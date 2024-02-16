@@ -1,0 +1,25 @@
+.navigation {
+  background-color: var(--color-gray-800);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 5px;
+  grid-row: 1/3;
+
+  >div {
+    padding: 3px 10px;
+    color: var(--secondary-color);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: var(--config-border-radius);
+    transition: background-color 300ms ease;
+
+    &:hover {
+      background-color: var(--color-blue-600);
+    }
+
+    &.active {
+      background-color: var(--color-blue-900);
+    }
+  }
+}

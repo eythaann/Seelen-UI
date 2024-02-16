@@ -8,6 +8,7 @@ import { App } from './app';
 import './styles/colors.css';
 import './styles/variables.css';
 import './styles/reset.css';
+import './styles/global.css';
 
 const domNode = document.getElementById('root');
 if (domNode) {

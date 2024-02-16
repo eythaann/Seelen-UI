@@ -1,6 +1,6 @@
+import { Header } from './components/header';
 import { Navigation } from './components/navigation';
-
-import { General } from './modules/general/infrastructure';
+import { General } from './modules/general/infra';
 
 import { useAppSelector } from './modules/shared/app/hooks';
 import { selectRoute } from './modules/shared/app/selectors';
@@ -18,11 +18,11 @@ export function App() {
   let route = useAppSelector(selectRoute);
   let Component = ComponentByRout[route];
 
-  return <div>
+  return <>
     <Navigation />
-    <div>
-      <div></div>
+    <Header />
+    <div className="content">
       <Component />
     </div>
-  </div>;
+  </>;
 }

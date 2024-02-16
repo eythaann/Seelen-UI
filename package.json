@@ -5,7 +5,7 @@
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon --watch src -e js,ts,tsx --exec \"npm run start\"",
+    "dev": "nodemon --watch src -e js,ts,tsx,css --exec \"npm run start\"",
     "start": "node ./scripts/build.mjs && electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",

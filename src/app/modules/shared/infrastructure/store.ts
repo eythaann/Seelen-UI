@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import { mainReducer } from '../app/reducer';
+
 import { GlobalState } from '../domain/state';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: mainReducer,
 });
 
 export type AppDispatch = typeof store.dispatch;

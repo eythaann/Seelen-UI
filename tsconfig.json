@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

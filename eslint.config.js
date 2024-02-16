@@ -1,10 +1,11 @@
-import stylistic from '@stylistic/eslint-plugin';
-import simpleImportSort from 'eslint-plugin-simple-import-sort';
-import tsEslint from 'typescript-eslint';
+const stylistic = require('@stylistic/eslint-plugin');
+const simpleImportSort = require('eslint-plugin-simple-import-sort');
+const tsEslint = require('typescript-eslint');
 
-export default [
+module.exports = [
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
+    ignores: ['node_modules/**/*', 'dist/**/*'],
     plugins: {
       '@stylistic': stylistic,
       'simple-import-sort': simpleImportSort,
@@ -19,7 +20,8 @@ export default [
           ['.*\/infrastructure.*'],
           ['.*\/app'],
           ['.*\/domain.*'],
-          ['(.css)$'],
+          ['.*.module.css$'],
+          ['.*.css$'],
         ],
       }],
       'no-dupe-keys': 'error',
@@ -78,6 +80,7 @@ export default [
       '@stylistic/jsx-indent': ['error', 2],
       '@stylistic/member-delimiter-style': ['error'],
       '@stylistic/type-annotation-spacing': ['error'],
+      'no-unused-vars': ['warn', { 'varsIgnorePattern': '^_' }],
     },
   },
 ];
