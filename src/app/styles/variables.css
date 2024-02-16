@@ -1,0 +1,15 @@
+:root {
+  /* font variables */
+  --placeholder-font-color: var(--color-gray-400);
+  --error-font-color: var(--color-red-800);
+
+  /* config variables */
+  --config-border-radius: 8px;
+  --config-header-height: 50px;
+  --config-content-margin: 5%;
+
+   /* z indexs */
+   --z-header: 1;
+   --z-docs-menu: 2;
+   --z-modal: 3;
+}

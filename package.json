@@ -1,0 +1,47 @@
+{
+  "name": "komorebi-ui",
+  "productName": "komorebi-ui",
+  "version": "1.0.0",
+  "description": "My Electron application description",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon --watch src -e js,ts,tsx --exec \"npm run start\"",
+    "start": "node ./scripts/build.mjs && electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint ./**/** --fix --max-warnings 0"
+  },
+  "keywords": [],
+  "author": {
+    "name": "eythaann",
+    "email": "eythan.cvt@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@reduxjs/toolkit": "^2.2.1",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "electron-squirrel-startup": "^1.0.0",
+    "esbuild": "^0.20.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.0",
+    "redux": "^5.0.1"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.2.0",
+    "@electron-forge/maker-deb": "^7.2.0",
+    "@electron-forge/maker-rpm": "^7.2.0",
+    "@electron-forge/maker-squirrel": "^7.2.0",
+    "@electron-forge/maker-zip": "^7.2.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
+    "@stylistic/eslint-plugin": "^1.6.2",
+    "electron": "28.2.3",
+    "eslint": "^8.56.0",
+    "eslint-plugin-simple-import-sort": "^12.0.0",
+    "nodemon": "^3.0.3",
+    "typescript": "^5.3.3",
+    "typescript-eslint": "^7.0.1"
+  }
+}
