@@ -1,5 +1,5 @@
-export function General() {
+export function Monitors() {
   return <div>
-    general
+    Monitors
   </div>;
 }

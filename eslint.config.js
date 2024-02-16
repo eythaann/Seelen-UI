@@ -17,7 +17,7 @@ module.exports = [
       'simple-import-sort/imports': ['error', {
         groups: [
           [''],
-          ['.*\/infrastructure.*'],
+          ['.*\/(infra|infrastructure).*'],
           ['.*\/app'],
           ['.*\/domain.*'],
           ['.*.module.css$'],
