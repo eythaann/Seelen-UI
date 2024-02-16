@@ -1,20 +1,21 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { combineSlices, createSlice } from '@reduxjs/toolkit';
+
+import { GeneralSettingsSlice } from '../../general/main/app';
 
 import { Route } from '../domain/routes';
 
-let initialState = {
-  route: Route.GENERAL,
-};
-
-const slice = createSlice({
-  name: 'main',
-  initialState,
+const RouteSlice = createSlice({
+  name: 'route',
+  initialState: Route.GENERAL,
   reducers: {
-    setRoute: (state, action) => {
-      state.route = action.payload;
-    },
+    setRoute: (state, action) => action.payload,
   },
 });
 
-export const mainReducer = slice.reducer;
-export const mainActions = slice.actions;
+export const mainActions = {
+  ...RouteSlice.actions,
+};
+
+export const mainReducer = combineSlices(RouteSlice, {
+  general: GeneralSettingsSlice.reducer,
+});

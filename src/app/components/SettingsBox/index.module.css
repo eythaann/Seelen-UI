@@ -1,0 +1,17 @@
+.box {
+  padding: 10px 20px;
+  border-radius: var(--config-border-radius);
+  background-color: #5551;
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+
+  >div {
+
+    &:not(:last-child) {
+      padding-bottom: 6px;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #4444; /* sublime */
+    }
+  }
+}

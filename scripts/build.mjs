@@ -26,7 +26,7 @@ const consolePrinter = {
 await esbuild.build({
   entryPoints: ['./src/app/index.tsx'],
   bundle: true,
-  minify: true,
+  sourcemap: true,
   outfile: './dist/bundle.js',
   jsx: 'automatic',
   plugins: [

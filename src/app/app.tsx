@@ -2,7 +2,7 @@ import { Header } from './components/header';
 import { Navigation } from './components/navigation';
 
 import { AppsConfiguration } from './modules/appsConfigurations/infrastructure';
-import { General } from './modules/general/infra';
+import { General } from './modules/general/main/infra';
 import { Monitors } from './modules/monitors/infrastructure';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
 
