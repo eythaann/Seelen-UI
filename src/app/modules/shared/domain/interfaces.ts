@@ -1,3 +1,3 @@
 export type HexColor = `#${string}`;
 
-export type PickLessObject<T> = { [K in keyof T as T[K] extends object ? never : K]: T[K] };
+export type SelectorsFor<T> = { [K in keyof T]: (state: T) => T[K] };

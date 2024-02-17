@@ -1,6 +1,6 @@
 #root {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 190px 1fr;
   grid-template-rows: 50px 1fr;
   height: 100vh;
   width: 100vw;
@@ -10,6 +10,23 @@ body {
   cursor: default;
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-500);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-gray-600);
+}
+
 .content {
   height: 100%;
   background: linear-gradient(217deg, var(--color-red-100), rgba(255, 0, 0, 0) 70%),
@@ -17,4 +34,16 @@ body {
     linear-gradient(336deg, var(--color-cyan-100), rgba(0, 255, 0, 0) 70%);
   padding: 10px;
   overflow: auto;
+}
+
+.ant-select {
+  min-width: 100px;
+}
+
+.ant-input {
+  min-width: 90px;
+}
+
+.ant-color-picker-trigger {
+  min-width: 90px !important;
 }

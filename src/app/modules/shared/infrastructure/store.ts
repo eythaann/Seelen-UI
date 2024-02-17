@@ -1,15 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { mainReducer } from '../app/reducer';
+import { RootReducer } from '../app/reducer';
 
-import { GlobalState } from '../domain/state';
+import { RootState } from '../domain/state';
 
 export const store = configureStore({
-  reducer: mainReducer,
+  reducer: RootReducer,
 });
 
 export type AppDispatch = typeof store.dispatch;
 export type store = {
   dispatch: AppDispatch;
-  getState: () => GlobalState;
+  getState: () => RootState;
 };

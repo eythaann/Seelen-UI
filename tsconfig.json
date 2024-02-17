@@ -10,6 +10,6 @@
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["react"],
+    "types": ["react", "readable-types"],
   }
 }

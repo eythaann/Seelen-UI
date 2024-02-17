@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { selectorsFor } from '../../shared/app/utils';
+
 import { AnimationsState } from './domain';
 
 let initialState: AnimationsState = {
@@ -8,8 +10,9 @@ let initialState: AnimationsState = {
 };
 
 export const AnimationsSlice = createSlice({
-  name: 'animations',
+  name: 'generalSettings/animations',
   initialState,
+  selectors: selectorsFor(initialState),
   reducers: {
     toggleWaitMinimization: (state) => {
       state.finishMiminization = !state.finishMiminization;

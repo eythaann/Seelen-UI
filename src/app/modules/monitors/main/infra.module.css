@@ -1,0 +1,33 @@
+
+.monitors {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .config {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    gap: 10px;
+  }
+}
+
+
+.border {
+  --padding: 6px;
+
+  background-color: black;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  padding: var(--padding);
+  height: calc(144px + var(--padding));
+  width: calc(256px + var(--padding));
+
+  .screen {
+    border-radius: 8px;
+    background-color: var(--color-blue-200);
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
+}
