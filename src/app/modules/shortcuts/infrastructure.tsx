@@ -1,5 +1,5 @@
 export function Shortcuts() {
   return <div>
-    Shortcutssss
+    Nothing less
   </div>;
 }

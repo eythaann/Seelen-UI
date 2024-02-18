@@ -40,3 +40,8 @@ export const validateHexColor = (str: string): HexColor | null => {
   }
   return str as HexColor;
 };
+
+export const OptionsFromEnum = (obj: anyObject) => Object.values(obj).map((value) => ({
+  label: value,
+  value,
+}));

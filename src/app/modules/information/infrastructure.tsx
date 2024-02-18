@@ -1,5 +1,5 @@
 export function Information() {
   return <div>
-    Information
+    <a href="https://lgug2z.github.io/komorebi/" target="_blank">Komorebi Documentation</a>
   </div>;
 }

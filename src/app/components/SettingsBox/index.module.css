@@ -22,6 +22,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    :global(.ant-input) {
+      max-width: 150px;
+    }
   }
 
   .subtitle {

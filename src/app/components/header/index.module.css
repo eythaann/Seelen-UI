@@ -13,5 +13,6 @@
 
   button {
     -webkit-app-region: no-drag;
+    width: 60px;
   }
 }

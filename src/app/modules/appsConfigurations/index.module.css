@@ -1,0 +1,30 @@
+
+
+.newBtn {
+  width: 100%;
+  background-color: var(--color-green-600);
+
+  &:hover {
+    background-color: var(--color-green-700) !important;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+
+  button {
+    flex: 1
+  }
+}
+
+.table {
+  :global(.ant-table-body) {
+    overflow-y: auto !important;
+  }
+
+  :global(.ant-pagination) {
+    margin-top: 10px !important;
+    margin-bottom: 0 !important;
+  }
+}

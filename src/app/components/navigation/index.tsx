@@ -20,26 +20,35 @@ const Item = ({ route, isActive }: ItemProps) => {
     dispatch(RootActions.setRoute(route));
   }, []);
 
-  return <div
-    onClick={onclick.bind(route)}
-    className={cx(cs.item, {
-      [cs.active!]: isActive,
-    })}
-  >
-    {RouteIcons[route]} {RouteLabels[route]}
-  </div>;
+  return (
+    <div
+      onClick={onclick.bind(route)}
+      className={cx(cs.item, {
+        [cs.active!]: isActive,
+      })}
+    >
+      <span className={cs.icon}>{RouteIcons[route]}</span>
+      <span className={cs.label}>{RouteLabels[route]}</span>
+    </div>
+  );
 };
 
 export const Navigation = memo(() => {
   let current = useAppSelector(RootSelectors.route);
-  return <div className={cs.navigation}>
-    <div className={cs.group}>
-      {Object.values(Route).map((route) => {
-        return route === Route.INFO
-          ? null
-          : <Item key={route} route={route} isActive={current === route} />;
+  return (
+    <div
+      className={cx(cs.navigation, {
+        [cs.tableView!]: current === Route.SPECIFIT_APPS,
       })}
+    >
+      <div className={cs.group}>
+        {Object.values(Route).map((route) => {
+          return route === Route.INFO ? null : (
+            <Item key={route} route={route} isActive={current === route} />
+          );
+        })}
+      </div>
+      <Item key={Route.INFO} route={Route.INFO} isActive={current === Route.INFO} />
     </div>
-    <Item key={Route.INFO} route={Route.INFO} isActive={current === Route.INFO} />
-  </div>;
+  );
 });

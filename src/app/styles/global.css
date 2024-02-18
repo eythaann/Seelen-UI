@@ -1,6 +1,6 @@
 #root {
   display: grid;
-  grid-template-columns: 190px 1fr;
+  grid-template-columns: min-content 1fr;
   grid-template-rows: 50px 1fr;
   height: 100vh;
   width: 100vw;
@@ -8,6 +8,13 @@
 
 body {
   cursor: default;
+
+  :not(input):not(textarea),
+  :not(input):not(textarea)::after,
+  :not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+  }
 }
 
 hr {
@@ -16,6 +23,7 @@ hr {
 
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -50,4 +58,9 @@ hr {
 
 .ant-color-picker-trigger {
   min-width: 90px !important;
+}
+
+.ant-modal-body {
+  max-height: 65vh !important;
+  overflow-y: auto !important;
 }

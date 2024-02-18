@@ -29,6 +29,7 @@ await esbuild.build({
   sourcemap: true,
   outfile: './dist/bundle.js',
   jsx: 'automatic',
+  external: ['electron'],
   plugins: [
     consolePrinter,
   ]

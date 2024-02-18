@@ -65,12 +65,6 @@
 }
 
 .advancedModal {
-  max-height: 65vh;
-  overflow-y: auto;
-
-  :global(.ant-input) {
-    max-width: 150px;
-  }
   :global(.ant-select) {
     min-width: 150px;
   }
