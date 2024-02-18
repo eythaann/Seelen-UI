@@ -1,3 +1,4 @@
+import { ConfigProvider } from 'antd';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -13,7 +14,11 @@ import './styles/global.css';
 const domNode = document.getElementById('root');
 if (domNode) {
   const root = createRoot(domNode);
-  root.render(<Provider store={store}>
-    <App/>
-  </Provider>);
+  root.render(
+    <Provider store={store}>
+      <ConfigProvider componentSize="small">
+        <App />
+      </ConfigProvider>
+    </Provider>,
+  );
 }

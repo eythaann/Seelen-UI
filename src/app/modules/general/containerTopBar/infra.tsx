@@ -1,7 +1,7 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { ColorPicker, InputNumber, Select } from 'antd';
 
-import { useAppDispatch, useAppSelector, useDispatchCallback } from '../../shared/app/hooks';
+import { useAppSelector } from '../../shared/app/hooks';
 import { ContainerTopBarSelectors } from '../../shared/app/selectors';
 
 import { ContainerTopBarMode } from './domain';
@@ -13,8 +13,6 @@ export const ContainerTopBarSettings = () => {
 
   const enabled = mode !== ContainerTopBarMode.NEVER;
 
-  const dispatch = useAppDispatch();
-
   return (
     <SettingsGroup>
       <SettingsSubGroup
@@ -23,7 +21,6 @@ export const ContainerTopBarSettings = () => {
             <span>Container Top Bar - Tabs</span>
             <Select
               value={mode}
-              size="small"
               options={Object.values(ContainerTopBarMode).map((op) => ({
                 label: op,
               }))}
@@ -33,25 +30,19 @@ export const ContainerTopBarSettings = () => {
       >
         <SettingsOption>
           <span>Height</span>
-          <InputNumber size="small" value={height} disabled={!enabled} />
+          <InputNumber value={height} disabled={!enabled} />
         </SettingsOption>
         <SettingsOption>
           <span>Width</span>
-          <InputNumber size="small" value={tabs.width} disabled={!enabled} />
+          <InputNumber value={tabs.width} disabled={!enabled} />
         </SettingsOption>
         <SettingsOption>
           <span>Text color</span>
-          <ColorPicker size="small" disabledAlpha showText value={tabs.color} disabled={!enabled} />
+          <ColorPicker disabledAlpha showText value={tabs.color} disabled={!enabled} />
         </SettingsOption>
         <SettingsOption>
           <span>Background color</span>
-          <ColorPicker
-            size="small"
-            disabledAlpha
-            showText
-            value={tabs.background}
-            disabled={!enabled}
-          />
+          <ColorPicker disabledAlpha showText value={tabs.background} disabled={!enabled} />
         </SettingsOption>
       </SettingsSubGroup>
     </SettingsGroup>

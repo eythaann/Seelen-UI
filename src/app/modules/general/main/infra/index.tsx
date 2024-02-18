@@ -47,12 +47,11 @@ export function General() {
         <div>
           <SettingsOption>
             <span>Mouse follows focus</span>
-            <Switch size="small" value={mouseFollowFocus} />
+            <Switch value={mouseFollowFocus} />
           </SettingsOption>
           <SettingsOption>
             <span>Focus follows mouse mode</span>
             <Select
-              size="small"
               value={focusFollowsMouse}
               options={Object.values(FocusFollowsMouse).map((op) => ({
                 label: op,
@@ -68,29 +67,29 @@ export function General() {
         <div>
           <SettingsOption>
             <span>Default container padding</span>
-            <InputNumber size="small" value={containerPadding} />
+            <InputNumber value={containerPadding} />
           </SettingsOption>
           <SettingsOption>
             <span>Default workspace padding</span>
-            <InputNumber size="small" value={workspacePadding} />
+            <InputNumber value={workspacePadding} />
           </SettingsOption>
         </div>
         <SettingsSubGroup label="Global work area offset">
           <SettingsOption>
             <span>Left</span>
-            <InputNumber size="small" value={workAreaOffset.left} />
+            <InputNumber value={workAreaOffset.left} />
           </SettingsOption>
           <SettingsOption>
             <span>Top</span>
-            <InputNumber size="small" value={workAreaOffset.top} />
+            <InputNumber value={workAreaOffset.top} />
           </SettingsOption>
           <SettingsOption>
             <span>Right</span>
-            <InputNumber size="small" value={workAreaOffset.right} />
+            <InputNumber value={workAreaOffset.right} />
           </SettingsOption>
           <SettingsOption>
             <span>Bottom</span>
-            <InputNumber size="small" value={workAreaOffset.bottom} />
+            <InputNumber value={workAreaOffset.bottom} />
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
@@ -101,7 +100,6 @@ export function General() {
             <span>Window container behaviour</span>
             <Select
               value={windowContainerBehaviour}
-              size="small"
               options={Object.values(WindowContainerBehaviour).map((op) => ({
                 label: op,
               }))}
@@ -109,14 +107,13 @@ export function General() {
           </SettingsOption>
           <SettingsOption>
             <span>Auto Stack by category (append if same category)</span>
-            <Switch value={autoStackinByCategory} size="small" />
+            <Switch value={autoStackinByCategory} />
           </SettingsOption>
         </div>
         <SettingsOption>
           <span>Window hiding behaviour</span>
           <Select
             value={windowHidingBehaviour}
-            size="small"
             options={Object.values(WindowHidingBehaviour).map((op) => ({
               label: op,
             }))}
@@ -130,19 +127,19 @@ export function General() {
         <SettingsSubGroup label="Invisible borders">
           <SettingsOption>
             <span>Left</span>
-            <InputNumber size="small" value={invisibleBorders.left} />
+            <InputNumber value={invisibleBorders.left} />
           </SettingsOption>
           <SettingsOption>
             <span>Top</span>
-            <InputNumber size="small" value={invisibleBorders.top} />
+            <InputNumber value={invisibleBorders.top} />
           </SettingsOption>
           <SettingsOption>
             <span>Right</span>
-            <InputNumber size="small" value={invisibleBorders.right} />
+            <InputNumber value={invisibleBorders.right} />
           </SettingsOption>
           <SettingsOption>
             <span>Bottom</span>
-            <InputNumber size="small" value={invisibleBorders.bottom} />
+            <InputNumber value={invisibleBorders.bottom} />
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
@@ -150,13 +147,12 @@ export function General() {
       <SettingsGroup>
         <SettingsOption>
           <span>Resize delta</span>
-          <InputNumber size="small" value={resizeDelta} />
+          <InputNumber value={resizeDelta} />
         </SettingsOption>
         <SettingsOption>
           <span>Cross monitor move behaviour - Swap Insert</span>
           <Select
             value={crossMonitorMoveBehaviour}
-            size="small"
             options={Object.values(CrossMonitorMoveBehaviour).map((op) => ({
               label: op,
             }))}
@@ -166,7 +162,6 @@ export function General() {
           <span>Unmanaged window operation behaviour</span>
           <Select
             value={unmanagedWindowOpBehaviour}
-            size="small"
             options={Object.values(UnmanagedWindowOperationBehaviour).map((op) => ({
               label: op,
             }))}

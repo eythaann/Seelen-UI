@@ -35,22 +35,21 @@ export const BorderSettings = () => {
       label={
         <SettingsOption>
           <span>Enable border on focus/activation</span>
-          <Switch value={enabled} onChange={toggleEnabled} size="small" />
+          <Switch value={enabled} onChange={toggleEnabled} />
         </SettingsOption>
       }
     >
       <SettingsOption>
         <span>Border offset</span>
-        <InputNumber size="small" value={offset} onChange={updateOffset} disabled={!enabled} />
+        <InputNumber value={offset} onChange={updateOffset} disabled={!enabled} />
       </SettingsOption>
       <SettingsOption>
         <span>Border width</span>
-        <InputNumber size="small" value={width} onChange={updateWidth} disabled={!enabled} />
+        <InputNumber value={width} onChange={updateWidth} disabled={!enabled} />
       </SettingsOption>
       <SettingsOption>
         <span>Border color</span>
         <ColorPicker
-          size="small"
           disabledAlpha
           showText
           value={color}

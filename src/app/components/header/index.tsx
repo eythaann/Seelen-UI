@@ -32,7 +32,6 @@ export const Header = () => {
             children="Cancel"
             type="default"
             danger
-            size="small"
             disabled={!hasChanges}
             onClick={onCancel}
           />
@@ -40,7 +39,6 @@ export const Header = () => {
           <Button
             children="Save"
             type="primary"
-            size="small"
             disabled={!hasChanges}
             onClick={onSave}
           />

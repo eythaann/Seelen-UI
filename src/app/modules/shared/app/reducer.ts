@@ -31,6 +31,10 @@ export const RootSlice = createSlice({
       .addMatcher(matcher(GeneralSettingsSlice), (state, action) => {
         state.toBeSaved = true;
         GeneralSettingsSlice.reducer(state.generals, action);
+      })
+      .addMatcher(matcher(MonitorsSlice), (state, action) => {
+        state.toBeSaved = true;
+        MonitorsSlice.reducer(state.monitors, action);
       });
   },
 });

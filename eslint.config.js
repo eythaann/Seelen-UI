@@ -30,7 +30,6 @@ module.exports = [
       '@stylistic/block-spacing': 'error',
       '@stylistic/arrow-spacing': 'error',
       '@stylistic/one-var-declaration-per-line': ['error', 'always'],
-      '@stylistic/object-property-newline': ['error', { 'allowMultiplePropertiesPerLine': false }],
       '@stylistic/object-curly-spacing': ['error', 'always'],
 
       '@stylistic/brace-style': ['error', '1tbs'],

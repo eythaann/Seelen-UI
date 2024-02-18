@@ -11,11 +11,11 @@ export const AnimationsSettings = () => {
   return <SettingsGroup>
     <SettingsOption>
       <span>Wait minimization before restore workspace</span>
-      <Switch value={finishMinimization} size="small" />
+      <Switch value={finishMinimization} />
     </SettingsOption>
     <SettingsOption>
       <span>Native windows animations delay (ms)</span>
-      <InputNumber value={delay} size="small" />
+      <InputNumber value={delay} />
     </SettingsOption>
   </SettingsGroup>;
 };

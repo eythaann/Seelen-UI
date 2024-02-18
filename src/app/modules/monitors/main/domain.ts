@@ -1,4 +1,5 @@
-import { Rect } from '../../general/main/domain';
+import { Rect } from '../../shared/app/Rect';
+
 import { Layout } from '../layouts/domain';
 
 export interface Workspace {
@@ -6,9 +7,9 @@ export interface Workspace {
   name: string;
   workspacePadding: number | null;
   containerPadding: number | null;
-  custom_layout: any | null;
-  custom_layout_rules: any | null;
-  layout_rules: Record<string, Layout> | null;
+  customLayout: any | null;
+  customLayoutRules: any | null;
+  layoutRules: Record<string, Layout> | null;
 }
 
 export interface Monitor {

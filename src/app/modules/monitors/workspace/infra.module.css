@@ -1,0 +1,5 @@
+.workspaceConfig {
+  :global(.ant-select) {
+    max-width: 100px;
+  }
+}

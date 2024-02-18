@@ -1,8 +1,11 @@
-import { Select } from 'antd';
+import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
+import { Button, Input, Modal, Select, Space } from 'antd';
+import { useState } from 'react';
 
 import { LayoutExamples } from '../layouts/infra';
 import { WorkspaceConfig } from '../workspace/infra';
 import cs from './infra.module.css';
+import { AdvancedConfig } from './infra_advanced';
 
 import { useAppSelector } from '../../shared/app/hooks';
 import {
@@ -34,21 +37,45 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
 
   return (
     <div className={cs.config}>
-      <div className={cs.border}>
-        <div className={cs.screen}>
-          <LayoutExample containerPadding={containerPadding} workspacePadding={workspacePadding} />
+      <div className={cs.monitor}>
+        <div className={cs.border}>
+          <div className={cs.screen}>
+            <LayoutExample
+              containerPadding={containerPadding}
+              workspacePadding={workspacePadding}
+            />
+          </div>
         </div>
+        <AdvancedConfig workspaceIdx={monitor.edditingWorkspace} monitorIdx={monitorIdx} />
+        <Button type="primary" danger disabled={monitorIdx === 0}>
+          Delete
+        </Button>
+        <Button type="primary">Insert</Button>
       </div>
-      <div>
-        <Select
-          value={monitor.edditingWorkspace}
-          options={monitor.workspaces.map((workspace, index) => ({
-            label: workspace.name,
-            value: index,
-          }))}
-        />
+      <SettingsGroup>
+        <div>
+          <div className={cs.title}>Monitor {monitorIdx + 1}</div>
+          <Select
+            className={cs.workspaceSelector}
+            value={monitor.edditingWorkspace}
+            dropdownRender={(menu) => (
+              <>
+                {menu}
+                <hr />
+                <Space>
+                  <Input placeholder="New workspace" />
+                  <Button type="primary">+</Button>
+                </Space>
+              </>
+            )}
+            options={monitor.workspaces.map((workspace, index) => ({
+              label: workspace.name,
+              value: index,
+            }))}
+          />
+        </div>
         <WorkspaceConfig monitorIdx={monitorIdx} workspaceIdx={monitor.edditingWorkspace} />
-      </div>
+      </SettingsGroup>
     </div>
   );
 };
