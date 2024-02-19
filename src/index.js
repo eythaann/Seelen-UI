@@ -15,16 +15,18 @@ const createWindow = () => {
     resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      devTools: !app.isPackaged,
     },
     titleBarStyle: 'hidden',
+    icon: path.join(process.cwd(), 'assets/icons/icon.ico'),
   });
-
-  mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url); // Open URL in user's browser.
     return { action: 'deny' }; // Prevent the app from opening the URL.
   });
+
+  mainWindow.loadFile(path.join(process.cwd(), '/out/frontend-bundle/index.html'));
 };
 
 // This method will be called when Electron has finished
