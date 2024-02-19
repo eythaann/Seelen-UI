@@ -1,6 +1,7 @@
 /* eslint-disable @ts/no-unused-vars */
 const path = require('path');
 const fs = require('fs');
+const { exec } = require('child_process');
 
 /**
  * @typedef {import('@electron-forge/shared-types').ForgeConfig} ForgeConfig
@@ -12,7 +13,7 @@ const config = {
     executableName: 'komorebi-ui',
     icon: path.join(process.cwd(), 'assets/icons/icon'),
     extraResource: [
-      path.join(process.cwd(), 'assets/icons/icon.ico'),
+      path.join(process.cwd(), 'assets/icons'),
     ],
     asar: true,
   },
@@ -21,6 +22,14 @@ const config = {
     generateAssets: async (forgeConfig, platform, version) => {
       await import('./scripts/build.mjs');
     },
+    prePackage: (forgeConfig, platform, version) => {
+      const command = 'cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc';
+      exec(command, (error, stdout, stderr) => {
+        if (error) {
+          throw Error(`Error on ejecution: ${error.message}`);
+        }
+      });
+    },
     packageAfterExtract: async (forgeConfig, buildPath, electronVersion, platform, arch) => {
       const licensesPath = path.join(buildPath, 'licenses');
 
@@ -28,7 +37,7 @@ const config = {
         fs.mkdirSync(licensesPath);
       }
 
-      fs.renameSync(path.join(buildPath, 'version'), path.join(licensesPath, 'version'));
+      fs.renameSync(path.join(buildPath, 'version'), path.join(licensesPath, 'version.electron'));
       fs.renameSync(path.join(buildPath, 'LICENSE'), path.join(licensesPath, 'LICENSE.electron'));
       fs.renameSync(path.join(buildPath, 'LICENSES.chromium.html'), path.join(licensesPath, 'LICENSES.electron.chromium.html'));
     },
@@ -36,6 +45,10 @@ const config = {
       const licensesPath = path.join(buildPath, '../../licenses');
       fs.copyFileSync(path.join(__dirname, 'LICENSE'), path.join(licensesPath, 'LICENSE'));
       fs.copyFileSync(path.join(__dirname, 'komorebi/LICENSE'), path.join(licensesPath, 'LICENSE.komorebi'));
+
+      // copy builded komorebi
+      fs.copyFileSync(path.join(__dirname, 'komorebi/target/x86_64-pc-windows-msvc/release/komorebi.exe'), path.join(buildPath, '../../komorebi.exe'));
+      fs.copyFileSync(path.join(__dirname, 'komorebi/target/x86_64-pc-windows-msvc/release/komorebic.exe'), path.join(buildPath, '../../komorebic.exe'));
     },
   },
   makers: [
