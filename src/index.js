@@ -1,11 +1,24 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const { shell } = require('electron');
+const { exec } = require('child_process');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
+
+const execPrinter = (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error: ${error.message}`);
+  }
+  if (stderr) {
+    console.error(`STDERR: ${stderr}`);
+  }
+  if (stdout) {
+    console.log(`STDOUT: ${stdout}`);
+  }
+};
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -15,10 +28,10 @@ const createWindow = () => {
     resizable: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      devTools: !app.isPackaged,
+      //devTools: !app.isPackaged,
     },
     titleBarStyle: 'hidden',
-    icon: path.join(process.cwd(), 'assets/icons/icon.ico'),
+    icon: path.join(__dirname, 'assets/icons/icon.ico'),
   });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -26,7 +39,17 @@ const createWindow = () => {
     return { action: 'deny' }; // Prevent the app from opening the URL.
   });
 
-  mainWindow.loadFile(path.join(process.cwd(), '/out/frontend-bundle/index.html'));
+  mainWindow.loadFile(path.join(__dirname, '../dist/frontend-bundle/index.html'));
+
+  ipcMain.on('enable-autostart', (_event, _arg) => {
+    const command = `powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "${path.join(__dirname, './autostart_on.ps1')}" -WindowStyle Hidden'" -WindowStyle Hidden`;
+    exec(command, execPrinter);
+  });
+
+  ipcMain.on('disable-autostart', (_event, _arg) => {
+    const command = `powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File "${path.join(__dirname, './autostart_off.ps1')}" -WindowStyle Hidden'" -WindowStyle Hidden`;
+    exec(command, execPrinter);
+  });
 };
 
 // This method will be called when Electron has finished

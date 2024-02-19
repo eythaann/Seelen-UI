@@ -40,8 +40,22 @@ export function General() {
   );
   const crossMonitorMoveBehaviour = useSelector(GeneralSettingsSelectors.crossMonitorMoveBehaviour);
 
+  const onAutoStart = (value: boolean) => {
+    if (value) {
+      window.backgroundApi.enableAutostart();
+    } else {
+      window.backgroundApi.disableAutostart();
+    }
+  };
+
   return (
     <div>
+      <SettingsGroup>
+        <SettingsOption>
+          <span>Auto Start Komorebi UI?</span>
+          <Switch onChange={onAutoStart} />
+        </SettingsOption>
+      </SettingsGroup>
       <SettingsGroup>
         <BorderSettings />
         <div>

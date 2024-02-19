@@ -16,6 +16,16 @@ const config = {
       path.join(process.cwd(), 'assets/icons'),
     ],
     asar: true,
+    ignore: [
+      'komorebi',
+      'scripts',
+      '.vscode',
+      '.gitignore',
+      '.gitmodules',
+      'eslint.config.js',
+      'tsconfig.json',
+      'src/app',
+    ],
   },
   rebuildConfig: {},
   hooks: {

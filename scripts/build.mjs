@@ -6,10 +6,10 @@ const consolePrinter = {
   setup(build) {
     build.onStart(() => {
       try {
-        fs.mkdirSync('out');
-        fs.mkdirSync('out/frontend-bundle');
+        fs.mkdirSync('dist');
+        fs.mkdirSync('dist/frontend-bundle');
       } catch (e) {}
-      fs.cpSync('src/app/public', 'out/frontend-bundle', {
+      fs.cpSync('src/app/public', 'dist/frontend-bundle', {
         'recursive': true,
       });
     });
@@ -27,7 +27,7 @@ await esbuild.build({
   bundle: true,
   minify: true,
   sourcemap: true,
-  outfile: './out/frontend-bundle/bundle.js',
+  outfile: './dist/frontend-bundle/bundle.js',
   jsx: 'automatic',
   external: ['electron'],
   plugins: [
