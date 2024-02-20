@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { selectorsFor } from '../../shared/app/utils';
+import { reducersFor, selectorsFor } from '../../shared/app/utils';
 
 import { AnimationsState } from './domain';
 
@@ -13,14 +13,7 @@ export const AnimationsSlice = createSlice({
   name: 'generalSettings/animations',
   initialState,
   selectors: selectorsFor(initialState),
-  reducers: {
-    toggleWaitMinimization: (state) => {
-      state.finishMiminization = !state.finishMiminization;
-    },
-    setNativeDelay: (state, action: PayloadAction<number>) => {
-      state.nativeDelay = action.payload;
-    },
-  },
+  reducers: reducersFor(initialState),
 });
 
 export const AnimationsActions = AnimationsSlice.actions;

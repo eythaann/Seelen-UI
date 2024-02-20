@@ -1,10 +1,12 @@
 import { SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { ColorPicker, InputNumber, Switch } from 'antd';
+import { Color } from 'antd/es/color-picker';
 
 import { useAppDispatch, useAppSelector, useDispatchCallback } from '../../shared/app/hooks';
 import { BorderSelectors } from '../../shared/app/selectors';
-import { validateHexColor } from '../../shared/app/utils';
 import { BorderActions } from './app';
+
+import { HexColor } from '../../shared/domain/interfaces';
 
 export const BorderSettings = () => {
   const enabled = useAppSelector(BorderSelectors.enable);
@@ -14,20 +16,20 @@ export const BorderSettings = () => {
 
   const dispatch = useAppDispatch();
 
-  const toggleEnabled = useDispatchCallback(() => {
-    dispatch(BorderActions.toggleEnable());
+  const toggleEnabled = useDispatchCallback((value: boolean) => {
+    dispatch(BorderActions.setEnable(value));
   });
 
   const updateOffset = useDispatchCallback((value: number | null) => {
-    dispatch(BorderActions.updateOffset(value));
+    dispatch(BorderActions.setOffset(value || 0));
   });
 
   const updateWidth = useDispatchCallback((value: number | null) => {
-    dispatch(BorderActions.updateWidth(value));
+    dispatch(BorderActions.setWidth(value || 0));
   });
 
-  const updateColor = useDispatchCallback((color: any, hexcolor) => {
-    dispatch(BorderActions.updateColor(validateHexColor(hexcolor)));
+  const updateColor = useDispatchCallback((color: Color) => {
+    dispatch(BorderActions.setColor(color.toHex() as HexColor));
   });
 
   return (
@@ -53,7 +55,7 @@ export const BorderSettings = () => {
           disabledAlpha
           showText
           value={color}
-          onChange={updateColor}
+          onChangeComplete={updateColor}
           disabled={!enabled}
         />
       </SettingsOption>

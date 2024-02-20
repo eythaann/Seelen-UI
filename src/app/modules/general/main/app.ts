@@ -1,12 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import { Rect } from '../../shared/app/Rect';
-import { matcher, selectorsFor } from '../../shared/app/utils';
+import { matcher, reducersFor, selectorsFor } from '../../shared/app/utils';
 import { AnimationsSlice } from '../animations/app';
 import { BorderSlice } from '../border/app';
 import { ContainerTopBarSlice } from '../containerTopBar/app';
 
-import { CrossMonitorMoveBehaviour, FocusFollowsMouse, GeneralSettingsState, UnmanagedWindowOperationBehaviour, WindowContainerBehaviour, WindowHidingBehaviour } from './domain';
+import {
+  CrossMonitorMoveBehaviour,
+  GeneralSettingsState,
+  UnmanagedWindowOperationBehaviour,
+  WindowContainerBehaviour,
+  WindowHidingBehaviour,
+} from './domain';
 
 let initialState: GeneralSettingsState = {
   altFocusHack: false,
@@ -17,7 +23,7 @@ let initialState: GeneralSettingsState = {
   workspacePadding: 10,
   resizeDelta: 50,
   mouseFollowFocus: false,
-  focusFollowsMouse: FocusFollowsMouse.NONE,
+  focusFollowsMouse: null,
   windowContainerBehaviour: WindowContainerBehaviour.CREATE,
   windowHidingBehaviour: WindowHidingBehaviour.MINIMIZE,
   invisibleBorders: new Rect().plain(),
@@ -32,12 +38,7 @@ export const GeneralSettingsSlice = createSlice({
   initialState,
   selectors: selectorsFor(initialState),
   reducers: {
-    toggleAltFocuseHack: (state) => {
-      state.altFocusHack = !state.altFocusHack;
-    },
-    toggleAutoStackinByCategory: (state) => {
-      state.autoStackinByCategory = !state.autoStackinByCategory;
-    },
+    ...reducersFor(initialState),
   },
   extraReducers: (builder) => {
     builder

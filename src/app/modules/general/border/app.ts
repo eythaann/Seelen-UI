@@ -1,8 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { defaultOnNull, selectorsFor } from '../../shared/app/utils';
+import { reducersFor, selectorsFor } from '../../shared/app/utils';
 
-import { HexColor } from '../../shared/domain/interfaces';
 import { BorderState } from './domain';
 
 const initialState: BorderState = {
@@ -15,20 +14,7 @@ const initialState: BorderState = {
 export const BorderSlice = createSlice({
   name: 'generalSettings/border',
   initialState,
-  reducers: {
-    toggleEnable: (state) => {
-      state.enable = !state.enable;
-    },
-    updateOffset: (state, action: PayloadAction<number | null>) => {
-      state.offset = defaultOnNull(action.payload, initialState.offset);
-    },
-    updateWidth: (state, action: PayloadAction<number | null>) => {
-      state.width = defaultOnNull(action.payload, initialState.width);
-    },
-    updateColor: (state, action: PayloadAction<HexColor | null>) => {
-      state.color = defaultOnNull(action.payload, initialState.color);
-    },
-  },
+  reducers: reducersFor(initialState),
   selectors: selectorsFor(initialState),
 });
 

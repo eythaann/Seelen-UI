@@ -5,7 +5,6 @@ import { BorderState } from '../border/domain';
 import { ContainerTabsState } from '../containerTopBar/domain';
 
 export enum FocusFollowsMouse {
-  NONE = 'None',
   KOMOREBI = 'Komorebi',
   WINDOWS = 'Windows',
 }
@@ -37,7 +36,7 @@ export interface GeneralSettingsState {
   autoStackinByCategory: boolean;
   animations: AnimationsState;
   mouseFollowFocus: boolean;
-  focusFollowsMouse: FocusFollowsMouse;
+  focusFollowsMouse: FocusFollowsMouse | null;
   resizeDelta: number;
   containerPadding: number;
   workspacePadding: number;

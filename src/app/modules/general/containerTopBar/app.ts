@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-import { defaultOnNull, selectorsFor } from '../../shared/app/utils';
+import { reducersFor, selectorsFor } from '../../shared/app/utils';
 
 import { ContainerTabsState, ContainerTopBarMode } from './domain';
 
@@ -17,9 +17,7 @@ const initialState: ContainerTabsState = {
 export const ContainerTopBarSlice = createSlice({
   name: 'generalSettings/border',
   initialState,
-  reducers: {
-
-  },
+  reducers: reducersFor(initialState),
   selectors: selectorsFor(initialState),
 });
 

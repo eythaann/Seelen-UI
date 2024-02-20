@@ -1,6 +1,6 @@
 import { Action, Slice } from '@reduxjs/toolkit';
 
-import { HexColor, SelectorsFor } from '../domain/interfaces';
+import { HexColor, ReducersFor, SelectorsFor } from '../domain/interfaces';
 
 type Args = undefined | string | { [x: string]: boolean };
 export const cx = (...args: Args[]): string => {
@@ -25,6 +25,20 @@ export const selectorsFor = <T>(state: T): SelectorsFor<T> => {
     selectors[key] = (state: T) => state[key];
   }
   return selectors;
+};
+
+export const capitalize = (text: string) => {
+  return text.slice(0, 1).toUpperCase() + text.slice(1);
+};
+
+export const reducersFor = <T>(state: T): ReducersFor<T> => {
+  const reducers: any = {};
+  for (const key in state) {
+    reducers[`set${capitalize(key)}`] = (state: T, action: any) => {
+      state[key] = action.payload;
+    };
+  }
+  return reducers;
 };
 
 export const defaultOnNull = <T>(value: T | null | undefined, onNull: T): T => {
