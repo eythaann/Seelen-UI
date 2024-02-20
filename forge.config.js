@@ -33,12 +33,7 @@ const config = {
       await import('./scripts/build.mjs');
     },
     prePackage: async (forgeConfig, platform, version) => {
-      await new Promise((resolve) => {
-        runPwshScript('force_stop.ps1');
-        setTimeout(() => {
-          resolve();
-        }, 5000);
-      });
+      await runPwshScript('force_stop.ps1');
     },
     packageAfterExtract: async (forgeConfig, buildPath, electronVersion, platform, arch) => {
       const licensesPath = path.join(buildPath, 'licenses');

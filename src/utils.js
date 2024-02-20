@@ -14,20 +14,28 @@ const fromPackage = (...segments) => {
 
 const execPrinter = (error, stdout, stderr) => {
   if (error) {
-    console.error(`Error: ${error.message}`);
+    console.error(`\nError: ${error.message}`);
   }
   if (stderr) {
-    console.error(`STDERR: ${stderr}`);
+    console.error(`\nSTDERR: ${stderr}\n`);
   }
   if (stdout) {
-    console.log(`STDOUT: ${stdout}`);
+    console.log(`\nSTDOUT: ${stdout}`);
   }
 };
 
-const runPwshScript = (name, args = '') => {
+const runPwshScript = async (name, args = '') => {
   const tempRoute = path.join(os.tmpdir(), `${Math.random()}-komorebi.ps1`.slice(2));
   writeFileSync(tempRoute, readFileSync(fromCurrent('./pwsh', name)).toString());
-  exec(`powershell -ExecutionPolicy Bypass -File ${tempRoute} ${args}`, execPrinter);
+  return new Promise((resolve, reject) => {
+    exec(`powershell -ExecutionPolicy Bypass -File ${tempRoute} ${args}`, (error, stdout, stderr) => {
+      execPrinter(error, stdout, stderr);
+      if (error) {
+        return reject(error);
+      }
+      resolve();
+    });
+  });
 };
 
 module.exports = { fromCurrent, runPwshScript, fromPackage };
