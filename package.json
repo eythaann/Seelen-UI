@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "nodemon --watch src -e js,ts,tsx,css --exec \"npm run start\"",
     "start": "electron-forge start",
-    "prePackage": "node ./scripts/build.mjs",
+    "prePackage": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",

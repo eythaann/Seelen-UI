@@ -1,7 +1,7 @@
 /* eslint-disable @ts/no-unused-vars */
 const path = require('path');
 const fs = require('fs');
-const { exec } = require('child_process');
+const { runPwshScript } = require('./src/utils');
 
 /**
  * @typedef {import('@electron-forge/shared-types').ForgeConfig} ForgeConfig
@@ -32,12 +32,12 @@ const config = {
     generateAssets: async (forgeConfig, platform, version) => {
       await import('./scripts/build.mjs');
     },
-    prePackage: (forgeConfig, platform, version) => {
-      const command = 'cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc';
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          throw Error(`Error on ejecution: ${error.message}`);
-        }
+    prePackage: async (forgeConfig, platform, version) => {
+      await new Promise((resolve) => {
+        runPwshScript('force_stop.ps1');
+        setTimeout(() => {
+          resolve();
+        }, 5000);
       });
     },
     packageAfterExtract: async (forgeConfig, buildPath, electronVersion, platform, arch) => {

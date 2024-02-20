@@ -1,12 +1,12 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
-import { Button, Input, Modal, Select, Switch } from 'antd';
+import { Button, Input, InputNumber, Modal, Select, Switch } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import cs from './infra.module.css';
 
 import { useAppSelector, useDispatchCallback } from '../../shared/app/hooks';
-import { getWorkspaceSelector } from '../../shared/app/selectors';
+import { getMonitorSelector, getWorkspaceSelector } from '../../shared/app/selectors';
 import { MonitorsActions } from './app';
 
 import { Layout } from '../layouts/domain';
@@ -19,6 +19,7 @@ interface Props {
 export const AdvancedConfig = ({ workspaceIdx, monitorIdx }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const workspace = useAppSelector(getWorkspaceSelector(workspaceIdx, monitorIdx));
+  const { workAreaOffset } = useAppSelector(getMonitorSelector(monitorIdx))!;
 
   const dispatch = useDispatch();
 
@@ -83,7 +84,7 @@ export const AdvancedConfig = ({ workspaceIdx, monitorIdx }: Props) => {
         ⚙️ Advanced
       </Button>
       <Modal
-        title={`Editing: ${workspace.name}`}
+        title={`Editing: Monitor ${monitorIdx + 1}, ${workspace.name}`}
         onCancel={handleCancel}
         onOk={handleOk}
         open={isModalOpen}
@@ -92,16 +93,38 @@ export const AdvancedConfig = ({ workspaceIdx, monitorIdx }: Props) => {
       >
         <div className={cs.advancedModal}>
           <SettingsGroup>
+            <SettingsSubGroup label="Specifit monitor offsets (margins)">
+              <SettingsOption>
+                <span>Left</span>
+                <InputNumber value={workAreaOffset?.left} placeholder="Global" />
+              </SettingsOption>
+              <SettingsOption>
+                <span>Top</span>
+                <InputNumber value={workAreaOffset?.top} placeholder="Global" />
+              </SettingsOption>
+              <SettingsOption>
+                <span>Right</span>
+                <InputNumber value={workAreaOffset?.right} placeholder="Global" />
+              </SettingsOption>
+              <SettingsOption>
+                <span>Bottom</span>
+                <InputNumber value={workAreaOffset?.bottom} placeholder="Global" />
+              </SettingsOption>
+            </SettingsSubGroup>
+          </SettingsGroup>
+
+          <SettingsGroup>
             <SettingsOption>
-              <span>Custom Layout</span>
+              <span>{workspace.name} Custom Layout</span>
               <Input value={undefined} placeholder="custom layout" />
             </SettingsOption>
           </SettingsGroup>
+
           <SettingsGroup>
             <SettingsSubGroup
               label={
                 <SettingsOption>
-                  <span>Layout Rules (by number of windows)</span>
+                  <span>{workspace.name} Layout Rules</span>
                   <Switch onChange={toggleLayoutRules} value={!!layoutRules.length} />
                 </SettingsOption>
               }
@@ -111,7 +134,7 @@ export const AdvancedConfig = ({ workspaceIdx, monitorIdx }: Props) => {
             <SettingsSubGroup
               label={
                 <SettingsOption>
-                  <span>Custom Layout Rules (by number of windows)</span>
+                  <span>{workspace.name} Custom Layout Rules</span>
                   <Switch onChange={toggleCustomLayoutRules} value={!!customLayoutRules.length} />
                 </SettingsOption>
               }

@@ -7,5 +7,15 @@ contextBridge.exposeInMainWorld('backgroundApi', {
   disableAutostart: () => {
     ipcRenderer.send('disable-autostart');
   },
-  autostartTaskExist: () => {},
+  autostartTaskExist: () => {
+    return new Promise((resolve, reject) => {
+      ipcRenderer.send('get-autostart-task');
+      ipcRenderer.on('get-autostart-task-reply', (e, result, error) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(result != null);
+      });
+    });
+  },
 });
