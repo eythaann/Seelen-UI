@@ -38,4 +38,16 @@ const runPwshScript = async (name, args = '') => {
   });
 };
 
-module.exports = { fromCurrent, runPwshScript, fromPackage };
+const runPwshCommand = async (command) => {
+  return new Promise((resolve, reject) => {
+    exec(command, { shell: 'powershell.exe' }, (error, stdout, stderr) => {
+      execPrinter(error, stdout, stderr);
+      if (error) {
+        return reject(error);
+      }
+      resolve();
+    });
+  });
+};
+
+module.exports = { fromCurrent, runPwshScript, fromPackage, runPwshCommand };

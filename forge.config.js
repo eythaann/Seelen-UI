@@ -1,7 +1,8 @@
 /* eslint-disable @ts/no-unused-vars */
 const path = require('path');
 const fs = require('fs');
-const { runPwshScript } = require('./src/utils');
+const { runPwshScript, runPwshCommand } = require('./src/utils');
+const { exec } = require('child_process');
 
 /**
  * @typedef {import('@electron-forge/shared-types').ForgeConfig} ForgeConfig

@@ -7,11 +7,11 @@
   "scripts": {
     "dev": "nodemon --watch src -e js,ts,tsx,css --exec \"npm run start\"",
     "start": "electron-forge start",
-    "prePackage": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
+    "package": "npm run build-komorebi && electron-forge package",
+    "make": "npm run build-komorebi && electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint ./**/** --fix --max-warnings 0"
+    "lint": "eslint ./**/** --fix --max-warnings 0",
+    "build-komorebi": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc"
   },
   "keywords": [],
   "author": {
