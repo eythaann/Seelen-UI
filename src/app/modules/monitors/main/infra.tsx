@@ -1,6 +1,7 @@
-import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
-import { Button, Input, Modal, Select, Space } from 'antd';
+import { SettingsGroup } from '../../../components/SettingsBox';
+import { Button, Input, Select, Space } from 'antd';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { LayoutExamples } from '../layouts/infra';
 import { WorkspaceConfig } from '../workspace/infra';
@@ -8,21 +9,21 @@ import cs from './infra.module.css';
 import { AdvancedConfig } from './infra_advanced';
 
 import { useAppSelector } from '../../shared/app/hooks';
-import {
-  GeneralSettingsSelectors,
-  getMonitorSelector,
-  RootSelectors,
-} from '../../shared/app/selectors';
+import { GeneralSettingsSelectors, getMonitorSelector, RootSelectors } from '../../shared/app/selectors';
 import { defaultOnNull } from '../../shared/app/utils';
+import { MonitorsActions } from './app';
 
 export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
+  const [newWorkspaceName, setNewWorkspaceName] = useState('');
   const monitor = useAppSelector(getMonitorSelector(monitorIdx));
+
+  const dispatch = useDispatch();
 
   if (!monitor) {
     return null;
   }
 
-  const workspace = monitor.workspaces[monitor.edditingWorkspace] || monitor.workspaces[0]!;
+  const workspace = monitor.workspaces[monitor.edditingWorkspace]!;
   const LayoutExample = LayoutExamples[workspace.layout];
 
   const containerPadding = defaultOnNull(
@@ -35,22 +36,41 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
     useAppSelector(GeneralSettingsSelectors.workspacePadding),
   );
 
+  const onDelete = () => {
+    dispatch(MonitorsActions.delete(monitorIdx));
+  };
+
+  const onInsert = () => {
+    dispatch(MonitorsActions.insert(monitorIdx + 1));
+  };
+
+  const onChangeWorkspace = (workspaceIdx: number) => {
+    dispatch(MonitorsActions.changeEditingWorkspace({ monitorIdx, workspaceIdx }));
+  };
+
+  const onChangeNewWorkspaceName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNewWorkspaceName(event.target.value);
+  };
+  const onAddWorkspace = () => {
+    dispatch(MonitorsActions.newWorkspace({ monitorIdx, name: newWorkspaceName }));
+    setNewWorkspaceName('');
+  };
+
   return (
     <div className={cs.config}>
       <div className={cs.monitor}>
         <div className={cs.border}>
           <div className={cs.screen}>
-            <LayoutExample
-              containerPadding={containerPadding}
-              workspacePadding={workspacePadding}
-            />
+            <LayoutExample containerPadding={containerPadding} workspacePadding={workspacePadding} />
           </div>
         </div>
         <AdvancedConfig workspaceIdx={monitor.edditingWorkspace} monitorIdx={monitorIdx} />
-        <Button type="primary" danger disabled={monitorIdx === 0}>
+        <Button type="primary" danger disabled={monitorIdx === 0} onClick={onDelete}>
           Delete
         </Button>
-        <Button type="primary">Insert</Button>
+        <Button type="primary" onClick={onInsert}>
+          Insert
+        </Button>
       </div>
       <SettingsGroup>
         <div>
@@ -63,8 +83,10 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
                 {menu}
                 <hr />
                 <Space>
-                  <Input placeholder="New workspace" />
-                  <Button type="primary">+</Button>
+                  <Input value={newWorkspaceName} placeholder="New workspace" onChange={onChangeNewWorkspaceName} />
+                  <Button type="primary" onClick={onAddWorkspace}>
+                    +
+                  </Button>
                 </Space>
               </>
             )}
@@ -72,6 +94,7 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
               label: workspace.name,
               value: index,
             }))}
+            onChange={onChangeWorkspace}
           />
         </div>
         <WorkspaceConfig monitorIdx={monitorIdx} workspaceIdx={monitor.edditingWorkspace} />

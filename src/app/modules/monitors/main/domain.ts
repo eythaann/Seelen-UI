@@ -7,13 +7,37 @@ export interface Workspace {
   name: string;
   workspacePadding: number | null;
   containerPadding: number | null;
-  customLayout: any | null;
-  customLayoutRules: any | null;
-  layoutRules: Record<string, Layout> | null;
+  customLayout: string | null;
+  customLayoutRules: Record<string, string | null> | null;
+  layoutRules: Record<string, Layout | null> | null;
+}
+
+export class Workspace {
+  static default(): Workspace {
+    return {
+      name: 'Workspace 1',
+      layout: Layout.BSP,
+      layoutRules: null,
+      containerPadding: null,
+      workspacePadding: null,
+      customLayout: null,
+      customLayoutRules: null,
+    };
+  }
 }
 
 export interface Monitor {
-  workAreaOffset: Rect | null;
+  workAreaOffset: Rect.plain | null;
   workspaces: Workspace[];
   edditingWorkspace: number;
+}
+
+export class Monitor {
+  static default(): Monitor {
+    return {
+      edditingWorkspace: 0,
+      workAreaOffset: null,
+      workspaces: [Workspace.default()],
+    };
+  }
 }

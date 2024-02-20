@@ -19,7 +19,7 @@ export const cx = (...args: Args[]): string => {
 
 export const matcher = (slice: Slice) => (action: Action) => action.type.startsWith(slice.name);
 
-export const selectorsFor = <T>(state: T): SelectorsFor<T> => {
+export const selectorsFor = <T extends anyObject>(state: T): SelectorsFor<T> => {
   const selectors = {} as SelectorsFor<T>;
   for (const key in state) {
     selectors[key] = (state: T) => state[key];

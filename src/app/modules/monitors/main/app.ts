@@ -1,86 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { Layout } from '../layouts/domain';
-import { Monitor } from './domain';
+import { Monitor, Workspace } from './domain';
 
-const initialState: Monitor[] = [{
-  edditingWorkspace: 0,
-  workAreaOffset: null,
-  workspaces: [{
-    name: 'Workspace 1',
-    layout: Layout.BSP,
-    layoutRules: null,
-    containerPadding: null,
-    workspacePadding: null,
-    customLayout: null,
-    customLayoutRules: null,
-  }],
-},
-{
-  edditingWorkspace: 0,
-  workAreaOffset: null,
-  workspaces: [{
-    name: 'Workspace 1',
-    layout: Layout.COLUMNS,
-    layoutRules: null,
-    containerPadding: null,
-    workspacePadding: null,
-    customLayout: null,
-    customLayoutRules: null,
-  }],
-},
-{
-  edditingWorkspace: 0,
-  workAreaOffset: null,
-  workspaces: [{
-    name: 'Workspace 1',
-    layout: Layout.ROWS,
-    layoutRules: null,
-    containerPadding: null,
-    workspacePadding: null,
-    customLayout: null,
-    customLayoutRules: null,
-  }],
-},
-{
-  edditingWorkspace: 0,
-  workAreaOffset: null,
-  workspaces: [{
-    name: 'Workspace 1',
-    layout: Layout.HORIZONTAL_STACK,
-    layoutRules: null,
-    containerPadding: null,
-    workspacePadding: null,
-    customLayout: null,
-    customLayoutRules: null,
-  }],
-},
-{
-  edditingWorkspace: 0,
-  workAreaOffset: null,
-  workspaces: [{
-    name: 'Workspace 1',
-    layout: Layout.VERTICAL_STACK,
-    layoutRules: null,
-    containerPadding: null,
-    workspacePadding: null,
-    customLayout: null,
-    customLayoutRules: null,
-  }],
-},
-{
-  edditingWorkspace: 0,
-  workAreaOffset: null,
-  workspaces: [{
-    name: 'Workspace 1',
-    layout: Layout.ULTRAWIDE_VERTICAL_STACK,
-    layoutRules: null,
-    containerPadding: null,
-    workspacePadding: null,
-    customLayout: null,
-    customLayoutRules: null,
-  }],
-}];
+const initialState: Monitor[] = [Monitor.default()];
 
 interface ForMonitor {
   monitorIdx: number;
@@ -94,6 +16,46 @@ export const MonitorsSlice = createSlice({
   name: 'monitors',
   initialState,
   reducers: {
+    delete: (state, action: PayloadAction<number>) => {
+      state.splice(action.payload, 1);
+    },
+    insert: (state, action: PayloadAction<number>) => {
+      state.splice(action.payload, 0, Monitor.default());
+    },
+    changeEditingWorkspace: (state, action: PayloadAction<ForWorkspace>) => {
+      const { monitorIdx, workspaceIdx } = action.payload;
+      const monitor = state[monitorIdx];
+      if (!monitor) {
+        return;
+      }
+      monitor.edditingWorkspace = workspaceIdx;
+    },
+    newWorkspace: (state, action: PayloadAction<ForMonitor & { name: string }>) => {
+      const { monitorIdx, name } = action.payload;
+      const monitor = state[monitorIdx];
+      if (!monitor) {
+        return;
+      }
+      const newWorkspace = Workspace.default();
+      const length = monitor.workspaces.push(newWorkspace);
+      newWorkspace.name = name || `Workspace ${length}`;
+    },
+    updateWorkspace: <T extends keyof Workspace>(state: Monitor[], action: PayloadAction<ForWorkspace & { key: T; value: Workspace[T] }>) => {
+      const { workspaceIdx, monitorIdx, key, value } = action.payload;
+      let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
+      if (!workspace) {
+        return;
+      }
+      workspace[key] = value;
+    },
+    updateMonitor: <T extends keyof Monitor>(state: Monitor[], action: PayloadAction<ForMonitor & { key: T; value: Monitor[T] }>) => {
+      const { monitorIdx, key, value } = action.payload;
+      const monitor = state[monitorIdx];
+      if (!monitor) {
+        return;
+      }
+      monitor[key] = value;
+    },
     enableLayoutRules: (state, action: PayloadAction<ForWorkspace>) => {
       const { workspaceIdx, monitorIdx } = action.payload;
       let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
@@ -102,14 +64,13 @@ export const MonitorsSlice = createSlice({
       }
       workspace.layoutRules = {};
       for (let n = 1; n < 10; n++) {
-        workspace.layoutRules[n] = workspace.layout;
+        workspace.layoutRules[n] = null;
       }
     },
     disableLayoutRules: (state, action: PayloadAction<ForWorkspace>) => {
       const { workspaceIdx, monitorIdx } = action.payload;
       let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
       if (workspace) {
-        console.log('????');
         workspace.layoutRules = null;
       }
     },
@@ -121,7 +82,7 @@ export const MonitorsSlice = createSlice({
       }
       workspace.customLayoutRules = {};
       for (let n = 1; n < 10; n++) {
-        workspace.customLayoutRules[n] = workspace.customLayout;
+        workspace.customLayoutRules[n] = null;
       }
     },
     disableCustomLayoutRules: (state, action: PayloadAction<ForWorkspace>) => {
@@ -129,7 +90,6 @@ export const MonitorsSlice = createSlice({
       let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
       if (workspace) {
         workspace.customLayoutRules = null;
-        console.log('????');
       }
     },
   },

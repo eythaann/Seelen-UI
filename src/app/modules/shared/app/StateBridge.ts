@@ -10,6 +10,8 @@ import {
   WindowContainerBehaviour,
   WindowHidingBehaviour,
 } from '../../general/main/domain';
+import { Layout } from '../../monitors/layouts/domain';
+import { Monitor, Workspace } from '../../monitors/main/domain';
 import { HexColor } from '../domain/interfaces';
 import { RootState } from '../domain/state';
 
@@ -58,11 +60,43 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
   };
 };
 
+const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[] => {
+  if (!json.monitors) {
+    return monitors;
+  }
+
+  return json.monitors.map((json_monitor) => {
+    const monitor = Monitor.default();
+    const defaultWorkspace = Workspace.default();
+
+    if (json_monitor.work_area_offset) {
+      monitor.workAreaOffset = json_monitor.work_area_offset;
+    }
+
+    if (json_monitor.workspaces && json_monitor.workspaces.length > 0) {
+      monitor.workspaces = json_monitor.workspaces.map<Workspace>((json_workspace) => {
+        const workspace: Workspace = {
+          name: json_workspace.name ?? defaultWorkspace.containerPadding,
+          containerPadding: json_workspace.container_padding ?? defaultWorkspace.containerPadding,
+          workspacePadding: json_workspace.workspace_padding ?? defaultWorkspace.workspacePadding,
+          customLayout: json_workspace.custom_layout ?? defaultWorkspace.customLayout,
+          customLayoutRules: json_workspace.custom_layout_rules ?? defaultWorkspace.customLayoutRules,
+          layout: json_workspace.layout as Layout ?? defaultWorkspace.layout,
+          layoutRules: json_workspace.layout_rules as Record<string, Layout> ?? defaultWorkspace.layoutRules,
+        };
+        return workspace;
+      });
+    }
+
+    return monitor;
+  });
+};
+
 export const JsonToState = (json: StaticConfig, initialState: RootState): RootState => {
   return {
     route: initialState.route,
     toBeSaved: false,
     generals: JsonToState_Generals(json, initialState.generals),
-    monitors: initialState.monitors, //TODO
+    monitors: JsonToState_Monitors(json, initialState.monitors), //TODO
   };
 };
