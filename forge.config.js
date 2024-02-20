@@ -1,8 +1,7 @@
 /* eslint-disable @ts/no-unused-vars */
 const path = require('path');
 const fs = require('fs');
-const { runPwshScript, runPwshCommand } = require('./src/utils');
-const { exec } = require('child_process');
+const { runPwshScript } = require('./src/background/utils');
 
 /**
  * @typedef {import('@electron-forge/shared-types').ForgeConfig} ForgeConfig
@@ -12,10 +11,7 @@ const config = {
   packagerConfig: {
     name: 'Komorebi UI',
     executableName: 'komorebi-ui',
-    icon: path.join(process.cwd(), 'assets/icons/icon'),
-    extraResource: [
-      path.join(process.cwd(), 'assets/icons'),
-    ],
+    icon: path.join(process.cwd(), 'static/icons/icon'),
     asar: true,
     ignore: [
       'komorebi',
@@ -25,7 +21,7 @@ const config = {
       '.gitmodules',
       'eslint.config.js',
       'tsconfig.json',
-      'src/app',
+      'src',
     ],
   },
   rebuildConfig: {},
@@ -61,7 +57,7 @@ const config = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
-        setupIcon: path.join(process.cwd(), 'assets/icons/icon.ico'),
+        setupIcon: path.join(process.cwd(), 'static/icons/icon.ico'),
       },
     },
   ],

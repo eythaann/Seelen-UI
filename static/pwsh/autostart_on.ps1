@@ -1,15 +1,19 @@
+param (
+  [string]$ExeRoute
+)
+
 $isAdmin = ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 if (-not $isAdmin) {
     $ownRoute = $MyInvocation.MyCommand.Definition
-    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$ownRoute`"" -Verb RunAs -WindowStyle Hidden
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$ownRoute`" -ExeRoute `"$ExeRoute`"" -Verb RunAs -WindowStyle Hidden
     Exit
 }
 
 $taskName = "KomorebiUI"
-$command = "$PSScriptRoot\komorebi.exe -c $Env:USERPROFILE\.config\komorebi\settings.json"
+$command = "& '$ExeRoute' -c $Env:USERPROFILE\.config\komorebi\settings.json"
 
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -Command $command"
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -Command `"$command`""
 $trigger = New-ScheduledTaskTrigger -AtLogon
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden
 

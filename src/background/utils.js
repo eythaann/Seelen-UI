@@ -4,11 +4,7 @@ const { readFileSync, writeFileSync } = require('fs');
 const os = require('os');
 const path = require('path');
 
-const fromCurrent = (...segments) => {
-  return path.join(__dirname, ...segments);
-};
-
-const fromPackage = (...segments) => {
+const fromPackageRoot = (...segments) => {
   return path.join(app.getAppPath(), '../../', ...segments);
 };
 
@@ -26,7 +22,11 @@ const execPrinter = (error, stdout, stderr) => {
 
 const runPwshScript = async (name, args = '') => {
   const tempRoute = path.join(os.tmpdir(), `${Math.random()}-komorebi.ps1`.slice(2));
-  writeFileSync(tempRoute, readFileSync(fromCurrent('./pwsh', name)).toString());
+  writeFileSync(
+    tempRoute,
+    // here we use __dirname instead app.getAppPath because this fn is also used on build.
+    readFileSync(path.join(__dirname, '../../static/pwsh', name)).toString(),
+  );
   return new Promise((resolve, reject) => {
     exec(`powershell -ExecutionPolicy Bypass -File ${tempRoute} ${args}`, (error, stdout, stderr) => {
       execPrinter(error, stdout, stderr);
@@ -38,16 +38,4 @@ const runPwshScript = async (name, args = '') => {
   });
 };
 
-const runPwshCommand = async (command) => {
-  return new Promise((resolve, reject) => {
-    exec(command, { shell: 'powershell.exe' }, (error, stdout, stderr) => {
-      execPrinter(error, stdout, stderr);
-      if (error) {
-        return reject(error);
-      }
-      resolve();
-    });
-  });
-};
-
-module.exports = { fromCurrent, runPwshScript, fromPackage, runPwshCommand };
+module.exports = { runPwshScript, fromPackageRoot };

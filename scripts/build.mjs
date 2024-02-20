@@ -1,8 +1,8 @@
 import esbuild from 'esbuild';
 import fs from 'fs';
 
-const consolePrinter = {
-  name: 'consolePrinter',
+const CopyPublic = {
+  name: 'CopyPublic',
   setup(build) {
     build.onStart(() => {
       try {
@@ -10,14 +10,8 @@ const consolePrinter = {
         fs.mkdirSync('dist/frontend-bundle');
       } catch (e) {}
       fs.cpSync('src/app/public', 'dist/frontend-bundle', {
-        'recursive': true,
+        recursive: true,
       });
-    });
-
-    build.onEnd(async (result) => {
-      if (result.errors.length) {
-        console.log(`\nFound ${result.errors.length} errors.`);
-      }
     });
   },
 };
@@ -26,11 +20,16 @@ await esbuild.build({
   entryPoints: ['./src/app/index.tsx'],
   bundle: true,
   minify: true,
-  sourcemap: true,
   outfile: './dist/frontend-bundle/bundle.js',
   jsx: 'automatic',
+  plugins: [CopyPublic],
+});
+
+await esbuild.build({
+  entryPoints: ['./src/background/index.ts', './src/background/preload.ts'],
+  bundle: true,
+  minify: true,
+  outdir: './dist/background-bundle',
+  platform: 'node',
   external: ['electron'],
-  plugins: [
-    consolePrinter,
-  ]
 });

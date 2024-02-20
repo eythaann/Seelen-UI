@@ -3,7 +3,7 @@
   "productName": "komorebi-ui",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": "src/index.js",
+  "main": "dist/background-bundle/index.js",
   "scripts": {
     "dev": "nodemon --watch src -e js,ts,tsx,css --exec \"npm run start\"",
     "start": "electron-forge start",

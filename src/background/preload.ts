@@ -1,6 +1,8 @@
+import { BackgroundApi } from '../shared.interfaces';
+
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('backgroundApi', {
+const api: BackgroundApi = {
   enableAutostart: () => {
     ipcRenderer.send('enable-autostart');
   },
@@ -18,4 +20,6 @@ contextBridge.exposeInMainWorld('backgroundApi', {
       });
     });
   },
-});
+};
+
+contextBridge.exposeInMainWorld('backgroundApi', api);
