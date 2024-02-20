@@ -1,0 +1,12 @@
+{
+  "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/nodemon.json",
+  "ignore": [
+    "src/JsonSettings.interface.ts"
+  ],
+  "watch": [
+    "src",
+    "scripts"
+  ],
+  "ext": "js,ts,tsx,css,mjs",
+  "exec": "npm run start"
+}
