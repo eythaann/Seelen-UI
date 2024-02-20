@@ -95,8 +95,85 @@ const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[
 export const JsonToState = (json: StaticConfig, initialState: RootState): RootState => {
   return {
     route: initialState.route,
-    toBeSaved: false,
+    toBeSaved: initialState.toBeSaved,
     generals: JsonToState_Generals(json, initialState.generals),
-    monitors: JsonToState_Monitors(json, initialState.monitors), //TODO
+    monitors: JsonToState_Monitors(json, initialState.monitors),
+  };
+};
+
+const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
+  return {
+    alt_focus_hack: state.altFocusHack,
+    animations: {
+      finish_miminization_before_restore: state.animations.finishMiminization,
+      native_animations_delay: state.animations.nativeDelay,
+    },
+    auto_stack_by_category: state.autoStackinByCategory,
+    active_window_border: state.border.enable,
+    active_window_border_colours: {
+      single: new ColorFactory(state.border.color).toRgb(), //TODO
+      monocle: new ColorFactory(state.border.color).toRgb(),
+      stack: new ColorFactory(state.border.color).toRgb(), //TODO
+    },
+    active_window_border_offset: state.border.offset,
+    active_window_border_width: state.border.width,
+    cross_monitor_move_behaviour: state.crossMonitorMoveBehaviour,
+    top_bar: {
+      height: state.containerTopBar.height,
+      mode: state.containerTopBar.mode,
+      tabs: {
+        width: state.containerTopBar.tabs.width,
+        color: state.containerTopBar.tabs.color,
+        background: state.containerTopBar.tabs.background,
+      },
+    },
+    default_container_padding: state.containerPadding,
+    default_workspace_padding: state.workspacePadding,
+    focus_follows_mouse: state.focusFollowsMouse,
+    global_work_area_offset: state.globalWorkAreaOffset,
+    invisible_borders: state.invisibleBorders,
+    mouse_follows_focus: state.mouseFollowFocus,
+    resize_delta: state.resizeDelta,
+    unmanaged_window_operation_behaviour: state.unmanagedWindowOperationBehaviour,
+    window_container_behaviour: state.windowContainerBehaviour,
+    window_hiding_behaviour: state.windowHidingBehaviour,
+  };
+};
+
+const cleanRules = <T = string>(rules: Record<string, string | null> | null): Record<string, T> | null => {
+  const cleanedRules = { ...rules };
+  for (const key of Object.keys(cleanedRules)) {
+    if (cleanedRules[key] == null || cleanedRules[key] === '') {
+      delete cleanedRules[key];
+    }
+  }
+  return Object.keys(cleanedRules).length ? cleanedRules as Record<string, T> : null;
+};
+
+const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {
+  return {
+    monitors: monitors.map((monitor) => {
+      return {
+        work_area_offset: monitor.workAreaOffset,
+        workspaces: monitor.workspaces.map((workspace) => {
+          return {
+            name: workspace.name,
+            container_padding: workspace.containerPadding,
+            workspace_padding: workspace.workspacePadding,
+            custom_layout: workspace.customLayout || null,
+            custom_layout_rules: cleanRules(workspace.customLayoutRules),
+            layout: workspace.layout,
+            layout_rules: cleanRules(workspace.layoutRules),
+          };
+        }),
+      };
+    }),
+  };
+};
+
+export const StateToJson = (state: RootState): StaticConfig => {
+  return {
+    ...StateToJson_Generals(state.generals),
+    ...StateToJson_Monitors(state.monitors),
   };
 };

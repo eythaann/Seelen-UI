@@ -5,9 +5,10 @@ export interface BackgroundApi {
   disableAutostart: () => void;
   autostartTaskExist: () => Promise<boolean>;
   getUserSettings: () => Promise<UserSettings>;
+  saveUserSettings: (settings: UserSettings) => Promise<void>;
 }
 
 export interface UserSettings {
-  jsonSettings: StaticConfig | null;
-  yamlSettings: any[] | null;
+  jsonSettings: StaticConfig;
+  yamlSettings: any[];
 }

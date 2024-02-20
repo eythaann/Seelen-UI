@@ -144,7 +144,7 @@ const columns: ColumnsType<AppConfiguration> = [
   },
 ];
 
-function Actions({ record, index }: { record: AppConfiguration; index: number }) {
+function Actions({ record }: { record: AppConfiguration; index: number }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
