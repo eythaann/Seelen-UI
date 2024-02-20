@@ -1,8 +1,8 @@
 import { Button } from 'antd';
-import { useDispatch } from 'react-redux';
+
+import { LoadSettingsToStore, SaveStore } from '../../modules/shared/infrastructure/store';
 
 import { useAppSelector } from '../../modules/shared/app/hooks';
-import { RootActions } from '../../modules/shared/app/reducer';
 import { RootSelectors } from '../../modules/shared/app/selectors';
 
 import { Route, RouteLabels } from '../../modules/shared/domain/routes';
@@ -12,16 +12,6 @@ import cs from './index.module.css';
 export const Header = () => {
   let route = useAppSelector(RootSelectors.route);
   let hasChanges = useAppSelector(RootSelectors.toBeSaved);
-
-  let dispatch = useDispatch();
-
-  let onSave = () => {
-    dispatch(RootActions.setSaved());
-  };
-
-  let onCancel = () => {
-    dispatch(RootActions.setSaved());
-  };
 
   return (
     <div className={cs.Header}>
@@ -33,14 +23,14 @@ export const Header = () => {
             type="default"
             danger
             disabled={!hasChanges}
-            onClick={onCancel}
+            onClick={LoadSettingsToStore}
           />
           {' '}
           <Button
             children="Save"
             type="primary"
             disabled={!hasChanges}
-            onClick={onSave}
+            onClick={SaveStore}
           />
         </div>
       )}

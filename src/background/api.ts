@@ -1,6 +1,9 @@
 import { fromPackageRoot, runPwshScript } from './utils';
 import { exec } from 'child_process';
 import { ipcMain } from 'electron';
+import { existsSync, readFileSync } from 'fs';
+import os from 'os';
+import path from 'path';
 
 export const loadApi = () => {
   ipcMain
@@ -20,6 +23,18 @@ export const loadApi = () => {
           return;
         }
         event.sender.send('get-autostart-task-reply', stdout);
+      });
+    })
+
+    .on('get-user-settings', (event, _arg) => {
+      const json_route = path.join(os.homedir(), '.config/komorebi/settings.json');
+      let data_json = {};
+      if (existsSync(json_route)) {
+        data_json = JSON.parse(readFileSync(json_route, 'utf-8'));
+      }
+      event.sender.send('get-user-settings-reply', {
+        jsonSettings: data_json,
+        yamlSettings: [],
       });
     });
 };

@@ -24,6 +24,7 @@ export const RootSlice = createSlice({
     setSaved: (state) => {
       state.toBeSaved = false;
     },
+    setState: (_state, action: PayloadAction<RootState>) => action.payload,
   },
   selectors: selectorsFor(initialState),
   extraReducers: (builder) => {

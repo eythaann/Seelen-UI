@@ -1,4 +1,4 @@
-import { BackgroundApi } from '../shared.interfaces';
+import { BackgroundApi, UserSettings } from '../shared.interfaces';
 
 const { contextBridge, ipcRenderer } = require('electron');
 
@@ -17,6 +17,17 @@ const api: BackgroundApi = {
           return reject(error);
         }
         resolve(result != null);
+      });
+    });
+  },
+  getUserSettings: async () => {
+    return new Promise<UserSettings>((resolve, reject) => {
+      ipcRenderer.send('get-user-settings');
+      ipcRenderer.on('get-user-settings-reply', (e, result: UserSettings, error) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(result);
       });
     });
   },

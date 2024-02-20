@@ -5,7 +5,7 @@
   "description": "My Electron application description",
   "main": "dist/background-bundle/index.js",
   "scripts": {
-    "dev": "nodemon --watch src -e js,ts,tsx,css --exec \"npm run start\"",
+    "dev": "nodemon --config nodemon.json",
     "start": "electron-forge start",
     "package": "npm run build-komorebi && electron-forge package",
     "make": "npm run build-komorebi && electron-forge make",
@@ -39,6 +39,7 @@
     "esbuild": "^0.20.1",
     "eslint": "^8.56.0",
     "eslint-plugin-simple-import-sort": "^12.0.0",
+    "json-schema-to-typescript": "^13.1.2",
     "nodemon": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
