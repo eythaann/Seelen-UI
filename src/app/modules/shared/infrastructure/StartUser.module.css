@@ -1,0 +1,21 @@
+
+.welcome {
+  :global(.ant-modal-confirm-content) {
+    text-align: justify;
+    b {
+      font-weight: 600;
+    }
+  }
+
+  .icon {
+    font-size: 23px;
+    position: relative;
+    width: 30px;
+    left: -3px;
+    top: -8px;
+  }
+
+  button:focus-visible {
+    overlay: none !important;
+  }
+}

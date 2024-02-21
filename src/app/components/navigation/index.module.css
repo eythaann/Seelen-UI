@@ -46,7 +46,11 @@
     }
 
     .icon {
-      width: 20px;
+      width: 18px;
+      min-width: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .label {

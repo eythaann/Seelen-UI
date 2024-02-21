@@ -1,4 +1,5 @@
 import { UserSettings } from '../../../../shared.interfaces';
+import { StartUser } from './StartUser';
 import { configureStore } from '@reduxjs/toolkit';
 import { Modal } from 'antd';
 
@@ -19,6 +20,11 @@ export type store = {
 
 export const LoadSettingsToStore = async () => {
   window.backgroundApi.getUserSettings().then((userSettings: UserSettings) => {
+    if (!Object.keys(userSettings.jsonSettings)) {
+      StartUser();
+      return;
+    }
+
     const currentState = store.getState();
     const initialState = RootSlice.getInitialState();
 

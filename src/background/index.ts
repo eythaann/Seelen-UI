@@ -1,4 +1,4 @@
-import { loadApi } from './api';
+import { loadBackgroundApi } from './api';
 import { fromPackageRoot, runPwshScript } from './utils';
 import { app, BrowserWindow } from 'electron';
 import { shell } from 'electron';
@@ -32,7 +32,12 @@ app.on('ready', () => {
   });
 
   mainWindow.loadFile(path.join(app.getAppPath(), 'dist/frontend-bundle/index.html'));
-  loadApi();
+
+  mainWindow.on('blur', () => {
+    mainWindow.close();
+  });
+
+  loadBackgroundApi();
 });
 
 app.on('window-all-closed', () => {

@@ -1,0 +1,8 @@
+.info {
+  a {
+    color: var(--color-blue-600);
+    &:hover {
+      color: var(--color-blue-800);
+    }
+  }
+}

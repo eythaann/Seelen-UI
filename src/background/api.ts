@@ -1,5 +1,6 @@
 import { StaticConfig } from '../JsonSettings.interface';
 import { UserSettings } from '../shared.interfaces';
+import { ApplicationConfiguration } from '../YamlSettings.interface';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
 import { fromPackageRoot, runPwshScript } from './utils';
 import { exec } from 'child_process';
@@ -9,45 +10,50 @@ import yaml from 'js-yaml';
 import os from 'os';
 import path from 'path';
 
-export const loadApi = () => {
+export const loadBackgroundApi = () => {
   ipcMain
-    .on('enable-autostart', (_event) => {
+    .on(Channel.ENABLE_AUTOSTART, (_event) => {
       runPwshScript('autostart_on.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
     })
 
-    .on('disable-autostart', (_event) => {
+    .on(Channel.DISABLE_AUTOSTART, (_event) => {
       runPwshScript('autostart_off.ps1');
     })
 
-    .on('get-autostart-task', (event) => {
+    .on(Channel.GET_AUTOSTART_STATUS, (event) => {
       const command = 'schtasks /query /tn "KomorebiUI" /v';
       exec(command, (err, stdout, stderr) => {
         if (stderr) {
-          event.sender.send('get-autostart-task-reply', null);
+          event.sender.send(REPLY_BY_CHANNEL[Channel.GET_AUTOSTART_STATUS], null);
           return;
         }
-        event.sender.send('get-autostart-task-reply', stdout);
+        event.sender.send(REPLY_BY_CHANNEL[Channel.GET_AUTOSTART_STATUS], stdout);
       });
     })
 
-    .on('get-user-settings', (event) => {
+    .on(Channel.GET_USER_SETTINGS, (event) => {
       const json_route = path.join(os.homedir(), '.config/komorebi/settings.json');
-      let data_json = {} as StaticConfig;
-      let data_yaml = [];
+      let data_json: StaticConfig = {};
+      let data_yaml: ApplicationConfiguration[] = [];
 
       if (existsSync(json_route)) {
         data_json = JSON.parse(readFileSync(json_route, 'utf-8'));
+
         let pathToYml = data_json.app_specific_configuration_path;
         if (pathToYml) {
+          pathToYml = pathToYml.replace('$Env:USERPROFILE', '~');
           if (pathToYml.startsWith('~')) {
             pathToYml = path.join(os.homedir(), pathToYml.slice(2));
           }
-          const processed = yaml.load(readFileSync(pathToYml, 'utf-8'));
-          data_yaml = Array.isArray(processed) ? processed : [];
+
+          if (existsSync(pathToYml)) {
+            const processed = yaml.load(readFileSync(pathToYml, 'utf-8'));
+            data_yaml = Array.isArray(processed) ? processed : [];
+          }
         }
       }
 
-      event.sender.send('get-user-settings-reply', {
+      event.sender.send(REPLY_BY_CHANNEL[Channel.GET_USER_SETTINGS], {
         jsonSettings: data_json,
         yamlSettings: data_yaml,
       });
