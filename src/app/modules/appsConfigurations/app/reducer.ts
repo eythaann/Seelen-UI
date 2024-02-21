@@ -15,8 +15,8 @@ export const AppsConfigSlice = createSlice({
     delete: (state, action: PayloadAction<number>) => {
       state.splice(action.payload, 1);
     },
-    push: (state, action: PayloadAction<AppConfiguration>) => {
-      state.push(action.payload);
+    push: (state, action: PayloadAction<AppConfiguration[]>) => {
+      state.push(...action.payload);
     },
     replace: (state, action: PayloadAction<AppPayload & { app: AppConfiguration }>) => {
       const { idx, app } = action.payload;

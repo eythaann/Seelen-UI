@@ -4,14 +4,14 @@ import { ApplicationConfiguration } from '../YamlSettings.interface';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
 import { fromPackageRoot, runPwshScript } from './utils';
 import { exec } from 'child_process';
-import { ipcMain } from 'electron';
+import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { ensureFileSync, readJsonSync, writeJsonSync } from 'fs-extra';
 import yaml from 'js-yaml';
 import os from 'os';
 import path from 'path';
 
-export const loadBackgroundApi = () => {
+export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
   ipcMain
     .on(Channel.ENABLE_AUTOSTART, (_event) => {
       runPwshScript('autostart_on.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
@@ -71,5 +71,25 @@ export const loadBackgroundApi = () => {
       writeFileSync(yaml_route, yaml.dump(settings.yamlSettings));
 
       event.sender.send(REPLY_BY_CHANNEL[Channel.SAVE_USER_SETTINGS]);
+    })
+
+    .on(Channel.LOAD_APPS_TEMPLATE, (event) => {
+      dialog.showOpenDialog(mainWindow, {
+        defaultPath: path.join(app.getAppPath(), 'static/apps_templates'),
+        properties: ['openFile', 'multiSelections'],
+        buttonLabel: 'load',
+        title: 'Select template',
+        filters: [{ name: 'template', extensions: ['yaml', 'yml'] }],
+      })
+        .then((result) => {
+          const data: ApplicationConfiguration[] = result.filePaths.flatMap((path) => {
+            const processed = yaml.load(readFileSync(path, 'utf-8'));
+            return Array.isArray(processed) ? processed : [];
+          });
+          event.sender.send(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], data);
+        })
+        .catch((err) => {
+          event.sender.send(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], undefined, err);
+        });
     });
 };

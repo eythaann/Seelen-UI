@@ -4,6 +4,7 @@ export enum Channel {
   ENABLE_AUTOSTART = 'enable-autostart',
   DISABLE_AUTOSTART = 'disable-autostart',
   SAVE_USER_SETTINGS = 'save-user-settings',
+  LOAD_APPS_TEMPLATE = 'load-apps-template',
 }
 
 type ReplayChannel = { [K in Channel]: `${K}-reply` };

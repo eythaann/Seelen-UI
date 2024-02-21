@@ -102,7 +102,7 @@ const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[
   });
 };
 
-const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfig): AppConfiguration[] => {
+export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfig): AppConfiguration[] => {
   const apps: AppConfiguration[] = [];
 
   yaml.forEach((ymlApp: YamlAppConfiguration) => {

@@ -7,14 +7,11 @@ import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../shared/app/hooks';
 import { RootSelectors } from '../../shared/app/selectors';
+import { YamlToState_Apps } from '../../shared/app/StateBridge';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
-import {
-  AppConfiguration,
-  ApplicationOptions,
-  LabelByAppOption,
-} from '../domain';
+import { AppConfiguration, ApplicationOptions, LabelByAppOption } from '../domain';
 
 import cs from './index.module.css';
 
@@ -85,21 +82,24 @@ const columns: ColumnsType<AppConfigWithKey> = [
     align: 'center',
     sorter: getSorterByText('matchingStrategy'),
   },
-  ...Object.values(ApplicationOptions).map((option) => ({
-    title: LabelByAppOption[option],
-    dataIndex: option,
-    key: option,
-    align: 'center',
-    width: 140,
-    render: ReadonlySwitch,
-    sorter: getSorterByBool(option),
-  } as ColumnType<AppConfigWithKey>)),
+  ...Object.values(ApplicationOptions).map(
+    (option) =>
+      ({
+        title: LabelByAppOption[option],
+        dataIndex: option,
+        key: option,
+        align: 'center',
+        width: 140,
+        render: ReadonlySwitch,
+        sorter: getSorterByBool(option),
+      } as ColumnType<AppConfigWithKey>),
+  ),
   {
     title: <ActionsTitle />,
     key: 'operation',
     fixed: 'right',
     align: 'center',
-    width: 80,
+    width: 90,
     render: (_, record, index) => <Actions record={record} index={index} />,
   },
 ];
@@ -111,13 +111,13 @@ function ActionsTitle() {
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
   const onSave = (app: AppConfiguration) => {
-    dispatch(AppsConfigActions.push(app));
+    dispatch(AppsConfigActions.push([app]));
     setIsModalOpen(false);
   };
 
   return (
     <div>
-      <EditAppModal open={isModalOpen} isNew onSave={onSave} onCancel={onCancel}/>
+      <EditAppModal open={isModalOpen} isNew onSave={onSave} onCancel={onCancel} />
       <Button className={cs.newBtn} type="primary" onClick={showModal}>
         New
       </Button>
@@ -153,7 +153,7 @@ function Actions({ record }: { record: AppConfigWithKey; index: number }) {
 
   return (
     <div className={cs.actions}>
-      {isModalOpen && <EditAppModal open idx={record.key} onSave={onSave} onCancel={onCancel}/>}
+      {isModalOpen && <EditAppModal open idx={record.key} onSave={onSave} onCancel={onCancel} />}
       <Button type="primary" onClick={showModal}>
         ✏️
       </Button>
@@ -165,17 +165,33 @@ function Actions({ record }: { record: AppConfigWithKey; index: number }) {
 }
 
 export function AppsConfiguration() {
-  const apps = useAppSelector(createSelector(RootSelectors.appsConfigurations, (apps) => {
-    return apps.map((app, index) => ({ ...app, key: index }));
-  }));
+  const apps = useAppSelector(
+    createSelector(RootSelectors.appsConfigurations, (apps) => {
+      return apps.map((app, index) => ({ ...app, key: index }));
+    }),
+  );
+
+  const dispatch = useDispatch();
+
+  const loadTemplate = async () => {
+    const yamlApps = await window.backgroundApi.loadAppsTemplate();
+    const newApps = YamlToState_Apps(yamlApps, {});
+    console.log(newApps);
+    dispatch(AppsConfigActions.push(newApps));
+  };
 
   return (
-    <Table
-      dataSource={apps}
-      columns={columns}
-      pagination={{ defaultPageSize: 20 }}
-      scroll={{ y: 350, x: '100vw' }}
-      className={cs.table}
-    />
+    <>
+      <Table
+        dataSource={apps}
+        columns={columns}
+        pagination={{ defaultPageSize: 20 }}
+        scroll={{ y: 350, x: '100vw' }}
+        className={cs.table}
+      />
+      <Button className={cs.loadBtn} onClick={loadTemplate}>
+        Load From Template
+      </Button>
+    </>
   );
 }

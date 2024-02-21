@@ -43,3 +43,8 @@
     min-width: 150px;
   }
 }
+
+.loadBtn {
+  position: absolute;
+  bottom: 15px;
+}

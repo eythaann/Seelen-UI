@@ -1,0 +1,7 @@
+- name: Komorebi-UI
+  identifier:
+    id: komorebi-ui.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - Unmanage

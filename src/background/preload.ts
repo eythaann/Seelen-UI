@@ -1,4 +1,5 @@
 import { BackgroundApi, UserSettings } from '../shared.interfaces';
+import { ApplicationConfiguration } from '../YamlSettings.interface';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
 
 const { contextBridge, ipcRenderer } = require('electron');
@@ -21,7 +22,7 @@ const api: BackgroundApi = {
       });
     });
   },
-  getUserSettings: async (route?: string) => {
+  getUserSettings: (route?: string) => {
     return new Promise<UserSettings>((resolve, reject) => {
       ipcRenderer.send(Channel.GET_USER_SETTINGS, route);
       ipcRenderer.on(REPLY_BY_CHANNEL[Channel.GET_USER_SETTINGS], (e, result: UserSettings, error) => {
@@ -40,6 +41,17 @@ const api: BackgroundApi = {
           return reject(error);
         }
         resolve();
+      });
+    });
+  },
+  loadAppsTemplate: () => {
+    return new Promise<ApplicationConfiguration[]>((resolve, reject) => {
+      ipcRenderer.send(Channel.LOAD_APPS_TEMPLATE);
+      ipcRenderer.on(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], (e, result: ApplicationConfiguration[], error) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(result);
       });
     });
   },

@@ -7,6 +7,7 @@ export interface BackgroundApi {
   autostartTaskExist: () => Promise<boolean>;
   getUserSettings: (route?: string) => Promise<UserSettings>;
   saveUserSettings: (settings: UserSettings) => Promise<void>;
+  loadAppsTemplate: () => Promise<ApplicationConfiguration[]>;
 }
 
 export interface UserSettings {

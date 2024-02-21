@@ -39,7 +39,7 @@ app.on('ready', () => {
     });
   }
 
-  loadBackgroundApi();
+  loadBackgroundApi(mainWindow);
 });
 
 app.on('window-all-closed', () => {
