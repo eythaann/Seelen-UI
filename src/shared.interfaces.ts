@@ -8,6 +8,7 @@ export interface BackgroundApi {
   getUserSettings: (route?: string) => Promise<UserSettings>;
   saveUserSettings: (settings: UserSettings) => Promise<void>;
   loadAppsTemplate: () => Promise<ApplicationConfiguration[]>;
+  quit: () => void;
 }
 
 export interface UserSettings {

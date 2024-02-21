@@ -55,6 +55,9 @@ const api: BackgroundApi = {
       });
     });
   },
+  quit() {
+    ipcRenderer.send(Channel.QUIT);
+  },
 };
 
 contextBridge.exposeInMainWorld('backgroundApi', api);

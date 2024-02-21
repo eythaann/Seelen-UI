@@ -33,12 +33,6 @@ app.on('ready', () => {
 
   mainWindow.loadFile(path.join(app.getAppPath(), 'dist/frontend-bundle/index.html'));
 
-  if (app.isPackaged) {
-    mainWindow.on('blur', () => {
-      mainWindow.close();
-    });
-  }
-
   loadBackgroundApi(mainWindow);
 });
 

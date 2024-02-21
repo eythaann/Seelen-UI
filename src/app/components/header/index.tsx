@@ -13,6 +13,14 @@ export const Header = () => {
   let route = useAppSelector(RootSelectors.route);
   let hasChanges = useAppSelector(RootSelectors.toBeSaved);
 
+  const SaveOrQuit = () => {
+    if (hasChanges) {
+      SaveStore();
+    } else {
+      window.backgroundApi.quit();
+    }
+  };
+
   return (
     <div className={cs.Header}>
       {RouteLabels[route]}
@@ -27,10 +35,10 @@ export const Header = () => {
           />
           {' '}
           <Button
-            children="Save"
+            children={hasChanges ? 'Save' : 'Close'}
             type="primary"
-            disabled={!hasChanges}
-            onClick={SaveStore}
+            danger={!hasChanges}
+            onClick={SaveOrQuit}
           />
         </div>
       )}

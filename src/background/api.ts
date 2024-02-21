@@ -74,8 +74,12 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
     })
 
     .on(Channel.LOAD_APPS_TEMPLATE, (event) => {
+      const defaultPath = app.isPackaged
+        ? fromPackageRoot('./resources/apps_templates')
+        : path.join(app.getAppPath(), 'static/apps_templates');
+
       dialog.showOpenDialog(mainWindow, {
-        defaultPath: path.join(app.getAppPath(), 'static/apps_templates'),
+        defaultPath,
         properties: ['openFile', 'multiSelections'],
         buttonLabel: 'load',
         title: 'Select template',
@@ -91,5 +95,9 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
         .catch((err) => {
           event.sender.send(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], undefined, err);
         });
+    })
+
+    .on(Channel.QUIT, () => {
+      mainWindow.close();
     });
 };
