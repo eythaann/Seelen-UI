@@ -23,6 +23,12 @@ const config = {
         './src/JsonSettings.interface.ts',
         await compileFromFile('./komorebi/schema.json'),
       );
+
+      fs.writeFileSync(
+        './src/YamlSettings.interface.ts',
+        await compileFromFile('./komorebi/schema.asc.json'),
+      );
+
       await import('./scripts/build.mjs');
     },
     prePackage: async (forgeConfig, platform, version) => {

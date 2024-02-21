@@ -1,4 +1,5 @@
 import { StaticConfig } from './JsonSettings.interface';
+import { ApplicationConfiguration } from './YamlSettings.interface';
 
 export interface BackgroundApi {
   enableAutostart: () => void;
@@ -10,5 +11,5 @@ export interface BackgroundApi {
 
 export interface UserSettings {
   jsonSettings: StaticConfig;
-  yamlSettings: any[];
+  yamlSettings: ApplicationConfiguration[];
 }

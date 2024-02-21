@@ -1,7 +1,7 @@
 import { Header } from './components/header';
 import { Navigation } from './components/navigation';
 
-import { AppsConfiguration } from './modules/appsConfigurations/infrastructure';
+import { AppsConfiguration } from './modules/appsConfigurations/infra/infra';
 import { General } from './modules/general/main/infra';
 import { Information } from './modules/information/infrastructure';
 import { Monitors } from './modules/monitors/main/infra';

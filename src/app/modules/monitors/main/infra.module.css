@@ -65,9 +65,5 @@
 }
 
 .advancedModal {
-  padding-right: 15px;
-
-  :global(.ant-select) {
-    min-width: 150px;
-  }
+  padding-right: 10px;
 }

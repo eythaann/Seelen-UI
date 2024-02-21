@@ -1,5 +1,3 @@
-
-
 .newBtn {
   width: 100%;
   background-color: var(--color-green-600);
@@ -14,17 +12,34 @@
   gap: 5px;
 
   button {
-    flex: 1
+    flex: 1;
   }
 }
 
 .table {
   :global(.ant-table-body) {
     overflow-y: auto !important;
+
+    :global(.ant-table-cell) {
+      text-wrap: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
   }
 
   :global(.ant-pagination) {
     margin-top: 10px !important;
     margin-bottom: 0 !important;
+  }
+}
+
+
+.editModal {
+  :global(.ant-modal-body) {
+    padding-right: 10px;
+  }
+
+  :global(.ant-select) {
+    min-width: 150px;
   }
 }

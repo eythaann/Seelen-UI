@@ -1,6 +1,8 @@
 import { StaticConfig } from '../../../../JsonSettings.interface';
+import { ApplicationConfiguration as YamlAppConfiguration } from '../../../../YamlSettings.interface';
 import { ColorFactory } from 'antd/es/color-picker/color';
 
+import { AppConfiguration, ApplicationIdentifier, ApplicationOptions, MatchingStrategy } from '../../appsConfigurations/domain';
 import { ContainerTopBarMode } from '../../general/containerTopBar/domain';
 import {
   CrossMonitorMoveBehaviour,
@@ -92,12 +94,36 @@ const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[
   });
 };
 
-export const JsonToState = (json: StaticConfig, initialState: RootState): RootState => {
+const YamlToState_Apps = (ymlApps: YamlAppConfiguration[]): AppConfiguration[] => {
+  return ymlApps.map<AppConfiguration>((ymlApp: YamlAppConfiguration) => {
+    const app: AppConfiguration = {
+      name: ymlApp.name,
+      category: ymlApp.category || null,
+      monitor: ymlApp.binded_monitor ?? null,
+      workspace: ymlApp.binded_workspace || null,
+      identifier: ymlApp.identifier.id,
+      kind: ymlApp.identifier.kind as ApplicationIdentifier,
+      matchingStrategy: ymlApp.identifier.matching_strategy as MatchingStrategy || MatchingStrategy.Legacy,
+      // options
+      [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
+      [ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,
+      [ApplicationOptions.Force]: ymlApp.options?.includes('force') || false,
+      [ApplicationOptions.Layered]: ymlApp.options?.includes('layered') || false,
+      [ApplicationOptions.ObjectNameChange]: ymlApp.options?.includes('object_name_change') || false,
+      [ApplicationOptions.TrayAndMultiWindow]: ymlApp.options?.includes('tray_and_multi_window') || false,
+      [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
+    };
+    return app;
+  });
+};
+
+export const JsonToState = (json: StaticConfig, yaml: YamlAppConfiguration[], initialState: RootState): RootState => {
   return {
     route: initialState.route,
     toBeSaved: initialState.toBeSaved,
     generals: JsonToState_Generals(json, initialState.generals),
     monitors: JsonToState_Monitors(json, initialState.monitors),
+    appsConfigurations: YamlToState_Apps(yaml),
   };
 };
 

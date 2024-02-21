@@ -1,13 +1,15 @@
+import { someToPartial } from 'readable-types';
 
 export enum ApplicationOptions {
-  Float = 'Float',
-  Unmanage = 'Unmanage',
-  Force = 'Force',
-  ObjectNameChange = 'ObjectNameChange',
-  Layered = 'Layered',
-  BorderOverflow = 'BorderOverflow',
-  TrayAndMultiWindow = 'TrayAndMultiWindow',
+  Float = 'float',
+  Unmanage = 'unmanage',
+  Force = 'force',
+  ObjectNameChange = 'object_name_change',
+  Layered = 'layered',
+  BorderOverflow = 'border_overflow',
+  TrayAndMultiWindow = 'tray_and_multi_window',
 }
+
 export enum ApplicationIdentifier {
   Exe = 'Exe',
   Class = 'Class',
@@ -16,7 +18,7 @@ export enum ApplicationIdentifier {
 
 export enum MatchingStrategy {
   Legacy = 'Legacy',
-  Equals = 'Legacy',
+  Equals = 'Equals',
   StartsWith = 'StartsWith',
   EndsWith = 'EndsWith',
   Contains = 'Contains',
@@ -31,25 +33,25 @@ export interface IdWithIdentifier {
 
 type AppConfigurationsOptions = { [K in ApplicationOptions]: boolean };
 export interface AppConfiguration extends AppConfigurationsOptions {
-  key: number;
   name: string;
   category: string | null;
   workspace: string | null;
+  monitor: number | null;
   kind: ApplicationIdentifier;
   identifier: string;
-  machingStrategy: MatchingStrategy;
+  matchingStrategy: MatchingStrategy;
 }
 
 export class AppConfiguration {
   static default(): AppConfiguration {
     return {
-      key: 0,
-      name: 'Fake App',
+      name: 'New App',
       category: null,
       workspace: null,
+      monitor: null,
       kind: ApplicationIdentifier.Exe,
-      identifier: 'FakeApp.exe',
-      machingStrategy: MatchingStrategy.Legacy,
+      identifier: 'new-app.exe',
+      matchingStrategy: MatchingStrategy.Equals,
       [ApplicationOptions.Float]: false,
       [ApplicationOptions.BorderOverflow]: false,
       [ApplicationOptions.Force]: false,
@@ -57,6 +59,16 @@ export class AppConfiguration {
       [ApplicationOptions.ObjectNameChange]: false,
       [ApplicationOptions.TrayAndMultiWindow]: false,
       [ApplicationOptions.Unmanage]: false,
+    };
+  }
+
+  static from(json_identifier: someToPartial<IdWithIdentifier, 'matching_strategy'>): AppConfiguration {
+    return {
+      ...AppConfiguration.default(),
+      name: json_identifier.id,
+      identifier: json_identifier.id,
+      kind: json_identifier.kind,
+      matchingStrategy: json_identifier.matching_strategy ?? MatchingStrategy.Legacy,
     };
   }
 }

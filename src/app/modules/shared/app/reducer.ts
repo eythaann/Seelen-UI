@@ -1,6 +1,7 @@
 import { matcher, selectorsFor } from './utils';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { AppsConfigSlice } from '../../appsConfigurations/app';
 import { GeneralSettingsSlice } from '../../general/main/app';
 import { MonitorsSlice } from '../../monitors/main/app';
 
@@ -12,6 +13,7 @@ const initialState: RootState = {
   generals: GeneralSettingsSlice.getInitialState(),
   toBeSaved: false,
   monitors: MonitorsSlice.getInitialState(),
+  appsConfigurations: AppsConfigSlice.getInitialState(),
 };
 
 export const RootSlice = createSlice({
@@ -36,6 +38,10 @@ export const RootSlice = createSlice({
       .addMatcher(matcher(MonitorsSlice), (state, action) => {
         state.toBeSaved = true;
         MonitorsSlice.reducer(state.monitors, action);
+      })
+      .addMatcher(matcher(AppsConfigSlice), (state, action) => {
+        state.toBeSaved = true;
+        AppsConfigSlice.reducer(state.appsConfigurations, action);
       });
   },
 });

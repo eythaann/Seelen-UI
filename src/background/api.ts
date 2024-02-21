@@ -1,9 +1,11 @@
+import { StaticConfig } from '../JsonSettings.interface';
 import { UserSettings } from '../shared.interfaces';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
 import { fromPackageRoot, runPwshScript } from './utils';
 import { exec } from 'child_process';
 import { ipcMain } from 'electron';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import yaml from 'js-yaml';
 import os from 'os';
 import path from 'path';
 
@@ -30,13 +32,24 @@ export const loadApi = () => {
 
     .on('get-user-settings', (event) => {
       const json_route = path.join(os.homedir(), '.config/komorebi/settings.json');
-      let data_json = {};
+      let data_json = {} as StaticConfig;
+      let data_yaml = [];
+
       if (existsSync(json_route)) {
         data_json = JSON.parse(readFileSync(json_route, 'utf-8'));
+        let pathToYml = data_json.app_specific_configuration_path;
+        if (pathToYml) {
+          if (pathToYml.startsWith('~')) {
+            pathToYml = path.join(os.homedir(), pathToYml.slice(2));
+          }
+          const processed = yaml.load(readFileSync(pathToYml, 'utf-8'));
+          data_yaml = Array.isArray(processed) ? processed : [];
+        }
       }
+
       event.sender.send('get-user-settings-reply', {
         jsonSettings: data_json,
-        yamlSettings: [],
+        yamlSettings: data_yaml,
       });
     })
 

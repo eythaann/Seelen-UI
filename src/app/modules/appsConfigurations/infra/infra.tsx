@@ -1,23 +1,19 @@
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
-import { Button, Input, Modal, Select, Switch, Table } from 'antd';
+import { EditAppModal } from './EditModal';
+import { Button, Modal, Switch, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
-import { OptionsFromEnum } from '../shared/app/utils';
+import { useAppSelector } from '../../shared/app/hooks';
+import { RootSelectors } from '../../shared/app/selectors';
+import { AppsConfigActions } from '../app';
 
 import {
   AppConfiguration,
-  ApplicationIdentifier,
   ApplicationOptions,
-  MatchingStrategy,
-} from './domain';
+} from '../domain';
 
 import cs from './index.module.css';
-
-const data: AppConfiguration[] = [];
-for (let i = 0; i < 240; i++) {
-  data.push({ ...AppConfiguration.default(), key: i });
-}
 
 const ReadonlySwitch = (value: boolean, _record: AppConfiguration, _index: number) => {
   return <Switch value={value} disabled />;
@@ -48,7 +44,16 @@ const columns: ColumnsType<AppConfiguration> = [
     key: 'category',
     width: 100,
     render(value, _record, _index) {
-      return value || 'None';
+      return value || '-';
+    },
+  },
+  {
+    title: 'Monitor',
+    dataIndex: 'monitor',
+    key: 'monitor',
+    width: 70,
+    render(value, _record, _index) {
+      return value ?? '-';
     },
   },
   {
@@ -57,7 +62,7 @@ const columns: ColumnsType<AppConfiguration> = [
     key: 'workspace',
     width: 100,
     render(value, _record, _index) {
-      return value || 'None';
+      return value || '-';
     },
   },
   {
@@ -129,13 +134,7 @@ const columns: ColumnsType<AppConfiguration> = [
     render: ReadonlySwitch,
   },
   {
-    title: (
-      <div>
-        <Button className={cs.newBtn} type="primary">
-          New
-        </Button>
-      </div>
-    ),
+    title: <ActionsTitle />,
     key: 'operation',
     fixed: 'right',
     align: 'center',
@@ -144,26 +143,47 @@ const columns: ColumnsType<AppConfiguration> = [
   },
 ];
 
-function Actions({ record }: { record: AppConfiguration; index: number }) {
+function ActionsTitle() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
+  const showModal = () => setIsModalOpen(true);
+  const onCancel = () => setIsModalOpen(false);
+  const onSave = (app: AppConfiguration) => {
+    dispatch(AppsConfigActions.push(app));
     setIsModalOpen(false);
   };
 
-  const handleCancel = () => {
+  return (
+    <div>
+      <EditAppModal open={isModalOpen} isNew onSave={onSave} onCancel={onCancel}/>
+      <Button className={cs.newBtn} type="primary" onClick={showModal}>
+        New
+      </Button>
+    </div>
+  );
+}
+
+function Actions({ index }: { record: AppConfiguration; index: number }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
+
+  const showModal = () => setIsModalOpen(true);
+  const onCancel = () => setIsModalOpen(false);
+  const onSave = (app: AppConfiguration) => {
+    dispatch(AppsConfigActions.replace({ idx: index, app }));
     setIsModalOpen(false);
   };
 
   const confirm = () => {
-    Modal.confirm({
+    const modal = Modal.confirm({
       title: 'Confirm Delete',
       content: 'Sure on delete this application?',
       okText: 'delete',
+      onOk: () => {
+        dispatch(AppsConfigActions.delete(index));
+        modal.destroy();
+      },
       okButtonProps: { danger: true },
       cancelText: 'cancel',
       centered: true,
@@ -172,54 +192,7 @@ function Actions({ record }: { record: AppConfiguration; index: number }) {
 
   return (
     <div className={cs.actions}>
-      <Modal
-        title={`Editing: ${record.name}`}
-        open={isModalOpen}
-        onCancel={handleCancel}
-        onOk={handleOk}
-        centered
-      >
-        <SettingsGroup>
-          <div>
-            <SettingsOption>
-              <span>Name</span>
-              <Input value={record.name} />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Category</span>
-              <Input value={record.category || ''} placeholder="None" />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Workspace</span>
-              <Input value={record.workspace || ''} placeholder="None" />
-            </SettingsOption>
-          </div>
-          <SettingsSubGroup label="Application Identifier">
-            <SettingsOption>
-              <span>Identifier</span>
-              <Input value={record.identifier} />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Identify By</span>
-              <Select value={record.kind} options={OptionsFromEnum(ApplicationIdentifier)} />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Maching Strategy</span>
-              <Select value={record.machingStrategy} options={OptionsFromEnum(MatchingStrategy)} />
-            </SettingsOption>
-          </SettingsSubGroup>
-        </SettingsGroup>
-        <SettingsGroup>
-          <SettingsSubGroup label="Extra Options">
-            {Object.values(ApplicationOptions).map((value) => (
-              <SettingsOption>
-                <span>{value}</span>
-                <Switch value={record[value]} />
-              </SettingsOption>
-            ))}
-          </SettingsSubGroup>
-        </SettingsGroup>
-      </Modal>
+      {isModalOpen && <EditAppModal open idx={index} onSave={onSave} onCancel={onCancel}/>}
       <Button type="primary" onClick={showModal}>
         ✏️
       </Button>
@@ -231,9 +204,11 @@ function Actions({ record }: { record: AppConfiguration; index: number }) {
 }
 
 export function AppsConfiguration() {
+  const apps = useAppSelector(RootSelectors.appsConfigurations);
+
   return (
     <Table
-      dataSource={data}
+      dataSource={apps}
       columns={columns}
       pagination={{ defaultPageSize: 20 }}
       scroll={{ y: 350, x: '100vw' }}
