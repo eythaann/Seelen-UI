@@ -11,5 +11,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["react", "readable-types", "node"],
+    "skipLibCheck": true,
   }
 }
