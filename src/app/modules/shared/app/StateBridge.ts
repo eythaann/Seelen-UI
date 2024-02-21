@@ -117,7 +117,7 @@ const YamlToState_Apps = (ymlApps: YamlAppConfiguration[]): AppConfiguration[] =
   });
 };
 
-export const JsonToState = (json: StaticConfig, yaml: YamlAppConfiguration[], initialState: RootState): RootState => {
+export const StaticSettingsToState = (json: StaticConfig, yaml: YamlAppConfiguration[], initialState: RootState): RootState => {
   return {
     route: initialState.route,
     toBeSaved: initialState.toBeSaved,
@@ -166,27 +166,27 @@ const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
   };
 };
 
-const cleanRules = <T = string>(rules: Record<string, string | null> | null): Record<string, T> | null => {
+const cleanRules = <T = string>(rules: Record<string, string | null> | null): Record<string, T> | undefined => {
   const cleanedRules = { ...rules };
   for (const key of Object.keys(cleanedRules)) {
     if (cleanedRules[key] == null || cleanedRules[key] === '') {
       delete cleanedRules[key];
     }
   }
-  return Object.keys(cleanedRules).length ? cleanedRules as Record<string, T> : null;
+  return Object.keys(cleanedRules).length ? cleanedRules as Record<string, T> : undefined;
 };
 
 const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {
   return {
     monitors: monitors.map((monitor) => {
       return {
-        work_area_offset: monitor.workAreaOffset,
+        work_area_offset: monitor.workAreaOffset || undefined,
         workspaces: monitor.workspaces.map((workspace) => {
           return {
             name: workspace.name,
-            container_padding: workspace.containerPadding,
-            workspace_padding: workspace.workspacePadding,
-            custom_layout: workspace.customLayout || null,
+            container_padding: workspace.containerPadding ?? undefined,
+            workspace_padding: workspace.workspacePadding ?? undefined,
+            custom_layout: workspace.customLayout || undefined,
             custom_layout_rules: cleanRules(workspace.customLayoutRules),
             layout: workspace.layout,
             layout_rules: cleanRules(workspace.layoutRules),
@@ -197,9 +197,27 @@ const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {
   };
 };
 
-export const StateToJson = (state: RootState): StaticConfig => {
+export const StateToJsonSettings = (state: RootState): StaticConfig => {
   return {
     ...StateToJson_Generals(state.generals),
     ...StateToJson_Monitors(state.monitors),
   };
+};
+
+export const StateToYamlSettings = (state: RootState): YamlAppConfiguration[] => {
+  return state.appsConfigurations.map((appConfig: AppConfiguration) => {
+    const yamlApp: YamlAppConfiguration = {
+      name: appConfig.name,
+      category: appConfig.category || undefined,
+      binded_monitor: appConfig.monitor ?? undefined,
+      binded_workspace: appConfig.workspace || undefined,
+      identifier: {
+        id: appConfig.identifier,
+        kind: appConfig.kind,
+        matching_strategy: appConfig.matchingStrategy,
+      },
+      options: Object.values(ApplicationOptions).filter((option) => appConfig[option]),
+    };
+    return yamlApp;
+  });
 };

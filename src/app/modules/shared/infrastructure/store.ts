@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Modal } from 'antd';
 
 import { RootActions, RootReducer, RootSlice } from '../app/reducer';
-import { JsonToState, StateToJson } from '../app/StateBridge';
+import { StateToJsonSettings, StateToYamlSettings, StaticSettingsToState } from '../app/StateBridge';
 
 import { RootState } from '../domain/state';
 
@@ -24,7 +24,7 @@ export const LoadSettingsToStore = async () => {
 
     store.dispatch(
       RootActions.setState({
-        ...JsonToState(userSettings.jsonSettings, userSettings.yamlSettings, initialState),
+        ...StaticSettingsToState(userSettings.jsonSettings, userSettings.yamlSettings, initialState),
         route: currentState.route,
       }),
     );
@@ -33,9 +33,10 @@ export const LoadSettingsToStore = async () => {
 
 export const SaveStore = async () => {
   try {
+    const currentState = store.getState();
     await window.backgroundApi.saveUserSettings({
-      jsonSettings: StateToJson(store.getState()),
-      yamlSettings: [],
+      jsonSettings: StateToJsonSettings(currentState),
+      yamlSettings: StateToYamlSettings(currentState),
     });
     store.dispatch(RootActions.setSaved());
   } catch (error) {

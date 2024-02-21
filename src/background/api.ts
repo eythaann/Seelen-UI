@@ -55,7 +55,13 @@ export const loadApi = () => {
 
     .on(Channel.SAVE_USER_SETTINGS, (event, settings: UserSettings) => {
       const json_route = path.join(os.homedir(), '.config/komorebi/settings.json');
+      const yaml_route = path.join(os.homedir(), '.config/komorebi/applications.yml');
+
+      settings.jsonSettings.app_specific_configuration_path = yaml_route;
+
       writeFileSync(json_route, JSON.stringify(settings.jsonSettings));
+      writeFileSync(yaml_route, yaml.dump(settings.yamlSettings));
+
       event.sender.send(REPLY_BY_CHANNEL[Channel.SAVE_USER_SETTINGS]);
     });
 };
