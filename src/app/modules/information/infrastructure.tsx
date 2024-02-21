@@ -1,5 +1,7 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
+import { Button, message, Upload } from 'antd';
 
+import { LoadSettingsToStore, SaveStore } from '../shared/infrastructure/store';
 import cs from './infra.module.css';
 
 export function Information() {
@@ -31,6 +33,35 @@ export function Information() {
             </a>
           </SettingsOption>
         </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <span>Load config file (replace current configurations):</span>
+          <Upload
+            fileList={[]}
+            onChange={async ({ file }) => {
+              if (file.originFileObj?.path) {
+                LoadSettingsToStore(file.originFileObj?.path)
+                  .then(() => {
+                    message.success('File load completed.');
+                    SaveStore();
+                  })
+                  .catch((_e) => message.error('Error loading the file.'));
+              }
+            }}
+            maxCount={1}
+            beforeUpload={(file) => {
+              const isJson = file.type === 'application/json';
+              if (!isJson) {
+                message.error(`${file.name} is not a json file`);
+              }
+              return isJson || Upload.LIST_IGNORE;
+            }}
+          >
+            <Button>Select File</Button>
+          </Upload>
+        </SettingsOption>
       </SettingsGroup>
     </div>
   );

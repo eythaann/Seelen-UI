@@ -21,9 +21,9 @@ const api: BackgroundApi = {
       });
     });
   },
-  getUserSettings: async () => {
+  getUserSettings: async (route?: string) => {
     return new Promise<UserSettings>((resolve, reject) => {
-      ipcRenderer.send(Channel.GET_USER_SETTINGS);
+      ipcRenderer.send(Channel.GET_USER_SETTINGS, route);
       ipcRenderer.on(REPLY_BY_CHANNEL[Channel.GET_USER_SETTINGS], (e, result: UserSettings, error) => {
         if (error) {
           return reject(error);

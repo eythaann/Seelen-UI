@@ -23,7 +23,7 @@ export const Header = () => {
             type="default"
             danger
             disabled={!hasChanges}
-            onClick={LoadSettingsToStore}
+            onClick={() => LoadSettingsToStore()}
           />
           {' '}
           <Button

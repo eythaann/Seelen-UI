@@ -4,7 +4,26 @@ import { Modal } from 'antd';
 import cs from './StartUser.module.css';
 
 export const StartUser = () => {
-  const modal = Modal.confirm({
+  const showMigrationInfo = () => {
+    Modal.info({
+      title: 'Migration from Komorebi CLI',
+      className: cs.welcome,
+      content: (
+        <div>
+          <p>
+            If you are migrating from komorebi cli, you can load your old configs in the
+            information tab, also try remove or unistalling the old version to avoid any
+            type of issues or conflicts, good luck!.
+          </p>
+        </div>
+      ),
+      okText: 'Ok',
+      cancelButtonProps: { style: { display: 'none' } },
+      centered: true,
+    });
+  };
+
+  const welcome = Modal.confirm({
     title: 'Welcome!',
     className: cs.welcome,
     content: (
@@ -19,7 +38,8 @@ export const StartUser = () => {
     okText: 'Continue',
     onOk: () => {
       SaveStore();
-      modal.destroy();
+      welcome.destroy();
+      showMigrationInfo();
     },
     icon: <div className={cs.icon}>🎉</div>,
     cancelButtonProps: { style: { display: 'none' } },

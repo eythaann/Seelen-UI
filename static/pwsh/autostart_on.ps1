@@ -11,7 +11,7 @@ if (-not $isAdmin) {
 }
 
 $taskName = "KomorebiUI"
-$command = "& '$ExeRoute' -c $Env:USERPROFILE\.config\komorebi\settings.json"
+$command = "& '$ExeRoute' -c $Env:USERPROFILE\.config\komorebi-ui\settings.json"
 
 $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -Command `"$command`""
 $trigger = New-ScheduledTaskTrigger -AtLogon

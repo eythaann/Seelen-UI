@@ -1,4 +1,3 @@
-import { UserSettings } from '../../../../shared.interfaces';
 import { StartUser } from './StartUser';
 import { configureStore } from '@reduxjs/toolkit';
 import { Modal } from 'antd';
@@ -18,23 +17,22 @@ export type store = {
   getState: () => RootState;
 };
 
-export const LoadSettingsToStore = async () => {
-  window.backgroundApi.getUserSettings().then((userSettings: UserSettings) => {
-    if (!Object.keys(userSettings.jsonSettings)) {
-      StartUser();
-      return;
-    }
+export const LoadSettingsToStore = async (route?: string) => {
+  const userSettings = await window.backgroundApi.getUserSettings(route);
+  if (!Object.keys(userSettings.jsonSettings).length) {
+    StartUser();
+    return;
+  }
 
-    const currentState = store.getState();
-    const initialState = RootSlice.getInitialState();
+  const currentState = store.getState();
+  const initialState = RootSlice.getInitialState();
 
-    store.dispatch(
-      RootActions.setState({
-        ...StaticSettingsToState(userSettings.jsonSettings, userSettings.yamlSettings, initialState),
-        route: currentState.route,
-      }),
-    );
-  });
+  store.dispatch(
+    RootActions.setState({
+      ...StaticSettingsToState(userSettings.jsonSettings, userSettings.yamlSettings, initialState),
+      route: currentState.route,
+    }),
+  );
 };
 
 export const SaveStore = async () => {

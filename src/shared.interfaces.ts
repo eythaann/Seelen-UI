@@ -5,7 +5,7 @@ export interface BackgroundApi {
   enableAutostart: () => void;
   disableAutostart: () => void;
   autostartTaskExist: () => Promise<boolean>;
-  getUserSettings: () => Promise<UserSettings>;
+  getUserSettings: (route?: string) => Promise<UserSettings>;
   saveUserSettings: (settings: UserSettings) => Promise<void>;
 }
 

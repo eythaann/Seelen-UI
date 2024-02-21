@@ -16,6 +16,6 @@
   }
 
   button:focus-visible {
-    overlay: none !important;
+    outline: none !important;
   }
 }
