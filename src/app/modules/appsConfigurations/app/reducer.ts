@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppConfiguration } from './domain';
+import { AppConfiguration } from '../domain';
 
 const initialState: AppConfiguration[] = [];
 

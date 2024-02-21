@@ -1,144 +1,105 @@
 import { EditAppModal } from './EditModal';
+import { createSelector } from '@reduxjs/toolkit';
 import { Button, Modal, Switch, Table } from 'antd';
-import { ColumnsType } from 'antd/es/table';
+import { ColumnsType, ColumnType } from 'antd/es/table';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../shared/app/hooks';
 import { RootSelectors } from '../../shared/app/selectors';
-import { AppsConfigActions } from '../app';
+import { getSorterByBool, getSorterByText } from '../app/filters';
+import { AppsConfigActions } from '../app/reducer';
 
 import {
   AppConfiguration,
   ApplicationOptions,
+  LabelByAppOption,
 } from '../domain';
 
 import cs from './index.module.css';
 
-const ReadonlySwitch = (value: boolean, _record: AppConfiguration, _index: number) => {
+const ReadonlySwitch = (value: boolean, _record: AppConfigWithKey, _index: number) => {
   return <Switch value={value} disabled />;
 };
 
-const columns: ColumnsType<AppConfiguration> = [
+type AppConfigWithKey = AppConfiguration & { key: number };
+const columns: ColumnsType<AppConfigWithKey> = [
   {
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
     fixed: 'left',
-    width: 100,
-    sorter: (a, b) => {
-      const nameA = a.name.toLowerCase();
-      const nameB = b.name.toLowerCase();
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      return 0;
-    },
+    width: 120,
+    sorter: getSorterByText('name'),
   },
   {
     title: 'Category',
     dataIndex: 'category',
     key: 'category',
-    width: 100,
+    width: 120,
     render(value, _record, _index) {
       return value || '-';
     },
+    sorter: getSorterByText('category'),
   },
   {
     title: 'Monitor',
     dataIndex: 'monitor',
     key: 'monitor',
-    width: 70,
+    width: 120,
     render(value, _record, _index) {
-      return value ?? '-';
+      return value != null ? `Monitor ${value + 1}` : '-';
     },
+    sorter: getSorterByText('monitor'),
   },
   {
     title: 'Workspace',
     dataIndex: 'workspace',
     key: 'workspace',
-    width: 100,
+    width: 120,
     render(value, _record, _index) {
       return value || '-';
     },
-  },
-  {
-    title: 'Identify By',
-    dataIndex: 'kind',
-    key: 'kind',
-    width: 100,
+    sorter: getSorterByText('workspace'),
   },
   {
     title: 'Identifier',
     dataIndex: 'identifier',
     key: 'identifier',
-    width: 100,
+    width: 120,
+    sorter: getSorterByText('identifier'),
   },
   {
-    title: 'Forced',
-    dataIndex: ApplicationOptions.Force,
-    key: ApplicationOptions.Force,
-    align: 'center',
+    title: 'By',
+    dataIndex: 'kind',
+    key: 'kind',
     width: 80,
-    render: ReadonlySwitch,
+    align: 'center',
+    sorter: getSorterByText('kind'),
   },
   {
-    title: 'Float',
-    dataIndex: ApplicationOptions.Float,
-    key: ApplicationOptions.Float,
+    title: 'Strategy',
+    dataIndex: 'matchingStrategy',
+    key: 'matchingStrategy',
+    width: 110,
     align: 'center',
-    width: 80,
-    render: ReadonlySwitch,
+    sorter: getSorterByText('matchingStrategy'),
   },
-  {
-    title: 'Unmanaged',
-    dataIndex: ApplicationOptions.Unmanage,
-    key: ApplicationOptions.Unmanage,
+  ...Object.values(ApplicationOptions).map((option) => ({
+    title: LabelByAppOption[option],
+    dataIndex: option,
+    key: option,
     align: 'center',
-    width: 100,
+    width: 140,
     render: ReadonlySwitch,
-  },
-  {
-    title: 'Border Overflow',
-    dataIndex: ApplicationOptions.BorderOverflow,
-    key: ApplicationOptions.BorderOverflow,
-    align: 'center',
-    width: 150,
-    render: ReadonlySwitch,
-  },
-  {
-    title: 'Layered',
-    dataIndex: ApplicationOptions.Layered,
-    key: ApplicationOptions.Layered,
-    align: 'center',
-    width: 90,
-    render: ReadonlySwitch,
-  },
-  {
-    title: 'Object Name Change',
-    dataIndex: ApplicationOptions.ObjectNameChange,
-    key: ApplicationOptions.ObjectNameChange,
-    align: 'center',
-    width: 180,
-    render: ReadonlySwitch,
-  },
-  {
-    title: 'Tray and MultiWindow',
-    dataIndex: ApplicationOptions.TrayAndMultiWindow,
-    key: ApplicationOptions.TrayAndMultiWindow,
-    align: 'center',
-    width: 180,
-    render: ReadonlySwitch,
-  },
+    sorter: getSorterByBool(option),
+  } as ColumnType<AppConfigWithKey>)),
   {
     title: <ActionsTitle />,
     key: 'operation',
     fixed: 'right',
     align: 'center',
-    width: 85,
+    width: 80,
     render: (_, record, index) => <Actions record={record} index={index} />,
   },
 ];
@@ -164,14 +125,14 @@ function ActionsTitle() {
   );
 }
 
-function Actions({ index }: { record: AppConfiguration; index: number }) {
+function Actions({ record }: { record: AppConfigWithKey; index: number }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
   const onSave = (app: AppConfiguration) => {
-    dispatch(AppsConfigActions.replace({ idx: index, app }));
+    dispatch(AppsConfigActions.replace({ idx: record.key, app }));
     setIsModalOpen(false);
   };
 
@@ -181,7 +142,7 @@ function Actions({ index }: { record: AppConfiguration; index: number }) {
       content: 'Sure on delete this application?',
       okText: 'delete',
       onOk: () => {
-        dispatch(AppsConfigActions.delete(index));
+        dispatch(AppsConfigActions.delete(record.key));
         modal.destroy();
       },
       okButtonProps: { danger: true },
@@ -192,7 +153,7 @@ function Actions({ index }: { record: AppConfiguration; index: number }) {
 
   return (
     <div className={cs.actions}>
-      {isModalOpen && <EditAppModal open idx={index} onSave={onSave} onCancel={onCancel}/>}
+      {isModalOpen && <EditAppModal open idx={record.key} onSave={onSave} onCancel={onCancel}/>}
       <Button type="primary" onClick={showModal}>
         ✏️
       </Button>
@@ -204,7 +165,9 @@ function Actions({ index }: { record: AppConfiguration; index: number }) {
 }
 
 export function AppsConfiguration() {
-  const apps = useAppSelector(RootSelectors.appsConfigurations);
+  const apps = useAppSelector(createSelector(RootSelectors.appsConfigurations, (apps) => {
+    return apps.map((app, index) => ({ ...app, key: index }));
+  }));
 
   return (
     <Table

@@ -10,6 +10,16 @@ export enum ApplicationOptions {
   TrayAndMultiWindow = 'tray_and_multi_window',
 }
 
+export const LabelByAppOption: Record<ApplicationOptions, string> = {
+  [ApplicationOptions.Float]: 'Float',
+  [ApplicationOptions.BorderOverflow]: 'Border Overflow',
+  [ApplicationOptions.Force]: 'Forced',
+  [ApplicationOptions.Layered]: 'Layered',
+  [ApplicationOptions.ObjectNameChange]: 'Name Change',
+  [ApplicationOptions.TrayAndMultiWindow]: 'MultiWindow',
+  [ApplicationOptions.Unmanage]: 'Unmanaged',
+};
+
 export enum ApplicationIdentifier {
   Exe = 'Exe',
   Class = 'Class',

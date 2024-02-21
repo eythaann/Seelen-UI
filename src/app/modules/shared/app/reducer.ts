@@ -1,7 +1,7 @@
 import { matcher, selectorsFor } from './utils';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppsConfigSlice } from '../../appsConfigurations/app';
+import { AppsConfigSlice } from '../../appsConfigurations/app/reducer';
 import { GeneralSettingsSlice } from '../../general/main/app';
 import { MonitorsSlice } from '../../monitors/main/app';
 
