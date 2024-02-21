@@ -1,8 +1,14 @@
 import { StaticConfig } from '../../../../JsonSettings.interface';
 import { ApplicationConfiguration as YamlAppConfiguration } from '../../../../YamlSettings.interface';
+import { Rect } from './Rect';
 import { ColorFactory } from 'antd/es/color-picker/color';
 
-import { AppConfiguration, ApplicationIdentifier, ApplicationOptions, MatchingStrategy } from '../../appsConfigurations/domain';
+import {
+  AppConfiguration,
+  ApplicationIdentifier,
+  ApplicationOptions,
+  MatchingStrategy,
+} from '../../appsConfigurations/domain';
 import { ContainerTopBarMode } from '../../general/containerTopBar/domain';
 import {
   CrossMonitorMoveBehaviour,
@@ -50,7 +56,9 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
     focusFollowsMouse: (json.focus_follows_mouse as FocusFollowsMouse) ?? generals.focusFollowsMouse,
     globalWorkAreaOffset: json.global_work_area_offset ?? generals.globalWorkAreaOffset,
     invisibleBorders: json.invisible_borders ?? generals.invisibleBorders,
-    //maybe a todo: monitorIndexPreferences: json.monitor_index_preferences ?? generals.monitorIndexPreferences,
+    monitorIndexPreferences:
+      (json.monitor_index_preferences as Record<string, Rect.plain>) ?? generals.monitorIndexPreferences,
+    displayindexpreferences: json.display_index_preferences ?? generals.displayindexpreferences,
     mouseFollowFocus: json.mouse_follows_focus ?? generals.mouseFollowFocus,
     resizeDelta: json.resize_delta ?? generals.resizeDelta,
     unmanagedWindowOperationBehaviour:
@@ -83,8 +91,8 @@ const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[
           workspacePadding: json_workspace.workspace_padding ?? defaultWorkspace.workspacePadding,
           customLayout: json_workspace.custom_layout ?? defaultWorkspace.customLayout,
           customLayoutRules: json_workspace.custom_layout_rules ?? defaultWorkspace.customLayoutRules,
-          layout: json_workspace.layout as Layout ?? defaultWorkspace.layout,
-          layoutRules: json_workspace.layout_rules as Record<string, Layout> ?? defaultWorkspace.layoutRules,
+          layout: (json_workspace.layout as Layout) ?? defaultWorkspace.layout,
+          layoutRules: (json_workspace.layout_rules as Record<string, Layout>) ?? defaultWorkspace.layoutRules,
         };
         return workspace;
       });
@@ -94,16 +102,18 @@ const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[
   });
 };
 
-const YamlToState_Apps = (ymlApps: YamlAppConfiguration[]): AppConfiguration[] => {
-  return ymlApps.map<AppConfiguration>((ymlApp: YamlAppConfiguration) => {
-    const app: AppConfiguration = {
+const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfig): AppConfiguration[] => {
+  const apps: AppConfiguration[] = [];
+
+  yaml.forEach((ymlApp: YamlAppConfiguration) => {
+    apps.push({
       name: ymlApp.name,
       category: ymlApp.category || null,
       monitor: ymlApp.binded_monitor ?? null,
       workspace: ymlApp.binded_workspace || null,
       identifier: ymlApp.identifier.id,
       kind: ymlApp.identifier.kind as ApplicationIdentifier,
-      matchingStrategy: ymlApp.identifier.matching_strategy as MatchingStrategy || MatchingStrategy.Legacy,
+      matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
       // options
       [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
       [ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,
@@ -112,18 +122,122 @@ const YamlToState_Apps = (ymlApps: YamlAppConfiguration[]): AppConfiguration[] =
       [ApplicationOptions.ObjectNameChange]: ymlApp.options?.includes('object_name_change') || false,
       [ApplicationOptions.TrayAndMultiWindow]: ymlApp.options?.includes('tray_and_multi_window') || false,
       [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
-    };
-    return app;
+    });
+
+    ymlApp.float_identifiers?.forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.Float]: true,
+      });
+    });
   });
+
+  /**
+   * From here are just migration code from old komorebi cli configs.
+   */
+
+  if (json.unmanage_rules) {
+    Object.values(json.unmanage_rules).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.Unmanage]: true,
+      });
+    });
+  }
+
+  if (json.manage_rules) {
+    Object.values(json.manage_rules).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.Force]: true,
+      });
+    });
+  }
+
+  if (json.float_rules) {
+    Object.values(json.float_rules).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.Float]: true,
+      });
+    });
+  }
+
+  if (json.object_name_change_applications) {
+    Object.values(json.object_name_change_applications).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.ObjectNameChange]: true,
+      });
+    });
+  }
+
+  if (json.layered_applications) {
+    Object.values(json.layered_applications).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.Layered]: true,
+      });
+    });
+  }
+
+  if (json.border_overflow_applications) {
+    Object.values(json.border_overflow_applications).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.BorderOverflow]: true,
+      });
+    });
+  }
+
+  if (json.tray_and_multi_window_applications) {
+    Object.values(json.tray_and_multi_window_applications).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        [ApplicationOptions.TrayAndMultiWindow]: true,
+      });
+    });
+  }
+
+  if (json.exclude_float_rules) {
+    Object.values(json.exclude_float_rules).forEach((rule) => {
+      apps.push({
+        ...AppConfiguration.from(rule),
+        // force disable float rules on komorebi
+        [ApplicationOptions.Force]: true,
+      });
+    });
+  }
+
+  json.monitors?.forEach(({ workspaces }, monitor_idx) => {
+    workspaces?.forEach(({ workspace_rules, name }) => {
+      if (!workspace_rules) {
+        return;
+      }
+      Object.values(workspace_rules).forEach((rule) => {
+        apps.push({
+          ...AppConfiguration.from(rule),
+          monitor: monitor_idx,
+          workspace: name,
+        });
+      });
+    });
+  });
+
+  return apps;
 };
 
-export const StaticSettingsToState = (json: StaticConfig, yaml: YamlAppConfiguration[], initialState: RootState): RootState => {
+export const StaticSettingsToState = (
+  json: StaticConfig,
+  yaml: YamlAppConfiguration[],
+  initialState: RootState,
+): RootState => {
   return {
     route: initialState.route,
     toBeSaved: initialState.toBeSaved,
     generals: JsonToState_Generals(json, initialState.generals),
     monitors: JsonToState_Monitors(json, initialState.monitors),
-    appsConfigurations: YamlToState_Apps(yaml),
+    appsConfigurations: YamlToState_Apps(yaml, json),
   };
 };
 
@@ -173,7 +287,7 @@ const cleanRules = <T = string>(rules: Record<string, string | null> | null): Re
       delete cleanedRules[key];
     }
   }
-  return Object.keys(cleanedRules).length ? cleanedRules as Record<string, T> : undefined;
+  return Object.keys(cleanedRules).length ? (cleanedRules as Record<string, T>) : undefined;
 };
 
 const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {

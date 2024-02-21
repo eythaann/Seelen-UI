@@ -47,4 +47,7 @@ export interface GeneralSettingsState {
   unmanagedWindowOperationBehaviour: UnmanagedWindowOperationBehaviour;
   crossMonitorMoveBehaviour: CrossMonitorMoveBehaviour;
   containerTopBar: ContainerTabsState;
+  // TODO add GUI configs for this
+  monitorIndexPreferences: Record<string, Rect.plain> | null;
+  displayindexpreferences: Record<string, string> | null;
 }

@@ -20,6 +20,12 @@ export interface StaticConfig {
    */
   active_window_border?: boolean | null;
   /**
+   * Set display index preferences
+   */
+  display_index_preferences?: {
+    [k: string]: string;
+  };
+  /**
    * Active window border colours for different container types
    */
   active_window_border_colours?: ActiveWindowBorderColours | null;
@@ -58,17 +64,9 @@ export interface StaticConfig {
     [k: string]: unknown;
   };
   /**
-   * DEPRECATED from v0.1.19: use active_window_border_offset instead
-   */
-  border_offset?: Rect | null;
-  /**
    * Identify border overflow applications
    */
   border_overflow_applications?: IdWithIdentifier[] | null;
-  /**
-   * DEPRECATED from v0.1.19: use active_window_border_width instead
-   */
-  border_width?: number | null;
   /**
    * Determine what happens when a window is moved across a monitor boundary (default: Swap)
    */
@@ -206,6 +204,12 @@ export interface Rgb {
   r: number;
   [k: string]: unknown;
 }
+export interface IdWithIdentifier {
+  id: string;
+  kind: ApplicationIdentifier;
+  matching_strategy?: MatchingStrategy | null;
+  [k: string]: unknown;
+}
 export interface Rect {
   /**
    * The bottom point in a Win32 Rect
@@ -223,12 +227,6 @@ export interface Rect {
    * The top point in a Win32 Rect
    */
   top: number;
-  [k: string]: unknown;
-}
-export interface IdWithIdentifier {
-  id: string;
-  kind: ApplicationIdentifier;
-  matching_strategy?: MatchingStrategy | null;
   [k: string]: unknown;
 }
 export interface MonitorConfig {

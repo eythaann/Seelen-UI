@@ -31,6 +31,8 @@ let initialState: GeneralSettingsState = {
   unmanagedWindowOperationBehaviour: UnmanagedWindowOperationBehaviour.OP,
   crossMonitorMoveBehaviour: CrossMonitorMoveBehaviour.SWAP,
   containerTopBar: ContainerTopBarSlice.getInitialState(),
+  monitorIndexPreferences: null,
+  displayindexpreferences: null,
 };
 
 export const GeneralSettingsSlice = createSlice({

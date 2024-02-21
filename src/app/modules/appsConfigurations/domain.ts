@@ -1,4 +1,4 @@
-import { someToPartial } from 'readable-types';
+import { IdWithIdentifier as JsonIdWithIdentifier } from '../../../YamlSettings.interface';
 
 export enum ApplicationOptions {
   Float = 'float',
@@ -72,13 +72,13 @@ export class AppConfiguration {
     };
   }
 
-  static from(json_identifier: someToPartial<IdWithIdentifier, 'matching_strategy'>): AppConfiguration {
+  static from(json_identifier: JsonIdWithIdentifier): AppConfiguration {
     return {
       ...AppConfiguration.default(),
       name: json_identifier.id,
       identifier: json_identifier.id,
-      kind: json_identifier.kind,
-      matchingStrategy: json_identifier.matching_strategy ?? MatchingStrategy.Legacy,
+      kind: json_identifier.kind as ApplicationIdentifier,
+      matchingStrategy: json_identifier.matching_strategy as MatchingStrategy ?? MatchingStrategy.Legacy,
     };
   }
 }
