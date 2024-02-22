@@ -2,6 +2,7 @@ import { loadBackgroundApi } from './api';
 import { fromPackageRoot, runPwshScript } from './utils';
 import { app, BrowserWindow } from 'electron';
 import { shell } from 'electron';
+import { copyFileSync, existsSync } from 'fs';
 import path from 'path';
 import { updateElectronApp } from 'update-electron-app';
 
@@ -13,6 +14,11 @@ updateElectronApp();
 
 app.on('ready', () => {
   if (app.isPackaged) {
+    if (!existsSync(fromPackageRoot('/komorebi.exe'))) {
+      copyFileSync(path.join(app.getAppPath(), 'komorebi.exe'), fromPackageRoot('/komorebi.exe'));
+      copyFileSync(path.join(app.getAppPath(), 'komorebic.exe'), fromPackageRoot('/komorebic.exe'));
+    }
+
     runPwshScript('manual_run.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
   }
 

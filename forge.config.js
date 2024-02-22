@@ -42,11 +42,11 @@ const config = {
       // copy builded komorebi
       fs.copyFileSync(
         path.join(__dirname, 'komorebi/target/x86_64-pc-windows-msvc/release/komorebi.exe'),
-        path.join(buildPath, '../../komorebi.exe'),
+        path.join(buildPath, 'komorebi.exe'),
       );
       fs.copyFileSync(
         path.join(__dirname, 'komorebi/target/x86_64-pc-windows-msvc/release/komorebic.exe'),
-        path.join(buildPath, '../../komorebic.exe'),
+        path.join(buildPath, 'komorebic.exe'),
       );
     },
   },
