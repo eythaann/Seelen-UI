@@ -1,7 +1,7 @@
-- name: Komorebi-UI
+- name: (?i)((install)|(setup)|(complete)|(menu))
   identifier:
-    id: komorebi-ui.exe
-    kind: Exe
-    matching_strategy: Equals
+    id: (?i)((install)|(setup)|(complete)|(menu))
+    kind: Title
+    matching_strategy: Regex
   options:
-    - Unmanage
+    - unmanage

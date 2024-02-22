@@ -1,0 +1,16 @@
+- name: steamwebhelper.exe
+  binded_monitor: 0
+  binded_workspace: Other
+  identifier:
+    id: steamwebhelper.exe
+    kind: Exe
+    matching_strategy: Legacy
+  options:
+    - unmanage
+- name: Steam
+  identifier:
+    id: Steam
+    kind: Title
+    matching_strategy: Equals
+  options:
+    - force
