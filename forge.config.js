@@ -13,7 +13,7 @@ const config = {
     name: 'Komorebi UI',
     executableName: 'komorebi-ui',
     icon: path.join(process.cwd(), 'static/icons/icon'),
-    extraResource: [path.join(process.cwd(), 'static/apps_templates')],
+    extraResource: ['static/apps_templates', 'static/redis'],
     asar: true,
     ignore: ['komorebi', 'scripts', '.vscode', '.gitignore', '.gitmodules', 'eslint.config.js', 'tsconfig.json', 'src'],
   },

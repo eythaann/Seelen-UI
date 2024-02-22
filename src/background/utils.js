@@ -38,4 +38,4 @@ const runPwshScript = async (name, args = '') => {
   });
 };
 
-module.exports = { runPwshScript, fromPackageRoot };
+module.exports = { runPwshScript, fromPackageRoot, execPrinter };

@@ -2,7 +2,7 @@ import { StaticConfig } from '../JsonSettings.interface';
 import { UserSettings } from '../shared.interfaces';
 import { ApplicationConfiguration } from '../YamlSettings.interface';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
-import { fromPackageRoot, runPwshScript } from './utils';
+import { execPrinter, fromPackageRoot, runPwshScript } from './utils';
 import { exec } from 'child_process';
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
@@ -113,5 +113,9 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
 
   ipcMain.on(Channel.QUIT, () => {
     mainWindow.close();
+  });
+
+  ipcMain.on(Channel.AHK_SETUP, () => {
+    exec(`"${fromPackageRoot('resources/redis/AutoHotKey_setup.exe')}"`, execPrinter);
   });
 };

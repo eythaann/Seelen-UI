@@ -10,6 +10,8 @@ export interface BackgroundApi {
   loadAppsTemplate: () => Promise<ApplicationConfiguration[]>;
   exportAppsTemplate: (apps: ApplicationConfiguration[]) => Promise<void>;
   quit: () => void;
+  // installers
+  runAhkSetup: () => void;
 }
 
 export interface UserSettings {

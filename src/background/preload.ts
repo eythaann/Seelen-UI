@@ -64,6 +64,9 @@ const api: BackgroundApi = {
   quit() {
     ipcRenderer.send(Channel.QUIT);
   },
+  runAhkSetup() {
+    ipcRenderer.send(Channel.AHK_SETUP);
+  },
 };
 
 contextBridge.exposeInMainWorld('backgroundApi', api);

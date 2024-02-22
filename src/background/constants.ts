@@ -7,6 +7,7 @@ export enum Channel {
   LOAD_APPS_TEMPLATE = 'load-apps-template',
   EXPORT_APPS_TEMPLATE = 'export-apps-template',
   QUIT = 'quit',
+  AHK_SETUP = 'ahk-setup',
 }
 
 type ReplayChannel = { [K in Channel]: `${K}-reply` };

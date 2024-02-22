@@ -3,27 +3,52 @@ import { Modal } from 'antd';
 
 import cs from './StartUser.module.css';
 
-export const StartUser = () => {
-  const showMigrationInfo = () => {
-    Modal.info({
-      title: 'Migration from Komorebi CLI',
-      className: cs.welcome,
-      content: (
-        <div>
-          <p>
-            If you are migrating from komorebi cli, you can load your old configs in the
-            information tab, also try remove or unistalling the old version to avoid any
-            type of issues or conflicts, good luck!.
-          </p>
-        </div>
-      ),
-      okText: 'Ok',
-      cancelButtonProps: { style: { display: 'none' } },
-      centered: true,
-    });
-  };
+const showNewUserTutorial = () => {
+  const modal = Modal.confirm({
+    title: 'Dependencies',
+    className: cs.welcome,
+    content: (
+      <div>
+        <p>
+          Komorebi UI needs AutoHotKey to work.
+        </p>
+      </div>
+    ),
+    okText: 'Install',
+    onOk: () => {
+      window.backgroundApi.runAhkSetup();
+      modal.destroy();
+    },
+    cancelText: 'Omit',
+    centered: true,
+  });
+};
 
-  const welcome = Modal.confirm({
+const showMigrationInfo = () => {
+  const modal = Modal.info({
+    title: 'Migration from Komorebi CLI',
+    className: cs.welcome,
+    content: (
+      <div>
+        <p>
+          If you are migrating from komorebi cli, you can load your old configs in the
+          information tab, also try remove or unistalling the old version to avoid any
+          type of issues or conflicts, good luck!.
+        </p>
+      </div>
+    ),
+    okText: 'Ok',
+    onOk: () => {
+      modal.destroy();
+      showNewUserTutorial();
+    },
+    cancelButtonProps: { style: { display: 'none' } },
+    centered: true,
+  });
+};
+
+export const StartUser = () => {
+  const modal = Modal.confirm({
     title: 'Welcome!',
     className: cs.welcome,
     content: (
@@ -38,7 +63,7 @@ export const StartUser = () => {
     okText: 'Continue',
     onOk: () => {
       SaveStore();
-      welcome.destroy();
+      modal.destroy();
       showMigrationInfo();
     },
     icon: <div className={cs.icon}>🎉</div>,
