@@ -1,6 +1,10 @@
 <img src="./static/title.svg" height="60" alt="Komorebi UI Title">
 
+[![Version](https://img.shields.io/github/v/release/eythaann/komorebi-ui.svg)](https://github.com/eythaann/komorebi-ui/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Contributors](https://img.shields.io/github/contributors/eythaann/komorebi-ui.svg)](https://github.com/eythaann/komorebi-ui/graphs/contributors)
+[![Last Commit](https://img.shields.io/github/last-commit/eythaann/komorebi-ui.svg)](https://github.com/eythaann/komorebi-ui/commits/main)
+[![Downloads](https://img.shields.io/github/downloads/eythaann/komorebi-ui/total.svg)](https://github.com/eythaann/komorebi-ui/releases)
 
 <img src="./static/desktop_view.png" width="100%" alt="komorebi ui desktop">
 
