@@ -98,7 +98,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open }: Props) => {
               placeholder="None"
               allowClear
               options={monitorsOptions}
-              onSelect={onSelectMonitor}
+              onChange={onSelectMonitor}
             />
           </SettingsOption>
           <SettingsOption>
@@ -108,7 +108,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open }: Props) => {
               placeholder="None"
               allowClear
               options={workspaceOptions}
-              onSelect={onSelectWorkspace}
+              onChange={onSelectWorkspace}
             />
           </SettingsOption>
         </SettingsSubGroup>
