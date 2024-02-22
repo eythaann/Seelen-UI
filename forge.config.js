@@ -27,7 +27,7 @@ const config = {
       await import('./scripts/build.mjs');
     },
     prePackage: async (forgeConfig, platform, version) => {
-      await runPwshScript(`force_stop.ps1', "-Exeroute '${path.join(__dirname, './out/Komorebi UI-win32-x64/komorebi.exe')}'`);
+      await runPwshScript('force_stop.ps1', `-Exeroute '${path.join(__dirname, './out/Komorebi UI-win32-x64/komorebi.exe')}'`);
     },
     packageAfterCopy: async (forgeConfig, buildPath, electronVersion, platform, arch) => {
       const ownLicense = fs.readFileSync(path.join(__dirname, 'LICENSE')).toString();
