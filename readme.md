@@ -28,17 +28,35 @@ You can choose from different installation options based on your preference:
 
 #### Option 1: Installer (Setup.exe)
 
-Download the latest version from the [Releases](https://github.com/your-username/komorebi-ui/releases) page and run the `setup.exe` installer. This is the recommended method for a hassle-free installation experience.
+Download the latest version from the [Releases](https://github.com/eythaann/komorebi-ui/releases) page and run the `setup.exe` installer. This is the recommended method for a hassle-free installation experience.
 
 #### Option 2: Portable Version (.zip)
 
-If you prefer a portable version, download the `.zip` file from the [Releases](https://github.com/your-username/komorebi-ui/releases) page. Extract the contents to a location of your choice, and you're ready to go.
+If you prefer a portable version, download the `.zip` file from the [Releases](https://github.com/eythaann/komorebi-ui/releases) page. Extract the contents to a location of your choice, and you're ready to go.
 
 ### Usage
 
 Once installed or extracted, simply open the program. The easy-to-use and intuitive GUI will guide you through the configuration process. Customize your window management experience effortlessly.
 
-For more detailed information and advanced features, refer to the [Komorebi User Guide](https://lgug2z.github.io/komorebi).
+For more detailed information and advanced features, refer to the [Komorebi UI User Guide](documentation/user_guide.md).
+
+## Deep Dive into the Maximalistic Fork
+
+Komorebi UI is not just a fork; it's a maximalistic fork of the original Komorebi. This means that it deviates significantly from the simplicity of Komorebi, embracing a more feature-rich approach. Unlike a retrocompatible fork, Komorebi UI introduces additional features and is not backward compatible with the original Komorebi CLI.
+
+### Key Differences
+
+- **Maximalistic Approach:** Komorebi UI takes a maximalistic approach, providing a comprehensive set of features beyond the simplicity of the original Komorebi.
+
+- **Enhanced Usability:** The user interface is designed to be more accessible, making it suitable for both developers and non-programmers.
+
+- **Migration Assistance:** Despite the lack of retrocompatibility, Komorebi UI offers a smooth migration path for users coming from the Komorebi CLI. The GUI provides an easy transition, allowing users to leverage the power of Komorebi UI effortlessly.
+
+### Why Maximalistic?
+
+The decision for a maximalistic fork stems from the desire to offer a feature-rich experience. While the original Komorebi aims to be as simple as possible, Komorebi UI embraces complexity to provide a more versatile and powerful window management solution.
+
+For more information on specific features and migration details, refer to the [Komorebi UI User Guide](documentation/user_guide.md).
 
 ## Contributing
 
