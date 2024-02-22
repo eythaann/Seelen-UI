@@ -40,21 +40,21 @@ Once installed or extracted, simply open the program. The easy-to-use and intuit
 
 For more detailed information and advanced features, refer to the [Komorebi UI User Guide](documentation/user_guide.md).
 
-## Deep Dive into the Maximalistic Fork
+## Deep Dive into the Maximalist Fork
 
-Komorebi UI is not just a fork; it's a maximalistic fork of the original Komorebi. This means that it deviates significantly from the simplicity of Komorebi, embracing a more feature-rich approach. Unlike a retrocompatible fork, Komorebi UI introduces additional features and is not backward compatible with the original Komorebi CLI.
+Komorebi UI is not just a fork; it's a maximalist fork of the original Komorebi. This means that it deviates significantly from the simplicity of Komorebi, embracing a more feature-rich approach. Unlike a retrocompatible fork, Komorebi UI introduces additional features and is not backward compatible with the original Komorebi CLI.
 
 ### Key Differences
 
-- **Maximalistic Approach:** Komorebi UI takes a maximalistic approach, providing a comprehensive set of features beyond the simplicity of the original Komorebi.
+- **Maximalist Approach:** Komorebi UI takes a maximalist approach, providing a comprehensive set of features beyond the simplicity of the original Komorebi.
 
 - **Enhanced Usability:** The user interface is designed to be more accessible, making it suitable for both developers and non-programmers.
 
 - **Migration Assistance:** Despite the lack of retrocompatibility, Komorebi UI offers a smooth migration path for users coming from the Komorebi CLI. The GUI provides an easy transition, allowing users to leverage the power of Komorebi UI effortlessly.
 
-### Why Maximalistic?
+### Why Maximalist?
 
-The decision for a maximalistic fork stems from the desire to offer a feature-rich experience. While the original Komorebi aims to be as simple as possible, Komorebi UI embraces complexity to provide a more versatile and powerful window management solution.
+The decision for a maximalist fork stems from the desire to offer a feature-rich experience. While the original Komorebi aims to be as simple as possible, Komorebi UI embraces complexity to provide a more versatile and powerful window management solution.
 
 For more information on specific features and migration details, refer to the [Komorebi UI User Guide](documentation/user_guide.md).
 
