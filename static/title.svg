@@ -1,0 +1,26 @@
+<svg fill="none" viewBox="0 0 600 100" width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+          <style>
+            header {
+              border-bottom: 1px solid #444;
+              display: flex;
+              gap: 15px;
+              height: 80px;
+            }
+            h1 {
+              border: none;
+              color: black;
+              margin: 0;
+              padding: 0;
+              font-size: 60px;
+              line-height: 1.1em;
+            }
+          </style>
+          <header>
+            <img width="60" height="60" src="https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/static/icons/icon.svg" alt="Komorebi UI Icon"></img>
+            <h1 style="">Komorebi UI</h1>
+          </header>
+      </div>
+  </foreignObject>
+</svg>

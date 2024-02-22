@@ -1,7 +1,6 @@
-<header style="display: flex; align-items: center; gap: 15px; font-size: 30px; line-height: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #444">
-  <img width="55" height="55" src="./static/icons/icon.svg" alt="Komorebi UI Icon">
-  <h1 style="border: none; margin: 0; padding: 0; margin-top: -6px">Komorebi UI</h1>
-</header>
+<div>
+  <img src="./static/title.svg" width="100%" height="100" alt="Komorebi UI Title">
+</div>
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
