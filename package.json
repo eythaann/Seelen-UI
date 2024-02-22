@@ -1,7 +1,7 @@
 {
   "name": "komorebi-ui",
   "productName": "komorebi-ui",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "My Electron application description",
   "main": "dist/background-bundle/index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "make": "npm run build-komorebi && electron-forge make",
     "publish": "electron-forge publish",
     "lint": "eslint ./**/** --fix --max-warnings 0",
-    "build-komorebi": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc"
+    "build-komorebi": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc",
+    "postversion": "scripts/update_changelog"
   },
   "keywords": [],
   "author": {
