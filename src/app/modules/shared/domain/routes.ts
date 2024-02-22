@@ -14,6 +14,17 @@ export const RouteLabels: Record<Route, string> = {
   [Route.INFO]: 'Information',
 };
 
+export const RouteExtraInfo: Record<Route, string | null> = {
+  [Route.GENERAL]: null,
+  [Route.MONITORS]: null,
+  [Route.SHORTCUTS]: null,
+  [Route.SPECIFIT_APPS]: `
+    Komorebi-UI use only one identifier per app (first match found) so the order in how are specificated is important,
+    the lastest added will be priorized, as note the table is sorted by default from lastest to old.
+  `,
+  [Route.INFO]: null,
+};
+
 export const RouteIcons: Record<Route, string> = {
   [Route.GENERAL]: '⚙️',
   [Route.MONITORS]: '🖥️',

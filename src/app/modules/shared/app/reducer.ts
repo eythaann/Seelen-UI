@@ -33,15 +33,15 @@ export const RootSlice = createSlice({
     builder
       .addMatcher(matcher(GeneralSettingsSlice), (state, action) => {
         state.toBeSaved = true;
-        GeneralSettingsSlice.reducer(state.generals, action);
+        state.generals = GeneralSettingsSlice.reducer(state.generals, action);
       })
       .addMatcher(matcher(MonitorsSlice), (state, action) => {
         state.toBeSaved = true;
-        MonitorsSlice.reducer(state.monitors, action);
+        state.monitors = MonitorsSlice.reducer(state.monitors, action);
       })
       .addMatcher(matcher(AppsConfigSlice), (state, action) => {
         state.toBeSaved = true;
-        AppsConfigSlice.reducer(state.appsConfigurations, action);
+        state.appsConfigurations = AppsConfigSlice.reducer(state.appsConfigurations, action);
       });
   },
 });

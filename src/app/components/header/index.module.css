@@ -11,6 +11,10 @@
   display: flex;
   justify-content: space-between;
 
+  .info {
+    -webkit-app-region: no-drag;
+  }
+
   button {
     -webkit-app-region: no-drag;
     width: 60px;

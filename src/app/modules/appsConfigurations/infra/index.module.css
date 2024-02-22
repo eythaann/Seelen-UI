@@ -8,15 +8,16 @@
 }
 
 .actions {
-  display: flex;
-  gap: 5px;
-
   button {
-    flex: 1;
+    width: 100%;
   }
 }
 
 .table {
+  :global(.ant-empty) {
+    margin: 119px;
+  }
+
   :global(.ant-table-body) {
     overflow-y: auto !important;
 
@@ -44,7 +45,10 @@
   }
 }
 
-.loadBtn {
+.footer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
   position: absolute;
   bottom: 15px;
 }

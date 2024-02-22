@@ -99,7 +99,7 @@ const columns: ColumnsType<AppConfigWithKey> = [
     key: 'operation',
     fixed: 'right',
     align: 'center',
-    width: 90,
+    width: 60,
     render: (_, record, index) => <Actions record={record} index={index} />,
   },
 ];
@@ -136,38 +136,21 @@ function Actions({ record }: { record: AppConfigWithKey; index: number }) {
     setIsModalOpen(false);
   };
 
-  const confirm = () => {
-    const modal = Modal.confirm({
-      title: 'Confirm Delete',
-      content: 'Sure on delete this application?',
-      okText: 'delete',
-      onOk: () => {
-        dispatch(AppsConfigActions.delete(record.key));
-        modal.destroy();
-      },
-      okButtonProps: { danger: true },
-      cancelText: 'cancel',
-      centered: true,
-    });
-  };
-
   return (
     <div className={cs.actions}>
       {isModalOpen && <EditAppModal open idx={record.key} onSave={onSave} onCancel={onCancel} />}
       <Button type="primary" onClick={showModal}>
         ✏️
       </Button>
-      <Button danger onClick={confirm}>
-        ❌
-      </Button>
     </div>
   );
 }
 
 export function AppsConfiguration() {
+  const [selectedAppsKey, setSelectedAppsKey] = useState<number[]>([]);
   const apps = useAppSelector(
     createSelector(RootSelectors.appsConfigurations, (apps) => {
-      return apps.map((app, index) => ({ ...app, key: index }));
+      return apps.map((app, index) => ({ ...app, key: index })).reverse(); // the last added should be show at the top
     }),
   );
 
@@ -180,6 +163,26 @@ export function AppsConfiguration() {
     dispatch(AppsConfigActions.push(newApps));
   };
 
+  const performSwap = () => {
+    dispatch(AppsConfigActions.swap(selectedAppsKey as [number, number]));
+  };
+
+  const confirmDelete = () => {
+    const modal = Modal.confirm({
+      title: 'Confirm Delete',
+      content: 'Sure on delete these applications?',
+      okText: 'delete',
+      onOk: () => {
+        dispatch(AppsConfigActions.deleteMany(selectedAppsKey));
+        setSelectedAppsKey([]);
+        modal.destroy();
+      },
+      okButtonProps: { danger: true },
+      cancelText: 'cancel',
+      centered: true,
+    });
+  };
+
   return (
     <>
       <Table
@@ -188,10 +191,22 @@ export function AppsConfiguration() {
         pagination={{ defaultPageSize: 20 }}
         scroll={{ y: 350, x: '100vw' }}
         className={cs.table}
+        rowSelection={{
+          selectedRowKeys: selectedAppsKey,
+          onChange(selectedRowKeys, _selectedRows, _info) {
+            setSelectedAppsKey(selectedRowKeys as number[]);
+          },
+        }}
       />
-      <Button className={cs.loadBtn} onClick={loadTemplate}>
-        Load From Template
-      </Button>
+      <div className={cs.footer}>
+        <Button onClick={loadTemplate}>Import Apps</Button>
+        <Button type="primary" danger disabled={!selectedAppsKey.length} onClick={confirmDelete}>
+          Delete
+        </Button>
+        <Button onClick={performSwap} type="primary" disabled={selectedAppsKey.length !== 2}>
+          Swap
+        </Button>
+      </div>
     </>
   );
 }
