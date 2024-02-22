@@ -51,4 +51,8 @@
   align-items: center;
   position: absolute;
   bottom: 15px;
+
+  button {
+    width: 80px;
+  }
 }

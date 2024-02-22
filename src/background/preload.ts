@@ -5,13 +5,13 @@ import { Channel, REPLY_BY_CHANNEL } from './constants';
 const { contextBridge, ipcRenderer } = require('electron');
 
 const api: BackgroundApi = {
-  enableAutostart: () => {
+  enableAutostart() {
     ipcRenderer.send(Channel.ENABLE_AUTOSTART);
   },
-  disableAutostart: () => {
+  disableAutostart() {
     ipcRenderer.send(Channel.DISABLE_AUTOSTART);
   },
-  autostartTaskExist: () => {
+  autostartTaskExist() {
     return new Promise((resolve, reject) => {
       ipcRenderer.send(Channel.GET_AUTOSTART_STATUS);
       ipcRenderer.on(REPLY_BY_CHANNEL[Channel.GET_AUTOSTART_STATUS], (e, result, error) => {
@@ -22,7 +22,7 @@ const api: BackgroundApi = {
       });
     });
   },
-  getUserSettings: (route?: string) => {
+  getUserSettings(route?: string) {
     return new Promise<UserSettings>((resolve, reject) => {
       ipcRenderer.send(Channel.GET_USER_SETTINGS, route);
       ipcRenderer.on(REPLY_BY_CHANNEL[Channel.GET_USER_SETTINGS], (e, result: UserSettings, error) => {
@@ -44,7 +44,7 @@ const api: BackgroundApi = {
       });
     });
   },
-  loadAppsTemplate: () => {
+  loadAppsTemplate() {
     return new Promise<ApplicationConfiguration[]>((resolve, reject) => {
       ipcRenderer.send(Channel.LOAD_APPS_TEMPLATE);
       ipcRenderer.on(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], (e, result: ApplicationConfiguration[], error) => {
@@ -53,6 +53,12 @@ const api: BackgroundApi = {
         }
         resolve(result);
       });
+    });
+  },
+  exportAppsTemplate(apps) {
+    return new Promise((resolve) => {
+      ipcRenderer.send(Channel.EXPORT_APPS_TEMPLATE, apps);
+      ipcRenderer.on(REPLY_BY_CHANNEL[Channel.EXPORT_APPS_TEMPLATE], () => resolve());
     });
   },
   quit() {

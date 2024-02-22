@@ -5,9 +5,9 @@ import { ColumnsType, ColumnType } from 'antd/es/table';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useAppSelector } from '../../shared/app/hooks';
+import { useAppSelector, useAppStore } from '../../shared/app/hooks';
 import { RootSelectors } from '../../shared/app/selectors';
-import { YamlToState_Apps } from '../../shared/app/StateBridge';
+import { StateAppsToYamlApps, YamlToState_Apps } from '../../shared/app/StateBridge';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
@@ -99,7 +99,7 @@ const columns: ColumnsType<AppConfigWithKey> = [
     key: 'operation',
     fixed: 'right',
     align: 'center',
-    width: 60,
+    width: 56,
     render: (_, record, index) => <Actions record={record} index={index} />,
   },
 ];
@@ -155,6 +155,7 @@ export function AppsConfiguration() {
   );
 
   const dispatch = useDispatch();
+  const store = useAppStore();
 
   const loadTemplate = async () => {
     const yamlApps = await window.backgroundApi.loadAppsTemplate();
@@ -165,6 +166,12 @@ export function AppsConfiguration() {
 
   const performSwap = () => {
     dispatch(AppsConfigActions.swap(selectedAppsKey as [number, number]));
+  };
+
+  const exportApps = () => {
+    const { appsConfigurations } = store.getState();
+    const appsToExport = selectedAppsKey.map((key) => appsConfigurations[key]!);
+    window.backgroundApi.exportAppsTemplate(StateAppsToYamlApps(appsToExport));
   };
 
   const confirmDelete = () => {
@@ -199,7 +206,10 @@ export function AppsConfiguration() {
         }}
       />
       <div className={cs.footer}>
-        <Button onClick={loadTemplate}>Import Apps</Button>
+        <Button onClick={loadTemplate}>Import</Button>
+        <Button onClick={exportApps} disabled={!selectedAppsKey.length}>
+          Export
+        </Button>
         <Button type="primary" danger disabled={!selectedAppsKey.length} onClick={confirmDelete}>
           Delete
         </Button>

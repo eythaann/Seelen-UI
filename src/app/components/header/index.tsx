@@ -39,7 +39,7 @@ export const Header = () => {
             danger
             disabled={!hasChanges}
             onClick={() => LoadSettingsToStore()}
-          />{' '}
+          />{'  '}
           <Button children={hasChanges ? 'Save' : 'Close'} type="primary" danger={!hasChanges} onClick={SaveOrQuit} />
         </div>
       )}

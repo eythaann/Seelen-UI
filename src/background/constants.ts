@@ -5,6 +5,7 @@ export enum Channel {
   DISABLE_AUTOSTART = 'disable-autostart',
   SAVE_USER_SETTINGS = 'save-user-settings',
   LOAD_APPS_TEMPLATE = 'load-apps-template',
+  EXPORT_APPS_TEMPLATE = 'export-apps-template',
   QUIT = 'quit',
 }
 

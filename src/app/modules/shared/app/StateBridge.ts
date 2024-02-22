@@ -322,8 +322,9 @@ export const StateToJsonSettings = (state: RootState): StaticConfig => {
   };
 };
 
-export const StateToYamlSettings = (state: RootState): YamlAppConfiguration[] => {
-  return state.appsConfigurations.map((appConfig: AppConfiguration) => {
+export const StateAppsToYamlApps = (appsConfigurations: AppConfiguration[]): YamlAppConfiguration[] => {
+  return appsConfigurations.map((appConfig: AppConfiguration) => {
+    const options = Object.values(ApplicationOptions).filter((option) => appConfig[option]);
     const yamlApp: YamlAppConfiguration = {
       name: appConfig.name,
       category: appConfig.category || undefined,
@@ -334,7 +335,7 @@ export const StateToYamlSettings = (state: RootState): YamlAppConfiguration[] =>
         kind: appConfig.kind,
         matching_strategy: appConfig.matchingStrategy,
       },
-      options: Object.values(ApplicationOptions).filter((option) => appConfig[option]),
+      options: options.length ? options : undefined,
     };
     return yamlApp;
   });
