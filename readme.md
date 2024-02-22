@@ -12,6 +12,22 @@
 
 Komorebi UI is a user-friendly fork of Komorebi, a tiling window manager for Windows. While the original Komorebi primarily offers a CLI (Command Line Interface) and may not be very accessible to non-programmers, Komorebi UI aims to provide a visually appealing, intuitive interface for users who may not have programming skills. This project enhances usability and aesthetic details while introducing additional features to make Komorebi more accessible.
 
+### What is a Tiling Window Manager?
+
+A Tiling Window Manager (TWM) is a window manager that automatically organizes applications into non-overlapping tiles instead of overlapping them. This optimizes screen space and simplifies application navigation through keyboard shortcuts.
+
+### Why Should You Consider Using It?
+
+- **Spatial Efficiency:** Maximize your screen real estate, allowing you to work with multiple applications without overlapping.
+
+- **Enhanced Productivity:** Quickly navigate between applications with keyboard shortcuts and easily split the screen for efficient multitasking.
+
+- **Total Customization:** Tailor window arrangement and keyboard shortcuts according to your preferences.
+
+- **Seamless Experience:** Eliminate visual distractions by avoiding overlapping windows.
+
+In summary, a Tiling Window Manager can transform your computing experience, offering spatial efficiency, enhanced productivity, and an interface tailored to your needs. If you value space optimization and agility in navigating between applications, consider making the switch!
+
 ## Features
 
 - **User-Friendly Interface:** Designed with a focus on usability, ensuring a seamless experience for both novice and experienced users.
