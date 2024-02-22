@@ -33,7 +33,9 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
     autoStackinByCategory: json.auto_stack_by_category ?? generals.autoStackinByCategory,
     border: {
       enable: json.active_window_border ?? generals.border.enable,
-      color: new ColorFactory(json.active_window_border_colours?.single || generals.border.color).toHex() as HexColor,
+      colorSingle: new ColorFactory(json.active_window_border_colours?.single || generals.border.colorSingle).toHexString() as HexColor,
+      colorMonocle: new ColorFactory(json.active_window_border_colours?.monocle || generals.border.colorMonocle).toHexString() as HexColor,
+      colorStack: new ColorFactory(json.active_window_border_colours?.stack || generals.border.colorStack).toHexString() as HexColor,
       offset: json.active_window_border_offset ?? generals.border.offset,
       width: json.active_window_border_width ?? generals.border.width,
     },
@@ -45,10 +47,10 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
       mode: (json.top_bar?.mode as ContainerTopBarMode) ?? generals.containerTopBar.mode,
       tabs: {
         width: json.top_bar?.tabs?.width ?? generals.containerTopBar.tabs.width,
-        color: new ColorFactory(json.top_bar?.tabs?.color || generals.containerTopBar.tabs.color).toHex() as HexColor,
+        color: new ColorFactory(json.top_bar?.tabs?.color || generals.containerTopBar.tabs.color).toHexString() as HexColor,
         background: new ColorFactory(
           json.top_bar?.tabs?.background || generals.containerTopBar.tabs.background,
-        ).toHex() as HexColor,
+        ).toHexString() as HexColor,
       },
     },
     containerPadding: json.default_container_padding ?? generals.containerPadding,
@@ -124,16 +126,18 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
       [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
     });
 
+    // In komorebi cli float_identifiers are considerated as unmanaged
+    // also we doesn't use this object whe use float option instead
     ymlApp.float_identifiers?.forEach((rule) => {
       apps.push({
         ...AppConfiguration.from(rule),
-        [ApplicationOptions.Float]: true,
+        [ApplicationOptions.Unmanage]: true,
       });
     });
   });
 
   /**
-   * From here are just migration code from old komorebi cli configs.
+   * From here are just migration from komorebi cli static configs.
    */
 
   if (json.unmanage_rules) {
@@ -251,9 +255,9 @@ const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
     auto_stack_by_category: state.autoStackinByCategory,
     active_window_border: state.border.enable,
     active_window_border_colours: {
-      single: new ColorFactory(state.border.color).toRgb(), //TODO
-      monocle: new ColorFactory(state.border.color).toRgb(),
-      stack: new ColorFactory(state.border.color).toRgb(), //TODO
+      single: new ColorFactory(state.border.colorSingle).toRgb(),
+      monocle: new ColorFactory(state.border.colorMonocle).toRgb(),
+      stack: new ColorFactory(state.border.colorStack).toRgb(),
     },
     active_window_border_offset: state.border.offset,
     active_window_border_width: state.border.width,

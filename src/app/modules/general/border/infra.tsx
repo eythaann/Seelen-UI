@@ -12,7 +12,7 @@ export const BorderSettings = () => {
   const enabled = useAppSelector(BorderSelectors.enable);
   const offset = useAppSelector(BorderSelectors.offset);
   const width = useAppSelector(BorderSelectors.width);
-  const color = useAppSelector(BorderSelectors.color);
+  const color = useAppSelector(BorderSelectors.colorSingle);
 
   const dispatch = useAppDispatch();
 
@@ -29,7 +29,7 @@ export const BorderSettings = () => {
   });
 
   const updateColor = useDispatchCallback((color: Color) => {
-    dispatch(BorderActions.setColor(color.toHex() as HexColor));
+    dispatch(BorderActions.setColorSingle(color.toHexString() as HexColor));
   });
 
   return (

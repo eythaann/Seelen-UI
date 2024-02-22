@@ -41,7 +41,7 @@ export const ContainerTopBarSettings = () => {
     dispatch(
       ContainerTopBarActions.setTabs({
         ...tabs,
-        color: value.toHex() as HexColor,
+        color: value.toHexString() as HexColor,
       }),
     );
   };
@@ -50,7 +50,7 @@ export const ContainerTopBarSettings = () => {
     dispatch(
       ContainerTopBarActions.setTabs({
         ...tabs,
-        background: value.toHex() as HexColor,
+        background: value.toHexString() as HexColor,
       }),
     );
   };
