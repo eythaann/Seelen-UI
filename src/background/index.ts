@@ -3,10 +3,13 @@ import { fromPackageRoot, runPwshScript } from './utils';
 import { app, BrowserWindow } from 'electron';
 import { shell } from 'electron';
 import path from 'path';
+import { updateElectronApp } from 'update-electron-app';
 
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
+
+updateElectronApp();
 
 app.on('ready', () => {
   if (app.isPackaged) {

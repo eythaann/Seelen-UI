@@ -20,39 +20,24 @@ const config = {
   rebuildConfig: {},
   hooks: {
     generateAssets: async (forgeConfig, platform, version) => {
-      fs.writeFileSync(
-        './src/JsonSettings.interface.ts',
-        await compileFromFile('./komorebi/schema.json'),
-      );
+      fs.writeFileSync('./src/JsonSettings.interface.ts', await compileFromFile('./komorebi/schema.json'));
 
-      fs.writeFileSync(
-        './src/YamlSettings.interface.ts',
-        await compileFromFile('./komorebi/schema.asc.json'),
-      );
+      fs.writeFileSync('./src/YamlSettings.interface.ts', await compileFromFile('./komorebi/schema.asc.json'));
 
       await import('./scripts/build.mjs');
     },
     prePackage: async (forgeConfig, platform, version) => {
-      await runPwshScript('force_stop.ps1');
-    },
-    packageAfterExtract: async (forgeConfig, buildPath, electronVersion, platform, arch) => {
-      const licensesPath = path.join(buildPath, 'licenses');
-
-      if (!fs.existsSync(licensesPath)) {
-        fs.mkdirSync(licensesPath);
-      }
-
-      fs.renameSync(path.join(buildPath, 'version'), path.join(licensesPath, 'version.electron'));
-      fs.renameSync(path.join(buildPath, 'LICENSE'), path.join(licensesPath, 'LICENSE.electron'));
-      fs.renameSync(
-        path.join(buildPath, 'LICENSES.chromium.html'),
-        path.join(licensesPath, 'LICENSES.electron.chromium.html'),
-      );
+      await runPwshScript(`force_stop.ps1', "-Exeroute '${path.join(__dirname, './out/Komorebi UI-win32-x64/komorebi.exe')}'`);
     },
     packageAfterCopy: async (forgeConfig, buildPath, electronVersion, platform, arch) => {
-      const licensesPath = path.join(buildPath, '../../licenses');
-      fs.copyFileSync(path.join(__dirname, 'LICENSE'), path.join(licensesPath, 'LICENSE'));
-      fs.copyFileSync(path.join(__dirname, 'komorebi/LICENSE'), path.join(licensesPath, 'LICENSE.komorebi'));
+      const ownLicense = fs.readFileSync(path.join(__dirname, 'LICENSE')).toString();
+      const komorebiLicense = fs.readFileSync(path.join(__dirname, 'komorebi/LICENSE')).toString();
+      const electronLicense = fs.readFileSync(path.join(buildPath, '../../LICENSE')).toString();
+
+      fs.writeFileSync(
+        path.join(buildPath, '../../LICENSE'),
+        [ownLicense, komorebiLicense, electronLicense].join('\n\n- - -\n\n'),
+      );
 
       // copy builded komorebi
       fs.copyFileSync(
@@ -69,8 +54,12 @@ const config = {
     {
       name: '@electron-forge/maker-squirrel',
       config: {
+        iconUrl: 'https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/static/icons/icon.ico',
         setupIcon: path.join(process.cwd(), 'static/icons/icon.ico'),
       },
+    },
+    {
+      name: '@electron-forge/maker-zip',
     },
   ],
   plugins: [
