@@ -47,23 +47,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgments
 
-- Thanks to the original Komorebi project for laying the foundation.
-- Special appreciation to [Contributor Name] for their significant contributions.
-
-## Contact
-
-For inquiries and support, please contact [Your Name] at [your.email@example.com].
-
-Happy window managing with Komorebi UI!
-
-We welcome contributions! Read the [Contribution Guidelines](CONTRIBUTING.md) to get started.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
 - Thanks to the [original Komorebi project](https://github.com/LGUG2Z/komorebi) for laying the foundation.
 - Special appreciation to [LGUG2Z](https://github.com/LGUG2Z) for their significant contributions.
 
