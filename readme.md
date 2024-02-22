@@ -1,7 +1,5 @@
 <img src="./static/title.svg" width="100%" height="100" alt="Komorebi UI Title">
 
-<h1 style="display: none">Komorebi UI</h1>
-
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Overview
