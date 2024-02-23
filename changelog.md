@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unrelease]
+## [1.0.0-beta.3]
 ### added
 - new apps templates
 - add AHK as a dependency to show to new users
