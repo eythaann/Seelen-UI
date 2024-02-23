@@ -10,4 +10,5 @@ export interface RootState {
   generals: GeneralSettingsState;
   monitors: Monitor[];
   appsConfigurations: AppConfiguration[];
+  ahkEnabled: boolean;
 }

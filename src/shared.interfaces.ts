@@ -17,4 +17,5 @@ export interface BackgroundApi {
 export interface UserSettings {
   jsonSettings: StaticConfig;
   yamlSettings: ApplicationConfiguration[];
+  ahkEnabled: boolean;
 }

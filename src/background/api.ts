@@ -5,11 +5,19 @@ import { Channel, REPLY_BY_CHANNEL } from './constants';
 import { execPrinter, fromPackageRoot, runPwshScript } from './utils';
 import { exec } from 'child_process';
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
-import { existsSync, readFileSync, writeFileSync } from 'fs';
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'fs';
 import { ensureFileSync, readJsonSync, writeJsonSync } from 'fs-extra';
 import yaml from 'js-yaml';
 import os from 'os';
 import path from 'path';
+
+const komorebi_config_path = path.join(os.homedir(), '.config/komorebi-ui');
+const ahk_path = path.join(komorebi_config_path, '/komorebic.ahk');
+const tryRunAhkShortcuts = () => {
+  if (existsSync(ahk_path)) {
+    exec(`& '${ahk_path}'`, { shell: 'powershell.exe' }, execPrinter);
+  }
+};
 
 export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
   ipcMain.on(Channel.ENABLE_AUTOSTART, (_event) => {
@@ -53,10 +61,17 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
       }
     }
 
-    event.sender.send(REPLY_BY_CHANNEL[Channel.GET_USER_SETTINGS], {
+    if (data_json.ahk_enabled) {
+      tryRunAhkShortcuts();
+    }
+
+    const userSettings: UserSettings = {
       jsonSettings: data_json,
       yamlSettings: data_yaml,
-    });
+      ahkEnabled: existsSync(ahk_path) && !!data_json.ahk_enabled,
+    };
+
+    event.sender.send(REPLY_BY_CHANNEL[Channel.GET_USER_SETTINGS], userSettings);
   });
 
   ipcMain.on(Channel.SAVE_USER_SETTINGS, (event, settings: UserSettings) => {
@@ -66,6 +81,19 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
     settings.jsonSettings.app_specific_configuration_path = yaml_route;
 
     ensureFileSync(json_route);
+
+    if (settings.ahkEnabled) {
+      if (!existsSync(ahk_path)) {
+        copyFileSync(path.join(app.getAppPath(), 'komorebi.sample.ahk'), ahk_path);
+        copyFileSync(
+          path.join(app.getAppPath(), 'komorebic.lib.ahk'),
+          path.join(komorebi_config_path, '/komorebic.lib.ahk'),
+        );
+      }
+      tryRunAhkShortcuts();
+    }
+
+    settings.jsonSettings.ahk_enabled = settings.ahkEnabled;
     writeJsonSync(json_route, settings.jsonSettings);
     writeFileSync(yaml_route, yaml.dump(settings.yamlSettings));
 
@@ -77,13 +105,14 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
       ? fromPackageRoot('./resources/apps_templates')
       : path.join(app.getAppPath(), 'static/apps_templates');
 
-    dialog.showOpenDialog(mainWindow, {
-      defaultPath,
-      properties: ['openFile', 'multiSelections'],
-      buttonLabel: 'load',
-      title: 'Select template',
-      filters: [{ name: 'apps', extensions: ['yaml', 'yml'] }],
-    })
+    dialog
+      .showOpenDialog(mainWindow, {
+        defaultPath,
+        properties: ['openFile', 'multiSelections'],
+        buttonLabel: 'load',
+        title: 'Select template',
+        filters: [{ name: 'apps', extensions: ['yaml', 'yml'] }],
+      })
       .then((result) => {
         if (result.canceled) {
           return;

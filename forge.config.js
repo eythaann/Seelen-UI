@@ -27,7 +27,7 @@ const config = {
       await import('./scripts/build.mjs');
     },
     prePackage: async (forgeConfig, platform, version) => {
-      await runPwshScript('force_stop.ps1', `-Exeroute '${path.join(__dirname, './out/Komorebi UI-win32-x64/komorebi.exe')}'`);
+      await runPwshScript('force_stop.ps1', `-ExeRoute '${path.join(__dirname, './out/Komorebi UI-win32-x64/komorebi.exe')}'`);
     },
     packageAfterCopy: async (forgeConfig, buildPath, electronVersion, platform, arch) => {
       const ownLicense = fs.readFileSync(path.join(__dirname, 'LICENSE')).toString();
@@ -47,6 +47,14 @@ const config = {
       fs.copyFileSync(
         path.join(__dirname, 'komorebi/target/x86_64-pc-windows-msvc/release/komorebic.exe'),
         path.join(buildPath, 'komorebic.exe'),
+      );
+      fs.copyFileSync(
+        path.join(__dirname, 'komorebi/komorebi.sample.ahk'),
+        path.join(buildPath, 'komorebi.sample.ahk'),
+      );
+      fs.copyFileSync(
+        path.join(__dirname, 'komorebi/komorebic.lib.ahk'),
+        path.join(buildPath, 'komorebic.lib.ahk'),
       );
     },
   },

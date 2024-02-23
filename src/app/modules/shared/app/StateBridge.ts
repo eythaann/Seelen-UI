@@ -1,4 +1,5 @@
 import { StaticConfig } from '../../../../JsonSettings.interface';
+import { UserSettings } from '../../../../shared.interfaces';
 import { ApplicationConfiguration as YamlAppConfiguration } from '../../../../YamlSettings.interface';
 import { Rect } from './Rect';
 import { ColorFactory } from 'antd/es/color-picker/color';
@@ -232,16 +233,18 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
 };
 
 export const StaticSettingsToState = (
-  json: StaticConfig,
-  yaml: YamlAppConfiguration[],
+  userSettings: UserSettings,
   initialState: RootState,
 ): RootState => {
+  const { jsonSettings, yamlSettings, ahkEnabled } = userSettings;
+
   return {
     route: initialState.route,
     toBeSaved: initialState.toBeSaved,
-    generals: JsonToState_Generals(json, initialState.generals),
-    monitors: JsonToState_Monitors(json, initialState.monitors),
-    appsConfigurations: YamlToState_Apps(yaml, json),
+    generals: JsonToState_Generals(jsonSettings, initialState.generals),
+    monitors: JsonToState_Monitors(jsonSettings, initialState.monitors),
+    appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
+    ahkEnabled,
   };
 };
 

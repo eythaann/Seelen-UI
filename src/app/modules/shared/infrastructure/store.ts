@@ -29,7 +29,7 @@ export const LoadSettingsToStore = async (route?: string) => {
 
   store.dispatch(
     RootActions.setState({
-      ...StaticSettingsToState(userSettings.jsonSettings, userSettings.yamlSettings, initialState),
+      ...StaticSettingsToState(userSettings, initialState),
       route: currentState.route,
     }),
   );
@@ -41,6 +41,7 @@ export const SaveStore = async () => {
     await window.backgroundApi.saveUserSettings({
       jsonSettings: StateToJsonSettings(currentState),
       yamlSettings: StateAppsToYamlApps(currentState.appsConfigurations),
+      ahkEnabled: currentState.ahkEnabled,
     });
     store.dispatch(RootActions.setSaved());
   } catch (error) {

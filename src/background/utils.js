@@ -28,7 +28,7 @@ const runPwshScript = async (name, args = '') => {
     readFileSync(path.join(__dirname, '../../static/pwsh', name)).toString(),
   );
   return new Promise((resolve, reject) => {
-    exec(`powershell -ExecutionPolicy Bypass -File ${tempRoute} ${args}`, (error, stdout, stderr) => {
+    exec(`powershell -ExecutionPolicy Bypass -File "${tempRoute}" ${args}`, (error, stdout, stderr) => {
       execPrinter(error, stdout, stderr);
       if (error) {
         return reject(error);

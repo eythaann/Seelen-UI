@@ -19,6 +19,7 @@ app.on('ready', () => {
       copyFileSync(path.join(app.getAppPath(), 'komorebic.exe'), fromPackageRoot('/komorebic.exe'));
     }
 
+    runPwshScript('add_to_path.ps1', `-AppPath "${fromPackageRoot()}\\"`);
     runPwshScript('manual_run.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
   }
 

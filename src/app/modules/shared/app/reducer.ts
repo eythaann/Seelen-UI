@@ -1,4 +1,4 @@
-import { matcher, selectorsFor } from './utils';
+import { matcher, reducersFor, selectorsFor } from './utils';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { AppsConfigSlice } from '../../appsConfigurations/app/reducer';
@@ -14,15 +14,14 @@ const initialState: RootState = {
   toBeSaved: false,
   monitors: MonitorsSlice.getInitialState(),
   appsConfigurations: AppsConfigSlice.getInitialState(),
+  ahkEnabled: true,
 };
 
 export const RootSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    setRoute: (state, action: PayloadAction<Route>) => {
-      state.route = action.payload;
-    },
+    ...reducersFor(initialState),
     setSaved: (state) => {
       state.toBeSaved = false;
     },
