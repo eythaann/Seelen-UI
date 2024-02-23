@@ -26,7 +26,12 @@ let initialState: GeneralSettingsState = {
   focusFollowsMouse: null,
   windowContainerBehaviour: WindowContainerBehaviour.CREATE,
   windowHidingBehaviour: WindowHidingBehaviour.MINIMIZE,
-  invisibleBorders: new Rect().plain(),
+  invisibleBorders: {
+    left: 7,
+    right: 14,
+    top: 0,
+    bottom: 7,
+  },
   globalWorkAreaOffset: new Rect().plain(),
   unmanagedWindowOperationBehaviour: UnmanagedWindowOperationBehaviour.OP,
   crossMonitorMoveBehaviour: CrossMonitorMoveBehaviour.SWAP,

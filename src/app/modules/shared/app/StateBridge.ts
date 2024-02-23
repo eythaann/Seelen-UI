@@ -34,9 +34,15 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
     autoStackinByCategory: json.auto_stack_by_category ?? generals.autoStackinByCategory,
     border: {
       enable: json.active_window_border ?? generals.border.enable,
-      colorSingle: new ColorFactory(json.active_window_border_colours?.single || generals.border.colorSingle).toHexString() as HexColor,
-      colorMonocle: new ColorFactory(json.active_window_border_colours?.monocle || generals.border.colorMonocle).toHexString() as HexColor,
-      colorStack: new ColorFactory(json.active_window_border_colours?.stack || generals.border.colorStack).toHexString() as HexColor,
+      colorSingle: new ColorFactory(
+        json.active_window_border_colours?.single || generals.border.colorSingle,
+      ).toHexString() as HexColor,
+      colorMonocle: new ColorFactory(
+        json.active_window_border_colours?.monocle || generals.border.colorMonocle,
+      ).toHexString() as HexColor,
+      colorStack: new ColorFactory(
+        json.active_window_border_colours?.stack || generals.border.colorStack,
+      ).toHexString() as HexColor,
       offset: json.active_window_border_offset ?? generals.border.offset,
       width: json.active_window_border_width ?? generals.border.width,
     },
@@ -48,7 +54,9 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
       mode: (json.top_bar?.mode as ContainerTopBarMode) ?? generals.containerTopBar.mode,
       tabs: {
         width: json.top_bar?.tabs?.width ?? generals.containerTopBar.tabs.width,
-        color: new ColorFactory(json.top_bar?.tabs?.color || generals.containerTopBar.tabs.color).toHexString() as HexColor,
+        color: new ColorFactory(
+          json.top_bar?.tabs?.color || generals.containerTopBar.tabs.color,
+        ).toHexString() as HexColor,
         background: new ColorFactory(
           json.top_bar?.tabs?.background || generals.containerTopBar.tabs.background,
         ).toHexString() as HexColor,
@@ -117,9 +125,11 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
       identifier: ymlApp.identifier.id,
       kind: ymlApp.identifier.kind as ApplicationIdentifier,
       matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
+      invisibleBorders:
+        ymlApp.invisible_borders || (ymlApp.options?.includes('border_overflow') ? new Rect().plain() : null),
       // options
       [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
-      [ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,
+      /*[ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,*/
       [ApplicationOptions.Force]: ymlApp.options?.includes('force') || false,
       [ApplicationOptions.Layered]: ymlApp.options?.includes('layered') || false,
       [ApplicationOptions.ObjectNameChange]: ymlApp.options?.includes('object_name_change') || false,
@@ -190,7 +200,7 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
     Object.values(json.border_overflow_applications).forEach((rule) => {
       apps.push({
         ...AppConfiguration.from(rule),
-        [ApplicationOptions.BorderOverflow]: true,
+        invisibleBorders: new Rect().plain(),
       });
     });
   }
@@ -232,10 +242,7 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
   return apps;
 };
 
-export const StaticSettingsToState = (
-  userSettings: UserSettings,
-  initialState: RootState,
-): RootState => {
+export const StaticSettingsToState = (userSettings: UserSettings, initialState: RootState): RootState => {
   const { jsonSettings, yamlSettings, ahkEnabled } = userSettings;
 
   return {
@@ -339,6 +346,7 @@ export const StateAppsToYamlApps = (appsConfigurations: AppConfiguration[]): Yam
         matching_strategy: appConfig.matchingStrategy,
       },
       options: options.length ? options : undefined,
+      invisible_borders: appConfig.invisibleBorders || undefined,
     };
     return yamlApp;
   });

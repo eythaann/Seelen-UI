@@ -25,6 +25,7 @@ export interface ApplicationConfiguration {
   binded_workspace?: null | string;
   binded_monitor?: null | number;
   options?: ApplicationOptions[] | null;
+  invisible_borders?: Rect;
   [k: string]: unknown;
 }
 export interface IdWithIdentifierAndComment {
@@ -38,5 +39,24 @@ export interface IdWithIdentifier {
   id: string;
   kind: ApplicationIdentifier;
   matching_strategy?: MatchingStrategy | null;
+  [k: string]: unknown;
+}
+export interface Rect {
+  /**
+   * The bottom point in a Win32 Rect
+   */
+  bottom: number;
+  /**
+   * The left point in a Win32 Rect
+   */
+  left: number;
+  /**
+   * The right point in a Win32 Rect
+   */
+  right: number;
+  /**
+   * The top point in a Win32 Rect
+   */
+  top: number;
   [k: string]: unknown;
 }
