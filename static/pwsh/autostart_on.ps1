@@ -11,9 +11,16 @@ if (-not $isAdmin) {
 }
 
 $taskName = "KomorebiUI"
-$command = "& '$ExeRoute' -c $Env:USERPROFILE\.config\komorebi-ui\settings.json"
+$jsonPath = Join-Path $Env:USERPROFILE "\.config\komorebi-ui\settings.json"
+$jsonContent = Get-Content -Raw -Path $jsonPath | ConvertFrom-Json
 
-$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -Command `"$command`""
+$actions = @(New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -Command `"& '$ExeRoute' -c $jsonPath`"")
+
+if ($jsonContent.ahk_enabled -eq $true) {
+  $ahkPath = Join-Path $Env:USERPROFILE "\.config\komorebi-ui\komorebic.ahk"
+  $actions += New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -Command `"& '$ahkPath'`""
+}
+
 $trigger = New-ScheduledTaskTrigger -AtLogon
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden
 
@@ -22,4 +29,4 @@ if ($null -ne $existingTask) {
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
 }
 
-Register-ScheduledTask -Action $action -Trigger $trigger -Settings $settings -TaskName $taskName -User $env:USERNAME -RunLevel Highest
+Register-ScheduledTask -Action $actions -Trigger $trigger -Settings $settings -TaskName $taskName -User $env:USERNAME -RunLevel Highest
