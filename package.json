@@ -37,6 +37,7 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@stylistic/eslint-plugin": "^1.6.2",
+    "@types/electron-squirrel-startup": "^1.0.2",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.56",
