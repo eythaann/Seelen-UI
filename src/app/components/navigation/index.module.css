@@ -1,5 +1,6 @@
 .navigation {
-  background-color: var(--color-gray-800);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,7 +32,6 @@
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    color: var(--secondary-color);
     font-size: 0.8rem;
     font-weight: 600;
     border-radius: var(--config-border-radius);
@@ -58,6 +58,24 @@
       opacity: 1;
       text-wrap: nowrap;
       transition: opacity 300ms ease;
+    }
+  }
+}
+
+/* Mantains colors on dark mode */
+@media (prefers-color-scheme: dark) {
+  .navigation {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+
+    .item {
+      &:hover {
+        background-color: var(--color-blue-400);
+      }
+
+      &.active {
+        background-color: var(--color-blue-100);
+      }
     }
   }
 }

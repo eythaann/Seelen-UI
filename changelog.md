@@ -8,6 +8,9 @@
 ### changed
 - delete border overflow and changed for invisible borders per app
 
+### fixed
+- components was not triggering dark mode correctly
+
 ## [1.0.0-beta.3]
 ### added
 - new apps templates
