@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### added
 - new feature of invisible borders per app
+- new easy way to hard restart the services and AHK
 
 ### changed
 - delete border overflow and changed for invisible borders per app

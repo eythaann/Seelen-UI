@@ -14,13 +14,14 @@ $taskName = "KomorebiUI"
 $jsonPath = Join-Path $Env:USERPROFILE "\.config\komorebi-ui\settings.json"
 $jsonContent = Get-Content -Raw -Path $jsonPath | ConvertFrom-Json
 
-$actions = @(New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -Command `"& '$ExeRoute' -c $jsonPath`"")
+$actions = @()
 
 if ($jsonContent.ahk_enabled -eq $true) {
   $ahkPath = Join-Path $Env:USERPROFILE "\.config\komorebi-ui\komorebic.ahk"
   $actions += New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -Command `"& '$ahkPath'`""
 }
 
+$actions += New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -WindowStyle Hidden -Command `"& '$ExeRoute' -c $jsonPath`""
 $trigger = New-ScheduledTaskTrigger -AtLogon
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden
 

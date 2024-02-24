@@ -15,7 +15,7 @@ const komorebi_config_path = path.join(os.homedir(), '.config/komorebi-ui');
 const ahk_path = path.join(komorebi_config_path, '/komorebic.ahk');
 const tryRunAhkShortcuts = () => {
   if (existsSync(ahk_path)) {
-    exec(`& '${ahk_path}'`, { shell: 'powershell.exe' }, execPrinter);
+    exec(`'${ahk_path}'`, execPrinter);
   }
 };
 
@@ -59,10 +59,6 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
           data_yaml = Array.isArray(processed) ? processed : [];
         }
       }
-    }
-
-    if (data_json.ahk_enabled) {
-      tryRunAhkShortcuts();
     }
 
     const userSettings: UserSettings = {
@@ -146,5 +142,10 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
 
   ipcMain.on(Channel.AHK_SETUP, () => {
     exec(`"${fromPackageRoot('resources/redis/AutoHotKey_setup.exe')}"`, execPrinter);
+  });
+
+  ipcMain.on(Channel.RESTART, async () => {
+    await runPwshScript('force_stop.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
+    await runPwshScript('manual_run.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
   });
 };

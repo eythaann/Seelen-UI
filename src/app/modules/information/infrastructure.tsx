@@ -37,7 +37,18 @@ export function Information() {
 
       <SettingsGroup>
         <SettingsOption>
-          <span>Load config file (replace current configurations):</span>
+          <span>Force Restart</span>
+          <Button
+            type="dashed"
+            onClick={() => {
+              window.backgroundApi.forceRestart();
+            }}
+          >
+            ⟳
+          </Button>
+        </SettingsOption>
+        <SettingsOption>
+          <span>Load config file (will replace current configurations):</span>
           <Upload
             fileList={[]}
             onChange={async ({ file }) => {

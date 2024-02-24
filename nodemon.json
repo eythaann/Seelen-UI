@@ -6,8 +6,9 @@
   ],
   "watch": [
     "src",
-    "scripts"
+    "scripts",
+    "static"
   ],
-  "ext": "js,ts,tsx,css,mjs",
+  "ext": "js,ts,tsx,css,mjs,ps1,yml,yaml",
   "exec": "npm run start"
 }

@@ -1,12 +1,16 @@
 export enum Channel {
-  GET_USER_SETTINGS = 'get-user-settings',
   GET_AUTOSTART_STATUS = 'get-autostart-task',
+  // actions
   ENABLE_AUTOSTART = 'enable-autostart',
   DISABLE_AUTOSTART = 'disable-autostart',
+  QUIT = 'quit',
+  RESTART = 'restart',
+  // settings
+  GET_USER_SETTINGS = 'get-user-settings',
   SAVE_USER_SETTINGS = 'save-user-settings',
   LOAD_APPS_TEMPLATE = 'load-apps-template',
   EXPORT_APPS_TEMPLATE = 'export-apps-template',
-  QUIT = 'quit',
+  // installers
   AHK_SETUP = 'ahk-setup',
 }
 

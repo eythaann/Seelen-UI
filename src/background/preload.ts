@@ -11,6 +11,12 @@ const api: BackgroundApi = {
   disableAutostart() {
     ipcRenderer.send(Channel.DISABLE_AUTOSTART);
   },
+  quit() {
+    ipcRenderer.send(Channel.QUIT);
+  },
+  forceRestart() {
+    ipcRenderer.send(Channel.RESTART);
+  },
   autostartTaskExist() {
     return new Promise((resolve, reject) => {
       ipcRenderer.send(Channel.GET_AUTOSTART_STATUS);
@@ -61,9 +67,7 @@ const api: BackgroundApi = {
       ipcRenderer.on(REPLY_BY_CHANNEL[Channel.EXPORT_APPS_TEMPLATE], () => resolve());
     });
   },
-  quit() {
-    ipcRenderer.send(Channel.QUIT);
-  },
+  // installers
   runAhkSetup() {
     ipcRenderer.send(Channel.AHK_SETUP);
   },
