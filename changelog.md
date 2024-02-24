@@ -4,6 +4,9 @@
 ### added
 - new searching option for applications
 
+### fixed
+- including ghost apps on migration
+
 ## [1.0.0-beta.4]
 ### added
 - new feature of invisible borders per app

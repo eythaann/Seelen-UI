@@ -117,25 +117,28 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
   const apps: AppConfiguration[] = [];
 
   yaml.forEach((ymlApp: YamlAppConfiguration) => {
-    apps.push({
-      name: ymlApp.name,
-      category: ymlApp.category || null,
-      monitor: ymlApp.binded_monitor ?? null,
-      workspace: ymlApp.binded_workspace || null,
-      identifier: ymlApp.identifier.id,
-      kind: ymlApp.identifier.kind as ApplicationIdentifier,
-      matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
-      invisibleBorders:
-        ymlApp.invisible_borders || (ymlApp.options?.includes('border_overflow') ? new Rect().plain() : null),
-      // options
-      [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
-      /*[ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,*/
-      [ApplicationOptions.Force]: ymlApp.options?.includes('force') || false,
-      [ApplicationOptions.Layered]: ymlApp.options?.includes('layered') || false,
-      [ApplicationOptions.ObjectNameChange]: ymlApp.options?.includes('object_name_change') || false,
-      [ApplicationOptions.TrayAndMultiWindow]: ymlApp.options?.includes('tray_and_multi_window') || false,
-      [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
-    });
+    // filter empty ghost apps used only for add float_identifiers in komorebi cli
+    if (ymlApp.options || !ymlApp.float_identifiers) {
+      apps.push({
+        name: ymlApp.name,
+        category: ymlApp.category || null,
+        monitor: ymlApp.binded_monitor ?? null,
+        workspace: ymlApp.binded_workspace || null,
+        identifier: ymlApp.identifier.id,
+        kind: ymlApp.identifier.kind as ApplicationIdentifier,
+        matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
+        invisibleBorders:
+          ymlApp.invisible_borders || (ymlApp.options?.includes('border_overflow') ? new Rect().plain() : null),
+        // options
+        [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
+        /*[ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,*/
+        [ApplicationOptions.Force]: ymlApp.options?.includes('force') || false,
+        [ApplicationOptions.Layered]: ymlApp.options?.includes('layered') || false,
+        [ApplicationOptions.ObjectNameChange]: ymlApp.options?.includes('object_name_change') || false,
+        [ApplicationOptions.TrayAndMultiWindow]: ymlApp.options?.includes('tray_and_multi_window') || false,
+        [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
+      });
+    }
 
     // In komorebi cli float_identifiers are considerated as unmanaged
     // also we doesn't use this object whe use float option instead
