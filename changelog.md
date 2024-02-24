@@ -1,5 +1,7 @@
 # Changelog
 
+## [Unreleased]
+
 ## [1.0.0-beta.4]
 ### added
 - new feature of invisible borders per app
