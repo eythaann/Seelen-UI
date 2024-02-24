@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-beta.5]
 ### added
 - new searching option for applications
 - templates feature
