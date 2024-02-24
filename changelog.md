@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### added
+- new searching option for applications
 
 ## [1.0.0-beta.4]
 ### added

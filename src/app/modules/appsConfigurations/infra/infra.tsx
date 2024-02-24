@@ -1,8 +1,8 @@
 import { EditAppModal } from './EditModal';
 import { createSelector } from '@reduxjs/toolkit';
-import { Button, Modal, Switch, Table } from 'antd';
+import { Button, Input, Modal, Switch, Table } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector, useAppStore } from '../../shared/app/hooks';
@@ -148,9 +148,13 @@ function Actions({ record }: { record: AppConfigWithKey; index: number }) {
 
 export function AppsConfiguration() {
   const [selectedAppsKey, setSelectedAppsKey] = useState<number[]>([]);
+  const [searched, setSearched] = useState('');
   const apps = useAppSelector(
     createSelector(RootSelectors.appsConfigurations, (apps) => {
-      return apps.map((app, index) => ({ ...app, key: index })).reverse(); // the last added should be show at the top
+      return apps
+        .map((app, index) => ({ ...app, key: index }))
+        .filter((app) => app.name.toLowerCase().includes(searched) || app.identifier.toLowerCase().includes(searched))
+        .reverse(); // the last added should be show at the top
     }),
   );
 
@@ -189,6 +193,11 @@ export function AppsConfiguration() {
       centered: true,
     });
   };
+
+  const onSearch = (e: ChangeEvent<HTMLInputElement>) => setSearched(e.target.value.toLowerCase());
+  columns[0]!.title = (
+    <Input value={searched} onChange={onSearch} onClick={(e) => e.stopPropagation()} placeholder="Name" />
+  );
 
   return (
     <>
