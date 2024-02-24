@@ -55,6 +55,13 @@ export interface AppConfiguration extends AppConfigurationsOptions {
   invisibleBorders: Rect.plain | null;
 }
 
+export interface AppConfigurationExtended extends AppConfiguration {
+  key: number;
+  isTemplate?: boolean;
+  templateName?: string;
+  templateDescription?: string;
+}
+
 export class AppConfiguration {
   static default(): AppConfiguration {
     return {

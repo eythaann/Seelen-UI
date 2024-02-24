@@ -14,6 +14,7 @@ const initialState: RootState = {
   toBeSaved: false,
   monitors: MonitorsSlice.getInitialState(),
   appsConfigurations: AppsConfigSlice.getInitialState(),
+  appsTemplates: [],
   ahkEnabled: true,
 };
 

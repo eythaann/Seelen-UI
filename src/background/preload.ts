@@ -1,4 +1,4 @@
-import { BackgroundApi, UserSettings } from '../shared.interfaces';
+import { AppTemplate, BackgroundApi, UserSettings } from '../shared.interfaces';
 import { ApplicationConfiguration } from '../YamlSettings.interface';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
 
@@ -50,10 +50,10 @@ const api: BackgroundApi = {
       });
     });
   },
-  loadAppsTemplate() {
+  importApps() {
     return new Promise<ApplicationConfiguration[]>((resolve, reject) => {
-      ipcRenderer.send(Channel.LOAD_APPS_TEMPLATE);
-      ipcRenderer.on(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], (e, result: ApplicationConfiguration[], error) => {
+      ipcRenderer.send(Channel.IMPORT_APPS);
+      ipcRenderer.on(REPLY_BY_CHANNEL[Channel.IMPORT_APPS], (e, result: ApplicationConfiguration[], error) => {
         if (error) {
           return reject(error);
         }
@@ -61,10 +61,21 @@ const api: BackgroundApi = {
       });
     });
   },
-  exportAppsTemplate(apps) {
+  loadAppsTemplates() {
+    return new Promise<AppTemplate[]>((resolve, reject) => {
+      ipcRenderer.send(Channel.LOAD_APPS_TEMPLATES);
+      ipcRenderer.on(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATES], (e, result: AppTemplate[], error) => {
+        if (error) {
+          return reject(error);
+        }
+        resolve(result);
+      });
+    });
+  },
+  exportApps(apps) {
     return new Promise((resolve) => {
-      ipcRenderer.send(Channel.EXPORT_APPS_TEMPLATE, apps);
-      ipcRenderer.on(REPLY_BY_CHANNEL[Channel.EXPORT_APPS_TEMPLATE], () => resolve());
+      ipcRenderer.send(Channel.EXPORT_APPS, apps);
+      ipcRenderer.on(REPLY_BY_CHANNEL[Channel.EXPORT_APPS], () => resolve());
     });
   },
   // installers

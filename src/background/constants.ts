@@ -8,8 +8,9 @@ export enum Channel {
   // settings
   GET_USER_SETTINGS = 'get-user-settings',
   SAVE_USER_SETTINGS = 'save-user-settings',
-  LOAD_APPS_TEMPLATE = 'load-apps-template',
-  EXPORT_APPS_TEMPLATE = 'export-apps-template',
+  IMPORT_APPS = 'import-apps',
+  EXPORT_APPS = 'export-apps',
+  LOAD_APPS_TEMPLATES = 'load-apps-templates',
   // installers
   AHK_SETUP = 'ahk-setup',
 }

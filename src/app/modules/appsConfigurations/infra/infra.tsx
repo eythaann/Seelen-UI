@@ -1,6 +1,6 @@
 import { EditAppModal } from './EditModal';
 import { createSelector } from '@reduxjs/toolkit';
-import { Button, Input, Modal, Switch, Table } from 'antd';
+import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -8,19 +8,27 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector, useAppStore } from '../../shared/app/hooks';
 import { RootSelectors } from '../../shared/app/selectors';
 import { StateAppsToYamlApps, YamlToState_Apps } from '../../shared/app/StateBridge';
+import { cx } from '../../shared/app/utils';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
-import { AppConfiguration, ApplicationOptions, LabelByAppOption } from '../domain';
+import { AppConfiguration, AppConfigurationExtended, ApplicationOptions, LabelByAppOption } from '../domain';
 
 import cs from './index.module.css';
 
-const ReadonlySwitch = (value: boolean, _record: AppConfigWithKey, _index: number) => {
-  return <Switch value={value} disabled />;
+const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index: number) => {
+  return (
+    <Switch
+      value={value}
+      disabled
+      className={cx({
+        [cs.readonly!]: record.isTemplate,
+      })}
+    />
+  );
 };
 
-type AppConfigWithKey = AppConfiguration & { key: number };
-const columns: ColumnsType<AppConfigWithKey> = [
+const columns: ColumnsType<AppConfigurationExtended> = [
   {
     title: 'Name',
     dataIndex: 'name',
@@ -28,6 +36,39 @@ const columns: ColumnsType<AppConfigWithKey> = [
     fixed: 'left',
     width: 120,
     sorter: getSorterByText('name'),
+    render: (name) => (
+      <Tooltip placement="topLeft" title={name}>
+        {name}
+      </Tooltip>
+    ),
+  },
+  {
+    title: 'Identifier',
+    dataIndex: 'identifier',
+    key: 'identifier',
+    width: 120,
+    sorter: getSorterByText('identifier'),
+    render: (identifier) => (
+      <Tooltip placement="topLeft" title={identifier}>
+        {identifier}
+      </Tooltip>
+    ),
+  },
+  {
+    title: 'By',
+    dataIndex: 'kind',
+    key: 'kind',
+    width: 80,
+    align: 'center',
+    sorter: getSorterByText('kind'),
+  },
+  {
+    title: 'Strategy',
+    dataIndex: 'matchingStrategy',
+    key: 'matchingStrategy',
+    width: 110,
+    align: 'center',
+    sorter: getSorterByText('matchingStrategy'),
   },
   {
     title: 'Category',
@@ -59,29 +100,6 @@ const columns: ColumnsType<AppConfigWithKey> = [
     },
     sorter: getSorterByText('workspace'),
   },
-  {
-    title: 'Identifier',
-    dataIndex: 'identifier',
-    key: 'identifier',
-    width: 120,
-    sorter: getSorterByText('identifier'),
-  },
-  {
-    title: 'By',
-    dataIndex: 'kind',
-    key: 'kind',
-    width: 80,
-    align: 'center',
-    sorter: getSorterByText('kind'),
-  },
-  {
-    title: 'Strategy',
-    dataIndex: 'matchingStrategy',
-    key: 'matchingStrategy',
-    width: 110,
-    align: 'center',
-    sorter: getSorterByText('matchingStrategy'),
-  },
   ...Object.values(ApplicationOptions).map(
     (option) =>
       ({
@@ -92,7 +110,7 @@ const columns: ColumnsType<AppConfigWithKey> = [
         width: 140,
         render: ReadonlySwitch,
         sorter: getSorterByBool(option),
-      } as ColumnType<AppConfigWithKey>),
+      } as ColumnType<AppConfigurationExtended>),
   ),
   {
     title: <ActionsTitle />,
@@ -125,22 +143,36 @@ function ActionsTitle() {
   );
 }
 
-function Actions({ record }: { record: AppConfigWithKey; index: number }) {
+function Actions({ record }: { record: AppConfigurationExtended; index: number }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
 
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
-  const onSave = (app: AppConfiguration) => {
-    dispatch(AppsConfigActions.replace({ idx: record.key, app }));
+  const onSave = (app: AppConfigurationExtended) => {
+    if (record.isTemplate) {
+      // eslint-disable-next-line @ts/no-unused-vars
+      const { isTemplate, templateName, templateDescription, ...cleanApp } = app;
+      dispatch(AppsConfigActions.push([cleanApp]));
+    } else {
+      dispatch(AppsConfigActions.replace({ idx: record.key, app }));
+    }
     setIsModalOpen(false);
   };
 
   return (
     <div className={cs.actions}>
-      {isModalOpen && <EditAppModal open idx={record.key} onSave={onSave} onCancel={onCancel} />}
-      <Button type="primary" onClick={showModal}>
-        ✏️
+      {isModalOpen && (
+        <EditAppModal
+          open
+          idx={record.isTemplate ? undefined : record.key}
+          onSave={onSave}
+          onCancel={onCancel}
+          readonlyApp={record.isTemplate ? record : undefined}
+        />
+      )}
+      <Button type={record.isTemplate ? 'default' : 'primary'} onClick={showModal}>
+        {record.isTemplate ? '👁️' : '✏️'}
       </Button>
     </div>
   );
@@ -149,7 +181,7 @@ function Actions({ record }: { record: AppConfigWithKey; index: number }) {
 export function AppsConfiguration() {
   const [selectedAppsKey, setSelectedAppsKey] = useState<number[]>([]);
   const [searched, setSearched] = useState('');
-  const apps = useAppSelector(
+  const apps: AppConfigurationExtended[] = useAppSelector(
     createSelector(RootSelectors.appsConfigurations, (apps) => {
       return apps
         .map((app, index) => ({ ...app, key: index }))
@@ -158,12 +190,29 @@ export function AppsConfiguration() {
     }),
   );
 
+  const templates: AppConfigurationExtended[] = useAppSelector(
+    createSelector(RootSelectors.appsTemplates, (templates) => {
+      return templates
+        .flatMap((template) => {
+          return template.apps.map((app, i) => ({
+            ...app,
+            key: `${template.name}-${i}` as unknown as number,
+            isTemplate: true,
+            templateName: template.name,
+            templateDescription: template.description,
+          }));
+        })
+        .filter((app) => app.name.toLowerCase().includes(searched) || app.identifier.toLowerCase().includes(searched))
+        .reverse();
+    }),
+  );
+
   const dispatch = useDispatch();
   const store = useAppStore();
 
-  const loadTemplate = async () => {
-    const yamlApps = await window.backgroundApi.loadAppsTemplate();
-    const newApps = YamlToState_Apps(yamlApps, {});
+  const importApps = async () => {
+    const yamlApps = await window.backgroundApi.importApps();
+    const newApps = YamlToState_Apps(yamlApps);
     console.log(newApps);
     dispatch(AppsConfigActions.push(newApps));
   };
@@ -175,7 +224,7 @@ export function AppsConfiguration() {
   const exportApps = () => {
     const { appsConfigurations } = store.getState();
     const appsToExport = selectedAppsKey.map((key) => appsConfigurations[key]!);
-    window.backgroundApi.exportAppsTemplate(StateAppsToYamlApps(appsToExport));
+    window.backgroundApi.exportApps(StateAppsToYamlApps(appsToExport));
   };
 
   const confirmDelete = () => {
@@ -202,7 +251,7 @@ export function AppsConfiguration() {
   return (
     <>
       <Table
-        dataSource={apps}
+        dataSource={[...apps, ...templates]}
         columns={columns}
         pagination={{ defaultPageSize: 20 }}
         scroll={{ y: 350, x: '100vw' }}
@@ -212,10 +261,15 @@ export function AppsConfiguration() {
           onChange(selectedRowKeys, _selectedRows, _info) {
             setSelectedAppsKey(selectedRowKeys as number[]);
           },
+          getCheckboxProps(record) {
+            return {
+              disabled: record.isTemplate,
+            };
+          },
         }}
       />
       <div className={cs.footer}>
-        <Button onClick={loadTemplate}>Import</Button>
+        <Button onClick={importApps}>Import</Button>
         <Button onClick={exportApps} disabled={!selectedAppsKey.length}>
           Export
         </Button>

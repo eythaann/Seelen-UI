@@ -1,7 +1,17 @@
-- name: (?i)((install)|(setup)|(complete)|(menu))
+- name: Base
   identifier:
-    id: (?i)((install)|(setup)|(complete)|(menu))
+    id: (?i)((install)|(setup)|(complete)|(menu)|(notification))
     kind: Title
     matching_strategy: Regex
   options:
     - unmanage
+- name: Electron Apps
+  identifier:
+    id: Chrome_WidgetWin_1
+    kind: Classk
+    matching_strategy: Equals
+  invisible_borders:
+    left: 2
+    top: 2
+    right: 4
+    bottom: 4

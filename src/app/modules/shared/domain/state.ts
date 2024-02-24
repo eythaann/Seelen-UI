@@ -1,3 +1,4 @@
+import { AppTemplate } from '../../../../shared.interfaces';
 import { Route } from './routes';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';
@@ -10,5 +11,6 @@ export interface RootState {
   generals: GeneralSettingsState;
   monitors: Monitor[];
   appsConfigurations: AppConfiguration[];
+  appsTemplates: (Omit<AppTemplate, 'apps'> & { apps: AppConfiguration[] })[];
   ahkEnabled: boolean;
 }

@@ -2,7 +2,7 @@ import { Action, Slice } from '@reduxjs/toolkit';
 
 import { HexColor, ReducersFor, SelectorsFor } from '../domain/interfaces';
 
-type Args = undefined | string | { [x: string]: boolean };
+type Args = undefined | string | { [x: string]: boolean | null | undefined };
 export const cx = (...args: Args[]): string => {
   return args.map((arg) => {
     if (!arg) {

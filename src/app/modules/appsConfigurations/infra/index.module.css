@@ -1,6 +1,7 @@
 .newBtn {
   width: 100%;
   background-color: var(--color-green-600);
+  padding: 0;
 
   &:hover {
     background-color: var(--color-green-700) !important;
@@ -19,8 +20,6 @@
   }
 
   :global(.ant-table-body) {
-    overflow-y: auto !important;
-
     :global(.ant-table-cell) {
       text-wrap: nowrap;
       text-overflow: ellipsis;

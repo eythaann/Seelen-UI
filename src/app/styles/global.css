@@ -65,3 +65,7 @@ hr {
   max-height: 65vh !important;
   overflow-y: auto !important;
 }
+
+.ant-modal-content {
+  padding: 12px 24px !important;
+}

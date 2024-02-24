@@ -1,5 +1,5 @@
 import { StaticConfig } from '../JsonSettings.interface';
-import { UserSettings } from '../shared.interfaces';
+import { AppTemplate, UserSettings } from '../shared.interfaces';
 import { ApplicationConfiguration } from '../YamlSettings.interface';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
 import { execPrinter, fromPackageRoot, runPwshScript } from './utils';
@@ -10,6 +10,8 @@ import { ensureFileSync, readJsonSync, writeJsonSync } from 'fs-extra';
 import yaml from 'js-yaml';
 import os from 'os';
 import path from 'path';
+
+import { AppsTemplates } from './appsTemplates';
 
 const komorebi_config_path = path.join(os.homedir(), '.config/komorebi-ui');
 const ahk_path = path.join(komorebi_config_path, '/komorebic.ahk');
@@ -96,7 +98,7 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
     event.sender.send(REPLY_BY_CHANNEL[Channel.SAVE_USER_SETTINGS]);
   });
 
-  ipcMain.on(Channel.LOAD_APPS_TEMPLATE, (event) => {
+  ipcMain.on(Channel.IMPORT_APPS, (event) => {
     const defaultPath = app.isPackaged
       ? fromPackageRoot('./resources/apps_templates')
       : path.join(app.getAppPath(), 'static/apps_templates');
@@ -117,14 +119,31 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
           const processed = yaml.load(readFileSync(path, 'utf-8'));
           return Array.isArray(processed) ? processed : [];
         });
-        event.sender.send(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], data);
+        event.sender.send(REPLY_BY_CHANNEL[Channel.IMPORT_APPS], data);
       })
       .catch((err) => {
-        event.sender.send(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATE], undefined, err);
+        event.sender.send(REPLY_BY_CHANNEL[Channel.IMPORT_APPS], undefined, err);
       });
   });
 
-  ipcMain.on(Channel.EXPORT_APPS_TEMPLATE, (event, apps: ApplicationConfiguration[]) => {
+  ipcMain.on(Channel.LOAD_APPS_TEMPLATES, (event) => {
+    const defaultPath = app.isPackaged
+      ? fromPackageRoot('./resources/apps_templates')
+      : path.join(app.getAppPath(), 'static/apps_templates');
+
+    const result = AppsTemplates.map<AppTemplate>(({ name, description, path: file }) => {
+      const apps = yaml.load(readFileSync(path.join(defaultPath, file), 'utf-8')) as ApplicationConfiguration[];
+      return {
+        name,
+        description,
+        apps,
+      };
+    });
+
+    event.sender.send(REPLY_BY_CHANNEL[Channel.LOAD_APPS_TEMPLATES], result);
+  });
+
+  ipcMain.on(Channel.EXPORT_APPS, (event, apps: ApplicationConfiguration[]) => {
     const pathToSave = dialog.showSaveDialogSync(mainWindow, {
       title: 'Exporting Apps',
       defaultPath: path.join(os.homedir(), 'downloads/apps.yaml'),
@@ -133,7 +152,7 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
     if (pathToSave) {
       writeFileSync(pathToSave, yaml.dump(apps));
     }
-    event.sender.send(REPLY_BY_CHANNEL[Channel.EXPORT_APPS_TEMPLATE]);
+    event.sender.send(REPLY_BY_CHANNEL[Channel.EXPORT_APPS]);
   });
 
   ipcMain.on(Channel.QUIT, () => {

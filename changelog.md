@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### added
 - new searching option for applications
+- templates feature
 
 ### fixed
 - including ghost apps on migration

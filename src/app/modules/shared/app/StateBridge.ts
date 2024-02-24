@@ -113,7 +113,7 @@ const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[
   });
 };
 
-export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfig): AppConfiguration[] => {
+export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfig = {}): AppConfiguration[] => {
   const apps: AppConfiguration[] = [];
 
   yaml.forEach((ymlApp: YamlAppConfiguration) => {
@@ -249,8 +249,7 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
   const { jsonSettings, yamlSettings, ahkEnabled } = userSettings;
 
   return {
-    route: initialState.route,
-    toBeSaved: initialState.toBeSaved,
+    ...initialState,
     generals: JsonToState_Generals(jsonSettings, initialState.generals),
     monitors: JsonToState_Monitors(jsonSettings, initialState.monitors),
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),

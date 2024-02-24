@@ -1,13 +1,11 @@
-- name: steamwebhelper.exe
-  binded_monitor: 0
-  binded_workspace: Other
+- name: Steam
   identifier:
-    id: steamwebhelper.exe
+    id: (steamwebhelper.exe)|(steam.exe)
     kind: Exe
-    matching_strategy: Legacy
+    matching_strategy: Regex
   options:
     - unmanage
-- name: Steam
+- name: Main Steam Window
   identifier:
     id: Steam
     kind: Title
