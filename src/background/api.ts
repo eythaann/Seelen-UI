@@ -17,7 +17,7 @@ const komorebi_config_path = path.join(os.homedir(), '.config/komorebi-ui');
 const ahk_path = path.join(komorebi_config_path, '/komorebic.ahk');
 const tryRunAhkShortcuts = () => {
   if (existsSync(ahk_path)) {
-    exec(`'${ahk_path}'`, execPrinter);
+    exec(`"${ahk_path}"`, execPrinter);
   }
 };
 
@@ -82,10 +82,14 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
   ipcMain.on(Channel.SAVE_USER_SETTINGS, (event, settings: UserSettings) => {
     const json_route = path.join(os.homedir(), '.config/komorebi-ui/settings.json');
     const yaml_route = path.join(os.homedir(), '.config/komorebi-ui/applications.yml');
-
     settings.jsonSettings.app_specific_configuration_path = yaml_route;
-
     ensureFileSync(json_route);
+
+    let oldSettings: StaticConfig = {};
+    if (existsSync(json_route)) {
+      oldSettings = readJsonSync(json_route);
+    }
+    const isChangingAhkStatus = settings.ahkEnabled != oldSettings.ahk_enabled;
 
     if (settings.ahkEnabled) {
       if (!existsSync(ahk_path)) {
@@ -95,7 +99,11 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
           path.join(komorebi_config_path, '/komorebic.lib.ahk'),
         );
       }
-      tryRunAhkShortcuts();
+      if (isChangingAhkStatus) {
+        tryRunAhkShortcuts();
+      }
+    } else if (isChangingAhkStatus) {
+      exec('wmic process where "commandline like \'%komorebic.ahk%\'" call terminate', { shell: 'powershell.exe' }, execPrinter);
     }
 
     settings.jsonSettings.ahk_enabled = settings.ahkEnabled;

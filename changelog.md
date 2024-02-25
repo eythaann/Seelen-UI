@@ -5,6 +5,8 @@
 - delete old paths on update
 
 ### fixed
+- fix not saving templates
+- fix toggle ahk shortcuts does not run or stop the instance
 - running ahk when disabled
 - not updating the path of intallation folder on update for windows tasks
 
