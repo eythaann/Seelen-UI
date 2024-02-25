@@ -1,6 +1,6 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { Button, ConfigProvider, Input, InputNumber, Modal, Select, Switch } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../shared/app/hooks';
 import { Rect } from '../../shared/app/Rect';
@@ -31,9 +31,17 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const _app = useAppSelector((state) => {
     return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.default();
   })!;
-  const [app, setApp] = useState(readonlyApp || _app);
-  const { invisibleBorders } = app;
+  const initialState = readonlyApp || _app;
   const isReadonly = !!readonlyApp;
+
+  const [app, setApp] = useState(initialState);
+  const { invisibleBorders } = app;
+
+  useEffect(() => {
+    if (isNew && !open) { // reset state on close
+      setApp(initialState);
+    }
+  }, [open]);
 
   const onInternalSave = () => {
     onSave(app as AppConfigurationExtended);

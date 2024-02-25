@@ -253,7 +253,7 @@ export function AppsConfiguration() {
       <Table
         dataSource={[...apps, ...templates]}
         columns={columns}
-        pagination={{ defaultPageSize: 20 }}
+        pagination={{ pageSize: 50 }}
         scroll={{ y: 350, x: '100vw' }}
         className={cs.table}
         rowSelection={{

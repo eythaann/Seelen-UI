@@ -1,0 +1,7 @@
+- name: Electron
+  identifier:
+    id: electron.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - Unmanage

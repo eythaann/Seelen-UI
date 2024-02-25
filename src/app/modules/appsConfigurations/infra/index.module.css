@@ -15,6 +15,10 @@
 }
 
 .table {
+  :global(.ant-pagination-options) {
+    display: none;
+  }
+
   :global(.ant-empty) {
     margin: 119px;
   }
