@@ -27,7 +27,7 @@ const config = {
       await import('./scripts/build.mjs');
     },
     prePackage: async (forgeConfig, platform, version) => {
-      await runPwshScript('prePackage.ps1');
+      await runPwshScript('prePackage.ps1', `-Folder ${path.join(process.cwd(), 'out/Komorebi UI-win32-x64')}`);
     },
     packageAfterCopy: async (forgeConfig, buildPath, electronVersion, platform, arch) => {
       const ownLicense = fs.readFileSync(path.join(__dirname, 'LICENSE')).toString();
@@ -64,6 +64,7 @@ const config = {
       config: {
         iconUrl: 'https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/static/icons/icon.ico',
         setupIcon: path.join(process.cwd(), 'static/icons/icon.ico'),
+        skipUpdateIcon: false,
       },
     },
     {
