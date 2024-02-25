@@ -117,6 +117,10 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
   const apps: AppConfiguration[] = [];
 
   yaml.forEach((ymlApp: YamlAppConfiguration) => {
+    if (ymlApp.template) {
+      return;
+    }
+
     // filter empty ghost apps used only for add float_identifiers in komorebi cli
     if (ymlApp.options || !ymlApp.float_identifiers) {
       apps.push({
@@ -334,11 +338,12 @@ export const StateToJsonSettings = (state: RootState): StaticConfig => {
   };
 };
 
-export const StateAppsToYamlApps = (appsConfigurations: AppConfiguration[]): YamlAppConfiguration[] => {
+export const StateAppsToYamlApps = (appsConfigurations: AppConfiguration[], template?: boolean): YamlAppConfiguration[] => {
   return appsConfigurations.map((appConfig: AppConfiguration) => {
     const options = Object.values(ApplicationOptions).filter((option) => appConfig[option]);
     const yamlApp: YamlAppConfiguration = {
       name: appConfig.name,
+      template: template || undefined,
       category: appConfig.category || undefined,
       binded_monitor: appConfig.monitor ?? undefined,
       binded_workspace: appConfig.workspace || undefined,

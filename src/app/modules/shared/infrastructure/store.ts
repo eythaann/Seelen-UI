@@ -19,12 +19,16 @@ export type store = {
 
 export const LoadSettingsToStore = async (route?: string) => {
   const appsTemplate = await window.backgroundApi.loadAppsTemplates();
-  store.dispatch(RootActions.setAppsTemplates(appsTemplate.map((template) => {
-    return {
-      ...template,
-      apps: YamlToState_Apps(template.apps),
-    };
-  })));
+  store.dispatch(
+    RootActions.setAppsTemplates(
+      appsTemplate.map((template) => {
+        return {
+          ...template,
+          apps: YamlToState_Apps(template.apps),
+        };
+      }),
+    ),
+  );
 
   const userSettings = await window.backgroundApi.getUserSettings(route);
   if (!Object.keys(userSettings.jsonSettings).length) {
@@ -50,7 +54,10 @@ export const SaveStore = async () => {
     const currentState = store.getState();
     await window.backgroundApi.saveUserSettings({
       jsonSettings: StateToJsonSettings(currentState),
-      yamlSettings: StateAppsToYamlApps(currentState.appsConfigurations),
+      yamlSettings: [
+        ...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
+        ...StateAppsToYamlApps(currentState.appsConfigurations),
+      ],
       ahkEnabled: currentState.ahkEnabled,
     });
     store.dispatch(RootActions.setSaved());
