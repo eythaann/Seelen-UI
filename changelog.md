@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fixed
+- fix first install
+
 ## [1.0.0-beta.6]
 ### added
 - delete old paths on update

@@ -83,14 +83,13 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
     const json_route = path.join(os.homedir(), '.config/komorebi-ui/settings.json');
     const yaml_route = path.join(os.homedir(), '.config/komorebi-ui/applications.yml');
     settings.jsonSettings.app_specific_configuration_path = yaml_route;
-    ensureFileSync(json_route);
 
     let oldSettings: StaticConfig = {};
     if (existsSync(json_route)) {
       oldSettings = readJsonSync(json_route);
     }
-    const isChangingAhkStatus = settings.ahkEnabled != oldSettings.ahk_enabled;
 
+    const isChangingAhkStatus = settings.ahkEnabled != oldSettings.ahk_enabled;
     if (settings.ahkEnabled) {
       if (!existsSync(ahk_path)) {
         copyFileSync(path.join(app.getAppPath(), 'komorebi.sample.ahk'), ahk_path);
@@ -107,6 +106,7 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
     }
 
     settings.jsonSettings.ahk_enabled = settings.ahkEnabled;
+    ensureFileSync(json_route);
     writeJsonSync(json_route, settings.jsonSettings);
     writeFileSync(yaml_route, yaml.dump(settings.yamlSettings));
 
