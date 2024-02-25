@@ -2,7 +2,7 @@ import { StaticConfig } from '../JsonSettings.interface';
 import { AppTemplate, UserSettings } from '../shared.interfaces';
 import { ApplicationConfiguration } from '../YamlSettings.interface';
 import { Channel, REPLY_BY_CHANNEL } from './constants';
-import { execPrinter, fromPackageRoot, runPwshScript } from './utils';
+import { execPrinter, fromPackageRoot, getEnviroment, runPwshScript } from './utils';
 import { exec } from 'child_process';
 import { app, BrowserWindow, dialog, ipcMain } from 'electron';
 import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'fs';
@@ -23,7 +23,14 @@ const tryRunAhkShortcuts = () => {
 
 export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
   ipcMain.on(Channel.ENABLE_AUTOSTART, (_event) => {
-    runPwshScript('autostart_on.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
+    switch (getEnviroment()) {
+      case 'installed':
+        return runPwshScript('autostart_on.ps1', `-VersionPath "${fromPackageRoot('../version')}"`);
+      case 'packaged':
+        return runPwshScript('autostart_on.ps1', `-ExeRoute "${fromPackageRoot('/komorebi.exe')}"`);
+      default:
+        return;
+    }
   });
 
   ipcMain.on(Channel.DISABLE_AUTOSTART, (_event) => {

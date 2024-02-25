@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+### added
+- delete old paths on update
+
+### fixed
+- running ahk when disabled
+- not updating the path of intallation folder on update for windows tasks
+
 ## [1.0.0-beta.5]
 ### added
 - new searching option for applications

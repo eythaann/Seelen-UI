@@ -1,6 +1,6 @@
 const { exec } = require('child_process');
 const { app } = require('electron');
-const { readFileSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync, existsSync } = require('fs');
 const os = require('os');
 const path = require('path');
 
@@ -38,4 +38,14 @@ const runPwshScript = async (name, args = '') => {
   });
 };
 
-module.exports = { runPwshScript, fromPackageRoot, execPrinter };
+const getEnviroment = () => {
+  if (!app.isPackaged) {
+    return 'dev';
+  }
+  if (existsSync(fromPackageRoot('../Update.exe'))) {
+    return 'installed';
+  }
+  return 'packaged';
+};
+
+module.exports = { runPwshScript, fromPackageRoot, execPrinter, getEnviroment };

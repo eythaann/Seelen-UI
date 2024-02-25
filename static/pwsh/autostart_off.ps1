@@ -10,4 +10,5 @@ $taskName = "KomorebiUI"
 $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 if ($null -ne $existingTask) {
     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+    Unregister-ScheduledTask -TaskName "$taskName-limited" -Confirm:$false
 }
