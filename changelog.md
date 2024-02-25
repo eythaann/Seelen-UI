@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-beta.7]
 ### fixed
 - fix first install
 
