@@ -8,7 +8,7 @@
 - name: Electron Apps
   identifier:
     id: Chrome_WidgetWin_1
-    kind: Classk
+    kind: Class
     matching_strategy: Equals
   invisible_borders:
     left: 2
