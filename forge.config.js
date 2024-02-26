@@ -5,6 +5,8 @@ const { runPwshScript } = require('./src/background/utils');
 const { compileFromFile } = require('json-schema-to-typescript');
 const package_json = require('./package.json');
 
+require('dotenv').config;
+
 /**
  * @typedef {import('@electron-forge/shared-types').ForgeConfig} ForgeConfig
  * @type {ForgeConfig}
@@ -85,6 +87,7 @@ const config = {
         },
         prerelease: package_json.version.includes('beta'),
         generateReleaseNotes: true,
+        authToken: process.env.GITHUB_TOKEN,
       },
     },
   ],

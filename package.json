@@ -25,6 +25,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "electron-squirrel-startup": "^1.0.0",
     "update-electron-app": "^3.0.0"
   },
