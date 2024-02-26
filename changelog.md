@@ -7,6 +7,7 @@
 
 ### fixed
 - fix no removing old path
+- lag on many applications
 
 ## [1.0.0-beta.8]
 ### added

@@ -5,7 +5,7 @@ import { LoadSettingsToStore, SaveStore } from '../../modules/shared/infrastruct
 import { useAppSelector } from '../../modules/shared/app/hooks';
 import { RootSelectors } from '../../modules/shared/app/selectors';
 
-import { Route, RouteExtraInfo, RouteLabels } from '../../modules/shared/domain/routes';
+import { RouteExtraInfo, RouteLabels } from '../../modules/shared/domain/routes';
 
 import cs from './index.module.css';
 
@@ -31,18 +31,11 @@ export const Header = () => {
           </Tooltip>
         )}
       </div>
-      {route !== Route.INFO && (
-        <div>
-          <Button
-            children="Cancel"
-            type="default"
-            danger
-            disabled={!hasChanges}
-            onClick={() => LoadSettingsToStore()}
-          />{'  '}
-          <Button children={hasChanges ? 'Save' : 'Close'} type="primary" danger={!hasChanges} onClick={SaveOrQuit} />
-        </div>
-      )}
+      <div>
+        <Button children="Cancel" type="default" danger disabled={!hasChanges} onClick={() => LoadSettingsToStore()} />
+        {'  '}
+        <Button children={hasChanges ? 'Save' : 'Close'} type="primary" danger={!hasChanges} onClick={SaveOrQuit} />
+      </div>
     </div>
   );
 };

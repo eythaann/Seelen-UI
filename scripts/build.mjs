@@ -19,7 +19,7 @@ const CopyPublic = {
 await esbuild.build({
   entryPoints: ['./src/app/index.tsx'],
   bundle: true,
-  minify: true,
+  minify: false,
   outfile: './dist/frontend-bundle/bundle.js',
   jsx: 'automatic',
   plugins: [CopyPublic],
@@ -28,7 +28,7 @@ await esbuild.build({
 await esbuild.build({
   entryPoints: ['./src/background/index.ts', './src/background/preload.ts'],
   bundle: true,
-  minify: true,
+  minify: false,
   outdir: './dist/background-bundle',
   platform: 'node',
   external: ['electron'],

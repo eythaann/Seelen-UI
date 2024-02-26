@@ -8,9 +8,9 @@ const initialState: BorderState = {
   enable: false,
   offset: 0,
   width: 20,
-  colorSingle: '#ff0000',
-  colorMonocle: '#00ff00',
-  colorStack: '#0000ff',
+  colorSingle: '#cc0000',
+  colorMonocle: '#00cc00',
+  colorStack: '#0000cc',
 };
 
 export const BorderSlice = createSlice({

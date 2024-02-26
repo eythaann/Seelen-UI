@@ -4,6 +4,7 @@ import { AnimationsSlice } from '../../general/animations/app';
 import { BorderSlice } from '../../general/border/app';
 import { ContainerTopBarSlice } from '../../general/containerTopBar/app';
 import { GeneralSettingsSlice } from '../../general/main/app';
+import { PopupSlice } from '../../general/popups/app';
 
 import { RootState } from '../domain/state';
 
@@ -13,6 +14,7 @@ export const GeneralSettingsSelectors = GeneralSettingsSlice.getSelectors(RootSe
 
 export const AnimationsSelectors = AnimationsSlice.getSelectors(GeneralSettingsSelectors.animations);
 export const BorderSelectors = BorderSlice.getSelectors(GeneralSettingsSelectors.border);
+export const PopupSelectors = PopupSlice.getSelectors(GeneralSettingsSelectors.popups);
 export const ContainerTopBarSelectors = ContainerTopBarSlice.getSelectors(GeneralSettingsSelectors.containerTopBar);
 
 export const getMonitorSelector = (idx: number) => (state: RootState) => RootSelectors.monitors(state)[idx];

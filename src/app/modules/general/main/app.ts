@@ -5,6 +5,7 @@ import { matcher, reducersFor, selectorsFor } from '../../shared/app/utils';
 import { AnimationsSlice } from '../animations/app';
 import { BorderSlice } from '../border/app';
 import { ContainerTopBarSlice } from '../containerTopBar/app';
+import { PopupSlice } from '../popups/app';
 
 import {
   CrossMonitorMoveBehaviour,
@@ -19,6 +20,7 @@ let initialState: GeneralSettingsState = {
   autoStackinByCategory: true,
   animations: AnimationsSlice.getInitialState(),
   border: BorderSlice.getInitialState(),
+  popups: PopupSlice.getInitialState(),
   containerPadding: 10,
   workspacePadding: 10,
   resizeDelta: 50,
@@ -50,13 +52,16 @@ export const GeneralSettingsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(matcher(BorderSlice), (state, action) => {
-        BorderSlice.reducer(state.border, action);
+        state.border = BorderSlice.reducer(state.border, action);
+      })
+      .addMatcher(matcher(PopupSlice), (state, action) => {
+        state.popups = PopupSlice.reducer(state.popups, action);
       })
       .addMatcher(matcher(AnimationsSlice), (state, action) => {
-        AnimationsSlice.reducer(state.animations, action);
+        state.animations = AnimationsSlice.reducer(state.animations, action);
       })
       .addMatcher(matcher(ContainerTopBarSlice), (state, action) => {
-        ContainerTopBarSlice.reducer(state.containerTopBar, action);
+        state.containerTopBar = ContainerTopBarSlice.reducer(state.containerTopBar, action);
       });
   },
 });

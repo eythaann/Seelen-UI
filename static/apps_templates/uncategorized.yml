@@ -341,28 +341,6 @@
     matching_strategy: Legacy
   options:
     - unmanage
-- name: Steam Beta
-  identifier:
-    id: SDL_app
-    kind: Class
-    matching_strategy: Legacy
-  options:
-    - tray_and_multi_window
-  invisible_borders:
-    left: 0
-    top: 0
-    right: 0
-    bottom: 0
-- name: Steam
-  identifier:
-    id: vguiPopupWindow
-    kind: Class
-    matching_strategy: Legacy
-  invisible_borders:
-    left: 0
-    top: 0
-    right: 0
-    bottom: 0
 - name: Spotify
   identifier:
     id: Spotify.exe
@@ -565,27 +543,6 @@
     matching_strategy: Equals
   options:
     - tray_and_multi_window
-- name: 语音通话
-  identifier:
-    id: 语音通话
-    kind: Title
-    matching_strategy: Legacy
-  options:
-    - unmanage
-- name: 群聊的聊天记录
-  identifier:
-    id: 群聊的聊天记录
-    kind: Title
-    matching_strategy: Legacy
-  options:
-    - unmanage
-- name: 图片查看器
-  identifier:
-    id: 图片查看器
-    kind: Title
-    matching_strategy: Legacy
-  options:
-    - unmanage
 - name: QQ
   identifier:
     id: QQ.exe

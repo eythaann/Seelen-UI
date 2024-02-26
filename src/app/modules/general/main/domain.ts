@@ -3,6 +3,7 @@ import { Rect } from '../../shared/app/Rect';
 import { AnimationsState } from '../animations/domain';
 import { BorderState } from '../border/domain';
 import { ContainerTabsState } from '../containerTopBar/domain';
+import { PopupState } from '../popups/domain';
 
 export enum FocusFollowsMouse {
   KOMOREBI = 'Komorebi',
@@ -32,6 +33,7 @@ export enum CrossMonitorMoveBehaviour {
 
 export interface GeneralSettingsState {
   border: BorderState;
+  popups: PopupState;
   altFocusHack: boolean;
   autoStackinByCategory: boolean;
   animations: AnimationsState;

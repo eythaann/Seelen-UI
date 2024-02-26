@@ -1,8 +1,7 @@
 import { EditAppModal } from './EditModal';
-import { createSelector } from '@reduxjs/toolkit';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector, useAppStore } from '../../shared/app/hooks';
@@ -179,33 +178,42 @@ function Actions({ record }: { record: AppConfigurationExtended; index: number }
 }
 
 export function AppsConfiguration() {
+  const [delay, setDelay] = useState(300);
+  const [loading, setLoading] = useState(true);
   const [selectedAppsKey, setSelectedAppsKey] = useState<number[]>([]);
   const [searched, setSearched] = useState('');
-  const apps: AppConfigurationExtended[] = useAppSelector(
-    createSelector(RootSelectors.appsConfigurations, (apps) => {
-      return apps
-        .map((app, index) => ({ ...app, key: index }))
-        .filter((app) => app.name.toLowerCase().includes(searched) || app.identifier.toLowerCase().includes(searched))
-        .reverse(); // the last added should be show at the top
-    }),
-  );
+  const [data, setData] = useState<AppConfigurationExtended[]>([]);
 
-  const templates: AppConfigurationExtended[] = useAppSelector(
-    createSelector(RootSelectors.appsTemplates, (templates) => {
-      return templates
-        .flatMap((template) => {
-          return template.apps.map((app, i) => ({
-            ...app,
-            key: `${template.name}-${i}` as unknown as number,
-            isTemplate: true,
-            templateName: template.name,
-            templateDescription: template.description,
-          }));
-        })
-        .filter((app) => app.name.toLowerCase().includes(searched) || app.identifier.toLowerCase().includes(searched))
-        .reverse();
-    }),
-  );
+  const apps = useAppSelector(RootSelectors.appsConfigurations);
+  const templates = useAppSelector(RootSelectors.appsTemplates);
+
+  useEffect(() => {
+    const data: AppConfigurationExtended[] = [];
+
+    templates.forEach((template) => {
+      template.apps.forEach((app, i) =>
+        data.unshift({
+          ...app,
+          key: `${template.name}-${i}` as unknown as number,
+          isTemplate: true,
+          templateName: template.name,
+          templateDescription: template.description,
+        }),
+      );
+    });
+
+    apps.forEach((app, index) => data.unshift({ ...app, key: index }));
+
+    setTimeout(() => {
+      setData(
+        data.filter((app) => {
+          return app.name.toLowerCase().includes(searched) || app.identifier.toLowerCase().includes(searched);
+        }),
+      );
+      setLoading(false);
+      setDelay(0);
+    }, delay);
+  }, [apps]);
 
   const dispatch = useDispatch();
   const store = useAppStore();
@@ -251,7 +259,8 @@ export function AppsConfiguration() {
   return (
     <>
       <Table
-        dataSource={[...apps, ...templates]}
+        loading={loading}
+        dataSource={data}
         columns={columns}
         pagination={{ pageSize: 50 }}
         scroll={{ y: 350, x: '100vw' }}

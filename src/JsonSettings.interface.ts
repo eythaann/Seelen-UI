@@ -163,11 +163,11 @@ export interface StaticConfig {
     /**
      * X-coordinate position
      */
-    x?: number & string;
+    x?: number | null;
     /**
      * Y-coordinate position
      */
-    y?: number & string;
+    y?: number | null;
     /**
      * Height of the popup
      */

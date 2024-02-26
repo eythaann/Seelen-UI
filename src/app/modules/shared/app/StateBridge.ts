@@ -46,6 +46,17 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
       offset: json.active_window_border_offset ?? generals.border.offset,
       width: json.active_window_border_width ?? generals.border.width,
     },
+    popups: {
+      enable: json.popups?.enable ?? generals.popups.enable,
+      x: json.popups?.x ?? generals.popups.x,
+      y: json.popups?.y ?? generals.popups.y,
+      width: json.popups?.width ?? generals.popups.width,
+      height: json.popups?.height ?? generals.popups.height,
+      textColor: new ColorFactory(json.popups?.text_color ?? generals.popups.textColor).toHexString(),
+      background: new ColorFactory(json.popups?.background ?? generals.popups.background).toHexString(),
+      borderColor: new ColorFactory(json.popups?.border_color ?? generals.popups.borderColor).toHexString(),
+      borderWidth: json.popups?.border_width ?? generals.popups.borderWidth,
+    },
     crossMonitorMoveBehaviour:
       (json.cross_monitor_move_behaviour as CrossMonitorMoveBehaviour) ?? generals.crossMonitorMoveBehaviour,
 
@@ -287,6 +298,17 @@ const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
         background: state.containerTopBar.tabs.background,
       },
     },
+    popups: {
+      enable: state.popups.enable,
+      x: state.popups.x,
+      y: state.popups.y,
+      width: state.popups.width,
+      height: state.popups.height,
+      text_color: state.popups.textColor,
+      background: state.popups.background,
+      border_color: state.popups.borderColor,
+      border_width: state.popups.borderWidth,
+    },
     default_container_padding: state.containerPadding,
     default_workspace_padding: state.workspacePadding,
     focus_follows_mouse: state.focusFollowsMouse,
@@ -338,7 +360,10 @@ export const StateToJsonSettings = (state: RootState): StaticConfig => {
   };
 };
 
-export const StateAppsToYamlApps = (appsConfigurations: AppConfiguration[], template?: boolean): YamlAppConfiguration[] => {
+export const StateAppsToYamlApps = (
+  appsConfigurations: AppConfiguration[],
+  template?: boolean,
+): YamlAppConfiguration[] => {
   return appsConfigurations.map((appConfig: AppConfiguration) => {
     const options = Object.values(ApplicationOptions).filter((option) => appConfig[option]);
     const yamlApp: YamlAppConfiguration = {
