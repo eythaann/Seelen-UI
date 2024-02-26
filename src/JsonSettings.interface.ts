@@ -153,6 +153,48 @@ export interface StaticConfig {
     [k: string]: unknown;
   };
   /**
+   * Configurations for popups
+   */
+  popups?: {
+    /**
+     * Enable or disable the popups
+     */
+    enable?: boolean;
+    /**
+     * X-coordinate position
+     */
+    x?: number & string;
+    /**
+     * Y-coordinate position
+     */
+    y?: number & string;
+    /**
+     * Height of the popup
+     */
+    height?: number;
+    /**
+     * Width of the popup
+     */
+    width?: number;
+    /**
+     * Text color
+     */
+    text_color?: string;
+    /**
+     * Border color
+     */
+    border_color?: string;
+    /**
+     * Border width
+     */
+    border_width?: number;
+    /**
+     * Background color
+     */
+    background?: string;
+    [k: string]: unknown;
+  };
+  /**
    * Identify tray and multi-window applications
    */
   tray_and_multi_window_applications?: IdWithIdentifier[] | null;
