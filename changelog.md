@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-beta.9]
 ### added
 - add popups on actions 🦀
 - now can switch from installed and packaged and should work as the same
