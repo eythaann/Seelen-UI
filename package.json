@@ -9,7 +9,7 @@
     "start": "electron-forge start",
     "package": "npm run build-komorebi && electron-forge package",
     "make": "npm run build-komorebi && electron-forge make",
-    "publish": "electron-forge publish",
+    "publish": "npm run build-komorebi && electron-forge publish",
     "lint": "eslint ./**/** --fix --max-warnings 0",
     "build-komorebi": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc",
     "postversion": "node scripts/update_changelog.mjs"

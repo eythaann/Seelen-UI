@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const { runPwshScript } = require('./src/background/utils');
 const { compileFromFile } = require('json-schema-to-typescript');
+const package_json = require('./package.json');
 
 /**
  * @typedef {import('@electron-forge/shared-types').ForgeConfig} ForgeConfig
@@ -52,10 +53,7 @@ const config = {
         path.join(__dirname, 'komorebi/komorebi.sample.ahk'),
         path.join(buildPath, 'komorebi.sample.ahk'),
       );
-      fs.copyFileSync(
-        path.join(__dirname, 'komorebi/komorebic.lib.ahk'),
-        path.join(buildPath, 'komorebic.lib.ahk'),
-      );
+      fs.copyFileSync(path.join(__dirname, 'komorebi/komorebic.lib.ahk'), path.join(buildPath, 'komorebic.lib.ahk'));
     },
   },
   makers: [
@@ -75,6 +73,19 @@ const config = {
     {
       name: '@electron-forge/plugin-auto-unpack-natives',
       config: {},
+    },
+  ],
+  publishers: [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'eythaann',
+          name: 'komorebi-ui',
+        },
+        prerelease: package_json.version.includes('beta'),
+        generateReleaseNotes: true,
+      },
     },
   ],
 };
