@@ -59,3 +59,15 @@ export const OptionsFromEnum = (obj: anyObject) => Object.values(obj).map((value
   label: value,
   value,
 }));
+
+export function debounce<T extends anyFunction>(fn: T, delay: number): T {
+  let timeoutId: NodeJS.Timeout;
+
+  return function debounced(this: ThisParameterType<T>, ...args: Parameters<T>): void {
+    const context = this;
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      fn.apply(context, args);
+    }, delay);
+  } as T;
+}

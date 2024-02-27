@@ -1,17 +1,22 @@
 import { EditAppModal } from './EditModal';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useAppSelector, useAppStore } from '../../shared/app/hooks';
+import { useAppSelector } from '../../shared/app/hooks';
 import { RootSelectors } from '../../shared/app/selectors';
 import { StateAppsToYamlApps, YamlToState_Apps } from '../../shared/app/StateBridge';
-import { cx } from '../../shared/app/utils';
+import { cx, debounce } from '../../shared/app/utils';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
-import { AppConfiguration, AppConfigurationExtended, ApplicationOptions, LabelByAppOption } from '../domain';
+import {
+  AppConfiguration,
+  AppConfigurationExtended,
+  ApplicationOptions,
+  LabelByAppOption,
+} from '../domain';
 
 import cs from './index.module.css';
 
@@ -207,35 +212,35 @@ export function AppsConfiguration() {
     setTimeout(() => {
       setData(
         data.filter((app) => {
-          return app.name.toLowerCase().includes(searched) || app.identifier.toLowerCase().includes(searched);
+          return (
+            app.name.toLowerCase().includes(searched) ||
+            app.identifier.toLowerCase().includes(searched)
+          );
         }),
       );
       setLoading(false);
       setDelay(0);
     }, delay);
-  }, [apps]);
+  }, [apps, searched]);
 
   const dispatch = useDispatch();
-  const store = useAppStore();
 
-  const importApps = async () => {
+  const importApps = useCallback(async () => {
     const yamlApps = await window.backgroundApi.importApps();
     const newApps = YamlToState_Apps(yamlApps);
-    console.log(newApps);
     dispatch(AppsConfigActions.push(newApps));
-  };
+  }, []);
 
-  const performSwap = () => {
+  const performSwap = useCallback(() => {
     dispatch(AppsConfigActions.swap(selectedAppsKey as [number, number]));
-  };
+  }, [selectedAppsKey]);
 
-  const exportApps = () => {
-    const { appsConfigurations } = store.getState();
-    const appsToExport = selectedAppsKey.map((key) => appsConfigurations[key]!);
+  const exportApps = useCallback(() => {
+    const appsToExport = selectedAppsKey.map((key) => apps[key]!);
     window.backgroundApi.exportApps(StateAppsToYamlApps(appsToExport));
-  };
+  }, [apps, selectedAppsKey]);
 
-  const confirmDelete = () => {
+  const confirmDelete = useCallback(() => {
     const modal = Modal.confirm({
       title: 'Confirm Delete',
       content: 'Sure on delete these applications?',
@@ -249,11 +254,18 @@ export function AppsConfiguration() {
       cancelText: 'cancel',
       centered: true,
     });
-  };
+  }, [selectedAppsKey]);
 
-  const onSearch = (e: ChangeEvent<HTMLInputElement>) => setSearched(e.target.value.toLowerCase());
+  const onSearch = useCallback(debounce((e: ChangeEvent<HTMLInputElement>) => {
+    setSearched(e.target.value.toLowerCase());
+  }, 200), []);
+
   columns[0]!.title = (
-    <Input value={searched} onChange={onSearch} onClick={(e) => e.stopPropagation()} placeholder="Name" />
+    <Input
+      onChange={onSearch}
+      onClick={(e) => e.stopPropagation()}
+      placeholder="Name"
+    />
   );
 
   return (

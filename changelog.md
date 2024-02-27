@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fixed
+- searching feature on apps
+
 ## [1.0.0-beta.9]
 ### added
 - add popups on actions 🦀
