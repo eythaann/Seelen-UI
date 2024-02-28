@@ -5,7 +5,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type ApplicationIdentifier = "Exe" | "Class" | "Title";
+export type ApplicationIdentifier = "Exe" | "Class" | "Title" | "Path";
 export type MatchingStrategy = "Legacy" | "Equals" | "StartsWith" | "EndsWith" | "Contains" | "Regex";
 export type ApplicationOptions =
   | "object_name_change"

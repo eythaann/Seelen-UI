@@ -26,6 +26,7 @@ export enum ApplicationIdentifier {
   Exe = 'Exe',
   Class = 'Class',
   Title = 'Title',
+  Path = 'Path',
 }
 
 export enum MatchingStrategy {

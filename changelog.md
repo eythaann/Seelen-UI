@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### added
+- add a new way to match applications by path
+
 ### fixed
 - searching feature on apps
 - no focusing windows on change workspace
