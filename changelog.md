@@ -3,6 +3,9 @@
 ## [Unreleased]
 ### fixed
 - searching feature on apps
+- no focusing windows on change workspace
+- autostacking not working propertly
+- workspaces rules not working
 
 ## [1.0.0-beta.9]
 ### added
