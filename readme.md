@@ -1,4 +1,4 @@
-<img src="./static/title.svg" height="60" alt="Komorebi UI Title">
+<img src="./static/icons/title.svg" height="60" alt="Komorebi UI Title">
 
 [![Version](https://img.shields.io/github/v/release/eythaann/komorebi-ui.svg)](https://github.com/eythaann/komorebi-ui/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -6,11 +6,21 @@
 [![Last Commit](https://img.shields.io/github/last-commit/eythaann/komorebi-ui.svg)](https://github.com/eythaann/komorebi-ui/commits/main)
 [![Downloads](https://img.shields.io/github/downloads/eythaann/komorebi-ui/total.svg)](https://github.com/eythaann/komorebi-ui/releases)
 
-<img src="./static/desktop_view.png" width="100%" alt="komorebi ui desktop">
+<img src="./static/images/desktop_view.png" width="100%" alt="komorebi ui desktop">
 
 ## Overview
 
 Komorebi UI is a user-friendly fork of Komorebi, a tiling window manager for Windows. While the original Komorebi primarily offers a CLI (Command Line Interface) and may not be very accessible to non-programmers, Komorebi UI aims to provide a visually appealing, intuitive interface for users who may not have programming skills. This project enhances usability and aesthetic details while introducing additional features to make Komorebi more accessible.
+
+### Features
+
+- **User-Friendly Interface:** Designed with a focus on usability, ensuring a seamless experience for both novice and experienced users.
+
+- **Visual Appeal:** Attention to aesthetic details to create an attractive and enjoyable interface.
+
+- **Additional Functionality:** Includes extra features that enhance the overall usability of Komorebi.
+
+<img src="./static/images/mosaico.png" width="100%" alt="komorebi ui desktop">
 
 ### What is a Tiling Window Manager?
 
@@ -27,14 +37,6 @@ A Tiling Window Manager (TWM) is a window manager that automatically organizes a
 - **Seamless Experience:** Eliminate visual distractions by avoiding overlapping windows.
 
 In summary, a Tiling Window Manager can transform your computing experience, offering spatial efficiency, enhanced productivity, and an interface tailored to your needs. If you value space optimization and agility in navigating between applications, consider making the switch!
-
-## Features
-
-- **User-Friendly Interface:** Designed with a focus on usability, ensuring a seamless experience for both novice and experienced users.
-
-- **Visual Appeal:** Attention to aesthetic details to create an attractive and enjoyable interface.
-
-- **Additional Functionality:** Includes extra features that enhance the overall usability of Komorebi.
 
 ## Getting Started
 
