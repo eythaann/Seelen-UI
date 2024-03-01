@@ -26,6 +26,7 @@ const createWindow = () => {
     },
     titleBarStyle: 'hidden',
     icon: path.join(app.getAppPath(), 'static/icons/icon.ico'),
+    show: false,
   });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -34,6 +35,10 @@ const createWindow = () => {
   });
 
   mainWindow.loadFile(path.join(app.getAppPath(), 'dist/frontend-bundle/index.html'));
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 
   return mainWindow;
 };

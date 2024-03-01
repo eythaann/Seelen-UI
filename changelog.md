@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fixed
+- white screen on start app
+
 ## [1.0.0-beta.10]
 ### added
 - add a new way to match applications by path
