@@ -1,0 +1,24 @@
+- name: Adobe Creative Cloud
+  identifier:
+    id: CreativeCloudDesktopWindowClass
+    kind: Class
+    matching_strategy: Equals
+  options:
+    - tray_and_multi_window
+- name: Adobe Photoshop
+  identifier:
+    id: Photoshop
+    kind: Class
+    matching_strategy: Equals
+  invisible_borders:
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+- name: Photoshop Dialogs
+  identifier:
+    id: PSDialogBox
+    kind: Class
+    matching_strategy: Equals
+  options:
+    - unmanage

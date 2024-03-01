@@ -22,6 +22,16 @@ export const AppsTemplates: AppTemplateDeclaration[] = [
     path: 'gaming.yml',
   },
   {
+    name: 'Adobe',
+    description: 'Settings for adobe apps.',
+    path: 'adobe.yml',
+  },
+  {
+    name: 'Video and Streaming',
+    description: 'Settings for apps like OBS.',
+    path: 'video-and-streaming.yml',
+  },
+  {
     name: 'Development',
     description: 'General settings devs 💻.',
     path: 'development.yml',

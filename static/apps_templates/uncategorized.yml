@@ -1664,23 +1664,6 @@
     matching_strategy: Equals
   options:
     - unmanage
-- name: Adobe Photoshop
-  identifier:
-    id: Photoshop
-    kind: Class
-    matching_strategy: Legacy
-  invisible_borders:
-    left: 0
-    top: 0
-    right: 0
-    bottom: 0
-- name: Adobe Creative Cloud
-  identifier:
-    id: CreativeCloudDesktopWindowClass
-    kind: Class
-    matching_strategy: Legacy
-  options:
-    - tray_and_multi_window
 - name: Vst3PlugWindow
   identifier:
     id: Vst3PlugWindow
