@@ -5,7 +5,7 @@ const { runPwshScript } = require('./src/background/utils');
 const { compileFromFile } = require('json-schema-to-typescript');
 const package_json = require('./package.json');
 
-require('dotenv').config;
+require('dotenv').config();
 
 /**
  * @typedef {import('@electron-forge/shared-types').ForgeConfig} ForgeConfig
