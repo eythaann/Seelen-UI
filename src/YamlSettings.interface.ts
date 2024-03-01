@@ -24,6 +24,10 @@ export interface ApplicationConfiguration {
   category?: null | string;
   binded_workspace?: null | string;
   binded_monitor?: null | number;
+  /**
+   * Means that the app is part of the official bundle of apps configurations included in the build
+   */
+  template?: null | boolean;
   options?: ApplicationOptions[] | null;
   invisible_borders?: Rect;
   [k: string]: unknown;

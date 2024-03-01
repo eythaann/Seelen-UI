@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### fixed
+- missing propety on schema
 - white screen on start app
 
 ## [1.0.0-beta.10]
