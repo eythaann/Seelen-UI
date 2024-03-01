@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-beta.11]
 ### fixed
 - missing propety on schema
 - white screen on start app
