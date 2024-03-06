@@ -34,7 +34,7 @@ let initialState: GeneralSettingsState = {
     top: 0,
     bottom: 7,
   },
-  globalWorkAreaOffset: new Rect().plain(),
+  globalWorkAreaOffset: new Rect().toJSON(),
   unmanagedWindowOperationBehaviour: UnmanagedWindowOperationBehaviour.OP,
   crossMonitorMoveBehaviour: CrossMonitorMoveBehaviour.SWAP,
   containerTopBar: ContainerTopBarSlice.getInitialState(),

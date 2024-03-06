@@ -14,7 +14,7 @@ export const GlobalPaddings = () => {
 
   const dispatch = useDispatch();
 
-  const onChangeGlobalOffset = (side: keyof Rect.plain, value: number | null) => {
+  const onChangeGlobalOffset = (side: keyof Rect, value: number | null) => {
     dispatch(
       GeneralSettingsActions.setGlobalWorkAreaOffset({
         ...workAreaOffset,

@@ -143,7 +143,8 @@ export const loadBackgroundApi = (mainWindow: BrowserWindow) => {
       : path.join(app.getAppPath(), 'static/apps_templates');
 
     const result = AppsTemplates.map<AppTemplate>(({ name, description, path: file }) => {
-      const apps = yaml.load(readFileSync(path.join(defaultPath, file), 'utf-8')) as ApplicationConfiguration[];
+      const processed = yaml.load(readFileSync(path.join(defaultPath, file), 'utf-8'));
+      const apps = Array.isArray(processed) ? processed : [];
       return {
         name,
         description,

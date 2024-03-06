@@ -58,13 +58,13 @@ export const AdvancedConfig = ({ workspaceIdx, monitorIdx }: Props) => {
   });
 
   const resetOffset = () => dispatch(MonitorsActions.updateMonitor({ monitorIdx, key: 'workAreaOffset', value: null }));
-  const onChangeOffset = (side: keyof Rect.plain, value: number | null) => {
+  const onChangeOffset = (side: keyof Rect, value: number | null) => {
     dispatch(
       MonitorsActions.updateMonitor({
         monitorIdx,
         key: 'workAreaOffset',
         value: {
-          ...(workAreaOffset || new Rect().plain()),
+          ...(workAreaOffset || new Rect().toJSON()),
           [side]: value || 0,
         },
       }),

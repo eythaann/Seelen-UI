@@ -19,7 +19,8 @@ const CopyPublic = {
 await esbuild.build({
   entryPoints: ['./src/app/index.tsx'],
   bundle: true,
-  minify: false,
+  minify: true,
+  sourcemap: true,
   outfile: './dist/frontend-bundle/bundle.js',
   jsx: 'automatic',
   plugins: [CopyPublic],

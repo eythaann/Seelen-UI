@@ -53,7 +53,7 @@ export interface AppConfiguration extends AppConfigurationsOptions {
   kind: ApplicationIdentifier;
   identifier: string;
   matchingStrategy: MatchingStrategy;
-  invisibleBorders: Rect.plain | null;
+  invisibleBorders: Rect | null;
 }
 
 export interface AppConfigurationExtended extends AppConfiguration {

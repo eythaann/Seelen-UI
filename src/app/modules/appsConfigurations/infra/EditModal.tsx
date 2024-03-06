@@ -61,11 +61,11 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const onChangeOption = (option: ApplicationOptions, value: boolean) => setApp({ ...app, [option]: value });
 
   const resetInvisibleBorders = () => setApp({ ...app, invisibleBorders: null });
-  const onChangeInvisibleBorders = (side: keyof Rect.plain, value: number | null) => {
+  const onChangeInvisibleBorders = (side: keyof Rect, value: number | null) => {
     setApp({
       ...app,
       invisibleBorders: {
-        ...(app.invisibleBorders || new Rect().plain()),
+        ...(app.invisibleBorders || new Rect().toJSON()),
         [side]: value || 0,
       },
     });

@@ -18,7 +18,7 @@ export const OthersConfigs = () => {
 
   const dispatch = useDispatch();
 
-  const onChangeInvisibleBorders = (side: keyof Rect.plain, value: number | null) => {
+  const onChangeInvisibleBorders = (side: keyof Rect, value: number | null) => {
     dispatch(
       GeneralSettingsActions.setInvisibleBorders({
         ...invisibleBorders,

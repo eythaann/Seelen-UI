@@ -1,7 +1,4 @@
-
-export namespace Rect {
-  export type plain = Omit<Rect, 'plain'>;
-}
+import { ClassBuilder, Deserialize, Serialize } from "readable-types";
 
 export interface Rect {
   left: number;
@@ -10,14 +7,13 @@ export interface Rect {
   bottom: number;
 }
 
-export class Rect {
-  left: number = 0;
-  top: number = 0;
-  right: number = 0;
-  bottom: number = 0;
-
-  plain() {
-    const { ...obj } = this;
-    return obj;
+export const Rect = new ClassBuilder(
+  class Rect {
+    left: number = 0;
+    top: number = 0;
+    right: number = 0;
+    bottom: number = 0;
   }
-}
+)
+  .decorate(Serialize, Deserialize)
+  .build();

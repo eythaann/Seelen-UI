@@ -79,7 +79,7 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
     globalWorkAreaOffset: json.global_work_area_offset ?? generals.globalWorkAreaOffset,
     invisibleBorders: json.invisible_borders ?? generals.invisibleBorders,
     monitorIndexPreferences:
-      (json.monitor_index_preferences as Record<string, Rect.plain>) ?? generals.monitorIndexPreferences,
+      (json.monitor_index_preferences as Record<string, Rect>) ?? generals.monitorIndexPreferences,
     displayindexpreferences: json.display_index_preferences ?? generals.displayindexpreferences,
     mouseFollowFocus: json.mouse_follows_focus ?? generals.mouseFollowFocus,
     resizeDelta: json.resize_delta ?? generals.resizeDelta,
@@ -143,7 +143,7 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
         kind: ymlApp.identifier.kind as ApplicationIdentifier,
         matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
         invisibleBorders:
-          ymlApp.invisible_borders || (ymlApp.options?.includes('border_overflow') ? new Rect().plain() : null),
+          ymlApp.invisible_borders || (ymlApp.options?.includes('border_overflow') ? new Rect().toJSON() : null),
         // options
         [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
         /*[ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,*/
@@ -218,7 +218,7 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
     Object.values(json.border_overflow_applications).forEach((rule) => {
       apps.push({
         ...AppConfiguration.from(rule),
-        invisibleBorders: new Rect().plain(),
+        invisibleBorders: new Rect().toJSON(),
       });
     });
   }
@@ -312,8 +312,8 @@ const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
     default_container_padding: state.containerPadding,
     default_workspace_padding: state.workspacePadding,
     focus_follows_mouse: state.focusFollowsMouse,
-    global_work_area_offset: state.globalWorkAreaOffset,
-    invisible_borders: state.invisibleBorders,
+    global_work_area_offset: state.globalWorkAreaOffset as any,
+    invisible_borders: state.invisibleBorders as any,
     mouse_follows_focus: state.mouseFollowFocus,
     resize_delta: state.resizeDelta,
     unmanaged_window_operation_behaviour: state.unmanagedWindowOperationBehaviour,
@@ -336,7 +336,7 @@ const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {
   return {
     monitors: monitors.map((monitor) => {
       return {
-        work_area_offset: monitor.workAreaOffset || undefined,
+        work_area_offset: monitor.workAreaOffset as any || undefined,
         workspaces: monitor.workspaces.map((workspace) => {
           return {
             name: workspace.name,
@@ -378,7 +378,7 @@ export const StateAppsToYamlApps = (
         matching_strategy: appConfig.matchingStrategy,
       },
       options: options.length ? options : undefined,
-      invisible_borders: appConfig.invisibleBorders || undefined,
+      invisible_borders: appConfig.invisibleBorders as any || undefined,
     };
     return yamlApp;
   });

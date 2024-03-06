@@ -27,7 +27,7 @@ export class Workspace {
 }
 
 export interface Monitor {
-  workAreaOffset: Rect.plain | null;
+  workAreaOffset: Rect | null;
   workspaces: Workspace[];
   edditingWorkspace: number;
 }

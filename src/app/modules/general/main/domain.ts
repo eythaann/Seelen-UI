@@ -42,14 +42,14 @@ export interface GeneralSettingsState {
   resizeDelta: number;
   containerPadding: number;
   workspacePadding: number;
-  globalWorkAreaOffset: Rect.plain;
-  invisibleBorders: Rect.plain;
+  globalWorkAreaOffset: Rect;
+  invisibleBorders: Rect;
   windowContainerBehaviour: WindowContainerBehaviour;
   windowHidingBehaviour: WindowHidingBehaviour;
   unmanagedWindowOperationBehaviour: UnmanagedWindowOperationBehaviour;
   crossMonitorMoveBehaviour: CrossMonitorMoveBehaviour;
   containerTopBar: ContainerTabsState;
   // TODO add GUI configs for this
-  monitorIndexPreferences: Record<string, Rect.plain> | null;
+  monitorIndexPreferences: Record<string, Rect> | null;
   displayindexpreferences: Record<string, string> | null;
 }
