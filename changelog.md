@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-beta.12]
 ### added
 - show current used versions on information
 - add grid layout preview
