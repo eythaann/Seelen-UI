@@ -1,9 +1,8 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
-import { Button, ConfigProvider, Input, InputNumber, Modal, Select, Switch } from 'antd';
+import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 
 import { useAppSelector } from '../../shared/app/hooks';
-import { Rect } from '../../shared/app/Rect';
 import { RootSelectors } from '../../shared/app/selectors';
 import { OptionsFromEnum } from '../../shared/app/utils';
 
@@ -35,7 +34,6 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const isReadonly = !!readonlyApp;
 
   const [app, setApp] = useState(initialState);
-  const { invisibleBorders } = app;
 
   useEffect(() => {
     if (isNew && !open) { // reset state on close
@@ -59,17 +57,6 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const onSelectWorkspace = (value: string | null) => setApp({ ...app, workspace: value });
 
   const onChangeOption = (option: ApplicationOptions, value: boolean) => setApp({ ...app, [option]: value });
-
-  const resetInvisibleBorders = () => setApp({ ...app, invisibleBorders: null });
-  const onChangeInvisibleBorders = (side: keyof Rect, value: number | null) => {
-    setApp({
-      ...app,
-      invisibleBorders: {
-        ...(app.invisibleBorders || new Rect().toJSON()),
-        [side]: value || 0,
-      },
-    });
-  };
 
   const monitorsOptions = monitors.map((_, i) => ({ label: `Monitor ${i + 1}`, value: i }));
   const workspaceOptions =
@@ -171,52 +158,6 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
                 <Switch value={app[value]} onChange={onChangeOption.bind(this, value)} />
               </SettingsOption>
             ))}
-          </SettingsSubGroup>
-        </SettingsGroup>
-
-        <SettingsGroup>
-          <SettingsSubGroup
-            label={
-              <SettingsOption>
-                <span>Specifit invisible borders</span>
-                <Button type="dashed" onClick={resetInvisibleBorders}>
-                  ⟳
-                </Button>
-              </SettingsOption>
-            }
-          >
-            <SettingsOption>
-              <span>Left</span>
-              <InputNumber
-                value={invisibleBorders?.left}
-                onChange={onChangeInvisibleBorders.bind(this, 'left')}
-                placeholder="Global"
-              />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Top</span>
-              <InputNumber
-                value={invisibleBorders?.top}
-                onChange={onChangeInvisibleBorders.bind(this, 'top')}
-                placeholder="Global"
-              />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Right</span>
-              <InputNumber
-                value={invisibleBorders?.right}
-                onChange={onChangeInvisibleBorders.bind(this, 'right')}
-                placeholder="Global"
-              />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Bottom</span>
-              <InputNumber
-                value={invisibleBorders?.bottom}
-                onChange={onChangeInvisibleBorders.bind(this, 'bottom')}
-                placeholder="Global"
-              />
-            </SettingsOption>
           </SettingsSubGroup>
         </SettingsGroup>
       </ConfigProvider>

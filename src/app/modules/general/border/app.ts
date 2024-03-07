@@ -6,8 +6,8 @@ import { BorderState } from './domain';
 
 const initialState: BorderState = {
   enable: false,
-  offset: 0,
-  width: 20,
+  offset: -1,
+  width: 8,
   colorSingle: '#ff0000',
   colorMonocle: '#00ff00',
   colorStack: '#0000ff',

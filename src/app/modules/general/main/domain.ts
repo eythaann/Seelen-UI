@@ -43,7 +43,6 @@ export interface GeneralSettingsState {
   containerPadding: number;
   workspacePadding: number;
   globalWorkAreaOffset: Rect;
-  invisibleBorders: Rect;
   windowContainerBehaviour: WindowContainerBehaviour;
   windowHidingBehaviour: WindowHidingBehaviour;
   unmanagedWindowOperationBehaviour: UnmanagedWindowOperationBehaviour;

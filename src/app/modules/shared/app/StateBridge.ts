@@ -26,7 +26,7 @@ import { RootState } from '../domain/state';
 
 const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
   return {
-    altFocusHack: json.alt_focus_hack ?? generals.altFocusHack,
+    altFocusHack: !!json.alt_focus_hack,
     animations: {
       finishMiminization: json.animations?.finish_miminization_before_restore ?? generals.animations.finishMiminization,
       nativeDelay: json.animations?.native_animations_delay ?? generals.animations.nativeDelay,
@@ -43,8 +43,8 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
       colorStack: new ColorFactory(
         json.active_window_border_colours?.stack || generals.border.colorStack,
       ).toHexString() as HexColor,
-      offset: json.active_window_border_offset ?? generals.border.offset,
-      width: json.active_window_border_width ?? generals.border.width,
+      offset: json.border_offset ?? generals.border.offset,
+      width: json.border_width ?? generals.border.width,
     },
     popups: {
       enable: json.popups?.enable ?? generals.popups.enable,
@@ -77,7 +77,6 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
     workspacePadding: json.default_workspace_padding ?? generals.workspacePadding,
     focusFollowsMouse: (json.focus_follows_mouse as FocusFollowsMouse) ?? generals.focusFollowsMouse,
     globalWorkAreaOffset: json.global_work_area_offset ?? generals.globalWorkAreaOffset,
-    invisibleBorders: json.invisible_borders ?? generals.invisibleBorders,
     monitorIndexPreferences:
       (json.monitor_index_preferences as Record<string, Rect>) ?? generals.monitorIndexPreferences,
     displayindexpreferences: json.display_index_preferences ?? generals.displayindexpreferences,
@@ -142,8 +141,6 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
         identifier: ymlApp.identifier.id,
         kind: ymlApp.identifier.kind as ApplicationIdentifier,
         matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
-        invisibleBorders:
-          ymlApp.invisible_borders || (ymlApp.options?.includes('border_overflow') ? new Rect().toJSON() : null),
         // options
         [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
         /*[ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,*/
@@ -214,15 +211,6 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
     });
   }
 
-  if (json.border_overflow_applications) {
-    Object.values(json.border_overflow_applications).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        invisibleBorders: new Rect().toJSON(),
-      });
-    });
-  }
-
   if (json.tray_and_multi_window_applications) {
     Object.values(json.tray_and_multi_window_applications).forEach((rule) => {
       apps.push({
@@ -286,8 +274,8 @@ const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
       monocle: new ColorFactory(state.border.colorMonocle).toRgb(),
       stack: new ColorFactory(state.border.colorStack).toRgb(),
     },
-    active_window_border_offset: state.border.offset,
-    active_window_border_width: state.border.width,
+    border_offset: state.border.offset,
+    border_width: state.border.width,
     cross_monitor_move_behaviour: state.crossMonitorMoveBehaviour,
     top_bar: {
       height: state.containerTopBar.height,
@@ -311,9 +299,8 @@ const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
     },
     default_container_padding: state.containerPadding,
     default_workspace_padding: state.workspacePadding,
-    focus_follows_mouse: state.focusFollowsMouse,
+    focus_follows_mouse: state.focusFollowsMouse ?? undefined,
     global_work_area_offset: state.globalWorkAreaOffset as any,
-    invisible_borders: state.invisibleBorders as any,
     mouse_follows_focus: state.mouseFollowFocus,
     resize_delta: state.resizeDelta,
     unmanaged_window_operation_behaviour: state.unmanagedWindowOperationBehaviour,
@@ -378,7 +365,6 @@ export const StateAppsToYamlApps = (
         matching_strategy: appConfig.matchingStrategy,
       },
       options: options.length ? options : undefined,
-      invisible_borders: appConfig.invisibleBorders as any || undefined,
     };
     return yamlApp;
   });

@@ -3,6 +3,7 @@ import { Button, message, Upload } from 'antd';
 
 import { LoadSettingsToStore, SaveStore } from '../shared/infrastructure/store';
 import cs from './infra.module.css';
+import { EnvConfig } from '../shared/domain/envConfig';
 
 export function Information() {
   return (
@@ -10,13 +11,13 @@ export function Information() {
       <SettingsGroup>
         <SettingsSubGroup label="Documentation">
           <SettingsOption>
-            <span>komorebi:</span>
+            <span>komorebi <span className={cs.version}>v{EnvConfig.komorebiVersion}</span>:</span>
             <a href="https://lgug2z.github.io/komorebi" target="_blank">
               lgug2z.github.io/komorebi
             </a>
           </SettingsOption>
           <SettingsOption>
-            <span>komorebi-ui:</span>
+            <span>komorebi-ui <span className={cs.version}>v{EnvConfig.version}</span>:</span>
             <a href="https://github.com/eythaann/komorebi-ui" target="_blank">
               github.com/eythaann/komorebi-ui
             </a>

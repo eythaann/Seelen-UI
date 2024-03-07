@@ -6,6 +6,7 @@ export enum Layout {
   VERTICAL_STACK = 'VerticalStack',
   HORIZONTAL_STACK = 'HorizontalStack',
   ULTRAWIDE_VERTICAL_STACK = 'UltrawideVerticalStack',
+  GRID = 'Grid',
 }
 
 // aspect ratio in base to 720p to 144px (height of monitor in preview)

@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### added
+- show current used versions on information
+- add grid layout preview
+- add win + k to open komorebi settings
+
+### refactored
+- update komorebi to 0.1.22
+
+### removed
+- remove invisible borders feature
+
 ## [1.0.0-beta.11]
 ### fixed
 - missing propety on schema

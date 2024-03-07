@@ -5,4 +5,10 @@
       color: var(--color-blue-800);
     }
   }
+
+  .version {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-black);
+  }
 }

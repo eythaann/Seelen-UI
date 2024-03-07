@@ -58,6 +58,7 @@
     "react-redux": "^9.1.0",
     "readable-types": "^4.0.0",
     "redux": "^5.0.1",
+    "toml": "^3.0.0",
     "typescript": "^5.3.3",
     "typescript-eslint": "^7.0.1"
   }

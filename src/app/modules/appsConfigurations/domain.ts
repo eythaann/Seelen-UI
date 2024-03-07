@@ -1,7 +1,5 @@
 import { IdWithIdentifier as JsonIdWithIdentifier } from '../../../YamlSettings.interface';
 
-import { Rect } from '../shared/app/Rect';
-
 export enum ApplicationOptions {
   Float = 'float',
   Unmanage = 'unmanage',
@@ -53,7 +51,6 @@ export interface AppConfiguration extends AppConfigurationsOptions {
   kind: ApplicationIdentifier;
   identifier: string;
   matchingStrategy: MatchingStrategy;
-  invisibleBorders: Rect | null;
 }
 
 export interface AppConfigurationExtended extends AppConfiguration {
@@ -80,7 +77,6 @@ export class AppConfiguration {
       [ApplicationOptions.ObjectNameChange]: false,
       [ApplicationOptions.TrayAndMultiWindow]: false,
       [ApplicationOptions.Unmanage]: false,
-      invisibleBorders: null,
     };
   }
 
