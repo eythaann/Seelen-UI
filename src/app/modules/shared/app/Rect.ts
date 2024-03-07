@@ -1,4 +1,4 @@
-import { ClassBuilder, Deserialize, Serialize } from "readable-types";
+import { ClassBuilder, Deserialize, Serialize } from 'readable-types';
 
 export interface Rect {
   left: number;
@@ -13,7 +13,7 @@ export const Rect = new ClassBuilder(
     top: number = 0;
     right: number = 0;
     bottom: number = 0;
-  }
+  },
 )
   .decorate(Serialize, Deserialize)
   .build();

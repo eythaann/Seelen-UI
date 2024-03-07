@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import cs from "./infra.module.css";
+import cs from './infra.module.css';
 
-import { Layout, RELATION_ASPECT_RATIO } from "./domain";
+import { Layout, RELATION_ASPECT_RATIO } from './domain';
 
 interface Props {
   containerPadding: number;
