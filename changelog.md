@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-beta.13]
 ### ehancements
 - improve maximized windows experience
 
