@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### ehancements
+- improve maximized windows experience
+
+### fixed
+- fix resize not working (now works like master)
+
 ## [1.0.0-beta.12]
 ### added
 - show current used versions on information
