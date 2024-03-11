@@ -12,5 +12,6 @@
     "jsx": "react-jsx",
     "types": ["react", "readable-types", "node"],
     "skipLibCheck": true,
+    "esModuleInterop": true,
   }
 }

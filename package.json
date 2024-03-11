@@ -2,19 +2,14 @@
   "name": "komorebi-ui",
   "productName": "komorebi-ui",
   "version": "1.0.0-beta.13",
-  "description": "My Electron application description",
-  "main": "dist/background-bundle/index.js",
+  "description": "Komorebi UI Project",
   "scripts": {
-    "tauri": "tauri",
-    "build": "node ./scripts/build.mjs",
     "dev": "nodemon --config nodemon.json",
-    "start": "electron-forge start",
-    "package": "npm run build-komorebi && electron-forge package",
-    "make": "npm run build-komorebi && electron-forge make",
-    "publish": "npm run build-komorebi && electron-forge publish",
+    "build": "tauri build",
+    "build:ui": "ts-node scripts/build.ts",
+    "build:komorebi": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc",
     "lint": "eslint ./**/** --fix --max-warnings 0",
-    "build-komorebi": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc",
-    "postversion": "node scripts/update_changelog.mjs"
+    "postversion": "ts-node scripts/update_changelog.ts"
   },
   "keywords": [],
   "author": {
@@ -26,34 +21,20 @@
     "url": "https://github.com/eythaann/komorebi-ui.git"
   },
   "license": "MIT",
-  "dependencies": {
-    "dotenv": "^16.4.5",
-    "electron-squirrel-startup": "^1.0.0",
-    "update-electron-app": "^3.0.0"
-  },
   "devDependencies": {
-    "@electron-forge/cli": "^7.2.0",
-    "@electron-forge/maker-deb": "^7.2.0",
-    "@electron-forge/maker-rpm": "^7.2.0",
-    "@electron-forge/maker-squirrel": "^7.2.0",
-    "@electron-forge/maker-zip": "^7.2.0",
-    "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
-    "@electron-forge/publisher-github": "^7.3.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@tauri-apps/api": "^1.5.3",
     "@tauri-apps/cli": "^1.5.11",
-    "@types/electron-squirrel-startup": "^1.0.2",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.56",
     "@types/react-dom": "^18.2.19",
     "antd": "^5.14.1",
-    "electron": "28.2.3",
+    "dotenv": "^16.4.5",
     "esbuild": "^0.20.1",
     "eslint": "^8.56.0",
     "eslint-plugin-simple-import-sort": "^12.0.0",
-    "fs-extra": "^11.2.0",
     "js-yaml": "^4.1.0",
     "json-schema-to-typescript": "^13.1.2",
     "nodemon": "^3.0.3",
@@ -63,6 +44,7 @@
     "readable-types": "^4.0.0",
     "redux": "^5.0.1",
     "toml": "^3.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "typescript-eslint": "^7.0.1"
   }

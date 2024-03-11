@@ -1,11 +1,11 @@
 [package]
-name = "app"
-version = "0.1.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
-default-run = "app"
+name = "komorebi-ui"
+version = "1.0.0"
+description = "Komorebi UI Background"
+authors = ["eythaann"]
+license = "MIT"
+repository = "https://github.com/eythaann/komorebi-ui.git"
+default-run = "komorebi-ui"
 edition = "2021"
 rust-version = "1.60"
 
@@ -17,7 +17,7 @@ tauri-build = { version = "1.5.1", features = [] }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.6.1", features = [ "fs-all", "path-all", "window-close", "window-start-dragging", "window-show"] }
+tauri = { version = "1.6.1", features = [ "cli", "fs-all", "path-all", "window-close", "window-start-dragging", "window-show"] }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.

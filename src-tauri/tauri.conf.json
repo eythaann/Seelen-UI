@@ -1,16 +1,36 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "package": {
+    "productName": "Komorebi UI",
+    "version": "../package.json"
+  },
   "build": {
-    "beforeBuildCommand": "npm run build",
-    "beforeDevCommand": "npm run build",
+    "beforeBuildCommand": "npm run build:komorebi && npm run build:ui",
     "devPath": "../dist/frontend-bundle",
     "distDir": "../dist/frontend-bundle"
   },
-  "package": {
-    "productName": "komorebi-ui",
-    "version": "0.1.0"
-  },
+  "plugins": {},
   "tauri": {
+    "cli": {
+      "subcommands": {
+        "settings": {
+          "args": [
+            {
+              "name": "silent",
+              "short": "s"
+            }
+          ]
+        },
+        "roulette": {
+          "args": [
+            {
+              "name": "silent",
+              "short": "s"
+            }
+          ]
+        }
+      }
+    },
     "allowlist": {
       "all": false,
       "window": {
@@ -47,11 +67,14 @@
         "static/*"
       ],
       "shortDescription": "",
-      "targets": "all",
+      "targets": "nsis",
       "windows": {
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
-        "timestampUrl": ""
+        "nsis": {
+          "installerIcon": "static/icons/icon.ico",
+          "template": "template.nsi"
+        }
       }
     },
     "security": {
@@ -66,22 +89,11 @@
         "fullscreen": false,
         "height": 500,
         "resizable": false,
-        "title": "Komorebi UI",
+        "title": "Komorebi UI - Settings",
         "width": 700,
         "visible": false,
         "decorations": false,
         "transparent": true
-      },
-      {
-        "height": 300,
-        "width": 300,
-        "label": "roulette",
-        "title": "Roulette",
-        "url": "roulette.html",
-        "visible": false,
-        "transparent": true,
-        "decorations": false,
-        "alwaysOnTop": true
       }
     ]
   }
