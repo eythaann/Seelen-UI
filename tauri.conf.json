@@ -1,92 +1,70 @@
 {
   "$schema": "node_modules/@tauri-apps/cli/schema.json",
-  "package": {
-    "productName": "Komorebi UI",
-    "version": "package.json"
-  },
-  "build": {
-    "beforeBuildCommand": "npm run build:komorebi && npm run build:ui",
-    "devPath": "dist",
-    "distDir": "dist"
-  },
-  "plugins": {},
-  "tauri": {
-    "cli": {
-      "subcommands": {
-        "settings": {
-          "args": [
-            {
-              "name": "silent",
-              "short": "s"
-            }
-          ]
-        },
-        "roulette": {
-          "args": [
-            {
-              "name": "silent",
-              "short": "s"
-            }
-          ]
-        }
-      }
-    },
-    "allowlist": {
-      "all": false,
-      "window": {
-        "show": true,
-        "startDragging": true,
-        "close": true
-      },
-      "path": {
-        "all": true
-      },
-      "fs": {
-        "all": true,
-        "scope": ["**", "**/*", "/**/*"]
-      }
-    },
-    "bundle": {
-      "active": true,
-      "category": "DeveloperTool",
-      "copyright": "",
-      "deb": {
-        "depends": []
-      },
-      "externalBin": [],
-      "icon": [
-        "static/icons/32x32.png",
-        "static/icons/128x128.png",
-        "static/icons/128x128@2x.png",
-        "static/icons/icon.icns",
-        "static/icons/icon.ico"
-      ],
-      "identifier": "com.komorebi-ui.settings",
-      "longDescription": "",
-      "resources": [
-        "static/*",
-        "komorebi/target/x86_64-pc-windows-msvc/release/komorebi.exe",
-        "komorebi/target/x86_64-pc-windows-msvc/release/komorebic.exe",
-        "komorebi/komorebi.sample.ahk",
-        "komorebi/komorebic.lib.ahk"
-      ],
-      "shortDescription": "",
-      "targets": "nsis",
-      "windows": {
-        "certificateThumbprint": null,
-        "digestAlgorithm": "sha256",
-        "nsis": {
-          "installerIcon": "static/icons/icon.ico",
-          "template": "template.nsi"
-        }
-      }
-    },
+  "productName": "Komorebi UI",
+  "version": "package.json",
+  "identifier": "com.eythaann.komorebi-ui",
+  "app": {
     "security": {
       "csp": null
     },
-    "updater": {
-      "active": false
-    },
     "windows": []
+  },
+  "build": {
+    "beforeBuildCommand": "npm run build:komorebi && npm run build:ui",
+    "frontendDist": "dist"
+  },
+  "bundle": {
+    "active": true,
+    "category": "Utility",
+    "copyright": "",
+    "targets": "nsis",
+    "externalBin": [],
+    "icon": [
+      "static/icons/32x32.png",
+      "static/icons/128x128.png",
+      "static/icons/128x128@2x.png",
+      "static/icons/256x256.png",
+      "static/icons/icon.ico"
+    ],
+    "windows": {
+      "certificateThumbprint": null,
+      "digestAlgorithm": "sha256",
+      "nsis": {
+        "installerIcon": "static/icons/icon.ico",
+        "template": "scripts/installer.nsi"
+      }
+    },
+    "longDescription": "",
+    "resources": [
+      "static/*",
+      "komorebi/target/x86_64-pc-windows-msvc/release/komorebi.exe",
+      "komorebi/target/x86_64-pc-windows-msvc/release/komorebic.exe",
+      "komorebi/komorebi.sample.ahk",
+      "komorebi/komorebic.lib.ahk"
+    ],
+    "shortDescription": "",
+    "licenseFile": "LICENSE"
+  },
+  "plugins": {
+    "cli": {
+      "description": "Seelen Command Line Interface.",
+      "longDescription": "Seelen Command Line Interface.",
+      "beforeHelp": "",
+      "afterHelp": "To read more about Seelen visit https://github.com/eythaann/komorebi-ui.git",
+      "subcommands": {
+        "settings": {
+          "description": "Opens the Seelen settings gui."
+        },
+        "roulette": {
+          "description": "Opens the Seelen Pad tool.",
+          "args": [
+            {
+              "name": "silent",
+              "short": "s"
+            }
+          ]
+        }
+      }
+    }
   }
 }

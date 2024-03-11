@@ -1,0 +1,49 @@
+{
+  "$schema": "../gen/schemas/windows-schema.json",
+  "identifier": "migrated",
+  "description": "permissions that were migrated from v1",
+  "local": true,
+  "windows": [
+    "settings",
+    "seelenpad"
+  ],
+  "permissions": [
+    "path:default",
+    "event:default",
+    "window:default",
+    "webview:default",
+    "app:default",
+    "resources:default",
+    "menu:default",
+    "tray:default",
+    "fs:allow-read-file",
+    "fs:allow-read-text-file",
+    "fs:allow-write-file",
+    "fs:allow-read-dir",
+    "fs:allow-copy-file",
+    "fs:allow-mkdir",
+    "fs:allow-remove",
+    "fs:allow-rename",
+    "fs:allow-exists",
+    {
+      "identifier": "fs:scope",
+      "allow": [
+        {
+          "path": "**"
+        },
+        {
+          "path": "**/*"
+        },
+        {
+          "path": "/**/*"
+        }
+      ]
+    },
+    "window:allow-show",
+    "window:allow-close",
+    "window:allow-start-dragging",
+    "autostart:allow-enable",
+    "autostart:allow-disable",
+    "autostart:allow-is-enabled"
+  ]
+}

@@ -6,25 +6,24 @@ import { ContainerBehaviors } from './ContainerBehaviours';
 import { FocusBehaviours } from './FocusBehaviours';
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
+import * as autostart from '@tauri-apps/plugin-autostart';
 import { Switch } from 'antd';
 import { useEffect, useState } from 'react';
 
 import { AnimationsSettings } from '../../animations/infra';
 
 export function General() {
-  const [autostart, setAutostart] = useState(false);
+  const [autostartStatus, setAutostartStatus] = useState(false);
 
   useEffect(() => {
-    // TODO(eythan) window.backgroundApi.autostartTaskExist().then((value) => setAutostart(value));
+    autostart.isEnabled().then((value) => setAutostartStatus(value));
   }, []);
 
   const onAutoStart = (value: boolean) => {
     if (value) {
-      // TODO(eythan) window.backgroundApi.enableAutostart();
-      setAutostart(true);
+      autostart.enable().then(() => setAutostartStatus(true));
     } else {
-      // TODO(eythan) window.backgroundApi.disableAutostart();
-      setAutostart(false);
+      autostart.disable().then(() => setAutostartStatus(false));
     }
   };
 
@@ -33,7 +32,7 @@ export function General() {
       <SettingsGroup>
         <SettingsOption>
           <span style={{ fontWeight: 600 }}>Run Komorebi-UI at startup?</span>
-          <Switch onChange={onAutoStart} value={autostart} />
+          <Switch onChange={onAutoStart} value={autostartStatus} />
         </SettingsOption>
       </SettingsGroup>
 

@@ -21,11 +21,17 @@
     "url": "https://github.com/eythaann/komorebi-ui.git"
   },
   "license": "MIT",
+  "dependencies": {
+    "@tauri-apps/plugin-autostart": "^2.0.0-beta.2",
+    "@tauri-apps/plugin-cli": "^2.0.0-beta.2",
+    "@tauri-apps/plugin-dialog": "^2.0.0-beta.2",
+    "@tauri-apps/plugin-fs": "^2.0.0-beta.2"
+  },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.2.1",
     "@stylistic/eslint-plugin": "^1.6.2",
-    "@tauri-apps/api": "^1.5.3",
-    "@tauri-apps/cli": "^1.5.11",
+    "@tauri-apps/api": "^2.0.0-beta.4",
+    "@tauri-apps/cli": "^2.0.0-beta.8",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.56",

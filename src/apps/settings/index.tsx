@@ -1,4 +1,4 @@
-import { appWindow } from '@tauri-apps/api/window';
+import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -19,7 +19,7 @@ const container = document.getElementById('root');
 if (container) {
   const WrappedRoot = () => {
     useEffect(() => {
-      appWindow.show();
+      getCurrent().show();
     }, []);
 
     return <Provider store={store}>

@@ -1,5 +1,5 @@
 import { store } from './store';
-import { appWindow } from '@tauri-apps/api/window';
+import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -17,7 +17,7 @@ const root = createRoot(RouletteNode || document.body);
 
 const WrappedRoot = () => {
   useEffect(() => {
-    appWindow.show();
+    getCurrent().show();
   }, []);
 
   return <Provider store={store}>

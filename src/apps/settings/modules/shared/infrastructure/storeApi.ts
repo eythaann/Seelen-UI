@@ -1,6 +1,8 @@
 import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
-import { dialog, fs, path } from '@tauri-apps/api';
+import { path } from '@tauri-apps/api';
+import * as dialog from '@tauri-apps/plugin-dialog';
+import * as fs from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 
 import { AppsTemplates } from '../domain/appsTemplates';
@@ -80,19 +82,19 @@ export async function saveUserSettings(settings: UserSettings) {
 export async function ImportApps() {
   const data: ApplicationConfiguration[] = [];
 
-  const paths = await dialog.open({
+  const files = await dialog.open({
     defaultPath: await path.resolveResource('static/apps_templates'),
-    multiple: false,
+    multiple: true,
     title: 'Select template',
     filters: [{ name: 'apps', extensions: ['yaml', 'yml'] }],
   });
 
-  if (!paths) {
+  if (!files) {
     return data;
   }
 
-  for (const path of [paths].flat()) {
-    const processed = yaml.load(await fs.readTextFile(path));
+  for (const file of [files].flat()) {
+    const processed = yaml.load(await fs.readTextFile(file.path));
     data.push(...Array.isArray(processed) ? processed : []);
   }
 

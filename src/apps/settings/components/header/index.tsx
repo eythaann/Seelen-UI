@@ -1,4 +1,4 @@
-import { appWindow } from '@tauri-apps/api/window';
+import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { Button, Tooltip } from 'antd';
 
 import { LoadSettingsToStore, SaveStore } from '../../modules/shared/infrastructure/store';
@@ -18,7 +18,7 @@ export const Header = () => {
     if (hasChanges) {
       SaveStore();
     } else {
-      appWindow.close();
+      getCurrent().close();
     }
   };
 

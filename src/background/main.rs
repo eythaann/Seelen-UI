@@ -2,24 +2,28 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use cli::handle_cli;
+use tauri_plugin_autostart::MacosLauncher;
+use color_eyre::eyre::Result;
 
 mod cli;
 
-#[tauri::command]
-fn my_custom_command() {
-    println!("I was invoked from JS!");
-}
+fn main() -> Result<()> {
+    color_eyre::install()?;
 
-fn main() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_cli::init())
+        .plugin(tauri_plugin_autostart::init(
+            MacosLauncher::LaunchAgent,
+            Some(vec!["--silent"]),
+        ))
         .setup(|app| {
-            match app.get_cli_matches() {
-                Ok(matches) => handle_cli(app, matches)?,
-                Err(_) => {}
-            }
+            handle_cli(app)?;
             Ok(())
         })
-        .invoke_handler(tauri::generate_handler![my_custom_command])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
+
+    Ok(())
 }
