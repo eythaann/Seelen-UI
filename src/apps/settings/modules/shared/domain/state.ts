@@ -1,4 +1,4 @@
-import { AppTemplate } from '../../../../shared.interfaces';
+import { AppTemplate } from '../../../../../shared.interfaces';
 import { Route } from './routes';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';

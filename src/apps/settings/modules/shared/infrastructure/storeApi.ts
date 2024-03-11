@@ -1,9 +1,9 @@
-import { AppTemplate, UserSettings } from '../../../../shared.interfaces';
-import { ApplicationConfiguration } from '../../../../YamlSettings.interface';
+import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
+import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
 import { dialog, fs, path } from '@tauri-apps/api';
 import yaml from 'js-yaml';
 
-import { AppsTemplates } from '../../../../background/appsTemplates';
+import { AppsTemplates } from '../domain/appsTemplates';
 
 export async function loadUserSettings(route?: string) {
   const userSettings: UserSettings = {

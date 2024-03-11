@@ -1,4 +1,4 @@
-import { IdWithIdentifier as JsonIdWithIdentifier } from '../../../YamlSettings.interface';
+import { IdWithIdentifier as JsonIdWithIdentifier } from '../../../../YamlSettings.interface';
 
 export enum ApplicationOptions {
   Float = 'float',

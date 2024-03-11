@@ -8,8 +8,13 @@ repository = "https://github.com/eythaann/komorebi-ui.git"
 default-run = "komorebi-ui"
 edition = "2021"
 rust-version = "1.60"
+build = "scripts/build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "komorebi-ui"
+path = "src/background/main.rs"
 
 [build-dependencies]
 tauri-build = { version = "1.5.1", features = [] }

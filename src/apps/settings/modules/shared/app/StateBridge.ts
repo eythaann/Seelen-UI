@@ -1,6 +1,6 @@
-import { StaticConfig } from '../../../../JsonSettings.interface';
-import { UserSettings } from '../../../../shared.interfaces';
-import { ApplicationConfiguration as YamlAppConfiguration } from '../../../../YamlSettings.interface';
+import { StaticConfig } from '../../../../../JsonSettings.interface';
+import { UserSettings } from '../../../../../shared.interfaces';
+import { ApplicationConfiguration as YamlAppConfiguration } from '../../../../../YamlSettings.interface';
 import { Rect } from './Rect';
 import { ColorFactory } from 'antd/es/color-picker/color';
 

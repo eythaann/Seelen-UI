@@ -2,14 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/nodemon.json",
   "ignore": [
     "src/JsonSettings.interface.ts",
-    "src/YamlSettings.interface.ts",
-    "src-tauri/target"
+    "src/YamlSettings.interface.ts"
   ],
   "watch": [
     "src",
-    "src-tauri",
-    "scripts"
+    "scripts",
+    "static",
+    "tauri.conf.json"
   ],
-  "ext": "ts,tsx,css,ps1,yml,rs,json",
+  "ext": "ts,tsx,css,ps1,yml,rs,json,html",
   "exec": "npm run build:komorebi && npm run build:ui && npx tauri dev"
 }

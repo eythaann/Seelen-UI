@@ -1,4 +1,4 @@
-import { AppTemplate } from '../shared.interfaces';
+import { AppTemplate } from '../../../../../shared.interfaces';
 
 export interface AppTemplateDeclaration extends Omit<AppTemplate, 'apps'> {
   /** path from apps_templates */

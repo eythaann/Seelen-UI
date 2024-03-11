@@ -1,13 +1,13 @@
 {
-  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "$schema": "node_modules/@tauri-apps/cli/schema.json",
   "package": {
     "productName": "Komorebi UI",
-    "version": "../package.json"
+    "version": "package.json"
   },
   "build": {
     "beforeBuildCommand": "npm run build:komorebi && npm run build:ui",
-    "devPath": "../dist/frontend-bundle",
-    "distDir": "../dist/frontend-bundle"
+    "devPath": "dist",
+    "distDir": "dist"
   },
   "plugins": {},
   "tauri": {
@@ -55,16 +55,20 @@
       },
       "externalBin": [],
       "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
+        "static/icons/32x32.png",
+        "static/icons/128x128.png",
+        "static/icons/128x128@2x.png",
+        "static/icons/icon.icns",
+        "static/icons/icon.ico"
       ],
       "identifier": "com.komorebi-ui.settings",
       "longDescription": "",
       "resources": [
-        "static/*"
+        "static/*",
+        "komorebi/target/x86_64-pc-windows-msvc/release/komorebi.exe",
+        "komorebi/target/x86_64-pc-windows-msvc/release/komorebic.exe",
+        "komorebi/komorebi.sample.ahk",
+        "komorebi/komorebic.lib.ahk"
       ],
       "shortDescription": "",
       "targets": "nsis",
@@ -83,18 +87,6 @@
     "updater": {
       "active": false
     },
-    "windows": [
-      {
-        "label": "external",
-        "fullscreen": false,
-        "height": 500,
-        "resizable": false,
-        "title": "Komorebi UI - Settings",
-        "width": 700,
-        "visible": false,
-        "decorations": false,
-        "transparent": true
-      }
-    ]
+    "windows": []
   }
 }
