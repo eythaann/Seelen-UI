@@ -16,7 +16,7 @@ const showNewUserTutorial = () => {
     ),
     okText: 'Install',
     onOk: () => {
-      window.backgroundApi.runAhkSetup();
+      // TODO(eythan) window.backgroundApi.runAhkSetup();
       modal.destroy();
     },
     cancelText: 'Omit',

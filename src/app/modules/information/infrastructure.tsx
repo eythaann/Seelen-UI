@@ -43,7 +43,7 @@ export function Information() {
           <Button
             type="dashed"
             onClick={() => {
-              window.backgroundApi.forceRestart();
+              // TODO(eythan) window.backgroundApi.forceRestart();
             }}
           >
             ⟳

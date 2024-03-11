@@ -4,6 +4,8 @@ import { ColumnsType, ColumnType } from 'antd/es/table';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { ExportApps, ImportApps } from '../../shared/infrastructure/storeApi';
+
 import { useAppSelector } from '../../shared/app/hooks';
 import { RootSelectors } from '../../shared/app/selectors';
 import { StateAppsToYamlApps, YamlToState_Apps } from '../../shared/app/StateBridge';
@@ -226,7 +228,7 @@ export function AppsConfiguration() {
   const dispatch = useDispatch();
 
   const importApps = useCallback(async () => {
-    const yamlApps = await window.backgroundApi.importApps();
+    const yamlApps = await ImportApps();
     const newApps = YamlToState_Apps(yamlApps);
     dispatch(AppsConfigActions.push(newApps));
   }, []);
@@ -237,7 +239,7 @@ export function AppsConfiguration() {
 
   const exportApps = useCallback(() => {
     const appsToExport = selectedAppsKey.map((key) => apps[key]!);
-    window.backgroundApi.exportApps(StateAppsToYamlApps(appsToExport));
+    ExportApps(StateAppsToYamlApps(appsToExport));
   }, [apps, selectedAppsKey]);
 
   const confirmDelete = useCallback(() => {

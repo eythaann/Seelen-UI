@@ -1,4 +1,5 @@
 import { StartUser } from './StartUser';
+import { loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { Modal } from 'antd';
 
@@ -18,7 +19,7 @@ export type store = {
 };
 
 export const LoadSettingsToStore = async (route?: string) => {
-  const appsTemplate = await window.backgroundApi.loadAppsTemplates();
+  const appsTemplate = await loadAppsTemplates();
   store.dispatch(
     RootActions.setAppsTemplates(
       appsTemplate.map((template) => {
@@ -30,7 +31,7 @@ export const LoadSettingsToStore = async (route?: string) => {
     ),
   );
 
-  const userSettings = await window.backgroundApi.getUserSettings(route);
+  const userSettings = await loadUserSettings(route);
   if (!Object.keys(userSettings.jsonSettings).length) {
     StartUser();
     return;
@@ -52,7 +53,7 @@ export const LoadSettingsToStore = async (route?: string) => {
 export const SaveStore = async () => {
   try {
     const currentState = store.getState();
-    await window.backgroundApi.saveUserSettings({
+    await saveUserSettings({
       jsonSettings: StateToJsonSettings(currentState),
       yamlSettings: [
         ...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),

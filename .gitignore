@@ -1,5 +1,6 @@
-.vscode
-dist
-out
-node_modules
+/.vscode
+/dist
+/out
+/node_modules
 .env
+target

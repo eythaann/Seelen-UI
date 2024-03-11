@@ -1,9 +1,12 @@
+#root, #root-roulette {
+  height: 100vh;
+  width: 100vw;
+}
+
 #root {
   display: grid;
   grid-template-columns: min-content 1fr;
   grid-template-rows: 50px 1fr;
-  height: 100vh;
-  width: 100vw;
 }
 
 body {

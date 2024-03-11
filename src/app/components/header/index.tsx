@@ -1,3 +1,4 @@
+import { appWindow } from '@tauri-apps/api/window';
 import { Button, Tooltip } from 'antd';
 
 import { LoadSettingsToStore, SaveStore } from '../../modules/shared/infrastructure/store';
@@ -17,12 +18,12 @@ export const Header = () => {
     if (hasChanges) {
       SaveStore();
     } else {
-      window.backgroundApi.quit();
+      appWindow.close();
     }
   };
 
   return (
-    <div className={cs.Header}>
+    <div className={cs.Header} data-tauri-drag-region>
       <div>
         {RouteLabels[route]}{' '}
         {RouteExtraInfo[route] && (

@@ -5,6 +5,8 @@
   "description": "My Electron application description",
   "main": "dist/background-bundle/index.js",
   "scripts": {
+    "tauri": "tauri",
+    "build": "node ./scripts/build.mjs",
     "dev": "nodemon --config nodemon.json",
     "start": "electron-forge start",
     "package": "npm run build-komorebi && electron-forge package",
@@ -39,6 +41,8 @@
     "@electron-forge/publisher-github": "^7.3.0",
     "@reduxjs/toolkit": "^2.2.1",
     "@stylistic/eslint-plugin": "^1.6.2",
+    "@tauri-apps/api": "^1.5.3",
+    "@tauri-apps/cli": "^1.5.11",
     "@types/electron-squirrel-startup": "^1.0.2",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.19",

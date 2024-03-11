@@ -1,0 +1,88 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run build",
+    "devPath": "../dist/frontend-bundle",
+    "distDir": "../dist/frontend-bundle"
+  },
+  "package": {
+    "productName": "komorebi-ui",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "window": {
+        "show": true,
+        "startDragging": true,
+        "close": true
+      },
+      "path": {
+        "all": true
+      },
+      "fs": {
+        "all": true,
+        "scope": ["**", "**/*", "/**/*"]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.komorebi-ui.settings",
+      "longDescription": "",
+      "resources": [
+        "static/*"
+      ],
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "label": "external",
+        "fullscreen": false,
+        "height": 500,
+        "resizable": false,
+        "title": "Komorebi UI",
+        "width": 700,
+        "visible": false,
+        "decorations": false,
+        "transparent": true
+      },
+      {
+        "height": 300,
+        "width": 300,
+        "label": "roulette",
+        "title": "Roulette",
+        "url": "roulette.html",
+        "visible": false,
+        "transparent": true,
+        "decorations": false,
+        "alwaysOnTop": true
+      }
+    ]
+  }
+}

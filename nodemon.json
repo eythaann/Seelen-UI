@@ -6,9 +6,10 @@
   ],
   "watch": [
     "src",
+    "src-tauri",
     "scripts",
     "static"
   ],
   "ext": "js,ts,tsx,css,mjs,ps1,yml,yaml",
-  "exec": "npm run start"
+  "exec": "npm run tauri dev"
 }

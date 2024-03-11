@@ -15,15 +15,15 @@ export function General() {
   const [autostart, setAutostart] = useState(false);
 
   useEffect(() => {
-    window.backgroundApi.autostartTaskExist().then((value) => setAutostart(value));
+    // TODO(eythan) window.backgroundApi.autostartTaskExist().then((value) => setAutostart(value));
   }, []);
 
   const onAutoStart = (value: boolean) => {
     if (value) {
-      window.backgroundApi.enableAutostart();
+      // TODO(eythan) window.backgroundApi.enableAutostart();
       setAutostart(true);
     } else {
-      window.backgroundApi.disableAutostart();
+      // TODO(eythan) window.backgroundApi.disableAutostart();
       setAutostart(false);
     }
   };
