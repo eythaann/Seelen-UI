@@ -1,8 +1,7 @@
 import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
+import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
-import * as dialog from '@tauri-apps/plugin-dialog';
-import * as fs from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 
 import { AppsTemplates } from '../domain/appsTemplates';

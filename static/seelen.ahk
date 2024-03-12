@@ -5,13 +5,16 @@
  * 
  * To read more about AHK see: https://www.autohotkey.com/docs/v2
  */
-
 #Requires AutoHotkey v2.0
 #SingleInstance Force
+#NoTrayIcon
+
 #Include komorebic.lib.ahk
 
+SetWorkingDir(A_ScriptDir . "/..")
+
 ; Open Settings
-#k::RunWait("komorebi-ui.exe")
+#k::RunWait("Komorebi Ui.exe")
 
 ; Focus windows
 !a::Focus("left")

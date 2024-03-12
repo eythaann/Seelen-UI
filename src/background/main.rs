@@ -48,6 +48,17 @@ struct Payload {
     cwd: String,
 }
 
+#[tauri::command]
+fn run_ahk_installer() {
+    tauri::async_runtime::spawn(async move {
+        let app = SEELEN.lock().handle().clone();
+        app.shell()
+        .command("static\\redis\\AutoHotKey_setup.exe")
+        .spawn()
+        .expect("Fail on running ahk intaller");
+    });
+}
+
 fn main() -> Result<()> {
     color_eyre::install()?;
 
@@ -56,6 +67,7 @@ fn main() -> Result<()> {
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_cli::init())
+        .plugin(tauri_plugin_process::init())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             Some(vec!["--silent"]),
@@ -65,6 +77,7 @@ fn main() -> Result<()> {
             app.emit("single-instance", Payload { args: argv, cwd })
                 .unwrap();
         }))
+        .invoke_handler(tauri::generate_handler![run_ahk_installer])
         .setup(|app| {
             SEELEN.lock().set_handle(app.handle().clone());
             set_windows_events(app)?;
@@ -87,7 +100,7 @@ fn main() -> Result<()> {
 
                 app.shell()
                     .command("cmd")
-                    .args(["/C", ".\\static\\shortcuts.ahk"])
+                    .args(["/C", ".\\static\\seelen.ahk"])
                     .spawn()
                     .expect("Failed to spawn shortcuts");
             });
@@ -105,8 +118,26 @@ fn main() -> Result<()> {
     handle_tray_icon(&mut app)?;
 
     app.run(|_handle, event| match event {
-        tauri::RunEvent::ExitRequested { api, .. } => {
-            api.prevent_exit();
+        tauri::RunEvent::ExitRequested { api, code, .. } => {
+            if code.is_some() {
+                tauri::async_runtime::block_on(async move {
+                    let app = SEELEN.lock().handle().clone();
+                    app.shell()
+                        .command("powershell")
+                        .args([
+                            "-ExecutionPolicy",
+                            "Bypass",
+                            "-NoProfile",
+                            "-Command",
+                            "Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*seelen.ahk*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
+                        ])
+                        .spawn()
+                        .expect("Failed to close ahk");
+                });
+            } else {
+                // prevent close background on windows closing
+                api.prevent_exit();
+            }
         }
         _ => {}
     });

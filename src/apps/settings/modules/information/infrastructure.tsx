@@ -1,4 +1,5 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
+import { relaunch } from '@tauri-apps/plugin-process';
 import { Button } from 'antd';
 
 import { LoadCustomConfigFile } from './infra.api';
@@ -42,9 +43,7 @@ export function Information() {
           <span>Force Restart</span>
           <Button
             type="dashed"
-            onClick={() => {
-              // TODO(eythan) window.backgroundApi.forceRestart();
-            }}
+            onClick={relaunch}
           >
             ⟳
           </Button>
