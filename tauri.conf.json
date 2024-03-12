@@ -37,10 +37,8 @@
     "longDescription": "",
     "resources": [
       "static/*",
-      "komorebi/target/x86_64-pc-windows-msvc/release/komorebi.exe",
-      "komorebi/target/x86_64-pc-windows-msvc/release/komorebic.exe",
-      "komorebi/komorebi.sample.ahk",
-      "komorebi/komorebic.lib.ahk"
+      "komorebi.exe",
+      "komorebic.exe"
     ],
     "shortDescription": "",
     "licenseFile": "LICENSE"
@@ -51,18 +49,30 @@
       "longDescription": "Seelen Command Line Interface.",
       "beforeHelp": "",
       "afterHelp": "To read more about Seelen visit https://github.com/eythaann/komorebi-ui.git",
+      "args": [
+        {
+          "name": "silent",
+          "short": "s",
+          "description": "Start only background processes."
+        },
+        {
+          "name": "verbose",
+          "short": "v",
+          "description": "Start only background processes."
+        }
+      ],
       "subcommands": {
         "settings": {
           "description": "Opens the Seelen settings gui."
         },
-        "roulette": {
-          "description": "Opens the Seelen Pad tool.",
-          "args": [
-            {
-              "name": "silent",
-              "short": "s"
-            }
-          ]
+        "pad": {
+          "description": "Opens the Seelen Pad tool."
+        },
+        "taskbar" : {
+          "description": "Opens the Seelen Task Bar."
+        },
+        "finder" : {
+          "description": "Opens the Seelen Finder."
         }
       }
     }

@@ -9,6 +9,7 @@ import { Route } from '../domain/routes';
 import { RootState } from '../domain/state';
 
 const initialState: RootState = {
+  autostart: false,
   route: Route.GENERAL,
   generals: GeneralSettingsSlice.getInitialState(),
   toBeSaved: false,

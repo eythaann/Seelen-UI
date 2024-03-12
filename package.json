@@ -4,10 +4,12 @@
   "version": "1.0.0-beta.13",
   "description": "Komorebi UI Project",
   "scripts": {
+    "tauri": "tauri",
     "dev": "nodemon --config nodemon.json",
     "build": "tauri build",
     "build:ui": "ts-node scripts/build.ts",
-    "build:komorebi": "cd ./komorebi && cargo build --locked --release --target x86_64-pc-windows-msvc",
+    "build:komorebi": "ts-node scripts/build_komorebi.ts",
+    "postbuild:komorebi": "",
     "lint": "eslint ./**/** --fix --max-warnings 0",
     "postversion": "ts-node scripts/update_changelog.ts"
   },

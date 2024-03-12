@@ -1,0 +1,1 @@
+export * as startup from '@tauri-apps/plugin-autostart';

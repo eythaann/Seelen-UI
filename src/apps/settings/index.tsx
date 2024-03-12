@@ -13,28 +13,34 @@ import './styles/variables.css';
 import './styles/reset.css';
 import './styles/global.css';
 
-LoadSettingsToStore();
+(async function main() {
+  await LoadSettingsToStore();
 
-const container = document.getElementById('root');
-if (container) {
-  const WrappedRoot = () => {
-    useEffect(() => {
-      getCurrent().show();
-    }, []);
+  const container = document.getElementById('root');
+  if (container) {
+    const WrappedRoot = () => {
+      useEffect(() => {
+        setTimeout(() => {
+          getCurrent().show();
+        }, 0);
+      });
 
-    return <Provider store={store}>
-      <ConfigProvider
-        componentSize="small"
-        theme={{
-          algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? theme.darkAlgorithm
-            : theme.defaultAlgorithm,
-        }}
-      >
-        <App/>
-      </ConfigProvider>
-    </Provider>;
-  };
+      return (
+        <Provider store={store}>
+          <ConfigProvider
+            componentSize="small"
+            theme={{
+              algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? theme.darkAlgorithm
+                : theme.defaultAlgorithm,
+            }}
+          >
+            <App />
+          </ConfigProvider>
+        </Provider>
+      );
+    };
 
-  createRoot(container).render(<WrappedRoot/>);
-}
+    createRoot(container).render(<WrappedRoot />);
+  }
+})();

@@ -1,30 +1,30 @@
-import {
-  SettingsGroup,
-  SettingsOption,
-} from '../../../../components/SettingsBox';
+import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { ContainerBehaviors } from './ContainerBehaviours';
 import { FocusBehaviours } from './FocusBehaviours';
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
-import * as autostart from '@tauri-apps/plugin-autostart';
 import { Switch } from 'antd';
-import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
+import { startup } from '../../../shared/infrastructure/tauri';
 import { AnimationsSettings } from '../../animations/infra';
 
+import { useAppDispatch } from '../../../shared/app/hooks';
+import { RootActions } from '../../../shared/app/reducer';
+import { RootSelectors } from '../../../shared/app/selectors';
+
 export function General() {
-  const [autostartStatus, setAutostartStatus] = useState(false);
+  const autostartStatus = useSelector(RootSelectors.autostart);
 
-  useEffect(() => {
-    autostart.isEnabled().then((value) => setAutostartStatus(value));
-  }, []);
+  const dispatch = useAppDispatch();
 
-  const onAutoStart = (value: boolean) => {
+  const onAutoStart = async (value: boolean) => {
     if (value) {
-      autostart.enable().then(() => setAutostartStatus(true));
+      await startup.enable();
     } else {
-      autostart.disable().then(() => setAutostartStatus(false));
+      await startup.disable();
     }
+    dispatch(RootActions.setAutostart(value));
   };
 
   return (
@@ -42,7 +42,7 @@ export function General() {
 
       <ContainerBehaviors />
       <AnimationsSettings />
-      <GlobalPaddings/>
+      <GlobalPaddings />
 
       <OthersConfigs />
     </>

@@ -32,6 +32,8 @@ export enum CrossMonitorMoveBehaviour {
 }
 
 export interface GeneralSettingsState {
+  // own
+  // komorebi
   border: BorderState;
   popups: PopupState;
   altFocusHack: boolean;

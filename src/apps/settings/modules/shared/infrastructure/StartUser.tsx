@@ -1,27 +1,13 @@
-import { SaveStore } from './store';
+import { SaveStore, store } from './store';
+import { startup } from './tauri';
 import { Modal } from 'antd';
+
+import { GeneralSettingsActions } from '../../general/main/app';
 
 import cs from './StartUser.module.css';
 
 const showNewUserTutorial = () => {
-  const modal = Modal.confirm({
-    title: 'Dependencies',
-    className: cs.welcome,
-    content: (
-      <div>
-        <p>
-          Komorebi UI needs AutoHotKey to work.
-        </p>
-      </div>
-    ),
-    okText: 'Install',
-    onOk: () => {
-      // TODO(eythan) window.backgroundApi.runAhkSetup();
-      modal.destroy();
-    },
-    cancelText: 'Omit',
-    centered: true,
-  });
+
 };
 
 const showMigrationInfo = () => {
@@ -48,6 +34,9 @@ const showMigrationInfo = () => {
 };
 
 export const StartUser = () => {
+  startup.enable();
+  store.dispatch(GeneralSettingsActions.setAutostart(true));
+
   const modal = Modal.confirm({
     title: 'Welcome!',
     className: cs.welcome,

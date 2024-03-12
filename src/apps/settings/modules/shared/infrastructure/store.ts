@@ -1,5 +1,6 @@
 import { StartUser } from './StartUser';
 import { loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
+import { startup } from './tauri';
 import { configureStore } from '@reduxjs/toolkit';
 import { Modal } from 'antd';
 
@@ -19,6 +20,8 @@ export type store = {
 };
 
 export const LoadSettingsToStore = async (route?: string) => {
+  store.dispatch(RootActions.setAutostart(await startup.isEnabled()));
+
   const appsTemplate = await loadAppsTemplates();
   store.dispatch(
     RootActions.setAppsTemplates(
@@ -46,6 +49,7 @@ export const LoadSettingsToStore = async (route?: string) => {
       ...loadedStore,
       appsTemplates: currentState.appsTemplates,
       route: currentState.route,
+      autostart: currentState.autostart,
     }),
   );
 };
