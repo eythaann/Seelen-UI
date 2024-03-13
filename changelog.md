@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.2]
 ## [1.0.0-prerelease.1]
 ### added
 - implement tray icon
