@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 ## [1.0.0-prerelease.1]
+### added
+- implement tray icon
+
+### refactored
+- Migrate all app background from Electron ⚡ to Tauri 🦀
+- reimplement startup to use native system startup
+- reimplement included shortcuts with ahk
+- reimplement komorebi autostart
+- reimplement installer to use NSIS
+- refactor folder structure to isolate front-end apps
+
 ## [1.0.0-beta.13]
 ### ehancements
 - improve maximized windows experience
