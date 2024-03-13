@@ -42,11 +42,11 @@ pub fn show_seelenpad_window(app: &AppHandle) -> Result<WebviewWindow> {
 }
 
 pub fn set_windows_events(app: &mut App) -> Result<()> {
-    app.listen("open_settings", |_| {
+    app.listen("open-settings", |_| {
         show_settings_window(SEELEN.lock().handle()).ok();
     });
 
-    app.listen("open_seelenpad", |_| {
+    app.listen("open-seelenpad", |_| {
         show_seelenpad_window(SEELEN.lock().handle()).ok();
     });
 

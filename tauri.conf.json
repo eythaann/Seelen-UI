@@ -31,6 +31,7 @@
       "digestAlgorithm": "sha256",
       "nsis": {
         "installerIcon": "static/icons/icon.ico",
+        "sidebarImage": "static/icons/banner.bmp",
         "template": "scripts/installer.nsi"
       }
     },
@@ -58,7 +59,7 @@
         {
           "name": "verbose",
           "short": "v",
-          "description": "Start only background processes."
+          "description": "Prints some proccess on the console."
         }
       ],
       "subcommands": {

@@ -46,6 +46,8 @@ Name "${PRODUCTNAME}"
 BrandingText "${COPYRIGHT}"
 OutFile "${OUTFILE}"
 
+ManifestDPIAware true
+
 VIProductVersion "${VERSIONWITHBUILD}"
 VIAddVersionKey "ProductName" "${PRODUCTNAME}"
 VIAddVersionKey "FileDescription" "${SHORTDESCRIPTION}"
@@ -110,219 +112,238 @@ VIAddVersionKey "ProductVersion" "${VERSION}"
 !define MUI_LANGDLL_REGISTRY_KEY "${MANUPRODUCTKEY}"
 !define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
 
-; Installer pages, must be ordered as they appear
+; ===============================================================================================
+; ====================================== INSTALLER PAGES ========================================
+; ===============================================================================================
+!define MUI_BGCOLOR 222228
+!define MUI_TEXTCOLOR fdfdfd
+!define MUI_FINISHPAGE_TEXT_COLOR fdfdfd
+
 ; 1. Welcome Page
 !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
 !insertmacro MUI_PAGE_WELCOME
 
+; ----------------------------------------------
 ; 2. License Page (if defined)
-!if "${LICENSE}" != ""
-  !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
-  !insertmacro MUI_PAGE_LICENSE "${LICENSE}"
-!endif
-
-; 3. Install mode (if it is set to `both`)
-!if "${INSTALLMODE}" == "both"
-  !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
-  !insertmacro MULTIUSER_PAGE_INSTALLMODE
-!endif
-
-
-; 4. Custom page to ask user if he wants to reinstall/uninstall
-;    only if a previous installtion was detected
-Var ReinstallPageCheck
-Page custom PageReinstall PageLeaveReinstall
-Function PageReinstall
-  ; Uninstall previous WiX installation if exists.
-  ;
-  ; A WiX installer stores the isntallation info in registry
-  ; using a UUID and so we have to loop through all keys under
-  ; `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall`
-  ; and check if `DisplayName` and `Publisher` keys match ${PRODUCTNAME} and ${MANUFACTURER}
-  ;
-  ; This has a potentional issue that there maybe another installation that matches
-  ; our ${PRODUCTNAME} and ${MANUFACTURER} but wasn't installed by our WiX installer,
-  ; however, this should be fine since the user will have to confirm the uninstallation
-  ; and they can chose to abort it if doesn't make sense.
-  StrCpy $0 0
-  wix_loop:
-    EnumRegKey $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" $0
-    StrCmp $1 "" wix_done ; Exit loop if there is no more keys to loop on
-    IntOp $0 $0 + 1
-    ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1" "DisplayName"
-    ReadRegStr $R1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1" "Publisher"
-    StrCmp "$R0$R1" "${PRODUCTNAME}${MANUFACTURER}" 0 wix_loop
-    ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1" "UninstallString"
-    ${StrCase} $R1 $R0 "L"
-    ${StrLoc} $R0 $R1 "msiexec" ">"
-    StrCmp $R0 0 0 wix_done
-    StrCpy $R7 "wix"
-    StrCpy $R6 "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1"
-    Goto compare_version
-  wix_done:
-
-  ; Check if there is an existing installation, if not, abort the reinstall page
-  ReadRegStr $R0 SHCTX "${UNINSTKEY}" ""
-  ReadRegStr $R1 SHCTX "${UNINSTKEY}" "UninstallString"
-  ${IfThen} "$R0$R1" == "" ${|} Abort ${|}
-
-  ; Compare this installar version with the existing installation
-  ; and modify the messages presented to the user accordingly
-  compare_version:
-  StrCpy $R4 "$(older)"
-  ${If} $R7 == "wix"
-    ReadRegStr $R0 HKLM "$R6" "DisplayVersion"
-  ${Else}
-    ReadRegStr $R0 SHCTX "${UNINSTKEY}" "DisplayVersion"
-  ${EndIf}
-  ${IfThen} $R0 == "" ${|} StrCpy $R4 "$(unknown)" ${|}
-
-  nsis_tauri_utils::SemverCompare "${VERSION}" $R0
-  Pop $R0
-  ; Reinstalling the same version
-  ${If} $R0 == 0
-    StrCpy $R1 "$(alreadyInstalledLong)"
-    StrCpy $R2 "$(addOrReinstall)"
-    StrCpy $R3 "$(uninstallApp)"
-    !insertmacro MUI_HEADER_TEXT "$(alreadyInstalled)" "$(chooseMaintenanceOption)"
-    StrCpy $R5 "2"
-  ; Upgrading
-  ${ElseIf} $R0 == 1
-    StrCpy $R1 "$(olderOrUnknownVersionInstalled)"
-    StrCpy $R2 "$(uninstallBeforeInstalling)"
-    StrCpy $R3 "$(dontUninstall)"
-    !insertmacro MUI_HEADER_TEXT "$(alreadyInstalled)" "$(choowHowToInstall)"
-    StrCpy $R5 "1"
-  ; Downgrading
-  ${ElseIf} $R0 == -1
-    StrCpy $R1 "$(newerVersionInstalled)"
-    StrCpy $R2 "$(uninstallBeforeInstalling)"
-    !if "${ALLOWDOWNGRADES}" == "true"
-      StrCpy $R3 "$(dontUninstall)"
-    !else
-      StrCpy $R3 "$(dontUninstallDowngrade)"
-    !endif
-    !insertmacro MUI_HEADER_TEXT "$(alreadyInstalled)" "$(choowHowToInstall)"
-    StrCpy $R5 "1"
-  ${Else}
-    Abort
-  ${EndIf}
-
-  Call SkipIfPassive
-
-  nsDialogs::Create 1018
-  Pop $R4
-  ${IfThen} $(^RTL) == 1 ${|} nsDialogs::SetRTL $(^RTL) ${|}
-
-  ${NSD_CreateLabel} 0 0 100% 24u $R1
-  Pop $R1
-
-  ${NSD_CreateRadioButton} 30u 50u -30u 8u $R2
-  Pop $R2
-  ${NSD_OnClick} $R2 PageReinstallUpdateSelection
-
-  ${NSD_CreateRadioButton} 30u 70u -30u 8u $R3
-  Pop $R3
-  ; disable this radio button if downgrading and downgrades are disabled
-  !if "${ALLOWDOWNGRADES}" == "false"
-    ${IfThen} $R0 == -1 ${|} EnableWindow $R3 0 ${|}
+  !if "${LICENSE}" != ""
+    !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+    !insertmacro MUI_PAGE_LICENSE "${LICENSE}"
   !endif
-  ${NSD_OnClick} $R3 PageReinstallUpdateSelection
 
-  ; Check the first radio button if this the first time
-  ; we enter this page or if the second button wasn't
-  ; selected the last time we were on this page
-  ${If} $ReinstallPageCheck != 2
-    SendMessage $R2 ${BM_SETCHECK} ${BST_CHECKED} 0
-  ${Else}
-    SendMessage $R3 ${BM_SETCHECK} ${BST_CHECKED} 0
-  ${EndIf}
+; ----------------------------------------------
+; 3. Install mode (if it is set to `both`)
+  !if "${INSTALLMODE}" == "both"
+    !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+    !insertmacro MULTIUSER_PAGE_INSTALLMODE
+  !endif
 
-  ${NSD_SetFocus} $R2
-  nsDialogs::Show
-FunctionEnd
-Function PageReinstallUpdateSelection
-  ${NSD_GetState} $R2 $R1
-  ${If} $R1 == ${BST_CHECKED}
-    StrCpy $ReinstallPageCheck 1
-  ${Else}
-    StrCpy $ReinstallPageCheck 2
-  ${EndIf}
-FunctionEnd
-Function PageLeaveReinstall
-  ${NSD_GetState} $R2 $R1
-
-  ; $R5 holds whether we are reinstalling the same version or not
-  ; $R5 == "1" -> different versions
-  ; $R5 == "2" -> same version
-  ;
-  ; $R1 holds the radio buttons state. its meaning is dependant on the context
-  StrCmp $R5 "1" 0 +2 ; Existing install is not the same version?
-    StrCmp $R1 "1" reinst_uninstall reinst_done ; $R1 == "1", then user chose to uninstall existing version, otherwise skip uninstalling
-  StrCmp $R1 "1" reinst_done ; Same version? skip uninstalling
-
-  reinst_uninstall:
-    HideWindow
-    ClearErrors
-
+; ----------------------------------------------
+; 4. Custom page to ask user if he wants to reinstall/uninstall
+; only if a previous installtion was detected
+  Var ReinstallPageCheck
+  Page custom PageReinstall PageLeaveReinstall
+  Function PageReinstall
+    ; Uninstall previous WiX installation if exists.
+    ;
+    ; A WiX installer stores the isntallation info in registry
+    ; using a UUID and so we have to loop through all keys under
+    ; `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall`
+    ; and check if `DisplayName` and `Publisher` keys match ${PRODUCTNAME} and ${MANUFACTURER}
+    ;
+    ; This has a potentional issue that there maybe another installation that matches
+    ; our ${PRODUCTNAME} and ${MANUFACTURER} but wasn't installed by our WiX installer,
+    ; however, this should be fine since the user will have to confirm the uninstallation
+    ; and they can chose to abort it if doesn't make sense.
+    StrCpy $0 0
+    wix_loop:
+      EnumRegKey $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" $0
+      StrCmp $1 "" wix_done ; Exit loop if there is no more keys to loop on
+      IntOp $0 $0 + 1
+      ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1" "DisplayName"
+      ReadRegStr $R1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1" "Publisher"
+      StrCmp "$R0$R1" "${PRODUCTNAME}${MANUFACTURER}" 0 wix_loop
+      ReadRegStr $R0 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1" "UninstallString"
+      ${StrCase} $R1 $R0 "L"
+      ${StrLoc} $R0 $R1 "msiexec" ">"
+      StrCmp $R0 0 0 wix_done
+      StrCpy $R7 "wix"
+      StrCpy $R6 "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$1"
+      Goto compare_version
+    wix_done:
+  
+    ; Check if there is an existing installation, if not, abort the reinstall page
+    ReadRegStr $R0 SHCTX "${UNINSTKEY}" ""
+    ReadRegStr $R1 SHCTX "${UNINSTKEY}" "UninstallString"
+    ${IfThen} "$R0$R1" == "" ${|} Abort ${|}
+  
+    ; Compare this installar version with the existing installation
+    ; and modify the messages presented to the user accordingly
+    compare_version:
+    StrCpy $R4 "$(older)"
     ${If} $R7 == "wix"
-      ReadRegStr $R1 HKLM "$R6" "UninstallString"
-      ExecWait '$R1' $0
+      ReadRegStr $R0 HKLM "$R6" "DisplayVersion"
     ${Else}
-      ReadRegStr $4 SHCTX "${MANUPRODUCTKEY}" ""
-      ReadRegStr $R1 SHCTX "${UNINSTKEY}" "UninstallString"
-      ExecWait '$R1 /P _?=$4' $0
+      ReadRegStr $R0 SHCTX "${UNINSTKEY}" "DisplayVersion"
     ${EndIf}
-
-    BringToFront
-
-    ${IfThen} ${Errors} ${|} StrCpy $0 2 ${|} ; ExecWait failed, set fake exit code
-
-    ${If} $0 <> 0
-    ${OrIf} ${FileExists} "$INSTDIR\${MAINBINARYNAME}.exe"
-      ${If} $0 = 1 ; User aborted uninstaller?
-        StrCmp $R5 "2" 0 +2 ; Is the existing install the same version?
-          Quit ; ...yes, already installed, we are done
-        Abort
-      ${EndIf}
-      MessageBox MB_ICONEXCLAMATION "$(unableToUninstall)"
+    ${IfThen} $R0 == "" ${|} StrCpy $R4 "$(unknown)" ${|}
+  
+    nsis_tauri_utils::SemverCompare "${VERSION}" $R0
+    Pop $R0
+    ; Reinstalling the same version
+    ${If} $R0 == 0
+      StrCpy $R1 "$(alreadyInstalledLong)"
+      StrCpy $R2 "$(addOrReinstall)"
+      StrCpy $R3 "$(uninstallApp)"
+      !insertmacro MUI_HEADER_TEXT "$(alreadyInstalled)" "$(chooseMaintenanceOption)"
+      StrCpy $R5 "2"
+    ; Upgrading
+    ${ElseIf} $R0 == 1
+      StrCpy $R1 "$(olderOrUnknownVersionInstalled)"
+      StrCpy $R2 "$(uninstallBeforeInstalling)"
+      StrCpy $R3 "$(dontUninstall)"
+      !insertmacro MUI_HEADER_TEXT "$(alreadyInstalled)" "$(choowHowToInstall)"
+      StrCpy $R5 "1"
+    ; Downgrading
+    ${ElseIf} $R0 == -1
+      StrCpy $R1 "$(newerVersionInstalled)"
+      StrCpy $R2 "$(uninstallBeforeInstalling)"
+      !if "${ALLOWDOWNGRADES}" == "true"
+        StrCpy $R3 "$(dontUninstall)"
+      !else
+        StrCpy $R3 "$(dontUninstallDowngrade)"
+      !endif
+      !insertmacro MUI_HEADER_TEXT "$(alreadyInstalled)" "$(choowHowToInstall)"
+      StrCpy $R5 "1"
+    ${Else}
       Abort
-    ${Else}
-      StrCpy $0 $R1 1
-      ${IfThen} $0 == '"' ${|} StrCpy $R1 $R1 -1 1 ${|} ; Strip quotes from UninstallString
-      Delete $R1
-      RMDir $INSTDIR
     ${EndIf}
-  reinst_done:
-FunctionEnd
+  
+    Call SkipIfPassive
+  
+    nsDialogs::Create 1018
+    Pop $R4
+    ${IfThen} $(^RTL) == 1 ${|} nsDialogs::SetRTL $(^RTL) ${|}
+  
+    ${NSD_CreateLabel} 0 0 100% 24u $R1
+    Pop $R1
+  
+    ${NSD_CreateRadioButton} 30u 50u -30u 8u $R2
+    Pop $R2
+    ${NSD_OnClick} $R2 PageReinstallUpdateSelection
+  
+    ${NSD_CreateRadioButton} 30u 70u -30u 8u $R3
+    Pop $R3
+    ; disable this radio button if downgrading and downgrades are disabled
+    !if "${ALLOWDOWNGRADES}" == "false"
+      ${IfThen} $R0 == -1 ${|} EnableWindow $R3 0 ${|}
+    !endif
+    ${NSD_OnClick} $R3 PageReinstallUpdateSelection
+  
+    ; Check the first radio button if this the first time
+    ; we enter this page or if the second button wasn't
+    ; selected the last time we were on this page
+    ${If} $ReinstallPageCheck != 2
+      SendMessage $R2 ${BM_SETCHECK} ${BST_CHECKED} 0
+    ${Else}
+      SendMessage $R3 ${BM_SETCHECK} ${BST_CHECKED} 0
+    ${EndIf}
+  
+    ${NSD_SetFocus} $R2
+    nsDialogs::Show
+  FunctionEnd
+  Function PageReinstallUpdateSelection
+    ${NSD_GetState} $R2 $R1
+    ${If} $R1 == ${BST_CHECKED}
+      StrCpy $ReinstallPageCheck 1
+    ${Else}
+      StrCpy $ReinstallPageCheck 2
+    ${EndIf}
+  FunctionEnd
+  Function PageLeaveReinstall
+    ${NSD_GetState} $R2 $R1
+  
+    ; $R5 holds whether we are reinstalling the same version or not
+    ; $R5 == "1" -> different versions
+    ; $R5 == "2" -> same version
+    ;
+    ; $R1 holds the radio buttons state. its meaning is dependant on the context
+    StrCmp $R5 "1" 0 +2 ; Existing install is not the same version?
+      StrCmp $R1 "1" reinst_uninstall reinst_done ; $R1 == "1", then user chose to uninstall existing version, otherwise skip uninstalling
+    StrCmp $R1 "1" reinst_done ; Same version? skip uninstalling
+  
+    reinst_uninstall:
+      HideWindow
+      ClearErrors
+  
+      ${If} $R7 == "wix"
+        ReadRegStr $R1 HKLM "$R6" "UninstallString"
+        ExecWait '$R1' $0
+      ${Else}
+        ReadRegStr $4 SHCTX "${MANUPRODUCTKEY}" ""
+        ReadRegStr $R1 SHCTX "${UNINSTKEY}" "UninstallString"
+        ExecWait '$R1 /P _?=$4' $0
+      ${EndIf}
+  
+      BringToFront
+  
+      ${IfThen} ${Errors} ${|} StrCpy $0 2 ${|} ; ExecWait failed, set fake exit code
+  
+      ${If} $0 <> 0
+      ${OrIf} ${FileExists} "$INSTDIR\${MAINBINARYNAME}.exe"
+        ${If} $0 = 1 ; User aborted uninstaller?
+          StrCmp $R5 "2" 0 +2 ; Is the existing install the same version?
+            Quit ; ...yes, already installed, we are done
+          Abort
+        ${EndIf}
+        MessageBox MB_ICONEXCLAMATION "$(unableToUninstall)"
+        Abort
+      ${Else}
+        StrCpy $0 $R1 1
+        ${IfThen} $0 == '"' ${|} StrCpy $R1 $R1 -1 1 ${|} ; Strip quotes from UninstallString
+        Delete $R1
+        RMDir $INSTDIR
+      ${EndIf}
+    reinst_done:
+  FunctionEnd
 
+; ----------------------------------------------
 ; 5. Choose install directoy page
 !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
 !insertmacro MUI_PAGE_DIRECTORY
 
+; ----------------------------------------------
 ; 6. Start menu shortcut page
-!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
-Var AppStartMenuFolder
-!insertmacro MUI_PAGE_STARTMENU Application $AppStartMenuFolder
+  !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+  Var AppStartMenuFolder
+  !insertmacro MUI_PAGE_STARTMENU Application $AppStartMenuFolder
 
+; ----------------------------------------------
 ; 7. Installation page
-!insertmacro MUI_PAGE_INSTFILES
+  !insertmacro MUI_PAGE_INSTFILES
 
+; ----------------------------------------------
 ; 8. Finish page
-;
-; Don't auto jump to finish page after installation page,
-; because the installation page has useful info that can be used debug any issues with the installer.
-!define MUI_FINISHPAGE_NOAUTOCLOSE
-; Use show readme button in the finish page as a button create a desktop shortcut
-!define MUI_FINISHPAGE_SHOWREADME
-!define MUI_FINISHPAGE_SHOWREADME_TEXT "$(createDesktop)"
-!define MUI_FINISHPAGE_SHOWREADME_FUNCTION CreateDesktopShortcut
-; Show run app after installation.
-!define MUI_FINISHPAGE_RUN "$INSTDIR\${MAINBINARYNAME}.exe"
-!define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
-!insertmacro MUI_PAGE_FINISH
+  ; Don't auto jump to finish page after installation page,
+  ; because the installation page has useful info that can be used debug any issues with the installer.
+  !define MUI_FINISHPAGE_NOAUTOCLOSE
 
-; Uninstaller Pages
+  ; Show sponsor link
+  !define MUI_FINISHPAGE_LINK_COLOR 59a7f6
+  !define MUI_FINISHPAGE_LINK "Sponsor this project! 🤍"
+  !define MUI_FINISHPAGE_LINK_LOCATION "https://github.com/sponsors/eythaann"
+
+  Function RunOnLeave
+    Exec '"$INSTDIR\${MAINBINARYNAME}.exe"'
+  FunctionEnd
+
+  !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+  !define MUI_PAGE_CUSTOMFUNCTION_LEAVE RunOnLeave
+  !insertmacro MUI_PAGE_FINISH
+
+; ===============================================================================================
+; ====================================== UNINSTALLER PAGES ======================================
+; ===============================================================================================
+
 ; 1. Confirm uninstall page
 Var DeleteAppDataCheckbox
 Var DeleteAppDataCheckboxState
@@ -579,6 +600,7 @@ Section Install
   ; Create start menu shortcut (GUI)
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     Call CreateStartMenuShortcut
+    Call CreateDesktopShortcut
   !insertmacro MUI_STARTMENU_WRITE_END
 
   ; Create shortcuts for silent and passive installers, which

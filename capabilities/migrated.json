@@ -16,15 +16,11 @@
     "resources:default",
     "menu:default",
     "tray:default",
-    "fs:allow-read-file",
+
     "fs:allow-read-text-file",
-    "fs:allow-write-file",
-    "fs:allow-read-dir",
-    "fs:allow-copy-file",
-    "fs:allow-mkdir",
-    "fs:allow-remove",
-    "fs:allow-rename",
+    "fs:allow-write-text-file",
     "fs:allow-exists",
+
     {
       "identifier": "fs:scope",
       "allow": [

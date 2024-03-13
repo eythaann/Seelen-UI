@@ -14,6 +14,7 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
 use tauri_plugin_autostart::MacosLauncher;
+use tauri_plugin_log::{Target, TargetKind};
 use tauri_plugin_shell::ShellExt;
 use tray::handle_tray_icon;
 use windows::set_windows_events;
@@ -53,9 +54,9 @@ fn run_ahk_installer() {
     tauri::async_runtime::spawn(async move {
         let app = SEELEN.lock().handle().clone();
         app.shell()
-        .command("static\\redis\\AutoHotKey_setup.exe")
-        .spawn()
-        .expect("Fail on running ahk intaller");
+            .command("static\\redis\\AutoHotKey_setup.exe")
+            .spawn()
+            .expect("Fail on running ahk intaller");
     });
 }
 
@@ -74,9 +75,22 @@ fn main() -> Result<()> {
         ))
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             println!("{}, {argv:?}, {cwd}", app.package_info().name);
-            app.emit("single-instance", Payload { args: argv, cwd })
-                .unwrap();
+            
+            if argv.contains(&"roulette".to_owned()) {
+                return app.emit("open-roulette", ()).unwrap();
+            }
+
+            app.emit("open-settings", ()).unwrap();
         }))
+        .plugin(
+            tauri_plugin_log::Builder::new()
+                .targets([
+                    Target::new(TargetKind::Stdout),
+                    Target::new(TargetKind::LogDir { file_name: None }),
+                    Target::new(TargetKind::Webview),
+                ])
+                .build(),
+        )
         .invoke_handler(tauri::generate_handler![run_ahk_installer])
         .setup(|app| {
             SEELEN.lock().set_handle(app.handle().clone());

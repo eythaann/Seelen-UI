@@ -10,7 +10,7 @@ export async function loadUserSettings(route?: string) {
   const userSettings: UserSettings = {
     jsonSettings: {},
     yamlSettings: [],
-    ahkEnabled: true,
+    ahkEnabled: false,
   };
 
   const json_route = route || await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json');
@@ -28,6 +28,7 @@ export async function loadUserSettings(route?: string) {
     userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
   }
 
+  userSettings.ahkEnabled = !!userSettings.jsonSettings.ahk_enabled;
   return userSettings;
 };
 
