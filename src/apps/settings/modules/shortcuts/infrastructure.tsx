@@ -25,8 +25,8 @@ export function Shortcuts() {
             <Tooltip
               title={
                 <>
-                  Disable if you will implement your own shortcuts. Not is necessary disable if you will only mutate the
-                  .ahk files in the komorebi-ui config folder
+                  Disable if you will implement your own shortcuts. Not is necessary disable if you
+                  will only mutate the .ahk files in the komorebi-ui config folder
                 </>
               }
             >
@@ -34,6 +34,13 @@ export function Shortcuts() {
             </Tooltip>
           </span>
           <Switch value={ahkEnable} onChange={onChange} />
+        </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <span>Open this settings window</span>
+          <span>Win + K</span>
         </SettingsOption>
       </SettingsGroup>
 
@@ -86,33 +93,33 @@ export function Shortcuts() {
         <SettingsSubGroup label="Move">
           <SettingsOption>
             <span>window to the left</span>
-            <span>Alt + Shif + A</span>
+            <span>Win + Shif + A</span>
           </SettingsOption>
           <SettingsOption>
             <span>window to the right</span>
-            <span>Alt + Shif + D</span>
+            <span>Win + Shif + D</span>
           </SettingsOption>
           <SettingsOption>
             <span>window to the top</span>
-            <span>Alt + Shif + W</span>
+            <span>Win + Shif + W</span>
           </SettingsOption>
           <SettingsOption>
             <span>window to the bottom</span>
-            <span>Alt + Shif + S</span>
+            <span>Win + Shif + S</span>
           </SettingsOption>
 
           <SettingsOption>
             <span>Flip layout horizontal</span>
-            <span>Alt + Shif + x</span>
+            <span>Win + Shif + x</span>
           </SettingsOption>
           <SettingsOption>
             <span>Flip layout vertical</span>
-            <span>Alt + Shif + z</span>
+            <span>Win + Shif + z</span>
           </SettingsOption>
 
           <SettingsOption>
             <span>Promote</span>
-            <span>Alt + Shif + Enter</span>
+            <span>Win + Shif + Enter</span>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
