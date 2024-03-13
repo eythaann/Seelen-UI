@@ -26,7 +26,6 @@ import { RootState } from '../domain/state';
 
 const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
   return {
-    autostart: generals.autostart,
     altFocusHack: !!json.alt_focus_hack,
     animations: {
       finishMiminization: json.animations?.finish_miminization_before_restore ?? generals.animations.finishMiminization,
