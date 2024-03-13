@@ -7,6 +7,7 @@
  */
 #Requires AutoHotkey v2.0
 #SingleInstance Force
+#NoTrayIcon
 
 #Include komorebic.lib.ahk
 #Include seelen.lib.ahk
