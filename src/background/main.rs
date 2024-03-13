@@ -14,7 +14,7 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
 use tauri_plugin_autostart::MacosLauncher;
-use tauri_plugin_log::{Target, TargetKind};
+use tauri_plugin_log::{fern::colors::ColoredLevelConfig, Target, TargetKind};
 use tauri_plugin_shell::ShellExt;
 use tray::handle_tray_icon;
 use windows::set_windows_events;
@@ -89,6 +89,7 @@ fn main() -> Result<()> {
                     Target::new(TargetKind::LogDir { file_name: None }),
                     Target::new(TargetKind::Webview),
                 ])
+                .with_colors(ColoredLevelConfig::default())
                 .build(),
         )
         .invoke_handler(tauri::generate_handler![run_ahk_installer])

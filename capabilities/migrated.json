@@ -20,6 +20,7 @@
     "fs:allow-read-text-file",
     "fs:allow-write-text-file",
     "fs:allow-exists",
+    "fs:allow-mkdir",
 
     {
       "identifier": "fs:scope",
@@ -35,6 +36,7 @@
         }
       ]
     },
+
     "window:allow-show",
     "window:allow-close",
     "window:allow-start-dragging",
@@ -43,6 +45,11 @@
     "autostart:allow-disable",
     "autostart:allow-is-enabled",
 
-    "shell:allow-open"
+    "dialog:allow-save",
+    "dialog:allow-open",
+
+    "process:allow-restart",
+
+    "log:allow-log"
   ]
 }

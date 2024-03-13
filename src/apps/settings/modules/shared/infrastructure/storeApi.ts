@@ -13,7 +13,12 @@ export async function loadUserSettings(route?: string) {
     ahkEnabled: false,
   };
 
-  const json_route = route || await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json');
+  const json_route =
+    route || (await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json'));
+
+  if (!(await fs.exists(json_route))) {
+    return userSettings;
+  }
 
   userSettings.jsonSettings = JSON.parse(await fs.readTextFile(json_route));
 
@@ -30,13 +35,17 @@ export async function loadUserSettings(route?: string) {
 
   userSettings.ahkEnabled = !!userSettings.jsonSettings.ahk_enabled;
   return userSettings;
-};
+}
 
 export async function loadAppsTemplates() {
   const result: AppTemplate[] = [];
 
   for (const AppTemplateDeclaration of AppsTemplates) {
-    const processed = yaml.load(await fs.readTextFile(await path.resolveResource(`static/apps_templates/${AppTemplateDeclaration.path}`)));
+    const processed = yaml.load(
+      await fs.readTextFile(
+        await path.resolveResource(`static/apps_templates/${AppTemplateDeclaration.path}`),
+      ),
+    );
     const apps = Array.isArray(processed) ? processed : [];
     result.push({
       name: AppTemplateDeclaration.name,
@@ -75,6 +84,11 @@ export async function saveUserSettings(settings: UserSettings) {
   } */
 
   settings.jsonSettings.ahk_enabled = settings.ahkEnabled;
+
+  if (!(await fs.exists(json_route))) {
+    await fs.mkdir(await path.join(await path.homeDir(), '.config/komorebi-ui'));
+  }
+
   await fs.writeTextFile(json_route, JSON.stringify(settings.jsonSettings));
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
 }
@@ -95,7 +109,7 @@ export async function ImportApps() {
 
   for (const file of [files].flat()) {
     const processed = yaml.load(await fs.readTextFile(file.path));
-    data.push(...Array.isArray(processed) ? processed : []);
+    data.push(...(Array.isArray(processed) ? processed : []));
   }
 
   return data;

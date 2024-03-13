@@ -36,7 +36,9 @@ export const LoadSettingsToStore = async (route?: string) => {
 
   const userSettings = await loadUserSettings(route);
   if (!Object.keys(userSettings.jsonSettings).length) {
-    StartUser();
+    if (!route) { // avoid start user on manual user loading file
+      StartUser();
+    }
     return;
   }
 

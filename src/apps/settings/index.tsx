@@ -1,3 +1,4 @@
+import { wrapConsole } from '../ConsoleWrapper';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
@@ -14,6 +15,7 @@ import './styles/reset.css';
 import './styles/global.css';
 
 (async function main() {
+  wrapConsole();
   await LoadSettingsToStore();
 
   const container = document.getElementById('root');

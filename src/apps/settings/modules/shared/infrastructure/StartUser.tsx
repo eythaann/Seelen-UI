@@ -13,8 +13,11 @@ const showNewUserTutorial = () => {
     className: cs.welcome,
     content: (
       <div>
-        <p>Komorebi UI by default needs AutoHotKey to work.</p>
-        <p>You can omit this step if you will configure your own shortcuts system.</p>
+        <p>
+          Komorebi UI by default needs AutoHotKey to work.
+          You can omit this step if you will configure your own shortcuts system.
+          Please restart your pc after install AutoHotKey.
+        </p>
       </div>
     ),
     okText: 'Install',
