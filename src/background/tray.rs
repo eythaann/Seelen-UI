@@ -14,7 +14,7 @@ use crate::SEELEN;
 pub fn handle_tray_icon(app: &mut App) -> Result<()> {
     let settings = MenuItemBuilder::with_id("settings", "Open Settings").build(app)?;
 
-    let toggle_pause = MenuItemBuilder::with_id("toggle", "Pause/Resume").build(app)?;
+    let toggle_pause = MenuItemBuilder::with_id("pause", "Pause/Resume").build(app)?;
     let restart = MenuItemBuilder::with_id("restart", "Reload").build(app)?;
 
     let quit = MenuItemBuilder::with_id("quit", "Quit").build(app)?;
