@@ -5,6 +5,8 @@
 .env
 target
 gen
+/.cert
 
 komorebi.exe
+komorebi-wm.exe
 komorebic.exe
