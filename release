@@ -1,11 +1,11 @@
 {
-  "version": "v1.0.0-prerelease.4",
-  "notes": "### fix\n- icon not showing on tray\n- poor icon quality on task bar\n- StartUp running bad exe file",
-  "pub_date": "2024-03-18T16:42:00.304Z",
+  "version": "1.0.0-prerelease.6",
+  "notes": "### added\n- Enable Updater 🎉",
+  "pub_date": "2024-03-18T20:38:22.727Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0dXUkQwVm82dm1wMlRqWUtlNkhVYTFHeVR0SG5tcXRzU3hQUGt3dTFaQmUxcWwwZklweTN3S1FPTWhGNkJXNzQ1NzlLTDkydHlTZ1lzMFliN1dwSFF3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEwNzkyNTY4CWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS4zX3g2NC1zZXR1cC5uc2lzLnppcApodG4xeUxhOWh2NUpqTG55Y08zSTB5NlBLVGpsTldURXVQcXR3RU1kSHl5YmpWWmhFSW5udkQyNWVGUzFaOW1mTGNzS01QSVRNbkFFTElzM1l5ZWFCZz09Cg==",
-      "url": "https://github.com/eythaann/Komorebi-UI/releases/download/v1.0.0-prerelease.3/Komorebi.UI_1.0.0-prerelease.3_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU1A4RUJTcXpTVXFDVlZkTS9GZHZPL25rVHVoSEFlTGJudW1vaXVpQ2V1MnB2MDU4NHN6OFhBZnN2T0txQzh1YVVrQzJIaWZCL0R6TUFjNWxjcG5OUmc4PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEwNzk0MzAxCWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS42X3g2NC1zZXR1cC5uc2lzLnppcAp5TWdNLzVza0VrbDFMRjIrQXRRODdLSFFwc1NVN2VsMnFwYURTWUNoU1p3TXVoN0tnN1c3VnVrNVQzZHdQb3BMMW5QbElOemVBUXpLd3V3eFdNU0dDdz09Cg==",
+      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v1.0.0-prerelease.6/Komorebi.UI_1.0.0-prerelease.6_x64-setup.nsis.zip"
     }
   }
 }

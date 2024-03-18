@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.6]
 ### added
 - Enable Updater 🎉
 
