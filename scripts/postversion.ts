@@ -1,8 +1,6 @@
 import { execSync } from 'child_process';
 import fs from 'fs';
 
-execSync('npm run build');
-
 const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 
 let changelogContent = fs.readFileSync('changelog.md', 'utf-8');
