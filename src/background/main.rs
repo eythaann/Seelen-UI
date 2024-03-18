@@ -108,7 +108,7 @@ fn main() -> Result<()> {
                 let app = SEELEN.lock().handle().clone();
 
                 app.shell()
-                    .command("komorebi.exe")
+                    .command("komorebi-wm.exe")
                     .args(["-c", &config_route])
                     .spawn()
                     .expect("Failed to spawn komorebi");

@@ -1,3 +1,4 @@
+use tauri::image::Image;
 use tauri::tray::ClickType;
 use tauri::{
     menu::{MenuBuilder, MenuEvent, MenuItemBuilder},
@@ -27,6 +28,8 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
         .build()?;
 
     TrayIconBuilder::new()
+        .icon(Image::from_path("./static/icons/32x32.png")?)
+        .tooltip("Komorebi UI")
         .menu(&menu)
         .on_menu_event(
             move |app: &AppHandle, event: MenuEvent| match event.id().as_ref() {

@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- icon not showing on tray
+- poor icon quality on task bar
+- StartUp running bad exe file
+
 ## [1.0.0-prerelease.2]
 ## [1.0.0-prerelease.1]
 ### added

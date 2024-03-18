@@ -13,7 +13,7 @@ try {
 
   // Move the compiled executables
   const sourcePath = join('./', 'target', 'x86_64-pc-windows-msvc', 'release');
-  fs.copyFileSync(join(sourcePath, 'komorebi.exe'), '../komorebi.exe');
+  fs.copyFileSync(join(sourcePath, 'komorebi.exe'), '../komorebi-wm.exe');
   fs.copyFileSync(join(sourcePath, 'komorebic.exe'), '../komorebic.exe');
 
   console.log('    Compilation and file movement completed successfully.');

@@ -38,7 +38,7 @@
     "longDescription": "",
     "resources": [
       "static/*",
-      "komorebi.exe",
+      "komorebi-wm.exe",
       "komorebic.exe"
     ],
     "shortDescription": "",
