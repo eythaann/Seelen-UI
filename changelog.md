@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.3]
 ### fix
 - icon not showing on tray
 - poor icon quality on task bar
