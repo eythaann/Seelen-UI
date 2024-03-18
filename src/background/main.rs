@@ -17,7 +17,7 @@ use tauri_plugin_autostart::MacosLauncher;
 use tauri_plugin_log::{fern::colors::ColoredLevelConfig, Target, TargetKind};
 use tauri_plugin_shell::ShellExt;
 use tray::handle_tray_icon;
-use windows::set_windows_events;
+use windows::{check_updates_window, set_windows_events};
 
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
@@ -69,13 +69,14 @@ fn main() -> Result<()> {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_cli::init())
         .plugin(tauri_plugin_process::init())
+        .plugin(tauri_plugin_updater::Builder::new().build())
         .plugin(tauri_plugin_autostart::init(
             MacosLauncher::LaunchAgent,
             Some(vec!["--silent"]),
         ))
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             println!("{}, {argv:?}, {cwd}", app.package_info().name);
-            
+
             if argv.contains(&"roulette".to_owned()) {
                 return app.emit("open-roulette", ()).unwrap();
             }
@@ -96,16 +97,18 @@ fn main() -> Result<()> {
         .setup(|app| {
             SEELEN.lock().set_handle(app.handle().clone());
             set_windows_events(app)?;
-
-            let config_route = app
-                .path()
-                .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)?
-                .to_str()
-                .unwrap_or("")
-                .to_string();
+            check_updates_window(app.app_handle())?;
 
             tauri::async_runtime::spawn(async move {
                 let app = SEELEN.lock().handle().clone();
+
+                let config_route = app
+                .path()
+                .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)
+                .expect("Failed to resolve path")
+                .to_str()
+                .unwrap_or("")
+                .to_string();
 
                 app.shell()
                     .command("komorebi-wm.exe")

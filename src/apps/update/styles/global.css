@@ -1,0 +1,74 @@
+body {
+  overflow: hidden;
+  cursor: default;
+  background: transparent;
+
+  :not(input):not(textarea),
+  :not(input):not(textarea)::after,
+  :not(input):not(textarea)::before {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-500);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-gray-600);
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  border-radius: 20px;
+  background-color: var(--color-gray-100);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow: hidden;
+
+  .title {
+    font-size: 20px;
+    font-weight: bold;
+
+    .package {
+      color: var(--color-blue-900);
+    }
+  }
+
+  .description {
+    flex: 1;
+    overflow: auto;
+
+    b {
+      font-weight: bold;
+    }
+
+    a {
+      color: var(--color-blue-900);
+    }
+  }
+
+  .footer {
+    display: flex;
+    gap: 14px;
+    justify-content: flex-end;
+
+    > button {
+      font-weight: bold;
+    }
+  }
+}

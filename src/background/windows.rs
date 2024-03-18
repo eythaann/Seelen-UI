@@ -41,6 +41,28 @@ pub fn show_seelenpad_window(app: &AppHandle) -> Result<WebviewWindow> {
     Ok(window)
 }
 
+pub fn check_updates_window(app: &AppHandle) -> Result<WebviewWindow> {
+    let window = tauri::WebviewWindowBuilder::new(
+        app,
+        "updater",
+        tauri::WebviewUrl::App("update/index.html".into()),
+    )
+    .inner_size(500.0, 240.0)
+    .maximizable(false)
+    .minimizable(true)
+    .resizable(false)
+    .title("Update Available")
+    .visible(false)
+    .decorations(false)
+    .transparent(true)
+    .shadow(false)
+    .center()
+    .always_on_top(true)
+    .build()?;
+
+    Ok(window)
+}
+
 pub fn set_windows_events(app: &mut App) -> Result<()> {
     app.listen("open-settings", |_| {
         show_settings_window(SEELEN.lock().handle()).ok();

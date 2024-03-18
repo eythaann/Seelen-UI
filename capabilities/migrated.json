@@ -5,7 +5,8 @@
   "local": true,
   "windows": [
     "settings",
-    "seelenpad"
+    "seelenpad",
+    "updater"
   ],
   "permissions": [
     "path:default",
@@ -50,6 +51,11 @@
 
     "process:allow-restart",
 
-    "log:allow-log"
+    "log:allow-log",
+
+    "updater:allow-check",
+    "updater:allow-download-and-install",
+
+    "shell:allow-open"
   ]
 }

@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### added
+- Enable Updater 🎉
+
 ## [1.0.0-prerelease.3]
 ### fix
 - icon not showing on tray

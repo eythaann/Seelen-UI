@@ -11,7 +11,7 @@
     "build:komorebi": "ts-node scripts/build_komorebi.ts",
     "postbuild:komorebi": "",
     "lint": "eslint ./**/** --fix --max-warnings 0",
-    "postversion": "ts-node scripts/update_changelog.ts"
+    "postversion": "ts-node scripts/postversion.ts"
   },
   "keywords": [],
   "author": {
@@ -30,7 +30,8 @@
     "@tauri-apps/plugin-dialog": "^2.0.0-beta.2",
     "@tauri-apps/plugin-fs": "^2.0.0-beta.2",
     "@tauri-apps/plugin-process": "^2.0.0-beta.2",
-    "@tauri-apps/plugin-log": "^2.0.0-beta.2"
+    "@tauri-apps/plugin-log": "^2.0.0-beta.2",
+    "@tauri-apps/plugin-updater": "^2.0.0-beta.2"
   },
   "devDependencies": {
     "@reduxjs/toolkit": "^2.2.1",

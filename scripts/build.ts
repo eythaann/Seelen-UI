@@ -2,6 +2,7 @@ import { config as loadEnv } from 'dotenv';
 import esbuild from 'esbuild';
 import fs from 'fs';
 import { compileFromFile } from 'json-schema-to-typescript';
+import path from 'path';
 import toml from 'toml';
 
 const { GITHUB_TOKEN: _, ...parsedEnv } = loadEnv().parsed!;
@@ -14,8 +15,12 @@ async function main() {
     await compileFromFile('komorebi/schema.asc.json'),
   );
 
+  const appFolders = fs
+    .readdirSync('src/apps')
+    .filter((item) => fs.statSync(path.join('src/apps', item)).isDirectory());
+
   await esbuild.build({
-    entryPoints: ['./src/apps/settings/index.tsx', './src/apps/seelenpad/index.tsx'],
+    entryPoints: appFolders.map((folder) => `./src/apps/${folder}/index.tsx`),
     bundle: true,
     minify: true,
     sourcemap: true,
@@ -31,8 +36,9 @@ async function main() {
     },
   });
 
-  fs.cpSync('src/apps/settings/index.html', 'dist/settings/index.html');
-  fs.cpSync('src/apps/seelenpad/index.html', 'dist/seelenpad/index.html');
+  appFolders.forEach((folder) => {
+    fs.cpSync(`src/apps/${folder}/index.html`, `dist/${folder}/index.html`);
+  });
 }
 
 main();
