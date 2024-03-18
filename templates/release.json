@@ -1,0 +1,11 @@
+{
+  "version": "{{version}}",
+  "notes": "{{notes}}",
+  "pub_date": "{{current_date}}",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "{{signature}}",
+      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v{{version}}/Komorebi.UI_{{version}}_x64-setup.nsis.zip"
+    }
+  }
+}
