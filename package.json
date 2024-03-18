@@ -1,7 +1,7 @@
 {
   "name": "komorebi-ui",
   "productName": "komorebi-ui",
-  "version": "1.0.0-prerelease.4",
+  "version": "1.0.0-prerelease.5",
   "description": "Komorebi UI Project",
   "scripts": {
     "tauri": "tauri",
