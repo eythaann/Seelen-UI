@@ -11,8 +11,7 @@
     "build:komorebi": "ts-node scripts/build_komorebi.ts",
     "postbuild:komorebi": "",
     "lint": "eslint ./**/** --fix --max-warnings 0",
-    "preversion": "npm run build",
-    "postversion": "ts-node scripts/postversion.ts"
+    "postversion": "npm run build && ts-node scripts/postversion.ts"
   },
   "keywords": [],
   "author": {
