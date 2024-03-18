@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+- add funcionality to pause btn on tray menu
+
 ## [1.0.0-prerelease.6]
 ### added
 - Enable Updater 🎉

@@ -5,6 +5,7 @@ use tauri::{
     tray::TrayIconBuilder,
     App, AppHandle,
 };
+use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
 use crate::windows::show_settings_window;
@@ -13,7 +14,7 @@ use crate::SEELEN;
 pub fn handle_tray_icon(app: &mut App) -> Result<()> {
     let settings = MenuItemBuilder::with_id("settings", "Open Settings").build(app)?;
 
-    let toggle_pause = MenuItemBuilder::with_id("toggle", "Pause").build(app)?;
+    let toggle_pause = MenuItemBuilder::with_id("toggle", "Pause/Resume").build(app)?;
     let restart = MenuItemBuilder::with_id("restart", "Reload").build(app)?;
 
     let quit = MenuItemBuilder::with_id("quit", "Quit").build(app)?;
@@ -37,7 +38,11 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
                     show_settings_window(app).ok();
                 }
                 "pause" => {
-                    println!("toggle clicked");
+                    app.shell()
+                        .command("komorebic.exe")
+                        .args(["toggle-pause"])
+                        .spawn()
+                        .expect("Failed to spawn komorebic");
                 }
                 "restart" => app.restart(),
                 "quit" => app.exit(0),
