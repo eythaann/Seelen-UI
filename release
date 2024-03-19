@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0-prerelease.9",
-  "notes": "## [1.0.0-prerelease.8]\n- add funcionality to pause btn on tray menu",
-  "pub_date": "2024-03-18T21:41:25.663Z",
+  "version": "1.0.0-prerelease.10",
+  "notes": "### features\n- add a update tab to allow users decide if will recive notifications for updates",
+  "pub_date": "2024-03-19T16:28:32.975Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0hhamFVL2phZ3J2MVVVTW13b2RUbTR5M1pxd3ZMZjE2czVWcSt0L2pCWTZod0JXVG9CdkNadTlYdTVxS3VjSHY3UXdKYS8yWm9GMWlqay83UjBOQ1FnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEwNzk4MDg0CWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS45X3g2NC1zZXR1cC5uc2lzLnppcApPVTI5T0syMnRmdHpGMzRsOFNPZlFSbVpxMnpFMEF2VkZXVFZmR1psU2J5TFN4V0ttNWNxYzdGMWwzaVplMEZETXZwRENiRmVGSWFhUmxIeFFwZmpDUT09Cg==",
-      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v1.0.0-prerelease.9/Komorebi.UI_1.0.0-prerelease.9_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0p4NCtxYVVGSFlPSlFCTXlUNWZNWXFCQWtRK1hYdjlJMGtZaEFGTWo5M1U0QmpzNTZXTEtKRmEvblhBVkMyQTBIc29TWUxZMlNIMlNSVEJwcStmNGdjPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEwODY1NzEwCWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS4xMF94NjQtc2V0dXAubnNpcy56aXAKNkl0N3hzaVNRM0U1djhoSVptWEFja3k3dmFLQ2ladU9sZ243dXlGK0lrSE1EK0pUN1ovU245M1oybGJDb1VyMnFQMFUrdkdVeWQzeG5peDRiVnBOQlE9PQo=",
+      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v1.0.0-prerelease.10/Komorebi.UI_1.0.0-prerelease.10_x64-setup.nsis.zip"
     }
   }
 }

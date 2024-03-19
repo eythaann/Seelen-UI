@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.10]
 ### features
 - add a update tab to allow users decide if will recive notifications for updates
 
