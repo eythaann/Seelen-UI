@@ -66,6 +66,7 @@ export const SaveStore = async () => {
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
       ahkEnabled: currentState.ahkEnabled,
+      updateNotification: currentState.updateNotification,
     });
     store.dispatch(RootActions.setSaved());
   } catch (error) {

@@ -5,6 +5,7 @@ export enum Route {
   SPECIFIT_APPS = 'specifit_apps',
   SHORTCUTS = 'shortcuts',
   INFO = 'info',
+  UPDATES = 'updates',
 }
 
 export const RouteLabels: Record<Route, string> = {
@@ -14,6 +15,7 @@ export const RouteLabels: Record<Route, string> = {
   [Route.SHORTCUTS]: 'Shortcuts',
   [Route.SPECIFIT_APPS]: 'Apps Configurations',
   [Route.INFO]: 'Information',
+  [Route.UPDATES]: 'Updates',
 };
 
 export const RouteExtraInfo: Record<Route, string | null> = {
@@ -26,6 +28,7 @@ export const RouteExtraInfo: Record<Route, string | null> = {
     the lastest added will be priorized, as note the table is sorted by default from lastest to old.
   `,
   [Route.INFO]: null,
+  [Route.UPDATES]: null,
 };
 
 export const RouteIcons: Record<Route, string> = {
@@ -35,4 +38,5 @@ export const RouteIcons: Record<Route, string> = {
   [Route.SHORTCUTS]: '🔡',
   [Route.SPECIFIT_APPS]: '🅰️',
   [Route.INFO]: '🛈',
+  [Route.UPDATES]: '🔄️',
 };

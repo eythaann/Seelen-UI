@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add a update tab to allow users decide if will recive notifications for updates
+
 ## [1.0.0-prerelease.9]
 ## [1.0.0-prerelease.8]
 - add funcionality to pause btn on tray menu

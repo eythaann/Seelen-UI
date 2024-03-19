@@ -249,7 +249,7 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
 };
 
 export const StaticSettingsToState = (userSettings: UserSettings, initialState: RootState): RootState => {
-  const { jsonSettings, yamlSettings, ahkEnabled } = userSettings;
+  const { jsonSettings, yamlSettings, ahkEnabled, updateNotification } = userSettings;
 
   return {
     ...initialState,
@@ -257,6 +257,7 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
     monitors: JsonToState_Monitors(jsonSettings, initialState.monitors),
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
     ahkEnabled,
+    updateNotification,
   };
 };
 

@@ -8,6 +8,7 @@ import { StylesView } from './modules/general/visuals/infra';
 import { Information } from './modules/information/infrastructure';
 import { Monitors } from './modules/monitors/main/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
+import { Updates } from './modules/updates/infrastructure';
 
 import { useAppSelector } from './modules/shared/app/hooks';
 import { RootSelectors } from './modules/shared/app/selectors';
@@ -21,6 +22,7 @@ const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.SHORTCUTS]: Shortcuts,
   [Route.SPECIFIT_APPS]: AppsConfiguration,
   [Route.INFO]: Information,
+  [Route.UPDATES]: Updates,
 };
 
 export function App() {

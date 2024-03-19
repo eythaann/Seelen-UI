@@ -6,11 +6,12 @@ import yaml from 'js-yaml';
 
 import { AppsTemplates } from '../domain/appsTemplates';
 
-export async function loadUserSettings(route?: string) {
+export async function loadUserSettings(route?: string): Promise<UserSettings> {
   const userSettings: UserSettings = {
     jsonSettings: {},
     yamlSettings: [],
     ahkEnabled: false,
+    updateNotification: false,
   };
 
   const json_route =
@@ -34,6 +35,7 @@ export async function loadUserSettings(route?: string) {
   }
 
   userSettings.ahkEnabled = !!userSettings.jsonSettings.ahk_enabled;
+  userSettings.updateNotification = !!userSettings.jsonSettings.update_notification;
   return userSettings;
 }
 
@@ -84,6 +86,7 @@ export async function saveUserSettings(settings: UserSettings) {
   } */
 
   settings.jsonSettings.ahk_enabled = settings.ahkEnabled;
+  settings.jsonSettings.update_notification = settings.updateNotification;
 
   if (!(await fs.exists(json_route))) {
     await fs.mkdir(await path.join(await path.homeDir(), '.config/komorebi-ui'));

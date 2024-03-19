@@ -23,12 +23,7 @@ export function Shortcuts() {
           <span>
             Enable Komorebi UI shortcuts{' '}
             <Tooltip
-              title={
-                <>
-                  Disable if you will implement your own shortcuts. Not is necessary disable if you
-                  will only mutate the .ahk files in the komorebi-ui config folder
-                </>
-              }
+              title="Disable if you will implement your own shortcuts using the Komorebi CLI."
             >
               🛈
             </Tooltip>

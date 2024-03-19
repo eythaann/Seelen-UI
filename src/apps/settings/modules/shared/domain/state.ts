@@ -13,5 +13,6 @@ export interface RootState {
   appsConfigurations: AppConfiguration[];
   appsTemplates: (Omit<AppTemplate, 'apps'> & { apps: AppConfiguration[] })[];
   ahkEnabled: boolean;
+  updateNotification: boolean;
   autostart: boolean;
 }

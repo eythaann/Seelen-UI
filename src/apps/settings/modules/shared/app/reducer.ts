@@ -17,6 +17,7 @@ const initialState: RootState = {
   appsConfigurations: AppsConfigSlice.getInitialState(),
   appsTemplates: [],
   ahkEnabled: true,
+  updateNotification: false,
 };
 
 export const RootSlice = createSlice({

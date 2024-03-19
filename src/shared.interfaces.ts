@@ -5,6 +5,7 @@ export interface UserSettings {
   jsonSettings: StaticConfig;
   yamlSettings: ApplicationConfiguration[];
   ahkEnabled: boolean;
+  updateNotification: boolean;
 }
 
 export interface AppTemplate {
