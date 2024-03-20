@@ -16,7 +16,9 @@ ExitIfDisabled()
 SetWorkingDir(A_ScriptDir . "/..")
 
 ; Open Settings
-#k:: RunWait("Komorebi Ui.exe")
+#k:: RunWait("`"Komorebi UI.exe`"")
+; Open Seelen Pad
+; #Enter:: RunWait("`"Komorebi UI.exe`" roulette")
 
 ; Focus windows
 !a:: Focus("left")

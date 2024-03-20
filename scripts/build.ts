@@ -17,12 +17,12 @@ async function main() {
 
   const appFolders = fs
     .readdirSync('src/apps')
-    .filter((item) => fs.statSync(path.join('src/apps', item)).isDirectory());
+    .filter((item) => item !== 'utils' && fs.statSync(path.join('src/apps', item)).isDirectory());
 
   await esbuild.build({
     entryPoints: appFolders.map((folder) => `./src/apps/${folder}/index.tsx`),
     bundle: true,
-    minify: true,
+    minify: false,
     sourcemap: true,
     outdir: './dist',
     jsx: 'automatic',

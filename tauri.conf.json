@@ -5,7 +5,10 @@
   "identifier": "com.eythaann.komorebi-ui",
   "app": {
     "security": {
-      "csp": null
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["$RESOURCE/**/*"]
+      }
     },
     "windows": []
   },
@@ -78,8 +81,13 @@
         "settings": {
           "description": "Opens the Seelen settings gui."
         },
-        "pad": {
-          "description": "Opens the Seelen Pad tool."
+        "roulette": {
+          "description": "Opens the Seelen Pad tool.",
+          "subcommands": {
+            "quit": {
+              "description": "Quits the Seelen Pad tool."
+            }
+          }
         },
         "taskbar": {
           "description": "Opens the Seelen Task Bar."

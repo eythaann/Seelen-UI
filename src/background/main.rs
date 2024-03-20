@@ -3,50 +3,49 @@
 
 mod cli;
 mod error_handler;
+mod seelenweg;
 mod tray;
-mod windows;
-
-use std::sync::Arc;
+mod webviews;
+mod windows_api;
+mod seelen;
 
 use cli::handle_cli;
-use color_eyre::eyre::Result;
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
-use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
+use error_handler::Result;
+use seelen::SEELEN;
+use tauri::Manager;
 use tauri_plugin_autostart::MacosLauncher;
-use tauri_plugin_log::{fern::colors::ColoredLevelConfig, Target, TargetKind};
+use tauri_plugin_log::{
+    fern::colors::{Color, ColoredLevelConfig},
+    Target, TargetKind,
+};
 use tauri_plugin_shell::ShellExt;
 use tray::handle_tray_icon;
-use windows::{check_updates_window, set_windows_events};
+use webviews::{check_updates_window, set_windows_events};
+use windows::Win32::UI::Input::KeyboardAndMouse::{
+    VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
+};
 
-pub struct Seelen {
-    handle: Option<AppHandle<Wry>>,
-}
-
-impl Default for Seelen {
-    fn default() -> Self {
-        Self { handle: None }
-    }
-}
-
-impl Seelen {
-    pub fn handle(&self) -> &AppHandle<Wry> {
-        self.handle.as_ref().unwrap()
-    }
-
-    pub fn set_handle(&mut self, app: AppHandle<Wry>) {
-        self.handle = Some(app);
-    }
-}
-
-lazy_static! {
-    pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
-}
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
     args: Vec<String>,
     cwd: String,
+}
+
+fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
+    let app = SEELEN.lock().handle().clone();
+
+    app.shell()
+        .command("powershell")
+        .args([
+            "-NoProfile",
+            "-Command",
+            &format!("(new-object -com wscript.shell).SendKeys([char]{})", key.0),
+        ])
+        .spawn()
+        .expect("Fail on pressing key");
+
+    Ok(())
 }
 
 #[tauri::command]
@@ -58,6 +57,21 @@ fn run_ahk_installer() {
             .spawn()
             .expect("Fail on running ahk intaller");
     });
+}
+
+#[tauri::command]
+fn media_play_pause() -> Result<(), String> {
+    press_key(VK_MEDIA_PLAY_PAUSE)
+}
+
+#[tauri::command]
+fn media_next() -> Result<(), String> {
+    press_key(VK_MEDIA_NEXT_TRACK)
+}
+
+#[tauri::command]
+fn media_prev() -> Result<(), String> {
+    press_key(VK_MEDIA_PREV_TRACK)
 }
 
 fn main() -> Result<()> {
@@ -75,10 +89,9 @@ fn main() -> Result<()> {
             Some(vec!["--silent"]),
         ))
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
-            println!("{}, {argv:?}, {cwd}", app.package_info().name);
-
+            log::trace!("Executing with: {argv:?}, from: {cwd}");
             if argv.contains(&"roulette".to_owned()) {
-                return app.emit("open-roulette", ()).unwrap();
+                return app.emit("open-seelenpad", ()).unwrap();
             }
 
             app.emit("open-settings", ()).unwrap();
@@ -90,39 +103,35 @@ fn main() -> Result<()> {
                     Target::new(TargetKind::LogDir { file_name: None }),
                     Target::new(TargetKind::Webview),
                 ])
-                .with_colors(ColoredLevelConfig::default())
+                .with_colors(ColoredLevelConfig {
+                    error: Color::Red,
+                    warn: Color::Yellow,
+                    debug: Color::BrightGreen,
+                    info: Color::Blue,
+                    trace: Color::White,
+                })
+                .level_for("tao", log::LevelFilter::Off)
                 .build(),
         )
-        .invoke_handler(tauri::generate_handler![run_ahk_installer])
+        .invoke_handler(tauri::generate_handler![
+            run_ahk_installer,
+            media_play_pause,
+            media_next,
+            media_prev,
+        ])
         .setup(|app| {
-            SEELEN.lock().set_handle(app.handle().clone());
+            let mut seelen = SEELEN.lock();
+            seelen.set_handle(app.handle().clone());
             set_windows_events(app)?;
             check_updates_window(app.app_handle())?;
-
-            tauri::async_runtime::spawn(async move {
-                let app = SEELEN.lock().handle().clone();
-
-                let config_route = app
-                .path()
-                .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)
-                .expect("Failed to resolve path")
-                .to_str()
-                .unwrap_or("")
-                .to_string();
-
-                app.shell()
-                    .command("komorebi-wm.exe")
-                    .args(["-c", &config_route])
-                    .spawn()
-                    .expect("Failed to spawn komorebi");
-
-                app.shell()
-                    .command("cmd")
-                    .args(["/C", ".\\static\\seelen.ahk"])
-                    .spawn()
-                    .expect("Failed to spawn shortcuts");
-            });
-
+            seelen.start_ahk_shortcuts();
+            seelen.start_komorebi_manager();
+            if false { // Todo(eythan) future feature should be handle by settings
+               match seelen.weg().start() {
+                   Ok(_) => {}
+                   Err(err) => log::error!("Fail on starting SeelenWeg: {err}"),
+               };
+            }
             Ok(())
         })
         .build(tauri::generate_context!())
@@ -135,27 +144,22 @@ fn main() -> Result<()> {
 
     handle_tray_icon(&mut app)?;
 
-    app.run(|_handle, event| match event {
+    app.run(|_, event| match event {
         tauri::RunEvent::ExitRequested { api, code, .. } => {
-            if code.is_some() {
-                tauri::async_runtime::block_on(async move {
-                    let app = SEELEN.lock().handle().clone();
-                    app.shell()
-                        .command("powershell")
-                        .args([
-                            "-ExecutionPolicy",
-                            "Bypass",
-                            "-NoProfile",
-                            "-Command",
-                            "Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*seelen.ahk*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
-                        ])
-                        .spawn()
-                        .expect("Failed to close ahk");
-                });
-            } else {
-                // prevent close background on windows closing
+            // prevent close background on webview windows closing
+            if code.is_none() {
                 api.prevent_exit();
             }
+        }
+        tauri::RunEvent::Exit => {
+            tauri::async_runtime::block_on(async move {
+                let app = SEELEN.lock();
+                if false {
+                    // Todo(eythan) future feature should be handle by settings
+                    app.weg().stop();
+                }
+                app.kill_ahk_shortcuts();
+            });
         }
         _ => {}
     });

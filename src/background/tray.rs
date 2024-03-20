@@ -8,7 +8,7 @@ use tauri::{
 use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
-use crate::windows::show_settings_window;
+use crate::webviews::show_settings_window;
 use crate::SEELEN;
 
 pub fn handle_tray_icon(app: &mut App) -> Result<()> {

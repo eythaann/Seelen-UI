@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import { RootSlice } from './app';
+
 export const store = configureStore({
-  reducer: () => {},
+  reducer: RootSlice.reducer,
 });
 
 export type AppDispatch = typeof store.dispatch;

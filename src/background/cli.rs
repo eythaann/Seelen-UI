@@ -2,8 +2,8 @@ use tauri::App;
 use tauri_plugin_cli::CliExt;
 
 use crate::error_handler::Result;
-use crate::windows::show_seelenpad_window;
-use crate::windows::show_settings_window;
+use crate::webviews::show_seelenpad_window;
+use crate::webviews::show_settings_window;
 
 type ShouldInitApp = bool;
 

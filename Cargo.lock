@@ -2113,6 +2113,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "http-range"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "21dec9db110f5f872ed9699c3ecf50cf16f423502706ba5c72462e28d3157573"
+
+[[package]]
 name = "httparse"
 version = "1.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2404,6 +2410,7 @@ version = "1.0.0"
 dependencies = [
  "color-eyre",
  "lazy_static",
+ "log",
  "parking_lot",
  "serde",
  "serde_json",
@@ -2418,6 +2425,7 @@ dependencies = [
  "tauri-plugin-shell",
  "tauri-plugin-single-instance",
  "tauri-plugin-updater",
+ "windows 0.52.0",
 ]
 
 [[package]]
@@ -4240,6 +4248,7 @@ dependencies = [
  "gtk",
  "heck",
  "http",
+ "http-range",
  "infer",
  "jni",
  "libc",
