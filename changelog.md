@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.11]
+### refactor
+- little improvements on background code
+
+### fix
+- initial users can not save the settings
+
 ## [1.0.0-prerelease.10]
 ### features
 - add a update tab to allow users decide if will recive notifications for updates
