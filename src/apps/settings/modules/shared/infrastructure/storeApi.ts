@@ -89,6 +89,7 @@ export async function saveUserSettings(settings: UserSettings) {
   settings.jsonSettings.update_notification = settings.updateNotification;
 
   if (!(await fs.exists(json_route))) {
+    await fs.mkdir(await path.join(await path.homeDir(), '.config'));
     await fs.mkdir(await path.join(await path.homeDir(), '.config/komorebi-ui'));
   }
 
