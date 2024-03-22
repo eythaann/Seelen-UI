@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0-prerelease.11",
-  "notes": "## [1.0.0-prerelease.10]\n### features\n- add a update tab to allow users decide if will recive notifications for updates",
-  "pub_date": "2024-03-21T14:28:19.472Z",
+  "version": "1.0.0-prerelease.12",
+  "notes": "### enhancements\n- add some traces on functions to save logs\n\n### fix\n- clean installation of komorebi no working",
+  "pub_date": "2024-03-22T16:49:52.316Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0tHMmRYcFBtOWVIQXNmaytXcFZ0M0JFSFFwa3hocWlCc2VhQkxQMFVCc0NOcUtTbnlxUzZ1M2U3T0hmOHhlS0IxMlFUOWNJWlI3MW0zaVN0UXZaMkFBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzExMDMxMjk4CWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS4xMV94NjQtc2V0dXAubnNpcy56aXAKYWpodGpwUHpIQ1FBQ2pYaFFtbTJ1KzMyT010b2JBb0dBblNjb1RFV25OTG8zL2Z3V0NWaUF2TnRTaE9MV0VYRlNTWmNISEU2dUhvekpVaS9NUjBMQVE9PQo=",
-      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v1.0.0-prerelease.11/Komorebi.UI_1.0.0-prerelease.11_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0NkRUtORzZNVkxGWDJOdjRTK1U2aEVpVGl1SUxRYzlBNWRmN3J2Z1lsbFFQTEptN2loQ2Zod3Q5TFdBUHUzQUFLNEtaL0FXMk5RZ3p5RWZOVHphNFFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzExMTI2MTkxCWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS4xMl94NjQtc2V0dXAubnNpcy56aXAKY1MzSzRHcXR6WVBJZVdtSWpUVTdlM3FBMXBITFozQTcweUlhSWNURkRIWGJTWXhwdWUvdXVXenRacXZaMi9IY3VBTzd1ZjJ6T1haVmhrTGE2SzNpQ1E9PQo=",
+      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v1.0.0-prerelease.12/Komorebi.UI_1.0.0-prerelease.12_x64-setup.nsis.zip"
     }
   }
 }

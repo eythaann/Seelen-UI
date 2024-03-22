@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.12]
 ### enhancements
 - add some traces on functions to save logs
 
