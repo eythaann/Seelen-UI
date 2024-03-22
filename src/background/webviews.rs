@@ -74,6 +74,8 @@ pub fn focus_window(hwnd: HWND) -> Result<()> {
 }
 
 pub fn show_settings_window(app: &AppHandle) -> Result<WebviewWindow> {
+    log::trace!("show_settings_window");
+
     let window = tauri::WebviewWindowBuilder::new(
         app,
         "settings",
@@ -93,6 +95,8 @@ pub fn show_settings_window(app: &AppHandle) -> Result<WebviewWindow> {
 }
 
 pub fn show_seelenpad_window(app: &AppHandle) -> Result<WebviewWindow> {
+    log::trace!("show_seelenpad_window");
+
     let window = tauri::WebviewWindowBuilder::new(
         app,
         "seelenpad",
@@ -117,6 +121,8 @@ pub fn show_seelenpad_window(app: &AppHandle) -> Result<WebviewWindow> {
 }
 
 pub fn check_updates_window(app: &AppHandle) -> Result<WebviewWindow> {
+    log::trace!("check_updates_window");
+
     let window = tauri::WebviewWindowBuilder::new(
         app,
         "updater",

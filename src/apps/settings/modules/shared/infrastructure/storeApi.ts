@@ -2,6 +2,7 @@ import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
 import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
+import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
 
 import { AppsTemplates } from '../domain/appsTemplates';
@@ -64,34 +65,14 @@ export async function saveUserSettings(settings: UserSettings) {
   const yaml_route = await path.join(await path.homeDir(), '.config/komorebi-ui/applications.yml');
   settings.jsonSettings.app_specific_configuration_path = yaml_route;
 
-  /*   let oldSettings: StaticConfig = {};
-  if (await fs.exists(json_route)) {
-    oldSettings = JSON.parse(await fs.readTextFile(json_route));
-  } */
-
-  /*   const isChangingAhkStatus = settings.ahkEnabled != oldSettings.ahk_enabled;
   if (settings.ahkEnabled) {
-    if (!await fs.exists(ahk_path)) {
-      await fs.copyFile(await path.join(app.getAppPath(), 'komorebi.sample.ahk'), ahk_path);
-      await fs.copyFile(
-        await path.join(app.getAppPath(), 'komorebic.lib.ahk'),
-        await path.join(komorebi_config_path, '/komorebic.lib.ahk'),
-      );
-    }
-    if (isChangingAhkStatus) {
-      tryRunAhkShortcuts();
-    }
-  } else if (isChangingAhkStatus) {
-    exec('wmic process where "commandline like \'%komorebic.ahk%\'" call terminate', { shell: 'powershell.exe' }, execPrinter);
-  } */
+    invoke('start_seelen_shortcuts');
+  } else {
+    invoke('kill_seelen_shortcuts');
+  }
 
   settings.jsonSettings.ahk_enabled = settings.ahkEnabled;
   settings.jsonSettings.update_notification = settings.updateNotification;
-
-  if (!(await fs.exists(json_route))) {
-    await fs.mkdir(await path.join(await path.homeDir(), '.config'));
-    await fs.mkdir(await path.join(await path.homeDir(), '.config/komorebi-ui'));
-  }
 
   await fs.writeTextFile(json_route, JSON.stringify(settings.jsonSettings));
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));

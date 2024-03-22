@@ -5,7 +5,7 @@ use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 
-use crate::seelenweg::SeelenWeg;
+use crate::{error_handler::Result, seelenweg::SeelenWeg};
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
@@ -34,12 +34,26 @@ impl Seelen {
         self.weg.as_ref().unwrap()
     }
 
-    pub fn set_handle(&mut self, app: AppHandle<Wry>) {
+    pub fn init(&mut self, app: AppHandle<Wry>) {
+        log::trace!("Initializing Seelen");
         self.handle = Some(app.clone());
         self.weg = Some(SeelenWeg::new(app.clone()));
     }
 
+    pub fn ensure_folders(&self) -> Result<()> {
+        log::trace!("Ensuring folders");
+        let path = self.handle().path();
+
+        // komorebi window manager does not create this folder on first install/run 🤡
+        std::fs::create_dir_all(path.resolve("komorebi", BaseDirectory::LocalData)?)?;
+        std::fs::create_dir_all(path.resolve(".config/komorebi-ui", BaseDirectory::Home)?)?;
+
+        Ok(())
+    }
+
     pub fn start_ahk_shortcuts(&self) {
+        log::trace!("Starting AHK shortcuts");
+
         tauri::async_runtime::spawn(async move {
             let app = SEELEN.lock().handle().clone();
 
@@ -62,6 +76,8 @@ impl Seelen {
     }
 
     pub fn kill_ahk_shortcuts(&self) {
+        log::trace!("Killing AHK shortcuts");
+
         self.handle()
             .shell()
             .command("powershell")
@@ -77,6 +93,8 @@ impl Seelen {
     }
 
     pub fn start_komorebi_manager(&self) {
+        log::trace!("Starting komorebi manager");
+
         tauri::async_runtime::spawn(async move {
             let app = SEELEN.lock().handle().clone();
 

@@ -3,11 +3,11 @@
 
 mod cli;
 mod error_handler;
+mod seelen;
 mod seelenweg;
 mod tray;
 mod webviews;
 mod windows_api;
-mod seelen;
 
 use cli::handle_cli;
 use error_handler::Result;
@@ -24,7 +24,6 @@ use webviews::{check_updates_window, set_windows_events};
 use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
-
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -74,10 +73,28 @@ fn media_prev() -> Result<(), String> {
     press_key(VK_MEDIA_PREV_TRACK)
 }
 
+#[tauri::command]
+fn start_seelen_shortcuts() -> Result<(), String> {
+    SEELEN.lock().start_ahk_shortcuts();
+    Ok(())
+}
+
+#[tauri::command]
+fn kill_seelen_shortcuts() -> Result<(), String> {
+    SEELEN.lock().kill_ahk_shortcuts();
+    Ok(())
+}
+
 fn main() -> Result<()> {
     color_eyre::install()?;
 
-    let mut app = tauri::Builder::default()
+    std::panic::set_hook(Box::new(|info| {
+        if let Some(s) = info.payload().downcast_ref::<String>() {
+            log::error!("{}", s);
+        }
+    }));
+
+    let app = tauri::Builder::default()
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
@@ -89,7 +106,7 @@ fn main() -> Result<()> {
             Some(vec!["--silent"]),
         ))
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
-            log::trace!("Executing with: {argv:?}, from: {cwd}");
+            log::trace!("Instance Detected. Executing with: {argv:?}, from: {cwd}");
             if argv.contains(&"roulette".to_owned()) {
                 return app.emit("open-seelenpad", ()).unwrap();
             }
@@ -107,7 +124,7 @@ fn main() -> Result<()> {
                     error: Color::Red,
                     warn: Color::Yellow,
                     debug: Color::BrightGreen,
-                    info: Color::Blue,
+                    info: Color::BrightBlue,
                     trace: Color::White,
                 })
                 .level_for("tao", log::LevelFilter::Off)
@@ -118,31 +135,41 @@ fn main() -> Result<()> {
             media_play_pause,
             media_next,
             media_prev,
+            start_seelen_shortcuts,
+            kill_seelen_shortcuts,
         ])
         .setup(|app| {
+            log::info!("───────────────────── Starting Seelen ─────────────────────");
+
+            let should_run_app = handle_cli(app)?;
+            if !should_run_app {
+                app.handle().exit(0);
+                return Ok(());
+            }
+
             let mut seelen = SEELEN.lock();
-            seelen.set_handle(app.handle().clone());
-            set_windows_events(app)?;
-            check_updates_window(app.app_handle())?;
+            seelen.init(app.handle().clone());
+
+            seelen.ensure_folders().expect("Fail on ensuring folders");
             seelen.start_ahk_shortcuts();
             seelen.start_komorebi_manager();
-            if false { // Todo(eythan) future feature should be handle by settings
-               match seelen.weg().start() {
-                   Ok(_) => {}
-                   Err(err) => log::error!("Fail on starting SeelenWeg: {err}"),
-               };
+
+            handle_tray_icon(app)?;
+
+            set_windows_events(app)?;
+            check_updates_window(app.app_handle())?;
+
+            if false {
+                // Todo(eythan) future feature should be handle by settings
+                match seelen.weg().start() {
+                    Ok(_) => {}
+                    Err(err) => log::error!("Fail on starting SeelenWeg: {err}"),
+                };
             }
             Ok(())
         })
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
-
-    let should_run_app = handle_cli(&mut app)?;
-    if !should_run_app {
-        return Ok(());
-    }
-
-    handle_tray_icon(&mut app)?;
 
     app.run(|_, event| match event {
         tauri::RunEvent::ExitRequested { api, code, .. } => {
@@ -152,6 +179,8 @@ fn main() -> Result<()> {
             }
         }
         tauri::RunEvent::Exit => {
+            log::info!("───────────────────── Exiting Seelen ─────────────────────");
+
             tauri::async_runtime::block_on(async move {
                 let app = SEELEN.lock();
                 if false {

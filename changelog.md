@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add some traces on functions to save logs
+
+### fix
+- clean installation of komorebi no working
+
 ## [1.0.0-prerelease.11]
 ### refactor
 - little improvements on background code
