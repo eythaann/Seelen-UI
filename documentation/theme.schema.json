@@ -14,7 +14,7 @@
       "type": "object",
       "properties": {
         "background": {
-          "$ref": "#definitions/layers"
+          "$ref": "#/definitions/layers"
         }
       },
       "required": ["background"]
@@ -25,7 +25,7 @@
     "layers": {
       "type": "array",
       "items": {
-        "$ref": "#definitions/CSSProperties"
+        "$ref": "#/definitions/CSSProperties"
       },
       "description": "An array of CSS Properties where each object is represented as a Layer"
     },

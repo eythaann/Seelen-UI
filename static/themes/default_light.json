@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/documentation/theme.schema.json",
   "info": {
     "displayName": "Default Light",
     "author": "eythaann"
