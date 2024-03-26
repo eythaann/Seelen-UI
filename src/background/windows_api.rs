@@ -1,15 +1,23 @@
-use windows::Win32::{
-    Foundation::HWND,
-    System::Threading::{AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId},
-    UI::{
-        Input::KeyboardAndMouse::SetFocus,
-        WindowsAndMessaging::{
-            AllowSetForegroundWindow, GetWindowThreadProcessId, SetForegroundWindow,
+use windows::{
+    core::PWSTR,
+    Win32::{
+        Foundation::{CloseHandle, HANDLE, HWND},
+        System::Threading::{
+            AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
+            QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
+            PROCESS_QUERY_INFORMATION,
+        },
+        UI::{
+            Input::KeyboardAndMouse::SetFocus,
+            WindowsAndMessaging::{
+                AllowSetForegroundWindow, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
+                IsWindow, IsWindowVisible, SetForegroundWindow,
+            },
         },
     },
 };
 
-use crate::error_handler::Result;
+use crate::error_handler::{log_if_error, Result};
 
 pub struct WindowsApi {}
 impl WindowsApi {
@@ -57,5 +65,63 @@ impl WindowsApi {
 
     pub fn current_process_id() -> u32 {
         unsafe { GetCurrentProcessId() }
+    }
+
+    pub fn is_window(hwnd: HWND) -> bool {
+        unsafe { IsWindow(hwnd) }.into()
+    }
+
+    pub fn is_window_visible(hwnd: HWND) -> bool {
+        unsafe { IsWindowVisible(hwnd) }.into()
+    }
+
+    pub fn is_iconic(hwnd: HWND) -> bool {
+        unsafe { IsIconic(hwnd) }.into()
+    }
+
+    fn open_process(
+        access_rights: PROCESS_ACCESS_RIGHTS,
+        inherit_handle: bool,
+        process_id: u32,
+    ) -> Result<HANDLE> {
+        unsafe { Ok(OpenProcess(access_rights, inherit_handle, process_id)?) }
+    }
+
+    pub fn close_process(handle: HANDLE) -> Result<()> {
+        unsafe {
+            CloseHandle(handle)?;
+        }
+        Ok(())
+    }
+
+    pub fn process_handle(process_id: u32) -> Result<HANDLE> {
+        Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
+    }
+
+    pub fn exe_path(hwnd: HWND) -> Result<String> {
+        let mut len = 260_u32;
+        let mut path: Vec<u16> = vec![0; len as usize];
+        let text_ptr = path.as_mut_ptr();
+
+        let (process_id, _) = Self::window_thread_process_id(hwnd);
+        let handle = Self::process_handle(process_id)?;
+        unsafe {
+            log_if_error(QueryFullProcessImageNameW(
+                handle,
+                PROCESS_NAME_WIN32,
+                PWSTR(text_ptr),
+                &mut len,
+            ));
+        }
+        Self::close_process(handle)?;
+
+        Ok(String::from_utf16(&path[..len as usize])?)
+    }
+
+    pub fn get_window_text(hwnd: HWND) -> String {
+        let mut text: [u16; 512] = [0; 512];
+        let len = unsafe { GetWindowTextW(hwnd, &mut text) };
+        let length = usize::try_from(len).unwrap_or(0);
+        String::from_utf16(&text[..length]).unwrap_or("".to_owned())
     }
 }

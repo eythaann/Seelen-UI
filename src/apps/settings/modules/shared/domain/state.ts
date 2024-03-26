@@ -1,9 +1,10 @@
-import { AppTemplate } from '../../../../../shared.interfaces';
+import { AppTemplate, Theme, ThemeInfo } from '../../../../../shared.interfaces';
 import { Route } from './routes';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';
 import { GeneralSettingsState } from '../../general/main/domain';
 import { Monitor } from '../../monitors/main/domain';
+import { SeelenWegState } from '../../seelenweg/domain';
 
 export interface RootState {
   route: Route;
@@ -12,6 +13,9 @@ export interface RootState {
   monitors: Monitor[];
   appsConfigurations: AppConfiguration[];
   appsTemplates: (Omit<AppTemplate, 'apps'> & { apps: AppConfiguration[] })[];
+  seelenweg: SeelenWegState;
+  availableThemes: Theme[];
+  theme: Theme | null;
   ahkEnabled: boolean;
   updateNotification: boolean;
   autostart: boolean;

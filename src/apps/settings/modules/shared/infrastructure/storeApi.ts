@@ -1,4 +1,4 @@
-import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
+import { AppTemplate, Theme, UserSettings } from '../../../../../shared.interfaces';
 import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
 import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
@@ -13,6 +13,8 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     yamlSettings: [],
     ahkEnabled: false,
     updateNotification: false,
+    themes: [],
+    theme: null,
   };
 
   const json_route =
@@ -23,6 +25,8 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
   }
 
   userSettings.jsonSettings = JSON.parse(await fs.readTextFile(json_route));
+  userSettings.ahkEnabled = !!userSettings.jsonSettings.ahk_enabled;
+  userSettings.updateNotification = !!userSettings.jsonSettings.update_notification;
 
   let pathToYml = userSettings.jsonSettings.app_specific_configuration_path;
   if (pathToYml) {
@@ -35,8 +39,28 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
   }
 
-  userSettings.ahkEnabled = !!userSettings.jsonSettings.ahk_enabled;
-  userSettings.updateNotification = !!userSettings.jsonSettings.update_notification;
+  let themesPath = await path.join(await path.resourceDir(), 'static', 'themes');
+  let entries = await fs.readDir(themesPath);
+
+  let hasDefinedTheme = !!userSettings.jsonSettings.theme_filename;
+
+  for (const entry of entries) {
+    if (entry.isFile && entry.name.endsWith('.json')) {
+      const theme: Theme = JSON.parse(await fs.readTextFile(await path.join(themesPath, entry.name)));
+
+      if (hasDefinedTheme && userSettings.jsonSettings.theme_filename === entry.name) {
+        userSettings.theme = theme;
+      }
+
+      if (!hasDefinedTheme && entry.name === 'default_light.json') {
+        userSettings.theme = theme;
+      }
+
+      theme.info.filename = entry.name;
+      userSettings.themes.push(theme);
+    }
+  }
+
   return userSettings;
 }
 
@@ -60,7 +84,7 @@ export async function loadAppsTemplates() {
   return result;
 }
 
-export async function saveUserSettings(settings: UserSettings) {
+export async function saveUserSettings(settings: Omit<UserSettings, 'themes' | 'theme'>) {
   const json_route = await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json');
   const yaml_route = await path.join(await path.homeDir(), '.config/komorebi-ui/applications.yml');
   settings.jsonSettings.app_specific_configuration_path = yaml_route;

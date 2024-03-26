@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "author": { "type": "string" }
+      },
+      "required": ["displayName", "author"]
+    },
+    "seelenweg": {
+      "type": "object",
+      "properties": {
+        "background": {
+          "$ref": "#definitions/layers"
+        }
+      },
+      "required": ["background"]
+    }
+  },
+  "required": ["info", "seelenweg"],
+  "definitions": {
+    "layers": {
+      "type": "array",
+      "items": {
+        "$ref": "#definitions/CSSProperties"
+      },
+      "description": "An array of CSS Properties where each object is represented as a Layer"
+    },
+    "CSSProperties": {
+      "type": "object",
+      "description": "Use Properties Interface in https://github.com/frenic/csstype"
+    }
+  }
+}

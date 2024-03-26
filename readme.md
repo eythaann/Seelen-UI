@@ -6,7 +6,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/eythaann/komorebi-ui.svg)](https://github.com/eythaann/komorebi-ui/commits/main)
 [![Downloads](https://img.shields.io/github/downloads/eythaann/komorebi-ui/total.svg)](https://github.com/eythaann/komorebi-ui/releases)
 
-<img src="./static/images/desktop_view.png" width="100%" alt="komorebi ui desktop">
+<img src="./documentation/images/desktop_view.png" width="100%" alt="komorebi ui desktop">
 
 ## Overview
 
@@ -20,7 +20,7 @@ Komorebi UI is a user-friendly fork of Komorebi, a tiling window manager for Win
 
 - **Additional Functionality:** Includes extra features that enhance the overall usability of Komorebi.
 
-<img src="./static/images/mosaico.png" width="100%" alt="komorebi ui desktop">
+<img src="./documentation/images/mosaico.png" width="100%" alt="komorebi ui desktop">
 
 ### What is a Tiling Window Manager?
 

@@ -21,11 +21,13 @@ import {
 } from '../../general/main/domain';
 import { Layout } from '../../monitors/layouts/domain';
 import { Monitor, Workspace } from '../../monitors/main/domain';
+import { SeelenWegMode, SeelenWegState } from '../../seelenweg/domain';
 import { HexColor } from '../domain/interfaces';
 import { RootState } from '../domain/state';
 
 const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
   return {
+    selectedTheme: json.theme_filename ?? generals.selectedTheme,
     altFocusHack: !!json.alt_focus_hack,
     animations: {
       finishMiminization: json.animations?.finish_miminization_before_restore ?? generals.animations.finishMiminization,
@@ -248,12 +250,27 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
   return apps;
 };
 
+export const JsonToState_Seelenweg = (json: StaticConfig, initialState: SeelenWegState): SeelenWegState => {
+  return {
+    enabled: json.seelenweg?.enabled ?? initialState.enabled,
+    mode: json.seelenweg?.mode as SeelenWegMode ?? initialState.mode,
+    size: json.seelenweg?.size ?? initialState.size,
+    zoomSize: json.seelenweg?.zoom_size ?? initialState.zoomSize,
+    margin: json.seelenweg?.margin ?? initialState.margin,
+    padding: json.seelenweg?.padding ?? initialState.padding,
+    spaceBetweenItems: json.seelenweg?.space_between_items ?? initialState.spaceBetweenItems,
+  };
+};
+
 export const StaticSettingsToState = (userSettings: UserSettings, initialState: RootState): RootState => {
-  const { jsonSettings, yamlSettings, ahkEnabled, updateNotification } = userSettings;
+  const { jsonSettings, yamlSettings, ahkEnabled, updateNotification, theme, themes } = userSettings;
 
   return {
     ...initialState,
+    theme,
+    availableThemes: themes,
     generals: JsonToState_Generals(jsonSettings, initialState.generals),
+    seelenweg: JsonToState_Seelenweg(jsonSettings, initialState.seelenweg),
     monitors: JsonToState_Monitors(jsonSettings, initialState.monitors),
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
     ahkEnabled,
@@ -263,6 +280,7 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
 
 const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
   return {
+    theme_filename: state.selectedTheme,
     alt_focus_hack: state.altFocusHack,
     animations: {
       finish_miminization_before_restore: state.animations.finishMiminization,
@@ -341,10 +359,25 @@ const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {
   };
 };
 
+const StateToJson_SeelenWeg = (state: SeelenWegState): Partial<StaticConfig> => {
+  return {
+    seelenweg: {
+      enabled: state.enabled,
+      mode: state.mode,
+      size: state.size,
+      zoom_size: state.zoomSize,
+      margin: state.margin,
+      padding: state.padding,
+      space_between_items: state.spaceBetweenItems,
+    },
+  };
+};
+
 export const StateToJsonSettings = (state: RootState): StaticConfig => {
   return {
     ...StateToJson_Generals(state.generals),
     ...StateToJson_Monitors(state.monitors),
+    ...StateToJson_SeelenWeg(state.seelenweg),
   };
 };
 

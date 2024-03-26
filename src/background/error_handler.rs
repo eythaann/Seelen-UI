@@ -25,6 +25,9 @@ define_app_errors!(
     TauriCli(tauri_plugin_cli::Error);
     Eyre(color_eyre::eyre::Error);
     Windows(windows::core::Error);
+    SerdeJson(serde_json::Error);
+    Utf8(std::string::FromUtf8Error);
+    Utf16(std::string::FromUtf16Error);
 );
 
 impl std::fmt::Display for AppError {
@@ -41,8 +44,21 @@ impl std::error::Error for AppError {
             AppError::Tauri(err) => Some(err),
             AppError::TauriCli(err) => Some(err),
             AppError::Windows(err) => Some(err),
+            AppError::SerdeJson(err) => Some(err),
+            AppError::Utf8(err) => Some(err),
+            AppError::Utf16(err) => Some(err),
         }
     }
 }
 
 pub type Result<T = (), E = AppError> = core::result::Result<T, E>;
+
+pub fn log_if_error<T, E>(result: Result<T, E>)
+where
+    E: Into<AppError>
+{
+    if let Err(err) = result {
+        let err: AppError = err.into();
+        log::error!("{:?}", err);
+    }
+}

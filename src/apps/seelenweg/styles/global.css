@@ -1,12 +1,17 @@
 #root {
-  height: 100vh;
-  width: 100vw;
+  width: min-content;
 }
 
 body {
   overflow: hidden;
   cursor: default;
   background: transparent;
+  /* background: blue; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100vw;
+  height: 100vh;
 
   :not(input):not(textarea),
   :not(input):not(textarea)::after,

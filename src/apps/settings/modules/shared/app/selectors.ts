@@ -5,12 +5,14 @@ import { BorderSlice } from '../../general/border/app';
 import { ContainerTopBarSlice } from '../../general/containerTopBar/app';
 import { GeneralSettingsSlice } from '../../general/main/app';
 import { PopupSlice } from '../../general/popups/app';
+import { SeelenWegSlice } from '../../seelenweg/app';
 
 import { RootState } from '../domain/state';
 
 export const RootSelectors = RootSlice.getSelectors((state: RootState) => state);
 
 export const GeneralSettingsSelectors = GeneralSettingsSlice.getSelectors(RootSelectors.generals);
+export const SeelenWegSelectors = SeelenWegSlice.getSelectors(RootSelectors.seelenweg);
 
 export const AnimationsSelectors = AnimationsSlice.getSelectors(GeneralSettingsSelectors.animations);
 export const BorderSelectors = BorderSlice.getSelectors(GeneralSettingsSelectors.border);

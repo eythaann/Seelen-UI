@@ -33,6 +33,7 @@ export enum CrossMonitorMoveBehaviour {
 
 export interface GeneralSettingsState {
   // own
+  selectedTheme: string;
   // komorebi
   border: BorderState;
   popups: PopupState;

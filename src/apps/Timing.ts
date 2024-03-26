@@ -23,3 +23,22 @@ export function throttle<T extends anyFunction>(
     }
   } as T;
 }
+
+export interface TimeoutIdRef {
+  ref: ReturnType<typeof setTimeout> | null;
+}
+
+export function debounce<T extends (...args: any[]) => any>(
+  func: T,
+  delay: number,
+  timeoutId: TimeoutIdRef = { ref: null },
+): (...args: Parameters<T>) => void {
+  return function debouncedFunction(this: ThisParameterType<T>, ...args: Parameters<T>) {
+    const context = this;
+
+    clearTimeout(timeoutId.ref!);
+    timeoutId.ref = setTimeout(function () {
+      func.apply(context, args);
+    }, delay);
+  };
+}

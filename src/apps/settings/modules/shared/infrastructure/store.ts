@@ -2,6 +2,7 @@ import { StartUser } from './StartUser';
 import { loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
 import { startup } from './tauri';
 import { configureStore } from '@reduxjs/toolkit';
+import { emitTo } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 
 import { RootActions, RootReducer, RootSlice } from '../app/reducer';
@@ -59,6 +60,7 @@ export const LoadSettingsToStore = async (route?: string) => {
 export const SaveStore = async () => {
   try {
     const currentState = store.getState();
+
     await saveUserSettings({
       jsonSettings: StateToJsonSettings(currentState),
       yamlSettings: [
@@ -68,6 +70,10 @@ export const SaveStore = async () => {
       ahkEnabled: currentState.ahkEnabled,
       updateNotification: currentState.updateNotification,
     });
+
+    await emitTo('seelenweg', 'update-store-settings', currentState.seelenweg);
+    await emitTo('seelenweg', 'update-store-theme', currentState.theme);
+
     store.dispatch(RootActions.setSaved());
   } catch (error) {
     Modal.error({

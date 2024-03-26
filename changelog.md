@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add Themes Feature 🎉 (incompleted only for Seelenweg for now)
+- add SeelenWeg (a Dock or Taskbar) beta feature
+- add SeelenWeg in to Settings
+
+### enhancements
+- move readme blob to documentation/images
+
 ## [1.0.0-prerelease.12]
 ### enhancements
 - add some traces on functions to save logs

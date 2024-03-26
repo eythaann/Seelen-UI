@@ -16,6 +16,7 @@ import {
 } from './domain';
 
 let initialState: GeneralSettingsState = {
+  selectedTheme: 'default_light.json',
   altFocusHack: false,
   autoStackinByCategory: true,
   animations: AnimationsSlice.getInitialState(),

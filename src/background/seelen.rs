@@ -5,7 +5,7 @@ use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{error_handler::Result, seelenweg::SeelenWeg};
+use crate::{error_handler::Result, hook::register_hook, seelenweg::SeelenWeg, state::State};
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
@@ -14,6 +14,7 @@ lazy_static! {
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
     weg: Option<SeelenWeg>,
+    state: State,
 }
 
 impl Default for Seelen {
@@ -21,6 +22,7 @@ impl Default for Seelen {
         Self {
             handle: None,
             weg: None,
+            state: State::default(),
         }
     }
 }
@@ -30,14 +32,47 @@ impl Seelen {
         self.handle.as_ref().unwrap()
     }
 
+    pub fn mut_weg(&mut self) -> &mut SeelenWeg {
+        self.weg.as_mut().unwrap()
+    }
+
     pub fn weg(&self) -> &SeelenWeg {
         self.weg.as_ref().unwrap()
     }
-
     pub fn init(&mut self, app: AppHandle<Wry>) {
         log::trace!("Initializing Seelen");
         self.handle = Some(app.clone());
         self.weg = Some(SeelenWeg::new(app.clone()));
+        self.state = State::new(
+            &app.path()
+                .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)
+                .expect("Failed to resolve path"),
+        )
+        .ok()
+        .unwrap_or_default();
+    }
+
+    pub fn start(&mut self) {
+        self.ensure_folders().expect("Fail on ensuring folders");
+        self.start_ahk_shortcuts();
+        self.start_komorebi_manager();
+
+        if self.state.is_weg_enabled() {
+            match self.mut_weg().start() {
+                Ok(_) => {
+                    register_hook().expect("Failed to register hook");
+                }
+                Err(err) => log::error!("Fail on starting SeelenWeg: {err}"),
+            };
+        }
+    }
+
+    pub fn stop(&self) {
+        self.kill_ahk_shortcuts();
+
+        if self.state.is_weg_enabled() {
+            self.weg().stop();
+        }
     }
 
     pub fn ensure_folders(&self) -> Result<()> {

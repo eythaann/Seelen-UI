@@ -5,6 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type SeelenWegMode = "Full-Width" | "Min-Content";
+
 /**
  * The `komorebi.json` static configuration file reference for `v0.1.20`
  */
@@ -511,5 +513,17 @@ export interface StaticConfig {
    * Which Windows signal to use when hiding windows (default: minimize)
    */
   window_hiding_behaviour?: "Hide" | "Minimize" | "Cloak";
+  seelenweg?: SeelenWegState;
+  theme_filename?: string;
+  [k: string]: unknown;
+}
+export interface SeelenWegState {
+  enabled?: boolean;
+  mode?: SeelenWegMode;
+  size?: number;
+  zoom_size?: number;
+  margin?: number;
+  padding?: number;
+  space_between_items?: number;
   [k: string]: unknown;
 }
