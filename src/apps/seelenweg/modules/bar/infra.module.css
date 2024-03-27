@@ -2,36 +2,19 @@
   position: relative;
   overflow: visible;
   display: flex;
+  width: 100%;
+  justify-content: space-between;
 
-  .backgroundLayers {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-
-    .layer {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-    }
+  .group {
+    display: flex;
   }
 
   .itemsContainer {
     z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: visible;
-    flex: 1;
-
-    &.left {
-      justify-content: flex-start;
-    }
-
-    &.right {
-      justify-content: flex-end;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 
     &:not(:hover) {
       .item {
@@ -50,24 +33,22 @@
         }
       }
     }
+  }
+}
 
-    .item {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: white;
-      border-radius: 25%;
-      box-shadow: 1px 1px 1px #0000002a;
+.item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-      &:active {
-        filter: brightness(0.30);
-      }
+  &:active {
+    filter: brightness(0.30);
+  }
 
-      >img {
-        width: 65%;
-        height: 65%;
-        filter: drop-shadow(0px 0px 1px #0000009a);
-      }
-    }
+  >img {
+    width: 65%;
+    height: 65%;
+    filter: drop-shadow(0px 0px 1px #0000009a);
   }
 }

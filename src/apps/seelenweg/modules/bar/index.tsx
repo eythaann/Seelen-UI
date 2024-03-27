@@ -1,81 +1,78 @@
-import { updateHitbox } from '../../events';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { Tooltip } from 'antd';
-import { CSSProperties, memo, MouseEvent, useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { WegItem } from './item';
+import { Reorder } from 'framer-motion';
+import { debounce } from 'lodash';
+import { MouseEvent, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
 import cs from './infra.module.css';
 
 import { cx } from '../../../settings/modules/shared/app/utils';
-import { Selectors } from '../shared/store/app';
+import { RootActions, Selectors } from '../shared/store/app';
 
-import { RootState } from '../shared/store/domain';
-
-interface Item {
-  style: CSSProperties;
-  label: string;
-  iconPath: string;
-  exePath: string;
-  hwnd: number;
-}
+import { App, OpenApp, PinnedApp, SpecialApp, SpecialItemType } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = 500;
+const MAX_CURSOR_DISTANCE_MARGIN = MAX_CURSOR_DISTANCE / 3;
 
-function StoreAppsToItems(storeItems: RootState['apps'], size: number) {
-  return storeItems.map<Item>((app) => ({
-    label: app.state === 'Open' ? app.title : app.exe,
-    iconPath: app.icon,
-    hwnd: app.hwnd,
-    exePath: app.exe,
-    style: {
-      width: size,
-      height: size,
-    },
-  }));
-}
-
-interface SeelenWegBackgroundProps {
-  styles: CSSProperties[];
-}
-const BackgroundByLayers = memo(({ styles }: SeelenWegBackgroundProps) => {
-  return <div className={cs.backgroundLayers}>
-    {styles.map((layer, index) => (
-      <div key={index} className={cs.layer} style={layer} />
-    ))}
-  </div>;
-});
+const Separator1: SpecialApp = {
+  type: SpecialItemType.Separator,
+};
+const Separator2: SpecialApp = {
+  type: SpecialItemType.Separator,
+};
+const Separator3: SpecialApp = {
+  type: SpecialItemType.Separator,
+};
 
 export function SeelenWeg() {
   const theme = useSelector(Selectors.theme);
   const settings = useSelector(Selectors.settings);
+
   const openApps = useSelector(Selectors.apps);
   const pinnedOnLeft = useSelector(Selectors.pinnedOnLeft);
+  const pinnedOnCenter = useSelector(Selectors.pinnedOnCenter);
   const pinnedOnRight = useSelector(Selectors.pinnedOnRight);
 
-  const [items, setItems] = useState<Item[]>(StoreAppsToItems(openApps, settings.size));
+  const refs = useRef<HTMLDivElement[]>([]);
 
-  const itemsContainer = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setItems(StoreAppsToItems(openApps, settings.size));
-  }, [openApps]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    updateHitbox();
-  }, [items, settings]);
+    refs.current = Array.from(document.getElementsByClassName(cs.item!)) as HTMLDivElement[];
+  });
 
-  const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
-    if (!itemsContainer.current) {
-      return;
-    }
+  const onReorderPinneds = debounce((apps: (SpecialApp | PinnedApp)[]) => {
+    console.log(apps);
+    let extractedPinned: PinnedApp[] = [];
 
-    const mouseX = event.clientX; // Posición X del cursor
-
-    itemsContainer.current.childNodes.forEach((child) => {
-      if (child.nodeType !== Node.ELEMENT_NODE) {
+    apps.forEach((app) => {
+      if (app === Separator1) {
+        dispatch(RootActions.setPinnedOnLeft(extractedPinned));
+        extractedPinned = [];
         return;
       }
 
+      if (app === Separator2) {
+        dispatch(RootActions.setPinnedOnCenter(extractedPinned));
+        extractedPinned = [];
+        return;
+      }
+
+      extractedPinned.push(app as PinnedApp);
+    });
+
+    dispatch(RootActions.setPinnedOnRight(extractedPinned));
+  }, 200);
+
+  const onReorderOpens = (apps: OpenApp[]) => {
+    dispatch(RootActions.setApps(apps));
+  };
+
+  const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    const mouseX = event.clientX; // Posición X del cursor
+
+    refs.current.forEach((child) => {
       const node = child as HTMLElement;
       const rect = (node as HTMLDivElement).getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -90,9 +87,10 @@ export function SeelenWeg() {
         ((MAX_CURSOR_DISTANCE - distance) / MAX_CURSOR_DISTANCE) * settings.zoomSize,
       );
 
-      const distancemargin = Math.min(MAX_CURSOR_DISTANCE / 3, distanceFromBorder);
+      const maxMargin = (settings.zoomSize - settings.size) / 5;
+      const distancemargin = Math.min(MAX_CURSOR_DISTANCE_MARGIN, distanceFromBorder);
       const marginBottom =
-        ((MAX_CURSOR_DISTANCE / 3 - distancemargin) / (MAX_CURSOR_DISTANCE / 3)) * 10;
+        ((MAX_CURSOR_DISTANCE_MARGIN - distancemargin) / MAX_CURSOR_DISTANCE_MARGIN) * maxMargin;
 
       node.style.width = newSize + 'px';
       node.style.height = newSize + 'px';
@@ -101,15 +99,7 @@ export function SeelenWeg() {
   };
 
   const onMouseLeave = () => {
-    if (!itemsContainer.current) {
-      return;
-    }
-
-    itemsContainer.current.childNodes.forEach((child) => {
-      if (child.nodeType !== Node.ELEMENT_NODE) {
-        return;
-      }
-
+    refs.current.forEach((child) => {
       const node = child as HTMLElement;
       node.style.width = settings.size + 'px';
       node.style.height = settings.size + 'px';
@@ -124,33 +114,72 @@ export function SeelenWeg() {
   };
 
   return (
-    <div className={cs.bar} onMouseMoveCapture={onMouseMove} onMouseLeave={onMouseLeave}>
+    <Reorder.Group
+      onMouseMoveCapture={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
+      onReorder={onReorderPinneds}
+      axis="x"
+      as="div"
+      className={cs.bar}
+    >
       <BackgroundByLayers styles={theme?.seelenweg.background || []} />
-      {pinnedOnLeft.length > 0 && (
-        <div className={cx(cs.itemsContainer, cs.left)} style={containerStyle}>
-          {/* TODO */}
-        </div>
-      )}
-      <div ref={itemsContainer} className={cs.itemsContainer} style={containerStyle}>
-        {items.map((item, index) => (
-          <Tooltip key={index} title={item.label} placement="top" showArrow={false}>
-            <button
-              className={cs.item}
-              style={item.style}
-              onClick={() => {
-                invoke('weg_toggle_window_state', { hwnd: item.hwnd!, exePath: item.exePath });
-              }}
-            >
-              <img src={convertFileSrc(item.iconPath)} />
-            </button>
-          </Tooltip>
+
+      <div
+        className={cx(cs.itemsContainer, cs.left)}
+        style={{
+          ...containerStyle,
+          padding: pinnedOnLeft.length === 0 ? 0 : containerStyle.padding,
+        }}
+      >
+        {pinnedOnLeft.map((item) => (
+          <WegItem key={item.exe} item={item} initialSize={settings.size} />
         ))}
       </div>
-      {pinnedOnRight.length > 0 && (
-        <div className={cx(cs.itemsContainer, cs.right)} style={containerStyle}>
-          {/* TODO */}
+
+      <Reorder.Item as="div" value={Separator1}>
+        <div>|</div>
+      </Reorder.Item>
+
+      <div className={cs.group}>
+        <div
+          className={cs.itemsContainer}
+          style={containerStyle}
+        >
+          {pinnedOnCenter.map((item) => (
+            <WegItem key={item.exe} item={item} initialSize={settings.size} />
+          ))}
         </div>
-      )}
-    </div>
+
+        <Reorder.Group
+          as="div"
+          axis="x"
+          className={cs.itemsContainer}
+          style={containerStyle}
+          values={openApps}
+          onReorder={onReorderOpens}
+        >
+          {openApps.map((item) => (
+            <WegItem key={item.hwnd} item={item} initialSize={settings.size} />
+          ))}
+        </Reorder.Group>
+      </div>
+
+      <Reorder.Item as="div" value={Separator2}>
+        <div>|</div>
+      </Reorder.Item>
+
+      <div
+        className={cx(cs.itemsContainer, cs.right)}
+        style={{
+          ...containerStyle,
+          padding: pinnedOnRight.length === 0 ? 0 : containerStyle.padding,
+        }}
+      >
+        {pinnedOnRight.map((item) => (
+          <WegItem key={item.exe} item={item} initialSize={settings.size} />
+        ))}
+      </div>
+    </Reorder.Group>
   );
 }

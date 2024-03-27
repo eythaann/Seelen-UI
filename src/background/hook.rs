@@ -6,14 +6,13 @@ use windows::Win32::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_SHOW, MSG,
+            EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_HIDE,
+            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, MSG,
         },
     },
 };
 
 use crate::{error_handler::Result, seelen::SEELEN, seelenweg::SeelenWeg};
-
-static FILTERED_EVENT: [u32; 3] = [EVENT_OBJECT_DESTROY, EVENT_OBJECT_SHOW, EVENT_OBJECT_CREATE];
 
 pub extern "system" fn win_event_hook(
     _h_win_event_hook: HWINEVENTHOOK,
@@ -24,17 +23,30 @@ pub extern "system" fn win_event_hook(
     _id_event_thread: u32,
     _dwms_event_time: u32,
 ) {
-    if id_object != 0 || !FILTERED_EVENT.contains(&event) {
+    if id_object != 0 {
         return;
     }
 
-    let mut seelen = SEELEN.lock();
+    /*
+    if event == EVENT_OBJECT_LOCATIONCHANGE {
+        return;
+    }
+
+    let winevent = match WinEvent::try_from(event) {
+        Ok(event) => event,
+        Err(_) => return,
+    };
+
+    println!("{:?}", winevent); */
+
     match event {
-        EVENT_OBJECT_DESTROY => {
+        EVENT_OBJECT_DESTROY | EVENT_OBJECT_HIDE | EVENT_OBJECT_CLOAKED => {
+            let mut seelen = SEELEN.lock();
             seelen.mut_weg().remove_hwnd(hwnd);
         }
-        EVENT_OBJECT_SHOW => {
+        EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE | EVENT_OBJECT_UNCLOAKED => {
             if SeelenWeg::should_handle_hwnd(hwnd) {
+                let mut seelen = SEELEN.lock();
                 seelen.mut_weg().add_hwnd(hwnd);
             }
         }

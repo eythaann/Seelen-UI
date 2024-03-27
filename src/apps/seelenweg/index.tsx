@@ -1,5 +1,5 @@
 import { wrapConsole } from '../ConsoleWrapper';
-import { registerDocumentEvents, setWindowSize } from './events';
+import { registerDocumentEvents, setWindowSize, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
 import { emitTo } from '@tauri-apps/api/event';
 import { ConfigProvider, theme } from 'antd';
@@ -20,9 +20,12 @@ async function Main() {
   await loadStore();
   registerDocumentEvents();
 
+  const container = document.getElementById('root') || document.body;
+
   const WrappedRoot = () => {
     useEffect(() => {
       emitTo('seelenweg-hitbox', 'init');
+      updateHitbox();
     }, []);
 
     return (
@@ -41,7 +44,6 @@ async function Main() {
     );
   };
 
-  const container = document.getElementById('root') || document.body;
   createRoot(container).render(<WrappedRoot />);
 }
 

@@ -1,14 +1,17 @@
 import { Theme } from '../../../../../shared.interfaces';
+import { updateHitbox } from '../../../events';
 import { configureStore } from '@reduxjs/toolkit';
-import { invoke } from '@tauri-apps/api/core';
+import { path } from '@tauri-apps/api';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 
 import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
+import { fs } from '../../../../settings/modules/shared/infrastructure/tauri';
 
 import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/StateBridge';
 import { RootActions, RootSlice } from './app';
 
-import { SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
+import { SeelenWegMode, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
 import { OpenApp } from './domain';
 
 export const store = configureStore({
@@ -21,23 +24,56 @@ export type store = {
   getState: () => {};
 };
 
+async function cleanItems(items: OpenApp[]) {
+  const missingIcon = await path.resolve(
+    await path.resourceDir(),
+    'static',
+    'icons',
+    'missing.png',
+  );
+
+  const cleaned: OpenApp[] = [];
+
+  for (const item of items) {
+    if (!(await fs.exists(item.icon))) {
+      item.icon = missingIcon;
+    }
+    item.icon = convertFileSrc(item.icon);
+    cleaned.push(item);
+  }
+
+  return cleaned;
+}
+
 export async function registerStoreEvents() {
-  await listen<any[]>('update-store-apps', (event) => {
-    store.dispatch(
-      RootActions.setApps(
-        event.payload.map<OpenApp>((app) => {
-          return {
-            ...app,
-            state: 'Open',
-          };
-        }),
-      ),
-    );
+  const updateHitboxIfNeeded = () => {
+    const { mode } = store.getState().settings;
+    if (mode === SeelenWegMode.MIN_CONTENT) {
+      updateHitbox();
+    }
+  };
+
+  await listen<OpenApp[]>('update-store-apps', async (event) => {
+    store.dispatch(RootActions.setApps(await cleanItems(event.payload)));
+    updateHitboxIfNeeded();
+  });
+
+  await listen<OpenApp>('add-open-app', async (event) => {
+    const item = (await cleanItems([event.payload]))[0]!;
+    store.dispatch(RootActions.addOpenApp(item));
+    updateHitboxIfNeeded();
+  });
+
+  await listen<number>('remove-open-app', (event) => {
+    store.dispatch(RootActions.removeOpenApp(event.payload));
+    updateHitboxIfNeeded();
   });
 
   await listen<SeelenWegState>('update-store-settings', (event) => {
     document.getElementById('root')!.style.margin = event.payload.margin + 'px';
+
     store.dispatch(RootActions.setSettings(event.payload));
+    updateHitbox();
   });
 
   await listen<Theme>('update-store-theme', (event) => {
@@ -51,8 +87,9 @@ export async function loadStore() {
   const userSettings = await loadUserSettings();
   const initialState = RootSlice.getInitialState();
 
-  store.dispatch(
-    RootActions.setSettings(JsonToState_Seelenweg(userSettings.jsonSettings, initialState.settings)),
-  );
-  store.dispatch(RootActions.setTheme(userSettings.theme));
+  const settings = JsonToState_Seelenweg(userSettings.jsonSettings, initialState.settings);
+  store.dispatch(RootActions.setSettings(settings));
+  if (userSettings.theme) {
+    store.dispatch(RootActions.setTheme(userSettings.theme));
+  }
 }

@@ -20,7 +20,8 @@ export const updateHitbox = () => {
   const { margin, mode } = store.getState().settings;
 
   root_container.style.margin = margin + 'px';
-  root_container.style.width = mode === SeelenWegMode.FULL_WIDTH ? `calc(100% - ${margin * 2}px)` : 'min-content';
+  root_container.style.width =
+    mode === SeelenWegMode.FULL_WIDTH ? `calc(100% - ${margin * 2}px)` : 'min-content';
 
   const width = root_container.offsetWidth;
   const height = root_container.offsetHeight;
@@ -38,26 +39,45 @@ export const updateHitbox = () => {
   });
 };
 
+export const ExtraCallbacksOnLeave = {
+  callbacks: [] as (() => void)[],
+  add(cb: () => void) {
+    this.callbacks.push(cb);
+  },
+  execute() {
+    this.callbacks.forEach((fn) => fn());
+  },
+};
+
 export function registerDocumentEvents() {
   const timeoutId: TimeoutIdRef = { ref: null };
+  const webview = getCurrent();
 
-  document.body.addEventListener('click', (event) => {
-    if (event.target === document.body) {
-      // if for some reazon mouseleave is not emitted
-      // set ignore cursor events when user click on screen
-      getCurrent().setIgnoreCursorEvents(true);
-    }
-  });
+  document.addEventListener('contextmenu', (event) => event.preventDefault());
 
-  root_container.addEventListener('mouseleave', debounce(() => {
-    getCurrent().setIgnoreCursorEvents(true);
+  const onMouseLeave = () => {
+    webview.setIgnoreCursorEvents(true);
     updateHitbox(); // ensure min size hitbox on unzoom elements
-  }, 200, timeoutId));
+    ExtraCallbacksOnLeave.execute();
+  };
 
-  listen('mouseenter', () => {
+  const onMouseEnter = () => {
     if (timeoutId.ref) {
       clearTimeout(timeoutId.ref);
     }
-    getCurrent().setIgnoreCursorEvents(false);
+    webview.setIgnoreCursorEvents(false);
+  };
+
+  root_container.addEventListener('mouseleave', debounce(onMouseLeave, 200, timeoutId));
+
+  // if for some reazon mouseleave is not emitted
+  // set ignore cursor events when user click on screen
+  document.body.addEventListener('click', (event) => {
+    if (event.target === document.body) {
+      onMouseLeave();
+    }
   });
+
+  root_container.addEventListener('mouseenter', onMouseEnter);
+  listen('mouseenter', onMouseEnter); // listener for hitbox
 }

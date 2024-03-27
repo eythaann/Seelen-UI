@@ -9,7 +9,7 @@ async function Main() {
   wrapConsole();
 
   listen('init', () => {
-    document.body.addEventListener('mouseenter', () => {
+    document.body.addEventListener('mousemove', () => {
       emitTo('seelenweg', 'mouseenter');
     });
   });

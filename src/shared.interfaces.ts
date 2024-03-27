@@ -27,5 +27,11 @@ export interface Theme {
   info: ThemeInfo;
   seelenweg: {
     background: CSSProperties[];
+    items: {
+      background: CSSProperties[];
+    };
+    contextMenu: {
+      background: CSSProperties[];
+    };
   };
 }

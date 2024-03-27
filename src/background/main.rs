@@ -13,6 +13,7 @@ mod tray;
 mod utils;
 mod webviews;
 mod windows_api;
+mod winevent;
 
 use cli::handle_cli;
 use error_handler::Result;

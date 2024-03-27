@@ -1,3 +1,5 @@
+use std::process::Command;
+
 use tauri::{command, Builder, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::UI::Input::KeyboardAndMouse::{
@@ -61,8 +63,19 @@ fn kill_seelen_shortcuts() -> Result<(), String> {
     Ok(())
 }
 
+#[command]
+fn open_file_location(path: String) -> Result<(), String> {
+    Command::new("explorer")
+        .args(["/select,", &path])
+        .spawn()
+        .unwrap();
+    Ok(())
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
+        // General
+        open_file_location,
         // Media
         media_play_pause,
         media_next,

@@ -15,9 +15,25 @@
       "properties": {
         "background": {
           "$ref": "#/definitions/layers"
+        },
+        "items": {
+          "properties": {
+            "background": {
+              "$ref": "#/definitions/layers"
+            }
+          },
+          "required": ["background"]
+        },
+        "contextMenu": {
+          "properties": {
+            "background": {
+              "$ref": "#/definitions/layers"
+            }
+          },
+          "required": ["background"]
         }
       },
-      "required": ["background"]
+      "required": ["background", "items", "contextMenu"]
     }
   },
   "required": ["info", "seelenweg"],

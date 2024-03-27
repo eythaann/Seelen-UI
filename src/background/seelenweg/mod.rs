@@ -2,6 +2,7 @@ pub mod handler;
 
 use std::env::temp_dir;
 
+use lazy_static::lazy_static;
 use serde::Serialize;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
@@ -13,14 +14,18 @@ use windows::{
             Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
             WindowsAndMessaging::{
                 EnumWindows, FindWindowW, GetParent, GetWindowLongW, ShowWindow, GWL_EXSTYLE,
-                GWL_STYLE, SHOW_WINDOW_CMD, SW_HIDE, SW_SHOWNORMAL, WINDOW_EX_STYLE, WINDOW_STYLE,
-                WS_EX_APPWINDOW, WS_EX_TOOLWINDOW, WS_POPUP,
+                SHOW_WINDOW_CMD, SW_HIDE, SW_SHOWNORMAL, WINDOW_EX_STYLE, WS_EX_APPWINDOW,
+                WS_EX_TOOLWINDOW,
             },
         },
     },
 };
 
 use crate::{error_handler::Result, seelen::SEELEN, windows_api::WindowsApi};
+
+lazy_static! {
+    static ref BLACK_LIST: Vec<&'static str> = Vec::from(["", "SeelenWeg", "SeelenWeg Hitbox",]);
+}
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SeelenWegApp {
@@ -36,6 +41,9 @@ pub struct SeelenWeg {
 }
 
 impl SeelenWeg {
+    const TARGET: &'static str = "seelenweg";
+    const TARGET_HITBOX: &'static str = "seelenweg-hitbox";
+
     pub fn new(handle: AppHandle<Wry>) -> Self {
         Self {
             handle,
@@ -46,7 +54,7 @@ impl SeelenWeg {
     fn create_window(&self) -> Result<WebviewWindow> {
         tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             &self.handle,
-            "seelenweg-hitbox",
+            Self::TARGET_HITBOX,
             tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
         )
         .maximizable(false)
@@ -63,7 +71,7 @@ impl SeelenWeg {
 
         let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             &self.handle,
-            "seelenweg",
+            Self::TARGET,
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
         )
         .position(0.0, 0.0)
@@ -198,7 +206,7 @@ impl SeelenWeg {
 
     pub fn update_ui(&self) {
         self.handle
-            .emit("update-store-apps", self.opened_apps.clone())
+            .emit_to(Self::TARGET, "update-store-apps", self.opened_apps.clone())
             .expect("Failed to emit");
     }
 
@@ -213,35 +221,51 @@ impl SeelenWeg {
             icon_path = self.extract_icon(&exe_path).unwrap_or(icon_path);
         }
 
-        self.opened_apps.push(SeelenWegApp {
+        let app = SeelenWegApp {
             hwnd: hwnd.0,
             exe: exe_path,
             title: WindowsApi::get_window_text(hwnd),
             icon: icon_path,
-        });
-        self.update_ui();
+        };
+
+        self.handle
+            .emit_to(Self::TARGET, "add-open-app", app.clone())
+            .expect("Failed to emit");
+
+        self.opened_apps.push(app);
     }
 
     pub fn remove_hwnd(&mut self, hwnd: HWND) {
         self.opened_apps.retain(|app| app.hwnd != hwnd.0);
-        self.update_ui();
+        self.handle
+            .emit_to(Self::TARGET, "remove-open-app", hwnd.0)
+            .expect("Failed to emit");
     }
 
     pub fn should_handle_hwnd(hwnd: HWND) -> bool {
-        if WindowsApi::is_window_visible(hwnd) {
-            unsafe {
-                let parent = GetParent(hwnd);
-                if parent.0 == 0 {
-                    let ex_style = WINDOW_EX_STYLE(GetWindowLongW(hwnd, GWL_EXSTYLE) as u32);
-                    let style = WINDOW_STYLE(GetWindowLongW(hwnd, GWL_STYLE) as u32);
-
-                    let is_popup = style.contains(WS_POPUP); // Todo(eythan) ensure this is correct
-                    let is_tool = ex_style.contains(WS_EX_TOOLWINDOW);
-                    let is_app = ex_style.contains(WS_EX_APPWINDOW);
-                    return (!is_popup && !is_tool) || is_app;
-                }
-            }
+        if !WindowsApi::is_window_visible(hwnd) {
+            return false;
         }
-        false
+
+        let parent = unsafe { GetParent(hwnd) };
+        if parent.0 != 0 {
+            return false;
+        }
+
+        let ex_style = WINDOW_EX_STYLE(unsafe { GetWindowLongW(hwnd, GWL_EXSTYLE) } as u32);
+        let is_tool = ex_style.contains(WS_EX_TOOLWINDOW);
+        let is_app = ex_style.contains(WS_EX_APPWINDOW);
+
+        if is_tool && !is_app {
+            return false;
+        }
+
+        let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
+        if exe_path.starts_with("C:\\Windows\\SystemApps") {
+            return false;
+        }
+
+        let title = WindowsApi::get_window_text(hwnd);
+        !BLACK_LIST.contains(&title.as_str())
     }
 }

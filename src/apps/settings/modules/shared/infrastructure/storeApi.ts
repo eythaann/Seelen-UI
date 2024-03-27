@@ -42,23 +42,21 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
   let themesPath = await path.join(await path.resourceDir(), 'static', 'themes');
   let entries = await fs.readDir(themesPath);
 
-  let hasDefinedTheme = !!userSettings.jsonSettings.theme_filename;
-
   for (const entry of entries) {
     if (entry.isFile && entry.name.endsWith('.json')) {
       const theme: Theme = JSON.parse(await fs.readTextFile(await path.join(themesPath, entry.name)));
 
-      if (hasDefinedTheme && userSettings.jsonSettings.theme_filename === entry.name) {
-        userSettings.theme = theme;
-      }
-
-      if (!hasDefinedTheme && entry.name === 'default_light.json') {
+      if (userSettings.jsonSettings.theme_filename === entry.name) {
         userSettings.theme = theme;
       }
 
       theme.info.filename = entry.name;
       userSettings.themes.push(theme);
     }
+  }
+
+  if (!userSettings.theme) {
+    userSettings.theme = userSettings.themes[0] || null;
   }
 
   return userSettings;

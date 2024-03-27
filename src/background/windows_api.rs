@@ -1,3 +1,4 @@
+use color_eyre::eyre::eyre;
 use windows::{
     core::PWSTR,
     Win32::{
@@ -116,6 +117,14 @@ impl WindowsApi {
         Self::close_process(handle)?;
 
         Ok(String::from_utf16(&path[..len as usize])?)
+    }
+
+    pub fn _exe(hwnd: HWND) -> Result<String> {
+        Ok(Self::exe_path(hwnd)?
+            .split('\\')
+            .last()
+            .ok_or_else(|| eyre!("there is no last element"))?
+            .to_string())
     }
 
     pub fn get_window_text(hwnd: HWND) -> String {

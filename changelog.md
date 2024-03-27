@@ -5,6 +5,8 @@
 - add Themes Feature 🎉 (incompleted only for Seelenweg for now)
 - add SeelenWeg (a Dock or Taskbar) beta feature
 - add SeelenWeg in to Settings
+- add ContextMenu for apps in SeelenWeg
+- allow move apps in the Weg 😄
 
 ### enhancements
 - move readme blob to documentation/images
