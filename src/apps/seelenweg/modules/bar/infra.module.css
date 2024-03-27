@@ -4,9 +4,10 @@
   display: flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 
-  .group {
-    display: flex;
+  .separator {
+    width: 1px;
   }
 
   .itemsContainer {
@@ -15,10 +16,25 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    flex: 1;
+    height: 100%;
+    gap: inherit;
+
+    .itemsContainer {
+      flex: 0;
+    }
+
+    &.left {
+      justify-content: flex-start;
+    }
+
+    &.right {
+      justify-content: flex-end;
+    }
 
     &:not(:hover) {
       .item {
-        transition-property: width, height, margin, filter; 
+        transition-property: width, height, margin, filter;
         transition-duration: 0.2s;
         transition-timing-function: ease-in-out;
       }
@@ -43,10 +59,10 @@
   align-items: center;
 
   &:active {
-    filter: brightness(0.30);
+    filter: brightness(0.3);
   }
 
-  >img {
+  > img {
     width: 65%;
     height: 65%;
     filter: drop-shadow(0px 0px 1px #0000009a);
