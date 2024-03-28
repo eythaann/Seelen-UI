@@ -6,10 +6,12 @@ use crate::{seelen::SEELEN, windows_api::WindowsApi};
 use windows::{
     core::PCWSTR,
     Win32::{
-        Foundation::HWND,
+        Foundation::{HWND, LPARAM, WPARAM},
         UI::{
             Shell::ShellExecuteW,
-            WindowsAndMessaging::{ShowWindow, SW_MINIMIZE, SW_RESTORE, SW_SHOWNORMAL},
+            WindowsAndMessaging::{
+                PostMessageW, ShowWindow, SW_MINIMIZE, SW_RESTORE, SW_SHOWNORMAL, WM_CLOSE,
+            },
         },
     },
 };
@@ -17,6 +19,17 @@ use windows::{
 #[command]
 pub fn weg_request_apps() {
     SEELEN.lock().weg().update_ui();
+}
+
+#[command]
+pub fn weg_close_app(hwnd: isize) -> Result<(), String> {
+    let hwnd = HWND(hwnd);
+    unsafe {
+        match PostMessageW(hwnd, WM_CLOSE, WPARAM(0), LPARAM(0)) {
+            Ok(()) => Ok(()),
+            Err(_) => Err("could not close window".to_owned()),
+        }
+    }
 }
 
 #[command]

@@ -84,8 +84,13 @@ export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
 
   if (isTemporalPinned(item)) {
     menu.push({
-      label: 'Close',
+      label: item.opens.length > 1 ? 'Close All' : 'Close',
       key: 'weg_close_app',
+      onClick() {
+        item.opens.forEach((app) => {
+          invoke('weg_close_app', { hwnd: app.hwnd });
+        });
+      },
       danger: true,
     });
   }

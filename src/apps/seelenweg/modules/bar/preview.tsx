@@ -20,7 +20,8 @@ export const WegPreview = ({ hwnd, title, exe }: PreviewProps) => {
       onClick={() => invoke('weg_toggle_window_state', { hwnd, exePath: exe })}
     >
       <div className={cs.title} style={styles.title}>
-        {title}
+        <div className={cs.label}>{title}</div>
+        <div className={cs.close} onClick={() => invoke('weg_close_app', { hwnd })}>x</div>
       </div>
       <div className={cs.image} style={styles.image}>
         Incomming

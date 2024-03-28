@@ -45,7 +45,7 @@
       },
       "items": {
         "content": {
-          "padding": "10px",
+          "padding": "6px 10px 10px 10px",
           "borderRadius": "10px"
         },
         "title": {

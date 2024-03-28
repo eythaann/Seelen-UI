@@ -21,7 +21,6 @@ export interface App {
   exe: string;
   icon: string;
   title: string;
-  hwnd?: number;
 }
 
 export interface AppFromBackground extends App {
@@ -36,7 +35,6 @@ export interface PinnedAppSubItem {
 export interface PinnedApp extends App {
   type: SpecialItemType.PinnedApp | SpecialItemType.TemporalPin;
   opens: PinnedAppSubItem[];
-  hwnd?: never;
 }
 
 export interface TemporalPinnedApp extends PinnedApp {

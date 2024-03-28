@@ -85,6 +85,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         start_seelen_shortcuts,
         kill_seelen_shortcuts,
         // SeelenWeg
+        weg_close_app,
         weg_request_apps,
         weg_toggle_window_state,
     ])

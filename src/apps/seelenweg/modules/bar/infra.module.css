@@ -90,12 +90,33 @@
     }
 
     .title {
-      overflow: hidden;
+      display: flex;
       width: 240px;
-      text-wrap: nowrap;
-      text-overflow: ellipsis;
+      justify-content: space-between;
+      gap: 10px;
+
+      .label {
+        overflow: hidden;
+        text-wrap: nowrap;
+        text-overflow: ellipsis;
+        flex: 1;
+      }
+
+      .close {
+        border-radius: 6px;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 5px;
+
+        &:hover {
+          background-color: #0000005c;
+        }
+      }
     }
-  
+
     .image {
       width: 240px;
       height: calc(240px / 1.77);
