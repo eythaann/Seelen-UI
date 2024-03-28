@@ -1,12 +1,10 @@
-import { AppTemplate, Theme, UserSettings } from '../../../../../shared.interfaces';
+import { AppTemplate, defaultTheme, Theme, UserSettings } from '../../../../../shared.interfaces';
 import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
 import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
 import { defaultsDeep } from 'lodash';
-
-import { defaultTheme } from '../../../../seelenweg/modules/shared/store/app';
 
 import { AppsTemplates } from '../domain/appsTemplates';
 

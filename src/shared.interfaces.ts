@@ -46,3 +46,31 @@ export interface Theme {
     };
   };
 }
+
+export const defaultTheme: Theme = {
+  info: {
+    filename: 'unknown',
+    displayName: 'Empty',
+    author: 'none',
+  },
+  seelenweg: {
+    background: [],
+    items: {
+      background: [],
+      content: {},
+    },
+    contextMenu: {
+      background: [],
+      content: {},
+    },
+    preview: {
+      content: {},
+      background: [],
+      items: {
+        content: {},
+        title: {},
+        image: {},
+      },
+    },
+  },
+};

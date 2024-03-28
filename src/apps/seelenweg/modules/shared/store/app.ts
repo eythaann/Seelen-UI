@@ -1,38 +1,10 @@
-import { Theme } from '../../../../../shared.interfaces';
+import { defaultTheme } from '../../../../../shared.interfaces';
 import { StateBuilder } from '../../../../utils/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { SeelenWegSlice } from '../../bar/app';
 
 import { App, AppFromBackground, PinnedApp, PinnedAppSide, RootState, SpecialItemType, TemporalPinnedApp } from './domain';
-
-export const defaultTheme: Theme = {
-  info: {
-    filename: 'unknown',
-    displayName: 'Empty',
-    author: 'none',
-  },
-  seelenweg: {
-    background: [],
-    items: {
-      background: [],
-      content: {},
-    },
-    contextMenu: {
-      background: [],
-      content: {},
-    },
-    preview: {
-      content: {},
-      background: [],
-      items: {
-        content: {},
-        title: {},
-        image: {},
-      },
-    },
-  },
-};
 
 const initialState: RootState = {
   pinnedOnLeft: [],

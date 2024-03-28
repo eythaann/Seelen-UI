@@ -16,33 +16,36 @@ import './styles/global.css';
 
 (async function main() {
   wrapConsole();
-  await LoadSettingsToStore();
 
   const container = document.getElementById('root');
-  if (container) {
-    const WrappedRoot = () => {
-      useEffect(() => {
-        setTimeout(() => {
-          getCurrent().show();
-        }, 0);
-      });
-
-      return (
-        <Provider store={store}>
-          <ConfigProvider
-            componentSize="small"
-            theme={{
-              algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? theme.darkAlgorithm
-                : theme.defaultAlgorithm,
-            }}
-          >
-            <App />
-          </ConfigProvider>
-        </Provider>
-      );
-    };
-
-    createRoot(container).render(<WrappedRoot />);
+  if (!container) {
+    throw new Error('container not found');
   }
+
+  await LoadSettingsToStore();
+
+  const WrappedRoot = () => {
+    useEffect(() => {
+      setTimeout(() => {
+        getCurrent().show();
+      }, 0);
+    });
+
+    return (
+      <Provider store={store}>
+        <ConfigProvider
+          componentSize="small"
+          theme={{
+            algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? theme.darkAlgorithm
+              : theme.defaultAlgorithm,
+          }}
+        >
+          <App />
+        </ConfigProvider>
+      </Provider>
+    );
+  };
+
+  createRoot(container).render(<WrappedRoot />);
 })();
