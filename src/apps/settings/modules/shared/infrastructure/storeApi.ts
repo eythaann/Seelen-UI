@@ -4,6 +4,9 @@ import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
+import { defaultsDeep } from 'lodash';
+
+import { defaultTheme } from '../../../../seelenweg/modules/shared/store/app';
 
 import { AppsTemplates } from '../domain/appsTemplates';
 
@@ -45,13 +48,15 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
   for (const entry of entries) {
     if (entry.isFile && entry.name.endsWith('.json')) {
       const theme: Theme = JSON.parse(await fs.readTextFile(await path.join(themesPath, entry.name)));
+      const sanitizedTheme: Theme = defaultsDeep(theme, defaultTheme);
+
+      sanitizedTheme.info.filename = entry.name;
 
       if (userSettings.jsonSettings.theme_filename === entry.name) {
-        userSettings.theme = theme;
+        userSettings.theme = sanitizedTheme;
       }
 
-      theme.info.filename = entry.name;
-      userSettings.themes.push(theme);
+      userSettings.themes.push(sanitizedTheme);
     }
   }
 

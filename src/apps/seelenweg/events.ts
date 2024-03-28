@@ -50,7 +50,7 @@ export const ExtraCallbacksOnLeave = {
 };
 
 export function registerDocumentEvents() {
-  const timeoutId: TimeoutIdRef = { ref: null };
+  const timeoutId: TimeoutIdRef = { current: null };
   const webview = getCurrent();
 
   document.addEventListener('contextmenu', (event) => event.preventDefault());
@@ -62,8 +62,8 @@ export function registerDocumentEvents() {
   };
 
   const onMouseEnter = () => {
-    if (timeoutId.ref) {
-      clearTimeout(timeoutId.ref);
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
     }
     webview.setIgnoreCursorEvents(false);
   };

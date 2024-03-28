@@ -1,6 +1,7 @@
+import { debounce } from '../../../Timing';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
-import { MouseEvent, useEffect, useRef } from 'react';
+import { MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
@@ -9,50 +10,31 @@ import cs from './infra.module.css';
 import { cx } from '../../../settings/modules/shared/app/utils';
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { OpenApp, PinnedApp, SpecialApp, SpecialItemType } from '../shared/store/domain';
+import { PinnedApp, Separator, SpecialItemType } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = 500;
 const MAX_CURSOR_DISTANCE_MARGIN = MAX_CURSOR_DISTANCE / 3;
 
-const Separator1: SpecialApp = {
+const Separator1: Separator = {
   type: SpecialItemType.Separator,
 };
-const Separator2: SpecialApp = {
+
+const Separator2: Separator = {
   type: SpecialItemType.Separator,
 };
 
 interface Props {
   items: PinnedApp[];
-  openApps?: OpenApp[];
   initialSize: number;
   align?: 'left' | 'right';
 }
-function ItemsContainer({ items, initialSize, align, openApps }: Props) {
-  const dispatch = useDispatch();
-
-  const onReorderOpens = (apps: OpenApp[]) => {
-    dispatch(RootActions.setApps(apps));
-  };
-
+function ItemsContainer({ items, initialSize, align }: Props) {
   const alignClassname = align ? cs[align] : '';
   return (
     <div className={cx(cs.itemsContainer, alignClassname)}>
       {items.map((item) => (
         <WegItem key={item.exe} item={item} initialSize={initialSize} />
       ))}
-      {!!openApps && (
-        <Reorder.Group
-          as="div"
-          axis="x"
-          className={cs.itemsContainer}
-          values={openApps}
-          onReorder={onReorderOpens}
-        >
-          {openApps.map((item) => (
-            <WegItem key={item.hwnd} item={item} initialSize={initialSize} />
-          ))}
-        </Reorder.Group>
-      )}
     </div>
   );
 }
@@ -61,7 +43,6 @@ export function SeelenWeg() {
   const theme = useSelector(Selectors.theme);
   const settings = useSelector(Selectors.settings);
 
-  const openApps = useSelector(Selectors.apps);
   const pinnedOnLeft = useSelector(Selectors.pinnedOnLeft);
   const pinnedOnCenter = useSelector(Selectors.pinnedOnCenter);
   const pinnedOnRight = useSelector(Selectors.pinnedOnRight);
@@ -69,6 +50,7 @@ export function SeelenWeg() {
   const refs = useRef<HTMLDivElement[]>([]);
   const shouldAnimate = useRef(false);
   const mouseX = useRef(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   const dispatch = useDispatch();
 
@@ -76,7 +58,17 @@ export function SeelenWeg() {
     refs.current = Array.from(document.getElementsByClassName(cs.item!)) as HTMLDivElement[];
   });
 
-  const animate = () => {
+  const animate = useCallback(() => {
+    if (!shouldAnimate.current) {
+      refs.current.forEach((child) => {
+        const node = child as HTMLElement;
+        node.style.width = settings.size + 'px';
+        node.style.height = settings.size + 'px';
+        node.style.marginBottom = 0 + 'px';
+      });
+      return;
+    }
+
     refs.current.forEach((child) => {
       const node = child as HTMLElement;
       const rect = (node as HTMLDivElement).getBoundingClientRect();
@@ -102,12 +94,27 @@ export function SeelenWeg() {
       node.style.marginBottom = marginBottom + 'px';
     });
 
-    if (shouldAnimate.current) {
-      requestAnimationFrame(animate);
-    }
-  };
+    requestAnimationFrame(animate);
+  }, []);
 
-  const onReorderPinneds = (apps: (SpecialApp | PinnedApp)[]) => {
+  const onMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    mouseX.current = event.clientX;
+  }, []);
+
+  const onMouseEnter = useCallback(() => {
+    shouldAnimate.current = true;
+    requestAnimationFrame(animate);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }, []);
+
+  const disableMouseAnimations = useCallback(() => {
+    shouldAnimate.current = false;
+  }, []);
+
+  const onReorderPinneds = useCallback((apps: (Separator | PinnedApp)[]) => {
     let extractedPinned: PinnedApp[] = [];
 
     apps.forEach((app) => {
@@ -127,35 +134,13 @@ export function SeelenWeg() {
     });
 
     dispatch(RootActions.setPinnedOnRight(extractedPinned));
-  };
-
-  const onMouseMove = (event: MouseEvent<HTMLDivElement>) => {
-    mouseX.current = event.clientX;
-  };
-
-  const onMouseEnter = () => {
-    shouldAnimate.current = true;
-    requestAnimationFrame(animate);
-  };
-
-  const onMouseLeave = () => {
-    shouldAnimate.current = false;
-    // wait for next frame before leave
-    setTimeout(() => {
-      refs.current.forEach((child) => {
-        const node = child as HTMLElement;
-        node.style.width = settings.size + 'px';
-        node.style.height = settings.size + 'px';
-        node.style.marginBottom = 0 + 'px';
-      });
-    }, 100);
-  };
+  }, []);
 
   return (
     <Reorder.Group
       onMouseEnter={onMouseEnter}
-      onMouseMoveCapture={onMouseMove}
-      onMouseLeave={onMouseLeave}
+      onMouseMove={onMouseMove}
+      onMouseLeave={debounce(disableMouseAnimations, 100, timeoutRef)}
       values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
       onReorder={onReorderPinneds}
       axis="x"
@@ -175,7 +160,7 @@ export function SeelenWeg() {
         className={cs.separator}
         style={{ height: settings.size }}
       />
-      <ItemsContainer items={pinnedOnCenter} openApps={openApps} initialSize={settings.size} />
+      <ItemsContainer items={pinnedOnCenter} initialSize={settings.size} />
       <Reorder.Item
         as="div"
         value={Separator2}

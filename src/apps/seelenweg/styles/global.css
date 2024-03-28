@@ -1,12 +1,20 @@
 #root {
   width: min-content;
+
+  .ant-popover {
+    .ant-popover-inner {
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+  }  
 }
 
 body {
   overflow: hidden;
   cursor: default;
   background: transparent;
-  /* background: blue; */
   display: flex;
   justify-content: center;
   align-items: flex-end;

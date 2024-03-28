@@ -4,10 +4,10 @@ import { MenuProps } from 'antd';
 
 import { store } from '../shared/store/infra';
 
-import { isAppPinned, RootActions } from '../shared/store/app';
+import { isRealPinned, isTemporalPinned, RootActions } from '../shared/store/app';
 
 import { SeelenWegMode, SeelenWegState } from '../../../settings/modules/seelenweg/domain';
-import { OpenApp, PinnedApp, PinnedAppSide } from '../shared/store/domain';
+import { PinnedApp, PinnedAppSide } from '../shared/store/domain';
 
 const initialState: SeelenWegState = {
   enabled: true,
@@ -25,12 +25,14 @@ export const SeelenWegSlice = createSlice({
   reducers: {},
 });
 
-export function getMenuForItem(item: OpenApp | PinnedApp): MenuProps['items'] {
+export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
   const state = store.getState();
-  const isPinned = isAppPinned(state, item);
+  const isPinned = isRealPinned(state, item);
 
   const pin = (side: PinnedAppSide) => {
-    store.dispatch(RootActions.pinApp({ app: item as OpenApp, side }));
+    if (isTemporalPinned(item)) {
+      store.dispatch(RootActions.pinApp({ app: item, side }));
+    }
   };
 
   const menu: MenuProps['items'] = [];
@@ -46,19 +48,25 @@ export function getMenuForItem(item: OpenApp | PinnedApp): MenuProps['items'] {
   } else {
     menu.push(
       {
-        label: 'Pin to Left',
-        key: 'weg_pin_app_left',
-        onClick: () => pin(PinnedAppSide.LEFT),
-      },
-      {
-        label: 'Pin to Center',
-        key: 'weg_pin_app_center',
-        onClick: () => pin(PinnedAppSide.CENTER),
-      },
-      {
-        label: 'Pin to Right',
-        key: 'weg_pin_app_right',
-        onClick: () => pin(PinnedAppSide.RIGHT),
+        label: 'Pin',
+        key: 'weg_pin_app',
+        children: [
+          {
+            label: 'Pin to Left',
+            key: 'weg_pin_app_left',
+            onClick: () => pin(PinnedAppSide.LEFT),
+          },
+          {
+            label: 'Pin to Center',
+            key: 'weg_pin_app_center',
+            onClick: () => pin(PinnedAppSide.CENTER),
+          },
+          {
+            label: 'Pin to Right',
+            key: 'weg_pin_app_right',
+            onClick: () => pin(PinnedAppSide.RIGHT),
+          },
+        ],
       },
     );
   }
@@ -72,11 +80,15 @@ export function getMenuForItem(item: OpenApp | PinnedApp): MenuProps['items'] {
       key: 'weg_open_file_location',
       onClick: () => invoke('open_file_location', { path: item.exe }),
     },
-    {
+  );
+
+  if (isTemporalPinned(item)) {
+    menu.push({
       label: 'Close',
       key: 'weg_close_app',
-    },
-  );
+      danger: true,
+    });
+  }
 
   return menu;
 }

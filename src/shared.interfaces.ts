@@ -29,9 +29,20 @@ export interface Theme {
     background: CSSProperties[];
     items: {
       background: CSSProperties[];
+      content: CSSProperties;
     };
     contextMenu: {
       background: CSSProperties[];
+      content: CSSProperties;
+    };
+    preview: {
+      background: CSSProperties[];
+      content: CSSProperties;
+      items: {
+        content: CSSProperties;
+        title: CSSProperties;
+        image: CSSProperties;
+      };
     };
   };
 }

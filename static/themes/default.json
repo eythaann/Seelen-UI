@@ -32,6 +32,33 @@
           "backgroundColor": "var(--color-gray-200)"
         }
       ]
+    },
+    "preview": {
+      "background": [
+        {
+          "backgroundColor": "var(--color-gray-200)"
+        }
+      ],
+      "content": {
+        "padding": "10px",
+        "borderRadius": "10px"
+      },
+      "items": {
+        "content": {
+          "padding": "10px",
+          "borderRadius": "10px"
+        },
+        "title": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "var(--color-gray-900)",
+          "margin": "0 0 8px 0"
+        },
+        "image": {
+          "borderRadius": "10px",
+          "border": "1px solid var(--color-gray-300)"
+        }
+      }
     }
   }
 }

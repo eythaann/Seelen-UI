@@ -31,6 +31,7 @@ async function Main() {
     return (
       <Provider store={store}>
         <ConfigProvider
+          getPopupContainer={() => container}
           componentSize="small"
           theme={{
             algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches

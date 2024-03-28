@@ -11,25 +11,40 @@ export enum SpecialItemType {
   Bluetooth = 'Bluetooth',
   Battery = 'Battery',
   DateTime = 'DateTime',
-  App = 'App',
+
+  PinnedApp = 'PinnedApp',
+  TemporalPin = 'TemporalPin',
 }
 
 export interface App {
+  type?: SpecialItemType;
   exe: string;
   icon: string;
   title: string;
+  hwnd?: number;
 }
 
-export interface SpecialApp {
-  type: SpecialItemType;
-}
-
-export interface OpenApp extends App {
+export interface AppFromBackground extends App {
   hwnd: number;
 }
 
-export interface PinnedApp extends App, SpecialApp {
+export interface PinnedAppSubItem {
+  hwnd: number;
+  title: string;
+}
+
+export interface PinnedApp extends App {
+  type: SpecialItemType.PinnedApp | SpecialItemType.TemporalPin;
+  opens: PinnedAppSubItem[];
   hwnd?: never;
+}
+
+export interface TemporalPinnedApp extends PinnedApp {
+  type: SpecialItemType.TemporalPin;
+}
+
+export interface Separator {
+  type: SpecialItemType.Separator;
 }
 
 export enum PinnedAppSide {
@@ -39,7 +54,6 @@ export enum PinnedAppSide {
 }
 
 export interface RootState {
-  apps: OpenApp[];
   pinnedOnLeft: PinnedApp[];
   pinnedOnCenter: PinnedApp[];
   pinnedOnRight: PinnedApp[];

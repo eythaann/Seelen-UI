@@ -12,7 +12,7 @@ import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/S
 import { RootActions, RootSlice } from './app';
 
 import { SeelenWegMode, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
-import { OpenApp } from './domain';
+import { AppFromBackground } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -24,7 +24,7 @@ export type store = {
   getState: () => {};
 };
 
-async function cleanItems(items: OpenApp[]) {
+async function cleanItems(items: AppFromBackground[]) {
   const missingIcon = await path.resolve(
     await path.resourceDir(),
     'static',
@@ -32,7 +32,7 @@ async function cleanItems(items: OpenApp[]) {
     'missing.png',
   );
 
-  const cleaned: OpenApp[] = [];
+  const cleaned: AppFromBackground[] = [];
 
   for (const item of items) {
     if (!(await fs.exists(item.icon))) {
@@ -53,12 +53,14 @@ export async function registerStoreEvents() {
     }
   };
 
-  await listen<OpenApp[]>('update-store-apps', async (event) => {
-    store.dispatch(RootActions.setApps(await cleanItems(event.payload)));
+  await listen<AppFromBackground[]>('update-store-apps', async (event) => {
+    const items = await cleanItems(event.payload);
+    console.log(items);
+    items.forEach((item) => store.dispatch(RootActions.addOpenApp(item)));
     updateHitboxIfNeeded();
   });
 
-  await listen<OpenApp>('add-open-app', async (event) => {
+  await listen<AppFromBackground>('add-open-app', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.addOpenApp(item));
     updateHitboxIfNeeded();

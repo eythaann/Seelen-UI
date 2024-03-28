@@ -7,6 +7,7 @@
 - add SeelenWeg in to Settings
 - add ContextMenu for apps in SeelenWeg
 - allow move apps in the Weg 😄
+- add Grouped Apps in one item
 
 ### enhancements
 - move readme blob to documentation/images
