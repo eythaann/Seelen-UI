@@ -7,7 +7,7 @@ use windows::Win32::{
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
             EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_HIDE,
-            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, MSG,
+            EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, MSG,
         },
     },
 };
@@ -47,6 +47,14 @@ pub extern "system" fn win_event_hook(
         EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE | EVENT_OBJECT_UNCLOAKED => {
             if SeelenWeg::should_handle_hwnd(hwnd) {
                 let mut seelen = SEELEN.lock();
+                seelen.mut_weg().add_hwnd(hwnd);
+            }
+        }
+        EVENT_OBJECT_NAMECHANGE => {
+            let mut seelen = SEELEN.lock();
+            if seelen.weg().contains_hwnd(hwnd) {
+                seelen.mut_weg().update_app_title(hwnd);
+            } else if SeelenWeg::should_handle_hwnd(hwnd) {
                 seelen.mut_weg().add_hwnd(hwnd);
             }
         }

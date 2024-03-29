@@ -93,8 +93,8 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
                 style={theme.preview.content}
                 onMouseMoveCapture={(e) => e.stopPropagation()}
               >
-                {item.opens.map((open) => (
-                  <WegPreview key={open.hwnd} hwnd={open.hwnd} title={open.title} exe={item.exe} />
+                {item.opens.map((hwnd) => (
+                  <WegPreview key={hwnd} hwnd={hwnd} />
                 ))}
               </div>
             </>
@@ -105,7 +105,7 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
             style={style}
             onClick={() => {
               if (!isDragging.current) {
-                let hwnd = item.opens[0]?.hwnd || 0;
+                let hwnd = item.opens[0] || 0;
                 invoke('weg_toggle_window_state', { hwnd, exePath: item.exe });
               }
             }}

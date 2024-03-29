@@ -280,7 +280,7 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
 
 const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
   return {
-    theme_filename: state.selectedTheme,
+    theme_filename: state.selectedTheme || undefined,
     alt_focus_hack: state.altFocusHack,
     animations: {
       finish_miminization_before_restore: state.animations.finishMiminization,

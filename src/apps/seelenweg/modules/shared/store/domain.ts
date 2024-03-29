@@ -27,14 +27,9 @@ export interface AppFromBackground extends App {
   hwnd: number;
 }
 
-export interface PinnedAppSubItem {
-  hwnd: number;
-  title: string;
-}
-
 export interface PinnedApp extends App {
   type: SpecialItemType.PinnedApp | SpecialItemType.TemporalPin;
-  opens: PinnedAppSubItem[];
+  opens: HWND[];
 }
 
 export interface TemporalPinnedApp extends PinnedApp {
@@ -51,10 +46,13 @@ export enum PinnedAppSide {
   RIGHT = 'right',
 }
 
+export type HWND = number & {};
+
 export interface RootState {
   pinnedOnLeft: PinnedApp[];
   pinnedOnCenter: PinnedApp[];
   pinnedOnRight: PinnedApp[];
+  openApps: Record<HWND, AppFromBackground>;
   theme: Theme;
   settings: SeelenWegState;
 }

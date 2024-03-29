@@ -22,7 +22,11 @@ tauri-build = { version = "2.0.0-beta", features = [] }
 [dependencies]
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "2.0.0-beta", features = ["protocol-asset", "tray-icon", "image-png"] }
+tauri = { version = "2.0.0-beta", features = [
+    "protocol-asset",
+    "tray-icon",
+    "image-png",
+] }
 tauri-plugin-fs = "2.0.0-beta.2"
 tauri-plugin-dialog = "2.0.0-beta.2"
 tauri-plugin-autostart = "2.0.0-beta.2"
@@ -44,7 +48,7 @@ features = [
     "Win32_UI_Input_KeyboardAndMouse",
     "Win32_UI_WindowsAndMessaging",
     "Win32_UI_Shell",
-    "Win32_System_Threading"
+    "Win32_System_Threading",
 ]
 
 [features]

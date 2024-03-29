@@ -8,6 +8,7 @@
 - add ContextMenu for apps in SeelenWeg
 - allow move apps in the Weg 😄
 - add Grouped Apps in one item
+- live reload of Apps on events like change of title
 
 ### enhancements
 - move readme blob to documentation/images

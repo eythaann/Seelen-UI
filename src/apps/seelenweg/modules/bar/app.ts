@@ -87,8 +87,8 @@ export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
       label: item.opens.length > 1 ? 'Close All' : 'Close',
       key: 'weg_close_app',
       onClick() {
-        item.opens.forEach((app) => {
-          invoke('weg_close_app', { hwnd: app.hwnd });
+        item.opens.forEach((hwnd) => {
+          invoke('weg_close_app', { hwnd });
         });
       },
       danger: true,

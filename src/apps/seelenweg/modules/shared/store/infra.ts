@@ -12,7 +12,7 @@ import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/S
 import { RootActions, RootSlice } from './app';
 
 import { SeelenWegMode, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
-import { AppFromBackground } from './domain';
+import { AppFromBackground, HWND } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -65,7 +65,13 @@ export async function registerStoreEvents() {
     updateHitboxIfNeeded();
   });
 
-  await listen<number>('remove-open-app', (event) => {
+  await listen<AppFromBackground>('update-open-app', async (event) => {
+    const item = (await cleanItems([event.payload]))[0]!;
+    store.dispatch(RootActions.updateOpenAppInfo(item));
+    updateHitboxIfNeeded();
+  });
+
+  await listen<HWND>('remove-open-app', (event) => {
     store.dispatch(RootActions.removeOpenApp(event.payload));
     updateHitboxIfNeeded();
   });

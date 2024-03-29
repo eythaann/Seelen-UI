@@ -118,19 +118,21 @@ export function SeelenWeg() {
     let extractedPinned: PinnedApp[] = [];
 
     apps.forEach((app) => {
-      if (app === Separator1) {
+      if (app === Separator1 && extractedPinned.length) {
         dispatch(RootActions.setPinnedOnLeft(extractedPinned));
         extractedPinned = [];
         return;
       }
 
-      if (app === Separator2) {
+      if (app === Separator2 && extractedPinned.length) {
         dispatch(RootActions.setPinnedOnCenter(extractedPinned));
         extractedPinned = [];
         return;
       }
 
-      extractedPinned.push(app as PinnedApp);
+      if (app.type !== SpecialItemType.Separator) {
+        extractedPinned.push(app);
+      }
     });
 
     dispatch(RootActions.setPinnedOnRight(extractedPinned));
@@ -153,29 +155,29 @@ export function SeelenWeg() {
       }}
     >
       <BackgroundByLayers styles={theme?.seelenweg.background || []} />
-      {!!pinnedOnLeft.length && (
-        <>
-          <ItemsContainer items={pinnedOnLeft} align="left" initialSize={settings.size} />
-          <Reorder.Item
-            as="div"
-            value={Separator1}
-            className={cs.separator}
-            style={{ height: settings.size }}
-          />
-        </>
-      )}
+      {!!pinnedOnLeft.length && <ItemsContainer items={pinnedOnLeft} align="left" initialSize={settings.size} />}
+      <Reorder.Item
+        as="div"
+        value={Separator1}
+        className={cs.separator}
+        style={{
+          height: settings.size,
+          marginLeft: pinnedOnLeft.length ? 0 : settings.spaceBetweenItems * -1,
+          opacity: pinnedOnLeft.length ? 1 : 0,
+        }}
+      />
       <ItemsContainer items={pinnedOnCenter} initialSize={settings.size} />
-      {!!pinnedOnRight.length && (
-        <>
-          <Reorder.Item
-            as="div"
-            value={Separator2}
-            className={cs.separator}
-            style={{ height: settings.size }}
-          />
-          <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />
-        </>
-      )}
+      <Reorder.Item
+        as="div"
+        value={Separator2}
+        className={cs.separator}
+        style={{
+          height: settings.size,
+          marginLeft: pinnedOnRight.length ? 0 : settings.spaceBetweenItems * -1,
+          opacity: pinnedOnRight.length ? 1 : 0,
+        }}
+      />
+      {!!pinnedOnRight.length && <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />}
     </Reorder.Group>
   );
 }

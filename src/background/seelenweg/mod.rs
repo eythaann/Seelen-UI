@@ -210,8 +210,22 @@ impl SeelenWeg {
             .expect("Failed to emit");
     }
 
+    pub fn contains_hwnd(&self, hwnd: HWND) -> bool {
+        self.opened_apps.iter().any(|app| app.hwnd == hwnd.0)
+    }
+
+    pub fn update_app_title(&mut self, hwnd: HWND) {
+        let app = self.opened_apps.iter_mut().find(|app| app.hwnd == hwnd.0);
+        if let Some(app) = app {
+            app.title = WindowsApi::get_window_text(hwnd);
+            self.handle
+                .emit_to(Self::TARGET, "update-open-app", app.clone())
+                .expect("Failed to emit");
+        }
+    }
+
     pub fn add_hwnd(&mut self, hwnd: HWND) {
-        if self.opened_apps.iter().any(|app| app.hwnd == hwnd.0) {
+        if self.contains_hwnd(hwnd) {
             return;
         }
 
