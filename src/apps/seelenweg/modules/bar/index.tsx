@@ -153,21 +153,29 @@ export function SeelenWeg() {
       }}
     >
       <BackgroundByLayers styles={theme?.seelenweg.background || []} />
-      <ItemsContainer items={pinnedOnLeft} align="left" initialSize={settings.size} />
-      <Reorder.Item
-        as="div"
-        value={Separator1}
-        className={cs.separator}
-        style={{ height: settings.size }}
-      />
+      {!!pinnedOnLeft.length && (
+        <>
+          <ItemsContainer items={pinnedOnLeft} align="left" initialSize={settings.size} />
+          <Reorder.Item
+            as="div"
+            value={Separator1}
+            className={cs.separator}
+            style={{ height: settings.size }}
+          />
+        </>
+      )}
       <ItemsContainer items={pinnedOnCenter} initialSize={settings.size} />
-      <Reorder.Item
-        as="div"
-        value={Separator2}
-        className={cs.separator}
-        style={{ height: settings.size }}
-      />
-      <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />
+      {!!pinnedOnRight.length && (
+        <>
+          <Reorder.Item
+            as="div"
+            value={Separator2}
+            className={cs.separator}
+            style={{ height: settings.size }}
+          />
+          <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />
+        </>
+      )}
     </Reorder.Group>
   );
 }

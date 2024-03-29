@@ -55,7 +55,6 @@ export async function registerStoreEvents() {
 
   await listen<AppFromBackground[]>('update-store-apps', async (event) => {
     const items = await cleanItems(event.payload);
-    console.log(items);
     items.forEach((item) => store.dispatch(RootActions.addOpenApp(item)));
     updateHitboxIfNeeded();
   });
