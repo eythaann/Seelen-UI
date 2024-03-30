@@ -123,6 +123,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      > img {
+        max-height: 100%;
+        height: 100%;
+        object-fit: scale-down;
+      }
     }
   }
 }

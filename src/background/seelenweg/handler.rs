@@ -1,6 +1,7 @@
-use std::{ffi::OsStr, os::windows::ffi::OsStrExt};
+use std::{ffi::OsStr, os::windows::ffi::OsStrExt, path::PathBuf};
 
-use tauri::command;
+use image::ImageFormat;
+use tauri::{command, Manager};
 
 use crate::{seelen::SEELEN, windows_api::WindowsApi};
 use windows::{
@@ -16,9 +17,36 @@ use windows::{
     },
 };
 
+use super::SeelenWeg;
+
 #[command]
 pub fn weg_request_apps() {
     SEELEN.lock().weg().update_ui();
+}
+
+#[command]
+pub fn weg_request_update_previews(hwnds: Vec<isize>) -> Result<(), String> {
+    std::thread::spawn(move || {
+        for hwnd in hwnds {
+            let temp_dir = std::env::temp_dir();
+            let hwnd = HWND(hwnd);
+
+            let image = SeelenWeg::capture_window(hwnd);
+            if let Some(image) = image {
+                let mut output_path = PathBuf::from(temp_dir.clone());
+                output_path.push(format!("{}.png", hwnd.0));
+                image
+                    .save_with_format(&output_path, ImageFormat::Png)
+                    .expect("could not save image");
+                SEELEN
+                    .lock()
+                    .handle()
+                    .emit(format!("weg-preview-update-{}", hwnd.0).as_str(), ())
+                    .expect("could not emit event");
+            }
+        }
+    });
+    Ok(())
 }
 
 #[command]

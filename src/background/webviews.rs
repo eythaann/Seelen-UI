@@ -115,7 +115,7 @@ pub fn show_seelenpad_window(app: &AppHandle) -> Result<WebviewWindow> {
     .always_on_top(true)
     .build()?;
 
-    focus_window(window.hwnd()?)?;
+    focus_window(HWND(window.hwnd()?.0))?;
 
     Ok(window)
 }

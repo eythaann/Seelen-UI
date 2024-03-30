@@ -54,6 +54,12 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
     }
   }, [openContextMenu]);
 
+  useEffect(() => {
+    if (openPreview) {
+      invoke('weg_request_update_previews', { hwnds: item.opens });
+    }
+  }, [openPreview]);
+
   return (
     <Reorder.Item
       as="div"

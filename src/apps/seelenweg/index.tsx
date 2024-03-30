@@ -8,6 +8,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
+import { loadConstants } from './modules/shared/utils/infra';
 
 import './styles/colors.css';
 import './styles/reset.css';
@@ -15,9 +16,10 @@ import './styles/global.css';
 
 async function Main() {
   wrapConsole();
-  setWindowSize();
   await registerStoreEvents();
   await loadStore();
+  await loadConstants();
+  setWindowSize();
   registerDocumentEvents();
 
   const container = document.getElementById('root') || document.body;

@@ -1,11 +1,11 @@
 pub mod handler;
+pub mod icon_extractor;
 
-use std::env::temp_dir;
-
+use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use serde::Serialize;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
-use tauri_plugin_shell::ShellExt;
+use win_screenshot::capture::capture_window;
 use windows::{
     core::PCWSTR,
     Win32::{
@@ -22,6 +22,8 @@ use windows::{
 };
 
 use crate::{error_handler::Result, seelen::SEELEN, windows_api::WindowsApi};
+
+use self::icon_extractor::get_images_from_exe;
 
 lazy_static! {
     static ref BLACK_LIST: Vec<&'static str> = Vec::from(["", "SeelenWeg", "SeelenWeg Hitbox",]);
@@ -129,53 +131,37 @@ impl SeelenWeg {
     }
 
     pub fn extract_icon(&self, exe_path: &str) -> Result<String> {
-        let pwsh_script = include_str!("extract_icon.ps1");
-        let pwsh_script_path = temp_dir().join("extract_icon.ps1");
-
-        if !pwsh_script_path.exists() {
-            std::fs::write(&pwsh_script_path, pwsh_script)
-                .expect("Failed to write temp script file");
-        }
-
         let handle = &self.handle;
         let gen_icons_paths = handle
             .path()
             .resolve("gen/icons", BaseDirectory::Resource)?;
 
-        handle
-            .shell()
-            .command("powershell")
-            .args([
-                "-ExecutionPolicy",
-                "Bypass",
-                "-NoProfile",
-                "-File",
-                &pwsh_script_path.to_string_lossy(),
-                "-exe",
-                exe_path,
-                "-ExtractDir",
-                &gen_icons_paths
-                    .to_string_lossy()
-                    .trim_start_matches("\\\\?\\"),
-            ])
-            .spawn()
-            .expect("Failed to spawn icon extraction script");
+        if !gen_icons_paths.exists() {
+            std::fs::create_dir_all(&gen_icons_paths)?;
+        }
 
-        std::fs::remove_file(pwsh_script_path)?;
+        let icon_path = gen_icons_paths.join(
+            exe_path
+                .replace(".exe", ".png")
+                .split("\\")
+                .last()
+                .unwrap_or_default(),
+        );
 
-        let ico_path = gen_icons_paths
-            .join(
-                exe_path
-                    .replace(".exe", ".png")
-                    .split("\\")
-                    .last()
-                    .unwrap_or_default(),
-            )
+        if !icon_path.exists() {
+            let images = get_images_from_exe(exe_path);
+            if let Ok(images) = images {
+                // icon on index 0 always is the app showed icon
+                if let Some(icon) = images.get(0) {
+                    icon.save(&icon_path).unwrap();
+                }
+            }
+        }
+
+        Ok(icon_path
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")
-            .to_string();
-
-        Ok(ico_path)
+            .to_string())
     }
 
     fn auto_hide_taskbar(&self, hide: bool) {
@@ -281,5 +267,14 @@ impl SeelenWeg {
 
         let title = WindowsApi::get_window_text(hwnd);
         !BLACK_LIST.contains(&title.as_str())
+    }
+
+    pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {
+        if WindowsApi::is_iconic(hwnd) {
+            return None;
+        }
+        let buf = capture_window(hwnd.0).unwrap();
+        let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap();
+        Some(DynamicImage::ImageRgba8(image))
     }
 }

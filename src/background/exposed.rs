@@ -88,5 +88,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         weg_close_app,
         weg_request_apps,
         weg_toggle_window_state,
+        weg_request_update_previews,
     ])
 }

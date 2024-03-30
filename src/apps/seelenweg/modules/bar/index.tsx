@@ -10,6 +10,7 @@ import cs from './infra.module.css';
 import { cx } from '../../../settings/modules/shared/app/utils';
 import { RootActions, Selectors } from '../shared/store/app';
 
+import { SeelenWegMode } from '../../../settings/modules/seelenweg/domain';
 import { PinnedApp, Separator, SpecialItemType } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = 500;
@@ -138,6 +139,9 @@ export function SeelenWeg() {
     dispatch(RootActions.setPinnedOnRight(extractedPinned));
   }, []);
 
+  const showLeft = !!pinnedOnLeft.length || settings.mode === SeelenWegMode.FULL_WIDTH;
+  const showRight = !!pinnedOnRight.length || settings.mode === SeelenWegMode.FULL_WIDTH;
+
   return (
     <Reorder.Group
       onMouseEnter={onMouseEnter}
@@ -155,7 +159,7 @@ export function SeelenWeg() {
       }}
     >
       <BackgroundByLayers styles={theme?.seelenweg.background || []} />
-      {!!pinnedOnLeft.length && <ItemsContainer items={pinnedOnLeft} align="left" initialSize={settings.size} />}
+      {showLeft && <ItemsContainer items={pinnedOnLeft} align="left" initialSize={settings.size} />}
       <Reorder.Item
         as="div"
         value={Separator1}
@@ -177,7 +181,7 @@ export function SeelenWeg() {
           opacity: pinnedOnRight.length ? 1 : 0,
         }}
       />
-      {!!pinnedOnRight.length && <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />}
+      {showRight && <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />}
     </Reorder.Group>
   );
 }
