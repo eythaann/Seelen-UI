@@ -8,6 +8,7 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
+import { updatePreviews } from '../shared/utils/infra';
 import cs from './infra.module.css';
 
 import { Selectors } from '../shared/store/app';
@@ -56,7 +57,7 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
 
   useEffect(() => {
     if (openPreview) {
-      invoke('weg_request_update_previews', { hwnds: item.opens });
+      updatePreviews(item.opens);
     }
   }, [openPreview]);
 

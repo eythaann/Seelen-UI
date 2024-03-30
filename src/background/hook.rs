@@ -7,12 +7,13 @@ use windows::Win32::{
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
             EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_HIDE,
-            EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, MSG,
+            EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW,
+            EVENT_OBJECT_UNCLOAKED, MSG,
         },
     },
 };
 
-use crate::{error_handler::Result, seelen::SEELEN, seelenweg::SeelenWeg};
+use crate::{error_handler::Result, seelen::SEELEN, seelenweg::SeelenWeg, windows_api::WindowsApi};
 
 pub extern "system" fn win_event_hook(
     _h_win_event_hook: HWINEVENTHOOK,
@@ -40,22 +41,38 @@ pub extern "system" fn win_event_hook(
     println!("{:?}", winevent); */
 
     match event {
-        EVENT_OBJECT_DESTROY | EVENT_OBJECT_HIDE | EVENT_OBJECT_CLOAKED => {
+        EVENT_OBJECT_HIDE => {
             let mut seelen = SEELEN.lock();
-            seelen.mut_weg().remove_hwnd(hwnd);
+            if seelen.weg().contains_app(hwnd) {
+                // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
+                // parent so we can't filter it on open event but these are inmediatly hidden when the ApplicationFrameHost.exe parent
+                // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
+                let parent = WindowsApi::get_parent(hwnd);
+                if parent.0 != 0 {
+                    seelen.weg_mut().replace_hwnd(hwnd, parent);
+                } else {
+                    seelen.weg_mut().remove_hwnd(hwnd);
+                }
+            }
+        }
+        EVENT_OBJECT_DESTROY | EVENT_OBJECT_CLOAKED => {
+            let mut seelen = SEELEN.lock();
+            if seelen.weg().contains_app(hwnd) {
+                seelen.weg_mut().remove_hwnd(hwnd);
+            }
         }
         EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE | EVENT_OBJECT_UNCLOAKED => {
             if SeelenWeg::should_handle_hwnd(hwnd) {
                 let mut seelen = SEELEN.lock();
-                seelen.mut_weg().add_hwnd(hwnd);
+                seelen.weg_mut().add_hwnd(hwnd);
             }
         }
         EVENT_OBJECT_NAMECHANGE => {
             let mut seelen = SEELEN.lock();
-            if seelen.weg().contains_hwnd(hwnd) {
-                seelen.mut_weg().update_app_title(hwnd);
+            if seelen.weg().contains_app(hwnd) {
+                seelen.weg_mut().update_app(hwnd);
             } else if SeelenWeg::should_handle_hwnd(hwnd) {
-                seelen.mut_weg().add_hwnd(hwnd);
+                seelen.weg_mut().add_hwnd(hwnd);
             }
         }
         _ => {}

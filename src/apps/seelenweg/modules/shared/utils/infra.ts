@@ -1,5 +1,9 @@
 import { path } from '@tauri-apps/api';
-import { convertFileSrc } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+
+import { store } from '../store/infra';
+
+import { HWND } from '../store/domain';
 
 export const Constants = {
   MISSING_ICON: '',
@@ -19,4 +23,12 @@ export async function getMissingIconUrl() {
     'missing.png',
   );
   return convertFileSrc(missingIcon);
+}
+
+export async function updatePreviews(hwnds: HWND[]) {
+  const state = store.getState();
+  const process = hwnds.map((hwnd) => {
+    return state.openApps[hwnd]?.process_hwnd || 0;
+  });
+  invoke('weg_request_update_previews', { hwnds: process });
 }

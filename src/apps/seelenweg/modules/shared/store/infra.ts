@@ -71,6 +71,12 @@ export async function registerStoreEvents() {
     updateHitboxIfNeeded();
   });
 
+  await listen<AppFromBackground>('replace-open-app', async (event) => {
+    const item = (await cleanItems([event.payload]))[0]!;
+    store.dispatch(RootActions.addOpenApp(item));
+    store.dispatch(RootActions.removeOpenApp(item.process_hwnd));
+  });
+
   await listen<HWND>('remove-open-app', (event) => {
     store.dispatch(RootActions.removeOpenApp(event.payload));
     updateHitboxIfNeeded();

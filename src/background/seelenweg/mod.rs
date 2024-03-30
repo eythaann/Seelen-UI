@@ -35,11 +35,13 @@ pub struct SeelenWegApp {
     exe: String,
     title: String,
     icon: String,
+    uwp: bool,
+    process_hwnd: isize,
 }
 
 pub struct SeelenWeg {
     handle: AppHandle<Wry>,
-    opened_apps: Vec<SeelenWegApp>,
+    apps: Vec<SeelenWegApp>,
 }
 
 impl SeelenWeg {
@@ -49,7 +51,7 @@ impl SeelenWeg {
     pub fn new(handle: AppHandle<Wry>) -> Self {
         Self {
             handle,
-            opened_apps: Vec::new(),
+            apps: Vec::new(),
         }
     }
 
@@ -96,7 +98,7 @@ impl SeelenWeg {
 
     unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
         if SeelenWeg::should_handle_hwnd(hwnd) {
-            SEELEN.lock().mut_weg().add_hwnd(hwnd);
+            SEELEN.lock().weg_mut().add_hwnd(hwnd);
         }
         true.into()
     }
@@ -153,7 +155,7 @@ impl SeelenWeg {
             if let Ok(images) = images {
                 // icon on index 0 always is the app showed icon
                 if let Some(icon) = images.get(0) {
-                    icon.save(&icon_path).unwrap();
+                    icon.save(&icon_path).expect("Failed to save icon");
                 }
             }
         }
@@ -192,16 +194,16 @@ impl SeelenWeg {
 
     pub fn update_ui(&self) {
         self.handle
-            .emit_to(Self::TARGET, "update-store-apps", self.opened_apps.clone())
+            .emit_to(Self::TARGET, "update-store-apps", self.apps.clone())
             .expect("Failed to emit");
     }
 
-    pub fn contains_hwnd(&self, hwnd: HWND) -> bool {
-        self.opened_apps.iter().any(|app| app.hwnd == hwnd.0)
+    pub fn contains_app(&self, hwnd: HWND) -> bool {
+        self.apps.iter().any(|app| app.hwnd == hwnd.0)
     }
 
-    pub fn update_app_title(&mut self, hwnd: HWND) {
-        let app = self.opened_apps.iter_mut().find(|app| app.hwnd == hwnd.0);
+    pub fn update_app(&mut self, hwnd: HWND) {
+        let app = self.apps.iter_mut().find(|app| app.hwnd == hwnd.0);
         if let Some(app) = app {
             app.title = WindowsApi::get_window_text(hwnd);
             self.handle
@@ -210,8 +212,20 @@ impl SeelenWeg {
         }
     }
 
+    pub fn replace_hwnd(&mut self, old: HWND, new: HWND) {
+        let app = self
+            .apps
+            .iter_mut()
+            .find(|app| app.hwnd == old.0)
+            .expect("Failed to find app");
+        app.hwnd = new.0;
+        self.handle
+            .emit_to(Self::TARGET, "replace-open-app", app.clone())
+            .expect("Failed to emit");
+    }
+
     pub fn add_hwnd(&mut self, hwnd: HWND) {
-        if self.contains_hwnd(hwnd) {
+        if self.contains_app(hwnd) {
             return;
         }
 
@@ -226,17 +240,19 @@ impl SeelenWeg {
             exe: exe_path,
             title: WindowsApi::get_window_text(hwnd),
             icon: icon_path,
+            uwp: WindowsApi::is_uwp(hwnd),
+            process_hwnd: hwnd.0,
         };
 
         self.handle
             .emit_to(Self::TARGET, "add-open-app", app.clone())
             .expect("Failed to emit");
 
-        self.opened_apps.push(app);
+        self.apps.push(app);
     }
 
     pub fn remove_hwnd(&mut self, hwnd: HWND) {
-        self.opened_apps.retain(|app| app.hwnd != hwnd.0);
+        self.apps.retain(|app| app.hwnd != hwnd.0);
         self.handle
             .emit_to(Self::TARGET, "remove-open-app", hwnd.0)
             .expect("Failed to emit");
@@ -261,7 +277,9 @@ impl SeelenWeg {
         }
 
         let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
-        if exe_path.starts_with("C:\\Windows\\SystemApps") {
+        if exe_path.starts_with("C:\\Windows\\SystemApps")
+            || exe_path.ends_with("ApplicationFrameHost.exe")
+        {
             return false;
         }
 
@@ -273,8 +291,9 @@ impl SeelenWeg {
         if WindowsApi::is_iconic(hwnd) {
             return None;
         }
-        let buf = capture_window(hwnd.0).unwrap();
-        let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap();
-        Some(DynamicImage::ImageRgba8(image))
+        capture_window(hwnd.0).ok().map(|buf| {
+            let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
+            DynamicImage::ImageRgba8(image)
+        })
     }
 }

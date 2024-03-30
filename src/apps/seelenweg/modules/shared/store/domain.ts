@@ -24,7 +24,9 @@ export interface App {
 }
 
 export interface AppFromBackground extends App {
-  hwnd: number;
+  hwnd: HWND;
+  is_uwp: boolean;
+  process_hwnd: HWND;
 }
 
 export interface PinnedApp extends App {

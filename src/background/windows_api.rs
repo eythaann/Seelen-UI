@@ -4,15 +4,15 @@ use windows::{
     Win32::{
         Foundation::{CloseHandle, HANDLE, HWND},
         System::Threading::{
-            AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
-            QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
+            AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId, IsImmersiveProcess,
+            OpenProcess, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
             PROCESS_QUERY_INFORMATION,
         },
         UI::{
             Input::KeyboardAndMouse::SetFocus,
             WindowsAndMessaging::{
-                AllowSetForegroundWindow, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
-                IsWindow, IsWindowVisible, SetForegroundWindow,
+                AllowSetForegroundWindow, GetParent, GetWindowTextW, GetWindowThreadProcessId,
+                IsIconic, IsWindow, IsWindowVisible, SetForegroundWindow
             },
         },
     },
@@ -99,6 +99,23 @@ impl WindowsApi {
         Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
     }
 
+    pub fn is_uwp(hwnd: HWND) -> bool {
+        let mut is_uwp = false;
+        let (process_id, _) = Self::window_thread_process_id(hwnd);
+        if let Ok(handle) = Self::process_handle(process_id) {
+            is_uwp = match unsafe { IsImmersiveProcess(handle) } {
+                Ok(_) => true,
+                Err(_) => false,
+            };
+            Self::close_process(handle).expect("could not close process handle");
+        }
+        is_uwp
+    }
+
+    pub fn get_parent(hwnd: HWND) -> HWND {
+        unsafe { GetParent(hwnd) }
+    }
+
     pub fn exe_path(hwnd: HWND) -> Result<String> {
         let mut len = 260_u32;
         let mut path: Vec<u16> = vec![0; len as usize];
@@ -134,3 +151,24 @@ impl WindowsApi {
         String::from_utf16(&text[..length]).unwrap_or("".to_owned())
     }
 }
+
+/*
+
+may be this is useful later
+
+static CHILD_FROM_FRAME: AtomicIsize = AtomicIsize::new(0);
+unsafe extern "system" fn enum_childs_uwp(hwnd: HWND, _: LPARAM) -> BOOL {
+    let exe = WindowsApi::exe(hwnd).unwrap_or_default();
+    println!("enum_childs_uwp {} {}", hwnd.0, exe);
+    if exe != "ApplicationFrameHost.exe" {
+        CHILD_FROM_FRAME.store(hwnd.0, Ordering::SeqCst);
+        return false.into();
+    }
+    true.into()
+}
+
+pub fn get_child_from_frame_host(hwnd: HWND) -> HWND {
+    CHILD_FROM_FRAME.store(0, Ordering::SeqCst);
+    unsafe { EnumChildWindows(hwnd, Some(enum_childs_uwp), LPARAM(0)) };
+    HWND(CHILD_FROM_FRAME.load(Ordering::SeqCst))
+} */

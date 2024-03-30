@@ -32,7 +32,7 @@ impl Seelen {
         self.handle.as_ref().unwrap()
     }
 
-    pub fn mut_weg(&mut self) -> &mut SeelenWeg {
+    pub fn weg_mut(&mut self) -> &mut SeelenWeg {
         self.weg.as_mut().unwrap()
     }
 
@@ -58,7 +58,7 @@ impl Seelen {
         self.start_komorebi_manager();
 
         if self.state.is_weg_enabled() {
-            match self.mut_weg().start() {
+            match self.weg_mut().start() {
                 Ok(_) => {
                     register_hook().expect("Failed to register hook");
                 }

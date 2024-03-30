@@ -1,7 +1,7 @@
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { Spin } from 'antd';
-import { MouseEvent, useEffect, useReducer, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Constants } from '../shared/utils/infra';
@@ -17,14 +17,13 @@ interface PreviewProps {
 
 export const WegPreview = ({ hwnd }: PreviewProps) => {
   const styles = useSelector(Selectors.theme.seelenweg.preview.items);
-  const app = useSelector(SelectOpenApp(hwnd));
-  const [url, setUrl] = useState<string | null>(null);
-  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  const app = useSelector(SelectOpenApp(hwnd))!;
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    const uslistener = listen(`weg-preview-update-${hwnd}`, () => {
-      setUrl(convertFileSrc(`${Constants.TEMP_FOLDER}${hwnd}.png`));
-      forceUpdate();
+    const uslistener = listen(`weg-preview-update-${app.process_hwnd}`, () => {
+      const postfix = `?${new Date().getTime()}`;
+      setImageSrc(convertFileSrc(`${Constants.TEMP_FOLDER}${app.process_hwnd}.png`) + postfix);
     });
     return () => {
       uslistener.then((unlisten) => unlisten());
@@ -40,16 +39,16 @@ export const WegPreview = ({ hwnd }: PreviewProps) => {
     <div
       className={cs.preview}
       style={styles.content}
-      onClick={() => invoke('weg_toggle_window_state', { hwnd, exePath: app?.exe || '' })}
+      onClick={() => invoke('weg_toggle_window_state', { hwnd: app.hwnd || 0, exePath: app.exe })}
     >
       <div className={cs.title} style={styles.title}>
-        <div className={cs.label}>{app?.title}</div>
+        <div className={cs.label}>{app.title}</div>
         <div className={cs.close} onClick={onClose}>
           x
         </div>
       </div>
       <div className={cs.image} style={styles.image}>
-        {url ? <img src={`${url}?${new Date().getTime()}`} /> : <Spin />}
+        {imageSrc ? <img src={imageSrc} /> : <Spin />}
       </div>
     </div>
   );
