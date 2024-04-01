@@ -5,10 +5,13 @@
     "info": {
       "type": "object",
       "properties": {
-        "displayName": { "type": "string" },
-        "author": { "type": "string" }
-      },
-      "required": ["displayName", "author"]
+        "displayName": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        }
+      }
     },
     "seelenweg": {
       "type": "object",
@@ -20,23 +23,48 @@
           "properties": {
             "background": {
               "$ref": "#/definitions/layers"
+            },
+            "content": {
+              "$ref": "#/definitions/CSSProperties"
             }
-          },
-          "required": ["background"]
+          }
         },
         "contextMenu": {
           "properties": {
             "background": {
               "$ref": "#/definitions/layers"
+            },
+            "content": {
+              "$ref": "#/definitions/CSSProperties"
             }
-          },
-          "required": ["background"]
+          }
+        },
+        "preview": {
+          "properties": {
+            "background": {
+              "$ref": "#/definitions/layers"
+            },
+            "content": {
+              "$ref": "#/definitions/CSSProperties"
+            },
+            "items": {
+              "properties": {
+                "content": {
+                  "$ref": "#/definitions/CSSProperties"
+                },
+                "title": {
+                  "$ref": "#/definitions/CSSProperties"
+                },
+                "image": {
+                  "$ref": "#/definitions/CSSProperties"
+                }
+              }
+            }
+          }
         }
-      },
-      "required": ["background", "items", "contextMenu"]
+      }
     }
   },
-  "required": ["info", "seelenweg"],
   "definitions": {
     "layers": {
       "type": "array",

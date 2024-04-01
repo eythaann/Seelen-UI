@@ -69,6 +69,7 @@ export function registerDocumentEvents() {
   };
 
   root_container.addEventListener('mouseleave', debounce(onMouseLeave, 200, timeoutId));
+  root_container.addEventListener('blur', debounce(onMouseLeave, 200, timeoutId));
 
   // if for some reazon mouseleave is not emitted
   // set ignore cursor events when user click on screen

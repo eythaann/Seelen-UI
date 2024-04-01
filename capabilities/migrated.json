@@ -25,6 +25,7 @@
     "fs:allow-exists",
     "fs:allow-mkdir",
     "fs:allow-read-dir",
+    "fs:allow-copy-file",
 
     {
       "identifier": "fs:scope",

@@ -4,7 +4,7 @@ use windows::{
     Win32::{
         Foundation::{CloseHandle, HANDLE, HWND},
         System::Threading::{
-            AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId, IsImmersiveProcess,
+            AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId,
             OpenProcess, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
             PROCESS_QUERY_INFORMATION,
         },
@@ -97,19 +97,6 @@ impl WindowsApi {
 
     pub fn process_handle(process_id: u32) -> Result<HANDLE> {
         Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
-    }
-
-    pub fn is_uwp(hwnd: HWND) -> bool {
-        let mut is_uwp = false;
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
-        if let Ok(handle) = Self::process_handle(process_id) {
-            is_uwp = match unsafe { IsImmersiveProcess(handle) } {
-                Ok(_) => true,
-                Err(_) => false,
-            };
-            Self::close_process(handle).expect("could not close process handle");
-        }
-        is_uwp
     }
 
     pub fn get_parent(hwnd: HWND) -> HWND {

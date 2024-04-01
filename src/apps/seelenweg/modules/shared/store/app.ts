@@ -53,7 +53,7 @@ function removeHwnd(state: PinnedApp[], searched: number) {
 
     if (index !== -1) {
       current.opens.splice(index, 1);
-      if (current.opens.length === 0) {
+      if (current.type === SpecialItemType.TemporalPin && current.opens.length === 0) {
         state.splice(i, 1);
       }
       break;
@@ -129,6 +129,7 @@ export const RootSlice = createSlice({
         type: SpecialItemType.TemporalPin,
         icon: app.icon,
         exe: app.exe,
+        execution_path: app.execution_path,
         title: app.exe.split('\\').at(-1) || 'Unknown',
         opens: [app.hwnd],
       });

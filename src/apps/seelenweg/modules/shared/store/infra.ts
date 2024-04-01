@@ -7,6 +7,7 @@ import { listen } from '@tauri-apps/api/event';
 
 import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
 import { fs } from '../../../../settings/modules/shared/infrastructure/tauri';
+import { getUWPInfoFromExePath } from '../utils/infra';
 
 import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/StateBridge';
 import { RootActions, RootSlice } from './app';
@@ -35,12 +36,31 @@ async function cleanItems(items: AppFromBackground[]) {
   const cleaned: AppFromBackground[] = [];
 
   for (const item of items) {
+    try {
+      const uwpInfo = await getUWPInfoFromExePath(item.exe);
+      if (uwpInfo && typeof uwpInfo.AppId === 'string') {
+        item.execution_path = `shell:AppsFolder\\${uwpInfo.Name}_${uwpInfo.PublisherId}!${uwpInfo.AppId}`;
+        const logoPath = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo;
+        const logoPath200 = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo.replace('.png', '.scale-200.png');
+        if (await fs.exists(logoPath)) {
+          await fs.copyFile(logoPath, item.icon);
+        } else if (await fs.exists(logoPath200)) {
+          await fs.copyFile(logoPath200, item.icon);
+        }
+      }
+    } catch (error) {
+      console.error('Error while getting UWP info: ', error);
+    }
+
     if (!(await fs.exists(item.icon))) {
       item.icon = missingIcon;
     }
+
     item.icon = convertFileSrc(item.icon);
     cleaned.push(item);
   }
+
+  console.log('cleaned', cleaned);
 
   return cleaned;
 }

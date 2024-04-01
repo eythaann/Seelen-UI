@@ -55,6 +55,9 @@ features = [
     "Win32_UI_Shell",
     "Win32_System_Threading",
     "Win32_UI_Accessibility",
+    "Management_Deployment",
+    "ApplicationModel",
+    "Foundation_Collections",
 ]
 
 [features]

@@ -2,6 +2,8 @@ import { Theme } from '../../../../../shared.interfaces';
 
 import { SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
 
+export type HWND = number & {};
+
 export enum SpecialItemType {
   Start = 'Start',
   Separator = 'Separator',
@@ -16,16 +18,27 @@ export enum SpecialItemType {
   TemporalPin = 'TemporalPin',
 }
 
+export interface UWP {
+  Name: string;
+  Version: string;
+  PublisherId: string;
+  AppId: string;
+  Executable: string;
+  Logo: string;
+  PackageFullName: string;
+  InstallLocation: string;
+}
+
 export interface App {
   type?: SpecialItemType;
   exe: string;
   icon: string;
   title: string;
+  execution_path: string;
 }
 
 export interface AppFromBackground extends App {
   hwnd: HWND;
-  is_uwp: boolean;
   process_hwnd: HWND;
 }
 
@@ -47,8 +60,6 @@ export enum PinnedAppSide {
   CENTER = 'center',
   RIGHT = 'right',
 }
-
-export type HWND = number & {};
 
 export interface RootState {
   pinnedOnLeft: PinnedApp[];

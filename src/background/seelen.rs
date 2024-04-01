@@ -82,6 +82,7 @@ impl Seelen {
         // komorebi window manager does not create this folder on first install/run 🤡
         std::fs::create_dir_all(path.resolve("komorebi", BaseDirectory::LocalData)?)?;
         std::fs::create_dir_all(path.resolve(".config/komorebi-ui", BaseDirectory::Home)?)?;
+        std::fs::create_dir_all(path.resolve("gen", BaseDirectory::Resource)?)?;
 
         Ok(())
     }

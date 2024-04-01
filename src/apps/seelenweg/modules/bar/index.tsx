@@ -1,4 +1,5 @@
 import { debounce } from '../../../Timing';
+import { ExtraCallbacksOnLeave } from '../../events';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
 import { MouseEvent, useCallback, useEffect, useRef } from 'react';
@@ -54,6 +55,12 @@ export function SeelenWeg() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    ExtraCallbacksOnLeave.add(() => {
+      shouldAnimate.current = false;
+    });
+  }, []);
 
   useEffect(() => {
     refs.current = Array.from(document.getElementsByClassName(cs.item!)) as HTMLDivElement[];
@@ -181,7 +188,9 @@ export function SeelenWeg() {
           opacity: pinnedOnRight.length ? 1 : 0,
         }}
       />
-      {showRight && <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />}
+      {showRight && (
+        <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />
+      )}
     </Reorder.Group>
   );
 }

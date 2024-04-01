@@ -17,13 +17,13 @@ interface PreviewProps {
 
 export const WegPreview = ({ hwnd }: PreviewProps) => {
   const styles = useSelector(Selectors.theme.seelenweg.preview.items);
-  const app = useSelector(SelectOpenApp(hwnd))!;
+  const app = useSelector(SelectOpenApp(hwnd));
   const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    const uslistener = listen(`weg-preview-update-${app.process_hwnd}`, () => {
+    const uslistener = listen(`weg-preview-update-${app?.process_hwnd || 0}`, () => {
       const postfix = `?${new Date().getTime()}`;
-      setImageSrc(convertFileSrc(`${Constants.TEMP_FOLDER}${app.process_hwnd}.png`) + postfix);
+      setImageSrc(convertFileSrc(`${Constants.TEMP_FOLDER}${app?.process_hwnd || 0}.png`) + postfix);
     });
     return () => {
       uslistener.then((unlisten) => unlisten());
@@ -35,11 +35,15 @@ export const WegPreview = ({ hwnd }: PreviewProps) => {
     invoke('weg_close_app', { hwnd });
   };
 
+  if (!app) {
+    return null;
+  }
+
   return (
     <div
       className={cs.preview}
       style={styles.content}
-      onClick={() => invoke('weg_toggle_window_state', { hwnd: app.hwnd || 0, exePath: app.exe })}
+      onClick={() => invoke('weg_toggle_window_state', { hwnd: app.hwnd || 0, exePath: app.execution_path })}
     >
       <div className={cs.title} style={styles.title}>
         <div className={cs.label}>{app.title}</div>

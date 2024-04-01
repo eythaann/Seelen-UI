@@ -76,15 +76,10 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) {
             .chain(Some(0).into_iter())
             .collect();
 
-        let operation: Vec<u16> = OsStr::new("open")
-            .encode_wide()
-            .chain(Some(0).into_iter())
-            .collect();
-
         unsafe {
             ShellExecuteW(
                 HWND(0),
-                PCWSTR(operation.as_ptr()),
+                PCWSTR::null(),
                 PCWSTR(wide_file_path.as_ptr()),
                 PCWSTR::null(),
                 PCWSTR::null(),

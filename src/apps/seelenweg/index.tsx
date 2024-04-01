@@ -1,4 +1,5 @@
 import { wrapConsole } from '../ConsoleWrapper';
+import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, setWindowSize, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
 import { emitTo } from '@tauri-apps/api/event';
@@ -41,7 +42,9 @@ async function Main() {
               : theme.defaultAlgorithm,
           }}
         >
-          <SeelenWeg />
+          <ErrorBoundary fallback={<div>Something went wrong</div>}>
+            <SeelenWeg />
+          </ErrorBoundary>
         </ConfigProvider>
       </Provider>
     );

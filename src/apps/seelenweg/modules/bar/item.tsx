@@ -86,7 +86,7 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
         }}
       >
         <Popover
-          open={openPreview}
+          open={openPreview && !!item.opens.length}
           mouseEnterDelay={0.2}
           placement="top"
           onOpenChange={setOpenPreview}
@@ -113,7 +113,7 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
             onClick={() => {
               if (!isDragging.current) {
                 let hwnd = item.opens[0] || 0;
-                invoke('weg_toggle_window_state', { hwnd, exePath: item.exe });
+                invoke('weg_toggle_window_state', { hwnd, exePath: item.execution_path });
               }
             }}
           >

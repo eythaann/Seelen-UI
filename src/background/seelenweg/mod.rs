@@ -1,6 +1,8 @@
 pub mod handler;
 pub mod icon_extractor;
 
+use std::{env::temp_dir, path::PathBuf, process::Command};
+
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use serde::Serialize;
@@ -35,7 +37,7 @@ pub struct SeelenWegApp {
     exe: String,
     title: String,
     icon: String,
-    uwp: bool,
+    execution_path: String,
     process_hwnd: isize,
 }
 
@@ -110,17 +112,60 @@ impl SeelenWeg {
         };
     }
 
+    fn load_uwp_apps(&self) -> Result<()> {
+        let pwsh_script = include_str!("load_uwp_apps.ps1");
+        let pwsh_script_path = temp_dir().join("load_uwp_apps.ps1");
+        std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
+        let mut child = Command::new("powershell")
+            .args([
+                "-ExecutionPolicy",
+                "Bypass",
+                "-NoProfile",
+                "-File",
+                &pwsh_script_path.to_string_lossy(),
+                "-SavePath",
+                &self
+                    .generated_files_path()
+                    .join("uwp_manifests.json")
+                    .to_string_lossy()
+                    .trim_start_matches("\\\\?\\"),
+            ])
+            .spawn()
+            .expect("Failed to spawn uwp load script");
+
+        match child.wait() {
+            Ok(status) => {
+                log::trace!(
+                    "load_uwp_apps exit code: {}",
+                    status.code().unwrap_or_default()
+                );
+            }
+            Err(err) => log::error!("load_uwp_apps Failed to wait for process: {}", err),
+        };
+
+        std::fs::remove_file(pwsh_script_path)?;
+        Ok(())
+    }
+
     pub fn start(&mut self) -> Result<()> {
         log::trace!("Starting SeelenWeg");
 
         self.auto_hide_taskbar(true);
-        self.create_window()?;
         self.enum_opened_apps();
+        self.load_uwp_apps()?;
+        self.create_window()?;
         Ok(())
     }
 
     pub fn stop(&self) {
         self.auto_hide_taskbar(false);
+    }
+
+    pub fn generated_files_path(&self) -> PathBuf {
+        self.handle
+            .path()
+            .resolve("gen", BaseDirectory::Resource)
+            .expect("Failed to resolve gen path")
     }
 
     pub fn missing_icon(&self) -> String {
@@ -133,11 +178,7 @@ impl SeelenWeg {
     }
 
     pub fn extract_icon(&self, exe_path: &str) -> Result<String> {
-        let handle = &self.handle;
-        let gen_icons_paths = handle
-            .path()
-            .resolve("gen/icons", BaseDirectory::Resource)?;
-
+        let gen_icons_paths = self.generated_files_path().join("icons");
         if !gen_icons_paths.exists() {
             std::fs::create_dir_all(&gen_icons_paths)?;
         }
@@ -237,10 +278,10 @@ impl SeelenWeg {
 
         let app = SeelenWegApp {
             hwnd: hwnd.0,
-            exe: exe_path,
+            exe: exe_path.clone(),
             title: WindowsApi::get_window_text(hwnd),
             icon: icon_path,
-            uwp: WindowsApi::is_uwp(hwnd),
+            execution_path: exe_path,
             process_hwnd: hwnd.0,
         };
 
