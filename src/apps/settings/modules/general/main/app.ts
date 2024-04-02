@@ -29,7 +29,7 @@ let initialState: GeneralSettingsState = {
   focusFollowsMouse: null,
   windowContainerBehaviour: WindowContainerBehaviour.CREATE,
   windowHidingBehaviour: WindowHidingBehaviour.MINIMIZE,
-  globalWorkAreaOffset: new Rect().toJSON(),
+  globalWorkAreaOffset: Rect.fromJSON({ left: 0, top: 0, right: 0, bottom: 95 }).toJSON(),
   unmanagedWindowOperationBehaviour: UnmanagedWindowOperationBehaviour.OP,
   crossMonitorMoveBehaviour: CrossMonitorMoveBehaviour.SWAP,
   containerTopBar: ContainerTopBarSlice.getInitialState(),

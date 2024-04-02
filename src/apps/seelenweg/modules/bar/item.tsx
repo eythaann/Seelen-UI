@@ -1,4 +1,5 @@
 import { ExtraCallbacksOnLeave } from '../../events';
+import { savePinnedItems } from '../shared/store/storeApi';
 import { getMenuForItem } from './menu';
 import { WegPreview } from './preview';
 import { animated, useSpring } from '@react-spring/web';
@@ -9,6 +10,7 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
+import { store } from '../shared/store/infra';
 import { updatePreviews } from '../shared/utils/infra';
 import cs from './infra.module.css';
 
@@ -23,6 +25,8 @@ interface Props {
 
 export const WegItem = memo(({ item, initialSize }: Props) => {
   const theme = useSelector(Selectors.theme.seelenweg);
+  const spaceBetweenItems = useSelector(Selectors.settings.spaceBetweenItems);
+
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
 
@@ -72,6 +76,7 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
       onDragEnd={() => {
         setTimeout(() => {
           isDragging.current = false;
+          savePinnedItems(store.getState());
         }, 150);
       }}
     >
@@ -99,7 +104,10 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
               <BackgroundByLayers styles={theme.preview.background} />
               <div
                 className={cs.previewContainer}
-                style={theme.preview.content}
+                style={{
+                  ...theme.preview.content,
+                  gap: spaceBetweenItems + 'px',
+                }}
                 onMouseMoveCapture={(e) => e.stopPropagation()}
               >
                 {item.opens.map((hwnd) => (

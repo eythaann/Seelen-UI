@@ -9,32 +9,36 @@ export function wrapConsole() {
     trace: console.trace,
   };
 
+  const StrintifyParams = (params: any[]): string => {
+    return params.reduce((a, b) => a + ' ' + JSON.stringify(b), '');
+  };
+
   window.addEventListener('unhandledrejection', (event) => {
     console.error(`Unhandled Rejection - ${event.reason}`);
   });
 
-  console.error = (message: any, ...optionalParams: any[]) => {
-    WebConsole.error(message, ...optionalParams);
-    Logger.error(String(message));
+  console.error = (...params: any[]) => {
+    WebConsole.error(...params);
+    Logger.error(StrintifyParams(params));
   };
 
-  console.warn = (message: any, ...optionalParams: any[]) => {
-    WebConsole.warn(message, ...optionalParams);
-    Logger.warn(String(message));
+  console.warn = (...params: any[]) => {
+    WebConsole.warn(...params);
+    Logger.warn(StrintifyParams(params));
   };
 
-  console.info = (message: any, ...optionalParams: any[]) => {
-    WebConsole.info(message, ...optionalParams);
-    Logger.info(String(message));
+  console.info = (...params: any[]) => {
+    WebConsole.info(...params);
+    Logger.info(StrintifyParams(params));
   };
 
-  console.debug = (message: any, ...optionalParams: any[]) => {
-    WebConsole.debug(message, ...optionalParams);
-    Logger.debug(String(message));
+  console.debug = (...params: any[]) => {
+    WebConsole.debug(...params);
+    Logger.debug(StrintifyParams(params));
   };
 
-  console.trace = (message: any, ...optionalParams: any[]) => {
-    WebConsole.trace(message, ...optionalParams);
-    Logger.trace(String(message));
+  console.trace = (...params: any[]) => {
+    WebConsole.trace(...params);
+    Logger.trace(StrintifyParams(params));
   };
 }

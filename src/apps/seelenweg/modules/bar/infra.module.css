@@ -6,30 +6,17 @@
   justify-content: space-between;
   align-items: center;
 
-  .separator {
-    width: 1px;
-  }
-
   .itemsContainer {
     z-index: 1;
     overflow: visible;
     display: flex;
-    justify-content: center;
     align-items: flex-end;
-    flex: 1;
     height: 100%;
+    width: 100%;
     gap: inherit;
 
-    .itemsContainer {
-      flex: 0;
-    }
-
-    &.left {
-      justify-content: flex-start;
-    }
-
-    &.right {
-      justify-content: flex-end;
+    .separator {
+      flex: 1;
     }
   }
 }

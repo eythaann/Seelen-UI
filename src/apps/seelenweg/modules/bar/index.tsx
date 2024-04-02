@@ -1,5 +1,6 @@
 import { debounce } from '../../../Timing';
 import { ExtraCallbacksOnLeave } from '../../events';
+import { savePinnedItems } from '../shared/store/storeApi';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
 import { MouseEvent, useCallback, useEffect, useRef } from 'react';
@@ -11,7 +12,6 @@ import cs from './infra.module.css';
 import { cx } from '../../../settings/modules/shared/app/utils';
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { SeelenWegMode } from '../../../settings/modules/seelenweg/domain';
 import { PinnedApp, Separator, SpecialItemType } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = 500;
@@ -24,22 +24,6 @@ const Separator1: Separator = {
 const Separator2: Separator = {
   type: SpecialItemType.Separator,
 };
-
-interface Props {
-  items: PinnedApp[];
-  initialSize: number;
-  align?: 'left' | 'right';
-}
-function ItemsContainer({ items, initialSize, align }: Props) {
-  const alignClassname = align ? cs[align] : '';
-  return (
-    <div className={cx(cs.itemsContainer, alignClassname)}>
-      {items.map((item) => (
-        <WegItem key={item.exe} item={item} initialSize={initialSize} />
-      ))}
-    </div>
-  );
-}
 
 export function SeelenWeg() {
   const theme = useSelector(Selectors.theme);
@@ -126,13 +110,13 @@ export function SeelenWeg() {
     let extractedPinned: PinnedApp[] = [];
 
     apps.forEach((app) => {
-      if (app === Separator1 && extractedPinned.length) {
+      if (app === Separator1) {
         dispatch(RootActions.setPinnedOnLeft(extractedPinned));
         extractedPinned = [];
         return;
       }
 
-      if (app === Separator2 && extractedPinned.length) {
+      if (app === Separator2) {
         dispatch(RootActions.setPinnedOnCenter(extractedPinned));
         extractedPinned = [];
         return;
@@ -145,9 +129,6 @@ export function SeelenWeg() {
 
     dispatch(RootActions.setPinnedOnRight(extractedPinned));
   }, []);
-
-  const showLeft = !!pinnedOnLeft.length || settings.mode === SeelenWegMode.FULL_WIDTH;
-  const showRight = !!pinnedOnRight.length || settings.mode === SeelenWegMode.FULL_WIDTH;
 
   return (
     <Reorder.Group
@@ -166,31 +147,41 @@ export function SeelenWeg() {
       }}
     >
       <BackgroundByLayers styles={theme?.seelenweg.background || []} />
-      {showLeft && <ItemsContainer items={pinnedOnLeft} align="left" initialSize={settings.size} />}
-      <Reorder.Item
-        as="div"
-        value={Separator1}
-        className={cs.separator}
-        style={{
-          height: settings.size,
-          marginLeft: pinnedOnLeft.length ? 0 : settings.spaceBetweenItems * -1,
-          opacity: pinnedOnLeft.length ? 1 : 0,
-        }}
-      />
-      <ItemsContainer items={pinnedOnCenter} initialSize={settings.size} />
-      <Reorder.Item
-        as="div"
-        value={Separator2}
-        className={cs.separator}
-        style={{
-          height: settings.size,
-          marginLeft: pinnedOnRight.length ? 0 : settings.spaceBetweenItems * -1,
-          opacity: pinnedOnRight.length ? 1 : 0,
-        }}
-      />
-      {showRight && (
-        <ItemsContainer items={pinnedOnRight} align="right" initialSize={settings.size} />
-      )}
+      <div className={cx(cs.itemsContainer)}>
+        {[
+          ...pinnedOnLeft.map((item) => (
+            <WegItem key={item.exe} item={item} initialSize={settings.size} />
+          )),
+          <Reorder.Item
+            as="div"
+            key="separator1"
+            value={Separator1}
+            className={cs.separator}
+            style={{
+              height: settings.size,
+              marginLeft: pinnedOnLeft.length ? 0 : settings.spaceBetweenItems * -1,
+              opacity: pinnedOnLeft.length ? 1 : 0,
+            }}
+          />,
+          ...pinnedOnCenter.map((item) => (
+            <WegItem key={item.exe} item={item} initialSize={settings.size} />
+          )),
+          <Reorder.Item
+            as="div"
+            key="separator2"
+            value={Separator2}
+            className={cs.separator}
+            style={{
+              height: settings.size,
+              marginLeft: pinnedOnRight.length ? 0 : settings.spaceBetweenItems * -1,
+              opacity: pinnedOnRight.length ? 1 : 0,
+            }}
+          />,
+          ...pinnedOnRight.map((item) => (
+            <WegItem key={item.exe} item={item} initialSize={settings.size} />
+          )),
+        ]}
+      </div>
     </Reorder.Group>
   );
 }

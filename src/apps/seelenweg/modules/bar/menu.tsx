@@ -10,7 +10,7 @@ import { PinnedApp, PinnedAppSide } from '../shared/store/domain';
 
 export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
   const state = store.getState();
-  const isPinned = isRealPinned(state, item);
+  const isPinned = isRealPinned(item);
 
   const pin = (side: PinnedAppSide) => {
     if (isTemporalPinned(item)) {
@@ -79,7 +79,7 @@ export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
     },
   );
 
-  if (isTemporalPinned(item)) {
+  if (item.opens.length) {
     menu.push({
       label: item.opens.length > 1 ? 'Close All' : 'Close',
       key: 'weg_close_app',

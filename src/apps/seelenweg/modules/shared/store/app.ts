@@ -1,5 +1,6 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
 import { StateBuilder } from '../../../../utils/StateBuilder';
+import { savePinnedItems } from './storeApi';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { SeelenWegSlice } from '../../bar/app';
@@ -78,6 +79,7 @@ export const RootSlice = createSlice({
       if (found) {
         found.type = SpecialItemType.TemporalPin;
       }
+      savePinnedItems(state);
     },
     pinApp(state, action: PayloadAction<{ app: TemporalPinnedApp; side: PinnedAppSide }>) {
       const { app, side } = action.payload;
@@ -101,6 +103,7 @@ export const RootSlice = createSlice({
           break;
         default:
       }
+      savePinnedItems(state);
     },
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
       const app = action.payload;
@@ -154,7 +157,7 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isRealPinned = (state: RootState, item: App): boolean => {
+export const isRealPinned = (item: App): boolean => {
   return item.type === SpecialItemType.PinnedApp;
 };
 

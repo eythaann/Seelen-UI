@@ -1,5 +1,6 @@
 import { Theme } from '../../../../../shared.interfaces';
 import { updateHitbox } from '../../../events';
+import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
@@ -13,7 +14,7 @@ import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/S
 import { RootActions, RootSlice } from './app';
 
 import { SeelenWegMode, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
-import { AppFromBackground, HWND } from './domain';
+import { AppFromBackground, HWND, PinnedApp } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -114,10 +115,17 @@ export async function registerStoreEvents() {
   });
 
   await listen<Theme>('update-store-theme', (event) => {
+    loadCSSVariables(event.payload);
     store.dispatch(RootActions.setTheme(event.payload));
   });
 
   invoke('weg_request_apps');
+}
+
+function loadCSSVariables(theme: Theme) {
+  Object.entries(theme.variables).forEach(([property, value]) => {
+    document.documentElement.style.setProperty(property, value);
+  });
 }
 
 export async function loadStore() {
@@ -127,9 +135,12 @@ export async function loadStore() {
   const settings = JsonToState_Seelenweg(userSettings.jsonSettings, initialState.settings);
   store.dispatch(RootActions.setSettings(settings));
   if (userSettings.theme) {
+    loadCSSVariables(userSettings.theme);
     store.dispatch(RootActions.setTheme(userSettings.theme));
-    Object.entries(userSettings.theme.variables).forEach(([property, value]) => {
-      document.documentElement.style.setProperty(property, value);
-    });
   }
+
+  const apps = await loadPinnedItems();
+  store.dispatch(RootActions.setPinnedOnLeft(apps.left as PinnedApp[]));
+  store.dispatch(RootActions.setPinnedOnCenter(apps.center as PinnedApp[]));
+  store.dispatch(RootActions.setPinnedOnRight(apps.right as PinnedApp[]));
 }
