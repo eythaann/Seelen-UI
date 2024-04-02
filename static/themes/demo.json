@@ -1,0 +1,111 @@
+{
+  "$schema": "https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/documentation/theme.schema.json",
+  "info": {
+    "displayName": "Parabellum",
+    "author": "eythaann",
+    "description": "Demo of what a theme can be. Theme based on a portait of the same name"
+  },
+  "variables": {
+    "--color-border": "#f2f5f2ab"
+  },
+  "seelenweg": {
+    "background": [
+      {
+        "opacity": 0.3,
+        "filter": "saturate(0)",
+        "backgroundImage": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
+        "backgroundSize": "cover",
+        "borderRadius": "10px"
+      },
+      {
+        "opacity": 1,
+        "background": "linear-gradient(#2a302c 60%, #ff2b24)",
+        "borderRadius": "10px"
+      }
+    ],
+    "items": {
+      "background": [
+        {
+          "backgroundColor": "#f2f5f2",
+          "borderRadius": "16%"
+        },
+        {
+          "background": "linear-gradient(rgb(42, 48, 44) 20%, rgb(242, 245, 242) 80%)",
+          "top": "3%",
+          "left": "10%",
+          "width": "10%",
+          "height": "94%"
+        },
+        {
+          "background": "linear-gradient(rgb(108 108 108), rgb(128 128 128))",
+          "height": "10%",
+          "width": "94%",
+          "top": "40%",
+          "left": "3%"
+        }
+      ],
+      "icon": {
+        "height": "60%",
+        "width": "60%",
+        "filter": "grayscale(95%) contrast(150%) drop-shadow(2px 2px 2px #2a302c)"
+      }
+    },
+    "contextMenu": {
+      "background": [
+        {
+          "backgroundColor": "#2a302c",
+          "borderRadius": "10px"
+        },
+        {
+          "width": "70%",
+          "height": "70%",
+          "bottom": "10px",
+          "left": "10px",
+          "borderLeft": "1px solid var(--color-border)",
+          "borderBottom": "1px solid var(--color-border)"
+        },
+        {
+          "width": "70%",
+          "height": "70%",
+          "top": "10px",
+          "right": "10px",
+          "borderRight": "1px solid var(--color-border)",
+          "borderTop": "1px solid var(--color-border)"
+        }
+      ],
+      "content": {
+        "color": "#f2f5f2",
+        "padding": "16px"
+      }
+    },
+    "preview": {
+      "background": [
+        {
+          "backgroundColor": "#2a302c",
+          "borderRadius": "10px"
+        }
+      ],
+      "content": {
+        "padding": "10px",
+        "borderRadius": "10px"
+      },
+      "items": {
+        "content": {
+          "padding": "6px 10px 10px 10px"
+        },
+        "title": {
+          "fontSize": "12px",
+          "fontWeight": "400",
+          "color": "#ff2b24",
+          "fontFamily": "Serif",
+          "textTransform": "uppercase",
+          "letterSpacing": "2px",
+          "margin": "0 0 8px 0"
+        },
+        "image": {
+          "border": "1px solid var(--color-border)"
+        }
+      }
+    }
+  }
+}

@@ -10,11 +10,13 @@
         "opacity": 0.3,
         "filter": "saturate(0)",
         "backgroundImage": "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")",
-        "backgroundSize": "cover"
+        "backgroundSize": "cover",
+        "borderRadius": "10px"
       },
       {
         "opacity": 0.6,
-        "backgroundColor": "var(--color-gray-100)"
+        "backgroundColor": "var(--color-gray-100)",
+        "borderRadius": "10px"
       }
     ],
     "items": {
@@ -29,14 +31,19 @@
     "contextMenu": {
       "background": [
         {
-          "backgroundColor": "var(--color-gray-200)"
+          "backgroundColor": "var(--color-gray-200)",
+          "borderRadius": "10px"
         }
-      ]
+      ],
+      "content": {
+        "padding": "6px"
+      }
     },
     "preview": {
       "background": [
         {
-          "backgroundColor": "var(--color-gray-200)"
+          "backgroundColor": "var(--color-gray-200)",
+          "borderRadius": "10px"
         }
       ],
       "content": {

@@ -68,6 +68,7 @@
     width: 65%;
     height: 65%;
     filter: drop-shadow(0px 0px 1px #0000009a);
+    object-fit: contain;
   }
 }
 

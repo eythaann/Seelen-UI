@@ -10,8 +10,20 @@
         },
         "author": {
           "type": "string"
+        },
+        "description": {
+          "type": "string"
         }
       }
+    },
+    "variables": {
+      "type": "object",
+      "patternProperties": {
+        "^--.*$": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "seelenweg": {
       "type": "object",
@@ -20,16 +32,19 @@
           "$ref": "#/definitions/layers"
         },
         "items": {
+          "type": "object",
           "properties": {
             "background": {
               "$ref": "#/definitions/layers"
             },
-            "content": {
+            "icon": {
               "$ref": "#/definitions/CSSProperties"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "contextMenu": {
+          "type": "object",
           "properties": {
             "background": {
               "$ref": "#/definitions/layers"
@@ -37,9 +52,11 @@
             "content": {
               "$ref": "#/definitions/CSSProperties"
             }
-          }
+          },
+          "additionalProperties": false
         },
         "preview": {
+          "type": "object",
           "properties": {
             "background": {
               "$ref": "#/definitions/layers"
@@ -48,6 +65,7 @@
               "$ref": "#/definitions/CSSProperties"
             },
             "items": {
+              "type": "object",
               "properties": {
                 "content": {
                   "$ref": "#/definitions/CSSProperties"
@@ -58,11 +76,14 @@
                 "image": {
                   "$ref": "#/definitions/CSSProperties"
                 }
-              }
+              },
+              "additionalProperties": false
             }
-          }
+          },
+          "additionalProperties": false
         }
-      }
+      },
+      "additionalProperties": false
     }
   },
   "definitions": {

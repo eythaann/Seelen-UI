@@ -25,11 +25,12 @@ export interface ThemeInfo {
 
 export interface Theme {
   info: ThemeInfo;
+  variables: Record<`--${string}`, string>;
   seelenweg: {
     background: CSSProperties[];
     items: {
       background: CSSProperties[];
-      content: CSSProperties;
+      icon: CSSProperties;
     };
     contextMenu: {
       background: CSSProperties[];
@@ -53,11 +54,12 @@ export const defaultTheme: Theme = {
     displayName: 'Empty',
     author: 'none',
   },
+  variables: {},
   seelenweg: {
     background: [],
     items: {
       background: [],
-      content: {},
+      icon: {},
     },
     contextMenu: {
       background: [],

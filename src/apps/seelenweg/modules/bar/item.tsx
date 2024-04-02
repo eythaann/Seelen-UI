@@ -1,8 +1,9 @@
 import { ExtraCallbacksOnLeave } from '../../events';
+import { getMenuForItem } from './menu';
 import { WegPreview } from './preview';
 import { animated, useSpring } from '@react-spring/web';
 import { invoke } from '@tauri-apps/api/core';
-import { Dropdown, Popover } from 'antd';
+import { Dropdown, Menu, Popover } from 'antd';
 import { Reorder } from 'framer-motion';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -12,7 +13,6 @@ import { updatePreviews } from '../shared/utils/infra';
 import cs from './infra.module.css';
 
 import { Selectors } from '../shared/store/app';
-import { getMenuForItem } from './app';
 
 import { PinnedApp } from '../shared/store/domain';
 
@@ -80,10 +80,12 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
         open={openContextMenu}
         onOpenChange={setOpenContextMenu}
         trigger={['contextMenu']}
-        menu={{
-          onMouseMoveCapture: (e) => e.stopPropagation(),
-          items: getMenuForItem(item),
-        }}
+        dropdownRender={() => (
+          <>
+            <BackgroundByLayers styles={theme.contextMenu.background} />
+            <Menu style={theme.contextMenu.content} onMouseMoveCapture={(e) => e.stopPropagation()} items={getMenuForItem(item)} />
+          </>
+        )}
       >
         <Popover
           open={openPreview && !!item.opens.length}
@@ -118,7 +120,7 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
             }}
           >
             <BackgroundByLayers styles={theme.items.background} />
-            <img src={item.icon} draggable={false} />
+            <img src={item.icon} style={theme.items.icon} draggable={false} />
           </animated.button>
         </Popover>
       </Dropdown>

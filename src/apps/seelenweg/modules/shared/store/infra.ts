@@ -7,7 +7,7 @@ import { listen } from '@tauri-apps/api/event';
 
 import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
 import { fs } from '../../../../settings/modules/shared/infrastructure/tauri';
-import { getUWPInfoFromExePath } from '../utils/infra';
+import { getImageBase64FromUrl, getUWPInfoFromExePath } from '../utils/infra';
 
 import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/StateBridge';
 import { RootActions, RootSlice } from './app';
@@ -26,13 +26,6 @@ export type store = {
 };
 
 async function cleanItems(items: AppFromBackground[]) {
-  const missingIcon = await path.resolve(
-    await path.resourceDir(),
-    'static',
-    'icons',
-    'missing.png',
-  );
-
   const cleaned: AppFromBackground[] = [];
 
   for (const item of items) {
@@ -42,10 +35,14 @@ async function cleanItems(items: AppFromBackground[]) {
         item.execution_path = `shell:AppsFolder\\${uwpInfo.Name}_${uwpInfo.PublisherId}!${uwpInfo.AppId}`;
         const logoPath = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo;
         const logoPath200 = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo.replace('.png', '.scale-200.png');
-        if (await fs.exists(logoPath)) {
-          await fs.copyFile(logoPath, item.icon);
+        const logoPath400 = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo.replace('.png', '.scale-400.png');
+
+        if (await fs.exists(logoPath400)) {
+          await fs.copyFile(logoPath400, item.icon);
         } else if (await fs.exists(logoPath200)) {
           await fs.copyFile(logoPath200, item.icon);
+        } else if (await fs.exists(logoPath)) {
+          await fs.copyFile(logoPath, item.icon);
         }
       }
     } catch (error) {
@@ -53,15 +50,22 @@ async function cleanItems(items: AppFromBackground[]) {
     }
 
     if (!(await fs.exists(item.icon))) {
-      item.icon = missingIcon;
+      item.icon = await path.resolve(
+        await path.resourceDir(),
+        'static',
+        'icons',
+        'missing.png',
+      );
     }
 
-    item.icon = convertFileSrc(item.icon);
+    try {
+      item.icon = await getImageBase64FromUrl(convertFileSrc(item.icon));
+    } catch {
+      item.icon = convertFileSrc(item.icon);
+    }
+
     cleaned.push(item);
   }
-
-  console.log('cleaned', cleaned);
-
   return cleaned;
 }
 
@@ -124,5 +128,8 @@ export async function loadStore() {
   store.dispatch(RootActions.setSettings(settings));
   if (userSettings.theme) {
     store.dispatch(RootActions.setTheme(userSettings.theme));
+    Object.entries(userSettings.theme.variables).forEach(([property, value]) => {
+      document.documentElement.style.setProperty(property, value);
+    });
   }
 }
