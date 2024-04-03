@@ -72,9 +72,16 @@ fn open_file_location(path: String) -> Result<(), String> {
     Ok(())
 }
 
+
+#[command]
+fn is_dev_mode() -> bool {
+    tauri::dev()
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
+        is_dev_mode,
         open_file_location,
         // Media
         media_play_pause,

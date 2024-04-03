@@ -29,38 +29,16 @@ export const SeelenWegSettings = () => {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsOption>
-          <div>SeelenWeg Mode</div>
-          <Select
-            style={{ width: '120px' }}
-            value={settings.mode}
-            options={OptionsFromEnum(SeelenWegMode)}
-            onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
-          />
-        </SettingsOption>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsSubGroup label="">
+        <SettingsSubGroup label="Dock/Taskbar">
           <SettingsOption>
-            <div>Size</div>
-            <InputNumber
-              value={settings.size}
-              onChange={(value) => dispatch(SeelenWegActions.setSize(value || 0))}
+            <div>Mode</div>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.mode}
+              options={OptionsFromEnum(SeelenWegMode)}
+              onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
             />
           </SettingsOption>
-          <SettingsOption>
-            <div>Size on hover</div>
-            <InputNumber
-              value={settings.zoomSize}
-              onChange={(value) => dispatch(SeelenWegActions.setZoomSize(value || 0))}
-            />
-          </SettingsOption>
-        </SettingsSubGroup>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsSubGroup label="">
           <SettingsOption>
             <div>Margin</div>
             <InputNumber
@@ -73,6 +51,25 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.margin}
               onChange={(value) => dispatch(SeelenWegActions.setPadding(value || 0))}
+            />
+          </SettingsOption>
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsSubGroup label="Items">
+          <SettingsOption>
+            <div>Size</div>
+            <InputNumber
+              value={settings.size}
+              onChange={(value) => dispatch(SeelenWegActions.setSize(value || 0))}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <div>Size on hover</div>
+            <InputNumber
+              value={settings.zoomSize}
+              onChange={(value) => dispatch(SeelenWegActions.setZoomSize(value || 0))}
             />
           </SettingsOption>
           <SettingsOption>

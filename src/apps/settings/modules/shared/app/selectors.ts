@@ -9,7 +9,8 @@ import { SeelenWegSlice } from '../../seelenweg/app';
 
 import { RootState } from '../domain/state';
 
-export const RootSelectors = RootSlice.getSelectors((state: RootState) => state);
+export const ownSelector = (state: RootState) => state;
+export const RootSelectors = RootSlice.getSelectors(ownSelector);
 
 export const GeneralSettingsSelectors = GeneralSettingsSlice.getSelectors(RootSelectors.generals);
 export const SeelenWegSelectors = SeelenWegSlice.getSelectors(RootSelectors.seelenweg);

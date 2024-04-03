@@ -26,6 +26,7 @@
       width: 100%;
       line-height: 12px;
       margin: 0;
+      border-radius: 8px;
     }
 
     .ant-menu-item:not(.ant-menu-item-danger),

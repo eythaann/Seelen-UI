@@ -100,7 +100,7 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
       >
         <Popover
           open={openPreview}
-          mouseEnterDelay={0.2}
+          mouseEnterDelay={0.4}
           placement="top"
           onOpenChange={(open) => setOpenPreview(open && !!item.opens.length)}
           trigger="hover"

@@ -4,8 +4,8 @@ use windows::{
     Win32::{
         Foundation::{CloseHandle, HANDLE, HWND},
         System::Threading::{
-            AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId,
-            OpenProcess, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
+            AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
+            QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
             PROCESS_QUERY_INFORMATION,
         },
         UI::{
@@ -104,7 +104,7 @@ impl WindowsApi {
     }
 
     pub fn exe_path(hwnd: HWND) -> Result<String> {
-        let mut len = 260_u32;
+        let mut len = 512_u32;
         let mut path: Vec<u16> = vec![0; len as usize];
         let text_ptr = path.as_mut_ptr();
 
@@ -143,7 +143,7 @@ impl WindowsApi {
 
 may be this is useful later
 
-static CHILD_FROM_FRAME: AtomicIsize = AtomicIsize::new(0);
+static CHILD_FROM_FRAME: AtomicIsize = AtoumicIsize::new(0);
 unsafe extern "system" fn enum_childs_uwp(hwnd: HWND, _: LPARAM) -> BOOL {
     let exe = WindowsApi::exe(hwnd).unwrap_or_default();
     println!("enum_childs_uwp {} {}", hwnd.0, exe);

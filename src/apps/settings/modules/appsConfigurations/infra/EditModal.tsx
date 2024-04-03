@@ -1,11 +1,13 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
+import { createSelector } from '@reduxjs/toolkit';
 import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-import { useAppSelector } from '../../shared/app/hooks';
-import { RootSelectors } from '../../shared/app/selectors';
+import { ownSelector, RootSelectors } from '../../shared/app/selectors';
 import { OptionsFromEnum } from '../../shared/app/utils';
 
+import { RootState } from '../../shared/domain/state';
 import {
   AppConfiguration,
   AppConfigurationExtended,
@@ -25,11 +27,13 @@ interface Props {
   readonlyApp?: AppConfigurationExtended;
 }
 
+const getAppSelector = (idx: number | undefined, isNew: boolean) => createSelector([ownSelector], (state: RootState) => {
+  return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.default();
+});
+
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
-  const monitors = useAppSelector(RootSelectors.monitors);
-  const _app = useAppSelector((state) => {
-    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.default();
-  })!;
+  const monitors = useSelector(RootSelectors.monitors);
+  const _app = useSelector(getAppSelector(idx, !!isNew));
   const initialState = readonlyApp || _app;
   const isReadonly = !!readonlyApp;
 

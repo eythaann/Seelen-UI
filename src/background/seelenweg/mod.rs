@@ -17,7 +17,7 @@ use windows::{
             WindowsAndMessaging::{
                 EnumWindows, FindWindowW, GetParent, GetWindowLongW, ShowWindow, GWL_EXSTYLE,
                 SHOW_WINDOW_CMD, SW_HIDE, SW_SHOWNORMAL, WINDOW_EX_STYLE, WS_EX_APPWINDOW,
-                WS_EX_TOOLWINDOW,
+                WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
             },
         },
     },
@@ -28,7 +28,8 @@ use crate::{error_handler::Result, seelen::SEELEN, windows_api::WindowsApi};
 use self::icon_extractor::get_images_from_exe;
 
 lazy_static! {
-    static ref BLACK_LIST: Vec<&'static str> = Vec::from(["", "SeelenWeg", "SeelenWeg Hitbox",]);
+    /** For now only filter apps without title like the desktop explorer app */
+    static ref BLACK_LIST: Vec<&'static str> = Vec::from([""]);
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -310,10 +311,9 @@ impl SeelenWeg {
         }
 
         let ex_style = WINDOW_EX_STYLE(unsafe { GetWindowLongW(hwnd, GWL_EXSTYLE) } as u32);
-        let is_tool = ex_style.contains(WS_EX_TOOLWINDOW);
-        let is_app = ex_style.contains(WS_EX_APPWINDOW);
-
-        if is_tool && !is_app {
+        if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
+            && !ex_style.contains(WS_EX_APPWINDOW)
+        {
             return false;
         }
 

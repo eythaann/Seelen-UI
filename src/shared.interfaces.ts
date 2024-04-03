@@ -21,6 +21,7 @@ export interface ThemeInfo {
   filename: string;
   displayName: string;
   author: string;
+  description: string;
 }
 
 export interface Theme {
@@ -52,7 +53,8 @@ export const defaultTheme: Theme = {
   info: {
     filename: 'unknown',
     displayName: 'Empty',
-    author: 'none',
+    author: 'unknown',
+    description: 'unknown',
   },
   variables: {},
   seelenweg: {

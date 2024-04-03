@@ -30,7 +30,7 @@ export async function updatePreviews(hwnds: HWND[]) {
   const process = hwnds.map((hwnd) => {
     return {
       hwnd,
-      process_hwnd: state.openApps[hwnd]?.process_hwnd || 0 as HWND,
+      process_hwnd: state.openApps[hwnd]?.process_hwnd || (0 as HWND),
     };
   });
   invoke('weg_request_update_previews', { hwnds: process });
@@ -84,7 +84,13 @@ function trimCanvas(canvas: HTMLCanvasElement) {
     return true;
   }
 
-  function columnBlank(imageData: ImageData, width: number, x: number, top: number, bottom: number) {
+  function columnBlank(
+    imageData: ImageData,
+    width: number,
+    x: number,
+    top: number,
+    bottom: number,
+  ) {
     for (let y = top; y < bottom; ++y) {
       if (imageData.data[y * width * 4 + x * 4 + 3] !== 0) return false;
     }
@@ -113,4 +119,8 @@ function trimCanvas(canvas: HTMLCanvasElement) {
   copyCtx.putImageData(trimmed, 0, 0);
 
   return copy;
-};
+}
+
+export async function isDevMode() {
+  return await invoke<boolean>('is_dev_mode');
+}

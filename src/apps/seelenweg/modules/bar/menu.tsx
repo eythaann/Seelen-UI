@@ -46,17 +46,17 @@ export function getMenuForItem(item: App): MenuProps['items'] {
                 style={state.theme.seelenweg.contextMenu.content}
                 items={[
                   {
-                    label: 'Pin to Left',
+                    label: 'Pin to left',
                     key: 'weg_pin_app_left',
                     onClick: () => pin(AppsSides.LEFT),
                   },
                   {
-                    label: 'Pin to Center',
+                    label: 'Pin to center',
                     key: 'weg_pin_app_center',
                     onClick: () => pin(AppsSides.CENTER),
                   },
                   {
-                    label: 'Pin to Right',
+                    label: 'Pin to right',
                     key: 'weg_pin_app_right',
                     onClick: () => pin(AppsSides.RIGHT),
                   },
@@ -76,7 +76,12 @@ export function getMenuForItem(item: App): MenuProps['items'] {
       type: 'divider',
     },
     {
-      label: 'Open File Location',
+      label: 'Copy handles',
+      key: 'weg_copy_hwnd',
+      onClick: () => navigator.clipboard.writeText(JSON.stringify(item.opens)),
+    },
+    {
+      label: 'Open file location',
       key: 'weg_open_file_location',
       onClick: () => invoke('open_file_location', { path: item.exe }),
     },
@@ -84,7 +89,7 @@ export function getMenuForItem(item: App): MenuProps['items'] {
 
   if (item.opens.length) {
     menu.push({
-      label: item.opens.length > 1 ? 'Close All' : 'Close',
+      label: item.opens.length > 1 ? 'Close all' : 'Close',
       key: 'weg_close_app',
       onClick() {
         item.opens.forEach((hwnd) => {

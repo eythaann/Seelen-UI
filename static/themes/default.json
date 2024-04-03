@@ -2,7 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/documentation/theme.schema.json",
   "info": {
     "displayName": "Default",
-    "author": "eythaann"
+    "author": "eythaann",
+    "description": "Default Seelen Theme"
   },
   "seelenweg": {
     "background": [

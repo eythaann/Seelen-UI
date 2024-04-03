@@ -13,6 +13,7 @@ import { GeneralSettingsActions } from '../main/app';
 export const StylesView = () => {
   const selectedTheme = useAppSelector(GeneralSettingsSelectors.selectedTheme);
   const themes = useAppSelector(RootSelectors.availableThemes);
+  const usingTheme = useAppSelector(RootSelectors.theme);
 
   const dispatch = useAppDispatch();
 
@@ -25,13 +26,25 @@ export const StylesView = () => {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>Theme 🎨</b>
+          <div>
+            <b>Theme: </b>
+          </div>
           <Select
+            style={{ width: '200px' }}
             value={selectedTheme}
-            options={themes.map((theme) => ({ label: theme.info.displayName, value: theme.info.filename }))}
+            options={themes.map((theme) => ({
+              label: theme.info.displayName,
+              value: theme.info.filename,
+            }))}
             onSelect={onSelectTheme}
           />
         </SettingsOption>
+        <div>
+          <p>
+            <b>Author: </b>{usingTheme?.info.author}
+          </p>
+          <p><b>Description: </b>{usingTheme?.info.description}</p>
+        </div>
       </SettingsGroup>
       <PopupsSettings />
       <ContainerTopBarSettings />
