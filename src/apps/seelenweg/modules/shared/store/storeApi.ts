@@ -4,7 +4,7 @@ import yaml from 'js-yaml';
 
 import { isRealPinned } from './app';
 
-import { App, RootState, SpecialItemType } from './domain';
+import { App, RootState } from './domain';
 
 export interface YamlWeg {
   left: App[];
@@ -15,13 +15,7 @@ export interface YamlWeg {
 export const savePinnedItems = async (state: RootState): Promise<void> => {
   const cb = (acc: App[], app: App) => {
     if (isRealPinned(app)) {
-      acc.push({
-        type: SpecialItemType.PinnedApp,
-        icon: app.icon,
-        exe: app.exe,
-        execution_path: app.execution_path,
-        title: app.title,
-      });
+      acc.push(app);
     }
     return acc;
   };

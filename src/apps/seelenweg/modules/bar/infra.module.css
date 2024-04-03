@@ -16,13 +16,19 @@
     gap: inherit;
 
     .separator {
-      flex: 1;
+      pointer-events: none;
     }
   }
 }
 
 :global(#root) {
   &:not(:hover) {
+    .separator {
+      transition-property: width;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+    }
+
     .item {
       transition-property: width, height, margin, filter;
       transition-duration: 0.2s;

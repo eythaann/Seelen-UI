@@ -28,7 +28,10 @@ export async function getMissingIconUrl() {
 export async function updatePreviews(hwnds: HWND[]) {
   const state = store.getState();
   const process = hwnds.map((hwnd) => {
-    return state.openApps[hwnd]?.process_hwnd || 0;
+    return {
+      hwnd,
+      process_hwnd: state.openApps[hwnd]?.process_hwnd || 0 as HWND,
+    };
   });
   invoke('weg_request_update_previews', { hwnds: process });
 }

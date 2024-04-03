@@ -12,7 +12,7 @@ use windows::{
             Input::KeyboardAndMouse::SetFocus,
             WindowsAndMessaging::{
                 AllowSetForegroundWindow, GetParent, GetWindowTextW, GetWindowThreadProcessId,
-                IsIconic, IsWindow, IsWindowVisible, SetForegroundWindow
+                IsIconic, IsWindow, IsWindowVisible, SetForegroundWindow,
             },
         },
     },

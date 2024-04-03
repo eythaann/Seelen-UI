@@ -36,7 +36,7 @@ pub struct SeelenWegApp {
     hwnd: isize,
     exe: String,
     title: String,
-    icon: String,
+    icon_path: String,
     execution_path: String,
     process_hwnd: isize,
 }
@@ -280,7 +280,7 @@ impl SeelenWeg {
             hwnd: hwnd.0,
             exe: exe_path.clone(),
             title: WindowsApi::get_window_text(hwnd),
-            icon: icon_path,
+            icon_path,
             execution_path: exe_path,
             process_hwnd: hwnd.0,
         };
@@ -329,9 +329,6 @@ impl SeelenWeg {
     }
 
     pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {
-        if WindowsApi::is_iconic(hwnd) {
-            return None;
-        }
         capture_window(hwnd.0).ok().map(|buf| {
             let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
             DynamicImage::ImageRgba8(image)

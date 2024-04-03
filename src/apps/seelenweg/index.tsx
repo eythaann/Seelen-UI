@@ -17,9 +17,9 @@ import './styles/global.css';
 
 async function Main() {
   wrapConsole();
-  await registerStoreEvents();
-  await loadStore();
   await loadConstants();
+  await loadStore();
+  await registerStoreEvents();
   setWindowSize();
   registerDocumentEvents();
 

@@ -16,10 +16,10 @@ import cs from './infra.module.css';
 
 import { Selectors } from '../shared/store/app';
 
-import { PinnedApp } from '../shared/store/domain';
+import { App } from '../shared/store/domain';
 
 interface Props {
-  item: PinnedApp /* | SpecialApp */;
+  item: App;
   initialSize: number;
 }
 
@@ -65,6 +65,12 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
     }
   }, [openPreview]);
 
+  useEffect(() => {
+    if (!item.opens.length) {
+      setOpenPreview(false);
+    }
+  }, [item]);
+
   return (
     <Reorder.Item
       as="div"
@@ -93,10 +99,10 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
         )}
       >
         <Popover
-          open={openPreview && !!item.opens.length}
+          open={openPreview}
           mouseEnterDelay={0.2}
           placement="top"
-          onOpenChange={setOpenPreview}
+          onOpenChange={(open) => setOpenPreview(open && !!item.opens.length)}
           trigger="hover"
           arrow={false}
           content={

@@ -1,7 +1,7 @@
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { Spin } from 'antd';
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Constants } from '../shared/utils/infra';
@@ -18,12 +18,16 @@ interface PreviewProps {
 export const WegPreview = ({ hwnd }: PreviewProps) => {
   const styles = useSelector(Selectors.theme.seelenweg.preview.items);
   const app = useSelector(SelectOpenApp(hwnd));
-  const [imageSrc, setImageSrc] = useState<string | null>(null);
+
+  const imageUrl = convertFileSrc(`${Constants.TEMP_FOLDER}${app?.process_hwnd || 0}.png`);
+
+  const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
+  const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
     const uslistener = listen(`weg-preview-update-${app?.process_hwnd || 0}`, () => {
-      const postfix = `?${new Date().getTime()}`;
-      setImageSrc(convertFileSrc(`${Constants.TEMP_FOLDER}${app?.process_hwnd || 0}.png`) + postfix);
+      setImageSrc(imageUrl);
+      forceUpdate();
     });
     return () => {
       uslistener.then((unlisten) => unlisten());
@@ -52,7 +56,7 @@ export const WegPreview = ({ hwnd }: PreviewProps) => {
         </div>
       </div>
       <div className={cs.image} style={styles.image}>
-        {imageSrc ? <img src={imageSrc} /> : <Spin />}
+        {imageSrc ? <img src={imageSrc + `?${new Date().getTime()}`} onError={() => setImageSrc(null)}/> : <Spin />}
       </div>
     </div>
   );

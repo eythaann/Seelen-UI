@@ -1,4 +1,8 @@
 import { Theme } from '../../../../../shared.interfaces';
+import { modify } from 'readable-types';
+
+import { PinnedApp } from '../../item/app/PinnedApp';
+import { TemporalApp } from '../../item/app/TemporalApp';
 
 import { SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
 
@@ -29,42 +33,40 @@ export interface UWP {
   InstallLocation: string;
 }
 
-export interface App {
+export interface IApp {
   type?: SpecialItemType;
   exe: string;
+  /** Base64 image or URL */
   icon: string;
+  icon_path: string;
   title: string;
   execution_path: string;
 }
 
-export interface AppFromBackground extends App {
+export type AppFromBackground = modify<IApp, {
+  icon: string | null;
   hwnd: HWND;
   process_hwnd: HWND;
-}
+}>;
 
-export interface PinnedApp extends App {
-  type: SpecialItemType.PinnedApp | SpecialItemType.TemporalPin;
-  opens: HWND[];
-}
-
-export interface TemporalPinnedApp extends PinnedApp {
-  type: SpecialItemType.TemporalPin;
-}
+export type SavedItems = modify<IApp, { icon: string | null }>;
 
 export interface Separator {
   type: SpecialItemType.Separator;
 }
 
-export enum PinnedAppSide {
+export type App = PinnedApp | TemporalApp;
+
+export enum AppsSides {
   LEFT = 'left',
   CENTER = 'center',
   RIGHT = 'right',
 }
 
 export interface RootState {
-  pinnedOnLeft: PinnedApp[];
-  pinnedOnCenter: PinnedApp[];
-  pinnedOnRight: PinnedApp[];
+  pinnedOnLeft: App[];
+  pinnedOnCenter: App[];
+  pinnedOnRight: App[];
   openApps: Record<HWND, AppFromBackground>;
   theme: Theme;
   settings: SeelenWegState;

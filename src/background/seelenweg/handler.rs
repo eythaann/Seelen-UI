@@ -1,6 +1,7 @@
 use std::{ffi::OsStr, os::windows::ffi::OsStrExt, path::PathBuf};
 
 use image::ImageFormat;
+use serde::Deserialize;
 use tauri::{command, Manager};
 
 use crate::{seelen::SEELEN, windows_api::WindowsApi};
@@ -24,13 +25,21 @@ pub fn weg_request_apps() {
     SEELEN.lock().weg().update_ui();
 }
 
+#[derive(Deserialize)]
+pub struct Args {
+    hwnd: isize,
+    process_hwnd: isize,
+}
 #[command]
-pub fn weg_request_update_previews(hwnds: Vec<isize>) -> Result<(), String> {
+pub fn weg_request_update_previews(hwnds: Vec<Args>) -> Result<(), String> {
     std::thread::spawn(move || {
-        for hwnd in hwnds {
-            let temp_dir = std::env::temp_dir();
-            let hwnd = HWND(hwnd);
+        for app in hwnds {
+            if WindowsApi::is_iconic(HWND(app.hwnd)) {
+                continue;
+            }
 
+            let temp_dir = std::env::temp_dir();
+            let hwnd = HWND(app.process_hwnd);
             let image = SeelenWeg::capture_window(hwnd);
             if let Some(image) = image {
                 let mut output_path = PathBuf::from(temp_dir.clone());

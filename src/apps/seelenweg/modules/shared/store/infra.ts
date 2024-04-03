@@ -2,19 +2,18 @@ import { Theme } from '../../../../../shared.interfaces';
 import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { path } from '@tauri-apps/api';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 
 import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
-import { fs } from '../../../../settings/modules/shared/infrastructure/tauri';
-import { getImageBase64FromUrl, getUWPInfoFromExePath } from '../utils/infra';
 
 import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/StateBridge';
+import { PinnedApp } from '../../item/app/PinnedApp';
+import { TemporalApp } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
 import { SeelenWegMode, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
-import { AppFromBackground, HWND, PinnedApp } from './domain';
+import { AppFromBackground, HWND, SavedItems } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -26,48 +25,22 @@ export type store = {
   getState: () => {};
 };
 
-async function cleanItems(items: AppFromBackground[]) {
-  const cleaned: AppFromBackground[] = [];
-
+async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground[]> {
+  const result: AppFromBackground[] = [];
   for (const item of items) {
-    try {
-      const uwpInfo = await getUWPInfoFromExePath(item.exe);
-      if (uwpInfo && typeof uwpInfo.AppId === 'string') {
-        item.execution_path = `shell:AppsFolder\\${uwpInfo.Name}_${uwpInfo.PublisherId}!${uwpInfo.AppId}`;
-        const logoPath = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo;
-        const logoPath200 = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo.replace('.png', '.scale-200.png');
-        const logoPath400 = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo.replace('.png', '.scale-400.png');
-
-        if (await fs.exists(logoPath400)) {
-          await fs.copyFile(logoPath400, item.icon);
-        } else if (await fs.exists(logoPath200)) {
-          await fs.copyFile(logoPath200, item.icon);
-        } else if (await fs.exists(logoPath)) {
-          await fs.copyFile(logoPath, item.icon);
-        }
-      }
-    } catch (error) {
-      console.error('Error while getting UWP info: ', error);
-    }
-
-    if (!(await fs.exists(item.icon))) {
-      item.icon = await path.resolve(
-        await path.resourceDir(),
-        'static',
-        'icons',
-        'missing.png',
-      );
-    }
-
-    try {
-      item.icon = await getImageBase64FromUrl(convertFileSrc(item.icon));
-    } catch {
-      item.icon = convertFileSrc(item.icon);
-    }
-
-    cleaned.push(item);
+    const cleaned = await TemporalApp.clean(item);
+    result.push(cleaned);
   }
-  return cleaned;
+  return result;
+}
+
+async function cleanSavedItems(items: SavedItems[]): Promise<PinnedApp[]> {
+  const result: PinnedApp[] = [];
+  for (const item of items) {
+    const cleaned = await PinnedApp.clean(item);
+    result.push(PinnedApp.fromSaved(cleaned));
+  }
+  return result;
 }
 
 export async function registerStoreEvents() {
@@ -140,7 +113,7 @@ export async function loadStore() {
   }
 
   const apps = await loadPinnedItems();
-  store.dispatch(RootActions.setPinnedOnLeft(apps.left as PinnedApp[]));
-  store.dispatch(RootActions.setPinnedOnCenter(apps.center as PinnedApp[]));
-  store.dispatch(RootActions.setPinnedOnRight(apps.right as PinnedApp[]));
+  store.dispatch(RootActions.setPinnedOnLeft(await cleanSavedItems(apps.left) ));
+  store.dispatch(RootActions.setPinnedOnCenter(await cleanSavedItems(apps.center )));
+  store.dispatch(RootActions.setPinnedOnRight(await cleanSavedItems(apps.right )));
 }

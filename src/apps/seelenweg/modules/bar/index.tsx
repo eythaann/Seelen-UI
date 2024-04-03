@@ -1,6 +1,5 @@
 import { debounce } from '../../../Timing';
 import { ExtraCallbacksOnLeave } from '../../events';
-import { savePinnedItems } from '../shared/store/storeApi';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
 import { MouseEvent, useCallback, useEffect, useRef } from 'react';
@@ -12,7 +11,8 @@ import cs from './infra.module.css';
 import { cx } from '../../../settings/modules/shared/app/utils';
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { PinnedApp, Separator, SpecialItemType } from '../shared/store/domain';
+import { SeelenWegMode } from '../../../settings/modules/seelenweg/domain';
+import { App, Separator, SpecialItemType } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = 500;
 const MAX_CURSOR_DISTANCE_MARGIN = MAX_CURSOR_DISTANCE / 3;
@@ -34,6 +34,9 @@ export function SeelenWeg() {
   const pinnedOnRight = useSelector(Selectors.pinnedOnRight);
 
   const refs = useRef<HTMLDivElement[]>([]);
+  const separatorRefs = useRef<HTMLDivElement[]>([]);
+  const lenghtsRefs = useRef<number[]>([]);
+
   const shouldAnimate = useRef(false);
   const mouseX = useRef(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
@@ -48,9 +51,19 @@ export function SeelenWeg() {
 
   useEffect(() => {
     refs.current = Array.from(document.getElementsByClassName(cs.item!)) as HTMLDivElement[];
+    separatorRefs.current = Array.from(document.getElementsByClassName(cs.separator!)) as HTMLDivElement[];
+    lenghtsRefs.current = [
+      pinnedOnLeft.length,
+      pinnedOnCenter.length,
+      pinnedOnRight.length,
+    ];
   });
 
   const animate = useCallback(() => {
+    let totalLeftSize = 0;
+    let totalCenterSize = 0;
+    let totalRightSize = 0;
+
     if (!shouldAnimate.current) {
       refs.current.forEach((child) => {
         const node = child as HTMLElement;
@@ -58,10 +71,20 @@ export function SeelenWeg() {
         node.style.height = settings.size + 'px';
         node.style.marginBottom = 0 + 'px';
       });
+
+      totalLeftSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[0]!;
+      totalCenterSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[1]!;
+      totalRightSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[2]!;
+
+      separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + (totalCenterSize / 2)}px`;
+      separatorRefs.current[1]!.style.width = `calc(50% - ${totalRightSize + (totalCenterSize / 2)}px`;
       return;
     }
 
-    refs.current.forEach((child) => {
+    const stop1 = lenghtsRefs.current[0]!;
+    const stop2 = stop1 + lenghtsRefs.current[1]!;
+    const stop3 = stop2 + lenghtsRefs.current[2]!;
+    refs.current.forEach((child, index) => {
       const node = child as HTMLElement;
       const rect = (node as HTMLDivElement).getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
@@ -81,13 +104,24 @@ export function SeelenWeg() {
       const marginBottom =
         ((MAX_CURSOR_DISTANCE_MARGIN - distancemargin) / MAX_CURSOR_DISTANCE_MARGIN) * maxMargin;
 
+      if (index < stop1) {
+        totalLeftSize += newSize + settings.spaceBetweenItems;
+      } else if (index < stop2) {
+        totalCenterSize += newSize + settings.spaceBetweenItems;
+      } else if (index < stop3) {
+        totalRightSize += newSize + settings.spaceBetweenItems;
+      }
+
       node.style.width = newSize + 'px';
       node.style.height = newSize + 'px';
       node.style.marginBottom = marginBottom + 'px';
     });
 
+    separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + (totalCenterSize / 2)}px`;
+    separatorRefs.current[1]!.style.width = `calc(50% - ${totalRightSize + (totalCenterSize / 2)}px`;
+
     requestAnimationFrame(animate);
-  }, []);
+  }, [settings]);
 
   const onMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
@@ -100,14 +134,14 @@ export function SeelenWeg() {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
-  }, []);
+  }, [settings]);
 
   const disableMouseAnimations = useCallback(() => {
     shouldAnimate.current = false;
   }, []);
 
-  const onReorderPinneds = useCallback((apps: (Separator | PinnedApp)[]) => {
-    let extractedPinned: PinnedApp[] = [];
+  const onReorderPinneds = useCallback((apps: (Separator | App)[]) => {
+    let extractedPinned: App[] = [];
 
     apps.forEach((app) => {
       if (app === Separator1) {
@@ -157,10 +191,13 @@ export function SeelenWeg() {
             key="separator1"
             value={Separator1}
             className={cs.separator}
+            onDragStart={(e) => e.stopPropagation()}
             style={{
               height: settings.size,
               marginLeft: pinnedOnLeft.length ? 0 : settings.spaceBetweenItems * -1,
-              opacity: pinnedOnLeft.length ? 1 : 0,
+              width: settings.mode === SeelenWegMode.FULL_WIDTH
+                ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${pinnedOnLeft.length + (pinnedOnCenter.length / 2)})`
+                : 'auto',
             }}
           />,
           ...pinnedOnCenter.map((item) => (
@@ -174,7 +211,9 @@ export function SeelenWeg() {
             style={{
               height: settings.size,
               marginLeft: pinnedOnRight.length ? 0 : settings.spaceBetweenItems * -1,
-              opacity: pinnedOnRight.length ? 1 : 0,
+              width: settings.mode === SeelenWegMode.FULL_WIDTH
+                ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${pinnedOnRight.length + (pinnedOnCenter.length / 2)})`
+                : 'auto',
             }}
           />,
           ...pinnedOnRight.map((item) => (

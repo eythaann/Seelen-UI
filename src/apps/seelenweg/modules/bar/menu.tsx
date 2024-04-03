@@ -1,3 +1,4 @@
+import { savePinnedItems } from '../shared/store/storeApi';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, MenuProps, Popover } from 'antd';
 
@@ -6,15 +7,16 @@ import { store } from '../shared/store/infra';
 
 import { isRealPinned, isTemporalPinned, RootActions } from '../shared/store/app';
 
-import { PinnedApp, PinnedAppSide } from '../shared/store/domain';
+import { App, AppsSides } from '../shared/store/domain';
 
-export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
+export function getMenuForItem(item: App): MenuProps['items'] {
   const state = store.getState();
   const isPinned = isRealPinned(item);
 
-  const pin = (side: PinnedAppSide) => {
+  const pin = (side: AppsSides) => {
     if (isTemporalPinned(item)) {
       store.dispatch(RootActions.pinApp({ app: item, side }));
+      savePinnedItems(store.getState());
     }
   };
 
@@ -26,6 +28,7 @@ export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
       key: 'weg_unpin_app',
       onClick: () => {
         store.dispatch(RootActions.unPin(item));
+        savePinnedItems(store.getState());
       },
     });
   } else {
@@ -45,17 +48,17 @@ export function getMenuForItem(item: PinnedApp): MenuProps['items'] {
                   {
                     label: 'Pin to Left',
                     key: 'weg_pin_app_left',
-                    onClick: () => pin(PinnedAppSide.LEFT),
+                    onClick: () => pin(AppsSides.LEFT),
                   },
                   {
                     label: 'Pin to Center',
                     key: 'weg_pin_app_center',
-                    onClick: () => pin(PinnedAppSide.CENTER),
+                    onClick: () => pin(AppsSides.CENTER),
                   },
                   {
                     label: 'Pin to Right',
                     key: 'weg_pin_app_right',
-                    onClick: () => pin(PinnedAppSide.RIGHT),
+                    onClick: () => pin(AppsSides.RIGHT),
                   },
                 ]}
               />

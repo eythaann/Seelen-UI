@@ -1,19 +1,18 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
 import { StateBuilder } from '../../../../utils/StateBuilder';
-import { savePinnedItems } from './storeApi';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { SeelenWegSlice } from '../../bar/app';
+import { PinnedApp } from '../../item/app/PinnedApp';
+import { TemporalApp } from '../../item/app/TemporalApp';
 
 import {
   App,
   AppFromBackground,
+  AppsSides,
   HWND,
-  PinnedApp,
-  PinnedAppSide,
   RootState,
   SpecialItemType,
-  TemporalPinnedApp,
 } from './domain';
 
 const initialState: RootState = {
@@ -26,7 +25,7 @@ const initialState: RootState = {
 };
 
 function removeAppFromState(state: RootState, searched: App) {
-  const search = (app: PinnedApp) => app.exe === searched.exe;
+  const search = (app: App) => app.exe === searched.exe;
 
   let index = state.pinnedOnLeft.findIndex(search);
   if (index !== -1) {
@@ -47,9 +46,16 @@ function removeAppFromState(state: RootState, searched: App) {
   }
 }
 
-function removeHwnd(state: PinnedApp[], searched: number) {
+function removeHwnd(state: App[], searched: number) {
   for (let i = 0; i < state.length; i++) {
     const current = state[i]!;
+    if (
+      current.type !== SpecialItemType.PinnedApp &&
+      current.type !== SpecialItemType.TemporalPin
+    ) {
+      continue;
+    }
+
     const index = current.opens.findIndex((hwnd) => hwnd === searched);
 
     if (index !== -1) {
@@ -62,7 +68,7 @@ function removeHwnd(state: PinnedApp[], searched: number) {
   }
 }
 
-function findApp(state: RootState, searched: App): PinnedApp | undefined {
+function findApp(state: RootState, searched: App): App | undefined {
   return (
     state.pinnedOnLeft.find((app) => app.exe === searched.exe) ||
     state.pinnedOnCenter.find((app) => app.exe === searched.exe) ||
@@ -79,9 +85,8 @@ export const RootSlice = createSlice({
       if (found) {
         found.type = SpecialItemType.TemporalPin;
       }
-      savePinnedItems(state);
     },
-    pinApp(state, action: PayloadAction<{ app: TemporalPinnedApp; side: PinnedAppSide }>) {
+    pinApp(state, action: PayloadAction<{ app: TemporalApp; side: AppsSides }>) {
       const { app, side } = action.payload;
 
       const appToPin = findApp(state, app) as PinnedApp;
@@ -92,18 +97,17 @@ export const RootSlice = createSlice({
       removeAppFromState(state, appToPin);
 
       switch (side) {
-        case PinnedAppSide.LEFT:
+        case AppsSides.LEFT:
           state.pinnedOnLeft.push(appToPin);
           break;
-        case PinnedAppSide.CENTER:
+        case AppsSides.CENTER:
           state.pinnedOnCenter.unshift(appToPin);
           break;
-        case PinnedAppSide.RIGHT:
+        case AppsSides.RIGHT:
           state.pinnedOnRight.push(appToPin);
           break;
         default:
       }
-      savePinnedItems(state);
     },
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
       const app = action.payload;
@@ -128,14 +132,7 @@ export const RootSlice = createSlice({
         return;
       }
 
-      state.pinnedOnCenter.push({
-        type: SpecialItemType.TemporalPin,
-        icon: app.icon,
-        exe: app.exe,
-        execution_path: app.execution_path,
-        title: app.exe.split('\\').at(-1) || 'Unknown',
-        opens: [app.hwnd],
-      });
+      state.pinnedOnCenter.push(TemporalApp.fromBackground(app));
     },
     updateOpenAppInfo(state, action: PayloadAction<AppFromBackground>) {
       const found = state.openApps[action.payload.hwnd];
@@ -157,10 +154,10 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isRealPinned = (item: App): boolean => {
+export const isRealPinned = (item: App): item is PinnedApp => {
   return item.type === SpecialItemType.PinnedApp;
 };
 
-export const isTemporalPinned = (item: App): item is TemporalPinnedApp => {
+export const isTemporalPinned = (item: App): item is TemporalApp => {
   return item.type === SpecialItemType.TemporalPin;
 };
