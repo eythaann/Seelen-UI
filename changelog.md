@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.13]
 ### features
 - add Themes Feature 🎉 (incompleted only for Seelenweg for now)
 - add SeelenWeg (a Dock or Taskbar) beta feature

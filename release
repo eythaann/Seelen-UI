@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0-prerelease.12",
-  "notes": "### enhancements\n- add some traces on functions to save logs\n\n### fix\n- clean installation of komorebi no working",
-  "pub_date": "2024-03-22T16:49:52.316Z",
+  "version": "1.0.0-prerelease.13",
+  "notes": "### features\n- add Themes Feature 🎉 (incompleted only for Seelenweg for now)\n- add SeelenWeg (a Dock or Taskbar) beta feature\n- add SeelenWeg in to Settings\n- add ContextMenu for apps in SeelenWeg\n- allow move apps in the Weg 😄\n- add Grouped Apps in one item\n- live reload of Apps on events like change of title\n- UWP apps support\n\n### enhancements\n- move readme blob to documentation/images",
+  "pub_date": "2024-04-03T22:49:55.120Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0NkRUtORzZNVkxGWDJOdjRTK1U2aEVpVGl1SUxRYzlBNWRmN3J2Z1lsbFFQTEptN2loQ2Zod3Q5TFdBUHUzQUFLNEtaL0FXMk5RZ3p5RWZOVHphNFFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzExMTI2MTkxCWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS4xMl94NjQtc2V0dXAubnNpcy56aXAKY1MzSzRHcXR6WVBJZVdtSWpUVTdlM3FBMXBITFozQTcweUlhSWNURkRIWGJTWXhwdWUvdXVXenRacXZaMi9IY3VBTzd1ZjJ6T1haVmhrTGE2SzNpQ1E9PQo=",
-      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v1.0.0-prerelease.12/Komorebi.UI_1.0.0-prerelease.12_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0VIU01raVR6YVZGQWNHZFc4ZTdmN1R4WjZyTVRzSVpIWWU3MW0yUm5paFVIaW0xcldQVFpEd0xHUkdXMnBpME51bk8wU2thaTdHNnNBTFA1RXNXOXd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyMTg0NTkzCWZpbGU6S29tb3JlYmkgVUlfMS4wLjAtcHJlcmVsZWFzZS4xM194NjQtc2V0dXAubnNpcy56aXAKb3o0YWJHVGc0bER5V1JyREhlOXVrSlpJalBvbVJhb25RUEZNWlNIeTAzMGovcDR3dTNnbjRtS3lkYWwzb3Zwc1JEWUppRmdld3hFRC96ZG9rZ0tRQkE9PQo=",
+      "url": "https://github.com/eythaann/komorebi-ui/releases/download/v1.0.0-prerelease.13/Komorebi.UI_1.0.0-prerelease.13_x64-setup.nsis.zip"
     }
   }
 }
