@@ -6,9 +6,9 @@ use windows::Win32::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_HIDE,
-            EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW,
-            EVENT_OBJECT_UNCLOAKED, MSG,
+            EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
+            EVENT_OBJECT_HIDE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED,
+            EVENT_SYSTEM_FOREGROUND, MSG,
         },
     },
 };
@@ -73,6 +73,15 @@ pub extern "system" fn win_event_hook(
                 seelen.weg_mut().update_app(hwnd);
             } else if SeelenWeg::should_handle_hwnd(hwnd) {
                 seelen.weg_mut().add_hwnd(hwnd);
+            }
+        }
+        EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
+            let seelen = SEELEN.lock();
+            let seelenweg = seelen.weg();
+            if seelenweg.contains_app(hwnd) {
+                seelenweg.set_focused(hwnd);
+            } else if WindowsApi::get_window_text(hwnd) != "Task Switching" {
+                seelenweg.set_focused(HWND(0));
             }
         }
         _ => {}

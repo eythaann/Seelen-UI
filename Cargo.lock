@@ -2636,7 +2636,6 @@ dependencies = [
  "widestring",
  "win-screenshot",
  "windows 0.54.0",
- "windows-capture",
 ]
 
 [[package]]
@@ -5949,18 +5948,6 @@ checksum = "9252e5725dbed82865af151df558e754e4a3c2c30818359eb17465f1346a1b49"
 dependencies = [
  "windows-core 0.54.0",
  "windows-targets 0.52.4",
-]
-
-[[package]]
-name = "windows-capture"
-version = "1.0.68"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1664266231b152b9987b6ecfd0f0ae752904a962e50e7808d0b9641edc23ab03"
-dependencies = [
- "parking_lot",
- "rayon",
- "thiserror",
- "windows 0.54.0",
 ]
 
 [[package]]

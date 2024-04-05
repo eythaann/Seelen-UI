@@ -5,6 +5,9 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  padding: var(--config-padding) var(--config-padding) calc(var(--config-padding) + 4px) var(--config-padding);
+  height: calc(var(--config-item-size) + 4px + var(--config-padding) * 2);
+  gap: var(--config-space-between-items);
 
   .itemsContainer {
     z-index: 1;
@@ -62,6 +65,31 @@
     height: 65%;
     filter: drop-shadow(0px 0px 1px #0000009a);
     object-fit: contain;
+  }
+
+  .openSign {
+    position: absolute;
+    top: calc(100% + var(--config-padding));
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--color-gray-600);
+    opacity: 0;
+    transition-property: width, opacity, background-color, border-radius;
+    transition-duration: 0.2s;
+    transition-timing-function: linear;
+
+    &.active {
+      opacity: 1;
+    }
+
+    &.focused {
+      background-color: var(--config-accent-color);
+      width: 50%;
+      border-radius: 4px;
+    }
   }
 }
 

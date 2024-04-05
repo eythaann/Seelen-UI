@@ -51,7 +51,7 @@ export async function registerStoreEvents() {
     }
   };
 
-  await listen<AppFromBackground[]>('update-store-apps', async (event) => {
+  await listen<AppFromBackground[]>('set-store-apps', async (event) => {
     const items = await cleanItems(event.payload);
     items.forEach((item) => store.dispatch(RootActions.addOpenApp(item)));
     updateHitboxIfNeeded();
@@ -81,24 +81,40 @@ export async function registerStoreEvents() {
   });
 
   await listen<SeelenWegState>('update-store-settings', (event) => {
-    document.getElementById('root')!.style.margin = event.payload.margin + 'px';
-
+    loadSettingsVariables(event.payload);
     store.dispatch(RootActions.setSettings(event.payload));
     updateHitbox();
   });
 
   await listen<Theme>('update-store-theme', (event) => {
-    loadCSSVariables(event.payload);
+    loadThemeVariables(event.payload);
     store.dispatch(RootActions.setTheme(event.payload));
+    updateHitbox();
   });
 
-  invoke('weg_request_apps');
+  await listen<HWND>('set-focused-handle', (event) => {
+    store.dispatch(RootActions.setFocusedHandle(event.payload));
+  });
+
+  await invoke('store_events_established');
 }
 
-function loadCSSVariables(theme: Theme) {
+function loadThemeVariables(theme: Theme) {
+  invoke<string>('get_accent_color').then((color) => {
+    document.documentElement.style.setProperty('--config-accent-color', color);
+  });
   Object.entries(theme.variables).forEach(([property, value]) => {
     document.documentElement.style.setProperty(property, value);
   });
+}
+
+function loadSettingsVariables(settings: SeelenWegState) {
+  document.documentElement.style.setProperty('--config-margin', `${settings.margin}px`);
+  document.documentElement.style.setProperty('--config-padding', `${settings.padding}px`);
+
+  document.documentElement.style.setProperty('--config-item-size', `${settings.size}px`);
+  document.documentElement.style.setProperty('--config-item-zoom-size', `${settings.zoomSize}px`);
+  document.documentElement.style.setProperty('--config-space-between-items', `${settings.spaceBetweenItems}px`);
 }
 
 export async function loadStore() {
@@ -107,8 +123,10 @@ export async function loadStore() {
 
   const settings = JsonToState_Seelenweg(userSettings.jsonSettings, initialState.settings);
   store.dispatch(RootActions.setSettings(settings));
+  loadSettingsVariables(settings);
+
   if (userSettings.theme) {
-    loadCSSVariables(userSettings.theme);
+    loadThemeVariables(userSettings.theme);
     store.dispatch(RootActions.setTheme(userSettings.theme));
   }
 

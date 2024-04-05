@@ -68,6 +68,7 @@ export interface RootState {
   pinnedOnCenter: App[];
   pinnedOnRight: App[];
   openApps: Record<HWND, AppFromBackground>;
+  focusedHandle: HWND;
   theme: Theme;
   settings: SeelenWegState;
 }

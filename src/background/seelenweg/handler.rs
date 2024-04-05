@@ -21,7 +21,7 @@ use windows::{
 use super::SeelenWeg;
 
 #[command]
-pub fn weg_request_apps() {
+pub fn store_events_established() {
     SEELEN.lock().weg().update_ui();
 }
 

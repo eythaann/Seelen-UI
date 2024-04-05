@@ -1,12 +1,13 @@
 pub mod handler;
 pub mod icon_extractor;
 
-use std::{env::temp_dir, path::PathBuf, process::Command};
+use std::{env::temp_dir, path::PathBuf};
 
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use serde::Serialize;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
+use tauri_plugin_shell::ShellExt;
 use win_screenshot::capture::capture_window;
 use windows::{
     core::PCWSTR,
@@ -113,38 +114,47 @@ impl SeelenWeg {
         };
     }
 
+    pub fn set_focused(&self, hwnd: HWND) {
+        self.handle.emit_to(Self::TARGET, "set-focused-handle", hwnd.0).expect("Failed to emit");
+    }
+
     fn load_uwp_apps(&self) -> Result<()> {
         let pwsh_script = include_str!("load_uwp_apps.ps1");
         let pwsh_script_path = temp_dir().join("load_uwp_apps.ps1");
         std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
-        let mut child = Command::new("powershell")
-            .args([
-                "-ExecutionPolicy",
-                "Bypass",
-                "-NoProfile",
-                "-File",
-                &pwsh_script_path.to_string_lossy(),
-                "-SavePath",
-                &self
-                    .generated_files_path()
-                    .join("uwp_manifests.json")
-                    .to_string_lossy()
-                    .trim_start_matches("\\\\?\\"),
-            ])
-            .spawn()
-            .expect("Failed to spawn uwp load script");
 
-        match child.wait() {
-            Ok(status) => {
-                log::trace!(
-                    "load_uwp_apps exit code: {}",
-                    status.code().unwrap_or_default()
-                );
-            }
-            Err(err) => log::error!("load_uwp_apps Failed to wait for process: {}", err),
-        };
+        tauri::async_runtime::block_on(async move {
+            let result = self
+                .handle
+                .shell()
+                .command("powershell")
+                .args([
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-NoProfile",
+                    "-File",
+                    &pwsh_script_path.to_string_lossy(),
+                    "-SavePath",
+                    &self
+                        .generated_files_path()
+                        .join("uwp_manifests.json")
+                        .to_string_lossy()
+                        .trim_start_matches("\\\\?\\"),
+                ])
+                .status()
+                .await;
 
-        std::fs::remove_file(pwsh_script_path)?;
+            match result {
+                Ok(status) => {
+                    log::trace!(
+                        "load_uwp_apps exit code: {}",
+                        status.code().unwrap_or_default()
+                    );
+                }
+                Err(err) => log::error!("load_uwp_apps Failed to wait for process: {}", err),
+            };
+        });
+
         Ok(())
     }
 
@@ -236,7 +246,7 @@ impl SeelenWeg {
 
     pub fn update_ui(&self) {
         self.handle
-            .emit_to(Self::TARGET, "update-store-apps", self.apps.clone())
+            .emit_to(Self::TARGET, "set-store-apps", self.apps.clone())
             .expect("Failed to emit");
     }
 

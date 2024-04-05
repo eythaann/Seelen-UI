@@ -26,6 +26,7 @@ const Separator2: Separator = {
 };
 
 export function SeelenWeg() {
+  const focusedHandle = useSelector(Selectors.focusedHandle);
   const theme = useSelector(Selectors.theme);
   const settings = useSelector(Selectors.settings);
 
@@ -51,12 +52,10 @@ export function SeelenWeg() {
 
   useEffect(() => {
     refs.current = Array.from(document.getElementsByClassName(cs.item!)) as HTMLDivElement[];
-    separatorRefs.current = Array.from(document.getElementsByClassName(cs.separator!)) as HTMLDivElement[];
-    lenghtsRefs.current = [
-      pinnedOnLeft.length,
-      pinnedOnCenter.length,
-      pinnedOnRight.length,
-    ];
+    separatorRefs.current = Array.from(
+      document.getElementsByClassName(cs.separator!),
+    ) as HTMLDivElement[];
+    lenghtsRefs.current = [pinnedOnLeft.length, pinnedOnCenter.length, pinnedOnRight.length];
   });
 
   const animate = useCallback(() => {
@@ -76,8 +75,10 @@ export function SeelenWeg() {
       totalCenterSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[1]!;
       totalRightSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[2]!;
 
-      separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + (totalCenterSize / 2)}px`;
-      separatorRefs.current[1]!.style.width = `calc(50% - ${totalRightSize + (totalCenterSize / 2)}px`;
+      separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px`;
+      separatorRefs.current[1]!.style.width = `calc(50% - ${
+        totalRightSize + totalCenterSize / 2
+      }px`;
       return;
     }
 
@@ -117,8 +118,8 @@ export function SeelenWeg() {
       node.style.marginBottom = marginBottom + 'px';
     });
 
-    separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + (totalCenterSize / 2)}px`;
-    separatorRefs.current[1]!.style.width = `calc(50% - ${totalRightSize + (totalCenterSize / 2)}px`;
+    separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px`;
+    separatorRefs.current[1]!.style.width = `calc(50% - ${totalRightSize + totalCenterSize / 2}px`;
 
     requestAnimationFrame(animate);
   }, [settings]);
@@ -174,17 +175,17 @@ export function SeelenWeg() {
       axis="x"
       as="div"
       className={cs.bar}
-      style={{
-        padding: settings.padding,
-        height: settings.size + settings.padding * 2,
-        gap: settings.spaceBetweenItems,
-      }}
     >
       <BackgroundByLayers styles={theme?.seelenweg.background || []} />
       <div className={cx(cs.itemsContainer)}>
         {[
           ...pinnedOnLeft.map((item) => (
-            <WegItem key={item.exe} item={item} initialSize={settings.size} />
+            <WegItem
+              key={item.exe}
+              item={item}
+              initialSize={settings.size}
+              isFocused={item.opens.includes(focusedHandle)}
+            />
           )),
           <Reorder.Item
             as="div"
@@ -195,13 +196,21 @@ export function SeelenWeg() {
             style={{
               height: settings.size,
               marginLeft: pinnedOnLeft.length ? 0 : settings.spaceBetweenItems * -1,
-              width: settings.mode === SeelenWegMode.FULL_WIDTH
-                ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${pinnedOnLeft.length + (pinnedOnCenter.length / 2)})`
-                : 'auto',
+              width:
+                settings.mode === SeelenWegMode.FULL_WIDTH
+                  ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
+                    pinnedOnLeft.length + pinnedOnCenter.length / 2
+                  })`
+                  : 'auto',
             }}
           />,
           ...pinnedOnCenter.map((item) => (
-            <WegItem key={item.exe} item={item} initialSize={settings.size} />
+            <WegItem
+              key={item.exe}
+              item={item}
+              initialSize={settings.size}
+              isFocused={item.opens.includes(focusedHandle)}
+            />
           )),
           <Reorder.Item
             as="div"
@@ -211,13 +220,21 @@ export function SeelenWeg() {
             style={{
               height: settings.size,
               marginLeft: pinnedOnRight.length ? 0 : settings.spaceBetweenItems * -1,
-              width: settings.mode === SeelenWegMode.FULL_WIDTH
-                ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${pinnedOnRight.length + (pinnedOnCenter.length / 2)})`
-                : 'auto',
+              width:
+                settings.mode === SeelenWegMode.FULL_WIDTH
+                  ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
+                    pinnedOnRight.length + pinnedOnCenter.length / 2
+                  })`
+                  : 'auto',
             }}
           />,
           ...pinnedOnRight.map((item) => (
-            <WegItem key={item.exe} item={item} initialSize={settings.size} />
+            <WegItem
+              key={item.exe}
+              item={item}
+              initialSize={settings.size}
+              isFocused={item.opens.includes(focusedHandle)}
+            />
           )),
         ]}
       </div>

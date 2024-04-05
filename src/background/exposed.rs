@@ -2,6 +2,7 @@ use std::process::Command;
 
 use tauri::{command, Builder, Wry};
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::Graphics::Dwm::DwmGetColorizationColor;
 use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
@@ -72,10 +73,23 @@ fn open_file_location(path: String) -> Result<(), String> {
     Ok(())
 }
 
-
 #[command]
 fn is_dev_mode() -> bool {
     tauri::dev()
+}
+
+#[command]
+fn get_accent_color() -> String {
+    let mut colorization: u32 = 0;
+    let mut opaqueblend = windows::Win32::Foundation::BOOL(0);
+    let _ = unsafe { DwmGetColorizationColor(&mut colorization, &mut opaqueblend) };
+
+    let alpha = (colorization >> 24) & 0xFF;
+    let red = (colorization >> 16) & 0xFF;
+    let green = (colorization >> 8) & 0xFF;
+    let blue = colorization & 0xFF;
+
+    format!("#{:02X}{:02X}{:02X}{:02X}", red, green, blue, alpha)
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
@@ -83,6 +97,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         // General
         is_dev_mode,
         open_file_location,
+        get_accent_color,
         // Media
         media_play_pause,
         media_next,
@@ -93,7 +108,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         kill_seelen_shortcuts,
         // SeelenWeg
         weg_close_app,
-        weg_request_apps,
+        store_events_established,
         weg_toggle_window_state,
         weg_request_update_previews,
     ])

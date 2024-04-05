@@ -1,3 +1,4 @@
+import { cx } from '../../../utils/styles';
 import { ExtraCallbacksOnLeave } from '../../events';
 import { savePinnedItems } from '../shared/store/storeApi';
 import { getMenuForItem } from './menu';
@@ -21,11 +22,12 @@ import { App } from '../shared/store/domain';
 interface Props {
   item: App;
   initialSize: number;
+  isFocused: boolean;
 }
 
-export const WegItem = memo(({ item, initialSize }: Props) => {
+export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
   const theme = useSelector(Selectors.theme.seelenweg);
-  const spaceBetweenItems = useSelector(Selectors.settings.spaceBetweenItems);
+  const { spaceBetweenItems } = useSelector(Selectors.settings);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
@@ -135,6 +137,10 @@ export const WegItem = memo(({ item, initialSize }: Props) => {
           >
             <BackgroundByLayers styles={theme.items.background} />
             <img src={item.icon} style={theme.items.icon} draggable={false} />
+            <div className={cx(cs.openSign, {
+              [cs.active!]: !!item.opens.length,
+              [cs.focused!]: isFocused,
+            })} />
           </animated.button>
         </Popover>
       </Dropdown>

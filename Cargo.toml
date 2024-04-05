@@ -41,7 +41,6 @@ parking_lot = "0.12.1"
 log = "0.4"
 uuid = "1.8.0"
 image = "0.25.0"
-windows-capture = "1.0.68"
 win-screenshot = "4.0.8"
 widestring = "1.0.2"
 itertools = "0.12.1"
@@ -55,6 +54,7 @@ features = [
     "Win32_UI_Shell",
     "Win32_System_Threading",
     "Win32_UI_Accessibility",
+    "Win32_Graphics_Dwm",
     "Management_Deployment",
     "ApplicationModel",
     "Foundation_Collections",

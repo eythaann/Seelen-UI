@@ -49,7 +49,7 @@ export const SeelenWegSettings = () => {
           <SettingsOption>
             <div>Padding</div>
             <InputNumber
-              value={settings.margin}
+              value={settings.padding}
               onChange={(value) => dispatch(SeelenWegActions.setPadding(value || 0))}
             />
           </SettingsOption>

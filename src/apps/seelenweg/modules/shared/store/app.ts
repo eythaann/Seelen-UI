@@ -20,6 +20,7 @@ const initialState: RootState = {
   pinnedOnCenter: [],
   pinnedOnRight: [],
   openApps: {},
+  focusedHandle: 0,
   theme: defaultTheme,
   settings: SeelenWegSlice.getInitialState(),
 };
@@ -46,7 +47,7 @@ function removeAppFromState(state: RootState, searched: App) {
   }
 }
 
-function removeHwnd(state: App[], searched: number) {
+function removeHwnd(state: App[], searched: HWND) {
   for (let i = 0; i < state.length; i++) {
     const current = state[i]!;
     if (
@@ -84,6 +85,9 @@ export const RootSlice = createSlice({
       const found = findApp(state, action.payload);
       if (found) {
         found.type = SpecialItemType.TemporalPin;
+        if (found.opens.length === 0) {
+          removeAppFromState(state, found);
+        }
       }
     },
     pinApp(state, action: PayloadAction<{ app: TemporalApp; side: AppsSides }>) {

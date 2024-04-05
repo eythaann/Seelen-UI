@@ -1,5 +1,6 @@
 #root {
   width: min-content;
+  margin: var(--config-margin);
 
   .ant-popover {
     .ant-popover-inner {

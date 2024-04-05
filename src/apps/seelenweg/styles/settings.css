@@ -1,0 +1,10 @@
+:root {
+  --config-padding: 0px;
+  --config-margin: 0px;
+
+  --config-item-size: 0px;
+  --config-item-zoom-size: 0px;
+  --config-space-between-items: 0px;
+
+  --config-accent-color: #ff0000;
+}

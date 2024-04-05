@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add indicator to know opens and focused apps on SeelenWeg
+
 ## [1.0.0-prerelease.13]
 ### features
 - add Themes Feature 🎉 (incompleted only for Seelenweg for now)
