@@ -28,17 +28,14 @@
     "seelenweg": {
       "type": "object",
       "properties": {
-        "background": {
+        "backgroundLayers": {
           "$ref": "#/definitions/layers"
         },
         "items": {
           "type": "object",
           "properties": {
-            "background": {
+            "backgroundLayers": {
               "$ref": "#/definitions/layers"
-            },
-            "icon": {
-              "$ref": "#/definitions/CSSProperties"
             }
           },
           "additionalProperties": false
@@ -46,11 +43,8 @@
         "contextMenu": {
           "type": "object",
           "properties": {
-            "background": {
+            "backgroundLayers": {
               "$ref": "#/definitions/layers"
-            },
-            "content": {
-              "$ref": "#/definitions/CSSProperties"
             }
           },
           "additionalProperties": false
@@ -58,26 +52,8 @@
         "preview": {
           "type": "object",
           "properties": {
-            "background": {
+            "backgroundLayers": {
               "$ref": "#/definitions/layers"
-            },
-            "content": {
-              "$ref": "#/definitions/CSSProperties"
-            },
-            "items": {
-              "type": "object",
-              "properties": {
-                "content": {
-                  "$ref": "#/definitions/CSSProperties"
-                },
-                "title": {
-                  "$ref": "#/definitions/CSSProperties"
-                },
-                "image": {
-                  "$ref": "#/definitions/CSSProperties"
-                }
-              },
-              "additionalProperties": false
             }
           },
           "additionalProperties": false
@@ -89,10 +65,18 @@
   "definitions": {
     "layers": {
       "type": "array",
-      "items": {
-        "$ref": "#/definitions/CSSProperties"
-      },
-      "description": "An array of CSS Properties where each object is represented as a Layer"
+      "description": "An array of CSS Properties where each object is represented as a Layer or the lenght of the array is used as the background layer.",
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CSSProperties"
+          }
+        }
+      ]
     },
     "CSSProperties": {
       "type": "object",
