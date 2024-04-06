@@ -12,7 +12,7 @@ import { loadStore, registerStoreEvents, store } from './modules/shared/store/in
 import { loadConstants } from './modules/shared/utils/infra';
 
 import './styles/colors.css';
-import './styles/settings.css';
+import './styles/variables.css';
 import './styles/reset.css';
 import './styles/global.css';
 

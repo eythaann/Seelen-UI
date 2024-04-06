@@ -13,7 +13,6 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
 import { store } from '../shared/store/infra';
 import { updatePreviews } from '../shared/utils/infra';
-import cs from './infra.module.css';
 
 import { Selectors } from '../shared/store/app';
 
@@ -111,7 +110,7 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
             <>
               <BackgroundByLayers styles={theme.preview.background} />
               <div
-                className={cs.previewContainer}
+                className="weg-item-preview-container"
                 style={{
                   ...theme.preview.content,
                   gap: spaceBetweenItems + 'px',
@@ -126,7 +125,7 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
           }
         >
           <animated.button
-            className={cs.item}
+            className="weg-item"
             style={style}
             onClick={() => {
               if (!isDragging.current) {
@@ -137,9 +136,9 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
           >
             <BackgroundByLayers styles={theme.items.background} />
             <img src={item.icon} style={theme.items.icon} draggable={false} />
-            <div className={cx(cs.openSign, {
-              [cs.active!]: !!item.opens.length,
-              [cs.focused!]: isFocused,
+            <div className={cx('weg-item-open-sign', {
+              'weg-item-open-sign-active': !!item.opens.length,
+              'weg-item-open-sign-focused': isFocused,
             })} />
           </animated.button>
         </Popover>

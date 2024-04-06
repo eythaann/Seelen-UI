@@ -5,7 +5,6 @@ import { MouseEvent, useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
-import cs from './infra.module.css';
 
 import { SelectOpenApp, Selectors } from '../shared/store/app';
 
@@ -45,17 +44,17 @@ export const WegPreview = ({ hwnd }: PreviewProps) => {
 
   return (
     <div
-      className={cs.preview}
+      className={'weg-item-preview'}
       style={styles.content}
       onClick={() => invoke('weg_toggle_window_state', { hwnd: app.hwnd || 0, exePath: app.execution_path })}
     >
-      <div className={cs.title} style={styles.title}>
-        <div className={cs.label}>{app.title}</div>
-        <div className={cs.close} onClick={onClose}>
+      <div className="weg-item-preview-topbar" style={styles.title}>
+        <div className="weg-item-preview-title">{app.title}</div>
+        <div className="weg-item-preview-close" onClick={onClose}>
           x
         </div>
       </div>
-      <div className={cs.image} style={styles.image}>
+      <div className="weg-item-preview-image" style={styles.image}>
         {imageSrc ? <img src={imageSrc + `?${new Date().getTime()}`} onError={() => setImageSrc(null)}/> : <Spin />}
       </div>
     </div>

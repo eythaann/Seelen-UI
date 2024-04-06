@@ -6,9 +6,7 @@ import { MouseEvent, useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
-import cs from './infra.module.css';
 
-import { cx } from '../../../settings/modules/shared/app/utils';
 import { RootActions, Selectors } from '../shared/store/app';
 
 import { SeelenWegMode } from '../../../settings/modules/seelenweg/domain';
@@ -51,9 +49,9 @@ export function SeelenWeg() {
   }, []);
 
   useEffect(() => {
-    refs.current = Array.from(document.getElementsByClassName(cs.item!)) as HTMLDivElement[];
+    refs.current = Array.from(document.getElementsByClassName('weg-item')) as HTMLDivElement[];
     separatorRefs.current = Array.from(
-      document.getElementsByClassName(cs.separator!),
+      document.getElementsByClassName('weg-separator'),
     ) as HTMLDivElement[];
     lenghtsRefs.current = [pinnedOnLeft.length, pinnedOnCenter.length, pinnedOnRight.length];
   });
@@ -174,10 +172,10 @@ export function SeelenWeg() {
       onReorder={onReorderPinneds}
       axis="x"
       as="div"
-      className={cs.bar}
+      className="taskbar"
     >
       <BackgroundByLayers styles={theme?.seelenweg.background || []} />
-      <div className={cx(cs.itemsContainer)}>
+      <div className={'weg-items-container'}>
         {[
           ...pinnedOnLeft.map((item) => (
             <WegItem
@@ -191,7 +189,7 @@ export function SeelenWeg() {
             as="div"
             key="separator1"
             value={Separator1}
-            className={cs.separator}
+            className={'weg-separator'}
             onDragStart={(e) => e.stopPropagation()}
             style={{
               height: settings.size,
@@ -216,7 +214,7 @@ export function SeelenWeg() {
             as="div"
             key="separator2"
             value={Separator2}
-            className={cs.separator}
+            className={'weg-separator'}
             style={{
               height: settings.size,
               marginLeft: pinnedOnRight.length ? 0 : settings.spaceBetweenItems * -1,

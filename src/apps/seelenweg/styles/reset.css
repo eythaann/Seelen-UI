@@ -82,3 +82,52 @@ hr {
   opacity: 0.8;
   color: var(--color-gray-200);
 }
+
+#root {
+  .ant-popover {
+    .ant-popover-inner {
+      background: transparent;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0;
+    }
+  }
+
+  .ant-dropdown-menu-submenu,
+  .ant-dropdown-menu,
+  .ant-menu {
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .ant-menu-item,
+    .ant-dropdown-menu-item {
+      padding: 10px;
+      height: min-content;
+      width: 100%;
+      line-height: 12px;
+      margin: 0;
+      border-radius: 8px;
+    }
+
+    .ant-menu-item:not(.ant-menu-item-danger),
+    .ant-dropdown-menu-item:not(.ant-dropdown-menu-item-danger) {
+      color: inherit;
+
+      &:hover {
+        backdrop-filter: brightness(0.6);
+      }
+    }
+
+    .ant-menu-item-divider,
+    .ant-dropdown-menu-item-divider {
+      backdrop-filter: brightness(0.85);
+    }
+
+    .ant-dropdown-menu-submenu-title {
+      color: inherit;
+    }
+  }
+}
