@@ -6,18 +6,24 @@ import { isDevMode } from '../utils/infra';
 
 import { isRealPinned } from './app';
 
-import { App, RootState } from './domain';
+import { App, RootState, SavedAppsInYaml } from './domain';
 
 export interface YamlWeg {
-  left: App[];
-  center: App[];
-  right: App[];
+  left: SavedAppsInYaml[];
+  center: SavedAppsInYaml[];
+  right: SavedAppsInYaml[];
 }
 
 export const savePinnedItems = async (state: RootState): Promise<void> => {
-  const cb = (acc: App[], app: App) => {
+  const cb = (acc: SavedAppsInYaml[], app: App) => {
     if (isRealPinned(app)) {
-      acc.push(app);
+      acc.push({
+        type: app.type,
+        title: app.title,
+        exe: app.exe,
+        icon_path: app.icon_path,
+        execution_path: app.execution_path,
+      });
     }
     return acc;
   };

@@ -1,8 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- only creates app icons the first time they are loaded
+
 ### features
 - add indicator to know opens and focused apps on SeelenWeg
+
+### fix
+- incorrect icon for UWP (using store icon instead taskbar icon)
+- replacing icons on each load
 
 ## [1.0.0-prerelease.13]
 ### features

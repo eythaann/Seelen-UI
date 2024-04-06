@@ -1,10 +1,16 @@
-import { path } from '@tauri-apps/api';
 import { convertFileSrc } from '@tauri-apps/api/core';
 
 import { fs } from '../../../../settings/modules/shared/infrastructure/tauri';
-import { getImageBase64FromUrl, getUWPInfoFromExePath } from '../../shared/utils/infra';
+import {
+  getImageBase64FromUrl,
+  getUWPInfoFromExePath,
+  LAZY_CONSTANTS,
+} from '../../shared/utils/infra';
+
+import { filenameFromPath, getGeneratedFilesPath } from '../../shared/utils/app';
 
 import { AppFromBackground, HWND, IApp, SpecialItemType } from '../../shared/store/domain';
+import { UWP_TARGET_SIZE_POSTFIXS } from '../../shared/utils/domain';
 
 export interface TemporalApp extends IApp {
   type: SpecialItemType.TemporalPin;
@@ -12,34 +18,48 @@ export interface TemporalApp extends IApp {
 }
 
 export class TemporalApp {
-  static async clean(item: AppFromBackground): Promise<AppFromBackground> {
+  static async cleanUWP(item: AppFromBackground) {
     try {
-      const uwpInfo = await getUWPInfoFromExePath(item.exe);
-      if (uwpInfo && typeof uwpInfo.AppId === 'string') {
-        item.execution_path = `shell:AppsFolder\\${uwpInfo.Name}_${uwpInfo.PublisherId}!${uwpInfo.AppId}`;
-        const logoPath = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo;
-        const logoPath200 = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo.replace('.png', '.scale-200.png');
-        const logoPath400 = uwpInfo.InstallLocation + '\\' + uwpInfo.Logo.replace('.png', '.scale-400.png');
+      const uwpPackage = await getUWPInfoFromExePath(item.exe);
+      if (!uwpPackage) {
+        return;
+      }
 
-        if (await fs.exists(logoPath400)) {
-          await fs.copyFile(logoPath400, item.icon_path);
-        } else if (await fs.exists(logoPath200)) {
-          await fs.copyFile(logoPath200, item.icon_path);
-        } else if (await fs.exists(logoPath)) {
-          await fs.copyFile(logoPath, item.icon_path);
+      const app = uwpPackage.Applications.find(
+        (app) => app.Executable === filenameFromPath(item.exe),
+      );
+
+      if (!app) {
+        return;
+      }
+
+      item.execution_path = `shell:AppsFolder\\${uwpPackage.Name}_${uwpPackage.PublisherId}!${app.AppId}`;
+      item.icon_path = await getGeneratedFilesPath() + '\\icons\\' + filenameFromPath(item.exe).replace('.exe', '_uwp.png');
+
+      if (await fs.exists(item.icon_path)) {
+        return;
+      }
+
+      for (const postfix of UWP_TARGET_SIZE_POSTFIXS) {
+        const logoPathUWP =
+          uwpPackage.InstallLocation + '\\' + app.Square44x44Logo.replace('.png', postfix);
+        if (await fs.exists(logoPathUWP)) {
+          await fs.copyFile(logoPathUWP, item.icon_path);
+          // remove icon file generated from exe
+          await fs.remove(item.icon_path.replace('_uwp.png', '.png'));
+          break;
         }
       }
     } catch (error) {
       console.error('Error while getting UWP info: ', error);
     }
+  }
+
+  static async clean(item: AppFromBackground): Promise<AppFromBackground> {
+    await TemporalApp.cleanUWP(item);
 
     if (!(await fs.exists(item.icon_path))) {
-      item.icon_path = await path.resolve(
-        await path.resourceDir(),
-        'static',
-        'icons',
-        'missing.png',
-      );
+      item.icon_path = LAZY_CONSTANTS.MISSING_ICON_PATH;
     }
 
     try {
@@ -47,7 +67,6 @@ export class TemporalApp {
     } catch {
       item.icon = convertFileSrc(item.icon_path);
     }
-
     return item;
   }
 

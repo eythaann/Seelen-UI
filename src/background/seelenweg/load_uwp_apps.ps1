@@ -11,17 +11,36 @@ $output = @()
 
 foreach ($package in $packages) {
   $manifest = Get-AppxPackageManifest -Package $package.PackageFullName
+
+  $applications = @()
+  foreach ($app in $manifest.Package.Applications.Application) {
+    if ($null -eq $app.Executable) {
+      continue
+    }
+
+    $applications += [PSCustomObject]@{
+      AppId             = $app.Id
+      Executable        = $app.Executable
+      Square150x150Logo = $app.VisualElements.Square150x150Logo
+      Square44x44Logo   = $app.VisualElements.Square44x44Logo
+    }
+  }
+
+  if ($applications.Count -eq 0) {
+    continue
+  }
+
   $selected = [PSCustomObject]@{
     Name            = $package.Name
     Version         = $package.Version
     PublisherId     = $package.PublisherId
-    AppId           = $manifest.Package.Applications.Application.Id
-    Executable   = $manifest.Package.Applications.Application.Executable
-    Logo            = $manifest.Package.Properties.Logo
     PackageFullName = $package.PackageFullName
     InstallLocation = $package.InstallLocation
+    StoreLogo       = $manifest.Package.Properties.Logo
+    Applications    = $applications
   }
+
   $output += $selected
 }
 
-$output | ConvertTo-Json | Out-File -FilePath $SavePath -Encoding utf8
+$output | ConvertTo-Json -Depth 3 | Out-File -FilePath $SavePath -Encoding utf8

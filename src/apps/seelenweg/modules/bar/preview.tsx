@@ -4,7 +4,7 @@ import { Spin } from 'antd';
 import { MouseEvent, useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Constants } from '../shared/utils/infra';
+import { LAZY_CONSTANTS } from '../shared/utils/infra';
 import cs from './infra.module.css';
 
 import { SelectOpenApp, Selectors } from '../shared/store/app';
@@ -19,7 +19,7 @@ export const WegPreview = ({ hwnd }: PreviewProps) => {
   const styles = useSelector(Selectors.theme.seelenweg.preview.items);
   const app = useSelector(SelectOpenApp(hwnd));
 
-  const imageUrl = convertFileSrc(`${Constants.TEMP_FOLDER}${app?.process_hwnd || 0}.png`);
+  const imageUrl = convertFileSrc(`${LAZY_CONSTANTS.TEMP_FOLDER}${app?.process_hwnd || 0}.png`);
 
   const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);

@@ -3,26 +3,25 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 
 import { store } from '../store/infra';
 
-import { HWND, UWP } from '../store/domain';
+import { HWND, UWP_Package } from '../store/domain';
 
-export const Constants = {
-  MISSING_ICON: '',
+export const LAZY_CONSTANTS = {
+  MISSING_ICON_PATH: '',
   TEMP_FOLDER: '',
 };
 
 export async function loadConstants() {
-  Constants.MISSING_ICON = await getMissingIconUrl();
-  Constants.TEMP_FOLDER = await path.tempDir();
+  LAZY_CONSTANTS.MISSING_ICON_PATH = await getMissingIconPath();
+  LAZY_CONSTANTS.TEMP_FOLDER = await path.tempDir();
 }
 
-export async function getMissingIconUrl() {
-  const missingIcon = await path.resolve(
+export async function getMissingIconPath() {
+  return await path.resolve(
     await path.resourceDir(),
     'static',
     'icons',
     'missing.png',
   );
-  return convertFileSrc(missingIcon);
 }
 
 export async function updatePreviews(hwnds: HWND[]) {
@@ -42,14 +41,18 @@ export async function iconPathFromExePath(exePath: string) {
   return await path.resolve(await path.resourceDir(), 'gen', 'icons', fileName);
 }
 
-export async function getUWPInfoFromExePath(exePath: string): Promise<UWP | undefined> {
+/**
+ * For some reason uwp_manifests.json can no be readed and parsed by JSON.parse()
+ * so I use fetch as solution, maybe is a problem with the encoding of the file
+ */
+export async function getUWPInfoFromExePath(exePath: string): Promise<UWP_Package | undefined> {
+  if (!exePath) {
+    return undefined;
+  }
   const dirname = await path.dirname(exePath);
-  // for some reason uwp_manifests.json can no be readed and parsed by JSON.parse so
-  // I use fetch as solution, maybe is a problem with the encoding of the file
-  const response = await fetch(
-    convertFileSrc(await path.resolveResource('gen/uwp_manifests.json')),
-  );
-  const manifests: UWP[] = await response.json();
+  const url = convertFileSrc(await path.resolveResource('gen/uwp_manifests.json'));
+  const response = await fetch(url);
+  const manifests: UWP_Package[] = await response.json();
   return manifests.find((manifest) => manifest.InstallLocation === dirname);
 }
 

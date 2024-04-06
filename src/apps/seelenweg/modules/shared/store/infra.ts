@@ -13,7 +13,7 @@ import { TemporalApp } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
 import { SeelenWegMode, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
-import { AppFromBackground, HWND, SavedItems } from './domain';
+import { AppFromBackground, HWND, SavedAppsInYaml } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -34,11 +34,11 @@ async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground
   return result;
 }
 
-async function cleanSavedItems(items: SavedItems[]): Promise<PinnedApp[]> {
+async function cleanSavedItems(items: SavedAppsInYaml[]): Promise<PinnedApp[]> {
   const result: PinnedApp[] = [];
   for (const item of items) {
     const cleaned = await PinnedApp.clean(item);
-    result.push(PinnedApp.fromSaved(cleaned));
+    result.push(await PinnedApp.fromSaved(cleaned));
   }
   return result;
 }

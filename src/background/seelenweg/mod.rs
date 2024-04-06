@@ -24,7 +24,9 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, seelen::SEELEN, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result, seelen::SEELEN, utils::filename_from_path, windows_api::WindowsApi,
+};
 
 use self::icon_extractor::get_images_from_exe;
 
@@ -115,7 +117,9 @@ impl SeelenWeg {
     }
 
     pub fn set_focused(&self, hwnd: HWND) {
-        self.handle.emit_to(Self::TARGET, "set-focused-handle", hwnd.0).expect("Failed to emit");
+        self.handle
+            .emit_to(Self::TARGET, "set-focused-handle", hwnd.0)
+            .expect("Failed to emit");
     }
 
     fn load_uwp_apps(&self) -> Result<()> {
@@ -194,15 +198,11 @@ impl SeelenWeg {
             std::fs::create_dir_all(&gen_icons_paths)?;
         }
 
-        let icon_path = gen_icons_paths.join(
-            exe_path
-                .replace(".exe", ".png")
-                .split("\\")
-                .last()
-                .unwrap_or_default(),
-        );
+        let filename = filename_from_path(exe_path);
+        let icon_path = gen_icons_paths.join(filename.replace(".exe", ".png"));
+        let icon_path_uwp = gen_icons_paths.join(filename.replace(".exe", "_uwp.png"));
 
-        if !icon_path.exists() {
+        if !icon_path.exists() && !icon_path_uwp.exists() {
             let images = get_images_from_exe(exe_path);
             if let Ok(images) = images {
                 // icon on index 0 always is the app showed icon
@@ -212,7 +212,12 @@ impl SeelenWeg {
             }
         }
 
-        Ok(icon_path
+        let mut icon_to_save = icon_path;
+        if icon_path_uwp.exists() {
+            icon_to_save = icon_path_uwp;
+        }
+
+        Ok(icon_to_save
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")
             .to_string())

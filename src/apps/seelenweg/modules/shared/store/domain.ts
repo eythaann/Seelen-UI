@@ -22,34 +22,47 @@ export enum SpecialItemType {
   TemporalPin = 'TemporalPin',
 }
 
-export interface UWP {
+/** @from pwsh */
+export interface UWP_App {
+  AppId: string;
+  Executable: string;
+  /** An image used as the app's Start Screen medium tile, and on the Task Switcher. */
+  Square150x150Logo: string;
+  /** An image used as the app's Start Screen small tile, and on the All Apps List (taskbar). */
+  Square44x44Logo: string;
+}
+
+/** @from pwsh */
+export interface UWP_Package {
   Name: string;
   Version: string;
   PublisherId: string;
-  AppId: string;
-  Executable: string;
-  Logo: string;
   PackageFullName: string;
   InstallLocation: string;
+  StoreLogo: string;
+  Applications: UWP_App[];
 }
 
 export interface IApp {
   type?: SpecialItemType;
+  /** Path to executable */
   exe: string;
   /** Base64 image or URL */
   icon: string;
   icon_path: string;
   title: string;
+  /** Path to execute the app using explorer.exe (uwp apps starts with `shell:AppsFolder`) */
   execution_path: string;
 }
 
 export type AppFromBackground = modify<IApp, {
+  /** Base64 image or URL */
   icon: string | null;
   hwnd: HWND;
   process_hwnd: HWND;
 }>;
 
-export type SavedItems = modify<IApp, { icon: string | null }>;
+export type SavedAppsInYaml = Omit<IApp, 'icon'>;
 
 export interface Separator {
   type: SpecialItemType.Separator;

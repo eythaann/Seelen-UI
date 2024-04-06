@@ -18,8 +18,6 @@ use windows::Win32::UI::WindowsAndMessaging::GetIconInfoExW;
 use windows::Win32::UI::WindowsAndMessaging::HICON;
 use windows::Win32::UI::WindowsAndMessaging::ICONINFOEXW;
 
-#[cfg(target_arch = "x86")]
-use std::arch::x86::_mm_shuffle_epi8;
 use std::arch::x86_64::__m128i;
 use std::arch::x86_64::_mm_loadu_si128;
 use std::arch::x86_64::_mm_setr_epi8;
