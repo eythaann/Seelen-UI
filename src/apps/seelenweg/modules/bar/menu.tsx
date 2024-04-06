@@ -40,10 +40,10 @@ export function getMenuForItem(item: App): MenuProps['items'] {
           placement="rightBottom"
           arrow={false}
           content={
-            <>
-              <BackgroundByLayers styles={state.theme.seelenweg.contextMenu.background} />
+            <div className="weg-context-menu-container">
+              <BackgroundByLayers prefix="menu" styles={state.theme.seelenweg.contextMenu.backgroundLayers} />
               <Menu
-                style={state.theme.seelenweg.contextMenu.content}
+                className="weg-context-menu"
                 items={[
                   {
                     label: 'Pin to left',
@@ -62,7 +62,7 @@ export function getMenuForItem(item: App): MenuProps['items'] {
                   },
                 ]}
               />
-            </>
+            </div>
           }
         >
           <div style={{ width: '100%', height: '100%', margin: '-10px', padding: '10px' }}>Pin</div>

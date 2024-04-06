@@ -1,21 +1,14 @@
-use std::{ffi::OsStr, os::windows::ffi::OsStrExt, path::PathBuf};
+use std::path::PathBuf;
 
 use image::ImageFormat;
 use serde::Deserialize;
 use tauri::{command, Manager};
+use tauri_plugin_shell::ShellExt;
 
 use crate::{seelen::SEELEN, windows_api::WindowsApi};
-use windows::{
-    core::PCWSTR,
-    Win32::{
-        Foundation::{HWND, LPARAM, WPARAM},
-        UI::{
-            Shell::ShellExecuteW,
-            WindowsAndMessaging::{
-                PostMessageW, ShowWindow, SW_MINIMIZE, SW_RESTORE, SW_SHOWNORMAL, WM_CLOSE,
-            },
-        },
-    },
+use windows::Win32::{
+    Foundation::{HWND, LPARAM, WPARAM},
+    UI::WindowsAndMessaging::{PostMessageW, ShowWindow, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
 };
 
 use super::SeelenWeg;
@@ -80,20 +73,13 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) {
             unsafe { ShowWindow(hwnd, SW_MINIMIZE) };
         }
     } else {
-        let wide_file_path: Vec<u16> = OsStr::new(&exe_path)
-            .encode_wide()
-            .chain(Some(0).into_iter())
-            .collect();
-
-        unsafe {
-            ShellExecuteW(
-                HWND(0),
-                PCWSTR::null(),
-                PCWSTR(wide_file_path.as_ptr()),
-                PCWSTR::null(),
-                PCWSTR::null(),
-                SW_SHOWNORMAL,
-            );
-        }
+        SEELEN
+            .lock()
+            .handle()
+            .shell()
+            .command("explorer")
+            .arg(&exe_path)
+            .spawn()
+            .expect("Could not spawn explorer on Opening App Action");
     }
 }

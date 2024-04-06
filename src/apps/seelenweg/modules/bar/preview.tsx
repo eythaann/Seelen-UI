@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
-import { SelectOpenApp, Selectors } from '../shared/store/app';
+import { SelectOpenApp } from '../shared/store/app';
 
 import { HWND } from '../shared/store/domain';
 
@@ -15,7 +15,6 @@ interface PreviewProps {
 }
 
 export const WegPreview = ({ hwnd }: PreviewProps) => {
-  const styles = useSelector(Selectors.theme.seelenweg.preview.items);
   const app = useSelector(SelectOpenApp(hwnd));
 
   const imageUrl = convertFileSrc(`${LAZY_CONSTANTS.TEMP_FOLDER}${app?.process_hwnd || 0}.png`);
@@ -44,18 +43,27 @@ export const WegPreview = ({ hwnd }: PreviewProps) => {
 
   return (
     <div
-      className={'weg-item-preview'}
-      style={styles.content}
-      onClick={() => invoke('weg_toggle_window_state', { hwnd: app.hwnd || 0, exePath: app.execution_path })}
+      className="weg-item-preview"
+      onClick={() =>
+        invoke('weg_toggle_window_state', { hwnd: app.hwnd || 0, exePath: app.execution_path })
+      }
     >
-      <div className="weg-item-preview-topbar" style={styles.title}>
+      <div className="weg-item-preview-topbar">
         <div className="weg-item-preview-title">{app.title}</div>
         <div className="weg-item-preview-close" onClick={onClose}>
           x
         </div>
       </div>
-      <div className="weg-item-preview-image" style={styles.image}>
-        {imageSrc ? <img src={imageSrc + `?${new Date().getTime()}`} onError={() => setImageSrc(null)}/> : <Spin />}
+      <div className="weg-item-preview-image-container">
+        {imageSrc ? (
+          <img
+            className="weg-item-preview-image"
+            src={imageSrc + `?${new Date().getTime()}`}
+            onError={() => setImageSrc(null)}
+          />
+        ) : (
+          <Spin className="weg-item-preview-spin" />
+        )}
       </div>
     </div>
   );

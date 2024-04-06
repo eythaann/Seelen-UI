@@ -19,6 +19,7 @@ export interface AppTemplate {
 
 export interface ThemeInfo {
   filename: string;
+  cssFileUrl: string | null;
   displayName: string;
   author: string;
   description: string;
@@ -28,29 +29,22 @@ export interface Theme {
   info: ThemeInfo;
   variables: Record<`--${string}`, string>;
   seelenweg: {
-    background: CSSProperties[];
+    backgroundLayers: CSSProperties[] | number;
     items: {
-      background: CSSProperties[];
-      icon: CSSProperties;
+      backgroundLayers: CSSProperties[] | number;
     };
     contextMenu: {
-      background: CSSProperties[];
-      content: CSSProperties;
+      backgroundLayers: CSSProperties[] | number;
     };
     preview: {
-      background: CSSProperties[];
-      content: CSSProperties;
-      items: {
-        content: CSSProperties;
-        title: CSSProperties;
-        image: CSSProperties;
-      };
+      backgroundLayers: CSSProperties[] | number;
     };
   };
 }
 
 export const defaultTheme: Theme = {
   info: {
+    cssFileUrl: null,
     filename: 'unknown',
     displayName: 'Empty',
     author: 'unknown',
@@ -58,23 +52,15 @@ export const defaultTheme: Theme = {
   },
   variables: {},
   seelenweg: {
-    background: [],
+    backgroundLayers: [],
     items: {
-      background: [],
-      icon: {},
+      backgroundLayers: [],
     },
     contextMenu: {
-      background: [],
-      content: {},
+      backgroundLayers: [],
     },
     preview: {
-      content: {},
-      background: [],
-      items: {
-        content: {},
-        title: {},
-        image: {},
-      },
+      backgroundLayers: [],
     },
   },
 };

@@ -174,7 +174,7 @@ export function SeelenWeg() {
       as="div"
       className="taskbar"
     >
-      <BackgroundByLayers styles={theme?.seelenweg.background || []} />
+      <BackgroundByLayers prefix="taskbar" styles={theme?.seelenweg.backgroundLayers || []} />
       <div className={'weg-items-container'}>
         {[
           ...pinnedOnLeft.map((item) => (

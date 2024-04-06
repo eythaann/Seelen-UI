@@ -2,7 +2,7 @@ import { AppTemplate, defaultTheme, Theme, UserSettings } from '../../../../../s
 import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
 import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
 import { defaultsDeep } from 'lodash';
 
@@ -49,6 +49,11 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
       const sanitizedTheme: Theme = defaultsDeep(theme, defaultTheme);
 
       sanitizedTheme.info.filename = entry.name;
+
+      let cssFilePath = await path.join(await path.resourceDir(), 'static', 'themes', entry.name.replace('.json', '.css'));
+      if (await fs.exists(cssFilePath)) {
+        sanitizedTheme.info.cssFileUrl = convertFileSrc(cssFilePath);
+      }
 
       if (userSettings.jsonSettings.theme_filename === entry.name) {
         userSettings.theme = sanitizedTheme;

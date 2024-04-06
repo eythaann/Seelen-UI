@@ -105,12 +105,6 @@ body {
         &.weg-item-open-sign-active {
           opacity: 1;
         }
-
-        &.weg-item-open-sign-focused {
-          background-color: var(--config-accent-color);
-          width: 50%;
-          border-radius: 4px;
-        }
       }
     }
   }
@@ -121,6 +115,7 @@ body {
   display: flex;
   max-width: 100vw;
   overflow-x: auto;
+  gap: var(--config-space-between-items);
 
   &::-webkit-scrollbar {
     display: none;
@@ -162,14 +157,14 @@ body {
       }
     }
 
-    .weg-item-preview-image {
+    .weg-item-preview-image-container {
       width: 240px;
       height: calc(240px / 1.77);
       display: flex;
       justify-content: center;
       align-items: center;
 
-      > img {
+      .weg-item-preview-image {
         max-height: 100%;
         height: 100%;
         object-fit: scale-down;

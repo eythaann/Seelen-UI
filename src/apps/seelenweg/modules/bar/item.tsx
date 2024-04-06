@@ -26,7 +26,6 @@ interface Props {
 
 export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
   const theme = useSelector(Selectors.theme.seelenweg);
-  const { spaceBetweenItems } = useSelector(Selectors.settings);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
@@ -93,10 +92,10 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
         onOpenChange={setOpenContextMenu}
         trigger={['contextMenu']}
         dropdownRender={() => (
-          <>
-            <BackgroundByLayers styles={theme.contextMenu.background} />
-            <Menu style={theme.contextMenu.content} onMouseMoveCapture={(e) => e.stopPropagation()} items={getMenuForItem(item)} />
-          </>
+          <div className="weg-context-menu-container">
+            <BackgroundByLayers prefix="menu" styles={theme.contextMenu.backgroundLayers} />
+            <Menu className="weg-context-menu" onMouseMoveCapture={(e) => e.stopPropagation()} items={getMenuForItem(item)} />
+          </div>
         )}
       >
         <Popover
@@ -107,21 +106,15 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
           trigger="hover"
           arrow={false}
           content={
-            <>
-              <BackgroundByLayers styles={theme.preview.background} />
-              <div
-                className="weg-item-preview-container"
-                style={{
-                  ...theme.preview.content,
-                  gap: spaceBetweenItems + 'px',
-                }}
-                onMouseMoveCapture={(e) => e.stopPropagation()}
-              >
-                {item.opens.map((hwnd) => (
-                  <WegPreview key={hwnd} hwnd={hwnd} />
-                ))}
-              </div>
-            </>
+            <div
+              className="weg-item-preview-container"
+              onMouseMoveCapture={(e) => e.stopPropagation()}
+            >
+              <BackgroundByLayers prefix="preview" styles={theme.preview.backgroundLayers} />
+              {item.opens.map((hwnd) => (
+                <WegPreview key={hwnd} hwnd={hwnd} />
+              ))}
+            </div>
           }
         >
           <animated.button
@@ -134,8 +127,8 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
               }
             }}
           >
-            <BackgroundByLayers styles={theme.items.background} />
-            <img src={item.icon} style={theme.items.icon} draggable={false} />
+            <BackgroundByLayers prefix="item" styles={theme.items.backgroundLayers} />
+            <img className="weg-item-icon" src={item.icon} draggable={false} />
             <div className={cx('weg-item-open-sign', {
               'weg-item-open-sign-active': !!item.opens.length,
               'weg-item-open-sign-focused': isFocused,

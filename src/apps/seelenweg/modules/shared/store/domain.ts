@@ -25,6 +25,7 @@ export enum SpecialItemType {
 /** @from pwsh */
 export interface UWP_App {
   AppId: string;
+  /** Relative path to the executable from Package:IntallLocation folder */
   Executable: string;
   /** An image used as the app's Start Screen medium tile, and on the Task Switcher. */
   Square150x150Logo: string;

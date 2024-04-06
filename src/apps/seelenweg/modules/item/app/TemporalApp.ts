@@ -26,7 +26,7 @@ export class TemporalApp {
       }
 
       const app = uwpPackage.Applications.find(
-        (app) => app.Executable === filenameFromPath(item.exe),
+        (app) => app.Executable.split('\\').at(-1)! === filenameFromPath(item.exe),
       );
 
       if (!app) {

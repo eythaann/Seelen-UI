@@ -1,0 +1,97 @@
+.SeelenWeg {
+  .taskbar {
+    .taskbar-bg-layer-1 {
+      opacity: 0.3;
+      filter: saturate(0);
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      background-size: cover;
+      border-radius: 15p;
+    }
+
+    .taskbar-bg-layer-2 {
+      opacity: 0.6;
+      background-color: var(--color-gray-100);
+      border-radius: 15px;
+    }
+
+    .weg-items-container {
+      .weg-separator {
+        --empty-rule: "delete me on use";
+      }
+
+      .weg-item {
+        .item-bg-layer-1 {
+          background-color: var(--color-gray-100);
+          border-radius: 25%;
+          box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .weg-item-open-sign {
+          &.weg-item-open-sign-active {
+            --empty-rule: "delete me on use";
+          }
+
+          &.weg-item-open-sign-focused {
+            background-color: var(--config-accent-color);
+            width: 50%;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  .weg-context-menu-container {
+    padding: 6px;
+
+    .menu-bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 10px;
+    }
+
+    .weg-context-menu {
+      --empty-rule: "delete me on use";
+    }
+  }
+
+  .weg-item-preview-container {
+    padding: 10px;
+    border-radius: 10px;
+
+    .preview-bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 10px;
+    }
+
+    .weg-item-preview {
+      padding: 6px 10px 10px 10px;
+      border-radius: 10px;
+
+      .weg-item-preview-topbar {
+        margin: 0 0 8px 0;
+
+        .weg-item-preview-title {
+          font-size: 14px;
+          font-weight: 600;
+          color: var(--color-gray-900);
+        }
+
+        .weg-item-preview-close {
+          --empty-rule: "delete me on use";
+        }
+      }
+
+      .weg-item-preview-image-container {
+        border-radius: 10px;
+        border: 1px solid var(--color-gray-300);
+
+        .weg-item-preview-image {
+          --empty-rule: "delete me on use";
+        }
+        .weg-item-preview-spin {
+          --empty-rule: "delete me on use";
+        }
+      }
+    }
+  }
+}

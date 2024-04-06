@@ -16,12 +16,7 @@ export async function loadConstants() {
 }
 
 export async function getMissingIconPath() {
-  return await path.resolve(
-    await path.resourceDir(),
-    'static',
-    'icons',
-    'missing.png',
-  );
+  return await path.resolve(await path.resourceDir(), 'static', 'icons', 'missing.png');
 }
 
 export async function updatePreviews(hwnds: HWND[]) {
@@ -53,7 +48,12 @@ export async function getUWPInfoFromExePath(exePath: string): Promise<UWP_Packag
   const url = convertFileSrc(await path.resolveResource('gen/uwp_manifests.json'));
   const response = await fetch(url);
   const manifests: UWP_Package[] = await response.json();
-  return manifests.find((manifest) => manifest.InstallLocation === dirname);
+  return manifests.find(
+    (manifest) =>
+      manifest.InstallLocation === dirname ||
+      /** Some apps anidates the exe path in instalation location like notepad/notepad.exe */
+      dirname.startsWith(manifest.InstallLocation),
+  );
 }
 
 export function getImageBase64FromUrl(url: string): Promise<string> {

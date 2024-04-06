@@ -87,7 +87,7 @@ export async function registerStoreEvents() {
   });
 
   await listen<Theme>('update-store-theme', (event) => {
-    loadThemeVariables(event.payload);
+    loadThemeCSS(event.payload);
     store.dispatch(RootActions.setTheme(event.payload));
     updateHitbox();
   });
@@ -99,13 +99,21 @@ export async function registerStoreEvents() {
   await invoke('store_events_established');
 }
 
-function loadThemeVariables(theme: Theme) {
+function loadThemeCSS(theme: Theme) {
   invoke<string>('get_accent_color').then((color) => {
     document.documentElement.style.setProperty('--config-accent-color', color);
   });
+
   Object.entries(theme.variables).forEach(([property, value]) => {
     document.documentElement.style.setProperty(property, value);
   });
+
+  if (theme.info.cssFileUrl) {
+    const link = document.createElement('link');
+    link.setAttribute('rel', 'stylesheet');
+    link.setAttribute('href', theme.info.cssFileUrl);
+    document.head.appendChild(link);
+  }
 }
 
 function loadSettingsVariables(settings: SeelenWegState) {
@@ -126,7 +134,7 @@ export async function loadStore() {
   loadSettingsVariables(settings);
 
   if (userSettings.theme) {
-    loadThemeVariables(userSettings.theme);
+    loadThemeCSS(userSettings.theme);
     store.dispatch(RootActions.setTheme(userSettings.theme));
   }
 
