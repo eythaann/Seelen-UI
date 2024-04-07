@@ -1,10 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { SeelenWegMode, SeelenWegState } from '../../../settings/modules/seelenweg/domain';
+import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../settings/modules/seelenweg/domain';
 
 const initialState: SeelenWegState = {
   enabled: true,
   mode: SeelenWegMode.MIN_CONTENT,
+  position: SeelenWegSide.BOTTOM,
   size: 40,
   zoomSize: 70,
   margin: 8,

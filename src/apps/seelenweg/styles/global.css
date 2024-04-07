@@ -3,8 +3,8 @@ body {
   cursor: default;
   background: transparent;
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  justify-content: var(--config-by-position-justify-content);
+  align-items: var(--config-by-position-align-items);
   width: 100vw;
   height: 100vh;
 
@@ -16,6 +16,7 @@ body {
   }
 }
 
+/** Root Styles */
 .SeelenWeg {
   height: min-content;
   width: min-content;
@@ -46,65 +47,116 @@ body {
   }
 }
 
+/** Taskabr Styles */
 .taskbar {
   position: relative;
   overflow: visible;
   display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--config-padding) var(--config-padding) calc(var(--config-padding) + 4px)
-    var(--config-padding);
-  height: calc(var(--config-item-size) + 4px + var(--config-padding) * 2);
   gap: var(--config-space-between-items);
+  padding: var(--config-padding);
 
-  .weg-items-container {
-    z-index: 1;
-    overflow: visible;
-    display: flex;
-    align-items: flex-end;
-    height: 100%;
-    width: 100%;
-    gap: inherit;
+  &.horizontal {
+    height: calc(
+      var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
+    );
+    width: min-content;
+    flex-direction: row;
 
-    .weg-separator {
-      pointer-events: none;
+    &.full-width {
+      width: calc(100vw - var(--config-margin) * 2);
     }
 
-    .weg-item {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    &.top {
+      align-items: flex-start;
+      padding-top: calc(var(--config-padding) + var(--config-additional-side-padding));
+    }
 
-      &:active {
-        filter: brightness(0.3);
+    &.bottom {
+      align-items: flex-end;
+      padding-bottom: calc(var(--config-padding) + var(--config-additional-side-padding));
+    }
+  }
+
+  &.vertical {
+    width: calc(
+      var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
+    );
+    height: min-content;
+    flex-direction: column;
+
+    &.full-width {
+      height: calc(100vh - var(--config-margin) * 2);
+    }
+
+    &.left {
+      align-items: flex-start;
+      padding-left: calc(var(--config-padding) + var(--config-additional-side-padding));
+    }
+
+    &.right {
+      align-items: flex-end;
+      padding-right: calc(var(--config-padding) + var(--config-additional-side-padding));
+    }
+  }
+
+  .weg-item {
+    z-index: 1;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:active {
+      filter: brightness(0.3);
+    }
+
+    > img {
+      width: 65%;
+      height: 65%;
+      filter: drop-shadow(0px 0px 1px #0000009a);
+      object-fit: contain;
+    }
+
+    .weg-item-open-sign {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background-color: var(--color-gray-600);
+      opacity: 0;
+
+      &.weg-item-open-sign-active {
+        opacity: 1;
       }
 
-      > img {
-        width: 65%;
-        height: 65%;
-        filter: drop-shadow(0px 0px 1px #0000009a);
-        object-fit: contain;
+      &.weg-item-open-sign-focused {
+        background-color: var(--config-accent-color);
       }
 
-      .weg-item-open-sign {
-        position: absolute;
-        top: calc(100% + var(--config-padding));
+      .vertical & {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .horizontal & {
         left: 50%;
-        transform: translateX(-50%) translateY(-50%);
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background-color: var(--color-gray-600);
-        opacity: 0;
-        transition-property: width, opacity, background-color, border-radius;
-        transition-duration: 0.2s;
-        transition-timing-function: linear;
+        transform: translateX(-50%);
+      }
 
-        &.weg-item-open-sign-active {
-          opacity: 1;
-        }
+      .top & {
+        bottom: calc(100% + var(--config-additional-side-padding));
+      }
+
+      .bottom & {
+        top: calc(100% + var(--config-additional-side-padding));
+      }
+
+      .left & {
+        right: calc(100% + var(--config-additional-side-padding));
+      }
+
+      .right & {
+        left: calc(100% + var(--config-additional-side-padding));
       }
     }
   }

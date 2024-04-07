@@ -6,7 +6,7 @@ import { RootSelectors } from '../shared/app/selectors';
 import { OptionsFromEnum } from '../shared/app/utils';
 import { SeelenWegActions } from './app';
 
-import { SeelenWegMode } from './domain';
+import { SeelenWegMode, SeelenWegSide } from './domain';
 
 export const SeelenWegSettings = () => {
   const settings = useAppSelector(RootSelectors.seelenweg);
@@ -31,12 +31,21 @@ export const SeelenWegSettings = () => {
       <SettingsGroup>
         <SettingsSubGroup label="Dock/Taskbar">
           <SettingsOption>
-            <div>Mode</div>
+            <div>Width</div>
             <Select
               style={{ width: '120px' }}
               value={settings.mode}
               options={OptionsFromEnum(SeelenWegMode)}
               onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <div>Side to show dock</div>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.position}
+              options={OptionsFromEnum(SeelenWegSide)}
+              onChange={(value) => dispatch(SeelenWegActions.setPosition(value))}
             />
           </SettingsOption>
           <SettingsOption>

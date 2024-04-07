@@ -21,11 +21,15 @@ import {
 } from '../../general/main/domain';
 import { Layout } from '../../monitors/layouts/domain';
 import { Monitor, Workspace } from '../../monitors/main/domain';
-import { SeelenWegMode, SeelenWegState } from '../../seelenweg/domain';
+import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../seelenweg/domain';
 import { HexColor } from '../domain/interfaces';
 import { RootState } from '../domain/state';
 
 const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
+  const globalWorkAreaOffset = { ...(json.global_work_area_offset ?? generals.globalWorkAreaOffset) };
+  globalWorkAreaOffset.bottom = globalWorkAreaOffset.bottom - globalWorkAreaOffset.top;
+  globalWorkAreaOffset.right = globalWorkAreaOffset.right - globalWorkAreaOffset.left;
+
   return {
     selectedTheme: json.theme_filename ?? generals.selectedTheme,
     altFocusHack: !!json.alt_focus_hack,
@@ -78,7 +82,7 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
     containerPadding: json.default_container_padding ?? generals.containerPadding,
     workspacePadding: json.default_workspace_padding ?? generals.workspacePadding,
     focusFollowsMouse: (json.focus_follows_mouse as FocusFollowsMouse) ?? generals.focusFollowsMouse,
-    globalWorkAreaOffset: json.global_work_area_offset ?? generals.globalWorkAreaOffset,
+    globalWorkAreaOffset,
     monitorIndexPreferences:
       (json.monitor_index_preferences as Record<string, Rect>) ?? generals.monitorIndexPreferences,
     displayindexpreferences: json.display_index_preferences ?? generals.displayindexpreferences,
@@ -254,6 +258,7 @@ export const JsonToState_Seelenweg = (json: StaticConfig, initialState: SeelenWe
   return {
     enabled: json.seelenweg?.enabled ?? initialState.enabled,
     mode: json.seelenweg?.mode as SeelenWegMode ?? initialState.mode,
+    position: json.seelenweg?.position as SeelenWegSide ?? initialState.position,
     size: json.seelenweg?.size ?? initialState.size,
     zoomSize: json.seelenweg?.zoom_size ?? initialState.zoomSize,
     margin: json.seelenweg?.margin ?? initialState.margin,
@@ -279,6 +284,10 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
 };
 
 const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
+  const global_work_area_offset = { ...state.globalWorkAreaOffset };
+  global_work_area_offset.bottom = global_work_area_offset.bottom + global_work_area_offset.top;
+  global_work_area_offset.right = global_work_area_offset.right + global_work_area_offset.left;
+
   return {
     theme_filename: state.selectedTheme || undefined,
     alt_focus_hack: state.altFocusHack,
@@ -319,7 +328,7 @@ const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
     default_container_padding: state.containerPadding,
     default_workspace_padding: state.workspacePadding,
     focus_follows_mouse: state.focusFollowsMouse ?? undefined,
-    global_work_area_offset: state.globalWorkAreaOffset as any,
+    global_work_area_offset: global_work_area_offset as any,
     mouse_follows_focus: state.mouseFollowFocus,
     resize_delta: state.resizeDelta,
     unmanaged_window_operation_behaviour: state.unmanagedWindowOperationBehaviour,
@@ -364,6 +373,7 @@ const StateToJson_SeelenWeg = (state: SeelenWegState): Partial<StaticConfig> => 
     seelenweg: {
       enabled: state.enabled,
       mode: state.mode,
+      position: state.position,
       size: state.size,
       zoom_size: state.zoomSize,
       margin: state.margin,

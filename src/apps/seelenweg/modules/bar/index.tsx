@@ -1,4 +1,5 @@
 import { debounce } from '../../../Timing';
+import { cx } from '../../../utils/styles';
 import { ExtraCallbacksOnLeave } from '../../events';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
@@ -9,7 +10,7 @@ import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { SeelenWegMode } from '../../../settings/modules/seelenweg/domain';
+import { SeelenWegMode, SeelenWegSide } from '../../../settings/modules/seelenweg/domain';
 import { App, Separator, SpecialItemType } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = 500;
@@ -127,9 +128,32 @@ export function SeelenWeg() {
     mouseX.current = event.clientX;
   }, []);
 
+  const getSeparatorSizeStyle = useCallback(
+    (sideElements: number, centerElements: number) => {
+      let size = sideElements === 0 ? '0px' : `${settings.spaceBetweenItems * 2}px`;
+
+      if (settings.mode === SeelenWegMode.FULL_WIDTH) {
+        size = `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
+          sideElements + centerElements / 2
+        })`;
+      }
+
+      if (settings.position === SeelenWegSide.LEFT || settings.position === SeelenWegSide.RIGHT) {
+        return {
+          height: size,
+        };
+      }
+
+      return {
+        width: size,
+      };
+    },
+    [settings],
+  );
+
   const onMouseEnter = useCallback(() => {
-    shouldAnimate.current = true;
-    requestAnimationFrame(animate);
+    /* shouldAnimate.current = true;
+    requestAnimationFrame(animate); */
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
@@ -163,6 +187,9 @@ export function SeelenWeg() {
     dispatch(RootActions.setPinnedOnRight(extractedPinned));
   }, []);
 
+  const isHorizontal =
+    settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM;
+
   return (
     <Reorder.Group
       onMouseEnter={onMouseEnter}
@@ -170,72 +197,58 @@ export function SeelenWeg() {
       onMouseLeave={debounce(disableMouseAnimations, 100, timeoutRef)}
       values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
       onReorder={onReorderPinneds}
-      axis="x"
+      axis={isHorizontal ? 'x' : 'y'}
       as="div"
-      className="taskbar"
+      className={cx('taskbar', settings.position.toLowerCase(), {
+        horizontal: isHorizontal,
+        vertical: !isHorizontal,
+        'full-width': settings.mode === SeelenWegMode.FULL_WIDTH,
+      })}
     >
       <BackgroundByLayers prefix="taskbar" styles={theme?.seelenweg.backgroundLayers || []} />
-      <div className={'weg-items-container'}>
-        {[
-          ...pinnedOnLeft.map((item) => (
-            <WegItem
-              key={item.exe}
-              item={item}
-              initialSize={settings.size}
-              isFocused={item.opens.includes(focusedHandle)}
-            />
-          )),
-          <Reorder.Item
-            as="div"
-            key="separator1"
-            value={Separator1}
-            className={'weg-separator'}
-            onDragStart={(e) => e.stopPropagation()}
-            style={{
-              height: settings.size,
-              marginLeft: pinnedOnLeft.length ? 0 : settings.spaceBetweenItems * -1,
-              width:
-                settings.mode === SeelenWegMode.FULL_WIDTH
-                  ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
-                    pinnedOnLeft.length + pinnedOnCenter.length / 2
-                  })`
-                  : 'auto',
-            }}
-          />,
-          ...pinnedOnCenter.map((item) => (
-            <WegItem
-              key={item.exe}
-              item={item}
-              initialSize={settings.size}
-              isFocused={item.opens.includes(focusedHandle)}
-            />
-          )),
-          <Reorder.Item
-            as="div"
-            key="separator2"
-            value={Separator2}
-            className={'weg-separator'}
-            style={{
-              height: settings.size,
-              marginLeft: pinnedOnRight.length ? 0 : settings.spaceBetweenItems * -1,
-              width:
-                settings.mode === SeelenWegMode.FULL_WIDTH
-                  ? `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
-                    pinnedOnRight.length + pinnedOnCenter.length / 2
-                  })`
-                  : 'auto',
-            }}
-          />,
-          ...pinnedOnRight.map((item) => (
-            <WegItem
-              key={item.exe}
-              item={item}
-              initialSize={settings.size}
-              isFocused={item.opens.includes(focusedHandle)}
-            />
-          )),
-        ]}
-      </div>
+      {[
+        ...pinnedOnLeft.map((item) => (
+          <WegItem
+            key={item.exe}
+            item={item}
+            initialSize={settings.size}
+            isFocused={item.opens.includes(focusedHandle)}
+          />
+        )),
+        <Reorder.Item
+          as="div"
+          key="separator1"
+          value={Separator1}
+          className="weg-separator"
+          onDragStart={(e) => e.stopPropagation()}
+          drag={false}
+          style={getSeparatorSizeStyle(pinnedOnLeft.length, pinnedOnCenter.length)}
+        />,
+        ...pinnedOnCenter.map((item) => (
+          <WegItem
+            key={item.exe}
+            item={item}
+            initialSize={settings.size}
+            isFocused={item.opens.includes(focusedHandle)}
+          />
+        )),
+        <Reorder.Item
+          as="div"
+          key="separator2"
+          value={Separator2}
+          className="weg-separator"
+          drag={false}
+          style={getSeparatorSizeStyle(pinnedOnRight.length, pinnedOnCenter.length)}
+        />,
+        ...pinnedOnRight.map((item) => (
+          <WegItem
+            key={item.exe}
+            item={item}
+            initialSize={settings.size}
+            isFocused={item.opens.includes(focusedHandle)}
+          />
+        )),
+      ]}
     </Reorder.Group>
   );
 }

@@ -3,9 +3,17 @@ export enum SeelenWegMode {
   MIN_CONTENT = 'Min-Content',
 }
 
+export enum SeelenWegSide {
+  LEFT = 'Left',
+  RIGHT = 'Right',
+  TOP = 'Top',
+  BOTTOM = 'Bottom',
+}
+
 export interface SeelenWegState {
   enabled: boolean;
   mode: SeelenWegMode;
+  position: SeelenWegSide;
   size: number;
   zoomSize: number;
   margin: number;

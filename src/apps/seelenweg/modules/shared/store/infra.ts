@@ -12,7 +12,7 @@ import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { SeelenWegMode, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
+import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
 import { AppFromBackground, HWND, SavedAppsInYaml } from './domain';
 
 export const store = configureStore({
@@ -81,7 +81,7 @@ export async function registerStoreEvents() {
   });
 
   await listen<SeelenWegState>('update-store-settings', (event) => {
-    loadSettingsVariables(event.payload);
+    loadSettingsCSS(event.payload);
     store.dispatch(RootActions.setSettings(event.payload));
     updateHitbox();
   });
@@ -116,13 +116,38 @@ function loadThemeCSS(theme: Theme) {
   }
 }
 
-function loadSettingsVariables(settings: SeelenWegState) {
-  document.documentElement.style.setProperty('--config-margin', `${settings.margin}px`);
-  document.documentElement.style.setProperty('--config-padding', `${settings.padding}px`);
+function loadSettingsCSS(settings: SeelenWegState) {
+  const styles = document.documentElement.style;
 
-  document.documentElement.style.setProperty('--config-item-size', `${settings.size}px`);
-  document.documentElement.style.setProperty('--config-item-zoom-size', `${settings.zoomSize}px`);
-  document.documentElement.style.setProperty('--config-space-between-items', `${settings.spaceBetweenItems}px`);
+  styles.setProperty('--config-margin', `${settings.margin}px`);
+  styles.setProperty('--config-padding', `${settings.padding}px`);
+
+  styles.setProperty('--config-item-size', `${settings.size}px`);
+  styles.setProperty('--config-item-zoom-size', `${settings.zoomSize}px`);
+  styles.setProperty('--config-space-between-items', `${settings.spaceBetweenItems}px`);
+
+  switch (settings.position) {
+    case SeelenWegSide.TOP:
+      styles.setProperty('--config-by-position-justify-content', 'center');
+      styles.setProperty('--config-by-position-align-items', 'flex-start');
+      styles.setProperty('--config-by-position-flex-direction', 'row');
+      break;
+    case SeelenWegSide.BOTTOM:
+      styles.setProperty('--config-by-position-justify-content', 'center');
+      styles.setProperty('--config-by-position-align-items', 'flex-end');
+      styles.setProperty('--config-by-position-flex-direction', 'row');
+      break;
+    case SeelenWegSide.LEFT:
+      styles.setProperty('--config-by-position-justify-content', 'flex-start');
+      styles.setProperty('--config-by-position-align-items', 'center');
+      styles.setProperty('--config-by-position-flex-direction', 'column');
+      break;
+    case SeelenWegSide.RIGHT:
+      styles.setProperty('--config-by-position-justify-content', 'flex-end');
+      styles.setProperty('--config-by-position-align-items', 'center');
+      styles.setProperty('--config-by-position-flex-direction', 'column');
+      break;
+  }
 }
 
 export async function loadStore() {
@@ -131,7 +156,7 @@ export async function loadStore() {
 
   const settings = JsonToState_Seelenweg(userSettings.jsonSettings, initialState.settings);
   store.dispatch(RootActions.setSettings(settings));
-  loadSettingsVariables(settings);
+  loadSettingsCSS(settings);
 
   if (userSettings.theme) {
     loadThemeCSS(userSettings.theme);

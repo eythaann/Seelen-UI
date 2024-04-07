@@ -2,7 +2,8 @@
 
 ## [Unreleased]
 ### features
-- add indicator to know opens and focused apps on SeelenWeg 
+- add indicator to know opens and focused apps on SeelenWeg
+- allow set the position of seelenweg (left, top, right, bottom) 🎉
 
 ### enhancements
 - only creates app icons the first time they are loaded
@@ -14,6 +15,7 @@
 - incorrect icon for UWP (was using store icon instead taskbar icon)
 - replacing icons on each load
 - showing logs of opened apps on development
+- offset margins working like windows RECT instead like one side margins
 
 ## [1.0.0-prerelease.13]
 ### features

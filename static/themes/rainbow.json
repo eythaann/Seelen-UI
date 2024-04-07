@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/documentation/theme.schema.json",
+  "info": {
+    "displayName": "Rainbow",
+    "author": "eythaann",
+    "description": "COLORS EVERYWHERE!!!"
+  },
+  "seelenweg": {
+    "backgroundLayers": 2,
+    "items": {
+      "backgroundLayers": 1
+    },
+    "contextMenu": {
+      "backgroundLayers": 1
+    },
+    "preview": {
+      "backgroundLayers": 1
+    }
+  }
+}
