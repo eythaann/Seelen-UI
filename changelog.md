@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0-prerelease.14]
 ### features
 - add indicator to know opens and focused apps on SeelenWeg
 - allow set the position of seelenweg (left, top, right, bottom) 🎉
