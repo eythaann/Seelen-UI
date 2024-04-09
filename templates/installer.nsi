@@ -39,6 +39,7 @@ ${StrLoc}
 !define WEBVIEW2INSTALLERPATH "{{webview2_installer_path}}"
 !define UNINSTKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCTNAME}"
 !define MANUPRODUCTKEY "Software\${MANUFACTURER}\${PRODUCTNAME}"
+!define APPFLAGSKEY "Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"
 !define UNINSTALLERSIGNCOMMAND "{{uninstaller_sign_cmd}}"
 !define ESTIMATEDSIZE "{{estimated_size}}"
 
@@ -75,7 +76,7 @@ VIAddVersionKey "ProductVersion" "${VERSION}"
 
 !if "${INSTALLMODE}" == "both"
   !define MULTIUSER_MUI
-  !define MULTIUSER_INSTALLMODE_INSTDIR "${PRODUCTNAME}"
+  !define MULTIUSER_INSTALLMODE_INSTDIR "${MANUFACTURER}\${PRODUCTNAME}"
   !define MULTIUSER_INSTALLMODE_COMMANDLINE
   !if "${ARCH}" == "x64"
     !define MULTIUSER_USE_PROGRAMFILES64
@@ -413,17 +414,17 @@ Function .onInit
     !if "${INSTALLMODE}" == "perMachine"
       ${If} ${RunningX64}
         !if "${ARCH}" == "x64"
-          StrCpy $INSTDIR "$PROGRAMFILES64\${PRODUCTNAME}"
+          StrCpy $INSTDIR "$PROGRAMFILES64\${MANUFACTURER}\${PRODUCTNAME}"
         !else if "${ARCH}" == "arm64"
-          StrCpy $INSTDIR "$PROGRAMFILES64\${PRODUCTNAME}"
+          StrCpy $INSTDIR "$PROGRAMFILES64\${MANUFACTURER}\${PRODUCTNAME}"
         !else
-          StrCpy $INSTDIR "$PROGRAMFILES\${PRODUCTNAME}"
+          StrCpy $INSTDIR "$PROGRAMFILES\${MANUFACTURER}\${PRODUCTNAME}"
         !endif
       ${Else}
-        StrCpy $INSTDIR "$PROGRAMFILES\${PRODUCTNAME}"
+        StrCpy $INSTDIR "$PROGRAMFILES\${MANUFACTURER}\${PRODUCTNAME}"
       ${EndIf}
     !else if "${INSTALLMODE}" == "currentUser"
-      StrCpy $INSTDIR "$LOCALAPPDATA\${PRODUCTNAME}"
+      StrCpy $INSTDIR "$LOCALAPPDATA\${MANUFACTURER}\${PRODUCTNAME}"
     !endif
 
     Call RestorePreviousInstallLocation

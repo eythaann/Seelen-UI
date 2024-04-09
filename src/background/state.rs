@@ -16,7 +16,10 @@ pub struct State {
 
 impl State {
     pub fn new(path: &PathBuf) -> Result<Self> {
-        let content = std::fs::read_to_string(path)?;
+        let mut content = String::from("{}");
+        if path.exists() {
+            content = std::fs::read_to_string(path)?;
+        }
         let value: Self = serde_json::from_str(&content)?;
         Ok(value)
     }

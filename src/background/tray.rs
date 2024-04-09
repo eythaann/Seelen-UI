@@ -1,5 +1,7 @@
 use tauri::image::Image;
+use tauri::path::BaseDirectory;
 use tauri::tray::ClickType;
+use tauri::Manager;
 use tauri::{
     menu::{MenuBuilder, MenuEvent, MenuItemBuilder},
     tray::TrayIconBuilder,
@@ -12,6 +14,7 @@ use crate::webviews::show_settings_window;
 use crate::SEELEN;
 
 pub fn handle_tray_icon(app: &mut App) -> Result<()> {
+    log::trace!("registering tray icon");
     let settings = MenuItemBuilder::with_id("settings", "Open Settings").build(app)?;
 
     let toggle_pause = MenuItemBuilder::with_id("pause", "Pause/Resume").build(app)?;
@@ -29,7 +32,7 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
         .build()?;
 
     TrayIconBuilder::new()
-        .icon(Image::from_path("./static/icons/32x32.png")?)
+        .icon(Image::from_path(app.path().resolve("static/icons/32x32.png", BaseDirectory::Resource)?)?)
         .tooltip("Komorebi UI")
         .menu(&menu)
         .on_menu_event(

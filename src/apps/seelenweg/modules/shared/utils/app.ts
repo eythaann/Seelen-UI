@@ -6,5 +6,5 @@ export function filenameFromPath(path: string): string {
 }
 
 export async function getGeneratedFilesPath(): Promise<string> {
-  return await path.resolveResource('gen');
+  return await path.appDataDir();
 }

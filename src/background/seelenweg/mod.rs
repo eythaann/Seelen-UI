@@ -179,7 +179,7 @@ impl SeelenWeg {
     pub fn generated_files_path(&self) -> PathBuf {
         self.handle
             .path()
-            .resolve("gen", BaseDirectory::Resource)
+            .app_data_dir()
             .expect("Failed to resolve gen path")
     }
 

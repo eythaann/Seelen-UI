@@ -81,8 +81,8 @@ impl Seelen {
 
         // komorebi window manager does not create this folder on first install/run 🤡
         std::fs::create_dir_all(path.resolve("komorebi", BaseDirectory::LocalData)?)?;
+        // TODO(eythan) start migration
         std::fs::create_dir_all(path.resolve(".config/komorebi-ui", BaseDirectory::Home)?)?;
-        std::fs::create_dir_all(path.resolve("gen", BaseDirectory::Resource)?)?;
 
         Ok(())
     }
@@ -90,25 +90,23 @@ impl Seelen {
     pub fn start_ahk_shortcuts(&self) {
         log::trace!("Starting AHK shortcuts");
 
-        tauri::async_runtime::spawn(async move {
-            let app = SEELEN.lock().handle().clone();
+        let handle = self.handle();
+        let ahk_path = handle
+            .path()
+            .resolve("static/seelen.ahk", BaseDirectory::Resource)
+            .expect("Failed to resolve path")
+            .to_str()
+            .expect("Failed to convert path to string")
+            .to_owned()
+            .trim_start_matches("\\\\?\\")
+            .to_owned();
 
-            let ahk_path = app
-                .path()
-                .resolve("static/seelen.ahk", BaseDirectory::Resource)
-                .expect("Failed to resolve path")
-                .to_str()
-                .expect("Failed to convert path to string")
-                .to_owned()
-                .trim_start_matches("\\\\?\\")
-                .to_owned();
-
-            app.shell()
-                .command("cmd")
-                .args(["/C", &ahk_path])
-                .spawn()
-                .expect("Failed to spawn shortcuts");
-        });
+        handle
+            .shell()
+            .command("cmd")
+            .args(["/C", &ahk_path])
+            .spawn()
+            .expect("Failed to spawn shortcuts");
     }
 
     pub fn kill_ahk_shortcuts(&self) {
@@ -131,22 +129,20 @@ impl Seelen {
     pub fn start_komorebi_manager(&self) {
         log::trace!("Starting komorebi manager");
 
-        tauri::async_runtime::spawn(async move {
-            let app = SEELEN.lock().handle().clone();
+        let handle = self.handle();
+        let config_route = handle
+            .path()
+            .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)
+            .expect("Failed to resolve path")
+            .to_str()
+            .unwrap_or("")
+            .to_string();
 
-            let config_route = app
-                .path()
-                .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)
-                .expect("Failed to resolve path")
-                .to_str()
-                .unwrap_or("")
-                .to_string();
-
-            app.shell()
-                .command("komorebi-wm.exe")
-                .args(["-c", &config_route])
-                .spawn()
-                .expect("Failed to spawn komorebi");
-        });
+        handle
+            .shell()
+            .command("komorebi-wm.exe")
+            .args(["-c", &config_route])
+            .spawn()
+            .expect("Failed to spawn komorebi");
     }
 }

@@ -1,15 +1,16 @@
 {
   "$schema": "node_modules/@tauri-apps/cli/schema.json",
-  "productName": "Komorebi UI",
+  "productName": "Seelen UI",
   "version": "package.json",
-  "identifier": "com.eythaann.komorebi-ui",
+  "identifier": "com.seelen.seelen-ui",
   "app": {
     "security": {
       "assetProtocol": {
         "enable": true,
         "scope": [
           "$RESOURCE/**/*",
-          "$TEMP/*"
+          "$TEMP/**/*",
+          "$DATA/**/*"
         ]
       }
     },
@@ -21,18 +22,14 @@
   },
   "bundle": {
     "active": true,
+    "publisher": "Seelen",
     "category": "Utility",
-    "copyright": "",
     "targets": [
       "nsis",
       "updater"
     ],
     "externalBin": [],
     "icon": [
-      "static/icons/32x32.png",
-      "static/icons/128x128.png",
-      "static/icons/128x128@2x.png",
-      "static/icons/256x256.png",
       "static/icons/icon.ico"
     ],
     "windows": {
@@ -41,7 +38,8 @@
       "nsis": {
         "installerIcon": "static/icons/icon.ico",
         "sidebarImage": "static/icons/banner.bmp",
-        "template": "templates/installer.nsi"
+        "template": "templates/installer.nsi",
+        "installMode": "perMachine"
       }
     },
     "longDescription": "",

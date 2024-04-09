@@ -3,6 +3,8 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 
 import { store } from '../store/infra';
 
+import { getGeneratedFilesPath } from './app';
+
 import { HWND, UWP_Package } from '../store/domain';
 
 export const LAZY_CONSTANTS = {
@@ -33,7 +35,7 @@ export async function updatePreviews(hwnds: HWND[]) {
 export async function iconPathFromExePath(exePath: string) {
   const parts = exePath.split('\\');
   const fileName = parts.at(-1)?.replace('.exe', '.png') || 'missing.png';
-  return await path.resolve(await path.resourceDir(), 'gen', 'icons', fileName);
+  return await path.resolve(await getGeneratedFilesPath(), 'icons', fileName);
 }
 
 /**
@@ -45,7 +47,7 @@ export async function getUWPInfoFromExePath(exePath: string): Promise<UWP_Packag
     return undefined;
   }
   const dirname = await path.dirname(exePath);
-  const url = convertFileSrc(await path.resolveResource('gen/uwp_manifests.json'));
+  const url = convertFileSrc(await path.resolve(await getGeneratedFilesPath(), 'uwp_manifests.json'));
   const response = await fetch(url);
   const manifests: UWP_Package[] = await response.json();
   return manifests.find(
