@@ -9,6 +9,7 @@ export const UWP_TARGET_SIZE_POSTFIXS = [
   '.targetsize-48.png',
   '.targetsize-32_altform-lightunplated.png',
   '.targetsize-32.png',
+  '.png',
 ];
 
 export const UWP_SCALE_POSTFIXS = [
@@ -17,4 +18,5 @@ export const UWP_SCALE_POSTFIXS = [
   '.scale-150.png',
   '.scale-125.png',
   '.scale-100.png',
+  '.png',
 ];
