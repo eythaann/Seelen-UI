@@ -152,8 +152,11 @@ export function SeelenWeg() {
   );
 
   const onMouseEnter = useCallback(() => {
-    /* shouldAnimate.current = true;
-    requestAnimationFrame(animate); */
+    if (settings.position === SeelenWegSide.BOTTOM) {
+      shouldAnimate.current = true;
+      requestAnimationFrame(animate);
+    }
+
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }

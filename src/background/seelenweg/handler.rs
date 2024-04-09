@@ -14,7 +14,7 @@ use windows::Win32::{
 use super::SeelenWeg;
 
 #[command]
-pub fn store_events_established() {
+pub fn enum_opened_apps() {
     SEELEN.lock().weg().update_ui();
 }
 

@@ -51,33 +51,32 @@ export async function registerStoreEvents() {
     }
   };
 
-  await listen<AppFromBackground[]>('set-store-apps', async (event) => {
-    const items = await cleanItems(event.payload);
-    items.forEach((item) => store.dispatch(RootActions.addOpenApp(item)));
-    updateHitboxIfNeeded();
-  });
-
   await listen<AppFromBackground>('add-open-app', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.addOpenApp(item));
     updateHitboxIfNeeded();
   });
 
-  await listen<AppFromBackground>('update-open-app', async (event) => {
+  await listen<AppFromBackground[]>('add-open-app-many', async (event) => {
+    const items = await cleanItems(event.payload);
+    items.forEach((item) => store.dispatch(RootActions.addOpenApp(item)));
+    updateHitboxIfNeeded();
+  });
+
+  await listen<HWND>('remove-open-app', (event) => {
+    store.dispatch(RootActions.removeOpenApp(event.payload));
+    updateHitboxIfNeeded();
+  });
+
+  await listen<AppFromBackground>('update-open-app-info', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.updateOpenAppInfo(item));
-    updateHitboxIfNeeded();
   });
 
   await listen<AppFromBackground>('replace-open-app', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.addOpenApp(item));
     store.dispatch(RootActions.removeOpenApp(item.process_hwnd));
-  });
-
-  await listen<HWND>('remove-open-app', (event) => {
-    store.dispatch(RootActions.removeOpenApp(event.payload));
-    updateHitboxIfNeeded();
   });
 
   await listen<SeelenWegState>('update-store-settings', (event) => {
@@ -95,8 +94,6 @@ export async function registerStoreEvents() {
   await listen<HWND>('set-focused-handle', (event) => {
     store.dispatch(RootActions.setFocusedHandle(event.payload));
   });
-
-  await invoke('store_events_established');
 }
 
 function loadThemeCSS(theme: Theme) {

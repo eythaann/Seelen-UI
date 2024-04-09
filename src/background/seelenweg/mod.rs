@@ -251,7 +251,7 @@ impl SeelenWeg {
 
     pub fn update_ui(&self) {
         self.handle
-            .emit_to(Self::TARGET, "set-store-apps", self.apps.clone())
+            .emit_to(Self::TARGET, "add-open-app-many", self.apps.clone())
             .expect("Failed to emit");
     }
 
@@ -264,7 +264,7 @@ impl SeelenWeg {
         if let Some(app) = app {
             app.title = WindowsApi::get_window_text(hwnd);
             self.handle
-                .emit_to(Self::TARGET, "update-open-app", app.clone())
+                .emit_to(Self::TARGET, "update-open-app-info", app.clone())
                 .expect("Failed to emit");
         }
     }

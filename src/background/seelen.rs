@@ -130,6 +130,17 @@ impl Seelen {
         log::trace!("Starting komorebi manager");
 
         let handle = self.handle();
+
+        let komorebi_path = handle
+            .path()
+            .resolve("komorebi-wm.exe", BaseDirectory::Resource)
+            .expect("Failed to resolve path")
+            .to_str()
+            .expect("Failed to convert path to string")
+            .to_owned()
+            .trim_start_matches("\\\\?\\")
+            .to_owned();
+
         let config_route = handle
             .path()
             .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)
@@ -138,10 +149,16 @@ impl Seelen {
             .unwrap_or("")
             .to_string();
 
+
         handle
             .shell()
-            .command("komorebi-wm.exe")
-            .args(["-c", &config_route])
+            .command("cmd")
+            .args([
+                "/C",
+                &komorebi_path,
+                "-c",
+                &config_route,
+            ])
             .spawn()
             .expect("Failed to spawn komorebi");
     }

@@ -2,6 +2,7 @@ import { wrapConsole } from '../ConsoleWrapper';
 import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, setWindowSize, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
+import { invoke } from '@tauri-apps/api/core';
 import { emitTo } from '@tauri-apps/api/event';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
@@ -18,13 +19,19 @@ import './styles/global.css';
 
 async function Main() {
   wrapConsole();
-  await loadConstants();
-  await loadStore();
-  await registerStoreEvents();
+
+  const container = document.getElementById('root');
+  if (!container) {
+    throw new Error('Root container not found');
+  }
+
   setWindowSize();
   registerDocumentEvents();
 
-  const container = document.getElementById('root') || document.body;
+  await loadConstants();
+  await loadStore();
+  await registerStoreEvents();
+  await invoke('enum_opened_apps');
 
   const WrappedRoot = () => {
     useEffect(() => {
