@@ -31,7 +31,7 @@ export function General() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <span style={{ fontWeight: 600 }}>Run Komorebi-UI at startup?</span>
+          <span style={{ fontWeight: 600 }}>Run Seelen UI at startup?</span>
           <Switch onChange={onAutoStart} value={autostartStatus} />
         </SettingsOption>
       </SettingsGroup>

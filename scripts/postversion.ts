@@ -12,7 +12,7 @@ const variables = {
   version: packageJson.version,
   notes: releaseNotes.replaceAll(/\r/g, '').replaceAll(/\n/g, '\\n'),
   current_date: new Date().toISOString(),
-  signature: fs.readFileSync(`target/release/bundle/nsis/Komorebi UI_${packageJson.version}_x64-setup.nsis.zip.sig`, 'utf-8'),
+  signature: fs.readFileSync(`target/release/bundle/nsis/Seelen UI_${packageJson.version}_x64-setup.nsis.zip.sig`, 'utf-8'),
 };
 const jsonString = fs.readFileSync('templates/release.json', 'utf-8');
 const replacedString = jsonString.replace(/{{(.*?)}}/g, (match, p1 ) => {

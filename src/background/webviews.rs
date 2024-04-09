@@ -1,4 +1,4 @@
-use tauri::{App, AppHandle, WebviewWindow};
+use tauri::{App, AppHandle, Manager, WebviewWindow};
 use windows::Win32::Foundation::HWND;
 
 use crate::{error_handler::Result, windows_api::WindowsApi, SEELEN};
@@ -85,7 +85,7 @@ pub fn show_settings_window(app: &AppHandle) -> Result<WebviewWindow> {
     .maximizable(false)
     .minimizable(true)
     .resizable(false)
-    .title("Komorebi UI - Settings")
+    .title("Settings")
     .visible(false)
     .decorations(false)
     .center()
@@ -120,10 +120,17 @@ pub fn show_seelenpad_window(app: &AppHandle) -> Result<WebviewWindow> {
     Ok(window)
 }
 
-pub fn check_updates_window(app: &AppHandle) -> Result<WebviewWindow> {
-    log::trace!("check_updates_window");
+pub fn check_updates_window(app: &AppHandle) -> Result<()> {
+    log::trace!("Creating update notification window");
 
-    let window = tauri::WebviewWindowBuilder::new(
+    // check if path is in windowsapps folder
+    let installation_path = app.path().resource_dir()?;
+    if installation_path.starts_with(r"C:\Program Files\WindowsApps") {
+        log::trace!("Skipping update notification because it is installed as MSIX");
+        return Ok(());
+    }
+
+    tauri::WebviewWindowBuilder::new(
         app,
         "updater",
         tauri::WebviewUrl::App("update/index.html".into()),
@@ -141,7 +148,7 @@ pub fn check_updates_window(app: &AppHandle) -> Result<WebviewWindow> {
     .always_on_top(true)
     .build()?;
 
-    Ok(window)
+    Ok(())
 }
 
 pub fn set_windows_events(app: &mut App) -> Result<()> {

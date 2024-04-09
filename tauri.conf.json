@@ -54,18 +54,18 @@
   "plugins": {
     "updater": {
       "endpoints": [
-        "https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/release"
+        "https://raw.githubusercontent.com/eythaann/seelen-ui/master/release"
       ],
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK",
       "windows": {
-        "installMode": "passive"
+        "installMode": "basicUi"
       }
     },
     "cli": {
       "description": "Seelen Command Line Interface.",
       "longDescription": "Seelen Command Line Interface.",
       "beforeHelp": "",
-      "afterHelp": "To read more about Seelen visit https://github.com/eythaann/komorebi-ui.git",
+      "afterHelp": "To read more about Seelen visit https://github.com/eythaann/seelen-ui.git",
       "args": [
         {
           "name": "silent",

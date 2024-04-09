@@ -2610,35 +2610,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "komorebi-ui"
-version = "1.0.0"
-dependencies = [
- "color-eyre",
- "image 0.25.0",
- "itertools",
- "lazy_static",
- "log",
- "parking_lot",
- "serde",
- "serde_json",
- "tauri",
- "tauri-build",
- "tauri-plugin-autostart",
- "tauri-plugin-cli",
- "tauri-plugin-dialog",
- "tauri-plugin-fs",
- "tauri-plugin-log",
- "tauri-plugin-process",
- "tauri-plugin-shell",
- "tauri-plugin-single-instance",
- "tauri-plugin-updater",
- "uuid",
- "widestring",
- "win-screenshot",
- "windows 0.54.0",
-]
-
-[[package]]
 name = "kuchikiki"
 version = "0.8.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4121,6 +4092,35 @@ name = "seahash"
 version = "4.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
+
+[[package]]
+name = "seelen-ui"
+version = "1.0.0"
+dependencies = [
+ "color-eyre",
+ "image 0.25.0",
+ "itertools",
+ "lazy_static",
+ "log",
+ "parking_lot",
+ "serde",
+ "serde_json",
+ "tauri",
+ "tauri-build",
+ "tauri-plugin-autostart",
+ "tauri-plugin-cli",
+ "tauri-plugin-dialog",
+ "tauri-plugin-fs",
+ "tauri-plugin-log",
+ "tauri-plugin-process",
+ "tauri-plugin-shell",
+ "tauri-plugin-single-instance",
+ "tauri-plugin-updater",
+ "uuid",
+ "widestring",
+ "win-screenshot",
+ "windows 0.54.0",
+]
 
 [[package]]
 name = "selectors"

@@ -1,3 +1,4 @@
+/** Unused File but it is still here for maybe a future use */
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Switch } from 'antd';
 import { useDispatch } from 'react-redux';
@@ -29,12 +30,12 @@ export function Updates() {
       <SettingsGroup>
         <div className={cs.disclaimer}>
           By default auto update notification is disabled. This is because it is detected as a virus
-          by anti-virus software for some users. If you will enable it, add Komorebi UI to excluded
+          by anti-virus software for some users. If you will enable it, add Seelen UI to excluded
           programs in your anti-virus software settings to avoid false positives.
         </div>
         <SettingsOption>
           You can manually download the latest version from:{' '}
-          <a href="https://github.com/eythaann/komorebi-ui/releases" target="_blank">Github Releases</a>
+          <a href="https://github.com/eythaann/seelen-ui/releases" target="_blank">Github Releases</a>
         </SettingsOption>
       </SettingsGroup>
     </div>

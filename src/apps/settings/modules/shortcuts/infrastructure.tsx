@@ -21,7 +21,7 @@ export function Shortcuts() {
       <SettingsGroup>
         <SettingsOption>
           <span>
-            Enable Komorebi UI shortcuts{' '}
+            Enable Seelen UI shortcuts{' '}
             <Tooltip
               title="Disable if you will implement your own shortcuts using the Komorebi CLI."
             >

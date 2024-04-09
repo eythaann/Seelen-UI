@@ -19,9 +19,9 @@ export function Information() {
             </a>
           </SettingsOption>
           <SettingsOption>
-            <span>komorebi-ui <span className={cs.version}>v{EnvConfig.version}</span>:</span>
-            <a href="https://github.com/eythaann/komorebi-ui" target="_blank">
-              github.com/eythaann/komorebi-ui
+            <span>Seelen UI <span className={cs.version}>v{EnvConfig.version}</span>:</span>
+            <a href="https://github.com/eythaann/seelen-ui" target="_blank">
+              github.com/eythaann/seelen-ui
             </a>
           </SettingsOption>
         </SettingsSubGroup>

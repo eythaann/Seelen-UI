@@ -14,7 +14,7 @@ const showNewUserTutorial = () => {
     content: (
       <div>
         <p>
-          Komorebi UI by default needs AutoHotKey to work.
+          Seelen UI by default needs AutoHotKey to work.
           You can omit this step if you will configure your own shortcuts system.
           Please restart your pc after install AutoHotKey.
         </p>
@@ -63,9 +63,9 @@ export const StartUser = () => {
     content: (
       <div>
         <p>
-          Welcome to Komorebi-UI, the ultimate tiling windows manager to enhance your Windows 11
-          experience! Explore a new era of efficiency and multitasking with our intuitive interface
-          and advanced features.
+          Welcome to Seelen UI, the ultimate Desktop Enviroment with an incorporated tiling windows manager
+          to enhance your Windows 11 experience! Explore a new era of efficiency and multitasking with our \
+          intuitive interface and advanced features.
         </p>
         <b>Optimize your productivity with style!</b>
       </div>

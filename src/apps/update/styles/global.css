@@ -50,8 +50,9 @@ body {
   }
 
   .description {
-    flex: 1;
+    position: relative;
     overflow: auto;
+    flex: 1;
 
     b {
       font-weight: bold;
@@ -59,6 +60,13 @@ body {
 
     a {
       color: var(--color-blue-900);
+    }
+
+    .progress {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 

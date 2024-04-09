@@ -33,7 +33,7 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
 
     TrayIconBuilder::new()
         .icon(Image::from_path(app.path().resolve("static/icons/32x32.png", BaseDirectory::Resource)?)?)
-        .tooltip("Komorebi UI")
+        .tooltip("Seelen UI")
         .menu(&menu)
         .on_menu_event(
             move |app: &AppHandle, event: MenuEvent| match event.id().as_ref() {
