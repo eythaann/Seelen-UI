@@ -1,4 +1,4 @@
-<img src="./static/icons/title.svg" height="60" alt="Seelen UI Title">
+<img src="./documentation/images/title.svg" height="60" alt="Seelen UI Title">
 
 [![Version](https://img.shields.io/github/v/release/eythaann/seelen-ui.svg)](https://github.com/eythaann/seelen-ui/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
