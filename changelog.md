@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+### refactored
+- Update notifications always enabled for nsis installer
+- Update notifications will not appear if app is intalled using msix (Microsoft Store).
+
+### enhancements
+- Now by default if user is Admin, UAC will be trigered on run the app to allow a better integrated experience in SeelenWeg and Komorebi Tiling Manager.
+
 ## [1.0.0-prerelease.14]
 ### features
 - add indicator to know opens and focused apps on SeelenWeg
