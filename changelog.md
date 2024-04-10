@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.0.0]
 ### refactored
 - Update notifications always enabled for nsis installer
 - Update notifications will not appear if app is intalled using msix (Microsoft Store).
