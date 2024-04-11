@@ -27,14 +27,14 @@ tauri = { version = "2.0.0-beta", features = [
     "tray-icon",
     "image-png",
 ] }
-tauri-plugin-fs = "2.0.0-beta.2"
-tauri-plugin-dialog = "2.0.0-beta.2"
-tauri-plugin-autostart = "2.0.0-beta.2"
-tauri-plugin-single-instance = "2.0.0-beta.2"
-tauri-plugin-shell = "2.0.0-beta.2"
-tauri-plugin-process = "2.0.0-beta.2"
-tauri-plugin-log = { version = "2.0.0-beta.2", features = ["colored"] }
-tauri-plugin-updater = "2.0.0-beta.2"
+tauri-plugin-fs = "2.0.0-beta"
+tauri-plugin-dialog = "2.0.0-beta"
+tauri-plugin-autostart = "2.0.0-beta"
+tauri-plugin-single-instance = "2.0.0-beta"
+tauri-plugin-shell = "2.0.0-beta"
+tauri-plugin-process = "2.0.0-beta"
+tauri-plugin-log = { version = "2.0.0-beta", features = ["colored"] }
+tauri-plugin-updater = "2.0.0-beta"
 color-eyre = "0.6.2"
 lazy_static = "1.4.0"
 parking_lot = "0.12.1"
@@ -67,4 +67,4 @@ custom-protocol = ["tauri/custom-protocol"]
 
 
 [target."cfg(not(any(target_os = \"android\", target_os = \"ios\")))".dependencies]
-tauri-plugin-cli = "2.0.0-beta.2"
+tauri-plugin-cli = "2.0.0-beta"
