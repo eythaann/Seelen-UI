@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- App downloaded form Microsoft Store was not running without admin.
+
 ## [1.0.0]
 ### refactored
 - Update notifications always enabled for nsis installer
