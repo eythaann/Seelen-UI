@@ -4,6 +4,9 @@
 ### features
 - Add Smart Auto Hide for Seelenweg.
 
+### enhancements
+- Now the copy handles option will return hexadecimal handles instead decimal (good for faster debug in tools like spy++).
+
 ### fix
 - duped handles
 

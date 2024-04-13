@@ -76,11 +76,6 @@ export function getMenuForItem(item: App): MenuProps['items'] {
       type: 'divider',
     },
     {
-      label: 'Copy handles',
-      key: 'weg_copy_hwnd',
-      onClick: () => navigator.clipboard.writeText(JSON.stringify(item.opens)),
-    },
-    {
       label: 'Open file location',
       key: 'weg_open_file_location',
       onClick: () => invoke('open_file_location', { path: item.exe }),
@@ -88,16 +83,22 @@ export function getMenuForItem(item: App): MenuProps['items'] {
   );
 
   if (item.opens.length) {
-    menu.push({
-      label: item.opens.length > 1 ? 'Close all' : 'Close',
-      key: 'weg_close_app',
-      onClick() {
-        item.opens.forEach((hwnd) => {
-          invoke('weg_close_app', { hwnd });
-        });
+    menu.push(
+      {
+        label: 'Copy handles',
+        key: 'weg_copy_hwnd',
+        onClick: () => navigator.clipboard.writeText(JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16)))),
       },
-      danger: true,
-    });
+      {
+        label: item.opens.length > 1 ? 'Close all' : 'Close',
+        key: 'weg_close_app',
+        onClick() {
+          item.opens.forEach((hwnd) => {
+            invoke('weg_close_app', { hwnd });
+          });
+        },
+        danger: true,
+      });
   }
 
   return menu;
