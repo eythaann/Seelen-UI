@@ -12,7 +12,7 @@ import { RootActions, Selectors } from '../shared/store/app';
 import { SeelenWegMode, SeelenWegSide } from '../../../settings/modules/seelenweg/domain';
 import { App, Separator, SpecialItemType } from '../shared/store/domain';
 
-const MAX_CURSOR_DISTANCE = 500;
+const MAX_CURSOR_DISTANCE = window.screen.height / 3;
 const MAX_CURSOR_DISTANCE_MARGIN = MAX_CURSOR_DISTANCE / 3;
 
 const Separator1: Separator = {
@@ -40,7 +40,10 @@ export function SeelenWeg() {
   const lenghtsRefs = useRef<number[]>([]);
 
   const shouldAnimate = useRef(false);
-  const mouseX = useRef(0);
+  const mousePos = useRef({
+    x: 0,
+    y: 0,
+  });
 
   const dispatch = useDispatch();
 
@@ -51,10 +54,8 @@ export function SeelenWeg() {
 
   useAppActivation(() => {
     setHidden(false);
-    if (settings.position === SeelenWegSide.BOTTOM) {
-      shouldAnimate.current = true;
-      requestAnimationFrame(animate);
-    }
+    shouldAnimate.current = true;
+    requestAnimationFrame(animate);
   }, [settings]);
 
   useEffect(() => {
@@ -101,7 +102,7 @@ export function SeelenWeg() {
         const node = child as HTMLElement;
         node.style.width = settings.size + 'px';
         node.style.height = settings.size + 'px';
-        node.style.marginBottom = 0 + 'px';
+        node.style[`margin${settings.position}`] = 0 + 'px';
       });
 
       if (isFullWidth) {
@@ -133,8 +134,11 @@ export function SeelenWeg() {
       const node = child as HTMLElement;
       const rect = (node as HTMLDivElement).getBoundingClientRect();
       const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-      const realDistance = Math.abs(mouseX.current - centerX);
+      const realDistance = isHorizontal
+        ? Math.abs(mousePos.current.x - centerX)
+        : Math.abs(mousePos.current.y - centerY);
       const delta = settings.zoomSize / 2 + 5;
       const distanceFromBorder = Math.max(delta, realDistance) - delta;
 
@@ -146,12 +150,12 @@ export function SeelenWeg() {
 
       const maxMargin = (settings.zoomSize - settings.size) / 5;
       const distancemargin = Math.min(MAX_CURSOR_DISTANCE_MARGIN, distanceFromBorder);
-      const marginBottom =
+      const marginSize =
         ((MAX_CURSOR_DISTANCE_MARGIN - distancemargin) / MAX_CURSOR_DISTANCE_MARGIN) * maxMargin;
 
       node.style.width = newSize + 'px';
       node.style.height = newSize + 'px';
-      node.style.marginBottom = marginBottom + 'px';
+      node.style[`margin${settings.position}`] = marginSize + 'px';
 
       if (!isFullWidth) {
         return;
@@ -167,8 +171,12 @@ export function SeelenWeg() {
     });
 
     if (isFullWidth) {
-      const complementarySize1 = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px - ${settings.spaceBetweenItems}px`;
-      const complementarySize2 = `calc(50% - ${totalRightSize + totalCenterSize / 2}px - ${settings.spaceBetweenItems}px`;
+      const complementarySize1 = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px - ${
+        settings.spaceBetweenItems
+      }px`;
+      const complementarySize2 = `calc(50% - ${totalRightSize + totalCenterSize / 2}px - ${
+        settings.spaceBetweenItems
+      }px`;
 
       if (isHorizontal) {
         separatorRefs.current[0]!.style.width = complementarySize1;
@@ -184,7 +192,8 @@ export function SeelenWeg() {
 
   const onMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
-    mouseX.current = event.clientX;
+    mousePos.current.x = event.clientX;
+    mousePos.current.y = event.clientY;
   }, []);
 
   const onReorderPinneds = useCallback((apps: (Separator | App)[]) => {
@@ -243,7 +252,7 @@ export function SeelenWeg() {
           key="separator1"
           value={Separator1}
           className={cx('weg-separator weg-separator-1', {
-            'visible': settings.visibleSeparators,
+            visible: settings.visibleSeparators,
           })}
           onDragStart={(e) => e.stopPropagation()}
           drag={false}
@@ -262,7 +271,7 @@ export function SeelenWeg() {
           key="separator2"
           value={Separator2}
           className={cx('weg-separator weg-separator-2', {
-            'visible': settings.visibleSeparators,
+            visible: settings.visibleSeparators,
           })}
           drag={false}
           style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
