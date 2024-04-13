@@ -65,10 +65,36 @@ export function SeelenWeg() {
     lenghtsRefs.current = [pinnedOnLeft.length, pinnedOnCenter.length, pinnedOnRight.length];
   });
 
+  const getSeparatorSizeStyle = useCallback(
+    (sideElements: number, centerElements: number) => {
+      let size = sideElements === 0 ? '0px' : `${settings.spaceBetweenItems * 2}px`;
+
+      if (settings.mode === SeelenWegMode.FULL_WIDTH) {
+        size = `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
+          sideElements + centerElements / 2
+        })`;
+      }
+
+      if (settings.position === SeelenWegSide.LEFT || settings.position === SeelenWegSide.RIGHT) {
+        return {
+          marginTop: `-${settings.spaceBetweenItems}px`,
+          height: size,
+        };
+      }
+
+      return {
+        marginLeft: `-${settings.spaceBetweenItems}px`,
+        width: size,
+      };
+    },
+    [settings],
+  );
+
   const animate = useCallback(() => {
     let totalLeftSize = 0;
     let totalCenterSize = 0;
     let totalRightSize = 0;
+    const isFullWidth = settings.mode === SeelenWegMode.FULL_WIDTH;
 
     if (!shouldAnimate.current) {
       refs.current.forEach((child) => {
@@ -78,14 +104,17 @@ export function SeelenWeg() {
         node.style.marginBottom = 0 + 'px';
       });
 
-      totalLeftSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[0]!;
-      totalCenterSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[1]!;
-      totalRightSize = (settings.size + settings.spaceBetweenItems) * lenghtsRefs.current[2]!;
+      if (isFullWidth) {
+        separatorRefs.current[0]!.style.width = getSeparatorSizeStyle(
+          lenghtsRefs.current[0]!,
+          lenghtsRefs.current[1]!,
+        ).width!;
+        separatorRefs.current[1]!.style.width = getSeparatorSizeStyle(
+          lenghtsRefs.current[2]!,
+          lenghtsRefs.current[1]!,
+        ).width!;
+      }
 
-      separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px`;
-      separatorRefs.current[1]!.style.width = `calc(50% - ${
-        totalRightSize + totalCenterSize / 2
-      }px`;
       return;
     }
 
@@ -112,6 +141,14 @@ export function SeelenWeg() {
       const marginBottom =
         ((MAX_CURSOR_DISTANCE_MARGIN - distancemargin) / MAX_CURSOR_DISTANCE_MARGIN) * maxMargin;
 
+      node.style.width = newSize + 'px';
+      node.style.height = newSize + 'px';
+      node.style.marginBottom = marginBottom + 'px';
+
+      if (!isFullWidth) {
+        return;
+      }
+
       if (index < stop1) {
         totalLeftSize += newSize + settings.spaceBetweenItems;
       } else if (index < stop2) {
@@ -119,14 +156,14 @@ export function SeelenWeg() {
       } else if (index < stop3) {
         totalRightSize += newSize + settings.spaceBetweenItems;
       }
-
-      node.style.width = newSize + 'px';
-      node.style.height = newSize + 'px';
-      node.style.marginBottom = marginBottom + 'px';
     });
 
-    separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px`;
-    separatorRefs.current[1]!.style.width = `calc(50% - ${totalRightSize + totalCenterSize / 2}px`;
+    if (isFullWidth) {
+      separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px`;
+      separatorRefs.current[1]!.style.width = `calc(50% - ${
+        totalRightSize + totalCenterSize / 2
+      }px`;
+    }
 
     requestAnimationFrame(animate);
   }, [settings]);
@@ -135,29 +172,6 @@ export function SeelenWeg() {
     event.stopPropagation();
     mouseX.current = event.clientX;
   }, []);
-
-  const getSeparatorSizeStyle = useCallback(
-    (sideElements: number, centerElements: number) => {
-      let size = sideElements === 0 ? '0px' : `${settings.spaceBetweenItems * 2}px`;
-
-      if (settings.mode === SeelenWegMode.FULL_WIDTH) {
-        size = `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
-          sideElements + centerElements / 2
-        })`;
-      }
-
-      if (settings.position === SeelenWegSide.LEFT || settings.position === SeelenWegSide.RIGHT) {
-        return {
-          height: size,
-        };
-      }
-
-      return {
-        width: size,
-      };
-    },
-    [settings],
-  );
 
   const onReorderPinneds = useCallback((apps: (Separator | App)[]) => {
     let extractedPinned: App[] = [];

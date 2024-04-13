@@ -9,6 +9,7 @@
 
 ### fix
 - duped handles
+- inconsistencies in separators width
 
 ## [1.0.1]
 ### fix
