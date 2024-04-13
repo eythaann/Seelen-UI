@@ -74,6 +74,7 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
     <Reorder.Item
       as="div"
       value={item}
+      className="weg-item-drag-container"
       onDragStart={() => {
         isDragging.current = true;
       }}

@@ -14,6 +14,7 @@ export interface SeelenWegState {
   enabled: boolean;
   mode: SeelenWegMode;
   position: SeelenWegSide;
+  visibleSeparators: boolean;
   size: number;
   zoomSize: number;
   margin: number;

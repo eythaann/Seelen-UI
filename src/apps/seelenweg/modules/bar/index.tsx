@@ -65,26 +65,24 @@ export function SeelenWeg() {
     lenghtsRefs.current = [pinnedOnLeft.length, pinnedOnCenter.length, pinnedOnRight.length];
   });
 
-  const getSeparatorSizeStyle = useCallback(
+  const getSeparatorComplementarySize = useCallback(
     (sideElements: number, centerElements: number) => {
-      let size = sideElements === 0 ? '0px' : `${settings.spaceBetweenItems * 2}px`;
+      let size = '1px';
 
       if (settings.mode === SeelenWegMode.FULL_WIDTH) {
-        size = `calc(50% - ${settings.size + settings.spaceBetweenItems}px * ${
+        size = `calc(50% - (${settings.size + settings.spaceBetweenItems}px * ${
           sideElements + centerElements / 2
-        })`;
+        }) - ${settings.spaceBetweenItems}px)`;
       }
 
-      if (settings.position === SeelenWegSide.LEFT || settings.position === SeelenWegSide.RIGHT) {
+      if (settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM) {
         return {
-          marginTop: `-${settings.spaceBetweenItems}px`,
-          height: size,
+          width: size,
         };
       }
 
       return {
-        marginLeft: `-${settings.spaceBetweenItems}px`,
-        width: size,
+        height: size,
       };
     },
     [settings],
@@ -95,6 +93,8 @@ export function SeelenWeg() {
     let totalCenterSize = 0;
     let totalRightSize = 0;
     const isFullWidth = settings.mode === SeelenWegMode.FULL_WIDTH;
+    const isHorizontal =
+      settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM;
 
     if (!shouldAnimate.current) {
       refs.current.forEach((child) => {
@@ -105,14 +105,22 @@ export function SeelenWeg() {
       });
 
       if (isFullWidth) {
-        separatorRefs.current[0]!.style.width = getSeparatorSizeStyle(
+        const complementarySize1 = getSeparatorComplementarySize(
           lenghtsRefs.current[0]!,
           lenghtsRefs.current[1]!,
-        ).width!;
-        separatorRefs.current[1]!.style.width = getSeparatorSizeStyle(
+        );
+        const complementarySize2 = getSeparatorComplementarySize(
           lenghtsRefs.current[2]!,
           lenghtsRefs.current[1]!,
-        ).width!;
+        );
+
+        if (isHorizontal) {
+          separatorRefs.current[0]!.style.width = complementarySize1.width!;
+          separatorRefs.current[1]!.style.width = complementarySize2.width!;
+        } else {
+          separatorRefs.current[0]!.style.height = complementarySize1.height!;
+          separatorRefs.current[1]!.style.height = complementarySize2.height!;
+        }
       }
 
       return;
@@ -159,10 +167,16 @@ export function SeelenWeg() {
     });
 
     if (isFullWidth) {
-      separatorRefs.current[0]!.style.width = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px`;
-      separatorRefs.current[1]!.style.width = `calc(50% - ${
-        totalRightSize + totalCenterSize / 2
-      }px`;
+      const complementarySize1 = `calc(50% - ${totalLeftSize + totalCenterSize / 2}px - ${settings.spaceBetweenItems}px`;
+      const complementarySize2 = `calc(50% - ${totalRightSize + totalCenterSize / 2}px - ${settings.spaceBetweenItems}px`;
+
+      if (isHorizontal) {
+        separatorRefs.current[0]!.style.width = complementarySize1;
+        separatorRefs.current[1]!.style.width = complementarySize2;
+      } else {
+        separatorRefs.current[0]!.style.height = complementarySize1;
+        separatorRefs.current[1]!.style.height = complementarySize2;
+      }
     }
 
     requestAnimationFrame(animate);
@@ -228,10 +242,12 @@ export function SeelenWeg() {
           as="div"
           key="separator1"
           value={Separator1}
-          className="weg-separator"
+          className={cx('weg-separator weg-separator-1', {
+            'visible': settings.visibleSeparators,
+          })}
           onDragStart={(e) => e.stopPropagation()}
           drag={false}
-          style={getSeparatorSizeStyle(pinnedOnLeft.length, pinnedOnCenter.length)}
+          style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
         />,
         ...pinnedOnCenter.map((item) => (
           <WegItem
@@ -245,9 +261,11 @@ export function SeelenWeg() {
           as="div"
           key="separator2"
           value={Separator2}
-          className="weg-separator"
+          className={cx('weg-separator weg-separator-2', {
+            'visible': settings.visibleSeparators,
+          })}
           drag={false}
-          style={getSeparatorSizeStyle(pinnedOnRight.length, pinnedOnCenter.length)}
+          style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
         />,
         ...pinnedOnRight.map((item) => (
           <WegItem

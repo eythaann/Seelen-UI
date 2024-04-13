@@ -13,6 +13,7 @@ const initialState: SeelenWegState = {
   margin: 8,
   padding: 8,
   spaceBetweenItems: 8,
+  visibleSeparators: true,
 };
 
 export const SeelenWegSlice = createSlice({

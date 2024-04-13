@@ -66,6 +66,15 @@ export const SeelenWegSettings = () => {
       </SettingsGroup>
 
       <SettingsGroup>
+        <SettingsSubGroup label="Separators">
+          <SettingsOption>
+            <div>Visible</div>
+            <Switch checked={settings.visibleSeparators} onChange={(value) => dispatch(SeelenWegActions.setVisibleSeparators(value))} />
+          </SettingsOption>
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
         <SettingsSubGroup label="Items">
           <SettingsOption>
             <div>Size</div>

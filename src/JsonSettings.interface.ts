@@ -519,6 +519,7 @@ export interface StaticConfig {
 }
 export interface SeelenWegState {
   enabled?: boolean;
+  visible_separators?: boolean;
   mode?: SeelenWegMode;
   size?: number;
   zoom_size?: number;

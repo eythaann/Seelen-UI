@@ -264,6 +264,7 @@ export const JsonToState_Seelenweg = (json: StaticConfig, initialState: SeelenWe
     margin: json.seelenweg?.margin ?? initialState.margin,
     padding: json.seelenweg?.padding ?? initialState.padding,
     spaceBetweenItems: json.seelenweg?.space_between_items ?? initialState.spaceBetweenItems,
+    visibleSeparators: json.seelenweg?.visible_separators ?? initialState.visibleSeparators,
   };
 };
 
@@ -379,6 +380,7 @@ const StateToJson_SeelenWeg = (state: SeelenWegState): Partial<StaticConfig> => 
       margin: state.margin,
       padding: state.padding,
       space_between_items: state.spaceBetweenItems,
+      visible_separators: state.visibleSeparators,
     },
   };
 };

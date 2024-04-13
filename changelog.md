@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - Add Smart Auto Hide for Seelenweg.
+- Add visible Separators Option
 
 ### enhancements
 - Now the copy handles option will return hexadecimal handles instead decimal (good for faster debug in tools like spy++).

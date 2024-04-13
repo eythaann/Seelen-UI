@@ -21,7 +21,7 @@ body {
 
   &:not(:hover) {
     .weg-separator {
-      transition-property: width;
+      transition-property: width, height;
       transition-duration: 0.2s;
       transition-timing-function: linear;
     }
@@ -51,6 +51,7 @@ body {
   display: flex;
   gap: var(--config-space-between-items);
   padding: var(--config-padding);
+  justify-content: space-between;
   transition: transform 0.2s ease-in-out;
 
   &.hidden {
@@ -101,8 +102,47 @@ body {
     }
   }
 
+  .weg-separator {
+    z-index: 1 !important; /* Override inline style */
+
+    &:nth-child(2),
+    &:last-child,
+    &:not(.visible) {
+      opacity: 0;
+    }
+
+    .vertical & {
+      width: 100%;
+
+      /* first child always is the background */
+      &:nth-child(2) {
+        margin-top: calc(var(--config-space-between-items) * -1);
+      }
+
+      &:last-child {
+        margin-bottom: calc(var(--config-space-between-items) * -1);
+      }
+    }
+
+    .horizontal & {
+      height: 100%;
+
+      /* first child always is the background */
+      &:nth-child(2) {
+        margin-left: calc(var(--config-space-between-items) * -1);
+      }
+
+      &:last-child {
+        margin-right: calc(var(--config-space-between-items) * -1);
+      }
+    }
+  }
+
+  .weg-item-drag-container {
+    z-index: 2 !important; /* Override inline style */
+  }
+
   .weg-item {
-    z-index: 1;
     position: relative;
     display: flex;
     justify-content: center;
