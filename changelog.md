@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- Bad download URL in Update Notification
+- Showing update notification on intallations by Windows Store
+
 ## [1.1.0]
 ### features
 - Add Smart Auto Hide for Seelenweg.

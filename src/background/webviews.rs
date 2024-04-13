@@ -125,7 +125,10 @@ pub fn check_updates_window(app: &AppHandle) -> Result<()> {
 
     // check if path is in windowsapps folder
     let installation_path = app.path().resource_dir()?;
-    if installation_path.starts_with(r"C:\Program Files\WindowsApps") {
+    if installation_path
+        .to_string_lossy()
+        .contains(r"\Program Files\WindowsApps\")
+    {
         log::trace!("Skipping update notification because it is installed as MSIX");
         return Ok(());
     }
