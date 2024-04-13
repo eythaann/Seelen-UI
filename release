@@ -1,11 +1,11 @@
 {
-  "version": "1.0.0",
-  "notes": "### refactored\n- Update notifications always enabled for nsis installer\n- Update notifications will not appear if app is intalled using msix (Microsoft Store).\n\n### enhancements\n- Now by default if user is Admin, UAC will be trigered on run the app to allow a better integrated experience in SeelenWeg and Komorebi Tiling Manager.",
-  "pub_date": "2024-04-10T22:15:56.963Z",
+  "version": "1.1.0",
+  "notes": "### features\n- Add Smart Auto Hide for Seelenweg.\n- Add visible Separators Option\n- Enable animations for items into LEFT, TOP, RIGHT positions\n\n### enhancements\n- Now the copy handles option will return hexadecimal handles instead decimal (good for faster debug in tools like spy++).\n\n### fix\n- duped handles\n- inconsistencies in separators width",
+  "pub_date": "2024-04-13T21:27:07.219Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU09GRTVUS3dJdGFEYm9mQWUxeW5HK1RGVFhNOWFGdkpseDRORFViSGtwTDM2Zm1mNmpkR0JDejZLRUpYaHdReHpVMWpFUlNRa2x6SXlBQkN6VEdJL2dBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEyNzg3MzU1CWZpbGU6U2VlbGVuIFVJXzEuMC4wX3g2NC1zZXR1cC5uc2lzLnppcApjVzhKSWZ3Z0xhelI0QkJKaU1QZ0xMak13RTNSMnllKzVCRVhicTg2N1pMUE9SbSs1T2FEWkRmRmRGblBhVVVhVjhQMFkwcFNQYWM0S0M5SmxnNFFCdz09Cg==",
-      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.0.0/Komorebi.UI_1.0.0_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0pSMXkyTDI5S3RiTkF0WmEwWVJicklzTkVGQTRZSSt1WU9nQVBBUFlSSlZpWEd0VUVLazNLckozM05TTDR3MXVOZThScW9Jd3lWaUdCemJ3MjRCY1FNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEzMDQzNjI2CWZpbGU6U2VlbGVuIFVJXzEuMS4wX3g2NC1zZXR1cC5uc2lzLnppcAppc2VmZERiSmpvbnl0ZTZacUxBclc0T2Q1dXg4TzBmWEdxSlEvM0RLTTNkeUZNdFhnZitRYVg1QW9USGNHb3pCN2IzRWVQQXZRTkZGNEdqTUlRUkpDUT09Cg==",
+      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.1.0/Komorebi.UI_1.1.0_x64-setup.nsis.zip"
     }
   }
 }

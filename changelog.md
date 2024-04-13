@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.1.0]
 ### features
 - Add Smart Auto Hide for Seelenweg.
 - Add visible Separators Option
