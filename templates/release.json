@@ -5,7 +5,7 @@
   "platforms": {
     "windows-x86_64": {
       "signature": "{{signature}}",
-      "url": "https://github.com/eythaann/seelen-ui/releases/download/v{{version}}/Komorebi.UI_{{version}}_x64-setup.nsis.zip"
+      "url": "https://github.com/eythaann/seelen-ui/releases/download/v{{version}}/Seelen.UI_{{version}}_x64-setup.nsis.zip"
     }
   }
 }

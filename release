@@ -5,7 +5,7 @@
   "platforms": {
     "windows-x86_64": {
       "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0pSMXkyTDI5S3RiTkF0WmEwWVJicklzTkVGQTRZSSt1WU9nQVBBUFlSSlZpWEd0VUVLazNLckozM05TTDR3MXVOZThScW9Jd3lWaUdCemJ3MjRCY1FNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEzMDQzNjI2CWZpbGU6U2VlbGVuIFVJXzEuMS4wX3g2NC1zZXR1cC5uc2lzLnppcAppc2VmZERiSmpvbnl0ZTZacUxBclc0T2Q1dXg4TzBmWEdxSlEvM0RLTTNkeUZNdFhnZitRYVg1QW9USGNHb3pCN2IzRWVQQXZRTkZGNEdqTUlRUkpDUT09Cg==",
-      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.1.0/Komorebi.UI_1.1.0_x64-setup.nsis.zip"
+      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.1.0/Seelen.UI_1.1.0_x64-setup.nsis.zip"
     }
   }
 }
