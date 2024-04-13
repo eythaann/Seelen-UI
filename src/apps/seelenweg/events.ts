@@ -27,9 +27,11 @@ export const updateHitbox = debounce(() => {
 
   const isHorizontal = position === SeelenWegSide.TOP || position === SeelenWegSide.BOTTOM;
 
+  const overlapedY = position === SeelenWegSide.TOP ? 0 : toPhysicalPixels(window.screen.height) - 1;
+  const overlapedX = position === SeelenWegSide.LEFT ? 0 : toPhysicalPixels(window.screen.width) - 1;
   emitTo('seelenweg-hitbox', 'move', {
-    x: toPhysicalPixels(root_container.offsetLeft),
-    y: isOverlaped ? toPhysicalPixels(window.screen.height) - 1 : toPhysicalPixels(root_container.offsetTop),
+    x: isOverlaped && !isHorizontal ? overlapedX : toPhysicalPixels(root_container.offsetLeft),
+    y: isOverlaped && isHorizontal ? overlapedY : toPhysicalPixels(root_container.offsetTop),
   });
   emitTo('seelenweg-hitbox', 'resize', {
     width: isOverlaped && !isHorizontal ? 1 : toPhysicalPixels(root_container.offsetWidth),

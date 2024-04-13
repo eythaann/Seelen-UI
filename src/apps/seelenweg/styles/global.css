@@ -55,7 +55,21 @@ body {
   transition: transform 0.2s ease-in-out;
 
   &.hidden {
-    transform: translateY(calc(100% + var(--config-margin)));
+    &.left {
+      transform: translateX(calc(-100% - var(--config-margin)));
+    }
+
+    &.right {
+      transform: translateX(calc(100% + var(--config-margin)));
+    }
+
+    &.top {
+      transform: translateY(calc(-100% - var(--config-margin)));
+    }
+
+    &.bottom {
+      transform: translateY(calc(100% + var(--config-margin)));
+    }
   }
 
   &.horizontal {
