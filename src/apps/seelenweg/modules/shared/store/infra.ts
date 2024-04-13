@@ -94,6 +94,11 @@ export async function registerStoreEvents() {
   await listen<HWND>('set-focused-handle', (event) => {
     store.dispatch(RootActions.setFocusedHandle(event.payload));
   });
+
+  await listen<boolean>('set-auto-hide', (event) => {
+    store.dispatch(RootActions.setIsOverlaped(event.payload));
+    updateHitbox();
+  });
 }
 
 function loadThemeCSS(theme: Theme) {

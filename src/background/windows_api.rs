@@ -2,7 +2,7 @@ use color_eyre::eyre::eyre;
 use windows::{
     core::PWSTR,
     Win32::{
-        Foundation::{CloseHandle, HANDLE, HWND},
+        Foundation::{CloseHandle, HANDLE, HWND, RECT},
         System::Threading::{
             AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
             QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
@@ -11,8 +11,9 @@ use windows::{
         UI::{
             Input::KeyboardAndMouse::SetFocus,
             WindowsAndMessaging::{
-                AllowSetForegroundWindow, GetParent, GetWindowTextW, GetWindowThreadProcessId,
-                IsIconic, IsWindow, IsWindowVisible, SetForegroundWindow,
+                AllowSetForegroundWindow, GetParent, GetWindowRect, GetWindowTextW,
+                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
+                SetForegroundWindow,
             },
         },
     },
@@ -123,7 +124,7 @@ impl WindowsApi {
         Ok(String::from_utf16(&path[..len as usize])?)
     }
 
-    pub fn _exe(hwnd: HWND) -> Result<String> {
+    pub fn exe(hwnd: HWND) -> Result<String> {
         Ok(Self::exe_path(hwnd)?
             .split('\\')
             .last()
@@ -136,6 +137,12 @@ impl WindowsApi {
         let len = unsafe { GetWindowTextW(hwnd, &mut text) };
         let length = usize::try_from(len).unwrap_or(0);
         String::from_utf16(&text[..length]).unwrap_or("".to_owned())
+    }
+
+    pub fn get_window_rect(hwnd: HWND) -> RECT {
+        let mut rect = RECT::default();
+        let _ = unsafe { GetWindowRect(hwnd, &mut rect) };
+        rect
     }
 }
 

@@ -12,6 +12,8 @@
   outline: none;
   box-sizing: border-box;
   vertical-align: baseline;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 img, image, picture, video, iframe, figure {
@@ -83,6 +85,7 @@ hr {
   color: var(--color-gray-200);
 }
 
+/* Antd reset */
 #root {
   .ant-popover {
     .ant-popover-inner {

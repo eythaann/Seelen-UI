@@ -22,6 +22,7 @@ const initialState: RootState = {
   openApps: {},
   focusedHandle: 0,
   theme: defaultTheme,
+  isOverlaped: false,
   settings: SeelenWegSlice.getInitialState(),
 };
 
@@ -102,7 +103,7 @@ export const RootSlice = createSlice({
 
       switch (side) {
         case AppsSides.LEFT:
-          state.pinnedOnLeft.push(appToPin);
+          state.pinnedOnLeft.unshift(appToPin);
           break;
         case AppsSides.CENTER:
           state.pinnedOnCenter.unshift(appToPin);
@@ -115,6 +116,10 @@ export const RootSlice = createSlice({
     },
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
       const app = action.payload;
+
+      if (state.openApps[app.hwnd]) {
+        return;
+      }
 
       state.openApps[app.hwnd] = app;
 

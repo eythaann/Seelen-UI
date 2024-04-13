@@ -4,6 +4,7 @@ import { registerDocumentEvents, setWindowSize, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
 import { invoke } from '@tauri-apps/api/core';
 import { emitTo } from '@tauri-apps/api/event';
+import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -35,8 +36,10 @@ async function Main() {
 
   const WrappedRoot = () => {
     useEffect(() => {
-      emitTo('seelenweg-hitbox', 'init');
-      updateHitbox();
+      emitTo('seelenweg-hitbox', 'init').then(() => {
+        updateHitbox();
+        getCurrent().show();
+      });
     }, []);
 
     return (

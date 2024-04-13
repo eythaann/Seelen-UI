@@ -85,4 +85,5 @@ export interface RootState {
   focusedHandle: HWND;
   theme: Theme;
   settings: SeelenWegState;
+  isOverlaped: boolean;
 }

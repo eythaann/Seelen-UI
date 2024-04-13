@@ -9,6 +9,7 @@ async function Main() {
   wrapConsole();
 
   listen('init', () => {
+    getCurrent().show();
     document.body.addEventListener('mousemove', () => {
       emitTo('seelenweg', 'mouseenter');
     });

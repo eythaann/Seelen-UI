@@ -7,13 +7,13 @@ use windows::Win32::{
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
             EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
-            EVENT_OBJECT_HIDE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED,
-            EVENT_SYSTEM_FOREGROUND, MSG,
+            EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
+            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND, MSG,
         },
     },
 };
 
-use crate::{error_handler::Result, seelen::SEELEN, seelenweg::SeelenWeg, windows_api::WindowsApi};
+use crate::{error_handler::{log_if_error, Result}, seelen::SEELEN, seelenweg::SeelenWeg, windows_api::WindowsApi};
 
 pub extern "system" fn win_event_hook(
     _h_win_event_hook: HWINEVENTHOOK,
@@ -76,13 +76,18 @@ pub extern "system" fn win_event_hook(
             }
         }
         EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
-            let seelen = SEELEN.lock();
-            let seelenweg = seelen.weg();
+            let mut seelen = SEELEN.lock();
+            let seelenweg = seelen.weg_mut();
             if seelenweg.contains_app(hwnd) {
                 seelenweg.set_focused(hwnd);
             } else if WindowsApi::get_window_text(hwnd) != "Task Switching" {
                 seelenweg.set_focused(HWND(0));
             }
+            log_if_error(seelenweg.update_status_if_needed(hwnd));
+        }
+        EVENT_OBJECT_LOCATIONCHANGE => {
+            let result = SEELEN.lock().weg_mut().update_status_if_needed(hwnd);
+            log_if_error(result);
         }
         _ => {}
     }

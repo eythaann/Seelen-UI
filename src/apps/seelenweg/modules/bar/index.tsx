@@ -1,12 +1,11 @@
-import { debounce } from '../../../Timing';
 import { cx } from '../../../utils/styles';
-import { ExtraCallbacksOnLeave } from '../../events';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
-import { MouseEvent, useCallback, useEffect, useRef } from 'react';
+import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
+import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 
@@ -28,10 +27,13 @@ export function SeelenWeg() {
   const focusedHandle = useSelector(Selectors.focusedHandle);
   const theme = useSelector(Selectors.theme);
   const settings = useSelector(Selectors.settings);
+  const isOverlaped = useSelector(Selectors.isOverlaped);
 
   const pinnedOnLeft = useSelector(Selectors.pinnedOnLeft);
   const pinnedOnCenter = useSelector(Selectors.pinnedOnCenter);
   const pinnedOnRight = useSelector(Selectors.pinnedOnRight);
+
+  const [hidden, setHidden] = useState(true);
 
   const refs = useRef<HTMLDivElement[]>([]);
   const separatorRefs = useRef<HTMLDivElement[]>([]);
@@ -39,15 +41,21 @@ export function SeelenWeg() {
 
   const shouldAnimate = useRef(false);
   const mouseX = useRef(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    ExtraCallbacksOnLeave.add(() => {
-      shouldAnimate.current = false;
-    });
-  }, []);
+  useAppBlur(() => {
+    setHidden(true);
+    shouldAnimate.current = false;
+  });
+
+  useAppActivation(() => {
+    setHidden(false);
+    if (settings.position === SeelenWegSide.BOTTOM) {
+      shouldAnimate.current = true;
+      requestAnimationFrame(animate);
+    }
+  }, [settings]);
 
   useEffect(() => {
     refs.current = Array.from(document.getElementsByClassName('weg-item')) as HTMLDivElement[];
@@ -151,21 +159,6 @@ export function SeelenWeg() {
     [settings],
   );
 
-  const onMouseEnter = useCallback(() => {
-    if (settings.position === SeelenWegSide.BOTTOM) {
-      shouldAnimate.current = true;
-      requestAnimationFrame(animate);
-    }
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-  }, [settings]);
-
-  const disableMouseAnimations = useCallback(() => {
-    shouldAnimate.current = false;
-  }, []);
-
   const onReorderPinneds = useCallback((apps: (Separator | App)[]) => {
     let extractedPinned: App[] = [];
 
@@ -195,9 +188,7 @@ export function SeelenWeg() {
 
   return (
     <Reorder.Group
-      onMouseEnter={onMouseEnter}
       onMouseMove={onMouseMove}
-      onMouseLeave={debounce(disableMouseAnimations, 100, timeoutRef)}
       values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
       onReorder={onReorderPinneds}
       axis={isHorizontal ? 'x' : 'y'}
@@ -206,6 +197,7 @@ export function SeelenWeg() {
         horizontal: isHorizontal,
         vertical: !isHorizontal,
         'full-width': settings.mode === SeelenWegMode.FULL_WIDTH,
+        hidden: isOverlaped && hidden,
       })}
     >
       <BackgroundByLayers prefix="taskbar" styles={theme?.seelenweg.backgroundLayers || []} />

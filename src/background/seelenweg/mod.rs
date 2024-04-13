@@ -12,7 +12,7 @@ use win_screenshot::capture::capture_window;
 use windows::{
     core::PCWSTR,
     Win32::{
-        Foundation::{BOOL, HWND, LPARAM},
+        Foundation::{BOOL, HWND, LPARAM, RECT},
         UI::{
             Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
             WindowsAndMessaging::{
@@ -25,14 +25,18 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result, seelen::SEELEN, utils::filename_from_path, windows_api::WindowsApi,
+    error_handler::Result,
+    seelen::SEELEN,
+    utils::{are_overlaped, filename_from_path},
+    windows_api::WindowsApi,
 };
 
 use self::icon_extractor::get_images_from_exe;
 
 lazy_static! {
     /** For now only filter apps without title like the desktop explorer app */
-    static ref BLACK_LIST: Vec<&'static str> = Vec::from([""]);
+    static ref BLACK_LIST: Vec<&'static str> = Vec::from(["", "Task Switching", "DesktopWindowXamlSource", "SeelenWeg", "SeelenWeg Hitbox"]);
+    static ref EXE_BLACK_LIST: Vec<&'static str> = Vec::from(["msedgewebview2.exe", "SearchHost.exe", "StartMenuExperienceHost.exe"]);
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -48,6 +52,10 @@ pub struct SeelenWegApp {
 pub struct SeelenWeg {
     handle: AppHandle<Wry>,
     apps: Vec<SeelenWegApp>,
+    hitbox_handle: isize,
+    window_handle: isize,
+    overlaped: bool,
+    last_hitbox_rect: Option<RECT>,
 }
 
 impl SeelenWeg {
@@ -58,20 +66,26 @@ impl SeelenWeg {
         Self {
             handle,
             apps: Vec::new(),
+            hitbox_handle: 0,
+            window_handle: 0,
+            overlaped: false,
+            last_hitbox_rect: None,
         }
     }
 
-    fn create_window(&self) -> Result<WebviewWindow> {
-        tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
+    fn create_window(&self) -> Result<(WebviewWindow, WebviewWindow)> {
+        let hitbox = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             &self.handle,
             Self::TARGET_HITBOX,
             tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
         )
+        .title("SeelenWeg Hitbox")
+        .inner_size(0.0, 0.0)
+        .position(0.0, 0.0)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
-        .title("SeelenWeg Hitbox")
-        .visible(true)
+        .visible(false)
         .decorations(false)
         .transparent(true)
         .shadow(false)
@@ -84,12 +98,12 @@ impl SeelenWeg {
             Self::TARGET,
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
         )
+        .title("SeelenWeg")
         .position(0.0, 0.0)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
-        .title("SeelenWeg")
-        .visible(true)
+        .visible(false)
         .decorations(false)
         .transparent(true)
         .shadow(false)
@@ -99,7 +113,7 @@ impl SeelenWeg {
 
         window.set_ignore_cursor_events(true)?;
 
-        Ok(window)
+        Ok((window, hitbox))
     }
 
     unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
@@ -168,7 +182,9 @@ impl SeelenWeg {
         self.auto_hide_taskbar(true);
         self.enum_opened_apps();
         self.load_uwp_apps()?;
-        self.create_window()?;
+        let (window, hitbox) = self.create_window()?;
+        self.hitbox_handle = hitbox.hwnd()?.0;
+        self.window_handle = window.hwnd()?.0;
         Ok(())
     }
 
@@ -313,6 +329,40 @@ impl SeelenWeg {
         self.handle
             .emit_to(Self::TARGET, "remove-open-app", hwnd.0)
             .expect("Failed to emit");
+    }
+
+    pub fn is_overlapping(&self, hwnd: HWND) -> bool {
+        let rect = WindowsApi::get_window_rect(hwnd);
+        let hitbox_rect = self
+            .last_hitbox_rect
+            .unwrap_or_else(|| WindowsApi::get_window_rect(HWND(self.hitbox_handle)));
+        are_overlaped(&hitbox_rect, &rect)
+    }
+
+    pub fn update_status_if_needed(&mut self, hwnd: HWND) -> Result<()> {
+        if WindowsApi::is_iconic(hwnd)
+            || !WindowsApi::is_window_visible(hwnd)
+            || BLACK_LIST.contains(&WindowsApi::get_window_text(hwnd).as_str())
+            || EXE_BLACK_LIST.contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str())
+        {
+            return Ok(());
+        }
+
+        let last_status = self.overlaped.clone();
+        self.overlaped = self.is_overlapping(hwnd);
+        if last_status == self.overlaped {
+            return Ok(());
+        }
+
+        self.last_hitbox_rect = if self.overlaped {
+            Some(WindowsApi::get_window_rect(HWND(self.hitbox_handle)))
+        } else {
+            None
+        };
+
+        self.handle
+            .emit_to(Self::TARGET, "set-auto-hide", self.overlaped)?;
+        Ok(())
     }
 
     pub fn should_handle_hwnd(hwnd: HWND) -> bool {

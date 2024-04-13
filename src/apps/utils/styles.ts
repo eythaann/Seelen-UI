@@ -9,6 +9,13 @@ export const cx = (...args: Args[]): string => {
       return arg;
     }
 
-    return Object.keys(arg).map((key) => arg[key] ? key : '').join(' ');
+    let classnames = '';
+    Object.keys(arg).forEach((key) => {
+      if (arg[key]) {
+        classnames += ` ${key}`;
+      }
+    });
+
+    return classnames.trimStart();
   }).join(' ');
 };

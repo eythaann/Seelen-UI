@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+### features
+- Add Smart Auto Hide for Seelenweg.
+
+### fix
+- duped handles
+
 ## [1.0.1]
 ### fix
 - App downloaded form Microsoft Store was not running without admin.
