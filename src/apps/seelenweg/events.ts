@@ -4,7 +4,16 @@ import { PhysicalSize } from '@tauri-apps/api/dpi';
 import { emitTo, listen } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
+import { store } from './modules/shared/store/infra';
+
+import { CallbacksManager } from './modules/shared/utils/app';
+
+import { SeelenWegSide } from '../settings/modules/seelenweg/domain';
+
 const root_container = document.getElementById('root')!;
+
+export const ExtraCallbacksOnLeave = new CallbacksManager();
+export const ExtraCallbacksOnActivate = new CallbacksManager();
 
 export const setWindowSize = () => {
   const webview = getCurrent();
@@ -13,26 +22,20 @@ export const setWindowSize = () => {
   webview.setSize(new PhysicalSize(screenWidth, screenHeight));
 };
 
-export const updateHitbox = () => {
-  emitTo('seelenweg-hitbox', 'resize', {
-    width: toPhysicalPixels(root_container.offsetWidth),
-    height: toPhysicalPixels(root_container.offsetHeight),
-  });
+export const updateHitbox = debounce(() => {
+  const { isOverlaped, settings: { position } } = store.getState();
+
+  const isHorizontal = position === SeelenWegSide.TOP || position === SeelenWegSide.BOTTOM;
+
   emitTo('seelenweg-hitbox', 'move', {
     x: toPhysicalPixels(root_container.offsetLeft),
-    y: toPhysicalPixels(root_container.offsetTop),
+    y: isOverlaped ? toPhysicalPixels(window.screen.height) - 1 : toPhysicalPixels(root_container.offsetTop),
   });
-};
-
-export const ExtraCallbacksOnLeave = {
-  callbacks: [] as (() => void)[],
-  add(cb: () => void) {
-    this.callbacks.push(cb);
-  },
-  execute() {
-    this.callbacks.forEach((fn) => fn());
-  },
-};
+  emitTo('seelenweg-hitbox', 'resize', {
+    width: isOverlaped && !isHorizontal ? 1 : toPhysicalPixels(root_container.offsetWidth),
+    height: isOverlaped && isHorizontal ? 1 : toPhysicalPixels(root_container.offsetHeight),
+  });
+}, 300);
 
 export function registerDocumentEvents() {
   const timeoutId: TimeoutIdRef = { current: null };
@@ -40,22 +43,21 @@ export function registerDocumentEvents() {
 
   document.addEventListener('contextmenu', (event) => event.preventDefault());
 
-  const onMouseLeave = () => {
+  const onMouseLeave = debounce(() => {
     webview.setIgnoreCursorEvents(true);
-    updateHitbox(); // ensure min size hitbox on unzoom elements
     ExtraCallbacksOnLeave.execute();
-  };
+    updateHitbox();
+  }, 200, timeoutId);
 
   const onMouseEnter = () => {
     if (timeoutId.current) {
       clearTimeout(timeoutId.current);
     }
     webview.setIgnoreCursorEvents(false);
+    ExtraCallbacksOnActivate.execute();
   };
 
-  root_container.addEventListener('mouseleave', debounce(onMouseLeave, 200, timeoutId));
-  root_container.addEventListener('blur', debounce(onMouseLeave, 200, timeoutId));
-
+  root_container.addEventListener('mouseleave', onMouseLeave);
   // if for some reazon mouseleave is not emitted
   // set ignore cursor events when user click on screen
   document.body.addEventListener('click', (event) => {

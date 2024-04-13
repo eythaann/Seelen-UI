@@ -1,3 +1,7 @@
+/**
+ * The styles in this file are only structurals for Seelenweg,
+ * all the design should be added to the default theme css.
+ */
 body {
   overflow: hidden;
   cursor: default;
@@ -7,13 +11,6 @@ body {
   align-items: var(--config-by-position-align-items);
   width: 100vw;
   height: 100vh;
-
-  :not(input):not(textarea),
-  :not(input):not(textarea)::after,
-  :not(input):not(textarea)::before {
-    -webkit-user-select: none;
-    user-select: none;
-  }
 }
 
 /** Root Styles */
@@ -26,13 +23,13 @@ body {
     .weg-separator {
       transition-property: width;
       transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
+      transition-timing-function: linear;
     }
 
     .weg-item {
       transition-property: width, height, margin, filter;
       transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
+      transition-timing-function: linear;
     }
   }
 
@@ -54,6 +51,11 @@ body {
   display: flex;
   gap: var(--config-space-between-items);
   padding: var(--config-padding);
+  transition: transform 0.2s ease-in-out;
+
+  &.hidden {
+    transform: translateY(calc(100% + var(--config-margin)));
+  }
 
   &.horizontal {
     height: calc(

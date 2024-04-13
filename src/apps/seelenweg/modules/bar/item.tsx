@@ -1,5 +1,4 @@
 import { cx } from '../../../utils/styles';
-import { ExtraCallbacksOnLeave } from '../../events';
 import { savePinnedItems } from '../shared/store/storeApi';
 import { getMenuForItem } from './menu';
 import { WegPreview } from './preview';
@@ -11,6 +10,7 @@ import { memo, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
+import { useAppBlur } from '../shared/hooks/infra';
 import { store } from '../shared/store/infra';
 import { updatePreviews } from '../shared/utils/infra';
 
@@ -47,11 +47,10 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
     [],
   );
 
-  useEffect(() => {
-    ExtraCallbacksOnLeave.add(() => {
-      setOpenContextMenu(false);
-    });
-  }, []);
+  useAppBlur(() => {
+    setOpenContextMenu(false);
+    setOpenPreview(false);
+  });
 
   useEffect(() => {
     if (openContextMenu) {
