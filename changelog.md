@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.1.1]
 ### fix
 - Bad download URL in Update Notification
 - Showing update notification on intallations by Windows Store
