@@ -34,9 +34,19 @@ use crate::{
 use self::icon_extractor::get_images_from_exe;
 
 lazy_static! {
-    /** For now only filter apps without title like the desktop explorer app */
-    static ref BLACK_LIST: Vec<&'static str> = Vec::from(["", "Task Switching", "DesktopWindowXamlSource", "SeelenWeg", "SeelenWeg Hitbox"]);
-    static ref EXE_BLACK_LIST: Vec<&'static str> = Vec::from(["msedgewebview2.exe", "SearchHost.exe", "StartMenuExperienceHost.exe"]);
+    static ref TITLE_BLACK_LIST: Vec<&'static str> = Vec::from([
+        "",
+        "Task Switching",
+        "DesktopWindowXamlSource",
+        "SeelenWeg",
+        "SeelenWeg Hitbox",
+        "Program Manager"
+    ]);
+    static ref EXE_BLACK_LIST: Vec<&'static str> = Vec::from([
+        "msedgewebview2.exe",
+        "SearchHost.exe",
+        "StartMenuExperienceHost.exe"
+    ]);
 }
 
 #[derive(Debug, Serialize, Clone)]
@@ -117,8 +127,11 @@ impl SeelenWeg {
     }
 
     unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
-        if SeelenWeg::should_handle_hwnd(hwnd) {
-            SEELEN.lock().weg_mut().add_hwnd(hwnd);
+        let mut seelen = SEELEN.lock();
+        if let Some(weg) = seelen.weg_mut() {
+            if SeelenWeg::should_handle_hwnd(hwnd) {
+                weg.add_hwnd(hwnd);
+            }
         }
         true.into()
     }
@@ -342,7 +355,7 @@ impl SeelenWeg {
     pub fn update_status_if_needed(&mut self, hwnd: HWND) -> Result<()> {
         if WindowsApi::is_iconic(hwnd)
             || !WindowsApi::is_window_visible(hwnd)
-            || BLACK_LIST.contains(&WindowsApi::get_window_text(hwnd).as_str())
+            || TITLE_BLACK_LIST.contains(&WindowsApi::get_window_text(hwnd).as_str())
             || EXE_BLACK_LIST.contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str())
         {
             return Ok(());
@@ -390,7 +403,7 @@ impl SeelenWeg {
         }
 
         let title = WindowsApi::get_window_text(hwnd);
-        !BLACK_LIST.contains(&title.as_str())
+        !TITLE_BLACK_LIST.contains(&title.as_str())
     }
 
     pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {

@@ -25,7 +25,6 @@
   "license": "MIT",
   "dependencies": {
     "@tauri-apps/plugin-autostart": "^2.0.0-beta.2",
-    "@tauri-apps/plugin-cli": "^2.0.0-beta.2",
     "@tauri-apps/plugin-dialog": "^2.0.0-beta.2",
     "@tauri-apps/plugin-fs": "^2.0.0-beta.2",
     "@tauri-apps/plugin-log": "^2.0.0-beta.2",

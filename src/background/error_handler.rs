@@ -22,7 +22,6 @@ macro_rules! define_app_errors {
 define_app_errors!(
     Io(std::io::Error);
     Tauri(tauri::Error);
-    TauriCli(tauri_plugin_cli::Error);
     Eyre(color_eyre::eyre::Error);
     Windows(windows::core::Error);
     SerdeJson(serde_json::Error);
@@ -42,7 +41,6 @@ impl std::error::Error for AppError {
             AppError::Eyre(err) => Some(err.root_cause()),
             AppError::Io(err) => Some(err),
             AppError::Tauri(err) => Some(err),
-            AppError::TauriCli(err) => Some(err),
             AppError::Windows(err) => Some(err),
             AppError::SerdeJson(err) => Some(err),
             AppError::Utf8(err) => Some(err),

@@ -8,12 +8,127 @@ use windows::Win32::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
             EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
             EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
-            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND, MSG,
+            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND,
+            EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MOVESIZEEND, MSG,
         },
     },
 };
 
-use crate::{error_handler::{log_if_error, Result}, seelen::SEELEN, seelenweg::SeelenWeg, windows_api::WindowsApi};
+use crate::{
+    error_handler::{log_if_error, Result},
+    k_killer::WindowManager,
+    seelen::SEELEN,
+    seelenweg::SeelenWeg,
+    windows_api::WindowsApi,
+};
+
+pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
+    match event {
+        EVENT_SYSTEM_MOVESIZEEND => {
+            let seelen = SEELEN.lock();
+            if let Some(wm) = seelen.wm() {
+                if wm.contains(hwnd) {
+                    wm.force_retiling()?;
+                }
+            }
+        }
+        EVENT_SYSTEM_MINIMIZEEND => {
+            let mut seelen = SEELEN.lock();
+            if let Some(wm) = seelen.wm_mut() {
+                if WindowManager::should_handle(hwnd) {
+                    wm.add_hwnd(hwnd)?;
+                }
+            }
+        }
+        EVENT_SYSTEM_MINIMIZESTART => {
+            let mut seelen = SEELEN.lock();
+            if let Some(wm) = seelen.wm_mut() {
+                if wm.contains(hwnd) {
+                    wm.remove_hwnd(hwnd)?;
+                }
+            }
+        }
+        EVENT_OBJECT_HIDE => {
+            let mut seelen = SEELEN.lock();
+            if let Some(weg) = seelen.weg_mut() {
+                if weg.contains_app(hwnd) {
+                    // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
+                    // parent so we can't filter it on open event but these are inmediatly hidden when the ApplicationFrameHost.exe parent
+                    // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
+                    let parent = WindowsApi::get_parent(hwnd);
+                    if parent.0 != 0 {
+                        weg.replace_hwnd(hwnd, parent);
+                    } else {
+                        weg.remove_hwnd(hwnd);
+                    }
+                }
+            }
+
+            if let Some(manager) = seelen.wm_mut() {
+                if manager.contains(hwnd) {
+                    manager.remove_hwnd(hwnd)?;
+                }
+            }
+        }
+        EVENT_OBJECT_DESTROY | EVENT_OBJECT_CLOAKED => {
+            let mut seelen = SEELEN.lock();
+            if let Some(weg) = seelen.weg_mut() {
+                if weg.contains_app(hwnd) {
+                    weg.remove_hwnd(hwnd);
+                }
+            }
+
+            if let Some(manager) = seelen.wm_mut() {
+                if manager.contains(hwnd) {
+                    manager.remove_hwnd(hwnd)?;
+                }
+            }
+        }
+        EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE | EVENT_OBJECT_UNCLOAKED => {
+            let mut seelen = SEELEN.lock();
+            if let Some(weg) = seelen.weg_mut() {
+                if SeelenWeg::should_handle_hwnd(hwnd) {
+                    weg.add_hwnd(hwnd);
+                }
+            }
+
+            if let Some(manager) = seelen.wm_mut() {
+                if WindowManager::should_handle(hwnd) {
+                    manager.add_hwnd(hwnd)?;
+                }
+            }
+        }
+        EVENT_OBJECT_NAMECHANGE => {
+            let mut seelen = SEELEN.lock();
+            if let Some(weg) = seelen.weg_mut() {
+                if weg.contains_app(hwnd) {
+                    weg.update_app(hwnd);
+                } else if SeelenWeg::should_handle_hwnd(hwnd) {
+                    weg.add_hwnd(hwnd);
+                }
+            }
+        }
+        EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
+            let mut seelen = SEELEN.lock();
+            if let Some(seelenweg) = seelen.weg_mut() {
+                if seelenweg.contains_app(hwnd) {
+                    seelenweg.set_focused(hwnd);
+                } else if WindowsApi::get_window_text(hwnd) != "Task Switching" {
+                    seelenweg.set_focused(HWND(0));
+                }
+                seelenweg.update_status_if_needed(hwnd)?;
+            }
+        }
+        EVENT_OBJECT_LOCATIONCHANGE => {
+            if let Some(weg) = SEELEN.lock().weg_mut() {
+                weg.update_status_if_needed(hwnd)?;
+            }
+        }
+        _ => {}
+    };
+
+    Ok(())
+}
 
 pub extern "system" fn win_event_hook(
     _h_win_event_hook: HWINEVENTHOOK,
@@ -28,8 +143,7 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    /*
-    if event == EVENT_OBJECT_LOCATIONCHANGE {
+    /* if event == EVENT_OBJECT_LOCATIONCHANGE {
         return;
     }
 
@@ -40,57 +154,7 @@ pub extern "system" fn win_event_hook(
 
     println!("{:?}", winevent); */
 
-    match event {
-        EVENT_OBJECT_HIDE => {
-            let mut seelen = SEELEN.lock();
-            if seelen.weg().contains_app(hwnd) {
-                // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
-                // parent so we can't filter it on open event but these are inmediatly hidden when the ApplicationFrameHost.exe parent
-                // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
-                let parent = WindowsApi::get_parent(hwnd);
-                if parent.0 != 0 {
-                    seelen.weg_mut().replace_hwnd(hwnd, parent);
-                } else {
-                    seelen.weg_mut().remove_hwnd(hwnd);
-                }
-            }
-        }
-        EVENT_OBJECT_DESTROY | EVENT_OBJECT_CLOAKED => {
-            let mut seelen = SEELEN.lock();
-            if seelen.weg().contains_app(hwnd) {
-                seelen.weg_mut().remove_hwnd(hwnd);
-            }
-        }
-        EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE | EVENT_OBJECT_UNCLOAKED => {
-            if SeelenWeg::should_handle_hwnd(hwnd) {
-                let mut seelen = SEELEN.lock();
-                seelen.weg_mut().add_hwnd(hwnd);
-            }
-        }
-        EVENT_OBJECT_NAMECHANGE => {
-            let mut seelen = SEELEN.lock();
-            if seelen.weg().contains_app(hwnd) {
-                seelen.weg_mut().update_app(hwnd);
-            } else if SeelenWeg::should_handle_hwnd(hwnd) {
-                seelen.weg_mut().add_hwnd(hwnd);
-            }
-        }
-        EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
-            let mut seelen = SEELEN.lock();
-            let seelenweg = seelen.weg_mut();
-            if seelenweg.contains_app(hwnd) {
-                seelenweg.set_focused(hwnd);
-            } else if WindowsApi::get_window_text(hwnd) != "Task Switching" {
-                seelenweg.set_focused(HWND(0));
-            }
-            log_if_error(seelenweg.update_status_if_needed(hwnd));
-        }
-        EVENT_OBJECT_LOCATIONCHANGE => {
-            let result = SEELEN.lock().weg_mut().update_status_if_needed(hwnd);
-            log_if_error(result);
-        }
-        _ => {}
-    }
+    log_if_error(process_event(event, hwnd));
 }
 
 pub fn register_hook() -> Result<()> {

@@ -9,6 +9,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 
 use crate::seelen::SEELEN;
 use crate::seelenweg::handler::*;
+use crate::k_killer::handler::*;
 
 fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
     let app = SEELEN.lock().handle().clone();
@@ -111,5 +112,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         enum_opened_apps,
         weg_toggle_window_state,
         weg_request_update_previews,
+
+        // Windows Manager
+        set_window_position,
     ])
 }

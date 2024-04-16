@@ -1,0 +1,21 @@
+*, *:after, *:before {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  box-sizing: border-box;
+  vertical-align: baseline;
+}
+
+#root {
+  padding: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  border: 3px solid red;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}

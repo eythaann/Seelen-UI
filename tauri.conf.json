@@ -60,43 +60,6 @@
       "windows": {
         "installMode": "basicUi"
       }
-    },
-    "cli": {
-      "description": "Seelen Command Line Interface.",
-      "longDescription": "Seelen Command Line Interface.",
-      "beforeHelp": "",
-      "afterHelp": "To read more about Seelen visit https://github.com/eythaann/seelen-ui.git",
-      "args": [
-        {
-          "name": "silent",
-          "short": "s",
-          "description": "Start only background processes."
-        },
-        {
-          "name": "verbose",
-          "short": "v",
-          "description": "Prints some proccess on the console."
-        }
-      ],
-      "subcommands": {
-        "settings": {
-          "description": "Opens the Seelen settings gui."
-        },
-        "roulette": {
-          "description": "Opens the Seelen Pad tool.",
-          "subcommands": {
-            "quit": {
-              "description": "Quits the Seelen Pad tool."
-            }
-          }
-        },
-        "taskbar": {
-          "description": "Opens the Seelen Task Bar."
-        },
-        "finder": {
-          "description": "Opens the Seelen Finder."
-        }
-      }
     }
   }
 }

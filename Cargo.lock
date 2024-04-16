@@ -820,9 +820,9 @@ dependencies = [
 
 [[package]]
 name = "clap"
-version = "4.5.2"
+version = "4.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b230ab84b0ffdf890d5a10abdbc8b83ae1c4918275daea1ab8801f71536b2651"
+checksum = "90bc066a67923782aa8515dbaea16946c5bcc5addbd668bb80af688e53e548a0"
 dependencies = [
  "clap_builder",
 ]
@@ -4097,6 +4097,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 name = "seelen-ui"
 version = "1.0.0"
 dependencies = [
+ "clap",
  "color-eyre",
  "image 0.25.0",
  "itertools",
@@ -4108,7 +4109,6 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-plugin-autostart",
- "tauri-plugin-cli",
  "tauri-plugin-dialog",
  "tauri-plugin-fs",
  "tauri-plugin-log",
@@ -4817,21 +4817,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a11d976fdee482eddf3bc846284fe46c2fea94b202fc6bf846e5db411346b11d"
 dependencies = [
  "auto-launch",
- "log",
- "serde",
- "serde_json",
- "tauri",
- "tauri-plugin",
- "thiserror",
-]
-
-[[package]]
-name = "tauri-plugin-cli"
-version = "2.0.0-beta.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1e8680d100eda2a17387f9ea01221c5d987856c5c25aaab910ff589c72627156"
-dependencies = [
- "clap",
  "log",
  "serde",
  "serde_json",

@@ -8,7 +8,8 @@
     "seelenpad",
     "seelenweg",
     "seelenweg-hitbox",
-    "updater"
+    "updater",
+    "k_killer"
   ],
   "permissions": [
     "path:default",

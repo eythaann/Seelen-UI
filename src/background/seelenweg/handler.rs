@@ -15,7 +15,9 @@ use super::SeelenWeg;
 
 #[command]
 pub fn enum_opened_apps() {
-    SEELEN.lock().weg().update_ui();
+    if let Some(weg) = SEELEN.lock().weg() {
+        weg.update_ui();
+    }
 }
 
 #[derive(Deserialize)]

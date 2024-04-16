@@ -9,3 +9,11 @@ pub fn are_overlaped(rect1: &RECT, rect2: &RECT) -> bool {
     let y_overlap = !(rect1.bottom <= rect2.top || rect2.bottom <= rect1.top);
     x_overlap && y_overlap
 }
+
+pub fn compress_u128(num: u128) -> String {
+    format!("{:x}", num)
+}
+
+pub fn decompress_u128(hex_str: &str) -> u128 {
+    u128::from_str_radix(hex_str, 16).expect("could not decompress u128")
+}
