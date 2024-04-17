@@ -40,12 +40,14 @@ lazy_static! {
         "DesktopWindowXamlSource",
         "SeelenWeg",
         "SeelenWeg Hitbox",
-        "Program Manager"
+        "SeelenWeg Hitbox",
+        "Seelen Window Manager",
+        "Program Manager",
     ]);
     static ref EXE_BLACK_LIST: Vec<&'static str> = Vec::from([
         "msedgewebview2.exe",
         "SearchHost.exe",
-        "StartMenuExperienceHost.exe"
+        "StartMenuExperienceHost.exe",
     ]);
 }
 
@@ -126,27 +128,13 @@ impl SeelenWeg {
         Ok((window, hitbox))
     }
 
-    unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
-        let mut seelen = SEELEN.lock();
-        if let Some(weg) = seelen.weg_mut() {
-            if SeelenWeg::should_handle_hwnd(hwnd) {
-                weg.add_hwnd(hwnd);
-            }
+    pub fn set_active_window(&self, hwnd: HWND) -> Result<()> {
+        if WindowsApi::get_window_text(hwnd) == "Task Switching" {
+            return Ok(());
         }
-        true.into()
-    }
-
-    fn enum_opened_apps(&mut self) {
-        unsafe {
-            EnumWindows(Some(Self::enum_opened_apps_proc), LPARAM(0))
-                .expect("Failed to enum windows");
-        };
-    }
-
-    pub fn set_focused(&self, hwnd: HWND) {
         self.handle
-            .emit_to(Self::TARGET, "set-focused-handle", hwnd.0)
-            .expect("Failed to emit");
+            .emit_to(Self::TARGET, "set-focused-handle", hwnd.0)?;
+        Ok(())
     }
 
     fn load_uwp_apps(&self) -> Result<()> {
@@ -193,7 +181,6 @@ impl SeelenWeg {
         log::trace!("Starting SeelenWeg");
 
         self.auto_hide_taskbar(true);
-        self.enum_opened_apps();
         self.load_uwp_apps()?;
         let (window, hitbox) = self.create_window()?;
         self.hitbox_handle = hitbox.hwnd()?.0;

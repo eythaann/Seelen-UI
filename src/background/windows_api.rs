@@ -2,8 +2,8 @@ use color_eyre::eyre::eyre;
 use windows::{
     core::{PCWSTR, PWSTR},
     Win32::{
-        Foundation::{CloseHandle, HANDLE, HWND, LPARAM, RECT, BOOL},
-        Graphics::Dwm::{DwmGetWindowAttribute, DWMWA_EXTENDED_FRAME_BOUNDS, DWMWINDOWATTRIBUTE},
+        Foundation::{CloseHandle, BOOL, HANDLE, HWND, LPARAM, RECT},
+        Graphics::Dwm::{DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS, DWMWINDOWATTRIBUTE, DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL},
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
             StationsAndDesktops::EnumDesktopsW,
@@ -17,8 +17,7 @@ use windows::{
             Input::KeyboardAndMouse::SetFocus,
             Shell::{IVirtualDesktopManager, IVirtualDesktopManager_Vtbl, VirtualDesktopManager},
             WindowsAndMessaging::{
-                AllowSetForegroundWindow, GetParent, GetWindowRect, GetWindowTextW,
-                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, SetForegroundWindow,
+                AllowSetForegroundWindow, BringWindowToTop, GetParent, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, SetForegroundWindow, SetWindowPos, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE
             },
         },
     },
@@ -84,6 +83,15 @@ impl WindowsApi {
 
     pub fn is_iconic(hwnd: HWND) -> bool {
         unsafe { IsIconic(hwnd) }.into()
+    }
+
+    pub fn is_cloaked(hwnd: HWND) -> Result<bool> {
+        let mut cloaked: u32 = 0;
+        Self::dwm_get_window_attribute(hwnd, DWMWA_CLOAKED, &mut cloaked)?;
+        Ok(matches!(
+            cloaked,
+            DWM_CLOAKED_APP | DWM_CLOAKED_SHELL | DWM_CLOAKED_INHERITED
+        ))
     }
 
     fn open_process(
@@ -195,8 +203,22 @@ impl WindowsApi {
             Ok(manager?)
         }
     }
-}
 
+    pub fn raise_window_to(hwnd: HWND, zorder: HWND) -> Result<()> {
+        unsafe {
+            SetWindowPos(
+                hwnd,
+                zorder,
+                0,
+                0,
+                0,
+                0,
+                SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE,
+            )?;
+        }
+        Ok(())
+    }
+}
 
 unsafe extern "system" fn enum_desktops_proc(hwnd: PCWSTR, _: LPARAM) -> BOOL {
     println!("enum_desktops_proc {:?}", hwnd);

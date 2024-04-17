@@ -4,46 +4,51 @@ import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';
 
-import { addHandleToLayout, removeHandleFromLayout } from '../../layout/app';
+import { NodeImpl, removeHandleFromLayout } from '../../layout/app';
 
-import { BoxSubType, BoxType, Layout } from '../../layout/domain';
+import { Layout, NodeSubtype, NodeType } from '../../layout/domain';
 import { DesktopId, RootState } from './domain';
 
 const Fibonacci: Layout = {
   floating: [],
   structure: {
-    type: BoxType.Horizontal,
-    subtype: BoxSubType.Permanent,
+    type: NodeType.Horizontal,
+    subtype: NodeSubtype.Permanent,
     priority: 1,
     children: [
       {
-        type: BoxType.Reserved,
-        subtype: BoxSubType.Permanent,
+        type: NodeType.Leaf,
+        subtype: NodeSubtype.Permanent,
+        handle: null,
         priority: 1,
       },
       {
-        type: BoxType.Vertical,
-        subtype: BoxSubType.Permanent,
+        type: NodeType.Vertical,
+        subtype: NodeSubtype.Permanent,
         priority: 2,
         children: [
           {
-            type: BoxType.Reserved,
-            subtype: BoxSubType.Permanent,
+            type: NodeType.Leaf,
+            subtype: NodeSubtype.Permanent,
+            handle: null,
             priority: 1,
           },
           {
-            type: BoxType.Horizontal,
-            subtype: BoxSubType.Permanent,
+            type: NodeType.Horizontal,
+            subtype: NodeSubtype.Permanent,
             priority: 2,
             children: [
               {
-                type: BoxType.Reserved,
-                subtype: BoxSubType.Permanent,
+                type: NodeType.Leaf,
+                subtype: NodeSubtype.Permanent,
+                handle: null,
                 priority: 1,
               },
               {
-                type: BoxType.Reserved,
-                subtype: BoxSubType.Permanent,
+                type: NodeType.Fallback,
+                subtype: NodeSubtype.Permanent,
+                active: null,
+                handles: [],
                 priority: 2,
               },
             ],
@@ -55,11 +60,14 @@ const Fibonacci: Layout = {
 };
 
 const initialState: RootState = {
+  version: 0,
   defaultLayout: Fibonacci,
   workspaces: {},
   activeWorkspace: '' as DesktopId,
-  version: 0,
   desktopByHandle: {},
+  activeWindow: 0,
+  lastManagedActivated: null,
+  reservation: null,
   settings: {
     floating: {
       width: 800,
@@ -76,8 +84,6 @@ export const RootSlice = createSlice({
     addWindow: (state, action: PayloadAction<{ desktop_id: DesktopId; hwnd: number }>) => {
       const { desktop_id, hwnd } = action.payload;
 
-      console.log(action.payload);
-
       state.desktopByHandle[hwnd] = desktop_id;
 
       if (!state.workspaces[desktop_id]) {
@@ -88,11 +94,32 @@ export const RootSlice = createSlice({
       }
 
       const workspace = state.workspaces[desktop_id]!;
-      addHandleToLayout(workspace.layout, hwnd);
+      const node = NodeImpl.from(workspace.layout.structure);
 
-      console.log(current(state));
+      let sucessfullyAdded = false;
+      if (state.reservation && state.lastManagedActivated) {
+        sucessfullyAdded = node.concreteReservation(
+          hwnd,
+          state.reservation,
+          state.lastManagedActivated,
+        );
+      } else {
+        sucessfullyAdded = node.addHandle(hwnd);
+      }
 
-      if (workspace.layout.floating.includes(hwnd)) {
+      if (sucessfullyAdded) {
+        state.reservation = null;
+        state.lastManagedActivated = hwnd;
+        state.activeWindow = hwnd;
+      } else {
+        console.warn('Layout is full, can\'t add new window');
+        invoke('remove_hwnd', { hwnd });
+      }
+
+      /* console.warn('Layout is full, can\'t add new window');
+      invoke('remove_hwnd', { hwnd }); */
+
+      /* if (workspace.layout.floating.includes(hwnd)) {
         invoke('set_window_position', {
           hwnd,
           rect: {
@@ -102,7 +129,7 @@ export const RootSlice = createSlice({
             bottom: toPhysicalPixels(state.settings.floating.height),
           },
         });
-      }
+      } */
     },
     removeWindow: (state, action: PayloadAction<number>) => {
       const hwnd = action.payload;

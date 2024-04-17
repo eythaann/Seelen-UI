@@ -45,8 +45,7 @@
     "longDescription": "",
     "resources": [
       "static/*",
-      "komorebi-wm.exe",
-      "komorebic.exe"
+      "seelen.cmd"
     ],
     "shortDescription": "",
     "licenseFile": "LICENSE"

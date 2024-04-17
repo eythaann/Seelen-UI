@@ -1,3 +1,4 @@
+pub mod cli;
 pub mod handler;
 
 use std::{thread::sleep, time::Duration};
@@ -5,10 +6,10 @@ use std::{thread::sleep, time::Duration};
 use color_eyre::eyre::eyre;
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
-use windows::Win32::Foundation::HWND;
+use windows::Win32::{Foundation::{HWND, LPARAM, BOOL}, UI::WindowsAndMessaging::{EnumWindows, HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST}};
 
 use crate::{
-    error_handler::Result, seelenweg::SeelenWeg, utils::compress_u128, windows_api::WindowsApi,
+    error_handler::Result, seelen::SEELEN, seelenweg::SeelenWeg, utils::compress_u128, windows_api::WindowsApi
 };
 
 #[derive(Serialize, Clone)]
@@ -29,6 +30,7 @@ impl WindowManager {
     const TARGET: &'static str = "k_killer";
 
     pub fn new(handle: AppHandle<Wry>) -> Self {
+        log::trace!("Creating tiling window manager");
         Self {
             window: Self::create_window(&handle).expect("Failed to create Manager Container"),
             handle,
@@ -57,17 +59,19 @@ impl WindowManager {
         .transparent(true)
         .shadow(false)
         .skip_taskbar(true)
-        .always_on_bottom(true)
-        /* .always_on_top(true) */
         .build()?;
 
-        /* window.set_ignore_cursor_events(true)?; */
+        window.set_ignore_cursor_events(true)?;
 
         Ok(window)
     }
 
     pub fn should_handle(hwnd: HWND) -> bool {
-        SeelenWeg::should_handle_hwnd(hwnd) && !WindowsApi::is_iconic(hwnd)
+        SeelenWeg::should_handle_hwnd(hwnd) 
+        && !WindowsApi::is_iconic(hwnd)
+        && !WindowsApi::is_cloaked(hwnd).unwrap_or(false)
+        // Without admin some apps does not return the exe path so this should be unmanaged
+        && WindowsApi::exe_path(hwnd).is_ok()
     }
 
     pub fn add_hwnd(&mut self, hwnd: HWND) -> Result<()> {
@@ -76,23 +80,22 @@ impl WindowManager {
         }
 
         let manager = WindowsApi::get_virtual_desktop_manager()?;
-        unsafe {
-            let mut desktop_id = manager.GetWindowDesktopId(hwnd)?.to_u128();
-            let mut attempt = 0;
-            while desktop_id == 0 && attempt < 10 {
-                sleep(Duration::from_millis(30));
-                desktop_id = manager.GetWindowDesktopId(hwnd)?.to_u128();
-                attempt += 1;
+        let mut desktop_id = 0;
+        let mut attempt = 0;
+        while desktop_id == 0 && attempt < 10 {
+            sleep(Duration::from_millis(30));
+            match unsafe { manager.GetWindowDesktopId(hwnd) } {
+                Ok(desktop) => desktop_id = desktop.to_u128(),
+                Err(_) => attempt += 1,
             }
-            
-
-            if attempt == 10 && desktop_id == 0 {
-                return Err(eyre!("Failed to get desktop id for: {hwnd:?}").into());
-            }
-
-            self.current_virtual_desktop = compress_u128(desktop_id);
-            self.set_active_workspace(&self.current_virtual_desktop)?;
         }
+
+        if desktop_id == 0 {
+            return Err(eyre!("Failed to get desktop id for: {hwnd:?}").into());
+        }
+
+        self.current_virtual_desktop = compress_u128(desktop_id);
+        self.set_active_workspace(&self.current_virtual_desktop)?;
 
         self.hwnds.push(hwnd.0);
         self.handle.emit_to(
@@ -104,6 +107,11 @@ impl WindowManager {
             },
         )?;
         Ok(())
+    }
+
+    pub fn remove_hwnd_no_emit(&mut self, hwnd: HWND) {
+        log::trace!("Layout is full, removing: {}", hwnd.0);
+        self.hwnds.retain(|&x| x != hwnd.0);
     }
 
     pub fn remove_hwnd(&mut self, hwnd: HWND) -> Result<()> {
@@ -122,4 +130,28 @@ impl WindowManager {
             .emit_to(Self::TARGET, "set-active-workspace", id)?;
         Ok(())
     }
+
+    pub fn set_active_window(&self, hwnd: HWND) -> Result<()> {
+        if WindowsApi::get_window_text(hwnd) == "Task Switching" {
+            return Ok(());
+        }
+
+        let hwnd = match self.contains(hwnd) {
+            true => {
+                self.window.set_always_on_bottom(false)?;
+                self.window.set_always_on_top(true)?;
+                hwnd
+            },
+            false => {
+                self.window.set_always_on_top(false)?;
+                self.window.set_always_on_bottom(true)?;
+                HWND(0) // avoid rerenders on multiple unmanaged focus
+            },
+        };
+ 
+        self.handle
+            .emit_to(Self::TARGET, "set-active-window", hwnd.0)?;
+        Ok(())
+    }
+
 }

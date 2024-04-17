@@ -1,5 +1,11 @@
 import * as Logger from '@tauri-apps/plugin-log';
 
+declare global {
+  interface Console {
+    throw(...params: any[]): never;
+  }
+}
+
 export function wrapConsole() {
   const WebConsole = {
     info: console.info,
@@ -20,6 +26,11 @@ export function wrapConsole() {
   console.error = (...params: any[]) => {
     WebConsole.error(...params);
     Logger.error(StrintifyParams(params));
+  };
+
+  console.throw = (...params: any[]) => {
+    console.error(...params);
+    throw new Error();
   };
 
   console.warn = (...params: any[]) => {

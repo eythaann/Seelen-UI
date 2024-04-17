@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/eythaann/Komorebi-UI/master/documentation/theme.schema.json",
+  "$schema": "https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/theme.schema.json",
   "info": {
     "displayName": "Default",
     "author": "eythaann",

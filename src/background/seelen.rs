@@ -7,7 +7,7 @@ use tauri_plugin_shell::ShellExt;
 
 use crate::{
     error_handler::{log_if_error, Result},
-    hook::register_hook,
+    hook::register_hook_and_enum_windows,
     k_killer::WindowManager,
     seelen_bar::SeelenBar,
     seelen_shell::SeelenShell,
@@ -118,13 +118,13 @@ impl Seelen {
 
     pub fn start(&mut self) {
         self.ensure_folders().expect("Fail on ensuring folders");
-        register_hook().expect("Failed to register hook");
-
         self.start_ahk_shortcuts();
 
         if let Some(weg) = self.weg_mut() {
             log_if_error(weg.start());
         }
+
+        register_hook_and_enum_windows().expect("Failed to register hook");
     }
 
     pub fn stop(&self) {

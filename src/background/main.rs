@@ -55,8 +55,12 @@ fn main() -> Result<()> {
                 SEELEN.force_unlock();
             }
             handle_tray_icon(app)?;
-            handle_cli_events(app.handle(), &matches)?;
             seelen.create_update_modal()?;
+
+            if !matches.get_flag("silent") {
+                seelen.show_settings()?;
+            }
+
             seelen.start();
             Ok(())
         })

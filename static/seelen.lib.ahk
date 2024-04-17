@@ -17,3 +17,17 @@ ExitIfDisabled() {
     settings := ""
   }
 }
+
+
+global seelen := "Seelen UI.exe"
+Reserve(reservation) {
+  RunWait(seelen " wm reserve " reservation, , "Hide")
+}
+
+CancelReservation() {
+  RunWait(seelen " wm cancel-reservation", , "Hide")
+}
+
+WMDebug() {
+  RunWait(seelen " wm debug", , "Hide")
+}

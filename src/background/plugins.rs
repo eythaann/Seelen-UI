@@ -19,8 +19,7 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
             Some(vec!["--silent"]),
         ))
         .plugin(tauri_plugin_single_instance::init(
-            |app: &AppHandle<Wry>, argv: Vec<String>, cwd: String| -> () {
-                log::trace!("Instance Detected. Executing with: {argv:?}, from: {cwd}");
+            |app: &AppHandle<Wry>, argv: Vec<String>, _cwd: String| -> () {
                 let command = SEELEN_COMMAND_LINE.lock().clone();
                 log_if_error(handle_cli_events(app, &command.get_matches_from(argv)));
             },

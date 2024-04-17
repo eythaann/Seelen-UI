@@ -1,11 +1,11 @@
 use std::time::Duration;
 
 use windows::Win32::{
-    Foundation::HWND,
+    Foundation::{BOOL, HWND, LPARAM},
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
+            DispatchMessageW, EnumWindows, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
             EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
             EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
             EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND,
@@ -111,12 +111,14 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
         EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
             let mut seelen = SEELEN.lock();
             if let Some(seelenweg) = seelen.weg_mut() {
-                if seelenweg.contains_app(hwnd) {
-                    seelenweg.set_focused(hwnd);
-                } else if WindowsApi::get_window_text(hwnd) != "Task Switching" {
-                    seelenweg.set_focused(HWND(0));
+                match seelenweg.contains_app(hwnd) {
+                    true => seelenweg.set_active_window(hwnd)?,
+                    false => seelenweg.set_active_window(HWND(0))?, // avoid rerenders on multiple unmanaged focus
                 }
                 seelenweg.update_status_if_needed(hwnd)?;
+            }
+            if let Some(wm) = seelen.wm_mut() {
+                wm.set_active_window(hwnd)?;
             }
         }
         EVENT_OBJECT_LOCATIONCHANGE => {
@@ -157,8 +159,28 @@ pub extern "system" fn win_event_hook(
     log_if_error(process_event(event, hwnd));
 }
 
-pub fn register_hook() -> Result<()> {
+unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
+    let mut seelen = SEELEN.lock();
+    if let Some(weg) = seelen.weg_mut() {
+        if SeelenWeg::should_handle_hwnd(hwnd) {
+            weg.add_hwnd(hwnd);
+        }
+    }
+
+    if let Some(manager) = seelen.wm_mut() {
+        if WindowManager::should_handle(hwnd) {
+            log_if_error(manager.add_hwnd(hwnd));
+        }
+    }
+    true.into()
+}
+
+pub fn register_hook_and_enum_windows() -> Result<()> {
     std::thread::spawn(move || {
+        unsafe {
+            log_if_error(EnumWindows(Some(enum_opened_apps_proc), LPARAM(0)));
+        };
+
         unsafe { SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0) };
 
         let mut msg: MSG = MSG::default();

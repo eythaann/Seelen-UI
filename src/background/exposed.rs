@@ -112,8 +112,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         enum_opened_apps,
         weg_toggle_window_state,
         weg_request_update_previews,
-
         // Windows Manager
         set_window_position,
+        remove_hwnd
     ])
 }

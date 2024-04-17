@@ -44,7 +44,7 @@ image = "0.25.0"
 win-screenshot = "4.0.8"
 widestring = "1.0.2"
 itertools = "0.12.1"
-clap = "4.5.4"
+clap = { version = "4.5.4", features = ["derive", "string"] }
 
 [dependencies.windows]
 version = "0.54.0"

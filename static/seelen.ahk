@@ -9,7 +9,6 @@
 #SingleInstance Force
 #NoTrayIcon
 
-#Include komorebic.lib.ahk
 #Include seelen.lib.ahk
 
 ExitIfDisabled()
@@ -20,6 +19,19 @@ SetWorkingDir(A_ScriptDir . "/..")
 ; Open Seelen Pad
 ; #Enter:: RunWait("`"Seelen UI.exe`" roulette")
 
+~Esc::{
+  CancelReservation()
+}
+
+!i::Reserve("top")
+!k::Reserve("bottom")
+!j::Reserve("left")
+!l::Reserve("right")
+!o::Reserve("stack")
+
+^+w::WMDebug()
+
+/* 
 ; Focus windows
 !a:: Focus("left")
 !s:: Focus("down")
@@ -94,4 +106,4 @@ SetWorkingDir(A_ScriptDir . "/..")
 #+6:: SendToWorkspace(5)
 #+7:: SendToWorkspace(6)
 #+8:: SendToWorkspace(7)
-#+9:: SendToWorkspace(8)
+#+9:: SendToWorkspace(8) */

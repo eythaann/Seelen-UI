@@ -2,12 +2,12 @@ use serde::Deserialize;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{
-        SetWindowPos, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-        SWP_NOCOPYBITS, SWP_NOOWNERZORDER, SWP_NOSENDCHANGING, SWP_NOZORDER,
+        SetWindowPos, HWND_BOTTOM, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS,
+        SWP_NOOWNERZORDER, SWP_NOSENDCHANGING, SWP_NOZORDER,
     },
 };
 
-use crate::{error_handler::log_if_error, windows_api::WindowsApi};
+use crate::{error_handler::log_if_error, seelen::SEELEN, windows_api::WindowsApi};
 
 #[derive(Deserialize, Debug)]
 pub struct Rect {
@@ -44,4 +44,11 @@ pub fn set_window_position(hwnd: isize, rect: Rect) {
     };
 
     log_if_error(result);
+}
+
+#[tauri::command]
+pub fn remove_hwnd(hwnd: isize) {
+    if let Some(wm) = SEELEN.lock().wm_mut() {
+        wm.remove_hwnd_no_emit(HWND(hwnd))
+    }
 }
