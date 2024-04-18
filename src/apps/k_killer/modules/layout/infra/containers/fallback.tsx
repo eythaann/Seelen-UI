@@ -18,15 +18,18 @@ interface Props {
 
 export function FallbackContainer({ node }: Props) {
   return (
-    <div className={cx(cs.container, cs.stack)}>
+    <div
+      style={{
+        flexGrow: node.growFactor,
+      }}
+      className={cx(cs.container, cs.stack)}
+    >
       <div className={cs.stackedBar}>
         {node.handles.map((handle) => (
           <div className={cs.stackedItem}>{handle}</div>
         ))}
       </div>
-      {node.handles.map((handle) => (
-        <LeafContainer key={handle} hwnd={handle} />
-      ))}
+      {node.active && <LeafContainer hwnd={node.active} />}
     </div>
   );
 }

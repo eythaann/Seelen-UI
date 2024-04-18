@@ -1,3 +1,5 @@
+import { HWND } from '../shared/utils/domain';
+
 export enum NodeType {
   Vertical = 'Vertical',
   Horizontal = 'Horizontal',
@@ -19,28 +21,34 @@ export enum Reservation {
   Stack = 'Stack',
 }
 
+export enum Sizing {
+  Increase = 'Increase',
+  Decrease = 'Decrease',
+}
+
 interface INode {
   type: NodeType;
   subtype: NodeSubtype;
   priority: number;
+  growFactor: number;
 }
 
 export interface StackNode extends INode {
   type: NodeType.Stack;
-  active: number | null;
-  handles: number[];
+  active: HWND | null;
+  handles: HWND[];
 }
 
 export interface FallbackNode extends INode {
   type: NodeType.Fallback;
   subtype: NodeSubtype.Permanent;
-  active: number | null;
-  handles: number[];
+  active: HWND | null;
+  handles: HWND[];
 }
 
 export interface LeafNode extends INode {
   type: NodeType.Leaf;
-  handle: number | null;
+  handle: HWND | null;
 }
 
 export interface BranchNode extends INode {
@@ -51,7 +59,9 @@ export interface BranchNode extends INode {
 export type Node = LeafNode | FallbackNode | BranchNode | StackNode;
 
 export type Layout = {
-  floating: number[];
+  floating: HWND[];
   /** Layout can be monocontainer: FallbackNode or a Tree: BranchNode */
   structure: FallbackNode | BranchNode;
 };
+
+export const MAX_ALLOWED_ELEMENTS_PER_ROW = 10;

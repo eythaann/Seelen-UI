@@ -6,10 +6,10 @@ use std::{thread::sleep, time::Duration};
 use color_eyre::eyre::eyre;
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
-use windows::Win32::{Foundation::{HWND, LPARAM, BOOL}, UI::WindowsAndMessaging::{EnumWindows, HWND_BOTTOM, HWND_NOTOPMOST, HWND_TOP, HWND_TOPMOST}};
+use windows::Win32::Foundation::HWND;
 
 use crate::{
-    error_handler::Result, seelen::SEELEN, seelenweg::SeelenWeg, utils::compress_u128, windows_api::WindowsApi
+    error_handler::Result, seelenweg::SeelenWeg, utils::compress_u128, windows_api::WindowsApi
 };
 
 #[derive(Serialize, Clone)]

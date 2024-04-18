@@ -1,5 +1,3 @@
-import { current } from '@reduxjs/toolkit';
-import { invoke } from '@tauri-apps/api/core';
 import { clone } from 'lodash';
 
 import { HWND } from '../shared/utils/domain';
@@ -12,6 +10,8 @@ import {
   NodeSubtype,
   NodeType,
   Reservation,
+  Sizing,
+  StackNode,
 } from './domain';
 
 export function removeHandleFromLayout(layout: Layout, handle: number): void {
@@ -20,42 +20,9 @@ export function removeHandleFromLayout(layout: Layout, handle: number): void {
     layout.floating.splice(floatingIndex, 1);
     return;
   }
-  if (removeHandleFromContainer(layout.structure, handle)) {
+  if (NodeImpl.from(layout.structure).removeHandle(handle)) {
     reIndexContainer(layout.structure);
   }
-}
-
-function removeHandleFromContainer(container: Node, handle: number): boolean {
-  if (container.type === NodeType.Fallback) {
-    const index = container.handles.indexOf(handle);
-    if (index !== -1) {
-      container.handles.splice(index, 1);
-      if (handle === container.active) {
-        container.active = container.handles[0] || null;
-      }
-      return true;
-    }
-    return false;
-  }
-
-  if (container.type === NodeType.Leaf && container.handle === handle) {
-    container.handle = null;
-    return true;
-  }
-
-  if (container.type === NodeType.Horizontal || container.type === NodeType.Vertical) {
-    for (let index = 0; index < container.children.length; index++) {
-      const child = container.children[index]!;
-      if (removeHandleFromContainer(child, handle)) {
-        /*         if (isEmptyContainer(child) && child.subtype === BoxSubType.Temporal) {
-          container.children.splice(index, 1);
-        } */
-        return true;
-      }
-    }
-  }
-
-  return false;
 }
 
 function clearContainer(container: Node): number[] {
@@ -114,6 +81,7 @@ export class NodeImpl<T extends Node> {
       type: NodeType.Leaf,
       subtype: NodeSubtype.Temporal,
       priority: insertAfter + 1,
+      growFactor: 1,
       handle,
     };
   }
@@ -139,8 +107,16 @@ export class NodeImpl<T extends Node> {
     return this.ref.type === NodeType.Fallback;
   }
 
+  isStack(): this is NodeImpl<StackNode> {
+    return this.ref.type === NodeType.Stack;
+  }
+
   isBranch(): this is NodeImpl<BranchNode> {
     return this.ref.type === NodeType.Horizontal || this.ref.type === NodeType.Vertical;
+  }
+
+  isTemporal(): this is NodeImpl<T & { subtype: NodeSubtype.Temporal }> {
+    return this.ref.subtype === NodeSubtype.Temporal;
   }
 
   isEmpty(): boolean {
@@ -183,10 +159,8 @@ export class NodeImpl<T extends Node> {
     }
 
     if (this.isFallback()) {
-      let len = this.ref.handles.push(handle);
-      if (len === 1) {
-        this.ref.active = handle;
-      }
+      this.ref.handles.push(handle);
+      this.ref.active = handle;
       return true;
     }
 
@@ -202,6 +176,39 @@ export class NodeImpl<T extends Node> {
     }
 
     this.unreachable();
+  }
+
+  removeHandle(handle: number): boolean {
+    if (this.isFallback()) {
+      const index = this.ref.handles.indexOf(handle);
+      if (index !== -1) {
+        this.ref.handles.splice(index, 1);
+        if (handle === this.ref.active) {
+          this.ref.active = this.ref.handles[0] || null;
+        }
+        return true;
+      }
+      return false;
+    }
+
+    if (this.isLeaf() && this.ref.handle === handle) {
+      this.ref.handle = null;
+      return true;
+    }
+
+    if (this.isBranch()) {
+      for (let index = 0; index < this.ref.children.length; index++) {
+        const child = NodeImpl.from(this.ref.children[index]!);
+        if (child.removeHandle(handle)) {
+          if (child.isTemporal() && child.isEmpty() && (child.isLeaf() || child.isStack())) {
+            this.ref.children.splice(index, 1);
+          }
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   mutateToStacked(): NodeImpl<FallbackNode> {
@@ -313,5 +320,95 @@ export class NodeImpl<T extends Node> {
     }
 
     this.unreachable();
+  }
+
+  trace(to: Node, result: Node[] = []): Node[] {
+    if (this.isLeaf() && this.ref === to) {
+      result.push(this.ref);
+    }
+
+    if (this.isFallback() && this.ref === to) {
+      result.push(this.ref);
+    }
+
+    if (this.isBranch()) {
+      for (const child of this.ref.children) {
+        const traced = NodeImpl.from(child).trace(to);
+        if (traced.length) {
+          result.push(this.ref, ...traced);
+        }
+      }
+    }
+
+    return result;
+  }
+
+  resetGrowFactor() {
+    this.ref.growFactor = 1;
+    if (this.isBranch()) {
+      for (const child of this.ref.children) {
+        NodeImpl.from(child).resetGrowFactor();
+      }
+    }
+  }
+
+  reIndexingGrowFactor() {
+    if (this.isBranch()) {
+      const noEmptyChildren = this.ref.children.filter((child) => !NodeImpl.from(child).isEmpty());
+
+      const min = noEmptyChildren.reduce((acc, child) => Math.min(acc, child.growFactor), Infinity);
+      const scaleFactor = 1 / min;
+
+      noEmptyChildren.forEach((child) => {
+        child.growFactor = Number((child.growFactor * scaleFactor).toFixed(2));
+      });
+
+      for (const child of this.ref.children) {
+        NodeImpl.from(child).reIndexingGrowFactor();
+      }
+    }
+  }
+
+  updateGrowFactor(handle: HWND, axis: 'x' | 'y', action: Sizing) {
+    const result = this.getNodeContaining(handle);
+    if (!result) {
+      console.error('Could not find node containing handle', handle);
+      return;
+    }
+
+    const trace = this.trace(result);
+
+    const idx = trace.findLastIndex((_node) => {
+      const node = NodeImpl.from(_node);
+      if (!node.isBranch()) {
+        return false;
+      }
+
+      if (node.ref.children.filter((child) => !NodeImpl.from(child).isEmpty()).length < 2) {
+        return false;
+      }
+
+      return axis === 'x' ? node.ref.type === NodeType.Horizontal : node.ref.type === NodeType.Vertical;
+    });
+
+    if (idx === -1) {
+      console.error('Can\'t resize root');
+      return;
+    }
+
+    const parent = trace[idx] as BranchNode;
+    const nodeToResize = trace[idx + 1]!;
+
+    const noEmptyChildren = parent.children.filter((child) => !NodeImpl.from(child).isEmpty());
+
+    const total = noEmptyChildren.reduce((acc, child) => acc + child.growFactor, 0);
+    const delta = 0.1;
+
+    nodeToResize.growFactor =
+      action === Sizing.Increase
+        ? nodeToResize.growFactor + total * delta
+        : nodeToResize.growFactor - total * delta;
+
+    this.reIndexingGrowFactor();
   }
 }

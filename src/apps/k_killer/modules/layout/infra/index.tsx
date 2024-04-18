@@ -22,12 +22,17 @@ export function Container({ container }: { container: Node }) {
   }
 
   if (node.isLeaf() && node.inner.handle) {
-    return <LeafContainer hwnd={node.inner.handle} />;
+    return <LeafContainer hwnd={node.inner.handle} growFactor={node.inner.growFactor} />;
   }
 
   if (node.isBranch()) {
     return (
-      <div className={cx(cs.container, cs[container.type])}>
+      <div
+        style={{
+          flexGrow: node.inner.growFactor,
+        }}
+        className={cx(cs.container, cs[container.type])}
+      >
         {node.inner.children.map((child) => (
           <Container key={child.priority} container={child} />
         ))}

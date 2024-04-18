@@ -1,11 +1,11 @@
 use std::env::args_os;
 use std::sync::Arc;
 
-use clap::{Arg, ArgAction, Command, arg};
+use clap::{Arg, ArgAction, Command};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use tauri::AppHandle;
 use tauri::Wry;
-use tauri::{AppHandle, Manager};
 
 use crate::error_handler::Result;
 use crate::k_killer::WindowManager;
@@ -56,14 +56,14 @@ pub fn handle_cli_info(matches: &clap::ArgMatches) -> ShouldInitApp {
         return false;
     }
 
-    if args_os().any(|arg|arg == "help" || arg == "--help" || arg == "-h") {
+    if args_os().any(|arg| arg == "help" || arg == "--help" || arg == "-h") {
         return false;
     }
 
     true
 }
 
-pub fn handle_cli_events(app: &AppHandle<Wry>, matches: &clap::ArgMatches) -> Result<()> {
+pub fn handle_cli_events(_app: &AppHandle<Wry>, matches: &clap::ArgMatches) -> Result<()> {
     if let Some((subcommand, matches)) = matches.subcommand() {
         match subcommand {
             "settings" => {

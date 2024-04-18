@@ -31,6 +31,13 @@ SetWorkingDir(A_ScriptDir . "/..")
 
 ^+w::WMDebug()
 
+!=::updateWindowWidth("increase")
+!-::updateWindowWidth("decrease")
+!+=::updateWindowHeight("increase")
+!+-::updateWindowHeight("decrease")
+
+!0::resetWorkspaceSize()
+
 /* 
 ; Focus windows
 !a:: Focus("left")

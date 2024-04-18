@@ -2,7 +2,7 @@ use serde::Deserialize;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{
-        SetWindowPos, HWND_BOTTOM, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS,
+        SetWindowPos, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS,
         SWP_NOOWNERZORDER, SWP_NOSENDCHANGING, SWP_NOZORDER,
     },
 };

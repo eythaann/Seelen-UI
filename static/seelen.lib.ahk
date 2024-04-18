@@ -31,3 +31,15 @@ CancelReservation() {
 WMDebug() {
   RunWait(seelen " wm debug", , "Hide")
 }
+
+updateWindowWidth(action) {
+  RunWait(seelen " wm width " action, , "Hide")
+}
+
+updateWindowHeight(action) {
+  RunWait(seelen " wm height " action, , "Hide")
+}
+
+resetWorkspaceSize() {
+  RunWait(seelen " wm reset-workspace-size", , "Hide")
+}

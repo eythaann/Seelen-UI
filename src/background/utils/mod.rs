@@ -14,9 +14,9 @@ pub fn compress_u128(num: u128) -> String {
     format!("{:x}", num)
 }
 
-pub fn decompress_u128(hex_str: &str) -> u128 {
+/* pub fn decompress_u128(hex_str: &str) -> u128 {
     u128::from_str_radix(hex_str, 16).expect("could not decompress u128")
-}
+} */
 
 pub fn pascal_to_kebab(input: &str) -> String {
     let mut kebab_case = String::new();

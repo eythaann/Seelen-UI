@@ -11,9 +11,10 @@ import cs from '../index.module.css';
 
 interface Props {
   hwnd: number;
+  growFactor?: number;
 }
 
-export function LeafContainer({ hwnd }: Props) {
+export function LeafContainer({ hwnd, growFactor }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const reservation = useSelector(Selectors.reservation);
   const activeWindow = useSelector(Selectors.activeWindow);
@@ -40,6 +41,9 @@ export function LeafContainer({ hwnd }: Props) {
   return (
     <div
       ref={ref}
+      style={{
+        flexGrow: growFactor,
+      }}
       className={cx(cs.container, cs.leaf, {
         [cs.focused!]: isFocused,
       })}

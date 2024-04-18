@@ -1,12 +1,11 @@
-import { toPhysicalPixels } from '../../../../utils';
 import { StateBuilder } from '../../../../utils/StateBuilder';
-import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';
 
 import { NodeImpl, removeHandleFromLayout } from '../../layout/app';
 
-import { Layout, NodeSubtype, NodeType } from '../../layout/domain';
+import { Layout, NodeSubtype, NodeType, Sizing } from '../../layout/domain';
 import { DesktopId, RootState } from './domain';
 
 const Fibonacci: Layout = {
@@ -15,33 +14,39 @@ const Fibonacci: Layout = {
     type: NodeType.Horizontal,
     subtype: NodeSubtype.Permanent,
     priority: 1,
+    growFactor: 1,
     children: [
       {
         type: NodeType.Leaf,
         subtype: NodeSubtype.Permanent,
         handle: null,
+        growFactor: 1,
         priority: 1,
       },
       {
         type: NodeType.Vertical,
         subtype: NodeSubtype.Permanent,
-        priority: 2,
+        growFactor: 1,
+        priority: 3,
         children: [
           {
             type: NodeType.Leaf,
             subtype: NodeSubtype.Permanent,
             handle: null,
+            growFactor: 1,
             priority: 1,
           },
           {
             type: NodeType.Horizontal,
             subtype: NodeSubtype.Permanent,
+            growFactor: 1,
             priority: 2,
             children: [
               {
                 type: NodeType.Leaf,
                 subtype: NodeSubtype.Permanent,
                 handle: null,
+                growFactor: 1,
                 priority: 1,
               },
               {
@@ -49,6 +54,7 @@ const Fibonacci: Layout = {
                 subtype: NodeSubtype.Permanent,
                 active: null,
                 handles: [],
+                growFactor: 1,
                 priority: 2,
               },
             ],
@@ -115,21 +121,6 @@ export const RootSlice = createSlice({
         console.warn('Layout is full, can\'t add new window');
         invoke('remove_hwnd', { hwnd });
       }
-
-      /* console.warn('Layout is full, can\'t add new window');
-      invoke('remove_hwnd', { hwnd }); */
-
-      /* if (workspace.layout.floating.includes(hwnd)) {
-        invoke('set_window_position', {
-          hwnd,
-          rect: {
-            top: toPhysicalPixels(window.screen.height / 2 - state.settings.floating.height / 2),
-            left: toPhysicalPixels(window.screen.width / 2 - state.settings.floating.width / 2),
-            right: toPhysicalPixels(state.settings.floating.width),
-            bottom: toPhysicalPixels(state.settings.floating.height),
-          },
-        });
-      } */
     },
     removeWindow: (state, action: PayloadAction<number>) => {
       const hwnd = action.payload;
@@ -152,6 +143,17 @@ export const RootSlice = createSlice({
           layout: cloneDeep(state.defaultLayout),
         };
       }
+    },
+    updateSizing(state, action: PayloadAction<{ axis: 'x' | 'y'; sizing: Sizing }>) {
+      const { axis, sizing } = action.payload;
+      if (state.lastManagedActivated) {
+        const node = NodeImpl.from(state.workspaces[state.activeWorkspace]!.layout.structure);
+        node.updateGrowFactor(state.lastManagedActivated, axis, sizing);
+      }
+    },
+    resetSizing(state) {
+      const node = NodeImpl.from(state.workspaces[state.activeWorkspace]!.layout.structure);
+      node.resetGrowFactor();
     },
   },
 });

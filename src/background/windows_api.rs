@@ -1,23 +1,24 @@
 use color_eyre::eyre::eyre;
 use windows::{
-    core::{PCWSTR, PWSTR},
+    core::PWSTR,
     Win32::{
-        Foundation::{CloseHandle, BOOL, HANDLE, HWND, LPARAM, RECT},
-        Graphics::Dwm::{DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS, DWMWINDOWATTRIBUTE, DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL},
+        Foundation::{CloseHandle, HANDLE, HWND, RECT},
+        Graphics::Dwm::{
+            DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS, DWMWINDOWATTRIBUTE,
+            DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
+        },
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
-            StationsAndDesktops::EnumDesktopsW,
             Threading::{
-                AttachThreadInput, GetCurrentProcessId, GetCurrentThreadId, OpenProcess,
-                QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
+                OpenProcess, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
                 PROCESS_QUERY_INFORMATION,
             },
         },
         UI::{
-            Input::KeyboardAndMouse::SetFocus,
-            Shell::{IVirtualDesktopManager, IVirtualDesktopManager_Vtbl, VirtualDesktopManager},
+            Shell::{IVirtualDesktopManager, VirtualDesktopManager},
             WindowsAndMessaging::{
-                AllowSetForegroundWindow, BringWindowToTop, GetParent, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, SetForegroundWindow, SetWindowPos, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE
+                GetParent, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
+                IsWindow, IsWindowVisible,
             },
         },
     },
@@ -37,40 +38,6 @@ impl WindowsApi {
         };
 
         (process_id, thread_id)
-    }
-
-    pub fn current_thread_id() -> u32 {
-        unsafe { GetCurrentThreadId() }
-    }
-
-    pub fn attach_thread_input(thread_id: u32, target_thread_id: u32, attach: bool) -> Result<()> {
-        unsafe {
-            AttachThreadInput(thread_id, target_thread_id, attach);
-        }
-        Ok(())
-    }
-
-    pub fn allow_set_foreground_window(process_id: u32) -> Result<()> {
-        unsafe {
-            AllowSetForegroundWindow(process_id)?;
-        }
-        Ok(())
-    }
-
-    pub fn set_foreground_window(hwnd: HWND) -> Result<()> {
-        unsafe {
-            SetForegroundWindow(hwnd);
-        }
-        Ok(())
-    }
-
-    pub fn set_focus(hwnd: HWND) -> Result<()> {
-        unsafe { SetFocus(hwnd) };
-        Ok(())
-    }
-
-    pub fn current_process_id() -> u32 {
-        unsafe { GetCurrentProcessId() }
     }
 
     pub fn is_window(hwnd: HWND) -> bool {
@@ -163,7 +130,7 @@ impl WindowsApi {
                 attribute,
                 (value as *mut T).cast(),
                 u32::try_from(std::mem::size_of::<T>()).unwrap(),
-            );
+            )?;
         }
 
         Ok(())
@@ -174,7 +141,7 @@ impl WindowsApi {
         if Self::dwm_get_window_attribute(hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, &mut rect).is_ok() {
             rect
         } else {
-            unsafe { GetWindowRect(hwnd, &mut rect) };
+            unsafe { GetWindowRect(hwnd, &mut rect).ok() };
             rect
         }
     }
@@ -183,7 +150,7 @@ impl WindowsApi {
         let window_rect = Self::get_window_rect(hwnd);
 
         let mut shadow_rect = Default::default();
-        unsafe { GetWindowRect(hwnd, &mut shadow_rect) };
+        unsafe { GetWindowRect(hwnd, &mut shadow_rect)? };
 
         Ok(RECT {
             left: shadow_rect.left - window_rect.left,
@@ -204,7 +171,7 @@ impl WindowsApi {
         }
     }
 
-    pub fn raise_window_to(hwnd: HWND, zorder: HWND) -> Result<()> {
+    /*     pub fn raise_window_to(hwnd: HWND, zorder: HWND) -> Result<()> {
         unsafe {
             SetWindowPos(
                 hwnd,
@@ -217,17 +184,17 @@ impl WindowsApi {
             )?;
         }
         Ok(())
-    }
+    } */
 }
 
-unsafe extern "system" fn enum_desktops_proc(hwnd: PCWSTR, _: LPARAM) -> BOOL {
+/* unsafe extern "system" fn enum_desktops_proc(hwnd: PCWSTR, _: LPARAM) -> BOOL {
     println!("enum_desktops_proc {:?}", hwnd);
     true.into()
-}
-pub fn switch_desktop(idx: u32) {
-    unsafe {
+} */
+pub fn switch_desktop(_idx: u32) {
+    /*  TODO unsafe {
         EnumDesktopsW(None, Some(enum_desktops_proc), LPARAM(0));
-    }
+    } */
 }
 
 /*

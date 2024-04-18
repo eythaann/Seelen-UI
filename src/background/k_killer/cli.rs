@@ -72,7 +72,15 @@ pub enum AllowedReservations {
     Stack
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
+pub enum Sizing {
+    Increase,
+    Decrease,
+}
+
 get_subcommands![
+    /** Open Dev Tools (only works if the app is running in dev mode) */
+    Debug,
     /** Pause the Seelen Window Manager. */
     Pause,
     /** Resume the Seelen Window Manager. */
@@ -83,8 +91,12 @@ get_subcommands![
     CancelReservation,
     /** Switches to the specified workspace. */
     SwitchWorkspace(index: u8 => "The index of the workspace to switch to."),
-    /** Open Dev Tools (only works if the app is running in dev mode) */
-    Debug,
+    /** Increases or decreases the size of the window */
+    Height(action: Sizing => "What to do with the height."),
+    /** Increases or decreases the size of the window */
+    Width(action: Sizing => "What to do with the width."),
+    /** Resets the size of the containers in current workspace to the default size. */
+    ResetWorkspaceSize,
 ];
 
 impl WindowManager {
@@ -128,6 +140,15 @@ impl WindowManager {
             }
             SubCommand::Debug => {
                 self.window.open_devtools();
+            }
+            SubCommand::Height(action) => {
+                self.handle.emit_to(Self::TARGET, "update-height", action)?;
+            }
+            SubCommand::Width(action) => {
+                self.handle.emit_to(Self::TARGET, "update-width", action)?;
+            }
+            SubCommand::ResetWorkspaceSize => {
+                self.handle.emit_to(Self::TARGET, "reset-workspace-size", ())?;
             }
         };
         Ok(())

@@ -64,9 +64,9 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
                 }
             }
 
-            if let Some(manager) = seelen.wm_mut() {
-                if manager.contains(hwnd) {
-                    manager.remove_hwnd(hwnd)?;
+            if let Some(wm) = seelen.wm_mut() {
+                if wm.contains(hwnd) {
+                    wm.remove_hwnd(hwnd)?;
                 }
             }
         }
@@ -78,9 +78,9 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
                 }
             }
 
-            if let Some(manager) = seelen.wm_mut() {
-                if manager.contains(hwnd) {
-                    manager.remove_hwnd(hwnd)?;
+            if let Some(wm) = seelen.wm_mut() {
+                if wm.contains(hwnd) {
+                    wm.remove_hwnd(hwnd)?;
                 }
             }
         }
@@ -92,9 +92,10 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
                 }
             }
 
-            if let Some(manager) = seelen.wm_mut() {
+            if let Some(wm) = seelen.wm_mut() {
                 if WindowManager::should_handle(hwnd) {
-                    manager.add_hwnd(hwnd)?;
+                    wm.add_hwnd(hwnd)?;
+                    wm.set_active_window(hwnd)?;
                 }
             }
         }

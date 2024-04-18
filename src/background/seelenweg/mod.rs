@@ -12,13 +12,13 @@ use win_screenshot::capture::capture_window;
 use windows::{
     core::PCWSTR,
     Win32::{
-        Foundation::{BOOL, HWND, LPARAM, RECT},
+        Foundation::{HWND, LPARAM, RECT},
         UI::{
             Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
             WindowsAndMessaging::{
-                EnumWindows, FindWindowW, GetParent, GetWindowLongW, ShowWindow, GWL_EXSTYLE,
-                SHOW_WINDOW_CMD, SW_HIDE, SW_SHOWNORMAL, WINDOW_EX_STYLE, WS_EX_APPWINDOW,
-                WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+                FindWindowW, GetParent, GetWindowLongW, ShowWindow, GWL_EXSTYLE, SHOW_WINDOW_CMD,
+                SW_HIDE, SW_SHOWNORMAL, WINDOW_EX_STYLE, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
+                WS_EX_TOOLWINDOW,
             },
         },
     },
@@ -26,7 +26,6 @@ use windows::{
 
 use crate::{
     error_handler::Result,
-    seelen::SEELEN,
     utils::{are_overlaped, filename_from_path},
     windows_api::WindowsApi,
 };

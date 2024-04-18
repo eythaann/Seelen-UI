@@ -1,6 +1,7 @@
 use tauri::{AppHandle, Wry};
 
 pub struct SeelenShell {
+    #[allow(dead_code)]
     handle: AppHandle<Wry>,
 }
 

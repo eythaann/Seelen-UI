@@ -25,7 +25,7 @@ use seelen::SEELEN;
 
 use tray::handle_tray_icon;
 
-use crate::cli::{handle_cli_events, SEELEN_COMMAND_LINE};
+use crate::cli::SEELEN_COMMAND_LINE;
 
 fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
