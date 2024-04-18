@@ -1,0 +1,28 @@
+# Contributing to Seelen UI
+
+Thank you for your interest in contributing to this project! We welcome contributions from everyone. By participating in this project, you agree to abide by the following guidelines and terms.
+
+## How to Contribute
+
+1. Fork the repository and clone it to your local machine.
+2. Create a new branch for your contribution: `git checkout -b feature/new-feature`.
+3. Make your changes and ensure they are well-tested.
+4. Commit your changes: `git commit -m 'Add new feature'`.
+5. Push to the branch: `git push origin feature/new-feature`.
+6. Submit a pull request.
+
+## Contributor License Agreement (CLA)
+
+By submitting code as an individual, you agree to the [Contributor License Agreement](CLA.md).
+
+## Code of Conduct
+
+This project adheres to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT). By participating, you are expected to uphold this code. Please report any unacceptable behavior to [Maintainer's Email].
+
+## Licensing
+
+All contributions to this project are subject to the terms of the [PolyForm Strict License 1.0.0](LICENSE). By contributing, you agree that your contributions will be licensed under the terms of this license.
+
+## Contact
+
+If you have any questions or need further clarification, please feel free to contact the project maintainer at [Maintainer's Email].
