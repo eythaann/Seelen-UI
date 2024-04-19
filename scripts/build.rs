@@ -12,13 +12,5 @@ fn main() {
         .wait()
         .expect("Failed to close ahk");
 
-    if tauri_build::dev() {
-        tauri_build::build();
-    } else {
-        let mut windows = tauri_build::WindowsAttributes::new();
-        windows = windows.app_manifest(include_str!("manifest.xml"));
-
-        tauri_build::try_build(tauri_build::Attributes::new().windows_attributes(windows))
-            .expect("Failed to run build script");
-    }
+    tauri_build::build();
 }
