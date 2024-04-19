@@ -19,6 +19,7 @@ export enum Reservation {
   Top = 'Top',
   Bottom = 'Bottom',
   Stack = 'Stack',
+  Float = 'Float',
 }
 
 export enum Sizing {
@@ -51,17 +52,29 @@ export interface LeafNode extends INode {
   handle: HWND | null;
 }
 
-export interface BranchNode extends INode {
-  type: NodeType.Horizontal | NodeType.Vertical;
+export interface HorizontalBranchNode extends INode {
+  type: NodeType.Horizontal;
   children: Node[];
 }
 
+export interface VerticalBranchNode extends INode {
+  type: NodeType.Vertical;
+  children: Node[];
+}
+
+export type BranchNode = HorizontalBranchNode | VerticalBranchNode;
 export type Node = LeafNode | FallbackNode | BranchNode | StackNode;
 
 export type Layout = {
-  floating: HWND[];
-  /** Layout can be monocontainer: FallbackNode or a Tree: BranchNode */
-  structure: FallbackNode | BranchNode;
+  /**
+   * Tree: BranchNode
+   * Monocontainer: FallbackNode
+   * FirstManaged: LeafNode
+   * FirstManaged + Stack: StackNode
+  */
+  structure: Node;
+  /** What to do if a FallbackNode is not present */
+  noFallbackBehavior?: 'Float' | 'Unmanaged';
 };
 
 export const MAX_ALLOWED_ELEMENTS_PER_ROW = 10;

@@ -4,18 +4,12 @@ import { listen } from '@tauri-apps/api/event';
 import { RootActions, RootSlice } from './app';
 
 import { Reservation, Sizing } from '../../layout/domain';
-import { DesktopId } from './domain';
+import { DesktopId, FocusAction } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
   devTools: true,
 });
-
-export type AppDispatch = typeof store.dispatch;
-export type store = {
-  dispatch: AppDispatch;
-  getState: () => {};
-};
 
 export async function registerStoreEvents() {
   await listen<{ hwnd: number; desktop_id: DesktopId }>('add-window', (event) => {
@@ -55,5 +49,9 @@ export async function registerStoreEvents() {
 
   await listen<void>('reset-workspace-size', () => {
     store.dispatch(RootActions.resetSizing());
+  });
+
+  await listen<FocusAction>('focus', (event) => {
+    store.dispatch(RootActions.focus(event.payload));
   });
 }

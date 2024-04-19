@@ -1,3 +1,4 @@
+import { toPhysicalPixels } from '../../../../utils';
 import { StateBuilder } from '../../../../utils/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
@@ -5,11 +6,11 @@ import { cloneDeep } from 'lodash';
 
 import { NodeImpl, removeHandleFromLayout } from '../../layout/app';
 
-import { Layout, NodeSubtype, NodeType, Sizing } from '../../layout/domain';
-import { DesktopId, RootState } from './domain';
+import { Layout, NodeSubtype, NodeType, Reservation, Sizing } from '../../layout/domain';
+import { DesktopId, FocusAction, RootState } from './domain';
 
 const Fibonacci: Layout = {
-  floating: [],
+  noFallbackBehavior: 'Float',
   structure: {
     type: NodeType.Horizontal,
     subtype: NodeSubtype.Permanent,
@@ -103,23 +104,47 @@ export const RootSlice = createSlice({
       const node = NodeImpl.from(workspace.layout.structure);
 
       let sucessfullyAdded = false;
-      if (state.reservation && state.lastManagedActivated) {
-        sucessfullyAdded = node.concreteReservation(
+
+      const setFloatingSize = () => {
+        invoke('set_window_position', {
           hwnd,
-          state.reservation,
-          state.lastManagedActivated,
-        );
+          rect: {
+            top: toPhysicalPixels(window.screen.height / 2 - state.settings.floating.height / 2),
+            left: toPhysicalPixels(window.screen.width / 2 - state.settings.floating.width / 2),
+            right: toPhysicalPixels(state.settings.floating.width),
+            bottom: toPhysicalPixels(state.settings.floating.height),
+          },
+        });
+      };
+
+      if (state.reservation) {
+        if (state.reservation === Reservation.Float) {
+          invoke('remove_hwnd', { hwnd });
+          setFloatingSize();
+          sucessfullyAdded = true;
+        } else if (state.lastManagedActivated) {
+          sucessfullyAdded = node.concreteReservation(
+            hwnd,
+            state.reservation,
+            state.lastManagedActivated,
+          );
+        }
       } else {
         sucessfullyAdded = node.addHandle(hwnd);
       }
 
+      state.reservation = null;
+
       if (sucessfullyAdded) {
-        state.reservation = null;
         state.lastManagedActivated = hwnd;
         state.activeWindow = hwnd;
       } else {
-        console.warn('Layout is full, can\'t add new window');
         invoke('remove_hwnd', { hwnd });
+        if (!workspace.layout.noFallbackBehavior) {
+          console.error('Layout can\'t handle the window, FallbackNode and noFallbackBehavior are not defined in layout');
+        } else if (workspace.layout.noFallbackBehavior === 'Float') {
+          setFloatingSize();
+        }
       }
     },
     removeWindow: (state, action: PayloadAction<number>) => {
@@ -154,6 +179,29 @@ export const RootSlice = createSlice({
     resetSizing(state) {
       const node = NodeImpl.from(state.workspaces[state.activeWorkspace]!.layout.structure);
       node.resetGrowFactor();
+    },
+    focus(state, action: PayloadAction<FocusAction>) {
+      const { workspaces, activeWorkspace } = state;
+      const workspace = workspaces[activeWorkspace];
+      if (!workspace) {
+        return console.error('No active workspace found.');
+      }
+
+      if (!state.lastManagedActivated) {
+        return console.error('No last managed window found.');
+      }
+
+      if (action.payload === FocusAction.Lastest) {
+        invoke('request_focus', { hwnd: state.lastManagedActivated });
+        return;
+      }
+
+      const node = NodeImpl.from(workspace.layout.structure);
+      const next = node.getNodeAtSide(state.lastManagedActivated, action.payload);
+      if (next) {
+        const nextNode = NodeImpl.from(next);
+        invoke('request_focus', { hwnd: nextNode.currentHandle || 0 });
+      }
     },
   },
 });

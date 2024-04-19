@@ -1,15 +1,11 @@
-use std::time::Duration;
+use std::{thread::sleep, time::Duration};
 
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM},
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, EnumWindows, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
-            EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
-            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND,
-            EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MOVESIZEEND, MSG,
+            DispatchMessageW, EnumWindows, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS, EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MOVESIZEEND, EVENT_SYSTEM_MOVESIZESTART, MSG
         },
     },
 };
@@ -24,18 +20,28 @@ use crate::{
 
 pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
     match event {
+        EVENT_SYSTEM_MOVESIZESTART => {
+            let seelen = SEELEN.lock();
+            if let Some(wm) = seelen.wm() {
+                if wm.contains(hwnd) {
+                    wm.pseudo_pause()?;
+                }
+            }
+        }
         EVENT_SYSTEM_MOVESIZEEND => {
             let seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm() {
                 if wm.contains(hwnd) {
                     wm.force_retiling()?;
+                    sleep(Duration::from_millis(35));
+                    wm.psudo_resume()?;
                 }
             }
         }
         EVENT_SYSTEM_MINIMIZEEND => {
             let mut seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm_mut() {
-                if WindowManager::should_handle(hwnd) {
+                if !wm.contains(hwnd) && WindowManager::should_handle(hwnd) {
                     wm.add_hwnd(hwnd)?;
                 }
             }
@@ -145,8 +151,8 @@ pub extern "system" fn win_event_hook(
     if id_object != 0 {
         return;
     }
-
-    /* if event == EVENT_OBJECT_LOCATIONCHANGE {
+/* 
+    if event == EVENT_OBJECT_LOCATIONCHANGE {
         return;
     }
 

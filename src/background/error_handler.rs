@@ -49,6 +49,12 @@ impl std::error::Error for AppError {
     }
 }
 
+impl From<AppError> for String {
+    fn from(err: AppError) -> String {
+        format!("{:?}", err)
+    }
+}
+
 pub type Result<T = (), E = AppError> = core::result::Result<T, E>;
 
 pub fn log_if_error<T, E>(result: Result<T, E>)

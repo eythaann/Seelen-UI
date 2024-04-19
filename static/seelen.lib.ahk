@@ -43,3 +43,7 @@ updateWindowHeight(action) {
 resetWorkspaceSize() {
   RunWait(seelen " wm reset-workspace-size", , "Hide")
 }
+
+focus(action) {
+  RunWait(seelen " wm focus " action, , "Hide")
+}

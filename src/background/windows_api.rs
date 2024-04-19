@@ -1,6 +1,8 @@
+use std::{ffi::c_void, thread::sleep, time::Duration};
+
 use color_eyre::eyre::eyre;
 use windows::{
-    core::PWSTR,
+    core::{GUID, PWSTR},
     Win32::{
         Foundation::{CloseHandle, HANDLE, HWND, RECT},
         Graphics::Dwm::{
@@ -18,7 +20,9 @@ use windows::{
             Shell::{IVirtualDesktopManager, VirtualDesktopManager},
             WindowsAndMessaging::{
                 GetParent, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
-                IsWindow, IsWindowVisible,
+                IsWindow, IsWindowVisible, ShowWindow, ShowWindowAsync, SystemParametersInfoW,
+                ANIMATIONINFO, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION,
+                SPI_SETANIMATION, SW_NORMAL, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
             },
         },
     },
@@ -59,6 +63,22 @@ impl WindowsApi {
             cloaked,
             DWM_CLOAKED_APP | DWM_CLOAKED_SHELL | DWM_CLOAKED_INHERITED
         ))
+    }
+
+    pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) {
+        // BOOL is returned but does not signify whether or not the operation was succesful
+        // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
+        unsafe { ShowWindow(hwnd, command) };
+    }
+
+    pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) {
+        // BOOL is returned but does not signify whether or not the operation was succesful
+        // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
+        unsafe { ShowWindowAsync(hwnd, command) };
+    }
+
+    pub fn unmaximize_window(hwnd: HWND) {
+        Self::show_window(hwnd, SW_NORMAL);
     }
 
     fn open_process(
@@ -171,20 +191,53 @@ impl WindowsApi {
         }
     }
 
-    /*     pub fn raise_window_to(hwnd: HWND, zorder: HWND) -> Result<()> {
+    pub fn get_virtual_desktop_id(hwnd: HWND) -> Result<GUID> {
+        let manager = Self::get_virtual_desktop_manager()?;
+        let mut desktop_id = GUID::zeroed();
+        let mut attempt = 0;
+        while desktop_id.to_u128() == 0 && attempt < 10 {
+            attempt += 1;
+            sleep(Duration::from_millis(30));
+            match unsafe { manager.GetWindowDesktopId(hwnd) } {
+                Ok(desktop) => desktop_id = desktop,
+                Err(_) => {}
+            }
+        }
+        if desktop_id.to_u128() == 0 {
+            return Err(eyre!("Failed to get desktop id for: {hwnd:?}").into());
+        }
+        Ok(desktop_id)
+    }
+
+    pub fn get_min_animation_info() -> Result<ANIMATIONINFO> {
+        let mut anim_info: ANIMATIONINFO = unsafe { core::mem::zeroed() };
+        anim_info.cbSize = core::mem::size_of::<ANIMATIONINFO>() as u32;
+        let uiparam = anim_info.cbSize.clone();
         unsafe {
-            SetWindowPos(
-                hwnd,
-                zorder,
-                0,
-                0,
-                0,
-                0,
-                SWP_NOACTIVATE | SWP_NOMOVE | SWP_NOSIZE,
+            SystemParametersInfoW(
+                SPI_GETANIMATION,
+                uiparam,
+                Some(&mut anim_info as *mut ANIMATIONINFO as *mut c_void),
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS(0),
+            )?;
+        }
+        Ok(anim_info)
+    }
+
+    pub fn set_minimize_animation(enable: bool) -> Result<()> {
+        let mut anim_info = Self::get_min_animation_info()?;
+        let uiparam = anim_info.cbSize.clone();
+        unsafe {
+            anim_info.iMinAnimate = enable.into();
+            SystemParametersInfoW(
+                SPI_SETANIMATION,
+                uiparam,
+                Some(&mut anim_info as *mut ANIMATIONINFO as *mut c_void),
+                SPIF_SENDCHANGE,
             )?;
         }
         Ok(())
-    } */
+    }
 }
 
 /* unsafe extern "system" fn enum_desktops_proc(hwnd: PCWSTR, _: LPARAM) -> BOOL {

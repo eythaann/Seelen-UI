@@ -8,7 +8,7 @@
 }
 
 #root {
-  padding: 10px;
+  padding: 16px;
   padding-bottom: 90px;
   height: 100%;
   width: 100%;
@@ -19,5 +19,5 @@ body {
   width: 100vw;
   overflow: hidden;
 
-  border: 3px solid red;
+  /* border: 3px solid red; */
 }

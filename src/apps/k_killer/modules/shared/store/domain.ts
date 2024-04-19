@@ -18,6 +18,14 @@ interface Workspace {
 
 export type DesktopId = SoftOpaque<string, 'DesktopId'>;
 
+export enum FocusAction {
+  Left = 'Left',
+  Right = 'Right',
+  Up = 'Up',
+  Down = 'Down',
+  Lastest = 'Lastest',
+}
+
 export interface RootState {
   settings: WMSettings;
   defaultLayout: Layout;

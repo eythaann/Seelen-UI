@@ -24,11 +24,15 @@ export function FallbackContainer({ node }: Props) {
       }}
       className={cx(cs.container, cs.stack)}
     >
-      <div className={cs.stackedBar}>
-        {node.handles.map((handle) => (
-          <div className={cs.stackedItem}>{handle}</div>
-        ))}
-      </div>
+      {node.handles.length > 1 && (
+        <div className={cs.stackedBar}>
+          {node.handles.map((handle) => (
+            <div key={handle} className={cs.stackedItem}>
+              {handle}
+            </div>
+          ))}
+        </div>
+      )}
       {node.active && <LeafContainer hwnd={node.active} />}
     </div>
   );

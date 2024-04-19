@@ -1,13 +1,22 @@
+use std::{
+    thread::{self, sleep},
+    time::Duration,
+};
+
 use serde::Deserialize;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{
-        SetWindowPos, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS,
-        SWP_NOOWNERZORDER, SWP_NOSENDCHANGING, SWP_NOZORDER,
+        SetWindowPos, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOOWNERZORDER,
+        SWP_NOSENDCHANGING, SWP_NOZORDER, SW_MINIMIZE, SW_RESTORE,
     },
 };
 
-use crate::{error_handler::log_if_error, seelen::SEELEN, windows_api::WindowsApi};
+use crate::{
+    error_handler::{log_if_error, Result},
+    seelen::SEELEN,
+    windows_api::WindowsApi,
+};
 
 #[derive(Deserialize, Debug)]
 pub struct Rect {
@@ -25,6 +34,7 @@ pub fn set_window_position(hwnd: isize, rect: Rect) {
         return;
     }
 
+    WindowsApi::unmaximize_window(hwnd);
     let shadow = WindowsApi::shadow_rect(hwnd).unwrap();
     let result = unsafe {
         SetWindowPos(
@@ -49,6 +59,37 @@ pub fn set_window_position(hwnd: isize, rect: Rect) {
 #[tauri::command]
 pub fn remove_hwnd(hwnd: isize) {
     if let Some(wm) = SEELEN.lock().wm_mut() {
-        wm.remove_hwnd_no_emit(HWND(hwnd))
+        wm.remove_hwnd_no_emit(HWND(hwnd));
     }
+}
+
+#[tauri::command]
+pub fn request_focus(hwnd: isize) -> Result<(), String> {
+    let hwnd = HWND(hwnd);
+    log::trace!(
+        "Requesting focus on {:?} - {} , {:?}",
+        hwnd,
+        WindowsApi::get_window_text(hwnd),
+        WindowsApi::exe(hwnd)
+    );
+
+    let mut seelen = SEELEN.lock();
+    if let Some(wm) = seelen.wm_mut() {
+        wm.pause(true, false)?;
+
+        WindowsApi::set_minimize_animation(false)?;
+        WindowsApi::show_window_async(hwnd, SW_MINIMIZE);
+        WindowsApi::show_window_async(hwnd, SW_RESTORE);
+
+        thread::spawn(|| -> Result<()> {
+            sleep(Duration::from_millis(35));
+            WindowsApi::set_minimize_animation(true)?;
+            let mut seelen = SEELEN.lock();
+            if let Some(wm) = seelen.wm_mut() {
+                wm.pause(false, false)?;
+            }
+            Ok(())
+        });
+    }
+    Ok(())
 }

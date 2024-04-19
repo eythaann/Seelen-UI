@@ -69,7 +69,17 @@ pub enum AllowedReservations {
     Right,
     Top,
     Bottom,
-    Stack
+    Stack,
+    Float,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
+pub enum AllowedFocus {
+    Left,
+    Right,
+    Up,
+    Down,
+    Lastest,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
@@ -97,6 +107,8 @@ get_subcommands![
     Width(action: Sizing => "What to do with the width."),
     /** Resets the size of the containers in current workspace to the default size. */
     ResetWorkspaceSize,
+    /** Focuses the window in the specified position. */
+    Focus(side: AllowedFocus => "The position of the window to focus."),
 ];
 
 impl WindowManager {
@@ -149,6 +161,9 @@ impl WindowManager {
             }
             SubCommand::ResetWorkspaceSize => {
                 self.handle.emit_to(Self::TARGET, "reset-workspace-size", ())?;
+            }
+            SubCommand::Focus(side) => {
+                self.handle.emit_to(Self::TARGET, "focus", side)?;
             }
         };
         Ok(())

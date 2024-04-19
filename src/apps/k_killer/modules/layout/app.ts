@@ -1,9 +1,11 @@
 import { clone } from 'lodash';
 
+import { FocusAction } from '../shared/store/domain';
 import { HWND } from '../shared/utils/domain';
 import {
   BranchNode,
   FallbackNode,
+  HorizontalBranchNode,
   Layout,
   LeafNode,
   Node,
@@ -12,14 +14,10 @@ import {
   Reservation,
   Sizing,
   StackNode,
+  VerticalBranchNode,
 } from './domain';
 
 export function removeHandleFromLayout(layout: Layout, handle: number): void {
-  let floatingIndex = layout.floating.indexOf(handle);
-  if (floatingIndex !== -1) {
-    layout.floating.splice(floatingIndex, 1);
-    return;
-  }
   if (NodeImpl.from(layout.structure).removeHandle(handle)) {
     reIndexContainer(layout.structure);
   }
@@ -99,6 +97,19 @@ export class NodeImpl<T extends Node> {
     throw new Error();
   }
 
+  get currentHandle(): HWND | null {
+    if (this.isFallback()) {
+      return this.ref.active;
+    }
+    if (this.isStack()) {
+      return this.ref.active;
+    }
+    if (this.isLeaf()) {
+      return this.ref.handle;
+    }
+    return null;
+  }
+
   isLeaf(): this is NodeImpl<LeafNode> {
     return this.ref.type === NodeType.Leaf;
   }
@@ -113,6 +124,14 @@ export class NodeImpl<T extends Node> {
 
   isBranch(): this is NodeImpl<BranchNode> {
     return this.ref.type === NodeType.Horizontal || this.ref.type === NodeType.Vertical;
+  }
+
+  isHorizontal(): this is NodeImpl<HorizontalBranchNode> {
+    return this.ref.type === NodeType.Horizontal;
+  }
+
+  isVertical(): this is NodeImpl<VerticalBranchNode> {
+    return this.ref.type === NodeType.Vertical;
   }
 
   isTemporal(): this is NodeImpl<T & { subtype: NodeSubtype.Temporal }> {
@@ -388,7 +407,9 @@ export class NodeImpl<T extends Node> {
         return false;
       }
 
-      return axis === 'x' ? node.ref.type === NodeType.Horizontal : node.ref.type === NodeType.Vertical;
+      return axis === 'x'
+        ? node.ref.type === NodeType.Horizontal
+        : node.ref.type === NodeType.Vertical;
     });
 
     if (idx === -1) {
@@ -410,5 +431,59 @@ export class NodeImpl<T extends Node> {
         : nodeToResize.growFactor - total * delta;
 
     this.reIndexingGrowFactor();
+  }
+
+  getLeafByPriority(): LeafNode | FallbackNode | null {
+    if (this.isLeaf()) {
+      return this.ref;
+    }
+
+    if (this.isFallback()) {
+      return this.ref;
+    }
+
+    if (this.isBranch()) {
+      const sorted = [...this.ref.children].sort((a, b) => a.priority - b.priority);
+      if (sorted[0]) {
+        const node = NodeImpl.from(sorted[0]);
+        return node.getLeafByPriority();
+      }
+    }
+
+    return null;
+  }
+
+  getNodeAtSide(from: HWND, side: FocusAction): LeafNode | FallbackNode | null {
+    const result = this.getNodeContaining(from);
+    if (!result) {
+      console.error('Could not find node containing handle', from);
+      return null;
+    }
+
+    const trace = this.trace(result);
+    const axis = [FocusAction.Left, FocusAction.Right].includes(side)
+      ? NodeType.Horizontal
+      : NodeType.Vertical;
+    const after = [FocusAction.Right, FocusAction.Down].includes(side);
+
+    let lastAncessor: Node = trace.at(-1)!;
+    for (const node of trace.reverse()) {
+      if (node.type != axis) {
+        lastAncessor = node;
+        continue;
+      }
+
+      let idx = node.children.indexOf(lastAncessor);
+      if (idx === -1) {
+        console.throw('Error in Trace algorithm');
+      }
+      idx = after ? idx + 1 : idx - 1;
+      if (idx >= 0 && idx < node.children.length) {
+        let next = NodeImpl.from(node.children[idx]!);
+        return next.getLeafByPriority();
+      }
+    }
+
+    return null;
   }
 }

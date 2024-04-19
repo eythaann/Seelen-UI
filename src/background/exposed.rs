@@ -114,6 +114,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         weg_request_update_previews,
         // Windows Manager
         set_window_position,
-        remove_hwnd
+        remove_hwnd,
+        request_focus,
     ])
 }
