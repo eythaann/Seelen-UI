@@ -23,7 +23,8 @@ struct AddWindowPayload {
 pub struct WindowManager {
     handle: AppHandle<Wry>,
     window: WebviewWindow,
-    hwnds: Vec<isize>,
+    managed_handles: Vec<isize>,
+    floating_handles: Vec<isize>,
     pub current_virtual_desktop: String,
     paused: bool,
 }
@@ -37,7 +38,8 @@ impl WindowManager {
         Self {
             window: Self::create_window(&handle).expect("Failed to create Manager Container"),
             handle,
-            hwnds: Vec::new(),
+            managed_handles: Vec::new(),
+            floating_handles: Vec::new(),
             current_virtual_desktop: virtual_desktop.id(),
             paused: true, // paused until complete_window_setup is called
         }
@@ -75,7 +77,7 @@ impl WindowManager {
     }
 
     pub fn contains(&self, hwnd: HWND) -> bool {
-        self.hwnds.contains(&hwnd.0)
+        self.managed_handles.contains(&hwnd.0) || self.floating_handles.contains(&hwnd.0)
     }
 
     pub fn _hwnd(&self) -> HWND {
@@ -134,7 +136,7 @@ impl WindowManager {
 
         log::trace!("Adding {} <=> {:?} to desktop: {}", hwnd.0, WindowsApi::get_window_text(hwnd), desktop_to_add);
 
-        self.hwnds.push(hwnd.0);
+        self.managed_handles.push(hwnd.0);
         self.handle.emit_to(
             Self::TARGET,
             "add-window",
@@ -150,8 +152,15 @@ impl WindowManager {
         if self.paused || !self.contains(hwnd) {
             return false
         }
-        self.hwnds.retain(|&x| x != hwnd.0);
+        self.managed_handles.retain(|&x| x != hwnd.0);
         true
+    }
+
+    /** trigered when a window is bounced by the front-end on adding action */
+    pub fn bounce_handle(&mut self, hwnd: HWND) {
+        if self.remove_hwnd_no_emit(hwnd) {
+            self.floating_handles.push(hwnd.0);
+        }
     }
 
     pub fn remove_hwnd(&mut self, hwnd: HWND) -> Result<bool> {

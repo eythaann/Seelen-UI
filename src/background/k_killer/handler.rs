@@ -57,9 +57,9 @@ pub fn set_window_position(hwnd: isize, rect: Rect) {
 }
 
 #[tauri::command]
-pub fn remove_hwnd(hwnd: isize) {
+pub fn bounce_handle(hwnd: isize) {
     if let Some(wm) = SEELEN.lock().wm_mut() {
-        wm.remove_hwnd_no_emit(HWND(hwnd));
+        wm.bounce_handle(HWND(hwnd));
     }
 }
 

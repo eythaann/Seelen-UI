@@ -119,7 +119,7 @@ export const RootSlice = createSlice({
 
       if (state.reservation) {
         if (state.reservation === Reservation.Float) {
-          invoke('remove_hwnd', { hwnd });
+          invoke('bounce_handle', { hwnd });
           setFloatingSize();
           sucessfullyAdded = true;
         } else if (state.lastManagedActivated) {
@@ -139,7 +139,7 @@ export const RootSlice = createSlice({
         state.lastManagedActivated = hwnd;
         state.activeWindow = hwnd;
       } else {
-        invoke('remove_hwnd', { hwnd });
+        invoke('bounce_handle', { hwnd });
         if (!workspace.layout.noFallbackBehavior) {
           console.error('Layout can\'t handle the window, FallbackNode and noFallbackBehavior are not defined in layout');
         } else if (workspace.layout.noFallbackBehavior === 'Float') {
