@@ -57,7 +57,7 @@ fn main() -> Result<()> {
             handle_tray_icon(app)?;
             seelen.create_update_modal()?;
 
-            if !matches.get_flag("silent") {
+            if !tauri::dev() && !matches.get_flag("silent") {
                 seelen.show_settings()?;
             }
 

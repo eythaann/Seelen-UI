@@ -11,5 +11,5 @@
     "tauri.conf.json"
   ],
   "ext": "ts,tsx,css,ps1,yml,rs,json,html",
-  "exec": "npm run build:komorebi && npm run build:ui && npx tauri dev"
+  "exec": "npm run build:ui && npx tauri dev"
 }

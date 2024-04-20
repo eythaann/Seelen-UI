@@ -64,6 +64,14 @@ pub fn remove_hwnd(hwnd: isize) {
 }
 
 #[tauri::command]
+pub fn complete_window_setup() {
+    let mut seelen = SEELEN.lock();
+    if let Some(wm) = seelen.wm_mut() {
+        log_if_error(wm.complete_window_setup());
+    }
+}
+
+#[tauri::command]
 pub fn request_focus(hwnd: isize) -> Result<(), String> {
     let hwnd = HWND(hwnd);
     log::trace!(

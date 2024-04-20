@@ -27,6 +27,7 @@ define_app_errors!(
     SerdeJson(serde_json::Error);
     Utf8(std::string::FromUtf8Error);
     Utf16(std::string::FromUtf16Error);
+    CrossbeamRecv(crossbeam_channel::RecvError);
 );
 
 impl std::fmt::Display for AppError {
@@ -45,6 +46,7 @@ impl std::error::Error for AppError {
             AppError::SerdeJson(err) => Some(err),
             AppError::Utf8(err) => Some(err),
             AppError::Utf16(err) => Some(err),
+            AppError::CrossbeamRecv(err) => Some(err),
         }
     }
 }
@@ -58,11 +60,18 @@ impl From<AppError> for String {
 pub type Result<T = (), E = AppError> = core::result::Result<T, E>;
 
 pub fn log_if_error<T, E>(result: Result<T, E>)
-where
-    E: Into<AppError>
+where 
+    E: std::fmt::Debug
 {
     if let Err(err) = result {
-        let err: AppError = err.into();
         log::error!("{:?}", err);
     }
 }
+
+/* macro_rules! log_if_error {
+    ($result:expr) => {
+        if let Err(err) = $result {
+            log::error!("{:?}", err);
+        }
+    };
+} */

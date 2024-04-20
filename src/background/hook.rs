@@ -5,7 +5,12 @@ use windows::Win32::{
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, EnumWindows, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, EVENT_OBJECT_CLOAKED, EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS, EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MOVESIZEEND, EVENT_SYSTEM_MOVESIZESTART, MSG
+            DispatchMessageW, EnumWindows, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
+            EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
+            EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
+            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND,
+            EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MOVESIZEEND,
+            EVENT_SYSTEM_MOVESIZESTART, MSG,
         },
     },
 };
@@ -76,8 +81,9 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
                 }
             }
         }
-        EVENT_OBJECT_DESTROY | EVENT_OBJECT_CLOAKED => {
+        EVENT_OBJECT_DESTROY /* | EVENT_OBJECT_CLOAKED */ => {
             let mut seelen = SEELEN.lock();
+
             if let Some(weg) = seelen.weg_mut() {
                 if weg.contains_app(hwnd) {
                     weg.remove_hwnd(hwnd);
@@ -114,6 +120,13 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
                     weg.add_hwnd(hwnd);
                 }
             }
+            
+            if let Some(wm) = seelen.wm_mut() {
+                if !wm.contains(hwnd) && WindowManager::should_handle(hwnd) {
+                    wm.add_hwnd(hwnd)?;
+                    wm.set_active_window(hwnd)?;
+                }
+            }
         }
         EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
             let mut seelen = SEELEN.lock();
@@ -129,7 +142,8 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_OBJECT_LOCATIONCHANGE => {
-            if let Some(weg) = SEELEN.lock().weg_mut() {
+            let mut seelen = SEELEN.lock();
+            if let Some(weg) = seelen.weg_mut() {
                 weg.update_status_if_needed(hwnd)?;
             }
         }
@@ -151,8 +165,8 @@ pub extern "system" fn win_event_hook(
     if id_object != 0 {
         return;
     }
-/* 
-    if event == EVENT_OBJECT_LOCATIONCHANGE {
+
+    /* if event == EVENT_OBJECT_LOCATIONCHANGE {
         return;
     }
 
@@ -161,8 +175,14 @@ pub extern "system" fn win_event_hook(
         Err(_) => return,
     };
 
-    println!("{:?}", winevent); */
+    println!(
+        "{:?} - {} - {}",
+        winevent,
+        WindowsApi::exe(hwnd).unwrap_or_default(),
+        WindowsApi::get_window_text(hwnd)
+    ); */
 
+    log_if_error(WindowManager::process_event(event, hwnd));
     log_if_error(process_event(event, hwnd));
 }
 
@@ -174,9 +194,9 @@ unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
         }
     }
 
-    if let Some(manager) = seelen.wm_mut() {
+    if let Some(wm) = seelen.wm_mut() {
         if WindowManager::should_handle(hwnd) {
-            log_if_error(manager.add_hwnd(hwnd));
+            log_if_error(wm.add_hwnd(hwnd));
         }
     }
     true.into()

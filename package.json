@@ -8,8 +8,6 @@
     "dev": "nodemon --config nodemon.json",
     "build": "tauri build",
     "build:ui": "ts-node scripts/build.ts",
-    "build:komorebi": "ts-node scripts/build_komorebi.ts",
-    "postbuild:komorebi": "",
     "lint": "eslint ./**/** --fix --max-warnings 0",
     "postversion": "npm run build && ts-node scripts/postversion.ts"
   },

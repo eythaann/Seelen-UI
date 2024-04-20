@@ -118,7 +118,9 @@ impl Seelen {
 
     pub fn start(&mut self) {
         self.ensure_folders().expect("Fail on ensuring folders");
-        self.start_ahk_shortcuts();
+        if self.state.is_ahk_enabled() {
+            self.start_ahk_shortcuts();
+        }
 
         if let Some(weg) = self.weg_mut() {
             log_if_error(weg.start());
@@ -128,7 +130,9 @@ impl Seelen {
     }
 
     pub fn stop(&self) {
-        self.kill_ahk_shortcuts();
+        if self.state.is_ahk_enabled() {
+            self.kill_ahk_shortcuts();
+        }
 
         if let Some(weg) = self.weg() {
             weg.stop();
@@ -151,20 +155,27 @@ impl Seelen {
         log::trace!("Starting AHK shortcuts");
 
         let handle = self.handle();
+
         let ahk_path = handle
+            .path()
+            .resolve("static/redis/AutoHotkey.exe", BaseDirectory::Resource)
+            .expect("Failed to resolve path")
+            .to_string_lossy()
+            .trim_start_matches(r"\\?\")
+            .to_owned();
+
+        let ahk_script_path = handle
             .path()
             .resolve("static/seelen.ahk", BaseDirectory::Resource)
             .expect("Failed to resolve path")
-            .to_str()
-            .expect("Failed to convert path to string")
-            .to_owned()
-            .trim_start_matches("\\\\?\\")
+            .to_string_lossy()
+            .trim_start_matches(r"\\?\")
             .to_owned();
 
         handle
             .shell()
-            .command("cmd")
-            .args(["/C", &ahk_path])
+            .command(ahk_path)
+            .arg(ahk_script_path)
             .spawn()
             .expect("Failed to spawn shortcuts");
     }

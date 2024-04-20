@@ -1,3 +1,5 @@
+pub mod virtual_desktop;
+
 use windows::Win32::Foundation::RECT;
 
 pub fn filename_from_path(path: &str) -> String {
@@ -9,14 +11,6 @@ pub fn are_overlaped(rect1: &RECT, rect2: &RECT) -> bool {
     let y_overlap = !(rect1.bottom <= rect2.top || rect2.bottom <= rect1.top);
     x_overlap && y_overlap
 }
-
-pub fn compress_u128(num: u128) -> String {
-    format!("{:x}", num)
-}
-
-/* pub fn decompress_u128(hex_str: &str) -> u128 {
-    u128::from_str_radix(hex_str, 16).expect("could not decompress u128")
-} */
 
 pub fn pascal_to_kebab(input: &str) -> String {
     let mut kebab_case = String::new();
@@ -52,4 +46,12 @@ pub fn kebab_to_pascal(input: &str) -> String {
         }
     }
     pascal_case
+}
+
+pub fn is_windows_10() -> bool {
+    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &10240 && x < &22000)
+}
+
+pub fn is_windows_11() -> bool {
+    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22000)
 }

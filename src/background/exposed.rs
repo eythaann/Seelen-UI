@@ -1,5 +1,6 @@
 use std::process::Command;
 
+use serde::Serialize;
 use tauri::{command, Builder, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Graphics::Dwm::DwmGetColorizationColor;
@@ -7,9 +8,10 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
 
+use crate::k_killer::handler::*;
 use crate::seelen::SEELEN;
 use crate::seelenweg::handler::*;
-use crate::k_killer::handler::*;
+use crate::utils::{is_windows_10, is_windows_11};
 
 fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
     let app = SEELEN.lock().handle().clone();
@@ -93,12 +95,31 @@ fn get_accent_color() -> String {
     format!("#{:02X}{:02X}{:02X}{:02X}", red, green, blue, alpha)
 }
 
+#[derive(Serialize)]
+enum WinVersion {
+    Windows10,
+    Windows11,
+    Unknown,
+}
+
+#[command]
+fn get_win_version() -> WinVersion {
+    if is_windows_10() {
+        WinVersion::Windows10
+    } else if is_windows_11() {
+        WinVersion::Windows11
+    } else {
+        WinVersion::Unknown
+    }
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
         is_dev_mode,
         open_file_location,
         get_accent_color,
+        get_win_version,
         // Media
         media_play_pause,
         media_next,
@@ -116,5 +137,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         set_window_position,
         remove_hwnd,
         request_focus,
+        complete_window_setup,
     ])
 }

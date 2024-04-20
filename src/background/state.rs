@@ -11,10 +11,12 @@ struct FeatureState {
 
 #[derive(Debug, Deserialize, Default)]
 pub struct State {
-    seelen_weg: Option<FeatureState>,
+    /** this is no snake case for a error in naming but is already published so FF */
+    seelenweg: Option<FeatureState>,
     seelen_shell: Option<FeatureState>,
     seelen_bar: Option<FeatureState>,
     seelen_window_manager: Option<FeatureState>,
+    ahk_enabled: Option<bool>,
 }
 
 impl State {
@@ -28,12 +30,12 @@ impl State {
     }
 
     pub fn is_weg_enabled(&self) -> bool {
-        if let Some(weg) = &self.seelen_weg {
+        if let Some(weg) = &self.seelenweg {
             if let Some(enable) = weg.enable {
                 return enable;
             }
         }
-        return true;
+        true
     }
 
     pub fn is_shell_enabled(&self) -> bool {
@@ -42,7 +44,7 @@ impl State {
                 return enable;
             }
         }
-        return true;
+        true
     }
 
     pub fn is_bar_enabled(&self) -> bool {
@@ -51,7 +53,7 @@ impl State {
                 return enable;
             }
         }
-        return true;
+        true
     }
 
     pub fn is_window_manager_enabled(&self) -> bool {
@@ -60,6 +62,13 @@ impl State {
                 return enable;
             }
         }
-        return true;
+        true
+    }
+
+    pub fn is_ahk_enabled(&self) -> bool {
+        if let Some(enable) = self.ahk_enabled {
+            return enable;
+        }
+        true
     }
 }

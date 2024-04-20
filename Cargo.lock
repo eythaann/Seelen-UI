@@ -3178,6 +3178,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "os_info"
+version = "3.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ae99c7fa6dd38c7cafe1ec085e804f8f555a2f8659b0dbe03f1f9963a9b51092"
+dependencies = [
+ "log",
+ "serde",
+ "windows-sys 0.52.0",
+]
+
+[[package]]
 name = "os_pipe"
 version = "1.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -4118,10 +4129,12 @@ version = "1.0.0"
 dependencies = [
  "clap",
  "color-eyre",
+ "crossbeam-channel",
  "image 0.25.0",
  "itertools",
  "lazy_static",
  "log",
+ "os_info",
  "parking_lot",
  "serde",
  "serde_json",
@@ -4139,6 +4152,7 @@ dependencies = [
  "widestring",
  "win-screenshot",
  "windows 0.54.0",
+ "winreg 0.52.0",
 ]
 
 [[package]]

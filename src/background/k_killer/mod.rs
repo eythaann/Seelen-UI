@@ -1,12 +1,16 @@
 pub mod cli;
 pub mod handler;
+pub mod hook;
 
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
-use windows::{Win32::Foundation::HWND, core::GUID};
+use windows::Win32::Foundation::HWND;
 
 use crate::{
-    error_handler::Result, seelenweg::SeelenWeg, utils::compress_u128, windows_api::WindowsApi
+    error_handler::Result,
+    seelenweg::SeelenWeg,
+    utils::virtual_desktop::VirtualDesktopManager,
+    windows_api::WindowsApi
 };
 
 #[derive(Serialize, Clone)]
@@ -20,7 +24,7 @@ pub struct WindowManager {
     handle: AppHandle<Wry>,
     window: WebviewWindow,
     hwnds: Vec<isize>,
-    current_virtual_desktop: String,
+    pub current_virtual_desktop: String,
     paused: bool,
 }
 
@@ -28,13 +32,14 @@ impl WindowManager {
     const TARGET: &'static str = "k_killer";
 
     pub fn new(handle: AppHandle<Wry>) -> Self {
-        log::trace!("Creating tiling window manager");
+        log::info!("Creating Tiling Windows Manager");
+        let virtual_desktop = VirtualDesktopManager::get_current_virtual_desktop().expect("Failed to get current virtual desktop");
         Self {
             window: Self::create_window(&handle).expect("Failed to create Manager Container"),
             handle,
             hwnds: Vec::new(),
-            current_virtual_desktop: Default::default(),
-            paused: false,
+            current_virtual_desktop: virtual_desktop.id(),
+            paused: true, // paused until complete_window_setup is called
         }
     }
 
@@ -61,14 +66,25 @@ impl WindowManager {
         Ok(window)
     }
 
+    fn complete_window_setup(&mut self) -> Result<()> {
+        log::info!("Tiling Windows Manager Created");
+        self.paused = false;
+        self.handle
+            .emit_to(Self::TARGET, "set-active-workspace", &self.current_virtual_desktop)?;
+        Ok(())
+    }
+
     pub fn contains(&self, hwnd: HWND) -> bool {
         self.hwnds.contains(&hwnd.0)
+    }
+
+    pub fn _hwnd(&self) -> HWND {
+        HWND(self.window.hwnd().expect("can't get Self Window handle").0)
     }
 
     pub fn should_handle(hwnd: HWND) -> bool {
         SeelenWeg::should_handle_hwnd(hwnd) 
         && !WindowsApi::is_iconic(hwnd)
-        && !WindowsApi::is_cloaked(hwnd).unwrap_or(false)
         // Without admin some apps does not return the exe path so this should be unmanaged
         && WindowsApi::exe_path(hwnd).is_ok()
     }
@@ -94,39 +110,37 @@ impl WindowManager {
         Ok(())
     }
 
-    pub fn set_active_workspace(&mut self, desktop_id: GUID) -> Result<()> {
-        let new_virtual_desktop = compress_u128(desktop_id.to_u128());
-        if new_virtual_desktop == self.current_virtual_desktop {
+    pub fn set_active_workspace(&mut self, virtual_desktop_id: String) -> Result<()> {
+        if virtual_desktop_id == self.current_virtual_desktop {
             return Ok(());
         }
+        log::trace!("Setting active workspace to: {:?}", virtual_desktop_id);
         self.discard_reservation()?;
-        self.current_virtual_desktop = new_virtual_desktop;
+        self.current_virtual_desktop = virtual_desktop_id;
         self.handle
             .emit_to(Self::TARGET, "set-active-workspace", &self.current_virtual_desktop)?;
         Ok(())
     }
 
-    /** returns true if the handle was added */
-    pub fn add_hwnd_no_emit(&mut self, hwnd: HWND) -> Result<bool> {
-        if self.paused || self.contains(hwnd) {
-            return Ok(false);
-        }
-        let desktop_id = WindowsApi::get_virtual_desktop_id(hwnd)?;
-        self.set_active_workspace(desktop_id)?;
-        self.hwnds.push(hwnd.0);
-        Ok(true)
-    }
-
     pub fn add_hwnd(&mut self, hwnd: HWND) -> Result<bool> {
-        if !self.add_hwnd_no_emit(hwnd)? {
+        if self.paused || self.contains(hwnd) {
             return Ok(false)
         }
+
+        let mut desktop_to_add = self.current_virtual_desktop.clone();
+        if WindowsApi::is_cloaked(hwnd)? {
+            desktop_to_add = format!("{:?}", WindowsApi::get_virtual_desktop_id(hwnd)?);
+        }
+
+        log::trace!("Adding {} <=> {:?} to desktop: {}", hwnd.0, WindowsApi::get_window_text(hwnd), desktop_to_add);
+
+        self.hwnds.push(hwnd.0);
         self.handle.emit_to(
             Self::TARGET,
             "add-window",
             AddWindowPayload {
                 hwnd: hwnd.0,
-                desktop_id: self.current_virtual_desktop.clone(),
+                desktop_id: desktop_to_add,
             },
         )?;
         Ok(true)

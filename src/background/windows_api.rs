@@ -11,9 +11,10 @@ use windows::{
         },
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
+            RemoteDesktop::ProcessIdToSessionId,
             Threading::{
-                OpenProcess, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_INFORMATION,
+                GetCurrentProcessId, OpenProcess, QueryFullProcessImageNameW,
+                PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32, PROCESS_QUERY_INFORMATION,
             },
         },
         UI::{
@@ -42,6 +43,23 @@ impl WindowsApi {
         };
 
         (process_id, thread_id)
+    }
+
+    pub fn current_process_id() -> u32 {
+        unsafe { GetCurrentProcessId() }
+    }
+
+    pub fn current_session_id() -> Result<u32> {
+        let process_id = Self::current_process_id();
+        let mut session_id = 0;
+
+        unsafe {
+            if ProcessIdToSessionId(process_id, &mut session_id).is_ok() {
+                Ok(session_id)
+            } else {
+                Err(eyre!("could not determine current session id").into())
+            }
+        }
     }
 
     pub fn is_window(hwnd: HWND) -> bool {
@@ -182,11 +200,8 @@ impl WindowsApi {
 
     pub fn get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
         unsafe {
-            let manager: Result<IVirtualDesktopManager, windows::core::Error> = CoCreateInstance(
-                &VirtualDesktopManager as *const _ as *const _,
-                None,
-                CLSCTX_ALL,
-            );
+            let manager: Result<IVirtualDesktopManager, windows::core::Error> =
+                CoCreateInstance(&VirtualDesktopManager, None, CLSCTX_ALL);
             Ok(manager?)
         }
     }

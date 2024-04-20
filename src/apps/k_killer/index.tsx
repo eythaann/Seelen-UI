@@ -2,6 +2,7 @@
 import { wrapConsole } from '../ConsoleWrapper';
 import { ErrorBoundary } from '../seelenweg/components/Error';
 import { setWindowAsFullSize } from '../utils';
+import { invoke } from '@tauri-apps/api/core';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -27,6 +28,7 @@ async function Main() {
   const WrappedRoot = () => {
     useEffect(() => {
       getCurrent().show();
+      invoke('complete_window_setup');
     }, []);
 
     return (
