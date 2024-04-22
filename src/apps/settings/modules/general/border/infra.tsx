@@ -12,9 +12,8 @@ export const BorderSettings = () => {
   const enabled = useAppSelector(BorderSelectors.enable);
   const offset = useAppSelector(BorderSelectors.offset);
   const width = useAppSelector(BorderSelectors.width);
-  const colorSingle = useAppSelector(BorderSelectors.colorSingle);
-  const colorMonocle = useAppSelector(BorderSelectors.colorMonocle);
-  const colorStack = useAppSelector(BorderSelectors.colorStack);
+  const color = useAppSelector(BorderSelectors.color);
+  const activeColor = useAppSelector(BorderSelectors.activeColor);
 
   const dispatch = useAppDispatch();
 
@@ -31,15 +30,11 @@ export const BorderSettings = () => {
   });
 
   const updateColorSingle = useDispatchCallback((color: Color) => {
-    dispatch(BorderActions.setColorSingle(color.toHexString() as HexColor));
+    dispatch(BorderActions.setColor(color.toHexString() as HexColor));
   });
 
-  const updateColorMonocle = useDispatchCallback((color: Color) => {
-    dispatch(BorderActions.setColorMonocle(color.toHexString() as HexColor));
-  });
-
-  const updateColorStack = useDispatchCallback((color: Color) => {
-    dispatch(BorderActions.setColorStack(color.toHexString() as HexColor));
+  const updateActiveColor = useDispatchCallback((color: Color) => {
+    dispatch(BorderActions.setActiveColor(color.toHexString() as HexColor));
   });
 
   return (
@@ -60,32 +55,20 @@ export const BorderSettings = () => {
         <InputNumber value={width} onChange={updateWidth} disabled={!enabled} />
       </SettingsOption>
       <SettingsOption>
-        <span>Border color single</span>
+        <span>Border color</span>
         <ColorPicker
-          disabledAlpha
           showText
-          value={colorSingle}
+          value={color}
           onChangeComplete={updateColorSingle}
           disabled={!enabled}
         />
       </SettingsOption>
       <SettingsOption>
-        <span>Border color monocle</span>
+        <span>Border active color</span>
         <ColorPicker
-          disabledAlpha
           showText
-          value={colorMonocle}
-          onChangeComplete={updateColorMonocle}
-          disabled={!enabled}
-        />
-      </SettingsOption>
-      <SettingsOption>
-        <span>Border color stack</span>
-        <ColorPicker
-          disabledAlpha
-          showText
-          value={colorStack}
-          onChangeComplete={updateColorStack}
+          value={activeColor}
+          onChangeComplete={updateActiveColor}
           disabled={!enabled}
         />
       </SettingsOption>

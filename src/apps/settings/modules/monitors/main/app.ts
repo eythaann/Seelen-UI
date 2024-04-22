@@ -56,42 +56,6 @@ export const MonitorsSlice = createSlice({
       }
       monitor[key] = value;
     },
-    enableLayoutRules: (state, action: PayloadAction<ForWorkspace>) => {
-      const { workspaceIdx, monitorIdx } = action.payload;
-      let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
-      if (!workspace) {
-        return;
-      }
-      workspace.layoutRules = {};
-      for (let n = 1; n < 10; n++) {
-        workspace.layoutRules[n] = null;
-      }
-    },
-    disableLayoutRules: (state, action: PayloadAction<ForWorkspace>) => {
-      const { workspaceIdx, monitorIdx } = action.payload;
-      let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
-      if (workspace) {
-        workspace.layoutRules = null;
-      }
-    },
-    enableCustomLayoutRules: (state, action: PayloadAction<ForWorkspace>) => {
-      const { workspaceIdx, monitorIdx } = action.payload;
-      let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
-      if (!workspace) {
-        return;
-      }
-      workspace.customLayoutRules = {};
-      for (let n = 1; n < 10; n++) {
-        workspace.customLayoutRules[n] = null;
-      }
-    },
-    disableCustomLayoutRules: (state, action: PayloadAction<ForWorkspace>) => {
-      const { workspaceIdx, monitorIdx } = action.payload;
-      let workspace = state[monitorIdx]?.workspaces[workspaceIdx];
-      if (workspace) {
-        workspace.customLayoutRules = null;
-      }
-    },
   },
 });
 

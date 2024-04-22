@@ -87,16 +87,15 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
-    pub fn init(&mut self, app: AppHandle<Wry>) {
+    pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
         self.handle = Some(app.clone());
-        self.state = State::new(
-            &app.path()
-                .resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)
-                .expect("Failed to resolve path"),
-        )
-        .ok()
-        .unwrap_or_default();
+
+        let mut path = app.path().resolve(".config/seelen/settings.json", BaseDirectory::Home)?;
+        if !path.exists() {
+            path = app.path().resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)?;
+        }
+        self.state = State::new(&path).unwrap_or_default();
 
         if self.state.is_weg_enabled() {
             self.weg = Some(SeelenWeg::new(app.clone()));
@@ -115,6 +114,7 @@ impl Seelen {
         }
 
         self.initialized = true;
+        Ok(())
     }
 
     pub fn start(&mut self) -> Result<()> {
@@ -142,12 +142,7 @@ impl Seelen {
     pub fn ensure_folders(&self) -> Result<()> {
         log::trace!("Ensuring folders");
         let path = self.handle().path();
-
-        // komorebi window manager does not create this folder on first install/run 🤡
-        std::fs::create_dir_all(path.resolve("komorebi", BaseDirectory::LocalData)?)?;
-        // TODO(eythan) start migration
-        std::fs::create_dir_all(path.resolve(".config/komorebi-ui", BaseDirectory::Home)?)?;
-
+        std::fs::create_dir_all(path.resolve(".config/seelen", BaseDirectory::Home)?)?;
         Ok(())
     }
 

@@ -4,7 +4,6 @@ export interface BorderState {
   enable: boolean;
   offset: number;
   width: number;
-  colorSingle: HexColor;
-  colorMonocle: HexColor;
-  colorStack: HexColor;
+  color: HexColor;
+  activeColor: HexColor;
 }

@@ -1,6 +1,5 @@
 import { RootSlice } from './reducer';
 
-import { AnimationsSlice } from '../../general/animations/app';
 import { BorderSlice } from '../../general/border/app';
 import { ContainerTopBarSlice } from '../../general/containerTopBar/app';
 import { GeneralSettingsSlice } from '../../general/main/app';
@@ -15,7 +14,6 @@ export const RootSelectors = RootSlice.getSelectors(ownSelector);
 export const GeneralSettingsSelectors = GeneralSettingsSlice.getSelectors(RootSelectors.generals);
 export const SeelenWegSelectors = SeelenWegSlice.getSelectors(RootSelectors.seelenweg);
 
-export const AnimationsSelectors = AnimationsSlice.getSelectors(GeneralSettingsSelectors.animations);
 export const BorderSelectors = BorderSlice.getSelectors(GeneralSettingsSelectors.border);
 export const PopupSelectors = PopupSlice.getSelectors(GeneralSettingsSelectors.popups);
 export const ContainerTopBarSelectors = ContainerTopBarSlice.getSelectors(GeneralSettingsSelectors.containerTopBar);

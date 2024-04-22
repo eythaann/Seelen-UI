@@ -1,13 +1,10 @@
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
-import { ContainerBehaviors } from './ContainerBehaviours';
-import { FocusBehaviours } from './FocusBehaviours';
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
 import { Switch } from 'antd';
 import { useSelector } from 'react-redux';
 
 import { startup } from '../../../shared/infrastructure/tauri';
-import { AnimationsSettings } from '../../animations/infra';
 
 import { useAppDispatch } from '../../../shared/app/hooks';
 import { RootActions } from '../../../shared/app/reducer';
@@ -35,15 +32,7 @@ export function General() {
           <Switch onChange={onAutoStart} value={autostartStatus} />
         </SettingsOption>
       </SettingsGroup>
-
-      <SettingsGroup>
-        <FocusBehaviours />
-      </SettingsGroup>
-
-      <ContainerBehaviors />
-      <AnimationsSettings />
       <GlobalPaddings />
-
       <OthersConfigs />
     </>
   );

@@ -35,13 +35,17 @@ export const savePinnedItems = async (state: RootState): Promise<void> => {
   };
 
   const postfix = await isDevMode() ? '.dev' : '';
-  const yaml_route = await path.join(await path.homeDir(), `.config/komorebi-ui/seelenweg_items${postfix}.yaml`);
+  const yaml_route = await path.join(await path.homeDir(), `.config/seelen/seelenweg_items${postfix}.yaml`);
   await writeTextFile(yaml_route, yaml.dump(data));
 };
 
 export const loadPinnedItems = async (): Promise<YamlWeg> => {
   const postfix = await isDevMode() ? '.dev' : '';
-  const yaml_route = await path.join(await path.homeDir(), `.config/komorebi-ui/seelenweg_items${postfix}.yaml`);
+  let yaml_route = await path.join(await path.homeDir(), `.config/seelen/seelenweg_items${postfix}.yaml`);
+
+  if (!(await exists(yaml_route))) {
+    yaml_route = await path.join(await path.homeDir(), `.config/komorebi-ui/seelenweg_items${postfix}.yaml`);
+  }
 
   if (!(await exists(yaml_route))) {
     return {

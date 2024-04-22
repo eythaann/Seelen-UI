@@ -18,9 +18,12 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     theme: null,
   };
 
-  const json_route =
-    route || (await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json'));
+  let configPath = await path.join(await path.homeDir(), '.config/seelen/settings.json');
+  if (!(await fs.exists(configPath))) {
+    configPath = await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json');
+  }
 
+  const json_route = route || configPath;
   if (!(await fs.exists(json_route))) {
     return userSettings;
   }
@@ -91,8 +94,8 @@ export async function loadAppsTemplates() {
 }
 
 export async function saveUserSettings(settings: Omit<UserSettings, 'themes' | 'theme'>) {
-  const json_route = await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json');
-  const yaml_route = await path.join(await path.homeDir(), '.config/komorebi-ui/applications.yml');
+  const json_route = await path.join(await path.homeDir(), '.config/seelen/settings.json');
+  const yaml_route = await path.join(await path.homeDir(), '.config/seelen/applications.yml');
   settings.jsonSettings.app_specific_configuration_path = yaml_route;
 
   if (settings.ahkEnabled) {
