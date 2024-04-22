@@ -1,7 +1,6 @@
 import { StaticConfig } from '../../../../../JsonSettings.interface';
 import { UserSettings } from '../../../../../shared.interfaces';
 import { ApplicationConfiguration as YamlAppConfiguration } from '../../../../../YamlSettings.interface';
-import { ColorFactory } from 'antd/es/color-picker/color';
 
 import {
   AppConfiguration,
@@ -17,7 +16,6 @@ import { Monitor, Workspace } from '../../monitors/main/domain';
 import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../seelenweg/domain';
 import { ContainerTopBarMode } from '../../WindowManager/containerTopBar/domain';
 import { WMSettingsState } from '../../WindowManager/main/domain';
-import { HexColor } from '../domain/interfaces';
 import { RootState } from '../domain/state';
 
 const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
@@ -35,12 +33,6 @@ const JsonToState_WManager = (json: anyObject, wmSettings: WMSettingsState): WMS
     autoStackinByCategory: json.auto_stack_by_category ?? wmSettings.autoStackinByCategory,
     border: {
       enabled: json.border?.enabled ?? wmSettings.border.enabled,
-      color: new ColorFactory(
-        json.border?.color || wmSettings.border.color,
-      ).toHexString() as HexColor,
-      activeColor: new ColorFactory(
-        json.border?.active_color || wmSettings.border.activeColor,
-      ).toHexString() as HexColor,
       offset: json.border?.offset ?? wmSettings.border.offset,
       width: json.border?.width ?? wmSettings.border.width,
     },
@@ -249,8 +241,6 @@ const StateToJson_WManager = (state: WMSettingsState): StaticConfig => {
       enabled: state.border.enabled,
       offset: state.border.offset,
       width: state.border.width,
-      color: new ColorFactory(state.border.color).toHexString(),
-      active_color: new ColorFactory(state.border.activeColor).toHexString(),
     },
     top_bar: {
       mode: state.containerTopBar.mode,

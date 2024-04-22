@@ -7,9 +7,7 @@ import { BorderState } from './domain';
 const initialState: BorderState = {
   enabled: false,
   offset: -1,
-  width: 8,
-  color: '#ff0000',
-  activeColor: '#00ff00',
+  width: 3,
 };
 
 export const BorderSlice = createSlice({
