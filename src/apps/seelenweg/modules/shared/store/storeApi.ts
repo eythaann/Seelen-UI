@@ -2,8 +2,6 @@ import { path } from '@tauri-apps/api';
 import { exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 
-import { isDevMode } from '../utils/infra';
-
 import { isRealPinned } from './app';
 
 import { App, RootState, SavedAppsInYaml } from './domain';
@@ -34,17 +32,15 @@ export const savePinnedItems = async (state: RootState): Promise<void> => {
     right: state.pinnedOnRight.reduce(cb, []),
   };
 
-  const postfix = await isDevMode() ? '.dev' : '';
-  const yaml_route = await path.join(await path.homeDir(), `.config/seelen/seelenweg_items${postfix}.yaml`);
+  const yaml_route = await path.join(await path.homeDir(), '.config/seelen/seelenweg_items.yaml');
   await writeTextFile(yaml_route, yaml.dump(data));
 };
 
 export const loadPinnedItems = async (): Promise<YamlWeg> => {
-  const postfix = await isDevMode() ? '.dev' : '';
-  let yaml_route = await path.join(await path.homeDir(), `.config/seelen/seelenweg_items${postfix}.yaml`);
+  let yaml_route = await path.join(await path.homeDir(), '.config/seelen/seelenweg_items.yaml');
 
   if (!(await exists(yaml_route))) {
-    yaml_route = await path.join(await path.homeDir(), `.config/komorebi-ui/seelenweg_items${postfix}.yaml`);
+    yaml_route = await path.join(await path.homeDir(), '.config/komorebi-ui/seelenweg_items.yaml');
   }
 
   if (!(await exists(yaml_route))) {
