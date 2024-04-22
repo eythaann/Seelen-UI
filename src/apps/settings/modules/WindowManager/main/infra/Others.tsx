@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../../shared/app/hooks';
 import { GeneralSettingsSelectors } from '../../../shared/app/selectors';
-import { GeneralSettingsActions } from '../app';
+import { WManagerSettingsActions } from '../app';
 
 export const OthersConfigs = () => {
   const resizeDelta = useAppSelector(GeneralSettingsSelectors.resizeDelta);
@@ -12,7 +12,7 @@ export const OthersConfigs = () => {
   const dispatch = useDispatch();
 
   const onChangeResizeDelta = (value: number | null) => {
-    dispatch(GeneralSettingsActions.setResizeDelta(value || 0));
+    dispatch(WManagerSettingsActions.setResizeDelta(value || 0));
   };
 
   return (

@@ -5,7 +5,7 @@ import { reducersFor, selectorsFor } from '../../shared/app/utils';
 import { BorderState } from './domain';
 
 const initialState: BorderState = {
-  enable: false,
+  enabled: false,
   offset: -1,
   width: 8,
   color: '#ff0000',

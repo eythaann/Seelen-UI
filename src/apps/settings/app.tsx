@@ -4,11 +4,11 @@ import { Suspense } from 'react';
 
 import { AppsConfiguration } from './modules/appsConfigurations/infra/infra';
 import { General } from './modules/general/main/infra';
-import { StylesView } from './modules/general/visuals/infra';
 import { Information } from './modules/information/infrastructure';
 import { Monitors } from './modules/monitors/main/infra';
 import { SeelenWegSettings } from './modules/seelenweg/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
+import { ThemesView } from './modules/Theming/infra';
 
 import { useAppSelector } from './modules/shared/app/hooks';
 import { RootSelectors } from './modules/shared/app/selectors';
@@ -18,7 +18,7 @@ import { Route } from './modules/shared/domain/routes';
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.GENERAL]: General,
   [Route.MONITORS]: Monitors,
-  [Route.STYLES]: StylesView,
+  [Route.STYLES]: ThemesView,
   [Route.SHORTCUTS]: Shortcuts,
   [Route.SPECIFIT_APPS]: AppsConfiguration,
   [Route.INFO]: Information,

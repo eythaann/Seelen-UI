@@ -5,6 +5,7 @@ import { AppConfiguration } from '../../appsConfigurations/domain';
 import { GeneralSettingsState } from '../../general/main/domain';
 import { Monitor } from '../../monitors/main/domain';
 import { SeelenWegState } from '../../seelenweg/domain';
+import { WMSettingsState } from '../../WindowManager/main/domain';
 
 export interface RootState {
   route: Route;
@@ -13,6 +14,7 @@ export interface RootState {
   monitors: Monitor[];
   appsConfigurations: AppConfiguration[];
   appsTemplates: (Omit<AppTemplate, 'apps'> & { apps: AppConfiguration[] })[];
+  seelenwm: WMSettingsState;
   seelenweg: SeelenWegState;
   availableThemes: Theme[];
   theme: Theme | null;

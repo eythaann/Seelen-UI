@@ -50,7 +50,7 @@ fn main() -> Result<()> {
         .setup(move |app| {
             log::info!("───────────────────── Starting Seelen ─────────────────────");
             let mut seelen = SEELEN.lock();
-            seelen.init(app.handle().clone());
+            seelen.init(app.handle().clone())?;
             unsafe {
                 SEELEN.force_unlock();
             }

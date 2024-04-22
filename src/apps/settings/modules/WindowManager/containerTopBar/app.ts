@@ -6,12 +6,6 @@ import { ContainerTabsState, ContainerTopBarMode } from './domain';
 
 const initialState: ContainerTabsState = {
   mode: ContainerTopBarMode.ON_STACK,
-  height: 40,
-  tabs: {
-    width: 200,
-    color: '#efefef',
-    background: '#333333',
-  },
 };
 
 export const ContainerTopBarSlice = createSlice({

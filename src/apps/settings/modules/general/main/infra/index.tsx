@@ -1,6 +1,4 @@
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
-import { GlobalPaddings } from './GlobalPaddings';
-import { OthersConfigs } from './Others';
 import { Switch } from 'antd';
 import { useSelector } from 'react-redux';
 
@@ -32,8 +30,6 @@ export function General() {
           <Switch onChange={onAutoStart} value={autostartStatus} />
         </SettingsOption>
       </SettingsGroup>
-      <GlobalPaddings />
-      <OthersConfigs />
     </>
   );
 }

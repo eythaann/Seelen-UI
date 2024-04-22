@@ -1,16 +1,12 @@
-import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
+import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Select } from 'antd';
 
-import { BorderSettings } from '../border/infra';
-import { ContainerTopBarSettings } from '../containerTopBar/infra';
-import { PopupsSettings } from '../popups/infra';
+import { GeneralSettingsActions } from '../general/main/app';
+import { useAppDispatch, useAppSelector } from '../shared/app/hooks';
+import { RootActions } from '../shared/app/reducer';
+import { GeneralSettingsSelectors, RootSelectors } from '../shared/app/selectors';
 
-import { useAppDispatch, useAppSelector } from '../../shared/app/hooks';
-import { RootActions } from '../../shared/app/reducer';
-import { GeneralSettingsSelectors, RootSelectors } from '../../shared/app/selectors';
-import { GeneralSettingsActions } from '../main/app';
-
-export const StylesView = () => {
+export const ThemesView = () => {
   const selectedTheme = useAppSelector(GeneralSettingsSelectors.selectedTheme);
   const themes = useAppSelector(RootSelectors.availableThemes);
   const usingTheme = useAppSelector(RootSelectors.theme);
@@ -46,11 +42,11 @@ export const StylesView = () => {
           <p><b>Description: </b>{usingTheme?.info.description}</p>
         </div>
       </SettingsGroup>
-      <PopupsSettings />
+      {/* <PopupsSettings />
       <ContainerTopBarSettings />
       <SettingsGroup>
         <BorderSettings />
-      </SettingsGroup>
+      </SettingsGroup> */}
     </>
   );
 };

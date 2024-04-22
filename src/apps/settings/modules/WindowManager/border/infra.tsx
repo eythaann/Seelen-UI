@@ -9,7 +9,7 @@ import { BorderActions } from './app';
 import { HexColor } from '../../shared/domain/interfaces';
 
 export const BorderSettings = () => {
-  const enabled = useAppSelector(BorderSelectors.enable);
+  const enabled = useAppSelector(BorderSelectors.enabled);
   const offset = useAppSelector(BorderSelectors.offset);
   const width = useAppSelector(BorderSelectors.width);
   const color = useAppSelector(BorderSelectors.color);
@@ -18,7 +18,7 @@ export const BorderSettings = () => {
   const dispatch = useAppDispatch();
 
   const toggleEnabled = useDispatchCallback((value: boolean) => {
-    dispatch(BorderActions.setEnable(value));
+    dispatch(BorderActions.setEnabled(value));
   });
 
   const updateOffset = useDispatchCallback((value: number | null) => {

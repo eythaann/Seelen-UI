@@ -1,7 +1,7 @@
 import { HexColor } from '../../shared/domain/interfaces';
 
 export interface BorderState {
-  enable: boolean;
+  enabled: boolean;
   offset: number;
   width: number;
   color: HexColor;

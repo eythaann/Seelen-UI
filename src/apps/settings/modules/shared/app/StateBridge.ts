@@ -9,63 +9,48 @@ import {
   ApplicationOptions,
   MatchingStrategy,
 } from '../../appsConfigurations/domain';
-import { ContainerTopBarMode } from '../../general/containerTopBar/domain';
 import {
   GeneralSettingsState,
 } from '../../general/main/domain';
 import { Layout } from '../../monitors/layouts/domain';
 import { Monitor, Workspace } from '../../monitors/main/domain';
 import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../seelenweg/domain';
+import { ContainerTopBarMode } from '../../WindowManager/containerTopBar/domain';
+import { WMSettingsState } from '../../WindowManager/main/domain';
 import { HexColor } from '../domain/interfaces';
 import { RootState } from '../domain/state';
 
 const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
-  const globalWorkAreaOffset = { ...(json.global_work_area_offset ?? generals.globalWorkAreaOffset) };
+  return {
+    selectedTheme: json.theme_filename ?? generals.selectedTheme,
+  };
+};
+
+const JsonToState_WManager = (json: anyObject, wmSettings: WMSettingsState): WMSettingsState => {
+  const globalWorkAreaOffset = { ...(json.global_work_area_offset ?? wmSettings.globalWorkAreaOffset) };
   globalWorkAreaOffset.bottom = globalWorkAreaOffset.bottom - globalWorkAreaOffset.top;
   globalWorkAreaOffset.right = globalWorkAreaOffset.right - globalWorkAreaOffset.left;
 
   return {
-    selectedTheme: json.theme_filename ?? generals.selectedTheme,
-    autoStackinByCategory: json.auto_stack_by_category ?? generals.autoStackinByCategory,
+    autoStackinByCategory: json.auto_stack_by_category ?? wmSettings.autoStackinByCategory,
     border: {
-      enable: json.active_window_border ?? generals.border.enable,
+      enabled: json.border?.enabled ?? wmSettings.border.enabled,
       color: new ColorFactory(
-        json.active_window_border_colours?.single || generals.border.color,
+        json.border?.color || wmSettings.border.color,
       ).toHexString() as HexColor,
       activeColor: new ColorFactory(
-        json.active_window_border_colours?.monocle || generals.border.activeColor,
+        json.border?.active_color || wmSettings.border.activeColor,
       ).toHexString() as HexColor,
-      offset: json.border_offset ?? generals.border.offset,
-      width: json.border_width ?? generals.border.width,
-    },
-    popups: {
-      enable: json.popups?.enable ?? generals.popups.enable,
-      x: json.popups?.x ?? generals.popups.x,
-      y: json.popups?.y ?? generals.popups.y,
-      width: json.popups?.width ?? generals.popups.width,
-      height: json.popups?.height ?? generals.popups.height,
-      textColor: new ColorFactory(json.popups?.text_color ?? generals.popups.textColor).toHexString(),
-      background: new ColorFactory(json.popups?.background ?? generals.popups.background).toHexString(),
-      borderColor: new ColorFactory(json.popups?.border_color ?? generals.popups.borderColor).toHexString(),
-      borderWidth: json.popups?.border_width ?? generals.popups.borderWidth,
+      offset: json.border?.offset ?? wmSettings.border.offset,
+      width: json.border?.width ?? wmSettings.border.width,
     },
     containerTopBar: {
-      height: json.top_bar?.height ?? generals.containerTopBar.height,
-      mode: (json.top_bar?.mode as ContainerTopBarMode) ?? generals.containerTopBar.mode,
-      tabs: {
-        width: json.top_bar?.tabs?.width ?? generals.containerTopBar.tabs.width,
-        color: new ColorFactory(
-          json.top_bar?.tabs?.color || generals.containerTopBar.tabs.color,
-        ).toHexString() as HexColor,
-        background: new ColorFactory(
-          json.top_bar?.tabs?.background || generals.containerTopBar.tabs.background,
-        ).toHexString() as HexColor,
-      },
+      mode: (json.top_bar?.mode as ContainerTopBarMode) ?? wmSettings.containerTopBar.mode,
     },
-    containerPadding: json.default_container_padding ?? generals.containerPadding,
-    workspacePadding: json.default_workspace_padding ?? generals.workspacePadding,
+    containerPadding: json.default_container_padding ?? wmSettings.containerPadding,
+    workspacePadding: json.default_workspace_padding ?? wmSettings.workspacePadding,
     globalWorkAreaOffset,
-    resizeDelta: json.resize_delta ?? generals.resizeDelta,
+    resizeDelta: json.resize_delta ?? wmSettings.resizeDelta,
   };
 };
 
@@ -245,6 +230,7 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
     theme,
     availableThemes: themes,
     generals: JsonToState_Generals(jsonSettings, initialState.generals),
+    seelenwm: JsonToState_WManager(jsonSettings, initialState.seelenwm),
     seelenweg: JsonToState_Seelenweg(jsonSettings, initialState.seelenweg),
     monitors: JsonToState_Monitors(jsonSettings, initialState.monitors),
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
@@ -253,40 +239,22 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
   };
 };
 
-const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
+const StateToJson_WManager = (state: WMSettingsState): StaticConfig => {
   const global_work_area_offset = { ...state.globalWorkAreaOffset };
   global_work_area_offset.bottom = global_work_area_offset.bottom + global_work_area_offset.top;
   global_work_area_offset.right = global_work_area_offset.right + global_work_area_offset.left;
 
   return {
-    theme_filename: state.selectedTheme || undefined,
     auto_stack_by_category: state.autoStackinByCategory,
     border: {
-      enabled: state.border.enable,
+      enabled: state.border.enabled,
       offset: state.border.offset,
       width: state.border.width,
       color: new ColorFactory(state.border.color).toHexString(),
       active_color: new ColorFactory(state.border.activeColor).toHexString(),
     },
     top_bar: {
-      height: state.containerTopBar.height,
       mode: state.containerTopBar.mode,
-      tabs: {
-        width: state.containerTopBar.tabs.width,
-        color: state.containerTopBar.tabs.color,
-        background: state.containerTopBar.tabs.background,
-      },
-    },
-    popups: {
-      enable: state.popups.enable,
-      x: state.popups.x,
-      y: state.popups.y,
-      width: state.popups.width,
-      height: state.popups.height,
-      text_color: state.popups.textColor,
-      background: state.popups.background,
-      border_color: state.popups.borderColor,
-      border_width: state.popups.borderWidth,
     },
     default_container_padding: state.containerPadding,
     default_workspace_padding: state.workspacePadding,
@@ -329,10 +297,17 @@ const StateToJson_SeelenWeg = (state: SeelenWegState): Partial<StaticConfig> => 
   };
 };
 
+const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
+  return {
+    theme_filename: state.selectedTheme || undefined,
+  };
+};
+
 export const StateToJsonSettings = (state: RootState): StaticConfig => {
   return {
     ...StateToJson_Generals(state.generals),
     ...StateToJson_Monitors(state.monitors),
+    ...StateToJson_WManager(state.seelenwm),
     ...StateToJson_SeelenWeg(state.seelenweg),
   };
 };

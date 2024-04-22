@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../../shared/app/hooks';
 import { Rect } from '../../../shared/app/Rect';
 import { GeneralSettingsSelectors } from '../../../shared/app/selectors';
-import { GeneralSettingsActions } from '../app';
+import { WManagerSettingsActions } from '../app';
 
 export const GlobalPaddings = () => {
   const containerPadding = useAppSelector(GeneralSettingsSelectors.containerPadding);
@@ -16,7 +16,7 @@ export const GlobalPaddings = () => {
 
   const onChangeGlobalOffset = (side: keyof Rect, value: number | null) => {
     dispatch(
-      GeneralSettingsActions.setGlobalWorkAreaOffset({
+      WManagerSettingsActions.setGlobalWorkAreaOffset({
         ...workAreaOffset,
         [side]: value || 0,
       }),
@@ -24,11 +24,11 @@ export const GlobalPaddings = () => {
   };
 
   const onChangeDefaultGap = (value: number | null) => {
-    dispatch(GeneralSettingsActions.setContainerPadding(value || 0));
+    dispatch(WManagerSettingsActions.setContainerPadding(value || 0));
   };
 
   const onChangeDefaultPadding = (value: number | null) => {
-    dispatch(GeneralSettingsActions.setWorkspacePadding(value || 0));
+    dispatch(WManagerSettingsActions.setWorkspacePadding(value || 0));
   };
 
   return (
