@@ -2,6 +2,7 @@ export enum Route {
   GENERAL = 'general',
   MONITORS = 'monitors',
   STYLES = 'styles',
+  SEELEN_WM = 'seelen_wm',
   SEELEN_WEG = 'seelen_weg',
   SPECIFIT_APPS = 'specifit_apps',
   SHORTCUTS = 'shortcuts',
@@ -16,6 +17,7 @@ export const RouteLabels: Record<Route, string> = {
   [Route.SPECIFIT_APPS]: 'Apps Configurations',
   [Route.INFO]: 'Information',
   [Route.SEELEN_WEG]: 'SeelenWeg Beta',
+  [Route.SEELEN_WM]: 'Tiling Window Manager',
 };
 
 export const RouteExtraInfo: { [key in Route]?: string } = {
@@ -33,4 +35,5 @@ export const RouteIcons: Record<Route, string> = {
   [Route.SPECIFIT_APPS]: '🅰️',
   [Route.INFO]: '🛈',
   [Route.SEELEN_WEG]: '🚧',
+  [Route.SEELEN_WM]: '🪟',
 };

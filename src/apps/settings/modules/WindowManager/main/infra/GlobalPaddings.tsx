@@ -4,13 +4,13 @@ import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../../shared/app/hooks';
 import { Rect } from '../../../shared/app/Rect';
-import { GeneralSettingsSelectors } from '../../../shared/app/selectors';
+import { SeelenWmSelectors } from '../../../shared/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 export const GlobalPaddings = () => {
-  const containerPadding = useAppSelector(GeneralSettingsSelectors.containerPadding);
-  const workspacePadding = useAppSelector(GeneralSettingsSelectors.workspacePadding);
-  const workAreaOffset = useAppSelector(GeneralSettingsSelectors.globalWorkAreaOffset);
+  const containerPadding = useAppSelector(SeelenWmSelectors.containerPadding);
+  const workspacePadding = useAppSelector(SeelenWmSelectors.workspacePadding);
+  const workAreaOffset = useAppSelector(SeelenWmSelectors.globalWorkAreaOffset);
 
   const dispatch = useDispatch();
 

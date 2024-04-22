@@ -3,11 +3,11 @@ import { InputNumber } from 'antd';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../../shared/app/hooks';
-import { GeneralSettingsSelectors } from '../../../shared/app/selectors';
+import { SeelenWmSelectors } from '../../../shared/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 export const OthersConfigs = () => {
-  const resizeDelta = useAppSelector(GeneralSettingsSelectors.resizeDelta);
+  const resizeDelta = useAppSelector(SeelenWmSelectors.resizeDelta);
 
   const dispatch = useDispatch();
 

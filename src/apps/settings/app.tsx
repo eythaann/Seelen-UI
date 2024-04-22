@@ -9,6 +9,7 @@ import { Monitors } from './modules/monitors/main/infra';
 import { SeelenWegSettings } from './modules/seelenweg/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
 import { ThemesView } from './modules/Theming/infra';
+import { WindowManagerSettings } from './modules/WindowManager/main/infra';
 
 import { useAppSelector } from './modules/shared/app/hooks';
 import { RootSelectors } from './modules/shared/app/selectors';
@@ -23,6 +24,7 @@ const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.SPECIFIT_APPS]: AppsConfiguration,
   [Route.INFO]: Information,
   [Route.SEELEN_WEG]: SeelenWegSettings,
+  [Route.SEELEN_WM]: WindowManagerSettings,
 };
 
 export function App() {

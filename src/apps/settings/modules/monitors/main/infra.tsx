@@ -9,7 +9,7 @@ import cs from './infra.module.css';
 import { AdvancedConfig } from './infra_advanced';
 
 import { useAppSelector } from '../../shared/app/hooks';
-import { GeneralSettingsSelectors, getMonitorSelector, RootSelectors } from '../../shared/app/selectors';
+import { getMonitorSelector, RootSelectors, SeelenWmSelectors } from '../../shared/app/selectors';
 import { defaultOnNull } from '../../shared/app/utils';
 import { MonitorsActions } from './app';
 
@@ -28,12 +28,12 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
 
   const containerPadding = defaultOnNull(
     workspace.containerPadding,
-    useAppSelector(GeneralSettingsSelectors.containerPadding),
+    useAppSelector(SeelenWmSelectors.containerPadding),
   );
 
   const workspacePadding = defaultOnNull(
     workspace.workspacePadding,
-    useAppSelector(GeneralSettingsSelectors.workspacePadding),
+    useAppSelector(SeelenWmSelectors.workspacePadding),
   );
 
   const onDelete = () => {
