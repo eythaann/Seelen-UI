@@ -30,29 +30,6 @@ const showNewUserTutorial = () => {
   });
 };
 
-const showMigrationInfo = () => {
-  const modal = Modal.info({
-    title: 'Migration from Komorebi CLI',
-    className: cs.welcome,
-    content: (
-      <div>
-        <p>
-          If you are migrating from komorebi cli, you can load your old configs in the information
-          tab, also try remove or unistalling the old version to avoid any type of issues or
-          conflicts, good luck!.
-        </p>
-      </div>
-    ),
-    okText: 'Ok',
-    onOk: () => {
-      modal.destroy();
-      showNewUserTutorial();
-    },
-    cancelButtonProps: { style: { display: 'none' } },
-    centered: true,
-  });
-};
-
 export const StartUser = () => {
   startup.enable();
   store.dispatch(RootActions.setAutostart(true));
@@ -74,7 +51,7 @@ export const StartUser = () => {
     onOk: () => {
       SaveStore();
       modal.destroy();
-      showMigrationInfo();
+      showNewUserTutorial();
     },
     icon: <div className={cs.icon}>🎉</div>,
     cancelButtonProps: { style: { display: 'none' } },

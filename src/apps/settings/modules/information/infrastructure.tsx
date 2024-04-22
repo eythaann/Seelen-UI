@@ -13,12 +13,6 @@ export function Information() {
       <SettingsGroup>
         <SettingsSubGroup label="Documentation">
           <SettingsOption>
-            <span>komorebi <span className={cs.version}>v{EnvConfig.komorebiVersion}</span>:</span>
-            <a href="https://lgug2z.github.io/komorebi" target="_blank">
-              lgug2z.github.io/komorebi
-            </a>
-          </SettingsOption>
-          <SettingsOption>
             <span>Seelen UI <span className={cs.version}>v{EnvConfig.version}</span>:</span>
             <a href="https://github.com/eythaann/seelen-ui" target="_blank">
               github.com/eythaann/seelen-ui

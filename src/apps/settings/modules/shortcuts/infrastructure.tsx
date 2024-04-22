@@ -23,7 +23,7 @@ export function Shortcuts() {
           <span>
             Enable Seelen UI shortcuts{' '}
             <Tooltip
-              title="Disable if you will implement your own shortcuts using the Komorebi CLI."
+              title="Disable if you will implement your own shortcuts using the CLI."
             >
               🛈
             </Tooltip>

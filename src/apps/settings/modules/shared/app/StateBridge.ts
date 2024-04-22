@@ -125,7 +125,6 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
   /**
    * From here are just migration from komorebi cli static configs.
    */
-
   if (json.unmanage_rules) {
     Object.values(json.unmanage_rules).forEach((rule) => {
       apps.push({

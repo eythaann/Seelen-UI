@@ -6,7 +6,6 @@ export enum ApplicationOptions {
   Force = 'force',
   ObjectNameChange = 'object_name_change',
   Layered = 'layered',
-  /*BorderOverflow = 'border_overflow',*/ // present in komorebi but deprecated
   TrayAndMultiWindow = 'tray_and_multi_window',
 }
 

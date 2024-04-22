@@ -40,11 +40,6 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
                     log_if_error(SEELEN.lock().show_settings());
                 }
                 "pause" => {
-                    app.shell()
-                        .command("komorebic.exe")
-                        .args(["toggle-pause"])
-                        .spawn()
-                        .expect("Failed to spawn komorebic");
                 }
                 "restart" => app.restart(),
                 "quit" => app.exit(0),

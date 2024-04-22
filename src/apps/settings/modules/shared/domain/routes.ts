@@ -20,7 +20,7 @@ export const RouteLabels: Record<Route, string> = {
 
 export const RouteExtraInfo: { [key in Route]?: string } = {
   [Route.SPECIFIT_APPS]: `
-    Komorebi use only one identifier per app (first match found) so the order in how are specificated is important,
+    Seelen UI use only one identifier per app (first match found) so the order in how are specificated is important,
     the lastest added will be priorized, as note the table is sorted by default from lastest to old.
   `,
 };
