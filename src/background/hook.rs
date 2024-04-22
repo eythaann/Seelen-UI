@@ -8,27 +8,45 @@ use windows::Win32::{
             DispatchMessageW, EnumWindows, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
             EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
             EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
-            EVENT_OBJECT_SHOW, EVENT_OBJECT_UNCLOAKED, EVENT_SYSTEM_FOREGROUND,
+            EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND,
             EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MOVESIZEEND,
             EVENT_SYSTEM_MOVESIZESTART, MSG,
         },
     },
 };
+use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    error_handler::{log_if_error, Result},
+    error_handler::{log_if_error, Result}, 
     k_killer::WindowManager,
     seelen::SEELEN,
     seelenweg::SeelenWeg,
     windows_api::WindowsApi,
 };
 
-pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
+pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
+    match event {
+        DesktopEvent::DesktopChanged{ new, old: _ } => {
+            let mut seelen = SEELEN.lock();
+            if let Some(wm) = seelen.wm_mut() {
+                wm.discard_reservation()?;
+                wm.set_active_workspace(format!("{:?}", new.get_id()?))?;
+            }
+        }
+        DesktopEvent::WindowChanged(hwnd) => {
+            println!("WindowChanged {} - {}", hwnd.0, WindowsApi::get_window_text(hwnd))
+        }
+        _ => {}
+    }
+    Ok(())
+}
+
+pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
     match event {
         EVENT_SYSTEM_MOVESIZESTART => {
             let seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm() {
-                if wm.contains(hwnd) {
+                if wm.is_managed(hwnd) {
                     wm.pseudo_pause()?;
                 }
             }
@@ -36,17 +54,17 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
         EVENT_SYSTEM_MOVESIZEEND => {
             let seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm() {
-                if wm.contains(hwnd) {
+                if wm.is_managed(hwnd) {
                     wm.force_retiling()?;
                     sleep(Duration::from_millis(35));
-                    wm.psudo_resume()?;
+                    wm.pseudo_resume()?;
                 }
             }
         }
         EVENT_SYSTEM_MINIMIZEEND => {
             let mut seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm_mut() {
-                if !wm.contains(hwnd) && WindowManager::should_handle(hwnd) {
+                if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
                     wm.add_hwnd(hwnd)?;
                 }
             }
@@ -54,7 +72,7 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
         EVENT_SYSTEM_MINIMIZESTART => {
             let mut seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm_mut() {
-                if wm.contains(hwnd) {
+                if wm.is_managed(hwnd) {
                     wm.remove_hwnd(hwnd)?;
                 }
             }
@@ -76,7 +94,7 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
             }
 
             if let Some(wm) = seelen.wm_mut() {
-                if wm.contains(hwnd) {
+                if wm.is_managed(hwnd) {
                     wm.remove_hwnd(hwnd)?;
                 }
             }
@@ -91,23 +109,32 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
             }
 
             if let Some(wm) = seelen.wm_mut() {
-                if wm.contains(hwnd) {
+                let title = WindowsApi::get_window_text(hwnd);
+                if WindowManager::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
+                    wm.pseudo_resume()?;
+                }
+                if wm.is_managed(hwnd) {
                     wm.remove_hwnd(hwnd)?;
                 }
             }
         }
-        EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE | EVENT_OBJECT_UNCLOAKED => {
+        EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE /* | EVENT_OBJECT_UNCLOAKED */ => {
             let mut seelen = SEELEN.lock();
             if let Some(weg) = seelen.weg_mut() {
-                if SeelenWeg::should_handle_hwnd(hwnd) {
+                if SeelenWeg::is_real_window(hwnd) {
                     weg.add_hwnd(hwnd);
                 }
             }
 
             if let Some(wm) = seelen.wm_mut() {
-                if WindowManager::should_handle(hwnd) {
-                    wm.add_hwnd(hwnd)?;
+                let title = WindowsApi::get_window_text(hwnd);
+                if WindowManager::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
+                    wm.pseudo_pause()?;
+                }
+
+                if WindowManager::should_manage(hwnd) {
                     wm.set_active_window(hwnd)?;
+                    wm.add_hwnd(hwnd)?;
                 }
             }
         }
@@ -116,15 +143,15 @@ pub fn process_event(event: u32, hwnd: HWND) -> Result<()> {
             if let Some(weg) = seelen.weg_mut() {
                 if weg.contains_app(hwnd) {
                     weg.update_app(hwnd);
-                } else if SeelenWeg::should_handle_hwnd(hwnd) {
+                } else if SeelenWeg::is_real_window(hwnd) {
                     weg.add_hwnd(hwnd);
                 }
             }
             
             if let Some(wm) = seelen.wm_mut() {
-                if !wm.contains(hwnd) && WindowManager::should_handle(hwnd) {
-                    wm.add_hwnd(hwnd)?;
+                if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
                     wm.set_active_window(hwnd)?;
+                    wm.add_hwnd(hwnd)?;
                 }
             }
         }
@@ -182,20 +209,19 @@ pub extern "system" fn win_event_hook(
         WindowsApi::get_window_text(hwnd)
     ); */
 
-    log_if_error(WindowManager::process_event(event, hwnd));
-    log_if_error(process_event(event, hwnd));
+    log_if_error(process_win_event(event, hwnd));
 }
 
 unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
     let mut seelen = SEELEN.lock();
     if let Some(weg) = seelen.weg_mut() {
-        if SeelenWeg::should_handle_hwnd(hwnd) {
+        if SeelenWeg::is_real_window(hwnd) {
             weg.add_hwnd(hwnd);
         }
     }
 
     if let Some(wm) = seelen.wm_mut() {
-        if WindowManager::should_handle(hwnd) {
+        if WindowManager::is_manageble_window(hwnd, true) {
             log_if_error(wm.add_hwnd(hwnd));
         }
     }
@@ -203,25 +229,30 @@ unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
 }
 
 pub fn register_hook_and_enum_windows() -> Result<()> {
-    std::thread::spawn(move || {
-        unsafe {
-            log_if_error(EnumWindows(Some(enum_opened_apps_proc), LPARAM(0)));
-        };
+    std::thread::spawn(move || unsafe {
+        log_if_error(EnumWindows(Some(enum_opened_apps_proc), LPARAM(0)));
 
-        unsafe { SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0) };
+        SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
 
         let mut msg: MSG = MSG::default();
         loop {
-            unsafe {
-                if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
-                    log::info!("windows event processing shutdown");
-                    break;
-                };
-                TranslateMessage(&msg);
-                DispatchMessageW(&msg);
-                std::thread::sleep(Duration::from_millis(10));
-            }
+            if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
+                log::info!("windows event processing shutdown");
+                break;
+            };
+            TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+            std::thread::sleep(Duration::from_millis(10));
         }
+    });
+
+    std::thread::spawn(move || -> Result<()> {
+        let (sender, receiver) = std::sync::mpsc::channel::<DesktopEvent>();
+        let _notifications_thread = listen_desktop_events(sender)?;
+        for event in receiver {
+            log_if_error(process_vd_event(event))
+        }
+        Ok(())
     });
     Ok(())
 }

@@ -4,6 +4,7 @@ import { listen } from '@tauri-apps/api/event';
 import { RootActions, RootSlice } from './app';
 
 import { Reservation, Sizing } from '../../layout/domain';
+import { HWND } from '../utils/domain';
 import { DesktopId, FocusAction } from './domain';
 
 export const store = configureStore({
@@ -53,5 +54,10 @@ export async function registerStoreEvents() {
 
   await listen<FocusAction>('focus', (event) => {
     store.dispatch(RootActions.focus(event.payload));
+  });
+
+  await listen<{ hwnd: HWND; desktop_id: DesktopId }>('move-window-to-workspace', (event) => {
+    store.dispatch(RootActions.removeWindow(event.payload.hwnd));
+    store.dispatch(RootActions.addWindow(event.payload));
   });
 }

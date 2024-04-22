@@ -70,7 +70,7 @@ pub fn handle_cli_events(_app: &AppHandle<Wry>, matches: &clap::ArgMatches) -> R
                 SEELEN.lock().show_settings()?;
             }
             WindowManager::CLI_IDENTIFIER => {
-                if let Some(wm) = SEELEN.lock().wm() {
+                if let Some(wm) = SEELEN.lock().wm_mut() {
                     wm.process(matches)?;
                 }
             }

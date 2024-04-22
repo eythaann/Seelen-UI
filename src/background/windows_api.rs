@@ -20,10 +20,11 @@ use windows::{
         UI::{
             Shell::{IVirtualDesktopManager, VirtualDesktopManager},
             WindowsAndMessaging::{
-                GetParent, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
-                IsWindow, IsWindowVisible, ShowWindow, ShowWindowAsync, SystemParametersInfoW,
-                ANIMATIONINFO, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION,
-                SPI_SETANIMATION, SW_NORMAL, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                GetForegroundWindow, GetParent, GetWindowRect, GetWindowTextW,
+                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, SHOW_WINDOW_CMD,
+                SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SW_MINIMIZE, SW_NORMAL,
+                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
             },
         },
     },
@@ -60,6 +61,18 @@ impl WindowsApi {
                 Err(eyre!("could not determine current session id").into())
             }
         }
+    }
+
+    pub fn get_foreground_window() -> HWND {
+        unsafe { GetForegroundWindow() }
+    }
+
+    pub fn force_set_foregorund(hwnd: HWND) -> Result<()> {
+        Self::set_minimize_animation(false)?;
+        Self::show_window_async(hwnd, SW_MINIMIZE);
+        Self::show_window_async(hwnd, SW_RESTORE);
+        Self::set_minimize_animation(true)?;
+        Ok(())
     }
 
     pub fn is_window(hwnd: HWND) -> bool {
@@ -255,18 +268,7 @@ impl WindowsApi {
     }
 }
 
-/* unsafe extern "system" fn enum_desktops_proc(hwnd: PCWSTR, _: LPARAM) -> BOOL {
-    println!("enum_desktops_proc {:?}", hwnd);
-    true.into()
-} */
-pub fn switch_desktop(_idx: u32) {
-    /*  TODO unsafe {
-        EnumDesktopsW(None, Some(enum_desktops_proc), LPARAM(0));
-    } */
-}
-
 /*
-
 may be this is useful later
 
 static CHILD_FROM_FRAME: AtomicIsize = AtoumicIsize::new(0);

@@ -1,14 +1,9 @@
-use std::{
-    thread::{self, sleep},
-    time::Duration,
-};
-
 use serde::Deserialize;
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{
         SetWindowPos, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOOWNERZORDER,
-        SWP_NOSENDCHANGING, SWP_NOZORDER, SW_MINIMIZE, SW_RESTORE,
+        SWP_NOSENDCHANGING, SWP_NOZORDER,
     },
 };
 
@@ -83,21 +78,7 @@ pub fn request_focus(hwnd: isize) -> Result<(), String> {
 
     let mut seelen = SEELEN.lock();
     if let Some(wm) = seelen.wm_mut() {
-        wm.pause(true, false)?;
-
-        WindowsApi::set_minimize_animation(false)?;
-        WindowsApi::show_window_async(hwnd, SW_MINIMIZE);
-        WindowsApi::show_window_async(hwnd, SW_RESTORE);
-
-        thread::spawn(|| -> Result<()> {
-            sleep(Duration::from_millis(35));
-            WindowsApi::set_minimize_animation(true)?;
-            let mut seelen = SEELEN.lock();
-            if let Some(wm) = seelen.wm_mut() {
-                wm.pause(false, false)?;
-            }
-            Ok(())
-        });
+        wm.force_focus(hwnd)?;
     }
     Ok(())
 }

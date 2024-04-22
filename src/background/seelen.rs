@@ -13,6 +13,7 @@ use crate::{
     seelen_shell::SeelenShell,
     seelenweg::SeelenWeg,
     state::State,
+    utils::run_ahk_file,
 };
 
 lazy_static! {
@@ -116,17 +117,16 @@ impl Seelen {
         self.initialized = true;
     }
 
-    pub fn start(&mut self) {
+    pub fn start(&mut self) -> Result<()> {
         self.ensure_folders().expect("Fail on ensuring folders");
-        if self.state.is_ahk_enabled() {
-            self.start_ahk_shortcuts();
-        }
+        self.start_ahk_shortcuts()?;
 
         if let Some(weg) = self.weg_mut() {
             log_if_error(weg.start());
         }
 
-        register_hook_and_enum_windows().expect("Failed to register hook");
+        register_hook_and_enum_windows()?;
+        Ok(())
     }
 
     pub fn stop(&self) {
@@ -151,33 +151,14 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn start_ahk_shortcuts(&self) {
-        log::trace!("Starting AHK shortcuts");
-
-        let handle = self.handle();
-
-        let ahk_path = handle
-            .path()
-            .resolve("static/redis/AutoHotkey.exe", BaseDirectory::Resource)
-            .expect("Failed to resolve path")
-            .to_string_lossy()
-            .trim_start_matches(r"\\?\")
-            .to_owned();
-
-        let ahk_script_path = handle
-            .path()
-            .resolve("static/seelen.ahk", BaseDirectory::Resource)
-            .expect("Failed to resolve path")
-            .to_string_lossy()
-            .trim_start_matches(r"\\?\")
-            .to_owned();
-
-        handle
-            .shell()
-            .command(ahk_path)
-            .arg(ahk_script_path)
-            .spawn()
-            .expect("Failed to spawn shortcuts");
+    pub fn start_ahk_shortcuts(&self) -> Result<()> {
+        if self.state.is_ahk_enabled() {
+            run_ahk_file(self.handle(), "seelen.ahk")?;
+            if self.wm().is_some(){
+                run_ahk_file(self.handle(), "seelen.wm.ahk")?;
+            }
+        }
+        Ok(())
     }
 
     pub fn kill_ahk_shortcuts(&self) {

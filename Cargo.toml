@@ -20,6 +20,7 @@ path = "src/background/main.rs"
 tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
+winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "2.0.0-beta", features = [
@@ -50,7 +51,7 @@ winreg = "0.52.0"
 crossbeam-channel = "0.5.12"
 
 [dependencies.windows]
-version = "0.54.0"
+version = "0.52.0"
 features = [
     "Win32_Foundation",
     "Win32_UI_Input_KeyboardAndMouse",

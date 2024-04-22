@@ -2,10 +2,13 @@ use clap::{value_parser, Arg, ArgAction, Command, ValueEnum};
 use color_eyre::eyre::eyre;
 use serde::{Deserialize, Serialize};
 use tauri::Manager;
+use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
-use crate::utils::{kebab_to_pascal, pascal_to_kebab};
-use crate::windows_api::switch_desktop;
+use crate::seelen::SEELEN;
+use crate::utils::virtual_desktop::VirtualDesktopManager;
+use crate::utils::{kebab_to_pascal, pascal_to_kebab, sleep_millis};
+use crate::windows_api::WindowsApi;
 
 use super::WindowManager;
 
@@ -100,7 +103,11 @@ get_subcommands![
     /** Cancels the current reservation */
     CancelReservation,
     /** Switches to the specified workspace. */
-    SwitchWorkspace(index: u8 => "The index of the workspace to switch to."),
+    SwitchWorkspace(index: usize => "The index of the workspace to switch to."),
+    /** Moves the window to the specified workspace. */
+    MoveToWorkspace(index: usize => "The index of the workspace to switch to."),
+    /** Sends the window to the specified workspace */
+    SendToWorkspace(index: usize => "The index of the workspace to switch to."),
     /** Increases or decreases the size of the window */
     Height(action: Sizing => "What to do with the height."),
     /** Increases or decreases the size of the window */
@@ -131,18 +138,80 @@ impl WindowManager {
         Ok(())
     }
 
-    pub fn process(&self, matches: &clap::ArgMatches) -> Result<()> {
+    pub fn process(&mut self, matches: &clap::ArgMatches) -> Result<()> {
         let subcommand = SubCommand::try_from(matches)?;
         log::trace!("Processing {:?}", subcommand);
         match subcommand {
             SubCommand::Pause => {
-                println!("Paused");
+                self.pause(true, true)?;
             }
             SubCommand::Resume => {
-                println!("Resume");
+                self.pause(false, true)?;
+                SEELEN.lock().start_ahk_shortcuts()?;
             }
             SubCommand::SwitchWorkspace(index) => {
-                switch_desktop(index as u32);
+                let desktops = VirtualDesktopManager::enum_virtual_desktops()?;
+                match desktops.get(index) {
+                    Some(_) => {
+                        self.pseudo_pause()?;
+                        std::thread::spawn(move || -> Result<()> {
+                            winvd::switch_desktop(index as u32)?;
+                            sleep_millis(35); // to ensure avoid any artifacs
+                            let mut seelen = SEELEN.lock();
+                            let wm = seelen.wm_mut().unwrap();
+                            if let Some(next) = Self::get_next_by_order(HWND(0)) {
+                                wm.force_focus(next)?;
+                            }
+                            wm.pseudo_resume()?;
+                            Ok(())
+                        });
+                    }
+                    None => log::error!("Invalid workspace index: {}", index),
+                }
+            }
+            SubCommand::SendToWorkspace(index) => {
+                let desktops = VirtualDesktopManager::enum_virtual_desktops()?;
+                match desktops.get(index) {
+                    Some(desktop) => {
+                        let to_move = WindowsApi::get_foreground_window();
+                        if self.is_managed(to_move) && !self.is_floating(to_move) {
+                            self.emit_send_to_workspace(to_move, desktop.id())?;
+                        }
+                        let guid = desktop.guid();
+                        std::thread::spawn(move || -> Result<()> {
+                            winvd::move_window_to_desktop(guid, &to_move)?;
+                            if let Some(next) = Self::get_next_by_order(to_move) {
+                                SEELEN.lock().wm_mut().unwrap().force_focus(next)?;
+                            }
+                            Ok(())
+                        });
+                    }
+                    None => log::error!("Invalid workspace index: {}", index),
+                }
+            }
+            SubCommand::MoveToWorkspace(index) => {
+                let desktops = VirtualDesktopManager::enum_virtual_desktops()?;
+                match desktops.get(index) {
+                    Some(desktop) => {
+                        let to_move = WindowsApi::get_foreground_window();
+                        let to_move_is_managed = self.is_managed(to_move);
+                        self.pseudo_pause()?;
+                        if to_move_is_managed && !self.is_floating(to_move) {
+                            self.emit_send_to_workspace(to_move, desktop.id())?;
+                        }
+                        let guid = desktop.guid();
+                        std::thread::spawn(move || -> Result<()> {
+                            let desktop = winvd::Desktop::from(guid);
+                            winvd::move_window_to_desktop(desktop, &to_move)?;
+                            winvd::switch_desktop(desktop)?;
+                            if to_move_is_managed {
+                                SEELEN.lock().wm_mut().unwrap().pseudo_resume()?;
+                            }
+                            Ok(())
+                        });
+                    }
+                    None => log::error!("Invalid workspace index: {}", index),
+                }
             }
             SubCommand::Reserve(side) => {
                 self.reserve(side)?;
@@ -160,7 +229,8 @@ impl WindowManager {
                 self.handle.emit_to(Self::TARGET, "update-width", action)?;
             }
             SubCommand::ResetWorkspaceSize => {
-                self.handle.emit_to(Self::TARGET, "reset-workspace-size", ())?;
+                self.handle
+                    .emit_to(Self::TARGET, "reset-workspace-size", ())?;
             }
             SubCommand::Focus(side) => {
                 self.handle.emit_to(Self::TARGET, "focus", side)?;

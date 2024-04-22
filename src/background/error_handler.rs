@@ -22,12 +22,14 @@ macro_rules! define_app_errors {
 define_app_errors!(
     Io(std::io::Error);
     Tauri(tauri::Error);
+    TauriShell(tauri_plugin_shell::Error);
     Eyre(color_eyre::eyre::Error);
     Windows(windows::core::Error);
     SerdeJson(serde_json::Error);
     Utf8(std::string::FromUtf8Error);
     Utf16(std::string::FromUtf16Error);
     CrossbeamRecv(crossbeam_channel::RecvError);
+    WinVD(winvd::Error);
 );
 
 impl std::fmt::Display for AppError {
@@ -47,6 +49,8 @@ impl std::error::Error for AppError {
             AppError::Utf8(err) => Some(err),
             AppError::Utf16(err) => Some(err),
             AppError::CrossbeamRecv(err) => Some(err),
+            AppError::WinVD(_) => None,
+            AppError::TauriShell(err) => Some(err),
         }
     }
 }

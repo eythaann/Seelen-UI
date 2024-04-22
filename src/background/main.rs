@@ -61,7 +61,7 @@ fn main() -> Result<()> {
                 seelen.show_settings()?;
             }
 
-            seelen.start();
+            seelen.start()?;
             Ok(())
         })
         .build(tauri::generate_context!())

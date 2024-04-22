@@ -57,7 +57,7 @@ fn media_prev() -> Result<(), String> {
 
 #[command]
 fn start_seelen_shortcuts() -> Result<(), String> {
-    SEELEN.lock().start_ahk_shortcuts();
+    SEELEN.lock().start_ahk_shortcuts()?;
     Ok(())
 }
 

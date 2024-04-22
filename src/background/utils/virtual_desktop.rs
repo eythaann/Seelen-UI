@@ -1,5 +1,5 @@
 use color_eyre::eyre::eyre;
-use windows::core::GUID;
+use windows::{core::GUID, Win32::Foundation::HWND};
 use winreg::{enums::HKEY_CURRENT_USER, RegKey};
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
@@ -12,6 +12,22 @@ pub struct VirtualDesktop {
     guid: GUID,
     #[allow(dead_code)]
     name: String,
+}
+
+impl From<GUID> for VirtualDesktop {
+    fn from(guid: GUID) -> Self {
+        let mut id: Vec<u8> = Vec::new();
+        id.append(&mut guid.data1.to_le_bytes().to_vec());
+        id.append(&mut guid.data2.to_le_bytes().to_vec());
+        id.append(&mut guid.data3.to_le_bytes().to_vec());
+        id.append(&mut guid.data4.to_vec());
+
+        Self {
+            id: id.try_into().expect("Invalid id length"),
+            guid,
+            name: String::new(),
+        }
+    }
 }
 
 impl From<Vec<u8>> for VirtualDesktop {
@@ -33,11 +49,14 @@ impl VirtualDesktop {
     pub fn id(&self) -> String {
         format!("{:?}", self.guid)
     }
+
+    pub fn guid(&self) -> GUID {
+        self.guid
+    }
 }
 
 impl VirtualDesktopManager {
-    /* pub fn enum_virtual_desktops(&self) -> Result<Vec<GUID>> {
-        let mut desktops = vec![];
+    pub fn enum_virtual_desktops() -> Result<Vec<VirtualDesktop>> {
         let session_id = WindowsApi::current_session_id()?;
         let hkcu = RegKey::predef(HKEY_CURRENT_USER);
 
@@ -48,7 +67,7 @@ impl VirtualDesktopManager {
         ))
         .ok()
         .and_then(
-            |desktops| match desktops.get_raw_value("CurrentVirtualDesktop") {
+            |desktops| match desktops.get_raw_value("VirtualDesktopIDs") {
                 Ok(current) => Option::from(current.bytes),
                 Err(_) => None,
             },
@@ -60,7 +79,7 @@ impl VirtualDesktopManager {
                 .open_subkey(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops")
                 .ok()
                 .and_then(
-                    |desktops| match desktops.get_raw_value("CurrentVirtualDesktop") {
+                    |desktops| match desktops.get_raw_value("VirtualDesktopIDs") {
                         Ok(current) => Option::from(current.bytes),
                         Err(_) => None,
                     },
@@ -68,12 +87,20 @@ impl VirtualDesktopManager {
         }
 
         match current {
-            Some(current) => Ok(GUID::from_u128(u128::from_be_bytes(
-                current.as_slice().try_into().expect("invalid length"),
-            ))),
+            Some(current) => {
+                let mut result = Vec::new();
+                for desktop_id in current.chunks_exact(16).map(|chunk| Vec::from(chunk)) {
+                    result.push(VirtualDesktop::from(desktop_id))
+                }
+                Ok(result)
+            },
             None => Err(eyre!("could not determine current virtual desktop").into()),
         }
-    } */
+    }
+
+    pub fn get_window_virtual_desktop(hwnd: HWND) -> Result<VirtualDesktop> {
+        Ok(VirtualDesktop::from(WindowsApi::get_virtual_desktop_id(hwnd)?))
+    }
 
     pub fn get_current_virtual_desktop() -> Result<VirtualDesktop> {
         let session_id = WindowsApi::current_session_id()?;

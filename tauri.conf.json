@@ -21,6 +21,10 @@
     "frontendDist": "dist"
   },
   "bundle": {
+    "resources": [
+      "static/*",
+      "seelen.cmd"
+    ],
     "active": true,
     "publisher": "Seelen",
     "category": "Utility",
@@ -43,10 +47,6 @@
       }
     },
     "longDescription": "",
-    "resources": [
-      "static/*",
-      "seelen.cmd"
-    ],
     "shortDescription": "",
     "licenseFile": "LICENSE"
   },

@@ -364,7 +364,7 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn should_handle_hwnd(hwnd: HWND) -> bool {
+    pub fn is_real_window(hwnd: HWND) -> bool {
         if !WindowsApi::is_window_visible(hwnd) {
             return false;
         }
