@@ -1,4 +1,4 @@
-import { Theme } from '../../../../../shared.interfaces';
+import { UserSettings } from '../../../../../shared.interfaces';
 import { loadThemeCSS } from '../../../../utils';
 import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../../utils/interfaces/Weg';
 import { updateHitbox } from '../../../events';
@@ -79,15 +79,16 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.removeOpenApp(item.process_hwnd));
   });
 
-  await listen<SeelenWegState>('update-store-settings', (event) => {
-    loadSettingsCSS(event.payload);
-    store.dispatch(RootActions.setSettings(event.payload));
-    updateHitbox();
-  });
-
-  await listen<Theme>('update-store-theme', (event) => {
-    loadThemeCSS(event.payload);
-    store.dispatch(RootActions.setTheme(event.payload));
+  await listen<UserSettings>('updated-settings', (event) => {
+    const state = store.getState();
+    const userSettings = event.payload;
+    const settings = JsonToState_Seelenweg(userSettings.jsonSettings, state.settings);
+    store.dispatch(RootActions.setSettings(settings));
+    loadSettingsCSS(settings);
+    if (userSettings.theme) {
+      loadThemeCSS(userSettings.theme, state.theme);
+      store.dispatch(RootActions.setTheme(userSettings.theme));
+    }
     updateHitbox();
   });
 

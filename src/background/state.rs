@@ -57,7 +57,7 @@ impl State {
     }
 
     pub fn is_window_manager_enabled(&self) -> bool {
-        if let Some(window_manager) = &self.seelen_window_manager {
+        if let Some(window_manager) = &self.seelen_wm {
             if let Some(enable) = window_manager.enable {
                 return enable;
             }

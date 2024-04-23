@@ -19,14 +19,17 @@ export const setWindowAsFullSize = () => {
   getCurrent().setSize(new PhysicalSize(screenWidth, screenHeight));
 };
 
-export function loadThemeCSS(theme: Theme) {
+export function loadThemeCSS(theme: Theme, old?: Theme) {
   invoke<string>('get_accent_color').then((color) => {
     document.documentElement.style.setProperty('--config-accent-color', color);
   });
 
-  Object.entries(theme.variables).forEach(([property, value]) => {
-    document.documentElement.style.setProperty(property, value);
-  });
+  if (old?.info.cssFileUrl) {
+    const link = document.querySelector(`link[href="${old.info.cssFileUrl}"]`);
+    if (link) {
+      document.head.removeChild(link);
+    }
+  }
 
   if (theme.info.cssFileUrl) {
     const link = document.createElement('link');

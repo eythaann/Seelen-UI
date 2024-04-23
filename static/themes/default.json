@@ -5,6 +5,12 @@
     "author": "eythaann",
     "description": "Default Seelen Theme"
   },
+  "variables": {
+    "--fallback-primary": "#fefefe",
+    "--fallback-secondary": "#121212",
+    "--fallback-accent-primary": "#ff0000",
+    "--fallback-accent-secondary": "#00ff00"
+  },
   "seelenweg": {
     "backgroundLayers": 2,
     "items": {

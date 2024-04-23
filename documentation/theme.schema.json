@@ -64,23 +64,8 @@
   },
   "definitions": {
     "layers": {
-      "type": "array",
-      "description": "An array of CSS Properties where each object is represented as a Layer or the lenght of the array is used as the background layer.",
-      "anyOf": [
-        {
-          "type": "integer"
-        },
-        {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CSSProperties"
-          }
-        }
-      ]
-    },
-    "CSSProperties": {
-      "type": "object",
-      "description": "Use Properties Interface in https://github.com/frenic/csstype"
+      "type": "integer",
+      "description": "The lenght of the used layers amount."
     }
   }
 }

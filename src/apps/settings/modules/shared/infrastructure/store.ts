@@ -1,8 +1,9 @@
+import { UserSettings } from '../../../../../shared.interfaces';
 import { StartUser } from './StartUser';
 import { loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
 import { startup } from './tauri';
 import { configureStore } from '@reduxjs/toolkit';
-import { emitTo } from '@tauri-apps/api/event';
+import { emit } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 
 import { RootActions, RootReducer, RootSlice } from '../app/reducer';
@@ -60,8 +61,7 @@ export const LoadSettingsToStore = async (route?: string) => {
 export const SaveStore = async () => {
   try {
     const currentState = store.getState();
-
-    await saveUserSettings({
+    const settings: UserSettings = {
       jsonSettings: StateToJsonSettings(currentState),
       yamlSettings: [
         ...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
@@ -69,13 +69,12 @@ export const SaveStore = async () => {
       ],
       ahkEnabled: currentState.ahkEnabled,
       updateNotification: currentState.updateNotification,
-    });
+      themes: currentState.availableThemes,
+      theme: currentState.theme,
+    };
 
-    await emitTo('seelenweg', 'update-store-settings', currentState.seelenweg);
-    await emitTo('seelenweg', 'update-store-theme', currentState.theme);
-
-    await emitTo('seelen_wm', 'update-store-settings', currentState.seelenwm);
-    await emitTo('seelen_wm', 'update-store-theme', currentState.theme);
+    await saveUserSettings(settings);
+    await emit('updated-settings', settings);
 
     store.dispatch(RootActions.setSaved());
   } catch (error) {

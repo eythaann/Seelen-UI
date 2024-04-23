@@ -1,4 +1,4 @@
-import { Theme } from '../../../../../shared.interfaces';
+import { UserSettings } from '../../../../../shared.interfaces';
 import { loadThemeCSS } from '../../../../utils';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
@@ -8,7 +8,6 @@ import { loadUserSettings } from '../../../../settings/modules/shared/infrastruc
 import { JsonToState_WManager } from '../../../../settings/modules/shared/app/StateBridge';
 import { RootActions, RootSlice } from './app';
 
-import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
 import { Reservation, Sizing } from '../../layout/domain';
 import { HWND } from '../utils/domain';
 import { DesktopId, FocusAction } from './domain';
@@ -32,13 +31,15 @@ export async function loadStore() {
 }
 
 export async function registerStoreEvents() {
-  await listen<SeelenManagerState>('update-store-settings', (event) => {
-    store.dispatch(RootActions.setSettings(event.payload));
-  });
-
-  await listen<Theme>('update-store-theme', (event) => {
-    loadThemeCSS(event.payload);
-    store.dispatch(RootActions.setTheme(event.payload));
+  await listen<UserSettings>('updated-settings', (event) => {
+    const state = store.getState();
+    const userSettings = event.payload;
+    const settings = JsonToState_WManager(userSettings.jsonSettings, state.settings);
+    store.dispatch(RootActions.setSettings(settings));
+    if (userSettings.theme) {
+      loadThemeCSS(userSettings.theme, state.theme);
+      store.dispatch(RootActions.setTheme(userSettings.theme));
+    }
   });
 
   await listen<{ hwnd: number; desktop_id: DesktopId }>('add-window', (event) => {
