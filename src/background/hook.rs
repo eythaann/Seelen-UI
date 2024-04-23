@@ -18,7 +18,7 @@ use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
     error_handler::{log_if_error, Result}, 
-    k_killer::WindowManager,
+    seelen_wm::WindowManager,
     seelen::SEELEN,
     seelenweg::SeelenWeg,
     windows_api::WindowsApi,

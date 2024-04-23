@@ -24,29 +24,33 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
   };
 };
 
-const JsonToState_WManager = (json: anyObject, wmSettings: SeelenManagerState): SeelenManagerState => {
+export const JsonToState_WManager = (json: anyObject, wmSettings: SeelenManagerState): SeelenManagerState => {
   const globalWorkAreaOffset = { ...(json.global_work_area_offset ?? wmSettings.globalWorkAreaOffset) };
   globalWorkAreaOffset.bottom = globalWorkAreaOffset.bottom - globalWorkAreaOffset.top;
   globalWorkAreaOffset.right = globalWorkAreaOffset.right - globalWorkAreaOffset.left;
 
   return {
-    autoStackinByCategory: json.auto_stack_by_category ?? wmSettings.autoStackinByCategory,
+    autoStackinByCategory: json.seelen_wm?.auto_stack_by_category ?? wmSettings.autoStackinByCategory,
     border: {
-      enabled: json.border?.enabled ?? wmSettings.border.enabled,
-      offset: json.border?.offset ?? wmSettings.border.offset,
-      width: json.border?.width ?? wmSettings.border.width,
+      enabled: json.seelen_wm?.border?.enabled ?? wmSettings.border.enabled,
+      offset: json.seelen_wm?.border?.offset ?? wmSettings.border.offset,
+      width: json.seelen_wm?.border?.width ?? wmSettings.border.width,
     },
     containerTopBar: {
-      mode: (json.top_bar?.mode as ContainerTopBarMode) ?? wmSettings.containerTopBar.mode,
+      mode: (json.seelen_wm?.top_bar?.mode as ContainerTopBarMode) ?? wmSettings.containerTopBar.mode,
     },
-    containerPadding: json.default_container_padding ?? wmSettings.containerPadding,
-    workspacePadding: json.default_workspace_padding ?? wmSettings.workspacePadding,
+    containerPadding: json.seelen_wm?.default_container_padding ?? wmSettings.containerPadding,
+    workspacePadding: json.seelen_wm?.default_workspace_padding ?? wmSettings.workspacePadding,
     globalWorkAreaOffset,
-    resizeDelta: json.resize_delta ?? wmSettings.resizeDelta,
+    resizeDelta: json.seelen_wm?.resize_delta ?? wmSettings.resizeDelta,
+    floating: {
+      width: json.seelen_wm?.floating?.width ?? wmSettings.floating.width,
+      height: json.seelen_wm?.floating?.height ?? wmSettings.floating.height,
+    },
   };
 };
 
-const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[] => {
+export const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[] => {
   if (!json.monitors) {
     return monitors;
   }
@@ -95,11 +99,6 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
         matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
         // options
         [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
-        /*[ApplicationOptions.BorderOverflow]: ymlApp.options?.includes('border_overflow') || false,*/
-        [ApplicationOptions.Force]: ymlApp.options?.includes('force') || false,
-        [ApplicationOptions.Layered]: ymlApp.options?.includes('layered') || false,
-        [ApplicationOptions.ObjectNameChange]: ymlApp.options?.includes('object_name_change') || false,
-        [ApplicationOptions.TrayAndMultiWindow]: ymlApp.options?.includes('tray_and_multi_window') || false,
         [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
       });
     }
@@ -126,57 +125,11 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
     });
   }
 
-  if (json.manage_rules) {
-    Object.values(json.manage_rules).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        [ApplicationOptions.Force]: true,
-      });
-    });
-  }
-
   if (json.float_rules) {
     Object.values(json.float_rules).forEach((rule) => {
       apps.push({
         ...AppConfiguration.from(rule),
         [ApplicationOptions.Float]: true,
-      });
-    });
-  }
-
-  if (json.object_name_change_applications) {
-    Object.values(json.object_name_change_applications).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        [ApplicationOptions.ObjectNameChange]: true,
-      });
-    });
-  }
-
-  if (json.layered_applications) {
-    Object.values(json.layered_applications).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        [ApplicationOptions.Layered]: true,
-      });
-    });
-  }
-
-  if (json.tray_and_multi_window_applications) {
-    Object.values(json.tray_and_multi_window_applications).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        [ApplicationOptions.TrayAndMultiWindow]: true,
-      });
-    });
-  }
-
-  if (json.exclude_float_rules) {
-    Object.values(json.exclude_float_rules).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        // force disable float rules on komorebi
-        [ApplicationOptions.Force]: true,
       });
     });
   }
@@ -236,19 +189,25 @@ const StateToJson_WManager = (state: SeelenManagerState): StaticConfig => {
   global_work_area_offset.right = global_work_area_offset.right + global_work_area_offset.left;
 
   return {
-    auto_stack_by_category: state.autoStackinByCategory,
-    border: {
-      enabled: state.border.enabled,
-      offset: state.border.offset,
-      width: state.border.width,
+    seelen_wm: {
+      auto_stack_by_category: state.autoStackinByCategory,
+      border: {
+        enabled: state.border.enabled,
+        offset: state.border.offset,
+        width: state.border.width,
+      },
+      top_bar: {
+        mode: state.containerTopBar.mode,
+      },
+      default_container_padding: state.containerPadding,
+      default_workspace_padding: state.workspacePadding,
+      global_work_area_offset: global_work_area_offset as any,
+      resize_delta: state.resizeDelta,
+      floating: {
+        width: state.floating.width,
+        height: state.floating.height,
+      },
     },
-    top_bar: {
-      mode: state.containerTopBar.mode,
-    },
-    default_container_padding: state.containerPadding,
-    default_workspace_padding: state.workspacePadding,
-    global_work_area_offset: global_work_area_offset as any,
-    resize_delta: state.resizeDelta,
   };
 };
 

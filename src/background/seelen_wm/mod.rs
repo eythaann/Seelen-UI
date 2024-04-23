@@ -17,7 +17,6 @@ struct AddWindowPayload {
     desktop_id: String,
 }
 
-/** @Alias - K_Killer */
 pub struct WindowManager {
     handle: AppHandle<Wry>,
     window: WebviewWindow,
@@ -28,7 +27,7 @@ pub struct WindowManager {
 }
 
 impl WindowManager {
-    pub const TARGET: &'static str = "k_killer";
+    pub const TARGET: &'static str = "seelen_wm";
     pub const VIRTUAL_PREVIEWS: [&'static str; 2] = [
         "Virtual desktop switching preview",
         "Virtual desktop hotkey switching preview",
@@ -217,7 +216,7 @@ impl WindowManager {
         let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             handle,
             Self::TARGET,
-            tauri::WebviewUrl::App("k_killer/index.html".into()),
+            tauri::WebviewUrl::App("seelen_wm/index.html".into()),
         )
         .title("Seelen Window Manager")
         .position(0.0, 0.0)

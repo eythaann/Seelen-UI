@@ -5,7 +5,7 @@ import { AppsConfigSlice } from '../../appsConfigurations/app/reducer';
 import { GeneralSettingsSlice } from '../../general/main/app';
 import { MonitorsSlice } from '../../monitors/main/app';
 import { SeelenWegSlice } from '../../seelenweg/app';
-import { WManagerSlice } from '../../WindowManager/main/app';
+import { SeelenManagerSlice } from '../../WindowManager/main/app';
 
 import { Route } from '../domain/routes';
 import { RootState } from '../domain/state';
@@ -15,7 +15,7 @@ const initialState: RootState = {
   route: Route.GENERAL,
   generals: GeneralSettingsSlice.getInitialState(),
   seelenweg: SeelenWegSlice.getInitialState(),
-  seelenwm: WManagerSlice.getInitialState(),
+  seelenwm: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   monitors: MonitorsSlice.getInitialState(),
   appsConfigurations: AppsConfigSlice.getInitialState(),
@@ -43,9 +43,9 @@ export const RootSlice = createSlice({
         state.toBeSaved = true;
         state.generals = GeneralSettingsSlice.reducer(state.generals, action);
       })
-      .addMatcher(matcher(WManagerSlice), (state, action) => {
+      .addMatcher(matcher(SeelenManagerSlice), (state, action) => {
         state.toBeSaved = true;
-        state.seelenwm = WManagerSlice.reducer(state.seelenwm, action);
+        state.seelenwm = SeelenManagerSlice.reducer(state.seelenwm, action);
       })
       .addMatcher(matcher(SeelenWegSlice), (state, action) => {
         state.toBeSaved = true;

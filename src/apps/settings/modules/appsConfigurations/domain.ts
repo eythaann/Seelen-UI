@@ -3,19 +3,10 @@ import { IdWithIdentifier as JsonIdWithIdentifier } from '../../../../YamlSettin
 export enum ApplicationOptions {
   Float = 'float',
   Unmanage = 'unmanage',
-  Force = 'force',
-  ObjectNameChange = 'object_name_change',
-  Layered = 'layered',
-  TrayAndMultiWindow = 'tray_and_multi_window',
 }
 
 export const LabelByAppOption: Record<ApplicationOptions, string> = {
   [ApplicationOptions.Float]: 'Float',
-  /*[ApplicationOptions.BorderOverflow]: 'Border Overflow',*/
-  [ApplicationOptions.Force]: 'Forced',
-  [ApplicationOptions.Layered]: 'Layered',
-  [ApplicationOptions.ObjectNameChange]: 'Name Change',
-  [ApplicationOptions.TrayAndMultiWindow]: 'MultiWindow',
   [ApplicationOptions.Unmanage]: 'Unmanaged',
 };
 
@@ -70,11 +61,6 @@ export class AppConfiguration {
       identifier: 'new-app.exe',
       matchingStrategy: MatchingStrategy.Equals,
       [ApplicationOptions.Float]: false,
-      /*[ApplicationOptions.BorderOverflow]: false,*/
-      [ApplicationOptions.Force]: false,
-      [ApplicationOptions.Layered]: false,
-      [ApplicationOptions.ObjectNameChange]: false,
-      [ApplicationOptions.TrayAndMultiWindow]: false,
       [ApplicationOptions.Unmanage]: false,
     };
   }

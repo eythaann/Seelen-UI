@@ -1,9 +1,11 @@
+import { defaultTheme } from '../../../../../shared.interfaces';
 import { toPhysicalPixels } from '../../../../utils';
 import { StateBuilder } from '../../../../utils/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';
 
+import { SeelenManagerSlice } from '../../../../settings/modules/WindowManager/main/app';
 import { NodeImpl, removeHandleFromLayout } from '../../layout/app';
 
 import { Layout, NodeSubtype, NodeType, Reservation, Sizing } from '../../layout/domain';
@@ -75,12 +77,8 @@ const initialState: RootState = {
   activeWindow: 0,
   lastManagedActivated: null,
   reservation: null,
-  settings: {
-    floating: {
-      width: 800,
-      height: 500,
-    },
-  },
+  settings: SeelenManagerSlice.getInitialState(),
+  theme: defaultTheme,
 };
 
 export const RootSlice = createSlice({

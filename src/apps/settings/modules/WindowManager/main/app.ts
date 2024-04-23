@@ -14,13 +14,17 @@ let initialState: SeelenManagerState = {
   border: BorderSlice.getInitialState(),
   containerPadding: 10,
   workspacePadding: 10,
-  resizeDelta: 50,
+  resizeDelta: 10,
   globalWorkAreaOffset: new Rect().toJSON(),
   containerTopBar: ContainerTopBarSlice.getInitialState(),
+  floating: {
+    width: 800,
+    height: 500,
+  },
 };
 
-export const WManagerSlice = createSlice({
-  name: 'generalSettings',
+export const SeelenManagerSlice = createSlice({
+  name: 'seelenManagerSettings',
   initialState,
   selectors: selectorsFor(initialState),
   reducers: {
@@ -37,4 +41,4 @@ export const WManagerSlice = createSlice({
   },
 });
 
-export const WManagerSettingsActions = WManagerSlice.actions;
+export const WManagerSettingsActions = SeelenManagerSlice.actions;

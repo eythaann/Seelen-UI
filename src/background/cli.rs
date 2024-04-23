@@ -8,7 +8,7 @@ use tauri::AppHandle;
 use tauri::Wry;
 
 use crate::error_handler::Result;
-use crate::k_killer::WindowManager;
+use crate::seelen_wm::WindowManager;
 use crate::seelen::SEELEN;
 
 lazy_static! {

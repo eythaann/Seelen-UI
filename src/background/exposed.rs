@@ -8,7 +8,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
 
-use crate::k_killer::handler::*;
+use crate::seelen_wm::handler::*;
 use crate::seelen::SEELEN;
 use crate::seelenweg::handler::*;
 use crate::utils::{is_windows_10, is_windows_11};

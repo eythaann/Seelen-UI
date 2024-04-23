@@ -1,7 +1,11 @@
 import { Theme } from '../../../../../shared.interfaces';
+import { loadThemeCSS } from '../../../../utils';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
 
+import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
+
+import { JsonToState_WManager } from '../../../../settings/modules/shared/app/StateBridge';
 import { RootActions, RootSlice } from './app';
 
 import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
@@ -14,12 +18,26 @@ export const store = configureStore({
   devTools: true,
 });
 
+export async function loadStore() {
+  const userSettings = await loadUserSettings();
+  const initialState = RootSlice.getInitialState();
+
+  const settings = JsonToState_WManager(userSettings.jsonSettings, initialState.settings);
+  store.dispatch(RootActions.setSettings(settings));
+
+  if (userSettings.theme) {
+    loadThemeCSS(userSettings.theme);
+    store.dispatch(RootActions.setTheme(userSettings.theme));
+  }
+}
+
 export async function registerStoreEvents() {
   await listen<SeelenManagerState>('update-store-settings', (event) => {
     store.dispatch(RootActions.setSettings(event.payload));
   });
 
   await listen<Theme>('update-store-theme', (event) => {
+    loadThemeCSS(event.payload);
     store.dispatch(RootActions.setTheme(event.payload));
   });
 

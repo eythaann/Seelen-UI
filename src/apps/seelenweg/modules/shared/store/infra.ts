@@ -1,8 +1,8 @@
 import { Theme } from '../../../../../shared.interfaces';
+import { loadThemeCSS } from '../../../../utils';
 import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 
 import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
@@ -99,23 +99,6 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
     updateHitbox();
   });
-}
-
-function loadThemeCSS(theme: Theme) {
-  invoke<string>('get_accent_color').then((color) => {
-    document.documentElement.style.setProperty('--config-accent-color', color);
-  });
-
-  Object.entries(theme.variables).forEach(([property, value]) => {
-    document.documentElement.style.setProperty(property, value);
-  });
-
-  if (theme.info.cssFileUrl) {
-    const link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('href', theme.info.cssFileUrl);
-    document.head.appendChild(link);
-  }
 }
 
 function loadSettingsCSS(settings: SeelenWegState) {

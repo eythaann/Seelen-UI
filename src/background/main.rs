@@ -5,7 +5,7 @@ mod cli;
 mod error_handler;
 mod exposed;
 mod hook;
-mod k_killer;
+mod seelen_wm;
 mod plugins;
 mod seelen;
 mod seelen_bar;
