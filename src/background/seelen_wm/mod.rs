@@ -8,7 +8,7 @@ use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::EnumWindows};
 
 use crate::{
-    error_handler::Result, seelen::SEELEN, seelenweg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
+    error_handler::Result, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
 };
 
 #[derive(Serialize, Clone)]

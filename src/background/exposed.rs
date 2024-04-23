@@ -10,7 +10,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 
 use crate::seelen_wm::handler::*;
 use crate::seelen::SEELEN;
-use crate::seelenweg::handler::*;
+use crate::seelen_weg::handler::*;
 use crate::utils::{is_windows_10, is_windows_11};
 
 fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {

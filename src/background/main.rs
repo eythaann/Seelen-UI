@@ -10,7 +10,7 @@ mod plugins;
 mod seelen;
 mod seelen_bar;
 mod seelen_shell;
-mod seelenweg;
+mod seelen_weg;
 mod state;
 mod tray;
 mod utils;

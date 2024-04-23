@@ -20,7 +20,7 @@ use crate::{
     error_handler::{log_if_error, Result}, 
     seelen_wm::WindowManager,
     seelen::SEELEN,
-    seelenweg::SeelenWeg,
+    seelen_weg::SeelenWeg,
     windows_api::WindowsApi,
 };
 
