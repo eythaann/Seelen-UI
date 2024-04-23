@@ -6,14 +6,7 @@ use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::{log_if_error, Result},
-    hook::register_hook_and_enum_windows,
-    k_killer::WindowManager,
-    seelen_bar::SeelenBar,
-    seelen_shell::SeelenShell,
-    seelenweg::SeelenWeg,
-    state::State,
-    utils::run_ahk_file,
+    apps_config::SETTINGS_BY_APP, error_handler::{log_if_error, Result}, hook::register_hook_and_enum_windows, k_killer::WindowManager, seelen_bar::SeelenBar, seelen_shell::SeelenShell, seelenweg::SeelenWeg, state::State, utils::run_ahk_file
 };
 
 lazy_static! {
@@ -96,6 +89,12 @@ impl Seelen {
             path = app.path().resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)?;
         }
         self.state = State::new(&path).unwrap_or_default();
+
+        let mut path = app.path().resolve(".config/seelen/applications.yml", BaseDirectory::Home)?;
+        if !path.exists() {
+            path = app.path().resolve(".config/komorebi-ui/applications.yml", BaseDirectory::Home)?;
+        }
+        SETTINGS_BY_APP.lock().load(path);
 
         if self.state.is_weg_enabled() {
             self.weg = Some(SeelenWeg::new(app.clone()));

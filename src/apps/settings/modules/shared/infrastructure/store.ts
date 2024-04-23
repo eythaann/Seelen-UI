@@ -74,6 +74,9 @@ export const SaveStore = async () => {
     await emitTo('seelenweg', 'update-store-settings', currentState.seelenweg);
     await emitTo('seelenweg', 'update-store-theme', currentState.theme);
 
+    await emitTo('k_killer', 'update-store-settings', currentState.seelenwm);
+    await emitTo('k_killer', 'update-store-theme', currentState.theme);
+
     store.dispatch(RootActions.setSaved());
   } catch (error) {
     Modal.error({

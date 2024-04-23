@@ -1,4 +1,4 @@
-import { wrapConsole } from '../ConsoleWrapper';
+import { wrapConsole } from '../utils/ConsoleWrapper';
 import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, setWindowSize, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';

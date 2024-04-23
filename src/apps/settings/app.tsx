@@ -8,7 +8,6 @@ import { Information } from './modules/information/infrastructure';
 import { Monitors } from './modules/monitors/main/infra';
 import { SeelenWegSettings } from './modules/seelenweg/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
-import { ThemesView } from './modules/Theming/infra';
 import { WindowManagerSettings } from './modules/WindowManager/main/infra';
 
 import { useAppSelector } from './modules/shared/app/hooks';
@@ -19,7 +18,6 @@ import { Route } from './modules/shared/domain/routes';
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.GENERAL]: General,
   [Route.MONITORS]: Monitors,
-  [Route.STYLES]: ThemesView,
   [Route.SHORTCUTS]: Shortcuts,
   [Route.SPECIFIT_APPS]: AppsConfiguration,
   [Route.INFO]: Information,

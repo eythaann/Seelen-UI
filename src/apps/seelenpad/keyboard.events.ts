@@ -1,4 +1,4 @@
-import { throttle } from '../Timing';
+import { throttle } from '../utils/Timing';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 

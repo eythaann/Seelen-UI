@@ -15,7 +15,7 @@ import { Layout } from '../../monitors/layouts/domain';
 import { Monitor, Workspace } from '../../monitors/main/domain';
 import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../seelenweg/domain';
 import { ContainerTopBarMode } from '../../WindowManager/containerTopBar/domain';
-import { WMSettingsState } from '../../WindowManager/main/domain';
+import { SeelenManagerState } from '../../WindowManager/main/domain';
 import { RootState } from '../domain/state';
 
 const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
@@ -24,7 +24,7 @@ const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState
   };
 };
 
-const JsonToState_WManager = (json: anyObject, wmSettings: WMSettingsState): WMSettingsState => {
+const JsonToState_WManager = (json: anyObject, wmSettings: SeelenManagerState): SeelenManagerState => {
   const globalWorkAreaOffset = { ...(json.global_work_area_offset ?? wmSettings.globalWorkAreaOffset) };
   globalWorkAreaOffset.bottom = globalWorkAreaOffset.bottom - globalWorkAreaOffset.top;
   globalWorkAreaOffset.right = globalWorkAreaOffset.right - globalWorkAreaOffset.left;
@@ -230,7 +230,7 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
   };
 };
 
-const StateToJson_WManager = (state: WMSettingsState): StaticConfig => {
+const StateToJson_WManager = (state: SeelenManagerState): StaticConfig => {
   const global_work_area_offset = { ...state.globalWorkAreaOffset };
   global_work_area_offset.bottom = global_work_area_offset.bottom + global_work_area_offset.top;
   global_work_area_offset.right = global_work_area_offset.right + global_work_area_offset.left;

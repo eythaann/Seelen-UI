@@ -2,6 +2,11 @@ import { StaticConfig } from './JsonSettings.interface';
 import { ApplicationConfiguration } from './YamlSettings.interface';
 import { CSSProperties } from 'react';
 
+export interface IRootState<T> {
+  settings: T;
+  theme: Theme;
+}
+
 export interface UserSettings {
   jsonSettings: StaticConfig;
   yamlSettings: ApplicationConfiguration[];

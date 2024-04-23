@@ -20,7 +20,7 @@ use windows::{
         UI::{
             Shell::{IVirtualDesktopManager, VirtualDesktopManager},
             WindowsAndMessaging::{
-                GetForegroundWindow, GetParent, GetWindowRect, GetWindowTextW,
+                GetClassNameW, GetForegroundWindow, GetParent, GetWindowRect, GetWindowTextW,
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, ShowWindow,
                 ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, SHOW_WINDOW_CMD,
                 SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SW_MINIMIZE, SW_NORMAL,
@@ -161,6 +161,13 @@ impl WindowsApi {
             .last()
             .ok_or_else(|| eyre!("there is no last element"))?
             .to_string())
+    }
+
+    pub fn get_class(hwnd: HWND) -> Result<String> {
+        let mut text: [u16; 512] = [0; 512];
+        let len = unsafe { GetClassNameW(hwnd, &mut text) };
+        let length = usize::try_from(len).unwrap_or(0);
+        Ok(String::from_utf16(&text[..length])?)
     }
 
     pub fn get_window_text(hwnd: HWND) -> String {

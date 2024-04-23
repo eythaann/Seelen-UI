@@ -6,10 +6,10 @@ import { BorderSlice } from '../border/app';
 import { ContainerTopBarSlice } from '../containerTopBar/app';
 
 import {
-  WMSettingsState,
+  SeelenManagerState,
 } from './domain';
 
-let initialState: WMSettingsState = {
+let initialState: SeelenManagerState = {
   autoStackinByCategory: true,
   border: BorderSlice.getInitialState(),
   containerPadding: 10,

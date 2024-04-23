@@ -1,15 +1,8 @@
+import { IRootState } from '../../../../../shared.interfaces';
 import { SoftOpaque } from 'readable-types/dist';
 
+import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
 import { Layout, Reservation } from '../../layout/domain';
-
-interface FloatingWindowSettings {
-  width: number;
-  height: number;
-}
-
-interface WMSettings {
-  floating: FloatingWindowSettings;
-}
 
 interface Workspace {
   name: string;
@@ -26,8 +19,7 @@ export enum FocusAction {
   Lastest = 'Lastest',
 }
 
-export interface RootState {
-  settings: WMSettings;
+export interface RootState extends IRootState<SeelenManagerState> {
   defaultLayout: Layout;
   workspaces: Record<DesktopId, Workspace>;
   activeWorkspace: DesktopId;
@@ -37,7 +29,6 @@ export interface RootState {
   lastManagedActivated: number | null;
   reservation: Reservation | null;
   desktopByHandle: Record<number, DesktopId>;
-
   /** Prop to listen for app forced updates */
   version: number;
 }

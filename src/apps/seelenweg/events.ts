@@ -1,4 +1,4 @@
-import { debounce, TimeoutIdRef } from '../Timing';
+import { debounce, TimeoutIdRef } from '../utils/Timing';
 import { toPhysicalPixels } from '../utils';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
 import { emitTo, listen } from '@tauri-apps/api/event';

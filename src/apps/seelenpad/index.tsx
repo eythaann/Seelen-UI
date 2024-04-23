@@ -1,4 +1,4 @@
-import { wrapConsole } from '../ConsoleWrapper';
+import { wrapConsole } from '../utils/ConsoleWrapper';
 import { registerKeyboarEvents } from './keyboard.events';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';

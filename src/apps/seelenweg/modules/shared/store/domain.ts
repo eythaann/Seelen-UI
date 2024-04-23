@@ -1,4 +1,4 @@
-import { Theme } from '../../../../../shared.interfaces';
+import { IRootState } from '../../../../../shared.interfaces';
 import { modify } from 'readable-types';
 
 import { PinnedApp } from '../../item/app/PinnedApp';
@@ -77,13 +77,11 @@ export enum AppsSides {
   RIGHT = 'right',
 }
 
-export interface RootState {
+export interface RootState extends IRootState<SeelenWegState> {
   pinnedOnLeft: App[];
   pinnedOnCenter: App[];
   pinnedOnRight: App[];
   openApps: Record<HWND, AppFromBackground>;
   focusedHandle: HWND;
-  theme: Theme;
-  settings: SeelenWegState;
   isOverlaped: boolean;
 }

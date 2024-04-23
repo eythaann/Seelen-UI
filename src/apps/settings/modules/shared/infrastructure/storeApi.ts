@@ -96,7 +96,6 @@ export async function loadAppsTemplates() {
 export async function saveUserSettings(settings: Omit<UserSettings, 'themes' | 'theme'>) {
   const json_route = await path.join(await path.homeDir(), '.config/seelen/settings.json');
   const yaml_route = await path.join(await path.homeDir(), '.config/seelen/applications.yml');
-  settings.jsonSettings.app_specific_configuration_path = yaml_route;
 
   if (settings.ahkEnabled) {
     invoke('start_seelen_shortcuts');

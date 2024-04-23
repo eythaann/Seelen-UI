@@ -1,4 +1,4 @@
-import { wrapConsole } from '../ConsoleWrapper';
+import { wrapConsole } from '../utils/ConsoleWrapper';
 import { PhysicalPosition, PhysicalSize } from '@tauri-apps/api/dpi';
 import { emitTo, listen } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';

@@ -3,7 +3,12 @@ import { Rect } from '../../shared/app/Rect';
 import { BorderState } from '../border/domain';
 import { ContainerTabsState } from '../containerTopBar/domain';
 
-export interface WMSettingsState {
+interface FloatingWindowSettings {
+  width: number;
+  height: number;
+}
+
+export interface SeelenManagerState {
   border: BorderState;
   autoStackinByCategory: boolean;
   resizeDelta: number;
@@ -11,4 +16,5 @@ export interface WMSettingsState {
   workspacePadding: number;
   globalWorkAreaOffset: Rect;
   containerTopBar: ContainerTabsState;
+  floating: FloatingWindowSettings;
 }

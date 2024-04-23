@@ -1,5 +1,5 @@
 
-import { wrapConsole } from '../ConsoleWrapper';
+import { wrapConsole } from '../utils/ConsoleWrapper';
 import { ErrorBoundary } from '../seelenweg/components/Error';
 import { setWindowAsFullSize } from '../utils';
 import { invoke } from '@tauri-apps/api/core';

@@ -1,7 +1,6 @@
 export enum Route {
   GENERAL = 'general',
   MONITORS = 'monitors',
-  STYLES = 'styles',
   SEELEN_WM = 'seelen_wm',
   SEELEN_WEG = 'seelen_weg',
   SPECIFIT_APPS = 'specifit_apps',
@@ -12,7 +11,6 @@ export enum Route {
 export const RouteLabels: Record<Route, string> = {
   [Route.GENERAL]: 'General',
   [Route.MONITORS]: 'Monitors',
-  [Route.STYLES]: 'Visuals',
   [Route.SHORTCUTS]: 'Shortcuts',
   [Route.SPECIFIT_APPS]: 'Apps Configurations',
   [Route.INFO]: 'Information',
@@ -30,7 +28,6 @@ export const RouteExtraInfo: { [key in Route]?: string } = {
 export const RouteIcons: Record<Route, string> = {
   [Route.GENERAL]: '⚙️',
   [Route.MONITORS]: '🖥️',
-  [Route.STYLES]: '🖼️',
   [Route.SHORTCUTS]: '🔡',
   [Route.SPECIFIT_APPS]: '🅰️',
   [Route.INFO]: '🛈',

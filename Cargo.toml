@@ -21,8 +21,9 @@ tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
 winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
-serde_json = "1.0"
 serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9.34"
 tauri = { version = "2.0.0-beta", features = [
     "protocol-asset",
     "tray-icon",
@@ -49,6 +50,7 @@ clap = { version = "4.5.4", features = ["derive", "string"] }
 os_info = "3.8.2"
 winreg = "0.52.0"
 crossbeam-channel = "0.5.12"
+regex = "1.10.4"
 
 [dependencies.windows]
 version = "0.52.0"

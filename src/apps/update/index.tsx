@@ -1,4 +1,4 @@
-import { wrapConsole } from '../ConsoleWrapper';
+import { wrapConsole } from '../utils/ConsoleWrapper';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './app';

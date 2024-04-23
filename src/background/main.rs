@@ -16,6 +16,7 @@ mod tray;
 mod utils;
 mod windows_api;
 mod winevent;
+mod apps_config;
 
 use cli::handle_cli_info;
 use error_handler::Result;

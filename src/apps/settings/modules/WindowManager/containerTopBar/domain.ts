@@ -1,5 +1,4 @@
 export enum ContainerTopBarMode {
-  ALWAYS = 'Always',
   ON_STACK = 'OnStack',
   NEVER = 'Never',
 }

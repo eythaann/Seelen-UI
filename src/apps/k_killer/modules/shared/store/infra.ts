@@ -1,8 +1,10 @@
+import { Theme } from '../../../../../shared.interfaces';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
 
 import { RootActions, RootSlice } from './app';
 
+import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
 import { Reservation, Sizing } from '../../layout/domain';
 import { HWND } from '../utils/domain';
 import { DesktopId, FocusAction } from './domain';
@@ -13,6 +15,14 @@ export const store = configureStore({
 });
 
 export async function registerStoreEvents() {
+  await listen<SeelenManagerState>('update-store-settings', (event) => {
+    store.dispatch(RootActions.setSettings(event.payload));
+  });
+
+  await listen<Theme>('update-store-theme', (event) => {
+    store.dispatch(RootActions.setTheme(event.payload));
+  });
+
   await listen<{ hwnd: number; desktop_id: DesktopId }>('add-window', (event) => {
     store.dispatch(RootActions.addWindow(event.payload));
   });

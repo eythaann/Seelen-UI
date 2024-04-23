@@ -1,4 +1,4 @@
-import { wrapConsole } from '../ConsoleWrapper';
+import { wrapConsole } from '../utils/ConsoleWrapper';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
