@@ -13,7 +13,7 @@ Welcome to Seelen UI, where customization meets productivity, revolutionizing yo
 
 * **Unleash Your Creativity**: With Seelen UI, your desktop becomes a canvas, ready for your creative vision. From menus to widgets, every element can be tailored to reflect your unique style and workflow.
 
-* **Boost Your Productivity**: Say goodbye to clutter and hello to organization. Seelen UI empowers you to streamline your desktop layout, ensuring that essential tools and information are always at your fingertips. Plus, with Komorebi Tiling Windows Manager for Windows, productivity reaches new heights as windows automatically arrange themselves for optimal multitasking efficiency.
+* **Boost Your Productivity**: Say goodbye to clutter and hello to organization. Seelen UI empowers you to streamline your desktop layout, ensuring that essential tools and information are always at your fingertips. Plus, with a Tiling Windows Manager for Windows, productivity reaches new heights as windows automatically arrange themselves for optimal multitasking efficiency.
 
   <img src="./documentation/images/desktop_view2.png" width="100%" alt="Seelen UI desktop">
 
@@ -55,26 +55,6 @@ A Tiling Window Manager (TWM) is a window manager that automatically organizes a
 
 In summary, a Tiling Window Manager can transform your computing experience, offering spatial efficiency, enhanced productivity, and an interface tailored to your needs. If you value space optimization and agility in navigating between applications, consider making the switch!
 
-## Deep Dive into the Maximalist Fork of Komorebi
-
-Seelen UI mantains a user-friendly fork of Komorebi, a tiling window manager for Windows. While the original Komorebi primarily offers a CLI (Command Line Interface) and may not be very accessible to non-programmers, Seelen UI aims to provide a visually appealing, intuitive interface for users who may not have programming skills. This project enhances usability and aesthetic details while introducing additional features to make Komorebi more accessible.
-
-Seelen UI is not just a fork; it's a maximalist fork of the original Komorebi. This means that it deviates significantly from the simplicity of Komorebi, embracing a more feature-rich approach. Unlike a retrocompatible fork, Seelen UI introduces additional features and is not backward compatible with the original Komorebi CLI.
-
-### Key Differences
-
-- **Maximalist Approach:** Seelen UI takes a maximalist approach, providing a comprehensive set of features beyond the simplicity of the original Komorebi.
-
-- **Enhanced Usability:** The user interface is designed to be more accessible, making it suitable for both developers and non-programmers.
-
-- **Migration Assistance:** Despite the lack of retrocompatibility, Seelen UI offers a smooth migration path for users coming from the Komorebi CLI. The GUI provides an easy transition, allowing users to leverage the power of Seelen UI effortlessly.
-
-### Why Maximalist?
-
-The decision for a maximalist fork stems from the desire to offer a feature-rich experience. While the original Komorebi aims to be as simple as possible, Seelen UI embraces complexity to provide a more versatile and powerful window management solution.
-
-For more information on specific features and migration details, refer to the [Seelen UI User Guide](documentation/user_guide.md).
-
 ## Contributing
 
 We welcome contributions! Read the [Contribution Guidelines](CONTRIBUTING.md) to get started.
@@ -82,11 +62,6 @@ We welcome contributions! Read the [Contribution Guidelines](CONTRIBUTING.md) to
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Thanks to the [original Komorebi project](https://github.com/LGUG2Z/komorebi) for laying the foundation.
-- Special appreciation to [LGUG2Z](https://github.com/LGUG2Z) for their significant contributions.
 
 ## Contact
 
