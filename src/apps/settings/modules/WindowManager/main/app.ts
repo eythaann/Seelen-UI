@@ -10,6 +10,7 @@ import {
 } from './domain';
 
 let initialState: SeelenManagerState = {
+  enable: true,
   autoStackinByCategory: true,
   border: BorderSlice.getInitialState(),
   containerPadding: 10,

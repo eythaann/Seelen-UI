@@ -1,10 +1,10 @@
 import { AppTemplate, Theme } from '../../../../../shared.interfaces';
+import { SeelenWegState } from '../../../../utils/interfaces/Weg';
 import { Route } from './routes';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';
 import { GeneralSettingsState } from '../../general/main/domain';
 import { Monitor } from '../../monitors/main/domain';
-import { SeelenWegState } from '../../seelenweg/domain';
 import { SeelenManagerState } from '../../WindowManager/main/domain';
 
 export interface RootState {

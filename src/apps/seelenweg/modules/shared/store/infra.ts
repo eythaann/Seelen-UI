@@ -1,5 +1,6 @@
 import { Theme } from '../../../../../shared.interfaces';
 import { loadThemeCSS } from '../../../../utils';
+import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../../utils/interfaces/Weg';
 import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
@@ -12,7 +13,6 @@ import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
 import { AppFromBackground, HWND, SavedAppsInYaml } from './domain';
 
 export const store = configureStore({

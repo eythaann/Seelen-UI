@@ -1,3 +1,4 @@
+import { SeelenWegMode, SeelenWegSide } from '../../../utils/interfaces/Weg';
 import { cx } from '../../../utils/styles';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
@@ -9,7 +10,6 @@ import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { SeelenWegMode, SeelenWegSide } from '../../../settings/modules/seelenweg/domain';
 import { App, Separator, SpecialItemType } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = window.screen.height / 3;

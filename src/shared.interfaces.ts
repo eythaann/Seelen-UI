@@ -1,5 +1,3 @@
-import { StaticConfig } from './JsonSettings.interface';
-import { ApplicationConfiguration } from './YamlSettings.interface';
 import { CSSProperties } from 'react';
 
 export interface IRootState<T> {
@@ -8,8 +6,8 @@ export interface IRootState<T> {
 }
 
 export interface UserSettings {
-  jsonSettings: StaticConfig;
-  yamlSettings: ApplicationConfiguration[];
+  jsonSettings: anyObject;
+  yamlSettings: anyObject[];
   ahkEnabled: boolean;
   updateNotification: boolean;
   themes: Theme[];
@@ -19,7 +17,7 @@ export interface UserSettings {
 export interface AppTemplate {
   name: string;
   description: string;
-  apps: ApplicationConfiguration[];
+  apps: anyObject[];
 }
 
 export interface ThemeInfo {

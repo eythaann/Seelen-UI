@@ -1,6 +1,5 @@
-import { StaticConfig } from '../../../../../JsonSettings.interface';
 import { UserSettings } from '../../../../../shared.interfaces';
-import { ApplicationConfiguration as YamlAppConfiguration } from '../../../../../YamlSettings.interface';
+import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../../utils/interfaces/Weg';
 
 import {
   AppConfiguration,
@@ -13,12 +12,11 @@ import {
 } from '../../general/main/domain';
 import { Layout } from '../../monitors/layouts/domain';
 import { Monitor, Workspace } from '../../monitors/main/domain';
-import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../seelenweg/domain';
 import { ContainerTopBarMode } from '../../WindowManager/containerTopBar/domain';
 import { SeelenManagerState } from '../../WindowManager/main/domain';
 import { RootState } from '../domain/state';
 
-const JsonToState_Generals = (json: StaticConfig, generals: GeneralSettingsState): GeneralSettingsState => {
+const JsonToState_Generals = (json: anyObject, generals: GeneralSettingsState): GeneralSettingsState => {
   return {
     selectedTheme: json.theme_filename ?? generals.selectedTheme,
   };
@@ -30,6 +28,7 @@ export const JsonToState_WManager = (json: anyObject, wmSettings: SeelenManagerS
   globalWorkAreaOffset.right = globalWorkAreaOffset.right - globalWorkAreaOffset.left;
 
   return {
+    enable: json.seelen_wm?.enable ?? wmSettings.enable,
     autoStackinByCategory: json.seelen_wm?.auto_stack_by_category ?? wmSettings.autoStackinByCategory,
     border: {
       enabled: json.seelen_wm?.border?.enabled ?? wmSettings.border.enabled,
@@ -50,12 +49,12 @@ export const JsonToState_WManager = (json: anyObject, wmSettings: SeelenManagerS
   };
 };
 
-export const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): Monitor[] => {
+export const JsonToState_Monitors = (json: anyObject, monitors: Monitor[]): Monitor[] => {
   if (!json.monitors) {
     return monitors;
   }
 
-  return json.monitors.map((json_monitor) => {
+  return json.monitors.map((json_monitor: anyObject) => {
     const monitor = Monitor.default();
     const defaultWorkspace = Workspace.default();
 
@@ -64,7 +63,7 @@ export const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): M
     }
 
     if (json_monitor.workspaces && json_monitor.workspaces.length > 0) {
-      monitor.workspaces = json_monitor.workspaces.map<Workspace>((json_workspace) => {
+      monitor.workspaces = json_monitor.workspaces.map((json_workspace: anyObject) => {
         const workspace: Workspace = {
           name: json_workspace.name ?? defaultWorkspace.containerPadding,
           containerPadding: json_workspace.container_padding ?? defaultWorkspace.containerPadding,
@@ -79,10 +78,10 @@ export const JsonToState_Monitors = (json: StaticConfig, monitors: Monitor[]): M
   });
 };
 
-export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfig = {}): AppConfiguration[] => {
+export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppConfiguration[] => {
   const apps: AppConfiguration[] = [];
 
-  yaml.forEach((ymlApp: YamlAppConfiguration) => {
+  yaml.forEach((ymlApp: anyObject) => {
     if (ymlApp.template) {
       return;
     }
@@ -105,7 +104,7 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
 
     // In komorebi cli float_identifiers are considerated as unmanaged
     // also we doesn't use this object whe use float option instead
-    ymlApp.float_identifiers?.forEach((rule) => {
+    ymlApp.float_identifiers?.forEach((rule: any) => {
       apps.push({
         ...AppConfiguration.from(rule),
         [ApplicationOptions.Unmanage]: true,
@@ -134,8 +133,8 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
     });
   }
 
-  json.monitors?.forEach(({ workspaces }, monitor_idx) => {
-    workspaces?.forEach(({ workspace_rules, name }) => {
+  json.monitors?.forEach(({ workspaces }: anyObject, monitor_idx: number) => {
+    workspaces?.forEach(({ workspace_rules, name }: anyObject) => {
       if (!workspace_rules) {
         return;
       }
@@ -152,9 +151,9 @@ export const YamlToState_Apps = (yaml: YamlAppConfiguration[], json: StaticConfi
   return apps;
 };
 
-export const JsonToState_Seelenweg = (json: StaticConfig, initialState: SeelenWegState): SeelenWegState => {
+export const JsonToState_Seelenweg = (json: anyObject, initialState: SeelenWegState): SeelenWegState => {
   return {
-    enabled: json.seelenweg?.enabled ?? initialState.enabled,
+    enable: json.seelenweg?.enable ?? initialState.enable,
     mode: json.seelenweg?.mode as SeelenWegMode ?? initialState.mode,
     position: json.seelenweg?.position as SeelenWegSide ?? initialState.position,
     size: json.seelenweg?.size ?? initialState.size,
@@ -183,7 +182,7 @@ export const StaticSettingsToState = (userSettings: UserSettings, initialState: 
   };
 };
 
-const StateToJson_WManager = (state: SeelenManagerState): StaticConfig => {
+const StateToJson_WManager = (state: SeelenManagerState): anyObject => {
   const global_work_area_offset = { ...state.globalWorkAreaOffset };
   global_work_area_offset.bottom = global_work_area_offset.bottom + global_work_area_offset.top;
   global_work_area_offset.right = global_work_area_offset.right + global_work_area_offset.left;
@@ -211,7 +210,7 @@ const StateToJson_WManager = (state: SeelenManagerState): StaticConfig => {
   };
 };
 
-const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {
+const StateToJson_Monitors = (monitors: Monitor[]): anyObject => {
   return {
     monitors: monitors.map((monitor) => {
       return {
@@ -229,10 +228,10 @@ const StateToJson_Monitors = (monitors: Monitor[]): Partial<StaticConfig> => {
   };
 };
 
-const StateToJson_SeelenWeg = (state: SeelenWegState): Partial<StaticConfig> => {
+const StateToJson_SeelenWeg = (state: SeelenWegState): anyObject => {
   return {
     seelenweg: {
-      enabled: state.enabled,
+      enable: state.enable,
       mode: state.mode,
       position: state.position,
       size: state.size,
@@ -245,13 +244,13 @@ const StateToJson_SeelenWeg = (state: SeelenWegState): Partial<StaticConfig> => 
   };
 };
 
-const StateToJson_Generals = (state: GeneralSettingsState): StaticConfig => {
+const StateToJson_Generals = (state: GeneralSettingsState): anyObject => {
   return {
     theme_filename: state.selectedTheme || undefined,
   };
 };
 
-export const StateToJsonSettings = (state: RootState): StaticConfig => {
+export const StateToJsonSettings = (state: RootState): anyObject => {
   return {
     ...StateToJson_Generals(state.generals),
     ...StateToJson_Monitors(state.monitors),
@@ -263,10 +262,10 @@ export const StateToJsonSettings = (state: RootState): StaticConfig => {
 export const StateAppsToYamlApps = (
   appsConfigurations: AppConfiguration[],
   template?: boolean,
-): YamlAppConfiguration[] => {
+): anyObject[] => {
   return appsConfigurations.map((appConfig: AppConfiguration) => {
     const options = Object.values(ApplicationOptions).filter((option) => appConfig[option]);
-    const yamlApp: YamlAppConfiguration = {
+    const yamlApp = {
       name: appConfig.name,
       template: template || undefined,
       category: appConfig.category || undefined,

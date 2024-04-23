@@ -15,7 +15,7 @@ pub struct State {
     seelenweg: Option<FeatureState>,
     seelen_shell: Option<FeatureState>,
     seelen_bar: Option<FeatureState>,
-    seelen_window_manager: Option<FeatureState>,
+    seelen_wm: Option<FeatureState>,
     ahk_enabled: Option<bool>,
 }
 

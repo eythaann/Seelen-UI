@@ -1,3 +1,4 @@
+import { SeelenWegMode, SeelenWegSide } from '../../../utils/interfaces/Weg';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 
@@ -6,15 +7,13 @@ import { RootSelectors } from '../shared/app/selectors';
 import { OptionsFromEnum } from '../shared/app/utils';
 import { SeelenWegActions } from './app';
 
-import { SeelenWegMode, SeelenWegSide } from './domain';
-
 export const SeelenWegSettings = () => {
   const settings = useAppSelector(RootSelectors.seelenweg);
 
   const dispatch = useAppDispatch();
 
   const onToggleEnable = (value: boolean) => {
-    dispatch(SeelenWegActions.setEnabled(value));
+    dispatch(SeelenWegActions.setEnable(value));
   };
 
   return (
@@ -24,7 +23,7 @@ export const SeelenWegSettings = () => {
           <div>
             <b>Enable SeelenWeg</b>
           </div>
-          <Switch checked={settings.enabled} onChange={onToggleEnable} />
+          <Switch checked={settings.enable} onChange={onToggleEnable} />
         </SettingsOption>
       </SettingsGroup>
 

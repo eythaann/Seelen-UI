@@ -1,3 +1,5 @@
+import { IModule } from './common';
+
 export enum SeelenWegMode {
   FULL_WIDTH = 'Full-Width',
   MIN_CONTENT = 'Min-Content',
@@ -10,8 +12,7 @@ export enum SeelenWegSide {
   BOTTOM = 'Bottom',
 }
 
-export interface SeelenWegState {
-  enabled: boolean;
+export interface SeelenWegState extends IModule {
   mode: SeelenWegMode;
   position: SeelenWegSide;
   visibleSeparators: boolean;

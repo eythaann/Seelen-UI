@@ -1,5 +1,4 @@
 import { AppTemplate, defaultTheme, Theme, UserSettings } from '../../../../../shared.interfaces';
-import { ApplicationConfiguration } from '../../../../../YamlSettings.interface';
 import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
@@ -111,7 +110,7 @@ export async function saveUserSettings(settings: Omit<UserSettings, 'themes' | '
 }
 
 export async function ImportApps() {
-  const data: ApplicationConfiguration[] = [];
+  const data: any[] = [];
 
   const files = await dialog.open({
     defaultPath: await path.resolveResource('static/apps_templates'),
@@ -132,7 +131,7 @@ export async function ImportApps() {
   return data;
 }
 
-export async function ExportApps(apps: ApplicationConfiguration[]) {
+export async function ExportApps(apps: any[]) {
   const pathToSave = await dialog.save({
     title: 'Exporting Apps',
     defaultPath: await path.join(await path.homeDir(), 'downloads/apps.yaml'),

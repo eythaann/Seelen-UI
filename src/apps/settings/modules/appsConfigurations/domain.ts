@@ -1,5 +1,3 @@
-import { IdWithIdentifier as JsonIdWithIdentifier } from '../../../../YamlSettings.interface';
-
 export enum ApplicationOptions {
   Float = 'float',
   Unmanage = 'unmanage',
@@ -65,7 +63,7 @@ export class AppConfiguration {
     };
   }
 
-  static from(json_identifier: JsonIdWithIdentifier): AppConfiguration {
+  static from(json_identifier: any): AppConfiguration {
     return {
       ...AppConfiguration.default(),
       name: json_identifier.id,

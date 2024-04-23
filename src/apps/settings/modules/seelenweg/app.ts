@@ -1,11 +1,10 @@
+import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../utils/interfaces/Weg';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { reducersFor, selectorsFor } from '../shared/app/utils';
 
-import { SeelenWegMode, SeelenWegSide, SeelenWegState } from './domain';
-
 const initialState: SeelenWegState = {
-  enabled: true,
+  enable: true,
   mode: SeelenWegMode.MIN_CONTENT,
   position: SeelenWegSide.BOTTOM,
   size: 40,

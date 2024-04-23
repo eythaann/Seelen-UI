@@ -1,10 +1,9 @@
 import { IRootState } from '../../../../../shared.interfaces';
+import { SeelenWegState } from '../../../../utils/interfaces/Weg';
 import { modify } from 'readable-types';
 
 import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
-
-import { SeelenWegState } from '../../../../settings/modules/seelenweg/domain';
 
 export type HWND = number & {};
 

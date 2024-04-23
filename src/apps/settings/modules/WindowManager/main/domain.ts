@@ -9,6 +9,7 @@ interface FloatingWindowSettings {
 }
 
 export interface SeelenManagerState {
+  enable: boolean;
   border: BorderState;
   autoStackinByCategory: boolean;
   resizeDelta: number;
