@@ -9,7 +9,7 @@
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["react", "readable-types", "node"],
+    "types": ["react", "readable-types", "node", "jest"],
     "skipLibCheck": true,
     "esModuleInterop": true,
   }

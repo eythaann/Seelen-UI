@@ -4,17 +4,21 @@ import { HexColor, ReducersFor, SelectorsFor } from '../domain/interfaces';
 
 type Args = undefined | string | { [x: string]: boolean | null | undefined };
 export const cx = (...args: Args[]): string => {
-  return args.map((arg) => {
-    if (!arg) {
-      return;
-    }
+  return args
+    .map((arg) => {
+      if (!arg) {
+        return;
+      }
 
-    if (typeof arg === 'string') {
-      return arg;
-    }
+      if (typeof arg === 'string') {
+        return arg;
+      }
 
-    return Object.keys(arg).map((key) => arg[key] ? key : '').join(' ');
-  }).join(' ');
+      return Object.keys(arg)
+        .map((key) => (arg[key] ? key : ''))
+        .join(' ');
+    })
+    .join(' ');
 };
 
 export const matcher = (slice: Slice) => (action: Action) => action.type.startsWith(slice.name);
@@ -55,10 +59,11 @@ export const validateHexColor = (str: string): HexColor | null => {
   return str as HexColor;
 };
 
-export const OptionsFromEnum = (obj: anyObject) => Object.values(obj).map((value) => ({
-  label: value,
-  value,
-}));
+export const OptionsFromEnum = (obj: anyObject) =>
+  Object.values(obj).map((value) => ({
+    label: value,
+    value,
+  }));
 
 export function debounce<T extends anyFunction>(fn: T, delay: number): T {
   let timeoutId: NodeJS.Timeout;
@@ -70,4 +75,62 @@ export function debounce<T extends anyFunction>(fn: T, delay: number): T {
       fn.apply(context, args);
     }, delay);
   } as T;
+}
+
+export class VariableConvention {
+  static snakeToCamel(text: string) {
+    let camel = '';
+    let prevCharIsDash = false;
+    for (const char of text.split('')) {
+      if (char === '_') {
+        prevCharIsDash = true;
+        continue;
+      }
+      if (prevCharIsDash) {
+        camel += char.toUpperCase();
+        prevCharIsDash = false;
+      } else {
+        camel += char;
+      }
+    }
+    return camel;
+  }
+
+  static camelToSnake(text: string) {
+    let snake = '';
+    for (const char of text.split('')) {
+      if (char === char.toLowerCase()) {
+        snake += char;
+      } else {
+        snake += `_${char.toLowerCase()}`;
+      }
+    }
+    return snake;
+  }
+
+  static deepKeyParser(obj: anyObject, parser: (text: string) => string): anyObject {
+    if (Array.isArray(obj)) {
+      return obj.map((x) => {
+        if (typeof x === 'object') {
+          return VariableConvention.deepKeyParser(x, parser);
+        }
+        return x;
+      });
+    }
+
+    let newObj = {} as anyObject;
+    for (const key in obj) {
+      const value = obj[key];
+      if (typeof value !== 'object') {
+        newObj[parser(key)] = value;
+      } else {
+        newObj[parser(key)] = VariableConvention.deepKeyParser(value, parser);
+      }
+    }
+    return newObj;
+  }
+
+  static fromSnakeToCamel(value: anyObject) {
+    return VariableConvention.deepKeyParser(value, VariableConvention.snakeToCamel);
+  }
 }

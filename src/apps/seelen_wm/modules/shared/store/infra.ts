@@ -2,12 +2,14 @@ import { UserSettings } from '../../../../../shared.interfaces';
 import { loadThemeCSS } from '../../../../utils';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
+import { defaultsDeep } from 'lodash';
 
 import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
 
-import { JsonToState_WManager } from '../../../../settings/modules/shared/app/StateBridge';
+import { VariableConvention } from '../../../../settings/modules/shared/app/utils';
 import { RootActions, RootSlice } from './app';
 
+import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
 import { Reservation, Sizing } from '../../layout/domain';
 import { HWND } from '../utils/domain';
 import { DesktopId, FocusAction } from './domain';
@@ -21,9 +23,11 @@ export async function loadStore() {
   const userSettings = await loadUserSettings();
   const initialState = RootSlice.getInitialState();
 
-  const settings = JsonToState_WManager(userSettings.jsonSettings, initialState.settings);
-  store.dispatch(RootActions.setSettings(settings));
+  let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelen_wm || {}) as any;
+  settings = defaultsDeep(settings, initialState.settings);
 
+  store.dispatch(RootActions.setSettings(settings));
+  loadSettingsCSS(settings);
   if (userSettings.theme) {
     loadThemeCSS(userSettings.theme);
     store.dispatch(RootActions.setTheme(userSettings.theme));
@@ -32,12 +36,16 @@ export async function loadStore() {
 
 export async function registerStoreEvents() {
   await listen<UserSettings>('updated-settings', (event) => {
-    const state = store.getState();
+    const currentState = store.getState();
     const userSettings = event.payload;
-    const settings = JsonToState_WManager(userSettings.jsonSettings, state.settings);
+
+    let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelen_wm || {}) as any;
+    settings = defaultsDeep(settings, currentState.settings);
+
+    loadSettingsCSS(settings);
     store.dispatch(RootActions.setSettings(settings));
     if (userSettings.theme) {
-      loadThemeCSS(userSettings.theme, state.theme);
+      loadThemeCSS(userSettings.theme, currentState.theme);
       store.dispatch(RootActions.setTheme(userSettings.theme));
     }
   });
@@ -89,4 +97,19 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.removeWindow(event.payload.hwnd));
     store.dispatch(RootActions.addWindow(event.payload));
   });
+}
+
+function loadSettingsCSS(settings: SeelenManagerState) {
+  const styles = document.documentElement.style;
+
+  styles.setProperty('--config-padding', `${settings.workspacePadding}px`);
+  styles.setProperty('--config-containers-gap', `${settings.containerPadding}px`);
+
+  styles.setProperty('--config-margin-top', `${settings.globalWorkAreaOffset.top}px`);
+  styles.setProperty('--config-margin-left', `${settings.globalWorkAreaOffset.left}px`);
+  styles.setProperty('--config-margin-right', `${settings.globalWorkAreaOffset.right}px`);
+  styles.setProperty('--config-margin-bottom', `${settings.globalWorkAreaOffset.bottom}px`);
+
+  styles.setProperty('--config-border-offset', `${settings.border.offset}px`);
+  styles.setProperty('--config-border-width', `${settings.border.width}px`);
 }

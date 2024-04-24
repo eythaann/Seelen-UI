@@ -1,7 +1,7 @@
 
-import { wrapConsole } from '../utils/ConsoleWrapper';
 import { ErrorBoundary } from '../seelenweg/components/Error';
 import { setWindowAsFullSize } from '../utils';
+import { wrapConsole } from '../utils/ConsoleWrapper';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { useEffect } from 'react';
@@ -9,9 +9,10 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { Layout } from './modules/layout/infra';
-import { registerStoreEvents, store } from './modules/shared/store/infra';
+import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
 
 import './styles/colors.css';
+import './styles/variables.css';
 import './styles/global.css';
 
 async function Main() {
@@ -23,6 +24,7 @@ async function Main() {
   }
 
   setWindowAsFullSize();
+  await loadStore();
   await registerStoreEvents();
 
   const WrappedRoot = () => {

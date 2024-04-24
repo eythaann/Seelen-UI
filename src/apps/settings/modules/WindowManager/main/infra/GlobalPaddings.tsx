@@ -35,15 +35,15 @@ export const GlobalPaddings = () => {
     <SettingsGroup>
       <div>
         <SettingsOption>
-          <span>Default gap between containers</span>
+          <span>Gap between containers</span>
           <InputNumber value={containerPadding} onChange={onChangeDefaultGap} />
         </SettingsOption>
         <SettingsOption>
-          <span>Default workspaces padding</span>
+          <span>Workspace padding</span>
           <InputNumber value={workspacePadding} onChange={onChangeDefaultPadding} />
         </SettingsOption>
       </div>
-      <SettingsSubGroup label="Default monitors offset (margins)">
+      <SettingsSubGroup label="Workspace offset (margins)">
         <SettingsOption>
           <span>Left</span>
           <InputNumber value={workAreaOffset.left} onChange={onChangeGlobalOffset.bind(this, 'left')} />

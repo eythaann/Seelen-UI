@@ -1,33 +1,31 @@
-import { toPhysicalPixels } from '../../../../../utils';
 import { cx } from '../../../../../utils/styles';
 import { LeafContainer } from './leaf';
-import { ReservedContainer } from './reserved';
-import { invoke } from '@tauri-apps/api/core';
-import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
 
 import { FallbackNode } from '../../domain';
 
-import cs from '../index.module.css';
-
 interface Props {
   node: FallbackNode;
 }
 
 export function FallbackContainer({ node }: Props) {
+  const { border } = useSelector(Selectors.settings);
+
   return (
     <div
       style={{
         flexGrow: node.growFactor,
       }}
-      className={cx(cs.container, cs.stack)}
+      className={cx('wm-container', 'wm-stack')}
     >
       {node.handles.length > 1 && (
-        <div className={cs.stackedBar}>
+        <div className={cx('wm-stack-bar', {
+          'wm-stack-bar-with-borders': border.enabled,
+        })}>
           {node.handles.map((handle) => (
-            <div key={handle} className={cs.stackedItem}>
+            <div key={handle} className="wm-stack-bar-item">
               {handle}
             </div>
           ))}

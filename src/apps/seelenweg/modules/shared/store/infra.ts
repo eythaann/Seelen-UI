@@ -5,10 +5,11 @@ import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
+import { defaultsDeep } from 'lodash';
 
 import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
 
-import { JsonToState_Seelenweg } from '../../../../settings/modules/shared/app/StateBridge';
+import { VariableConvention } from '../../../../settings/modules/shared/app/utils';
 import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
@@ -82,7 +83,7 @@ export async function registerStoreEvents() {
   await listen<UserSettings>('updated-settings', (event) => {
     const state = store.getState();
     const userSettings = event.payload;
-    const settings = JsonToState_Seelenweg(userSettings.jsonSettings, state.settings);
+    const settings = defaultsDeep(VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelenweg || {}), state.settings);
     store.dispatch(RootActions.setSettings(settings));
     loadSettingsCSS(settings);
     if (userSettings.theme) {
@@ -140,7 +141,7 @@ export async function loadStore() {
   const userSettings = await loadUserSettings();
   const initialState = RootSlice.getInitialState();
 
-  const settings = JsonToState_Seelenweg(userSettings.jsonSettings, initialState.settings);
+  const settings = defaultsDeep(VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelenweg || {}), initialState.settings);
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
 

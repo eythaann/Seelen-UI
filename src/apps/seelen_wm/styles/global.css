@@ -8,8 +8,10 @@
 }
 
 #root {
-  padding: 16px;
-  padding-bottom: 90px;
+  padding-top: calc(var(--config-padding) + var(--config-margin-top));
+  padding-left: calc(var(--config-padding) + var(--config-margin-left));
+  padding-right: calc(var(--config-padding) + var(--config-margin-right));
+  padding-bottom: calc(var(--config-padding) + var(--config-margin-bottom));
   height: 100%;
   width: 100%;
 }
@@ -18,6 +20,4 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-
-  /* border: 3px solid red; */
 }

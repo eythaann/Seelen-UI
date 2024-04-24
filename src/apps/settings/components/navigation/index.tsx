@@ -1,3 +1,4 @@
+import { Tooltip } from 'antd';
 import { memo, useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../../modules/shared/app/hooks';
@@ -5,7 +6,12 @@ import { RootActions } from '../../modules/shared/app/reducer';
 import { RootSelectors } from '../../modules/shared/app/selectors';
 import { cx } from '../../modules/shared/app/utils';
 
-import { Route, RouteIcons, RouteLabels } from '../../modules/shared/domain/routes';
+import {
+  Route,
+  RouteIcons,
+  RouteLabels,
+  WorkingInProgressRoutes,
+} from '../../modules/shared/domain/routes';
 
 import cs from './index.module.css';
 
@@ -17,6 +23,9 @@ interface ItemProps {
 const Item = ({ route, isActive }: ItemProps) => {
   let dispatch = useAppDispatch();
   let onclick = useCallback(() => {
+    if (WorkingInProgressRoutes.includes(route)) {
+      return;
+    };
     dispatch(RootActions.setRoute(route));
   }, []);
 
@@ -28,7 +37,9 @@ const Item = ({ route, isActive }: ItemProps) => {
       })}
     >
       <span className={cs.icon}>{RouteIcons[route]}</span>
-      <span className={cs.label}>{RouteLabels[route]}</span>
+      <Tooltip title={WorkingInProgressRoutes.includes(route) ? 'Working in progress' : undefined}>
+        <span className={cs.label}>{RouteLabels[route]}</span>
+      </Tooltip>
     </div>
   );
 };

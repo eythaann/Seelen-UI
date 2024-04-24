@@ -28,7 +28,7 @@ export const BorderSettings = () => {
     <SettingsSubGroup
       label={
         <SettingsOption>
-          <span>Enable border on focus/activation</span>
+          <span>Enable windows border</span>
           <Switch value={enabled} onChange={toggleEnabled} />
         </SettingsOption>
       }

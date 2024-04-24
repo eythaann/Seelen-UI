@@ -8,14 +8,16 @@ export enum Route {
   INFO = 'info',
 }
 
+export const WorkingInProgressRoutes = [Route.SPECIFIT_APPS, Route.MONITORS, Route.SHORTCUTS];
+
 export const RouteLabels: Record<Route, string> = {
   [Route.GENERAL]: 'General',
   [Route.MONITORS]: 'Monitors',
   [Route.SHORTCUTS]: 'Shortcuts',
   [Route.SPECIFIT_APPS]: 'Apps Configurations',
   [Route.INFO]: 'Information',
-  [Route.SEELEN_WEG]: 'SeelenWeg Beta',
-  [Route.SEELEN_WM]: 'Tiling Window Manager',
+  [Route.SEELEN_WEG]: 'SeelenWeg',
+  [Route.SEELEN_WM]: 'Window Manager',
 };
 
 export const RouteExtraInfo: { [key in Route]?: string } = {

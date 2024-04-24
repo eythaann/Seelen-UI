@@ -7,8 +7,6 @@ import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
 
-import cs from '../index.module.css';
-
 interface Props {
   hwnd: number;
   growFactor?: number;
@@ -18,6 +16,7 @@ export function LeafContainer({ hwnd, growFactor }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const reservation = useSelector(Selectors.reservation);
   const activeWindow = useSelector(Selectors.activeWindow);
+  const borderSettings = useSelector(Selectors.settings.border);
 
   const updateSize = useCallback(() => {
     if (!ref.current) {
@@ -44,8 +43,9 @@ export function LeafContainer({ hwnd, growFactor }: Props) {
       style={{
         flexGrow: growFactor,
       }}
-      className={cx(cs.container, cs.leaf, {
-        [cs.focused!]: isFocused,
+      className={cx('wm-container', 'wm-leaf', {
+        'wm-leaf-focused': isFocused,
+        'wm-leaf-with-borders': borderSettings.enabled,
       })}
     >
       {!!reservation && isFocused && <ReservedContainer reservation={reservation} />}

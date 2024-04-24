@@ -1,0 +1,14 @@
+:root {
+  --config-padding: 0px;
+  --config-containers-gap: 0px;
+
+  --config-margin-top: 0px;
+  --config-margin-left: 0px;
+  --config-margin-right: 0px;
+  --config-margin-bottom: 0px;
+
+  --config-accent-color: #ff0000;
+
+  --config-border-offset: 0px;
+  --config-border-width: 0px;
+}

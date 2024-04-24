@@ -6,6 +6,7 @@
   "scripts": {
     "tauri": "tauri",
     "dev": "nodemon --config nodemon.json",
+    "test": "jest",
     "build": "tauri build",
     "build:ui": "ts-node scripts/build.ts",
     "lint": "eslint ./**/** --fix --max-warnings 0",
@@ -36,6 +37,7 @@
     "@stylistic/eslint-plugin": "^1.6.2",
     "@tauri-apps/api": "^2.0.0-beta.4",
     "@tauri-apps/cli": "^2.0.0-beta.8",
+    "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^20.11.19",
     "@types/react": "^18.2.56",
@@ -46,6 +48,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-simple-import-sort": "^12.0.0",
     "framer-motion": "^11.0.22",
+    "jest": "^29.7.0",
     "js-yaml": "^4.1.0",
     "json-schema-to-typescript": "^13.1.2",
     "lodash": "^4.17.21",
@@ -56,6 +59,7 @@
     "readable-types": "^4.0.0",
     "redux": "^5.0.1",
     "toml": "^3.0.0",
+    "ts-jest": "^29.1.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3",
     "typescript-eslint": "^7.0.1"

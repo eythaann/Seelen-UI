@@ -219,12 +219,6 @@ unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
             weg.add_hwnd(hwnd);
         }
     }
-
-    if let Some(wm) = seelen.wm_mut() {
-        if WindowManager::is_manageble_window(hwnd, true) {
-            log_if_error(wm.add_hwnd(hwnd));
-        }
-    }
     true.into()
 }
 

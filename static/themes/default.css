@@ -119,3 +119,36 @@
     }
   }
 }
+
+.SeelenWM {
+  .wm-leaf {
+    &.wm-leaf-with-borders {
+      outline-color: var(--color-blue-800);
+      outline-style: solid;
+      outline-width: var(--config-border-width);
+      outline-offset: var(--config-border-offset);
+
+      &.wm-leaf-focused {
+        outline-color: var(--color-red-800);
+      }
+    }
+  }
+
+  .wm-stack {
+    .wm-stack-bar {
+      background-color: #222222;
+      color: #fefefe;
+
+      &.wm-stack-bar-with-borders {
+        outline-color: var(--color-blue-800);
+        outline-style: solid;
+        outline-width: var(--config-border-width);
+        outline-offset: var(--config-border-offset);
+      }
+    }
+  }
+
+  .wm-reserved {
+    background-color: var(--color-cyan-700);
+  }
+}

@@ -17,6 +17,33 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     theme: null,
   };
 
+  let themesPath = await path.join(await path.resourceDir(), 'static', 'themes');
+  let entries = await fs.readDir(themesPath);
+
+  for (const entry of entries) {
+    if (entry.isFile && entry.name.endsWith('.json')) {
+      const theme: Theme = JSON.parse(await fs.readTextFile(await path.join(themesPath, entry.name)));
+      const sanitizedTheme: Theme = defaultsDeep(theme, defaultTheme);
+
+      sanitizedTheme.info.filename = entry.name;
+
+      let cssFilePath = await path.join(await path.resourceDir(), 'static', 'themes', entry.name.replace('.json', '.css'));
+      if (await fs.exists(cssFilePath)) {
+        sanitizedTheme.info.cssFileUrl = convertFileSrc(cssFilePath);
+      }
+
+      if (userSettings.jsonSettings.selected_theme === entry.name) {
+        userSettings.theme = sanitizedTheme;
+      }
+
+      userSettings.themes.push(sanitizedTheme);
+    }
+  }
+
+  if (!userSettings.theme) {
+    userSettings.theme = userSettings.themes[0] || null;
+  }
+
   let configPath = await path.join(await path.homeDir(), '.config/seelen/settings.json');
   if (!(await fs.exists(configPath))) {
     configPath = await path.join(await path.homeDir(), '.config/komorebi-ui/settings.json');
@@ -40,33 +67,6 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
 
     const processed = yaml.load(await fs.readTextFile(pathToYml));
     userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
-  }
-
-  let themesPath = await path.join(await path.resourceDir(), 'static', 'themes');
-  let entries = await fs.readDir(themesPath);
-
-  for (const entry of entries) {
-    if (entry.isFile && entry.name.endsWith('.json')) {
-      const theme: Theme = JSON.parse(await fs.readTextFile(await path.join(themesPath, entry.name)));
-      const sanitizedTheme: Theme = defaultsDeep(theme, defaultTheme);
-
-      sanitizedTheme.info.filename = entry.name;
-
-      let cssFilePath = await path.join(await path.resourceDir(), 'static', 'themes', entry.name.replace('.json', '.css'));
-      if (await fs.exists(cssFilePath)) {
-        sanitizedTheme.info.cssFileUrl = convertFileSrc(cssFilePath);
-      }
-
-      if (userSettings.jsonSettings.theme_filename === entry.name) {
-        userSettings.theme = sanitizedTheme;
-      }
-
-      userSettings.themes.push(sanitizedTheme);
-    }
-  }
-
-  if (!userSettings.theme) {
-    userSettings.theme = userSettings.themes[0] || null;
   }
 
   return userSettings;

@@ -8,7 +8,7 @@ import { NodeImpl } from '../app';
 
 import { Layout, Node } from '../domain';
 
-import cs from './index.module.css';
+import './index.css';
 
 export function Container({ container }: { container: Node }) {
   const node = NodeImpl.from(container);
@@ -31,7 +31,7 @@ export function Container({ container }: { container: Node }) {
         style={{
           flexGrow: node.inner.growFactor,
         }}
-        className={cx(cs.container, cs[container.type])}
+        className={cx('wm-container', `wm-${container.type.toLowerCase()}`)}
       >
         {node.inner.children.map((child) => (
           <Container key={child.priority} container={child} />

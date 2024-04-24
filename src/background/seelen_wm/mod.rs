@@ -8,7 +8,7 @@ use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::EnumWindows};
 
 use crate::{
-    error_handler::Result, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
+    error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
 };
 
 #[derive(Serialize, Clone)]
@@ -51,6 +51,7 @@ impl WindowManager {
         self.paused = false;
         self.handle
             .emit_to(Self::TARGET, "set-active-workspace", &self.current_virtual_desktop)?;
+        Self::enum_windows();
         Ok(())
     }
 
@@ -201,15 +202,31 @@ impl WindowManager {
 // UTILS AND STATICS
 impl WindowManager {
     pub fn should_manage(hwnd: HWND) -> bool {
-        Self::is_manageble_window(hwnd, false)
+        Self::is_manageable_window(hwnd, false)
     }
 
-    pub fn is_manageble_window(hwnd: HWND, ignore_cloaked: bool) -> bool {
+    pub fn is_manageable_window(hwnd: HWND, ignore_cloaked: bool) -> bool {
         SeelenWeg::is_real_window(hwnd) 
         && !WindowsApi::is_iconic(hwnd)
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
         // Without admin some apps does not return the exe path so these should be unmanaged
         && WindowsApi::exe_path(hwnd).is_ok()
+    }
+
+    unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
+        let mut seelen = SEELEN.lock();
+        if let Some(wm) = seelen.wm_mut() {
+            if Self::is_manageable_window(hwnd, true) {
+                log_if_error(wm.add_hwnd(hwnd));
+            }
+        }
+        true.into()
+    }
+
+    pub fn enum_windows() {
+        std::thread::spawn(|| unsafe {
+            log_if_error(EnumWindows(Some(Self::enum_windows_proc), LPARAM(0)));
+        });
     }
 
     fn create_window(handle: &AppHandle<Wry>) -> Result<WebviewWindow> {
@@ -237,7 +254,7 @@ impl WindowManager {
 
     const NEXT: AtomicIsize = AtomicIsize::new(0);
     unsafe extern "system" fn get_next_by_order_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
-        if WindowManager::is_manageble_window(hwnd, false) && hwnd.0 != lparam.0 {
+        if WindowManager::is_manageable_window(hwnd, false) && hwnd.0 != lparam.0 {
             Self::NEXT.store(hwnd.0, Ordering::SeqCst);
             return false.into();
         }
