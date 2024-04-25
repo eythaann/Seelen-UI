@@ -12,7 +12,6 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
   const userSettings: UserSettings = {
     jsonSettings: {},
     yamlSettings: [],
-    ahkEnabled: false,
     themes: [],
     theme: null,
   };
@@ -55,7 +54,6 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
   }
 
   userSettings.jsonSettings = JSON.parse(await fs.readTextFile(json_route));
-  userSettings.ahkEnabled = !!userSettings.jsonSettings.ahk_enabled;
 
   let pathToYml = userSettings.jsonSettings.app_specific_configuration_path;
   if (pathToYml) {
@@ -95,13 +93,11 @@ export async function saveUserSettings(settings: Omit<UserSettings, 'themes' | '
   const json_route = await path.join(await path.homeDir(), '.config/seelen/settings.json');
   const yaml_route = await path.join(await path.homeDir(), '.config/seelen/applications.yml');
 
-  if (settings.ahkEnabled) {
+  if (settings.jsonSettings.ahk_enabled) {
     invoke('start_seelen_shortcuts');
   } else {
     invoke('kill_seelen_shortcuts');
   }
-
-  settings.jsonSettings.ahk_enabled = settings.ahkEnabled;
 
   await fs.writeTextFile(json_route, JSON.stringify(settings.jsonSettings));
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));

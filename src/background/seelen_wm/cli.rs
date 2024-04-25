@@ -1,70 +1,17 @@
-use clap::{value_parser, Arg, ArgAction, Command, ValueEnum};
+use clap::{Command, ValueEnum};
 use color_eyre::eyre::eyre;
 use serde::{Deserialize, Serialize};
 use tauri::Manager;
 use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
+use crate::get_subcommands;
 use crate::seelen::SEELEN;
 use crate::utils::virtual_desktop::VirtualDesktopManager;
 use crate::utils::{kebab_to_pascal, pascal_to_kebab, sleep_millis};
 use crate::windows_api::WindowsApi;
 
 use super::WindowManager;
-
-macro_rules! get_subcommands {
-    ($(
-        #[$meta:meta]
-        $subcommand:ident $(($($arg_name:ident: $arg_type:ty => $arg_desc:literal),*))?,
-    )*) => {
-        #[derive(Debug, Clone, Serialize, Deserialize)]
-        enum SubCommand {
-            $(
-                #[$meta]
-                $subcommand$(($($arg_type),*))?,
-            )*
-        }
-
-        impl SubCommand {
-            pub fn commands() -> Vec<Command> {
-                let mut commands = Vec::new();
-                $(
-                    commands.push({
-                        let args: Vec<clap::Arg> = vec![
-                            $($(
-                                Arg::new(stringify!($arg_name))
-                                    .help($arg_desc)
-                                    .action(ArgAction::Set)
-                                    .value_parser(value_parser!($arg_type))
-                                    .required(true)
-                            ),*)?
-                        ];
-
-                        let about = stringify!($meta).trim_start_matches("doc = r\"").trim_end_matches("\"").trim();
-                        let command = pascal_to_kebab(stringify!($subcommand));
-                        Command::new(command).about(about).args(args)
-                    });
-                )*
-                commands
-            }
-
-            fn try_from(matches: &clap::ArgMatches) -> Result<Self> {
-                if let Some((subcommand, matches)) = matches.subcommand() {
-                    match kebab_to_pascal(subcommand).as_str() {
-                        $(
-                            stringify!($subcommand) => {
-                                Ok(SubCommand::$subcommand$(($((matches.get_one(stringify!($arg_name)) as Option<&$arg_type>).unwrap().clone()),*))?)
-                            },
-                        )*
-                        _ => Err(eyre!("Unknown subcommand.").into()),
-                    }
-                } else {
-                    Err(eyre!("No subcommand was provided.").into())
-                }
-            }
-        }
-    }
-}
 
 #[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]
 pub enum AllowedReservations {

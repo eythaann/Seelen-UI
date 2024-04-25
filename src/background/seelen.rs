@@ -6,7 +6,7 @@ use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    apps_config::SETTINGS_BY_APP, error_handler::{log_if_error, Result}, hook::register_hook_and_enum_windows, seelen_wm::WindowManager, seelen_bar::SeelenBar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg, state::State, utils::run_ahk_file
+    apps_config::SETTINGS_BY_APP, error_handler::{log_if_error, Result}, hook::register_hook_and_enum_windows, seelen_wm::WindowManager, seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg, state::State, utils::run_ahk_file
 };
 
 lazy_static! {
@@ -17,7 +17,7 @@ lazy_static! {
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
     weg: Option<SeelenWeg>,
-    bar: Option<SeelenBar>,
+    bar: Option<FancyToolbar>,
     shell: Option<SeelenShell>,
     window_manager: Option<WindowManager>,
     state: State,
@@ -53,11 +53,11 @@ impl Seelen {
         self.weg.as_ref()
     }
 
-    /* pub fn bar(&self) -> Option<&SeelenBar> {
+    pub fn toolbar(&self) -> Option<&FancyToolbar> {
         self.bar.as_ref()
     }
 
-    pub fn bar_mut(&mut self) -> Option<&mut SeelenBar> {
+    pub fn toolbar_mut(&mut self) -> Option<&mut FancyToolbar> {
         self.bar.as_mut()
     }
 
@@ -67,7 +67,7 @@ impl Seelen {
 
     pub fn shell_mut(&mut self) -> Option<&mut SeelenShell> {
         self.shell.as_mut()
-    } */
+    }
 
     pub fn wm_mut(&mut self) -> Option<&mut WindowManager> {
         self.window_manager.as_mut()
@@ -105,7 +105,7 @@ impl Seelen {
         }
 
         if self.state.is_bar_enabled() {
-            self.bar = Some(SeelenBar::new(app.clone()));
+            self.bar = Some(FancyToolbar::new(app.clone()));
         }
 
         if self.state.is_window_manager_enabled() {

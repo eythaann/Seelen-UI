@@ -90,14 +90,15 @@ export const StaticSettingsToState = (
   userSettings: UserSettings,
   initialState: RootState,
 ): RootState => {
-  const { jsonSettings, yamlSettings, ahkEnabled, theme, themes } = userSettings;
+  const { jsonSettings, yamlSettings, theme, themes } = userSettings;
 
   return {
     ...initialState,
+    selectedTheme: theme?.info.filename || null,
     theme,
     availableThemes: themes,
     windowManager: defaultsDeep(
-      VariableConvention.fromSnakeToCamel(jsonSettings.seelen_wm),
+      VariableConvention.fromSnakeToCamel(jsonSettings.window_manager),
       initialState.windowManager,
     ),
     seelenweg: defaultsDeep(
@@ -108,7 +109,7 @@ export const StaticSettingsToState = (
       ? (VariableConvention.fromSnakeToCamel(jsonSettings.monitors) as Monitor[])
       : initialState.monitors,
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
-    ahkEnabled,
+    ahkEnabled: jsonSettings.ahk_enabled ?? initialState.ahkEnabled,
   };
 };
 

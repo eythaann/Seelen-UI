@@ -1,0 +1,1 @@
+export const HITBOX_TARGET = 'fancy-toolbar-hitbox';

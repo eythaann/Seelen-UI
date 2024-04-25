@@ -1,0 +1,47 @@
+/**
+ * The styles in this file are only structurals for finder,
+ * all the design should be added to the default theme css.
+ */
+body {
+  overflow: hidden;
+  cursor: default;
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+}
+
+.fancy-toolbar {
+  width: 100vw;
+
+  .ft-bar {
+    position: relative;
+    background-color: #121212;
+    color: white;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    text-wrap: nowrap;
+    display: flex;
+
+    .ft-bar-left {
+      width: 50%;
+      overflow: hidden;
+    }
+
+    .ft-bar-center {
+      position: absolute;
+      background-color: #121212;
+      box-shadow: 0 0 20px 20px #121212;
+      height: 100%;
+      left: 50%;
+      top: 0;
+      translate: -50% 0;
+      overflow: hidden;
+    }
+
+    .ft-bar-right {
+      width: 50%;
+      overflow: hidden;
+    }
+  }
+}

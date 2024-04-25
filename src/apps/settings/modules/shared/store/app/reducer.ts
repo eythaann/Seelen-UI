@@ -33,6 +33,10 @@ export const RootSlice = createSlice({
       state.toBeSaved = false;
     },
     setState: (_state, action: PayloadAction<RootState>) => action.payload,
+    setSelectedTheme: (state, action: PayloadAction<string>) => {
+      state.toBeSaved = true;
+      state.selectedTheme = action.payload;
+    },
   },
   selectors: selectorsFor(initialState),
   extraReducers: (builder) => {

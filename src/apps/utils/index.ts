@@ -4,6 +4,14 @@ import { invoke } from '@tauri-apps/api/core';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
+export function getRootContainer() {
+  const container = document.getElementById('root');
+  if (!container) {
+    throw new Error('Root container not found');
+  }
+  return container;
+}
+
 export function toPhysicalPixels(size: number): number {
   return Math.floor(size * window.devicePixelRatio);
 }

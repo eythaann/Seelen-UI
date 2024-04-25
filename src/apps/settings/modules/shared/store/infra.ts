@@ -22,7 +22,7 @@ export type store = {
   getState: () => RootState;
 };
 
-export const LoadSettingsToStore = async (route?: string) => {
+export const LoadSettingsToStore = async (customPath?: string) => {
   store.dispatch(RootActions.setAutostart(await startup.isEnabled()));
 
   const appsTemplate = await loadAppsTemplates();
@@ -37,13 +37,7 @@ export const LoadSettingsToStore = async (route?: string) => {
     ),
   );
 
-  const userSettings = await loadUserSettings(route);
-  if (!Object.keys(userSettings.jsonSettings).length) {
-    if (!route) { // avoid start user on manual user loading file
-      StartUser();
-    }
-    return;
-  }
+  const userSettings = await loadUserSettings(customPath);
 
   const currentState = store.getState();
   const initialState = RootSlice.getInitialState();
@@ -57,6 +51,11 @@ export const LoadSettingsToStore = async (route?: string) => {
       autostart: currentState.autostart,
     }),
   );
+
+  // !customPath => avoid start user on manual user loading file
+  if (!Object.keys(userSettings.jsonSettings).length && !customPath) {
+    StartUser();
+  }
 };
 
 export const SaveStore = async () => {
@@ -68,7 +67,6 @@ export const SaveStore = async () => {
         ...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
-      ahkEnabled: currentState.ahkEnabled,
       themes: currentState.availableThemes,
       theme: currentState.theme,
     };

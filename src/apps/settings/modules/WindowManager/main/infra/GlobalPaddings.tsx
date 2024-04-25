@@ -3,8 +3,9 @@ import { InputNumber } from 'antd';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../../shared/utils/infra';
-import { Rect } from '../../../shared/utils/app/Rect';
+
 import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
+import { Rect } from '../../../shared/utils/app/Rect';
 import { WManagerSettingsActions } from '../app';
 
 export const GlobalPaddings = () => {

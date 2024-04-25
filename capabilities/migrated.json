@@ -9,7 +9,9 @@
     "seelenweg",
     "seelenweg-hitbox",
     "updater",
-    "seelen_wm"
+    "seelen_wm",
+    "fancy-toolbar",
+    "fancy-toolbar-hitbox"
   ],
   "permissions": [
     "path:default",

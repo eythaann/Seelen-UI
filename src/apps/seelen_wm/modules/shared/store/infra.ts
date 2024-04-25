@@ -1,11 +1,11 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
-import { VariableConvention } from '../../../../settings/modules/shared/utils/app';
 import { loadThemeCSS } from '../../../../utils';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
 import { defaultsDeep } from 'lodash';
 
+import { VariableConvention } from '../../../../settings/modules/shared/utils/app';
 import { RootActions, RootSlice } from './app';
 
 import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
@@ -22,7 +22,7 @@ export async function loadStore() {
   const userSettings = await loadUserSettings();
   const initialState = RootSlice.getInitialState();
 
-  let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelen_wm || {}) as any;
+  let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.window_manager || {}) as any;
   settings = defaultsDeep(settings, initialState.settings);
 
   store.dispatch(RootActions.setSettings(settings));
@@ -38,7 +38,7 @@ export async function registerStoreEvents() {
     const currentState = store.getState();
     const userSettings = event.payload;
 
-    let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelen_wm || {}) as any;
+    let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.window_manager || {}) as any;
     settings = defaultsDeep(settings, currentState.settings);
 
     loadSettingsCSS(settings);
@@ -100,6 +100,8 @@ export async function registerStoreEvents() {
 
 function loadSettingsCSS(settings: SeelenManagerState) {
   const styles = document.documentElement.style;
+
+  console.log(settings);
 
   styles.setProperty('--config-padding', `${settings.workspacePadding}px`);
   styles.setProperty('--config-containers-gap', `${settings.containerPadding}px`);

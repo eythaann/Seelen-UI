@@ -41,6 +41,8 @@ lazy_static! {
         "SeelenWeg Hitbox",
         "SeelenWeg Hitbox",
         "Seelen Window Manager",
+        "Seelen Fancy Toolbar",
+        "Seelen Fancy Toolbar Hitbox",
         "Program Manager",
     ]);
     static ref EXE_BLACK_LIST: Vec<&'static str> = Vec::from([

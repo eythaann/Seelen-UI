@@ -14,7 +14,7 @@ pub struct State {
     /** this is no snake case for a error in naming but is already published so FF */
     seelenweg: Option<FeatureState>,
     seelen_shell: Option<FeatureState>,
-    seelen_bar: Option<FeatureState>,
+    fancy_toolbar: Option<FeatureState>,
     window_manager: Option<FeatureState>,
     ahk_enabled: Option<bool>,
 }
@@ -48,7 +48,7 @@ impl State {
     }
 
     pub fn is_bar_enabled(&self) -> bool {
-        if let Some(bar) = &self.seelen_bar {
+        if let Some(bar) = &self.fancy_toolbar {
             if let Some(enable) = bar.enable {
                 return enable;
             }

@@ -8,7 +8,6 @@ export interface IRootState<T> {
 export interface UserSettings {
   jsonSettings: anyObject;
   yamlSettings: anyObject[];
-  ahkEnabled: boolean;
   themes: Theme[];
   theme: Theme | null;
 }

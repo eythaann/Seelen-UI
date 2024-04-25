@@ -1,3 +1,4 @@
+import { getRootContainer } from '../utils';
 import { wrapConsole } from '../utils/ConsoleWrapper';
 import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, setWindowSize, updateHitbox } from './events';
@@ -20,11 +21,7 @@ import './styles/global.css';
 
 async function Main() {
   wrapConsole();
-
-  const container = document.getElementById('root');
-  if (!container) {
-    throw new Error('Root container not found');
-  }
+  const container = getRootContainer();
 
   setWindowSize();
   registerDocumentEvents();
