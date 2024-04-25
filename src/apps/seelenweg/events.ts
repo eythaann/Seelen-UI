@@ -1,8 +1,8 @@
 import { toPhysicalPixels } from '../utils';
-import { SeelenWegSide } from '../utils/interfaces/Weg';
+import { SeelenWegSide } from '../utils/schemas/Seelenweg';
 import { debounce, TimeoutIdRef } from '../utils/Timing';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
-import { emitTo, listen } from '@tauri-apps/api/event';
+import { emitTo } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { store } from './modules/shared/store/infra';

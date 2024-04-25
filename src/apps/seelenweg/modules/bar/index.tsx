@@ -1,4 +1,4 @@
-import { SeelenWegMode, SeelenWegSide } from '../../../utils/interfaces/Weg';
+import { SeelenWegMode, SeelenWegSide } from '../../../utils/schemas/Seelenweg';
 import { cx } from '../../../utils/styles';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';

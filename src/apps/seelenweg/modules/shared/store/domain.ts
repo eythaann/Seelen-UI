@@ -1,5 +1,5 @@
 import { IRootState } from '../../../../../shared.interfaces';
-import { SeelenWegState } from '../../../../utils/interfaces/Weg';
+import { Seelenweg } from '../../../../utils/schemas/Seelenweg';
 import { modify } from 'readable-types';
 
 import { PinnedApp } from '../../item/app/PinnedApp';
@@ -76,7 +76,7 @@ export enum AppsSides {
   RIGHT = 'right',
 }
 
-export interface RootState extends IRootState<SeelenWegState> {
+export interface RootState extends IRootState<Seelenweg> {
   pinnedOnLeft: App[];
   pinnedOnCenter: App[];
   pinnedOnRight: App[];

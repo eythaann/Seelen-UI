@@ -1,14 +1,10 @@
+import { parseAsCamel } from '../../../../utils/schemas';
+import { Border, BorderSchema } from '../../../../utils/schemas/WindowManager';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { reducersFor, selectorsFor } from '../../shared/utils/app';
 
-import { BorderState } from './domain';
-
-const initialState: BorderState = {
-  enabled: true,
-  offset: -1,
-  width: 3,
-};
+const initialState: Border = parseAsCamel(BorderSchema, {});
 
 export const BorderSlice = createSlice({
   name: 'generalSettings/border',

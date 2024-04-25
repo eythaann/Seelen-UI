@@ -1,28 +1,12 @@
+import { parseAsCamel } from '../../../../utils/schemas';
+import { WindowManager, WindowManagerSchema } from '../../../../utils/schemas/WindowManager';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { Rect } from '../../shared/utils/app/Rect';
 import { matcher, reducersFor, selectorsFor } from '../../shared/utils/app';
 import { BorderSlice } from '../border/app';
 import { ContainerTopBarSlice } from '../containerTopBar/app';
 
-import {
-  SeelenManagerState,
-} from './domain';
-
-let initialState: SeelenManagerState = {
-  enable: true,
-  autoStackinByCategory: true,
-  border: BorderSlice.getInitialState(),
-  containerPadding: 10,
-  workspacePadding: 10,
-  resizeDelta: 10,
-  globalWorkAreaOffset: new Rect().toJSON(),
-  containerTopBar: ContainerTopBarSlice.getInitialState(),
-  floating: {
-    width: 800,
-    height: 500,
-  },
-};
+let initialState: WindowManager = parseAsCamel(WindowManagerSchema, {});
 
 export const SeelenManagerSlice = createSlice({
   name: 'seelenManagerSettings',

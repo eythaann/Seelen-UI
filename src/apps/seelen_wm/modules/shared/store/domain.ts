@@ -1,8 +1,9 @@
 import { IRootState } from '../../../../../shared.interfaces';
+import { Layout } from '../../../../utils/schemas/Layout';
+import { WindowManager } from '../../../../utils/schemas/WindowManager';
 import { SoftOpaque } from 'readable-types/dist';
 
-import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
-import { Layout, Reservation } from '../../layout/domain';
+import { Reservation } from '../../layout/domain';
 
 interface Workspace {
   name: string;
@@ -19,7 +20,7 @@ export enum FocusAction {
   Lastest = 'Lastest',
 }
 
-export interface RootState extends IRootState<SeelenManagerState> {
+export interface RootState extends IRootState<WindowManager> {
   defaultLayout: Layout;
   workspaces: Record<DesktopId, Workspace>;
   activeWorkspace: DesktopId;

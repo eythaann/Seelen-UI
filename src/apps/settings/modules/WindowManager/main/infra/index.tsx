@@ -16,7 +16,7 @@ export function WindowManagerSettings() {
   const dispatch = useDispatch();
 
   const onToggleEnable = (value: boolean) => {
-    dispatch(WManagerSettingsActions.setEnable(value));
+    dispatch(WManagerSettingsActions.setEnabled(value));
   };
 
   return (
@@ -26,7 +26,7 @@ export function WindowManagerSettings() {
           <div>
             <b>Enable Tiling Window Manager</b>
           </div>
-          <Switch checked={settings.enable} onChange={onToggleEnable} />
+          <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
       </SettingsGroup>
 

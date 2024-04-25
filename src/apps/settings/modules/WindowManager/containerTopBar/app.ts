@@ -1,11 +1,10 @@
-import { reducersFor, selectorsFor } from '../../shared/utils/app';
+import { parseAsCamel } from '../../../../utils/schemas';
+import { ContainerTabs, ContainerTabsSchema } from '../../../../utils/schemas/WindowManager';
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ContainerTabsState, ContainerTopBarMode } from './domain';
+import { reducersFor, selectorsFor } from '../../shared/utils/app';
 
-const initialState: ContainerTabsState = {
-  mode: ContainerTopBarMode.ON_STACK,
-};
+const initialState: ContainerTabs = parseAsCamel(ContainerTabsSchema, {});
 
 export const ContainerTopBarSlice = createSlice({
   name: 'generalSettings/border',

@@ -1,10 +1,9 @@
+import { FallbackNode } from '../../../../../utils/schemas/Layout';
 import { cx } from '../../../../../utils/styles';
 import { LeafContainer } from './leaf';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
-
-import { FallbackNode } from '../../domain';
 
 interface Props {
   node: FallbackNode;

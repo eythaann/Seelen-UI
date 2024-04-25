@@ -226,7 +226,7 @@ const GridLayoutExample = ({ containerPadding, workspacePadding }: Props) => {
   );
 };
 
-export const LayoutExamples: Record<Layout, React.JSXElementConstructor<Props>> = {
+export const LayoutExamples: Record<string, React.JSXElementConstructor<Props>> = {
   [Layout.BSP]: BSPLayoutExample,
   [Layout.COLUMNS]: ColumsLayoutExample,
   [Layout.ROWS]: RowsLayoutExample,

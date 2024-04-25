@@ -9,7 +9,7 @@ import { Rect } from '../../../shared/utils/app/Rect';
 import { WManagerSettingsActions } from '../app';
 
 export const GlobalPaddings = () => {
-  const containerPadding = useAppSelector(SeelenWmSelectors.containerPadding);
+  const containerPadding = useAppSelector(SeelenWmSelectors.workspaceGap);
   const workspacePadding = useAppSelector(SeelenWmSelectors.workspacePadding);
   const workAreaOffset = useAppSelector(SeelenWmSelectors.globalWorkAreaOffset);
 
@@ -25,7 +25,7 @@ export const GlobalPaddings = () => {
   };
 
   const onChangeDefaultGap = (value: number | null) => {
-    dispatch(WManagerSettingsActions.setContainerPadding(value || 0));
+    dispatch(WManagerSettingsActions.setWorkspaceGap(value || 0));
   };
 
   const onChangeDefaultPadding = (value: number | null) => {

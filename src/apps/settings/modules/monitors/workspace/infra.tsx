@@ -2,9 +2,9 @@ import { SettingsOption } from '../../../components/SettingsBox';
 import { InputNumber, Select } from 'antd';
 import { useDispatch } from 'react-redux';
 
+import { useAppSelector } from '../../shared/utils/infra';
 import cs from './infra.module.css';
 
-import { useAppSelector } from '../../shared/utils/infra';
 import { getWorkspaceSelector } from '../../shared/store/app/selectors';
 import { OptionsFromEnum } from '../../shared/utils/app';
 import { MonitorsActions } from '../main/app';
@@ -30,26 +30,26 @@ export const WorkspaceConfig = ({ monitorIdx, workspaceIdx }: Props) => {
   };
 
   const onChangeGap = (value: number | null) => {
-    dispatch(MonitorsActions.updateWorkspace({ monitorIdx, workspaceIdx, key: 'containerPadding', value }));
+    dispatch(MonitorsActions.updateWorkspace({ monitorIdx, workspaceIdx, key: 'gap', value }));
   };
 
   const onChangePadding = (value: number | null) => {
-    dispatch(MonitorsActions.updateWorkspace({ monitorIdx, workspaceIdx, key: 'workspacePadding', value }));
+    dispatch(MonitorsActions.updateWorkspace({ monitorIdx, workspaceIdx, key: 'padding', value }));
   };
 
   return (
     <div className={cs.workspaceConfig}>
       <SettingsOption>
         <span>padding</span>
-        <InputNumber value={workspace.workspacePadding} placeholder="Global" onChange={onChangePadding} />
+        <InputNumber value={workspace.padding} placeholder="Global" onChange={onChangePadding} />
       </SettingsOption>
       <SettingsOption>
         <span>gap</span>
-        <InputNumber value={workspace.containerPadding} placeholder="Global" onChange={onChangeGap} />
+        <InputNumber value={workspace.gap} placeholder="Global" onChange={onChangeGap} />
       </SettingsOption>
       <SettingsOption>
         <span>layout</span>
-        <Select value={workspace.layout} options={OptionsFromEnum(Layout)} onChange={onSelectLayout} />
+        <Select value={workspace.layout as any} options={OptionsFromEnum(Layout)} onChange={onSelectLayout} />
       </SettingsOption>
     </div>
   );

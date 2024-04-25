@@ -1,4 +1,4 @@
-import { VariableConvention } from './app';
+import { VariableConvention } from '.';
 
 describe('VariableConvention', () => {
   test('snakeToCamel', () => {

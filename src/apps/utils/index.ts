@@ -1,4 +1,4 @@
-import { Theme } from '../../shared.interfaces';
+import { Theme } from './schemas/Theme';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { PhysicalSize } from '@tauri-apps/api/dpi';

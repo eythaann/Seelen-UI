@@ -2,7 +2,6 @@ import { config as loadEnv } from 'dotenv';
 import esbuild from 'esbuild';
 import fs from 'fs';
 import path from 'path';
-import toml from 'toml';
 
 const { GITHUB_TOKEN: _, ...parsedEnv } = loadEnv().parsed!;
 

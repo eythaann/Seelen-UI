@@ -1,4 +1,5 @@
-import { CSSProperties } from 'react';
+import { ISettings } from './apps/utils/schemas/Settings';
+import { Theme, ThemeSchema } from './apps/utils/schemas/Theme';
 
 export interface IRootState<T> {
   settings: T;
@@ -6,7 +7,7 @@ export interface IRootState<T> {
 }
 
 export interface UserSettings {
-  jsonSettings: anyObject;
+  jsonSettings: ISettings;
   yamlSettings: anyObject[];
   themes: Theme[];
   theme: Theme | null;
@@ -18,50 +19,12 @@ export interface AppTemplate {
   apps: anyObject[];
 }
 
-export interface ThemeInfo {
-  filename: string;
-  cssFileUrl: string | null;
-  displayName: string;
-  author: string;
-  description: string;
-}
-
-export interface Theme {
-  info: ThemeInfo;
-  variables: Record<`--${string}`, string>;
-  seelenweg: {
-    backgroundLayers: CSSProperties[] | number;
-    items: {
-      backgroundLayers: CSSProperties[] | number;
-    };
-    contextMenu: {
-      backgroundLayers: CSSProperties[] | number;
-    };
-    preview: {
-      backgroundLayers: CSSProperties[] | number;
-    };
-  };
-}
-
+const _defaultTheme = ThemeSchema.parse({});
 export const defaultTheme: Theme = {
+  ..._defaultTheme,
   info: {
+    ..._defaultTheme.info,
     cssFileUrl: null,
     filename: 'unknown',
-    displayName: 'Empty',
-    author: 'unknown',
-    description: 'unknown',
-  },
-  variables: {},
-  seelenweg: {
-    backgroundLayers: [],
-    items: {
-      backgroundLayers: [],
-    },
-    contextMenu: {
-      backgroundLayers: [],
-    },
-    preview: {
-      backgroundLayers: [],
-    },
   },
 };

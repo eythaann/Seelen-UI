@@ -1,7 +1,6 @@
 import { UserSettings } from '../../../../../../shared.interfaces';
-import { defaultsDeep, pick } from 'lodash';
-
-import { VariableConvention } from '../../utils/app';
+import { ISettings } from '../../../../../utils/schemas/Settings';
+import { pick } from 'lodash';
 
 import {
   AppConfiguration,
@@ -9,7 +8,6 @@ import {
   ApplicationOptions,
   MatchingStrategy,
 } from '../../../appsConfigurations/domain';
-import { Monitor } from '../../../monitors/main/domain';
 import { RootState } from '../domain';
 
 export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppConfiguration[] => {
@@ -94,29 +92,16 @@ export const StaticSettingsToState = (
 
   return {
     ...initialState,
+    ...jsonSettings,
     selectedTheme: theme?.info.filename || null,
     theme,
     availableThemes: themes,
-    windowManager: defaultsDeep(
-      VariableConvention.fromSnakeToCamel(jsonSettings.window_manager),
-      initialState.windowManager,
-    ),
-    seelenweg: defaultsDeep(
-      VariableConvention.fromSnakeToCamel(jsonSettings.seelenweg),
-      initialState.seelenweg,
-    ),
-    monitors: jsonSettings.monitors
-      ? (VariableConvention.fromSnakeToCamel(jsonSettings.monitors) as Monitor[])
-      : initialState.monitors,
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
-    ahkEnabled: jsonSettings.ahk_enabled ?? initialState.ahkEnabled,
   };
 };
 
-export const StateToJsonSettings = (state: RootState): anyObject => {
-  return VariableConvention.fromCamelToSnake(
-    pick(state, ['windowManager', 'seelenweg', 'monitors', 'selectedTheme', 'ahkEnabled']),
-  );
+export const StateToJsonSettings = (state: RootState): ISettings => {
+  return pick(state, ['windowManager', 'seelenweg', 'monitors', 'selectedTheme', 'ahkEnabled', 'fancyToolbar']);
 };
 
 export const StateAppsToYamlApps = (

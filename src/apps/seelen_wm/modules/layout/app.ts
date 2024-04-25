@@ -1,21 +1,9 @@
+import { FallbackNode, HorizontalBranchNode, Layout, LeafNode, NodeSubtype, NodeType, StackNode, VerticalBranchNode } from '../../../utils/schemas/Layout';
 import { clone } from 'lodash';
 
 import { FocusAction } from '../shared/store/domain';
 import { HWND } from '../shared/utils/domain';
-import {
-  BranchNode,
-  FallbackNode,
-  HorizontalBranchNode,
-  Layout,
-  LeafNode,
-  Node,
-  NodeSubtype,
-  NodeType,
-  Reservation,
-  Sizing,
-  StackNode,
-  VerticalBranchNode,
-} from './domain';
+import { BranchNode, Node, Reservation, Sizing } from './domain';
 
 export function removeHandleFromLayout(layout: Layout, handle: number): void {
   if (NodeImpl.from(layout.structure).removeHandle(handle)) {

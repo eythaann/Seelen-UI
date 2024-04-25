@@ -3,12 +3,12 @@ import { Button, Input, Select, Space } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { useAppSelector } from '../../shared/utils/infra';
 import { LayoutExamples } from '../layouts/infra';
 import { WorkspaceConfig } from '../workspace/infra';
 import cs from './infra.module.css';
 import { AdvancedConfig } from './infra_advanced';
 
-import { useAppSelector } from '../../shared/utils/infra';
 import { getMonitorSelector, RootSelectors, SeelenWmSelectors } from '../../shared/store/app/selectors';
 import { defaultOnNull } from '../../shared/utils/app';
 import { MonitorsActions } from './app';
@@ -27,12 +27,12 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
   const LayoutExample = LayoutExamples[workspace.layout];
 
   const containerPadding = defaultOnNull(
-    workspace.containerPadding,
-    useAppSelector(SeelenWmSelectors.containerPadding),
+    workspace.gap,
+    useAppSelector(SeelenWmSelectors.workspaceGap),
   );
 
   const workspacePadding = defaultOnNull(
-    workspace.workspacePadding,
+    workspace.padding,
     useAppSelector(SeelenWmSelectors.workspacePadding),
   );
 
@@ -61,7 +61,7 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
       <div className={cs.monitor}>
         <div className={cs.border}>
           <div className={cs.screen}>
-            <LayoutExample containerPadding={containerPadding} workspacePadding={workspacePadding} />
+            {LayoutExample && <LayoutExample containerPadding={containerPadding} workspacePadding={workspacePadding} />}
           </div>
         </div>
         <AdvancedConfig workspaceIdx={monitor.edditingWorkspace} monitorIdx={monitorIdx} />

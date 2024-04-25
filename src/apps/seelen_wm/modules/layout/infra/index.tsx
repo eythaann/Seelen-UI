@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { SelectCurrentWorkspace, Selectors } from '../../shared/store/app';
 import { NodeImpl } from '../app';
 
-import { Layout, Node } from '../domain';
+import { Node } from '../domain';
 
 import './index.css';
 

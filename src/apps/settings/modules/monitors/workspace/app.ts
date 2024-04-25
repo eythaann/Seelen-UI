@@ -5,14 +5,14 @@ import { RootState } from '../../shared/store/domain';
 
 export const getWorkspacePaddingSelector = (idx: number, monitorIdx: number) => (state: RootState) => {
   return defaultOnNull(
-    getWorkspaceSelector(idx, monitorIdx)(state)?.workspacePadding,
+    getWorkspaceSelector(idx, monitorIdx)(state)?.padding,
     SeelenWmSelectors.workspacePadding(state),
   );
 };
 
-export const getContainerPaddingSelector = (idx: number, monitorIdx: number) => (state: RootState) => {
+export const getWorkspaceGapSelector = (idx: number, monitorIdx: number) => (state: RootState) => {
   return defaultOnNull(
-    getWorkspaceSelector(idx, monitorIdx)(state)?.containerPadding,
-    SeelenWmSelectors.containerPadding(state),
+    getWorkspaceSelector(idx, monitorIdx)(state)?.gap,
+    SeelenWmSelectors.workspaceGap(state),
   );
 };

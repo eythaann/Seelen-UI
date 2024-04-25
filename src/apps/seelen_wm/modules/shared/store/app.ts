@@ -1,5 +1,6 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
 import { toPhysicalPixels } from '../../../../utils';
+import { Layout, NodeSubtype, NodeType, NoFallbackBehavior } from '../../../../utils/schemas/Layout';
 import { StateBuilder } from '../../../../utils/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
@@ -8,11 +9,11 @@ import { cloneDeep } from 'lodash';
 import { SeelenManagerSlice } from '../../../../settings/modules/WindowManager/main/app';
 import { NodeImpl, removeHandleFromLayout } from '../../layout/app';
 
-import { Layout, NodeSubtype, NodeType, Reservation, Sizing } from '../../layout/domain';
+import { Reservation, Sizing } from '../../layout/domain';
 import { DesktopId, FocusAction, RootState } from './domain';
 
 const Fibonacci: Layout = {
-  noFallbackBehavior: 'Float',
+  noFallbackBehavior: NoFallbackBehavior.Float,
   structure: {
     type: NodeType.Horizontal,
     subtype: NodeSubtype.Permanent,

@@ -1,15 +1,12 @@
 import { UserSettings } from '../../../../../shared.interfaces';
+import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS } from '../../../../utils';
-import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../../utils/interfaces/Weg';
+import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../utils/schemas/Seelenweg';
 import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
-import { defaultsDeep } from 'lodash';
 
-import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
-
-import { VariableConvention } from '../../../../settings/modules/shared/utils/app';
 import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
@@ -83,7 +80,7 @@ export async function registerStoreEvents() {
   await listen<UserSettings>('updated-settings', (event) => {
     const state = store.getState();
     const userSettings = event.payload;
-    const settings = defaultsDeep(VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelenweg || {}), state.settings);
+    const settings = userSettings.jsonSettings.seelenweg;
     store.dispatch(RootActions.setSettings(settings));
     loadSettingsCSS(settings);
     if (userSettings.theme) {
@@ -103,7 +100,7 @@ export async function registerStoreEvents() {
   });
 }
 
-function loadSettingsCSS(settings: SeelenWegState) {
+function loadSettingsCSS(settings: Seelenweg) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-margin', `${settings.margin}px`);
@@ -139,9 +136,7 @@ function loadSettingsCSS(settings: SeelenWegState) {
 
 export async function loadStore() {
   const userSettings = await loadUserSettings();
-  const initialState = RootSlice.getInitialState();
-
-  const settings = defaultsDeep(VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.seelenweg || {}), initialState.settings);
+  const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
 

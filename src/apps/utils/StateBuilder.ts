@@ -1,6 +1,7 @@
-import { reducersFor, selectorsFor } from '../settings/modules/shared/utils/app';
 import { Action, ActionReducerMapBuilder, CaseReducer, createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { cast, isStrictObject, prettify, TupleReduce } from 'readable-types';
+
+import { reducersFor, selectorsFor } from '../settings/modules/shared/utils/app';
 
 export type SelectorsFor<T extends anyObject> = { [K in keyof T]: (state: T) => T[K] };
 export type ReducersFor<T> = {

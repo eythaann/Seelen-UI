@@ -1,0 +1,78 @@
+{
+  "type": "object",
+  "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "default": "Unknown"
+        },
+        "author": {
+          "type": "string",
+          "default": "Unknown"
+        },
+        "description": {
+          "type": "string",
+          "default": "Empty"
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "variables": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "propertyNames": {
+        "pattern": "^\\-\\-"
+      },
+      "default": {}
+    },
+    "seelenweg": {
+      "type": "object",
+      "properties": {
+        "backgroundLayers": {
+          "type": "number",
+          "minimum": 0,
+          "default": 0
+        },
+        "items": {
+          "type": "object",
+          "properties": {
+            "backgroundLayers": {
+              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "contextMenu": {
+          "type": "object",
+          "properties": {
+            "backgroundLayers": {
+              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "preview": {
+          "type": "object",
+          "properties": {
+            "backgroundLayers": {
+              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

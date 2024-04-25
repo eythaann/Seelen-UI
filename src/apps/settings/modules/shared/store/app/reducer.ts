@@ -1,7 +1,9 @@
+import { StateBuilder } from '../../../../../utils/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
+import { FancyToolbarSlice } from '../../../fancyToolbar/app';
 import { MonitorsSlice } from '../../../monitors/main/app';
 import { SeelenWegSlice } from '../../../seelenweg/app';
 import { SeelenManagerSlice } from '../../../WindowManager/main/app';
@@ -12,6 +14,7 @@ import { RootState } from '../domain';
 const initialState: RootState = {
   autostart: false,
   route: Route.GENERAL,
+  fancyToolbar: FancyToolbarSlice.getInitialState(),
   seelenweg: SeelenWegSlice.getInitialState(),
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
@@ -56,9 +59,15 @@ export const RootSlice = createSlice({
       .addMatcher(matcher(AppsConfigSlice), (state, action) => {
         state.toBeSaved = true;
         state.appsConfigurations = AppsConfigSlice.reducer(state.appsConfigurations, action);
+      })
+      .addMatcher(matcher(FancyToolbarSlice), (state, action) => {
+        state.toBeSaved = true;
+        state.fancyToolbar = FancyToolbarSlice.reducer(state.fancyToolbar, action);
       });
   },
 });
 
 export const RootActions = RootSlice.actions;
 export const RootReducer = RootSlice.reducer;
+
+export const newSelectors = StateBuilder.compositeSelector(initialState);

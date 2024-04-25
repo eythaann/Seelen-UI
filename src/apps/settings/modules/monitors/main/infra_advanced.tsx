@@ -3,11 +3,11 @@ import { Button, InputNumber, Modal } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
+import { useAppSelector } from '../../shared/utils/infra';
 import cs from './infra.module.css';
 
-import { useAppSelector } from '../../shared/utils/infra';
-import { Rect } from '../../shared/utils/app/Rect';
 import { getMonitorSelector, getWorkspaceSelector } from '../../shared/store/app/selectors';
+import { Rect } from '../../shared/utils/app/Rect';
 import { MonitorsActions } from './app';
 
 interface Props {

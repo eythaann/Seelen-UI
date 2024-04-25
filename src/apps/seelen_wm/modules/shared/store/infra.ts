@@ -1,14 +1,12 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS } from '../../../../utils';
+import { WindowManager } from '../../../../utils/schemas/WindowManager';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
-import { defaultsDeep } from 'lodash';
 
-import { VariableConvention } from '../../../../settings/modules/shared/utils/app';
 import { RootActions, RootSlice } from './app';
 
-import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';
 import { Reservation, Sizing } from '../../layout/domain';
 import { HWND } from '../utils/domain';
 import { DesktopId, FocusAction } from './domain';
@@ -20,11 +18,7 @@ export const store = configureStore({
 
 export async function loadStore() {
   const userSettings = await loadUserSettings();
-  const initialState = RootSlice.getInitialState();
-
-  let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.window_manager || {}) as any;
-  settings = defaultsDeep(settings, initialState.settings);
-
+  const settings = userSettings.jsonSettings.windowManager;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
   if (userSettings.theme) {
@@ -38,9 +32,7 @@ export async function registerStoreEvents() {
     const currentState = store.getState();
     const userSettings = event.payload;
 
-    let settings = VariableConvention.fromSnakeToCamel(userSettings.jsonSettings.window_manager || {}) as any;
-    settings = defaultsDeep(settings, currentState.settings);
-
+    const settings = userSettings.jsonSettings.windowManager;
     loadSettingsCSS(settings);
     store.dispatch(RootActions.setSettings(settings));
     if (userSettings.theme) {
@@ -98,13 +90,13 @@ export async function registerStoreEvents() {
   });
 }
 
-function loadSettingsCSS(settings: SeelenManagerState) {
+function loadSettingsCSS(settings: WindowManager) {
   const styles = document.documentElement.style;
 
   console.log(settings);
 
   styles.setProperty('--config-padding', `${settings.workspacePadding}px`);
-  styles.setProperty('--config-containers-gap', `${settings.containerPadding}px`);
+  styles.setProperty('--config-containers-gap', `${settings.workspaceGap}px`);
 
   styles.setProperty('--config-margin-top', `${settings.globalWorkAreaOffset.top}px`);
   styles.setProperty('--config-margin-left', `${settings.globalWorkAreaOffset.left}px`);

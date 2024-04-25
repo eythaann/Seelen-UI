@@ -1,18 +1,10 @@
-import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../utils/interfaces/Weg';
-import { reducersFor, selectorsFor } from '../shared/utils/app';
+import { parseAsCamel } from '../../../utils/schemas';
+import { Seelenweg, SeelenWegSchema } from '../../../utils/schemas/Seelenweg';
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState: SeelenWegState = {
-  enable: true,
-  mode: SeelenWegMode.MIN_CONTENT,
-  position: SeelenWegSide.BOTTOM,
-  size: 40,
-  zoomSize: 70,
-  margin: 8,
-  padding: 8,
-  spaceBetweenItems: 8,
-  visibleSeparators: true,
-};
+import { reducersFor, selectorsFor } from '../shared/utils/app';
+
+const initialState: Seelenweg = parseAsCamel(SeelenWegSchema, {});
 
 export const SeelenWegSlice = createSlice({
   name: 'seelenweg',

@@ -1,0 +1,381 @@
+{
+  "type": "object",
+  "properties": {
+    "fancy_toolbar": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "height": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 30
+        },
+        "modules": {
+          "type": "object",
+          "properties": {
+            "left": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "const": "text"
+                      },
+                      "template": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "template"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "const": "date"
+                      },
+                      "each": {
+                        "type": "string",
+                        "enum": [
+                          "second",
+                          "minute",
+                          "hour",
+                          "day"
+                        ],
+                        "description": "Time unit to update showing the date",
+                        "default": "second"
+                      },
+                      "template": {
+                        "type": "string",
+                        "description": "A format for the date used by MomentJS",
+                        "default": "MMMM Do, h:mm:ss a"
+                      }
+                    },
+                    "required": [
+                      "type"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "default": []
+            },
+            "center": {
+              "type": "array",
+              "items": {
+                "$ref": "#/properties/fancy_toolbar/properties/modules/properties/left/items"
+              },
+              "default": []
+            },
+            "right": {
+              "type": "array",
+              "items": {
+                "$ref": "#/properties/fancy_toolbar/properties/modules/properties/left/items"
+              },
+              "default": []
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "seelenweg": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "mode": {
+          "type": "string",
+          "enum": [
+            "Full-Width",
+            "Min-Content"
+          ],
+          "default": "Min-Content"
+        },
+        "position": {
+          "type": "string",
+          "enum": [
+            "Left",
+            "Right",
+            "Top",
+            "Bottom"
+          ],
+          "default": "Bottom"
+        },
+        "visible_separators": {
+          "type": "boolean",
+          "default": true
+        },
+        "size": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 40,
+          "description": "Item size in pixels"
+        },
+        "zoom_size": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "default": 70,
+          "description": "Zoomed item size in pixels"
+        },
+        "margin": {
+          "type": "number",
+          "minimum": 0,
+          "default": 8,
+          "description": "Dock/Bar margin in pixels"
+        },
+        "padding": {
+          "type": "number",
+          "minimum": 0,
+          "default": 8,
+          "description": "Dock/Bar padding in pixels"
+        },
+        "space_between_items": {
+          "type": "number",
+          "minimum": 0,
+          "default": 8,
+          "description": "Space between items (gap) in pixels"
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "window_manager": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "auto_stackin_by_category": {
+          "type": "boolean",
+          "default": true
+        },
+        "border": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "default": true
+            },
+            "width": {
+              "type": "number",
+              "minimum": 0,
+              "default": 3
+            },
+            "offset": {
+              "type": "number",
+              "default": -1
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "resize_delta": {
+          "type": "number",
+          "default": 10,
+          "description": "% to add or remove on resize of windows using the CLI"
+        },
+        "workspace_gap": {
+          "type": "number",
+          "minimum": 0,
+          "default": 10,
+          "description": "Space between windows"
+        },
+        "workspace_padding": {
+          "type": "number",
+          "minimum": 0,
+          "default": 10
+        },
+        "global_work_area_offset": {
+          "type": "object",
+          "properties": {
+            "top": {
+              "type": "number",
+              "default": 0
+            },
+            "left": {
+              "type": "number",
+              "default": 0
+            },
+            "right": {
+              "type": "number",
+              "default": 0
+            },
+            "bottom": {
+              "type": "number",
+              "default": 0
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "container_top_bar": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "string",
+              "enum": [
+                "OnStack",
+                "Never"
+              ],
+              "default": "OnStack"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        },
+        "floating": {
+          "type": "object",
+          "properties": {
+            "width": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "default": 800
+            },
+            "height": {
+              "type": "number",
+              "exclusiveMinimum": 0,
+              "default": 500
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "monitors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "workspaces": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "default": "New Workspace"
+                },
+                "layout": {
+                  "type": "string",
+                  "default": "BSP"
+                },
+                "padding": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "gap": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "not": {}
+                        },
+                        {
+                          "type": "number",
+                          "minimum": 0
+                        }
+                      ]
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "default": [
+              {
+                "name": "New Workspace",
+                "layout": "BSP"
+              }
+            ]
+          },
+          "work_area_offset": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "not": {}
+                  },
+                  {
+                    "$ref": "#/properties/window_manager/properties/global_work_area_offset"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "editing_workspace": {
+            "type": "number",
+            "minimum": 0,
+            "default": 0
+          }
+        },
+        "additionalProperties": false
+      },
+      "minItems": 1,
+      "default": [
+        {
+          "workspaces": [
+            {
+              "name": "New Workspace",
+              "layout": "BSP"
+            }
+          ],
+          "editing_workspace": 0
+        }
+      ]
+    },
+    "ahk_enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "selected_theme": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "default": null
+    }
+  },
+  "additionalProperties": false,
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
