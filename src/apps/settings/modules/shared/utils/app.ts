@@ -1,6 +1,6 @@
 import { Action, Slice } from '@reduxjs/toolkit';
 
-import { HexColor, ReducersFor, SelectorsFor } from '../domain/interfaces';
+import { HexColor, ReducersFor, SelectorsFor } from './domain';
 
 type Args = undefined | string | { [x: string]: boolean | null | undefined };
 export const cx = (...args: Args[]): string => {
@@ -98,9 +98,10 @@ export class VariableConvention {
 
   static camelToSnake(text: string) {
     let snake = '';
-    for (const char of text.split('')) {
-      if (char === char.toLowerCase()) {
-        snake += char;
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i]!;
+      if (char === char.toLowerCase() || i === 0) {
+        snake += char.toLowerCase();
       } else {
         snake += `_${char.toLowerCase()}`;
       }
@@ -132,5 +133,9 @@ export class VariableConvention {
 
   static fromSnakeToCamel(value: anyObject) {
     return VariableConvention.deepKeyParser(value, VariableConvention.snakeToCamel);
+  }
+
+  static fromCamelToSnake(value: anyObject) {
+    return VariableConvention.deepKeyParser(value, VariableConvention.camelToSnake);
   }
 }

@@ -1,4 +1,4 @@
-import { Rect } from '../../shared/app/Rect';
+import { Rect } from '../../shared/utils/app/Rect';
 
 import { Layout } from '../layouts/domain';
 

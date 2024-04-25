@@ -4,12 +4,12 @@ import { ColumnsType, ColumnType } from 'antd/es/table';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ExportApps, ImportApps } from '../../shared/infrastructure/storeApi';
+import { ExportApps, ImportApps } from '../../shared/store/storeApi';
 
-import { useAppSelector } from '../../shared/app/hooks';
-import { RootSelectors } from '../../shared/app/selectors';
-import { StateAppsToYamlApps, YamlToState_Apps } from '../../shared/app/StateBridge';
-import { cx, debounce } from '../../shared/app/utils';
+import { useAppSelector } from '../../shared/utils/infra';
+import { RootSelectors } from '../../shared/store/app/selectors';
+import { StateAppsToYamlApps, YamlToState_Apps } from '../../shared/store/app/StateBridge';
+import { cx, debounce } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 

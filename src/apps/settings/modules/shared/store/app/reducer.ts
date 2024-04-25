@@ -1,29 +1,27 @@
-import { matcher, reducersFor, selectorsFor } from './utils';
+import { Route } from '../../../../components/navigation/routes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppsConfigSlice } from '../../appsConfigurations/app/reducer';
-import { GeneralSettingsSlice } from '../../general/main/app';
-import { MonitorsSlice } from '../../monitors/main/app';
-import { SeelenWegSlice } from '../../seelenweg/app';
-import { SeelenManagerSlice } from '../../WindowManager/main/app';
+import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
+import { MonitorsSlice } from '../../../monitors/main/app';
+import { SeelenWegSlice } from '../../../seelenweg/app';
+import { SeelenManagerSlice } from '../../../WindowManager/main/app';
+import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 
-import { Route } from '../domain/routes';
-import { RootState } from '../domain/state';
+import { RootState } from '../domain';
 
 const initialState: RootState = {
   autostart: false,
   route: Route.GENERAL,
-  generals: GeneralSettingsSlice.getInitialState(),
   seelenweg: SeelenWegSlice.getInitialState(),
-  seelenwm: SeelenManagerSlice.getInitialState(),
+  windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   monitors: MonitorsSlice.getInitialState(),
   appsConfigurations: AppsConfigSlice.getInitialState(),
   appsTemplates: [],
   ahkEnabled: true,
-  updateNotification: false,
   availableThemes: [],
   theme: null,
+  selectedTheme: null,
 };
 
 export const RootSlice = createSlice({
@@ -39,13 +37,9 @@ export const RootSlice = createSlice({
   selectors: selectorsFor(initialState),
   extraReducers: (builder) => {
     builder
-      .addMatcher(matcher(GeneralSettingsSlice), (state, action) => {
-        state.toBeSaved = true;
-        state.generals = GeneralSettingsSlice.reducer(state.generals, action);
-      })
       .addMatcher(matcher(SeelenManagerSlice), (state, action) => {
         state.toBeSaved = true;
-        state.seelenwm = SeelenManagerSlice.reducer(state.seelenwm, action);
+        state.windowManager = SeelenManagerSlice.reducer(state.windowManager, action);
       })
       .addMatcher(matcher(SeelenWegSlice), (state, action) => {
         state.toBeSaved = true;

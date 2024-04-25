@@ -1,12 +1,11 @@
 import { UserSettings } from '../../../../../shared.interfaces';
+import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
+import { VariableConvention } from '../../../../settings/modules/shared/utils/app';
 import { loadThemeCSS } from '../../../../utils';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
 import { defaultsDeep } from 'lodash';
 
-import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
-
-import { VariableConvention } from '../../../../settings/modules/shared/app/utils';
 import { RootActions, RootSlice } from './app';
 
 import { SeelenManagerState } from '../../../../settings/modules/WindowManager/main/domain';

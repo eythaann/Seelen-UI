@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BorderSettings } from '../../border/infra';
 import { ContainerTopBarSettings } from '../../containerTopBar/infra';
 
-import { RootSelectors } from '../../../shared/app/selectors';
+import { RootSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 export function WindowManagerSettings() {
-  const settings = useSelector(RootSelectors.seelenwm);
+  const settings = useSelector(RootSelectors.windowManager);
 
   const dispatch = useDispatch();
 

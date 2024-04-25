@@ -2,9 +2,9 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../component
 import { Switch, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
 
-import { useAppSelector } from '../shared/app/hooks';
-import { RootActions } from '../shared/app/reducer';
-import { RootSelectors } from '../shared/app/selectors';
+import { useAppSelector } from '../shared/utils/infra';
+import { RootActions } from '../shared/store/app/reducer';
+import { RootSelectors } from '../shared/store/app/selectors';
 
 export function Shortcuts() {
   const ahkEnable = useAppSelector(RootSelectors.ahkEnabled);

@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux';
 
 import cs from './infra.module.css';
 
-import { useAppSelector } from '../../shared/app/hooks';
-import { Rect } from '../../shared/app/Rect';
-import { getMonitorSelector, getWorkspaceSelector } from '../../shared/app/selectors';
+import { useAppSelector } from '../../shared/utils/infra';
+import { Rect } from '../../shared/utils/app/Rect';
+import { getMonitorSelector, getWorkspaceSelector } from '../../shared/store/app/selectors';
 import { MonitorsActions } from './app';
 
 interface Props {

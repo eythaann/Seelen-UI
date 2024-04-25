@@ -1,10 +1,11 @@
-import { SaveStore, store } from './store';
-import { startup } from './tauri';
 import { Modal } from 'antd';
 
-import { RootActions } from '../app/reducer';
+import { SaveStore, store } from '../shared/store/infra';
+import { startup } from '../shared/tauri/infra';
 
-import cs from './StartUser.module.css';
+import { RootActions } from '../shared/store/app/reducer';
+
+import cs from './index.module.css';
 
 export const StartUser = () => {
   startup.enable();

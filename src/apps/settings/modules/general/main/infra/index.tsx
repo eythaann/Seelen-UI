@@ -2,23 +2,22 @@ import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBo
 import { Select, Switch } from 'antd';
 import { useSelector } from 'react-redux';
 
-import { startup } from '../../../shared/infrastructure/tauri';
+import { startup } from '../../../shared/tauri/infra';
+import { useAppDispatch } from '../../../shared/utils/infra';
 
-import { useAppDispatch } from '../../../shared/app/hooks';
-import { RootActions } from '../../../shared/app/reducer';
-import { GeneralSettingsSelectors, RootSelectors } from '../../../shared/app/selectors';
-import { GeneralSettingsActions } from '../app';
+import { RootActions } from '../../../shared/store/app/reducer';
+import { RootSelectors } from '../../../shared/store/app/selectors';
 
 export function General() {
   const autostartStatus = useSelector(RootSelectors.autostart);
-  const selectedTheme = useSelector(GeneralSettingsSelectors.selectedTheme);
+  const selectedTheme = useSelector(RootSelectors.selectedTheme);
   const themes = useSelector(RootSelectors.availableThemes);
   const usingTheme = useSelector(RootSelectors.theme);
 
   const dispatch = useAppDispatch();
 
   const onSelectTheme = (theme: string) => {
-    dispatch(GeneralSettingsActions.setSelectedTheme(theme));
+    dispatch(RootActions.setSelectedTheme(theme));
     dispatch(RootActions.setTheme(themes.find((t) => t.info.filename === theme)!));
   };
 

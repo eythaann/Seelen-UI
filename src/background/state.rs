@@ -15,7 +15,7 @@ pub struct State {
     seelenweg: Option<FeatureState>,
     seelen_shell: Option<FeatureState>,
     seelen_bar: Option<FeatureState>,
-    seelen_wm: Option<FeatureState>,
+    window_manager: Option<FeatureState>,
     ahk_enabled: Option<bool>,
 }
 
@@ -57,7 +57,7 @@ impl State {
     }
 
     pub fn is_window_manager_enabled(&self) -> bool {
-        if let Some(window_manager) = &self.seelen_wm {
+        if let Some(window_manager) = &self.window_manager {
             if let Some(enable) = window_manager.enable {
                 return enable;
             }

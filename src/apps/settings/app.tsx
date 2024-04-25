@@ -10,10 +10,10 @@ import { SeelenWegSettings } from './modules/seelenweg/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
 import { WindowManagerSettings } from './modules/WindowManager/main/infra';
 
-import { useAppSelector } from './modules/shared/app/hooks';
-import { RootSelectors } from './modules/shared/app/selectors';
+import { useAppSelector } from './modules/shared/utils/infra';
+import { RootSelectors } from './modules/shared/store/app/selectors';
 
-import { Route } from './modules/shared/domain/routes';
+import { Route } from './components/navigation/routes';
 
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.GENERAL]: General,

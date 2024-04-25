@@ -2,10 +2,9 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../component
 import { relaunch } from '@tauri-apps/plugin-process';
 import { Button } from 'antd';
 
+import { EnvConfig } from '../shared/config/infra';
 import { LoadCustomConfigFile } from './infra.api';
 import cs from './infra.module.css';
-
-import { EnvConfig } from '../shared/domain/envConfig';
 
 export function Information() {
   return (

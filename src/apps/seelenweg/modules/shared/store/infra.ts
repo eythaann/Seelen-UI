@@ -7,9 +7,9 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
 import { defaultsDeep } from 'lodash';
 
-import { loadUserSettings } from '../../../../settings/modules/shared/infrastructure/storeApi';
+import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
 
-import { VariableConvention } from '../../../../settings/modules/shared/app/utils';
+import { VariableConvention } from '../../../../settings/modules/shared/utils/app';
 import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';

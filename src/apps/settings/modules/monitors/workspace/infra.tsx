@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 
 import cs from './infra.module.css';
 
-import { useAppSelector } from '../../shared/app/hooks';
-import { getWorkspaceSelector } from '../../shared/app/selectors';
-import { OptionsFromEnum } from '../../shared/app/utils';
+import { useAppSelector } from '../../shared/utils/infra';
+import { getWorkspaceSelector } from '../../shared/store/app/selectors';
+import { OptionsFromEnum } from '../../shared/utils/app';
 import { MonitorsActions } from '../main/app';
 
 import { Layout } from '../layouts/domain';

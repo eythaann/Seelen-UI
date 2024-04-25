@@ -1,54 +1,16 @@
-import { UserSettings } from '../../../../../shared.interfaces';
-import { VariableConvention } from './utils';
-import { defaultsDeep } from 'lodash';
+import { UserSettings } from '../../../../../../shared.interfaces';
+import { defaultsDeep, pick } from 'lodash';
+
+import { VariableConvention } from '../../utils/app';
 
 import {
   AppConfiguration,
   ApplicationIdentifier,
   ApplicationOptions,
   MatchingStrategy,
-} from '../../appsConfigurations/domain';
-import {
-  GeneralSettingsState,
-} from '../../general/main/domain';
-import { Layout } from '../../monitors/layouts/domain';
-import { Monitor, Workspace } from '../../monitors/main/domain';
-import { RootState } from '../domain/state';
-
-const JsonToState_Generals = (json: anyObject, generals: GeneralSettingsState): GeneralSettingsState => {
-  return {
-    selectedTheme: json.selected_theme ?? generals.selectedTheme,
-  };
-};
-
-export const JsonToState_Monitors = (json: anyObject, monitors: Monitor[]): Monitor[] => {
-  if (!json.monitors) {
-    return monitors;
-  }
-
-  return json.monitors.map((json_monitor: anyObject) => {
-    const monitor = Monitor.default();
-    const defaultWorkspace = Workspace.default();
-
-    if (json_monitor.work_area_offset) {
-      monitor.workAreaOffset = json_monitor.work_area_offset;
-    }
-
-    if (json_monitor.workspaces && json_monitor.workspaces.length > 0) {
-      monitor.workspaces = json_monitor.workspaces.map((json_workspace: anyObject) => {
-        const workspace: Workspace = {
-          name: json_workspace.name ?? defaultWorkspace.containerPadding,
-          containerPadding: json_workspace.container_padding ?? defaultWorkspace.containerPadding,
-          workspacePadding: json_workspace.workspace_padding ?? defaultWorkspace.workspacePadding,
-          layout: (json_workspace.layout as Layout) ?? defaultWorkspace.layout,
-        };
-        return workspace;
-      });
-    }
-
-    return monitor;
-  });
-};
+} from '../../../appsConfigurations/domain';
+import { Monitor } from '../../../monitors/main/domain';
+import { RootState } from '../domain';
 
 export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppConfiguration[] => {
   const apps: AppConfiguration[] = [];
@@ -67,7 +29,8 @@ export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppCo
         workspace: ymlApp.binded_workspace || null,
         identifier: ymlApp.identifier.id,
         kind: ymlApp.identifier.kind as ApplicationIdentifier,
-        matchingStrategy: (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
+        matchingStrategy:
+          (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
         // options
         [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
         [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
@@ -123,32 +86,36 @@ export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppCo
   return apps;
 };
 
-export const StaticSettingsToState = (userSettings: UserSettings, initialState: RootState): RootState => {
-  const { jsonSettings, yamlSettings, ahkEnabled, updateNotification, theme, themes } = userSettings;
+export const StaticSettingsToState = (
+  userSettings: UserSettings,
+  initialState: RootState,
+): RootState => {
+  const { jsonSettings, yamlSettings, ahkEnabled, theme, themes } = userSettings;
 
   return {
     ...initialState,
     theme,
     availableThemes: themes,
-    generals: JsonToState_Generals(jsonSettings, initialState.generals),
-    seelenwm: defaultsDeep(VariableConvention.deepKeyParser(jsonSettings.seelen_wm, VariableConvention.snakeToCamel), initialState.seelenwm),
-    seelenweg: defaultsDeep(VariableConvention.deepKeyParser(jsonSettings.seelenweg, VariableConvention.snakeToCamel), initialState.seelenweg),
-    monitors: JsonToState_Monitors(jsonSettings, initialState.monitors),
+    windowManager: defaultsDeep(
+      VariableConvention.fromSnakeToCamel(jsonSettings.seelen_wm),
+      initialState.windowManager,
+    ),
+    seelenweg: defaultsDeep(
+      VariableConvention.fromSnakeToCamel(jsonSettings.seelenweg),
+      initialState.seelenweg,
+    ),
+    monitors: jsonSettings.monitors
+      ? (VariableConvention.fromSnakeToCamel(jsonSettings.monitors) as Monitor[])
+      : initialState.monitors,
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
     ahkEnabled,
-    updateNotification,
   };
 };
 
 export const StateToJsonSettings = (state: RootState): anyObject => {
-  return {
-    ...VariableConvention.deepKeyParser(state.generals, VariableConvention.camelToSnake),
-    monitors: VariableConvention.deepKeyParser(state.monitors, VariableConvention.camelToSnake),
-    seelenweg: VariableConvention.deepKeyParser(state.seelenweg, VariableConvention.camelToSnake),
-    seelen_wm: VariableConvention.deepKeyParser(state.seelenwm, VariableConvention.camelToSnake),
-    seelen_bar: {},
-    seelen_shell: {},
-  };
+  return VariableConvention.fromCamelToSnake(
+    pick(state, ['windowManager', 'seelenweg', 'monitors', 'selectedTheme', 'ahkEnabled']),
+  );
 };
 
 export const StateAppsToYamlApps = (

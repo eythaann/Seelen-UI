@@ -1,7 +1,6 @@
 import { SeelenWegMode, SeelenWegSide, SeelenWegState } from '../../../utils/interfaces/Weg';
+import { reducersFor, selectorsFor } from '../shared/utils/app';
 import { createSlice } from '@reduxjs/toolkit';
-
-import { reducersFor, selectorsFor } from '../shared/app/utils';
 
 const initialState: SeelenWegState = {
   enable: true,

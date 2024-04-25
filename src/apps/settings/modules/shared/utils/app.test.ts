@@ -1,4 +1,4 @@
-import { VariableConvention } from './utils';
+import { VariableConvention } from './app';
 
 describe('VariableConvention', () => {
   test('snakeToCamel', () => {
@@ -8,6 +8,7 @@ describe('VariableConvention', () => {
   });
 
   test('camelToSnake', () => {
+    expect(VariableConvention.camelToSnake('HelloWorld')).toBe('hello_world');
     expect(VariableConvention.camelToSnake('helloWorld')).toBe('hello_world');
     expect(VariableConvention.camelToSnake('testingSnakeCaseText')).toBe('testing_snake_case_text');
     expect(VariableConvention.camelToSnake('helloWorld123')).toBe('hello_world123');

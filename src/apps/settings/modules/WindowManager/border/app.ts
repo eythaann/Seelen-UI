@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { reducersFor, selectorsFor } from '../../shared/app/utils';
+import { reducersFor, selectorsFor } from '../../shared/utils/app';
 
 import { BorderState } from './domain';
 

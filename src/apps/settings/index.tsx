@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { LoadSettingsToStore, store } from './modules/shared/infrastructure/store';
+import { LoadSettingsToStore, store } from './modules/shared/store/infra';
 
 import { App } from './app';
 

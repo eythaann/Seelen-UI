@@ -1,6 +1,6 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
 
-import { fs } from '../../../../settings/modules/shared/infrastructure/tauri';
+import { fs } from '../../../../settings/modules/shared/tauri/infra';
 import {
   getImageBase64FromUrl,
   getUWPInfoFromExePath,

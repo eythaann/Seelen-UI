@@ -2,9 +2,9 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../../com
 import { InputNumber } from 'antd';
 import { useDispatch } from 'react-redux';
 
-import { useAppSelector } from '../../../shared/app/hooks';
-import { Rect } from '../../../shared/app/Rect';
-import { SeelenWmSelectors } from '../../../shared/app/selectors';
+import { useAppSelector } from '../../../shared/utils/infra';
+import { Rect } from '../../../shared/utils/app/Rect';
+import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 export const GlobalPaddings = () => {

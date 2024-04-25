@@ -1,8 +1,8 @@
 import { SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { InputNumber, Switch } from 'antd';
 
-import { useAppDispatch, useAppSelector, useDispatchCallback } from '../../shared/app/hooks';
-import { BorderSelectors } from '../../shared/app/selectors';
+import { useAppDispatch, useAppSelector, useDispatchCallback } from '../../shared/utils/infra';
+import { BorderSelectors } from '../../shared/store/app/selectors';
 import { BorderActions } from './app';
 
 export const BorderSettings = () => {

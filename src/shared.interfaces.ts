@@ -9,7 +9,6 @@ export interface UserSettings {
   jsonSettings: anyObject;
   yamlSettings: anyObject[];
   ahkEnabled: boolean;
-  updateNotification: boolean;
   themes: Theme[];
   theme: Theme | null;
 }

@@ -2,9 +2,9 @@ import { SeelenWegMode, SeelenWegSide } from '../../../utils/interfaces/Weg';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 
-import { useAppDispatch, useAppSelector } from '../shared/app/hooks';
-import { RootSelectors } from '../shared/app/selectors';
-import { OptionsFromEnum } from '../shared/app/utils';
+import { useAppDispatch, useAppSelector } from '../shared/utils/infra';
+import { RootSelectors } from '../shared/store/app/selectors';
+import { OptionsFromEnum } from '../shared/utils/app';
 import { SeelenWegActions } from './app';
 
 export const SeelenWegSettings = () => {

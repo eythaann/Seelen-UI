@@ -1,17 +1,17 @@
 import { Tooltip } from 'antd';
 import { memo, useCallback } from 'react';
 
-import { useAppDispatch, useAppSelector } from '../../modules/shared/app/hooks';
-import { RootActions } from '../../modules/shared/app/reducer';
-import { RootSelectors } from '../../modules/shared/app/selectors';
-import { cx } from '../../modules/shared/app/utils';
+import { useAppDispatch, useAppSelector } from '../../modules/shared/utils/infra';
+import { RootActions } from '../../modules/shared/store/app/reducer';
+import { RootSelectors } from '../../modules/shared/store/app/selectors';
+import { cx } from '../../modules/shared/utils/app';
 
 import {
   Route,
   RouteIcons,
   RouteLabels,
   WorkingInProgressRoutes,
-} from '../../modules/shared/domain/routes';
+} from './routes';
 
 import cs from './index.module.css';
 

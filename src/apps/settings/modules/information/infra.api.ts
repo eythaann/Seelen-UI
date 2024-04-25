@@ -1,7 +1,7 @@
 import { path } from '@tauri-apps/api';
 import * as dialog from '@tauri-apps/plugin-dialog';
 
-import { LoadSettingsToStore } from '../shared/infrastructure/store';
+import { LoadSettingsToStore } from '../shared/store/infra';
 
 export async function LoadCustomConfigFile() {
   const file = await dialog.open({

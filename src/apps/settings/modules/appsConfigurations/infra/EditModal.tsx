@@ -4,10 +4,10 @@ import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ownSelector, RootSelectors } from '../../shared/app/selectors';
-import { OptionsFromEnum } from '../../shared/app/utils';
+import { ownSelector, RootSelectors } from '../../shared/store/app/selectors';
+import { OptionsFromEnum } from '../../shared/utils/app';
 
-import { RootState } from '../../shared/domain/state';
+import { RootState } from '../../shared/store/domain';
 import {
   AppConfiguration,
   AppConfigurationExtended,

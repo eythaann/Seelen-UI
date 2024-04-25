@@ -1,7 +1,7 @@
-import { getWorkspaceSelector, SeelenWmSelectors } from '../../shared/app/selectors';
-import { defaultOnNull } from '../../shared/app/utils';
+import { getWorkspaceSelector, SeelenWmSelectors } from '../../shared/store/app/selectors';
+import { defaultOnNull } from '../../shared/utils/app';
 
-import { RootState } from '../../shared/domain/state';
+import { RootState } from '../../shared/store/domain';
 
 export const getWorkspacePaddingSelector = (idx: number, monitorIdx: number) => (state: RootState) => {
   return defaultOnNull(

@@ -8,9 +8,9 @@ import { WorkspaceConfig } from '../workspace/infra';
 import cs from './infra.module.css';
 import { AdvancedConfig } from './infra_advanced';
 
-import { useAppSelector } from '../../shared/app/hooks';
-import { getMonitorSelector, RootSelectors, SeelenWmSelectors } from '../../shared/app/selectors';
-import { defaultOnNull } from '../../shared/app/utils';
+import { useAppSelector } from '../../shared/utils/infra';
+import { getMonitorSelector, RootSelectors, SeelenWmSelectors } from '../../shared/store/app/selectors';
+import { defaultOnNull } from '../../shared/utils/app';
 import { MonitorsActions } from './app';
 
 export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {

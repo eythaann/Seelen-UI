@@ -1,18 +1,18 @@
 import { AppTemplate, defaultTheme, Theme, UserSettings } from '../../../../../shared.interfaces';
-import { dialog, fs } from './tauri';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
 import { defaultsDeep } from 'lodash';
 
-import { AppsTemplates } from '../domain/appsTemplates';
+import { dialog, fs } from '../tauri/infra';
+
+import { AppsTemplates } from '../../../../utils/appsTemplates';
 
 export async function loadUserSettings(route?: string): Promise<UserSettings> {
   const userSettings: UserSettings = {
     jsonSettings: {},
     yamlSettings: [],
     ahkEnabled: false,
-    updateNotification: false,
     themes: [],
     theme: null,
   };
@@ -56,7 +56,6 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
 
   userSettings.jsonSettings = JSON.parse(await fs.readTextFile(json_route));
   userSettings.ahkEnabled = !!userSettings.jsonSettings.ahk_enabled;
-  userSettings.updateNotification = !!userSettings.jsonSettings.update_notification;
 
   let pathToYml = userSettings.jsonSettings.app_specific_configuration_path;
   if (pathToYml) {
@@ -103,7 +102,6 @@ export async function saveUserSettings(settings: Omit<UserSettings, 'themes' | '
   }
 
   settings.jsonSettings.ahk_enabled = settings.ahkEnabled;
-  settings.jsonSettings.update_notification = settings.updateNotification;
 
   await fs.writeTextFile(json_route, JSON.stringify(settings.jsonSettings));
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
