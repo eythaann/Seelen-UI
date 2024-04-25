@@ -154,7 +154,8 @@
               "items": {
                 "$ref": "#/properties/structure"
               },
-              "minItems": 1
+              "minItems": 1,
+              "default": []
             }
           },
           "required": [
@@ -184,7 +185,8 @@
               "items": {
                 "$ref": "#/properties/structure"
               },
-              "minItems": 1
+              "minItems": 1,
+              "default": []
             }
           },
           "required": [
