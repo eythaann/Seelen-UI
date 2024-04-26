@@ -256,6 +256,13 @@
           },
           "additionalProperties": false,
           "default": {}
+        },
+        "default_layout": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null
         }
       },
       "additionalProperties": false,

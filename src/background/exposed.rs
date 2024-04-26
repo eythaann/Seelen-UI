@@ -8,9 +8,10 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
 
-use crate::seelen_wm::handler::*;
+use crate::error_handler::{log_if_error, AppError, Result};
 use crate::seelen::SEELEN;
 use crate::seelen_weg::handler::*;
+use crate::seelen_wm::handler::*;
 use crate::utils::{is_windows_10, is_windows_11};
 
 fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
@@ -69,10 +70,7 @@ fn kill_seelen_shortcuts() -> Result<(), String> {
 
 #[command]
 fn open_file_location(path: String) -> Result<(), String> {
-    Command::new("explorer")
-        .args(["/select,", &path])
-        .spawn()
-        .unwrap();
+    log_if_error(Command::new("explorer").args(["/select,", &path]).spawn());
     Ok(())
 }
 

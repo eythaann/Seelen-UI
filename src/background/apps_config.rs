@@ -167,7 +167,7 @@ impl AppsConfigurations {
         if path.exists() {
             content = std::fs::read_to_string(path)?;
         }
-        self.apps = serde_yaml::from_str(&content).unwrap();
+        self.apps = serde_yaml::from_str(&content)?;
         self.cache.clear();
         Ok(())
     }

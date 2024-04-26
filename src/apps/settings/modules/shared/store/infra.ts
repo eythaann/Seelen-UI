@@ -68,7 +68,8 @@ export const SaveStore = async () => {
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
       themes: currentState.availableThemes,
-      theme: currentState.theme,
+      theme: currentState.availableThemes.find((t) => t.info.filename === currentState.selectedTheme) || null,
+      layouts: currentState.availableLayouts,
     };
 
     await saveUserSettings(settings);

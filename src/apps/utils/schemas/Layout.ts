@@ -1,3 +1,4 @@
+import { modify } from 'readable-types/dist';
 import z from 'zod';
 
 export enum NodeType {
@@ -30,6 +31,7 @@ const BaseNodeSchema = z.object({
     .describe('Order in how the tree will be traversed (1 = first, 2 = second, etc.)')
     .default(1),
   growFactor: z.number().describe('How much of the remaining space this node will take').default(1),
+  condition: z.string().optional().nullable().describe('Math Condition for the node to be shown, e.g: n >= 3'),
 });
 
 export type StackNode = z.infer<typeof StackNodeSchema>;
@@ -42,7 +44,7 @@ const StackNodeSchema = BaseNodeSchema.extend({
 export type FallbackNode = z.infer<typeof FallbackNodeSchema>;
 const FallbackNodeSchema = BaseNodeSchema.extend({
   type: z.literal(NodeType.Fallback),
-  subtype: z.literal(NodeSubtype.Permanent),
+  subtype: z.literal(NodeSubtype.Permanent).default(NodeSubtype.Permanent),
   active: hwndSchema.nullable().default(null),
   handles: z.array(hwndSchema).default([]),
 });
@@ -76,11 +78,19 @@ export const NodeSchema = z.union([
 
 type InnerLayout = z.infer<typeof LayoutSchema>;
 export const LayoutSchema = z.object({
-  structure: NodeSchema,
+  info: z.object({
+    displayName: z.string().default('Unknown'),
+    author: z.string().default('Unknown'),
+    description: z.string().default('Empty'),
+  }).default({}),
+  structure: NodeSchema.default({ type: NodeType.Fallback }),
   no_fallback_behavior: z.nativeEnum(NoFallbackBehavior).optional().nullable(),
 });
 
 export interface Layout {
+  info: modify<InnerLayout['info'], {
+    filename: string;
+  }>;
   structure: InnerLayout['structure'];
   noFallbackBehavior: InnerLayout['no_fallback_behavior'];
 }

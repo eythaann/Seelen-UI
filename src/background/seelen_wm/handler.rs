@@ -22,15 +22,15 @@ pub struct Rect {
 }
 
 #[tauri::command]
-pub fn set_window_position(hwnd: isize, rect: Rect) {
+pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
     let hwnd = HWND(hwnd);
 
     if !WindowsApi::is_window(hwnd) {
-        return;
+        return Ok(());
     }
 
     WindowsApi::unmaximize_window(hwnd);
-    let shadow = WindowsApi::shadow_rect(hwnd).unwrap();
+    let shadow = WindowsApi::shadow_rect(hwnd)?;
     let result = unsafe {
         SetWindowPos(
             hwnd,
@@ -49,6 +49,7 @@ pub fn set_window_position(hwnd: isize, rect: Rect) {
     };
 
     log_if_error(result);
+    Ok(())
 }
 
 #[tauri::command]

@@ -41,6 +41,7 @@ export const WindowManagerSchema = z.object({
   global_work_area_offset: RectSchema.default({}),
   container_top_bar: ContainerTabsSchema.default({}),
   floating: FloatingWindowSchema.default({}),
+  default_layout: z.string().nullable().default(null),
 });
 
 type inner = z.infer<typeof WindowManagerSchema> & {};
@@ -54,4 +55,5 @@ export interface WindowManager {
   globalWorkAreaOffset: inner['global_work_area_offset'];
   containerTopBar: inner['container_top_bar'];
   floating: inner['floating'];
+  defaultLayout: inner['default_layout'];
 }

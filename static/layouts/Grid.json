@@ -1,0 +1,74 @@
+{
+  "$schema": "https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/schemas/layout.schema.json",
+  "info": {
+    "displayName": "Grid",
+    "author": "eythaann",
+    "description": "Grid Layout useful for big monitors"
+  },
+  "no_fallback_behavior": "Float",
+  "structure": {
+    "type": "Horizontal",
+    "children": [
+      {
+        "type": "Vertical",
+        "priority": 3,
+        "condition": "total >= 5",
+        "children": [
+          {
+            "type": "Leaf",
+            "condition": "total >= 8"
+          },
+          {
+            "type": "Leaf"
+          },
+          {
+            "type": "Leaf"
+          }
+        ]
+      },
+      {
+        "type": "Leaf",
+        "priority": 1,
+        "condition": "total == 5"
+      },
+      {
+        "type": "Vertical",
+        "priority": 1,
+        "condition": "total != 5",
+        "children": [
+          {
+            "type": "Leaf",
+            "priority": 3,
+            "condition": "total >= 9"
+          },
+          {
+            "type": "Leaf",
+            "priority": 1
+          },
+          {
+            "type": "Leaf",
+            "condition": "total == 4 or total >= 6",
+            "priority": 2
+          }
+        ]
+      },
+      {
+        "type": "Vertical",
+        "priority": 2,
+        "condition": "total > 1",
+        "children": [
+          {
+            "type": "Leaf",
+            "condition": "total >= 7"
+          },
+          {
+            "type": "Leaf"
+          },
+          {
+            "type": "Leaf"
+          }
+        ]
+      }
+    ]
+  }
+}

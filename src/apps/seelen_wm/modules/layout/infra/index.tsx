@@ -33,8 +33,8 @@ export function Container({ container }: { container: Node }) {
         }}
         className={cx('wm-container', `wm-${container.type.toLowerCase()}`)}
       >
-        {node.inner.children.map((child) => (
-          <Container key={child.priority} container={child} />
+        {node.inner.children.map((child, idx) => (
+          <Container key={idx} container={child} />
         ))}
       </div>
     );

@@ -19,6 +19,7 @@ export const store = configureStore({
 export async function loadStore() {
   const userSettings = await loadUserSettings();
   const settings = userSettings.jsonSettings.windowManager;
+  store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
   if (userSettings.theme) {
@@ -34,6 +35,7 @@ export async function registerStoreEvents() {
 
     const settings = userSettings.jsonSettings.windowManager;
     loadSettingsCSS(settings);
+    store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
     store.dispatch(RootActions.setSettings(settings));
     if (userSettings.theme) {
       loadThemeCSS(userSettings.theme, currentState.theme);
@@ -92,8 +94,6 @@ export async function registerStoreEvents() {
 
 function loadSettingsCSS(settings: WindowManager) {
   const styles = document.documentElement.style;
-
-  console.log(settings);
 
   styles.setProperty('--config-padding', `${settings.workspacePadding}px`);
   styles.setProperty('--config-containers-gap', `${settings.workspaceGap}px`);

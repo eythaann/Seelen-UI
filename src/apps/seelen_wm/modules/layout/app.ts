@@ -1,49 +1,44 @@
-import { FallbackNode, HorizontalBranchNode, Layout, LeafNode, NodeSubtype, NodeType, StackNode, VerticalBranchNode } from '../../../utils/schemas/Layout';
+import { FallbackNode, HorizontalBranchNode, LeafNode, NodeSubtype, NodeType, StackNode, VerticalBranchNode } from '../../../utils/schemas/Layout';
+import { current } from '@reduxjs/toolkit';
 import { clone } from 'lodash';
+import { evaluate } from 'mathjs';
 
 import { FocusAction } from '../shared/store/domain';
 import { HWND } from '../shared/utils/domain';
 import { BranchNode, Node, Reservation, Sizing } from './domain';
 
-export function removeHandleFromLayout(layout: Layout, handle: number): void {
-  if (NodeImpl.from(layout.structure).removeHandle(handle)) {
-    reIndexContainer(layout.structure);
-  }
-}
-
-function clearContainer(container: Node): number[] {
-  const deleted: number[] = [];
+export function clearContainer(container: Node): void {
   switch (container.type) {
+    case NodeType.Stack:
     case NodeType.Fallback:
-      deleted.push(...container.handles);
       container.handles = [];
       container.active = null;
       break;
 
     case NodeType.Leaf:
       if (container.handle) {
-        deleted.push(container.handle);
         container.handle = null;
       }
       break;
 
     case NodeType.Horizontal:
     case NodeType.Vertical:
-      const sortedByPriority = [...container.children].sort((a, b) => a.priority - b.priority);
-      for (const child of sortedByPriority) {
-        deleted.push(...clearContainer(child));
+      for (const child of container.children) {
+        clearContainer(child);
       }
       break;
 
     default:
       console.error('Unknown container type');
   }
-  return deleted;
 }
 
-function reIndexContainer(container: Node): void {
-  const handlesToRestore: number[] = clearContainer(container);
-  handlesToRestore.forEach((handle) => NodeImpl.from(container).addHandle(handle));
+export function reIndexContainer(container: Node, handles: HWND[]): void {
+  clearContainer(container);
+  const node = NodeImpl.from(container);
+  handles.forEach((handle) => {
+    node.addHandle(handle, handles.length);
+  });
 }
 
 export class NodeImpl<T extends Node> {
@@ -70,6 +65,22 @@ export class NodeImpl<T extends Node> {
       growFactor: 1,
       handle,
     };
+  }
+
+  get lenght(): number {
+    if (this.isLeaf()) {
+      return this.ref.handle ? 1 : 0;
+    };
+
+    if (this.isFallback() || this.isStack()) {
+      return this.ref.handles.length;
+    }
+
+    if (this.isBranch()) {
+      return this.ref.children.reduce((acc, child) => acc + NodeImpl.from(child).lenght, 0);
+    }
+
+    return 0;
   }
 
   get inner(): T {
@@ -148,7 +159,7 @@ export class NodeImpl<T extends Node> {
     }
 
     if (this.isFallback()) {
-      // fallback nodes can be fulled this allow infinite number of handles
+      // fallback nodes can not be fulled this allow infinite number of handles
       return false;
     }
 
@@ -159,7 +170,12 @@ export class NodeImpl<T extends Node> {
     this.unreachable();
   }
 
-  addHandle(handle: number): boolean {
+  // total will be lenght + 1 suposing that the node is not full
+  addHandle(handle: number, total = this.lenght + 1): boolean {
+    if (this.ref.condition && !evaluate(this.ref.condition, { total })) {
+      return false;
+    }
+
     if (this.isLeaf()) {
       this.ref.handle = handle;
       return true;
@@ -173,9 +189,10 @@ export class NodeImpl<T extends Node> {
 
     if (this.isBranch()) {
       const sortedByPriority = [...this.ref.children].sort((a, b) => a.priority - b.priority);
+      console.log(sortedByPriority.map((x) => current(x)));
       for (const child of sortedByPriority) {
         const node = NodeImpl.from(child);
-        if (!node.isFull() && node.addHandle(handle)) {
+        if (!node.isFull() && node.addHandle(handle, total)) {
           return true;
         }
       }

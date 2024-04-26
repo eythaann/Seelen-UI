@@ -1,84 +1,28 @@
-import { defaultTheme } from '../../../../../shared.interfaces';
+import { defaultLayout, defaultTheme } from '../../../../../shared.interfaces';
 import { toPhysicalPixels } from '../../../../utils';
-import { Layout, NodeSubtype, NodeType, NoFallbackBehavior } from '../../../../utils/schemas/Layout';
+import { parseAsCamel } from '../../../../utils/schemas';
+import { WindowManagerSchema } from '../../../../utils/schemas/WindowManager';
 import { StateBuilder } from '../../../../utils/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';
 
-import { SeelenManagerSlice } from '../../../../settings/modules/WindowManager/main/app';
-import { NodeImpl, removeHandleFromLayout } from '../../layout/app';
+import { NodeImpl, reIndexContainer } from '../../layout/app';
 
 import { Reservation, Sizing } from '../../layout/domain';
 import { DesktopId, FocusAction, RootState } from './domain';
 
-const Fibonacci: Layout = {
-  noFallbackBehavior: NoFallbackBehavior.Float,
-  structure: {
-    type: NodeType.Horizontal,
-    subtype: NodeSubtype.Permanent,
-    priority: 1,
-    growFactor: 1,
-    children: [
-      {
-        type: NodeType.Leaf,
-        subtype: NodeSubtype.Permanent,
-        handle: null,
-        growFactor: 1,
-        priority: 1,
-      },
-      {
-        type: NodeType.Vertical,
-        subtype: NodeSubtype.Permanent,
-        growFactor: 1,
-        priority: 3,
-        children: [
-          {
-            type: NodeType.Leaf,
-            subtype: NodeSubtype.Permanent,
-            handle: null,
-            growFactor: 1,
-            priority: 1,
-          },
-          {
-            type: NodeType.Horizontal,
-            subtype: NodeSubtype.Permanent,
-            growFactor: 1,
-            priority: 2,
-            children: [
-              {
-                type: NodeType.Leaf,
-                subtype: NodeSubtype.Permanent,
-                handle: null,
-                growFactor: 1,
-                priority: 1,
-              },
-              {
-                type: NodeType.Fallback,
-                subtype: NodeSubtype.Permanent,
-                active: null,
-                handles: [],
-                growFactor: 1,
-                priority: 2,
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-};
-
 const initialState: RootState = {
   version: 0,
-  defaultLayout: Fibonacci,
+  availableLayouts: [],
   workspaces: {},
   activeWorkspace: '' as DesktopId,
   desktopByHandle: {},
+  handlesByDesktop: {},
   activeWindow: 0,
   lastManagedActivated: null,
   reservation: null,
-  settings: SeelenManagerSlice.getInitialState(),
+  settings: parseAsCamel(WindowManagerSchema, {}),
   theme: defaultTheme,
 };
 
@@ -91,11 +35,15 @@ export const RootSlice = createSlice({
       const { desktop_id, hwnd } = action.payload;
 
       state.desktopByHandle[hwnd] = desktop_id;
+      state.handlesByDesktop[desktop_id] ??= [];
+
+      const handlesInDesktop = state.handlesByDesktop[desktop_id]!;
+      handlesInDesktop.push(hwnd);
 
       if (!state.workspaces[desktop_id]) {
         state.workspaces[desktop_id] = {
           name: `Workspace ${desktop_id}`,
-          layout: cloneDeep(state.defaultLayout),
+          layout: cloneDeep(state.availableLayouts.find((l) => l.info.filename === state.settings.defaultLayout) || defaultLayout),
         };
       }
 
@@ -130,6 +78,9 @@ export const RootSlice = createSlice({
         }
       } else {
         sucessfullyAdded = node.addHandle(hwnd);
+        if (sucessfullyAdded) {
+          reIndexContainer(node.inner, handlesInDesktop);
+        }
       }
 
       state.reservation = null;
@@ -150,10 +101,24 @@ export const RootSlice = createSlice({
       const hwnd = action.payload;
 
       const desktopId = state.desktopByHandle[hwnd];
-      delete state.desktopByHandle[hwnd];
+      if (!desktopId) {
+        return;
+      }
 
-      if (desktopId && state.workspaces[desktopId]) {
-        removeHandleFromLayout(state.workspaces[desktopId]!.layout, hwnd);
+      delete state.desktopByHandle[hwnd];
+      const handlesInDesktop = state.handlesByDesktop[desktopId] || [];
+      const idx = handlesInDesktop.indexOf(hwnd);
+      if (idx != -1) {
+        handlesInDesktop.splice(idx, 1);
+      }
+
+      const workspace = state.workspaces[desktopId];
+      if (workspace) {
+        const node = NodeImpl.from(workspace.layout.structure);
+        const wasRemoved = node.removeHandle(hwnd);
+        if (wasRemoved) {
+          reIndexContainer(node.inner, handlesInDesktop);
+        }
       }
     },
     forceUpdate(state) {
@@ -164,7 +129,7 @@ export const RootSlice = createSlice({
       if (!state.workspaces[action.payload]) {
         state.workspaces[action.payload] = {
           name: `Workspace ${action.payload}`,
-          layout: cloneDeep(state.defaultLayout),
+          layout: cloneDeep(state.availableLayouts.find((l) => l.info.filename === state.settings.defaultLayout) || defaultLayout),
         };
       }
     },

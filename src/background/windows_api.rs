@@ -187,7 +187,7 @@ impl WindowsApi {
                 hwnd,
                 attribute,
                 (value as *mut T).cast(),
-                u32::try_from(std::mem::size_of::<T>()).unwrap(),
+                u32::try_from(std::mem::size_of::<T>())?,
             )?;
         }
 

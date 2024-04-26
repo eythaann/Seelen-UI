@@ -1,3 +1,4 @@
+import { defaultTheme } from '../../../../../../shared.interfaces';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Select, Switch } from 'antd';
 import { useSelector } from 'react-redux';
@@ -12,13 +13,12 @@ export function General() {
   const autostartStatus = useSelector(RootSelectors.autostart);
   const selectedTheme = useSelector(RootSelectors.selectedTheme);
   const themes = useSelector(RootSelectors.availableThemes);
-  const usingTheme = useSelector(RootSelectors.theme);
+  const usingTheme = themes.find((theme) => theme.info.filename === selectedTheme) || defaultTheme;
 
   const dispatch = useAppDispatch();
 
   const onSelectTheme = (theme: string) => {
     dispatch(RootActions.setSelectedTheme(theme));
-    dispatch(RootActions.setTheme(themes.find((t) => t.info.filename === theme)!));
   };
 
   const onAutoStart = async (value: boolean) => {

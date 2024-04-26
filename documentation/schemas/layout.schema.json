@@ -1,6 +1,25 @@
 {
   "type": "object",
   "properties": {
+    "info": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "default": "Unknown"
+        },
+        "author": {
+          "type": "string",
+          "default": "Unknown"
+        },
+        "description": {
+          "type": "string",
+          "default": "Empty"
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
     "structure": {
       "anyOf": [
         {
@@ -28,6 +47,24 @@
               "type": "number",
               "description": "How much of the remaining space this node will take",
               "default": 1
+            },
+            "condition": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Math Condition for the node to be shown, e.g: n >= 3"
             },
             "active": {
               "anyOf": [
@@ -65,13 +102,17 @@
             },
             "subtype": {
               "type": "string",
-              "const": "Permanent"
+              "const": "Permanent",
+              "default": "Permanent"
             },
             "priority": {
               "$ref": "#/properties/structure/anyOf/0/properties/priority"
             },
             "growFactor": {
               "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
+            },
+            "condition": {
+              "$ref": "#/properties/structure/anyOf/0/properties/condition"
             },
             "active": {
               "anyOf": [
@@ -94,8 +135,7 @@
             }
           },
           "required": [
-            "type",
-            "subtype"
+            "type"
           ],
           "additionalProperties": false
         },
@@ -114,6 +154,9 @@
             },
             "growFactor": {
               "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
+            },
+            "condition": {
+              "$ref": "#/properties/structure/anyOf/0/properties/condition"
             },
             "handle": {
               "anyOf": [
@@ -149,13 +192,15 @@
             "growFactor": {
               "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
             },
+            "condition": {
+              "$ref": "#/properties/structure/anyOf/0/properties/condition"
+            },
             "children": {
               "type": "array",
               "items": {
                 "$ref": "#/properties/structure"
               },
-              "minItems": 1,
-              "default": []
+              "minItems": 1
             }
           },
           "required": [
@@ -180,13 +225,15 @@
             "growFactor": {
               "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
             },
+            "condition": {
+              "$ref": "#/properties/structure/anyOf/0/properties/condition"
+            },
             "children": {
               "type": "array",
               "items": {
                 "$ref": "#/properties/structure"
               },
-              "minItems": 1,
-              "default": []
+              "minItems": 1
             }
           },
           "required": [
@@ -196,7 +243,10 @@
           "additionalProperties": false
         }
       ],
-      "description": "The layout tree"
+      "description": "The layout tree",
+      "default": {
+        "type": "Fallback"
+      }
     },
     "no_fallback_behavior": {
       "anyOf": [
@@ -220,9 +270,6 @@
       ]
     }
   },
-  "required": [
-    "structure"
-  ],
   "additionalProperties": false,
   "$schema": "http://json-schema.org/draft-07/schema#"
 }

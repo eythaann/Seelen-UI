@@ -23,7 +23,7 @@ const initialState: RootState = {
   appsTemplates: [],
   ahkEnabled: true,
   availableThemes: [],
-  theme: null,
+  availableLayouts: [],
   selectedTheme: null,
 };
 

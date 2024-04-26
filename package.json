@@ -53,6 +53,7 @@
     "js-yaml": "^4.1.0",
     "json-schema-to-typescript": "^13.1.2",
     "lodash": "^4.17.21",
+    "mathjs": "^12.4.2",
     "nodemon": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

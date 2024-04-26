@@ -1,3 +1,4 @@
+import { Layout, LayoutSchema, NoFallbackBehavior } from './apps/utils/schemas/Layout';
 import { ISettings } from './apps/utils/schemas/Settings';
 import { Theme, ThemeSchema } from './apps/utils/schemas/Theme';
 
@@ -11,6 +12,7 @@ export interface UserSettings {
   yamlSettings: anyObject[];
   themes: Theme[];
   theme: Theme | null;
+  layouts: Layout[];
 }
 
 export interface AppTemplate {
@@ -27,4 +29,14 @@ export const defaultTheme: Theme = {
     cssFileUrl: null,
     filename: 'unknown',
   },
+};
+
+const _defaultLayout = LayoutSchema.parse({});
+export const defaultLayout: Layout = {
+  ..._defaultLayout,
+  info: {
+    ..._defaultLayout.info,
+    filename: 'unknown',
+  },
+  noFallbackBehavior: NoFallbackBehavior.Unmanaged,
 };

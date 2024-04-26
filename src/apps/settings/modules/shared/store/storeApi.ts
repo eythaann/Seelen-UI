@@ -1,5 +1,6 @@
 import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, VariableConvention } from '../../../../utils/schemas';
+import { Layout, LayoutSchema } from '../../../../utils/schemas/Layout';
 import { SettingsSchema } from '../../../../utils/schemas/Settings';
 import { Theme, ThemeSchema } from '../../../../utils/schemas/Theme';
 import { path } from '@tauri-apps/api';
@@ -10,14 +11,7 @@ import { dialog, fs } from '../tauri/infra';
 
 import { AppsTemplates } from '../../../../utils/appsTemplates';
 
-export async function loadUserSettings(route?: string): Promise<UserSettings> {
-  const userSettings: UserSettings = {
-    jsonSettings: parseAsCamel(SettingsSchema, {}),
-    yamlSettings: [],
-    themes: [],
-    theme: null,
-  };
-
+async function loadUserThemes(ref: UserSettings) {
   const themesPath = await path.join(await path.resourceDir(), 'static', 'themes');
   const entries = await fs.readDir(themesPath);
 
@@ -35,24 +29,74 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
         },
       };
 
-      sanitizedTheme.info.filename = entry.name;
+      if (sanitizedTheme.info.displayName === 'Unknown') {
+        sanitizedTheme.info.displayName = entry.name;
+      }
 
       const cssFilePath = await path.join(await path.resourceDir(), 'static', 'themes', entry.name.replace('.json', '.css'));
       if (await fs.exists(cssFilePath)) {
         sanitizedTheme.info.cssFileUrl = convertFileSrc(cssFilePath);
       }
 
-      if (userSettings.jsonSettings.selectedTheme === entry.name) {
-        userSettings.theme = sanitizedTheme;
+      if (ref.jsonSettings.selectedTheme === entry.name) {
+        ref.theme = sanitizedTheme;
       }
 
-      userSettings.themes.push(sanitizedTheme);
+      ref.themes.push(sanitizedTheme);
     }
   }
 
-  if (!userSettings.theme) {
-    userSettings.theme = userSettings.themes[0] || null;
+  if (!ref.theme) {
+    ref.theme = ref.themes[0] || null;
+    ref.jsonSettings.selectedTheme = ref.theme?.info.filename || null;
   }
+}
+
+async function loadUserLayouts(ref: UserSettings) {
+  const layoutsPath = await path.join(await path.resourceDir(), 'static', 'layouts');
+  const entries = await fs.readDir(layoutsPath);
+
+  const defaultLayout = ref.jsonSettings.windowManager.defaultLayout;
+  let found = false;
+
+  for (const entry of entries) {
+    if (entry.isFile && entry.name.endsWith('.json')) {
+      let layout: Layout = JSON.parse(await fs.readTextFile(await path.join(layoutsPath, entry.name)));
+      layout = parseAsCamel(LayoutSchema, layout);
+
+      const sanitizedLayout: Layout = {
+        ...layout,
+        info: {
+          ...layout.info,
+          filename: entry.name,
+        },
+      };
+
+      if (sanitizedLayout.info.displayName === 'Unknown') {
+        sanitizedLayout.info.displayName = entry.name;
+      }
+
+      if (defaultLayout === entry.name) {
+        found = true;
+      }
+
+      ref.layouts.push(sanitizedLayout);
+    }
+  }
+
+  if (!found) {
+    ref.jsonSettings.windowManager.defaultLayout = ref.layouts[0]?.info.filename || null;
+  }
+}
+
+export async function loadUserSettings(route?: string): Promise<UserSettings> {
+  const userSettings: UserSettings = {
+    jsonSettings: parseAsCamel(SettingsSchema, {}),
+    yamlSettings: [],
+    themes: [],
+    theme: null,
+    layouts: [],
+  };
 
   const json_route = route || await path.join(await path.homeDir(), '.config/seelen/settings.json');
   const yaml_route = await path.join(await path.homeDir(), '.config/seelen/applications.yml');
@@ -65,6 +109,9 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     const processed = yaml.load(await fs.readTextFile(yaml_route));
     userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
   }
+
+  await loadUserThemes(userSettings);
+  await loadUserLayouts(userSettings);
 
   return userSettings;
 }

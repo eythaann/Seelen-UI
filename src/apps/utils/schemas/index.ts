@@ -35,7 +35,7 @@ export class VariableConvention {
   static deepKeyParser(obj: anyObject, parser: (text: string) => string): anyObject {
     if (Array.isArray(obj)) {
       return obj.map((x) => {
-        if (typeof x === 'object') {
+        if (typeof x === 'object' && x != null) {
           return VariableConvention.deepKeyParser(x, parser);
         }
         return x;
@@ -45,10 +45,10 @@ export class VariableConvention {
     let newObj = {} as anyObject;
     for (const key in obj) {
       const value = obj[key];
-      if (typeof value !== 'object') {
-        newObj[parser(key)] = value;
-      } else {
+      if (typeof value === 'object' && value != null) {
         newObj[parser(key)] = VariableConvention.deepKeyParser(value, parser);
+      } else {
+        newObj[parser(key)] = value;
       }
     }
     return newObj;

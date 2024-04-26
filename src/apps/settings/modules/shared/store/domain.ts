@@ -1,4 +1,5 @@
 import { AppTemplate } from '../../../../../shared.interfaces';
+import { Layout } from '../../../../utils/schemas/Layout';
 import { ISettings } from '../../../../utils/schemas/Settings';
 import { Theme } from '../../../../utils/schemas/Theme';
 import { Route } from '../../../components/navigation/routes';
@@ -10,8 +11,8 @@ export interface RootState extends ISettings {
   toBeSaved: boolean;
   appsConfigurations: AppConfiguration[];
   appsTemplates: (Omit<AppTemplate, 'apps'> & { apps: AppConfiguration[] })[];
-  theme: Theme | null;
-  availableThemes: Theme[];
   selectedTheme: string | null;
+  availableThemes: Theme[];
+  availableLayouts: Layout[];
   autostart: boolean;
 }

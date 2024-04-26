@@ -1,0 +1,35 @@
+{
+  "$schema": "https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/schemas/layout.schema.json",
+  "info": {
+    "displayName": "Wide",
+    "author": "eythaann",
+    "description": "Wide Layout"
+  },
+  "structure": {
+    "type": "Vertical",
+    "children": [
+      {
+        "type": "Leaf",
+        "growFactor": 1.5
+      },
+      {
+        "type": "Horizontal",
+        "children": [
+          {
+            "type": "Leaf"
+          },
+          {
+            "type": "Leaf"
+          },
+          {
+            "type": "Leaf"
+          },
+          {
+            "type": "Leaf"
+          }
+        ]
+      }
+    ]
+  },
+  "no_fallback_behavior": "Float"
+}

@@ -88,14 +88,14 @@ export const StaticSettingsToState = (
   userSettings: UserSettings,
   initialState: RootState,
 ): RootState => {
-  const { jsonSettings, yamlSettings, theme, themes } = userSettings;
+  const { jsonSettings, yamlSettings, theme, themes, layouts } = userSettings;
 
   return {
     ...initialState,
     ...jsonSettings,
     selectedTheme: theme?.info.filename || null,
-    theme,
     availableThemes: themes,
+    availableLayouts: layouts,
     appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
   };
 };
