@@ -1,11 +1,11 @@
 {
-  "version": "1.1.1",
-  "notes": "### fix\n- Bad download URL in Update Notification\n- Showing update notification on intallations by Windows Store",
-  "pub_date": "2024-04-13T21:58:57.010Z",
+  "version": "1.2.0",
+  "notes": "### fix\n- Taskbar showing instead be always hidden",
+  "pub_date": "2024-04-28T21:25:14.693Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0lMajNJOE9haXROZWw3NVR0aGRyTVFWRGRUUWhYM3BoS0hKd1g2Ykt3QnJ0ODdhUVYzKzJBRUR0RStkamJtQjNmOWF4UmhPcTZZcDRoOG9zYytHbUEwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzEzMDQ1NTM0CWZpbGU6U2VlbGVuIFVJXzEuMS4xX3g2NC1zZXR1cC5uc2lzLnppcApVVGtuOW9FSGNVTG5uaGtrQjRqZEEwRVZwQklORmJ4MlhSbnlERFJoUWtiTmtkU1ZCbEpmUGZjeXVKOCt2Z0YrYmVScU5OVnEwUTBUTEV0SG1sTStDUT09Cg==",
-      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.1.1/Seelen.UI_1.1.1_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0F1NjVRbXJPWUVmVGZSV3VvRHVSNG9kMUtmbnFCZWM0cHNrQ1NYS1JkWkw4ZXN4dHNaVkh0Wm9rMnBoVzBZQ25qYVFZSW1OWlNWSDBWYUdCZU52L0FzPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzE0MzM5NTEzCWZpbGU6U2VlbGVuIFVJXzEuMi4wX3g2NC1zZXR1cC5uc2lzLnppcApJclhDYldwQ1dxbWVGdHNTTSs0WFVtMjRpNWRQRGY1SlJEdkY2RHZvK0szdUt1TzFweHh4cmwxYWVEcmdmbkVPM3JwNDduUnVBam1ZaVl3TlZjQUhBQT09Cg==",
+      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.2.0/Seelen.UI_1.2.0_x64-setup.nsis.zip"
     }
   }
 }
