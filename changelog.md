@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- Allow quit from settings
+
 ## [1.2.0]
 ### fix
 - Taskbar showing instead be always hidden

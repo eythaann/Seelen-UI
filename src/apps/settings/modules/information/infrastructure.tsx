@@ -1,5 +1,6 @@
+import { Icon } from '../../../utils/components/Icon';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
-import { relaunch } from '@tauri-apps/plugin-process';
+import { exit, relaunch } from '@tauri-apps/plugin-process';
 import { Button } from 'antd';
 
 import { EnvConfig } from '../shared/config/infra';
@@ -12,7 +13,9 @@ export function Information() {
       <SettingsGroup>
         <SettingsSubGroup label="Documentation">
           <SettingsOption>
-            <span>Seelen UI <span className={cs.version}>v{EnvConfig.version}</span>:</span>
+            <span>
+              Seelen UI <span className={cs.version}>v{EnvConfig.version}</span>:
+            </span>
             <a href="https://github.com/eythaann/seelen-ui" target="_blank">
               github.com/eythaann/seelen-ui
             </a>
@@ -33,17 +36,23 @@ export function Information() {
 
       <SettingsGroup>
         <SettingsOption>
+          <span>Load config file (will replace current configurations):</span>
+          <Button onClick={LoadCustomConfigFile}>Select File</Button>
+        </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
           <span>Force Restart</span>
-          <Button
-            type="dashed"
-            onClick={relaunch}
-          >
-            ⟳
+          <Button type="dashed" onClick={relaunch} style={{ width: '40px' }}>
+            <Icon lib="io5" iconName="IoReload" propsIcon={{ size: 12 }} />
           </Button>
         </SettingsOption>
         <SettingsOption>
-          <span>Load config file (will replace current configurations):</span>
-          <Button onClick={LoadCustomConfigFile}>Select File</Button>
+          <span>Quit/Close</span>
+          <Button type="dashed" onClick={() => exit(0)} style={{ width: '40px' }}>
+            <Icon lib="io5" iconName="IoClose" />
+          </Button>
         </SettingsOption>
       </SettingsGroup>
     </div>
