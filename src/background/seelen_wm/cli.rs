@@ -166,6 +166,7 @@ impl WindowManager {
                 self.discard_reservation()?;
             }
             SubCommand::Debug => {
+                #[cfg(any(debug_assertions, feature = "devtools"))]
                 self.window.open_devtools();
             }
             SubCommand::Height(action) => {

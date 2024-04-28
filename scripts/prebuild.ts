@@ -1,12 +1,8 @@
 import { exec } from 'child_process';
 
-const command = `
-    Get-WmiObject Win32_Process | 
-    Where-Object { $_.CommandLine -like '*seelen.ahk*' } | 
-    ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
-`;
+const command = 'Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like \'*target\\debug\\*seelen*.ahk\' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }';
 
-exec(`powershell.exe -ExecutionPolicy Bypass -NoProfile -Command "${command}"`, (error, stdout, stderr) => {
+exec(`powershell -ExecutionPolicy Bypass -NoProfile -Command "${command}"`, (error, stdout, stderr) => {
   if (error) {
     console.error(`Error: ${error.message}`);
     return;

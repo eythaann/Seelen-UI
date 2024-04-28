@@ -24,6 +24,7 @@ impl FancyToolbar {
         log::trace!("Processing {:?}", subcommand);
         match subcommand {
             SubCommand::Debug => {
+                #[cfg(any(debug_assertions, feature = "devtools"))]
                 self.window.open_devtools();
             }
         };
