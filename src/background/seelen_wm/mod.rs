@@ -210,7 +210,14 @@ impl WindowManager {
         && !WindowsApi::is_iconic(hwnd)
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
         // Without admin some apps does not return the exe path so these should be unmanaged
-        && WindowsApi::exe_path(hwnd).is_ok()
+        && {
+            let exe =WindowsApi::exe_path(hwnd);
+            if let Ok(exe) = exe {
+                !exe.ends_with("Seelen UI.exe")
+            } else {
+                false
+            }
+        }
     }
 
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {

@@ -141,8 +141,8 @@ pub fn handle_cli_events(_app: &AppHandle<Wry>, matches: &clap::ArgMatches) -> R
         return Ok(());
     }
 
-    /* if !tauri::dev() {
+    if !tauri::dev() {
         SEELEN.lock().show_settings()?;
-    } */
+    }
     Ok(())
 }
