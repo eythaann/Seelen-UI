@@ -379,7 +379,7 @@ impl SeelenWeg {
             return false;
         }
 
-        let ex_style = WINDOW_EX_STYLE(unsafe { GetWindowLongW(hwnd, GWL_EXSTYLE) } as u32);
+        let ex_style = WindowsApi::get_ex_styles(hwnd);
         if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
             && !ex_style.contains(WS_EX_APPWINDOW)
         {

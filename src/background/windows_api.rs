@@ -30,12 +30,7 @@ use windows::{
                 VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowRect,
-                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
-                IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW,
-                ANIMATIONINFO, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
-                SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOZORDER, SW_MINIMIZE,
-                SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE
             },
         },
     },
@@ -125,6 +120,14 @@ impl WindowsApi {
 
     pub fn unmaximize_window(hwnd: HWND) {
         Self::show_window(hwnd, SW_NORMAL);
+    }
+
+    pub fn get_styles(hwnd: HWND) -> WINDOW_STYLE {
+        WINDOW_STYLE(unsafe { GetWindowLongW(hwnd, GWL_STYLE) } as u32)
+    }
+
+    pub fn get_ex_styles(hwnd: HWND) -> WINDOW_EX_STYLE {
+        WINDOW_EX_STYLE(unsafe { GetWindowLongW(hwnd, GWL_EXSTYLE) } as u32)
     }
 
     fn _set_position(

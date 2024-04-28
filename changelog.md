@@ -4,6 +4,9 @@
 ### enhancements
 - Allow quit from settings
 
+### fix
+- Managing windows without caption (Title bar)
+
 ## [1.2.0]
 ### fix
 - Taskbar showing instead be always hidden

@@ -5,7 +5,7 @@ use std::{sync::atomic::{AtomicIsize, Ordering}, thread::sleep, time::Duration};
 
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
-use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE}};
+use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE, WS_CAPTION}};
 
 use crate::{
     error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
@@ -207,11 +207,12 @@ impl WindowManager {
 
     pub fn is_manageable_window(hwnd: HWND, ignore_cloaked: bool) -> bool {
         SeelenWeg::is_real_window(hwnd) 
+        && WindowsApi::get_styles(hwnd).contains(WS_CAPTION)
         && !WindowsApi::is_iconic(hwnd)
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
         // Without admin some apps does not return the exe path so these should be unmanaged
         && {
-            let exe =WindowsApi::exe_path(hwnd);
+            let exe = WindowsApi::exe_path(hwnd);
             if let Ok(exe) = exe {
                 !exe.ends_with("Seelen UI.exe")
             } else {
