@@ -1,11 +1,11 @@
 use std::{thread::sleep, time::Duration};
 
 use windows::Win32::{
-    Foundation::{BOOL, HWND, LPARAM},
+    Foundation::HWND,
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, EnumWindows, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
+            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
             EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
             EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
             EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND,
@@ -18,9 +18,10 @@ use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
     error_handler::{log_if_error, Result}, 
-    seelen_wm::WindowManager,
     seelen::SEELEN,
+    seelen_bar::FancyToolbar,
     seelen_weg::SeelenWeg,
+    seelen_wm::WindowManager,
     windows_api::WindowsApi,
 };
 
@@ -121,6 +122,11 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
         EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE /* | EVENT_OBJECT_UNCLOAKED */ => {
             let mut seelen = SEELEN.lock();
             if let Some(weg) = seelen.weg_mut() {
+                if "Shell_TrayWnd" == WindowsApi::get_class(hwnd)? {
+                    // ensure that the taskbar is always hidden
+                    weg.hide_taskbar(true);
+                }
+
                 if SeelenWeg::is_real_window(hwnd) {
                     weg.add_hwnd(hwnd);
                 }
@@ -173,6 +179,12 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             if let Some(weg) = seelen.weg_mut() {
                 weg.update_status_if_needed(hwnd)?;
             }
+
+            if let Some(wm) = seelen.wm_mut() {
+                if WindowsApi::is_maximized(hwnd) {
+                    wm.pseudo_pause()?;
+                }
+            }
         }
         _ => {}
     };
@@ -197,35 +209,24 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    let winevent = match WinEvent::try_from(event) {
+    let winevent = match crate::winevent::WinEvent::try_from(event) {
         Ok(event) => event,
         Err(_) => return,
     };
 
     println!(
-        "{:?} - {} - {}",
+        "{:?} || {} || {} || {}",
         winevent,
         WindowsApi::exe(hwnd).unwrap_or_default(),
+        WindowsApi::get_class(hwnd).unwrap_or_default(),
         WindowsApi::get_window_text(hwnd)
     ); */
-
+    log_if_error(FancyToolbar::process_win_event(event, hwnd));
     log_if_error(process_win_event(event, hwnd));
 }
 
-unsafe extern "system" fn enum_opened_apps_proc(hwnd: HWND, _: LPARAM) -> BOOL {
-    let mut seelen = SEELEN.lock();
-    if let Some(weg) = seelen.weg_mut() {
-        if SeelenWeg::is_real_window(hwnd) {
-            weg.add_hwnd(hwnd);
-        }
-    }
-    true.into()
-}
-
-pub fn register_hook_and_enum_windows() -> Result<()> {
+pub fn register_win_hook() -> Result<()> {
     std::thread::spawn(move || unsafe {
-        log_if_error(EnumWindows(Some(enum_opened_apps_proc), LPARAM(0)));
-
         SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
 
         let mut msg: MSG = MSG::default();

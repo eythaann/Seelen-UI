@@ -8,7 +8,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
 
-use crate::error_handler::{log_if_error, AppError, Result};
+use crate::error_handler::{log_if_error, Result};
 use crate::seelen::SEELEN;
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
@@ -28,17 +28,6 @@ fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
         .expect("Fail on pressing key");
 
     Ok(())
-}
-
-#[command]
-fn run_ahk_installer() {
-    tauri::async_runtime::spawn(async move {
-        let app = SEELEN.lock().handle().clone();
-        app.shell()
-            .command("static\\redis\\AutoHotKey_setup.exe")
-            .spawn()
-            .expect("Fail on running ahk intaller");
-    });
 }
 
 #[command]
@@ -123,7 +112,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         media_next,
         media_prev,
         // AHK
-        run_ahk_installer,
         start_seelen_shortcuts,
         kill_seelen_shortcuts,
         // SeelenWeg

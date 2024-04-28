@@ -17,12 +17,6 @@ export const store = configureStore({
   reducer: RootSlice.reducer,
 });
 
-export type AppDispatch = typeof store.dispatch;
-export type store = {
-  dispatch: AppDispatch;
-  getState: () => {};
-};
-
 async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground[]> {
   const result: AppFromBackground[] = [];
   for (const item of items) {

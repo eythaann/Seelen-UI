@@ -6,7 +6,9 @@ use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    apps_config::SETTINGS_BY_APP, error_handler::{log_if_error, Result}, hook::register_hook_and_enum_windows, seelen_wm::WindowManager, seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg, state::State, utils::run_ahk_file
+    error_handler::{log_if_error, Result}, hook::register_win_hook,
+    seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg,
+    seelen_wm::WindowManager, state::State, utils::run_ahk_file,
 };
 
 lazy_static! {
@@ -61,13 +63,13 @@ impl Seelen {
         self.bar.as_mut()
     }
 
-    pub fn shell(&self) -> Option<&SeelenShell> {
+    /* pub fn shell(&self) -> Option<&SeelenShell> {
         self.shell.as_ref()
     }
 
     pub fn shell_mut(&mut self) -> Option<&mut SeelenShell> {
         self.shell.as_mut()
-    }
+    } */
 
     pub fn wm_mut(&mut self) -> Option<&mut WindowManager> {
         self.window_manager.as_mut()
@@ -80,36 +82,49 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
+    pub fn lazy_init(&mut self) {
+        if self.state.is_weg_enabled() {
+            let mut weg = SeelenWeg::new(self.handle().clone());
+            log_if_error(weg.start());
+            self.weg = Some(weg);
+        }
+
+        if self.state.is_window_manager_enabled() {
+            self.window_manager = Some(WindowManager::new(self.handle().clone()));
+        }
+    }
+
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
         self.handle = Some(app.clone());
 
-        let mut path = app.path().resolve(".config/seelen/settings.json", BaseDirectory::Home)?;
-        if !path.exists() {
-            path = app.path().resolve(".config/komorebi-ui/settings.json", BaseDirectory::Home)?;
-        }
+        let path = app
+            .path()
+            .resolve(".config/seelen/settings.json", BaseDirectory::Home)?;
         self.state = State::new(&path).unwrap_or_default();
 
-        let mut path = app.path().resolve(".config/seelen/applications.yml", BaseDirectory::Home)?;
-        if !path.exists() {
-            path = app.path().resolve(".config/komorebi-ui/applications.yml", BaseDirectory::Home)?;
-        }
-        SETTINGS_BY_APP.lock().load(path);
+        /* let path = app
+            .path()
+            .resolve(".config/seelen/applications.yml", BaseDirectory::Home)?;
+        SETTINGS_BY_APP.lock().load(path); */
 
-        if self.state.is_weg_enabled() {
-            self.weg = Some(SeelenWeg::new(app.clone()));
+        if self.state.is_bar_enabled() {
+            self.bar = Some(FancyToolbar::new(app.clone()));
+
+            // wait for bar to be initialized see src\background\seelen_bar\mod.rs complete-setup event
+            app.listen("toolbar-setup-completed", move |e| {
+                std::thread::spawn(move || {
+                    let mut seelen = SEELEN.lock();
+                    seelen.lazy_init();
+                    seelen.handle().unlisten(e.id())
+                });
+            });
+        } else {
+            self.lazy_init();
         }
 
         if self.state.is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
-        }
-
-        if self.state.is_bar_enabled() {
-            self.bar = Some(FancyToolbar::new(app.clone()));
-        }
-
-        if self.state.is_window_manager_enabled() {
-            self.window_manager = Some(WindowManager::new(app.clone()));
         }
 
         self.initialized = true;
@@ -119,12 +134,7 @@ impl Seelen {
     pub fn start(&mut self) -> Result<()> {
         self.ensure_folders().expect("Fail on ensuring folders");
         self.start_ahk_shortcuts()?;
-
-        if let Some(weg) = self.weg_mut() {
-            log_if_error(weg.start());
-        }
-
-        register_hook_and_enum_windows()?;
+        register_win_hook()?;
         Ok(())
     }
 
@@ -148,7 +158,7 @@ impl Seelen {
     pub fn start_ahk_shortcuts(&self) -> Result<()> {
         if self.state.is_ahk_enabled() {
             run_ahk_file(self.handle(), "seelen.ahk")?;
-            if self.wm().is_some(){
+            if self.state.is_window_manager_enabled() {
                 run_ahk_file(self.handle(), "seelen.wm.ahk")?;
             }
         }

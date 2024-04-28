@@ -26,8 +26,8 @@ export function LeafContainer({ hwnd, growFactor }: Props) {
     invoke('set_window_position', {
       hwnd: hwnd,
       rect: {
-        top: toPhysicalPixels(domRect.top),
-        left: toPhysicalPixels(domRect.left),
+        top: toPhysicalPixels(domRect.top) + toPhysicalPixels(window.screenY),
+        left: toPhysicalPixels(domRect.left) + toPhysicalPixels(window.screenX),
         right: toPhysicalPixels(domRect.width),
         bottom: toPhysicalPixels(domRect.height),
       },

@@ -1,6 +1,5 @@
 
 import { ErrorBoundary } from '../seelenweg/components/Error';
-import { setWindowAsFullSize } from '../utils';
 import { wrapConsole } from '../utils/ConsoleWrapper';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
@@ -23,7 +22,6 @@ async function Main() {
     throw new Error('Root container not found');
   }
 
-  setWindowAsFullSize();
   await loadStore();
   await registerStoreEvents();
 

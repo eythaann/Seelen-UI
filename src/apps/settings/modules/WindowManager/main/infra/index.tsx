@@ -5,7 +5,6 @@ import { Select, Switch } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BorderSettings } from '../../border/infra';
-import { ContainerTopBarSettings } from '../../containerTopBar/infra';
 
 import { newSelectors } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
@@ -25,6 +24,8 @@ export function WindowManagerSettings() {
   const onSelectLayout = (value: string) => {
     dispatch(WManagerSettingsActions.setDefaultLayout(value));
   };
+
+  const usingLayout = layouts.find((layout) => layout.info.filename === defaultLayout);
 
   return (
     <>
@@ -52,9 +53,14 @@ export function WindowManagerSettings() {
             onSelect={onSelectLayout}
           />
         </SettingsOption>
+        <div>
+          <p>
+            <b>Author: </b>{usingLayout?.info.author}
+          </p>
+          <p><b>Description: </b>{usingLayout?.info.description}</p>
+        </div>
       </SettingsGroup>
 
-      <ContainerTopBarSettings />
       <GlobalPaddings />
       <OthersConfigs />
       <SettingsGroup>

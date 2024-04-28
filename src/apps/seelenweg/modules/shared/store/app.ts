@@ -82,6 +82,7 @@ export const RootSlice = createSlice({
   name: 'root',
   initialState,
   reducers: {
+    ...StateBuilder.reducersFor(initialState),
     unPin(state, action: PayloadAction<App>) {
       const found = findApp(state, action.payload);
       if (found) {
@@ -155,7 +156,6 @@ export const RootSlice = createSlice({
       removeHwnd(state.pinnedOnCenter, action.payload);
       removeHwnd(state.pinnedOnRight, action.payload);
     },
-    ...StateBuilder.reducersFor(initialState),
   },
 });
 

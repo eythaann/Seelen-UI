@@ -7,7 +7,6 @@ use tauri::{
     tray::TrayIconBuilder,
     App, AppHandle,
 };
-use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::{log_if_error, Result};
 use crate::SEELEN;

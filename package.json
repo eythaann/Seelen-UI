@@ -7,6 +7,7 @@
     "tauri": "tauri",
     "dev": "nodemon --config nodemon.json",
     "test": "jest",
+    "prebuild": "ts-node scripts/prebuild.ts",
     "build": "tauri build",
     "build:ui": "ts-node scripts/build.ts",
     "build:schemas": "ts-node scripts/createJsonSchemas.ts",
@@ -30,7 +31,8 @@
     "@tauri-apps/plugin-log": "^2.0.0-beta.2",
     "@tauri-apps/plugin-process": "^2.0.0-beta.2",
     "@tauri-apps/plugin-shell": "^2.0.0-beta.2",
-    "@tauri-apps/plugin-updater": "^2.0.0-beta.2"
+    "@tauri-apps/plugin-updater": "^2.0.0-beta.2",
+    "react-icons": "^5.1.0"
   },
   "devDependencies": {
     "@react-spring/web": "^9.7.3",
@@ -54,6 +56,7 @@
     "json-schema-to-typescript": "^13.1.2",
     "lodash": "^4.17.21",
     "mathjs": "^12.4.2",
+    "moment": "^2.30.1",
     "nodemon": "^3.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,5 +1,4 @@
 use clap::{Command, ValueEnum};
-use color_eyre::eyre::eyre;
 use serde::{Deserialize, Serialize};
 use tauri::Manager;
 use windows::Win32::Foundation::HWND;
@@ -7,8 +6,8 @@ use windows::Win32::Foundation::HWND;
 use crate::error_handler::Result;
 use crate::get_subcommands;
 use crate::seelen::SEELEN;
+use crate::utils::sleep_millis;
 use crate::utils::virtual_desktop::VirtualDesktopManager;
-use crate::utils::{kebab_to_pascal, pascal_to_kebab, sleep_millis};
 use crate::windows_api::WindowsApi;
 
 use super::WindowManager;

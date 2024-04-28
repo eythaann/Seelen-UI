@@ -1,5 +1,4 @@
 import { debounce, TimeoutIdRef } from '../utils/Timing';
-import { emitTo, listen } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { CallbacksManager } from './modules/shared/utils/app';
@@ -8,12 +7,6 @@ const root_container = document.getElementById('root')!;
 
 export const ExtraCallbacksOnLeave = new CallbacksManager();
 export const ExtraCallbacksOnActivate = new CallbacksManager();
-
-export const updateHitbox = debounce(() => {
-  emitTo('fancy-toolbar-hitbox', 'resize', {
-    height: 20,
-  });
-}, 300);
 
 export function registerDocumentEvents() {
   const timeoutId: TimeoutIdRef = { current: null };
@@ -24,7 +17,6 @@ export function registerDocumentEvents() {
   const onMouseLeave = debounce(() => {
     webview.setIgnoreCursorEvents(true);
     ExtraCallbacksOnLeave.execute();
-    updateHitbox();
   }, 200, timeoutId);
 
   const onMouseEnter = () => {
@@ -45,5 +37,5 @@ export function registerDocumentEvents() {
   });
 
   root_container.addEventListener('mouseenter', onMouseEnter);
-  listen('mouseenter', onMouseEnter); // listener for hitbox
+  webview.listen('mouseenter', onMouseEnter); // listener for hitbox
 }

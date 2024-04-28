@@ -1,10 +1,5 @@
 import z from 'zod';
 
-export enum ContainerTopBarMode {
-  ON_STACK = 'OnStack',
-  NEVER = 'Never',
-}
-
 export type Rect = z.infer<typeof RectSchema>;
 export const RectSchema = z.object({
   top: z.number().default(0),
@@ -18,11 +13,6 @@ export const BorderSchema = z.object({
   enabled: z.boolean().default(true),
   width: z.number().min(0).default(3),
   offset: z.number().default(-1),
-});
-
-export type ContainerTabs = z.infer<typeof ContainerTabsSchema>;
-export const ContainerTabsSchema = z.object({
-  mode: z.nativeEnum(ContainerTopBarMode).default(ContainerTopBarMode.ON_STACK),
 });
 
 export type FloatingWindowSettings = z.infer<typeof FloatingWindowSchema>;
@@ -39,7 +29,6 @@ export const WindowManagerSchema = z.object({
   workspace_gap: z.number().nonnegative().default(10).describe('Space between windows'),
   workspace_padding: z.number().nonnegative().default(10),
   global_work_area_offset: RectSchema.default({}),
-  container_top_bar: ContainerTabsSchema.default({}),
   floating: FloatingWindowSchema.default({}),
   default_layout: z.string().nullable().default(null),
 });
@@ -53,7 +42,6 @@ export interface WindowManager {
   workspaceGap: inner['workspace_gap'];
   workspacePadding: inner['workspace_padding'];
   globalWorkAreaOffset: inner['global_work_area_offset'];
-  containerTopBar: inner['container_top_bar'];
   floating: inner['floating'];
   defaultLayout: inner['default_layout'];
 }

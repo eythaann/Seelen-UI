@@ -12,6 +12,9 @@ body {
 
 .fancy-toolbar {
   width: 100vw;
+  font-size: 0.8rem; /* remove */
+  line-height: 1em;
+  font-weight: 500; /* remove */
 
   .ft-bar {
     position: relative;
@@ -23,25 +26,40 @@ body {
     text-wrap: nowrap;
     display: flex;
 
+    .ft-bar-left,
+    .ft-bar-center,
+    .ft-bar-right {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      gap: 6px;
+    }
+
     .ft-bar-left {
       width: 50%;
       overflow: hidden;
+      justify-content: flex-start;
+      padding-left: 14px;  /* configureble */
     }
 
     .ft-bar-center {
       position: absolute;
       background-color: #121212;
       box-shadow: 0 0 20px 20px #121212;
+      padding: 0 5%;
       height: 100%;
       left: 50%;
       top: 0;
       translate: -50% 0;
       overflow: hidden;
+      justify-content: center;
     }
 
     .ft-bar-right {
       width: 50%;
       overflow: hidden;
+      justify-content: flex-end;
+      padding-right: 14px; /* configureble */
     }
   }
 }

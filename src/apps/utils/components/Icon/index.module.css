@@ -1,0 +1,7 @@
+.icon {
+  display: inline-block;
+  > svg {
+    font-size: 1rem;
+    vertical-align: middle;
+  }
+}

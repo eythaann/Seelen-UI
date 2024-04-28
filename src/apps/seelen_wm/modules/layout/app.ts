@@ -1,5 +1,4 @@
 import { FallbackNode, HorizontalBranchNode, LeafNode, NodeSubtype, NodeType, StackNode, VerticalBranchNode } from '../../../utils/schemas/Layout';
-import { current } from '@reduxjs/toolkit';
 import { clone } from 'lodash';
 import { evaluate } from 'mathjs';
 
@@ -189,7 +188,6 @@ export class NodeImpl<T extends Node> {
 
     if (this.isBranch()) {
       const sortedByPriority = [...this.ref.children].sort((a, b) => a.priority - b.priority);
-      console.log(sortedByPriority.map((x) => current(x)));
       for (const child of sortedByPriority) {
         const node = NodeImpl.from(child);
         if (!node.isFull() && node.addHandle(handle, total)) {

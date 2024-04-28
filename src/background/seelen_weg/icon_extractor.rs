@@ -78,7 +78,7 @@ pub fn get_images_from_exe(executable_path: &str) -> Result<Vec<RgbaImage>> {
             .filter_map(|r| match r {
                 Ok(img) => Some(img),
                 Err(e) => {
-                    eprintln!("Failed to convert HICON to RgbaImage: {:?}", e);
+                    log::error!("Failed to convert HICON to RgbaImage: {:?}", e);
                     None
                 }
             })
@@ -90,7 +90,9 @@ pub fn get_images_from_exe(executable_path: &str) -> Result<Vec<RgbaImage>> {
             .filter(|icon| !icon.is_invalid())
             .map(|icon| DestroyIcon(*icon))
             .filter_map(|r| r.err())
-            .for_each(|e| eprintln!("Failed to destroy icon: {:?}", e));
+            .for_each(|e| {
+                log::error!("Failed to destroy icon: {:?}", e);
+            });
 
         Ok(images)
     }

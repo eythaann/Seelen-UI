@@ -50,11 +50,11 @@ macro_rules! get_subcommands {
             }
 
             fn try_from(matches: &clap::ArgMatches) -> crate::error_handler::Result<Self> {
-                if let Some((subcommand, matches)) = matches.subcommand() {
+                if let Some((subcommand, sub_matches)) = matches.subcommand() {
                     match crate::utils::kebab_to_pascal(subcommand).as_str() {
                         $(
                             stringify!($subcommand) => {
-                                Ok(SubCommand::$subcommand$(($((matches.get_one(stringify!($arg_name)) as Option<&$arg_type>).unwrap().clone()),*))?)
+                                Ok(SubCommand::$subcommand$(($((sub_matches.get_one(stringify!($arg_name)) as Option<&$arg_type>).unwrap().clone()),*))?)
                             },
                         )*
                         _ => Err(color_eyre::eyre::eyre!("Unknown subcommand.").into()),

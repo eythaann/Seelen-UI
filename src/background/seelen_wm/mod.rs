@@ -5,7 +5,7 @@ use std::{sync::atomic::{AtomicIsize, Ordering}, thread::sleep, time::Duration};
 
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
-use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::EnumWindows};
+use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE}};
 
 use crate::{
     error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
@@ -76,7 +76,7 @@ impl WindowManager {
             self.set_active_workspace(vdesktop.id())?;
         }
         log::trace!("Setting active window to {} on {}", hwnd.0, vdesktop.id()[0..8].to_string());
-        match self.is_managed(hwnd) {
+        match self.is_managed(hwnd) && !self.is_floating(hwnd) && !WindowsApi::is_maximized(hwnd) {
             true => self.pseudo_resume()?,
             false => self.pseudo_pause()?,
         };
@@ -236,7 +236,6 @@ impl WindowManager {
             tauri::WebviewUrl::App("seelen_wm/index.html".into()),
         )
         .title("Seelen Window Manager")
-        .position(0.0, 0.0)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
@@ -248,6 +247,10 @@ impl WindowManager {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
+
+        let monitor_info = WindowsApi::monitor_info(WindowsApi::primary_monitor())?;
+        let work_area = monitor_info.monitorInfo.rcWork;
+        WindowsApi::set_position(window.hwnd()?, None, &work_area, SWP_NOACTIVATE)?;
 
         Ok(window)
     }

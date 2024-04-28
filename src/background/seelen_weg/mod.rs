@@ -1,5 +1,6 @@
 pub mod handler;
 pub mod icon_extractor;
+pub mod hook;
 
 use std::{env::temp_dir, path::PathBuf};
 
@@ -178,19 +179,21 @@ impl SeelenWeg {
         Ok(())
     }
 
+    // TODO(eythan) remove this, add to new.
     pub fn start(&mut self) -> Result<()> {
         log::trace!("Starting SeelenWeg");
 
-        self.auto_hide_taskbar(true);
+        self.hide_taskbar(true);
         self.load_uwp_apps()?;
         let (window, hitbox) = self.create_window()?;
         self.hitbox_handle = hitbox.hwnd()?.0;
         self.window_handle = window.hwnd()?.0;
+        Self::enum_opened_windows();
         Ok(())
     }
 
     pub fn stop(&self) {
-        self.auto_hide_taskbar(false);
+        self.hide_taskbar(false);
     }
 
     pub fn generated_files_path(&self) -> PathBuf {
@@ -240,7 +243,7 @@ impl SeelenWeg {
             .to_string())
     }
 
-    fn auto_hide_taskbar(&self, hide: bool) {
+    pub fn hide_taskbar(&self, hide: bool) {
         let lparam: LPARAM;
         let cmdshow: SHOW_WINDOW_CMD;
         if hide {

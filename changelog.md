@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- Taskbar showing instead be always hidden
+
 ## [1.1.1]
 ### fix
 - Bad download URL in Update Notification

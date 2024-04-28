@@ -6,7 +6,7 @@ use crate::error_handler::Result;
 
 #[derive(Debug, Deserialize)]
 struct FeatureState {
-    enable: Option<bool>,
+    enabled: Option<bool>,
 }
 
 #[derive(Debug, Deserialize, Default)]
@@ -31,7 +31,7 @@ impl State {
 
     pub fn is_weg_enabled(&self) -> bool {
         if let Some(weg) = &self.seelenweg {
-            if let Some(enable) = weg.enable {
+            if let Some(enable) = weg.enabled {
                 return enable;
             }
         }
@@ -40,7 +40,7 @@ impl State {
 
     pub fn is_shell_enabled(&self) -> bool {
         if let Some(shell) = &self.seelen_shell {
-            if let Some(enable) = shell.enable {
+            if let Some(enable) = shell.enabled {
                 return enable;
             }
         }
@@ -49,7 +49,7 @@ impl State {
 
     pub fn is_bar_enabled(&self) -> bool {
         if let Some(bar) = &self.fancy_toolbar {
-            if let Some(enable) = bar.enable {
+            if let Some(enable) = bar.enabled {
                 return enable;
             }
         }
@@ -58,7 +58,7 @@ impl State {
 
     pub fn is_window_manager_enabled(&self) -> bool {
         if let Some(window_manager) = &self.window_manager {
-            if let Some(enable) = window_manager.enable {
+            if let Some(enable) = window_manager.enabled {
                 return enable;
             }
         }

@@ -4,6 +4,7 @@ import { Route } from './components/navigation/routes';
 import { Suspense } from 'react';
 
 import { AppsConfiguration } from './modules/appsConfigurations/infra/infra';
+import { FancyToolbarSettings } from './modules/fancyToolbar/infra';
 import { General } from './modules/general/main/infra';
 import { Information } from './modules/information/infrastructure';
 import { Monitors } from './modules/monitors/main/infra';
@@ -22,6 +23,7 @@ const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.INFO]: Information,
   [Route.SEELEN_WEG]: SeelenWegSettings,
   [Route.SEELEN_WM]: WindowManagerSettings,
+  [Route.SEELEN_BAR]: FancyToolbarSettings,
 };
 
 export function App() {

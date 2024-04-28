@@ -2,13 +2,20 @@ use std::{ffi::c_void, thread::sleep, time::Duration};
 
 use color_eyre::eyre::eyre;
 use windows::{
-    core::{GUID, PWSTR},
+    core::{GUID, PCWSTR, PWSTR},
     Win32::{
         Foundation::{CloseHandle, HANDLE, HWND, RECT},
-        Graphics::Dwm::{
-            DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS, DWMWINDOWATTRIBUTE,
-            DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
+        Graphics::{
+            Dwm::{
+                DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
+                DWMWINDOWATTRIBUTE, DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
+            },
+            Gdi::{
+                GetMonitorInfoW, MonitorFromWindow, HMONITOR, MONITORINFOEXW,
+                MONITOR_DEFAULTTOPRIMARY,
+            },
         },
+        Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
             RemoteDesktop::ProcessIdToSessionId,
@@ -18,13 +25,17 @@ use windows::{
             },
         },
         UI::{
-            Shell::{IVirtualDesktopManager, VirtualDesktopManager},
+            Shell::{
+                IShellItem2, IVirtualDesktopManager, SHCreateItemFromParsingName,
+                VirtualDesktopManager, SIGDN_NORMALDISPLAY,
+            },
             WindowsAndMessaging::{
-                GetClassNameW, GetForegroundWindow, GetParent, GetWindowRect, GetWindowTextW,
-                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, ShowWindow,
-                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, SHOW_WINDOW_CMD,
-                SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SW_MINIMIZE, SW_NORMAL,
-                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowRect,
+                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
+                IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW,
+                ANIMATIONINFO, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
+                SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOZORDER, SW_MINIMIZE,
+                SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
             },
         },
     },
@@ -63,16 +74,16 @@ impl WindowsApi {
         }
     }
 
-    pub fn get_foreground_window() -> HWND {
-        unsafe { GetForegroundWindow() }
-    }
-
     pub fn force_set_foregorund(hwnd: HWND) -> Result<()> {
         Self::set_minimize_animation(false)?;
         Self::show_window_async(hwnd, SW_MINIMIZE);
         Self::show_window_async(hwnd, SW_RESTORE);
         Self::set_minimize_animation(true)?;
         Ok(())
+    }
+
+    pub fn get_foreground_window() -> HWND {
+        unsafe { GetForegroundWindow() }
     }
 
     pub fn is_window(hwnd: HWND) -> bool {
@@ -85,6 +96,10 @@ impl WindowsApi {
 
     pub fn is_iconic(hwnd: HWND) -> bool {
         unsafe { IsIconic(hwnd) }.into()
+    }
+
+    pub fn is_maximized(hwnd: HWND) -> bool {
+        unsafe { IsZoomed(hwnd) }.into()
     }
 
     pub fn is_cloaked(hwnd: HWND) -> Result<bool> {
@@ -112,6 +127,47 @@ impl WindowsApi {
         Self::show_window(hwnd, SW_NORMAL);
     }
 
+    fn _set_position(
+        hwnd: HWND,
+        order: HWND,
+        rect: RECT,
+        flags: SET_WINDOW_POS_FLAGS,
+    ) -> Result<()> {
+        unsafe {
+            SetWindowPos(
+                hwnd,
+                order,
+                rect.left,
+                rect.top,
+                rect.right - rect.left,
+                rect.bottom - rect.top,
+                flags,
+            )?;
+        }
+        Ok(())
+    }
+
+    pub fn set_position(
+        hwnd: HWND,
+        order: Option<HWND>,
+        rect: &RECT,
+        flags: SET_WINDOW_POS_FLAGS,
+    ) -> Result<()> {
+        let uflags = match order {
+            Some(_) => flags,
+            None => SWP_NOZORDER | flags,
+        };
+        let order = order.unwrap_or(HWND(0));
+
+        if uflags.contains(SWP_ASYNCWINDOWPOS) {
+            let rect = rect.clone();
+            std::thread::spawn(move || Self::_set_position(hwnd, order, rect, uflags));
+            return Ok(());
+        }
+
+        Self::_set_position(hwnd, order, *rect, uflags)
+    }
+
     fn open_process(
         access_rights: PROCESS_ACCESS_RIGHTS,
         inherit_handle: bool,
@@ -120,14 +176,14 @@ impl WindowsApi {
         unsafe { Ok(OpenProcess(access_rights, inherit_handle, process_id)?) }
     }
 
-    pub fn close_process(handle: HANDLE) -> Result<()> {
+    fn close_handle(handle: HANDLE) -> Result<()> {
         unsafe {
             CloseHandle(handle)?;
         }
         Ok(())
     }
 
-    pub fn process_handle(process_id: u32) -> Result<HANDLE> {
+    fn process_handle(process_id: u32) -> Result<HANDLE> {
         Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
     }
 
@@ -150,7 +206,7 @@ impl WindowsApi {
                 &mut len,
             ));
         }
-        Self::close_process(handle)?;
+        Self::close_handle(handle)?;
 
         Ok(String::from_utf16(&path[..len as usize])?)
     }
@@ -168,6 +224,22 @@ impl WindowsApi {
         let len = unsafe { GetClassNameW(hwnd, &mut text) };
         let length = usize::try_from(len).unwrap_or(0);
         Ok(String::from_utf16(&text[..length])?)
+    }
+
+    pub fn get_window_display_name(hwnd: HWND) -> Result<String> {
+        let path = Self::exe_path(hwnd)?;
+        let wide_path: Vec<u16> = path.encode_utf16().chain(Some(0)).collect();
+        unsafe {
+            let shell_item: IShellItem2 =
+                SHCreateItemFromParsingName(PCWSTR(wide_path.as_ptr()), None)?;
+            match shell_item.GetString(&PKEY_FileDescription) {
+                Ok(description) => Ok(description.to_string()?),
+                Err(_) => Ok(shell_item
+                    .GetDisplayName(SIGDN_NORMALDISPLAY)?
+                    .to_string()?
+                    .replace(".exe", "")),
+            }
+        }
     }
 
     pub fn get_window_text(hwnd: HWND) -> String {
@@ -202,6 +274,17 @@ impl WindowsApi {
             unsafe { GetWindowRect(hwnd, &mut rect).ok() };
             rect
         }
+    }
+
+    pub fn primary_monitor() -> HMONITOR {
+        unsafe { MonitorFromWindow(GetDesktopWindow(), MONITOR_DEFAULTTOPRIMARY) }
+    }
+
+    pub fn monitor_info(hmonitor: HMONITOR) -> Result<MONITORINFOEXW> {
+        let mut ex_info = MONITORINFOEXW::default();
+        ex_info.monitorInfo.cbSize = u32::try_from(std::mem::size_of::<MONITORINFOEXW>())?;
+        unsafe { GetMonitorInfoW(hmonitor, &mut ex_info.monitorInfo) };
+        Ok(ex_info)
     }
 
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {
