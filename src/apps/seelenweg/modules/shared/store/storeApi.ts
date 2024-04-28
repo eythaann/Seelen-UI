@@ -40,10 +40,6 @@ export const loadPinnedItems = async (): Promise<YamlWeg> => {
   let yaml_route = await path.join(await path.homeDir(), '.config/seelen/seelenweg_items.yaml');
 
   if (!(await exists(yaml_route))) {
-    yaml_route = await path.join(await path.homeDir(), '.config/komorebi-ui/seelenweg_items.yaml');
-  }
-
-  if (!(await exists(yaml_route))) {
     return {
       left: [],
       center: [],
