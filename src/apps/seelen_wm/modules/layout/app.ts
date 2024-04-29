@@ -1,4 +1,12 @@
-import { FallbackNode, HorizontalBranchNode, LeafNode, NodeSubtype, NodeType, StackNode, VerticalBranchNode } from '../../../utils/schemas/Layout';
+import {
+  FallbackNode,
+  HorizontalBranchNode,
+  LeafNode,
+  NodeSubtype,
+  NodeType,
+  StackNode,
+  VerticalBranchNode,
+} from '../../../utils/schemas/Layout';
 import { clone } from 'lodash';
 import { evaluate } from 'mathjs';
 
@@ -66,17 +74,17 @@ export class NodeImpl<T extends Node> {
     };
   }
 
-  get lenght(): number {
+  get length(): number {
     if (this.isLeaf()) {
       return this.ref.handle ? 1 : 0;
-    };
+    }
 
     if (this.isFallback() || this.isStack()) {
       return this.ref.handles.length;
     }
 
     if (this.isBranch()) {
-      return this.ref.children.reduce((acc, child) => acc + NodeImpl.from(child).lenght, 0);
+      return this.ref.children.reduce((acc, child) => acc + NodeImpl.from(child).length, 0);
     }
 
     return 0;
@@ -169,8 +177,8 @@ export class NodeImpl<T extends Node> {
     this.unreachable();
   }
 
-  // total will be lenght + 1 suposing that the node is not full
-  addHandle(handle: number, total = this.lenght + 1): boolean {
+  // total will be length + 1 supposing that the node is not full
+  addHandle(handle: number, total = this.length + 1): boolean {
     if (this.ref.condition && !evaluate(this.ref.condition, { total })) {
       return false;
     }
@@ -436,27 +444,30 @@ export class NodeImpl<T extends Node> {
     this.reIndexingGrowFactor();
   }
 
-  getLeafByPriority(): LeafNode | FallbackNode | null {
+  getLeafByPriority(): LeafNode | FallbackNode | StackNode | null {
     if (this.isLeaf()) {
-      return this.ref;
+      return this.ref.handle ? this.ref : null;
     }
 
-    if (this.isFallback()) {
-      return this.ref;
+    if (this.isFallback() || this.isStack()) {
+      return this.ref.active ? this.ref : null;
     }
 
     if (this.isBranch()) {
       const sorted = [...this.ref.children].sort((a, b) => a.priority - b.priority);
-      if (sorted[0]) {
-        const node = NodeImpl.from(sorted[0]);
-        return node.getLeafByPriority();
+      for (const child of sorted) {
+        const node = NodeImpl.from(child);
+        const result = node.getLeafByPriority();
+        if (result) {
+          return result;
+        }
       }
     }
 
     return null;
   }
 
-  getNodeAtSide(from: HWND, side: FocusAction): LeafNode | FallbackNode | null {
+  getNodeAtSide(from: HWND, side: FocusAction): LeafNode | FallbackNode | StackNode | null {
     const result = this.getNodeContaining(from);
     if (!result) {
       console.error('Could not find node containing handle', from);
@@ -469,14 +480,14 @@ export class NodeImpl<T extends Node> {
       : NodeType.Vertical;
     const after = [FocusAction.Right, FocusAction.Down].includes(side);
 
-    let lastAncessor: Node = trace.at(-1)!;
+    let lastAncestor: Node = trace.at(-1)!;
     for (const node of trace.reverse()) {
       if (node.type != axis) {
-        lastAncessor = node;
+        lastAncestor = node;
         continue;
       }
 
-      let idx = node.children.indexOf(lastAncessor);
+      let idx = node.children.indexOf(lastAncestor);
       if (idx === -1) {
         console.throw('Error in Trace algorithm');
       }
