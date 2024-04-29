@@ -72,12 +72,13 @@ pub fn request_focus(hwnd: isize) -> Result<(), String> {
         "Requesting focus on {:?} - {} , {:?}",
         hwnd,
         WindowsApi::get_window_text(hwnd),
-        WindowsApi::exe(hwnd)
+        WindowsApi::exe(hwnd)?,
     );
 
-    let mut seelen = SEELEN.lock();
-    if let Some(wm) = seelen.wm_mut() {
-        wm.force_focus(hwnd)?;
+    if !WindowsApi::is_window(hwnd) {
+        return Ok(());
     }
+
+    WindowsApi::force_set_foreground(hwnd)?;
     Ok(())
 }

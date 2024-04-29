@@ -30,13 +30,23 @@ use windows::{
                 VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE
+                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW,
+                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
+                IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
+                EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION,
+                SWP_ASYNCWINDOWPOS, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
             },
         },
     },
 };
 
-use crate::error_handler::{log_if_error, Result};
+use crate::{
+    error_handler::{log_if_error, Result},
+    hook::HOOK_MANAGER,
+};
 
 pub struct WindowsApi {}
 impl WindowsApi {
@@ -71,9 +81,16 @@ impl WindowsApi {
 
     pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
         Self::set_minimize_animation(false)?;
+
+        let mut hook_manager = HOOK_MANAGER.lock();
+        hook_manager.pause_and_resume_after(EVENT_SYSTEM_MINIMIZEEND, hwnd.clone());
+        hook_manager.set_resume_callback(move |hook_manager| {
+            log_if_error(Self::set_minimize_animation(true));
+            hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
+        });
+
         Self::show_window_async(hwnd, SW_MINIMIZE);
         Self::show_window_async(hwnd, SW_RESTORE);
-        Self::set_minimize_animation(true)?;
         Ok(())
     }
 

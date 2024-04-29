@@ -1,5 +1,7 @@
-use std::{thread::sleep, time::Duration};
+use std::{thread::sleep, time::Duration, sync::Arc};
 
+use lazy_static::lazy_static;
+use parking_lot::Mutex;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
@@ -19,6 +21,68 @@ use winvd::{listen_desktop_events, DesktopEvent};
 use crate::{
     error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::constants::IGNORE_FOCUS, windows_api::WindowsApi
 };
+
+lazy_static! {
+    pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
+}
+
+pub struct HookManager {
+    paused: bool,
+    waiting_event: Option<u32>,
+    waiting_hwnd: Option<HWND>,
+    resume_cb: Option<Box<dyn Fn(&mut HookManager) + Send>>,
+}
+
+impl HookManager {
+    pub fn new() -> Self {
+        Self {
+            paused: false,
+            waiting_event: None,
+            waiting_hwnd: None,
+            resume_cb: None,
+        }
+    }
+
+    pub fn pause(&mut self) {
+        self.paused = true;
+    }
+
+    pub fn resume(&mut self) {
+        self.paused = false;
+        if let Some(cb) = self.resume_cb.take() {
+            cb(self);
+        }
+    }
+
+    pub fn is_paused(&self) -> bool {
+        self.paused
+    }
+
+    pub fn pause_and_resume_after(&mut self, event: u32, hwnd: HWND) {
+        self.pause();
+        self.waiting_event = Some(event);
+        self.waiting_hwnd = Some(hwnd);
+    }
+
+    pub fn set_resume_callback<F>(&mut self, cb: F)
+    where 
+        F: Fn(&mut HookManager) + Send + 'static
+    {
+        self.resume_cb = Some(Box::new(cb));
+    }
+
+    pub fn is_waiting_for(&self, event: u32, hwnd: HWND) -> bool {
+        self.waiting_event == Some(event) && self.waiting_hwnd == Some(hwnd)
+    }
+
+    pub fn emit_fake_win_event(&mut self, event: u32, hwnd: HWND) {
+        std::thread::spawn(move || {
+            win_event_hook(HWINEVENTHOOK::default(), event, hwnd, 0, 0, 0, 0);
+        });
+    }
+}
+
+
 
 pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
     match event {
@@ -78,7 +142,7 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             if let Some(weg) = seelen.weg_mut() {
                 if weg.contains_app(hwnd) {
                     // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
-                    // parent so we can't filter it on open event but these are inmediatly hidden when the ApplicationFrameHost.exe parent
+                    // parent so we can't filter it on open event but these are immediately hidden when the ApplicationFrameHost.exe parent
                     // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
                     let parent = WindowsApi::get_parent(hwnd);
                     if parent.0 != 0 {
@@ -197,6 +261,14 @@ pub extern "system" fn win_event_hook(
     _dwms_event_time: u32,
 ) {
     if id_object != 0 {
+        return;
+    }
+
+    let mut hook_manager = HOOK_MANAGER.lock();
+    if hook_manager.is_paused() {
+        if hook_manager.is_waiting_for(event, hwnd) {
+            hook_manager.resume();
+        }
         return;
     }
 

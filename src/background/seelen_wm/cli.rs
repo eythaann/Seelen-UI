@@ -44,7 +44,7 @@ get_subcommands![
     Pause,
     /** Resume the Seelen Window Manager. */
     Resume,
-    /** Reserve space for a incomming window. */
+    /** Reserve space for a incoming window. */
     Reserve(side: AllowedReservations => "The position of the new window."),
     /** Cancels the current reservation */
     CancelReservation,
@@ -102,11 +102,11 @@ impl WindowManager {
                         self.pseudo_pause()?;
                         std::thread::spawn(move || -> Result<()> {
                             winvd::switch_desktop(index as u32)?;
-                            sleep_millis(35); // to ensure avoid any artifacs
+                            sleep_millis(35); // to ensure avoid any artifacts
                             let mut seelen = SEELEN.lock();
                             let wm = seelen.wm_mut().unwrap();
                             if let Some(next) = Self::get_next_by_order(HWND(0)) {
-                                wm.force_focus(next)?;
+                                WindowsApi::force_set_foreground(next)?;
                             }
                             wm.pseudo_resume()?;
                             Ok(())
@@ -127,7 +127,7 @@ impl WindowManager {
                         std::thread::spawn(move || -> Result<()> {
                             winvd::move_window_to_desktop(guid, &to_move)?;
                             if let Some(next) = Self::get_next_by_order(to_move) {
-                                SEELEN.lock().wm_mut().unwrap().force_focus(next)?;
+                                WindowsApi::force_set_foreground(next)?;
                             }
                             Ok(())
                         });

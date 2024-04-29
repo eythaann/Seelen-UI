@@ -65,8 +65,13 @@ pub fn weg_close_app(hwnd: isize) -> Result<(), String> {
 }
 
 #[command]
-pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) {
+pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<(), String> {
     let hwnd = HWND(hwnd);
+
+    if WindowsApi::is_cloaked(hwnd)? {
+        WindowsApi::force_set_foreground(hwnd)?;
+        return Ok(());
+    }
 
     if WindowsApi::is_window(hwnd) {
         if WindowsApi::is_iconic(hwnd) {
@@ -84,4 +89,6 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) {
             .spawn()
             .expect("Could not spawn explorer on Opening App Action");
     }
+
+    Ok(())
 }

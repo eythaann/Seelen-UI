@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- if app on weg is cloak, change of virtual desktop instead minimize/restore
+
 ### fix
 - no closing AHK instances
 - floating size on fallback

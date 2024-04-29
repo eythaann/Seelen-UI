@@ -1,17 +1,22 @@
 pub mod cli;
 pub mod handler;
 
-use std::{sync::atomic::{AtomicIsize, Ordering}, thread::sleep, time::Duration};
+use std::sync::atomic::{AtomicIsize, Ordering};
 
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
-use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST}};
-
-use crate::{
-    error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
+use windows::Win32::{
+    Foundation::{BOOL, HWND, LPARAM},
+    UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST},
 };
 
-use self::cli::AllowedReservations;
+use crate::{
+    error_handler::{log_if_error, Result},
+    seelen::SEELEN,
+    seelen_weg::SeelenWeg,
+    utils::virtual_desktop::VirtualDesktopManager,
+    windows_api::WindowsApi,
+};
 
 #[derive(Serialize, Clone)]
 struct AddWindowPayload {
@@ -25,7 +30,6 @@ pub struct WindowManager {
     managed_handles: Vec<isize>,
     floating_handles: Vec<isize>,
     pub current_virtual_desktop: String,
-    pub reservation: Option<AllowedReservations>,
     paused: bool,
 }
 
@@ -38,7 +42,8 @@ impl WindowManager {
 
     pub fn new(handle: AppHandle<Wry>) -> Self {
         log::info!("Creating Tiling Windows Manager");
-        let virtual_desktop = VirtualDesktopManager::get_current_virtual_desktop().expect("Failed to get current virtual desktop");
+        let virtual_desktop = VirtualDesktopManager::get_current_virtual_desktop()
+            .expect("Failed to get current virtual desktop");
         Self {
             window: Self::create_window(&handle).expect("Failed to create Manager Container"),
             handle,
@@ -46,15 +51,17 @@ impl WindowManager {
             floating_handles: Vec::new(),
             current_virtual_desktop: virtual_desktop.id(),
             paused: true, // paused until complete_window_setup is called
-            reservation: None,
         }
     }
 
     pub fn complete_window_setup(&mut self) -> Result<()> {
         log::info!("Tiling Windows Manager Created");
         self.paused = false;
-        self.handle
-            .emit_to(Self::TARGET, "set-active-workspace", &self.current_virtual_desktop)?;
+        self.handle.emit_to(
+            Self::TARGET,
+            "set-active-workspace",
+            &self.current_virtual_desktop,
+        )?;
         Self::enum_windows();
         Ok(())
     }
@@ -75,20 +82,28 @@ impl WindowManager {
         if WindowsApi::get_window_text(hwnd) == "Task Switching" {
             return Ok(());
         }
-        let v_desktop = VirtualDesktopManager::get_window_virtual_desktop(hwnd).or_else(|_| VirtualDesktopManager::get_current_virtual_desktop())?;
+        let v_desktop = VirtualDesktopManager::get_window_virtual_desktop(hwnd)
+            .or_else(|_| VirtualDesktopManager::get_current_virtual_desktop())?;
         if v_desktop.id() != self.current_virtual_desktop {
             self.set_active_workspace(v_desktop.id())?;
         }
-        log::trace!("Setting active window to {} on {}", hwnd.0, v_desktop.id()[0..8].to_string());
-        let hwnd = match self.is_managed(hwnd) && !self.is_floating(hwnd) && !WindowsApi::is_maximized(hwnd) {
+        log::trace!(
+            "Setting active window to {} on {}",
+            hwnd.0,
+            v_desktop.id()[0..8].to_string()
+        );
+        let hwnd = match self.is_managed(hwnd)
+            && !self.is_floating(hwnd)
+            && !WindowsApi::is_maximized(hwnd)
+        {
             true => {
                 self.pseudo_resume()?;
                 hwnd
-            },
+            }
             false => {
                 self.pseudo_pause()?;
                 HWND(0)
-            },
+            }
         };
         self.handle
             .emit_to(Self::TARGET, "set-active-window", hwnd.0)?;
@@ -101,14 +116,17 @@ impl WindowManager {
         }
         log::trace!("Setting active workspace to: {}", virtual_desktop_id);
         self.current_virtual_desktop = virtual_desktop_id;
-        self.handle
-            .emit_to(Self::TARGET, "set-active-workspace", &self.current_virtual_desktop)?;
+        self.handle.emit_to(
+            Self::TARGET,
+            "set-active-workspace",
+            &self.current_virtual_desktop,
+        )?;
         Ok(())
     }
 
     pub fn add_hwnd(&mut self, hwnd: HWND) -> Result<bool> {
         if self.paused || self.is_managed(hwnd) {
-            return Ok(false)
+            return Ok(false);
         }
 
         let mut desktop_to_add = self.current_virtual_desktop.clone();
@@ -116,7 +134,12 @@ impl WindowManager {
             desktop_to_add = format!("{:?}", WindowsApi::get_virtual_desktop_id(hwnd)?);
         }
 
-        log::trace!("Adding {} <=> {:?} to desktop: {}", hwnd.0, WindowsApi::get_window_text(hwnd), desktop_to_add);
+        log::trace!(
+            "Adding {} <=> {:?} to desktop: {}",
+            hwnd.0,
+            WindowsApi::get_window_text(hwnd),
+            desktop_to_add
+        );
 
         self.managed_handles.push(hwnd.0);
         self.handle.emit_to(
@@ -130,7 +153,7 @@ impl WindowManager {
         Ok(true)
     }
 
-    pub fn emit_send_to_workspace(&mut self, hwnd: HWND, desktop_id: String) -> Result<()>{
+    pub fn emit_send_to_workspace(&mut self, hwnd: HWND, desktop_id: String) -> Result<()> {
         self.handle.emit_to(
             Self::TARGET,
             "move-window-to-workspace",
@@ -144,13 +167,13 @@ impl WindowManager {
 
     pub fn remove_hwnd_no_emit(&mut self, hwnd: HWND) -> bool {
         if self.paused || !self.is_managed(hwnd) {
-            return false
+            return false;
         }
         self.managed_handles.retain(|&x| x != hwnd.0);
         true
     }
 
-    /** trigered when a window is bounced by the front-end on adding action */
+    /** triggered when a window is bounced by the front-end on adding action */
     pub fn bounce_handle(&mut self, hwnd: HWND) {
         if self.remove_hwnd_no_emit(hwnd) {
             self.floating_handles.push(hwnd.0);
@@ -159,8 +182,13 @@ impl WindowManager {
 
     pub fn remove_hwnd(&mut self, hwnd: HWND) -> Result<bool> {
         if !self.remove_hwnd_no_emit(hwnd) {
-            return Ok(false)
+            return Ok(false);
         }
+        log::trace!(
+            "Removing {} <=> {:?}",
+            hwnd.0,
+            WindowsApi::get_window_text(hwnd)
+        );
         self.handle.emit_to(Self::TARGET, "remove-window", hwnd.0)?;
         Ok(true)
     }
@@ -192,21 +220,6 @@ impl WindowManager {
         self.window.set_always_on_top(true)?;
         Ok(())
     }
-
-    pub fn force_focus(&mut self, hwnd: HWND) -> Result<()> {
-        self.pause(true, false)?;
-        WindowsApi::force_set_foreground(hwnd)?;
-        std::thread::spawn(|| -> Result<()> {
-            sleep(Duration::from_millis(35));
-            let mut seelen = SEELEN.lock();
-            if let Some(wm) = seelen.wm_mut() {
-                wm.pause(false, false)?;
-            }
-            Ok(())
-        });
-
-        Ok(())
-    }
 }
 
 // UTILS AND STATICS
@@ -216,20 +229,15 @@ impl WindowManager {
     }
 
     pub fn is_manageable_window(hwnd: HWND, ignore_cloaked: bool) -> bool {
-        SeelenWeg::is_real_window(hwnd) 
+        let exe = WindowsApi::exe(hwnd);
+        // Without admin some apps does not return the exe path so these should be unmanaged
+        exe.is_ok()
+        && SeelenWeg::is_real_window(hwnd)
         // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
         && !WindowsApi::is_iconic(hwnd)
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
-        // Without admin some apps does not return the exe path so these should be unmanaged
-        && {
-            let exe = WindowsApi::exe_path(hwnd);
-            if let Ok(exe) = exe {
-                !exe.ends_with("Seelen UI.exe")
-            } else {
-                false
-            }
-        }
+        && !exe.unwrap().ends_with("Seelen UI.exe") // Todo manage this using apps config
     }
 
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {

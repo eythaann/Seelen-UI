@@ -85,7 +85,7 @@ lazy_static! {
                     .short('v')
                     .long("verbose")
                     .action(ArgAction::SetTrue)
-                    .help("Prints some extra proccess on the console."),
+                    .help("Prints some extra process on the console."),
                 Arg::new("version")
                     .short('V')
                     .long("version")
