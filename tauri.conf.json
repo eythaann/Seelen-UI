@@ -22,8 +22,7 @@
   },
   "bundle": {
     "resources": [
-      "static/*",
-      "seelen.cmd"
+      "static/*"
     ],
     "active": true,
     "publisher": "Seelen",
