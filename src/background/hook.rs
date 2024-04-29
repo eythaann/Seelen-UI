@@ -17,12 +17,7 @@ use windows::Win32::{
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    error_handler::{log_if_error, Result}, 
-    seelen::SEELEN,
-    seelen_bar::FancyToolbar,
-    seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager,
-    windows_api::WindowsApi,
+    error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::constants::IGNORE_FOCUS, windows_api::WindowsApi
 };
 
 pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
@@ -205,7 +200,7 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    /* if event == EVENT_OBJECT_LOCATIONCHANGE {
+    if event == EVENT_OBJECT_LOCATIONCHANGE {
         return;
     }
 
@@ -220,7 +215,13 @@ pub extern "system" fn win_event_hook(
         WindowsApi::exe(hwnd).unwrap_or_default(),
         WindowsApi::get_class(hwnd).unwrap_or_default(),
         WindowsApi::get_window_text(hwnd)
-    ); */
+    );
+
+    let title = WindowsApi::get_window_text(hwnd);
+    if (event == EVENT_OBJECT_FOCUS || event == EVENT_SYSTEM_FOREGROUND) && IGNORE_FOCUS.contains(&title) {
+        return;
+    }
+
     log_if_error(FancyToolbar::process_win_event(event, hwnd));
     log_if_error(process_win_event(event, hwnd));
 }

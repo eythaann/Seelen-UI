@@ -4,7 +4,6 @@ pub mod hook;
 use crate::{
     error_handler::{log_if_error, Result},
     seelen::SEELEN,
-    utils::constants::IGNORE_FOCUS,
     windows_api::WindowsApi,
 };
 use serde::Serialize;
@@ -50,9 +49,6 @@ impl FancyToolbar {
     pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
         let title = WindowsApi::get_window_text(hwnd);
 
-        if IGNORE_FOCUS.contains(&title) {
-            return Ok(());
-        }
         self.last_focus = Some(hwnd.0);
         self.handle.emit_to(
             Self::TARGET,

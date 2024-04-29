@@ -8,6 +8,7 @@
 ### fix
 - Managing windows without caption (Title bar)
 - can't update border configurations
+- hidding dock on switching virtual desktops
 
 ## [1.2.0]
 ### fix
