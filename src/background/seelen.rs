@@ -176,7 +176,7 @@ impl Seelen {
                 "Bypass",
                 "-NoProfile",
                 "-Command",
-                "Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*seelen.ahk*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
+                r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*target\debug\*seelen*.ahk' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
             ])
             .spawn()
             .expect("Failed to close ahk");

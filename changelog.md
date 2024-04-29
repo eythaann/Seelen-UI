@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no closing AHK instances
+
 ## [1.2.1]
 ### enhancements
 - Allow quit from settings
