@@ -200,7 +200,7 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    if event == EVENT_OBJECT_LOCATIONCHANGE {
+    /* if event == EVENT_OBJECT_LOCATIONCHANGE {
         return;
     }
 
@@ -215,7 +215,7 @@ pub extern "system" fn win_event_hook(
         WindowsApi::exe(hwnd).unwrap_or_default(),
         WindowsApi::get_class(hwnd).unwrap_or_default(),
         WindowsApi::get_window_text(hwnd)
-    );
+    ); */
 
     let title = WindowsApi::get_window_text(hwnd);
     if (event == EVENT_OBJECT_FOCUS || event == EVENT_SYSTEM_FOREGROUND) && IGNORE_FOCUS.contains(&title) {
