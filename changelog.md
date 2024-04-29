@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### fix
 - no closing AHK instances
+- floating size on fallback
+- reservation not working properly
 
 ## [1.2.1]
 ### enhancements
@@ -12,7 +14,7 @@
 ### fix
 - Managing windows without caption (Title bar)
 - can't update border configurations
-- hidding dock on switching virtual desktops
+- hiding dock on switching virtual desktops
 
 ## [1.2.0]
 ### fix
@@ -21,7 +23,7 @@
 ## [1.1.1]
 ### fix
 - Bad download URL in Update Notification
-- Showing update notification on intallations by Windows Store
+- Showing update notification on installations by Windows Store
 
 ## [1.1.0]
 ### features
@@ -43,10 +45,10 @@
 ## [1.0.0]
 ### refactored
 - Update notifications always enabled for nsis installer
-- Update notifications will not appear if app is intalled using msix (Microsoft Store).
+- Update notifications will not appear if app is installed using msix (Microsoft Store).
 
 ### enhancements
-- Now by default if user is Admin, UAC will be trigered on run the app to allow a better integrated experience in SeelenWeg and Komorebi Tiling Manager.
+- Now by default if user is Admin, UAC will be triggered on run the app to allow a better integrated experience in SeelenWeg and Komorebi Tiling Manager.
 
 ## [1.0.0-prerelease.14]
 ### features
@@ -67,7 +69,7 @@
 
 ## [1.0.0-prerelease.13]
 ### features
-- add Themes Feature 🎉 (incompleted only for Seelenweg for now)
+- add Themes Feature 🎉 (incomplete only for Seelenweg for now)
 - add SeelenWeg (a Dock or Taskbar) beta feature
 - add SeelenWeg in to Settings
 - add ContextMenu for apps in SeelenWeg
@@ -95,11 +97,11 @@
 
 ## [1.0.0-prerelease.10]
 ### features
-- add a update tab to allow users decide if will recive notifications for updates
+- add a update tab to allow users decide if will receive notifications for updates
 
 ## [1.0.0-prerelease.9]
 ## [1.0.0-prerelease.8]
-- add funcionality to pause btn on tray menu
+- add functionality to pause btn on tray menu
 
 ## [1.0.0-prerelease.6]
 ### added
@@ -125,7 +127,7 @@
 - refactor folder structure to isolate front-end apps
 
 ## [1.0.0-beta.13]
-### ehancements
+### enhancements
 - improve maximized windows experience
 
 ### fixed
@@ -145,7 +147,7 @@
 
 ## [1.0.0-beta.11]
 ### fixed
-- missing propety on schema
+- missing property on schema
 - white screen on start app
 
 ## [1.0.0-beta.10]
@@ -155,7 +157,7 @@
 ### fixed
 - searching feature on apps
 - no focusing windows on change workspace
-- autostacking not working propertly
+- autostacking not working properly
 - workspaces rules not working
 
 ## [1.0.0-beta.9]
@@ -183,7 +185,7 @@
 - fix not saving templates
 - fix toggle ahk shortcuts does not run or stop the instance
 - running ahk when disabled
-- not updating the path of intallation folder on update for windows tasks
+- not updating the path of installation folder on update for windows tasks
 
 ## [1.0.0-beta.5]
 ### added
@@ -215,5 +217,5 @@
 - export option for apps
 
 ### fixed
-- delete binded monitor and workpace on an application
-- bad intallation on setup
+- delete bound monitor and workspace on an application
+- bad installation on setup

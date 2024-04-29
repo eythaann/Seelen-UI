@@ -69,7 +69,7 @@ impl WindowsApi {
         }
     }
 
-    pub fn force_set_foregorund(hwnd: HWND) -> Result<()> {
+    pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
         Self::set_minimize_animation(false)?;
         Self::show_window_async(hwnd, SW_MINIMIZE);
         Self::show_window_async(hwnd, SW_RESTORE);

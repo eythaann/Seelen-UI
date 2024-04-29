@@ -11,6 +11,8 @@ use crate::{
     error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
 };
 
+use self::cli::AllowedReservations;
+
 #[derive(Serialize, Clone)]
 struct AddWindowPayload {
     hwnd: isize,
@@ -23,6 +25,7 @@ pub struct WindowManager {
     managed_handles: Vec<isize>,
     floating_handles: Vec<isize>,
     pub current_virtual_desktop: String,
+    pub reservation: Option<AllowedReservations>,
     paused: bool,
 }
 
@@ -43,6 +46,7 @@ impl WindowManager {
             floating_handles: Vec::new(),
             current_virtual_desktop: virtual_desktop.id(),
             paused: true, // paused until complete_window_setup is called
+            reservation: None,
         }
     }
 
@@ -71,14 +75,20 @@ impl WindowManager {
         if WindowsApi::get_window_text(hwnd) == "Task Switching" {
             return Ok(());
         }
-        let vdesktop = VirtualDesktopManager::get_window_virtual_desktop(hwnd).or_else(|_| VirtualDesktopManager::get_current_virtual_desktop())?;
-        if vdesktop.id() != self.current_virtual_desktop {
-            self.set_active_workspace(vdesktop.id())?;
+        let v_desktop = VirtualDesktopManager::get_window_virtual_desktop(hwnd).or_else(|_| VirtualDesktopManager::get_current_virtual_desktop())?;
+        if v_desktop.id() != self.current_virtual_desktop {
+            self.set_active_workspace(v_desktop.id())?;
         }
-        log::trace!("Setting active window to {} on {}", hwnd.0, vdesktop.id()[0..8].to_string());
-        match self.is_managed(hwnd) && !self.is_floating(hwnd) && !WindowsApi::is_maximized(hwnd) {
-            true => self.pseudo_resume()?,
-            false => self.pseudo_pause()?,
+        log::trace!("Setting active window to {} on {}", hwnd.0, v_desktop.id()[0..8].to_string());
+        let hwnd = match self.is_managed(hwnd) && !self.is_floating(hwnd) && !WindowsApi::is_maximized(hwnd) {
+            true => {
+                self.pseudo_resume()?;
+                hwnd
+            },
+            false => {
+                self.pseudo_pause()?;
+                HWND(0)
+            },
         };
         self.handle
             .emit_to(Self::TARGET, "set-active-window", hwnd.0)?;
@@ -185,7 +195,7 @@ impl WindowManager {
 
     pub fn force_focus(&mut self, hwnd: HWND) -> Result<()> {
         self.pause(true, false)?;
-        WindowsApi::force_set_foregorund(hwnd)?;
+        WindowsApi::force_set_foreground(hwnd)?;
         std::thread::spawn(|| -> Result<()> {
             sleep(Duration::from_millis(35));
             let mut seelen = SEELEN.lock();

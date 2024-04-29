@@ -29,8 +29,8 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
                 wm.set_active_workspace(format!("{:?}", new.get_id()?))?;
             }
         }
-        DesktopEvent::WindowChanged(hwnd) => {
-            println!("WindowChanged {} - {}", hwnd.0, WindowsApi::get_window_text(hwnd))
+        DesktopEvent::WindowChanged(_hwnd) => {
+            /* println!("WindowChanged {} - {}", hwnd.0, WindowsApi::get_window_text(hwnd)) */
         }
         _ => {}
     }

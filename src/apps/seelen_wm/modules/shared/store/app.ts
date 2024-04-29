@@ -50,16 +50,18 @@ export const RootSlice = createSlice({
       const workspace = state.workspaces[desktop_id]!;
       const node = NodeImpl.from(workspace.layout.structure);
 
-      let sucessfullyAdded = false;
+      let successfullyAdded = false;
 
       const setFloatingSize = () => {
+        const top = toPhysicalPixels(window.screen.height / 2 - state.settings.floating.height / 2);
+        const left = toPhysicalPixels(window.screen.width / 2 - state.settings.floating.width / 2);
         invoke('set_window_position', {
           hwnd,
           rect: {
-            top: toPhysicalPixels(window.screen.height / 2 - state.settings.floating.height / 2),
-            left: toPhysicalPixels(window.screen.width / 2 - state.settings.floating.width / 2),
-            right: toPhysicalPixels(state.settings.floating.width),
-            bottom: toPhysicalPixels(state.settings.floating.height),
+            top,
+            left,
+            right: left + toPhysicalPixels(state.settings.floating.width),
+            bottom: top + toPhysicalPixels(state.settings.floating.height),
           },
         });
       };
@@ -68,24 +70,24 @@ export const RootSlice = createSlice({
         if (state.reservation === Reservation.Float) {
           invoke('bounce_handle', { hwnd });
           setFloatingSize();
-          sucessfullyAdded = true;
+          successfullyAdded = true;
         } else if (state.lastManagedActivated) {
-          sucessfullyAdded = node.concreteReservation(
+          successfullyAdded = node.concreteReservation(
             hwnd,
             state.reservation,
             state.lastManagedActivated,
           );
         }
       } else {
-        sucessfullyAdded = node.addHandle(hwnd);
-        if (sucessfullyAdded) {
+        successfullyAdded = node.addHandle(hwnd);
+        if (successfullyAdded) {
           reIndexContainer(node.inner, handlesInDesktop);
         }
       }
 
       state.reservation = null;
 
-      if (sucessfullyAdded) {
+      if (successfullyAdded) {
         state.lastManagedActivated = hwnd;
         state.activeWindow = hwnd;
       } else {
