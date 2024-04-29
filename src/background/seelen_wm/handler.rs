@@ -25,7 +25,7 @@ pub struct Rect {
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
     let hwnd = HWND(hwnd);
 
-    if !WindowsApi::is_window(hwnd) {
+    if !WindowsApi::is_window(hwnd) || WindowsApi::is_iconic(hwnd) {
         return Ok(());
     }
 

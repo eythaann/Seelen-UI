@@ -6,6 +6,7 @@
 - floating size on fallback
 - reservation not working properly
 - ignore top most windows by default (normally these are tools or widgets)
+- minimization on weg not working properly if window manager is activated
 
 ## [1.2.1]
 ### enhancements
