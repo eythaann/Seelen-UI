@@ -13,7 +13,7 @@
   gap: var(--config-containers-gap);
 
   &.wm-leaf {
-    border-radius: 8px;
+    border-radius: 10px;
 
     &.wm-leaf-focused {
       z-index: 1;

@@ -123,13 +123,12 @@
 .SeelenWM {
   .wm-leaf {
     &.wm-leaf-with-borders {
-      outline-color: var(--color-blue-800);
-      outline-style: solid;
-      outline-width: var(--config-border-width);
-      outline-offset: var(--config-border-offset);
+      border-color: var(--color-blue-800);
+      border-style: solid;
+      border-width: var(--config-border-width);
 
       &.wm-leaf-focused {
-        outline-color: var(--color-red-800);
+        border-color: var(--color-red-800);
       }
     }
   }
@@ -140,10 +139,9 @@
       color: #fefefe;
 
       &.wm-stack-bar-with-borders {
-        outline-color: var(--color-blue-800);
-        outline-style: solid;
-        outline-width: var(--config-border-width);
-        outline-offset: var(--config-border-offset);
+        border-color: var(--color-blue-800);
+        border-style: solid;
+        border-width: var(--config-border-width);
       }
     }
   }

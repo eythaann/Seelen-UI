@@ -17,8 +17,8 @@ use windows::{
         UI::{
             Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
             WindowsAndMessaging::{
-                FindWindowW, GetParent, GetWindowLongW, ShowWindow, GWL_EXSTYLE, SHOW_WINDOW_CMD,
-                SW_HIDE, SW_SHOWNORMAL, WINDOW_EX_STYLE, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
+                FindWindowW, GetParent, ShowWindow, SHOW_WINDOW_CMD,
+                SW_HIDE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
                 WS_EX_TOOLWINDOW,
             },
         },

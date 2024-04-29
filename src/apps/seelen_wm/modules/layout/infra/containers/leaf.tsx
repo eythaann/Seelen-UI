@@ -22,14 +22,18 @@ export function LeafContainer({ hwnd, growFactor }: Props) {
     if (!ref.current) {
       return;
     }
+
+    const border = borderSettings.enabled ? borderSettings.width + borderSettings.offset : 0;
     const domRect = ref.current.getBoundingClientRect();
+    const top = domRect.top + window.screenY + border;
+    const left = domRect.left + window.screenX + border;
     invoke('set_window_position', {
       hwnd: hwnd,
       rect: {
-        top: toPhysicalPixels(domRect.top) + toPhysicalPixels(window.screenY),
-        left: toPhysicalPixels(domRect.left) + toPhysicalPixels(window.screenX),
-        right: toPhysicalPixels(domRect.width),
-        bottom: toPhysicalPixels(domRect.height),
+        top: toPhysicalPixels(top),
+        left: toPhysicalPixels(left),
+        right: toPhysicalPixels(left + domRect.width - border * 2),
+        bottom: toPhysicalPixels(top + domRect.height - border * 2),
       },
     });
   }, [hwnd]);

@@ -7,7 +7,7 @@ import { reducersFor, selectorsFor } from '../../shared/utils/app';
 const initialState: Border = parseAsCamel(BorderSchema, {});
 
 export const BorderSlice = createSlice({
-  name: 'generalSettings/border',
+  name: 'windowManager/border',
   initialState,
   reducers: reducersFor(initialState),
   selectors: selectorsFor(initialState),

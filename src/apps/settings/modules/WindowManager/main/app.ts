@@ -8,7 +8,7 @@ import { BorderSlice } from '../border/app';
 let initialState: WindowManager = parseAsCamel(WindowManagerSchema, {});
 
 export const SeelenManagerSlice = createSlice({
-  name: 'seelenManagerSettings',
+  name: 'windowManager',
   initialState,
   selectors: selectorsFor(initialState),
   reducers: {

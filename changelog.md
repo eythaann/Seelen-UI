@@ -3,9 +3,11 @@
 ## [Unreleased]
 ### enhancements
 - Allow quit from settings
+- Using Box-Content style in the position of windows instead outlined for a better user experience
 
 ### fix
 - Managing windows without caption (Title bar)
+- can't update border configurations
 
 ## [1.2.0]
 ### fix
