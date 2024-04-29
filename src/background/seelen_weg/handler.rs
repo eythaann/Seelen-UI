@@ -15,9 +15,11 @@ use super::SeelenWeg;
 
 #[command]
 pub fn enum_opened_apps() {
-    if let Some(weg) = SEELEN.lock().weg() {
-        weg.update_ui();
-    }
+    std::thread::spawn(|| {
+        if let Some(weg) = SEELEN.lock().weg() {
+            weg.update_ui();
+        }
+    });
 }
 
 #[derive(Deserialize)]

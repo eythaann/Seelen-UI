@@ -1,22 +1,22 @@
 // Prevents additional console window on Windows in release
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod apps_config;
 mod cli;
 mod error_handler;
 mod exposed;
 mod hook;
-mod seelen_wm;
 mod plugins;
 mod seelen;
 mod seelen_bar;
 mod seelen_shell;
 mod seelen_weg;
+mod seelen_wm;
 mod state;
 mod tray;
 mod utils;
 mod windows_api;
 mod winevent;
-mod apps_config;
 
 use cli::handle_cli_info;
 use error_handler::Result;
@@ -51,10 +51,11 @@ fn main() -> Result<()> {
         .setup(move |app| {
             log::info!("───────────────────── Starting Seelen ─────────────────────");
             let mut seelen = SEELEN.lock();
-            seelen.init(app.handle().clone())?;
             unsafe {
                 SEELEN.force_unlock();
             }
+            seelen.init(app.handle().clone())?;
+
             handle_tray_icon(app)?;
             seelen.create_update_modal()?;
 
@@ -76,10 +77,10 @@ fn main() -> Result<()> {
             }
         }
         tauri::RunEvent::Exit => {
-            let seleen = SEELEN.lock();
-            if seleen.initialized {
+            let seelen = SEELEN.lock();
+            if seelen.initialized {
                 log::info!("───────────────────── Exiting Seelen ─────────────────────");
-                seleen.stop();
+                seelen.stop();
             }
         }
         _ => {}

@@ -83,14 +83,14 @@ impl Seelen {
 /* ============== Methods ============== */
 impl Seelen {
     pub fn lazy_init(&mut self) {
+        if self.state.is_window_manager_enabled() {
+            self.window_manager = Some(WindowManager::new(self.handle().clone()));
+        }
+
         if self.state.is_weg_enabled() {
             let mut weg = SeelenWeg::new(self.handle().clone());
             log_if_error(weg.start());
             self.weg = Some(weg);
-        }
-
-        if self.state.is_window_manager_enabled() {
-            self.window_manager = Some(WindowManager::new(self.handle().clone()));
         }
     }
 
@@ -204,7 +204,7 @@ impl Seelen {
     pub fn create_update_modal(&self) -> Result<()> {
         log::trace!("Creating update notification window");
 
-        // check if path is in windowsapps folder
+        // check if path is in windows apps folder
         let installation_path = self.handle().path().resource_dir()?;
         if installation_path
             .to_string_lossy()

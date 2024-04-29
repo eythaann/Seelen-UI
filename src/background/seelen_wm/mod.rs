@@ -88,8 +88,9 @@ impl WindowManager {
             self.set_active_workspace(v_desktop.id())?;
         }
         log::trace!(
-            "Setting active window to {} on {}",
+            "Setting active window to {} <=> {:?} on {}",
             hwnd.0,
+            WindowsApi::get_window_text(hwnd),
             v_desktop.id()[0..8].to_string()
         );
         let hwnd = match self.is_managed(hwnd)
@@ -135,7 +136,7 @@ impl WindowManager {
         }
 
         log::trace!(
-            "Adding {} <=> {:?} to desktop: {}",
+            "Adding {} <=> {:?} on desktop: {}",
             hwnd.0,
             WindowsApi::get_window_text(hwnd),
             desktop_to_add
