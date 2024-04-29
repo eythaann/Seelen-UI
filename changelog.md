@@ -5,6 +5,7 @@
 - no closing AHK instances
 - floating size on fallback
 - reservation not working properly
+- ignore top most windows by default (normally these are tools or widgets)
 
 ## [1.2.1]
 ### enhancements

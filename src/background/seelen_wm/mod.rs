@@ -5,7 +5,7 @@ use std::{sync::atomic::{AtomicIsize, Ordering}, thread::sleep, time::Duration};
 
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
-use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE, WS_CAPTION}};
+use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST}};
 
 use crate::{
     error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager, windows_api::WindowsApi
@@ -217,7 +217,8 @@ impl WindowManager {
 
     pub fn is_manageable_window(hwnd: HWND, ignore_cloaked: bool) -> bool {
         SeelenWeg::is_real_window(hwnd) 
-        && WindowsApi::get_styles(hwnd).contains(WS_CAPTION)
+        // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
+        && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
         && !WindowsApi::is_iconic(hwnd)
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
         // Without admin some apps does not return the exe path so these should be unmanaged
