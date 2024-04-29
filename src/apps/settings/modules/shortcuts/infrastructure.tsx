@@ -35,7 +35,7 @@ export function Shortcuts() {
 
       <SettingsGroup>
         <SettingsOption>
-          <div>Icomming Configurable Shortcuts using UI</div>
+          <div>Incoming Configurable Shortcuts using UI</div>
         </SettingsOption>
       </SettingsGroup>
     </div>

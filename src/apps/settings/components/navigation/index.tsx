@@ -37,7 +37,7 @@ const Item = ({ route, isActive }: ItemProps) => {
       })}
     >
       <span className={cs.icon}>{RouteIcons[route]}</span>
-      <Tooltip title={WorkingInProgressRoutes.includes(route) ? 'Working in progress' : undefined}>
+      <Tooltip title={WorkingInProgressRoutes.includes(route) ? 'Work in progress' : undefined}>
         <span className={cs.label}>{RouteLabels[route]}</span>
       </Tooltip>
     </div>

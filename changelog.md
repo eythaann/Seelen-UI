@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.2.1]
 ### enhancements
 - Allow quit from settings
 - Using Box-Content style in the position of windows instead outlined for a better user experience
