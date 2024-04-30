@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.2.2]
 ### enhancements
 - if app on weg is cloak, change of virtual desktop instead minimize/restore
 

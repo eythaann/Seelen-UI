@@ -1,11 +1,11 @@
 {
-  "version": "1.2.1",
-  "notes": "### enhancements\n- Allow quit from settings\n- Using Box-Content style in the position of windows instead outlined for a better user experience\n\n### fix\n- Managing windows without caption (Title bar)\n- can't update border configurations\n- hidding dock on switching virtual desktops",
-  "pub_date": "2024-04-29T03:40:43.399Z",
+  "version": "1.2.2",
+  "notes": "### enhancements\n- if app on weg is cloak, change of virtual desktop instead minimize/restore\n\n### fix\n- no closing AHK instances\n- floating size on fallback\n- reservation not working properly\n- ignore top most windows by default (normally these are tools or widgets)\n- minimization on weg not working properly if window manager is activated\n- change focus using commands not working with conditional layouts\n- randomly frozen app on start\n- no tiling UWP apps",
+  "pub_date": "2024-04-30T15:40:12.748Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU1BvM3E5QWNKYWRVLy9TU1JtR0NnQkprdzhuZUpOMUdQeUVheDE4MFBuWWNlQTZiK2k0WEdoT00relBxaUQrUWFvMmwrUVBhdk9YQlpXYXRHQ1BRMUFRPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzE0MzY0NDE3CWZpbGU6U2VlbGVuIFVJXzEuMi4xX3g2NC1zZXR1cC5uc2lzLnppcApHQzd2MjlwZ1FIWVNXVXNteVMrS3E5aEdEUlNjcVoyUXhIMUswNmpCbE51R1Z0Z3dMMDA5dzR0OVBveHdLZU9jMjR0MExWbldpQXQ4K3paY3l6bWZCdz09Cg==",
-      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.2.1/Seelen.UI_1.2.1_x64-setup.nsis.zip"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU01WUXg1UkZCMkVEVUZCVktDUGF0bUtFazI1ZjI1OThUQk1wK09McjdmWjhEN2NhSlZ5Tkl2cFAxN2JXM3l6UnF3ZitWVzJvUG1OdjhQK2pMY1FESlFrPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzE0NDkxNjExCWZpbGU6U2VlbGVuIFVJXzEuMi4yX3g2NC1zZXR1cC5uc2lzLnppcApUZlBIRFhvVVgwUWFKY0UwaVJnaS8vRkVUSnN5WWJaUlFaWGNaRmJvSjl4RHAxUklSa0NaTVgwNmRiUFlLcExDS0l4cVYrRS9HWmxmazQxRWlrdWhCQT09Cg==",
+      "url": "https://github.com/eythaann/seelen-ui/releases/download/v1.2.2/Seelen.UI_1.2.2_x64-setup.nsis.zip"
     }
   }
 }
