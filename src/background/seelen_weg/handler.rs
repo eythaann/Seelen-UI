@@ -82,7 +82,8 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<(), Stri
             unsafe { ShowWindow(hwnd, SW_MINIMIZE) };
         }
     } else {
-        SEELEN
+        std::thread::spawn(move || {
+            SEELEN
             .lock()
             .handle()
             .shell()
@@ -90,6 +91,7 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<(), Stri
             .arg(&exe_path)
             .spawn()
             .expect("Could not spawn explorer on Opening App Action");
+        });
     }
 
     Ok(())

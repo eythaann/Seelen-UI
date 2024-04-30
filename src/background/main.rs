@@ -50,10 +50,7 @@ fn main() -> Result<()> {
     let app = app_builder
         .setup(move |app| {
             log::info!("───────────────────── Starting Seelen ─────────────────────");
-            let mut seelen = SEELEN.lock();
-            unsafe {
-                SEELEN.force_unlock();
-            }
+            let mut seelen = unsafe { SEELEN.make_guard_unchecked()};
             seelen.init(app.handle().clone())?;
 
             handle_tray_icon(app)?;
@@ -64,6 +61,7 @@ fn main() -> Result<()> {
             }
 
             seelen.start()?;
+            std::mem::forget(seelen);
             Ok(())
         })
         .build(tauri::generate_context!())

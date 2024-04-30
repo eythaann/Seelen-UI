@@ -114,9 +114,10 @@ impl Seelen {
             // wait for bar to be initialized see src\background\seelen_bar\mod.rs complete-setup event
             app.listen("toolbar-setup-completed", move |e| {
                 std::thread::spawn(move || {
-                    let mut seelen = SEELEN.lock();
+                    let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
                     seelen.lazy_init();
-                    seelen.handle().unlisten(e.id())
+                    seelen.handle().unlisten(e.id());
+                    std::mem::forget(seelen);
                 });
             });
         } else {

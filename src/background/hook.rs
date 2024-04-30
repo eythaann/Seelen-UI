@@ -197,7 +197,7 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
                     wm.pseudo_pause()?;
                 }
 
-                if WindowManager::should_manage(hwnd) {
+                if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
                     wm.set_active_window(hwnd)?;
                     wm.add_hwnd(hwnd)?;
                 }

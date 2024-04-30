@@ -1,24 +1,21 @@
-use windows::Win32::{
-    Foundation::{BOOL, LPARAM, HWND},
-    UI::WindowsAndMessaging::EnumWindows,
-};
+use windows::Win32::{Foundation::{BOOL, HWND, LPARAM}, UI::WindowsAndMessaging::EnumWindows};
 
 use crate::{error_handler::log_if_error, seelen::SEELEN};
 
-use super::SeelenWeg;
+use super::WindowManager;
 
-impl SeelenWeg {
+impl WindowManager {
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
         let mut seelen = SEELEN.lock();
-        if let Some(weg) = seelen.weg_mut() {
-            if SeelenWeg::is_real_window(hwnd) {
-                weg.add_hwnd(hwnd);
+        if let Some(wm) = seelen.wm_mut() {
+            if Self::is_manageable_window(hwnd, true) {
+                log_if_error(wm.add_hwnd(hwnd));
             }
         }
         true.into()
     }
 
-    pub fn enum_opened_windows() {
+    pub fn enum_windows() {
         std::thread::spawn(|| unsafe {
             log::trace!("Enumerating windows");
             log_if_error(EnumWindows(Some(Self::enum_windows_proc), LPARAM(0)));

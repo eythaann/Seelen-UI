@@ -1,5 +1,6 @@
 pub mod cli;
 pub mod handler;
+pub mod hook;
 
 use std::sync::atomic::{AtomicIsize, Ordering};
 
@@ -11,8 +12,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::{log_if_error, Result},
-    seelen::SEELEN,
+    error_handler::Result,
     seelen_weg::SeelenWeg,
     utils::virtual_desktop::VirtualDesktopManager,
     windows_api::WindowsApi,
@@ -239,22 +239,6 @@ impl WindowManager {
         && !WindowsApi::is_iconic(hwnd)
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
         && !exe.unwrap().ends_with("Seelen UI.exe") // Todo manage this using apps config
-    }
-
-    unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
-        let mut seelen = SEELEN.lock();
-        if let Some(wm) = seelen.wm_mut() {
-            if Self::is_manageable_window(hwnd, true) {
-                log_if_error(wm.add_hwnd(hwnd));
-            }
-        }
-        true.into()
-    }
-
-    pub fn enum_windows() {
-        std::thread::spawn(|| unsafe {
-            log_if_error(EnumWindows(Some(Self::enum_windows_proc), LPARAM(0)));
-        });
     }
 
     fn create_window(handle: &AppHandle<Wry>) -> Result<WebviewWindow> {

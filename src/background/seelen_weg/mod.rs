@@ -306,6 +306,8 @@ impl SeelenWeg {
             return;
         }
 
+        log::trace!("Adding {} <=> {:?}", hwnd.0, WindowsApi::get_window_text(hwnd));
+
         let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
         let mut icon_path = self.missing_icon();
         if exe_path != "" {

@@ -52,9 +52,11 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
 
 #[tauri::command]
 pub fn bounce_handle(hwnd: isize) {
-    if let Some(wm) = SEELEN.lock().wm_mut() {
-        wm.bounce_handle(HWND(hwnd));
-    }
+    std::thread::spawn(move || {
+        if let Some(wm) = SEELEN.lock().wm_mut() {
+            wm.bounce_handle(HWND(hwnd));
+        }
+    });
 }
 
 #[tauri::command]
