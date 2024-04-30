@@ -70,12 +70,12 @@ pub fn weg_close_app(hwnd: isize) -> Result<(), String> {
 pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<(), String> {
     let hwnd = HWND(hwnd);
 
-    if WindowsApi::is_cloaked(hwnd)? {
-        WindowsApi::force_set_foreground(hwnd)?;
-        return Ok(());
-    }
-
     if WindowsApi::is_window(hwnd) {
+        if WindowsApi::is_cloaked(hwnd)? {
+            WindowsApi::force_set_foreground(hwnd)?;
+            return Ok(());
+        }
+
         if WindowsApi::is_iconic(hwnd) {
             unsafe { ShowWindow(hwnd, SW_RESTORE) };
         } else {
