@@ -11,7 +11,7 @@ impl SeelenWeg {
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
         let mut seelen = SEELEN.lock();
         if let Some(weg) = seelen.weg_mut() {
-            if SeelenWeg::is_real_window(hwnd) {
+            if SeelenWeg::is_real_window(hwnd, false) {
                 weg.add_hwnd(hwnd);
             }
         }

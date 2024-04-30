@@ -19,7 +19,7 @@ use windows::Win32::{
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::constants::IGNORE_FOCUS, windows_api::WindowsApi
+    error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::{constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS}, sleep_millis}, windows_api::WindowsApi
 };
 
 lazy_static! {
@@ -146,7 +146,7 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
                     // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
                     let parent = WindowsApi::get_parent(hwnd);
                     if parent.0 != 0 {
-                        weg.replace_hwnd(hwnd, parent);
+                        weg.replace_hwnd(hwnd, parent)?;
                     } else {
                         weg.remove_hwnd(hwnd);
                     }
@@ -186,7 +186,7 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
                     weg.hide_taskbar(true);
                 }
 
-                if SeelenWeg::is_real_window(hwnd) {
+                if SeelenWeg::is_real_window(hwnd, false) {
                     weg.add_hwnd(hwnd);
                 }
             }
@@ -199,7 +199,14 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
 
                 if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
                     wm.set_active_window(hwnd)?;
-                    wm.add_hwnd(hwnd)?;
+                    if wm.add_hwnd(hwnd)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
+                        // Todo search a better way to do this
+                        std::thread::spawn(|| -> Result<()> {
+                            sleep_millis(250);
+                            SEELEN.lock().wm().unwrap().force_retiling()?;
+                            Ok(())
+                        });
+                    };
                 }
             }
         }
@@ -208,7 +215,7 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             if let Some(weg) = seelen.weg_mut() {
                 if weg.contains_app(hwnd) {
                     weg.update_app(hwnd);
-                } else if SeelenWeg::is_real_window(hwnd) {
+                } else if SeelenWeg::is_real_window(hwnd, false) {
                     weg.add_hwnd(hwnd);
                 }
             }
@@ -216,7 +223,15 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             if let Some(wm) = seelen.wm_mut() {
                 if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
                     wm.set_active_window(hwnd)?;
-                    wm.add_hwnd(hwnd)?;
+                    let title = WindowsApi::get_window_text(hwnd);
+                    if wm.add_hwnd(hwnd)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
+                        // Todo search a better way to do this
+                        std::thread::spawn(|| -> Result<()> {
+                            sleep_millis(250);
+                            SEELEN.lock().wm().unwrap().force_retiling()?;
+                            Ok(())
+                        });
+                    };
                 }
             }
         }

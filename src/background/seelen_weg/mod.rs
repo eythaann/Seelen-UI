@@ -1,6 +1,6 @@
 pub mod handler;
-pub mod icon_extractor;
 pub mod hook;
+pub mod icon_extractor;
 
 use std::{env::temp_dir, path::PathBuf};
 
@@ -17,9 +17,8 @@ use windows::{
         UI::{
             Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
             WindowsAndMessaging::{
-                FindWindowW, GetParent, ShowWindow, SHOW_WINDOW_CMD,
-                SW_HIDE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
-                WS_EX_TOOLWINDOW,
+                FindWindowW, GetParent, ShowWindow, SHOW_WINDOW_CMD, SW_HIDE, SW_SHOWNORMAL,
+                WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
             },
         },
     },
@@ -276,7 +275,9 @@ impl SeelenWeg {
     }
 
     pub fn contains_app(&self, hwnd: HWND) -> bool {
-        self.apps.iter().any(|app| app.hwnd == hwnd.0)
+        self.apps
+            .iter()
+            .any(|app| app.hwnd == hwnd.0 || app.process_hwnd == hwnd.0)
     }
 
     pub fn update_app(&mut self, hwnd: HWND) {
@@ -289,16 +290,14 @@ impl SeelenWeg {
         }
     }
 
-    pub fn replace_hwnd(&mut self, old: HWND, new: HWND) {
-        let app = self
-            .apps
-            .iter_mut()
-            .find(|app| app.hwnd == old.0)
-            .expect("Failed to find app");
-        app.hwnd = new.0;
-        self.handle
-            .emit_to(Self::TARGET, "replace-open-app", app.clone())
-            .expect("Failed to emit");
+    pub fn replace_hwnd(&mut self, old: HWND, new: HWND) -> Result<()> {
+        let app = self.apps.iter_mut().find(|app| app.hwnd == old.0);
+        if let Some(app) = app {
+            app.hwnd = new.0;
+            self.handle
+                .emit_to(Self::TARGET, "replace-open-app", app.clone())?;
+        }
+        Ok(())
     }
 
     pub fn add_hwnd(&mut self, hwnd: HWND) {
@@ -306,7 +305,11 @@ impl SeelenWeg {
             return;
         }
 
-        log::trace!("Adding {} <=> {:?}", hwnd.0, WindowsApi::get_window_text(hwnd));
+        log::trace!(
+            "Adding {} <=> {:?}",
+            hwnd.0,
+            WindowsApi::get_window_text(hwnd)
+        );
 
         let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
         let mut icon_path = self.missing_icon();
@@ -371,7 +374,7 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn is_real_window(hwnd: HWND) -> bool {
+    pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {
         if !WindowsApi::is_window_visible(hwnd) {
             return false;
         }
@@ -390,7 +393,7 @@ impl SeelenWeg {
 
         let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
         if exe_path.starts_with("C:\\Windows\\SystemApps")
-            || exe_path.ends_with("ApplicationFrameHost.exe")
+            || (!ignore_frame && exe_path.ends_with("ApplicationFrameHost.exe"))
         {
             return false;
         }

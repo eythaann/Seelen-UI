@@ -12,6 +12,7 @@
 - minimization on weg not working properly if window manager is activated
 - change focus using commands not working with conditional layouts
 - randomly frozen app on start
+- no tiling UWP apps
 
 ## [1.2.1]
 ### enhancements

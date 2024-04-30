@@ -12,9 +12,7 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result,
-    seelen_weg::SeelenWeg,
-    utils::virtual_desktop::VirtualDesktopManager,
+    error_handler::Result, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager,
     windows_api::WindowsApi,
 };
 
@@ -195,6 +193,7 @@ impl WindowManager {
     }
 
     pub fn force_retiling(&self) -> Result<()> {
+        log::trace!("Forcing retiling");
         self.handle.emit_to(Self::TARGET, "force-retiling", ())?;
         Ok(())
     }
@@ -231,9 +230,16 @@ impl WindowManager {
 
     pub fn is_manageable_window(hwnd: HWND, ignore_cloaked: bool) -> bool {
         let exe = WindowsApi::exe(hwnd);
+
+        if let Ok(exe) = &exe {
+            if exe.ends_with("ApplicationFrameHost.exe") && SeelenWeg::is_real_window(hwnd, true) {
+                return true;
+            }
+        }
+
         // Without admin some apps does not return the exe path so these should be unmanaged
         exe.is_ok()
-        && SeelenWeg::is_real_window(hwnd)
+        && SeelenWeg::is_real_window(hwnd, true)
         // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
         && !WindowsApi::is_iconic(hwnd)

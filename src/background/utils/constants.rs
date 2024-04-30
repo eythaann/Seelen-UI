@@ -12,4 +12,15 @@ lazy_static! {
     .iter()
     .map(|x| x.to_string())
     .collect_vec();
+
+    /**
+     * Some UWP apps like WhatsApp are resized after be opened,
+     * this list will be used to resize them back after a delay.
+     */
+    pub static ref FORCE_RETILING_AFTER_ADD: Vec<String> = vec![
+        "WhatsApp",
+    ]
+    .iter()
+    .map(|x| x.to_string())
+    .collect_vec();
 }
