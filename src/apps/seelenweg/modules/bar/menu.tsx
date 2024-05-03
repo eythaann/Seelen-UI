@@ -77,8 +77,8 @@ export function getMenuForItem(item: App): MenuProps['items'] {
     },
     {
       label: 'Open file location',
-      key: 'weg_open_file_location',
-      onClick: () => invoke('open_file_location', { path: item.exe }),
+      key: 'weg_select_file_on_explorer',
+      onClick: () => invoke('select_file_on_explorer', { path: item.exe }),
     },
   );
 

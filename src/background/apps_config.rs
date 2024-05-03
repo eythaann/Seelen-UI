@@ -52,6 +52,7 @@ pub enum MatchingStrategy {
     Regex,
 }
 
+#[allow(dead_code)]
 #[derive(Clone, Debug, Deserialize)]
 pub struct AppIdentifier {
     id: String,
@@ -59,6 +60,7 @@ pub struct AppIdentifier {
     matching_strategy: MatchingStrategy,
 }
 
+#[allow(dead_code)]
 impl AppIdentifier {
     pub fn cache_regex(&mut self) {
         if matches!(self.matching_strategy, MatchingStrategy::Regex) {
@@ -122,6 +124,7 @@ impl AppIdentifier {
     }
 }
 
+#[allow(dead_code)]
 #[derive(Clone, Debug, Deserialize)]
 pub struct AppConfig {
     name: String,
@@ -132,6 +135,7 @@ pub struct AppConfig {
     options: Option<Vec<AppExtraFlag>>,
 }
 
+#[allow(dead_code)]
 impl AppConfig {
     pub fn match_window(&self, hwnd: HWND) -> bool {
         if let (title, Ok(path), Ok(exe), Ok(class)) = (
@@ -146,6 +150,7 @@ impl AppConfig {
     }
 }
 
+#[allow(dead_code)]
 #[derive(Clone, Debug, Deserialize)]
 pub struct AppsConfigurations {
     apps: VecDeque<AppConfig>,
@@ -161,6 +166,7 @@ impl Default for AppsConfigurations {
     }
 }
 
+#[allow(dead_code)]
 impl AppsConfigurations {
     pub fn load(&mut self, path: PathBuf) -> Result<()> {
         let mut content = String::from("");

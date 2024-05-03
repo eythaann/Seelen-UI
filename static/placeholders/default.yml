@@ -1,0 +1,46 @@
+info:
+  displayName: Default,
+  author: eythaann,
+  description: Default toolbar layout good for all devices.
+
+left:
+  - type: text
+    template: concat("@", env.USERNAME)
+    onClick: open -> env.USERPROFILE
+    tooltip: '"Open user folder"'
+
+  - type: text
+    template: '"|"'
+
+  - type: text
+    template: window.name
+
+  - type: text
+    template: >
+      window.title ? "-" : ""
+
+  - type: text
+    template: window.title
+
+center:
+  - type: date
+    each: minute
+    format: MMM Do, HH:mm
+    template: date
+
+right:
+  - type: power
+    tooltip: concat(string(power.BatteryLifePercent), "% remaining")
+    template: >
+      power.BatteryFlag & 8
+      ? icon.PiBatteryChargingFill
+      : power.BatteryLifePercent > 90
+      ? icon.PiBatteryFullFill
+      : power.BatteryLifePercent > 75
+      ? icon.PiBatteryHighFill
+      : power.BatteryLifePercent > 50
+      ? icon.PiBatteryMediumFill
+      : power.BatteryLifePercent > 10
+      ? icon.PiBatteryLowFill
+      : icon.PiBatteryWarning
+

@@ -1,5 +1,6 @@
 import { AppTemplate } from '../../../../../shared.interfaces';
 import { Layout } from '../../../../utils/schemas/Layout';
+import { Placeholder } from '../../../../utils/schemas/Placeholders';
 import { ISettings } from '../../../../utils/schemas/Settings';
 import { Theme } from '../../../../utils/schemas/Theme';
 import { Route } from '../../../components/navigation/routes';
@@ -14,5 +15,6 @@ export interface RootState extends ISettings {
   selectedTheme: string | null;
   availableThemes: Theme[];
   availableLayouts: Layout[];
+  availablePlaceholders: Placeholder[];
   autostart: boolean;
 }

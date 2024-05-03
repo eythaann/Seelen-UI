@@ -1,4 +1,5 @@
 import { Layout, LayoutSchema, NoFallbackBehavior } from './apps/utils/schemas/Layout';
+import { Placeholder } from './apps/utils/schemas/Placeholders';
 import { ISettings } from './apps/utils/schemas/Settings';
 import { Theme, ThemeSchema } from './apps/utils/schemas/Theme';
 
@@ -13,6 +14,8 @@ export interface UserSettings {
   themes: Theme[];
   theme: Theme | null;
   layouts: Layout[];
+  placeholders: Placeholder[];
+  env: Record<string, string>;
 }
 
 export interface AppTemplate {

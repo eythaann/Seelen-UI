@@ -262,8 +262,8 @@ impl SeelenWeg {
         if ap_bar.hWnd.0 != 0 {
             ap_bar.lParam = lparam;
             unsafe {
-                ShowWindow(ap_bar.hWnd, cmdshow);
                 SHAppBarMessage(ABM_SETSTATE, &mut ap_bar as *mut APPBARDATA);
+                ShowWindow(ap_bar.hWnd, cmdshow);
             }
         }
     }

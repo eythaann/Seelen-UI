@@ -33,12 +33,12 @@ export const RouteExtraInfo: { [key in Route]?: string } = {
 };
 
 export const RouteIcons: Record<Route, React.ReactNode> = {
-  [Route.GENERAL]: <Icon lib="ri" iconName="RiSettings3Fill" />,
-  [Route.MONITORS]: <Icon lib="pi" iconName="PiMonitorBold" />,
-  [Route.SEELEN_BAR]: <Icon lib="bi" iconName="BiSolidDockTop" />,
-  [Route.SEELEN_WM]: <Icon lib="bs" iconName="BsGrid1X2Fill" propsIcon={{ color: '#0086b4', size: 14 }} />,
-  [Route.SEELEN_WEG]: <Icon lib="bi" iconName="BiDockBottom" />,
-  [Route.SPECIFIT_APPS]: <Icon lib="io" iconName="IoIosApps" propsIcon={{ color: '#d71913' }} />,
+  [Route.GENERAL]: <Icon iconName="RiSettings3Fill" />,
+  [Route.MONITORS]: <Icon iconName="PiMonitorBold" />,
+  [Route.SEELEN_BAR]: <Icon iconName="BiSolidDockTop" />,
+  [Route.SEELEN_WM]: <Icon iconName="BsGrid1X2Fill" propsIcon={{ color: '#0086b4', size: 14 }} />,
+  [Route.SEELEN_WEG]: <Icon iconName="BiDockBottom" />,
+  [Route.SPECIFIT_APPS]: <Icon iconName="IoIosApps" propsIcon={{ color: '#d71913' }} />,
   [Route.SHORTCUTS]: '🔡',
-  [Route.INFO]: <Icon lib="pi" iconName="PiInfoFill" />,
+  [Route.INFO]: <Icon iconName="PiInfoFill" />,
 };

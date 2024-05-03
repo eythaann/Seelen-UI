@@ -1,31 +1,35 @@
-import { Icon } from '../../../utils/components/Icon';
-import { useSelector } from 'react-redux';
+import { Placeholder, ToolbarModule, ToolbarModuleType } from '../../../utils/schemas/Placeholders';
 
 import { DateModule } from '../Date/infra';
+import { Item } from '../item/infra';
+import { PowerModule } from '../Power/infra';
 
-import { Selectors } from '../shared/store/app';
+function componentByModule(module: ToolbarModule, idx: number) {
+  switch (module.type) {
+    case ToolbarModuleType.TEXT:
+    case ToolbarModuleType.GENERIC:
+      return <Item key={idx} module={module} />;
+    case ToolbarModuleType.DATE:
+      return <DateModule key={idx} module={module} />;
+    case ToolbarModuleType.POWER:
+      return <PowerModule key={idx} module={module} />;
+    default:
+      return null;
+  }
+}
 
-export function ToolBar() {
-  const focused = useSelector(Selectors.focused);
+interface Props {
+  structure: Placeholder;
+}
+
+export function ToolBar({ structure }: Props) {
+  console.log(structure);
 
   return (
     <div className="ft-bar">
-      <div className="ft-bar-left">
-        <Icon lib="md" iconName="MdWindow" propsIcon={{ size: 14 }} />
-        <span>ßeta</span>
-        <span>&nbsp;|&nbsp;</span>
-        <span>{focused?.name} - {focused?.title}</span>
-      </div>
-      <div className="ft-bar-center">
-        <DateModule />
-      </div>
-      <div className="ft-bar-right">
-        <span>Incoming:&nbsp;</span>
-        <Icon lib="bs" iconName="BsBluetooth" propsIcon={{ size: 14 }} />
-        <Icon lib="bs" iconName="BsWifi" />
-        <Icon lib="pi" iconName="PiBatteryFullFill" />
-        <Icon lib="lu" iconName="LuSettings2" />
-      </div>
+      <div className="ft-bar-left">{structure.left.map(componentByModule)}</div>
+      <div className="ft-bar-center">{structure.center.map(componentByModule)}</div>
+      <div className="ft-bar-right">{structure.right.map(componentByModule)}</div>
     </div>
   );
 }

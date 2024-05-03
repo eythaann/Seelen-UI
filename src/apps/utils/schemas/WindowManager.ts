@@ -23,7 +23,7 @@ export const FloatingWindowSchema = z.object({
 
 export const WindowManagerSchema = z.object({
   enabled: z.boolean().default(true),
-  auto_stackin_by_category: z.boolean().default(true),
+  auto_stacking_by_category: z.boolean().default(true),
   border: BorderSchema.default({}),
   resize_delta: z.number().default(10).describe('% to add or remove on resize of windows using the CLI'),
   workspace_gap: z.number().nonnegative().default(10).describe('Space between windows'),
@@ -36,7 +36,7 @@ export const WindowManagerSchema = z.object({
 type inner = z.infer<typeof WindowManagerSchema> & {};
 export interface WindowManager {
   enabled: inner['enabled'];
-  autoStackinByCategory: inner['auto_stackin_by_category'];
+  autoStackingByCategory: inner['auto_stacking_by_category'];
   border: inner['border'];
   resizeDelta: inner['resize_delta'];
   workspaceGap: inner['workspace_gap'];

@@ -45,13 +45,13 @@ export function Information() {
         <SettingsOption>
           <span>Force Restart</span>
           <Button type="dashed" onClick={relaunch} style={{ width: '40px' }}>
-            <Icon lib="io5" iconName="IoReload" propsIcon={{ size: 12 }} />
+            <Icon iconName="IoReload" propsIcon={{ size: 12 }} />
           </Button>
         </SettingsOption>
         <SettingsOption>
           <span>Quit/Close</span>
           <Button type="dashed" onClick={() => exit(0)} style={{ width: '40px' }}>
-            <Icon lib="io5" iconName="IoClose" />
+            <Icon iconName="IoClose" />
           </Button>
         </SettingsOption>
       </SettingsGroup>

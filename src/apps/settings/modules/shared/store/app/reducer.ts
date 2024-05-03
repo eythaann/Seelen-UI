@@ -24,6 +24,7 @@ const initialState: RootState = {
   ahkEnabled: true,
   availableThemes: [],
   availableLayouts: [],
+  availablePlaceholders: [],
   selectedTheme: null,
 };
 

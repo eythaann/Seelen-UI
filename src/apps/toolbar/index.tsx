@@ -1,4 +1,3 @@
-import { ErrorBoundary } from '../seelenweg/components/Error';
 import { getRootContainer, setWindowAsFullSize } from '../utils';
 import { wrapConsole } from '../utils/ConsoleWrapper';
 import { registerDocumentEvents } from './events';
@@ -6,7 +5,7 @@ import { ConfigProvider, theme } from 'antd';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { registerStoreEvents, store } from './modules/shared/store/infra';
+import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
 
 import { App } from './app';
 
@@ -22,6 +21,7 @@ async function Main() {
   setWindowAsFullSize();
   registerDocumentEvents();
   await registerStoreEvents();
+  await loadStore();
 
   createRoot(container).render(
     <Provider store={store}>

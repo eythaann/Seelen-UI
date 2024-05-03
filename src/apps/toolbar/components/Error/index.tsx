@@ -1,5 +1,9 @@
 import cs from './index.module.css';
 
-export function ErrorFallback() {
-  return <div className={cs.error}>Something went wrong - please restart the app</div>;
+interface Props {
+  msg?: string;
+}
+
+export function ErrorFallback({ msg = 'Something went wrong' }: Props) {
+  return <div className={cs.error}>{msg}</div>;
 }

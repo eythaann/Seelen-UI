@@ -6,9 +6,7 @@ use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::{log_if_error, Result}, hook::register_win_hook,
-    seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager, state::State, utils::run_ahk_file,
+    error_handler::{log_if_error, Result}, hook::register_win_hook, seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::State, system_events::register_system_events, utils::run_ahk_file
 };
 
 lazy_static! {
@@ -98,6 +96,8 @@ impl Seelen {
         log::trace!("Initializing Seelen");
         self.handle = Some(app.clone());
 
+        self.ensure_folders()?;
+
         let path = app
             .path()
             .resolve(".config/seelen/settings.json", BaseDirectory::Home)?;
@@ -133,9 +133,9 @@ impl Seelen {
     }
 
     pub fn start(&mut self) -> Result<()> {
-        self.ensure_folders().expect("Fail on ensuring folders");
         self.start_ahk_shortcuts()?;
         register_win_hook()?;
+        register_system_events(self.handle().clone())?;
         Ok(())
     }
 

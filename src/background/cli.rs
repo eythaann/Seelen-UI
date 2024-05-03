@@ -50,6 +50,7 @@ macro_rules! get_subcommands {
             }
 
             fn try_from(matches: &clap::ArgMatches) -> crate::error_handler::Result<Self> {
+                #[allow(unused_variables)]
                 if let Some((subcommand, sub_matches)) = matches.subcommand() {
                     match crate::utils::kebab_to_pascal(subcommand).as_str() {
                         $(

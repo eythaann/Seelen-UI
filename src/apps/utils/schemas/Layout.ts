@@ -1,3 +1,4 @@
+import { CreatorInfoSchema } from '.';
 import { modify } from 'readable-types/dist';
 import z from 'zod';
 
@@ -78,11 +79,7 @@ export const NodeSchema = z.union([
 
 type InnerLayout = z.infer<typeof LayoutSchema>;
 export const LayoutSchema = z.object({
-  info: z.object({
-    displayName: z.string().default('Unknown'),
-    author: z.string().default('Unknown'),
-    description: z.string().default('Empty'),
-  }).default({}),
+  info: CreatorInfoSchema.default({}),
   structure: NodeSchema.default({ type: NodeType.Fallback }),
   no_fallback_behavior: z.nativeEnum(NoFallbackBehavior).optional().nullable(),
 });

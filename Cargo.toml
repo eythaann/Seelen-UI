@@ -70,6 +70,7 @@ features = [
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
     "Win32_System_ProcessStatus",
+    "Win32_System_Power", # required for power management (battery)
     "Win32_Storage_EnhancedStorage",
 ]
 

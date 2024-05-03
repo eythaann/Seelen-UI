@@ -1,0 +1,8 @@
+.error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: var(--config-height);
+  background-color: var(--color-blue-800);
+}

@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- Allow customize Fancy Toolbar modules using placeholders yaml files.
+
 ## [1.2.2]
 ### enhancements
 - if app on weg is cloak, change of virtual desktop instead minimize/restore

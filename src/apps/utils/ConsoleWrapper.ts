@@ -1,4 +1,5 @@
 import * as Logger from '@tauri-apps/plugin-log';
+import { exit } from '@tauri-apps/plugin-process';
 
 declare global {
   interface Console {
@@ -21,6 +22,7 @@ export function wrapConsole() {
 
   window.addEventListener('unhandledrejection', (event) => {
     console.error(`Unhandled Rejection - ${event.reason}`);
+    exit(1);
   });
 
   console.error = (...params: any[]) => {

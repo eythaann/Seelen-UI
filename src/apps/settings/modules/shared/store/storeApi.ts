@@ -1,6 +1,7 @@
 import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, VariableConvention } from '../../../../utils/schemas';
 import { Layout, LayoutSchema } from '../../../../utils/schemas/Layout';
+import { Placeholder, PlaceholderSchema } from '../../../../utils/schemas/Placeholders';
 import { SettingsSchema } from '../../../../utils/schemas/Settings';
 import { Theme, ThemeSchema } from '../../../../utils/schemas/Theme';
 import { path } from '@tauri-apps/api';
@@ -89,6 +90,37 @@ async function loadUserLayouts(ref: UserSettings) {
   }
 }
 
+async function loadUserPlaceholders(ref: UserSettings) {
+  const placeholderPath = await path.join(await path.resourceDir(), 'static', 'placeholders');
+  const entries = await fs.readDir(placeholderPath);
+
+  const selectedPlaceholder = ref.jsonSettings.fancyToolbar.placeholder;
+  let found = false;
+
+  for (const entry of entries) {
+    if (entry.isFile && entry.name.endsWith('.yml')) {
+      let _placeholder = yaml.load(await fs.readTextFile(await path.join(placeholderPath, entry.name)));
+      let placeholder = parseAsCamel(PlaceholderSchema, _placeholder) as Placeholder;
+
+      placeholder.info.filename = entry.name;
+
+      if (placeholder.info.displayName === 'Unknown') {
+        placeholder.info.displayName = entry.name;
+      }
+
+      if (selectedPlaceholder === entry.name) {
+        found = true;
+      }
+
+      ref.placeholders.push(placeholder);
+    }
+  }
+
+  if (!found) {
+    ref.jsonSettings.fancyToolbar.placeholder = ref.placeholders[0]?.info.filename || null;
+  }
+}
+
 export async function loadUserSettings(route?: string): Promise<UserSettings> {
   const userSettings: UserSettings = {
     jsonSettings: parseAsCamel(SettingsSchema, {}),
@@ -96,6 +128,8 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     themes: [],
     theme: null,
     layouts: [],
+    placeholders: [],
+    env: await invoke('get_user_envs'),
   };
 
   const json_route = route || await path.join(await path.homeDir(), '.config/seelen/settings.json');
@@ -112,6 +146,7 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
 
   await loadUserThemes(userSettings);
   await loadUserLayouts(userSettings);
+  await loadUserPlaceholders(userSettings);
 
   return userSettings;
 }
@@ -136,7 +171,7 @@ export async function loadAppsTemplates() {
   return result;
 }
 
-export async function saveUserSettings(settings: Omit<UserSettings, 'themes' | 'theme'>) {
+export async function saveUserSettings(settings: UserSettings) {
   const json_route = await path.join(await path.homeDir(), '.config/seelen/settings.json');
   const yaml_route = await path.join(await path.homeDir(), '.config/seelen/applications.yml');
 

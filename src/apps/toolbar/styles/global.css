@@ -63,3 +63,14 @@ body {
     }
   }
 }
+
+.ft-bar-item {
+  &.ft-bar-item-clickable {
+    padding: 4px;
+    border-radius: 6px;
+
+    &:hover {
+      backdrop-filter: brightness(3);
+    }
+  }
+}

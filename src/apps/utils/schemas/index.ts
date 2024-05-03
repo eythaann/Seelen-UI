@@ -66,3 +66,9 @@ export class VariableConvention {
 export function parseAsCamel(schema: z.Schema, value: any) {
   return VariableConvention.fromSnakeToCamel(schema.parse(value));
 }
+
+export const CreatorInfoSchema = z.object({
+  displayName: z.string().default('Unknown'),
+  author: z.string().default('Unknown'),
+  description: z.string().default('Empty'),
+});

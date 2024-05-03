@@ -1,6 +1,7 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
+import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 
@@ -70,6 +71,8 @@ export const SaveStore = async () => {
       themes: currentState.availableThemes,
       theme: currentState.availableThemes.find((t) => t.info.filename === currentState.selectedTheme) || null,
       layouts: currentState.availableLayouts,
+      placeholders: currentState.availablePlaceholders,
+      env: await invoke('get_user_envs'),
     };
 
     await saveUserSettings(settings);

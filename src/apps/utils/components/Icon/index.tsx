@@ -1,4 +1,4 @@
-import { IconBaseProps, IconType } from 'react-icons';
+import { IconBaseProps } from 'react-icons';
 import * as ai from 'react-icons/ai';
 import * as bi from 'react-icons/bi';
 import * as bs from 'react-icons/bs';
@@ -33,52 +33,61 @@ import * as wi from 'react-icons/wi';
 
 import cs from './index.module.css';
 
-const libs = {
-  ai: ai,
-  bi: bi,
-  bs: bs,
-  cg: cg,
-  ci: ci,
-  di: di,
-  fa: fa,
-  fa6: fa6,
-  fc: fc,
-  fi: fi,
-  gi: gi,
-  go: go,
-  gr: gr,
-  hi: hi,
-  hi2: hi2,
-  im: im,
-  io: io,
-  io5: io5,
-  lia: lia,
-  lu: lu,
-  md: md,
-  pi: pi,
-  ri: ri,
-  rx: rx,
-  si: si,
-  sl: sl,
-  tb: tb,
-  tfi: tfi,
-  ti: ti,
-  vsc: vsc,
-  wi: wi,
+export type Icon = keyof typeof icons;
+const icons = {
+  ...ai,
+  ...bi,
+  ...bs,
+  ...cg,
+  ...ci,
+  ...di,
+  ...fa,
+  ...fa6,
+  ...fc,
+  ...fi,
+  ...gi,
+  ...go,
+  ...gr,
+  ...hi,
+  ...hi2,
+  ...im,
+  ...io,
+  ...io5,
+  ...lia,
+  ...lu,
+  ...md,
+  ...pi,
+  ...ri,
+  ...rx,
+  ...si,
+  ...sl,
+  ...tb,
+  ...tfi,
+  ...ti,
+  ...vsc,
+  ...wi,
 };
 
-type libs = typeof libs;
+export const exposedIconsRegex = /\[ICON:(.*?)\]/g;
+export const exposedIcons = Object.keys(icons).reduce((acc, icon) => {
+  acc[icon] = `[ICON:${icon}]`;
+  return acc;
+}, {} as any);
 
-interface typesPropsIcon<T extends keyof libs> {
-  lib: T;
-  iconName: keyof libs[T];
+export function isValidIconName(str: string) {
+  const [name] = str.split(':');
+  return !!icons[name as Icon];
+}
+
+interface typesPropsIcon {
+  iconName: Icon;
   propsIcon?: IconBaseProps;
 }
 
-export function Icon<T extends keyof libs>(props: typesPropsIcon<T>) {
-  const { lib, iconName, propsIcon } = props;
+export function Icon(props: typesPropsIcon) {
+  const { iconName, propsIcon } = props;
 
-  const Icon: IconType | null = libs[lib]?.[iconName] as IconType || null;
+  const Icon = icons[iconName] || null;
 
   if (!Icon) {
     return null;

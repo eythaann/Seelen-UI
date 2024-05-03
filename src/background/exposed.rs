@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::process::Command;
 
 use serde::Serialize;
@@ -58,8 +59,14 @@ fn kill_seelen_shortcuts() -> Result<(), String> {
 }
 
 #[command]
-fn open_file_location(path: String) -> Result<(), String> {
+fn select_file_on_explorer(path: String) -> Result<(), String> {
     log_if_error(Command::new("explorer").args(["/select,", &path]).spawn());
+    Ok(())
+}
+
+#[command]
+fn open_file(path: String) -> Result<(), String> {
+    log_if_error(Command::new("explorer").args([&path]).spawn());
     Ok(())
 }
 
@@ -71,8 +78,8 @@ fn is_dev_mode() -> bool {
 #[command]
 fn get_accent_color() -> String {
     let mut colorization: u32 = 0;
-    let mut opaqueblend = windows::Win32::Foundation::BOOL(0);
-    let _ = unsafe { DwmGetColorizationColor(&mut colorization, &mut opaqueblend) };
+    let mut opaque_blend = windows::Win32::Foundation::BOOL(0);
+    let _ = unsafe { DwmGetColorizationColor(&mut colorization, &mut opaque_blend) };
 
     let alpha = (colorization >> 24) & 0xFF;
     let red = (colorization >> 16) & 0xFF;
@@ -80,6 +87,11 @@ fn get_accent_color() -> String {
     let blue = colorization & 0xFF;
 
     format!("#{:02X}{:02X}{:02X}{:02X}", red, green, blue, alpha)
+}
+
+#[command]
+pub fn get_user_envs() -> HashMap<String, String> {
+    std::env::vars().collect::<HashMap<String, String>>()
 }
 
 #[derive(Serialize)]
@@ -104,9 +116,11 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
         is_dev_mode,
-        open_file_location,
+        open_file,
+        select_file_on_explorer,
         get_accent_color,
         get_win_version,
+        get_user_envs,
         // Media
         media_play_pause,
         media_next,
