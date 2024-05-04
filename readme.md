@@ -26,9 +26,6 @@ You can choose from different installation options based on your preference:
 ### Microsoft Store (recommended)
 Download the latest version from the [Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) page this is the recommended option because you will recieve updates, and a secure version of the program.
 
-#### Pay vs Free trial
-There are no differences between them, both the paid version and the free trial offer exactly the same features. The option to purchase is simply a way to donate and support my work in developing this application.
-
 ### Installer (Setup.exe)
 Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the `setup.exe` installer. This will notify for new updates but maybe is detected as virus because actually is not signed.
 
