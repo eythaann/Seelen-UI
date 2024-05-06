@@ -38,8 +38,11 @@ Therefore, by stating that "each type has its own evaluation scope," we emphasiz
 ### Generic Module
 **Scope:** `icon` is a object of all available icons in [react-icons](https://react-icons.github.io/react-icons/), `env` is the current environment, and `window` is the current focused window.
 
+
 ### Date Module
 **Scope:** The `date` variable represents the current date and time as a string, formatted according to the specified format in the `format` property of the Module.
+
+**Format:** is a string to parse the date in a specific format, follow the next guide of [moment-js](https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/)
 
 ### Power Module
 **Scope:** The `power` variable has available the same properties exposed in the [win32 SYSTEM_POWER_STATUS interface](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status)
