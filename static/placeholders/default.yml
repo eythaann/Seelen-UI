@@ -29,6 +29,21 @@ center:
     template: date
 
 right:
+  - type: generic
+    template: icon.TbBluetoothConnected
+    onClick: open -> "ms-settings:bluetooth"
+    tooltip: '"Bluetooth"'
+
+  - type: generic
+    template: '"[ICON:FaWifi:14]"'
+    onClick: open -> "ms-settings:network"
+    tooltip: '"Network"'
+
+  - type: generic
+    template: icon.IoVolumeHighOutline
+    onClick: open -> "ms-settings:sound"
+    tooltip: '"Sound"'
+
   - type: power
     tooltip: concat(string(power.BatteryLifePercent), "% remaining")
     template: >
@@ -43,6 +58,7 @@ right:
       : power.BatteryLifePercent > 5
       ? icon.PiBatteryLowFill
       : icon.PiBatteryWarning
+    onClick: open -> "ms-settings:powersleep"
 
   - type: settings
     template: icon.LuSettings2

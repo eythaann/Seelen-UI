@@ -6,15 +6,6 @@
     "description": "COLORS EVERYWHERE!!!"
   },
   "seelenweg": {
-    "backgroundLayers": 2,
-    "items": {
-      "backgroundLayers": 1
-    },
-    "contextMenu": {
-      "backgroundLayers": 1
-    },
-    "preview": {
-      "backgroundLayers": 1
-    }
+    "backgroundLayers": 2
   }
 }

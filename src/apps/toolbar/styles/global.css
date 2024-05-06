@@ -16,10 +16,8 @@ body {
 
   .ft-bar {
     position: relative;
-    background-color: #121212;
-    color: white;
     width: 100%;
-    height: 30px;
+    height: var(--config-height);
     overflow: hidden;
     text-wrap: nowrap;
     display: flex;
@@ -27,6 +25,7 @@ body {
     .ft-bar-left,
     .ft-bar-center,
     .ft-bar-right {
+      z-index: 1;
       display: flex;
       align-items: center;
       height: 100%;
@@ -42,8 +41,6 @@ body {
 
     .ft-bar-center {
       position: absolute;
-      background-color: #121212;
-      box-shadow: 0 0 20px 20px #121212;
       padding: 0 5%;
       height: 100%;
       left: 50%;
