@@ -15,7 +15,7 @@ left:
 
 Note that `template`, `tooltip` and `onClick` function bodies are defined as code. This code will be evaluated at runtime using the [mathjs](https://mathjs.org/) evaluate function, similar to how Conditional Layouts work.
 
-Also, observe that to write literal strings, you must use double quotes. Each type has its own scope for evaluation.
+Also, observe that to write literal strings, you must use double quotes.
 
 ```yaml
  tooltip: '"Open user folder"'
