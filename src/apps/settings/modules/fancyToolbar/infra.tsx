@@ -1,5 +1,5 @@
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { Select, Switch } from 'antd';
+import { InputNumber, Select, Switch } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { newSelectors } from '../shared/store/app/reducer';
@@ -28,7 +28,7 @@ export function FancyToolbarSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Enable Fancy Toolbar (Beta)</b>
+            <b>Enable Fancy Toolbar</b>
           </div>
           <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
@@ -37,7 +37,7 @@ export function FancyToolbarSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Default Layout: </b>
+            <b>Placeholder (structure): </b>
           </div>
           <Select
             style={{ width: '200px' }}
@@ -55,6 +55,19 @@ export function FancyToolbarSettings() {
           </p>
           <p><b>Description: </b>{usingStructure?.info.description}</p>
         </div>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <div>
+            <b>Height</b>
+          </div>
+          <InputNumber
+            value={settings.height}
+            onChange={(value) => dispatch(FancyToolbarActions.setHeight(value || 0))}
+            min={0}
+          />
+        </SettingsOption>
       </SettingsGroup>
     </>
   );

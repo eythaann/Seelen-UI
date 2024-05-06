@@ -1,7 +1,7 @@
 info:
   displayName: Default,
   author: eythaann,
-  description: Default toolbar layout good for all devices.
+  description: Default toolbar layout good for many devices.
 
 left:
   - type: text
