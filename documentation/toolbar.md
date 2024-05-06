@@ -1,4 +1,4 @@
-# Toolbar Widget
+# Seelen UI - Toolbar
 
 ## Placeholders
 The toolbar layout, also known as "placeholder," can be defined in a YAML file, adhering to the [placeholder schema](./schemas/placeholder.schema.json) and customized using Themes.
