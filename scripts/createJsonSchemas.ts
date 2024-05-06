@@ -2,6 +2,7 @@ import { writeFileSync } from 'fs';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 
 import { LayoutSchema } from '../src/apps/utils/schemas/Layout';
+import { PlaceholderSchema } from '../src/apps/utils/schemas/Placeholders';
 import { SettingsSchema } from '../src/apps/utils/schemas/Settings';
 import { ThemeSchema } from '../src/apps/utils/schemas/Theme';
 
@@ -19,5 +20,10 @@ import { ThemeSchema } from '../src/apps/utils/schemas/Theme';
   writeFileSync(
     'documentation/schemas/theme.schema.json',
     JSON.stringify(zodToJsonSchema(ThemeSchema), null, 2),
+  );
+
+  writeFileSync(
+    'documentation/schemas/placeholder.schema.json',
+    JSON.stringify(zodToJsonSchema(PlaceholderSchema), null, 2),
   );
 })();

@@ -36,7 +36,7 @@
         "backgroundLayers": {
           "type": "number",
           "minimum": 0,
-          "default": 0
+          "default": 1
         },
         "items": {
           "type": "object",
@@ -59,6 +59,26 @@
           "default": {}
         },
         "preview": {
+          "type": "object",
+          "properties": {
+            "backgroundLayers": {
+              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+            }
+          },
+          "additionalProperties": false,
+          "default": {}
+        }
+      },
+      "additionalProperties": false,
+      "default": {}
+    },
+    "toolbar": {
+      "type": "object",
+      "properties": {
+        "backgroundLayers": {
+          "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+        },
+        "fastSettings": {
           "type": "object",
           "properties": {
             "backgroundLayers": {

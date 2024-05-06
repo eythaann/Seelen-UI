@@ -23,6 +23,8 @@ async function Main() {
   await registerStoreEvents();
   await loadStore();
 
+  window.TOOLBAR_MODULES = {} as any;
+
   createRoot(container).render(
     <Provider store={store}>
       <ConfigProvider

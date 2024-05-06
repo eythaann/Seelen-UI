@@ -7,6 +7,7 @@ import {
 import { ToolbarModule } from '../../../utils/schemas/Placeholders';
 import { cx } from '../../../utils/styles';
 import { Tooltip } from 'antd';
+import { cloneDeep } from 'lodash';
 import { evaluate } from 'mathjs';
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
@@ -72,15 +73,15 @@ export function Item({ extraVars, module }: Props) {
   const scope = useRef(new Scope());
 
   useEffect(() => {
-    scope.current.set('icon', exposedIcons);
-    scope.current.set('env', env);
+    scope.current.set('icon', cloneDeep(exposedIcons));
+    scope.current.set('env', cloneDeep(env));
   }, []);
 
   if (!window) {
     return null;
   }
 
-  scope.current.set('window', window);
+  scope.current.set('window', { ...window });
   if (extraVars) {
     Object.keys(extraVars).forEach((key) => {
       scope.current.set(key, extraVars[key]);

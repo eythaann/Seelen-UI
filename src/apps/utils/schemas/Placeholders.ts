@@ -13,18 +13,6 @@ export enum ToolbarModuleType {
   TRAY = 'tray',
 }
 
-window.TOOLBAR_MODULES = {
-  [ToolbarModuleType.GENERIC]: false,
-  [ToolbarModuleType.TEXT]: false,
-  [ToolbarModuleType.DATE]: false,
-  [ToolbarModuleType.POWER]: false,
-  [ToolbarModuleType.SETTINGS]: false,
-  [ToolbarModuleType.NETWORK]: false,
-  [ToolbarModuleType.SOUND]: false,
-  [ToolbarModuleType.BLUETOOTH]: false,
-  [ToolbarModuleType.TRAY]: false,
-};
-
 export enum TimeUnit {
   SECOND = 'second',
   MINUTE = 'minute',
