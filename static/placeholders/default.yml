@@ -36,11 +36,14 @@ right:
       ? icon.PiBatteryChargingFill
       : power.BatteryLifePercent > 90
       ? icon.PiBatteryFullFill
-      : power.BatteryLifePercent > 75
+      : power.BatteryLifePercent > 66
       ? icon.PiBatteryHighFill
-      : power.BatteryLifePercent > 50
+      : power.BatteryLifePercent > 33
       ? icon.PiBatteryMediumFill
-      : power.BatteryLifePercent > 10
+      : power.BatteryLifePercent > 5
       ? icon.PiBatteryLowFill
       : icon.PiBatteryWarning
 
+  - type: settings
+    template: icon.LuSettings2
+    tooltip: '"Fast Settings"'

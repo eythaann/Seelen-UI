@@ -1,4 +1,5 @@
-pub mod battery;
+pub mod power;
+pub mod brightness;
 
 use std::sync::Arc;
 
@@ -31,7 +32,7 @@ pub fn register_system_events(handle: AppHandle<Wry>) -> Result<()> {
     HANDLER.lock().init(handle.clone());
 
     handle.once("register-power-events", move |_| {
-        battery::register_battery_events(HANDLER.lock().clone_handle());
+        power::register_battery_events(HANDLER.lock().clone_handle());
     });
 
     handle.once("register-wifi-events", move |_| {
@@ -41,5 +42,12 @@ pub fn register_system_events(handle: AppHandle<Wry>) -> Result<()> {
     handle.once("register-bluetooth-events", move |_| {
         // todo
     });
+
+    handle.once("register-audio-events", move |_| {
+        // todo
+        // let audio = WindowsApi::get_default_audio_endpoint().unwrap();
+        // audio.RegisterControlChangeNotify(IAudioEndpointVolumeCallback)
+    });
+
     Ok(())
 }

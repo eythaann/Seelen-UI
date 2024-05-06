@@ -4,6 +4,7 @@ use std::process::Command;
 use serde::Serialize;
 use tauri::{command, Builder, Wry};
 use tauri_plugin_shell::ShellExt;
+use windows::core::GUID;
 use windows::Win32::Graphics::Dwm::DwmGetColorizationColor;
 use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
@@ -13,7 +14,10 @@ use crate::error_handler::{log_if_error, Result};
 use crate::seelen::SEELEN;
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
+use crate::system::brightness::*;
+use crate::system::power::*;
 use crate::utils::{is_windows_10, is_windows_11};
+use crate::windows_api::WindowsApi;
 
 fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
     let app = SEELEN.lock().handle().clone();
@@ -44,6 +48,25 @@ fn media_next() -> Result<(), String> {
 #[command]
 fn media_prev() -> Result<(), String> {
     press_key(VK_MEDIA_PREV_TRACK)
+}
+
+#[command]
+pub fn get_volume_level() -> Result<f32, String> {
+    Ok(unsafe {
+        WindowsApi::get_default_audio_endpoint()?
+            .GetMasterVolumeLevelScalar()
+            .unwrap_or_default()
+    })
+}
+
+#[command]
+pub fn set_volume_level(level: f32) -> Result<(), String> {
+    unsafe {
+        WindowsApi::get_default_audio_endpoint()?
+            .SetMasterVolumeLevelScalar(level, &GUID::zeroed())
+            .unwrap()
+    };
+    Ok(())
 }
 
 #[command]
@@ -112,6 +135,13 @@ fn get_win_version() -> WinVersion {
     }
 }
 
+#[command]
+fn show_app_settings() {
+    std::thread::spawn(|| {
+        log_if_error(SEELEN.lock().show_settings());
+    });
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
@@ -121,10 +151,21 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_accent_color,
         get_win_version,
         get_user_envs,
+        show_app_settings,
         // Media
         media_play_pause,
         media_next,
         media_prev,
+        get_volume_level,
+        set_volume_level,
+        // Brightness
+        get_main_monitor_brightness,
+        set_main_monitor_brightness,
+        // Power
+        log_out,
+        sleep,
+        restart,
+        shutdown,
         // AHK
         start_seelen_shortcuts,
         kill_seelen_shortcuts,

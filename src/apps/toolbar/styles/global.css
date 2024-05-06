@@ -1,5 +1,5 @@
 /**
- * The styles in this file are only structurals for finder,
+ * The styles in this file are only structural for toolbar,
  * all the design should be added to the default theme css.
  */
 body {
@@ -12,9 +12,7 @@ body {
 
 .fancy-toolbar {
   width: 100vw;
-  font-size: 0.8rem; /* remove */
   line-height: 1em;
-  font-weight: 500; /* remove */
 
   .ft-bar {
     position: relative;
@@ -39,7 +37,7 @@ body {
       width: 50%;
       overflow: hidden;
       justify-content: flex-start;
-      padding-left: 14px;  /* configureble */
+      padding-left: var(--config-padding-at-side);
     }
 
     .ft-bar-center {
@@ -59,7 +57,7 @@ body {
       width: 50%;
       overflow: hidden;
       justify-content: flex-end;
-      padding-right: 14px; /* configureble */
+      padding-right: var(--config-padding-at-side);
     }
   }
 }
@@ -72,5 +70,61 @@ body {
     &:hover {
       backdrop-filter: brightness(3);
     }
+  }
+}
+
+.fast-settings {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 300px;
+
+  .fast-settings-title {
+    z-index: 1;
+    font-weight: 600;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .fast-settings-item-title-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 6px;
+      border-radius: 6px;
+
+      &:hover {
+        backdrop-filter: brightness(0.8); 
+      }
+    }
+  }
+
+  .fast-settings-item {
+    z-index: 1;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    .ant-slider {
+      flex: 1;
+    }
+  }
+
+  .fast-settings-power {
+    display: flex;
+    gap: 6px;
+
+    > .fast-settings-item-button {
+      flex: 1;
+    }
+  }
+
+  .fast-settings-item-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 12px;
   }
 }

@@ -150,3 +150,27 @@
     background-color: var(--color-cyan-700);
   }
 }
+
+.fancy-toolbar {
+  font-size: 0.8rem;
+  font-weight: 500;
+
+  .fast-settings {
+    padding: 12px 16px;
+    margin: 4px;
+
+    .fast-settings-bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 10px;
+    }
+
+    .fast-settings-item-button {
+      border: 1px solid var(--color-gray-600);
+      border-radius: 8px;
+
+      &:hover {
+        background-color: var(--color-gray-200);
+      }
+    }
+  }
+}

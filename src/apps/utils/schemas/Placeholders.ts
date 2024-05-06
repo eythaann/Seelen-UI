@@ -6,6 +6,7 @@ export enum ToolbarModuleType {
   TEXT = 'text',
   DATE = 'date',
   POWER = 'power',
+  SETTINGS = 'settings',
   NETWORK = 'network',
   SOUND = 'sound',
   BLUETOOTH = 'bluetooth',
@@ -17,6 +18,7 @@ window.TOOLBAR_MODULES = {
   [ToolbarModuleType.TEXT]: false,
   [ToolbarModuleType.DATE]: false,
   [ToolbarModuleType.POWER]: false,
+  [ToolbarModuleType.SETTINGS]: false,
   [ToolbarModuleType.NETWORK]: false,
   [ToolbarModuleType.SOUND]: false,
   [ToolbarModuleType.BLUETOOTH]: false,
@@ -63,11 +65,17 @@ export const PowerToolbarModuleSchema = BaseToolbarModuleSchema.extend({
   type: z.literal(ToolbarModuleType.POWER),
 });
 
+export type SettingsToolbarModule = z.infer<typeof SettingsToolbarModuleSchema>;
+export const SettingsToolbarModuleSchema = BaseToolbarModuleSchema.extend({
+  type: z.literal(ToolbarModuleType.SETTINGS),
+});
+
 export type ToolbarModule = z.infer<typeof ToolbarModuleSchema>;
 export const ToolbarModuleSchema = z.union([
   GenericToolbarModuleSchema,
   DateToolbarModuleSchema,
   PowerToolbarModuleSchema,
+  SettingsToolbarModuleSchema,
 ]);
 
 type InnerPlaceholder = z.infer<typeof PlaceholderSchema>;

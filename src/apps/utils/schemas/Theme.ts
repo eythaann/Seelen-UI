@@ -2,7 +2,7 @@ import { CreatorInfoSchema } from '.';
 import { modify } from 'readable-types/dist';
 import { z } from 'zod';
 
-const backgroundLayersSchema = z.number().min(0).default(0);
+const backgroundLayersSchema = z.number().min(0).default(1);
 
 type inner = z.infer<typeof ThemeSchema>;
 export const ThemeSchema = z.object({
@@ -17,6 +17,12 @@ export const ThemeSchema = z.object({
       backgroundLayers: backgroundLayersSchema,
     }).default({}),
     preview: z.object({
+      backgroundLayers: backgroundLayersSchema,
+    }).default({}),
+  }).default({}),
+  toolbar: z.object({
+    backgroundLayers: backgroundLayersSchema,
+    fastSettings: z.object({
       backgroundLayers: backgroundLayersSchema,
     }).default({}),
   }).default({}),

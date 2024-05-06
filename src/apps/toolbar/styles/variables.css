@@ -1,5 +1,6 @@
 :root {
   --config-height: 30px;
+  --config-padding-at-side: 14px;
 
   --config-accent-color: #ff0000;
 }

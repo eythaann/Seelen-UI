@@ -2,9 +2,13 @@ use std::{ffi::c_void, thread::sleep, time::Duration};
 
 use color_eyre::eyre::eyre;
 use windows::{
-    core::{GUID, PCWSTR, PWSTR},
+    core::{ComInterface, GUID, PCWSTR, PWSTR},
     Win32::{
-        Foundation::{CloseHandle, HANDLE, HWND, RECT},
+        Devices::Display::{
+            GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
+            PHYSICAL_MONITOR,
+        },
+        Foundation::{CloseHandle, HANDLE, HWND, LUID, RECT},
         Graphics::{
             Dwm::{
                 DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
@@ -15,13 +19,21 @@ use windows::{
                 MONITOR_DEFAULTTOPRIMARY,
             },
         },
+        Media::Audio::{
+            eMultimedia, eRender, Endpoints::IAudioEndpointVolume, IMMDeviceEnumerator,
+            MMDeviceEnumerator,
+        },
+        Security::{LookupPrivilegeValueW, TOKEN_ADJUST_PRIVILEGES, TOKEN_QUERY},
         Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
+            Power::SetSuspendState,
             RemoteDesktop::ProcessIdToSessionId,
+            Shutdown::{ExitWindowsEx, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             Threading::{
-                GetCurrentProcessId, OpenProcess, QueryFullProcessImageNameW,
-                PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32, PROCESS_QUERY_INFORMATION,
+                GetCurrentProcess, GetCurrentProcessId, OpenProcess, OpenProcessToken,
+                QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
+                PROCESS_QUERY_INFORMATION,
             },
         },
         UI::{
@@ -32,8 +44,8 @@ use windows::{
             WindowsAndMessaging::{
                 GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW,
                 GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
-                IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow,
-                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
+                IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
                 EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
                 SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION,
                 SWP_ASYNCWINDOWPOS, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
@@ -62,6 +74,10 @@ impl WindowsApi {
         (process_id, thread_id)
     }
 
+    pub fn current_process() -> HANDLE {
+        unsafe { GetCurrentProcess() }
+    }
+
     pub fn current_process_id() -> u32 {
         unsafe { GetCurrentProcessId() }
     }
@@ -77,21 +93,6 @@ impl WindowsApi {
                 Err(eyre!("could not determine current session id").into())
             }
         }
-    }
-
-    pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
-        Self::set_minimize_animation(false)?;
-
-        let mut hook_manager = HOOK_MANAGER.lock();
-        hook_manager.pause_and_resume_after(EVENT_SYSTEM_MINIMIZEEND, hwnd.clone());
-        hook_manager.set_resume_callback(move |hook_manager| {
-            log_if_error(Self::set_minimize_animation(true));
-            hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
-        });
-
-        Self::show_window_async(hwnd, SW_MINIMIZE);
-        Self::show_window_async(hwnd, SW_RESTORE);
-        Ok(())
     }
 
     pub fn get_foreground_window() -> HWND {
@@ -188,12 +189,45 @@ impl WindowsApi {
         Self::_set_position(hwnd, order, *rect, uflags)
     }
 
+    pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
+        Self::set_minimize_animation(false)?;
+
+        let mut hook_manager = HOOK_MANAGER.lock();
+        hook_manager.pause_and_resume_after(EVENT_SYSTEM_MINIMIZEEND, hwnd.clone());
+        hook_manager.set_resume_callback(move |hook_manager| {
+            log_if_error(Self::set_minimize_animation(true));
+            hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
+        });
+
+        Self::show_window_async(hwnd, SW_MINIMIZE);
+        Self::show_window_async(hwnd, SW_RESTORE);
+        Ok(())
+    }
+
     fn open_process(
         access_rights: PROCESS_ACCESS_RIGHTS,
         inherit_handle: bool,
         process_id: u32,
     ) -> Result<HANDLE> {
         unsafe { Ok(OpenProcess(access_rights, inherit_handle, process_id)?) }
+    }
+
+    pub fn open_process_token() -> Result<HANDLE> {
+        let mut token_handle: HANDLE = HANDLE(0);
+        unsafe {
+            OpenProcessToken(
+                Self::current_process(),
+                TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
+                &mut token_handle,
+            )?;
+        }
+        Ok(token_handle)
+    }
+
+    pub fn get_luid(system: PCWSTR, name: PCWSTR) -> Result<LUID> {
+        let mut luid = LUID::default();
+        unsafe { LookupPrivilegeValueW(system, name, &mut luid)? };
+        Ok(luid)
     }
 
     fn close_handle(handle: HANDLE) -> Result<()> {
@@ -296,6 +330,22 @@ impl WindowsApi {
         }
     }
 
+    /// handle of PHYSICAL_MONITOR is bugged and will be always 0
+    pub fn primary_physical_monitor() -> Result<PHYSICAL_MONITOR> {
+        let hmonitor = Self::primary_monitor();
+
+        let mut c_physical_monitors: u32 = 0;
+        let mut p_physical_monitors: Vec<PHYSICAL_MONITOR> = Vec::new();
+
+        unsafe {
+            GetNumberOfPhysicalMonitorsFromHMONITOR(hmonitor, &mut c_physical_monitors)?;
+            p_physical_monitors.resize(c_physical_monitors as usize, std::mem::zeroed());
+            GetPhysicalMonitorsFromHMONITOR(hmonitor, p_physical_monitors.as_mut())?;
+        };
+
+        Ok(p_physical_monitors[0])
+    }
+
     pub fn primary_monitor() -> HMONITOR {
         unsafe { MonitorFromWindow(GetDesktopWindow(), MONITOR_DEFAULTTOPRIMARY) }
     }
@@ -321,12 +371,34 @@ impl WindowsApi {
         })
     }
 
-    pub fn get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
+    pub fn co_create_instance<T>(rclsid: &GUID) -> Result<T>
+    where
+        T: ComInterface,
+    {
         unsafe {
-            let manager: Result<IVirtualDesktopManager, windows::core::Error> =
-                CoCreateInstance(&VirtualDesktopManager, None, CLSCTX_ALL);
-            Ok(manager?)
+            let result: Result<T, windows::core::Error> =
+                CoCreateInstance(rclsid, None, CLSCTX_ALL);
+            Ok(result?)
         }
+    }
+
+    pub fn get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
+        Ok(Self::co_create_instance::<IVirtualDesktopManager>(
+            &VirtualDesktopManager,
+        )?)
+    }
+
+    pub fn get_media_device_enumerator() -> Result<IMMDeviceEnumerator> {
+        Ok(Self::co_create_instance::<IMMDeviceEnumerator>(
+            &MMDeviceEnumerator,
+        )?)
+    }
+
+    pub fn get_default_audio_endpoint() -> Result<IAudioEndpointVolume> {
+        let enumerator = Self::get_media_device_enumerator()?;
+        let device = unsafe { enumerator.GetDefaultAudioEndpoint(eRender, eMultimedia)? };
+        let endpoint: IAudioEndpointVolume = unsafe { device.Activate(CLSCTX_ALL, None)? };
+        Ok(endpoint)
     }
 
     pub fn get_virtual_desktop_id(hwnd: HWND) -> Result<GUID> {
@@ -373,6 +445,19 @@ impl WindowsApi {
                 Some(&mut anim_info as *mut ANIMATIONINFO as *mut c_void),
                 SPIF_SENDCHANGE,
             )?;
+        }
+        Ok(())
+    }
+
+    pub fn exit_windows(flags: EXIT_WINDOWS_FLAGS, reason: SHUTDOWN_REASON) -> Result<()> {
+        unsafe { ExitWindowsEx(flags, reason) }?;
+        Ok(())
+    }
+
+    pub fn set_suspend_state() -> Result<()> {
+        let success = unsafe { SetSuspendState(false, true, false).as_bool() };
+        if !success {
+            return Err(eyre!("Failed to set suspend state").into());
         }
         Ok(())
     }

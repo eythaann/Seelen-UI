@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - Allow customize Fancy Toolbar modules using placeholders yaml files.
+- Add fast settings for toolbar allowing to adjust volume, brightness, etc.
 
 ## [1.2.2]
 ### enhancements

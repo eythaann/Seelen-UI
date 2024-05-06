@@ -6,7 +6,7 @@ use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::{log_if_error, Result}, hook::register_win_hook, seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::State, system_events::register_system_events, utils::run_ahk_file
+    error_handler::{log_if_error, Result}, hook::register_win_hook, seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::State, system::register_system_events, utils::run_ahk_file
 };
 
 lazy_static! {
