@@ -36,7 +36,7 @@ export const GlobalPaddings = () => {
     <SettingsGroup>
       <div>
         <SettingsOption>
-          <span>Gap between containers</span>
+          <span>Container Padding</span>
           <InputNumber value={containerPadding} onChange={onChangeDefaultGap} />
         </SettingsOption>
         <SettingsOption>
