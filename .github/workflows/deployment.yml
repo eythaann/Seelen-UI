@@ -23,10 +23,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Cloning Seelen Web
-        env:
-          GITHUB_TOKEN: ${{ secrets.WORKFLOWS_TOKEN }}
-        run: git clone https://github.com/Seelen-Inc/seelen-web.git .
+      - uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          repository: Seelen-Inc/seelen-web
 
       - name: Detect package manager
         id: detect-package-manager
