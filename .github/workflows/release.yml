@@ -77,9 +77,9 @@ jobs:
         if: matrix.platform == 'windows-latest'
         shell: powershell
         run: |
-          winget install -Id Microsoft.DotNet.AspNetCore.8
-          winget install -Id Microsoft.DotNet.DesktopRuntime.8
-          winget install -Id MarcinOtorowski.MSIXHero
+          winget install --id Microsoft.DotNet.AspNetCore.8
+          winget install --id Microsoft.DotNet.DesktopRuntime.8
+          winget install --id MarcinOtorowski.MSIXHero
 
       - name: Install frontend dependencies
         run: npm install
