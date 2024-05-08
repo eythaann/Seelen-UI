@@ -62,9 +62,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: get version
-        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
-
       - name: setup node
         uses: actions/setup-node@v4
         with:
@@ -107,10 +104,11 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
             const fs = require('fs');
+            const packageJson = require('./package.json');
             await github.rest.repos.uploadReleaseAsset({
-              name: `Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`,
+              name: `Seelen.SeelenUI_${packageJson.version}_x64__p6yyn03m1894e.msix`,
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: `${process.env.releaseId}`,
-              data: fs.readFileSync(`./target/release/bundle/msix/Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`)
+              data: fs.readFileSync(`./target/release/bundle/msix/Seelen.SeelenUI_${packageJson.version}_x64__p6yyn03m1894e.msix`)
             });
