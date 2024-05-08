@@ -35,7 +35,7 @@ jobs:
             const changelogContent = fs.readFileSync('changelog.md', 'utf-8');
             const regex = new RegExp( `(?<=\\[${process.env.PACKAGE_VERSION}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
             const releaseNotes = changelogContent.match(regex)?.[0].trim() || '';
-          
+
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -47,7 +47,7 @@ jobs:
             });
             return data.id;
 
-  publish-tauri:
+  build-installers:
     needs: create-release
     permissions:
       contents: write
@@ -81,3 +81,22 @@ jobs:
         with:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           args: ${{ matrix.args }}
+
+      - name: Bundle MSIX
+        run: npm run build:msix
+
+      - name: Add msix to release files
+        uses: "actions/github-script@v7"
+        env:
+          releaseId: ${{ needs.create-release.outputs.release_id }}
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          script: |
+            const fs = require('fs').promises;
+            await github.rest.repos.uploadReleaseAsset({
+              name: `Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: ${{ env.releaseId }},
+              data: await fs.readFile(`./target/release/bundle/msix/Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`)  # The file to upload.
+            });
