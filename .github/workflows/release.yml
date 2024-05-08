@@ -103,11 +103,11 @@ jobs:
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
-            const fs = require('fs').promises;
+            const fs = require('fs');
             await github.rest.repos.uploadReleaseAsset({
               name: `Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: ${{ env.releaseId }},
-              data: await fs.readFile(`./target/release/bundle/msix/Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`)  # The file to upload.
+              release_id: `${process.env.releaseId}`,
+              data: fs.readFileSync(`./target/release/bundle/msix/Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`)  # The file to upload.
             });
