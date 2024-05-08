@@ -109,5 +109,5 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: `${process.env.releaseId}`,
-              data: fs.readFileSync(`./target/release/bundle/msix/Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`)  # The file to upload.
+              data: fs.readFileSync(`./target/release/bundle/msix/Seelen.SeelenUI_${process.env.PACKAGE_VERSION}_x64__p6yyn03m1894e.msix`)
             });
