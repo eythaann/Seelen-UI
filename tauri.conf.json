@@ -17,7 +17,7 @@
     "windows": []
   },
   "build": {
-    "beforeBuildCommand": "npm run prebuild && npm run build:ui",
+    "beforeBuildCommand": "npm run build:ui",
     "frontendDist": "dist"
   },
   "bundle": {
