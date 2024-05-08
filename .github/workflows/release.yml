@@ -67,10 +67,13 @@ jobs:
         with:
           node-version: lts/*
 
-      - name: install Rust stable
+      - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
 
-      - name: install MSIX dependencies
+      - name: Install winget
+        uses: Cyberboss/install-winget@v1
+
+      - name: Install MSIX dependencies
         if: matrix.platform == 'windows-latest'
         shell: powershell
         run: |
@@ -78,7 +81,7 @@ jobs:
           winget install -Id Microsoft.DotNet.DesktopRuntime.8
           winget install -Id MarcinOtorowski.MSIXHero
 
-      - name: install frontend dependencies
+      - name: Install frontend dependencies
         run: npm install
 
       - uses: tauri-apps/tauri-action@v0
