@@ -46,6 +46,7 @@ jobs:
             return data.id;
 
   publish-tauri:
+    needs: create-release
     permissions:
       contents: write
     strategy:
