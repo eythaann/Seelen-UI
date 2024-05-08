@@ -94,7 +94,7 @@ jobs:
           args: ${{ matrix.args }}
 
       - name: Bundle MSIX
-        run: npm run build:msix
+        run: npx ts-node scripts/bundle.msix.ts
 
       - name: Add msix to release files
         uses: "actions/github-script@v7"
