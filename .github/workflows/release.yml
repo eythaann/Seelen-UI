@@ -70,6 +70,13 @@ jobs:
       - name: install Rust stable
         uses: dtolnay/rust-toolchain@stable
 
+      - name: install MSIX dependencies
+        if: matrix.platform == 'windows-latest'
+        run: |
+          winget install -Id Microsoft.DotNet.AspNetCore.8
+          winget install -Id Microsoft.DotNet.DesktopRuntime.8
+          winget install -Id MarcinOtorowski.MSIXHero
+
       - name: install frontend dependencies
         run: npm install
 
