@@ -43,10 +43,11 @@ tauriConfig.bundle.resources.forEach((pattern) => {
 });
 
 try {
+  fs.mkdirSync(installer_msix_path.split(path.sep).slice(0, -1).join(path.sep), { recursive: true });
   fs.copyFileSync(msixTemplatePath, installer_msix_path);
 
   const buffer = execSync(`msixHeroCli edit "${installer_msix_path}" list "${msixCmdsPath}"`);
   console.info(buffer.toString());
-} catch (_error) {
-  //console.error('\n', error);
+} catch (error) {
+  console.error('\n', error);
 }
