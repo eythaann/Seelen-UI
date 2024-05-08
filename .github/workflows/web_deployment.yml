@@ -1,4 +1,4 @@
-name: Deploy Readable Types Website to Pages
+name: Deploy Website to Github Pages
 
 on:
   repository_dispatch:
