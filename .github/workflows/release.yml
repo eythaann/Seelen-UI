@@ -128,16 +128,16 @@ jobs:
         with:
           script: |
             const result = await github.rest.repos.listReleaseAssets({
-              owner,
-              repo,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               release_id: releaseId,
             });
 
             result.data.forEach(async (asset) => {
               if (asset.name.endsWith('.sig')) {
                 await github.rest.repos.deleteReleaseAsset({
-                  owner,
-                  repo,
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
                   asset_id: asset.id,
                 });
               }
