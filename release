@@ -1,0 +1,11 @@
+{
+  "version": "1.2.4",
+  "notes": "",
+  "pub_date": "2024-05-09T05:12:03.905Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUckRVZE10RjYxU0czY3B1VXQ1T1hCenRjOVFMV0wrVTRLU040TGlKQ2N4QkcwY3ZkZkU3aGRlbVpKN3BrKzdocXAxck4xbWFIZHFnbFcwRG9FSTJKZENFb2ZHaWNIQ2cwPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzE1MjMxNTIwCWZpbGU6U2VlbGVuIFVJXzEuMi40X3g2NC1zZXR1cC5uc2lzLnppcApGeWkwdytjSkswcWNYUHZETlFaamlhQ3A5OEZYSUJ6VUN5VVgyZ1dlTHh5SzZXWVRHRE1iYnU1REZuS1JrSUVLbXNWdzhJbjhvQXc5emNUVGZhT1NDQT09Cg==",
+      "url": "https://github.com/eythaann/Seelen-UI/releases/latest/download/Seelen.UI_1.2.4_x64-setup.nsis.zip"
+    }
+  }
+}
