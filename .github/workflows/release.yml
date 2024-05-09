@@ -130,7 +130,7 @@ jobs:
             const result = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: releaseId,
+              release_id: process.env.releaseId,
             });
 
             result.data.forEach(async (asset) => {
