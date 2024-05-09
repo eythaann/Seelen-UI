@@ -1,12 +1,11 @@
+import { RouteExtraInfo, RouteLabels } from '../navigation/routes';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { Button, Tooltip } from 'antd';
 
 import { LoadSettingsToStore, SaveStore } from '../../modules/shared/store/infra';
-
 import { useAppSelector } from '../../modules/shared/utils/infra';
-import { RootSelectors } from '../../modules/shared/store/app/selectors';
 
-import { RouteExtraInfo, RouteLabels } from '../navigation/routes';
+import { RootSelectors } from '../../modules/shared/store/app/selectors';
 
 import cs from './index.module.css';
 

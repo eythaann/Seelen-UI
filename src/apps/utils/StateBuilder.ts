@@ -1,7 +1,5 @@
-import { Action, ActionReducerMapBuilder, CaseReducer, createSlice, PayloadAction, Slice } from '@reduxjs/toolkit';
+import { Action, ActionReducerMapBuilder, CaseReducer, PayloadAction, Slice } from '@reduxjs/toolkit';
 import { cast, isStrictObject, prettify, TupleReduce } from 'readable-types';
-
-import { reducersFor, selectorsFor } from '../settings/modules/shared/utils/app';
 
 export type SelectorsFor<T extends anyObject> = { [K in keyof T]: (state: T) => T[K] };
 export type ReducersFor<T> = {
@@ -22,7 +20,7 @@ export type SelectorFor2<State extends anyObject, Current = State> = $if<isStric
   else: (state: State) => Current;
 }>;
 
-export class StateBuilder<Name extends string, Slices extends Slice[]> {
+export class StateBuilder {
   static selectorsFor<T extends anyObject>(state: T): SelectorsFor<T> {
     const selectors = {} as SelectorsFor<T>;
     for (const key in state) {

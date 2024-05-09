@@ -10,7 +10,8 @@
     "prebuild": "ts-node scripts/prebuild.ts",
     "build:ui": "ts-node scripts/build.ts",
     "build:schemas": "ts-node scripts/createJsonSchemas.ts",
-    "lint": "eslint ./**/** --fix --max-warnings 0",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0",
     "postversion": "npm run build && ts-node scripts/postversion.ts"
   },
   "keywords": [],

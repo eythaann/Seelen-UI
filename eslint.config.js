@@ -4,8 +4,10 @@ const tsEslint = require('typescript-eslint');
 
 module.exports = [
   {
+    ignores: ['node_modules/', '.git/', 'dist/', 'target/'],
+  },
+  {
     files: ['**/*.{js,jsx,ts,tsx,mjs}'],
-    ignores: ['node_modules/**/*', 'dist/**/*'],
     plugins: {
       '@stylistic': stylistic,
       'simple-import-sort': simpleImportSort,

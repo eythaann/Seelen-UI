@@ -3,6 +3,7 @@ import { InputNumber } from 'antd';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../../shared/utils/infra';
+
 import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
