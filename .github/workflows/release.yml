@@ -8,10 +8,22 @@ on:
   workflow_dispatch:
 
 jobs:
+  run-tests-and-linter:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+      - run: npm clean-install
+      - run: npm run lint
+      - run: npm run test
+
   create-release:
     permissions:
       contents: write
     runs-on: ubuntu-latest
+    needs: run-tests-and-linter
     outputs:
       release_id: ${{ steps.create-release.outputs.result }}
 
@@ -116,7 +128,7 @@ jobs:
             });
 
   publish-release:
-    needs: build-installers
+    needs: [build-installers, create-release]
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -126,6 +138,7 @@ jobs:
         env:
           releaseId: ${{ needs.create-release.outputs.release_id }}
         with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
             const result = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
