@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.2.4]
 ### enhancements
 - Automatic MSIX bundle.
 - Add Github Actions for Releases.
