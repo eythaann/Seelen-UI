@@ -111,7 +111,7 @@ jobs:
               name: `Seelen.SeelenUI_${packageVersion}_x64__p6yyn03m1894e.msix`,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: `${process.env.releaseId}`,
+              release_id: process.env.releaseId,
               data: fs.readFileSync(`./target/release/bundle/msix/Seelen.SeelenUI_${packageVersion}_x64__p6yyn03m1894e.msix`)
             });
 
@@ -130,7 +130,7 @@ jobs:
             const result = await github.rest.repos.listReleaseAssets({
               owner,
               repo,
-              release_id: releaseId,
+              release_id: process.env.releaseId,
             });
 
             result.data.forEach(async (asset) => {
@@ -146,6 +146,6 @@ jobs:
             await github.rest.repos.updateRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: `${process.env.releaseId}`,
+              release_id: process.env.releaseId,
               draft: false,
             });
