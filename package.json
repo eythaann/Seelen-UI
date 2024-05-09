@@ -8,7 +8,6 @@
     "dev": "nodemon --config nodemon.json",
     "test": "jest",
     "prebuild": "ts-node scripts/prebuild.ts",
-    "build": "tauri build && ts-node scripts/bundle.msix.ts",
     "build:ui": "ts-node scripts/build.ts",
     "build:schemas": "ts-node scripts/createJsonSchemas.ts",
     "lint": "eslint ./**/** --fix --max-warnings 0",

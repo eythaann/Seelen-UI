@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- Automatic MSIX bundle.
+- Add Github Actions for Releases.
+- Add Github Actions for Web Page.
+
 ## [1.2.3]
 ### features
 - Allow customize Fancy Toolbar modules using placeholders yaml files.
