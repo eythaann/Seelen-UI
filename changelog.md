@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.3.0]
 ### features
 - Allow pin apps on Open using Apps Configurations.
 - Allow changes Shortcuts using UI.
