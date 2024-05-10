@@ -32,6 +32,10 @@ export class VariableConvention {
     return snake;
   }
 
+  static camelToUser(text: string) {
+    return VariableConvention.snakeToCamel(text).replace(/_/g, ' ');
+  }
+
   static deepKeyParser(obj: anyObject, parser: (text: string) => string): anyObject {
     if (Array.isArray(obj)) {
       return obj.map((x) => {

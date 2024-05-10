@@ -140,9 +140,13 @@ impl AppIdentifier {
 
 #[derive(Clone, Debug, Deserialize)]
 pub struct AppConfig {
+    #[allow(dead_code)]
     name: String,
+    #[allow(dead_code)]
     category: Option<String>,
+    #[allow(dead_code)]
     bound_monitor_idx: Option<usize>,
+    #[allow(dead_code)]
     bound_workspace_name: Option<String>,
     identifier: AppIdentifier,
     options: Option<Vec<AppExtraFlag>>,

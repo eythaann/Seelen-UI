@@ -1,3 +1,4 @@
+import { VariableConvention } from '../../../utils/schemas';
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Input, Switch, Tooltip } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,15 +49,18 @@ export function Shortcuts() {
 
       <SettingsGroup>
         {
-          Object.entries(ahkVariables).map(([name, value]) => (
-            <SettingsOption key={name}>
-              <div>{name}</div>
-              <Input
-                value={value.fancy}
-                onKeyDown={(e) => onChangeVar(name, e)}
-              />
-            </SettingsOption>
-          ))
+          Object.entries(ahkVariables).map(([name, value]) => {
+            let label = VariableConvention.camelToUser(name);
+            return (
+              <SettingsOption key={name}>
+                <div>{label[0]?.toUpperCase() + label.slice(1)}</div>
+                <Input
+                  value={value.fancy}
+                  onKeyDown={(e) => onChangeVar(name, e)}
+                />
+              </SettingsOption>
+            );
+          })
         }
       </SettingsGroup>
     </div>
