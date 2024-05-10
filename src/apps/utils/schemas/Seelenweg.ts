@@ -5,6 +5,12 @@ export enum SeelenWegMode {
   MIN_CONTENT = 'Min-Content',
 }
 
+export enum SeelenWegHideMode {
+  Never = 'Never',
+  Always = 'Always',
+  OnOverlap = 'On-Overlap',
+}
+
 export enum SeelenWegSide {
   LEFT = 'Left',
   RIGHT = 'Right',
@@ -15,6 +21,7 @@ export enum SeelenWegSide {
 export const SeelenWegSchema = z.object({
   enabled: z.boolean().default(true),
   mode: z.nativeEnum(SeelenWegMode).default(SeelenWegMode.MIN_CONTENT),
+  hide_mode: z.nativeEnum(SeelenWegHideMode).default(SeelenWegHideMode.OnOverlap),
   position: z.nativeEnum(SeelenWegSide).default(SeelenWegSide.BOTTOM),
   visible_separators: z.boolean().default(true),
   size: z.number().positive().default(40).describe('Item size in pixels'),
@@ -28,6 +35,7 @@ type inner = z.infer<typeof SeelenWegSchema> & {};
 export interface Seelenweg {
   enabled: inner['enabled'];
   mode: inner['mode'];
+  hideMode: inner['hide_mode'];
   position: inner['position'];
   visibleSeparators: inner['visible_separators'];
   size: inner['size'];

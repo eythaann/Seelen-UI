@@ -1,4 +1,4 @@
-import { SeelenWegMode, SeelenWegSide } from '../../../utils/schemas/Seelenweg';
+import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../utils/schemas/Seelenweg';
 import { cx } from '../../../utils/styles';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
@@ -33,11 +33,11 @@ export function SeelenWeg() {
   const pinnedOnCenter = useSelector(Selectors.pinnedOnCenter);
   const pinnedOnRight = useSelector(Selectors.pinnedOnRight);
 
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
 
   const refs = useRef<HTMLDivElement[]>([]);
   const separatorRefs = useRef<HTMLDivElement[]>([]);
-  const lenghtsRefs = useRef<number[]>([]);
+  const lengthsRefs = useRef<number[]>([]);
 
   const shouldAnimate = useRef(false);
   const mousePos = useRef({
@@ -48,9 +48,9 @@ export function SeelenWeg() {
   const dispatch = useDispatch();
 
   useAppBlur(() => {
-    setHidden(true);
+    setHidden(settings.hideMode !== SeelenWegHideMode.Never);
     shouldAnimate.current = false;
-  });
+  }, [settings]);
 
   useAppActivation(() => {
     setHidden(false);
@@ -63,7 +63,7 @@ export function SeelenWeg() {
     separatorRefs.current = Array.from(
       document.getElementsByClassName('weg-separator'),
     ) as HTMLDivElement[];
-    lenghtsRefs.current = [pinnedOnLeft.length, pinnedOnCenter.length, pinnedOnRight.length];
+    lengthsRefs.current = [pinnedOnLeft.length, pinnedOnCenter.length, pinnedOnRight.length];
   });
 
   const getSeparatorComplementarySize = useCallback(
@@ -107,12 +107,12 @@ export function SeelenWeg() {
 
       if (isFullWidth) {
         const complementarySize1 = getSeparatorComplementarySize(
-          lenghtsRefs.current[0]!,
-          lenghtsRefs.current[1]!,
+          lengthsRefs.current[0]!,
+          lengthsRefs.current[1]!,
         );
         const complementarySize2 = getSeparatorComplementarySize(
-          lenghtsRefs.current[2]!,
-          lenghtsRefs.current[1]!,
+          lengthsRefs.current[2]!,
+          lengthsRefs.current[1]!,
         );
 
         if (isHorizontal) {
@@ -127,9 +127,9 @@ export function SeelenWeg() {
       return;
     }
 
-    const stop1 = lenghtsRefs.current[0]!;
-    const stop2 = stop1 + lenghtsRefs.current[1]!;
-    const stop3 = stop2 + lenghtsRefs.current[2]!;
+    const stop1 = lengthsRefs.current[0]!;
+    const stop2 = stop1 + lengthsRefs.current[1]!;
+    const stop3 = stop2 + lengthsRefs.current[2]!;
     refs.current.forEach((child, index) => {
       const node = child as HTMLElement;
       const rect = (node as HTMLDivElement).getBoundingClientRect();
@@ -149,9 +149,9 @@ export function SeelenWeg() {
       );
 
       const maxMargin = (settings.zoomSize - settings.size) / 5;
-      const distancemargin = Math.min(MAX_CURSOR_DISTANCE_MARGIN, distanceFromBorder);
+      const distanceMargin = Math.min(MAX_CURSOR_DISTANCE_MARGIN, distanceFromBorder);
       const marginSize =
-        ((MAX_CURSOR_DISTANCE_MARGIN - distancemargin) / MAX_CURSOR_DISTANCE_MARGIN) * maxMargin;
+        ((MAX_CURSOR_DISTANCE_MARGIN - distanceMargin) / MAX_CURSOR_DISTANCE_MARGIN) * maxMargin;
 
       node.style.width = newSize + 'px';
       node.style.height = newSize + 'px';
@@ -196,7 +196,7 @@ export function SeelenWeg() {
     mousePos.current.y = event.clientY;
   }, []);
 
-  const onReorderPinneds = useCallback((apps: (Separator | App)[]) => {
+  const onReorderPinned = useCallback((apps: (Separator | App)[]) => {
     let extractedPinned: App[] = [];
 
     apps.forEach((app) => {
@@ -227,14 +227,14 @@ export function SeelenWeg() {
     <Reorder.Group
       onMouseMove={onMouseMove}
       values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
-      onReorder={onReorderPinneds}
+      onReorder={onReorderPinned}
       axis={isHorizontal ? 'x' : 'y'}
       as="div"
       className={cx('taskbar', settings.position.toLowerCase(), {
         horizontal: isHorizontal,
         vertical: !isHorizontal,
         'full-width': settings.mode === SeelenWegMode.FULL_WIDTH,
-        hidden: isOverlaped && hidden,
+        hidden: (isOverlaped || settings.hideMode === SeelenWegHideMode.Always) && hidden,
       })}
     >
       <BackgroundByLayers prefix="taskbar" styles={theme?.seelenweg.backgroundLayers || []} />

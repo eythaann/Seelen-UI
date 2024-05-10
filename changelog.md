@@ -5,6 +5,7 @@
 - Allow pin apps on Open using Apps Configurations.
 - Allow changes Shortcuts using UI.
 - Allow Binary Conditions in Apps Configurations Identifiers.
+- Allow change the Auto hide behavior for Seelenweg.
 
 ### enhancements
 - Close AHK by itself if app is crashed or forcedly closed.

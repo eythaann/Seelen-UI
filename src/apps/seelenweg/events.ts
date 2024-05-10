@@ -1,5 +1,5 @@
 import { toPhysicalPixels } from '../utils';
-import { SeelenWegSide } from '../utils/schemas/Seelenweg';
+import { SeelenWegHideMode, SeelenWegSide } from '../utils/schemas/Seelenweg';
 import { debounce, TimeoutIdRef } from '../utils/Timing';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
 import { emitTo } from '@tauri-apps/api/event';
@@ -22,19 +22,20 @@ export const setWindowSize = () => {
 };
 
 export const updateHitbox = debounce(() => {
-  const { isOverlaped, settings: { position } } = store.getState();
+  const { isOverlaped, settings: { position, hideMode } } = store.getState();
 
+  const isAutoHideOn = (hideMode !== SeelenWegHideMode.Never && isOverlaped) || hideMode === SeelenWegHideMode.Always;
   const isHorizontal = position === SeelenWegSide.TOP || position === SeelenWegSide.BOTTOM;
 
-  const overlapedY = position === SeelenWegSide.TOP ? 0 : toPhysicalPixels(window.screen.height) - 1;
-  const overlapedX = position === SeelenWegSide.LEFT ? 0 : toPhysicalPixels(window.screen.width) - 1;
+  const hiddenOffsetTop = position === SeelenWegSide.TOP ? 0 : toPhysicalPixels(window.screen.height) - 1;
+  const hiddenOffsetLeft = position === SeelenWegSide.LEFT ? 0 : toPhysicalPixels(window.screen.width) - 1;
   emitTo('seelenweg-hitbox', 'move', {
-    x: isOverlaped && !isHorizontal ? overlapedX : toPhysicalPixels(root_container.offsetLeft),
-    y: isOverlaped && isHorizontal ? overlapedY : toPhysicalPixels(root_container.offsetTop),
+    x: isAutoHideOn && !isHorizontal ? hiddenOffsetLeft : toPhysicalPixels(root_container.offsetLeft),
+    y: isAutoHideOn && isHorizontal ? hiddenOffsetTop : toPhysicalPixels(root_container.offsetTop),
   });
   emitTo('seelenweg-hitbox', 'resize', {
-    width: isOverlaped && !isHorizontal ? 1 : toPhysicalPixels(root_container.offsetWidth),
-    height: isOverlaped && isHorizontal ? 1 : toPhysicalPixels(root_container.offsetHeight),
+    width: isAutoHideOn && !isHorizontal ? 1 : toPhysicalPixels(root_container.offsetWidth),
+    height: isAutoHideOn && isHorizontal ? 1 : toPhysicalPixels(root_container.offsetHeight),
   });
 }, 300);
 

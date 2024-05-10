@@ -1,4 +1,4 @@
-import { SeelenWegMode, SeelenWegSide } from '../../../utils/schemas/Seelenweg';
+import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../utils/schemas/Seelenweg';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 
@@ -37,6 +37,15 @@ export const SeelenWegSettings = () => {
               value={settings.mode}
               options={OptionsFromEnum(SeelenWegMode)}
               onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <div>Auto Hide</div>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.hideMode}
+              options={OptionsFromEnum(SeelenWegHideMode)}
+              onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
             />
           </SettingsOption>
           <SettingsOption>
