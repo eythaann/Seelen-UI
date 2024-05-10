@@ -110,13 +110,6 @@
     matching_strategy: Legacy
   options:
     - unmanage
-- name: Discord
-  identifier:
-    id: Discord.exe
-    kind: Exe
-    matching_strategy: Equals
-  options:
-    - force
 - name: Dropbox.exe
   identifier:
     id: Dropbox.exe
@@ -236,13 +229,6 @@
     matching_strategy: Equals
   options:
     - force
-- name: '#32770'
-  identifier:
-    id: '#32770'
-    kind: Class
-    matching_strategy: Legacy
-  options:
-    - unmanage
 - name: _WwB
   identifier:
     id: _WwB
@@ -551,13 +537,6 @@
     matching_strategy: Equals
   options:
     - unmanage
-- name: Windows Console (conhost.exe)
-  identifier:
-    id: ConsoleWindowClass
-    kind: Class
-    matching_strategy: Equals
-  options:
-    - force
 - name: OperationStatusWindow
   identifier:
     id: OperationStatusWindow

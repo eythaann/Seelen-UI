@@ -3,9 +3,14 @@
 ## [Unreleased]
 ### features
 - Allow pin apps on Open using Apps Configurations.
+- Allow changes Shortcuts using UI.
 
 ### enhancements
+- Close AHK by itself if app is crashed or forcedly closed.
 - Configurations by apps are enabled again.
+
+### fix
+- Ahk not closing on app close or when user change options.
 
 ## [1.2.4]
 ### enhancements

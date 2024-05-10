@@ -28,7 +28,7 @@ pub enum AllowedFocus {
     Right,
     Up,
     Down,
-    Lastest,
+    Latest,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize, ValueEnum)]

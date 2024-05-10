@@ -23,7 +23,7 @@ export class VariableConvention {
     let snake = '';
     for (let i = 0; i < text.length; i++) {
       const char = text[i]!;
-      if (char === char.toLowerCase() || i === 0) {
+      if ((char === char.toLowerCase() && !char.match(/[0-9]/)) || i === 0) {
         snake += char.toLowerCase();
       } else {
         snake += `_${char.toLowerCase()}`;

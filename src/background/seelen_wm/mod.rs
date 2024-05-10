@@ -138,7 +138,8 @@ impl WindowManager {
         }
 
         log::trace!(
-            "Adding {} <=> {:?} on desktop: {}",
+            "Adding {}({}) <=> {:?} on desktop: {}",
+            WindowsApi::exe(hwnd).unwrap_or_default(),
             hwnd.0,
             WindowsApi::get_window_text(hwnd),
             desktop_to_add

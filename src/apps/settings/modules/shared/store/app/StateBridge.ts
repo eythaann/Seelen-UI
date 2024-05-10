@@ -83,7 +83,7 @@ export const StaticSettingsToState = (
 };
 
 export const StateToJsonSettings = (state: RootState): ISettings => {
-  return pick(state, ['windowManager', 'seelenweg', 'monitors', 'selectedTheme', 'ahkEnabled', 'fancyToolbar']);
+  return pick(state, ['windowManager', 'seelenweg', 'monitors', 'selectedTheme', 'ahkEnabled', 'fancyToolbar', 'ahkVariables']);
 };
 
 export const StateAppsToYamlApps = (

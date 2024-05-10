@@ -36,9 +36,4 @@ export const AppsTemplates: AppTemplateDeclaration[] = [
     description: 'General settings devs 💻.',
     path: 'development.yml',
   },
-  {
-    name: 'Javascript Development',
-    description: 'Settings devs focus on Javascript enviroment.',
-    path: 'js-development.yml',
-  },
 ];

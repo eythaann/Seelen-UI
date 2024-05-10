@@ -1,20 +1,27 @@
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
-import { Switch, Tooltip } from 'antd';
-import { useDispatch } from 'react-redux';
-
-import { useAppSelector } from '../shared/utils/infra';
+import { Input, Switch, Tooltip } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { RootActions } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
+import { AhkVariablesActions, KeyCodeToAHK } from './app';
 
 export function Shortcuts() {
-  const ahkEnable = useAppSelector(RootSelectors.ahkEnabled);
+  const ahkEnable = useSelector(RootSelectors.ahkEnabled);
+  const ahkVariables = useSelector(RootSelectors.ahkVariables);
 
   const dispatch = useDispatch();
 
-  const onChange = (value: boolean) => {
+  const onChangeEnabled = (value: boolean) => {
     dispatch(RootActions.setAhkEnabled(value));
     dispatch(RootActions.setToBeSaved(true));
+  };
+
+  const onChangeVar = (name: string, e: React.KeyboardEvent<HTMLInputElement>) => {
+    const result = KeyCodeToAHK(e);
+    if (result) {
+      dispatch(AhkVariablesActions.setVariable({ name, value: result }));
+    }
   };
 
   return (
@@ -29,7 +36,7 @@ export function Shortcuts() {
               🛈
             </Tooltip>
           </span>
-          <Switch value={ahkEnable} onChange={onChange} />
+          <Switch value={ahkEnable} onChange={onChangeEnabled} />
         </SettingsOption>
       </SettingsGroup>
 
@@ -37,6 +44,20 @@ export function Shortcuts() {
         <SettingsOption>
           <div>Configurable shortcuts using UI is in progress</div>
         </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        {
+          Object.entries(ahkVariables).map(([name, value]) => (
+            <SettingsOption key={name}>
+              <div>{name}</div>
+              <Input
+                value={value.fancy}
+                onKeyDown={(e) => onChangeVar(name, e)}
+              />
+            </SettingsOption>
+          ))
+        }
       </SettingsGroup>
     </div>
   );

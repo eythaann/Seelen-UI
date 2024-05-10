@@ -18,7 +18,7 @@ export enum FocusAction {
   Right = 'Right',
   Up = 'Up',
   Down = 'Down',
-  Lastest = 'Lastest',
+  Latest = 'Latest',
 }
 
 export interface RootState extends IRootState<WindowManager> {

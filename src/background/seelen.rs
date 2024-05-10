@@ -172,8 +172,9 @@ impl Seelen {
     pub fn start_ahk_shortcuts(&self) -> Result<()> {
         if self.state.is_ahk_enabled() {
             run_ahk_file(self.handle(), "seelen.ahk")?;
+
             if self.state.is_window_manager_enabled() {
-                run_ahk_file(self.handle(), "seelen.wm.ahk")?;
+                log_if_error(run_ahk_file(self.handle(), "seelen.wm.ahk"));
             }
         }
         Ok(())
@@ -181,7 +182,6 @@ impl Seelen {
 
     pub fn kill_ahk_shortcuts(&self) {
         log::trace!("Killing AHK shortcuts");
-
         self.handle()
             .shell()
             .command("powershell")
@@ -190,7 +190,7 @@ impl Seelen {
                 "Bypass",
                 "-NoProfile",
                 "-Command",
-                r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*target\debug\*seelen*.ahk' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
+                r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*static\redis\AutoHotkey.exe*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
             ])
             .spawn()
             .expect("Failed to close ahk");

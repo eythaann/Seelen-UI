@@ -160,7 +160,7 @@ export const RootSlice = createSlice({
         return console.error('No last managed window found.');
       }
 
-      if (action.payload === FocusAction.Lastest) {
+      if (action.payload === FocusAction.Latest) {
         invoke('request_focus', { hwnd: state.lastManagedActivated });
         return;
       }

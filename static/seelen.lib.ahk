@@ -3,8 +3,19 @@
  * If you want to introduce your own implementation for shortcuts with AHK or any other scripting language
  * just disable Seelen UI intergrated shortcuts in the shortcuts tab, and this file will be ignored.
 */
+#Requires AutoHotkey v2.0
+#SingleInstance Force
 
 global seelen := A_ScriptDir . "\..\Seelen UI.exe"
+
+/** Close the AHK if app is crashed or forced to close */
+CloseIfNotRunning() {
+  if ProcessExist("Seelen UI.exe") == 0 {
+    ExitApp()
+  }
+  SetTimer(CloseIfNotRunning, 1000)
+}
+
 Reserve(reservation) {
   RunWait(seelen " wm reserve " reservation, , "Hide")
 }

@@ -2,7 +2,7 @@ import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, VariableConvention } from '../../../../utils/schemas';
 import { Layout, LayoutSchema } from '../../../../utils/schemas/Layout';
 import { Placeholder, PlaceholderSchema } from '../../../../utils/schemas/Placeholders';
-import { SettingsSchema } from '../../../../utils/schemas/Settings';
+import { AhkVariables, SettingsSchema } from '../../../../utils/schemas/Settings';
 import { Theme, ThemeSchema } from '../../../../utils/schemas/Theme';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
@@ -34,7 +34,12 @@ async function loadUserThemes(ref: UserSettings) {
         sanitizedTheme.info.displayName = entry.name;
       }
 
-      const cssFilePath = await path.join(await path.resourceDir(), 'static', 'themes', entry.name.replace('.json', '.css'));
+      const cssFilePath = await path.join(
+        await path.resourceDir(),
+        'static',
+        'themes',
+        entry.name.replace('.json', '.css'),
+      );
       if (await fs.exists(cssFilePath)) {
         sanitizedTheme.info.cssFileUrl = convertFileSrc(cssFilePath);
       }
@@ -62,7 +67,9 @@ async function loadUserLayouts(ref: UserSettings) {
 
   for (const entry of entries) {
     if (entry.isFile && entry.name.endsWith('.json')) {
-      let layout: Layout = JSON.parse(await fs.readTextFile(await path.join(layoutsPath, entry.name)));
+      let layout: Layout = JSON.parse(
+        await fs.readTextFile(await path.join(layoutsPath, entry.name)),
+      );
       layout = parseAsCamel(LayoutSchema, layout);
 
       const sanitizedLayout: Layout = {
@@ -99,7 +106,9 @@ async function loadUserPlaceholders(ref: UserSettings) {
 
   for (const entry of entries) {
     if (entry.isFile && entry.name.endsWith('.yml')) {
-      let _placeholder = yaml.load(await fs.readTextFile(await path.join(placeholderPath, entry.name)));
+      let _placeholder = yaml.load(
+        await fs.readTextFile(await path.join(placeholderPath, entry.name)),
+      );
       let placeholder = parseAsCamel(PlaceholderSchema, _placeholder) as Placeholder;
 
       placeholder.info.filename = entry.name;
@@ -132,11 +141,15 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     env: await invoke('get_user_envs'),
   };
 
-  const json_route = route || await path.join(await path.homeDir(), '.config/seelen/settings.json');
+  const json_route =
+    route || (await path.join(await path.homeDir(), '.config/seelen/settings.json'));
   const yaml_route = await path.join(await path.homeDir(), '.config/seelen/applications.yml');
 
   if (await fs.exists(json_route)) {
-    userSettings.jsonSettings = parseAsCamel(SettingsSchema, JSON.parse(await fs.readTextFile(json_route)));
+    userSettings.jsonSettings = parseAsCamel(
+      SettingsSchema,
+      JSON.parse(await fs.readTextFile(json_route)),
+    );
   }
 
   if (await fs.exists(yaml_route)) {
@@ -171,17 +184,36 @@ export async function loadAppsTemplates() {
   return result;
 }
 
+export async function createAhkFiles(ahkVariables: AhkVariables) {
+  const staticPath = await path.join(await path.resourceDir(), 'static');
+  const entries = await fs.readDir(staticPath);
+
+  for (const entry of entries) {
+    if (entry.isFile && entry.name.endsWith('.ahk.template')) {
+      let content = await fs.readTextFile(await path.join(staticPath, entry.name));
+      content = content.replace(/{{(.*?)}}/g, (match, varname) => {
+        return ahkVariables[varname]?.ahk || match;
+      });
+      await fs.writeTextFile(await path.join(staticPath, entry.name.replace('.template', '')), content);
+    }
+  }
+}
+
 export async function saveUserSettings(settings: UserSettings) {
   const json_route = await path.join(await path.homeDir(), '.config/seelen/settings.json');
   const yaml_route = await path.join(await path.homeDir(), '.config/seelen/applications.yml');
 
   if (settings.jsonSettings.ahkEnabled) {
+    await createAhkFiles(settings.jsonSettings.ahkVariables);
     invoke('start_seelen_shortcuts');
   } else {
     invoke('kill_seelen_shortcuts');
   }
 
-  await fs.writeTextFile(json_route, JSON.stringify(VariableConvention.fromCamelToSnake(settings.jsonSettings)));
+  await fs.writeTextFile(
+    json_route,
+    JSON.stringify(VariableConvention.fromCamelToSnake(settings.jsonSettings)),
+  );
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
 }
 

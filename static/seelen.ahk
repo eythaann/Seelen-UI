@@ -9,6 +9,8 @@
 
 #Include seelen.lib.ahk
 
+CloseIfNotRunning()
+
 ; Open Settings
 #k:: RunWait("..\Seelen UI.exe settings")
 

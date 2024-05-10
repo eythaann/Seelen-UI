@@ -7,6 +7,14 @@
       - id: Steam
         kind: Title
         matching_strategy: equals
-        negate: true
+        negation: true
+  options:
+    - unmanage
+
+- name: Steam Apps/Games
+  identifier:
+    id: steamapps
+    kind: path
+    matching_strategy: contains
   options:
     - unmanage

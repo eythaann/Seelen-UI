@@ -70,16 +70,22 @@ pub fn is_windows_11() -> bool {
 pub fn run_ahk_file(handle: &AppHandle<Wry>, ahk_file: &str) -> Result<()> {
     log::trace!("Starting AHK: {}", ahk_file);
 
-    let ahk_path = handle
+    let ahk_script_path = handle
         .path()
-        .resolve("static/redis/AutoHotkey.exe", BaseDirectory::Resource)?
+        .resolve(format!("static/{}", ahk_file), BaseDirectory::Resource)?;
+
+    if !ahk_script_path.exists() {
+        return Err(format!("AHK script not found: {}", ahk_file).into());
+    }
+
+    let ahk_script_path = ahk_script_path
         .to_string_lossy()
         .trim_start_matches(r"\\?\")
         .to_owned();
 
-    let ahk_script_path = handle
+    let ahk_path = handle
         .path()
-        .resolve(format!("static/{}", ahk_file), BaseDirectory::Resource)?
+        .resolve("static/redis/AutoHotkey.exe", BaseDirectory::Resource)?
         .to_string_lossy()
         .trim_start_matches(r"\\?\")
         .to_owned();

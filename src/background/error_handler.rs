@@ -20,6 +20,7 @@ macro_rules! define_app_errors {
 }
 
 define_app_errors!(
+    Generic(String);
     Io(std::io::Error);
     Tauri(tauri::Error);
     TauriShell(tauri_plugin_shell::Error);

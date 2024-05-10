@@ -7,7 +7,6 @@
     "tauri": "tauri",
     "dev": "nodemon --config nodemon.json",
     "test": "jest",
-    "prebuild": "ts-node scripts/prebuild.ts",
     "build:ui": "ts-node scripts/build.ts",
     "build:schemas": "ts-node scripts/createJsonSchemas.ts",
     "lint": "eslint . --max-warnings 0",

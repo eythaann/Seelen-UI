@@ -67,7 +67,7 @@ pub struct AppIdentifier {
     id: String,
     kind: AppIdentifierType,
     matching_strategy: MatchingStrategy,
-    negate: Option<bool>,
+    negation: Option<bool>,
     and: Option<Vec<AppIdentifier>>,
     or: Option<Vec<AppIdentifier>>,
 }
@@ -120,7 +120,7 @@ impl AppIdentifier {
             },
         };
 
-        if self.negate.is_some_and(|negation| negation) {
+        if self.negation.is_some_and(|negation| negation) {
             self_result = !self_result;
         }
 

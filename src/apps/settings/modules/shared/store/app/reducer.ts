@@ -6,6 +6,7 @@ import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
 import { MonitorsSlice } from '../../../monitors/main/app';
 import { SeelenWegSlice } from '../../../seelenweg/app';
+import { AhkVariablesSlice } from '../../../shortcuts/app';
 import { SeelenManagerSlice } from '../../../WindowManager/main/app';
 import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 
@@ -22,6 +23,7 @@ const initialState: RootState = {
   appsConfigurations: AppsConfigSlice.getInitialState(),
   appsTemplates: [],
   ahkEnabled: true,
+  ahkVariables: AhkVariablesSlice.getInitialState(),
   availableThemes: [],
   availableLayouts: [],
   availablePlaceholders: [],
@@ -64,6 +66,10 @@ export const RootSlice = createSlice({
       .addMatcher(matcher(FancyToolbarSlice), (state, action) => {
         state.toBeSaved = true;
         state.fancyToolbar = FancyToolbarSlice.reducer(state.fancyToolbar, action);
+      })
+      .addMatcher(matcher(AhkVariablesSlice), (state, action) => {
+        state.toBeSaved = true;
+        state.ahkVariables = AhkVariablesSlice.reducer(state.ahkVariables, action);
       });
   },
 });

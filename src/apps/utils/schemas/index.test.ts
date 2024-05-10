@@ -11,7 +11,7 @@ describe('VariableConvention', () => {
     expect(VariableConvention.camelToSnake('HelloWorld')).toBe('hello_world');
     expect(VariableConvention.camelToSnake('helloWorld')).toBe('hello_world');
     expect(VariableConvention.camelToSnake('testingSnakeCaseText')).toBe('testing_snake_case_text');
-    expect(VariableConvention.camelToSnake('helloWorld123')).toBe('hello_world123');
+    expect(VariableConvention.camelToSnake('helloWorld123')).toBe('hello_world_1_2_3');
   });
 
   test('deepKeyParser', () => {
@@ -26,7 +26,7 @@ describe('VariableConvention', () => {
           },
           arrayCamelCase: [
             {
-              deepCamelCase: 'text',
+              deepCamelCase0: 'text',
             },
             'text',
           ],
@@ -45,7 +45,7 @@ describe('VariableConvention', () => {
           },
           array_camel_case: [
             {
-              deep_camel_case: 'text',
+              deep_camel_case_0: 'text',
             },
             'text',
           ],
