@@ -21,6 +21,7 @@ body {
     overflow: hidden;
     text-wrap: nowrap;
     display: flex;
+    justify-content: space-between;
 
     .ft-bar-left,
     .ft-bar-center,
@@ -40,6 +41,7 @@ body {
     }
 
     .ft-bar-center {
+      z-index: 2;
       position: absolute;
       padding: 0 5%;
       height: 100%;

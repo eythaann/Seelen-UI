@@ -13,5 +13,8 @@
   },
   "seelenweg": {
     "backgroundLayers": 2
+  },
+  "toolbar": {
+    "backgroundLayers": 2
   }
 }

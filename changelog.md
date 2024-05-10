@@ -9,6 +9,7 @@
 - Close AHK by itself if app is crashed or forcedly closed.
 - Configurations by apps are enabled again.
 - Allow open settings file from Extras/Information
+- Add opacity to toolbar (theme: default)
 
 ### fix
 - Ahk not closing on app close or when user change options.
