@@ -54,4 +54,22 @@ export function wrapConsole() {
     WebConsole.trace(...params);
     Logger.trace(StrintifyParams(params));
   };
+
+  disableRefreshAndContextMenu();
+}
+
+export function disableRefreshAndContextMenu() {
+  document.addEventListener('keydown', function (event) {
+    if (
+      event.key === 'F5' ||
+      (event.ctrlKey && event.key === 'r') ||
+      (event.metaKey && event.key === 'r')
+    ) {
+      event.preventDefault();
+    }
+  });
+
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+  });
 }

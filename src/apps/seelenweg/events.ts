@@ -42,8 +42,6 @@ export function registerDocumentEvents() {
   const timeoutId: TimeoutIdRef = { current: null };
   const webview = getCurrent();
 
-  document.addEventListener('contextmenu', (event) => event.preventDefault());
-
   const onMouseLeave = debounce(() => {
     webview.setIgnoreCursorEvents(true);
     ExtraCallbacksOnLeave.execute();
