@@ -1,16 +1,13 @@
 import { UserSettings } from '../../../../../../shared.interfaces';
+import { parseAsCamel, VariableConvention } from '../../../../../utils/schemas';
+import { IdWithIdentifierSchema } from '../../../../../utils/schemas/AppsConfigurations';
 import { ISettings } from '../../../../../utils/schemas/Settings';
 import { pick } from 'lodash';
 
-import {
-  AppConfiguration,
-  ApplicationIdentifier,
-  ApplicationOptions,
-  MatchingStrategy,
-} from '../../../appsConfigurations/domain';
+import { AppConfiguration, ApplicationOptions } from '../../../appsConfigurations/domain';
 import { RootState } from '../domain';
 
-export const YamlToState_Apps = (yaml: anyObject[], json?: ISettings): AppConfiguration[] => {
+export const YamlToState_Apps = (yaml: anyObject[]): AppConfiguration[] => {
   const apps: AppConfiguration[] = [];
 
   yaml.forEach((ymlApp: anyObject) => {
@@ -25,41 +22,16 @@ export const YamlToState_Apps = (yaml: anyObject[], json?: ISettings): AppConfig
         category: ymlApp.category || null,
         monitor: ymlApp.bound_monitor ?? null,
         workspace: ymlApp.bound_workspace || null,
-        identifier: ymlApp.identifier.id,
-        kind: ymlApp.identifier.kind as ApplicationIdentifier,
-        matchingStrategy:
-          (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
+        identifier: parseAsCamel(IdWithIdentifierSchema, ymlApp.identifier),
         // options
         [ApplicationOptions.Float]: ymlApp.options?.includes(ApplicationOptions.Float) || false,
-        [ApplicationOptions.Unmanage]: ymlApp.options?.includes(ApplicationOptions.Unmanage) || false,
+        [ApplicationOptions.Unmanage]:
+          ymlApp.options?.includes(ApplicationOptions.Unmanage) || false,
         [ApplicationOptions.Pinned]: ymlApp.options?.includes(ApplicationOptions.Pinned) || false,
-        [ApplicationOptions.ForceManage]: ymlApp.options?.includes(ApplicationOptions.ForceManage) || false,
+        [ApplicationOptions.ForceManage]:
+          ymlApp.options?.includes(ApplicationOptions.ForceManage) || false,
       });
     }
-
-    // In komorebi cli float_identifiers are considerated as unmanaged
-    // also we doesn't use this object whe use float option instead
-    ymlApp.float_identifiers?.forEach((rule: any) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        [ApplicationOptions.Unmanage]: true,
-      });
-    });
-  });
-
-  json?.monitors?.forEach(({ workspaces }: anyObject, monitor_idx: number) => {
-    workspaces?.forEach(({ workspace_rules, name }: anyObject) => {
-      if (!workspace_rules) {
-        return;
-      }
-      Object.values(workspace_rules).forEach((rule) => {
-        apps.push({
-          ...AppConfiguration.from(rule),
-          monitor: monitor_idx,
-          workspace: name,
-        });
-      });
-    });
   });
 
   return apps;
@@ -78,12 +50,20 @@ export const StaticSettingsToState = (
     availableThemes: themes,
     availableLayouts: layouts,
     availablePlaceholders: placeholders,
-    appsConfigurations: YamlToState_Apps(yamlSettings, jsonSettings),
+    appsConfigurations: YamlToState_Apps(yamlSettings),
   };
 };
 
 export const StateToJsonSettings = (state: RootState): ISettings => {
-  return pick(state, ['windowManager', 'seelenweg', 'monitors', 'selectedTheme', 'ahkEnabled', 'fancyToolbar', 'ahkVariables']);
+  return pick(state, [
+    'windowManager',
+    'seelenweg',
+    'monitors',
+    'selectedTheme',
+    'ahkEnabled',
+    'fancyToolbar',
+    'ahkVariables',
+  ]);
 };
 
 export const StateAppsToYamlApps = (
@@ -98,11 +78,7 @@ export const StateAppsToYamlApps = (
       category: appConfig.category || undefined,
       bound_monitor: appConfig.monitor ?? undefined,
       bound_workspace: appConfig.workspace || undefined,
-      identifier: {
-        id: appConfig.identifier,
-        kind: appConfig.kind,
-        matching_strategy: appConfig.matchingStrategy,
-      },
+      identifier: VariableConvention.fromCamelToSnake(appConfig.identifier),
       options: options.length ? options : undefined,
     };
     return yamlApp;

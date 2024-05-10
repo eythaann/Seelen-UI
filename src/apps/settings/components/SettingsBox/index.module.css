@@ -6,7 +6,7 @@
   position: relative;
 
   > div {
-    position: absolute;
+    position: absolute; /* for noise and blur */
     top: 0;
     right: 0;
     bottom: 0;
@@ -32,7 +32,8 @@
     position: relative;
     z-index: 1;
 
-    > div {
+    > .box,
+    > .subgroup {
       &:not(:last-child) {
         padding-bottom: 6px;
         margin-bottom: 6px;

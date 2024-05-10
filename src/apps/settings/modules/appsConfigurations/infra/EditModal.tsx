@@ -1,20 +1,15 @@
+import { IdWithIdentifier } from '../../../../utils/schemas/AppsConfigurations';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
+import { Identifier } from './Identifier';
 import { createSelector } from '@reduxjs/toolkit';
 import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ownSelector, RootSelectors } from '../../shared/store/app/selectors';
-import { OptionsFromEnum } from '../../shared/utils/app';
 
 import { RootState } from '../../shared/store/domain';
-import {
-  AppConfiguration,
-  AppConfigurationExtended,
-  ApplicationIdentifier,
-  ApplicationOptions,
-  MatchingStrategy,
-} from '../domain';
+import { AppConfiguration, AppConfigurationExtended, ApplicationOptions } from '../domain';
 
 import cs from './index.module.css';
 
@@ -27,9 +22,10 @@ interface Props {
   readonlyApp?: AppConfigurationExtended;
 }
 
-const getAppSelector = (idx: number | undefined, isNew: boolean) => createSelector([ownSelector], (state: RootState) => {
-  return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.default();
-});
+const getAppSelector = (idx: number | undefined, isNew: boolean) =>
+  createSelector([ownSelector], (state: RootState) => {
+    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.default();
+  });
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
   const monitors = useSelector(RootSelectors.monitors);
@@ -40,7 +36,8 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const [app, setApp] = useState(initialState);
 
   useEffect(() => {
-    if (isNew && !open) { // reset state on close
+    if (isNew && !open) {
+      // reset state on close
       setApp(initialState);
     }
   }, [open]);
@@ -49,18 +46,18 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
     onSave(app as AppConfigurationExtended);
   };
 
-  const updateName = (e: React.ChangeEvent<HTMLInputElement>) => setApp({ ...app, name: e.target.value });
+  const updateName = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setApp({ ...app, name: e.target.value });
   const updateCategory = (e: React.ChangeEvent<HTMLInputElement>) =>
     setApp({ ...app, category: e.target.value || null });
-  const updateIdentifier = (e: React.ChangeEvent<HTMLInputElement>) => setApp({ ...app, identifier: e.target.value });
 
-  const onSelectKind = (value: ApplicationIdentifier) => setApp({ ...app, kind: value });
-  const onSelectMatchingStrategy = (value: MatchingStrategy) => setApp({ ...app, matchingStrategy: value });
+  const onChangeIdentifier = (identifier: IdWithIdentifier) => setApp({ ...app, identifier });
 
   const onSelectMonitor = (value: number | null) => setApp({ ...app, monitor: value });
   const onSelectWorkspace = (value: string | null) => setApp({ ...app, workspace: value });
 
-  const onChangeOption = (option: ApplicationOptions, value: boolean) => setApp({ ...app, [option]: value });
+  const onChangeOption = (option: ApplicationOptions, value: boolean) =>
+    setApp({ ...app, [option]: value });
 
   const monitorsOptions = monitors.map((_, i) => ({ label: `Monitor ${i + 1}`, value: i }));
   const workspaceOptions =
@@ -91,13 +88,14 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
       className={cs.editModal}
     >
       <ConfigProvider componentDisabled={isReadonly}>
-        {
-          !!readonlyApp && <SettingsGroup>
+        {!!readonlyApp && (
+          <SettingsGroup>
             <SettingsSubGroup label={`Loaded from ${readonlyApp.templateName} pack`}>
               <p>{readonlyApp.templateDescription}</p>
             </SettingsSubGroup>
           </SettingsGroup>
-        }
+        )}
+
         <SettingsGroup>
           <div>
             <SettingsOption>
@@ -109,25 +107,9 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
               <Input value={app.category || ''} placeholder="None" onChange={updateCategory} />
             </SettingsOption>
           </div>
-          <SettingsSubGroup label="Application Identifier">
-            <SettingsOption>
-              <span>Identifier</span>
-              <Input value={app.identifier} onChange={updateIdentifier} />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Identify By</span>
-              <Select value={app.kind} options={OptionsFromEnum(ApplicationIdentifier)} onSelect={onSelectKind} />
-            </SettingsOption>
-            <SettingsOption>
-              <span>Maching Strategy</span>
-              <Select
-                value={app.matchingStrategy}
-                options={OptionsFromEnum(MatchingStrategy)}
-                onSelect={onSelectMatchingStrategy}
-              />
-            </SettingsOption>
-          </SettingsSubGroup>
         </SettingsGroup>
+
+        <Identifier identifier={app.identifier} onChange={onChangeIdentifier} />
 
         <SettingsGroup>
           <SettingsSubGroup label="Binding *note: both options are required">

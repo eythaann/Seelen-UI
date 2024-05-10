@@ -33,7 +33,7 @@ export class VariableConvention {
   }
 
   static camelToUser(text: string) {
-    return VariableConvention.snakeToCamel(text).replace(/_/g, ' ');
+    return VariableConvention.camelToSnake(text).replace(/_/g, ' ');
   }
 
   static deepKeyParser(obj: anyObject, parser: (text: string) => string): anyObject {

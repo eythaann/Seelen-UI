@@ -49,34 +49,6 @@ const columns: ColumnsType<AppConfigurationExtended> = [
     ),
   },
   {
-    title: 'Identifier',
-    dataIndex: 'identifier',
-    key: 'identifier',
-    width: 120,
-    sorter: getSorterByText('identifier'),
-    render: (identifier) => (
-      <Tooltip placement="topLeft" title={identifier}>
-        {identifier}
-      </Tooltip>
-    ),
-  },
-  {
-    title: 'By',
-    dataIndex: 'kind',
-    key: 'kind',
-    width: 80,
-    align: 'center',
-    sorter: getSorterByText('kind'),
-  },
-  {
-    title: 'Strategy',
-    dataIndex: 'matchingStrategy',
-    key: 'matchingStrategy',
-    width: 110,
-    align: 'center',
-    sorter: getSorterByText('matchingStrategy'),
-  },
-  {
     title: 'Category',
     dataIndex: 'category',
     key: 'category',
@@ -214,10 +186,10 @@ export function AppsConfiguration() {
     setTimeout(() => {
       setData(
         data.filter((app) => {
-          return (
-            app.name.toLowerCase().includes(searched) ||
-            app.identifier.toLowerCase().includes(searched)
-          );
+          return app.name.toLowerCase().includes(searched)
+          || app.identifier.id.toLowerCase().includes(searched)
+          || app.identifier.and.some((id) => id.id.toLowerCase().includes(searched))
+          || app.identifier.or.some((id) => id.id.toLowerCase().includes(searched));
         }),
       );
       setLoading(false);

@@ -1,3 +1,5 @@
+import { IdWithIdentifier } from '../../../utils/schemas/AppsConfigurations';
+
 export enum ApplicationOptions {
   Float = 'float',
   Unmanage = 'unmanage',
@@ -28,21 +30,13 @@ export enum MatchingStrategy {
   Regex = 'Regex',
 }
 
-export interface IdWithIdentifier {
-  kind: ApplicationIdentifier;
-  id: string;
-  matching_strategy: MatchingStrategy;
-}
-
 type AppConfigurationsOptions = { [K in ApplicationOptions]: boolean };
 export interface AppConfiguration extends AppConfigurationsOptions {
   name: string;
   category: string | null;
   workspace: string | null;
   monitor: number | null;
-  kind: ApplicationIdentifier;
-  identifier: string;
-  matchingStrategy: MatchingStrategy;
+  identifier: IdWithIdentifier;
 }
 
 export interface AppConfigurationExtended extends AppConfiguration {
@@ -59,23 +53,18 @@ export class AppConfiguration {
       category: null,
       workspace: null,
       monitor: null,
-      kind: ApplicationIdentifier.Exe,
-      identifier: 'new-app.exe',
-      matchingStrategy: MatchingStrategy.Equals,
+      identifier: {
+        id: 'new-app.exe',
+        kind: ApplicationIdentifier.Exe,
+        matchingStrategy: MatchingStrategy.Equals,
+        negation: false,
+        and: [],
+        or: [],
+      },
       [ApplicationOptions.Float]: false,
       [ApplicationOptions.Unmanage]: false,
       [ApplicationOptions.Pinned]: false,
       [ApplicationOptions.ForceManage]: false,
-    };
-  }
-
-  static from(json_identifier: any): AppConfiguration {
-    return {
-      ...AppConfiguration.default(),
-      name: json_identifier.id,
-      identifier: json_identifier.id,
-      kind: json_identifier.kind as ApplicationIdentifier,
-      matchingStrategy: json_identifier.matching_strategy as MatchingStrategy ?? MatchingStrategy.Legacy,
     };
   }
 }
