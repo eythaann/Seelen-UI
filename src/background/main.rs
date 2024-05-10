@@ -55,10 +55,13 @@ fn main() -> Result<()> {
             seelen.init(app.handle().clone())?;
 
             handle_tray_icon(app)?;
-            seelen.create_update_modal()?;
 
-            if !tauri::dev() && !matches.get_flag("silent") {
-                seelen.show_settings()?;
+            if !tauri::dev() {
+                seelen.create_update_modal()?;
+
+                if !matches.get_flag("silent") {
+                    seelen.show_settings()?;
+                }
             }
 
             seelen.start()?;
