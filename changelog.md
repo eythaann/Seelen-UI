@@ -8,6 +8,7 @@
 ### enhancements
 - Close AHK by itself if app is crashed or forcedly closed.
 - Configurations by apps are enabled again.
+- Allow open settings file from Extras/Information
 
 ### fix
 - Ahk not closing on app close or when user change options.
