@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- Allow pin apps on Open using Apps Configurations.
+
+### enhancements
+- Configurations by apps are enabled again.
+
 ## [1.2.4]
 ### enhancements
 - Automatic MSIX bundle.

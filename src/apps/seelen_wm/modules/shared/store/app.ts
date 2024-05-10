@@ -10,7 +10,7 @@ import { cloneDeep } from 'lodash';
 import { NodeImpl, reIndexContainer } from '../../layout/app';
 
 import { Reservation, Sizing } from '../../layout/domain';
-import { DesktopId, FocusAction, RootState } from './domain';
+import { AddWindowPayload, DesktopId, FocusAction, RootState } from './domain';
 
 const initialState: RootState = {
   version: 0,
@@ -31,8 +31,8 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    addWindow: (state, action: PayloadAction<{ desktop_id: DesktopId; hwnd: number }>) => {
-      const { desktop_id, hwnd } = action.payload;
+    addWindow: (state, action: PayloadAction<AddWindowPayload>) => {
+      const { desktop_id, hwnd, as_floating } = action.payload;
 
       state.desktopByHandle[hwnd] = desktop_id;
       state.handlesByDesktop[desktop_id] ??= [];
@@ -78,6 +78,9 @@ export const RootSlice = createSlice({
             state.lastManagedActivated,
           );
         }
+      } else if (as_floating) {
+        setFloatingSize();
+        successfullyAdded = true;
       } else {
         successfullyAdded = node.addHandle(hwnd);
         if (successfullyAdded) {

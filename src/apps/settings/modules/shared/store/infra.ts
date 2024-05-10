@@ -65,7 +65,7 @@ export const SaveStore = async () => {
     const settings: UserSettings = {
       jsonSettings: StateToJsonSettings(currentState),
       yamlSettings: [
-        ...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
+        //...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
       themes: currentState.availableThemes,

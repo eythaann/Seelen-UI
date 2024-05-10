@@ -1,11 +1,15 @@
 export enum ApplicationOptions {
   Float = 'float',
   Unmanage = 'unmanage',
+  ForceManage = 'force',
+  Pinned = 'pinned',
 }
 
 export const LabelByAppOption: Record<ApplicationOptions, string> = {
   [ApplicationOptions.Float]: 'Float',
   [ApplicationOptions.Unmanage]: 'Unmanaged',
+  [ApplicationOptions.ForceManage]: 'Force Manage',
+  [ApplicationOptions.Pinned]: 'Pinned',
 };
 
 export enum ApplicationIdentifier {
@@ -60,6 +64,8 @@ export class AppConfiguration {
       matchingStrategy: MatchingStrategy.Equals,
       [ApplicationOptions.Float]: false,
       [ApplicationOptions.Unmanage]: false,
+      [ApplicationOptions.Pinned]: false,
+      [ApplicationOptions.ForceManage]: false,
     };
   }
 

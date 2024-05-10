@@ -35,3 +35,9 @@ export interface RootState extends IRootState<WindowManager> {
   /** Prop to listen for app forced updates */
   version: number;
 }
+
+export interface AddWindowPayload {
+  hwnd: HWND;
+  desktop_id: DesktopId;
+  as_floating: boolean;
+}

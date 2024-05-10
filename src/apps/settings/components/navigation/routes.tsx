@@ -12,7 +12,7 @@ export enum Route {
   INFO = 'info',
 }
 
-export const WorkingInProgressRoutes = [Route.SPECIFIT_APPS, Route.MONITORS];
+export const WorkingInProgressRoutes = [Route.MONITORS];
 
 export const RouteLabels: Record<Route, string> = {
   [Route.GENERAL]: 'General',

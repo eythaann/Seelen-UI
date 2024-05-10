@@ -1,5 +1,7 @@
 use std::{
-    collections::{hash_map::Entry, HashMap, VecDeque}, path::PathBuf, sync::Arc
+    collections::{hash_map::Entry, HashMap, VecDeque},
+    path::PathBuf,
+    sync::Arc,
 };
 
 use lazy_static::lazy_static;
@@ -17,17 +19,18 @@ lazy_static! {
         Arc::new(Mutex::new(AppsConfigurations::default()));
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Deserialize)]
 #[serde(rename_all(deserialize = "snake_case"))]
 pub enum AppExtraFlag {
     Float,
+    Force,
     Unmanage,
-    // only for backguard compatibility
+    Pinned,
+    // only for backwards compatibility
     ObjectNameChange,
     Layered,
     BorderOverflow,
     TrayAndMultiWindow,
-    Force,
 }
 
 #[derive(Clone, Debug, Deserialize)]
@@ -44,25 +47,33 @@ pub enum AppIdentifierType {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
 pub enum MatchingStrategy {
-    Legacy,
+    #[serde(alias = "equals")]
     Equals,
+    #[serde(alias = "startsWith")]
     StartsWith,
+    #[serde(alias = "endsWith")]
     EndsWith,
+    #[serde(alias = "contains")]
     Contains,
+    #[serde(alias = "regex")]
     Regex,
+    // only for backwards compatibility
+    #[serde(alias = "legacy")]
+    Legacy,
 }
 
-#[allow(dead_code)]
 #[derive(Clone, Debug, Deserialize)]
 pub struct AppIdentifier {
     id: String,
     kind: AppIdentifierType,
     matching_strategy: MatchingStrategy,
+    negate: Option<bool>,
+    and: Option<Vec<AppIdentifier>>,
+    or: Option<Vec<AppIdentifier>>,
 }
 
-#[allow(dead_code)]
 impl AppIdentifier {
-    pub fn cache_regex(&mut self) {
+    pub fn cache_regex(&self) {
         if matches!(self.matching_strategy, MatchingStrategy::Regex) {
             let result = Regex::new(&self.id);
             if let Some(re) = result.ok() {
@@ -73,18 +84,8 @@ impl AppIdentifier {
     }
 
     pub fn validate(&self, title: &str, class: &str, exe: &str, path: &str) -> bool {
-        match self.matching_strategy {
-            MatchingStrategy::Legacy => match self.kind {
-                AppIdentifierType::Title => {
-                    title.starts_with(&self.id) || title.ends_with(&self.id)
-                }
-                AppIdentifierType::Class => {
-                    class.starts_with(&self.id) || class.ends_with(&self.id)
-                }
-                AppIdentifierType::Exe => exe.eq(&self.id),
-                AppIdentifierType::Path => path.eq(&self.id),
-            },
-            MatchingStrategy::Equals => match self.kind {
+        let mut self_result = match self.matching_strategy {
+            MatchingStrategy::Legacy | MatchingStrategy::Equals => match self.kind {
                 AppIdentifierType::Title => title.eq(&self.id),
                 AppIdentifierType::Class => class.eq(&self.id),
                 AppIdentifierType::Exe => exe.eq(&self.id),
@@ -108,34 +109,45 @@ impl AppIdentifier {
                 AppIdentifierType::Exe => exe.contains(&self.id),
                 AppIdentifierType::Path => path.contains(&self.id),
             },
-            MatchingStrategy::Regex => {
-                let regex_identifiers = REGEX_IDENTIFIERS.lock();
-                if let Some(re) = regex_identifiers.get(&self.id) {
-                    return match self.kind {
-                        AppIdentifierType::Title => re.is_match(title),
-                        AppIdentifierType::Class => re.is_match(class),
-                        AppIdentifierType::Exe => re.is_match(exe),
-                        AppIdentifierType::Path => re.is_match(path),
-                    };
-                }
-                false
+            MatchingStrategy::Regex => match REGEX_IDENTIFIERS.lock().get(&self.id) {
+                Some(re) => match self.kind {
+                    AppIdentifierType::Title => re.is_match(title),
+                    AppIdentifierType::Class => re.is_match(class),
+                    AppIdentifierType::Exe => re.is_match(exe),
+                    AppIdentifierType::Path => re.is_match(path),
+                },
+                None => false,
+            },
+        };
+
+        if self.negate.is_some_and(|negation| negation) {
+            self_result = !self_result;
+        }
+
+        (self_result && {
+            match self.and.as_ref() {
+                Some(and) => and.iter().all(|and| and.validate(title, class, exe, path)),
+                None => true,
+            }
+        }) || {
+            match self.or.as_ref() {
+                Some(or) => or.iter().any(|or| or.validate(title, class, exe, path)),
+                None => false,
             }
         }
     }
 }
 
-#[allow(dead_code)]
 #[derive(Clone, Debug, Deserialize)]
 pub struct AppConfig {
     name: String,
     category: Option<String>,
-    binded_monitor_idx: Option<usize>,
-    binded_workspace_name: Option<String>,
+    bound_monitor_idx: Option<usize>,
+    bound_workspace_name: Option<String>,
     identifier: AppIdentifier,
     options: Option<Vec<AppExtraFlag>>,
 }
 
-#[allow(dead_code)]
 impl AppConfig {
     pub fn match_window(&self, hwnd: HWND) -> bool {
         if let (title, Ok(path), Ok(exe), Ok(class)) = (
@@ -148,13 +160,20 @@ impl AppConfig {
         }
         false
     }
+
+    pub fn options_contains(&self, option: AppExtraFlag) -> bool {
+        self.options
+            .as_ref()
+            .map_or(false, |options| options.contains(&option))
+    }
 }
 
-#[allow(dead_code)]
 #[derive(Clone, Debug, Deserialize)]
 pub struct AppsConfigurations {
     apps: VecDeque<AppConfig>,
     cache: HashMap<isize, Option<usize>>,
+    user_path: PathBuf,
+    apps_template_path: PathBuf,
 }
 
 impl Default for AppsConfigurations {
@@ -162,19 +181,41 @@ impl Default for AppsConfigurations {
         Self {
             apps: VecDeque::new(),
             cache: HashMap::new(),
+            user_path: PathBuf::new(),
+            apps_template_path: PathBuf::new(),
         }
     }
 }
 
-#[allow(dead_code)]
 impl AppsConfigurations {
-    pub fn load(&mut self, path: PathBuf) -> Result<()> {
-        let mut content = String::from("");
-        if path.exists() {
-            content = std::fs::read_to_string(path)?;
-        }
-        self.apps = serde_yaml::from_str(&content)?;
+    pub fn set_paths(&mut self, user_path: PathBuf, apps_template_path: PathBuf) {
+        self.user_path = user_path;
+        self.apps_template_path = apps_template_path;
+    }
+
+    pub fn load(&mut self) -> Result<()> {
+        log::trace!("Loading apps configurations from {:?}", self.user_path);
+        REGEX_IDENTIFIERS.lock().clear();
         self.cache.clear();
+        self.apps.clear();
+
+        if self.user_path.exists() {
+            let content = std::fs::read_to_string(&self.user_path)?;
+            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
+            self.apps.extend(apps);
+        }
+
+        for entry in self.apps_template_path.read_dir()? {
+            if let Ok(entry) = entry {
+                let content = std::fs::read_to_string(entry.path())?;
+                let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
+                self.apps.extend(apps);
+            }
+        }
+
+        self.apps
+            .iter()
+            .for_each(|app| app.identifier.cache_regex());
         Ok(())
     }
 
@@ -193,4 +234,9 @@ impl AppsConfigurations {
             }
         }
     }
+}
+
+#[tauri::command]
+pub fn reload_apps_configurations() {
+    std::thread::spawn(|| -> Result<()> { SETTINGS_BY_APP.lock().load() });
 }

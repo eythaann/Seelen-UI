@@ -5,23 +5,10 @@
     matching_strategy: Regex
   options:
     - unmanage
-- name: Electron Apps
+- name: Seelen
   identifier:
-    id: Chrome_WidgetWin_1
-    kind: Class
-    matching_strategy: Equals
-  invisible_borders:
-    left: 2
-    top: 2
-    right: 4
-    bottom: 4
-- name: Explorer
-  identifier:
-    id: explorer.exe
-    kind: Exe
-    matching_strategy: Equals
-  invisible_borders:
-    left: 10
-    top: 0
-    right: 20
-    bottom: 10
+    id: Seelen UI.exe
+    kind: exe
+    matching_strategy: equals
+  options:
+    - unmanage

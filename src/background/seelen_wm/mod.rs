@@ -12,7 +12,10 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result, seelen_weg::SeelenWeg, utils::virtual_desktop::VirtualDesktopManager,
+    apps_config::{AppExtraFlag, SETTINGS_BY_APP},
+    error_handler::Result,
+    seelen_weg::SeelenWeg,
+    utils::virtual_desktop::VirtualDesktopManager,
     windows_api::WindowsApi,
 };
 
@@ -20,12 +23,13 @@ use crate::{
 struct AddWindowPayload {
     hwnd: isize,
     desktop_id: String,
+    as_floating: bool,
 }
 
 pub struct WindowManager {
     handle: AppHandle<Wry>,
     window: WebviewWindow,
-    managed_handles: Vec<isize>,
+    tiled_handles: Vec<isize>,
     floating_handles: Vec<isize>,
     pub current_virtual_desktop: String,
     paused: bool,
@@ -45,7 +49,7 @@ impl WindowManager {
         Self {
             window: Self::create_window(&handle).expect("Failed to create Manager Container"),
             handle,
-            managed_handles: Vec::new(),
+            tiled_handles: Vec::new(),
             floating_handles: Vec::new(),
             current_virtual_desktop: virtual_desktop.id(),
             paused: true, // paused until complete_window_setup is called
@@ -65,7 +69,7 @@ impl WindowManager {
     }
 
     pub fn is_managed(&self, hwnd: HWND) -> bool {
-        self.managed_handles.contains(&hwnd.0) || self.floating_handles.contains(&hwnd.0)
+        self.tiled_handles.contains(&hwnd.0) || self.floating_handles.contains(&hwnd.0)
     }
 
     pub fn is_floating(&self, hwnd: HWND) -> bool {
@@ -140,25 +144,41 @@ impl WindowManager {
             desktop_to_add
         );
 
-        self.managed_handles.push(hwnd.0);
+        let mut as_floating = false;
+        if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
+            as_floating = config.options_contains(AppExtraFlag::Float);
+        }
+        
+        if as_floating {
+            self.floating_handles.push(hwnd.0);
+        } else {
+            self.tiled_handles.push(hwnd.0);
+        }
+
         self.handle.emit_to(
             Self::TARGET,
             "add-window",
             AddWindowPayload {
                 hwnd: hwnd.0,
                 desktop_id: desktop_to_add,
+                as_floating,
             },
         )?;
         Ok(true)
     }
 
     pub fn emit_send_to_workspace(&mut self, hwnd: HWND, desktop_id: String) -> Result<()> {
+        let mut as_floating = false;
+        if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
+            as_floating = config.options_contains(AppExtraFlag::Float);
+        }
         self.handle.emit_to(
             Self::TARGET,
             "move-window-to-workspace",
             AddWindowPayload {
                 hwnd: hwnd.0,
                 desktop_id,
+                as_floating,
             },
         )?;
         Ok(())
@@ -168,7 +188,7 @@ impl WindowManager {
         if self.paused || !self.is_managed(hwnd) {
             return false;
         }
-        self.managed_handles.retain(|&x| x != hwnd.0);
+        self.tiled_handles.retain(|&x| x != hwnd.0);
         true
     }
 
@@ -225,6 +245,12 @@ impl WindowManager {
 // UTILS AND STATICS
 impl WindowManager {
     pub fn should_manage(hwnd: HWND) -> bool {
+        let mut settings_by_app = SETTINGS_BY_APP.lock();
+        if let Some(config) = settings_by_app.get_by_window(hwnd) {
+            return config.options_contains(AppExtraFlag::Force)
+                || (!config.options_contains(AppExtraFlag::Unmanage)
+                    && Self::is_manageable_window(hwnd, false));
+        }
         Self::is_manageable_window(hwnd, false)
     }
 
@@ -244,7 +270,6 @@ impl WindowManager {
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
         && !WindowsApi::is_iconic(hwnd)
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
-        && !exe.unwrap().ends_with("Seelen UI.exe") // Todo manage this using apps config
     }
 
     fn create_window(handle: &AppHandle<Wry>) -> Result<WebviewWindow> {

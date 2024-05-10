@@ -6,7 +6,16 @@ use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::{log_if_error, Result}, hook::register_win_hook, seelen_bar::FancyToolbar, seelen_shell::SeelenShell, seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::State, system::register_system_events, utils::run_ahk_file
+    apps_config::SETTINGS_BY_APP,
+    error_handler::{log_if_error, Result},
+    hook::register_win_hook,
+    seelen_bar::FancyToolbar,
+    seelen_shell::SeelenShell,
+    seelen_weg::SeelenWeg,
+    seelen_wm::WindowManager,
+    state::State,
+    system::register_system_events,
+    utils::run_ahk_file,
 };
 
 lazy_static! {
@@ -103,10 +112,14 @@ impl Seelen {
             .resolve(".config/seelen/settings.json", BaseDirectory::Home)?;
         self.state = State::new(&path).unwrap_or_default();
 
-        /* let path = app
-            .path()
-            .resolve(".config/seelen/applications.yml", BaseDirectory::Home)?;
-        SETTINGS_BY_APP.lock().load(path); */
+        let mut settings_by_app = SETTINGS_BY_APP.lock();
+        settings_by_app.set_paths(
+            app.path()
+                .resolve(".config/seelen/applications.yml", BaseDirectory::Home)?,
+            app.path()
+                .resolve("static/apps_templates", BaseDirectory::Resource)?,
+        );
+        log_if_error(settings_by_app.load());
 
         if self.state.is_bar_enabled() {
             self.bar = Some(FancyToolbar::new(app.clone()));

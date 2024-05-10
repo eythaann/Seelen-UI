@@ -10,7 +10,7 @@ import {
 } from '../../../appsConfigurations/domain';
 import { RootState } from '../domain';
 
-export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppConfiguration[] => {
+export const YamlToState_Apps = (yaml: anyObject[], json?: ISettings): AppConfiguration[] => {
   const apps: AppConfiguration[] = [];
 
   yaml.forEach((ymlApp: anyObject) => {
@@ -23,15 +23,17 @@ export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppCo
       apps.push({
         name: ymlApp.name,
         category: ymlApp.category || null,
-        monitor: ymlApp.binded_monitor ?? null,
-        workspace: ymlApp.binded_workspace || null,
+        monitor: ymlApp.bound_monitor ?? null,
+        workspace: ymlApp.bound_workspace || null,
         identifier: ymlApp.identifier.id,
         kind: ymlApp.identifier.kind as ApplicationIdentifier,
         matchingStrategy:
           (ymlApp.identifier.matching_strategy as MatchingStrategy) || MatchingStrategy.Legacy,
         // options
-        [ApplicationOptions.Float]: ymlApp.options?.includes('float') || false,
-        [ApplicationOptions.Unmanage]: ymlApp.options?.includes('unmanage') || false,
+        [ApplicationOptions.Float]: ymlApp.options?.includes(ApplicationOptions.Float) || false,
+        [ApplicationOptions.Unmanage]: ymlApp.options?.includes(ApplicationOptions.Unmanage) || false,
+        [ApplicationOptions.Pinned]: ymlApp.options?.includes(ApplicationOptions.Pinned) || false,
+        [ApplicationOptions.ForceManage]: ymlApp.options?.includes(ApplicationOptions.ForceManage) || false,
       });
     }
 
@@ -45,28 +47,7 @@ export const YamlToState_Apps = (yaml: anyObject[], json: anyObject = {}): AppCo
     });
   });
 
-  /**
-   * From here are just migration from komorebi cli static configs.
-   */
-  if (json.unmanage_rules) {
-    Object.values(json.unmanage_rules).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        [ApplicationOptions.Unmanage]: true,
-      });
-    });
-  }
-
-  if (json.float_rules) {
-    Object.values(json.float_rules).forEach((rule) => {
-      apps.push({
-        ...AppConfiguration.from(rule),
-        [ApplicationOptions.Float]: true,
-      });
-    });
-  }
-
-  json.monitors?.forEach(({ workspaces }: anyObject, monitor_idx: number) => {
+  json?.monitors?.forEach(({ workspaces }: anyObject, monitor_idx: number) => {
     workspaces?.forEach(({ workspace_rules, name }: anyObject) => {
       if (!workspace_rules) {
         return;
@@ -115,8 +96,8 @@ export const StateAppsToYamlApps = (
       name: appConfig.name,
       template: template || undefined,
       category: appConfig.category || undefined,
-      binded_monitor: appConfig.monitor ?? undefined,
-      binded_workspace: appConfig.workspace || undefined,
+      bound_monitor: appConfig.monitor ?? undefined,
+      bound_workspace: appConfig.workspace || undefined,
       identifier: {
         id: appConfig.identifier,
         kind: appConfig.kind,

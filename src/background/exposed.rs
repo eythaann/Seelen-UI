@@ -10,6 +10,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
 
+use crate::apps_config::*;
 use crate::error_handler::{log_if_error, Result};
 use crate::seelen::SEELEN;
 use crate::seelen_weg::handler::*;
@@ -152,6 +153,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_win_version,
         get_user_envs,
         show_app_settings,
+        reload_apps_configurations,
         // Media
         media_play_pause,
         media_next,

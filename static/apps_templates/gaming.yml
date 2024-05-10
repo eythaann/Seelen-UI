@@ -3,24 +3,10 @@
     id: (steamwebhelper.exe)|(steam.exe)
     kind: Exe
     matching_strategy: Regex
+    and:
+      - id: Steam
+        kind: Title
+        matching_strategy: equals
+        negate: true
   options:
     - unmanage
-- name: Main Steam Window
-  identifier:
-    id: Steam
-    kind: Title
-    matching_strategy: Equals
-  options:
-    - force
-- name: Epic Games Launcher
-  identifier:
-    id: EpicGamesLauncher.exe
-    kind: Exe
-    matching_strategy: Equals
-  options:
-    - tray_and_multi_window
-  invisible_borders:
-    left: 0
-    top: 0
-    right: 0
-    bottom: 0
