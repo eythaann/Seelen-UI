@@ -42,12 +42,6 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsOption>
-          <div>Configurable shortcuts using UI is in progress</div>
-        </SettingsOption>
-      </SettingsGroup>
-
-      <SettingsGroup>
         {
           Object.entries(ahkVariables).map(([name, value]) => {
             let label = VariableConvention.camelToUser(name);
