@@ -109,15 +109,15 @@ impl Seelen {
 
         let path = app
             .path()
-            .resolve(".config/seelen/settings.json", BaseDirectory::Home)?;
+            .resolve(".config\\seelen\\settings.json", BaseDirectory::Home)?;
         self.state = State::new(&path).unwrap_or_default();
 
         let mut settings_by_app = SETTINGS_BY_APP.lock();
         settings_by_app.set_paths(
             app.path()
-                .resolve(".config/seelen/applications.yml", BaseDirectory::Home)?,
+                .resolve(".config\\seelen\\applications.yml", BaseDirectory::Home)?,
             app.path()
-                .resolve("static/apps_templates", BaseDirectory::Resource)?,
+                .resolve("static\\apps_templates", BaseDirectory::Resource)?,
         );
         log_if_error(settings_by_app.load());
 

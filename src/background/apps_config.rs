@@ -224,7 +224,8 @@ impl AppsConfigurations {
     }
 
     pub fn get_by_window(&mut self, hwnd: HWND) -> Option<&AppConfig> {
-        match self.cache.entry(hwnd.0) {
+        // Can no cache apps that changes titles
+        /* match self.cache.entry(hwnd.0) {
             Entry::Occupied(entry) => entry.get().and_then(|index| self.apps.get(index)),
             Entry::Vacant(entry) => {
                 for (i, app) in self.apps.iter().enumerate() {
@@ -236,7 +237,13 @@ impl AppsConfigurations {
                 entry.insert(None);
                 None
             }
+        } */
+        for app in self.apps.iter() {
+            if app.match_window(hwnd) {
+                return Option::from(app);
+            }
         }
+        None
     }
 }
 

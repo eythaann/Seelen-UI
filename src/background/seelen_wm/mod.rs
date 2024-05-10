@@ -149,7 +149,7 @@ impl WindowManager {
         if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
             as_floating = config.options_contains(AppExtraFlag::Float);
         }
-        
+
         if as_floating {
             self.floating_handles.push(hwnd.0);
         } else {
@@ -248,9 +248,11 @@ impl WindowManager {
     pub fn should_manage(hwnd: HWND) -> bool {
         let mut settings_by_app = SETTINGS_BY_APP.lock();
         if let Some(config) = settings_by_app.get_by_window(hwnd) {
-            return config.options_contains(AppExtraFlag::Force)
-                || (!config.options_contains(AppExtraFlag::Unmanage)
-                    && Self::is_manageable_window(hwnd, false));
+            return config.options_contains(AppExtraFlag::Force) || {
+                !config.options_contains(AppExtraFlag::Unmanage)
+                    && !config.options_contains(AppExtraFlag::Pinned)
+                    && Self::is_manageable_window(hwnd, false)
+            };
         }
         Self::is_manageable_window(hwnd, false)
     }

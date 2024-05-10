@@ -19,7 +19,7 @@ use windows::Win32::{
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::{constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS}, sleep_millis}, windows_api::WindowsApi
+    apps_config::{AppExtraFlag, SETTINGS_BY_APP}, error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::{constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS}, sleep_millis}, windows_api::WindowsApi
 };
 
 lazy_static! {
@@ -93,8 +93,14 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
                 wm.set_active_workspace(format!("{:?}", new.get_id()?))?;
             }
         }
-        DesktopEvent::WindowChanged(_hwnd) => {
-            /* println!("WindowChanged {} - {}", hwnd.0, WindowsApi::get_window_text(hwnd)) */
+        DesktopEvent::WindowChanged(hwnd) => {
+            if WindowsApi::is_window(hwnd) {
+                if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
+                    if config.options_contains(AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)? {
+                        winvd::pin_window(hwnd)?;
+                    }
+                }
+            }
         }
         _ => {}
     }

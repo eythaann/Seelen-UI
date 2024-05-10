@@ -1,0 +1,7 @@
+- name: Picture in Picture
+  identifier:
+    id: Picture-in-Picture
+    kind: Title
+    matching_strategy: Equals
+  options:
+    - pinned
