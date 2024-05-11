@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- disable binding monitors and monitors on apps configurations for now.
+
 ## [1.3.0]
 ### features
 - Allow pin apps on Open using Apps Configurations.

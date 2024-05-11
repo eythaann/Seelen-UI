@@ -121,6 +121,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
                 allowClear
                 options={monitorsOptions}
                 onChange={onSelectMonitor}
+                disabled // Todo(eythan) remove when enable monitors on release
               />
             </SettingsOption>
             <SettingsOption>
@@ -131,6 +132,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
                 allowClear
                 options={workspaceOptions}
                 onChange={onSelectWorkspace}
+                disabled // Todo(eythan) remove when enable monitors on release
               />
             </SettingsOption>
           </SettingsSubGroup>
