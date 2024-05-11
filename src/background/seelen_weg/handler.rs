@@ -5,7 +5,7 @@ use serde::Deserialize;
 use tauri::{command, Manager};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{seelen::SEELEN, windows_api::WindowsApi};
+use crate::{error_handler::Result, seelen::SEELEN, windows_api::WindowsApi};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
     UI::WindowsAndMessaging::{PostMessageW, ShowWindow, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
@@ -67,32 +67,32 @@ pub fn weg_close_app(hwnd: isize) -> Result<(), String> {
 }
 
 #[command]
-pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<(), String> {
-    let hwnd = HWND(hwnd);
+pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) {
+    std::thread::spawn(move || -> Result<()> {
+        let hwnd = HWND(hwnd);
 
-    if WindowsApi::is_window(hwnd) {
-        if WindowsApi::is_cloaked(hwnd)? {
-            WindowsApi::force_set_foreground(hwnd)?;
-            return Ok(());
-        }
+        if WindowsApi::is_window(hwnd) {
+            if WindowsApi::is_cloaked(hwnd)? {
+                WindowsApi::force_set_foreground(hwnd)?;
+                return Ok(());
+            }
 
-        if WindowsApi::is_iconic(hwnd) {
-            unsafe { ShowWindow(hwnd, SW_RESTORE) };
+            if WindowsApi::is_iconic(hwnd) {
+                unsafe { ShowWindow(hwnd, SW_RESTORE) };
+            } else {
+                unsafe { ShowWindow(hwnd, SW_MINIMIZE) };
+            }
         } else {
-            unsafe { ShowWindow(hwnd, SW_MINIMIZE) };
-        }
-    } else {
-        std::thread::spawn(move || {
             SEELEN
-            .lock()
-            .handle()
-            .shell()
-            .command("explorer")
-            .arg(&exe_path)
-            .spawn()
-            .expect("Could not spawn explorer on Opening App Action");
-        });
-    }
+                .lock()
+                .handle()
+                .shell()
+                .command("explorer")
+                .arg(&exe_path)
+                .spawn()
+                .expect("Could not spawn explorer on Opening App Action");
+        }
 
-    Ok(())
+        Ok(())
+    });
 }
