@@ -42,14 +42,7 @@ use windows::{
                 VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW,
-                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
-                IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
-                EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION,
-                SWP_ASYNCWINDOWPOS, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
+                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE
             },
         },
     },
@@ -187,6 +180,16 @@ impl WindowsApi {
         }
 
         Self::_set_position(hwnd, order, *rect, uflags)
+    }
+
+    pub fn bring_to(hwnd: HWND, after: HWND) -> Result<()> {
+        Self::set_position(
+            hwnd,
+            Some(after),
+            &Default::default(),
+            SWP_ASYNCWINDOWPOS | SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
+        )?;
+        Ok(())
     }
 
     pub fn force_set_foreground(hwnd: HWND) -> Result<()> {

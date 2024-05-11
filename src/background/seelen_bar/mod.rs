@@ -61,6 +61,13 @@ impl FancyToolbar {
         )?;
         Ok(())
     }
+
+    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
+        WindowsApi::bring_to(
+            HWND(self.hitbox_window.hwnd()?.0),
+            HWND(self.window.hwnd()?.0),
+        )
+    }
 }
 
 // statics

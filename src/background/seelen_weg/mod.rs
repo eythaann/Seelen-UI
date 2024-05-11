@@ -374,6 +374,13 @@ impl SeelenWeg {
         Ok(())
     }
 
+    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
+        WindowsApi::bring_to(
+            HWND(self.hitbox_handle),
+            HWND(self.window_handle),
+        )
+    }
+    
     pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {
         if !WindowsApi::is_window_visible(hwnd) {
             return false;

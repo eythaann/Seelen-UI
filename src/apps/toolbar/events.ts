@@ -36,4 +36,11 @@ export function registerDocumentEvents() {
 
   root_container.addEventListener('mouseenter', onMouseEnter);
   webview.listen('mouseenter', onMouseEnter); // listener for hitbox
+
+  webview.listen<{ x: number; y: number }>('click', (event) => {
+    let element = document.elementFromPoint(event.payload.x, event.payload.y);
+    if (element && 'click' in element && typeof element.click === 'function') {
+      element.click();
+    }
+  });
 }

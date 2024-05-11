@@ -6,6 +6,7 @@
 
 ### fix
 - Crash on restoring app in other virtual desktop using Weg.
+- Touch events not working on Toolbar and Weg.
 
 ## [1.3.1]
 ### fix
