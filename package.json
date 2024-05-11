@@ -11,7 +11,7 @@
     "build:schemas": "ts-node scripts/createJsonSchemas.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
-    "postversion": "ts-node scripts/postversion.ts"
+    "preversion": "ts-node scripts/preversion.ts"
   },
   "keywords": [],
   "author": {
