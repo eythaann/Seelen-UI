@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.3.1]
 ### fix
 - disable binding monitors and monitors on apps configurations for now.
 
