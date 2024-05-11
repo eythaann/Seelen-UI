@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.3.2]
 ### enhancements
 - Remove unnecessary tooltip collision on toolbar items.
 
