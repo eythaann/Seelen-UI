@@ -62,4 +62,4 @@ right:
 
   - type: settings
     template: icon.LuSettings2
-    tooltip: '"Fast Settings"'
+    tooltip: '"Quick Settings"'
