@@ -89,7 +89,12 @@ export function Item({ extraVars, module }: Props) {
   }
 
   return (
-    <Tooltip title={tooltip ? ElementsFromEvaluated(evaluate(tooltip, scope.current)) : undefined}>
+    <Tooltip
+      arrow={false}
+      mouseLeaveDelay={0}
+      overlayClassName="ft-bar-item-tooltip"
+      title={tooltip ? ElementsFromEvaluated(evaluate(tooltip, scope.current)) : undefined}
+    >
       <div
         onClick={() => performClick(onClick, scope.current)}
         className={cx('ft-bar-item', {

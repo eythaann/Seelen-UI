@@ -22,14 +22,15 @@ body {
     text-wrap: nowrap;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     .ft-bar-left,
     .ft-bar-center,
     .ft-bar-right {
       z-index: 1;
       display: flex;
-      align-items: center;
-      height: 100%;
+      align-items: stretch;
+      height: min-content;
       gap: 6px;
     }
 
@@ -61,7 +62,15 @@ body {
   }
 }
 
+.ft-bar-item-tooltip {
+  top: calc(var(--config-height) + 4px) !important; /* Override inline style */
+}
+
 .ft-bar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &.ft-bar-item-clickable {
     padding: 4px;
     border-radius: 6px;

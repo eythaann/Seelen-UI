@@ -1,6 +1,5 @@
 import { Icon } from '../../../utils/components/Icon';
 import { SettingsToolbarModule } from '../../../utils/schemas/Placeholders';
-import { cx } from '../../../utils/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { Popover, Slider, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -65,8 +64,11 @@ export function SettingsModule(props: Props) {
           <BackgroundByLayers prefix="fast-settings" styles={theme.fastSettings.backgroundLayers} />
           <div className="fast-settings-title">
             <span>Settings</span>
-            <Tooltip title="App settings">
-              <button className="fast-settings-item-title-button" onClick={() => invoke('show_app_settings')}>
+            <Tooltip mouseLeaveDelay={0} arrow={false} title="App settings" placement="left">
+              <button
+                className="fast-settings-item-title-button"
+                onClick={() => invoke('show_app_settings')}
+              >
                 <Icon iconName="RiSettings4Fill" />
               </button>
             </Tooltip>
@@ -96,22 +98,22 @@ export function SettingsModule(props: Props) {
             </div>
           )}
           <div className="fast-settings-item fast-settings-power">
-            <Tooltip title="Log out">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title="Log out">
               <button className="fast-settings-item-button" onClick={() => invoke('log_out')}>
                 <Icon iconName="BiLogOut" />
               </button>
             </Tooltip>
-            <Tooltip title="Sleep">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title="Sleep">
               <button className="fast-settings-item-button" onClick={() => invoke('sleep')}>
                 <Icon iconName="BiMoon" />
               </button>
             </Tooltip>
-            <Tooltip title="Restart">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title="Restart">
               <button className="fast-settings-item-button" onClick={() => invoke('restart')}>
                 <Icon iconName="VscDebugRestart" />
               </button>
             </Tooltip>
-            <Tooltip title="Shut down">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title="Shut down">
               <button className="fast-settings-item-button" onClick={() => invoke('shutdown')}>
                 <Icon iconName="GrPower" />
               </button>
@@ -120,8 +122,13 @@ export function SettingsModule(props: Props) {
         </div>
       }
     >
-      <div className={cx('ft-bar-item', 'ft-bar-item-clickable')}>
-        <Item module={props.module} />
+      <div>
+        <Item
+          module={{
+            ...props.module,
+            onClick: 'none',
+          }}
+        />
       </div>
     </Popover>
   );
