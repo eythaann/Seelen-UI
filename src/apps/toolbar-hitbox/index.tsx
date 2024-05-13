@@ -8,6 +8,7 @@ import './index.css';
 async function Main() {
   wrapConsole();
   let view = getCurrent();
+  let main = view.label.replace('-hitbox', '');
 
   view.listen('init', async () => {
     await getCurrent().show();
@@ -20,19 +21,19 @@ async function Main() {
       if (e instanceof MouseEvent) {
         x = e.clientX;
         y = e.clientY;
-        emitTo('fancy-toolbar', 'click', { x, y });
+        emitTo(main, 'click', { x, y });
         return;
       }
 
       if (e.touches && e.touches.length > 0) {
         x = e.touches[0]?.clientX || 0;
         y = e.touches[0]?.clientY || 0;
-        emitTo('fancy-toolbar', 'click', { x, y });
+        emitTo(main, 'click', { x, y });
       }
     }
 
     document.body.addEventListener('mousemove', () => {
-      emitTo('fancy-toolbar', 'mouseenter');
+      emitTo(main, 'mouseenter');
     });
     document.body.addEventListener('click', onClick);
     document.body.addEventListener('touchend', onClick);

@@ -19,7 +19,7 @@ use windows::Win32::{
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    apps_config::{AppExtraFlag, SETTINGS_BY_APP}, error_handler::{log_if_error, Result}, seelen::SEELEN, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::{constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS}, sleep_millis}, windows_api::WindowsApi
+    apps_config::{AppExtraFlag, SETTINGS_BY_APP}, error_handler::{log_if_error, Result}, seelen::{Seelen, SEELEN}, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::{constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS}, sleep_millis}, windows_api::WindowsApi
 };
 
 lazy_static! {
@@ -107,10 +107,9 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
     Ok(())
 }
 
-pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
+pub fn process_win_event(seelen: &mut Seelen, event: u32, hwnd: HWND) -> Result<()> {
     match event {
         EVENT_SYSTEM_MOVESIZESTART => {
-            let seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm() {
                 if wm.is_managed(hwnd) {
                     wm.pseudo_pause()?;
@@ -118,7 +117,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_SYSTEM_MOVESIZEEND => {
-            let seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm() {
                 if wm.is_managed(hwnd) {
                     wm.force_retiling()?;
@@ -128,7 +126,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_SYSTEM_MINIMIZEEND => {
-            let mut seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm_mut() {
                 if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
                     wm.add_hwnd(hwnd)?;
@@ -136,7 +133,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_SYSTEM_MINIMIZESTART => {
-            let mut seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm_mut() {
                 if wm.is_managed(hwnd) {
                     wm.remove_hwnd(hwnd)?;
@@ -144,7 +140,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_OBJECT_HIDE => {
-            let mut seelen = SEELEN.lock();
             if let Some(weg) = seelen.weg_mut() {
                 if weg.contains_app(hwnd) {
                     // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
@@ -166,8 +161,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_OBJECT_DESTROY /* | EVENT_OBJECT_CLOAKED */ => {
-            let mut seelen = SEELEN.lock();
-
             if let Some(weg) = seelen.weg_mut() {
                 if weg.contains_app(hwnd) {
                     weg.remove_hwnd(hwnd);
@@ -185,7 +178,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE /* | EVENT_OBJECT_UNCLOAKED */ => {
-            let mut seelen = SEELEN.lock();
             if let Some(weg) = seelen.weg_mut() {
                 if "Shell_TrayWnd" == WindowsApi::get_class(hwnd)? {
                     // ensure that the taskbar is always hidden
@@ -217,7 +209,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_OBJECT_NAMECHANGE => {
-            let mut seelen = SEELEN.lock();
             if let Some(weg) = seelen.weg_mut() {
                 if weg.contains_app(hwnd) {
                     weg.update_app(hwnd);
@@ -242,7 +233,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
-            let mut seelen = SEELEN.lock();
             if let Some(seelenweg) = seelen.weg_mut() {
                 match seelenweg.contains_app(hwnd) {
                     true => seelenweg.set_active_window(hwnd)?,
@@ -255,7 +245,6 @@ pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
             }
         }
         EVENT_OBJECT_LOCATIONCHANGE => {
-            let mut seelen = SEELEN.lock();
             if let Some(weg) = seelen.weg_mut() {
                 weg.update_status_if_needed(hwnd)?;
             }
@@ -315,8 +304,14 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    log_if_error(FancyToolbar::process_win_event(event, hwnd));
-    log_if_error(process_win_event(event, hwnd));
+    let mut seelen = SEELEN.lock();
+    for monitor in seelen.monitors_mut() {
+        if let Some(toolbar) = monitor.toolbar_mut() {
+            log_if_error(toolbar.process_win_event(event, hwnd));
+        }
+    }
+
+    log_if_error(process_win_event(&mut seelen, event, hwnd));
 }
 
 pub fn register_win_hook() -> Result<()> {

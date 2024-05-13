@@ -103,9 +103,12 @@ fn is_dev_mode() -> bool {
 fn ensure_hitboxes_zorder() {
     std::thread::spawn(|| -> Result<()> {
         let seelen = SEELEN.lock();
-        if let Some(toolbar) = seelen.toolbar() {
-            toolbar.ensure_hitbox_zorder()?;
+        for monitor in seelen.monitors() {
+            if let Some(toolbar) = monitor.toolbar() {
+                toolbar.ensure_hitbox_zorder()?;
+            }
         }
+
         if let Some(weg) = seelen.weg() {
             weg.ensure_hitbox_zorder()?;
         }

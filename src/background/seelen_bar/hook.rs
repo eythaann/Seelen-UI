@@ -5,24 +5,20 @@ use windows::Win32::{
     },
 };
 
-use crate::{error_handler::Result, seelen::SEELEN};
+use crate::error_handler::Result;
 
 use super::FancyToolbar;
 
 impl FancyToolbar {
-    pub fn process_win_event(event: u32, hwnd: HWND) -> Result<()> {
+    pub fn process_win_event(&mut self, event: u32, hwnd: HWND) -> Result<()> {
         match event {
             EVENT_OBJECT_NAMECHANGE => {
-                if let Some(toolbar) = SEELEN.lock().toolbar_mut() {
-                    if toolbar.last_focus == Some(hwnd.0) {
-                        toolbar.focus_changed(hwnd)?;
-                    }
+                if self.last_focus == Some(hwnd.0) {
+                    self.focus_changed(hwnd)?;
                 }
             }
             EVENT_SYSTEM_FOREGROUND | EVENT_OBJECT_FOCUS => {
-                if let Some(toolbar) = SEELEN.lock().toolbar_mut() {
-                    toolbar.focus_changed(hwnd)?;
-                }
+                self.focus_changed(hwnd)?;
             }
             _ => {}
         };

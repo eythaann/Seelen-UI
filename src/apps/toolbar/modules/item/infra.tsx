@@ -68,24 +68,31 @@ export function ElementsFromEvaluated(content: any) {
 
 export function Item({ extraVars, module }: Props) {
   const { template, tooltip, onClick } = module;
+
+  const [mounted, setMounted] = React.useState(false);
   const env = useSelector(Selectors.env);
-  const window = useSelector(Selectors.focused);
+  const window = useSelector(Selectors.focused) || {
+    name: 'None',
+    title: 'No Window Focused',
+  };
+
   const scope = useRef(new Scope());
 
   useEffect(() => {
     scope.current.set('icon', cloneDeep(exposedIcons));
     scope.current.set('env', cloneDeep(env));
+    setMounted(true);
   }, []);
-
-  if (!window) {
-    return null;
-  }
 
   scope.current.set('window', { ...window });
   if (extraVars) {
     Object.keys(extraVars).forEach((key) => {
       scope.current.set(key, extraVars[key]);
     });
+  }
+
+  if (!mounted) {
+    return null;
   }
 
   return (

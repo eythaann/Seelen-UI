@@ -3,22 +3,21 @@ pub mod hook;
 
 use crate::{
     error_handler::{log_if_error, Result},
-    seelen::SEELEN,
+    seelen::get_app_handle,
     windows_api::WindowsApi,
 };
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::HWND,
+    Graphics::Gdi::HMONITOR,
     UI::{
         Shell::{SHAppBarMessage, ABE_TOP, ABM_NEW, ABM_SETPOS, APPBARDATA},
-        WindowsAndMessaging::{GetSystemMetrics, SM_CXSCREEN, SWP_ASYNCWINDOWPOS},
+        WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
     },
 };
 
 pub struct FancyToolbar {
-    #[allow(dead_code)]
-    handle: AppHandle<Wry>,
     window: WebviewWindow,
     hitbox_window: WebviewWindow,
     // -- -- -- --
@@ -32,26 +31,22 @@ pub struct ActiveApp {
 }
 
 impl FancyToolbar {
-    pub fn new(handle: AppHandle<Wry>) -> Self {
+    pub fn new(monitor: isize) -> Result<Self> {
         log::info!("Creating Fancy Toolbar");
-
-        let (window, hitbox_window) =
-            Self::create_window(&handle).expect("Failed to create window");
-
-        Self {
-            handle,
+        let handle = get_app_handle();
+        let (window, hitbox_window) = Self::create_window(&handle, monitor)?;
+        Ok(Self {
             window,
             hitbox_window,
             last_focus: None,
-        }
+        })
     }
 
     pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
         let title = WindowsApi::get_window_text(hwnd);
 
         self.last_focus = Some(hwnd.0);
-        self.handle.emit_to(
-            Self::TARGET,
+        self.window.emit(
             "focus-changed",
             ActiveApp {
                 title,
@@ -75,19 +70,23 @@ impl FancyToolbar {
     const TARGET: &'static str = "fancy-toolbar";
     const TARGET_HITBOX: &'static str = "fancy-toolbar-hitbox";
 
-    fn create_window(manager: &AppHandle<Wry>) -> Result<(WebviewWindow, WebviewWindow)> {
+    fn create_window(
+        manager: &AppHandle<Wry>,
+        monitor: isize,
+    ) -> Result<(WebviewWindow, WebviewWindow)> {
+        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor))?;
+        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
+
         let hitbox = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             manager,
-            Self::TARGET_HITBOX,
+            format!("{}/{}", Self::TARGET_HITBOX, monitor),
             tauri::WebviewUrl::App("toolbar-hitbox/index.html".into()),
         )
         .title("Seelen Fancy Toolbar Hitbox")
-        .inner_size(0.0, 0.0)
-        .position(0.0, 0.0)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
-        .visible(false)
+        .visible(true)
         .decorations(false)
         .transparent(true)
         .shadow(false)
@@ -97,15 +96,14 @@ impl FancyToolbar {
 
         let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             manager,
-            Self::TARGET,
+            format!("{}/{}", Self::TARGET, monitor),
             tauri::WebviewUrl::App("toolbar/index.html".into()),
         )
         .title("Seelen Fancy Toolbar")
-        .position(0.0, 0.0)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
-        .visible(false)
+        .visible(true)
         .decorations(false)
         .transparent(true)
         .shadow(false)
@@ -114,35 +112,43 @@ impl FancyToolbar {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
-        window.listen("complete-setup", move |event| unsafe {
-            let seelen = SEELEN.lock();
-            let ft = seelen.toolbar().unwrap();
 
-            let height: i32 = event.payload().parse().unwrap_or(0);
-            let main_hwnd = ft.window.hwnd().expect("Failed to get HWND");
+        let main_hwnd = HWND(window.hwnd()?.0);
+        let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
 
-            let mut abd = APPBARDATA::default();
-            abd.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-            abd.hWnd = ft.hitbox_window.hwnd().expect("Failed to get HWND");
-            abd.uEdge = ABE_TOP;
+        // pre set position for resize in case of multiples dpi
+        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
+        WindowsApi::set_position(hitbox_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
 
-            abd.rc.bottom = height;
-            abd.rc.right = GetSystemMetrics(SM_CXSCREEN);
+        window.once("complete-setup", move |event| unsafe {
+            let result = || -> Result<()> {
+                let mut rect = rc_monitor.clone();
+                rect.bottom = rect.bottom - 1; // avoid be matched as a fullscreen app;
 
-            SHAppBarMessage(ABM_NEW, &mut abd);
-            SHAppBarMessage(ABM_SETPOS, &mut abd);
+                let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+                let toolbar_height: f32 = event.payload().parse().expect("Failed to parse payload");
 
-            WindowsApi::set_position(abd.hWnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)
-                .expect("Failed to set position");
+                let mut abd = APPBARDATA::default();
+                abd.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
+                abd.hWnd = hitbox_hwnd;
+                abd.uEdge = ABE_TOP;
 
-            let mut rect = abd.rc.clone();
-            rect.bottom = GetSystemMetrics(SM_CXSCREEN);
-            WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)
-                .expect("Failed to set position");
+                abd.rc = rc_monitor.clone();
+                abd.rc.bottom = abd.rc.top + (toolbar_height * dpi) as i32;
 
-            log::info!("Fancy Toolbar setup is completed");
-            log_if_error(seelen.handle().emit("toolbar-setup-completed", ()));
-            ft.window.unlisten(event.id());
+                SHAppBarMessage(ABM_NEW, &mut abd);
+                SHAppBarMessage(ABM_SETPOS, &mut abd);
+
+                WindowsApi::set_position(hitbox_hwnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)?;
+
+                WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+
+                log::info!("Fancy Toolbar setup completed for {}", monitor);
+                //let handle = get_app_handle();
+                //log_if_error(handle.emit("toolbar-setup-completed", ()));
+                Ok(())
+            };
+            log_if_error(result());
         });
 
         Ok((window, hitbox))

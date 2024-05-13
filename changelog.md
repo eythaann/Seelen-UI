@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- Multi-monitor support for Fancy Toolbar.
+
 ## [1.3.2]
 ### enhancements
 - Remove unnecessary tooltip collision on toolbar items.

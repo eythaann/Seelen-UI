@@ -42,18 +42,18 @@ impl WindowManager {
         "Virtual desktop hotkey switching preview",
     ];
 
-    pub fn new(handle: AppHandle<Wry>) -> Self {
+    pub fn new(handle: AppHandle<Wry>) -> Result<Self> {
         log::info!("Creating Tiling Windows Manager");
-        let virtual_desktop = VirtualDesktopManager::get_current_virtual_desktop()
-            .expect("Failed to get current virtual desktop");
-        Self {
-            window: Self::create_window(&handle).expect("Failed to create Manager Container"),
+        let virtual_desktop = winvd::get_current_desktop()?;
+        let guid = virtual_desktop.get_id()?;
+        Ok(Self {
+            window: Self::create_window(&handle)?,
             handle,
             tiled_handles: Vec::new(),
             floating_handles: Vec::new(),
-            current_virtual_desktop: virtual_desktop.id(),
+            current_virtual_desktop: format!("{:?}", guid),
             paused: true, // paused until complete_window_setup is called
-        }
+        })
     }
 
     pub fn complete_window_setup(&mut self) -> Result<()> {

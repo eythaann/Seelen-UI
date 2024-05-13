@@ -10,17 +10,19 @@ import { ToolBar } from './modules/main/infra';
 
 import { Selectors } from './modules/shared/store/app';
 
-import { HITBOX_TARGET, SELF_TARGET } from './modules/shared/utils/domain';
+async function onMount(height: number) {
+  let view = getCurrent();
+  await emitTo(view.label.replace('/', '-hitbox/'), 'init');
+  await view.show();
+  await view.emit('complete-setup', height);
+}
 
 export function App() {
   const structure = useSelector(Selectors.placeholder);
   const height = useSelector(Selectors.settings.height);
 
   useEffect(() => {
-    emitTo(HITBOX_TARGET, 'init').then(async () => {
-      await getCurrent().show();
-      await emitTo(SELF_TARGET, 'complete-setup', toPhysicalPixels(height));
-    });
+    onMount(height);
   }, []);
 
   if (!structure) {

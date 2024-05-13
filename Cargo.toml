@@ -51,6 +51,7 @@ os_info = "3.8.2"
 winreg = "0.52.0"
 crossbeam-channel = "0.5.12"
 regex = "1.10.4"
+getset = "0.1.2"
 
 [dependencies.windows]
 version = "0.52.0"

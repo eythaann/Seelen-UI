@@ -8,15 +8,15 @@ use windows::{
             GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
             PHYSICAL_MONITOR,
         },
-        Foundation::{CloseHandle, HANDLE, HWND, LUID, RECT},
+        Foundation::{CloseHandle, HANDLE, HWND, LPARAM, LUID, RECT},
         Graphics::{
             Dwm::{
                 DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
                 DWMWINDOWATTRIBUTE, DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                GetMonitorInfoW, MonitorFromWindow, HMONITOR, MONITORINFOEXW,
-                MONITOR_DEFAULTTOPRIMARY,
+                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromWindow, HDC, HMONITOR,
+                MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
             },
         },
         Media::Audio::{
@@ -37,12 +37,21 @@ use windows::{
             },
         },
         UI::{
+            HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
                 IShellItem2, IVirtualDesktopManager, SHCreateItemFromParsingName,
                 VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE
+                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW,
+                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
+                IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
+                EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION,
+                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
+                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                WINDOW_EX_STYLE, WINDOW_STYLE,
             },
         },
     },
@@ -55,6 +64,23 @@ use crate::{
 
 pub struct WindowsApi {}
 impl WindowsApi {
+    pub fn enum_display_monitors(
+        callback: MONITORENUMPROC,
+        callback_data_address: isize,
+    ) -> Result<()> {
+        unsafe { EnumDisplayMonitors(HDC(0), None, callback, LPARAM(callback_data_address)) }
+            .ok()?;
+        Ok(())
+    }
+
+    pub fn get_device_pixel_ratio(hmonitor: HMONITOR) -> Result<f32> {
+        let mut dpi_x: u32 = 0;
+        let mut _dpi_y: u32 = 0;
+        unsafe { GetDpiForMonitor(hmonitor, MDT_EFFECTIVE_DPI, &mut dpi_x, &mut _dpi_y)? };
+        // 96 is the default DPI value on Windows
+        Ok(dpi_x as f32 / 96 as f32)
+    }
+
     pub fn window_thread_process_id(hwnd: HWND) -> (u32, u32) {
         let mut process_id: u32 = 0;
 
@@ -153,8 +179,8 @@ impl WindowsApi {
                 order,
                 rect.left,
                 rect.top,
-                rect.right - rect.left,
-                rect.bottom - rect.top,
+                (rect.right - rect.left).abs(),
+                (rect.bottom - rect.top).abs(),
                 flags,
             )?;
         }

@@ -1,32 +1,45 @@
 use std::sync::Arc;
 
+use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
+use windows::Win32::{
+    Foundation::{BOOL, LPARAM, RECT},
+    Graphics::Gdi::{HDC, HMONITOR},
+};
 
 use crate::{
     apps_config::SETTINGS_BY_APP,
     error_handler::{log_if_error, Result},
     hook::register_win_hook,
-    seelen_bar::FancyToolbar,
+    monitor::Monitor,
     seelen_shell::SeelenShell,
     seelen_weg::SeelenWeg,
     seelen_wm::WindowManager,
     state::State,
     system::register_system_events,
-    utils::run_ahk_file,
+    utils::run_ahk_file, windows_api::WindowsApi,
 };
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
+    pub static ref APP_HANDLE: Arc<Mutex<Option<AppHandle<Wry>>>> =
+        Arc::new(Mutex::new(None));
+}
+
+pub fn get_app_handle() -> AppHandle<Wry> {
+    APP_HANDLE.lock().clone().expect("get_app_handle called but app is still not initialized")
 }
 
 /** Struct should be initialized first before calling any other methods */
+#[derive(Getters, MutGetters)]
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
+    #[getset(get="pub", get_mut="pub")]
+    monitors: Vec<Monitor>,
     weg: Option<SeelenWeg>,
-    bar: Option<FancyToolbar>,
     shell: Option<SeelenShell>,
     window_manager: Option<WindowManager>,
     state: State,
@@ -37,8 +50,8 @@ impl Default for Seelen {
     fn default() -> Self {
         Self {
             handle: None,
+            monitors: Vec::new(),
             weg: None,
-            bar: None,
             shell: None,
             window_manager: None,
             state: State::default(),
@@ -62,14 +75,6 @@ impl Seelen {
         self.weg.as_ref()
     }
 
-    pub fn toolbar(&self) -> Option<&FancyToolbar> {
-        self.bar.as_ref()
-    }
-
-    pub fn toolbar_mut(&mut self) -> Option<&mut FancyToolbar> {
-        self.bar.as_mut()
-    }
-
     /* pub fn shell(&self) -> Option<&SeelenShell> {
         self.shell.as_ref()
     }
@@ -89,21 +94,10 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
-    pub fn lazy_init(&mut self) {
-        if self.state.is_window_manager_enabled() {
-            self.window_manager = Some(WindowManager::new(self.handle().clone()));
-        }
-
-        if self.state.is_weg_enabled() {
-            let mut weg = SeelenWeg::new(self.handle().clone());
-            log_if_error(weg.start());
-            self.weg = Some(weg);
-        }
-    }
-
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
         self.handle = Some(app.clone());
+        *APP_HANDLE.lock() = Some(app.clone());
 
         self.ensure_folders()?;
 
@@ -121,20 +115,21 @@ impl Seelen {
         );
         log_if_error(settings_by_app.load());
 
-        if self.state.is_bar_enabled() {
-            self.bar = Some(FancyToolbar::new(app.clone()));
+        if self.state.is_window_manager_enabled() {
+            match WindowManager::new(self.handle().clone()) {
+                Ok(wm) => {
+                    self.window_manager = Some(wm);
+                }
+                Err(err) => {
+                    log::error!("{:?}", err);
+                }
+            }
+        }
 
-            // wait for bar to be initialized see src\background\seelen_bar\mod.rs complete-setup event
-            app.listen("toolbar-setup-completed", move |e| {
-                std::thread::spawn(move || {
-                    let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
-                    seelen.lazy_init();
-                    seelen.handle().unlisten(e.id());
-                    std::mem::forget(seelen);
-                });
-            });
-        } else {
-            self.lazy_init();
+        if self.state.is_weg_enabled() {
+            let mut weg = SeelenWeg::new(self.handle().clone());
+            log_if_error(weg.start());
+            self.weg = Some(weg);
         }
 
         if self.state.is_shell_enabled() {
@@ -147,6 +142,7 @@ impl Seelen {
 
     pub fn start(&mut self) -> Result<()> {
         self.start_ahk_shortcuts()?;
+        Self::enum_monitors();
         register_win_hook()?;
         register_system_events(self.handle().clone())?;
         Ok(())
@@ -247,5 +243,32 @@ impl Seelen {
         .build()?;
 
         Ok(())
+    }
+}
+
+impl Seelen {
+    unsafe extern "system" fn enum_monitors_proc(
+        hmonitor: HMONITOR,
+        _hdc: HDC,
+        _rect_clip: *mut RECT,
+        _lparam: LPARAM,
+    ) -> BOOL {
+        let mut seelen = SEELEN.lock();
+        match Monitor::new(hmonitor, &seelen.state) {
+            Ok(monitor) => seelen.monitors.push(monitor),
+            Err(err) => log::error!("Failed to create monitor: {:?}", err),
+        }
+        true.into()
+    }
+
+    pub fn enum_monitors() {
+        std::thread::spawn(|| {
+            log::trace!("Enumerating Monitors");
+            log_if_error(WindowsApi::enum_display_monitors(
+                Some(Self::enum_monitors_proc),
+                0,
+            ));
+            log::trace!("Finished enumerating Monitors");
+        });
     }
 }

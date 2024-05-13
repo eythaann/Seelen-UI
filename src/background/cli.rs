@@ -133,8 +133,11 @@ pub fn handle_cli_events(_app: &AppHandle<Wry>, matches: &clap::ArgMatches) -> R
                 }
             }
             FancyToolbar::CLI_IDENTIFIER => {
-                if let Some(toolbar) = SEELEN.lock().toolbar_mut() {
-                    toolbar.process(matches)?;
+                let mut seelen = SEELEN.lock();
+                for monitor in seelen.monitors_mut() {
+                    if let Some(toolbar) = monitor.toolbar_mut() {
+                        toolbar.process(matches)?;
+                    }
                 }
             }
             _ => {}
