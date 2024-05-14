@@ -107,10 +107,9 @@ fn ensure_hitboxes_zorder() {
             if let Some(toolbar) = monitor.toolbar() {
                 toolbar.ensure_hitbox_zorder()?;
             }
-        }
-
-        if let Some(weg) = seelen.weg() {
-            weg.ensure_hitbox_zorder()?;
+            if let Some(weg) = monitor.weg() {
+                weg.ensure_hitbox_zorder()?;
+            }
         }
         Ok(())
     });

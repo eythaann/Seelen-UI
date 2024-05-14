@@ -23,6 +23,21 @@ const Separator2: Separator = {
   type: SpecialItemType.Separator,
 };
 
+function shouldBeHidden(hideMode: SeelenWegHideMode, isActive: boolean, isOverlaped: boolean) {
+  let shouldBeHidden = false;
+  switch (hideMode) {
+    case SeelenWegHideMode.Always:
+      shouldBeHidden = !isActive;
+      break;
+    case SeelenWegHideMode.Never:
+      shouldBeHidden = false;
+      break;
+    case SeelenWegHideMode.OnOverlap:
+      shouldBeHidden = !isActive && isOverlaped;
+  }
+  return shouldBeHidden;
+}
+
 export function SeelenWeg() {
   const focusedHandle = useSelector(Selectors.focusedHandle);
   const theme = useSelector(Selectors.theme);
@@ -33,7 +48,7 @@ export function SeelenWeg() {
   const pinnedOnCenter = useSelector(Selectors.pinnedOnCenter);
   const pinnedOnRight = useSelector(Selectors.pinnedOnRight);
 
-  const [hidden, setHidden] = useState(false);
+  const [isActive, setActive] = useState(false);
 
   const refs = useRef<HTMLDivElement[]>([]);
   const separatorRefs = useRef<HTMLDivElement[]>([]);
@@ -48,14 +63,14 @@ export function SeelenWeg() {
   const dispatch = useDispatch();
 
   useAppBlur(() => {
-    setHidden(settings.hideMode !== SeelenWegHideMode.Never);
     shouldAnimate.current = false;
+    setActive(false);
   }, [settings]);
 
   useAppActivation(() => {
-    setHidden(false);
     shouldAnimate.current = true;
     requestAnimationFrame(animate);
+    setActive(true);
   }, [settings]);
 
   useEffect(() => {
@@ -234,7 +249,7 @@ export function SeelenWeg() {
         horizontal: isHorizontal,
         vertical: !isHorizontal,
         'full-width': settings.mode === SeelenWegMode.FULL_WIDTH,
-        hidden: (isOverlaped || settings.hideMode === SeelenWegHideMode.Always) && hidden,
+        hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
       })}
     >
       <BackgroundByLayers prefix="taskbar" styles={theme?.seelenweg.backgroundLayers || []} />

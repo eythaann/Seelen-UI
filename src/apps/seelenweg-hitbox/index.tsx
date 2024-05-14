@@ -9,12 +9,13 @@ import './index.css';
 async function Main() {
   wrapConsole();
   let view = getCurrent();
+  let main = view.label.replace('-hitbox', '');
 
   view.listen('init', () => {
     getCurrent().show();
 
     document.body.addEventListener('mousemove', () => {
-      emitTo('seelenweg', 'mouseenter');
+      emitTo(main, 'mouseenter');
     });
 
     async function onClick(e: MouseEvent | TouchEvent) {
@@ -25,14 +26,14 @@ async function Main() {
       if (e instanceof MouseEvent) {
         x = e.clientX;
         y = e.clientY;
-        emitTo('fancy-toolbar', 'click', { x, y });
+        emitTo(main, 'click', { x, y });
         return;
       }
 
       if (e.touches && e.touches.length > 0) {
         x = e.touches[0]?.clientX || 0;
         y = e.touches[0]?.clientY || 0;
-        emitTo('fancy-toolbar', 'click', { x, y });
+        emitTo(main, 'click', { x, y });
       }
     }
 

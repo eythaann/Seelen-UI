@@ -1,4 +1,3 @@
-use serde::Deserialize;
 use windows::Win32::{
     Foundation::{HWND, RECT},
     UI::WindowsAndMessaging::{
@@ -10,16 +9,9 @@ use windows::Win32::{
 use crate::{
     error_handler::{log_if_error, Result},
     seelen::SEELEN,
+    utils::rect::Rect,
     windows_api::WindowsApi,
 };
-
-#[derive(Deserialize, Debug)]
-pub struct Rect {
-    pub left: i32,
-    pub top: i32,
-    pub right: i32,
-    pub bottom: i32,
-}
 
 #[tauri::command]
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {

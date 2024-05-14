@@ -1,4 +1,4 @@
-use std::{thread::sleep, time::Duration, sync::Arc};
+use std::{sync::Arc, thread::sleep, time::Duration};
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -8,18 +8,25 @@ use windows::Win32::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS,
-            EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE,
-            EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND,
-            EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART, EVENT_SYSTEM_MOVESIZEEND,
-            EVENT_SYSTEM_MOVESIZESTART, MSG,
+            EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS, EVENT_OBJECT_HIDE,
+            EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW,
+            EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART,
+            EVENT_SYSTEM_MOVESIZEEND, EVENT_SYSTEM_MOVESIZESTART, MSG,
         },
     },
 };
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    apps_config::{AppExtraFlag, SETTINGS_BY_APP}, error_handler::{log_if_error, Result}, seelen::{Seelen, SEELEN}, seelen_weg::SeelenWeg, seelen_wm::WindowManager, utils::{constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS}, sleep_millis}, windows_api::WindowsApi
+    apps_config::{AppExtraFlag, SETTINGS_BY_APP},
+    error_handler::{log_if_error, Result},
+    seelen::{Seelen, SEELEN},
+    seelen_wm::WindowManager,
+    utils::{
+        constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS},
+        sleep_millis,
+    },
+    windows_api::WindowsApi,
 };
 
 lazy_static! {
@@ -65,8 +72,8 @@ impl HookManager {
     }
 
     pub fn set_resume_callback<F>(&mut self, cb: F)
-    where 
-        F: Fn(&mut HookManager) + Send + 'static
+    where
+        F: Fn(&mut HookManager) + Send + 'static,
     {
         self.resume_cb = Some(Box::new(cb));
     }
@@ -82,11 +89,9 @@ impl HookManager {
     }
 }
 
-
-
 pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
     match event {
-        DesktopEvent::DesktopChanged{ new, old: _ } => {
+        DesktopEvent::DesktopChanged { new, old: _ } => {
             let mut seelen = SEELEN.lock();
             if let Some(wm) = seelen.wm_mut() {
                 wm.discard_reservation()?;
@@ -96,7 +101,9 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
         DesktopEvent::WindowChanged(hwnd) => {
             if WindowsApi::is_window(hwnd) {
                 if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
-                    if config.options_contains(AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)? {
+                    if config.options_contains(AppExtraFlag::Pinned)
+                        && !winvd::is_pinned_window(hwnd)?
+                    {
                         winvd::pin_window(hwnd)?;
                     }
                 }
@@ -140,20 +147,6 @@ pub fn process_win_event(seelen: &mut Seelen, event: u32, hwnd: HWND) -> Result<
             }
         }
         EVENT_OBJECT_HIDE => {
-            if let Some(weg) = seelen.weg_mut() {
-                if weg.contains_app(hwnd) {
-                    // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
-                    // parent so we can't filter it on open event but these are immediately hidden when the ApplicationFrameHost.exe parent
-                    // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
-                    let parent = WindowsApi::get_parent(hwnd);
-                    if parent.0 != 0 {
-                        weg.replace_hwnd(hwnd, parent)?;
-                    } else {
-                        weg.remove_hwnd(hwnd);
-                    }
-                }
-            }
-
             if let Some(wm) = seelen.wm_mut() {
                 if wm.is_managed(hwnd) {
                     wm.remove_hwnd(hwnd)?;
@@ -161,12 +154,6 @@ pub fn process_win_event(seelen: &mut Seelen, event: u32, hwnd: HWND) -> Result<
             }
         }
         EVENT_OBJECT_DESTROY /* | EVENT_OBJECT_CLOAKED */ => {
-            if let Some(weg) = seelen.weg_mut() {
-                if weg.contains_app(hwnd) {
-                    weg.remove_hwnd(hwnd);
-                }
-            }
-
             if let Some(wm) = seelen.wm_mut() {
                 let title = WindowsApi::get_window_text(hwnd);
                 if WindowManager::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
@@ -178,17 +165,6 @@ pub fn process_win_event(seelen: &mut Seelen, event: u32, hwnd: HWND) -> Result<
             }
         }
         EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE /* | EVENT_OBJECT_UNCLOAKED */ => {
-            if let Some(weg) = seelen.weg_mut() {
-                if "Shell_TrayWnd" == WindowsApi::get_class(hwnd)? {
-                    // ensure that the taskbar is always hidden
-                    weg.hide_taskbar(true);
-                }
-
-                if SeelenWeg::is_real_window(hwnd, false) {
-                    weg.add_hwnd(hwnd);
-                }
-            }
-
             if let Some(wm) = seelen.wm_mut() {
                 let title = WindowsApi::get_window_text(hwnd);
                 if WindowManager::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
@@ -209,14 +185,6 @@ pub fn process_win_event(seelen: &mut Seelen, event: u32, hwnd: HWND) -> Result<
             }
         }
         EVENT_OBJECT_NAMECHANGE => {
-            if let Some(weg) = seelen.weg_mut() {
-                if weg.contains_app(hwnd) {
-                    weg.update_app(hwnd);
-                } else if SeelenWeg::is_real_window(hwnd, false) {
-                    weg.add_hwnd(hwnd);
-                }
-            }
-            
             if let Some(wm) = seelen.wm_mut() {
                 if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
                     wm.set_active_window(hwnd)?;
@@ -233,22 +201,11 @@ pub fn process_win_event(seelen: &mut Seelen, event: u32, hwnd: HWND) -> Result<
             }
         }
         EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
-            if let Some(seelenweg) = seelen.weg_mut() {
-                match seelenweg.contains_app(hwnd) {
-                    true => seelenweg.set_active_window(hwnd)?,
-                    false => seelenweg.set_active_window(HWND(0))?, // avoid rerenders on multiple unmanaged focus
-                }
-                seelenweg.update_status_if_needed(hwnd)?;
-            }
             if let Some(wm) = seelen.wm_mut() {
                 wm.set_active_window(hwnd)?;
             }
         }
         EVENT_OBJECT_LOCATIONCHANGE => {
-            if let Some(weg) = seelen.weg_mut() {
-                weg.update_status_if_needed(hwnd)?;
-            }
-
             if let Some(wm) = seelen.wm_mut() {
                 if WindowsApi::is_maximized(hwnd) {
                     wm.pseudo_pause()?;
@@ -300,7 +257,9 @@ pub extern "system" fn win_event_hook(
     ); */
 
     let title = WindowsApi::get_window_text(hwnd);
-    if (event == EVENT_OBJECT_FOCUS || event == EVENT_SYSTEM_FOREGROUND) && IGNORE_FOCUS.contains(&title) {
+    if (event == EVENT_OBJECT_FOCUS || event == EVENT_SYSTEM_FOREGROUND)
+        && IGNORE_FOCUS.contains(&title)
+    {
         return;
     }
 
@@ -308,6 +267,9 @@ pub extern "system" fn win_event_hook(
     for monitor in seelen.monitors_mut() {
         if let Some(toolbar) = monitor.toolbar_mut() {
             log_if_error(toolbar.process_win_event(event, hwnd));
+        }
+        if let Some(weg) = monitor.weg_mut() {
+            log_if_error(weg.process_win_event(event, hwnd));
         }
     }
 

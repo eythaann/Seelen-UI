@@ -4,17 +4,24 @@ use serde::Deserialize;
 
 use crate::error_handler::Result;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Clone)]
 struct FeatureState {
     enabled: Option<bool>,
 }
 
-#[derive(Debug, Deserialize, Default)]
+#[derive(Debug, Deserialize, Clone)]
+struct FancyToolbarState {
+    enabled: Option<bool>,
+    height: Option<u32>,
+}
+
+
+#[derive(Debug, Deserialize, Default, Clone)]
 pub struct State {
     /** this is no snake case for a error in naming but is already published so FF */
     seelenweg: Option<FeatureState>,
     seelen_shell: Option<FeatureState>,
-    fancy_toolbar: Option<FeatureState>,
+    fancy_toolbar: Option<FancyToolbarState>,
     window_manager: Option<FeatureState>,
     ahk_enabled: Option<bool>,
 }
@@ -70,5 +77,14 @@ impl State {
             return enable;
         }
         true
+    }
+
+    pub fn get_toolbar_height(&self) -> u32 {
+        if let Some(bar) = &self.fancy_toolbar {
+            if let Some(height) = bar.height {
+                return height;
+            }
+        }
+        30
     }
 }

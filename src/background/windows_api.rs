@@ -208,6 +208,10 @@ impl WindowsApi {
         Self::_set_position(hwnd, order, *rect, uflags)
     }
 
+    pub fn move_window(hwnd: HWND, rect: &RECT) -> Result<()> {
+        Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_NOACTIVATE)
+    }
+
     pub fn bring_to(hwnd: HWND, after: HWND) -> Result<()> {
         Self::set_position(
             hwnd,

@@ -5,9 +5,8 @@
   "local": true,
   "windows": [
     "settings",
-    "seelenpad",
-    "seelenweg",
-    "seelenweg-hitbox",
+    "seelenweg/*",
+    "seelenweg-hitbox/*",
     "updater",
     "seelen_wm",
     "fancy-toolbar/*",

@@ -2,23 +2,23 @@ pub mod handler;
 pub mod hook;
 pub mod icon_extractor;
 
-use std::{env::temp_dir, path::PathBuf};
+use std::path::PathBuf;
 
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use serde::Serialize;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
-use tauri_plugin_shell::ShellExt;
 use win_screenshot::capture::capture_window;
 use windows::{
     core::PCWSTR,
     Win32::{
         Foundation::{HWND, LPARAM, RECT},
+        Graphics::Gdi::HMONITOR,
         UI::{
             Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
             WindowsAndMessaging::{
-                FindWindowW, GetParent, ShowWindow, SHOW_WINDOW_CMD, SW_HIDE, SW_SHOWNORMAL,
-                WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+                FindWindowW, GetParent, ShowWindow, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
+                SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
             },
         },
     },
@@ -26,6 +26,7 @@ use windows::{
 
 use crate::{
     error_handler::Result,
+    seelen::{get_app_handle, SEELEN},
     utils::{are_overlaped, filename_from_path},
     windows_api::WindowsApi,
 };
@@ -65,134 +66,38 @@ pub struct SeelenWegApp {
 pub struct SeelenWeg {
     handle: AppHandle<Wry>,
     apps: Vec<SeelenWegApp>,
-    hitbox_handle: isize,
-    window_handle: isize,
+    window: WebviewWindow<Wry>,
+    hitbox: WebviewWindow<Wry>,
+    hitbox_enabled: bool,
     overlaped: bool,
     last_hitbox_rect: Option<RECT>,
 }
 
 impl SeelenWeg {
-    const TARGET: &'static str = "seelenweg";
-    const TARGET_HITBOX: &'static str = "seelenweg-hitbox";
+    pub fn new(monitor: isize) -> Result<Self> {
+        log::info!("Creating SeelenWeg");
+        let handle = get_app_handle();
+        let (window, hitbox) = Self::create_window(&handle, monitor)?;
 
-    pub fn new(handle: AppHandle<Wry>) -> Self {
-        Self {
+        let weg = Self {
             handle,
             apps: Vec::new(),
-            hitbox_handle: 0,
-            window_handle: 0,
+            window,
+            hitbox,
+            hitbox_enabled: false,
             overlaped: false,
             last_hitbox_rect: None,
-        }
-    }
+        };
 
-    fn create_window(&self) -> Result<(WebviewWindow, WebviewWindow)> {
-        let hitbox = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
-            &self.handle,
-            Self::TARGET_HITBOX,
-            tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
-        )
-        .title("SeelenWeg Hitbox")
-        .inner_size(0.0, 0.0)
-        .position(0.0, 0.0)
-        .maximizable(false)
-        .minimizable(false)
-        .resizable(false)
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .skip_taskbar(true)
-        .always_on_top(true)
-        .build()?;
-
-        let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
-            &self.handle,
-            Self::TARGET,
-            tauri::WebviewUrl::App("seelenweg/index.html".into()),
-        )
-        .title("SeelenWeg")
-        .position(0.0, 0.0)
-        .maximizable(false)
-        .minimizable(false)
-        .resizable(false)
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .skip_taskbar(true)
-        .always_on_top(true)
-        .build()?;
-
-        window.set_ignore_cursor_events(true)?;
-
-        Ok((window, hitbox))
+        Ok(weg)
     }
 
     pub fn set_active_window(&self, hwnd: HWND) -> Result<()> {
         if WindowsApi::get_window_text(hwnd) == "Task Switching" {
             return Ok(());
         }
-        self.handle
-            .emit_to(Self::TARGET, "set-focused-handle", hwnd.0)?;
+        self.window.emit("set-focused-handle", hwnd.0)?;
         Ok(())
-    }
-
-    fn load_uwp_apps(&self) -> Result<()> {
-        let pwsh_script = include_str!("load_uwp_apps.ps1");
-        let pwsh_script_path = temp_dir().join("load_uwp_apps.ps1");
-        std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
-
-        tauri::async_runtime::block_on(async move {
-            let result = self
-                .handle
-                .shell()
-                .command("powershell")
-                .args([
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-NoProfile",
-                    "-File",
-                    &pwsh_script_path.to_string_lossy(),
-                    "-SavePath",
-                    &self
-                        .generated_files_path()
-                        .join("uwp_manifests.json")
-                        .to_string_lossy()
-                        .trim_start_matches("\\\\?\\"),
-                ])
-                .status()
-                .await;
-
-            match result {
-                Ok(status) => {
-                    log::trace!(
-                        "load_uwp_apps exit code: {}",
-                        status.code().unwrap_or_default()
-                    );
-                }
-                Err(err) => log::error!("load_uwp_apps Failed to wait for process: {}", err),
-            };
-        });
-
-        Ok(())
-    }
-
-    // TODO(eythan) remove this, add to new.
-    pub fn start(&mut self) -> Result<()> {
-        log::trace!("Starting SeelenWeg");
-
-        self.hide_taskbar(true);
-        self.load_uwp_apps()?;
-        let (window, hitbox) = self.create_window()?;
-        self.hitbox_handle = hitbox.hwnd()?.0;
-        self.window_handle = window.hwnd()?.0;
-        Self::enum_opened_windows();
-        Ok(())
-    }
-
-    pub fn stop(&self) {
-        self.hide_taskbar(false);
     }
 
     pub fn generated_files_path(&self) -> PathBuf {
@@ -242,38 +147,6 @@ impl SeelenWeg {
             .to_string())
     }
 
-    pub fn hide_taskbar(&self, hide: bool) {
-        let lparam: LPARAM;
-        let cmdshow: SHOW_WINDOW_CMD;
-        if hide {
-            lparam = LPARAM(ABS_AUTOHIDE as isize);
-            cmdshow = SW_HIDE;
-        } else {
-            lparam = LPARAM(ABS_ALWAYSONTOP as isize);
-            cmdshow = SW_SHOWNORMAL;
-        }
-
-        let name: Vec<u16> = format!("Shell_TrayWnd\0").encode_utf16().collect();
-        let mut ap_bar: APPBARDATA = unsafe { std::mem::zeroed() };
-
-        ap_bar.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-        ap_bar.hWnd = unsafe { FindWindowW(PCWSTR(name.as_ptr()), PCWSTR::null()) };
-
-        if ap_bar.hWnd.0 != 0 {
-            ap_bar.lParam = lparam;
-            unsafe {
-                SHAppBarMessage(ABM_SETSTATE, &mut ap_bar as *mut APPBARDATA);
-                ShowWindow(ap_bar.hWnd, cmdshow);
-            }
-        }
-    }
-
-    pub fn update_ui(&self) {
-        self.handle
-            .emit_to(Self::TARGET, "add-open-app-many", self.apps.clone())
-            .expect("Failed to emit");
-    }
-
     pub fn contains_app(&self, hwnd: HWND) -> bool {
         self.apps
             .iter()
@@ -284,8 +157,8 @@ impl SeelenWeg {
         let app = self.apps.iter_mut().find(|app| app.hwnd == hwnd.0);
         if let Some(app) = app {
             app.title = WindowsApi::get_window_text(hwnd);
-            self.handle
-                .emit_to(Self::TARGET, "update-open-app-info", app.clone())
+            self.window
+                .emit("update-open-app-info", app.clone())
                 .expect("Failed to emit");
         }
     }
@@ -294,8 +167,7 @@ impl SeelenWeg {
         let app = self.apps.iter_mut().find(|app| app.hwnd == old.0);
         if let Some(app) = app {
             app.hwnd = new.0;
-            self.handle
-                .emit_to(Self::TARGET, "replace-open-app", app.clone())?;
+            self.window.emit("replace-open-app", app.clone())?;
         }
         Ok(())
     }
@@ -326,8 +198,8 @@ impl SeelenWeg {
             process_hwnd: hwnd.0,
         };
 
-        self.handle
-            .emit_to(Self::TARGET, "add-open-app", app.clone())
+        self.window
+            .emit("add-open-app", app.clone())
             .expect("Failed to emit");
 
         self.apps.push(app);
@@ -335,22 +207,25 @@ impl SeelenWeg {
 
     pub fn remove_hwnd(&mut self, hwnd: HWND) {
         self.apps.retain(|app| app.hwnd != hwnd.0);
-        self.handle
-            .emit_to(Self::TARGET, "remove-open-app", hwnd.0)
+        self.window
+            .emit("remove-open-app", hwnd.0)
             .expect("Failed to emit");
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> bool {
         let rect = WindowsApi::get_window_rect(hwnd);
-        let hitbox_rect = self
-            .last_hitbox_rect
-            .unwrap_or_else(|| WindowsApi::get_window_rect(HWND(self.hitbox_handle)));
+        let hitbox_rect = self.last_hitbox_rect.unwrap_or_else(|| {
+            WindowsApi::get_window_rect(HWND(
+                self.hitbox.hwnd().expect("Failed to get hitbox handle").0,
+            ))
+        });
         are_overlaped(&hitbox_rect, &rect)
     }
 
     pub fn update_status_if_needed(&mut self, hwnd: HWND) -> Result<()> {
-        if WindowsApi::is_iconic(hwnd)
+        if !self.hitbox_enabled
             || !WindowsApi::is_window_visible(hwnd)
+            || WindowsApi::is_iconic(hwnd)
             || TITLE_BLACK_LIST.contains(&WindowsApi::get_window_text(hwnd).as_str())
             || EXE_BLACK_LIST.contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str())
         {
@@ -364,23 +239,19 @@ impl SeelenWeg {
         }
 
         self.last_hitbox_rect = if self.overlaped {
-            Some(WindowsApi::get_window_rect(HWND(self.hitbox_handle)))
+            Some(WindowsApi::get_window_rect(HWND(self.hitbox.hwnd()?.0)))
         } else {
             None
         };
 
-        self.handle
-            .emit_to(Self::TARGET, "set-auto-hide", self.overlaped)?;
+        self.window.emit("set-auto-hide", self.overlaped)?;
         Ok(())
     }
 
     pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        WindowsApi::bring_to(
-            HWND(self.hitbox_handle),
-            HWND(self.window_handle),
-        )
+        WindowsApi::bring_to(HWND(self.hitbox.hwnd()?.0), HWND(self.window.hwnd()?.0))
     }
-    
+
     pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {
         if !WindowsApi::is_window_visible(hwnd) {
             return false;
@@ -414,5 +285,104 @@ impl SeelenWeg {
             let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
             DynamicImage::ImageRgba8(image)
         })
+    }
+}
+
+impl SeelenWeg {
+    const TARGET: &'static str = "seelenweg";
+    const TARGET_HITBOX: &'static str = "seelenweg-hitbox";
+
+    fn create_window(
+        manager: &AppHandle<Wry>,
+        monitor_id: isize,
+    ) -> Result<(WebviewWindow, WebviewWindow)> {
+        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor_id))?;
+        let rc_work = monitor_info.monitorInfo.rcWork;
+
+        let hitbox = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
+            manager,
+            format!("{}/{}", Self::TARGET_HITBOX, monitor_id),
+            tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
+        )
+        .title("SeelenWeg Hitbox")
+        .maximizable(false)
+        .minimizable(false)
+        .resizable(false)
+        .visible(false)
+        .decorations(false)
+        .transparent(true)
+        .shadow(false)
+        .skip_taskbar(true)
+        .always_on_top(true)
+        .build()?;
+
+        let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
+            manager,
+            format!("{}/{}", Self::TARGET, monitor_id),
+            tauri::WebviewUrl::App("seelenweg/index.html".into()),
+        )
+        .title("SeelenWeg")
+        .maximizable(false)
+        .minimizable(false)
+        .resizable(false)
+        .visible(false)
+        .decorations(false)
+        .transparent(true)
+        .shadow(false)
+        .skip_taskbar(true)
+        .always_on_top(true)
+        .build()?;
+
+        window.set_ignore_cursor_events(true)?;
+
+        let main_hwnd = HWND(window.hwnd()?.0);
+        let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
+
+        WindowsApi::move_window(hitbox_hwnd, &rc_work)?;
+
+        // pre set position before resize in case of multiples dpi
+        WindowsApi::move_window(main_hwnd, &rc_work)?;
+        WindowsApi::set_position(main_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
+
+        window.once("complete-setup", move |_event| {
+            for monitor in SEELEN.lock().monitors_mut() {
+                if let Some(weg) = monitor.weg_mut() {
+                    if weg.window.label() == format!("{}/{}", Self::TARGET, monitor_id) {
+                        weg.hitbox_enabled = true;
+                        weg.window
+                            .emit("add-open-app-many", weg.apps.clone())
+                            .expect("Failed to emit");
+                    }
+                }
+            }
+        });
+
+        Ok((window, hitbox))
+    }
+
+    pub fn hide_taskbar(hide: bool) {
+        let lparam: LPARAM;
+        let cmdshow: SHOW_WINDOW_CMD;
+        if hide {
+            lparam = LPARAM(ABS_AUTOHIDE as isize);
+            cmdshow = SW_HIDE;
+        } else {
+            lparam = LPARAM(ABS_ALWAYSONTOP as isize);
+            cmdshow = SW_SHOWNORMAL;
+        }
+
+        let name: Vec<u16> = format!("Shell_TrayWnd\0").encode_utf16().collect();
+        let mut ap_bar: APPBARDATA = unsafe { std::mem::zeroed() };
+
+        ap_bar.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
+        ap_bar.hWnd = unsafe { FindWindowW(PCWSTR(name.as_ptr()), PCWSTR::null()) };
+
+        if ap_bar.hWnd.0 != 0 {
+            ap_bar.lParam = lparam;
+            unsafe {
+                SHAppBarMessage(ABM_SETSTATE, &mut ap_bar as *mut APPBARDATA);
+                ShowWindow(ap_bar.hWnd, cmdshow);
+            }
+        }
     }
 }

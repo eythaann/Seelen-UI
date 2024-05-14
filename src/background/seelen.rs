@@ -1,4 +1,4 @@
-use std::sync::Arc;
+use std::{env::temp_dir, sync::Arc};
 
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
@@ -6,8 +6,9 @@ use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
-    Foundation::{BOOL, LPARAM, RECT},
+    Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::{HDC, HMONITOR},
+    UI::WindowsAndMessaging::EnumWindows,
 };
 
 use crate::{
@@ -20,26 +21,29 @@ use crate::{
     seelen_wm::WindowManager,
     state::State,
     system::register_system_events,
-    utils::run_ahk_file, windows_api::WindowsApi,
+    utils::run_ahk_file,
+    windows_api::WindowsApi,
 };
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
-    pub static ref APP_HANDLE: Arc<Mutex<Option<AppHandle<Wry>>>> =
-        Arc::new(Mutex::new(None));
+    pub static ref APP_HANDLE: Arc<Mutex<Option<AppHandle<Wry>>>> = Arc::new(Mutex::new(None));
+    pub static ref APP_STATE: Arc<Mutex<State>> = Arc::new(Mutex::new(State::default()));
 }
 
 pub fn get_app_handle() -> AppHandle<Wry> {
-    APP_HANDLE.lock().clone().expect("get_app_handle called but app is still not initialized")
+    APP_HANDLE
+        .lock()
+        .clone()
+        .expect("get_app_handle called but app is still not initialized")
 }
 
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters)]
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
-    #[getset(get="pub", get_mut="pub")]
+    #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
-    weg: Option<SeelenWeg>,
     shell: Option<SeelenShell>,
     window_manager: Option<WindowManager>,
     state: State,
@@ -51,7 +55,6 @@ impl Default for Seelen {
         Self {
             handle: None,
             monitors: Vec::new(),
-            weg: None,
             shell: None,
             window_manager: None,
             state: State::default(),
@@ -65,14 +68,6 @@ impl Seelen {
     /** Ensure Seelen is initialized first before calling */
     pub fn handle(&self) -> &AppHandle<Wry> {
         self.handle.as_ref().unwrap()
-    }
-
-    pub fn weg_mut(&mut self) -> Option<&mut SeelenWeg> {
-        self.weg.as_mut()
-    }
-
-    pub fn weg(&self) -> Option<&SeelenWeg> {
-        self.weg.as_ref()
     }
 
     /* pub fn shell(&self) -> Option<&SeelenShell> {
@@ -100,11 +95,13 @@ impl Seelen {
         *APP_HANDLE.lock() = Some(app.clone());
 
         self.ensure_folders()?;
+        self.load_uwp_apps_info()?;
 
         let path = app
             .path()
             .resolve(".config\\seelen\\settings.json", BaseDirectory::Home)?;
         self.state = State::new(&path).unwrap_or_default();
+        *APP_STATE.lock() = self.state.clone();
 
         let mut settings_by_app = SETTINGS_BY_APP.lock();
         settings_by_app.set_paths(
@@ -126,12 +123,6 @@ impl Seelen {
             }
         }
 
-        if self.state.is_weg_enabled() {
-            let mut weg = SeelenWeg::new(self.handle().clone());
-            log_if_error(weg.start());
-            self.weg = Some(weg);
-        }
-
         if self.state.is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
         }
@@ -141,7 +132,12 @@ impl Seelen {
     }
 
     pub fn start(&mut self) -> Result<()> {
+        if self.state.is_weg_enabled() {
+            SeelenWeg::hide_taskbar(true);
+        }
+
         self.start_ahk_shortcuts()?;
+
         Self::enum_monitors();
         register_win_hook()?;
         register_system_events(self.handle().clone())?;
@@ -149,12 +145,11 @@ impl Seelen {
     }
 
     pub fn stop(&self) {
+        if self.state.is_weg_enabled() {
+            SeelenWeg::hide_taskbar(false);
+        }
         if self.state.is_ahk_enabled() {
             self.kill_ahk_shortcuts();
-        }
-
-        if let Some(weg) = self.weg() {
-            weg.stop();
         }
     }
 
@@ -162,6 +157,48 @@ impl Seelen {
         log::trace!("Ensuring folders");
         let path = self.handle().path();
         std::fs::create_dir_all(path.resolve(".config/seelen", BaseDirectory::Home)?)?;
+        Ok(())
+    }
+
+    pub fn load_uwp_apps_info(&self) -> Result<()> {
+        let pwsh_script = include_str!("load_uwp_apps.ps1");
+        let pwsh_script_path = temp_dir().join("load_uwp_apps.ps1");
+        std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
+
+        tauri::async_runtime::block_on(async move {
+            let result = self
+                .handle()
+                .shell()
+                .command("powershell")
+                .args([
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-NoProfile",
+                    "-File",
+                    &pwsh_script_path.to_string_lossy(),
+                    "-SavePath",
+                    &self
+                        .handle()
+                        .path()
+                        .app_data_dir()
+                        .expect("Failed to resolve app data dir")
+                        .join("uwp_manifests.json")
+                        .to_string_lossy()
+                        .trim_start_matches("\\\\?\\"),
+                ])
+                .status()
+                .await;
+
+            match result {
+                Ok(status) => {
+                    log::trace!(
+                        "load_uwp_apps exit code: {}",
+                        status.code().unwrap_or_default()
+                    );
+                }
+                Err(err) => log::error!("load_uwp_apps Failed to wait for process: {}", err),
+            };
+        });
         Ok(())
     }
 
@@ -261,14 +298,30 @@ impl Seelen {
         true.into()
     }
 
+    unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
+        let mut seelen = SEELEN.lock();
+        for monitor in seelen.monitors_mut() {
+            if let Some(weg) = monitor.weg_mut() {
+                if SeelenWeg::is_real_window(hwnd, false) {
+                    weg.add_hwnd(hwnd);
+                }
+            }
+        }
+        true.into()
+    }
+
     pub fn enum_monitors() {
-        std::thread::spawn(|| {
+        std::thread::spawn(|| unsafe {
             log::trace!("Enumerating Monitors");
             log_if_error(WindowsApi::enum_display_monitors(
                 Some(Self::enum_monitors_proc),
                 0,
             ));
             log::trace!("Finished enumerating Monitors");
+
+            log::trace!("Enumerating windows");
+            log_if_error(EnumWindows(Some(Self::enum_windows_proc), LPARAM(0)));
+            log::trace!("Finished enumerating windows");
         });
     }
 }

@@ -2,8 +2,8 @@ pub mod cli;
 pub mod hook;
 
 use crate::{
-    error_handler::{log_if_error, Result},
-    seelen::get_app_handle,
+    error_handler::Result,
+    seelen::{get_app_handle, APP_STATE},
     windows_api::WindowsApi,
 };
 use serde::Serialize;
@@ -86,7 +86,7 @@ impl FancyToolbar {
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
-        .visible(true)
+        .visible(false)
         .decorations(false)
         .transparent(true)
         .shadow(false)
@@ -103,7 +103,7 @@ impl FancyToolbar {
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
-        .visible(true)
+        .visible(false)
         .decorations(false)
         .transparent(true)
         .shadow(false)
@@ -120,36 +120,29 @@ impl FancyToolbar {
         WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
         WindowsApi::set_position(hitbox_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
 
-        window.once("complete-setup", move |event| unsafe {
-            let result = || -> Result<()> {
-                let mut rect = rc_monitor.clone();
-                rect.bottom = rect.bottom - 1; // avoid be matched as a fullscreen app;
+        let mut rect = rc_monitor.clone();
+        rect.bottom = rect.bottom - 1; // avoid be matched as a fullscreen app;
 
-                let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
-                let toolbar_height: f32 = event.payload().parse().expect("Failed to parse payload");
+        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+        let toolbar_height = APP_STATE.lock().get_toolbar_height();
 
-                let mut abd = APPBARDATA::default();
-                abd.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-                abd.hWnd = hitbox_hwnd;
-                abd.uEdge = ABE_TOP;
+        let mut abd = APPBARDATA::default();
+        abd.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
+        abd.hWnd = hitbox_hwnd;
+        abd.uEdge = ABE_TOP;
 
-                abd.rc = rc_monitor.clone();
-                abd.rc.bottom = abd.rc.top + (toolbar_height * dpi) as i32;
+        abd.rc = rc_monitor.clone();
+        abd.rc.bottom = abd.rc.top + (toolbar_height as f32 * dpi) as i32;
 
-                SHAppBarMessage(ABM_NEW, &mut abd);
-                SHAppBarMessage(ABM_SETPOS, &mut abd);
+        unsafe {
+            SHAppBarMessage(ABM_NEW, &mut abd);
+            SHAppBarMessage(ABM_SETPOS, &mut abd);
+        }
 
-                WindowsApi::set_position(hitbox_hwnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::set_position(hitbox_hwnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
 
-                WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
-
-                log::info!("Fancy Toolbar setup completed for {}", monitor);
-                //let handle = get_app_handle();
-                //log_if_error(handle.emit("toolbar-setup-completed", ()));
-                Ok(())
-            };
-            log_if_error(result());
-        });
+        log::info!("Fancy Toolbar setup completed for {}", monitor);
 
         Ok((window, hitbox))
     }
