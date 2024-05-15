@@ -7,6 +7,29 @@
 
 <img src="./documentation/images/desktop_view.png" width="100%" alt="Seelen UI desktop">
 
+<table>
+  <tr>
+    <td align="center">
+      <a
+        href="https://apps.microsoft.com/detail/Seelen%20UI/9p67c2d4t9fb?mode=full"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download Seelen UI from Microsoft Store">
+        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250px" />
+      </a>
+    </td>
+    <td align="center">
+      <a
+        href="https://discord.gg/ABfASx5ZAJ"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Download Seelen UI from Microsoft Store">
+        <img src="./documentation/images/discord.png" width="285px" />
+      </a>
+    </td>
+  </tr>
+</table>
+
 ## Overview
 Welcome to Seelen UI, where customization meets productivity, revolutionizing your Windows desktop experience. Seamlessly integrated into your system, Seelen UI unlocks a world of possibilities, offering an extensive array of customization features to sculpt your desktop into a personalized masterpiece of efficiency and style.
 
