@@ -419,7 +419,7 @@ impl WindowsApi {
         }
     }
 
-    pub fn get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
+    pub fn _get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
         Ok(Self::co_create_instance::<IVirtualDesktopManager>(
             &VirtualDesktopManager,
         )?)
@@ -438,8 +438,8 @@ impl WindowsApi {
         Ok(endpoint)
     }
 
-    pub fn get_virtual_desktop_id(hwnd: HWND) -> Result<GUID> {
-        let manager = Self::get_virtual_desktop_manager()?;
+    pub fn _get_virtual_desktop_id(hwnd: HWND) -> Result<GUID> {
+        let manager = Self::_get_virtual_desktop_manager()?;
         let mut desktop_id = GUID::zeroed();
         let mut attempt = 0;
         while desktop_id.to_u128() == 0 && attempt < 10 {

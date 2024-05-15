@@ -51,14 +51,12 @@ impl WindowManager {
         log::info!("Creating Tiling Windows Manager / {}", monitor);
 
         let handle = get_app_handle();
-        let virtual_desktop = winvd::get_current_desktop()?;
-        let guid = virtual_desktop.get_id()?;
 
         Ok(Self {
             window: Self::create_window(&handle, monitor)?,
             tiled_handles: Vec::new(),
             floating_handles: Vec::new(),
-            current_virtual_desktop: format!("{:?}", guid),
+            current_virtual_desktop: VirtualDesktopManager::get_current_virtual_desktop()?.id(),
             paused: true, // paused until complete_window_setup is called
             ready: false,
         })
@@ -90,17 +88,13 @@ impl WindowManager {
         if WindowsApi::get_window_text(hwnd) == "Task Switching" {
             return Ok(());
         }
-        let v_desktop = VirtualDesktopManager::get_window_virtual_desktop(hwnd)
-            .or_else(|_| VirtualDesktopManager::get_current_virtual_desktop())?;
-        if v_desktop.id() != self.current_virtual_desktop {
-            self.set_active_workspace(v_desktop.id())?;
-        }
+
         log::trace!(
-            "Setting active window to {} <=> {:?} on {}",
+            "Setting active window to {} <=> {:?}",
             hwnd.0,
             WindowsApi::get_window_text(hwnd),
-            v_desktop.id()[0..8].to_string()
         );
+
         let hwnd = match self.is_managed(hwnd)
             && !self.is_floating(hwnd)
             && !WindowsApi::is_maximized(hwnd)
@@ -136,7 +130,7 @@ impl WindowManager {
 
         let mut desktop_to_add = self.current_virtual_desktop.clone();
         if WindowsApi::is_cloaked(hwnd)? {
-            desktop_to_add = format!("{:?}", WindowsApi::get_virtual_desktop_id(hwnd)?);
+            desktop_to_add = VirtualDesktopManager::get_by_window(hwnd)?.id();
         }
 
         log::trace!(

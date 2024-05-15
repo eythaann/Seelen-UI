@@ -98,43 +98,11 @@ impl VirtualDesktopManager {
         }
     }
 
-    pub fn get_window_virtual_desktop(hwnd: HWND) -> Result<VirtualDesktop> {
-        Ok(VirtualDesktop::from(WindowsApi::get_virtual_desktop_id(hwnd)?))
+    pub fn get_by_window(hwnd: HWND) -> Result<VirtualDesktop> {
+        Ok(VirtualDesktop::from(winvd::get_desktop_by_window(hwnd)?.get_id()?))
     }
 
     pub fn get_current_virtual_desktop() -> Result<VirtualDesktop> {
-        let session_id = WindowsApi::current_session_id()?;
-        let hkcu = RegKey::predef(HKEY_CURRENT_USER);
-
-        // This is the path on Windows 10
-        let mut current = hkcu
-        .open_subkey(format!(
-            r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\{session_id}\VirtualDesktops"
-        ))
-        .ok()
-        .and_then(
-            |desktops| match desktops.get_raw_value("CurrentVirtualDesktop") {
-                Ok(current) => Option::from(current.bytes),
-                Err(_) => None,
-            },
-        );
-
-        // This is the path on Windows 11
-        if current.is_none() {
-            current = hkcu
-                .open_subkey(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops")
-                .ok()
-                .and_then(
-                    |desktops| match desktops.get_raw_value("CurrentVirtualDesktop") {
-                        Ok(current) => Option::from(current.bytes),
-                        Err(_) => None,
-                    },
-                );
-        }
-
-        match current {
-            Some(current) => Ok(VirtualDesktop::from(current)),
-            None => Err(eyre!("could not determine current virtual desktop").into()),
-        }
+        Ok(VirtualDesktop::from(winvd::get_current_desktop()?.get_id()?))
     }
 }
