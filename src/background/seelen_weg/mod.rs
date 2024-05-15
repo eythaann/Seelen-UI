@@ -95,11 +95,16 @@ impl SeelenWeg {
         Ok(weg)
     }
 
+    pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
+        self.window.emit_to(self.window.label(), event, payload)?;
+        Ok(())
+    }
+
     pub fn set_active_window(&self, hwnd: HWND) -> Result<()> {
         if WindowsApi::get_window_text(hwnd) == "Task Switching" {
             return Ok(());
         }
-        self.window.emit("set-focused-handle", hwnd.0)?;
+        self.emit("set-focused-handle", hwnd.0)?;
         Ok(())
     }
 
@@ -167,11 +172,19 @@ impl SeelenWeg {
     }
 
     pub fn replace_hwnd(&mut self, old: HWND, new: HWND) -> Result<()> {
-        let app = self.apps.iter_mut().find(|app| app.hwnd == old.0);
-        if let Some(app) = app {
-            app.hwnd = new.0;
-            self.window.emit("replace-open-app", app.clone())?;
+        let mut found = None;
+        for app in self.apps.iter_mut() {
+            if app.hwnd == old.0 {
+                app.hwnd = new.0;
+                found = Some(app.clone());
+                break;
+            }
         }
+
+        if let Some(app) = found {
+            self.emit("replace-open-app", app)?;
+        }
+
         Ok(())
     }
 
@@ -247,7 +260,8 @@ impl SeelenWeg {
             None
         };
 
-        self.window.emit("set-auto-hide", self.overlaped)?;
+        log::debug!("Emitting: set-auto-hide from: {}", self.window.label());
+        self.emit("set-auto-hide", self.overlaped)?;
         Ok(())
     }
 

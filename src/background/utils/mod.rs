@@ -18,10 +18,11 @@ pub fn filename_from_path(path: &str) -> String {
     path.split('\\').last().unwrap_or_default().to_string()
 }
 
-pub fn are_overlaped(rect1: &RECT, rect2: &RECT) -> bool {
-    let x_overlap = !(rect1.right <= rect2.left || rect2.right <= rect1.left);
-    let y_overlap = !(rect1.bottom <= rect2.top || rect2.bottom <= rect1.top);
-    x_overlap && y_overlap
+pub fn are_overlaped(a: &RECT, b: &RECT) -> bool {
+    if a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom {
+        return false;
+    }
+    true
 }
 
 pub fn pascal_to_kebab(input: &str) -> String {

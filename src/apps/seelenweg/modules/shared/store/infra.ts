@@ -5,7 +5,8 @@ import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../utils/schem
 import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { listen } from '@tauri-apps/api/event';
+import { listen as globalListen } from '@tauri-apps/api/event';
+import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
@@ -36,6 +37,7 @@ async function cleanSavedItems(items: SavedAppsInYaml[]): Promise<PinnedApp[]> {
 }
 
 export async function registerStoreEvents() {
+  const view = getCurrent();
   const updateHitboxIfNeeded = () => {
     const { mode } = store.getState().settings;
     if (mode === SeelenWegMode.MIN_CONTENT) {
@@ -43,35 +45,7 @@ export async function registerStoreEvents() {
     }
   };
 
-  await listen<AppFromBackground>('add-open-app', async (event) => {
-    const item = (await cleanItems([event.payload]))[0]!;
-    store.dispatch(RootActions.addOpenApp(item));
-    updateHitboxIfNeeded();
-  });
-
-  await listen<AppFromBackground[]>('add-open-app-many', async (event) => {
-    const items = await cleanItems(event.payload);
-    items.forEach((item) => store.dispatch(RootActions.addOpenApp(item)));
-    updateHitboxIfNeeded();
-  });
-
-  await listen<HWND>('remove-open-app', (event) => {
-    store.dispatch(RootActions.removeOpenApp(event.payload));
-    updateHitboxIfNeeded();
-  });
-
-  await listen<AppFromBackground>('update-open-app-info', async (event) => {
-    const item = (await cleanItems([event.payload]))[0]!;
-    store.dispatch(RootActions.updateOpenAppInfo(item));
-  });
-
-  await listen<AppFromBackground>('replace-open-app', async (event) => {
-    const item = (await cleanItems([event.payload]))[0]!;
-    store.dispatch(RootActions.addOpenApp(item));
-    store.dispatch(RootActions.removeOpenApp(item.process_hwnd));
-  });
-
-  await listen<UserSettings>('updated-settings', (event) => {
+  await globalListen<UserSettings>('updated-settings', (event) => {
     const state = store.getState();
     const userSettings = event.payload;
     const settings = userSettings.jsonSettings.seelenweg;
@@ -84,11 +58,33 @@ export async function registerStoreEvents() {
     updateHitbox();
   });
 
-  await listen<HWND>('set-focused-handle', (event) => {
+  await view.listen<AppFromBackground>('add-open-app', async (event) => {
+    const item = (await cleanItems([event.payload]))[0]!;
+    store.dispatch(RootActions.addOpenApp(item));
+    updateHitboxIfNeeded();
+  });
+
+  await view.listen<HWND>('remove-open-app', (event) => {
+    store.dispatch(RootActions.removeOpenApp(event.payload));
+    updateHitboxIfNeeded();
+  });
+
+  await view.listen<AppFromBackground>('update-open-app-info', async (event) => {
+    const item = (await cleanItems([event.payload]))[0]!;
+    store.dispatch(RootActions.updateOpenAppInfo(item));
+  });
+
+  await view.listen<AppFromBackground>('replace-open-app', async (event) => {
+    const item = (await cleanItems([event.payload]))[0]!;
+    store.dispatch(RootActions.addOpenApp(item));
+    store.dispatch(RootActions.removeOpenApp(item.process_hwnd));
+  });
+
+  await view.listen<HWND>('set-focused-handle', (event) => {
     store.dispatch(RootActions.setFocusedHandle(event.payload));
   });
 
-  await listen<boolean>('set-auto-hide', (event) => {
+  await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
     updateHitbox();
   });

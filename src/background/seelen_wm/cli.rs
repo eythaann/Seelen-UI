@@ -1,6 +1,5 @@
 use clap::{Command, ValueEnum};
 use serde::{Deserialize, Serialize};
-use tauri::Manager;
 use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
@@ -75,12 +74,12 @@ impl WindowManager {
     }
 
     pub fn reserve(&self, side: AllowedReservations) -> Result<()> {
-        self.window.emit("set-reservation", side)?;
+        self.emit("set-reservation", side)?;
         Ok(())
     }
 
     pub fn discard_reservation(&self) -> Result<()> {
-        self.window.emit("set-reservation", ())?;
+        self.emit("set-reservation", ())?;
         Ok(())
     }
 
@@ -162,16 +161,16 @@ impl WindowManager {
                 self.window.open_devtools();
             }
             SubCommand::Height(action) => {
-                self.window.emit("update-height", action)?;
+                self.emit("update-height", action)?;
             }
             SubCommand::Width(action) => {
-                self.window.emit("update-width", action)?;
+                self.emit("update-width", action)?;
             }
             SubCommand::ResetWorkspaceSize => {
-                self.window.emit("reset-workspace-size", ())?;
+                self.emit("reset-workspace-size", ())?;
             }
             SubCommand::Focus(side) => {
-                self.window.emit("focus", side)?;
+                self.emit("focus", side)?;
             }
         };
         Ok(())

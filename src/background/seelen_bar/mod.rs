@@ -42,11 +42,16 @@ impl FancyToolbar {
         })
     }
 
+    pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
+        self.window.emit_to(self.window.label(), event, payload)?;
+        Ok(())
+    }
+
     pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
         let title = WindowsApi::get_window_text(hwnd);
 
         self.last_focus = Some(hwnd.0);
-        self.window.emit(
+        self.emit(
             "focus-changed",
             ActiveApp {
                 title,

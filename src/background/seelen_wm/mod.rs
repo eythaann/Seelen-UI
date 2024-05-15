@@ -64,6 +64,11 @@ impl WindowManager {
         })
     }
 
+    pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
+        self.window.emit_to(self.window.label(), event, payload)?;
+        Ok(())
+    }
+
     pub fn complete_window_setup(&mut self) -> Result<()> {
         log::info!("Tiling Windows Manager Created");
         self.paused = false;
@@ -109,7 +114,7 @@ impl WindowManager {
                 HWND(0)
             }
         };
-        self.window.emit("set-active-window", hwnd.0)?;
+        self.emit("set-active-window", hwnd.0)?;
         Ok(())
     }
 
@@ -153,7 +158,7 @@ impl WindowManager {
             self.tiled_handles.push(hwnd.0);
         }
 
-        self.window.emit(
+        self.emit(
             "add-window",
             AddWindowPayload {
                 hwnd: hwnd.0,
@@ -169,7 +174,7 @@ impl WindowManager {
         if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
             as_floating = config.options_contains(AppExtraFlag::Float);
         }
-        self.window.emit(
+        self.emit(
             "move-window-to-workspace",
             AddWindowPayload {
                 hwnd: hwnd.0,
@@ -204,13 +209,13 @@ impl WindowManager {
             hwnd.0,
             WindowsApi::get_window_text(hwnd)
         );
-        self.window.emit("remove-window", hwnd.0)?;
+        self.emit("remove-window", hwnd.0)?;
         Ok(true)
     }
 
     pub fn force_retiling(&self) -> Result<()> {
         log::trace!("Forcing retiling");
-        self.window.emit("force-retiling", ())?;
+        self.emit("force-retiling", ())?;
         Ok(())
     }
 
