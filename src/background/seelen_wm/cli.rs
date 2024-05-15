@@ -75,12 +75,12 @@ impl WindowManager {
     }
 
     pub fn reserve(&self, side: AllowedReservations) -> Result<()> {
-        self.handle.emit_to(Self::TARGET, "set-reservation", side)?;
+        self.window.emit("set-reservation", side)?;
         Ok(())
     }
 
     pub fn discard_reservation(&self) -> Result<()> {
-        self.handle.emit_to(Self::TARGET, "set-reservation", ())?;
+        self.window.emit("set-reservation", ())?;
         Ok(())
     }
 
@@ -100,17 +100,12 @@ impl WindowManager {
                 match desktops.get(index) {
                     Some(_) => {
                         self.pseudo_pause()?;
-                        std::thread::spawn(move || -> Result<()> {
-                            winvd::switch_desktop(index as u32)?;
-                            sleep_millis(35); // to ensure avoid any artifacts
-                            let mut seelen = SEELEN.lock();
-                            let wm = seelen.wm_mut().unwrap();
-                            if let Some(next) = Self::get_next_by_order(HWND(0)) {
-                                WindowsApi::force_set_foreground(next)?;
-                            }
-                            wm.pseudo_resume()?;
-                            Ok(())
-                        });
+                        winvd::switch_desktop(index as u32)?;
+                        sleep_millis(35); // to ensure avoid any artifacts
+                        if let Some(next) = Self::get_next_by_order(HWND(0)) {
+                            WindowsApi::force_set_foreground(next)?;
+                        }
+                        self.pseudo_resume()?;
                     }
                     None => log::error!("Invalid workspace index: {}", index),
                 }
@@ -146,15 +141,12 @@ impl WindowManager {
                             self.emit_send_to_workspace(to_move, desktop.id())?;
                         }
                         let guid = desktop.guid();
-                        std::thread::spawn(move || -> Result<()> {
-                            let desktop = winvd::Desktop::from(guid);
-                            winvd::move_window_to_desktop(desktop, &to_move)?;
-                            winvd::switch_desktop(desktop)?;
-                            if to_move_is_managed {
-                                SEELEN.lock().wm_mut().unwrap().pseudo_resume()?;
-                            }
-                            Ok(())
-                        });
+                        let desktop = winvd::Desktop::from(guid);
+                        winvd::move_window_to_desktop(desktop, &to_move)?;
+                        winvd::switch_desktop(desktop)?;
+                        if to_move_is_managed {
+                            self.pseudo_resume()?;
+                        }
                     }
                     None => log::error!("Invalid workspace index: {}", index),
                 }
@@ -170,17 +162,16 @@ impl WindowManager {
                 self.window.open_devtools();
             }
             SubCommand::Height(action) => {
-                self.handle.emit_to(Self::TARGET, "update-height", action)?;
+                self.window.emit("update-height", action)?;
             }
             SubCommand::Width(action) => {
-                self.handle.emit_to(Self::TARGET, "update-width", action)?;
+                self.window.emit("update-width", action)?;
             }
             SubCommand::ResetWorkspaceSize => {
-                self.handle
-                    .emit_to(Self::TARGET, "reset-workspace-size", ())?;
+                self.window.emit("reset-workspace-size", ())?;
             }
             SubCommand::Focus(side) => {
-                self.handle.emit_to(Self::TARGET, "focus", side)?;
+                self.window.emit("focus", side)?;
             }
         };
         Ok(())

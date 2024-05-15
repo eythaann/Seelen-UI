@@ -8,7 +8,7 @@
     "seelenweg/*",
     "seelenweg-hitbox/*",
     "updater",
-    "seelen_wm",
+    "window-manager/*",
     "fancy-toolbar/*",
     "fancy-toolbar-hitbox/*"
   ],

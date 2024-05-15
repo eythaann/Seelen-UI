@@ -21,7 +21,7 @@ use crate::{
     seelen_wm::WindowManager,
     state::State,
     system::register_system_events,
-    utils::run_ahk_file,
+    utils::{run_ahk_file, sleep_millis},
     windows_api::WindowsApi,
 };
 
@@ -45,7 +45,7 @@ pub struct Seelen {
     #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
     shell: Option<SeelenShell>,
-    window_manager: Option<WindowManager>,
+    #[getset(get = "pub")]
     state: State,
     pub initialized: bool,
 }
@@ -56,7 +56,6 @@ impl Default for Seelen {
             handle: None,
             monitors: Vec::new(),
             shell: None,
-            window_manager: None,
             state: State::default(),
             initialized: false,
         }
@@ -70,6 +69,18 @@ impl Seelen {
         self.handle.as_ref().unwrap()
     }
 
+    pub fn focused_monitor(&self) -> Option<&Monitor> {
+        self.monitors.iter().find(|m| m.is_focused())
+    }
+
+    pub fn focused_monitor_mut(&mut self) -> Option<&mut Monitor> {
+        self.monitors.iter_mut().find(|m| m.is_focused())
+    }
+
+    pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut Monitor> {
+        self.monitors.iter_mut().find(|m| m.hmonitor().0 == id)
+    }
+
     /* pub fn shell(&self) -> Option<&SeelenShell> {
         self.shell.as_ref()
     }
@@ -77,14 +88,6 @@ impl Seelen {
     pub fn shell_mut(&mut self) -> Option<&mut SeelenShell> {
         self.shell.as_mut()
     } */
-
-    pub fn wm_mut(&mut self) -> Option<&mut WindowManager> {
-        self.window_manager.as_mut()
-    }
-
-    pub fn wm(&self) -> Option<&WindowManager> {
-        self.window_manager.as_ref()
-    }
 }
 
 /* ============== Methods ============== */
@@ -111,17 +114,6 @@ impl Seelen {
                 .resolve("static\\apps_templates", BaseDirectory::Resource)?,
         );
         log_if_error(settings_by_app.load());
-
-        if self.state.is_window_manager_enabled() {
-            match WindowManager::new(self.handle().clone()) {
-                Ok(wm) => {
-                    self.window_manager = Some(wm);
-                }
-                Err(err) => {
-                    log::error!("{:?}", err);
-                }
-            }
-        }
 
         if self.state.is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
@@ -306,6 +298,12 @@ impl Seelen {
                     weg.add_hwnd(hwnd);
                 }
             }
+
+            if let Some(wm) = monitor.wm_mut() {
+                if WindowManager::is_manageable_window(hwnd, true) {
+                    log_if_error(wm.add_hwnd(hwnd));
+                }
+            }
         }
         true.into()
     }
@@ -318,6 +316,12 @@ impl Seelen {
                 0,
             ));
             log::trace!("Finished enumerating Monitors");
+
+            let mut all_ready = false;
+            while !all_ready {
+                all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
+                sleep_millis(10);
+            }
 
             log::trace!("Enumerating windows");
             log_if_error(EnumWindows(Some(Self::enum_windows_proc), LPARAM(0)));

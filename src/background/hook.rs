@@ -1,4 +1,4 @@
-use std::{sync::Arc, thread::sleep, time::Duration};
+use std::{sync::Arc, time::Duration};
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -8,25 +8,15 @@ use windows::Win32::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS, EVENT_OBJECT_HIDE,
-            EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW,
-            EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART,
-            EVENT_SYSTEM_MOVESIZEEND, EVENT_SYSTEM_MOVESIZESTART, MSG,
+            EVENT_OBJECT_CREATE, EVENT_OBJECT_FOCUS, EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND,
+            MSG,
         },
     },
 };
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    apps_config::{AppExtraFlag, SETTINGS_BY_APP},
-    error_handler::{log_if_error, Result},
-    seelen::{Seelen, SEELEN},
-    seelen_wm::WindowManager,
-    utils::{
-        constants::{FORCE_RETILING_AFTER_ADD, IGNORE_FOCUS},
-        sleep_millis,
-    },
-    windows_api::WindowsApi,
+    apps_config::{AppExtraFlag, SETTINGS_BY_APP}, error_handler::{log_if_error, Result}, seelen::{Seelen, SEELEN}, seelen_weg::SeelenWeg, utils::constants::IGNORE_FOCUS, windows_api::WindowsApi
 };
 
 lazy_static! {
@@ -90,14 +80,14 @@ impl HookManager {
 }
 
 pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
-    match event {
-        DesktopEvent::DesktopChanged { new, old: _ } => {
-            let mut seelen = SEELEN.lock();
-            if let Some(wm) = seelen.wm_mut() {
-                wm.discard_reservation()?;
-                wm.set_active_workspace(format!("{:?}", new.get_id()?))?;
-            }
+    let mut seelen = SEELEN.lock();
+    for monitor in seelen.monitors_mut() {
+        if let Some(wm) = monitor.wm_mut() {
+            log_if_error(wm.process_vd_event(&event));
         }
+    }
+
+    match event {
         DesktopEvent::WindowChanged(hwnd) => {
             if WindowsApi::is_window(hwnd) {
                 if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
@@ -111,111 +101,24 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
         }
         _ => {}
     }
+
     Ok(())
 }
 
-pub fn process_win_event(seelen: &mut Seelen, event: u32, hwnd: HWND) -> Result<()> {
-    match event {
-        EVENT_SYSTEM_MOVESIZESTART => {
-            if let Some(wm) = seelen.wm() {
-                if wm.is_managed(hwnd) {
-                    wm.pseudo_pause()?;
+impl Seelen {
+    pub fn process_win_event(&mut self, event: u32, hwnd: HWND) -> Result<()> {
+        match event {
+            EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
+                // ensure that the taskbar is always hidden
+                if self.state().is_weg_enabled() && "Shell_TrayWnd" == WindowsApi::get_class(hwnd)?
+                {
+                    SeelenWeg::hide_taskbar(true);
                 }
             }
+            _ => {}
         }
-        EVENT_SYSTEM_MOVESIZEEND => {
-            if let Some(wm) = seelen.wm() {
-                if wm.is_managed(hwnd) {
-                    wm.force_retiling()?;
-                    sleep(Duration::from_millis(35));
-                    wm.pseudo_resume()?;
-                }
-            }
-        }
-        EVENT_SYSTEM_MINIMIZEEND => {
-            if let Some(wm) = seelen.wm_mut() {
-                if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
-                    wm.add_hwnd(hwnd)?;
-                }
-            }
-        }
-        EVENT_SYSTEM_MINIMIZESTART => {
-            if let Some(wm) = seelen.wm_mut() {
-                if wm.is_managed(hwnd) {
-                    wm.remove_hwnd(hwnd)?;
-                }
-            }
-        }
-        EVENT_OBJECT_HIDE => {
-            if let Some(wm) = seelen.wm_mut() {
-                if wm.is_managed(hwnd) {
-                    wm.remove_hwnd(hwnd)?;
-                }
-            }
-        }
-        EVENT_OBJECT_DESTROY /* | EVENT_OBJECT_CLOAKED */ => {
-            if let Some(wm) = seelen.wm_mut() {
-                let title = WindowsApi::get_window_text(hwnd);
-                if WindowManager::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
-                    wm.pseudo_resume()?;
-                }
-                if wm.is_managed(hwnd) {
-                    wm.remove_hwnd(hwnd)?;
-                }
-            }
-        }
-        EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE /* | EVENT_OBJECT_UNCLOAKED */ => {
-            if let Some(wm) = seelen.wm_mut() {
-                let title = WindowsApi::get_window_text(hwnd);
-                if WindowManager::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
-                    wm.pseudo_pause()?;
-                }
-
-                if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
-                    wm.set_active_window(hwnd)?;
-                    if wm.add_hwnd(hwnd)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
-                        // Todo search a better way to do this
-                        std::thread::spawn(|| -> Result<()> {
-                            sleep_millis(250);
-                            SEELEN.lock().wm().unwrap().force_retiling()?;
-                            Ok(())
-                        });
-                    };
-                }
-            }
-        }
-        EVENT_OBJECT_NAMECHANGE => {
-            if let Some(wm) = seelen.wm_mut() {
-                if !wm.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
-                    wm.set_active_window(hwnd)?;
-                    let title = WindowsApi::get_window_text(hwnd);
-                    if wm.add_hwnd(hwnd)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
-                        // Todo search a better way to do this
-                        std::thread::spawn(|| -> Result<()> {
-                            sleep_millis(250);
-                            SEELEN.lock().wm().unwrap().force_retiling()?;
-                            Ok(())
-                        });
-                    };
-                }
-            }
-        }
-        EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
-            if let Some(wm) = seelen.wm_mut() {
-                wm.set_active_window(hwnd)?;
-            }
-        }
-        EVENT_OBJECT_LOCATIONCHANGE => {
-            if let Some(wm) = seelen.wm_mut() {
-                if WindowsApi::is_maximized(hwnd) {
-                    wm.pseudo_pause()?;
-                }
-            }
-        }
-        _ => {}
-    };
-
-    Ok(())
+        Ok(())
+    }
 }
 
 pub extern "system" fn win_event_hook(
@@ -264,16 +167,21 @@ pub extern "system" fn win_event_hook(
     }
 
     let mut seelen = SEELEN.lock();
+    log_if_error(seelen.process_win_event(event, hwnd));
+
     for monitor in seelen.monitors_mut() {
         if let Some(toolbar) = monitor.toolbar_mut() {
             log_if_error(toolbar.process_win_event(event, hwnd));
         }
+
         if let Some(weg) = monitor.weg_mut() {
             log_if_error(weg.process_win_event(event, hwnd));
         }
-    }
 
-    log_if_error(process_win_event(&mut seelen, event, hwnd));
+        if let Some(wm) = monitor.wm_mut() {
+            log_if_error(wm.process_win_event(event, hwnd));
+        }
+    }
 }
 
 pub fn register_win_hook() -> Result<()> {

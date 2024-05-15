@@ -4,6 +4,7 @@ pub mod icon_extractor;
 
 use std::path::PathBuf;
 
+use getset::{Getters, MutGetters};
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use serde::Serialize;
@@ -63,12 +64,14 @@ pub struct SeelenWegApp {
     process_hwnd: isize,
 }
 
+#[derive(Getters, MutGetters)]
 pub struct SeelenWeg {
     handle: AppHandle<Wry>,
     apps: Vec<SeelenWegApp>,
     window: WebviewWindow<Wry>,
     hitbox: WebviewWindow<Wry>,
-    hitbox_enabled: bool,
+    #[getset(get = "pub")]
+    ready: bool,
     overlaped: bool,
     last_hitbox_rect: Option<RECT>,
 }
@@ -84,7 +87,7 @@ impl SeelenWeg {
             apps: Vec::new(),
             window,
             hitbox,
-            hitbox_enabled: false,
+            ready: false,
             overlaped: false,
             last_hitbox_rect: None,
         };
@@ -223,7 +226,7 @@ impl SeelenWeg {
     }
 
     pub fn update_status_if_needed(&mut self, hwnd: HWND) -> Result<()> {
-        if !self.hitbox_enabled
+        if !self.ready
             || !WindowsApi::is_window_visible(hwnd)
             || WindowsApi::is_iconic(hwnd)
             || TITLE_BLACK_LIST.contains(&WindowsApi::get_window_text(hwnd).as_str())
@@ -345,16 +348,13 @@ impl SeelenWeg {
         WindowsApi::set_position(main_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
 
         window.once("complete-setup", move |_event| {
-            for monitor in SEELEN.lock().monitors_mut() {
-                if let Some(weg) = monitor.weg_mut() {
-                    if weg.window.label() == format!("{}/{}", Self::TARGET, monitor_id) {
-                        weg.hitbox_enabled = true;
-                        weg.window
-                            .emit("add-open-app-many", weg.apps.clone())
-                            .expect("Failed to emit");
+            std::thread::spawn(move || {
+                if let Some(monitor) = SEELEN.lock().monitor_by_id_mut(monitor_id) {
+                    if let Some(weg) = monitor.weg_mut() {
+                        weg.ready = true;
                     }
                 }
-            }
+            });
         });
 
         Ok((window, hitbox))

@@ -1,3 +1,4 @@
+use tauri::{Webview, Wry};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     UI::WindowsAndMessaging::{
@@ -43,19 +44,29 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
 }
 
 #[tauri::command]
-pub fn bounce_handle(hwnd: isize) {
+pub fn bounce_handle(webview: Webview<Wry>, hwnd: isize) {
+    let monitor_id = webview.label().split("/").last().expect("No monitor ID");
+    let monitor_id = monitor_id.parse::<isize>().expect("Invalid monitor ID");
+
     std::thread::spawn(move || {
-        if let Some(wm) = SEELEN.lock().wm_mut() {
-            wm.bounce_handle(HWND(hwnd));
+        if let Some(monitor) = SEELEN.lock().monitor_by_id_mut(monitor_id) {
+            if let Some(wm) = monitor.wm_mut() {
+                wm.bounce_handle(HWND(hwnd));
+            }
         }
     });
 }
 
 #[tauri::command]
-pub fn complete_window_setup() {
-    std::thread::spawn(|| {
-        if let Some(wm) = SEELEN.lock().wm_mut() {
-            log_if_error(wm.complete_window_setup());
+pub fn complete_window_setup(webview: Webview<Wry>) {
+    let monitor_id = webview.label().split("/").last().expect("No monitor ID");
+    let monitor_id = monitor_id.parse::<isize>().expect("Invalid monitor ID");
+
+    std::thread::spawn(move || {
+        if let Some(monitor) = SEELEN.lock().monitor_by_id_mut(monitor_id) {
+            if let Some(wm) = monitor.wm_mut() {
+                log_if_error(wm.complete_window_setup());
+            }
         }
     });
 }

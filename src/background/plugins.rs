@@ -5,7 +5,10 @@ use tauri_plugin_log::{
     Target, TargetKind,
 };
 
-use crate::{cli::{handle_cli_events, SEELEN_COMMAND_LINE}, error_handler::log_if_error};
+use crate::{
+    cli::{handle_cli_events, SEELEN_COMMAND_LINE},
+    error_handler::log_if_error,
+};
 
 pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder
@@ -19,9 +22,11 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
             Some(vec!["--silent"]),
         ))
         .plugin(tauri_plugin_single_instance::init(
-            |app: &AppHandle<Wry>, argv: Vec<String>, _cwd: String| -> () {
-                let command = SEELEN_COMMAND_LINE.lock().clone();
-                log_if_error(handle_cli_events(app, &command.get_matches_from(argv)));
+            |_app: &AppHandle<Wry>, argv: Vec<String>, _cwd: String| {
+                std::thread::spawn(move || {
+                    let command = SEELEN_COMMAND_LINE.lock().clone();
+                    log_if_error(handle_cli_events(&command.get_matches_from(argv)));
+                });
             },
         ))
         .plugin(

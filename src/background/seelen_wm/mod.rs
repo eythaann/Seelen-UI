@@ -4,16 +4,19 @@ pub mod hook;
 
 use std::sync::atomic::{AtomicIsize, Ordering};
 
+use getset::{Getters, MutGetters};
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM},
+    Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST},
 };
 
 use crate::{
     apps_config::{AppExtraFlag, SETTINGS_BY_APP},
     error_handler::Result,
+    seelen::get_app_handle,
     seelen_weg::SeelenWeg,
     utils::virtual_desktop::VirtualDesktopManager,
     windows_api::WindowsApi,
@@ -26,45 +29,47 @@ struct AddWindowPayload {
     as_floating: bool,
 }
 
+#[derive(Getters, MutGetters)]
 pub struct WindowManager {
-    handle: AppHandle<Wry>,
     window: WebviewWindow,
     tiled_handles: Vec<isize>,
     floating_handles: Vec<isize>,
     pub current_virtual_desktop: String,
     paused: bool,
+    #[getset(get = "pub")]
+    ready: bool,
 }
 
 impl WindowManager {
-    pub const TARGET: &'static str = "seelen_wm";
+    pub const TARGET: &'static str = "window-manager";
     pub const VIRTUAL_PREVIEWS: [&'static str; 2] = [
         "Virtual desktop switching preview",
         "Virtual desktop hotkey switching preview",
     ];
 
-    pub fn new(handle: AppHandle<Wry>) -> Result<Self> {
+    pub fn new(monitor: isize) -> Result<Self> {
         log::info!("Creating Tiling Windows Manager");
+
+        let handle = get_app_handle();
         let virtual_desktop = winvd::get_current_desktop()?;
         let guid = virtual_desktop.get_id()?;
+
         Ok(Self {
-            window: Self::create_window(&handle)?,
-            handle,
+            window: Self::create_window(&handle, monitor)?,
             tiled_handles: Vec::new(),
             floating_handles: Vec::new(),
             current_virtual_desktop: format!("{:?}", guid),
             paused: true, // paused until complete_window_setup is called
+            ready: false,
         })
     }
 
     pub fn complete_window_setup(&mut self) -> Result<()> {
         log::info!("Tiling Windows Manager Created");
         self.paused = false;
-        self.handle.emit_to(
-            Self::TARGET,
-            "set-active-workspace",
-            &self.current_virtual_desktop,
-        )?;
-        Self::enum_windows();
+        self.ready = true;
+        self.window
+            .emit("set-active-workspace", &self.current_virtual_desktop)?;
         Ok(())
     }
 
@@ -74,10 +79,6 @@ impl WindowManager {
 
     pub fn is_floating(&self, hwnd: HWND) -> bool {
         self.floating_handles.contains(&hwnd.0)
-    }
-
-    pub fn _hwnd(&self) -> HWND {
-        HWND(self.window.hwnd().expect("can't get Self Window handle").0)
     }
 
     pub fn set_active_window(&mut self, hwnd: HWND) -> Result<()> {
@@ -108,8 +109,7 @@ impl WindowManager {
                 HWND(0)
             }
         };
-        self.handle
-            .emit_to(Self::TARGET, "set-active-window", hwnd.0)?;
+        self.window.emit("set-active-window", hwnd.0)?;
         Ok(())
     }
 
@@ -119,11 +119,8 @@ impl WindowManager {
         }
         log::trace!("Setting active workspace to: {}", virtual_desktop_id);
         self.current_virtual_desktop = virtual_desktop_id;
-        self.handle.emit_to(
-            Self::TARGET,
-            "set-active-workspace",
-            &self.current_virtual_desktop,
-        )?;
+        self.window
+            .emit("set-active-workspace", &self.current_virtual_desktop)?;
         Ok(())
     }
 
@@ -156,8 +153,7 @@ impl WindowManager {
             self.tiled_handles.push(hwnd.0);
         }
 
-        self.handle.emit_to(
-            Self::TARGET,
+        self.window.emit(
             "add-window",
             AddWindowPayload {
                 hwnd: hwnd.0,
@@ -173,8 +169,7 @@ impl WindowManager {
         if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
             as_floating = config.options_contains(AppExtraFlag::Float);
         }
-        self.handle.emit_to(
-            Self::TARGET,
+        self.window.emit(
             "move-window-to-workspace",
             AddWindowPayload {
                 hwnd: hwnd.0,
@@ -209,13 +204,13 @@ impl WindowManager {
             hwnd.0,
             WindowsApi::get_window_text(hwnd)
         );
-        self.handle.emit_to(Self::TARGET, "remove-window", hwnd.0)?;
+        self.window.emit("remove-window", hwnd.0)?;
         Ok(true)
     }
 
     pub fn force_retiling(&self) -> Result<()> {
         log::trace!("Forcing retiling");
-        self.handle.emit_to(Self::TARGET, "force-retiling", ())?;
+        self.window.emit("force-retiling", ())?;
         Ok(())
     }
 
@@ -275,10 +270,13 @@ impl WindowManager {
         && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
     }
 
-    fn create_window(handle: &AppHandle<Wry>) -> Result<WebviewWindow> {
+    fn create_window(handle: &AppHandle<Wry>, monitor_id: isize) -> Result<WebviewWindow> {
+        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor_id))?;
+        let work_area = monitor_info.monitorInfo.rcWork;
+
         let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             handle,
-            Self::TARGET,
+            format!("{}/{}", Self::TARGET, monitor_id),
             tauri::WebviewUrl::App("seelen_wm/index.html".into()),
         )
         .title("Seelen Window Manager")
@@ -294,8 +292,6 @@ impl WindowManager {
 
         window.set_ignore_cursor_events(true)?;
 
-        let monitor_info = WindowsApi::monitor_info(WindowsApi::primary_monitor())?;
-        let work_area = monitor_info.monitorInfo.rcWork;
         WindowsApi::set_position(window.hwnd()?, None, &work_area, SWP_NOACTIVATE)?;
 
         Ok(window)

@@ -363,6 +363,14 @@ impl WindowsApi {
         }
     }
 
+    pub fn monitor_from_window(hwnd: HWND) -> HMONITOR {
+        unsafe { MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY) }
+    }
+
+    pub fn primary_monitor() -> HMONITOR {
+        unsafe { MonitorFromWindow(GetDesktopWindow(), MONITOR_DEFAULTTOPRIMARY) }
+    }
+
     /// handle of PHYSICAL_MONITOR is bugged and will be always 0
     pub fn primary_physical_monitor() -> Result<PHYSICAL_MONITOR> {
         let hmonitor = Self::primary_monitor();
@@ -377,10 +385,6 @@ impl WindowsApi {
         };
 
         Ok(p_physical_monitors[0])
-    }
-
-    pub fn primary_monitor() -> HMONITOR {
-        unsafe { MonitorFromWindow(GetDesktopWindow(), MONITOR_DEFAULTTOPRIMARY) }
     }
 
     pub fn monitor_info(hmonitor: HMONITOR) -> Result<MONITORINFOEXW> {
