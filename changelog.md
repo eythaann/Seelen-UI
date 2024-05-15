@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.3.3]
 ### features
 - Multi-monitor support for Fancy Toolbar.
 - Multi-monitor support for Seelenweg.
