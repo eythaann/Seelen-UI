@@ -1,38 +1,13 @@
-pub mod power;
 pub mod brightness;
+pub mod power;
 
-use std::sync::Arc;
+use crate::{error_handler::Result, seelen::get_app_handle};
 
-use lazy_static::lazy_static;
-use parking_lot::Mutex;
-use tauri::{AppHandle, Wry};
-
-use crate::error_handler::Result;
-
-lazy_static! {
-    pub static ref HANDLER: Arc<Mutex<Handler>> = Arc::new(Mutex::new(Handler::new()));
-}
-
-pub struct Handler(Option<AppHandle<Wry>>);
-impl Handler {
-    fn new() -> Self {
-        Self(None)
-    }
-
-    fn init(&mut self, handle: AppHandle<Wry>) {
-        self.0 = Some(handle);
-    }
-
-    fn clone_handle(&self) -> AppHandle<Wry> {
-        self.0.clone().unwrap()
-    }
-}
-
-pub fn register_system_events(handle: AppHandle<Wry>) -> Result<()> {
-    HANDLER.lock().init(handle.clone());
+pub fn register_system_events() -> Result<()> {
+    let handle = get_app_handle();
 
     handle.once("register-power-events", move |_| {
-        power::register_battery_events(HANDLER.lock().clone_handle());
+        power::register_battery_events();
     });
 
     handle.once("register-wifi-events", move |_| {

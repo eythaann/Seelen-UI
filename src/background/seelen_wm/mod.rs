@@ -48,7 +48,7 @@ impl WindowManager {
     ];
 
     pub fn new(monitor: isize) -> Result<Self> {
-        log::info!("Creating Tiling Windows Manager");
+        log::info!("Creating Tiling Windows Manager / {}", monitor);
 
         let handle = get_app_handle();
         let virtual_desktop = winvd::get_current_desktop()?;

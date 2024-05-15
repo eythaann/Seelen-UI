@@ -43,15 +43,7 @@ use windows::{
                 VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW,
-                GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow,
-                IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
-                EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION,
-                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE,
+                EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC
             },
         },
     },
@@ -70,6 +62,14 @@ impl WindowsApi {
     ) -> Result<()> {
         unsafe { EnumDisplayMonitors(HDC(0), None, callback, LPARAM(callback_data_address)) }
             .ok()?;
+        Ok(())
+    }
+
+    pub fn enum_windows(
+        callback: WNDENUMPROC,
+        callback_data_address: isize,
+    ) -> Result<()> {
+        unsafe { EnumWindows(callback, LPARAM(callback_data_address))? };
         Ok(())
     }
 

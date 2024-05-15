@@ -1,5 +1,5 @@
 use serde::Serialize;
-use tauri::{AppHandle, Manager, Wry};
+use tauri::Manager;
 use windows::{
     core::PCWSTR,
     Win32::{
@@ -16,11 +16,12 @@ use windows::{
 
 use crate::{
     error_handler::{log_if_error, Result},
+    seelen::get_app_handle,
     utils::sleep_millis,
     windows_api::WindowsApi,
 };
 
-pub fn register_battery_events(handle: AppHandle<Wry>) {
+pub fn register_battery_events() {
     #[allow(non_snake_case)]
     #[derive(Serialize, Clone)]
     struct Battery {
@@ -33,6 +34,8 @@ pub fn register_battery_events(handle: AppHandle<Wry>) {
     }
 
     std::thread::spawn(move || -> Result<()> {
+        let handle = get_app_handle();
+
         loop {
             let mut power_status = SYSTEM_POWER_STATUS::default();
             unsafe {

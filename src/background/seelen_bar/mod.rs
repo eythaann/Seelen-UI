@@ -32,7 +32,7 @@ pub struct ActiveApp {
 
 impl FancyToolbar {
     pub fn new(monitor: isize) -> Result<Self> {
-        log::info!("Creating Fancy Toolbar");
+        log::info!("Creating Fancy Toolbar / {}", monitor);
         let handle = get_app_handle();
         let (window, hitbox_window) = Self::create_window(&handle, monitor)?;
         Ok(Self {
@@ -146,8 +146,6 @@ impl FancyToolbar {
 
         WindowsApi::set_position(hitbox_hwnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)?;
         WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
-
-        log::info!("Fancy Toolbar setup completed for {}", monitor);
 
         Ok((window, hitbox))
     }

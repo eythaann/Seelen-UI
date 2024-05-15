@@ -78,7 +78,7 @@ pub struct SeelenWeg {
 
 impl SeelenWeg {
     pub fn new(monitor: isize) -> Result<Self> {
-        log::info!("Creating SeelenWeg");
+        log::info!("Creating SeelenWeg / {}", monitor);
         let handle = get_app_handle();
         let (window, hitbox) = Self::create_window(&handle, monitor)?;
 
@@ -260,7 +260,6 @@ impl SeelenWeg {
             None
         };
 
-        log::debug!("Emitting: set-auto-hide from: {}", self.window.label());
         self.emit("set-auto-hide", self.overlaped)?;
         Ok(())
     }

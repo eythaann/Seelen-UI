@@ -8,7 +8,6 @@ use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::{HDC, HMONITOR},
-    UI::WindowsAndMessaging::EnumWindows,
 };
 
 use crate::{
@@ -130,9 +129,26 @@ impl Seelen {
 
         self.start_ahk_shortcuts()?;
 
-        Self::enum_monitors();
-        register_win_hook()?;
-        register_system_events(self.handle().clone())?;
+        std::thread::spawn(|| -> Result<()> {
+            log::trace!("Enumerating Monitors");
+            WindowsApi::enum_display_monitors(Some(Self::enum_monitors_proc), 0)
+                .expect("Failed to enum monitors");
+
+            let mut all_ready = false;
+            while !all_ready {
+                sleep_millis(10);
+                all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
+            }
+
+            log::trace!("Enumerating windows");
+            WindowsApi::enum_windows(Some(Self::enum_windows_proc), 0)
+                .expect("Failed to enum windows");
+
+            log::trace!("Registering Windows and System Events");
+            register_win_hook()?;
+            register_system_events()?;
+            Ok(())
+        });
         Ok(())
     }
 
@@ -306,26 +322,5 @@ impl Seelen {
             }
         }
         true.into()
-    }
-
-    pub fn enum_monitors() {
-        std::thread::spawn(|| unsafe {
-            log::trace!("Enumerating Monitors");
-            log_if_error(WindowsApi::enum_display_monitors(
-                Some(Self::enum_monitors_proc),
-                0,
-            ));
-            log::trace!("Finished enumerating Monitors");
-
-            let mut all_ready = false;
-            while !all_ready {
-                all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
-                sleep_millis(10);
-            }
-
-            log::trace!("Enumerating windows");
-            log_if_error(EnumWindows(Some(Self::enum_windows_proc), LPARAM(0)));
-            log::trace!("Finished enumerating windows");
-        });
     }
 }

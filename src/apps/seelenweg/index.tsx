@@ -23,7 +23,7 @@ async function onMount() {
   updateHitbox();
   await emitTo(view.label.replace('/', '-hitbox/'), 'init');
   await view.show();
-  await view.emit('complete-setup');
+  await view.emitTo(view.label, 'complete-setup');
 }
 
 async function Main() {
