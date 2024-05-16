@@ -22,7 +22,7 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
         return Ok(());
     }
 
-    WindowsApi::unmaximize_window(hwnd);
+    WindowsApi::unmaximize_window(hwnd)?;
     let shadow = WindowsApi::shadow_rect(hwnd)?;
     WindowsApi::set_position(
         hwnd,

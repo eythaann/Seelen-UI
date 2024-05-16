@@ -31,8 +31,7 @@ use tray::handle_tray_icon;
 
 use crate::cli::SEELEN_COMMAND_LINE;
 
-fn main() -> Result<()> {
-    color_eyre::install().expect("Failed to install color_eyre");
+fn register_panic_hook() {
     std::panic::set_hook(Box::new(|info| {
         let cause = info
             .payload()
@@ -61,6 +60,11 @@ fn main() -> Result<()> {
             string_location.purple()
         );
     }));
+}
+
+fn main() -> Result<()> {
+    color_eyre::install().expect("Failed to install color_eyre");
+    register_panic_hook();
 
     let command = SEELEN_COMMAND_LINE.lock().clone();
     let matches = command.get_matches();

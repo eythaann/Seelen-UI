@@ -8,15 +8,20 @@ use windows::Win32::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            EVENT_OBJECT_CREATE, EVENT_OBJECT_FOCUS, EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND,
-            MSG,
+            EVENT_OBJECT_CREATE, EVENT_OBJECT_FOCUS, EVENT_OBJECT_LOCATIONCHANGE,
+            EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND, MSG,
         },
     },
 };
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    apps_config::{AppExtraFlag, SETTINGS_BY_APP}, error_handler::{log_if_error, Result}, seelen::{Seelen, SEELEN}, seelen_weg::SeelenWeg, utils::constants::IGNORE_FOCUS, windows_api::WindowsApi
+    apps_config::{AppExtraFlag, SETTINGS_BY_APP},
+    error_handler::{log_if_error, Result},
+    seelen::{Seelen, SEELEN},
+    seelen_weg::SeelenWeg,
+    utils::constants::IGNORE_FOCUS,
+    windows_api::WindowsApi,
 };
 
 lazy_static! {
@@ -121,6 +126,25 @@ impl Seelen {
     }
 }
 
+pub fn _log_event(hwnd: HWND, event: u32) {
+    if event == EVENT_OBJECT_LOCATIONCHANGE {
+        return;
+    }
+
+    let winevent = match crate::winevent::WinEvent::try_from(event) {
+        Ok(event) => event,
+        Err(_) => return,
+    };
+
+    println!(
+        "{:?} || {} || {} || {}",
+        winevent,
+        WindowsApi::exe(hwnd).unwrap_or_default(),
+        WindowsApi::get_class(hwnd).unwrap_or_default(),
+        WindowsApi::get_window_text(hwnd)
+    );
+}
+
 pub extern "system" fn win_event_hook(
     _h_win_event_hook: HWINEVENTHOOK,
     event: u32,
@@ -142,22 +166,7 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    /* if event == EVENT_OBJECT_LOCATIONCHANGE {
-        return;
-    }
-
-    let winevent = match crate::winevent::WinEvent::try_from(event) {
-        Ok(event) => event,
-        Err(_) => return,
-    };
-
-    println!(
-        "{:?} || {} || {} || {}",
-        winevent,
-        WindowsApi::exe(hwnd).unwrap_or_default(),
-        WindowsApi::get_class(hwnd).unwrap_or_default(),
-        WindowsApi::get_window_text(hwnd)
-    ); */
+    // _log_event(hwnd, event);
 
     let title = WindowsApi::get_window_text(hwnd);
     if (event == EVENT_OBJECT_FOCUS || event == EVENT_SYSTEM_FOREGROUND)

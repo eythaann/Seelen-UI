@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### refactor
+- Use TaskScheduler for autostart Seelen with priority and admin privileges.
+
 ## [1.3.3]
 ### features
 - Multi-monitor support for Fancy Toolbar.

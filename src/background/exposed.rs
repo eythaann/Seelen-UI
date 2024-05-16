@@ -12,7 +12,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 
 use crate::apps_config::*;
 use crate::error_handler::{log_if_error, Result};
-use crate::seelen::SEELEN;
+use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
@@ -159,6 +159,18 @@ fn show_app_settings() {
     });
 }
 
+#[command]
+fn set_auto_start(enabled: bool) {
+    std::thread::spawn(move || {
+        log_if_error(SEELEN.lock().set_auto_start(enabled));
+    });
+}
+
+#[command]
+fn get_auto_start_status() -> Result<bool, String> {
+    Ok(Seelen::is_auto_start_enabled()?)
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
@@ -171,6 +183,9 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         show_app_settings,
         reload_apps_configurations,
         ensure_hitboxes_zorder,
+        // Auto Start
+        set_auto_start,
+        get_auto_start_status,
         // Media
         media_play_pause,
         media_next,

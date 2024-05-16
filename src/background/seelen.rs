@@ -149,6 +149,13 @@ impl Seelen {
             register_system_events()?;
             Ok(())
         });
+
+        if WindowsApi::is_elevated()? {
+            if Self::is_auto_start_enabled()? {
+                // override auto-start task in case of location change, normally this happen on MSIX update
+                self.set_auto_start(true)?;
+            }
+        }
         Ok(())
     }
 
@@ -165,6 +172,69 @@ impl Seelen {
         log::trace!("Ensuring folders");
         let path = self.handle().path();
         std::fs::create_dir_all(path.resolve(".config/seelen", BaseDirectory::Home)?)?;
+        Ok(())
+    }
+
+    pub fn is_auto_start_enabled() -> Result<bool> {
+        let handle = get_app_handle();
+        let output = tauri::async_runtime::block_on(async move {
+            handle
+                .shell()
+                .command("powershell")
+                .args([
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-NoProfile",
+                    "-Command",
+                    "[bool](Get-ScheduledTask -TaskName Seelen-UI -ErrorAction SilentlyContinue)",
+                ])
+                .output()
+                .await
+        })?;
+        let stdout = String::from_utf8(output.stdout)?.trim().to_lowercase();
+        Ok(stdout == "true")
+    }
+
+    pub fn set_auto_start(&self, enabled: bool) -> Result<()> {
+        let pwsh_script = include_str!("schedule.ps1");
+        let pwsh_script_path = temp_dir().join("schedule.ps1");
+        std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
+
+        let exe_path = std::env::current_exe()?;
+
+        tauri::async_runtime::block_on(async move {
+            let result = self
+                .handle()
+                .shell()
+                .command("powershell")
+                .args([
+                    "-ExecutionPolicy",
+                    "Bypass",
+                    "-NoProfile",
+                    "-File",
+                    &pwsh_script_path.to_string_lossy(),
+                    "-ExeRoute",
+                    &exe_path.to_string_lossy(),
+                    "-Enabled",
+                    if enabled { "true" } else { "false" },
+                ])
+                .output()
+                .await;
+
+            match result {
+                Ok(output) => {
+                    if !output.status.success() {
+                        let stderr = std::str::from_utf8(&output.stderr)
+                            .unwrap_or_default()
+                            .trim();
+
+                        log::error!("schedule auto start failed: {}", stderr);
+                    }
+                }
+                Err(err) => log::error!("schedule auto start Failed to wait for process: {}", err),
+            };
+        });
+
         Ok(())
     }
 

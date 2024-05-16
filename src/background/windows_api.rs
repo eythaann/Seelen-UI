@@ -23,7 +23,7 @@ use windows::{
             eMultimedia, eRender, Endpoints::IAudioEndpointVolume, IMMDeviceEnumerator,
             MMDeviceEnumerator,
         },
-        Security::{LookupPrivilegeValueW, TOKEN_ADJUST_PRIVILEGES, TOKEN_QUERY},
+        Security::{GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_QUERY},
         Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
@@ -43,7 +43,15 @@ use windows::{
                 VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC
+                EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
+                GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
+                IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
+                EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
+                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION,
+                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
+                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
             },
         },
     },
@@ -65,10 +73,7 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn enum_windows(
-        callback: WNDENUMPROC,
-        callback_data_address: isize,
-    ) -> Result<()> {
+    pub fn enum_windows(callback: WNDENUMPROC, callback_data_address: isize) -> Result<()> {
         unsafe { EnumWindows(callback, LPARAM(callback_data_address))? };
         Ok(())
     }
@@ -143,20 +148,22 @@ impl WindowsApi {
         ))
     }
 
-    pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) {
+    pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
-        unsafe { ShowWindow(hwnd, command) };
+        unsafe { ShowWindow(hwnd, command) }.ok()?;
+        Ok(())
     }
 
-    pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) {
+    pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
-        unsafe { ShowWindowAsync(hwnd, command) };
+        unsafe { ShowWindowAsync(hwnd, command) }.ok()?;
+        Ok(())
     }
 
-    pub fn unmaximize_window(hwnd: HWND) {
-        Self::show_window(hwnd, SW_NORMAL);
+    pub fn unmaximize_window(hwnd: HWND) -> Result<()>{
+        Self::show_window(hwnd, SW_NORMAL)
     }
 
     pub fn get_styles(hwnd: HWND) -> WINDOW_STYLE {
@@ -232,8 +239,8 @@ impl WindowsApi {
             hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
         });
 
-        Self::show_window_async(hwnd, SW_MINIMIZE);
-        Self::show_window_async(hwnd, SW_RESTORE);
+        Self::show_window_async(hwnd, SW_MINIMIZE)?;
+        Self::show_window_async(hwnd, SW_RESTORE)?;
         Ok(())
     }
 
@@ -497,6 +504,27 @@ impl WindowsApi {
             return Err(eyre!("Failed to set suspend state").into());
         }
         Ok(())
+    }
+
+    pub fn is_elevated() -> Result<bool> {
+        unsafe {
+            let mut elevation = TOKEN_ELEVATION::default();
+            let mut ret_len = 0;
+    
+            let token_handle = Self::open_process_token()?;
+    
+            GetTokenInformation(
+                token_handle,
+                TokenElevation,
+                Some(&mut elevation as *mut _ as *mut _),
+                std::mem::size_of::<TOKEN_ELEVATION>() as u32,
+                &mut ret_len,
+            )?;
+    
+            CloseHandle(token_handle)?;
+
+            Ok(elevation.TokenIsElevated != 0)
+        }
     }
 }
 
