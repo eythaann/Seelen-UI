@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.3.4]
 ### enhancements
 - Add splash screen to Settings window.
 - Add discord link on Information Section.
