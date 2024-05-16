@@ -22,7 +22,7 @@
     "type": "git",
     "url": "https://github.com/eythaann/seelen-ui.git"
   },
-  "license": "MIT",
+  "license": "Polyform Strict License",
   "dependencies": {
     "@tauri-apps/plugin-autostart": "^2.0.0-beta.2",
     "@tauri-apps/plugin-dialog": "^2.0.0-beta.2",
