@@ -10,7 +10,9 @@ use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{EnumWindows, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST},
+    UI::WindowsAndMessaging::{
+        EnumWindows, HWND_BOTTOM, HWND_TOPMOST, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST,
+    },
 };
 
 use crate::{
@@ -214,9 +216,11 @@ impl WindowManager {
     }
 
     pub fn pseudo_pause(&self) -> Result<()> {
-        self.window.set_always_on_top(false)?;
-        self.window.set_always_on_bottom(true)?;
-        Ok(())
+        WindowsApi::bring_to(self.window.hwnd()?, HWND_BOTTOM)
+    }
+
+    pub fn pseudo_resume(&self) -> Result<()> {
+        WindowsApi::bring_to(self.window.hwnd()?, HWND_TOPMOST)
     }
 
     pub fn pause(&mut self, action: bool, visuals: bool) -> Result<()> {
@@ -227,12 +231,6 @@ impl WindowManager {
                 false => self.pseudo_resume()?,
             }
         }
-        Ok(())
-    }
-
-    pub fn pseudo_resume(&self) -> Result<()> {
-        self.window.set_always_on_bottom(false)?;
-        self.window.set_always_on_top(true)?;
         Ok(())
     }
 }
@@ -291,7 +289,12 @@ impl WindowManager {
 
         window.set_ignore_cursor_events(true)?;
 
-        WindowsApi::set_position(window.hwnd()?, None, &work_area, SWP_NOACTIVATE)?;
+        WindowsApi::set_position(
+            window.hwnd()?,
+            Some(HWND_TOPMOST),
+            &work_area,
+            SWP_NOACTIVATE,
+        )?;
 
         Ok(window)
     }

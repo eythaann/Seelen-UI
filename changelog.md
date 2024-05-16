@@ -7,6 +7,9 @@
 ### refactor
 - Use TaskScheduler for autostart Seelen with priority and admin privileges.
 
+### fix
+- bad zorder on Weg and Toolbar under the WM borders
+
 ## [1.3.3]
 ### features
 - Multi-monitor support for Fancy Toolbar.

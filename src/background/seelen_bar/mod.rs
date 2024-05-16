@@ -13,12 +13,13 @@ use windows::Win32::{
     Graphics::Gdi::HMONITOR,
     UI::{
         Shell::{SHAppBarMessage, ABE_TOP, ABM_NEW, ABM_SETPOS, APPBARDATA},
-        WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
+        WindowsAndMessaging::{HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
     },
 };
 
 pub struct FancyToolbar {
     window: WebviewWindow,
+    #[allow(dead_code)]
     hitbox_window: WebviewWindow,
     // -- -- -- --
     last_focus: Option<isize>,
@@ -63,10 +64,7 @@ impl FancyToolbar {
     }
 
     pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        WindowsApi::bring_to(
-            HWND(self.hitbox_window.hwnd()?.0),
-            HWND(self.window.hwnd()?.0),
-        )
+        WindowsApi::bring_to(HWND(self.window.hwnd()?.0), HWND_TOPMOST)
     }
 }
 

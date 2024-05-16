@@ -18,8 +18,7 @@ use windows::{
         UI::{
             Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
             WindowsAndMessaging::{
-                FindWindowW, GetParent, ShowWindow, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
-                SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+                FindWindowW, GetParent, ShowWindow, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW
             },
         },
     },
@@ -265,7 +264,7 @@ impl SeelenWeg {
     }
 
     pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        WindowsApi::bring_to(HWND(self.hitbox.hwnd()?.0), HWND(self.window.hwnd()?.0))
+        WindowsApi::bring_to(HWND(self.window.hwnd()?.0), HWND_TOPMOST)
     }
 
     pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {

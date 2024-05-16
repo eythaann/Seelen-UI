@@ -34,6 +34,7 @@ async function Main() {
 
     document.body.addEventListener('mousemove', () => {
       emitTo(main, 'mouseenter');
+      invoke('ensure_hitboxes_zorder');
     });
     document.body.addEventListener('click', onClick);
     document.body.addEventListener('touchend', onClick);
