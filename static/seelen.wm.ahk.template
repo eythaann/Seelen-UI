@@ -15,7 +15,7 @@ CloseIfNotRunning()
 {{debugWm}}:: WMDebug()
 
 ; Pause Window Manager
-{{pauseWm}}:: {
+^#!p:: {
   PauseWM()
   ExitApp()
 }

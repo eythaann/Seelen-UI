@@ -13,7 +13,7 @@ export const AhkVarSchema = z.object({
 
 export const AhkVariablesSchema = z.object({
   debug_wm: AhkVarSchema.default({ fancy: 'Win + Control + Alt + W', ahk: '^#!w' }),
-  pause_wm: AhkVarSchema.default({ fancy: 'Win + Control + Alt + P', ahk: '^#!p' }),
+  // pause_wm: AhkVarSchema.default({ fancy: 'Win + Control + Alt + P', ahk: '^#!p' }),
   // reservations
   reserve_top: AhkVarSchema.default({ fancy: 'Win + Shift + I', ahk: '#+i' }),
   reserve_bottom: AhkVarSchema.default({ fancy: 'Win + Shift + K', ahk: '#+k' }),
