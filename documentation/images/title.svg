@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 100">
-  <svg width="100%" height="100%" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <svg x="20" width="100" height="100" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
 
     <rect width="100%" height="100%" rx="20%" ry="20%" fill="#0f0f0f" />
 
@@ -13,8 +13,5 @@
     <line stroke-width="2.5%" x1="49%" y1="50%" x2="95%" y2="50%" stroke="#ffffff" stroke-dasharray="6.5% 4%" />
     <line stroke-width="2.5%" x1="50%" y1="5%" x2="50%" y2="95%" stroke="#ffffff" stroke-dasharray="6.5% 3.95%" />
   </svg>
-
-  <text x="140" y="85" font-weight="500"
-    font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif"
-    style="font-size: 100px; fill: black;">Seelen UI</text>
+  <text x="140" y="86" font-weight="400" font-family="Segoe UI" style="font-size: 100px; fill: black;">Seelen UI</text>
 </svg>
