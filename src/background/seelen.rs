@@ -314,11 +314,11 @@ impl Seelen {
             "settings",
             tauri::WebviewUrl::App("settings/index.html".into()),
         )
+        .title("Settings")
         .inner_size(700.0, 500.0)
         .maximizable(false)
         .minimizable(true)
         .resizable(false)
-        .title("Settings")
         .visible(false)
         .decorations(false)
         .center()

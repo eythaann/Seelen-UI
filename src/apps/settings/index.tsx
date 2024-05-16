@@ -1,3 +1,4 @@
+import { getRootContainer } from '../utils';
 import { wrapConsole } from '../utils/ConsoleWrapper';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
@@ -15,21 +16,18 @@ import './styles/reset.css';
 import './styles/global.css';
 
 (async function main() {
+  getCurrent().show();
   wrapConsole();
-
-  const container = document.getElementById('root');
-  if (!container) {
-    throw new Error('container not found');
-  }
+  const container = getRootContainer();
 
   await LoadSettingsToStore();
 
   const WrappedRoot = () => {
     useEffect(() => {
-      setTimeout(() => {
-        getCurrent().show();
-      }, 0);
-    });
+      let splashscreen = document.getElementById('splashscreen');
+      splashscreen?.classList.add('vanish');
+      setTimeout(() => splashscreen?.classList.add('hidden'), 300);
+    }, []);
 
     return (
       <Provider store={store}>

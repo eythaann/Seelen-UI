@@ -6,6 +6,58 @@
   width: 100vw;
 }
 
+#splashscreen {
+  will-change: contents;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--color-gray-50);
+  transition: opacity 300ms ease-out;
+  opacity: 1;
+
+  &::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: " ";
+    background: linear-gradient(217deg, var(--color-red-100), #0000 70%),
+      linear-gradient(127deg, var(--color-blue-100), #0000 70%),
+      linear-gradient(336deg, var(--color-cyan-100), #0000 70%);
+  }
+
+  &.hidden {
+    display: none;
+  }
+
+  &.vanish {
+    opacity: 0;
+  }
+
+  .splashscreen-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transform: translate(-50%, -50%);
+
+    .splashscreen-logo {
+      width: 100px;
+    }
+
+    .splashscreen-text {
+      font-size: 5rem;
+      line-height: 5rem;
+      margin-top: -5px;
+      text-wrap: nowrap;
+    }
+  }
+}
+
 body {
   overflow: hidden;
   cursor: default;

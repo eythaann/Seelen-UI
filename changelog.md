@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- Add splash screen to Settings window.
+
 ### refactor
 - Use TaskScheduler for autostart Seelen with priority and admin privileges.
 
