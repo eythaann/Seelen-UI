@@ -58,26 +58,6 @@ const columns: ColumnsType<AppConfigurationExtended> = [
     },
     sorter: getSorterByText('category'),
   },
-  {
-    title: 'Monitor',
-    dataIndex: 'monitor',
-    key: 'monitor',
-    width: 120,
-    render(value, _record, _index) {
-      return value != null ? `Monitor ${value + 1}` : '-';
-    },
-    sorter: getSorterByText('monitor'),
-  },
-  {
-    title: 'Workspace',
-    dataIndex: 'workspace',
-    key: 'workspace',
-    width: 120,
-    render(value, _record, _index) {
-      return value || '-';
-    },
-    sorter: getSorterByText('workspace'),
-  },
   ...Object.values(ApplicationOptions).map(
     (option) =>
       ({
@@ -249,7 +229,7 @@ export function AppsConfiguration() {
         dataSource={data}
         columns={columns}
         pagination={{ pageSize: 50 }}
-        scroll={{ y: 350, x: '100vw' }}
+        scroll={{ y: 330, x: '100vw' }}
         className={cs.table}
         rowSelection={{
           selectedRowKeys: selectedAppsKey,

@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### enhancements
 - Add splash screen to Settings window.
+- Add discord link on Information Section.
 
 ### refactor
 - Use TaskScheduler for autostart Seelen with priority and admin privileges.

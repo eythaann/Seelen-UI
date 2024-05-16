@@ -16,7 +16,7 @@ export function Information() {
   return (
     <div className={cs.info}>
       <SettingsGroup>
-        <SettingsSubGroup label="Documentation">
+        <SettingsSubGroup label="Links:">
           <SettingsOption>
             <span>
               Seelen UI <span className={cs.version}>v{EnvConfig.version}</span>:
@@ -25,15 +25,10 @@ export function Information() {
               github.com/eythaann/seelen-ui
             </a>
           </SettingsOption>
-        </SettingsSubGroup>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsSubGroup label="Follow me:">
           <SettingsOption>
-            <span>Github:</span>
-            <a href="https://github.com/eythaann" target="_blank">
-              github.com/eythaann
+            <span>Discord:</span>
+            <a href="https://discord.gg/ABfASx5ZAJ" target="_blank">
+              discord.gg/ABfASx5ZAJ
             </a>
           </SettingsOption>
         </SettingsSubGroup>
