@@ -12,7 +12,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 
 use crate::apps_config::*;
 use crate::error_handler::{log_if_error, Result};
-use crate::seelen::{get_app_handle, Seelen, SEELEN};
+use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
