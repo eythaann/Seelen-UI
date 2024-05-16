@@ -24,7 +24,9 @@ export type store = {
 };
 
 export const LoadSettingsToStore = async (customPath?: string) => {
-  store.dispatch(RootActions.setAutostart(await startup.isEnabled()));
+  startup.isEnabled().then((value) => {
+    store.dispatch(RootActions.setAutostart(value));
+  });
 
   const appsTemplate = await loadAppsTemplates();
   store.dispatch(
