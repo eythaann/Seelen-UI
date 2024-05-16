@@ -35,13 +35,18 @@ Welcome to Seelen UI, where customization meets productivity, revolutionizing yo
 
 * **Unleash Your Creativity**: With Seelen UI, your desktop becomes a canvas, ready for your creative vision. From menus to widgets, every element can be tailored to reflect your unique style and workflow.
 
+  <img src="./documentation/images/seelen.png" width="100%" alt="Seelen UI">
+<br/>
+
 * **Boost Your Productivity**: Say goodbye to clutter and hello to organization. Seelen UI empowers you to streamline your desktop layout, ensuring that essential tools and information are always at your fingertips. Plus, with a Tiling Windows Manager for Windows, productivity reaches new heights as windows automatically arrange themselves for optimal multitasking efficiency.
 
   <img src="./documentation/images/desktop_view2.png" width="100%" alt="Seelen UI desktop">
+<br/>
 
 * **Easy and Very Customizable Configuration**: Seelen UI offers an easy and highly customizable configuration through an intuitive user interface. Tweak every aspect of your desktop experience with ease, from colors and fonts to taskbar layouts and icon arrangements, all within a few clicks.
 
   <img src="./documentation/images/mosaico.png" width="100%" alt="Seelen UI desktop">
+<br/>
 
 ## Getting Started - Installation
 You can choose from different installation options based on your preference:
