@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- No hiding the taskbar correctly.
+
 ## [1.3.4]
 ### enhancements
 - Add splash screen to Settings window.

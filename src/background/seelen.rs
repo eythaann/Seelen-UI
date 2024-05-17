@@ -124,7 +124,7 @@ impl Seelen {
 
     pub fn start(&mut self) -> Result<()> {
         if self.state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar(true);
+            SeelenWeg::hide_taskbar(true)?;
         }
 
         self.start_ahk_shortcuts()?;
@@ -159,13 +159,14 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn stop(&self) {
+    pub fn stop(&self) -> Result<()> {
         if self.state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar(false);
+            SeelenWeg::hide_taskbar(false)?;
         }
         if self.state.is_ahk_enabled() {
             self.kill_ahk_shortcuts();
         }
+        Ok(())
     }
 
     pub fn ensure_folders(&self) -> Result<()> {

@@ -29,7 +29,7 @@ use seelen::SEELEN;
 
 use tray::handle_tray_icon;
 
-use crate::cli::SEELEN_COMMAND_LINE;
+use crate::{cli::SEELEN_COMMAND_LINE, error_handler::log_if_error};
 
 fn register_panic_hook() {
     std::panic::set_hook(Box::new(|info| {
@@ -111,7 +111,7 @@ fn main() -> Result<()> {
             let seelen = SEELEN.lock();
             if seelen.initialized {
                 log::info!("───────────────────── Exiting Seelen ─────────────────────");
-                seelen.stop();
+                log_if_error(seelen.stop());
             }
         }
         _ => {}

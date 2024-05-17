@@ -7,19 +7,18 @@ use std::path::PathBuf;
 use getset::{Getters, MutGetters};
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
+use parking_lot::Mutex;
 use serde::Serialize;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
-use windows::{
-    core::PCWSTR,
-    Win32::{
-        Foundation::{HWND, LPARAM, RECT},
-        Graphics::Gdi::HMONITOR,
-        UI::{
-            Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
-            WindowsAndMessaging::{
-                FindWindowW, GetParent, ShowWindow, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW
-            },
+use windows::Win32::{
+    Foundation::{BOOL, HWND, LPARAM, RECT},
+    Graphics::Gdi::HMONITOR,
+    UI::{
+        Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
+        WindowsAndMessaging::{
+            EnumWindows, GetParent, ShowWindow, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE,
+            SW_HIDE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
         },
     },
 };
@@ -372,9 +371,10 @@ impl SeelenWeg {
         Ok((window, hitbox))
     }
 
-    pub fn hide_taskbar(hide: bool) {
+    pub fn hide_taskbar(hide: bool) -> Result<()> {
         let lparam: LPARAM;
         let cmdshow: SHOW_WINDOW_CMD;
+
         if hide {
             lparam = LPARAM(ABS_AUTOHIDE as isize);
             cmdshow = SW_HIDE;
@@ -383,18 +383,39 @@ impl SeelenWeg {
             cmdshow = SW_SHOWNORMAL;
         }
 
-        let name: Vec<u16> = format!("Shell_TrayWnd\0").encode_utf16().collect();
-        let mut ap_bar: APPBARDATA = unsafe { std::mem::zeroed() };
-
-        ap_bar.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-        ap_bar.hWnd = unsafe { FindWindowW(PCWSTR(name.as_ptr()), PCWSTR::null()) };
-
-        if ap_bar.hWnd.0 != 0 {
+        let handles = get_taskbars_handles()?;
+        for handle in handles {
+            let mut ap_bar: APPBARDATA = unsafe { std::mem::zeroed() };
+            ap_bar.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
+            ap_bar.hWnd = handle;
             ap_bar.lParam = lparam;
             unsafe {
-                SHAppBarMessage(ABM_SETSTATE, &mut ap_bar as *mut APPBARDATA);
-                ShowWindow(ap_bar.hWnd, cmdshow);
+                SHAppBarMessage(ABM_SETSTATE, &mut ap_bar as *mut _);
+                ShowWindow(handle, cmdshow);
             }
         }
+        Ok(())
     }
+}
+
+lazy_static! {
+    pub static ref FOUNDS: Mutex<Vec<HWND>> = Mutex::new(Vec::new());
+    pub static ref TASKBAR_CLASS: Vec<&'static str> =
+        Vec::from(["Shell_TrayWnd", "Shell_SecondaryTrayWnd",]);
+}
+
+unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
+    let class = WindowsApi::get_class(hwnd).unwrap_or_default();
+    if TASKBAR_CLASS.contains(&class.as_str()) {
+        FOUNDS.lock().push(hwnd);
+    }
+    true.into()
+}
+
+pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
+    unsafe { EnumWindows(Some(enum_windows_proc), LPARAM(0))? };
+    let mut found = FOUNDS.lock();
+    let result = found.clone();
+    found.clear();
+    Ok(result)
 }

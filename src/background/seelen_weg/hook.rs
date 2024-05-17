@@ -13,11 +13,6 @@ impl SeelenWeg {
     pub fn process_win_event(&mut self, event: u32, hwnd: HWND) -> Result<()> {
         match event {
             EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
-                if "Shell_TrayWnd" == WindowsApi::get_class(hwnd)? {
-                    // ensure that the taskbar is always hidden
-                    SeelenWeg::hide_taskbar(true);
-                }
-
                 if SeelenWeg::is_real_window(hwnd, false) {
                     self.add_hwnd(hwnd);
                 }

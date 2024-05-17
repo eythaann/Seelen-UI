@@ -19,7 +19,7 @@ use crate::{
     apps_config::{AppExtraFlag, SETTINGS_BY_APP},
     error_handler::{log_if_error, Result},
     seelen::{Seelen, SEELEN},
-    seelen_weg::SeelenWeg,
+    seelen_weg::{SeelenWeg, TASKBAR_CLASS},
     utils::constants::IGNORE_FOCUS,
     windows_api::WindowsApi,
 };
@@ -115,9 +115,14 @@ impl Seelen {
         match event {
             EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
                 // ensure that the taskbar is always hidden
-                if self.state().is_weg_enabled() && "Shell_TrayWnd" == WindowsApi::get_class(hwnd)?
-                {
-                    SeelenWeg::hide_taskbar(true);
+                if self.state().is_weg_enabled() {
+                    let class = WindowsApi::get_class(hwnd)?;
+                    let parent_class = WindowsApi::get_class(WindowsApi::get_parent(hwnd)).unwrap_or_default();
+                    if TASKBAR_CLASS.contains(&class.as_str())
+                        || TASKBAR_CLASS.contains(&parent_class.as_str())
+                    {
+                        SeelenWeg::hide_taskbar(true)?;
+                    }
                 }
             }
             _ => {}
@@ -166,7 +171,7 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    // _log_event(hwnd, event);
+    //_log_event(hwnd, event);
 
     let title = WindowsApi::get_window_text(hwnd);
     if (event == EVENT_OBJECT_FOCUS || event == EVENT_SYSTEM_FOREGROUND)

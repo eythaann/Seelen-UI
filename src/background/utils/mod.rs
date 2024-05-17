@@ -1,6 +1,6 @@
 pub mod constants;
-pub mod virtual_desktop;
 pub mod rect;
+pub mod virtual_desktop;
 
 use std::time::Duration;
 

@@ -23,7 +23,10 @@ use windows::{
             eMultimedia, eRender, Endpoints::IAudioEndpointVolume, IMMDeviceEnumerator,
             MMDeviceEnumerator,
         },
-        Security::{GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_QUERY},
+        Security::{
+            GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TOKEN_ADJUST_PRIVILEGES,
+            TOKEN_ELEVATION, TOKEN_QUERY,
+        },
         Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
@@ -162,7 +165,7 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn unmaximize_window(hwnd: HWND) -> Result<()>{
+    pub fn unmaximize_window(hwnd: HWND) -> Result<()> {
         Self::show_window(hwnd, SW_NORMAL)
     }
 
@@ -510,9 +513,9 @@ impl WindowsApi {
         unsafe {
             let mut elevation = TOKEN_ELEVATION::default();
             let mut ret_len = 0;
-    
+
             let token_handle = Self::open_process_token()?;
-    
+
             GetTokenInformation(
                 token_handle,
                 TokenElevation,
@@ -520,7 +523,7 @@ impl WindowsApi {
                 std::mem::size_of::<TOKEN_ELEVATION>() as u32,
                 &mut ret_len,
             )?;
-    
+
             CloseHandle(token_handle)?;
 
             Ok(elevation.TokenIsElevated != 0)
