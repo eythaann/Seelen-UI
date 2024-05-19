@@ -39,10 +39,10 @@ lazy_static! {
         "DesktopWindowXamlSource",
         "SeelenWeg",
         "SeelenWeg Hitbox",
-        "SeelenWeg Hitbox",
-        "Seelen Window Manager",
         "Seelen Fancy Toolbar",
         "Seelen Fancy Toolbar Hitbox",
+        "Seelen Window Manager",
+        "Seelen Wall",
         "Program Manager",
     ]);
     static ref EXE_BLACK_LIST: Vec<&'static str> = Vec::from([
@@ -338,6 +338,7 @@ impl SeelenWeg {
         .title("SeelenWeg")
         .maximizable(false)
         .minimizable(false)
+        .closable(false)
         .resizable(false)
         .visible(false)
         .decorations(false)
@@ -345,12 +346,13 @@ impl SeelenWeg {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
+        .disable_file_drop_handler()
         .build()?;
-
-        window.set_ignore_cursor_events(true)?;
 
         let main_hwnd = HWND(window.hwnd()?.0);
         let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
+
+        window.set_ignore_cursor_events(true)?;
 
         WindowsApi::move_window(hitbox_hwnd, &rc_work)?;
 

@@ -23,6 +23,7 @@ pub struct State {
     seelen_shell: Option<FeatureState>,
     fancy_toolbar: Option<FancyToolbarState>,
     window_manager: Option<FeatureState>,
+    wall: Option<FeatureState>,
     ahk_enabled: Option<bool>,
 }
 
@@ -75,6 +76,15 @@ impl State {
     pub fn is_ahk_enabled(&self) -> bool {
         if let Some(enable) = self.ahk_enabled {
             return enable;
+        }
+        true
+    }
+
+    pub fn is_wall_enabled(&self) -> bool {
+        if let Some(wall) = &self.wall {
+            if let Some(enable) = wall.enabled {
+                return enable;
+            }
         }
         true
     }

@@ -1,0 +1,16 @@
+/**
+ * The styles in this file are only structural for The Wall,
+ * all the design should be added to the default theme css.
+ */
+body {
+  overflow: hidden;
+  background: transparent;
+  width: 100vw;
+  height: 100vh;
+
+  background: linear-gradient(
+    -45deg,
+    var(--color-persist-gray-500) 0%,
+    var(--color-persist-gray-800) 100%
+  );
+}

@@ -105,6 +105,7 @@ impl FancyToolbar {
         .title("Seelen Fancy Toolbar")
         .maximizable(false)
         .minimizable(false)
+        .closable(false)
         .resizable(false)
         .visible(false)
         .decorations(false)
@@ -112,12 +113,13 @@ impl FancyToolbar {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
+        .disable_file_drop_handler()
         .build()?;
-
-        window.set_ignore_cursor_events(true)?;
 
         let main_hwnd = HWND(window.hwnd()?.0);
         let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
+
+        window.set_ignore_cursor_events(true)?;
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOSIZE)?;

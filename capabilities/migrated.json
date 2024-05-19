@@ -10,7 +10,8 @@
     "updater",
     "window-manager/*",
     "fancy-toolbar/*",
-    "fancy-toolbar-hitbox/*"
+    "fancy-toolbar-hitbox/*",
+    "seelen-wall/*"
   ],
   "permissions": [
     "path:default",

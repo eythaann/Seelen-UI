@@ -1,4 +1,4 @@
-import { getRootContainer, setWindowAsFullSize } from '../utils';
+import { getRootContainer } from '../utils';
 import { wrapConsole } from '../utils/ConsoleWrapper';
 import { registerDocumentEvents } from './events';
 import { ConfigProvider, theme } from 'antd';
@@ -18,7 +18,6 @@ async function Main() {
   wrapConsole();
   const container = getRootContainer();
 
-  setWindowAsFullSize();
   registerDocumentEvents();
   await registerStoreEvents();
   await loadStore();

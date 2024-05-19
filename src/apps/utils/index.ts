@@ -21,12 +21,6 @@ export async function wasInstalledUsingMSIX() {
   return intallPath.startsWith('C:\\Program Files\\WindowsApps');
 }
 
-export const setWindowAsFullSize = () => {
-  const screenWidth = toPhysicalPixels(window.screen.width);
-  const screenHeight = toPhysicalPixels(window.screen.height);
-  getCurrent().setSize(new PhysicalSize(screenWidth, screenHeight));
-};
-
 export function loadThemeCSS(theme: Theme, old?: Theme) {
   invoke<string>('get_accent_color').then((color) => {
     document.documentElement.style.setProperty('--config-accent-color', color);

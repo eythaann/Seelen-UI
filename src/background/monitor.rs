@@ -2,8 +2,7 @@ use color_eyre::eyre::eyre;
 use getset::{Getters, MutGetters};
 
 use crate::{
-    error_handler::Result, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager, state::State, windows_api::WindowsApi,
+    error_handler::Result, seelen_bar::FancyToolbar, seelen_wall::SeelenWall, seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::State, windows_api::WindowsApi
 };
 
 use windows::Win32::Graphics::Gdi::HMONITOR;
@@ -15,6 +14,7 @@ pub struct Monitor {
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
     wm: Option<WindowManager>,
+    wall: Option<SeelenWall>,
 }
 
 impl Monitor {
@@ -28,7 +28,15 @@ impl Monitor {
             toolbar: None,
             weg: None,
             wm: None,
+            wall: None,
         };
+
+        if settings.is_wall_enabled() {
+            match SeelenWall::new(hmonitor.0) {
+                Ok(wall) => monitor.wall = Some(wall),
+                Err(e) => log::error!("Failed to create Wall: {}", e),
+            }
+        }
 
         if settings.is_bar_enabled() {
             match FancyToolbar::new(hmonitor.0) {
