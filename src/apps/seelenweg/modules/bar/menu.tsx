@@ -41,7 +41,7 @@ export function getMenuForItem(item: App): MenuProps['items'] {
           arrow={false}
           content={
             <div className="weg-context-menu-container">
-              <BackgroundByLayers prefix="menu" styles={state.theme.seelenweg.contextMenu.backgroundLayers} />
+              <BackgroundByLayers prefix="menu" layers={state.themeLayers.weg.contextMenu.bg} />
               <Menu
                 className="weg-context-menu"
                 items={[

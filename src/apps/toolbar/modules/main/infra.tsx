@@ -30,11 +30,11 @@ interface Props {
 }
 
 export function ToolBar({ structure }: Props) {
-  const theme = useSelector(Selectors.theme.toolbar);
+  const layers = useSelector(Selectors.themeLayers);
 
   return (
     <div className="ft-bar">
-      <BackgroundByLayers prefix="ft-bar" styles={theme.backgroundLayers} />
+      <BackgroundByLayers prefix="ft-bar" layers={layers.toolbar.bg} />
       <div className="ft-bar-left">{structure.left.map(componentByModule)}</div>
       <div className="ft-bar-center">{structure.center.map(componentByModule)}</div>
       <div className="ft-bar-right">{structure.right.map(componentByModule)}</div>

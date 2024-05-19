@@ -40,7 +40,7 @@ function shouldBeHidden(hideMode: SeelenWegHideMode, isActive: boolean, isOverla
 
 export function SeelenWeg() {
   const focusedHandle = useSelector(Selectors.focusedHandle);
-  const theme = useSelector(Selectors.theme);
+  const bgLayers = useSelector(Selectors.themeLayers);
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
 
@@ -252,7 +252,7 @@ export function SeelenWeg() {
         hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
       })}
     >
-      <BackgroundByLayers prefix="taskbar" styles={theme?.seelenweg.backgroundLayers || []} />
+      <BackgroundByLayers prefix="taskbar" layers={bgLayers.weg.bg || []} />
       {[
         ...pinnedOnLeft.map((item) => (
           <WegItem

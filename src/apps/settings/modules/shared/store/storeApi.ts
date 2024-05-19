@@ -1,62 +1,90 @@
-import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
+import { AppTemplate, defaultTheme, UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, VariableConvention } from '../../../../utils/schemas';
 import { Layout, LayoutSchema } from '../../../../utils/schemas/Layout';
 import { Placeholder, PlaceholderSchema } from '../../../../utils/schemas/Placeholders';
 import { AhkVariables, SettingsSchema } from '../../../../utils/schemas/Settings';
 import { Theme, ThemeSchema } from '../../../../utils/schemas/Theme';
 import { path } from '@tauri-apps/api';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
+import { cloneDeep } from 'lodash';
 
 import { getSettingsPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
 import { AppsTemplates } from '../../../../utils/appsTemplates';
 
+const isObject = (obj: any) => obj && typeof obj === 'object' && !Array.isArray(obj);
+const mergeLayers = (obj1: any, obj2: any) => {
+  const result = { ...obj1 };
+
+  Object.keys(obj2).forEach((key) => {
+    if (isObject(obj2[key])) {
+      if (!obj1[key]) {
+        result[key] = obj2[key];
+      } else {
+        result[key] = mergeLayers(obj1[key], obj2[key]);
+      }
+    } else {
+      result[key] = obj1[key] !== undefined ? Math.max(obj1[key], obj2[key]) : obj2[key];
+    }
+  });
+
+  return result;
+};
+
+export const getBackgroundLayers = (selected: string[], themes: Theme[]) => {
+  return themes.reduce((acc, theme) => {
+    if (selected.includes(theme.info.filename)) {
+      return mergeLayers(acc, theme.layers);
+    }
+
+    return acc;
+  }, cloneDeep(defaultTheme.layers));
+};
+
 async function loadUserThemes(ref: UserSettings) {
   const themesPath = await path.join(await path.resourceDir(), 'static', 'themes');
   const entries = await fs.readDir(themesPath);
 
+  async function themeFromDir(dirname: string) {
+    let themePath = await path.join(themesPath, dirname);
+    let theme = yaml.load(await fs.readTextFile(await path.join(themePath, 'theme.yml'))) as Theme;
+    theme = ThemeSchema.parse(theme) as Theme;
+
+    theme.info.filename = dirname;
+
+    theme.styles = {
+      weg: await fs.readTextFile(await path.join(themePath, 'theme.weg.css')),
+      toolbar: await fs.readTextFile(await path.join(themePath, 'theme.toolbar.css')),
+      wm: await fs.readTextFile(await path.join(themePath, 'theme.wm.css')),
+    };
+
+    return theme;
+  }
+
+  async function themeFromFile(filename: string) {
+    let theme = yaml.load(await fs.readTextFile(await path.join(themesPath, filename))) as Theme;
+    theme = ThemeSchema.parse(theme) as Theme;
+    theme.info.filename = filename;
+    return theme;
+  }
+
   for (const entry of entries) {
-    if (entry.isFile && entry.name.endsWith('.json')) {
-      let theme: Theme = JSON.parse(await fs.readTextFile(await path.join(themesPath, entry.name)));
-      theme = parseAsCamel(ThemeSchema, theme);
+    let theme: null | Theme = null;
 
-      const sanitizedTheme: Theme = {
-        ...theme,
-        info: {
-          ...theme.info,
-          filename: entry.name,
-          cssFileUrl: null,
-        },
-      };
+    if (entry.isDirectory) {
+      theme = await themeFromDir(entry.name);
+    } else if (entry.isFile && entry.name.endsWith('.yml')) {
+      theme = await themeFromFile(entry.name);
+    }
 
-      if (sanitizedTheme.info.displayName === 'Unknown') {
-        sanitizedTheme.info.displayName = entry.name;
-      }
-
-      const cssFilePath = await path.join(
-        await path.resourceDir(),
-        'static',
-        'themes',
-        entry.name.replace('.json', '.css'),
-      );
-      if (await fs.exists(cssFilePath)) {
-        sanitizedTheme.info.cssFileUrl = convertFileSrc(cssFilePath);
-      }
-
-      if (ref.jsonSettings.selectedTheme === entry.name) {
-        ref.theme = sanitizedTheme;
-      }
-
-      ref.themes.push(sanitizedTheme);
+    if (theme) {
+      ref.themes.push(theme);
     }
   }
 
-  if (!ref.theme) {
-    ref.theme = ref.themes[0] || null;
-    ref.jsonSettings.selectedTheme = ref.theme?.info.filename || null;
-  }
+  ref.bgLayers = getBackgroundLayers([ref.jsonSettings.selectedTheme].flat(), ref.themes);
 }
 
 async function loadUserLayouts(ref: UserSettings) {
@@ -136,7 +164,7 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     jsonSettings: parseAsCamel(SettingsSchema, {}),
     yamlSettings: [],
     themes: [],
-    theme: null,
+    bgLayers: defaultTheme.layers,
     layouts: [],
     placeholders: [],
     env: await invoke('get_user_envs'),

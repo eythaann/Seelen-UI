@@ -23,7 +23,7 @@ const initialState: RootState = {
   lastManagedActivated: null,
   reservation: null,
   settings: parseAsCamel(WindowManagerSchema, {}),
-  theme: defaultTheme,
+  themeLayers: defaultTheme.layers,
 };
 
 export const RootSlice = createSlice({

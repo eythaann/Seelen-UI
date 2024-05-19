@@ -9,4 +9,8 @@ declare global {
     const classnames: Record<string, string>;
     export default classnames;
   }
+
+  interface ObjectConstructor {
+    keys<T>(o: T): (keyof T)[];
+  }
 }

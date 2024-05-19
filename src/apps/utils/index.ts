@@ -1,4 +1,4 @@
-import { Theme } from './schemas/Theme';
+import { UserSettings } from '../../shared.interfaces';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
@@ -17,8 +17,8 @@ export function toPhysicalPixels(size: number): number {
 }
 
 export async function wasInstalledUsingMSIX() {
-  let intallPath = await path.resourceDir();
-  return intallPath.startsWith('C:\\Program Files\\WindowsApps');
+  let installPath = await path.resourceDir();
+  return installPath.startsWith('C:\\Program Files\\WindowsApps');
 }
 
 export const setWindowAsFullSize = () => {
@@ -27,22 +27,34 @@ export const setWindowAsFullSize = () => {
   getCurrent().setSize(new PhysicalSize(screenWidth, screenHeight));
 };
 
-export function loadThemeCSS(theme: Theme, old?: Theme) {
+export function loadThemeCSS(config: UserSettings) {
   invoke<string>('get_accent_color').then((color) => {
     document.documentElement.style.setProperty('--config-accent-color', color);
   });
 
-  if (old?.info.cssFileUrl) {
-    const link = document.querySelector(`link[href="${old.info.cssFileUrl}"]`);
-    if (link) {
-      document.head.removeChild(link);
-    }
+  let selected = [config.jsonSettings.selectedTheme || ''].flat();
+  let themes = config.themes.filter((theme) => selected.includes(theme.info.filename));
+
+  if (themes.length === 0) {
+    let defaultTheme = config.themes.find((theme) => theme.info.filename === 'default');
+    themes = defaultTheme ? [defaultTheme] : [];
   }
 
-  if (theme.info.cssFileUrl) {
-    const link = document.createElement('link');
-    link.setAttribute('rel', 'stylesheet');
-    link.setAttribute('href', theme.info.cssFileUrl);
-    document.head.appendChild(link);
-  }
+  themes.forEach((theme, idx) => {
+    for (const key of Object.keys(theme.styles)) {
+      let element = document.getElementById(key);
+
+      if (!element) {
+        element = document.createElement('style');
+        element.id = key.toString();
+        document.head.appendChild(element);
+      }
+
+      if (idx === 0) {
+        element.textContent = '';
+      }
+
+      element.textContent += theme.styles[key] + '\n';
+    }
+  });
 }

@@ -5,14 +5,14 @@ import { Theme, ThemeSchema } from './apps/utils/schemas/Theme';
 
 export interface IRootState<T> {
   settings: T;
-  theme: Theme;
+  themeLayers: Theme['layers'];
 }
 
 export interface UserSettings {
   jsonSettings: ISettings;
   yamlSettings: anyObject[];
   themes: Theme[];
-  theme: Theme | null;
+  bgLayers: Theme['layers'];
   layouts: Layout[];
   placeholders: Placeholder[];
   env: Record<string, string>;
@@ -29,7 +29,6 @@ export const defaultTheme: Theme = {
   ..._defaultTheme,
   info: {
     ..._defaultTheme.info,
-    cssFileUrl: null,
     filename: 'unknown',
   },
 };

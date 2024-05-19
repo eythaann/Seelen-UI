@@ -4,10 +4,10 @@ import { CSSProperties, memo } from 'react';
 import cs from './infra.module.css';
 
 interface SeelenWegBackgroundProps {
-  styles: CSSProperties[] | number;
+  layers: CSSProperties[] | number;
   prefix: string;
 }
-export const BackgroundByLayers = memo(({ prefix, styles }: SeelenWegBackgroundProps) => {
+export const BackgroundByLayers = memo(({ prefix, layers: styles }: SeelenWegBackgroundProps) => {
   const layerStyles = typeof styles === 'object' ? styles : new Array(styles).fill({});
 
   return <div className={cx(cs.backgroundLayers)}>

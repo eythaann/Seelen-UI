@@ -21,7 +21,7 @@ const initialState: RootState = {
   pinnedOnRight: [],
   openApps: {},
   focusedHandle: 0,
-  theme: defaultTheme,
+  themeLayers: defaultTheme.layers,
   isOverlaped: false,
   settings: SeelenWegSlice.getInitialState(),
 };

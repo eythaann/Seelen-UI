@@ -75,7 +75,7 @@ export const SettingsSchema = z.object({
   monitors: z.array(MonitorSchema).min(1).default([MonitorSchema.parse({})]),
   ahk_enabled: z.boolean().default(true),
   ahk_variables: AhkVariablesSchema.default({}),
-  selected_theme: z.string().nullable().default(null),
+  selected_theme: z.union([z.string(), z.array(z.string())]).default(['default']),
 });
 
 type inner = z.infer<typeof SettingsSchema> & {};

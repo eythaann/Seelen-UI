@@ -46,14 +46,13 @@ export async function registerStoreEvents() {
   };
 
   await globalListen<UserSettings>('updated-settings', (event) => {
-    const state = store.getState();
     const userSettings = event.payload;
     const settings = userSettings.jsonSettings.seelenweg;
     store.dispatch(RootActions.setSettings(settings));
     loadSettingsCSS(settings);
-    if (userSettings.theme) {
-      loadThemeCSS(userSettings.theme, state.theme);
-      store.dispatch(RootActions.setTheme(userSettings.theme));
+    if (userSettings.bgLayers) {
+      loadThemeCSS(userSettings);
+      store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
     }
     updateHitbox();
   });
@@ -130,9 +129,9 @@ export async function loadStore() {
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
 
-  if (userSettings.theme) {
-    loadThemeCSS(userSettings.theme);
-    store.dispatch(RootActions.setTheme(userSettings.theme));
+  if (userSettings.bgLayers) {
+    loadThemeCSS(userSettings);
+    store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
   }
 
   const apps = await loadPinnedItems();

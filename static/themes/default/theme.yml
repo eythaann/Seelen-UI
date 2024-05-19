@@ -1,0 +1,9 @@
+info:
+  displayName: Default
+  author: eythaann
+  description: Default Seelen Theme
+layers:
+  weg:
+    bg: 2
+  toolbar:
+    bg: 2

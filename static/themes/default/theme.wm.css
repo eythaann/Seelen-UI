@@ -1,0 +1,30 @@
+.SeelenWM {
+  .wm-leaf {
+    &.wm-leaf-with-borders {
+      border-color: var(--color-blue-800);
+      border-style: solid;
+      border-width: var(--config-border-width);
+
+      &.wm-leaf-focused {
+        border-color: var(--color-red-800);
+      }
+    }
+  }
+
+  .wm-stack {
+    .wm-stack-bar {
+      background-color: #222222;
+      color: #fefefe;
+
+      &.wm-stack-bar-with-borders {
+        border-color: var(--color-blue-800);
+        border-style: solid;
+        border-width: var(--config-border-width);
+      }
+    }
+  }
+
+  .wm-reserved {
+    background-color: var(--color-cyan-700);
+  }
+}

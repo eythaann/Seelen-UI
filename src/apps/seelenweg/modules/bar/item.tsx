@@ -25,7 +25,7 @@ interface Props {
 }
 
 export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
-  const theme = useSelector(Selectors.theme.seelenweg);
+  const themeLayers = useSelector(Selectors.themeLayers);
 
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
@@ -92,7 +92,7 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
         trigger={['contextMenu']}
         dropdownRender={() => (
           <div className="weg-context-menu-container">
-            <BackgroundByLayers prefix="menu" styles={theme.contextMenu.backgroundLayers} />
+            <BackgroundByLayers prefix="menu" layers={themeLayers.weg.contextMenu.bg} />
             <Menu className="weg-context-menu" onMouseMoveCapture={(e) => e.stopPropagation()} items={getMenuForItem(item)} />
           </div>
         )}
@@ -109,7 +109,7 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
               className="weg-item-preview-container"
               onMouseMoveCapture={(e) => e.stopPropagation()}
             >
-              <BackgroundByLayers prefix="preview" styles={theme.preview.backgroundLayers} />
+              <BackgroundByLayers prefix="preview" layers={themeLayers.weg.preview.bg} />
               {item.opens.map((hwnd) => (
                 <WegPreview key={hwnd} hwnd={hwnd} />
               ))}
@@ -126,7 +126,7 @@ export const WegItem = memo(({ item, initialSize, isFocused }: Props) => {
               }
             }}
           >
-            <BackgroundByLayers prefix="item" styles={theme.items.backgroundLayers} />
+            <BackgroundByLayers prefix="item" layers={themeLayers.weg.items.bg} />
             <img className="weg-item-icon" src={item.icon} draggable={false} />
             <div className={cx('weg-item-open-sign', {
               'weg-item-open-sign-active': !!item.opens.length,

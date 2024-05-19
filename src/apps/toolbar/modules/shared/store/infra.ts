@@ -37,9 +37,9 @@ export async function loadStore(_userSettings?: UserSettings) {
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));
 
-  if (userSettings.theme) {
-    loadThemeCSS(userSettings.theme);
-    store.dispatch(RootActions.setTheme(userSettings.theme));
+  if (userSettings.bgLayers) {
+    loadThemeCSS(userSettings);
+    store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
   }
 
   const placeholder =

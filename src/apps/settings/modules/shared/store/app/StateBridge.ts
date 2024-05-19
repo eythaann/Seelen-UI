@@ -41,12 +41,11 @@ export const StaticSettingsToState = (
   userSettings: UserSettings,
   initialState: RootState,
 ): RootState => {
-  const { jsonSettings, yamlSettings, theme, themes, layouts, placeholders } = userSettings;
+  const { jsonSettings, yamlSettings, themes, layouts, placeholders } = userSettings;
 
   return {
     ...initialState,
     ...jsonSettings,
-    selectedTheme: theme?.info.filename || null,
     availableThemes: themes,
     availableLayouts: layouts,
     availablePlaceholders: placeholders,

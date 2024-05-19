@@ -8,7 +8,7 @@ import { RootState } from './domain';
 
 const initialState: RootState = {
   focused: null,
-  theme: defaultTheme,
+  themeLayers: defaultTheme.layers,
   placeholder: null,
   settings: parseAsCamel(FancyToolbarSchema, {}),
   env: {},

@@ -12,7 +12,6 @@ export interface RootState extends ISettings {
   toBeSaved: boolean;
   appsConfigurations: AppConfiguration[];
   appsTemplates: (Omit<AppTemplate, 'apps'> & { apps: AppConfiguration[] })[];
-  selectedTheme: string | null;
   availableThemes: Theme[];
   availableLayouts: Layout[];
   availablePlaceholders: Placeholder[];

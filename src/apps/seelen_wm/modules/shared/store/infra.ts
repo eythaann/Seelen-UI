@@ -21,24 +21,23 @@ export async function loadStore() {
   store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
-  if (userSettings.theme) {
-    loadThemeCSS(userSettings.theme);
-    store.dispatch(RootActions.setTheme(userSettings.theme));
+  if (userSettings.bgLayers) {
+    loadThemeCSS(userSettings);
+    store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
   }
 }
 
 export async function registerStoreEvents() {
   await listen<UserSettings>('updated-settings', (event) => {
-    const currentState = store.getState();
     const userSettings = event.payload;
 
     const settings = userSettings.jsonSettings.windowManager;
     loadSettingsCSS(settings);
     store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
     store.dispatch(RootActions.setSettings(settings));
-    if (userSettings.theme) {
-      loadThemeCSS(userSettings.theme, currentState.theme);
-      store.dispatch(RootActions.setTheme(userSettings.theme));
+    if (userSettings.bgLayers) {
+      loadThemeCSS(userSettings);
+      store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
     }
   });
 

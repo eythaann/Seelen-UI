@@ -22,7 +22,7 @@ interface Brightness {
 }
 
 export function SettingsModule(props: Props) {
-  const theme = useSelector(Selectors.theme.toolbar);
+  const themeLayers = useSelector(Selectors.themeLayers.toolbar);
   const [openPreview, setOpenPreview] = useState(false);
   const [volume, setVolume] = useState(0);
   const [brightness, setBrightness] = useState<Brightness>({
@@ -61,7 +61,7 @@ export function SettingsModule(props: Props) {
       arrow={false}
       content={
         <div className="fast-settings">
-          <BackgroundByLayers prefix="fast-settings" styles={theme.fastSettings.backgroundLayers} />
+          <BackgroundByLayers prefix="fast-settings" layers={themeLayers.fastSettings.bg} />
           <div className="fast-settings-title">
             <span>Settings</span>
             <Tooltip mouseLeaveDelay={0} arrow={false} title="App settings" placement="left">

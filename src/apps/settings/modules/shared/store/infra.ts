@@ -1,5 +1,5 @@
 import { UserSettings } from '../../../../../shared.interfaces';
-import { loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
+import { getBackgroundLayers, loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
@@ -71,7 +71,7 @@ export const SaveStore = async () => {
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
       themes: currentState.availableThemes,
-      theme: currentState.availableThemes.find((t) => t.info.filename === currentState.selectedTheme) || null,
+      bgLayers: getBackgroundLayers([currentState.selectedTheme].flat(), currentState.availableThemes),
       layouts: currentState.availableLayouts,
       placeholders: currentState.availablePlaceholders,
       env: await invoke('get_user_envs'),
