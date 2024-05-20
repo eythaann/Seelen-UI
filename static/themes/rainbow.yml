@@ -2,11 +2,10 @@ info:
   displayName: Rainbow
   author: eythaann
   description: COLORS EVERYWHERE!!!
-
+  tags: ['weg']
 layers:
   weg:
     bg: 2
-
 styles:
   weg: |
     @keyframes rainbow {

@@ -2,6 +2,7 @@ info:
   displayName: Bubbles
   author: eythaann
   description: Bubbles says pop.
+  tags: ['toolbar']
 styles:
   toolbar: |
     .ft-bar-bg-layer-1 {

@@ -5,7 +5,7 @@ import {
   SettingsOption,
   SettingsSubGroup,
 } from '../../../../components/SettingsBox';
-import { Button, Select, Switch, Tooltip } from 'antd';
+import { Button, Flex, Select, Switch, Tag, Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -15,6 +15,8 @@ import { useAppDispatch } from '../../../shared/utils/infra';
 
 import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
+
+import { TAGS_COLORS } from '../domain';
 
 import cs from './index.module.css';
 
@@ -67,14 +69,27 @@ export function General() {
                 }))}
                 onSelect={setSelectedThemeStr}
                 onClear={() => setSelectedThemeStr(null)}
+                placeholder="Select theme"
               />
             </SettingsOption>
           }
         >
           {selectedTheme && (
             <SettingsOption>
+              <Flex gap="2px 0" wrap="wrap">
+                <b style={{ marginRight: '4px' }}>Tags:</b>
+                {selectedTheme.info.tags.map((tag, idx) => (
+                  <Tag key={tag} color={TAGS_COLORS[idx % TAGS_COLORS.length]} bordered={false}>
+                    {tag}
+                  </Tag>
+                ))}
+              </Flex>
+            </SettingsOption>
+          )}
+          {selectedTheme && (
+            <SettingsOption>
               <b>Add to layers</b>
-              <Tooltip title={selectedThemeIsAdded ? 'Already added' : ''} >
+              <Tooltip title={selectedThemeIsAdded ? 'Already added' : ''}>
                 <Button
                   type="dashed"
                   disabled={selectedThemeIsAdded}

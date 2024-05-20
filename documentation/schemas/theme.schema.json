@@ -15,6 +15,18 @@
         "description": {
           "type": "string",
           "default": "Empty"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "weg",
+              "toolbar",
+              "window-manager"
+            ]
+          },
+          "default": []
         }
       },
       "additionalProperties": false,

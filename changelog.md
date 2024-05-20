@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - Modular Themes
+- Themes now allow tags to be categorized.
 - Allow add, organize, combine multiple themes as cascade layers.
 - Themes now allow folder structure to improve developers experience.
 
