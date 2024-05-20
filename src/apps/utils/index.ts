@@ -32,7 +32,7 @@ export function loadThemeCSS(config: UserSettings) {
     document.documentElement.style.setProperty('--config-accent-color', color);
   });
 
-  let selected = [config.jsonSettings.selectedTheme || ''].flat();
+  let selected = config.jsonSettings.selectedTheme;
   let themes = config.themes.filter((theme) => selected.includes(theme.info.filename));
 
   if (themes.length === 0) {
@@ -40,7 +40,13 @@ export function loadThemeCSS(config: UserSettings) {
     themes = defaultTheme ? [defaultTheme] : [];
   }
 
-  themes.forEach((theme, idx) => {
+  selected.forEach((themeStr, idx) => {
+    let theme = themes.find((theme) => theme.info.filename === themeStr);
+
+    if (!theme) {
+      return;
+    }
+
     for (const key of Object.keys(theme.styles)) {
       let element = document.getElementById(key);
 

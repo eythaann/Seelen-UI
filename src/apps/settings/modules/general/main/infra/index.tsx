@@ -1,6 +1,13 @@
-import { defaultTheme } from '../../../../../../shared.interfaces';
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
-import { Select, Switch } from 'antd';
+import { Icon } from '../../../../../utils/components/Icon';
+import { Theme } from '../../../../../utils/schemas/Theme';
+import {
+  SettingsGroup,
+  SettingsOption,
+  SettingsSubGroup,
+} from '../../../../components/SettingsBox';
+import { Button, Select, Switch, Tooltip } from 'antd';
+import { Reorder } from 'framer-motion';
+import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { startup } from '../../../shared/tauri/infra';
@@ -9,17 +16,16 @@ import { useAppDispatch } from '../../../shared/utils/infra';
 import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 
+import cs from './index.module.css';
+
 export function General() {
   const autostartStatus = useSelector(RootSelectors.autostart);
-  const selectedTheme = useSelector(RootSelectors.selectedTheme);
   const themes = useSelector(RootSelectors.availableThemes);
-  const usingTheme = themes.find((theme) => theme.info.filename === selectedTheme) || defaultTheme;
+  const usingThemes = useSelector(RootSelectors.selectedTheme);
+
+  const [selectedThemeStr, setSelectedThemeStr] = useState<string | null>(null);
 
   const dispatch = useAppDispatch();
-
-  const onSelectTheme = (theme: string) => {
-    dispatch(RootActions.setSelectedTheme(theme));
-  };
 
   const onAutoStart = async (value: boolean) => {
     if (value) {
@@ -30,6 +36,14 @@ export function General() {
     dispatch(RootActions.setAutostart(value));
   };
 
+  const selectedTheme = themes.find((theme) => theme.info.filename === selectedThemeStr);
+  const selectedThemeIsAdded = !!selectedThemeStr && usingThemes.includes(selectedThemeStr);
+
+  const themesById = themes.reduce((acc, theme) => {
+    acc[theme.info.filename] = theme;
+    return acc;
+  }, {} as Record<string, Theme>);
+
   return (
     <>
       <SettingsGroup>
@@ -39,25 +53,93 @@ export function General() {
         </SettingsOption>
       </SettingsGroup>
       <SettingsGroup>
-        <SettingsOption>
-          <div>
-            <b>Theme: </b>
-          </div>
-          <Select
-            style={{ width: '200px' }}
-            value={selectedTheme}
-            options={themes.map((theme) => ({
-              label: theme.info.displayName,
-              value: theme.info.filename,
-            }))}
-            onSelect={onSelectTheme}
-          />
-        </SettingsOption>
+        <SettingsSubGroup
+          label={
+            <SettingsOption>
+              <b>Theme info: </b>
+              <Select
+                style={{ width: '200px' }}
+                value={selectedThemeStr}
+                allowClear
+                options={themes.map((theme) => ({
+                  label: theme.info.displayName,
+                  value: theme.info.filename,
+                }))}
+                onSelect={setSelectedThemeStr}
+                onClear={() => setSelectedThemeStr(null)}
+              />
+            </SettingsOption>
+          }
+        >
+          {selectedTheme && (
+            <SettingsOption>
+              <b>Add to layers</b>
+              <Tooltip title={selectedThemeIsAdded ? 'Already added' : ''} >
+                <Button
+                  type="dashed"
+                  disabled={selectedThemeIsAdded}
+                  style={{ width: '50px' }}
+                  onClick={() => {
+                    if (selectedThemeStr) {
+                      dispatch(RootActions.setSelectedTheme([...usingThemes, selectedThemeStr]));
+                    }
+                  }}
+                >
+                  <b>+</b>
+                </Button>
+              </Tooltip>
+            </SettingsOption>
+          )}
+          {selectedTheme && (
+            <SettingsOption>
+              <p>
+                <b>Author: </b>
+                {selectedTheme.info.author}
+              </p>
+            </SettingsOption>
+          )}
+          {selectedTheme && (
+            <SettingsOption>
+              <p>
+                <b>Description: </b>
+                {selectedTheme.info.description}
+              </p>
+            </SettingsOption>
+          )}
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <b>Themes enabled:</b>
         <div>
-          <p>
-            <b>Author: </b>{usingTheme?.info.author}
-          </p>
-          <p><b>Description: </b>{usingTheme?.info.description}</p>
+          <Reorder.Group
+            onReorder={(values) => dispatch(RootActions.setSelectedTheme(values))}
+            values={usingThemes}
+            axis="y"
+            className={cs.resourceList}
+          >
+            {usingThemes.map((themeStr) => {
+              const theme = themesById[themeStr];
+
+              if (!theme) {
+                return null;
+              }
+
+              return (
+                <Reorder.Item key={theme.info.filename} value={themeStr} className={cs.resource}>
+                  {theme.info.displayName}
+                  <Button
+                    type="text"
+                    danger
+                    onClick={() => dispatch(RootActions.removeTheme(themeStr))}
+                    disabled={theme.info.filename === 'default'}
+                  >
+                    <Icon iconName="IoTrash" />
+                  </Button>
+                </Reorder.Item>
+              );
+            })}
+          </Reorder.Group>
         </div>
       </SettingsGroup>
     </>

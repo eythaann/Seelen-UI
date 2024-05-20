@@ -72,10 +72,22 @@ export const SettingsSchema = z.object({
   fancy_toolbar: FancyToolbarSchema.default({}),
   seelenweg: SeelenWegSchema.default({}),
   window_manager: WindowManagerSchema.default({}),
-  monitors: z.array(MonitorSchema).min(1).default([MonitorSchema.parse({})]),
+  monitors: z
+    .array(MonitorSchema)
+    .min(1)
+    .default([MonitorSchema.parse({})]),
   ahk_enabled: z.boolean().default(true),
   ahk_variables: AhkVariablesSchema.default({}),
-  selected_theme: z.union([z.string(), z.array(z.string())]).default(['default']),
+  selected_theme: z
+    .union([z.string(), z.array(z.string())])
+    .transform((arg) => {
+      // backward compatibility with versions before 1.4.0
+      if (arg === 'default.json') {
+        return ['default'];
+      }
+      return Array.isArray(arg) ? arg : [arg];
+    })
+    .default(['default']),
 });
 
 type inner = z.infer<typeof SettingsSchema> & {};
@@ -86,5 +98,5 @@ export interface ISettings {
   monitors: Monitor[];
   ahkEnabled: inner['ahk_enabled'];
   ahkVariables: AhkVariables;
-  selectedTheme: inner['selected_theme'];
+  selectedTheme: string[];
 }

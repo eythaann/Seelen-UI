@@ -9,6 +9,12 @@ layers:
 
 styles:
   weg: |
+    @keyframes rainbow {
+      to {
+        background-position: 0 -200%;
+      }
+    }
+
     .taskbar-bg-layer-2 {
       opacity: 0.8;
       background: linear-gradient(

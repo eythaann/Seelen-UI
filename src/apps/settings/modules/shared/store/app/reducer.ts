@@ -27,7 +27,7 @@ const initialState: RootState = {
   availableThemes: [],
   availableLayouts: [],
   availablePlaceholders: [],
-  selectedTheme: null,
+  selectedTheme: [],
 };
 
 export const RootSlice = createSlice({
@@ -39,9 +39,13 @@ export const RootSlice = createSlice({
       state.toBeSaved = false;
     },
     setState: (_state, action: PayloadAction<RootState>) => action.payload,
-    setSelectedTheme: (state, action: PayloadAction<string>) => {
+    setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
       state.toBeSaved = true;
-      state.selectedTheme = action.payload;
+      state.selectedTheme = Array.from(new Set(action.payload));
+    },
+    removeTheme: (state, action: PayloadAction<string>) => {
+      state.toBeSaved = true;
+      state.selectedTheme = state.selectedTheme.filter((x) => x !== action.payload);
     },
   },
   selectors: selectorsFor(initialState),

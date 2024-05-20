@@ -45,10 +45,9 @@ body {
       z-index: 2;
       position: absolute;
       padding: 0 5%;
-      height: 100%;
       left: 50%;
-      top: 0;
-      translate: -50% 0;
+      top: 50%;
+      translate: -50% -50%;
       overflow: hidden;
       justify-content: center;
     }

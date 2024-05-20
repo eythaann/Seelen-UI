@@ -54,11 +54,20 @@ async function loadUserThemes(ref: UserSettings) {
 
     theme.info.filename = dirname;
 
-    theme.styles = {
-      weg: await fs.readTextFile(await path.join(themePath, 'theme.weg.css')),
-      toolbar: await fs.readTextFile(await path.join(themePath, 'theme.toolbar.css')),
-      wm: await fs.readTextFile(await path.join(themePath, 'theme.wm.css')),
-    };
+    let wegPath = await path.join(themePath, 'theme.weg.css');
+    if (await fs.exists(wegPath)) {
+      theme.styles.weg = await fs.readTextFile(wegPath);
+    }
+
+    let toolbarPath = await path.join(themePath, 'theme.toolbar.css');
+    if (await fs.exists(toolbarPath)) {
+      theme.styles.toolbar = await fs.readTextFile(toolbarPath);
+    }
+
+    let wmPath = await path.join(themePath, 'theme.wm.css');
+    if (await fs.exists(wmPath)) {
+      theme.styles.wm = await fs.readTextFile(wmPath);
+    }
 
     return theme;
   }
