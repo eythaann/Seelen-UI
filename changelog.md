@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.4.0]
 ### features
 - Modular Themes
 - Themes now allow tags to be categorized.
