@@ -30,39 +30,66 @@
       },
       "default": {}
     },
-    "seelenweg": {
+    "layers": {
       "type": "object",
       "properties": {
-        "backgroundLayers": {
-          "type": "number",
-          "minimum": 0,
-          "default": 1
-        },
-        "items": {
+        "weg": {
           "type": "object",
           "properties": {
-            "backgroundLayers": {
-              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+            "bg": {
+              "type": "number",
+              "minimum": 1,
+              "default": 1
+            },
+            "items": {
+              "type": "object",
+              "properties": {
+                "bg": {
+                  "$ref": "#/properties/layers/properties/weg/properties/bg"
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "contextMenu": {
+              "type": "object",
+              "properties": {
+                "bg": {
+                  "$ref": "#/properties/layers/properties/weg/properties/bg"
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
+            },
+            "preview": {
+              "type": "object",
+              "properties": {
+                "bg": {
+                  "$ref": "#/properties/layers/properties/weg/properties/bg"
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
             }
           },
           "additionalProperties": false,
           "default": {}
         },
-        "contextMenu": {
+        "toolbar": {
           "type": "object",
           "properties": {
-            "backgroundLayers": {
-              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
-            }
-          },
-          "additionalProperties": false,
-          "default": {}
-        },
-        "preview": {
-          "type": "object",
-          "properties": {
-            "backgroundLayers": {
-              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+            "bg": {
+              "$ref": "#/properties/layers/properties/weg/properties/bg"
+            },
+            "fastSettings": {
+              "type": "object",
+              "properties": {
+                "bg": {
+                  "$ref": "#/properties/layers/properties/weg/properties/bg"
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
             }
           },
           "additionalProperties": false,
@@ -72,21 +99,20 @@
       "additionalProperties": false,
       "default": {}
     },
-    "toolbar": {
+    "styles": {
       "type": "object",
       "properties": {
-        "backgroundLayers": {
-          "$ref": "#/properties/seelenweg/properties/backgroundLayers"
+        "weg": {
+          "type": "string",
+          "default": ""
         },
-        "fastSettings": {
-          "type": "object",
-          "properties": {
-            "backgroundLayers": {
-              "$ref": "#/properties/seelenweg/properties/backgroundLayers"
-            }
-          },
-          "additionalProperties": false,
-          "default": {}
+        "toolbar": {
+          "type": "string",
+          "default": ""
+        },
+        "wm": {
+          "type": "string",
+          "default": ""
         }
       },
       "additionalProperties": false,

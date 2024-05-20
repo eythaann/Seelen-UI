@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- Modular Themes
+- Allow add, organize, combine multiple themes as cascade layers.
+- Themes now allow folder structure to improve developers experience.
+
+### refactor
+- Now themes will use .yml files instead json to improve developers experience.
+- Themes schema updated, no backwards compatibility with json themes. (.json in themes folder will be ignored)
+
 ### fix
 - No hiding the taskbar correctly.
 
