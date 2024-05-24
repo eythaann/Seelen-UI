@@ -2,18 +2,12 @@ import { CreatorInfoSchema } from '.';
 import { modify } from 'readable-types/dist';
 import { z } from 'zod';
 
-export enum ThemeTag {
-  weg = 'weg',
-  toolbar = 'toolbar',
-  wm = 'window-manager',
-}
-
 const backgroundLayersSchema = z.number().min(1).default(1);
 
 type inner = z.infer<typeof ThemeSchema>;
 export const ThemeSchema = z.object({
   info: CreatorInfoSchema.extend({
-    tags: z.array(z.nativeEnum(ThemeTag)).default([]),
+    tags: z.array(z.string()).default([]),
   }).default({}),
   variables: z.record(z.string().startsWith('--'), z.string()).default({}),
   layers: z

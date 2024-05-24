@@ -19,12 +19,7 @@
         "tags": {
           "type": "array",
           "items": {
-            "type": "string",
-            "enum": [
-              "weg",
-              "toolbar",
-              "window-manager"
-            ]
+            "type": "string"
           },
           "default": []
         }
