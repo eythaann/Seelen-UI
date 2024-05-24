@@ -49,21 +49,25 @@ export function ElementsFromEvaluated(content: any) {
     content = JSON.stringify(content);
   }
 
-  const parts = content.split(exposedIconsRegex);
-  return parts.map((part: string, index: number) => {
+  const parts: string[] = content.split(exposedIconsRegex);
+  const result: React.ReactNode[] = [];
+
+  parts.forEach((part: string, index: number) => {
     if (isValidIconName(part)) {
       const [iconName, size] = part.split(':') as [Icon, string?];
-      return (
+      result.push(
         <Icon
           key={index}
           iconName={iconName}
           propsIcon={{ size: size ? size + 'px' : undefined }}
-        />
+        />,
       );
-    } else {
-      return <React.Fragment key={index}>{part}</React.Fragment>;
+    } else if (part) {
+      result.push(<React.Fragment key={index}>{part}</React.Fragment>);
     }
   });
+
+  return result;
 }
 
 export function Item({ extraVars, module }: Props) {
@@ -95,6 +99,11 @@ export function Item({ extraVars, module }: Props) {
     return null;
   }
 
+  const elements = ElementsFromEvaluated(evaluate(template, scope.current));
+  if (!elements.length) {
+    return null;
+  }
+
   return (
     <Tooltip
       arrow={false}
@@ -108,7 +117,7 @@ export function Item({ extraVars, module }: Props) {
           'ft-bar-item-clickable': !!onClick,
         })}
       >
-        {ElementsFromEvaluated(evaluate(template, scope.current))}
+        <span>{elements}</span>
       </div>
     </Tooltip>
   );

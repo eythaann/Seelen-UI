@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no truncating text on toolbar items overflow.
+- rendering empty items on toolbar when empty placeholder is declared.
+
 ## [1.4.0]
 ### features
 - Modular Themes

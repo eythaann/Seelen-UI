@@ -18,8 +18,6 @@ body {
     position: relative;
     width: 100%;
     height: var(--config-height);
-    overflow: hidden;
-    text-wrap: nowrap;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,6 +67,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
 
   &.ft-bar-item-clickable {
     padding: 4px;
@@ -77,6 +76,12 @@ body {
     &:hover {
       backdrop-filter: brightness(3);
     }
+  }
+
+  > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-wrap: nowrap;
   }
 }
 
@@ -103,7 +108,7 @@ body {
       border-radius: 6px;
 
       &:hover {
-        backdrop-filter: brightness(0.8); 
+        backdrop-filter: brightness(0.8);
       }
     }
   }
