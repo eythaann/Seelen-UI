@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.4.1]
 ### fix
 - no truncating text on toolbar items overflow.
 - rendering empty items on toolbar when empty placeholder is declared.
