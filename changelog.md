@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- support fullscreen apps (will hide the toolbar and the weg on fullscreen an app).
+
+### refactor
+- refactor on window event manager to allow synthetic events.
+
 ## [1.4.1]
 ### fix
 - no truncating text on toolbar items overflow.

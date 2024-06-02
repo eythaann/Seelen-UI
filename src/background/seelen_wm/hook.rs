@@ -1,12 +1,4 @@
-use windows::Win32::{
-    Foundation::HWND,
-    UI::WindowsAndMessaging::{
-        EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS, EVENT_OBJECT_HIDE,
-        EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW,
-        EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_MINIMIZEEND, EVENT_SYSTEM_MINIMIZESTART,
-        EVENT_SYSTEM_MOVESIZEEND, EVENT_SYSTEM_MOVESIZESTART,
-    },
-};
+use windows::Win32::Foundation::HWND;
 use winvd::DesktopEvent;
 
 use crate::{
@@ -14,6 +6,7 @@ use crate::{
     seelen::SEELEN,
     utils::{constants::FORCE_RETILING_AFTER_ADD, sleep_millis},
     windows_api::WindowsApi,
+    winevent::WinEvent,
 };
 
 use super::WindowManager;
@@ -30,53 +23,53 @@ impl WindowManager {
         Ok(())
     }
 
-    pub fn process_win_event(&mut self, event: u32, hwnd: HWND) -> Result<()> {
+    pub fn process_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
         match event {
-            EVENT_SYSTEM_MOVESIZESTART => {
-                if self.is_managed(hwnd) {
+            WinEvent::SystemMoveSizeStart => {
+                if self.is_managed(origin) {
                     self.pseudo_pause()?;
                 }
             }
-            EVENT_SYSTEM_MOVESIZEEND => {
-                if self.is_managed(hwnd) {
+            WinEvent::SystemMoveSizeEnd => {
+                if self.is_managed(origin) {
                     self.force_retiling()?;
                     sleep_millis(35);
                     self.pseudo_resume()?;
                 }
             }
-            EVENT_SYSTEM_MINIMIZEEND => {
-                if !self.is_managed(hwnd) && Self::should_manage(hwnd) {
-                    self.add_hwnd(hwnd)?;
+            WinEvent::SystemMinimizeEnd => {
+                if !self.is_managed(origin) && Self::should_manage(origin) {
+                    self.add_hwnd(origin)?;
                 }
             }
-            EVENT_SYSTEM_MINIMIZESTART => {
-                if self.is_managed(hwnd) {
-                    self.remove_hwnd(hwnd)?;
+            WinEvent::SystemMinimizeStart => {
+                if self.is_managed(origin) {
+                    self.remove_hwnd(origin)?;
                 }
             }
-            EVENT_OBJECT_HIDE => {
-                if self.is_managed(hwnd) {
-                    self.remove_hwnd(hwnd)?;
+            WinEvent::ObjectHide => {
+                if self.is_managed(origin) {
+                    self.remove_hwnd(origin)?;
                 }
             }
-            EVENT_OBJECT_DESTROY => {
-                let title = WindowsApi::get_window_text(hwnd);
+            WinEvent::ObjectDestroy => {
+                let title = WindowsApi::get_window_text(origin);
                 if Self::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
                     self.pseudo_resume()?;
                 }
-                if self.is_managed(hwnd) {
-                    self.remove_hwnd(hwnd)?;
+                if self.is_managed(origin) {
+                    self.remove_hwnd(origin)?;
                 }
             }
-            EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
-                let title = WindowsApi::get_window_text(hwnd);
+            WinEvent::ObjectShow | WinEvent::ObjectCreate => {
+                let title = WindowsApi::get_window_text(origin);
                 if WindowManager::VIRTUAL_PREVIEWS.contains(&title.as_str()) {
                     self.pseudo_pause()?;
                 }
 
-                if !self.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
-                    self.set_active_window(hwnd)?;
-                    if self.add_hwnd(hwnd)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
+                if !self.is_managed(origin) && WindowManager::should_manage(origin) {
+                    self.set_active_window(origin)?;
+                    if self.add_hwnd(origin)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
                         // Todo search a better way to do this
                         std::thread::spawn(|| -> Result<()> {
                             sleep_millis(250);
@@ -88,11 +81,11 @@ impl WindowManager {
                     };
                 }
             }
-            EVENT_OBJECT_NAMECHANGE => {
-                if !self.is_managed(hwnd) && WindowManager::should_manage(hwnd) {
-                    self.set_active_window(hwnd)?;
-                    let title = WindowsApi::get_window_text(hwnd);
-                    if self.add_hwnd(hwnd)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
+            WinEvent::ObjectNameChange => {
+                if !self.is_managed(origin) && WindowManager::should_manage(origin) {
+                    self.set_active_window(origin)?;
+                    let title = WindowsApi::get_window_text(origin);
+                    if self.add_hwnd(origin)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
                         // Todo search a better way to do this
                         std::thread::spawn(|| -> Result<()> {
                             sleep_millis(250);
@@ -104,14 +97,16 @@ impl WindowManager {
                     };
                 }
             }
-            EVENT_OBJECT_FOCUS | EVENT_SYSTEM_FOREGROUND => {
-                self.set_active_window(hwnd)?;
+            WinEvent::ObjectFocus | WinEvent::SystemForeground => {
+                self.set_active_window(origin)?;
             }
-            EVENT_OBJECT_LOCATIONCHANGE => {
-                if WindowsApi::is_maximized(hwnd) {
+            WinEvent::ObjectLocationChange => {
+                if WindowsApi::is_maximized(origin) {
                     self.pseudo_pause()?;
                 }
             }
+            WinEvent::SyntheticFullscreenStart => self.pseudo_pause()?,
+            WinEvent::SyntheticFullscreenEnd => self.pseudo_resume()?,
             _ => {}
         };
         Ok(())

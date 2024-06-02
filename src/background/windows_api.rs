@@ -49,12 +49,11 @@ use windows::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
                 GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
                 IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
-                EVENT_SYSTEM_MINIMIZEEND, GWL_EXSTYLE, GWL_STYLE, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SPIF_SENDCHANGE, SPI_GETANIMATION, SPI_SETANIMATION,
-                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
+                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND, GWL_EXSTYLE,
+                GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
+                SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE,
+                SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
             },
         },
     },
@@ -63,6 +62,7 @@ use windows::{
 use crate::{
     error_handler::{log_if_error, Result},
     hook::HOOK_MANAGER,
+    winevent::WinEvent,
 };
 
 pub struct WindowsApi {}
@@ -140,6 +140,12 @@ impl WindowsApi {
 
     pub fn is_maximized(hwnd: HWND) -> bool {
         unsafe { IsZoomed(hwnd) }.into()
+    }
+
+    pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
+        let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
+        let window_rect = WindowsApi::get_window_rect(hwnd);
+        Ok(rc_monitor == window_rect)
     }
 
     pub fn is_cloaked(hwnd: HWND) -> Result<bool> {
@@ -236,7 +242,7 @@ impl WindowsApi {
         Self::set_minimize_animation(false)?;
 
         let mut hook_manager = HOOK_MANAGER.lock();
-        hook_manager.pause_and_resume_after(EVENT_SYSTEM_MINIMIZEEND, hwnd.clone());
+        hook_manager.pause_and_resume_after(WinEvent::SystemMinimizeEnd, hwnd.clone());
         hook_manager.set_resume_callback(move |hook_manager| {
             log_if_error(Self::set_minimize_animation(true));
             hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
@@ -402,6 +408,10 @@ impl WindowsApi {
         ex_info.monitorInfo.cbSize = u32::try_from(std::mem::size_of::<MONITORINFOEXW>())?;
         unsafe { GetMonitorInfoW(hmonitor, &mut ex_info.monitorInfo) };
         Ok(ex_info)
+    }
+
+    pub fn monitor_rect(hmonitor: HMONITOR) -> Result<RECT> {
+        Ok(Self::monitor_info(hmonitor)?.monitorInfo.rcMonitor)
     }
 
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {

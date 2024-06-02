@@ -1,28 +1,23 @@
-use windows::Win32::{
-    Foundation::HWND,
-    UI::WindowsAndMessaging::{
-        EVENT_OBJECT_CREATE, EVENT_OBJECT_DESTROY, EVENT_OBJECT_FOCUS, EVENT_OBJECT_HIDE, EVENT_OBJECT_LOCATIONCHANGE, EVENT_OBJECT_NAMECHANGE, EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND
-    },
-};
+use windows::Win32::Foundation::HWND;
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error_handler::Result, windows_api::WindowsApi, winevent::WinEvent};
 
 use super::SeelenWeg;
 
 impl SeelenWeg {
-    pub fn process_win_event(&mut self, event: u32, hwnd: HWND) -> Result<()> {
+    pub fn process_win_event(&mut self, event: WinEvent, hwnd: HWND) -> Result<()> {
         match event {
-            EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
+            WinEvent::ObjectShow | WinEvent::ObjectCreate => {
                 if SeelenWeg::is_real_window(hwnd, false) {
                     self.add_hwnd(hwnd);
                 }
             }
-            EVENT_OBJECT_DESTROY => {
+            WinEvent::ObjectDestroy => {
                 if self.contains_app(hwnd) {
                     self.remove_hwnd(hwnd);
                 }
             }
-            EVENT_OBJECT_HIDE => {
+            WinEvent::ObjectHide => {
                 if self.contains_app(hwnd) {
                     // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
                     // parent so we can't filter it on open event but these are immediately hidden when the ApplicationFrameHost.exe parent
@@ -35,21 +30,21 @@ impl SeelenWeg {
                     }
                 }
             }
-            EVENT_OBJECT_NAMECHANGE => {
+            WinEvent::ObjectNameChange => {
                 if self.contains_app(hwnd) {
                     self.update_app(hwnd);
                 } else if SeelenWeg::is_real_window(hwnd, false) {
                     self.add_hwnd(hwnd);
                 }
             }
-            EVENT_SYSTEM_FOREGROUND | EVENT_OBJECT_FOCUS => {
+            WinEvent::SystemForeground | WinEvent::ObjectFocus => {
                 match self.contains_app(hwnd) {
                     true => self.set_active_window(hwnd)?,
                     false => self.set_active_window(HWND(0))?, // avoid rerenders on multiple unmanaged focus
                 }
                 self.update_status_if_needed(hwnd)?;
             }
-            EVENT_OBJECT_LOCATIONCHANGE => {
+            WinEvent::ObjectLocationChange => {
                 self.update_status_if_needed(hwnd)?;
             }
             _ => {}

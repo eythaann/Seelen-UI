@@ -30,3 +30,13 @@ impl Into<RECT> for Rect {
         }
     }
 }
+
+impl Eq for Rect {}
+impl PartialEq for Rect {
+    fn eq(&self, other: &Self) -> bool {
+        self.left == other.left
+            && self.top == other.top
+            && self.right == other.right
+            && self.bottom == other.bottom
+    }
+}

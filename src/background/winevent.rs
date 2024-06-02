@@ -1,7 +1,11 @@
 #![allow(clippy::use_self)]
 
+use lazy_static::lazy_static;
+use parking_lot::Mutex;
 use serde::Deserialize;
 use serde::Serialize;
+
+use windows::Win32::Foundation::HWND;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_AIA_END;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_AIA_START;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_CARET;
@@ -76,8 +80,6 @@ use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_MOVESIZESTART;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SCROLLINGEND;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SCROLLINGSTART;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SOUND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHEND;
-use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHER_APPDROPPED;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHER_APPGRABBED;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHER_APPOVERTARGET;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_SYSTEM_SWITCHER_CANCELLED;
@@ -86,6 +88,15 @@ use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_EVENTID_END;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_EVENTID_START;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_PROPID_END;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_UIA_PROPID_START;
+use windows::Win32::UI::WindowsAndMessaging::{
+    EVENT_SYSTEM_SWITCHEND, EVENT_SYSTEM_SWITCHER_APPDROPPED,
+};
+
+use crate::windows_api::WindowsApi;
+
+lazy_static! {
+    pub static ref FULLSCREENED: Mutex<Vec<HWND>> = Mutex::new(Vec::new());
+}
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug, Serialize, Deserialize)]
 #[repr(u32)]
@@ -175,6 +186,9 @@ pub enum WinEvent {
     UiaEventIdStart = EVENT_UIA_EVENTID_START,
     UiaPropIdSEnd = EVENT_UIA_PROPID_END,
     UiaPropIdStart = EVENT_UIA_PROPID_START,
+    // ================== Synthetic events ==================
+    SyntheticFullscreenStart,
+    SyntheticFullscreenEnd,
 }
 
 impl TryFrom<u32> for WinEvent {
@@ -270,6 +284,28 @@ impl TryFrom<u32> for WinEvent {
             EVENT_UIA_PROPID_START => Ok(Self::UiaPropIdStart),
 
             _ => Err(()),
+        }
+    }
+}
+
+impl WinEvent {
+    pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {
+        match self {
+            Self::ObjectLocationChange => {
+                let mut fullscreened = FULLSCREENED.lock();
+                match WindowsApi::is_fullscreen(origin) {
+                    Ok(true) if !fullscreened.contains(&origin) => {
+                        fullscreened.push(origin);
+                        Some(Self::SyntheticFullscreenStart)
+                    }
+                    Ok(false) if fullscreened.contains(&origin) => {
+                        fullscreened.retain(|&x| x != origin);
+                        Some(Self::SyntheticFullscreenEnd)
+                    }
+                    _ => None,
+                }
+            }
+            _ => None,
         }
     }
 }

@@ -1,5 +1,6 @@
 use std::{sync::Arc, time::Duration};
 
+use color_eyre::owo_colors::OwoColorize;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::Win32::{
@@ -7,9 +8,7 @@ use windows::Win32::{
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN,
-            EVENT_OBJECT_CREATE, EVENT_OBJECT_FOCUS, EVENT_OBJECT_LOCATIONCHANGE,
-            EVENT_OBJECT_SHOW, EVENT_SYSTEM_FOREGROUND, MSG,
+            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
         },
     },
 };
@@ -22,6 +21,7 @@ use crate::{
     seelen_weg::{SeelenWeg, TASKBAR_CLASS},
     utils::constants::IGNORE_FOCUS,
     windows_api::WindowsApi,
+    winevent::WinEvent,
 };
 
 lazy_static! {
@@ -30,7 +30,7 @@ lazy_static! {
 
 pub struct HookManager {
     paused: bool,
-    waiting_event: Option<u32>,
+    waiting_event: Option<WinEvent>,
     waiting_hwnd: Option<HWND>,
     resume_cb: Option<Box<dyn Fn(&mut HookManager) + Send>>,
 }
@@ -60,7 +60,7 @@ impl HookManager {
         self.paused
     }
 
-    pub fn pause_and_resume_after(&mut self, event: u32, hwnd: HWND) {
+    pub fn pause_and_resume_after(&mut self, event: WinEvent, hwnd: HWND) {
         self.pause();
         self.waiting_event = Some(event);
         self.waiting_hwnd = Some(hwnd);
@@ -73,7 +73,7 @@ impl HookManager {
         self.resume_cb = Some(Box::new(cb));
     }
 
-    pub fn is_waiting_for(&self, event: u32, hwnd: HWND) -> bool {
+    pub fn is_waiting_for(&self, event: WinEvent, hwnd: HWND) -> bool {
         self.waiting_event == Some(event) && self.waiting_hwnd == Some(hwnd)
     }
 
@@ -81,6 +81,56 @@ impl HookManager {
         std::thread::spawn(move || {
             win_event_hook(HWINEVENTHOOK::default(), event, hwnd, 0, 0, 0, 0);
         });
+    }
+
+    pub fn _log_event(event: WinEvent, origin: HWND) {
+        if event == WinEvent::ObjectLocationChange {
+            return;
+        }
+
+        println!(
+            "{:?} || {} || {} || {}",
+            event.green(),
+            WindowsApi::exe(origin).unwrap_or_default(),
+            WindowsApi::get_class(origin).unwrap_or_default(),
+            WindowsApi::get_window_text(origin)
+        );
+    }
+
+    pub fn event(&mut self, event: WinEvent, origin: HWND) {
+        // uncomment for debug
+        // Self::_log_event(event, origin);
+
+        if self.is_paused() {
+            if self.is_waiting_for(event, origin) {
+                self.resume();
+            }
+            return;
+        }
+
+        let title = WindowsApi::get_window_text(origin);
+        if (event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground)
+            && IGNORE_FOCUS.contains(&title)
+        {
+            return;
+        }
+
+        let mut seelen = SEELEN.lock();
+        log_if_error(seelen.process_win_event(event, origin));
+
+        for monitor in seelen.monitors_mut() {
+            if let Some(toolbar) = monitor.toolbar_mut() {
+                log_if_error(toolbar.process_win_event(event, origin));
+            }
+
+            if let Some(weg) = monitor.weg_mut() {
+                log_if_error(weg.process_win_event(event, origin));
+            }
+
+            if let Some(wm) = monitor.wm_mut() {
+                log_if_error(wm.process_win_event(event, origin));
+            }
+        }
     }
 }
 
@@ -111,13 +161,14 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
 }
 
 impl Seelen {
-    pub fn process_win_event(&mut self, event: u32, hwnd: HWND) -> Result<()> {
+    pub fn process_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
         match event {
-            EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
+            WinEvent::ObjectShow | WinEvent::ObjectCreate => {
                 // ensure that the taskbar is always hidden
                 if self.state().is_weg_enabled() {
-                    let class = WindowsApi::get_class(hwnd)?;
-                    let parent_class = WindowsApi::get_class(WindowsApi::get_parent(hwnd)).unwrap_or_default();
+                    let class = WindowsApi::get_class(origin)?;
+                    let parent_class =
+                        WindowsApi::get_class(WindowsApi::get_parent(origin)).unwrap_or_default();
                     if TASKBAR_CLASS.contains(&class.as_str())
                         || TASKBAR_CLASS.contains(&parent_class.as_str())
                     {
@@ -129,25 +180,6 @@ impl Seelen {
         }
         Ok(())
     }
-}
-
-pub fn _log_event(hwnd: HWND, event: u32) {
-    if event == EVENT_OBJECT_LOCATIONCHANGE {
-        return;
-    }
-
-    let winevent = match crate::winevent::WinEvent::try_from(event) {
-        Ok(event) => event,
-        Err(_) => return,
-    };
-
-    println!(
-        "{:?} || {} || {} || {}",
-        winevent,
-        WindowsApi::exe(hwnd).unwrap_or_default(),
-        WindowsApi::get_class(hwnd).unwrap_or_default(),
-        WindowsApi::get_window_text(hwnd)
-    );
 }
 
 pub extern "system" fn win_event_hook(
@@ -163,39 +195,18 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
+    let event = match WinEvent::try_from(event) {
+        Ok(event) => event,
+        Err(_) => return,
+    };
+
     let mut hook_manager = HOOK_MANAGER.lock();
-    if hook_manager.is_paused() {
-        if hook_manager.is_waiting_for(event, hwnd) {
-            hook_manager.resume();
-        }
-        return;
+    hook_manager.event(event, hwnd);
+
+    if let Some(synthetic_event) = event.get_synthetic(hwnd) {
+        hook_manager.event(synthetic_event, hwnd);
     }
 
-    //_log_event(hwnd, event);
-
-    let title = WindowsApi::get_window_text(hwnd);
-    if (event == EVENT_OBJECT_FOCUS || event == EVENT_SYSTEM_FOREGROUND)
-        && IGNORE_FOCUS.contains(&title)
-    {
-        return;
-    }
-
-    let mut seelen = SEELEN.lock();
-    log_if_error(seelen.process_win_event(event, hwnd));
-
-    for monitor in seelen.monitors_mut() {
-        if let Some(toolbar) = monitor.toolbar_mut() {
-            log_if_error(toolbar.process_win_event(event, hwnd));
-        }
-
-        if let Some(weg) = monitor.weg_mut() {
-            log_if_error(weg.process_win_event(event, hwnd));
-        }
-
-        if let Some(wm) = monitor.wm_mut() {
-            log_if_error(wm.process_win_event(event, hwnd));
-        }
-    }
 }
 
 pub fn register_win_hook() -> Result<()> {

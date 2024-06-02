@@ -23,6 +23,7 @@ pub struct FancyToolbar {
     hitbox_window: WebviewWindow,
     // -- -- -- --
     last_focus: Option<isize>,
+    hidden: bool,
 }
 
 #[derive(Serialize, Clone)]
@@ -40,6 +41,7 @@ impl FancyToolbar {
             window,
             hitbox_window,
             last_focus: None,
+            hidden: false,
         })
     }
 
@@ -48,9 +50,22 @@ impl FancyToolbar {
         Ok(())
     }
 
+    pub fn hide(&mut self) -> Result<()> {
+        self.hidden = true;
+        self.window.hide()?;
+        self.hitbox_window.hide()?;
+        Ok(())
+    }
+
+    pub fn show(&mut self) -> Result<()> {
+        self.hidden = false;
+        self.window.show()?;
+        self.hitbox_window.show()?;
+        Ok(())
+    }
+
     pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
         let title = WindowsApi::get_window_text(hwnd);
-
         self.last_focus = Some(hwnd.0);
         self.emit(
             "focus-changed",
