@@ -21,4 +21,6 @@ export interface RootState extends IRootState<FancyToolbar> {
   placeholder: Placeholder | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
+  workspaces: string[];
+  activeWorkspace: number;
 }

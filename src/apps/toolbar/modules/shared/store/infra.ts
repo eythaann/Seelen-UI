@@ -15,9 +15,9 @@ export const store = configureStore({
 });
 
 export async function registerStoreEvents() {
-  const webview = getCurrent();
+  const view = getCurrent();
 
-  await webview.listen<ActiveApp | null>('focus-changed', (e) => {
+  await view.listen<ActiveApp | null>('focus-changed', (e) => {
     store.dispatch(RootActions.setFocused(e.payload));
   });
 
@@ -28,6 +28,16 @@ export async function registerStoreEvents() {
   await listenGlobal<PowerStatus>('power-status', (event) => {
     store.dispatch(RootActions.setPowerStatus(event.payload));
   });
+
+  await listenGlobal<string[]>('workspaces-changed', (event) => {
+    store.dispatch(RootActions.setWorkspaces(event.payload));
+  });
+
+  await listenGlobal<number>('active-workspace-changed', (event) => {
+    store.dispatch(RootActions.setActiveWorkspace(event.payload));
+  });
+
+  await view.emitTo(view.label, 'store-events-ready');
 }
 
 export async function loadStore(_userSettings?: UserSettings) {
@@ -46,6 +56,7 @@ export async function loadStore(_userSettings?: UserSettings) {
     userSettings.placeholders.find(
       (placeholder) => placeholder.info.filename === settings.placeholder,
     ) || null;
+
   store.dispatch(RootActions.setPlaceholder(placeholder));
   store.dispatch(RootActions.setEnv(userSettings.env));
 }

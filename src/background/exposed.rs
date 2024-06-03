@@ -171,6 +171,13 @@ fn get_auto_start_status() -> Result<bool, String> {
     Ok(Seelen::is_auto_start_enabled()?)
 }
 
+#[command]
+fn switch_workspace(idx: u32) {
+    std::thread::spawn(move || {
+        winvd::switch_desktop(idx)
+    });
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
@@ -183,6 +190,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         show_app_settings,
         reload_apps_configurations,
         ensure_hitboxes_zorder,
+        switch_workspace,
         // Auto Start
         set_auto_start,
         get_auto_start_status,

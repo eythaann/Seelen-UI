@@ -4,6 +4,7 @@ import { evaluate } from 'mathjs';
 export enum Actions {
   Open = 'open',
   CopyToClipboard = 'copy-to-clipboard',
+  SwitchWorkspace = 'switch-workspace',
 }
 
 export function performClick(onClick: string | null, scope: any) {
@@ -28,6 +29,10 @@ export function performClick(onClick: string | null, scope: any) {
     case Actions.CopyToClipboard:
       if (argument) {
         navigator.clipboard.writeText(evaluate(argument, scope));
+      }
+    case Actions.SwitchWorkspace:
+      if (argument) {
+        invoke('switch_workspace', { idx: evaluate(argument, scope) });
       }
   }
 }

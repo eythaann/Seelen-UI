@@ -16,7 +16,7 @@ const timeByUnit = {
 };
 
 export function DateModule({ module }: Props) {
-  const [date, setDate] = useState(moment().format('MMM Do, HH:mm'));
+  const [date, setDate] = useState(moment().format(module.format));
 
   useEffect(() => {
     const id = setInterval(() => {

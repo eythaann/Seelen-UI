@@ -1,8 +1,16 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- new placeholder added to the bundle as alternative to default.
+- new workspace item available to be used in placeholders.
+
 ### enhancements
 - support fullscreen apps (will hide the toolbar and the weg on fullscreen an app).
+
+### fix
+- showing incorrect format on dates at start of the app.
+- complex text with icons on toolbar items cause wraps.
 
 ### refactor
 - refactor on window event manager to allow synthetic events.

@@ -21,6 +21,8 @@ const initialState: RootState = {
     BatteryLifeTime: -1,
     BatteryFullLifeTime: -1,
   },
+  workspaces: [],
+  activeWorkspace: 0,
 };
 
 export const RootSlice = createSlice({

@@ -18,6 +18,7 @@ import { performClick } from './app';
 interface Props {
   module: ToolbarModule;
   extraVars?: Record<string, any>;
+  active?: boolean;
 }
 
 class Scope {
@@ -63,14 +64,14 @@ export function ElementsFromEvaluated(content: any) {
         />,
       );
     } else if (part) {
-      result.push(<React.Fragment key={index}>{part}</React.Fragment>);
+      result.push(<span key={index}>{part}</span>);
     }
   });
 
   return result;
 }
 
-export function Item({ extraVars, module }: Props) {
+export function Item({ extraVars, module, active }: Props) {
   const { template, tooltip, onClick } = module;
 
   const [mounted, setMounted] = React.useState(false);
@@ -115,9 +116,10 @@ export function Item({ extraVars, module }: Props) {
         onClick={() => performClick(onClick, scope.current)}
         className={cx('ft-bar-item', {
           'ft-bar-item-clickable': !!onClick,
+          'ft-bar-item-active': active,
         })}
       >
-        <span>{elements}</span>
+        <div className="ft-bar-item-content">{elements}</div>
       </div>
     </Tooltip>
   );

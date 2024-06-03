@@ -88,13 +88,44 @@ impl FancyToolbar {
     const TARGET: &'static str = "fancy-toolbar";
     const TARGET_HITBOX: &'static str = "fancy-toolbar-hitbox";
 
+    fn set_positions(window: &WebviewWindow, hitbox: &WebviewWindow, monitor: isize) -> Result<()> {
+        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor))?;
+        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
+        let main_hwnd = HWND(window.hwnd()?.0);
+        let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
+
+        // pre set position for resize in case of multiples dpi
+        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
+        WindowsApi::set_position(hitbox_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
+
+        let mut rect = rc_monitor.clone();
+        rect.bottom = rect.bottom - 1; // avoid be matched as a fullscreen app;
+
+        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+        let toolbar_height = APP_STATE.lock().get_toolbar_height();
+
+        let mut abd = APPBARDATA::default();
+        abd.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
+        abd.hWnd = hitbox_hwnd;
+        abd.uEdge = ABE_TOP;
+
+        abd.rc = rc_monitor.clone();
+        abd.rc.bottom = abd.rc.top + (toolbar_height as f32 * dpi) as i32;
+
+        unsafe {
+            SHAppBarMessage(ABM_NEW, &mut abd);
+            SHAppBarMessage(ABM_SETPOS, &mut abd);
+        }
+
+        WindowsApi::set_position(hitbox_hwnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+        Ok(())
+    }
+
     fn create_window(
         manager: &AppHandle<Wry>,
         monitor: isize,
     ) -> Result<(WebviewWindow, WebviewWindow)> {
-        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor))?;
-        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
-
         let hitbox = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             manager,
             format!("{}/{}", Self::TARGET_HITBOX, monitor),
@@ -130,36 +161,33 @@ impl FancyToolbar {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
+        Self::set_positions(&window, &hitbox, monitor)?;
 
-        let main_hwnd = HWND(window.hwnd()?.0);
-        let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
-
-        // pre set position for resize in case of multiples dpi
-        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
-        WindowsApi::set_position(hitbox_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
-
-        let mut rect = rc_monitor.clone();
-        rect.bottom = rect.bottom - 1; // avoid be matched as a fullscreen app;
-
-        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
-        let toolbar_height = APP_STATE.lock().get_toolbar_height();
-
-        let mut abd = APPBARDATA::default();
-        abd.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-        abd.hWnd = hitbox_hwnd;
-        abd.uEdge = ABE_TOP;
-
-        abd.rc = rc_monitor.clone();
-        abd.rc.bottom = abd.rc.top + (toolbar_height as f32 * dpi) as i32;
-
-        unsafe {
-            SHAppBarMessage(ABM_NEW, &mut abd);
-            SHAppBarMessage(ABM_SETPOS, &mut abd);
-        }
-
-        WindowsApi::set_position(hitbox_hwnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)?;
-        WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+        window.once("store-events-ready", Self::on_store_events_ready);
 
         Ok((window, hitbox))
+    }
+
+
+    fn on_store_events_ready(_: tauri::Event) {
+        std::thread::spawn(|| -> Result<()> {
+            let handler = get_app_handle();
+
+            let desktops = winvd::get_desktops()?;
+            let current_desktop = winvd::get_current_desktop()?;
+
+            let mut desktops_names = Vec::new();
+            for (i, d) in desktops.iter().enumerate() {
+                if let Some(name) = d.get_name().ok() {
+                    desktops_names.push(name);
+                } else {
+                    desktops_names.push(format!("Desktop {}", i + 1))
+                }
+            }
+
+            handler.emit("workspaces-changed", desktops_names)?;
+            handler.emit("active-workspace-changed", current_desktop.get_index()?)?;
+            Ok(())
+        });
     }
 }

@@ -78,10 +78,31 @@ body {
     }
   }
 
-  > span {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-wrap: nowrap;
+  .ft-bar-item-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    > span {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: pre;
+    }
+
+    &.workspaces {
+      gap: 12px;
+      margin: 0 4px;
+
+      .workspace-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 3px;
+
+        &.workspace-dot-active {
+          width: 18px;
+        }
+      }
+    }
   }
 }
 

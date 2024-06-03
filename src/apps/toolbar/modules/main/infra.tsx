@@ -1,4 +1,5 @@
 import { Placeholder, ToolbarModule, ToolbarModuleType } from '../../../utils/schemas/Placeholders';
+import { WorkspacesModule } from '../Workspaces';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
@@ -11,15 +12,17 @@ import { Selectors } from '../shared/store/app';
 
 function componentByModule(module: ToolbarModule, idx: number) {
   switch (module.type) {
-    case ToolbarModuleType.TEXT:
-    case ToolbarModuleType.GENERIC:
+    case ToolbarModuleType.Text:
+    case ToolbarModuleType.Generic:
       return <Item key={idx} module={module} />;
-    case ToolbarModuleType.DATE:
+    case ToolbarModuleType.Date:
       return <DateModule key={idx} module={module} />;
-    case ToolbarModuleType.POWER:
+    case ToolbarModuleType.Power:
       return <PowerModule key={idx} module={module} />;
-    case ToolbarModuleType.SETTINGS:
+    case ToolbarModuleType.Settings:
       return <SettingsModule key={idx} module={module} />;
+    case ToolbarModuleType.Workspaces:
+      return <WorkspacesModule key={idx} module={module} />;
     default:
       return null;
   }

@@ -15,8 +15,8 @@ export function PowerModule({ module }: Props) {
   const power = useSelector(Selectors.powerStatus);
 
   useEffect(() => {
-    if (!window.TOOLBAR_MODULES[ToolbarModuleType.POWER]) {
-      window.TOOLBAR_MODULES[ToolbarModuleType.POWER] = true;
+    if (!window.TOOLBAR_MODULES[ToolbarModuleType.Power]) {
+      window.TOOLBAR_MODULES[ToolbarModuleType.Power] = true;
       emit('register-power-events');
     }
   }, []);

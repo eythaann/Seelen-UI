@@ -17,7 +17,7 @@ export function wrapConsole() {
   };
 
   const StrintifyParams = (params: any[]): string => {
-    return params.reduce((a, b) => a + ' ' + JSON.stringify(b), '');
+    return params.reduce((a, b) => a + ' ' + JSON.stringify(b, null, 2), '');
   };
 
   window.addEventListener('unhandledrejection', (event) => {

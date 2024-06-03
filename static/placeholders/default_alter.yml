@@ -1,0 +1,75 @@
+info:
+  displayName: Alter
+  author: eythaann,
+  description: Alternative to the Default layout.
+
+left:
+  - type: text
+    template: concat("@", env.USERNAME)
+    onClick: open -> env.USERPROFILE
+    tooltip: '"Open user folder"'
+
+  - type: text
+    template: '"|"'
+
+  - type: text
+    template: window.name
+
+  - type: text
+    template: >
+      window.title ? "-" : ""
+
+  - type: text
+    template: window.title
+
+center:
+  - type: workspaces
+    mode: dotted
+
+right:
+  - type: generic
+    template: icon.TbBluetoothConnected
+    onClick: open -> "ms-settings:bluetooth"
+    tooltip: '"Bluetooth"'
+
+  - type: generic
+    template: '"[ICON:FaWifi:14]"'
+    onClick: open -> "ms-settings:network"
+    tooltip: '"Network"'
+
+  - type: generic
+    template: icon.IoVolumeHighOutline
+    onClick: open -> "ms-settings:sound"
+    tooltip: '"Sound"'
+
+  - type: power
+    tooltip: concat(string(power.BatteryLifePercent), "% remaining")
+    template: >- 
+      concat(
+        string(
+          power.BatteryFlag & 8
+          ? icon.PiBatteryChargingFill
+          : power.BatteryLifePercent > 90
+          ? icon.PiBatteryFullFill
+          : power.BatteryLifePercent > 66
+          ? icon.PiBatteryHighFill
+          : power.BatteryLifePercent > 33
+          ? icon.PiBatteryMediumFill
+          : power.BatteryLifePercent > 5
+          ? icon.PiBatteryLowFill
+          : icon.PiBatteryWarning
+        ), 
+        " ",
+        string(power.BatteryLifePercent),
+        "%"
+      )
+    onClick: open -> "ms-settings:powersleep"
+
+  - type: date
+    each: minute
+    format: ddd DD-MM, hh:mm A
+    template: date
+
+  - type: settings
+    template: icon.LuSettings2
+    tooltip: '"Quick Settings"'

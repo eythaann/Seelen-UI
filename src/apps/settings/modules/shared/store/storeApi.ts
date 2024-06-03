@@ -1,5 +1,5 @@
 import { AppTemplate, defaultTheme, UserSettings } from '../../../../../shared.interfaces';
-import { parseAsCamel, VariableConvention } from '../../../../utils/schemas';
+import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../utils/schemas';
 import { Layout, LayoutSchema } from '../../../../utils/schemas/Layout';
 import { Placeholder, PlaceholderSchema } from '../../../../utils/schemas/Placeholders';
 import { AhkVariables, SettingsSchema } from '../../../../utils/schemas/Settings';
@@ -108,7 +108,11 @@ async function loadUserLayouts(ref: UserSettings) {
       let layout: Layout = JSON.parse(
         await fs.readTextFile(await path.join(layoutsPath, entry.name)),
       );
-      layout = parseAsCamel(LayoutSchema, layout);
+
+      layout = safeParseAsCamel(LayoutSchema, layout);
+      if (!layout) {
+        continue;
+      }
 
       const sanitizedLayout: Layout = {
         ...layout,
@@ -147,7 +151,11 @@ async function loadUserPlaceholders(ref: UserSettings) {
       let _placeholder = yaml.load(
         await fs.readTextFile(await path.join(placeholderPath, entry.name)),
       );
-      let placeholder = parseAsCamel(PlaceholderSchema, _placeholder) as Placeholder;
+
+      let placeholder = safeParseAsCamel(PlaceholderSchema, _placeholder) as Placeholder;
+      if (!placeholder) {
+        continue;
+      }
 
       placeholder.info.filename = entry.name;
 

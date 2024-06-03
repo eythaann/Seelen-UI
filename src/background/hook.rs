@@ -3,6 +3,7 @@ use std::{sync::Arc, time::Duration};
 use color_eyre::owo_colors::OwoColorize;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use tauri::Manager;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
@@ -143,6 +144,29 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
     }
 
     match event {
+        DesktopEvent::DesktopCreated(_)
+        | DesktopEvent::DesktopDestroyed { destroyed: _, fallback: _}
+        | DesktopEvent::DesktopMoved { desktop: _, old_index: _, new_index: _ }
+        | DesktopEvent::DesktopNameChanged(_, _) => {
+            let desktops = winvd::get_desktops()?;
+            let mut desktops_names = Vec::new();
+            for (i, d) in desktops.iter().enumerate() {
+                if let Some(name) = d.get_name().ok() {
+                    desktops_names.push(name);
+                } else {
+                    desktops_names.push(format!("Desktop {}", i + 1))
+                }
+            }
+            seelen.handle().emit("workspaces-changed", desktops_names)?;
+        }
+
+        DesktopEvent::DesktopChanged { new, old: _} => {
+            seelen.handle().emit("active-workspace-changed", new.get_index()?)?;
+        }
+        _ => {}
+    }
+
+    match event {
         DesktopEvent::WindowChanged(hwnd) => {
             if WindowsApi::is_window(hwnd) {
                 if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
@@ -206,7 +230,6 @@ pub extern "system" fn win_event_hook(
     if let Some(synthetic_event) = event.get_synthetic(hwnd) {
         hook_manager.event(synthetic_event, hwnd);
     }
-
 }
 
 pub fn register_win_hook() -> Result<()> {

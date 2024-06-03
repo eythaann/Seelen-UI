@@ -25,6 +25,23 @@
     .ft-bar-right {
       width: 45%;
     }
+
+    .ft-bar-item {
+      &.ft-bar-item-active {
+        color: var(--config-accent-color);
+      }
+
+      .workspace-dot {
+        background-color: #efefef;
+        transition-property: width, border-radius, background-color;
+        transition-duration: 200ms;
+        transition-timing-function: ease-out;
+
+        &.workspace-dot-active {
+          background-color: var(--config-accent-color);
+        }
+      }
+    }
   }
 
   .fast-settings {
