@@ -10,7 +10,7 @@ import {
 import { filenameFromPath, getGeneratedFilesPath } from '../../shared/utils/app';
 
 import { AppFromBackground, HWND, IApp, SpecialItemType } from '../../shared/store/domain';
-import { UWP_TARGET_SIZE_POSTFIXS } from '../../shared/utils/domain';
+import { UWP_IMAGE_POSTFIXES } from '../../shared/utils/domain';
 
 export interface TemporalApp extends IApp {
   type: SpecialItemType.TemporalPin;
@@ -40,7 +40,7 @@ export class TemporalApp {
         return;
       }
 
-      for (const postfix of UWP_TARGET_SIZE_POSTFIXS) {
+      for (const postfix of UWP_IMAGE_POSTFIXES) {
         const logoPathUWP =
           uwpPackage.InstallLocation + '\\' + app.Square44x44Logo.replace('.png', postfix);
         if (await fs.exists(logoPathUWP)) {

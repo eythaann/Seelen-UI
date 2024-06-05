@@ -11,6 +11,7 @@
 ### fix
 - showing incorrect format on dates at start of the app.
 - complex text with icons on toolbar items cause wraps.
+- missing icons on some uwp apps.
 
 ### refactor
 - refactor on window event manager to allow synthetic events.
