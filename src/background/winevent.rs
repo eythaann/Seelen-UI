@@ -291,7 +291,45 @@ impl TryFrom<u32> for WinEvent {
 impl WinEvent {
     pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {
         match self {
+            Self::ObjectShow | Self::ObjectCreate | Self::ObjectUncloaked => {
+                if WindowsApi::get_window_text(origin).contains("Seelen")
+                    || !WindowsApi::is_window_visible(origin)
+                {
+                    return None;
+                }
+
+                let mut fullscreened = FULLSCREENED.lock();
+                match WindowsApi::is_fullscreen(origin) {
+                    Ok(true) if !fullscreened.contains(&origin) => {
+                        fullscreened.push(origin);
+                        Some(Self::SyntheticFullscreenStart)
+                    }
+                    _ => None,
+                }
+            }
+            Self::ObjectHide | Self::ObjectDestroy | Self::ObjectCloaked => {
+                // ignore own windows
+                if WindowsApi::get_window_text(origin).contains("Seelen") {
+                    return None;
+                }
+
+                let mut fullscreened = FULLSCREENED.lock();
+                match fullscreened.contains(&origin) {
+                    true => {
+                        fullscreened.retain(|&x| x != origin);
+                        Some(Self::SyntheticFullscreenEnd)
+                    }
+                    false => None,
+                }
+            }
             Self::ObjectLocationChange => {
+                if origin != WindowsApi::get_foreground_window()
+                    || WindowsApi::get_window_text(origin).contains("Seelen")
+                    || !WindowsApi::is_window_visible(origin)
+                {
+                    return None;
+                }
+
                 let mut fullscreened = FULLSCREENED.lock();
                 match WindowsApi::is_fullscreen(origin) {
                     Ok(true) if !fullscreened.contains(&origin) => {
