@@ -80,6 +80,11 @@ export function getMenuForItem(item: App): MenuProps['items'] {
       key: 'weg_select_file_on_explorer',
       onClick: () => invoke('select_file_on_explorer', { path: item.exe }),
     },
+    {
+      label: 'Run as administrator',
+      key: 'weg_runas',
+      onClick: () => invoke('run_as_admin', { path: item.execution_path }),
+    },
   );
 
   if (item.opens.length) {

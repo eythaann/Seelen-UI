@@ -83,15 +83,22 @@ fn kill_seelen_shortcuts() -> Result<(), String> {
 }
 
 #[command]
-fn select_file_on_explorer(path: String) -> Result<(), String> {
+fn select_file_on_explorer(path: String) {
     log_if_error(Command::new("explorer").args(["/select,", &path]).spawn());
-    Ok(())
 }
 
 #[command]
-fn open_file(path: String) -> Result<(), String> {
+fn open_file(path: String) {
     log_if_error(Command::new("explorer").args([&path]).spawn());
-    Ok(())
+}
+
+#[command]
+fn run_as_admin(path: String) {
+    log_if_error(
+        Command::new("powershell")
+            .args(["-Command", &format!("Start-Process '{}' -Verb runAs", path)])
+            .status(),
+    );
 }
 
 #[command]
@@ -173,9 +180,7 @@ fn get_auto_start_status() -> Result<bool, String> {
 
 #[command]
 fn switch_workspace(idx: u32) {
-    std::thread::spawn(move || {
-        winvd::switch_desktop(idx)
-    });
+    std::thread::spawn(move || winvd::switch_desktop(idx));
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
@@ -183,6 +188,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         // General
         is_dev_mode,
         open_file,
+        run_as_admin,
         select_file_on_explorer,
         get_accent_color,
         get_win_version,
