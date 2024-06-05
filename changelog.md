@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.5.0]
 ### features
 - new placeholder added to the bundle as alternative to default.
 - new workspace item available to be used in placeholders.
