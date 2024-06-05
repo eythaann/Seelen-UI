@@ -8,7 +8,7 @@ use windows::{
             GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
             PHYSICAL_MONITOR,
         },
-        Foundation::{CloseHandle, HANDLE, HWND, LPARAM, LUID, RECT},
+        Foundation::{CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, RECT},
         Graphics::{
             Dwm::{
                 DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
@@ -30,7 +30,8 @@ use windows::{
         Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
             Com::{CoCreateInstance, CLSCTX_ALL},
-            Power::SetSuspendState,
+            LibraryLoader::GetModuleHandleW,
+            Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
             Shutdown::{ExitWindowsEx, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             Threading::{
@@ -67,6 +68,10 @@ use crate::{
 
 pub struct WindowsApi {}
 impl WindowsApi {
+    pub fn module_handle_w() -> Result<HMODULE> {
+        Ok(unsafe { GetModuleHandleW(None) }?)
+    }
+
     pub fn enum_display_monitors(
         callback: MONITORENUMPROC,
         callback_data_address: isize,
@@ -538,6 +543,14 @@ impl WindowsApi {
 
             Ok(elevation.TokenIsElevated != 0)
         }
+    }
+
+    pub fn get_system_power_status() -> Result<SYSTEM_POWER_STATUS> {
+        let mut power_status = SYSTEM_POWER_STATUS::default();
+        unsafe {
+            GetSystemPowerStatus(&mut power_status as _)?;
+        }
+        Ok(power_status)
     }
 }
 

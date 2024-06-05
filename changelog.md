@@ -4,6 +4,9 @@
 ### features
 - add "Run as admin" option at context menu on Seelenweg. 
 
+### enhancements
+- improve power (battery) events performance
+
 ## [1.5.0]
 ### features
 - new placeholder added to the bundle as alternative to default.

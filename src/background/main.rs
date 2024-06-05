@@ -19,6 +19,7 @@ mod tray;
 mod utils;
 mod windows_api;
 mod winevent;
+mod modules;
 
 use cli::handle_cli_info;
 use color_eyre::owo_colors::OwoColorize;

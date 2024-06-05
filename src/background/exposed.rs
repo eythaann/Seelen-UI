@@ -12,11 +12,11 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 
 use crate::apps_config::*;
 use crate::error_handler::{log_if_error, Result};
+use crate::modules::power::infrastructure::*;
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
-use crate::system::power::*;
 use crate::utils::{is_windows_10, is_windows_11};
 use crate::windows_api::WindowsApi;
 

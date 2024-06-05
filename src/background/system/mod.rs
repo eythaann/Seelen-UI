@@ -1,13 +1,15 @@
 pub mod brightness;
-pub mod power;
 
-use crate::{error_handler::Result, seelen::get_app_handle};
+use crate::{
+    error_handler::Result, modules::power::infrastructure::PowerManager, seelen::get_app_handle,
+};
 
 pub fn register_system_events() -> Result<()> {
     let handle = get_app_handle();
 
     handle.once("register-power-events", move |_| {
-        power::register_battery_events();
+        PowerManager::register_power_events().expect("Fail on registering system power events");
+        PowerManager::emit_system_power_info().expect("Fail on emitting initial system power info");
     });
 
     handle.once("register-wifi-events", move |_| {
