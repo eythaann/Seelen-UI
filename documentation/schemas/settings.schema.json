@@ -101,7 +101,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "default": true
+          "default": false
         },
         "auto_stacking_by_category": {
           "type": "boolean",
