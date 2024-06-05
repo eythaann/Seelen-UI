@@ -22,7 +22,7 @@ export const FloatingWindowSchema = z.object({
 });
 
 export const WindowManagerSchema = z.object({
-  enabled: z.boolean().default(true),
+  enabled: z.boolean().default(false),
   auto_stacking_by_category: z.boolean().default(true),
   border: BorderSchema.default({}),
   resize_delta: z.number().default(10).describe('% to add or remove on resize of windows using the CLI'),

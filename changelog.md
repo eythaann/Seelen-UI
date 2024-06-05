@@ -6,6 +6,7 @@
 
 ### enhancements
 - improve power (battery) events performance
+- Window manager disabled by default to new users
 
 ## [1.5.0]
 ### features
