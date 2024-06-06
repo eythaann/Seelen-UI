@@ -10,7 +10,7 @@ impl Theme {
 
         let hkcr = RegKey::predef(HKEY_CLASSES_ROOT);
 
-        let (key, _) = hkcr.create_subkey("slu-theme")?;
+        let (key, _) = hkcr.create_subkey("Seelen.UI.URI")?;
 
         key.set_value("", &"URL:Seelen Theme protocol")?;
         key.set_value("URL Protocol", &"")?;
@@ -19,7 +19,7 @@ impl Theme {
         icon_key.set_value("", &format!("\"{}\",1", exe_path_str))?;
 
         let (command_key, _) = key.create_subkey("shell\\open\\command")?;
-        command_key.set_value("", &format!("\"{exe_path_str}\" uri \"%1\""))?;
+        command_key.set_value("", &format!("\"{exe_path_str}\" load uri \"%1\""))?;
 
         Ok(())
     }
@@ -30,17 +30,24 @@ impl Theme {
 
         let hkcr = RegKey::predef(HKEY_CLASSES_ROOT);
 
-        let (theme_ext_key, _) = hkcr.create_subkey(".theme.slu")?;
-        theme_ext_key.set_value("", &"theme.slu")?;
+        // register the extension
+        let (ext_key, _) = hkcr.create_subkey(".slu")?;
+        ext_key.set_value("", &"Seelen.UI")?;
 
-        let (theme_key, _) = hkcr.create_subkey("theme.slu")?;
-        theme_key.set_value("", &"Theme Seelen UI File")?;
+        // register the app
+        let (app_key, _) = hkcr.create_subkey("Seelen.UI")?;
 
-        let (default_icon_key, _) = theme_key.create_subkey("DefaultIcon")?;
+        let (default_icon_key, _) = app_key.create_subkey("DefaultIcon")?;
         default_icon_key.set_value("", &format!("\"{}\",1", exe_path_str))?;
 
-        let (command_key, _) = theme_key.create_subkey("shell\\open\\command")?;
-        command_key.set_value("", &format!("\"{}\" \"%1\"", exe_path_str))?;
+        let command = format!("\"{}\" load file \"%1\"", exe_path_str);
+
+        let (command_key, _) = app_key.create_subkey("shell\\open\\command")?;
+        command_key.set_value("", &command)?;
+
+        let (command_key, _) = app_key.create_subkey("shell\\edit\\command")?;
+        command_key.set_value("", &command)?;
+
         Ok(())
     }
 }

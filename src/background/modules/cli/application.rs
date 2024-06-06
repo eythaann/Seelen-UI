@@ -95,16 +95,24 @@ lazy_static! {
                 Command::new("settings").about("Opens the Seelen settings gui."),
                 WindowManager::get_cli(),
                 FancyToolbar::get_cli(),
-                Command::new("uri")
-                    .about("Opens the Seelen Files or resolve URI.")
-                    .arg(
-                        Arg::new("value")
-                            .required(true)
-                            .value_parser(clap::value_parser!(std::string::String))
-                            .action(clap::ArgAction::Set)
-                    ),
+                loader_command(),
             ])
     ));
+}
+
+pub fn loader_command() -> Command {
+    let arg = Arg::new("value")
+        .help("Value to load.")
+        .required(true)
+        .value_parser(clap::value_parser!(std::string::String))
+        .action(clap::ArgAction::Set);
+
+    Command::new("load")
+        .about("Opens the Seelen Files or resolve URI.")
+        .subcommands([
+            Command::new("file").about("Load a .slu file.").arg(arg.clone().id("path")),
+            Command::new("uri").about("Load a URI.").arg(arg.id("uri")),
+        ])
 }
 
 type ShouldInitApp = bool;
