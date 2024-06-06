@@ -6,9 +6,9 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 
 use crate::error_handler::Result;
+use crate::seelen::SEELEN;
 use crate::seelen_bar::FancyToolbar;
 use crate::seelen_wm::WindowManager;
-use crate::seelen::SEELEN;
 
 #[macro_export]
 macro_rules! get_subcommands {
@@ -93,10 +93,16 @@ lazy_static! {
             ])
             .subcommands([
                 Command::new("settings").about("Opens the Seelen settings gui."),
-                Command::new("weg").about("Opens the Seelen Task Bar."),
-                Command::new("finder").about("Opens the Seelen Finder."),
                 WindowManager::get_cli(),
                 FancyToolbar::get_cli(),
+                Command::new("uri")
+                    .about("Opens the Seelen Files or resolve URI.")
+                    .arg(
+                        Arg::new("value")
+                            .required(true)
+                            .value_parser(clap::value_parser!(std::string::String))
+                            .action(clap::ArgAction::Set)
+                    ),
             ])
     ));
 }

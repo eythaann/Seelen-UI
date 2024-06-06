@@ -2,10 +2,10 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod apps_config;
-mod cli;
 mod error_handler;
 mod exposed;
 mod hook;
+mod modules;
 mod monitor;
 mod plugins;
 mod seelen;
@@ -19,18 +19,22 @@ mod tray;
 mod utils;
 mod windows_api;
 mod winevent;
-mod modules;
 
-use cli::handle_cli_info;
+use std::io::{BufWriter, Write};
+
 use color_eyre::owo_colors::OwoColorize;
 use error_handler::Result;
 use exposed::register_invoke_handler;
+use modules::cli::{
+    application::{handle_cli_info, SEELEN_COMMAND_LINE},
+    infrastructure::Client,
+};
 use plugins::register_plugins;
 use seelen::SEELEN;
 
 use tray::handle_tray_icon;
 
-use crate::{cli::SEELEN_COMMAND_LINE, error_handler::log_if_error};
+use crate::error_handler::log_if_error;
 
 fn register_panic_hook() {
     std::panic::set_hook(Box::new(|info| {
@@ -74,6 +78,17 @@ fn main() -> Result<()> {
         return Ok(());
     }
 
+    if let Ok(stream) = Client::connect_tcp() {
+        let mut writer = BufWriter::new(stream);
+
+        let args: Vec<String> = std::env::args().collect();
+        let msg = serde_json::to_string(&args).expect("could not serialize");
+
+        writer.write_all(msg.as_bytes()).expect("could not write");
+        writer.flush().expect("could not flush");
+        return Ok(());
+    }
+
     let mut app_builder = tauri::Builder::default();
     app_builder = register_plugins(app_builder);
     app_builder = register_invoke_handler(app_builder);
@@ -81,6 +96,8 @@ fn main() -> Result<()> {
     let app = app_builder
         .setup(move |app| {
             log::info!("───────────────────── Starting Seelen ─────────────────────");
+            Client::listen_tcp()?;
+
             let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
             seelen.init(app.handle().clone())?;
 

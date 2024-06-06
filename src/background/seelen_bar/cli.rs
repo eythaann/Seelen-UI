@@ -21,7 +21,6 @@ impl FancyToolbar {
 
     pub fn process(&mut self, matches: &clap::ArgMatches) -> Result<()> {
         let subcommand = SubCommand::try_from(matches)?;
-        log::trace!("Processing {:?}", subcommand);
         match subcommand {
             SubCommand::Debug => {
                 #[cfg(any(debug_assertions, feature = "devtools"))]

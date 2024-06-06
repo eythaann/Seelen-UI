@@ -85,7 +85,6 @@ impl WindowManager {
 
     pub fn process(&mut self, matches: &clap::ArgMatches) -> Result<()> {
         let subcommand = SubCommand::try_from(matches)?;
-        log::trace!("Processing {:?}", subcommand);
         match subcommand {
             SubCommand::Pause => {
                 self.pause(true, true)?;

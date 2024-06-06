@@ -151,11 +151,14 @@ impl Seelen {
         });
 
         if WindowsApi::is_elevated()? {
+            Self::bind_file_extensions()?;
+
             if Self::is_auto_start_enabled()? {
                 // override auto-start task in case of location change, normally this happen on MSIX update
                 self.set_auto_start(true)?;
             }
         }
+
         Ok(())
     }
 
@@ -169,7 +172,16 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn ensure_folders(&self) -> Result<()> {
+    fn bind_file_extensions() -> Result<()> {
+        use crate::modules::file_extensions::infrastructure::*;
+
+        Theme::create_uri_protocol()?;
+        Theme::create_ext_protocol()?;
+
+        Ok(())
+    }
+
+    fn ensure_folders(&self) -> Result<()> {
         log::trace!("Ensuring folders");
         let path = self.handle().path();
         std::fs::create_dir_all(path.resolve(".config/seelen", BaseDirectory::Home)?)?;
@@ -239,7 +251,7 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn load_uwp_apps_info(&self) -> Result<()> {
+    fn load_uwp_apps_info(&self) -> Result<()> {
         let pwsh_script = include_str!("load_uwp_apps.ps1");
         let pwsh_script_path = temp_dir().join("load_uwp_apps.ps1");
         std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");

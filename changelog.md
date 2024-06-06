@@ -3,10 +3,14 @@
 ## [Unreleased]
 ### features
 - add "Run as admin" option at context menu on Seelenweg. 
+- allow receive commands using TCP connections.
 
 ### enhancements
-- improve power (battery) events performance
-- Window manager disabled by default to new users
+- improve power (battery) events performance.
+- Window manager disabled by default to new users.
+
+### refactor
+- remove tauri single instance plugin by TCP connection.
 
 ## [1.5.0]
 ### features

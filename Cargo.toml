@@ -32,7 +32,6 @@ tauri = { version = "2.0.0-beta", features = [
 tauri-plugin-fs = "2.0.0-beta.2"
 tauri-plugin-dialog = "2.0.0-beta.2"
 tauri-plugin-autostart = "2.0.0-beta.2"
-tauri-plugin-single-instance = "2.0.0-beta.2"
 tauri-plugin-shell = "2.0.0-beta.2"
 tauri-plugin-process = "2.0.0-beta.2"
 tauri-plugin-log = { version = "2.0.0-beta.2", features = ["colored"] }
