@@ -9,7 +9,7 @@ use tauri::{
 };
 
 use crate::error_handler::{log_if_error, Result};
-use crate::SEELEN;
+use crate::seelen::SEELEN;
 
 pub fn handle_tray_icon(app: &mut App) -> Result<()> {
     log::trace!("registering tray icon");

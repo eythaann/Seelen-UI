@@ -27,6 +27,10 @@ center:
     mode: dotted
 
 right:
+  - type: tray
+    template: icon.BsThreeDots
+    tooltip: '"Open system tray"'
+
   - type: generic
     template: icon.TbBluetoothConnected
     onClick: open -> "ms-settings:bluetooth"
@@ -59,7 +63,7 @@ right:
           ? icon.PiBatteryLowFill
           : icon.PiBatteryWarning
         ), 
-        " ",
+        "  ",
         string(power.BatteryLifePercent),
         "%"
       )
@@ -67,7 +71,7 @@ right:
 
   - type: date
     each: minute
-    format: ddd DD-MM, hh:mm A
+    format: ddd D MMM, hh:mm A
     template: date
 
   - type: settings

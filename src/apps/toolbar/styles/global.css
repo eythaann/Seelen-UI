@@ -106,6 +106,22 @@ body {
   }
 }
 
+.tray {
+  position: relative;
+  width: 250px;
+
+  .tray-list {
+    position: relative;
+    z-index: 1;
+
+    .tray-item-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
 .fast-settings {
   position: relative;
   display: flex;

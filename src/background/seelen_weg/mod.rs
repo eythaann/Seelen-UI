@@ -2,9 +2,8 @@ pub mod handler;
 pub mod hook;
 pub mod icon_extractor;
 
-use std::path::PathBuf;
-
 use getset::{Getters, MutGetters};
+use icon_extractor::extract_and_save_icon;
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -26,11 +25,9 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     seelen::{get_app_handle, SEELEN},
-    utils::{are_overlaped, filename_from_path},
+    utils::are_overlaped,
     windows_api::WindowsApi,
 };
-
-use self::icon_extractor::get_images_from_exe;
 
 lazy_static! {
     static ref TITLE_BLACK_LIST: Vec<&'static str> = Vec::from([
@@ -106,13 +103,6 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn generated_files_path(&self) -> PathBuf {
-        self.handle
-            .path()
-            .app_data_dir()
-            .expect("Failed to resolve gen path")
-    }
-
     pub fn missing_icon(&self) -> String {
         self.handle
             .path()
@@ -123,31 +113,7 @@ impl SeelenWeg {
     }
 
     pub fn extract_icon(&self, exe_path: &str) -> Result<String> {
-        let gen_icons_paths = self.generated_files_path().join("icons");
-        if !gen_icons_paths.exists() {
-            std::fs::create_dir_all(&gen_icons_paths)?;
-        }
-
-        let filename = filename_from_path(exe_path);
-        let icon_path = gen_icons_paths.join(filename.replace(".exe", ".png"));
-        let icon_path_uwp = gen_icons_paths.join(filename.replace(".exe", "_uwp.png"));
-
-        if !icon_path.exists() && !icon_path_uwp.exists() {
-            let images = get_images_from_exe(exe_path);
-            if let Ok(images) = images {
-                // icon on index 0 always is the app showed icon
-                if let Some(icon) = images.get(0) {
-                    icon.save(&icon_path).expect("Failed to save icon");
-                }
-            }
-        }
-
-        let mut icon_to_save = icon_path;
-        if icon_path_uwp.exists() {
-            icon_to_save = icon_path_uwp;
-        }
-
-        Ok(icon_to_save
+        Ok(extract_and_save_icon(&self.handle, exe_path)?
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")
             .to_string())

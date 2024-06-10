@@ -51,6 +51,8 @@ winreg = "0.52.0"
 crossbeam-channel = "0.5.12"
 regex = "1.10.4"
 getset = "0.1.2"
+phf = "0.11.2"
+sysinfo = "0.30.12"
 
 [dependencies.windows]
 version = "0.52.0"
@@ -75,7 +77,8 @@ features = [
     "Win32_System_Shutdown", # required for power management (shutdown)
     "Win32_Storage_EnhancedStorage",
     "Win32_Media_Audio_Endpoints", # required for audio
-    "Win32_Devices_Display" # required for display (brightness, etc)
+    "Win32_Devices_Display", # required for display (brightness, etc)
+    "UI_Core",
 ]
 
 [features]

@@ -29,6 +29,10 @@ center:
     template: date
 
 right:
+  - type: tray
+    template: icon.BsThreeDots
+    tooltip: '"Open system tray"'
+
   - type: generic
     template: icon.TbBluetoothConnected
     onClick: open -> "ms-settings:bluetooth"

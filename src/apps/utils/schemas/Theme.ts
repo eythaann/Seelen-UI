@@ -40,6 +40,11 @@ export const ThemeSchema = z.object({
               bg: backgroundLayersSchema,
             })
             .default({}),
+          systemTray: z
+            .object({
+              bg: backgroundLayersSchema,
+            })
+            .default({}),
         })
         .default({}),
     })

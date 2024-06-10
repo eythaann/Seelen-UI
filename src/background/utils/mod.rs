@@ -2,11 +2,17 @@ pub mod constants;
 pub mod rect;
 pub mod virtual_desktop;
 
-use std::time::Duration;
+use std::{path::PathBuf, time::Duration};
 
 use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
-use windows::Win32::Foundation::RECT;
+use windows::{
+    core::GUID,
+    Win32::{
+        Foundation::{HANDLE, RECT},
+        UI::Shell::{SHGetKnownFolderPath, KF_FLAG_DEFAULT},
+    },
+};
 
 use crate::error_handler::Result;
 
@@ -69,6 +75,11 @@ pub fn is_windows_11() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22000)
 }
 
+/// Is Windows 11 22H2 or newer
+pub fn is_windows_11_22h2() -> bool {
+    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22621)
+}
+
 pub fn run_ahk_file(handle: &AppHandle<Wry>, ahk_file: &str) -> Result<()> {
     log::trace!("Starting AHK: {}", ahk_file);
 
@@ -99,4 +110,37 @@ pub fn run_ahk_file(handle: &AppHandle<Wry>, ahk_file: &str) -> Result<()> {
         .spawn()?;
 
     Ok(())
+}
+
+/// Resolve paths with folder ids in the form of "{GUID}\path\to\file"
+///
+/// https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid
+pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
+    let parts = path.as_ref().split("\\");
+    let mut path_buf = PathBuf::new();
+
+    for (idx, part) in parts.into_iter().enumerate() {
+        if part.starts_with("{") && part.ends_with("}") {
+            let guid = part.trim_start_matches('{').trim_end_matches('}');
+            let rfid = GUID::from(guid);
+            let string_path = unsafe {
+                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, HANDLE(0))?.to_string()?
+            };
+
+            path_buf.push(string_path);
+        } else if idx == 0 {
+            return Ok(PathBuf::from(path.as_ref()));
+        } else {
+            path_buf.push(part);
+        }
+    }
+
+    Ok(path_buf)
+}
+
+pub fn app_data_path(handle: &AppHandle) -> PathBuf {
+    handle
+        .path()
+        .app_data_dir()
+        .expect("Failed to resolve App Data path")
 }

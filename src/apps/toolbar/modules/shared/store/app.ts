@@ -23,6 +23,7 @@ const initialState: RootState = {
   },
   workspaces: [],
   activeWorkspace: 0,
+  systemTray: [],
 };
 
 export const RootSlice = createSlice({

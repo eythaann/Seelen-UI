@@ -4,6 +4,7 @@
 ### features
 - add "Run as admin" option at context menu on Seelenweg. 
 - allow receive commands using TCP connections.
+- Add System Tray Icons module, (incomplete, devices like usb or windows antivirus trays are still not supported).
 
 ### enhancements
 - improve power (battery) events performance.

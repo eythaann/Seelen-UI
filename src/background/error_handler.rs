@@ -20,7 +20,8 @@ macro_rules! define_app_errors {
 }
 
 define_app_errors!(
-    Generic(String);
+    Generic(&'static str);
+    GenericString(String);
     Io(std::io::Error);
     Tauri(tauri::Error);
     TauriShell(tauri_plugin_shell::Error);
@@ -33,11 +34,25 @@ define_app_errors!(
     CrossbeamRecv(crossbeam_channel::RecvError);
     WinVD(winvd::Error);
     TryFromInt(std::num::TryFromIntError);
+    Image(image::ImageError);
 );
 
 impl std::fmt::Display for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{:?}", self)
+    }
+}
+
+// needed to tauri::command macro (exposed functions to frontend)
+impl Into<tauri::ipc::InvokeError> for AppError {
+    fn into(self) -> tauri::ipc::InvokeError {
+        tauri::ipc::InvokeError::from(self.to_string())
+    }
+}
+
+impl From<AppError> for String {
+    fn from(err: AppError) -> String {
+        format!("{:?}", err)
     }
 }
 
@@ -59,12 +74,6 @@ impl std::error::Error for AppError {
     }
 }
 
-impl From<AppError> for String {
-    fn from(err: AppError) -> String {
-        format!("{:?}", err)
-    }
-}
-
 pub type Result<T = (), E = AppError> = core::result::Result<T, E>;
 
 pub fn log_if_error<T, E>(result: Result<T, E>)
@@ -75,11 +84,3 @@ where
         log::error!("{:?}", err);
     }
 }
-
-/* macro_rules! log_if_error {
-    ($result:expr) => {
-        if let Err(err) = $result {
-            log::error!("{:?}", err);
-        }
-    };
-} */

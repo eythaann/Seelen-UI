@@ -8,7 +8,7 @@ import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { RootActions, RootSlice } from './app';
 
-import { ActiveApp, PowerStatus } from './domain';
+import { ActiveApp, PowerStatus, TrayInfo } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -35,6 +35,10 @@ export async function registerStoreEvents() {
 
   await listenGlobal<number>('active-workspace-changed', (event) => {
     store.dispatch(RootActions.setActiveWorkspace(event.payload));
+  });
+
+  await listenGlobal<TrayInfo[]>('tray-info', (event) => {
+    store.dispatch(RootActions.setSystemTray(event.payload));
   });
 
   await view.emitTo(view.label, 'store-events-ready');

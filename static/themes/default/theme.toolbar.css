@@ -62,4 +62,48 @@
       }
     }
   }
+
+  .tray {
+    padding: 10px;
+    margin: 4px;
+
+    .tray-bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 10px;
+      box-shadow: 0 0 10px 10px #0001;
+    }
+
+    .tray-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+
+      .tray-item {
+        display: flex;
+        align-items: center;
+        border-radius: 8px;
+        padding: 8px;
+        gap: 6px;
+
+        &:hover {
+          background-color: var(--color-blue-400);
+        }
+
+        .tray-item-icon {
+          width: 1rem;
+          height: 1rem;
+          min-height: 1rem;
+          min-width: 1rem;
+        }
+
+        .tray-item-label {
+          font-size: 0.7rem;
+          font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
 }

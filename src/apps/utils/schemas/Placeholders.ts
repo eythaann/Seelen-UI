@@ -45,6 +45,11 @@ export const GenericToolbarModuleSchema = BaseTMSchema.extend({
   type: z.union([z.literal(ToolbarModuleType.Generic), z.literal(ToolbarModuleType.Text)]),
 });
 
+export type TrayTM = z.infer<typeof TrayTMSchema>;
+export const TrayTMSchema = BaseTMSchema.extend({
+  type: z.literal(ToolbarModuleType.Tray),
+});
+
 export type DateToolbarModule = z.infer<typeof DateToolbarModuleSchema>;
 export const DateToolbarModuleSchema = BaseTMSchema.extend({
   type: z.literal(ToolbarModuleType.Date),
@@ -78,6 +83,7 @@ export const ToolbarModuleSchema = z.union([
   PowerToolbarModuleSchema,
   SettingsToolbarModuleSchema,
   WorkspaceTMSchema,
+  TrayTMSchema,
 ]);
 
 type InnerPlaceholder = z.infer<typeof PlaceholderSchema>;

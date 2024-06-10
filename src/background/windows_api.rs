@@ -165,14 +165,24 @@ impl WindowsApi {
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
-        unsafe { ShowWindow(hwnd, command) }.ok()?;
+        let result = unsafe { ShowWindow(hwnd, command) }.ok();
+        if let Err(error) = result {
+            if !error.code().is_ok() {
+                return Err(error.into());
+            }
+        }
         Ok(())
     }
 
     pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
-        unsafe { ShowWindowAsync(hwnd, command) }.ok()?;
+        let result = unsafe { ShowWindowAsync(hwnd, command) }.ok();
+        if let Err(error) = result {
+            if !error.code().is_ok() {
+                return Err(error.into());
+            }
+        }
         Ok(())
     }
 
@@ -552,6 +562,27 @@ impl WindowsApi {
         }
         Ok(power_status)
     }
+}
+
+#[macro_export]
+macro_rules! pcstr {
+    ($s:literal) => {
+        windows::core::s!($s)
+    };
+}
+
+#[macro_export]
+macro_rules! pcwstr {
+    ($s:literal) => {
+        windows::core::w!($s)
+    };
+}
+
+#[macro_export]
+macro_rules! hstring {
+    ($s:literal) => {
+        windows::core::h!($s)
+    };
 }
 
 /*

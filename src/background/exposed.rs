@@ -13,6 +13,7 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 use crate::apps_config::*;
 use crate::error_handler::{log_if_error, Result};
 use crate::modules::power::infrastructure::*;
+use crate::modules::tray::infrastructure::*;
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
@@ -227,5 +228,9 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         bounce_handle,
         request_focus,
         complete_window_setup,
+        // tray icons
+        temp_get_by_event_tray_info,
+        on_click_tray_icon,
+        on_context_menu_tray_icon
     ])
 }

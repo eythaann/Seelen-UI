@@ -1,7 +1,7 @@
 pub mod brightness;
 
 use crate::{
-    error_handler::Result, modules::power::infrastructure::PowerManager, seelen::get_app_handle,
+    error_handler::Result, modules::{power::infrastructure::PowerManager, tray::infrastructure::register_tray_events}, seelen::get_app_handle,
 };
 
 pub fn register_system_events() -> Result<()> {
@@ -10,6 +10,10 @@ pub fn register_system_events() -> Result<()> {
     handle.once("register-power-events", move |_| {
         PowerManager::register_power_events().expect("Fail on registering system power events");
         PowerManager::emit_system_power_info().expect("Fail on emitting initial system power info");
+    });
+
+    handle.once("register-tray-events", move |_| {
+        register_tray_events().expect("Fail on registering tray events");
     });
 
     handle.once("register-wifi-events", move |_| {

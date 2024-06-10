@@ -1,4 +1,5 @@
 import { Placeholder, ToolbarModule, ToolbarModuleType } from '../../../utils/schemas/Placeholders';
+import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
 import { useSelector } from 'react-redux';
 
@@ -23,6 +24,8 @@ function componentByModule(module: ToolbarModule, idx: number) {
       return <SettingsModule key={idx} module={module} />;
     case ToolbarModuleType.Workspaces:
       return <WorkspacesModule key={idx} module={module} />;
+    case ToolbarModuleType.Tray:
+      return <TrayModule key={idx} module={module} />;
     default:
       return null;
   }
