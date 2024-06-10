@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.6.1]
 ### fix
 - tray icons not showing on startup
 - hidden trays if icon was not found (now will show a missing icon)
