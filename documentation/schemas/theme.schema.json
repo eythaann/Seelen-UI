@@ -97,6 +97,16 @@
               },
               "additionalProperties": false,
               "default": {}
+            },
+            "systemTray": {
+              "type": "object",
+              "properties": {
+                "bg": {
+                  "$ref": "#/properties/layers/properties/weg/properties/bg"
+                }
+              },
+              "additionalProperties": false,
+              "default": {}
             }
           },
           "additionalProperties": false,
