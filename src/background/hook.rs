@@ -145,8 +145,15 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
 
     match event {
         DesktopEvent::DesktopCreated(_)
-        | DesktopEvent::DesktopDestroyed { destroyed: _, fallback: _}
-        | DesktopEvent::DesktopMoved { desktop: _, old_index: _, new_index: _ }
+        | DesktopEvent::DesktopDestroyed {
+            destroyed: _,
+            fallback: _,
+        }
+        | DesktopEvent::DesktopMoved {
+            desktop: _,
+            old_index: _,
+            new_index: _,
+        }
         | DesktopEvent::DesktopNameChanged(_, _) => {
             let desktops = winvd::get_desktops()?;
             let mut desktops_names = Vec::new();
@@ -160,8 +167,10 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
             seelen.handle().emit("workspaces-changed", desktops_names)?;
         }
 
-        DesktopEvent::DesktopChanged { new, old: _} => {
-            seelen.handle().emit("active-workspace-changed", new.get_index()?)?;
+        DesktopEvent::DesktopChanged { new, old: _ } => {
+            seelen
+                .handle()
+                .emit("active-workspace-changed", new.get_index()?)?;
         }
         _ => {}
     }

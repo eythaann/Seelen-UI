@@ -18,7 +18,7 @@ export interface PowerStatus {
 
 export interface TrayInfo {
   label: string;
-  icon: string;
+  icon: string | null;
 }
 
 export interface RootState extends IRootState<FancyToolbar> {

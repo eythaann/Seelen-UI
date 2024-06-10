@@ -15,7 +15,6 @@ struct FancyToolbarState {
     height: Option<u32>,
 }
 
-
 #[derive(Debug, Deserialize, Default, Clone)]
 pub struct State {
     /** this is no snake case for a error in naming but is already published so FF */

@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- tray icons not showing on startup
+- hidden trays if icon was not found (now will show a missing icon)
+
 ## [1.6.0]
 ### features
 - add "Run as admin" option at context menu on Seelenweg. 

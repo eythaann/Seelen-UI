@@ -93,16 +93,20 @@ impl VirtualDesktopManager {
                     result.push(VirtualDesktop::from(desktop_id))
                 }
                 Ok(result)
-            },
+            }
             None => Err(eyre!("could not determine current virtual desktop").into()),
         }
     }
 
     pub fn get_by_window(hwnd: HWND) -> Result<VirtualDesktop> {
-        Ok(VirtualDesktop::from(winvd::get_desktop_by_window(hwnd)?.get_id()?))
+        Ok(VirtualDesktop::from(
+            winvd::get_desktop_by_window(hwnd)?.get_id()?,
+        ))
     }
 
     pub fn get_current_virtual_desktop() -> Result<VirtualDesktop> {
-        Ok(VirtualDesktop::from(winvd::get_current_desktop()?.get_id()?))
+        Ok(VirtualDesktop::from(
+            winvd::get_current_desktop()?.get_id()?,
+        ))
     }
 }

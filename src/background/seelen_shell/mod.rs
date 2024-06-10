@@ -10,4 +10,3 @@ impl SeelenShell {
         Self { handle }
     }
 }
-  

@@ -77,8 +77,8 @@ impl std::error::Error for AppError {
 pub type Result<T = (), E = AppError> = core::result::Result<T, E>;
 
 pub fn log_if_error<T, E>(result: Result<T, E>)
-where 
-    E: std::fmt::Debug
+where
+    E: std::fmt::Debug,
 {
     if let Err(err) = result {
         log::error!("{:?}", err);

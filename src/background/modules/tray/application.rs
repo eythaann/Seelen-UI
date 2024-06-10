@@ -7,7 +7,7 @@ use windows::Win32::{
     UI::{
         Accessibility::{
             CUIAutomation, IUIAutomation, IUIAutomationElement, IUIAutomationInvokePattern,
-            TreeScope_Descendants, UIA_InvokePatternId,
+            TreeScope_Descendants, TreeScope_Subtree, UIA_InvokePatternId,
         },
         WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_SHOW},
     },
@@ -21,11 +21,12 @@ use crate::{
     seelen::get_app_handle,
     seelen_weg::icon_extractor::extract_and_save_icon,
     utils::{is_windows_11_22h2, resolve_guid_path},
-    windows_api::WindowsApi,
+    windows_api::{AppBarData, AppBarDataState, WindowsApi},
 };
 
 use super::domain::{RegistryNotifyIcon, TrayIcon, TrayIconInfo};
 
+// force_tray_overflow_creation should be called before get_tray_handle
 pub fn get_tray_handle() -> HWND {
     unsafe {
         // https://learn.microsoft.com/en-us/answers/questions/1483214/win11-22h2-(10-0-22621)-cant-support-tb-buttoncount
@@ -51,6 +52,51 @@ pub fn get_tray_handle() -> HWND {
     }
 }
 
+pub fn force_tray_overflow_creation() -> Result<()> {
+    unsafe {
+        CoInitializeEx(None, COINIT_APARTMENTTHREADED)?;
+
+        let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
+
+        let tray_bar = AppBarData::new(tray_hwnd);
+        let tray_bar_state = tray_bar.state();
+        // This function will fail if taskbar is hidden
+        tray_bar.set_state(AppBarDataState::AlwaysOnTop);
+
+        let automation: IUIAutomation = CoCreateInstance(&CUIAutomation, None, CLSCTX_ALL)?;
+        let condition = automation.CreateTrueCondition()?;
+        let element: IUIAutomationElement = automation.ElementFromHandle(tray_hwnd)?;
+
+        let element_array = element.FindAll(TreeScope_Subtree, &condition)?;
+        for index in 0..element_array.Length().unwrap_or(0) {
+            let element = element_array.GetElement(index)?;
+            /* log::debug!(
+                "{:?} // {:?} // {:?}",
+                element.CurrentName(),
+                element.CurrentAutomationId(),
+                element.CurrentClassName()
+            ); */
+            if element.CurrentName()?.to_string() == "Show Hidden Icons"
+                && element.CurrentAutomationId()?.to_string() == "SystemTrayIcon"
+            {
+                let invoker = element
+                    .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
+                // open and close the tray to force the creation of the overflow list
+                invoker.Invoke()?;
+                invoker.Invoke()?;
+
+                tray_bar.set_state(tray_bar_state);
+                return Ok(());
+            }
+        }
+
+        CoUninitialize();
+        tray_bar.set_state(tray_bar_state);
+    }
+
+    Err("Failed to force tray overflow creation".into())
+}
+
 /*
 FOR TASKBAR ICONS:
 let rebar_hwnd = FindWindowExA(tray_hwnd, HWND(0), s!("ReBarWindow32"), None);
@@ -66,26 +112,32 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
         let automation: IUIAutomation = CoCreateInstance(&CUIAutomation, None, CLSCTX_ALL)?;
         let condition = automation.CreateTrueCondition()?;
 
-        let element: IUIAutomationElement = automation.ElementFromHandle(get_tray_handle())?;
+        let hwnd = get_tray_handle();
+        if hwnd == HWND(0) {
+            CoUninitialize();
+            return Ok(tray_elements);
+        }
 
-        let element_array = element.FindAll(TreeScope_Descendants, &condition);
-        if let Ok(element_array) = element_array {
-            for index in 0..element_array.Length().unwrap_or(0) {
-                if let Ok(element) = element_array.GetElement(index) {
-                    if element.CurrentAutomationId()? == "NotifyItemIcon" {
-                        let name = element.CurrentName()?.to_string();
-                        let registry = tray_from_registry
-                            .iter()
-                            .find(|t| t.initial_tooltip == name);
+        let element: IUIAutomationElement = automation.ElementFromHandle(hwnd)?;
+        let element_array = element.FindAll(TreeScope_Descendants, &condition)?;
 
-                        if let Some(registry) = registry {
-                            tray_elements.push(TrayIcon {
-                                ui_automation: element,
-                                registry: registry.clone(),
-                            });
-                        }
-                    }
-                }
+        for index in 0..element_array.Length().unwrap_or(0) {
+            let element = element_array.GetElement(index)?;
+            if element.CurrentAutomationId()? == "NotifyItemIcon" {
+                let name = element.CurrentName()?.to_string();
+
+                let registry = tray_from_registry.iter().find(|t| {
+                    let trimmed = name.trim();
+                    t.initial_tooltip == trimmed
+                        || t.executable_path
+                            .to_lowercase()
+                            .contains(&trimmed.to_lowercase())
+                });
+
+                tray_elements.push(TrayIcon {
+                    ui_automation: element,
+                    registry: registry.as_deref().clone().cloned(),
+                });
             }
         }
 
@@ -98,13 +150,7 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
 impl TrayIcon {
     pub fn info(&self) -> TrayIconInfo {
         TrayIconInfo {
-            icon: match self.icon() {
-                Ok(icon) => icon,
-                Err(e) => {
-                    log::error!("Failed to get tray icon: {}", e);
-                    String::from("")
-                }
-            },
+            icon: self.icon().ok(),
             label: self.name().unwrap_or("Unknown".to_string()),
         }
     }
@@ -114,8 +160,12 @@ impl TrayIcon {
     }
 
     pub fn icon(&self) -> Result<String> {
-        let path = &self.registry.executable_path;
-        let icon = extract_and_save_icon(&get_app_handle(), path)?;
+        if self.registry.is_none() {
+            return Err("Registry icon not found".into());
+        }
+
+        let path = self.registry.as_ref().unwrap().executable_path.clone();
+        let icon = extract_and_save_icon(&get_app_handle(), &path)?;
         Ok(icon
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")

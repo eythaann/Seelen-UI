@@ -1,7 +1,9 @@
 pub mod brightness;
 
 use crate::{
-    error_handler::Result, modules::{power::infrastructure::PowerManager, tray::infrastructure::register_tray_events}, seelen::get_app_handle,
+    error_handler::Result,
+    modules::{power::infrastructure::PowerManager, tray::infrastructure::register_tray_events},
+    seelen::get_app_handle,
 };
 
 pub fn register_system_events() -> Result<()> {

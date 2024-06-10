@@ -1,5 +1,7 @@
 use std::{
-    fs, io::{BufReader, Read}, net::{TcpListener, TcpStream}
+    fs,
+    io::{BufReader, Read},
+    net::{TcpListener, TcpStream},
 };
 
 use crate::{
@@ -42,7 +44,10 @@ impl Client {
         let port = socket_addr.port();
 
         log::info!("TCP server listening on 127.0.0.1:{}", port);
-        fs::write(std::env::temp_dir().join("slu_tcp_socket"), port.to_string())?;
+        fs::write(
+            std::env::temp_dir().join("slu_tcp_socket"),
+            port.to_string(),
+        )?;
 
         std::thread::Builder::new()
             .stack_size(Self::BUFFER_SIZE)

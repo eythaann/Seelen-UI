@@ -1,4 +1,4 @@
-import { getRootContainer, setWindowAsFullSize } from '../utils';
+import { getRootContainer } from '../utils';
 import { wrapConsole } from '../utils/ConsoleWrapper';
 import { registerDocumentEvents } from './events';
 import { ConfigProvider, theme } from 'antd';
@@ -6,6 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
+import { loadConstants } from './modules/shared/utils/infra';
 
 import { App } from './app';
 
@@ -18,10 +19,10 @@ async function Main() {
   wrapConsole();
   const container = getRootContainer();
 
-  setWindowAsFullSize();
-  registerDocumentEvents();
+  await loadConstants();
   await registerStoreEvents();
   await loadStore();
+  registerDocumentEvents();
 
   window.TOOLBAR_MODULES = {} as any;
 

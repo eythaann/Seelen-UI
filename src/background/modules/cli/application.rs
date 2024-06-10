@@ -110,7 +110,9 @@ pub fn loader_command() -> Command {
     Command::new("load")
         .about("Opens the Seelen Files or resolve URI.")
         .subcommands([
-            Command::new("file").about("Load a .slu file.").arg(arg.clone().id("path")),
+            Command::new("file")
+                .about("Load a .slu file.")
+                .arg(arg.clone().id("path")),
             Command::new("uri").about("Load a URI.").arg(arg.id("uri")),
         ])
 }

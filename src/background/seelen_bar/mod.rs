@@ -168,7 +168,6 @@ impl FancyToolbar {
         Ok((window, hitbox))
     }
 
-
     fn on_store_events_ready(_: tauri::Event) {
         std::thread::spawn(|| -> Result<()> {
             let handler = get_app_handle();

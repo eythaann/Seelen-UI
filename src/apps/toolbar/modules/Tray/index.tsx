@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
 import { Item } from '../item/infra';
 import { useAppBlur } from '../shared/hooks/infra';
+import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';
 
@@ -58,7 +59,7 @@ export function TrayModule({ module }: Props) {
                 onContextMenu={() => invoke('on_context_menu_tray_icon', { idx })}
               >
                 <div className="tray-item-icon">
-                  <img src={convertFileSrc(tray.icon)} />
+                  <img src={convertFileSrc(tray.icon ? tray.icon : LAZY_CONSTANTS.MISSING_ICON_PATH)} />
                 </div>
                 <div className="tray-item-label">{tray.label}</div>
               </li>

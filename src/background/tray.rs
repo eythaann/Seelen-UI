@@ -30,7 +30,10 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
         .build()?;
 
     TrayIconBuilder::new()
-        .icon(Image::from_path(app.path().resolve("static/icons/32x32.png", BaseDirectory::Resource)?)?)
+        .icon(Image::from_path(app.path().resolve(
+            "static/icons/32x32.png",
+            BaseDirectory::Resource,
+        )?)?)
         .tooltip("Seelen UI")
         .menu(&menu)
         .on_menu_event(
@@ -38,8 +41,7 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
                 "settings" => {
                     log_if_error(SEELEN.lock().show_settings());
                 }
-                "pause" => {
-                }
+                "pause" => {}
                 "restart" => app.restart(),
                 "quit" => app.exit(0),
                 _ => (),

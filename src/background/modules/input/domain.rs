@@ -10,10 +10,7 @@ pub struct Point(POINT);
 impl Point {
     /// Creates a new position.
     pub fn new(x: i32, y: i32) -> Self {
-        Self(POINT {
-            x,
-            y
-        })
+        Self(POINT { x, y })
     }
 
     /// Retrieves the x position.
@@ -29,7 +26,10 @@ impl Point {
 
 impl Debug for Point {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        f.debug_struct("Point").field("x", &self.0.x).field("y", &self.0.y).finish()
+        f.debug_struct("Point")
+            .field("x", &self.0.x)
+            .field("y", &self.0.y)
+            .finish()
     }
 }
 
