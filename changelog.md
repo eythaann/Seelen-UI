@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.6.0]
 ### features
 - add "Run as admin" option at context menu on Seelenweg. 
 - allow receive commands using TCP connections.
