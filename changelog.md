@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- only show a progress bar on update and not the complete installer GUI.
+
 ## [1.6.2]
 ### features
 - now `batteries` and `battery` (same as: `batteries[0]`) are available on the scope of power toolbar module.
