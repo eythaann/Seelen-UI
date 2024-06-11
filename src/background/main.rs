@@ -30,7 +30,7 @@ use modules::{
         application::{handle_cli_info, SEELEN_COMMAND_LINE},
         infrastructure::Client,
     },
-    tray::application::force_tray_overflow_creation,
+    tray::application::try_force_tray_overflow_creation,
 };
 use plugins::register_plugins;
 use seelen::SEELEN;
@@ -100,7 +100,7 @@ fn main() -> Result<()> {
         .setup(move |app| {
             log::info!("───────────────────── Starting Seelen ─────────────────────");
             Client::listen_tcp()?;
-            force_tray_overflow_creation()?;
+            log_if_error(try_force_tray_overflow_creation());
 
             let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
             seelen.init(app.handle().clone())?;

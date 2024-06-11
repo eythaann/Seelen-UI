@@ -52,7 +52,7 @@ pub fn get_tray_handle() -> HWND {
     }
 }
 
-pub fn force_tray_overflow_creation() -> Result<()> {
+pub fn try_force_tray_overflow_creation() -> Result<()> {
     unsafe {
         let tray_overflow_hwnd = FindWindowA(None, pcstr!("System tray overflow window."));
         if tray_overflow_hwnd.0 != 0 {

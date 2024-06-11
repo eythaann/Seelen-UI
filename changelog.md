@@ -4,6 +4,9 @@
 ### enhancements
 - only show a progress bar on update and not the complete installer GUI.
 
+### fix
+- main app no running if the forced creation of tray overflow fails.
+
 ## [1.6.2]
 ### features
 - now `batteries` and `battery` (same as: `batteries[0]`) are available on the scope of power toolbar module.
