@@ -14,7 +14,7 @@ use crate::apps_config::*;
 use crate::error_handler::{log_if_error, Result};
 use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
-use crate::seelen::{Seelen, SEELEN};
+use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
@@ -95,11 +95,16 @@ fn open_file(path: String) {
 
 #[command]
 fn run_as_admin(path: String) {
-    log_if_error(
-        Command::new("powershell")
-            .args(["-Command", &format!("Start-Process '{}' -Verb runAs", path)])
-            .status(),
-    );
+    tauri::async_runtime::spawn(async move {
+        let app = get_app_handle();
+        log_if_error(
+            app.shell()
+                .command("powershell")
+                .args(["-Command", &format!("Start-Process '{}' -Verb runAs", path)])
+                .status()
+                .await,
+        );
+    });
 }
 
 #[command]
