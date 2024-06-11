@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.6.2]
 ### features
 - now `batteries` and `battery` (same as: `batteries[0]`) are available on the scope of power toolbar module.
 
