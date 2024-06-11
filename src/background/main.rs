@@ -70,6 +70,25 @@ fn register_panic_hook() {
     }));
 }
 
+fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
+    match event {
+        tauri::RunEvent::ExitRequested { api, code, .. } => {
+            // prevent close background on webview windows closing
+            if code.is_none() {
+                api.prevent_exit();
+            }
+        }
+        tauri::RunEvent::Exit => {
+            let seelen = SEELEN.lock();
+            if seelen.initialized {
+                log::info!("───────────────────── Exiting Seelen ─────────────────────");
+                log_if_error(seelen.stop());
+            }
+        }
+        _ => {}
+    }
+}
+
 fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
@@ -122,22 +141,6 @@ fn main() -> Result<()> {
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
-    app.run(|_, event| match event {
-        tauri::RunEvent::ExitRequested { api, code, .. } => {
-            // prevent close background on webview windows closing
-            if code.is_none() {
-                api.prevent_exit();
-            }
-        }
-        tauri::RunEvent::Exit => {
-            let seelen = SEELEN.lock();
-            if seelen.initialized {
-                log::info!("───────────────────── Exiting Seelen ─────────────────────");
-                log_if_error(seelen.stop());
-            }
-        }
-        _ => {}
-    });
-
+    app.run(app_callback);
     Ok(())
 }
