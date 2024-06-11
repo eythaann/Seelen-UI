@@ -35,6 +35,7 @@ define_app_errors!(
     WinVD(winvd::Error);
     TryFromInt(std::num::TryFromIntError);
     Image(image::ImageError);
+    Battery(battery::Error);
 );
 
 impl std::fmt::Display for AppError {

@@ -21,6 +21,7 @@ const initialState: RootState = {
     BatteryLifeTime: -1,
     BatteryFullLifeTime: -1,
   },
+  batteries: [],
   workspaces: [],
   activeWorkspace: 0,
   systemTray: [],

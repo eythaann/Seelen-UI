@@ -53,6 +53,7 @@ regex = "1.10.4"
 getset = "0.1.2"
 phf = "0.11.2"
 sysinfo = "0.30.12"
+battery = "0.7.8"
 
 [dependencies.windows]
 version = "0.52.0"

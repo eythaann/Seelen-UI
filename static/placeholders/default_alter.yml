@@ -1,7 +1,7 @@
 info:
-  displayName: Alter
+  displayName: Default-Alter
   author: eythaann,
-  description: Alternative to the Default layout.
+  description: Alternative to the default layout with workspaces.
 
 left:
   - type: text
@@ -47,24 +47,25 @@ right:
     tooltip: '"Sound"'
 
   - type: power
-    tooltip: concat(string(power.BatteryLifePercent), "% remaining")
-    template: >- 
+    tooltip: >-
+      concat(string(battery.percentage), "% remaining", battery.smartCharging ? " - Smart Charge" : "")
+    template: >-
       concat(
+        string(compareText(battery.state, "charging") ? "[ICON:MdOutlineElectricBolt:12] " : ""),
+        string(battery.smartCharging ? "[ICON:FaHeart:12] " : ""),
         string(
-          power.BatteryFlag & 8
-          ? icon.PiBatteryChargingFill
-          : power.BatteryLifePercent > 90
+          battery.percentage > 90
           ? icon.PiBatteryFullFill
-          : power.BatteryLifePercent > 66
+          : battery.percentage > 66
           ? icon.PiBatteryHighFill
-          : power.BatteryLifePercent > 33
+          : battery.percentage > 33
           ? icon.PiBatteryMediumFill
-          : power.BatteryLifePercent > 5
+          : battery.percentage > 5
           ? icon.PiBatteryLowFill
           : icon.PiBatteryWarning
-        ), 
+        ),
         "  ",
-        string(power.BatteryLifePercent),
+        string(battery.percentage),
         "%"
       )
     onClick: open -> "ms-settings:powersleep"

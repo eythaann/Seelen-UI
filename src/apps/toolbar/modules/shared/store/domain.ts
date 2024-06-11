@@ -16,6 +16,10 @@ export interface PowerStatus {
   BatteryFullLifeTime: number;
 }
 
+export interface Battery {
+  percent: number;
+}
+
 export interface TrayInfo {
   label: string;
   icon: string | null;
@@ -26,6 +30,7 @@ export interface RootState extends IRootState<FancyToolbar> {
   placeholder: Placeholder | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
+  batteries: Battery[];
   workspaces: string[];
   activeWorkspace: number;
   systemTray: TrayInfo[];

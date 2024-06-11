@@ -16,9 +16,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::{log_if_error, Result},
-    seelen::get_app_handle,
-    windows_api::WindowsApi,
+    error_handler::{log_if_error, Result}, modules::power::domain::Battery, seelen::get_app_handle, windows_api::WindowsApi
 };
 
 use super::domain::PowerStatus;
@@ -94,8 +92,22 @@ impl PowerManager {
 
     pub fn emit_system_power_info() -> Result<()> {
         let handle = get_app_handle();
+
         let power_status: PowerStatus = WindowsApi::get_system_power_status()?.into();
         handle.emit("power-status", power_status)?;
+
+        let mut batteries: Vec<Battery> = Vec::new();
+        let manager = battery::Manager::new()?;
+        for battery in manager.batteries()? {
+            if let Ok(battery) = battery {
+                batteries.push(battery.try_into()?);
+            }
+        }
+
+        //println!("{:?}%", (battery.state_of_charge().value * 100.0).round());
+
+        handle.emit("batteries-status", batteries)?;
+
         Ok(())
     }
 }

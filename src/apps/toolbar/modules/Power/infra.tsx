@@ -13,6 +13,7 @@ interface Props {
 
 export function PowerModule({ module }: Props) {
   const power = useSelector(Selectors.powerStatus);
+  const batteries = useSelector(Selectors.batteries);
 
   useEffect(() => {
     if (!window.TOOLBAR_MODULES[ToolbarModuleType.Power]) {
@@ -21,5 +22,18 @@ export function PowerModule({ module }: Props) {
     }
   }, []);
 
-  return <Item extraVars={{ power }} module={module} />;
+  if (!batteries.length) {
+    return null;
+  }
+
+  return (
+    <Item
+      extraVars={{
+        power,
+        batteries,
+        battery: batteries[0],
+      }}
+      module={module}
+    />
+  );
 }

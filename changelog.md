@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- now `batteries` and `battery` (same as: `batteries[0]`) are available on the scope of power toolbar module.
+
+### enhancements
+- add battery crate to handle batteries info directly from their drivers.
+- show if is smart charging.
+- now battery module wont be shown if batteries are not found.
+
+### fix
+- battery showing 255%.
+
 ## [1.6.1]
 ### fix
 - tray icons not showing on startup

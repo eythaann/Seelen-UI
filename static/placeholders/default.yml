@@ -2,7 +2,6 @@ info:
   displayName: Default
   author: eythaann,
   description: Default toolbar layout good for many devices.
-
 left:
   - type: text
     template: concat("@", env.USERNAME)
@@ -25,7 +24,7 @@ left:
 center:
   - type: date
     each: minute
-    format: MMM Do, HH:mm
+    format: ddd D MMM, hh:mm A
     template: date
 
 right:
@@ -49,19 +48,27 @@ right:
     tooltip: '"Sound"'
 
   - type: power
-    tooltip: concat(string(power.BatteryLifePercent), "% remaining")
-    template: >
-      power.BatteryFlag & 8
-      ? icon.PiBatteryChargingFill
-      : power.BatteryLifePercent > 90
-      ? icon.PiBatteryFullFill
-      : power.BatteryLifePercent > 66
-      ? icon.PiBatteryHighFill
-      : power.BatteryLifePercent > 33
-      ? icon.PiBatteryMediumFill
-      : power.BatteryLifePercent > 5
-      ? icon.PiBatteryLowFill
-      : icon.PiBatteryWarning
+    tooltip: >-
+      concat(string(battery.percentage), "% remaining", battery.smartCharging ? " - Smart Charge" : "")
+    template: >-
+      concat(
+        string(compareText(battery.state, "charging") ? "[ICON:MdOutlineElectricBolt:12] " : ""),
+        string(battery.smartCharging ? "[ICON:FaHeart:12] " : ""),
+        string(
+          battery.percentage > 90
+          ? icon.PiBatteryFullFill
+          : battery.percentage > 66
+          ? icon.PiBatteryHighFill
+          : battery.percentage > 33
+          ? icon.PiBatteryMediumFill
+          : battery.percentage > 5
+          ? icon.PiBatteryLowFill
+          : icon.PiBatteryWarning
+        ),
+        "  ",
+        string(battery.percentage),
+        "%"
+      )
     onClick: open -> "ms-settings:powersleep"
 
   - type: settings

@@ -8,7 +8,7 @@ import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { RootActions, RootSlice } from './app';
 
-import { ActiveApp, PowerStatus, TrayInfo } from './domain';
+import { ActiveApp, Battery, PowerStatus, TrayInfo } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -26,7 +26,13 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<PowerStatus>('power-status', (event) => {
+    console.log(event.payload);
     store.dispatch(RootActions.setPowerStatus(event.payload));
+  });
+
+  await listenGlobal<Battery[]>('batteries-status', (event) => {
+    console.log(event.payload);
+    store.dispatch(RootActions.setBatteries(event.payload));
   });
 
   await listenGlobal<string[]>('workspaces-changed', (event) => {
