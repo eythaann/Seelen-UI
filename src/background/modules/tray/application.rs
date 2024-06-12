@@ -63,7 +63,7 @@ pub fn try_force_tray_overflow_creation() -> Result<()> {
 
         let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
 
-        let tray_bar = AppBarData::new(tray_hwnd);
+        let tray_bar = AppBarData::from_handle(tray_hwnd);
         let tray_bar_state = tray_bar.state();
         // This function will fail if taskbar is hidden
         tray_bar.set_state(AppBarDataState::AlwaysOnTop);

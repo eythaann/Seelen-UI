@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### refactor
+- refactor on window_api and AppBar structures.
+
 ## [1.6.3]
 ### enhancements
 - only show a progress bar on update and not the complete installer GUI.

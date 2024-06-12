@@ -13,12 +13,9 @@ use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::{
-        Shell::{SHAppBarMessage, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA},
-        WindowsAndMessaging::{
-            EnumWindows, GetParent, ShowWindow, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE,
-            SW_HIDE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
-        },
+    UI::WindowsAndMessaging::{
+        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
+        SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -26,7 +23,7 @@ use crate::{
     error_handler::Result,
     seelen::{get_app_handle, SEELEN},
     utils::are_overlaped,
-    windows_api::WindowsApi,
+    windows_api::{AppBarData, AppBarDataState, WindowsApi},
 };
 
 lazy_static! {
@@ -338,27 +335,22 @@ impl SeelenWeg {
     }
 
     pub fn hide_taskbar(hide: bool) -> Result<()> {
-        let lparam: LPARAM;
+        let state: AppBarDataState;
         let cmdshow: SHOW_WINDOW_CMD;
 
         if hide {
-            lparam = LPARAM(ABS_AUTOHIDE as isize);
+            state = AppBarDataState::AutoHide;
             cmdshow = SW_HIDE;
         } else {
-            lparam = LPARAM(ABS_ALWAYSONTOP as isize);
+            state = AppBarDataState::AlwaysOnTop;
             cmdshow = SW_SHOWNORMAL;
         }
 
         let handles = get_taskbars_handles()?;
         for handle in handles {
-            let mut ap_bar: APPBARDATA = unsafe { std::mem::zeroed() };
-            ap_bar.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-            ap_bar.hWnd = handle;
-            ap_bar.lParam = lparam;
-            unsafe {
-                SHAppBarMessage(ABM_SETSTATE, &mut ap_bar as *mut _);
-                ShowWindow(handle, cmdshow);
-            }
+            let pdata = AppBarData::from_handle(handle);
+            pdata.set_state(state);
+            WindowsApi::show_window(handle, cmdshow)?;
         }
         Ok(())
     }

@@ -1,3 +1,5 @@
+mod app_bar;
+
 use std::{ffi::c_void, thread::sleep, time::Duration};
 
 use color_eyre::eyre::eyre;
@@ -43,9 +45,8 @@ use windows::{
         UI::{
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
-                IShellItem2, IVirtualDesktopManager, SHAppBarMessage, SHCreateItemFromParsingName,
-                VirtualDesktopManager, ABM_GETSTATE, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE,
-                APPBARDATA, SIGDN_NORMALDISPLAY,
+                IShellItem2, IVirtualDesktopManager, SHCreateItemFromParsingName,
+                VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
@@ -66,6 +67,27 @@ use crate::{
     hook::HOOK_MANAGER,
     winevent::WinEvent,
 };
+
+#[macro_export]
+macro_rules! pcstr {
+    ($s:literal) => {
+        windows::core::s!($s)
+    };
+}
+
+#[macro_export]
+macro_rules! pcwstr {
+    ($s:literal) => {
+        windows::core::w!($s)
+    };
+}
+
+#[macro_export]
+macro_rules! hstring {
+    ($s:literal) => {
+        windows::core::h!($s)
+    };
+}
 
 pub struct WindowsApi {}
 impl WindowsApi {
@@ -565,69 +587,7 @@ impl WindowsApi {
     }
 }
 
-#[macro_export]
-macro_rules! pcstr {
-    ($s:literal) => {
-        windows::core::s!($s)
-    };
-}
-
-#[macro_export]
-macro_rules! pcwstr {
-    ($s:literal) => {
-        windows::core::w!($s)
-    };
-}
-
-#[macro_export]
-macro_rules! hstring {
-    ($s:literal) => {
-        windows::core::h!($s)
-    };
-}
-
-pub enum AppBarDataState {
-    AlwaysOnTop,
-    AutoHide,
-    Unknown,
-}
-
-impl Into<LPARAM> for AppBarDataState {
-    fn into(self) -> LPARAM {
-        LPARAM(self as u32 as isize)
-    }
-}
-
-impl From<u32> for AppBarDataState {
-    fn from(state: u32) -> Self {
-        match state {
-            ABS_ALWAYSONTOP => AppBarDataState::AlwaysOnTop,
-            ABS_AUTOHIDE => AppBarDataState::AutoHide,
-            _ => AppBarDataState::Unknown,
-        }
-    }
-}
-
-pub struct AppBarData(APPBARDATA);
-impl AppBarData {
-    pub fn new(hwnd: HWND) -> Self {
-        let mut app_bar = APPBARDATA::default();
-        app_bar.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-        app_bar.hWnd = hwnd;
-        Self(app_bar)
-    }
-
-    pub fn state(&self) -> AppBarDataState {
-        let mut data = self.0.clone();
-        AppBarDataState::from(unsafe { SHAppBarMessage(ABM_GETSTATE, &mut data) as u32 })
-    }
-
-    pub fn set_state(&self, state: AppBarDataState) {
-        let mut data = self.0.clone();
-        data.lParam = state.into();
-        unsafe { SHAppBarMessage(ABM_SETSTATE, &mut data) };
-    }
-}
+pub use app_bar::*;
 
 /*
 may be this is useful later

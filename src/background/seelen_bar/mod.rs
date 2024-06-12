@@ -4,17 +4,14 @@ pub mod hook;
 use crate::{
     error_handler::Result,
     seelen::{get_app_handle, APP_STATE},
-    windows_api::WindowsApi,
+    windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::HWND,
     Graphics::Gdi::HMONITOR,
-    UI::{
-        Shell::{SHAppBarMessage, ABE_TOP, ABM_NEW, ABM_SETPOS, APPBARDATA},
-        WindowsAndMessaging::{HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
-    },
+    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
 };
 
 pub struct FancyToolbar {
@@ -98,26 +95,24 @@ impl FancyToolbar {
         WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
         WindowsApi::set_position(hitbox_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
 
-        let mut rect = rc_monitor.clone();
-        rect.bottom = rect.bottom - 1; // avoid be matched as a fullscreen app;
+        {
+            let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+            let toolbar_height = APP_STATE.lock().get_toolbar_height();
 
-        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
-        let toolbar_height = APP_STATE.lock().get_toolbar_height();
+            let mut abd = AppBarData::from_handle(hitbox_hwnd);
 
-        let mut abd = APPBARDATA::default();
-        abd.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-        abd.hWnd = hitbox_hwnd;
-        abd.uEdge = ABE_TOP;
+            let mut abd_rect = rc_monitor.clone();
+            abd_rect.bottom = abd_rect.top + (toolbar_height as f32 * dpi) as i32;
 
-        abd.rc = rc_monitor.clone();
-        abd.rc.bottom = abd.rc.top + (toolbar_height as f32 * dpi) as i32;
+            abd.set_edge(AppBarDataEdge::Top);
+            abd.set_rect(abd_rect.clone());
 
-        unsafe {
-            SHAppBarMessage(ABM_NEW, &mut abd);
-            SHAppBarMessage(ABM_SETPOS, &mut abd);
+            abd.register_as_new_bar();
+            WindowsApi::set_position(hitbox_hwnd, None, &abd_rect, SWP_ASYNCWINDOWPOS)?;
         }
 
-        WindowsApi::set_position(hitbox_hwnd, None, &abd.rc, SWP_ASYNCWINDOWPOS)?;
+        let mut rect = rc_monitor.clone();
+        rect.bottom = rect.bottom - 1; // avoid be matched as a fullscreen app;
         WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
