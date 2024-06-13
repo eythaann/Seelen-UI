@@ -1,15 +1,10 @@
-use windows::
-    Win32::{
-        Foundation::{HWND, LPARAM, RECT},
-        UI::
-            Shell::{
-                SHAppBarMessage, ABE_BOTTOM, ABE_LEFT, ABE_RIGHT, ABE_TOP, ABM_GETSTATE,
-                ABM_NEW, ABM_SETPOS, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA,
-            }
-        ,
-    }
-;
-
+use windows::Win32::{
+    Foundation::{HWND, LPARAM, RECT},
+    UI::Shell::{
+        SHAppBarMessage, ABE_BOTTOM, ABE_LEFT, ABE_RIGHT, ABE_TOP, ABM_GETSTATE, ABM_NEW,
+        ABM_SETPOS, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA,
+    },
+};
 
 #[allow(dead_code)]
 pub enum AppBarDataEdge {

@@ -92,11 +92,9 @@ impl PowerManager {
 
         // TODO search for a better way to do this, WM_POWERBROADCAST only register status events
         // like charging, discharging, battery low, etc.
-        std::thread::spawn(move || {
-            loop {
-                log_if_error(PowerManager::emit_system_power_info());
-                std::thread::sleep(std::time::Duration::from_secs(60));
-            }
+        std::thread::spawn(move || loop {
+            log_if_error(PowerManager::emit_system_power_info());
+            std::thread::sleep(std::time::Duration::from_secs(60));
         });
 
         Ok(())
