@@ -52,7 +52,7 @@ right:
       concat(string(battery.percentage), "% remaining", battery.smartCharging ? " - Smart Charge" : "")
     template: >-
       concat(
-        string(compareText(battery.state, "charging") ? "[ICON:MdOutlineElectricBolt:12] " : ""),
+        string(equalText(battery.state, "charging") ? "[ICON:MdOutlineElectricBolt:12] " : ""),
         string(battery.smartCharging ? "[ICON:FaHeart:12] " : ""),
         string(
           battery.percentage > 90

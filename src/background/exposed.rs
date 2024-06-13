@@ -217,7 +217,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         set_main_monitor_brightness,
         // Power
         log_out,
-        sleep,
+        suspend,
         restart,
         shutdown,
         // AHK

@@ -104,7 +104,7 @@ export function SettingsModule(props: Props) {
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title="Sleep">
-              <button className="fast-settings-item-button" onClick={() => invoke('sleep')}>
+              <button className="fast-settings-item-button" onClick={() => invoke('suspend')}>
                 <Icon iconName="BiMoon" />
               </button>
             </Tooltip>

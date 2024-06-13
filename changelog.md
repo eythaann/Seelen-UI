@@ -7,6 +7,8 @@
 ### fix
 - no showing promoted (pinned on taskbar) tray icons.
 - toolbar no initialized correctly sometimes, now will retry if fails.
+- battery no updating level.
+- battery showing as always charging on default toolbar templates.
 
 ### refactor
 - refactor on window_api and AppBar structures.
