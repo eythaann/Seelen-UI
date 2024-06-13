@@ -9,6 +9,7 @@
 - toolbar no initialized correctly sometimes, now will retry if fails.
 - battery no updating level.
 - battery showing as always charging on default toolbar templates.
+- tray overflow module no working on different languages.
 
 ### refactor
 - refactor on window_api and AppBar structures.

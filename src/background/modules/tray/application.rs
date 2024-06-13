@@ -23,7 +23,7 @@ use crate::{
     pcstr,
     seelen::get_app_handle,
     seelen_weg::icon_extractor::extract_and_save_icon,
-    utils::{is_windows_11_22h2, resolve_guid_path},
+    utils::{is_windows_11_22h2, resolve_guid_path, sleep_millis},
     windows_api::{AppBarData, AppBarDataState, WindowsApi},
 };
 
@@ -50,7 +50,8 @@ pub fn get_tray_overflow_handle() -> HWND {
     unsafe {
         // https://learn.microsoft.com/en-us/answers/questions/1483214/win11-22h2-(10-0-22621)-cant-support-tb-buttoncount
         if is_windows_11_22h2() {
-            let tray_overflow_hwnd = FindWindowA(None, pcstr!("System tray overflow window."));
+            let tray_overflow_hwnd =
+                FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
             let tray_overflow_list_hwnd = FindWindowExA(
                 tray_overflow_hwnd,
                 HWND(0),
@@ -73,7 +74,7 @@ pub fn get_tray_overflow_handle() -> HWND {
 
 pub fn try_force_tray_overflow_creation() -> Result<()> {
     unsafe {
-        let tray_overflow_hwnd = FindWindowA(None, pcstr!("System tray overflow window."));
+        let tray_overflow_hwnd = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
         if tray_overflow_hwnd.0 != 0 {
             return Ok(());
         }
@@ -101,6 +102,7 @@ pub fn try_force_tray_overflow_creation() -> Result<()> {
                     .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
                 // open and close the tray to force the creation of the overflow list
                 invoker.Invoke()?;
+                sleep_millis(10);
                 invoker.Invoke()?;
 
                 tray_bar.set_state(tray_bar_state);
