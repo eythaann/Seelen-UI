@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no showing promoted (pinned on taskbar) tray icons.
+
 ### refactor
 - refactor on window_api and AppBar structures.
 

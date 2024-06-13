@@ -16,5 +16,4 @@ pub struct TrayIcon {
 pub struct RegistryNotifyIcon {
     pub executable_path: String,
     pub initial_tooltip: String,
-    pub is_promoted: bool,
 }

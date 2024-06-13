@@ -1,13 +1,16 @@
 use itertools::Itertools;
 use windows::Win32::{
     Foundation::{HWND, POINT, RECT},
-    System::Com::{
-        CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
+    System::{
+        Com::{
+            CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
+        },
+        Registry,
     },
     UI::{
         Accessibility::{
-            CUIAutomation, IUIAutomation, IUIAutomationElement, IUIAutomationInvokePattern,
-            TreeScope_Descendants, TreeScope_Subtree, UIA_InvokePatternId,
+            CUIAutomation, IUIAutomation, IUIAutomationCondition, IUIAutomationElement,
+            IUIAutomationInvokePattern, TreeScope, TreeScope_Subtree, UIA_InvokePatternId,
         },
         WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_SHOW},
     },
@@ -26,8 +29,24 @@ use crate::{
 
 use super::domain::{RegistryNotifyIcon, TrayIcon, TrayIconInfo};
 
+pub fn get_sub_tree(
+    element: &IUIAutomationElement,
+    condition: &IUIAutomationCondition,
+    scope: TreeScope,
+) -> Result<Vec<IUIAutomationElement>> {
+    let mut elements = Vec::new();
+    unsafe {
+        let element_array = element.FindAll(scope, condition)?;
+        for index in 0..element_array.Length()? {
+            let element = element_array.GetElement(index)?;
+            elements.push(element);
+        }
+    }
+    Ok(elements)
+}
+
 // force_tray_overflow_creation should be called before get_tray_handle
-pub fn get_tray_handle() -> HWND {
+pub fn get_tray_overflow_handle() -> HWND {
     unsafe {
         // https://learn.microsoft.com/en-us/answers/questions/1483214/win11-22h2-(10-0-22621)-cant-support-tb-buttoncount
         if is_windows_11_22h2() {
@@ -75,12 +94,6 @@ pub fn try_force_tray_overflow_creation() -> Result<()> {
         let element_array = element.FindAll(TreeScope_Subtree, &condition)?;
         for index in 0..element_array.Length().unwrap_or(0) {
             let element = element_array.GetElement(index)?;
-            /* log::debug!(
-                "{:?} // {:?} // {:?}",
-                element.CurrentName(),
-                element.CurrentAutomationId(),
-                element.CurrentClassName()
-            ); */
             if element.CurrentName()?.to_string() == "Show Hidden Icons"
                 && element.CurrentAutomationId()?.to_string() == "SystemTrayIcon"
             {
@@ -107,6 +120,7 @@ FOR TASKBAR ICONS:
 let rebar_hwnd = FindWindowExA(tray_hwnd, HWND(0), s!("ReBarWindow32"), None);
 let task_hwnd = FindWindowExA(rebar_hwnd, HWND(0), s!("MSTaskSwWClass"), None);
 let task_list_hwnd = FindWindowExA(task_hwnd, HWND(0), s!("MSTaskListWClass"), None); */
+
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
     let mut tray_elements = Vec::new();
     let tray_from_registry = TrayIcon::enum_from_registry()?;
@@ -117,17 +131,28 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
         let automation: IUIAutomation = CoCreateInstance(&CUIAutomation, None, CLSCTX_ALL)?;
         let condition = automation.CreateTrueCondition()?;
 
-        let hwnd = get_tray_handle();
-        if hwnd == HWND(0) {
-            CoUninitialize();
-            return Ok(tray_elements);
+        let mut children = Vec::new();
+        /* let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
+        if tray_hwnd.0 != 0 {
+            let element: IUIAutomationElement = automation.ElementFromHandle(tray_hwnd)?;
+            children.extend(get_sub_tree(&element, &condition, TreeScope_Subtree)?);
+
+            for element in &children {
+                println!(
+                    "{:?} // {:?}",
+                    element.CurrentName()?,
+                    element.CurrentAutomationId()?
+                );
+            }
+        } */
+
+        let tray_overflow = get_tray_overflow_handle();
+        if tray_overflow.0 != 0 {
+            let element: IUIAutomationElement = automation.ElementFromHandle(tray_overflow)?;
+            children.extend(get_sub_tree(&element, &condition, TreeScope_Subtree)?);
         }
 
-        let element: IUIAutomationElement = automation.ElementFromHandle(hwnd)?;
-        let element_array = element.FindAll(TreeScope_Descendants, &condition)?;
-
-        for index in 0..element_array.Length().unwrap_or(0) {
-            let element = element_array.GetElement(index)?;
+        for element in children {
             if element.CurrentAutomationId()? == "NotifyItemIcon" {
                 let name = element.CurrentName()?.to_string();
 
@@ -216,6 +241,7 @@ impl TrayIcon {
         let settings = hkcr.open_subkey("Control Panel\\NotifyIconSettings")?;
         let list = settings.get_raw_value("UIOrderList")?;
 
+        // the order in this list is the order in which the icons will be displayed on the Win Taskbar and Win Tray Overflow
         let ids = list
             .bytes
             .chunks_exact(8)
@@ -235,7 +261,15 @@ impl TrayIcon {
         });
 
         for id in ids {
-            let key = settings.open_subkey(id.to_string())?;
+            let key =
+                settings.open_subkey_with_flags(id.to_string(), Registry::KEY_ALL_ACCESS.0)?;
+
+            let promoted: u32 = key.get_value("IsPromoted").unwrap_or_default();
+            if promoted == 1 && WindowsApi::is_elevated()? {
+                // avoid show tray icons directly on taskbar
+                // all icons should be in the tray overflow window
+                key.set_value("IsPromoted", &0u32)?;
+            }
 
             if key.get_raw_value("IconGuid").is_ok() {
                 // TODO: Handle Tray Icons like USB devices, Security tray, etc
@@ -248,12 +282,9 @@ impl TrayIcon {
 
             let is_executing = processes_string.contains(&executable_path.to_lowercase());
             if is_executing {
-                let promoted: u32 = key.get_value("IsPromoted").unwrap_or_default();
-
                 registers.push(RegistryNotifyIcon {
                     executable_path,
                     initial_tooltip: key.get_value("InitialTooltip").unwrap_or_default(),
-                    is_promoted: promoted != 0,
                 })
             }
         }
