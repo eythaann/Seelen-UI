@@ -84,9 +84,11 @@
         border-radius: 8px;
         padding: 8px;
         gap: 6px;
+        transition: background-color 200ms linear;
 
         &:hover {
-          background-color: var(--color-blue-400);
+          background-color: var(--config-accent-color);
+          transition: background-color 100ms ease-in;
         }
 
         .tray-item-icon {

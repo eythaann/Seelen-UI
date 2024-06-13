@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- follow user accent color for tray list and windows borders
+
 ### fix
 - no showing promoted (pinned on taskbar) tray icons.
 
