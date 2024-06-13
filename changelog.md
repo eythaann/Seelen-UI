@@ -6,6 +6,7 @@
 
 ### fix
 - no showing promoted (pinned on taskbar) tray icons.
+- toolbar no initialized correctly sometimes, now will retry if fails.
 
 ### refactor
 - refactor on window_api and AppBar structures.

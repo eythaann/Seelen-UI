@@ -3,7 +3,7 @@ use getset::{Getters, MutGetters};
 
 use crate::{
     error_handler::Result, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager, state::State, windows_api::WindowsApi,
+    seelen_wm::WindowManager, state::State, utils::sleep_millis, windows_api::WindowsApi,
 };
 
 use windows::Win32::Graphics::Gdi::HMONITOR;
@@ -31,9 +31,19 @@ impl Monitor {
         };
 
         if settings.is_bar_enabled() {
-            match FancyToolbar::new(hmonitor.0) {
-                Ok(bar) => monitor.toolbar = Some(bar),
-                Err(e) => log::error!("Failed to create Toolbar: {}", e),
+            // Tauri can fail the on creation of the first window, thats's why we only should retry
+            // for the first window created, the next windows should work normally.
+            for attempt in 1..4 {
+                match FancyToolbar::new(hmonitor.0) {
+                    Ok(bar) => {
+                        monitor.toolbar = Some(bar);
+                        break;
+                    }
+                    Err(e) => {
+                        log::error!("Failed to create Toolbar (attempt {}): {}", attempt, e);
+                        sleep_millis(30);
+                    }
+                }
             }
         }
 

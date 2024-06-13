@@ -121,45 +121,52 @@ impl FancyToolbar {
         manager: &AppHandle<Wry>,
         monitor: isize,
     ) -> Result<(WebviewWindow, WebviewWindow)> {
-        let hitbox = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
-            manager,
-            format!("{}/{}", Self::TARGET_HITBOX, monitor),
-            tauri::WebviewUrl::App("toolbar-hitbox/index.html".into()),
-        )
-        .title("Seelen Fancy Toolbar Hitbox")
-        .maximizable(false)
-        .minimizable(false)
-        .resizable(false)
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .skip_taskbar(true)
-        .always_on_top(true)
-        .build()?;
+        let label = format!("{}/{}", Self::TARGET_HITBOX, monitor);
+        let hitbox = match manager.get_webview_window(&label) {
+            Some(window) => window,
+            None => tauri::WebviewWindowBuilder::new(
+                manager,
+                label,
+                tauri::WebviewUrl::App("toolbar-hitbox/index.html".into()),
+            )
+            .title("Seelen Fancy Toolbar Hitbox")
+            .maximizable(false)
+            .minimizable(false)
+            .resizable(false)
+            .visible(false)
+            .decorations(false)
+            .transparent(true)
+            .shadow(false)
+            .skip_taskbar(true)
+            .always_on_top(true)
+            .build()?,
+        };
 
-        let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
-            manager,
-            format!("{}/{}", Self::TARGET, monitor),
-            tauri::WebviewUrl::App("toolbar/index.html".into()),
-        )
-        .title("Seelen Fancy Toolbar")
-        .maximizable(false)
-        .minimizable(false)
-        .resizable(false)
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .skip_taskbar(true)
-        .always_on_top(true)
-        .build()?;
+        let label = format!("{}/{}", Self::TARGET, monitor);
+        let window = match manager.get_webview_window(&label) {
+            Some(window) => window,
+            None => tauri::WebviewWindowBuilder::new(
+                manager,
+                label,
+                tauri::WebviewUrl::App("toolbar/index.html".into()),
+            )
+            .title("Seelen Fancy Toolbar")
+            .maximizable(false)
+            .minimizable(false)
+            .resizable(false)
+            .visible(false)
+            .decorations(false)
+            .transparent(true)
+            .shadow(false)
+            .skip_taskbar(true)
+            .always_on_top(true)
+            .build()?,
+        };
 
         window.set_ignore_cursor_events(true)?;
         Self::set_positions(&window, &hitbox, monitor)?;
 
         window.once("store-events-ready", Self::on_store_events_ready);
-
         Ok((window, hitbox))
     }
 
