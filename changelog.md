@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.6.4]
 ### enhancements
 - follow user accent color for tray list and windows borders
 
