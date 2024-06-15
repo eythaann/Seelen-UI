@@ -30,12 +30,18 @@ foreach ($package in $packages) {
     continue
   }
 
+  # Resolve install location in case it's a symlink
+  $resolvedInstallLocation = (Get-Item -Path $package.InstallLocation).Target[0]
+  if ($null -eq $resolvedInstallLocation) {
+    $resolvedInstallLocation = $package.InstallLocation
+  }
+
   $selected = [PSCustomObject]@{
     Name            = $package.Name
     Version         = $package.Version
     PublisherId     = $package.PublisherId
     PackageFullName = $package.PackageFullName
-    InstallLocation = $package.InstallLocation
+    InstallLocation = $resolvedInstallLocation.TrimEnd('\')
     StoreLogo       = $manifest.Package.Properties.Logo
     Applications    = $applications
   }

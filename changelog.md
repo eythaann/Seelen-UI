@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 ## [1.6.4]
+### fix
+- xbox games showing missing icons on SeelenWeg.
+
 ### enhancements
 - follow user accent color for tray list and windows borders
 

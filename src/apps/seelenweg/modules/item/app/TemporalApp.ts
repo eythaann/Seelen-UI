@@ -18,6 +18,7 @@ export interface TemporalApp extends IApp {
 }
 
 export class TemporalApp {
+  // TODO(eythan) this should be handle by the background process
   static async cleanUWP(item: AppFromBackground) {
     try {
       const uwpPackage = await getUWPInfoFromExePath(item.exe);
@@ -25,30 +26,54 @@ export class TemporalApp {
         return;
       }
 
+      const storedLogoPath =
+        (await getGeneratedFilesPath()) +
+        '\\icons\\' +
+        filenameFromPath(item.exe).replace('.exe', '_uwp.png');
+
       const app = uwpPackage.Applications.find(
         (app) => app.Executable.split('\\').at(-1)! === filenameFromPath(item.exe),
       );
 
-      if (!app) {
-        return;
+      if (app) {
+        item.execution_path = `shell:AppsFolder\\${uwpPackage.Name}_${uwpPackage.PublisherId}!${app.AppId}`;
       }
 
-      item.execution_path = `shell:AppsFolder\\${uwpPackage.Name}_${uwpPackage.PublisherId}!${app.AppId}`;
-      item.icon_path = await getGeneratedFilesPath() + '\\icons\\' + filenameFromPath(item.exe).replace('.exe', '_uwp.png');
-
-      if (await fs.exists(item.icon_path)) {
+      // check if a uwp logo already exists
+      if (await fs.exists(storedLogoPath)) {
         return;
       }
 
       for (const postfix of UWP_IMAGE_POSTFIXES) {
-        const logoPathUWP =
-          uwpPackage.InstallLocation + '\\' + app.Square44x44Logo.replace('.png', postfix);
-        if (await fs.exists(logoPathUWP)) {
-          await fs.copyFile(logoPathUWP, item.icon_path);
-          // remove icon file generated from exe
-          await fs.remove(item.icon_path.replace('_uwp.png', '.png'));
-          break;
+        let logoToCopy = '';
+        let storeLogo =
+          uwpPackage.InstallLocation + '\\' + uwpPackage.StoreLogo.replace('.png', postfix);
+
+        if (app) {
+          logoToCopy =
+            uwpPackage.InstallLocation + '\\' + app.Square150x150Logo.replace('.png', postfix);
+
+          if (!(await fs.exists(logoToCopy))) {
+            logoToCopy =
+              uwpPackage.InstallLocation + '\\' + app.Square44x44Logo.replace('.png', postfix);
+
+            if (!(await fs.exists(logoToCopy))) {
+              logoToCopy = storeLogo;
+            }
+          }
+        } else {
+          logoToCopy = storeLogo;
         }
+
+        if (!(await fs.exists(logoToCopy))) {
+          continue;
+        }
+
+        item.icon_path = storedLogoPath;
+        await fs.copyFile(logoToCopy, item.icon_path);
+        // remove icon file generated from exe
+        await fs.remove(item.icon_path.replace('_uwp.png', '.png'));
+        break;
       }
     } catch (error) {
       console.error('Error while getting UWP info: ', error);
