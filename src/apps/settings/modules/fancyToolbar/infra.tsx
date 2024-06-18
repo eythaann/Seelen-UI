@@ -21,7 +21,9 @@ export function FancyToolbarSettings() {
     dispatch(FancyToolbarActions.setPlaceholder(value));
   };
 
-  const usingStructure = placeholders.find((placeholder) => placeholder.info.filename === selectedStructure);
+  const usingStructure = placeholders.find(
+    (placeholder) => placeholder.info.filename === selectedStructure,
+  );
 
   return (
     <>
@@ -42,7 +44,8 @@ export function FancyToolbarSettings() {
           <Select
             style={{ width: '200px' }}
             value={selectedStructure}
-            options={placeholders.map((placeholder) => ({
+            options={placeholders.map((placeholder, idx) => ({
+              key: `placeholder-${idx}`,
               label: placeholder.info.displayName,
               value: placeholder.info.filename,
             }))}
@@ -51,9 +54,13 @@ export function FancyToolbarSettings() {
         </SettingsOption>
         <div>
           <p>
-            <b>Author: </b>{usingStructure?.info.author}
+            <b>Author: </b>
+            {usingStructure?.info.author}
           </p>
-          <p><b>Description: </b>{usingStructure?.info.description}</p>
+          <p>
+            <b>Description: </b>
+            {usingStructure?.info.description}
+          </p>
         </div>
       </SettingsGroup>
 

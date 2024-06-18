@@ -46,7 +46,8 @@ export function WindowManagerSettings() {
           <Select
             style={{ width: '200px' }}
             value={defaultLayout}
-            options={layouts.map((layout) => ({
+            options={layouts.map((layout, idx) => ({
+              key: `layout-${idx}`,
               label: layout.info.displayName,
               value: layout.info.filename,
             }))}
@@ -55,9 +56,13 @@ export function WindowManagerSettings() {
         </SettingsOption>
         <div>
           <p>
-            <b>Author: </b>{usingLayout?.info.author}
+            <b>Author: </b>
+            {usingLayout?.info.author}
           </p>
-          <p><b>Description: </b>{usingLayout?.info.description}</p>
+          <p>
+            <b>Description: </b>
+            {usingLayout?.info.description}
+          </p>
         </div>
       </SettingsGroup>
 

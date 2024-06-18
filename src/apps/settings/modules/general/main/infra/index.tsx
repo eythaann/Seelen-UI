@@ -63,7 +63,8 @@ export function General() {
                 style={{ width: '200px' }}
                 value={selectedThemeStr}
                 allowClear
-                options={themes.map((theme) => ({
+                options={themes.map((theme, idx) => ({
+                  key: `theme-${idx}`,
                   label: theme.info.displayName,
                   value: theme.info.filename,
                 }))}

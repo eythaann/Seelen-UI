@@ -184,7 +184,17 @@ impl Seelen {
     fn ensure_folders(&self) -> Result<()> {
         log::trace!("Ensuring folders");
         let path = self.handle().path();
+        let data_path = path.app_data_dir()?;
+
+        // user saved settings
         std::fs::create_dir_all(path.resolve(".config/seelen", BaseDirectory::Home)?)?;
+
+        // user data folder
+        std::fs::create_dir_all(data_path.join("placeholders"))?;
+        std::fs::create_dir_all(data_path.join("themes"))?;
+        std::fs::create_dir_all(data_path.join("layouts"))?;
+        std::fs::create_dir_all(data_path.join("icons"))?;
+
         Ok(())
     }
 

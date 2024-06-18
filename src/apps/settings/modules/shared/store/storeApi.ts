@@ -6,6 +6,7 @@ import { AhkVariables, SettingsSchema } from '../../../../shared/schemas/Setting
 import { Theme, ThemeSchema } from '../../../../shared/schemas/Theme';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
+import { DirEntry } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { cloneDeep } from 'lodash';
 
@@ -13,6 +14,33 @@ import { getSettingsPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
 import { AppsTemplates } from '../../../../shared/appsTemplates';
+
+interface Entry extends DirEntry {
+  path: string;
+}
+
+async function getEntries(folderName: string) {
+  const bundledPath = await path.join(await path.resourceDir(), 'static', folderName);
+  const userPath = await path.join(await path.appDataDir(), folderName);
+
+  const entries: Entry[] = [];
+
+  for (const entry of await fs.readDir(bundledPath)) {
+    entries.push({
+      ...entry,
+      path: await path.join(bundledPath, entry.name),
+    });
+  }
+
+  for (const entry of await fs.readDir(userPath)) {
+    entries.push({
+      ...entry,
+      path: await path.join(userPath, entry.name),
+    });
+  }
+
+  return entries;
+}
 
 const isObject = (obj: any) => obj && typeof obj === 'object' && !Array.isArray(obj);
 const mergeLayers = (obj1: any, obj2: any) => {
@@ -44,27 +72,23 @@ export const getBackgroundLayers = (selected: string[], themes: Theme[]) => {
 };
 
 async function loadUserThemes(ref: UserSettings) {
-  const themesPath = await path.join(await path.resourceDir(), 'static', 'themes');
-  const entries = await fs.readDir(themesPath);
-
-  async function themeFromDir(dirname: string) {
-    let themePath = await path.join(themesPath, dirname);
-    let theme = yaml.load(await fs.readTextFile(await path.join(themePath, 'theme.yml'))) as Theme;
+  async function themeFromDir(entry: Entry) {
+    let theme = yaml.load(await fs.readTextFile(await path.join(entry.path, 'theme.yml'))) as Theme;
     theme = ThemeSchema.parse(theme) as Theme;
 
-    theme.info.filename = dirname;
+    theme.info.filename = entry.name;
 
-    let wegPath = await path.join(themePath, 'theme.weg.css');
+    let wegPath = await path.join(entry.path, 'theme.weg.css');
     if (await fs.exists(wegPath)) {
       theme.styles.weg = await fs.readTextFile(wegPath);
     }
 
-    let toolbarPath = await path.join(themePath, 'theme.toolbar.css');
+    let toolbarPath = await path.join(entry.path, 'theme.toolbar.css');
     if (await fs.exists(toolbarPath)) {
       theme.styles.toolbar = await fs.readTextFile(toolbarPath);
     }
 
-    let wmPath = await path.join(themePath, 'theme.wm.css');
+    let wmPath = await path.join(entry.path, 'theme.wm.css');
     if (await fs.exists(wmPath)) {
       theme.styles.wm = await fs.readTextFile(wmPath);
     }
@@ -72,20 +96,20 @@ async function loadUserThemes(ref: UserSettings) {
     return theme;
   }
 
-  async function themeFromFile(filename: string) {
-    let theme = yaml.load(await fs.readTextFile(await path.join(themesPath, filename))) as Theme;
+  async function themeFromFile(entry: Entry) {
+    let theme = yaml.load(await fs.readTextFile(entry.path)) as Theme;
     theme = ThemeSchema.parse(theme) as Theme;
-    theme.info.filename = filename;
+    theme.info.filename = entry.name;
     return theme;
   }
 
-  for (const entry of entries) {
+  for (const entry of await getEntries('themes')) {
     let theme: null | Theme = null;
 
     if (entry.isDirectory) {
-      theme = await themeFromDir(entry.name);
+      theme = await themeFromDir(entry);
     } else if (entry.isFile && entry.name.endsWith('.yml')) {
-      theme = await themeFromFile(entry.name);
+      theme = await themeFromFile(entry);
     }
 
     if (theme) {
@@ -97,17 +121,12 @@ async function loadUserThemes(ref: UserSettings) {
 }
 
 async function loadUserLayouts(ref: UserSettings) {
-  const layoutsPath = await path.join(await path.resourceDir(), 'static', 'layouts');
-  const entries = await fs.readDir(layoutsPath);
-
   const defaultLayout = ref.jsonSettings.windowManager.defaultLayout;
   let found = false;
 
-  for (const entry of entries) {
+  for (const entry of await getEntries('layouts')) {
     if (entry.isFile && entry.name.endsWith('.json')) {
-      let layout: Layout = JSON.parse(
-        await fs.readTextFile(await path.join(layoutsPath, entry.name)),
-      );
+      let layout: Layout = JSON.parse(await fs.readTextFile(entry.path));
 
       layout = safeParseAsCamel(LayoutSchema, layout);
       if (!layout) {
@@ -140,17 +159,12 @@ async function loadUserLayouts(ref: UserSettings) {
 }
 
 async function loadUserPlaceholders(ref: UserSettings) {
-  const placeholderPath = await path.join(await path.resourceDir(), 'static', 'placeholders');
-  const entries = await fs.readDir(placeholderPath);
-
   const selectedPlaceholder = ref.jsonSettings.fancyToolbar.placeholder;
   let found = false;
 
-  for (const entry of entries) {
+  for (const entry of await getEntries('placeholders')) {
     if (entry.isFile && entry.name.endsWith('.yml')) {
-      let _placeholder = yaml.load(
-        await fs.readTextFile(await path.join(placeholderPath, entry.name)),
-      );
+      let _placeholder = yaml.load(await fs.readTextFile(entry.path));
 
       let placeholder = safeParseAsCamel(PlaceholderSchema, _placeholder) as Placeholder;
       if (!placeholder) {

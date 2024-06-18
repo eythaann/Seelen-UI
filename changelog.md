@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add Network toolbar module 🎉
+
+### enhancements
+- now placeholders, layouts and themes can be loaded from data users folder (`AppData\Roaming\com.seelen.seelen-ui`)
+
 ## [1.6.4]
 ### fix
 - xbox games showing missing icons on SeelenWeg.
