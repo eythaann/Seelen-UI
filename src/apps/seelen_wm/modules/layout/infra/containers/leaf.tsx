@@ -1,5 +1,5 @@
-import { toPhysicalPixels } from '../../../../../utils';
-import { cx } from '../../../../../utils/styles';
+import { toPhysicalPixels } from '../../../../../shared';
+import { cx } from '../../../../../shared/styles';
 import { ReservedContainer } from './reserved';
 import { invoke } from '@tauri-apps/api/core';
 import { useCallback, useEffect, useRef } from 'react';

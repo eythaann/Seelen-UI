@@ -1,4 +1,4 @@
-import { StateBuilder } from '../../../../../utils/StateBuilder';
+import { StateBuilder } from '../../../../../shared/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 

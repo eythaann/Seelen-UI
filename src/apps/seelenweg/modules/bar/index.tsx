@@ -1,5 +1,5 @@
-import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../utils/schemas/Seelenweg';
-import { cx } from '../../../utils/styles';
+import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
+import { cx } from '../../../shared/styles';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
 import { MouseEvent, useCallback, useEffect, useRef, useState } from 'react';

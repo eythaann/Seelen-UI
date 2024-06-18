@@ -1,4 +1,4 @@
-import { ToolbarModuleType } from './apps/utils/schemas/Placeholders';
+import { ToolbarModuleType } from './apps/shared/schemas/Placeholders';
 
 declare global {
   interface Window {

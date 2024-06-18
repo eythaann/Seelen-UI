@@ -1,10 +1,10 @@
 import { writeFileSync } from 'fs';
 import { zodToJsonSchema } from 'zod-to-json-schema';
 
-import { LayoutSchema } from '../src/apps/utils/schemas/Layout';
-import { PlaceholderSchema } from '../src/apps/utils/schemas/Placeholders';
-import { SettingsSchema } from '../src/apps/utils/schemas/Settings';
-import { ThemeSchema } from '../src/apps/utils/schemas/Theme';
+import { LayoutSchema } from '../src/apps/shared/schemas/Layout';
+import { PlaceholderSchema } from '../src/apps/shared/schemas/Placeholders';
+import { SettingsSchema } from '../src/apps/shared/schemas/Settings';
+import { ThemeSchema } from '../src/apps/shared/schemas/Theme';
 
 (async function main() {
   writeFileSync(

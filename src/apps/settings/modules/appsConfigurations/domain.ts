@@ -1,4 +1,4 @@
-import { IdWithIdentifier } from '../../../utils/schemas/AppsConfigurations';
+import { IdWithIdentifier } from '../../../shared/schemas/AppsConfigurations';
 
 export enum ApplicationOptions {
   Float = 'float',

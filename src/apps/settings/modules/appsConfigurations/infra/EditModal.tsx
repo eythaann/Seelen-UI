@@ -1,4 +1,4 @@
-import { IdWithIdentifier } from '../../../../utils/schemas/AppsConfigurations';
+import { IdWithIdentifier } from '../../../../shared/schemas/AppsConfigurations';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { Identifier } from './Identifier';
 import { createSelector } from '@reduxjs/toolkit';

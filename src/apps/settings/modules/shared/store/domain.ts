@@ -1,8 +1,8 @@
 import { AppTemplate } from '../../../../../shared.interfaces';
-import { Layout } from '../../../../utils/schemas/Layout';
-import { Placeholder } from '../../../../utils/schemas/Placeholders';
-import { ISettings } from '../../../../utils/schemas/Settings';
-import { Theme } from '../../../../utils/schemas/Theme';
+import { Layout } from '../../../../shared/schemas/Layout';
+import { Placeholder } from '../../../../shared/schemas/Placeholders';
+import { ISettings } from '../../../../shared/schemas/Settings';
+import { Theme } from '../../../../shared/schemas/Theme';
 import { Route } from '../../../components/navigation/routes';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';

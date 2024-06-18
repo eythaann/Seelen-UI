@@ -1,5 +1,5 @@
-import { Icon } from '../../../utils/components/Icon';
-import { SettingsToolbarModule } from '../../../utils/schemas/Placeholders';
+import { Icon } from '../../../shared/components/Icon';
+import { SettingsToolbarModule } from '../../../shared/schemas/Placeholders';
 import { invoke } from '@tauri-apps/api/core';
 import { Popover, Slider, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';

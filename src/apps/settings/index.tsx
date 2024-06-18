@@ -1,5 +1,5 @@
-import { getRootContainer } from '../utils';
-import { wrapConsole } from '../utils/ConsoleWrapper';
+import { getRootContainer } from '../shared';
+import { wrapConsole } from '../shared/ConsoleWrapper';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';

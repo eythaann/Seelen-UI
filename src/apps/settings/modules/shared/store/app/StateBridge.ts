@@ -1,7 +1,7 @@
 import { UserSettings } from '../../../../../../shared.interfaces';
-import { parseAsCamel, VariableConvention } from '../../../../../utils/schemas';
-import { IdWithIdentifierSchema } from '../../../../../utils/schemas/AppsConfigurations';
-import { ISettings } from '../../../../../utils/schemas/Settings';
+import { parseAsCamel, VariableConvention } from '../../../../../shared/schemas';
+import { IdWithIdentifierSchema } from '../../../../../shared/schemas/AppsConfigurations';
+import { ISettings } from '../../../../../shared/schemas/Settings';
 import { pick } from 'lodash';
 
 import { AppConfiguration, ApplicationOptions } from '../../../appsConfigurations/domain';

@@ -1,4 +1,4 @@
-import { NetworkTM, ToolbarModuleType } from '../../../utils/schemas/Placeholders';
+import { NetworkTM, ToolbarModuleType } from '../../../shared/schemas/Placeholders';
 import { emit } from '@tauri-apps/api/event';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';

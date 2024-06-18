@@ -1,4 +1,4 @@
-import { DateToolbarModule, TimeUnit } from '../../../utils/schemas/Placeholders';
+import { DateToolbarModule, TimeUnit } from '../../../shared/schemas/Placeholders';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 

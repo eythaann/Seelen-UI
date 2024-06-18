@@ -3,9 +3,9 @@ import {
   exposedIconsRegex,
   Icon,
   isValidIconName,
-} from '../../../utils/components/Icon';
-import { ToolbarModule } from '../../../utils/schemas/Placeholders';
-import { cx } from '../../../utils/styles';
+} from '../../../shared/components/Icon';
+import { ToolbarModule } from '../../../shared/schemas/Placeholders';
+import { cx } from '../../../shared/styles';
 import { Tooltip } from 'antd';
 import { cloneDeep } from 'lodash';
 import { evaluate } from 'mathjs';

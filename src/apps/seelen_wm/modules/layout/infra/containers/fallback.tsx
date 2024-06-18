@@ -1,5 +1,5 @@
-import { FallbackNode } from '../../../../../utils/schemas/Layout';
-import { cx } from '../../../../../utils/styles';
+import { FallbackNode } from '../../../../../shared/schemas/Layout';
+import { cx } from '../../../../../shared/styles';
 import { LeafContainer } from './leaf';
 import { useSelector } from 'react-redux';
 

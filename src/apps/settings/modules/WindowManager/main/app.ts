@@ -1,5 +1,5 @@
-import { parseAsCamel } from '../../../../utils/schemas';
-import { WindowManager, WindowManagerSchema } from '../../../../utils/schemas/WindowManager';
+import { parseAsCamel } from '../../../../shared/schemas';
+import { WindowManager, WindowManagerSchema } from '../../../../shared/schemas/WindowManager';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { matcher, reducersFor, selectorsFor } from '../../shared/utils/app';

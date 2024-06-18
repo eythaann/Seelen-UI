@@ -1,4 +1,4 @@
-import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../utils/schemas/Seelenweg';
+import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 

@@ -1,4 +1,4 @@
-import { wrapConsole } from '../utils/ConsoleWrapper';
+import { wrapConsole } from '../shared/ConsoleWrapper';
 import { invoke } from '@tauri-apps/api/core';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';

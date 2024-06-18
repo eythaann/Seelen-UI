@@ -6,7 +6,7 @@ import {
   NodeType,
   StackNode,
   VerticalBranchNode,
-} from '../../../utils/schemas/Layout';
+} from '../../../shared/schemas/Layout';
 import { clone } from 'lodash';
 import { evaluate } from 'mathjs';
 

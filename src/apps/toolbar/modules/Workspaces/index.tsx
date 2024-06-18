@@ -1,5 +1,5 @@
-import { WorkspacesTM, WorkspaceTMMode } from '../../../utils/schemas/Placeholders';
-import { cx } from '../../../utils/styles';
+import { WorkspacesTM, WorkspaceTMMode } from '../../../shared/schemas/Placeholders';
+import { cx } from '../../../shared/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { useSelector } from 'react-redux';
 

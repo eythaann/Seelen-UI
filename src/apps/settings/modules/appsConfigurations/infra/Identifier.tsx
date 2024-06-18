@@ -1,9 +1,9 @@
-import { Icon } from '../../../../utils/components/Icon';
+import { Icon } from '../../../../shared/components/Icon';
 import {
   ApplicationIdentifier,
   IdWithIdentifier,
   MatchingStrategy,
-} from '../../../../utils/schemas/AppsConfigurations';
+} from '../../../../shared/schemas/AppsConfigurations';
 import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
 import { Button, Input, Select, Switch } from 'antd';
 

@@ -1,7 +1,7 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS } from '../../../../utils';
-import { WindowManager } from '../../../../utils/schemas/WindowManager';
+import { loadThemeCSS } from '../../../../shared';
+import { WindowManager } from '../../../../shared/schemas/WindowManager';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
 

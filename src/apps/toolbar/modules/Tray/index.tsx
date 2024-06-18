@@ -1,4 +1,4 @@
-import { ToolbarModuleType, TrayTM } from '../../../utils/schemas/Placeholders';
+import { ToolbarModuleType, TrayTM } from '../../../shared/schemas/Placeholders';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';

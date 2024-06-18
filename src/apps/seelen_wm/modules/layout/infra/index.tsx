@@ -1,4 +1,4 @@
-import { cx } from '../../../../utils/styles';
+import { cx } from '../../../../shared/styles';
 import { FallbackContainer } from './containers/fallback';
 import { LeafContainer } from './containers/leaf';
 import { useSelector } from 'react-redux';

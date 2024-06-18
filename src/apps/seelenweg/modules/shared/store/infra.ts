@@ -1,7 +1,7 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS } from '../../../../utils';
-import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../utils/schemas/Seelenweg';
+import { loadThemeCSS } from '../../../../shared';
+import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';

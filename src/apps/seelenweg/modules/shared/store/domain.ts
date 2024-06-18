@@ -1,5 +1,5 @@
 import { IRootState } from '../../../../../shared.interfaces';
-import { Seelenweg } from '../../../../utils/schemas/Seelenweg';
+import { Seelenweg } from '../../../../shared/schemas/Seelenweg';
 import { modify } from 'readable-types';
 
 import { PinnedApp } from '../../item/app/PinnedApp';

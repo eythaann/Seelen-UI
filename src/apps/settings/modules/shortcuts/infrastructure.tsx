@@ -1,4 +1,4 @@
-import { VariableConvention } from '../../../utils/schemas';
+import { VariableConvention } from '../../../shared/schemas';
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Input, Switch, Tooltip } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';

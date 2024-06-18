@@ -1,4 +1,4 @@
-import { Icon } from '../../../utils/components/Icon';
+import { Icon } from '../../../shared/components/Icon';
 import React from 'react';
 
 export enum Route {

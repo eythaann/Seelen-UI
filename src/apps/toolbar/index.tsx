@@ -1,5 +1,5 @@
-import { getRootContainer } from '../utils';
-import { wrapConsole } from '../utils/ConsoleWrapper';
+import { getRootContainer } from '../shared';
+import { wrapConsole } from '../shared/ConsoleWrapper';
 import { registerDocumentEvents } from './events';
 import { ConfigProvider, theme } from 'antd';
 import { createRoot } from 'react-dom/client';

@@ -1,6 +1,6 @@
 import { IRootState } from '../../../../../shared.interfaces';
-import { FancyToolbar } from '../../../../utils/schemas/FancyToolbar';
-import { Placeholder } from '../../../../utils/schemas/Placeholders';
+import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
+import { Placeholder } from '../../../../shared/schemas/Placeholders';
 
 export interface ActiveApp {
   name: string;

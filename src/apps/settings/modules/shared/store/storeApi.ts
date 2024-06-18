@@ -1,9 +1,9 @@
 import { AppTemplate, defaultTheme, UserSettings } from '../../../../../shared.interfaces';
-import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../utils/schemas';
-import { Layout, LayoutSchema } from '../../../../utils/schemas/Layout';
-import { Placeholder, PlaceholderSchema } from '../../../../utils/schemas/Placeholders';
-import { AhkVariables, SettingsSchema } from '../../../../utils/schemas/Settings';
-import { Theme, ThemeSchema } from '../../../../utils/schemas/Theme';
+import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../shared/schemas';
+import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
+import { Placeholder, PlaceholderSchema } from '../../../../shared/schemas/Placeholders';
+import { AhkVariables, SettingsSchema } from '../../../../shared/schemas/Settings';
+import { Theme, ThemeSchema } from '../../../../shared/schemas/Theme';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
@@ -12,7 +12,7 @@ import { cloneDeep } from 'lodash';
 import { getSettingsPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
-import { AppsTemplates } from '../../../../utils/appsTemplates';
+import { AppsTemplates } from '../../../../shared/appsTemplates';
 
 const isObject = (obj: any) => obj && typeof obj === 'object' && !Array.isArray(obj);
 const mergeLayers = (obj1: any, obj2: any) => {

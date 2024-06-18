@@ -1,4 +1,4 @@
-import { cx } from '../../../utils/styles';
+import { cx } from '../../../shared/styles';
 import { CSSProperties, memo } from 'react';
 
 import cs from './infra.module.css';

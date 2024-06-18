@@ -1,5 +1,5 @@
-import { parseAsCamel } from '../../../utils/schemas';
-import { Seelenweg, SeelenWegSchema } from '../../../utils/schemas/Seelenweg';
+import { parseAsCamel } from '../../../shared/schemas';
+import { Seelenweg, SeelenWegSchema } from '../../../shared/schemas/Seelenweg';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { reducersFor, selectorsFor } from '../shared/utils/app';

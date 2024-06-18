@@ -1,4 +1,4 @@
-import { PowerToolbarModule, ToolbarModuleType } from '../../../utils/schemas/Placeholders';
+import { PowerToolbarModule, ToolbarModuleType } from '../../../shared/schemas/Placeholders';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';

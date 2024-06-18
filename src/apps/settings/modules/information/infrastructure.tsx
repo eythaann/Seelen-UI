@@ -1,4 +1,4 @@
-import { Icon } from '../../../utils/components/Icon';
+import { Icon } from '../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { invoke } from '@tauri-apps/api/core';
 import { exit, relaunch } from '@tauri-apps/plugin-process';

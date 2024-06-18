@@ -1,4 +1,4 @@
-import { FallbackNode, HorizontalBranchNode, LeafNode, StackNode, VerticalBranchNode } from '../../../utils/schemas/Layout';
+import { FallbackNode, HorizontalBranchNode, LeafNode, StackNode, VerticalBranchNode } from '../../../shared/schemas/Layout';
 
 export enum Reservation {
   Left = 'Left',

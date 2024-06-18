@@ -1,7 +1,7 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
-import { parseAsCamel } from '../../../../utils/schemas';
-import { FancyToolbarSchema } from '../../../../utils/schemas/FancyToolbar';
-import { StateBuilder } from '../../../../utils/StateBuilder';
+import { parseAsCamel } from '../../../../shared/schemas';
+import { FancyToolbarSchema } from '../../../../shared/schemas/FancyToolbar';
+import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from './domain';

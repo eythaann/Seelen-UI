@@ -1,5 +1,5 @@
-import { parseAsCamel } from '../../../../utils/schemas';
-import { Monitor, MonitorSchema, Workspace, WorkspaceSchema } from '../../../../utils/schemas/Monitors';
+import { parseAsCamel } from '../../../../shared/schemas';
+import { Monitor, MonitorSchema, Workspace, WorkspaceSchema } from '../../../../shared/schemas/Monitors';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: Monitor[] = [parseAsCamel(MonitorSchema, {})];

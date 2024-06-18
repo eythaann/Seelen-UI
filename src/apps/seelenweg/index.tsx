@@ -1,5 +1,5 @@
-import { getRootContainer } from '../utils';
-import { wrapConsole } from '../utils/ConsoleWrapper';
+import { getRootContainer } from '../shared';
+import { wrapConsole } from '../shared/ConsoleWrapper';
 import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';

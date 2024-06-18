@@ -1,5 +1,5 @@
-import { parseAsCamel } from '../../../../utils/schemas';
-import { Border, BorderSchema } from '../../../../utils/schemas/WindowManager';
+import { parseAsCamel } from '../../../../shared/schemas';
+import { Border, BorderSchema } from '../../../../shared/schemas/WindowManager';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { reducersFor, selectorsFor } from '../../shared/utils/app';

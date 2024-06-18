@@ -1,4 +1,4 @@
-import { cx } from '../../../utils/styles';
+import { cx } from '../../../shared/styles';
 import { savePinnedItems } from '../shared/store/storeApi';
 import { getMenuForItem } from './menu';
 import { WegPreview } from './preview';

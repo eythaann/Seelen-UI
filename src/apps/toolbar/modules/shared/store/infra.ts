@@ -1,7 +1,7 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS } from '../../../../utils';
-import { FancyToolbar } from '../../../../utils/schemas/FancyToolbar';
+import { loadThemeCSS } from '../../../../shared';
+import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';

@@ -1,4 +1,4 @@
-import { cx } from '../../../../../utils/styles';
+import { cx } from '../../../../../shared/styles';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';

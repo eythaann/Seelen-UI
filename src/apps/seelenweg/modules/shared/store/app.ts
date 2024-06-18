@@ -1,5 +1,5 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
-import { StateBuilder } from '../../../../utils/StateBuilder';
+import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { SeelenWegSlice } from '../../bar/app';

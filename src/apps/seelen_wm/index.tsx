@@ -1,6 +1,6 @@
 
 import { ErrorBoundary } from '../seelenweg/components/Error';
-import { wrapConsole } from '../utils/ConsoleWrapper';
+import { wrapConsole } from '../shared/ConsoleWrapper';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { useEffect } from 'react';

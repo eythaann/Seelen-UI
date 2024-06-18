@@ -1,4 +1,4 @@
-import { Placeholder, ToolbarModule, ToolbarModuleType } from '../../../utils/schemas/Placeholders';
+import { Placeholder, ToolbarModule, ToolbarModuleType } from '../../../shared/schemas/Placeholders';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
 import { useSelector } from 'react-redux';

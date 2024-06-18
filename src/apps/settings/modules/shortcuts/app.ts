@@ -1,5 +1,5 @@
-import { parseAsCamel } from '../../../utils/schemas';
-import { AhkVar, AhkVariables, AhkVariablesSchema } from '../../../utils/schemas/Settings';
+import { parseAsCamel } from '../../../shared/schemas';
+import { AhkVar, AhkVariables, AhkVariablesSchema } from '../../../shared/schemas/Settings';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { selectorsFor } from '../shared/utils/app';

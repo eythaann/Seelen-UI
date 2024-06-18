@@ -1,8 +1,8 @@
 import { defaultLayout, defaultTheme } from '../../../../../shared.interfaces';
-import { toPhysicalPixels } from '../../../../utils';
-import { parseAsCamel } from '../../../../utils/schemas';
-import { WindowManagerSchema } from '../../../../utils/schemas/WindowManager';
-import { StateBuilder } from '../../../../utils/StateBuilder';
+import { toPhysicalPixels } from '../../../../shared';
+import { parseAsCamel } from '../../../../shared/schemas';
+import { WindowManagerSchema } from '../../../../shared/schemas/WindowManager';
+import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';

@@ -1,7 +1,7 @@
-import { Layout, LayoutSchema, NoFallbackBehavior } from './apps/utils/schemas/Layout';
-import { Placeholder } from './apps/utils/schemas/Placeholders';
-import { ISettings } from './apps/utils/schemas/Settings';
-import { Theme, ThemeSchema } from './apps/utils/schemas/Theme';
+import { Layout, LayoutSchema, NoFallbackBehavior } from './apps/shared/schemas/Layout';
+import { Placeholder } from './apps/shared/schemas/Placeholders';
+import { ISettings } from './apps/shared/schemas/Settings';
+import { Theme, ThemeSchema } from './apps/shared/schemas/Theme';
 
 export interface IRootState<T> {
   settings: T;

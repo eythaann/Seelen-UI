@@ -1,5 +1,5 @@
-import { Icon } from '../../../../../utils/components/Icon';
-import { Theme } from '../../../../../utils/schemas/Theme';
+import { Icon } from '../../../../../shared/components/Icon';
+import { Theme } from '../../../../../shared/schemas/Theme';
 import {
   SettingsGroup,
   SettingsOption,

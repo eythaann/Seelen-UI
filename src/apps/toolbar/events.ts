@@ -1,4 +1,4 @@
-import { debounce, TimeoutIdRef } from '../utils/Timing';
+import { debounce, TimeoutIdRef } from '../shared/Timing';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { CallbacksManager } from './modules/shared/utils/app';

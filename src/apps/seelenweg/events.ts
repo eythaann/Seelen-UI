@@ -1,6 +1,6 @@
-import { toPhysicalPixels } from '../utils';
-import { SeelenWegHideMode, SeelenWegSide } from '../utils/schemas/Seelenweg';
-import { debounce, TimeoutIdRef } from '../utils/Timing';
+import { toPhysicalPixels } from '../shared';
+import { SeelenWegHideMode, SeelenWegSide } from '../shared/schemas/Seelenweg';
+import { debounce, TimeoutIdRef } from '../shared/Timing';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
