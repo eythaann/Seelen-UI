@@ -25,6 +25,9 @@ const initialState: RootState = {
   workspaces: [],
   activeWorkspace: 0,
   systemTray: [],
+  networkAdapters: [],
+  networkLocalIp: null,
+  online: false,
 };
 
 export const RootSlice = createSlice({

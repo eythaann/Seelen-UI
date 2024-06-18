@@ -2,7 +2,7 @@ pub mod brightness;
 
 use crate::{
     error_handler::Result,
-    modules::{power::infrastructure::PowerManager, tray::infrastructure::register_tray_events},
+    modules::{network::infrastructure::register_network_events, power::infrastructure::PowerManager, tray::infrastructure::register_tray_events},
     seelen::get_app_handle,
 };
 
@@ -18,8 +18,9 @@ pub fn register_system_events() -> Result<()> {
         register_tray_events().expect("Fail on registering tray events");
     });
 
-    handle.once("register-wifi-events", move |_| {
-        // todo
+    handle.once("register-network-events", move |_| {
+        log::debug!("Registering network events");
+        register_network_events().expect("Fail on registering network events");
     });
 
     handle.once("register-bluetooth-events", move |_| {

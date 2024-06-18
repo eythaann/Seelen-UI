@@ -8,7 +8,7 @@ import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { RootActions, RootSlice } from './app';
 
-import { ActiveApp, Battery, PowerStatus, TrayInfo } from './domain';
+import { ActiveApp, Battery, NetworkAdapter, PowerStatus, TrayInfo } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -26,12 +26,10 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<PowerStatus>('power-status', (event) => {
-    console.log(event.payload);
     store.dispatch(RootActions.setPowerStatus(event.payload));
   });
 
   await listenGlobal<Battery[]>('batteries-status', (event) => {
-    console.log(event.payload);
     store.dispatch(RootActions.setBatteries(event.payload));
   });
 
@@ -45,6 +43,18 @@ export async function registerStoreEvents() {
 
   await listenGlobal<TrayInfo[]>('tray-info', (event) => {
     store.dispatch(RootActions.setSystemTray(event.payload));
+  });
+
+  await listenGlobal<NetworkAdapter[]>('network-adapters', (event) => {
+    store.dispatch(RootActions.setNetworkAdapters(event.payload));
+  });
+
+  await listenGlobal<string | null>('network-default-local-ip', (event) => {
+    store.dispatch(RootActions.setNetworkLocalIp(event.payload));
+  });
+
+  await listenGlobal<boolean>('network-internet-connection', (event) => {
+    store.dispatch(RootActions.setOnline(event.payload));
   });
 
   await view.emitTo(view.label, 'store-events-ready');

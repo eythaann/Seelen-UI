@@ -25,6 +25,11 @@ export interface TrayInfo {
   icon: string | null;
 }
 
+export interface NetworkAdapter {
+  ipv4: string | null;
+  ipv6: string | null;
+}
+
 export interface RootState extends IRootState<FancyToolbar> {
   focused: ActiveApp | null;
   placeholder: Placeholder | null;
@@ -34,4 +39,7 @@ export interface RootState extends IRootState<FancyToolbar> {
   workspaces: string[];
   activeWorkspace: number;
   systemTray: TrayInfo[];
+  networkAdapters: NetworkAdapter[];
+  networkLocalIp: string | null;
+  online: boolean;
 }

@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
 import { DateModule } from '../Date/infra';
 import { Item } from '../item/infra';
+import { NetworkModule } from '../network/infra';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
 
@@ -16,16 +17,25 @@ function componentByModule(module: ToolbarModule, idx: number) {
     case ToolbarModuleType.Text:
     case ToolbarModuleType.Generic:
       return <Item key={idx} module={module} />;
+
     case ToolbarModuleType.Date:
       return <DateModule key={idx} module={module} />;
+
     case ToolbarModuleType.Power:
       return <PowerModule key={idx} module={module} />;
+
     case ToolbarModuleType.Settings:
       return <SettingsModule key={idx} module={module} />;
+
     case ToolbarModuleType.Workspaces:
       return <WorkspacesModule key={idx} module={module} />;
+
     case ToolbarModuleType.Tray:
       return <TrayModule key={idx} module={module} />;
+
+    case ToolbarModuleType.Network:
+      return <NetworkModule key={idx} module={module} />;
+
     default:
       return null;
   }

@@ -80,6 +80,11 @@ features = [
     "Win32_Media_Audio_Endpoints", # required for audio
     "Win32_Devices_Display", # required for display (brightness, etc)
     "UI_Core",
+
+    "Win32_NetworkManagement_IpHelper", # required for network manager
+    "Win32_NetworkManagement_Ndis", # required for network manager
+    "Win32_Networking_WinSock", # required for network manager
+    "Win32_Networking_NetworkListManager", # required for network manager events
 ]
 
 [features]

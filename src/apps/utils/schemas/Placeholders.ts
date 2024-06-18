@@ -65,6 +65,11 @@ export const PowerToolbarModuleSchema = BaseTMSchema.extend({
   type: z.literal(ToolbarModuleType.Power),
 });
 
+export type NetworkTM = z.infer<typeof NetworkTMSchema>;
+export const NetworkTMSchema = BaseTMSchema.extend({
+  type: z.literal(ToolbarModuleType.Network),
+});
+
 export type SettingsToolbarModule = z.infer<typeof SettingsToolbarModuleSchema>;
 export const SettingsToolbarModuleSchema = BaseTMSchema.extend({
   type: z.literal(ToolbarModuleType.Settings),
@@ -84,6 +89,7 @@ export const ToolbarModuleSchema = z.union([
   SettingsToolbarModuleSchema,
   WorkspaceTMSchema,
   TrayTMSchema,
+  NetworkTMSchema,
 ]);
 
 type InnerPlaceholder = z.infer<typeof PlaceholderSchema>;

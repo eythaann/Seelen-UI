@@ -36,10 +36,18 @@ right:
     onClick: open -> "ms-settings:bluetooth"
     tooltip: '"Bluetooth"'
 
-  - type: generic
-    template: '"[ICON:FaWifi:14]"'
+  - type: network
     onClick: open -> "ms-settings:network"
-    tooltip: '"Network"'
+    tooltip: >-
+      online ? "Internet access" : "No internet access"
+    template: >-
+      online
+      ? (
+        unequal(usingInterface, null) and equalText(usingInterface.type, "IEEE80211")
+          ? "[ICON:FaWifi:14]"
+          : icon.TbWorld
+      )
+      : icon.TbWorldCancel
 
   - type: generic
     template: icon.IoVolumeHighOutline
