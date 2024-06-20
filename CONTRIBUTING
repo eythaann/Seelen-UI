@@ -5,11 +5,12 @@ Thank you for your interest in contributing to this project! We welcome contribu
 ## How to Contribute
 
 1. Fork the repository and clone it to your local machine.
-2. Create a new branch for your contribution: `git checkout -b feature/new-feature`.
-3. Make your changes and ensure they are well-tested.
-4. Commit your changes: `git commit -m 'Add new feature'`.
-5. Push to the branch: `git push origin feature/new-feature`.
-6. Submit a pull request.
+2. Read the [Project Documentation](documentation/project.md) to understand the project structure and how to use it.
+3. Create a new branch for your contribution: `git checkout -b feature/new-feature`.
+4. Make your changes and ensure they are well-tested.
+5. Commit your changes: `git commit -m 'Add new feature'`.
+6. Push to the branch: `git push origin feature/new-feature`.
+7. Submit a pull request.
 
 ## Contributor License Agreement (CLA)
 
