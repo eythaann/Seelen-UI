@@ -2,6 +2,24 @@
   font-size: 0.8rem;
   font-weight: 500;
 
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-400);
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-gray-500);
+  }
+
   .ft-bar {
     color: #fefefe;
 
@@ -64,7 +82,6 @@
   }
 
   .tray {
-    padding: 10px;
     margin: 4px;
 
     .tray-bg-layer-1 {
@@ -74,8 +91,11 @@
     }
 
     .tray-list {
+      padding: 10px;
+      max-height: 50vh;
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
       gap: 4px;
 
       .tray-item {
@@ -85,6 +105,7 @@
         padding: 8px;
         gap: 6px;
         transition: background-color 200ms linear;
+        height: min-content;
 
         &:hover {
           background-color: var(--config-accent-color);

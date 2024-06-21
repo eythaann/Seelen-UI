@@ -10,6 +10,9 @@
 - now placeholders, layouts and themes can be loaded from data users folder (`AppData\Roaming\com.seelen.seelen-ui`)
 - now buttons and others components will use the user accent color.
 
+### fix
+- no max size on System Tray List module.
+
 ## [1.6.4]
 ### fix
 - xbox games showing missing icons on SeelenWeg.
