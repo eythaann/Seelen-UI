@@ -29,5 +29,5 @@ jobs:
 
           SECTION_NAME: "ChangeLog"
 
-          FOOTER_TEXT: ""
+          FOOTER_TEXT: "Seelen Inc."
           FOOTER_URL: ""
