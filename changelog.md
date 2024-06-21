@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.7.0]
 ### features
 - add Network toolbar module.
 - add WLAN selector to the Network toolbar module.
