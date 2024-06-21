@@ -1,0 +1,22 @@
+name: "Post Published Release"
+
+on:
+  release:
+    types:
+      - published
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  discord:
+    runs-on: ubuntu-latest
+    name: Sends Release To Discord
+    steps:
+      - name: Discord notification
+        uses: LeGitHubDeTai/github-to-discord@main
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          MESSAGE_TITLE: Release
+          MESSAGE_DESCRIPTION: A new release has been published
+          MESSAGE_URL: https://github.com/eythaann/Seelen-UI
+          MESSAGE_COLOR: 5814783
