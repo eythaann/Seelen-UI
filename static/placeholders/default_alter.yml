@@ -37,7 +37,7 @@ right:
     tooltip: '"Bluetooth"'
 
   - type: network
-    onClick: open -> "ms-settings:network"
+    withWlanSelector: true
     tooltip: >-
       online ? "Internet access" : "No internet access"
     template: >-

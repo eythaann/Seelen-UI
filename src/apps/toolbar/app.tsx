@@ -1,7 +1,9 @@
 import { ErrorBoundary } from '../seelenweg/components/Error';
+import { getRootContainer } from '../shared';
 import { ErrorFallback } from './components/Error';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -17,6 +19,7 @@ async function onMount() {
 
 export function App() {
   const structure = useSelector(Selectors.placeholder);
+  const accentColor = useSelector(Selectors.accentColor);
 
   useEffect(() => {
     onMount();
@@ -27,8 +30,20 @@ export function App() {
   }
 
   return (
-    <ErrorBoundary fallback={<ErrorFallback />}>
-      <ToolBar structure={structure} />
-    </ErrorBoundary>
+    <ConfigProvider
+      getPopupContainer={() => getRootContainer()}
+      theme={{
+        token: {
+          colorPrimary: accentColor,
+        },
+        algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? theme.darkAlgorithm
+          : theme.defaultAlgorithm,
+      }}
+    >
+      <ErrorBoundary fallback={<ErrorFallback />}>
+        <ToolBar structure={structure} />
+      </ErrorBoundary>
+    </ConfigProvider>
   );
 }

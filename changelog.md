@@ -2,10 +2,13 @@
 
 ## [Unreleased]
 ### features
-- add Network toolbar module 🎉
+- add Network toolbar module.
+- add WLAN selector to the Network toolbar module.
+- add css variable (--config-accent-color-rgb) to be used with css functions like `rgb` or `rgba`.
 
 ### enhancements
 - now placeholders, layouts and themes can be loaded from data users folder (`AppData\Roaming\com.seelen.seelen-ui`)
+- now buttons and others components will use the user accent color.
 
 ## [1.6.4]
 ### fix

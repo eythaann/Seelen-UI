@@ -40,7 +40,11 @@ define_app_errors!(
 
 impl std::fmt::Display for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{:?}", self)
+        match self {
+            Self::Generic(error) => write!(f, "{}", error),
+            Self::GenericString(error) => write!(f, "{}", error),
+            _ => write!(f, "{:?}", self),
+        }
     }
 }
 
@@ -53,7 +57,17 @@ impl Into<tauri::ipc::InvokeError> for AppError {
 
 impl From<AppError> for String {
     fn from(err: AppError) -> String {
-        format!("{:?}", err)
+        format!("{}", err)
+    }
+}
+
+impl From<tauri_plugin_shell::process::Output> for AppError {
+    fn from(output: tauri_plugin_shell::process::Output) -> Self {
+        if output.stderr.len() > 0 {
+            String::from_utf8(output.stderr).unwrap_or_default().trim().to_owned().into()
+        } else {
+            String::from_utf8(output.stdout).unwrap_or_default().trim().to_owned().into()
+        }
     }
 }
 

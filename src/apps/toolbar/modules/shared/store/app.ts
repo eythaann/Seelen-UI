@@ -28,6 +28,8 @@ const initialState: RootState = {
   networkAdapters: [],
   networkLocalIp: null,
   online: false,
+  accentColor: '#ff0000',
+  wlanBssEntries: [],
 };
 
 export const RootSlice = createSlice({

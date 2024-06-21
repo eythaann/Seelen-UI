@@ -1,13 +1,15 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS } from '../../../../shared';
+import { loadThemeCSS, setAccentColorAsCssVar } from '../../../../shared';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { configureStore } from '@reduxjs/toolkit';
+import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 
 import { RootActions, RootSlice } from './app';
 
+import { WlanBssEntry } from '../../network/domain';
 import { ActiveApp, Battery, NetworkAdapter, PowerStatus, TrayInfo } from './domain';
 
 export const store = configureStore({
@@ -57,6 +59,14 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setOnline(event.payload));
   });
 
+  await listenGlobal<WlanBssEntry[]>('wlan-scanned', (event) => {
+    store.dispatch(RootActions.setWlanBssEntries(event.payload));
+  });
+
+  await listenGlobal<string>('theme-accent-color', (event) => {
+    store.dispatch(RootActions.setAccentColor(event.payload));
+  });
+
   await view.emitTo(view.label, 'store-events-ready');
 }
 
@@ -79,6 +89,11 @@ export async function loadStore(_userSettings?: UserSettings) {
 
   store.dispatch(RootActions.setPlaceholder(placeholder));
   store.dispatch(RootActions.setEnv(userSettings.env));
+
+  invoke<string>('get_accent_color').then((color) => {
+    setAccentColorAsCssVar(color);
+    store.dispatch(RootActions.setAccentColor(color));
+  });
 }
 
 export function loadSettingsCSS(settings: FancyToolbar) {

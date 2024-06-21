@@ -84,7 +84,8 @@ features = [
     "Win32_NetworkManagement_IpHelper", # required for network manager
     "Win32_NetworkManagement_Ndis", # required for network manager
     "Win32_Networking_WinSock", # required for network manager
-    "Win32_Networking_NetworkListManager", # required for network manager events
+    "Win32_Networking_NetworkListManager", # required for network manager // events
+    "Win32_NetworkManagement_WiFi" # required for network manager // wifi
 ]
 
 [features]

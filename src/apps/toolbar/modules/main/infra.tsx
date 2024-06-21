@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
 import { DateModule } from '../Date/infra';
 import { Item } from '../item/infra';
-import { NetworkModule } from '../network/infra';
+import { NetworkModule } from '../network/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
 

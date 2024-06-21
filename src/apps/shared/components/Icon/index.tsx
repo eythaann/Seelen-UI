@@ -33,7 +33,7 @@ import * as wi from 'react-icons/wi';
 
 import cs from './index.module.css';
 
-export type Icon = keyof typeof icons;
+export type IconName = keyof typeof icons;
 const icons = {
   ...ai,
   ...bi,
@@ -76,11 +76,11 @@ export const exposedIcons = Object.keys(icons).reduce((acc, icon) => {
 
 export function isValidIconName(str: string) {
   const [name] = str.split(':');
-  return !!icons[name as Icon];
+  return !!icons[name as IconName];
 }
 
 interface typesPropsIcon {
-  iconName: Icon;
+  iconName: IconName;
   propsIcon?: IconBaseProps;
 }
 

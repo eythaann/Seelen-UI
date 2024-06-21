@@ -1,5 +1,8 @@
-use std::net::UdpSocket;
+pub mod scanner;
 
+use std::{env::temp_dir, net::UdpSocket};
+
+use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
     NetworkManagement::IpHelper::{
         GetAdaptersAddresses, GAA_FLAG_INCLUDE_GATEWAYS, GAA_FLAG_INCLUDE_PREFIX,
@@ -14,9 +17,9 @@ use windows::Win32::{
     },
 };
 
-use crate::error_handler::Result;
+use crate::{error_handler::Result, seelen::get_app_handle, utils::pwsh::PwshScript};
 
-use super::domain::NetworkAdapter;
+use super::domain::{NetworkAdapter, WlanProfile};
 
 impl NetworkAdapter {
     pub unsafe fn iter_from_raw(
@@ -34,21 +37,6 @@ impl NetworkAdapter {
         Ok(adapters)
     }
 }
-
-/* #[implement(INetworkListManagerEvents)]
-struct NetworkListManagerEvents {}
-
-impl INetworkListManagerEvents_Impl for NetworkListManagerEvents {
-    fn ConnectivityChanged(
-        &self,
-        _new_connectivity: NLM_CONNECTIVITY,
-    ) -> Result<(), windows::core::Error> {
-        log::debug!("Connectivity changed! {:?}", _new_connectivity);
-        log_if_error(emit_network_events());
-        Ok(())
-    }
-}
- */
 
 pub struct NetworkManager {}
 
@@ -112,6 +100,69 @@ impl NetworkManager {
                 }
             }
         });
+    }
+
+    pub async fn get_wifi_profiles() -> Result<Vec<WlanProfile>> {
+        let path = PwshScript::new(include_str!("profiles.ps1"))
+            .execute()
+            .await?;
+        let contents = std::fs::read_to_string(path)?;
+        let profiles: Vec<WlanProfile> = serde_json::from_str(&contents)?;
+        Ok(profiles)
+    }
+
+    pub async fn add_profile(ssid: &str, password: &str, hidden: bool) -> Result<()> {
+        log::trace!("Adding profile {}", ssid);
+
+        // Be sure that xml is using tabs instead of spaces for indentation
+        let profile_xml = include_str!("profile.template.xml")
+            .replace("{ssid}", ssid)
+            .replace("{password}", password)
+            .replace("{hidden}", if hidden { "true" } else { "false" });
+
+        let profile_path = temp_dir().join(format!("slu-{}-profile.xml", ssid));
+
+        std::fs::write(&profile_path, profile_xml)?;
+
+        let handle = get_app_handle();
+        let output = handle
+            .shell()
+            .command("netsh")
+            .args([
+                "wlan",
+                "add",
+                "profile",
+                &format!("filename={}", &profile_path.to_string_lossy()),
+            ])
+            .output()
+            .await?;
+
+        let result = if output.status.success() {
+            Ok(())
+        } else {
+            Err(output.into())
+        };
+
+        std::fs::remove_file(&profile_path)?;
+        result
+    }
+
+    pub async fn remove_profile(ssid: &str) -> Result<()> {
+        log::trace!("Removing profile {}", ssid);
+
+        let handle = get_app_handle();
+        let output = handle
+            .shell()
+            .command("netsh")
+            .args(["wlan", "delete", "profile", &format!("name={}", ssid)])
+            .output()
+            .await?;
+
+        if output.status.success() {
+            Ok(())
+        } else {
+            Err(output.into())
+        }
     }
 }
 

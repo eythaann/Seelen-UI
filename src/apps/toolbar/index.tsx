@@ -1,7 +1,6 @@
 import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
 import { registerDocumentEvents } from './events';
-import { ConfigProvider, theme } from 'antd';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
@@ -28,17 +27,7 @@ async function Main() {
 
   createRoot(container).render(
     <Provider store={store}>
-      <ConfigProvider
-        getPopupContainer={() => container}
-        componentSize="small"
-        theme={{
-          algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
-            ? theme.darkAlgorithm
-            : theme.defaultAlgorithm,
-        }}
-      >
-        <App />
-      </ConfigProvider>
+      <App />
     </Provider>,
   );
 }

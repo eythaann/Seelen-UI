@@ -17,7 +17,12 @@ export function wrapConsole() {
   };
 
   const StrintifyParams = (params: any[]): string => {
-    return params.reduce((a, b) => a + ' ' + JSON.stringify(b, null, 2), '');
+    return params.reduce((a, b) => {
+      if (typeof b === 'string') {
+        return a + ' ' + b;
+      }
+      return a + ' ' + JSON.stringify(b, null, 2);
+    }, '');
   };
 
   window.addEventListener('unhandledrejection', (event) => {

@@ -108,4 +108,67 @@
       }
     }
   }
+
+  .wlan-selector {
+    margin: 4px;
+    width: 260px;
+    max-height: 50vh;
+    box-shadow: 0 0 10px 10px #0001;
+    display: flex;
+    flex-direction: column;
+
+    .wlan-selector-bg-layer-1 {
+      background-color: var(--color-gray-100);
+      border-radius: 10px;
+    }
+
+    .wlan-selector-entries {
+      padding: 8px;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .wlan-entry {
+      min-height: min-content;
+      padding: 12px 10px;
+      border-radius: 8px;
+      gap: 10px;
+
+      &:hover {
+        background-color: var(--color-gray-200);
+      }
+
+      &.wlan-entry-selected {
+        background-color: rgba(var(--config-accent-color-rgb), 0.2);
+      }
+
+      .wlan-entry-info {
+        font-weight: 600;
+        gap: 10px;
+
+        .wlan-entry-info-ssid {
+          color: var(--color-gray-800);
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+
+    .wlan-selector-footer {
+      border-top: solid 1px var(--color-gray-300);
+      padding: 8px 16px;
+      font-weight: 600;
+      font-size: 0.8rem;
+
+      > span {
+        padding: 2px 6px;
+        border-radius: 8px;
+
+        &:hover {
+          background-color: var(--color-gray-200);
+        }
+      }
+    }
+  }
 }

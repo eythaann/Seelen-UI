@@ -12,14 +12,16 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
 
 use crate::apps_config::*;
 use crate::error_handler::{log_if_error, Result};
-use crate::modules::power::infrastructure::*;
-use crate::modules::tray::infrastructure::*;
 use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
 use crate::utils::{is_windows_10, is_windows_11};
 use crate::windows_api::WindowsApi;
+
+use crate::modules::network::infrastructure::*;
+use crate::modules::power::infrastructure::*;
+use crate::modules::tray::infrastructure::*;
 
 fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
     let app = SEELEN.lock().handle().clone();
@@ -134,12 +136,12 @@ fn get_accent_color() -> String {
     let mut opaque_blend = windows::Win32::Foundation::BOOL(0);
     let _ = unsafe { DwmGetColorizationColor(&mut colorization, &mut opaque_blend) };
 
-    let alpha = (colorization >> 24) & 0xFF;
+    let _alpha = (colorization >> 24) & 0xFF;
     let red = (colorization >> 16) & 0xFF;
     let green = (colorization >> 8) & 0xFF;
     let blue = colorization & 0xFF;
 
-    format!("#{:02X}{:02X}{:02X}{:02X}", red, green, blue, alpha)
+    format!("#{:02X}{:02X}{:02X}", red, green, blue)
 }
 
 #[command]
@@ -236,6 +238,12 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         // tray icons
         temp_get_by_event_tray_info,
         on_click_tray_icon,
-        on_context_menu_tray_icon
+        on_context_menu_tray_icon,
+        // network
+        wlan_get_profiles,
+        wlan_start_scanning,
+        wlan_stop_scanning,
+        wlan_connect,
+        wlan_disconnect,
     ])
 }

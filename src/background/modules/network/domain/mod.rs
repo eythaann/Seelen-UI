@@ -1,7 +1,7 @@
 pub mod types;
 
 use itertools::Itertools;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use types::InterfaceType;
 use windows::Win32::{
     NetworkManagement::{IpHelper::IP_ADAPTER_ADDRESSES_LH, Ndis::IfOperStatusUp},
@@ -143,4 +143,28 @@ impl TryFrom<&IP_ADAPTER_ADDRESSES_LH> for NetworkAdapter {
             })
         }
     }
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all(serialize = "camelCase", deserialize = "PascalCase"))]
+pub struct WlanProfile {
+    profile_name: String,
+    #[serde(rename(deserialize = "SSID"))]
+    ssid: String,
+    authentication: String,
+    encryption: String,
+    password: String,
+}
+
+#[derive(Debug, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct WlanBssEntry {
+    pub ssid: Option<String>,
+    pub bssid: String,
+    pub channel_frequency: u32,
+    pub signal: u32,
+    /// true if the interface is connected to this network
+    pub connected: bool,
+    /// true if the interface is connected to this network and is using this channel frequency
+    pub connected_channel: bool,
 }

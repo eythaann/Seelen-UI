@@ -68,6 +68,10 @@ export const PowerToolbarModuleSchema = BaseTMSchema.extend({
 export type NetworkTM = z.infer<typeof NetworkTMSchema>;
 export const NetworkTMSchema = BaseTMSchema.extend({
   type: z.literal(ToolbarModuleType.Network),
+  withWlanSelector: z
+    .boolean()
+    .describe('Show Wi-fi settings on click (overrides onClick property)')
+    .default(false),
 });
 
 export type SettingsToolbarModule = z.infer<typeof SettingsToolbarModuleSchema>;

@@ -2,6 +2,8 @@ import { IRootState } from '../../../../../shared.interfaces';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { Placeholder } from '../../../../shared/schemas/Placeholders';
 
+import { WlanBssEntry } from '../../network/domain';
+
 export interface ActiveApp {
   name: string;
   title: string;
@@ -42,4 +44,6 @@ export interface RootState extends IRootState<FancyToolbar> {
   networkAdapters: NetworkAdapter[];
   networkLocalIp: string | null;
   online: boolean;
+  accentColor: string;
+  wlanBssEntries: WlanBssEntry[];
 }

@@ -8,6 +8,7 @@
   --config-space-between-items: 0px;
 
   --config-accent-color: #ff0000;
+  --config-accent-color-rgb: 255, 0, 0;
 
   --config-by-position-justify-content: center;
   --config-by-position-align-items: flex-end;

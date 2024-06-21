@@ -27,10 +27,18 @@ export const setWindowAsFullSize = () => {
   getCurrent().setSize(new PhysicalSize(screenWidth, screenHeight));
 };
 
+export function setAccentColorAsCssVar(color: string) {
+  let hex = color.replace('#', '');
+  var bigint = parseInt(hex, 16);
+  var r = (bigint >> 16) & 255;
+  var g = (bigint >> 8) & 255;
+  var b = bigint & 255;
+  document.documentElement.style.setProperty('--config-accent-color', color);
+  document.documentElement.style.setProperty('--config-accent-color-rgb', `${r}, ${g}, ${b}`);
+}
+
 export function loadThemeCSS(config: UserSettings) {
-  invoke<string>('get_accent_color').then((color) => {
-    document.documentElement.style.setProperty('--config-accent-color', color);
-  });
+  invoke<string>('get_accent_color').then(setAccentColorAsCssVar);
 
   let selected = config.jsonSettings.selectedTheme;
   let themes = config.themes.filter((theme) => selected.includes(theme.info.filename));

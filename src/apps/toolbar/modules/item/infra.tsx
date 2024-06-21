@@ -2,6 +2,7 @@ import {
   exposedIcons,
   exposedIconsRegex,
   Icon,
+  IconName,
   isValidIconName,
 } from '../../../shared/components/Icon';
 import { ToolbarModule } from '../../../shared/schemas/Placeholders';
@@ -55,7 +56,7 @@ export function ElementsFromEvaluated(content: any) {
 
   parts.forEach((part: string, index: number) => {
     if (isValidIconName(part)) {
-      const [iconName, size] = part.split(':') as [Icon, string?];
+      const [iconName, size] = part.split(':') as [IconName, string?];
       result.push(
         <Icon
           key={index}

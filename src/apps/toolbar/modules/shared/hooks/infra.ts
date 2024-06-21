@@ -22,3 +22,16 @@ export function useAppActivation(cb: () => void, deps: any[] = []) {
     };
   }, deps);
 }
+
+export function useInterval(callback: () => void, delay: number, deps: any[] = []) {
+  const key = useRef<number>();
+
+  // Set up the interval.
+  useEffect(() => {
+    if (key.current) {
+      clearInterval(key.current);
+    }
+    key.current = window.setInterval(callback, delay);
+    return () => clearInterval(key.current);
+  }, [callback, delay, ...deps]);
+}

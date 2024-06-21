@@ -126,7 +126,7 @@ export function SettingsModule(props: Props) {
         <Item
           module={{
             ...props.module,
-            onClick: null,
+            onClick: 'nothing',
           }}
         />
       </div>
