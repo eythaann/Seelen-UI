@@ -16,7 +16,18 @@ jobs:
         uses: LeGitHubDeTai/github-to-discord@main
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          MESSAGE_TITLE: Release
-          MESSAGE_DESCRIPTION: A new release has been published
-          MESSAGE_URL: https://github.com/eythaann/Seelen-UI
+          DISCORD_USERNAME: Seelen
+          DISCORD_AVATAR: https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/images/logo_with_margins.png
+
+          AUTHOR_NAME: eythaann
+          AUTHOR_URL: "https://github.com/eythaann"
+          AUTHOR_AVATAR: "https://avatars.githubusercontent.com/u/76607907?v=4"
+
+          MESSAGE_TITLE: Seelen UI
+          MESSAGE_DESCRIPTION: A new release of Seelen UI has been published
           MESSAGE_COLOR: 5814783
+
+          SECTION_NAME: "ChangeLog"
+
+          FOOTER_TEXT: ""
+          FOOTER_URL: ""
