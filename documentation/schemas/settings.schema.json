@@ -304,7 +304,7 @@
     "ahk_variables": {
       "type": "object",
       "properties": {
-        "debug_wm": {
+        "reserve_top": {
           "type": "object",
           "properties": {
             "fancy": {
@@ -320,327 +320,320 @@
           ],
           "additionalProperties": false,
           "default": {
-            "fancy": "Win + Control + Alt + W",
-            "ahk": "^#!w"
-          }
-        },
-        "reserve_top": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
-          "default": {
             "fancy": "Win + Shift + I",
             "ahk": "#+i"
           }
         },
         "reserve_bottom": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + K",
             "ahk": "#+k"
           }
         },
         "reserve_left": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + J",
             "ahk": "#+j"
           }
         },
         "reserve_right": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + L",
             "ahk": "#+l"
           }
         },
         "reserve_float": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + U",
             "ahk": "#+u"
           }
         },
         "reserve_stack": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + O",
             "ahk": "#+o"
           }
         },
         "focus_top": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + W",
             "ahk": "#+w"
           }
         },
         "focus_bottom": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + S",
             "ahk": "#+s"
           }
         },
         "focus_left": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + A",
             "ahk": "#+a"
           }
         },
         "focus_right": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + D",
             "ahk": "#+d"
           }
         },
         "focus_latest": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + E",
             "ahk": "#+e"
           }
         },
         "increase_width": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Alt + =",
             "ahk": "#!="
           }
         },
         "decrease_width": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Alt + -",
             "ahk": "#!-"
           }
         },
         "increase_height": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + =",
             "ahk": "#+="
           }
         },
         "decrease_height": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + -",
             "ahk": "#+-"
           }
         },
         "restore_sizes": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Alt + 0",
             "ahk": "#!0"
           }
         },
         "switch_workspace_0": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 1",
             "ahk": "!1"
           }
         },
         "switch_workspace_1": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 2",
             "ahk": "!2"
           }
         },
         "switch_workspace_2": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 3",
             "ahk": "!3"
           }
         },
         "switch_workspace_3": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 4",
             "ahk": "!4"
           }
         },
         "switch_workspace_4": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 5",
             "ahk": "!5"
           }
         },
         "switch_workspace_5": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 6",
             "ahk": "!6"
           }
         },
         "switch_workspace_6": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 7",
             "ahk": "!7"
           }
         },
         "switch_workspace_7": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 8",
             "ahk": "!8"
           }
         },
         "switch_workspace_8": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 9",
             "ahk": "!9"
           }
         },
         "switch_workspace_9": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + 0",
             "ahk": "!0"
           }
         },
         "move_to_workspace_0": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 1",
             "ahk": "!+1"
           }
         },
         "move_to_workspace_1": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 2",
             "ahk": "!+2"
           }
         },
         "move_to_workspace_2": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 3",
             "ahk": "!+3"
           }
         },
         "move_to_workspace_3": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 4",
             "ahk": "!+4"
           }
         },
         "move_to_workspace_4": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 5",
             "ahk": "!+5"
           }
         },
         "move_to_workspace_5": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 6",
             "ahk": "!+6"
           }
         },
         "move_to_workspace_6": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 7",
             "ahk": "!+7"
           }
         },
         "move_to_workspace_7": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 8",
             "ahk": "!+8"
           }
         },
         "move_to_workspace_8": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 9",
             "ahk": "!+9"
           }
         },
         "move_to_workspace_9": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Alt + Shift + 0",
             "ahk": "!+0"
           }
         },
         "send_to_workspace_0": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 1",
             "ahk": "#+1"
           }
         },
         "send_to_workspace_1": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 2",
             "ahk": "#+2"
           }
         },
         "send_to_workspace_2": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 3",
             "ahk": "#+3"
           }
         },
         "send_to_workspace_3": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 4",
             "ahk": "#+4"
           }
         },
         "send_to_workspace_4": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 5",
             "ahk": "#+5"
           }
         },
         "send_to_workspace_5": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 6",
             "ahk": "#+6"
           }
         },
         "send_to_workspace_6": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 7",
             "ahk": "#+7"
           }
         },
         "send_to_workspace_7": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 8",
             "ahk": "#+8"
           }
         },
         "send_to_workspace_8": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 9",
             "ahk": "#+9"
           }
         },
         "send_to_workspace_9": {
-          "$ref": "#/properties/ahk_variables/properties/debug_wm",
+          "$ref": "#/properties/ahk_variables/properties/reserve_top",
           "default": {
             "fancy": "Win + Shift + 0",
             "ahk": "#+0"
@@ -665,6 +658,10 @@
       "default": [
         "default"
       ]
+    },
+    "dev_tools": {
+      "type": "boolean",
+      "default": false
     }
   },
   "additionalProperties": false,

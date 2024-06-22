@@ -207,6 +207,11 @@
               },
               "onClick": {
                 "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "withWlanSelector": {
+                "type": "boolean",
+                "description": "Show Wi-fi settings on click (overrides onClick property)",
+                "default": false
               }
             },
             "required": [
