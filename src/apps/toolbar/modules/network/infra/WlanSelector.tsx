@@ -51,6 +51,9 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
           <div className="wlan-selector">
             <BackgroundByLayers prefix="wlan-selector" layers={1} />
             <div className="wlan-selector-entries">
+              {filtered.length === 0 && (
+                <div className="wlan-selector-empty">No networks found</div>
+              )}
               {filtered.map((entry) => {
                 let ssid = entry.ssid || '__HIDDEN_SSID__';
                 return (

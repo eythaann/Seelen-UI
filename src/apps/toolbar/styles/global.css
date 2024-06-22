@@ -133,6 +133,13 @@ body {
     flex-direction: column;
     gap: 6px;
 
+    .wlan-selector-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px;
+    }
+
     .wlan-entry {
       display: flex;
       flex-direction: column;

@@ -147,6 +147,10 @@
       padding: 8px;
       flex: 1;
       overflow-y: auto;
+
+      .wlan-selector-empty {
+        font-style: italic;
+      }
     }
 
     .wlan-entry {

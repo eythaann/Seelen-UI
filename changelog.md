@@ -8,6 +8,7 @@
 - better performance on canceling changes in settings.
 - avoid loading innecesary files in modules that are not used.
 - update pinned apps path by filename on open (some apps change of path on updates so this will fix that).
+- show empty message on toolbar when no wlan networks are found.
 
 ### fix
 - ahk error on save.
