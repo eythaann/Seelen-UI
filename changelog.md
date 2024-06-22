@@ -7,6 +7,7 @@
 - focus settings window if already exist.
 - better performance on canceling changes in settings.
 - avoid loading innecesary files in modules that are not used.
+- update pinned apps path by filename on open (some apps change of path on updates so this will fix that).
 
 ### fix
 - ahk error on save.

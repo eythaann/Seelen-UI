@@ -1,19 +1,13 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
 import { StateBuilder } from '../../../../shared/StateBuilder';
+import { savePinnedItems } from './storeApi';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { SeelenWegSlice } from '../../bar/app';
 import { PinnedApp } from '../../item/app/PinnedApp';
 import { TemporalApp } from '../../item/app/TemporalApp';
 
-import {
-  App,
-  AppFromBackground,
-  AppsSides,
-  HWND,
-  RootState,
-  SpecialItemType,
-} from './domain';
+import { App, AppFromBackground, AppsSides, HWND, RootState, SpecialItemType } from './domain';
 
 const initialState: RootState = {
   pinnedOnLeft: [],
@@ -124,22 +118,23 @@ export const RootSlice = createSlice({
 
       state.openApps[app.hwnd] = app;
 
-      const appOnLeft = state.pinnedOnLeft.find((current) => current.exe === app.exe);
-      if (appOnLeft) {
-        appOnLeft.opens.push(app.hwnd);
-        return;
-      }
+      const appFilename = app.exe.split('\\').pop();
+      if (appFilename) {
+        const pinedApp =
+          state.pinnedOnLeft.find((current) => current.exe.endsWith(appFilename)) ||
+          state.pinnedOnCenter.find((current) => current.exe.endsWith(appFilename)) ||
+          state.pinnedOnRight.find((current) => current.exe.endsWith(appFilename));
 
-      const appOnCenter = state.pinnedOnCenter.find((current) => current.exe === app.exe);
-      if (appOnCenter) {
-        appOnCenter.opens.push(app.hwnd);
-        return;
-      }
+        if (pinedApp) {
+          pinedApp.opens.push(app.hwnd);
 
-      const appOnRight = state.pinnedOnRight.find((current) => current.exe === app.exe);
-      if (appOnRight) {
-        appOnRight.opens.push(app.hwnd);
-        return;
+          if (pinedApp.exe !== app.exe) {
+            pinedApp.exe = app.exe;
+            pinedApp.execution_path = app.execution_path;
+            savePinnedItems(state);
+          }
+          return;
+        }
       }
 
       state.pinnedOnCenter.push(TemporalApp.fromBackground(app));
