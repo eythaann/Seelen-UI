@@ -1,9 +1,4 @@
-import {
-  Route,
-  RouteIcons,
-  RouteLabels,
-  WorkingInProgressRoutes,
-} from './routes';
+import { Route, RouteIcons, RouteLabels, WorkingInProgressRoutes } from './routes';
 import { Tooltip } from 'antd';
 import { memo, useCallback } from 'react';
 
@@ -25,7 +20,7 @@ const Item = ({ route, isActive }: ItemProps) => {
   let onclick = useCallback(() => {
     if (WorkingInProgressRoutes.includes(route)) {
       return;
-    };
+    }
     dispatch(RootActions.setRoute(route));
   }, []);
 
@@ -46,18 +41,22 @@ const Item = ({ route, isActive }: ItemProps) => {
 
 export const Navigation = memo(() => {
   let current = useAppSelector(RootSelectors.route);
+  let devTools = useAppSelector(RootSelectors.devTools);
+
+  let routes = Object.values(Route).filter(
+    (r) => (r !== Route.DEVELOPER || devTools) && r !== Route.INFO,
+  );
+
   return (
     <div
       className={cx(cs.navigation, {
-        [cs.tableView!]: current === Route.SPECIFIT_APPS,
+        [cs.tableView!]: current === Route.SPECIFIC_APPS,
       })}
     >
       <div className={cs.group}>
-        {Object.values(Route).map((route) => {
-          return route === Route.INFO ? null : (
-            <Item key={route} route={route} isActive={current === route} />
-          );
-        })}
+        {routes.map((route) => (
+          <Item key={route} route={route} isActive={current === route} />
+        ))}
       </div>
       <Item key={Route.INFO} route={Route.INFO} isActive={current === Route.INFO} />
     </div>

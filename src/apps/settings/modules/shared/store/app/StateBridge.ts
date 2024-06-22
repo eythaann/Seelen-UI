@@ -62,6 +62,7 @@ export const StateToJsonSettings = (state: RootState): ISettings => {
     'ahkEnabled',
     'fancyToolbar',
     'ahkVariables',
+    'devTools',
   ]);
 };
 

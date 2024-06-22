@@ -88,6 +88,7 @@ export const SettingsSchema = z.object({
       return Array.isArray(arg) ? arg : [arg];
     })
     .default(['default']),
+  dev_tools: z.boolean().default(false),
 });
 
 type inner = z.infer<typeof SettingsSchema> & {};
@@ -99,4 +100,5 @@ export interface ISettings {
   ahkEnabled: inner['ahk_enabled'];
   ahkVariables: AhkVariables;
   selectedTheme: string[];
+  devTools: boolean;
 }

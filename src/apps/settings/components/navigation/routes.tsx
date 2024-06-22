@@ -7,8 +7,9 @@ export enum Route {
   SEELEN_WM = 'seelen_wm',
   SEELEN_WEG = 'seelen_weg',
   MONITORS = 'monitors',
-  SPECIFIT_APPS = 'specifit_apps',
+  SPECIFIC_APPS = 'specific_apps',
   SHORTCUTS = 'shortcuts',
+  DEVELOPER = 'developer',
   INFO = 'info',
 }
 
@@ -18,15 +19,16 @@ export const RouteLabels: Record<Route, string> = {
   [Route.GENERAL]: 'General',
   [Route.MONITORS]: 'Monitors',
   [Route.SHORTCUTS]: 'Shortcuts',
-  [Route.SPECIFIT_APPS]: 'Apps Configurations',
+  [Route.SPECIFIC_APPS]: 'Apps Configurations',
   [Route.INFO]: 'Information',
   [Route.SEELEN_WEG]: 'SeelenWeg',
   [Route.SEELEN_WM]: 'Window Manager',
   [Route.SEELEN_BAR]: 'Fancy Toolbar',
+  [Route.DEVELOPER]: 'Developer Tools',
 };
 
 export const RouteExtraInfo: { [key in Route]?: string } = {
-  [Route.SPECIFIT_APPS]: `
+  [Route.SPECIFIC_APPS]: `
     Seelen UI use only one identifier per app (first match found) so the order in how are specificated is important,
     the latest added will be priorized, as note the table is sorted by default from latest to old.
   `,
@@ -38,7 +40,8 @@ export const RouteIcons: Record<Route, React.ReactNode> = {
   [Route.SEELEN_BAR]: <Icon iconName="BiSolidDockTop" />,
   [Route.SEELEN_WM]: <Icon iconName="BsGrid1X2Fill" propsIcon={{ color: '#0086b4', size: 14 }} />,
   [Route.SEELEN_WEG]: <Icon iconName="BiDockBottom" />,
-  [Route.SPECIFIT_APPS]: <Icon iconName="IoIosApps" propsIcon={{ color: '#d71913' }} />,
+  [Route.SPECIFIC_APPS]: <Icon iconName="IoIosApps" propsIcon={{ color: '#d71913' }} />,
   [Route.SHORTCUTS]: '🔡',
   [Route.INFO]: <Icon iconName="PiInfoFill" />,
+  [Route.DEVELOPER]: <Icon iconName="PiCodeBold" />,
 };

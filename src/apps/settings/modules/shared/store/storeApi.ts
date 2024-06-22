@@ -10,7 +10,7 @@ import { DirEntry } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { cloneDeep } from 'lodash';
 
-import { getSettingsPath } from '../config/infra';
+import { resolveDotConfigPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
 import { AppsTemplates } from '../../../../shared/appsTemplates';
@@ -201,8 +201,8 @@ export async function loadUserSettings(route?: string): Promise<UserSettings> {
     env: await invoke('get_user_envs'),
   };
 
-  const json_route = route || (await getSettingsPath('settings.json'));
-  const yaml_route = await getSettingsPath('applications.yml');
+  const json_route = route || (await resolveDotConfigPath('settings.json'));
+  const yaml_route = await resolveDotConfigPath('applications.yml');
 
   if (await fs.exists(json_route)) {
     userSettings.jsonSettings = parseAsCamel(
@@ -262,8 +262,8 @@ export async function createAhkFiles(ahkVariables: AhkVariables) {
 }
 
 export async function saveUserSettings(settings: UserSettings) {
-  const json_route = await getSettingsPath('settings.json');
-  const yaml_route = await getSettingsPath('applications.yml');
+  const json_route = await resolveDotConfigPath('settings.json');
+  const yaml_route = await resolveDotConfigPath('applications.yml');
 
   if (settings.jsonSettings.ahkEnabled) {
     await createAhkFiles(settings.jsonSettings.ahkVariables);

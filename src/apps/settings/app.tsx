@@ -4,6 +4,7 @@ import { Route } from './components/navigation/routes';
 import { Suspense } from 'react';
 
 import { AppsConfiguration } from './modules/appsConfigurations/infra/infra';
+import { DeveloperTools } from './modules/developer/infra';
 import { FancyToolbarSettings } from './modules/fancyToolbar/infra';
 import { General } from './modules/general/main/infra';
 import { Information } from './modules/information/infrastructure';
@@ -19,11 +20,12 @@ const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.GENERAL]: General,
   [Route.MONITORS]: Monitors,
   [Route.SHORTCUTS]: Shortcuts,
-  [Route.SPECIFIT_APPS]: AppsConfiguration,
+  [Route.SPECIFIC_APPS]: AppsConfiguration,
   [Route.INFO]: Information,
   [Route.SEELEN_WEG]: SeelenWegSettings,
   [Route.SEELEN_WM]: WindowManagerSettings,
   [Route.SEELEN_BAR]: FancyToolbarSettings,
+  [Route.DEVELOPER]: DeveloperTools,
 };
 
 export function App() {

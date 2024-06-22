@@ -80,7 +80,7 @@ export const SaveStore = async () => {
     await saveUserSettings(settings);
     await emit('updated-settings', settings);
 
-    store.dispatch(RootActions.setSaved());
+    store.dispatch(RootActions.setToBeSaved(false));
   } catch (error) {
     Modal.error({
       title: 'Error on Save',

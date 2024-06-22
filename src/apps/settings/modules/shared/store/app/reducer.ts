@@ -28,6 +28,7 @@ const initialState: RootState = {
   availableLayouts: [],
   availablePlaceholders: [],
   selectedTheme: [],
+  devTools: false,
 };
 
 export const RootSlice = createSlice({
@@ -35,8 +36,9 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...reducersFor(initialState),
-    setSaved: (state) => {
-      state.toBeSaved = false;
+    setDevTools: (state, action: PayloadAction<boolean>) => {
+      state.toBeSaved = true;
+      state.devTools = action.payload;
     },
     setState: (_state, action: PayloadAction<RootState>) => action.payload,
     setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
