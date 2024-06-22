@@ -331,22 +331,33 @@ impl Seelen {
     }
 
     pub fn show_settings(&self) -> Result<WebviewWindow> {
-        log::trace!("show_settings_window");
-        let window = tauri::WebviewWindowBuilder::new(
-            self.handle(),
-            "settings",
-            tauri::WebviewUrl::App("settings/index.html".into()),
-        )
-        .title("Settings")
-        .inner_size(720.0, 480.0)
-        .maximizable(false)
-        .minimizable(true)
-        .resizable(false)
-        .visible(false)
-        .decorations(false)
-        .center()
-        .build()?;
-        Ok(window)
+        log::trace!("Show settings window");
+
+        let window = self.handle().get_webview_window("settings").or_else(|| {
+            tauri::WebviewWindowBuilder::new(
+                self.handle(),
+                "settings",
+                tauri::WebviewUrl::App("settings/index.html".into()),
+            )
+            .title("Settings")
+            .inner_size(720.0, 480.0)
+            .maximizable(false)
+            .minimizable(true)
+            .resizable(false)
+            .visible(false)
+            .decorations(false)
+            .center()
+            .build()
+            .ok()
+        });
+
+        match window {
+            Some(window) => {
+                window.set_focus()?;
+                Ok(window)
+            }
+            None => Err("Failed to create settings window".into()),
+        }
     }
 
     pub fn create_update_modal(&self) -> Result<()> {

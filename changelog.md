@@ -4,6 +4,7 @@
 ### enhancements
 - separate `information` and `developer tools` tabs in the settings.
 - add a option to open the install path in explorer.
+- focus settings window if already exist.
 
 ## [1.7.0]
 ### features
