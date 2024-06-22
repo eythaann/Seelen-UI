@@ -1,5 +1,5 @@
 import { UserSettings } from '../../../../../shared.interfaces';
-import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS } from '../../../../shared';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { updateHitbox } from '../../../events';
@@ -124,7 +124,7 @@ function loadSettingsCSS(settings: Seelenweg) {
 }
 
 export async function loadStore() {
-  const userSettings = await loadUserSettings();
+  const userSettings = await new UserSettingsLoader().load();
   const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
@@ -135,7 +135,7 @@ export async function loadStore() {
   }
 
   const apps = await loadPinnedItems();
-  store.dispatch(RootActions.setPinnedOnLeft(await cleanSavedItems(apps.left) ));
-  store.dispatch(RootActions.setPinnedOnCenter(await cleanSavedItems(apps.center )));
-  store.dispatch(RootActions.setPinnedOnRight(await cleanSavedItems(apps.right )));
+  store.dispatch(RootActions.setPinnedOnLeft(await cleanSavedItems(apps.left)));
+  store.dispatch(RootActions.setPinnedOnCenter(await cleanSavedItems(apps.center)));
+  store.dispatch(RootActions.setPinnedOnRight(await cleanSavedItems(apps.right)));
 }

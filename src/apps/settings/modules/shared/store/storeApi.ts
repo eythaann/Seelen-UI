@@ -190,37 +190,66 @@ async function loadUserPlaceholders(ref: UserSettings) {
   }
 }
 
-export async function loadUserSettings(route?: string): Promise<UserSettings> {
-  const userSettings: UserSettings = {
-    jsonSettings: parseAsCamel(SettingsSchema, {}),
-    yamlSettings: [],
-    themes: [],
-    bgLayers: defaultTheme.layers,
-    layouts: [],
-    placeholders: [],
-    env: await invoke('get_user_envs'),
-  };
+export class UserSettingsLoader {
+  private _withUserApps: boolean = false;
+  private _withLayouts: boolean = false;
+  private _withPlaceholders: boolean = false;
 
-  const json_route = route || (await resolveDotConfigPath('settings.json'));
-  const yaml_route = await resolveDotConfigPath('applications.yml');
-
-  if (await fs.exists(json_route)) {
-    userSettings.jsonSettings = parseAsCamel(
-      SettingsSchema,
-      JSON.parse(await fs.readTextFile(json_route)),
-    );
+  withUserApps() {
+    this._withUserApps = true;
+    return this;
   }
 
-  if (await fs.exists(yaml_route)) {
-    const processed = yaml.load(await fs.readTextFile(yaml_route));
-    userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
+  withLayouts() {
+    this._withLayouts = true;
+    return this;
   }
 
-  await loadUserThemes(userSettings);
-  await loadUserLayouts(userSettings);
-  await loadUserPlaceholders(userSettings);
+  withPlaceholders() {
+    this._withPlaceholders = true;
+    return this;
+  }
 
-  return userSettings;
+  async load(route?: string): Promise<UserSettings> {
+    const userSettings: UserSettings = {
+      jsonSettings: parseAsCamel(SettingsSchema, {}),
+      yamlSettings: [],
+      themes: [],
+      bgLayers: defaultTheme.layers,
+      layouts: [],
+      placeholders: [],
+      env: await invoke('get_user_envs'),
+    };
+
+    const json_route = route || (await resolveDotConfigPath('settings.json'));
+
+    if (await fs.exists(json_route)) {
+      userSettings.jsonSettings = parseAsCamel(
+        SettingsSchema,
+        JSON.parse(await fs.readTextFile(json_route)),
+      );
+    }
+
+    if (this._withUserApps) {
+      const yaml_route = await resolveDotConfigPath('applications.yml');
+      if (await fs.exists(yaml_route)) {
+        const processed = yaml.load(await fs.readTextFile(yaml_route));
+        userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
+      }
+    }
+
+    await loadUserThemes(userSettings);
+
+    if (this._withLayouts) {
+      await loadUserLayouts(userSettings);
+    }
+
+    if (this._withPlaceholders) {
+      await loadUserPlaceholders(userSettings);
+    }
+
+    return userSettings;
+  }
 }
 
 export async function loadAppsTemplates() {

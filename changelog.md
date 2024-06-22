@@ -6,6 +6,7 @@
 - add a option to open the install path in explorer.
 - focus settings window if already exist.
 - better performance on canceling changes in settings.
+- avoid loading innecesary files in modules that are not used.
 
 ### fix
 - ahk error on save.

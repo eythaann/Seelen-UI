@@ -2,8 +2,8 @@ import { UserSettings } from '../../../../../shared.interfaces';
 import {
   getBackgroundLayers,
   loadAppsTemplates,
-  loadUserSettings,
   saveUserSettings,
+  UserSettingsLoader,
 } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
@@ -51,7 +51,11 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     ),
   );
 
-  const userSettings = await loadUserSettings(customPath);
+  const userSettings = await new UserSettingsLoader()
+    .withLayouts()
+    .withPlaceholders()
+    .withUserApps()
+    .load(customPath);
 
   const currentState = store.getState();
   const initialState = RootSlice.getInitialState();

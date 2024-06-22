@@ -1,5 +1,5 @@
 import { UserSettings } from '../../../../../shared.interfaces';
-import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setAccentColorAsCssVar } from '../../../../shared';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { configureStore } from '@reduxjs/toolkit';
@@ -71,7 +71,7 @@ export async function registerStoreEvents() {
 }
 
 export async function loadStore(_userSettings?: UserSettings) {
-  const userSettings = _userSettings || (await loadUserSettings());
+  const userSettings = _userSettings || (await new UserSettingsLoader().withPlaceholders().load());
   const settings = userSettings.jsonSettings.fancyToolbar;
 
   loadSettingsCSS(settings);

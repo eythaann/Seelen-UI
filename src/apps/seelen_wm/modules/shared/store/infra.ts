@@ -1,5 +1,5 @@
 import { UserSettings } from '../../../../../shared.interfaces';
-import { loadUserSettings } from '../../../../settings/modules/shared/store/storeApi';
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS } from '../../../../shared';
 import { WindowManager } from '../../../../shared/schemas/WindowManager';
 import { configureStore } from '@reduxjs/toolkit';
@@ -16,7 +16,7 @@ export const store = configureStore({
 });
 
 export async function loadStore() {
-  const userSettings = await loadUserSettings();
+  const userSettings = await new UserSettingsLoader().withLayouts().load();
   const settings = userSettings.jsonSettings.windowManager;
   store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
   store.dispatch(RootActions.setSettings(settings));
