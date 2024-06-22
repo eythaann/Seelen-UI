@@ -6,6 +6,9 @@
 - add a option to open the install path in explorer.
 - focus settings window if already exist.
 
+### fix
+- ahk error on save.
+
 ## [1.7.0]
 ### features
 - add Network toolbar module.

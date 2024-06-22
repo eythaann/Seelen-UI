@@ -20,14 +20,13 @@ use crate::{
     seelen_wm::WindowManager,
     state::State,
     system::register_system_events,
-    utils::{run_ahk_file, sleep_millis},
+    utils::{ahk::AutoHotKey, sleep_millis},
     windows_api::WindowsApi,
 };
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
     pub static ref APP_HANDLE: Arc<Mutex<Option<AppHandle<Wry>>>> = Arc::new(Mutex::new(None));
-    pub static ref APP_STATE: Arc<Mutex<State>> = Arc::new(Mutex::new(State::default()));
 }
 
 pub fn get_app_handle() -> AppHandle<Wry> {
@@ -91,6 +90,10 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
+    pub fn refresh_state(&mut self) -> Result<()> {
+        self.state.refresh()
+    }
+
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
         self.handle = Some(app.clone());
@@ -103,7 +106,6 @@ impl Seelen {
             .path()
             .resolve(".config\\seelen\\settings.json", BaseDirectory::Home)?;
         self.state = State::new(&path).unwrap_or_default();
-        *APP_STATE.lock() = self.state.clone();
 
         let mut settings_by_app = SETTINGS_BY_APP.lock();
         settings_by_app.set_paths(
@@ -304,13 +306,26 @@ impl Seelen {
     }
 
     pub fn start_ahk_shortcuts(&self) -> Result<()> {
+        // kill all running shortcuts before starting again
+        self.kill_ahk_shortcuts();
+
         if self.state.is_ahk_enabled() {
-            run_ahk_file(self.handle(), "seelen.ahk")?;
+            log::trace!("Starting seelen.ahk");
+            AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.ahk"))
+                .with_lib()
+                .execute()?;
 
             if self.state.is_window_manager_enabled() {
-                log_if_error(run_ahk_file(self.handle(), "seelen.wm.ahk"));
+                log::trace!("Starting seelen.wm.ahk");
+                AutoHotKey::from_template(
+                    include_str!("utils/ahk/mocks/seelen.wm.ahk"),
+                    self.state.get_ahk_variables(),
+                )
+                .with_lib()
+                .execute()?;
             }
         }
+
         Ok(())
     }
 

@@ -6,7 +6,7 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-global seelen := A_ScriptDir . "\..\Seelen UI.exe"
+global seelen := "SEELEN_UI_EXE_PATH"
 
 /** Close the AHK if app is crashed or forced to close */
 CloseIfNotRunning() {
@@ -14,6 +14,10 @@ CloseIfNotRunning() {
     ExitApp()
   }
   SetTimer(CloseIfNotRunning, 1000)
+}
+
+OpenSettings(){
+  RunWait(seelen " settings", , "Hide")
 }
 
 Reserve(reservation) {

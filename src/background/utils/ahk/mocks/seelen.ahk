@@ -12,7 +12,7 @@
 CloseIfNotRunning()
 
 ; Open Settings
-#k:: RunWait("..\Seelen UI.exe settings")
+#k:: OpenSettings()
 
 ; Resume Window Manager
 ^#!p:: {

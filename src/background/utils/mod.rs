@@ -1,3 +1,4 @@
+pub mod ahk;
 pub mod constants;
 pub mod pwsh;
 pub mod rect;
@@ -5,8 +6,7 @@ pub mod virtual_desktop;
 
 use std::{path::PathBuf, time::Duration};
 
-use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
-use tauri_plugin_shell::ShellExt;
+use tauri::{AppHandle, Manager};
 use windows::{
     core::GUID,
     Win32::{
@@ -79,38 +79,6 @@ pub fn is_windows_11() -> bool {
 /// Is Windows 11 22H2 or newer
 pub fn is_windows_11_22h2() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22621)
-}
-
-pub fn run_ahk_file(handle: &AppHandle<Wry>, ahk_file: &str) -> Result<()> {
-    log::trace!("Starting AHK: {}", ahk_file);
-
-    let ahk_script_path = handle
-        .path()
-        .resolve(format!("static/{}", ahk_file), BaseDirectory::Resource)?;
-
-    if !ahk_script_path.exists() {
-        return Err(format!("AHK script not found: {}", ahk_file).into());
-    }
-
-    let ahk_script_path = ahk_script_path
-        .to_string_lossy()
-        .trim_start_matches(r"\\?\")
-        .to_owned();
-
-    let ahk_path = handle
-        .path()
-        .resolve("static/redis/AutoHotkey.exe", BaseDirectory::Resource)?
-        .to_string_lossy()
-        .trim_start_matches(r"\\?\")
-        .to_owned();
-
-    handle
-        .shell()
-        .command(ahk_path)
-        .arg(ahk_script_path)
-        .spawn()?;
-
-    Ok(())
 }
 
 /// Resolve paths with folder ids in the form of "{GUID}\path\to\file"

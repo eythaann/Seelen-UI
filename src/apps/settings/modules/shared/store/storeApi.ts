@@ -2,7 +2,7 @@ import { AppTemplate, defaultTheme, UserSettings } from '../../../../../shared.i
 import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../shared/schemas';
 import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
 import { Placeholder, PlaceholderSchema } from '../../../../shared/schemas/Placeholders';
-import { AhkVariables, SettingsSchema } from '../../../../shared/schemas/Settings';
+import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { Theme, ThemeSchema } from '../../../../shared/schemas/Theme';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
@@ -243,40 +243,23 @@ export async function loadAppsTemplates() {
   return result;
 }
 
-export async function createAhkFiles(ahkVariables: AhkVariables) {
-  const staticPath = await path.join(await path.resourceDir(), 'static');
-  const entries = await fs.readDir(staticPath);
-
-  for (const entry of entries) {
-    if (entry.isFile && entry.name.endsWith('.ahk.template')) {
-      let content = await fs.readTextFile(await path.join(staticPath, entry.name));
-      content = content.replace(/{{(.*?)}}/g, (match, varname) => {
-        return ahkVariables[varname]?.ahk || match;
-      });
-      await fs.writeTextFile(
-        await path.join(staticPath, entry.name.replace('.template', '')),
-        content,
-      );
-    }
-  }
-}
-
 export async function saveUserSettings(settings: UserSettings) {
   const json_route = await resolveDotConfigPath('settings.json');
   const yaml_route = await resolveDotConfigPath('applications.yml');
-
-  if (settings.jsonSettings.ahkEnabled) {
-    await createAhkFiles(settings.jsonSettings.ahkVariables);
-    invoke('start_seelen_shortcuts');
-  } else {
-    invoke('kill_seelen_shortcuts');
-  }
 
   await fs.writeTextFile(
     json_route,
     JSON.stringify(VariableConvention.fromCamelToSnake(settings.jsonSettings)),
   );
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
+
+  await invoke('refresh_state');
+
+  if (settings.jsonSettings.ahkEnabled) {
+    await invoke('start_seelen_shortcuts');
+  } else {
+    await invoke('kill_seelen_shortcuts');
+  }
 }
 
 export async function ImportApps() {

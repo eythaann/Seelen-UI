@@ -74,15 +74,24 @@ pub fn set_volume_level(level: f32) -> Result<(), String> {
 }
 
 #[command]
-fn start_seelen_shortcuts() -> Result<(), String> {
-    SEELEN.lock().start_ahk_shortcuts()?;
-    Ok(())
+fn refresh_state() {
+    std::thread::spawn(|| {
+        log_if_error(SEELEN.lock().refresh_state());
+    });
 }
 
 #[command]
-fn kill_seelen_shortcuts() -> Result<(), String> {
-    SEELEN.lock().kill_ahk_shortcuts();
-    Ok(())
+fn start_seelen_shortcuts() {
+    std::thread::spawn(|| {
+        log_if_error(SEELEN.lock().start_ahk_shortcuts());
+    });
+}
+
+#[command]
+fn kill_seelen_shortcuts() {
+    std::thread::spawn(|| {
+        SEELEN.lock().kill_ahk_shortcuts();
+    });
 }
 
 #[command]
@@ -98,7 +107,11 @@ fn open_file(path: String) {
 #[command]
 fn open_install_folder() {
     let exe_path = std::env::current_exe().unwrap();
-    log_if_error(Command::new("explorer").args(["/select,", &exe_path.to_string_lossy()]).spawn());
+    log_if_error(
+        Command::new("explorer")
+            .args(["/select,", &exe_path.to_string_lossy()])
+            .spawn(),
+    );
 }
 
 #[command]
@@ -200,6 +213,7 @@ fn switch_workspace(idx: u32) {
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
+        refresh_state,
         is_dev_mode,
         open_file,
         open_install_folder,

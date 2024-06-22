@@ -1,10 +1,10 @@
 pub mod cli;
 pub mod hook;
 
+use std::sync::atomic::Ordering;
+
 use crate::{
-    error_handler::Result,
-    seelen::{get_app_handle, APP_STATE},
-    windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
+    error_handler::Result, seelen::get_app_handle, state::TOOLBAR_HEIGHT, windows_api::{AppBarData, AppBarDataEdge, WindowsApi}
 };
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
@@ -97,7 +97,7 @@ impl FancyToolbar {
 
         {
             let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
-            let toolbar_height = APP_STATE.lock().get_toolbar_height();
+            let toolbar_height = TOOLBAR_HEIGHT.load(Ordering::Acquire);
 
             let mut abd = AppBarData::from_handle(hitbox_hwnd);
 
