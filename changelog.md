@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.7.1]
 ### enhancements
 - separate `information` and `developer tools` tabs in the settings.
 - add a option to open the install path in explorer.
