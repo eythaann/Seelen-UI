@@ -1,6 +1,7 @@
 import { StateBuilder } from '../../../../../shared/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { cloneDeep } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
@@ -13,6 +14,7 @@ import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 import { RootState } from '../domain';
 
 const initialState: RootState = {
+  lastLoaded: null,
   autostart: false,
   route: Route.GENERAL,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
@@ -36,11 +38,20 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...reducersFor(initialState),
+    setState: (_state, action: PayloadAction<RootState>) => action.payload,
+    restoreToLastLoaded: (state) => {
+      if (state.lastLoaded) {
+        const newState = cloneDeep(state.lastLoaded);
+        newState.lastLoaded = cloneDeep(state.lastLoaded);
+        newState.route = state.route;
+        return newState;
+      }
+      return state;
+    },
     setDevTools: (state, action: PayloadAction<boolean>) => {
       state.toBeSaved = true;
       state.devTools = action.payload;
     },
-    setState: (_state, action: PayloadAction<RootState>) => action.payload,
     setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
       state.toBeSaved = true;
       state.selectedTheme = Array.from(new Set(action.payload));

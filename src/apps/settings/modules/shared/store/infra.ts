@@ -1,15 +1,26 @@
 import { UserSettings } from '../../../../../shared.interfaces';
-import { getBackgroundLayers, loadAppsTemplates, loadUserSettings, saveUserSettings } from './storeApi';
+import {
+  getBackgroundLayers,
+  loadAppsTemplates,
+  loadUserSettings,
+  saveUserSettings,
+} from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
+import { cloneDeep } from 'lodash';
 
 import { StartUser } from '../../StartUser/infra';
 import { startup } from '../tauri/infra';
 
 import { RootActions, RootReducer, RootSlice } from './app/reducer';
-import { StateAppsToYamlApps, StateToJsonSettings, StaticSettingsToState, YamlToState_Apps } from './app/StateBridge';
+import {
+  StateAppsToYamlApps,
+  StateToJsonSettings,
+  StaticSettingsToState,
+  YamlToState_Apps,
+} from './app/StateBridge';
 
 import { RootState } from './domain';
 
@@ -46,14 +57,15 @@ export const LoadSettingsToStore = async (customPath?: string) => {
   const initialState = RootSlice.getInitialState();
   const loadedStore = StaticSettingsToState(userSettings, initialState);
 
-  store.dispatch(
-    RootActions.setState({
-      ...loadedStore,
-      appsTemplates: currentState.appsTemplates,
-      route: currentState.route,
-      autostart: currentState.autostart,
-    }),
-  );
+  let state = {
+    ...loadedStore,
+    appsTemplates: currentState.appsTemplates,
+    route: currentState.route,
+    autostart: currentState.autostart,
+  };
+  state.lastLoaded = cloneDeep(state);
+
+  store.dispatch(RootActions.setState(state));
 
   // !customPath => avoid start user on manual user loading file
   if (!Object.keys(userSettings.jsonSettings).length && !customPath) {
@@ -71,7 +83,10 @@ export const SaveStore = async () => {
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
       themes: currentState.availableThemes,
-      bgLayers: getBackgroundLayers([currentState.selectedTheme].flat(), currentState.availableThemes),
+      bgLayers: getBackgroundLayers(
+        [currentState.selectedTheme].flat(),
+        currentState.availableThemes,
+      ),
       layouts: currentState.availableLayouts,
       placeholders: currentState.availablePlaceholders,
       env: await invoke('get_user_envs'),

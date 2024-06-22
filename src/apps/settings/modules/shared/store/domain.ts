@@ -8,6 +8,7 @@ import { Route } from '../../../components/navigation/routes';
 import { AppConfiguration } from '../../appsConfigurations/domain';
 
 export interface RootState extends ISettings {
+  lastLoaded: this | null;
   route: Route;
   toBeSaved: boolean;
   appsConfigurations: AppConfiguration[];

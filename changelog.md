@@ -5,6 +5,7 @@
 - separate `information` and `developer tools` tabs in the settings.
 - add a option to open the install path in explorer.
 - focus settings window if already exist.
+- better performance on canceling changes in settings.
 
 ### fix
 - ahk error on save.
