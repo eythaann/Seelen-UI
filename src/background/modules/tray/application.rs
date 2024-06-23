@@ -112,7 +112,7 @@ let task_hwnd = FindWindowExA(rebar_hwnd, HWND(0), s!("MSTaskSwWClass"), None);
 let task_list_hwnd = FindWindowExA(task_hwnd, HWND(0), s!("MSTaskListWClass"), None); */
 
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
-    let tray_from_registry = TrayIcon::enum_from_registry()?;
+    let tray_from_registry = TrayIcon::enum_from_registry().unwrap_or_default();
 
     Com::run_with_context(|| unsafe {
         let mut tray_elements = Vec::new();
