@@ -19,7 +19,7 @@ jobs:
   discord:
     needs: follow-up
     runs-on: ubuntu-latest
-    name: Sends Release To Discord
+    name: Send Announcement To Discord
     steps:
       - name: Discord notification
         uses: LeGitHubDeTai/github-to-discord@main
