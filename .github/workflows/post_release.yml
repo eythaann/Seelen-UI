@@ -2,8 +2,8 @@ name: "Post Published Release"
 
 on:
   release:
-    types:
-      - published
+    types: [published]
+    branches: [ "master" ]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
