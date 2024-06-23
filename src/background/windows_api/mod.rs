@@ -1,10 +1,14 @@
 mod app_bar;
+mod com;
+
+pub use app_bar::*;
+pub use com::*;
 
 use std::{ffi::c_void, thread::sleep, time::Duration};
 
 use color_eyre::eyre::eyre;
 use windows::{
-    core::{ComInterface, GUID, PCWSTR, PWSTR},
+    core::{GUID, PCWSTR, PWSTR},
     Win32::{
         Devices::Display::{
             GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
@@ -31,7 +35,7 @@ use windows::{
         },
         Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
-            Com::{CoCreateInstance, CLSCTX_ALL},
+            Com::CLSCTX_ALL,
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
@@ -466,27 +470,12 @@ impl WindowsApi {
         })
     }
 
-    pub fn co_create_instance<T>(rclsid: &GUID) -> Result<T>
-    where
-        T: ComInterface,
-    {
-        unsafe {
-            let result: Result<T, windows::core::Error> =
-                CoCreateInstance(rclsid, None, CLSCTX_ALL);
-            Ok(result?)
-        }
-    }
-
     pub fn _get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
-        Ok(Self::co_create_instance::<IVirtualDesktopManager>(
-            &VirtualDesktopManager,
-        )?)
+        Com::create_instance(&VirtualDesktopManager)
     }
 
     pub fn get_media_device_enumerator() -> Result<IMMDeviceEnumerator> {
-        Ok(Self::co_create_instance::<IMMDeviceEnumerator>(
-            &MMDeviceEnumerator,
-        )?)
+        Com::create_instance::<IMMDeviceEnumerator>(&MMDeviceEnumerator)
     }
 
     pub fn get_default_audio_endpoint() -> Result<IAudioEndpointVolume> {
@@ -586,8 +575,6 @@ impl WindowsApi {
         Ok(power_status)
     }
 }
-
-pub use app_bar::*;
 
 /*
 may be this is useful later

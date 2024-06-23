@@ -1,12 +1,7 @@
 use itertools::Itertools;
 use windows::Win32::{
     Foundation::{HWND, POINT, RECT},
-    System::{
-        Com::{
-            CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
-        },
-        Registry,
-    },
+    System::Registry,
     UI::{
         Accessibility::{
             CUIAutomation, IUIAutomation, IUIAutomationCondition, IUIAutomationElement,
@@ -24,7 +19,7 @@ use crate::{
     seelen::get_app_handle,
     seelen_weg::icon_extractor::extract_and_save_icon,
     utils::{is_windows_11_22h2, resolve_guid_path, sleep_millis},
-    windows_api::{AppBarData, AppBarDataState, WindowsApi},
+    windows_api::{AppBarData, AppBarDataState, Com, WindowsApi},
 };
 
 use super::domain::{RegistryNotifyIcon, TrayIcon, TrayIconInfo};
@@ -73,13 +68,15 @@ pub fn get_tray_overflow_handle() -> HWND {
 }
 
 pub fn try_force_tray_overflow_creation() -> Result<()> {
-    unsafe {
+    if !is_windows_11_22h2() {
+        return Ok(());
+    }
+
+    Com::run_with_context(|| unsafe {
         let tray_overflow_hwnd = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
         if tray_overflow_hwnd.0 != 0 {
             return Ok(());
         }
-
-        CoInitializeEx(None, COINIT_APARTMENTTHREADED)?;
 
         let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
 
@@ -88,7 +85,7 @@ pub fn try_force_tray_overflow_creation() -> Result<()> {
         // This function will fail if taskbar is hidden
         tray_bar.set_state(AppBarDataState::AlwaysOnTop);
 
-        let automation: IUIAutomation = CoCreateInstance(&CUIAutomation, None, CLSCTX_ALL)?;
+        let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
         let condition = automation.CreateTrueCondition()?;
         let element: IUIAutomationElement = automation.ElementFromHandle(tray_hwnd)?;
 
@@ -110,11 +107,9 @@ pub fn try_force_tray_overflow_creation() -> Result<()> {
             }
         }
 
-        CoUninitialize();
         tray_bar.set_state(tray_bar_state);
-    }
-
-    Err("Failed to force tray overflow creation".into())
+        Err("Failed to force tray overflow creation".into())
+    })
 }
 
 /*
@@ -124,13 +119,12 @@ let task_hwnd = FindWindowExA(rebar_hwnd, HWND(0), s!("MSTaskSwWClass"), None);
 let task_list_hwnd = FindWindowExA(task_hwnd, HWND(0), s!("MSTaskListWClass"), None); */
 
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
-    let mut tray_elements = Vec::new();
     let tray_from_registry = TrayIcon::enum_from_registry()?;
 
-    unsafe {
-        CoInitializeEx(None, COINIT_APARTMENTTHREADED)?;
+    Com::run_with_context(|| unsafe {
+        let mut tray_elements = Vec::new();
 
-        let automation: IUIAutomation = CoCreateInstance(&CUIAutomation, None, CLSCTX_ALL)?;
+        let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
         let condition = automation.CreateTrueCondition()?;
 
         let mut children = Vec::new();
@@ -173,10 +167,8 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
             }
         }
 
-        CoUninitialize();
-    }
-
-    Ok(tray_elements)
+        Ok(tray_elements)
+    })
 }
 
 impl TrayIcon {
