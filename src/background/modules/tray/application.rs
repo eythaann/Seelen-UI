@@ -5,7 +5,8 @@ use windows::Win32::{
     UI::{
         Accessibility::{
             CUIAutomation, IUIAutomation, IUIAutomationCondition, IUIAutomationElement,
-            IUIAutomationInvokePattern, TreeScope, TreeScope_Subtree, UIA_InvokePatternId,
+            IUIAutomationInvokePattern, TreeScope, TreeScope_Descendants, TreeScope_Subtree,
+            UIA_InvokePatternId,
         },
         WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_SHOW},
     },
@@ -18,7 +19,7 @@ use crate::{
     pcstr,
     seelen::get_app_handle,
     seelen_weg::icon_extractor::extract_and_save_icon,
-    utils::{is_windows_11_22h2, resolve_guid_path, sleep_millis},
+    utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
     windows_api::{AppBarData, AppBarDataState, Com, WindowsApi},
 };
 
@@ -41,34 +42,26 @@ pub fn get_sub_tree(
 }
 
 // force_tray_overflow_creation should be called before get_tray_handle
+// https://learn.microsoft.com/en-us/answers/questions/1483214/win11-22h2-(10-0-22621)-cant-support-tb-buttoncount
 pub fn get_tray_overflow_handle() -> HWND {
     unsafe {
-        // https://learn.microsoft.com/en-us/answers/questions/1483214/win11-22h2-(10-0-22621)-cant-support-tb-buttoncount
-        if is_windows_11_22h2() {
-            let tray_overflow_hwnd =
-                FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
-            let tray_overflow_list_hwnd = FindWindowExA(
-                tray_overflow_hwnd,
+        if is_windows_10() {
+            let tray_overflow = FindWindowA(pcstr!("NotifyIconOverFlowWindow"), None);
+            FindWindowExA(tray_overflow, HWND(0), pcstr!("ToolbarWindow32"), None)
+        } else {
+            let tray_overflow = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
+            FindWindowExA(
+                tray_overflow,
                 HWND(0),
                 None,
                 pcstr!("DesktopWindowXamlSource"),
-            );
-
-            return tray_overflow_list_hwnd;
+            )
         }
-
-        // Todo test on windows 10
-        let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
-        let tray_notify_hwnd = FindWindowExA(tray_hwnd, HWND(0), pcstr!("TrayNotifyWnd"), None);
-        let sys_pager_hwnd = FindWindowExA(tray_notify_hwnd, HWND(0), pcstr!("SysPager"), None);
-        let toolbar_hwnd = FindWindowExA(sys_pager_hwnd, HWND(0), pcstr!("ToolbarWindow32"), None);
-
-        toolbar_hwnd
     }
 }
 
 pub fn try_force_tray_overflow_creation() -> Result<()> {
-    if !is_windows_11_22h2() {
+    if !is_windows_11() {
         return Ok(());
     }
 
@@ -128,28 +121,16 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
         let condition = automation.CreateTrueCondition()?;
 
         let mut children = Vec::new();
-        /* let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
-        if tray_hwnd.0 != 0 {
-            let element: IUIAutomationElement = automation.ElementFromHandle(tray_hwnd)?;
-            children.extend(get_sub_tree(&element, &condition, TreeScope_Subtree)?);
-
-            for element in &children {
-                println!(
-                    "{:?} // {:?}",
-                    element.CurrentName()?,
-                    element.CurrentAutomationId()?
-                );
-            }
-        } */
 
         let tray_overflow = get_tray_overflow_handle();
         if tray_overflow.0 != 0 {
             let element: IUIAutomationElement = automation.ElementFromHandle(tray_overflow)?;
-            children.extend(get_sub_tree(&element, &condition, TreeScope_Subtree)?);
+            children.extend(get_sub_tree(&element, &condition, TreeScope_Descendants)?);
         }
 
+        let is_win10 = is_windows_10();
         for element in children {
-            if element.CurrentAutomationId()? == "NotifyItemIcon" {
+            if is_win10 || element.CurrentAutomationId()? == "NotifyItemIcon" {
                 let name = element.CurrentName()?.to_string();
 
                 let registry = tray_from_registry.iter().find(|t| {

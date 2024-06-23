@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app crashing on windows 10
+- empty tray icons list on windows 10
+
 ## [1.7.1]
 ### enhancements
 - separate `information` and `developer tools` tabs in the settings.

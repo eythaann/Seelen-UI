@@ -2,7 +2,7 @@ use itertools::Itertools;
 use tauri::Manager;
 
 use crate::{
-    error_handler::Result, modules::tray::application::get_tray_icons, seelen::get_app_handle,
+    error_handler::{log_if_error, Result}, modules::tray::application::get_tray_icons, seelen::get_app_handle,
 };
 
 fn emit_tray_info() -> Result<()> {
@@ -20,8 +20,8 @@ pub fn register_tray_events() -> Result<()> {
 
 // TODO: remove when add event listener for tray events
 #[tauri::command]
-pub fn temp_get_by_event_tray_info() -> Result<()> {
-    emit_tray_info()
+pub fn temp_get_by_event_tray_info() {
+    log_if_error(emit_tray_info());
 }
 
 #[tauri::command]

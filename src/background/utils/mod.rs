@@ -76,11 +76,6 @@ pub fn is_windows_11() -> bool {
     matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22000)
 }
 
-/// Is Windows 11 22H2 or newer
-pub fn is_windows_11_22h2() -> bool {
-    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22621)
-}
-
 /// Resolve paths with folder ids in the form of "{GUID}\path\to\file"
 ///
 /// https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid
