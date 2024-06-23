@@ -14,8 +14,10 @@ pub enum AppBarDataEdge {
     Bottom = ABE_BOTTOM as isize,
 }
 
+/// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters
 #[derive(Debug, Clone, Copy)]
 pub enum AppBarDataState {
+    Both = 0,
     AutoHide = ABS_AUTOHIDE as isize,
     AlwaysOnTop = ABS_ALWAYSONTOP as isize,
 }
@@ -29,8 +31,9 @@ impl Into<LPARAM> for AppBarDataState {
 impl From<u32> for AppBarDataState {
     fn from(state: u32) -> Self {
         match state {
-            ABS_ALWAYSONTOP => AppBarDataState::AlwaysOnTop,
+            0 => AppBarDataState::Both,
             ABS_AUTOHIDE => AppBarDataState::AutoHide,
+            ABS_ALWAYSONTOP => AppBarDataState::AlwaysOnTop,
             _ => unreachable!(),
         }
     }
