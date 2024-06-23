@@ -1,7 +1,9 @@
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
+import { invoke } from '@tauri-apps/api/core';
 import { Select, Switch } from 'antd';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BorderSettings } from '../../border/infra';
@@ -11,11 +13,17 @@ import { RootSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 export function WindowManagerSettings() {
+  const [isWindows10, setIsWindows10] = useState(false);
+
   const settings = useSelector(RootSelectors.windowManager);
   const layouts = useSelector(newSelectors.availableLayouts);
   const defaultLayout = useSelector(newSelectors.windowManager.defaultLayout);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    invoke<string>('get_win_version').then((ver) => setIsWindows10(ver === 'Windows10'));
+  }, []);
 
   const onToggleEnable = (value: boolean) => {
     dispatch(WManagerSettingsActions.setEnabled(value));
@@ -29,12 +37,20 @@ export function WindowManagerSettings() {
 
   return (
     <>
+      {isWindows10 && (
+        <SettingsGroup>
+          <div>
+            <p>The Window Manager is not available for Windows 10.</p>
+          </div>
+        </SettingsGroup>
+      )}
+
       <SettingsGroup>
         <SettingsOption>
           <div>
             <b>Enable Tiling Window Manager</b>
           </div>
-          <Switch checked={settings.enabled} onChange={onToggleEnable} />
+          <Switch checked={settings.enabled} onChange={onToggleEnable} disabled={isWindows10} />
         </SettingsOption>
       </SettingsGroup>
 

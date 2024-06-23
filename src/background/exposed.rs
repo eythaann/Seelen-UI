@@ -177,10 +177,10 @@ enum WinVersion {
 
 #[command]
 fn get_win_version() -> WinVersion {
-    if is_windows_10() {
-        WinVersion::Windows10
-    } else if is_windows_11() {
+    if is_windows_11() {
         WinVersion::Windows11
+    } else if is_windows_10() {
+        WinVersion::Windows10
     } else {
         WinVersion::Unknown
     }

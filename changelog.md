@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- disable tiling window manager on windows 10 from UI (can be forced on settings.json file)
+
 ### fix
 - app crashing on windows 10
 - empty tray icons list on windows 10
