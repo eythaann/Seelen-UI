@@ -12,12 +12,11 @@ use windows::Win32::{
         NetworkListManager::{INetworkListManager, NetworkListManager, NLM_CONNECTIVITY},
         WinSock::AF_UNSPEC,
     },
-    System::Com::{
-        CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
-    },
 };
 
-use crate::{error_handler::Result, seelen::get_app_handle, utils::pwsh::PwshScript};
+use crate::{
+    error_handler::Result, seelen::get_app_handle, utils::pwsh::PwshScript, windows_api::Com,
+};
 
 use super::domain::{NetworkAdapter, WlanProfile};
 
@@ -71,34 +70,31 @@ impl NetworkManager {
     where
         F: Fn(NLM_CONNECTIVITY) + Send + 'static,
     {
-        std::thread::spawn(move || -> Result<()> {
-            unsafe {
-                CoInitializeEx(None, COINIT_APARTMENTTHREADED)?;
-
-                let list_manager: INetworkListManager =
-                    CoCreateInstance(&NetworkListManager, None, CLSCTX_ALL)?;
-
-                CoUninitialize();
-
+        std::thread::spawn(move || {
+            let result: Result<()> = Com::run_with_context(|| {
+                let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
                 let mut last = None;
+
                 loop {
                     match last {
                         Some(last_state) => {
-                            let current_state = list_manager.GetConnectivity()?;
+                            let current_state = unsafe { list_manager.GetConnectivity()? };
                             if last_state != current_state {
                                 last = Some(current_state);
                                 cb(current_state);
                             }
                         }
                         None => {
-                            let state = list_manager.GetConnectivity()?;
+                            let state = unsafe { list_manager.GetConnectivity()? };
                             last = Some(state);
                             cb(state);
                         }
                     }
                     std::thread::sleep(std::time::Duration::from_millis(1000));
                 }
-            }
+            });
+
+            log::warn!("loop finished: {:?}", result);
         });
     }
 
