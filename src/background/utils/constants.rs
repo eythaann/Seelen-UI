@@ -2,7 +2,7 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 
 lazy_static! {
-    pub static ref IGNORE_FOCUS: Vec<String> = vec![
+    pub static ref IGNORE_FOCUS_AND_FULLSCREEN: Vec<String> = vec![
         "Task Switching",
         "Task View",
         "Virtual desktop switching preview",

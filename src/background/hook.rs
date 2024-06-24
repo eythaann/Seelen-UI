@@ -20,7 +20,7 @@ use crate::{
     error_handler::{log_if_error, Result},
     seelen::{Seelen, SEELEN},
     seelen_weg::{SeelenWeg, TASKBAR_CLASS},
-    utils::{constants::IGNORE_FOCUS, is_windows_11},
+    utils::{constants::IGNORE_FOCUS_AND_FULLSCREEN, is_windows_11},
     windows_api::WindowsApi,
     winevent::WinEvent,
 };
@@ -111,7 +111,7 @@ impl HookManager {
 
         let title = WindowsApi::get_window_text(origin);
         if (event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground)
-            && IGNORE_FOCUS.contains(&title)
+            && IGNORE_FOCUS_AND_FULLSCREEN.contains(&title)
         {
             return;
         }

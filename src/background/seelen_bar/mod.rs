@@ -11,7 +11,7 @@ use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::HWND,
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE},
+    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
@@ -48,16 +48,16 @@ impl FancyToolbar {
     }
 
     pub fn hide(&mut self) -> Result<()> {
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
+        WindowsApi::show_window_async(self.hitbox_window.hwnd()?, SW_HIDE)?;
         self.hidden = true;
-        self.window.hide()?;
-        self.hitbox_window.hide()?;
         Ok(())
     }
 
     pub fn show(&mut self) -> Result<()> {
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        WindowsApi::show_window_async(self.hitbox_window.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.hidden = false;
-        self.window.show()?;
-        self.hitbox_window.show()?;
         Ok(())
     }
 

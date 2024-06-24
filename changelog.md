@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- improvements on fullscreen events.
+
 ## [1.7.2]
 ### enhancements
 - disable tiling window manager on windows 10 from UI (can be forced on settings.json file)

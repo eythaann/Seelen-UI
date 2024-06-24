@@ -92,6 +92,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
     EVENT_SYSTEM_SWITCHEND, EVENT_SYSTEM_SWITCHER_APPDROPPED,
 };
 
+use crate::utils::constants::IGNORE_FOCUS_AND_FULLSCREEN;
 use crate::windows_api::WindowsApi;
 
 lazy_static! {
@@ -289,58 +290,70 @@ impl TryFrom<u32> for WinEvent {
 }
 
 impl WinEvent {
+    pub fn should_handle_fullscreen_events(&self, hwnd: HWND) -> bool {
+        let title = WindowsApi::get_window_text(hwnd);
+        let is_foreground_window = hwnd == WindowsApi::get_foreground_window();
+
+        return (is_foreground_window || *self == Self::SystemMinimizeStart)
+            && !title.starts_with("Seelen")
+            && !IGNORE_FOCUS_AND_FULLSCREEN.contains(&title)
+            // not is creating a non visible window
+            && !(*self == Self::ObjectCreate && !WindowsApi::is_window_visible(hwnd));
+    }
+
     pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {
         match self {
-            Self::ObjectShow | Self::ObjectCreate | Self::ObjectUncloaked => {
-                if WindowsApi::get_window_text(origin).contains("Seelen")
-                    || !WindowsApi::is_window_visible(origin)
-                {
+            Self::ObjectShow
+            | Self::ObjectCreate
+            | Self::ObjectUncloaked
+            | Self::SystemMinimizeEnd => {
+                if !self.should_handle_fullscreen_events(origin) {
                     return None;
                 }
 
-                let mut fullscreened = FULLSCREENED.lock();
-                match WindowsApi::is_fullscreen(origin) {
-                    Ok(true) if !fullscreened.contains(&origin) => {
-                        fullscreened.push(origin);
-                        Some(Self::SyntheticFullscreenStart)
-                    }
-                    _ => None,
+                if WindowsApi::is_fullscreen(origin).ok()? {
+                    FULLSCREENED.lock().push(origin);
+                    Some(Self::SyntheticFullscreenStart)
+                } else {
+                    None
                 }
             }
-            Self::ObjectHide | Self::ObjectDestroy | Self::ObjectCloaked => {
-                // ignore own windows
-                if WindowsApi::get_window_text(origin).contains("Seelen") {
+            Self::ObjectHide
+            | Self::ObjectDestroy
+            | Self::ObjectCloaked
+            | Self::SystemMinimizeStart => {
+                if !self.should_handle_fullscreen_events(origin) {
                     return None;
                 }
 
                 let mut fullscreened = FULLSCREENED.lock();
-                match fullscreened.contains(&origin) {
-                    true => {
-                        fullscreened.retain(|&x| x != origin);
-                        Some(Self::SyntheticFullscreenEnd)
-                    }
-                    false => None,
+                if fullscreened.contains(&origin) {
+                    fullscreened.retain(|&x| x != origin);
+                    Some(Self::SyntheticFullscreenEnd)
+                } else {
+                    None
                 }
             }
             Self::ObjectLocationChange => {
-                if origin != WindowsApi::get_foreground_window()
-                    || WindowsApi::get_window_text(origin).contains("Seelen")
-                    || !WindowsApi::is_window_visible(origin)
-                {
+                if !self.should_handle_fullscreen_events(origin) {
                     return None;
                 }
 
                 let mut fullscreened = FULLSCREENED.lock();
-                match WindowsApi::is_fullscreen(origin) {
-                    Ok(true) if !fullscreened.contains(&origin) => {
-                        fullscreened.push(origin);
-                        Some(Self::SyntheticFullscreenStart)
-                    }
-                    Ok(false) if fullscreened.contains(&origin) => {
-                        fullscreened.retain(|&x| x != origin);
-                        Some(Self::SyntheticFullscreenEnd)
-                    }
-                    _ => None,
+                let was_fullscreen = fullscreened.contains(&origin);
+                let is_fullscreen = WindowsApi::is_fullscreen(origin).ok()?;
+
+                // state no changed
+                if was_fullscreen == is_fullscreen {
+                    return None;
+                }
+
+                if is_fullscreen {
+                    fullscreened.push(origin);
+                    Some(Self::SyntheticFullscreenStart)
+                } else {
+                    fullscreened.retain(|&x| x != origin);
+                    Some(Self::SyntheticFullscreenEnd)
                 }
             }
             _ => None,

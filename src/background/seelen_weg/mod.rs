@@ -14,8 +14,7 @@ use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
-        SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW
     },
 };
 
@@ -64,6 +63,7 @@ pub struct SeelenWeg {
     hitbox: WebviewWindow<Wry>,
     #[getset(get = "pub")]
     ready: bool,
+    hidden: bool,
     overlaped: bool,
     last_hitbox_rect: Option<RECT>,
 }
@@ -80,6 +80,7 @@ impl SeelenWeg {
             window,
             hitbox,
             ready: false,
+            hidden: false,
             overlaped: false,
             last_hitbox_rect: None,
         };
@@ -262,6 +263,20 @@ impl SeelenWeg {
             let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
             DynamicImage::ImageRgba8(image)
         })
+    }
+
+    pub fn hide(&mut self) -> Result<()> {
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
+        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_HIDE)?;
+        self.hidden = true;
+        Ok(())
+    }
+
+    pub fn show(&mut self) -> Result<()> {
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_SHOWNOACTIVATE)?;
+        self.hidden = false;
+        Ok(())
     }
 }
 
