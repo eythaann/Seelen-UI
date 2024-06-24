@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.7.3]
 ### enhancements
 - improvements on fullscreen events.
 
