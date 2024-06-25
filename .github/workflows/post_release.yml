@@ -43,41 +43,16 @@ jobs:
 
   microsoft-store-submission:
     needs: follow-up
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Get package version
-        id: get_version
+      # Use Store Broker to publish to Microsoft Store
+      - name: Submit to Partner Center (aka DevCenter)
+        shell: pwsh
         run: |
-          package_version=$(jq -r '.version' < package.json)
-          echo "Package version: $package_version"
-          echo "::set-output name=package_version::$package_version"
-
-      - name: Configure Store Credentials
-        uses: microsoft/store-submission@v1
-        with:
-          command: configure
-          type: win32
-          seller-id: ${{ secrets.MS_SELLER_ID }}
-          product-id: ${{ secrets.MS_PRODUCT_ID }}
-          tenant-id: ${{ secrets.MS_TENANT_ID }}
-          client-id: ${{ secrets.MS_CLIENT_ID }}
-          client-secret: ${{ secrets.MS_CLIENT_SECRET }}
-
-      - name: Update Draft Submission
-        uses: microsoft/store-submission@v1
-        with:
-          command: update
-          product-update: >-
-            {
-              "packages": [{
-                "packageUrl": "https://github.com/eythaann/Seelen-UI/releases/download/v1.7.3/Seelen.SeelenUI_1.7.3.0_x64__p6yyn03m1894e.msix",
-              }]
-            }
-
-      - name: Publish Submission
-        uses: microsoft/store-submission@v1
-        with:
-          command: publish
+          ./.scripts/SubmitToMsftStore.ps1
+        env:
+          PartnerCenterStoreId: ${{ secrets.MS_PRODUCT_ID }}
+          PartnerCenterTenantId: ${{ secrets.MS_TENANT_ID }}
+          PartnerCenterClientId: ${{ secrets.MS_CLIENT_ID }}
+          PartnerCenterClientSecret: ${{ secrets.MS_CLIENT_SECRET }}
+          SBDisableTelemetry: true

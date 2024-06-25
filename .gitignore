@@ -6,3 +6,6 @@
 target
 gen
 /.cert
+
+# Submission Files
+/scripts/SBTemp
