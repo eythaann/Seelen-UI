@@ -43,7 +43,7 @@ jobs:
           script: |
             const fs = require('fs');
             const changelogContent = fs.readFileSync('changelog.md', 'utf-8');
-            const regex = new RegExp( `(?<=\\[${process.env.PACKAGE_VERSION}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
+            const regex = new RegExp(`(?<=\\[${process.env.PACKAGE_VERSION}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
             const releaseNotes = changelogContent.match(regex)?.[0].trim() || '';
 
             const { data } = await github.rest.repos.createRelease({
@@ -51,7 +51,7 @@ jobs:
               repo: context.repo.repo,
               tag_name: `v${process.env.PACKAGE_VERSION}`,
               name: `Seelen UI v${process.env.PACKAGE_VERSION}`,
-              body: releaseNotes + "\n",
+              body: releaseNotes,
               generate_release_notes: true,
               draft: true,
               prerelease: false,
