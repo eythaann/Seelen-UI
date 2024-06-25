@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.7.4]
 ### enhancements
 - improvements on workflows to auto upload artifacts to the store.
 
