@@ -73,7 +73,7 @@ jobs:
           product-update: >-
             {
               "packages": [{
-                "packageUrl": "https://github.com/eythaann/Seelen-UI/releases/latest/download/Seelen.UI_Temporal_Unsigned.msix",
+                "packageUrl": "https://github.com/eythaann/Seelen-UI/releases/download/v1.7.3/Seelen.SeelenUI_1.7.3.0_x64__p6yyn03m1894e.msix",
               }]
             }
 
