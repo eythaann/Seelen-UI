@@ -1,0 +1,22 @@
+name: Check Artifacts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-artifacts:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-bundle
+          path: ./target/release/bundle
+
+      - name: List files in bundle
+        shell: pwsh
+        run: Get-ChildItem -Path .\target\release\bundle -Recurse | ForEach-Object { $_.FullName }
