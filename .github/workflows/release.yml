@@ -1,4 +1,4 @@
-name: "Publish Release"
+name: "Release"
 
 on:
   push:
@@ -78,21 +78,10 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: 20
 
       - name: Install Rust stable
         uses: dtolnay/rust-toolchain@stable
-
-      - name: Install winget
-        uses: Cyberboss/install-winget@v1
-
-      - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-latest'
-        shell: powershell
-        run: |
-          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
 
       - name: Install frontend dependencies
         run: npm install
@@ -106,26 +95,51 @@ jobs:
           releaseId: ${{ needs.create-release.outputs.release_id }}
           args: ${{ matrix.args }}
 
+      - name: Install winget
+        if: matrix.platform == 'windows-latest'
+        uses: Cyberboss/install-winget@v1
+
+      - name: Install MSIX dependencies
+        if: matrix.platform == 'windows-latest'
+        shell: powershell
+        run: |
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+
       - name: Bundle MSIX
+        if: matrix.platform == 'windows-latest'
         run: npx ts-node scripts/bundle.msix.ts
 
-      - name: Add msix to release
-        uses: "actions/github-script@v7"
-        env:
-          releaseId: ${{ needs.create-release.outputs.release_id }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
-          script: |
-            const fs = require('fs');
-            const packageJson = require('./package.json');
-            const packageVersion = packageJson.version + '.0';
-            await github.rest.repos.uploadReleaseAsset({
-              name: `Seelen.UI_Temporal_Unsigned.msix`,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: process.env.releaseId,
-              data: fs.readFileSync(`./target/release/bundle/msix/Seelen.SeelenUI_${packageVersion}_x64__p6yyn03m1894e.msix`)
-            });
+          name: build-bundle
+          path: ./target/release/bundle
+
+  microsoft-store-submission:
+    needs: build-installers
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build-bundle
+          path: ./target/release/bundle
+
+      # Use Store Broker to publish to Microsoft Store
+      - name: Submit to Partner Center (aka DevCenter)
+        shell: pwsh
+        run: |
+          ./scripts/SubmitToStore.ps1
+        env:
+          PartnerCenterStoreId: ${{ secrets.MS_PRODUCT_ID }}
+          PartnerCenterTenantId: ${{ secrets.MS_TENANT_ID }}
+          PartnerCenterClientId: ${{ secrets.MS_CLIENT_ID }}
+          PartnerCenterClientSecret: ${{ secrets.MS_CLIENT_SECRET }}
+          SBDisableTelemetry: true
 
   publish-release:
     needs: [build-installers, create-release]
