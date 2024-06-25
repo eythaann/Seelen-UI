@@ -11,8 +11,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: build-bundle
-          path: ./target/release/bundle
+          path: target/release/bundle
 
       - name: List files in bundle
         shell: pwsh
