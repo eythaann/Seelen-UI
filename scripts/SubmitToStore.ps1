@@ -4,7 +4,7 @@ Set-ExecutionPolicy RemoteSigned -Force
 $jsonContent = Get-Content -Path ".\package.json" -Raw
 $jsonObject = $jsonContent | ConvertFrom-Json
 $version = $jsonObject.version
-$appxUploadFilePath = ".\target\release\bundle\msix\Seelen.SeelenUI_${version}_x64__p6yyn03m1894e.msix"
+$appxUploadFilePath = ".\target\release\bundle\msix\Seelen.SeelenUI_${version}.0_x64__p6yyn03m1894e.msix"
 
 Write-Host "MSIX file: $appxUploadFilePath"
 
