@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- improvements on workflows to auto upload artifacts to the store.
+
 ## [1.7.3]
 ### enhancements
 - improvements on fullscreen events.
