@@ -109,10 +109,14 @@ jobs:
         run: npx ts-node scripts/bundle.msix.ts
 
       - name: Upload artifacts
+        id: artifact-upload-step
         uses: actions/upload-artifact@v4
         with:
           name: build-bundle
-          path: ./target/release/bundle
+          path: target/release/bundle
+
+      - name: Output artifact ID
+        run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
 
   microsoft-store-submission:
     needs: build-installers
@@ -124,7 +128,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build-bundle
-          path: ./target/release/bundle
+          path: target/release/bundle
 
       # Use Store Broker to publish to Microsoft Store
       - name: Submit to Partner Center (aka DevCenter)
