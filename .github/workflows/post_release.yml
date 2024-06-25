@@ -16,27 +16,69 @@ jobs:
         if: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'success' }}
         run: exit 1
 
-  discord:
+  #discord:
+  #  needs: follow-up
+  #  runs-on: ubuntu-latest
+  #  name: Send Announcement To Discord
+  #  steps:
+  #    - name: Discord notification
+  #      uses: LeGitHubDeTai/github-to-discord@main
+  #      env:
+  #        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+  #        DISCORD_USERNAME: Seelen
+  #        DISCORD_AVATAR: https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/images/logo_with_margins.png
+  #
+  #        AUTHOR_NAME: eythaann
+  #        AUTHOR_URL: "https://github.com/eythaann"
+  #        AUTHOR_AVATAR: "https://avatars.githubusercontent.com/u/76607907?v=4"
+  #
+  #        MESSAGE_TITLE: Seelen UI
+  #        MESSAGE_DESCRIPTION: A new release of Seelen UI has been published
+  #        MESSAGE_COLOR: 5814783
+  #
+  #        SECTION_NAME: "ChangeLog"
+  #
+  #        FOOTER_TEXT: "Seelen Inc."
+  #        FOOTER_URL: ""
+
+  microsoft-store-submission:
     needs: follow-up
     runs-on: ubuntu-latest
-    name: Send Announcement To Discord
     steps:
-      - name: Discord notification
-        uses: LeGitHubDeTai/github-to-discord@main
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_USERNAME: Seelen
-          DISCORD_AVATAR: https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/images/logo_with_margins.png
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-          AUTHOR_NAME: eythaann
-          AUTHOR_URL: "https://github.com/eythaann"
-          AUTHOR_AVATAR: "https://avatars.githubusercontent.com/u/76607907?v=4"
+      - name: Get package version
+        id: get_version
+        run: |
+          package_version=$(jq -r '.version' < package.json)
+          echo "Package version: $package_version"
+          echo "::set-output name=package_version::$package_version"
 
-          MESSAGE_TITLE: Seelen UI
-          MESSAGE_DESCRIPTION: A new release of Seelen UI has been published
-          MESSAGE_COLOR: 5814783
+      - name: Configure Store Credentials
+        uses: microsoft/store-submission@v1
+        with:
+          command: configure
+          type: win32
+          seller-id: ${{ secrets.MS_SELLER_ID }}
+          product-id: ${{ secrets.MS_PRODUCT_ID }}
+          tenant-id: ${{ secrets.MS_TENANT_ID }}
+          client-id: ${{ secrets.MS_CLIENT_ID }}
+          client-secret: ${{ secrets.MS_CLIENT_SECRET }}
 
-          SECTION_NAME: "ChangeLog"
+      - name: Update Draft Submission
+        uses: microsoft/store-submission@v1
+        with:
+          command: update
+          product-update: >-
+            {
+              "packages": [{
+                "packageUrl": "https://github.com/eythaann/Seelen-UI/releases/latest/download/Seelen.UI_Temporal_Unsigned.msix",
+                "packageType": "msix",
+              }]
+            }
 
-          FOOTER_TEXT: "Seelen Inc."
-          FOOTER_URL: ""
+      - name: Publish Submission
+        uses: microsoft/store-submission@v1
+        with:
+          command: publish

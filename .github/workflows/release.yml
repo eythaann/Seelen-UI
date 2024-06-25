@@ -120,7 +120,7 @@ jobs:
             const packageJson = require('./package.json');
             const packageVersion = packageJson.version + '.0';
             await github.rest.repos.uploadReleaseAsset({
-              name: `Seelen.SeelenUI_${packageVersion}_x64__p6yyn03m1894e.msix`,
+              name: `Seelen.UI_Temporal_Unsigned.msix`,
               owner: context.repo.owner,
               repo: context.repo.repo,
               release_id: process.env.releaseId,
