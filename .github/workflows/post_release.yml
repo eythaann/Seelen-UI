@@ -51,7 +51,7 @@ jobs:
       - name: Submit to Partner Center (aka DevCenter)
         shell: pwsh
         run: |
-          ./.scripts/SubmitToMsftStore.ps1
+          ./scripts/SubmitToStore.ps1
         env:
           PartnerCenterStoreId: ${{ secrets.MS_PRODUCT_ID }}
           PartnerCenterTenantId: ${{ secrets.MS_TENANT_ID }}
