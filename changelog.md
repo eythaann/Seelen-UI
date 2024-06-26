@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no registering system events (battery/network/etc)
+
 ## [1.7.6]
 ### enhancements
 - improve logging on dev mode and fix missing target on production logged errors.

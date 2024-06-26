@@ -20,7 +20,7 @@ use crate::{
     seelen_weg::SeelenWeg,
     seelen_wm::WindowManager,
     state::State,
-    system::register_system_events,
+    system::declare_system_events_handlers,
     utils::{ahk::AutoHotKey, sleep_millis},
     windows_api::WindowsApi,
 };
@@ -131,6 +131,7 @@ impl Seelen {
         }
 
         self.start_ahk_shortcuts()?;
+        declare_system_events_handlers()?;
 
         std::thread::spawn(|| -> Result<()> {
             log::trace!("Enumerating Monitors");
@@ -147,9 +148,7 @@ impl Seelen {
             WindowsApi::enum_windows(Some(Self::enum_windows_proc), 0)
                 .expect("Failed to enum windows");
 
-            log::trace!("Registering Windows and System Events");
             register_win_hook()?;
-            register_system_events()?;
             Ok(())
         });
 

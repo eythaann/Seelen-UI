@@ -243,6 +243,8 @@ pub extern "system" fn win_event_hook(
 }
 
 pub fn register_win_hook() -> Result<()> {
+    log::trace!("Registering Windows and Virtual Desktop Hooks");
+
     std::thread::spawn(move || unsafe {
         SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
 

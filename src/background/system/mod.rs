@@ -9,7 +9,7 @@ use crate::{
     seelen::get_app_handle,
 };
 
-pub fn register_system_events() -> Result<()> {
+pub fn declare_system_events_handlers() -> Result<()> {
     let handle = get_app_handle();
 
     handle.once("register-power-events", move |_| {
