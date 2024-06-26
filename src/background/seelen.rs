@@ -12,8 +12,9 @@ use windows::Win32::{
 
 use crate::{
     apps_config::SETTINGS_BY_APP,
-    error_handler::{log_if_error, Result},
+    error_handler::Result,
     hook::register_win_hook,
+    log_error,
     monitor::Monitor,
     seelen_shell::SeelenShell,
     seelen_weg::SeelenWeg,
@@ -114,7 +115,7 @@ impl Seelen {
             app.path()
                 .resolve("static\\apps_templates", BaseDirectory::Resource)?,
         );
-        log_if_error(settings_by_app.load());
+        log_error!(settings_by_app.load());
 
         if self.state.is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
@@ -436,7 +437,7 @@ impl Seelen {
 
             if let Some(wm) = monitor.wm_mut() {
                 if WindowManager::is_manageable_window(hwnd, true) {
-                    log_if_error(wm.add_hwnd(hwnd));
+                    log_error!(wm.add_hwnd(hwnd));
                 }
             }
         }

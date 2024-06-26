@@ -66,11 +66,7 @@ use windows::{
     },
 };
 
-use crate::{
-    error_handler::{log_if_error, Result},
-    hook::HOOK_MANAGER,
-    winevent::WinEvent,
-};
+use crate::{error_handler::Result, hook::HOOK_MANAGER, log_error, winevent::WinEvent};
 
 #[macro_export]
 macro_rules! pcstr {
@@ -286,7 +282,7 @@ impl WindowsApi {
         let mut hook_manager = HOOK_MANAGER.lock();
         hook_manager.pause_and_resume_after(WinEvent::SystemMinimizeEnd, hwnd.clone());
         hook_manager.set_resume_callback(move |hook_manager| {
-            log_if_error(Self::set_minimize_animation(true));
+            log_error!(Self::set_minimize_animation(true));
             hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
         });
 
@@ -344,7 +340,7 @@ impl WindowsApi {
         let (process_id, _) = Self::window_thread_process_id(hwnd);
         let handle = Self::process_handle(process_id)?;
         unsafe {
-            log_if_error(QueryFullProcessImageNameW(
+            log_error!(QueryFullProcessImageNameW(
                 handle,
                 PROCESS_NAME_WIN32,
                 PWSTR(text_ptr),
@@ -413,6 +409,13 @@ impl WindowsApi {
 
     pub fn get_window_rect(hwnd: HWND) -> RECT {
         let mut rect = unsafe { std::mem::zeroed() };
+        unsafe { GetWindowRect(hwnd, &mut rect).ok() };
+        rect
+    }
+
+    // some windows like explorer.exe have a shadow margin
+    pub fn get_window_rect_without_margins(hwnd: HWND) -> RECT {
+        let mut rect = unsafe { std::mem::zeroed() };
         if Self::dwm_get_window_attribute(hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, &mut rect).is_ok() {
             rect
         } else {
@@ -457,7 +460,7 @@ impl WindowsApi {
     }
 
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {
-        let window_rect = Self::get_window_rect(hwnd);
+        let window_rect = Self::get_window_rect_without_margins(hwnd);
 
         let mut shadow_rect = Default::default();
         unsafe { GetWindowRect(hwnd, &mut shadow_rect)? };

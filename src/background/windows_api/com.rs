@@ -2,7 +2,7 @@ use crate::error_handler::Result;
 use windows::{
     core::{ComInterface, GUID},
     Win32::System::Com::{
-        CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED
+        CoCreateInstance, CoInitializeEx, CoUninitialize, CLSCTX_ALL, COINIT_APARTMENTTHREADED,
     },
 };
 
@@ -26,8 +26,9 @@ impl Com {
     }
 
     /// Will execute init and drop in a safe way, ensuring that all instances created between init and drop are dropped
-    pub fn run_with_context<F, T>(f: F) -> Result<T> 
-    where F: FnOnce() -> Result<T>,
+    pub fn run_with_context<F, T>(f: F) -> Result<T>
+    where
+        F: FnOnce() -> Result<T>,
     {
         Self::initialize()?;
         let result = f();

@@ -10,14 +10,14 @@ use windows::Win32::UI::Input::KeyboardAndMouse::{
     VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
 };
 
-use crate::apps_config::*;
-use crate::error_handler::{log_if_error, Result};
+use crate::error_handler::Result;
 use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
 use crate::utils::{is_windows_10, is_windows_11};
 use crate::windows_api::WindowsApi;
+use crate::{apps_config::*, log_error};
 
 use crate::modules::network::infrastructure::*;
 use crate::modules::power::infrastructure::*;
@@ -76,14 +76,14 @@ pub fn set_volume_level(level: f32) -> Result<(), String> {
 #[command]
 fn refresh_state() {
     std::thread::spawn(|| {
-        log_if_error(SEELEN.lock().refresh_state());
+        log_error!(SEELEN.lock().refresh_state());
     });
 }
 
 #[command]
 fn start_seelen_shortcuts() {
     std::thread::spawn(|| {
-        log_if_error(SEELEN.lock().start_ahk_shortcuts());
+        log_error!(SEELEN.lock().start_ahk_shortcuts());
     });
 }
 
@@ -96,34 +96,32 @@ fn kill_seelen_shortcuts() {
 
 #[command]
 fn select_file_on_explorer(path: String) {
-    log_if_error(Command::new("explorer").args(["/select,", &path]).spawn());
+    log_error!(Command::new("explorer").args(["/select,", &path]).spawn());
 }
 
 #[command]
 fn open_file(path: String) {
-    log_if_error(Command::new("explorer").args([&path]).spawn());
+    log_error!(Command::new("explorer").args([&path]).spawn());
 }
 
 #[command]
 fn open_install_folder() {
     let exe_path = std::env::current_exe().unwrap();
-    log_if_error(
-        Command::new("explorer")
-            .args(["/select,", &exe_path.to_string_lossy()])
-            .spawn(),
-    );
+    log_error!(Command::new("explorer")
+        .args(["/select,", &exe_path.to_string_lossy()])
+        .spawn());
 }
 
 #[command]
 fn run_as_admin(path: String) {
     tauri::async_runtime::spawn(async move {
         let app = get_app_handle();
-        log_if_error(
+        log_error!(
             app.shell()
                 .command("powershell")
                 .args(["-Command", &format!("Start-Process '{}' -Verb runAs", path)])
                 .status()
-                .await,
+                .await
         );
     });
 }
@@ -189,14 +187,14 @@ fn get_win_version() -> WinVersion {
 #[command]
 fn show_app_settings() {
     std::thread::spawn(|| {
-        log_if_error(SEELEN.lock().show_settings());
+        log_error!(SEELEN.lock().show_settings());
     });
 }
 
 #[command]
 fn set_auto_start(enabled: bool) {
     std::thread::spawn(move || {
-        log_if_error(SEELEN.lock().set_auto_start(enabled));
+        log_error!(SEELEN.lock().set_auto_start(enabled));
     });
 }
 

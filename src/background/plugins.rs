@@ -1,11 +1,49 @@
+use color_eyre::owo_colors::OwoColorize;
 use tauri::{Builder, Wry};
 use tauri_plugin_autostart::MacosLauncher;
-use tauri_plugin_log::{
-    fern::colors::{Color, ColoredLevelConfig},
-    Target, TargetKind,
-};
+use tauri_plugin_log::{Target, TargetKind};
 
 pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
+    let mut log_plugin_builder = tauri_plugin_log::Builder::new()
+        .targets([
+            Target::new(TargetKind::Stdout),
+            Target::new(TargetKind::LogDir { file_name: None }),
+            Target::new(TargetKind::Webview),
+        ])
+        .level_for("tao", log::LevelFilter::Off);
+
+    if tauri::dev() {
+        log_plugin_builder = log_plugin_builder.format(move |out, message, record| {
+            out.finish(format_args!(
+                "[{}][{}] {}",
+                match record.level() {
+                    log::Level::Trace => "TRACE".bright_black().to_string(),
+                    log::Level::Info => "INFO~".bright_blue().to_string(),
+                    log::Level::Warn => "WARN~".yellow().to_string(),
+                    log::Level::Error => "ERROR".red().to_string(),
+                    log::Level::Debug => "DEBUG".bright_green().to_string(),
+                },
+                if record.level() == log::Level::Error {
+                    record
+                        .file()
+                        .map(|file| {
+                            format!(
+                                "{}:{}",
+                                file.replace("\\", "/"),
+                                record.line().unwrap_or_default()
+                            )
+                        })
+                        .unwrap_or_else(|| record.target().to_owned())
+                        .bright_red()
+                        .to_string()
+                } else {
+                    record.target().bright_black().to_string()
+                },
+                message
+            ))
+        });
+    }
+
     app_builder
         .plugin(tauri_plugin_fs::init())
         .plugin(tauri_plugin_shell::init())
@@ -16,21 +54,5 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
             MacosLauncher::LaunchAgent,
             Some(vec!["--silent"]),
         ))
-        .plugin(
-            tauri_plugin_log::Builder::new()
-                .targets([
-                    Target::new(TargetKind::Stdout),
-                    Target::new(TargetKind::LogDir { file_name: None }),
-                    Target::new(TargetKind::Webview),
-                ])
-                .with_colors(ColoredLevelConfig {
-                    error: Color::Red,
-                    warn: Color::Yellow,
-                    debug: Color::BrightGreen,
-                    info: Color::BrightBlue,
-                    trace: Color::White,
-                })
-                .level_for("tao", log::LevelFilter::Off)
-                .build(),
-        )
+        .plugin(log_plugin_builder.build())
 }

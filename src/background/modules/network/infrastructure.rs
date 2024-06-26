@@ -4,11 +4,7 @@ use windows::Win32::Networking::NetworkListManager::{
     NLM_CONNECTIVITY_IPV4_INTERNET, NLM_CONNECTIVITY_IPV6_INTERNET,
 };
 
-use crate::{
-    error_handler::{log_if_error, Result},
-    seelen::get_app_handle,
-    utils::sleep_millis,
-};
+use crate::{error_handler::Result, log_error, seelen::get_app_handle, utils::sleep_millis};
 
 use super::{
     application::{get_local_ip_address, NetworkManager},
@@ -27,15 +23,15 @@ pub fn register_network_events() -> Result<()> {
             connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0 == NLM_CONNECTIVITY_IPV6_INTERNET.0;
 
         let has_internet = has_internet_ipv4 || has_internet_ipv6;
-        log_if_error(handle.emit("network-internet-connection", has_internet));
+        log_error!(handle.emit("network-internet-connection", has_internet));
 
         match NetworkManager::get_adapters() {
-            Ok(adapters) => log_if_error(handle.emit("network-adapters", adapters)),
+            Ok(adapters) => log_error!(handle.emit("network-adapters", adapters)),
             Err(err) => log::error!("Fail on getting network adapters: {}", err),
         }
 
         match get_local_ip_address() {
-            Ok(ip) => log_if_error(handle.emit("network-default-local-ip", ip)),
+            Ok(ip) => log_error!(handle.emit("network-default-local-ip", ip)),
             Err(err) => log::error!("Fail on getting local ip address: {}", err),
         }
     });
@@ -66,7 +62,7 @@ pub fn wlan_start_scanning() {
     log::trace!("Start scanning networks");
     NetworkManager::start_scanning(|list| {
         let app = get_app_handle();
-        log_if_error(app.emit("wlan-scanned", &list));
+        log_error!(app.emit("wlan-scanned", &list));
     });
 }
 

@@ -39,7 +39,6 @@ enum Address {
     Gateway,
 }
 
-
 unsafe fn get_gateway(adapter: &IP_ADAPTER_ADDRESSES_LH) -> Option<String> {
     let mut gateway_ptr = adapter.FirstGatewayAddress;
     while !gateway_ptr.is_null() {

@@ -4,14 +4,19 @@ pub mod hook;
 use std::sync::atomic::Ordering;
 
 use crate::{
-    error_handler::Result, seelen::get_app_handle, state::TOOLBAR_HEIGHT, windows_api::{AppBarData, AppBarDataEdge, WindowsApi}
+    error_handler::Result,
+    seelen::get_app_handle,
+    state::TOOLBAR_HEIGHT,
+    windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
 use serde::Serialize;
 use tauri::{AppHandle, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::HWND,
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{
+        HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE, SW_HIDE, SW_SHOWNOACTIVATE,
+    },
 };
 
 pub struct FancyToolbar {

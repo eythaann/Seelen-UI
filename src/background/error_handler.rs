@@ -64,9 +64,17 @@ impl From<AppError> for String {
 impl From<tauri_plugin_shell::process::Output> for AppError {
     fn from(output: tauri_plugin_shell::process::Output) -> Self {
         if output.stderr.len() > 0 {
-            String::from_utf8(output.stderr).unwrap_or_default().trim().to_owned().into()
+            String::from_utf8(output.stderr)
+                .unwrap_or_default()
+                .trim()
+                .to_owned()
+                .into()
         } else {
-            String::from_utf8(output.stdout).unwrap_or_default().trim().to_owned().into()
+            String::from_utf8(output.stdout)
+                .unwrap_or_default()
+                .trim()
+                .to_owned()
+                .into()
         }
     }
 }
@@ -91,11 +99,13 @@ impl std::error::Error for AppError {
 
 pub type Result<T = (), E = AppError> = core::result::Result<T, E>;
 
-pub fn log_if_error<T, E>(result: Result<T, E>)
-where
-    E: std::fmt::Debug,
-{
-    if let Err(err) = result {
-        log::error!("{:?}", err);
-    }
+#[macro_export]
+macro_rules! log_error {
+    ($($result:expr),*) => {
+        $(
+            if let Err(err) = $result {
+                log::error!("{:?}", err);
+            }
+        )*
+    };
 }

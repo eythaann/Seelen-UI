@@ -7,12 +7,7 @@ use windows::Win32::{
     },
 };
 
-use crate::{
-    error_handler::{log_if_error, Result},
-    seelen::SEELEN,
-    utils::rect::Rect,
-    windows_api::WindowsApi,
-};
+use crate::{log_error, seelen::SEELEN, utils::rect::Rect, windows_api::WindowsApi};
 
 #[tauri::command]
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
@@ -65,7 +60,7 @@ pub fn complete_window_setup(webview: Webview<Wry>) {
     std::thread::spawn(move || {
         if let Some(monitor) = SEELEN.lock().monitor_by_id_mut(monitor_id) {
             if let Some(wm) = monitor.wm_mut() {
-                log_if_error(wm.complete_window_setup());
+                log_error!(wm.complete_window_setup());
             }
         }
     });

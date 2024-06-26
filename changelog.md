@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- improve logging on dev mode and fix missing target on production logged errors.
+
 ### fix
 - network icon showing incorrect interface icon (lan instead wifi).
 - no updating adapters list and using adapter on network changes.

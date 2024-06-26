@@ -37,8 +37,6 @@ use seelen::SEELEN;
 
 use tray::handle_tray_icon;
 
-use crate::error_handler::log_if_error;
-
 fn register_panic_hook() {
     std::panic::set_hook(Box::new(|info| {
         let cause = info
@@ -82,7 +80,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             let seelen = SEELEN.lock();
             if seelen.initialized {
                 log::info!("───────────────────── Exiting Seelen ─────────────────────");
-                log_if_error(seelen.stop());
+                log_error!(seelen.stop());
             }
         }
         _ => {}
@@ -119,7 +117,7 @@ fn main() -> Result<()> {
         .setup(move |app| {
             log::info!("───────────────────── Starting Seelen ─────────────────────");
             Client::listen_tcp()?;
-            log_if_error(try_force_tray_overflow_creation());
+            log_error!(try_force_tray_overflow_creation());
 
             let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
             seelen.init(app.handle().clone())?;

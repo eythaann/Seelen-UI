@@ -17,7 +17,8 @@ use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
     apps_config::{AppExtraFlag, SETTINGS_BY_APP},
-    error_handler::{log_if_error, Result},
+    error_handler::Result,
+    log_error,
     seelen::{Seelen, SEELEN},
     seelen_weg::{SeelenWeg, TASKBAR_CLASS},
     utils::{constants::IGNORE_FOCUS_AND_FULLSCREEN, is_windows_11},
@@ -117,19 +118,19 @@ impl HookManager {
         }
 
         let mut seelen = SEELEN.lock();
-        log_if_error(seelen.process_win_event(event, origin));
+        log_error!(seelen.process_win_event(event, origin));
 
         for monitor in seelen.monitors_mut() {
             if let Some(toolbar) = monitor.toolbar_mut() {
-                log_if_error(toolbar.process_win_event(event, origin));
+                log_error!(toolbar.process_win_event(event, origin));
             }
 
             if let Some(weg) = monitor.weg_mut() {
-                log_if_error(weg.process_win_event(event, origin));
+                log_error!(weg.process_win_event(event, origin));
             }
 
             if let Some(wm) = monitor.wm_mut() {
-                log_if_error(wm.process_win_event(event, origin));
+                log_error!(wm.process_win_event(event, origin));
             }
         }
     }
@@ -139,7 +140,7 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
     let mut seelen = SEELEN.lock();
     for monitor in seelen.monitors_mut() {
         if let Some(wm) = monitor.wm_mut() {
-            log_if_error(wm.process_vd_event(&event));
+            log_error!(wm.process_vd_event(&event));
         }
     }
 
@@ -263,7 +264,7 @@ pub fn register_win_hook() -> Result<()> {
             let (sender, receiver) = std::sync::mpsc::channel::<DesktopEvent>();
             let _notifications_thread = listen_desktop_events(sender)?;
             for event in receiver {
-                log_if_error(process_vd_event(event))
+                log_error!(process_vd_event(event))
             }
             Ok(())
         });

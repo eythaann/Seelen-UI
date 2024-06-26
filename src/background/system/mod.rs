@@ -2,7 +2,10 @@ pub mod brightness;
 
 use crate::{
     error_handler::Result,
-    modules::{network::infrastructure::register_network_events, power::infrastructure::PowerManager, tray::infrastructure::register_tray_events},
+    modules::{
+        network::infrastructure::register_network_events, power::infrastructure::PowerManager,
+        tray::infrastructure::register_tray_events,
+    },
     seelen::get_app_handle,
 };
 

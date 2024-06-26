@@ -14,7 +14,8 @@ use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW
+        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
+        SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -191,9 +192,9 @@ impl SeelenWeg {
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> bool {
-        let rect = WindowsApi::get_window_rect(hwnd);
+        let rect = WindowsApi::get_window_rect_without_margins(hwnd);
         let hitbox_rect = self.last_hitbox_rect.unwrap_or_else(|| {
-            WindowsApi::get_window_rect(HWND(
+            WindowsApi::get_window_rect_without_margins(HWND(
                 self.hitbox.hwnd().expect("Failed to get hitbox handle").0,
             ))
         });
@@ -217,7 +218,9 @@ impl SeelenWeg {
         }
 
         self.last_hitbox_rect = if self.overlaped {
-            Some(WindowsApi::get_window_rect(HWND(self.hitbox.hwnd()?.0)))
+            Some(WindowsApi::get_window_rect_without_margins(HWND(
+                self.hitbox.hwnd()?.0,
+            )))
         } else {
             None
         };

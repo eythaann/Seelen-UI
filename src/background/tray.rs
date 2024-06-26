@@ -8,7 +8,8 @@ use tauri::{
     App, AppHandle,
 };
 
-use crate::error_handler::{log_if_error, Result};
+use crate::error_handler::Result;
+use crate::log_error;
 use crate::seelen::SEELEN;
 
 pub fn handle_tray_icon(app: &mut App) -> Result<()> {
@@ -39,7 +40,7 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
         .on_menu_event(
             move |app: &AppHandle, event: MenuEvent| match event.id().as_ref() {
                 "settings" => {
-                    log_if_error(SEELEN.lock().show_settings());
+                    log_error!(SEELEN.lock().show_settings());
                 }
                 "pause" => {}
                 "restart" => app.restart(),
@@ -49,7 +50,7 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
         )
         .on_tray_icon_event(move |_, event| match event.click_type {
             ClickType::Left | ClickType::Double => {
-                log_if_error(SEELEN.lock().show_settings());
+                log_error!(SEELEN.lock().show_settings());
             }
             ClickType::Right => {}
         })

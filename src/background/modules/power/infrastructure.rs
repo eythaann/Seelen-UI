@@ -16,9 +16,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::{log_if_error, Result},
-    modules::power::domain::Battery,
-    seelen::get_app_handle,
+    error_handler::Result, log_error, modules::power::domain::Battery, seelen::get_app_handle,
     windows_api::WindowsApi,
 };
 
@@ -35,7 +33,7 @@ impl PowerManager {
         match msg {
             WM_POWERBROADCAST => {
                 if PBT_APMPOWERSTATUSCHANGE == w_param.0 as u32 {
-                    log_if_error(PowerManager::emit_system_power_info());
+                    log_error!(PowerManager::emit_system_power_info());
                 }
                 LRESULT(1)
             }
@@ -93,7 +91,7 @@ impl PowerManager {
         // TODO search for a better way to do this, WM_POWERBROADCAST only register status events
         // like charging, discharging, battery low, etc.
         std::thread::spawn(move || loop {
-            log_if_error(PowerManager::emit_system_power_info());
+            log_error!(PowerManager::emit_system_power_info());
             std::thread::sleep(std::time::Duration::from_secs(60));
         });
 
@@ -122,12 +120,12 @@ impl PowerManager {
 
 #[tauri::command]
 pub fn log_out() {
-    log_if_error(WindowsApi::exit_windows(EWX_LOGOFF, SHTDN_REASON_NONE));
+    log_error!(WindowsApi::exit_windows(EWX_LOGOFF, SHTDN_REASON_NONE));
 }
 
 #[tauri::command]
 pub fn suspend() {
-    log_if_error(WindowsApi::set_suspend_state());
+    log_error!(WindowsApi::set_suspend_state());
 }
 
 #[tauri::command]
