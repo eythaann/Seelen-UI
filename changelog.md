@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.7.6]
 ### enhancements
 - improve logging on dev mode and fix missing target on production logged errors.
 - improve fullscreen matching.
