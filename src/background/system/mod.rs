@@ -10,11 +10,13 @@ pub fn register_system_events() -> Result<()> {
     let handle = get_app_handle();
 
     handle.once("register-power-events", move |_| {
+        log::debug!("Registering system power events");
         PowerManager::register_power_events().expect("Fail on registering system power events");
         PowerManager::emit_system_power_info().expect("Fail on emitting initial system power info");
     });
 
     handle.once("register-tray-events", move |_| {
+        log::debug!("Registering tray events");
         register_tray_events().expect("Fail on registering tray events");
     });
 

@@ -45,7 +45,7 @@ right:
       ? (
         unequal(usingInterface, null) and equalText(usingInterface.type, "IEEE80211")
           ? "[ICON:FaWifi:14]"
-          : icon.TbWorld
+          : icon.FaComputer
       )
       : icon.TbWorldCancel
 

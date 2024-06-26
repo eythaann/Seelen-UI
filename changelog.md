@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- network icon showing incorrect interface icon (lan instead wifi).
+- no updating adapters list and using adapter on network changes.
+
 ## [1.7.5]
 ## [1.7.4]
 ### enhancements
