@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.7.7]
 ### fix
 - no registering system events (battery/network/etc)
 
