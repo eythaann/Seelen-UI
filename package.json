@@ -1,7 +1,7 @@
 {
   "name": "seelen-ui",
   "productName": "seelen-ui",
-  "version": "1.7.6",
+  "version": "1.7.7",
   "description": "Seelen UI Project",
   "scripts": {
     "tauri": "tauri",
