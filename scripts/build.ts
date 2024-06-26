@@ -1,9 +1,6 @@
-import { config as loadEnv } from 'dotenv';
 import esbuild from 'esbuild';
 import fs from 'fs';
 import path from 'path';
-
-const { GITHUB_TOKEN: _, ...parsedEnv } = loadEnv().parsed!;
 
 async function main() {
   const appFolders = fs
@@ -19,7 +16,6 @@ async function main() {
     jsx: 'automatic',
     define: {
       'process.env': JSON.stringify({
-        ...(parsedEnv || {}),
         packageVersion: JSON.parse(fs.readFileSync('package.json', 'utf-8')).version,
       }),
     },
