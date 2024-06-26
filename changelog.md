@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### enhancements
 - improve logging on dev mode and fix missing target on production logged errors.
+- improve fullscreen matching.
 
 ### fix
 - network icon showing incorrect interface icon (lan instead wifi).

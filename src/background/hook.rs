@@ -91,11 +91,11 @@ impl HookManager {
         }
 
         println!(
-            "{:?} || {} || {} || {}",
+            "{:?} || {} || {} || {:<30}",
             event.green(),
             WindowsApi::exe(origin).unwrap_or_default(),
             WindowsApi::get_class(origin).unwrap_or_default(),
-            WindowsApi::get_window_text(origin)
+            WindowsApi::get_window_text(origin),
         );
     }
 
