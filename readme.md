@@ -1,7 +1,21 @@
 <h1 align="center">
-  <img src="./documentation/images/logo.svg" style="margin-bottom: -8px;" height="44" alt="Seelen UI logo">
-  Seelen UI
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100" width="350">
+  <svg x="20" width="100" height="100" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+    <rect width="100%" height="100%" rx="20%" ry="20%" fill="#0f0f0f" />
+    <linearGradient id="screen" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#f75c46;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#9d57f4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0054b6;stop-opacity:1" />
+    </linearGradient>
+    <rect x="5%" y="5%" width="90%" height="90%" rx="16%" ry="16%" fill="url(#screen)" />
+    <line stroke-width="2.5%" x1="49%" y1="50%" x2="95%" y2="50%" stroke="#ffffff" stroke-dasharray="6.5% 4%" />
+    <line stroke-width="2.5%" x1="50%" y1="5%" x2="50%" y2="95%" stroke="#ffffff" stroke-dasharray="6.5% 3.95%" />
+  </svg>
+  <text x="140" y="86" font-weight="400" font-family="Segoe UI" style="font-size: 100px;" fill="currentColor">Seelen
+    UI</text>
+</svg>
 </h1>
+
 
 <div align="center"> 
 
