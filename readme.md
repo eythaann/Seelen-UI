@@ -1,4 +1,4 @@
-<h1 align="center" valign="center">
+<h1 align="center">
   <img src="documentation/images/logo.svg" width="44" align="top" />
   Seelen UI
 </h1>
