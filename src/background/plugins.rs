@@ -12,7 +12,7 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
         ])
         .level_for("tao", log::LevelFilter::Off);
 
-    if tauri::dev() {
+    if tauri::is_dev() {
         log_plugin_builder = log_plugin_builder.format(move |out, message, record| {
             out.finish(format_args!(
                 "[{}][{}] {}",

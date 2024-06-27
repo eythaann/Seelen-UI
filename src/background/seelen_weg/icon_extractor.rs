@@ -144,10 +144,10 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
         }
         // Clean up
         SelectObject(hdc_mem, hbm_old);
-        DeleteDC(hdc_mem);
-        DeleteDC(hdc_screen);
-        DeleteObject(icon_info.hbmColor);
-        DeleteObject(icon_info.hbmMask);
+        DeleteDC(hdc_mem).ok()?;
+        DeleteDC(hdc_screen).ok()?;
+        DeleteObject(icon_info.hbmColor).ok()?;
+        DeleteObject(icon_info.hbmMask).ok()?;
 
         bgra_to_rgba(buffer.as_mut_slice());
 

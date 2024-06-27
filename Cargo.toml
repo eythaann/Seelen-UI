@@ -1,3 +1,5 @@
+cargo-features = ["profile-rustflags"]
+
 [package]
 name = "seelen-ui"
 version = "1.0.0"
@@ -10,11 +12,13 @@ edition = "2021"
 rust-version = "1.60"
 build = "scripts/build.rs"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [[bin]]
 name = "seelen-ui"
 path = "src/background/main.rs"
+
+[profile.dev]
+incremental = true
+rustflags = ["-Z", "threads=8"]
 
 [build-dependencies]
 tauri-build = { version = "2.0.0-beta", features = [] }
@@ -34,7 +38,7 @@ tauri-plugin-dialog = "2.0.0-beta.2"
 tauri-plugin-autostart = "2.0.0-beta.2"
 tauri-plugin-shell = "2.0.0-beta.2"
 tauri-plugin-process = "2.0.0-beta.2"
-tauri-plugin-log = { version = "2.0.0-beta.2", features = ["colored"] }
+tauri-plugin-log = "2.0.0-beta.2"
 tauri-plugin-updater = "2.0.0-beta.2"
 color-eyre = "0.6.2"
 lazy_static = "1.4.0"
@@ -56,7 +60,7 @@ sysinfo = "0.30.12"
 battery = "0.7.8"
 
 [dependencies.windows]
-version = "0.52.0"
+version = "=0.56.0"
 features = [
     "Win32_Foundation",
     "ApplicationModel",
@@ -69,26 +73,27 @@ features = [
     "Win32_UI_Accessibility",
     "Win32_Graphics_Dwm",
     "Win32_System_Com",
-    "Win32_Security", # required for power management (shutdown, reboot)
+    "Win32_System_Registry",               # required for system tray icon module
+    "Win32_Security",                      # required for power management (shutdown, reboot)
     "Win32_System_Threading",
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
     "Win32_System_ProcessStatus",
-    "Win32_System_Power", # required for power management (battery - AC)
-    "Win32_System_Shutdown", # required for power management (shutdown)
+    "Win32_System_Power",                  # required for power management (battery - AC)
+    "Win32_System_Shutdown",               # required for power management (shutdown)
     "Win32_Storage_EnhancedStorage",
-    "Win32_Media_Audio_Endpoints", # required for audio
-    "Win32_Devices_Display", # required for display (brightness, etc)
+    "Win32_Media_Audio_Endpoints",         # required for audio
+    "Win32_Devices_Display",               # required for display (brightness, etc)
     "UI_Core",
-
-    "Win32_NetworkManagement_IpHelper", # required for network manager
-    "Win32_NetworkManagement_Ndis", # required for network manager
-    "Win32_Networking_WinSock", # required for network manager
+    "Win32_NetworkManagement_IpHelper",    # required for network manager
+    "Win32_NetworkManagement_Ndis",        # required for network manager
+    "Win32_Networking_WinSock",            # required for network manager
     "Win32_Networking_NetworkListManager", # required for network manager // events
-    "Win32_NetworkManagement_WiFi" # required for network manager // wifi
+    "Win32_NetworkManagement_WiFi",        # required for network manager // wifi
 ]
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem and the built-in dev server is disabled.
 # If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.
 custom-protocol = ["tauri/custom-protocol"]
+devtools = ["tauri/devtools"]

@@ -83,7 +83,7 @@ impl PowerManager {
 
             let mut msg = MSG::default();
             while GetMessageW(&mut msg, hwnd, 0, 0).into() {
-                TranslateMessage(&msg);
+                let _ = TranslateMessage(&msg);
                 DispatchMessageW(&msg);
             }
         });

@@ -454,7 +454,7 @@ impl WindowsApi {
     pub fn monitor_info(hmonitor: HMONITOR) -> Result<MONITORINFOEXW> {
         let mut ex_info = MONITORINFOEXW::default();
         ex_info.monitorInfo.cbSize = u32::try_from(std::mem::size_of::<MONITORINFOEXW>())?;
-        unsafe { GetMonitorInfoW(hmonitor, &mut ex_info.monitorInfo) };
+        unsafe { GetMonitorInfoW(hmonitor, &mut ex_info.monitorInfo).ok() }?;
         Ok(ex_info)
     }
 

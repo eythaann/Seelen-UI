@@ -124,7 +124,7 @@ fn main() -> Result<()> {
 
             handle_tray_icon(app)?;
 
-            if !tauri::dev() {
+            if !tauri::is_dev() {
                 seelen.create_update_modal()?;
 
                 if !matches.get_flag("silent") {

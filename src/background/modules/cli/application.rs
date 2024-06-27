@@ -161,7 +161,7 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
         return Ok(());
     }
 
-    if !tauri::dev() {
+    if !tauri::is_dev() {
         SEELEN.lock().show_settings()?;
     }
     Ok(())

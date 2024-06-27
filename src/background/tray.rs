@@ -1,6 +1,6 @@
 use tauri::image::Image;
 use tauri::path::BaseDirectory;
-use tauri::tray::ClickType;
+use tauri::tray::{MouseButton, MouseButtonState, TrayIconEvent};
 use tauri::Manager;
 use tauri::{
     menu::{MenuBuilder, MenuEvent, MenuItemBuilder},
@@ -48,11 +48,19 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
                 _ => (),
             },
         )
-        .on_tray_icon_event(move |_, event| match event.click_type {
-            ClickType::Left | ClickType::Double => {
-                log_error!(SEELEN.lock().show_settings());
+        .on_tray_icon_event(move |_, event| match event {
+            TrayIconEvent::Click {
+                id: _,
+                position: _,
+                rect: _,
+                button,
+                button_state,
+            } => {
+                if button == MouseButton::Left && button_state == MouseButtonState::Up {
+                    log_error!(SEELEN.lock().show_settings());
+                }
             }
-            ClickType::Right => {}
+            _ => (),
         })
         .build(app)?;
 

@@ -8,7 +8,7 @@ use tauri_plugin_shell::ShellExt;
 use crate::{error_handler::Result, seelen::SEELEN, windows_api::WindowsApi};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
-    UI::WindowsAndMessaging::{PostMessageW, ShowWindow, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
+    UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
 };
 
 use super::SeelenWeg;
@@ -78,9 +78,9 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) {
             }
 
             if WindowsApi::is_iconic(hwnd) {
-                unsafe { ShowWindow(hwnd, SW_RESTORE) };
+                WindowsApi::show_window(hwnd, SW_RESTORE)?;
             } else {
-                unsafe { ShowWindow(hwnd, SW_MINIMIZE) };
+                WindowsApi::show_window(hwnd, SW_MINIMIZE)?;
             }
         } else {
             SEELEN

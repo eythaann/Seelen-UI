@@ -254,7 +254,7 @@ pub fn register_win_hook() -> Result<()> {
                 log::info!("windows event processing shutdown");
                 break;
             };
-            TranslateMessage(&msg);
+            let _ = TranslateMessage(&msg);
             DispatchMessageW(&msg);
             std::thread::sleep(Duration::from_millis(10));
         }

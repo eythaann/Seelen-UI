@@ -128,7 +128,7 @@ fn run_as_admin(path: String) {
 
 #[command]
 fn is_dev_mode() -> bool {
-    tauri::dev()
+    tauri::is_dev()
 }
 
 #[command]

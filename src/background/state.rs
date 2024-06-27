@@ -12,6 +12,7 @@ pub static TOOLBAR_HEIGHT: AtomicU32 = AtomicU32::new(30);
 
 #[derive(Debug, Deserialize, Clone)]
 pub struct AhkShortcutConfig {
+    #[allow(dead_code)]
     pub fancy: String,
     pub ahk: String,
 }
