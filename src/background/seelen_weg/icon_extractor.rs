@@ -78,7 +78,7 @@ pub fn get_images_from_exe(executable_path: &str) -> Result<Vec<RgbaImage>> {
         let images = large_icons
             .iter()
             .chain(small_icons.iter())
-            .map(|icon| convert_hicon_to_rgba_image(icon))
+            .map(convert_hicon_to_rgba_image)
             .filter_map(|r| match r {
                 Ok(img) => Some(img),
                 Err(e) => {
@@ -104,8 +104,10 @@ pub fn get_images_from_exe(executable_path: &str) -> Result<Vec<RgbaImage>> {
 
 pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
     unsafe {
-        let mut icon_info = ICONINFOEXW::default();
-        icon_info.cbSize = std::mem::size_of::<ICONINFOEXW>() as u32;
+        let mut icon_info = ICONINFOEXW {
+            cbSize: std::mem::size_of::<ICONINFOEXW>() as u32,
+            ..Default::default()
+        };
 
         if !GetIconInfoExW(*hicon, &mut icon_info).as_bool() {
             return Err(eyre!("Failed to get icon info").into());
@@ -153,7 +155,7 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
 
         let image = ImageBuffer::from_raw(icon_info.xHotspot * 2, icon_info.yHotspot * 2, buffer)
             .expect("Failed to create image buffer");
-        return Ok(image);
+        Ok(image)
     }
 }
 
@@ -181,7 +183,7 @@ pub fn extract_and_save_icon(handle: &AppHandle, exe_path: &str) -> Result<PathB
     let images = get_images_from_exe(exe_path);
     if let Ok(images) = images {
         // icon on index 0 always is the app showed icon
-        if let Some(icon) = images.get(0) {
+        if let Some(icon) = images.first() {
             icon.save(&icon_path)?;
         }
     }

@@ -20,13 +20,13 @@ impl From<RECT> for Rect {
     }
 }
 
-impl Into<RECT> for Rect {
-    fn into(self) -> RECT {
+impl From<Rect> for RECT {
+    fn from(val: Rect) -> Self {
         RECT {
-            left: self.left,
-            top: self.top,
-            right: self.right,
-            bottom: self.bottom,
+            left: val.left,
+            top: val.top,
+            right: val.right,
+            bottom: val.bottom,
         }
     }
 }

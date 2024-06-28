@@ -294,11 +294,9 @@ impl WinEvent {
         let title = WindowsApi::get_window_text(hwnd);
         let is_foreground_window = hwnd == WindowsApi::get_foreground_window();
 
-        return (is_foreground_window || *self == Self::SystemMinimizeStart)
+        (is_foreground_window || *self == Self::SystemMinimizeStart)
             && !title.starts_with("Seelen")
             && !IGNORE_FOCUS_AND_FULLSCREEN.contains(&title)
-            // not is creating a non visible window
-            && !(*self == Self::ObjectCreate && !WindowsApi::is_window_visible(hwnd));
     }
 
     pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {
@@ -307,7 +305,9 @@ impl WinEvent {
             | Self::ObjectCreate
             | Self::ObjectUncloaked
             | Self::SystemMinimizeEnd => {
-                if !self.should_handle_fullscreen_events(origin) {
+                let is_creating_invisible_window =
+                    *self == Self::ObjectCreate && !WindowsApi::is_window_visible(origin);
+                if is_creating_invisible_window || !self.should_handle_fullscreen_events(origin) {
                     return None;
                 }
 

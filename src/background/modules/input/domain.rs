@@ -45,9 +45,9 @@ impl From<POINT> for Point {
     }
 }
 
-impl Into<POINT> for Point {
-    fn into(self) -> POINT {
-        self.0
+impl From<Point> for POINT {
+    fn from(val: Point) -> Self {
+        val.0
     }
 }
 

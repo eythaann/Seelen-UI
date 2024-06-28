@@ -22,9 +22,9 @@ pub enum AppBarDataState {
     AlwaysOnTop = ABS_ALWAYSONTOP as isize,
 }
 
-impl Into<LPARAM> for AppBarDataState {
-    fn into(self) -> LPARAM {
-        LPARAM(self as isize)
+impl From<AppBarDataState> for LPARAM {
+    fn from(val: AppBarDataState) -> Self {
+        LPARAM(val as isize)
     }
 }
 
@@ -42,19 +42,20 @@ impl From<u32> for AppBarDataState {
 pub struct AppBarData(APPBARDATA);
 impl AppBarData {
     pub fn from_handle(hwnd: HWND) -> Self {
-        let mut app_bar = APPBARDATA::default();
-        app_bar.cbSize = std::mem::size_of::<APPBARDATA>() as u32;
-        app_bar.hWnd = hwnd;
-        Self(app_bar)
+        Self(APPBARDATA {
+            cbSize: std::mem::size_of::<APPBARDATA>() as u32,
+            hWnd: hwnd,
+            ..Default::default()
+        })
     }
 
     pub fn state(&self) -> AppBarDataState {
-        let mut data = self.0.clone();
+        let mut data = self.0;
         AppBarDataState::from(unsafe { SHAppBarMessage(ABM_GETSTATE, &mut data) as u32 })
     }
 
     pub fn set_state(&self, state: AppBarDataState) {
-        let mut data = self.0.clone();
+        let mut data = self.0;
         data.lParam = state.into();
         unsafe { SHAppBarMessage(ABM_SETSTATE, &mut data) };
     }

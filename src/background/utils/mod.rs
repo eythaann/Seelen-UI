@@ -56,20 +56,18 @@ pub fn kebab_to_pascal(input: &str) -> String {
     for c in input.chars() {
         if c == '-' {
             prev_char_dash = true;
+        } else if prev_char_dash || pascal_case.is_empty() {
+            pascal_case.push(c.to_ascii_uppercase());
+            prev_char_dash = false;
         } else {
-            if prev_char_dash || pascal_case.is_empty() {
-                pascal_case.push(c.to_ascii_uppercase());
-                prev_char_dash = false;
-            } else {
-                pascal_case.push(c);
-            }
+            pascal_case.push(c);
         }
     }
     pascal_case
 }
 
 pub fn is_windows_10() -> bool {
-    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &10240 && x < &22000)
+    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if (&10240..&22000).contains(&x))
 }
 
 pub fn is_windows_11() -> bool {

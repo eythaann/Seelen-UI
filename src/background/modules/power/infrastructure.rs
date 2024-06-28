@@ -41,7 +41,7 @@ impl PowerManager {
                 PostQuitMessage(0);
                 LRESULT(0)
             }
-            _ => return DefWindowProcW(hwnd, msg, w_param, l_param),
+            _ => DefWindowProcW(hwnd, msg, w_param, l_param),
         }
     }
 
@@ -106,10 +106,8 @@ impl PowerManager {
 
         let mut batteries: Vec<Battery> = Vec::new();
         let manager = battery::Manager::new()?;
-        for battery in manager.batteries()? {
-            if let Ok(battery) = battery {
-                batteries.push(battery.try_into()?);
-            }
+        for battery in manager.batteries()?.flatten() {
+            batteries.push(battery.try_into()?);
         }
 
         handle.emit("batteries-status", batteries)?;
@@ -131,9 +129,11 @@ pub fn suspend() {
 #[tauri::command]
 pub fn restart() -> Result<(), String> {
     let token_handle = WindowsApi::open_process_token()?;
-    let mut tkp = TOKEN_PRIVILEGES::default();
+    let mut tkp = TOKEN_PRIVILEGES {
+        PrivilegeCount: 1,
+        ..Default::default()
+    };
 
-    tkp.PrivilegeCount = 1;
     tkp.Privileges[0].Luid = WindowsApi::get_luid(PCWSTR::null(), SE_SHUTDOWN_NAME)?;
     tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 
@@ -149,9 +149,11 @@ pub fn restart() -> Result<(), String> {
 #[tauri::command]
 pub fn shutdown() -> Result<(), String> {
     let token_handle = WindowsApi::open_process_token()?;
-    let mut tkp = TOKEN_PRIVILEGES::default();
+    let mut tkp = TOKEN_PRIVILEGES {
+        PrivilegeCount: 1,
+        ..Default::default()
+    };
 
-    tkp.PrivilegeCount = 1;
     tkp.Privileges[0].Luid = WindowsApi::get_luid(PCWSTR::null(), SE_SHUTDOWN_NAME)?;
     tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
 

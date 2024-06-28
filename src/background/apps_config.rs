@@ -76,7 +76,7 @@ impl AppIdentifier {
     pub fn cache_regex(&self) {
         if matches!(self.matching_strategy, MatchingStrategy::Regex) {
             let result = Regex::new(&self.id);
-            if let Some(re) = result.ok() {
+            if let Ok(re) = result {
                 let mut regex_identifiers = REGEX_IDENTIFIERS.lock();
                 regex_identifiers.insert(self.id.clone(), re);
             }
@@ -120,7 +120,7 @@ impl AppIdentifier {
             },
         };
 
-        if self.negation.is_some_and(|negation| negation) {
+        if self.negation == Some(true) {
             self_result = !self_result;
         }
 
@@ -209,12 +209,10 @@ impl AppsConfigurations {
             self.apps.extend(apps);
         }
 
-        for entry in self.apps_template_path.read_dir()? {
-            if let Ok(entry) = entry {
-                let content = std::fs::read_to_string(entry.path())?;
-                let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
-                self.apps.extend(apps);
-            }
+        for entry in self.apps_template_path.read_dir()?.flatten() {
+            let content = std::fs::read_to_string(entry.path())?;
+            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
+            self.apps.extend(apps);
         }
 
         self.apps

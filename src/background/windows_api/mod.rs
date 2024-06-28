@@ -114,7 +114,7 @@ impl WindowsApi {
         let mut _dpi_y: u32 = 0;
         unsafe { GetDpiForMonitor(hmonitor, MDT_EFFECTIVE_DPI, &mut dpi_x, &mut _dpi_y)? };
         // 96 is the default DPI value on Windows
-        Ok(dpi_x as f32 / 96 as f32)
+        Ok(dpi_x as f32 / 96_f32)
     }
 
     pub fn window_thread_process_id(hwnd: HWND) -> (u32, u32) {
@@ -257,7 +257,7 @@ impl WindowsApi {
         let order = order.unwrap_or(HWND(0));
 
         if uflags.contains(SWP_ASYNCWINDOWPOS) {
-            let rect = rect.clone();
+            let rect = *rect;
             std::thread::spawn(move || Self::_set_position(hwnd, order, rect, uflags));
             return Ok(());
         }
@@ -283,7 +283,7 @@ impl WindowsApi {
         Self::set_minimize_animation(false)?;
 
         let mut hook_manager = HOOK_MANAGER.lock();
-        hook_manager.pause_and_resume_after(WinEvent::SystemMinimizeEnd, hwnd.clone());
+        hook_manager.pause_and_resume_after(WinEvent::SystemMinimizeEnd, hwnd);
         hook_manager.set_resume_callback(move |hook_manager| {
             log_error!(Self::set_minimize_animation(true));
             hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
@@ -498,10 +498,7 @@ impl WindowsApi {
         while desktop_id.to_u128() == 0 && attempt < 10 {
             attempt += 1;
             sleep(Duration::from_millis(30));
-            match unsafe { manager.GetWindowDesktopId(hwnd) } {
-                Ok(desktop) => desktop_id = desktop,
-                Err(_) => {}
-            }
+            if let Ok(desktop) = unsafe { manager.GetWindowDesktopId(hwnd) } { desktop_id = desktop }
         }
         if desktop_id.to_u128() == 0 {
             return Err(eyre!("Failed to get desktop id for: {hwnd:?}").into());
@@ -512,7 +509,7 @@ impl WindowsApi {
     pub fn get_min_animation_info() -> Result<ANIMATIONINFO> {
         let mut anim_info: ANIMATIONINFO = unsafe { core::mem::zeroed() };
         anim_info.cbSize = core::mem::size_of::<ANIMATIONINFO>() as u32;
-        let uiparam = anim_info.cbSize.clone();
+        let uiparam = anim_info.cbSize;
         unsafe {
             SystemParametersInfoW(
                 SPI_GETANIMATION,
@@ -526,7 +523,7 @@ impl WindowsApi {
 
     pub fn set_minimize_animation(enable: bool) -> Result<()> {
         let mut anim_info = Self::get_min_animation_info()?;
-        let uiparam = anim_info.cbSize.clone();
+        let uiparam = anim_info.cbSize;
         unsafe {
             anim_info.iMinAnimate = enable.into();
             SystemParametersInfoW(

@@ -13,12 +13,9 @@ use super::WindowManager;
 
 impl WindowManager {
     pub fn process_vd_event(&mut self, event: &DesktopEvent) -> Result<()> {
-        match event {
-            DesktopEvent::DesktopChanged { new, old: _ } => {
-                self.discard_reservation()?;
-                self.set_active_workspace(format!("{:?}", new.get_id()?))?;
-            }
-            _ => {}
+        if let DesktopEvent::DesktopChanged { new, old: _ } = event {
+            self.discard_reservation()?;
+            self.set_active_workspace(format!("{:?}", new.get_id()?))?;
         }
         Ok(())
     }

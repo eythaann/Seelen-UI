@@ -39,6 +39,7 @@ pub fn get_app_handle() -> AppHandle<Wry> {
 
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters)]
+#[derive(Default)]
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
     #[getset(get = "pub", get_mut = "pub")]
@@ -49,17 +50,6 @@ pub struct Seelen {
     pub initialized: bool,
 }
 
-impl Default for Seelen {
-    fn default() -> Self {
-        Self {
-            handle: None,
-            monitors: Vec::new(),
-            shell: None,
-            state: State::default(),
-            initialized: false,
-        }
-    }
-}
 
 /* ============== Getters ============== */
 impl Seelen {
@@ -280,7 +270,7 @@ impl Seelen {
                     "-File",
                     &pwsh_script_path.to_string_lossy(),
                     "-SavePath",
-                    &self
+                    self
                         .handle()
                         .path()
                         .app_data_dir()

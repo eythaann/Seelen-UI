@@ -47,7 +47,7 @@ impl NetworkManager {
         let adapters = unsafe {
             let family = AF_UNSPEC.0 as u32;
             let flags = GAA_FLAG_INCLUDE_PREFIX | GAA_FLAG_INCLUDE_GATEWAYS;
-            let mut buffer_length = 0 as u32;
+            let mut buffer_length = 0_u32;
 
             // first call to get the buffer size
             GetAdaptersAddresses(family, flags, None, None, &mut buffer_length);

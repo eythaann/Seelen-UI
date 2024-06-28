@@ -32,13 +32,11 @@ impl PwshScript {
         let script_path = temp_dir().join(format!("slu-{}.ps1", uuid::Uuid::new_v4()));
         let script_path_str = script_path.to_string_lossy();
 
-        let args = vec![
-            "-ExecutionPolicy",
+        let args = ["-ExecutionPolicy",
             "Bypass",
             "-NoProfile",
             "-File",
-            &script_path_str,
-        ]
+            &script_path_str]
         .iter()
         .map(|s| s.to_string())
         .chain(self.args.clone())

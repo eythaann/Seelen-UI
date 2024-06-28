@@ -1,4 +1,3 @@
-use std::path::PathBuf;
 
 use image::ImageFormat;
 use serde::Deserialize;
@@ -39,7 +38,7 @@ pub fn weg_request_update_previews(hwnds: Vec<Args>) -> Result<(), String> {
             let hwnd = HWND(app.process_hwnd);
             let image = SeelenWeg::capture_window(hwnd);
             if let Some(image) = image {
-                let mut output_path = PathBuf::from(temp_dir.clone());
+                let mut output_path = temp_dir.clone();
                 output_path.push(format!("{}.png", hwnd.0));
                 image
                     .save_with_format(&output_path, ImageFormat::Png)

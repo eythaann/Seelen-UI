@@ -49,9 +49,9 @@ impl std::fmt::Display for AppError {
 }
 
 // needed to tauri::command macro (exposed functions to frontend)
-impl Into<tauri::ipc::InvokeError> for AppError {
-    fn into(self) -> tauri::ipc::InvokeError {
-        tauri::ipc::InvokeError::from(self.to_string())
+impl From<AppError> for tauri::ipc::InvokeError {
+    fn from(val: AppError) -> Self {
+        tauri::ipc::InvokeError::from(val.to_string())
     }
 }
 
@@ -63,7 +63,7 @@ impl From<AppError> for String {
 
 impl From<tauri_plugin_shell::process::Output> for AppError {
     fn from(output: tauri_plugin_shell::process::Output) -> Self {
-        if output.stderr.len() > 0 {
+        if !output.stderr.is_empty() {
             String::from_utf8(output.stderr)
                 .unwrap_or_default()
                 .trim()

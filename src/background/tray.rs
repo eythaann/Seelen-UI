@@ -48,19 +48,16 @@ pub fn handle_tray_icon(app: &mut App) -> Result<()> {
                 _ => (),
             },
         )
-        .on_tray_icon_event(move |_, event| match event {
-            TrayIconEvent::Click {
+        .on_tray_icon_event(move |_, event| if let TrayIconEvent::Click {
                 id: _,
                 position: _,
                 rect: _,
                 button,
                 button_state,
-            } => {
-                if button == MouseButton::Left && button_state == MouseButtonState::Up {
-                    log_error!(SEELEN.lock().show_settings());
-                }
+            } = event {
+            if button == MouseButton::Left && button_state == MouseButtonState::Up {
+                log_error!(SEELEN.lock().show_settings());
             }
-            _ => (),
         })
         .build(app)?;
 

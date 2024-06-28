@@ -28,7 +28,7 @@ impl From<&WLAN_BSS_ENTRY> for WlanBssEntry {
             .replace("\0", "")
             .to_string();
 
-        let ssid = if ssid.len() == 0 { None } else { Some(ssid) };
+        let ssid = if ssid.is_empty() { None } else { Some(ssid) };
 
         let bssid = entry
             .dot11Bssid
@@ -235,7 +235,7 @@ impl NetworkManager {
                     Ok(entries) => {
                         // sometimes we get an empty list, because the wlan list is updating after the scan
                         // so we will wait ~10 seconds before show empty list
-                        if entries.len() > 0 || attempts > 3 {
+                        if !entries.is_empty() || attempts > 3 {
                             cb(entries);
                         } else {
                             attempts += 1;

@@ -30,11 +30,12 @@ lazy_static! {
     pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
 }
 
+type HookCallback = Box<dyn Fn(&mut HookManager) + Send + 'static>;
 pub struct HookManager {
     paused: bool,
     waiting_event: Option<WinEvent>,
     waiting_hwnd: Option<HWND>,
-    resume_cb: Option<Box<dyn Fn(&mut HookManager) + Send>>,
+    resume_cb: Option<HookCallback>,
 }
 
 impl HookManager {
@@ -159,7 +160,7 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
             let desktops = winvd::get_desktops()?;
             let mut desktops_names = Vec::new();
             for (i, d) in desktops.iter().enumerate() {
-                if let Some(name) = d.get_name().ok() {
+                if let Ok(name) = d.get_name() {
                     desktops_names.push(name);
                 } else {
                     desktops_names.push(format!("Desktop {}", i + 1))
@@ -176,19 +177,16 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
         _ => {}
     }
 
-    match event {
-        DesktopEvent::WindowChanged(hwnd) => {
-            if WindowsApi::is_window(hwnd) {
-                if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
-                    if config.options_contains(AppExtraFlag::Pinned)
-                        && !winvd::is_pinned_window(hwnd)?
-                    {
-                        winvd::pin_window(hwnd)?;
-                    }
+    if let DesktopEvent::WindowChanged(hwnd) = event {
+        if WindowsApi::is_window(hwnd) {
+            if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
+                if config.options_contains(AppExtraFlag::Pinned)
+                    && !winvd::is_pinned_window(hwnd)?
+                {
+                    winvd::pin_window(hwnd)?;
                 }
             }
         }
-        _ => {}
     }
 
     Ok(())

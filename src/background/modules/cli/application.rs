@@ -40,17 +40,17 @@ macro_rules! get_subcommands {
                         ];
 
                         let about = stringify!($meta).trim_start_matches("doc = r\"").trim_end_matches("\"").trim();
-                        let command = crate::utils::pascal_to_kebab(stringify!($subcommand));
+                        let command = $crate::utils::pascal_to_kebab(stringify!($subcommand));
                         Command::new(command).about(about).args(args)
                     });
                 )*
                 commands
             }
 
-            fn try_from(matches: &clap::ArgMatches) -> crate::error_handler::Result<Self> {
+            fn try_from(matches: &clap::ArgMatches) -> $crate::error_handler::Result<Self> {
                 #[allow(unused_variables)]
                 if let Some((subcommand, sub_matches)) = matches.subcommand() {
-                    match crate::utils::kebab_to_pascal(subcommand).as_str() {
+                    match $crate::utils::kebab_to_pascal(subcommand).as_str() {
                         $(
                             stringify!($subcommand) => {
                                 Ok(SubCommand::$subcommand$(($((sub_matches.get_one(stringify!($arg_name)) as Option<&$arg_type>).unwrap().clone()),*))?)
@@ -124,7 +124,7 @@ pub fn handle_cli_info(matches: &clap::ArgMatches) -> ShouldInitApp {
     }
 
     if matches.get_flag("version") {
-        println!("{}", "1.0.0");
+        println!("1.0.0");
         return false;
     }
 

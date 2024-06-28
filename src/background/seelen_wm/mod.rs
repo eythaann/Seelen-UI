@@ -299,22 +299,23 @@ impl WindowManager {
         Ok(window)
     }
 
-    const NEXT: AtomicIsize = AtomicIsize::new(0);
     unsafe extern "system" fn get_next_by_order_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
         if WindowManager::is_manageable_window(hwnd, false) && hwnd.0 != lparam.0 {
-            Self::NEXT.store(hwnd.0, Ordering::SeqCst);
+            NEXT.store(hwnd.0, Ordering::SeqCst);
             return false.into();
         }
         true.into()
     }
 
     pub fn get_next_by_order(hwnd: HWND) -> Option<HWND> {
-        Self::NEXT.store(0, Ordering::SeqCst);
+        NEXT.store(0, Ordering::SeqCst);
         unsafe { EnumWindows(Some(Self::get_next_by_order_proc), LPARAM(hwnd.0)) }.ok();
-        let result = Self::NEXT.load(Ordering::SeqCst);
+        let result = NEXT.load(Ordering::SeqCst);
         if result == 0 {
             return None;
         }
         Some(HWND(result))
     }
 }
+
+static NEXT: AtomicIsize = AtomicIsize::new(0);

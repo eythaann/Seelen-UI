@@ -89,7 +89,7 @@ impl VirtualDesktopManager {
         match current {
             Some(current) => {
                 let mut result = Vec::new();
-                for desktop_id in current.chunks_exact(16).map(|chunk| Vec::from(chunk)) {
+                for desktop_id in current.chunks_exact(16).map(Vec::from) {
                     result.push(VirtualDesktop::from(desktop_id))
                 }
                 Ok(result)

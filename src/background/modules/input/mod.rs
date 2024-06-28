@@ -53,10 +53,7 @@ enum InputItem {
 
 impl InputItem {
     fn is_holdkey(&self) -> bool {
-        match self {
-            Self::HoldKey(_) => true,
-            _ => false,
-        }
+        matches!(self, Self::HoldKey(_))
     }
 }
 
@@ -128,7 +125,7 @@ impl Input {
             }
         }
 
-        for holdkey in (&self.holdkeys).iter().rev() {
+        for holdkey in self.holdkeys.iter().rev() {
             let input = Self::create_virtual_key(*holdkey, KEYEVENTF_KEYUP);
             inputs.push(input);
         }
@@ -220,12 +217,8 @@ impl Input {
             } else {
                 let mut shift: bool = (vk >> 8 & 0x01) != 0;
                 let state = unsafe { GetKeyState(VK_CAPITAL.0 as _) };
-                if (state & 0x01) != 0 {
-                    if (ch >= 'a' as u16 && ch <= 'z' as u16)
-                        || (ch >= 'A' as u16 && ch <= 'Z' as u16)
-                    {
-                        shift = !shift;
-                    }
+                if (state & 0x01) != 0 && ((ch >= 'a' as u16 && ch <= 'z' as u16) || (ch >= 'A' as u16 && ch <= 'Z' as u16)) {
+                    shift = !shift;
                 };
                 let mut char_inputs: Vec<INPUT> = Vec::new();
                 if shift {
@@ -332,7 +325,7 @@ fn next_input(expr: &mut Chars<'_>) -> Result<Option<(Vec<InputItem>, bool)>> {
 fn read_special_item(expr: &mut Chars<'_>) -> Result<InputItem> {
     let mut token = String::new();
     let mut matched = false;
-    while let Some(ch) = expr.next() {
+    for ch in expr.by_ref() {
         if ch == '}' && !token.is_empty() {
             matched = true;
             break;
@@ -343,7 +336,7 @@ fn read_special_item(expr: &mut Chars<'_>) -> Result<InputItem> {
 
     if matched {
         if token == "(" || token == ")" || token == "{" || token == "}" {
-            Ok(InputItem::Character(token.chars().nth(0).unwrap()))
+            Ok(InputItem::Character(token.chars().next().unwrap()))
         } else {
             let token = token.to_uppercase();
             if let Some(key) = VIRTUAL_KEYS.get(&token) {
@@ -493,7 +486,7 @@ impl Keyboard {
             send_input(input_keys)
         } else {
             for input_key in input_keys {
-                let input_key_slice: [INPUT; 1] = [input_key.clone()];
+                let input_key_slice: [INPUT; 1] = [*input_key];
                 send_input(&input_key_slice)?;
 
                 self.wait();
@@ -518,7 +511,7 @@ impl Drop for Keyboard {
                 holdkey_inputs.push(Input::create_virtual_key(*holdkey, KEYEVENTF_KEYUP));
             }
 
-            if send_input(&holdkey_inputs.as_slice()).is_ok() {
+            if send_input(holdkey_inputs.as_slice()).is_ok() {
                 self.holdkeys.clear();
             }
         }

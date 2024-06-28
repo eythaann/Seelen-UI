@@ -164,7 +164,7 @@ impl SeelenWeg {
 
         let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
         let mut icon_path = self.missing_icon();
-        if exe_path != "" {
+        if !exe_path.is_empty() {
             icon_path = self.extract_icon(&exe_path).unwrap_or(icon_path);
         }
 
@@ -211,7 +211,7 @@ impl SeelenWeg {
             return Ok(());
         }
 
-        let last_status = self.overlaped.clone();
+        let last_status = self.overlaped;
         self.overlaped = self.is_overlapping(hwnd);
         if last_status == self.overlaped {
             return Ok(());

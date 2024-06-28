@@ -85,8 +85,8 @@ pub fn try_force_tray_overflow_creation() -> Result<()> {
         let element_array = element.FindAll(TreeScope_Subtree, &condition)?;
         for index in 0..element_array.Length().unwrap_or(0) {
             let element = element_array.GetElement(index)?;
-            if element.CurrentName()?.to_string() == "Show Hidden Icons"
-                && element.CurrentAutomationId()?.to_string() == "SystemTrayIcon"
+            if element.CurrentName()? == "Show Hidden Icons"
+                && element.CurrentAutomationId()? == "SystemTrayIcon"
             {
                 let invoker = element
                     .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
@@ -143,7 +143,7 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
 
                 tray_elements.push(TrayIcon {
                     ui_automation: element,
-                    registry: registry.as_deref().clone().cloned(),
+                    registry: registry.cloned(),
                 });
             }
         }
