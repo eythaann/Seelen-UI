@@ -132,22 +132,6 @@ fn is_dev_mode() -> bool {
 }
 
 #[command]
-fn ensure_hitboxes_zorder() {
-    std::thread::spawn(|| -> Result<()> {
-        let seelen = trace_lock!(SEELEN);
-        for monitor in seelen.monitors() {
-            if let Some(toolbar) = monitor.toolbar() {
-                toolbar.ensure_hitbox_zorder()?;
-            }
-            if let Some(weg) = monitor.weg() {
-                weg.ensure_hitbox_zorder()?;
-            }
-        }
-        Ok(())
-    });
-}
-
-#[command]
 fn get_accent_color() -> String {
     let mut colorization: u32 = 0;
     let mut opaque_blend = windows::Win32::Foundation::BOOL(0);
@@ -222,7 +206,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_user_envs,
         show_app_settings,
         reload_apps_configurations,
-        ensure_hitboxes_zorder,
         switch_workspace,
         // Auto Start
         set_auto_start,

@@ -14,8 +14,8 @@ use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
-        SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        EnumWindows, GetParent, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE,
+        SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -230,10 +230,6 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        WindowsApi::bring_to(HWND(self.window.hwnd()?.0), HWND_TOPMOST)
-    }
-
     pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {
         if !WindowsApi::is_window_visible(hwnd) {
             return false;
@@ -295,7 +291,7 @@ impl SeelenWeg {
         let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor_id))?;
         let rc_work = monitor_info.monitorInfo.rcWork;
 
-        let hitbox = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
+        let hitbox = tauri::WebviewWindowBuilder::new(
             manager,
             format!("{}/{}", Self::TARGET_HITBOX, monitor_id),
             tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
@@ -312,7 +308,7 @@ impl SeelenWeg {
         .always_on_top(true)
         .build()?;
 
-        let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
+        let window = tauri::WebviewWindowBuilder::new(
             manager,
             format!("{}/{}", Self::TARGET, monitor_id),
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
@@ -327,6 +323,7 @@ impl SeelenWeg {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
+        .owner(&hitbox)?
         .build()?;
 
         window.set_ignore_cursor_events(true)?;

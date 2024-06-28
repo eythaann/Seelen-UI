@@ -1,5 +1,4 @@
 import { wrapConsole } from '../shared/ConsoleWrapper';
-import { invoke } from '@tauri-apps/api/core';
 import { PhysicalPosition, PhysicalSize } from '@tauri-apps/api/dpi';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
@@ -16,12 +15,9 @@ async function Main() {
 
     document.body.addEventListener('mousemove', () => {
       emitTo(main, 'mouseenter');
-      invoke('ensure_hitboxes_zorder');
     });
 
     async function onClick(e: MouseEvent | TouchEvent) {
-      invoke('ensure_hitboxes_zorder');
-
       let x = 0;
       let y = 0;
       if (e instanceof MouseEvent) {
