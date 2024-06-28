@@ -44,7 +44,9 @@ jobs:
           cargo build
 
       - name: Run linter
-        run: cargo fmt -- --check
+        run: |-
+          rustup component add rustfmt
+          cargo fmt -- --check
 
       - name: Run clippy
         run: cargo clippy --all-targets -- -D warnings
