@@ -39,6 +39,7 @@ jobs:
 
       - name: Build
         run: |-
+          npm install
           npm run build:ui
           cargo build
 
