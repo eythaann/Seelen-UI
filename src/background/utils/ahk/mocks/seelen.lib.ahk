@@ -10,7 +10,7 @@ global seelen := "SEELEN_UI_EXE_PATH"
 
 /** Close the AHK if app is crashed or forced to close */
 CloseIfNotRunning() {
-  if ProcessExist("Seelen UI.exe") == 0 {
+  if ProcessExist("seelen-ui.exe") == 0 {
     ExitApp()
   }
   SetTimer(CloseIfNotRunning, 1000)
