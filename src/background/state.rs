@@ -108,7 +108,7 @@ impl State {
                 return enable;
             }
         }
-        true
+        false
     }
 
     pub fn is_ahk_enabled(&self) -> bool {

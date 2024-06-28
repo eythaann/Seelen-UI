@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no updating colors correctly on change light or dark mode on windows settings.
+- window manager enabled by default for new users.
+
 ## [1.7.7]
 ### fix
 - no registering system events (battery/network/etc)
