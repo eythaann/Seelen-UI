@@ -26,15 +26,21 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2024-06-25
-
-      - name: Cache
-        uses: Swatinem/rust-cache@v2
+      - uses: Swatinem/rust-cache@v2
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
 
       - name: Build
-        run: cargo build
+        run: |-
+          npm run build:ui
+          cargo build
 
       - name: Run linter
         run: cargo fmt -- --check
