@@ -127,7 +127,7 @@ impl FancyToolbar {
         monitor: isize,
     ) -> Result<(WebviewWindow, WebviewWindow)> {
         let label = format!("{}/{}", Self::TARGET_HITBOX, monitor);
-        
+
         let hitbox = match manager.get_webview_window(&label) {
             Some(window) => window,
             None => tauri::WebviewWindowBuilder::new(

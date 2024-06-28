@@ -1,4 +1,3 @@
-
 use image::ImageFormat;
 use serde::Deserialize;
 use tauri::{command, Manager};

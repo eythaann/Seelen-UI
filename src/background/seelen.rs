@@ -38,8 +38,7 @@ pub fn get_app_handle() -> AppHandle<Wry> {
 }
 
 /** Struct should be initialized first before calling any other methods */
-#[derive(Getters, MutGetters)]
-#[derive(Default)]
+#[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
     #[getset(get = "pub", get_mut = "pub")]
@@ -49,7 +48,6 @@ pub struct Seelen {
     state: State,
     pub initialized: bool,
 }
-
 
 /* ============== Getters ============== */
 impl Seelen {
@@ -270,8 +268,7 @@ impl Seelen {
                     "-File",
                     &pwsh_script_path.to_string_lossy(),
                     "-SavePath",
-                    self
-                        .handle()
+                    self.handle()
                         .path()
                         .app_data_dir()
                         .expect("Failed to resolve app data dir")

@@ -217,7 +217,10 @@ impl Input {
             } else {
                 let mut shift: bool = (vk >> 8 & 0x01) != 0;
                 let state = unsafe { GetKeyState(VK_CAPITAL.0 as _) };
-                if (state & 0x01) != 0 && ((ch >= 'a' as u16 && ch <= 'z' as u16) || (ch >= 'A' as u16 && ch <= 'Z' as u16)) {
+                if (state & 0x01) != 0
+                    && ((ch >= 'a' as u16 && ch <= 'z' as u16)
+                        || (ch >= 'A' as u16 && ch <= 'Z' as u16))
+                {
                     shift = !shift;
                 };
                 let mut char_inputs: Vec<INPUT> = Vec::new();

@@ -498,7 +498,9 @@ impl WindowsApi {
         while desktop_id.to_u128() == 0 && attempt < 10 {
             attempt += 1;
             sleep(Duration::from_millis(30));
-            if let Ok(desktop) = unsafe { manager.GetWindowDesktopId(hwnd) } { desktop_id = desktop }
+            if let Ok(desktop) = unsafe { manager.GetWindowDesktopId(hwnd) } {
+                desktop_id = desktop
+            }
         }
         if desktop_id.to_u128() == 0 {
             return Err(eyre!("Failed to get desktop id for: {hwnd:?}").into());
