@@ -105,12 +105,6 @@ pub fn try_force_tray_overflow_creation() -> Result<()> {
     })
 }
 
-/*
-FOR TASKBAR ICONS:
-let rebar_hwnd = FindWindowExA(tray_hwnd, HWND(0), s!("ReBarWindow32"), None);
-let task_hwnd = FindWindowExA(rebar_hwnd, HWND(0), s!("MSTaskSwWClass"), None);
-let task_list_hwnd = FindWindowExA(task_hwnd, HWND(0), s!("MSTaskListWClass"), None); */
-
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
     let tray_from_registry = TrayIcon::enum_from_registry().unwrap_or_default();
 
@@ -130,9 +124,8 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
 
         let is_win10 = is_windows_10();
         for element in children {
-            if is_win10 || element.CurrentAutomationId()? == "NotifyItemIcon" {
-                let name = element.CurrentName()?.to_string();
-
+            let name = element.CurrentName()?.to_string();
+            if name.len() > 0 && (is_win10 || element.CurrentAutomationId()? == "NotifyItemIcon") {
                 let registry = tray_from_registry.iter().find(|t| {
                     let trimmed = name.trim();
                     t.initial_tooltip == trimmed

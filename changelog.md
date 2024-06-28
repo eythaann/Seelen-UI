@@ -4,6 +4,7 @@
 ### fix
 - no updating colors correctly on change light or dark mode on windows settings.
 - window manager enabled by default for new users.
+- showing tray icons with empty name.
 
 ## [1.7.7]
 ### fix
