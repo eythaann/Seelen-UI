@@ -17,21 +17,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
       - run: npm install
       - run: npm run lint
       - run: npm run test
 
   check-rust:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@nightly
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2024-06-25
 
-      - name: Run tests
-        run: cargo test --verbose
+      - name: Cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build
+
+      - name: Run linter
+        run: cargo fmt -- --check
 
       - name: Run clippy
         run: cargo clippy --all-targets -- -D warnings
 
-      - name: Run linter
-        run: cargo fmt -- --check
+      - name: Run tests
+        run: cargo test --verbose

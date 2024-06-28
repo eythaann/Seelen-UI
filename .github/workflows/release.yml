@@ -78,7 +78,9 @@ jobs:
           node-version: 20
 
       - name: Install Rust Nightly
-        uses: dtolnay/rust-toolchain@nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2024-06-25
 
       - name: Install frontend dependencies
         run: npm install
