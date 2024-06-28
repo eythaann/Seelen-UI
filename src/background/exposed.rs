@@ -24,7 +24,7 @@ use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
 fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
-    let app = SEELEN.lock().handle().clone();
+    let app = get_app_handle();
 
     app.shell()
         .command("powershell")
@@ -246,14 +246,12 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         kill_seelen_shortcuts,
         // SeelenWeg
         weg_close_app,
-        enum_opened_apps,
         weg_toggle_window_state,
         weg_request_update_previews,
         // Windows Manager
         set_window_position,
         bounce_handle,
         request_focus,
-        complete_window_setup,
         // tray icons
         temp_get_by_event_tray_info,
         on_click_tray_icon,

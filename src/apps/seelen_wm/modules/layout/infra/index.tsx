@@ -44,12 +44,12 @@ export function Container({ container }: { container: Node }) {
 }
 
 export function Layout() {
-  const workpsace = useSelector(SelectCurrentWorkspace);
+  const workspace = useSelector(SelectCurrentWorkspace);
   const version = useSelector(Selectors.version);
 
-  if (!workpsace) {
+  if (!workspace) {
     return null;
   }
 
-  return <Container key={version} container={workpsace.layout.structure} />;
+  return <Container key={version} container={workspace.layout.structure} />;
 }

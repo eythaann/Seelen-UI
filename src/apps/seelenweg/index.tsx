@@ -1,5 +1,6 @@
 import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
+import { useDarkMode } from '../shared/styles';
 import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
@@ -37,6 +38,8 @@ async function Main() {
   await registerStoreEvents();
 
   const WrappedRoot = () => {
+    const isDarkMode = useDarkMode();
+
     useEffect(() => {
       onMount();
     }, []);
@@ -47,9 +50,7 @@ async function Main() {
           getPopupContainer={() => container}
           componentSize="small"
           theme={{
-            algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? theme.darkAlgorithm
-              : theme.defaultAlgorithm,
+            algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
           }}
         >
           <ErrorBoundary fallback={<div>Something went wrong</div>}>

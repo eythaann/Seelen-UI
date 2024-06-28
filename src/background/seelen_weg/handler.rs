@@ -11,15 +11,6 @@ use windows::Win32::{
 
 use super::SeelenWeg;
 
-#[command]
-pub fn enum_opened_apps() {
-    /* std::thread::spawn(|| {
-        if let Some(weg) = SEELEN.lock().weg() {
-            weg.update_ui();
-        }
-    }); */
-}
-
 #[derive(Deserialize)]
 pub struct Args {
     hwnd: isize,

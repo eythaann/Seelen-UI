@@ -1,5 +1,6 @@
 import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
+import { useDarkMode } from '../shared/styles';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
@@ -29,14 +30,14 @@ import './styles/global.css';
       setTimeout(() => splashscreen?.classList.add('hidden'), 300);
     }, []);
 
+    const isDarkMode = useDarkMode();
+
     return (
       <Provider store={store}>
         <ConfigProvider
           componentSize="small"
           theme={{
-            algorithm: window.matchMedia('(prefers-color-scheme: dark)').matches
-              ? theme.darkAlgorithm
-              : theme.defaultAlgorithm,
+            algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
           }}
         >
           <App />

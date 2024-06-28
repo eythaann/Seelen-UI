@@ -18,7 +18,7 @@ use windows::Win32::{
 use crate::{
     apps_config::{AppExtraFlag, SETTINGS_BY_APP},
     error_handler::Result,
-    seelen::get_app_handle,
+    seelen::{get_app_handle, SEELEN},
     seelen_weg::SeelenWeg,
     utils::virtual_desktop::VirtualDesktopManager,
     windows_api::WindowsApi,
@@ -59,22 +59,13 @@ impl WindowManager {
             tiled_handles: Vec::new(),
             floating_handles: Vec::new(),
             current_virtual_desktop: VirtualDesktopManager::get_current_virtual_desktop()?.id(),
-            paused: true, // paused until complete_window_setup is called
+            paused: true, // paused until complete-setup is called
             ready: false,
         })
     }
 
     pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
         self.window.emit_to(self.window.label(), event, payload)?;
-        Ok(())
-    }
-
-    pub fn complete_window_setup(&mut self) -> Result<()> {
-        log::info!("Tiling Windows Manager Created");
-        self.paused = false;
-        self.ready = true;
-        self.window
-            .emit("set-active-workspace", &self.current_virtual_desktop)?;
         Ok(())
     }
 
@@ -295,6 +286,20 @@ impl WindowManager {
             &work_area,
             SWP_NOACTIVATE,
         )?;
+
+        window.once("complete-setup", move |_event| {
+            std::thread::spawn(move || -> Result<()> {
+                if let Some(monitor) = SEELEN.lock().monitor_by_id_mut(monitor_id) {
+                    if let Some(wm) = monitor.wm_mut() {
+                        wm.paused = false;
+                        wm.ready = true;
+                        wm.window
+                            .emit("set-active-workspace", &wm.current_virtual_desktop)?;
+                    }
+                }
+                Ok(())
+            });
+        });
 
         Ok(window)
     }

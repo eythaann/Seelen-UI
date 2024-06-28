@@ -1,10 +1,11 @@
 import { ErrorBoundary } from '../seelenweg/components/Error';
 import { getRootContainer } from '../shared';
+import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { ToolBar } from './modules/main/infra';
@@ -18,17 +19,13 @@ async function onMount() {
 }
 
 export function App() {
-  const [darkMode, setDarkMode] = useState(window.matchMedia('(prefers-color-scheme: dark)').matches);
-
   const structure = useSelector(Selectors.placeholder);
   const accentColor = useSelector(Selectors.accentColor);
 
+  const isDarkMode = useDarkMode();
+
   useEffect(() => {
     onMount();
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    media.addEventListener('change', (e) => {
-      setDarkMode(e.matches);
-    });
   }, []);
 
   if (!structure) {
@@ -42,9 +39,7 @@ export function App() {
         token: {
           colorPrimary: accentColor,
         },
-        algorithm: darkMode
-          ? theme.darkAlgorithm
-          : theme.defaultAlgorithm,
+        algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
       <ErrorBoundary fallback={<ErrorFallback />}>
