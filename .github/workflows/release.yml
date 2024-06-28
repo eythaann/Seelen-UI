@@ -77,8 +77,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Rust stable
-        uses: dtolnay/rust-toolchain@stable
+      - name: Install Rust Nightly
+        uses: dtolnay/rust-toolchain@nightly
 
       - name: Install frontend dependencies
         run: npm install
