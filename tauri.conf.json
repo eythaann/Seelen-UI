@@ -18,7 +18,8 @@
   },
   "build": {
     "beforeBuildCommand": "npm run build:ui",
-    "frontendDist": "dist"
+    "frontendDist": "dist",
+    "features": []
   },
   "bundle": {
     "resources": [

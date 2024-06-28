@@ -106,3 +106,20 @@ pub fn app_data_path(handle: &AppHandle) -> PathBuf {
         .app_data_dir()
         .expect("Failed to resolve App Data path")
 }
+
+#[macro_export]
+macro_rules! trace_lock {
+    ($mutex:expr) => {{
+        #[cfg(feature = "trace_lock")]
+        {
+            log::debug!("Attempting to acquire lock on {}", stringify!($mutex));
+            let lock = $mutex.lock();
+            log::debug!("Successfully acquired lock on {}", stringify!($mutex));
+            lock
+        }
+        #[cfg(not(feature = "trace_lock"))]
+        {
+            $mutex.lock()
+        }
+    }};
+}

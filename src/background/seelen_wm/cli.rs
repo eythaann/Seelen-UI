@@ -3,11 +3,11 @@ use serde::{Deserialize, Serialize};
 use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
-use crate::get_subcommands;
 use crate::seelen::SEELEN;
 use crate::utils::sleep_millis;
 use crate::utils::virtual_desktop::VirtualDesktopManager;
 use crate::windows_api::WindowsApi;
+use crate::{get_subcommands, trace_lock};
 
 use super::WindowManager;
 
@@ -91,7 +91,7 @@ impl WindowManager {
             }
             SubCommand::Resume => {
                 self.pause(false, true)?;
-                SEELEN.lock().start_ahk_shortcuts()?;
+                trace_lock!(SEELEN).start_ahk_shortcuts()?;
             }
             SubCommand::SwitchWorkspace(index) => {
                 let desktops = VirtualDesktopManager::enum_virtual_desktops()?;

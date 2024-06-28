@@ -10,7 +10,7 @@ use regex::Regex;
 use serde::{Deserialize, Serialize};
 use windows::Win32::Foundation::HWND;
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
 
 lazy_static! {
     pub static ref REGEX_IDENTIFIERS: Arc<Mutex<HashMap<String, Regex>>> =
@@ -77,7 +77,7 @@ impl AppIdentifier {
         if matches!(self.matching_strategy, MatchingStrategy::Regex) {
             let result = Regex::new(&self.id);
             if let Ok(re) = result {
-                let mut regex_identifiers = REGEX_IDENTIFIERS.lock();
+                let mut regex_identifiers = trace_lock!(REGEX_IDENTIFIERS);
                 regex_identifiers.insert(self.id.clone(), re);
             }
         }
@@ -109,7 +109,7 @@ impl AppIdentifier {
                 AppIdentifierType::Exe => exe.contains(&self.id),
                 AppIdentifierType::Path => path.contains(&self.id),
             },
-            MatchingStrategy::Regex => match REGEX_IDENTIFIERS.lock().get(&self.id) {
+            MatchingStrategy::Regex => match trace_lock!(REGEX_IDENTIFIERS).get(&self.id) {
                 Some(re) => match self.kind {
                     AppIdentifierType::Title => re.is_match(title),
                     AppIdentifierType::Class => re.is_match(class),
@@ -199,7 +199,7 @@ impl AppsConfigurations {
 
     pub fn load(&mut self) -> Result<()> {
         log::trace!("Loading apps configurations from {:?}", self.user_path);
-        REGEX_IDENTIFIERS.lock().clear();
+        trace_lock!(REGEX_IDENTIFIERS).clear();
         self.cache.clear();
         self.apps.clear();
 
@@ -236,16 +236,25 @@ impl AppsConfigurations {
                 None
             }
         } */
-        for app in self.apps.iter() {
-            if app.match_window(hwnd) {
-                return Option::from(app);
+
+        if let (title, Ok(path), Ok(exe), Ok(class)) = (
+            WindowsApi::get_window_text(hwnd),
+            WindowsApi::exe_path(hwnd),
+            WindowsApi::exe(hwnd),
+            WindowsApi::get_class(hwnd),
+        ) {
+            for app in self.apps.iter() {
+                if app.identifier.validate(&title, &class, &exe, &path) {
+                    return Option::from(app);
+                }
             }
         }
+
         None
     }
 }
 
 #[tauri::command]
 pub fn reload_apps_configurations() {
-    std::thread::spawn(|| -> Result<()> { SETTINGS_BY_APP.lock().load() });
+    std::thread::spawn(|| -> Result<()> { trace_lock!(SETTINGS_BY_APP).load() });
 }

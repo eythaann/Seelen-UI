@@ -22,6 +22,7 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     seelen::{get_app_handle, SEELEN},
+    trace_lock,
     utils::are_overlaped,
     windows_api::{AppBarData, AppBarDataState, WindowsApi},
 };
@@ -341,7 +342,7 @@ impl SeelenWeg {
 
         window.once("complete-setup", move |_event| {
             std::thread::spawn(move || {
-                if let Some(monitor) = SEELEN.lock().monitor_by_id_mut(monitor_id) {
+                if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
                     if let Some(weg) = monitor.weg_mut() {
                         weg.ready = true;
                     }

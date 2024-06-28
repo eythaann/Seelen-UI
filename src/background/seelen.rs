@@ -21,6 +21,7 @@ use crate::{
     seelen_wm::WindowManager,
     state::State,
     system::declare_system_events_handlers,
+    trace_lock,
     utils::{ahk::AutoHotKey, sleep_millis},
     windows_api::WindowsApi,
 };
@@ -96,7 +97,7 @@ impl Seelen {
             .resolve(".config\\seelen\\settings.json", BaseDirectory::Home)?;
         self.state = State::new(&path).unwrap_or_default();
 
-        let mut settings_by_app = SETTINGS_BY_APP.lock();
+        let mut settings_by_app = trace_lock!(SETTINGS_BY_APP);
         settings_by_app.set_paths(
             app.path()
                 .resolve(".config\\seelen\\applications.yml", BaseDirectory::Home)?,
@@ -129,7 +130,7 @@ impl Seelen {
             let mut all_ready = false;
             while !all_ready {
                 sleep_millis(10);
-                all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
+                all_ready = trace_lock!(SEELEN).monitors().iter().all(|m| m.is_ready());
             }
 
             log::trace!("Enumerating windows");
@@ -404,7 +405,7 @@ impl Seelen {
         _rect_clip: *mut RECT,
         _lparam: LPARAM,
     ) -> BOOL {
-        let mut seelen = SEELEN.lock();
+        let mut seelen = trace_lock!(SEELEN);
         match Monitor::new(hmonitor, &seelen.state) {
             Ok(monitor) => seelen.monitors.push(monitor),
             Err(err) => log::error!("Failed to create monitor: {:?}", err),
@@ -413,7 +414,7 @@ impl Seelen {
     }
 
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
-        let mut seelen = SEELEN.lock();
+        let mut seelen = trace_lock!(SEELEN);
         for monitor in seelen.monitors_mut() {
             if let Some(weg) = monitor.weg_mut() {
                 if SeelenWeg::is_real_window(hwnd, false) {

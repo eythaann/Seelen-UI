@@ -77,7 +77,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             }
         }
         tauri::RunEvent::Exit => {
-            let seelen = SEELEN.lock();
+            let seelen = trace_lock!(SEELEN);
             if seelen.initialized {
                 log::info!("───────────────────── Exiting Seelen ─────────────────────");
                 log_error!(seelen.stop());

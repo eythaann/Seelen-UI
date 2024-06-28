@@ -7,7 +7,7 @@
     - unmanage
 - name: Seelen
   identifier:
-    id: Seelen UI.exe
+    id: seelen-ui.exe
     kind: exe
     matching_strategy: equals
   options:

@@ -9,6 +9,7 @@ use crate::error_handler::Result;
 use crate::seelen::SEELEN;
 use crate::seelen_bar::FancyToolbar;
 use crate::seelen_wm::WindowManager;
+use crate::trace_lock;
 
 #[macro_export]
 macro_rules! get_subcommands {
@@ -139,17 +140,17 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
     if let Some((subcommand, matches)) = matches.subcommand() {
         match subcommand {
             "settings" => {
-                SEELEN.lock().show_settings()?;
+                trace_lock!(SEELEN).show_settings()?;
             }
             WindowManager::CLI_IDENTIFIER => {
-                if let Some(monitor) = SEELEN.lock().focused_monitor_mut() {
+                if let Some(monitor) = trace_lock!(SEELEN).focused_monitor_mut() {
                     if let Some(wm) = monitor.wm_mut() {
                         wm.process(matches)?;
                     }
                 }
             }
             FancyToolbar::CLI_IDENTIFIER => {
-                let mut seelen = SEELEN.lock();
+                let mut seelen = trace_lock!(SEELEN);
                 for monitor in seelen.monitors_mut() {
                     if let Some(toolbar) = monitor.toolbar_mut() {
                         toolbar.process(matches)?;
@@ -162,7 +163,7 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
     }
 
     if !tauri::is_dev() {
-        SEELEN.lock().show_settings()?;
+        trace_lock!(SEELEN).show_settings()?;
     }
     Ok(())
 }

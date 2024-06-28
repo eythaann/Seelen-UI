@@ -4,6 +4,7 @@ use winvd::DesktopEvent;
 use crate::{
     error_handler::Result,
     seelen::SEELEN,
+    trace_lock,
     utils::{constants::FORCE_RETILING_AFTER_ADD, sleep_millis},
     windows_api::WindowsApi,
     winevent::WinEvent,
@@ -70,7 +71,7 @@ impl WindowManager {
                         // Todo search a better way to do this
                         std::thread::spawn(|| -> Result<()> {
                             sleep_millis(250);
-                            if let Some(monitor) = SEELEN.lock().focused_monitor() {
+                            if let Some(monitor) = trace_lock!(SEELEN).focused_monitor() {
                                 monitor.wm().as_ref().unwrap().force_retiling()?
                             }
                             Ok(())
@@ -86,7 +87,7 @@ impl WindowManager {
                         // Todo search a better way to do this
                         std::thread::spawn(|| -> Result<()> {
                             sleep_millis(250);
-                            if let Some(monitor) = SEELEN.lock().focused_monitor() {
+                            if let Some(monitor) = trace_lock!(SEELEN).focused_monitor() {
                                 monitor.wm().as_ref().unwrap().force_retiling()?
                             }
                             Ok(())

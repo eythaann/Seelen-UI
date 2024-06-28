@@ -7,7 +7,7 @@ use windows::Win32::{
     },
 };
 
-use crate::{seelen::SEELEN, utils::rect::Rect, windows_api::WindowsApi};
+use crate::{seelen::SEELEN, trace_lock, utils::rect::Rect, windows_api::WindowsApi};
 
 #[tauri::command]
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
@@ -44,7 +44,7 @@ pub fn bounce_handle(webview: Webview<Wry>, hwnd: isize) {
     let monitor_id = monitor_id.parse::<isize>().expect("Invalid monitor ID");
 
     std::thread::spawn(move || {
-        if let Some(monitor) = SEELEN.lock().monitor_by_id_mut(monitor_id) {
+        if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
             if let Some(wm) = monitor.wm_mut() {
                 wm.bounce_handle(HWND(hwnd));
             }

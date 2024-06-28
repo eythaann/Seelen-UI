@@ -17,7 +17,7 @@ use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
 use crate::utils::{is_windows_10, is_windows_11};
 use crate::windows_api::WindowsApi;
-use crate::{apps_config::*, log_error};
+use crate::{apps_config::*, log_error, trace_lock};
 
 use crate::modules::network::infrastructure::*;
 use crate::modules::power::infrastructure::*;
@@ -76,21 +76,21 @@ pub fn set_volume_level(level: f32) -> Result<(), String> {
 #[command]
 fn refresh_state() {
     std::thread::spawn(|| {
-        log_error!(SEELEN.lock().refresh_state());
+        log_error!(trace_lock!(SEELEN).refresh_state());
     });
 }
 
 #[command]
 fn start_seelen_shortcuts() {
     std::thread::spawn(|| {
-        log_error!(SEELEN.lock().start_ahk_shortcuts());
+        log_error!(trace_lock!(SEELEN).start_ahk_shortcuts());
     });
 }
 
 #[command]
 fn kill_seelen_shortcuts() {
     std::thread::spawn(|| {
-        SEELEN.lock().kill_ahk_shortcuts();
+        trace_lock!(SEELEN).kill_ahk_shortcuts();
     });
 }
 
@@ -134,7 +134,7 @@ fn is_dev_mode() -> bool {
 #[command]
 fn ensure_hitboxes_zorder() {
     std::thread::spawn(|| -> Result<()> {
-        let seelen = SEELEN.lock();
+        let seelen = trace_lock!(SEELEN);
         for monitor in seelen.monitors() {
             if let Some(toolbar) = monitor.toolbar() {
                 toolbar.ensure_hitbox_zorder()?;
@@ -187,14 +187,14 @@ fn get_win_version() -> WinVersion {
 #[command]
 fn show_app_settings() {
     std::thread::spawn(|| {
-        log_error!(SEELEN.lock().show_settings());
+        log_error!(trace_lock!(SEELEN).show_settings());
     });
 }
 
 #[command]
 fn set_auto_start(enabled: bool) {
     std::thread::spawn(move || {
-        log_error!(SEELEN.lock().set_auto_start(enabled));
+        log_error!(trace_lock!(SEELEN).set_auto_start(enabled));
     });
 }
 

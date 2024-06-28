@@ -21,6 +21,7 @@ use crate::{
     log_error,
     seelen::{Seelen, SEELEN},
     seelen_weg::{SeelenWeg, TASKBAR_CLASS},
+    trace_lock,
     utils::{constants::IGNORE_FOCUS_AND_FULLSCREEN, is_windows_11},
     windows_api::WindowsApi,
     winevent::WinEvent,
@@ -118,7 +119,7 @@ impl HookManager {
             return;
         }
 
-        let mut seelen = SEELEN.lock();
+        let mut seelen = trace_lock!(SEELEN);
         log_error!(seelen.process_win_event(event, origin));
 
         for monitor in seelen.monitors_mut() {
@@ -138,7 +139,7 @@ impl HookManager {
 }
 
 pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
-    let mut seelen = SEELEN.lock();
+    let mut seelen = trace_lock!(SEELEN);
     for monitor in seelen.monitors_mut() {
         if let Some(wm) = monitor.wm_mut() {
             log_error!(wm.process_vd_event(&event));
@@ -179,7 +180,7 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
 
     if let DesktopEvent::WindowChanged(hwnd) = event {
         if WindowsApi::is_window(hwnd) {
-            if let Some(config) = SETTINGS_BY_APP.lock().get_by_window(hwnd) {
+            if let Some(config) = trace_lock!(SETTINGS_BY_APP).get_by_window(hwnd) {
                 if config.options_contains(AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)?
                 {
                     winvd::pin_window(hwnd)?;
