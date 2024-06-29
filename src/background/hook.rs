@@ -243,20 +243,24 @@ pub extern "system" fn win_event_hook(
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
 
-    std::thread::spawn(move || unsafe {
-        SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
+    let stack_size = 5 * 1024 * 1024; // 5 MB
+    std::thread::Builder::new()
+        .name("win_event_hook".into())
+        .stack_size(stack_size)
+        .spawn(move || unsafe {
+            SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
 
-        let mut msg: MSG = MSG::default();
-        loop {
-            if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
-                log::info!("windows event processing shutdown");
-                break;
-            };
-            let _ = TranslateMessage(&msg);
-            DispatchMessageW(&msg);
-            std::thread::sleep(Duration::from_millis(10));
-        }
-    });
+            let mut msg: MSG = MSG::default();
+            loop {
+                if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
+                    log::info!("windows event processing shutdown");
+                    break;
+                };
+                let _ = TranslateMessage(&msg);
+                DispatchMessageW(&msg);
+                std::thread::sleep(Duration::from_millis(10));
+            }
+        })?;
 
     // Todo search why virtual desktop events are not working on windows 10
     if is_windows_11() {

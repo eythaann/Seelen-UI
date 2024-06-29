@@ -4,7 +4,6 @@ use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
 use crate::seelen::SEELEN;
-use crate::utils::sleep_millis;
 use crate::utils::virtual_desktop::VirtualDesktopManager;
 use crate::windows_api::WindowsApi;
 use crate::{get_subcommands, trace_lock};
@@ -99,9 +98,9 @@ impl WindowManager {
                     Some(_) => {
                         self.pseudo_pause()?;
                         winvd::switch_desktop(index as u32)?;
-                        sleep_millis(35); // to ensure avoid any artifacts
+                        /* sleep_millis(35); // to ensure avoid any artifacts */
                         if let Some(next) = Self::get_next_by_order(HWND(0)) {
-                            WindowsApi::force_set_foreground(next)?;
+                            WindowsApi::async_force_set_foreground(next);
                         }
                         self.pseudo_resume()?;
                     }
@@ -116,14 +115,10 @@ impl WindowManager {
                         if self.is_managed(to_move) && !self.is_floating(to_move) {
                             self.emit_send_to_workspace(to_move, desktop.id())?;
                         }
-                        let guid = desktop.guid();
-                        std::thread::spawn(move || -> Result<()> {
-                            winvd::move_window_to_desktop(guid, &to_move)?;
-                            if let Some(next) = Self::get_next_by_order(to_move) {
-                                WindowsApi::force_set_foreground(next)?;
-                            }
-                            Ok(())
-                        });
+                        winvd::move_window_to_desktop(desktop.guid(), &to_move)?;
+                        if let Some(next) = Self::get_next_by_order(to_move) {
+                            WindowsApi::async_force_set_foreground(next);
+                        }
                     }
                     None => log::error!("Invalid workspace index: {}", index),
                 }

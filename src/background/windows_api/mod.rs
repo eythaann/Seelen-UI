@@ -279,6 +279,10 @@ impl WindowsApi {
         Ok(())
     }
 
+    pub fn async_force_set_foreground(hwnd: HWND) {
+        std::thread::spawn(move || log_error!(Self::force_set_foreground(hwnd)));
+    }
+
     pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
         Self::set_minimize_animation(false)?;
 
