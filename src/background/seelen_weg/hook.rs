@@ -42,10 +42,12 @@ impl SeelenWeg {
                     true => self.set_active_window(origin)?,
                     false => self.set_active_window(HWND(0))?, // avoid rerenders on multiple unmanaged focus
                 }
-                self.update_status_if_needed(origin)?;
+                self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {
-                self.update_status_if_needed(origin)?;
+                if origin == WindowsApi::get_foreground_window() {
+                    self.handle_overlaped_status(origin)?;
+                }
             }
             WinEvent::SyntheticFullscreenStart => {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
@@ -59,6 +61,7 @@ impl SeelenWeg {
                 let event_monitor = WindowsApi::monitor_from_window(origin);
                 if monitor == event_monitor {
                     self.show()?;
+                    self.set_overlaped_status(false)?;
                 }
             }
             _ => {}

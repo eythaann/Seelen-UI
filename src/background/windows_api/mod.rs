@@ -431,6 +431,10 @@ impl WindowsApi {
         }
     }
 
+    pub fn desktop_window() -> HWND {
+        unsafe { GetDesktopWindow() }
+    }
+
     pub fn monitor_from_window(hwnd: HWND) -> HMONITOR {
         unsafe { MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY) }
     }

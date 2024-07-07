@@ -1,4 +1,11 @@
-use std::{sync::Arc, time::Duration};
+use std::{
+    collections::HashMap,
+    sync::{
+        atomic::{AtomicIsize, Ordering},
+        Arc,
+    },
+    time::{Duration, Instant},
+};
 
 use color_eyre::owo_colors::OwoColorize;
 use lazy_static::lazy_static;
@@ -22,7 +29,7 @@ use crate::{
     seelen::{Seelen, SEELEN},
     seelen_weg::{SeelenWeg, TASKBAR_CLASS},
     trace_lock,
-    utils::{constants::IGNORE_FOCUS_AND_FULLSCREEN, is_windows_11},
+    utils::{constants::IGNORE_FOCUS, is_windows_11},
     windows_api::WindowsApi,
     winevent::WinEvent,
 };
@@ -93,8 +100,9 @@ impl HookManager {
         }
 
         println!(
-            "{:?} || {} || {} || {:<30}",
+            "{:?}({:x}) || {} || {} || {:<20}",
             event.green(),
+            origin.0,
             WindowsApi::exe(origin).unwrap_or_default(),
             WindowsApi::get_class(origin).unwrap_or_default(),
             WindowsApi::get_window_text(origin),
@@ -114,7 +122,7 @@ impl HookManager {
 
         let title = WindowsApi::get_window_text(origin);
         if (event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground)
-            && IGNORE_FOCUS_AND_FULLSCREEN.contains(&title)
+            && IGNORE_FOCUS.contains(&title)
         {
             return;
         }
@@ -214,6 +222,37 @@ impl Seelen {
     }
 }
 
+lazy_static! {
+    static ref DICT: Arc<Mutex<HashMap<isize, Instant>>> = Arc::new(Mutex::new(HashMap::new()));
+}
+static LAST_LOCATION_CHANGED: AtomicIsize = AtomicIsize::new(0);
+
+pub fn location_delay_completed(origin: HWND) -> bool {
+    let last = LAST_LOCATION_CHANGED.load(Ordering::Acquire);
+    let mut dict = DICT.lock();
+
+    let should_continue = match dict.entry(origin.0) {
+        std::collections::hash_map::Entry::Occupied(mut entry) => {
+            if last != origin.0 || entry.get().elapsed() > Duration::from_millis(50) {
+                entry.insert(Instant::now());
+                true
+            } else {
+                false
+            }
+        }
+        std::collections::hash_map::Entry::Vacant(entry) => {
+            entry.insert(Instant::now());
+            true
+        }
+    };
+
+    if should_continue {
+        LAST_LOCATION_CHANGED.store(origin.0, Ordering::Release);
+    }
+
+    return should_continue;
+}
+
 pub extern "system" fn win_event_hook(
     _h_win_event_hook: HWINEVENTHOOK,
     event: u32,
@@ -231,6 +270,10 @@ pub extern "system" fn win_event_hook(
         Ok(event) => event,
         Err(_) => return,
     };
+
+    if event == WinEvent::ObjectLocationChange && !location_delay_completed(hwnd) {
+        return;
+    }
 
     let mut hook_manager = HOOK_MANAGER.lock();
     hook_manager.event(event, hwnd);

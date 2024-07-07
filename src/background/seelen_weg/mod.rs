@@ -34,7 +34,6 @@ lazy_static! {
         "DesktopWindowXamlSource",
         "SeelenWeg",
         "SeelenWeg Hitbox",
-        "SeelenWeg Hitbox",
         "Seelen Window Manager",
         "Seelen Fancy Toolbar",
         "Seelen Fancy Toolbar Hitbox",
@@ -46,6 +45,16 @@ lazy_static! {
         "StartMenuExperienceHost.exe",
     ]);
 }
+
+static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 7] = [
+    "",
+    "SeelenWeg",
+    "SeelenWeg Hitbox",
+    "Seelen Window Manager",
+    "Seelen Fancy Toolbar",
+    "Seelen Fancy Toolbar Hitbox",
+    "Program Manager",
+];
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SeelenWegApp {
@@ -202,22 +211,12 @@ impl SeelenWeg {
         are_overlaped(&hitbox_rect, &rect)
     }
 
-    pub fn update_status_if_needed(&mut self, hwnd: HWND) -> Result<()> {
-        if !self.ready
-            || !WindowsApi::is_window_visible(hwnd)
-            || WindowsApi::is_iconic(hwnd)
-            || TITLE_BLACK_LIST.contains(&WindowsApi::get_window_text(hwnd).as_str())
-            || EXE_BLACK_LIST.contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str())
-        {
+    pub fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
+        if self.overlaped == is_overlaped {
             return Ok(());
         }
 
-        let last_status = self.overlaped;
-        self.overlaped = self.is_overlapping(hwnd);
-        if last_status == self.overlaped {
-            return Ok(());
-        }
-
+        self.overlaped = is_overlaped;
         self.last_hitbox_rect = if self.overlaped {
             Some(WindowsApi::get_window_rect_without_margins(HWND(
                 self.hitbox.hwnd()?.0,
@@ -228,6 +227,19 @@ impl SeelenWeg {
 
         self.emit("set-auto-hide", self.overlaped)?;
         Ok(())
+    }
+
+    pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
+        let should_handle_hidden = self.ready
+            && WindowsApi::is_window_visible(hwnd)
+            && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
+            && !EXE_BLACK_LIST.contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
+
+        if !should_handle_hidden {
+            return Ok(());
+        }
+
+        self.set_overlaped_status(self.is_overlapping(hwnd))
     }
 
     pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {

@@ -2,11 +2,26 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 
 lazy_static! {
-    pub static ref IGNORE_FOCUS_AND_FULLSCREEN: Vec<String> = ["Task Switching",
+    pub static ref IGNORE_FOCUS: Vec<String> = [
+        "Task Switching",
         "Task View",
         "Virtual desktop switching preview",
         "Virtual desktop hotkey switching preview",
-        "Seelen Window Manager"]
+        "Seelen Window Manager",
+    ]
+    .iter()
+    .map(|x| x.to_string())
+    .collect_vec();
+
+    pub static ref IGNORE_FULLSCREEN: Vec<String> = [
+        "Task Switching",
+        "Task View",
+        "Virtual desktop switching preview",
+        "Virtual desktop hotkey switching preview",
+        "Seelen Window Manager",
+        "Seelen Fancy Toolbar",
+        "SeelenWeg"
+    ]
     .iter()
     .map(|x| x.to_string())
     .collect_vec();

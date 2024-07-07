@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- enhancements on fullscreen events.
+
 ### fix
 - no updating colors correctly on change light or dark mode on windows settings.
 - window manager enabled by default for new users.

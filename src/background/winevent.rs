@@ -92,7 +92,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
     EVENT_SYSTEM_SWITCHEND, EVENT_SYSTEM_SWITCHER_APPDROPPED,
 };
 
-use crate::utils::constants::IGNORE_FOCUS_AND_FULLSCREEN;
+use crate::utils::constants::IGNORE_FULLSCREEN;
 use crate::windows_api::WindowsApi;
 
 lazy_static! {
@@ -295,8 +295,7 @@ impl WinEvent {
         let is_foreground_window = hwnd == WindowsApi::get_foreground_window();
 
         (is_foreground_window || *self == Self::SystemMinimizeStart)
-            && !title.starts_with("Seelen")
-            && !IGNORE_FOCUS_AND_FULLSCREEN.contains(&title)
+            && !IGNORE_FULLSCREEN.contains(&title)
     }
 
     pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {
@@ -322,10 +321,6 @@ impl WinEvent {
             | Self::ObjectDestroy
             | Self::ObjectCloaked
             | Self::SystemMinimizeStart => {
-                if !self.should_handle_fullscreen_events(origin) {
-                    return None;
-                }
-
                 let mut fullscreened = FULLSCREENED.lock();
                 if fullscreened.contains(&origin) {
                     fullscreened.retain(|&x| x != origin);
