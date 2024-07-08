@@ -22,6 +22,7 @@ rules:
         "build", # Changes affecting the build system or external dependencies
         "ci", # Changes to CI configuration files and scripts
         "chore", # Other changes that don't modify src or test files
+        "delete", # Deleting unused files
         "revert", # Reverting to a previous commit
       ]
 
