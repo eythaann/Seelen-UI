@@ -1,0 +1,29 @@
+# commitlint.config.yml
+extends:
+  - "@commitlint/config-conventional"
+
+rules:
+  # Basic rules
+  header-max-length: [2, "always", 72]
+  body-max-line-length: [2, "always", 100]
+
+  # Commit type
+  type-enum:
+    - 2
+    - "always"
+    - [
+        "feat", # New feature
+        "fix", # Bug fix
+        "docs", # Documentation changes
+        "style", # Code formatting, white spaces, etc.
+        "refactor", # Code refactoring
+        "perf", # Performance improvement
+        "test", # Adding or fixing tests
+        "build", # Changes affecting the build system or external dependencies
+        "ci", # Changes to CI configuration files and scripts
+        "chore", # Other changes that don't modify src or test files
+        "revert", # Reverting to a previous commit
+      ]
+
+  scope-empty: [2, "never"]
+  subject-empty: [2, "never"]

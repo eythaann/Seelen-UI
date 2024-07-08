@@ -250,7 +250,7 @@ pub fn location_delay_completed(origin: HWND) -> bool {
         LAST_LOCATION_CHANGED.store(origin.0, Ordering::Release);
     }
 
-    return should_continue;
+    should_continue
 }
 
 pub extern "system" fn win_event_hook(

@@ -11,7 +11,9 @@
     "build:schemas": "ts-node scripts/createJsonSchemas.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
-    "preversion": "ts-node scripts/preversion.ts"
+    "preversion": "ts-node scripts/preversion.ts",
+    "commit": "commit",
+    "postinstall": "lefthook install"
   },
   "keywords": [],
   "author": {
@@ -34,6 +36,8 @@
     "react-icons": "^5.1.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "@react-spring/web": "^9.7.3",
     "@reduxjs/toolkit": "^2.2.1",
     "@stylistic/eslint-plugin": "^1.6.2",
@@ -53,6 +57,7 @@
     "jest": "^29.7.0",
     "js-yaml": "^4.1.0",
     "json-schema-to-typescript": "^13.1.2",
+    "lefthook": "^1.6.18",
     "lodash": "^4.17.21",
     "mathjs": "^12.4.2",
     "moment": "^2.30.1",

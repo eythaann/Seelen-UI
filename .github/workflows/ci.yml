@@ -49,7 +49,6 @@ jobs:
           cargo fmt -- --check
 
       - name: Run clippy
-      
         run: |- 
           rustup component add clippy
           cargo clippy --all-targets -- -D warnings

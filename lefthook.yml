@@ -1,0 +1,21 @@
+commit-msg:
+  commands:
+    lint-commit-msg:
+      run: npx commitlint --edit
+
+pre-commit:
+  commands:
+    js-linter:
+      run: npm run lint
+    rust-linter:
+      run: cargo fmt -- --check
+    rust-code-check:
+      run: cargo clippy -- -D warnings
+
+pre-push:
+  parallel: true
+  commands:
+    js-test:
+      run: npm run test
+    rust-test:
+      run: cargo test
