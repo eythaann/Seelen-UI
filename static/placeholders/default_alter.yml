@@ -49,10 +49,10 @@ right:
       )
       : icon.TbWorldCancel
 
-  - type: generic
+  - type: media
+    withMediaControls: true
     template: icon.IoVolumeHighOutline
-    onClick: open -> "ms-settings:sound"
-    tooltip: '"Sound"'
+    tooltip: '"Media Controls"'
 
   - type: power
     tooltip: >-

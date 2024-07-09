@@ -1,4 +1,4 @@
-.backgroundLayers {
+.background {
   position: absolute;
   top: 0;
   right: 0;
@@ -10,4 +10,13 @@
     height: 100%;
     position: absolute;
   }
+}
+
+.container {
+  position: relative;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
 }

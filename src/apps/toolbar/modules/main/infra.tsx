@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
 import { DateModule } from '../Date/infra';
 import { Item } from '../item/infra';
+import { MediaModule } from '../media/infra/Module';
 import { NetworkModule } from '../network/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
@@ -35,6 +36,9 @@ function componentByModule(module: ToolbarModule, idx: number) {
 
     case ToolbarModuleType.Network:
       return <NetworkModule key={idx} module={module} />;
+
+    case ToolbarModuleType.Media:
+      return <MediaModule key={idx} module={module} />;
 
     default:
       return null;

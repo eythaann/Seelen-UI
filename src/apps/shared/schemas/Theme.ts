@@ -1,5 +1,5 @@
 import { CreatorInfoSchema } from '.';
-import { modify } from 'readable-types/dist';
+import { modify } from 'readable-types';
 import { z } from 'zod';
 
 const backgroundLayersSchema = z.number().min(1).default(1);

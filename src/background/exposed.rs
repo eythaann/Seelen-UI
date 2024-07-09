@@ -19,6 +19,7 @@ use crate::utils::{is_windows_10, is_windows_11};
 use crate::windows_api::WindowsApi;
 use crate::{apps_config::*, log_error, trace_lock};
 
+use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
 use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
@@ -61,6 +62,16 @@ pub fn get_volume_level() -> Result<f32, String> {
             .GetMasterVolumeLevelScalar()
             .unwrap_or_default()
     })
+}
+
+#[command]
+pub fn media_toggle_mute() -> Result<()> {
+    unsafe {
+        let endpoint = WindowsApi::get_default_audio_endpoint()?;
+        let muted = endpoint.GetMute()?.as_bool();
+        endpoint.SetMute(!muted, &GUID::zeroed())?;
+    }
+    Ok(())
 }
 
 #[command]
@@ -216,6 +227,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         media_prev,
         get_volume_level,
         set_volume_level,
+        media_toggle_mute,
+        request_media_sessions,
         // Brightness
         get_main_monitor_brightness,
         set_main_monitor_brightness,

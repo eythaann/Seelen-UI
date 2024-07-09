@@ -9,7 +9,7 @@ export enum ToolbarModuleType {
   Settings = 'settings',
   Network = 'network',
   Workspaces = 'workspaces',
-  Sound = 'sound',
+  Media = 'media',
   Bluetooth = 'bluetooth',
   Tray = 'tray',
 }
@@ -74,6 +74,12 @@ export const NetworkTMSchema = BaseTMSchema.extend({
     .default(false),
 });
 
+export type MediaTM = z.infer<typeof MediaTMSchema>;
+export const MediaTMSchema = BaseTMSchema.extend({
+  type: z.literal(ToolbarModuleType.Media),
+  withMediaControls: z.boolean().default(false),
+});
+
 export type SettingsToolbarModule = z.infer<typeof SettingsToolbarModuleSchema>;
 export const SettingsToolbarModuleSchema = BaseTMSchema.extend({
   type: z.literal(ToolbarModuleType.Settings),
@@ -94,6 +100,7 @@ export const ToolbarModuleSchema = z.union([
   WorkspaceTMSchema,
   TrayTMSchema,
   NetworkTMSchema,
+  MediaTMSchema,
 ]);
 
 type InnerPlaceholder = z.infer<typeof PlaceholderSchema>;

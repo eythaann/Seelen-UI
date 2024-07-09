@@ -2,17 +2,21 @@ import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS } from '../../../../shared';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
+import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { listen as globalListen } from '@tauri-apps/api/event';
+import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import * as fs from '@tauri-apps/plugin-fs';
 
-import { PinnedApp } from '../../item/app/PinnedApp';
-import { TemporalApp } from '../../item/app/TemporalApp';
+import { LAZY_CONSTANTS } from '../utils/infra';
+
+import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
+import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { AppFromBackground, HWND, SavedAppsInYaml } from './domain';
+import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -21,18 +25,24 @@ export const store = configureStore({
 async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground[]> {
   const result: AppFromBackground[] = [];
   for (const item of items) {
-    const cleaned = await TemporalApp.clean(item);
+    const cleaned = await SwTemporalAppUtils.clean(item);
     result.push(cleaned);
   }
   return result;
 }
 
-async function cleanSavedItems(items: SavedAppsInYaml[]): Promise<PinnedApp[]> {
-  const result: PinnedApp[] = [];
+async function cleanSavedItems(items: SwSavedItem[]): Promise<SwItem[]> {
+  const result: SwItem[] = [];
+
   for (const item of items) {
-    const cleaned = await PinnedApp.clean(item);
-    result.push(await PinnedApp.fromSaved(cleaned));
+    if ('icon_path' in item && !(await fs.exists(item.icon_path))) {
+      item.icon_path = LAZY_CONSTANTS.MISSING_ICON_PATH;
+    }
+    let cleaned =
+      item.type === SwItemType.PinnedApp ? await SwPinnedAppUtils.fromSaved(item) : item;
+    result.push(cleaned);
   }
+
   return result;
 }
 
@@ -45,7 +55,7 @@ export async function registerStoreEvents() {
     }
   };
 
-  await globalListen<UserSettings>('updated-settings', (event) => {
+  await listenGlobal<UserSettings>('updated-settings', (event) => {
     const userSettings = event.payload;
     const settings = userSettings.jsonSettings.seelenweg;
     store.dispatch(RootActions.setSettings(settings));
@@ -86,6 +96,10 @@ export async function registerStoreEvents() {
   await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
     updateHitbox();
+  });
+
+  await listenGlobal<MediaSession[]>('media-sessions', (event) => {
+    store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 }
 
@@ -135,7 +149,7 @@ export async function loadStore() {
   }
 
   const apps = await loadPinnedItems();
-  store.dispatch(RootActions.setPinnedOnLeft(await cleanSavedItems(apps.left)));
-  store.dispatch(RootActions.setPinnedOnCenter(await cleanSavedItems(apps.center)));
-  store.dispatch(RootActions.setPinnedOnRight(await cleanSavedItems(apps.right)));
+  store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
+  store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
+  store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
 }

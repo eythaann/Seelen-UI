@@ -4,50 +4,59 @@ import { savePinnedItems } from './storeApi';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { SeelenWegSlice } from '../../bar/app';
-import { PinnedApp } from '../../item/app/PinnedApp';
-import { TemporalApp } from '../../item/app/TemporalApp';
+import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 
-import { App, AppFromBackground, AppsSides, HWND, RootState, SpecialItemType } from './domain';
+import {
+  AppFromBackground,
+  AppsSides,
+  HWND,
+  RootState,
+  SpecialItemType,
+  SwItem,
+  SwPinnedApp,
+  SwTemporalApp,
+} from './domain';
 
 const initialState: RootState = {
-  pinnedOnLeft: [],
-  pinnedOnCenter: [],
-  pinnedOnRight: [],
+  itemsOnLeft: [],
+  itemsOnCenter: [],
+  itemsOnRight: [],
   openApps: {},
   focusedHandle: 0,
   themeLayers: defaultTheme.layers,
   isOverlaped: false,
   settings: SeelenWegSlice.getInitialState(),
+  mediaSessions: [],
 };
 
-function removeAppFromState(state: RootState, searched: App) {
-  const search = (app: App) => app.exe === searched.exe;
+function removeAppFromState(state: RootState, searched: SwPinnedApp | SwTemporalApp) {
+  const search = (app: SwItem) => 'exe' in app && app.exe === searched.exe;
 
-  let index = state.pinnedOnLeft.findIndex(search);
+  let index = state.itemsOnLeft.findIndex(search);
   if (index !== -1) {
-    state.pinnedOnLeft.splice(index, 1);
+    state.itemsOnLeft.splice(index, 1);
     return;
   }
 
-  index = state.pinnedOnCenter.findIndex(search);
+  index = state.itemsOnCenter.findIndex(search);
   if (index !== -1) {
-    state.pinnedOnCenter.splice(index, 1);
+    state.itemsOnCenter.splice(index, 1);
     return;
   }
 
-  index = state.pinnedOnRight.findIndex(search);
+  index = state.itemsOnRight.findIndex(search);
   if (index !== -1) {
-    state.pinnedOnRight.splice(index, 1);
+    state.itemsOnRight.splice(index, 1);
     return;
   }
 }
 
-function removeHwnd(state: App[], searched: HWND) {
+function removeHwnd(state: SwItem[], searched: HWND) {
   for (let i = 0; i < state.length; i++) {
     const current = state[i]!;
     if (
       current.type !== SpecialItemType.PinnedApp &&
-      current.type !== SpecialItemType.TemporalPin
+      current.type !== SpecialItemType.TemporalApp
     ) {
       continue;
     }
@@ -56,7 +65,7 @@ function removeHwnd(state: App[], searched: HWND) {
 
     if (index !== -1) {
       current.opens.splice(index, 1);
-      if (current.type === SpecialItemType.TemporalPin && current.opens.length === 0) {
+      if (current.type === SpecialItemType.TemporalApp && current.opens.length === 0) {
         state.splice(i, 1);
       }
       break;
@@ -64,12 +73,13 @@ function removeHwnd(state: App[], searched: HWND) {
   }
 }
 
-function findApp(state: RootState, searched: App): App | undefined {
-  return (
-    state.pinnedOnLeft.find((app) => app.exe === searched.exe) ||
-    state.pinnedOnCenter.find((app) => app.exe === searched.exe) ||
-    state.pinnedOnRight.find((app) => app.exe === searched.exe)
-  );
+function findApp(state: RootState, searched: SwPinnedApp | SwTemporalApp) {
+  return (state.itemsOnLeft.find((app) => 'exe' in app && app.exe === searched.exe) ||
+    state.itemsOnCenter.find((app) => 'exe' in app && app.exe === searched.exe) ||
+    state.itemsOnRight.find((app) => 'exe' in app && app.exe === searched.exe)) as
+    | SwPinnedApp
+    | SwTemporalApp
+    | undefined;
 }
 
 export const RootSlice = createSlice({
@@ -77,34 +87,33 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    unPin(state, action: PayloadAction<App>) {
+    unPin(state, action: PayloadAction<SwPinnedApp | SwTemporalApp>) {
       const found = findApp(state, action.payload);
       if (found) {
-        found.type = SpecialItemType.TemporalPin;
+        found.type = SpecialItemType.TemporalApp;
         if (found.opens.length === 0) {
           removeAppFromState(state, found);
         }
       }
     },
-    pinApp(state, action: PayloadAction<{ app: TemporalApp; side: AppsSides }>) {
+    pinApp(state, action: PayloadAction<{ app: SwTemporalApp; side: AppsSides }>) {
       const { app, side } = action.payload;
 
-      const appToPin = findApp(state, app) as PinnedApp;
-      if (appToPin) {
-        appToPin.type = SpecialItemType.PinnedApp;
-      }
-
-      removeAppFromState(state, appToPin);
+      const appToPin = findApp(state, app) || app;
+      appToPin.type = SpecialItemType.PinnedApp;
 
       switch (side) {
-        case AppsSides.LEFT:
-          state.pinnedOnLeft.unshift(appToPin);
+        case AppsSides.Left:
+          removeAppFromState(state, appToPin);
+          state.itemsOnLeft.unshift(appToPin);
           break;
-        case AppsSides.CENTER:
-          state.pinnedOnCenter.unshift(appToPin);
+        case AppsSides.Center:
+          removeAppFromState(state, appToPin);
+          state.itemsOnCenter.unshift(appToPin);
           break;
-        case AppsSides.RIGHT:
-          state.pinnedOnRight.push(appToPin);
+        case AppsSides.Right:
+          removeAppFromState(state, appToPin);
+          state.itemsOnRight.push(appToPin);
           break;
         default:
       }
@@ -120,10 +129,11 @@ export const RootSlice = createSlice({
 
       const appFilename = app.exe.split('\\').pop();
       if (appFilename) {
-        const pinedApp =
-          state.pinnedOnLeft.find((current) => current.exe.endsWith(appFilename)) ||
-          state.pinnedOnCenter.find((current) => current.exe.endsWith(appFilename)) ||
-          state.pinnedOnRight.find((current) => current.exe.endsWith(appFilename));
+        const pinedApp = (
+          state.itemsOnLeft.find((current) => 'exe' in current && current.exe.endsWith(appFilename)) ||
+          state.itemsOnCenter.find((current) => 'exe' in current && current.exe.endsWith(appFilename)) ||
+          state.itemsOnRight.find((current) => 'exe' in current && current.exe.endsWith(appFilename))
+        ) as SwPinnedApp | undefined;
 
         if (pinedApp) {
           pinedApp.opens.push(app.hwnd);
@@ -137,7 +147,7 @@ export const RootSlice = createSlice({
         }
       }
 
-      state.pinnedOnCenter.push(TemporalApp.fromBackground(app));
+      state.itemsOnCenter.push(SwTemporalAppUtils.fromBackground(app));
     },
     updateOpenAppInfo(state, action: PayloadAction<AppFromBackground>) {
       const found = state.openApps[action.payload.hwnd];
@@ -147,9 +157,9 @@ export const RootSlice = createSlice({
     },
     removeOpenApp(state, action: PayloadAction<HWND>) {
       delete state.openApps[action.payload];
-      removeHwnd(state.pinnedOnLeft, action.payload);
-      removeHwnd(state.pinnedOnCenter, action.payload);
-      removeHwnd(state.pinnedOnRight, action.payload);
+      removeHwnd(state.itemsOnLeft, action.payload);
+      removeHwnd(state.itemsOnCenter, action.payload);
+      removeHwnd(state.itemsOnRight, action.payload);
     },
   },
 });
@@ -158,10 +168,10 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isRealPinned = (item: App): item is PinnedApp => {
+export const isRealPinned = (item: SwItem): item is SwPinnedApp => {
   return item.type === SpecialItemType.PinnedApp;
 };
 
-export const isTemporalPinned = (item: App): item is TemporalApp => {
-  return item.type === SpecialItemType.TemporalPin;
+export const isTemporalPinned = (item: SwItem): item is SwTemporalApp => {
+  return item.type === SpecialItemType.TemporalApp;
 };

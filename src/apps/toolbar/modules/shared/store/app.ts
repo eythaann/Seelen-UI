@@ -30,6 +30,7 @@ const initialState: RootState = {
   online: false,
   accentColor: '#ff0000',
   wlanBssEntries: [],
+  mediaSessions: [],
 };
 
 export const RootSlice = createSlice({

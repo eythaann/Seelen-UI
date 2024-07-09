@@ -1,5 +1,5 @@
 import { cx } from '../../../shared/styles';
-import { CSSProperties, memo } from 'react';
+import { CSSProperties, memo, PropsWithChildren } from 'react';
 
 import cs from './infra.module.css';
 
@@ -10,9 +10,35 @@ interface SeelenWegBackgroundProps {
 export const BackgroundByLayers = memo(({ prefix, layers: styles }: SeelenWegBackgroundProps) => {
   const layerStyles = typeof styles === 'object' ? styles : new Array(styles).fill({});
 
-  return <div className={cx(cs.backgroundLayers)}>
-    {layerStyles.map((layer, index) => (
-      <div key={index} className={cx(cs.layer, `${prefix}-bg-layer-${index + 1}`)} style={layer} />
-    ))}
-  </div>;
+  return (
+    <div className={cx(cs.background)}>
+      {layerStyles.map((layer, index) => (
+        <div
+          key={index}
+          className={cx(cs.layer, `${prefix}-bg-layer-${index + 1}`)}
+          style={layer}
+        />
+      ))}
+    </div>
+  );
 });
+
+interface PropsV2 extends PropsWithChildren {
+  className?: string;
+  amount: number;
+}
+
+export function BackgroundByLayersV2({ amount, children, className }: PropsV2) {
+  return (
+    <div className={cx(cs.container, className)}>
+      <div className={cs.background}>
+        {Array.from({ length: amount }, (_, index) => (
+          <div key={index} className={cx(cs.layer, `bg-layer-${index + 1}`)} />
+        ))}
+      </div>
+      <div className={cs.content}>
+        {children}
+      </div>
+    </div>
+  );
+}

@@ -1,7 +1,7 @@
 import { IRootState } from '../../../../../shared.interfaces';
 import { Layout } from '../../../../shared/schemas/Layout';
 import { WindowManager } from '../../../../shared/schemas/WindowManager';
-import { SoftOpaque } from 'readable-types/dist';
+import { SoftOpaque } from 'readable-types';
 
 import { Reservation } from '../../layout/domain';
 import { HWND } from '../utils/domain';

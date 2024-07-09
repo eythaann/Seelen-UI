@@ -32,6 +32,14 @@ export interface NetworkAdapter {
   ipv6: string | null;
 }
 
+export interface MediaSession {
+  title: string;
+  author: string;
+  thumbnail: string | null;
+  playing: boolean;
+  default: boolean;
+}
+
 export interface RootState extends IRootState<FancyToolbar> {
   focused: ActiveApp | null;
   placeholder: Placeholder | null;
@@ -46,4 +54,5 @@ export interface RootState extends IRootState<FancyToolbar> {
   online: boolean;
   accentColor: string;
   wlanBssEntries: WlanBssEntry[];
+  mediaSessions: MediaSession[];
 }

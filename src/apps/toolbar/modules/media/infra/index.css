@@ -1,0 +1,40 @@
+.media-control {
+  width: 320px;
+
+  .media-control-volume {
+    .ant-slider {
+      flex: 1;
+    }
+  }
+
+  .media-control-sessions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .media-session {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .media-session-actions {
+    .ant-btn {
+      color: inherit !important;
+    }
+  }
+
+  .media-session-thumbnail {
+    z-index: 2;
+  }
+
+  .media-session-blurred-thumbnail {
+    filter: blur(15px) brightness(1.5) contrast(125%);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+  }
+}

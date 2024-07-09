@@ -1,5 +1,5 @@
 import { CreatorInfoSchema } from '.';
-import { modify } from 'readable-types/dist';
+import { modify } from 'readable-types';
 import z from 'zod';
 
 export enum NodeType {

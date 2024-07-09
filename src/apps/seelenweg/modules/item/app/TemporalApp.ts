@@ -9,15 +9,10 @@ import {
 
 import { filenameFromPath, getGeneratedFilesPath } from '../../shared/utils/app';
 
-import { AppFromBackground, HWND, IApp, SpecialItemType } from '../../shared/store/domain';
+import { AppFromBackground, SpecialItemType, SwTemporalApp } from '../../shared/store/domain';
 import { UWP_IMAGE_POSTFIXES } from '../../shared/utils/domain';
 
-export interface TemporalApp extends IApp {
-  type: SpecialItemType.TemporalPin;
-  opens: HWND[];
-}
-
-export class TemporalApp {
+export class SwTemporalAppUtils {
   // TODO(eythan) this should be handle by the background process
   static async cleanUWP(item: AppFromBackground) {
     try {
@@ -81,7 +76,7 @@ export class TemporalApp {
   }
 
   static async clean(item: AppFromBackground): Promise<AppFromBackground> {
-    await TemporalApp.cleanUWP(item);
+    await SwTemporalAppUtils.cleanUWP(item);
 
     if (!(await fs.exists(item.icon_path))) {
       item.icon_path = LAZY_CONSTANTS.MISSING_ICON_PATH;
@@ -95,9 +90,9 @@ export class TemporalApp {
     return item;
   }
 
-  static fromBackground(item: AppFromBackground): TemporalApp {
+  static fromBackground(item: AppFromBackground): SwTemporalApp {
     return {
-      type: SpecialItemType.TemporalPin,
+      type: SpecialItemType.TemporalApp,
       icon: item.icon || '',
       icon_path: item.icon_path,
       exe: item.exe,

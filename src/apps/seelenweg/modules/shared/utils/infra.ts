@@ -5,7 +5,7 @@ import { store } from '../store/infra';
 
 import { getGeneratedFilesPath } from './app';
 
-import { HWND, UWP_Package } from '../store/domain';
+import { HWND } from '../store/domain';
 
 export const LAZY_CONSTANTS = {
   MISSING_ICON_PATH: '',
@@ -38,8 +38,30 @@ export async function iconPathFromExePath(exePath: string) {
   return await path.resolve(await getGeneratedFilesPath(), 'icons', fileName);
 }
 
+/** @from pwsh */
+interface UWP_App {
+  AppId: string;
+  /** Relative path to the executable from Package:InstallLocation folder */
+  Executable: string;
+  /** An image used as the app's Start Screen medium tile, and on the Task Switcher. */
+  Square150x150Logo: string;
+  /** An image used as the app's Start Screen small tile, and on the All Apps List (taskbar). */
+  Square44x44Logo: string;
+}
+
+/** @from pwsh */
+interface UWP_Package {
+  Name: string;
+  Version: string;
+  PublisherId: string;
+  PackageFullName: string;
+  InstallLocation: string;
+  StoreLogo: string;
+  Applications: UWP_App[];
+}
+
 /**
- * For some reason uwp_manifests.json can no be readed and parsed by JSON.parse()
+ * For some reason uwp_manifests.json can no be read and parsed by JSON.parse()
  * so I use fetch as solution, maybe is a problem with the encoding of the file
  */
 export async function getUWPInfoFromExePath(exePath: string): Promise<UWP_Package | undefined> {
@@ -47,37 +69,39 @@ export async function getUWPInfoFromExePath(exePath: string): Promise<UWP_Packag
     return undefined;
   }
   const dirname = await path.dirname(exePath);
-  const url = convertFileSrc(await path.resolve(await getGeneratedFilesPath(), 'uwp_manifests.json'));
+  const url = convertFileSrc(
+    await path.resolve(await getGeneratedFilesPath(), 'uwp_manifests.json'),
+  );
   const response = await fetch(url);
   const manifests: UWP_Package[] = await response.json();
   return manifests.find(
     (manifest) =>
       manifest.InstallLocation === dirname ||
-      /** Some apps anidates the exe path in instalation location like notepad/notepad.exe */
+      /** Some apps are children of the exe path in installation location like notepad/notepad.exe */
       dirname.startsWith(manifest.InstallLocation),
   );
 }
 
 export function getImageBase64FromUrl(url: string): Promise<string> {
-  let imagen = new Image();
+  let image = new Image();
   let canvas = document.createElement('canvas');
   let ctx = canvas.getContext('2d')!;
 
   return new Promise((resolve, reject) => {
-    imagen.onload = function () {
-      canvas.width = imagen.width;
-      canvas.height = imagen.height;
-      ctx.drawImage(imagen, 0, 0);
+    image.onload = function () {
+      canvas.width = image.width;
+      canvas.height = image.height;
+      ctx.drawImage(image, 0, 0);
       resolve(trimCanvas(canvas).toDataURL());
     };
 
-    imagen.onerror = function () {
+    image.onerror = function () {
       console.error('Error while loading image: ', url);
       reject();
     };
 
-    imagen.crossOrigin = '';
-    imagen.src = url;
+    image.crossOrigin = '';
+    image.src = url;
   });
 }
 

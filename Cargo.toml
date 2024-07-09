@@ -82,7 +82,11 @@ features = [
     "Win32_System_Power",                  # required for power management (battery - AC)
     "Win32_System_Shutdown",               # required for power management (shutdown)
     "Win32_Storage_EnhancedStorage",
-    "Win32_Media_Audio_Endpoints",         # required for audio
+    "Win32_Media_Audio_Endpoints",         # required for audio module
+    "Win32_Media_DeviceManager",           # required for audio module
+    "Media",                               # required for audio module
+    "Media_Control",                       # required for audio module
+    "Storage_Streams",                     # required for audio module
     "Win32_Devices_Display",               # required for display (brightness, etc)
     "UI_Core",
     "Win32_NetworkManagement_IpHelper",    # required for network manager

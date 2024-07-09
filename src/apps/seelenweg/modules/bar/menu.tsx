@@ -7,9 +7,9 @@ import { store } from '../shared/store/infra';
 
 import { isRealPinned, isTemporalPinned, RootActions } from '../shared/store/app';
 
-import { App, AppsSides } from '../shared/store/domain';
+import { AppsSides, SwPinnedApp, SwTemporalApp } from '../shared/store/domain';
 
-export function getMenuForItem(item: App): MenuProps['items'] {
+export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): MenuProps['items'] {
   const state = store.getState();
   const isPinned = isRealPinned(item);
 
@@ -48,17 +48,17 @@ export function getMenuForItem(item: App): MenuProps['items'] {
                   {
                     label: 'Pin to left',
                     key: 'weg_pin_app_left',
-                    onClick: () => pin(AppsSides.LEFT),
+                    onClick: () => pin(AppsSides.Left),
                   },
                   {
                     label: 'Pin to center',
                     key: 'weg_pin_app_center',
-                    onClick: () => pin(AppsSides.CENTER),
+                    onClick: () => pin(AppsSides.Center),
                   },
                   {
                     label: 'Pin to right',
                     key: 'weg_pin_app_right',
-                    onClick: () => pin(AppsSides.RIGHT),
+                    onClick: () => pin(AppsSides.Right),
                   },
                 ]}
               />
@@ -92,7 +92,10 @@ export function getMenuForItem(item: App): MenuProps['items'] {
       {
         label: 'Copy handles',
         key: 'weg_copy_hwnd',
-        onClick: () => navigator.clipboard.writeText(JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16)))),
+        onClick: () =>
+          navigator.clipboard.writeText(
+            JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16))),
+          ),
       },
       {
         label: item.opens.length > 1 ? 'Close all' : 'Close',
@@ -103,7 +106,8 @@ export function getMenuForItem(item: App): MenuProps['items'] {
           });
         },
         danger: true,
-      });
+      },
+    );
   }
 
   return menu;

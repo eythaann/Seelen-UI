@@ -16,10 +16,10 @@ import { updatePreviews } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';
 
-import { App } from '../shared/store/domain';
+import { SwItem } from '../shared/store/domain';
 
 interface Props {
-  item: App;
+  item: SwItem;
   initialSize: number;
   isFocused: boolean;
 }

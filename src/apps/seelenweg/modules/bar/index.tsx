@@ -1,4 +1,5 @@
 import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
+import { SavedSeparatorItem } from '../../../shared/schemas/SeelenWegItems';
 import { cx } from '../../../shared/styles';
 import { WegItem } from './item';
 import { Reorder } from 'framer-motion';
@@ -10,16 +11,16 @@ import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { App, Separator, SpecialItemType } from '../shared/store/domain';
+import { SpecialItemType, SwItem } from '../shared/store/domain';
 
 const MAX_CURSOR_DISTANCE = window.screen.height / 3;
 const MAX_CURSOR_DISTANCE_MARGIN = MAX_CURSOR_DISTANCE / 3;
 
-const Separator1: Separator = {
+const Separator1: SavedSeparatorItem = {
   type: SpecialItemType.Separator,
 };
 
-const Separator2: Separator = {
+const Separator2: SavedSeparatorItem = {
   type: SpecialItemType.Separator,
 };
 
@@ -44,9 +45,9 @@ export function SeelenWeg() {
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
 
-  const pinnedOnLeft = useSelector(Selectors.pinnedOnLeft);
-  const pinnedOnCenter = useSelector(Selectors.pinnedOnCenter);
-  const pinnedOnRight = useSelector(Selectors.pinnedOnRight);
+  const pinnedOnLeft = useSelector(Selectors.itemsOnLeft);
+  const pinnedOnCenter = useSelector(Selectors.itemsOnCenter);
+  const pinnedOnRight = useSelector(Selectors.itemsOnRight);
 
   const [isActive, setActive] = useState(false);
 
@@ -211,18 +212,18 @@ export function SeelenWeg() {
     mousePos.current.y = event.clientY;
   }, []);
 
-  const onReorderPinned = useCallback((apps: (Separator | App)[]) => {
-    let extractedPinned: App[] = [];
+  const onReorderPinned = useCallback((apps: (SavedSeparatorItem | SwItem)[]) => {
+    let extractedPinned: SwItem[] = [];
 
     apps.forEach((app) => {
       if (app === Separator1) {
-        dispatch(RootActions.setPinnedOnLeft(extractedPinned));
+        dispatch(RootActions.setItemsOnLeft(extractedPinned));
         extractedPinned = [];
         return;
       }
 
       if (app === Separator2) {
-        dispatch(RootActions.setPinnedOnCenter(extractedPinned));
+        dispatch(RootActions.setItemsOnCenter(extractedPinned));
         extractedPinned = [];
         return;
       }
@@ -232,7 +233,7 @@ export function SeelenWeg() {
       }
     });
 
-    dispatch(RootActions.setPinnedOnRight(extractedPinned));
+    dispatch(RootActions.setItemsOnRight(extractedPinned));
   }, []);
 
   const isHorizontal =
