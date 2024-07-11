@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.0]
 ### features
 - Media module added to the toolbar.
 - Media module added to SeelenWeg.
