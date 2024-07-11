@@ -6,4 +6,4 @@ changelogContent = changelogContent.replace(/## \[Unreleased\]/g, `## \[Unreleas
 fs.writeFileSync('changelog.md', changelogContent);
 
 execSync('git add changelog.md');
-execSync(`git commit -m "v${process.env.npm_new_version}: update changelog"`);
+execSync(`git commit -m "docs(v${process.env.npm_new_version}): update changelog"`);
