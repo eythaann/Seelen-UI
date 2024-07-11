@@ -9,7 +9,7 @@ license = "Polyform Strict License"
 repository = "https://github.com/eythaann/seelen-ui.git"
 default-run = "seelen-ui"
 edition = "2021"
-rust-version = "1.60"
+rust-version = "1.70"
 build = "scripts/build.rs"
 
 [[bin]]

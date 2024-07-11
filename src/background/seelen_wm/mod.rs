@@ -306,7 +306,11 @@ impl WindowManager {
     }
 
     unsafe extern "system" fn get_next_by_order_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
-        if WindowManager::is_manageable_window(hwnd, false) && hwnd.0 != lparam.0 {
+        // TODO search a way to handle ApplicationFrameHost.exe as well on change of virtual desktop
+        if WindowManager::is_manageable_window(hwnd, false)
+            && hwnd.0 != lparam.0
+            && !WindowsApi::exe(hwnd).is_ok_and(|exe| &exe == "ApplicationFrameHost.exe")
+        {
             NEXT.store(hwnd.0, Ordering::SeqCst);
             return false.into();
         }
