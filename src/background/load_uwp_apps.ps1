@@ -18,9 +18,24 @@ foreach ($package in $packages) {
       continue
     }
 
+    $alias = $null
+    if ($app.Extensions.Extension) {
+      foreach ($extension in $app.Extensions.Extension) {
+        if ($extension.Category -eq "windows.appExecutionAlias" -and $extension.AppExecutionAlias) {
+          foreach ($executionAlias in $extension.AppExecutionAlias.ExecutionAlias) {
+            if ($executionAlias.Alias) {
+              $alias = $executionAlias.Alias
+              break
+            }
+          }
+        }
+      }
+    }
+
     $applications += [PSCustomObject]@{
       AppId             = $app.Id
       Executable        = $app.Executable
+      Alias             = $alias
       Square150x150Logo = $app.VisualElements.Square150x150Logo
       Square44x44Logo   = $app.VisualElements.Square44x44Logo
     }

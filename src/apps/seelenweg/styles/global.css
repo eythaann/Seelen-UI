@@ -18,41 +18,20 @@ body {
   height: min-content;
   width: min-content;
   margin: var(--config-margin);
-
-  &:not(:hover) {
-    .weg-separator {
-      transition-property: width, height;
-      transition-duration: 0.2s;
-      transition-timing-function: linear;
-    }
-
-    .weg-item {
-      transition-property: width, height, margin, filter;
-      transition-duration: 0.2s;
-      transition-timing-function: linear;
-    }
-  }
-
-  &:hover {
-    .weg-item {
-      &:not(:active) {
-        transition-property: filter;
-        transition-duration: 0.2s;
-        transition-timing-function: ease-in-out;
-      }
-    }
-  }
 }
 
-/** Taskabr Styles */
+/** Taskbar Styles */
 .taskbar {
   position: relative;
   overflow: visible;
-  display: flex;
-  gap: var(--config-space-between-items);
   padding: var(--config-padding);
-  justify-content: space-between;
   transition: transform 0.2s ease-in-out;
+
+  display: flex;
+  justify-content: var(--config-by-position-justify-content);
+  align-items: var(--config-by-position-align-items);
+  flex-direction: var(--config-by-position-flex-direction);
+  gap: var(--config-space-between-items);
 
   &.hidden {
     &.left {
@@ -77,19 +56,16 @@ body {
       var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
     );
     width: min-content;
-    flex-direction: row;
 
     &.full-width {
       width: calc(100vw - var(--config-margin) * 2);
     }
 
     &.top {
-      align-items: flex-start;
       padding-top: calc(var(--config-padding) + var(--config-additional-side-padding));
     }
 
     &.bottom {
-      align-items: flex-end;
       padding-bottom: calc(var(--config-padding) + var(--config-additional-side-padding));
     }
   }
@@ -99,19 +75,16 @@ body {
       var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
     );
     height: min-content;
-    flex-direction: column;
 
     &.full-width {
       height: calc(100vh - var(--config-margin) * 2);
     }
 
     &.left {
-      align-items: flex-start;
       padding-left: calc(var(--config-padding) + var(--config-additional-side-padding));
     }
 
     &.right {
-      align-items: flex-end;
       padding-right: calc(var(--config-padding) + var(--config-additional-side-padding));
     }
   }
@@ -161,10 +134,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &:active {
-      filter: brightness(0.3);
-    }
 
     > img {
       width: 65%;

@@ -19,7 +19,6 @@ use crate::utils::{is_windows_10, is_windows_11};
 use crate::windows_api::WindowsApi;
 use crate::{apps_config::*, log_error, trace_lock};
 
-use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
 use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
@@ -53,15 +52,6 @@ fn media_next() -> Result<(), String> {
 #[command]
 fn media_prev() -> Result<(), String> {
     press_key(VK_MEDIA_PREV_TRACK)
-}
-
-#[command]
-pub fn get_volume_level() -> Result<f32, String> {
-    Ok(unsafe {
-        WindowsApi::get_default_audio_endpoint()?
-            .GetMasterVolumeLevelScalar()
-            .unwrap_or_default()
-    })
 }
 
 #[command]
@@ -225,10 +215,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         media_play_pause,
         media_next,
         media_prev,
-        get_volume_level,
         set_volume_level,
         media_toggle_mute,
-        request_media_sessions,
         // Brightness
         get_main_monitor_brightness,
         set_main_monitor_brightness,

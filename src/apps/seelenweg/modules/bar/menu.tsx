@@ -1,22 +1,42 @@
 import { savePinnedItems } from '../shared/store/storeApi';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, MenuProps, Popover } from 'antd';
+import { ItemType } from 'antd/es/menu/interface';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
 import { store } from '../shared/store/infra';
 
-import { isRealPinned, isTemporalPinned, RootActions } from '../shared/store/app';
+import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
 import { AppsSides, SwPinnedApp, SwTemporalApp } from '../shared/store/domain';
 
-export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): MenuProps['items'] {
+export function getSeelenWegMenu(): ItemType[] {
+  return [
+    {
+      key: 'add-media',
+      label: 'Add Media Module',
+      onClick() {
+        store.dispatch(RootActions.addMediaModule());
+      },
+    },
+    {
+      key: 'settings',
+      label: 'Open Settings',
+      onClick() {
+        invoke('show_app_settings');
+      },
+    },
+  ];
+}
+
+export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): ItemType[] {
   const state = store.getState();
-  const isPinned = isRealPinned(item);
+  const isPinned = isPinnedApp(item);
 
   const pin = (side: AppsSides) => {
-    if (isTemporalPinned(item)) {
+    if (isTemporalApp(item)) {
       store.dispatch(RootActions.pinApp({ app: item, side }));
-      savePinnedItems(store.getState());
+      savePinnedItems();
     }
   };
 
@@ -28,7 +48,7 @@ export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): MenuProps['it
       key: 'weg_unpin_app',
       onClick: () => {
         store.dispatch(RootActions.unPin(item));
-        savePinnedItems(store.getState());
+        savePinnedItems();
       },
     });
   } else {

@@ -21,13 +21,14 @@ export class SwTemporalAppUtils {
         return;
       }
 
+      const filename = filenameFromPath(item.exe);
       const storedLogoPath =
-        (await getGeneratedFilesPath()) +
-        '\\icons\\' +
-        filenameFromPath(item.exe).replace('.exe', '_uwp.png');
+        (await getGeneratedFilesPath()) + '\\icons\\' + filename.replace('.exe', '_uwp.png');
 
       const app = uwpPackage.Applications.find(
-        (app) => app.Executable.split('\\').at(-1)! === filenameFromPath(item.exe),
+        (app) =>
+          app.Executable.split('\\').at(-1) === filename ||
+          app.Alias?.split('\\').at(-1) === filename,
       );
 
       if (app) {
@@ -46,11 +47,11 @@ export class SwTemporalAppUtils {
 
         if (app) {
           logoToCopy =
-            uwpPackage.InstallLocation + '\\' + app.Square150x150Logo.replace('.png', postfix);
+            uwpPackage.InstallLocation + '\\' + app.Square44x44Logo.replace('.png', postfix);
 
           if (!(await fs.exists(logoToCopy))) {
             logoToCopy =
-              uwpPackage.InstallLocation + '\\' + app.Square44x44Logo.replace('.png', postfix);
+              uwpPackage.InstallLocation + '\\' + app.Square150x150Logo.replace('.png', postfix);
 
             if (!(await fs.exists(logoToCopy))) {
               logoToCopy = storeLogo;

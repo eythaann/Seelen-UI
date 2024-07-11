@@ -1,27 +1,29 @@
-import { SwSavedItem, SwSaveFile } from '../../../../shared/schemas/SeelenWegItems';
+import { SwItemType, SwSavedItem, SwSaveFile } from '../../../../shared/schemas/SeelenWegItems';
 import { path } from '@tauri-apps/api';
 import { exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 
-import { isRealPinned, isTemporalPinned } from './app';
+import { store } from './infra';
 
 import { RootState, SwItem } from './domain';
 
-export const savePinnedItems = async (state: RootState): Promise<void> => {
-  const cb = (acc: SwSavedItem[], app: SwItem) => {
-    if (isTemporalPinned(app)) {
-      return acc;
+export const savePinnedItems = async (state: RootState = store.getState()): Promise<void> => {
+  const cb = (acc: SwSavedItem[], item: SwItem) => {
+    switch (item.type) {
+      case SwItemType.TemporalApp:
+        break;
+      case SwItemType.PinnedApp:
+        acc.push({
+          type: item.type,
+          exe: item.exe,
+          execution_path: item.execution_path,
+          icon_path: item.icon_path,
+        });
+        break;
+      default:
+        acc.push(item);
+        break;
     }
-
-    if (isRealPinned(app)) {
-      acc.push({
-        exe: app.exe,
-        type: app.type,
-        execution_path: app.execution_path,
-        icon_path: app.icon_path,
-      });
-    }
-
     return acc;
   };
 

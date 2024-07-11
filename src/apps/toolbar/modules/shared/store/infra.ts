@@ -51,6 +51,14 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
+  await listenGlobal<number>('media-volume', (event) => {
+    store.dispatch(RootActions.setMediaVolume(event.payload));
+  });
+
+  await listenGlobal<boolean>('media-muted', (event) => {
+    store.dispatch(RootActions.setMediaMuted(event.payload));
+  });
+
   await listenGlobal<NetworkAdapter[]>('network-adapters', (event) => {
     store.dispatch(RootActions.setNetworkAdapters(event.payload));
   });

@@ -3,6 +3,7 @@ pub mod brightness;
 use crate::{
     error_handler::Result,
     modules::{
+        media::infrastructure::register_media_events,
         network::infrastructure::register_network_events, power::infrastructure::PowerManager,
         tray::infrastructure::register_tray_events,
     },
@@ -32,10 +33,9 @@ pub fn declare_system_events_handlers() -> Result<()> {
         // todo
     });
 
-    handle.once("register-audio-events", move |_| {
-        // todo
-        // let audio = WindowsApi::get_default_audio_endpoint().unwrap();
-        // audio.RegisterControlChangeNotify(IAudioEndpointVolumeCallback)
+    handle.listen("register-media-events", move |_| {
+        log::debug!("Registering media events");
+        register_media_events();
     });
 
     Ok(())

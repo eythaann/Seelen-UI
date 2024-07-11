@@ -24,7 +24,6 @@ rustflags = ["-Z", "threads=8"]
 tauri-build = { version = "2.0.0-beta", features = [] }
 
 [dependencies]
-winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.34"
@@ -46,18 +45,21 @@ parking_lot = "0.12.1"
 log = "0.4"
 uuid = "1.8.0"
 image = "0.25.0"
-win-screenshot = "4.0.8"
 widestring = "1.0.2"
 itertools = "0.12.1"
 clap = { version = "4.5.4", features = ["derive", "string"] }
 os_info = "3.8.2"
-winreg = "0.52.0"
 crossbeam-channel = "0.5.12"
 regex = "1.10.4"
 getset = "0.1.2"
 phf = "0.11.2"
 sysinfo = "0.30.12"
 battery = "0.7.8"
+# Windows Crates
+winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
+winreg = "0.52.0"
+win-screenshot = "4.0.8"
+windows-core = "=0.56.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 
 [dependencies.windows]
 version = "=0.56.0"

@@ -4183,6 +4183,7 @@ dependencies = [
  "widestring",
  "win-screenshot",
  "windows 0.56.0",
+ "windows-core 0.56.0",
  "winreg 0.52.0",
  "winvd",
 ]

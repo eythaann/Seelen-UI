@@ -4,17 +4,17 @@ import { Spin } from 'antd';
 import { MouseEvent, useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { LAZY_CONSTANTS } from '../shared/utils/infra';
+import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
-import { SelectOpenApp } from '../shared/store/app';
+import { SelectOpenApp } from '../../shared/store/app';
 
-import { HWND } from '../shared/store/domain';
+import { HWND } from '../../shared/store/domain';
 
 interface PreviewProps {
   hwnd: HWND;
 }
 
-export const WegPreview = ({ hwnd }: PreviewProps) => {
+export const UserApplicationPreview = ({ hwnd }: PreviewProps) => {
   const app = useSelector(SelectOpenApp(hwnd));
 
   const imageUrl = convertFileSrc(`${LAZY_CONSTANTS.TEMP_FOLDER}${app?.process_hwnd || 0}.png`);

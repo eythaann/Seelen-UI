@@ -1,7 +1,7 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { savePinnedItems } from './storeApi';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 
 import { SeelenWegSlice } from '../../bar/app';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -27,6 +27,7 @@ const initialState: RootState = {
   isOverlaped: false,
   settings: SeelenWegSlice.getInitialState(),
   mediaSessions: [],
+  mediaLastPlayedSession: null,
 };
 
 function removeAppFromState(state: RootState, searched: SwPinnedApp | SwTemporalApp) {
@@ -118,6 +119,15 @@ export const RootSlice = createSlice({
         default:
       }
     },
+    addMediaModule(state) {
+      const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
+      if (!all.some((current) => current.type === SpecialItemType.Media)) {
+        state.itemsOnRight.push({
+          type: SpecialItemType.Media,
+        });
+      }
+      savePinnedItems(current(state));
+    },
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
       const app = action.payload;
 
@@ -141,7 +151,7 @@ export const RootSlice = createSlice({
           if (pinedApp.exe !== app.exe) {
             pinedApp.exe = app.exe;
             pinedApp.execution_path = app.execution_path;
-            savePinnedItems(state);
+            savePinnedItems(current(state));
           }
           return;
         }
@@ -161,6 +171,19 @@ export const RootSlice = createSlice({
       removeHwnd(state.itemsOnCenter, action.payload);
       removeHwnd(state.itemsOnRight, action.payload);
     },
+    updateLastMediaPlayedSession(state) {
+      let last = state.mediaLastPlayedSession;
+      let current = state.mediaSessions.find((session) => session.playing);
+      let lastWasClosed = last && state.mediaSessions.every((session) => session.title !== last!.title);
+
+      if (current) {
+        state.mediaLastPlayedSession = current;
+      } else if (!last || lastWasClosed) {
+        state.mediaLastPlayedSession = state.mediaSessions[0] || null;
+      } else {
+        state.mediaLastPlayedSession!.playing = false;
+      }
+    },
   },
 });
 
@@ -168,10 +191,10 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isRealPinned = (item: SwItem): item is SwPinnedApp => {
+export const isPinnedApp = (item: SwItem): item is SwPinnedApp => {
   return item.type === SpecialItemType.PinnedApp;
 };
 
-export const isTemporalPinned = (item: SwItem): item is SwTemporalApp => {
+export const isTemporalApp = (item: SwItem): item is SwTemporalApp => {
   return item.type === SpecialItemType.TemporalApp;
 };

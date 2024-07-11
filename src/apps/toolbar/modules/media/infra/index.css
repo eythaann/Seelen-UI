@@ -31,7 +31,7 @@
   }
 
   .media-session-blurred-thumbnail {
-    filter: blur(15px) brightness(1.5) contrast(125%);
+    filter: blur(15px) brightness(125%) contrast(125%);
     position: absolute;
     width: 100%;
     height: 100%;

@@ -34,7 +34,6 @@ export interface MediaSession {
   author: string;
   thumbnail: string | null;
   playing: boolean;
-  default: boolean;
 }
 
 export type SwPinnedApp = modify<
@@ -64,4 +63,5 @@ export interface RootState extends IRootState<Seelenweg> {
   focusedHandle: HWND;
   isOverlaped: boolean;
   mediaSessions: MediaSession[];
+  mediaLastPlayedSession: MediaSession | null;
 }

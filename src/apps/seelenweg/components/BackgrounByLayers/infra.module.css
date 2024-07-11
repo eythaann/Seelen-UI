@@ -15,8 +15,3 @@
 .container {
   position: relative;
 }
-
-.content {
-  position: relative;
-  z-index: 1;
-}

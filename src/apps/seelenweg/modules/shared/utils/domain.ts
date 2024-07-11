@@ -20,7 +20,7 @@ const UWP_SCALE_POSTFIXES = [
 ];
 
 export const UWP_IMAGE_POSTFIXES = [
-  ...UWP_SCALE_POSTFIXES,
   ...UWP_TARGET_SIZE_POSTFIXES,
+  ...UWP_SCALE_POSTFIXES,
   '.png',
 ];

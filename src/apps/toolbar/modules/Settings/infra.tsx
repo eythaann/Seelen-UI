@@ -22,20 +22,17 @@ interface Brightness {
 }
 
 export function SettingsModule(props: Props) {
-  const themeLayers = useSelector(Selectors.themeLayers.toolbar);
   const [openPreview, setOpenPreview] = useState(false);
-  const [volume, setVolume] = useState(0);
   const [brightness, setBrightness] = useState<Brightness>({
     min: 0,
     max: 0,
     current: 0,
   });
 
-  useEffect(() => {
-    invoke<number>('get_volume_level').then((volume) => {
-      setVolume(volume);
-    });
+  const themeLayers = useSelector(Selectors.themeLayers.toolbar);
+  const volume = useSelector(Selectors.mediaVolume);
 
+  useEffect(() => {
     invoke<Brightness>('get_main_monitor_brightness')
       .then(setBrightness)
       .catch(() => {
@@ -50,7 +47,6 @@ export function SettingsModule(props: Props) {
 
   const onChangeVolume = (value: number) => {
     invoke('set_volume_level', { level: value });
-    setVolume(value);
   };
 
   return (

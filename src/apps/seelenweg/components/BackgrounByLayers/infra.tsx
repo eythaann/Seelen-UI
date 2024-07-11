@@ -25,20 +25,20 @@ export const BackgroundByLayers = memo(({ prefix, layers: styles }: SeelenWegBac
 
 interface PropsV2 extends PropsWithChildren {
   className?: string;
+  bgPrefix?: string;
   amount: number;
 }
 
-export function BackgroundByLayersV2({ amount, children, className }: PropsV2) {
+export function BackgroundByLayersV2({ amount, children, className, bgPrefix: _prefix }: PropsV2) {
+  const prefix = _prefix ? _prefix + '-' : '';
   return (
     <div className={cx(cs.container, className)}>
       <div className={cs.background}>
         {Array.from({ length: amount }, (_, index) => (
-          <div key={index} className={cx(cs.layer, `bg-layer-${index + 1}`)} />
+          <div key={index} className={cx(cs.layer, `${prefix}bg-layer-${index + 1}`)} />
         ))}
       </div>
-      <div className={cs.content}>
-        {children}
-      </div>
+      {children}
     </div>
   );
 }

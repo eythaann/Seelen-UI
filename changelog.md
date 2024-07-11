@@ -1,13 +1,25 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- Media module added to the toolbar.
+- Media module added to SeelenWeg.
+
+  ![Media Module Example](documentation/images/media_module_preview.png)
+
+- SeelenWeg now has a context menu (Right Click Menu).
+
 ### enhancements
 - enhancements on fullscreen events.
+
+### refactor
+- remove Default Wave animation on seelenweg (users will be able to add their own animations).
 
 ### fix
 - no updating colors correctly on change light or dark mode on windows settings.
 - window manager enabled by default for new users.
 - showing tray icons with empty name.
+- no focusing seelen settings if it was minimized.
 
 ## [1.7.7]
 ### fix

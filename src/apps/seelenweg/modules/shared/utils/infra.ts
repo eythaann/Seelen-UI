@@ -9,12 +9,19 @@ import { HWND } from '../store/domain';
 
 export const LAZY_CONSTANTS = {
   MISSING_ICON_PATH: '',
+  DEFAULT_THUMBNAIL: '',
   TEMP_FOLDER: '',
 };
 
 export async function loadConstants() {
-  LAZY_CONSTANTS.MISSING_ICON_PATH = await getMissingIconPath();
   LAZY_CONSTANTS.TEMP_FOLDER = await path.tempDir();
+  LAZY_CONSTANTS.MISSING_ICON_PATH = await getMissingIconPath();
+  LAZY_CONSTANTS.DEFAULT_THUMBNAIL = await path.resolve(
+    await path.resourceDir(),
+    'static',
+    'icons',
+    'default_thumbnail.jpg',
+  );
 }
 
 export async function getMissingIconPath() {
@@ -43,6 +50,8 @@ interface UWP_App {
   AppId: string;
   /** Relative path to the executable from Package:InstallLocation folder */
   Executable: string;
+  /** Alias executable */
+  Alias: string | null;
   /** An image used as the app's Start Screen medium tile, and on the Task Switcher. */
   Square150x150Logo: string;
   /** An image used as the app's Start Screen small tile, and on the All Apps List (taskbar). */

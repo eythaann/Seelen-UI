@@ -37,7 +37,6 @@ export interface MediaSession {
   author: string;
   thumbnail: string | null;
   playing: boolean;
-  default: boolean;
 }
 
 export interface RootState extends IRootState<FancyToolbar> {
@@ -55,4 +54,6 @@ export interface RootState extends IRootState<FancyToolbar> {
   accentColor: string;
   wlanBssEntries: WlanBssEntry[];
   mediaSessions: MediaSession[];
+  mediaVolume: number;
+  mediaMuted: boolean;
 }

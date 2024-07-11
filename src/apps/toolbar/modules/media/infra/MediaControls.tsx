@@ -17,6 +17,7 @@ import './index.css';
 
 const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
+const BRIGHTNESS_MULTIPLIER = 1.25; // used in css
 
 function MediaSession({ session }: { session: MediaSession }) {
   const [luminance, setLuminance] = useState(0);
@@ -29,13 +30,18 @@ function MediaSession({ session }: { session: MediaSession }) {
     calcLuminance(src).then(setLuminance).catch(console.error);
   }, [src]);
 
-  const filteredLuminance = Math.max(Math.min(luminance, MAX_LUMINANCE), MIN_LUMINANCE);
-  const color = luminance < 125 ? 'var(--color-gray-200)' : 'var(--color-gray-800)';
+  const filteredLuminance = Math.max(Math.min(luminance * BRIGHTNESS_MULTIPLIER, MAX_LUMINANCE), MIN_LUMINANCE);
+  const color = filteredLuminance < 125 ? '#efefef' : '#222222';
 
   return (
-    <div className="media-session" style={{ backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})` }}>
-      <img className="media-session-thumbnail" src={src} />
-      <img className="media-session-blurred-thumbnail" src={src} />
+    <div
+      className="media-session"
+      style={{
+        backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
+      }}
+    >
+      <img className="media-session-thumbnail" src={src} draggable={false} />
+      <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
 
       <div className="media-session-info" style={{ color }}>
         <h4 className="media-session-title">{session.title}</h4>
@@ -61,15 +67,9 @@ function MediaSession({ session }: { session: MediaSession }) {
 
 export function WithMediaControls({ children }: PropsWithChildren) {
   const [openPreview, setOpenPreview] = useState(false);
-  const [volume, setVolume] = useState(0);
 
+  const volume = useSelector(Selectors.mediaVolume);
   const sessions = useSelector(Selectors.mediaSessions);
-
-  useEffect(() => {
-    if (openPreview) {
-      invoke('request_media_sessions');
-    }
-  }, [openPreview]);
 
   useAppBlur(() => {
     setOpenPreview(false);
@@ -77,7 +77,6 @@ export function WithMediaControls({ children }: PropsWithChildren) {
 
   const onChangeVolume = (value: number) => {
     invoke('set_volume_level', { level: value });
-    setVolume(value);
   };
 
   return (

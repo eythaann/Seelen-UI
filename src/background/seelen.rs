@@ -356,6 +356,7 @@ impl Seelen {
 
         match window {
             Some(window) => {
+                window.unminimize()?;
                 window.set_focus()?;
                 Ok(window)
             }
