@@ -7,13 +7,19 @@
   display: grid;
   grid-template-columns: var(--config-item-size) 1fr;
   height: var(--config-item-size);
-  width: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2); /* 3 items + 2 spaces between */
+  width: calc(
+    var(--config-item-size) * 3 + var(--config-space-between-items) * 2
+  ); /* 3 items + 2 spaces between */
   position: relative;
   overflow: hidden;
   border-radius: 10px;
 
   .media-session-thumbnail {
     z-index: 2;
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    background: #0004;
   }
 
   .media-session-blurred-thumbnail {

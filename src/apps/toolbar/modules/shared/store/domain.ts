@@ -33,10 +33,12 @@ export interface NetworkAdapter {
 }
 
 export interface MediaSession {
+  id: string;
   title: string;
   author: string;
   thumbnail: string | null;
   playing: boolean;
+  default: boolean;
 }
 
 export interface RootState extends IRootState<FancyToolbar> {

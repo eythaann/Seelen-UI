@@ -4,11 +4,7 @@ use std::process::Command;
 use serde::Serialize;
 use tauri::{command, Builder, Wry};
 use tauri_plugin_shell::ShellExt;
-use windows::core::GUID;
 use windows::Win32::Graphics::Dwm::DwmGetColorizationColor;
-use windows::Win32::UI::Input::KeyboardAndMouse::{
-    VIRTUAL_KEY, VK_MEDIA_NEXT_TRACK, VK_MEDIA_PLAY_PAUSE, VK_MEDIA_PREV_TRACK,
-};
 
 use crate::error_handler::Result;
 use crate::seelen::{get_app_handle, Seelen, SEELEN};
@@ -16,63 +12,12 @@ use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
 use crate::utils::{is_windows_10, is_windows_11};
-use crate::windows_api::WindowsApi;
 use crate::{apps_config::*, log_error, trace_lock};
 
+use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
 use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
-
-fn press_key(key: VIRTUAL_KEY) -> Result<(), String> {
-    let app = get_app_handle();
-
-    app.shell()
-        .command("powershell")
-        .args([
-            "-NoProfile",
-            "-Command",
-            &format!("(new-object -com wscript.shell).SendKeys([char]{})", key.0),
-        ])
-        .spawn()
-        .expect("Fail on pressing key");
-
-    Ok(())
-}
-
-#[command]
-fn media_play_pause() -> Result<(), String> {
-    press_key(VK_MEDIA_PLAY_PAUSE)
-}
-
-#[command]
-fn media_next() -> Result<(), String> {
-    press_key(VK_MEDIA_NEXT_TRACK)
-}
-
-#[command]
-fn media_prev() -> Result<(), String> {
-    press_key(VK_MEDIA_PREV_TRACK)
-}
-
-#[command]
-pub fn media_toggle_mute() -> Result<()> {
-    unsafe {
-        let endpoint = WindowsApi::get_default_audio_endpoint()?;
-        let muted = endpoint.GetMute()?.as_bool();
-        endpoint.SetMute(!muted, &GUID::zeroed())?;
-    }
-    Ok(())
-}
-
-#[command]
-pub fn set_volume_level(level: f32) -> Result<(), String> {
-    unsafe {
-        WindowsApi::get_default_audio_endpoint()?
-            .SetMasterVolumeLevelScalar(level, &GUID::zeroed())
-            .unwrap()
-    };
-    Ok(())
-}
 
 #[command]
 fn refresh_state() {
@@ -212,9 +157,9 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         set_auto_start,
         get_auto_start_status,
         // Media
-        media_play_pause,
-        media_next,
         media_prev,
+        media_toggle_play_pause,
+        media_next,
         set_volume_level,
         media_toggle_mute,
         // Brightness

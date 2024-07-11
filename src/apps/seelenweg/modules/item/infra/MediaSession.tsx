@@ -1,7 +1,7 @@
 import { Icon } from '../../../../shared/components/Icon';
 import { SavedMediaItem } from '../../../../shared/schemas/SeelenWegItems';
 import { DraggableItem } from './DraggableItem';
-import { convertFileSrc } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
@@ -16,12 +16,13 @@ import './MediaSession.css';
 
 const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
-const BRIGHTNESS_MULTIPLIER = 1.25; // used in css
+const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
 export function MediaSession({ item }: { item: SavedMediaItem }) {
   const [luminance, setLuminance] = useState(0);
 
-  const session = useSelector(Selectors.mediaLastPlayedSession);
+  const sessions = useSelector(Selectors.mediaSessions);
+  const session = sessions.find((s) => s.default);
 
   let src = convertFileSrc(
     session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
@@ -40,6 +41,13 @@ export function MediaSession({ item }: { item: SavedMediaItem }) {
     MIN_LUMINANCE,
   );
   const color = filteredLuminance < 125 ? '#efefef' : '#222222';
+
+  const onClickBtn = (cmd: string) => {
+    if (session) {
+      invoke(cmd, { id: session.id }).catch(console.error);
+    }
+  };
+
   return (
     <DraggableItem item={item}>
       <div className="media-session-container">
@@ -57,16 +65,28 @@ export function MediaSession({ item }: { item: SavedMediaItem }) {
               {session?.title || 'No Media'}
             </span>
             <div className="media-session-actions">
-              <Button type="text" size="small">
+              <Button
+                type="text"
+                size="small"
+                onClick={onClickBtn.bind(null, 'media_prev')}
+              >
                 <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color, size: 12 }} />
               </Button>
-              <Button type="text" size="small">
+              <Button
+                type="text"
+                size="small"
+                onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
+              >
                 <Icon
                   iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
                   propsIcon={{ color, size: 12 }}
                 />
               </Button>
-              <Button type="text" size="small">
+              <Button
+                type="text"
+                size="small"
+                onClick={onClickBtn.bind(null, 'media_next')}
+              >
                 <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color, size: 12 }} />
               </Button>
             </div>

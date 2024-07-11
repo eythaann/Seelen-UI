@@ -51,8 +51,18 @@ right:
 
   - type: media
     withMediaControls: true
-    template: icon.IoVolumeHighOutline
-    tooltip: '"Media Controls"'
+    template: >-
+      isMuted
+      ? icon.IoVolumeMuteOutline
+      : volume >= 0.66
+      ? icon.IoVolumeHighOutline
+      : volume >= 0.33
+      ? icon.IoVolumeMediumOutline
+      : volume != 0
+      ? icon.IoVolumeLowOutline
+      : icon.IoVolumeOffOutline
+    tooltip: >-
+      concat("Volume: ", string(round(volume * 100)), "%")
 
   - type: power
     tooltip: >-

@@ -27,7 +27,6 @@ const initialState: RootState = {
   isOverlaped: false,
   settings: SeelenWegSlice.getInitialState(),
   mediaSessions: [],
-  mediaLastPlayedSession: null,
 };
 
 function removeAppFromState(state: RootState, searched: SwPinnedApp | SwTemporalApp) {
@@ -170,19 +169,6 @@ export const RootSlice = createSlice({
       removeHwnd(state.itemsOnLeft, action.payload);
       removeHwnd(state.itemsOnCenter, action.payload);
       removeHwnd(state.itemsOnRight, action.payload);
-    },
-    updateLastMediaPlayedSession(state) {
-      let last = state.mediaLastPlayedSession;
-      let current = state.mediaSessions.find((session) => session.playing);
-      let lastWasClosed = last && state.mediaSessions.every((session) => session.title !== last!.title);
-
-      if (current) {
-        state.mediaLastPlayedSession = current;
-      } else if (!last || lastWasClosed) {
-        state.mediaLastPlayedSession = state.mediaSessions[0] || null;
-      } else {
-        state.mediaLastPlayedSession!.playing = false;
-      }
     },
   },
 });

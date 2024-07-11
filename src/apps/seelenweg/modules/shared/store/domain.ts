@@ -30,10 +30,12 @@ export enum AppsSides {
 }
 
 export interface MediaSession {
+  id: string;
   title: string;
   author: string;
   thumbnail: string | null;
   playing: boolean;
+  default: boolean;
 }
 
 export type SwPinnedApp = modify<
@@ -63,5 +65,4 @@ export interface RootState extends IRootState<Seelenweg> {
   focusedHandle: HWND;
   isOverlaped: boolean;
   mediaSessions: MediaSession[];
-  mediaLastPlayedSession: MediaSession | null;
 }

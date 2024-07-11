@@ -50,10 +50,20 @@ right:
       )
       : icon.TbWorldCancel
 
-  - type: generic
-    template: icon.IoVolumeHighOutline
-    onClick: open -> "ms-settings:sound"
-    tooltip: '"Sound"'
+  - type: media
+    withMediaControls: true
+    template: >-
+      isMuted
+      ? icon.IoVolumeMuteOutline
+      : volume >= 0.66
+      ? icon.IoVolumeHighOutline
+      : volume >= 0.33
+      ? icon.IoVolumeMediumOutline
+      : volume != 0
+      ? icon.IoVolumeLowOutline
+      : icon.IoVolumeOffOutline
+    tooltip: >-
+      concat("Volume: ", string(round(volume * 100)), "%")
 
   - type: power
     tooltip: >-

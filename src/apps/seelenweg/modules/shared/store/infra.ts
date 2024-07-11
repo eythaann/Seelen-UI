@@ -100,7 +100,6 @@ export async function registerStoreEvents() {
 
   await listenGlobal<MediaSession[]>('media-sessions', (event) => {
     store.dispatch(RootActions.setMediaSessions(event.payload));
-    store.dispatch(RootActions.updateLastMediaPlayedSession());
   });
 }
 

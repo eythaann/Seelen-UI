@@ -1,11 +1,11 @@
-use std::{path::PathBuf, sync::Arc};
+use std::{collections::HashMap, sync::Arc};
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use serde::Serialize;
 use windows::{
-    Foundation::TypedEventHandler,
+    Foundation::{EventRegistrationToken, TypedEventHandler},
     Media::Control::{
+        GlobalSystemMediaTransportControlsSession,
         GlobalSystemMediaTransportControlsSessionManager,
         GlobalSystemMediaTransportControlsSessionPlaybackStatus,
     },
@@ -25,19 +25,17 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, windows_api::Com};
+use crate::{error_handler::Result, log_error, windows_api::Com};
+
+use super::domain::MediaSession;
 
 lazy_static! {
     pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> =
         Arc::new(Mutex::new(MediaManager::new()));
-}
-
-#[derive(Debug, Serialize)]
-pub struct MediaSession {
-    title: String,
-    author: String,
-    thumbnail: Option<PathBuf>,
-    playing: bool,
+    pub static ref REG_PROPERTY_EVENTS: Arc<Mutex<HashMap<String, EventRegistrationToken>>> =
+        Arc::new(Mutex::new(HashMap::new()));
+    pub static ref REG_PLAYBACK_EVENTS: Arc<Mutex<HashMap<String, EventRegistrationToken>>> =
+        Arc::new(Mutex::new(HashMap::new()));
 }
 
 #[windows::core::implement(IAudioEndpointVolumeCallback)]
@@ -199,8 +197,23 @@ impl MediaManager {
         }
     }
 
+    pub fn session_by_id(
+        &self,
+        id: &str,
+    ) -> Result<Option<GlobalSystemMediaTransportControlsSession>> {
+        for session in self.sessions_manager.GetSessions()? {
+            if session.SourceAppUserModelId()?.to_string_lossy() == id {
+                return Ok(Some(session));
+            }
+        }
+        Ok(None)
+    }
+
     pub async fn request_media_sessions(&self) -> Result<Vec<MediaSession>> {
         let mut sessions = Vec::new();
+
+        let default_session = self.sessions_manager.GetCurrentSession()?;
+        let default_session_id = default_session.SourceAppUserModelId()?.to_string_lossy();
 
         for session in self.sessions_manager.GetSessions()? {
             let properties = session.TryGetMediaPropertiesAsync()?.await?;
@@ -223,12 +236,15 @@ impl MediaManager {
 
             let playback_info = session.GetPlaybackInfo()?;
             let status = playback_info.PlaybackStatus()?;
+            let id = session.SourceAppUserModelId()?.to_string_lossy();
 
             sessions.push(MediaSession {
                 title: properties.Title()?.to_string_lossy(),
                 author: properties.Artist()?.to_string_lossy(),
                 thumbnail: Some(image_path),
                 playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
+                default: id == default_session_id,
+                id,
             });
         }
 
@@ -289,31 +305,59 @@ impl MediaManager {
 
         std::thread::spawn(move || -> Result<()> {
             let callback = Arc::new(callback);
-
             let callback_clone = Arc::clone(&callback);
-            let property_changed = TypedEventHandler::new(move |_, _| {
-                callback_clone();
-                Ok(())
-            });
 
-            let callback_clone = Arc::clone(&callback);
-            let playback_info_changed = TypedEventHandler::new(move |_, _| {
-                callback_clone();
-                Ok(())
-            });
+            let register_sessions: Arc<dyn Fn() -> Result<()> + Send + Sync> =
+                Arc::new(move || -> Result<()> {
+                    let callback_clone = Arc::clone(&callback);
+                    let property_changed = TypedEventHandler::new(move |_, _| {
+                        callback_clone();
+                        Ok(())
+                    });
 
-            // add initial listeners
-            for session in transport_session_manager.GetSessions()? {
-                println!(
-                    "SESSION: {}",
-                    session.SourceAppUserModelId()?.to_string_lossy()
-                );
-                session.MediaPropertiesChanged(&property_changed)?;
-                session.PlaybackInfoChanged(&playback_info_changed)?;
-            }
+                    let callback_clone = Arc::clone(&callback);
+                    let playback_info_changed = TypedEventHandler::new(move |_, _| {
+                        callback_clone();
+                        Ok(())
+                    });
+                    let controls_session_manager = tauri::async_runtime::block_on(
+                        GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?,
+                    )?;
 
-            let callback_clone = Arc::clone(&callback);
+                    for session in controls_session_manager.GetSessions()? {
+                        let string_id = session.SourceAppUserModelId()?.to_string_lossy();
+
+                        let mut property_dict = REG_PROPERTY_EVENTS.lock();
+                        let mut playback_dict = REG_PLAYBACK_EVENTS.lock();
+
+                        if let Some(token) = property_dict.get(&string_id) {
+                            session.RemoveMediaPropertiesChanged(*token)?;
+                        }
+
+                        if let Some(token) = playback_dict.get(&string_id) {
+                            session.RemoveMediaPropertiesChanged(*token)?;
+                        }
+
+                        property_dict.insert(
+                            string_id.clone(),
+                            session.MediaPropertiesChanged(&property_changed)?,
+                        );
+                        playback_dict.insert(
+                            string_id.clone(),
+                            session.PlaybackInfoChanged(&playback_info_changed)?,
+                        );
+                    }
+
+                    Ok(())
+                });
+
+            // register initial sessions on startup
+            register_sessions()?;
+
+            // listen for futures changes in sessions
+            let cloned_register_sessions = Arc::clone(&register_sessions);
             transport_session_manager.SessionsChanged(&TypedEventHandler::new(move |_, _| {
+                log_error!(cloned_register_sessions());
                 callback_clone();
                 Ok(())
             }))?;
