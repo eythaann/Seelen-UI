@@ -20,15 +20,12 @@ if (fs.existsSync(msixCmdsPath)) {
   fs.mkdirSync(path.dirname(msixCmdsPath));
 }
 
-fs.appendFileSync(
-  msixCmdsPath,
-  `setIdentity --packageVersion ${packageVersion}\n`,
-);
+fs.appendFileSync(msixCmdsPath, `setIdentity --packageVersion ${packageVersion}\n`);
 
 fs.appendFileSync(
   msixCmdsPath,
-  `addFile --target "${tauriConfig.productName}.exe" --source "${path.resolve(
-    `target/release/${tauriConfig.productName}.exe`,
+  `addFile --target "${packageJson.productName}.exe" --source "${path.resolve(
+    `target/release/${packageJson.productName}.exe`,
   )}"\n`,
 );
 
@@ -43,7 +40,9 @@ tauriConfig.bundle.resources.forEach((pattern) => {
 });
 
 try {
-  fs.mkdirSync(installer_msix_path.split(path.sep).slice(0, -1).join(path.sep), { recursive: true });
+  fs.mkdirSync(installer_msix_path.split(path.sep).slice(0, -1).join(path.sep), {
+    recursive: true,
+  });
   fs.copyFileSync(msixTemplatePath, installer_msix_path);
 
   const buffer = execSync(`msixHeroCli edit "${installer_msix_path}" list "${msixCmdsPath}"`);
