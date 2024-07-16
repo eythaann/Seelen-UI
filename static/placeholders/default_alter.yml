@@ -31,10 +31,10 @@ right:
     template: icon.BsThreeDots
     tooltip: '"Open system tray"'
 
-  - type: generic
+  - type: device
     template: icon.TbBluetoothConnected
-    onClick: open -> "ms-settings:bluetooth"
-    tooltip: '"Bluetooth"'
+    onClick: open -> "ms-settings:connecteddevices"
+    tooltip: '"Bluetooth & Devices"'
 
   - type: network
     withWlanSelector: true

@@ -1,10 +1,12 @@
 import { Placeholder, ToolbarModule, ToolbarModuleType } from '../../../shared/schemas/Placeholders';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
+import { JSXElementConstructor } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
 import { DateModule } from '../Date/infra';
+import { DeviceModule } from '../Device/infra';
 import { Item } from '../item/infra';
 import { MediaModule } from '../media/infra/Module';
 import { NetworkModule } from '../network/infra/Module';
@@ -13,36 +15,22 @@ import { SettingsModule } from '../Settings/infra';
 
 import { Selectors } from '../shared/store/app';
 
+const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
+  [ToolbarModuleType.Generic]: Item,
+  [ToolbarModuleType.Text]: Item,
+  [ToolbarModuleType.Date]: DateModule,
+  [ToolbarModuleType.Power]: PowerModule,
+  [ToolbarModuleType.Settings]: SettingsModule,
+  [ToolbarModuleType.Workspaces]: WorkspacesModule,
+  [ToolbarModuleType.Tray]: TrayModule,
+  [ToolbarModuleType.Network]: NetworkModule,
+  [ToolbarModuleType.Media]: MediaModule,
+  [ToolbarModuleType.Device]: DeviceModule,
+};
+
 function componentByModule(module: ToolbarModule, idx: number) {
-  switch (module.type) {
-    case ToolbarModuleType.Text:
-    case ToolbarModuleType.Generic:
-      return <Item key={idx} module={module} />;
-
-    case ToolbarModuleType.Date:
-      return <DateModule key={idx} module={module} />;
-
-    case ToolbarModuleType.Power:
-      return <PowerModule key={idx} module={module} />;
-
-    case ToolbarModuleType.Settings:
-      return <SettingsModule key={idx} module={module} />;
-
-    case ToolbarModuleType.Workspaces:
-      return <WorkspacesModule key={idx} module={module} />;
-
-    case ToolbarModuleType.Tray:
-      return <TrayModule key={idx} module={module} />;
-
-    case ToolbarModuleType.Network:
-      return <NetworkModule key={idx} module={module} />;
-
-    case ToolbarModuleType.Media:
-      return <MediaModule key={idx} module={module} />;
-
-    default:
-      return null;
-  }
+  let Component = modulesByType[module.type];
+  return <Component key={idx} module={module} />;
 }
 
 interface Props {

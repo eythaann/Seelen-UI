@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- replace "bluetooth" for "devices" on bundled fancy toolbar placeholders.
+
 ## [1.8.0]
 ### features
 - Media module added to the toolbar.

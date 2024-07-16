@@ -2,16 +2,18 @@ import { CreatorInfoSchema } from '.';
 import z from 'zod';
 
 export enum ToolbarModuleType {
+  // generic types
   Generic = 'generic',
   Text = 'text',
+  // special types
   Date = 'date',
   Power = 'power',
   Settings = 'settings',
   Network = 'network',
   Workspaces = 'workspaces',
   Media = 'media',
-  Bluetooth = 'bluetooth',
   Tray = 'tray',
+  Device = 'device',
 }
 
 export enum WorkspaceTMMode {
@@ -25,6 +27,12 @@ export enum TimeUnit {
   MINUTE = 'minute',
   HOUR = 'hour',
   DAY = 'day',
+}
+
+export enum DeviceTMSubType {
+  Disk = 'disk',
+  CPU = 'cpu',
+  Memory = 'memory',
 }
 
 export const BaseTMSchema = z.object({
@@ -80,6 +88,11 @@ export const MediaTMSchema = BaseTMSchema.extend({
   withMediaControls: z.boolean().default(false),
 });
 
+export type DeviceTM = z.infer<typeof DeviceTMSchema>;
+export const DeviceTMSchema = BaseTMSchema.extend({
+  type: z.literal(ToolbarModuleType.Device),
+});
+
 export type SettingsToolbarModule = z.infer<typeof SettingsToolbarModuleSchema>;
 export const SettingsToolbarModuleSchema = BaseTMSchema.extend({
   type: z.literal(ToolbarModuleType.Settings),
@@ -101,6 +114,7 @@ export const ToolbarModuleSchema = z.union([
   TrayTMSchema,
   NetworkTMSchema,
   MediaTMSchema,
+  DeviceTMSchema,
 ]);
 
 type InnerPlaceholder = z.infer<typeof PlaceholderSchema>;
