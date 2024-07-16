@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - styles can be specified in fancy toolbar placeholder item.
+- fancy toolbar item now will have an unique id, this can be specified in the placeholder file.
 
 ### enhancements
 - replace "bluetooth" for "devices" on bundled fancy toolbar placeholders.

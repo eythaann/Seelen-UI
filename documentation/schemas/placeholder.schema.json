@@ -27,6 +27,10 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "type": "string",
+                "default": "64622d88-d889-435a-ac21-15f19839ade6"
+              },
               "type": {
                 "type": "string",
                 "enum": [
@@ -66,6 +70,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "date"
@@ -106,6 +113,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "power"
@@ -131,6 +141,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "settings"
@@ -156,6 +169,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "workspaces"
@@ -190,6 +206,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "tray"
@@ -215,6 +234,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "network"
@@ -245,6 +267,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "media"
@@ -274,6 +299,9 @@
           {
             "type": "object",
             "properties": {
+              "id": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/id"
+              },
               "type": {
                 "type": "string",
                 "const": "device"

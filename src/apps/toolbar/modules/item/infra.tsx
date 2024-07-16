@@ -73,7 +73,7 @@ export function ElementsFromEvaluated(content: any) {
 }
 
 export function Item({ extraVars, module, active }: Props) {
-  const { template, tooltip, onClick, style } = module;
+  const { template, tooltip, onClick, style, id } = module;
 
   const [mounted, setMounted] = React.useState(false);
   const env = useSelector(Selectors.env);
@@ -114,16 +114,15 @@ export function Item({ extraVars, module, active }: Props) {
       title={tooltip ? ElementsFromEvaluated(evaluate(tooltip, scope.current)) : undefined}
     >
       <div
-        onClick={() => performClick(onClick, scope.current)}
+        id={id}
+        style={style}
         className={cx('ft-bar-item', {
           'ft-bar-item-clickable': !!onClick,
           'ft-bar-item-active': active,
         })}
-        style={style}
+        onClick={() => performClick(onClick, scope.current)}
       >
-        <div className="ft-bar-item-content">
-          {elements}
-        </div>
+        <div className="ft-bar-item-content">{elements}</div>
       </div>
     </Tooltip>
   );

@@ -36,6 +36,7 @@ export enum DeviceTMSubType {
 }
 
 export const BaseTMSchema = z.object({
+  id: z.string().default(() => crypto.randomUUID()),
   type: z.nativeEnum(ToolbarModuleType),
   template: z
     .string()
