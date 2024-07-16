@@ -73,7 +73,7 @@ export function ElementsFromEvaluated(content: any) {
 }
 
 export function Item({ extraVars, module, active }: Props) {
-  const { template, tooltip, onClick } = module;
+  const { template, tooltip, onClick, style } = module;
 
   const [mounted, setMounted] = React.useState(false);
   const env = useSelector(Selectors.env);
@@ -119,8 +119,11 @@ export function Item({ extraVars, module, active }: Props) {
           'ft-bar-item-clickable': !!onClick,
           'ft-bar-item-active': active,
         })}
+        style={style}
       >
-        <div className="ft-bar-item-content">{elements}</div>
+        <div className="ft-bar-item-content">
+          {elements}
+        </div>
       </div>
     </Tooltip>
   );

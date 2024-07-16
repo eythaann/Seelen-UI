@@ -51,6 +51,11 @@
                   "null"
                 ],
                 "default": null
+              },
+              "style": {
+                "type": "object",
+                "additionalProperties": {},
+                "default": {}
               }
             },
             "required": [
@@ -73,6 +78,9 @@
               },
               "onClick": {
                 "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
               },
               "each": {
                 "type": "string",
@@ -110,6 +118,9 @@
               },
               "onClick": {
                 "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
               }
             },
             "required": [
@@ -132,6 +143,9 @@
               },
               "onClick": {
                 "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
               }
             },
             "required": [
@@ -154,6 +168,9 @@
               },
               "onClick": {
                 "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
               },
               "mode": {
                 "type": "string",
@@ -185,6 +202,9 @@
               },
               "onClick": {
                 "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
               }
             },
             "required": [
@@ -208,10 +228,67 @@
               "onClick": {
                 "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
               },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
+              },
               "withWlanSelector": {
                 "type": "boolean",
                 "description": "Show Wi-fi settings on click (overrides onClick property)",
                 "default": false
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "media"
+              },
+              "template": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/template"
+              },
+              "tooltip": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/tooltip"
+              },
+              "onClick": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
+              },
+              "withMediaControls": {
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "const": "device"
+              },
+              "template": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/template"
+              },
+              "tooltip": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/tooltip"
+              },
+              "onClick": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/onClick"
+              },
+              "style": {
+                "$ref": "#/properties/left/items/anyOf/0/properties/style"
               }
             },
             "required": [

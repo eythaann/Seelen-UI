@@ -46,6 +46,7 @@ export const BaseTMSchema = z.object({
     .default('"Unset"'),
   tooltip: z.string().nullable().default(null),
   onClick: z.string().nullable().default(null),
+  style: z.record(z.string(), z.any()).default({}),
 });
 
 export type GenericToolbarModule = z.infer<typeof GenericToolbarModuleSchema>;

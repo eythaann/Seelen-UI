@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- styles can be specified in fancy toolbar placeholder item.
+
 ### enhancements
 - replace "bluetooth" for "devices" on bundled fancy toolbar placeholders.
 

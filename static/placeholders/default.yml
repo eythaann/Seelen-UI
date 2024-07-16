@@ -7,12 +7,16 @@ left:
     template: concat("@", env.USERNAME)
     onClick: open -> env.USERPROFILE
     tooltip: '"Open user folder"'
+    style:
+      flexShrink: 0
 
   - type: text
     template: '"|"'
 
   - type: text
     template: window.name
+    style:
+      flexShrink: 0
 
   - type: text
     template: >
@@ -20,6 +24,8 @@ left:
 
   - type: text
     template: window.title
+    style:
+      flexShrink: 2
 
 center:
   - type: date
