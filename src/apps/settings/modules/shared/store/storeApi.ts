@@ -194,6 +194,7 @@ export class UserSettingsLoader {
   private _withUserApps: boolean = false;
   private _withLayouts: boolean = false;
   private _withPlaceholders: boolean = false;
+  private _withThemes: boolean = true;
 
   withUserApps() {
     this._withUserApps = true;
@@ -207,6 +208,11 @@ export class UserSettingsLoader {
 
   withPlaceholders() {
     this._withPlaceholders = true;
+    return this;
+  }
+
+  withThemes(value: boolean) {
+    this._withThemes = value;
     return this;
   }
 
@@ -238,7 +244,9 @@ export class UserSettingsLoader {
       }
     }
 
-    await loadUserThemes(userSettings);
+    if (this._withThemes) {
+      await loadUserThemes(userSettings);
+    }
 
     if (this._withLayouts) {
       await loadUserLayouts(userSettings);
@@ -272,14 +280,19 @@ export async function loadAppsTemplates() {
   return result;
 }
 
-export async function saveUserSettings(settings: UserSettings) {
+export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
   const json_route = await resolveDotConfigPath('settings.json');
-  const yaml_route = await resolveDotConfigPath('applications.yml');
-
   await fs.writeTextFile(
     json_route,
-    JSON.stringify(VariableConvention.fromCamelToSnake(settings.jsonSettings)),
+    JSON.stringify(VariableConvention.fromCamelToSnake(settings)),
   );
+}
+
+export async function saveUserSettings(settings: UserSettings) {
+  const yaml_route = await resolveDotConfigPath('applications.yml');
+
+  await saveJsonSettings(settings.jsonSettings);
+
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
 
   await invoke('refresh_state');

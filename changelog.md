@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - fancy toolbar items now can be dragged of position.
+- using fancy toolbar's layout now can be modified and saved as custom.yml.
 
 ## [1.8.1]
 ### features

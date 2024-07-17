@@ -1,13 +1,14 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
 import { parseAsCamel } from '../../../../shared/schemas';
 import { FancyToolbarSchema } from '../../../../shared/schemas/FancyToolbar';
-import { ToolbarModule } from '../../../../shared/schemas/Placeholders';
+import { Placeholder, ToolbarModule } from '../../../../shared/schemas/Placeholders';
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from './domain';
 
 const initialState: RootState = {
+  version: 0,
   focused: null,
   themeLayers: defaultTheme.layers,
   placeholder: null,
@@ -41,6 +42,10 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
+    setPlaceholder(state, action: PayloadAction<Placeholder | null>) {
+      state.placeholder = action.payload;
+      state.version++;
+    },
     setItemsOnLeft(state, action: PayloadAction<ToolbarModule[]>) {
       if (state.placeholder) {
         state.placeholder.left = action.payload;

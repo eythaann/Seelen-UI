@@ -42,6 +42,7 @@ export interface MediaSession {
 }
 
 export interface RootState extends IRootState<FancyToolbar> {
+  version: number;
   focused: ActiveApp | null;
   placeholder: Placeholder | null;
   env: Record<string, string>;

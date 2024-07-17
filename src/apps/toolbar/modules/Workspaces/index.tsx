@@ -36,7 +36,7 @@ export function WorkspacesModule({ module }: Props) {
   }
 
   return (
-    <Reorder.Item as="div" id={module.id} value={module}>
+    <Reorder.Item as="div" id={module.id} value={module} className="ft-bar-group">
       {workspaces.map((name, idx) => {
         return (
           <Tooltip

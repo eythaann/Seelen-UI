@@ -5,9 +5,9 @@ import {
 } from '../../../shared/schemas/Placeholders';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
-import { Reorder } from 'framer-motion';
+import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
-import { JSXElementConstructor, useCallback, useEffect, useRef } from 'react';
+import { JSXElementConstructor, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
@@ -20,6 +20,7 @@ import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
+import { SavePlaceholderAsCustom } from './application';
 
 const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
   [ToolbarModuleType.Generic]: Item,
@@ -49,46 +50,29 @@ function componentByModule(module: ToolbarModule) {
 export function ToolBar({ structure }: Props) {
   const layers = useSelector(Selectors.themeLayers);
 
-  const leftRef = useRef<HTMLDivElement>(null);
-  const centerRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
-
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (!leftRef.current || !centerRef.current || !rightRef.current) {
-      return;
-    }
-
-    leftRef.current.style.width = `calc(50% - ${centerRef.current.offsetWidth / 2}px)`;
-    rightRef.current.style.width = `calc(50% - ${centerRef.current.offsetWidth / 2}px)`;
-  }, [structure.center]);
+  const [forceUpdate] = useForceUpdate();
 
   const onReorderPinned = useCallback(
     debounce((apps: (ToolbarModule | string)[]) => {
-      let extractedPinned: ToolbarModule[] = [];
+      let dividerStart = apps.indexOf(DividerStart);
+      let dividerEnd = apps.indexOf(DividerEnd);
 
-      console.log(apps);
+      if (dividerStart === -1 || dividerEnd === -1) {
+        forceUpdate();
+        return;
+      }
 
-      apps.forEach((app) => {
-        if (app === DividerStart) {
-          dispatch(RootActions.setItemsOnLeft(extractedPinned));
-          extractedPinned = [];
-          return;
-        }
+      let payload = apps.slice(0, dividerStart) as ToolbarModule[];
+      dispatch(RootActions.setItemsOnLeft(payload));
 
-        if (app === DividerEnd) {
-          dispatch(RootActions.setItemsOnCenter(extractedPinned));
-          extractedPinned = [];
-          return;
-        }
+      payload = apps.slice(dividerStart + 1, dividerEnd) as ToolbarModule[];
+      dispatch(RootActions.setItemsOnCenter(payload));
 
-        if (typeof app !== 'string') {
-          extractedPinned.push(app);
-        }
-      });
+      payload = apps.slice(dividerEnd + 1) as ToolbarModule[];
+      dispatch(RootActions.setItemsOnRight(payload));
 
-      dispatch(RootActions.setItemsOnRight(extractedPinned));
+      SavePlaceholderAsCustom();
     }, 10),
     [],
   );
@@ -108,14 +92,12 @@ export function ToolBar({ structure }: Props) {
       as="div"
     >
       <BackgroundByLayers prefix="ft-bar" layers={layers.toolbar.bg} />
-      <div className="ft-bar-left" ref={leftRef}>
+      <div className="ft-bar-left">
         {structure.left.map(componentByModule)}
         <Reorder.Item as="div" value={DividerStart} drag={false} style={{ flex: 1 }} />
       </div>
-      <div className="ft-bar-center" ref={centerRef}>
-        {structure.center.map(componentByModule)}
-      </div>
-      <div className="ft-bar-right" ref={rightRef}>
+      <div className="ft-bar-center">{structure.center.map(componentByModule)}</div>
+      <div className="ft-bar-right">
         <Reorder.Item as="div" value={DividerEnd} drag={false} style={{ flex: 1 }} />
         {structure.right.map(componentByModule)}
       </div>

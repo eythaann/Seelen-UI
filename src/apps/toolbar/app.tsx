@@ -19,13 +19,15 @@ async function onMount() {
 }
 
 export function App() {
+  const version = useSelector(Selectors.version);
+
   const structure = useSelector(Selectors.placeholder);
   const accentColor = useSelector(Selectors.accentColor);
 
   const isDarkMode = useDarkMode();
 
   useEffect(() => {
-    onMount();
+    onMount().catch(console.error);
   }, []);
 
   if (!structure) {
@@ -43,7 +45,7 @@ export function App() {
       }}
     >
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <ToolBar structure={structure} />
+        <ToolBar key={version} structure={structure} />
       </ErrorBoundary>
     </ConfigProvider>
   );
