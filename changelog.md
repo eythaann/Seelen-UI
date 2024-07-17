@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.2]
 ### features
 - fancy toolbar items now can be dragged of position.
 - using fancy toolbar's layout now can be modified and saved as custom.yml.
