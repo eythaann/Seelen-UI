@@ -12,7 +12,7 @@ interface Props {
   module: NetworkTM;
 }
 
-function NetworkModuleItem({ module }: Props) {
+function NetworkModuleItem({ module, ...rest }: Props) {
   const networkAdapters = useSelector(Selectors.networkAdapters);
   const defaultIp = useSelector(Selectors.networkLocalIp);
   const online = useSelector(Selectors.online);
@@ -21,15 +21,13 @@ function NetworkModuleItem({ module }: Props) {
 
   return (
     <Item
+      {...rest}
       extraVars={{
         online,
         interfaces: networkAdapters,
         usingInterface: usingAdapter,
       }}
-      module={{
-        ...module,
-        onClick: module.withWlanSelector ? 'nothing' : module.onClick,
-      }}
+      module={module}
     />
   );
 }

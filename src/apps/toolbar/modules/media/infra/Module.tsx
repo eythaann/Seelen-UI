@@ -12,17 +12,15 @@ interface Props {
   module: MediaTM;
 }
 
-function MediaModuleItem({ module }: Props) {
+function MediaModuleItem({ module, ...rest }: Props) {
   const volume = useSelector(Selectors.mediaVolume);
   const isMuted = useSelector(Selectors.mediaMuted);
 
   return (
     <Item
+      {...rest}
       extraVars={{ volume, isMuted }}
-      module={{
-        ...module,
-        onClick: module.withMediaControls ? 'nothing' : module.onClick,
-      }}
+      module={module}
     />
   );
 }

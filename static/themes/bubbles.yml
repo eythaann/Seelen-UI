@@ -2,7 +2,7 @@ info:
   displayName: Bubbles
   author: eythaann
   description: Bubbles says pop.
-  tags: ['toolbar']
+  tags: ["toolbar"]
 styles:
   toolbar: |
     .ft-bar-bg-layer-1 {
@@ -27,15 +27,6 @@ styles:
 
         &:hover {
           background-color: #323232;
-        }
-      }
-    }
-
-    .fancy-toolbar {
-      .ft-bar {
-        .ft-bar-center {
-          background-color: transparent;
-          box-shadow: none;
         }
       }
     }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-type Args = undefined | string | { [x: string]: boolean | null | undefined };
+type Args = undefined | string | { [x: string]: any };
 export const cx = (...args: Args[]): string => {
   return args
     .map((arg) => {

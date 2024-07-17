@@ -137,7 +137,7 @@ export function WithMediaControls({ children }: PropsWithChildren) {
         </BackgroundByLayersV2>
       }
     >
-      <div>{children}</div>
+      {children}
     </Popover>
   );
 }

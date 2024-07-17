@@ -1,8 +1,9 @@
 import { defaultTheme } from '../../../../../shared.interfaces';
 import { parseAsCamel } from '../../../../shared/schemas';
 import { FancyToolbarSchema } from '../../../../shared/schemas/FancyToolbar';
+import { ToolbarModule } from '../../../../shared/schemas/Placeholders';
 import { StateBuilder } from '../../../../shared/StateBuilder';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from './domain';
 
@@ -40,6 +41,21 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
+    setItemsOnLeft(state, action: PayloadAction<ToolbarModule[]>) {
+      if (state.placeholder) {
+        state.placeholder.left = action.payload;
+      }
+    },
+    setItemsOnCenter(state, action: PayloadAction<ToolbarModule[]>) {
+      if (state.placeholder) {
+        state.placeholder.center = action.payload;
+      }
+    },
+    setItemsOnRight(state, action: PayloadAction<ToolbarModule[]>) {
+      if (state.placeholder) {
+        state.placeholder.right = action.payload;
+      }
+    },
   },
 });
 

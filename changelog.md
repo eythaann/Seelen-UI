@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- fancy toolbar items now can be dragged of position.
+
 ## [1.8.1]
 ### features
 - styles can be specified in fancy toolbar placeholder item.

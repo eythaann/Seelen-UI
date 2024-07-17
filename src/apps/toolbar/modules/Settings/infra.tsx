@@ -21,7 +21,7 @@ interface Brightness {
   current: number;
 }
 
-export function SettingsModule(props: Props) {
+export function SettingsModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
   const [brightness, setBrightness] = useState<Brightness>({
     min: 0,
@@ -118,14 +118,7 @@ export function SettingsModule(props: Props) {
         </div>
       }
     >
-      <div>
-        <Item
-          module={{
-            ...props.module,
-            onClick: 'nothing',
-          }}
-        />
-      </div>
+      <Item module={module} />
     </Popover>
   );
 }

@@ -68,14 +68,9 @@ export function TrayModule({ module }: Props) {
         </div>
       }
     >
-      <div>
-        <Item
-          module={{
-            ...module,
-            onClick: 'none',
-          }}
-        />
-      </div>
+      <Item
+        module={module}
+      />
     </Popover>
   );
 }

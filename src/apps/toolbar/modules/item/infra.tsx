@@ -8,6 +8,7 @@ import {
 import { ToolbarModule } from '../../../shared/schemas/Placeholders';
 import { cx } from '../../../shared/styles';
 import { Tooltip } from 'antd';
+import { Reorder } from 'framer-motion';
 import { cloneDeep } from 'lodash';
 import { evaluate } from 'mathjs';
 import React, { useEffect, useRef } from 'react';
@@ -20,6 +21,9 @@ interface Props {
   module: ToolbarModule;
   extraVars?: Record<string, any>;
   active?: boolean;
+  // needed for dropdown/popup wrappers
+  onClick?: (e: React.MouseEvent) => void;
+  onKeydown?: (e: React.KeyboardEvent) => void;
 }
 
 class Scope {
@@ -72,7 +76,14 @@ export function ElementsFromEvaluated(content: any) {
   return result;
 }
 
-export function Item({ extraVars, module, active }: Props) {
+export function Item(props: Props) {
+  const {
+    extraVars,
+    module,
+    active,
+    onClick: onClickProp,
+    onKeydown: onKeydownProp,
+  } = props;
   const { template, tooltip, onClick, style, id } = module;
 
   const [mounted, setMounted] = React.useState(false);
@@ -113,17 +124,24 @@ export function Item({ extraVars, module, active }: Props) {
       overlayClassName="ft-bar-item-tooltip"
       title={tooltip ? ElementsFromEvaluated(evaluate(tooltip, scope.current)) : undefined}
     >
-      <div
+      <Reorder.Item
         id={id}
         style={style}
         className={cx('ft-bar-item', {
-          'ft-bar-item-clickable': !!onClick,
+          'ft-bar-item-clickable': onClick || onClickProp,
           'ft-bar-item-active': active,
         })}
-        onClick={() => performClick(onClick, scope.current)}
+        onKeyDown={onKeydownProp}
+        onClick={(e) => {
+          onClickProp?.(e);
+          performClick(onClick, scope.current);
+        }}
+        value={module}
+        as="div"
+        transition={{ duration: 0.15 }}
       >
         <div className="ft-bar-item-content">{elements}</div>
-      </div>
+      </Reorder.Item>
     </Tooltip>
   );
 }

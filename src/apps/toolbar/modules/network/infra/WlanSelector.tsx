@@ -75,7 +75,7 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
         </>
       }
     >
-      <div>{children}</div>
+      {children}
     </Popover>
   );
 }

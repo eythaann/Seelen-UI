@@ -33,33 +33,32 @@
     .ft-bar-bg-layer-2 {
       background-color: #121212aa;
     }
+  }
 
-    .ft-bar-center {
-      background-color: #12121250;
-      box-shadow: 0 0 20px 20px #12121250;
-    }
+  .ft-bar-item {
+    .workspace-dot {
+      background-color: #efefef;
+      transition-property: width, border-radius, background-color;
+      transition-duration: 200ms;
+      transition-timing-function: ease-out;
 
-    .ft-bar-left,
-    .ft-bar-right {
-      width: 45%;
-    }
-
-    .ft-bar-item {
-      &.ft-bar-item-active {
-        color: var(--config-accent-color);
-      }
-
-      .workspace-dot {
-        background-color: #efefef;
-        transition-property: width, border-radius, background-color;
-        transition-duration: 200ms;
-        transition-timing-function: ease-out;
-
-        &.workspace-dot-active {
-          background-color: var(--config-accent-color);
-        }
+      &.workspace-dot-active {
+        background-color: var(--config-accent-color);
       }
     }
+  }
+
+  .ft-bar-item-clickable {
+    padding: 4px;
+    border-radius: 6px;
+
+    &:hover {
+      backdrop-filter: brightness(3);
+    }
+  }
+
+  .ft-bar-item-active {
+    color: var(--config-accent-color);
   }
 
   .fast-settings {
