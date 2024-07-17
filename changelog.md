@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.1]
 ### features
 - styles can be specified in fancy toolbar placeholder item.
 - fancy toolbar item now will have an unique id, this can be specified in the placeholder file.
