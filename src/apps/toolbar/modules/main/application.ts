@@ -27,5 +27,5 @@ export async function SavePlaceholderAsCustom() {
   let { jsonSettings } = await new UserSettingsLoader().withThemes(false).load();
   jsonSettings.fancyToolbar.placeholder = toBeSaved.info.filename;
 
-  saveJsonSettings(jsonSettings);
+  await saveJsonSettings(jsonSettings);
 }

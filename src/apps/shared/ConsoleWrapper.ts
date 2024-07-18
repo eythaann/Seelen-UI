@@ -1,12 +1,6 @@
 import * as Logger from '@tauri-apps/plugin-log';
 import { exit } from '@tauri-apps/plugin-process';
 
-declare global {
-  interface Console {
-    throw(...params: any[]): never;
-  }
-}
-
 export function wrapConsole() {
   const WebConsole = {
     info: console.info,
@@ -16,7 +10,7 @@ export function wrapConsole() {
     trace: console.trace,
   };
 
-  const StrintifyParams = (params: any[]): string => {
+  const StringifyParams = (params: any[]): string => {
     return params.reduce((a, b) => {
       if (typeof b === 'string') {
         return a + ' ' + b;
@@ -32,32 +26,27 @@ export function wrapConsole() {
 
   console.error = (...params: any[]) => {
     WebConsole.error(...params);
-    Logger.error(StrintifyParams(params));
-  };
-
-  console.throw = (...params: any[]) => {
-    console.error(...params);
-    throw new Error();
+    Logger.error(StringifyParams(params));
   };
 
   console.warn = (...params: any[]) => {
     WebConsole.warn(...params);
-    Logger.warn(StrintifyParams(params));
+    Logger.warn(StringifyParams(params));
   };
 
   console.info = (...params: any[]) => {
     WebConsole.info(...params);
-    Logger.info(StrintifyParams(params));
+    Logger.info(StringifyParams(params));
   };
 
   console.debug = (...params: any[]) => {
     WebConsole.debug(...params);
-    Logger.debug(StrintifyParams(params));
+    Logger.debug(StringifyParams(params));
   };
 
   console.trace = (...params: any[]) => {
     WebConsole.trace(...params);
-    Logger.trace(StrintifyParams(params));
+    Logger.trace(StringifyParams(params));
   };
 
   disableRefreshAndContextMenu();

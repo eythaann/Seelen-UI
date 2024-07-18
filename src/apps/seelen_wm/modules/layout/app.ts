@@ -326,7 +326,8 @@ export class NodeImpl<T extends Node> {
         return true;
       }
       default:
-        console.throw(`Unknown reservation ${reservation}`);
+        console.error(`Unknown reservation ${reservation}`);
+        return false;
     }
   }
 
@@ -489,7 +490,8 @@ export class NodeImpl<T extends Node> {
 
       let idx = node.children.indexOf(lastAncestor);
       if (idx === -1) {
-        console.throw('Error in Trace algorithm');
+        console.error('Error in Trace algorithm');
+        return null;
       }
       idx = after ? idx + 1 : idx - 1;
       if (idx >= 0 && idx < node.children.length) {

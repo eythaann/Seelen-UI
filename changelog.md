@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### fix crash on move toolbar item
+
 ## [1.8.2]
 ### features
 - fancy toolbar items now can be dragged of position.
