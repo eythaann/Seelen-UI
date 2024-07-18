@@ -13,8 +13,7 @@
           "$DATA/**/*"
         ]
       }
-    },
-    "windows": []
+    }
   },
   "build": {
     "beforeBuildCommand": "npm run build:ui",
@@ -22,17 +21,14 @@
     "features": []
   },
   "bundle": {
+    "active": true,
+    "createUpdaterArtifacts": true,
     "resources": [
       "static/**/*"
     ],
-    "active": true,
-    "publisher": "Seelen",
-    "category": "Utility",
     "targets": [
-      "nsis",
-      "updater"
+      "nsis"
     ],
-    "externalBin": [],
     "icon": [
       "static/icons/icon.ico"
     ],
@@ -43,22 +39,22 @@
         "installerIcon": "static/icons/icon.ico",
         "sidebarImage": "static/icons/banner.bmp",
         "template": "templates/installer.nsi",
-        "installMode": "perMachine"
+        "installMode": "perMachine",
+        "startMenuFolder": "Seelen"
       }
     },
+    "publisher": "Seelen",
+    "category": "Utility",
     "longDescription": "",
     "shortDescription": "",
     "licenseFile": "LICENSE"
   },
   "plugins": {
     "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK",
       "endpoints": [
         "https://github.com/eythaann/Seelen-UI/releases/latest/download/latest.json"
-      ],
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK",
-      "windows": {
-        "installMode": "passive"
-      }
+      ]
     }
   }
 }
