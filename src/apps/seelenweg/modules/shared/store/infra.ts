@@ -7,7 +7,7 @@ import { updateHitbox } from '../../../events';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import * as fs from '@tauri-apps/plugin-fs';
 
 import { LAZY_CONSTANTS } from '../utils/infra';
@@ -47,7 +47,7 @@ async function cleanSavedItems(items: SwSavedItem[]): Promise<SwItem[]> {
 }
 
 export async function registerStoreEvents() {
-  const view = getCurrent();
+  const view = getCurrentWebviewWindow();
   const updateHitboxIfNeeded = () => {
     const { mode } = store.getState().settings;
     if (mode === SeelenWegMode.MIN_CONTENT) {

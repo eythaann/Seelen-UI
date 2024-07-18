@@ -1,17 +1,17 @@
 import { wrapConsole } from '../shared/ConsoleWrapper';
 import { PhysicalPosition, PhysicalSize } from '@tauri-apps/api/dpi';
 import { emitTo } from '@tauri-apps/api/event';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 import './index.css';
 
 async function Main() {
   wrapConsole();
-  let view = getCurrent();
+  let view = getCurrentWebviewWindow();
   let main = view.label.replace('-hitbox', '');
 
   view.listen('init', () => {
-    getCurrent().show();
+    getCurrentWebviewWindow().show();
 
     document.body.addEventListener('mousemove', () => {
       emitTo(main, 'mouseenter');
@@ -40,12 +40,12 @@ async function Main() {
 
   view.listen('resize', (event) => {
     const { width, height } = event.payload as any;
-    getCurrent().setSize(new PhysicalSize(width, height));
+    getCurrentWebviewWindow().setSize(new PhysicalSize(width, height));
   });
 
   view.listen('move', (event) => {
     const { x, y } = event.payload as any;
-    getCurrent().setPosition(new PhysicalPosition(x, y));
+    getCurrentWebviewWindow().setPosition(new PhysicalPosition(x, y));
   });
 }
 

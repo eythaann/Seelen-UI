@@ -1,5 +1,5 @@
 import { debounce, TimeoutIdRef } from '../shared/Timing';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 import { CallbacksManager } from './modules/shared/utils/app';
 
@@ -10,7 +10,7 @@ export const ExtraCallbacksOnActivate = new CallbacksManager();
 
 export function registerDocumentEvents() {
   const timeoutId: TimeoutIdRef = { current: null };
-  const webview = getCurrent();
+  const webview = getCurrentWebviewWindow();
 
   const onMouseLeave = debounce(() => {
     webview.setIgnoreCursorEvents(true);

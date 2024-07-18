@@ -1,7 +1,7 @@
 import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
 import { useDarkMode } from '../shared/styles';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -17,7 +17,7 @@ import './styles/reset.css';
 import './styles/global.css';
 
 (async function main() {
-  getCurrent().show();
+  getCurrentWebviewWindow().show();
   wrapConsole();
   const container = getRootContainer();
 

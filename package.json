@@ -5,6 +5,7 @@
   "description": "Seelen UI Project",
   "scripts": {
     "tauri": "tauri",
+    "tauri:update": "ts-node scripts/UpdateTauri.ts",
     "dev": "nodemon --config nodemon.json",
     "test": "jest",
     "build:ui": "ts-node scripts/build.ts",
@@ -12,7 +13,6 @@
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
     "preversion": "ts-node scripts/preversion.ts",
-    "commit": "commit",
     "postinstall": "lefthook install"
   },
   "keywords": [],

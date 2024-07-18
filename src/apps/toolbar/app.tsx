@@ -3,7 +3,7 @@ import { getRootContainer } from '../shared';
 import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 import { emitTo } from '@tauri-apps/api/event';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import { ToolBar } from './modules/main/infra';
 import { Selectors } from './modules/shared/store/app';
 
 async function onMount() {
-  let view = getCurrent();
+  let view = getCurrentWebviewWindow();
   await emitTo(view.label.replace('/', '-hitbox/'), 'init');
   await view.show();
 }

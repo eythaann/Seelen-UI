@@ -1,16 +1,16 @@
 import { wrapConsole } from '../shared/ConsoleWrapper';
 import { emitTo } from '@tauri-apps/api/event';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 import './index.css';
 
 async function Main() {
   wrapConsole();
-  let view = getCurrent();
+  let view = getCurrentWebviewWindow();
   let main = view.label.replace('-hitbox', '');
 
   view.listen('init', async () => {
-    await getCurrent().show();
+    await getCurrentWebviewWindow().show();
 
     async function onClick(e: MouseEvent | TouchEvent) {
       let x = 0;

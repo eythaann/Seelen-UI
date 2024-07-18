@@ -1,6 +1,6 @@
 import { ErrorBoundary } from '../seelenweg/components/Error';
 import { wrapConsole } from '../shared/ConsoleWrapper';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -25,8 +25,8 @@ async function Main() {
 
   const WrappedRoot = () => {
     useEffect(() => {
-      getCurrent().show();
-      let view = getCurrent();
+      getCurrentWebviewWindow().show();
+      let view = getCurrentWebviewWindow();
       view.emitTo(view.label, 'complete-setup');
     }, []);
 

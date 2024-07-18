@@ -1,5 +1,5 @@
 use std::sync::atomic::{AtomicBool, Ordering};
-use tauri::Manager;
+use tauri::Emitter;
 use windows::core::GUID;
 
 use crate::{

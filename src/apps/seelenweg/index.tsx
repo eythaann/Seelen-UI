@@ -5,7 +5,7 @@ import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
 import { emitTo } from '@tauri-apps/api/event';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -20,7 +20,7 @@ import './styles/reset.css';
 import './styles/global.css';
 
 async function onMount() {
-  let view = getCurrent();
+  let view = getCurrentWebviewWindow();
   updateHitbox();
   await emitTo(view.label.replace('/', '-hitbox/'), 'init');
   await view.show();

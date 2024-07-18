@@ -5,7 +5,7 @@ import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 import { RootActions, RootSlice } from './app';
 
@@ -17,7 +17,7 @@ export const store = configureStore({
 });
 
 export async function registerStoreEvents() {
-  const view = getCurrent();
+  const view = getCurrentWebviewWindow();
 
   await view.listen<ActiveApp | null>('focus-changed', (e) => {
     store.dispatch(RootActions.setFocused(e.payload));

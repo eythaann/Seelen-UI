@@ -6,7 +6,7 @@ use std::sync::atomic::{AtomicIsize, Ordering};
 
 use getset::{Getters, MutGetters};
 use serde::Serialize;
-use tauri::{AppHandle, Manager, WebviewWindow, Wry};
+use tauri::{AppHandle, Emitter, Listener, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM},
     Graphics::Gdi::HMONITOR,

@@ -1,4 +1,4 @@
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { Update } from '@tauri-apps/plugin-updater';
 import { Button, Progress } from 'antd';
 import { useState } from 'react';
@@ -75,7 +75,7 @@ export function UpdateModal({ update }: Props) {
         </p>
       </div>
       <div className="footer">
-        <Button onClick={() => getCurrent().close()}>Later</Button>
+        <Button onClick={() => getCurrentWebviewWindow().close()}>Later</Button>
         <Button onClick={onDownload} type="primary">
           Download & Install
         </Button>

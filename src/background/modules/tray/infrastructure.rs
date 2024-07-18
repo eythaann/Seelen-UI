@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use tauri::Manager;
+use tauri::Emitter;
 
 use crate::{
     error_handler::Result, log_error, modules::tray::application::get_tray_icons,

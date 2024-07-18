@@ -1,5 +1,5 @@
 import { UpdateModal } from './update';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { check, Update } from '@tauri-apps/plugin-updater';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect, useState } from 'react';
@@ -8,7 +8,7 @@ export function App() {
   const [update, setUpdate] = useState<Update | null>(null);
 
   useEffect(() => {
-    const webview = getCurrent();
+    const webview = getCurrentWebviewWindow();
     check({})
       .then((update) => {
         if (!update) {

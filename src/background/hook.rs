@@ -10,7 +10,7 @@ use std::{
 use color_eyre::owo_colors::OwoColorize;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use tauri::Manager;
+use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
     UI::{

@@ -2,7 +2,7 @@ import { toPhysicalPixels } from '../shared';
 import { SeelenWegHideMode, SeelenWegSide } from '../shared/schemas/Seelenweg';
 import { debounce, TimeoutIdRef } from '../shared/Timing';
 import { emitTo } from '@tauri-apps/api/event';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 import { store } from './modules/shared/store/infra';
 
@@ -18,7 +18,7 @@ export const updateHitbox = debounce(async () => {
     isOverlaped,
     settings: { position, hideMode },
   } = store.getState();
-  const view = getCurrent();
+  const view = getCurrentWebviewWindow();
   const hitboxTarget = view.label.replace('/', '-hitbox/');
 
   const viewPosition = await view.innerPosition();
@@ -50,7 +50,7 @@ export const updateHitbox = debounce(async () => {
 
 export function registerDocumentEvents() {
   const timeoutId: TimeoutIdRef = { current: null };
-  const webview = getCurrent();
+  const webview = getCurrentWebviewWindow();
 
   const onMouseLeave = debounce(
     () => {

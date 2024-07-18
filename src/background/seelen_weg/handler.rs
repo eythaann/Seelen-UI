@@ -1,6 +1,6 @@
 use image::ImageFormat;
 use serde::Deserialize;
-use tauri::{command, Manager};
+use tauri::{command, Emitter};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{error_handler::Result, seelen::SEELEN, trace_lock, windows_api::WindowsApi};

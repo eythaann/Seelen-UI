@@ -1,4 +1,4 @@
-use tauri::Manager;
+use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Networking::NetworkListManager::{
     NLM_CONNECTIVITY_IPV4_INTERNET, NLM_CONNECTIVITY_IPV6_INTERNET,

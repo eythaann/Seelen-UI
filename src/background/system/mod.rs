@@ -1,5 +1,7 @@
 pub mod brightness;
 
+use tauri::Listener;
+
 use crate::{
     error_handler::Result,
     modules::{

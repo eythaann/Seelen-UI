@@ -2,7 +2,7 @@ import { UserSettings } from '../../shared.interfaces';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
 export function getRootContainer() {
   const container = document.getElementById('root');
@@ -24,7 +24,7 @@ export async function wasInstalledUsingMSIX() {
 export const setWindowAsFullSize = () => {
   const screenWidth = toPhysicalPixels(window.screen.width);
   const screenHeight = toPhysicalPixels(window.screen.height);
-  getCurrent().setSize(new PhysicalSize(screenWidth, screenHeight));
+  getCurrentWebviewWindow().setSize(new PhysicalSize(screenWidth, screenHeight));
 };
 
 export function setAccentColorAsCssVar(color: string) {

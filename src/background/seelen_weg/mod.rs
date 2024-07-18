@@ -8,7 +8,7 @@ use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use serde::Serialize;
-use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
+use tauri::{path::BaseDirectory, AppHandle, Emitter, Listener, Manager, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},

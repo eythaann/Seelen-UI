@@ -10,7 +10,7 @@ use crate::{
     windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
 use serde::Serialize;
-use tauri::{AppHandle, Manager, WebviewWindow, Wry};
+use tauri::{AppHandle, Emitter, Listener, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::HWND,
     Graphics::Gdi::HMONITOR,

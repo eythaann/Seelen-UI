@@ -1,5 +1,5 @@
 import { RouteExtraInfo, RouteLabels } from '../navigation/routes';
-import { getCurrent } from '@tauri-apps/api/webviewWindow';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { Button, Tooltip } from 'antd';
 import { useDispatch } from 'react-redux';
 
@@ -25,7 +25,7 @@ export const Header = () => {
     if (hasChanges) {
       SaveStore();
     } else {
-      getCurrent().close();
+      getCurrentWebviewWindow().close();
     }
   };
 

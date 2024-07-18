@@ -1,4 +1,4 @@
-use tauri::Manager;
+use tauri::Emitter;
 use windows::{
     core::PCWSTR,
     Win32::{
