@@ -262,13 +262,20 @@ impl Seelen {
     }
 
     fn load_uwp_apps_info(&self) -> Result<()> {
+        let time = std::time::Instant::now();
         let pwsh_script = include_str!("load_uwp_apps.ps1");
         let pwsh_script_path = temp_dir().join("load_uwp_apps.ps1");
         std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
 
-        tauri::async_runtime::block_on(async move {
-            let result = self
-                .handle()
+        let manifest_path = self
+            .handle()
+            .path()
+            .app_data_dir()?
+            .join("uwp_manifests.json");
+        let manifest_path_exist = manifest_path.exists();
+
+        let task = async move {
+            let result = get_app_handle()
                 .shell()
                 .command("powershell")
                 .args([
@@ -278,27 +285,34 @@ impl Seelen {
                     "-File",
                     &pwsh_script_path.to_string_lossy(),
                     "-SavePath",
-                    self.handle()
-                        .path()
-                        .app_data_dir()
-                        .expect("Failed to resolve app data dir")
-                        .join("uwp_manifests.json")
+                    manifest_path
                         .to_string_lossy()
                         .trim_start_matches("\\\\?\\"),
                 ])
                 .status()
                 .await;
 
+            let duration = time.elapsed();
             match result {
-                Ok(status) => {
-                    log::trace!(
-                        "load_uwp_apps exit code: {}",
-                        status.code().unwrap_or_default()
-                    );
-                }
-                Err(err) => log::error!("load_uwp_apps Failed to wait for process: {}", err),
+                Ok(status) => log::trace!(
+                    "load_uwp_apps took: {}s, exit code: {}",
+                    duration.as_secs_f32(),
+                    status.code().unwrap_or_default()
+                ),
+                Err(err) => log::error!(
+                    "load_uwp_apps took: {}, failed to wait for process: {}",
+                    duration.as_secs_f32(),
+                    err
+                ),
             };
-        });
+        };
+
+        if !manifest_path_exist {
+            tauri::async_runtime::block_on(task);
+        } else {
+            tauri::async_runtime::spawn(task);
+        }
+
         Ok(())
     }
 

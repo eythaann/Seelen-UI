@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### refactor
 - migrate settings files from `$USER/.config/seelen` to `$APPDATA/com.seelen.seelen-ui`
+- load uwp apps info asynchronously
 
 ### fix
 - crash on move toolbar item
