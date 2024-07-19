@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.4]
 ## [1.8.3]
 ### refactor
 - migrate settings files from `$USER/.config/seelen` to `$APPDATA/com.seelen.seelen-ui`
