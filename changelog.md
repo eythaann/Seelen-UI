@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.5]
 ### fix
 - no executing seelen after update installation
 
