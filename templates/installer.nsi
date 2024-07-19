@@ -637,11 +637,12 @@ Section Install
     Call CreateOrUpdateStartMenuShortcut
   !insertmacro MUI_STARTMENU_WRITE_END
 
-  ; Create desktop shortcut for silent and passive installers
+  ; Create desktop shortcut and run Executable for silent and passive installers
   ; because finish page will be skipped
   ${If} $PassiveMode = 1
   ${OrIf} ${Silent}
     Call CreateOrUpdateDesktopShortcut
+    Call RunMainBinary
   ${EndIf}
 
   !ifmacrodef NSIS_HOOK_POSTINSTALL

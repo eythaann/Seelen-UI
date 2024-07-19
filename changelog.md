@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no executing seelen after update installation
+
 ## [1.8.4]
 ## [1.8.3]
 ### refactor
