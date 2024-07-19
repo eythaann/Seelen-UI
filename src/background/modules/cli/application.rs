@@ -118,22 +118,21 @@ pub fn loader_command() -> Command {
         ])
 }
 
-type ShouldInitApp = bool;
-pub fn handle_cli_info(matches: &clap::ArgMatches) -> ShouldInitApp {
+pub fn is_just_getting_cmd_info(matches: &clap::ArgMatches) -> bool {
     if matches.get_flag("verbose") {
         println!("{:?}", matches);
     }
 
     if matches.get_flag("version") {
         println!("1.0.0");
-        return false;
+        return true;
     }
 
     if args_os().any(|arg| arg == "help" || arg == "--help" || arg == "-h") {
-        return false;
+        return true;
     }
 
-    true
+    false
 }
 
 pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {

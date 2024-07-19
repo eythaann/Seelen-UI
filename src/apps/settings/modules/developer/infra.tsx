@@ -1,9 +1,10 @@
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
+import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Switch } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { resolveDotConfigPath } from '../shared/config/infra';
+import { resolveDataPath } from '../shared/config/infra';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 import { LoadCustomConfigFile } from './app';
@@ -18,11 +19,15 @@ export function DeveloperTools() {
   }
 
   async function openSettingsFile() {
-    invoke('open_file', { path: await resolveDotConfigPath('settings.json') });
+    invoke('open_file', { path: await resolveDataPath('settings.json') });
   }
 
   async function openInstallFolder() {
-    invoke('open_install_folder');
+    invoke('open_file', { path: await path.resourceDir() });
+  }
+
+  async function openDataFolder() {
+    invoke('open_file', { path: await path.appDataDir() });
   }
 
   return (
@@ -35,10 +40,16 @@ export function DeveloperTools() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsOption>
-          <span>Open Install Folder</span>
-          <Button onClick={openInstallFolder}>Open</Button>
-        </SettingsOption>
+        <SettingsSubGroup label="App Folders">
+          <SettingsOption>
+            <span>Install Folder</span>
+            <Button onClick={openInstallFolder}>Open</Button>
+          </SettingsOption>
+          <SettingsOption>
+            <span>Data Folder</span>
+            <Button onClick={openDataFolder}>Open</Button>
+          </SettingsOption>
+        </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>

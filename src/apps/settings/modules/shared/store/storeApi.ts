@@ -10,7 +10,7 @@ import { DirEntry } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { cloneDeep } from 'lodash';
 
-import { resolveDotConfigPath } from '../config/infra';
+import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
 import { AppsTemplates } from '../../../../shared/appsTemplates';
@@ -227,7 +227,7 @@ export class UserSettingsLoader {
       env: await invoke('get_user_envs'),
     };
 
-    const json_route = route || (await resolveDotConfigPath('settings.json'));
+    const json_route = route || (await resolveDataPath('settings.json'));
 
     if (await fs.exists(json_route)) {
       userSettings.jsonSettings = parseAsCamel(
@@ -237,7 +237,7 @@ export class UserSettingsLoader {
     }
 
     if (this._withUserApps) {
-      const yaml_route = await resolveDotConfigPath('applications.yml');
+      const yaml_route = await resolveDataPath('applications.yml');
       if (await fs.exists(yaml_route)) {
         const processed = yaml.load(await fs.readTextFile(yaml_route));
         userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
@@ -281,7 +281,7 @@ export async function loadAppsTemplates() {
 }
 
 export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
-  const json_route = await resolveDotConfigPath('settings.json');
+  const json_route = await resolveDataPath('settings.json');
   await fs.writeTextFile(
     json_route,
     JSON.stringify(VariableConvention.fromCamelToSnake(settings)),
@@ -289,7 +289,7 @@ export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
 }
 
 export async function saveUserSettings(settings: UserSettings) {
-  const yaml_route = await resolveDotConfigPath('applications.yml');
+  const yaml_route = await resolveDataPath('applications.yml');
 
   await saveJsonSettings(settings.jsonSettings);
 

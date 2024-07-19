@@ -33,12 +33,12 @@ export const savePinnedItems = async (state: RootState = store.getState()): Prom
     right: state.itemsOnRight.reduce(cb, []),
   };
 
-  const yaml_route = await path.join(await path.homeDir(), '.config/seelen/seelenweg_items.yaml');
+  const yaml_route = await path.join(await path.appDataDir(), 'seelenweg_items.yaml');
   await writeTextFile(yaml_route, yaml.dump(data));
 };
 
 export const loadPinnedItems = async (): Promise<SwSaveFile> => {
-  let yaml_route = await path.join(await path.homeDir(), '.config/seelen/seelenweg_items.yaml');
+  let yaml_route = await path.join(await path.appDataDir(), 'seelenweg_items.yaml');
 
   if (!(await exists(yaml_route))) {
     return {

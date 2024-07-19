@@ -1,7 +1,11 @@
 # Changelog
 
 ## [Unreleased]
-### fix crash on move toolbar item
+### refactor
+- migrate settings files from `$USER/.config/seelen` to `$APPDATA/com.seelen.seelen-ui`
+
+### fix
+- crash on move toolbar item
 
 ## [1.8.2]
 ### features

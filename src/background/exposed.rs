@@ -51,14 +51,6 @@ fn open_file(path: String) {
 }
 
 #[command]
-fn open_install_folder() {
-    let exe_path = std::env::current_exe().unwrap();
-    log_error!(Command::new("explorer")
-        .args(["/select,", &exe_path.to_string_lossy()])
-        .spawn());
-}
-
-#[command]
 fn run_as_admin(path: String) {
     tauri::async_runtime::spawn(async move {
         let app = get_app_handle();
@@ -144,7 +136,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         refresh_state,
         is_dev_mode,
         open_file,
-        open_install_folder,
         run_as_admin,
         select_file_on_explorer,
         get_accent_color,

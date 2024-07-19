@@ -86,21 +86,20 @@ impl Seelen {
 
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
-        self.handle = Some(app.clone());
-        *APP_HANDLE.lock() = Some(app.clone());
+        {
+            self.handle = Some(app.clone());
+            *APP_HANDLE.lock() = Some(app.clone());
+        }
 
         self.ensure_folders()?;
         self.load_uwp_apps_info()?;
 
-        let path = app
-            .path()
-            .resolve(".config\\seelen\\settings.json", BaseDirectory::Home)?;
-        self.state = State::new(&path).unwrap_or_default();
+        let data_path = app.path().app_data_dir()?;
+        self.state = State::new(&data_path.join("settings.json")).unwrap_or_default();
 
         let mut settings_by_app = trace_lock!(SETTINGS_BY_APP);
         settings_by_app.set_paths(
-            app.path()
-                .resolve(".config\\seelen\\applications.yml", BaseDirectory::Home)?,
+            data_path.join("applications.yml"),
             app.path()
                 .resolve("static\\apps_templates", BaseDirectory::Resource)?,
         );
@@ -177,8 +176,18 @@ impl Seelen {
         let path = self.handle().path();
         let data_path = path.app_data_dir()?;
 
-        // user saved settings
-        std::fs::create_dir_all(path.resolve(".config/seelen", BaseDirectory::Home)?)?;
+        // migration of user settings files below v1.8.3
+        let old_path = path.resolve(".config/seelen", BaseDirectory::Home)?;
+        if old_path.exists() {
+            log::trace!("Migrating user settings from {:?}", old_path);
+            for entry in std::fs::read_dir(&old_path)?.flatten() {
+                if entry.file_type()?.is_dir() {
+                    continue;
+                }
+                std::fs::copy(entry.path(), data_path.join(entry.file_name()))?;
+            }
+            std::fs::remove_dir_all(&old_path)?;
+        }
 
         // user data folder
         std::fs::create_dir_all(data_path.join("placeholders"))?;

@@ -27,7 +27,7 @@ use error_handler::Result;
 use exposed::register_invoke_handler;
 use modules::{
     cli::{
-        application::{handle_cli_info, SEELEN_COMMAND_LINE},
+        application::{is_just_getting_cmd_info, SEELEN_COMMAND_LINE},
         infrastructure::Client,
     },
     tray::application::try_force_tray_overflow_creation,
@@ -68,6 +68,31 @@ fn register_panic_hook() {
     }));
 }
 
+fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
+    log::info!("───────────────────── Starting Seelen ─────────────────────");
+    Client::listen_tcp()?;
+    log_error!(try_force_tray_overflow_creation());
+
+    let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
+    seelen.init(app.handle().clone())?;
+
+    handle_tray_icon(app)?;
+
+    if !tauri::is_dev() {
+        seelen.create_update_modal()?;
+
+        let command = SEELEN_COMMAND_LINE.lock().clone();
+        let matches = command.get_matches();
+        if !matches.get_flag("silent") {
+            seelen.show_settings()?;
+        }
+    }
+
+    seelen.start()?;
+    std::mem::forget(seelen);
+    Ok(())
+}
+
 fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
     match event {
         tauri::RunEvent::ExitRequested { api, code, .. } => {
@@ -93,8 +118,7 @@ fn main() -> Result<()> {
 
     let command = SEELEN_COMMAND_LINE.lock().clone();
     let matches = command.get_matches();
-    let should_run_app = handle_cli_info(&matches);
-    if !should_run_app {
+    if is_just_getting_cmd_info(&matches) {
         return Ok(());
     }
 
@@ -114,28 +138,7 @@ fn main() -> Result<()> {
     app_builder = register_invoke_handler(app_builder);
 
     let app = app_builder
-        .setup(move |app| {
-            log::info!("───────────────────── Starting Seelen ─────────────────────");
-            Client::listen_tcp()?;
-            log_error!(try_force_tray_overflow_creation());
-
-            let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
-            seelen.init(app.handle().clone())?;
-
-            handle_tray_icon(app)?;
-
-            if !tauri::is_dev() {
-                seelen.create_update_modal()?;
-
-                if !matches.get_flag("silent") {
-                    seelen.show_settings()?;
-                }
-            }
-
-            seelen.start()?;
-            std::mem::forget(seelen);
-            Ok(())
-        })
+        .setup(setup)
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
