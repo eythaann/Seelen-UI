@@ -7,6 +7,7 @@
 
 ### fix
 - crash on move toolbar item
+- can not remove media module
 
 ## [1.8.2]
 ### features

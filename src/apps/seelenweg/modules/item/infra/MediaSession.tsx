@@ -1,6 +1,8 @@
 import { Icon } from '../../../../shared/components/Icon';
 import { SavedMediaItem } from '../../../../shared/schemas/SeelenWegItems';
+import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
+import { MediaSessionMenu } from './Menu';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Button } from 'antd';
@@ -50,49 +52,43 @@ export function MediaSession({ item }: { item: SavedMediaItem }) {
 
   return (
     <DraggableItem item={item}>
-      <div className="media-session-container">
-        <div
-          className="media-session"
-          style={{
-            backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
-          }}
-        >
-          <img className="media-session-thumbnail" src={src} draggable={false} />
-          <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
+      <WithContextMenu items={MediaSessionMenu}>
+        <div className="media-session-container" onContextMenu={(e) => e.stopPropagation()}>
+          <div
+            className="media-session"
+            style={{
+              backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
+            }}
+          >
+            <img className="media-session-thumbnail" src={src} draggable={false} />
+            <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
 
-          <div className="media-session-info">
-            <span className="media-session-title" style={{ color }}>
-              {session?.title || 'No Media'}
-            </span>
-            <div className="media-session-actions">
-              <Button
-                type="text"
-                size="small"
-                onClick={onClickBtn.bind(null, 'media_prev')}
-              >
-                <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color, size: 12 }} />
-              </Button>
-              <Button
-                type="text"
-                size="small"
-                onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
-              >
-                <Icon
-                  iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
-                  propsIcon={{ color, size: 12 }}
-                />
-              </Button>
-              <Button
-                type="text"
-                size="small"
-                onClick={onClickBtn.bind(null, 'media_next')}
-              >
-                <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color, size: 12 }} />
-              </Button>
+            <div className="media-session-info">
+              <span className="media-session-title" style={{ color }}>
+                {session?.title || 'No Media'}
+              </span>
+              <div className="media-session-actions">
+                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
+                  <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color, size: 12 }} />
+                </Button>
+                <Button
+                  type="text"
+                  size="small"
+                  onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
+                >
+                  <Icon
+                    iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
+                    propsIcon={{ color, size: 12 }}
+                  />
+                </Button>
+                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
+                  <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color, size: 12 }} />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </WithContextMenu>
     </DraggableItem>
   );
 }

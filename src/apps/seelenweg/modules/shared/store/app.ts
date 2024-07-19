@@ -127,6 +127,12 @@ export const RootSlice = createSlice({
       }
       savePinnedItems(current(state));
     },
+    removeMediaModule(state) {
+      const filter = (current: SwItem) => current.type !== SpecialItemType.Media;
+      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
+      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
+      state.itemsOnRight = state.itemsOnRight.filter(filter);
+    },
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
       const app = action.payload;
 
@@ -138,11 +144,15 @@ export const RootSlice = createSlice({
 
       const appFilename = app.exe.split('\\').pop();
       if (appFilename) {
-        const pinedApp = (
-          state.itemsOnLeft.find((current) => 'exe' in current && current.exe.endsWith(appFilename)) ||
-          state.itemsOnCenter.find((current) => 'exe' in current && current.exe.endsWith(appFilename)) ||
-          state.itemsOnRight.find((current) => 'exe' in current && current.exe.endsWith(appFilename))
-        ) as SwPinnedApp | undefined;
+        const pinedApp = (state.itemsOnLeft.find(
+          (current) => 'exe' in current && current.exe.endsWith(appFilename),
+        ) ||
+          state.itemsOnCenter.find(
+            (current) => 'exe' in current && current.exe.endsWith(appFilename),
+          ) ||
+          state.itemsOnRight.find(
+            (current) => 'exe' in current && current.exe.endsWith(appFilename),
+          )) as SwPinnedApp | undefined;
 
         if (pinedApp) {
           pinedApp.opens.push(app.hwnd);
