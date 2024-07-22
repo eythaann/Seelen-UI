@@ -5,9 +5,11 @@ import {
   SettingsOption,
   SettingsSubGroup,
 } from '../../../../components/SettingsBox';
+import { AVAILABLE_LANGUAGES } from '../../../../i18n';
 import { Button, Flex, Select, Switch, Tag, Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { startup } from '../../../shared/tauri/infra';
@@ -21,12 +23,14 @@ import { TAGS_COLORS } from '../domain';
 import cs from './index.module.css';
 
 export function General() {
+  const [selectedThemeStr, setSelectedThemeStr] = useState<string | null>(null);
+
   const autostartStatus = useSelector(RootSelectors.autostart);
   const themes = useSelector(RootSelectors.availableThemes);
   const usingThemes = useSelector(RootSelectors.selectedTheme);
+  const language = useSelector(RootSelectors.language);
 
-  const [selectedThemeStr, setSelectedThemeStr] = useState<string | null>(null);
-
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const onAutoStart = async (value: boolean) => {
@@ -50,15 +54,28 @@ export function General() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <span style={{ fontWeight: 600 }}>Run Seelen UI at startup?</span>
+          <span style={{ fontWeight: 600 }}>{t('general.startup')}</span>
           <Switch onChange={onAutoStart} value={autostartStatus} />
         </SettingsOption>
       </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <b>{t('general.language')}:</b>
+          <Select
+            style={{ width: '200px' }}
+            value={language}
+            options={AVAILABLE_LANGUAGES}
+            onSelect={(value) => dispatch(RootActions.setLanguage(value))}
+          />
+        </SettingsOption>
+      </SettingsGroup>
+
       <SettingsGroup>
         <SettingsSubGroup
           label={
             <SettingsOption>
-              <b>Theme info: </b>
+              <b>{t('general.theme.label')}:</b>
               <Select
                 style={{ width: '200px' }}
                 value={selectedThemeStr}
@@ -70,7 +87,7 @@ export function General() {
                 }))}
                 onSelect={setSelectedThemeStr}
                 onClear={() => setSelectedThemeStr(null)}
-                placeholder="Select theme"
+                placeholder={t('general.theme.placeholder')}
               />
             </SettingsOption>
           }
@@ -78,7 +95,7 @@ export function General() {
           {selectedTheme && (
             <SettingsOption>
               <Flex gap="2px 0" wrap="wrap">
-                <b style={{ marginRight: '4px' }}>Tags:</b>
+                <b style={{ marginRight: '4px' }}>{t('general.theme.tags')}:</b>
                 {selectedTheme.info.tags.map((tag, idx) => (
                   <Tag key={tag} color={TAGS_COLORS[idx % TAGS_COLORS.length]} bordered={false}>
                     {tag}
@@ -89,8 +106,8 @@ export function General() {
           )}
           {selectedTheme && (
             <SettingsOption>
-              <b>Add to layers</b>
-              <Tooltip title={selectedThemeIsAdded ? 'Already added' : ''}>
+              <b>{t('general.theme.add')}</b>
+              <Tooltip title={selectedThemeIsAdded ? t('general.theme.added') : ''}>
                 <Button
                   type="dashed"
                   disabled={selectedThemeIsAdded}
@@ -109,7 +126,7 @@ export function General() {
           {selectedTheme && (
             <SettingsOption>
               <p>
-                <b>Author: </b>
+                <b>{t('general.theme.author')}: </b>
                 {selectedTheme.info.author}
               </p>
             </SettingsOption>
@@ -117,7 +134,7 @@ export function General() {
           {selectedTheme && (
             <SettingsOption>
               <p>
-                <b>Description: </b>
+                <b>{t('general.theme.description')}: </b>
                 {selectedTheme.info.description}
               </p>
             </SettingsOption>
@@ -126,7 +143,7 @@ export function General() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <b>Themes enabled:</b>
+        <b>{t('general.theme.enabled')}:</b>
         <div>
           <Reorder.Group
             onReorder={(values) => dispatch(RootActions.setSelectedTheme(values))}

@@ -6,6 +6,7 @@ import {
 } from '../../../../shared/schemas/AppsConfigurations';
 import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
 import { Button, Input, Select, Switch } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import { OptionsFromEnum } from '../../shared/utils/app';
 
@@ -19,6 +20,8 @@ interface Props {
 
 export function Identifier({ identifier, onChange, onRemove }: Props) {
   const { id, kind, matchingStrategy } = identifier;
+
+  const { t } = useTranslation();
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange({ ...identifier, id: e.target.value });
@@ -65,18 +68,18 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
       <div>
         {onRemove && (
           <SettingsOption>
-            <span>Remove</span>
+            <span>{t('apps_configurations.identifier.remove')}</span>
             <Button type="text" danger onClick={onRemove} className={cs.removeButton}>
               <Icon iconName="IoTrash" />
             </Button>
           </SettingsOption>
         )}
         <SettingsOption>
-          <span>Identifier</span>
+          <span>{t('apps_configurations.identifier.id')}</span>
           <Input value={id} onChange={onChangeId} />
         </SettingsOption>
         <SettingsOption>
-          <span>Identify By</span>
+          <span>{t('apps_configurations.identifier.kind')}</span>
           <Select
             value={kind}
             options={OptionsFromEnum(ApplicationIdentifier)}
@@ -84,7 +87,7 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
           />
         </SettingsOption>
         <SettingsOption>
-          <span>Matching Strategy</span>
+          <span>{t('apps_configurations.identifier.matching_strategy')}</span>
           <Select
             value={matchingStrategy}
             options={OptionsFromEnum(MatchingStrategy)}
@@ -92,14 +95,16 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
           />
         </SettingsOption>
         <SettingsOption>
-          <span>Negate Matching</span>
+          <span>{t('apps_configurations.identifier.negation')}</span>
           <Switch value={identifier.negation} onChange={onChangeNegation} />
         </SettingsOption>
 
+        <hr />
+
         <SettingsOption>
-          <b>AND</b>
+          <b>{t('apps_configurations.identifier.and')}</b>
           <Button type="dashed" onClick={onAddAndItem}>
-            Add Block
+            {t('apps_configurations.identifier.add_block')}
           </Button>
         </SettingsOption>
         {identifier.and.map((id, idx) => (
@@ -112,9 +117,9 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
         ))}
 
         <SettingsOption>
-          <b>OR</b>
+          <b>{t('apps_configurations.identifier.or')}</b>
           <Button type="dashed" onClick={onAddOrItem}>
-            Add Block
+            {t('apps_configurations.identifier.add_block')}
           </Button>
         </SettingsOption>
         {identifier.or.map((id, idx) => (

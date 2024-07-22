@@ -15,18 +15,6 @@ export enum Route {
 
 export const WorkingInProgressRoutes = [Route.MONITORS];
 
-export const RouteLabels: Record<Route, string> = {
-  [Route.GENERAL]: 'General',
-  [Route.MONITORS]: 'Monitors',
-  [Route.SHORTCUTS]: 'Shortcuts',
-  [Route.SPECIFIC_APPS]: 'Apps Configurations',
-  [Route.INFO]: 'Information',
-  [Route.SEELEN_WEG]: 'SeelenWeg',
-  [Route.SEELEN_WM]: 'Window Manager',
-  [Route.SEELEN_BAR]: 'Fancy Toolbar',
-  [Route.DEVELOPER]: 'Developer Tools',
-};
-
 export const RouteExtraInfo: { [key in Route]?: string } = {
   [Route.SPECIFIC_APPS]: `
     Seelen UI use only one identifier per app (first match found) so the order in how are specificated is important,

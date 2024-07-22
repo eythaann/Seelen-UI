@@ -2,6 +2,7 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../component
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Switch } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { resolveDataPath } from '../shared/config/infra';
@@ -13,6 +14,7 @@ export function DeveloperTools() {
   const devTools = useSelector(newSelectors.devTools);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function onToggleDevTools(value: boolean) {
     dispatch(RootActions.setDevTools(value));
@@ -34,32 +36,32 @@ export function DeveloperTools() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <b>Developer Mode</b>
+          <b>{t('devtools.enable')}</b>
           <Switch value={devTools} onChange={onToggleDevTools} />
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label="App Folders">
+        <SettingsSubGroup label={t('devtools.app_folders')}>
           <SettingsOption>
-            <span>Install Folder</span>
-            <Button onClick={openInstallFolder}>Open</Button>
+            <span>{t('devtools.install_folder')}</span>
+            <Button onClick={openInstallFolder}>{t('open')}</Button>
           </SettingsOption>
           <SettingsOption>
-            <span>Data Folder</span>
-            <Button onClick={openDataFolder}>Open</Button>
+            <span>{t('devtools.data_folder')}</span>
+            <Button onClick={openDataFolder}>{t('open')}</Button>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <span>Open Settings file</span>
-          <Button onClick={openSettingsFile}>Open</Button>
+          <span>{t('devtools.settings_file')}</span>
+          <Button onClick={openSettingsFile}>{t('open')}</Button>
         </SettingsOption>
         <SettingsOption>
-          <span>Load Custom file (will replace current settings):</span>
-          <Button onClick={LoadCustomConfigFile}>Select File</Button>
+          <span>{t('devtools.custom_config_file')}:</span>
+          <Button onClick={LoadCustomConfigFile}>{t('devtools.load')}</Button>
         </SettingsOption>
       </SettingsGroup>
     </>

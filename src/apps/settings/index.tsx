@@ -1,10 +1,12 @@
 import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
 import { useDarkMode } from '../shared/styles';
+import i18n, { loadTranslations } from './i18n';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import { LoadSettingsToStore, store } from './modules/shared/store/infra';
@@ -22,6 +24,7 @@ import './styles/global.css';
   const container = getRootContainer();
 
   await LoadSettingsToStore();
+  await loadTranslations();
 
   const WrappedRoot = () => {
     useEffect(() => {
@@ -34,14 +37,16 @@ import './styles/global.css';
 
     return (
       <Provider store={store}>
-        <ConfigProvider
-          componentSize="small"
-          theme={{
-            algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
-          }}
-        >
-          <App />
-        </ConfigProvider>
+        <I18nextProvider i18n={i18n}>
+          <ConfigProvider
+            componentSize="small"
+            theme={{
+              algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+            }}
+          >
+            <App />
+          </ConfigProvider>
+        </I18nextProvider>
       </Provider>
     );
   };

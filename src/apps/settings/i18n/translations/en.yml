@@ -1,0 +1,186 @@
+loading: Loading...
+inProgress: In Progress...
+cancel: Cancel
+save: Save
+quit: Quit
+open: Open
+delete: Delete
+sides:
+  left: Left
+  right: Right
+  top: Top
+  bottom: Bottom
+header:
+  labels:
+    general: General
+    seelen_bar: Fancy Toolbar
+    seelen_wm: Window Manager
+    seelen_weg: Dock/Taskbar
+    monitors: Monitors
+    specific_apps: Specific Apps
+    shortcuts: Shortcuts
+    developer: Developer
+    info: Information
+start:
+  title: Welcome!
+  message: >-
+    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated tiling windows manager
+    to enhance your Windows 11 experience! Explore a new era of efficiency and multitasking with our
+    intuitive interface and advanced features.
+  message_accent: Optimize your productivity with style!
+general:
+  startup: Run on startup?
+  language: Language
+  theme:
+    label: Theme Information
+    placeholder: Select theme
+    author: Author
+    description: Description
+    add: Add theme
+    added: Theme already added
+    enabled: Enabled Themes
+    tags: Tags
+toolbar:
+  enable: Enable Fancy Toolbar
+  placeholder:
+    select: Toolbar Structure
+    author: Author
+    description: Description
+  height: Height
+wm:
+  enable: Enable Window Manager
+  disabled_windows10: The Window Manager is not available for Windows 10.
+  layout: Layout
+  author: Author
+  description: Description
+  space_between_containers: Space Between Containers
+  workspace_padding: Workspaces Padding
+  workspace_offset: Workspaces Offset (Margins)
+  resize_delta: Resize Delta (%)
+  border:
+    enable: Enable Window's Border
+    width: Border Width
+    offset: Border Offset
+weg:
+  label: Dock/Taskbar
+  enable: Enable Dock/Taskbar
+  width: Width
+  auto_hide: Auto Hide
+  dock_side: Dock Side
+  padding: Padding
+  margin: Margin
+  gap: Gap
+  items:
+    label: Items
+    size: Item Size
+    zoom_size: Zoomed Size (used for themes)
+    gap: Space Between Items
+    visible_separators: Visible Separators
+devtools:
+  enable: Enable Developer Tools
+  app_folders: App Folders
+  install_folder: Installation Folder
+  data_folder: Data Folder
+  settings_file: Settings File
+  custom_config_file: Load Custom Config File
+  load: Load
+apps_configurations:
+  import: Import
+  export: Export
+  delete: Delete
+  swap: Swap
+  new: New
+  bundled_title: App Config Bundled with Seelen
+  bundled_msg: >-
+    These bundled configurations are not editable and are designed to provide you with the best
+    experience without customization. They automatically configure the most common applications for you.
+  confirm_delete_title: Confirm Delete
+  confirm_delete: Are you sure you want to delete this configuration/s?
+  search: Search
+  app:
+    name: Name
+    category: Category
+    category_placeholder: None
+    bindings: Binding (note both options are required)
+    monitor: Monitor
+    monitor_placeholder: None
+    workspace: Workspace
+    workspace_placeholder: None
+    title_edit: Editting {{name}}
+    title_create: Creating {{name}}
+    title_readonly: Viewing {{name}}
+    ok_edit: Update
+    ok_create: Create
+    ok_readonly: Edit as New
+    options_label: Extra Options
+    options:
+      float: Float
+      unmanage: Unmanage
+      force: Force Manage
+      pinned: Pinned
+  identifier:
+    remove: Delete Block
+    id: Identifier
+    kind: Identify By
+    matching_strategy: Matching Strategy
+    negation: Negate Matching
+    and: AND
+    or: OR
+    add_block: Add Block
+extras:
+  version: Version
+  links: Official Links
+  github: GitHub
+  discord: Discord
+  relaunch: Relaunch
+  exit: Quit/Exit
+shortcuts:
+  enable: Enable Integrated Shortcuts (ahk)
+  enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api
+  labels:
+    reserve_top: Reserve Top
+    reserve_bottom: Reserve Bottom
+    reserve_left: Reserve Left
+    reserve_right: Reserve Right
+    reserve_float: Reserve Float
+    reserve_stack: Reserve Stack
+    focus_top: Focus Top
+    focus_bottom: Focus Bottom
+    focus_left: Focus Left
+    focus_right: Focus Right
+    focus_latest: Focus Latest
+    increase_width: Increase Width
+    decrease_width: Decrease Width
+    increase_height: Increase Height
+    decrease_height: Decrease Height
+    restore_sizes: Restore Sizes
+    switch_workspace_0: Switch to Workspace 0
+    switch_workspace_1: Switch to Workspace 1
+    switch_workspace_2: Switch to Workspace 2
+    switch_workspace_3: Switch to Workspace 3
+    switch_workspace_4: Switch to Workspace 4
+    switch_workspace_5: Switch to Workspace 5
+    switch_workspace_6: Switch to Workspace 6
+    switch_workspace_7: Switch to Workspace 7
+    switch_workspace_8: Switch to Workspace 8
+    switch_workspace_9: Switch to Workspace 9
+    move_to_workspace_0: Move to Workspace 0
+    move_to_workspace_1: Move to Workspace 1
+    move_to_workspace_2: Move to Workspace 2
+    move_to_workspace_3: Move to Workspace 3
+    move_to_workspace_4: Move to Workspace 4
+    move_to_workspace_5: Move to Workspace 5
+    move_to_workspace_6: Move to Workspace 6
+    move_to_workspace_7: Move to Workspace 7
+    move_to_workspace_8: Move to Workspace 8
+    move_to_workspace_9: Move to Workspace 9
+    send_to_workspace_0: Send to Workspace 0
+    send_to_workspace_1: Send to Workspace 1
+    send_to_workspace_2: Send to Workspace 2
+    send_to_workspace_3: Send to Workspace 3
+    send_to_workspace_4: Send to Workspace 4
+    send_to_workspace_5: Send to Workspace 5
+    send_to_workspace_6: Send to Workspace 6
+    send_to_workspace_7: Send to Workspace 7
+    send_to_workspace_8: Send to Workspace 8
+    send_to_workspace_9: Send to Workspace 9

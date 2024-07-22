@@ -2,6 +2,7 @@ import { Icon } from '../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { exit, relaunch } from '@tauri-apps/plugin-process';
 import { Button, Switch } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { EnvConfig } from '../shared/config/infra';
@@ -13,6 +14,7 @@ export function Information() {
   const devTools = useSelector(newSelectors.devTools);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   function onToggleDevTools(value: boolean) {
     dispatch(RootActions.setDevTools(value));
@@ -23,22 +25,22 @@ export function Information() {
       <SettingsGroup>
         <SettingsSubGroup label="Seelen UI">
           <SettingsOption>
-            <span>Version:</span>
+            <span>{t('extras.version')}:</span>
             <span className={cs.version}>v{EnvConfig.version}</span>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label="Official Links">
+        <SettingsSubGroup label={t('extras.links')}>
           <SettingsOption>
-            <span>Github:</span>
+            <span>{t('extras.github')}:</span>
             <a href="https://github.com/eythaann/seelen-ui" target="_blank">
               github.com/eythaann/seelen-ui
             </a>
           </SettingsOption>
           <SettingsOption>
-            <span>Discord:</span>
+            <span>{t('extras.discord')}:</span>
             <a href="https://discord.gg/ABfASx5ZAJ" target="_blank">
               discord.gg/ABfASx5ZAJ
             </a>
@@ -48,20 +50,20 @@ export function Information() {
 
       <SettingsGroup>
         <SettingsOption>
-          <span>Development Mode</span>
+          <span>{t('devtools.enable')}</span>
           <Switch value={devTools} onChange={onToggleDevTools} />
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <span>Force Restart</span>
+          <span>{t('extras.relaunch')}</span>
           <Button type="dashed" onClick={relaunch} style={{ width: '50px' }}>
             <Icon iconName="IoReload" propsIcon={{ size: 12 }} />
           </Button>
         </SettingsOption>
         <SettingsOption>
-          <span>Quit/Close</span>
+          <span>{t('extras.exit')}</span>
           <Button type="dashed" danger onClick={() => exit(0)} style={{ width: '50px' }}>
             <Icon iconName="IoClose" />
           </Button>

@@ -1,5 +1,6 @@
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../../components/SettingsBox';
 import { InputNumber } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../../shared/utils/infra';
@@ -14,6 +15,7 @@ export const GlobalPaddings = () => {
   const workAreaOffset = useAppSelector(SeelenWmSelectors.globalWorkAreaOffset);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onChangeGlobalOffset = (side: keyof Rect, value: number | null) => {
     dispatch(
@@ -36,29 +38,29 @@ export const GlobalPaddings = () => {
     <SettingsGroup>
       <div>
         <SettingsOption>
-          <span>Space between containers</span>
+          <span>{t('wm.space_between_containers')}</span>
           <InputNumber value={workspaceGap} onChange={onChangeDefaultGap} />
         </SettingsOption>
         <SettingsOption>
-          <span>Workspace padding</span>
+          <span>{t('wm.workspace_padding')}</span>
           <InputNumber value={workspacePadding} onChange={onChangeDefaultPadding} />
         </SettingsOption>
       </div>
-      <SettingsSubGroup label="Workspace offset (margins)">
+      <SettingsSubGroup label={t('wm.workspace_offset')}>
         <SettingsOption>
-          <span>Left</span>
+          <span>{t('sides.left')}</span>
           <InputNumber value={workAreaOffset.left} onChange={onChangeGlobalOffset.bind(this, 'left')} />
         </SettingsOption>
         <SettingsOption>
-          <span>Top</span>
+          <span>{t('sides.top')}</span>
           <InputNumber value={workAreaOffset.top} onChange={onChangeGlobalOffset.bind(this, 'top')} />
         </SettingsOption>
         <SettingsOption>
-          <span>Right</span>
+          <span>{t('sides.right')}</span>
           <InputNumber value={workAreaOffset.right} onChange={onChangeGlobalOffset.bind(this, 'right')} />
         </SettingsOption>
         <SettingsOption>
-          <span>Bottom</span>
+          <span>{t('sides.bottom')}</span>
           <InputNumber value={workAreaOffset.bottom} onChange={onChangeGlobalOffset.bind(this, 'bottom')} />
         </SettingsOption>
       </SettingsSubGroup>

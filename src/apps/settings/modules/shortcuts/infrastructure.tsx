@@ -1,6 +1,7 @@
 import { VariableConvention } from '../../../shared/schemas';
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Input, Switch, Tooltip } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { RootActions } from '../shared/store/app/reducer';
@@ -12,6 +13,7 @@ export function Shortcuts() {
   const ahkVariables = useSelector(RootSelectors.ahkVariables);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onChangeEnabled = (value: boolean) => {
     dispatch(RootActions.setAhkEnabled(value));
@@ -30,9 +32,9 @@ export function Shortcuts() {
       <SettingsGroup>
         <SettingsOption>
           <span>
-            Enable Seelen UI shortcuts{' '}
+            {t('shortcuts.enable')}{' '}
             <Tooltip
-              title="Disable if you will implement your own shortcuts using the CLI."
+              title={t('shortcuts.enable_tooltip')}
             >
               🛈
             </Tooltip>
@@ -43,14 +45,13 @@ export function Shortcuts() {
 
       <SettingsGroup>
         {
-          Object.entries(ahkVariables).map(([name, value]) => {
-            let label = VariableConvention.camelToUser(name);
+          Object.entries(ahkVariables).map(([key, value]) => {
             return (
-              <SettingsOption key={name}>
-                <div>{label[0]?.toUpperCase() + label.slice(1)}</div>
+              <SettingsOption key={key}>
+                <div>{t(`shortcuts.labels.${VariableConvention.camelToSnake(key)}`)}</div>
                 <Input
                   value={value.fancy}
-                  onKeyDown={(e) => onChangeVar(name, e)}
+                  onKeyDown={(e) => onChangeVar(key, e)}
                 />
               </SettingsOption>
             );

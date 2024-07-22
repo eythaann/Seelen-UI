@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- Add multi-language support! 🥳.
+
 ## [1.8.5]
 ### fix
 - no executing seelen after update installation

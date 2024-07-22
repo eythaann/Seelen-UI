@@ -1,3 +1,4 @@
+import i18n from '../../i18n';
 import { Modal } from 'antd';
 
 import { SaveStore, store } from '../shared/store/infra';
@@ -12,16 +13,14 @@ export const StartUser = () => {
   store.dispatch(RootActions.setAutostart(true));
 
   const modal = Modal.confirm({
-    title: 'Welcome!',
+    title: i18n.t('start.title'),
     className: cs.welcome,
     content: (
       <div>
         <p>
-          Welcome to Seelen UI, the ultimate Desktop Enviroment with an incorporated tiling windows manager
-          to enhance your Windows 11 experience! Explore a new era of efficiency and multitasking with our \
-          intuitive interface and advanced features.
+          {i18n.t('start.message')}
         </p>
-        <b>Optimize your productivity with style!</b>
+        <b>{i18n.t('start.message_accent')}</b>
       </div>
     ),
     okText: 'Continue',

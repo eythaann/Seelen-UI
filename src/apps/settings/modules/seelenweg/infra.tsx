@@ -1,6 +1,7 @@
 import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../shared/utils/infra';
 
@@ -12,6 +13,7 @@ export const SeelenWegSettings = () => {
   const settings = useAppSelector(RootSelectors.seelenweg);
 
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const onToggleEnable = (value: boolean) => {
     dispatch(SeelenWegActions.setEnabled(value));
@@ -22,16 +24,16 @@ export const SeelenWegSettings = () => {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Enable SeelenWeg</b>
+            <b>{t('weg.enable')}</b>
           </div>
           <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label="Dock/Taskbar">
+        <SettingsSubGroup label={t('weg.label')}>
           <SettingsOption>
-            <div>Width</div>
+            <div>{t('weg.width')}</div>
             <Select
               style={{ width: '120px' }}
               value={settings.mode}
@@ -40,7 +42,7 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
           <SettingsOption>
-            <div>Auto Hide</div>
+            <div>{t('weg.auto_hide')}</div>
             <Select
               style={{ width: '120px' }}
               value={settings.hideMode}
@@ -49,7 +51,7 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
           <SettingsOption>
-            <div>Side to show dock</div>
+            <div>{t('weg.dock_side')}</div>
             <Select
               style={{ width: '120px' }}
               value={settings.position}
@@ -58,14 +60,14 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
           <SettingsOption>
-            <div>Margin</div>
+            <div>{t('weg.margin')}</div>
             <InputNumber
               value={settings.margin}
               onChange={(value) => dispatch(SeelenWegActions.setMargin(value || 0))}
             />
           </SettingsOption>
           <SettingsOption>
-            <div>Padding</div>
+            <div>{t('weg.padding')}</div>
             <InputNumber
               value={settings.padding}
               onChange={(value) => dispatch(SeelenWegActions.setPadding(value || 0))}
@@ -75,36 +77,31 @@ export const SeelenWegSettings = () => {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label="Separators">
+        <SettingsSubGroup label={t('weg.items.label')}>
           <SettingsOption>
-            <div>Visible</div>
-            <Switch checked={settings.visibleSeparators} onChange={(value) => dispatch(SeelenWegActions.setVisibleSeparators(value))} />
-          </SettingsOption>
-        </SettingsSubGroup>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsSubGroup label="Items">
-          <SettingsOption>
-            <div>Size</div>
+            <div>{t('weg.items.size')}</div>
             <InputNumber
               value={settings.size}
               onChange={(value) => dispatch(SeelenWegActions.setSize(value || 0))}
             />
           </SettingsOption>
           <SettingsOption>
-            <div>Size on hover</div>
+            <div>{t('weg.items.zoom_size')}</div>
             <InputNumber
               value={settings.zoomSize}
               onChange={(value) => dispatch(SeelenWegActions.setZoomSize(value || 0))}
             />
           </SettingsOption>
           <SettingsOption>
-            <div>Space between items</div>
+            <div>{t('weg.items.gap')}</div>
             <InputNumber
               value={settings.spaceBetweenItems}
               onChange={(value) => dispatch(SeelenWegActions.setSpaceBetweenItems(value || 0))}
             />
+          </SettingsOption>
+          <SettingsOption>
+            <div>{t('weg.items.visible_separators')}</div>
+            <Switch checked={settings.visibleSeparators} onChange={(value) => dispatch(SeelenWegActions.setVisibleSeparators(value))} />
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>

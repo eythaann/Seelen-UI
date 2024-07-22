@@ -4,6 +4,7 @@ import { OthersConfigs } from './Others';
 import { invoke } from '@tauri-apps/api/core';
 import { Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BorderSettings } from '../../border/infra';
@@ -20,6 +21,7 @@ export function WindowManagerSettings() {
   const defaultLayout = useSelector(newSelectors.windowManager.defaultLayout);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useEffect(() => {
     invoke<string>('get_win_version').then((ver) => setIsWindows10(ver === 'Windows10'));
@@ -40,7 +42,7 @@ export function WindowManagerSettings() {
       {isWindows10 && (
         <SettingsGroup>
           <div>
-            <p>The Window Manager is not available for Windows 10.</p>
+            <p>{t('wm.disabled_windows10')}</p>
           </div>
         </SettingsGroup>
       )}
@@ -48,7 +50,7 @@ export function WindowManagerSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Enable Tiling Window Manager</b>
+            <b>{t('wm.enable')}</b>
           </div>
           <Switch checked={settings.enabled} onChange={onToggleEnable} disabled={isWindows10} />
         </SettingsOption>
@@ -57,7 +59,7 @@ export function WindowManagerSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Default Layout: </b>
+            <b>{t('wm.layout')}: </b>
           </div>
           <Select
             style={{ width: '200px' }}
@@ -72,11 +74,11 @@ export function WindowManagerSettings() {
         </SettingsOption>
         <div>
           <p>
-            <b>Author: </b>
+            <b>{t('wm.author')}: </b>
             {usingLayout?.info.author}
           </p>
           <p>
-            <b>Description: </b>
+            <b>{t('wm.description')}: </b>
             {usingLayout?.info.description}
           </p>
         </div>

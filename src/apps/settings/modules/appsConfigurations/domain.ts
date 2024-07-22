@@ -7,13 +7,6 @@ export enum ApplicationOptions {
   Pinned = 'pinned',
 }
 
-export const LabelByAppOption: Record<ApplicationOptions, string> = {
-  [ApplicationOptions.Float]: 'Float',
-  [ApplicationOptions.Unmanage]: 'Unmanaged',
-  [ApplicationOptions.ForceManage]: 'Force Manage',
-  [ApplicationOptions.Pinned]: 'Pinned',
-};
-
 export enum ApplicationIdentifier {
   Exe = 'Exe',
   Class = 'Class',

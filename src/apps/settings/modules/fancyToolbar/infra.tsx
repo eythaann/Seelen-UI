@@ -1,5 +1,6 @@
 import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { newSelectors } from '../shared/store/app/reducer';
@@ -12,6 +13,7 @@ export function FancyToolbarSettings() {
   const selectedStructure = useSelector(newSelectors.fancyToolbar.placeholder);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const onToggleEnable = (value: boolean) => {
     dispatch(FancyToolbarActions.setEnabled(value));
@@ -30,7 +32,7 @@ export function FancyToolbarSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Enable Fancy Toolbar</b>
+            <b>{t('toolbar.enable')}</b>
           </div>
           <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
@@ -39,7 +41,7 @@ export function FancyToolbarSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Placeholder (structure): </b>
+            <b>{t('toolbar.placeholder.select')}: </b>
           </div>
           <Select
             style={{ width: '200px' }}
@@ -54,11 +56,11 @@ export function FancyToolbarSettings() {
         </SettingsOption>
         <div>
           <p>
-            <b>Author: </b>
+            <b>{t('toolbar.placeholder.author')}: </b>
             {usingStructure?.info.author}
           </p>
           <p>
-            <b>Description: </b>
+            <b>{t('toolbar.placeholder.description')}: </b>
             {usingStructure?.info.description}
           </p>
         </div>
@@ -67,7 +69,7 @@ export function FancyToolbarSettings() {
       <SettingsGroup>
         <SettingsOption>
           <div>
-            <b>Height</b>
+            <b>{t('toolbar.height')}</b>
           </div>
           <InputNumber
             value={settings.height}

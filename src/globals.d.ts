@@ -10,6 +10,10 @@ declare global {
     export default classnames;
   }
 
+  declare module '*.yml' {
+    export default string;
+  }
+
   interface ObjectConstructor {
     keys<T>(o: T): (keyof T)[];
   }

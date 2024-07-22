@@ -89,16 +89,17 @@ export const SettingsSchema = z.object({
     })
     .default(['default']),
   dev_tools: z.boolean().default(false),
+  language: z.string().default(() => navigator.language.split('-')[0] || 'en'),
 });
 
-type inner = z.infer<typeof SettingsSchema> & {};
 export interface ISettings {
   fancyToolbar: FancyToolbar;
   seelenweg: Seelenweg;
   windowManager: WindowManager;
   monitors: Monitor[];
-  ahkEnabled: inner['ahk_enabled'];
+  ahkEnabled: boolean;
   ahkVariables: AhkVariables;
   selectedTheme: string[];
   devTools: boolean;
+  language: string;
 }

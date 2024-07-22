@@ -1,0 +1,186 @@
+loading: Laden...
+inProgress: In Bearbeitung...
+cancel: Abbrechen
+save: Speichern
+quit: Beenden
+open: Öffnen
+delete: Löschen
+sides:
+  left: Links
+  right: Rechts
+  top: Oben
+  bottom: Unten
+header:
+  labels:
+    general: Allgemein
+    seelen_bar: Elegante Werkzeugleiste
+    seelen_wm: Fenstermanager
+    seelen_weg: Dock/Taskleiste
+    monitors: Monitore
+    specific_apps: Spezifische Apps
+    shortcuts: Kurzbefehle
+    developer: Entwickler
+    info: Information
+start:
+  title: Willkommen!
+  message: >-
+    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem integrierten Kachel-Fenstermanager,
+    um dein Windows 11-Erlebnis zu verbessern! Erkunde eine neue Ära der Effizienz und Multitasking mit
+    unserer intuitiven Oberfläche und fortschrittlichen Funktionen.
+  message_accent: Optimiere deine Produktivität mit Stil!
+general:
+  startup: Beim Start ausführen?
+  language: Sprache
+  theme:
+    label: Themeninformation
+    placeholder: Thema auswählen
+    author: Autor
+    description: Beschreibung
+    add: Thema hinzufügen
+    added: Thema bereits hinzugefügt
+    enabled: Aktivierte Themen
+    tags: Tags
+toolbar:
+  enable: Elegante Werkzeugleiste aktivieren
+  placeholder:
+    select: Struktur der Werkzeugleiste
+    author: Autor
+    description: Beschreibung
+  height: Höhe
+wm:
+  enable: Fenstermanager aktivieren
+  disabled_windows10: Der Fenstermanager ist nicht für Windows 10 verfügbar.
+  layout: Layout
+  author: Autor
+  description: Beschreibung
+  space_between_containers: Abstand zwischen Containern
+  workspace_padding: Arbeitsbereichs-Padding
+  workspace_offset: Arbeitsbereichs-Versatz (Ränder)
+  resize_delta: Größenänderung Delta (%)
+  border:
+    enable: Fensterrand aktivieren
+    width: Randbreite
+    offset: Randversatz
+weg:
+  label: Dock/Taskleiste
+  enable: Dock/Taskleiste aktivieren
+  width: Breite
+  auto_hide: Automatisch ausblenden
+  dock_side: Dock-Seite
+  padding: Polsterung
+  margin: Rand
+  gap: Abstand
+  items:
+    label: Elemente
+    size: Elementgröße
+    zoom_size: Vergrößerte Größe (für Themen verwendet)
+    gap: Abstand zwischen Elementen
+    visible_separators: Sichtbare Trennzeichen
+devtools:
+  enable: Entwicklerwerkzeuge aktivieren
+  app_folders: Anwendungsordner
+  install_folder: Installationsordner
+  data_folder: Datenordner
+  settings_file: Einstellungsdatei
+  custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
+  load: Laden
+apps_configurations:
+  import: Importieren
+  export: Exportieren
+  delete: Löschen
+  swap: Tauschen
+  new: Neu
+  bundled_title: Mit Seelen gebündelte App-Konfiguration
+  bundled_msg: >-
+    Diese gebündelten Konfigurationen sind nicht bearbeitbar und wurden entwickelt, um dir das beste
+    Erlebnis ohne Anpassung zu bieten. Sie konfigurieren die gebräuchlichsten Anwendungen automatisch für dich.
+  confirm_delete_title: Löschen bestätigen
+  confirm_delete: Möchtest du diese Konfiguration wirklich löschen?
+  search: Suchen
+  app:
+    name: Name
+    category: Kategorie
+    category_placeholder: Keine
+    bindings: Bindung (beide Optionen sind erforderlich)
+    monitor: Monitor
+    monitor_placeholder: Keine
+    workspace: Arbeitsbereich
+    workspace_placeholder: Keine
+    title_edit: "{{name}} bearbeiten"
+    title_create: "{{name}} erstellen"
+    title_readonly: "{{name}} ansehen"
+    ok_edit: Aktualisieren
+    ok_create: Erstellen
+    ok_readonly: Als neu bearbeiten
+    options_label: Zusätzliche Optionen
+    options:
+      float: Schwebend
+      unmanage: Nicht verwalten
+      force: Verwaltung erzwingen
+      pinned: Angeheftet
+  identifier:
+    remove: Block löschen
+    id: Identifikator
+    kind: Identifizieren nach
+    matching_strategy: Abgleichstrategie
+    negation: Abgleich negieren
+    and: UND
+    or: ODER
+    add_block: Block hinzufügen
+extras:
+  version: Version
+  links: Offizielle Links
+  github: GitHub
+  discord: Discord
+  relaunch: Neu starten
+  exit: Beenden/Verlassen
+shortcuts:
+  enable: Integrierte Kurzbefehle (ahk) aktivieren
+  enable_tooltip: Deaktivieren, wenn du deine eigenen Kurzbefehle mit der Seelen Core API implementierst
+  labels:
+    reserve_top: Oben reservieren
+    reserve_bottom: Unten reservieren
+    reserve_left: Links reservieren
+    reserve_right: Rechts reservieren
+    reserve_float: Schwebend reservieren
+    reserve_stack: Stapel reservieren
+    focus_top: Oben fokussieren
+    focus_bottom: Unten fokussieren
+    focus_left: Links fokussieren
+    focus_right: Rechts fokussieren
+    focus_latest: Letztes fokussieren
+    increase_width: Breite vergrößern
+    decrease_width: Breite verkleinern
+    increase_height: Höhe vergrößern
+    decrease_height: Höhe verkleinern
+    restore_sizes: Größen wiederherstellen
+    switch_workspace_0: Zum Arbeitsbereich 0 wechseln
+    switch_workspace_1: Zum Arbeitsbereich 1 wechseln
+    switch_workspace_2: Zum Arbeitsbereich 2 wechseln
+    switch_workspace_3: Zum Arbeitsbereich 3 wechseln
+    switch_workspace_4: Zum Arbeitsbereich 4 wechseln
+    switch_workspace_5: Zum Arbeitsbereich 5 wechseln
+    switch_workspace_6: Zum Arbeitsbereich 6 wechseln
+    switch_workspace_7: Zum Arbeitsbereich 7 wechseln
+    switch_workspace_8: Zum Arbeitsbereich 8 wechseln
+    switch_workspace_9: Zum Arbeitsbereich 9 wechseln
+    move_to_workspace_0: Zum Arbeitsbereich 0 verschieben
+    move_to_workspace_1: Zum Arbeitsbereich 1 verschieben
+    move_to_workspace_2: Zum Arbeitsbereich 2 verschieben
+    move_to_workspace_3: Zum Arbeitsbereich 3 verschieben
+    move_to_workspace_4: Zum Arbeitsbereich 4 verschieben
+    move_to_workspace_5: Zum Arbeitsbereich 5 verschieben
+    move_to_workspace_6: Zum Arbeitsbereich 6 verschieben
+    move_to_workspace_7: Zum Arbeitsbereich 7 verschieben
+    move_to_workspace_8: Zum Arbeitsbereich 8 verschieben
+    move_to_workspace_9: Zum Arbeitsbereich 9 verschieben
+    send_to_workspace_0: Zum Arbeitsbereich 0 senden
+    send_to_workspace_1: Zum Arbeitsbereich 1 senden
+    send_to_workspace_2: Zum Arbeitsbereich 2 senden
+    send_to_workspace_3: Zum Arbeitsbereich 3 senden
+    send_to_workspace_4: Zum Arbeitsbereich 4 senden
+    send_to_workspace_5: Zum Arbeitsbereich 5 senden
+    send_to_workspace_6: Zum Arbeitsbereich 6 senden
+    send_to_workspace_7: Zum Arbeitsbereich 7 senden
+    send_to_workspace_8: Zum Arbeitsbereich 8 senden
+    send_to_workspace_9: Zum Arbeitsbereich 9 senden

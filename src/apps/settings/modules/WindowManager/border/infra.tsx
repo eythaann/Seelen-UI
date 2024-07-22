@@ -1,5 +1,6 @@
 import { SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { InputNumber, Switch } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector, useDispatchCallback } from '../../shared/utils/infra';
 
@@ -12,6 +13,7 @@ export const BorderSettings = () => {
   const width = useAppSelector(BorderSelectors.width);
 
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const toggleEnabled = useDispatchCallback((value: boolean) => {
     dispatch(BorderActions.setEnabled(value));
@@ -29,17 +31,17 @@ export const BorderSettings = () => {
     <SettingsSubGroup
       label={
         <SettingsOption>
-          <span>Enable windows border</span>
+          <span>{t('wm.border.enable')}</span>
           <Switch value={enabled} onChange={toggleEnabled} />
         </SettingsOption>
       }
     >
       <SettingsOption>
-        <span>Border offset</span>
+        <span>{t('wm.border.offset')}</span>
         <InputNumber value={offset} onChange={updateOffset} disabled={!enabled} />
       </SettingsOption>
       <SettingsOption>
-        <span>Border width</span>
+        <span>{t('wm.border.width')}</span>
         <InputNumber value={width} onChange={updateWidth} disabled={!enabled} />
       </SettingsOption>
     </SettingsSubGroup>

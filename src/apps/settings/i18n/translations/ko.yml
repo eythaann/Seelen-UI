@@ -1,0 +1,184 @@
+loading: 로딩 중...
+inProgress: 진행 중...
+cancel: 취소
+save: 저장
+quit: 종료
+open: 열기
+delete: 삭제
+sides:
+  left: 왼쪽
+  right: 오른쪽
+  top: 위
+  bottom: 아래
+header:
+  labels:
+    general: 일반
+    seelen_bar: 화려한 툴바
+    seelen_wm: 윈도우 매니저
+    seelen_weg: 독/작업 표시줄
+    monitors: 모니터
+    specific_apps: 특정 앱
+    shortcuts: 단축키
+    developer: 개발자
+    info: 정보
+start:
+  title: 환영합니다!
+  message: >-
+    Seelen UI에 오신 것을 환영합니다. Windows 11 경험을 향상시키기 위해 타일링 윈도우 매니저가 포함된 궁극의 데스크탑 환경입니다!
+    직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
+  message_accent: 스타일로 생산성을 최적화하세요!
+general:
+  startup: 시작 시 실행하시겠습니까?
+  language: 언어
+  theme:
+    label: 테마 정보
+    placeholder: 테마 선택
+    author: 작성자
+    description: 설명
+    add: 테마 추가
+    added: 테마가 이미 추가됨
+    enabled: 활성화된 테마
+    tags: 태그
+toolbar:
+  enable: 화려한 툴바 활성화
+  placeholder:
+    select: 툴바 구조
+    author: 작성자
+    description: 설명
+  height: 높이
+wm:
+  enable: 윈도우 매니저 활성화
+  disabled_windows10: 윈도우 매니저는 Windows 10에서 사용할 수 없습니다.
+  layout: 레이아웃
+  author: 작성자
+  description: 설명
+  space_between_containers: 컨테이너 간 간격
+  workspace_padding: 작업 공간 패딩
+  workspace_offset: 작업 공간 오프셋 (여백)
+  resize_delta: 크기 조정 델타 (%)
+  border:
+    enable: 창 테두리 활성화
+    width: 테두리 너비
+    offset: 테두리 오프셋
+weg:
+  label: 독/작업 표시줄
+  enable: 독/작업 표시줄 활성화
+  width: 너비
+  auto_hide: 자동 숨기기
+  dock_side: 독 측면
+  padding: 패딩
+  margin: 여백
+  gap: 간격
+  items:
+    label: 항목
+    size: 항목 크기
+    zoom_size: 확대된 크기 (테마에 사용됨)
+    gap: 항목 간 간격
+    visible_separators: 보이는 구분선
+devtools:
+  enable: 개발자 도구 활성화
+  app_folders: 앱 폴더
+  install_folder: 설치 폴더
+  data_folder: 데이터 폴더
+  settings_file: 설정 파일
+  custom_config_file: 사용자 정의 구성 파일 로드
+  load: 로드
+apps_configurations:
+  import: 가져오기
+  export: 내보내기
+  delete: 삭제
+  swap: 교환
+  new: 새로 만들기
+  bundled_title: Seelen과 함께 제공되는 앱 구성
+  bundled_msg: >-
+    이러한 번들 구성은 편집할 수 없으며 맞춤화 없이 최상의 경험을 제공하도록 설계되었습니다. 가장 일반적인 응용 프로그램을 자동으로 구성합니다.
+  confirm_delete_title: 삭제 확인
+  confirm_delete: 이 구성을 삭제하시겠습니까?
+  search: 검색
+  app:
+    name: 이름
+    category: 카테고리
+    category_placeholder: 없음
+    bindings: 바인딩 (두 옵션 모두 필요)
+    monitor: 모니터
+    monitor_placeholder: 없음
+    workspace: 작업 공간
+    workspace_placeholder: 없음
+    title_edit: "{{name}} 편집 중"
+    title_create: "{{name}} 생성 중"
+    title_readonly: "{{name}} 보기"
+    ok_edit: 업데이트
+    ok_create: 생성
+    ok_readonly: 새로 편집
+    options_label: 추가 옵션
+    options:
+      float: 부유
+      unmanage: 관리 안 함
+      force: 강제 관리
+      pinned: 고정됨
+  identifier:
+    remove: 블록 삭제
+    id: 식별자
+    kind: 식별 기준
+    matching_strategy: 매칭 전략
+    negation: 매칭 부정
+    and: 그리고
+    or: 또는
+    add_block: 블록 추가
+extras:
+  version: 버전
+  links: 공식 링크
+  github: 깃허브
+  discord: 디스코드
+  relaunch: 다시 시작
+  exit: 종료/나가기
+shortcuts:
+  enable: 통합 단축키 (ahk) 활성화
+  enable_tooltip: Seelen Core API를 사용하여 자체 단축키를 구현할 경우 비활성화하세요
+  labels:
+    reserve_top: 상단 예약
+    reserve_bottom: 하단 예약
+    reserve_left: 왼쪽 예약
+    reserve_right: 오른쪽 예약
+    reserve_float: 부유 예약
+    reserve_stack: 스택 예약
+    focus_top: 상단 집중
+    focus_bottom: 하단 집중
+    focus_left: 왼쪽 집중
+    focus_right: 오른쪽 집중
+    focus_latest: 최신 집중
+    increase_width: 너비 증가
+    decrease_width: 너비 감소
+    increase_height: 높이 증가
+    decrease_height: 높이 감소
+    restore_sizes: 크기 복원
+    switch_workspace_0: 작업 공간 0으로 전환
+    switch_workspace_1: 작업 공간 1으로 전환
+    switch_workspace_2: 작업 공간 2로 전환
+    switch_workspace_3: 작업 공간 3으로 전환
+    switch_workspace_4: 작업 공간 4로 전환
+    switch_workspace_5: 작업 공간 5로 전환
+    switch_workspace_6: 작업 공간 6으로 전환
+    switch_workspace_7: 작업 공간 7로 전환
+    switch_workspace_8: 작업 공간 8로 전환
+    switch_workspace_9: 작업 공간 9로 전환
+    move_to_workspace_0: 작업 공간 0으로 이동
+    move_to_workspace_1: 작업 공간 1으로 이동
+    move_to_workspace_2: 작업 공간 2로 이동
+    move_to_workspace_3: 작업 공간 3으로 이동
+    move_to_workspace_4: 작업 공간 4로 이동
+    move_to_workspace_5: 작업 공간 5로 이동
+    move_to_workspace_6: 작업 공간 6으로 이동
+    move_to_workspace_7: 작업 공간 7로 이동
+    move_to_workspace_8: 작업 공간 8으로 이동
+    move_to_workspace_9: 작업 공간 9으로 이동
+    send_to_workspace_0: 작업 공간 0으로 보내기
+    send_to_workspace_1: 작업 공간 1으로 보내기
+    send_to_workspace_2: 작업 공간 2로 보내기
+    send_to_workspace_3: 작업 공간 3으로 보내기
+    send_to_workspace_4: 작업 공간 4로 보내기
+    send_to_workspace_5: 작업 공간 5로 보내기
+    send_to_workspace_6: 작업 공간 6으로 보내기
+    send_to_workspace_7: 작업 공간 7으로 보내기
+    send_to_workspace_8: 작업 공간 8으로 보내기
+    send_to_workspace_9: 작업 공간 9으로 보내기

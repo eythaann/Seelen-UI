@@ -2,7 +2,9 @@ import { ExportApps, ImportApps } from '../../shared/store/storeApi';
 import { EditAppModal } from './EditModal';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
+import { TFunction } from 'i18next';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
 import { useAppSelector } from '../../shared/utils/infra';
@@ -13,12 +15,7 @@ import { cx, debounce } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
-import {
-  AppConfiguration,
-  AppConfigurationExtended,
-  ApplicationOptions,
-  LabelByAppOption,
-} from '../domain';
+import { AppConfiguration, AppConfigurationExtended, ApplicationOptions } from '../domain';
 
 import cs from './index.module.css';
 
@@ -34,55 +31,59 @@ const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index
   );
 };
 
-const columns: ColumnsType<AppConfigurationExtended> = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
-    fixed: 'left',
-    width: 120,
-    sorter: getSorterByText('name'),
-    render: (name) => (
-      <Tooltip placement="topLeft" title={name}>
-        {name}
-      </Tooltip>
-    ),
-  },
-  {
-    title: 'Category',
-    dataIndex: 'category',
-    key: 'category',
-    width: 120,
-    render(value, _record, _index) {
-      return value || '-';
+const getColumns = (t: TFunction): ColumnsType<AppConfigurationExtended> => {
+  return [
+    {
+      title: t('apps_configurations.app.name'),
+      dataIndex: 'name',
+      key: 'name',
+      fixed: 'left',
+      width: 120,
+      sorter: getSorterByText('name'),
+      render: (name) => (
+        <Tooltip placement="topLeft" title={name}>
+          {name}
+        </Tooltip>
+      ),
     },
-    sorter: getSorterByText('category'),
-  },
-  ...Object.values(ApplicationOptions).map(
-    (option) =>
-      ({
-        title: LabelByAppOption[option],
-        dataIndex: option,
-        key: option,
-        align: 'center',
-        width: 140,
-        render: ReadonlySwitch,
-        sorter: getSorterByBool(option),
-      } as ColumnType<AppConfigurationExtended>),
-  ),
-  {
-    title: <ActionsTitle />,
-    key: 'operation',
-    fixed: 'right',
-    align: 'center',
-    width: 56,
-    render: (_, record, index) => <Actions record={record} index={index} />,
-  },
-];
+    {
+      title: t('apps_configurations.app.category'),
+      dataIndex: 'category',
+      key: 'category',
+      width: 120,
+      render(value, _record, _index) {
+        return value || '-';
+      },
+      sorter: getSorterByText('category'),
+    },
+    ...Object.values(ApplicationOptions).map(
+      (option) =>
+        ({
+          title: t(`apps_configurations.app.options.${option}`),
+          dataIndex: option,
+          key: option,
+          align: 'center',
+          width: 140,
+          render: ReadonlySwitch,
+          sorter: getSorterByBool(option),
+        } as ColumnType<AppConfigurationExtended>),
+    ),
+    {
+      title: <ActionsTitle />,
+      key: 'operation',
+      fixed: 'right',
+      align: 'center',
+      width: 56,
+      render: (_, record, index) => <Actions record={record} index={index} />,
+    },
+  ];
+};
 
 function ActionsTitle() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
@@ -95,7 +96,7 @@ function ActionsTitle() {
     <div>
       <EditAppModal open={isModalOpen} isNew onSave={onSave} onCancel={onCancel} />
       <Button className={cs.newBtn} type="primary" onClick={showModal}>
-        New
+        {t('apps_configurations.new')}
       </Button>
     </div>
   );
@@ -166,10 +167,12 @@ export function AppsConfiguration() {
     setTimeout(() => {
       setData(
         data.filter((app) => {
-          return app.name.toLowerCase().includes(searched)
-          || app.identifier.id.toLowerCase().includes(searched)
-          || app.identifier.and.some((id) => id.id.toLowerCase().includes(searched))
-          || app.identifier.or.some((id) => id.id.toLowerCase().includes(searched));
+          return (
+            app.name.toLowerCase().includes(searched) ||
+            app.identifier.id.toLowerCase().includes(searched) ||
+            app.identifier.and.some((id) => id.id.toLowerCase().includes(searched)) ||
+            app.identifier.or.some((id) => id.id.toLowerCase().includes(searched))
+          );
         }),
       );
       setLoading(false);
@@ -178,6 +181,7 @@ export function AppsConfiguration() {
   }, [apps, searched]);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const importApps = useCallback(async () => {
     const yamlApps = await ImportApps();
@@ -196,29 +200,33 @@ export function AppsConfiguration() {
 
   const confirmDelete = useCallback(() => {
     const modal = Modal.confirm({
-      title: 'Confirm Delete',
-      content: 'Sure on delete these applications?',
-      okText: 'delete',
+      title: t('apps_configurations.confirm_delete_title'),
+      content: t('apps_configurations.confirm_delete'),
+      okText: t('delete'),
       onOk: () => {
         dispatch(AppsConfigActions.deleteMany(selectedAppsKey));
         setSelectedAppsKey([]);
         modal.destroy();
       },
       okButtonProps: { danger: true },
-      cancelText: 'cancel',
+      cancelText: t('cancel'),
       centered: true,
     });
   }, [selectedAppsKey]);
 
-  const onSearch = useCallback(debounce((e: ChangeEvent<HTMLInputElement>) => {
-    setSearched(e.target.value.toLowerCase());
-  }, 200), []);
+  const onSearch = useCallback(
+    debounce((e: ChangeEvent<HTMLInputElement>) => {
+      setSearched(e.target.value.toLowerCase());
+    }, 200),
+    [],
+  );
 
+  const columns = getColumns(t);
   columns[0]!.title = (
     <Input
       onChange={onSearch}
       onClick={(e) => e.stopPropagation()}
-      placeholder="Name"
+      placeholder={t('apps_configurations.search')}
     />
   );
 
@@ -244,15 +252,15 @@ export function AppsConfiguration() {
         }}
       />
       <div className={cs.footer}>
-        <Button onClick={importApps}>Import</Button>
+        <Button onClick={importApps}>{t('apps_configurations.import')}</Button>
         <Button onClick={exportApps} disabled={!selectedAppsKey.length}>
-          Export
+          {t('apps_configurations.export')}
         </Button>
         <Button type="primary" danger disabled={!selectedAppsKey.length} onClick={confirmDelete}>
-          Delete
+          {t('apps_configurations.delete')}
         </Button>
         <Button onClick={performSwap} type="primary" disabled={selectedAppsKey.length !== 2}>
-          Swap
+          {t('apps_configurations.swap')}
         </Button>
       </div>
     </>

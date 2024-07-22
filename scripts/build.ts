@@ -19,6 +19,9 @@ async function main() {
         packageVersion: JSON.parse(fs.readFileSync('package.json', 'utf-8')).version,
       }),
     },
+    loader: {
+      '.yml': 'text',
+    },
   });
 
   appFolders.forEach((folder) => {

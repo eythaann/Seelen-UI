@@ -1,5 +1,6 @@
 import { StateBuilder } from '../../../../../shared/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
+import i18n from '../../../../i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cloneDeep } from 'lodash';
 
@@ -31,6 +32,7 @@ const initialState: RootState = {
   availablePlaceholders: [],
   selectedTheme: [],
   devTools: false,
+  language: navigator.language.split('-')[0] || 'en',
 };
 
 export const RootSlice = createSlice({
@@ -38,12 +40,21 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...reducersFor(initialState),
-    setState: (_state, action: PayloadAction<RootState>) => action.payload,
+    setState: (_state, action: PayloadAction<RootState>) => {
+      i18n.changeLanguage(action.payload.language);
+      return action.payload;
+    },
+    setLanguage: (state, action: PayloadAction<string>) => {
+      state.language = action.payload;
+      state.toBeSaved = true;
+      i18n.changeLanguage(action.payload);
+    },
     restoreToLastLoaded: (state) => {
       if (state.lastLoaded) {
         const newState = cloneDeep(state.lastLoaded);
         newState.lastLoaded = cloneDeep(state.lastLoaded);
         newState.route = state.route;
+        i18n.changeLanguage(newState.language);
         return newState;
       }
       return state;

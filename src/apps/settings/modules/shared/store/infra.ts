@@ -58,11 +58,10 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     .load(customPath);
 
   const currentState = store.getState();
-  const initialState = RootSlice.getInitialState();
-  const loadedStore = StaticSettingsToState(userSettings, initialState);
+  const loadedState = StaticSettingsToState(userSettings, RootSlice.getInitialState());
 
   let state = {
-    ...loadedStore,
+    ...loadedState,
     appsTemplates: currentState.appsTemplates,
     route: currentState.route,
     autostart: currentState.autostart,

@@ -63,6 +63,7 @@ export const StateToJsonSettings = (state: RootState): ISettings => {
     'fancyToolbar',
     'ahkVariables',
     'devTools',
+    'language',
   ]);
 };
 

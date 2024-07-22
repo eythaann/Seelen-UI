@@ -1,6 +1,7 @@
-import { Route, RouteIcons, RouteLabels, WorkingInProgressRoutes } from './routes';
+import { Route, RouteIcons, WorkingInProgressRoutes } from './routes';
 import { Tooltip } from 'antd';
 import { memo, useCallback } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../modules/shared/utils/infra';
 
@@ -16,6 +17,8 @@ interface ItemProps {
 }
 
 const Item = ({ route, isActive }: ItemProps) => {
+  const { t } = useTranslation();
+
   let dispatch = useAppDispatch();
   let onclick = useCallback(() => {
     if (WorkingInProgressRoutes.includes(route)) {
@@ -25,17 +28,18 @@ const Item = ({ route, isActive }: ItemProps) => {
   }, []);
 
   return (
-    <div
-      onClick={onclick.bind(route)}
-      className={cx(cs.item, {
-        [cs.active!]: isActive,
-      })}
-    >
-      <span className={cs.icon}>{RouteIcons[route]}</span>
-      <Tooltip title={WorkingInProgressRoutes.includes(route) ? 'Work in progress' : undefined}>
-        <span className={cs.label}>{RouteLabels[route]}</span>
-      </Tooltip>
-    </div>
+    <Tooltip title={WorkingInProgressRoutes.includes(route) ? t('inProgress') : undefined}>
+      <div
+        onClick={onclick.bind(route)}
+        className={cx(cs.item, {
+          [cs.active!]: isActive,
+        })}
+      >
+        <span className={cs.icon}>{RouteIcons[route]}</span>
+        <span className={cs.label}>{t(`header.labels.${route}`)}</span>
+      </div>
+    </Tooltip>
+
   );
 };
 

@@ -4,6 +4,7 @@ import { Identifier } from './Identifier';
 import { createSelector } from '@reduxjs/toolkit';
 import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { ownSelector, RootSelectors } from '../../shared/store/app/selectors';
@@ -28,6 +29,8 @@ const getAppSelector = (idx: number | undefined, isNew: boolean) =>
   });
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
+  const { t } = useTranslation();
+
   const monitors = useSelector(RootSelectors.monitors);
   const _app = useSelector(getAppSelector(idx, !!isNew));
   const initialState = readonlyApp || _app;
@@ -65,23 +68,26 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
       ? monitors[app.monitor]?.workspaces.map(({ name }) => ({ label: name, value: name }))
       : [];
 
-  let title = 'Editing';
-  let okText = 'Update';
+  let title = t('apps_configurations.app.title_edit');
+  let okText = t('apps_configurations.app.ok_edit');
+
   if (isNew) {
-    title = 'Creating';
-    okText = 'Create';
+    title = t('apps_configurations.app.title_create');
+    okText = t('apps_configurations.app.ok_create');
   }
+
   if (isReadonly) {
-    title = 'Viewing';
-    okText = 'Edit as New App';
+    title = t('apps_configurations.app.title_readonly');
+    okText = t('apps_configurations.app.ok_readonly');
   }
 
   return (
     <Modal
-      title={`${title} ${app.name}`}
+      title={title.replace('{{name}}', app.name)}
       open={open}
       onCancel={onCancel}
       onOk={onInternalSave}
+      cancelText={t('cancel')}
       okText={okText}
       cancelButtonProps={isReadonly ? { style: { display: 'none' } } : undefined}
       centered
@@ -90,21 +96,24 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
       <ConfigProvider componentDisabled={isReadonly}>
         {!!readonlyApp && (
           <SettingsGroup>
-            <SettingsSubGroup label={`Loaded from ${readonlyApp.templateName} pack`}>
-              <p>{readonlyApp.templateDescription}</p>
-            </SettingsSubGroup>
+            <b>{t('apps_configurations.bundled_title')}</b>
+            <p>{t('apps_configurations.bundled_msg')}</p>
           </SettingsGroup>
         )}
 
         <SettingsGroup>
           <div>
             <SettingsOption>
-              <span>Name</span>
+              <span>{t('apps_configurations.app.name')}</span>
               <Input value={app.name} onChange={updateName} required />
             </SettingsOption>
             <SettingsOption>
-              <span>Category</span>
-              <Input value={app.category || ''} placeholder="None" onChange={updateCategory} />
+              <span>{t('apps_configurations.app.category')}</span>
+              <Input
+                value={app.category || ''}
+                placeholder={t('apps_configurations.app.category_placeholder')}
+                onChange={updateCategory}
+              />
             </SettingsOption>
           </div>
         </SettingsGroup>
@@ -112,12 +121,12 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
         <Identifier identifier={app.identifier} onChange={onChangeIdentifier} />
 
         <SettingsGroup>
-          <SettingsSubGroup label="Binding *note: both options are required">
+          <SettingsSubGroup label={t('apps_configurations.app.bindings')}>
             <SettingsOption>
-              <span>Monitor</span>
+              <span>{t('apps_configurations.app.monitor')}</span>
               <Select
                 value={app.monitor}
-                placeholder="None"
+                placeholder={t('apps_configurations.app.monitor_placeholder')}
                 allowClear
                 options={monitorsOptions}
                 onChange={onSelectMonitor}
@@ -125,10 +134,10 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
               />
             </SettingsOption>
             <SettingsOption>
-              <span>Workspace</span>
+              <span>{t('apps_configurations.app.workspace')}</span>
               <Select
                 value={app.workspace}
-                placeholder="None"
+                placeholder={t('apps_configurations.app.workspace_placeholder')}
                 allowClear
                 options={workspaceOptions}
                 onChange={onSelectWorkspace}
@@ -139,10 +148,10 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
         </SettingsGroup>
 
         <SettingsGroup>
-          <SettingsSubGroup label="Extra Options">
+          <SettingsSubGroup label={t('apps_configurations.app.options_label')}>
             {Object.values(ApplicationOptions).map((value, i) => (
               <SettingsOption key={i}>
-                <span>{value}</span>
+                <span>{t(`apps_configurations.app.options.${value}`)}</span>
                 <Switch value={app[value]} onChange={onChangeOption.bind(this, value)} />
               </SettingsOption>
             ))}
