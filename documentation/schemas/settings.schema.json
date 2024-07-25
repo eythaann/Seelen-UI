@@ -662,6 +662,10 @@
     "dev_tools": {
       "type": "boolean",
       "default": false
+    },
+    "language": {
+      "type": "string",
+      "default": "en"
     }
   },
   "additionalProperties": false,
