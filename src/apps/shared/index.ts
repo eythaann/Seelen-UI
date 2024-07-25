@@ -67,16 +67,12 @@ export function loadThemeCSS(config: UserSettings) {
     return;
   }
 
+  document.getElementById(theme_key)?.remove();
+  let element = document.createElement('style');
+  element.id = theme_key.toString();
+  element.textContent = '';
+  document.head.appendChild(element);
   for (const theme of themes) {
-    let element = document.getElementById(theme_key);
-
-    if (!element) {
-      element = document.createElement('style');
-      element.id = theme_key.toString();
-      document.head.appendChild(element);
-    }
-
-    element.textContent ?? '';
     element.textContent += theme.styles[theme_key] + '\n';
   }
 }

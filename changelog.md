@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Fix
+- no updating themes on changes saved.
+
 ## [1.8.6]
 ### features
 - Add multi-language support! 🥳.
