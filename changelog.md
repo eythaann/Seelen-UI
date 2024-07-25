@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.7]
 ### Fix
 - no updating themes on changes saved.
 
