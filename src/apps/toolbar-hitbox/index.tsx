@@ -1,4 +1,5 @@
 import { wrapConsole } from '../shared/ConsoleWrapper';
+import { invoke } from '@tauri-apps/api/core';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
@@ -13,6 +14,8 @@ async function Main() {
     await getCurrentWebviewWindow().show();
 
     async function onClick(e: MouseEvent | TouchEvent) {
+      invoke('ensure_hitboxes_zorder').catch(console.error);
+
       let x = 0;
       let y = 0;
       if (e instanceof MouseEvent) {
@@ -31,6 +34,7 @@ async function Main() {
 
     document.body.addEventListener('mousemove', () => {
       emitTo(main, 'mouseenter');
+      invoke('ensure_hitboxes_zorder').catch(console.error);
     });
     document.body.addEventListener('click', onClick);
     document.body.addEventListener('touchend', onClick);

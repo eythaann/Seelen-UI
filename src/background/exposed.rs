@@ -130,6 +130,22 @@ fn switch_workspace(idx: u32) {
     std::thread::spawn(move || winvd::switch_desktop(idx));
 }
 
+#[command]
+fn ensure_hitboxes_zorder() {
+    std::thread::spawn(|| -> Result<()> {
+        let seelen = trace_lock!(SEELEN);
+        for monitor in seelen.monitors() {
+            if let Some(toolbar) = monitor.toolbar() {
+                toolbar.ensure_hitbox_zorder()?;
+            }
+            if let Some(weg) = monitor.weg() {
+                weg.ensure_hitbox_zorder()?;
+            }
+        }
+        Ok(())
+    });
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
@@ -144,6 +160,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         show_app_settings,
         reload_apps_configurations,
         switch_workspace,
+        ensure_hitboxes_zorder,
         // Auto Start
         set_auto_start,
         get_auto_start_status,

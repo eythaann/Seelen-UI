@@ -14,8 +14,8 @@ use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        EnumWindows, GetParent, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE,
-        SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
+        SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -289,6 +289,10 @@ impl SeelenWeg {
         WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.hidden = false;
         Ok(())
+    }
+
+    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
+        WindowsApi::bring_to(HWND(self.hitbox.hwnd()?.0), HWND_TOPMOST)
     }
 }
 

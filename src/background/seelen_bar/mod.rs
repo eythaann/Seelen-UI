@@ -14,7 +14,9 @@ use tauri::{AppHandle, Emitter, Listener, Manager, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::HWND,
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SWP_NOSIZE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{
+        HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE, SW_HIDE, SW_SHOWNOACTIVATE,
+    },
 };
 
 pub struct FancyToolbar {
@@ -76,6 +78,10 @@ impl FancyToolbar {
             },
         )?;
         Ok(())
+    }
+
+    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
+        WindowsApi::bring_to(HWND(self.hitbox_window.hwnd()?.0), HWND_TOPMOST)
     }
 }
 
