@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.6]
 ### features
 - Add multi-language support! 🥳.
 - Add default media input/output selectors to media module in fancy toolbar.
