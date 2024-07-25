@@ -1,33 +1,31 @@
-.SeelenWM {
-  .wm-leaf {
-    &.wm-leaf-with-borders {
+.wm-leaf {
+  &.wm-leaf-with-borders {
+    border-style: solid;
+    border-width: var(--config-border-width);
+    border-color: var(--config-accent-color);
+    filter: invert(1);
+
+    &.wm-leaf-focused {
+      border-color: var(--config-accent-color);
+      filter: invert(0);
+    }
+  }
+}
+
+.wm-stack {
+  .wm-stack-bar {
+    background-color: #222222;
+    color: #fefefe;
+
+    &.wm-stack-bar-with-borders {
       border-style: solid;
       border-width: var(--config-border-width);
       border-color: var(--config-accent-color);
       filter: invert(1);
-
-      &.wm-leaf-focused {
-        border-color: var(--config-accent-color);
-        filter: invert(0);
-      }
     }
   }
+}
 
-  .wm-stack {
-    .wm-stack-bar {
-      background-color: #222222;
-      color: #fefefe;
-
-      &.wm-stack-bar-with-borders {
-        border-style: solid;
-        border-width: var(--config-border-width);
-        border-color: var(--config-accent-color);
-        filter: invert(1);
-      }
-    }
-  }
-
-  .wm-reserved {
-    background-color: var(--color-cyan-700);
-  }
+.wm-reserved {
+  background-color: var(--color-cyan-700);
 }

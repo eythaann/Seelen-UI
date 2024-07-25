@@ -5,8 +5,12 @@
 - Add multi-language support! 🥳.
 - Add default media input/output selectors to media module in fancy toolbar.
 
+### enhancements
+- Flat default themes to allow easier overrides.
+
 ### fix
 - Fix zorder on hovering on weg and toolbar respectively to wm borders.
+- Applying bad themes on apps.
 
 ## [1.8.5]
 ### fix

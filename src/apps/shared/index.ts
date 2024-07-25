@@ -1,4 +1,5 @@
 import { UserSettings } from '../../shared.interfaces';
+import { Theme } from './schemas/Theme';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
@@ -41,34 +42,41 @@ export function loadThemeCSS(config: UserSettings) {
   invoke<string>('get_accent_color').then(setAccentColorAsCssVar);
 
   let selected = config.jsonSettings.selectedTheme;
-  let themes = config.themes.filter((theme) => selected.includes(theme.info.filename));
+  let themes: Theme[] = config.themes
+    .filter((theme) => selected.includes(theme.info.filename))
+    .sort((a, b) => {
+      return selected.indexOf(a.info.filename) - selected.indexOf(b.info.filename);
+    });
 
   if (themes.length === 0) {
     let defaultTheme = config.themes.find((theme) => theme.info.filename === 'default');
     themes = defaultTheme ? [defaultTheme] : [];
   }
 
-  selected.forEach((themeStr, idx) => {
-    let theme = themes.find((theme) => theme.info.filename === themeStr);
+  const label = getCurrentWebviewWindow().label;
+  let theme_key: keyof Theme['styles'] | null = null;
+  if (label.startsWith('fancy-toolbar')) {
+    theme_key = 'toolbar';
+  } else if (label.startsWith('seelenweg')) {
+    theme_key = 'weg';
+  } else if (label.startsWith('window-manager')) {
+    theme_key = 'wm';
+  }
 
-    if (!theme) {
-      return;
+  if (!theme_key) {
+    return;
+  }
+
+  for (const theme of themes) {
+    let element = document.getElementById(theme_key);
+
+    if (!element) {
+      element = document.createElement('style');
+      element.id = theme_key.toString();
+      document.head.appendChild(element);
     }
 
-    for (const key of Object.keys(theme.styles)) {
-      let element = document.getElementById(key);
-
-      if (!element) {
-        element = document.createElement('style');
-        element.id = key.toString();
-        document.head.appendChild(element);
-      }
-
-      if (idx === 0) {
-        element.textContent = '';
-      }
-
-      element.textContent += theme.styles[key] + '\n';
-    }
-  });
+    element.textContent ?? '';
+    element.textContent += theme.styles[theme_key] + '\n';
+  }
 }
