@@ -4,6 +4,7 @@
 ### features
 - Add multi-language support! 🥳.
 - Add default media input/output selectors to media module in fancy toolbar.
+- Add start module to dock/taskbar (opens start menu).
 
 ### enhancements
 - Flat default themes to allow easier overrides.

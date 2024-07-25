@@ -48,12 +48,10 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<MediaChannelTransportData[]>('media-sessions', (event) => {
-    console.log(event.payload);
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
   await listenGlobal<MediaDevice[]>('media-outputs', (event) => {
-    console.log(event.payload);
     store.dispatch(RootActions.setMediaOutputs(event.payload));
   });
 

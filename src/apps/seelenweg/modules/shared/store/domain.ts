@@ -4,6 +4,7 @@ import {
   SavedMediaItem,
   SavedPinnedApp,
   SavedSeparatorItem,
+  StartMenuItem,
   SwItemType as SpecialItemType,
 } from '../../../../shared/schemas/SeelenWegItems';
 import { modify } from 'readable-types';
@@ -54,7 +55,7 @@ export type SwTemporalApp = modify<
   }
 >;
 
-export type SwItem = SwPinnedApp | SwTemporalApp | SavedSeparatorItem | SavedMediaItem;
+export type SwItem = SwPinnedApp | SwTemporalApp | SavedSeparatorItem | SavedMediaItem | StartMenuItem;
 
 export interface RootState extends IRootState<Seelenweg> {
   itemsOnLeft: SwItem[];
@@ -63,6 +64,7 @@ export interface RootState extends IRootState<Seelenweg> {
   openApps: Record<HWND, AppFromBackground>;
   // ----------------------
   focusedHandle: HWND;
+  focusedExecutable: string;
   isOverlaped: boolean;
   mediaSessions: MediaSession[];
 }

@@ -5,6 +5,7 @@ export enum SwItemType {
   TemporalApp = 'TemporalPin',
   Separator = 'Separator',
   Media = 'Media',
+  Start = 'StartMenu',
 }
 
 export type SavedPinnedApp = z.infer<typeof PinnedAppSchema>;
@@ -27,16 +28,30 @@ const MediaItemSchema = z.object({
   type: z.literal(SwItemType.Media),
 });
 
+export type StartMenuItem = z.infer<typeof StartMenuItemSchema>;
+const StartMenuItemSchema = z.object({
+  type: z.literal(SwItemType.Start),
+});
+
 export type SwSavedItem = z.infer<typeof SwSavedItemSchema>;
 export const SwSavedItemSchema = z.union([
   PinnedAppSchema,
   SeparatorSchema,
   MediaItemSchema,
+  StartMenuItemSchema,
 ]);
 
 export type SwSaveFile = z.infer<typeof SwSaveFileSchema>;
 export const SwSaveFileSchema = z.object({
-  left: z.array(SwSavedItemSchema),
-  center: z.array(SwSavedItemSchema),
-  right: z.array(SwSavedItemSchema),
+  left: z.array(SwSavedItemSchema).default([
+    {
+      type: SwItemType.Start,
+    },
+  ]),
+  center: z.array(SwSavedItemSchema).default([]),
+  right: z.array(SwSavedItemSchema).default([
+    {
+      type: SwItemType.Media,
+    },
+  ]),
 });

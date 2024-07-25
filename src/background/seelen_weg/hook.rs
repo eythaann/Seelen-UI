@@ -38,10 +38,7 @@ impl SeelenWeg {
                 }
             }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
-                match self.contains_app(origin) {
-                    true => self.set_active_window(origin)?,
-                    false => self.set_active_window(HWND(0))?, // avoid rerenders on multiple unmanaged focus
-                }
+                self.set_active_window(origin)?;
                 self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {

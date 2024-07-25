@@ -7,6 +7,7 @@ use tauri_plugin_shell::ShellExt;
 use windows::Win32::Graphics::Dwm::DwmGetColorizationColor;
 
 use crate::error_handler::Result;
+use crate::modules::input::Keyboard;
 use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_wm::handler::*;
@@ -146,6 +147,11 @@ fn ensure_hitboxes_zorder() {
     });
 }
 
+#[command]
+fn send_keys(keys: String) -> Result<()> {
+    Keyboard::new().send_keys(&keys)
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
@@ -161,6 +167,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         reload_apps_configurations,
         switch_workspace,
         ensure_hitboxes_zorder,
+        send_keys,
         // Auto Start
         set_auto_start,
         get_auto_start_status,

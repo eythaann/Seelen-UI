@@ -93,6 +93,10 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setFocusedHandle(event.payload));
   });
 
+  await view.listen<string>('set-focused-executable', (event) => {
+    store.dispatch(RootActions.setFocusedExecutable(event.payload));
+  });
+
   await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
     updateHitbox();

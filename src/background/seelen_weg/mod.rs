@@ -109,6 +109,10 @@ impl SeelenWeg {
             return Ok(());
         }
         self.emit("set-focused-handle", hwnd.0)?;
+        self.emit(
+            "set-focused-executable",
+            WindowsApi::exe(hwnd).unwrap_or_default(),
+        )?;
         Ok(())
     }
 

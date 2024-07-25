@@ -23,6 +23,7 @@ const initialState: RootState = {
   itemsOnRight: [],
   openApps: {},
   focusedHandle: 0,
+  focusedExecutable: '',
   themeLayers: defaultTheme.layers,
   isOverlaped: false,
   settings: SeelenWegSlice.getInitialState(),
@@ -132,6 +133,23 @@ export const RootSlice = createSlice({
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
+      savePinnedItems(current(state));
+    },
+    addStartModule(state) {
+      const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
+      if (!all.some((current) => current.type === SpecialItemType.Start)) {
+        state.itemsOnLeft.unshift({
+          type: SpecialItemType.Start,
+        });
+      }
+      savePinnedItems(current(state));
+    },
+    removeStartModule(state) {
+      const filter = (current: SwItem) => current.type !== SpecialItemType.Start;
+      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
+      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
+      state.itemsOnRight = state.itemsOnRight.filter(filter);
+      savePinnedItems(current(state));
     },
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
       const app = action.payload;

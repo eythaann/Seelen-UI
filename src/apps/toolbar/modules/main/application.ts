@@ -5,11 +5,11 @@ import {
 import { path } from '@tauri-apps/api';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, debounce } from 'lodash';
 
 import { store } from '../shared/store/infra';
 
-export async function SavePlaceholderAsCustom() {
+export const SavePlaceholderAsCustom = debounce(async () => {
   const { placeholder, env } = store.getState();
 
   if (!placeholder) return;
@@ -20,7 +20,11 @@ export async function SavePlaceholderAsCustom() {
   toBeSaved.info.description = 'Customized by me';
   toBeSaved.info.filename = 'custom.yml';
 
-  const filePath = await path.join(await path.appDataDir(), 'placeholders', toBeSaved.info.filename);
+  const filePath = await path.join(
+    await path.appDataDir(),
+    'placeholders',
+    toBeSaved.info.filename,
+  );
 
   await writeTextFile(filePath, yaml.dump(toBeSaved));
 
@@ -28,4 +32,4 @@ export async function SavePlaceholderAsCustom() {
   jsonSettings.fancyToolbar.placeholder = toBeSaved.info.filename;
 
   await saveJsonSettings(jsonSettings);
-}
+}, 1000);

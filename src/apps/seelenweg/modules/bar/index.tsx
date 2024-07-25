@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
 import { MediaSession } from '../item/infra/MediaSession';
+import { StartMenu } from '../item/infra/StartMenu';
 import { UserApplication } from '../item/infra/UserApplication';
 import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
@@ -168,6 +169,10 @@ function ItemByType(item: SwItem) {
 
   if (item.type === SpecialItemType.Media) {
     return <MediaSession key={'media-item'} item={item} />;
+  }
+
+  if (item.type === SpecialItemType.Start) {
+    return <StartMenu key={'start-menu'} item={item} />;
   }
 
   return null;

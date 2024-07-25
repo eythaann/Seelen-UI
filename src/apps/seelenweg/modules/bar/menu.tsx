@@ -13,10 +13,17 @@ import { AppsSides, SwPinnedApp, SwTemporalApp } from '../shared/store/domain';
 export function getSeelenWegMenu(): ItemType[] {
   return [
     {
-      key: 'add-media',
+      key: 'add-media-module',
       label: 'Add Media Module',
       onClick() {
         store.dispatch(RootActions.addMediaModule());
+      },
+    },
+    {
+      key: 'add-start-module',
+      label: 'Add Start Module',
+      onClick() {
+        store.dispatch(RootActions.addStartModule());
       },
     },
     {

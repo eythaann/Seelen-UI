@@ -11,3 +11,13 @@ export const MediaSessionMenu = [
     },
   },
 ];
+
+export const StartModuleMenu = [
+  {
+    key: 'remove',
+    label: 'Remove Start Module',
+    onClick() {
+      store.dispatch(RootActions.removeStartModule());
+    },
+  },
+];
