@@ -39,11 +39,6 @@ lazy_static! {
         "Seelen Fancy Toolbar Hitbox",
         "Program Manager",
     ]);
-    static ref EXE_BLACK_LIST: Vec<&'static str> = Vec::from([
-        "msedgewebview2.exe",
-        "SearchHost.exe",
-        "StartMenuExperienceHost.exe",
-    ]);
 }
 
 static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 7] = [
@@ -54,6 +49,13 @@ static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 7] = [
     "Seelen Fancy Toolbar",
     "Seelen Fancy Toolbar Hitbox",
     "Program Manager",
+];
+
+static OVERLAP_BLACK_LIST_BY_EXE: [&str; 4] = [
+    "msedgewebview2.exe",
+    "SearchHost.exe",
+    "StartMenuExperienceHost.exe",
+    "ShellExperienceHost.exe",
 ];
 
 #[derive(Debug, Serialize, Clone)]
@@ -237,7 +239,8 @@ impl SeelenWeg {
         let should_handle_hidden = self.ready
             && WindowsApi::is_window_visible(hwnd)
             && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
-            && !EXE_BLACK_LIST.contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
+            && !OVERLAP_BLACK_LIST_BY_EXE
+                .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
 
         if !should_handle_hidden {
             return Ok(());
@@ -387,6 +390,11 @@ impl SeelenWeg {
             let pdata = AppBarData::from_handle(handle);
             pdata.set_state(state);
             WindowsApi::show_window(handle, cmdshow)?;
+
+            std::thread::spawn(move || -> Result<()> {
+                std::thread::sleep(std::time::Duration::from_millis(1000));
+                SeelenWeg::hide_taskbar(hide)
+            });
         }
         Ok(())
     }

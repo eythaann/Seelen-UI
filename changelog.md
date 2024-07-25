@@ -12,6 +12,7 @@
 ### fix
 - Fix zorder on hovering on weg and toolbar respectively to wm borders.
 - Applying bad themes on apps.
+- Not hiding the taskbar at start.
 
 ## [1.8.5]
 ### fix
