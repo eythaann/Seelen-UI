@@ -1,5 +1,6 @@
-use std::{collections::HashMap, sync::Arc};
+use std::{collections::HashMap, path::PathBuf, sync::Arc};
 
+use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::{
@@ -7,64 +8,252 @@ use windows::{
     Media::Control::{
         GlobalSystemMediaTransportControlsSession,
         GlobalSystemMediaTransportControlsSessionManager,
-        GlobalSystemMediaTransportControlsSessionPlaybackStatus,
+        GlobalSystemMediaTransportControlsSessionPlaybackStatus, MediaPropertiesChangedEventArgs,
+        PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
     },
-    Storage::Streams::{Buffer, DataReader, InputStreamOptions},
+    Storage::Streams::{DataReader, IRandomAccessStreamReference},
     Win32::{
+        Devices::FunctionDiscovery::PKEY_Device_FriendlyName,
         Media::Audio::{
-            eMultimedia, eRender,
+            eAll, eCapture, eCommunications, eConsole, eMultimedia, eRender, EDataFlow, ERole,
             Endpoints::{
                 IAudioEndpointVolume, IAudioEndpointVolumeCallback,
                 IAudioEndpointVolumeCallback_Impl,
             },
-            IAudioSessionControl, IAudioSessionEvents, IAudioSessionEvents_Impl,
-            IAudioSessionManager2, IAudioSessionNotification, IAudioSessionNotification_Impl,
-            IMMDeviceEnumerator, MMDeviceEnumerator,
+            IAudioSessionControl, IAudioSessionControl2, IAudioSessionEvents,
+            IAudioSessionEvents_Impl, IAudioSessionManager2, IAudioSessionNotification,
+            IAudioSessionNotification_Impl, IMMDevice, IMMDeviceEnumerator, IMMEndpoint,
+            IMMNotificationClient, IMMNotificationClient_Impl, ISimpleAudioVolume,
+            MMDeviceEnumerator, DEVICE_STATE_ACTIVE,
         },
-        System::Com::CLSCTX_ALL,
+        Storage::EnhancedStorage::PKEY_FileDescription,
+        System::Com::{CLSCTX_ALL, STGM_READ},
+        UI::Shell::{PropertiesSystem::PROPERTYKEY, SIGDN_NORMALDISPLAY},
     },
 };
+use windows_core::Interface;
 
-use crate::{error_handler::Result, log_error, windows_api::Com};
+use crate::{
+    error_handler::Result,
+    log_error,
+    seelen::get_app_handle,
+    seelen_weg::icon_extractor::extract_and_save_icon,
+    trace_lock,
+    utils::pcwstr,
+    windows_api::{Com, WindowsApi},
+};
 
-use super::domain::MediaSession;
+use super::domain::{Device, DeviceChannel, IPolicyConfig, MediaPlayer, PolicyConfig};
 
 lazy_static! {
-    pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> =
-        Arc::new(Mutex::new(MediaManager::new()));
+    pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> = Arc::new(Mutex::new(
+        MediaManager::new().expect("Failed to create media manager")
+    ));
     pub static ref REG_PROPERTY_EVENTS: Arc<Mutex<HashMap<String, EventRegistrationToken>>> =
         Arc::new(Mutex::new(HashMap::new()));
     pub static ref REG_PLAYBACK_EVENTS: Arc<Mutex<HashMap<String, EventRegistrationToken>>> =
         Arc::new(Mutex::new(HashMap::new()));
 }
 
-#[windows::core::implement(IAudioEndpointVolumeCallback)]
-pub struct AudioEndpointVolumeCallback<F>
-where
-    F: Fn(f32, bool) + Send + 'static,
-{
-    callback: F,
+enum MediaEvent {
+    DeviceAdded(String),
+    DeviceRemoved(String),
+    DefaultDeviceChanged {
+        flow: EDataFlow,
+        role: ERole,
+        device_id: String,
+    },
+    DeviceVolumeChanged {
+        device_id: String,
+        volume: f32,
+        muted: bool,
+    },
+    MediaPlayerAdded(GlobalSystemMediaTransportControlsSession),
+    MediaPlayerRemoved(String),
+    MediaPlayerPropertiesChanged {
+        id: String,
+        title: String,
+        author: String,
+        thumbnail: Option<PathBuf>,
+    },
+    MediaPlayerPlaybackStatusChanged {
+        id: String,
+        playing: bool,
+    },
 }
 
-impl<F> IAudioEndpointVolumeCallback_Impl for AudioEndpointVolumeCallback<F>
-where
-    F: Fn(f32, bool) + Send + 'static,
-{
+#[windows_core::implement(IMMNotificationClient)]
+struct MediaManagerEvents;
+
+impl IMMNotificationClient_Impl for MediaManagerEvents {
+    fn OnDefaultDeviceChanged(
+        &self,
+        flow: EDataFlow,
+        role: ERole,
+        device_id: &windows_core::PCWSTR,
+    ) -> windows_core::Result<()> {
+        trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DefaultDeviceChanged {
+            flow,
+            role,
+            device_id: unsafe { device_id.to_string()? },
+        });
+        Ok(())
+    }
+
+    fn OnDeviceAdded(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
+        trace_lock!(MEDIA_MANAGER)
+            .emit_event(MediaEvent::DeviceAdded(unsafe { device_id.to_string()? }));
+        Ok(())
+    }
+
+    fn OnDeviceRemoved(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
+        trace_lock!(MEDIA_MANAGER)
+            .emit_event(MediaEvent::DeviceRemoved(unsafe { device_id.to_string()? }));
+        Ok(())
+    }
+
+    fn OnDeviceStateChanged(
+        &self,
+        device_id: &windows_core::PCWSTR,
+        new_device_state: windows::Win32::Media::Audio::DEVICE_STATE,
+    ) -> windows_core::Result<()> {
+        let device_id = unsafe { device_id.to_string()? };
+        match new_device_state {
+            DEVICE_STATE_ACTIVE => {
+                trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DeviceAdded(device_id));
+            }
+            _ => {
+                trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DeviceRemoved(device_id));
+            }
+        }
+        Ok(())
+    }
+
+    fn OnPropertyValueChanged(
+        &self,
+        _device_id: &windows_core::PCWSTR,
+        _key: &PROPERTYKEY,
+    ) -> windows_core::Result<()> {
+        Ok(())
+    }
+}
+
+fn extract_thumbnail(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
+    let stream = stream.OpenReadAsync()?.get()?;
+    let size = stream.Size()?;
+    let mut buffer = vec![0u8; size as usize];
+
+    let input_stream = stream.GetInputStreamAt(0)?;
+    let data_reader = DataReader::CreateDataReader(&input_stream)?;
+
+    data_reader.LoadAsync(size as u32)?.get()?;
+    data_reader.ReadBytes(&mut buffer)?;
+
+    let image = image::load_from_memory_with_format(&buffer, image::ImageFormat::Png)?;
+    let image_path = std::env::temp_dir().join(format!("{}.png", uuid::Uuid::new_v4()));
+    image.save(&image_path)?;
+
+    Ok(image_path)
+}
+
+impl MediaManagerEvents {
+    fn on_media_player_properties_changed(
+        session: &Option<GlobalSystemMediaTransportControlsSession>,
+        _args: &Option<MediaPropertiesChangedEventArgs>,
+    ) -> windows_core::Result<()> {
+        if let Some(session) = session {
+            let id = session.SourceAppUserModelId()?.to_string();
+            let properties = session.TryGetMediaPropertiesAsync()?.get()?;
+            trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerPropertiesChanged {
+                id,
+                title: properties.Title()?.to_string(),
+                author: properties.Artist()?.to_string(),
+                thumbnail: extract_thumbnail(properties.Thumbnail()?).ok(),
+            });
+        }
+        Ok(())
+    }
+
+    fn on_media_player_playback_changed(
+        session: &Option<GlobalSystemMediaTransportControlsSession>,
+        _args: &Option<PlaybackInfoChangedEventArgs>,
+    ) -> windows_core::Result<()> {
+        if let Some(session) = session {
+            let playback = session.GetPlaybackInfo()?;
+            trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerPlaybackStatusChanged {
+                id: session.SourceAppUserModelId()?.to_string(),
+                playing: playback.PlaybackStatus()?
+                    == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
+            });
+        }
+        Ok(())
+    }
+
+    fn on_media_players_changed(
+        session_manager: &Option<GlobalSystemMediaTransportControlsSessionManager>,
+        _args: &Option<SessionsChangedEventArgs>,
+    ) -> windows_core::Result<()> {
+        if let Some(session_manager) = session_manager {
+            let mut current_list = trace_lock!(MEDIA_MANAGER)
+                .playing()
+                .iter()
+                .map(|session| session.id.clone())
+                .collect_vec();
+
+            for session in session_manager.GetSessions()? {
+                let id = session.SourceAppUserModelId()?.to_string();
+                if !current_list.contains(&id) {
+                    println!("added: {:?}", id);
+                    trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerAdded(session));
+                }
+                current_list.retain(|x| *x != id);
+            }
+
+            for id in current_list {
+                trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerRemoved(id));
+            }
+        }
+        Ok(())
+    }
+}
+
+#[windows::core::implement(IAudioEndpointVolumeCallback, IAudioSessionNotification)]
+struct MediaDeviceEventHandler {
+    device_id: String,
+}
+
+impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
     fn OnNotify(
         &self,
         data: *mut windows::Win32::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA,
     ) -> windows_core::Result<()> {
-        if data.is_null() {
-            return Ok(());
+        if let Some(data) = unsafe { data.as_ref() } {
+            trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DeviceVolumeChanged {
+                device_id: self.device_id.clone(),
+                volume: data.fMasterVolume,
+                muted: data.bMuted.as_bool(),
+            });
         }
-        let data = unsafe { *data };
-        (self.callback)(data.fMasterVolume, data.bMuted.as_bool());
+        Ok(())
+    }
+}
+
+impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
+    fn OnSessionCreated(
+        &self,
+        new_session: Option<&IAudioSessionControl>,
+    ) -> windows::core::Result<()> {
+        if let Some(session) = new_session {
+            println!("SESSION CREATED! {}", unsafe {
+                session.GetDisplayName()?.to_string()?
+            });
+        }
         Ok(())
     }
 }
 
 #[windows::core::implement(IAudioSessionEvents)]
-pub struct MediaSessionEventHandler;
+struct MediaSessionEventHandler;
 
 impl IAudioSessionEvents_Impl for MediaSessionEventHandler {
     fn OnChannelVolumeChanged(
@@ -127,244 +316,450 @@ impl IAudioSessionEvents_Impl for MediaSessionEventHandler {
         &self,
         _new_state: windows::Win32::Media::Audio::AudioSessionState,
     ) -> windows::core::Result<()> {
-        println!("STATE CHANGED! {:?}", _new_state);
+        // println!("STATE CHANGED! {:?}", _new_state);
         Ok(())
     }
 }
 
-#[windows::core::implement(IAudioSessionNotification)]
-pub struct MediaSessionCreationEventHandler {
-    event_handler: IAudioSessionEvents,
-    sessions: Mutex<Vec<IAudioSessionControl>>,
-}
-
-impl Default for MediaSessionCreationEventHandler {
-    fn default() -> Self {
-        Self::new()
-    }
-}
-
-impl MediaSessionCreationEventHandler {
-    pub fn new() -> Self {
-        Self {
-            event_handler: MediaSessionEventHandler.into(),
-            sessions: Mutex::new(Vec::new()),
-        }
-    }
-}
-
-impl IAudioSessionNotification_Impl for MediaSessionCreationEventHandler {
-    fn OnSessionCreated(
-        &self,
-        new_session: Option<&IAudioSessionControl>,
-    ) -> windows::core::Result<()> {
-        if let Some(session) = new_session {
-            println!("SESSION CREATED! {}", unsafe {
-                session.GetDisplayName()?.to_string()?
-            });
-            let session = session.clone();
-            unsafe { session.RegisterAudioSessionNotification(Some(&self.event_handler))? };
-            self.sessions.lock().push(session);
-        }
-        Ok(())
-    }
-}
-
+type OnDevicesChange = Box<dyn Fn(&Vec<Device>, &Vec<Device>) + Send + Sync>;
+type OnPlayersChange = Box<dyn Fn(&Vec<MediaPlayer>) + Send + Sync>;
 pub struct MediaManager {
-    sessions_manager: GlobalSystemMediaTransportControlsSessionManager,
+    inputs: Vec<Device>,
+    outputs: Vec<Device>,
+    playing: Vec<MediaPlayer>,
+
+    registered_devices_callbacks: Vec<OnDevicesChange>,
+    registered_players_callbacks: Vec<OnPlayersChange>,
+
+    device_enumerator: IMMDeviceEnumerator,
+    mm_notification_client: IMMNotificationClient,
+    devices_audio_endpoint: HashMap<String, (IAudioEndpointVolume, IAudioEndpointVolumeCallback)>,
+
+    media_player_manager: GlobalSystemMediaTransportControlsSessionManager,
+    media_player_manager_event_handler: TypedEventHandler<
+        GlobalSystemMediaTransportControlsSessionManager,
+        SessionsChangedEventArgs,
+    >,
+
+    media_players: HashMap<String, GlobalSystemMediaTransportControlsSession>,
+    media_player_properties_event_handler: TypedEventHandler<
+        GlobalSystemMediaTransportControlsSession,
+        MediaPropertiesChangedEventArgs,
+    >,
+    media_player_playback_event_handler:
+        TypedEventHandler<GlobalSystemMediaTransportControlsSession, PlaybackInfoChangedEventArgs>,
+    /// session id -> (media properties changed event, playback info changed event)
+    media_player_event_tokens: HashMap<String, (EventRegistrationToken, EventRegistrationToken)>,
+}
+
+unsafe impl Send for MediaManager {}
+
+// getters/setters
+impl MediaManager {
+    pub fn inputs(&self) -> &Vec<Device> {
+        &self.inputs
+    }
+
+    pub fn outputs(&self) -> &Vec<Device> {
+        &self.outputs
+    }
+
+    pub fn playing(&self) -> &Vec<MediaPlayer> {
+        &self.playing
+    }
+
+    pub fn device_mut(&mut self, id: &str) -> Option<&mut Device> {
+        self.inputs
+            .iter_mut()
+            .chain(self.outputs.iter_mut())
+            .find(|d| d.id == id)
+    }
+
+    pub fn player_mut(&mut self, id: &str) -> Option<&mut MediaPlayer> {
+        self.playing.iter_mut().find(|p| p.id == id)
+    }
+
+    pub fn get_raw_device(&self, device_id: &str) -> Option<IMMDevice> {
+        unsafe { self.device_enumerator.GetDevice(pcwstr(device_id)) }.ok()
+    }
+
+    pub fn devices_audio_endpoint(
+        &self,
+    ) -> &HashMap<String, (IAudioEndpointVolume, IAudioEndpointVolumeCallback)> {
+        &self.devices_audio_endpoint
+    }
+
+    pub fn session_by_id(&self, id: &str) -> Option<&GlobalSystemMediaTransportControlsSession> {
+        self.media_players.get(id)
+    }
+
+    pub fn get_recommended_player_id(&self) -> Result<String> {
+        Ok(self
+            .media_player_manager
+            .GetCurrentSession()?
+            .SourceAppUserModelId()?
+            .to_string_lossy())
+    }
 }
 
 impl MediaManager {
-    /// T can be any type in the list:
-    /// https://learn.microsoft.com/en-us/windows/win32/api/mmdeviceapi/nf-mmdeviceapi-immdevice-activate
-    pub fn activate_default_device<T: windows::core::Interface>() -> Result<T> {
-        let enumerator: IMMDeviceEnumerator = Com::create_instance(&MMDeviceEnumerator)?;
-        let device = unsafe { enumerator.GetDefaultAudioEndpoint(eRender, eMultimedia)? };
-        let instance: T = unsafe { device.Activate(CLSCTX_ALL, None)? };
-        Ok(instance)
+    pub fn new() -> Result<Self> {
+        let media_player_manager =
+            GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?.get()?;
+
+        let mut manager = Self {
+            inputs: Vec::new(),
+            outputs: Vec::new(),
+            playing: Vec::new(),
+            registered_devices_callbacks: Vec::new(),
+            registered_players_callbacks: Vec::new(),
+
+            // unsafe com objects
+            devices_audio_endpoint: HashMap::new(),
+            device_enumerator: Com::create_instance(&MMDeviceEnumerator)?,
+            mm_notification_client: MediaManagerEvents.into(),
+
+            media_player_manager,
+            media_player_manager_event_handler: TypedEventHandler::new(
+                MediaManagerEvents::on_media_players_changed,
+            ),
+            media_players: HashMap::new(),
+            media_player_event_tokens: HashMap::new(),
+            media_player_properties_event_handler: TypedEventHandler::new(
+                MediaManagerEvents::on_media_player_properties_changed,
+            ),
+            media_player_playback_event_handler: TypedEventHandler::new(
+                MediaManagerEvents::on_media_player_playback_changed,
+            ),
+        };
+
+        unsafe { manager.initialize()? };
+        Ok(manager)
     }
 
-    pub fn new() -> Self {
-        let controls_session_manager = tauri::async_runtime::block_on(async {
-            GlobalSystemMediaTransportControlsSessionManager::RequestAsync()
-                .expect("Failed requesting transport controls")
-                .await
-                .expect("Failed requesting transport controls")
-        });
+    pub fn on_change_players<F>(&mut self, callback: F)
+    where
+        F: Fn(&Vec<MediaPlayer>) + Send + Sync + 'static,
+    {
+        self.registered_players_callbacks.push(Box::new(callback));
+    }
 
-        Self {
-            sessions_manager: controls_session_manager,
+    pub fn on_change_devices<F>(&mut self, callback: F)
+    where
+        F: Fn(&Vec<Device>, &Vec<Device>) + Send + Sync + 'static,
+    {
+        self.registered_devices_callbacks.push(Box::new(callback));
+    }
+
+    unsafe fn initialize(&mut self) -> Result<()> {
+        let collection = self
+            .device_enumerator
+            .EnumAudioEndpoints(eAll, DEVICE_STATE_ACTIVE)?;
+
+        for idx in 0..collection.GetCount()? {
+            self.load_device(&collection.Item(idx)?)?;
         }
-    }
 
-    pub fn session_by_id(
-        &self,
-        id: &str,
-    ) -> Result<Option<GlobalSystemMediaTransportControlsSession>> {
-        for session in self.sessions_manager.GetSessions()? {
-            if session.SourceAppUserModelId()?.to_string_lossy() == id {
-                return Ok(Some(session));
-            }
+        self.device_enumerator
+            .RegisterEndpointNotificationCallback(&self.mm_notification_client)?;
+
+        for session in self.media_player_manager.GetSessions()? {
+            self.load_media_transport_session(session)?;
         }
-        Ok(None)
+
+        self.update_recommended_player();
+        self.media_player_manager
+            .SessionsChanged(&self.media_player_manager_event_handler)?;
+
+        Ok(())
     }
 
-    pub async fn request_media_sessions(&self) -> Result<Vec<MediaSession>> {
+    unsafe fn load_device(&mut self, device: &IMMDevice) -> Result<()> {
+        let device_id = device.GetId()?.to_string()?;
+        let device_volume: IAudioEndpointVolume = device.Activate(CLSCTX_ALL, None)?;
+        let device_session_manager: IAudioSessionManager2 = device.Activate(CLSCTX_ALL, None)?;
+
+        // create Serializable Device object
         let mut sessions = Vec::new();
+        let enumerator = device_session_manager.GetSessionEnumerator()?;
+        for session_idx in 0..enumerator.GetCount()? {
+            let session: IAudioSessionControl2 = enumerator.GetSession(session_idx)?.cast()?;
+            let volume: ISimpleAudioVolume = session.cast()?;
 
-        let default_session = self.sessions_manager.GetCurrentSession()?;
-        let default_session_id = default_session.SourceAppUserModelId()?.to_string_lossy();
-
-        for session in self.sessions_manager.GetSessions()? {
-            let properties = session.TryGetMediaPropertiesAsync()?.await?;
-
-            let buffer = Buffer::Create(1_000_000)?; // 1MB
-            let stream = properties.Thumbnail()?.OpenReadAsync()?.await?;
-            stream
-                .ReadAsync(&buffer, buffer.Capacity()?, InputStreamOptions::ReadAhead)?
-                .await?;
-
-            let reader = DataReader::FromBuffer(&buffer)?;
-            let mut bytes = Vec::new();
-            while reader.UnconsumedBufferLength()? > 0 {
-                bytes.push(reader.ReadByte()?);
+            let name;
+            let icon_path;
+            match WindowsApi::exe_path_by_process(session.GetProcessId()?) {
+                Ok(path) => {
+                    let shell_item = WindowsApi::get_shell_item(&path)?;
+                    name = match shell_item.GetString(&PKEY_FileDescription) {
+                        Ok(description) => description.to_string()?,
+                        Err(_) => shell_item
+                            .GetDisplayName(SIGDN_NORMALDISPLAY)?
+                            .to_string()?,
+                    }
+                    .replace(".exe", "");
+                    icon_path = extract_and_save_icon(&get_app_handle(), &path)
+                        .ok()
+                        .map(|p| p.to_string_lossy().to_string());
+                }
+                Err(_) => {
+                    name = session.GetDisplayName()?.to_string()?;
+                    icon_path = None;
+                }
             }
 
-            let image = image::load_from_memory_with_format(&bytes, image::ImageFormat::Png)?;
-            let image_path = std::env::temp_dir().join(format!("{}.png", uuid::Uuid::new_v4()));
-            image.save(&image_path)?;
-
-            let playback_info = session.GetPlaybackInfo()?;
-            let status = playback_info.PlaybackStatus()?;
-            let id = session.SourceAppUserModelId()?.to_string_lossy();
-
-            sessions.push(MediaSession {
-                title: properties.Title()?.to_string_lossy(),
-                author: properties.Artist()?.to_string_lossy(),
-                thumbnail: Some(image_path),
-                playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
-                default: id == default_session_id,
-                id,
+            sessions.push(DeviceChannel {
+                id: session.GetSessionIdentifier()?.to_string()?,
+                instance_id: session.GetSessionInstanceIdentifier()?.to_string()?,
+                process_id: session.GetProcessId()?,
+                name,
+                icon_path,
+                is_system: session.IsSystemSoundsSession().0 == 0,
+                volume: volume.GetMasterVolume()?,
+                muted: volume.GetMute()?.as_bool(),
             });
         }
 
-        Ok(sessions)
+        let is_input = device.cast::<IMMEndpoint>()?.GetDataFlow()? == eCapture;
+        let properties = device.OpenPropertyStore(STGM_READ)?;
+
+        let (is_default_multimedia, is_default_communications) = if is_input {
+            (
+                self.is_default_device(&device_id, eCapture, eMultimedia),
+                self.is_default_device(&device_id, eCapture, eCommunications),
+            )
+        } else {
+            (
+                self.is_default_device(&device_id, eRender, eMultimedia),
+                self.is_default_device(&device_id, eRender, eCommunications),
+            )
+        };
+
+        let device = Device {
+            id: device_id.clone(),
+            name: properties.GetValue(&PKEY_Device_FriendlyName)?.to_string(),
+            is_default_multimedia,
+            is_default_communications,
+            sessions,
+            volume: device_volume.GetMasterVolumeLevelScalar()?,
+            muted: device_volume.GetMute()?.as_bool(),
+        };
+
+        if is_input {
+            self.inputs.push(device);
+        } else {
+            self.outputs.push(device);
+        }
+
+        // listen for device events
+        let device_volume_callback = IAudioEndpointVolumeCallback::from(MediaDeviceEventHandler {
+            device_id: device_id.clone(),
+        });
+
+        device_volume.RegisterControlChangeNotify(&device_volume_callback)?;
+        self.devices_audio_endpoint
+            .insert(device_id, (device_volume, device_volume_callback));
+        Ok(())
     }
 
-    fn _listen_media_channels_events() {
-        Com::run_threaded_with_context(move || -> Result<()> {
-            let audio_session_manager: IAudioSessionManager2 = Self::activate_default_device()?;
+    fn release_device(&mut self, device_id: &str) -> Result<()> {
+        if let Some((endpoint, callback)) = self.devices_audio_endpoint.remove(device_id) {
+            unsafe { endpoint.UnregisterControlChangeNotify(&callback)? };
+        }
+        self.inputs.retain(|d| d.id != device_id);
+        self.outputs.retain(|d| d.id != device_id);
+        Ok(())
+    }
 
-            unsafe {
-                let enumerator = audio_session_manager.GetSessionEnumerator()?;
+    fn load_media_transport_session(
+        &mut self,
+        session: GlobalSystemMediaTransportControlsSession,
+    ) -> Result<()> {
+        let properties = session.TryGetMediaPropertiesAsync()?.get()?;
 
-                let handler: IAudioSessionNotification =
-                    MediaSessionCreationEventHandler::new().into();
-                audio_session_manager.RegisterSessionNotification(Some(&handler))?;
+        let playback_info = session.GetPlaybackInfo()?;
+        let status = playback_info.PlaybackStatus()?;
+        let id = session.SourceAppUserModelId()?.to_string_lossy();
 
-                let handler: IAudioSessionEvents = MediaSessionEventHandler.into();
-                let mut sessions = Vec::new();
+        self.playing.push(MediaPlayer {
+            title: properties.Title().unwrap_or_default().to_string_lossy(),
+            author: properties.Artist().unwrap_or_default().to_string_lossy(),
+            thumbnail: properties
+                .Thumbnail()
+                .ok()
+                .and_then(|stream| extract_thumbnail(stream).ok()),
+            playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
+            default: false,
+            id: id.clone(),
+        });
 
-                for i in 0..enumerator.GetCount()? {
-                    let session = enumerator.GetSession(i)?;
-                    session.RegisterAudioSessionNotification(Some(&handler))?;
-                    sessions.push(session);
-                }
+        // listen for media transport events
+        self.media_player_event_tokens.insert(
+            id.clone(),
+            (
+                session.MediaPropertiesChanged(&self.media_player_properties_event_handler)?,
+                session.PlaybackInfoChanged(&self.media_player_playback_event_handler)?,
+            ),
+        );
+        self.media_players.insert(id, session);
+        Ok(())
+    }
 
-                while enumerator.GetCount().is_ok() {
-                    std::thread::sleep(std::time::Duration::from_secs(1));
+    fn update_recommended_player(&mut self) {
+        if let Ok(recommended) = self.get_recommended_player_id() {
+            for player in &mut self.playing {
+                player.default = player.id == recommended;
+            }
+        }
+    }
+
+    fn release_media_transport_session(&mut self, player_id: &str) -> Result<()> {
+        if let Some(session) = self.media_players.remove(player_id) {
+            if let Some((properties_token, playback_token)) =
+                self.media_player_event_tokens.remove(player_id)
+            {
+                session.RemoveMediaPropertiesChanged(properties_token)?;
+                session.RemovePlaybackInfoChanged(playback_token)?;
+            }
+        }
+        self.playing.retain(|player| player.id != player_id);
+        Ok(())
+    }
+
+    fn is_default_device(&self, device_id: &str, dataflow: EDataFlow, role: ERole) -> bool {
+        unsafe {
+            self.device_enumerator
+                .GetDefaultAudioEndpoint(dataflow, role)
+                .and_then(|d| d.GetId())
+                .and_then(|id| id.to_hstring())
+                .map(|id| id.to_string())
+                .map(|id| id == device_id)
+                .unwrap_or(false)
+        }
+    }
+
+    fn emit_event(&mut self, event: MediaEvent) {
+        let is_changing_players = matches!(
+            event,
+            MediaEvent::MediaPlayerAdded(_)
+                | MediaEvent::MediaPlayerRemoved(_)
+                | MediaEvent::MediaPlayerPropertiesChanged { .. }
+                | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
+        );
+
+        log_error!(self.process_event(event));
+
+        if is_changing_players {
+            self.update_recommended_player();
+            for callback in &self.registered_players_callbacks {
+                callback(self.playing());
+            }
+        } else {
+            for callback in &self.registered_devices_callbacks {
+                callback(self.inputs(), self.outputs());
+            }
+        }
+    }
+
+    fn process_event(&mut self, event: MediaEvent) -> Result<()> {
+        match event {
+            MediaEvent::DeviceAdded(device_id) => {
+                if let Some(device) = self.get_raw_device(&device_id) {
+                    unsafe { self.load_device(&device)? };
                 }
             }
-
-            Ok(())
-        });
-    }
-
-    pub fn listen_media_volume_events<F>(&self, callback: F)
-    where
-        F: Fn(f32, bool) + Send + 'static,
-    {
-        Com::run_threaded_with_context(move || -> Result<()> {
-            let audio_endpoint: IAudioEndpointVolume = Self::activate_default_device()?;
-
-            let callback: IAudioEndpointVolumeCallback =
-                AudioEndpointVolumeCallback { callback }.into();
-            unsafe { audio_endpoint.RegisterControlChangeNotify(&callback)? };
-
-            loop {
-                std::thread::sleep(std::time::Duration::from_secs(60));
+            MediaEvent::DeviceRemoved(device_id) => {
+                self.release_device(&device_id)?;
             }
-        });
-    }
+            MediaEvent::DefaultDeviceChanged {
+                flow,
+                role,
+                device_id,
+            } => {
+                let devices = if flow == eCapture {
+                    &mut self.inputs
+                } else {
+                    &mut self.outputs
+                };
 
-    pub fn listen_transport_controls_events<F>(&self, callback: F)
-    where
-        F: Fn() + Send + Sync + 'static,
-    {
-        let transport_session_manager = self.sessions_manager.clone();
-
-        std::thread::spawn(move || -> Result<()> {
-            let callback = Arc::new(callback);
-            let callback_clone = Arc::clone(&callback);
-
-            let register_sessions: Arc<dyn Fn() -> Result<()> + Send + Sync> =
-                Arc::new(move || -> Result<()> {
-                    let callback_clone = Arc::clone(&callback);
-                    let property_changed = TypedEventHandler::new(move |_, _| {
-                        callback_clone();
-                        Ok(())
-                    });
-
-                    let callback_clone = Arc::clone(&callback);
-                    let playback_info_changed = TypedEventHandler::new(move |_, _| {
-                        callback_clone();
-                        Ok(())
-                    });
-                    let controls_session_manager = tauri::async_runtime::block_on(
-                        GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?,
-                    )?;
-
-                    for session in controls_session_manager.GetSessions()? {
-                        let string_id = session.SourceAppUserModelId()?.to_string_lossy();
-
-                        let mut property_dict = REG_PROPERTY_EVENTS.lock();
-                        let mut playback_dict = REG_PLAYBACK_EVENTS.lock();
-
-                        if let Some(token) = property_dict.get(&string_id) {
-                            session.RemoveMediaPropertiesChanged(*token)?;
-                        }
-
-                        if let Some(token) = playback_dict.get(&string_id) {
-                            session.RemoveMediaPropertiesChanged(*token)?;
-                        }
-
-                        property_dict.insert(
-                            string_id.clone(),
-                            session.MediaPropertiesChanged(&property_changed)?,
-                        );
-                        playback_dict.insert(
-                            string_id.clone(),
-                            session.PlaybackInfoChanged(&playback_info_changed)?,
-                        );
+                for device in devices {
+                    if role == eMultimedia {
+                        device.is_default_multimedia = device.id == device_id;
+                    } else if role == eCommunications {
+                        device.is_default_communications = device.id == device_id;
                     }
-
-                    Ok(())
-                });
-
-            // register initial sessions on startup
-            register_sessions()?;
-
-            // listen for futures changes in sessions
-            let cloned_register_sessions = Arc::clone(&register_sessions);
-            transport_session_manager.SessionsChanged(&TypedEventHandler::new(move |_, _| {
-                log_error!(cloned_register_sessions());
-                callback_clone();
-                Ok(())
-            }))?;
-
-            loop {
-                std::thread::sleep(std::time::Duration::from_secs(60));
+                }
             }
-        });
+            MediaEvent::DeviceVolumeChanged {
+                device_id,
+                volume,
+                muted,
+            } => {
+                if let Some(device) = self.device_mut(&device_id) {
+                    device.volume = volume;
+                    device.muted = muted;
+                }
+            }
+            MediaEvent::MediaPlayerAdded(session) => {
+                self.load_media_transport_session(session)?;
+            }
+            MediaEvent::MediaPlayerRemoved(id) => {
+                self.release_media_transport_session(&id)?;
+            }
+            MediaEvent::MediaPlayerPropertiesChanged {
+                id,
+                title,
+                author,
+                thumbnail,
+            } => {
+                if let Some(player) = self.player_mut(&id) {
+                    player.title = title;
+                    player.author = author;
+                    player.thumbnail = thumbnail;
+                }
+            }
+            MediaEvent::MediaPlayerPlaybackStatusChanged { id, playing } => {
+                if let Some(player) = self.player_mut(&id) {
+                    player.playing = playing;
+                }
+            }
+        }
+        Ok(())
+    }
+
+    pub fn set_default_device(&mut self, id: &str, role: &str) -> Result<()> {
+        let role = match role {
+            "multimedia" => eMultimedia,
+            "communications" => eCommunications,
+            "console" => eConsole,
+            _ => return Err("invalid role".into()),
+        };
+
+        let policy: IPolicyConfig = Com::create_instance(&PolicyConfig)?;
+        unsafe {
+            policy.SetDefaultEndpoint(pcwstr(id), role)?;
+        }
+        Ok(())
+    }
+
+    /// Release all resources
+    /// should be called on application exit
+    pub fn release(&mut self) {
+        let player_ids = self.playing.iter().map(|p| p.id.clone()).collect_vec();
+
+        for player_id in player_ids {
+            log_error!(self.release_media_transport_session(&player_id));
+        }
+
+        let device_ids = self
+            .inputs
+            .iter()
+            .map(|d| d.id.clone())
+            .chain(self.outputs.iter().map(|d| d.id.clone()))
+            .collect_vec();
+
+        for device_id in device_ids {
+            log_error!(self.release_device(&device_id));
+        }
     }
 }

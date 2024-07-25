@@ -83,13 +83,15 @@ features = [
     "Win32_System_ProcessStatus",
     "Win32_System_Power",                  # required for power management (battery - AC)
     "Win32_System_Shutdown",               # required for power management (shutdown)
-    "Win32_Storage_EnhancedStorage",
+    "Win32_Storage_EnhancedStorage",       # PKEYS and Devices/Storage/etc
     "Win32_Media_Audio_Endpoints",         # required for audio module
     "Win32_Media_DeviceManager",           # required for audio module
     "Media",                               # required for audio module
     "Media_Control",                       # required for audio module
     "Storage_Streams",                     # required for audio module
     "Win32_Devices_Display",               # required for display (brightness, etc)
+    "Win32_Devices_FunctionDiscovery",     # PKEYS for Devices
+    "Devices_Custom",
     "UI_Core",
     "Win32_NetworkManagement_IpHelper",    # required for network manager
     "Win32_NetworkManagement_Ndis",        # required for network manager

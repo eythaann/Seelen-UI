@@ -10,7 +10,7 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
-import { ActiveApp, Battery, MediaSession, NetworkAdapter, PowerStatus, TrayInfo } from './domain';
+import { ActiveApp, Battery, MediaChannelTransportData, MediaDevice, NetworkAdapter, PowerStatus, TrayInfo } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -47,16 +47,18 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setSystemTray(event.payload));
   });
 
-  await listenGlobal<MediaSession[]>('media-sessions', (event) => {
+  await listenGlobal<MediaChannelTransportData[]>('media-sessions', (event) => {
+    console.log(event.payload);
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
-  await listenGlobal<number>('media-volume', (event) => {
-    store.dispatch(RootActions.setMediaVolume(event.payload));
+  await listenGlobal<MediaDevice[]>('media-outputs', (event) => {
+    console.log(event.payload);
+    store.dispatch(RootActions.setMediaOutputs(event.payload));
   });
 
-  await listenGlobal<boolean>('media-muted', (event) => {
-    store.dispatch(RootActions.setMediaMuted(event.payload));
+  await listenGlobal<MediaDevice[]>('media-inputs', (event) => {
+    store.dispatch(RootActions.setMediaInputs(event.payload));
   });
 
   await listenGlobal<NetworkAdapter[]>('network-adapters', (event) => {

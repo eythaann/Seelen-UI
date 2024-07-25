@@ -25,17 +25,12 @@ use windows::{
                 MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
             },
         },
-        Media::Audio::{
-            eMultimedia, eRender, Endpoints::IAudioEndpointVolume, IMMDeviceEnumerator,
-            MMDeviceEnumerator,
-        },
         Security::{
             GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TOKEN_ADJUST_PRIVILEGES,
             TOKEN_ELEVATION, TOKEN_QUERY,
         },
         Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
-            Com::CLSCTX_ALL,
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
@@ -66,7 +61,7 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, hook::HOOK_MANAGER, log_error, winevent::WinEvent};
+use crate::{error_handler::Result, hook::HOOK_MANAGER, log_error, trace_lock, winevent::WinEvent};
 
 #[macro_export]
 macro_rules! pcstr {
@@ -286,7 +281,7 @@ impl WindowsApi {
     pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
         Self::set_minimize_animation(false)?;
 
-        let mut hook_manager = HOOK_MANAGER.lock();
+        let mut hook_manager = trace_lock!(HOOK_MANAGER);
         hook_manager.pause_and_resume_after(WinEvent::SystemMinimizeEnd, hwnd);
         hook_manager.set_resume_callback(move |hook_manager| {
             log_error!(Self::set_minimize_animation(true));
@@ -339,12 +334,11 @@ impl WindowsApi {
         unsafe { GetParent(hwnd) }
     }
 
-    pub fn exe_path(hwnd: HWND) -> Result<String> {
+    pub fn exe_path_by_process(process_id: u32) -> Result<String> {
         let mut len = 512_u32;
         let mut path: Vec<u16> = vec![0; len as usize];
         let text_ptr = path.as_mut_ptr();
 
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
         let handle = Self::process_handle(process_id)?;
         unsafe {
             log_error!(QueryFullProcessImageNameW(
@@ -357,6 +351,11 @@ impl WindowsApi {
         Self::close_handle(handle)?;
 
         Ok(String::from_utf16(&path[..len as usize])?)
+    }
+
+    pub fn exe_path(hwnd: HWND) -> Result<String> {
+        let (process_id, _) = Self::window_thread_process_id(hwnd);
+        Self::exe_path_by_process(process_id)
     }
 
     pub fn exe(hwnd: HWND) -> Result<String> {
@@ -374,12 +373,15 @@ impl WindowsApi {
         Ok(String::from_utf16(&text[..length])?)
     }
 
-    pub fn get_window_display_name(hwnd: HWND) -> Result<String> {
-        let path = Self::exe_path(hwnd)?;
+    pub fn get_shell_item(path: &str) -> Result<IShellItem2> {
         let wide_path: Vec<u16> = path.encode_utf16().chain(Some(0)).collect();
+        let item = unsafe { SHCreateItemFromParsingName(PCWSTR(wide_path.as_ptr()), None)? };
+        Ok(item)
+    }
+
+    pub fn get_window_display_name(hwnd: HWND) -> Result<String> {
+        let shell_item = Self::get_shell_item(&Self::exe_path(hwnd)?)?;
         unsafe {
-            let shell_item: IShellItem2 =
-                SHCreateItemFromParsingName(PCWSTR(wide_path.as_ptr()), None)?;
             match shell_item.GetString(&PKEY_FileDescription) {
                 Ok(description) => Ok(description.to_string()?),
                 Err(_) => Ok(shell_item
@@ -486,17 +488,6 @@ impl WindowsApi {
 
     pub fn _get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {
         Com::create_instance(&VirtualDesktopManager)
-    }
-
-    pub fn get_media_device_enumerator() -> Result<IMMDeviceEnumerator> {
-        Com::create_instance::<IMMDeviceEnumerator>(&MMDeviceEnumerator)
-    }
-
-    pub fn get_default_audio_endpoint() -> Result<IAudioEndpointVolume> {
-        let enumerator = Self::get_media_device_enumerator()?;
-        let device = unsafe { enumerator.GetDefaultAudioEndpoint(eRender, eMultimedia)? };
-        let endpoint: IAudioEndpointVolume = unsafe { device.Activate(CLSCTX_ALL, None)? };
-        Ok(endpoint)
     }
 
     pub fn _get_virtual_desktop_id(hwnd: HWND) -> Result<GUID> {

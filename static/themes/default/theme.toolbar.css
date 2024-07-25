@@ -31,7 +31,7 @@
     }
 
     .ft-bar-bg-layer-2 {
-      background-color: #121212aa;
+      background-color: #121212bb;
     }
   }
 
@@ -66,7 +66,7 @@
     margin: 4px;
 
     .fast-settings-bg-layer-1 {
-      background-color: var(--color-gray-100);
+      background-color: var(--color-gray-50);
       border-radius: 10px;
     }
 
@@ -84,7 +84,7 @@
     margin: 4px;
 
     .tray-bg-layer-1 {
-      background-color: var(--color-gray-100);
+      background-color: var(--color-gray-50);
       border-radius: 10px;
       box-shadow: 0 0 10px 10px #0001;
     }
@@ -136,7 +136,7 @@
     flex-direction: column;
 
     .wlan-selector-bg-layer-1 {
-      background-color: var(--color-gray-100);
+      background-color: var(--color-gray-50);
       border-radius: 10px;
     }
 
@@ -196,10 +196,11 @@
 
   .media-control {
     margin: 4px;
+    width: 300px;
     padding: 10px;
 
     .bg-layer-1 {
-      background-color: var(--color-gray-100);
+      background-color: var(--color-gray-50);
       border-radius: 10px;
     }
 
@@ -209,10 +210,31 @@
       align-items: center;
     }
 
+    .media-control-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-gray-600);
+      margin-bottom: 4px;
+      display: block;
+      width: 100%;
+
+      &:not(:first-of-type) {
+        margin-top: 10px;
+        padding-top: 4px;
+        border-top: solid 1px var(--color-gray-300);
+      }
+    }
+
+    .media-device {
+      font-weight: 600;
+      font-size: 0.8rem;
+      color: var(--color-gray-700);
+    }
+
     .media-control-session-list {
       display: flex;
       flex-direction: column;
-      margin-top: 10px;
+      margin-top: 6px;
       gap: 4px;
 
       .media-session {

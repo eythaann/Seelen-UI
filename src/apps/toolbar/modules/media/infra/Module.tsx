@@ -13,16 +13,10 @@ interface Props {
 }
 
 function MediaModuleItem({ module, ...rest }: Props) {
-  const volume = useSelector(Selectors.mediaVolume);
-  const isMuted = useSelector(Selectors.mediaMuted);
+  const { volume = 0, muted: isMuted = false } =
+    useSelector((state: any) => Selectors.mediaOutputs(state).find((d) => d.is_default_multimedia)) || {};
 
-  return (
-    <Item
-      {...rest}
-      extraVars={{ volume, isMuted }}
-      module={module}
-    />
-  );
+  return <Item {...rest} extraVars={{ volume, isMuted }} module={module} />;
 }
 
 export function MediaModule({ module }: Props) {

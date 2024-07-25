@@ -6,6 +6,7 @@ pub mod virtual_desktop;
 
 use std::{path::PathBuf, time::Duration};
 
+use itertools::Itertools;
 use tauri::{AppHandle, Manager};
 use windows::{
     core::GUID,
@@ -16,6 +17,10 @@ use windows::{
 };
 
 use crate::error_handler::Result;
+
+pub fn pcwstr(s: &str) -> windows::core::PCWSTR {
+    windows::core::PCWSTR::from_raw(s.encode_utf16().chain(Some(0)).collect_vec().as_ptr())
+}
 
 pub fn sleep_millis(millis: u64) {
     std::thread::sleep(Duration::from_millis(millis));
@@ -112,7 +117,12 @@ macro_rules! trace_lock {
     ($mutex:expr) => {{
         #[cfg(feature = "trace_lock")]
         {
-            log::debug!("Attempting to acquire lock on {}", stringify!($mutex));
+            log::debug!(
+                "Attempting to acquire lock on {} at {}:{}",
+                stringify!($mutex),
+                file!(),
+                line!()
+            );
             let lock = $mutex.lock();
             log::debug!("Successfully acquired lock on {}", stringify!($mutex));
             lock

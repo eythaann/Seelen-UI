@@ -32,7 +32,7 @@ export interface NetworkAdapter {
   ipv6: string | null;
 }
 
-export interface MediaSession {
+export interface MediaChannelTransportData {
   id: string;
   title: string;
   author: string;
@@ -56,7 +56,28 @@ export interface RootState extends IRootState<FancyToolbar> {
   online: boolean;
   accentColor: string;
   wlanBssEntries: WlanBssEntry[];
-  mediaSessions: MediaSession[];
-  mediaVolume: number;
-  mediaMuted: boolean;
+  mediaSessions: MediaChannelTransportData[];
+  mediaOutputs: MediaDevice[];
+  mediaInputs: MediaDevice[];
+}
+
+export interface MediaDeviceChannel {
+  id: string;
+  instance_id: string;
+  process_id: number;
+  name: string;
+  icon_path: string | null;
+  is_system: boolean;
+  volume: number;
+  muted: boolean;
+}
+
+export interface MediaDevice {
+  id: string;
+  name: string;
+  is_default_multimedia: boolean;
+  is_default_communications: boolean;
+  sessions: MediaDeviceChannel[];
+  volume: number;
+  muted: boolean;
 }

@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - Add multi-language support! 🥳.
+- Add default media input/output selectors to media module in fancy toolbar.
 
 ## [1.8.5]
 ### fix

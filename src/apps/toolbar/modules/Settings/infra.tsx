@@ -30,7 +30,6 @@ export function SettingsModule({ module }: Props) {
   });
 
   const themeLayers = useSelector(Selectors.themeLayers.toolbar);
-  const volume = useSelector(Selectors.mediaVolume);
 
   useEffect(() => {
     invoke<Brightness>('get_main_monitor_brightness')
@@ -44,10 +43,6 @@ export function SettingsModule({ module }: Props) {
   useAppBlur(() => {
     setOpenPreview(false);
   });
-
-  const onChangeVolume = (value: number) => {
-    invoke('set_volume_level', { level: value });
-  };
 
   return (
     <Popover
@@ -68,19 +63,6 @@ export function SettingsModule({ module }: Props) {
                 <Icon iconName="RiSettings4Fill" />
               </button>
             </Tooltip>
-          </div>
-          <div className="fast-settings-item">
-            <Icon iconName="IoVolumeHighOutline" />
-            <Slider
-              value={volume}
-              onChange={onChangeVolume}
-              min={0}
-              max={1}
-              step={0.01}
-              tooltip={{
-                formatter: (value) => `${(100 * (value || 0)).toFixed(0)}`,
-              }}
-            />
           </div>
           {brightness.max > 0 && (
             <div className="fast-settings-item">

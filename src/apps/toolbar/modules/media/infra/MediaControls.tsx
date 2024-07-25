@@ -1,8 +1,9 @@
 import { Icon } from '../../../../shared/components/Icon';
+import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { Button, Popover, Slider } from 'antd';
+import { Button, Popover, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
-import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgrounByLayers/infra';
@@ -12,7 +13,7 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 import { Selectors } from '../../shared/store/app';
 import { calcLuminance } from '../application';
 
-import { MediaSession } from '../../shared/store/domain';
+import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
 
 import './index.css';
 
@@ -20,7 +21,7 @@ const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
 const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
-function MediaSession({ session }: { session: MediaSession }) {
+function MediaSession({ session }: { session: MediaChannelTransportData }) {
   const [luminance, setLuminance] = useState(0);
 
   let src = convertFileSrc(
@@ -73,33 +74,172 @@ function MediaSession({ session }: { session: MediaSession }) {
   );
 }
 
-export function WithMediaControls({ children }: PropsWithChildren) {
-  const [openPreview, setOpenPreview] = useState(false);
-  const [internalVolume, setInternalVolume] = useState(0);
+function Device({ device }: { device: MediaDevice }) {
+  const onClickMultimedia = () => {
+    if (!device.is_default_multimedia) {
+      invoke('media_set_default_device', { id: device.id, role: 'multimedia' })
+        .then(() => invoke('media_set_default_device', { id: device.id, role: 'console' }))
+        .catch(console.error);
+    }
+  };
+
+  const onClickCommunications = () => {
+    if (!device.is_default_communications) {
+      invoke('media_set_default_device', { id: device.id, role: 'communications' }).catch(
+        console.error,
+      );
+    }
+  };
+
+  return (
+    <div className="media-device">
+      <Button.Group size="small" style={{ width: 50 }}>
+        <Tooltip title="Multimedia">
+          <Button
+            type={device.is_default_multimedia ? 'primary' : 'default'}
+            onClick={onClickMultimedia}
+          >
+            <Icon iconName="IoMusicalNotes" propsIcon={{ size: 18 }} />
+          </Button>
+        </Tooltip>
+        <Tooltip title="Communications">
+          <Button
+            type={device.is_default_communications ? 'primary' : 'default'}
+            onClick={onClickCommunications}
+          >
+            <Icon iconName="FaPhoneFlip" />
+          </Button>
+        </Tooltip>
+      </Button.Group>
+      <OverflowTooltip text={device.name} />
+    </div>
+  );
+}
+
+function DeviceGroup({ devices }: { devices: MediaDevice[] }) {
+  return (
+    <div className="media-device-group">
+      {devices.map((d) => (
+        <Device key={d.id} device={d} />
+      ))}
+    </div>
+  );
+}
+
+interface VolumeControlProps {
+  value: number;
+  icon: React.ReactNode;
+  deviceId: string;
+  sessionId?: string;
+}
+
+function VolumeControl(props: VolumeControlProps) {
+  const { value, icon, deviceId, sessionId } = props;
+
+  const [internalValue, setInternalValue] = useState(value);
+
+  useEffect(() => {
+    setInternalValue(value);
+  }, [value]);
+
+  const onExternalChange = useCallback(
+    debounce((value: number) => {
+      invoke('set_volume_level', { id: deviceId, level: value }).catch(console.error);
+    }, 100),
+    [deviceId, sessionId],
+  );
+
+  const onInternalChange = (value: number) => {
+    setInternalValue(value);
+    onExternalChange(value);
+  };
+
+  return (
+    <div className="media-control-volume">
+      <Button type="text" onClick={() => invoke('media_toggle_mute', { id: deviceId })}>
+        {icon}
+      </Button>
+      <Slider
+        value={internalValue}
+        onChange={onInternalChange}
+        min={0}
+        max={1}
+        step={0.01}
+        tooltip={{
+          formatter: (value) => `${(100 * (value || 0)).toFixed(0)}`,
+        }}
+      />
+      <Button type="text" onClick={() => invoke('open_file', { path: 'ms-settings:sound' })}>
+        <Icon iconName="RiEqualizerLine" />
+      </Button>
+    </div>
+  );
+}
+
+function MediaControls() {
+  const inputs = useSelector(Selectors.mediaInputs);
+  const defaultInput = inputs.find((d) => d.is_default_multimedia);
+
+  const outputs = useSelector(Selectors.mediaOutputs);
+  const defaultOutput = outputs.find((d) => d.is_default_multimedia);
 
   const sessions = useSelector(Selectors.mediaSessions);
-  const volume = useSelector(Selectors.mediaVolume);
-  const isMuted = useSelector(Selectors.mediaMuted);
+
+  return (
+    <BackgroundByLayersV2 className="media-control" amount={1}>
+      <span className="media-control-label">Master Volume</span>
+      {!!defaultOutput && (
+        <VolumeControl
+          value={defaultOutput.volume}
+          deviceId={defaultOutput.id}
+          icon={
+            <Icon iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'} />
+          }
+        />
+      )}
+
+      {!!defaultInput && (
+        <VolumeControl
+          value={defaultInput.volume}
+          deviceId={defaultInput.id}
+          icon={<Icon iconName={defaultInput.muted ? 'BiMicrophoneOff' : 'BiMicrophone'} />}
+        />
+      )}
+
+      {outputs.length > 0 && (
+        <>
+          <span className="media-control-label">Output Device</span>
+          <DeviceGroup devices={outputs} />
+        </>
+      )}
+
+      {inputs.length > 0 && (
+        <>
+          <span className="media-control-label">Input Device</span>
+          <DeviceGroup devices={inputs} />
+        </>
+      )}
+
+      {sessions.length > 0 && (
+        <>
+          <span className="media-control-label">Media Players</span>
+          <div className="media-control-session-list">
+            {sessions.map((session, index) => (
+              <MediaSession key={index} session={session} />
+            ))}
+          </div>
+        </>
+      )}
+    </BackgroundByLayersV2>
+  );
+}
+
+export function WithMediaControls({ children }: PropsWithChildren) {
+  const [openPreview, setOpenPreview] = useState(false);
 
   useAppBlur(() => {
     setOpenPreview(false);
   });
-
-  useEffect(() => {
-    setInternalVolume(volume);
-  }, [volume]);
-
-  const onChangeVolumeExternal = useCallback(
-    debounce((value: number) => {
-      invoke('set_volume_level', { level: value });
-    }, 100),
-    [],
-  );
-
-  const onChangeVolumeInternal = (value: number) => {
-    setInternalVolume(value);
-    onChangeVolumeExternal(value);
-  };
 
   return (
     <Popover
@@ -107,35 +247,7 @@ export function WithMediaControls({ children }: PropsWithChildren) {
       trigger="click"
       onOpenChange={setOpenPreview}
       arrow={false}
-      content={
-        <BackgroundByLayersV2 className="media-control" amount={1}>
-          <div className="media-control-volume">
-            <Button type="text" onClick={() => invoke('media_toggle_mute')}>
-              <Icon iconName={isMuted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'} />
-            </Button>
-            <Slider
-              value={internalVolume}
-              onChange={onChangeVolumeInternal}
-              min={0}
-              max={1}
-              step={0.01}
-              tooltip={{
-                formatter: (value) => `${(100 * (value || 0)).toFixed(0)}`,
-              }}
-            />
-            <Button type="text" onClick={() => invoke('open_file', { path: 'ms-settings:sound' })}>
-              <Icon iconName="RiEqualizerLine" />
-            </Button>
-          </div>
-          {sessions.length > 0 && (
-            <div className="media-control-session-list">
-              {sessions.map((session, index) => (
-                <MediaSession key={index} session={session} />
-              ))}
-            </div>
-          )}
-        </BackgroundByLayersV2>
-      }
+      content={<MediaControls />}
     >
       {children}
     </Popover>

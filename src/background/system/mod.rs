@@ -5,8 +5,9 @@ use tauri::Listener;
 use crate::{
     error_handler::Result,
     modules::{
-        media::infrastructure::register_media_events,
-        network::infrastructure::register_network_events, power::infrastructure::PowerManager,
+        media::infrastructure::{register_media_events, release_media_events},
+        network::infrastructure::register_network_events,
+        power::infrastructure::PowerManager,
         tray::infrastructure::register_tray_events,
     },
     seelen::get_app_handle,
@@ -41,4 +42,8 @@ pub fn declare_system_events_handlers() -> Result<()> {
     });
 
     Ok(())
+}
+
+pub fn release_system_events_handlers() {
+    release_media_events();
 }

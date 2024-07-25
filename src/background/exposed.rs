@@ -153,6 +153,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         media_next,
         set_volume_level,
         media_toggle_mute,
+        media_set_default_device,
         // Brightness
         get_main_monitor_brightness,
         set_main_monitor_brightness,

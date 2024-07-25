@@ -20,7 +20,7 @@ use crate::{
     seelen_weg::SeelenWeg,
     seelen_wm::WindowManager,
     state::State,
-    system::declare_system_events_handlers,
+    system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::{ahk::AutoHotKey, sleep_millis},
     windows_api::WindowsApi,
@@ -152,14 +152,15 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn stop(&self) -> Result<()> {
+    /// Stop and release all resources
+    pub fn stop(&self) {
+        release_system_events_handlers();
         if self.state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar(false)?;
+            log_error!(SeelenWeg::hide_taskbar(false));
         }
         if self.state.is_ahk_enabled() {
             self.kill_ahk_shortcuts();
         }
-        Ok(())
     }
 
     fn bind_file_extensions() -> Result<()> {

@@ -1,6 +1,4 @@
 .media-control {
-  width: 320px;
-
   .media-control-volume {
     .ant-slider {
       flex: 1;
@@ -36,5 +34,18 @@
     width: 100%;
     height: 100%;
     object-fit: fill;
+  }
+
+  .media-device-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .media-device {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 50px 1fr;
+      gap: 6px;
+    }
   }
 }
