@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.8]
 ### fix
 - app not running on startup
 
