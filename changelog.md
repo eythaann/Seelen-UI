@@ -1,8 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app not running on startup
+
 ## [1.8.7]
-### Fix
+### fix
 - no updating themes on changes saved.
 
 ## [1.8.6]

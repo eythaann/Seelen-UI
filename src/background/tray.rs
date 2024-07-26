@@ -10,9 +10,27 @@ use tauri::{
 
 use crate::error_handler::Result;
 use crate::seelen::SEELEN;
+use crate::utils::sleep_millis;
 use crate::{log_error, trace_lock};
 
-pub fn handle_tray_icon(app: &mut App) -> Result<()> {
+pub fn try_register_tray_icon(app: &mut App) -> Result<()> {
+    log::trace!("registering tray icon");
+    let mut attempts = 0;
+
+    // normally tray icon creation not fails but on windows startup
+    // it could fail until some processes are started
+    while let Err(e) = register_tray_icon(app) {
+        if attempts >= 10 {
+            return Err(e);
+        }
+        attempts += 1;
+        sleep_millis(100);
+    }
+
+    Ok(())
+}
+
+fn register_tray_icon(app: &mut App) -> Result<()> {
     log::trace!("registering tray icon");
     let settings = MenuItemBuilder::with_id("settings", "Open Settings").build(app)?;
 

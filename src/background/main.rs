@@ -34,8 +34,7 @@ use modules::{
 };
 use plugins::register_plugins;
 use seelen::SEELEN;
-
-use tray::handle_tray_icon;
+use tray::try_register_tray_icon;
 
 fn register_panic_hook() {
     std::panic::set_hook(Box::new(|info| {
@@ -76,19 +75,18 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
     seelen.init(app.handle().clone())?;
 
-    handle_tray_icon(app)?;
-
     if !tauri::is_dev() {
-        seelen.create_update_modal()?;
+        log_error!(seelen.create_update_modal());
 
         let command = SEELEN_COMMAND_LINE.lock().clone();
         let matches = command.get_matches();
         if !matches.get_flag("silent") {
-            seelen.show_settings()?;
+            log_error!(seelen.show_settings());
         }
     }
 
     seelen.start()?;
+    log_error!(try_register_tray_icon(app));
     std::mem::forget(seelen);
     Ok(())
 }
@@ -102,11 +100,8 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             }
         }
         tauri::RunEvent::Exit => {
-            let seelen = trace_lock!(SEELEN);
-            if seelen.initialized {
-                log::info!("───────────────────── Exiting Seelen ─────────────────────");
-                seelen.stop()
-            }
+            log::info!("───────────────────── Exiting Seelen ─────────────────────");
+            trace_lock!(SEELEN).stop()
         }
         _ => {}
     }

@@ -47,7 +47,6 @@ pub struct Seelen {
     shell: Option<SeelenShell>,
     #[getset(get = "pub")]
     state: State,
-    pub initialized: bool,
 }
 
 /* ============== Getters ============== */
@@ -108,20 +107,18 @@ impl Seelen {
         if self.state.is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
         }
-
-        self.initialized = true;
         Ok(())
     }
 
     pub fn start(&mut self) -> Result<()> {
         if self.state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar(true)?;
+            //SeelenWeg::hide_taskbar(true)?;
         }
 
         self.start_ahk_shortcuts()?;
         declare_system_events_handlers()?;
 
-        std::thread::spawn(|| -> Result<()> {
+        std::thread::spawn(|| {
             log::trace!("Enumerating Monitors");
             WindowsApi::enum_display_monitors(Some(Self::enum_monitors_proc), 0)
                 .expect("Failed to enum monitors");
@@ -136,8 +133,7 @@ impl Seelen {
             WindowsApi::enum_windows(Some(Self::enum_windows_proc), 0)
                 .expect("Failed to enum windows");
 
-            register_win_hook()?;
-            Ok(())
+            register_win_hook().expect("Failed to register windows hook");
         });
 
         if WindowsApi::is_elevated()? {
