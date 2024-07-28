@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Kommunikasjon
+  master_volume: Hovedvolum
+  output_device: Utgangsenhet
+  input_device: Inngangsenhet
+  players: Mediespillere
+network:
+  placeholder:
+    password: Passord
+  connect: Koble
+  disconnect: Koble fra
+  more: Flere nettverksinnstillinger
+  hidden: Skjult nettverk
+  not_found: Ingen nettverk funnet
+settings:
+  restart: Omstart
+  shutdown: Skru av
+  log_out: Logg ut
+  sleep: Sove
+  app_settings: Appinnstillinger
+  title: Innstillinger
+placeholder:
+  battery_remaining: '% gjenstående'
+  volume: Volum
+  ethernet_connected: Internettilgang
+  bluetooth_devices: Bluetooth & Devices
+  settings: Raske innstillinger
+  smart_charge: '- Smart kostnad'
+  open_system_tray: Åpent systembrett
+  ethernet_disconnected: Ingen internettilgang
+  open_user_folder: Åpne brukermappe

@@ -1,0 +1,190 @@
+sides:
+  top: Topp
+  left: Venstre
+  right: Ikke sant
+  bottom: Bunn
+header:
+  labels:
+    info: Informasjon
+    general: Generell
+    seelen_bar: Fancy verktøylinje
+    seelen_wm: Vindusleder
+    shortcuts: Snarveier
+    specific_apps: Spesifikke apper
+    developer: Utvikler
+    seelen_weg: Dock/oppgavelinje
+    monitors: Skjermer
+start:
+  title: Velkommen!
+  message: >-
+    Velkommen til Seelen UI, Ultimate Desktop Environment med en innlemmet
+    tilflising av Windows Manager for å forbedre Windows 11 -opplevelsen din!
+    Utforsk en ny epoke med effektivitet og multitasking med vårt intuitive
+    grensesnitt og avanserte funksjoner.
+  message_accent: Optimaliser produktiviteten din med stil!
+general:
+  theme:
+    description: Beskrivelse
+    author: Forfatter
+    enabled: Aktiverte temaer
+    label: Temainformasjon
+    added: Tema som allerede er lagt til
+    tags: Tagger
+    placeholder: Velg tema
+    add: Legg til tema
+  language: Språk
+  startup: Kjør ved oppstart?
+toolbar:
+  placeholder:
+    description: Beskrivelse
+    author: Forfatter
+    select: Verktøylinjestruktur
+  height: Høyde
+  enable: Aktiver fancy verktøylinje
+wm:
+  border:
+    enable: Aktiver vinduets grense
+    width: Grensebredde
+    offset: Grenseforskyvning
+  author: Forfatter
+  description: Beskrivelse
+  layout: Oppsett
+  space_between_containers: Plass mellom containere
+  resize_delta: Endre størrelse på Delta (%)
+  workspace_offset: Arbeidsområder forskyvning (marginer)
+  workspace_padding: Arbeidsområder polstring
+  disabled_windows10: Window Manager er ikke tilgjengelig for Windows 10.
+  enable: Aktiver Window Manager
+weg:
+  items:
+    zoom_size: Zoomet størrelse (brukt til temaer)
+    visible_separators: Synlige separatorer
+    size: Varestørrelse
+    label: Gjenstander
+    gap: Plass mellom varene
+  width: Bredde
+  auto_hide: Skjul automatisk
+  margin: Margin
+  gap: Mellomrom
+  padding: Polstring
+  dock_side: Dock Side
+  label: Dock/oppgavelinje
+  enable: Aktiver dock/oppgavelinje
+devtools:
+  load: Laste
+  custom_config_file: Last inn tilpasset konfigurasjonsfil
+  settings_file: Innstillingsfilen
+  install_folder: Installasjonsmappe
+  app_folders: App -mapper
+  data_folder: Datamappen
+  enable: Aktiver utviklerverktøy
+apps_configurations:
+  app:
+    options:
+      float: Flyte
+      force: Force Manag
+      pinned: Festet
+      unmanage: Unmanage
+    title_edit: Redigering {{name}}
+    category: Kategori
+    title_create: Opprette {{name}}
+    monitor_placeholder: Ingen
+    ok_edit: Oppdater
+    ok_create: Skape
+    category_placeholder: Ingen
+    bindings: Binding (Merk begge alternativene er påkrevd)
+    workspace_placeholder: Ingen
+    name: Navn
+    monitor: Observere
+    title_readonly: Visning {{name}}
+    options_label: Ekstra alternativer
+    workspace: Arbeidsområde
+    ok_readonly: Rediger som ny
+  identifier:
+    and: OG
+    kind: Identifisere av
+    or: ELLER
+    add_block: Legg til blokkering
+    matching_strategy: Matchende strategi
+    id: Identifikator
+    remove: Slett blokkering
+    negation: Negere matching
+  swap: Bytte
+  search: Søk
+  confirm_delete: Er du sikker på at du vil slette denne konfigurasjonen/S?
+  new: Ny
+  bundled_msg: >-
+    Disse samlede konfigurasjonene er ikke redigerbare og er designet for å gi
+    deg den beste opplevelsen uten tilpasning. De konfigurerer automatisk de
+    vanligste applikasjonene for deg.
+  delete: Slett
+  export: Eksport
+  import: Import
+  confirm_delete_title: Bekreft slett
+  bundled_title: App Config samlet med Seelen
+extras:
+  version: Versjon
+  github: Github
+  relaunch: Relanseres
+  exit: Avslutt/avslutte
+  links: Offisielle lenker
+  discord: Uenighet
+shortcuts:
+  labels:
+    focus_latest: Fokusere siste
+    reserve_left: Reserve igjen
+    switch_workspace_1: Bytt til arbeidsområdet 1
+    focus_top: Fokus topp
+    switch_workspace_2: Bytt til arbeidsområdet 2
+    send_to_workspace_8: Send til arbeidsområdet 8
+    switch_workspace_7: Bytt til arbeidsområdet 7
+    increase_width: Øke bredden
+    send_to_workspace_4: Send til arbeidsområdet 4
+    switch_workspace_0: Bytt til arbeidsområdet 0
+    decrease_width: Redusere bredden
+    move_to_workspace_4: Flytt til arbeidsområdet 4
+    reserve_bottom: Reserve bunn
+    reserve_stack: Reserve stack
+    reserve_float: Reserve flyter
+    move_to_workspace_6: Flytt til arbeidsområdet 6
+    increase_height: Øk høyden
+    focus_right: Fokuser riktig
+    switch_workspace_8: Bytt til arbeidsområdet 8
+    switch_workspace_9: Bytt til arbeidsområdet 9
+    switch_workspace_6: Bytt til arbeidsområdet 6
+    decrease_height: Reduser høyden
+    reserve_top: Reserve top
+    move_to_workspace_8: Flytt til arbeidsområdet 8
+    restore_sizes: Gjenopprett størrelser
+    move_to_workspace_9: Flytt til arbeidsområdet 9
+    focus_bottom: Fokus bunnen
+    move_to_workspace_1: Flytt til arbeidsområdet 1
+    send_to_workspace_2: Send til arbeidsområdet 2
+    reserve_right: Reservere riktig
+    switch_workspace_5: Bytt til arbeidsområdet 5
+    send_to_workspace_6: Send til arbeidsområdet 6
+    switch_workspace_3: Bytt til arbeidsområdet 3
+    move_to_workspace_5: Flytt til arbeidsområdet 5
+    move_to_workspace_2: Flytt til arbeidsområdet 2
+    move_to_workspace_7: Flytt til arbeidsområdet 7
+    switch_workspace_4: Bytt til arbeidsområdet 4
+    move_to_workspace_0: Flytt til arbeidsområdet 0
+    send_to_workspace_5: Send til arbeidsområdet 5
+    focus_left: Fokus igjen
+    send_to_workspace_1: Send til arbeidsområdet 1
+    send_to_workspace_0: Send til arbeidsområdet 0
+    send_to_workspace_9: Send til arbeidsområdet 9
+    move_to_workspace_3: Flytt til arbeidsområdet 3
+    send_to_workspace_7: Send til arbeidsområdet 7
+    send_to_workspace_3: Send til arbeidsområdet 3
+  enable_tooltip: >-
+    Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
+    Core API
+  enable: Aktiver integrerte snarveier (AHK)
+cancel: Avbryt
+inProgress: I prosess...
+quit: Slutte
+open: Åpen
+save: Lagre
+delete: Slett
+loading: Laster ...
