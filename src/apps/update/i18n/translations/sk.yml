@@ -1,0 +1,10 @@
+update:
+  version: Verzia
+  title: Aktualizácia je dostupná!
+  date: Dátum
+  download: Aktualizovať a inštalovať
+  installing: Inštalácia ...
+  extra_info: Ak si chcete prečítať úplný Changelog, navštívte stránku Changelog
+  downloading: Sťahovanie ...
+  cancel: Neskôr
+  page: Stránka vydania GitHub

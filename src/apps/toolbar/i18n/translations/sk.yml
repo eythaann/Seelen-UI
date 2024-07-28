@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimédiá
+    comunications: Komunikácia
+  input_device: Vstupné zariadenie
+  output_device: Výstupné zariadenie
+  master_volume: Zväzok
+  players: Médiá
+network:
+  placeholder:
+    password: Heslo
+  hidden: Skrytá sieť
+  disconnect: Odpojiť
+  connect: Pripojiť
+  more: Viac nastavení siete
+  not_found: Nenašli sa žiadne siete
+settings:
+  log_out: Odhlásiť sa
+  restart: Reštart
+  shutdown: Vypnúť
+  title: nastavenie
+  sleep: Spať
+  app_settings: Nastavenia aplikácií
+placeholder:
+  ethernet_connected: Prístup na internet
+  ethernet_disconnected: Žiadny prístup na internet
+  open_user_folder: Otvorte priečinok používateľa
+  smart_charge: '- Inteligentný poplatok'
+  settings: Rýchle nastavenia
+  battery_remaining: zostávajúci % %
+  bluetooth_devices: Bluetooth a zariadenia
+  open_system_tray: Podnos otvorených systémov
+  volume: Zväzok

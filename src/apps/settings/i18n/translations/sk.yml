@@ -1,0 +1,188 @@
+sides:
+  right: Správny
+  top: Vrchol
+  left: Vľavo
+  bottom: Spodná časť
+header:
+  labels:
+    developer: Vývojár
+    seelen_bar: Ozdobný panel s nástrojmi
+    info: Informácie
+    shortcuts: Skratky
+    seelen_weg: Prístavný panel
+    monitors: Monitorovať
+    specific_apps: Konkrétne aplikácie
+    general: Všeobecný
+    seelen_wm: Správca okien
+start:
+  title: Vitajte!
+  message: >-
+    Vitajte v používateľskom rozhraní Seelen, v konečnom prostredí Desktop so
+    začleneným obkladom Windows Manager, aby ste vylepšili váš zážitok z systému
+    Windows 11! Preskúmajte novú éru účinnosti a multitaskingu s naším
+    intuitívnym rozhraním a pokročilými funkciami.
+  message_accent: Optimalizujte svoju produktivitu štýlom!
+general:
+  theme:
+    placeholder: Vyberte tému
+    description: Opis
+    added: Téma už bola pridaná
+    author: Autor
+    enabled: Povolené témy
+    label: Informácie o téme
+    add: Pridať tému
+    tags: Značky
+  startup: Spustiť pri štarte?
+  language: Jazyk
+toolbar:
+  placeholder:
+    author: Autor
+    select: Štruktúra
+    description: Opis
+  enable: Povoliť ozdobný panel s nástrojmi
+  height: Výška
+wm:
+  border:
+    width: Šírka hranice
+    enable: Povoľte hranicu okna
+    offset: Vyrovnanie
+  author: Autor
+  resize_delta: Zmeňte veľkosť delty (%)
+  workspace_padding: Čalúnenie pracovných priestorov
+  enable: Povoliť správcu okien
+  layout: Usporiadanie
+  space_between_containers: Priestor medzi nádobami
+  description: Opis
+  disabled_windows10: Správca okien nie je k dispozícii pre Windows 10.
+  workspace_offset: Offsety Workspaces (marže)
+weg:
+  items:
+    size: Veľkosť položky
+    zoom_size: Zväčšená veľkosť (používa sa na témy)
+    visible_separators: Viditeľné oddeľovače
+    label: Predmety
+    gap: Priestor medzi položkami
+  width: Šírka
+  label: Prístavný panel
+  enable: Povoliť prístavisko/panel úloh
+  gap: Priepasť
+  auto_hide: Automaticky skryť
+  padding: Vypchávka
+  margin: Okraj
+  dock_side: Strana
+devtools:
+  enable: Povoľte vývojárskym nástrojom
+  custom_config_file: Načítať vlastný konfiguračný súbor
+  app_folders: Priečinky
+  install_folder: Inštalačný priečinok
+  load: Naložiť
+  settings_file: Nastavovací súbor
+  data_folder: Priečinok
+apps_configurations:
+  app:
+    options:
+      float: Plavák
+      force: Riadiť silu
+      pinned: Pripnutý
+      unmanage: Nemeniť
+    name: názov
+    ok_edit: Aktualizácia
+    workspace: Pracovný priestor
+    ok_readonly: Upravovať ako nové
+    title_create: Vytváranie {{name}}
+    bindings: Viazanie (POZNÁMKA sú potrebné obe možnosti)
+    title_edit: Editovanie {{name}}
+    workspace_placeholder: Žiadny
+    options_label: Ďalšie možnosti
+    category_placeholder: Žiadny
+    ok_create: Vytvárať
+    title_readonly: Prezeranie {{name}}
+    monitor_placeholder: Žiadny
+    category: Kategória
+    monitor: Monitor
+  identifier:
+    remove: Vymazať blok
+    negation: Negovať zladenie
+    kind: Určiť
+    add_block: Pridať blok
+    id: Identifikátor
+    or: Alebo
+    matching_strategy: Stratégia
+    and: A
+  search: Vyhľadávanie
+  delete: Vymazať
+  export: Export
+  new: Nový
+  import: Dovoz
+  confirm_delete: Ste si istí, že chcete túto konfiguráciu vymazať?
+  confirm_delete_title: Potvrďte odstránenie
+  bundled_title: Aplikácia konfigurácia zviazaná s Seelen
+  bundled_msg: >-
+    Tieto zviazané konfigurácie nie sú upraviteľné a sú navrhnuté tak, aby vám
+    poskytli najlepší zážitok bez prispôsobenia. Automaticky nakonfigurujú pre
+    vás najbežnejšie aplikácie.
+  swap: Vymeniť
+extras:
+  relaunch: Reštart
+  version: Verzia
+  github: Potápať sa
+  links: Oficiálne odkazy
+  discord: Nesúhlas
+  exit: Prestať
+shortcuts:
+  labels:
+    decrease_width: Znížiť šírku
+    send_to_workspace_0: Pošlite do pracovného priestoru 0
+    switch_workspace_7: Prepnite na pracovný priestor 7
+    focus_top: Zaostrenie
+    focus_right: Zamerať sa
+    increase_height: Výška
+    move_to_workspace_5: Presuňte sa do pracovného priestoru 5
+    move_to_workspace_4: Presuňte sa do pracovného priestoru 4
+    move_to_workspace_2: Presuňte sa do pracovného priestoru 2
+    move_to_workspace_9: Presuňte sa do pracovného priestoru 9
+    move_to_workspace_8: Presuňte sa do pracovného priestoru 8
+    switch_workspace_4: Prepnite na pracovný priestor 4
+    reserve_stack: Zásobník
+    move_to_workspace_7: Presuňte sa do pracovného priestoru 7
+    send_to_workspace_1: Pošlite do pracovného priestoru 1
+    switch_workspace_1: Prepnite na pracovný priestor 1
+    send_to_workspace_5: Pošlite do pracovného priestoru 5
+    reserve_left: Vľavo
+    reserve_top: Horná časť
+    send_to_workspace_9: Pošlite do pracovného priestoru 9
+    send_to_workspace_2: Pošlite do pracovného priestoru 2
+    switch_workspace_9: Prepnite na pracovný priestor 9
+    send_to_workspace_8: Pošlite do pracovného priestoru 8
+    switch_workspace_5: Prepnite na pracovný priestor 5
+    move_to_workspace_3: Presuňte sa do pracovného priestoru 3
+    move_to_workspace_0: Presuňte sa do pracovného priestoru 0
+    move_to_workspace_6: Presuňte sa do pracovného priestoru 6
+    switch_workspace_3: Prepnite na pracovný priestor 3
+    reserve_bottom: Dno
+    focus_bottom: Zaostrenie
+    send_to_workspace_4: Pošlite do pracovného priestoru 4
+    decrease_height: Zníženie výšky
+    send_to_workspace_6: Pošlite do pracovného priestoru 6
+    reserve_right: Oprávnenie
+    switch_workspace_2: Prepnite na pracovný priestor 2
+    switch_workspace_8: Prepnite na pracovný priestor 8
+    switch_workspace_6: Prepnite na pracovný priestor 6
+    focus_left: Vľavo
+    reserve_float: Plavák
+    switch_workspace_0: Prepnite na pracovný priestor 0
+    focus_latest: Najnovší
+    send_to_workspace_7: Pošlite do pracovného priestoru 7
+    send_to_workspace_3: Pošlite do pracovného priestoru 3
+    move_to_workspace_1: Presun do pracovného priestoru 1
+    increase_width: Zväčšenie
+    restore_sizes: Obnoviť veľkosti
+  enable: Povoliť integrované skratky (AHK)
+  enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
+inProgress: Prebieha ...
+loading: Načítava...
+open: OTVORENÉ
+cancel: Zrušiť
+quit: Prestať
+save: Uložiť
+delete: Vymazať

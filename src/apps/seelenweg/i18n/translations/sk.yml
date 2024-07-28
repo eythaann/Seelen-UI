@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Pridať mediálny modul
+  settings: Otvorené nastavenia
+  start: Pridať štartový modul
+app_menu:
+  close: Zavrieť
+  run_as: Spustiť ako správca
+  close_multiple: Zavrieť
+  open_file_location: Otvorte umiestnenie súboru
+  pin_to_center: Špendlík
+  pin_to_right: Špendlík
+  unpin: Zaniknúť
+  pin: Pin
+  copy_handles: Kopírovanie rukovätí
+  pin_to_left: Špendlík doľava
+media_menu:
+  remove: Odstráňte mediálny modul
+start_menu:
+  remove: Odstráňte modul Štart
