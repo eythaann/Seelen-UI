@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Tambahkan modul media
+  start: Tambahkan modul Mulai
+  settings: Buka Pengaturan
+app_menu:
+  pin_to_center: Pin ke tengah
+  open_file_location: Buka Lokasi File
+  close_multiple: Tutup semua
+  run_as: Jalankan sebagai administrator
+  pin_to_right: Pin ke kanan
+  pin: Pin
+  pin_to_left: Pin ke kiri
+  close: Menutup
+  unpin: Membuka peniti
+  copy_handles: Pegangan Salin
+media_menu:
+  remove: Hapus Modul Media
+start_menu:
+  remove: Hapus modul Mulai

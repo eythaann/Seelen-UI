@@ -1,0 +1,190 @@
+sides:
+  left: Kiri
+  bottom: Dasar
+  top: Atas
+  right: Benar
+header:
+  labels:
+    general: Umum
+    seelen_bar: Toolbar mewah
+    developer: Pengembang
+    info: Informasi
+    monitors: Monitor
+    seelen_weg: Dock/Taskbar
+    seelen_wm: Manajer Jendela
+    specific_apps: Aplikasi tertentu
+    shortcuts: Pintasan
+start:
+  message: >-
+    Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
+    Manager yang digabungkan untuk meningkatkan pengalaman Windows 11 Anda!
+    Jelajahi era baru efisiensi dan multitasking dengan antarmuka intuitif dan
+    fitur canggih kami.
+  message_accent: Optimalkan produktivitas Anda dengan gaya!
+  title: Selamat datang!
+general:
+  theme:
+    placeholder: Pilih tema
+    label: Informasi tema
+    enabled: Tema yang diaktifkan
+    add: Tambahkan tema
+    author: Pengarang
+    added: Tema sudah ditambahkan
+    tags: Tag
+    description: Keterangan
+  startup: Jalankan saat startup?
+  language: Bahasa
+toolbar:
+  placeholder:
+    select: Struktur bilah alat
+    description: Keterangan
+    author: Pengarang
+  enable: Aktifkan toolbar mewah
+  height: Tinggi
+wm:
+  border:
+    offset: Offset perbatasan
+    width: Lebar perbatasan
+    enable: Aktifkan Perbatasan Jendela
+  space_between_containers: Ruang antar wadah
+  description: Keterangan
+  layout: Tata letak
+  enable: Aktifkan Window Manager
+  resize_delta: Ubah Ubah Delta (%)
+  author: Pengarang
+  disabled_windows10: Window Manager tidak tersedia untuk Windows 10.
+  workspace_offset: Offset ruang kerja (margin)
+  workspace_padding: Padding ruang kerja
+weg:
+  items:
+    size: Ukuran item
+    zoom_size: Ukuran zoom (digunakan untuk tema)
+    label: Item
+    visible_separators: Pemisah yang terlihat
+    gap: Ruang antar item
+  margin: Batas
+  enable: Aktifkan Dock/Taskbar
+  auto_hide: Sembunyi otomatis
+  label: Dock/Taskbar
+  padding: Lapisan
+  width: Lebar
+  gap: Celah
+  dock_side: Sisi dermaga
+devtools:
+  settings_file: File Pengaturan
+  install_folder: Folder Instalasi
+  enable: Aktifkan alat pengembang
+  custom_config_file: Muat file konfigurasi khusus
+  data_folder: Folder Data
+  load: Memuat
+  app_folders: Folder aplikasi
+apps_configurations:
+  app:
+    options:
+      float: Mengambang
+      force: Memaksa mengelola
+      pinned: Disematkan
+      unmanage: Tidak mengelola
+    title_readonly: Melihat {{name}}
+    workspace: Ruang kerja
+    category_placeholder: Tidak ada
+    ok_edit: Memperbarui
+    monitor_placeholder: Tidak ada
+    name: Nama
+    options_label: Opsi tambahan
+    ok_create: Membuat
+    category: Kategori
+    title_edit: Editting {{name}}
+    title_create: Membuat {{name}}
+    workspace_placeholder: Tidak ada
+    ok_readonly: Edit sebagai baru
+    bindings: Mengikat (perhatikan kedua opsi itu diperlukan)
+    monitor: Monitor
+  identifier:
+    and: DAN
+    matching_strategy: Strategi pencocokan
+    kind: Identifikasi oleh
+    or: ATAU
+    remove: Hapus blok
+    add_block: Tambahkan blok
+    id: Pengidentifikasi
+    negation: Meninggalkan pencocokan
+  delete: Menghapus
+  confirm_delete: Anda yakin ingin menghapus konfigurasi ini?
+  bundled_msg: >-
+    Konfigurasi yang dibundel ini tidak dapat diedit dan dirancang untuk memberi
+    Anda pengalaman terbaik tanpa kustomisasi. Mereka secara otomatis
+    mengonfigurasi aplikasi yang paling umum untuk Anda.
+  export: Ekspor
+  bundled_title: Aplikasi Config dibundel dengan Seelen
+  confirm_delete_title: Konfirmasi hapus
+  search: Mencari
+  swap: Menukar
+  import: Impor
+  new: Baru
+extras:
+  github: GitHub
+  relaunch: Peluncuran kembali
+  discord: Perselisihan
+  exit: Berhenti/keluar
+  links: Tautan resmi
+  version: 'Versi: kapan'
+shortcuts:
+  labels:
+    move_to_workspace_7: Pindah ke ruang kerja 7
+    move_to_workspace_9: Pindah ke ruang kerja 9
+    focus_bottom: Fokus dasar
+    focus_left: Fokus kiri
+    decrease_height: Tinggi penurunan
+    reserve_right: Cadangan hak
+    reserve_left: Cadangan kiri
+    focus_right: Fokus benar
+    reserve_stack: Tumpukan Cadangan
+    reserve_bottom: Cadangan Bawah
+    switch_workspace_1: Beralih ke ruang kerja 1
+    switch_workspace_9: Beralih ke ruang kerja 9
+    reserve_float: Cadangan float
+    increase_height: Tingkatkan tinggi
+    switch_workspace_3: Beralih ke ruang kerja 3
+    restore_sizes: Kembalikan ukuran
+    switch_workspace_5: Beralih ke ruang kerja 5
+    send_to_workspace_1: Kirim ke ruang kerja 1
+    switch_workspace_7: Beralih ke ruang kerja 7
+    send_to_workspace_8: Kirim ke Workspace 8
+    reserve_top: Cadangan atasan
+    send_to_workspace_9: Kirim ke ruang kerja 9
+    send_to_workspace_6: Kirim ke Workspace 6
+    switch_workspace_4: Beralih ke ruang kerja 4
+    move_to_workspace_1: Pindah ke ruang kerja 1
+    send_to_workspace_5: Kirim ke Workspace 5
+    send_to_workspace_0: Kirim ke ruang kerja 0
+    focus_latest: Fokus Terbaru
+    switch_workspace_0: Beralih ke ruang kerja 0
+    move_to_workspace_8: Pindah ke ruang kerja 8
+    move_to_workspace_5: Pindah ke ruang kerja 5
+    move_to_workspace_6: Pindah ke ruang kerja 6
+    switch_workspace_8: Beralih ke ruang kerja 8
+    move_to_workspace_3: Pindah ke ruang kerja 3
+    switch_workspace_2: Beralih ke ruang kerja 2
+    move_to_workspace_2: Pindah ke ruang kerja 2
+    move_to_workspace_4: Pindah ke ruang kerja 4
+    send_to_workspace_2: Kirim ke Workspace 2
+    increase_width: Meningkatkan lebar
+    switch_workspace_6: Beralih ke ruang kerja 6
+    focus_top: Fokus atas
+    send_to_workspace_4: Kirim ke Workspace 4
+    move_to_workspace_0: Pindah ke ruang kerja 0
+    decrease_width: Penurunan lebar
+    send_to_workspace_7: Kirim ke Workspace 7
+    send_to_workspace_3: Kirim ke Workspace 3
+  enable: Aktifkan pintasan terintegrasi (AHK)
+  enable_tooltip: >-
+    Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri
+    menggunakan API Inti Seelen
+open: Membuka
+cancel: Membatalkan
+save: Menyimpan
+inProgress: Sedang berlangsung...
+quit: Berhenti
+delete: Menghapus
+loading: Memuat...
