@@ -30,9 +30,9 @@ async function completeTranslationsFor(app: string) {
   const path = `./src/apps/${app}/i18n/translations`;
 
   const en = yaml.load(readFileSync(`${path}/en.yml`, 'utf8'));
-  const promises = toTranslate.map(async (lang) => {
-    console.log(`(${app}): translating to ${lang}...`);
+  for (const lang of toTranslate) {
     const filePath = `${path}/${lang}.yml`;
+    console.log(filePath);
 
     if (!existsSync(filePath)) {
       writeFileSync(filePath, yaml.dump({}));
@@ -41,14 +41,14 @@ async function completeTranslationsFor(app: string) {
     const trans = yaml.load(readFileSync(filePath, 'utf8'));
     await translateObject(en, lang, trans);
     writeFileSync(filePath, yaml.dump(trans));
-  });
-
-  await Promise.all(promises);
+  }
 }
 
-Promise.all([
-  completeTranslationsFor('toolbar'),
-  completeTranslationsFor('seelenweg'),
-  completeTranslationsFor('settings'),
-  completeTranslationsFor('update'),
-]).catch(console.error);
+async function main() {
+  await completeTranslationsFor('toolbar');
+  await completeTranslationsFor('seelenweg');
+  await completeTranslationsFor('settings');
+  await completeTranslationsFor('update');
+}
+
+main().catch(console.error);

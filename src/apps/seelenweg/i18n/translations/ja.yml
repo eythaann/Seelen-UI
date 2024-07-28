@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: 設定を開く
+  media: メディアモジュールを追加します
+  start: 開始モジュールを追加します
+app_menu:
+  pin: ピン
+  open_file_location: 開いているファイルの場所
+  close: 近い
+  run_as: 管理者として実行
+  pin_to_center: 中央にピン
+  pin_to_right: 右にピン
+  close_multiple: すべてを閉じます
+  unpin: unepin
+  copy_handles: ハンドルをコピーします
+  pin_to_left: 左にピン
+media_menu:
+  remove: メディアモジュールを削除します
+start_menu:
+  remove: 開始モジュールを削除します

@@ -1,0 +1,185 @@
+sides:
+  left: 左
+  right: 右
+  top: 上
+  bottom: 底
+header:
+  labels:
+    developer: 開発者
+    info: 情報
+    general: 一般的な
+    shortcuts: ショートカット
+    seelen_wm: ウィンドウマネージャー
+    specific_apps: 特定のアプリ
+    monitors: モニター
+    seelen_weg: ドック/タスクバー
+    seelen_bar: 派手なツールバー
+start:
+  title: いらっしゃいませ！
+  message: >-
+    Windows 11エクスペリエンスを強化するために、組み込まれたタイル張りWindowsマネージャーを備えた究極のデスクトップ環境であるSeelen
+    UIへようこそ！ 直感的なインターフェイスと高度な機能を使用して、効率とマルチタスクの新しい時代を探ります。
+  message_accent: スタイルで生産性を最適化してください！
+general:
+  theme:
+    author: 著者
+    description: 説明
+    add: テーマを追加します
+    tags: タグ
+    added: テーマはすでに追加されています
+    enabled: テーマを有効にしました
+    label: テーマ情報
+    placeholder: テーマを選択します
+  startup: 起動時に実行？
+  language: 言語
+toolbar:
+  placeholder:
+    description: 説明
+    author: 著者
+    select: ツールバー構造
+  height: 身長
+  enable: 派手なツールバーを有効にします
+wm:
+  border:
+    offset: ボーダーオフセット
+    enable: ウィンドウの境界線を有効にします
+    width: 境界幅
+  author: 著者
+  layout: レイアウト
+  description: 説明
+  enable: ウィンドウマネージャーを有効にします
+  workspace_offset: ワークスペースオフセット（マージン）
+  disabled_windows10: ウィンドウマネージャーはWindows 10では利用できません。
+  space_between_containers: コンテナ間のスペース
+  resize_delta: デルタのサイズ（％）
+  workspace_padding: ワークスペースパディング
+weg:
+  items:
+    size: アイテムサイズ
+    zoom_size: ズームされたサイズ（テーマに使用）
+    visible_separators: 目に見えるセパレーター
+    label: アイテム
+    gap: アイテム間のスペース
+  width: 幅
+  margin: マージン
+  gap: ギャップ
+  padding: パディング
+  label: ドック/タスクバー
+  auto_hide: 自動隠し
+  dock_side: ドック側
+  enable: ドック/タスクバーを有効にします
+devtools:
+  load: 負荷
+  data_folder: データフォルダー
+  app_folders: アプリフォルダー
+  enable: 開発者ツールを有効にします
+  settings_file: 設定ファイル
+  install_folder: インストールフォルダー
+  custom_config_file: カスタム構成ファイルをロードします
+apps_configurations:
+  app:
+    options:
+      float: 浮く
+      force: 力管理
+      pinned: ピン留め
+      unmanage: 無人
+    category_placeholder: なし
+    monitor_placeholder: なし
+    workspace: ワークスペース
+    ok_edit: アップデート
+    category: カテゴリー
+    monitor: モニター
+    ok_create: 作成する
+    bindings: バインディング（両方のオプションが必要です）
+    ok_readonly: 新しいとして編集します
+    workspace_placeholder: なし
+    title_edit: 編集{{name}}
+    title_readonly: 表示{{name}}
+    name: 名前
+    title_create: '{{name}}を作成する'
+    options_label: 追加オプション
+  identifier:
+    id: 識別子
+    and: そして
+    or: または
+    negation: マッチングを否定します
+    remove: ブロックを削除します
+    matching_strategy: マッチング戦略
+    add_block: ブロックを追加します
+    kind: 識別します
+  search: 検索
+  export: 輸出
+  delete: 消去
+  import: 輸入
+  new: 新しい
+  swap: スワップ
+  confirm_delete: この構成を削除したいですか？
+  confirm_delete_title: 削除を確認します
+  bundled_msg: >-
+    これらのバンドルされた構成は編集可能ではなく、カスタマイズなしで最高の体験を提供するように設計されています。
+    最も一般的なアプリケーションを自動的に構成します。
+  bundled_title: Seelenにバンドルされたアプリの構成
+extras:
+  discord: 不和
+  version: バージョン
+  github: github
+  relaunch: リニューアル
+  links: 公式リンク
+  exit: 終了/終了
+shortcuts:
+  labels:
+    reserve_left: 左に予備
+    switch_workspace_5: ワークスペースに切り替えます5
+    send_to_workspace_1: ワークスペースに送信1
+    restore_sizes: サイズを復元します
+    send_to_workspace_3: ワークスペースに送信3
+    move_to_workspace_2: ワークスペース2に移動します
+    send_to_workspace_2: Workspace 2に送信します
+    reserve_stack: 予備スタック
+    move_to_workspace_0: ワークスペース0に移動します
+    switch_workspace_2: ワークスペースに切り替えます2
+    increase_height: 高さを増やします
+    switch_workspace_3: ワークスペースに切り替えます3
+    focus_top: フォーカストップ
+    send_to_workspace_9: ワークスペースに送信します9
+    send_to_workspace_0: ワークスペースに送信します0
+    move_to_workspace_4: ワークスペース4に移動します
+    send_to_workspace_5: ワークスペースに送信5
+    move_to_workspace_6: ワークスペース6に移動します
+    decrease_height: 高さを減らします
+    switch_workspace_7: ワークスペースに切り替えます7
+    reserve_bottom: 底を予約します
+    focus_right: 焦点を合わせてください
+    switch_workspace_1: ワークスペースに切り替えます1
+    reserve_right: 右に予約します
+    switch_workspace_8: ワークスペースに切り替えます8
+    switch_workspace_0: ワークスペースに切り替えます0
+    send_to_workspace_8: ワークスペースに送信8
+    move_to_workspace_8: ワークスペース8に移動します
+    switch_workspace_6: ワークスペースに切り替えます6
+    send_to_workspace_4: ワークスペースに送信する4
+    reserve_float: 予備のフロート
+    focus_latest: 最新の焦点
+    decrease_width: 幅を減らします
+    reserve_top: トップを予約します
+    move_to_workspace_1: ワークスペース1に移動します
+    switch_workspace_4: ワークスペースに切り替えます4
+    move_to_workspace_7: ワークスペース7に移動します
+    switch_workspace_9: ワークスペースに切り替えます9
+    focus_bottom: フォーカスボトム
+    move_to_workspace_9: ワークスペース9に移動します
+    move_to_workspace_3: ワークスペース3に移動します
+    send_to_workspace_6: ワークスペースに送信6
+    increase_width: 幅を増やします
+    move_to_workspace_5: ワークスペース5に移動します
+    focus_left: フォーカスを左にします
+    send_to_workspace_7: ワークスペースに送信7
+  enable: 統合ショートカット（AHK）を有効にする
+  enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にします
+delete: 消去
+loading: 読み込み...
+inProgress: 進行中...
+quit: やめる
+open: 開ける
+save: 保存
+cancel: キャンセル

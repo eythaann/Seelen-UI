@@ -1,0 +1,10 @@
+update:
+  cancel: 後で
+  version: バージョン
+  date: 日付
+  title: 更新が利用可能です！
+  page: GitHubリリースページ
+  installing: インストール...
+  extra_info: 完全なChangelogを読むには、Changelogページにアクセスしてください
+  download: 更新＆インストール
+  downloading: ダウンロード...

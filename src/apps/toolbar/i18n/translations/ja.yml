@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: コミュニケーション
+    multimedia: マルチメディア
+  output_device: 出力機器
+  master_volume: マスターボリューム
+  input_device: 入力デバイス
+  players: メディアプレーヤー
+network:
+  placeholder:
+    password: パスワード
+  connect: 接続する
+  not_found: ネットワークは見つかりません
+  hidden: 隠されたネットワーク
+  more: より多くのネットワーク設定
+  disconnect: 切断します
+settings:
+  restart: 再起動
+  log_out: ログアウト
+  app_settings: アプリ設定
+  shutdown: シャットダウン
+  sleep: 寝る
+  title: 設定
+placeholder:
+  battery_remaining: ％ 残り
+  settings: クイック設定
+  open_system_tray: システムトレイを開きます
+  volume: 音量
+  ethernet_connected: インターネット・アクセス
+  bluetooth_devices: Bluetooth＆Devices
+  smart_charge: '- スマートチャージ'
+  open_user_folder: ユーザーフォルダーを開きます
+  ethernet_disconnected: インターネットアクセスはありません
