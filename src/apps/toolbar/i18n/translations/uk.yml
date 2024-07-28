@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Комунікація
+    multimedia: Мультимедіа
+  players: Медіаплеєри
+  output_device: Пристрій виводу
+  master_volume: Головний об'єм
+  input_device: Пристрій введення
+network:
+  placeholder:
+    password: Пароль
+  hidden: Прихована мережа
+  disconnect: Відключити
+  more: Більше налаштувань мережі
+  connect: З'єднувати
+  not_found: Жодних мереж не знайдено
+settings:
+  log_out: Вийти
+  shutdown: Закрити
+  app_settings: Налаштування додатків
+  restart: Перезапустити
+  sleep: Сплячий
+  title: Налаштування
+placeholder:
+  ethernet_disconnected: Немає доступу до Інтернету
+  ethernet_connected: Доступ в інтернет
+  settings: Швидкі налаштування
+  volume: Обсяг
+  battery_remaining: '% залишається'
+  open_system_tray: Лоток відкритого систем
+  bluetooth_devices: Bluetooth та пристрої
+  smart_charge: '- розумний заряд'
+  open_user_folder: Відкрийте папку користувача

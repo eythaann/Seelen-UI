@@ -1,0 +1,188 @@
+sides:
+  right: Право
+  left: Лівий
+  top: Топ
+  bottom: Дно
+header:
+  labels:
+    specific_apps: Конкретні програми
+    info: Інформація
+    seelen_bar: Панель інструментів вишуканих
+    general: Загальний
+    seelen_weg: Док/панель завдань
+    monitors: Монітори
+    developer: Розробник
+    seelen_wm: Менеджер вікон
+    shortcuts: Ярлики
+start:
+  title: Ласкаво просимо!
+  message_accent: Оптимізуйте свою продуктивність стилем!
+  message: >-
+    Ласкаво просимо в інтерфейс SEELEN, Ultimate Desktop Envirtional із
+    включеним менеджером з плитки Windows для покращення вашого досвіду Windows
+    11! Вивчіть нову еру ефективності та багатозадачності за допомогою нашого
+    інтуїтивного інтерфейсу та розширених функцій.
+general:
+  theme:
+    enabled: Увімкнено теми
+    added: Тема вже додана
+    description: Опис
+    author: Автор
+    tags: Теги
+    add: Додати тему
+    label: Інформація про тему
+    placeholder: Виберіть тему
+  language: Мова
+  startup: Бігати на стартап?
+toolbar:
+  placeholder:
+    select: Структура панелі інструментів
+    description: Опис
+    author: Автор
+  enable: Увімкнути панель інструментів вишуканих
+  height: Висота
+wm:
+  border:
+    width: Ширина кордону
+    enable: Увімкнути кордон вікна
+    offset: Зміщення кордону
+  enable: Увімкніть менеджер вікон
+  description: Опис
+  resize_delta: Змінити розмір дельти (%)
+  layout: Макет
+  disabled_windows10: Менеджер вікон недоступний для Windows 10.
+  author: Автор
+  workspace_offset: Зсув робочих просторів (поля)
+  space_between_containers: Простір між контейнерами
+  workspace_padding: Прокладка робочих просторів
+weg:
+  items:
+    label: Предмети
+    zoom_size: Збільшений розмір (використовується для тем)
+    size: Розмір товару
+    gap: Простір між предметами
+    visible_separators: Видимі сепаратори
+  enable: Увімкнути док/панель завдань
+  margin: Націнка
+  auto_hide: Автомати
+  label: Док/панель завдань
+  gap: Розрив
+  width: Ширина
+  padding: Прокладка
+  dock_side: Причал
+devtools:
+  load: Навантаження
+  app_folders: Папки додатків
+  install_folder: Папка встановлення
+  custom_config_file: Завантажте власний конфігураційний файл
+  data_folder: Папка даних
+  enable: Увімкнути інструменти розробника
+  settings_file: Файл налаштувань
+apps_configurations:
+  app:
+    options:
+      force: Управління силою
+      float: Плавати
+      pinned: Закріплений
+      unmanage: Неемінь
+    ok_edit: Оновити
+    options_label: Додаткові варіанти
+    monitor: Моніторинг
+    category: Категорія
+    title_create: Створення {{Ім'я}}
+    ok_readonly: Редагувати як нове
+    title_readonly: Перегляд {{Ім'я}}
+    category_placeholder: Ні
+    monitor_placeholder: Ні
+    workspace_placeholder: Ні
+    workspace: Робоча область
+    title_edit: Редагування {{Ім'я}}
+    ok_create: Створити
+    name: Назва
+    bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
+  identifier:
+    and: І
+    add_block: Додати блок
+    matching_strategy: Стратегія відповідності
+    kind: Ідентифікувати
+    remove: Видалити блок
+    or: Або
+    negation: Заперечувати відповідність
+    id: Ідентифікатор
+  delete: Видаляти
+  confirm_delete: Ви впевнені, що хочете видалити цю конфігурацію?
+  swap: Обміняти
+  bundled_title: Конфігурація додатка в комплекті з Seelen
+  export: Експорт
+  confirm_delete_title: Підтвердьте видалення
+  import: Імпорт
+  search: Обшук
+  bundled_msg: >-
+    Ці конфігурації в комплекті не підлягають редагуванню та розроблені для
+    того, щоб забезпечити вам найкращий досвід без налаштування. Вони
+    автоматично налаштовують для вас найпоширеніші програми.
+  new: Новачок
+extras:
+  links: Офіційні посилання
+  relaunch: Відновлювати
+  github: Гітб
+  exit: Кинути/вийти
+  discord: Розбрат
+  version: Версія
+shortcuts:
+  labels:
+    move_to_workspace_5: Перехід до робочої області 5
+    move_to_workspace_4: Переходити до робочої області 4
+    move_to_workspace_2: Перехід до робочої області 2
+    focus_latest: Фокус найновіший
+    switch_workspace_0: Перехід на робочу область 0
+    switch_workspace_7: Перехід на робочу область 7
+    switch_workspace_2: Перехід на робочу область 2
+    switch_workspace_1: Перехід на робочу область 1
+    increase_width: Збільшити ширину
+    switch_workspace_3: Перехід на робочу область 3
+    move_to_workspace_9: Переходити до робочої області 9
+    decrease_height: Зниження висоти
+    increase_height: Збільшити висоту
+    reserve_stack: Резерв
+    send_to_workspace_1: Надіслати на робочу область 1
+    move_to_workspace_8: Перехід до робочої області 8
+    switch_workspace_6: Перехід на робочу область 6
+    send_to_workspace_9: Надіслати на робочу область 9
+    restore_sizes: Відновити розміри
+    focus_top: Фокус
+    move_to_workspace_1: Переходити до робочої області 1
+    reserve_bottom: ЗАБЕЗПЕЧЕННЯ
+    send_to_workspace_3: Надіслати на робочу область 3
+    send_to_workspace_8: Надіслати на робочу область 8
+    move_to_workspace_6: Переходити до робочої області 6
+    switch_workspace_9: Перехід на робочу область 9
+    focus_bottom: Фокус дно
+    reserve_left: Резерв зліва
+    move_to_workspace_0: Перехід до робочої області 0
+    send_to_workspace_5: Надіслати на робочу область 5
+    switch_workspace_5: Перехід на робочу область 5
+    reserve_top: Резервувати топ
+    decrease_width: Зменшення ширини
+    switch_workspace_8: Перехід на робочу область 8
+    send_to_workspace_4: Надіслати на робочу область 4
+    reserve_right: Резервуйте праворуч
+    move_to_workspace_3: Переходити до робочої області 3
+    send_to_workspace_2: Надіслати на робочу область 2
+    switch_workspace_4: Перехід на робочу область 4
+    move_to_workspace_7: Перехід до робочої області 7
+    reserve_float: Резервне плавання
+    send_to_workspace_0: Надіслати на робочу область 0
+    focus_left: Фокус ліворуч
+    send_to_workspace_6: Надіслати на робочу область 6
+    focus_right: Фокус правильно
+    send_to_workspace_7: Надіслати на робочу область 7
+  enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
+  enable: Увімкнути інтегровані ярлики (AHK)
+delete: Видаляти
+inProgress: В процесі...
+cancel: Скасувати
+save: Заощадити
+open: ВІДЧИНЕНО
+quit: Кинути
+loading: Завантаження ...

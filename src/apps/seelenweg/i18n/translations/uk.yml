@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Додати медіа -модуль
+  start: Додайте модуль запуску
+  settings: Відкриті налаштування
+app_menu:
+  run_as: Запустити від імені адміністратора
+  pin_to_center: Шпилька до центру
+  copy_handles: Копіювати ручки
+  open_file_location: Розташування відкритого файлу
+  close_multiple: Закрити все
+  pin_to_right: Праворуч праворуч
+  close: Закривати
+  unpin: Розмивати
+  pin: Шпилька
+  pin_to_left: Шпилька зліва
+media_menu:
+  remove: Видалити медіа -модуль
+start_menu:
+  remove: Зніміть модуль запуску
