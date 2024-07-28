@@ -1,0 +1,190 @@
+sides:
+  left: Stânga
+  top: Top
+  right: Dreapta
+  bottom: Fund
+header:
+  labels:
+    developer: Dezvoltator
+    info: informație
+    general: General
+    seelen_weg: Dock/Bara de activități
+    shortcuts: Comitete rapide
+    seelen_wm: Manager de ferestre
+    specific_apps: Aplicații specifice
+    seelen_bar: Bara de instrumente fantezistă
+    monitors: Monitoare
+start:
+  title: Bine ati venit!
+  message_accent: Optimizează -ți productivitatea cu stil!
+  message: >-
+    Bine ați venit la Seelen UI, mediul de desktop final cu un manager Windows
+    de gresie încorporat pentru a vă îmbunătăți experiența Windows 11! Explorați
+    o nouă eră de eficiență și multitasking cu interfața noastră intuitivă și
+    caracteristicile avansate.
+general:
+  theme:
+    placeholder: Selectează tema
+    author: Autor
+    description: Descriere
+    tags: Etichete
+    enabled: Teme activate
+    add: Adăugați tema
+    label: Informații despre temă
+    added: Tema deja adăugată
+  language: Limba
+  startup: Rulați la pornire?
+toolbar:
+  placeholder:
+    select: Structura barei de instrumente
+    author: Autor
+    description: Descriere
+  height: Înălţime
+  enable: Activați bara de instrumente fantezistă
+wm:
+  border:
+    enable: Activați granița ferestrei
+    width: Lățimea graniței
+    offset: Offset de frontieră
+  description: Descriere
+  author: Autor
+  layout: Aspect
+  resize_delta: Redimensionați delta (%)
+  workspace_offset: Spații de lucru Offset (marje)
+  space_between_containers: Spațiu între containere
+  enable: Activați managerul de ferestre
+  workspace_padding: Padding spații de lucru
+  disabled_windows10: Managerul de ferestre nu este disponibil pentru Windows 10.
+weg:
+  items:
+    size: Dimensiunea articolului
+    label: Articole
+    zoom_size: Dimensiunea zoomată (folosită pentru teme)
+    gap: Spațiu între articole
+    visible_separators: Separatoare vizibile
+  width: Lăţime
+  gap: Decalaj
+  label: Dock/Bara de activități
+  auto_hide: Ascundere automată
+  margin: Marjă
+  enable: Activați Dock/Bara de activități
+  padding: Căptușeală
+  dock_side: Partea de doc
+devtools:
+  load: Sarcină
+  data_folder: Folder de date
+  custom_config_file: Încărcați fișierul de configurare personalizat
+  enable: Activați instrumentele pentru dezvoltatori
+  app_folders: Foldere de aplicații
+  settings_file: Fișier de setări
+  install_folder: Folder de instalare
+apps_configurations:
+  app:
+    options:
+      force: Forța gestionează
+      float: Pluti
+      unmanage: Ne gestionare
+      pinned: Fixat
+    ok_create: Crea
+    ok_edit: Actualizați
+    category_placeholder: Nici unul
+    bindings: Legare (notă ambele opțiuni sunt necesare)
+    monitor_placeholder: Nici unul
+    workspace_placeholder: Nici unul
+    category: Categorie
+    options_label: Opțiuni suplimentare
+    name: Nume
+    title_create: Crearea {{nume}}
+    workspace: Spațiu de lucru
+    title_readonly: Vizualizare {{nume}}
+    title_edit: Editt {{nume}}
+    ok_readonly: Editați ca nou
+    monitor: Monitor
+  identifier:
+    and: ȘI
+    or: SAU
+    negation: Negate potrivire
+    remove: Ștergeți blocul
+    matching_strategy: Strategia de potrivire
+    add_block: Adăugați bloc
+    kind: Identifică de
+    id: Identificator
+  export: Export
+  search: Căutare
+  import: Import
+  new: Nou
+  confirm_delete_title: Confirmă ștergerea
+  bundled_title: App Config Bundled cu Seelen
+  delete: Șterge
+  bundled_msg: >-
+    Aceste configurații în pachet nu sunt editabile și sunt concepute pentru a
+    vă oferi cea mai bună experiență fără personalizare. Acestea configurează
+    automat cele mai frecvente aplicații pentru dvs.
+  swap: Swap
+  confirm_delete: Ești sigur că vrei să ștergi această configurație/s?
+extras:
+  github: Github
+  relaunch: Relansare
+  discord: Discordie
+  version: Versiune
+  links: Link -uri oficiale
+  exit: Renunță/ieșire
+shortcuts:
+  labels:
+    move_to_workspace_8: Mutați -vă la spațiul de lucru 8
+    switch_workspace_1: Treceți la spațiul de lucru 1
+    switch_workspace_0: Treceți la spațiul de lucru 0
+    switch_workspace_3: Treceți la spațiul de lucru 3
+    send_to_workspace_0: Trimiteți la spațiul de lucru 0
+    send_to_workspace_5: Trimiteți la spațiul de lucru 5
+    send_to_workspace_8: Trimiteți la spațiul de lucru 8
+    send_to_workspace_4: Trimiteți la Workspace 4
+    switch_workspace_4: Treceți la spațiul de lucru 4
+    reserve_bottom: Rezervați fundul
+    reserve_left: Rezerva stânga
+    focus_bottom: Focus Fund
+    send_to_workspace_9: Trimiteți la spațiul de lucru 9
+    send_to_workspace_3: Trimiteți la Workspace 3
+    send_to_workspace_7: Trimiteți la Workspace 7
+    send_to_workspace_6: Trimiteți la spațiul de lucru 6
+    switch_workspace_7: Treceți la spațiul de lucru 7
+    send_to_workspace_2: Trimiteți la Workspace 2
+    move_to_workspace_4: Treceți la spațiul de lucru 4
+    increase_width: Creșteți lățimea
+    reserve_float: Rezervați plutitorul
+    move_to_workspace_6: Treceți la spațiul de lucru 6
+    decrease_width: Scăderea lățimii
+    decrease_height: Scăderea înălțimii
+    restore_sizes: Restaurați dimensiunile
+    move_to_workspace_3: Treceți la spațiul de lucru 3
+    focus_latest: Concentrați -vă cel mai recent
+    focus_left: Concentrați -vă la stânga
+    switch_workspace_2: Treceți la spațiul de lucru 2
+    switch_workspace_9: Treceți la spațiul de lucru 9
+    switch_workspace_5: Treceți la spațiul de lucru 5
+    send_to_workspace_1: Trimiteți la spațiul de lucru 1
+    reserve_right: Rezervați drept
+    move_to_workspace_9: Treceți la spațiul de lucru 9
+    move_to_workspace_2: Treceți la spațiul de lucru 2
+    reserve_stack: Rezerva stivă
+    increase_height: Crește înălțimea
+    focus_right: Concentrați -vă corect
+    reserve_top: Rezervați vârful
+    move_to_workspace_1: Treceți la spațiul de lucru 1
+    switch_workspace_6: Treceți la spațiul de lucru 6
+    move_to_workspace_5: Treceți la spațiul de lucru 5
+    move_to_workspace_0: Treceți la spațiul de lucru 0
+    switch_workspace_8: Treceți la spațiul de lucru 8
+    focus_top: Focus top
+    move_to_workspace_7: Mutați -vă la spațiul de lucru 7
+  enable: Activați comenzi rapide integrate (AHK)
+  enable_tooltip: >-
+    Dezactivați dacă veți implementa propriile comenzi rapide folosind API -ul
+    Seelen Core
+delete: Șterge
+inProgress: În curs...
+loading: Se încarcă...
+quit: Părăsi
+save: Salvați
+open: Deschis
+cancel: Anulare

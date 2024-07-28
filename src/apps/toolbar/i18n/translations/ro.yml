@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Comunicări
+  input_device: Dispozitiv de intrare
+  players: Playere media
+  master_volume: Volumul principal
+  output_device: Dispozitiv de ieșire
+network:
+  placeholder:
+    password: Parola
+  connect: Conectați
+  not_found: Nu au fost găsite rețele
+  disconnect: Deconectat
+  more: Mai multe setări de rețea
+  hidden: Rețea ascunsă
+settings:
+  shutdown: Închide
+  sleep: Dormi
+  restart: Repornire
+  app_settings: Setări aplicație
+  log_out: Deconectați -vă
+  title: Setări
+placeholder:
+  ethernet_connected: acces la internet
+  ethernet_disconnected: Fara acces la internet
+  volume: Volum
+  battery_remaining: '% rămas'
+  bluetooth_devices: Bluetooth & Devices
+  open_user_folder: Deschideți folderul utilizator
+  settings: Setări rapide
+  open_system_tray: Tava de sistem deschisă
+  smart_charge: '- Încărcare inteligentă'

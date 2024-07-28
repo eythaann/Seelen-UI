@@ -1,0 +1,10 @@
+update:
+  version: Versiune
+  cancel: Mai tarziu
+  downloading: Descărcarea...
+  title: Actualizare disponibila!
+  date: Data
+  extra_info: Pentru a citi ChangeLog complet, vă rugăm să vizitați pagina ChangeLog
+  installing: Instalare ...
+  page: Pagina de eliberare Github
+  download: Actualizați și instalați

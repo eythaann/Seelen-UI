@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Deschide setările
+  media: Adăugați modul media
+  start: Adăugați modulul de pornire
+app_menu:
+  open_file_location: Deschide locația fișierului
+  close: Închide
+  close_multiple: Inchide tot
+  run_as: Rulat ca administrator
+  pin_to_center: Pin în centru
+  copy_handles: Copiați mânerele
+  pin_to_right: Pin la dreapta
+  unpin: Unpin
+  pin: Ac
+  pin_to_left: Pin la stânga
+media_menu:
+  remove: Eliminați modulul media
+start_menu:
+  remove: Eliminați modulul de pornire
