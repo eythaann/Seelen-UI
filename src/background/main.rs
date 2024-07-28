@@ -25,6 +25,7 @@ use std::io::{BufWriter, Write};
 use color_eyre::owo_colors::OwoColorize;
 use error_handler::Result;
 use exposed::register_invoke_handler;
+use itertools::Itertools;
 use modules::{
     cli::{
         application::{is_just_getting_cmd_info, SEELEN_COMMAND_LINE},
@@ -117,14 +118,20 @@ fn main() -> Result<()> {
         return Ok(());
     }
 
-    if let Ok(stream) = Client::connect_tcp() {
-        let mut writer = BufWriter::new(stream);
+    let mut sys = sysinfo::System::new();
+    sys.refresh_processes();
+    let already_running = sys.processes_by_name("seelen-ui.exe").collect_vec().len() > 1;
 
-        let args: Vec<String> = std::env::args().collect();
-        let msg = serde_json::to_string(&args).expect("could not serialize");
+    if already_running {
+        if let Ok(stream) = Client::connect_tcp() {
+            let mut writer = BufWriter::new(stream);
 
-        writer.write_all(msg.as_bytes()).expect("could not write");
-        writer.flush().expect("could not flush");
+            let args = std::env::args().collect_vec();
+            let msg = serde_json::to_string(&args).expect("could not serialize");
+
+            writer.write_all(msg.as_bytes()).expect("could not write");
+            writer.flush().expect("could not flush");
+        }
         return Ok(());
     }
 
