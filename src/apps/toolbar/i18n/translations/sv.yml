@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Kommunikation
+  input_device: Inmatningsapparat
+  output_device: Utmatningsanordning
+  players: Mediaspelare
+  master_volume: Mastervolym
+network:
+  placeholder:
+    password: Lösenord
+  more: Fler nätverksinställningar
+  not_found: Inga nätverk hittades
+  disconnect: Koppla ifrån
+  connect: Ansluta
+  hidden: Doldnätverk
+settings:
+  shutdown: Stänga av
+  restart: Omstart
+  app_settings: App inställningar
+  title: inställningar
+  sleep: Sova
+  log_out: Logga ut
+placeholder:
+  ethernet_disconnected: Ingen internetuppkoppling
+  battery_remaining: '% återstående'
+  open_system_tray: Öppet system
+  ethernet_connected: internetåtkomst
+  volume: Volym
+  open_user_folder: Öppen användarmapp
+  bluetooth_devices: Bluetooth & enheter
+  settings: Snabbinställningar
+  smart_charge: '- Smart laddning'

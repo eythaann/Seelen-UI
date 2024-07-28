@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Öppna Inställningar
+  start: Lägg till startmodul
+  media: Lägg till mediemodul
+app_menu:
+  pin: Stift
+  close_multiple: Stäng alla
+  run_as: Kör som administratör
+  open_file_location: Öppna filplats
+  close: Stänga
+  copy_handles: Kopieringshandtag
+  pin_to_center: Stift till mitten
+  pin_to_right: Nöja sig till höger
+  unpin: Lutande
+  pin_to_left: Stämma till vänster
+media_menu:
+  remove: Ta bort mediemodulen
+start_menu:
+  remove: Ta bort startmodulen
