@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Komunikasyon
+    multimedia: Multimedia
+  master_volume: Dami ng master
+  input_device: Aparato ng pag -input
+  players: Mga manlalaro ng media
+  output_device: Aparato ng output
+network:
+  placeholder:
+    password: Password
+  not_found: Walang nahanap na mga network
+  hidden: Nakatagong network
+  disconnect: Idiskonekta
+  more: Higit pang mga setting ng network
+  connect: Kumonekta
+settings:
+  app_settings: Mga Setting ng App
+  shutdown: Shutdown
+  sleep: Matulog ka na
+  restart: I -restart
+  log_out: Mag -log out
+  title: Mga setting
+placeholder:
+  ethernet_connected: Internet access
+  ethernet_disconnected: Walang internet access
+  settings: Mabilis na mga setting
+  battery_remaining: Nananatili
+  open_system_tray: Bukas na tray ng system
+  open_user_folder: Buksan ang folder ng gumagamit
+  volume: Dami
+  bluetooth_devices: Bluetooth at mga aparato
+  smart_charge: '- Smart Charge'

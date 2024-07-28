@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Buksan ang settings
+  media: Magdagdag ng module ng media
+  start: Magdagdag ng Start Module
+app_menu:
+  pin_to_left: Pin sa kaliwa
+  pin_to_center: Pin sa gitna
+  close_multiple: Isara ang lahat
+  close: Malapit
+  pin: Pin
+  pin_to_right: Pin sa kanan
+  run_as: Tumakbo bilang Administrator
+  unpin: Unpin
+  open_file_location: Buksan ang lokasyon ng file
+  copy_handles: Kopyahin ang mga hawakan
+media_menu:
+  remove: Alisin ang module ng media
+start_menu:
+  remove: Alisin ang Start Module

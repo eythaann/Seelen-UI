@@ -1,0 +1,12 @@
+update:
+  version: Bersyon
+  extra_info: >-
+    Upang mabasa ang buong Changelog, mangyaring bisitahin ang pahina ng
+    Changelog
+  cancel: Kalaunan
+  download: I -update at i -install
+  title: Mag -update Magagamit!
+  downloading: Pag -download ...
+  page: Pahina ng paglabas ng Github
+  date: Petsa
+  installing: Pag -install ...

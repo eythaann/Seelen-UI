@@ -1,0 +1,191 @@
+sides:
+  right: Tama
+  left: Kaliwa
+  top: Tuktok
+  bottom: Ilalim
+header:
+  labels:
+    seelen_bar: Fancy Toolbar
+    seelen_wm: Window Manager
+    general: Pangkalahatan
+    info: Impormasyon
+    monitors: Monitor
+    shortcuts: Mga shortcut
+    developer: Developer
+    specific_apps: Tukoy na apps
+    seelen_weg: Dock/Taskbar
+start:
+  message: >-
+    Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
+    may isang isinama na tiling windows manager upang mapahusay ang iyong
+    karanasan sa Windows 11! Galugarin ang isang bagong panahon ng kahusayan at
+    multitasking sa aming intuitive interface at mga advanced na tampok.
+  title: Maligayang pagdating!
+  message_accent: I -optimize ang iyong pagiging produktibo sa estilo!
+general:
+  theme:
+    author: May -akda
+    placeholder: Piliin ang TEMA
+    add: Magdagdag ng tema
+    description: Paglalarawan
+    label: Impormasyon sa Tema
+    enabled: Pinagana ang mga tema
+    added: Naidagdag na ang tema
+    tags: Tags
+  language: Wika
+  startup: Patakbuhin sa Startup?
+toolbar:
+  placeholder:
+    author: May -akda
+    select: Istraktura ng toolbar
+    description: Paglalarawan
+  height: Taas
+  enable: Paganahin ang magarbong toolbar
+wm:
+  border:
+    width: Lapad ng hangganan
+    offset: Border Offset
+    enable: Paganahin ang hangganan ng window
+  author: May -akda
+  disabled_windows10: Ang window manager ay hindi magagamit para sa Windows 10.
+  description: Paglalarawan
+  space_between_containers: Puwang sa pagitan ng mga lalagyan
+  layout: Layout
+  workspace_offset: Workspaces Offset (Margin)
+  enable: Paganahin ang Window Manager
+  workspace_padding: Mga workspaces padding
+  resize_delta: Baguhin ang laki ng Delta (%)
+weg:
+  items:
+    label: Mga item
+    visible_separators: Visible Separator
+    zoom_size: Zoom na laki (ginamit para sa mga tema)
+    gap: Puwang sa pagitan ng mga item
+    size: Laki ng item
+  width: Lapad
+  padding: Padding
+  enable: Paganahin ang pantalan/taskbar
+  label: Dock/Taskbar
+  margin: Margin
+  auto_hide: Auto itago
+  dock_side: Dock side
+  gap: Gap
+devtools:
+  custom_config_file: I -load ang pasadyang config file
+  app_folders: Mga folder ng app
+  load: Mag -load
+  settings_file: File ng mga setting
+  data_folder: Folder ng data
+  install_folder: Folder ng pag -install
+  enable: Paganahin ang mga tool ng developer
+apps_configurations:
+  app:
+    options:
+      float: Lumutang
+      force: Pamahalaan ang Pamahalaan
+      pinned: Naka -pin
+      unmanage: Hindi namamahala
+    bindings: Ang pagbubuklod (tandaan ang parehong mga pagpipilian ay kinakailangan)
+    ok_edit: I -update
+    title_create: Lumilikha ng {{pangalan}}
+    title_readonly: Pagtingin {{pangalan}}
+    category_placeholder: Wala
+    ok_create: Lumikha
+    monitor_placeholder: Wala
+    title_edit: Pag -edit {{pangalan}}
+    category: Kategorya
+    ok_readonly: I -edit bilang bago
+    options_label: Dagdag na mga pagpipilian
+    workspace: Workspace
+    monitor: Subaybayan
+    workspace_placeholder: Wala
+    name: Pangalan
+  identifier:
+    id: Identifier
+    negation: Negate pagtutugma
+    kind: Kilalanin ng
+    remove: Tanggalin ang bloke
+    matching_strategy: Diskarte sa pagtutugma
+    add_block: Magdagdag ng block
+    or: O
+    and: At
+  import: Angkat
+  delete: Tanggalin
+  search: Maghanap
+  export: I -export
+  bundled_title: Ang config ng app na naka -bundle kay Seelen
+  bundled_msg: >-
+    Ang mga naka -bundle na mga pagsasaayos ay hindi mai -edit at idinisenyo
+    upang mabigyan ka ng pinakamahusay na karanasan nang walang pagpapasadya.
+    Awtomatiko nilang i -configure ang pinaka -karaniwang mga aplikasyon para sa
+    iyo.
+  confirm_delete: Sigurado ka bang nais mong tanggalin ang pagsasaayos na ito/s?
+  confirm_delete_title: Kumpirmahin ang Tanggalin
+  new: Bago
+  swap: Ipagpalit
+extras:
+  relaunch: Muling pagsasaayos
+  version: Bersyon
+  exit: Huminto/exit
+  github: Github
+  links: Opisyal na mga link
+  discord: Discord
+shortcuts:
+  labels:
+    focus_top: Tumuon sa itaas
+    reserve_stack: Reserve stack
+    increase_height: Dagdagan ang taas
+    focus_bottom: Pokus sa ilalim
+    switch_workspace_5: Lumipat sa Workspace 5
+    focus_left: Kaliwa ng Focus
+    send_to_workspace_2: Ipadala sa Workspace 2
+    switch_workspace_6: Lumipat sa Workspace 6
+    send_to_workspace_6: Ipadala sa Workspace 6
+    focus_latest: Pinakabagong ituon
+    send_to_workspace_0: Ipadala sa Workspace 0
+    move_to_workspace_0: Lumipat sa workspace 0
+    send_to_workspace_8: Ipadala sa Workspace 8
+    restore_sizes: Ibalik ang mga sukat
+    move_to_workspace_8: Lumipat sa Workspace 8
+    switch_workspace_9: Lumipat sa Workspace 9
+    reserve_left: Reserve Kaliwa
+    send_to_workspace_1: Ipadala sa Workspace 1
+    switch_workspace_3: Lumipat sa Workspace 3
+    send_to_workspace_5: Ipadala sa Workspace 5
+    reserve_top: Reserve top
+    switch_workspace_7: Lumipat sa Workspace 7
+    reserve_right: Tama ang reserba
+    move_to_workspace_9: Lumipat sa Workspace 9
+    send_to_workspace_9: Ipadala sa Workspace 9
+    move_to_workspace_5: Lumipat sa Workspace 5
+    move_to_workspace_3: Lumipat sa Workspace 3
+    switch_workspace_2: Lumipat sa Workspace 2
+    switch_workspace_4: Lumipat sa Workspace 4
+    move_to_workspace_6: Lumipat sa Workspace 6
+    decrease_width: Bawasan ang lapad
+    move_to_workspace_2: Lumipat sa Workspace 2
+    reserve_bottom: Reserve Bottom
+    move_to_workspace_7: Lumipat sa Workspace 7
+    move_to_workspace_4: Lumipat sa Workspace 4
+    increase_width: Dagdagan ang lapad
+    reserve_float: Reserve float
+    send_to_workspace_4: Ipadala sa Workspace 4
+    decrease_height: Bawasan ang taas
+    focus_right: Tama ang ituon
+    move_to_workspace_1: Lumipat sa Workspace 1
+    switch_workspace_8: Lumipat sa Workspace 8
+    switch_workspace_1: Lumipat sa Workspace 1
+    switch_workspace_0: Lumipat sa workspace 0
+    send_to_workspace_7: Ipadala sa Workspace 7
+    send_to_workspace_3: Ipadala sa Workspace 3
+  enable_tooltip: >-
+    Huwag paganahin kung ipatutupad mo ang iyong sariling mga shortcut gamit ang
+    Seelen Core API
+  enable: Paganahin ang Integrated Shortcut (AHK)
+inProgress: Sa pag -unlad ...
+delete: Tanggalin
+loading: Naglo -load ...
+cancel: Kanselahin
+quit: Huminto ka
+open: Buksan
+save: I -save
