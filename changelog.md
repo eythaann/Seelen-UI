@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.9]
 ### enhancements
 - add translation to the rest of apps (dock, toolbar, and update modal).
 
