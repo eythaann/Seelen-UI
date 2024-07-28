@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: बहुतायत
+    comunications: संचार
+  master_volume: मूल संस्करण
+  output_device: आउटपुट डिवाइस
+  players: मीडिया -खिलाड़ी
+  input_device: इनपुट डिवाइस
+network:
+  placeholder:
+    password: पासवर्ड
+  not_found: कोई नेटवर्क नहीं मिला
+  more: अधिक नेटवर्क सेटिंग्स
+  hidden: छिपा हुआ नेटवर्क
+  disconnect: डिस्कनेक्ट
+  connect: जोड़ना
+settings:
+  restart: पुनः आरंभ करें
+  sleep: नींद
+  shutdown: शट डाउन
+  title: समायोजन
+  log_out: लॉग आउट
+  app_settings: एप्लिकेशन सेटिंग
+placeholder:
+  smart_charge: '- स्मार्ट चार्ज'
+  battery_remaining: '% शेष'
+  open_user_folder: उपयोगकर्ता फ़ोल्डर खोलें
+  bluetooth_devices: ब्लूटूथ और डिवाइस
+  ethernet_connected: इंटरनेट का उपयोग
+  ethernet_disconnected: इंटरनेट की सुविधा नहीं है
+  settings: त्वरित सेटिंग
+  volume: आयतन
+  open_system_tray: खुला तंत्र ट्रे

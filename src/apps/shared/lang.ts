@@ -11,5 +11,6 @@ export const LanguageList = [
     { label: 'العربية', value: 'ar' }, // Arabic
     { label: 'Português', value: 'pt' }, // Portuguese
     { label: 'Русский', value: 'ru' }, // Russian
+    { label: 'हिन्दी', value: 'hi' }, // Hindi
   ] as const),
 ].sort((a, b) => a.label.localeCompare(b.label));

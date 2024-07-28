@@ -1,0 +1,190 @@
+sides:
+  left: बाएं
+  top: शीर्ष
+  right: सही
+  bottom: तल
+header:
+  labels:
+    seelen_wm: खिड़की प्रबंधक
+    general: सामान्य
+    seelen_weg: डॉक/टास्टरबार
+    developer: डेवलपर
+    specific_apps: विशिष्ट ऐप्स
+    seelen_bar: फैंसी टूलबार
+    shortcuts: शॉर्टकट
+    monitors: पर नज़र रखता है
+    info: जानकारी
+start:
+  message_accent: शैली के साथ अपनी उत्पादकता का अनुकूलन करें!
+  message: >-
+    सेलेन यूआई में आपका स्वागत है, अपने विंडोज 11 अनुभव को बढ़ाने के लिए एक
+    निगमित टाइलिंग विंडोज मैनेजर के साथ अंतिम डेस्कटॉप वातावरण! हमारे सहज
+    इंटरफ़ेस और उन्नत सुविधाओं के साथ दक्षता और मल्टीटास्किंग के एक नए युग का
+    अन्वेषण करें।
+  title: स्वागत!
+general:
+  theme:
+    added: थीम पहले से ही जोड़ा गया
+    enabled: सक्षम थीम
+    add: थीम जोड़ें
+    label: थीम सूचना
+    author: लेखक
+    tags: टैग
+    placeholder: चुनिंदा विषय
+    description: विवरण
+  startup: स्टार्टअप पर चलाएं?
+  language: भाषा
+toolbar:
+  placeholder:
+    author: लेखक
+    select: उपकरण -संरचना
+    description: विवरण
+  height: ऊंचाई
+  enable: फैंसी टूलबार सक्षम करें
+wm:
+  border:
+    width: सीमा चौड़ाई
+    enable: विंडो की सीमा सक्षम करें
+    offset: सीमावर्ती ऑफसेट
+  space_between_containers: कंटेनरों के बीच की जगह
+  resize_delta: डेल्टा का आकार बदलें (%)
+  workspace_offset: कार्यक्षेत्र ऑफसेट (मार्जिन)
+  author: लेखक
+  description: विवरण
+  disabled_windows10: विंडोज 10 के लिए विंडो मैनेजर उपलब्ध नहीं है।
+  workspace_padding: कार्यक्षेत्र पैडिंग
+  layout: लेआउट
+  enable: विंडो मैनेजर सक्षम करें
+weg:
+  items:
+    visible_separators: दृश्य विभाजक
+    size: आइटम आकार
+    zoom_size: ज़ूमेड आकार (विषयों के लिए उपयोग किया जाता है)
+    label: सामान
+    gap: वस्तुओं के बीच का स्थान
+  padding: गद्दी
+  width: चौड़ाई
+  label: डॉक/टास्टरबार
+  gap: अंतर
+  enable: डॉक/टास्कबार सक्षम करें
+  dock_side: डॉक साइड
+  auto_hide: खुद से छिपना
+  margin: अंतर
+devtools:
+  install_folder: स्थापना फ़ोल्डर
+  load: भार
+  app_folders: ऐप फ़ोल्डर्स
+  settings_file: सेटिंग संचिका
+  custom_config_file: कस्टम कॉन्फ़िगर फ़ाइल लोड करें
+  data_folder: डेटा फ़ोल्डर
+  enable: डेवलपर टूल सक्षम करें
+apps_configurations:
+  app:
+    options:
+      force: बल का प्रबंधन करना
+      pinned: पिन की गई
+      unmanage: अमानवीय
+      float: तैरना
+    title_create: '{{नाम}} बनाना'
+    ok_edit: अद्यतन
+    ok_readonly: नए के रूप में संपादित करें
+    workspace: कार्यस्थान
+    category_placeholder: कोई नहीं
+    monitor_placeholder: कोई नहीं
+    bindings: बाइंडिंग (ध्यान दें कि दोनों विकल्पों की आवश्यकता है)
+    title_edit: संपादन {{नाम}}
+    monitor: निगरानी करना
+    category: वर्ग
+    workspace_placeholder: कोई नहीं
+    options_label: अतिरिक्त विकल्प
+    name: नाम
+    ok_create: बनाएं
+    title_readonly: '{{नाम}} देखना'
+  identifier:
+    remove: ब्लॉक हटाएं
+    add_block: ब्लॉक जोड़ें
+    negation: नकारात्मक मिलान
+    kind: से पहचानना
+    id: पहचानकर्ता
+    matching_strategy: मिलान रणनीति
+    and: और
+    or: या
+  confirm_delete_title: हटाने की पुष्टि करें
+  bundled_msg: >-
+    ये बंडल किए गए कॉन्फ़िगरेशन संपादन योग्य नहीं हैं और आपको अनुकूलन के बिना
+    सबसे अच्छा अनुभव प्रदान करने के लिए डिज़ाइन किए गए हैं। वे स्वचालित रूप से
+    आपके लिए सबसे आम अनुप्रयोगों को कॉन्फ़िगर करते हैं।
+  confirm_delete: क्या आप सुनिश्चित हैं कि आप इस कॉन्फ़िगरेशन/एस को हटाना चाहते हैं?
+  export: निर्यात
+  new: नया
+  delete: मिटाना
+  bundled_title: ऐप कॉन्फ़िगरेशन सेलेन के साथ बंडल किया गया
+  swap: बदलना
+  import: आयात
+  search: खोज
+extras:
+  discord: कलह
+  relaunch: 'पुन: लॉन्च'
+  links: आधिकारिक संबंध
+  exit: छोड़ देना/बाहर निकलना
+  github: GitHub
+  version: संस्करण
+shortcuts:
+  labels:
+    switch_workspace_1: कार्यक्षेत्र 1 पर स्विच करें
+    reserve_right: आरक्षित अधिकार
+    move_to_workspace_1: कार्यक्षेत्र 1 पर जाएं
+    switch_workspace_2: कार्यक्षेत्र 2 पर स्विच करें
+    reserve_stack: आरक्षित स्टैक
+    decrease_height: ऊंचाई में कमी
+    reserve_left: आरक्षित आरक्षित
+    move_to_workspace_2: कार्यक्षेत्र 2 पर जाएं
+    move_to_workspace_9: कार्यक्षेत्र 9 पर जाएं
+    reserve_top: आरक्षित शीर्ष
+    send_to_workspace_4: कार्यक्षेत्र 4 पर भेजें
+    increase_width: चौड़ाई में वृद्धि
+    switch_workspace_5: कार्यक्षेत्र 5 पर स्विच करें
+    move_to_workspace_8: कार्यक्षेत्र 8 पर जाएं
+    send_to_workspace_2: कार्यक्षेत्र 2 को भेजें
+    focus_left: फोकस लेफ्ट
+    send_to_workspace_5: कार्यक्षेत्र 5 को भेजें
+    send_to_workspace_7: कार्यक्षेत्र 7 को भेजें
+    send_to_workspace_3: कार्यक्षेत्र 3 को भेजें
+    decrease_width: चौड़ाई में कमी
+    send_to_workspace_8: कार्यक्षेत्र 8 पर भेजें
+    move_to_workspace_6: कार्यक्षेत्र 6 पर जाएं
+    restore_sizes: आकारों को बहाल करें
+    focus_top: फोकस टॉप
+    switch_workspace_9: कार्यक्षेत्र 9 पर स्विच करें
+    move_to_workspace_4: कार्यक्षेत्र 4 पर जाएं
+    focus_bottom: फोकस बॉटम
+    switch_workspace_8: कार्यक्षेत्र 8 पर स्विच करें
+    switch_workspace_6: कार्यक्षेत्र 6 पर स्विच करें
+    reserve_bottom: रिजर्व
+    move_to_workspace_3: कार्यक्षेत्र 3 पर जाएं
+    move_to_workspace_0: कार्यक्षेत्र 0 पर जाएं
+    send_to_workspace_0: कार्यक्षेत्र 0 पर भेजें
+    focus_latest: नवीनतम ध्यान केंद्रित करें
+    increase_height: ऊंचाई बढ़ाना
+    focus_right: फोकस अधिकार
+    switch_workspace_4: कार्यक्षेत्र 4 पर स्विच करें
+    send_to_workspace_1: कार्यक्षेत्र 1 पर भेजें
+    send_to_workspace_6: कार्यक्षेत्र 6 को भेजें
+    move_to_workspace_5: कार्यक्षेत्र 5 पर जाएं
+    send_to_workspace_9: कार्यक्षेत्र 9 को भेजें
+    switch_workspace_0: कार्यक्षेत्र पर स्विच करें 0
+    switch_workspace_7: कार्यक्षेत्र 7 पर स्विच करें
+    reserve_float: रिजर्व फ्लोट
+    switch_workspace_3: कार्यक्षेत्र 3 पर स्विच करें
+    move_to_workspace_7: कार्यक्षेत्र 7 पर जाएं
+  enable: एकीकृत शॉर्टकट (AHK) सक्षम करें
+  enable_tooltip: >-
+    अक्षम करें यदि आप सेलेन कोर एपीआई का उपयोग करके अपने स्वयं के शॉर्टकट को
+    लागू करेंगे
+inProgress: प्रगति पर है...
+save: बचाना
+open: खुला
+delete: मिटाना
+cancel: रद्द करना
+loading: लोड हो रहा है...
+quit: छोड़ना
