@@ -1,0 +1,190 @@
+sides:
+  left: Αριστερά
+  bottom: Κάτω μέρος
+  top: Μπλουζα
+  right: σωστά
+header:
+  labels:
+    info: Πληροφορίες
+    general: Γενικός
+    monitors: Παρακολουθεί
+    developer: Προγραμματιστής
+    seelen_wm: Διαχειριστής παραθύρων
+    seelen_bar: Φανταχτερή γραμμή εργαλείων
+    shortcuts: Συντομεύσεις
+    specific_apps: Συγκεκριμένες εφαρμογές
+    seelen_weg: Λέσχη εργασιών
+start:
+  message_accent: Βελτιστοποιήστε την παραγωγικότητά σας με στυλ!
+  title: Καλως ΗΡΘΑΤΕ!
+  message: >-
+    Καλώς ήλθατε στο Seelen UI, το Ultimate Desktop Environment με έναν
+    ενσωματωμένο διαχειριστή Windows για να βελτιώσετε την εμπειρία των Windows
+    11! Εξερευνήστε μια νέα εποχή αποτελεσματικότητας και πολλαπλών εργασιών με
+    την διαισθητική διεπαφή και τα προηγμένα χαρακτηριστικά μας.
+general:
+  theme:
+    placeholder: Επέλεξε θέμα
+    author: Συγγραφέας
+    description: Περιγραφή
+    add: Προσθέστε θέμα
+    label: Πληροφορίες θεμάτων
+    tags: Ετικέτες
+    enabled: Ενεργοποιημένα θέματα
+    added: Το θέμα έχει ήδη προστεθεί
+  language: Γλώσσα
+  startup: Εκτέλεση κατά την εκκίνηση;
+toolbar:
+  placeholder:
+    select: Δομή γραμμής εργαλείων
+    author: Συγγραφέας
+    description: Περιγραφή
+  height: Υψος
+  enable: Ενεργοποίηση φανταχτερά εργαλεία εργαλείων
+wm:
+  border:
+    offset: Μετατόπιση των συνόρων
+    width: Πλάτος συνόρων
+    enable: Ενεργοποιήστε τα σύνορα του παραθύρου
+  description: Περιγραφή
+  author: Συγγραφέας
+  disabled_windows10: Ο διαχειριστής παραθύρων δεν είναι διαθέσιμος για τα Windows 10.
+  layout: Διάταξη
+  workspace_padding: Πλατύφυλλα
+  enable: Ενεργοποίηση διαχειριστή παραθύρων
+  workspace_offset: Μετατόπιση χώρων εργασίας (περιθώρια)
+  space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων
+  resize_delta: Αλλαγή μεγέθους Delta (%)
+weg:
+  items:
+    size: Μέγεθος αντικειμένου
+    visible_separators: Ορατοί διαχωριστές
+    label: Αντικείμενα
+    zoom_size: Μέγεθος μεγέθυνσης (χρησιμοποιείται για θέματα)
+    gap: Χώρος μεταξύ αντικειμένων
+  width: Πλάτος
+  padding: Υλικό παραγεμίσματος
+  margin: Περιθώριο
+  gap: Χάσμα
+  auto_hide: Αυτόματη απόκρυψη
+  label: Λέσχη εργασιών
+  enable: Ενεργοποίηση λίστα/γραμμή εργασιών
+  dock_side: Πλευρά αποβάθρας
+devtools:
+  data_folder: Φάκελος δεδομένων
+  custom_config_file: Φόρτωση προσαρμοσμένου αρχείου ρυθμίσεων
+  app_folders: Φακέλους εφαρμογών
+  load: Φορτώνω
+  enable: Ενεργοποίηση εργαλείων προγραμματιστή
+  settings_file: Αρχείο ρυθμίσεων
+  install_folder: Φάκελος εγκατάστασης
+apps_configurations:
+  app:
+    options:
+      float: Φλοτέρ
+      pinned: Καρφωμένος
+      force: Διαχειριστείτε τη δύναμη
+      unmanage: Μη διαχείριση
+    title_readonly: Προβολή {{όνομα}}
+    options_label: Επιπλέον επιλογές
+    title_create: Δημιουργία {{name}}
+    bindings: Σύνδεση (σημειώστε ότι και οι δύο επιλογές απαιτούνται)
+    ok_readonly: Επεξεργαστείτε ως νέο
+    category_placeholder: Κανένας
+    monitor_placeholder: Κανένας
+    name: Ονομα
+    ok_create: Δημιουργώ
+    monitor: Οθόνη
+    category: Κατηγορία
+    ok_edit: Εκσυγχρονίζω
+    workspace_placeholder: Κανένας
+    workspace: Χώρος εργασίας
+    title_edit: Επεξεργασία {{όνομα}}
+  identifier:
+    or: Ή
+    id: Αναγνωριστικό
+    remove: Διαγραφή μπλοκ
+    add_block: Προσθέστε μπλοκ
+    matching_strategy: Στρατηγική αντιστοίχισης
+    and: ΚΑΙ
+    kind: Προσδιορίζω
+    negation: Αρνείστε την αντιστοίχιση
+  new: Νέος
+  search: Αναζήτηση
+  bundled_title: App config που συνδέεται με Seelen
+  export: Εξαγωγή
+  confirm_delete: Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν τη διαμόρφωση/s;
+  delete: Διαγράφω
+  swap: Ανταλαγή
+  import: Εισαγωγή
+  confirm_delete_title: Επιβεβαιώστε τη διαγραφή
+  bundled_msg: >-
+    Αυτές οι συνδεδεμένες διαμορφώσεις δεν είναι επεξεργάσιμες και έχουν
+    σχεδιαστεί για να σας παρέχουν την καλύτερη εμπειρία χωρίς προσαρμογή.
+    Διαμορφώνουν αυτόματα τις πιο συνηθισμένες εφαρμογές για εσάς.
+extras:
+  relaunch: Ξεκίνησα ξανά
+  exit: Εγκατάλειψη/έξοδο
+  links: Επίσημοι σύνδεσμοι
+  discord: Διχόνοια
+  version: Εκδοχή
+  github: Github
+shortcuts:
+  labels:
+    focus_latest: Επικεντρώνεται το τελευταίο
+    focus_left: Αριστερά
+    reserve_float: Επιφυλάκισμα
+    reserve_right: Διατηρήστε το δικαίωμα
+    switch_workspace_4: Μεταβείτε στο χώρο εργασίας 4
+    switch_workspace_1: Μεταβείτε στο χώρο εργασίας 1
+    reserve_bottom: Αποθεματικός
+    focus_bottom: Επικεντρωμένος κάτω
+    focus_top: Επικεντρώνεται στην κορυφή
+    move_to_workspace_5: Μετακίνηση στο χώρο εργασίας 5
+    send_to_workspace_2: Αποστολή στο χώρο εργασίας 2
+    switch_workspace_3: Μεταβείτε στο χώρο εργασίας 3
+    move_to_workspace_1: Μετακίνηση στο χώρο εργασίας 1
+    reserve_top: Επιφυλάξτε την κορυφή
+    reserve_left: Αποθεματικό αριστερά
+    switch_workspace_7: Μεταβείτε στο χώρο εργασίας 7
+    switch_workspace_0: Μεταβείτε στο χώρο εργασίας 0
+    send_to_workspace_6: Αποστολή στο χώρο εργασίας 6
+    increase_height: Ύψος αύξησης
+    send_to_workspace_8: Αποστολή στο χώρο εργασίας 8
+    increase_width: Αύξηση πλάτους
+    switch_workspace_2: Μεταβείτε στο χώρο εργασίας 2
+    switch_workspace_8: Μεταβείτε στο χώρο εργασίας 8
+    focus_right: Εστίαση σωστά
+    move_to_workspace_6: Μετακίνηση στο χώρο εργασίας 6
+    move_to_workspace_4: Μετακίνηση στο χώρο εργασίας 4
+    move_to_workspace_9: Μετακίνηση στο χώρο εργασίας 9
+    switch_workspace_9: Μεταβείτε στο χώρο εργασίας 9
+    switch_workspace_6: Μεταβείτε στο χώρο εργασίας 6
+    restore_sizes: Επαναφορά μεγέθους
+    send_to_workspace_3: Αποστολή στο χώρο εργασίας 3
+    switch_workspace_5: Μεταβείτε στο χώρο εργασίας 5
+    reserve_stack: Επιφυλάκιση
+    move_to_workspace_8: Μετακίνηση στο χώρο εργασίας 8
+    move_to_workspace_2: Μετακίνηση στο χώρο εργασίας 2
+    send_to_workspace_5: Αποστολή στο χώρο εργασίας 5
+    send_to_workspace_1: Αποστολή στο χώρο εργασίας 1
+    send_to_workspace_7: Αποστολή στο χώρο εργασίας 7
+    move_to_workspace_3: Μετακίνηση στο χώρο εργασίας 3
+    decrease_height: Μείωση του ύψους
+    decrease_width: Μείωση του πλάτους
+    move_to_workspace_7: Μετακίνηση στο χώρο εργασίας 7
+    send_to_workspace_4: Αποστολή στο χώρο εργασίας 4
+    send_to_workspace_0: Αποστολή στο χώρο εργασίας 0
+    send_to_workspace_9: Αποστολή στο χώρο εργασίας 9
+    move_to_workspace_0: Μετακίνηση στο χώρο εργασίας 0
+  enable: Ενεργοποίηση ολοκληρωμένων συντομεύσεων (AHK)
+  enable_tooltip: >-
+    Απενεργοποιήστε εάν θα εφαρμόσετε τις δικές σας συντομεύσεις χρησιμοποιώντας
+    το API Seelen Core
+loading: Φόρτωση...
+inProgress: Σε εξέλιξη...
+cancel: Ματαίωση
+delete: Διαγράφω
+quit: Εγκαταλείπω
+save: Αποθηκεύσετε
+open: Ανοιξε

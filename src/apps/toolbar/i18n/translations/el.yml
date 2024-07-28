@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: ΠΟΛΥΜΕΣΑ
+    comunications: Διαβιβάσεις
+  input_device: Συσκευή εισόδου
+  master_volume: Κύριος όγκος
+  players: Media players
+  output_device: Συσκευή εξόδου
+network:
+  placeholder:
+    password: Κωδικός πρόσβασης
+  more: Περισσότερες ρυθμίσεις δικτύου
+  disconnect: Αποσυνδέω
+  connect: Συνδέω-συωδεομαι
+  hidden: Κρυμμένο δίκτυο
+  not_found: Δεν βρέθηκαν δίκτυα
+settings:
+  app_settings: Ρυθμίσεις εφαρμογής
+  shutdown: ΤΕΡΜΑΤΙΣΜΟΣ ΛΕΙΤΟΥΡΓΙΑΣ
+  title: Ρυθμίσεις
+  log_out: Αποσύνδεση
+  restart: Επανεκκίνηση
+  sleep: Υπνος
+placeholder:
+  settings: Γρήγορες ρυθμίσεις
+  smart_charge: '- έξυπνη χρέωση'
+  volume: Ενταση ΗΧΟΥ
+  open_system_tray: Ανοίξτε το δίσκο του συστήματος
+  open_user_folder: Ανοίξτε το φάκελο χρήστη
+  battery_remaining: '% υπόλοιπο'
+  bluetooth_devices: Bluetooth & συσκευές
+  ethernet_connected: πρόσβαση στο διαδίκτυο
+  ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο

@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Ανοίξτε τις ρυθμίσεις
+  media: Προσθήκη ενότητας μέσων
+  start: Προσθήκη μονάδας εκκίνησης
+app_menu:
+  close_multiple: Κλείσ'τα όλα
+  close: Κλείσε
+  pin: Καρφίτσα
+  unpin: Ξεκαρφιτσώνω
+  pin_to_right: Pin προς τα δεξιά
+  copy_handles: Λαβές αντιγράφων
+  pin_to_center: Καρφίτσα στο κέντρο
+  run_as: Εκτελέστε ως διαχειριστής
+  open_file_location: Ανοίξτε την τοποθεσία αρχείου
+  pin_to_left: Καρφίτσα στα αριστερά
+media_menu:
+  remove: Αφαιρέστε τη μονάδα μέσων
+start_menu:
+  remove: Αφαιρέστε την ενότητα εκκίνησης
