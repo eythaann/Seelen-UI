@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Kommunikation
+  input_device: Inputenhed
+  players: Medieafspillere
+  output_device: Outputenhed
+  master_volume: Mastervolumen
+network:
+  placeholder:
+    password: Adgangskode
+  connect: Forbinde
+  disconnect: Koble fra
+  not_found: Ingen netværk fundet
+  more: Flere netværksindstillinger
+  hidden: Skjult netværk
+settings:
+  sleep: Søvn
+  shutdown: Lukke ned
+  log_out: Log ud
+  restart: Genstart
+  title: Indstillinger
+  app_settings: Appindstillinger
+placeholder:
+  ethernet_connected: Internetadgang
+  volume: Bind
+  settings: Hurtige indstillinger
+  battery_remaining: '% resterende'
+  smart_charge: '- Smart opladning'
+  open_user_folder: Åben brugermappe
+  ethernet_disconnected: Ingen internetadgang
+  bluetooth_devices: Bluetooth & enheder
+  open_system_tray: Åben systembakke

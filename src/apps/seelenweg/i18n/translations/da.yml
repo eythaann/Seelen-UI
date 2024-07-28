@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Åbne indstillinger
+  media: Tilføj mediemodul
+  start: Tilføj startmodul
+app_menu:
+  pin_to_center: Stift til centrum
+  open_file_location: Åbn filplacering
+  close_multiple: Luk alt
+  copy_handles: Kopier håndtag
+  unpin: Unpin
+  pin: Pin
+  close: Tæt
+  pin_to_left: Pin til venstre
+  pin_to_right: Pin til højre
+  run_as: Kør som administrator
+media_menu:
+  remove: Fjern mediemodulet
+start_menu:
+  remove: Fjern startmodulet

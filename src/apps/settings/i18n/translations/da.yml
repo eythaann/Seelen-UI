@@ -1,0 +1,190 @@
+sides:
+  left: Venstre
+  right: Højre
+  bottom: Bund
+  top: Top
+header:
+  labels:
+    seelen_wm: Window Manager
+    seelen_weg: Dock/proceslinje
+    developer: Udvikler
+    general: Generel
+    info: Information
+    seelen_bar: Fancy værktøjslinje
+    specific_apps: Specifikke apps
+    shortcuts: Genveje
+    monitors: Monitors
+start:
+  message_accent: Optimer din produktivitet med stil!
+  title: Velkommen!
+  message: >-
+    Velkommen til Seelen UI, det ultimative desktopmiljø med en inkorporeret
+    Flising Windows Manager for at forbedre din Windows 11 -oplevelse! Udforsk
+    en ny æra med effektivitet og multitasking med vores intuitive interface og
+    avancerede funktioner.
+general:
+  theme:
+    label: Temaoplysninger
+    placeholder: Vælg tema
+    enabled: Aktiverede temaer
+    author: Forfatter
+    added: Tema allerede tilføjet
+    add: Tilføj tema
+    description: Beskrivelse
+    tags: Tags
+  startup: Kør ved opstart?
+  language: Sprog
+toolbar:
+  placeholder:
+    select: Værktøjslinjestruktur
+    description: Beskrivelse
+    author: Forfatter
+  enable: Aktivér fancy værktøjslinje
+  height: Højde
+wm:
+  border:
+    width: Grænsebredde
+    enable: Aktivér vindues grænse
+    offset: Border Offset
+  disabled_windows10: Window Manager er ikke tilgængelig til Windows 10.
+  author: Forfatter
+  description: Beskrivelse
+  resize_delta: Ændre størrelse på Delta (%)
+  layout: Layout
+  enable: Aktivér vindueadministrator
+  space_between_containers: Rum mellem containere
+  workspace_padding: Arbejdsområder polstring
+  workspace_offset: Arbejdsområder offset (marginer)
+weg:
+  items:
+    label: Genstande
+    zoom_size: Zoomet størrelse (brugt til temaer)
+    visible_separators: Synlige separatorer
+    size: Varestørrelse
+    gap: Rum mellem genstande
+  width: Bredde
+  margin: Margin
+  enable: Aktivér dock/proceslinje
+  auto_hide: Auto skjul
+  gap: Gap
+  padding: Polstring
+  label: Dock/proceslinje
+  dock_side: Dock side
+devtools:
+  enable: Aktivér udviklerværktøjer
+  settings_file: Indstillinger fil
+  app_folders: Appmapper
+  custom_config_file: Indlæs brugerdefineret konfigurationsfil
+  data_folder: Datamappe
+  load: belastning
+  install_folder: Installationsmappe
+apps_configurations:
+  app:
+    options:
+      force: Force Management
+      float: Flyde
+      pinned: Fastgjort
+      unmanage: Uudvikling
+    title_edit: Redigering {{navn}}
+    monitor_placeholder: Ingen
+    ok_edit: Opdatering
+    workspace: Arbejdsområde
+    category: Kategori
+    options_label: Ekstra muligheder
+    bindings: Binding (note begge muligheder er påkrævet)
+    title_readonly: Visning {{navn}}
+    name: Navn
+    category_placeholder: Ingen
+    ok_readonly: Rediger som ny
+    workspace_placeholder: Ingen
+    title_create: Oprettelse af {{navn}}
+    ok_create: skab
+    monitor: Overvåge
+  identifier:
+    id: Identifikator
+    add_block: Tilføj blok
+    remove: Slet blok
+    matching_strategy: Matchende strategi
+    or: ELLER
+    kind: Identificer ved
+    and: OG
+    negation: Negat matchning
+  delete: Slet
+  bundled_title: App Config bundtet med Seelen
+  confirm_delete: Er du sikker på, at du vil slette denne konfiguration/er?
+  swap: Bytte rundt
+  export: Eksport
+  new: Ny
+  bundled_msg: >-
+    Disse samlede konfigurationer kan ikke redigeres og er designet til at give
+    dig den bedste oplevelse uden tilpasning. De konfigurerer automatisk de mest
+    almindelige applikationer til dig.
+  confirm_delete_title: Bekræft slet
+  search: Søg
+  import: Importere
+extras:
+  exit: Afslut/exit
+  links: Officielle links
+  github: GitHub
+  discord: Uenighed
+  version: Version
+  relaunch: Relancering
+shortcuts:
+  labels:
+    move_to_workspace_6: Flyt til arbejdsområde 6
+    move_to_workspace_4: Flyt til arbejdsområde 4
+    decrease_height: Reducer højden
+    reserve_bottom: Reserve bund
+    switch_workspace_5: Skift til arbejdsområde 5
+    restore_sizes: Gendanstørrelser
+    reserve_right: Reserver rigtigt
+    send_to_workspace_9: Send til Workspace 9
+    switch_workspace_3: Skift til arbejdsområde 3
+    move_to_workspace_5: Flyt til arbejdsområde 5
+    send_to_workspace_8: Send til arbejdsområde 8
+    move_to_workspace_2: Flyt til arbejdsområde 2
+    move_to_workspace_0: Flyt til arbejdsområdet 0
+    move_to_workspace_1: Flyt til arbejdsområdet 1
+    increase_width: Øg bredden
+    focus_top: Fokus top
+    focus_left: Fokus tilbage
+    send_to_workspace_4: Send til Workspace 4
+    focus_latest: Fokus seneste
+    send_to_workspace_2: Send til Workspace 2
+    move_to_workspace_8: Flyt til arbejdsområde 8
+    send_to_workspace_0: Send til arbejdsområdet 0
+    reserve_stack: Reserve stak
+    switch_workspace_8: Skift til arbejdsområde 8
+    decrease_width: Reducer bredden
+    switch_workspace_9: Skift til arbejdsområde 9
+    move_to_workspace_7: Flyt til arbejdsområde 7
+    reserve_left: Reserve til venstre
+    reserve_float: Reserve float
+    switch_workspace_1: Skift til arbejdsområde 1
+    switch_workspace_7: Skift til arbejdsområde 7
+    switch_workspace_4: Skift til arbejdsområde 4
+    switch_workspace_2: Skift til arbejdsområde 2
+    send_to_workspace_6: Send til arbejdsområde 6
+    send_to_workspace_1: Send til arbejdsområde 1
+    reserve_top: Reserver top
+    send_to_workspace_3: Send til Workspace 3
+    send_to_workspace_7: Send til Workspace 7
+    move_to_workspace_9: Flyt til arbejdsområde 9
+    increase_height: Øg højde
+    focus_bottom: Fokusbund
+    switch_workspace_6: Skift til arbejdsområde 6
+    switch_workspace_0: Skift til arbejdsområdet 0
+    move_to_workspace_3: Flyt til arbejdsområde 3
+    focus_right: Fokusere rigtigt
+    send_to_workspace_5: Send til arbejdsområde 5
+  enable: Aktivér integrerede genveje (AHK)
+  enable_tooltip: >-
+    Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core
+    API
+inProgress: I gang...
+open: Åben
+delete: Slet
+quit: Afslut
+save: Gemme
+loading: Indlæser...
+cancel: Afbestille
