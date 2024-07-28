@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Viitaus
+    multimedia: Multimedia
+  input_device: Syöttölaite
+  master_volume: Pää-äänenvoimakkuus
+  players: Mediapelaajat
+  output_device: Lähtölaite
+network:
+  placeholder:
+    password: Salasana
+  connect: Kytkeä
+  not_found: Verkkoja ei löydy
+  disconnect: Katkaista
+  more: Lisää verkkoasetuksia
+  hidden: Piilotettu verkko
+settings:
+  sleep: Nukkua
+  log_out: Kirjautua ulos
+  restart: Uudelleenkäynnistää
+  title: asetukset
+  shutdown: Sammuttaa
+  app_settings: Sovellusasetukset
+placeholder:
+  bluetooth_devices: Bluetooth ja laitteet
+  battery_remaining: '% jäljelle jäänyt'
+  settings: Pika -asetukset
+  ethernet_disconnected: Ei Internet-yhteyttä
+  ethernet_connected: Internet-yhteys
+  open_system_tray: Avoin järjestelmälokero
+  open_user_folder: Avaa käyttäjäkansio
+  smart_charge: '- Älykäs maksu'
+  volume: Tilavuus

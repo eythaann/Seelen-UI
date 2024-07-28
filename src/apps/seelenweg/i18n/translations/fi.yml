@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Avaa asetukset
+  start: Lisää aloitusmoduuli
+  media: Lisää mediamoduuli
+app_menu:
+  close_multiple: Sulje kaikki
+  run_as: Suorita järjestelmänvalvojana
+  close: kiinni
+  open_file_location: Avaa tiedoston sijainti
+  pin_to_right: Pistä oikealle
+  copy_handles: Kopiokahvat
+  pin: Nasta
+  pin_to_center: Pintää keskustaan
+  pin_to_left: Vasemmalle
+  unpin: Purkaa
+media_menu:
+  remove: Poista mediamoduuli
+start_menu:
+  remove: Poista Start -moduuli
