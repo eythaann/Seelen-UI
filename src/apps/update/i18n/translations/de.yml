@@ -2,7 +2,9 @@ update:
   title: Update verfügbar!
   date: Datum
   version: Version
-  extra_info: Um das vollständige Änderungsprotokoll zu lesen, besuchen Sie bitte die Änderungsprotokollseite
+  extra_info: >-
+    Um das vollständige Änderungsprotokoll zu lesen, besuchen Sie bitte die
+    Änderungsprotokollseite
   page: GitHub-Veröffentlichungsseite
   cancel: Später
   download: Aktualisieren & installieren

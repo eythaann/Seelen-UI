@@ -28,6 +28,6 @@ placeholder:
   ethernet_connected: 인터넷 연결됨
   ethernet_disconnected: 인터넷 연결 안 됨
   volume: 볼륨
-  battery_remaining: "% 남음"
-  smart_charge: " - 스마트 충전"
+  battery_remaining: '% 남음'
+  smart_charge: ' - 스마트 충전'
   settings: 빠른 설정

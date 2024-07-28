@@ -1,11 +1,11 @@
 import { Icon } from '../../../../../shared/components/Icon';
+import { LanguageList } from '../../../../../shared/lang';
 import { Theme } from '../../../../../shared/schemas/Theme';
 import {
   SettingsGroup,
   SettingsOption,
   SettingsSubGroup,
 } from '../../../../components/SettingsBox';
-import { AVAILABLE_LANGUAGES } from '../../../../i18n';
 import { Button, Flex, Select, Switch, Tag, Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useState } from 'react';
@@ -65,7 +65,7 @@ export function General() {
           <Select
             style={{ width: '200px' }}
             value={language}
-            options={AVAILABLE_LANGUAGES}
+            options={[...LanguageList]}
             onSelect={(value) => dispatch(RootActions.setLanguage(value))}
           />
         </SettingsOption>

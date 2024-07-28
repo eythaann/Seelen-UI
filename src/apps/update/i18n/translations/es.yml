@@ -2,7 +2,9 @@ update:
   title: ¡Actualización disponible!
   date: Fecha
   version: Versión
-  extra_info: Para leer el registro completo de cambios, por favor visita la página del registro de cambios
+  extra_info: >-
+    Para leer el registro completo de cambios, por favor visita la página del
+    registro de cambios
   page: Página de lanzamientos en GitHub
   cancel: Más tarde
   download: Actualizar e instalar

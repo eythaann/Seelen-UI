@@ -28,6 +28,6 @@ placeholder:
   ethernet_connected: Internetzugang
   ethernet_disconnected: Kein Internetzugang
   volume: Lautstärke
-  battery_remaining: "% verbleibend"
-  smart_charge: " - Intelligentes Laden"
+  battery_remaining: '% verbleibend'
+  smart_charge: ' - Intelligentes Laden'
   settings: Schnelleinstellungen

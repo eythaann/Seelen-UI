@@ -28,6 +28,6 @@ placeholder:
   ethernet_connected: 网络已连接
   ethernet_disconnected: 无网络连接
   volume: 音量
-  battery_remaining: "% 剩余"
-  smart_charge: " - 智能充电"
+  battery_remaining: '% 剩余'
+  smart_charge: ' - 智能充电'
   settings: 快速设置

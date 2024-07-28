@@ -24,9 +24,10 @@ header:
 start:
   title: ¡Bienvenido!
   message: >-
-    ¡Bienvenido a Seelen UI, el entorno de escritorio definitivo con un gestor de ventanas en mosaico
-    incorporado para mejorar tu experiencia en Windows 11! Explora una nueva era de eficiencia y
-    multitarea con nuestra interfaz intuitiva y funciones avanzadas.
+    ¡Bienvenido a Seelen UI, el entorno de escritorio definitivo con un gestor
+    de ventanas en mosaico incorporado para mejorar tu experiencia en Windows
+    11! Explora una nueva era de eficiencia y multitarea con nuestra interfaz
+    intuitiva y funciones avanzadas.
   message_accent: ¡Optimiza tu productividad con estilo!
 general:
   startup: ¿Ejecutar al inicio?
@@ -92,8 +93,9 @@ apps_configurations:
   new: Nuevo
   bundled_title: Configuración de la aplicación incluida con Seelen
   bundled_msg: >-
-    Estas configuraciones incluidas no son editables y están diseñadas para proporcionarte la mejor
-    experiencia sin personalización. Configuran automáticamente las aplicaciones más comunes para ti.
+    Estas configuraciones incluidas no son editables y están diseñadas para
+    proporcionarte la mejor experiencia sin personalización. Configuran
+    automáticamente las aplicaciones más comunes para ti.
   confirm_delete_title: Confirmar eliminación
   confirm_delete: ¿Estás seguro de que deseas eliminar esta configuración?
   search: Buscar
@@ -136,7 +138,9 @@ extras:
   exit: Salir/Salir
 shortcuts:
   enable: Habilitar atajos integrados (ahk)
-  enable_tooltip: Desactiva si vas a implementar tus propios atajos usando la API de Seelen Core
+  enable_tooltip: >-
+    Desactiva si vas a implementar tus propios atajos usando la API de Seelen
+    Core
   labels:
     reserve_top: Reservar arriba
     reserve_bottom: Reservar abajo

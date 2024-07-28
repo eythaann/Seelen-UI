@@ -90,8 +90,7 @@ apps_configurations:
   swap: 交换
   new: 新建
   bundled_title: Seelen 捆绑的应用配置
-  bundled_msg: >-
-    这些捆绑配置不可编辑，旨在为你提供最佳体验而无需定制。它们会自动配置最常用的应用程序。
+  bundled_msg: 这些捆绑配置不可编辑，旨在为你提供最佳体验而无需定制。它们会自动配置最常用的应用程序。
   confirm_delete_title: 确认删除
   confirm_delete: 确认要删除此配置吗？
   search: 搜索

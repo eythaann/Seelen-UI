@@ -72,7 +72,7 @@ export function ToolBar({ structure }: Props) {
       payload = apps.slice(dividerEnd + 1) as ToolbarModule[];
       dispatch(RootActions.setItemsOnRight(payload));
 
-      SavePlaceholderAsCustom().catch(console.error);
+      SavePlaceholderAsCustom()?.catch(console.error);
     }, 10),
     [],
   );

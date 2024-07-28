@@ -24,8 +24,8 @@ header:
 start:
   title: 환영합니다!
   message: >-
-    Seelen UI에 오신 것을 환영합니다. Windows 11 경험을 향상시키기 위해 타일링 윈도우 매니저가 포함된 궁극의 데스크탑 환경입니다!
-    직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
+    Seelen UI에 오신 것을 환영합니다. Windows 11 경험을 향상시키기 위해 타일링 윈도우 매니저가 포함된 궁극의 데스크탑
+    환경입니다! 직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
   message_accent: 스타일로 생산성을 최적화하세요!
 general:
   startup: 시작 시 실행하시겠습니까?
@@ -91,7 +91,8 @@ apps_configurations:
   new: 새로 만들기
   bundled_title: Seelen과 함께 제공되는 앱 구성
   bundled_msg: >-
-    이러한 번들 구성은 편집할 수 없으며 맞춤화 없이 최상의 경험을 제공하도록 설계되었습니다. 가장 일반적인 응용 프로그램을 자동으로 구성합니다.
+    이러한 번들 구성은 편집할 수 없으며 맞춤화 없이 최상의 경험을 제공하도록 설계되었습니다. 가장 일반적인 응용 프로그램을 자동으로
+    구성합니다.
   confirm_delete_title: 삭제 확인
   confirm_delete: 이 구성을 삭제하시겠습니까?
   search: 검색
@@ -104,9 +105,9 @@ apps_configurations:
     monitor_placeholder: 없음
     workspace: 작업 공간
     workspace_placeholder: 없음
-    title_edit: "{{name}} 편집 중"
-    title_create: "{{name}} 생성 중"
-    title_readonly: "{{name}} 보기"
+    title_edit: '{{name}} 편집 중'
+    title_create: '{{name}} 생성 중'
+    title_readonly: '{{name}} 보기'
     ok_edit: 업데이트
     ok_create: 생성
     ok_readonly: 새로 편집

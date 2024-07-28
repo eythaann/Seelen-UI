@@ -24,9 +24,10 @@ header:
 start:
   title: Willkommen!
   message: >-
-    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem integrierten Kachel-Fenstermanager,
-    um dein Windows 11-Erlebnis zu verbessern! Erkunde eine neue Ära der Effizienz und Multitasking mit
-    unserer intuitiven Oberfläche und fortschrittlichen Funktionen.
+    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
+    integrierten Kachel-Fenstermanager, um dein Windows 11-Erlebnis zu
+    verbessern! Erkunde eine neue Ära der Effizienz und Multitasking mit unserer
+    intuitiven Oberfläche und fortschrittlichen Funktionen.
   message_accent: Optimiere deine Produktivität mit Stil!
 general:
   startup: Beim Start ausführen?
@@ -92,8 +93,9 @@ apps_configurations:
   new: Neu
   bundled_title: Mit Seelen gebündelte App-Konfiguration
   bundled_msg: >-
-    Diese gebündelten Konfigurationen sind nicht bearbeitbar und wurden entwickelt, um dir das beste
-    Erlebnis ohne Anpassung zu bieten. Sie konfigurieren die gebräuchlichsten Anwendungen automatisch für dich.
+    Diese gebündelten Konfigurationen sind nicht bearbeitbar und wurden
+    entwickelt, um dir das beste Erlebnis ohne Anpassung zu bieten. Sie
+    konfigurieren die gebräuchlichsten Anwendungen automatisch für dich.
   confirm_delete_title: Löschen bestätigen
   confirm_delete: Möchtest du diese Konfiguration wirklich löschen?
   search: Suchen
@@ -106,9 +108,9 @@ apps_configurations:
     monitor_placeholder: Keine
     workspace: Arbeitsbereich
     workspace_placeholder: Keine
-    title_edit: "{{name}} bearbeiten"
-    title_create: "{{name}} erstellen"
-    title_readonly: "{{name}} ansehen"
+    title_edit: '{{name}} bearbeiten'
+    title_create: '{{name}} erstellen'
+    title_readonly: '{{name}} ansehen'
     ok_edit: Aktualisieren
     ok_create: Erstellen
     ok_readonly: Als neu bearbeiten
@@ -136,7 +138,9 @@ extras:
   exit: Beenden/Verlassen
 shortcuts:
   enable: Integrierte Kurzbefehle (ahk) aktivieren
-  enable_tooltip: Deaktivieren, wenn du deine eigenen Kurzbefehle mit der Seelen Core API implementierst
+  enable_tooltip: >-
+    Deaktivieren, wenn du deine eigenen Kurzbefehle mit der Seelen Core API
+    implementierst
   labels:
     reserve_top: Oben reservieren
     reserve_bottom: Unten reservieren
