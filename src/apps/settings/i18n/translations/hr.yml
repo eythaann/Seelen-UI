@@ -1,0 +1,190 @@
+sides:
+  right: Pravo
+  left: Lijevo
+  top: Vrh
+  bottom: Dno
+header:
+  labels:
+    info: Informacija
+    seelen_bar: Fantastična alatna traka
+    specific_apps: Određene aplikacije
+    seelen_weg: Pristanište/trag
+    general: Općenito
+    seelen_wm: Upravitelj prozora
+    monitors: Monitori
+    shortcuts: Prečac
+    developer: Programer
+start:
+  message_accent: Optimizirajte svoju produktivnost stilom!
+  message: >-
+    Dobrodošli na Seelen UI, Ultimate Desktop okruženje s ugrađenim popločanim
+    Windows Managerom kako bi se poboljšalo vaše iskustvo Windows 11! Istražite
+    novu eru učinkovitosti i multitaskinga s našim intuitivnim sučeljem i
+    naprednim značajkama.
+  title: Dobrodošli!
+general:
+  theme:
+    label: Informacije o temi
+    author: Autor
+    enabled: Omogućene teme
+    placeholder: Odaberite temu
+    added: Tema već dodana
+    description: Opis
+    add: Dodaj temu
+    tags: Oznake
+  language: Jezik
+  startup: Trčati na startup?
+toolbar:
+  placeholder:
+    description: Opis
+    select: Struktura alatne trake
+    author: Autor
+  height: Visina
+  enable: Omogućite maštovitu alatnu traku
+wm:
+  border:
+    offset: Offset
+    width: Širina granice
+    enable: Omogućite obrub prozora
+  description: Opis
+  enable: Omogući upravitelju prozora
+  disabled_windows10: Upravitelj prozora nije dostupan za Windows 10.
+  author: Autor
+  workspace_offset: Pomak radnog prostora (margine)
+  layout: Raspored
+  resize_delta: Promijenite veličinu delta (%)
+  space_between_containers: Prostor između spremnika
+  workspace_padding: Radni prostori jastučići
+weg:
+  items:
+    visible_separators: Vidljivi separatori
+    label: Predmeti
+    size: Veličina predmeta
+    zoom_size: Zumirana veličina (koristi se za teme)
+    gap: Prostor između predmeta
+  width: Širina
+  auto_hide: Auto sakrij
+  padding: Jadnja
+  label: Pristanište/trag
+  gap: Jaz
+  margin: Margina
+  enable: Omogućite pristanište/zadaću
+  dock_side: Priključak
+devtools:
+  custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
+  data_folder: Mapa podataka
+  enable: Omogućite alate za razvojne programere
+  settings_file: Datoteka postavki
+  app_folders: Mape aplikacija
+  install_folder: Mapa za instalaciju
+  load: Opterećenje
+apps_configurations:
+  app:
+    options:
+      force: Sila upravljati
+      float: Plutati
+      unmanage: Razriješiti
+      pinned: Prikvačen
+    ok_edit: Ažuriraj
+    bindings: Vezivanje (napomena potrebne su obje opcije)
+    title_edit: Uređivanje {{name}}
+    category_placeholder: Nijedan
+    ok_create: Stvoriti
+    ok_readonly: Uredi kao novo
+    options_label: Dodatne opcije
+    title_readonly: Pregled {{name}}
+    title_create: Stvaranje {{name}}
+    category: Kategorija
+    workspace: Radni prostor
+    monitor_placeholder: Nijedan
+    workspace_placeholder: Nijedan
+    name: Ime
+    monitor: Monitor
+  identifier:
+    and: I
+    negation: Negiranje podudaranja
+    remove: Izbriši blok
+    id: Identifikator
+    kind: Identificirati
+    add_block: Dodajte blok
+    or: ILI
+    matching_strategy: Podudarna strategija
+  swap: Mijenjati
+  new: Novi
+  export: Izvoz
+  bundled_msg: >-
+    Ove paketne konfiguracije nisu moguće uređivati ​​i dizajnirane su tako da
+    vam pruže najbolje iskustvo bez prilagodbe. Oni automatski konfiguriraju
+    najčešće aplikacije za vas.
+  confirm_delete: Jeste li sigurni da želite izbrisati ovu konfiguraciju?
+  bundled_title: Aplikacija config sa Seelen
+  import: Uvoz
+  delete: Izbrisati
+  confirm_delete_title: Potvrdi Delete
+  search: traži
+extras:
+  relaunch: Ponovno pokretanje
+  github: Ždrijeb
+  exit: Prestati/izaći
+  discord: Nesklad
+  links: Službene veze
+  version: Verzija
+shortcuts:
+  labels:
+    send_to_workspace_8: Pošaljite u radni prostor 8
+    focus_latest: Fokus najnovije
+    switch_workspace_5: Prebacite se na radni prostor 5
+    focus_right: Usredotočite se u pravu
+    move_to_workspace_5: Pomaknite se u radni prostor 5
+    reserve_float: Rezervirati plutaj
+    switch_workspace_4: Prebacite se na radni prostor 4
+    move_to_workspace_4: Pomaknite se u radni prostor 4
+    reserve_left: Rezerva
+    move_to_workspace_3: Pomaknite se u radni prostor 3
+    focus_top: Fokus na vrhu
+    send_to_workspace_0: Pošaljite u radni prostor 0
+    send_to_workspace_9: Pošaljite u radni prostor 9
+    send_to_workspace_4: Pošaljite u radni prostor 4
+    send_to_workspace_2: Pošaljite u radni prostor 2
+    switch_workspace_2: Prebacite se na radni prostor 2
+    switch_workspace_3: Prebacite se na radni prostor 3
+    send_to_workspace_6: Pošaljite u radni prostor 6
+    switch_workspace_1: Prebacite se na radni prostor 1
+    move_to_workspace_7: Pomaknite se u radni prostor 7
+    increase_width: Povećati širinu
+    move_to_workspace_8: Pomaknite se u radni prostor 8
+    send_to_workspace_1: Pošaljite u radni prostor 1
+    restore_sizes: Vrati veličine
+    increase_height: Povećati visinu
+    send_to_workspace_5: Pošaljite u radni prostor 5
+    move_to_workspace_1: Pomaknite se u radni prostor 1
+    focus_left: Usredotočite se lijevo
+    switch_workspace_7: Prebacite se na radni prostor 7
+    move_to_workspace_6: Pomaknite se u radni prostor 6
+    decrease_width: Širina smanjenja
+    decrease_height: Visina smanjenja
+    switch_workspace_6: Prebacite se na radni prostor 6
+    move_to_workspace_2: Pomaknite se u radni prostor 2
+    move_to_workspace_9: Pomaknite se u radni prostor 9
+    reserve_right: Rezervirati
+    switch_workspace_9: Prebacite se na radni prostor 9
+    switch_workspace_0: Prebacite se na radni prostor 0
+    move_to_workspace_0: Pomaknite se u radni prostor 0
+    focus_bottom: Fokus dna
+    reserve_stack: Rezerva
+    switch_workspace_8: Prebacite se na radni prostor 8
+    reserve_top: Rezervirajte vrh
+    reserve_bottom: Rezervirati
+    send_to_workspace_7: Pošaljite u radni prostor 7
+    send_to_workspace_3: Pošaljite u radni prostor 3
+  enable_tooltip: >-
+    Onemogući ako ćete implementirati vlastite prečace pomoću Seelen Core API
+    -ja
+  enable: Omogućite integrirane prečace (AHK)
+cancel: Otkazati
+loading: Učitavam...
+delete: Izbrisati
+inProgress: U nastajanju...
+save: Uštedjeti
+quit: Prestati
+open: Otvoren

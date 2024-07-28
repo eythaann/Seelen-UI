@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Otvorene postavke
+  media: Dodajte medijski modul
+  start: Dodajte modul za start
+app_menu:
+  copy_handles: Ručke za kopiranje
+  close: Zatvoriti
+  pin_to_left: PIN ulijevo
+  run_as: Pokreni kao administrator
+  pin_to_right: PIN na desno
+  pin: Pričvrstiti
+  pin_to_center: Pin do centra
+  open_file_location: Otvorena lokacija datoteke
+  unpin: Raskoš
+  close_multiple: Zatvori sve
+media_menu:
+  remove: Uklonite medijski modul
+start_menu:
+  remove: Uklonite modul Start

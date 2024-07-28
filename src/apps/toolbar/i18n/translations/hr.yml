@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedija
+    comunications: Komunikacija
+  input_device: Ulazni uređaj
+  output_device: Izlazni uređaj
+  players: Medijski igrači
+  master_volume: Glasnoća
+network:
+  placeholder:
+    password: Lozinka
+  connect: Spojiti
+  not_found: Nisu pronađene mreže
+  hidden: Skrivena mreža
+  disconnect: Odspojiti
+  more: Više mrežnih postavki
+settings:
+  log_out: Odjavite se
+  sleep: Spavati
+  shutdown: Ugasiti
+  app_settings: Postavke aplikacija
+  restart: Ponovno pokrenuti
+  title: Postavke
+placeholder:
+  volume: Volumen
+  ethernet_connected: pristup internetu
+  ethernet_disconnected: Nema pristupa internetu
+  settings: Brze postavke
+  smart_charge: '- pametni naboj'
+  battery_remaining: '% Ostali'
+  open_user_folder: Otvorena korisnička mapa
+  open_system_tray: Otvoreni sustav
+  bluetooth_devices: Bluetooth i uređaji
