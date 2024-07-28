@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Atvērti iestatījumi
+  start: Pievienojiet starta moduli
+  media: Pievienojiet multivides moduli
+app_menu:
+  close: Tuvs
+  pin_to_right: Piespraudiet labajā pusē
+  copy_handles: Kopēt rokturus
+  close_multiple: Aizvērt visu
+  run_as: Izpildīt kā administratoram
+  open_file_location: Atveriet faila atrašanās vietu
+  unpin: Neslēpt
+  pin_to_left: Piespraudiet pa kreisi
+  pin_to_center: Piespraudiet centrā
+  pin: Piespraust
+media_menu:
+  remove: Noņemiet multivides moduli
+start_menu:
+  remove: Noņemiet sākuma moduli

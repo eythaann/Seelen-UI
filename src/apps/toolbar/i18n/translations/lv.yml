@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedija
+    comunications: Sakari
+  input_device: Ievades ierīce
+  master_volume: Master tilpums
+  players: Plašsaziņas līdzekļu spēlētāji
+  output_device: Izvades ierīce
+network:
+  placeholder:
+    password: Parole
+  disconnect: Atvienot
+  connect: Savienot
+  hidden: Slēpts tīkls
+  more: Vairāk tīkla iestatījumu
+  not_found: Neto atrasti tīkli
+settings:
+  log_out: Izlogoties
+  sleep: Gulēt
+  shutdown: Izslēgt
+  title: Iestatījumi
+  restart: Restartēt
+  app_settings: Lietotņu iestatījumi
+placeholder:
+  settings: Ātrie iestatījumi
+  battery_remaining: '% atliekas'
+  ethernet_connected: Interneta pieslēgums
+  smart_charge: '- Viedā maksa'
+  open_user_folder: Atveriet lietotāja mapi
+  open_system_tray: Atvērtā sistēmas paplāte
+  bluetooth_devices: Bluetooth & ierīces
+  volume: Tilpums
+  ethernet_disconnected: Nav piekļuves internetam

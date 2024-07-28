@@ -1,0 +1,10 @@
+update:
+  date: Datums
+  version: Versija
+  extra_info: Lai izlasītu pilnu maiņu, lūdzu, apmeklējiet vietni Changelog
+  download: Atjaunināt un instalēt
+  downloading: Lejupielāde ...
+  cancel: Vēlāk
+  title: Pieejams atjauninājums!
+  installing: Instalēšana ...
+  page: GitHub izlaišanas lapa

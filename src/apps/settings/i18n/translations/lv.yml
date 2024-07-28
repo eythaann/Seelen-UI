@@ -1,0 +1,188 @@
+sides:
+  top: Tops
+  right: Pa labi
+  left: Atstāts
+  bottom: Dibens
+header:
+  labels:
+    info: Informācija
+    shortcuts: Saīsnes
+    specific_apps: Īpašas lietotnes
+    seelen_bar: Izdomāta rīkjosla
+    developer: Attīstītājs
+    seelen_wm: Logu vadītājs
+    general: Ģenerāldirektors
+    seelen_weg: Doks/uzdevumjosla
+    monitors: Monitori
+start:
+  message_accent: Optimizējiet savu produktivitāti ar stilu!
+  message: >-
+    Laipni lūdzam Seelen Ui, galvenajā darbvirsmas vidē ar iestrādātu flīzes
+    Windows Manager, lai uzlabotu jūsu Windows 11 pieredzi! Izpētiet jaunu
+    efektivitātes un daudzuzdevumu laikmetu ar mūsu intuitīvo interfeisu un
+    uzlabotajām funkcijām.
+  title: Laipni lūdzam!
+general:
+  theme:
+    added: Tēma jau pievienota
+    add: Pievienot tēmu
+    description: Apraksts
+    placeholder: Atlasīt tēmu
+    tags: Tagi
+    label: Informācija par tēmu
+    author: Autors
+    enabled: Iespējotās tēmas
+  startup: Skriet startup?
+  language: Valoda
+toolbar:
+  placeholder:
+    author: Autors
+    description: Apraksts
+    select: Rīkjoslas struktūra
+  enable: Iespējot izdomātu rīkjoslu
+  height: Augstums
+wm:
+  border:
+    enable: Iespējot loga robežu
+    offset: Robežas kompensācija
+    width: Apmales platums
+  space_between_containers: Telpa starp konteineriem
+  author: Autors
+  enable: Iespējot logu pārvaldnieku
+  resize_delta: Delta izmēra maiņa (%)
+  disabled_windows10: Logu pārvaldnieks nav pieejams operētājsistēmai Windows 10.
+  workspace_offset: Darbvietu kompensācija (malas)
+  layout: Izkārtojums
+  workspace_padding: Darbvietas polsterējums
+  description: Apraksts
+weg:
+  items:
+    visible_separators: Redzami atdalītāji
+    zoom_size: Tuvināta izmēra (izmanto tēmām)
+    label: Priekšmeti
+    size: Vienuma izmērs
+    gap: Vieta starp priekšmetiem
+  gap: Plaisa
+  label: Doks/uzdevumjosla
+  auto_hide: Auto paslēpt
+  padding: Polsterējums
+  enable: Iespējot doku/uzdevumjoslu
+  margin: Robeža
+  width: Platums
+  dock_side: Doka puse
+devtools:
+  install_folder: Instalēšanas mape
+  enable: Iespējot izstrādātāju rīkus
+  custom_config_file: Ielādēt pielāgotu konfigurācijas failu
+  settings_file: Iestatīšanas fails
+  app_folders: Lietotņu mapes
+  load: Slodze
+  data_folder: Datu mape
+apps_configurations:
+  app:
+    options:
+      float: Peldēt
+      pinned: Saspiests
+      force: Piespiest pārvaldīt
+      unmanage: Pārvalde
+    ok_edit: Atjaunināt
+    monitor_placeholder: Neviens
+    category: Kategorija
+    name: Nosaukt
+    title_edit: Rediģēšana {{name}}
+    title_create: Izveidot {{name}}
+    ok_readonly: Rediģēt kā jaunu
+    workspace_placeholder: Neviens
+    bindings: Iesiešana (ņemiet vērā, ka ir vajadzīgas abas opcijas)
+    title_readonly: Skatoties {{name}}
+    options_label: Papildu iespējas
+    category_placeholder: Neviens
+    monitor: Kontrolēt
+    workspace: Darba vieta
+    ok_create: Radīt
+  identifier:
+    and: UN
+    matching_strategy: Atbilstības stratēģija
+    remove: Dzēst bloku
+    add_block: Pievienot bloku
+    or: Vai
+    kind: Identificēt ar
+    negation: Negatīva atbilstība
+    id: Identifikators
+  search: Meklēt
+  swap: Apmaiņa
+  import: Importēt
+  bundled_title: Lietotnes konfigurācija, kas komplektēta ar Seelen
+  confirm_delete: Vai esat pārliecināts, ka vēlaties izdzēst šo konfigurāciju/-as?
+  confirm_delete_title: Apstipriniet izdzēst
+  new: Jauns
+  export: Eksportēt
+  bundled_msg: >-
+    Šīs komplektētās konfigurācijas nav rediģējamas un ir paredzētas, lai
+    sniegtu jums vislabāko pieredzi bez pielāgošanas. Tie automātiski konfigurē
+    jums visizplatītākās lietojumprogrammas.
+  delete: Dzēst
+extras:
+  relaunch: Atsākšana
+  links: Oficiālas saites
+  discord: Nesaskaņas
+  github: Github
+  exit: Atmest/iziet
+  version: Versija
+shortcuts:
+  labels:
+    move_to_workspace_4: Pārvietojieties uz Workspace 4
+    switch_workspace_2: Pārslēdzieties uz darbvietu 2
+    focus_left: Fokusēt pa kreisi
+    move_to_workspace_3: Pārvietojieties uz darbvietu 3
+    switch_workspace_9: Pārslēdzieties uz darbvietu 9
+    switch_workspace_6: Pārslēdzieties uz darbvietu 6
+    move_to_workspace_0: Pārvietojieties uz darbvietu 0
+    decrease_height: Samazināt augstumu
+    focus_top: Fokusa tops
+    focus_bottom: Fokusēt apakšā
+    switch_workspace_7: Pārslēdzieties uz darbvietu 7
+    focus_latest: Fokuss jaunākais
+    switch_workspace_3: Pārslēdzieties uz darbvietu 3
+    move_to_workspace_6: Pārvietojieties uz darbvietu 6
+    move_to_workspace_8: Pārvietojieties uz Workspace 8
+    send_to_workspace_1: Nosūtīt uz 1. darbvietu
+    increase_width: Palielināt platumu
+    move_to_workspace_5: Pārvietojieties uz Workspace 5
+    send_to_workspace_8: Nosūtīt uz darbvietu 8
+    send_to_workspace_2: Nosūtīt uz darbvietu 2
+    increase_height: Palielināt augstumu
+    switch_workspace_0: Pārslēdzieties uz darbvietu 0
+    restore_sizes: Atjaunot izmērus
+    send_to_workspace_4: Nosūtiet uz Workspace 4
+    send_to_workspace_9: Nosūtīt uz darbvietu 9
+    switch_workspace_4: Pārslēdzieties uz darbvietu 4
+    reserve_top: Rezerves tops
+    reserve_bottom: Rezervēt apakšdaļu
+    reserve_right: Rezervēt pa labi
+    switch_workspace_5: Pārslēdzieties uz Workspace 5
+    switch_workspace_1: Pārslēdzieties uz 1. darbvietu
+    reserve_left: Rezervēt pa kreisi
+    switch_workspace_8: Pārslēdzieties uz darbvietu 8
+    reserve_float: Rezerves pludiņš
+    move_to_workspace_1: Pārvietojieties uz 1. darbvietu
+    send_to_workspace_6: Nosūtīt uz darbvietu 6
+    focus_right: Fokusēt pa labi
+    move_to_workspace_2: Pārvietojieties uz darbvietu 2
+    send_to_workspace_5: Nosūtīt uz darba vietu 5
+    move_to_workspace_9: Pārvietojieties uz darbvietu 9
+    move_to_workspace_7: Pārvietojieties uz darbvietu 7
+    send_to_workspace_0: Nosūtīt uz darbvietu 0
+    send_to_workspace_7: Nosūtīt uz darbvietu 7
+    reserve_stack: Rezerves kaudze
+    decrease_width: Samazināt platumu
+    send_to_workspace_3: Nosūtīt uz darbvietu 3
+  enable: Iespējot integrētus saīsnes (AHK)
+  enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
+delete: Dzēst
+cancel: Atcelt
+loading: Iekraušana ...
+quit: Atmest
+inProgress: Notiek ...
+open: Atvērt
+save: Ietaupīt
