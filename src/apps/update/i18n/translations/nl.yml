@@ -1,0 +1,10 @@
+update:
+  cancel: Later
+  version: Versie
+  title: Update beschikbaar!
+  date: Datum
+  extra_info: Ga naar de Changelog -pagina om de volledige changelog te lezen
+  installing: Installeren ...
+  page: GitHub release pagina
+  downloading: Downloaden ...
+  download: Update & installeren

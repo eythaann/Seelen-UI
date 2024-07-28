@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Communicatie
+  output_device: Uitvoerapparaat
+  input_device: Invoerapparaat
+  master_volume: Meester volume
+  players: Media -spelers
+network:
+  placeholder:
+    password: Wachtwoord
+  not_found: Geen netwerken gevonden
+  connect: Aansluiten
+  more: Meer netwerkinstellingen
+  hidden: Verborgen netwerk
+  disconnect: Loskoppelen
+settings:
+  app_settings: App instellingen
+  shutdown: Afsluiten
+  title: Instellingen
+  log_out: Uitloggen
+  restart: Herstarten
+  sleep: Slaap
+placeholder:
+  settings: Snelle instellingen
+  ethernet_disconnected: Geen toegang tot het internet
+  battery_remaining: '% overig'
+  volume: Volume
+  ethernet_connected: internet toegang
+  open_user_folder: Open de gebruikersmap
+  bluetooth_devices: Bluetooth & apparaten
+  open_system_tray: Open systeemlade
+  smart_charge: '- Slimme lading'

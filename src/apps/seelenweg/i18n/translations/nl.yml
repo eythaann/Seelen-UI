@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Open instellingen
+  media: Voeg mediamodule toe
+  start: Startmodule toevoegen
+app_menu:
+  close_multiple: Sluit alles
+  pin_to_left: Pin naar links
+  run_as: Als administrator uitvoeren
+  pin: Pin
+  close: Dichtbij
+  pin_to_right: Pin naar rechts
+  open_file_location: Open de bestandslocatie
+  pin_to_center: Pin tot het midden
+  copy_handles: Kopieer handgrepen
+  unpin: Losmaken
+media_menu:
+  remove: Verwijder de mediamodule
+start_menu:
+  remove: Verwijder de startmodule

@@ -1,0 +1,190 @@
+sides:
+  bottom: Onderkant
+  top: Bovenkant
+  right: Rechts
+  left: Links
+header:
+  labels:
+    seelen_wm: Window Manager
+    info: Informatie
+    developer: Ontwikkelaar
+    general: Algemeen
+    specific_apps: Specifieke apps
+    monitors: Monitoren
+    seelen_weg: Dock/taakbalk
+    seelen_bar: Fancy werkbalk
+    shortcuts: Snelkoppelingen
+start:
+  message_accent: Optimaliseer uw productiviteit met stijl!
+  title: Welkom!
+  message: >-
+    Welkom bij Seelen UI, de ultieme desktopomgeving met een opgenomen Tiling
+    Windows Manager om uw Windows 11 -ervaring te verbeteren! Verken een nieuw
+    tijdperk van efficiëntie en multitasking met onze intuïtieve interface en
+    geavanceerde functies.
+general:
+  theme:
+    author: Auteur
+    placeholder: Selecteer thema
+    description: Beschrijving
+    add: Thema toevoegen
+    tags: Tags
+    label: Thema -informatie
+    enabled: Ingeschakelde thema's
+    added: Thema al toegevoegd
+  language: Taal
+  startup: Uitvoeren bij het starten?
+toolbar:
+  placeholder:
+    author: Auteur
+    description: Beschrijving
+    select: Werkbalkstructuur
+  height: Hoogte
+  enable: Schakel fancy werkbalk in
+wm:
+  border:
+    width: Grensbreedte
+    enable: Schakel Window's Border in
+    offset: Grens offset
+  space_between_containers: Ruimte tussen containers
+  author: Auteur
+  workspace_offset: Workspaces Offset (marges)
+  description: Beschrijving
+  layout: Lay -out
+  workspace_padding: Workspaces -vulling
+  enable: Schakel Window Manager in
+  disabled_windows10: De Window Manager is niet beschikbaar voor Windows 10.
+  resize_delta: Wijzig de wijzers van delta (%)
+weg:
+  items:
+    visible_separators: Zichtbare scheiders
+    size: Artikelgrootte
+    zoom_size: Ingezoomde grootte (gebruikt voor thema's)
+    label: Items
+    gap: Ruimte tussen items
+  padding: Vulling
+  margin: Marge
+  gap: Gat
+  auto_hide: Auto Hide
+  width: Breedte
+  label: Dock/taakbalk
+  enable: Schakel dock/taakbalk in
+  dock_side: Dokzijde
+devtools:
+  load: Laden
+  data_folder: Gegevensmap
+  app_folders: App -mappen
+  custom_config_file: Laad het aangepaste configuratiebestand
+  enable: Schakel ontwikkelaarstools in
+  settings_file: Instellingenbestand
+  install_folder: Installatiemap
+apps_configurations:
+  app:
+    options:
+      float: Vlot
+      force: Force beheren
+      pinned: Vastgemaakt
+      unmanage: Onschadelijk
+    category_placeholder: Geen
+    ok_create: Creëren
+    ok_edit: Update
+    category: Categorie
+    monitor_placeholder: Geen
+    title_readonly: '{{{Name}} bekijken'
+    workspace: Werkruimte
+    title_edit: Bewerken {{name}}
+    ok_readonly: Bewerken als nieuw
+    title_create: Het maken van {{name}}
+    bindings: Binding (merk op beide opties vereist)
+    workspace_placeholder: Geen
+    monitor: Monitor
+    name: Naam
+    options_label: Extra opties
+  identifier:
+    and: EN
+    or: OF
+    remove: Verwijder blok
+    matching_strategy: Matching -strategie
+    add_block: Block toevoegen
+    id: Identificatier
+    negation: Ontkennen matching
+    kind: Identificeren door
+  swap: Ruil
+  confirm_delete_title: Bevestig verwijderen
+  export: Exporteren
+  new: Nieuw
+  confirm_delete: Weet u zeker dat u deze configuratie/en) wilt verwijderen?
+  delete: Verwijderen
+  import: Importeren
+  search: Zoekopdracht
+  bundled_msg: >-
+    Deze gebundelde configuraties zijn niet bewerkbaar en zijn ontworpen om u de
+    beste ervaring zonder aanpassing te bieden. Ze configureren automatisch de
+    meest voorkomende toepassingen voor u.
+  bundled_title: App -configuratie gebundeld met selen
+extras:
+  relaunch: Opnieuw lanceren
+  discord: Meningsverschil
+  exit: Stop/exit
+  version: Versie
+  links: Officiële links
+  github: Gitub
+shortcuts:
+  labels:
+    decrease_width: Breedte afnemen
+    move_to_workspace_6: Ga naar werkruimte 6
+    move_to_workspace_2: Ga naar werkruimte 2
+    switch_workspace_1: Schakel over naar werkruimte 1
+    switch_workspace_6: Schakel over naar werkruimte 6
+    switch_workspace_0: Schakel over naar werkruimte 0
+    move_to_workspace_4: Ga naar werkruimte 4
+    move_to_workspace_9: Ga naar werkruimte 9
+    increase_height: Verhoog de hoogte
+    move_to_workspace_7: Ga naar werkruimte 7
+    focus_top: Focus Top
+    focus_latest: Focus nieuwste
+    reserve_stack: Reservetapel
+    reserve_left: Reserveer links
+    send_to_workspace_0: Stuur naar werkruimte 0
+    reserve_float: Reserve Float
+    send_to_workspace_2: Stuur naar werkruimte 2
+    switch_workspace_3: Schakel over naar werkruimte 3
+    switch_workspace_4: Schakel over naar werkruimte 4
+    move_to_workspace_1: Ga naar werkruimte 1
+    switch_workspace_5: Schakel over naar werkruimte 5
+    send_to_workspace_8: Stuur naar werkruimte 8
+    switch_workspace_9: Schakel over naar werkruimte 9
+    focus_left: Focus links
+    decrease_height: De hoogte verminderen
+    move_to_workspace_8: Ga naar werkruimte 8
+    switch_workspace_2: Schakel over naar werkruimte 2
+    send_to_workspace_1: Stuur naar werkruimte 1
+    move_to_workspace_5: Ga naar werkruimte 5
+    increase_width: Verhoog de breedte
+    send_to_workspace_7: Stuur naar werkruimte 7
+    send_to_workspace_3: Stuur naar werkruimte 3
+    move_to_workspace_3: Ga naar werkruimte 3
+    send_to_workspace_5: Stuur naar werkruimte 5
+    reserve_top: Reserveer top
+    send_to_workspace_6: Stuur naar werkruimte 6
+    reserve_right: Reserve recht
+    switch_workspace_7: Schakel over naar werkruimte 7
+    reserve_bottom: Reserve bodem
+    move_to_workspace_0: Ga naar de werkruimte 0
+    switch_workspace_8: Schakel over naar werkruimte 8
+    restore_sizes: Herstel de maten
+    send_to_workspace_9: Stuur naar werkruimte 9
+    send_to_workspace_4: Stuur naar werkruimte 4
+    focus_right: Focus goed
+    focus_bottom: Focusbodem
+  enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
+  enable_tooltip: >-
+    Schakel uit of u uw eigen snelkoppelingen implementeert met behulp van de
+    Selen Core API
+quit: Ontslag nemen
+open: Open
+save: Redden
+inProgress: Bezig...
+loading: Bezig met laden...
+delete: Verwijderen
+cancel: Annuleren
