@@ -1,0 +1,12 @@
+update:
+  version: Változat
+  cancel: A későbbiekben
+  title: Frissítés elérhető!
+  date: Dátum
+  extra_info: >-
+    A teljes változási mód elolvasásához kérjük, látogasson el a ChangeLog
+    oldalra
+  installing: Telepítés ...
+  downloading: Letöltés ...
+  download: Frissítés és telepítés
+  page: GitHub kiadási oldal

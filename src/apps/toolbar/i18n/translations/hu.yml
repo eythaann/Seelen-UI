@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimédia
+    comunications: Kommunikáció
+  output_device: Kimeneti eszköz
+  players: Médialejátszók
+  input_device: Beviteli eszköz
+  master_volume: Fő kötet
+network:
+  placeholder:
+    password: Jelszó
+  disconnect: Leválaszt
+  not_found: Nincsenek hálózatok nem találtak
+  hidden: Rejtett hálózat
+  connect: Összekapcsol
+  more: További hálózati beállítások
+settings:
+  app_settings: Alkalmazásbeállítások
+  restart: Újrakezd
+  log_out: Kijelentkezés
+  shutdown: Leállitás
+  sleep: Alvás
+  title: Beállítások
+placeholder:
+  bluetooth_devices: Bluetooth & eszközök
+  ethernet_connected: internet-hozzáférés
+  smart_charge: '- Intelligens töltés'
+  ethernet_disconnected: Nincs internet hozzaferes
+  settings: Gyors beállítások
+  open_system_tray: Nyitott rendszer tálca
+  battery_remaining: '% megmaradt'
+  volume: Hangerő
+  open_user_folder: Nyissa meg a felhasználói mappát

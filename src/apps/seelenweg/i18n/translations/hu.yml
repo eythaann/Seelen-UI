@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Adjon hozzá média modult
+  settings: Nyisd meg a beállításokat
+  start: Adja hozzá a Start modult
+app_menu:
+  pin_to_right: Pin jobbra
+  unpin: Kibont
+  run_as: Futtatás rendszergazdaként
+  pin: Csap
+  close: Bezárás
+  close_multiple: Zárja be az összeset
+  pin_to_left: Pin balra
+  pin_to_center: Pin a középpontba
+  open_file_location: Nyissa meg a fájl helyét
+  copy_handles: Másolás fogantyúk
+media_menu:
+  remove: Távolítsa el a média modult
+start_menu:
+  remove: Távolítsa el a Start modult
