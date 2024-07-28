@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add translation to the rest of apps (dock, toolbar, and update modal).
+
 ## [1.8.8]
 ### fix
 - app not running on startup

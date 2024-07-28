@@ -1,0 +1,10 @@
+update:
+  title: 업데이트가 있습니다!
+  date: 날짜
+  version: 버전
+  extra_info: 전체 변경 로그를 읽으려면 변경 로그 페이지를 방문하세요
+  page: GitHub 릴리스 페이지
+  cancel: 나중에
+  download: 업데이트 및 설치
+  downloading: 다운로드 중...
+  installing: 설치 중...

@@ -2,6 +2,7 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { Update } from '@tauri-apps/plugin-updater';
 import { Button, Progress } from 'antd';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   update: Update;
@@ -10,6 +11,8 @@ interface Props {
 export function UpdateModal({ update }: Props) {
   const [total, setTotal] = useState<number | null>(null);
   const [current, setCurrent] = useState<number>(0);
+
+  const { t } = useTranslation();
 
   const onDownload = async () => {
     update.downloadAndInstall((progress) => {
@@ -28,21 +31,19 @@ export function UpdateModal({ update }: Props) {
   };
 
   if (total != null) {
+    const percent = Math.floor((current / total) * 100);
     return (
       <>
         <div className="title">
-          Downloading <span className="package">Seelen UI</span> available!
+          {percent === 100 ? t('update.installing') : t('update.downloading')}
         </div>
         <div className="description">
           <Progress
             className="progress"
             type="dashboard"
-            percent={Math.floor((current / total) * 100)}
+            percent={percent}
             strokeWidth={12}
-            strokeColor={[
-              '#0054b6',
-              '00670f',
-            ]}
+            strokeColor={['#0054b6', '00670f']}
           />
         </div>
       </>
@@ -51,33 +52,31 @@ export function UpdateModal({ update }: Props) {
 
   return (
     <>
-      <div className="title">
-        Update for <span className="package">Seelen UI</span> available!
-      </div>
+      <div className="title">{t('update.title')}</div>
       <div className="description">
         <div>
-          <b>Date:</b> {update.date ? update.date.replace(/\s.*/, '') : '-'}
+          <b>{t('update.date')}:</b> {update.date ? update.date.replace(/\s.*/, '') : '-'}
         </div>
         <div>
-          <b>Version:</b> {update.version}
+          <b>{t('update.version')}:</b> {update.version}
         </div>
         <br />
         <p>
           <b>
-            To read the changelog visit the{' '}
+            {t('update.extra_info')}:{' '}
             <a
               href={`https://github.com/eythaann/seelen-ui/releases/tag/v${update.version}`}
               target="_blank"
             >
-              Github Release Page
+              {t('update.page')}
             </a>
           </b>
         </p>
       </div>
       <div className="footer">
-        <Button onClick={() => getCurrentWebviewWindow().close()}>Later</Button>
+        <Button onClick={() => getCurrentWebviewWindow().close()}>{t('update.cancel')}</Button>
         <Button onClick={onDownload} type="primary">
-          Download & Install
+          {t('update.download')}
         </Button>
       </div>
     </>

@@ -1,0 +1,10 @@
+update:
+  title: Update available!
+  date: Date
+  version: Version
+  extra_info: To read the full changelog, please visit the changelog page
+  page: GitHub Release Page
+  cancel: Later
+  download: Update & Install
+  downloading: Downloading...
+  installing: Installing...
