@@ -1,0 +1,190 @@
+sides:
+  left: Dibiarkan
+  bottom: Bawah
+  right: Betul
+  top: Atas
+header:
+  labels:
+    specific_apps: Aplikasi khusus
+    seelen_wm: Pengurus tetingkap
+    info: Maklumat
+    seelen_weg: Dock/Taskbar
+    developer: Pemaju
+    general: Umum
+    seelen_bar: Bar alat mewah
+    monitors: Monitor
+    shortcuts: Pintasan
+start:
+  title: Selamat datang!
+  message_accent: Mengoptimumkan produktiviti anda dengan gaya!
+  message: >-
+    Selamat datang ke Seelen UI, persekitaran desktop muktamad dengan Pengurus
+    Windows Tiling yang diperbadankan untuk meningkatkan pengalaman Windows 11
+    anda! Terokai era kecekapan baru dan multitasking dengan antara muka
+    intuitif dan ciri canggih kami.
+general:
+  theme:
+    description: Penerangan
+    add: Tambah tema
+    placeholder: Pilih tema
+    author: Pengarang
+    added: Tema sudah ditambah
+    tags: Tag
+    enabled: Tema yang diaktifkan
+    label: Maklumat tema
+  startup: Jalankan permulaan?
+  language: Bahasa
+toolbar:
+  placeholder:
+    description: Penerangan
+    author: Pengarang
+    select: Struktur bar alat
+  enable: Dayakan bar alat mewah
+  height: Ketinggian
+wm:
+  border:
+    enable: Dayakan sempadan tetingkap
+    offset: Mengimbangi sempadan
+    width: Lebar sempadan
+  enable: Dayakan Pengurus Tetingkap
+  layout: Susun atur
+  description: Penerangan
+  disabled_windows10: Pengurus Window tidak tersedia untuk Windows 10.
+  space_between_containers: Ruang antara bekas
+  workspace_offset: Ruang Kerja Offset (margin)
+  resize_delta: Saiz semula delta (%)
+  author: Pengarang
+  workspace_padding: Padding ruang kerja
+weg:
+  items:
+    zoom_size: Saiz zum (digunakan untuk tema)
+    size: Saiz item
+    gap: Ruang antara item
+    label: Item
+    visible_separators: Pemisah yang kelihatan
+  enable: Dayakan Dock/Taskbar
+  margin: Margin
+  padding: Padding
+  width: Lebar
+  gap: Jurang
+  label: Dock/Taskbar
+  auto_hide: Menyembunyikan auto
+  dock_side: Sebelah dok
+devtools:
+  load: Beban
+  data_folder: Folder Data
+  settings_file: Fail tetapan
+  app_folders: Folder App
+  enable: Dayakan alat pemaju
+  custom_config_file: Muatkan fail konfigurasi tersuai
+  install_folder: Folder pemasangan
+apps_configurations:
+  app:
+    options:
+      force: Daya mengurus
+      float: Terapung
+      unmanage: Unmanage
+      pinned: Disematkan
+    title_edit: Editting {{name}}
+    category: Kategori
+    ok_edit: Kemas kini
+    title_readonly: Melihat {{name}}
+    name: Nama
+    bindings: Mengikat (perhatikan kedua -dua pilihan diperlukan)
+    workspace: Ruang kerja
+    ok_readonly: Edit sebagai baru
+    options_label: Pilihan tambahan
+    workspace_placeholder: Tiada
+    monitor_placeholder: Tiada
+    title_create: Menciptakan {{name}}
+    ok_create: Buat
+    category_placeholder: Tiada
+    monitor: Memantau
+  identifier:
+    matching_strategy: Strategi yang sepadan
+    and: Dan
+    add_block: Tambah blok
+    negation: Menafikan padanan
+    kind: Mengenal pasti oleh
+    or: Atau
+    remove: Padam blok
+    id: Pengenalpastian
+  new: Baru
+  export: Eksport
+  swap: Bertukar
+  import: Import
+  bundled_title: Konfigurasi aplikasi dibundel dengan seelen
+  confirm_delete: Adakah anda pasti mahu memadamkan konfigurasi ini?
+  confirm_delete_title: Sahkan padam
+  search: Cari
+  delete: Padam
+  bundled_msg: >-
+    Konfigurasi yang dibundel ini tidak dapat diedit dan direka untuk memberi
+    anda pengalaman terbaik tanpa penyesuaian. Mereka secara automatik
+    mengkonfigurasi aplikasi yang paling biasa untuk anda.
+extras:
+  links: Pautan Rasmi
+  github: Github
+  relaunch: Pelancaran semula
+  version: Versi
+  discord: Perselisihan
+  exit: Berhenti/keluar
+shortcuts:
+  labels:
+    send_to_workspace_4: Hantar ke Ruang Kerja 4
+    move_to_workspace_2: Pindah ke Ruang Kerja 2
+    reserve_stack: Timbunan simpanan
+    decrease_height: Mengurangkan ketinggian
+    send_to_workspace_6: Hantar ke Ruang Kerja 6
+    focus_left: Fokus kiri
+    send_to_workspace_8: Hantar ke Ruang Kerja 8
+    restore_sizes: Pulihkan saiz
+    switch_workspace_4: Beralih ke ruang kerja 4
+    move_to_workspace_5: Pindah ke Ruang Kerja 5
+    switch_workspace_5: Beralih ke ruang kerja 5
+    increase_width: Meningkatkan lebar
+    move_to_workspace_7: Pindah ke Ruang Kerja 7
+    focus_top: Fokus atas
+    focus_bottom: Fokus bawah
+    switch_workspace_9: Beralih ke ruang kerja 9
+    focus_right: Fokus betul
+    send_to_workspace_1: Hantar ke Ruang Kerja 1
+    move_to_workspace_9: Pindah ke Ruang Kerja 9
+    reserve_right: Rizab betul
+    switch_workspace_8: Beralih ke ruang kerja 8
+    focus_latest: Fokus terkini
+    move_to_workspace_8: Pindah ke Ruang Kerja 8
+    send_to_workspace_9: Hantar ke Ruang Kerja 9
+    send_to_workspace_2: Hantar ke Ruang Kerja 2
+    send_to_workspace_5: Hantar ke Ruang Kerja 5
+    switch_workspace_1: Beralih ke ruang kerja 1
+    decrease_width: Mengurangkan lebar
+    reserve_bottom: Bawah simpanan
+    send_to_workspace_0: Hantar ke Ruang Kerja 0
+    switch_workspace_3: Beralih ke ruang kerja 3
+    move_to_workspace_3: Pindah ke Ruang Kerja 3
+    move_to_workspace_0: Pindah ke Ruang Kerja 0
+    switch_workspace_6: Beralih ke ruang kerja 6
+    move_to_workspace_4: Pindah ke Ruang Kerja 4
+    move_to_workspace_6: Pindah ke Ruang Kerja 6
+    increase_height: Meningkatkan ketinggian
+    switch_workspace_2: Beralih ke ruang kerja 2
+    switch_workspace_0: Beralih ke ruang kerja 0
+    reserve_float: Rizab terapung
+    reserve_top: Rizab atas
+    reserve_left: Rizab kiri
+    switch_workspace_7: Tukar ke Ruang Kerja 7
+    move_to_workspace_1: Pindah ke Ruang Kerja 1
+    send_to_workspace_7: Hantar ke Ruang Kerja 7
+    send_to_workspace_3: Hantar ke Ruang Kerja 3
+  enable_tooltip: >-
+    Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
+    teras Seelen
+  enable: Dayakan Pintasan Bersepadu (AHK)
+open: Buka
+save: Simpan
+quit: Berhenti
+cancel: Batalkan
+delete: Padam
+inProgress: Dalam proses ...
+loading: Memuatkan ...

@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Komunikasi
+  output_device: Peranti output
+  input_device: Peranti input
+  master_volume: Volume Master
+  players: Pemain media
+network:
+  placeholder:
+    password: Kata laluan
+  more: Lebih banyak tetapan rangkaian
+  disconnect: Putuskan sambungan
+  hidden: Rangkaian Tersembunyi
+  not_found: Tiada rangkaian dijumpai
+  connect: Sambung
+settings:
+  shutdown: Menutup
+  log_out: Log keluar
+  restart: Mula semula
+  sleep: Tidur
+  app_settings: Tetapan aplikasi
+  title: Tetapan
+placeholder:
+  bluetooth_devices: Bluetooth & peranti
+  volume: Kelantangan
+  smart_charge: '- Caj pintar'
+  open_system_tray: Buka dulang sistem
+  ethernet_connected: akses internet
+  open_user_folder: Buka folder pengguna
+  battery_remaining: '% tinggal'
+  settings: Tetapan cepat
+  ethernet_disconnected: Tiada akses Internet

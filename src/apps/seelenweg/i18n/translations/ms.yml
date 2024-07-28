@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Buka Tetapan
+  media: Tambah Modul Media
+  start: Tambah Modul Mula
+app_menu:
+  close_multiple: Tutup semua
+  open_file_location: Buka lokasi fail
+  pin: Pin
+  pin_to_center: Pin ke pusat
+  close: Tutup
+  run_as: Jalankan sebagai pentadbir
+  unpin: Unpin
+  copy_handles: Salin pemegang
+  pin_to_right: Pin ke kanan
+  pin_to_left: Pin ke kiri
+media_menu:
+  remove: Keluarkan modul media
+start_menu:
+  remove: Keluarkan Modul Mula
