@@ -12,6 +12,7 @@ import { Reorder } from 'framer-motion';
 import { cloneDeep } from 'lodash';
 import { evaluate } from 'mathjs';
 import React, { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../shared/store/app';
@@ -77,13 +78,7 @@ export function ElementsFromEvaluated(content: any) {
 }
 
 export function Item(props: Props) {
-  const {
-    extraVars,
-    module,
-    active,
-    onClick: onClickProp,
-    onKeydown: onKeydownProp,
-  } = props;
+  const { extraVars, module, active, onClick: onClickProp, onKeydown: onKeydownProp } = props;
   const { template, tooltip, onClick, style, id } = module;
 
   const [mounted, setMounted] = React.useState(false);
@@ -93,7 +88,9 @@ export function Item(props: Props) {
     title: 'No Window Focused',
   };
 
+  const { t } = useTranslation();
   const scope = useRef(new Scope());
+  scope.current.set('t', t);
 
   useEffect(() => {
     scope.current.set('icon', cloneDeep(exposedIcons));

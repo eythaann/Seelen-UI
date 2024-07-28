@@ -1,0 +1,33 @@
+media:
+  master_volume: Volumen Maestro
+  output_device: Dispositivo de salida
+  input_device: Dispositivo de entrada
+  players: Reproductores de medios
+  device:
+    multimedia: Multimedia
+    comunications: Comunicaciones
+network:
+  not_found: No se encontraron redes
+  more: Más configuraciones de red
+  hidden: Red oculta
+  placeholder:
+    password: Contraseña
+  disconnect: Desconectar
+  connect: Conectar
+settings:
+  title: Configuraciones
+  app_settings: Configuraciones de la aplicación
+  log_out: Cerrar sesión
+  sleep: Suspender
+  restart: Reiniciar
+  shutdown: Apagar
+placeholder:
+  open_user_folder: Abrir carpeta de usuario
+  open_system_tray: Abrir bandeja del sistema
+  bluetooth_devices: Bluetooth y dispositivos
+  ethernet_connected: Acceso a internet
+  ethernet_disconnected: Sin acceso a internet
+  volume: Volumen
+  battery_remaining: "% restante"
+  smart_charge: " - Carga inteligente"
+  settings: Configuraciones rápidas

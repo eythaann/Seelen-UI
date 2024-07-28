@@ -1,0 +1,33 @@
+media:
+  master_volume: 마스터 볼륨
+  output_device: 출력 장치
+  input_device: 입력 장치
+  players: 미디어 플레이어
+  device:
+    multimedia: 멀티미디어
+    comunications: 통신
+network:
+  not_found: 네트워크를 찾을 수 없음
+  more: 추가 네트워크 설정
+  hidden: 숨겨진 네트워크
+  placeholder:
+    password: 비밀번호
+  disconnect: 연결 끊기
+  connect: 연결
+settings:
+  title: 설정
+  app_settings: 앱 설정
+  log_out: 로그아웃
+  sleep: 절전
+  restart: 다시 시작
+  shutdown: 종료
+placeholder:
+  open_user_folder: 사용자 폴더 열기
+  open_system_tray: 시스템 트레이 열기
+  bluetooth_devices: 블루투스 및 장치
+  ethernet_connected: 인터넷 연결됨
+  ethernet_disconnected: 인터넷 연결 안 됨
+  volume: 볼륨
+  battery_remaining: "% 남음"
+  smart_charge: " - 스마트 충전"
+  settings: 빠른 설정

@@ -4,6 +4,7 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Popover, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
 import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgrounByLayers/infra';
@@ -75,6 +76,8 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
 }
 
 function Device({ device }: { device: MediaDevice }) {
+  const { t } = useTranslation();
+
   const onClickMultimedia = () => {
     if (!device.is_default_multimedia) {
       invoke('media_set_default_device', { id: device.id, role: 'multimedia' })
@@ -94,7 +97,7 @@ function Device({ device }: { device: MediaDevice }) {
   return (
     <div className="media-device">
       <Button.Group size="small" style={{ width: 50 }}>
-        <Tooltip title="Multimedia">
+        <Tooltip title={t('media.device.multimedia')}>
           <Button
             type={device.is_default_multimedia ? 'primary' : 'default'}
             onClick={onClickMultimedia}
@@ -102,7 +105,7 @@ function Device({ device }: { device: MediaDevice }) {
             <Icon iconName="IoMusicalNotes" propsIcon={{ size: 18 }} />
           </Button>
         </Tooltip>
-        <Tooltip title="Communications">
+        <Tooltip title={t('media.device.communications')}>
           <Button
             type={device.is_default_communications ? 'primary' : 'default'}
             onClick={onClickCommunications}
@@ -177,6 +180,8 @@ function VolumeControl(props: VolumeControlProps) {
 }
 
 function MediaControls() {
+  const { t } = useTranslation();
+
   const inputs = useSelector(Selectors.mediaInputs);
   const defaultInput = inputs.find((d) => d.is_default_multimedia);
 
@@ -187,7 +192,7 @@ function MediaControls() {
 
   return (
     <BackgroundByLayersV2 className="media-control" amount={1}>
-      <span className="media-control-label">Master Volume</span>
+      <span className="media-control-label">{t('media.master_volume')}</span>
       {!!defaultOutput && (
         <VolumeControl
           value={defaultOutput.volume}
@@ -208,21 +213,21 @@ function MediaControls() {
 
       {outputs.length > 0 && (
         <>
-          <span className="media-control-label">Output Device</span>
+          <span className="media-control-label">{t('media.output_device')}</span>
           <DeviceGroup devices={outputs} />
         </>
       )}
 
       {inputs.length > 0 && (
         <>
-          <span className="media-control-label">Input Device</span>
+          <span className="media-control-label">{t('media.input_device')}</span>
           <DeviceGroup devices={inputs} />
         </>
       )}
 
       {sessions.length > 0 && (
         <>
-          <span className="media-control-label">Media Players</span>
+          <span className="media-control-label">{t('media.players')}</span>
           <div className="media-control-session-list">
             {sessions.map((session, index) => (
               <MediaSession key={index} session={session} />

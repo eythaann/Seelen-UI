@@ -3,6 +3,7 @@ import { cx } from '../../../../shared/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Input } from 'antd';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { WlanBssEntry, WlanProfile } from '../domain';
 
@@ -19,6 +20,8 @@ export function WlanSelectorEntry(props: {
 
   let [ssid, setSsid] = useState(entry.ssid || '');
   let [password, setPassword] = useState('');
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!selected) {
@@ -100,7 +103,7 @@ export function WlanSelectorEntry(props: {
     >
       <div className="wlan-entry-info">
         <Icon iconName={signalIcon} propsIcon={{ size: 20 }} />
-        <span className="wlan-entry-info-ssid">{entry.ssid || 'Hidden Network'}</span>
+        <span className="wlan-entry-info-ssid">{entry.ssid || t('network.hidden')}</span>
       </div>
       {showFields && (
         <form className="wlan-entry-fields">
@@ -117,7 +120,7 @@ export function WlanSelectorEntry(props: {
           )}
           <Input
             type="password"
-            placeholder="Password"
+            placeholder={t('network.placeholder.password')}
             value={password}
             status={showErrors ? 'error' : undefined}
             onChange={(e) => setPassword(e.target.value)}
@@ -129,7 +132,7 @@ export function WlanSelectorEntry(props: {
       {selected && (
         <div className="wlan-entry-actions">
           <Button type="primary" onClick={onConnection} loading={loading} disabled={loading}>
-            {entry.connected ? 'Disconnect' : 'Connect'}
+            {entry.connected ? t('network.disconnect') : t('network.connect')}
           </Button>
         </div>
       )}

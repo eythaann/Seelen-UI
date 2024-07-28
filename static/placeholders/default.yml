@@ -6,7 +6,7 @@ left:
   - type: text
     template: concat("@", env.USERNAME)
     onClick: open -> env.USERPROFILE
-    tooltip: '"Open user folder"'
+    tooltip: t("placeholder.open_user_folder")
     style:
       flexShrink: 0
 
@@ -36,17 +36,17 @@ center:
 right:
   - type: tray
     template: icon.BsThreeDots
-    tooltip: '"Open system tray"'
+    tooltip: t("placeholder.open_system_tray")
 
   - type: device
     template: icon.TbBluetoothConnected
     onClick: open -> "ms-settings:connecteddevices"
-    tooltip: '"Bluetooth & Devices"'
+    tooltip: t("placeholder.bluetooth_devices")
 
   - type: network
     withWlanSelector: true
     tooltip: >-
-      online ? "Internet access" : "No internet access"
+      online ? t("placeholder.ethernet_connected") : t("placeholder.ethernet_disconnected")
     template: >-
       online
       ? (
@@ -69,11 +69,11 @@ right:
       ? icon.IoVolumeLowOutline
       : icon.IoVolumeOffOutline
     tooltip: >-
-      concat("Volume: ", string(round(volume * 100)), "%")
+      concat(t("placeholder.volume"), ": ", string(round(volume * 100)), "%")
 
   - type: power
     tooltip: >-
-      concat(string(battery.percentage), "% remaining", battery.smartCharging ? " - Smart Charge" : "")
+      concat(string(battery.percentage), t("placeholder.battery_remaining"), battery.smartCharging ? t("placeholder.smart_charge") : "")
     template: >-
       concat(
         string(equalText(battery.state, "charging") ? "[ICON:MdOutlineElectricBolt:12] " : ""),
@@ -97,4 +97,4 @@ right:
 
   - type: settings
     template: icon.LuSettings2
-    tooltip: '"Quick Settings"'
+    tooltip: t("placeholder.settings")

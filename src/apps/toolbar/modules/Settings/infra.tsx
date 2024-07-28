@@ -3,6 +3,7 @@ import { SettingsToolbarModule } from '../../../shared/schemas/Placeholders';
 import { invoke } from '@tauri-apps/api/core';
 import { Popover, Slider, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
@@ -30,6 +31,7 @@ export function SettingsModule({ module }: Props) {
   });
 
   const themeLayers = useSelector(Selectors.themeLayers.toolbar);
+  const { t } = useTranslation();
 
   useEffect(() => {
     invoke<Brightness>('get_main_monitor_brightness')
@@ -54,8 +56,8 @@ export function SettingsModule({ module }: Props) {
         <div className="fast-settings">
           <BackgroundByLayers prefix="fast-settings" layers={themeLayers.fastSettings.bg} />
           <div className="fast-settings-title">
-            <span>Settings</span>
-            <Tooltip mouseLeaveDelay={0} arrow={false} title="App settings" placement="left">
+            <span>{t('settings.title')}</span>
+            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.app_settings')} placement="left">
               <button
                 className="fast-settings-item-title-button"
                 onClick={() => invoke('show_app_settings')}
@@ -76,22 +78,22 @@ export function SettingsModule({ module }: Props) {
             </div>
           )}
           <div className="fast-settings-item fast-settings-power">
-            <Tooltip mouseLeaveDelay={0} arrow={false} title="Log out">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')}>
               <button className="fast-settings-item-button" onClick={() => invoke('log_out')}>
                 <Icon iconName="BiLogOut" />
               </button>
             </Tooltip>
-            <Tooltip mouseLeaveDelay={0} arrow={false} title="Sleep">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.sleep')}>
               <button className="fast-settings-item-button" onClick={() => invoke('suspend')}>
                 <Icon iconName="BiMoon" />
               </button>
             </Tooltip>
-            <Tooltip mouseLeaveDelay={0} arrow={false} title="Restart">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
               <button className="fast-settings-item-button" onClick={() => invoke('restart')}>
                 <Icon iconName="VscDebugRestart" />
               </button>
             </Tooltip>
-            <Tooltip mouseLeaveDelay={0} arrow={false} title="Shut down">
+            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.shutdown')}>
               <button className="fast-settings-item-button" onClick={() => invoke('shutdown')}>
                 <Icon iconName="GrPower" />
               </button>

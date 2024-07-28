@@ -2,6 +2,7 @@ import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setAccentColorAsCssVar } from '../../../../shared';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
+import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
@@ -85,6 +86,7 @@ export async function registerStoreEvents() {
 export async function loadStore(_userSettings?: UserSettings) {
   const userSettings = _userSettings || (await new UserSettingsLoader().withPlaceholders().load());
   const settings = userSettings.jsonSettings.fancyToolbar;
+  i18n.changeLanguage(userSettings.jsonSettings.language);
 
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));

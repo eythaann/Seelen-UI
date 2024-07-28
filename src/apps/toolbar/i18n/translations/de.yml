@@ -1,0 +1,33 @@
+media:
+  master_volume: Hauptlautstärke
+  output_device: Ausgabegerät
+  input_device: Eingabegerät
+  players: Medienplayer
+  device:
+    multimedia: Multimedia
+    comunications: Kommunikation
+network:
+  not_found: Keine Netzwerke gefunden
+  more: Weitere Netzwerkeinstellungen
+  hidden: Verstecktes Netzwerk
+  placeholder:
+    password: Passwort
+  disconnect: Trennen
+  connect: Verbinden
+settings:
+  title: Einstellungen
+  app_settings: App-Einstellungen
+  log_out: Abmelden
+  sleep: Ruhezustand
+  restart: Neustarten
+  shutdown: Herunterfahren
+placeholder:
+  open_user_folder: Benutzerordner öffnen
+  open_system_tray: Systemleiste öffnen
+  bluetooth_devices: Bluetooth & Geräte
+  ethernet_connected: Internetzugang
+  ethernet_disconnected: Kein Internetzugang
+  volume: Lautstärke
+  battery_remaining: "% verbleibend"
+  smart_charge: " - Intelligentes Laden"
+  settings: Schnelleinstellungen

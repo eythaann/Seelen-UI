@@ -1,0 +1,33 @@
+media:
+  master_volume: 主音量
+  output_device: 输出设备
+  input_device: 输入设备
+  players: 媒体播放器
+  device:
+    multimedia: 多媒体
+    comunications: 通讯
+network:
+  not_found: 未找到网络
+  more: 更多网络设置
+  hidden: 隐藏网络
+  placeholder:
+    password: 密码
+  disconnect: 断开连接
+  connect: 连接
+settings:
+  title: 设置
+  app_settings: 应用设置
+  log_out: 注销
+  sleep: 睡眠
+  restart: 重启
+  shutdown: 关机
+placeholder:
+  open_user_folder: 打开用户文件夹
+  open_system_tray: 打开系统托盘
+  bluetooth_devices: 蓝牙和设备
+  ethernet_connected: 网络已连接
+  ethernet_disconnected: 无网络连接
+  volume: 音量
+  battery_remaining: "% 剩余"
+  smart_charge: " - 智能充电"
+  settings: 快速设置

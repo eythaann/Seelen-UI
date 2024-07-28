@@ -2,6 +2,7 @@ import { WlanSelectorEntry } from './WlanSelectorEntry';
 import { invoke } from '@tauri-apps/api/core';
 import { Popover } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../../seelenweg/components/BackgrounByLayers/infra';
@@ -14,6 +15,8 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
   const [selected, setSelected] = useState<string | null>(null);
 
   const entries = useSelector(Selectors.wlanBssEntries);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (openPreview) {
@@ -52,7 +55,7 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
             <BackgroundByLayers prefix="wlan-selector" layers={1} />
             <div className="wlan-selector-entries">
               {filtered.length === 0 && (
-                <div className="wlan-selector-empty">No networks found</div>
+                <div className="wlan-selector-empty">{t('network.not_found')}</div>
               )}
               {filtered.map((entry) => {
                 let ssid = entry.ssid || '__HIDDEN_SSID__';
@@ -68,7 +71,7 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
             </div>
             <div className="wlan-selector-footer">
               <span onClick={() => invoke('open_file', { path: 'ms-settings:network' })}>
-                More Wi-fi settings
+                {t('network.more')}
               </span>
             </div>
           </div>

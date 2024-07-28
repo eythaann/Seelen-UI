@@ -1,7 +1,9 @@
 import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
 import { registerDocumentEvents } from './events';
+import i18n, { loadTranslations } from './i18n';
 import { createRoot } from 'react-dom/client';
+import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
@@ -18,16 +20,20 @@ async function Main() {
   wrapConsole();
   const container = getRootContainer();
 
+  registerDocumentEvents(container);
+
   await loadConstants();
   await registerStoreEvents();
   await loadStore();
-  registerDocumentEvents();
+  await loadTranslations();
 
   window.TOOLBAR_MODULES = {} as any;
 
   createRoot(container).render(
     <Provider store={store}>
-      <App />
+      <I18nextProvider i18n={i18n}>
+        <App />
+      </I18nextProvider>
     </Provider>,
   );
 }

@@ -1,0 +1,33 @@
+media:
+  master_volume: Master Volume
+  output_device: Output device
+  input_device: Input device
+  players: Media Players
+  device:
+    multimedia: Multimedia
+    comunications: Communications
+network:
+  not_found: No networks found
+  more: More Network Settings
+  hidden: Hidden Network
+  placeholder:
+    password: Password
+  disconnect: Disconnect
+  connect: Connect
+settings:
+  title: Settings
+  app_settings: App Settings
+  log_out: Log Out
+  sleep: Sleep
+  restart: Restart
+  shutdown: Shutdown
+placeholder:
+  open_user_folder: Open User Folder
+  open_system_tray: Open System Tray
+  bluetooth_devices: Bluetooth & Devices
+  ethernet_connected: Internet access
+  ethernet_disconnected: No internet access
+  volume: Volume
+  battery_remaining: "% remaining"
+  smart_charge: " - Smart Charge"
+  settings: Quick Settings
