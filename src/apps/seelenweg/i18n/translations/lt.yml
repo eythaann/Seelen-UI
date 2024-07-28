@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Atidaryti nustatymai
+  start: Pridėkite pradžios modulį
+  media: Pridėkite laikmenos modulį
+app_menu:
+  pin_to_center: Kaištis iki centro
+  close: Uždaryti
+  pin: Kaištis
+  unpin: Unpin
+  copy_handles: Kopijavimo rankenos
+  pin_to_right: Kaištis į dešinę
+  pin_to_left: Kaištis į kairę
+  open_file_location: Atidarykite failo vietą
+  run_as: Vykdykite kaip administratorius
+  close_multiple: Uždaryk viską
+media_menu:
+  remove: Pašalinkite medijos modulį
+start_menu:
+  remove: Pašalinkite pradžios modulį

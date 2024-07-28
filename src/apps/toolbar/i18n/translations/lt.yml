@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Ryšiai
+    multimedia: Multimedija
+  master_volume: Pagrindinis garsas
+  input_device: Įvesties įrenginys
+  output_device: Išvesties įrenginys
+  players: Žiniasklaidos žaidėjai
+network:
+  placeholder:
+    password: Slaptažodis
+  disconnect: Atjungti
+  connect: Prisijungti
+  not_found: Jokių tinklų nerasta
+  more: Daugiau tinklo nustatymų
+  hidden: Paslėptas tinklas
+settings:
+  log_out: Atsijungti
+  restart: Perkrauti
+  shutdown: Išjungti
+  app_settings: Programos nustatymai
+  sleep: Miegas
+  title: Nustatymai
+placeholder:
+  settings: Greiti nustatymai
+  smart_charge: '- Išmanus mokestis'
+  ethernet_connected: Interneto ryšys
+  open_system_tray: Atviras sistemos dėklas
+  battery_remaining: '% liko'
+  ethernet_disconnected: Jokios interneto prieigos
+  volume: Apimtis
+  bluetooth_devices: „Bluetooth“ ir įrenginiai
+  open_user_folder: Atidaryti vartotojo aplanką

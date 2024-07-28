@@ -1,0 +1,188 @@
+sides:
+  left: Kairėje
+  right: Teisingai
+  top: Viršus
+  bottom: Apačia
+header:
+  labels:
+    developer: Programuotojas
+    seelen_wm: Lango vadovas
+    specific_apps: Konkrečios programos
+    seelen_bar: Išgalvota įrankių juosta
+    monitors: Monitoriai
+    seelen_weg: „Dock“/„Taskbar“
+    info: Informacija
+    shortcuts: Nuorodos
+    general: Bendrasis
+start:
+  title: Sveiki!
+  message_accent: Optimizuokite savo produktyvumą stiliumi!
+  message: >-
+    Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“
+    plytelių „Windows Manager“, kad patobulintumėte „Windows 11“ patirtį!
+    Naršykite naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi
+    intuityvia sąsaja ir pažangiomis funkcijomis.
+general:
+  theme:
+    enabled: Įgalintos temos
+    description: apibūdinimas
+    add: Pridėkite temą
+    placeholder: Pasirinkite temą
+    label: Informacija apie temą
+    added: Jau pridėta tema
+    author: Autorius
+    tags: Žymos
+  language: Kalba
+  startup: Paleisti paleidimą?
+toolbar:
+  placeholder:
+    select: Įrankių juostos struktūra
+    description: apibūdinimas
+    author: Autorius
+  height: Ūgis
+  enable: Įgalinkite išgalvotą įrankių juostą
+wm:
+  border:
+    enable: Įgalinti lango sieną
+    offset: Sienos poslinkis
+    width: Sienos plotis
+  space_between_containers: Tarpas tarp konteinerių
+  description: apibūdinimas
+  enable: Įgalinkite lango tvarkyklę
+  resize_delta: Pakeisti deltos dydį (%)
+  layout: Išdėstymas
+  disabled_windows10: „Windows Manager“ nėra „Windows 10“.
+  author: Autorius
+  workspace_offset: Darbo vietos poslinkis (paraštės)
+  workspace_padding: Darbo vietų pamušalas
+weg:
+  items:
+    size: Prekės dydis
+    zoom_size: Mastelio dydis (naudojamas temoms)
+    gap: Tarpas tarp daiktų
+    visible_separators: Matomi separatoriai
+    label: Daiktai
+  auto_hide: Automatinis slėptuvė
+  padding: Paminkštinimas
+  margin: Paraštė
+  label: „Dock“/„Taskbar“
+  width: Plotis
+  enable: Įgalinti doką/užduočių juostą
+  dock_side: Doko pusė
+  gap: Tarpas
+devtools:
+  settings_file: Nustatymų failas
+  custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
+  enable: Įgalinkite kūrėjo įrankius
+  data_folder: Duomenų aplankas
+  install_folder: Diegimo aplankas
+  load: Įkelti
+  app_folders: Programos aplankai
+apps_configurations:
+  app:
+    options:
+      float: Plūdė
+      force: Jėgos valdymas
+      pinned: Prigludęs
+      unmanage: Nevaldomas
+    name: vardas
+    title_readonly: Peržiūra {{name}}
+    monitor_placeholder: Nė vienas
+    category: Kategorija
+    category_placeholder: Nė vienas
+    title_create: Kurti {{name}}
+    bindings: Įrišimas (pastaba yra būtinos abi parinktys)
+    title_edit: Redagavimas {{name}}
+    workspace: Darbo vieta
+    workspace_placeholder: Nė vienas
+    options_label: Papildomos galimybės
+    ok_edit: Atnaujinimas
+    ok_create: Sukurti
+    monitor: Monitorius
+    ok_readonly: Redaguoti kaip naują
+  identifier:
+    id: Identifikatorius
+    negation: Neigiamas
+    matching_strategy: Atitikimo strategija
+    add_block: Pridėkite bloką
+    remove: Ištrinti bloką
+    kind: Identifikuoti
+    and: Ir
+    or: Arba
+  swap: Apsikeitimas
+  delete: Ištrinti
+  search: Paieška
+  bundled_msg: >-
+    Šios sujungtos konfigūracijos nėra redaguojamos ir yra skirtos suteikti jums
+    geriausią patirtį be pritaikymo. Jie automatiškai sukonfigūruoja dažniausiai
+    jums.
+  new: Nauja
+  confirm_delete: Ar tikrai norite ištrinti šią konfigūraciją (-us)?
+  import: Importuoti
+  confirm_delete_title: Patvirtinkite ištrynti
+  export: Eksportas
+  bundled_title: APP CONFIC sujungta su „Seelen“
+extras:
+  links: Oficialios nuorodos
+  github: Github
+  discord: Nesantaika
+  relaunch: Atsikrauti
+  exit: Mesti/išeiti
+  version: Versija
+shortcuts:
+  labels:
+    reserve_right: Rezervuokite dešinę
+    send_to_workspace_1: Siųsti į 1 darbo vietą
+    switch_workspace_9: Perjunkite į 9 darbo vietą
+    move_to_workspace_3: Pereikite į 3 darbo vietą
+    increase_width: Padidinti plotį
+    send_to_workspace_0: Siųsti į darbo vietą 0
+    focus_right: Susitelkite teisingai
+    decrease_width: Sumažinti plotį
+    switch_workspace_7: Perjunkite į 7 darbo vietą
+    reserve_bottom: Rezervo dugnas
+    send_to_workspace_8: Siųsti į „Workspace 8“
+    reserve_left: Rezervas kairėje
+    reserve_float: Atsargos plūdė
+    send_to_workspace_2: Siųsti į 2 darbo vietą
+    move_to_workspace_5: Pereikite į 5 darbo vietą
+    switch_workspace_1: Perjunkite į 1 darbo vietą
+    focus_top: Fokusavimo viršus
+    focus_latest: Sutelkite naujausią
+    send_to_workspace_5: Siųsti į 5 darbo vietą
+    switch_workspace_4: Perjunkite į 4 darbo vietą
+    send_to_workspace_4: Siųsti į 4 darbo vietą
+    send_to_workspace_9: Siųsti į „Workspace 9“
+    send_to_workspace_6: Siųsti į „Workspace 6“
+    move_to_workspace_4: Pereikite į 4 darbo vietą
+    switch_workspace_2: Perjunkite į 2 darbo vietą
+    move_to_workspace_2: Pereikite į 2 darbo vietą
+    switch_workspace_8: Perjunkite į 8 darbo vietą
+    focus_left: Fokusavimas kairėje
+    move_to_workspace_1: Pereikite į 1 darbo vietą
+    increase_height: Padidinti aukštį
+    reserve_top: Rezervuokite viršų
+    switch_workspace_6: Perjunkite į 6 darbo vietą
+    move_to_workspace_7: Pereikite į 7 darbo vietą
+    move_to_workspace_8: Pereikite į 8 darbo vietą
+    switch_workspace_0: Perjunkite į darbo vietą 0
+    switch_workspace_5: Perjunkite į 5 darbo vietą
+    send_to_workspace_7: Siųsti į „Workspace 7“
+    send_to_workspace_3: Siųsti į 3 „Workspace“
+    decrease_height: Sumažinti aukštį
+    restore_sizes: Atkurti dydžius
+    move_to_workspace_6: Pereikite į 6 darbo vietą
+    move_to_workspace_9: Pereikite į 9 darbo vietą
+    switch_workspace_3: Perjunkite į 3 darbo vietą
+    move_to_workspace_0: Pereikite į 0 darbo vietą
+    reserve_stack: Rezervo kaminas
+    focus_bottom: Fokusavimo dugnas
+  enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
+  enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
+delete: Ištrinti
+open: Atviras
+save: Sutaupyti
+inProgress: Vyksta ...
+quit: Mesti
+loading: Pakrovimas ...
+cancel: Atšaukti
