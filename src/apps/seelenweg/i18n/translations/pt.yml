@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Adicionar módulo de mídia
+  start: Adicionar módulo inicial
+  settings: Abrir configurações
+app_menu:
+  unpin: Liberar
+  pin: Alfinete
+  pin_to_left: Fixar à esquerda
+  pin_to_center: Fixar no centro
+  pin_to_right: Fixar à direita
+  open_file_location: Abrir local do Ficheiro
+  run_as: Executar como administrador
+  copy_handles: Alças de cópia
+  close: Fechar
+  close_multiple: Feche tudo
+media_menu:
+  remove: Remover módulo de mídia
+start_menu:
+  remove: Remover módulo inicial

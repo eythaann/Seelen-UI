@@ -1,0 +1,188 @@
+loading: Carregando...
+inProgress: Em andamento...
+cancel: Cancelar
+save: Salvar
+quit: Desistir
+open: Abrir
+delete: Excluir
+sides:
+  left: Esquerda
+  right: Certo
+  top: Principal
+  bottom: Fundo
+header:
+  labels:
+    general: Em geral
+    seelen_bar: Barra de ferramentas sofisticada
+    seelen_wm: Gerenciador de janelas
+    seelen_weg: Dock/barra de tarefas
+    monitors: Monitores
+    specific_apps: Aplicativos específicos
+    shortcuts: Atalhos
+    developer: Desenvolvedor
+    info: Informação
+start:
+  title: Bem-vindo!
+  message: >-
+    Bem-vindo ao Seelen UI, o melhor ambiente de área de trabalho com um
+    gerenciador de janelas lado a lado incorporado para aprimorar sua
+    experiência com o Windows 11! Explore uma nova era de eficiência e
+    multitarefa com nossa interface intuitiva e recursos avançados.
+  message_accent: Otimize sua produtividade com estilo!
+general:
+  startup: Executar ao iniciar?
+  language: Linguagem
+  theme:
+    label: Informações do tema
+    placeholder: Selecione o tema
+    author: Autor
+    description: Descrição
+    add: Adicionar tema
+    added: Tema já adicionado
+    enabled: Temas habilitados
+    tags: Tag
+toolbar:
+  enable: Ativar barra de ferramentas sofisticada
+  placeholder:
+    select: Estrutura da barra de ferramentas
+    author: Autor
+    description: Descrição
+  height: Altura
+wm:
+  enable: Habilitar Gerenciador de Janelas
+  disabled_windows10: O Gerenciador de janelas não está disponível para Windows 10.
+  layout: Disposição
+  author: Autor
+  description: Descrição
+  space_between_containers: Espaço entre contêineres
+  workspace_padding: Preenchimento de espaços de trabalho
+  workspace_offset: Deslocamento de espaços de trabalho (margens)
+  resize_delta: Redimensionar Delta (%)
+  border:
+    enable: Habilitar borda da janela
+    width: Largura da borda
+    offset: Deslocamento de borda
+weg:
+  label: Dock/barra de tarefas
+  enable: Habilitar Dock/Barra de Tarefas
+  width: Largura
+  auto_hide: Ocultar automaticamente
+  dock_side: Lado da doca
+  padding: Preenchimento
+  margin: Margem
+  gap: Brecha
+  items:
+    label: Unid
+    size: Tamanho do item
+    zoom_size: Tamanho ampliado (usado para temas)
+    gap: Espaço entre itens
+    visible_separators: Separadores Visíveis
+devtools:
+  enable: Habilitar ferramentas para desenvolvedores
+  app_folders: Pastas de aplicativos
+  install_folder: Pasta de instalação
+  data_folder: Pasta de dados
+  settings_file: Arquivo de configurações
+  custom_config_file: Carregar arquivo de configuração personalizado
+  load: Carregar
+apps_configurations:
+  import: Importar
+  export: Exportar
+  delete: Excluir
+  swap: Trocar
+  new: Novo
+  bundled_title: Configuração do aplicativo incluída no Seelen
+  bundled_msg: >-
+    Essas configurações agrupadas não são editáveis ​​e foram projetadas para
+    fornecer a melhor experiência sem personalização. Eles configuram
+    automaticamente os aplicativos mais comuns para você.
+  confirm_delete_title: Confirmar exclusão
+  confirm_delete: Tem certeza de que deseja excluir esta(s) configuração(ões)?
+  search: Procurar
+  app:
+    name: Nome
+    category: Categoria
+    category_placeholder: Nenhum
+    bindings: Vinculação (observe que ambas as opções são obrigatórias)
+    monitor: Monitor
+    monitor_placeholder: Nenhum
+    workspace: Área de trabalho
+    workspace_placeholder: Nenhum
+    title_edit: Editando {{nome}}
+    title_create: Criando {{nome}}
+    title_readonly: Visualizando {{nome}}
+    ok_edit: Atualizar
+    ok_create: Criar
+    ok_readonly: Editar como novo
+    options_label: Opções extras
+    options:
+      float: Flutuador
+      unmanage: Não gerenciar
+      force: Forçar gerenciamento
+      pinned: Fixado
+  identifier:
+    remove: Excluir bloco
+    id: Identificador
+    kind: Identificar por
+    matching_strategy: Estratégia de correspondência
+    negation: Negar correspondência
+    and: E
+    or: OU
+    add_block: Adicionar bloco
+extras:
+  version: Versão
+  links: Links Oficiais
+  github: GitHub
+  discord: Discórdia
+  relaunch: Relançar
+  exit: Sair/Sair
+shortcuts:
+  enable: Habilitar atalhos integrados (ahk)
+  enable_tooltip: Desative se você implementar seus próprios atalhos usando a API Seelen Core
+  labels:
+    reserve_top: Reserva Superior
+    reserve_bottom: Reserva Inferior
+    reserve_left: Reserva à Esquerda
+    reserve_right: Direito de reserva
+    reserve_float: Reserva Flutuante
+    reserve_stack: Pilha de Reserva
+    focus_top: Foco Superior
+    focus_bottom: Foco Inferior
+    focus_left: Foco à esquerda
+    focus_right: Foco certo
+    focus_latest: Foco mais recente
+    increase_width: Aumentar largura
+    decrease_width: Diminuir largura
+    increase_height: Aumentar a altura
+    decrease_height: Diminuir Altura
+    restore_sizes: Restaurar tamanhos
+    switch_workspace_0: Mudar para o espaço de trabalho 0
+    switch_workspace_1: Mudar para o espaço de trabalho 1
+    switch_workspace_2: Mudar para o espaço de trabalho 2
+    switch_workspace_3: Mudar para o espaço de trabalho 3
+    switch_workspace_4: Mudar para o espaço de trabalho 4
+    switch_workspace_5: Mudar para o espaço de trabalho 5
+    switch_workspace_6: Mudar para o espaço de trabalho 6
+    switch_workspace_7: Mudar para o espaço de trabalho 7
+    switch_workspace_8: Mudar para o espaço de trabalho 8
+    switch_workspace_9: Mudar para o espaço de trabalho 9
+    move_to_workspace_0: Mover para o espaço de trabalho 0
+    move_to_workspace_1: Mover para o espaço de trabalho 1
+    move_to_workspace_2: Mover para o espaço de trabalho 2
+    move_to_workspace_3: Mover para o espaço de trabalho 3
+    move_to_workspace_4: Mover para o espaço de trabalho 4
+    move_to_workspace_5: Mover para o espaço de trabalho 5
+    move_to_workspace_6: Mover para o espaço de trabalho 6
+    move_to_workspace_7: Mover para o espaço de trabalho 7
+    move_to_workspace_8: Mover para o espaço de trabalho 8
+    move_to_workspace_9: Mover para o espaço de trabalho 9
+    send_to_workspace_0: Enviar para o espaço de trabalho 0
+    send_to_workspace_1: Enviar para o espaço de trabalho 1
+    send_to_workspace_2: Enviar para o espaço de trabalho 2
+    send_to_workspace_3: Enviar para o espaço de trabalho 3
+    send_to_workspace_4: Enviar para o espaço de trabalho 4
+    send_to_workspace_5: Enviar para o espaço de trabalho 5
+    send_to_workspace_6: Enviar para o espaço de trabalho 6
+    send_to_workspace_7: Enviar para o espaço de trabalho 7
+    send_to_workspace_8: Enviar para o espaço de trabalho 8
+    send_to_workspace_9: Enviar para o espaço de trabalho 9

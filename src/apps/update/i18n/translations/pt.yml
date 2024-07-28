@@ -1,0 +1,10 @@
+update:
+  title: Atualização disponível!
+  date: Data
+  version: Versão
+  extra_info: Para ler o changelog completo, visite a página changelog
+  page: Página de lançamento do GitHub
+  cancel: Mais tarde
+  download: Atualizar
+  downloading: Baixando...
+  installing: Instalando...
