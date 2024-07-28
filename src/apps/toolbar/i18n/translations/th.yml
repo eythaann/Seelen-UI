@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: การสื่อสาร
+    multimedia: มัลติมีเดีย
+  output_device: อุปกรณ์ส่งออก
+  input_device: อุปกรณ์อินพุต
+  master_volume: ระดับปริญญาโท
+  players: เครื่องเล่นสื่อ
+network:
+  placeholder:
+    password: รหัสผ่าน
+  connect: เชื่อมต่อ
+  more: การตั้งค่าเครือข่ายเพิ่มเติม
+  not_found: ไม่พบเครือข่าย
+  disconnect: ตัดการเชื่อมต่อ
+  hidden: เครือข่ายที่ซ่อน
+settings:
+  restart: เริ่มต้นใหม่
+  app_settings: การตั้งค่าแอป
+  sleep: นอน
+  title: การตั้งค่า
+  shutdown: ปิดตัวลง
+  log_out: ออกจากระบบ
+placeholder:
+  settings: การตั้งค่าอย่างรวดเร็ว
+  open_system_tray: ถาดระบบเปิด
+  ethernet_disconnected: ไม่มีการเข้าถึงอินเทอร์เน็ต
+  volume: ปริมาณ
+  smart_charge: '- ชาร์จอัจฉริยะ'
+  battery_remaining: '% ที่เหลืออยู่'
+  open_user_folder: เปิดโฟลเดอร์ผู้ใช้
+  ethernet_connected: การเข้าถึงอินเทอร์เน็ต
+  bluetooth_devices: บลูทู ธ และอุปกรณ์

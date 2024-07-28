@@ -1,0 +1,10 @@
+update:
+  date: วันที่
+  version: รุ่น
+  cancel: ภายหลัง
+  title: อัปเดตพร้อมใช้งาน!
+  download: อัปเดตและติดตั้ง
+  extra_info: หากต้องการอ่านการเปลี่ยนแปลงเต็มรูปแบบโปรดไปที่หน้า Changelog
+  page: หน้าปล่อย GitHub
+  downloading: ดาวน์โหลด ...
+  installing: การติดตั้ง ...
