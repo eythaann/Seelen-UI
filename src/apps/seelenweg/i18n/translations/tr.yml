@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Ayarları aç
+  media: Medya Modülü Ekle
+  start: Başlat modülü ekle
+app_menu:
+  open_file_location: Dosya konumunu aç
+  run_as: Yönetici olarak çalıştır
+  pin: Toplu iğne
+  close_multiple: Hepsini kapat
+  close: Kapalı
+  pin_to_center: Merkeze pin
+  copy_handles: Kopyala Kulpları
+  pin_to_right: Sağa sabit
+  unpin: Bitirmek
+  pin_to_left: Sola pin
+media_menu:
+  remove: Medya Modülünü Kaldır
+start_menu:
+  remove: Başlat modülü kaldır

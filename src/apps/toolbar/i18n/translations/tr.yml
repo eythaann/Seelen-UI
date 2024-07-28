@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedya
+    comunications: İletişim
+  input_device: Giriş aygıtı
+  output_device: Çıkış aygıtı
+  players: Medya Oyuncuları
+  master_volume: Ana ses
+network:
+  placeholder:
+    password: Şifre
+  connect: Bağlamak
+  more: Daha Fazla Ağ Ayarları
+  hidden: Gizli ağ
+  not_found: Ağ bulunamadı
+  disconnect: Koparmak
+settings:
+  shutdown: Kapat
+  app_settings: Uygulama ayarları
+  log_out: Çıkış Yap
+  title: Ayarlar
+  restart: Tekrar başlat
+  sleep: Uyumak
+placeholder:
+  battery_remaining: '% geriye kalan'
+  settings: Hızlı Ayarlar
+  ethernet_connected: internet girişi
+  smart_charge: '- Akıllı şarj'
+  bluetooth_devices: Bluetooth ve Cihazlar
+  volume: Hacim
+  ethernet_disconnected: İnternet erişimi yok
+  open_user_folder: Kullanıcı klasörünü açın
+  open_system_tray: Sistem Tepsisi
