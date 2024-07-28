@@ -1,0 +1,33 @@
+media:
+  master_volume: Основной объем
+  output_device: Устройство вывода
+  input_device: Устройство ввода
+  players: Медиаплееры
+  device:
+    multimedia: Мультимедиа
+    comunications: Коммуникации
+network:
+  not_found: Сети не найдены
+  more: Дополнительные настройки сети
+  hidden: Скрытая сеть
+  placeholder:
+    password: Пароль
+  disconnect: Отключить
+  connect: Соединять
+settings:
+  title: Настройки
+  app_settings: Настройки приложения
+  log_out: Выйти
+  sleep: Спать
+  restart: Перезапуск
+  shutdown: Неисправность
+placeholder:
+  open_user_folder: Открыть папку пользователя
+  open_system_tray: Открыть системный трей
+  bluetooth_devices: Bluetooth и устройства
+  ethernet_connected: доступ в Интернет
+  ethernet_disconnected: Нет доступа в Интернет
+  volume: Объем
+  battery_remaining: '% оставшийся'
+  smart_charge: '- Умная зарядка'
+  settings: Быстрые настройки

@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Добавить медиа-модуль
+  start: Добавить стартовый модуль
+  settings: Открыть настройки
+app_menu:
+  unpin: Открепить
+  pin: Приколоть
+  pin_to_left: Закрепить слева
+  pin_to_center: Закрепить в центре
+  pin_to_right: Закрепить вправо
+  open_file_location: Местонахождение открытого файла
+  run_as: Запустить от имени администратора
+  copy_handles: Копировать дескрипторы
+  close: Закрывать
+  close_multiple: Закрыть все
+media_menu:
+  remove: Удаление медиа-модуля
+start_menu:
+  remove: Удалить стартовый модуль

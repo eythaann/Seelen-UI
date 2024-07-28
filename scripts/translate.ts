@@ -1,18 +1,12 @@
+import { translate } from '@vitalets/google-translate-api';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import yaml from 'js-yaml';
-import translate from 'translate';
 
-const toTranslate = [
-  'es',
-  'de',
-  'ko',
-  'zh',
-  'fr',
-  'ar',
-  'pt',
-];
+import { LanguageList } from '../src/apps/shared/lang';
 
-async function translateObject(base, lang, mut_obj) {
+const toTranslate = LanguageList.map((lang) => lang.value).filter((lang) => lang !== 'en');
+
+async function translateObject(base: any, lang: string, mut_obj: any) {
   for (const [key, value] of Object.entries(base)) {
     if (typeof value === 'object') {
       mut_obj[key] ??= {};
@@ -21,21 +15,21 @@ async function translateObject(base, lang, mut_obj) {
 
     // avoid modify already translated values
     if (typeof value === 'string' && !mut_obj[key]) {
-      mut_obj[key] = await translate(value, {
+      const res = await translate(value, {
         from: 'en',
         to: lang,
       });
+      mut_obj[key] = res.text;
     }
   }
 }
 
-async function completeTranslationsFor(app) {
+async function completeTranslationsFor(app: string) {
   const path = `./src/apps/${app}/i18n/translations`;
 
   const en = yaml.load(readFileSync(`${path}/en.yml`, 'utf8'));
-
   for (const lang of toTranslate) {
-    console.log(`Translating to ${lang} for ${app}.`);
+    console.log(`(${app}): translating to ${lang}...`);
     const filePath = `${path}/${lang}.yml`;
 
     if (!existsSync(filePath)) {
@@ -48,9 +42,11 @@ async function completeTranslationsFor(app) {
   }
 }
 
-Promise.all([
-  completeTranslationsFor('toolbar'),
-  completeTranslationsFor('seelenweg'),
-  completeTranslationsFor('settings'),
-  completeTranslationsFor('update'),
-]).catch(console.error);
+async function main() {
+  await completeTranslationsFor('toolbar');
+  await completeTranslationsFor('seelenweg');
+  await completeTranslationsFor('settings');
+  await completeTranslationsFor('update');
+}
+
+main().catch(console.error);

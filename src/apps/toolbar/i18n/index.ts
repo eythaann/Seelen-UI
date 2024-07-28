@@ -25,6 +25,7 @@ export async function loadTranslations() {
     ko: await import('./translations/ko.yml'),
     fr: await import('./translations/fr.yml'),
     ar: await import('./translations/ar.yml'),
+    ru: await import('./translations/ru.yml'),
     pt: await import('./translations/pt.yml'),
   };
 
