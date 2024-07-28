@@ -1,0 +1,10 @@
+update:
+  title: Uuendus saadaval!
+  date: Kuupäev
+  version: Versioon
+  extra_info: Täieliku muutuste logi lugemiseks külastage palun muutuste lehte
+  page: GitHubi väljaannete leht
+  cancel: Hiljem
+  download: Uuenda ja installi
+  downloading: Allalaadimine...
+  installing: Installimine...

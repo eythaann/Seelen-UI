@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimeedia
+    comunications: Suhtlus
+  input_device: Sisendseade
+  players: Meediamängijad
+  master_volume: Kaptenimaht
+  output_device: Väljundseade
+network:
+  placeholder:
+    password: Parool
+  disconnect: Ühenduse katkestama
+  more: Rohkem võrguseadeid
+  not_found: Võrgustikke pole leitud
+  connect: Ühendama
+  hidden: Varjatud võrk
+settings:
+  log_out: Logi välja
+  restart: Taaskäivita
+  shutdown: Lülita välja
+  app_settings: Rakenduse sätted
+  sleep: Magama
+  title: Sätted
+placeholder:
+  ethernet_disconnected: Interneti -ühendus pole
+  ethernet_connected: internetiühendus
+  battery_remaining: '% järelejäänud'
+  open_system_tray: Avatud süsteemialus
+  open_user_folder: Avage kasutaja kaust
+  smart_charge: '- Nutikas tasu'
+  bluetooth_devices: Bluetooth ja seadmed
+  settings: Kiired seaded
+  volume: Maht

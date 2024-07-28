@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Avatud sätted
+  start: Lisage käivitusmoodul
+  media: Lisage meediumimoodul
+app_menu:
+  pin_to_center: Tihvt keskele
+  close: Sulge
+  pin: Nööpnõel
+  close_multiple: Sulgege kõik
+  open_file_location: Ava faili asukoht
+  unpin: Lahti keelama
+  pin_to_left: Tihvt vasakule
+  pin_to_right: Tihvt paremal
+  run_as: Joosta administraatorina
+  copy_handles: Koopiakäepidemed
+media_menu:
+  remove: Eemaldage meediumimoodul
+start_menu:
+  remove: Eemaldage algusmoodul
