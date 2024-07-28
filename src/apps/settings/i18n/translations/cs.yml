@@ -1,0 +1,188 @@
+sides:
+  left: Vlevo, odjet
+  top: Horní
+  right: Že jo
+  bottom: Dno
+header:
+  labels:
+    info: Informace
+    developer: Vývojář
+    seelen_weg: Dock/TaskBar
+    general: Všeobecné
+    seelen_wm: Správce oken
+    seelen_bar: Ozdobný panel nástrojů
+    monitors: Monitory
+    specific_apps: Konkrétní aplikace
+    shortcuts: Zkratky
+start:
+  title: Vítejte!
+  message: >-
+    Vítejte v SEELEN UI, Ultimate Desktop Environment s začleněným obkladovým
+    systémem Windows Manager, aby se zlepšil váš zážitek ze systému Windows 11!
+    Prozkoumejte novou éru účinnosti a multitaskingu s naším intuitivním
+    rozhraním a pokročilými funkcemi.
+  message_accent: Optimalizujte svou produktivitu stylem!
+general:
+  theme:
+    description: Popis
+    author: Autor
+    enabled: Povolená témata
+    placeholder: Vyberte téma
+    added: Téma již bylo přidáno
+    add: Přidat téma
+    label: Informace o motivu
+    tags: Tagy
+  startup: Spouštěn při každém startu?
+  language: Jazyk
+toolbar:
+  placeholder:
+    author: Autor
+    description: Popis
+    select: Struktura panelu nástrojů
+  height: Výška
+  enable: Povolte ozdobný panel nástrojů
+wm:
+  border:
+    width: Šířka hranic
+    enable: Povolte hranici okna
+    offset: Offset hranic
+  author: Autor
+  description: Popis
+  disabled_windows10: Správce oken není k dispozici pro Windows 10.
+  resize_delta: Změna velikosti delta (%)
+  workspace_offset: Workspaces Offset (marže)
+  layout: Rozložení
+  enable: Povolit správce oken
+  space_between_containers: Prostor mezi kontejnery
+  workspace_padding: Polstrování pracovních prostorů
+weg:
+  items:
+    zoom_size: Zvětšená velikost (použitá pro témata)
+    gap: Prostor mezi položkami
+    visible_separators: Viditelné separátory
+    label: Položky
+    size: Velikost položky
+  margin: Okraj
+  label: Dock/TaskBar
+  auto_hide: Automatické skrytí
+  enable: Povolte dock/hlavní panel
+  width: Šířka
+  gap: Mezera
+  padding: Polstrování
+  dock_side: Dock Side
+devtools:
+  data_folder: Datová složka
+  settings_file: Nastavení souboru
+  load: Zatížení
+  app_folders: Složky aplikací
+  custom_config_file: Načíst vlastní konfigurační soubor
+  install_folder: Instalační složka
+  enable: Povolit vývojáře
+apps_configurations:
+  app:
+    options:
+      force: Správa síly
+      float: Plovák
+      unmanage: Unmanage
+      pinned: Připnuto
+    ok_create: Vytvořit
+    workspace_placeholder: Žádný
+    category: Kategorie
+    ok_edit: Aktualizace
+    title_readonly: Prohlížení {{name}}
+    category_placeholder: Žádný
+    options_label: Další možnosti
+    monitor_placeholder: Žádný
+    bindings: Vazba (poznámka o tom, že jsou vyžadovány obě možnosti)
+    workspace: Pracovní prostor
+    title_edit: Editace {{name}}
+    title_create: Vytváření {{name}}
+    ok_readonly: Upravit jako nové
+    name: název
+    monitor: Monitor
+  identifier:
+    add_block: Přidat blok
+    negation: Negovat odpovídající
+    kind: Identifikovat
+    and: A
+    id: Identifikátor
+    matching_strategy: Srovnávací strategie
+    remove: Odstranit blok
+    or: NEBO
+  confirm_delete: Určitě chcete tuto konfiguraci smazat?
+  bundled_title: Konfigurace aplikace spojená s Seelen
+  export: Vývozní
+  confirm_delete_title: Potvrďte smazání
+  bundled_msg: >-
+    Tyto sdružené konfigurace nejsou upravitelné a jsou navrženy tak, aby vám
+    poskytly nejlepší zážitek bez přizpůsobení. Automaticky nakonfigurují pro
+    vás nejběžnější aplikace.
+  swap: Swap
+  search: Vyhledávání
+  delete: Vymazat
+  import: Import
+  new: Nový
+extras:
+  relaunch: Opětovné
+  links: Oficiální odkazy
+  exit: Ukončit/ukončit
+  discord: Svár
+  github: GitHub
+  version: Verze
+shortcuts:
+  labels:
+    move_to_workspace_2: Přesuňte se do pracovního prostoru 2
+    move_to_workspace_4: Přesuňte se do pracovního prostoru 4
+    reserve_right: Rezervovat správně
+    move_to_workspace_0: Přesuňte se do pracovního prostoru 0
+    move_to_workspace_5: Přesuňte se do pracovního prostoru 5
+    focus_bottom: Zaostřit dole
+    move_to_workspace_1: Přesuňte se do pracovního prostoru 1
+    switch_workspace_9: Přepněte do pracovního prostoru 9
+    send_to_workspace_1: Odeslat do pracovního prostoru 1
+    reserve_bottom: Rezervní dno
+    switch_workspace_4: Přepněte do pracovního prostoru 4
+    reserve_float: Rezervní plovák
+    move_to_workspace_8: Přesuňte se do pracovního prostoru 8
+    move_to_workspace_6: Přesuňte se do pracovního prostoru 6
+    send_to_workspace_2: Odeslat do pracovního prostoru 2
+    focus_top: Zaostřit
+    reserve_top: Rezervní top
+    send_to_workspace_8: Odeslat do pracovního prostoru 8
+    switch_workspace_3: Přepněte do pracovního prostoru 3
+    decrease_height: Snížit výšku
+    switch_workspace_2: Přepněte do pracovního prostoru 2
+    increase_height: Zvýšit výšku
+    switch_workspace_8: Přepněte do pracovního prostoru 8
+    decrease_width: Snížit šířku
+    move_to_workspace_3: Přesuňte se do pracovního prostoru 3
+    switch_workspace_6: Přepněte do pracovního prostoru 6
+    switch_workspace_0: Přepněte do pracovního prostoru 0
+    reserve_left: Rezerva vlevo
+    increase_width: Zvětšit šířku
+    restore_sizes: Obnovení velikosti
+    reserve_stack: Rezervní zásobník
+    switch_workspace_7: Přepněte do pracovního prostoru 7
+    switch_workspace_1: Přepněte do pracovního prostoru 1
+    switch_workspace_5: Přepněte do pracovního prostoru 5
+    focus_right: Zaměřte se správně
+    focus_left: Zaostření doleva
+    focus_latest: Zaostřit nejnovější
+    send_to_workspace_4: Odeslat do pracovního prostoru 4
+    send_to_workspace_0: Odeslat do pracovního prostoru 0
+    send_to_workspace_9: Odeslat do pracovního prostoru 9
+    send_to_workspace_6: Odeslat do pracovního prostoru 6
+    send_to_workspace_5: Odeslat do pracovního prostoru 5
+    send_to_workspace_3: Odeslat do pracovního prostoru 3
+    move_to_workspace_7: Přesuňte se do pracovního prostoru 7
+    send_to_workspace_7: Odeslat do pracovního prostoru 7
+    move_to_workspace_9: Přesuňte se do pracovního prostoru 9
+  enable: Povolit integrované zkratky (AHK)
+  enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
+cancel: zrušení
+delete: Vymazat
+loading: Načítání...
+quit: Přestat
+save: Uložit
+open: OTEVŘENO
+inProgress: Probíhá ...

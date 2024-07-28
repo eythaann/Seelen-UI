@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Otevřené nastavení
+  media: Přidat mediální modul
+  start: Přidat startovací modul
+app_menu:
+  pin: Kolík
+  pin_to_center: Pin do středu
+  open_file_location: Otevřít umístění souboru
+  close_multiple: Zavřete všechny
+  run_as: Spustit jako administrátor
+  close: Zavřít
+  copy_handles: Kopírovat úchyty
+  pin_to_right: Pin doprava
+  unpin: Unlin
+  pin_to_left: Pin doleva
+media_menu:
+  remove: Odebrat mediální modul
+start_menu:
+  remove: Odstraňte startovací modul
