@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Mở cài đặt
+  media: Thêm mô -đun phương tiện
+  start: Thêm mô -đun bắt đầu
+app_menu:
+  open_file_location: Mở vị trí file
+  close_multiple: Đóng tất cả
+  close: Đóng
+  run_as: Chạy như quản trị viên
+  pin: Ghim
+  pin_to_center: Ghim đến trung tâm
+  unpin: Giải nén
+  pin_to_left: Ghim sang trái
+  copy_handles: Sao chép tay cầm
+  pin_to_right: Ghim sang phải
+media_menu:
+  remove: Loại bỏ mô -đun phương tiện
+start_menu:
+  remove: Xóa mô -đun bắt đầu

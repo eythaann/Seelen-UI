@@ -1,0 +1,10 @@
+update:
+  date: Ngày
+  version: Phiên bản
+  cancel: Sau đó
+  title: Cập nhật có sẵn!
+  downloading: Tải xuống ...
+  download: Cập nhật & Cài đặt
+  page: Trang phát hành GitHub
+  installing: Cài đặt ...
+  extra_info: Để đọc toàn bộ Changelog, vui lòng truy cập trang Changelog

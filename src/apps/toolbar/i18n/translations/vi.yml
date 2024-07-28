@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Đa phương tiện
+    comunications: Truyền thông
+  master_volume: Khối lượng tổng thể
+  input_device: Thiết bị đầu vào
+  output_device: Thiết bị đầu ra
+  players: Người chơi truyền thông
+network:
+  placeholder:
+    password: Mật khẩu
+  not_found: Không tìm thấy kết nối mạng
+  hidden: Mạng ẩn
+  disconnect: Ngắt kết nối
+  connect: Kết nối
+  more: Nhiều cài đặt mạng hơn
+settings:
+  sleep: Ngủ
+  log_out: Đăng xuất
+  restart: Khởi động lại
+  title: Cài đặt
+  app_settings: Cài đặt ứng dụng
+  shutdown: Tắt
+placeholder:
+  ethernet_connected: truy cập Internet
+  settings: Cài đặt nhanh
+  ethernet_disconnected: Không có kết nối mạng
+  open_system_tray: Khay mở hệ thống
+  open_user_folder: Mở thư mục người dùng
+  volume: Âm lượng
+  bluetooth_devices: Bluetooth & thiết bị
+  smart_charge: '- Phí thông minh'
+  battery_remaining: '% còn lại'
