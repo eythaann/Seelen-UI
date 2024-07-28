@@ -1,0 +1,190 @@
+sides:
+  top: Superiore
+  left: Sinistra
+  bottom: Metter il fondo a
+  right: Destra
+header:
+  labels:
+    developer: Sviluppatrice
+    info: Informazione
+    general: Generale
+    shortcuts: Scorciatoie
+    seelen_weg: Dock/TaskBar
+    monitors: Monitor
+    seelen_bar: Barra degli strumenti di fantasia
+    seelen_wm: Gestore delle finestre
+    specific_apps: App specifiche
+start:
+  title: Benvenuta!
+  message: >-
+    Benvenuti a Seelen UI, l'ambiente desktop finale con un gestore Windows
+    incorporato per migliorare la tua esperienza di Windows 11! Esplora una
+    nuova era di efficienza e multitasking con la nostra interfaccia intuitiva e
+    funzionalità avanzate.
+  message_accent: Ottimizza la tua produttività con stile!
+general:
+  theme:
+    author: Autrice
+    placeholder: Seleziona il tema
+    description: Descrizione
+    enabled: Temi abilitati
+    add: Aggiungi tema
+    added: Tema già aggiunto
+    tags: Tag
+    label: Informazioni sul tema
+  language: Lingua
+  startup: Eseguire all'avvio?
+toolbar:
+  placeholder:
+    author: Autrice
+    description: Descrizione
+    select: Struttura della barra degli strumenti
+  height: Altezza
+  enable: Abilita barra degli strumenti di fantasia
+wm:
+  border:
+    width: Larghezza del bordo
+    offset: Offset del confine
+    enable: Abilita il bordo della finestra
+  layout: Disposizione
+  description: Descrizione
+  author: Autrice
+  resize_delta: Ridimensiona Delta (%)
+  disabled_windows10: Il gestore delle finestre non è disponibile per Windows 10.
+  enable: Abilita il gestore delle finestre
+  space_between_containers: Spazio tra contenitori
+  workspace_offset: Offset degli spazi di lavoro (margini)
+  workspace_padding: Padding degli spazi di lavoro
+weg:
+  items:
+    label: Elementi
+    zoom_size: Dimensione ingrandita (usata per temi)
+    visible_separators: Separatori visibili
+    size: Dimensione dell'oggetto
+    gap: Spazio tra gli oggetti
+  padding: Imbottitura
+  auto_hide: Nascondi automaticamente
+  margin: Margine
+  width: Larghezza
+  gap: Spacco
+  label: Dock/TaskBar
+  enable: Abilita dock/barra delle applicazioni
+  dock_side: Lato dock
+devtools:
+  load: Carico
+  custom_config_file: Carica il file di configurazione personalizzato
+  data_folder: Cartella dati
+  enable: Abilita strumenti per sviluppatori
+  app_folders: Cartelle di app
+  install_folder: Cartella di installazione
+  settings_file: File Impostazioni
+apps_configurations:
+  app:
+    options:
+      float: Galleggiante
+      force: Force Manage
+      pinned: Appuntato
+      unmanage: Unmanage
+    monitor_placeholder: Nessuno
+    ok_create: Creare
+    workspace_placeholder: Nessuno
+    ok_edit: Aggiornamento
+    category: Categoria
+    name: Nome
+    category_placeholder: Nessuno
+    title_readonly: Visualizzazione {{name}}
+    title_edit: Moditing {{name}}
+    workspace: Spazio di lavoro
+    bindings: Binding (Nota che sono richieste entrambe le opzioni)
+    title_create: Creazione di {{name}}
+    ok_readonly: Modifica come nuovo
+    monitor: Tenere sotto controllo
+    options_label: Opzioni extra
+  identifier:
+    and: E
+    or: O
+    add_block: Aggiungi blocco
+    id: Identificatrice
+    negation: Negare la corrispondenza
+    remove: Elimina il blocco
+    matching_strategy: Strategia di abbinamento
+    kind: Identifica da
+  delete: Eliminare
+  export: Esportare
+  search: Ricerca
+  confirm_delete_title: Conferma cancellazione
+  swap: Scambio
+  new: Nuova
+  import: Importare
+  confirm_delete: Sei sicuro di voler eliminare questa configurazione/e?
+  bundled_title: APP Configta in bundle con Seelen
+  bundled_msg: >-
+    Queste configurazioni in bundle non sono modificabili e sono progettate per
+    offrirti la migliore esperienza senza personalizzazione. Configurano
+    automaticamente le applicazioni più comuni per te.
+extras:
+  relaunch: Rilancio
+  discord: Discordia
+  version: Versione
+  github: Github
+  links: Collegamenti ufficiali
+  exit: ESCIO/USCI
+shortcuts:
+  labels:
+    reserve_float: Float di riserva
+    move_to_workspace_5: Passa all'area di lavoro 5
+    move_to_workspace_2: Passa all'area di lavoro 2
+    switch_workspace_1: Passa all'area di lavoro 1
+    move_to_workspace_4: Passa all'area di lavoro 4
+    focus_bottom: Focus Bottom
+    focus_top: Focus top
+    move_to_workspace_9: Passa all'area di lavoro 9
+    switch_workspace_7: Passa all'area di lavoro 7
+    move_to_workspace_1: Passa all'area di lavoro 1
+    send_to_workspace_0: Invia a Workspace 0
+    switch_workspace_4: Passa all'area di lavoro 4
+    increase_width: Aumentare la larghezza
+    send_to_workspace_6: Invia a Workspace 6
+    move_to_workspace_0: Passa all'area di lavoro 0
+    send_to_workspace_2: Invia a Workspace 2
+    send_to_workspace_8: Invia a Workspace 8
+    restore_sizes: Ripristinare le dimensioni
+    reserve_bottom: Riserva Bottom
+    move_to_workspace_6: Passa all'area di lavoro 6
+    send_to_workspace_9: Invia a Workspace 9
+    increase_height: Aumenta l'altezza
+    send_to_workspace_3: Invia a Workspace 3
+    send_to_workspace_4: Invia a Workspace 4
+    focus_right: Concentrati bene
+    reserve_left: Riserva a sinistra
+    decrease_height: Diminuire l'altezza
+    switch_workspace_8: Passa all'area di lavoro 8
+    switch_workspace_9: Passa all'area di lavoro 9
+    switch_workspace_2: Passa all'area di lavoro 2
+    focus_latest: Focus Ultime
+    send_to_workspace_1: Invia a Workspace 1
+    switch_workspace_0: Passa all'area di lavoro 0
+    focus_left: Focus a sinistra
+    switch_workspace_6: Passa all'area di lavoro 6
+    move_to_workspace_8: Passa all'area di lavoro 8
+    move_to_workspace_3: Passa all'area di lavoro 3
+    reserve_top: Riserva Top
+    decrease_width: Diminuire la larghezza
+    reserve_right: Riserva a destra
+    send_to_workspace_7: Invia a Workspace 7
+    reserve_stack: Stack di riserva
+    send_to_workspace_5: Invia a Workspace 5
+    switch_workspace_5: Passa all'area di lavoro 5
+    switch_workspace_3: Passa all'area di lavoro 3
+    move_to_workspace_7: Passa all'area di lavoro 7
+  enable: Abilita scorciatoie integrate (AHK)
+  enable_tooltip: >-
+    Disabilita se implementerai i tuoi collegamenti utilizzando l'API Core
+    Seelen
+delete: Eliminare
+inProgress: In corso...
+open: Aprire
+quit: Esentata
+save: Salva
+loading: Caricamento...
+cancel: Annulla

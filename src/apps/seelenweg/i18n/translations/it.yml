@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Impostazioni aperte
+  start: Aggiungi il modulo Start
+  media: Aggiungi il modulo multimediale
+app_menu:
+  copy_handles: Copia maniglie
+  pin_to_center: Pin al centro
+  close_multiple: Chiudi tutto
+  open_file_location: Aprire la destinazione del file
+  pin: Spillo
+  unpin: Unpin
+  run_as: Esegui come amministratore
+  pin_to_right: Pin a destra
+  pin_to_left: Pin a sinistra
+  close: Vicina
+media_menu:
+  remove: Rimuovere il modulo multimediale
+start_menu:
+  remove: Rimuovi il modulo Start
