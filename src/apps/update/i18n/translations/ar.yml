@@ -1,0 +1,10 @@
+update:
+  title: التحديث متاح!
+  date: تاريخ
+  version: إصدار
+  extra_info: لقراءة سجل التغيير الكامل، يرجى زيارة صفحة سجل التغيير
+  page: صفحة إصدار جيثب
+  cancel: لاحقاً
+  download: تحديث
+  downloading: جارى التحميل...
+  installing: جارٍ التثبيت...

@@ -1,0 +1,186 @@
+loading: تحميل...
+inProgress: في تَقَدم...
+cancel: يلغي
+save: يحفظ
+quit: يترك
+open: يفتح
+delete: يمسح
+sides:
+  left: غادر
+  right: يمين
+  top: قمة
+  bottom: قاع
+header:
+  labels:
+    general: عام
+    seelen_bar: شريط الأدوات الهوى
+    seelen_wm: مدير النافذة
+    seelen_weg: قفص الاتهام / شريط المهام
+    monitors: الشاشات
+    specific_apps: تطبيقات محددة
+    shortcuts: الاختصارات
+    developer: مطور
+    info: معلومة
+start:
+  title: مرحباً!
+  message: >-
+    مرحبًا بك في Seelen UI، بيئة سطح المكتب المثالية مع مدير النوافذ المدمج
+    لتحسين تجربة Windows 11 الخاصة بك! اكتشف عصرًا جديدًا من الكفاءة وتعدد
+    المهام من خلال الواجهة البديهية والميزات المتقدمة.
+  message_accent: قم بتحسين إنتاجيتك بأناقة!
+general:
+  startup: تشغيل عند بدء التشغيل؟
+  language: لغة
+  theme:
+    label: معلومات الموضوع
+    placeholder: اختر نمطا
+    author: مؤلف
+    description: وصف
+    add: إضافة موضوع
+    added: تمت إضافة الموضوع بالفعل
+    enabled: السمات الممكّنة
+    tags: العلامات
+toolbar:
+  enable: تمكين شريط الأدوات الفاخر
+  placeholder:
+    select: هيكل شريط الأدوات
+    author: مؤلف
+    description: وصف
+  height: ارتفاع
+wm:
+  enable: تمكين مدير النوافذ
+  disabled_windows10: مدير النوافذ غير متوفر لنظام التشغيل Windows 10.
+  layout: تَخطِيط
+  author: مؤلف
+  description: وصف
+  space_between_containers: الفضاء بين الحاويات
+  workspace_padding: حشو مساحات العمل
+  workspace_offset: إزاحة مساحات العمل (الهوامش)
+  resize_delta: تغيير حجم دلتا (%)
+  border:
+    enable: تمكين حدود النافذة
+    width: عرض الحدود
+    offset: إزاحة الحدود
+weg:
+  label: قفص الاتهام / شريط المهام
+  enable: تمكين قفص الاتهام/شريط المهام
+  width: عرض
+  auto_hide: اخفاء تلقائي
+  dock_side: جانب الرصيف
+  padding: حشوة
+  margin: هامِش
+  gap: فجوة
+  items:
+    label: أغراض
+    size: حجم الصنف
+    zoom_size: الحجم المكبر (يستخدم للموضوعات)
+    gap: المسافة بين العناصر
+    visible_separators: فواصل مرئية
+devtools:
+  enable: تمكين أدوات المطور
+  app_folders: مجلدات التطبيق
+  install_folder: مجلد التثبيت
+  data_folder: مجلد البيانات
+  settings_file: ملف الإعدادات
+  custom_config_file: تحميل ملف التكوين المخصص
+  load: حمولة
+apps_configurations:
+  import: يستورد
+  export: يصدّر
+  delete: يمسح
+  swap: تبديل
+  new: جديد
+  bundled_title: تكوين التطبيق المجمعة مع Seelen
+  bundled_msg: >-
+    هذه التكوينات المجمعة غير قابلة للتحرير وهي مصممة لتوفر لك أفضل تجربة دون
+    تخصيص. يقومون تلقائيًا بتكوين التطبيقات الأكثر شيوعًا لك.
+  confirm_delete_title: تأكيد الحذف
+  confirm_delete: هل أنت متأكد أنك تريد حذف هذا التكوين/التكوينات؟
+  search: يبحث
+  app:
+    name: اسم
+    category: فئة
+    category_placeholder: لا أحد
+    bindings: ملزم (لاحظ أن كلا الخيارين مطلوبان)
+    monitor: شاشة
+    monitor_placeholder: لا أحد
+    workspace: مساحة العمل
+    workspace_placeholder: لا أحد
+    title_edit: تعديل {{اسم}}
+    title_create: إنشاء {{اسم}}
+    title_readonly: عرض {{اسم}}
+    ok_edit: تحديث
+    ok_create: يخلق
+    ok_readonly: تحرير كجديد
+    options_label: خيارات إضافية
+    options:
+      float: يطفو
+      unmanage: غير إدارة
+      force: إدارة القوة
+      pinned: مثبت
+  identifier:
+    remove: حذف الحظر
+    id: المعرف
+    kind: تحديد بواسطة
+    matching_strategy: استراتيجية المطابقة
+    negation: نفي المطابقة
+    and: و
+    or: أو
+    add_block: أضف بلوك
+extras:
+  version: إصدار
+  links: الروابط الرسمية
+  github: جيثب
+  discord: الفتنة
+  relaunch: إعادة التشغيل
+  exit: إنهاء/خروج
+shortcuts:
+  enable: تمكين الاختصارات المتكاملة (ahk)
+  enable_tooltip: قم بالتعطيل إذا كنت ستنفذ الاختصارات الخاصة بك باستخدام Seelen Core Api
+  labels:
+    reserve_top: احتياطي الأعلى
+    reserve_bottom: احتياطي القاع
+    reserve_left: احتياطي اليسار
+    reserve_right: حق الاحتياط
+    reserve_float: تعويم الاحتياطي
+    reserve_stack: المكدس الاحتياطي
+    focus_top: التركيز الأعلى
+    focus_bottom: التركيز على القاع
+    focus_left: التركيز على اليسار
+    focus_right: التركيز الصحيح
+    focus_latest: التركيز على الأحدث
+    increase_width: زيادة العرض
+    decrease_width: تقليل العرض
+    increase_height: زيادة الارتفاع
+    decrease_height: تقليل الارتفاع
+    restore_sizes: استعادة الأحجام
+    switch_workspace_0: قم بالتبديل إلى مساحة العمل 0
+    switch_workspace_1: قم بالتبديل إلى مساحة العمل 1
+    switch_workspace_2: قم بالتبديل إلى مساحة العمل 2
+    switch_workspace_3: قم بالتبديل إلى مساحة العمل 3
+    switch_workspace_4: قم بالتبديل إلى مساحة العمل 4
+    switch_workspace_5: قم بالتبديل إلى مساحة العمل 5
+    switch_workspace_6: قم بالتبديل إلى مساحة العمل 6
+    switch_workspace_7: قم بالتبديل إلى مساحة العمل 7
+    switch_workspace_8: قم بالتبديل إلى مساحة العمل 8
+    switch_workspace_9: قم بالتبديل إلى مساحة العمل 9
+    move_to_workspace_0: انتقل إلى مساحة العمل 0
+    move_to_workspace_1: انتقل إلى مساحة العمل 1
+    move_to_workspace_2: انتقل إلى مساحة العمل 2
+    move_to_workspace_3: انتقل إلى مساحة العمل 3
+    move_to_workspace_4: انتقل إلى مساحة العمل 4
+    move_to_workspace_5: انتقل إلى مساحة العمل 5
+    move_to_workspace_6: انتقل إلى مساحة العمل 6
+    move_to_workspace_7: انتقل إلى مساحة العمل 7
+    move_to_workspace_8: انتقل إلى مساحة العمل 8
+    move_to_workspace_9: انتقل إلى مساحة العمل 9
+    send_to_workspace_0: أرسل إلى مساحة العمل 0
+    send_to_workspace_1: أرسل إلى مساحة العمل 1
+    send_to_workspace_2: أرسل إلى مساحة العمل 2
+    send_to_workspace_3: أرسل إلى مساحة العمل 3
+    send_to_workspace_4: أرسل إلى مساحة العمل 4
+    send_to_workspace_5: أرسل إلى مساحة العمل 5
+    send_to_workspace_6: أرسل إلى مساحة العمل 6
+    send_to_workspace_7: أرسل إلى مساحة العمل 7
+    send_to_workspace_8: أرسل إلى مساحة العمل 8
+    send_to_workspace_9: أرسل إلى مساحة العمل 9

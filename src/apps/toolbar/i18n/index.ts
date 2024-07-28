@@ -24,6 +24,7 @@ export async function loadTranslations() {
     zh: await import('./translations/zh.yml'),
     ko: await import('./translations/ko.yml'),
     fr: await import('./translations/fr.yml'),
+    ar: await import('./translations/ar.yml'),
   };
 
   for (const [key, value] of Object.entries(translations)) {

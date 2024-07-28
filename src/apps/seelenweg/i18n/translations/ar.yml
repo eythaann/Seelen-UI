@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: إضافة وحدة الوسائط
+  start: إضافة وحدة البداية
+  settings: أفتح الإعدادات
+app_menu:
+  unpin: إزالة التثبيت
+  pin: دبوس
+  pin_to_left: دبوس إلى اليسار
+  pin_to_center: تثبيت على المركز
+  pin_to_right: تثبيت على اليمين
+  open_file_location: افتح مكان ملف
+  run_as: تشغيل كمسؤول
+  copy_handles: مقابض النسخ
+  close: يغلق
+  close_multiple: إغلاق الكل
+media_menu:
+  remove: إزالة وحدة الوسائط
+start_menu:
+  remove: إزالة وحدة البداية

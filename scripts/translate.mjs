@@ -8,6 +8,7 @@ const toTranslate = [
   'ko',
   'zh',
   'fr',
+  'ar',
 ];
 
 async function translateObject(base, lang, mut_obj) {

@@ -1,0 +1,33 @@
+media:
+  master_volume: الحجم الرئيسي
+  output_device: جهاز إخراج
+  input_device: جهاز الإدخال
+  players: مشغلات الوسائط
+  device:
+    multimedia: الوسائط المتعددة
+    comunications: مجال الاتصالات
+network:
+  not_found: لم يتم العثور على شبكات
+  more: المزيد من إعدادات الشبكة
+  hidden: الشبكة المخفية
+  placeholder:
+    password: كلمة المرور
+  disconnect: قطع الاتصال
+  connect: يتصل
+settings:
+  title: إعدادات
+  app_settings: إعدادات التطبيقات
+  log_out: تسجيل خروج
+  sleep: ينام
+  restart: إعادة تشغيل
+  shutdown: اغلق
+placeholder:
+  open_user_folder: افتح مجلد المستخدم
+  open_system_tray: افتح علبة النظام
+  bluetooth_devices: بلوتوث
+  ethernet_connected: خدمة الإنترنت
+  ethernet_disconnected: لا يوجد اتصال بالإنترنت
+  volume: مقدار
+  battery_remaining: ٪ متبقي
+  smart_charge: '- الشحن الذكي'
+  settings: الإعدادات السريعة
