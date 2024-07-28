@@ -1,0 +1,19 @@
+taskbar_menu:
+  start: Afegiu el mòdul d'inici
+  settings: Configuració oberta
+  media: Afegiu el mòdul de suports
+app_menu:
+  pin_to_left: Pin a l’esquerra
+  close: Tanca
+  run_as: Executa com administrador
+  pin: Agulla
+  close_multiple: Tanca tot
+  open_file_location: Obriu la ubicació del fitxer
+  pin_to_right: Pin a la dreta
+  pin_to_center: Pin al centre
+  copy_handles: Manelles de còpia
+  unpin: Desfeta
+media_menu:
+  remove: Elimina el mòdul de suports
+start_menu:
+  remove: Elimina el mòdul d'inici

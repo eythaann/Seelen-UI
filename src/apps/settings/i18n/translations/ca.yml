@@ -1,0 +1,190 @@
+sides:
+  left: Esquerre
+  right: Dret
+  bottom: Fons
+  top: Superior
+header:
+  labels:
+    info: Informació
+    seelen_wm: Gestor de finestres
+    seelen_bar: Barra d’eines de luxe
+    shortcuts: Dreceres
+    developer: Desenvolupador
+    seelen_weg: Moll/barra de tasques
+    monitors: Monitors
+    specific_apps: Aplicacions específiques
+    general: General
+start:
+  title: Benvingut!
+  message_accent: Optimitzeu la vostra productivitat amb estil.
+  message: >-
+    Benvingut a la interfície d'usuari de Seelen, l'entorn d'escriptori
+    definitiu amb un gestor de Windows de rajoles incorporat per millorar la
+    vostra experiència de Windows 11. Exploreu una nova era d’eficiència i
+    multitasca amb la nostra interfície intuïtiva i les funcions avançades.
+general:
+  theme:
+    added: Tema ja afegit
+    tags: Etiquetes
+    add: Afegiu el tema
+    description: Descripció
+    author: Autora
+    enabled: Temes habilitats
+    placeholder: Seleccioneu el tema
+    label: Informació del tema
+  startup: Executeu la posada en marxa?
+  language: Llenguatge
+toolbar:
+  placeholder:
+    description: Descripció
+    select: Estructura de la barra d’eines
+    author: Autora
+  height: Altura
+  enable: Activa la barra d’eines de luxe
+wm:
+  border:
+    offset: Compensació fronterera
+    width: Amplada de la frontera
+    enable: Activa la vora de la finestra
+  layout: Pla
+  space_between_containers: Espai entre contenidors
+  disabled_windows10: El gestor de finestres no està disponible per a Windows 10.
+  workspace_offset: Offset d'espais de treball (marges)
+  resize_delta: Redimensiona el delta (%)
+  workspace_padding: Rado d’espais de treball
+  author: Autora
+  description: Descripció
+  enable: Activa el gestor de finestres
+weg:
+  items:
+    visible_separators: Separadors visibles
+    label: Plantes
+    zoom_size: Mida zoom (usada per a temes)
+    size: Mida de l'article
+    gap: Espai entre articles
+  enable: Activa el moll/la barra de tasques
+  dock_side: Costat del moll
+  gap: Escletxa
+  margin: Marge
+  padding: Encoir
+  width: Amplada
+  label: Moll/barra de tasques
+  auto_hide: Amaga automàtic
+devtools:
+  load: Carregar
+  data_folder: Carpeta de dades
+  settings_file: Arxiu de configuració
+  custom_config_file: Carregueu el fitxer de configuració personalitzada
+  app_folders: Carpetes d'aplicacions
+  enable: Activa les eines de desenvolupadors
+  install_folder: Carpeta d'instal·lació
+apps_configurations:
+  app:
+    options:
+      force: Gestionar la força
+      float: Surar
+      unmanage: Implacable
+      pinned: Fixada
+    ok_edit: Actualitzar
+    workspace: Espai de treball
+    name: Nom
+    bindings: Enquadernació (nota les dues opcions són necessàries)
+    title_edit: Editing {{nom}}
+    category: Categoria
+    category_placeholder: Res
+    title_readonly: Visualització {{nom}}
+    workspace_placeholder: Res
+    ok_readonly: Edita com a nou
+    ok_create: Crear
+    monitor: Observar
+    title_create: Creació {{nom}}
+    monitor_placeholder: Res
+    options_label: Opcions addicionals
+  identifier:
+    add_block: Afegiu bloc
+    remove: Esborra el bloc
+    negation: Negar la concordança
+    and: I
+    matching_strategy: Estratègia de coincidència
+    id: Identificador
+    kind: Identificar -se per
+    or: O
+  confirm_delete_title: Confirmeu Suprimeix
+  search: Cerca
+  export: Exportar
+  new: Nou
+  bundled_title: Configuració de l'aplicació agrupada amb Seelen
+  import: Importar
+  confirm_delete: Esteu segur que voleu suprimir aquesta configuració/s?
+  bundled_msg: >-
+    Aquestes configuracions agrupades no són editables i estan dissenyades per
+    proporcionar -vos la millor experiència sense personalització. Configuen
+    automàticament les aplicacions més habituals per a vosaltres.
+  delete: Esborrar
+  swap: Canviar
+extras:
+  github: Github
+  exit: Deixar/sortir
+  links: Enllaços oficials
+  discord: Discòrdia
+  relaunch: Rellançar
+  version: Versió
+shortcuts:
+  labels:
+    reserve_top: Reserva superior
+    move_to_workspace_4: Traslladar -se a l'espai de treball 4
+    move_to_workspace_7: Desplaceu -vos a l'espai de treball 7
+    send_to_workspace_2: Enviar a l'espai de treball 2
+    send_to_workspace_9: Enviar a l’espai de treball 9
+    switch_workspace_2: Canvia a l'espai de treball 2
+    move_to_workspace_1: Desplaceu -vos a l'espai de treball 1
+    send_to_workspace_7: Enviar a l’espai de treball 7
+    switch_workspace_9: Canvia a l'espai de treball 9
+    reserve_right: Reserva a la dreta
+    reserve_left: Reserva a l'esquerra
+    switch_workspace_3: Canvia a l'espai de treball 3
+    decrease_width: Disminuir l'amplada
+    move_to_workspace_3: Desplaceu -vos a l'espai de treball 3
+    focus_right: Centra't a la dreta
+    switch_workspace_0: Canvia a l'espai de treball 0
+    move_to_workspace_5: Desplaceu -vos a l'espai de treball 5
+    focus_bottom: Focus Bottom
+    send_to_workspace_3: Envia a l’espai de treball 3
+    switch_workspace_4: Canvia a l'espai de treball 4
+    switch_workspace_6: Canvia a l'espai de treball 6
+    focus_left: Focus deixat
+    move_to_workspace_0: Desplaceu -vos a l'espai de treball 0
+    move_to_workspace_9: Traslladar -se a l'espai de treball 9
+    reserve_float: Reserva flotant
+    reserve_stack: Pila de reserva
+    focus_latest: Focus més recent
+    move_to_workspace_6: Desplaceu -vos a l'espai de treball 6
+    send_to_workspace_6: Enviar a l’espai de treball 6
+    switch_workspace_7: Canvia a l'espai de treball 7
+    switch_workspace_5: Canvia a l'espai de treball 5
+    send_to_workspace_8: Enviar a l'espai de treball 8
+    increase_width: Augment d'amplada
+    switch_workspace_8: Canvia a l'espai de treball 8
+    send_to_workspace_5: Enviar a l’espai de treball 5
+    move_to_workspace_2: Desplaceu -vos a l'espai de treball 2
+    reserve_bottom: Reserva de fons
+    restore_sizes: Restaurar les mides
+    increase_height: Augmentar l'alçada
+    focus_top: Focus Top
+    decrease_height: Disminuir l'alçada
+    move_to_workspace_8: Traslladar -se a l'espai de treball 8
+    send_to_workspace_0: Enviar a l’espai de treball 0
+    send_to_workspace_4: Enviar a l’espai de treball 4
+    switch_workspace_1: Canvieu a l'espai de treball 1
+    send_to_workspace_1: Envia a l'espai de treball 1
+  enable: Activa les dreceres integrades (AHK)
+  enable_tooltip: >-
+    Desactiveu si implementareu les vostres pròpies dreceres mitjançant l'API de
+    Seelen Core
+loading: Carregant ...
+open: Obrir
+delete: Esborrar
+inProgress: En progrés...
+cancel: Cancel · lar
+save: Estalviar
+quit: Abandonar
