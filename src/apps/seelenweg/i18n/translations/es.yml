@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Añadir módulo de medios
+  start: Añadir módulo de inicio
+  settings: Abrir configuraciones
+app_menu:
+  unpin: Desanclar
+  pin: Anclar
+  pin_to_left: Anclar a la izquierda
+  pin_to_center: Anclar al centro
+  pin_to_right: Anclar a la derecha
+  open_file_location: Abrir ubicación del archivo
+  run_as: Ejecutar como administrador
+  copy_handles: Copiar identificadores
+  close: Cerrar
+  close_multiple: Cerrar todo
+media_menu:
+  remove: Eliminar módulo de medios
+start_menu:
+  remove: Eliminar módulo de inicio

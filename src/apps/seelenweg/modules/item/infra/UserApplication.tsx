@@ -7,6 +7,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { Popover } from 'antd';
 import { motion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../components/BackgrounByLayers/infra';
@@ -28,6 +29,8 @@ export const UserApplication = memo(({ item }: Props) => {
 
   const [openPreview, setOpenPreview] = useState(false);
 
+  const { t } = useTranslation();
+
   useAppBlur(() => {
     setOpenPreview(false);
   });
@@ -46,7 +49,7 @@ export const UserApplication = memo(({ item }: Props) => {
 
   return (
     <DraggableItem item={item}>
-      <WithContextMenu items={getMenuForItem(item) || []}>
+      <WithContextMenu items={getMenuForItem(t, item) || []}>
         <Popover
           open={openPreview}
           mouseEnterDelay={0.4}

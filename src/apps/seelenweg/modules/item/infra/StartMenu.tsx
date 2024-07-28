@@ -1,10 +1,11 @@
 import { StartMenuItem } from '../../../../shared/schemas/SeelenWegItems';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
-import { StartModuleMenu } from './Menu';
+import { getMenuForItem } from './Menu';
 import { invoke } from '@tauri-apps/api/core';
 import { motion } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../components/BackgrounByLayers/infra';
@@ -29,6 +30,8 @@ export const StartMenu = memo(({ item }: Props) => {
     startMenuExes.includes(Selectors.focusedExecutable(state)),
   );
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     if (!isStartMenuOpen) {
       setTimeout(() => {
@@ -41,7 +44,7 @@ export const StartMenu = memo(({ item }: Props) => {
 
   return (
     <DraggableItem item={item}>
-      <WithContextMenu items={StartModuleMenu}>
+      <WithContextMenu items={getMenuForItem(t, item)}>
         <motion.div
           className="weg-item"
           initial={{ scale: 0 }}

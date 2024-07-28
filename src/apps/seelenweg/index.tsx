@@ -3,12 +3,14 @@ import { wrapConsole } from '../shared/ConsoleWrapper';
 import { useDarkMode } from '../shared/styles';
 import { ErrorBoundary } from './components/Error';
 import { registerDocumentEvents, updateHitbox } from './events';
+import i18n, { loadTranslations } from './i18n';
 import { SeelenWeg } from './modules/bar';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
+import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
@@ -36,6 +38,7 @@ async function Main() {
   await loadConstants();
   await loadStore();
   await registerStoreEvents();
+  await loadTranslations();
 
   const WrappedRoot = () => {
     const isDarkMode = useDarkMode();
@@ -46,17 +49,19 @@ async function Main() {
 
     return (
       <Provider store={store}>
-        <ConfigProvider
-          getPopupContainer={() => container}
-          componentSize="small"
-          theme={{
-            algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
-          }}
-        >
-          <ErrorBoundary fallback={<div>Something went wrong</div>}>
-            <SeelenWeg />
-          </ErrorBoundary>
-        </ConfigProvider>
+        <I18nextProvider i18n={i18n}>
+          <ConfigProvider
+            getPopupContainer={() => container}
+            componentSize="small"
+            theme={{
+              algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+            }}
+          >
+            <ErrorBoundary fallback={<div>Something went wrong</div>}>
+              <SeelenWeg />
+            </ErrorBoundary>
+          </ConfigProvider>
+        </I18nextProvider>
       </Provider>
     );
   };

@@ -2,6 +2,7 @@ import { savePinnedItems } from '../shared/store/storeApi';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, MenuProps, Popover } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
+import { TFunction } from 'i18next';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
 import { store } from '../shared/store/infra';
@@ -10,25 +11,25 @@ import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
 import { AppsSides, SwPinnedApp, SwTemporalApp } from '../shared/store/domain';
 
-export function getSeelenWegMenu(): ItemType[] {
+export function getSeelenWegMenu(t: TFunction): ItemType[] {
   return [
     {
       key: 'add-media-module',
-      label: 'Add Media Module',
+      label: t('taskbar_menu.media'),
       onClick() {
         store.dispatch(RootActions.addMediaModule());
       },
     },
     {
       key: 'add-start-module',
-      label: 'Add Start Module',
+      label: t('taskbar_menu.start'),
       onClick() {
         store.dispatch(RootActions.addStartModule());
       },
     },
     {
       key: 'settings',
-      label: 'Open Settings',
+      label: t('taskbar_menu.settings'),
       onClick() {
         invoke('show_app_settings');
       },
@@ -36,7 +37,7 @@ export function getSeelenWegMenu(): ItemType[] {
   ];
 }
 
-export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): ItemType[] {
+export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp): ItemType[] {
   const state = store.getState();
   const isPinned = isPinnedApp(item);
 
@@ -51,7 +52,7 @@ export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): ItemType[] {
 
   if (isPinned) {
     menu.push({
-      label: 'Unpin',
+      label: t('app_menu.unpin'),
       key: 'weg_unpin_app',
       onClick: () => {
         store.dispatch(RootActions.unPin(item));
@@ -73,18 +74,18 @@ export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): ItemType[] {
                 className="weg-context-menu"
                 items={[
                   {
-                    label: 'Pin to left',
                     key: 'weg_pin_app_left',
+                    label: t('app_menu.pin_to_left'),
                     onClick: () => pin(AppsSides.Left),
                   },
                   {
-                    label: 'Pin to center',
                     key: 'weg_pin_app_center',
+                    label: t('app_menu.pin_to_center'),
                     onClick: () => pin(AppsSides.Center),
                   },
                   {
-                    label: 'Pin to right',
                     key: 'weg_pin_app_right',
+                    label: t('app_menu.pin_to_right'),
                     onClick: () => pin(AppsSides.Right),
                   },
                 ]}
@@ -92,7 +93,9 @@ export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): ItemType[] {
             </div>
           }
         >
-          <div style={{ width: '100%', height: '100%', margin: '-10px', padding: '10px' }}>Pin</div>
+          <div style={{ width: '100%', height: '100%', margin: '-10px', padding: '10px' }}>
+            {t('app_menu.pin')}
+          </div>
         </Popover>
       ),
     });
@@ -103,13 +106,13 @@ export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): ItemType[] {
       type: 'divider',
     },
     {
-      label: 'Open file location',
       key: 'weg_select_file_on_explorer',
+      label: t('app_menu.open_file_location'),
       onClick: () => invoke('select_file_on_explorer', { path: item.exe }),
     },
     {
-      label: 'Run as administrator',
       key: 'weg_runas',
+      label: t('app_menu.run_as'),
       onClick: () => invoke('run_as_admin', { path: item.execution_path }),
     },
   );
@@ -117,16 +120,16 @@ export function getMenuForItem(item: SwPinnedApp | SwTemporalApp): ItemType[] {
   if (item.opens.length) {
     menu.push(
       {
-        label: 'Copy handles',
         key: 'weg_copy_hwnd',
+        label: t('app_menu.copy_handles'),
         onClick: () =>
           navigator.clipboard.writeText(
             JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16))),
           ),
       },
       {
-        label: item.opens.length > 1 ? 'Close all' : 'Close',
         key: 'weg_close_app',
+        label: item.opens.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
         onClick() {
           item.opens.forEach((hwnd) => {
             invoke('weg_close_app', { hwnd });

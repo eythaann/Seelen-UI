@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Medienmodul hinzufügen
+  start: Startmodul hinzufügen
+  settings: Einstellungen öffnen
+app_menu:
+  unpin: Lösen
+  pin: Anheften
+  pin_to_left: Links anheften
+  pin_to_center: Zentral anheften
+  pin_to_right: Rechts anheften
+  open_file_location: Dateispeicherort öffnen
+  run_as: Als Administrator ausführen
+  copy_handles: Handles kopieren
+  close: Schließen
+  close_multiple: Alle schließen
+media_menu:
+  remove: Medienmodul entfernen
+start_menu:
+  remove: Startmodul entfernen

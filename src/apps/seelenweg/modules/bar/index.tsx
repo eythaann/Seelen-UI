@@ -6,6 +6,7 @@ import { savePinnedItems } from '../shared/store/storeApi';
 import { getSeelenWegMenu } from './menu';
 import { Reorder } from 'framer-motion';
 import { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
@@ -55,6 +56,7 @@ export function SeelenWeg() {
   const [isActive, setActive] = useState(false);
 
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   useAppBlur(() => {
     setActive(false);
@@ -117,7 +119,7 @@ export function SeelenWeg() {
 
   return (
     <WithContextMenu
-      items={getSeelenWegMenu()}
+      items={getSeelenWegMenu(t)}
     >
       <Reorder.Group
         as="div"

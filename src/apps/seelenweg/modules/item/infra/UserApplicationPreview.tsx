@@ -1,3 +1,4 @@
+import { Icon } from '../../../../shared/components/Icon';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { Spin } from 'antd';
@@ -23,12 +24,12 @@ export const UserApplicationPreview = ({ hwnd }: PreviewProps) => {
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
-    const uslistener = listen(`weg-preview-update-${app?.process_hwnd || 0}`, () => {
+    const unlisten = listen(`weg-preview-update-${app?.process_hwnd || 0}`, () => {
       setImageSrc(imageUrl);
       forceUpdate();
     });
     return () => {
-      uslistener.then((unlisten) => unlisten());
+      unlisten.then((unlisten) => unlisten()).catch(console.error);
     };
   }, []);
 
@@ -51,7 +52,7 @@ export const UserApplicationPreview = ({ hwnd }: PreviewProps) => {
       <div className="weg-item-preview-topbar">
         <div className="weg-item-preview-title">{app.title}</div>
         <div className="weg-item-preview-close" onClick={onClose}>
-          x
+          <Icon iconName="IoClose" />
         </div>
       </div>
       <div className="weg-item-preview-image-container">

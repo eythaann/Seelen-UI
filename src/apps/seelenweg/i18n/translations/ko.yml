@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: 미디어 모듈 추가
+  start: 시작 모듈 추가
+  settings: 설정 열기
+app_menu:
+  unpin: 고정 해제
+  pin: 고정
+  pin_to_left: 왼쪽에 고정
+  pin_to_center: 중앙에 고정
+  pin_to_right: 오른쪽에 고정
+  open_file_location: 파일 위치 열기
+  run_as: 관리자 권한으로 실행
+  copy_handles: 핸들 복사
+  close: 닫기
+  close_multiple: 모두 닫기
+media_menu:
+  remove: 미디어 모듈 제거
+start_menu:
+  remove: 시작 모듈 제거

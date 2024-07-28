@@ -2,11 +2,12 @@ import { Icon } from '../../../../shared/components/Icon';
 import { SavedMediaItem } from '../../../../shared/schemas/SeelenWegItems';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
-import { MediaSessionMenu } from './Menu';
+import { getMenuForItem } from './Menu';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Button } from 'antd';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
@@ -30,6 +31,8 @@ export function MediaSession({ item }: { item: SavedMediaItem }) {
     session?.thumbnail ? session.thumbnail : LAZY_CONSTANTS.DEFAULT_THUMBNAIL,
   );
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     calcLuminance(src).then(setLuminance).catch(console.error);
   }, [src]);
@@ -52,7 +55,7 @@ export function MediaSession({ item }: { item: SavedMediaItem }) {
 
   return (
     <DraggableItem item={item}>
-      <WithContextMenu items={MediaSessionMenu}>
+      <WithContextMenu items={getMenuForItem(t, item)}>
         <div className="media-session-container" onContextMenu={(e) => e.stopPropagation()}>
           <div
             className="media-session"

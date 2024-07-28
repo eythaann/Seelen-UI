@@ -4,6 +4,7 @@ import { loadThemeCSS } from '../../../../shared';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { updateHitbox } from '../../../events';
+import i18n from '../../../i18n';
 import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
@@ -57,6 +58,7 @@ export async function registerStoreEvents() {
 
   await listenGlobal<UserSettings>('updated-settings', (event) => {
     const userSettings = event.payload;
+    i18n.changeLanguage(userSettings.jsonSettings.language);
     const settings = userSettings.jsonSettings.seelenweg;
     store.dispatch(RootActions.setSettings(settings));
     loadSettingsCSS(settings);
@@ -143,6 +145,8 @@ function loadSettingsCSS(settings: Seelenweg) {
 
 export async function loadStore() {
   const userSettings = await new UserSettingsLoader().load();
+  i18n.changeLanguage(userSettings.jsonSettings.language);
+
   const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
