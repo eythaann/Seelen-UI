@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Отворени настройки
+  media: Добавете медиен модул
+  start: Добавете старт модул
+app_menu:
+  close: Близо
+  close_multiple: Затвори всички
+  run_as: Изпълни като администратор
+  copy_handles: Копиращи дръжки
+  open_file_location: Отворете местоположението на файла
+  pin_to_center: Щифт към центъра
+  pin_to_left: Пин вляво
+  pin_to_right: Пин вдясно
+  pin: Щифт
+  unpin: Unpin
+media_menu:
+  remove: Премахване на медийния модул
+start_menu:
+  remove: Премахване на стартовия модул

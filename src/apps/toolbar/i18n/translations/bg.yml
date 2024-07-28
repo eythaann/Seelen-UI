@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Мултимедия
+    comunications: Комуникации
+  master_volume: Главен обем
+  input_device: Вход устройство
+  output_device: Изходно устройство
+  players: Медийни играчи
+network:
+  placeholder:
+    password: Парола
+  not_found: Не са намерени мрежи
+  connect: Свържете се
+  hidden: Скрита мрежа
+  more: Повече мрежови настройки
+  disconnect: Изключете
+settings:
+  shutdown: Изключвам
+  log_out: Излез от профила си
+  title: Настройки
+  restart: Рестартирам
+  app_settings: Настройки на приложението
+  sleep: Сън
+placeholder:
+  battery_remaining: '% остава'
+  open_system_tray: Отворена система табла
+  open_user_folder: Отворете потребителската папка
+  ethernet_disconnected: Няма достъп до интернет
+  smart_charge: '- Smart Charge'
+  ethernet_connected: достъп до интернет
+  volume: Сила на звука
+  settings: Бързи настройки
+  bluetooth_devices: Bluetooth & устройства

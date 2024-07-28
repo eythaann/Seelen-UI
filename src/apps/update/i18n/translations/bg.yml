@@ -1,0 +1,10 @@
+update:
+  version: Версия
+  cancel: По късно
+  date: Дата
+  extra_info: За да прочетете пълния Changelog, моля, посетете страницата на Changelog
+  download: Актуализирайте и инсталирайте
+  installing: Инсталиране ...
+  downloading: Изтегляне ...
+  title: Налична актуализация!
+  page: Страница за освобождаване на GitHub
