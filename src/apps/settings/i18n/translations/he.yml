@@ -1,0 +1,186 @@
+sides:
+  bottom: תַחתִית
+  right: ימין
+  left: שמאלה
+  top: חלק עליון
+header:
+  labels:
+    developer: מפתח
+    info: מֵידָע
+    specific_apps: אפליקציות ספציפיות
+    general: כללי
+    seelen_weg: שורת המזח/המשימות
+    shortcuts: קיצורי דרך
+    seelen_wm: מנהל חלונות
+    seelen_bar: סרגל כלים מפואר
+    monitors: צגים
+start:
+  title: ברוך הבא!
+  message: >-
+    ברוך הבא ל- Seelen UI, סביבת שולחן העבודה האולטימטיבית עם מנהל Windows משולב
+    אריחים כדי לשפר את חווית Windows 11 שלך! חקור עידן חדש של יעילות ורב משימות
+    עם הממשק האינטואיטיבי והתכונות המתקדמות שלנו.
+  message_accent: אופטימיזציה של הפרודוקטיביות שלך עם סגנון!
+general:
+  theme:
+    author: מְחַבֵּר
+    description: תיאור
+    label: מידע על נושא
+    enabled: נושאים מופעלים
+    tags: תגיות
+    added: הנושא כבר הוסיף
+    placeholder: בחר נושא
+    add: הוסף נושא
+  language: שפה
+  startup: לרוץ בהפעלה?
+toolbar:
+  placeholder:
+    author: מְחַבֵּר
+    description: תיאור
+    select: מבנה סרגל הכלים
+  height: גוֹבַה
+  enable: אפשר סרגל כלים מפואר
+wm:
+  border:
+    offset: קיזוז גבול
+    width: רוחב גבול
+    enable: אפשר את גבול החלון
+  space_between_containers: מרחב בין מכולות
+  layout: מַעֲרָך
+  author: מְחַבֵּר
+  disabled_windows10: מנהל החלונות אינו זמין עבור Windows 10.
+  description: תיאור
+  workspace_padding: מרחבי עבודה ריפוד
+  enable: אפשר מנהל חלונות
+  resize_delta: שינוי גודל דלתא (%)
+  workspace_offset: מרחבי עבודה קיזזו (שוליים)
+weg:
+  items:
+    gap: שטח בין פריטים
+    label: פריטים
+    visible_separators: מפרידים גלויים
+    zoom_size: גודל מתקרב (משמש לנושאים)
+    size: גודל פריט
+  width: רוֹחַב
+  gap: פער
+  auto_hide: הסתר אוטומטי
+  label: שורת המזח/המשימות
+  margin: שולים
+  enable: הפעל את המזח/שורת המשימות
+  dock_side: צד המזח
+  padding: ריפוד
+devtools:
+  load: לִטעוֹן
+  install_folder: תיקיית התקנה
+  custom_config_file: טען קובץ תצורה מותאם אישית
+  data_folder: תיקיית נתונים
+  app_folders: תיקיות אפליקציות
+  settings_file: קובץ הגדרות
+  enable: אפשר כלי מפתחים
+apps_configurations:
+  app:
+    options:
+      float: לָצוּף
+      force: כוח לנהל
+      pinned: מוצמד
+      unmanage: לא מנוהל
+    name: שֵׁם
+    monitor_placeholder: אף אחד
+    category_placeholder: אף אחד
+    ok_edit: עדכון
+    bindings: כריכה (שימו לב לשתי האפשרויות נדרשות)
+    category: קטגוריה
+    title_edit: עריכה {{name}}
+    ok_readonly: ערוך כחדש
+    monitor: צג
+    options_label: אפשרויות נוספות
+    ok_create: לִיצוֹר
+    workspace_placeholder: אף אחד
+    title_create: יצירת {{name}}
+    workspace: סביבת עבודה
+    title_readonly: צופה {{name}}
+  identifier:
+    id: מזהה
+    or: אוֹ
+    and: וכן
+    add_block: הוסף בלוק
+    kind: לזהות על ידי
+    remove: מחק בלוק
+    matching_strategy: אסטרטגיה תואמת
+    negation: שולל התאמה
+  new: חָדָשׁ
+  search: לחפש
+  confirm_delete: האם אתה בטוח שברצונך למחוק תצורה/ים אלה?
+  export: יְצוּא
+  delete: לִמְחוֹק
+  import: יְבוּא
+  swap: לְהַחלִיף
+  confirm_delete_title: אשר מחק
+  bundled_title: תצורת אפליקציה מצורפת עם Seelen
+  bundled_msg: >-
+    תצורות מצורפות אלה אינן ניתנות לעריכה ונועדו לספק לך את החוויה הטובה ביותר
+    ללא התאמה אישית. הם מגדירים באופן אוטומטי את היישומים הנפוצים ביותר עבורך.
+extras:
+  discord: מַחֲלוֹקֶת
+  relaunch: השקה מחדש
+  github: Github
+  version: גִרְסָה
+  links: קישורים רשמיים
+  exit: יצא/יציאה
+shortcuts:
+  labels:
+    move_to_workspace_4: עברו לסביבת העבודה 4
+    move_to_workspace_9: עברו לסביבת העבודה 9
+    switch_workspace_3: עבור לסביבת העבודה 3
+    switch_workspace_4: עברו לסביבת העבודה 4
+    switch_workspace_8: עברו לסביבת העבודה 8
+    decrease_width: ירידה ברוחב
+    focus_latest: התמקד האחרון
+    send_to_workspace_3: שלח לסביבת העבודה 3
+    reserve_bottom: שמורה בתחתית
+    move_to_workspace_8: עברו לסביבת העבודה 8
+    reserve_stack: ערימת מילואים
+    switch_workspace_7: לעבור לסביבת עבודה 7
+    move_to_workspace_0: עברו לסביבת העבודה 0
+    reserve_right: שמור ימינה
+    move_to_workspace_6: עברו לסביבת העבודה 6
+    send_to_workspace_9: שלח לסביבת העבודה 9
+    send_to_workspace_0: שלח לסביבת עבודה 0
+    move_to_workspace_2: לעבור לסביבת העבודה 2
+    move_to_workspace_1: לעבור לסביבת העבודה 1
+    switch_workspace_1: עבור לסביבת העבודה 1
+    increase_width: הגדל את הרוחב
+    move_to_workspace_7: לעבור לסביבת העבודה 7
+    send_to_workspace_5: שלח לסביבת העבודה 5
+    restore_sizes: שחזור גדלים
+    increase_height: הגדל את הגובה
+    move_to_workspace_5: לעבור לסביבת העבודה 5
+    switch_workspace_5: עברו לסביבת העבודה 5
+    focus_top: מיקוד למעלה
+    focus_right: להתמקד נכון
+    send_to_workspace_1: שלח לסביבת עבודה 1
+    switch_workspace_9: עבור לסביבת העבודה 9
+    reserve_top: עליון מילואים
+    switch_workspace_6: לעבור לסביבת עבודה 6
+    switch_workspace_0: לעבור לסביבת עבודה 0
+    focus_bottom: מיקוד תחתון
+    send_to_workspace_4: שלח לסביבת העבודה 4
+    switch_workspace_2: עבור לסביבת העבודה 2
+    reserve_float: שמורה לצוף
+    send_to_workspace_7: שלח לסביבת עבודה 7
+    send_to_workspace_6: שלח לסביבת עבודה 6
+    focus_left: פוקוס שמאלה
+    reserve_left: רזרבה שמאלה
+    move_to_workspace_3: לעבור לסביבת העבודה 3
+    send_to_workspace_8: שלח לסביבת עבודה 8
+    send_to_workspace_2: שלח לסביבת עבודה 2
+    decrease_height: ירידה בגובה
+  enable: אפשר קיצורי דרך משולבים (AHK)
+  enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
+inProgress: בתהליך...
+loading: טוען...
+open: לִפְתוֹחַ
+cancel: לְבַטֵל
+quit: לְהַפְסִיק
+delete: לִמְחוֹק
+save: להציל

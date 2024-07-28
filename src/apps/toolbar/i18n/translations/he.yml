@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: מולטימדיה
+    comunications: תקשורת
+  input_device: מכשיר קלט
+  output_device: מכשיר פלט
+  master_volume: נפח אמן
+  players: שחקני מדיה
+network:
+  placeholder:
+    password: סיסמה
+  connect: לְחַבֵּר
+  disconnect: לְנַתֵק
+  hidden: רשת נסתרת
+  not_found: לא נמצאו רשתות
+  more: הגדרות רשת נוספות
+settings:
+  app_settings: הגדרות אפליקציה
+  restart: איתחול
+  log_out: להתנתק
+  shutdown: לכבות
+  title: הגדרות
+  sleep: לִישׁוֹן
+placeholder:
+  settings: הגדרות מהירות
+  battery_remaining: '% נותר'
+  ethernet_disconnected: אין גישה לאינטרנט
+  smart_charge: '- חיוב חכם'
+  ethernet_connected: גישה לאינטרנט
+  bluetooth_devices: Bluetooth ומכשירים
+  open_system_tray: מגש מערכת פתוח
+  volume: כרך
+  open_user_folder: פתח את תיקיית המשתמש
