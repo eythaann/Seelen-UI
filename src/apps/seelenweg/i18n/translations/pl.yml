@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Otwórz ustawienia
+  start: Dodaj moduł Start
+  media: Dodaj moduł nośnika
+app_menu:
+  unpin: Odpiąć
+  pin: Szpilka
+  run_as: Uruchom jako administrator
+  open_file_location: Otwórz lokalizację pliku
+  close: Zamknąć
+  pin_to_center: Pin do środka
+  pin_to_right: Pin po prawej
+  copy_handles: Kopiuj uchwyty
+  close_multiple: Zamknij wszystko
+  pin_to_left: Szpilka do lewej
+media_menu:
+  remove: Usuń moduł multimediów
+start_menu:
+  remove: Usuń moduł startowy

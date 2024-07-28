@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Komunikacja
+  master_volume: Głośność
+  input_device: Urządzenie wejściowe
+  output_device: Urządzenie wyjściowe
+  players: Gracze multimedialni
+network:
+  placeholder:
+    password: Hasło
+  disconnect: Rozłączyć się
+  connect: Łączyć
+  not_found: Nie znaleziono sieci
+  more: Więcej ustawień sieciowych
+  hidden: Ukryta sieć
+settings:
+  app_settings: Ustawienia aplikacji
+  log_out: Wyloguj
+  title: Ustawienia
+  sleep: Spać
+  shutdown: Zamknięcie
+  restart: Uruchom ponownie
+placeholder:
+  ethernet_connected: dostęp do Internetu
+  battery_remaining: '% pozostały'
+  volume: Tom
+  bluetooth_devices: Bluetooth i urządzenia
+  settings: Szybkie ustawienia
+  ethernet_disconnected: Brak dostępu do internetu
+  smart_charge: '- Inteligentny ładunek'
+  open_user_folder: Otwórz folder użytkownika
+  open_system_tray: Otwórz tacę systemową
