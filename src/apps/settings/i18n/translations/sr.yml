@@ -1,0 +1,190 @@
+sides:
+  bottom: Дно
+  right: Јел тако
+  left: Лево
+  top: На врху
+header:
+  labels:
+    general: Генерал
+    shortcuts: Пречице
+    info: Информације
+    monitors: Монитори
+    seelen_bar: Фанци алатна трака
+    seelen_weg: Доцк / трака задатака
+    seelen_wm: Менаџер прозора
+    specific_apps: Специфичне апликације
+    developer: Разводнички
+start:
+  title: Добродошли!
+  message_accent: Оптимизирајте своју продуктивност стилом!
+  message: >-
+    Добродошли у СЕЕЛЕН УИ, Ултимате Десктоп окружење са уграђеним виљушкар на
+    плочицем за повећање вашег Виндовс 11 искуства! Истражите нову еру
+    ефикасности и више задатака са нашим интуитивним интерфејсом и напредним
+    функцијама.
+general:
+  theme:
+    tags: Ознаке
+    placeholder: Изаберите тему
+    label: Информације о темима
+    author: Аутор
+    enabled: Омогућене теме
+    description: Опис
+    added: Тема је већ додата
+    add: Додај тему
+  startup: Ради на покретању?
+  language: Језик
+toolbar:
+  placeholder:
+    description: Опис
+    author: Аутор
+    select: Структура алатне траке
+  enable: Омогућите фанци траку са алаткама
+  height: Висина
+wm:
+  border:
+    enable: Омогућите границу прозора
+    width: Ширина границе
+    offset: Помак на границу
+  description: Опис
+  space_between_containers: Простор између контејнера
+  enable: Омогући менаџер прозора
+  workspace_offset: Оффсет радних простора (маржи)
+  disabled_windows10: Менаџер прозора није доступан за Виндовс 10.
+  layout: Изглед
+  workspace_padding: Облога за радне просторе
+  resize_delta: Промените величину Делта (%)
+  author: Аутор
+weg:
+  items:
+    zoom_size: Зуомирана величина (користи се за теме)
+    label: Предмети
+    visible_separators: Видљиви сепаратори
+    gap: Простор између предмета
+    size: Величина предмета
+  label: Доцк / трака задатака
+  gap: Празнина
+  enable: Омогући прикључак / траку задатака
+  padding: Подлокнути
+  width: Ширина
+  margin: Маргина
+  dock_side: Пристаниште
+  auto_hide: Аутоматска кожа
+devtools:
+  enable: Омогућите алате за програмере
+  load: Оптеретити
+  app_folders: Мапе за апликације
+  custom_config_file: Учитајте прилагођену конфигуријску датотеку
+  install_folder: Инсталациона мапа
+  settings_file: Подешавања
+  data_folder: Мапа података
+apps_configurations:
+  app:
+    options:
+      float: Пловак
+      pinned: Прикован
+      unmanage: Неукратити
+      force: Присилно управљање
+    category: Категорија
+    monitor_placeholder: Ниједан
+    ok_create: Креирај
+    workspace: Радни простор
+    workspace_placeholder: Ниједан
+    category_placeholder: Ниједан
+    ok_readonly: Уреди као ново
+    options_label: Додатне опције
+    ok_edit: ажурирање
+    title_edit: Уређивање {{наме}}
+    monitor: Монитор
+    title_readonly: Гледајући {{наме}}
+    title_create: Стварање {{наме}}
+    name: Назив
+    bindings: Везивање (белешка су обе опције потребне)
+  identifier:
+    remove: Избрисати блок
+    or: Или
+    id: Идентификатор
+    kind: Идентификовати
+    and: И
+    negation: Негирајте подударање
+    matching_strategy: Стратегија подударања
+    add_block: Додај блок
+  new: Нова
+  import: Увоз
+  confirm_delete_title: Потврдити брисање
+  search: Претрага
+  delete: Избрисати
+  bundled_msg: >-
+    Ове пакетне конфигурације нису уређене и дизајниране су да вам пруже најбоље
+    искуство без прилагођавања. Они аутоматски конфигуришу најчешће апликације
+    за вас.
+  export: Извоз
+  bundled_title: Апликација конфигурација у пакету са СЕЕЛЕН-ом
+  confirm_delete: Јесте ли сигурни да желите да избришете ову конфигурацију / с?
+  swap: Замена
+extras:
+  relaunch: Поновити
+  exit: Престанак / излаз
+  version: Верзија
+  links: Званичне везе
+  discord: Нескладан
+  github: Гитхуб
+shortcuts:
+  labels:
+    move_to_workspace_3: Пређите на радни простор 3
+    focus_top: Фокусирати врх
+    send_to_workspace_9: Пошаљи на радни простор 9
+    switch_workspace_3: Пређите на радни простор 3
+    send_to_workspace_0: Пошаљи на радни простор 0
+    send_to_workspace_4: Пошаљи на радни простор 4
+    send_to_workspace_8: Пошаљи на радни простор 8
+    switch_workspace_6: Пређите на радни простор 6
+    send_to_workspace_7: Пошаљи на радни простор 7
+    focus_latest: Фокусирати најновије
+    send_to_workspace_1: Пошаљи на радни простор 1
+    switch_workspace_9: Пређите на радни простор 9
+    focus_right: Фокусирати право
+    move_to_workspace_5: Пређите на радни простор 5
+    increase_height: Повећати висину
+    switch_workspace_1: Пређите на радни простор 1
+    send_to_workspace_5: Пошаљи на радни простор 5
+    switch_workspace_4: Пређите на радни простор 4
+    switch_workspace_5: Пређите на радни простор 5
+    reserve_top: Резервисати врх
+    send_to_workspace_6: Пошаљи на радни простор 6
+    reserve_bottom: Резервисати дно
+    focus_bottom: На дно фокуса
+    reserve_float: Резерват
+    move_to_workspace_0: Пређите на радни простор 0
+    move_to_workspace_9: Пређите на радни простор 9
+    switch_workspace_0: Пређите на радни простор 0
+    increase_width: Повећати ширину
+    move_to_workspace_7: Пређите на радни простор 7
+    reserve_right: Резервисати право
+    move_to_workspace_4: Пређите на радни простор 4
+    decrease_height: Смањите висину
+    move_to_workspace_8: Прелазак на радни простор 8
+    decrease_width: Смањите ширину
+    send_to_workspace_2: Пошаљи на Воркспаце 2
+    focus_left: Фокус је остављен
+    reserve_left: Резерват лево
+    switch_workspace_8: Пређите на радни простор 8
+    reserve_stack: Резервни сноп
+    switch_workspace_2: Пређите на радни простор 2
+    restore_sizes: Вратите величине
+    move_to_workspace_6: Пређите на радни простор 6
+    switch_workspace_7: Пређите на радни простор 7
+    move_to_workspace_2: Пређите на радни простор 2
+    send_to_workspace_3: Пошаљи на радни простор 3
+    move_to_workspace_1: Прелазак на радни простор 1
+  enable_tooltip: >-
+    Онемогућите ако ћете имплементирати сопствене пречице користећи СЕЕЛЕН ЦОРЕ
+    АПИ
+  enable: Омогућите интегрисане пречице (АХК)
+quit: Одустати
+inProgress: У току...
+save: сачувати
+cancel: Поништити, отказати
+open: Отворен
+delete: Избрисати
+loading: Учитавање ...

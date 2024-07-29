@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Отвори подешавања
+  media: Додајте медијски модул
+  start: Додајте почетни модул
+app_menu:
+  close_multiple: Затворите све
+  run_as: Покрени као администратор
+  close: Близу
+  pin_to_center: ПИН до центра
+  open_file_location: Отворите локацију датотеке
+  pin_to_left: Игните лево
+  copy_handles: Копирајте ручке
+  pin: Пин
+  unpin: Развелити
+  pin_to_right: Пин удесно
+media_menu:
+  remove: Уклоните медијски модул
+start_menu:
+  remove: Уклоните покретни модул
