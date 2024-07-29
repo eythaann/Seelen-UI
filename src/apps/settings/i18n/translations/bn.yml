@@ -1,0 +1,190 @@
+sides:
+  bottom: নীচে
+  top: শীর্ষ
+  right: ঠিক আছে
+  left: বাম
+header:
+  labels:
+    info: তথ্য
+    developer: বিকাশকারী
+    seelen_weg: ডক/টাস্কবার
+    general: সাধারণ
+    monitors: মনিটর
+    seelen_bar: অভিনব সরঞ্জামদণ্ড
+    shortcuts: শর্টকাটস
+    specific_apps: নির্দিষ্ট অ্যাপ্লিকেশন
+    seelen_wm: উইন্ডো ম্যানেজার
+start:
+  title: স্বাগত!
+  message: >-
+    আপনার উইন্ডোজ 11 অভিজ্ঞতা বাড়ানোর জন্য একটি অন্তর্ভুক্ত টাইলিং উইন্ডোজ
+    ম্যানেজারের সাথে চূড়ান্ত ডেস্কটপ পরিবেশ সিলেন ইউআই -তে আপনাকে স্বাগতম!
+    আমাদের স্বজ্ঞাত ইন্টারফেস এবং উন্নত বৈশিষ্ট্যগুলির সাথে দক্ষতা এবং
+    মাল্টিটাস্কিংয়ের একটি নতুন যুগের সন্ধান করুন।
+  message_accent: স্টাইল দিয়ে আপনার উত্পাদনশীলতা অনুকূলিত করুন!
+general:
+  theme:
+    description: বর্ণনা
+    placeholder: থিম নির্বাচন কর
+    tags: ট্যাগ
+    author: লেখক
+    enabled: সক্ষম থিম
+    label: থিম তথ্য
+    added: থিম ইতিমধ্যে যুক্ত
+    add: থিম যুক্ত করুন
+  startup: প্রারম্ভকালে চালানো?
+  language: ভাষা
+toolbar:
+  placeholder:
+    author: লেখক
+    description: বর্ণনা
+    select: সরঞ্জামদণ্ড কাঠামো
+  enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
+  height: উচ্চতা
+wm:
+  border:
+    width: সীমানার প্রশস্থতা
+    enable: উইন্ডোর সীমানা সক্ষম করুন
+    offset: সীমান্ত অফসেট
+  author: লেখক
+  layout: বিন্যাস
+  description: বর্ণনা
+  resize_delta: পুনরায় আকার ডেল্টা (%)
+  workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
+  disabled_windows10: উইন্ডো ম্যানেজার উইন্ডোজ 10 এর জন্য উপলভ্য নয়।
+  space_between_containers: পাত্রে স্থান
+  workspace_padding: ওয়ার্কস্পেস প্যাডিং
+  enable: উইন্ডো ম্যানেজার সক্ষম করুন
+weg:
+  items:
+    size: আইটেমের আকার
+    gap: আইটেম মধ্যে স্থান
+    visible_separators: দৃশ্যমান বিভাজক
+    label: আইটেম
+    zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
+  auto_hide: স্বয়ং চামড়া
+  dock_side: ডক সাইড
+  width: প্রস্থ
+  gap: ফাঁক
+  margin: মার্জিন
+  enable: ডক/টাস্কবার সক্ষম করুন
+  label: ডক/টাস্কবার
+  padding: প্যাডিং
+devtools:
+  enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
+  settings_file: সেটিংস ফাইল
+  install_folder: ইনস্টলেশন ফোল্ডার
+  custom_config_file: কাস্টম কনফিগার ফাইল লোড করুন
+  app_folders: অ্যাপ্লিকেশন ফোল্ডার
+  data_folder: ডেটা ফোল্ডার
+  load: বোঝা
+apps_configurations:
+  app:
+    options:
+      float: ভাসা
+      unmanage: আনম্যানেজ
+      force: জোর পরিচালনা
+      pinned: পিনড
+    ok_create: সৃষ্টি
+    name: নাম
+    workspace_placeholder: কিছুই না
+    monitor_placeholder: কিছুই না
+    category_placeholder: কিছুই না
+    ok_edit: হালনাগাদ
+    title_readonly: '{{নাম}} দেখুন'
+    category: বিভাগ
+    ok_readonly: নতুন হিসাবে সম্পাদনা
+    monitor: মনিটর
+    title_edit: সম্পাদনা {{নাম}}
+    options_label: অতিরিক্ত বিকল্প
+    title_create: '{{নাম}} তৈরি করা'
+    workspace: কর্মক্ষেত্র
+    bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
+  identifier:
+    or: বা
+    and: এবং
+    id: সনাক্তকারী
+    negation: ম্যাচিং অবহেলা
+    remove: ব্লক মুছুন
+    kind: দ্বারা চিহ্নিত করুন
+    add_block: ব্লক যুক্ত করুন
+    matching_strategy: ম্যাচিং কৌশল
+  import: আমদানি
+  search: অনুসন্ধান
+  new: নতুন
+  confirm_delete_title: নিশ্চিত বাতিল
+  export: রফতানি
+  delete: মুছে ফেলা
+  confirm_delete: আপনি কি নিশ্চিত যে আপনি এই কনফিগারেশন/গুলি মুছতে চান?
+  bundled_title: অ্যাপ কনফিগারেশন সিলেনের সাথে বান্ডিল
+  swap: অদলবদল
+  bundled_msg: >-
+    এই বান্ডিলযুক্ত কনফিগারেশনগুলি সম্পাদনাযোগ্য নয় এবং আপনাকে কাস্টমাইজেশন
+    ছাড়াই সেরা অভিজ্ঞতা সরবরাহ করার জন্য ডিজাইন করা হয়েছে। তারা
+    স্বয়ংক্রিয়ভাবে আপনার জন্য সর্বাধিক সাধারণ অ্যাপ্লিকেশনগুলি কনফিগার করে।
+extras:
+  version: সংস্করণ
+  relaunch: পুনরায় চালু
+  exit: প্রস্থান/প্রস্থান
+  links: অফিসিয়াল লিঙ্ক
+  github: গিথুব
+  discord: মতবিরোধ
+shortcuts:
+  labels:
+    focus_latest: সর্বশেষ ফোকাস
+    send_to_workspace_2: ওয়ার্কস্পেস 2 এ প্রেরণ করুন
+    reserve_left: রিজার্ভ বাম
+    switch_workspace_6: ওয়ার্কস্পেস 6 এ স্যুইচ করুন
+    reserve_stack: রিজার্ভ স্ট্যাক
+    decrease_height: উচ্চতা হ্রাস
+    send_to_workspace_8: ওয়ার্কস্পেস 8 এ প্রেরণ করুন
+    send_to_workspace_4: ওয়ার্কস্পেস 4 এ প্রেরণ করুন
+    increase_width: প্রস্থ বৃদ্ধি
+    switch_workspace_9: ওয়ার্কস্পেস 9 এ স্যুইচ করুন
+    switch_workspace_8: ওয়ার্কস্পেস 8 এ স্যুইচ করুন
+    send_to_workspace_5: ওয়ার্কস্পেস 5 এ প্রেরণ করুন
+    move_to_workspace_5: ওয়ার্কস্পেস 5 এ যান
+    send_to_workspace_0: ওয়ার্কস্পেস 0 এ প্রেরণ করুন
+    move_to_workspace_3: ওয়ার্কস্পেস 3 এ যান
+    switch_workspace_5: ওয়ার্কস্পেস 5 এ স্যুইচ করুন
+    focus_top: ফোকাস শীর্ষ
+    focus_right: ডান ফোকাস
+    send_to_workspace_9: ওয়ার্কস্পেস 9 এ প্রেরণ করুন
+    switch_workspace_3: ওয়ার্কস্পেস 3 এ স্যুইচ করুন
+    switch_workspace_4: ওয়ার্কস্পেস 4 এ স্যুইচ করুন
+    move_to_workspace_6: ওয়ার্কস্পেস 6 এ যান
+    increase_height: উচ্চতা বৃদ্ধি
+    reserve_bottom: রিজার্ভ নীচে
+    send_to_workspace_1: ওয়ার্কস্পেস 1 এ প্রেরণ করুন
+    switch_workspace_2: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
+    send_to_workspace_6: ওয়ার্কস্পেস 6 এ প্রেরণ করুন
+    move_to_workspace_9: ওয়ার্কস্পেস 9 এ যান
+    reserve_float: রিজার্ভ ফ্লোট
+    send_to_workspace_3: ওয়ার্কস্পেস 3 এ প্রেরণ করুন
+    switch_workspace_1: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
+    switch_workspace_7: ওয়ার্কস্পেস 7 এ স্যুইচ করুন
+    focus_bottom: ফোকাস নীচে
+    move_to_workspace_1: ওয়ার্কস্পেস 1 এ যান
+    switch_workspace_0: ওয়ার্কস্পেস 0 এ স্যুইচ করুন
+    move_to_workspace_0: ওয়ার্কস্পেস 0 এ যান
+    decrease_width: প্রস্থ হ্রাস
+    restore_sizes: আকার পুনরুদ্ধার
+    send_to_workspace_7: ওয়ার্কস্পেস 7 এ প্রেরণ করুন
+    move_to_workspace_4: ওয়ার্কস্পেস 4 এ যান
+    move_to_workspace_7: ওয়ার্কস্পেস 7 এ যান
+    reserve_right: রিজার্ভ রিজার
+    move_to_workspace_2: ওয়ার্কস্পেস 2 এ যান
+    focus_left: ফোকাস বাম
+    move_to_workspace_8: ওয়ার্কস্পেস 8 এ যান
+    reserve_top: রিজার্ভ শীর্ষ
+  enable_tooltip: >-
+    আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
+    অক্ষম করুন
+  enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
+inProgress: চলমান...
+cancel: বাতিল
+delete: মুছে ফেলা
+save: সংরক্ষণ
+open: খোলা
+quit: প্রস্থান
+loading: লোড হচ্ছে ...

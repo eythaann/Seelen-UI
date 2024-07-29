@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: ওপেন সেটিংস
+  media: মিডিয়া মডিউল যুক্ত করুন
+  start: স্টার্ট মডিউল যুক্ত করুন
+app_menu:
+  close_multiple: সব বন্ধ করা
+  run_as: প্রশাসক হিসাবে চালান
+  close: বন্ধ
+  open_file_location: নথির অবস্থান বের করা
+  pin_to_center: কেন্দ্রে পিন
+  pin_to_left: বাম দিকে পিন
+  unpin: আনপিন
+  pin: পিন
+  pin_to_right: ডান পিন
+  copy_handles: হ্যান্ডলগুলি অনুলিপি
+media_menu:
+  remove: মিডিয়া মডিউল সরান
+start_menu:
+  remove: স্টার্ট মডিউল সরান

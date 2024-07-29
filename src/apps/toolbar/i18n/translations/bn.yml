@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: যোগাযোগ
+    multimedia: মাল্টিমিডিয়া
+  master_volume: মাস্টার ভলিউম
+  input_device: প্রেরণকারী যন্ত্র
+  output_device: আউটপুট ডিভাইস
+  players: মিডিয়া প্লেয়ার
+network:
+  placeholder:
+    password: পাসওয়ার্ড
+  disconnect: সংযোগ বিচ্ছিন্ন
+  not_found: কোনও নেটওয়ার্ক পাওয়া যায় নি
+  connect: সংযুক্ত করুন
+  more: আরও নেটওয়ার্ক সেটিংস
+  hidden: লুকানো নেটওয়ার্ক
+settings:
+  app_settings: অ্যাপ সেটিংস
+  restart: আবার শুরু
+  sleep: ঘুম
+  title: সেটিংস
+  log_out: প্রস্থান
+  shutdown: শাটডাউন
+placeholder:
+  ethernet_connected: ইন্টারনেট সুবিধা
+  smart_charge: '- স্মার্ট চার্জ'
+  open_system_tray: ওপেন সিস্টেম ট্রে
+  battery_remaining: '% অবশিষ্ট'
+  settings: দ্রুত সেটিংস
+  ethernet_disconnected: কোনও ইন্টারনেট অ্যাক্সেস নেই
+  bluetooth_devices: ব্লুটুথ এবং ডিভাইস
+  volume: ভলিউম
+  open_user_folder: ব্যবহারকারী ফোল্ডারটি খুলুন
