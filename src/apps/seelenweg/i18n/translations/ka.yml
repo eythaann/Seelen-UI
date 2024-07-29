@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: ღია პარამეტრები
+  media: დაამატეთ მედია მოდული
+  start: დაამატეთ დაწყების მოდული
+app_menu:
+  run_as: Ადმინისტრატორის სახელით გაშვება
+  close_multiple: Დახურე ყველა
+  close: ახლო
+  pin_to_center: Pin to Center
+  open_file_location: გახსენით ფაილის ადგილმდებარეობა
+  copy_handles: ასლის სახელურები
+  pin_to_left: პინი მარცხნივ
+  pin_to_right: Pin მარჯვნივ
+  unpin: გაუქმება
+  pin: ქინძისთავი
+media_menu:
+  remove: წაშალეთ მედია მოდული
+start_menu:
+  remove: წაშალეთ დაწყების მოდული

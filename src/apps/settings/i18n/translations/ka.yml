@@ -1,0 +1,190 @@
+sides:
+  left: მარცხენა
+  top: თავი
+  right: სწორი
+  bottom: ძირი
+header:
+  labels:
+    general: გენერალი
+    monitors: მონიტორები
+    info: ინფორმაცია
+    developer: დეველოპერი ქალი
+    seelen_bar: ლამაზი პანელი
+    seelen_weg: დოკ/დავალების ზოლი
+    shortcuts: მალსახმობები
+    seelen_wm: ფანჯრის მენეჯერი
+    specific_apps: კონკრეტული პროგრამები
+start:
+  message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
+  title: კეთილი იყოს თქვენი მობრძანება!
+  message: >-
+    კეთილი იყოს თქვენი მობრძანება Seelen UI- ში, საბოლოო დესკტოპის გარემოში,
+    რომელშიც შედის Windows Windows- ის მენეჯერი, თქვენი Windows 11 გამოცდილების
+    გასაუმჯობესებლად! გამოიკვლიეთ ეფექტურობისა და მრავალმხრივი ახალი ეპოქა ჩვენი
+    ინტუიციური ინტერფეისით და მოწინავე მახასიათებლებით.
+general:
+  theme:
+    description: აღწერილობა
+    label: თემის ინფორმაცია
+    add: თემის დამატება
+    added: თემა უკვე დამატებულია
+    tags: საკვანძო ნიშნები
+    placeholder: აირჩიეთ თემა
+    enabled: ჩართულია თემები
+    author: ავტორი
+  language: Ენა
+  startup: გაშვებით გაშვებით?
+toolbar:
+  placeholder:
+    description: აღწერილობა
+    author: ავტორი
+    select: ინსტრუმენტთა პანელის სტრუქტურა
+  height: სიმაღლე
+  enable: ჩართეთ ლამაზი პანელი
+wm:
+  border:
+    enable: ფანჯრის საზღვრის ჩართვა
+    offset: სასაზღვრო ოფსეტური
+    width: საზღვრის სიგანე
+  description: აღწერილობა
+  author: ავტორი
+  enable: ფანჯრის მენეჯერის ჩართვა
+  disabled_windows10: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი Windows 10 -ისთვის.
+  resize_delta: დელტას ზომის შეცვლა (%)
+  space_between_containers: სივრცე კონტეინერებს შორის
+  workspace_offset: სამუშაო ადგილები ოფსეტური (ზღვარი)
+  workspace_padding: სამუშაო ადგილები padding
+  layout: გამოფენა
+weg:
+  items:
+    label: ნივთები
+    zoom_size: მასშტაბური ზომა (გამოიყენება თემებისთვის)
+    size: ნივთის ზომა
+    visible_separators: ხილული გამყოფი
+    gap: სივრცე ნივთებს შორის
+  auto_hide: Ავტომატური დამალვა
+  width: სიგანე
+  label: დოკ/დავალების ზოლი
+  padding: ბადება
+  margin: ზღვარი
+  gap: ხარპი
+  dock_side: დოკის მხარე
+  enable: ჩართეთ dock/taskbar
+devtools:
+  enable: ჩართეთ დეველოპერის ინსტრუმენტები
+  app_folders: აპლიკაციის საქაღალდეები
+  custom_config_file: ჩატვირთეთ პერსონალური კონფიგურაციის ფაილი
+  settings_file: პარამეტრების ფაილი
+  install_folder: ინსტალაციის საქაღალდე
+  data_folder: მონაცემთა საქაღალდე
+  load: დატვირთვა
+apps_configurations:
+  app:
+    options:
+      unmanage: გაუგებრობა
+      pinned: დადგენილება
+      force: ძალის მართვა
+      float: ტივტივი
+    category: კატეგორია
+    ok_create: Შექმნა
+    bindings: სავალდებულო (შენიშვნა საჭიროა ორივე ვარიანტი)
+    category_placeholder: არაფერი
+    workspace_placeholder: არაფერი
+    options_label: დამატებითი პარამეტრები
+    ok_edit: განახლება
+    title_edit: რედაქტირება {{სახელი}}
+    workspace: სამუშაო ადგილი
+    ok_readonly: რედაქტირება როგორც ახალი
+    title_create: '{{სახელის შექმნა}}'
+    name: სახელი
+    title_readonly: ნახვა {{სახელი}}
+    monitor_placeholder: არაფერი
+    monitor: შემოწმება
+  identifier:
+    and: და
+    id: პირადობა
+    add_block: ბლოკის დამატება
+    negation: უარყოფითი შესატყვისი
+    kind: იდენტიფიცირება
+    matching_strategy: შესაბამისი სტრატეგია
+    remove: წაშალეთ ბლოკი
+    or: ან
+  import: იმპორტი
+  export: ექსპორტი
+  confirm_delete: დარწმუნებული ხართ, რომ გსურთ ამ კონფიგურაციის წაშლა?
+  search: ძებნა
+  confirm_delete_title: დაადასტურეთ წაშლა
+  bundled_msg: >-
+    ეს შეფუთული კონფიგურაციები არ არის რედაქტირებული და შექმნილია იმისთვის, რომ
+    საუკეთესო გამოცდილება მოგაწოდოთ პერსონალიზაციის გარეშე. ისინი ავტომატურად
+    კონფიგურაციას უკეთებენ თქვენთვის ყველაზე გავრცელებულ პროგრამებს.
+  bundled_title: აპლიკაციის კონფიგურაცია შეფუთულია Seelen- ით
+  swap: გაცვლა
+  delete: წაშლა
+  new: ახალი
+extras:
+  version: ვერსია
+  exit: დატოვება/გასვლა
+  discord: უთანასწორობა
+  github: გითუბ
+  relaunch: გაუქმება
+  links: ოფიციალური ბმულები
+shortcuts:
+  labels:
+    move_to_workspace_3: გადავიდეთ სამუშაო ადგილებზე 3
+    increase_width: სიგანის გაზრდა
+    send_to_workspace_1: გაგზავნეთ სამუშაო სივრცეში 1
+    reserve_bottom: სარეზერვო ქვედა
+    reserve_left: ნაკრძალი დარჩა
+    move_to_workspace_4: გადავიდეთ სამუშაო ადგილებზე 4
+    reserve_stack: სარეზერვო დასტა
+    focus_right: ფოკუსირება სწორად
+    move_to_workspace_8: გადავიდეთ სამუშაო ადგილებზე 8
+    switch_workspace_0: გადადით სამუშაო ადგილებზე 0
+    switch_workspace_2: გადადით სამუშაო ადგილებზე 2
+    switch_workspace_9: გადადით სამუშაო ადგილებზე 9
+    focus_latest: ფოკუსირება უახლესი
+    move_to_workspace_1: გადავიდეთ სამუშაო სივრცეში 1
+    send_to_workspace_2: გაგზავნეთ სამუშაო ადგილებზე 2
+    focus_top: ფოკუსირება
+    restore_sizes: აღადგინეთ ზომები
+    send_to_workspace_6: გაგზავნეთ სამუშაო სივრცეში 6
+    decrease_width: სიგანის შემცირება
+    send_to_workspace_3: გაგზავნეთ სამუშაო ადგილებზე 3
+    switch_workspace_3: გადადით სამუშაო ადგილებზე 3
+    move_to_workspace_6: გადადით სამუშაო ადგილებზე 6
+    send_to_workspace_4: გაგზავნეთ სამუშაო სივრცეში 4
+    switch_workspace_6: გადადით სამუშაო ადგილებზე 6
+    reserve_top: სარეზერვო ზედა
+    reserve_right: უფლება
+    send_to_workspace_7: გაგზავნეთ სამუშაო ადგილებზე 7
+    focus_bottom: ფოკუსირება
+    switch_workspace_4: გადადით სამუშაო ადგილებზე 4
+    focus_left: ფოკუსირება მარცხნივ
+    switch_workspace_1: გადადით სამუშაო ადგილებზე 1
+    move_to_workspace_2: გადავიდეთ სამუშაო ადგილებზე 2
+    send_to_workspace_9: გაგზავნეთ სამუშაო სივრცეში 9
+    move_to_workspace_0: გადადით სამუშაო ადგილებზე 0
+    decrease_height: სიმაღლის შემცირება
+    send_to_workspace_5: გაგზავნეთ სამუშაო სივრცეში 5
+    move_to_workspace_5: გადადით სამუშაო ადგილებზე 5
+    switch_workspace_8: გადადით სამუშაო ადგილებზე 8
+    switch_workspace_7: გადადით სამუშაო ადგილებზე 7
+    send_to_workspace_0: გაგზავნეთ სამუშაო სივრცეში 0
+    move_to_workspace_7: გადადით სამუშაო ადგილებზე 7
+    increase_height: სიმაღლის გაზრდა
+    move_to_workspace_9: გადავიდეთ სამუშაო სივრცეში 9
+    send_to_workspace_8: გაგზავნეთ სამუშაო სივრცეში 8
+    switch_workspace_5: გადადით სამუშაო ადგილებზე 5
+    reserve_float: სარეზერვო float
+  enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
+  enable_tooltip: >-
+    გამორთეთ, თუ თქვენ განახორციელებთ საკუთარ მალსახმობებს Seelen Core API– ს
+    გამოყენებით
+save: Გადარჩენა
+inProgress: Პროგრესირებს...
+loading: Ჩატვირთვა...
+quit: მიტოვება
+delete: წაშლა
+open: გახსნა
+cancel: გაუქმება

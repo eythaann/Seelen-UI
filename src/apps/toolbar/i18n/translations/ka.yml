@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: კომუნიკაცია
+    multimedia: მულტიმედია
+  input_device: შეყვანის მოწყობილობა
+  master_volume: სამაგისტრო ტომი
+  output_device: გამომავალი მოწყობილობა
+  players: მედიის მოთამაშეები
+network:
+  placeholder:
+    password: პაროლი
+  not_found: ქსელები ვერ მოიძებნა
+  disconnect: გათიშვა
+  connect: დაკავშირება
+  more: მეტი ქსელის პარამეტრები
+  hidden: დამალული ქსელი
+settings:
+  restart: Რესტარტი
+  shutdown: Გათიშვა
+  sleep: ძილი
+  log_out: შესვლა
+  app_settings: პროგრამის პარამეტრები
+  title: პარამეტრები
+placeholder:
+  bluetooth_devices: Bluetooth & მოწყობილობები
+  battery_remaining: დარჩენილი
+  ethernet_connected: ინტერნეტი
+  open_user_folder: გახსენით მომხმარებლის საქაღალდე
+  open_system_tray: ღია სისტემის უჯრა
+  volume: ტომი
+  smart_charge: '- ჭკვიანი მუხტი'
+  settings: სწრაფი პარამეტრები
+  ethernet_disconnected: ინტერნეტი არ არის
