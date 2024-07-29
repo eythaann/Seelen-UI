@@ -1,0 +1,189 @@
+sides:
+  left: بائیں
+  right: دائیں
+  bottom: نیچے
+  top: اوپر
+header:
+  labels:
+    info: معلومات
+    seelen_weg: گودی/ٹاسک بار
+    developer: ڈویلپر
+    general: جنرل
+    seelen_bar: فینسی ٹول بار
+    specific_apps: مخصوص ایپس
+    seelen_wm: ونڈو مینیجر
+    shortcuts: شارٹ کٹ
+    monitors: مانیٹر
+start:
+  title: خوش آمدید!
+  message_accent: اپنی پیداواری صلاحیت کو انداز کے ساتھ بہتر بنائیں!
+  message: >-
+    آپ کے ونڈوز 11 کے تجربے کو بڑھانے کے لئے شامل ٹائلنگ ونڈوز مینیجر کے ساتھ
+    حتمی ڈیسک ٹاپ ماحول ، سیلین UI میں خوش آمدید! ہمارے بدیہی انٹرفیس اور جدید
+    خصوصیات کے ساتھ کارکردگی اور ملٹی ٹاسکنگ کے ایک نئے دور کو دریافت کریں۔
+general:
+  theme:
+    enabled: قابل تھیمز
+    author: مصنف
+    add: تھیم شامل کریں
+    label: تھیم کی معلومات
+    tags: ٹیگز
+    added: تھیم پہلے ہی شامل کیا گیا ہے
+    description: تفصیل
+    placeholder: تھیم منتخب کریں
+  language: زبان
+  startup: اسٹارٹ اپ پر چلائیں؟
+toolbar:
+  placeholder:
+    description: تفصیل
+    author: مصنف
+    select: ٹول بار کا ڈھانچہ
+  enable: فینسی ٹول بار کو فعال کریں
+  height: اونچائی
+wm:
+  border:
+    enable: ونڈو کی بارڈر کو فعال کریں
+    width: بارڈر کی چوڑائی
+    offset: بارڈر آفسیٹ
+  layout: ترتیب
+  description: تفصیل
+  workspace_offset: ورک اسپیس آفسیٹ (مارجن)
+  space_between_containers: کنٹینرز کے درمیان جگہ
+  disabled_windows10: ونڈو مینیجر ونڈوز 10 کے لئے دستیاب نہیں ہے۔
+  resize_delta: ڈیلٹا کا سائز (٪)
+  author: مصنف
+  enable: ونڈو مینیجر کو فعال کریں
+  workspace_padding: ورک اسپیس پیڈنگ
+weg:
+  items:
+    label: اشیاء
+    zoom_size: زوم سائز (تھیمز کے لئے استعمال کیا جاتا ہے)
+    size: آئٹم کا سائز
+    gap: اشیاء کے درمیان جگہ
+    visible_separators: مرئی جداکار
+  auto_hide: خود بخود چھپ جانا
+  margin: مارجن
+  dock_side: گودی کی طرف
+  gap: گیپ
+  padding: بھرتی
+  width: چوڑائی
+  enable: گودی/ٹاسک بار کو فعال کریں
+  label: گودی/ٹاسک بار
+devtools:
+  custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
+  data_folder: ڈیٹا فولڈر
+  load: بوجھ
+  settings_file: ترتیبات فائل
+  enable: ڈویلپر ٹولز کو فعال کریں
+  install_folder: انسٹالیشن فولڈر
+  app_folders: ایپ فولڈرز
+apps_configurations:
+  app:
+    options:
+      pinned: پن
+      unmanage: غیر منظم
+      float: فلوٹ
+      force: فورس کا انتظام کریں
+    category: قسم
+    ok_edit: اپ ڈیٹ
+    ok_create: بنانا
+    bindings: بائنڈنگ (نوٹ دونوں اختیارات کی ضرورت ہے)
+    title_readonly: '{{نام}} دیکھ رہا ہے'
+    workspace: ورک اسپیس
+    monitor_placeholder: کوئی نہیں
+    ok_readonly: نئے کے طور پر ترمیم کریں
+    category_placeholder: کوئی نہیں
+    monitor: مانیٹر
+    options_label: اضافی اختیارات
+    name: نام
+    title_edit: ترمیم {{نام}}
+    workspace_placeholder: کوئی نہیں
+    title_create: '{{نام}} بنانا'
+  identifier:
+    and: اور
+    remove: بلاک کو حذف کریں
+    kind: بذریعہ شناخت کریں
+    add_block: بلاک شامل کریں
+    id: شناخت کنندہ
+    or: یا
+    matching_strategy: مماثل حکمت عملی
+    negation: نفی مماثل
+  new: نئی
+  search: تلاش
+  swap: تبادلہ
+  export: برآمد
+  delete: حذف کریں
+  bundled_msg: >-
+    یہ بنڈل تشکیلات قابل تدوین نہیں ہیں اور آپ کو حسب ضرورت کے بغیر بہترین تجربہ
+    فراہم کرنے کے لئے ڈیزائن کی گئی ہیں۔ وہ خود بخود آپ کے لئے سب سے عام ایپلی
+    کیشنز کو تشکیل دیتے ہیں۔
+  confirm_delete: کیا آپ واقعی اس ترتیب کو حذف کرنا چاہتے ہیں؟
+  bundled_title: ایپ کنفیگ سیلن کے ساتھ بنڈل
+  import: درآمد
+  confirm_delete_title: حذف کرنے کی تصدیق کریں
+extras:
+  links: سرکاری لنکس
+  discord: تنازعات
+  relaunch: دوبارہ لانچ
+  github: گٹ ہب
+  version: ورژن
+  exit: چھوڑ دیں/باہر نکلیں
+shortcuts:
+  labels:
+    reserve_stack: ریزرو اسٹیک
+    move_to_workspace_4: ورک اسپیس 4 میں منتقل کریں
+    reserve_top: ریزرو ٹاپ
+    move_to_workspace_5: ورک اسپیس 5 میں منتقل کریں
+    send_to_workspace_2: ورک اسپیس 2 پر بھیجیں
+    switch_workspace_8: ورک اسپیس 8 پر سوئچ کریں
+    decrease_height: اونچائی میں کمی
+    switch_workspace_2: ورک اسپیس 2 پر سوئچ کریں
+    reserve_float: ریزرو فلوٹ
+    send_to_workspace_1: ورک اسپیس 1 کو بھیجیں
+    focus_latest: تازہ ترین توجہ مرکوز کریں
+    send_to_workspace_5: ورک اسپیس 5 کو بھیجیں
+    increase_width: چوڑائی میں اضافہ
+    focus_right: صحیح توجہ مرکوز کریں
+    move_to_workspace_8: ورک اسپیس 8 میں منتقل کریں
+    switch_workspace_6: ورک اسپیس 6 پر سوئچ کریں
+    switch_workspace_9: ورک اسپیس 9 پر سوئچ کریں
+    focus_bottom: فوکس نیچے
+    send_to_workspace_8: ورک اسپیس 8 کو بھیجیں
+    move_to_workspace_3: ورک اسپیس 3 میں منتقل کریں
+    send_to_workspace_0: ورک اسپیس 0 پر بھیجیں
+    focus_top: فوکس ٹاپ
+    reserve_left: ریزرو بائیں
+    send_to_workspace_9: ورک اسپیس 9 کو بھیجیں
+    focus_left: فوکس بائیں
+    send_to_workspace_7: ورک اسپیس 7 کو بھیجیں
+    move_to_workspace_6: ورک اسپیس 6 میں منتقل کریں
+    switch_workspace_5: ورک اسپیس 5 پر سوئچ کریں
+    send_to_workspace_3: ورک اسپیس 3 کو بھیجیں
+    reserve_bottom: ریزرو نیچے
+    move_to_workspace_0: ورک اسپیس 0 میں منتقل کریں
+    switch_workspace_1: ورک اسپیس 1 پر سوئچ کریں
+    switch_workspace_4: ورک اسپیس 4 پر سوئچ کریں
+    move_to_workspace_1: ورک اسپیس 1 میں منتقل کریں
+    switch_workspace_3: ورک اسپیس 3 پر سوئچ کریں
+    switch_workspace_7: ورک اسپیس 7 پر سوئچ کریں
+    reserve_right: ٹھیک ہے
+    switch_workspace_0: ورک اسپیس 0 پر سوئچ کریں
+    move_to_workspace_7: ورک اسپیس 7 میں منتقل کریں
+    send_to_workspace_6: ورک اسپیس 6 کو بھیجیں
+    increase_height: اونچائی میں اضافہ
+    decrease_width: چوڑائی کو کم کرنا
+    send_to_workspace_4: ورک اسپیس 4 کو بھیجیں
+    restore_sizes: سائز کو بحال کریں
+    move_to_workspace_9: ورک اسپیس 9 میں منتقل کریں
+    move_to_workspace_2: ورک اسپیس 2 میں منتقل کریں
+  enable_tooltip: >-
+    اگر آپ سیلین کور API کا استعمال کرتے ہوئے اپنے شارٹ کٹ کو نافذ کریں گے تو
+    غیر فعال کریں
+  enable: مربوط شارٹ کٹ (اے ایچ کے) کو فعال کریں
+inProgress: کام جاری ہے...
+save: بچت کریں
+delete: حذف کریں
+quit: چھوڑ دیں
+loading: لوڈنگ ...
+cancel: منسوخ کریں
+open: کھلا
