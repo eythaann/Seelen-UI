@@ -1,0 +1,19 @@
+taskbar_menu:
+  start: પ્રારંભ મોડ્યુલ ઉમેરો
+  settings: ખુલ્લી સેટિંગ્સ
+  media: મીડિયા મોડ્યુલ ઉમેરો
+app_menu:
+  close: બંધ
+  pin_to_center: કેન્દ્રથી પિનથી કેન્દ્રમાં
+  pin_to_left: ડાબી બાજુ
+  run_as: વહીવટકર્તા તરીકે ચલાવો
+  copy_handles: નકલ
+  close_multiple: બંધ કરવું
+  pin_to_right: જમણી બાજુ
+  unpin: ખોળવું
+  open_file_location: ફાઇલ સ્થાન ખોલો
+  pin: પિન
+media_menu:
+  remove: મીડિયા મોડ્યુલ દૂર કરો
+start_menu:
+  remove: પ્રારંભ મોડ્યુલ દૂર કરો

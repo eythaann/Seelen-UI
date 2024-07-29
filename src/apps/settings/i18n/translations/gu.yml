@@ -1,0 +1,190 @@
+sides:
+  right: અધિકાર
+  left: ડાબી
+  top: ટોચ
+  bottom: તળિયે
+header:
+  labels:
+    seelen_weg: ડોક/ટાસ્કબાર
+    monitors: મોનિટર
+    general: જનરલ
+    developer: વિકાસકર્તા
+    seelen_bar: ફેન્સી ટૂલબાર
+    shortcuts: શૉર્ટકટ્સ
+    info: માહિતી
+    specific_apps: વિશિષ્ટ એપ્લિકેશનો
+    seelen_wm: વિન્ડો મેનેજર
+start:
+  title: સ્વાગત છે!
+  message_accent: શૈલી સાથે તમારી ઉત્પાદકતાને ઑપ્ટિમાઇઝ કરો!
+  message: >-
+    તમારા Windows 11 અનુભવને વધારવા માટે સમાવિષ્ટ ટાઇલિંગ વિન્ડોઝ મેનેજર સાથે
+    અંતિમ ડેસ્કટોપ પર્યાવરણ, સીલેન UI માં આપનું સ્વાગત છે! અમારા સાહજિક ઇન્ટરફેસ
+    અને અદ્યતન સુવિધાઓ સાથે કાર્યક્ષમતા અને મલ્ટિટાસ્કિંગના નવા યુગનું અન્વેષણ
+    કરો.
+general:
+  theme:
+    placeholder: થીમ પસંદ કરો
+    description: વર્ણન
+    author: લેખક
+    tags: ટૅગ્સ
+    added: થીમ પહેલેથી જ ઉમેરવામાં આવી છે
+    enabled: સક્ષમ થીમ્સ
+    add: થીમ ઉમેરો
+    label: થીમ માહિતી
+  language: ભાષા
+  startup: સ્ટાર્ટઅપ પર ચલાવો?
+toolbar:
+  placeholder:
+    author: લેખક
+    description: વર્ણન
+    select: ટૂલબાર માળખું
+  height: ઊંચાઈ
+  enable: ફેન્સી ટૂલબાર સક્ષમ કરો
+wm:
+  border:
+    width: સરહદની પહોળાઈ
+    offset: બોર્ડર ઓફસેટ
+    enable: વિન્ડોની બોર્ડર સક્ષમ કરો
+  layout: લેઆઉટ
+  space_between_containers: કન્ટેનર વચ્ચે જગ્યા
+  enable: વિન્ડો મેનેજરને સક્ષમ કરો
+  workspace_offset: વર્કસ્પેસ ઓફસેટ (માર્જિન)
+  workspace_padding: વર્કસ્પેસ પેડિંગ
+  disabled_windows10: વિન્ડોઝ 10 માટે વિન્ડો મેનેજર ઉપલબ્ધ નથી.
+  description: વર્ણન
+  author: લેખક
+  resize_delta: ડેલ્ટાનું કદ બદલો (%)
+weg:
+  items:
+    label: વસ્તુઓ
+    visible_separators: દૃશ્યમાન વિભાજક
+    zoom_size: ઝૂમ કરેલ કદ (થીમ્સ માટે વપરાયેલ)
+    size: વસ્તુનું કદ
+    gap: વસ્તુઓ વચ્ચે જગ્યા
+  label: ડોક/ટાસ્કબાર
+  auto_hide: સ્વતઃ છુપાવો
+  margin: માર્જિન
+  padding: ગાદી
+  enable: ડોક/ટાસ્કબારને સક્ષમ કરો
+  width: પહોળાઈ
+  gap: ગેપ
+  dock_side: ડોક સાઇડ
+devtools:
+  install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
+  custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો
+  enable: વિકાસકર્તા સાધનો સક્ષમ કરો
+  settings_file: સેટિંગ્સ ફાઇલ
+  app_folders: એપ્લિકેશન ફોલ્ડર્સ
+  load: લોડ
+  data_folder: ડેટા ફોલ્ડર
+apps_configurations:
+  app:
+    options:
+      float: ફ્લોટ
+      pinned: પિન કરેલ
+      unmanage: અનમેનેજ કરો
+      force: ફોર્સ મેનેજ કરો
+    options_label: વધારાના વિકલ્પો
+    title_create: '{{name}} બનાવી રહ્યાં છીએ'
+    workspace_placeholder: કોઈ નહિ
+    workspace: વર્કસ્પેસ
+    category_placeholder: કોઈ નહિ
+    monitor_placeholder: કોઈ નહિ
+    name: નામ
+    ok_readonly: નવા તરીકે સંપાદિત કરો
+    monitor: મોનીટર
+    category: શ્રેણી
+    ok_edit: અપડેટ કરો
+    title_readonly: '{{name}} જોઈ રહ્યાં છીએ'
+    bindings: બંધનકર્તા (નોંધો કે બંને વિકલ્પો જરૂરી છે)
+    title_edit: સંપાદન {{name}}
+    ok_create: બનાવો
+  identifier:
+    remove: બ્લોક કાઢી નાખો
+    add_block: બ્લોક ઉમેરો
+    negation: નેગેટ મેચિંગ
+    and: અને
+    or: અથવા
+    kind: દ્વારા ઓળખો
+    matching_strategy: મેચિંગ સ્ટ્રેટેજી
+    id: ઓળખકર્તા
+  new: નવી
+  swap: સ્વેપ
+  search: શોધો
+  import: આયાત કરો
+  bundled_title: સીલેન સાથે બંડલ કરેલ એપ્લિકેશન રૂપરેખા
+  export: નિકાસ કરો
+  bundled_msg: >-
+    આ બંડલ કરેલ રૂપરેખાંકનો સંપાદનયોગ્ય નથી અને કસ્ટમાઇઝેશન વિના તમને શ્રેષ્ઠ
+    અનુભવ પ્રદાન કરવા માટે રચાયેલ છે. તેઓ આપમેળે તમારા માટે સૌથી સામાન્ય
+    એપ્લિકેશનોને ગોઠવે છે.
+  confirm_delete_title: કાઢી નાખવાની પુષ્ટિ કરો
+  delete: કાઢી નાખો
+  confirm_delete: શું તમે ખરેખર આ ગોઠવણી/ઓ કાઢી નાખવા માંગો છો?
+extras:
+  github: GitHub
+  version: સંસ્કરણ
+  links: સત્તાવાર લિંક્સ
+  exit: છોડો/બહાર નીકળો
+  discord: વિખવાદ
+  relaunch: ફરીથી લોંચ કરો
+shortcuts:
+  labels:
+    send_to_workspace_2: વર્કસ્પેસ 2 પર મોકલો
+    send_to_workspace_1: વર્કસ્પેસ 1 પર મોકલો
+    switch_workspace_0: વર્કસ્પેસ 0 પર સ્વિચ કરો
+    switch_workspace_1: વર્કસ્પેસ 1 પર સ્વિચ કરો
+    switch_workspace_6: વર્કસ્પેસ 6 પર સ્વિચ કરો
+    send_to_workspace_7: વર્કસ્પેસ પર મોકલો 7
+    send_to_workspace_5: વર્કસ્પેસ 5 પર મોકલો
+    send_to_workspace_9: વર્કસ્પેસ પર મોકલો 9
+    move_to_workspace_2: વર્કસ્પેસ 2 પર ખસેડો
+    move_to_workspace_5: વર્કસ્પેસ 5 પર જાઓ
+    focus_latest: ફોકસ લેટેસ્ટ
+    send_to_workspace_3: વર્કસ્પેસ પર મોકલો 3
+    move_to_workspace_4: વર્કસ્પેસ 4 પર ખસેડો
+    restore_sizes: કદ પુનઃસ્થાપિત કરો
+    reserve_float: રિઝર્વ ફ્લોટ
+    focus_right: જમણે ફોકસ કરો
+    increase_height: ઊંચાઈ વધારો
+    move_to_workspace_9: વર્કસ્પેસ પર ખસેડો 9
+    move_to_workspace_7: વર્કસ્પેસ 7 પર જાઓ
+    send_to_workspace_4: વર્કસ્પેસ 4 પર મોકલો
+    send_to_workspace_0: વર્કસ્પેસ 0 પર મોકલો
+    focus_left: ડાબે ફોકસ કરો
+    reserve_stack: અનામત સ્ટેક
+    switch_workspace_5: વર્કસ્પેસ 5 પર સ્વિચ કરો
+    reserve_left: ડાબી બાજુ અનામત રાખો
+    move_to_workspace_6: વર્કસ્પેસ 6 પર જાઓ
+    reserve_top: અનામત ટોચ
+    decrease_height: ઊંચાઈ ઘટાડો
+    move_to_workspace_1: વર્કસ્પેસ 1 પર ખસેડો
+    reserve_bottom: અનામત નીચે
+    send_to_workspace_6: વર્કસ્પેસ પર મોકલો 6
+    switch_workspace_8: વર્કસ્પેસ 8 પર સ્વિચ કરો
+    move_to_workspace_8: વર્કસ્પેસ 8 પર જાઓ
+    switch_workspace_2: વર્કસ્પેસ 2 પર સ્વિચ કરો
+    focus_top: ફોકસ ટોપ
+    move_to_workspace_0: વર્કસ્પેસ 0 પર ખસેડો
+    decrease_width: પહોળાઈ ઘટાડો
+    move_to_workspace_3: વર્કસ્પેસ 3 પર ખસેડો
+    increase_width: પહોળાઈ વધારો
+    switch_workspace_4: વર્કસ્પેસ 4 પર સ્વિચ કરો
+    send_to_workspace_8: વર્કસ્પેસ 8 પર મોકલો
+    reserve_right: અનામત અધિકાર
+    switch_workspace_9: વર્કસ્પેસ 9 પર સ્વિચ કરો
+    switch_workspace_3: વર્કસ્પેસ 3 પર સ્વિચ કરો
+    focus_bottom: ફોકસ બોટમ
+    switch_workspace_7: વર્કસ્પેસ 7 પર સ્વિચ કરો
+  enable_tooltip: >-
+    જો તમે સીલેન કોર એપીઆઈનો ઉપયોગ કરીને તમારા પોતાના શોર્ટકટ્સનો અમલ કરશો તો
+    અક્ષમ કરો
+  enable: સંકલિત શૉર્ટકટ્સ સક્ષમ કરો (ahk)
+open: ખુલ્લા
+delete: કાઢી નાખો
+save: સાચવો
+loading: લોડ કરી રહ્યું છે...
+inProgress: ચાલુ છે...
+cancel: રદ કરો
+quit: છોડો
