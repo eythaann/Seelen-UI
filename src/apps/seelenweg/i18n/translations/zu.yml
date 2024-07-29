@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Faka imodyuli yabezindaba
+  settings: Vula Izilungiselelo
+  start: Faka imodyuli yokuqala
+app_menu:
+  pin_to_center: Pin esikhungweni
+  close: Ngokuminyanisa
+  close_multiple: Vala konke
+  open_file_location: Vula Indawo yefayela
+  pin_to_left: Pin kwesokunxele
+  pin_to_right: Pin kwesokudla
+  run_as: Gijima njengomlawuli
+  copy_handles: Kopisha izibambo
+  unpin: Unpin
+  pin: Isipeletu
+media_menu:
+  remove: Susa imodyuli yabezindaba
+start_menu:
+  remove: Susa imodyuli yokuqala

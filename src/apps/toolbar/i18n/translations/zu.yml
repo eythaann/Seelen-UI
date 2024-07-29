@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Ukuxoxisana
+  output_device: I-Output deturment
+  players: Abadlali beMedia
+  master_volume: '-Nqubenzi'
+  input_device: Idivayisi yokufaka
+network:
+  placeholder:
+    password: Igama lokuvunyelwa ukungena endaweni ethile
+  hidden: Inethiwekhi efihliwe
+  connect: Hlangana
+  more: Izilungiselelo eziningi zenethiwekhi
+  not_found: Awekho amanethiwekhi atholakele
+  disconnect: Thukulula
+settings:
+  shutdown: Vala shaqa
+  log_out: Phuma
+  restart: Qalanisa
+  title: Amasethingi
+  app_settings: Izilungiselelo zohlelo lokusebenza
+  sleep: Ukulala
+placeholder:
+  settings: Izilungiselelo ezisheshayo
+  open_system_tray: I-Open System Tray
+  ethernet_connected: Ukufinyelela i-Inthanethi
+  battery_remaining: '% okusele'
+  bluetooth_devices: I-Bluetooth & Amadivayisi
+  volume: Ukuvimbanisa
+  smart_charge: '- Ukushaja okuhle'
+  open_user_folder: Vula ifolda yomsebenzisi
+  ethernet_disconnected: Akukho ukufinyelela kwe-inthanethi

@@ -1,0 +1,190 @@
+sides:
+  bottom: Esinqeni
+  top: Isihloko
+  left: '-Bunxele'
+  right: Ngakwesokudla
+header:
+  labels:
+    seelen_wm: Imenenja yewindows
+    seelen_bar: I-Fancy Toolbar
+    seelen_weg: Dock / taskbar
+    general: Jwayelekile
+    developer: Konjiniyela
+    info: Ulwazi
+    specific_apps: Izinhlelo zokusebenza ezikhethekile
+    monitors: Ukuqapha
+    shortcuts: Amashoshothi
+start:
+  message: >-
+    Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
+    ofakiwe wokuthuthukisa isipiliyoni sakho seWindows 11! Hlola inkathi entsha
+    yokusebenza kahle kanye ne-multitasking nge-interface yethu enembile nezici
+    ezithuthukile.
+  message_accent: Lungiselela umkhiqizo wakho ngesitayela!
+  title: Uyemukelwa!
+general:
+  theme:
+    description: Ukufanisa
+    add: Engeza itimu
+    added: Itimu esevele ingezwe
+    author: Umlobi
+    enabled: Izindikimba ezinikwe amandla
+    label: Imininingwane yetimu
+    placeholder: Khetha isihloko
+    tags: Amathegi
+  language: Ulimi
+  startup: Gijima ekuqaleni?
+toolbar:
+  placeholder:
+    author: Umlobi
+    description: Ukufanisa
+    select: Isakhiwo samathuluzi
+  height: Ubude
+  enable: Nika amandla amathuluzi e-fancy
+wm:
+  border:
+    enable: Nika amandla umngcele wewindi
+    width: Ububanzi bomngcele
+    offset: Umngcele we-Offset
+  resize_delta: Shintsha usayizi DEDTA (%)
+  layout: Isakhiwo
+  workspace_offset: Izindawo zokusebenzela (Margins)
+  author: Umlobi
+  space_between_containers: Isikhala phakathi kweziqukathi
+  description: Ukufanisa
+  disabled_windows10: Imenenja yewindows ayitholakali ngeWindows 10.
+  workspace_padding: I-Workespashe Padding
+  enable: Nika amandla umphathi wewindi
+weg:
+  items:
+    size: Usayizi wento
+    gap: Isikhala phakathi kwezinto
+    visible_separators: Abahlukanisi ababonakalayo
+    label: Into
+    zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
+  width: Ububanzi
+  gap: Insungubezi
+  dock_side: Uhlangothi lwedokodo
+  enable: Nika amandla i-Dock / Taskbar
+  auto_hide: Fihla okuzenzakalelayo
+  padding: Idilidi
+  margin: Image
+  label: Dock / taskbar
+devtools:
+  install_folder: Ifolda yokufaka
+  data_folder: Ifolda yedatha
+  settings_file: Ifayela lezilungiselelo
+  load: Thwala
+  app_folders: Amafolda wohlelo lokusebenza
+  custom_config_file: Layisha ifayela le-config yangokwezifiso
+  enable: Nika amandla amathuluzi onjiniyela
+apps_configurations:
+  app:
+    options:
+      unmanage: Ugeage
+      pinned: Uphinisiwe
+      force: Cindezela Phatha
+      float: Thwala amaphiko
+    bindings: Ukubopha (inothi zombili izinketho ziyadingeka)
+    title_readonly: Ukubuka {{igama}}
+    title_create: Ukudala {{igama}}
+    ok_readonly: Hlela njengomusha
+    category_placeholder: Namunye
+    monitor: Qapha
+    name: Ibizo
+    options_label: Izinketho Ezengeziwe
+    ok_edit: Buyekeza
+    monitor_placeholder: Namunye
+    workspace_placeholder: Namunye
+    category: Uhlobo
+    workspace: Indawo
+    title_edit: Ukuhleleka {{igama}}
+    ok_create: Dala
+  identifier:
+    remove: Susa ibhulokhi
+    matching_strategy: Isu lokuqondanisa
+    negation: Hlukana nokufanisa
+    add_block: Faka ibhlokhi
+    kind: Khomba ngu
+    or: Noma
+    and: Na-
+    id: Isithombe esithi
+  export: Thumela kwamanye amazwe
+  import: Ngenisa ezweni
+  new: '-Kwanamuhla'
+  delete: Cisha
+  bundled_title: I-App Config ehlanganiswe ne-Seleen
+  confirm_delete: Uqinisekile ukuthi ufuna ukususa lolu hlelo / s?
+  confirm_delete_title: Qinisekisa ukususa
+  swap: Shintshela
+  search: Sesha
+  bundled_msg: >-
+    Lokhu kulungiswa okuhlanganisiwe akuhlelekile futhi kuklanyelwe ukukunikeza
+    okuhlangenwe nakho okuhle kakhulu ngaphandle kokwenza ngokwezifiso.
+    Balungiselela ngokuzenzakalelayo izicelo ezivame kakhulu kuwe.
+extras:
+  links: Izixhumanisi ezisemthethweni
+  relaunch: Qondisa amandla ehlehliseyo
+  exit: Quit / Phuma
+  version: Ukuhumushela
+  discord: Ukunqaba
+  github: Umuthi othile kiki
+shortcuts:
+  labels:
+    focus_right: Gxila kwesokudla
+    reserve_top: Beka phezulu
+    reserve_right: Ukubhuka kwesokudla
+    focus_top: Gxila phezulu
+    move_to_workspace_0: Hambisa ku-Workpace 0
+    increase_width: Khulisa Ububanzi
+    switch_workspace_9: Shintshela ku-Workpace 9
+    increase_height: Khuphula ukuphakama
+    restore_sizes: Buyisela osayizi
+    send_to_workspace_7: Thumela kwi-Workpace 7
+    move_to_workspace_4: Hambisa ku-Workpace 4
+    send_to_workspace_6: Thumela ku-Workpace 6
+    move_to_workspace_7: Hambisa ku-Workpace 7
+    move_to_workspace_2: Hambisa ku-Workpace 2
+    decrease_width: Yehlisa Ububanzi
+    focus_latest: Gxila kwakamuva
+    switch_workspace_5: Shintshela ku-Workpace 5
+    send_to_workspace_0: Thumela ku-Workpace 0
+    decrease_height: Yehlisa ukuphakama
+    move_to_workspace_9: Hambisa ku-Workpace 9
+    switch_workspace_2: Shintshela ku-Workpace 2
+    send_to_workspace_4: Thumela kwi-Workpace 4
+    switch_workspace_0: Shintshela ku-Workpace 0
+    send_to_workspace_8: Thumela ku-Workpace 8
+    reserve_left: Indawo esele
+    focus_left: Gxila kwesokunxele
+    move_to_workspace_3: Hambisa ku-Workpace 3
+    move_to_workspace_1: Hambisa ku-Workpace 1
+    reserve_bottom: Ukubhuka phansi
+    reserve_stack: Isitaki
+    move_to_workspace_6: Hambisa ku-Workpace 6
+    send_to_workspace_1: Thumela kwi-Workpace 1
+    switch_workspace_7: Shintshela ku-Workpace 7
+    switch_workspace_3: Shintshela ku-Workpace 3
+    move_to_workspace_8: Hambisa ku-Workpace 8
+    focus_bottom: Gxila phansi
+    move_to_workspace_5: Hambisa ku-Workpace 5
+    reserve_float: Indawo yokuntanta
+    send_to_workspace_3: Thumela ku-Workpace 3
+    switch_workspace_1: Shintshela ku-Workpace 1
+    send_to_workspace_5: Thumela ku-Workpace 5
+    send_to_workspace_9: Thumela ku-Workpace 9
+    send_to_workspace_2: Thumela ku-Workpace 2
+    switch_workspace_4: Shintshela ku-Workpace 4
+    switch_workspace_8: Shintshela ku-Workpace 8
+    switch_workspace_6: Shintshela ku-Workpace 6
+  enable: Nika amandla izinqamuleli ezihlanganisiwe (Ahk)
+  enable_tooltip: >-
+    Khubaza uma uzosebenzisa izinqamuleli zakho usebenzisa i-Seelen Core Core
+    API
+inProgress: Kuyaqhubeka...
+cancel: Hlikihla
+save: Hlenga
+quit: Yeka
+delete: Cisha
+loading: Iyalayisha ...
+open: Vula
