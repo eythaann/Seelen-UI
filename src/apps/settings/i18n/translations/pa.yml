@@ -1,0 +1,190 @@
+sides:
+  left: ਖੱਬੇ
+  bottom: ਹੇਠਾਂ
+  top: ਸਿਖਰ
+  right: ਸੱਜਾ
+header:
+  labels:
+    general: ਜਨਰਲ
+    seelen_wm: ਵਿੰਡੋ ਮੈਨੇਜਰ
+    seelen_bar: ਫੈਂਸੀ ਟੂਲਬਾਰ
+    monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
+    specific_apps: ਖਾਸ ਐਪਸ
+    shortcuts: ਸ਼ਾਰਟਕੱਟ
+    info: ਜਾਣਕਾਰੀ
+    developer: ਵਿਕਾਸਕਾਰ
+    seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
+start:
+  message: >-
+    Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows 11 ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
+    ਇਨਕੋਪੋਰੇਟਿਡ ਟਾਈਲਿੰਗ ਵਿੰਡੋਜ਼ ਮੈਨੇਜਰ ਦੇ ਨਾਲ ਅੰਤਮ ਡੈਸਕਟਾਪ ਵਾਤਾਵਰਨ! ਸਾਡੇ ਅਨੁਭਵੀ
+    ਇੰਟਰਫੇਸ ਅਤੇ ਉੱਨਤ ਵਿਸ਼ੇਸ਼ਤਾਵਾਂ ਨਾਲ ਕੁਸ਼ਲਤਾ ਅਤੇ ਮਲਟੀਟਾਸਕਿੰਗ ਦੇ ਇੱਕ ਨਵੇਂ ਯੁੱਗ
+    ਦੀ ਪੜਚੋਲ ਕਰੋ।
+  message_accent: ਸ਼ੈਲੀ ਨਾਲ ਆਪਣੀ ਉਤਪਾਦਕਤਾ ਨੂੰ ਅਨੁਕੂਲ ਬਣਾਓ!
+  title: ਜੀ ਆਇਆਂ ਨੂੰ!
+general:
+  theme:
+    description: ਵਰਣਨ
+    placeholder: ਥੀਮ ਚੁਣੋ
+    enabled: ਸਮਰਥਿਤ ਥੀਮ
+    add: ਥੀਮ ਸ਼ਾਮਲ ਕਰੋ
+    tags: ਟੈਗਸ
+    author: ਲੇਖਕ
+    added: ਥੀਮ ਪਹਿਲਾਂ ਹੀ ਸ਼ਾਮਲ ਕੀਤੀ ਗਈ ਹੈ
+    label: ਥੀਮ ਜਾਣਕਾਰੀ
+  language: ਭਾਸ਼ਾ
+  startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
+toolbar:
+  placeholder:
+    description: ਵਰਣਨ
+    select: ਟੂਲਬਾਰ ਢਾਂਚਾ
+    author: ਲੇਖਕ
+  height: ਉਚਾਈ
+  enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+wm:
+  border:
+    offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
+    enable: ਵਿੰਡੋ ਦੇ ਬਾਰਡਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+    width: ਬਾਰਡਰ ਚੌੜਾਈ
+  description: ਵਰਣਨ
+  workspace_offset: ਵਰਕਸਪੇਸ ਆਫਸੈੱਟ (ਮਾਰਜਿਨ)
+  author: ਲੇਖਕ
+  space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
+  resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
+  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
+  disabled_windows10: ਵਿੰਡੋ ਮੈਨੇਜਰ ਵਿੰਡੋਜ਼ 10 ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।
+  layout: ਖਾਕਾ
+weg:
+  items:
+    label: ਇਕਾਈ
+    gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
+    size: ਆਈਟਮ ਦਾ ਆਕਾਰ
+    zoom_size: ਜ਼ੂਮ ਕੀਤਾ ਆਕਾਰ (ਥੀਮਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ)
+    visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
+  enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  padding: ਪੈਡਿੰਗ
+  dock_side: ਡੌਕ ਸਾਈਡ
+  auto_hide: ਆਟੋ ਓਹਲੇ
+  gap: ਪਾੜਾ
+  width: ਚੌੜਾਈ
+  margin: ਹਾਸ਼ੀਏ
+  label: ਡੌਕ/ਟਾਸਕਬਾਰ
+devtools:
+  load: ਲੋਡ ਕਰੋ
+  settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
+  enable: ਡਿਵੈਲਪਰ ਟੂਲਸ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  data_folder: ਡਾਟਾ ਫੋਲਡਰ
+  app_folders: ਐਪ ਫੋਲਡਰ
+  custom_config_file: ਕਸਟਮ ਕੌਂਫਿਗ ਫਾਈਲ ਲੋਡ ਕਰੋ
+  install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
+apps_configurations:
+  app:
+    options:
+      float: ਫਲੋਟ
+      pinned: ਪਿੰਨ ਕੀਤਾ
+      unmanage: ਅਪ੍ਰਬੰਧਿਤ ਕਰੋ
+      force: ਫੋਰਸ ਪ੍ਰਬੰਧਨ
+    category: ਸ਼੍ਰੇਣੀ
+    bindings: ਬਾਈਡਿੰਗ (ਨੋਟ ਕਰੋ ਕਿ ਦੋਵੇਂ ਵਿਕਲਪ ਲੋੜੀਂਦੇ ਹਨ)
+    monitor_placeholder: ਕੋਈ ਨਹੀਂ
+    title_readonly: '{{name}} ਦੇਖ ਰਹੇ ਹਾਂ'
+    ok_readonly: ਨਵੇਂ ਵਜੋਂ ਸੰਪਾਦਿਤ ਕਰੋ
+    workspace: ਵਰਕਸਪੇਸ
+    name: ਨਾਮ
+    workspace_placeholder: ਕੋਈ ਨਹੀਂ
+    title_edit: ਸੰਪਾਦਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ {{name}}
+    ok_create: ਬਣਾਓ
+    category_placeholder: ਕੋਈ ਨਹੀਂ
+    ok_edit: ਅਪਡੇਟ
+    monitor: ਮਾਨੀਟਰ
+    title_create: '{{name}} ਬਣਾਉਣਾ'
+    options_label: ਵਾਧੂ ਵਿਕਲਪ
+  identifier:
+    kind: ਦੁਆਰਾ ਪਛਾਣੋ
+    id: ਪਛਾਣਕਰਤਾ
+    or: ਜਾਂ
+    and: ਅਤੇ
+    matching_strategy: ਮੈਚਿੰਗ ਰਣਨੀਤੀ
+    remove: ਬਲਾਕ ਮਿਟਾਓ
+    negation: ਨੈਗੇਟ ਮੈਚਿੰਗ
+    add_block: ਬਲਾਕ ਸ਼ਾਮਲ ਕਰੋ
+  confirm_delete: ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਸੰਰਚਨਾ/s ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+  export: ਨਿਰਯਾਤ
+  confirm_delete_title: ਮਿਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
+  bundled_msg: >-
+    ਇਹ ਬੰਡਲ ਕੀਤੀਆਂ ਸੰਰਚਨਾਵਾਂ ਸੰਪਾਦਨਯੋਗ ਨਹੀਂ ਹਨ ਅਤੇ ਤੁਹਾਨੂੰ ਅਨੁਕੂਲਿਤ ਕੀਤੇ ਬਿਨਾਂ
+    ਵਧੀਆ ਅਨੁਭਵ ਪ੍ਰਦਾਨ ਕਰਨ ਲਈ ਤਿਆਰ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ। ਉਹ ਤੁਹਾਡੇ ਲਈ ਸਭ ਤੋਂ ਆਮ
+    ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਕੌਂਫਿਗਰ ਕਰਦੇ ਹਨ।
+  delete: ਮਿਟਾਓ
+  swap: ਸਵੈਪ
+  search: ਖੋਜ
+  new: ਨਵਾਂ
+  bundled_title: ਐਪ ਕੌਂਫਿਗ ਸੀਲੇਨ ਨਾਲ ਬੰਡਲ ਕੀਤੀ ਗਈ
+  import: ਆਯਾਤ ਕਰੋ
+extras:
+  discord: ਵਿਵਾਦ
+  links: ਅਧਿਕਾਰਤ ਲਿੰਕ
+  exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
+  relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
+  github: GitHub
+  version: ਸੰਸਕਰਣ
+shortcuts:
+  labels:
+    switch_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
+    reserve_stack: ਰਿਜ਼ਰਵ ਸਟੈਕ
+    decrease_width: ਚੌੜਾਈ ਘਟਾਓ
+    decrease_height: ਉਚਾਈ ਘਟਾਓ
+    reserve_right: ਰਾਖਵਾਂ ਅਧਿਕਾਰ
+    reserve_top: ਰਿਜ਼ਰਵ ਸਿਖਰ
+    switch_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
+    switch_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
+    reserve_left: ਖੱਬੇ ਪਾਸੇ ਰਾਖਵਾਂ ਕਰੋ
+    switch_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
+    increase_width: ਚੌੜਾਈ ਵਧਾਓ
+    send_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਭੇਜੋ
+    switch_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
+    move_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
+    focus_bottom: ਹੇਠਾਂ ਫੋਕਸ ਕਰੋ
+    switch_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
+    focus_top: ਫੋਕਸ ਸਿਖਰ
+    move_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
+    send_to_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਭੇਜੋ
+    reserve_bottom: ਹੇਠਾਂ ਰਿਜ਼ਰਵ ਕਰੋ
+    switch_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
+    move_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
+    send_to_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਭੇਜੋ
+    switch_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
+    send_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਭੇਜੋ
+    send_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਭੇਜੋ
+    move_to_workspace_1: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
+    move_to_workspace_6: ਵਰਕਸਪੇਸ 6 ਤੇ ਜਾਓ
+    move_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
+    restore_sizes: ਆਕਾਰ ਰੀਸਟੋਰ ਕਰੋ
+    increase_height: ਉਚਾਈ ਵਧਾਓ
+    send_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਭੇਜੋ
+    switch_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਜਾਓ
+    focus_left: ਖੱਬੇ ਪਾਸੇ ਫੋਕਸ ਕਰੋ
+    move_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
+    send_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਭੇਜੋ
+    focus_right: ਸੱਜੇ ਫੋਕਸ ਕਰੋ
+    send_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਭੇਜੋ
+    send_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਭੇਜੋ
+    move_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
+    move_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
+    send_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਭੇਜੋ
+    reserve_float: ਰਿਜ਼ਰਵ ਫਲੋਟ
+    move_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
+    focus_latest: ਫੋਕਸ ਤਾਜ਼ਾ
+    switch_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਜਾਓ
+  enable_tooltip: >-
+    ਅਸਮਰੱਥ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ ਕੋਰ ਏਪੀਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ਾਰਟਕੱਟ
+    ਲਾਗੂ ਕਰਦੇ ਹੋ
+  enable: ਏਕੀਕ੍ਰਿਤ ਸ਼ਾਰਟਕੱਟ (ahk) ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+open: ਖੋਲ੍ਹੋ
+loading: ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
+save: ਸੇਵ ਕਰੋ
+delete: ਮਿਟਾਓ
+inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
+cancel: ਰੱਦ ਕਰੋ
+quit: ਛੱਡੋ

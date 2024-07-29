@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: ਸੰਚਾਰ
+    multimedia: ਮਲਟੀਮੀਡੀਆ
+  input_device: ਇਨਪੁਟ ਡਿਵਾਈਸ
+  players: ਮੀਡੀਆ ਪਲੇਅਰ
+  output_device: ਆਉਟਪੁੱਟ ਜੰਤਰ
+  master_volume: ਮਾਸਟਰ ਵਾਲੀਅਮ
+network:
+  placeholder:
+    password: ਪਾਸਵਰਡ
+  hidden: ਲੁਕਿਆ ਹੋਇਆ ਨੈਟਵਰਕ
+  not_found: ਕੋਈ ਨੈੱਟਵਰਕ ਨਹੀਂ ਮਿਲਿਆ
+  disconnect: ਡਿਸਕਨੈਕਟ
+  connect: ਕਨੈਕਟ ਕਰੋ
+  more: ਹੋਰ ਨੈੱਟਵਰਕ ਸੈਟਿੰਗਾਂ
+settings:
+  shutdown: ਸ਼ਟ ਡਾਉਨ
+  title: ਸੈਟਿੰਗਜ਼
+  log_out: ਲਾੱਗ ਆਊਟ, ਬਾਹਰ ਆਉਣਾ
+  app_settings: ਐਪ ਸੈਟਿੰਗਾਂ
+  sleep: ਨੀਂਦ
+  restart: ਰੀਸਟਾਰਟ
+placeholder:
+  ethernet_connected: ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ
+  smart_charge: '- ਸਮਾਰਟ ਚਾਰਜ'
+  open_user_folder: ਓਪਨ ਯੂਜ਼ਰ ਫੋਲਡਰ
+  volume: ਵਾਲੀਅਮ
+  battery_remaining: '% ਬਾਕੀ'
+  ethernet_disconnected: ਕੋਈ ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ ਨਹੀਂ
+  bluetooth_devices: ਬਲਿ Bluetooth ਟੁੱਥ ਅਤੇ ਉਪਕਰਣ
+  settings: ਤੇਜ਼ ਸੈਟਿੰਗ
+  open_system_tray: ਸਿਸਟਮ ਟਰੇ ਖੋਲ੍ਹੋ
