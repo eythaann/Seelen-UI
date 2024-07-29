@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: மல்டிமீடியா
+    comunications: தகவல்தொடர்புகள்
+  output_device: வெளியீடு சாதனம்
+  master_volume: முதன்மை தொகுதி
+  input_device: உள்ளீட்டு சாதனம்
+  players: மீடியா பிளேயர்கள்
+network:
+  placeholder:
+    password: கடவுச்சொல்
+  connect: இணைக்கவும்
+  more: மேலும் பிணைய அமைப்புகள்
+  not_found: நெட்வொர்க்குகள் எதுவும் கிடைக்கவில்லை
+  hidden: மறைக்கப்பட்ட பிணையம்
+  disconnect: துண்டிக்கவும்
+settings:
+  title: அமைப்புகள்
+  sleep: தூங்கு
+  log_out: வெளியேறு
+  app_settings: பயன்பாட்டு அமைப்புகள்
+  restart: மறுதொடக்கம்
+  shutdown: பணிநிறுத்தம்
+placeholder:
+  smart_charge: '- ஸ்மார்ட் கட்டணம்'
+  settings: விரைவான அமைப்புகள்
+  open_system_tray: திறந்த கணினி தட்டு
+  battery_remaining: '% மீதமுள்ள'
+  open_user_folder: பயனர் கோப்புறையைத் திறக்கவும்
+  ethernet_connected: இணைய அணுகல்
+  volume: தொகுதி
+  ethernet_disconnected: இணைய அணுகல் இல்லை
+  bluetooth_devices: புளூடூத் & சாதனங்கள்

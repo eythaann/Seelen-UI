@@ -1,0 +1,190 @@
+sides:
+  bottom: கீழே
+  top: மேல்
+  right: சரி
+  left: விட்டு
+header:
+  labels:
+    seelen_wm: சாளர மேலாளர்
+    info: தகவல்
+    monitors: கண்காணிப்பாளர்கள்
+    developer: டெவலப்பர்
+    shortcuts: குறுக்குவழிகள்
+    general: பொது
+    seelen_weg: கப்பல்துறை/பணிப்பட்டி
+    specific_apps: குறிப்பிட்ட பயன்பாடுகள்
+    seelen_bar: ஆடம்பரமான கருவிப்பட்டி
+start:
+  title: வரவேற்பு!
+  message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
+  message: >-
+    உங்கள் Windows 11 அனுபவத்தை மேம்படுத்த, ஒருங்கிணைக்கப்பட்ட டைலிங் விண்டோஸ்
+    மேலாளருடன் கூடிய இறுதி டெஸ்க்டாப் சூழலான Seelen UIக்கு வரவேற்கிறோம்! எங்கள்
+    உள்ளுணர்வு இடைமுகம் மற்றும் மேம்பட்ட அம்சங்களுடன் செயல்திறன் மற்றும்
+    பல்பணியின் புதிய சகாப்தத்தை ஆராயுங்கள்.
+general:
+  theme:
+    tags: குறிச்சொற்கள்
+    placeholder: தீம் தேர்ந்தெடுக்கவும்
+    description: விளக்கம்
+    author: நூலாசிரியர்
+    enabled: இயக்கப்பட்ட தீம்கள்
+    add: தீம் சேர்க்கவும்
+    added: தீம் ஏற்கனவே சேர்க்கப்பட்டது
+    label: தீம் தகவல்
+  language: மொழி
+  startup: தொடக்கத்தில் இயக்கவா?
+toolbar:
+  placeholder:
+    author: நூலாசிரியர்
+    description: விளக்கம்
+    select: கருவிப்பட்டி அமைப்பு
+  height: உயரம்
+  enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
+wm:
+  border:
+    width: பார்டர் அகலம்
+    enable: சாளரத்தின் எல்லையை இயக்கு
+    offset: பார்டர் ஆஃப்செட்
+  author: நூலாசிரியர்
+  description: விளக்கம்
+  space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி
+  workspace_padding: பணியிடங்கள் திணிப்பு
+  resize_delta: டெல்டாவின் அளவை மாற்று (%)
+  enable: சாளர மேலாளரை இயக்கு
+  disabled_windows10: விண்டோஸ் 10 க்கு சாளர மேலாளர் கிடைக்கவில்லை.
+  workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
+  layout: தளவமைப்பு
+weg:
+  items:
+    label: பொருட்களை
+    size: பொருளின் அளவு
+    visible_separators: காணக்கூடிய பிரிப்பான்கள்
+    gap: பொருட்களுக்கு இடையே உள்ள இடம்
+    zoom_size: பெரிதாக்கப்பட்ட அளவு (தீம்களுக்குப் பயன்படுத்தப்படுகிறது)
+  auto_hide: தானாக மறை
+  padding: திணிப்பு
+  label: கப்பல்துறை/பணிப்பட்டி
+  margin: விளிம்பு
+  gap: இடைவெளி
+  width: அகலம்
+  enable: டாக்/டாஸ்க்பாரை இயக்கவும்
+  dock_side: டாக் சைட்
+devtools:
+  install_folder: நிறுவல் கோப்புறை
+  enable: டெவலப்பர் கருவிகளை இயக்கு
+  custom_config_file: தனிப்பயன் கட்டமைப்பு கோப்பை ஏற்றவும்
+  app_folders: பயன்பாட்டு கோப்புறைகள்
+  data_folder: தரவு கோப்புறை
+  load: ஏற்றவும்
+  settings_file: அமைப்புகள் கோப்பு
+apps_configurations:
+  app:
+    options:
+      pinned: பின் செய்யப்பட்டது
+      float: மிதவை
+      unmanage: நிர்வகியுங்கள்
+      force: கட்டாயம் நிர்வகி
+    monitor: கண்காணிக்கவும்
+    options_label: கூடுதல் விருப்பங்கள்
+    title_create: '{{name}} உருவாக்குகிறது'
+    workspace: பணியிடம்
+    workspace_placeholder: இல்லை
+    category_placeholder: இல்லை
+    monitor_placeholder: இல்லை
+    name: பெயர்
+    category: வகை
+    ok_create: உருவாக்கு
+    title_readonly: '{{name}} பார்க்கிறது'
+    ok_edit: புதுப்பிக்கவும்
+    ok_readonly: புதியதாக திருத்தவும்
+    title_edit: திருத்துகிறது {{name}}
+    bindings: பிணைப்பு (இரண்டு விருப்பங்களும் தேவை என்பதை நினைவில் கொள்ளவும்)
+  identifier:
+    and: மற்றும்
+    remove: தடுப்பை நீக்கு
+    negation: பொருத்தத்தை மறுக்கவும்
+    id: அடையாளங்காட்டி
+    add_block: தொகுதியைச் சேர்க்கவும்
+    or: அல்லது
+    kind: மூலம் அடையாளம் காணவும்
+    matching_strategy: பொருந்தும் உத்தி
+  export: ஏற்றுமதி
+  confirm_delete_title: நீக்குவதை உறுதிப்படுத்தவும்
+  delete: அழி
+  bundled_title: பயன்பாட்டு கட்டமைப்பு சீலனுடன் தொகுக்கப்பட்டுள்ளது
+  confirm_delete: இந்த உள்ளமைவு/களை நிச்சயமாக நீக்க விரும்புகிறீர்களா?
+  bundled_msg: >-
+    இந்தத் தொகுக்கப்பட்ட உள்ளமைவுகளைத் திருத்த முடியாது மற்றும் தனிப்பயனாக்கம்
+    இல்லாமல் சிறந்த அனுபவத்தை உங்களுக்கு வழங்கும் வகையில் வடிவமைக்கப்பட்டுள்ளது.
+    உங்களுக்கான பொதுவான பயன்பாடுகளை அவை தானாகவே கட்டமைக்கும்.
+  import: இறக்குமதி
+  search: தேடு
+  swap: இடமாற்று
+  new: புதியது
+extras:
+  discord: கருத்து வேறுபாடு
+  exit: வெளியேறு/வெளியேறு
+  links: அதிகாரப்பூர்வ இணைப்புகள்
+  relaunch: மறுதொடக்கம்
+  version: பதிப்பு
+  github: கிட்ஹப்
+shortcuts:
+  labels:
+    focus_latest: சமீபத்திய கவனம்
+    send_to_workspace_2: பணியிடத்திற்கு அனுப்பு 2
+    increase_height: உயரத்தை அதிகரிக்கவும்
+    restore_sizes: அளவுகளை மீட்டமை
+    increase_width: அகலத்தை அதிகரிக்கவும்
+    switch_workspace_1: பணியிடத்திற்கு மாறவும் 1
+    send_to_workspace_4: பணியிடத்திற்கு அனுப்பு 4
+    move_to_workspace_5: பணியிடத்திற்கு நகர்த்து 5
+    reserve_right: ரிசர்வ் ரைட்
+    switch_workspace_6: பணியிடத்திற்கு மாறவும் 6
+    send_to_workspace_1: பணியிடத்திற்கு அனுப்பு 1
+    send_to_workspace_0: பணியிடம் 0க்கு அனுப்பவும்
+    focus_right: ஃபோகஸ் ரைட்
+    switch_workspace_0: பணியிடம் 0க்கு மாறவும்
+    reserve_float: ரிசர்வ் ஃப்ளோட்
+    reserve_left: ரிசர்வ் இடது
+    switch_workspace_5: பணியிடத்திற்கு மாறவும் 5
+    focus_top: ஃபோகஸ் டாப்
+    move_to_workspace_0: பணியிடம் 0க்கு நகர்த்தவும்
+    move_to_workspace_1: பணியிடத்திற்கு நகர்த்து 1
+    move_to_workspace_6: பணியிடத்திற்கு நகர்த்து 6
+    switch_workspace_2: பணியிடத்திற்கு மாறவும் 2
+    reserve_stack: ரிசர்வ் ஸ்டாக்
+    decrease_width: அகலத்தை குறைக்கவும்
+    switch_workspace_8: பணியிடத்திற்கு மாறவும் 8
+    send_to_workspace_8: பணியிடம் 8க்கு அனுப்பவும்
+    reserve_top: ரிசர்வ் டாப்
+    send_to_workspace_5: பணியிடத்திற்கு அனுப்பு 5
+    focus_left: இடதுபுறத்தில் கவனம் செலுத்துங்கள்
+    move_to_workspace_4: பணியிடத்திற்கு நகர்த்து 4
+    send_to_workspace_9: பணியிடம் 9க்கு அனுப்பவும்
+    move_to_workspace_2: பணியிடத்திற்கு நகர்த்து 2
+    move_to_workspace_9: பணியிடத்திற்கு நகர்த்து 9
+    send_to_workspace_3: பணியிடத்திற்கு அனுப்பு 3
+    send_to_workspace_7: பணியிடம் 7க்கு அனுப்பவும்
+    decrease_height: உயரத்தைக் குறைக்கவும்
+    send_to_workspace_6: பணியிடத்திற்கு அனுப்பு 6
+    switch_workspace_4: பணியிடத்திற்கு மாறவும் 4
+    reserve_bottom: ரிசர்வ் பாட்டம்
+    move_to_workspace_8: பணியிடத்திற்கு நகர்த்து 8
+    move_to_workspace_3: பணியிடத்திற்கு நகர்த்து 3
+    switch_workspace_3: பணியிடத்திற்கு மாறவும் 3
+    move_to_workspace_7: பணியிடத்திற்கு நகர்த்து 7
+    switch_workspace_9: பணியிடத்திற்கு மாறவும் 9
+    focus_bottom: கீழே கவனம் செலுத்துங்கள்
+    switch_workspace_7: பணியிடம் 7க்கு மாறவும்
+  enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
+  enable_tooltip: >-
+    சீலன் கோர் ஏபிஐ பயன்படுத்தி உங்கள் சொந்த ஷார்ட்கட்களை செயல்படுத்தினால்
+    முடக்கவும்
+inProgress: செயல்பாட்டில் உள்ளது...
+cancel: ரத்து செய்
+quit: விட்டுவிட
+delete: அழி
+loading: ஏற்றுகிறது...
+save: சேமிக்கவும்
+open: திற

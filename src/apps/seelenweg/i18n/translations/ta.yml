@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: திறந்த அமைப்புகள்
+  media: மீடியா தொகுதி சேர்க்கவும்
+  start: தொடக்க தொகுதி சேர்க்கவும்
+app_menu:
+  close: நெருக்கமான
+  run_as: நிர்வாகியாக செயல்படுங்கள்
+  close_multiple: அனைத்தையும் மூடு
+  copy_handles: நகல் கைப்பிடிகள்
+  pin_to_left: இடதுபுறம் முள்
+  pin_to_right: வலதுபுறம் முள்
+  pin_to_center: மையத்திற்கு முள்
+  pin: முள்
+  open_file_location: கோப்பு இருப்பிடத்தைத் திறக்கவும்
+  unpin: Unpin
+media_menu:
+  remove: மீடியா தொகுதியை அகற்று
+start_menu:
+  remove: தொடக்க தொகுதியை அகற்று
