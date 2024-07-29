@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: සන්නිවේදනය
+    multimedia: බහුමාධ්ය
+  output_device: ප්රතිදාන උපාංගය
+  master_volume: මාස්ටර් පරිමාව
+  input_device: ආදාන උපාංගය
+  players: මාධ්ය වාදකයන්
+network:
+  placeholder:
+    password: මුරපදය
+  not_found: ජාලක් හමු නොවීය
+  more: තවත් ජාල සැකසුම්
+  disconnect: විසන්ධි කරන්න
+  connect: සම්බන්ධ කරන්න
+  hidden: සැඟවුණු ජාලය
+settings:
+  restart: යළි අරඹන්න
+  shutdown: වසා දමන්න
+  title: සැකසුම්
+  app_settings: යෙදුම් සැකසුම්
+  log_out: ඉවත් වන්න
+  sleep: නිදාගන්න
+placeholder:
+  ethernet_connected: අන්තර්ජාල පිවිසුම
+  battery_remaining: ඉතිරි% ඉතිරිව ඇත
+  open_system_tray: විවෘත පද්ධති තැටි
+  ethernet_disconnected: අන්තර්ජාල ප්රවේශයක් නොමැත
+  bluetooth_devices: බ්ලූටූත් සහ උපාංග
+  smart_charge: '- ස්මාර්ට් ගාස්තුව'
+  open_user_folder: පරිශීලක ෆෝල්ඩරය විවෘත කරන්න
+  settings: ඉක්මන් සැකසුම්
+  volume: පරිමාව

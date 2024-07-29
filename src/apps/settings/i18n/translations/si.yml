@@ -1,0 +1,188 @@
+sides:
+  top: ඉහල
+  bottom: පහළ
+  right: හරි
+  left: වම
+header:
+  labels:
+    developer: සංවර්ධකයා
+    monitors: නිරීක්ෂකයින්
+    general: ජනරාල්
+    info: විස්තර
+    seelen_bar: විසිතුරු මෙවලම් තීරුව
+    specific_apps: විශේෂිත යෙදුම්
+    shortcuts: කෙටිමං
+    seelen_wm: කවුළු කළමනාකරු
+    seelen_weg: ඩොක්/කාර්ය තීරුව
+start:
+  title: සාදරයෙන් පිළිගනිමු!
+  message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
+  message: >-
+    ඔබගේ Windows 11 අත්දැකීම වැඩිදියුණු කිරීම සඳහා සංස්ථාපිත ටයිල් කවුළු
+    කළමනාකරුවෙකු සහිත අවසාන ඩෙස්ක්ටොප් පරිසරය වන Seelen UI වෙත සාදරයෙන්
+    පිළිගනිමු! අපගේ බුද්ධිමය අතුරුමුහුණත සහ උසස් විශේෂාංග සමඟ කාර්යක්ෂමතාවයේ සහ
+    බහුකාර්යයේ නව යුගයක් ගවේෂණය කරන්න.
+general:
+  theme:
+    tags: ටැග්
+    description: විස්තර
+    author: කර්තෘ
+    enabled: සබල කළ තේමා
+    placeholder: තේමාව තෝරන්න
+    added: තේමාව දැනටමත් එකතු කර ඇත
+    label: තේමා තොරතුරු
+    add: තේමාව එකතු කරන්න
+  language: භාෂාව
+  startup: ආරම්භයේදී ධාවනය කරන්නද?
+toolbar:
+  placeholder:
+    author: කර්තෘ
+    description: විස්තර
+    select: මෙවලම් තීරු ව්යුහය
+  height: උස
+  enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
+wm:
+  border:
+    width: මායිම් පළල
+    enable: කවුළුවේ මායිම සක්රිය කරන්න
+    offset: මායිම් ඕෆ්සෙට්
+  author: කර්තෘ
+  description: විස්තර
+  layout: පිරිසැලසුම
+  space_between_containers: බහාලුම් අතර අවකාශය
+  enable: කවුළු කළමනාකරු සබල කරන්න
+  workspace_padding: වැඩබිම් පිරවුම
+  resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
+  workspace_offset: වැඩබිම් ඕෆ්සෙට් (ආන්තික)
+  disabled_windows10: Windows 10 සඳහා Window Manager නොමැත.
+weg:
+  items:
+    label: අයිතම
+    visible_separators: දෘශ්‍ය බෙදුම්කරුවන්
+    size: අයිතමයේ ප්රමාණය
+    gap: අයිතම අතර අවකාශය
+    zoom_size: විශාලනය කළ ප්‍රමාණය (තේමා සඳහා භාවිතා වේ)
+  label: ඩොක්/කාර්ය තීරුව
+  auto_hide: ස්වයංක්‍රීය සඟවන්න
+  padding: පෑඩිං
+  width: පළල
+  enable: Dock/Taskbar සබල කරන්න
+  dock_side: ඩොක් පැත්ත
+  gap: පරතරය
+  margin: ආන්තිකය
+devtools:
+  enable: සංවර්ධක මෙවලම් සබල කරන්න
+  install_folder: ස්ථාපන ෆෝල්ඩරය
+  settings_file: සැකසුම් ගොනුව
+  app_folders: යෙදුම් ෆෝල්ඩර
+  data_folder: දත්ත ෆෝල්ඩරය
+  custom_config_file: අභිරුචි වින්‍යාස ගොනුව පූරණය කරන්න
+  load: පැටවීම
+apps_configurations:
+  app:
+    options:
+      float: පාවෙන
+      pinned: පින් කර ඇත
+      force: බල කළමනාකරණය
+      unmanage: කළමනාකරණය කරන්න
+    title_create: '{{name}} නිර්මාණය කරමින්'
+    monitor: නිරීක්ෂණය කරන්න
+    category_placeholder: කිසිවක් නැත
+    name: නම
+    workspace_placeholder: කිසිවක් නැත
+    monitor_placeholder: කිසිවක් නැත
+    options_label: අමතර විකල්ප
+    ok_edit: යාවත්කාලීන කරන්න
+    category: වර්ගය
+    title_edit: '{{name}} සංස්කරණය කරමින්'
+    bindings: බැඳීම (විකල්ප දෙකම අවශ්‍ය බව සලකන්න)
+    workspace: වැඩබිම
+    ok_readonly: නව ලෙස සංස්කරණය කරන්න
+    title_readonly: '{{name}} බලමින්'
+    ok_create: නිර්මාණය කරන්න
+  identifier:
+    and: සහ
+    add_block: බ්ලොක් එක් කරන්න
+    negation: ගැලපීම නිෂේධනය කරන්න
+    or: හෝ
+    remove: අවහිර කිරීම මකන්න
+    id: හඳුනාගැනීම
+    kind: විසින් හඳුනා ගන්න
+    matching_strategy: ගැලපුම් උපාය මාර්ගය
+  search: සෙවීම
+  import: ආනයන
+  export: අපනයන
+  new: අලුත්
+  confirm_delete_title: මකා දැමීම තහවුරු කරන්න
+  bundled_title: යෙදුම් වින්‍යාසය සීලන් සමඟ බණ්ඩල් කර ඇත
+  delete: මකන්න
+  swap: හුවමාරු කරන්න
+  bundled_msg: >-
+    මෙම මිටි වින්‍යාසයන් සංස්කරණය කළ නොහැකි අතර අභිරුචිකරණයකින් තොරව ඔබට හොඳම
+    අත්දැකීම ලබා දීමට සැලසුම් කර ඇත. ඔවුන් ඔබ සඳහා වඩාත් පොදු යෙදුම්
+    ස්වයංක්‍රීයව වින්‍යාස කරයි.
+  confirm_delete: ඔබට මෙම වින්‍යාසය/s මැකීමට අවශ්‍ය බව විශ්වාසද?
+extras:
+  version: පිටපත
+  discord: අසමගිය
+  github: GitHub
+  links: නිල සබැඳි
+  exit: පිටවීම/පිටවීම
+  relaunch: නැවත දියත් කරන්න
+shortcuts:
+  labels:
+    restore_sizes: ප්‍රමාණ ප්‍රතිසාධනය කරන්න
+    focus_right: නිවැරදිව අවධානය යොමු කරන්න
+    increase_height: උස වැඩි කරන්න
+    send_to_workspace_2: Workspace 2 වෙත යවන්න
+    send_to_workspace_5: වැඩබිම වෙත යවන්න 5
+    switch_workspace_0: Workspace 0 වෙත මාරු වන්න
+    move_to_workspace_7: වැඩබිම වෙත ගෙන යන්න 7
+    send_to_workspace_3: වැඩබිම වෙත යවන්න 3
+    send_to_workspace_9: Workspace 9 වෙත යවන්න
+    send_to_workspace_0: Workspace 0 වෙත යවන්න
+    switch_workspace_6: වැඩබිම වෙත මාරු වන්න 6
+    move_to_workspace_2: කාර්ය ඉඩ 2 වෙත ගෙන යන්න
+    move_to_workspace_4: වැඩබිම වෙත ගෙන යන්න 4
+    reserve_float: රක්ෂිත පාවෙන
+    send_to_workspace_1: කාර්ය ඉඩ 1 වෙත යවන්න
+    focus_latest: නවතම අවධානය යොමු කරන්න
+    focus_left: වමට අවධානය යොමු කරන්න
+    switch_workspace_1: කාර්ය ඉඩ 1 වෙත මාරු වන්න
+    move_to_workspace_5: වැඩබිම වෙත ගෙන යන්න 5
+    decrease_height: උස අඩු කරන්න
+    reserve_bottom: සංචිත පතුලේ
+    move_to_workspace_9: වැඩබිම වෙත ගෙන යන්න 9
+    send_to_workspace_7: Workspace 7 වෙත යවන්න
+    send_to_workspace_4: වැඩබිම වෙත යවන්න 4
+    reserve_right: රක්ෂිත අයිතිය
+    move_to_workspace_0: Workspace 0 වෙත ගෙන යන්න
+    switch_workspace_2: කාර්ය ඉඩ 2 වෙත මාරු වන්න
+    move_to_workspace_1: කාර්ය ඉඩ 1 වෙත ගෙන යන්න
+    switch_workspace_9: වැඩබිම වෙත මාරු වන්න 9
+    send_to_workspace_8: Workspace 8 වෙත යවන්න
+    move_to_workspace_3: වැඩබිම වෙත ගෙන යන්න 3
+    send_to_workspace_6: වැඩබිම වෙත යවන්න 6
+    decrease_width: පළල අඩු කරන්න
+    switch_workspace_4: වැඩබිම වෙත මාරු වන්න 4
+    reserve_left: වම රක්ෂිතය
+    switch_workspace_5: වැඩබිම වෙත මාරු වන්න 5
+    reserve_stack: සංචිත තොගය
+    move_to_workspace_8: වැඩබිම වෙත ගෙන යන්න 8
+    reserve_top: ඉහළම රක්ෂිතය
+    switch_workspace_3: වැඩබිම වෙත මාරු වන්න 3
+    switch_workspace_8: කාර්ය ඉඩ 8 වෙත මාරු වන්න
+    focus_top: ඉහළට අවධානය යොමු කරන්න
+    increase_width: පළල වැඩි කරන්න
+    move_to_workspace_6: වැඩබිම වෙත ගෙන යන්න 6
+    switch_workspace_7: වැඩබිම 7 වෙත මාරු වන්න
+    focus_bottom: පහළට අවධානය යොමු කරන්න
+  enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
+  enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
+loading: පූරණය වෙමින්...
+quit: ඉවත්
+inProgress: ප්රගතියේ...
+cancel: අවලංගු කරන්න
+delete: මකන්න
+open: විවෘත
+save: සුරකින්න

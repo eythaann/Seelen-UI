@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: විවෘත සැකසුම්
+  media: මාධ්ය මොඩියුලය එක් කරන්න
+  start: ආරම්භක මොඩියුලය එක් කරන්න
+app_menu:
+  open_file_location: ගොනුව විවෘත ස්ථානය
+  run_as: පරිපාලක ලෙස ක්රියාත්මක වන්න
+  pin_to_right: පින් කරන්න දකුණට
+  copy_handles: හසුරුමය
+  pin_to_center: මධ්යස්ථානයට පින් කරන්න
+  close_multiple: සියල්ල වසා දමන්න
+  unpin: UNTIN
+  pin_to_left: වමට
+  close: වසන්න
+  pin: පින්
+media_menu:
+  remove: මාධ්ය මොඩියුලය ඉවත් කරන්න
+start_menu:
+  remove: ආරම්භක මොඩියුලය ඉවත් කරන්න
