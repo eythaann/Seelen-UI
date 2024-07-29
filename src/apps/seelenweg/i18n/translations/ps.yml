@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: خلاص امستنې
+  media: د میډیا موډول اضافه کړئ
+  start: د پیل ماډل اضافه کړئ
+app_menu:
+  copy_handles: لاسوندونه کاپي کوي
+  pin_to_center: مرکز ته پن
+  pin_to_right: ښیې خوا ته
+  pin_to_left: د کی to اړخ ته پن
+  open_file_location: د فایل ځای خلاص کړئ
+  close_multiple: ټول وتړئ
+  unpin: غیر رنګ
+  close: بندول
+  run_as: د مدیر په توګه چلول
+  pin: پن
+media_menu:
+  remove: د میډیا ماډل لرې کړئ
+start_menu:
+  remove: د پیل ماډل لرې کړئ

@@ -1,0 +1,187 @@
+sides:
+  right: ښي
+  bottom: ښکته
+  top: سر
+  left: کیڼ
+header:
+  labels:
+    developer: پراختیا کونکی
+    general: عمومي
+    seelen_bar: د فینسي توکپټه
+    seelen_wm: د کړکۍ مدیر
+    seelen_weg: ډیک / ټاسک بار
+    specific_apps: ځانګړي اطلاقات
+    info: معلومات
+    monitors: څارونکي
+    shortcuts: لنډوکونه
+start:
+  title: ښه راغلاست!
+  message_accent: د سټایل سره خپل محصول غوره کړئ!
+  message: >-
+    د زنګ وهلو ته ښه راغلاست، حتمي ډیسټاپ چاپیریال د خپل وینډوز 11 تجربې ته وده
+    ورکولو لپاره د شامل شوي ټایټاپ وینډوز چاپیریال سره! زموږ د استثنایی بیرونځای
+    او پرمختللي ب shape و سره د اغیزمنتیا او ضرباتو نوې دوره وپلټئ.
+general:
+  theme:
+    description: تفصیل
+    label: د موضوع معلومات
+    added: موضوع لا دمخه اضافه شوې
+    tags: ټاګز
+    author: لیکوال
+    enabled: د لاسرسي وړ
+    add: موضوع اضافه کړئ
+    placeholder: موضوع وټاکئ
+  startup: په پیل کې چلول؟
+  language: ژبه
+toolbar:
+  placeholder:
+    description: تفصیل
+    select: د توکپټې جوړښت
+    author: لیکوال
+  enable: د فینسي تورې پټه وړتیا وړ کړئ
+  height: لوړوالی
+wm:
+  border:
+    width: د بريد سور
+    enable: د کړکۍ پوله فعال کړئ
+    offset: پوله
+  description: تفصیل
+  resize_delta: د ډیلټا (٪) ریموټ کړئ
+  workspace_offset: د کاري ځای ځایونه (مارجینز)
+  enable: د کړکۍ مدیر ته وړ کړئ
+  workspace_padding: د کارډا ریسس
+  space_between_containers: د کانتینرونو ترمینځ ځای
+  author: لیکوال
+  disabled_windows10: د کړکۍ مدیر د وینډوز 10 لپاره شتون نلري.
+  layout: ترتیب
+weg:
+  items:
+    size: د توکي اندازه
+    gap: د توکو تر مینځ فضا
+    label: توکي
+    zoom_size: زوم شوی اندازه (د موضوعاتو لپاره کارول کیږي)
+    visible_separators: لیدلي جلا کونکي
+  margin: حاشیه
+  padding: غالۍ
+  label: ډیک / ټاسک بار
+  width: پلنوالی
+  gap: تشې
+  enable: دوک / ټاسک بار فعال کړئ
+  auto_hide: آٹو پټول
+  dock_side: ډیک اړخ
+devtools:
+  custom_config_file: د دودیز ترتیب فایل پورته کړئ
+  enable: د پراختیا کونکي وسیلې فعال کړئ
+  settings_file: د امستنې دوتنه
+  data_folder: د معلوماتو فولډر
+  install_folder: لګول فولډر
+  app_folders: د ایپ فولډرونه
+  load: بار
+apps_configurations:
+  app:
+    options:
+      unmanage: بې وسلې کول
+      pinned: پینټ شوی
+      force: د ځواک اداره کول
+      float: فلوټ
+    ok_readonly: د نوي په توګه
+    title_edit: د {{{{}} ترمیم کول
+    category_placeholder: هیڅ نه
+    category: کټګورۍ
+    ok_create: جوړول
+    monitor_placeholder: هیڅ نه
+    monitor: څارونکی
+    ok_edit: تازه کول
+    title_readonly: لیدنه. یو {علی}}
+    name: نوم
+    workspace: کاري ځای
+    title_create: '{{}} رامینځته کول'
+    options_label: اضافي اختیارونه
+    bindings: تړل (په یادداشت کې دواړه اختیارونه اړین دي)
+    workspace_placeholder: هیڅ نه
+  identifier:
+    or: یا
+    id: پېژنيزه
+    and: او
+    remove: بلاک ړنګ کړئ
+    add_block: بلاک اضافه کړئ
+    kind: د
+    matching_strategy: برابرول
+    negation: غفلت کول
+  new: نوی
+  import: واردول
+  search: لټون
+  confirm_delete: ایا ته باوري یې چې دا جوړښتونه ړنګول غواړې؟
+  bundled_msg: >-
+    دا بنډل تشکیلات د ترمیم وړ ندي او ډیزاین شوي چې تاسو ته د دودیز کولو پرته
+    غوره تجربه چمتو کړي. دوی په اوتومات ډول ستاسو لپاره خورا عام غوښتنلیکونه
+    تنظیموي.
+  delete: حذف کول
+  swap: سویپ
+  confirm_delete_title: ړنګول تایید کړئ
+  export: صادرات
+  bundled_title: د اپلیکیشن سره ایپ بنډل شوی
+extras:
+  links: رسمي اړیکې
+  exit: پریښودل / وتل
+  github: ګیتوب
+  version: نسخه
+  relaunch: بیا پیل کول
+  discord: ډارول
+shortcuts:
+  labels:
+    send_to_workspace_9: کارځای ته واستوئ
+    decrease_height: لوړوالی کمول
+    reserve_left: ساتل شوی
+    focus_right: سم تمرکز
+    send_to_workspace_5: د کارځای 5 ته واستوئ
+    move_to_workspace_9: د کارځای 9 ته لاړشئ
+    send_to_workspace_6: کارځای ته واستوئ
+    switch_workspace_6: د کارځای 6 ته وګرځئ
+    send_to_workspace_1: کارځای ته واستوئ
+    switch_workspace_9: د کارځای شمیره 9
+    focus_left: کي left ه تمرکز
+    move_to_workspace_3: د کارځای 3 ته لاړشئ
+    send_to_workspace_4: کارځای ته واستوئ
+    switch_workspace_4: د کارځای ته وسپارئ
+    switch_workspace_5: د کارځای 5 ته لاړشئ
+    switch_workspace_1: د کارځای 1 ته لاړشئ
+    move_to_workspace_8: د کارځای ته لاړشئ
+    send_to_workspace_7: کارځای ته واستوئ
+    reserve_top: خوندي پټی
+    send_to_workspace_2: کارځای ته واستوئ
+    focus_latest: وروستی تمرکز وکړئ
+    move_to_workspace_4: د کارځای ته لاړشئ
+    send_to_workspace_3: کارځای ته واستوئ
+    move_to_workspace_7: د کارځای 7 ته لاړشئ
+    switch_workspace_2: د کارځای 2 ته لاړشئ
+    reserve_float: ریزرو فلوټ
+    switch_workspace_3: د کارځای 3 ته وګرځئ
+    move_to_workspace_5: د کارځای 5 ته لاړشئ
+    reserve_bottom: د
+    decrease_width: د سوری کمول
+    move_to_workspace_0: د کارځای 0 ته لاړشئ
+    send_to_workspace_0: کارځای ته واستوئ
+    focus_top: فوکس سر
+    switch_workspace_0: د کارځای 0 ته لاړشئ
+    focus_bottom: ښکته
+    reserve_stack: ریزرو سټیک
+    switch_workspace_7: د کارځای ته لاړشئ
+    move_to_workspace_1: د کارځای 1 ته لاړشئ
+    move_to_workspace_6: د کارځای ته لاړشئ
+    switch_workspace_8: د کارځای 8 ته وګرځئ
+    reserve_right: سم ساتل
+    move_to_workspace_2: د کارځای 2 ته لاړشئ
+    increase_width: پلنوالی زیات کړئ
+    send_to_workspace_8: کارځای ته واستوئ
+    restore_sizes: اندازونه بحال کړئ
+    increase_height: قد زیاتول
+  enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
+  enable: مدغم شوي لنډیزونه (اه)
+inProgress: د پرمختګ په حال کې...
+quit: پرېښودل
+delete: حذف کول
+cancel: لغوه کول
+loading: بارول ...
+save: خوندي کړئ
+open: خلاص

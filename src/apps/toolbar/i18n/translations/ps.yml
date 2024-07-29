@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: مخابرات
+    multimedia: ملټي میډیا
+  input_device: ننوتنی وسیله
+  players: د میډیا لوبغاړي
+  master_volume: ماسټر برابره
+  output_device: د محصول وسیله
+network:
+  placeholder:
+    password: رمز
+  connect: نښلول
+  not_found: هیڅ جال ونه موندل شو
+  hidden: پټه شبکه
+  more: نور د شبکې تنظیمات
+  disconnect: منحل
+settings:
+  restart: بیا روښانه کول
+  shutdown: ‍‍‍بندول
+  log_out: وتل
+  title: امستنې
+  sleep: ویده شه
+  app_settings: د ایپ امستنې
+placeholder:
+  smart_charge: '- سمارټ چارج'
+  ethernet_disconnected: هیڅ انټرنیټ لاسرسی
+  battery_remaining: ٪ پاتې
+  ethernet_connected: انټرنیټ لاسرسی
+  open_system_tray: د خلاص سیسټم ټری
+  bluetooth_devices: بلوتوث او وسایل
+  volume: حجم
+  open_user_folder: د کارونکي فولډر خلاص کړئ
+  settings: ګړندي امستنې
