@@ -1,0 +1,189 @@
+sides:
+  left: Bidix
+  bottom: Hoose
+  top: Dusha kore
+  right: Sax
+header:
+  labels:
+    monitors: Kormeerayaasha
+    seelen_weg: Dock / Tootshar
+    shortcuts: Gaaban
+    seelen_bar: Qalabka Fancy Toolbar
+    general: Guud
+    specific_apps: Barnaamijyo gaar ah
+    seelen_wm: Maamulaha daaqada
+    developer: Abuuris
+    info: War
+start:
+  message: >-
+    Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
+    maamulaha Windows-ka oo lagu daro Maareeyaha Windows 11 Sahamiyaan marxalad
+    cusub oo hufnaan iyo fara badan
+  title: Soo dhawow!
+  message_accent: Ku dadaal wax soo saarkaaga qaabka!
+general:
+  theme:
+    description: Sifo
+    author: Qoraa
+    placeholder: Xullo mawduuca
+    tags: Calaamadaha
+    label: Macluumaadka mawduuca
+    add: Ku dar mawduuc
+    added: Mawduuca mar hore ayaa lagu daray
+    enabled: Awood u yeelo mowduucyada
+  startup: Ku orod bilowga?
+  language: Af
+toolbar:
+  placeholder:
+    description: Sifo
+    author: Qoraa
+    select: Qaab dhismeedka Qalabka
+  enable: Keeniyaan Qalabka Fancy Toolbar
+  height: Dherer
+wm:
+  border:
+    enable: Karti xadka daaqadaha
+    width: Xadka ballaca
+    offset: Xudduud xadka
+  author: Qoraa
+  description: Sifo
+  disabled_windows10: Maamulaha daaqada ayaan loo heli karin Windows 10.
+  workspace_offset: Goobaha shaqada ayaa ka dhigtay
+  enable: Karti maamulaha daaqada
+  layout: Khariidad
+  resize_delta: Dib u dhig Delta (%)
+  space_between_containers: Meel bannaan oo u dhexeeya weelka
+  workspace_padding: Goobta Goobta Goobta
+weg:
+  items:
+    gap: Meel udhaxeysa waxyaabaha
+    label: Waxyaabaha
+    size: Shayga cabirka
+    zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
+    visible_separators: Kala-sooca muuqda
+  dock_side: Dhinaceeda dhinaceeda
+  width: Ballac
+  enable: Kartida DOCK / Turniinka
+  gap: Dalool
+  padding: Suur
+  margin: Margin
+  label: Dock / Tootshar
+  auto_hide: Auto qaraha
+devtools:
+  app_folders: Faylka app
+  install_folder: Xeerka rakibaadda
+  enable: U oggolow qalabka horumarinta
+  data_folder: Faylka xogta
+  custom_config_file: Xamuul faylka caadiga ah ee config
+  settings_file: Faylka Dejinta
+  load: Xammuul
+apps_configurations:
+  app:
+    options:
+      pinned: Shaashad
+      float: Sabbayn
+      unmanage: Aan lahayn
+      force: Xoog u maareeyaan
+    title_create: Abuuritaanka {{Magaca {Magaca}
+    bindings: Xirashada (Xusuusin labada ikhtiyaar ayaa loo baahan yahay)
+    ok_readonly: Tafatir sida cusub
+    monitor_placeholder: Midna
+    category: Dabaqad
+    options_label: Fursadaha dheeraadka ah
+    ok_edit: Cusboonaysiin
+    workspace: Shaqo-joojin
+    title_readonly: Daawashada {{,}
+    monitor: Kaabba-galaas
+    category_placeholder: Midna
+    name: Magac
+    workspace_placeholder: Midna
+    ok_create: Abuurid
+    title_edit: Tafatirka {{magacii}
+  identifier:
+    remove: Tirtir xannibaadda
+    matching_strategy: Istaraatiijiyadda iswaafajinta
+    negation: Ciriiri u dhigma
+    kind: Aqoonso
+    and: Iyo
+    add_block: Ku dar xannibaadda
+    or: Ama
+    id: Aqoonsiga
+  new: Cusub
+  bundled_title: App COLOND SOLDED SELEN
+  confirm_delete: Ma hubtaa inaad rabto inaad tirtirto qaabeyntan / s?
+  import: Soo dejin
+  confirm_delete_title: Xaqiiji Delete
+  export: Dhoofin
+  search: Raadin
+  swap: Isku beddelo
+  delete: Tirtirid
+  bundled_msg: >-
+    Qaabeyntan xirmada ma aha wax aan la taabtaan oo loogu talagalay inay ku
+    siiyaan khibradda ugu fiican ee aan la helin. Waxay si otomaatig ah u
+    habeeyaan codsiyada ugu caansan adiga.
+extras:
+  exit: Jooji / bixitaan
+  github: GitHub
+  version: Werin
+  relaunch: Dib u beer
+  discord: Huf
+  links: Xiriirinta rasmiga ah
+shortcuts:
+  labels:
+    reserve_right: Xaq u dhig
+    reserve_top: Keydka sare
+    reserve_bottom: Kaydsanaanta hoose
+    restore_sizes: Soo celinta cabirka
+    move_to_workspace_0: U dhaqaaq goobta shaqada 0
+    focus_left: Ahrive bidix
+    switch_workspace_5: U beddelo goobta shaqada 5
+    increase_width: Kordhi ballaadhan
+    send_to_workspace_9: U dir goobta shaqada 9
+    switch_workspace_8: U beddelo goobta shaqada 8
+    move_to_workspace_2: U dhaqaaq goobta shaqada 2
+    move_to_workspace_5: U dhaqaaq goobta shaqada 5
+    switch_workspace_9: U beddelo goobta shaqada 9
+    focus_latest: Diirad saar
+    send_to_workspace_5: U dir goobta shaqada 5
+    focus_right: Diiradda saara
+    switch_workspace_3: U beddelo goobta shaqada 3
+    send_to_workspace_7: U dir goobta shaqada 7
+    move_to_workspace_7: U dhaqaaq goobta shaqada 7
+    move_to_workspace_4: U dhaqaaq goobta shaqada 4
+    focus_bottom: Hoos udhaca hoose
+    decrease_width: Ballaadhinta ballac
+    switch_workspace_2: U beddelo goobta shaqada 2
+    move_to_workspace_1: U dhaqaaq goobta shaqada 1
+    move_to_workspace_3: U dhaqaaq goobta shaqada 3
+    increase_height: Kordhi dhererka
+    send_to_workspace_4: U dir goobta shaqada 4
+    move_to_workspace_9: U dhaqaaq goobta shaqada 9
+    reserve_float: Keydka sabuuradda
+    reserve_stack: Reebs Rap
+    switch_workspace_1: U beddelo goobta shaqada 1
+    send_to_workspace_3: U dir goobta shaqada 3
+    send_to_workspace_1: U dir goobta shaqada 1
+    switch_workspace_7: U beddelo goobta shaqada 7
+    send_to_workspace_8: U dir goobta shaqada 8
+    move_to_workspace_8: U dhaqaaqso goobta shaqada 8
+    send_to_workspace_6: U dir goobta shaqada 6
+    focus_top: Xoogga saar dusha sare
+    reserve_left: Kaydsanaanta bidix
+    send_to_workspace_2: U dir goobta shaqada 2
+    send_to_workspace_0: U dir goobta shaqada 0
+    switch_workspace_0: U beddelo goobta shaqada 0
+    decrease_height: Hoos u dhig dhererka
+    switch_workspace_4: U beddelo goobta shaqada 4
+    move_to_workspace_6: U dhaqaaq goobta shaqada 6
+    switch_workspace_6: U beddelo goobta shaqada 6
+  enable: U fududee fulinta isku dhafan ee isku dhafan (Ahk)
+  enable_tooltip: >-
+    Disable Haddii aad hirgelin doontid gaagaaban adiga oo adeegsanaya api-ka
+    quruxda badan
+loading: Loading ...
+cancel: Burin
+delete: Tirtirid
+quit: Joojin
+save: Badbaadin
+inProgress: Horusocod ...
+open: Furid

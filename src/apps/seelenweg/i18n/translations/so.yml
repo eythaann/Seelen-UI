@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Meel furan
+  media: Ku dar module warbaahinta
+  start: Ku dar cutubka bilowga
+app_menu:
+  pin_to_left: PIN ilaa bidix
+  pin_to_center: PIN ilaa Xarunta
+  open_file_location: Goobta faylka furan
+  run_as: U ordo sidii maamule
+  close: Xirid
+  close_multiple: Xir dhammaan
+  pin_to_right: PIN ilaa midig
+  copy_handles: Nuqullada gacanta
+  unpin: Aan qarin
+  pin: Musbaar yar
+media_menu:
+  remove: Ka saar cutubka warbaahinta
+start_menu:
+  remove: Ka saar cutubka bilowga
