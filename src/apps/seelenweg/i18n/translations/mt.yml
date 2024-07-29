@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Żid il-modulu tal-midja
+  settings: Settings miftuħa
+  start: Żid il-modulu tal-bidu
+app_menu:
+  pin_to_center: Pin għal ċentru
+  run_as: Mexxi bħala amministratur
+  close_multiple: Agħlaq ilkoll
+  pin_to_left: Pin lejn ix-xellug
+  pin_to_right: Pin għal dritt
+  unpin: Unpin
+  close: Viċin
+  copy_handles: Kopja pumi
+  pin: Pin
+  open_file_location: Post tal-fajl miftuħ
+media_menu:
+  remove: Neħħi l-modulu tal-midja
+start_menu:
+  remove: Neħħi l-modulu tal-bidu

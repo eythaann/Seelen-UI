@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Komunikazzjonijiet
+    multimedia: Multimedja
+  master_volume: Volum Master
+  players: Plejers tal-midja
+  output_device: Apparat tal-ħruġ
+  input_device: Apparat ta 'input
+network:
+  placeholder:
+    password: Password
+  connect: Qabbad
+  not_found: Ma nstabu l-ebda netwerks
+  disconnect: Skonnettja
+  hidden: Netwerk moħbi
+  more: Aktar settings tan-netwerk
+settings:
+  restart: Erġa ibda
+  shutdown: Għalaq
+  log_out: Oħroġ
+  title: Settings
+  sleep: Irqad
+  app_settings: Settings tal-App
+placeholder:
+  open_user_folder: Folder tal-utent miftuħ
+  settings: Settings ta 'malajr
+  ethernet_connected: Aċċess għall-Internet
+  ethernet_disconnected: L-ebda aċċess għall-internet
+  smart_charge: '- ħlas intelliġenti'
+  bluetooth_devices: Bluetooth & Apparat
+  battery_remaining: '% jibqa '''
+  open_system_tray: Tray tas-Sistema Miftuħa
+  volume: Volum
