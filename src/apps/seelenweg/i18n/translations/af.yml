@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Open instellings
+  start: Voeg beginmodule by
+  media: Voeg mediasmodule by
+app_menu:
+  close: Naby
+  pin: Speld
+  pin_to_right: Speld na regs
+  close_multiple: Sluit alles
+  pin_to_center: Speld na die sentrum
+  run_as: Hardloop as administrateur
+  pin_to_left: Speld na links
+  open_file_location: Oop lêlokasie
+  copy_handles: Kopiehandvatsels
+  unpin: Unpin
+media_menu:
+  remove: Verwyder die media -module
+start_menu:
+  remove: Verwyder beginmodule

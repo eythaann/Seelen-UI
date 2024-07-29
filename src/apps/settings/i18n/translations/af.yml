@@ -1,0 +1,190 @@
+sides:
+  top: Top
+  bottom: Bodem
+  left: Links
+  right: Regs
+header:
+  labels:
+    developer: Ontwikkelaar
+    shortcuts: Kortpaaie
+    monitors: Monitors
+    general: Generaal
+    seelen_bar: Fancy -werkbalk
+    seelen_wm: Vensterbestuurder
+    seelen_weg: Dock/Taakbalk
+    info: Informasie
+    specific_apps: Spesifieke programme
+start:
+  title: Welkom!
+  message: >-
+    Welkom by Seelen UI, die uiteindelike tafelrekenaaromgewing met 'n ingelyfde
+    teëlbestuurder om u Windows 11 -ervaring te verbeter! Ontdek 'n nuwe era van
+    doeltreffendheid en multitasking met ons intuïtiewe koppelvlak en gevorderde
+    funksies.
+  message_accent: Optimaliseer u produktiwiteit met styl!
+general:
+  theme:
+    add: Voeg tema by
+    label: Tema -inligting
+    author: Outeur
+    description: Beskrywing
+    added: Tema reeds bygevoeg
+    tags: Tags
+    placeholder: Kies tema
+    enabled: Ingeskakelde temas
+  language: Taal
+  startup: Hardloop met opstart?
+toolbar:
+  placeholder:
+    author: Outeur
+    description: Beskrywing
+    select: Werkbalkstruktuur
+  height: Hoogte
+  enable: Aktiveer Fancy Toolbar
+wm:
+  border:
+    width: Grenswydte
+    enable: Aktiveer venster se grens
+    offset: Grens offset
+  author: Outeur
+  description: Beskrywing
+  disabled_windows10: Die vensterbestuurder is nie beskikbaar vir Windows 10 nie.
+  space_between_containers: Ruimte tussen houers
+  resize_delta: Verander die grootte delta (%)
+  layout: Uitleg
+  workspace_offset: Werkruimtes offset (marges)
+  workspace_padding: Werkruimtes opvulling
+  enable: Aktiveer vensterbestuurder
+weg:
+  items:
+    visible_separators: Sigbare skeiers
+    label: Voorwerpe
+    gap: Ruimte tussen items
+    zoom_size: Ingezoomde grootte (gebruik vir temas)
+    size: Itemgrootte
+  dock_side: Dokkant
+  label: Dock/Taakbalk
+  margin: Marge
+  enable: Aktiveer dok/taakbalk
+  width: Wydte
+  auto_hide: Outo -vel
+  padding: Opvulling
+  gap: Gat
+devtools:
+  app_folders: APP -vouers
+  load: Vrag
+  install_folder: Installasie -lêergids
+  data_folder: Datapap
+  settings_file: Instellingslêer
+  enable: Aktiveer ontwikkelaarsgereedskap
+  custom_config_file: Laai Custom Config -lêer
+apps_configurations:
+  app:
+    options:
+      float: Dryf
+      force: Kragbestuur
+      pinned: Vasgaan
+      unmanage: Onhandiging
+    ok_create: Skep
+    name: Naam
+    ok_readonly: Wysig as nuut
+    monitor_placeholder: Geen
+    category_placeholder: Geen
+    monitor: Monitor
+    title_create: Skep {{name}}
+    title_readonly: Besigtig {{name}}
+    options_label: Ekstra opsies
+    ok_edit: Opdateer
+    workspace_placeholder: Geen
+    bindings: Binding (let op albei opsies is nodig)
+    workspace: Werkruimte
+    category: Kategorie
+    title_edit: Ingebou {{name}}
+  identifier:
+    remove: Vee blok uit
+    add_block: Voeg blok by
+    kind: Identifiseer deur
+    matching_strategy: Bypassende strategie
+    and: En
+    id: Identifiseerder
+    negation: Ontken ooreenstemming
+    or: Of
+  import: Invoerproduk
+  delete: Verwyder
+  export: Uitvoer
+  bundled_msg: >-
+    Hierdie saamgevoegde konfigurasies is nie bewerkbaar nie en is ontwerp om u
+    die beste ervaring sonder aanpassing te bied. Hulle stel outomaties die
+    algemeenste toepassings vir u op.
+  new: Nuut
+  bundled_title: App -konfigurasie saam met Seelen
+  confirm_delete_title: Bevestig delete
+  confirm_delete: Is u seker dat u hierdie konfigurasie/s wil uitvee?
+  swap: Ruil
+  search: Soek
+extras:
+  relaunch: Herlaai
+  links: Amptelike skakels
+  discord: Teenstrydigheid
+  version: Weergawe
+  github: Github
+  exit: Hou op/uitgang
+shortcuts:
+  labels:
+    increase_width: Verhoog die breedte
+    reserve_top: Reserve Top
+    switch_workspace_6: Skakel oor na Workspace 6
+    focus_left: Fokus links
+    send_to_workspace_7: Stuur na Workspace 7
+    reserve_right: Reserveer reg
+    move_to_workspace_0: Beweeg na werkruimte 0
+    reserve_float: Reservaat vlot
+    switch_workspace_0: Skakel oor na werkruimte 0
+    focus_right: Fokus reg
+    switch_workspace_7: Skakel oor na Workspace 7
+    move_to_workspace_4: Beweeg na Workspace 4
+    move_to_workspace_1: Beweeg na werkruimte 1
+    switch_workspace_5: Skakel oor na Workspace 5
+    switch_workspace_3: Skakel oor na Workspace 3
+    focus_bottom: Fokus onder
+    reserve_left: Reservaat links
+    send_to_workspace_6: Stuur na Workspace 6
+    send_to_workspace_3: Stuur na Workspace 3
+    send_to_workspace_8: Stuur na Workspace 8
+    switch_workspace_1: Skakel oor na werkruimte 1
+    move_to_workspace_7: Beweeg na Workspace 7
+    move_to_workspace_6: Beweeg na Workspace 6
+    send_to_workspace_5: Stuur na Workspace 5
+    send_to_workspace_1: Stuur na Workspace 1
+    switch_workspace_9: Skakel oor na Workspace 9
+    send_to_workspace_2: Stuur na Workspace 2
+    switch_workspace_2: Skakel oor na Workspace 2
+    move_to_workspace_3: Beweeg na Workspace 3
+    switch_workspace_8: Skakel oor na Workspace 8
+    reserve_stack: Reservaatstapel
+    focus_top: Fokus top
+    send_to_workspace_0: Stuur na werkruimte 0
+    move_to_workspace_9: Beweeg na Workspace 9
+    send_to_workspace_4: Stuur na Workspace 4
+    move_to_workspace_8: Beweeg na Workspace 8
+    send_to_workspace_9: Stuur na Workspace 9
+    move_to_workspace_2: Beweeg na Workspace 2
+    move_to_workspace_5: Beweeg na Workspace 5
+    increase_height: Verhoog die hoogte
+    restore_sizes: Herstel groottes
+    switch_workspace_4: Skakel oor na Workspace 4
+    decrease_width: Verminder breedte
+    decrease_height: Verminder hoogte
+    reserve_bottom: Reservaat onder
+    focus_latest: Fokus nuut
+  enable: Aktiveer geïntegreerde kortpaaie (AHK)
+  enable_tooltip: >-
+    Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen
+    Core API
+open: Oopmaak
+loading: Laai ...
+save: Red
+cancel: Kanselleer
+inProgress: Aan die gang ...
+quit: Laat vaar
+delete: Verwyder
