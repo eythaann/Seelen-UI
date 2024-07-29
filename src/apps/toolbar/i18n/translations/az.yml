@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Rabitə
+  master_volume: Magistral həcm
+  players: Media oyunçuları
+  input_device: Giriş cihazı
+  output_device: Çıxış cihazı
+network:
+  placeholder:
+    password: Parol
+  more: Daha çox şəbəkə parametrləri
+  not_found: Heç bir şəbəkə tapılmadı
+  hidden: Gizli şəbəkə
+  disconnect: Ayırd etmək
+  connect: Qoşulmaq
+settings:
+  shutdown: Söndür
+  restart: Yenidən başlamaq
+  log_out: Çıxış
+  app_settings: Tətbiq parametrləri
+  sleep: Yatmaq
+  title: Parametrlər
+placeholder:
+  ethernet_connected: İnternetə çıxışı
+  smart_charge: '- Ağıllı yük'
+  bluetooth_devices: Bluetooth və Cihazlar
+  open_system_tray: Açıq Sistem Tepsisi
+  volume: Həcm
+  open_user_folder: İstifadəçi qovluğu açın
+  ethernet_disconnected: İnternetə giriş yoxdur
+  settings: Tez Parametrlər
+  battery_remaining: Qalan

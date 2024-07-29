@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Media modulu əlavə edin
+  start: Başlama modulu əlavə edin
+  settings: Parametrləri açın
+app_menu:
+  close: Yaxın
+  pin: Pin
+  pin_to_left: Pin sola
+  pin_to_center: Mərkəzə pin
+  copy_handles: Copular
+  run_as: İdarəçi kimi qaçmaq
+  open_file_location: Fayl yeri açın
+  close_multiple: Hamısını bağlayın
+  unpin: Qeyri-pəncələmək
+  pin_to_right: Sağa pin
+media_menu:
+  remove: Media modulunu çıxarın
+start_menu:
+  remove: Başlama modulunu çıxarın

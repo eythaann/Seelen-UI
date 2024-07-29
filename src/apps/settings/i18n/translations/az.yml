@@ -1,0 +1,190 @@
+sides:
+  bottom: Dibli
+  right: Haqlı
+  left: Sol
+  top: Üst
+header:
+  labels:
+    developer: İnkişaf etdirici
+    seelen_wm: Pəncərə meneceri
+    info: Məlumat
+    specific_apps: Xüsusi tətbiqlər
+    seelen_weg: Dock / tapşırıq çubuğu
+    monitors: Monitorlar
+    shortcuts: Qısaylıq
+    seelen_bar: Xülya alətlər paneli
+    general: General
+start:
+  title: Xoş gəliş edin!
+  message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
+  message: >-
+    Windows 11 təcrübənizi artırmaq üçün birləşdirilmiş bir kirəmit windows
+    meneceri olan son masa üstü mühiti Seelen Ui-yə xoş gəlmisiniz! İntuitiv
+    interfeysimiz və inkişaf etmiş xüsusiyyətlərimizlə yeni bir səmərəlilik və
+    çoklu bir dövrü araşdırın.
+general:
+  theme:
+    placeholder: Mövzunu seçin
+    enabled: Effektiv mövzular
+    add: Mövzu əlavə edin
+    added: Mövzu artıq əlavə edildi
+    description: Təsvir
+    author: Müəllif
+    label: Tema haqqında məlumat
+    tags: Tags
+  language: Dil
+  startup: Başlanğıcda qaçırsınız?
+toolbar:
+  placeholder:
+    author: Müəllif
+    description: Təsvir
+    select: Alətlər paneli quruluşu
+  height: Hündürlük
+  enable: Zərif alət çubuğunu aktivləşdirin
+wm:
+  border:
+    width: Sərhəd eni
+    offset: Sərhəd əvəzinə
+    enable: Pəncərənin sərhədini aktivləşdirin
+  description: Təsvir
+  resize_delta: Delta'nın ölçüsünü (%)
+  layout: Sxem
+  enable: Pəncərə menecerini aktivləşdirin
+  space_between_containers: Konteynerlər arasındakı boşluq
+  author: Müəllif
+  workspace_offset: İş yerləri ofset (kənarları)
+  disabled_windows10: Pəncərə meneceri Windows 10 üçün mövcud deyil.
+  workspace_padding: İş sahələri padding
+weg:
+  items:
+    zoom_size: Böyüdülmüş ölçü (mövzular üçün istifadə olunur)
+    visible_separators: Görünən ayırıcılar
+    label: Maddələr
+    gap: Əşyalar arasındakı boşluq
+    size: Maddə ölçüsü
+  dock_side: Dok tərəfi
+  margin: Kənarə
+  auto_hide: Avtomatik gizlətmək
+  padding: Paddend
+  width: Geniştəhər
+  gap: Gap
+  label: Dock / tapşırıq çubuğu
+  enable: Dock / tapşırıq çubuğunu aktivləşdirin
+devtools:
+  app_folders: Tətbiq qovluqları
+  data_folder: Məlumat qovluğu
+  load: Yükləmək
+  custom_config_file: Xüsusi konfiqurasiya faylını yükləyin
+  settings_file: Parametrlər faylı
+  enable: Developer alətlərini aktivləşdirin
+  install_folder: Quraşdırma qovluğu
+apps_configurations:
+  app:
+    options:
+      float: Sal
+      pinned: Sancaq
+      unmanage: Qüsursuz
+      force: İdarə etmək
+    monitor: Ekran
+    ok_readonly: Yeni kimi redaktə edin
+    workspace_placeholder: Heç kim
+    title_create: Yaratmaq {{ad}}
+    monitor_placeholder: Heç kim
+    bindings: Bağlama (hər iki variant tələb olunur)
+    category_placeholder: Heç kim
+    name: Ad
+    category: Kateqoriya
+    ok_edit: Aktuallaşdırmaq
+    title_readonly: Bax {{ad}}
+    ok_create: Yaratmaq
+    workspace: İş sahəsi
+    title_edit: '{{Ad}} redaktəsi'
+    options_label: Əlavə seçimlər
+  identifier:
+    add_block: Blok əlavə edin
+    negation: Uyğunlaşmanı rədd edin
+    kind: Tərəfindən müəyyənləşdirmək
+    or: Və ya
+    and: Və
+    remove: Bloku silmək
+    matching_strategy: Uyğun strategiya
+    id: Eyniləşdirici
+  confirm_delete_title: Silmək təsdiqləyin
+  bundled_title: App Config Seelen ilə birləşdirilmişdir
+  export: İxrac etmək
+  confirm_delete: Bu konfiqurasiya / s silmək istədiyinizə əminsiniz?
+  new: Yeni
+  delete: Silmək
+  search: Axtarış
+  bundled_msg: >-
+    Bu paketlənmiş konfiqurasiya düzəliş deyil və özelleştirme olmadan ən yaxşı
+    təcrübəni təmin etmək üçün hazırlanmışdır. Avtomatik olaraq sizin üçün ən
+    çox yayılmış tətbiqləri konfiqurasiya edirlər.
+  import: İdxal etmək
+  swap: Dəyişdirmək
+extras:
+  version: Versiya
+  relaunch: Başsız
+  discord: Nifaq
+  github: Gitub
+  exit: Çıxmaq / çıxmaq
+  links: Rəsmi bağlantılar
+shortcuts:
+  labels:
+    reserve_right: Ehtiyat ehtiyat
+    focus_left: Fokus sol
+    focus_right: Fokuslanmaq
+    move_to_workspace_5: İş sahəsinə 5-ə keçin
+    focus_latest: Ən son fokus
+    send_to_workspace_5: 5 iş sahəsinə göndərin
+    decrease_width: Enini azaltmaq
+    decrease_height: Hündürlük azalmaq
+    move_to_workspace_3: İş sahəsinə 3-ə keçin
+    reserve_bottom: Ehtiyat
+    switch_workspace_3: İş sahəsinə 3 keçin
+    send_to_workspace_1: İş sahəsinə göndərin 1
+    increase_height: Boylanmaq
+    switch_workspace_5: İş sahəsinə 5-ə keçin
+    reserve_left: Qoruğu
+    switch_workspace_9: İş sahəsinə 9-a keçin
+    focus_top: Fokuslanmaq
+    switch_workspace_7: İş sahəsinə 7-ə keçin
+    restore_sizes: Ölçüləri bərpa etmək
+    move_to_workspace_4: İş sahəsinə 4-ə keçin
+    move_to_workspace_2: İş sahəsinə 2-ə keçin
+    move_to_workspace_8: 8 iş sahəsinə keçin 8
+    move_to_workspace_6: İş sahəsinə 6 hərəkət edin
+    switch_workspace_8: İş sahəsinə 8-ə keçin
+    focus_bottom: Fokuslanmaq
+    send_to_workspace_9: İş sahəsinə göndərin 9
+    move_to_workspace_1: İş sahəsinə 1-ə keçin
+    send_to_workspace_6: İş sahəsinə göndərin 6
+    reserve_stack: Ehtiyat yığını
+    move_to_workspace_7: 7 iş sahəsinə keçin
+    switch_workspace_6: İş sahəsinə 6-a keçin
+    increase_width: Enini artırmaq
+    reserve_top: Bronlamaq
+    switch_workspace_4: İş sahəsinə 4-ə keçin
+    send_to_workspace_7: 7 iş sahəsinə göndərin
+    send_to_workspace_8: İş sahəsinə göndərin 8
+    move_to_workspace_9: İş sahəsinə 9-a keçin
+    move_to_workspace_0: İş sahəsinə 0 hərəkət edin
+    send_to_workspace_4: İş sahəsinə 4 göndərin
+    switch_workspace_0: İş sahəsinə 0 keçin
+    switch_workspace_2: İş sahəsinə 2 keçin
+    switch_workspace_1: İş sahəsinə 1 keçin
+    send_to_workspace_2: İş sahəsinə 2 göndərin
+    send_to_workspace_0: 0 iş sahəsinə göndərin
+    send_to_workspace_3: İş sahəsinə göndərin 3
+    reserve_float: Ehtiyat float
+  enable: İnteqrasiya edilmiş qısa yolları (AHK) aktivləşdirin
+  enable_tooltip: >-
+    Seelen Core API istifadə edərək öz qısa yollarınızı həyata keçirə bilsəniz
+    deaktiv edin
+save: Yadda saxla
+loading: Yükləmə ...
+delete: Silmək
+cancel: Ləğv etmək
+quit: Çıxmaq
+open: Açıq-saçıq
+inProgress: Davam edir ...
