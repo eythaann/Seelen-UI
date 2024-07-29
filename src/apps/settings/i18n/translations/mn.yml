@@ -1,0 +1,187 @@
+sides:
+  top: Таг
+  right: Зөв байх
+  left: Зүүн
+  bottom: Ероол
+header:
+  labels:
+    seelen_bar: Уран зөгнөлийн багаж самбар
+    shortcuts: Хэв хаягдал
+    general: Жанжин
+    specific_apps: ТУСГАЙ АЖИЛЛАГАА
+    developer: Хөгжчин
+    seelen_weg: Док / Taskbar
+    seelen_wm: Цонхны менежер
+    monitors: Хэлэлт авагч
+    info: Мэдээлэл
+start:
+  message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
+  message: >-
+    Seelen Ui, Windows 11-ийг сайжруулахын тулд Windows 11-ийг сайжруулахын тулд
+    хамгийн дээд талын цонхны менежертэй морилно уу. Шинэ ERA-ийг судлах, олон
+    тооны интерфэйстэй, дэвшилтэт шинж чанаруудтай олон тооны үр ашийг судлах.
+  title: Сайтар хүлээх,!
+general:
+  theme:
+    label: Сэдвийн мэдээлэл
+    tags: Бичиглэл байна
+    author: Зохиолч
+    add: Сэдэв нэмэх
+    description: Тодорхойлолт / төрөл анги
+    enabled: Идэвхжүүлсэн сэдэв
+    placeholder: Сонгуулыг сонгоно уу
+    added: Сэдэв аль хэдийн нэмэгдсэн
+  language: Хэл
+  startup: Эхлэх үед гүйх үү?
+toolbar:
+  placeholder:
+    description: Тодорхойлолт / төрөл анги
+    select: Хэрэгслийн бүтэц
+    author: Зохиолч
+  enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
+  height: Өндөрлөг
+wm:
+  border:
+    offset: Хилийн офсет
+    width: Хилийн өргөн
+    enable: Цонхны хилийг идэвхжүүлэх
+  workspace_offset: Ажлын талбар нь офсет (Margins)
+  space_between_containers: Савны хоорондох зай
+  layout: Төлөвлөгөө
+  description: Тодорхойлолт / төрөл анги
+  workspace_padding: Ажлын талбарууд
+  author: Зохиолч
+  enable: Цонх менежерийг идэвхжүүлэх
+  resize_delta: Дельтааг өөрчлөх (%)
+  disabled_windows10: Цонхны менежер Windows 10-д байхгүй байна.
+weg:
+  items:
+    label: Зүйл
+    gap: Зүйлийн хоорондох зай
+    zoom_size: Томруулсан хэмжээ (сэдэвт ашигладаг)
+    size: Зүйлийн хэмжээ
+    visible_separators: Харагдах тусгаарлагч
+  enable: Док / Taskbar-г идэвхжүүлэх
+  dock_side: Дохын тухай
+  label: Док / Taskbar
+  width: Өргөн
+  padding: Дэвсгэр
+  margin: Саруулган өвс
+  gap: Цонх
+  auto_hide: Авто гүнд
+devtools:
+  settings_file: Тохиргооын нэр
+  enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
+  app_folders: Апп хавтас
+  install_folder: Суулгалах хүрээ
+  custom_config_file: Custom Compigh файлыг ачаалах
+  data_folder: Д код хавтас
+  load: Ачих
+apps_configurations:
+  app:
+    options:
+      pinned: Ан хатуу
+      float: Нисэн өнгөрөх
+      force: Хүч удирдах
+      unmanage: Нээлттэй
+    category: Зэрэглэл
+    title_readonly: Үзэх {{нэр}}
+    bindings: Батлах (Анхааруулга хоёулаа сонголтыг оруулах шаардлагатай)
+    category_placeholder: Хэн ч
+    workspace: Ауун тал
+    ok_edit: Шинэчлэх
+    monitor: Хянах
+    workspace_placeholder: Хэн ч
+    title_edit: '{{Нэр}}}}'
+    ok_create: Шуүгиан дэгдээх
+    options_label: Нэмий сонголт
+    ok_readonly: Шинэ болгон засах
+    name: Нэр
+    monitor_placeholder: Хэн ч
+    title_create: Үүсгэх {{нэр}}}
+  identifier:
+    id: Өмнө тайлбар
+    or: ЭСВЭЛ
+    negation: Тохирохыг үгүйсгэх
+    kind: Тодорхойлох
+    add_block: Нид нэмнэ
+    and: Ба
+    matching_strategy: Тохирох стратеги
+    remove: Блок устгах
+  delete: Эдгээх
+  swap: Түлхэх
+  bundled_title: App Config Selen-тай багцлав
+  confirm_delete_title: Устгахыг баталгаажуулна уу
+  new: Шинэ
+  import: Импортлох
+  confirm_delete: Та энэ тохиргоог устгахыг хүсч байна уу?
+  bundled_msg: >-
+    Эдгээр багцын тохиргоо нь засварлах боломжгүй бөгөөд танд тохируулга
+    хийхгүйгээр хамгийн сайн туршлага өгөх зорилготой юм. Тэд таны хувьд хамгийн
+    түгээмэл програмуудыг автоматаар тохируулдаг.
+  search: Эрэл хайгуул хийх
+  export: Гадаадад гаргах
+extras:
+  github: Github
+  relaunch: OradAUN
+  exit: Гарах / гарах
+  links: Албан ёсны холбоос
+  version: Таамаглал
+  discord: Холор
+shortcuts:
+  labels:
+    switch_workspace_2: Ажлын талбарт 2 руу шилжих
+    reserve_top: Нэр гаргах
+    move_to_workspace_9: Ажлын талбар руу шилжих 9
+    decrease_height: Өндөр хэмжээг
+    reserve_float: Нөөцийн хөвөх
+    switch_workspace_8: Ажлын талбар руу шилжих 8
+    send_to_workspace_7: Ажлын талбар руу илгээх 7
+    reserve_right: Нөөцийг зөв дарна уу
+    send_to_workspace_5: Ажлын талбар руу илгээх 5
+    focus_latest: Фандик хамгийн сүүлийн үеийн
+    send_to_workspace_2: Ажлын талбарт 2 руу илгээнэ үү
+    focus_top: Додуулах нь эсрэг
+    increase_width: Өргөнийг нэмэгдүүлэх
+    focus_bottom: Дээр төвлөрүү
+    switch_workspace_6: Ажлын талбарт шилжих 6
+    move_to_workspace_1: Ажлын талбар руу шилжих 1
+    reserve_left: Зуух Зүүн
+    switch_workspace_1: Ажлын талбарт шилжих 1
+    switch_workspace_5: Ажлын талбар руу шилжих 5
+    move_to_workspace_8: Ажлын талбар руу шилжих 8
+    focus_right: Домог
+    decrease_width: Гарын хойш хөгжих
+    increase_height: Дээд хэмжээг нэмэгдүүлэх
+    reserve_bottom: Нөөцийг нөөцлөх
+    move_to_workspace_6: Ажлын талбар руу шилжих 6
+    switch_workspace_0: Ажлын талбар руу шилжих 0
+    move_to_workspace_7: Ажлын талбар руу шилжих 7
+    send_to_workspace_4: Ажлын талбарт илгээх 4
+    move_to_workspace_3: Ажлын талбар руу шилжих 3
+    switch_workspace_7: Ажлын талбарт шилжих 7
+    reserve_stack: Дурсамж авах
+    move_to_workspace_4: Ажлын талбарт шилжих 4
+    move_to_workspace_2: Ажлын талбар руу шилжих 2
+    switch_workspace_4: Ажлын талбар 4 руу шилжих
+    send_to_workspace_6: Workpace 6 руу илгээнэ үү
+    move_to_workspace_0: Ажлын талбар руу шилжих 0
+    switch_workspace_3: Ажлын талбар руу шилжих 3
+    send_to_workspace_0: Ажлын талбарт 0 руу илгээнэ үү
+    send_to_workspace_8: Ажлын талбар руу илгээх 8
+    send_to_workspace_1: Ажлын талбар руу илгээх 1
+    focus_left: Зүүн талд байна
+    send_to_workspace_3: Ажлын талбар руу илгээх 3
+    move_to_workspace_5: Ажлын талбар руу шилжих 5
+    restore_sizes: Хэмжээг сэргээх
+    switch_workspace_9: Ажлын талбарт шилжих 9
+    send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
+  enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
+  enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
+inProgress: Явагдаж байна ...
+delete: Эдгээх
+loading: Ачаалах ...
+cancel: Цуаах
+quit: Орхих
+open: Нээлттэй
+save: Аврах

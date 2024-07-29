@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Харилцаа
+    multimedia: Multimiedia
+  input_device: Оролтын төхөөрөмж
+  master_volume: Мэргэжч
+  players: Хэвлэл хэвлэл тоглогч
+  output_device: Гаралтын төхөөрөмж
+network:
+  placeholder:
+    password: Нууц үг
+  not_found: Сүлжээ олдсонгүй
+  hidden: Цэг сонссон сүлж
+  disconnect: Тусгаарлах
+  connect: Холбох
+  more: Сүлжээний илүү олон тохиргоо
+settings:
+  shutdown: Унтраах
+  restart: Дахин ачааллах
+  log_out: Гарах
+  app_settings: Дуулахын тохиргоо
+  title: Тохиргоо
+  sleep: Нойр
+placeholder:
+  battery_remaining: '% үлдсэн'
+  volume: Хэмжээ
+  open_user_folder: Хэрэглэгчийн чиглэлд
+  smart_charge: '- ухаалаг цэнэг'
+  settings: Түлэлцэн тохиргоо
+  open_system_tray: Нээлттэй системийн тавиур
+  bluetooth_devices: Блютүүт ба төхөөрөмж
+  ethernet_disconnected: Интернэтэд нэвтрэх боломжгүй байна
+  ethernet_connected: Интернэт интернет нэвтрэх
