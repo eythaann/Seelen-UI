@@ -1,0 +1,190 @@
+sides:
+  top: Գագաթ
+  right: Ճիշտ
+  left: Ձախ
+  bottom: Հատակից
+header:
+  labels:
+    seelen_bar: Fancy Toolbar
+    developer: Մշակող
+    seelen_weg: Dock / Taskbar
+    specific_apps: Հատուկ ծրագրեր
+    general: Ընդհանուր
+    monitors: Մոնիտորներ
+    info: Տեղեկություն
+    shortcuts: Դյուրանցումներ
+    seelen_wm: Պատուհանների կառավարիչ
+start:
+  title: Բարի գալուստ
+  message: >-
+    Բարի գալուստ SEELEN UI, Ultimate Desktop միջավայրը `ներառված սալիկապատման
+    մենեջեր` ձեր Windows 11 փորձը բարելավելու համար: Ուսումնասիրեք
+    արդյունավետության եւ բազմամշակման նոր դարաշրջան մեր ինտուիտիվ ինտերֆեյսով եւ
+    առաջադեմ հատկություններով:
+  message_accent: 'Օպտիմիզացրեք ձեր արտադրողականությունը ոճով:'
+general:
+  theme:
+    label: Թեման տեղեկատվություն
+    add: Ավելացնել թեման
+    description: Նկարագրություն
+    placeholder: Ընտրեք թեման
+    enabled: Միացված թեմաներ
+    author: Հեղինակ
+    tags: Պիտակներ
+    added: Թեման արդեն ավելացրեց
+  language: Լեզու
+  startup: 'Գործարկման վրա գործարկեք:'
+toolbar:
+  placeholder:
+    author: Հեղինակ
+    description: Նկարագրություն
+    select: Գործիքադարակի կառուցվածքը
+  enable: Միացնել Fancy Toolbar- ը
+  height: Բարձրություն
+wm:
+  border:
+    enable: Միացնել պատուհանի սահմանը
+    width: Սահմանի լայնությունը
+    offset: Սահմանի օֆսեթ
+  description: Նկարագրություն
+  disabled_windows10: 'Պատուհանների կառավարիչը մատչելի չէ Windows 10-ի համար:'
+  resize_delta: Չափափոխել դելտան (%)
+  workspace_offset: Աշխատանքային տարածքների օֆսեթ (լուսանցքներ)
+  layout: Դասավորություն
+  space_between_containers: Տիեզերք բեռնարկղերի միջեւ
+  workspace_padding: Աշխատանքային տարածքների լիցքավորում
+  enable: Միացնել պատուհանի կառավարիչը
+  author: Հեղինակ
+weg:
+  items:
+    size: Ապրանքի չափը
+    label: Իրերը
+    visible_separators: Տեսանելի տարանջատիչներ
+    gap: Տարածություն իրերի միջեւ
+    zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
+  enable: Միացնել Dock / Taskbar
+  width: Լայնություն
+  dock_side: Նավահանգիստ
+  auto_hide: Ավտոմատ թաքցնել
+  margin: Լուսանցք
+  gap: Բացվածք
+  label: Dock / Taskbar
+  padding: Լիցք
+devtools:
+  custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
+  data_folder: Տվյալների պանակ
+  load: Բեռ
+  app_folders: Ծրագրի թղթապանակներ
+  install_folder: Տեղադրման պանակ
+  enable: Միացնել մշակողի գործիքները
+  settings_file: Կարգավորումներ ֆայլ
+apps_configurations:
+  app:
+    options:
+      pinned: Փածսյա
+      unmanage: Անօդաչուր
+      force: Ուժի կառավարում
+      float: Լողացող
+    monitor_placeholder: Ոչ ոք
+    category_placeholder: Ոչ ոք
+    workspace_placeholder: Ոչ ոք
+    name: Անուն
+    bindings: Պարտադիր (նշում է, որ երկու տարբերակները պարտադիր են)
+    workspace: Աշխատատեղ
+    monitor: Մոնիտոր
+    category: Կատեգորիա
+    ok_create: Ստեղծել
+    title_readonly: Դիտում է {{Անունը}
+    options_label: Լրացուցիչ ընտրանքներ
+    title_edit: Խմբագրում {{Անվան}
+    ok_readonly: Խմբագրել որպես նոր
+    ok_edit: Թարմացում
+    title_create: Ստեղծելով {{name}
+  identifier:
+    or: ԿԱՄ
+    and: Մի քանազոր
+    kind: Նույնացնել ըստ
+    id: Նույնացնող
+    remove: Delete նջել բլոկը
+    negation: Ժխտել համապատասխանությունը
+    add_block: Ավելացնել բլոկ
+    matching_strategy: Համապատասխան ռազմավարություն
+  bundled_title: Ծրագրի կազմաձեւումը փաթեթավորված է Seelen- ի հետ
+  confirm_delete_title: Հաստատեք ջնջել
+  swap: Փոխանակել
+  import: Ներմուծում
+  export: Արտահանում
+  new: Նոր
+  confirm_delete: 'Համոզված եք, որ ցանկանում եք ջնջել այս կազմաձեւը:'
+  search: Որոնել
+  delete: Ջնջել
+  bundled_msg: >-
+    Այս փաթեթավորված կազմաձեւերը խմբագրելի չեն եւ նախագծված են `առանց
+    հարմարեցման լավագույն փորձը տրամադրելու: Նրանք ինքնաբերաբար կարգավորում են
+    ձեզ համար ամենատարածված դիմումները:
+extras:
+  github: Գյուտ
+  discord: Տարաձայնություն
+  links: Պաշտոնական հղումներ
+  relaunch: Վերակառուցվել
+  exit: Հանգստացեք / Ելք
+  version: Տարբերակ
+shortcuts:
+  labels:
+    move_to_workspace_5: Տեղափոխել Workpace 5
+    focus_bottom: Կենտրոնացեք հատակին
+    send_to_workspace_8: Ուղարկել Workspace 8-ին
+    send_to_workspace_3: Ուղարկել Workspace 3-ին
+    move_to_workspace_9: Տեղափոխել Workspace 9
+    reserve_left: Պահուստը մնացել է
+    send_to_workspace_2: Ուղարկել Workspace 2-ին
+    switch_workspace_5: Անցեք Workspace- ին 5
+    focus_top: Կենտրոնանալ գագաթին
+    decrease_width: Լայնության նվազում
+    switch_workspace_2: Անցեք Workspace- ին 2
+    reserve_stack: Պահեստավորված նյութեր
+    reserve_float: Ամրագրեք բոց
+    focus_latest: Կենտրոնացեք վերջին
+    reserve_bottom: Ամրագրեք հատակը
+    send_to_workspace_6: Ուղարկել Workspace 6-ին
+    send_to_workspace_5: Ուղարկել Workspace 5-ին
+    switch_workspace_3: Անցեք Workspace- ին 3
+    move_to_workspace_6: Տեղափոխել Workspace 6
+    switch_workspace_4: Անցեք Workspace- ին 4
+    send_to_workspace_0: Ուղարկել Workspace- ին 0
+    switch_workspace_6: Անցեք Workspace- ին 6
+    focus_right: Կենտրոնանալ ճիշտ
+    send_to_workspace_9: Ուղարկել Workspace 9-ին
+    switch_workspace_1: Անցեք աշխատանքային տարածքին 1
+    send_to_workspace_4: Ուղարկել Workspace 4-ին
+    move_to_workspace_2: Տեղափոխվել դեպի Workspace 2
+    switch_workspace_9: Անցեք Workspace- ին 9
+    move_to_workspace_8: Տեղափոխել Workpace 8
+    switch_workspace_7: Անցեք Workspace- ին 7
+    switch_workspace_0: Անցեք Workspace- ին 0
+    send_to_workspace_7: Ուղարկել Workspace 7-ին
+    focus_left: Կենտրոնանալ ձախ
+    increase_height: Բարձրացնել բարձրությունը
+    reserve_right: Ամրագրեք աջ
+    move_to_workspace_0: Տեղափոխել Workspace 0
+    move_to_workspace_1: Տեղափոխել Workspace 1
+    move_to_workspace_3: Տեղափոխվել Workspace 3-ին
+    restore_sizes: Վերականգնել չափերը
+    decrease_height: Նվազեցնել բարձրությունը
+    increase_width: Բարձրացնել լայնությունը
+    send_to_workspace_1: Ուղարկել Workspace 1-ին
+    move_to_workspace_7: Տեղափոխվել Workpace 7-ին
+    move_to_workspace_4: Տեղափոխել Workpace 4-ին
+    reserve_top: Ամրագրեք վերեւ
+    switch_workspace_8: Անցեք Workspace- ին 8
+  enable: Միացնել ինտեգրված դյուրանցումները (AHK)
+  enable_tooltip: >-
+    Անջատեք, եթե դուք կիրականացնեք ձեր սեփական դյուրանցումները `օգտագործելով
+    Seelen Core API- ն
+inProgress: Ընթացքի մեջ է...
+loading: Բեռնում ...
+open: Բաց անել
+save: Խնայել
+cancel: Չեղարկել
+delete: Ջնջել
+quit: Թողնել

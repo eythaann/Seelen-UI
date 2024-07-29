@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Ավելացնել մեդիա մոդուլ
+  settings: Բաց պարամետրեր
+  start: Ավելացնել Սկսել մոդուլը
+app_menu:
+  close: փակել
+  pin_to_center: Քորոց դեպի կենտրոն
+  pin_to_left: PIN- ը ձախից
+  open_file_location: Բաց ֆայլի գտնվելու վայրը
+  copy_handles: Պատճենել բռնակներ
+  pin_to_right: Քորոց աջից
+  pin: Թոշակ
+  unpin: Անապաղում
+  close_multiple: Փակել բոլորը
+  run_as: Գործարկել որպես ադմինիստրատոր
+media_menu:
+  remove: Հեռացրեք մեդիա մոդուլը
+start_menu:
+  remove: Հեռացրեք Սկսել մոդուլը

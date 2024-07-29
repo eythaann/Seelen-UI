@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Մուլտիմեդիա
+    comunications: Կապի
+  master_volume: Վարպետի ծավալը
+  players: Մեդիա նվագարկիչներ
+  output_device: Արդյունքային սարք
+  input_device: Մուտքային սարք
+network:
+  placeholder:
+    password: Գաղտնաբառ
+  hidden: Թաքնված ցանց
+  disconnect: Անջատել
+  more: Ավելի շատ ցանցային պարամետրեր
+  connect: Միացնել
+  not_found: Networks անցեր չեն գտնվել
+settings:
+  shutdown: Անջատել
+  title: Կարգավորումներ
+  restart: Վերսկսել
+  log_out: Դուրս գալ
+  app_settings: Ծրագրի կարգավորումներ
+  sleep: Քնել
+placeholder:
+  ethernet_connected: Ինտերնետ հասանելիության
+  open_system_tray: Բաց համակարգի սկուտեղ
+  volume: Ծավալ
+  open_user_folder: Բաց օգտագործողի թղթապանակ
+  battery_remaining: Մնացած
+  ethernet_disconnected: Ոչ մի ինտերնետ մուտք չկա
+  settings: Արագ պարամետրեր
+  bluetooth_devices: Bluetooth & սարքեր
+  smart_charge: '- Խելացի վճար'
