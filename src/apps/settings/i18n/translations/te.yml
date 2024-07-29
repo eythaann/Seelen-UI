@@ -1,0 +1,190 @@
+sides:
+  bottom: దిగువన
+  top: టాప్
+  left: ఎడమ
+  right: కుడి
+header:
+  labels:
+    info: సమాచారం
+    general: జనరల్
+    monitors: మానిటర్లు
+    seelen_wm: విండో మేనేజర్
+    shortcuts: సత్వరమార్గాలు
+    developer: డెవలపర్
+    specific_apps: నిర్దిష్ట యాప్‌లు
+    seelen_bar: ఫ్యాన్సీ టూల్‌బార్
+    seelen_weg: డాక్/టాస్క్‌బార్
+start:
+  title: స్వాగతం!
+  message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
+  message: >-
+    సీలెన్ UIకి స్వాగతం, మీ Windows 11 అనుభవాన్ని మెరుగుపరచడానికి
+    ఇన్‌కార్పొరేటెడ్ టైలింగ్ విండోస్ మేనేజర్‌తో అంతిమ డెస్క్‌టాప్
+    ఎన్విరాన్‌మెంట్! మా సహజమైన ఇంటర్‌ఫేస్ మరియు అధునాతన ఫీచర్‌లతో సమర్ధత మరియు
+    బహువిధి యొక్క కొత్త యుగాన్ని అన్వేషించండి.
+general:
+  theme:
+    tags: టాగ్లు
+    placeholder: థీమ్‌ని ఎంచుకోండి
+    description: వివరణ
+    author: రచయిత
+    label: థీమ్ సమాచారం
+    added: థీమ్ ఇప్పటికే జోడించబడింది
+    enabled: ప్రారంభించబడిన థీమ్‌లు
+    add: థీమ్ జోడించండి
+  language: భాష
+  startup: స్టార్టప్‌లో అమలు చేయాలా?
+toolbar:
+  placeholder:
+    author: రచయిత
+    description: వివరణ
+    select: టూల్‌బార్ నిర్మాణం
+  height: ఎత్తు
+  enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
+wm:
+  border:
+    width: అంచు వెడల్పు
+    offset: సరిహద్దు ఆఫ్‌సెట్
+    enable: విండో అంచుని ప్రారంభించండి
+  layout: లేఅవుట్
+  author: రచయిత
+  description: వివరణ
+  space_between_containers: కంటైనర్ల మధ్య ఖాళీ
+  disabled_windows10: విండోస్ 10 కోసం విండో మేనేజర్ అందుబాటులో లేదు.
+  enable: విండో మేనేజర్‌ని ప్రారంభించండి
+  workspace_padding: కార్యస్థలాల పాడింగ్
+  workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)
+  resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
+weg:
+  items:
+    label: వస్తువులు
+    size: అంశం పరిమాణం
+    visible_separators: కనిపించే సెపరేటర్లు
+    gap: వస్తువుల మధ్య ఖాళీ
+    zoom_size: జూమ్ చేసిన పరిమాణం (థీమ్‌ల కోసం ఉపయోగించబడుతుంది)
+  auto_hide: ఆటో దాచు
+  padding: పాడింగ్
+  label: డాక్/టాస్క్‌బార్
+  margin: మార్జిన్
+  gap: గ్యాప్
+  width: వెడల్పు
+  enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
+  dock_side: డాక్ సైడ్
+devtools:
+  enable: డెవలపర్ సాధనాలను ప్రారంభించండి
+  custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి
+  settings_file: సెట్టింగుల ఫైల్
+  data_folder: డేటా ఫోల్డర్
+  load: లోడ్ చేయండి
+  install_folder: ఇన్‌స్టాలేషన్ ఫోల్డర్
+  app_folders: యాప్ ఫోల్డర్‌లు
+apps_configurations:
+  app:
+    options:
+      pinned: పిన్ చేయబడింది
+      float: ఫ్లోట్
+      unmanage: నిర్వహించవద్దు
+      force: బలవంతంగా నిర్వహించండి
+    monitor: మానిటర్
+    options_label: అదనపు ఎంపికలు
+    workspace: కార్యస్థలం
+    workspace_placeholder: ఏదీ లేదు
+    category_placeholder: ఏదీ లేదు
+    monitor_placeholder: ఏదీ లేదు
+    category: వర్గం
+    name: పేరు
+    title_create: '{{name}}ని సృష్టిస్తోంది'
+    title_readonly: '{{name}} వీక్షిస్తోంది'
+    title_edit: '{{name}}ని సవరిస్తోంది'
+    ok_edit: నవీకరించు
+    ok_readonly: కొత్తదిగా సవరించండి
+    bindings: బైండింగ్ (రెండు ఎంపికలు అవసరమని గమనించండి)
+    ok_create: సృష్టించు
+  identifier:
+    and: మరియు
+    negation: సరిపోలికను తిరస్కరించండి
+    or: లేదా
+    matching_strategy: మ్యాచింగ్ స్ట్రాటజీ
+    remove: బ్లాక్‌ని తొలగించండి
+    add_block: బ్లాక్ జోడించండి
+    id: ఐడెంటిఫైయర్
+    kind: ద్వారా గుర్తించండి
+  search: వెతకండి
+  swap: మార్పిడి
+  new: కొత్తది
+  import: దిగుమతి
+  export: ఎగుమతి చేయండి
+  confirm_delete_title: తొలగించడాన్ని నిర్ధారించండి
+  bundled_title: యాప్ కాన్ఫిగర్ సీలెన్‌తో బండిల్ చేయబడింది
+  delete: తొలగించు
+  confirm_delete: మీరు ఈ కాన్ఫిగరేషన్/లని ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?
+  bundled_msg: >-
+    ఈ బండిల్ కాన్ఫిగరేషన్‌లు సవరించదగినవి కావు మరియు అనుకూలీకరణ లేకుండా మీకు
+    ఉత్తమ అనుభవాన్ని అందించడానికి రూపొందించబడ్డాయి. వారు మీ కోసం అత్యంత సాధారణ
+    అప్లికేషన్‌లను స్వయంచాలకంగా కాన్ఫిగర్ చేస్తారు.
+extras:
+  version: 'సంస్కరణ: Telugu'
+  github: GitHub
+  links: అధికారిక లింకులు
+  discord: అసమ్మతి
+  relaunch: పునఃప్రారంభించండి
+  exit: నిష్క్రమించు/నిష్క్రమించు
+shortcuts:
+  labels:
+    focus_right: ఫోకస్ రైట్
+    reserve_right: రిజర్వ్ హక్కు
+    reserve_left: రిజర్వ్ ఎడమ
+    increase_height: ఎత్తు పెంచండి
+    switch_workspace_0: కార్యస్థలం 0కి మారండి
+    reserve_bottom: రిజర్వ్ బాటమ్
+    send_to_workspace_0: కార్యస్థలం 0కి పంపండి
+    switch_workspace_1: కార్యస్థలానికి మారండి 1
+    move_to_workspace_4: కార్యస్థలానికి తరలించు 4
+    switch_workspace_6: కార్యస్థలానికి మారండి 6
+    reserve_top: రిజర్వ్ టాప్
+    focus_latest: తాజాగా ఫోకస్ చేయండి
+    restore_sizes: పరిమాణాలను పునరుద్ధరించండి
+    reserve_stack: రిజర్వ్ స్టాక్
+    focus_left: ఎడమవైపు దృష్టి పెట్టండి
+    move_to_workspace_5: కార్యస్థలానికి తరలించు 5
+    decrease_height: ఎత్తు తగ్గించండి
+    send_to_workspace_1: కార్యస్థలానికి పంపండి 1
+    send_to_workspace_3: కార్యస్థలానికి పంపండి 3
+    send_to_workspace_4: కార్యస్థలానికి పంపండి 4
+    send_to_workspace_2: కార్యస్థలానికి పంపండి 2
+    send_to_workspace_9: కార్యస్థలానికి పంపండి 9
+    move_to_workspace_2: కార్యస్థలానికి తరలించు 2
+    send_to_workspace_5: కార్యస్థలానికి పంపండి 5
+    move_to_workspace_7: కార్యస్థలానికి తరలించు 7
+    increase_width: వెడల్పు పెంచండి
+    switch_workspace_5: కార్యస్థలానికి మారండి 5
+    decrease_width: వెడల్పును తగ్గించండి
+    reserve_float: రిజర్వ్ ఫ్లోట్
+    move_to_workspace_6: కార్యస్థలానికి తరలించు 6
+    send_to_workspace_7: కార్యస్థలానికి పంపండి 7
+    move_to_workspace_1: కార్యస్థలానికి తరలించు 1
+    switch_workspace_8: కార్యస్థలానికి మారండి 8
+    switch_workspace_3: కార్యస్థలానికి మారండి 3
+    focus_top: ఫోకస్ టాప్
+    move_to_workspace_0: కార్యస్థలం 0కి తరలించండి
+    move_to_workspace_9: కార్యస్థలానికి తరలించు 9
+    switch_workspace_2: కార్యస్థలానికి మారండి 2
+    switch_workspace_9: కార్యస్థలానికి మారండి 9
+    send_to_workspace_6: కార్యస్థలానికి పంపండి 6
+    move_to_workspace_8: కార్యస్థలానికి తరలించు 8
+    move_to_workspace_3: కార్యస్థలానికి తరలించు 3
+    switch_workspace_4: కార్యస్థలానికి మారండి 4
+    send_to_workspace_8: కార్యస్థలానికి పంపండి 8
+    switch_workspace_7: కార్యస్థలానికి మారండి 7
+    focus_bottom: ఫోకస్ బాటమ్
+  enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
+  enable_tooltip: >-
+    మీరు సీలెన్ కోర్ Apiని ఉపయోగించి మీ స్వంత సత్వరమార్గాలను అమలు చేస్తే
+    నిలిపివేయండి
+loading: లోడ్...
+delete: తొలగించు
+open: తెరవండి
+save: సేవ్ చేయండి
+cancel: రద్దు చేయండి
+quit: నిష్క్రమించు
+inProgress: పురోగతిలో ఉంది...

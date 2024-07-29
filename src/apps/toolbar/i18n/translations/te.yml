@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: కమ్యూనికేషన్స్
+    multimedia: మల్టీమీడియా
+  input_device: ఇన్పుట్ పరికరం
+  players: మీడియా ప్లేయర్స్
+  master_volume: మాస్టర్ వాల్యూమ్
+  output_device: అవుట్పుట్ పరికరం
+network:
+  placeholder:
+    password: పాస్వర్డ్
+  disconnect: డిస్‌కనెక్ట్ చేయండి
+  not_found: నెట్‌వర్క్‌లు ఏవీ కనుగొనబడలేదు
+  connect: కనెక్ట్
+  hidden: దాచిన నెట్‌వర్క్
+  more: మరిన్ని నెట్‌వర్క్ సెట్టింగులు
+settings:
+  log_out: లాగ్ అవుట్
+  app_settings: అనువర్తన సెట్టింగులు
+  shutdown: షట్డౌన్
+  title: సెట్టింగులు
+  restart: పున art ప్రారంభం
+  sleep: నిద్ర
+placeholder:
+  ethernet_connected: ఇంటర్నెట్ సదుపాయం
+  ethernet_disconnected: ఇంటర్నెట్ సదుపాయం లేదు
+  bluetooth_devices: బ్లూటూత్ & పరికరాలు
+  open_system_tray: ఓపెన్ సిస్టమ్ ట్రే
+  smart_charge: '- స్మార్ట్ ఛార్జ్'
+  battery_remaining: '% మిగిలి ఉంది'
+  volume: వాల్యూమ్
+  open_user_folder: ఓపెన్ యూజర్ ఫోల్డర్
+  settings: శీఘ్ర సెట్టింగులు
