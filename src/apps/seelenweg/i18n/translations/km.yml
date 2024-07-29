@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: បើកការកំណត់
+  media: បន្ថែមម៉ូឌុលមេឌៀបន្ថែម
+  start: បន្ថែមម៉ូឌុលចាប់ផ្តើម
+app_menu:
+  run_as: ដំណើរការ​ជា​រ​អ្នកគ្រប់គ្រង
+  pin: ម្ជុល
+  copy_handles: ចម្លងចំណុចទាញ
+  unpin: អក្គោអិន
+  pin_to_center: ម្ជុលទៅកណ្តាល
+  close_multiple: បិទទាំងអស់
+  pin_to_left: ម្ជុលទៅឆ្វេង
+  pin_to_right: ម្ជុលទៅស្តាំ
+  close: បិត
+  open_file_location: បើកទីតាំងឯកសារ
+media_menu:
+  remove: យកម៉ូឌុលមេឌៀចេញ
+start_menu:
+  remove: យកម៉ូឌុលចាប់ផ្តើមចេញ
