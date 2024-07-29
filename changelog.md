@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no loading translations correctly on update modal.
+
 ## [1.8.9]
 ### enhancements
 - add translation to the rest of apps (dock, toolbar, and update modal).
