@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Иловаи модули ВАО
+  settings: Танзимоти кушода
+  start: Иловаи модули оғоз
+app_menu:
+  copy_handles: Дасткор
+  pin_to_center: PIN ба марказ
+  pin_to_left: PIN ба чап
+  pin_to_right: PIN ба рост
+  close_multiple: Ҳамаашро пӯшед
+  pin: PIN
+  run_as: Ҳамчун мудир кор кунед
+  unpin: Ватанӣ
+  close: Наздик
+  open_file_location: Кушодани макони кушод
+media_menu:
+  remove: Модули ВАО-ро хориҷ кунед
+start_menu:
+  remove: Модули оғозро хориҷ кунед

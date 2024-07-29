@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Иртибот
+    multimedia: Мултимедиявӣ
+  input_device: Дастгоҳи воридшавӣ
+  master_volume: Ҳаҷми усто
+  players: Бозингарони ВАО
+  output_device: Дастгоҳи баромад
+network:
+  placeholder:
+    password: Номи махфӣ
+  hidden: Шабакаи пинҳонӣ
+  not_found: Ягон шабакаҳо ёфт нашуд
+  more: Танзимоти шабака
+  disconnect: Ьудо кардан
+  connect: Пайваст кардан
+settings:
+  restart: Оғози дубора
+  shutdown: Пӯшида шудан
+  log_out: Баромадан
+  app_settings: Танзимоти барнома
+  sleep: Хоб
+  title: Танзимот
+placeholder:
+  smart_charge: '- СПАЛ'
+  ethernet_connected: Дастрасии Интернет
+  bluetooth_devices: Bluetooth & Дастгоҳҳо
+  volume: Баланд
+  battery_remaining: '% боқимонда'
+  open_system_tray: Пойгоҳи системаро кушоед
+  settings: Танзимоти фаврӣ
+  open_user_folder: Папкаи корбарро кушоед
+  ethernet_disconnected: Дастрасии Интернет надорад
