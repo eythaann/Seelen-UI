@@ -1,0 +1,189 @@
+sides:
+  bottom: ລຸ່ມ
+  top: ເທິງ
+  right: ສິດ
+  left: ຊ້າຍ
+header:
+  labels:
+    general: ທົ່ວໄປ
+    shortcuts: ທາງລັດ
+    info: ຂໍ້ມູນ
+    seelen_weg: Dock/Taskbar
+    seelen_bar: ແຖບເຄື່ອງມືແຟນຊີ
+    specific_apps: ແອັບສະເພາະ
+    seelen_wm: ຜູ້ຈັດການປ່ອງຢ້ຽມ
+    monitors: ຈໍພາບ
+    developer: ນັກພັດທະນາ
+start:
+  title: ຍິນດີຕ້ອນຮັບ!
+  message_accent: ເພີ່ມປະສິດທິພາບການຜະລິດຂອງເຈົ້າດ້ວຍຮູບແບບ!
+  message: >-
+    ຍິນ​ດີ​ຕ້ອນ​ຮັບ​ສູ່ Seelen UI,
+    ສິ່ງ​ແວດ​ລ້ອມ​ເດັສ​ທັອບ​ທີ່​ດີ​ທີ່​ສຸດ​ທີ່​ມີ​ຕົວ​ຈັດ​ການ​ໜ້າ​ຕ່າງ​ກະ​ເບື້ອງ​ທີ່​ປະ​ກອບ​ເຂົ້າ​ເພື່ອ​ເພີ່ມ​ປະ​ສົບ​ການ
+    Windows 11 ຂອງ​ທ່ານ! ສຳຫຼວດຍຸກໃໝ່ຂອງປະສິດທິພາບ
+    ແລະການເຮັດວຽກຫຼາຍໜ້າດ້ວຍການໂຕ້ຕອບທີ່ເຂົ້າໃຈງ່າຍ
+    ແລະຄຸນສົມບັດຂັ້ນສູງຂອງພວກເຮົາ.
+general:
+  theme:
+    tags: ປ້າຍກຳກັບ
+    author: ຜູ້ຂຽນ
+    description: ລາຍລະອຽດ
+    enabled: ຮູບແບບສີສັນທີ່ເປີດໃຊ້ງານ
+    label: ຂໍ້ມູນຫົວຂໍ້
+    placeholder: ເລືອກຫົວຂໍ້
+    added: ເພີ່ມຮູບແບບສີສັນແລ້ວ
+    add: ເພີ່ມຫົວຂໍ້
+  language: ພາສາ
+  startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
+toolbar:
+  placeholder:
+    author: ຜູ້ຂຽນ
+    description: ລາຍລະອຽດ
+    select: ໂຄງສ້າງແຖບເຄື່ອງມື
+  enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
+  height: ຄວາມສູງ
+wm:
+  border:
+    enable: ເປີດໃຊ້ຂອບຂອງປ່ອງຢ້ຽມ
+    width: ຄວາມກວ້າງຊາຍແດນ
+    offset: Border Offset
+  author: ຜູ້ຂຽນ
+  description: ລາຍລະອຽດ
+  layout: ແຜນຜັງ
+  resize_delta: ປັບຂະໜາດ Delta (%)
+  space_between_containers: ຊ່ອງຫວ່າງລະຫວ່າງບັນຈຸ
+  enable: ເປີດໃຊ້ Window Manager
+  workspace_padding: ພື້ນທີ່ເຮັດວຽກ Padding
+  workspace_offset: ພື້ນທີ່ເຮັດວຽກຊົດເຊີຍ (ຂອບ)
+  disabled_windows10: Window Manager ບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບ Windows 10.
+weg:
+  items:
+    label: ລາຍການ
+    visible_separators: ຕົວແຍກທີ່ເບິ່ງເຫັນໄດ້
+    zoom_size: ຂະຫຍາຍຂະໜາດ (ໃຊ້ສຳລັບຮູບແບບສີສັນ)
+    gap: ຊ່ອງຫວ່າງລະຫວ່າງລາຍການ
+    size: ຂະໜາດລາຍການ
+  auto_hide: ເຊື່ອງອັດຕະໂນມັດ
+  width: ກວ້າງ
+  margin: ຂອບ
+  label: Dock/Taskbar
+  padding: padding
+  gap: ຊ່ອງຫວ່າງ
+  enable: ເປີດໃຊ້ Dock/Taskbar
+  dock_side: Dock Side
+devtools:
+  custom_config_file: ໂຫຼດໄຟລ໌ການຕັ້ງຄ່າແບບກຳນົດເອງ
+  enable: ເປີດໃຊ້ເຄື່ອງມືນັກພັດທະນາ
+  load: ໂຫຼດ
+  app_folders: ໂຟນເດີ App
+  settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
+  install_folder: ໂຟນເດີການຕິດຕັ້ງ
+  data_folder: ແຟ້ມຂໍ້ມູນ
+apps_configurations:
+  app:
+    options:
+      float: ລອຍ
+      unmanage: ຍົກເລີກການຈັດການ
+      pinned: ປັກໝຸດ
+      force: ບັງຄັບໃຫ້ຈັດການ
+    monitor: ຕິດຕາມກວດກາ
+    title_create: ການສ້າງ {{name}}
+    options_label: ທາງເລືອກພິເສດ
+    monitor_placeholder: ບໍ່ມີ
+    workspace_placeholder: ບໍ່ມີ
+    name: ຊື່
+    category_placeholder: ບໍ່ມີ
+    workspace: ພື້ນທີ່ເຮັດວຽກ
+    ok_edit: ອັບເດດ
+    category: ປະເພດ
+    title_readonly: ກຳລັງເບິ່ງ {{name}}
+    title_edit: ການແກ້ໄຂ {{name}}
+    ok_readonly: ແກ້ໄຂເປັນໃໝ່
+    ok_create: ສ້າງ
+    bindings: ການຜູກມັດ (ຫມາຍເຫດທັງສອງທາງເລືອກແມ່ນຈໍາເປັນ)
+  identifier:
+    and: ແລະ
+    negation: Negate ການຈັບຄູ່
+    add_block: ເພີ່ມ Block
+    remove: ລຶບ Block
+    or: ຫຼື
+    kind: ກໍານົດໂດຍ
+    matching_strategy: ຍຸດທະສາດການຈັບຄູ່
+    id: ຕົວລະບຸ
+  search: ຊອກຫາ
+  export: ສົ່ງອອກ
+  new: ໃຫມ່
+  swap: ແລກປ່ຽນ
+  import: ນໍາເຂົ້າ
+  delete: ລຶບ
+  bundled_title: App Config Bundled ກັບ Seelen
+  confirm_delete_title: ຢືນຢັນການລຶບ
+  bundled_msg: >-
+    ການຕັ້ງຄ່າຊຸດເຫຼົ່ານີ້ບໍ່ສາມາດແກ້ໄຂໄດ້
+    ແລະຖືກອອກແບບມາເພື່ອໃຫ້ປະສົບການທີ່ດີທີ່ສຸດແກ່ເຈົ້າໂດຍບໍ່ມີການປັບແຕ່ງ.
+    ພວກເຂົາຕັ້ງຄ່າແອັບພລິເຄຊັນທົ່ວໄປທີ່ສຸດສໍາລັບທ່ານໂດຍອັດຕະໂນມັດ.
+  confirm_delete: ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບການຕັ້ງຄ່ານີ້?
+extras:
+  version: ຮຸ່ນ
+  github: GitHub
+  discord: ຄວາມຂັດແຍ້ງ
+  links: ການເຊື່ອມຕໍ່ຢ່າງເປັນທາງການ
+  relaunch: ເປີດຄືນໃໝ່
+  exit: ອອກ/ອອກ
+shortcuts:
+  labels:
+    send_to_workspace_3: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 3
+    send_to_workspace_4: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 4
+    restore_sizes: ຟື້ນຟູຂະໜາດ
+    move_to_workspace_4: ຍ້າຍໄປບ່ອນເຮັດວຽກ 4
+    move_to_workspace_2: ຍ້າຍໄປບ່ອນເຮັດວຽກ 2
+    send_to_workspace_1: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 1
+    reserve_float: ສະຫງວນ Float
+    send_to_workspace_2: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 2
+    send_to_workspace_9: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 9
+    move_to_workspace_7: ຍ້າຍໄປບ່ອນເຮັດວຽກ 7
+    switch_workspace_0: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 0
+    send_to_workspace_5: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 5
+    switch_workspace_1: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 1
+    switch_workspace_6: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 6
+    focus_right: ໂຟກັສຂວາ
+    focus_left: ໂຟກັສຊ້າຍ
+    increase_height: ເພີ່ມຄວາມສູງ
+    focus_latest: Focus ຫຼ້າສຸດ
+    send_to_workspace_7: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 7
+    reserve_left: ຈອງຊ້າຍ
+    reserve_bottom: ຈອງລຸ່ມ
+    move_to_workspace_1: ຍ້າຍໄປບ່ອນເຮັດວຽກ 1
+    send_to_workspace_0: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 0
+    move_to_workspace_5: ຍ້າຍໄປບ່ອນເຮັດວຽກ 5
+    switch_workspace_5: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 5
+    decrease_height: ຫຼຸດຄວາມສູງ
+    decrease_width: ຫຼຸດຄວາມກວ້າງ
+    switch_workspace_9: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 9
+    move_to_workspace_8: ຍ້າຍໄປບ່ອນເຮັດວຽກ 8
+    send_to_workspace_6: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 6
+    move_to_workspace_0: ຍ້າຍໄປບ່ອນເຮັດວຽກ 0
+    focus_top: ໂຟກັສເທິງ
+    increase_width: ເພີ່ມຄວາມກວ້າງ
+    move_to_workspace_3: ຍ້າຍໄປບ່ອນເຮັດວຽກ 3
+    reserve_right: ສະຫງວນສິດ
+    reserve_stack: ຈອງ stack
+    reserve_top: ສະຫງວນເທິງ
+    move_to_workspace_6: ຍ້າຍໄປບ່ອນເຮັດວຽກ 6
+    move_to_workspace_9: ຍ້າຍໄປບ່ອນເຮັດວຽກ 9
+    switch_workspace_8: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 8
+    switch_workspace_7: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 7
+    switch_workspace_2: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 2
+    switch_workspace_3: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 3
+    switch_workspace_4: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 4
+    send_to_workspace_8: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 8
+    focus_bottom: ໂຟກັສລຸ່ມ
+  enable_tooltip: ປິດໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ Seelen Core Api
+  enable: ເປີດໃຊ້ທາງລັດປະສົມປະສານ (ahk)
+cancel: ຍົກເລີກ
+loading: ກຳລັງໂຫລດ...
+delete: ລຶບ
+quit: ເຊົາ
+save: ບັນທຶກ
+inProgress: ຢູ່ໃນຄວາມຄືບໜ້າ...
+open: ເປີດ

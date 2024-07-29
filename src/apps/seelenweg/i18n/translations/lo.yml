@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: ເປີດການຕັ້ງຄ່າ
+  media: ຕື່ມການໂມດູນສື່
+  start: ເພີ່ມໂມດູນ Start
+app_menu:
+  run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
+  close_multiple: ປິດທັງຫມົດ
+  pin_to_right: PIN ກັບຂວາ
+  copy_handles: ຄັດລອກ
+  open_file_location: ເປີດສະຖານທີ່ເອກະສານ
+  close: ປິດ
+  pin_to_center: PIN ເຖິງສູນກາງ
+  pin: ເຂັມ PIN
+  unpin: unppin
+  pin_to_left: ເຂັມຊ້າຍໄປ
+media_menu:
+  remove: ເອົາ Module ສື່
+start_menu:
+  remove: ເອົາໂມດູນເລີ່ມຕົ້ນ

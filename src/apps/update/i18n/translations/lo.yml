@@ -1,0 +1,10 @@
+update:
+  cancel: ຕໍ່ມາ
+  version: ຮຸ່ນ
+  date: ວັນທີ
+  title: ມີອັບເດດແລ້ວ!
+  downloading: ກຳລັງດາວໂຫຼດ...
+  download: ອັບເດດ ແລະຕິດຕັ້ງ
+  page: ຫນ້າປ່ອຍ GitHub
+  installing: ກຳລັງຕິດຕັ້ງ...
+  extra_info: ເພື່ອອ່ານບັນທຶກການປ່ຽນແປງເຕັມ, ກະລຸນາເຂົ້າໄປທີ່ໜ້າ changelog

@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: ໂມສອນເຄີຍີຫໍ້
+    comunications: ການສື່ສານ
+  master_volume: ປະລິມານຕົ້ນສະບັບ
+  output_device: ອຸປະກອນຜົນໄດ້ຮັບ
+  players: ເຄື່ອງຫຼີ້ນສື່
+  input_device: ອຸປະກອນປ້ອນຂໍ້ມູນ
+network:
+  placeholder:
+    password: ລະຫັດຜ່ານ
+  disconnect: ຕັດຂາດ
+  hidden: ເຄືອຂ່າຍທີ່ເຊື່ອງໄວ້
+  not_found: ບໍ່ພົບເຄືອຂ່າຍທີ່ພົບ
+  more: ການຕັ້ງຄ່າເຄືອຂ່າຍເພີ່ມເຕີມ
+  connect: ເຊື່ອມຕໍ່
+settings:
+  shutdown: ປິດ​ເຄື່ອງ
+  restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່
+  log_out: ອອກ​ຈາກ​ລະ​ບົບ
+  title: ການກໍານົດ
+  app_settings: ການຕັ້ງຄ່າແອັບ app
+  sleep: ນອນ
+placeholder:
+  ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
+  smart_charge: '- ຮັບຜິດຊອບສະຫຼາດ'
+  battery_remaining: ສ່ວນທີ່ເຫຼືອ
+  volume: ປະລິມານ
+  open_system_tray: ເປີດຖາດລະບົບ
+  open_user_folder: ເປີດໂຟນເດີຜູ້ໃຊ້
+  ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
+  bluetooth_devices: Bluetooth & ອຸປະກອນ
+  settings: ການຕັ້ງຄ່າດ່ວນ
