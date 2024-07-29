@@ -1,0 +1,188 @@
+sides:
+  right: Riets
+  left: Lénks
+  top: Uewen
+  bottom: Siwenn
+header:
+  labels:
+    seelen_bar: Fantastesch Toolbar
+    monitors: Iwwerschwannegkeeten
+    developer: Entwéckler
+    seelen_wm: Fënter Manager
+    specific_apps: Spezifesch Apps
+    general: Generol
+    info: Informatioun
+    shortcuts: Ofkierpsen
+    seelen_weg: Dock / Taskbar
+start:
+  title: Wëllkomm!
+  message_accent: Optimiséiert Är Produktivitéit mam Stil!
+  message: >-
+    Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute
+    Fournisseur Manager fir Är Windows 11 Erfarung ze verbesseren! Entdeckt eng
+    nei Ära vun Effizienz a Multits mat eisen intuitiven Interface a
+    fortgeschratgeschen Features.
+general:
+  theme:
+    add: Füügt Thema
+    label: Thema Informatioun
+    added: Thema scho bäigefüügt
+    tags: Tasmmenzwierk
+    description: Broessdatsch
+    author: Auteur
+    enabled: Aktivéiert Themen
+    placeholder: Wielt Thema
+  startup: Run op Startup?
+  language: Sprooche
+toolbar:
+  placeholder:
+    select: Toolbar Struktur
+    author: Auteur
+    description: Broessdatsch
+  enable: Aktivéiert Fore Toolbar
+  height: Héicht
+wm:
+  border:
+    width: Grenz Breet
+    enable: Aktivéiert Fenster Grenz
+    offset: Grenz Offäll
+  enable: Aktivéiert Fënstere Manager
+  resize_delta: Resize Delta (%)
+  disabled_windows10: Den Fenstermanager ass net verfügbar fir Windows 10.
+  description: Broessdatsch
+  space_between_containers: Raum tëscht Behälter
+  author: Auteur
+  layout: Lueden
+  workspace_offset: Workspaces Offset (Rand)
+  workspace_padding: Aarbechtsberäich padding
+weg:
+  items:
+    size: Telefonsgrouss
+    zoom_size: Zoomed Gréisst (benotzt fir Themen)
+    gap: Raum tëscht Artikelen
+    label: Artikelen
+    visible_separators: Sechsi seichtbar Seperure
+  width: Breet
+  label: Dock / Taskbar
+  padding: Padding
+  dock_side: Dock Säit
+  auto_hide: Automatesch
+  margin: Den Jean-Margin
+  gap: Knënn
+  enable: Aktivéiert Dock / Taskbar
+devtools:
+  app_folders: App Classeure
+  enable: Aktivéiert Entwéckler Tools
+  install_folder: Installatioun Dossier
+  custom_config_file: Luede personaliséiert Konfiguratiounsdatei
+  data_folder: Etabond Dossier
+  settings_file: Settytout-Datei
+  load: Lueden
+apps_configurations:
+  app:
+    options:
+      float: Schwammen
+      pinned: Verbonnen
+      force: Kraaft managen
+      unmanage: Unmanage
+    title_readonly: '{{{Numm}}'
+    category_placeholder: Keen
+    name: Numm vum Numm
+    monitor_placeholder: Keen
+    ok_readonly: Ännert als nei
+    workspace_placeholder: Keen
+    monitor: Bonitor
+    category: Gemengen
+    ok_edit: Olaangs
+    bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
+    workspace: Konschtpas
+    options_label: Extra Optiounen
+    title_edit: Ännerung {{Numm}}
+    title_create: Erstellen {{Numm}}
+    ok_create: Erreeiert eng kreéieren
+  identifier:
+    remove: Läschen Block
+    matching_strategy: Passende Strategie
+    kind: Identifizéieren duerch
+    negation: Negate passend
+    or: Oder
+    id: Identifizéierer
+    and: An an
+    add_block: Füügt Block
+  bundled_title: App con conflüchteg mat Seelen
+  delete: Läschen
+  confirm_delete_title: Confirméieren Leedung
+  search: Sichen
+  export: Export
+  new: Nei
+  confirm_delete: Sidd Dir sécher, datt Dir dës Configuratioun / s läscht braucht?
+  swap: Zort
+  import: Importéieren
+  bundled_msg: >-
+    Dës gebündelt Konfiguratiounen sinn net geännert a sinn entwéckelt fir Iech
+    déi bescht Erfahrung ouni Personnalisatioun ze ginn. Si konfiguréieren
+    automatesch déi heefegst Uwendungen fir Iech.
+extras:
+  version: Erëm
+  links: Offiziell Linken
+  relaunch: Relatioun
+  github: Github
+  exit: Ophalen / erausfannen
+  discord: Diskord
+shortcuts:
+  labels:
+    decrease_height: Reduzéiert Héicht
+    reserve_right: Reservéiert richteg
+    switch_workspace_5: Schalt op Aarbechtsberäich 5
+    increase_width: Erhéijung vun der Breet
+    switch_workspace_6: Wiesselt op Workspace 6
+    send_to_workspace_0: Schéckt e Aarbechtsberäich 0
+    send_to_workspace_1: Schéckt op Aarbechtsberäich 1
+    switch_workspace_7: Wiesselt op Aarbechtsberäich 7
+    reserve_stack: Reserve Stack
+    move_to_workspace_4: Gitt op Workspace 4
+    switch_workspace_9: Wiesselt op Workspace 9
+    switch_workspace_3: Wiesselt op Workspace 3
+    switch_workspace_8: Schalt op Workspace 8
+    switch_workspace_0: Schalt op Aarbechtsberäich 0
+    focus_latest: Fokusséieren dat lescht
+    focus_top: Fokusséieren Top
+    move_to_workspace_1: Gitt op Aarbechtsberäich 1
+    reserve_left: Reserve lénks
+    decrease_width: Reduzéiert Breet
+    increase_height: Erhéijen Héicht
+    focus_bottom: Fokus ënnen
+    reserve_bottom: Reservéiert ënnen
+    focus_right: Fokusséiert richteg
+    restore_sizes: Restauréiert Gréissten
+    focus_left: Fokusséiert lénks
+    move_to_workspace_6: Plënnert op Workspace 6
+    send_to_workspace_4: Schéckt op Aarbechtsberäich 4
+    switch_workspace_2: Schalt op Aarbechtsberäich 2
+    move_to_workspace_8: Plënnert op Workspace 8
+    move_to_workspace_2: Plënnert op Aarbechtsberäich 2
+    send_to_workspace_3: Schéckt op Aarbechtsberäich 3
+    switch_workspace_1: Schalt op Aarbechtsberäich 1
+    move_to_workspace_0: Plënnert op Workspace 0
+    move_to_workspace_9: Plënnert op Workspace 9
+    move_to_workspace_7: Plënnert op Workspace 7
+    send_to_workspace_5: Schéckt op Aarbechtsberäich 5
+    move_to_workspace_5: Plënnert op Aarbechtsberäich 5
+    send_to_workspace_8: Schéckt e Aarbechtsberäich 8
+    send_to_workspace_9: Schéckt an Aarbechtsbereedung 9
+    send_to_workspace_7: Schéckt op Aarbechtsberäich 7
+    switch_workspace_4: Schalt op Workspace 4
+    move_to_workspace_3: Plënnert op Aarbechtsberäich 3
+    send_to_workspace_6: Schéckt e Aarbechtsberäich 6
+    reserve_top: Reserve Top
+    send_to_workspace_2: Schéckt op Aarbechtsberäich 2
+    reserve_float: Reservéiert Float
+  enable: Aktivéiert integréiert Ofkiirzungen (AHK)
+  enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
+inProgress: A Beaarbechtung...
+loading: Lueden ...
+open: Ëmen e gratis
+delete: Läschen
+cancel: Ofbriechen
+quit: Ness
+save: Spuerwäit

@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Kommunikatiounen
+    multimedia: Multimedia
+  players: Media Spiller
+  master_volume: Master Volumen
+  output_device: Ausgangsapparat
+  input_device: Input Apparat
+network:
+  placeholder:
+    password: Passwuert
+  not_found: Keng Netzwierker fonnt
+  disconnect: Trennen
+  hidden: Verstoppt Netzwierk
+  more: Méi Netzwierk Astellunge
+  connect: Connecten
+settings:
+  restart: Neistart
+  shutdown: Ausmaachen
+  log_out: Ausloggen
+  app_settings: App Astellunge
+  title: Astellunge
+  sleep: Schlolof
+placeholder:
+  battery_remaining: '% bleiwen'
+  bluetooth_devices: Bluetooth & Apparater
+  open_system_tray: Open System Schacht
+  settings: Quick Astellungen
+  smart_charge: '- Smart charge'
+  open_user_folder: Open Benotzer Ordner
+  ethernet_connected: Internet Zougang
+  ethernet_disconnected: Keen Internetzougang
+  volume: Vuesso

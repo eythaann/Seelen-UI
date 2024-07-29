@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Füügt Media Modul bäi
+  start: Füügt Start Modul
+  settings: Oppen Astellungen
+app_menu:
+  close_multiple: Alles dobäi
+  copy_handles: Kopie Handelen
+  pin_to_left: PIN fir lénks
+  run_as: Lafen als Administrator
+  close: Zoumaachen
+  open_file_location: Open Dateiplaz
+  pin_to_center: PIN op Zentrum
+  unpin: Net unsträichen
+  pin: Pin
+  pin_to_right: PIN op riets
+media_menu:
+  remove: Ewechzehuelen Media Modul
+start_menu:
+  remove: Ewechzehuelen Start Modul

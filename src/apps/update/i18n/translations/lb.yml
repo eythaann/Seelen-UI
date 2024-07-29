@@ -1,0 +1,10 @@
+update:
+  date: Datum
+  version: Versioun
+  cancel: Méi spéit
+  title: Update verfügbar!
+  downloading: Eroflueden...
+  page: GitHub Release Säit
+  download: Update & Installéieren
+  extra_info: Fir de komplette Changelog ze liesen, besicht w.e.g. d'changelog Säit
+  installing: Installéiert ...
