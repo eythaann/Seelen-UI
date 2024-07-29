@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: खुला सेटिंग्स
+  media: मिडिया मोड्युल थप्नुहोस्
+  start: स्टार्ट मोड्युल थप्नुहोस्
+app_menu:
+  run_as: प्रशासक रूपमा चलाउन
+  pin_to_left: बाँया बायाँ
+  open_file_location: फाइल स्थान खोल्नुहोस्
+  close_multiple: चौमा
+  pin_to_center: केन्द्रमा पिन
+  copy_handles: मुख्य ह्यान्डल
+  pin: आलपिन
+  unpin: चुस्नु
+  pin_to_right: दायाँ राख्न पिन
+  close: घनिष्ट
+media_menu:
+  remove: मिडिया मोड्युल हटाउनुहोस्
+start_menu:
+  remove: सुरु मोड्युल हटाउनुहोस्
