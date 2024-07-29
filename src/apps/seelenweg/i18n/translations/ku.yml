@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: Modela medyayê lê zêde bike
+  settings: Mîhengên vekirî
+  start: Modulê dest pê bikin
+app_menu:
+  pin: Derzî
+  close: Nêzîkî
+  run_as: Wek Rêvebir bisekinin
+  pin_to_center: Pin to navenda
+  open_file_location: Cihê pelê vekirî
+  pin_to_right: Pin berbi rast
+  close_multiple: Her tiştî bigire
+  pin_to_left: Pin çepê
+  copy_handles: Destên kopî bikin
+  unpin: Unpin
+media_menu:
+  remove: Modela medyayê rakin
+start_menu:
+  remove: Modela Destpêkê rakirin

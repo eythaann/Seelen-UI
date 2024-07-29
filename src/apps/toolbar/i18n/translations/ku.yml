@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Têkilî
+    multimedia: Multimedia
+  master_volume: Qumarê masterê
+  output_device: Devera deriyê
+  input_device: Cîhaza têketinê
+  players: Lîstikên Medyayê
+network:
+  placeholder:
+    password: Şîfre
+  disconnect: Hevqetandin
+  connect: Bihevgirêdan
+  hidden: Tora Hidden
+  more: Mîhengên bêtir torê
+  not_found: Tora torgilok nehat dîtin
+settings:
+  shutdown: Temirandin
+  sleep: Xew
+  log_out: Derkeve
+  app_settings: Mîhengên App
+  restart: Destpêkirin
+  title: Mîhengan
+placeholder:
+  volume: Bend
+  ethernet_connected: Gihîştina înternetê
+  open_system_tray: Tray pergala vekirî
+  smart_charge: '- heqê harm'
+  bluetooth_devices: Bluetooth & Amûrên
+  ethernet_disconnected: Ne gihîştina înternetê
+  open_user_folder: Peldanka Bikarhêner vekirî
+  settings: Mîhengên Bilez
+  battery_remaining: '% mayî'
