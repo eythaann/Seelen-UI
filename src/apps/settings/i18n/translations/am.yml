@@ -1,0 +1,185 @@
+sides:
+  right: ቀኝ
+  left: ግራ
+  top: ከላይ
+  bottom: ታች
+header:
+  labels:
+    developer: ገንቢ
+    general: አጠቃላይ
+    info: መረጃ
+    seelen_weg: Dock / Accorbar
+    shortcuts: አቋራጮች
+    specific_apps: የተወሰኑ መተግበሪያዎች
+    seelen_bar: Fancy የመሣሪያ አሞሌ
+    monitors: ተቆጣጣሪዎች
+    seelen_wm: የመስኮት አቀናባሪ
+start:
+  title: እንኳን ደህና መጣህ!
+  message: >-
+    የእርስዎን ዊንዶውስ 11 ተሞክሮ ለማሳደግ ከተዋሃደ ድንገተኛ የዊንዶውስ ሥራ አስኪያጅ ጋር ወደ ደመወዝ የዴስክቶፕ ሥራ
+    አስኪያጅ እንኳን በደህና መጡ! አዲስ የብቃት እና የብዝበዛ ኢቫን እና ባለብዙ ፊደል እና የላቁ ባህሪያችን ጋር ይሳለቁ.
+  message_accent: ምርታማነትዎን በቅጥ ያሻሽሉ!
+general:
+  theme:
+    description: መግለጫ
+    tags: መለያዎች
+    label: ጭብጥ መረጃ
+    add: ጭብጥ ያክሉ
+    author: ደራሲ ደራሲ
+    added: ጭብጥ ቀድሞውኑ ታክሏል
+    placeholder: ጭብጥ ይምረጡ
+    enabled: አስቁ
+  startup: ጅምር ላይ ይሮጡ?
+  language: ቋንቋ
+toolbar:
+  placeholder:
+    description: መግለጫ
+    select: የመሣሪያ አሞሌ መዋቅር
+    author: ደራሲ ደራሲ
+  height: ቁመት
+  enable: Fangance የመሳሪያ አሞሌን ያንቁ
+wm:
+  border:
+    width: ድንበር ስፋት
+    offset: ድንበር ማካካሻ
+    enable: የመስኮት ድንበር አንቃ
+  description: መግለጫ
+  layout: አቀማመጥ
+  space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ
+  disabled_windows10: የመስክ ሥራ አስኪያጁ ለዊንዶውስ 10 አይገኝም.
+  enable: የመስኮት አቀናባሪን አንቃ
+  workspace_offset: የስራ ቦታዎች ማካካሻ (ማርጂኖች)
+  workspace_padding: የስራ ቦታዎች ፓድ
+  resize_delta: ዴልታ (%)
+  author: ደራሲ ደራሲ
+weg:
+  items:
+    zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
+    gap: በእቃዎች መካከል ቦታ
+    label: ዕቃዎች
+    size: የንጥል መጠን
+    visible_separators: የሚታዩ መለያዎች
+  margin: ህዳግ
+  auto_hide: ራስ-ሰር መደበቅ
+  padding: ፓድ
+  enable: መትከያ / ተግባር አሞሌን ያንቁ
+  width: ስፋት
+  gap: ክፍተት
+  label: Dock / Accorbar
+  dock_side: ጎን
+devtools:
+  app_folders: የመተግበሪያ አቃፊዎች
+  data_folder: የውሂብ አቃፊ
+  load: ጭነት
+  custom_config_file: ብጁ ውቅያ ፋይልን ይጫኑ
+  install_folder: የመጫን አቃፊ
+  enable: የገንቢ መሳሪያዎችን ያንቁ
+  settings_file: የቅንብሮች ፋይል
+apps_configurations:
+  app:
+    options:
+      float: ተንሳፋፊ
+      pinned: ተያይ ated ል
+      unmanage: አለመግባባት
+      force: ኃይል ማስተዳደር
+    monitor_placeholder: የለም
+    monitor: ተቆጣጠር
+    category_placeholder: የለም
+    name: ስም
+    ok_create: ፍጠር
+    workspace_placeholder: የለም
+    ok_edit: ዝመና
+    workspace: የስራ ቦታ
+    title_edit: አርትዕ {{{N}}}
+    bindings: ማሰሪያ (ሁለቱንም አማራጮች ልብ ይበሉ)
+    title_readonly: '{{{}}}}'
+    title_create: '{{{ስም} መፍጠር}}'
+    category: ምድብ
+    ok_readonly: እንደ አዲስ ያርትዑ
+    options_label: ተጨማሪ አማራጮች
+  identifier:
+    remove: ብሎክ ሰርዝ
+    and: እና
+    or: ወይም
+    id: መለያ
+    kind: መለየት በ
+    add_block: ብሎክ ያክሉ
+    negation: ማዛመድን
+    matching_strategy: ተዛማጅ ስትራቴጂ
+  new: አዲስ
+  search: ፍለጋ
+  confirm_delete: እርግጠኛ ነዎት ይህንን ውቅር / ቶች መሰረዝ ይፈልጋሉ?
+  confirm_delete_title: መሰረዝ ያረጋግጡ
+  bundled_title: የመተግበሪያ ውቅረት በጥይት የተደመሰሰ
+  bundled_msg: >-
+    እነዚህ የታሸጉ ውቅሮች አርት edity ት አይደሉም እናም ያለ ማበጀት ምርጥ ተሞክሮዎን ለማቅረብ የተቀየሱ ናቸው. በጣም
+    የተለመዱ ትግበራዎችን በራስ-ሰር ያዋቅሩታል.
+  delete: ሰርዝ
+  export: ወደ ውጭ ይላኩ
+  swap: መቀያየር
+  import: ማስመጣት
+extras:
+  links: ኦፊሴላዊ አገናኞች
+  github: Github
+  discord: አለመግባባት
+  version: ስሪት
+  exit: ማቆም / መውጣት
+  relaunch: እንደገና መነገር
+shortcuts:
+  labels:
+    send_to_workspace_2: ወደ የስራ ቦታ 2 ይላኩ 2
+    reserve_left: የተቆራረጠ
+    increase_height: ቁመት ይጨምሩ
+    send_to_workspace_1: ወደ የስራ ቦታ 1 ይላኩ 1
+    reserve_bottom: የተጠባበቅ ክፍል
+    switch_workspace_1: ወደ የሥራ ቦታ 1 ቀይር
+    switch_workspace_0: ወደ የሥራ ቦታ 0 ይቀይሩ
+    move_to_workspace_0: ወደ የሥራ ቦታ 0 ይሂዱ
+    send_to_workspace_5: ወደ የሥራ ቦታ 5 ይላኩ
+    switch_workspace_9: ወደ የሥራ ቦታ 9 ቀይር
+    switch_workspace_7: ወደ የሥራ ቦታ 7 ቀይር
+    decrease_height: ቁመት ቀንሷል
+    increase_width: ስፋት መጨመር
+    switch_workspace_6: ወደ የሥራ ቦታ 6 ይቀይሩ
+    move_to_workspace_3: ወደ የሥራ ቦታ 3 ይሂዱ
+    move_to_workspace_1: ወደ የሥራ ቦታ 1 ይሂዱ
+    focus_right: በትክክል ትኩረት ያድርጉ
+    focus_bottom: ወደ ታች ትኩረት
+    send_to_workspace_0: ወደ የስራ ቦታ 0 ይላኩ 0
+    switch_workspace_8: ወደ የሥራ ቦታ 8 ቀይር
+    move_to_workspace_9: ወደ የሥራ ቦታ 9 ይሂዱ
+    move_to_workspace_4: ወደ የሥራ ቦታ 4 ይሂዱ
+    send_to_workspace_3: ወደ የስራ ቦታ 3 ይላኩ
+    reserve_stack: የተጠባባቂ ቁልል
+    move_to_workspace_5: ወደ የሥራ ቦታ 5 ይሂዱ
+    move_to_workspace_8: ወደ የሥራ ቦታ 8 ይሂዱ
+    move_to_workspace_7: ወደ የሥራ ቦታ 7 ይሂዱ
+    send_to_workspace_7: ወደ የሥራ ቦታ 7 ይላኩ 7
+    focus_top: ትኩረት
+    focus_left: ትኩረት ቀርቷል
+    move_to_workspace_2: ወደ የሥራ ቦታ 2 ይሂዱ
+    switch_workspace_4: ወደ የሥራ ቦታ 4 ይቀይሩ
+    switch_workspace_3: ወደ የስራ ቦታ 3 ቀይር
+    send_to_workspace_9: ወደ የሥራ ቦታ 9 ይላኩ
+    send_to_workspace_6: ወደ የሥራ ቦታ 6 ይላኩ
+    switch_workspace_5: ወደ የሥራ ቦታ 5 ቀይር
+    reserve_top: የላይኛው ክፍል
+    focus_latest: የቅርብ ጊዜዎችን ያተኩሩ
+    reserve_float: የተጠባባቂ ተንሳፋፊ
+    send_to_workspace_4: ወደ የሥራ ቦታ 4 ይላኩ
+    switch_workspace_2: ወደ የሥራ ቦታ 2 ቀይር
+    move_to_workspace_6: ወደ የሥራ ቦታ 1 ይሂዱ
+    send_to_workspace_8: ወደ የሥራ ቦታ 8 ይላኩ 8
+    restore_sizes: መጠኖች ወደነበሩበት ይመልሱ
+    reserve_right: መብት
+    decrease_width: ስፋት መቀነስ
+  enable: የተቀናጁ አቋራጮችን (AHK)
+  enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
+inProgress: በሂደት ላይ...
+open: ክፈት
+cancel: ይቅር
+delete: ሰርዝ
+quit: አቁም
+loading: በመጫን ላይ ...
+save: አስቀምጥ

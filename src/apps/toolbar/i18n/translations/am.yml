@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: መልቲሚዲያ
+    comunications: ግንኙነቶች
+  output_device: የውጤት መሣሪያ
+  input_device: የግቤት መሣሪያ
+  players: የሚዲያ ተጫዋቾች
+  master_volume: ዋና መጠን
+network:
+  placeholder:
+    password: የይለፍ ቃል
+  disconnect: ያላቅቁ
+  hidden: የተደበቀ አውታረመረብ
+  more: ተጨማሪ የአውታረ መረብ ቅንብሮች
+  not_found: ምንም አውታረመረቦች አልተገኙም
+  connect: አገናኝ
+settings:
+  restart: እንደገና ጀምር
+  title: ቅንብሮች
+  shutdown: ዝጋው
+  log_out: ውጣ
+  app_settings: የመተግበሪያ ቅንጅቶች
+  sleep: እንቅልፍ
+placeholder:
+  smart_charge: '- ዘመናዊ ክፍያ'
+  open_system_tray: ክፍት የስርዓት ትሪ
+  open_user_folder: የተከፈተ የተጠቃሚ አቃፊ
+  ethernet_connected: የበይነመረብ መዳረሻ
+  volume: ድምጽ
+  bluetooth_devices: ብሉቱዝ እና መሣሪያዎች
+  ethernet_disconnected: ምንም የበይነመረብ ግንኙነት የለም
+  settings: ፈጣን ቅንብሮች
+  battery_remaining: '% ይቀራል'

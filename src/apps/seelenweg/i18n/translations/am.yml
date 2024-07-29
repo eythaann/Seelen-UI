@@ -1,0 +1,19 @@
+taskbar_menu:
+  media: የሚዲያ ሞዱል ያክሉ
+  settings: ክፍት ቅንብሮች
+  start: የመነሻ ሞጁል ያክሉ
+app_menu:
+  close: ገጠመ
+  pin_to_left: ፒን ወደ ግራ
+  pin_to_right: በቀኝ በኩል ፒን
+  pin_to_center: ፒን እስከ ማእከል
+  open_file_location: የፋይል ቦታ ይክፈቱ
+  pin: ፒን
+  close_multiple: ሁሉንም ዝጋ
+  run_as: እንደ አስተዳዳሪ ይሮጡ
+  copy_handles: መያዣዎች
+  unpin: እየቀነሰ ይሄዳል
+media_menu:
+  remove: የሚዲያ ሞዱል ያስወግዱ
+start_menu:
+  remove: የጀግንነት ሞዱልን ያስወግዱ
