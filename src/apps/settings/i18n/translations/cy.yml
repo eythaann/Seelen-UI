@@ -1,0 +1,190 @@
+sides:
+  left: Chwith
+  bottom: Waelod
+  top: Brigant
+  right: Dde
+header:
+  labels:
+    seelen_wm: Rheolwr Ffenestr
+    general: Gyffredinol
+    info: Ngwybodaeth
+    monitors: Monitorau
+    shortcuts: Llwybrau byr
+    specific_apps: Apiau penodol
+    developer: Natblygwr
+    seelen_weg: Doc/bar tasgau
+    seelen_bar: Bar offer ffansi
+start:
+  message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
+  title: Croeso!
+  message: >-
+    Croeso i Seelen UI, yr amgylchedd bwrdd gwaith yn y pen draw gyda rheolwr
+    ffenestri teils corfforedig i wella'ch profiad Windows 11! Archwiliwch oes
+    newydd o effeithlonrwydd ac amldasgio gyda'n rhyngwyneb greddfol a'n
+    nodweddion uwch.
+general:
+  theme:
+    placeholder: Dewiswch Thema
+    enabled: Themâu wedi'u galluogi
+    tags: Tagiau
+    author: Awduron
+    add: Ychwanegu Thema
+    added: Thema wedi'i hychwanegu eisoes
+    label: Gwybodaeth Thema
+    description: Disgrifiadau
+  language: Iaith
+  startup: Rhedeg ar gychwyn?
+toolbar:
+  placeholder:
+    author: Awduron
+    description: Disgrifiadau
+    select: Strwythur Bar Offer
+  enable: Galluogi bar offer ffansi
+  height: Uchder
+wm:
+  border:
+    width: Lled
+    enable: Galluogi ffin ffenestr
+    offset: Gwrthbwyso ar y ffin
+  disabled_windows10: Nid yw'r Rheolwr Ffenestr ar gael ar gyfer Windows 10.
+  space_between_containers: Lle rhwng cynwysyddion
+  author: Awduron
+  description: Disgrifiadau
+  enable: Galluogi Rheolwr Ffenestr
+  workspace_offset: Gwrthbwyso lleoedd gwaith (ymylon)
+  workspace_padding: Padin lleoedd gwaith
+  resize_delta: Newid maint Delta (%)
+  layout: Gynllun
+weg:
+  items:
+    label: Eitemau
+    size: Maint eitem
+    visible_separators: Gwahanyddion gweladwy
+    zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
+    gap: Lle rhwng eitemau
+  enable: Galluogi doc/bar tasg
+  auto_hide: Cuddio awto
+  label: Doc/bar tasgau
+  width: Lled
+  padding: Padin
+  dock_side: Ochr doc
+  margin: Ngherlong
+  gap: Bwlch
+devtools:
+  data_folder: Ffolder data
+  custom_config_file: Llwythwch ffeil ffurfweddu arfer
+  load: Lwythet
+  enable: Galluogi Offer Datblygwr
+  app_folders: Ffolderau app
+  settings_file: Ffeil Gosodiadau
+  install_folder: Ffolder gosod
+apps_configurations:
+  app:
+    options:
+      pinned: Pined
+      force: Rheoli Llu
+      unmanage: Di -reol
+      float: Harnofion
+    category: Categori
+    ok_readonly: Golygu fel NEWYDD
+    bindings: Rhwymo (nodwch fod angen y ddau opsiwn)
+    workspace_placeholder: Neb
+    monitor_placeholder: Neb
+    monitor: Monitrest
+    name: Alwai
+    options_label: Opsiynau ychwanegol
+    title_create: Creu {{enw}}
+    workspace: Gweithle
+    title_readonly: Gweld {{enw}}
+    ok_edit: Diweddara ’
+    category_placeholder: Neb
+    title_edit: Golygu {{enw}}
+    ok_create: Chrëid
+  identifier:
+    matching_strategy: Strategaeth gyfatebol
+    id: Dynodwr
+    remove: Dileu bloc
+    negation: Negate paru
+    add_block: Ychwanegu bloc
+    kind: Adnabod gan
+    or: Neu
+    and: A
+  new: Newydd
+  bundled_title: App Config wedi'i bwndelu â Seelen
+  confirm_delete: Ydych chi'n siŵr eich bod chi am ddileu'r cyfluniad/au hwn?
+  confirm_delete_title: Cadarnhau Dileu
+  bundled_msg: >-
+    Nid oes modd golygu'r cyfluniadau bwndelu hyn ac fe'u cynlluniwyd i roi'r
+    profiad gorau i chi heb addasu. Maent yn ffurfweddu'r cymwysiadau mwyaf
+    cyffredin ar eich cyfer yn awtomatig.
+  export: Allforiff
+  import: Mewnforied
+  search: Chwiloon
+  delete: Croeswn
+  swap: Trwciff
+extras:
+  relaunch: Hail -deirion
+  github: Github
+  discord: Anghytgord
+  version: Fersiwn
+  exit: Rhoi'r gorau iddi/allanfa
+  links: Dolenni Swyddogol
+shortcuts:
+  labels:
+    reserve_right: Cadw Iawn
+    move_to_workspace_0: Symud i Workpace 0
+    focus_right: Canolbwyntiwch yn iawn
+    switch_workspace_3: Newid i Workpace 3
+    focus_left: Ffocws ar ôl
+    move_to_workspace_3: Symud i Workpace 3
+    switch_workspace_7: Newid i Workpace 7
+    send_to_workspace_4: Anfonwch i Workpace 4
+    reserve_top: Top wrth gefn
+    increase_height: Cynyddu uchder
+    increase_width: Cynyddu lled
+    send_to_workspace_5: Anfonwch i Workpace 5
+    focus_top: Top Ffocws
+    decrease_width: Lleihau lled
+    switch_workspace_5: Newid i Workpace 5
+    reserve_bottom: Cadwch y gwaelod
+    switch_workspace_2: Newid i Workpace 2
+    reserve_stack: Pentwr wrth gefn
+    reserve_left: Gwarchodfa Chwith
+    switch_workspace_9: Newid i Workpace 9
+    focus_latest: Canolbwyntiwch y Diweddaraf
+    send_to_workspace_7: Anfon i Workpace 7
+    send_to_workspace_9: Anfonwch i Workpace 9
+    decrease_height: Lleihau uchder
+    send_to_workspace_8: Anfonwch i Workpace 8
+    switch_workspace_6: Newid i Workpace 6
+    switch_workspace_8: Newid i Workpace 8
+    focus_bottom: Ffocws Gwaelod
+    restore_sizes: Adfer Meintiau
+    switch_workspace_4: Newid i Workpace 4
+    switch_workspace_1: Newid i Workpace 1
+    move_to_workspace_7: Symud i Workpace 7
+    send_to_workspace_6: Anfonwch i Workpace 6
+    send_to_workspace_2: Anfonwch i Workpace 2
+    move_to_workspace_5: Symud i Workpace 5
+    move_to_workspace_9: Symud i Workpace 9
+    move_to_workspace_8: Symud i Workpace 8
+    move_to_workspace_6: Symud i Workpace 6
+    send_to_workspace_1: Anfonwch i Workpace 1
+    move_to_workspace_2: Symud i Workpace 2
+    reserve_float: Arnofio wrth gefn
+    switch_workspace_0: Newid i Workpace 0
+    send_to_workspace_3: Anfonwch i Workpace 3
+    move_to_workspace_4: Symud i Workpace 4
+    move_to_workspace_1: Symud i Workpace 1
+    send_to_workspace_0: Anfon i Workpace 0
+  enable: Galluogi llwybrau byr integredig (AHK)
+  enable_tooltip: >-
+    Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan
+    ddefnyddio API craidd Seelen
+inProgress: Ar y gweill...
+loading: Llwytho ...
+cancel: Chansliff
+save: Hiachasit
+delete: Croeswn
+quit: Gadawen
+open: Ymagorant

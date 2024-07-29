@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Gyfathrebiadau
+    multimedia: Amlgyfrwng
+  players: Chwaraewyr cyfryngau
+  output_device: Dyfais allbwn
+  master_volume: Meistr
+  input_device: Dyfais fewnbwn
+network:
+  placeholder:
+    password: Gyfrinair
+  hidden: Rhwydwaith Cudd
+  not_found: Ni ddarganfuwyd unrhyw rwydweithiau
+  more: Mwy o osodiadau rhwydwaith
+  disconnect: Ddatgysylltith
+  connect: Chysyllta ’
+settings:
+  restart: Ail-ddechrau
+  log_out: Allgofnodi
+  app_settings: Gosodiadau App
+  shutdown: Chaead
+  title: Gosodiadau
+  sleep: Chysger
+placeholder:
+  open_system_tray: Hambwrdd System Agored
+  smart_charge: '- Tâl craff'
+  battery_remaining: '% yn weddill'
+  settings: Gosodiadau Cyflym
+  ethernet_disconnected: Dim Mynediad i'r Rhyngrwyd
+  open_user_folder: Agor Ffolder Defnyddiwr
+  ethernet_connected: Mynediad i'r Rhyngrwyd
+  bluetooth_devices: Bluetooth a Dyfeisiau
+  volume: Nghyfrol

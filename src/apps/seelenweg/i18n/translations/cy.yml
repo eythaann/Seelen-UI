@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Gosodiadau Agored
+  media: Ychwanegu Modiwl Cyfryngau
+  start: Ychwanegu Modiwl Start
+app_menu:
+  copy_handles: Dolenni copi
+  pin_to_center: Pin i'r canol
+  pin_to_left: Pin i'r chwith
+  run_as: Rhedeg fel Gweinyddwr
+  close_multiple: Cau popeth
+  unpin: Dadleuon
+  open_file_location: Lleoliad Ffeil Agored
+  close: Chaewch
+  pin_to_right: Pin i'r dde
+  pin: Piniff
+media_menu:
+  remove: Dileu Modiwl Cyfryngau
+start_menu:
+  remove: Tynnwch y modiwl cychwyn
