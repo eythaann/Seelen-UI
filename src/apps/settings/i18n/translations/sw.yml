@@ -1,0 +1,186 @@
+sides:
+  right: Haki
+  top: Juu
+  left: Kushoto
+  bottom: Chini
+header:
+  labels:
+    developer: Msanidi programu
+    seelen_wm: Meneja wa Window
+    info: Habari
+    seelen_bar: Zana ya Dhana
+    shortcuts: Njia za mkato
+    specific_apps: Programu maalum
+    seelen_weg: Dock/Taskbar
+    general: Mkuu
+    monitors: Wachunguzi
+start:
+  message_accent: Boresha tija yako na mtindo!
+  message: >-
+    Karibu Seelen UI, mazingira ya mwisho ya desktop na meneja wa Windows
+    aliyeingizwa ili kuongeza uzoefu wako wa Windows 11! Chunguza enzi mpya ya
+    ufanisi na multitasking na interface yetu ya angavu na sifa za hali ya juu.
+  title: Karibu!
+general:
+  theme:
+    enabled: Mada zilizowezeshwa
+    description: Maelezo
+    author: Mwandishi
+    tags: Lebo
+    label: Habari ya mada
+    added: Mada tayari imeongezwa
+    add: Ongeza mandhari
+    placeholder: Chagua mandhari
+  language: Lugha
+  startup: Kuendesha kuanza?
+toolbar:
+  placeholder:
+    description: Maelezo
+    select: Muundo wa zana
+    author: Mwandishi
+  enable: Wezesha zana ya dhana
+  height: Urefu
+wm:
+  border:
+    enable: Wezesha mpaka wa dirisha
+    width: Upana wa mpaka
+    offset: Kukabiliana na mpaka
+  author: Mwandishi
+  resize_delta: Rudisha Delta (%)
+  workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
+  description: Maelezo
+  disabled_windows10: Meneja wa windows haipatikani kwa Windows 10.
+  space_between_containers: Nafasi kati ya vyombo
+  enable: Wezesha Meneja wa Dirisha
+  layout: Mpangilio
+  workspace_padding: Nafasi za kazi
+weg:
+  items:
+    size: Saizi ya bidhaa
+    gap: Nafasi kati ya vitu
+    label: Vitu
+    zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
+    visible_separators: Watenganisho unaoonekana
+  gap: Pengo
+  dock_side: Kizimbani
+  width: Upana
+  margin: Margin
+  padding: Padding
+  auto_hide: Kujificha kiotomatiki
+  label: Dock/Taskbar
+  enable: Wezesha Dock/Taskbar
+devtools:
+  app_folders: Folda za programu
+  enable: Wezesha zana za msanidi programu
+  load: Mzigo
+  settings_file: Faili ya mipangilio
+  data_folder: Folda ya data
+  install_folder: Folda ya usanikishaji
+  custom_config_file: Pakia faili ya usanidi wa kawaida
+apps_configurations:
+  app:
+    options:
+      unmanage: Kuhama
+      force: Nguvu kusimamia
+      pinned: Iliyoandikwa
+      float: Kuelea
+    title_create: Kuunda {{jina}}
+    title_readonly: Kuangalia {{jina}}
+    category_placeholder: Hakuna
+    options_label: Chaguzi za ziada
+    monitor_placeholder: Hakuna
+    monitor: Kufuatilia
+    ok_edit: Sasisha
+    name: Jina
+    bindings: Kufunga (kumbuka chaguzi zote mbili zinahitajika)
+    category: Jamii
+    workspace: Nafasi ya kazi
+    ok_readonly: Hariri kama mpya
+    workspace_placeholder: Hakuna
+    ok_create: Unda
+    title_edit: Kuhariri {{jina}}
+  identifier:
+    negation: Negate kulinganisha
+    or: Au
+    kind: Tambua na
+    remove: Futa block
+    matching_strategy: Mkakati wa kulinganisha
+    and: Na
+    id: Kitambulisho
+    add_block: Ongeza block
+  confirm_delete: Je! Una uhakika unataka kufuta usanidi huu/s?
+  bundled_msg: >-
+    Usanidi huu uliowekwa wazi hauwezi kuhaririwa na umeundwa kukupa uzoefu bora
+    bila ubinafsishaji. Wao husanidi moja kwa moja programu za kawaida kwako.
+  export: Kuuza nje
+  bundled_title: Programu ya kusanidi na Seelen
+  search: Tafuta
+  new: Mpya
+  delete: Futa
+  import: Kuagiza
+  confirm_delete_title: Thibitisha Futa
+  swap: Kubadilishana
+extras:
+  relaunch: Kuzindua tena
+  discord: Ugomvi
+  github: GitHub
+  exit: Acha/exit
+  links: Viungo rasmi
+  version: Toleo
+shortcuts:
+  labels:
+    focus_top: Kuzingatia juu
+    increase_width: Ongeza upana
+    restore_sizes: Kurejesha ukubwa
+    focus_left: Kuzingatia kushoto
+    switch_workspace_2: Badilika kwenye nafasi ya kazi 2
+    decrease_height: Kupungua urefu
+    reserve_top: Hifadhi juu
+    reserve_right: Hifadhi haki
+    reserve_stack: Hifadhi ya Hifadhi
+    focus_latest: Kuzingatia hivi karibuni
+    reserve_bottom: Hifadhi chini
+    focus_right: Zingatia kulia
+    switch_workspace_9: Badilika kwa nafasi ya kazi 9
+    switch_workspace_8: Badilika kwa nafasi ya kazi 8
+    move_to_workspace_5: Hoja kwa nafasi ya kazi 5
+    switch_workspace_1: Badilika kwenye nafasi ya kazi 1
+    send_to_workspace_1: Tuma kwa nafasi ya kazi 1
+    send_to_workspace_8: Tuma kwa nafasi ya kazi 8
+    send_to_workspace_5: Tuma kwa nafasi ya kazi 5
+    switch_workspace_5: Badilika kwa nafasi ya kazi 5
+    send_to_workspace_4: Tuma kwa nafasi ya kazi 4
+    move_to_workspace_2: Hoja kwenye nafasi ya kazi 2
+    move_to_workspace_8: Hoja kwa nafasi ya kazi 8
+    move_to_workspace_3: Hoja kwenye nafasi ya kazi 3
+    reserve_float: Hifadhi kuelea
+    reserve_left: Hifadhi kushoto
+    switch_workspace_6: Badilika kwa nafasi ya kazi 6
+    decrease_width: Punguza upana
+    send_to_workspace_6: Tuma kwa nafasi ya kazi 6
+    focus_bottom: Kuzingatia chini
+    switch_workspace_7: Badilika kwa nafasi ya kazi 7
+    move_to_workspace_7: Hoja kwa nafasi ya kazi 7
+    increase_height: Ongeza urefu
+    send_to_workspace_2: Tuma kwa nafasi ya kazi 2
+    move_to_workspace_0: Hoja kwenye nafasi ya kazi 0
+    move_to_workspace_6: Hoja kwa nafasi ya kazi 6
+    send_to_workspace_0: Tuma kwa nafasi ya kazi 0
+    switch_workspace_3: Badilika kwa nafasi ya kazi 3
+    switch_workspace_4: Badilika kwa nafasi ya kazi 4
+    send_to_workspace_3: Tuma kwa nafasi ya kazi 3
+    move_to_workspace_1: Hoja kwa nafasi ya kazi 1
+    switch_workspace_0: Badilika kwenye nafasi ya kazi 0
+    send_to_workspace_7: Tuma kwa nafasi ya kazi 7
+    move_to_workspace_4: Hoja kwa nafasi ya kazi 4
+    send_to_workspace_9: Tuma kwa nafasi ya kazi 9
+    move_to_workspace_9: Hoja kwa nafasi ya kazi 9
+  enable: Wezesha njia za mkato zilizojumuishwa (AHK)
+  enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
+inProgress: Inaendelea...
+loading: Inapakia ...
+delete: Futa
+cancel: Ghairi
+save: Kuokoa
+quit: Acha
+open: Wazi

@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Mipangilio ya Fungua
+  start: Ongeza moduli ya kuanza
+  media: Ongeza moduli ya media
+app_menu:
+  close_multiple: Funga yote
+  pin: Pini
+  open_file_location: Fungua eneo la faili
+  run_as: Kukimbia kama msimamizi
+  pin_to_left: Pini kushoto
+  copy_handles: Nakili Hushughulikia
+  close: Karibu
+  unpin: Unpin
+  pin_to_right: Pini kulia
+  pin_to_center: Pini katikati
+media_menu:
+  remove: Ondoa moduli ya media
+start_menu:
+  remove: Ondoa moduli ya kuanza

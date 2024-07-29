@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Mawasiliano
+  master_volume: Kiasi cha Mwalimu
+  input_device: Kifaa cha Kuingiza
+  players: Wachezaji wa media
+  output_device: Kifaa cha pato
+network:
+  placeholder:
+    password: Nenosiri
+  more: Mipangilio zaidi ya mtandao
+  not_found: Hakuna mitandao iliyopatikana
+  disconnect: Kukatwa
+  connect: Unganisha
+  hidden: Mtandao uliofichwa
+settings:
+  restart: Anzisha tena
+  title: Mipangilio
+  shutdown: Kuzimisha
+  app_settings: Mipangilio ya programu
+  log_out: Ingia nje
+  sleep: Kulala
+placeholder:
+  ethernet_connected: Ufikiaji wa mtandao
+  settings: Mipangilio ya haraka
+  smart_charge: '- Smart Charge'
+  bluetooth_devices: Bluetooth & vifaa
+  open_system_tray: Tray ya mfumo wazi
+  open_user_folder: Fungua folda ya Mtumiaji
+  ethernet_disconnected: Hakuna ufikiaji wa mtandao
+  volume: Kiasi
+  battery_remaining: Imebaki
