@@ -1,0 +1,19 @@
+taskbar_menu:
+  start: Gehitu abiapuntu modulua
+  settings: Ezarpenak irekitzea
+  media: Gehitu multimedia modulua
+app_menu:
+  pin: Iskilinba
+  close_multiple: Itxi guztiak
+  unpin: Desjendu
+  close: Hurbileko
+  pin_to_left: Ezkerrera
+  pin_to_center: Pin zentrora
+  copy_handles: Kopiatu heldulekuak
+  run_as: Exekutatu administratzaile gisa
+  open_file_location: Ireki fitxategiaren kokapena
+  pin_to_right: PIN eskuin
+media_menu:
+  remove: Kendu multimedia modulua
+start_menu:
+  remove: Kendu hasierako modulua

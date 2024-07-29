@@ -1,0 +1,12 @@
+update:
+  downloading: Deskargatzen...
+  cancel: Beranduago
+  date: Data
+  version: Bertsioa
+  page: GitHub bertsioaren orria
+  title: Eguneratzea eskuragarri!
+  download: Eguneratu eta instalatu
+  installing: Instalatzen...
+  extra_info: >-
+    Aldaketa-erregistro osoa irakurtzeko, mesedez bisitatu aldaketa-erregistroa
+    orria

@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Multimedia
+    comunications: Komunikazioak
+  output_device: Irteerako gailua
+  input_device: Sarrera gailua
+  master_volume: Bolumen maisua
+  players: Komunikabideetako jokalariak
+network:
+  placeholder:
+    password: Kontrazeinu
+  not_found: Ez da sarerik aurkitu
+  connect: Batu
+  hidden: Ezkutuko sarea
+  disconnect: Deskonektatu
+  more: Sareko ezarpen gehiago
+settings:
+  restart: Berriro hasi
+  shutdown: Itzali
+  log_out: Saioa amaitu
+  sleep: Lo
+  app_settings: Aplikazioaren ezarpenak
+  title: Ezarpen
+placeholder:
+  smart_charge: '- Karga adimentsua'
+  open_user_folder: Erabiltzaile karpeta irekia
+  ethernet_connected: Interneterako sarbidea
+  battery_remaining: '% geratzen'
+  open_system_tray: Sistema irekiko erretilua
+  bluetooth_devices: Bluetooth eta gailuak
+  settings: Ezarpen azkarrak
+  volume: Ozentasun
+  ethernet_disconnected: Ez da Interneteko sarbiderik
