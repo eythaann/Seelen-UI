@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Awọn ibaraẹnisọrọ
+    multimedia: Multimedia
+  master_volume: Ohun elo
+  input_device: Ẹrọ titẹ
+  players: Awọn oṣere Media
+  output_device: Ẹrọ iṣelọpọ
+network:
+  placeholder:
+    password: Ọrọ igbaniwọle
+  disconnect: Ge kuro
+  not_found: Ko si awọn nẹtiwọki ti a rii
+  hidden: Nẹtiwọki ti o farapamọ
+  connect: Sopọ
+  more: Awọn eto nẹtiwọọki diẹ sii
+settings:
+  shutdown: Paade
+  title: Ètò
+  app_settings: Eto App
+  log_out: Wọle
+  restart: Tun bẹrẹ
+  sleep: Sun
+placeholder:
+  ethernet_connected: Wiwọle Intanẹẹti
+  volume: Iwọn didun
+  battery_remaining: '% ti o ku'
+  smart_charge: '- Awọn iṣakoso Smart'
+  open_user_folder: Ṣiṣi folda olumulo
+  ethernet_disconnected: Ko si wiwọle intanẹẹti ko si
+  bluetooth_devices: Bluetooth & awọn ẹrọ
+  settings: Eto Awọn ọna
+  open_system_tray: Ṣii Tẹ Tẹ
