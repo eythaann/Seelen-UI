@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Komunikacije
+    multimedia: Multimedija
+  players: Medijski igrači
+  input_device: Uređaj za unos
+  master_volume: Glavni volumen
+  output_device: Izlazni uređaj
+network:
+  placeholder:
+    password: Lozinka
+  disconnect: Prekinuti
+  not_found: Nisu pronađene mreže
+  more: Više mrežnih postavki
+  hidden: Skrivena mreža
+  connect: Povezati
+settings:
+  shutdown: Ugasiti
+  log_out: Odjaviti se
+  restart: Ponovo pokrenuti
+  app_settings: Postavke aplikacija
+  sleep: Spavati
+  title: Postavke
+placeholder:
+  ethernet_connected: pristup Internetu
+  ethernet_disconnected: Nema pristupa internetu
+  battery_remaining: preostalo%
+  open_system_tray: Otvorena sistemska ladica
+  smart_charge: '- pametna optužba'
+  open_user_folder: Otvorite mapu korisnika
+  settings: Brze postavke
+  volume: Zapremina
+  bluetooth_devices: Bluetooth i uređaji

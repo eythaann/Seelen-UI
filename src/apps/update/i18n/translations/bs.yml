@@ -1,0 +1,10 @@
+update:
+  cancel: Kasnije
+  date: Datum
+  version: Verzija
+  page: Stranica izdanja GitHub-a
+  downloading: Preuzimanje...
+  download: Ažurirajte i instalirajte
+  installing: Instaliranje...
+  extra_info: Da pročitate cijeli dnevnik promjena, posjetite stranicu dnevnika promjena
+  title: Dostupno je ažuriranje!
