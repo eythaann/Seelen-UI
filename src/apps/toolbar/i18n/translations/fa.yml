@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: چند رسانه ای
+    comunications: ارتباطات
+  output_device: دستگاه خروجی
+  input_device: دستگاه ورودی
+  players: بازیکنان رسانه ای
+  master_volume: جلد استاد
+network:
+  placeholder:
+    password: کلمه عبور
+  connect: وصل کردن
+  disconnect: قطع شدن
+  hidden: شبکه پنهان
+  more: تنظیمات بیشتر شبکه
+  not_found: هیچ شبکه ای پیدا نشده است
+settings:
+  app_settings: تنظیمات برنامه
+  restart: مجدداً
+  sleep: خواب
+  title: تنظیمات
+  log_out: خروج
+  shutdown: تعطیل
+placeholder:
+  settings: تنظیمات سریع
+  ethernet_connected: دسترسی به اینترنت
+  volume: جلد
+  open_system_tray: سینی سیستم باز
+  battery_remaining: ٪ باقی مانده
+  bluetooth_devices: بلوتوث و دستگاه
+  ethernet_disconnected: بدون دسترسی به اینترنت
+  smart_charge: '- شارژ هوشمند'
+  open_user_folder: پوشه کاربر را باز کنید

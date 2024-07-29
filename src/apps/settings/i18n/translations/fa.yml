@@ -1,0 +1,189 @@
+sides:
+  top: بالا
+  right: درست
+  left: ترک کرد
+  bottom: پایین
+header:
+  labels:
+    monitors: مانیتور
+    shortcuts: میانبرها
+    info: اطلاعات
+    developer: توسعه دهنده
+    general: عمومی
+    seelen_wm: مدیر پنجره
+    seelen_bar: نوار ابزار فانتزی
+    seelen_weg: اسکله/نوار وظیفه
+    specific_apps: برنامه های خاص
+start:
+  title: خوش آمدی!
+  message_accent: بهره وری خود را با سبک بهینه کنید!
+  message: >-
+    به Seelen UI ، محیط دسک تاپ نهایی با یک مدیر کاشی کاری ویندوز برای تقویت
+    تجربه ویندوز 11 خوش آمدید! دوره جدیدی از کارآیی و چند وظیفه ای را با رابط
+    بصری و ویژگی های پیشرفته ما کاوش کنید.
+general:
+  theme:
+    placeholder: انتخاب قالب
+    tags: برچسب ها
+    description: شرح
+    author: نویسنده
+    add: موضوع را اضافه کنید
+    added: موضوع قبلاً اضافه شده است
+    label: اطلاعات تم
+    enabled: مضامین را فعال کرد
+  language: زبان
+  startup: در راه اندازی اجرا می شود؟
+toolbar:
+  placeholder:
+    description: شرح
+    author: نویسنده
+    select: نوار ابزار
+  height: قد
+  enable: نوار ابزار فانتزی را فعال کنید
+wm:
+  border:
+    enable: مرز پنجره را فعال کنید
+    width: عرض مرز
+    offset: جبران مرز
+  layout: چیدمان
+  author: نویسنده
+  description: شرح
+  workspace_offset: مکانهای کار افست (حاشیه)
+  space_between_containers: فضای بین ظروف
+  enable: مدیر پنجره را فعال کنید
+  resize_delta: تغییر اندازه دلتا (٪)
+  disabled_windows10: مدیر پنجره برای ویندوز 10 در دسترس نیست.
+  workspace_padding: قسمتهای کاری PADING
+weg:
+  items:
+    label: موارد
+    size: اندازه مورد
+    gap: فضای بین موارد
+    zoom_size: اندازه بزرگنمایی (برای مضامین استفاده می شود)
+    visible_separators: جداکننده های قابل مشاهده
+  padding: لایه گذاری
+  gap: شکاف
+  margin: لبه
+  label: اسکله/نوار وظیفه
+  dock_side: طرف اسکله
+  auto_hide: پنهان خودکار
+  enable: Dock/TaskBar را فعال کنید
+  width: عرض
+devtools:
+  load: بار
+  install_folder: پوشه نصب
+  custom_config_file: بارگیری پرونده پیکربندی سفارشی
+  enable: ابزارهای توسعه دهنده را فعال کنید
+  settings_file: پرونده تنظیمات
+  data_folder: پوشه داده ها
+  app_folders: پوشه های برنامه
+apps_configurations:
+  app:
+    options:
+      float: شناور
+      pinned: بریده شده
+      unmanage: از بین بردن
+      force: زور مدیریت
+    category: دسته بندی
+    ok_edit: به روز رسانی
+    category_placeholder: هیچ یک
+    name: نام
+    workspace_placeholder: هیچ یک
+    monitor_placeholder: هیچ یک
+    ok_create: ايجاد كردن
+    workspace: فضای کاری
+    options_label: گزینه های اضافی
+    title_create: ایجاد {{name}}
+    title_readonly: مشاهده {{نام}}
+    title_edit: ویرایش {{نام}}
+    bindings: اتصال (توجه داشته باشید هر دو گزینه مورد نیاز است)
+    ok_readonly: ویرایش به عنوان جدید
+    monitor: نظارت
+  identifier:
+    and: وت
+    or: یا
+    id: مشخص کننده
+    kind: شناسایی توسط
+    add_block: اضافه کردن
+    negation: نفی تطبیق
+    matching_strategy: استراتژی تطبیق
+    remove: حذف بلوک
+  new: جدید
+  confirm_delete_title: تایید حذف
+  delete: حذف
+  swap: مبادله کردن
+  import: وارد كردن
+  search: جستجو کردن
+  bundled_title: پیکربندی برنامه همراه با Seelen
+  confirm_delete: آیا مطمئن هستید که می خواهید این پیکربندی/s را حذف کنید؟
+  export: صادر کردن
+  bundled_msg: >-
+    این تنظیمات بسته بندی شده قابل ویرایش نیستند و به گونه ای طراحی شده اند که
+    بدون شخصی سازی بهترین تجربه را برای شما فراهم می کنند. آنها به طور خودکار
+    متداول ترین برنامه ها را برای شما پیکربندی می کنند.
+extras:
+  github: گیتوب
+  discord: اختلاف
+  version: نسخه
+  links: پیوندهای رسمی
+  exit: ترک/خروج
+  relaunch: مجدداً
+shortcuts:
+  labels:
+    reserve_stack: پشته ذخیره
+    switch_workspace_6: تغییر به فضای کاری 6
+    move_to_workspace_8: حرکت به فضای کاری 8
+    reserve_float: شناور رزرو
+    send_to_workspace_9: ارسال به فضای کاری 9
+    switch_workspace_4: تغییر به فضای کاری 4
+    move_to_workspace_3: حرکت به فضای کاری 3
+    move_to_workspace_0: حرکت به فضای کاری 0
+    focus_right: راست تمرکز کنید
+    send_to_workspace_1: ارسال به فضای کاری 1
+    send_to_workspace_3: ارسال به فضای کاری 3
+    send_to_workspace_8: ارسال به فضای کاری 8
+    focus_bottom: پایین تمرکز
+    switch_workspace_1: تغییر به فضای کاری 1
+    reserve_bottom: قسمت پایین ذخیره
+    send_to_workspace_7: ارسال به فضای کاری 7
+    focus_top: تمرکز بالا
+    increase_height: افزایش ارتفاع
+    send_to_workspace_6: ارسال به فضای کاری 6
+    switch_workspace_9: تغییر به فضای کاری 9
+    decrease_height: کاهش قد
+    move_to_workspace_5: حرکت به فضای کاری 5
+    switch_workspace_0: تغییر به فضای کاری 0
+    focus_latest: آخرین تمرکز
+    move_to_workspace_7: حرکت به فضای کاری 7
+    move_to_workspace_4: حرکت به فضای کاری 4
+    move_to_workspace_6: حرکت به فضای کاری 6
+    switch_workspace_8: تغییر به فضای کاری 8
+    move_to_workspace_9: حرکت به فضای کاری 9
+    reserve_left: رزرو سمت چپ
+    send_to_workspace_5: ارسال به فضای کاری 5
+    move_to_workspace_2: حرکت به فضای کاری 2
+    move_to_workspace_1: حرکت به فضای کاری 1
+    send_to_workspace_0: ارسال به فضای کاری 0
+    send_to_workspace_2: ارسال به فضای کاری 2
+    send_to_workspace_4: ارسال به فضای کاری 4
+    switch_workspace_7: تغییر به فضای کاری 7
+    increase_width: عرض را افزایش دهید
+    reserve_top: بالای ذخیره
+    switch_workspace_3: تغییر به فضای کاری 3
+    focus_left: تمرکز سمت چپ
+    decrease_width: کاهش عرض
+    switch_workspace_5: تغییر به فضای کاری 5
+    switch_workspace_2: تغییر به فضای کاری 2
+    restore_sizes: اندازه ها را بازیابی کنید
+    reserve_right: حق رزرو
+  enable_tooltip: >-
+    اگر میانبرهای خود را با استفاده از API Seelen Core پیاده سازی خواهید کرد ،
+    غیرفعال کنید
+  enable: میانبرهای یکپارچه (AHK) را فعال کنید
+inProgress: در حال پیش رفت...
+cancel: لغو کردن
+save: صرفه جویی
+open: باز کن
+loading: بارگذاری...
+delete: حذف
+quit: ترک

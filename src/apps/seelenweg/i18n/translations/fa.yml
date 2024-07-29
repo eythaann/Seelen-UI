@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: تنظیمات باز
+  media: ماژول رسانه را اضافه کنید
+  start: ماژول شروع را اضافه کنید
+app_menu:
+  pin: پین کردن
+  close: بستن
+  unpin: باز کردن
+  pin_to_center: پین به مرکز
+  pin_to_left: پین به سمت چپ
+  copy_handles: دسته کپی کردن
+  open_file_location: مکان فایل را باز کنید
+  pin_to_right: پین به راست
+  close_multiple: همه را ببندید
+  run_as: به عنوان مدیر اجرا کنید
+media_menu:
+  remove: ماژول رسانه را حذف کنید
+start_menu:
+  remove: ماژول شروع را حذف کنید
