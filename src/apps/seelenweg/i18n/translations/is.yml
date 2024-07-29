@@ -1,0 +1,19 @@
+taskbar_menu:
+  start: Bættu við Start Module
+  media: Bættu við Media Module
+  settings: Opnar stillingar
+app_menu:
+  pin_to_left: Pinna til vinstri
+  pin_to_center: Pinna í miðju
+  run_as: Hlaupa sem stjórnandi
+  close_multiple: Lokaðu öllu
+  close: Lokaðu
+  unpin: Taka úr
+  copy_handles: Afrit handföng
+  open_file_location: Opnaðu staðsetningu skráar
+  pin: PIN
+  pin_to_right: Pinna til hægri
+media_menu:
+  remove: Fjarlægðu miðlunareininguna
+start_menu:
+  remove: Fjarlægðu upphafseininguna

@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Margmiðlun
+    comunications: Samskipti
+  master_volume: Master bindi
+  output_device: Framleiðsla tæki
+  input_device: Inntakstæki
+  players: Fjölmiðla leikmenn
+network:
+  placeholder:
+    password: Lykilorð
+  disconnect: Aftengdu
+  more: Fleiri netstillingar
+  not_found: Engin net fundust
+  hidden: Falið net
+  connect: Tengdu
+settings:
+  restart: Endurræsa
+  log_out: Að skrá þig út
+  app_settings: Forritastillingar
+  title: Stillingar
+  shutdown: Lokun
+  sleep: Sofðu
+placeholder:
+  ethernet_connected: internet aðgangur
+  smart_charge: '- Snjall hleðsla'
+  bluetooth_devices: Bluetooth og tæki
+  volume: Bindi
+  ethernet_disconnected: Enginn internetaðgangur
+  settings: Fljótar stillingar
+  open_user_folder: Opna notendamöppu
+  battery_remaining: '% eftir'
+  open_system_tray: Opinn kerfisbakki

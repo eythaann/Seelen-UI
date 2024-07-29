@@ -1,0 +1,188 @@
+sides:
+  top: Efst
+  left: Vinstri
+  right: Ekki satt
+  bottom: Botn
+header:
+  labels:
+    seelen_wm: Gluggastjóri
+    info: Upplýsingar
+    seelen_bar: Fancy tækjastikan
+    monitors: Fylgist með
+    shortcuts: Flýtileiðir
+    general: Almennt
+    specific_apps: Sérstök forrit
+    developer: Hönnuður
+    seelen_weg: Bryggju/verkefnabar
+start:
+  title: Velkominn!
+  message_accent: Fínstilltu framleiðni þína með stæl!
+  message: >-
+    Verið velkomin í Seelen HÍ, fullkominn skrifborðsumhverfi með innbyggðan
+    flísar Windows Manager til að auka Windows 11 upplifun þína! Kannaðu nýtt
+    tímabil skilvirkni og fjölverkavinnslu með leiðandi viðmóti okkar og
+    háþróaðri eiginleika.
+general:
+  theme:
+    description: Lýsing
+    label: Þemaupplýsingar
+    added: Þema þegar bætt við
+    author: Höfundur
+    add: Bæta við þema
+    placeholder: Veldu þema
+    enabled: Virkt þemu
+    tags: Merkimiðar
+  startup: Hlaupa í gangsetningu?
+  language: Tungumál
+toolbar:
+  placeholder:
+    description: Lýsing
+    author: Höfundur
+    select: Uppbygging tækjastiku
+  enable: Virkja Fancy tækjastiku
+  height: Hæð
+wm:
+  border:
+    enable: Virkja landamæri glugga
+    width: Breidd landamæra
+    offset: Landamæri offset
+  description: Lýsing
+  workspace_offset: Vinnusvæði offset (framlegð)
+  disabled_windows10: Gluggastjórinn er ekki í boði fyrir Windows 10.
+  layout: Skipulag
+  space_between_containers: Rými milli gáma
+  resize_delta: Breyta stærð delta (%)
+  author: Höfundur
+  enable: Virkja gluggastjóra
+  workspace_padding: Vinnusvæði padding
+weg:
+  items:
+    label: Hlutir
+    size: Stærð hlutar
+    gap: Rými milli atriða
+    zoom_size: Aðdráttarstærð (notuð fyrir þemu)
+    visible_separators: Sýnilegir skilju
+  width: Breidd
+  label: Bryggju/verkefnabar
+  dock_side: Bryggjuhlið
+  enable: Virkja bryggju/verkefnastiku
+  gap: Bil
+  auto_hide: Sjálfvirk fela
+  margin: Framlegð
+  padding: Padding
+devtools:
+  load: Hlaða
+  app_folders: App möppur
+  settings_file: Stillingarskrá
+  custom_config_file: Hlaða sérsniðna config skrá
+  enable: Virkja verktaki verktaki
+  install_folder: Uppsetningarmöppu
+  data_folder: Gagnamappa
+apps_configurations:
+  app:
+    options:
+      unmanage: Unanmanage
+      float: Fljóta
+      pinned: Fest
+      force: Valdastjórnun
+    monitor_placeholder: Enginn
+    workspace_placeholder: Enginn
+    name: Nafn
+    category_placeholder: Enginn
+    options_label: Auka valkostir
+    title_create: Búa til {{nafn}}
+    ok_readonly: Breyta sem nýjum
+    title_readonly: Skoða {{nafn}}
+    category: Flokkur
+    workspace: Vinnusvæði
+    monitor: Fylgstu með
+    bindings: Binding (athugaðu að báðir valkostirnir eru nauðsynlegir)
+    ok_edit: UPDATE
+    ok_create: Búa til
+    title_edit: Breyta {{name}}
+  identifier:
+    matching_strategy: Samsvarandi stefna
+    add_block: Bæta við blokk
+    or: Eða
+    and: Og
+    kind: Þekkja með
+    remove: Eyða blokk
+    negation: Afneitar samsvörun
+    id: Auðkenni
+  delete: Eyða
+  import: Flytja inn
+  confirm_delete: Ertu viss um að þú viljir eyða þessari stillingu/s?
+  export: Flytja út
+  confirm_delete_title: Staðfestu að eyða
+  search: Leitaðu
+  bundled_title: App stillt saman með Seelen
+  bundled_msg: >-
+    Þessar búnt stillingar eru ekki breytanlegar og eru hannaðar til að veita
+    þér bestu upplifunina án aðlögunar. Þeir stilla sjálfkrafa algengustu
+    forritin fyrir þig.
+  new: Nýtt
+  swap: Skiptu um
+extras:
+  github: GitHub
+  links: Opinberir hlekkir
+  discord: Ósamræmi
+  version: Útgáfa
+  relaunch: Fylgdu aftur
+  exit: Hætta/hætta
+shortcuts:
+  labels:
+    increase_height: Auka hæð
+    move_to_workspace_4: Farðu á Workspace 4
+    focus_latest: Fókus síðast
+    reserve_bottom: Panta botn
+    decrease_width: Minnka breidd
+    reserve_left: Pantaðu til vinstri
+    switch_workspace_5: Skiptu yfir í vinnusvæði 5
+    increase_width: Auka breidd
+    reserve_top: Panta topp
+    focus_right: Einbeittu þér rétt
+    move_to_workspace_5: Fara í Workspace 5
+    switch_workspace_7: Skiptu yfir í vinnusvæði 7
+    move_to_workspace_0: Fara á vinnusvæði 0
+    send_to_workspace_8: Sendu á Workspace 8
+    switch_workspace_9: Skiptu yfir í vinnusvæði 9
+    send_to_workspace_1: Sendu á vinnusvæði 1
+    move_to_workspace_2: Farðu í Workspace 2
+    focus_left: Einbeittu til vinstri
+    send_to_workspace_6: Sendu á Workspace 6
+    send_to_workspace_9: Sendu á Workspace 9
+    decrease_height: Minnka hæð
+    reserve_right: Pantaðu rétt
+    restore_sizes: Endurheimta stærðir
+    reserve_stack: Panta stafla
+    switch_workspace_2: Skiptu yfir í vinnusvæði 2
+    move_to_workspace_8: Farðu á vinnusvæði 8
+    send_to_workspace_4: Sendu á Workspace 4
+    move_to_workspace_1: Fara á vinnusvæði 1
+    move_to_workspace_7: Farðu í vinnusvæði 7
+    send_to_workspace_7: Sendu á Workspace 7
+    switch_workspace_6: Skiptu yfir í vinnusvæði 6
+    move_to_workspace_6: Fara á vinnusvæði 6
+    move_to_workspace_9: Fara á vinnusvæði 9
+    focus_bottom: Fókus botn
+    switch_workspace_3: Skiptu yfir í vinnusvæði 3
+    focus_top: Fókus toppur
+    send_to_workspace_3: Senda á Workspace 3
+    switch_workspace_0: Skiptu yfir í vinnusvæði 0
+    reserve_float: Varasjóður flot
+    switch_workspace_1: Skiptu yfir í vinnusvæði 1
+    send_to_workspace_2: Sendu á Workspace 2
+    switch_workspace_8: Skiptu yfir í vinnusvæði 8
+    move_to_workspace_3: Farðu í vinnusvæði 3
+    send_to_workspace_5: Sendu á Workspace 5
+    send_to_workspace_0: Sendu á Workspace 0
+    switch_workspace_4: Skiptu yfir í vinnusvæði 4
+  enable: Virkja samþætta flýtileiðir (AHK)
+  enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
+delete: Eyða
+loading: Hleðsla ...
+inProgress: Í vinnslu...
+quit: Hættu
+open: Opið
+save: Vista
+cancel: Hætta við
