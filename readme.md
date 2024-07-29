@@ -3,6 +3,12 @@
   Seelen UI
 </h1>
 
+<h2 align="center">
+  Fully Customizable Desktop Environment for Windows
+  <br/>
+  Available in 70+ Languages
+</h2>
+
 <div align="center"> 
 
 [![Contributors](https://img.shields.io/github/contributors/eythaann/seelen-ui.svg)](https://github.com/eythaann/seelen-ui/graphs/contributors)
