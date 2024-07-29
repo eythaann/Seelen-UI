@@ -1,0 +1,33 @@
+media:
+  device:
+    comunications: Aloqa
+    multimedia: Multimedia
+  output_device: Chiqish moslamasi
+  players: Media pleerlari
+  input_device: Kirish moslamasi
+  master_volume: Master hajmi
+network:
+  placeholder:
+    password: Parol
+  connect: Ulanmoq
+  hidden: Yashirin tarmoq
+  disconnect: Ajratmoq
+  more: Ko'proq tarmoq sozlamalari
+  not_found: Tarmoq topilmadi
+settings:
+  restart: Qayta ishga tushirish
+  shutdown: O'chirish; yopish
+  log_out: Chiqish
+  app_settings: Ilova sozlamalari
+  sleep: Uyqu
+  title: Sozlash
+placeholder:
+  ethernet_connected: Internetga ulanish
+  battery_remaining: '% Qolgan'
+  ethernet_disconnected: Internetga kirish yo'q
+  open_system_tray: Ochiq tizimning patnisi
+  bluetooth_devices: Bluetooth va qurilmalar
+  volume: Hajmi
+  open_user_folder: Foydalanuvchi papkasini oching
+  settings: Tez sozlamalar
+  smart_charge: '- aqlli zaryad'

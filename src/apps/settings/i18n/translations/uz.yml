@@ -1,0 +1,190 @@
+sides:
+  top: Eng yuqori
+  right: To'g'ri
+  bottom: Pastki
+  left: Chapda
+header:
+  labels:
+    info: Ma `lumot
+    seelen_wm: Oyna menejeri
+    seelen_bar: Fashion asboblar paneli
+    monitors: Monitorlar
+    developer: Ishlab chiqaruvchi
+    general: Umumiy
+    specific_apps: Muayyan ilovalar
+    shortcuts: Yorliqlar
+    seelen_weg: Dok / vazifalar paneli
+start:
+  message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
+  message: >-
+    Windows 11 tajribangizni oshirish uchun "Windows" bosh murabbiyi bo'lgan
+    Windows menejeriga ega Seelen UI-ga xush kelibsiz! Bizning intuitiv
+    interfeysimiz va rivojlangan xususiyatlarimiz bilan samaradorlik va ko'p
+    bosqichli yangi davrni o'rganing.
+  title: Xush kelibsiz!
+general:
+  theme:
+    description: Tavsif
+    placeholder: Mavzuni tanlang
+    label: Mavzu haqida ma'lumot
+    enabled: Mavzular yoqilgan
+    added: Mavzu allaqachon qo'shilgan
+    author: Muallif
+    add: Mavzuni qo'shing
+    tags: Teglar
+  language: Til
+  startup: Ishga tushirishda ishlaydimi?
+toolbar:
+  placeholder:
+    description: Tavsif
+    select: Asboblar paneli tuzilishi
+    author: Muallif
+  enable: Fashr asboblar panelini yoqing
+  height: Balandlik
+wm:
+  border:
+    width: Chegara kengligi
+    offset: Chegara ofset
+    enable: Oynaning chegarasini yoqing
+  description: Tavsif
+  enable: Oyna boshqaruvchisini yoqish
+  disabled_windows10: Windows 10 uchun deraza menejeri mavjud emas.
+  space_between_containers: Idishlar orasidagi bo'shliq
+  workspace_offset: Ishxonalar ofset (marjalar)
+  author: Muallif
+  layout: Tartib
+  resize_delta: Delta (%) ni o'zgartiring
+  workspace_padding: Ish plakding
+weg:
+  items:
+    gap: Buyumlar orasidagi bo'shliq
+    zoom_size: Zomed o'lchami (mavzular uchun ishlatiladi)
+    label: Narsalar
+    size: Element hajmi
+    visible_separators: Ko'rinadigan ajratuvchi
+  label: Dok / vazifalar paneli
+  padding: Plomba
+  dock_side: Dok
+  width: Kenglik
+  auto_hide: Avtomatik yashirish
+  enable: Dock / vazifalar panelini yoqing
+  gap: Bo'shliq
+  margin: Marja
+devtools:
+  install_folder: O'rnatish papkasini o'rnatish
+  enable: Ishlab chiqaruvchi vositalarni yoqish
+  app_folders: Ilova papkalari
+  custom_config_file: Custom Config faylini yuklang
+  data_folder: Ma'lumotlar papkasi
+  settings_file: Sozlamalar fayli
+  load: Yuklamoq
+apps_configurations:
+  app:
+    options:
+      force: Kuchni boshqarish
+      pinned: Zebo
+      float: Suzmoq
+      unmanage: Ishtiyoq
+    options_label: Qo'shimcha variantlar
+    ok_readonly: Yangi sifatida tahrirlash
+    title_readonly: Ko'rish {{ism}}
+    title_create: '{{Ism}} yaratish'
+    monitor: Monitor
+    bindings: Bog'lash (eslatma ikkalasi ham talab qilinadi)
+    monitor_placeholder: Hech biri
+    category_placeholder: Hech biri
+    name: Ism
+    workspace: Ish maydoni
+    workspace_placeholder: Hech biri
+    category: Tili
+    ok_create: Yaratmoq
+    ok_edit: Yangilamoq
+    title_edit: '{{Ism}} tahrirlash'
+  identifier:
+    add_block: Blokni qo'shish
+    remove: Blokni o'chirish
+    matching_strategy: Mos keladigan strategiya
+    negation: Mos kelmaslik
+    id: Identifikator
+    or: Yoki
+    kind: Aniqlang
+    and: Va
+  search: Qidirmoq
+  import: Import
+  confirm_delete: Ushbu konfiguratsiyani o'chirishni xohlayotganingizga ishonchingiz komilmi?
+  confirm_delete_title: O'chirishni tasdiqlang
+  bundled_msg: >-
+    Ushbu yig'ilgan konfiguratsiyalar tahrirlanmaydi va sizga eng yaxshi
+    tajribani taqdim etishsiz taqdim etish uchun mo'ljallangan. Ular avtomatik
+    ravishda siz uchun eng keng tarqalgan dasturlarni sozlaydi.
+  bundled_title: Dastur konfigurasi Seelen bilan bog'langan
+  export: Eksport
+  new: Yangi
+  delete: O'chirmoq
+  swap: Almashmoq
+extras:
+  exit: Chiqish / chiqish
+  links: Rasmiy havolalar
+  github: Gitul
+  discord: Kelishmovchilik
+  version: Versiya
+  relaunch: Qolma
+shortcuts:
+  labels:
+    send_to_workspace_1: Ish maydoni 1-ga yuboring
+    decrease_height: Balandlikni kamaytirish
+    increase_height: Balandlikni oshirish
+    switch_workspace_7: Ish maydoni 7-ga o'ting
+    move_to_workspace_5: Ish maydoni 5 ga o'ting 5
+    switch_workspace_0: Ish maydoni 0 ga o'ting
+    switch_workspace_6: Ish maydoni 6 ga o'tish
+    reserve_bottom: Zaxira pastki
+    move_to_workspace_1: Ish maydoni 1 ga o'ting 1
+    move_to_workspace_6: Ish maydoni 6-ga o'ting
+    focus_right: Joylashtirish
+    move_to_workspace_8: Ish maydoni 8 ga o'ting 8
+    decrease_width: Kenglikni kamaytirish
+    send_to_workspace_7: Ish maydoni 7-ga yuboring
+    move_to_workspace_0: Ish maydoni 0 ga o'ting
+    reserve_top: Zaxira tepasi
+    send_to_workspace_9: Ish maydoni 9-ga yuboring
+    switch_workspace_8: Ish maydoni 8 ga o'tish
+    move_to_workspace_3: Ish maydoni 3 ga o'ting
+    reserve_right: Qo'riqxona
+    increase_width: Kenglikni oshirish
+    reserve_stack: Zaxira to'plami
+    switch_workspace_9: Ish maydoni 9 ga o'tish 9
+    focus_latest: Eng so'nggi
+    move_to_workspace_2: Ish maydoni 2-ga o'ting
+    focus_left: Fince chap
+    move_to_workspace_9: Ish maydoniga o'tish 9
+    switch_workspace_3: Ish maydoni 3 ga o'tish
+    restore_sizes: O'lchamlarini tiklash
+    send_to_workspace_5: Ish maydoni 5-ga yuboring 5
+    focus_top: Face Top
+    move_to_workspace_4: Ish maydoni 4-ga o'ting
+    send_to_workspace_4: Ish maydoni 4-ga yuboring
+    send_to_workspace_8: Ish maydoni 8-ga yuboring
+    switch_workspace_2: Ish maydoni 2-ga o'ting
+    focus_bottom: Fokus suvi
+    reserve_float: Suzmoq
+    send_to_workspace_2: Ish maydoni 2-ga yuboring
+    switch_workspace_5: Ish maydoni 5 ga o'tish
+    reserve_left: Zaxira chap
+    send_to_workspace_6: Ish maydoni 6-ga yuboring
+    move_to_workspace_7: Ish maydoni 7-ga o'ting
+    switch_workspace_4: Ish maydoni 4-ga o'ting
+    switch_workspace_1: Ish maydoni 1 ga o'tish
+    send_to_workspace_3: Ish maydoni 3-ga yuboring
+    send_to_workspace_0: Ish maydoni 0 ga yuboring
+  enable: Birlashtirilgan yorliqlarni yoqish (AHK)
+  enable_tooltip: >-
+    Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
+    o'chiring
+inProgress: Jarayonda...
+open: Ochiq
+save: Tejash
+loading: Yuklash ...
+cancel: Bekor qilmoq
+delete: O'chirmoq
+quit: Ketmoq
