@@ -1,0 +1,33 @@
+media:
+  device:
+    multimedia: Мултимедија
+    comunications: Комуникации
+  input_device: Влезен уред
+  output_device: Излезен уред
+  master_volume: Господар волумен
+  players: Медиа плеери
+network:
+  placeholder:
+    password: Лозинка
+  hidden: Скриена мрежа
+  not_found: Не се пронајдени мрежи
+  disconnect: Исклучување
+  connect: Поврзете се
+  more: Повеќе мрежни поставки
+settings:
+  shutdown: Исклучи
+  restart: Рестарт
+  log_out: Одјавете се
+  app_settings: Поставки за апликации
+  title: Поставки
+  sleep: Спиење
+placeholder:
+  ethernet_connected: Интернет пристап
+  volume: Волумен
+  settings: Брзи поставки
+  bluetooth_devices: Bluetooth & уреди
+  battery_remaining: Останатите %
+  smart_charge: '- Паметно полнење'
+  open_system_tray: Отворен фиока за систем
+  open_user_folder: Отворете ја папката за корисници
+  ethernet_disconnected: Нема пристап до Интернет

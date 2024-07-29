@@ -1,0 +1,19 @@
+taskbar_menu:
+  settings: Отворете ги поставките
+  start: Додадете модул за почеток
+  media: Додадете медиумски модул
+app_menu:
+  run_as: Работи како администратор
+  open_file_location: Отворете ја локацијата на датотеката
+  pin: Игла
+  unpin: Unpin
+  pin_to_left: Игла на лево
+  copy_handles: Копирање рачки
+  close: Затвори
+  pin_to_right: Игла надесно
+  close_multiple: Затворете ги сите
+  pin_to_center: Игла до центар
+media_menu:
+  remove: Отстранете го модулот за медиуми
+start_menu:
+  remove: Отстранете го модулот за почеток

@@ -1,0 +1,190 @@
+sides:
+  left: Лево
+  top: Врв
+  bottom: Дно
+  right: Десно
+header:
+  labels:
+    seelen_bar: Фенси лента со алатки
+    developer: Развивач
+    shortcuts: Кратенки
+    general: Општо
+    info: Информации
+    seelen_wm: Менаџер на прозорци
+    seelen_weg: Док/лента со задачи
+    monitors: Монитори
+    specific_apps: Специфични апликации
+start:
+  title: Добредојдовте!
+  message_accent: Оптимизирајте ја вашата продуктивност со стил!
+  message: >-
+    Добредојдовте во Seelen UI, крајната околина за десктоп со вграден менаџер
+    за прозорци за Windows за подобрување на вашето искуство со Windows 11!
+    Истражете нова ера на ефикасност и мултитаскинг со нашиот интуитивен
+    интерфејс и напредни карактеристики.
+general:
+  theme:
+    tags: Тагови
+    enabled: Овозможени теми
+    author: Автор
+    added: Веќе додадена тема
+    label: Информации за теми
+    description: Опис
+    placeholder: Изберете тема
+    add: Додадете тема
+  language: Јазик
+  startup: Стартувам на стартување?
+toolbar:
+  placeholder:
+    author: Автор
+    select: Структура на лентата со алатки
+    description: Опис
+  height: Висина
+  enable: Овозможете фенси лента со алатки
+wm:
+  border:
+    width: Ширина на границата
+    offset: Офсет за граница
+    enable: Овозможете ја границата на прозорецот
+  enable: Овозможи менаџер на прозорци
+  workspace_padding: Подлога за работни места
+  resize_delta: Променете ја големината на Делта (%)
+  disabled_windows10: Менаџерот на прозорецот не е достапен за Windows 10.
+  workspace_offset: Работни места за неутрализирање (маргини)
+  space_between_containers: Простор помеѓу контејнери
+  layout: Распоред
+  description: Опис
+  author: Автор
+weg:
+  items:
+    size: Големина на артикалот
+    label: Предмети
+    zoom_size: Зумирана големина (се користи за теми)
+    visible_separators: Видливи сепаратори
+    gap: Простор помеѓу предмети
+  width: Ширина
+  dock_side: Страна на пристаништето
+  enable: Овозможете пристаниште/лента со задачи
+  auto_hide: Автоматско скриј
+  gap: Јаз
+  margin: Маргина
+  padding: Подлога
+  label: Док/лента со задачи
+devtools:
+  load: Оптоварување
+  custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација
+  data_folder: Папка со податоци
+  install_folder: Папка за инсталација
+  settings_file: Датотека за поставки
+  enable: Овозможете алатки за развивачи
+  app_folders: Папки со апликации
+apps_configurations:
+  app:
+    options:
+      float: Плови
+      unmanage: Unmanage
+      pinned: Закачен
+      force: Управување со сила
+    title_edit: Уредување {{име}}
+    ok_edit: Ажурирање
+    category_placeholder: Ништо
+    name: Име
+    workspace_placeholder: Ништо
+    workspace: Работен простор
+    ok_create: Креирај
+    monitor_placeholder: Ништо
+    bindings: Обврзувачки (Забележете дека се потребни и двете опции)
+    title_readonly: Гледање {{име}}
+    monitor: Монитор
+    options_label: Дополнителни опции
+    ok_readonly: Уреди како ново
+    category: Категорија
+    title_create: Креирање {{име}}
+  identifier:
+    remove: Избриши блок
+    matching_strategy: Стратегија за појавување
+    or: Или
+    id: Идентификатор
+    kind: Идентификувајте од
+    and: И
+    negation: Негираат совпаѓање
+    add_block: Додадете блок
+  delete: Избриши
+  export: Извоз
+  swap: Разменување
+  search: Пребарување
+  bundled_msg: >-
+    Овие конфигурации во комплет не се уредни и се дизајнирани да ви обезбедат
+    најдобро искуство без прилагодување. Тие автоматски ги конфигурираат
+    најчестите апликации за вас.
+  import: Увоз
+  confirm_delete: Дали сте сигурни дека сакате да ја избришете оваа конфигурација/а?
+  new: Ново
+  bundled_title: Конфигурирана апликација во комплет со Селен
+  confirm_delete_title: Потврдете го Избриши
+extras:
+  relaunch: Повторно започнување
+  links: Официјални врски
+  exit: Откажете/излез
+  version: Верзија
+  github: Github
+  discord: Раздор
+shortcuts:
+  labels:
+    move_to_workspace_2: Преместете се на работниот простор 2
+    move_to_workspace_6: Преместете се на работниот простор 6
+    switch_workspace_2: Префрлете се на работниот простор 2
+    send_to_workspace_3: Испратете на работниот простор 3
+    switch_workspace_5: Префрлете се на работниот простор 5
+    move_to_workspace_7: Преместете се на работниот простор 7
+    reserve_left: Резерва лево
+    focus_bottom: Фокус дното
+    move_to_workspace_1: Преместете се на работниот простор 1
+    reserve_float: Резерва плови
+    send_to_workspace_2: Испратете на работниот простор 2
+    focus_top: Фокус врвот
+    switch_workspace_1: Префрлете се на работниот простор 1
+    send_to_workspace_0: Испратете на работниот простор 0
+    reserve_stack: Резервен магацин
+    increase_height: Зголемете ја висината
+    switch_workspace_9: Префрлете се на работниот простор 9
+    decrease_height: Намалување на висината
+    increase_width: Зголемете ја ширината
+    send_to_workspace_6: Испратете на работниот простор 6
+    focus_right: Фокусирајте се десно
+    reserve_top: Резервен врв
+    reserve_right: Резервирајте десно
+    send_to_workspace_8: Испратете на работниот простор 8
+    send_to_workspace_5: Испратете на работниот простор 5
+    move_to_workspace_0: Преместете се на работниот простор 0
+    move_to_workspace_8: Преместете се на работниот простор 8
+    reserve_bottom: Резервно дно
+    send_to_workspace_1: Испратете на работниот простор 1
+    switch_workspace_7: Префрлете се на работниот простор 7
+    switch_workspace_4: Префрлете се на работниот простор 4
+    focus_left: Фокусот лево
+    switch_workspace_0: Префрлете се на работниот простор 0
+    send_to_workspace_4: Испратете на работниот простор 4
+    focus_latest: Фокусирајте се најновите
+    switch_workspace_6: Префрлете се на работниот простор 6
+    send_to_workspace_7: Испратете на работниот простор 7
+    send_to_workspace_9: Испратете на работниот простор 9
+    restore_sizes: Врати големини
+    switch_workspace_8: Префрлете се на работниот простор 8
+    move_to_workspace_3: Преместете се на работниот простор 3
+    decrease_width: Намалување на ширината
+    move_to_workspace_5: Преместете се во работниот простор 5
+    move_to_workspace_4: Преместете се на работниот простор 4
+    move_to_workspace_9: Преместете се на работниот простор 9
+    switch_workspace_3: Префрлете се на работниот простор 3
+  enable_tooltip: >-
+    Оневозможете ако ги имплементирате вашите сопствени кратенки со користење на
+    API на Core Seelen
+  enable: Овозможете интегрирани кратенки (AHK)
+inProgress: Во тек...
+delete: Избриши
+cancel: Откажи
+loading: Вчитување ...
+quit: Откажете се
+save: Зачувај
+open: Отворено
