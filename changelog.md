@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- remove unnecessary loop on taskbar hiding function.
+
 ### fix
 - no loading translations correctly on update modal.
 

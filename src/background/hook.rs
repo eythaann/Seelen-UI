@@ -212,7 +212,7 @@ impl Seelen {
                     if TASKBAR_CLASS.contains(&class.as_str())
                         || TASKBAR_CLASS.contains(&parent_class.as_str())
                     {
-                        SeelenWeg::hide_taskbar(true)?;
+                        SeelenWeg::hide_taskbar(true);
                     }
                 }
             }

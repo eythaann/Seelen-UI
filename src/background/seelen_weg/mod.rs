@@ -2,6 +2,8 @@ pub mod handler;
 pub mod hook;
 pub mod icon_extractor;
 
+use std::thread::JoinHandle;
+
 use getset::{Getters, MutGetters};
 use icon_extractor::extract_and_save_icon;
 use image::{DynamicImage, RgbaImage};
@@ -14,16 +16,17 @@ use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        EnumWindows, GetParent, HWND_TOPMOST, SHOW_WINDOW_CMD, SWP_NOACTIVATE, SW_HIDE,
-        SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        EnumWindows, GetParent, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE,
+        SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
 use crate::{
     error_handler::Result,
+    log_error,
     seelen::{get_app_handle, SEELEN},
     trace_lock,
-    utils::are_overlaped,
+    utils::{are_overlaped, sleep_millis},
     windows_api::{AppBarData, AppBarDataState, WindowsApi},
 };
 
@@ -373,30 +376,28 @@ impl SeelenWeg {
         Ok((window, hitbox))
     }
 
-    pub fn hide_taskbar(hide: bool) -> Result<()> {
-        let state: AppBarDataState;
-        let cmdshow: SHOW_WINDOW_CMD;
+    pub fn hide_taskbar(hide: bool) -> JoinHandle<()> {
+        std::thread::spawn(move || {
+            let (state, cmdshow) = if hide {
+                (AppBarDataState::AutoHide, SW_HIDE)
+            } else {
+                (AppBarDataState::AlwaysOnTop, SW_SHOWNORMAL)
+            };
 
-        if hide {
-            state = AppBarDataState::AutoHide;
-            cmdshow = SW_HIDE;
-        } else {
-            state = AppBarDataState::AlwaysOnTop;
-            cmdshow = SW_SHOWNORMAL;
-        }
-
-        let handles = get_taskbars_handles()?;
-        for handle in handles {
-            let pdata = AppBarData::from_handle(handle);
-            pdata.set_state(state);
-            WindowsApi::show_window(handle, cmdshow)?;
-
-            std::thread::spawn(move || -> Result<()> {
-                std::thread::sleep(std::time::Duration::from_millis(1000));
-                SeelenWeg::hide_taskbar(hide)
-            });
-        }
-        Ok(())
+            match get_taskbars_handles() {
+                Ok(handles) => {
+                    for handle in &handles {
+                        AppBarData::from_handle(*handle).set_state(state);
+                    }
+                    // wait for taskbar animation before hiding it
+                    sleep_millis(1200);
+                    for handle in handles {
+                        log_error!(WindowsApi::show_window(handle, cmdshow));
+                    }
+                }
+                Err(err) => log::error!("Failed to get taskbars handles: {:?}", err),
+            }
+        })
     }
 }
 

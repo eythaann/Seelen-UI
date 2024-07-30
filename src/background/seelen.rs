@@ -112,7 +112,7 @@ impl Seelen {
 
     pub fn start(&mut self) -> Result<()> {
         if self.state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar(true)?;
+            SeelenWeg::hide_taskbar(true);
         }
 
         self.start_ahk_shortcuts()?;
@@ -152,7 +152,7 @@ impl Seelen {
     pub fn stop(&self) {
         release_system_events_handlers();
         if self.state.is_weg_enabled() {
-            log_error!(SeelenWeg::hide_taskbar(false));
+            log_error!(SeelenWeg::hide_taskbar(false).join());
         }
         if self.state.is_ahk_enabled() {
             self.kill_ahk_shortcuts();
