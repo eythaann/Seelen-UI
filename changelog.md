@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.10]
 ### enhancements
 - remove unnecessary loop on taskbar hiding function.
 
