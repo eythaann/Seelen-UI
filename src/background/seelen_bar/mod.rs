@@ -116,9 +116,7 @@ impl FancyToolbar {
             WindowsApi::set_position(hitbox_hwnd, None, &abd_rect, SWP_ASYNCWINDOWPOS)?;
         }
 
-        let mut rect = rc_monitor;
-        rect.bottom -= 1; // avoid be matched as a fullscreen app;
-        WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
+        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 

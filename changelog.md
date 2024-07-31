@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- remove unnecessary 1px padding on toolbar.
+
 ## [1.8.10]
 ### enhancements
 - remove unnecessary loop on taskbar hiding function.
