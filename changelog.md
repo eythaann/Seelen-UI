@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app installed by msix no opening.
+
 ## [1.8.11]
 ### fix
 - remove unnecessary 1px padding on toolbar.
