@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.8.12]
 ### fix
 - app installed by msix no opening.
 
