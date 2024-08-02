@@ -5,8 +5,8 @@ info:
 
 left:
   - type: text
-    template: concat("@", env.USERNAME)
-    onClick: open -> env.USERPROFILE
+    template: concat(imgFromExe("C:\\Windows\\explorer.exe"), " @", env.USERNAME)
+    onClickV2: open(env.USERPROFILE)
     tooltip: t("placeholder.open_user_folder")
     style:
       flexShrink: 0
@@ -39,7 +39,7 @@ right:
 
   - type: device
     template: icon.TbBluetoothConnected
-    onClick: open -> "ms-settings:connecteddevices"
+    onClickV2: open("ms-settings:connecteddevices")
     tooltip: t("placeholder.bluetooth_devices")
 
   - type: network
@@ -92,7 +92,7 @@ right:
         string(battery.percentage),
         "%"
       )
-    onClick: open -> "ms-settings:powersleep"
+    onClickV2: open("ms-settings:powersleep")
 
   - type: date
     each: minute

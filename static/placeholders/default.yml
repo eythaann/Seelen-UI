@@ -4,8 +4,8 @@ info:
   description: Default toolbar layout good for many devices.
 left:
   - type: text
-    template: concat("@", env.USERNAME)
-    onClick: open -> env.USERPROFILE
+    template: concat(imgFromExe("C:\\Windows\\explorer.exe"), " @", env.USERNAME)
+    onClickV2: open(env.USERPROFILE)
     tooltip: t("placeholder.open_user_folder")
     style:
       flexShrink: 0

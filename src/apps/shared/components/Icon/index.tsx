@@ -68,7 +68,6 @@ const icons = {
   ...wi,
 };
 
-export const exposedIconsRegex = /\[ICON:(.*?)\]/g;
 export const exposedIcons = Object.keys(icons).reduce((acc, icon) => {
   acc[icon] = `[ICON:${icon}]`;
   return acc;

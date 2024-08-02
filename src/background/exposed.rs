@@ -68,6 +68,20 @@ fn run_as_admin(path: String) {
 }
 
 #[command]
+fn run(program: String, args: Vec<String>) {
+    tauri::async_runtime::spawn(async move {
+        log_error!(
+            get_app_handle()
+                .shell()
+                .command(program)
+                .args(args)
+                .status()
+                .await
+        );
+    });
+}
+
+#[command]
 fn is_dev_mode() -> bool {
     tauri::is_dev()
 }
@@ -162,6 +176,7 @@ fn get_icon(path: String) -> Option<PathBuf> {
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
+        run,
         refresh_state,
         is_dev_mode,
         open_file,

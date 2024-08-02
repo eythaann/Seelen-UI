@@ -1,9 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- allow custom images on toolbar by imgFromUrl, imgFromPath and imgFromExe functions.
+
 ### enhancements
 - icons now are recreated from exe path if icon was deleted.
 - uwp icons now are loaded from background.
+
+### refactor
+- deprecate `onClick` and add new `onClickV2` on toolbar modules.
 
 ### fix
 - bad translations keys.

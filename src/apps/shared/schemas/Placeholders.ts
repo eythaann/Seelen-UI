@@ -46,7 +46,8 @@ export const BaseTMSchema = z.object({
     })
     .default('"Unset"'),
   tooltip: z.string().nullable().default(null),
-  onClick: z.string().nullable().default(null),
+  onClick: z.string().nullable().default(null).describe('Deprecated, use `onClickV2` instead'),
+  onClickV2: z.string().nullable().default(null),
   style: z.record(z.string(), z.any()).default({}),
 });
 
