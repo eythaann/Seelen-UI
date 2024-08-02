@@ -105,7 +105,7 @@ function Device({ device }: { device: MediaDevice }) {
             <Icon iconName="IoMusicalNotes" propsIcon={{ size: 18 }} />
           </Button>
         </Tooltip>
-        <Tooltip title={t('media.device.communications')}>
+        <Tooltip title={t('media.device.comunications')}>
           <Button
             type={device.is_default_communications ? 'primary' : 'default'}
             onClick={onClickCommunications}
