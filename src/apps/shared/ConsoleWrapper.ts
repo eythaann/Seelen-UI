@@ -1,5 +1,4 @@
 import * as Logger from '@tauri-apps/plugin-log';
-import { exit } from '@tauri-apps/plugin-process';
 
 export function wrapConsole() {
   const WebConsole = {
@@ -21,7 +20,6 @@ export function wrapConsole() {
 
   window.addEventListener('unhandledrejection', (event) => {
     console.error(`Unhandled Rejection - ${event.reason}`);
-    exit(1);
   });
 
   console.error = (...params: any[]) => {

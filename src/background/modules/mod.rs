@@ -5,3 +5,4 @@ pub mod media;
 pub mod network;
 pub mod power;
 pub mod tray;
+pub mod uwp;

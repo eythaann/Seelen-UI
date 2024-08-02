@@ -4,7 +4,7 @@ mod com;
 pub use app_bar::*;
 pub use com::*;
 
-use std::{ffi::c_void, thread::sleep, time::Duration};
+use std::{ffi::c_void, path::PathBuf, thread::sleep, time::Duration};
 
 use color_eyre::eyre::eyre;
 use windows::{
@@ -356,6 +356,11 @@ impl WindowsApi {
     pub fn exe_path(hwnd: HWND) -> Result<String> {
         let (process_id, _) = Self::window_thread_process_id(hwnd);
         Self::exe_path_by_process(process_id)
+    }
+
+    pub fn exe_path_v2(hwnd: HWND) -> Result<PathBuf> {
+        let (process_id, _) = Self::window_thread_process_id(hwnd);
+        Ok(PathBuf::from(Self::exe_path_by_process(process_id)?))
     }
 
     pub fn exe(hwnd: HWND) -> Result<String> {

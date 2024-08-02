@@ -66,8 +66,9 @@ version = "=0.57.0"
 features = [
     "Win32_Foundation",
     "ApplicationModel",
-    "Foundation_Collections",
-    "Management_Deployment",
+    "ApplicationModel_Core",               # uwp apps
+    "Foundation_Collections",              # uwp apps
+    "Management_Deployment",               # uwp apps
     "Win32_UI_Input_KeyboardAndMouse",
     "Win32_UI_WindowsAndMessaging",
     "Win32_UI_Shell",
@@ -78,6 +79,7 @@ features = [
     "Win32_System_Registry",               # required for system tray icon module
     "Win32_Security",                      # required for power management (shutdown, reboot)
     "Win32_System_Threading",
+    "Win32_System_WinRT",                  # uwp apps
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
     "Win32_System_ProcessStatus",

@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- icons now are recreated from exe path if icon was deleted.
+- uwp icons now are loaded from background.
+
 ## [1.8.12]
 ### fix
 - app installed by msix no opening.

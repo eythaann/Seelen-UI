@@ -24,6 +24,7 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
+    modules::uwp::UWP_MANAGER,
     seelen::{get_app_handle, SEELEN},
     trace_lock,
     utils::{are_overlaped, sleep_millis},
@@ -181,20 +182,36 @@ impl SeelenWeg {
             WindowsApi::get_window_text(hwnd)
         );
 
-        let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
-        let mut icon_path = self.missing_icon();
-        if !exe_path.is_empty() {
-            icon_path = self.extract_icon(&exe_path).unwrap_or(icon_path);
-        }
-
-        let app = SeelenWegApp {
+        let mut app = SeelenWegApp {
             hwnd: hwnd.0,
-            exe: exe_path.clone(),
+            exe: String::new(),
             title: WindowsApi::get_window_text(hwnd),
-            icon_path,
-            execution_path: exe_path,
+            icon_path: String::new(),
+            execution_path: String::new(),
             process_hwnd: hwnd.0,
         };
+
+        if let Ok(path) = WindowsApi::exe_path_v2(hwnd) {
+            app.exe = path.to_string_lossy().to_string();
+            app.icon_path = if !app.exe.is_empty() {
+                self.extract_icon(&app.exe)
+                    .unwrap_or_else(|_| self.missing_icon())
+            } else {
+                self.missing_icon()
+            };
+
+            let exe = path
+                .file_name()
+                .unwrap_or_default()
+                .to_string_lossy()
+                .to_string();
+            app.execution_path = match UWP_MANAGER.lock().get_from_path(&path) {
+                Some(package) => package
+                    .get_shell_path(&exe)
+                    .unwrap_or_else(|| app.exe.clone()),
+                None => app.exe.clone(),
+            };
+        }
 
         self.window
             .emit("add-open-app", app.clone())

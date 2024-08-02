@@ -24,7 +24,6 @@ export const savePinnedItems = debounce(
             type: item.type,
             exe: item.exe,
             execution_path: item.execution_path,
-            icon_path: item.icon_path,
           });
           break;
         default:

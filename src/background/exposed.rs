@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use std::path::PathBuf;
 use std::process::Command;
 
 use serde::Serialize;
@@ -10,6 +11,7 @@ use crate::error_handler::Result;
 use crate::modules::input::Keyboard;
 use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
+use crate::seelen_weg::icon_extractor::extract_and_save_icon;
 use crate::seelen_wm::handler::*;
 use crate::system::brightness::*;
 use crate::utils::{is_windows_10, is_windows_11};
@@ -152,6 +154,11 @@ fn send_keys(keys: String) -> Result<()> {
     Keyboard::new().send_keys(&keys)
 }
 
+#[command]
+fn get_icon(path: String) -> Option<PathBuf> {
+    extract_and_save_icon(&get_app_handle(), &path).ok()
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
@@ -168,6 +175,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         switch_workspace,
         ensure_hitboxes_zorder,
         send_keys,
+        get_icon,
         // Auto Start
         set_auto_start,
         get_auto_start_status,

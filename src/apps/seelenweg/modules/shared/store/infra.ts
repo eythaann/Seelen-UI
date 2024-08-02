@@ -9,9 +9,6 @@ import { loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import * as fs from '@tauri-apps/plugin-fs';
-
-import { LAZY_CONSTANTS } from '../utils/infra';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -36,12 +33,11 @@ async function cleanSavedItems(items: SwSavedItem[]): Promise<SwItem[]> {
   const result: SwItem[] = [];
 
   for (const item of items) {
-    if ('icon_path' in item && !(await fs.exists(item.icon_path))) {
-      item.icon_path = LAZY_CONSTANTS.MISSING_ICON_PATH;
+    if (item.type === SwItemType.PinnedApp) {
+      result.push(await SwPinnedAppUtils.fromSaved(item));
+    } else {
+      result.push(item);
     }
-    let cleaned =
-      item.type === SwItemType.PinnedApp ? await SwPinnedAppUtils.fromSaved(item) : item;
-    result.push(cleaned);
   }
 
   return result;

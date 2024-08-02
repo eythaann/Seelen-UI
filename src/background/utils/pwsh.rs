@@ -18,7 +18,6 @@ impl PwshScript {
         }
     }
 
-    #[allow(dead_code)]
     pub fn with_args<I, S>(&mut self, args: I)
     where
         I: IntoIterator<Item = S>,
@@ -28,7 +27,7 @@ impl PwshScript {
     }
 
     /// returns `Ok(stdout)` or `Err(stderr)`
-    pub async fn execute(&self) -> Result<String> {
+    pub async fn execute(self) -> Result<String> {
         let script_path = temp_dir().join(format!("slu-{}.ps1", uuid::Uuid::new_v4()));
         let script_path_str = script_path.to_string_lossy();
 

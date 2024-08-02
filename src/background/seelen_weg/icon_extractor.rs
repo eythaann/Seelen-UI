@@ -28,8 +28,8 @@ use std::arch::x86_64::_mm_storeu_si128;
 use std::path::PathBuf;
 
 use crate::error_handler::Result;
+use crate::modules::uwp::UWP_MANAGER;
 use crate::utils::app_data_path;
-use crate::utils::filename_from_path;
 
 /// Convert BGRA to RGBA
 ///
@@ -168,25 +168,37 @@ pub fn extract_and_save_icon(handle: &AppHandle, exe_path: &str) -> Result<PathB
         std::fs::create_dir_all(&gen_icons_paths)?;
     }
 
-    let filename = filename_from_path(exe_path);
-    let icon_path = gen_icons_paths.join(filename.replace(".exe", ".png"));
-    let icon_path_uwp = gen_icons_paths.join(filename.replace(".exe", "_uwp.png"));
+    let path = PathBuf::from(exe_path);
+    let filename = path
+        .file_name()
+        .unwrap_or_default()
+        .to_string_lossy()
+        .to_string();
+    let saved_icon_path = gen_icons_paths.join(filename.replace(".exe", ".png"));
 
-    if icon_path_uwp.exists() {
-        return Ok(icon_path_uwp);
+    if saved_icon_path.exists() {
+        return Ok(saved_icon_path);
     }
 
-    if icon_path.exists() {
-        return Ok(icon_path);
+    log::trace!("Extracting icon for \"{}\"", filename);
+
+    if let Some(package) = UWP_MANAGER.lock().get_from_path(&path) {
+        if let Some(uwp_icon_path) = package.get_light_icon(&filename) {
+            log::debug!("Copying UWP icon from \"{}\"", uwp_icon_path.display());
+
+            std::fs::copy(uwp_icon_path, &saved_icon_path)?;
+            return Ok(saved_icon_path);
+        }
     }
 
     let images = get_images_from_exe(exe_path);
     if let Ok(images) = images {
         // icon on index 0 always is the app showed icon
         if let Some(icon) = images.first() {
-            icon.save(&icon_path)?;
+            icon.save(&saved_icon_path)?;
+            return Ok(saved_icon_path);
         }
     }
 
-    Ok(icon_path)
+    Err("Failed to extract icon".into())
 }

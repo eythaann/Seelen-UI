@@ -11,7 +11,6 @@ export enum SwItemType {
 export type SavedPinnedApp = z.infer<typeof PinnedAppSchema>;
 const PinnedAppSchema = z.object({
   type: z.literal(SwItemType.PinnedApp),
-  icon_path: z.string(),
   /** Path to executable */
   exe: z.string(),
   /** Path to execute the app using explorer.exe (uwp apps starts with `shell:AppsFolder`) */

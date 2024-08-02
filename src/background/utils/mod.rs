@@ -26,10 +26,6 @@ pub fn sleep_millis(millis: u64) {
     std::thread::sleep(Duration::from_millis(millis));
 }
 
-pub fn filename_from_path(path: &str) -> String {
-    path.split('\\').last().unwrap_or_default().to_string()
-}
-
 pub fn are_overlaped(a: &RECT, b: &RECT) -> bool {
     if a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom {
         return false;

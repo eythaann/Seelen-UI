@@ -64,4 +64,6 @@ foreach ($package in $packages) {
   $output += $selected
 }
 
-$output | ConvertTo-Json -Depth 3 | Out-File -FilePath $SavePath -Encoding utf8
+$output | ConvertTo-Json -Depth 3 -Compress | Out-File -FilePath $SavePath -Encoding utf8
+
+$output | ConvertTo-Json -Depth 3 -Compress

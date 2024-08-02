@@ -1,5 +1,5 @@
 import { path } from '@tauri-apps/api';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 
 import { store } from '../store/infra';
 
@@ -43,52 +43,6 @@ export async function iconPathFromExePath(exePath: string) {
   const parts = exePath.split('\\');
   const fileName = parts.at(-1)?.replace('.exe', '.png') || 'missing.png';
   return await path.resolve(await getGeneratedFilesPath(), 'icons', fileName);
-}
-
-/** @from pwsh */
-interface UWP_App {
-  AppId: string;
-  /** Relative path to the executable from Package:InstallLocation folder */
-  Executable: string;
-  /** Alias executable */
-  Alias: string | null;
-  /** An image used as the app's Start Screen medium tile, and on the Task Switcher. */
-  Square150x150Logo: string;
-  /** An image used as the app's Start Screen small tile, and on the All Apps List (taskbar). */
-  Square44x44Logo: string;
-}
-
-/** @from pwsh */
-interface UWP_Package {
-  Name: string;
-  Version: string;
-  PublisherId: string;
-  PackageFullName: string;
-  InstallLocation: string;
-  StoreLogo: string;
-  Applications: UWP_App[];
-}
-
-/**
- * For some reason uwp_manifests.json can no be read and parsed by JSON.parse()
- * so I use fetch as solution, maybe is a problem with the encoding of the file
- */
-export async function getUWPInfoFromExePath(exePath: string): Promise<UWP_Package | undefined> {
-  if (!exePath) {
-    return undefined;
-  }
-  const dirname = await path.dirname(exePath);
-  const url = convertFileSrc(
-    await path.resolve(await getGeneratedFilesPath(), 'uwp_manifests.json'),
-  );
-  const response = await fetch(url);
-  const manifests: UWP_Package[] = await response.json();
-  return manifests.find(
-    (manifest) =>
-      manifest.InstallLocation === dirname ||
-      /** Some apps are children of the exe path in installation location like notepad/notepad.exe */
-      dirname.startsWith(manifest.InstallLocation),
-  );
 }
 
 export function getImageBase64FromUrl(url: string): Promise<string> {
