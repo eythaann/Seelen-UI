@@ -31,8 +31,12 @@ general:
     added: ธีมเพิ่มแล้ว
     label: ข้อมูลธีม
     enabled: เปิดใช้งานธีม
+    available: มีอยู่
+    selected: ที่เลือกสรรแล้ว
   language: ภาษา
   startup: วิ่งเมื่อเริ่มต้น?
+  icon_pack:
+    label: ไอคอนแพ็ค
 toolbar:
   placeholder:
     author: ผู้เขียน

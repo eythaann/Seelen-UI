@@ -32,8 +32,12 @@ general:
     enabled: Temes habilitats
     placeholder: Seleccioneu el tema
     label: Informació del tema
+    available: Disponible
+    selected: Seleccionat
   startup: Executeu la posada en marxa?
   language: Llenguatge
+  icon_pack:
+    label: Paquets d’icones
 toolbar:
   placeholder:
     description: Descripció

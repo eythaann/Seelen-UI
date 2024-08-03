@@ -31,8 +31,12 @@ general:
     added: הנושא כבר הוסיף
     placeholder: בחר נושא
     add: הוסף נושא
+    selected: נבחר
+    available: זמין
   language: שפה
   startup: לרוץ בהפעלה?
+  icon_pack:
+    label: חבילות אייקונים
 toolbar:
   placeholder:
     author: מְחַבֵּר

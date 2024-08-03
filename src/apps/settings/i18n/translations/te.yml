@@ -32,8 +32,12 @@ general:
     added: థీమ్ ఇప్పటికే జోడించబడింది
     enabled: ప్రారంభించబడిన థీమ్‌లు
     add: థీమ్ జోడించండి
+    available: అందుబాటులో ఉంది
+    selected: ఎంచుకున్నారు
   language: భాష
   startup: స్టార్టప్‌లో అమలు చేయాలా?
+  icon_pack:
+    label: ఐకాన్ ప్యాక్‌లు
 toolbar:
   placeholder:
     author: రచయిత

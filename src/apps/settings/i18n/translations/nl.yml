@@ -32,8 +32,12 @@ general:
     label: Thema -informatie
     enabled: Ingeschakelde thema's
     added: Thema al toegevoegd
+    selected: Geselecteerd
+    available: Beschikbaar
   language: Taal
   startup: Uitvoeren bij het starten?
+  icon_pack:
+    label: Pictogrampakketten
 toolbar:
   placeholder:
     author: Auteur

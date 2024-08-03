@@ -32,8 +32,12 @@ general:
     label: Tema Bilgileri
     added: Tema zaten eklendi
     add: Tema ekle
+    available: Mevcut
+    selected: Seçilmiş
   language: Dil
   startup: Başlangıçta koşmak mı?
+  icon_pack:
+    label: Simge paketleri
 toolbar:
   placeholder:
     author: Yazar

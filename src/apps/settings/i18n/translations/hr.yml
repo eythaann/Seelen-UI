@@ -32,8 +32,12 @@ general:
     description: Opis
     add: Dodaj temu
     tags: Oznake
+    selected: Odabran
+    available: Dostupno
   language: Jezik
   startup: Trčati na startup?
+  icon_pack:
+    label: Ikona pakiranja
 toolbar:
   placeholder:
     description: Opis

@@ -32,8 +32,12 @@ general:
     label: Информация за темата
     enabled: Активирани теми
     placeholder: Изберете тема
+    selected: Избран
+    available: На разположение
   startup: Да се ​​стартирате при стартиране?
   language: Език
+  icon_pack:
+    label: Икони пакети
 toolbar:
   placeholder:
     description: Описание

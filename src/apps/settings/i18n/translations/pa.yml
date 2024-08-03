@@ -32,8 +32,12 @@ general:
     author: ਲੇਖਕ
     added: ਥੀਮ ਪਹਿਲਾਂ ਹੀ ਸ਼ਾਮਲ ਕੀਤੀ ਗਈ ਹੈ
     label: ਥੀਮ ਜਾਣਕਾਰੀ
+    available: ਉਪਲੱਬਧ
+    selected: ਚੁਣਿਆ ਹੋਇਆ
   language: ਭਾਸ਼ਾ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
+  icon_pack:
+    label: ਆਈਕਾਨ ਪੈਕ
 toolbar:
   placeholder:
     description: ਵਰਣਨ

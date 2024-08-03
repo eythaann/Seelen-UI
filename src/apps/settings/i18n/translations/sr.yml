@@ -32,8 +32,12 @@ general:
     description: Опис
     added: Тема је већ додата
     add: Додај тему
+    available: Доступан
+    selected: Изабран
   startup: Ради на покретању?
   language: Језик
+  icon_pack:
+    label: Паковање икона
 toolbar:
   placeholder:
     description: Опис

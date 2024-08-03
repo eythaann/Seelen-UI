@@ -32,8 +32,12 @@ general:
     tags: Tags
     placeholder: Kies tema
     enabled: Ingeskakelde temas
+    selected: Gekies
+    available: Beskikbaar
   language: Taal
   startup: Hardloop met opstart?
+  icon_pack:
+    label: Ikoonpakkies
 toolbar:
   placeholder:
     author: Outeur

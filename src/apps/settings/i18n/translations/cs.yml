@@ -32,8 +32,12 @@ general:
     add: Přidat téma
     label: Informace o motivu
     tags: Tagy
+    selected: Vybraný
+    available: Dostupný
   startup: Spouštěn při každém startu?
   language: Jazyk
+  icon_pack:
+    label: Ikona balíčky
 toolbar:
   placeholder:
     author: Autor

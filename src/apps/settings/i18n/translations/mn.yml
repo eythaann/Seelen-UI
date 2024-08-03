@@ -31,8 +31,12 @@ general:
     enabled: Идэвхжүүлсэн сэдэв
     placeholder: Сонгуулыг сонгоно уу
     added: Сэдэв аль хэдийн нэмэгдсэн
+    available: Бэлнээр байгаа
+    selected: Сүл -ийг хийсэн
   language: Хэл
   startup: Эхлэх үед гүйх үү?
+  icon_pack:
+    label: Icon багц
 toolbar:
   placeholder:
     description: Тодорхойлолт / төрөл анги

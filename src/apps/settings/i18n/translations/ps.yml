@@ -31,8 +31,12 @@ general:
     enabled: د لاسرسي وړ
     add: موضوع اضافه کړئ
     placeholder: موضوع وټاکئ
+    available: شتون لري
+    selected: ټاکل شوی
   startup: په پیل کې چلول؟
   language: ژبه
+  icon_pack:
+    label: آیکون کڅوړه
 toolbar:
   placeholder:
     description: تفصیل

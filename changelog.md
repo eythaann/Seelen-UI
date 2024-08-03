@@ -7,6 +7,7 @@
 ### enhancements
 - icons now are recreated from exe path if icon was deleted.
 - uwp icons now are loaded from background.
+- improvements on themes selector.
 
 ### refactor
 - deprecate `onClick` and add new `onClickV2` on toolbar modules.

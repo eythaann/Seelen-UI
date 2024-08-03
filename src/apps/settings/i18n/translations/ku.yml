@@ -31,8 +31,12 @@ general:
     tags: Tags
     placeholder: Mijar hilbijêrin
     enabled: Mijarên çalak kirin
+    available: Berdeste
+    selected: Hilbijartin
   language: Ziman
   startup: Li ser destpêka bisekinin?
+  icon_pack:
+    label: Packon icon
 toolbar:
   placeholder:
     author: Nivîskar

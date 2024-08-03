@@ -32,8 +32,12 @@ general:
     add: தீம் சேர்க்கவும்
     added: தீம் ஏற்கனவே சேர்க்கப்பட்டது
     label: தீம் தகவல்
+    available: கிடைக்கிறது
+    selected: தேர்ந்தெடுக்கப்பட்டது
   language: மொழி
   startup: தொடக்கத்தில் இயக்கவா?
+  icon_pack:
+    label: ஐகான் பொதிகள்
 toolbar:
   placeholder:
     author: நூலாசிரியர்

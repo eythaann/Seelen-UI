@@ -32,8 +32,12 @@ general:
     tags: Oznake
     placeholder: Odaberite temu
     enabled: Omogućene teme
+    selected: Odabrano
+    available: Na raspolaganju
   language: Jezik
   startup: Trčite na pokretanju?
+  icon_pack:
+    label: Paketa ikona
 toolbar:
   placeholder:
     select: Struktura alatne trake

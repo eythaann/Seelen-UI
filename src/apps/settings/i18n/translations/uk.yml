@@ -32,8 +32,12 @@ general:
     add: Додати тему
     label: Інформація про тему
     placeholder: Виберіть тему
+    selected: Обраний
+    available: Доступний
   language: Мова
   startup: Бігати на стартап?
+  icon_pack:
+    label: Пакети значків
 toolbar:
   placeholder:
     select: Структура панелі інструментів

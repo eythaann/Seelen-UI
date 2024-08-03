@@ -32,7 +32,7 @@ general:
   startup: Run on startup?
   language: Language
   theme:
-    label: Theme Information
+    label: Themes
     placeholder: Select theme
     author: Author
     description: Description
@@ -40,6 +40,10 @@ general:
     added: Theme already added
     enabled: Enabled Themes
     tags: Tags
+    available: Available
+    selected: Selected
+  icon_pack:
+    label: Icon Packs
 toolbar:
   enable: Enable Fancy Toolbar
   placeholder:

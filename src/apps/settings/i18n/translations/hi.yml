@@ -32,8 +32,12 @@ general:
     tags: टैग
     placeholder: चुनिंदा विषय
     description: विवरण
+    available: उपलब्ध
+    selected: चयनित
   startup: स्टार्टअप पर चलाएं?
   language: भाषा
+  icon_pack:
+    label: आइकन पैक
 toolbar:
   placeholder:
     author: लेखक

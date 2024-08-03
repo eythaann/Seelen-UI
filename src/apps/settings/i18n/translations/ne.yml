@@ -31,8 +31,12 @@ general:
     placeholder: थिम चयन गर्नुहोस्
     tags: ट्यागहरू
     description: वर्णन
+    available: सुलभ
+    selected: चयनित
   startup: स्टार्टअपमा भाग्नुहोस्?
   language: भाषा
+  icon_pack:
+    label: आइकन प्याक
 toolbar:
   placeholder:
     description: वर्णन

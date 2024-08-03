@@ -32,8 +32,12 @@ general:
     label: Thông tin chủ đề
     tags: Tags
     enabled: Cho phép các chủ đề
+    selected: Đã chọn
+    available: Có sẵn
   startup: Chạy khi khởi động?
   language: Ngôn ngữ
+  icon_pack:
+    label: Gói biểu tượng
 toolbar:
   placeholder:
     author: Tác giả

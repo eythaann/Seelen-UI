@@ -32,8 +32,12 @@ general:
     add: Adăugați tema
     label: Informații despre temă
     added: Tema deja adăugată
+    selected: Selectat
+    available: Disponibil
   language: Limba
   startup: Rulați la pornire?
+  icon_pack:
+    label: Pachete de pictograme
 toolbar:
   placeholder:
     select: Structura barei de instrumente

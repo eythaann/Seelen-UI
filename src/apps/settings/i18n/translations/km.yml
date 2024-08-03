@@ -32,8 +32,12 @@ general:
     label: ព័ត៌មានអំពីប្រធានបទ
     enabled: ស្បែកដែលបានបើក
     added: ប្រធានបទត្រូវបានបន្ថែមរួចហើយ
+    selected: បានជ្រើស
+    available: មានរបយោចន៍
   language: ភាសា
   startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
+  icon_pack:
+    label: រូបតំណាងកញ្ចប់
 toolbar:
   placeholder:
     description: ការពិពណ៌នា

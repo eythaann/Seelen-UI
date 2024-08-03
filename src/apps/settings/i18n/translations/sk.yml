@@ -32,8 +32,12 @@ general:
     label: Informácie o téme
     add: Pridať tému
     tags: Značky
+    selected: Vybraný
+    available: Dostupný
   startup: Spustiť pri štarte?
   language: Jazyk
+  icon_pack:
+    label: Ikon
 toolbar:
   placeholder:
     author: Autor

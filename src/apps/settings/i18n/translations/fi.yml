@@ -32,8 +32,12 @@ general:
     tags: Tunnisteet
     author: Kirjoittaja
     placeholder: Valitse teema
+    available: Saatavilla
+    selected: Valittu
   language: Kieli
   startup: Suorittaa käynnistyksen yhteydessä?
+  icon_pack:
+    label: Kuvakepakkaukset
 toolbar:
   placeholder:
     description: Kuvaus

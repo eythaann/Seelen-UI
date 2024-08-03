@@ -32,8 +32,12 @@ general:
     author: Muallif
     add: Mavzuni qo'shing
     tags: Teglar
+    available: Mavjud
+    selected: Tanlangan
   language: Til
   startup: Ishga tushirishda ishlaydimi?
+  icon_pack:
+    label: Ikonka paketlari
 toolbar:
   placeholder:
     description: Tavsif

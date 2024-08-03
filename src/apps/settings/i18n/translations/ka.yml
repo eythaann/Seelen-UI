@@ -32,8 +32,12 @@ general:
     placeholder: აირჩიეთ თემა
     enabled: ჩართულია თემები
     author: ავტორი
+    selected: არჩეული
+    available: არსებული
   language: Ენა
   startup: გაშვებით გაშვებით?
+  icon_pack:
+    label: ხატის პაკეტები
 toolbar:
   placeholder:
     description: აღწერილობა

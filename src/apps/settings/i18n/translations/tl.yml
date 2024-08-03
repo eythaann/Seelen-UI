@@ -32,8 +32,12 @@ general:
     enabled: Pinagana ang mga tema
     added: Naidagdag na ang tema
     tags: Tags
+    selected: Napili
+    available: Magagamit
   language: Wika
   startup: Patakbuhin sa Startup?
+  icon_pack:
+    label: Icon pack
 toolbar:
   placeholder:
     author: May -akda

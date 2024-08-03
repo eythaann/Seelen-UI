@@ -30,8 +30,12 @@ general:
     enabled: テーマを有効にしました
     label: テーマ情報
     placeholder: テーマを選択します
+    available: 利用可能
+    selected: 選択しました
   startup: 起動時に実行？
   language: 言語
+  icon_pack:
+    label: アイコンパック
 toolbar:
   placeholder:
     description: 説明

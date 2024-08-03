@@ -32,8 +32,12 @@ general:
     added: Tema sudah ditambahkan
     tags: Tag
     description: Keterangan
+    selected: Terpilih
+    available: Tersedia
   startup: Jalankan saat startup?
   language: Bahasa
+  icon_pack:
+    label: Paket Ikon
 toolbar:
   placeholder:
     select: Struktur bilah alat

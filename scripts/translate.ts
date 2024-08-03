@@ -19,6 +19,7 @@ async function translateObject(base: any, lang: string, mut_obj: any) {
         const res = await translate(value, {
           from: 'en',
           to: lang,
+          forceTo: true,
         });
         mut_obj[key] = res.text;
       }

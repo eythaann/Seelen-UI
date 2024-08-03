@@ -33,8 +33,12 @@ general:
     placeholder: ເລືອກຫົວຂໍ້
     added: ເພີ່ມຮູບແບບສີສັນແລ້ວ
     add: ເພີ່ມຫົວຂໍ້
+    available: ມີໄວ້
+    selected: ຄັດເລືອກ
   language: ພາສາ
   startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
+  icon_pack:
+    label: icon ຊອງ
 toolbar:
   placeholder:
     author: ຜູ້ຂຽນ

@@ -31,8 +31,12 @@ general:
     added: تھیم پہلے ہی شامل کیا گیا ہے
     description: تفصیل
     placeholder: تھیم منتخب کریں
+    selected: منتخب شدہ
+    available: دستیاب
   language: زبان
   startup: اسٹارٹ اپ پر چلائیں؟
+  icon_pack:
+    label: آئیکن پیک
 toolbar:
   placeholder:
     description: تفصیل

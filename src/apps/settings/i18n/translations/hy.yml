@@ -32,8 +32,12 @@ general:
     author: Հեղինակ
     tags: Պիտակներ
     added: Թեման արդեն ավելացրեց
+    available: Մատչելի
+    selected: Ընտրված
   language: Լեզու
   startup: 'Գործարկման վրա գործարկեք:'
+  icon_pack:
+    label: Սրբապատկերներ
 toolbar:
   placeholder:
     author: Հեղինակ

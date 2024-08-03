@@ -32,8 +32,12 @@ general:
     label: Temainformation
     enabled: Aktiverade teman
     tags: Taggar
+    selected: Vald
+    available: Tillgängliga
   startup: Köras vid start?
   language: Språk
+  icon_pack:
+    label: Ikonförpackningar
 toolbar:
   placeholder:
     description: Beskrivning

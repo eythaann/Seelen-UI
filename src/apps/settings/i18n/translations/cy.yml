@@ -32,8 +32,12 @@ general:
     added: Thema wedi'i hychwanegu eisoes
     label: Gwybodaeth Thema
     description: Disgrifiadau
+    selected: Dethol
+    available: AR GAEL
   language: Iaith
   startup: Rhedeg ar gychwyn?
+  icon_pack:
+    label: Pecynnau eicon
 toolbar:
   placeholder:
     author: Awduron

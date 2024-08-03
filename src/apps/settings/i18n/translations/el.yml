@@ -32,8 +32,12 @@ general:
     tags: Ετικέτες
     enabled: Ενεργοποιημένα θέματα
     added: Το θέμα έχει ήδη προστεθεί
+    available: Διαθέσιμος
+    selected: Επιλεγμένος
   language: Γλώσσα
   startup: Εκτέλεση κατά την εκκίνηση;
+  icon_pack:
+    label: Εικονίδια
 toolbar:
   placeholder:
     select: Δομή γραμμής εργαλείων

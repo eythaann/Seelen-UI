@@ -32,8 +32,12 @@ general:
     added: A téma már hozzáadott
     enabled: Engedélyezve témák
     tags: Címkék
+    available: Elérhető
+    selected: Kiválasztott
   startup: Futtatni indításkor?
   language: Nyelv
+  icon_pack:
+    label: Ikoncsomagok
 toolbar:
   placeholder:
     description: Leírás

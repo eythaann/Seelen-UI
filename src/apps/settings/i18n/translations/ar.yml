@@ -40,6 +40,10 @@ general:
     added: تمت إضافة الموضوع بالفعل
     enabled: السمات الممكّنة
     tags: العلامات
+    available: متاح
+    selected: المحدد
+  icon_pack:
+    label: حزم أيقونة
 toolbar:
   enable: تمكين شريط الأدوات الفاخر
   placeholder:

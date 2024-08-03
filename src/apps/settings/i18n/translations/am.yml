@@ -30,8 +30,12 @@ general:
     added: ጭብጥ ቀድሞውኑ ታክሏል
     placeholder: ጭብጥ ይምረጡ
     enabled: አስቁ
+    selected: ተመር selected ል
+    available: ይገኛል
   startup: ጅምር ላይ ይሮጡ?
   language: ቋንቋ
+  icon_pack:
+    label: አዶዎች ፓኬጆች
 toolbar:
   placeholder:
     description: መግለጫ

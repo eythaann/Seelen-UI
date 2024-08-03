@@ -32,8 +32,12 @@ general:
     author: Müəllif
     label: Tema haqqında məlumat
     tags: Tags
+    selected: Seçilmiş
+    available: Mövcud
   language: Dil
   startup: Başlanğıcda qaçırsınız?
+  icon_pack:
+    label: Icon paketləri
 toolbar:
   placeholder:
     author: Müəllif

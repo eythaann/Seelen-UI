@@ -32,8 +32,12 @@ general:
     description: Опис
     placeholder: Изберете тема
     add: Додадете тема
+    selected: Избран
+    available: Достапно
   language: Јазик
   startup: Стартувам на стартување?
+  icon_pack:
+    label: Икони пакувања
 toolbar:
   placeholder:
     author: Автор

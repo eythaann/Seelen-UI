@@ -39,6 +39,10 @@ general:
     added: 테마가 이미 추가됨
     enabled: 활성화된 테마
     tags: 태그
+    available: 사용 가능
+    selected: 선택된
+  icon_pack:
+    label: 아이콘 팩
 toolbar:
   enable: 화려한 툴바 활성화
   placeholder:

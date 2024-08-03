@@ -31,8 +31,12 @@ general:
     tags: Afi ami
     add: Fi ọran kun
     author: Onkọwe ọkunrin
+    selected: Ti yan
+    available: Wa
   startup: Ṣiṣe lori ibẹrẹ?
   language: Ede
+  icon_pack:
+    label: Awọn akopọ aami
 toolbar:
   placeholder:
     author: Onkọwe ọkunrin

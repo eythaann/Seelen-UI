@@ -32,8 +32,12 @@ general:
     tags: Tag
     enabled: Tema yang diaktifkan
     label: Maklumat tema
+    available: Terdapat
+    selected: Dipilih
   startup: Jalankan permulaan?
   language: Bahasa
+  icon_pack:
+    label: Pek ikon
 toolbar:
   placeholder:
     description: Penerangan

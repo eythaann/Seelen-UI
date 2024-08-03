@@ -41,6 +41,10 @@ general:
     added: Tema já adicionado
     enabled: Temas habilitados
     tags: Tag
+    selected: Selecionada
+    available: Disponível
+  icon_pack:
+    label: Pacotes de ícones
 toolbar:
   enable: Ativar barra de ferramentas sofisticada
   placeholder:

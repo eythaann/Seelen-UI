@@ -32,8 +32,12 @@ general:
     author: Auteur
     enabled: Aktivéiert Themen
     placeholder: Wielt Thema
+    available: Liwwerungen
+    selected: Allgemeng
   startup: Run op Startup?
   language: Sprooche
+  icon_pack:
+    label: ICON Tass
 toolbar:
   placeholder:
     select: Toolbar Struktur

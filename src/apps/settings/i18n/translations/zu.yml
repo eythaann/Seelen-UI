@@ -32,8 +32,12 @@ general:
     label: Imininingwane yetimu
     placeholder: Khetha isihloko
     tags: Amathegi
+    available: '-Tholakala'
+    selected: Ikhethiwe
   language: Ulimi
   startup: Gijima ekuqaleni?
+  icon_pack:
+    label: I-Icon Packs
 toolbar:
   placeholder:
     author: Umlobi

@@ -32,8 +32,12 @@ general:
     placeholder: Veldu þema
     enabled: Virkt þemu
     tags: Merkimiðar
+    available: Laus
+    selected: Valinn
   startup: Hlaupa í gangsetningu?
   language: Tungumál
+  icon_pack:
+    label: Táknpakkar
 toolbar:
   placeholder:
     description: Lýsing

@@ -32,8 +32,12 @@ general:
     tags: Tagger
     placeholder: Velg tema
     add: Legg til tema
+    available: Tilgjengelig
+    selected: Valgt
   language: Språk
   startup: Kjør ved oppstart?
+  icon_pack:
+    label: Ikonpakker
 toolbar:
   placeholder:
     description: Beskrivelse

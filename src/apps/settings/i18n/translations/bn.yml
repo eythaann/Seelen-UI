@@ -32,8 +32,12 @@ general:
     label: থিম তথ্য
     added: থিম ইতিমধ্যে যুক্ত
     add: থিম যুক্ত করুন
+    selected: নির্বাচিত
+    available: উপলব্ধ
   startup: প্রারম্ভকালে চালানো?
   language: ভাষা
+  icon_pack:
+    label: আইকন প্যাকস
 toolbar:
   placeholder:
     author: লেখক

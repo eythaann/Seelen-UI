@@ -32,8 +32,12 @@ general:
     added: Tema già aggiunto
     tags: Tag
     label: Informazioni sul tema
+    selected: Selezionata
+    available: Disponibile
   language: Lingua
   startup: Eseguire all'avvio?
+  icon_pack:
+    label: Icon pacchetti
 toolbar:
   placeholder:
     author: Autrice

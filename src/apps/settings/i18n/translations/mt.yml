@@ -32,8 +32,12 @@ general:
     author: Awtur
     added: Tema diġà miżjuda
     tags: Tags
+    selected: Magħżula
+    available: Disponibbli
   language: Lingwa
   startup: Mexxi fuq l-istartjar?
+  icon_pack:
+    label: Pakketti tal-ikona
 toolbar:
   placeholder:
     author: Awtur

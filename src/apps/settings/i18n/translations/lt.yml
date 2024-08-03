@@ -32,8 +32,12 @@ general:
     added: Jau pridėta tema
     author: Autorius
     tags: Žymos
+    available: Galima
+    selected: Pasirinktas
   language: Kalba
   startup: Paleisti paleidimą?
+  icon_pack:
+    label: ICON PACKS
 toolbar:
   placeholder:
     select: Įrankių juostos struktūra

@@ -42,6 +42,10 @@ general:
     added: Тема уже добавлена
     enabled: Включенные темы
     tags: Теги
+    available: Доступный
+    selected: Выбран
+  icon_pack:
+    label: Иконы пакеты
 toolbar:
   enable: Включить необычную панель инструментов
   placeholder:

@@ -32,8 +32,12 @@ general:
     label: Informācija par tēmu
     author: Autors
     enabled: Iespējotās tēmas
+    selected: Atlasīts
+    available: Pieejams
   startup: Skriet startup?
   language: Valoda
+  icon_pack:
+    label: Ikonu paketes
 toolbar:
   placeholder:
     author: Autors

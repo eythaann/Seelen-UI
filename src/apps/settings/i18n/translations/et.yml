@@ -32,8 +32,12 @@ general:
     enabled: Lubatud teemad
     author: Autor
     add: Lisada teema
+    available: Saadav
+    selected: Valitud
   language: Keel
   startup: Kas joosta startup?
+  icon_pack:
+    label: Ikoonipakid
 toolbar:
   placeholder:
     author: Autor

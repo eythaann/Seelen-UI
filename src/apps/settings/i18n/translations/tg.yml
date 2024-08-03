@@ -31,8 +31,12 @@ general:
     added: Мавзӯъ аллакай илова карда шуд
     add: Иловаи мавзӯъ
     tags: Тегҳо
+    selected: Интихоб карда шуд
+    available: Дастрас
   startup: Оғози кор?
   language: Забон
+  icon_pack:
+    label: ICon бастаҳои
 toolbar:
   placeholder:
     select: Сохтори панели асбобҳо

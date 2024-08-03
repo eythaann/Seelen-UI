@@ -31,8 +31,12 @@ general:
     added: موضوع قبلاً اضافه شده است
     label: اطلاعات تم
     enabled: مضامین را فعال کرد
+    available: در دسترس
+    selected: انتخاب شد
   language: زبان
   startup: در راه اندازی اجرا می شود؟
+  icon_pack:
+    label: بسته های نماد
 toolbar:
   placeholder:
     description: شرح

@@ -37,6 +37,10 @@ general:
     added: Thème déjà ajouté
     enabled: Thèmes activés
     tags: Mots clés
+    selected: Choisie
+    available: Disponible
+  icon_pack:
+    label: Packs d'icônes
 toolbar:
   enable: Activer la barre d'outils sophistiquée
   placeholder:

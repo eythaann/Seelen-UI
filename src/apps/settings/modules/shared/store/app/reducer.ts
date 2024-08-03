@@ -64,8 +64,12 @@ export const RootSlice = createSlice({
       state.devTools = action.payload;
     },
     setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
+      let themes = new Set(action.payload);
+      if (!themes.has('default')) {
+        themes.add('default');
+      }
       state.toBeSaved = true;
-      state.selectedTheme = Array.from(new Set(action.payload));
+      state.selectedTheme = Array.from(themes);
     },
     removeTheme: (state, action: PayloadAction<string>) => {
       state.toBeSaved = true;

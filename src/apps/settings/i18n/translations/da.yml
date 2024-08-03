@@ -32,8 +32,12 @@ general:
     add: Tilføj tema
     description: Beskrivelse
     tags: Tags
+    selected: Valgte
+    available: Ledig
   startup: Kør ved opstart?
   language: Sprog
+  icon_pack:
+    label: Ikonpakker
 toolbar:
   placeholder:
     select: Værktøjslinjestruktur

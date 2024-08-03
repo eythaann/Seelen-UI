@@ -32,8 +32,12 @@ general:
     add: Dodaj motyw
     tags: Tagi
     label: Informacje o motywie
+    selected: Wybrany
+    available: Dostępny
   language: Język
   startup: Biegać na startup?
+  icon_pack:
+    label: Pakiety ikony
 toolbar:
   placeholder:
     author: Autor

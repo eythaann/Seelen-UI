@@ -39,6 +39,10 @@ general:
     added: 主题已添加
     enabled: 启用主题
     tags: 标签
+    selected: 选定
+    available: 可用的
+  icon_pack:
+    label: 图标包
 toolbar:
   enable: 启用精美工具栏
   placeholder:

@@ -41,6 +41,10 @@ general:
     added: Thema bereits hinzugefügt
     enabled: Aktivierte Themen
     tags: Tags
+    selected: Ausgewählt
+    available: Verfügbar
+  icon_pack:
+    label: Icon Packs
 toolbar:
   enable: Elegante Werkzeugleiste aktivieren
   placeholder:

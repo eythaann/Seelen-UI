@@ -31,8 +31,12 @@ general:
     add: Ku dar mawduuc
     added: Mawduuca mar hore ayaa lagu daray
     enabled: Awood u yeelo mowduucyada
+    selected: La xushay
+    available: Qof heli karo
   startup: Ku orod bilowga?
   language: Af
+  icon_pack:
+    label: Xirmooyinka icon
 toolbar:
   placeholder:
     description: Sifo

@@ -31,8 +31,12 @@ general:
     added: Mada tayari imeongezwa
     add: Ongeza mandhari
     placeholder: Chagua mandhari
+    selected: Kuchaguliwa
+    available: Inapatikana
   language: Lugha
   startup: Kuendesha kuanza?
+  icon_pack:
+    label: Pakiti za ikoni
 toolbar:
   placeholder:
     description: Maelezo

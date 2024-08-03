@@ -32,8 +32,12 @@ general:
     enabled: સક્ષમ થીમ્સ
     add: થીમ ઉમેરો
     label: થીમ માહિતી
+    available: ઉપલબ્ધ
+    selected: પસંદ કરેલું
   language: ભાષા
   startup: સ્ટાર્ટઅપ પર ચલાવો?
+  icon_pack:
+    label: ચિહ્ન
 toolbar:
   placeholder:
     author: લેખક

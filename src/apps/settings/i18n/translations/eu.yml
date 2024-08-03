@@ -32,8 +32,12 @@ general:
     description: Deskribapen
     added: Gaia dagoeneko gehitu da
     enabled: Gaitutako gaiak
+    available: Erabilgarri
+    selected: Hautatu
   startup: Korrika abiaraztean?
   language: Mintzaira
+  icon_pack:
+    label: Ikono paketeak
 toolbar:
   placeholder:
     select: Tresna-barraren egitura
