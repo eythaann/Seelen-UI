@@ -35,6 +35,7 @@ const initialState: RootState = {
   mediaSessions: [],
   mediaOutputs: [],
   mediaInputs: [],
+  notifications: [],
 };
 
 export const RootSlice = createSlice({

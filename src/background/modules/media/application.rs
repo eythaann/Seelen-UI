@@ -11,7 +11,6 @@ use windows::{
         GlobalSystemMediaTransportControlsSessionPlaybackStatus, MediaPropertiesChangedEventArgs,
         PlaybackInfoChangedEventArgs, SessionsChangedEventArgs,
     },
-    Storage::Streams::{DataReader, IRandomAccessStreamReference},
     Win32::{
         Devices::FunctionDiscovery::PKEY_Device_FriendlyName,
         Media::Audio::{
@@ -138,24 +137,6 @@ impl IMMNotificationClient_Impl for MediaManagerEvents {
     }
 }
 
-fn extract_thumbnail(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
-    let stream = stream.OpenReadAsync()?.get()?;
-    let size = stream.Size()?;
-    let mut buffer = vec![0u8; size as usize];
-
-    let input_stream = stream.GetInputStreamAt(0)?;
-    let data_reader = DataReader::CreateDataReader(&input_stream)?;
-
-    data_reader.LoadAsync(size as u32)?.get()?;
-    data_reader.ReadBytes(&mut buffer)?;
-
-    let image = image::load_from_memory_with_format(&buffer, image::ImageFormat::Png)?;
-    let image_path = std::env::temp_dir().join(format!("{}.png", uuid::Uuid::new_v4()));
-    image.save(&image_path)?;
-
-    Ok(image_path)
-}
-
 impl MediaManagerEvents {
     fn on_media_player_properties_changed(
         session: &Option<GlobalSystemMediaTransportControlsSession>,
@@ -168,7 +149,7 @@ impl MediaManagerEvents {
                 id,
                 title: properties.Title()?.to_string(),
                 author: properties.Artist()?.to_string(),
-                thumbnail: extract_thumbnail(properties.Thumbnail()?).ok(),
+                thumbnail: WindowsApi::extract_thumbnail_from_ref(properties.Thumbnail()?).ok(),
             });
         }
         Ok(())
@@ -203,7 +184,6 @@ impl MediaManagerEvents {
             for session in session_manager.GetSessions()? {
                 let id = session.SourceAppUserModelId()?.to_string();
                 if !current_list.contains(&id) {
-                    println!("added: {:?}", id);
                     trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerAdded(session));
                 }
                 current_list.retain(|x| *x != id);
@@ -587,7 +567,7 @@ impl MediaManager {
             thumbnail: properties
                 .Thumbnail()
                 .ok()
-                .and_then(|stream| extract_thumbnail(stream).ok()),
+                .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
             playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
             default: false,
             id: id.clone(),

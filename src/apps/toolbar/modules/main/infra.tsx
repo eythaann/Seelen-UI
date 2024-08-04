@@ -16,6 +16,7 @@ import { DeviceModule } from '../Device/infra';
 import { Item } from '../item/infra';
 import { MediaModule } from '../media/infra/Module';
 import { NetworkModule } from '../network/infra/Module';
+import { NotificationsModule } from '../Notifications/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
 
@@ -33,6 +34,7 @@ const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: a
   [ToolbarModuleType.Network]: NetworkModule,
   [ToolbarModuleType.Media]: MediaModule,
   [ToolbarModuleType.Device]: DeviceModule,
+  [ToolbarModuleType.Notifications]: NotificationsModule,
 };
 
 interface Props {

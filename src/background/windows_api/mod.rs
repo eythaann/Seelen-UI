@@ -9,6 +9,9 @@ use std::{ffi::c_void, path::PathBuf, thread::sleep, time::Duration};
 use color_eyre::eyre::eyre;
 use windows::{
     core::{GUID, PCWSTR, PWSTR},
+    Storage::Streams::{
+        DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
+    },
     Win32::{
         Devices::Display::{
             GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
@@ -341,12 +344,7 @@ impl WindowsApi {
 
         let handle = Self::process_handle(process_id)?;
         unsafe {
-            log_error!(QueryFullProcessImageNameW(
-                handle,
-                PROCESS_NAME_WIN32,
-                PWSTR(text_ptr),
-                &mut len,
-            ));
+            QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
         }
         Self::close_handle(handle)?;
 
@@ -582,6 +580,29 @@ impl WindowsApi {
             GetSystemPowerStatus(&mut power_status as _)?;
         }
         Ok(power_status)
+    }
+
+    pub fn extract_thumbnail_from_stream(
+        stream: IRandomAccessStreamWithContentType,
+    ) -> Result<PathBuf> {
+        let size = stream.Size()?;
+        let mut buffer = vec![0u8; size as usize];
+
+        let input_stream = stream.GetInputStreamAt(0)?;
+        let data_reader = DataReader::CreateDataReader(&input_stream)?;
+
+        data_reader.LoadAsync(size as u32)?.get()?;
+        data_reader.ReadBytes(&mut buffer)?;
+
+        let image = image::load_from_memory_with_format(&buffer, image::ImageFormat::Png)?;
+        let image_path = std::env::temp_dir().join(format!("{}.png", uuid::Uuid::new_v4()));
+        image.save(&image_path)?;
+
+        Ok(image_path)
+    }
+
+    pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
+        Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.get()?)
     }
 }
 

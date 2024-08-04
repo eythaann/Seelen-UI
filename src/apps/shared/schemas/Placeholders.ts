@@ -14,6 +14,7 @@ export enum ToolbarModuleType {
   Media = 'media',
   Tray = 'tray',
   Device = 'device',
+  Notifications = 'notifications',
 }
 
 export enum WorkspaceTMMode {
@@ -46,6 +47,7 @@ export const BaseTMSchema = z.object({
     })
     .default('"Unset"'),
   tooltip: z.string().nullable().default(null),
+  badge: z.string().nullable().default(null),
   onClick: z.string().nullable().default(null).describe('Deprecated, use `onClickV2` instead'),
   onClickV2: z.string().nullable().default(null),
   style: z.record(z.string(), z.any()).default({}),
@@ -91,6 +93,11 @@ export const MediaTMSchema = BaseTMSchema.extend({
   withMediaControls: z.boolean().default(false),
 });
 
+export type NotificationsTM = z.infer<typeof NotificationsTMSchema>;
+export const NotificationsTMSchema = BaseTMSchema.extend({
+  type: z.literal(ToolbarModuleType.Notifications),
+});
+
 export type DeviceTM = z.infer<typeof DeviceTMSchema>;
 export const DeviceTMSchema = BaseTMSchema.extend({
   type: z.literal(ToolbarModuleType.Device),
@@ -118,6 +125,7 @@ export const ToolbarModuleSchema = z.union([
   NetworkTMSchema,
   MediaTMSchema,
   DeviceTMSchema,
+  NotificationsTMSchema,
 ]);
 
 type InnerPlaceholder = z.infer<typeof PlaceholderSchema>;

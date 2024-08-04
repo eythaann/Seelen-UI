@@ -59,6 +59,7 @@ export interface RootState extends IRootState<FancyToolbar> {
   mediaSessions: MediaChannelTransportData[];
   mediaOutputs: MediaDevice[];
   mediaInputs: MediaDevice[];
+  notifications: AppNotification[];
 }
 
 export interface MediaDeviceChannel {
@@ -80,4 +81,13 @@ export interface MediaDevice {
   sessions: MediaDeviceChannel[];
   volume: number;
   muted: boolean;
+}
+
+export interface AppNotification {
+  id: number;
+  app_name: string;
+  app_description: string;
+  app_logo: string | null;
+  body: string[];
+  date: number;
 }

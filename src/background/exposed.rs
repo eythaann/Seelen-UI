@@ -19,6 +19,7 @@ use crate::{apps_config::*, log_error, trace_lock};
 
 use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
+use crate::modules::notifications::infrastructure::*;
 use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
@@ -230,5 +231,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         wlan_stop_scanning,
         wlan_connect,
         wlan_disconnect,
+        // notifications
+        notifications_close,
+        notifications_close_all,
     ])
 }

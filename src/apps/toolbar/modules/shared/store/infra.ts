@@ -11,7 +11,16 @@ import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
-import { ActiveApp, Battery, MediaChannelTransportData, MediaDevice, NetworkAdapter, PowerStatus, TrayInfo } from './domain';
+import {
+  ActiveApp,
+  AppNotification,
+  Battery,
+  MediaChannelTransportData,
+  MediaDevice,
+  NetworkAdapter,
+  PowerStatus,
+  TrayInfo,
+} from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -58,6 +67,10 @@ export async function registerStoreEvents() {
 
   await listenGlobal<MediaDevice[]>('media-inputs', (event) => {
     store.dispatch(RootActions.setMediaInputs(event.payload));
+  });
+
+  await listenGlobal<AppNotification[]>('notifications', (event) => {
+    store.dispatch(RootActions.setNotifications(event.payload));
   });
 
   await listenGlobal<NetworkAdapter[]>('network-adapters', (event) => {

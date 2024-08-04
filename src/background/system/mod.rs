@@ -7,6 +7,9 @@ use crate::{
     modules::{
         media::infrastructure::{register_media_events, release_media_events},
         network::infrastructure::register_network_events,
+        notifications::infrastructure::{
+            register_notification_events, release_notification_events,
+        },
         power::infrastructure::PowerManager,
         tray::infrastructure::register_tray_events,
     },
@@ -41,9 +44,15 @@ pub fn declare_system_events_handlers() -> Result<()> {
         register_media_events();
     });
 
+    handle.listen("register-notifications-events", move |_| {
+        log::debug!("Registering notifications events");
+        register_notification_events();
+    });
+
     Ok(())
 }
 
 pub fn release_system_events_handlers() {
     release_media_events();
+    release_notification_events();
 }

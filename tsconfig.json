@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "lib": ["ESNext", "DOM"],
+    "target": "ES2020",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,

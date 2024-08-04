@@ -99,6 +99,14 @@ right:
     format: ddd D MMM, hh:mm A
     template: date
 
+  - type: notifications
+    template: >-
+      count > 0 ? icon.MdNotificationsActive : icon.MdOutlineNotifications
+    badge: >-
+      count > 0 ? count : ""
+    tooltip: >-
+      concat(t("placeholder.notifications"), ": ", string(count))
+
   - type: settings
     template: icon.LuSettings2
     tooltip: t("placeholder.settings")

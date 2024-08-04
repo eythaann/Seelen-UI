@@ -59,7 +59,7 @@ battery = "0.7.8"
 winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 winreg = "0.52.0"
 win-screenshot = "4.0.8"
-windows-core = "=0.57.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-core = "=0.57.0"                                                   # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 
 [dependencies.windows]
 version = "=0.57.0"
@@ -67,6 +67,7 @@ features = [
     "Win32_Foundation",
     "ApplicationModel",
     "ApplicationModel_Core",               # uwp apps
+    "ApplicationModel_Background",         # background taks
     "Foundation_Collections",              # uwp apps
     "Management_Deployment",               # uwp apps
     "Win32_UI_Input_KeyboardAndMouse",
@@ -95,6 +96,7 @@ features = [
     "Win32_Devices_FunctionDiscovery",     # PKEYS for Devices
     "Devices_Custom",
     "UI_Core",
+    "UI_Notifications_Management",         # required for notifications
     "Win32_NetworkManagement_IpHelper",    # required for network manager
     "Win32_NetworkManagement_Ndis",        # required for network manager
     "Win32_Networking_WinSock",            # required for network manager

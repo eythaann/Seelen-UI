@@ -75,6 +75,25 @@
   color: var(--config-accent-color);
 }
 
+.ft-bar-item-content {
+  position: relative;
+}
+
+.ft-bar-item-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(25%, -25%);
+  background-color: var(--config-accent-color);
+  height: 12px;
+  min-width: 12px;
+  font-size: 10px;
+  border-radius: 8px;
+}
+
 .fast-settings {
   padding: 12px 16px;
   margin: 4px;
@@ -301,4 +320,81 @@
   justify-content: center;
   gap: 8px;
   margin-top: 4px;
+}
+
+.notifications {
+  margin: 4px;
+  width: 350px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .bg-layer-1 {
+    opacity: 0.4;
+    filter: saturate(0);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: cover;
+    border-radius: 12px;
+  }
+
+  .bg-layer-2 {
+    opacity: 0.9;
+    background-color: var(--color-gray-100);
+    border-radius: 12px;
+  }
+}
+
+.notifications-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.notifications-footer {
+  > button {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+}
+
+.notifications-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-gray-500);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.notification {
+  border-radius: 12px;
+  background-color: var(--color-gray-100);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.notification-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 5px;
+  border-bottom: solid 1px var(--color-gray-300);
+  margin-bottom: 5px;
+}
+
+.notification-header-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--color-gray-800);
+}
+
+.notification-body {
+  .notification-body-title {
+    font-weight: 600;
+  }
 }

@@ -132,7 +132,7 @@ export function Item(props: Props) {
     onKeydown: onKeydownProp,
     children,
   } = props;
-  const { template, tooltip, onClick: oldOnClick, onClickV2, style, id } = module;
+  const { template, tooltip, onClick: oldOnClick, onClickV2, style, id, badge } = module;
 
   const [mounted, setMounted] = React.useState(false);
   const env = useSelector(Selectors.env);
@@ -172,6 +172,8 @@ export function Item(props: Props) {
     return null;
   }
 
+  const badgeContent = badge ? ElementsFromEvaluated(evaluate(badge, scope.current)) : null;
+
   return (
     <Tooltip
       arrow={false}
@@ -200,7 +202,10 @@ export function Item(props: Props) {
         as="div"
         transition={{ duration: 0.15 }}
       >
-        <div className="ft-bar-item-content">{children || elements}</div>
+        <div className="ft-bar-item-content">
+          {children || elements}
+          {!!badgeContent?.length && <div className="ft-bar-item-badge">{badgeContent}</div>}
+        </div>
       </Reorder.Item>
     </Tooltip>
   );
