@@ -70,7 +70,7 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<AppNotification[]>('notifications', (event) => {
-    store.dispatch(RootActions.setNotifications(event.payload));
+    store.dispatch(RootActions.setNotifications(event.payload.sort((a, b) => b.date - a.date)));
   });
 
   await listenGlobal<NetworkAdapter[]>('network-adapters', (event) => {

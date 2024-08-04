@@ -33,53 +33,56 @@ export function Notifications() {
         </Button>
       </div>
 
-      <AnimatePresence>
-        {notifications.map((notification) => (
-          <motion.div
-            className="notification"
-            key={notification.id}
-            animate={{ x: '0%', opacity: 1 }}
-            exit={{ x: '100%', opacity: 0 }}
-            transition={{ duration: 0.4 }}
-          >
-            <div className="notification-header">
-              <div className="notification-header-info">
-                <Icon iconName="TbNotification" />
-                <div>{notification.app_name}</div>
-                <span>-</span>
-                <div>{moment(WindowsDateFileTimeToDate(BigInt(notification.date))).fromNow()}</div>
+      <div className="notifications-body">
+        <AnimatePresence>
+          {notifications.map((notification) => (
+            <motion.div
+              className="notification"
+              key={notification.id}
+              animate={{ x: '0%', opacity: 1 }}
+              exit={{ x: '100%', opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="notification-header">
+                <div className="notification-header-info">
+                  <Icon iconName="TbNotification" />
+                  <div>{notification.app_name}</div>
+                  <span>-</span>
+                  <div>
+                    {moment(WindowsDateFileTimeToDate(BigInt(notification.date))).fromNow()}
+                  </div>
+                </div>
+                <Button
+                  size="small"
+                  type="text"
+                  onClick={() => {
+                    invoke('notifications_close', { id: notification.id }).catch(console.error);
+                  }}
+                >
+                  <Icon iconName="IoClose" />
+                </Button>
               </div>
-              <Button
-                size="small"
-                type="text"
-                onClick={() => {
-                  invoke('notifications_close', { id: notification.id }).catch(console.error);
-                }}
-              >
-                <Icon iconName="IoClose" />
-              </Button>
-            </div>
-            <div className="notification-body">
-              <h2 className="notification-body-title">{notification.body[0]}</h2>
-              {notification.body.slice(1).map((body, idx) => (
-                <p key={idx}>{body}</p>
-              ))}
-            </div>
+              <div className="notification-body">
+                <h2 className="notification-body-title">{notification.body[0]}</h2>
+                {notification.body.slice(1).map((body, idx) => (
+                  <p key={idx}>{body}</p>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+
+        {!notifications.length && (
+          <motion.div
+            className="notifications-empty"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 200 }}
+            transition={{ duration: 0.2, delay: 0.4 }}
+          >
+            <p>No notifications</p>
           </motion.div>
-        ))}
-      </AnimatePresence>
-
-      {!notifications.length && (
-        <motion.div
-          className="notifications-empty"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 200 }}
-          transition={{ duration: 0.2, delay: 0.4 }}
-        >
-          <p>No notifications</p>
-        </motion.div>
-      )}
-
+        )}
+      </div>
       <div className="notifications-footer">
         <Button
           size="small"
