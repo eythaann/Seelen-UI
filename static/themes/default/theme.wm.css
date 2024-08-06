@@ -2,12 +2,10 @@
   &.wm-leaf-with-borders {
     border-style: solid;
     border-width: var(--config-border-width);
-    border-color: var(--config-accent-color);
-    filter: invert(1);
+    border-color: var(--config-accent-dark-color);
 
     &.wm-leaf-focused {
-      border-color: var(--config-accent-color);
-      filter: invert(0);
+      border-color: var(--config-accent-lighter-color);
     }
   }
 }
@@ -20,12 +18,11 @@
     &.wm-stack-bar-with-borders {
       border-style: solid;
       border-width: var(--config-border-width);
-      border-color: var(--config-accent-color);
-      filter: invert(1);
+      border-color: var(--config-accent-dark-color);
     }
   }
 }
 
 .wm-reserved {
-  background-color: var(--color-cyan-700);
+  background-color: var(--color-accent-lighter-color);
 }

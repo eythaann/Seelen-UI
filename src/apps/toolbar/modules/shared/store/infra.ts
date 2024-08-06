@@ -1,10 +1,9 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS, setAccentColorAsCssVar } from '../../../../shared';
+import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
-import { invoke } from '@tauri-apps/api/core';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
@@ -20,6 +19,7 @@ import {
   NetworkAdapter,
   PowerStatus,
   TrayInfo,
+  UIColors,
 } from './domain';
 
 export const store = configureStore({
@@ -89,8 +89,9 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await listenGlobal<string>('theme-accent-color', (event) => {
-    store.dispatch(RootActions.setAccentColor(event.payload));
+  await listenGlobal<UIColors>('colors', (event) => {
+    setColorsAsCssVariables(event.payload);
+    store.dispatch(RootActions.setColors(event.payload));
   });
 
   await view.emitTo(view.label, 'store-events-ready');
@@ -116,11 +117,6 @@ export async function loadStore(_userSettings?: UserSettings) {
 
   store.dispatch(RootActions.setPlaceholder(placeholder));
   store.dispatch(RootActions.setEnv(userSettings.env));
-
-  invoke<string>('get_accent_color').then((color) => {
-    setAccentColorAsCssVar(color);
-    store.dispatch(RootActions.setAccentColor(color));
-  });
 }
 
 export function loadSettingsCSS(settings: FancyToolbar) {

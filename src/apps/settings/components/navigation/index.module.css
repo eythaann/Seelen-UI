@@ -38,11 +38,11 @@
     transition: background-color 300ms ease;
 
     &:hover {
-      background-color: var(--color-blue-600);
+      background-color: var(--config-accent-light-color);
     }
 
     &.active {
-      background-color: var(--color-blue-900);
+      background-color: var(--config-accent-color);
     }
 
     .icon {
@@ -62,20 +62,10 @@
   }
 }
 
-/* Mantains colors on dark mode */
+/* Maintains colors on dark mode */
 @media (prefers-color-scheme: dark) {
   .navigation {
     background-color: var(--secondary-color);
     color: var(--primary-color);
-
-    .item {
-      &:hover {
-        background-color: var(--color-blue-400);
-      }
-
-      &.active {
-        background-color: var(--color-blue-100);
-      }
-    }
   }
 }

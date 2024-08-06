@@ -41,27 +41,6 @@ export interface MediaChannelTransportData {
   default: boolean;
 }
 
-export interface RootState extends IRootState<FancyToolbar> {
-  version: number;
-  focused: ActiveApp | null;
-  placeholder: Placeholder | null;
-  env: Record<string, string>;
-  powerStatus: PowerStatus;
-  batteries: Battery[];
-  workspaces: string[];
-  activeWorkspace: number;
-  systemTray: TrayInfo[];
-  networkAdapters: NetworkAdapter[];
-  networkLocalIp: string | null;
-  online: boolean;
-  accentColor: string;
-  wlanBssEntries: WlanBssEntry[];
-  mediaSessions: MediaChannelTransportData[];
-  mediaOutputs: MediaDevice[];
-  mediaInputs: MediaDevice[];
-  notifications: AppNotification[];
-}
-
 export interface MediaDeviceChannel {
   id: string;
   instance_id: string;
@@ -90,4 +69,38 @@ export interface AppNotification {
   app_logo: string | null;
   body: string[];
   date: number;
+}
+
+export interface UIColors {
+  background: string;
+  foreground: string;
+  accent_darkest: string;
+  accent_darker: string;
+  accent_dark: string;
+  accent: string;
+  accent_light: string;
+  accent_lighter: string;
+  accent_lightest: string;
+  complement: string | null;
+}
+
+export interface RootState extends IRootState<FancyToolbar> {
+  version: number;
+  focused: ActiveApp | null;
+  placeholder: Placeholder | null;
+  env: Record<string, string>;
+  powerStatus: PowerStatus;
+  batteries: Battery[];
+  workspaces: string[];
+  activeWorkspace: number;
+  systemTray: TrayInfo[];
+  networkAdapters: NetworkAdapter[];
+  networkLocalIp: string | null;
+  online: boolean;
+  wlanBssEntries: WlanBssEntry[];
+  mediaSessions: MediaChannelTransportData[];
+  mediaOutputs: MediaDevice[];
+  mediaInputs: MediaDevice[];
+  notifications: AppNotification[];
+  colors: UIColors;
 }

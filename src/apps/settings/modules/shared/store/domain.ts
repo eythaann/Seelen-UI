@@ -7,6 +7,19 @@ import { Route } from '../../../components/navigation/routes';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';
 
+export interface UIColors {
+  background: string;
+  foreground: string;
+  accent_darkest: string;
+  accent_darker: string;
+  accent_dark: string;
+  accent: string;
+  accent_light: string;
+  accent_lighter: string;
+  accent_lightest: string;
+  complement: string | null;
+}
+
 export interface RootState extends ISettings {
   lastLoaded: this | null;
   route: Route;
@@ -17,4 +30,5 @@ export interface RootState extends ISettings {
   availableLayouts: Layout[];
   availablePlaceholders: Placeholder[];
   autostart: boolean;
+  colors: UIColors;
 }

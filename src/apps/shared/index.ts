@@ -1,7 +1,6 @@
 import { UserSettings } from '../../shared.interfaces';
 import { Theme } from './schemas/Theme';
 import { path } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/core';
 import { PhysicalSize } from '@tauri-apps/api/dpi';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
@@ -28,19 +27,24 @@ export const setWindowAsFullSize = () => {
   getCurrentWebviewWindow().setSize(new PhysicalSize(screenWidth, screenHeight));
 };
 
-export function setAccentColorAsCssVar(color: string) {
-  let hex = color.replace('#', '');
-  var bigint = parseInt(hex, 16);
-  var r = (bigint >> 16) & 255;
-  var g = (bigint >> 8) & 255;
-  var b = bigint & 255;
-  document.documentElement.style.setProperty('--config-accent-color', color);
-  document.documentElement.style.setProperty('--config-accent-color-rgb', `${r}, ${g}, ${b}`);
+export function setColorsAsCssVariables(colors: anyObject) {
+  for (const [key, value] of Object.entries(colors)) {
+    if (typeof value !== 'string') {
+      continue;
+    }
+    let hex = value.replace('#', '').slice(0, 6);
+    var color = parseInt(hex, 16);
+    var r = (color >> 16) & 255;
+    var g = (color >> 8) & 255;
+    var b = color & 255;
+    // replace rust snake case with kebab case
+    let name = key.replace('_', '-');
+    document.documentElement.style.setProperty(`--config-${name}-color`, value.slice(0, 7));
+    document.documentElement.style.setProperty(`--config-${name}-color-rgb`, `${r}, ${g}, ${b}`);
+  }
 }
 
 export function loadThemeCSS(config: UserSettings) {
-  invoke<string>('get_accent_color').then(setAccentColorAsCssVar);
-
   let selected = config.jsonSettings.selectedTheme;
   let themes: Theme[] = config.themes
     .filter((theme) => selected.includes(theme.info.filename))

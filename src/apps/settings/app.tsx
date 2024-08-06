@@ -1,7 +1,11 @@
+import { useDarkMode } from '../shared/styles';
 import { Header } from './components/header';
 import { Navigation } from './components/navigation';
 import { Route } from './components/navigation/routes';
-import { Suspense } from 'react';
+import { emit } from '@tauri-apps/api/event';
+import { ConfigProvider, theme } from 'antd';
+import { Suspense, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { AppsConfiguration } from './modules/appsConfigurations/infra/infra';
 import { DeveloperTools } from './modules/developer/infra';
@@ -10,10 +14,10 @@ import { General } from './modules/general/main/infra';
 import { Information } from './modules/information/infrastructure';
 import { Monitors } from './modules/monitors/main/infra';
 import { SeelenWegSettings } from './modules/seelenweg/infra';
-import { useAppSelector } from './modules/shared/utils/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
 import { WindowManagerSettings } from './modules/WindowManager/main/infra';
 
+import { newSelectors } from './modules/shared/store/app/reducer';
 import { RootSelectors } from './modules/shared/store/app/selectors';
 
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
@@ -29,11 +33,29 @@ const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
 };
 
 export function App() {
-  let route = useAppSelector(RootSelectors.route);
+  const isDarkMode = useDarkMode();
+  const colors = useSelector(newSelectors.colors);
+  let route = useSelector(RootSelectors.route);
+
+  useEffect(() => {
+    let splashscreen = document.getElementById('splashscreen');
+    splashscreen?.classList.add('vanish');
+    setTimeout(() => splashscreen?.classList.add('hidden'), 300);
+    emit('register-colors-events');
+  }, []);
+
   let Component = ComponentByRout[route];
 
   return (
-    <>
+    <ConfigProvider
+      componentSize="small"
+      theme={{
+        token: {
+          colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
+        },
+        algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      }}
+    >
       <Navigation />
       <Header />
       <div className="content">
@@ -41,6 +63,6 @@ export function App() {
           <Component />
         </Suspense>
       </div>
-    </>
+    </ConfigProvider>
   );
 }

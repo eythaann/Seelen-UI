@@ -8,6 +8,7 @@
 - icons now are recreated from exe path if icon was deleted.
 - uwp icons now are loaded from background.
 - improvements on themes selector.
+- improvements on system color detection and expose more system colors based in accent gamma.
 
 ### refactor
 - deprecate `onClick` and add new `onClickV2` on toolbar modules.

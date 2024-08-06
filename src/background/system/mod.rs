@@ -11,6 +11,7 @@ use crate::{
             register_notification_events, release_notification_events,
         },
         power::infrastructure::PowerManager,
+        system_settings::infrastructure::{register_colors_events, release_colors_events},
         tray::infrastructure::register_tray_events,
     },
     seelen::get_app_handle,
@@ -49,10 +50,16 @@ pub fn declare_system_events_handlers() -> Result<()> {
         register_notification_events();
     });
 
+    handle.listen("register-colors-events", move |_| {
+        log::debug!("Registering colors events");
+        register_colors_events();
+    });
+
     Ok(())
 }
 
 pub fn release_system_events_handlers() {
     release_media_events();
     release_notification_events();
+    release_colors_events();
 }

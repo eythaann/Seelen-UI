@@ -5,7 +5,6 @@ use std::process::Command;
 use serde::Serialize;
 use tauri::{command, Builder, Wry};
 use tauri_plugin_shell::ShellExt;
-use windows::Win32::Graphics::Dwm::DwmGetColorizationColor;
 
 use crate::error_handler::Result;
 use crate::modules::input::Keyboard;
@@ -85,20 +84,6 @@ fn run(program: String, args: Vec<String>) {
 #[command]
 fn is_dev_mode() -> bool {
     tauri::is_dev()
-}
-
-#[command]
-fn get_accent_color() -> String {
-    let mut colorization: u32 = 0;
-    let mut opaque_blend = windows::Win32::Foundation::BOOL(0);
-    let _ = unsafe { DwmGetColorizationColor(&mut colorization, &mut opaque_blend) };
-
-    let _alpha = (colorization >> 24) & 0xFF;
-    let red = (colorization >> 16) & 0xFF;
-    let green = (colorization >> 8) & 0xFF;
-    let blue = colorization & 0xFF;
-
-    format!("#{:02X}{:02X}{:02X}", red, green, blue)
 }
 
 #[command]
@@ -183,7 +168,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         open_file,
         run_as_admin,
         select_file_on_explorer,
-        get_accent_color,
         get_win_version,
         get_user_envs,
         show_app_settings,
@@ -192,7 +176,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         ensure_hitboxes_zorder,
         send_keys,
         get_icon,
-        // Auto Start
+        // Seelen Settings
         set_auto_start,
         get_auto_start_status,
         // Media

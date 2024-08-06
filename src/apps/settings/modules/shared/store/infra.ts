@@ -1,4 +1,5 @@
 import { UserSettings } from '../../../../../shared.interfaces';
+import { setColorsAsCssVariables } from '../../../../shared';
 import {
   getBackgroundLayers,
   loadAppsTemplates,
@@ -7,7 +8,7 @@ import {
 } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
-import { emit } from '@tauri-apps/api/event';
+import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
 
@@ -22,7 +23,7 @@ import {
   YamlToState_Apps,
 } from './app/StateBridge';
 
-import { RootState } from './domain';
+import { RootState, UIColors } from './domain';
 
 export const store = configureStore({
   reducer: RootReducer,
@@ -33,6 +34,13 @@ export type store = {
   dispatch: AppDispatch;
   getState: () => RootState;
 };
+
+export async function registerStoreEvents() {
+  await listenGlobal<UIColors>('colors', (event) => {
+    setColorsAsCssVariables(event.payload);
+    store.dispatch(RootActions.setColors(event.payload));
+  });
+}
 
 export const LoadSettingsToStore = async (customPath?: string) => {
   startup.isEnabled().then((value) => {

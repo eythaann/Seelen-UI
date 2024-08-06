@@ -21,7 +21,21 @@ export enum FocusAction {
   Latest = 'Latest',
 }
 
+export interface UIColors {
+  background: string;
+  foreground: string;
+  accent_darkest: string;
+  accent_darker: string;
+  accent_dark: string;
+  accent: string;
+  accent_light: string;
+  accent_lighter: string;
+  accent_lightest: string;
+  complement: string | null;
+}
+
 export interface RootState extends IRootState<WindowManager> {
+  colors: UIColors;
   availableLayouts: Layout[];
   workspaces: Record<DesktopId, Workspace>;
   activeWorkspace: DesktopId;

@@ -1,6 +1,6 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS } from '../../../../shared';
+import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { updateHitbox } from '../../../events';
@@ -14,7 +14,7 @@ import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
+import { AppFromBackground, HWND, MediaSession, SwItem, UIColors } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -102,6 +102,11 @@ export async function registerStoreEvents() {
 
   await listenGlobal<MediaSession[]>('media-sessions', (event) => {
     store.dispatch(RootActions.setMediaSessions(event.payload));
+  });
+
+  await listenGlobal<UIColors>('colors', (event) => {
+    setColorsAsCssVariables(event.payload);
+    store.dispatch(RootActions.setColors(event.payload));
   });
 }
 

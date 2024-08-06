@@ -1,14 +1,14 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS } from '../../../../shared';
+import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { WindowManager } from '../../../../shared/schemas/WindowManager';
 import { configureStore } from '@reduxjs/toolkit';
-import { listen } from '@tauri-apps/api/event';
+import { listen as listenGlobal } from '@tauri-apps/api/event';
 
 import { RootActions, RootSlice } from './app';
 
 import { Reservation, Sizing } from '../../layout/domain';
-import { AddWindowPayload, DesktopId, FocusAction } from './domain';
+import { AddWindowPayload, DesktopId, FocusAction, UIColors } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -28,7 +28,7 @@ export async function loadStore() {
 }
 
 export async function registerStoreEvents() {
-  await listen<UserSettings>('updated-settings', (event) => {
+  await listenGlobal<UserSettings>('updated-settings', (event) => {
     const userSettings = event.payload;
 
     const settings = userSettings.jsonSettings.windowManager;
@@ -41,52 +41,57 @@ export async function registerStoreEvents() {
     }
   });
 
-  await listen<AddWindowPayload>('add-window', (event) => {
+  await listenGlobal<AddWindowPayload>('add-window', (event) => {
     store.dispatch(RootActions.addWindow(event.payload));
   });
 
-  await listen<number>('remove-window', (event) => {
+  await listenGlobal<number>('remove-window', (event) => {
     store.dispatch(RootActions.removeWindow(event.payload));
   });
 
-  await listen<void>('force-retiling', () => {
+  await listenGlobal<void>('force-retiling', () => {
     store.dispatch(RootActions.forceUpdate());
   });
 
-  await listen<DesktopId>('set-active-workspace', (event) => {
+  await listenGlobal<DesktopId>('set-active-workspace', (event) => {
     store.dispatch(RootActions.setActiveWorkspace(event.payload));
   });
 
-  await listen<number>('set-active-window', (event) => {
+  await listenGlobal<number>('set-active-window', (event) => {
     store.dispatch(RootActions.setActiveWindow(event.payload));
     if (event.payload != 0) {
       store.dispatch(RootActions.setLastManagedActivated(event.payload));
     }
   });
 
-  await listen<Reservation | null>('set-reservation', (event) => {
+  await listenGlobal<Reservation | null>('set-reservation', (event) => {
     store.dispatch(RootActions.setReservation(event.payload));
   });
 
-  await listen<Sizing>('update-width', (event) => {
+  await listenGlobal<Sizing>('update-width', (event) => {
     store.dispatch(RootActions.updateSizing({ axis: 'x', sizing: event.payload }));
   });
 
-  await listen<Sizing>('update-height', (event) => {
+  await listenGlobal<Sizing>('update-height', (event) => {
     store.dispatch(RootActions.updateSizing({ axis: 'y', sizing: event.payload }));
   });
 
-  await listen<void>('reset-workspace-size', () => {
+  await listenGlobal<void>('reset-workspace-size', () => {
     store.dispatch(RootActions.resetSizing());
   });
 
-  await listen<FocusAction>('focus', (event) => {
+  await listenGlobal<FocusAction>('focus', (event) => {
     store.dispatch(RootActions.focus(event.payload));
   });
 
-  await listen<AddWindowPayload>('move-window-to-workspace', (event) => {
+  await listenGlobal<AddWindowPayload>('move-window-to-workspace', (event) => {
     store.dispatch(RootActions.removeWindow(event.payload.hwnd));
     store.dispatch(RootActions.addWindow(event.payload));
+  });
+
+  await listenGlobal<UIColors>('colors', (event) => {
+    setColorsAsCssVariables(event.payload);
+    store.dispatch(RootActions.setColors(event.payload));
   });
 }
 

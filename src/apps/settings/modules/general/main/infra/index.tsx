@@ -1,5 +1,6 @@
 import { LanguageList } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
+import { Colors } from './Colors';
 import { Themes } from './Themes';
 import { Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -47,6 +48,8 @@ export function General() {
           />
         </SettingsOption>
       </SettingsGroup>
+
+      <Colors />
 
       <SettingsGroup>
         <div style={{ marginBottom: '6px' }}>

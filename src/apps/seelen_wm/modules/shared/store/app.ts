@@ -24,6 +24,18 @@ const initialState: RootState = {
   reservation: null,
   settings: parseAsCamel(WindowManagerSchema, {}),
   themeLayers: defaultTheme.layers,
+  colors: {
+    background: '#ffffff',
+    foreground: '#000000',
+    accent_darkest: '#000000',
+    accent_darker: '#000000',
+    accent_dark: '#000000',
+    accent: '#000000',
+    accent_light: '#000000',
+    accent_lighter: '#000000',
+    accent_lightest: '#000000',
+    complement: null,
+  },
 };
 
 export const RootSlice = createSlice({
