@@ -38,6 +38,7 @@ general:
   startup: స్టార్టప్‌లో అమలు చేయాలా?
   icon_pack:
     label: ఐకాన్ ప్యాక్‌లు
+  accent_color: యాస రంగు
 toolbar:
   placeholder:
     author: రచయిత

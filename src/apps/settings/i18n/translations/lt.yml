@@ -38,6 +38,7 @@ general:
   startup: Paleisti paleidimą?
   icon_pack:
     label: ICON PACKS
+  accent_color: Akcento spalva
 toolbar:
   placeholder:
     select: Įrankių juostos struktūra

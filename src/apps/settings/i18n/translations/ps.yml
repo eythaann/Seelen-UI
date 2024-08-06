@@ -37,6 +37,7 @@ general:
   language: ژبه
   icon_pack:
     label: آیکون کڅوړه
+  accent_color: تیزس رنګ
 toolbar:
   placeholder:
     description: تفصیل

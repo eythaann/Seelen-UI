@@ -36,6 +36,7 @@ general:
   language: ቋንቋ
   icon_pack:
     label: አዶዎች ፓኬጆች
+  accent_color: የዝግጅት ቀለም
 toolbar:
   placeholder:
     description: መግለጫ

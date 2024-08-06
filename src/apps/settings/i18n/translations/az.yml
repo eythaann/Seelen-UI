@@ -38,6 +38,7 @@ general:
   startup: Başlanğıcda qaçırsınız?
   icon_pack:
     label: Icon paketləri
+  accent_color: Vurğu
 toolbar:
   placeholder:
     author: Müəllif

@@ -38,6 +38,7 @@ general:
   startup: தொடக்கத்தில் இயக்கவா?
   icon_pack:
     label: ஐகான் பொதிகள்
+  accent_color: உச்சரிப்பு நிறம்
 toolbar:
   placeholder:
     author: நூலாசிரியர்

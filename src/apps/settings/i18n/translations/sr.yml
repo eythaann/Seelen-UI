@@ -38,6 +38,7 @@ general:
   language: Језик
   icon_pack:
     label: Паковање икона
+  accent_color: Боја нагласности
 toolbar:
   placeholder:
     description: Опис

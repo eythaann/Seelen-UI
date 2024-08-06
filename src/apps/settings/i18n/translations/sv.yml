@@ -38,6 +38,7 @@ general:
   language: Språk
   icon_pack:
     label: Ikonförpackningar
+  accent_color: Accentfärg
 toolbar:
   placeholder:
     description: Beskrivning

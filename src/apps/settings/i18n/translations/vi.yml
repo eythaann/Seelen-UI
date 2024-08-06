@@ -38,6 +38,7 @@ general:
   language: Ngôn ngữ
   icon_pack:
     label: Gói biểu tượng
+  accent_color: Màu nhấn
 toolbar:
   placeholder:
     author: Tác giả

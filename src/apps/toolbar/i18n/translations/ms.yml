@@ -31,3 +31,4 @@ placeholder:
   battery_remaining: '% tinggal'
   settings: Tetapan cepat
   ethernet_disconnected: Tiada akses Internet
+  notifications: Pemberitahuan

@@ -45,6 +45,7 @@ general:
     available: Disponível
   icon_pack:
     label: Pacotes de ícones
+  accent_color: Cor de destaque
 toolbar:
   enable: Ativar barra de ferramentas sofisticada
   placeholder:

@@ -38,6 +38,7 @@ general:
   language: Sprooche
   icon_pack:
     label: ICON Tass
+  accent_color: Akzenter Faarf
 toolbar:
   placeholder:
     select: Toolbar Struktur

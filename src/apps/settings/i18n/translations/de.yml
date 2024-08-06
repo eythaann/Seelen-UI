@@ -45,6 +45,7 @@ general:
     available: Verfügbar
   icon_pack:
     label: Icon Packs
+  accent_color: Akzentfarbe
 toolbar:
   enable: Elegante Werkzeugleiste aktivieren
   placeholder:

@@ -37,6 +37,7 @@ general:
   startup: Kuendesha kuanza?
   icon_pack:
     label: Pakiti za ikoni
+  accent_color: Rangi ya lafudhi
 toolbar:
   placeholder:
     description: Maelezo

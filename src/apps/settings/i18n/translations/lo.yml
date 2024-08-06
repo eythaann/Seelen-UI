@@ -39,6 +39,7 @@ general:
   startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
   icon_pack:
     label: icon ຊອງ
+  accent_color: ສີສໍານຽງ
 toolbar:
   placeholder:
     author: ຜູ້ຂຽນ

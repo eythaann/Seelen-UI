@@ -38,6 +38,7 @@ general:
   startup: Eseguire all'avvio?
   icon_pack:
     label: Icon pacchetti
+  accent_color: Colore accento
 toolbar:
   placeholder:
     author: Autrice

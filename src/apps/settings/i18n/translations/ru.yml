@@ -46,6 +46,7 @@ general:
     selected: Выбран
   icon_pack:
     label: Иконы пакеты
+  accent_color: Акцентный цвет
 toolbar:
   enable: Включить необычную панель инструментов
   placeholder:

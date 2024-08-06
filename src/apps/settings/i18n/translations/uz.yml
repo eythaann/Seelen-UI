@@ -38,6 +38,7 @@ general:
   startup: Ishga tushirishda ishlaydimi?
   icon_pack:
     label: Ikonka paketlari
+  accent_color: Urg'u rangi
 toolbar:
   placeholder:
     description: Tavsif

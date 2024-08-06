@@ -38,6 +38,7 @@ general:
   startup: Suorittaa käynnistyksen yhteydessä?
   icon_pack:
     label: Kuvakepakkaukset
+  accent_color: Korostusväri
 toolbar:
   placeholder:
     description: Kuvaus

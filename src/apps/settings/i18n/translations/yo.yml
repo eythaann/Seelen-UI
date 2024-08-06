@@ -37,6 +37,7 @@ general:
   language: Ede
   icon_pack:
     label: Awọn akopọ aami
+  accent_color: Awọ ara
 toolbar:
   placeholder:
     author: Onkọwe ọkunrin

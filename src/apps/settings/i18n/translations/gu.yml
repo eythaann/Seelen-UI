@@ -38,6 +38,7 @@ general:
   startup: સ્ટાર્ટઅપ પર ચલાવો?
   icon_pack:
     label: ચિહ્ન
+  accent_color: ઉચ્ચારણ રંગ
 toolbar:
   placeholder:
     author: લેખક

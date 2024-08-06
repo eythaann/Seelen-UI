@@ -38,6 +38,7 @@ general:
   startup: Rhedeg ar gychwyn?
   icon_pack:
     label: Pecynnau eicon
+  accent_color: Lliw acen
 toolbar:
   placeholder:
     author: Awduron

@@ -38,6 +38,7 @@ general:
   startup: Εκτέλεση κατά την εκκίνηση;
   icon_pack:
     label: Εικονίδια
+  accent_color: Έμφαση στο χρώμα
 toolbar:
   placeholder:
     select: Δομή γραμμής εργαλείων

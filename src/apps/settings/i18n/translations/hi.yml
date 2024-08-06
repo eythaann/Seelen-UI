@@ -38,6 +38,7 @@ general:
   language: भाषा
   icon_pack:
     label: आइकन पैक
+  accent_color: स्वरोंका रंग
 toolbar:
   placeholder:
     author: लेखक

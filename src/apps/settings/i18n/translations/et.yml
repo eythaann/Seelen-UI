@@ -38,6 +38,7 @@ general:
   startup: Kas joosta startup?
   icon_pack:
     label: Ikoonipakid
+  accent_color: Aktsentvärv
 toolbar:
   placeholder:
     author: Autor

@@ -38,6 +38,7 @@ general:
   language: Valoda
   icon_pack:
     label: Ikonu paketes
+  accent_color: Akcents
 toolbar:
   placeholder:
     author: Autors

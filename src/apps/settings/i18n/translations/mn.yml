@@ -37,6 +37,7 @@ general:
   startup: Эхлэх үед гүйх үү?
   icon_pack:
     label: Icon багц
+  accent_color: Эргүүлэг
 toolbar:
   placeholder:
     description: Тодорхойлолт / төрөл анги

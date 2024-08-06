@@ -38,6 +38,7 @@ general:
   language: Език
   icon_pack:
     label: Икони пакети
+  accent_color: Цвят на акцент
 toolbar:
   placeholder:
     description: Описание

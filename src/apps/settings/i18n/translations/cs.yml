@@ -38,6 +38,7 @@ general:
   language: Jazyk
   icon_pack:
     label: Ikona balíčky
+  accent_color: Accent Color
 toolbar:
   placeholder:
     author: Autor

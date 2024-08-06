@@ -37,6 +37,7 @@ general:
   startup: Li ser destpêka bisekinin?
   icon_pack:
     label: Packon icon
+  accent_color: Rengê Accent
 toolbar:
   placeholder:
     author: Nivîskar

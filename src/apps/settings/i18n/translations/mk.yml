@@ -38,6 +38,7 @@ general:
   startup: Стартувам на стартување?
   icon_pack:
     label: Икони пакувања
+  accent_color: Боја на акцент
 toolbar:
   placeholder:
     author: Автор

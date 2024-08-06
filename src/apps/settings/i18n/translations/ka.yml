@@ -38,6 +38,7 @@ general:
   startup: გაშვებით გაშვებით?
   icon_pack:
     label: ხატის პაკეტები
+  accent_color: აქცენტის ფერი
 toolbar:
   placeholder:
     description: აღწერილობა

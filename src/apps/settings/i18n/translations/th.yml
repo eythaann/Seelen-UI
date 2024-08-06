@@ -37,6 +37,7 @@ general:
   startup: วิ่งเมื่อเริ่มต้น?
   icon_pack:
     label: ไอคอนแพ็ค
+  accent_color: สีเน้น
 toolbar:
   placeholder:
     author: ผู้เขียน

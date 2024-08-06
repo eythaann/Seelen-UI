@@ -38,6 +38,7 @@ general:
   startup: 'Գործարկման վրա գործարկեք:'
   icon_pack:
     label: Սրբապատկերներ
+  accent_color: Շեշտադրիչ գույն
 toolbar:
   placeholder:
     author: Հեղինակ

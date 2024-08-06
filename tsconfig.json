@@ -1,9 +1,13 @@
 {
   "compilerOptions": {
-    "lib": ["ESNext", "DOM"],
+    "lib": [
+      "ESNext",
+      "DOM"
+    ],
     "target": "ES2020",
-    "module": "ES2020",
-    "moduleResolution": "Bundler",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -12,8 +16,16 @@
     "noUncheckedIndexedAccess": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["react", "readable-types", "node", "jest"],
+    "types": [
+      "react",
+      "readable-types",
+      "node",
+      "jest"
+    ],
     "skipLibCheck": true,
-    "esModuleInterop": true,
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

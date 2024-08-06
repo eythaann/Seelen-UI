@@ -38,6 +38,7 @@ general:
   startup: Mexxi fuq l-istartjar?
   icon_pack:
     label: Pakketti tal-ikona
+  accent_color: Kulur tal-aċċent
 toolbar:
   placeholder:
     author: Awtur

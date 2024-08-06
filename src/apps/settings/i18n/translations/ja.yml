@@ -36,6 +36,7 @@ general:
   language: 言語
   icon_pack:
     label: アイコンパック
+  accent_color: アクセントの色
 toolbar:
   placeholder:
     description: 説明

@@ -38,6 +38,7 @@ general:
   startup: Başlangıçta koşmak mı?
   icon_pack:
     label: Simge paketleri
+  accent_color: Aksan rengi
 toolbar:
   placeholder:
     author: Yazar

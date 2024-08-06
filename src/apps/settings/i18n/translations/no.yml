@@ -38,6 +38,7 @@ general:
   startup: Kjør ved oppstart?
   icon_pack:
     label: Ikonpakker
+  accent_color: Aksentfarge
 toolbar:
   placeholder:
     description: Beskrivelse

@@ -37,6 +37,7 @@ general:
   startup: לרוץ בהפעלה?
   icon_pack:
     label: חבילות אייקונים
+  accent_color: צבע הדגשה
 toolbar:
   placeholder:
     author: מְחַבֵּר

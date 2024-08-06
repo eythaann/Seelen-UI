@@ -38,6 +38,7 @@ general:
   startup: Uitvoeren bij het starten?
   icon_pack:
     label: Pictogrampakketten
+  accent_color: Accent kleur
 toolbar:
   placeholder:
     author: Auteur

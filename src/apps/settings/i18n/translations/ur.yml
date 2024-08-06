@@ -37,6 +37,7 @@ general:
   startup: اسٹارٹ اپ پر چلائیں؟
   icon_pack:
     label: آئیکن پیک
+  accent_color: لہجہ رنگ
 toolbar:
   placeholder:
     description: تفصیل

@@ -37,6 +37,7 @@ general:
   language: Забон
   icon_pack:
     label: ICon бастаҳои
+  accent_color: Ранги ҳисоб
 toolbar:
   placeholder:
     select: Сохтори панели асбобҳо

@@ -43,6 +43,7 @@ general:
     selected: 선택된
   icon_pack:
     label: 아이콘 팩
+  accent_color: 악센트 색상
 toolbar:
   enable: 화려한 툴바 활성화
   placeholder:

@@ -38,6 +38,7 @@ general:
   startup: Hardloop met opstart?
   icon_pack:
     label: Ikoonpakkies
+  accent_color: Aksentkleur
 toolbar:
   placeholder:
     author: Outeur

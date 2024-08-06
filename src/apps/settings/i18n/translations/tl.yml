@@ -38,6 +38,7 @@ general:
   startup: Patakbuhin sa Startup?
   icon_pack:
     label: Icon pack
+  accent_color: Kulay ng accent
 toolbar:
   placeholder:
     author: May -akda

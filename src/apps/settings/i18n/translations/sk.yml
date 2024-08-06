@@ -38,6 +38,7 @@ general:
   language: Jazyk
   icon_pack:
     label: Ikon
+  accent_color: Prízvuk
 toolbar:
   placeholder:
     author: Autor

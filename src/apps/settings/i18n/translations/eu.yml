@@ -38,6 +38,7 @@ general:
   language: Mintzaira
   icon_pack:
     label: Ikono paketeak
+  accent_color: Azentu kolorea
 toolbar:
   placeholder:
     select: Tresna-barraren egitura

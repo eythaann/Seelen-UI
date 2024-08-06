@@ -37,6 +37,7 @@ general:
   language: Af
   icon_pack:
     label: Xirmooyinka icon
+  accent_color: Midab caqabad
 toolbar:
   placeholder:
     description: Sifo

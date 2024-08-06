@@ -38,6 +38,7 @@ general:
   language: Bahasa
   icon_pack:
     label: Paket Ikon
+  accent_color: Aksen warna
 toolbar:
   placeholder:
     select: Struktur bilah alat

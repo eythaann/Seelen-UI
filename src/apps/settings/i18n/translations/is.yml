@@ -38,6 +38,7 @@ general:
   language: Tungumál
   icon_pack:
     label: Táknpakkar
+  accent_color: Hreim litur
 toolbar:
   placeholder:
     description: Lýsing

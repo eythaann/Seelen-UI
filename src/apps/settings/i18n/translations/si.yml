@@ -38,6 +38,7 @@ general:
   startup: ආරම්භයේදී ධාවනය කරන්නද?
   icon_pack:
     label: අයිකන ඇසුරුම්
+  accent_color: උච්චාරණ වර්ණය
 toolbar:
   placeholder:
     author: කර්තෘ

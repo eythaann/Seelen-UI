@@ -38,6 +38,7 @@ general:
   language: ভাষা
   icon_pack:
     label: আইকন প্যাকস
+  accent_color: সুরের ধাপের রঙ
 toolbar:
   placeholder:
     author: লেখক

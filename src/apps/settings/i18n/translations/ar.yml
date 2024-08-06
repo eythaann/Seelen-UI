@@ -44,6 +44,7 @@ general:
     selected: المحدد
   icon_pack:
     label: حزم أيقونة
+  accent_color: لون لهجة
 toolbar:
   enable: تمكين شريط الأدوات الفاخر
   placeholder:

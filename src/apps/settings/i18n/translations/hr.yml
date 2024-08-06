@@ -38,6 +38,7 @@ general:
   startup: Trčati na startup?
   icon_pack:
     label: Ikona pakiranja
+  accent_color: Akcentna boja
 toolbar:
   placeholder:
     description: Opis

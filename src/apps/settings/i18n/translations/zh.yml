@@ -43,6 +43,7 @@ general:
     available: 可用的
   icon_pack:
     label: 图标包
+  accent_color: 口音颜色
 toolbar:
   enable: 启用精美工具栏
   placeholder:

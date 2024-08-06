@@ -37,6 +37,7 @@ general:
   language: भाषा
   icon_pack:
     label: आइकन प्याक
+  accent_color: हिम्मता रंग
 toolbar:
   placeholder:
     description: वर्णन

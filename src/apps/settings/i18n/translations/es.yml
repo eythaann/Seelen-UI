@@ -45,6 +45,7 @@ general:
     selected: Seleccionada
   icon_pack:
     label: Paquetes de iconos
+  accent_color: Acentuar el color
 toolbar:
   enable: Habilitar barra elegante
   placeholder:

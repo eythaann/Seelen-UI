@@ -37,6 +37,7 @@ general:
   startup: در راه اندازی اجرا می شود؟
   icon_pack:
     label: بسته های نماد
+  accent_color: رنگ لهجه
 toolbar:
   placeholder:
     description: شرح

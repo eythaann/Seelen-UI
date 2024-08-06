@@ -38,6 +38,7 @@ general:
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
   icon_pack:
     label: ਆਈਕਾਨ ਪੈਕ
+  accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
 toolbar:
   placeholder:
     description: ਵਰਣਨ

@@ -38,6 +38,7 @@ general:
   startup: Trčite na pokretanju?
   icon_pack:
     label: Paketa ikona
+  accent_color: Akcentna boja
 toolbar:
   placeholder:
     select: Struktura alatne trake

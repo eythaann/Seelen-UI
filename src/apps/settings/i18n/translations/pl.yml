@@ -38,6 +38,7 @@ general:
   startup: Biegać na startup?
   icon_pack:
     label: Pakiety ikony
+  accent_color: Kolor akcentu
 toolbar:
   placeholder:
     author: Autor

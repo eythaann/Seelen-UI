@@ -38,6 +38,7 @@ general:
   startup: Бігати на стартап?
   icon_pack:
     label: Пакети значків
+  accent_color: Акцентний колір
 toolbar:
   placeholder:
     select: Структура панелі інструментів

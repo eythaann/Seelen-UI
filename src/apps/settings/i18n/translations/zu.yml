@@ -38,6 +38,7 @@ general:
   startup: Gijima ekuqaleni?
   icon_pack:
     label: I-Icon Packs
+  accent_color: Umbala we-Accent
 toolbar:
   placeholder:
     author: Umlobi

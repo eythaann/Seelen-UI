@@ -44,6 +44,7 @@ general:
     selected: Selected
   icon_pack:
     label: Icon Packs
+  accent_color: Accent Color
 toolbar:
   enable: Enable Fancy Toolbar
   placeholder:

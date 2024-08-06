@@ -38,6 +38,7 @@ general:
   startup: Rulați la pornire?
   icon_pack:
     label: Pachete de pictograme
+  accent_color: Culoare de accent
 toolbar:
   placeholder:
     select: Structura barei de instrumente

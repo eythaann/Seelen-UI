@@ -38,6 +38,7 @@ general:
   language: Llenguatge
   icon_pack:
     label: Paquets d’icones
+  accent_color: Color d’accent
 toolbar:
   placeholder:
     description: Descripció

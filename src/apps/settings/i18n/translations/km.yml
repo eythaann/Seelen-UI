@@ -38,6 +38,7 @@ general:
   startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
   icon_pack:
     label: រូបតំណាងកញ្ចប់
+  accent_color: ពណ៌សង្កត់សំឡេង
 toolbar:
   placeholder:
     description: ការពិពណ៌នា
