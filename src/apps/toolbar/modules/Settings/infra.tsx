@@ -1,6 +1,7 @@
 import { Icon } from '../../../shared/components/Icon';
 import { SettingsToolbarModule } from '../../../shared/schemas/Placeholders';
 import { invoke } from '@tauri-apps/api/core';
+import { emit } from '@tauri-apps/api/event';
 import { Popover, Slider, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,9 +9,12 @@ import { useSelector } from 'react-redux';
 
 import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
 import { Item } from '../item/infra';
+import { VolumeControl } from '../media/infra/MediaControls';
 import { useAppBlur } from '../shared/hooks/infra';
 
 import { Selectors } from '../shared/store/app';
+
+import { RootState } from '../shared/store/domain';
 
 interface Props {
   module: SettingsToolbarModule;
@@ -30,8 +34,19 @@ export function SettingsModule({ module }: Props) {
     current: 0,
   });
 
+  const defaultInput = useSelector((state: RootState) =>
+    Selectors.mediaInputs(state).find((d) => d.is_default_multimedia),
+  );
+  const defaultOutput = useSelector((state: RootState) =>
+    Selectors.mediaOutputs(state).find((d) => d.is_default_multimedia),
+  );
+
   const themeLayers = useSelector(Selectors.themeLayers.toolbar);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    emit('register-media-events');
+  }, []);
 
   useEffect(() => {
     invoke<Brightness>('get_main_monitor_brightness')
@@ -57,7 +72,12 @@ export function SettingsModule({ module }: Props) {
           <BackgroundByLayers prefix="fast-settings" layers={themeLayers.fastSettings.bg} />
           <div className="fast-settings-title">
             <span>{t('settings.title')}</span>
-            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.app_settings')} placement="left">
+            <Tooltip
+              mouseLeaveDelay={0}
+              arrow={false}
+              title={t('settings.app_settings')}
+              placement="left"
+            >
               <button
                 className="fast-settings-item-title-button"
                 onClick={() => invoke('show_app_settings')}
@@ -66,6 +86,35 @@ export function SettingsModule({ module }: Props) {
               </button>
             </Tooltip>
           </div>
+
+          {!!(defaultInput || defaultOutput) && (
+            <span className="fast-settings-label">{t('media.master_volume')}</span>
+          )}
+
+          {!!defaultOutput && (
+            <div className="fast-settings-item">
+              <VolumeControl
+                value={defaultOutput.volume}
+                deviceId={defaultOutput.id}
+                icon={
+                  <Icon
+                    iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'}
+                  />
+                }
+              />
+            </div>
+          )}
+
+          {!!defaultInput && (
+            <div className="fast-settings-item">
+              <VolumeControl
+                value={defaultInput.volume}
+                deviceId={defaultInput.id}
+                icon={<Icon iconName={defaultInput.muted ? 'BiMicrophoneOff' : 'BiMicrophone'} />}
+              />
+            </div>
+          )}
+
           {brightness.max > 0 && (
             <div className="fast-settings-item">
               <Icon iconName="CiBrightnessUp" />
@@ -77,6 +126,8 @@ export function SettingsModule({ module }: Props) {
               />
             </div>
           )}
+
+          <span className="fast-settings-label">{t('settings.power')}</span>
           <div className="fast-settings-item fast-settings-power">
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')}>
               <button className="fast-settings-item-button" onClick={() => invoke('log_out')}>

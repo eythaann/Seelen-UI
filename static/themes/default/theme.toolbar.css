@@ -244,8 +244,10 @@
   display: flex;
   gap: 4px;
   align-items: center;
+  width: 100%;
 }
 
+.fast-settings-label,
 .media-control-label {
   font-size: 0.8rem;
   font-weight: 600;

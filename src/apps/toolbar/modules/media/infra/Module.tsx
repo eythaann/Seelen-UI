@@ -1,4 +1,4 @@
-import { MediaTM, ToolbarModuleType } from '../../../../shared/schemas/Placeholders';
+import { MediaTM } from '../../../../shared/schemas/Placeholders';
 import { WithMediaControls } from './MediaControls';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect } from 'react';
@@ -21,10 +21,7 @@ function MediaModuleItem({ module, ...rest }: Props) {
 
 export function MediaModule({ module }: Props) {
   useEffect(() => {
-    if (!window.TOOLBAR_MODULES[ToolbarModuleType.Media]) {
-      window.TOOLBAR_MODULES[ToolbarModuleType.Media] = true;
-      emit('register-media-events');
-    }
+    emit('register-media-events');
   }, []);
 
   return module.withMediaControls ? (

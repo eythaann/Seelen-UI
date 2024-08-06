@@ -21,6 +21,7 @@ settings:
   sleep: Sleep
   restart: Restart
   shutdown: Shutdown
+  power: Power
 placeholder:
   open_user_folder: Open User Folder
   open_system_tray: Open System Tray

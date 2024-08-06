@@ -136,7 +136,7 @@ interface VolumeControlProps {
   sessionId?: string;
 }
 
-function VolumeControl(props: VolumeControlProps) {
+export function VolumeControl(props: VolumeControlProps) {
   const { value, icon, deviceId, sessionId } = props;
 
   const [internalValue, setInternalValue] = useState(value);
