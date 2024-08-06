@@ -408,6 +408,8 @@
 }
 
 .notification-body {
+  word-break: break-word;
+
   .notification-body-title {
     font-weight: 600;
   }
