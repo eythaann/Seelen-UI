@@ -32,7 +32,7 @@ interface StringToElementState {
   exe_icon_path: string;
 }
 
-class StringToElement extends React.Component<StringToElementProps, StringToElementState> {
+class StringToElement extends React.PureComponent<StringToElementProps, StringToElementState> {
   static splitter = /:([^:]+):/;
 
   static imgPrefix = 'IMG:';
@@ -40,14 +40,23 @@ class StringToElement extends React.Component<StringToElementProps, StringToElem
   static exePrefix = 'EXE:';
 
   static imgFromUrl(url: string, size = 16) {
+    if (!url) {
+      return '';
+    }
     return `[IMG:${size}px:${url}]`;
   }
 
   static imgFromPath(path: string, size = 16) {
+    if (!path) {
+      return '';
+    }
     return StringToElement.imgFromUrl(convertFileSrc(path), size);
   }
 
   static imgFromExe(exe_path: string, size = 16) {
+    if (!exe_path) {
+      return '';
+    }
     return `[EXE:${size}px:${exe_path}]`;
   }
 
@@ -72,7 +81,7 @@ class StringToElement extends React.Component<StringToElementProps, StringToElem
     this.setState({ exe_icon_path: exe_path || LAZY_CONSTANTS.MISSING_ICON_PATH });
   }
 
-  componentDidMount() {
+  loadExeIconToState() {
     if (this.isExe()) {
       const [_, _size, path] = this.props.text.split(StringToElement.splitter);
       if (path) {
@@ -80,6 +89,16 @@ class StringToElement extends React.Component<StringToElementProps, StringToElem
           .then(this.setExeIcon.bind(this))
           .catch(console.error);
       }
+    }
+  }
+
+  componentDidMount() {
+    this.loadExeIconToState();
+  }
+
+  componentDidUpdate(prevProps: StringToElementProps) {
+    if (this.props.text !== prevProps.text) {
+      this.loadExeIconToState();
     }
   }
 
@@ -117,7 +136,7 @@ export function ElementsFromEvaluated(content: any) {
 
   const parts: string[] = text.split(/\[|\]/g).filter((part: string) => part);
   const result: React.ReactNode[] = parts.map((part: string, index: number) => {
-    return <StringToElement text={part} key={index} />;
+    return <StringToElement key={index} text={part} />;
   });
 
   return result;

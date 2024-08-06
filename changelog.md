@@ -2,7 +2,10 @@
 
 ## [Unreleased]
 ### features
-- allow custom images on toolbar by imgFromUrl, imgFromPath and imgFromExe functions.
+- allow custom images on toolbar by `imgFromUrl`, `imgFromPath` and `imgFromExe` functions.
+- add notifications module to toolbar.
+- add exe path to window in generic module for toolbar.
+- add focused window icon to default toolbar layouts.
 
 ### enhancements
 - icons now are recreated from exe path if icon was deleted.

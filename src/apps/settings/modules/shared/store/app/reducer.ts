@@ -66,6 +66,7 @@ export const RootSlice = createSlice({
         const newState = cloneDeep(state.lastLoaded);
         newState.lastLoaded = cloneDeep(state.lastLoaded);
         newState.route = state.route;
+        newState.colors = state.colors;
         i18n.changeLanguage(newState.language);
         return newState;
       }

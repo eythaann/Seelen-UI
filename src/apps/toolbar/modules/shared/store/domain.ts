@@ -7,6 +7,7 @@ import { WlanBssEntry } from '../../network/domain';
 export interface ActiveApp {
   name: string;
   title: string;
+  exe: string | null;
 }
 
 export interface PowerStatus {

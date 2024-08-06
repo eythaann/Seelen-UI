@@ -3,26 +3,26 @@ info:
   author: eythaann,
   description: Default toolbar layout good for many devices.
 left:
-  - type: text
-    template: concat(imgFromExe("C:\\Windows\\explorer.exe"), " @", env.USERNAME)
+  - type: generic
+    template: concat("@", env.USERNAME)
     onClickV2: open(env.USERPROFILE)
     tooltip: t("placeholder.open_user_folder")
     style:
       flexShrink: 0
 
-  - type: text
+  - type: generic
     template: '"|"'
 
-  - type: text
-    template: window.name
+  - type: generic
+    template: concat(imgFromExe(window.exe), "  ", window.name)
     style:
       flexShrink: 0
 
-  - type: text
+  - type: generic
     template: >
       window.title ? "-" : ""
 
-  - type: text
+  - type: generic
     template: window.title
     style:
       flexShrink: 2

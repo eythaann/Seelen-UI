@@ -32,6 +32,7 @@ pub struct FancyToolbar {
 pub struct ActiveApp {
     title: String,
     name: String,
+    exe: Option<String>,
 }
 
 impl FancyToolbar {
@@ -75,6 +76,7 @@ impl FancyToolbar {
                 title,
                 name: WindowsApi::get_window_display_name(hwnd)
                     .unwrap_or(String::from("Error on App Name")),
+                exe: WindowsApi::exe_path(hwnd).ok(),
             },
         )?;
         Ok(())

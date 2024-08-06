@@ -73,6 +73,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     appsTemplates: currentState.appsTemplates,
     route: currentState.route,
     autostart: currentState.autostart,
+    colors: currentState.colors,
   };
   state.lastLoaded = cloneDeep(state);
 
