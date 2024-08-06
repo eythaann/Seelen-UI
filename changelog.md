@@ -18,6 +18,7 @@
 
 ### fix
 - bad translations keys.
+- no restoring dock on closing fullscreened app.
 
 ## [1.8.12]
 ### fix

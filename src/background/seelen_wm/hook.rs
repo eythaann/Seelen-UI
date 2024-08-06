@@ -103,8 +103,8 @@ impl WindowManager {
                     self.pseudo_pause()?;
                 }
             }
-            WinEvent::SyntheticFullscreenStart => self.pseudo_pause()?,
-            WinEvent::SyntheticFullscreenEnd => self.pseudo_resume()?,
+            WinEvent::SyntheticFullscreenStart(_) => self.pseudo_pause()?,
+            WinEvent::SyntheticFullscreenEnd(_) => self.pseudo_resume()?,
             _ => {}
         };
         Ok(())

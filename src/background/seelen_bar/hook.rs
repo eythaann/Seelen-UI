@@ -15,10 +15,9 @@ impl FancyToolbar {
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
                 self.focus_changed(origin)?;
             }
-            WinEvent::SyntheticFullscreenStart => {
+            WinEvent::SyntheticFullscreenStart(event_data) => {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
-                let event_monitor = WindowsApi::monitor_from_window(origin);
-                if monitor == event_monitor {
+                if monitor == event_data.monitor {
                     log::trace!(
                         "Fullscreen on {} || {} || {}",
                         WindowsApi::exe(origin).unwrap_or_default(),
@@ -28,10 +27,9 @@ impl FancyToolbar {
                     self.hide()?;
                 }
             }
-            WinEvent::SyntheticFullscreenEnd => {
+            WinEvent::SyntheticFullscreenEnd(event_data) => {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
-                let event_monitor = WindowsApi::monitor_from_window(origin);
-                if monitor == event_monitor {
+                if monitor == event_data.monitor {
                     log::trace!(
                         "Exit Fullscreen on {} || {} || {}",
                         WindowsApi::exe(origin).unwrap_or_default(),

@@ -2,10 +2,9 @@
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use serde::Deserialize;
-use serde::Serialize;
 
 use windows::Win32::Foundation::HWND;
+use windows::Win32::Graphics::Gdi::HMONITOR;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_AIA_END;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_AIA_START;
 use windows::Win32::UI::WindowsAndMessaging::EVENT_CONSOLE_CARET;
@@ -96,10 +95,10 @@ use crate::utils::constants::IGNORE_FULLSCREEN;
 use crate::windows_api::WindowsApi;
 
 lazy_static! {
-    pub static ref FULLSCREENED: Mutex<Vec<HWND>> = Mutex::new(Vec::new());
+    static ref FULLSCREENED: Mutex<Vec<SyntheticFullscreenData>> = Mutex::new(Vec::new());
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, Debug, Serialize, Deserialize)]
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
 #[repr(u32)]
 #[allow(dead_code)]
 pub enum WinEvent {
@@ -188,8 +187,14 @@ pub enum WinEvent {
     UiaPropIdSEnd = EVENT_UIA_PROPID_END,
     UiaPropIdStart = EVENT_UIA_PROPID_START,
     // ================== Synthetic events ==================
-    SyntheticFullscreenStart,
-    SyntheticFullscreenEnd,
+    SyntheticFullscreenStart(SyntheticFullscreenData),
+    SyntheticFullscreenEnd(SyntheticFullscreenData),
+}
+
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub struct SyntheticFullscreenData {
+    pub handle: HWND,
+    pub monitor: HMONITOR,
 }
 
 impl TryFrom<u32> for WinEvent {
@@ -311,8 +316,12 @@ impl WinEvent {
                 }
 
                 if WindowsApi::is_fullscreen(origin).ok()? {
-                    FULLSCREENED.lock().push(origin);
-                    Some(Self::SyntheticFullscreenStart)
+                    let data = SyntheticFullscreenData {
+                        handle: origin,
+                        monitor: WindowsApi::monitor_from_window(origin),
+                    };
+                    FULLSCREENED.lock().push(data);
+                    Some(Self::SyntheticFullscreenStart(data))
                 } else {
                     None
                 }
@@ -322,9 +331,9 @@ impl WinEvent {
             | Self::ObjectCloaked
             | Self::SystemMinimizeStart => {
                 let mut fullscreened = FULLSCREENED.lock();
-                if fullscreened.contains(&origin) {
-                    fullscreened.retain(|&x| x != origin);
-                    Some(Self::SyntheticFullscreenEnd)
+                if let Some(index) = fullscreened.iter().position(|x| x.handle == origin) {
+                    let data = fullscreened.remove(index);
+                    Some(Self::SyntheticFullscreenEnd(data))
                 } else {
                     None
                 }
@@ -335,20 +344,24 @@ impl WinEvent {
                 }
 
                 let mut fullscreened = FULLSCREENED.lock();
-                let was_fullscreen = fullscreened.contains(&origin);
+                let was_fullscreen = fullscreened.iter().position(|x| x.handle == origin);
                 let is_fullscreen = WindowsApi::is_fullscreen(origin).ok()?;
 
                 // state no changed
-                if was_fullscreen == is_fullscreen {
+                if was_fullscreen.is_some() == is_fullscreen {
                     return None;
                 }
 
-                if is_fullscreen {
-                    fullscreened.push(origin);
-                    Some(Self::SyntheticFullscreenStart)
+                if let Some(index) = was_fullscreen {
+                    let data = fullscreened.remove(index);
+                    Some(Self::SyntheticFullscreenEnd(data))
                 } else {
-                    fullscreened.retain(|&x| x != origin);
-                    Some(Self::SyntheticFullscreenEnd)
+                    let data = SyntheticFullscreenData {
+                        handle: origin,
+                        monitor: WindowsApi::monitor_from_window(origin),
+                    };
+                    fullscreened.push(data);
+                    Some(Self::SyntheticFullscreenStart(data))
                 }
             }
             _ => None,
