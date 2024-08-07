@@ -1,7 +1,7 @@
 import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../shared/schemas';
 import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
-import { Placeholder, PlaceholderSchema } from '../../../../shared/schemas/Placeholders';
+import { ParsePlaceholder } from '../../../../shared/schemas/Placeholders';
 import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
@@ -84,32 +84,17 @@ async function loadUserLayouts(ref: UserSettings) {
 
 async function loadUserPlaceholders(ref: UserSettings) {
   const selectedPlaceholder = ref.jsonSettings.fancyToolbar.placeholder;
-  let found = false;
 
-  for (const entry of await getEntries('placeholders')) {
-    if (entry.isFile && entry.name.endsWith('.yml')) {
-      let _placeholder = yaml.load(await fs.readTextFile(entry.path));
-
-      let placeholder = safeParseAsCamel(PlaceholderSchema, _placeholder) as Placeholder;
-      if (!placeholder) {
-        continue;
-      }
-
-      placeholder.info.filename = entry.name;
-
-      if (placeholder.info.displayName === 'Unknown') {
-        placeholder.info.displayName = entry.name;
-      }
-
-      if (selectedPlaceholder === entry.name) {
-        found = true;
-      }
-
+  const rawPlaceholders: any[] = await invoke('state_get_placeholders');
+  for (const rawPlaceholder of rawPlaceholders) {
+    let placeholder = ParsePlaceholder(rawPlaceholder);
+    if (placeholder) {
       ref.placeholders.push(placeholder);
     }
   }
 
-  if (!found) {
+  let usingPlaceholder = ref.placeholders.find((x) => x.info.filename === selectedPlaceholder);
+  if (!usingPlaceholder) {
     ref.jsonSettings.fancyToolbar.placeholder = ref.placeholders[0]?.info.filename || null;
   }
 }

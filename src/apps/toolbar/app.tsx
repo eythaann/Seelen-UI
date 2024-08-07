@@ -45,7 +45,7 @@ export function App() {
         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
-      <ErrorBoundary fallback={<ErrorFallback />}>
+      <ErrorBoundary key={version} fallback={<ErrorFallback />}>
         <ToolBar key={version} structure={structure} />
       </ErrorBoundary>
     </ConfigProvider>

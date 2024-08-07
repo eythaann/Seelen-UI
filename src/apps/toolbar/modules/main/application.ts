@@ -9,6 +9,10 @@ import { cloneDeep, debounce } from 'lodash';
 
 import { store } from '../shared/store/infra';
 
+export const IsSavingCustom = {
+  current: false,
+};
+
 export const SavePlaceholderAsCustom = debounce(async () => {
   const { placeholder, env } = store.getState();
 
@@ -31,5 +35,6 @@ export const SavePlaceholderAsCustom = debounce(async () => {
   let { jsonSettings } = await new UserSettingsLoader().withThemes(false).load();
   jsonSettings.fancyToolbar.placeholder = toBeSaved.info.filename;
 
+  IsSavingCustom.current = true;
   await saveJsonSettings(jsonSettings);
 }, 1000);

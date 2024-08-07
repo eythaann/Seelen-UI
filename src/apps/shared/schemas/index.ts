@@ -84,4 +84,5 @@ export const CreatorInfoSchema = z.object({
   displayName: z.string().default('Unknown'),
   author: z.string().default('Unknown'),
   description: z.string().default('Empty'),
+  filename: z.string().default(''),
 });

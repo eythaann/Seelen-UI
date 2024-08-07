@@ -1,5 +1,6 @@
 mod domain;
 pub mod infrastructure;
+mod placeholders;
 mod themes;
 
 use std::{

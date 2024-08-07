@@ -136,8 +136,33 @@ export const PlaceholderSchema = z.object({
   right: z.array(ToolbarModuleSchema).default([]),
 });
 
-export interface Placeholder extends InnerPlaceholder {
-  info: InnerPlaceholder['info'] & {
-    filename: string;
+export interface Placeholder extends InnerPlaceholder {}
+
+export function ParsePlaceholder(value: any): Placeholder | null {
+  let innerSchema = z.object({
+    info: CreatorInfoSchema.default({}),
+    left: z.array(z.any()).default([]),
+    center: z.array(z.any()).default([]),
+    right: z.array(z.any()).default([]),
+  });
+
+  const result = innerSchema.safeParse(value);
+  if (!result.success) {
+    console.error(result.error);
+    return null;
+  }
+
+  const cb = (acc: ToolbarModule[], current: any) => {
+    let result = ToolbarModuleSchema.safeParse(current);
+    if (result.success) {
+      acc.push(result.data);
+    }
+    return acc;
   };
+
+  result.data.left = result.data.left.reduce(cb, []);
+  result.data.center = result.data.center.reduce(cb, []);
+  result.data.right = result.data.right.reduce(cb, []);
+
+  return result.data;
 }

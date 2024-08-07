@@ -6,7 +6,9 @@ import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { debounce } from 'lodash';
 
+import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -99,7 +101,29 @@ export async function registerStoreEvents() {
     loadThemeCSS(userSettings);
   });
 
+  await listenGlobal(
+    'placeholders',
+    debounce(async () => {
+      if (IsSavingCustom.current) {
+        IsSavingCustom.current = false;
+        return;
+      }
+      const userSettings = await new UserSettingsLoader().withPlaceholders().load();
+      setPlaceholder(userSettings);
+    }, 100),
+  );
+
   await view.emitTo(view.label, 'store-events-ready');
+}
+
+function setPlaceholder(userSettings: UserSettings) {
+  const settings = userSettings.jsonSettings.fancyToolbar;
+  const placeholder =
+    userSettings.placeholders.find(
+      (placeholder) => placeholder.info.filename === settings.placeholder,
+    ) || null;
+
+  store.dispatch(RootActions.setPlaceholder(placeholder));
 }
 
 export async function loadStore(_userSettings?: UserSettings) {
@@ -109,14 +133,10 @@ export async function loadStore(_userSettings?: UserSettings) {
 
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));
+
   loadThemeCSS(userSettings);
+  setPlaceholder(userSettings);
 
-  const placeholder =
-    userSettings.placeholders.find(
-      (placeholder) => placeholder.info.filename === settings.placeholder,
-    ) || null;
-
-  store.dispatch(RootActions.setPlaceholder(placeholder));
   store.dispatch(RootActions.setEnv(userSettings.env));
 }
 

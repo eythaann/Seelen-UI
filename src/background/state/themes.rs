@@ -116,7 +116,7 @@ impl ThemeManager {
             match theme {
                 Ok(mut theme) => {
                     theme.info.filename = entry.file_name().to_string_lossy().to_string();
-                    self.themes.insert(theme.info.display_name.clone(), theme);
+                    self.themes.insert(theme.info.filename.clone(), theme);
                 }
                 Err(err) => log::error!("Failed to load theme ({:?}): {:?}", entry.path(), err),
             }

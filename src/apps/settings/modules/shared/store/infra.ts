@@ -32,6 +32,11 @@ export type store = {
 };
 
 export async function registerStoreEvents() {
+  await listenGlobal<any[]>('placeholders', async () => {
+    const userSettings = await new UserSettingsLoader().withPlaceholders().load();
+    store.dispatch(RootActions.setAvailablePlaceholders(userSettings.placeholders));
+  });
+
   await listenGlobal<Theme[]>('themes', (event) => {
     store.dispatch(RootActions.setAvailableThemes(event.payload));
   });

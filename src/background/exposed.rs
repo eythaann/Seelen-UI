@@ -181,6 +181,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         set_auto_start,
         get_auto_start_status,
         state_get_themes,
+        state_get_placeholders,
         // Media
         media_prev,
         media_toggle_play_pause,
