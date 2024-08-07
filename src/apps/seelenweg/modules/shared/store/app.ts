@@ -1,4 +1,3 @@
-import { defaultTheme } from '../../../../../shared.interfaces';
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { savePinnedItems } from './storeApi';
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
@@ -24,7 +23,6 @@ const initialState: RootState = {
   openApps: {},
   focusedHandle: 0,
   focusedExecutable: '',
-  themeLayers: defaultTheme.layers,
   isOverlaped: false,
   settings: SeelenWegSlice.getInitialState(),
   mediaSessions: [],

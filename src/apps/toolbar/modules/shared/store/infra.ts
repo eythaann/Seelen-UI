@@ -94,6 +94,11 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setColors(event.payload));
   });
 
+  await listenGlobal('themes', async () => {
+    const userSettings = await new UserSettingsLoader().load();
+    loadThemeCSS(userSettings);
+  });
+
   await view.emitTo(view.label, 'store-events-ready');
 }
 
@@ -104,11 +109,7 @@ export async function loadStore(_userSettings?: UserSettings) {
 
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));
-
-  if (userSettings.bgLayers) {
-    loadThemeCSS(userSettings);
-    store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
-  }
+  loadThemeCSS(userSettings);
 
   const placeholder =
     userSettings.placeholders.find(

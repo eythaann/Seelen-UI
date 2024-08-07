@@ -5,7 +5,7 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayers } from '../../../../seelenweg/components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 import { useAppBlur } from '../../shared/hooks/infra';
 
 import { Selectors } from '../../shared/store/app';
@@ -52,7 +52,7 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
       content={
         <>
           <div className="wlan-selector">
-            <BackgroundByLayers prefix="wlan-selector" layers={1} />
+            <BackgroundByLayersV2 prefix="wlan-selector" />
             <div className="wlan-selector-entries">
               {filtered.length === 0 && (
                 <div className="wlan-selector-empty">{t('network.not_found')}</div>

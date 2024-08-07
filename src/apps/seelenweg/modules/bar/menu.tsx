@@ -4,7 +4,7 @@ import { Menu, MenuProps, Popover } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
 
-import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { store } from '../shared/store/infra';
 
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
@@ -38,7 +38,6 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
 }
 
 export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp): ItemType[] {
-  const state = store.getState();
   const isPinned = isPinnedApp(item);
 
   const pin = (side: AppsSides) => {
@@ -68,8 +67,7 @@ export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp):
           placement="rightBottom"
           arrow={false}
           content={
-            <div className="weg-context-menu-container">
-              <BackgroundByLayers prefix="menu" layers={state.themeLayers.weg.contextMenu.bg} />
+            <BackgroundByLayersV2 className="weg-context-menu-container" prefix="menu">
               <Menu
                 className="weg-context-menu"
                 items={[
@@ -90,7 +88,7 @@ export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp):
                   },
                 ]}
               />
-            </div>
+            </BackgroundByLayersV2>
           }
         >
           <div style={{ width: '100%', height: '100%', margin: '-10px', padding: '10px' }}>

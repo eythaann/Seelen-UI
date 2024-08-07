@@ -3,6 +3,7 @@ import { UserSettingsLoader } from '../../../../settings/modules/shared/store/st
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
+import { Theme } from '../../../../shared/schemas/Theme';
 import { updateHitbox } from '../../../events';
 import i18n from '../../../i18n';
 import { loadPinnedItems } from './storeApi';
@@ -58,10 +59,7 @@ export async function registerStoreEvents() {
     const settings = userSettings.jsonSettings.seelenweg;
     store.dispatch(RootActions.setSettings(settings));
     loadSettingsCSS(settings);
-    if (userSettings.bgLayers) {
-      loadThemeCSS(userSettings);
-      store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
-    }
+    loadThemeCSS(userSettings);
     updateHitbox();
   });
 
@@ -108,6 +106,11 @@ export async function registerStoreEvents() {
     setColorsAsCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
   });
+
+  await listenGlobal<Theme[]>('themes', async () => {
+    const userSettings = await new UserSettingsLoader().load();
+    loadThemeCSS(userSettings);
+  });
 }
 
 function loadSettingsCSS(settings: Seelenweg) {
@@ -151,11 +154,7 @@ export async function loadStore() {
   const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
-
-  if (userSettings.bgLayers) {
-    loadThemeCSS(userSettings);
-    store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
-  }
+  loadThemeCSS(userSettings);
 
   const apps = await loadPinnedItems();
   store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));

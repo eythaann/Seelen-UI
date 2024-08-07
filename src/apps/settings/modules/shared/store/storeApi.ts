@@ -1,14 +1,12 @@
-import { AppTemplate, defaultTheme, UserSettings } from '../../../../../shared.interfaces';
+import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../shared/schemas';
 import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
 import { Placeholder, PlaceholderSchema } from '../../../../shared/schemas/Placeholders';
 import { SettingsSchema } from '../../../../shared/schemas/Settings';
-import { Theme, ThemeSchema } from '../../../../shared/schemas/Theme';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { DirEntry } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
-import { cloneDeep } from 'lodash';
 
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
@@ -42,82 +40,8 @@ async function getEntries(folderName: string) {
   return entries;
 }
 
-const isObject = (obj: any) => obj && typeof obj === 'object' && !Array.isArray(obj);
-const mergeLayers = (obj1: any, obj2: any) => {
-  const result = { ...obj1 };
-
-  Object.keys(obj2).forEach((key) => {
-    if (isObject(obj2[key])) {
-      if (!obj1[key]) {
-        result[key] = obj2[key];
-      } else {
-        result[key] = mergeLayers(obj1[key], obj2[key]);
-      }
-    } else {
-      result[key] = obj1[key] !== undefined ? Math.max(obj1[key], obj2[key]) : obj2[key];
-    }
-  });
-
-  return result;
-};
-
-export const getBackgroundLayers = (selected: string[], themes: Theme[]) => {
-  return themes.reduce((acc, theme) => {
-    if (selected.includes(theme.info.filename)) {
-      return mergeLayers(acc, theme.layers);
-    }
-
-    return acc;
-  }, cloneDeep(defaultTheme.layers));
-};
-
 async function loadUserThemes(ref: UserSettings) {
-  async function themeFromDir(entry: Entry) {
-    let theme = yaml.load(await fs.readTextFile(await path.join(entry.path, 'theme.yml'))) as Theme;
-    theme = ThemeSchema.parse(theme) as Theme;
-
-    theme.info.filename = entry.name;
-
-    let wegPath = await path.join(entry.path, 'theme.weg.css');
-    if (await fs.exists(wegPath)) {
-      theme.styles.weg = await fs.readTextFile(wegPath);
-    }
-
-    let toolbarPath = await path.join(entry.path, 'theme.toolbar.css');
-    if (await fs.exists(toolbarPath)) {
-      theme.styles.toolbar = await fs.readTextFile(toolbarPath);
-    }
-
-    let wmPath = await path.join(entry.path, 'theme.wm.css');
-    if (await fs.exists(wmPath)) {
-      theme.styles.wm = await fs.readTextFile(wmPath);
-    }
-
-    return theme;
-  }
-
-  async function themeFromFile(entry: Entry) {
-    let theme = yaml.load(await fs.readTextFile(entry.path)) as Theme;
-    theme = ThemeSchema.parse(theme) as Theme;
-    theme.info.filename = entry.name;
-    return theme;
-  }
-
-  for (const entry of await getEntries('themes')) {
-    let theme: null | Theme = null;
-
-    if (entry.isDirectory) {
-      theme = await themeFromDir(entry);
-    } else if (entry.isFile && entry.name.endsWith('.yml')) {
-      theme = await themeFromFile(entry);
-    }
-
-    if (theme) {
-      ref.themes.push(theme);
-    }
-  }
-
-  ref.bgLayers = getBackgroundLayers([ref.jsonSettings.selectedTheme].flat(), ref.themes);
+  ref.themes = await invoke('state_get_themes');
 }
 
 async function loadUserLayouts(ref: UserSettings) {
@@ -221,7 +145,6 @@ export class UserSettingsLoader {
       jsonSettings: parseAsCamel(SettingsSchema, {}),
       yamlSettings: [],
       themes: [],
-      bgLayers: defaultTheme.layers,
       layouts: [],
       placeholders: [],
       env: await invoke('get_user_envs'),
@@ -282,10 +205,7 @@ export async function loadAppsTemplates() {
 
 export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
   const json_route = await resolveDataPath('settings.json');
-  await fs.writeTextFile(
-    json_route,
-    JSON.stringify(VariableConvention.fromCamelToSnake(settings)),
-  );
+  await fs.writeTextFile(json_route, JSON.stringify(VariableConvention.fromCamelToSnake(settings)));
 }
 
 export async function saveUserSettings(settings: UserSettings) {

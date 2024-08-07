@@ -8,9 +8,9 @@ import { WorkspacesModule } from '../Workspaces';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
 import { DeviceModule } from '../Device/infra';
 import { Item } from '../item/infra';
@@ -20,7 +20,7 @@ import { NotificationsModule } from '../Notifications/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
 
-import { RootActions, Selectors } from '../shared/store/app';
+import { RootActions } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
 
 const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
@@ -50,8 +50,6 @@ function componentByModule(module: ToolbarModule) {
 }
 
 export function ToolBar({ structure }: Props) {
-  const layers = useSelector(Selectors.themeLayers);
-
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
 
@@ -93,7 +91,7 @@ export function ToolBar({ structure }: Props) {
       axis="x"
       as="div"
     >
-      <BackgroundByLayers prefix="ft-bar" layers={layers.toolbar.bg} />
+      <BackgroundByLayersV2 prefix="ft-bar" />
       <div className="ft-bar-left">
         {structure.left.map(componentByModule)}
         <Reorder.Item as="div" value={DividerStart} drag={false} style={{ flex: 1 }} />

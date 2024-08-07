@@ -36,6 +36,7 @@ define_app_errors!(
     TryFromInt(std::num::TryFromIntError);
     Image(image::ImageError);
     Battery(battery::Error);
+    FileNotify(notify::Error);
 );
 
 impl std::fmt::Display for AppError {

@@ -1,12 +1,9 @@
 import { Dropdown, Menu } from 'antd';
 import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { PropsWithChildren, useState } from 'react';
-import { useSelector } from 'react-redux';
 
 import { useAppBlur } from '../modules/shared/hooks/infra';
-import { BackgroundByLayersV2 } from './BackgrounByLayers/infra';
-
-import { Selectors } from '../modules/shared/store/app';
+import { BackgroundByLayersV2 } from './BackgroundByLayers/infra';
 
 interface Props extends PropsWithChildren {
   items: ItemType<MenuItemType>[];
@@ -14,8 +11,6 @@ interface Props extends PropsWithChildren {
 
 export function WithContextMenu({ children, items }: Props) {
   const [openContextMenu, setOpenContextMenu] = useState(false);
-
-  const menuBgLayers = useSelector(Selectors.themeLayers.weg.contextMenu.bg);
 
   useAppBlur(() => {
     setOpenContextMenu(false);
@@ -30,8 +25,7 @@ export function WithContextMenu({ children, items }: Props) {
       dropdownRender={() => (
         <BackgroundByLayersV2
           className="weg-context-menu-container"
-          bgPrefix="menu"
-          amount={menuBgLayers}
+          prefix="menu"
         >
           <Menu
             className="weg-context-menu"

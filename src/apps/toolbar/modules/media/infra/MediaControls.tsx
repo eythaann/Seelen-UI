@@ -7,7 +7,7 @@ import React, { PropsWithChildren, useCallback, useEffect, useState } from 'reac
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 import { useAppBlur } from '../../shared/hooks/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
@@ -191,7 +191,7 @@ function MediaControls() {
   const sessions = useSelector(Selectors.mediaSessions);
 
   return (
-    <BackgroundByLayersV2 className="media-control" amount={1}>
+    <BackgroundByLayersV2 className="media-control">
       <span className="media-control-label">{t('media.master_volume')}</span>
       {!!defaultOutput && (
         <VolumeControl

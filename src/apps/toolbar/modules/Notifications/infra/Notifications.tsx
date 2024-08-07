@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
 

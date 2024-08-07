@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra';
 import { VolumeControl } from '../media/infra/MediaControls';
 import { useAppBlur } from '../shared/hooks/infra';
@@ -41,7 +41,6 @@ export function SettingsModule({ module }: Props) {
     Selectors.mediaOutputs(state).find((d) => d.is_default_multimedia),
   );
 
-  const themeLayers = useSelector(Selectors.themeLayers.toolbar);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -69,7 +68,7 @@ export function SettingsModule({ module }: Props) {
       arrow={false}
       content={
         <div className="fast-settings">
-          <BackgroundByLayers prefix="fast-settings" layers={themeLayers.fastSettings.bg} />
+          <BackgroundByLayersV2 prefix="fast-settings" />
           <div className="fast-settings-title">
             <span>{t('settings.title')}</span>
             <Tooltip

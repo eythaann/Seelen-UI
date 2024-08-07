@@ -11,7 +11,8 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
             Target::new(TargetKind::Webview),
         ])
         .level_for("tao", log::LevelFilter::Off)
-        .level_for("os_info", log::LevelFilter::Off);
+        .level_for("os_info", log::LevelFilter::Off)
+        .level_for("notify", log::LevelFilter::Off);
 
     if tauri::is_dev() {
         log_plugin_builder = log_plugin_builder.format(move |out, message, record| {

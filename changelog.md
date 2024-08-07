@@ -12,6 +12,7 @@
 - uwp icons now are loaded from background.
 - improvements on themes selector.
 - improvements on system color detection and expose more system colors based in accent gamma.
+- improve theme creation experience by adding live reload feature.
 
 ### refactor
 - deprecate `onClick` and add new `onClickV2` on toolbar modules.

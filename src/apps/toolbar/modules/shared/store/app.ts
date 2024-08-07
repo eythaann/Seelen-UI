@@ -1,4 +1,3 @@
-import { defaultTheme } from '../../../../../shared.interfaces';
 import { parseAsCamel } from '../../../../shared/schemas';
 import { FancyToolbarSchema } from '../../../../shared/schemas/FancyToolbar';
 import { Placeholder, ToolbarModule } from '../../../../shared/schemas/Placeholders';
@@ -10,7 +9,6 @@ import { RootState } from './domain';
 const initialState: RootState = {
   version: 0,
   focused: null,
-  themeLayers: defaultTheme.layers,
   placeholder: null,
   settings: parseAsCamel(FancyToolbarSchema, {}),
   env: {},

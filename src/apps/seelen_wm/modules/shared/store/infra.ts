@@ -21,10 +21,7 @@ export async function loadStore() {
   store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
-  if (userSettings.bgLayers) {
-    loadThemeCSS(userSettings);
-    store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
-  }
+  loadThemeCSS(userSettings);
 }
 
 export async function registerStoreEvents() {
@@ -35,10 +32,7 @@ export async function registerStoreEvents() {
     loadSettingsCSS(settings);
     store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
     store.dispatch(RootActions.setSettings(settings));
-    if (userSettings.bgLayers) {
-      loadThemeCSS(userSettings);
-      store.dispatch(RootActions.setThemeLayers(userSettings.bgLayers));
-    }
+    loadThemeCSS(userSettings);
   });
 
   await listenGlobal<AddWindowPayload>('add-window', (event) => {
@@ -92,6 +86,11 @@ export async function registerStoreEvents() {
   await listenGlobal<UIColors>('colors', (event) => {
     setColorsAsCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
+  });
+
+  await listenGlobal('themes', async () => {
+    const userSettings = await new UserSettingsLoader().load();
+    loadThemeCSS(userSettings);
   });
 }
 

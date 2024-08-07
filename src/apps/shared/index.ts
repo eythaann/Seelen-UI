@@ -44,7 +44,7 @@ export function setColorsAsCssVariables(colors: anyObject) {
   }
 }
 
-export function loadThemeCSS(config: UserSettings) {
+export function loadThemeCSS(config: Pick<UserSettings, 'themes' | 'jsonSettings'>) {
   let selected = config.jsonSettings.selectedTheme;
   let themes: Theme[] = config.themes
     .filter((theme) => selected.includes(theme.info.filename))

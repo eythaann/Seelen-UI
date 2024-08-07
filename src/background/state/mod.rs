@@ -1,3 +1,7 @@
+mod domain;
+pub mod infrastructure;
+mod themes;
+
 use std::{
     collections::HashMap,
     path::PathBuf,

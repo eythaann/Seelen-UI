@@ -8,7 +8,7 @@ import { memo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayers } from '../../../components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
 
@@ -23,7 +23,6 @@ const startMenuExes = ['SearchHost.exe', 'StartMenuExperienceHost.exe'];
 export const StartMenu = memo(({ item }: Props) => {
   const startMenuOpenRef = useRef(false);
 
-  const themeLayers = useSelector(Selectors.themeLayers);
   const size = useSelector(Selectors.settings.size);
 
   const isStartMenuOpen = useSelector((state: RootState) =>
@@ -57,7 +56,7 @@ export const StartMenu = memo(({ item }: Props) => {
           }}
           onContextMenu={(e) => e.stopPropagation()}
         >
-          <BackgroundByLayers prefix="item" layers={themeLayers.weg.items.bg} />
+          <BackgroundByLayersV2 prefix="item" />
           <div className="weg-item-icon">
             <div className="weg-item-icon-start" />
           </div>

@@ -1,11 +1,7 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { setColorsAsCssVariables } from '../../../../shared';
-import {
-  getBackgroundLayers,
-  loadAppsTemplates,
-  saveUserSettings,
-  UserSettingsLoader,
-} from './storeApi';
+import { Theme } from '../../../../shared/schemas/Theme';
+import { loadAppsTemplates, saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
@@ -36,6 +32,10 @@ export type store = {
 };
 
 export async function registerStoreEvents() {
+  await listenGlobal<Theme[]>('themes', (event) => {
+    store.dispatch(RootActions.setAvailableThemes(event.payload));
+  });
+
   await listenGlobal<UIColors>('colors', (event) => {
     setColorsAsCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
@@ -95,10 +95,6 @@ export const SaveStore = async () => {
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
       themes: currentState.availableThemes,
-      bgLayers: getBackgroundLayers(
-        [currentState.selectedTheme].flat(),
-        currentState.availableThemes,
-      ),
       layouts: currentState.availableLayouts,
       placeholders: currentState.availablePlaceholders,
       env: await invoke('get_user_envs'),

@@ -5,7 +5,7 @@ import { Popover } from 'antd';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayers } from '../../../seelenweg/components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra';
 import { useAppBlur } from '../shared/hooks/infra';
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
@@ -19,7 +19,6 @@ interface Props {
 export function TrayModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
 
-  const themeLayers = useSelector(Selectors.themeLayers.toolbar);
   const trayList = useSelector(Selectors.systemTray);
 
   useEffect(() => {
@@ -45,8 +44,7 @@ export function TrayModule({ module }: Props) {
       }}
       arrow={false}
       content={
-        <div className="tray">
-          <BackgroundByLayers prefix="tray" layers={themeLayers.systemTray.bg} />
+        <BackgroundByLayersV2 className="tray" prefix="tray">
           <ul className="tray-list">
             {trayList.map((tray, idx) => (
               <li
@@ -59,18 +57,18 @@ export function TrayModule({ module }: Props) {
                 onContextMenu={() => invoke('on_context_menu_tray_icon', { idx })}
               >
                 <div className="tray-item-icon">
-                  <img src={convertFileSrc(tray.icon ? tray.icon : LAZY_CONSTANTS.MISSING_ICON_PATH)} />
+                  <img
+                    src={convertFileSrc(tray.icon ? tray.icon : LAZY_CONSTANTS.MISSING_ICON_PATH)}
+                  />
                 </div>
                 <div className="tray-item-label">{tray.label}</div>
               </li>
             ))}
           </ul>
-        </div>
+        </BackgroundByLayersV2>
       }
     >
-      <Item
-        module={module}
-      />
+      <Item module={module} />
     </Popover>
   );
 }

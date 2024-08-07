@@ -10,7 +10,7 @@ import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayers } from '../../../components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 import { useAppBlur } from '../../shared/hooks/infra';
 import { updatePreviews } from '../../shared/utils/infra';
 
@@ -23,7 +23,6 @@ interface Props {
 }
 
 export const UserApplication = memo(({ item }: Props) => {
-  const themeLayers = useSelector(Selectors.themeLayers);
   const size = useSelector(Selectors.settings.size);
   const isFocused = useSelector((state: RootState) => item.opens.includes(state.focusedHandle));
 
@@ -58,15 +57,15 @@ export const UserApplication = memo(({ item }: Props) => {
           trigger="hover"
           arrow={false}
           content={
-            <div
+            <BackgroundByLayersV2
               className="weg-item-preview-container"
               onMouseMoveCapture={(e) => e.stopPropagation()}
+              prefix="preview"
             >
-              <BackgroundByLayers prefix="preview" layers={themeLayers.weg.preview.bg} />
               {item.opens.map((hwnd) => (
                 <UserApplicationPreview key={hwnd} hwnd={hwnd} />
               ))}
-            </div>
+            </BackgroundByLayersV2>
           }
         >
           <motion.div
@@ -80,7 +79,7 @@ export const UserApplication = memo(({ item }: Props) => {
             }}
             onContextMenu={(e) => e.stopPropagation()}
           >
-            <BackgroundByLayers prefix="item" layers={themeLayers.weg.items.bg} />
+            <BackgroundByLayersV2 prefix="item" />
             <img className="weg-item-icon" src={item.icon} draggable={false} />
             <div
               className={cx('weg-item-open-sign', {

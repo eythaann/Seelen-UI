@@ -1,4 +1,4 @@
-import { defaultLayout, defaultTheme } from '../../../../../shared.interfaces';
+import { defaultLayout } from '../../../../../shared.interfaces';
 import { toPhysicalPixels } from '../../../../shared';
 import { parseAsCamel } from '../../../../shared/schemas';
 import { WindowManagerSchema } from '../../../../shared/schemas/WindowManager';
@@ -23,7 +23,6 @@ const initialState: RootState = {
   lastManagedActivated: null,
   reservation: null,
   settings: parseAsCamel(WindowManagerSchema, {}),
-  themeLayers: defaultTheme.layers,
   colors: {
     background: '#ffffff',
     foreground: '#000000',
@@ -55,7 +54,10 @@ export const RootSlice = createSlice({
       if (!state.workspaces[desktop_id]) {
         state.workspaces[desktop_id] = {
           name: `Workspace ${desktop_id}`,
-          layout: cloneDeep(state.availableLayouts.find((l) => l.info.filename === state.settings.defaultLayout) || defaultLayout),
+          layout: cloneDeep(
+            state.availableLayouts.find((l) => l.info.filename === state.settings.defaultLayout) ||
+              defaultLayout,
+          ),
         };
       }
 
@@ -108,7 +110,9 @@ export const RootSlice = createSlice({
       } else {
         invoke('bounce_handle', { hwnd });
         if (!workspace.layout.noFallbackBehavior) {
-          console.error('Layout can\'t handle the window, FallbackNode and noFallbackBehavior are not defined in layout');
+          console.error(
+            'Layout can\'t handle the window, FallbackNode and noFallbackBehavior are not defined in layout',
+          );
         } else if (workspace.layout.noFallbackBehavior === 'Float') {
           setFloatingSize();
         }
@@ -146,7 +150,10 @@ export const RootSlice = createSlice({
       if (!state.workspaces[action.payload]) {
         state.workspaces[action.payload] = {
           name: `Workspace ${action.payload}`,
-          layout: cloneDeep(state.availableLayouts.find((l) => l.info.filename === state.settings.defaultLayout) || defaultLayout),
+          layout: cloneDeep(
+            state.availableLayouts.find((l) => l.info.filename === state.settings.defaultLayout) ||
+              defaultLayout,
+          ),
         };
       }
     },

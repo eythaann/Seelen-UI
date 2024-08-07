@@ -12,6 +12,7 @@ use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_weg::icon_extractor::extract_and_save_icon;
 use crate::seelen_wm::handler::*;
+use crate::state::infrastructure::*;
 use crate::system::brightness::*;
 use crate::utils::{is_windows_10, is_windows_11};
 use crate::{apps_config::*, log_error, trace_lock};
@@ -179,6 +180,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,
+        state_get_themes,
         // Media
         media_prev,
         media_toggle_play_pause,

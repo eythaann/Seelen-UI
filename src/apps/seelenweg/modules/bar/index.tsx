@@ -9,7 +9,7 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { BackgroundByLayers } from '../../components/BackgrounByLayers/infra';
+import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { MediaSession } from '../item/infra/MediaSession';
 import { StartMenu } from '../item/infra/StartMenu';
 import { UserApplication } from '../item/infra/UserApplication';
@@ -45,7 +45,6 @@ function shouldBeHidden(hideMode: SeelenWegHideMode, isActive: boolean, isOverla
 }
 
 export function SeelenWeg() {
-  const bgLayers = useSelector(Selectors.themeLayers);
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
 
@@ -118,9 +117,7 @@ export function SeelenWeg() {
     settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM;
 
   return (
-    <WithContextMenu
-      items={getSeelenWegMenu(t)}
-    >
+    <WithContextMenu items={getSeelenWegMenu(t)}>
       <Reorder.Group
         as="div"
         values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
@@ -133,7 +130,7 @@ export function SeelenWeg() {
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
         })}
       >
-        <BackgroundByLayers prefix="taskbar" layers={bgLayers.weg.bg} />
+        <BackgroundByLayersV2 prefix="taskbar" />
         {[
           ...pinnedOnLeft.map(ItemByType),
           <Reorder.Item

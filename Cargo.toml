@@ -60,6 +60,7 @@ winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 winreg = "0.52.0"
 win-screenshot = "4.0.8"
 windows-core = "=0.57.0"                                                   # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+notify = "6.1.1"
 
 [dependencies.windows]
 version = "=0.57.0"
