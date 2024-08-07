@@ -46,3 +46,7 @@ pub struct Placeholder {
     pub center: Vec<serde_yaml::Value>,
     pub right: Vec<serde_yaml::Value>,
 }
+
+// ============== WEG ==============
+
+pub type WegItems = serde_yaml::Value;

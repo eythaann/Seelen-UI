@@ -14,6 +14,7 @@
 - improvements on system color detection and expose more system colors based in accent gamma.
 - improve theme creation experience by adding live reload feature.
 - improve toolbar layouts (placeholders) creation experience by adding live reload feature.
+- improve weg items editor experience by adding live reload feature.
 
 ### refactor
 - deprecate `onClick` and add new `onClickV2` on toolbar modules.

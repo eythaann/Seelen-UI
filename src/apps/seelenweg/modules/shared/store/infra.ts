@@ -6,10 +6,11 @@ import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegIte
 import { Theme } from '../../../../shared/schemas/Theme';
 import { updateHitbox } from '../../../events';
 import i18n from '../../../i18n';
-import { loadPinnedItems } from './storeApi';
+import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { debounce } from 'lodash';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -111,6 +112,21 @@ export async function registerStoreEvents() {
     const userSettings = await new UserSettingsLoader().load();
     loadThemeCSS(userSettings);
   });
+
+  await listenGlobal<unknown>(
+    'weg-items',
+    debounce(async () => {
+      if (IsSavingPinnedItems.current) {
+        IsSavingPinnedItems.current = false;
+        return;
+      }
+
+      const apps = await loadPinnedItems();
+      store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
+      store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
+      store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
+    }, 100),
+  );
 }
 
 function loadSettingsCSS(settings: Seelenweg) {

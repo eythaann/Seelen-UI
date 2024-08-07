@@ -40,7 +40,7 @@ export const SwSavedItemSchema = z.union([
   StartMenuItemSchema,
 ]);
 
-export type SwSaveFile = z.infer<typeof SwSaveFileSchema>;
+export interface SwSaveFile extends z.infer<typeof SwSaveFileSchema> {}
 export const SwSaveFileSchema = z.object({
   left: z.array(SwSavedItemSchema).default([
     {

@@ -5,13 +5,18 @@ import {
   SwSaveFileSchema,
 } from '../../../../shared/schemas/SeelenWegItems';
 import { path } from '@tauri-apps/api';
-import { exists, readTextFile, writeTextFile } from '@tauri-apps/plugin-fs';
+import { invoke } from '@tauri-apps/api/core';
+import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { debounce } from 'lodash';
 
 import { store } from './infra';
 
 import { RootState, SwItem } from './domain';
+
+export const IsSavingPinnedItems = {
+  current: false,
+};
 
 export const savePinnedItems = debounce(
   async (state: RootState = store.getState()): Promise<void> => {
@@ -40,17 +45,13 @@ export const savePinnedItems = debounce(
     };
 
     const yaml_route = await path.join(await path.appDataDir(), 'seelenweg_items.yaml');
+    IsSavingPinnedItems.current = true;
     await writeTextFile(yaml_route, yaml.dump(data));
   },
   1000,
 );
 
 export const loadPinnedItems = async (): Promise<SwSaveFile> => {
-  let yaml_route = await path.join(await path.appDataDir(), 'seelenweg_items.yaml');
-
-  if (!(await exists(yaml_route))) {
-    return SwSaveFileSchema.parse({});
-  }
-
-  return SwSaveFileSchema.parse(yaml.load(await readTextFile(yaml_route)));
+  let items = await invoke<json>('state_get_weg_items');
+  return SwSaveFileSchema.parse(items || {});
 };

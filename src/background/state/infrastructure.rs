@@ -1,7 +1,8 @@
 use itertools::Itertools;
 
 use super::{
-    domain::{Placeholder, Theme},
+    application::FULL_STATE,
+    domain::{Placeholder, Theme, WegItems},
     placeholders::PLACEHOLDERS_MANAGER,
     themes::THEME_MANAGER,
 };
@@ -24,4 +25,9 @@ pub fn state_get_placeholders() -> Vec<Placeholder> {
         .values()
         .cloned()
         .collect_vec()
+}
+
+#[tauri::command]
+pub fn state_get_weg_items() -> WegItems {
+    FULL_STATE.lock().weg_items().clone()
 }
