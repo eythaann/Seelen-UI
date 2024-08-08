@@ -23,11 +23,11 @@ use windows::Win32::{
 use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
-    apps_config::{AppExtraFlag, SETTINGS_BY_APP},
     error_handler::Result,
     log_error,
     seelen::{Seelen, SEELEN},
     seelen_weg::{SeelenWeg, TASKBAR_CLASS},
+    state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
     utils::{constants::IGNORE_FOCUS, is_windows_11},
     windows_api::WindowsApi,
@@ -188,7 +188,7 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
 
     if let DesktopEvent::WindowChanged(hwnd) = event {
         if WindowsApi::is_window(hwnd) {
-            if let Some(config) = trace_lock!(SETTINGS_BY_APP).get_by_window(hwnd) {
+            if let Some(config) = trace_lock!(FULL_STATE).get_app_config_by_window(hwnd) {
                 if config.options_contains(AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)?
                 {
                     winvd::pin_window(hwnd)?;

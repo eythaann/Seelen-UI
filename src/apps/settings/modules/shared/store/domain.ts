@@ -1,4 +1,3 @@
-import { AppTemplate } from '../../../../../shared.interfaces';
 import { Layout } from '../../../../shared/schemas/Layout';
 import { Placeholder } from '../../../../shared/schemas/Placeholders';
 import { ISettings } from '../../../../shared/schemas/Settings';
@@ -25,7 +24,6 @@ export interface RootState extends ISettings {
   route: Route;
   toBeSaved: boolean;
   appsConfigurations: AppConfiguration[];
-  appsTemplates: (Omit<AppTemplate, 'apps'> & { apps: AppConfiguration[] })[];
   availableThemes: Theme[];
   availableLayouts: Layout[];
   availablePlaceholders: Placeholder[];

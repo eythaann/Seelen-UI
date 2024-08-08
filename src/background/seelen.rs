@@ -11,7 +11,6 @@ use windows::Win32::{
 };
 
 use crate::{
-    apps_config::SETTINGS_BY_APP,
     error_handler::Result,
     hook::register_win_hook,
     log_error,
@@ -96,14 +95,6 @@ impl Seelen {
 
         let data_path = app.path().app_data_dir()?;
         self.state = State::new(&data_path.join("settings.json")).unwrap_or_default();
-
-        let mut settings_by_app = trace_lock!(SETTINGS_BY_APP);
-        settings_by_app.set_paths(
-            data_path.join("applications.yml"),
-            app.path()
-                .resolve("static\\apps_templates", BaseDirectory::Resource)?,
-        );
-        log_error!(settings_by_app.load());
 
         if self.state.is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));

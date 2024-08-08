@@ -3,6 +3,7 @@ import { EditAppModal } from './EditModal';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import { TFunction } from 'i18next';
+import { cloneDeep } from 'lodash';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -25,7 +26,7 @@ const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index
       value={value}
       disabled
       className={cx({
-        [cs.readonly!]: record.isTemplate,
+        [cs.readonly!]: record.isBundled,
       })}
     />
   );
@@ -109,10 +110,10 @@ function Actions({ record }: { record: AppConfigurationExtended; index: number }
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
   const onSave = (app: AppConfigurationExtended) => {
-    if (record.isTemplate) {
-      // eslint-disable-next-line @ts/no-unused-vars
-      const { isTemplate, templateName, templateDescription, ...cleanApp } = app;
-      dispatch(AppsConfigActions.push([cleanApp]));
+    if (record.isBundled) {
+      let newApp = cloneDeep(app);
+      newApp.isBundled = false;
+      dispatch(AppsConfigActions.push([newApp]));
     } else {
       dispatch(AppsConfigActions.replace({ idx: record.key, app }));
     }
@@ -124,14 +125,14 @@ function Actions({ record }: { record: AppConfigurationExtended; index: number }
       {isModalOpen && (
         <EditAppModal
           open
-          idx={record.isTemplate ? undefined : record.key}
+          idx={record.isBundled ? undefined : record.key}
           onSave={onSave}
           onCancel={onCancel}
-          readonlyApp={record.isTemplate ? record : undefined}
+          readonlyApp={record.isBundled ? record : undefined}
         />
       )}
-      <Button type={record.isTemplate ? 'default' : 'primary'} onClick={showModal}>
-        {record.isTemplate ? '👁️' : '✏️'}
+      <Button type={record.isBundled ? 'default' : 'primary'} onClick={showModal}>
+        {record.isBundled ? '👁️' : '✏️'}
       </Button>
     </div>
   );
@@ -145,22 +146,9 @@ export function AppsConfiguration() {
   const [data, setData] = useState<AppConfigurationExtended[]>([]);
 
   const apps = useAppSelector(RootSelectors.appsConfigurations);
-  const templates = useAppSelector(RootSelectors.appsTemplates);
 
   useEffect(() => {
     const data: AppConfigurationExtended[] = [];
-
-    templates.forEach((template) => {
-      template.apps.forEach((app, i) =>
-        data.unshift({
-          ...app,
-          key: `${template.name}-${i}` as unknown as number,
-          isTemplate: true,
-          templateName: template.name,
-          templateDescription: template.description,
-        }),
-      );
-    });
 
     apps.forEach((app, index) => data.unshift({ ...app, key: index }));
 
@@ -246,7 +234,7 @@ export function AppsConfiguration() {
           },
           getCheckboxProps(record) {
             return {
-              disabled: record.isTemplate,
+              disabled: record.isBundled,
             };
           },
         }}

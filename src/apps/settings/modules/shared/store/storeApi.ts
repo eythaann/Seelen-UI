@@ -1,4 +1,4 @@
-import { AppTemplate, UserSettings } from '../../../../../shared.interfaces';
+import { UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../shared/schemas';
 import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
 import { ParsePlaceholder } from '../../../../shared/schemas/Placeholders';
@@ -10,8 +10,6 @@ import yaml from 'js-yaml';
 
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
-
-import { AppsTemplates } from '../../../../shared/appsTemplates';
 
 interface Entry extends DirEntry {
   path: string;
@@ -145,11 +143,7 @@ export class UserSettingsLoader {
     }
 
     if (this._withUserApps) {
-      const yaml_route = await resolveDataPath('applications.yml');
-      if (await fs.exists(yaml_route)) {
-        const processed = yaml.load(await fs.readTextFile(yaml_route));
-        userSettings.yamlSettings = Array.isArray(processed) ? processed : [];
-      }
+      userSettings.yamlSettings = await invoke('state_get_specific_apps_configurations');
     }
 
     if (this._withThemes) {
@@ -166,26 +160,6 @@ export class UserSettingsLoader {
 
     return userSettings;
   }
-}
-
-export async function loadAppsTemplates() {
-  const result: AppTemplate[] = [];
-
-  for (const AppTemplateDeclaration of AppsTemplates) {
-    const processed = yaml.load(
-      await fs.readTextFile(
-        await path.resolveResource(`static/apps_templates/${AppTemplateDeclaration.path}`),
-      ),
-    );
-    const apps = Array.isArray(processed) ? processed : [];
-    result.push({
-      name: AppTemplateDeclaration.name,
-      description: AppTemplateDeclaration.description,
-      apps,
-    });
-  }
-
-  return result;
 }
 
 export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {

@@ -1,8 +1,6 @@
-mod application;
-mod domain;
+pub mod application;
+pub mod domain;
 pub mod infrastructure;
-mod placeholders;
-mod themes;
 
 use std::{
     collections::HashMap,

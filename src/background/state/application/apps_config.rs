@@ -1,75 +1,20 @@
-use std::{
-    collections::{HashMap, VecDeque},
-    path::PathBuf,
-    sync::Arc,
-};
-
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use regex::Regex;
-use serde::{Deserialize, Serialize};
+use std::{collections::HashMap, sync::Arc};
 use windows::Win32::Foundation::HWND;
 
-use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
+use crate::{
+    state::domain::{AppConfig, AppExtraFlag, AppIdentifier, AppIdentifierType, MatchingStrategy},
+    trace_lock,
+    windows_api::WindowsApi,
+};
+
+use super::FullState;
 
 lazy_static! {
     pub static ref REGEX_IDENTIFIERS: Arc<Mutex<HashMap<String, Regex>>> =
         Arc::new(Mutex::new(HashMap::new()));
-    pub static ref SETTINGS_BY_APP: Arc<Mutex<AppsConfigurations>> =
-        Arc::new(Mutex::new(AppsConfigurations::default()));
-}
-
-#[derive(Clone, Debug, Eq, PartialEq, Deserialize)]
-#[serde(rename_all(deserialize = "snake_case"))]
-pub enum AppExtraFlag {
-    Float,
-    Force,
-    Unmanage,
-    Pinned,
-    // only for backwards compatibility
-    ObjectNameChange,
-    Layered,
-    BorderOverflow,
-    TrayAndMultiWindow,
-}
-
-#[derive(Clone, Debug, Deserialize)]
-pub enum AppIdentifierType {
-    #[serde(alias = "exe")]
-    Exe,
-    #[serde(alias = "class")]
-    Class,
-    #[serde(alias = "title")]
-    Title,
-    #[serde(alias = "path")]
-    Path,
-}
-
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
-pub enum MatchingStrategy {
-    #[serde(alias = "equals")]
-    Equals,
-    #[serde(alias = "startsWith")]
-    StartsWith,
-    #[serde(alias = "endsWith")]
-    EndsWith,
-    #[serde(alias = "contains")]
-    Contains,
-    #[serde(alias = "regex")]
-    Regex,
-    // only for backwards compatibility
-    #[serde(alias = "legacy")]
-    Legacy,
-}
-
-#[derive(Clone, Debug, Deserialize)]
-pub struct AppIdentifier {
-    id: String,
-    kind: AppIdentifierType,
-    matching_strategy: MatchingStrategy,
-    negation: Option<bool>,
-    and: Option<Vec<AppIdentifier>>,
-    or: Option<Vec<AppIdentifier>>,
 }
 
 impl AppIdentifier {
@@ -120,36 +65,20 @@ impl AppIdentifier {
             },
         };
 
-        if self.negation == Some(true) {
+        if self.negation {
             self_result = !self_result;
         }
 
         (self_result && {
-            match self.and.as_ref() {
-                Some(and) => and.iter().all(|and| and.validate(title, class, exe, path)),
-                None => true,
-            }
+            self.and
+                .iter()
+                .all(|and| and.validate(title, class, exe, path))
         }) || {
-            match self.or.as_ref() {
-                Some(or) => or.iter().any(|or| or.validate(title, class, exe, path)),
-                None => false,
-            }
+            self.or
+                .iter()
+                .any(|or| or.validate(title, class, exe, path))
         }
     }
-}
-
-#[derive(Clone, Debug, Deserialize)]
-pub struct AppConfig {
-    #[allow(dead_code)]
-    name: String,
-    #[allow(dead_code)]
-    category: Option<String>,
-    #[allow(dead_code)]
-    bound_monitor_idx: Option<usize>,
-    #[allow(dead_code)]
-    bound_workspace_name: Option<String>,
-    identifier: AppIdentifier,
-    options: Option<Vec<AppExtraFlag>>,
 }
 
 impl AppConfig {
@@ -166,62 +95,12 @@ impl AppConfig {
     }
 
     pub fn options_contains(&self, option: AppExtraFlag) -> bool {
-        self.options
-            .as_ref()
-            .map_or(false, |options| options.contains(&option))
+        self.options.contains(&option)
     }
 }
 
-#[derive(Clone, Debug, Deserialize)]
-pub struct AppsConfigurations {
-    apps: VecDeque<AppConfig>,
-    cache: HashMap<isize, Option<usize>>,
-    user_path: PathBuf,
-    apps_template_path: PathBuf,
-}
-
-impl Default for AppsConfigurations {
-    fn default() -> Self {
-        Self {
-            apps: VecDeque::new(),
-            cache: HashMap::new(),
-            user_path: PathBuf::new(),
-            apps_template_path: PathBuf::new(),
-        }
-    }
-}
-
-impl AppsConfigurations {
-    pub fn set_paths(&mut self, user_path: PathBuf, apps_template_path: PathBuf) {
-        self.user_path = user_path;
-        self.apps_template_path = apps_template_path;
-    }
-
-    pub fn load(&mut self) -> Result<()> {
-        log::trace!("Loading apps configurations from {:?}", self.user_path);
-        trace_lock!(REGEX_IDENTIFIERS).clear();
-        self.cache.clear();
-        self.apps.clear();
-
-        if self.user_path.exists() {
-            let content = std::fs::read_to_string(&self.user_path)?;
-            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
-            self.apps.extend(apps);
-        }
-
-        for entry in self.apps_template_path.read_dir()?.flatten() {
-            let content = std::fs::read_to_string(entry.path())?;
-            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
-            self.apps.extend(apps);
-        }
-
-        self.apps
-            .iter()
-            .for_each(|app| app.identifier.cache_regex());
-        Ok(())
-    }
-
-    pub fn get_by_window(&mut self, hwnd: HWND) -> Option<&AppConfig> {
+impl FullState {
+    pub fn get_app_config_by_window(&mut self, hwnd: HWND) -> Option<&AppConfig> {
         // Can no cache apps that changes titles
         /* match self.cache.entry(hwnd.0) {
             Entry::Occupied(entry) => entry.get().and_then(|index| self.apps.get(index)),
@@ -243,7 +122,7 @@ impl AppsConfigurations {
             WindowsApi::exe(hwnd),
             WindowsApi::get_class(hwnd),
         ) {
-            for app in self.apps.iter() {
+            for app in self.settings_by_app.iter() {
                 if app.identifier.validate(&title, &class, &exe, &path) {
                     return Option::from(app);
                 }
@@ -252,9 +131,4 @@ impl AppsConfigurations {
 
         None
     }
-}
-
-#[tauri::command]
-pub fn reload_apps_configurations() {
-    std::thread::spawn(|| -> Result<()> { trace_lock!(SETTINGS_BY_APP).load() });
 }

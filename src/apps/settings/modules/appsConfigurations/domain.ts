@@ -30,13 +30,11 @@ export interface AppConfiguration extends AppConfigurationsOptions {
   workspace: string | null;
   monitor: number | null;
   identifier: IdWithIdentifier;
+  isBundled: boolean;
 }
 
 export interface AppConfigurationExtended extends AppConfiguration {
   key: number;
-  isTemplate?: boolean;
-  templateName?: string;
-  templateDescription?: string;
 }
 
 export class AppConfiguration {
@@ -54,6 +52,7 @@ export class AppConfiguration {
         and: [],
         or: [],
       },
+      isBundled: false,
       [ApplicationOptions.Float]: false,
       [ApplicationOptions.Unmanage]: false,
       [ApplicationOptions.Pinned]: false,

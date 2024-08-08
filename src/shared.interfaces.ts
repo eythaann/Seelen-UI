@@ -16,12 +16,6 @@ export interface UserSettings {
   env: Record<string, string>;
 }
 
-export interface AppTemplate {
-  name: string;
-  description: string;
-  apps: anyObject[];
-}
-
 const _defaultLayout = LayoutSchema.parse({});
 export const defaultLayout: Layout = {
   ..._defaultLayout,

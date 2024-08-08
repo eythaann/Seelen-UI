@@ -15,7 +15,7 @@ use crate::seelen_wm::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
 use crate::utils::{is_windows_10, is_windows_11};
-use crate::{apps_config::*, log_error, trace_lock};
+use crate::{log_error, trace_lock};
 
 use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
@@ -172,7 +172,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_win_version,
         get_user_envs,
         show_app_settings,
-        reload_apps_configurations,
         switch_workspace,
         ensure_hitboxes_zorder,
         send_keys,
@@ -183,6 +182,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         state_get_themes,
         state_get_placeholders,
         state_get_weg_items,
+        state_get_specific_apps_configurations,
         // Media
         media_prev,
         media_toggle_play_pause,

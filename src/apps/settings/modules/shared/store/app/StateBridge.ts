@@ -11,10 +11,6 @@ export const YamlToState_Apps = (yaml: anyObject[]): AppConfiguration[] => {
   const apps: AppConfiguration[] = [];
 
   yaml.forEach((ymlApp: anyObject) => {
-    if (ymlApp.template) {
-      return;
-    }
-
     // filter empty ghost apps used only for add float_identifiers in komorebi cli
     if (ymlApp.options || !ymlApp.float_identifiers) {
       apps.push({
@@ -23,6 +19,7 @@ export const YamlToState_Apps = (yaml: anyObject[]): AppConfiguration[] => {
         monitor: ymlApp.bound_monitor ?? null,
         workspace: ymlApp.bound_workspace || null,
         identifier: parseAsCamel(IdWithIdentifierSchema, ymlApp.identifier),
+        isBundled: ymlApp.is_bundled || false,
         // options
         [ApplicationOptions.Float]: ymlApp.options?.includes(ApplicationOptions.Float) || false,
         [ApplicationOptions.Unmanage]:
@@ -71,17 +68,19 @@ export const StateAppsToYamlApps = (
   appsConfigurations: AppConfiguration[],
   template?: boolean,
 ): anyObject[] => {
-  return appsConfigurations.map((appConfig: AppConfiguration) => {
-    const options = Object.values(ApplicationOptions).filter((option) => appConfig[option]);
-    const yamlApp = {
-      name: appConfig.name,
-      template: template || undefined,
-      category: appConfig.category || undefined,
-      bound_monitor: appConfig.monitor ?? undefined,
-      bound_workspace: appConfig.workspace || undefined,
-      identifier: VariableConvention.fromCamelToSnake(appConfig.identifier),
-      options: options.length ? options : undefined,
-    };
-    return yamlApp;
-  });
+  return appsConfigurations
+    .filter((appConfig) => !appConfig.isBundled)
+    .map((appConfig: AppConfiguration) => {
+      const options = Object.values(ApplicationOptions).filter((option) => appConfig[option]);
+      const yamlApp = {
+        name: appConfig.name,
+        template: template || undefined,
+        category: appConfig.category || undefined,
+        bound_monitor: appConfig.monitor ?? undefined,
+        bound_workspace: appConfig.workspace || undefined,
+        identifier: VariableConvention.fromCamelToSnake(appConfig.identifier),
+        options: options.length ? options : undefined,
+      };
+      return yamlApp;
+    });
 };

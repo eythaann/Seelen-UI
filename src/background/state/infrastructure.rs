@@ -2,24 +2,17 @@ use itertools::Itertools;
 
 use super::{
     application::FULL_STATE,
-    domain::{Placeholder, Theme, WegItems},
-    placeholders::PLACEHOLDERS_MANAGER,
-    themes::THEME_MANAGER,
+    domain::{AppConfig, Placeholder, Theme, WegItems},
 };
 
 #[tauri::command]
 pub fn state_get_themes() -> Vec<Theme> {
-    THEME_MANAGER
-        .lock()
-        .themes()
-        .values()
-        .cloned()
-        .collect_vec()
+    FULL_STATE.lock().themes().values().cloned().collect_vec()
 }
 
 #[tauri::command]
 pub fn state_get_placeholders() -> Vec<Placeholder> {
-    PLACEHOLDERS_MANAGER
+    FULL_STATE
         .lock()
         .placeholders()
         .values()
@@ -30,4 +23,14 @@ pub fn state_get_placeholders() -> Vec<Placeholder> {
 #[tauri::command]
 pub fn state_get_weg_items() -> WegItems {
     FULL_STATE.lock().weg_items().clone()
+}
+
+#[tauri::command]
+pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
+    FULL_STATE
+        .lock()
+        .settings_by_app()
+        .iter()
+        .cloned()
+        .collect_vec()
 }

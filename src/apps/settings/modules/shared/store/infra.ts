@@ -1,7 +1,7 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { setColorsAsCssVariables } from '../../../../shared';
 import { Theme } from '../../../../shared/schemas/Theme';
-import { loadAppsTemplates, saveUserSettings, UserSettingsLoader } from './storeApi';
+import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
@@ -12,12 +12,7 @@ import { StartUser } from '../../StartUser/infra';
 import { startup } from '../tauri/infra';
 
 import { RootActions, RootReducer, RootSlice } from './app/reducer';
-import {
-  StateAppsToYamlApps,
-  StateToJsonSettings,
-  StaticSettingsToState,
-  YamlToState_Apps,
-} from './app/StateBridge';
+import { StateAppsToYamlApps, StateToJsonSettings, StaticSettingsToState, YamlToState_Apps } from './app/StateBridge';
 
 import { RootState, UIColors } from './domain';
 
@@ -45,24 +40,16 @@ export async function registerStoreEvents() {
     setColorsAsCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
   });
+
+  await listenGlobal<anyObject[]>('settings-by-app', (event) => {
+    store.dispatch(RootActions.setAppsConfigurations(YamlToState_Apps(event.payload)));
+  });
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
   startup.isEnabled().then((value) => {
     store.dispatch(RootActions.setAutostart(value));
   });
-
-  const appsTemplate = await loadAppsTemplates();
-  store.dispatch(
-    RootActions.setAppsTemplates(
-      appsTemplate.map((template) => {
-        return {
-          ...template,
-          apps: YamlToState_Apps(template.apps),
-        };
-      }),
-    ),
-  );
 
   const userSettings = await new UserSettingsLoader()
     .withLayouts()
@@ -75,7 +62,6 @@ export const LoadSettingsToStore = async (customPath?: string) => {
 
   let state = {
     ...loadedState,
-    appsTemplates: currentState.appsTemplates,
     route: currentState.route,
     autostart: currentState.autostart,
     colors: currentState.colors,

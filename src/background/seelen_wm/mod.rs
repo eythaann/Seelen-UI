@@ -16,10 +16,10 @@ use windows::Win32::{
 };
 
 use crate::{
-    apps_config::{AppExtraFlag, SETTINGS_BY_APP},
     error_handler::Result,
     seelen::{get_app_handle, SEELEN},
     seelen_weg::SeelenWeg,
+    state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
     utils::virtual_desktop::VirtualDesktopManager,
     windows_api::WindowsApi,
@@ -136,7 +136,7 @@ impl WindowManager {
         );
 
         let mut as_floating = false;
-        if let Some(config) = trace_lock!(SETTINGS_BY_APP).get_by_window(hwnd) {
+        if let Some(config) = trace_lock!(FULL_STATE).get_app_config_by_window(hwnd) {
             as_floating = config.options_contains(AppExtraFlag::Float);
         }
 
@@ -159,7 +159,7 @@ impl WindowManager {
 
     pub fn emit_send_to_workspace(&mut self, hwnd: HWND, desktop_id: String) -> Result<()> {
         let mut as_floating = false;
-        if let Some(config) = trace_lock!(SETTINGS_BY_APP).get_by_window(hwnd) {
+        if let Some(config) = trace_lock!(FULL_STATE).get_app_config_by_window(hwnd) {
             as_floating = config.options_contains(AppExtraFlag::Float);
         }
         self.emit(
@@ -230,8 +230,8 @@ impl WindowManager {
 // UTILS AND STATICS
 impl WindowManager {
     pub fn should_manage(hwnd: HWND) -> bool {
-        let mut settings_by_app = trace_lock!(SETTINGS_BY_APP);
-        if let Some(config) = settings_by_app.get_by_window(hwnd) {
+        let mut settings_by_app = trace_lock!(FULL_STATE);
+        if let Some(config) = settings_by_app.get_app_config_by_window(hwnd) {
             return config.options_contains(AppExtraFlag::Force) || {
                 !config.options_contains(AppExtraFlag::Unmanage)
                     && !config.options_contains(AppExtraFlag::Pinned)
