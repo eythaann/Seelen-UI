@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.0]
 ### features
 - allow custom images on toolbar by `imgFromUrl`, `imgFromPath` and `imgFromExe` functions.
 - add notifications module to toolbar.
