@@ -9,7 +9,37 @@ on:
   workflow_dispatch: # Manually run the action
 
 jobs:
+  check-msix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check for MSIX file in latest release
+        id: check_msix
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const latestRelease = await github.rest.repos.getLatestRelease({ owner, repo });
+
+            // Check if .msix file exists in the release assets
+            const msixAsset = latestRelease.data.assets.find(asset => asset.name.endsWith('.msix'));
+
+            if (msixAsset) {
+              core.setOutput('MSIX_ALREADY_EXIST', 'true');
+              console.log('MSIX file exists.');
+            } else {
+              core.setOutput('MSIX_ALREADY_EXIST', 'false');
+              console.log('No MSIX file found in the latest release.');
+            }
+
+      - name: Output result
+        run: |
+          echo "MSIX_ALREADY_EXIST=${{ steps.check_msix.outputs.MSIX_ALREADY_EXIST }}"
+
   upload-store-msix-to-release:
+    name: Upload Signed MSIX to release
+    needs: check-msix
+    if: needs.check-msix.outputs.MSIX_ALREADY_EXIST == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Upload store MSIX to release
@@ -17,3 +47,14 @@ jobs:
         with:
           store-id: 9p67c2d4t9fb
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  msix-to-winget:
+    name: MSIX to Winget
+    needs: upload-store-msix-to-release
+    runs-on: windows-latest
+    steps:
+      - uses: vedantmgoyal9/winget-releaser@main
+        with:
+          identifier: Seelen.SeelenUI
+          installers-regex: '\.msix$'
+          token: ${{ secrets.WORKFLOWS_TOKEN }}
