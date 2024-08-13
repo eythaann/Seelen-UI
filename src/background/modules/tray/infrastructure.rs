@@ -1,3 +1,5 @@
+use std::sync::atomic::{AtomicBool, Ordering};
+
 use itertools::Itertools;
 use tauri::Emitter;
 
@@ -13,8 +15,13 @@ fn emit_tray_info() -> Result<()> {
     Ok(())
 }
 
+static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_tray_events() -> Result<()> {
-    // TODO: add event listener for tray events
+    if !REGISTERED.load(Ordering::Acquire) {
+        log::info!("Registering tray events");
+        // TODO: add event listener for tray events
+        REGISTERED.store(true, Ordering::Release);
+    }
     emit_tray_info()?;
     Ok(())
 }

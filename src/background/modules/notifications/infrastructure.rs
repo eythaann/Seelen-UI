@@ -17,6 +17,7 @@ pub fn register_notification_events() {
     std::thread::spawn(|| {
         let mut manager = NOTIFICATION_MANAGER.lock();
         if !REGISTERED.load(Ordering::Acquire) {
+            log::info!("Registering notifications events");
             manager.on_notifications_change(emit_notifications);
             REGISTERED.store(true, Ordering::Release);
         }

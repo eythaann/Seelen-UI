@@ -22,12 +22,17 @@ fn emit_media_devices(inputs: &Vec<Device>, outputs: &Vec<Device>) {
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_media_events() {
-    std::thread::spawn(|| {
-        if !REGISTERED.load(Ordering::Acquire) {
+    let was_registered = REGISTERED.load(Ordering::Acquire);
+    if !was_registered {
+        REGISTERED.store(true, Ordering::Release);
+    }
+
+    std::thread::spawn(move || {
+        if !was_registered {
+            log::info!("Registering media events");
             let mut manager = MEDIA_MANAGER.lock();
             manager.on_change_devices(emit_media_devices);
             manager.on_change_players(emit_media_sessions);
-            REGISTERED.store(true, Ordering::Release);
         }
 
         let media_manager = MEDIA_MANAGER.lock();

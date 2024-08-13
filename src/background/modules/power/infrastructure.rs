@@ -1,3 +1,5 @@
+use std::sync::atomic::{AtomicBool, Ordering};
+
 use tauri::Emitter;
 use windows::{
     core::PCWSTR,
@@ -21,6 +23,8 @@ use crate::{
 };
 
 use super::domain::PowerStatus;
+
+static REGISTERED: AtomicBool = AtomicBool::new(false);
 
 pub struct PowerManager;
 impl PowerManager {
@@ -46,6 +50,11 @@ impl PowerManager {
     }
 
     pub fn register_power_events() -> Result<()> {
+        if REGISTERED.load(Ordering::Acquire) {
+            return Ok(());
+        }
+        log::info!("Registering system power events");
+
         let wide_name: Vec<u16> = "Seelen Power Manager"
             .encode_utf16()
             .chain(Some(0))
@@ -95,6 +104,7 @@ impl PowerManager {
             std::thread::sleep(std::time::Duration::from_secs(60));
         });
 
+        REGISTERED.store(true, Ordering::Release);
         Ok(())
     }
 

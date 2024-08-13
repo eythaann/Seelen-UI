@@ -1,4 +1,4 @@
-import { ToolbarModuleType, TrayTM } from '../../../shared/schemas/Placeholders';
+import { TrayTM } from '../../../shared/schemas/Placeholders';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
@@ -22,10 +22,7 @@ export function TrayModule({ module }: Props) {
   const trayList = useSelector(Selectors.systemTray);
 
   useEffect(() => {
-    if (!window.TOOLBAR_MODULES[ToolbarModuleType.Tray]) {
-      window.TOOLBAR_MODULES[ToolbarModuleType.Tray] = true;
-      emit('register-tray-events');
-    }
+    emit('register-tray-events');
   }, []);
 
   useAppBlur(() => {

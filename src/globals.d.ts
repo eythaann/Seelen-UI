@@ -1,20 +1,12 @@
-import { ToolbarModuleType } from './apps/shared/schemas/Placeholders';
+declare module '*.module.css' {
+  const classnames: Record<string, string>;
+  export default classnames;
+}
 
-declare global {
-  interface Window {
-    TOOLBAR_MODULES: Record<ToolbarModuleType, boolean>;
-  }
+declare module '*.yml' {
+  export default string;
+}
 
-  declare module '*.module.css' {
-    const classnames: Record<string, string>;
-    export default classnames;
-  }
-
-  declare module '*.yml' {
-    export default string;
-  }
-
-  interface ObjectConstructor {
-    keys<T>(o: T): (keyof T)[];
-  }
+interface ObjectConstructor {
+  keys<T>(o: T): (keyof T)[];
 }

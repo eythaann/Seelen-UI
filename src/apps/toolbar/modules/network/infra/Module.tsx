@@ -1,4 +1,4 @@
-import { NetworkTM, ToolbarModuleType } from '../../../../shared/schemas/Placeholders';
+import { NetworkTM } from '../../../../shared/schemas/Placeholders';
 import { WithWlanSelector } from './WlanSelector';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect } from 'react';
@@ -34,10 +34,7 @@ function NetworkModuleItem({ module, ...rest }: Props) {
 
 export function NetworkModule({ module }: Props) {
   useEffect(() => {
-    if (!window.TOOLBAR_MODULES[ToolbarModuleType.Network]) {
-      window.TOOLBAR_MODULES[ToolbarModuleType.Network] = true;
-      emit('register-network-events');
-    }
+    emit('register-network-events');
   }, []);
 
   return module.withWlanSelector ? (

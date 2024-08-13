@@ -1,4 +1,4 @@
-import { NotificationsTM, ToolbarModuleType } from '../../../../shared/schemas/Placeholders';
+import { NotificationsTM } from '../../../../shared/schemas/Placeholders';
 import { Notifications } from './Notifications';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
@@ -25,10 +25,7 @@ export function NotificationsModule({ module }: Props) {
   });
 
   useEffect(() => {
-    if (!window.TOOLBAR_MODULES[ToolbarModuleType.Notifications]) {
-      window.TOOLBAR_MODULES[ToolbarModuleType.Notifications] = true;
-      emit('register-notifications-events');
-    }
+    emit('register-notifications-events');
   }, []);
 
   return (

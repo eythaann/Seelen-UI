@@ -1,40 +1,61 @@
+use std::sync::atomic::{AtomicBool, Ordering};
+
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Networking::NetworkListManager::{
-    NLM_CONNECTIVITY_IPV4_INTERNET, NLM_CONNECTIVITY_IPV6_INTERNET,
+    INetworkListManager, NetworkListManager, NLM_CONNECTIVITY_IPV4_INTERNET,
+    NLM_CONNECTIVITY_IPV6_INTERNET,
 };
 
-use crate::{error_handler::Result, log_error, seelen::get_app_handle, utils::sleep_millis};
+use crate::{
+    error_handler::Result, log_error, seelen::get_app_handle, utils::sleep_millis, windows_api::Com,
+};
 
 use super::{
     application::{get_local_ip_address, NetworkManager},
-    domain::WlanProfile,
+    domain::{NetworkAdapter, WlanProfile},
 };
 
-pub fn register_network_events() -> Result<()> {
+fn emit_networks(ip: String, adapters: Vec<NetworkAdapter>, has_internet: bool) {
     let handle = get_app_handle();
+    log_error!(handle.emit("network-default-local-ip", ip));
+    log_error!(handle.emit("network-adapters", adapters));
+    log_error!(handle.emit("network-internet-connection", has_internet));
+}
 
-    NetworkManager::register_events(move |connectivity| {
-        log::info!(target: "network", "Connectivity changed: {:?}", connectivity);
+static REGISTERED: AtomicBool = AtomicBool::new(false);
+pub fn register_network_events() -> Result<()> {
+    if !REGISTERED.load(Ordering::Acquire) {
+        log::info!("Registering network events");
+        NetworkManager::register_events(move |connectivity| {
+            log::info!(target: "network", "Connectivity changed: {:?}", connectivity);
+            if let (Ok(ip), Ok(adapters)) = (get_local_ip_address(), NetworkManager::get_adapters())
+            {
+                let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
+                    == NLM_CONNECTIVITY_IPV4_INTERNET.0;
+                let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
+                    == NLM_CONNECTIVITY_IPV6_INTERNET.0;
 
-        let has_internet_ipv4 =
-            connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0 == NLM_CONNECTIVITY_IPV4_INTERNET.0;
-        let has_internet_ipv6 =
-            connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0 == NLM_CONNECTIVITY_IPV6_INTERNET.0;
+                emit_networks(ip, adapters, has_internet_ipv4 || has_internet_ipv6);
+            }
+        });
+        REGISTERED.store(true, Ordering::Release);
+    }
 
-        let has_internet = has_internet_ipv4 || has_internet_ipv6;
-        log_error!(handle.emit("network-internet-connection", has_internet));
+    if let (Ok(ip), Ok(adapters)) = (get_local_ip_address(), NetworkManager::get_adapters()) {
+        let has_internet = Com::run_with_context(|| {
+            let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
+            let connectivity = unsafe { list_manager.GetConnectivity()? };
 
-        match NetworkManager::get_adapters() {
-            Ok(adapters) => log_error!(handle.emit("network-adapters", adapters)),
-            Err(err) => log::error!("Fail on getting network adapters: {}", err),
-        }
+            let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
+                == NLM_CONNECTIVITY_IPV4_INTERNET.0;
+            let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
+                == NLM_CONNECTIVITY_IPV6_INTERNET.0;
 
-        match get_local_ip_address() {
-            Ok(ip) => log_error!(handle.emit("network-default-local-ip", ip)),
-            Err(err) => log::error!("Fail on getting local ip address: {}", err),
-        }
-    });
+            Ok(has_internet_ipv4 || has_internet_ipv6)
+        })?;
+        emit_networks(ip, adapters, has_internet);
+    }
 
     Ok(())
 }

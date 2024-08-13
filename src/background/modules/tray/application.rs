@@ -60,17 +60,17 @@ pub fn get_tray_overflow_handle() -> HWND {
     }
 }
 
-pub fn try_force_tray_overflow_creation() -> Result<()> {
+pub fn ensure_tray_overflow_creation() -> Result<()> {
     if !is_windows_11() {
         return Ok(());
     }
 
-    Com::run_with_context(|| unsafe {
-        let tray_overflow_hwnd = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
-        if tray_overflow_hwnd.0 != 0 {
-            return Ok(());
-        }
+    let tray_overflow_hwnd = get_tray_overflow_handle();
+    if tray_overflow_hwnd.0 != 0 {
+        return Ok(());
+    }
 
+    Com::run_with_context(|| unsafe {
         let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
 
         let tray_bar = AppBarData::from_handle(tray_hwnd);

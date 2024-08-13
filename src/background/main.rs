@@ -30,7 +30,7 @@ use modules::{
         application::{is_just_getting_cmd_info, SEELEN_COMMAND_LINE},
         infrastructure::Client,
     },
-    tray::application::try_force_tray_overflow_creation,
+    tray::application::ensure_tray_overflow_creation,
 };
 use plugins::register_plugins;
 use seelen::SEELEN;
@@ -70,7 +70,9 @@ fn register_panic_hook() {
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
     log::info!("───────────────────── Starting Seelen ─────────────────────");
     Client::listen_tcp()?;
-    log_error!(try_force_tray_overflow_creation());
+
+    // try it at start to avoid made it before
+    log_error!(ensure_tray_overflow_creation());
 
     let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
     seelen.init(app.handle().clone())?;

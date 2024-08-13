@@ -9,10 +9,7 @@ use windows::Win32::{
         IP_ADAPTER_ADDRESSES_LH,
     },
     Networking::{
-        NetworkListManager::{
-            INetworkListManager, NetworkListManager, NLM_CONNECTIVITY,
-            NLM_CONNECTIVITY_DISCONNECTED,
-        },
+        NetworkListManager::{INetworkListManager, NetworkListManager, NLM_CONNECTIVITY},
         WinSock::AF_UNSPEC,
     },
 };
@@ -76,14 +73,16 @@ impl NetworkManager {
         std::thread::spawn(move || {
             let result: Result<()> = Com::run_with_context(|| {
                 let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
-                let mut last_state = NLM_CONNECTIVITY_DISCONNECTED;
+                let mut last_state = None;
 
                 loop {
-                    let current_state = unsafe { list_manager.GetConnectivity()? };
-                    if last_state != current_state {
-                        last_state = current_state;
-                        cb(current_state);
+                    let current_state = unsafe { list_manager.GetConnectivity() }.ok();
+                    if let (Some(current_state), Some(last_state)) = (current_state, last_state) {
+                        if current_state != last_state {
+                            cb(current_state);
+                        }
                     }
+                    last_state = current_state;
                     std::thread::sleep(std::time::Duration::from_millis(5000));
                 }
             });

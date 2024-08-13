@@ -27,8 +27,6 @@ async function Main() {
   await loadStore();
   await loadTranslations();
 
-  window.TOOLBAR_MODULES = {} as any;
-
   createRoot(container).render(
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>
