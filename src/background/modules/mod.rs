@@ -2,6 +2,7 @@ pub mod cli;
 pub mod file_extensions;
 pub mod input;
 pub mod media;
+pub mod monitors;
 pub mod network;
 pub mod notifications;
 pub mod power;

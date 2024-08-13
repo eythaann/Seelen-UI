@@ -8,6 +8,7 @@ use crate::{
     error_handler::Result,
     log_error,
     modules::cli::application::{handle_cli_events, SEELEN_COMMAND_LINE},
+    trace_lock,
 };
 
 pub struct Client;
@@ -24,7 +25,7 @@ impl Client {
                     Ok(argv) => {
                         log::trace!(target: "slu::cli", "{}", argv[1..].join(" "));
                         std::thread::spawn(move || {
-                            let command = SEELEN_COMMAND_LINE.lock().clone();
+                            let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
                             log_error!(handle_cli_events(&command.get_matches_from(argv)));
                         });
                     }

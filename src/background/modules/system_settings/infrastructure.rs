@@ -2,7 +2,7 @@ use std::sync::atomic::{AtomicBool, Ordering};
 
 use tauri::Emitter;
 
-use crate::{log_error, seelen::get_app_handle};
+use crate::{log_error, seelen::get_app_handle, trace_lock};
 
 use super::{application::SYSTEM_SETTINGS, domain::UIColors};
 
@@ -14,7 +14,7 @@ fn emit_colors(colors: &UIColors) {
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_colors_events() {
-    let mut manager = SYSTEM_SETTINGS.lock();
+    let mut manager = trace_lock!(SYSTEM_SETTINGS);
     if !REGISTERED.load(Ordering::Acquire) {
         log::info!("Registering colors events");
         manager.on_colors_change(Box::new(emit_colors));
@@ -25,6 +25,6 @@ pub fn register_colors_events() {
 
 pub fn release_colors_events() {
     if REGISTERED.load(Ordering::Acquire) {
-        log_error!(SYSTEM_SETTINGS.lock().release());
+        log_error!(trace_lock!(SYSTEM_SETTINGS).release());
     }
 }

@@ -32,7 +32,7 @@ async function Main() {
       }
     }
 
-    document.body.addEventListener('mousemove', () => {
+    document.body.addEventListener('mouseenter', () => {
       emitTo(main, 'mouseenter');
       invoke('ensure_hitboxes_zorder').catch(console.error);
     });

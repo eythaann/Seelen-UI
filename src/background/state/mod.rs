@@ -5,13 +5,14 @@ pub mod infrastructure;
 use std::{
     collections::HashMap,
     path::PathBuf,
-    sync::atomic::{AtomicU32, Ordering},
+    sync::atomic::{AtomicBool, AtomicU32, Ordering},
 };
 
 use serde::Deserialize;
 
 use crate::error_handler::Result;
 
+pub static IS_TOOLBAR_ENABLED: AtomicBool = AtomicBool::new(true);
 pub static TOOLBAR_HEIGHT: AtomicU32 = AtomicU32::new(30);
 
 #[derive(Debug, Deserialize, Clone)]
@@ -75,6 +76,10 @@ impl State {
         if let Some(toolbar) = &self.fancy_toolbar {
             if let Some(height) = toolbar.height {
                 TOOLBAR_HEIGHT.store(height, Ordering::SeqCst);
+            }
+
+            if let Some(enable) = toolbar.enabled {
+                IS_TOOLBAR_ENABLED.store(enable, Ordering::SeqCst);
             }
         }
     }

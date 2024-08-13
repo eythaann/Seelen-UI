@@ -30,12 +30,12 @@ pub fn register_media_events() {
     std::thread::spawn(move || {
         if !was_registered {
             log::info!("Registering media events");
-            let mut manager = MEDIA_MANAGER.lock();
+            let mut manager = trace_lock!(MEDIA_MANAGER);
             manager.on_change_devices(emit_media_devices);
             manager.on_change_players(emit_media_sessions);
         }
 
-        let media_manager = MEDIA_MANAGER.lock();
+        let media_manager = trace_lock!(MEDIA_MANAGER);
         emit_media_devices(media_manager.inputs(), media_manager.outputs());
         emit_media_sessions(media_manager.playing());
     });
@@ -43,19 +43,19 @@ pub fn register_media_events() {
 
 pub fn release_media_events() {
     if REGISTERED.load(Ordering::Acquire) {
-        MEDIA_MANAGER.lock().release();
+        trace_lock!(MEDIA_MANAGER).release();
     }
 }
 
 #[tauri::command]
 pub fn media_set_default_device(id: String, role: String) -> Result<()> {
-    MEDIA_MANAGER.lock().set_default_device(&id, &role)?;
+    trace_lock!(MEDIA_MANAGER).set_default_device(&id, &role)?;
     Ok(())
 }
 
 #[tauri::command]
 pub fn media_next(id: String) -> Result<()> {
-    if let Some(session) = MEDIA_MANAGER.lock().session_by_id(&id) {
+    if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
         let success = tauri::async_runtime::block_on(session.TrySkipNextAsync()?)?;
         if !success {
             return Err("failed to skip next".into());
@@ -66,7 +66,7 @@ pub fn media_next(id: String) -> Result<()> {
 
 #[tauri::command]
 pub fn media_prev(id: String) -> Result<()> {
-    if let Some(session) = MEDIA_MANAGER.lock().session_by_id(&id) {
+    if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
         let success = tauri::async_runtime::block_on(session.TrySkipPreviousAsync()?)?;
         if !success {
             return Err("failed to skip previous".into());
@@ -77,7 +77,7 @@ pub fn media_prev(id: String) -> Result<()> {
 
 #[tauri::command]
 pub fn media_toggle_play_pause(id: String) -> Result<()> {
-    if let Some(session) = MEDIA_MANAGER.lock().session_by_id(&id) {
+    if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
         let success = tauri::async_runtime::block_on(session.TryTogglePlayPauseAsync()?)?;
         if !success {
             return Err("failed to toggle play".into());

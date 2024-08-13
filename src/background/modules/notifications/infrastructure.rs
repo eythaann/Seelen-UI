@@ -15,7 +15,7 @@ fn emit_notifications(notifications: &Vec<AppNotification>) {
 static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_notification_events() {
     std::thread::spawn(|| {
-        let mut manager = NOTIFICATION_MANAGER.lock();
+        let mut manager = trace_lock!(NOTIFICATION_MANAGER);
         if !REGISTERED.load(Ordering::Acquire) {
             log::info!("Registering notifications events");
             manager.on_notifications_change(emit_notifications);
@@ -27,7 +27,7 @@ pub fn register_notification_events() {
 
 pub fn release_notification_events() {
     if REGISTERED.load(Ordering::Acquire) {
-        log_error!(NOTIFICATION_MANAGER.lock().release());
+        log_error!(trace_lock!(NOTIFICATION_MANAGER).release());
     }
 }
 

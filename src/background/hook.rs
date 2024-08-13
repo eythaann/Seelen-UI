@@ -229,7 +229,7 @@ static LAST_LOCATION_CHANGED: AtomicIsize = AtomicIsize::new(0);
 
 pub fn location_delay_completed(origin: HWND) -> bool {
     let last = LAST_LOCATION_CHANGED.load(Ordering::Acquire);
-    let mut dict = DICT.lock();
+    let mut dict = trace_lock!(DICT);
 
     let should_continue = match dict.entry(origin.0) {
         std::collections::hash_map::Entry::Occupied(mut entry) => {

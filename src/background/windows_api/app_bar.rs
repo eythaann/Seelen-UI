@@ -1,10 +1,16 @@
+use lazy_static::lazy_static;
+use parking_lot::Mutex;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT},
     UI::Shell::{
         SHAppBarMessage, ABE_BOTTOM, ABE_LEFT, ABE_RIGHT, ABE_TOP, ABM_GETSTATE, ABM_NEW,
-        ABM_SETPOS, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA,
+        ABM_REMOVE, ABM_SETPOS, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA,
     },
 };
+
+lazy_static! {
+    pub static ref RegisteredBars: Mutex<Vec<isize>> = Mutex::new(Vec::new());
+}
 
 #[allow(dead_code)]
 pub enum AppBarDataEdge {
@@ -70,7 +76,17 @@ impl AppBarData {
 
     pub fn register_as_new_bar(&mut self) {
         let mut data = self.0;
-        unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
+        let mut registered = RegisteredBars.lock();
+        if !registered.contains(&data.hWnd.0) {
+            registered.push(data.hWnd.0);
+            unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
+        }
         unsafe { SHAppBarMessage(ABM_SETPOS, &mut data) };
+    }
+
+    pub fn unregister_bar(&mut self) {
+        let mut data = self.0;
+        unsafe { SHAppBarMessage(ABM_REMOVE, &mut data) };
+        RegisteredBars.lock().retain(|x| *x != data.hWnd.0);
     }
 }

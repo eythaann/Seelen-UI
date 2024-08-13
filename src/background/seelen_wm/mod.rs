@@ -9,7 +9,6 @@ use serde::Serialize;
 use tauri::{AppHandle, Emitter, Listener, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM},
-    Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
         EnumWindows, HWND_BOTTOM, HWND_TOPMOST, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST,
     },
@@ -18,6 +17,7 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     seelen::{get_app_handle, SEELEN},
+    seelen_bar::FancyToolbar,
     seelen_weg::SeelenWeg,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
@@ -260,8 +260,7 @@ impl WindowManager {
     }
 
     fn create_window(handle: &AppHandle<Wry>, monitor_id: isize) -> Result<WebviewWindow> {
-        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor_id))?;
-        let work_area = monitor_info.monitorInfo.rcWork;
+        let work_area = FancyToolbar::get_work_area_by_monitor(monitor_id)?;
 
         let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             handle,
@@ -281,12 +280,9 @@ impl WindowManager {
 
         window.set_ignore_cursor_events(true)?;
 
-        WindowsApi::set_position(
-            window.hwnd()?,
-            Some(HWND_TOPMOST),
-            &work_area,
-            SWP_NOACTIVATE,
-        )?;
+        let main_hwnd = HWND(window.hwnd()?.0);
+        WindowsApi::move_window(main_hwnd, &work_area)?;
+        WindowsApi::set_position(main_hwnd, Some(HWND_TOPMOST), &work_area, SWP_NOACTIVATE)?;
 
         window.once("complete-setup", move |_event| {
             std::thread::spawn(move || -> Result<()> {

@@ -1,6 +1,6 @@
 use std::sync::Arc;
 
-use crate::{error_handler::Result, log_error};
+use crate::{error_handler::Result, log_error, trace_lock};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use windows::{
@@ -71,9 +71,7 @@ impl SystemSettings {
         _listener: &Option<UISettings>,
         _args: &Option<IInspectable>,
     ) -> windows_core::Result<()> {
-        log_error!(SYSTEM_SETTINGS
-            .lock()
-            .on_change(SettingsEvent::ColorChanged));
+        log_error!(trace_lock!(SYSTEM_SETTINGS).on_change(SettingsEvent::ColorChanged));
         Ok(())
     }
 

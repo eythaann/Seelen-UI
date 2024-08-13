@@ -1,5 +1,7 @@
 use itertools::Itertools;
 
+use crate::trace_lock;
+
 use super::{
     application::FULL_STATE,
     domain::{AppConfig, Placeholder, Theme, WegItems},
@@ -7,13 +9,16 @@ use super::{
 
 #[tauri::command]
 pub fn state_get_themes() -> Vec<Theme> {
-    FULL_STATE.lock().themes().values().cloned().collect_vec()
+    trace_lock!(FULL_STATE)
+        .themes()
+        .values()
+        .cloned()
+        .collect_vec()
 }
 
 #[tauri::command]
 pub fn state_get_placeholders() -> Vec<Placeholder> {
-    FULL_STATE
-        .lock()
+    trace_lock!(FULL_STATE)
         .placeholders()
         .values()
         .cloned()
@@ -22,13 +27,12 @@ pub fn state_get_placeholders() -> Vec<Placeholder> {
 
 #[tauri::command]
 pub fn state_get_weg_items() -> WegItems {
-    FULL_STATE.lock().weg_items().clone()
+    trace_lock!(FULL_STATE).weg_items().clone()
 }
 
 #[tauri::command]
 pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
-    FULL_STATE
-        .lock()
+    trace_lock!(FULL_STATE)
         .settings_by_app()
         .iter()
         .cloned()

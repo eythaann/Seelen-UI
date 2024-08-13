@@ -5,24 +5,22 @@ use std::sync::atomic::Ordering;
 
 use crate::{
     error_handler::Result,
+    log_error,
     seelen::get_app_handle,
-    state::TOOLBAR_HEIGHT,
+    state::{IS_TOOLBAR_ENABLED, TOOLBAR_HEIGHT},
     windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
 use serde::Serialize;
-use tauri::{AppHandle, Emitter, Listener, Manager, WebviewWindow, Wry};
+use tauri::{Emitter, Listener, Manager, WebviewWindow};
 use windows::Win32::{
-    Foundation::HWND,
+    Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{
-        HWND_TOPMOST, SWP_ASYNCWINDOWPOS, SWP_NOSIZE, SW_HIDE, SW_SHOWNOACTIVATE,
-    },
+    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
     window: WebviewWindow,
-    #[allow(dead_code)]
-    hitbox_window: WebviewWindow,
+    hitbox: WebviewWindow,
     // -- -- -- --
     last_focus: Option<isize>,
     hidden: bool,
@@ -35,14 +33,24 @@ pub struct ActiveApp {
     exe: Option<String>,
 }
 
+impl Drop for FancyToolbar {
+    fn drop(&mut self) {
+        log::info!("Dropping {}", self.window.label());
+        if let Ok(hwnd) = self.hitbox.hwnd() {
+            AppBarData::from_handle(hwnd).unregister_bar();
+        }
+        log_error!(self.window.destroy());
+        log_error!(self.hitbox.destroy());
+    }
+}
+
 impl FancyToolbar {
-    pub fn new(monitor: isize) -> Result<Self> {
-        log::info!("Creating Fancy Toolbar / {}", monitor);
-        let handle = get_app_handle();
-        let (window, hitbox_window) = Self::create_window(&handle, monitor)?;
+    pub fn new(postfix: &str) -> Result<Self> {
+        log::info!("Creating {}/{}", Self::TARGET, postfix);
+        let (window, hitbox) = Self::create_window(postfix)?;
         Ok(Self {
             window,
-            hitbox_window,
+            hitbox,
             last_focus: None,
             hidden: false,
         })
@@ -55,14 +63,14 @@ impl FancyToolbar {
 
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
-        WindowsApi::show_window_async(self.hitbox_window.hwnd()?, SW_HIDE)?;
+        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_HIDE)?;
         self.hidden = true;
         Ok(())
     }
 
     pub fn show(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
-        WindowsApi::show_window_async(self.hitbox_window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.hidden = false;
         Ok(())
     }
@@ -83,7 +91,10 @@ impl FancyToolbar {
     }
 
     pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        WindowsApi::bring_to(HWND(self.hitbox_window.hwnd()?.0), HWND_TOPMOST)
+        let hitbox = HWND(self.hitbox.hwnd()?.0);
+        WindowsApi::bring_to(hitbox, HWND_TOPMOST)?;
+        self.set_positions(WindowsApi::monitor_from_window(hitbox).0)?;
+        Ok(())
     }
 }
 
@@ -92,46 +103,64 @@ impl FancyToolbar {
     const TARGET: &'static str = "fancy-toolbar";
     const TARGET_HITBOX: &'static str = "fancy-toolbar-hitbox";
 
-    fn set_positions(window: &WebviewWindow, hitbox: &WebviewWindow, monitor: isize) -> Result<()> {
+    /// Work area no works fine on multiple monitors
+    /// so we use this functions that only takes the toolbar in account
+    pub fn get_work_area_by_monitor(monitor: isize) -> Result<RECT> {
         let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor))?;
-        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
-        let main_hwnd = HWND(window.hwnd()?.0);
-        let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
 
-        // pre set position for resize in case of multiples dpi
-        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
-        WindowsApi::set_position(hitbox_hwnd, None, &rc_monitor, SWP_NOSIZE)?;
+        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+        let mut rect = monitor_info.monitorInfo.rcMonitor;
 
-        {
-            let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+        if IS_TOOLBAR_ENABLED.load(Ordering::Acquire) {
             let toolbar_height = TOOLBAR_HEIGHT.load(Ordering::Acquire);
-
-            let mut abd = AppBarData::from_handle(hitbox_hwnd);
-
-            let mut abd_rect = rc_monitor;
-            abd_rect.bottom = abd_rect.top + (toolbar_height as f32 * dpi) as i32;
-
-            abd.set_edge(AppBarDataEdge::Top);
-            abd.set_rect(abd_rect);
-
-            abd.register_as_new_bar();
-            WindowsApi::set_position(hitbox_hwnd, None, &abd_rect, SWP_ASYNCWINDOWPOS)?;
+            rect.top += (toolbar_height as f32 * dpi) as i32;
         }
 
-        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_ASYNCWINDOWPOS)?;
+        Ok(rect)
+    }
+
+    pub fn set_positions(&self, monitor: isize) -> Result<()> {
+        let hmonitor = HMONITOR(monitor);
+        if hmonitor.is_invalid() {
+            return Err("Invalid Monitor".into());
+        }
+
+        let monitor_info = WindowsApi::monitor_info(hmonitor)?;
+        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
+
+        let main_hwnd = HWND(self.window.hwnd()?.0);
+        let hitbox_hwnd = HWND(self.hitbox.hwnd()?.0);
+
+        let dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
+        let toolbar_height = TOOLBAR_HEIGHT.load(Ordering::Acquire);
+
+        let mut abd = AppBarData::from_handle(hitbox_hwnd);
+
+        let mut abd_rect = rc_monitor;
+        abd_rect.bottom = abd_rect.top + (toolbar_height as f32 * dpi) as i32;
+
+        abd.set_edge(AppBarDataEdge::Top);
+        abd.set_rect(abd_rect);
+
+        abd.register_as_new_bar();
+
+        // pre set position for resize in case of multiples dpi
+        WindowsApi::move_window(hitbox_hwnd, &rc_monitor)?;
+        WindowsApi::set_position(hitbox_hwnd, None, &abd_rect, SWP_NOACTIVATE)?;
+
+        WindowsApi::move_window(main_hwnd, &rc_monitor)?;
+        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
         Ok(())
     }
 
-    fn create_window(
-        manager: &AppHandle<Wry>,
-        monitor: isize,
-    ) -> Result<(WebviewWindow, WebviewWindow)> {
-        let label = format!("{}/{}", Self::TARGET_HITBOX, monitor);
+    fn create_window(postfix: &str) -> Result<(WebviewWindow, WebviewWindow)> {
+        let manager = get_app_handle();
 
+        let label = format!("{}/{}", Self::TARGET_HITBOX, postfix);
         let hitbox = match manager.get_webview_window(&label) {
             Some(window) => window,
             None => tauri::WebviewWindowBuilder::new(
-                manager,
+                &manager,
                 label,
                 tauri::WebviewUrl::App("toolbar-hitbox/index.html".into()),
             )
@@ -148,11 +177,11 @@ impl FancyToolbar {
             .build()?,
         };
 
-        let label = format!("{}/{}", Self::TARGET, monitor);
+        let label = format!("{}/{}", Self::TARGET, postfix);
         let window = match manager.get_webview_window(&label) {
             Some(window) => window,
             None => tauri::WebviewWindowBuilder::new(
-                manager,
+                &manager,
                 label,
                 tauri::WebviewUrl::App("toolbar/index.html".into()),
             )
@@ -171,7 +200,6 @@ impl FancyToolbar {
         };
 
         window.set_ignore_cursor_events(true)?;
-        Self::set_positions(&window, &hitbox, monitor)?;
 
         window.once("store-events-ready", Self::on_store_events_ready);
         Ok((window, hitbox))

@@ -18,7 +18,7 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, log_error, trace_lock};
+use crate::{error_handler::Result, log_error};
 
 lazy_static! {
     pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
@@ -140,7 +140,7 @@ impl NotificationManager {
         _args: &Option<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
         if let Some(listener) = listener {
-            let mut manager = trace_lock!(NOTIFICATION_MANAGER);
+            let mut manager = NOTIFICATION_MANAGER.lock();
             let mut current_list = manager.notifications_ids.clone();
 
             for u_notification in listener

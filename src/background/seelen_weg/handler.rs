@@ -3,7 +3,7 @@ use serde::Deserialize;
 use tauri::{command, Emitter};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{error_handler::Result, seelen::SEELEN, trace_lock, windows_api::WindowsApi};
+use crate::{error_handler::Result, seelen::get_app_handle, windows_api::WindowsApi};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
     UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
@@ -33,8 +33,7 @@ pub fn weg_request_update_previews(hwnds: Vec<Args>) -> Result<(), String> {
                 image
                     .save_with_format(&output_path, ImageFormat::Png)
                     .expect("could not save image");
-                trace_lock!(SEELEN)
-                    .handle()
+                get_app_handle()
                     .emit(format!("weg-preview-update-{}", hwnd.0).as_str(), ())
                     .expect("could not emit event");
             }
@@ -71,8 +70,7 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) {
                 WindowsApi::show_window(hwnd, SW_MINIMIZE)?;
             }
         } else {
-            trace_lock!(SEELEN)
-                .handle()
+            get_app_handle()
                 .shell()
                 .command("explorer")
                 .arg(&exe_path)

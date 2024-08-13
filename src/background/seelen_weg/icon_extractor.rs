@@ -29,6 +29,7 @@ use std::path::PathBuf;
 
 use crate::error_handler::Result;
 use crate::modules::uwp::UWP_MANAGER;
+use crate::trace_lock;
 use crate::utils::app_data_path;
 
 /// Convert BGRA to RGBA
@@ -182,7 +183,7 @@ pub fn extract_and_save_icon(handle: &AppHandle, exe_path: &str) -> Result<PathB
 
     log::trace!("Extracting icon for \"{}\"", filename);
 
-    if let Some(package) = UWP_MANAGER.lock().get_from_path(&path) {
+    if let Some(package) = trace_lock!(UWP_MANAGER).get_from_path(&path) {
         if let Some(uwp_icon_path) = package.get_light_icon(&filename) {
             log::debug!("Copying UWP icon from \"{}\"", uwp_icon_path.display());
 

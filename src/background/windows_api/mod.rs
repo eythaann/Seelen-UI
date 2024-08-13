@@ -1,8 +1,11 @@
 mod app_bar;
 mod com;
+mod iterator;
 
 pub use app_bar::*;
 pub use com::*;
+pub use iterator::*;
+use widestring::U16CStr;
 
 use std::{ffi::c_void, path::PathBuf, thread::sleep, time::Duration};
 
@@ -64,7 +67,12 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, hook::HOOK_MANAGER, log_error, trace_lock, winevent::WinEvent};
+use crate::{
+    error_handler::{AppError, Result},
+    hook::HOOK_MANAGER,
+    log_error, trace_lock,
+    winevent::WinEvent,
+};
 
 #[macro_export]
 macro_rules! pcstr {
@@ -462,6 +470,16 @@ impl WindowsApi {
         };
 
         Ok(p_physical_monitors[0])
+    }
+
+    pub fn monitor_name(hmonitor: HMONITOR) -> Result<String> {
+        let ex_info = Self::monitor_info(hmonitor)?;
+        Ok(U16CStr::from_slice_truncate(&ex_info.szDevice)
+            .map_err(|_| AppError::Generic("monitor name was not a valid u16 c string"))?
+            .to_ustring()
+            .to_string_lossy()
+            .trim_start_matches(r"\\.\")
+            .to_string())
     }
 
     pub fn monitor_info(hmonitor: HMONITOR) -> Result<MONITORINFOEXW> {

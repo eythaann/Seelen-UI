@@ -14,7 +14,6 @@ use tauri::{path::BaseDirectory, AppHandle, Emitter, Listener, Manager, WebviewW
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
-    Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
         EnumWindows, GetParent, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE,
         SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
@@ -26,6 +25,7 @@ use crate::{
     log_error,
     modules::uwp::UWP_MANAGER,
     seelen::{get_app_handle, SEELEN},
+    seelen_bar::FancyToolbar,
     trace_lock,
     utils::{are_overlaped, sleep_millis},
     windows_api::{AppBarData, AppBarDataState, WindowsApi},
@@ -83,6 +83,14 @@ pub struct SeelenWeg {
     hidden: bool,
     overlaped: bool,
     last_hitbox_rect: Option<RECT>,
+}
+
+impl Drop for SeelenWeg {
+    fn drop(&mut self) {
+        log::info!("Dropping {}", self.window.label());
+        log_error!(self.window.destroy());
+        log_error!(self.hitbox.destroy());
+    }
 }
 
 impl SeelenWeg {
@@ -205,7 +213,7 @@ impl SeelenWeg {
                 .unwrap_or_default()
                 .to_string_lossy()
                 .to_string();
-            app.execution_path = match UWP_MANAGER.lock().get_from_path(&path) {
+            app.execution_path = match trace_lock!(UWP_MANAGER).get_from_path(&path) {
                 Some(package) => package
                     .get_shell_path(&exe)
                     .unwrap_or_else(|| app.exe.clone()),
@@ -331,8 +339,7 @@ impl SeelenWeg {
         manager: &AppHandle<Wry>,
         monitor_id: isize,
     ) -> Result<(WebviewWindow, WebviewWindow)> {
-        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor_id))?;
-        let rc_work = monitor_info.monitorInfo.rcWork;
+        let rc_work = FancyToolbar::get_work_area_by_monitor(monitor_id)?;
 
         let hitbox = tauri::WebviewWindowBuilder::new(
             manager,
@@ -374,10 +381,11 @@ impl SeelenWeg {
         let main_hwnd = HWND(window.hwnd()?.0);
         let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
 
-        WindowsApi::move_window(hitbox_hwnd, &rc_work)?;
-
         // pre set position before resize in case of multiples dpi
+        WindowsApi::move_window(hitbox_hwnd, &rc_work)?;
         WindowsApi::move_window(main_hwnd, &rc_work)?;
+
+        WindowsApi::set_position(hitbox_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
         WindowsApi::set_position(main_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
 
         window.once("complete-setup", move |_event| {

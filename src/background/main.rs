@@ -78,9 +78,9 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     seelen.init(app.handle().clone())?;
 
     if !tauri::is_dev() {
-        log_error!(seelen.create_update_modal());
+        log_error!(seelen.show_update_modal());
 
-        let command = SEELEN_COMMAND_LINE.lock().clone();
+        let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
         let matches = command.get_matches();
         if !matches.get_flag("silent") {
             log_error!(seelen.show_settings());
@@ -113,7 +113,7 @@ fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
 
-    let command = SEELEN_COMMAND_LINE.lock().clone();
+    let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = command.get_matches();
     if is_just_getting_cmd_info(&matches) {
         return Ok(());

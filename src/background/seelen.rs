@@ -6,15 +6,18 @@ use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
-    Foundation::{BOOL, HWND, LPARAM, RECT},
-    Graphics::Gdi::{HDC, HMONITOR},
+    Foundation::{BOOL, HWND, LPARAM},
+    Graphics::Gdi::HMONITOR,
 };
 
 use crate::{
     error_handler::Result,
     hook::register_win_hook,
     log_error,
-    modules::uwp::UWP_MANAGER,
+    modules::{
+        monitors::{MonitorManagerEvent, MONITOR_MANAGER},
+        uwp::UWP_MANAGER,
+    },
     monitor::Monitor,
     seelen_shell::SeelenShell,
     seelen_weg::SeelenWeg,
@@ -65,7 +68,11 @@ impl Seelen {
     }
 
     pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut Monitor> {
-        self.monitors.iter_mut().find(|m| m.hmonitor().0 == id)
+        self.monitors.iter_mut().find(|m| m.handle().0 == id)
+    }
+
+    pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut Monitor> {
+        self.monitors.iter_mut().find(|m| m.name() == name)
     }
 
     /* pub fn shell(&self) -> Option<&SeelenShell> {
@@ -91,7 +98,7 @@ impl Seelen {
         }
 
         self.ensure_folders()?;
-        UWP_MANAGER.lock().refresh()?;
+        trace_lock!(UWP_MANAGER).refresh()?;
 
         let data_path = app.path().app_data_dir()?;
         self.state = State::new(&data_path.join("settings.json")).unwrap_or_default();
@@ -102,6 +109,26 @@ impl Seelen {
         Ok(())
     }
 
+    fn on_monitor_event(event: MonitorManagerEvent) {
+        std::thread::spawn(move || {
+            log::trace!("Monitor event: {:?}", event);
+            let mut seelen = trace_lock!(SEELEN);
+            match event {
+                MonitorManagerEvent::Added(_name, id) => {
+                    log_error!(seelen.add_monitor(id));
+                }
+                MonitorManagerEvent::Removed(_name, id) => {
+                    log_error!(seelen.remove_monitor(id));
+                }
+                MonitorManagerEvent::Updated(name, id) => {
+                    if let Some(m) = seelen.monitor_by_name_mut(&name) {
+                        m.update_handle(id);
+                    }
+                }
+            }
+        });
+    }
+
     pub fn start(&mut self) -> Result<()> {
         if self.state.is_weg_enabled() {
             SeelenWeg::hide_taskbar(true);
@@ -110,15 +137,20 @@ impl Seelen {
         self.start_ahk_shortcuts()?;
         declare_system_events_handlers()?;
 
-        std::thread::spawn(|| {
-            log::trace!("Enumerating Monitors");
-            WindowsApi::enum_display_monitors(Some(Self::enum_monitors_proc), 0)
-                .expect("Failed to enum monitors");
+        log::trace!("Enumerating Monitors");
+        {
+            let mut monitor_manager = trace_lock!(MONITOR_MANAGER);
+            for (_name, id) in &monitor_manager.monitors {
+                log_error!(self.add_monitor(*id));
+            }
+            monitor_manager.listen_changes(Self::on_monitor_event);
+        }
 
+        std::thread::spawn(|| {
             let mut all_ready = false;
             while !all_ready {
                 sleep_millis(10);
-                all_ready = trace_lock!(SEELEN).monitors().iter().all(|m| m.is_ready());
+                all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
             }
 
             log::trace!("Enumerating windows");
@@ -149,6 +181,16 @@ impl Seelen {
         if self.state.is_ahk_enabled() {
             self.kill_ahk_shortcuts();
         }
+    }
+
+    fn add_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
+        self.monitors.push(Monitor::new(hmonitor, &self.state)?);
+        Ok(())
+    }
+
+    fn remove_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
+        self.monitors.retain(|m| m.handle() != &hmonitor);
+        Ok(())
     }
 
     fn bind_file_extensions() -> Result<()> {
@@ -321,8 +363,8 @@ impl Seelen {
         }
     }
 
-    pub fn create_update_modal(&self) -> Result<()> {
-        log::trace!("Creating update notification window");
+    pub fn show_update_modal(&self) -> Result<()> {
+        log::trace!("Showing update notification window");
 
         // check if path is in windows apps folder
         let installation_path = self.handle().path().resource_dir()?;
@@ -357,20 +399,6 @@ impl Seelen {
 }
 
 impl Seelen {
-    unsafe extern "system" fn enum_monitors_proc(
-        hmonitor: HMONITOR,
-        _hdc: HDC,
-        _rect_clip: *mut RECT,
-        _lparam: LPARAM,
-    ) -> BOOL {
-        let mut seelen = trace_lock!(SEELEN);
-        match Monitor::new(hmonitor, &seelen.state) {
-            Ok(monitor) => seelen.monitors.push(monitor),
-            Err(err) => log::error!("Failed to create monitor: {:?}", err),
-        }
-        true.into()
-    }
-
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
         let mut seelen = trace_lock!(SEELEN);
         for monitor in seelen.monitors_mut() {

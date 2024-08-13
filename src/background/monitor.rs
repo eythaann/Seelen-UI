@@ -2,7 +2,7 @@ use color_eyre::eyre::eyre;
 use getset::{Getters, MutGetters};
 
 use crate::{
-    error_handler::Result, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
+    error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
     seelen_wm::WindowManager, state::State, utils::sleep_millis, windows_api::WindowsApi,
 };
 
@@ -11,20 +11,34 @@ use windows::Win32::Graphics::Gdi::HMONITOR;
 #[derive(Getters, MutGetters)]
 #[getset(get = "pub", get_mut = "pub")]
 pub struct Monitor {
-    hmonitor: HMONITOR,
+    handle: HMONITOR,
+    name: String,
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
     wm: Option<WindowManager>,
 }
 
 impl Monitor {
+    pub fn update_handle(&mut self, id: HMONITOR) {
+        self.handle = id;
+        log_error!(self.ensure_positions());
+    }
+
+    pub fn ensure_positions(&mut self) -> Result<()> {
+        if let Some(bar) = &mut self.toolbar {
+            bar.set_positions(self.handle.0)?;
+        }
+        Ok(())
+    }
+
     pub fn new(hmonitor: HMONITOR, settings: &State) -> Result<Self> {
         if hmonitor.is_invalid() {
             return Err(eyre!("Invalid Monitor").into());
         }
 
         let mut monitor = Self {
-            hmonitor,
+            handle: hmonitor,
+            name: WindowsApi::monitor_name(hmonitor)?,
             toolbar: None,
             weg: None,
             wm: None,
@@ -33,8 +47,9 @@ impl Monitor {
         if settings.is_bar_enabled() {
             // Tauri can fail the on creation of the first window, thats's why we only should retry
             // for the first window created, the next windows should work normally.
+            // Update(08/13/2024): I think this can be removed on recent tauri versions
             for attempt in 1..4 {
-                match FancyToolbar::new(hmonitor.0) {
+                match FancyToolbar::new(&monitor.name) {
                     Ok(bar) => {
                         monitor.toolbar = Some(bar);
                         break;
@@ -61,12 +76,13 @@ impl Monitor {
             }
         }
 
+        monitor.ensure_positions()?;
         Ok(monitor)
     }
 
     pub fn is_focused(&self) -> bool {
         let hwnd = WindowsApi::get_foreground_window();
-        self.hmonitor == WindowsApi::monitor_from_window(hwnd)
+        self.handle == WindowsApi::monitor_from_window(hwnd)
     }
 
     pub fn is_ready(&self) -> bool {

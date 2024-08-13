@@ -91,6 +91,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
     EVENT_SYSTEM_SWITCHEND, EVENT_SYSTEM_SWITCHER_APPDROPPED,
 };
 
+use crate::trace_lock;
 use crate::utils::constants::IGNORE_FULLSCREEN;
 use crate::windows_api::WindowsApi;
 
@@ -320,7 +321,7 @@ impl WinEvent {
                         handle: origin,
                         monitor: WindowsApi::monitor_from_window(origin),
                     };
-                    FULLSCREENED.lock().push(data);
+                    trace_lock!(FULLSCREENED).push(data);
                     Some(Self::SyntheticFullscreenStart(data))
                 } else {
                     None
@@ -330,7 +331,7 @@ impl WinEvent {
             | Self::ObjectDestroy
             | Self::ObjectCloaked
             | Self::SystemMinimizeStart => {
-                let mut fullscreened = FULLSCREENED.lock();
+                let mut fullscreened = trace_lock!(FULLSCREENED);
                 if let Some(index) = fullscreened.iter().position(|x| x.handle == origin) {
                     let data = fullscreened.remove(index);
                     Some(Self::SyntheticFullscreenEnd(data))
@@ -343,7 +344,7 @@ impl WinEvent {
                     return None;
                 }
 
-                let mut fullscreened = FULLSCREENED.lock();
+                let mut fullscreened = trace_lock!(FULLSCREENED);
                 let was_fullscreen = fullscreened.iter().position(|x| x.handle == origin);
                 let is_fullscreen = WindowsApi::is_fullscreen(origin).ok()?;
 

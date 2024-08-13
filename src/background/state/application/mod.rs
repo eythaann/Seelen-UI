@@ -63,7 +63,7 @@ impl FullState {
     }
 
     fn process_event(event: notify::Event) -> Result<()> {
-        let mut manager = FULL_STATE.lock();
+        let mut manager = trace_lock!(FULL_STATE);
 
         let data_dir = manager.handle.path().app_data_dir()?;
         let resources_dir = manager.handle.path().resource_dir()?;
