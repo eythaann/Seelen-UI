@@ -5,40 +5,49 @@ use crate::{error_handler::Result, windows_api::WindowsApi, winevent::WinEvent};
 use super::SeelenWeg;
 
 impl SeelenWeg {
-    pub fn process_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
+    pub fn process_global_win_event(event: WinEvent, origin: HWND) -> Result<()> {
         match event {
             WinEvent::ObjectShow | WinEvent::ObjectCreate => {
-                if SeelenWeg::is_real_window(origin, false) {
-                    self.add_hwnd(origin);
+                if Self::is_real_window(origin, false) {
+                    Self::add_hwnd(origin);
                 }
             }
             WinEvent::ObjectDestroy => {
-                if self.contains_app(origin) {
-                    self.remove_hwnd(origin);
+                if Self::contains_app(origin) {
+                    Self::remove_hwnd(origin);
                 }
             }
             WinEvent::ObjectHide => {
-                if self.contains_app(origin) {
+                if Self::contains_app(origin) {
                     // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
                     // parent so we can't filter it on open event but these are immediately hidden when the ApplicationFrameHost.exe parent
                     // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
                     let parent = WindowsApi::get_parent(origin);
                     if parent.0 != 0 {
-                        self.replace_hwnd(origin, parent)?;
+                        Self::replace_hwnd(origin, parent)?;
                     } else {
-                        self.remove_hwnd(origin);
+                        Self::remove_hwnd(origin);
                     }
                 }
             }
             WinEvent::ObjectNameChange => {
-                if self.contains_app(origin) {
-                    self.update_app(origin);
-                } else if SeelenWeg::is_real_window(origin, false) {
-                    self.add_hwnd(origin);
+                if Self::contains_app(origin) {
+                    Self::update_app(origin);
+                } else if Self::is_real_window(origin, false) {
+                    Self::add_hwnd(origin);
                 }
             }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
-                self.set_active_window(origin)?;
+                Self::set_active_window(origin)?;
+            }
+            _ => {}
+        }
+        Ok(())
+    }
+
+    pub fn process_individual_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
+        match event {
+            WinEvent::SystemForeground | WinEvent::ObjectFocus => {
                 self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {

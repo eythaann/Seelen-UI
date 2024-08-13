@@ -130,13 +130,17 @@ impl HookManager {
         let mut seelen = trace_lock!(SEELEN);
         log_error!(seelen.process_win_event(event, origin));
 
+        if seelen.state().is_weg_enabled() {
+            log_error!(SeelenWeg::process_global_win_event(event, origin));
+        }
+
         for monitor in seelen.monitors_mut() {
             if let Some(toolbar) = monitor.toolbar_mut() {
                 log_error!(toolbar.process_win_event(event, origin));
             }
 
             if let Some(weg) = monitor.weg_mut() {
-                log_error!(weg.process_win_event(event, origin));
+                log_error!(weg.process_individual_win_event(event, origin));
             }
 
             if let Some(wm) = monitor.wm_mut() {

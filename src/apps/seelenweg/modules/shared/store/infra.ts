@@ -54,6 +54,11 @@ export async function registerStoreEvents() {
     }
   };
 
+  await view.listen<boolean>('set-auto-hide', (event) => {
+    store.dispatch(RootActions.setIsOverlaped(event.payload));
+    updateHitbox();
+  });
+
   await listenGlobal<UserSettings>('updated-settings', (event) => {
     const userSettings = event.payload;
     i18n.changeLanguage(userSettings.jsonSettings.language);
@@ -64,39 +69,42 @@ export async function registerStoreEvents() {
     updateHitbox();
   });
 
-  await view.listen<AppFromBackground>('add-open-app', async (event) => {
+  await listenGlobal<AppFromBackground[]>('add-multiple-open-apps', async (event) => {
+    const items = await cleanItems(event.payload);
+    for (const item of items) {
+      store.dispatch(RootActions.addOpenApp(item));
+    }
+    updateHitboxIfNeeded();
+  });
+
+  await listenGlobal<AppFromBackground>('add-open-app', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.addOpenApp(item));
     updateHitboxIfNeeded();
   });
 
-  await view.listen<HWND>('remove-open-app', (event) => {
+  await listenGlobal<HWND>('remove-open-app', (event) => {
     store.dispatch(RootActions.removeOpenApp(event.payload));
     updateHitboxIfNeeded();
   });
 
-  await view.listen<AppFromBackground>('update-open-app-info', async (event) => {
+  await listenGlobal<AppFromBackground>('update-open-app-info', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.updateOpenAppInfo(item));
   });
 
-  await view.listen<AppFromBackground>('replace-open-app', async (event) => {
+  await listenGlobal<AppFromBackground>('replace-open-app', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.addOpenApp(item));
     store.dispatch(RootActions.removeOpenApp(item.process_hwnd));
   });
 
-  await view.listen<HWND>('set-focused-handle', (event) => {
+  await listenGlobal<HWND>('set-focused-handle', (event) => {
     store.dispatch(RootActions.setFocusedHandle(event.payload));
   });
 
-  await view.listen<string>('set-focused-executable', (event) => {
+  await listenGlobal<string>('set-focused-executable', (event) => {
     store.dispatch(RootActions.setFocusedExecutable(event.payload));
-  });
-
-  await view.listen<boolean>('set-auto-hide', (event) => {
-    store.dispatch(RootActions.setIsOverlaped(event.payload));
-    updateHitbox();
   });
 
   await listenGlobal<MediaSession[]>('media-sessions', (event) => {
@@ -127,6 +135,8 @@ export async function registerStoreEvents() {
       store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
     }, 100),
   );
+
+  await view.emitTo(view.label, 'store-events-ready');
 }
 
 function loadSettingsCSS(settings: Seelenweg) {

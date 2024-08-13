@@ -16,6 +16,7 @@ use windows::Win32::{
 
 use crate::{
     error_handler::Result,
+    log_error,
     seelen::{get_app_handle, SEELEN},
     seelen_bar::FancyToolbar,
     seelen_weg::SeelenWeg,
@@ -41,6 +42,13 @@ pub struct WindowManager {
     paused: bool,
     #[getset(get = "pub")]
     ready: bool,
+}
+
+impl Drop for WindowManager {
+    fn drop(&mut self) {
+        log::info!("Dropping {}", self.window.label());
+        log_error!(self.window.destroy());
+    }
 }
 
 impl WindowManager {

@@ -12,6 +12,7 @@ use serde::Deserialize;
 
 use crate::error_handler::Result;
 
+pub static IS_WEG_ENABLED: AtomicBool = AtomicBool::new(true);
 pub static IS_TOOLBAR_ENABLED: AtomicBool = AtomicBool::new(true);
 pub static TOOLBAR_HEIGHT: AtomicU32 = AtomicU32::new(30);
 
@@ -34,7 +35,7 @@ struct FancyToolbarState {
 }
 
 #[derive(Debug, Deserialize, Default, Clone)]
-pub struct State {
+pub struct SeelenSettings {
     #[serde(skip)]
     path: PathBuf,
     /** this is no snake case for a error in naming but is already published so FF */
@@ -46,7 +47,7 @@ pub struct State {
     ahk_variables: Option<HashMap<String, AhkShortcutConfig>>,
 }
 
-impl State {
+impl SeelenSettings {
     pub fn new(path: &PathBuf) -> Result<Self> {
         let content = if path.exists() {
             std::fs::read_to_string(path)?
@@ -80,6 +81,12 @@ impl State {
 
             if let Some(enable) = toolbar.enabled {
                 IS_TOOLBAR_ENABLED.store(enable, Ordering::SeqCst);
+            }
+        }
+
+        if let Some(weg) = &self.seelenweg {
+            if let Some(enable) = weg.enabled {
+                IS_WEG_ENABLED.store(enable, Ordering::SeqCst);
             }
         }
     }

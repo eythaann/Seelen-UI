@@ -10,7 +10,7 @@ use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use serde::Serialize;
-use tauri::{path::BaseDirectory, AppHandle, Emitter, Listener, Manager, WebviewWindow, Wry};
+use tauri::{path::BaseDirectory, Emitter, Listener, Manager, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
@@ -43,6 +43,7 @@ lazy_static! {
         "Seelen Fancy Toolbar Hitbox",
         "Program Manager",
     ]);
+    static ref OPEN_APPS: Mutex<Vec<SeelenWegApp>> = Mutex::new(Vec::new());
 }
 
 static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 7] = [
@@ -74,8 +75,6 @@ pub struct SeelenWegApp {
 
 #[derive(Getters, MutGetters)]
 pub struct SeelenWeg {
-    handle: AppHandle<Wry>,
-    apps: Vec<SeelenWegApp>,
     window: WebviewWindow<Wry>,
     hitbox: WebviewWindow<Wry>,
     #[getset(get = "pub")]
@@ -93,45 +92,24 @@ impl Drop for SeelenWeg {
     }
 }
 
+// SINGLETON
 impl SeelenWeg {
-    pub fn new(monitor: isize) -> Result<Self> {
-        log::info!("Creating SeelenWeg / {}", monitor);
-        let handle = get_app_handle();
-        let (window, hitbox) = Self::create_window(&handle, monitor)?;
-
-        let weg = Self {
-            handle,
-            apps: Vec::new(),
-            window,
-            hitbox,
-            ready: false,
-            hidden: false,
-            overlaped: false,
-            last_hitbox_rect: None,
-        };
-
-        Ok(weg)
-    }
-
-    pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
-        self.window.emit_to(self.window.label(), event, payload)?;
-        Ok(())
-    }
-
-    pub fn set_active_window(&self, hwnd: HWND) -> Result<()> {
+    pub fn set_active_window(hwnd: HWND) -> Result<()> {
         if WindowsApi::get_window_text(hwnd) == "Task Switching" {
             return Ok(());
         }
-        self.emit("set-focused-handle", hwnd.0)?;
-        self.emit(
+
+        let handle = get_app_handle();
+        handle.emit("set-focused-handle", hwnd.0)?;
+        handle.emit(
             "set-focused-executable",
             WindowsApi::exe(hwnd).unwrap_or_default(),
         )?;
         Ok(())
     }
 
-    pub fn missing_icon(&self) -> String {
-        self.handle
+    pub fn missing_icon() -> String {
+        get_app_handle()
             .path()
             .resolve("static/icons/missing.png", BaseDirectory::Resource)
             .expect("Failed to resolve default icon path")
@@ -139,32 +117,35 @@ impl SeelenWeg {
             .to_uppercase()
     }
 
-    pub fn extract_icon(&self, exe_path: &str) -> Result<String> {
-        Ok(extract_and_save_icon(&self.handle, exe_path)?
+    pub fn extract_icon(exe_path: &str) -> Result<String> {
+        Ok(extract_and_save_icon(&get_app_handle(), exe_path)?
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")
             .to_string())
     }
 
-    pub fn contains_app(&self, hwnd: HWND) -> bool {
-        self.apps
+    pub fn contains_app(hwnd: HWND) -> bool {
+        OPEN_APPS
+            .lock()
             .iter()
             .any(|app| app.hwnd == hwnd.0 || app.process_hwnd == hwnd.0)
     }
 
-    pub fn update_app(&mut self, hwnd: HWND) {
-        let app = self.apps.iter_mut().find(|app| app.hwnd == hwnd.0);
+    pub fn update_app(hwnd: HWND) {
+        let mut apps = OPEN_APPS.lock();
+        let app = apps.iter_mut().find(|app| app.hwnd == hwnd.0);
         if let Some(app) = app {
             app.title = WindowsApi::get_window_text(hwnd);
-            self.window
+            get_app_handle()
                 .emit("update-open-app-info", app.clone())
                 .expect("Failed to emit");
         }
     }
 
-    pub fn replace_hwnd(&mut self, old: HWND, new: HWND) -> Result<()> {
+    pub fn replace_hwnd(old: HWND, new: HWND) -> Result<()> {
         let mut found = None;
-        for app in self.apps.iter_mut() {
+        let mut apps = OPEN_APPS.lock();
+        for app in apps.iter_mut() {
             if app.hwnd == old.0 {
                 app.hwnd = new.0;
                 found = Some(app.clone());
@@ -173,14 +154,14 @@ impl SeelenWeg {
         }
 
         if let Some(app) = found {
-            self.emit("replace-open-app", app)?;
+            get_app_handle().emit("replace-open-app", app)?;
         }
 
         Ok(())
     }
 
-    pub fn add_hwnd(&mut self, hwnd: HWND) {
-        if self.contains_app(hwnd) {
+    pub fn add_hwnd(hwnd: HWND) {
+        if Self::contains_app(hwnd) {
             return;
         }
 
@@ -202,10 +183,9 @@ impl SeelenWeg {
         if let Ok(path) = WindowsApi::exe_path_v2(hwnd) {
             app.exe = path.to_string_lossy().to_string();
             app.icon_path = if !app.exe.is_empty() {
-                self.extract_icon(&app.exe)
-                    .unwrap_or_else(|_| self.missing_icon())
+                Self::extract_icon(&app.exe).unwrap_or_else(|_| Self::missing_icon())
             } else {
-                self.missing_icon()
+                Self::missing_icon()
             };
 
             let exe = path
@@ -221,18 +201,77 @@ impl SeelenWeg {
             };
         }
 
-        self.window
+        get_app_handle()
             .emit("add-open-app", app.clone())
             .expect("Failed to emit");
 
-        self.apps.push(app);
+        OPEN_APPS.lock().push(app);
     }
 
-    pub fn remove_hwnd(&mut self, hwnd: HWND) {
-        self.apps.retain(|app| app.hwnd != hwnd.0);
-        self.window
+    pub fn remove_hwnd(hwnd: HWND) {
+        OPEN_APPS.lock().retain(|app| app.hwnd != hwnd.0);
+        get_app_handle()
             .emit("remove-open-app", hwnd.0)
             .expect("Failed to emit");
+    }
+
+    pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {
+        if !WindowsApi::is_window_visible(hwnd) {
+            return false;
+        }
+
+        let parent = unsafe { GetParent(hwnd) };
+        if parent.0 != 0 {
+            return false;
+        }
+
+        let ex_style = WindowsApi::get_ex_styles(hwnd);
+        if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
+            && !ex_style.contains(WS_EX_APPWINDOW)
+        {
+            return false;
+        }
+
+        let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
+        if exe_path.starts_with("C:\\Windows\\SystemApps")
+            || (!ignore_frame && exe_path.ends_with("ApplicationFrameHost.exe"))
+        {
+            return false;
+        }
+
+        let title = WindowsApi::get_window_text(hwnd);
+        !TITLE_BLACK_LIST.contains(&title.as_str())
+    }
+
+    pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {
+        capture_window(hwnd.0).ok().map(|buf| {
+            let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
+            DynamicImage::ImageRgba8(image)
+        })
+    }
+}
+
+// INSTANCE
+impl SeelenWeg {
+    pub fn new(postfix: &str) -> Result<Self> {
+        log::info!("Creating {}/{}", Self::TARGET, postfix);
+        let (window, hitbox) = Self::create_window(postfix)?;
+
+        let weg = Self {
+            window,
+            hitbox,
+            ready: false,
+            hidden: false,
+            overlaped: false,
+            last_hitbox_rect: None,
+        };
+
+        Ok(weg)
+    }
+
+    pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
+        self.window.emit_to(self.window.label(), event, payload)?;
+        Ok(())
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> bool {
@@ -277,41 +316,6 @@ impl SeelenWeg {
         self.set_overlaped_status(self.is_overlapping(hwnd))
     }
 
-    pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {
-        if !WindowsApi::is_window_visible(hwnd) {
-            return false;
-        }
-
-        let parent = unsafe { GetParent(hwnd) };
-        if parent.0 != 0 {
-            return false;
-        }
-
-        let ex_style = WindowsApi::get_ex_styles(hwnd);
-        if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
-            && !ex_style.contains(WS_EX_APPWINDOW)
-        {
-            return false;
-        }
-
-        let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
-        if exe_path.starts_with("C:\\Windows\\SystemApps")
-            || (!ignore_frame && exe_path.ends_with("ApplicationFrameHost.exe"))
-        {
-            return false;
-        }
-
-        let title = WindowsApi::get_window_text(hwnd);
-        !TITLE_BLACK_LIST.contains(&title.as_str())
-    }
-
-    pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {
-        capture_window(hwnd.0).ok().map(|buf| {
-            let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
-            DynamicImage::ImageRgba8(image)
-        })
-    }
-
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
         WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_HIDE)?;
@@ -327,7 +331,18 @@ impl SeelenWeg {
     }
 
     pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        WindowsApi::bring_to(HWND(self.hitbox.hwnd()?.0), HWND_TOPMOST)
+        WindowsApi::bring_to(self.hitbox.hwnd()?, HWND_TOPMOST)?;
+        self.set_positions(WindowsApi::monitor_from_window(self.window.hwnd()?).0)?;
+        Ok(())
+    }
+
+    pub fn set_positions(&self, monitor_id: isize) -> Result<()> {
+        let rc_work = FancyToolbar::get_work_area_by_monitor(monitor_id)?;
+        let main_hwnd = HWND(self.window.hwnd()?.0);
+        // pre set position before resize in case of multiples dpi
+        WindowsApi::move_window(main_hwnd, &rc_work)?;
+        WindowsApi::set_position(main_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
+        Ok(())
     }
 }
 
@@ -335,15 +350,12 @@ impl SeelenWeg {
     const TARGET: &'static str = "seelenweg";
     const TARGET_HITBOX: &'static str = "seelenweg-hitbox";
 
-    fn create_window(
-        manager: &AppHandle<Wry>,
-        monitor_id: isize,
-    ) -> Result<(WebviewWindow, WebviewWindow)> {
-        let rc_work = FancyToolbar::get_work_area_by_monitor(monitor_id)?;
+    fn create_window(postfix: &str) -> Result<(WebviewWindow, WebviewWindow)> {
+        let manager = get_app_handle();
 
         let hitbox = tauri::WebviewWindowBuilder::new(
-            manager,
-            format!("{}/{}", Self::TARGET_HITBOX, monitor_id),
+            &manager,
+            format!("{}/{}", Self::TARGET_HITBOX, postfix),
             tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
         )
         .title("SeelenWeg Hitbox")
@@ -359,8 +371,8 @@ impl SeelenWeg {
         .build()?;
 
         let window = tauri::WebviewWindowBuilder::new(
-            manager,
-            format!("{}/{}", Self::TARGET, monitor_id),
+            &manager,
+            format!("{}/{}", Self::TARGET, postfix),
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
         )
         .title("SeelenWeg")
@@ -378,19 +390,10 @@ impl SeelenWeg {
 
         window.set_ignore_cursor_events(true)?;
 
-        let main_hwnd = HWND(window.hwnd()?.0);
-        let hitbox_hwnd = HWND(hitbox.hwnd()?.0);
-
-        // pre set position before resize in case of multiples dpi
-        WindowsApi::move_window(hitbox_hwnd, &rc_work)?;
-        WindowsApi::move_window(main_hwnd, &rc_work)?;
-
-        WindowsApi::set_position(hitbox_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
-        WindowsApi::set_position(main_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
-
+        let postfix = postfix.to_string();
         window.once("complete-setup", move |_event| {
             std::thread::spawn(move || {
-                if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
+                if let Some(monitor) = trace_lock!(SEELEN).monitor_by_name_mut(&postfix) {
                     if let Some(weg) = monitor.weg_mut() {
                         weg.ready = true;
                     }
@@ -398,6 +401,12 @@ impl SeelenWeg {
             });
         });
 
+        let label = window.label().to_string();
+        window.once("store-events-ready", move |_| {
+            let handler = get_app_handle();
+            let apps = &*OPEN_APPS.lock();
+            log_error!(handler.emit_to(label, "add-multiple-open-apps", apps));
+        });
         Ok((window, hitbox))
     }
 

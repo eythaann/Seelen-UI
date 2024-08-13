@@ -31,7 +31,6 @@ pub fn try_register_tray_icon(app: &mut App) -> Result<()> {
 }
 
 fn register_tray_icon(app: &mut App) -> Result<()> {
-    log::trace!("registering tray icon");
     let settings = MenuItemBuilder::with_id("settings", "Open Settings").build(app)?;
 
     let toggle_pause = MenuItemBuilder::with_id("pause", "Pause/Resume").build(app)?;

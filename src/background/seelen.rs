@@ -22,7 +22,7 @@ use crate::{
     seelen_shell::SeelenShell,
     seelen_weg::SeelenWeg,
     seelen_wm::WindowManager,
-    state::State,
+    state::SeelenSettings,
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::{ahk::AutoHotKey, sleep_millis},
@@ -49,7 +49,7 @@ pub struct Seelen {
     monitors: Vec<Monitor>,
     shell: Option<SeelenShell>,
     #[getset(get = "pub")]
-    state: State,
+    state: SeelenSettings,
 }
 
 /* ============== Getters ============== */
@@ -74,20 +74,16 @@ impl Seelen {
     pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut Monitor> {
         self.monitors.iter_mut().find(|m| m.name() == name)
     }
-
-    /* pub fn shell(&self) -> Option<&SeelenShell> {
-        self.shell.as_ref()
-    }
-
-    pub fn shell_mut(&mut self) -> Option<&mut SeelenShell> {
-        self.shell.as_mut()
-    } */
 }
 
 /* ============== Methods ============== */
 impl Seelen {
     pub fn refresh_state(&mut self) -> Result<()> {
-        self.state.refresh()
+        self.state.refresh()?;
+        for monitor in &mut self.monitors {
+            monitor.load_settings(&self.state)?;
+        }
+        Ok(())
     }
 
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
@@ -101,7 +97,7 @@ impl Seelen {
         trace_lock!(UWP_MANAGER).refresh()?;
 
         let data_path = app.path().app_data_dir()?;
-        self.state = State::new(&data_path.join("settings.json")).unwrap_or_default();
+        self.state = SeelenSettings::new(&data_path.join("settings.json")).unwrap_or_default();
 
         if self.state.is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
@@ -401,13 +397,12 @@ impl Seelen {
 impl Seelen {
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
         let mut seelen = trace_lock!(SEELEN);
-        for monitor in seelen.monitors_mut() {
-            if let Some(weg) = monitor.weg_mut() {
-                if SeelenWeg::is_real_window(hwnd, false) {
-                    weg.add_hwnd(hwnd);
-                }
-            }
 
+        if SeelenWeg::is_real_window(hwnd, false) {
+            SeelenWeg::add_hwnd(hwnd);
+        }
+
+        for monitor in seelen.monitors_mut() {
             if let Some(wm) = monitor.wm_mut() {
                 if WindowManager::is_manageable_window(hwnd, true) {
                     log_error!(wm.add_hwnd(hwnd));
