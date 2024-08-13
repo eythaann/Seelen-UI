@@ -6,10 +6,13 @@ commit-msg:
 pre-commit:
   commands:
     js-linter:
+      glob: "**/*.{js,jsx,ts,tsx}"
       run: npm run lint
     rust-linter:
+      glob: "**/*.rs"
       run: cargo fmt -- --check
     rust-code-check:
+      glob: "**/*.rs"
       run: cargo clippy -- -D warnings
 
 pre-push:
