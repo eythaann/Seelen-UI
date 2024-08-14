@@ -6,4 +6,10 @@ changelogContent = changelogContent.replace(/## \[Unreleased\]/g, `## \[Unreleas
 fs.writeFileSync('changelog.md', changelogContent);
 
 execSync('git add changelog.md');
-execSync(`git commit -m "docs(v${process.env.npm_new_version}): update changelog"`);
+
+let cargoTomlContent = fs.readFileSync('Cargo.toml', 'utf-8');
+cargoTomlContent = cargoTomlContent.replace(/^version\s*=\s*".*"/m, `version = "${process.env.npm_new_version}"`);
+fs.writeFileSync('Cargo.toml', cargoTomlContent);
+
+execSync('git add Cargo.toml');
+execSync('git commit --amend --no-edit');

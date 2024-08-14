@@ -13,7 +13,7 @@
     "translate": "ts-node ./scripts/translate.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
-    "preversion": "ts-node scripts/preversion.ts",
+    "postversion": "ts-node scripts/postversion.ts",
     "postinstall": "lefthook install"
   },
   "keywords": [],
