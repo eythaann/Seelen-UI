@@ -36,12 +36,12 @@ export const YamlToState_Apps = (yaml: anyObject[]): AppConfiguration[] => {
 
 export const StaticSettingsToState = (
   userSettings: UserSettings,
-  initialState: RootState,
+  state: RootState,
 ): RootState => {
   const { jsonSettings, yamlSettings, themes, layouts, placeholders } = userSettings;
 
   return {
-    ...initialState,
+    ...state,
     ...jsonSettings,
     availableThemes: themes,
     availableLayouts: layouts,
@@ -52,12 +52,12 @@ export const StaticSettingsToState = (
 
 export const StateToJsonSettings = (state: RootState): ISettings => {
   return pick(state, [
+    'fancyToolbar',
     'windowManager',
     'seelenweg',
-    'monitors',
     'selectedTheme',
+    'monitors',
     'ahkEnabled',
-    'fancyToolbar',
     'ahkVariables',
     'devTools',
     'language',

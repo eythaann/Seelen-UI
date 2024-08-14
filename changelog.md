@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- improve settings editor experience by adding live reload feature.
+
 ## [1.9.1]
 ### fix
 - no listening window moving of virtual desktop events.

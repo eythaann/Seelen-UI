@@ -1,20 +1,26 @@
-import { UserSettings } from '../../../../../shared.interfaces';
 import { setColorsAsCssVariables } from '../../../../shared';
+import { parseAsCamel } from '../../../../shared/schemas';
+import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { Theme } from '../../../../shared/schemas/Theme';
 import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { invoke } from '@tauri-apps/api/core';
-import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
+import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, debounce } from 'lodash';
 
-import { StartUser } from '../../StartUser/infra';
 import { startup } from '../tauri/infra';
 
-import { RootActions, RootReducer, RootSlice } from './app/reducer';
-import { StateAppsToYamlApps, StateToJsonSettings, StaticSettingsToState, YamlToState_Apps } from './app/StateBridge';
+import { RootActions, RootReducer } from './app/reducer';
+import {
+  StateAppsToYamlApps,
+  StateToJsonSettings,
+  StaticSettingsToState,
+  YamlToState_Apps,
+} from './app/StateBridge';
 
 import { RootState, UIColors } from './domain';
+
+const IsSavingSettings = { current: false };
 
 export const store = configureStore({
   reducer: RootReducer,
@@ -44,6 +50,25 @@ export async function registerStoreEvents() {
   await listenGlobal<anyObject[]>('settings-by-app', (event) => {
     store.dispatch(RootActions.setAppsConfigurations(YamlToState_Apps(event.payload)));
   });
+
+  await listenGlobal<any>(
+    'settings',
+    debounce((event) => {
+      if (IsSavingSettings.current) {
+        IsSavingSettings.current = false;
+        return;
+      }
+      console.log('SETTINGS CHANGED', event.payload);
+
+      const currentState = store.getState();
+      const newState: RootState = {
+        ...currentState,
+        ...parseAsCamel(SettingsSchema, event.payload),
+        toBeSaved: false,
+      };
+      store.dispatch(RootActions.setState(newState));
+    }, 100),
+  );
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
@@ -58,42 +83,29 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     .load(customPath);
 
   const currentState = store.getState();
-  const loadedState = StaticSettingsToState(userSettings, RootSlice.getInitialState());
+  const newState = StaticSettingsToState(userSettings, currentState);
+  newState.lastLoaded = cloneDeep(newState);
+  store.dispatch(RootActions.setState(newState));
 
-  let state = {
-    ...loadedState,
-    route: currentState.route,
-    autostart: currentState.autostart,
-    colors: currentState.colors,
-  };
-  state.lastLoaded = cloneDeep(state);
-
-  store.dispatch(RootActions.setState(state));
-
-  // !customPath => avoid start user on manual user loading file
+  /* // !customPath => avoid start user on manual user loading file
   if (!Object.keys(userSettings.jsonSettings).length && !customPath) {
     StartUser();
-  }
+  } */
 };
 
 export const SaveStore = async () => {
   try {
     const currentState = store.getState();
-    const settings: UserSettings = {
+    const settings = {
       jsonSettings: StateToJsonSettings(currentState),
       yamlSettings: [
         //...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
         ...StateAppsToYamlApps(currentState.appsConfigurations),
       ],
-      themes: currentState.availableThemes,
-      layouts: currentState.availableLayouts,
-      placeholders: currentState.availablePlaceholders,
-      env: await invoke('get_user_envs'),
     };
 
+    IsSavingSettings.current = true;
     await saveUserSettings(settings);
-    await emit('updated-settings', settings);
-
     store.dispatch(RootActions.setToBeSaved(false));
   } catch (error) {
     Modal.error({

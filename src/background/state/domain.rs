@@ -122,3 +122,7 @@ pub struct AppConfig {
     #[serde(default)]
     pub is_bundled: bool,
 }
+
+// ============== SETTINGS ==============
+
+pub type Settings = serde_json::Value;

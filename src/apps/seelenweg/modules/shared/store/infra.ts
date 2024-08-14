@@ -1,6 +1,6 @@
-import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
+import { FileChange } from '../../../../shared/events';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { Theme } from '../../../../shared/schemas/Theme';
@@ -59,16 +59,6 @@ export async function registerStoreEvents() {
     updateHitbox();
   });
 
-  await listenGlobal<UserSettings>('updated-settings', (event) => {
-    const userSettings = event.payload;
-    i18n.changeLanguage(userSettings.jsonSettings.language);
-    const settings = userSettings.jsonSettings.seelenweg;
-    store.dispatch(RootActions.setSettings(settings));
-    loadSettingsCSS(settings);
-    loadThemeCSS(userSettings);
-    updateHitbox();
-  });
-
   await listenGlobal<AppFromBackground[]>('add-multiple-open-apps', async (event) => {
     const items = await cleanItems(event.payload);
     for (const item of items) {
@@ -116,13 +106,13 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setColors(event.payload));
   });
 
-  await listenGlobal<Theme[]>('themes', async () => {
+  await listenGlobal<Theme[]>(FileChange.Themes, async () => {
     const userSettings = await new UserSettingsLoader().load();
     loadThemeCSS(userSettings);
   });
 
   await listenGlobal<unknown>(
-    'weg-items',
+    FileChange.WegItems,
     debounce(async () => {
       if (IsSavingPinnedItems.current) {
         IsSavingPinnedItems.current = false;
@@ -133,6 +123,14 @@ export async function registerStoreEvents() {
       store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
       store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
       store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
+    }, 100),
+  );
+
+  await listenGlobal<any>(
+    FileChange.Settings,
+    debounce(async () => {
+      await loadSettingsToStore();
+      updateHitbox();
     }, 100),
   );
 
@@ -173,15 +171,17 @@ function loadSettingsCSS(settings: Seelenweg) {
   }
 }
 
-export async function loadStore() {
+async function loadSettingsToStore() {
   const userSettings = await new UserSettingsLoader().load();
   i18n.changeLanguage(userSettings.jsonSettings.language);
-
   const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
   loadThemeCSS(userSettings);
+}
 
+export async function loadStore() {
+  await loadSettingsToStore();
   const apps = await loadPinnedItems();
   store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
   store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));

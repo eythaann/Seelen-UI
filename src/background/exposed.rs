@@ -182,6 +182,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         state_get_themes,
         state_get_placeholders,
         state_get_weg_items,
+        state_get_settings,
         state_get_specific_apps_configurations,
         // Media
         media_prev,

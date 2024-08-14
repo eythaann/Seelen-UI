@@ -1,9 +1,10 @@
-import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
+import { FileChange } from '../../../../shared/events';
 import { WindowManager } from '../../../../shared/schemas/WindowManager';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
+import { debounce } from 'lodash';
 
 import { RootActions, RootSlice } from './app';
 
@@ -25,15 +26,12 @@ export async function loadStore() {
 }
 
 export async function registerStoreEvents() {
-  await listenGlobal<UserSettings>('updated-settings', (event) => {
-    const userSettings = event.payload;
-
-    const settings = userSettings.jsonSettings.windowManager;
-    loadSettingsCSS(settings);
-    store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
-    store.dispatch(RootActions.setSettings(settings));
-    loadThemeCSS(userSettings);
-  });
+  await listenGlobal<any>(
+    FileChange.Settings,
+    debounce(async () => {
+      await loadStore();
+    }, 100),
+  );
 
   await listenGlobal<AddWindowPayload>('add-window', (event) => {
     store.dispatch(RootActions.addWindow(event.payload));
@@ -88,10 +86,21 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setColors(event.payload));
   });
 
-  await listenGlobal('themes', async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
-  });
+  await listenGlobal(
+    FileChange.Themes,
+    debounce(async () => {
+      const userSettings = await new UserSettingsLoader().load();
+      loadThemeCSS(userSettings);
+    }, 100),
+  );
+
+  await listenGlobal(
+    FileChange.Placeholders,
+    debounce(async () => {
+      const userSettings = await new UserSettingsLoader().withLayouts().load();
+      store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
+    }, 100),
+  );
 }
 
 function loadSettingsCSS(settings: WindowManager) {

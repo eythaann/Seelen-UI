@@ -38,10 +38,6 @@ async function getEntries(folderName: string) {
   return entries;
 }
 
-async function loadUserThemes(ref: UserSettings) {
-  ref.themes = await invoke('state_get_themes');
-}
-
 async function loadUserLayouts(ref: UserSettings) {
   const defaultLayout = ref.jsonSettings.windowManager.defaultLayout;
   let found = false;
@@ -123,7 +119,7 @@ export class UserSettingsLoader {
     return this;
   }
 
-  async load(route?: string): Promise<UserSettings> {
+  async load(customPath?: string): Promise<UserSettings> {
     const userSettings: UserSettings = {
       jsonSettings: parseAsCamel(SettingsSchema, {}),
       yamlSettings: [],
@@ -133,21 +129,19 @@ export class UserSettingsLoader {
       env: await invoke('get_user_envs'),
     };
 
-    const json_route = route || (await resolveDataPath('settings.json'));
+    let data =
+      customPath && (await fs.exists(customPath))
+        ? JSON.parse(await fs.readTextFile(customPath))
+        : await invoke('state_get_settings');
 
-    if (await fs.exists(json_route)) {
-      userSettings.jsonSettings = parseAsCamel(
-        SettingsSchema,
-        JSON.parse(await fs.readTextFile(json_route)),
-      );
-    }
+    userSettings.jsonSettings = parseAsCamel(SettingsSchema, data);
 
     if (this._withUserApps) {
       userSettings.yamlSettings = await invoke('state_get_specific_apps_configurations');
     }
 
     if (this._withThemes) {
-      await loadUserThemes(userSettings);
+      userSettings.themes = await invoke('state_get_themes');
     }
 
     if (this._withLayouts) {
@@ -164,10 +158,10 @@ export class UserSettingsLoader {
 
 export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
   const json_route = await resolveDataPath('settings.json');
-  await fs.writeTextFile(json_route, JSON.stringify(VariableConvention.fromCamelToSnake(settings)));
+  await fs.writeTextFile(json_route, JSON.stringify(VariableConvention.fromCamelToSnake(settings), null, 2));
 }
 
-export async function saveUserSettings(settings: UserSettings) {
+export async function saveUserSettings(settings: Pick<UserSettings, 'jsonSettings' | 'yamlSettings'>) {
   const yaml_route = await resolveDataPath('applications.yml');
 
   await saveJsonSettings(settings.jsonSettings);

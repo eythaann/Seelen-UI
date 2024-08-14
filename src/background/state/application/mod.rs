@@ -15,7 +15,7 @@ use crate::{error_handler::Result, log_error, seelen::get_app_handle, trace_lock
 
 use super::{
     application::apps_config::REGEX_IDENTIFIERS,
-    domain::{AppConfig, Placeholder, Theme, WegItems},
+    domain::{AppConfig, Placeholder, Settings, Theme, WegItems},
 };
 
 lazy_static! {
@@ -26,16 +26,18 @@ lazy_static! {
 
 pub struct FullState {
     handle: AppHandle<tauri::Wry>,
-    weg_items: WegItems,
     themes: HashMap<String, Theme>,
     placeholders: HashMap<String, Placeholder>,
+    settings: Settings,
     settings_by_app: VecDeque<AppConfig>,
+    weg_items: WegItems,
 }
 
 impl FullState {
     fn new() -> Result<Self> {
         let mut manager = Self {
             handle: get_app_handle(),
+            settings: serde_json::Value::Null,
             weg_items: serde_yaml::Value::Null,
             themes: HashMap::new(),
             placeholders: HashMap::new(),
@@ -62,11 +64,17 @@ impl FullState {
         &self.settings_by_app
     }
 
+    pub fn settings(&self) -> &Settings {
+        &self.settings
+    }
+
     fn process_event(event: notify::Event) -> Result<()> {
         let mut manager = trace_lock!(FULL_STATE);
 
         let data_dir = manager.handle.path().app_data_dir()?;
         let resources_dir = manager.handle.path().resource_dir()?;
+
+        let settings_items_path = data_dir.join("settings.json");
 
         let weg_items_path = data_dir.join("seelenweg_items.yaml");
 
@@ -80,9 +88,15 @@ impl FullState {
         let bundled_app_configs = resources_dir.join("static/apps_templates");
 
         if event.paths.contains(&weg_items_path) {
-            log::info!("Weg Items changed: {:?}", weg_items_path);
+            log::info!("Weg Items changed: {:?}", event.paths);
             manager.load_weg_items()?;
             manager.emit_weg_items()?;
+        }
+
+        if event.paths.contains(&settings_items_path) {
+            log::info!("Seelen Settings changed: {:?}", event.paths);
+            manager.load_settings()?;
+            manager.emit_settings()?;
         }
 
         if event
@@ -90,7 +104,7 @@ impl FullState {
             .iter()
             .any(|p| p.starts_with(&user_themes) || p.starts_with(&bundled_themes))
         {
-            log::info!("Theme changed: {:?}", weg_items_path);
+            log::info!("Theme changed: {:?}", event.paths);
             manager.load_themes()?;
             manager.emit_themes()?;
         }
@@ -100,7 +114,7 @@ impl FullState {
             .iter()
             .any(|p| p.starts_with(&user_placeholders) || p.starts_with(&bundled_placeholders))
         {
-            log::info!("Placeholder changed: {:?}", weg_items_path);
+            log::info!("Placeholder changed: {:?}", event.paths);
             manager.load_placeholders()?;
             manager.emit_placeholders()?;
         }
@@ -110,7 +124,7 @@ impl FullState {
             .iter()
             .any(|p| p.starts_with(&user_app_configs) || p.starts_with(&bundled_app_configs))
         {
-            log::info!("Specific App Configuration changed: {:?}", weg_items_path);
+            log::info!("Specific App Configuration changed: {:?}", event.paths);
             manager.load_settings_by_app()?;
             manager.emit_settings_by_app()?;
         }
@@ -139,7 +153,20 @@ impl FullState {
             }
         });
 
-        log::info!("Seelen UI Data Watcher started!");
+        log::trace!("Seelen UI Data Watcher started!");
+        Ok(())
+    }
+
+    fn load_settings(&mut self) -> Result<()> {
+        let dir = self.handle.path().app_data_dir()?;
+        let path = dir.join("settings.json");
+
+        self.settings = if !path.exists() {
+            serde_json::Value::Null
+        } else {
+            serde_json::from_str(&std::fs::read_to_string(&path)?)?
+        };
+
         Ok(())
     }
 
@@ -282,10 +309,16 @@ impl FullState {
     }
 
     fn load_all(&mut self) -> Result<()> {
+        self.load_settings()?;
         self.load_weg_items()?;
         self.load_themes()?;
         self.load_placeholders()?;
         self.load_settings_by_app()?;
+        Ok(())
+    }
+
+    fn emit_settings(&self) -> Result<()> {
+        self.handle.emit("settings", self.settings())?;
         Ok(())
     }
 

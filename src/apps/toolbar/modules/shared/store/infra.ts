@@ -1,6 +1,7 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
+import { FileChange } from '../../../../shared/events';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
@@ -35,9 +36,12 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setFocused(e.payload));
   });
 
-  await listenGlobal<UserSettings>('updated-settings', (event) => {
-    loadStore(event.payload);
-  });
+  await listenGlobal<any>(
+    FileChange.Settings,
+    debounce(async (_event) => {
+      await loadStore();
+    }, 100),
+  );
 
   await listenGlobal<PowerStatus>('power-status', (event) => {
     store.dispatch(RootActions.setPowerStatus(event.payload));
@@ -96,13 +100,16 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setColors(event.payload));
   });
 
-  await listenGlobal('themes', async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
-  });
+  await listenGlobal(
+    FileChange.Themes,
+    debounce(async () => {
+      const userSettings = await new UserSettingsLoader().load();
+      loadThemeCSS(userSettings);
+    }, 100),
+  );
 
   await listenGlobal(
-    'placeholders',
+    FileChange.Placeholders,
     debounce(async () => {
       if (IsSavingCustom.current) {
         IsSavingCustom.current = false;
@@ -126,8 +133,8 @@ function setPlaceholder(userSettings: UserSettings) {
   store.dispatch(RootActions.setPlaceholder(placeholder));
 }
 
-export async function loadStore(_userSettings?: UserSettings) {
-  const userSettings = _userSettings || (await new UserSettingsLoader().withPlaceholders().load());
+export async function loadStore() {
+  const userSettings = await new UserSettingsLoader().withPlaceholders().load();
   const settings = userSettings.jsonSettings.fancyToolbar;
   i18n.changeLanguage(userSettings.jsonSettings.language);
 
