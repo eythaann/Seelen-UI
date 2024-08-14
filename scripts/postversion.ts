@@ -11,5 +11,5 @@ let cargoTomlContent = fs.readFileSync('Cargo.toml', 'utf-8');
 cargoTomlContent = cargoTomlContent.replace(/^version\s*=\s*".*"/m, `version = "${process.env.npm_new_version}"`);
 fs.writeFileSync('Cargo.toml', cargoTomlContent);
 
-execSync('git add Cargo.toml');
+execSync('git add Cargo.toml Cargo.lock');
 execSync('git commit --amend --no-edit');
