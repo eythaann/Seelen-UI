@@ -1,9 +1,9 @@
-use std::env::args_os;
 use std::sync::Arc;
 
 use clap::{Arg, ArgAction, Command};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
 use crate::seelen::SEELEN;
@@ -82,12 +82,12 @@ lazy_static! {
                     .action(ArgAction::SetTrue)
                     .help("Start only background processes."),
                 Arg::new("verbose")
-                    .short('v')
+                    .short('V')
                     .long("verbose")
                     .action(ArgAction::SetTrue)
                     .help("Prints some extra process on the console."),
                 Arg::new("version")
-                    .short('V')
+                    .short('v')
                     .long("version")
                     .action(ArgAction::SetTrue)
                     .help("Prints the current version of Seelen."),
@@ -101,6 +101,16 @@ lazy_static! {
     ));
 }
 
+pub fn attach_console() -> Result<()> {
+    unsafe { AttachConsole(ATTACH_PARENT_PROCESS)? };
+    Ok(())
+}
+
+pub fn detach_console() -> Result<()> {
+    unsafe { FreeConsole()? };
+    Ok(())
+}
+
 pub fn loader_command() -> Command {
     let arg = Arg::new("value")
         .help("Value to load.")
@@ -110,6 +120,7 @@ pub fn loader_command() -> Command {
 
     Command::new("load")
         .about("Opens the Seelen Files or resolve URI.")
+        .arg_required_else_help(true)
         .subcommands([
             Command::new("file")
                 .about("Load a .slu file.")
@@ -118,21 +129,21 @@ pub fn loader_command() -> Command {
         ])
 }
 
-pub fn is_just_getting_cmd_info(matches: &clap::ArgMatches) -> bool {
+pub fn handle_cli_info(matches: &clap::ArgMatches) -> Result<bool> {
+    let mut r = false;
+    attach_console()?;
+
     if matches.get_flag("verbose") {
         println!("{:?}", matches);
     }
 
     if matches.get_flag("version") {
-        println!("1.0.0");
-        return true;
+        println!("{}", env!("CARGO_PKG_VERSION"));
+        r = true;
     }
 
-    if args_os().any(|arg| arg == "help" || arg == "--help" || arg == "-h") {
-        return true;
-    }
-
-    false
+    detach_console()?;
+    Ok(r)
 }
 
 pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {

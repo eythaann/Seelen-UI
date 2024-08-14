@@ -27,7 +27,7 @@ use exposed::register_invoke_handler;
 use itertools::Itertools;
 use modules::{
     cli::{
-        application::{is_just_getting_cmd_info, SEELEN_COMMAND_LINE},
+        application::{attach_console, handle_cli_info, SEELEN_COMMAND_LINE},
         infrastructure::Client,
     },
     tray::application::ensure_tray_overflow_creation,
@@ -114,8 +114,17 @@ fn main() -> Result<()> {
     register_panic_hook();
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
-    let matches = command.get_matches();
-    if is_just_getting_cmd_info(&matches) {
+    let matches = match command.try_get_matches() {
+        Ok(m) => m,
+        // (help, --help or -h) is also managed as error
+        Err(e) => {
+            attach_console()?;
+            e.print()?;
+            return Ok(());
+        }
+    };
+
+    if handle_cli_info(&matches)? {
         return Ok(());
     }
 

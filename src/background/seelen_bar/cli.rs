@@ -15,7 +15,8 @@ impl FancyToolbar {
     pub fn get_cli() -> Command {
         Command::new(Self::CLI_IDENTIFIER)
             .about("Seelen's Fancy Toolbar")
-            .visible_alias("ftb")
+            .visible_alias("tb")
+            .arg_required_else_help(true)
             .subcommands(SubCommand::commands())
     }
 

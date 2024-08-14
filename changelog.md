@@ -6,6 +6,9 @@
 - add file associations with .slu files
 - improve settings editor experience by adding live reload feature.
 
+### fix
+- cli no working on production
+
 ## [1.9.1]
 ### fix
 - no listening window moving of virtual desktop events.

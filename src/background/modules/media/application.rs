@@ -221,13 +221,9 @@ impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
 impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
     fn OnSessionCreated(
         &self,
-        new_session: Option<&IAudioSessionControl>,
+        _new_session: Option<&IAudioSessionControl>,
     ) -> windows::core::Result<()> {
-        if let Some(session) = new_session {
-            println!("SESSION CREATED! {}", unsafe {
-                session.GetDisplayName()?.to_string()?
-            });
-        }
+        // println!("SESSION CREATED!")
         Ok(())
     }
 }

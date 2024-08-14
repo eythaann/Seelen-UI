@@ -69,6 +69,7 @@ impl WindowManager {
         Command::new(Self::CLI_IDENTIFIER)
             .about("Manage the Seelen Window Manager.")
             .visible_alias("wm")
+            .arg_required_else_help(true)
             .subcommands(SubCommand::commands())
     }
 
