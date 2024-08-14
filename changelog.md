@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 ### enhancements
+- add file associations with .slu files
 - improve settings editor experience by adding live reload feature.
 
 ## [1.9.1]
