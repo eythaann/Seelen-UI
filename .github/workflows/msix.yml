@@ -50,8 +50,23 @@ jobs:
     needs: upload-store-msix-to-release
     runs-on: windows-latest
     steps:
+      - name: Get Latest Release
+        id: get-version
+        uses: actions/github-script@v6
+        with:
+          script: |-
+            const { owner, repo } = context.repo;
+            const latestRelease = await github.rest.repos.getLatestRelease({ owner, repo });
+            const tag = latestRelease.data.tag_name;
+            const version = tag.replace("v", "") + ".0";
+            core.setOutput('version', version);
+            core.setOutput('release-tag', tag);
+            console.log("Release tag: ", tag, " Version: ", version);
+
       - uses: vedantmgoyal9/winget-releaser@main
         with:
           identifier: Seelen.SeelenUI
+          version: ${{ steps.get-version.outputs.version }}
+          release-tag: ${{ steps.get-version.outputs.release-tag }}
           installers-regex: '\.msix$'
           token: ${{ secrets.WORKFLOWS_TOKEN }}
