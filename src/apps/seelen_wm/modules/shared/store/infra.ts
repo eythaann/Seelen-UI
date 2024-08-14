@@ -78,7 +78,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.focus(event.payload));
   });
 
-  await listenGlobal<AddWindowPayload>('move-window-to-workspace', (event) => {
+  await listenGlobal<AddWindowPayload>('update-window', (event) => {
     store.dispatch(RootActions.removeWindow(event.payload.hwnd));
     store.dispatch(RootActions.addWindow(event.payload));
   });

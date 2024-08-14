@@ -14,9 +14,17 @@ use super::WindowManager;
 
 impl WindowManager {
     pub fn process_vd_event(&mut self, event: &DesktopEvent) -> Result<()> {
-        if let DesktopEvent::DesktopChanged { new, old: _ } = event {
-            self.discard_reservation()?;
-            self.set_active_workspace(format!("{:?}", new.get_id()?))?;
+        match event {
+            DesktopEvent::DesktopChanged { new, old: _ } => {
+                self.discard_reservation()?;
+                self.set_active_workspace(format!("{:?}", new.get_id()?))?;
+            }
+            DesktopEvent::WindowChanged(hwnd) => {
+                if self.is_managed(*hwnd) {
+                    self.update_app(*hwnd)?;
+                }
+            }
+            _ => {}
         }
         Ok(())
     }
@@ -36,7 +44,7 @@ impl WindowManager {
                 }
             }
             WinEvent::SystemMinimizeEnd => {
-                if !self.is_managed(origin) && Self::should_manage(origin) {
+                if self.should_be_added(origin) {
                     self.add_hwnd(origin)?;
                 }
             }
@@ -65,7 +73,7 @@ impl WindowManager {
                     self.pseudo_pause()?;
                 }
 
-                if !self.is_managed(origin) && WindowManager::should_manage(origin) {
+                if self.should_be_added(origin) {
                     self.set_active_window(origin)?;
                     if self.add_hwnd(origin)? && FORCE_RETILING_AFTER_ADD.contains(&title) {
                         // Todo search a better way to do this
@@ -80,7 +88,7 @@ impl WindowManager {
                 }
             }
             WinEvent::ObjectNameChange => {
-                if !self.is_managed(origin) && WindowManager::should_manage(origin) {
+                if self.should_be_added(origin) {
                     self.set_active_window(origin)?;
                     let title = WindowsApi::get_window_text(origin);
                     if self.add_hwnd(origin)? && FORCE_RETILING_AFTER_ADD.contains(&title) {

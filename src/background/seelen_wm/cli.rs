@@ -112,9 +112,6 @@ impl WindowManager {
                 match desktops.get(index) {
                     Some(desktop) => {
                         let to_move = WindowsApi::get_foreground_window();
-                        if self.is_managed(to_move) && !self.is_floating(to_move) {
-                            self.emit_send_to_workspace(to_move, desktop.id())?;
-                        }
                         winvd::move_window_to_desktop(desktop.guid(), &to_move)?;
                         if let Some(next) = Self::get_next_by_order(to_move) {
                             WindowsApi::async_force_set_foreground(next);
@@ -128,18 +125,9 @@ impl WindowManager {
                 match desktops.get(index) {
                     Some(desktop) => {
                         let to_move = WindowsApi::get_foreground_window();
-                        let to_move_is_managed = self.is_managed(to_move);
-                        self.pseudo_pause()?;
-                        if to_move_is_managed && !self.is_floating(to_move) {
-                            self.emit_send_to_workspace(to_move, desktop.id())?;
-                        }
-                        let guid = desktop.guid();
-                        let desktop = winvd::Desktop::from(guid);
-                        winvd::move_window_to_desktop(desktop, &to_move)?;
-                        winvd::switch_desktop(desktop)?;
-                        if to_move_is_managed {
-                            self.pseudo_resume()?;
-                        }
+                        let desktop_guid = desktop.guid();
+                        winvd::move_window_to_desktop(desktop_guid, &to_move)?;
+                        winvd::switch_desktop(desktop_guid)?;
                     }
                     None => log::error!("Invalid workspace index: {}", index),
                 }

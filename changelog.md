@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- no listening window moving of virtual desktop events.
+- no closing or starting widgets on settings changes.
+- no listening monitors changes.
+- no loading toolbar modules on wake up
+
 ## [1.9.0]
 ### features
 - allow custom images on toolbar by `imgFromUrl`, `imgFromPath` and `imgFromExe` functions.

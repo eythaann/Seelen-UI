@@ -9,6 +9,7 @@ use serde::Serialize;
 use tauri::{AppHandle, Emitter, Listener, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM},
+    Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
         EnumWindows, HWND_BOTTOM, HWND_TOPMOST, SWP_NOACTIVATE, WS_CAPTION, WS_EX_TOPMOST,
     },
@@ -27,17 +28,18 @@ use crate::{
 };
 
 #[derive(Serialize, Clone)]
-struct AddWindowPayload {
+pub struct ManagingApp {
     hwnd: isize,
+    monitor: String,
     desktop_id: String,
-    as_floating: bool,
+    is_floating: bool,
 }
 
 #[derive(Getters, MutGetters)]
 pub struct WindowManager {
     window: WebviewWindow,
-    tiled_handles: Vec<isize>,
-    floating_handles: Vec<isize>,
+    monitor: HMONITOR,
+    apps: Vec<ManagingApp>,
     pub current_virtual_desktop: String,
     paused: bool,
     #[getset(get = "pub")]
@@ -65,8 +67,8 @@ impl WindowManager {
 
         Ok(Self {
             window: Self::create_window(&handle, monitor)?,
-            tiled_handles: Vec::new(),
-            floating_handles: Vec::new(),
+            monitor: HMONITOR(monitor),
+            apps: Vec::new(),
             current_virtual_desktop: VirtualDesktopManager::get_current_virtual_desktop()?.id(),
             paused: true, // paused until complete-setup is called
             ready: false,
@@ -79,11 +81,21 @@ impl WindowManager {
     }
 
     pub fn is_managed(&self, hwnd: HWND) -> bool {
-        self.tiled_handles.contains(&hwnd.0) || self.floating_handles.contains(&hwnd.0)
+        self.get_app(hwnd).is_some()
     }
 
     pub fn is_floating(&self, hwnd: HWND) -> bool {
-        self.floating_handles.contains(&hwnd.0)
+        self.get_app(hwnd)
+            .map(|app| app.is_floating)
+            .unwrap_or(false)
+    }
+
+    pub fn get_app(&self, hwnd: HWND) -> Option<&ManagingApp> {
+        self.apps.iter().find(|app| app.hwnd == hwnd.0)
+    }
+
+    pub fn get_app_mut(&mut self, hwnd: HWND) -> Option<&mut ManagingApp> {
+        self.apps.iter_mut().find(|app| app.hwnd == hwnd.0)
     }
 
     pub fn set_active_window(&mut self, hwnd: HWND) -> Result<()> {
@@ -130,10 +142,11 @@ impl WindowManager {
             return Ok(false);
         }
 
-        let mut desktop_to_add = self.current_virtual_desktop.clone();
-        if WindowsApi::is_cloaked(hwnd)? {
-            desktop_to_add = VirtualDesktopManager::get_by_window(hwnd)?.id();
-        }
+        let desktop_to_add = if WindowsApi::is_cloaked(hwnd)? {
+            VirtualDesktopManager::get_by_window(hwnd)?.id()
+        } else {
+            self.current_virtual_desktop.clone()
+        };
 
         log::trace!(
             "Adding {}({}) <=> {:?} on desktop: {}",
@@ -143,57 +156,56 @@ impl WindowManager {
             desktop_to_add
         );
 
-        let mut as_floating = false;
+        let mut is_floating = false;
         if let Some(config) = trace_lock!(FULL_STATE).get_app_config_by_window(hwnd) {
-            as_floating = config.options_contains(AppExtraFlag::Float);
+            is_floating = config.options_contains(AppExtraFlag::Float);
         }
 
-        if as_floating {
-            self.floating_handles.push(hwnd.0);
-        } else {
-            self.tiled_handles.push(hwnd.0);
-        }
+        let app = ManagingApp {
+            hwnd: hwnd.0,
+            monitor: WindowsApi::monitor_name(WindowsApi::monitor_from_window(hwnd))?,
+            desktop_id: desktop_to_add,
+            is_floating,
+        };
 
-        self.emit(
-            "add-window",
-            AddWindowPayload {
-                hwnd: hwnd.0,
-                desktop_id: desktop_to_add,
-                as_floating,
-            },
-        )?;
+        self.emit("add-window", &app)?;
+        self.apps.push(app);
         Ok(true)
     }
 
-    pub fn emit_send_to_workspace(&mut self, hwnd: HWND, desktop_id: String) -> Result<()> {
-        let mut as_floating = false;
-        if let Some(config) = trace_lock!(FULL_STATE).get_app_config_by_window(hwnd) {
-            as_floating = config.options_contains(AppExtraFlag::Float);
+    pub fn update_app(&mut self, hwnd: HWND) -> Result<()> {
+        if self.paused {
+            return Ok(());
         }
-        self.emit(
-            "move-window-to-workspace",
-            AddWindowPayload {
-                hwnd: hwnd.0,
-                desktop_id,
-                as_floating,
-            },
-        )?;
-        Ok(())
-    }
+        let app = {
+            let app = match self.get_app_mut(hwnd) {
+                Some(app) => app,
+                None => return Ok(()),
+            };
 
-    pub fn remove_hwnd_no_emit(&mut self, hwnd: HWND) -> bool {
-        if self.paused || !self.is_managed(hwnd) {
-            return false;
-        }
-        self.tiled_handles.retain(|&x| x != hwnd.0);
-        true
+            let current_desktop = VirtualDesktopManager::get_by_window(HWND(app.hwnd))?.id();
+            if app.desktop_id != current_desktop {
+                app.desktop_id = current_desktop;
+            }
+            app.clone()
+        };
+        self.emit("update-window", app)?;
+        Ok(())
     }
 
     /** triggered when a window is bounced by the front-end on adding action */
     pub fn bounce_handle(&mut self, hwnd: HWND) {
-        if self.remove_hwnd_no_emit(hwnd) {
-            self.floating_handles.push(hwnd.0);
+        if let Some(app) = self.get_app_mut(hwnd) {
+            app.is_floating = true;
         }
+    }
+
+    fn remove_hwnd_no_emit(&mut self, hwnd: HWND) -> bool {
+        if self.paused || !self.is_managed(hwnd) {
+            return false;
+        }
+        self.apps.retain(|x| x.hwnd != hwnd.0);
+        true
     }
 
     pub fn remove_hwnd(&mut self, hwnd: HWND) -> Result<bool> {
@@ -233,11 +245,17 @@ impl WindowManager {
         }
         Ok(())
     }
+
+    pub fn should_be_added(&self, hwnd: HWND) -> bool {
+        !self.is_managed(hwnd)
+            && self.monitor == WindowsApi::monitor_from_window(hwnd)
+            && Self::should_be_managed(hwnd)
+    }
 }
 
 // UTILS AND STATICS
 impl WindowManager {
-    pub fn should_manage(hwnd: HWND) -> bool {
+    pub fn should_be_managed(hwnd: HWND) -> bool {
         let mut settings_by_app = trace_lock!(FULL_STATE);
         if let Some(config) = settings_by_app.get_app_config_by_window(hwnd) {
             return config.options_contains(AppExtraFlag::Force) || {
