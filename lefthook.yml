@@ -19,6 +19,8 @@ pre-push:
   parallel: true
   commands:
     js-test:
+      glob: "**/*.{js,jsx,ts,tsx}"
       run: npm run test
     rust-test:
+      glob: "**/*.rs"
       run: cargo test
