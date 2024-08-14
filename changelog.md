@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.1]
 ### fix
 - no listening window moving of virtual desktop events.
 - no closing or starting widgets on settings changes.
