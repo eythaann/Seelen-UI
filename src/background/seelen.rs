@@ -156,13 +156,9 @@ impl Seelen {
             register_win_hook().expect("Failed to register windows hook");
         });
 
-        if WindowsApi::is_elevated()? {
-            Self::bind_file_extensions()?;
-
-            if Self::is_auto_start_enabled()? {
-                // override auto-start task in case of location change, normally this happen on MSIX update
-                self.set_auto_start(true)?;
-            }
+        if WindowsApi::is_elevated()? && Self::is_auto_start_enabled()? {
+            // override auto-start task in case of location change, normally this happen on MSIX update
+            self.set_auto_start(true)?;
         }
 
         Ok(())
@@ -186,15 +182,6 @@ impl Seelen {
 
     fn remove_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
         self.monitors.retain(|m| m.handle() != &hmonitor);
-        Ok(())
-    }
-
-    fn bind_file_extensions() -> Result<()> {
-        use crate::modules::file_extensions::infrastructure::*;
-
-        Theme::create_uri_protocol()?;
-        Theme::create_ext_protocol()?;
-
         Ok(())
     }
 

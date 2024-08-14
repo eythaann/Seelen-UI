@@ -1,8 +1,8 @@
 {
   "$schema": "node_modules/@tauri-apps/cli/schema.json",
   "productName": "Seelen UI",
-  "version": "package.json",
   "identifier": "com.seelen.seelen-ui",
+  "version": "package.json",
   "app": {
     "security": {
       "assetProtocol": {
@@ -45,9 +45,20 @@
     },
     "publisher": "Seelen",
     "category": "Utility",
-    "longDescription": "",
-    "shortDescription": "",
-    "licenseFile": "LICENSE"
+    "copyright": "Copyright © 2024",
+    "shortDescription": "Seelen UI",
+    "longDescription": "Seelen UI Fully Customizable Desktop Environment for Windows",
+    "licenseFile": "LICENSE",
+    "homepage": "https://github.com/eythaann/Seelen-UI",
+    "fileAssociations": [
+      {
+        "ext": [".slu"],
+        "name": "SeelenUI.File",
+        "description": "Seelen UI File",
+        "mimeType": "text/plain",
+        "role": "Viewer"
+      }
+    ]
   },
   "plugins": {
     "updater": {

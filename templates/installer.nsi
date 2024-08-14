@@ -54,6 +54,7 @@ ${StrLoc}
 !define WEBVIEW2BOOTSTRAPPERPATH "{{webview2_bootstrapper_path}}"
 !define WEBVIEW2INSTALLERPATH "{{webview2_installer_path}}"
 !define UNINSTKEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCTNAME}"
+!define APPPATHKEY "Software\Microsoft\Windows\CurrentVersion\App Paths\${MAINBINARYNAME}.exe"
 !define MANUPRODUCTKEY "Software\${MANUFACTURER}\${PRODUCTNAME}"
 !define UNINSTALLERSIGNCOMMAND "{{uninstaller_sign_cmd}}"
 !define ESTIMATEDSIZE "{{estimated_size}}"
@@ -590,6 +591,7 @@ Section Install
        !insertmacro APP_ASSOCIATE "{{ext}}" "{{or association.name ext}}" "{{association-description association.description ext}}" "$INSTDIR\${MAINBINARYNAME}.exe,0" "Open with ${PRODUCTNAME}" "$INSTDIR\${MAINBINARYNAME}.exe $\"%1$\""
     {{/each}}
   {{/each}}
+  !insertmacro UPDATEFILEASSOC
 
   ; Register deep links
   {{#each deep_link_protocols as |protocol| ~}}
@@ -631,6 +633,10 @@ Section Install
     WriteRegStr SHCTX "${UNINSTKEY}" "URLUpdateInfo" "${HOMEPAGE}"
     WriteRegStr SHCTX "${UNINSTKEY}" "HelpLink" "${HOMEPAGE}"
   !endif
+
+  ; Register Main Binary path to Apps Paths
+  WriteRegStr SHCTX "${APPPATHKEY}" "" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\""
+  WriteRegStr SHCTX "${APPPATHKEY}" "Path" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\""
 
   ; Create start menu shortcut
   !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
@@ -766,10 +772,13 @@ Section Uninstall
   ; Remove registry information for add/remove programs
   !if "${INSTALLMODE}" == "both"
     DeleteRegKey SHCTX "${UNINSTKEY}"
+    DeleteRegKey SHCTX "${APPPATHKEY}"
   !else if "${INSTALLMODE}" == "perMachine"
     DeleteRegKey HKLM "${UNINSTKEY}"
+    DeleteRegKey HKLM "${APPPATHKEY}"
   !else
     DeleteRegKey HKCU "${UNINSTKEY}"
+    DeleteRegKey HKCU "${APPPATHKEY}"
   !endif
 
   DeleteRegValue HKCU "${MANUPRODUCTKEY}" "Installer Language"
@@ -784,7 +793,7 @@ Section Uninstall
   ${EndIf}
 
   !ifmacrodef NSIS_HOOK_POSTUNINSTALL
-    !insertmacro NSIS_HOOK_PREUNINSTALL
+    !insertmacro NSIS_HOOK_POSTUNINSTALL
   !endif
 
   ; Auto close if passive mode
