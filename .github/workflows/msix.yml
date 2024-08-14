@@ -69,4 +69,4 @@ jobs:
           version: ${{ steps.get-version.outputs.version }}
           release-tag: ${{ steps.get-version.outputs.release-tag }}
           installers-regex: '\.msix$'
-          token: ${{ secrets.WORKFLOWS_TOKEN }}
+          token: ${{ secrets.WINGET_TOKEN }}
