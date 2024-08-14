@@ -39,7 +39,7 @@ jobs:
   upload-store-msix-to-release:
     name: Upload Signed MSIX to release
     needs: check-msix
-    if: needs.check-msix.outputs.MSIX_ALREADY_EXIST == 'false'
+    if: ${{ needs.check-msix.outputs.MSIX_ALREADY_EXIST == 'false' }}
     runs-on: ubuntu-latest
     steps:
       - name: Upload store MSIX to release
