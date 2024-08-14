@@ -66,10 +66,22 @@ Welcome to Seelen UI, where customization meets productivity, revolutionizing yo
 You can choose from different installation options based on your preference:
 
 ### Microsoft Store <em>(recommended)</em>
-Download the latest version from the [Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) page this is the recommended option because you will recieve updates, and a secure version of the program.
+Download the latest version from the [Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) page. This is the recommended option because you will receive updates and a secure version of the program.
+
+### Winget
+Install the latest version using:
+
+``` pwsh
+winget install --id Seelen.SeelenUI
+``` 
+This option also uses the signed `.msix` package and ensures you have the latest secure version.
+
+### .msix Installer
+Download the `.msix` installer from the [Releases](https://github.com/eythaann/seelen-ui/releases) page. This package is signed, ensuring a secure installation.
 
 ### Setup.exe
-Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the `setup.exe` installer. This will notify for new updates but maybe is detected as virus because actually is not signed.
+Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the `setup.exe` installer. This option is less recommended as the installer is not signed, which may cause it to be flagged as a potential threat by some antivirus programs.
+
 
 ## Usage
 
