@@ -11,7 +11,8 @@ on:
 jobs:
   check-msix:
     runs-on: ubuntu-latest
-
+    outputs:
+      MSIX_ALREADY_EXIST: ${{ steps.check_msix.outputs.MSIX_ALREADY_EXIST }}
     steps:
       - name: Check for MSIX file in latest release
         id: check_msix
@@ -31,10 +32,6 @@ jobs:
               core.setOutput('MSIX_ALREADY_EXIST', 'false');
               console.log('No MSIX file found in the latest release.');
             }
-
-      - name: Output result
-        run: |
-          echo "MSIX_ALREADY_EXIST=${{ steps.check_msix.outputs.MSIX_ALREADY_EXIST }}"
 
   upload-store-msix-to-release:
     name: Upload Signed MSIX to release
