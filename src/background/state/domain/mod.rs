@@ -1,4 +1,7 @@
+mod settings;
+
 use serde::{Deserialize, Serialize};
+pub use settings::*;
 
 // ============== THEMES ==============
 
@@ -122,7 +125,3 @@ pub struct AppConfig {
     #[serde(default)]
     pub is_bundled: bool,
 }
-
-// ============== SETTINGS ==============
-
-pub type Settings = serde_json::Value;

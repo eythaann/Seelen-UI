@@ -7,11 +7,17 @@ use parking_lot::Mutex;
 use std::{
     collections::{HashMap, VecDeque},
     path::PathBuf,
-    sync::Arc,
+    sync::{
+        atomic::{AtomicBool, Ordering},
+        Arc,
+    },
 };
 use tauri::{AppHandle, Emitter, Manager};
 
-use crate::{error_handler::Result, log_error, seelen::get_app_handle, trace_lock};
+use crate::{
+    error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
+    trace_lock,
+};
 
 use super::{
     application::apps_config::REGEX_IDENTIFIERS,
@@ -31,17 +37,25 @@ pub struct FullState {
     settings: Settings,
     settings_by_app: VecDeque<AppConfig>,
     weg_items: WegItems,
+    data_dir: PathBuf,
+    resources_dir: PathBuf,
 }
+
+static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
 
 impl FullState {
     fn new() -> Result<Self> {
+        let handle = get_app_handle();
         let mut manager = Self {
-            handle: get_app_handle(),
-            settings: serde_json::Value::Null,
+            settings: Settings::default(),
             weg_items: serde_yaml::Value::Null,
             themes: HashMap::new(),
             placeholders: HashMap::new(),
             settings_by_app: VecDeque::new(),
+            // paths
+            data_dir: handle.path().app_data_dir()?,
+            resources_dir: handle.path().resource_dir()?,
+            handle,
         };
         manager.load_all()?;
         manager.start_listeners()?;
@@ -68,35 +82,32 @@ impl FullState {
         &self.settings
     }
 
-    fn process_event(event: notify::Event) -> Result<()> {
-        let mut manager = trace_lock!(FULL_STATE);
+    pub fn settings_path(&self) -> PathBuf {
+        self.data_dir.join("settings.json")
+    }
 
-        let data_dir = manager.handle.path().app_data_dir()?;
-        let resources_dir = manager.handle.path().resource_dir()?;
+    fn process_event(&mut self, event: notify::Event) -> Result<()> {
+        let weg_items_path = self.data_dir.join("seelenweg_items.yaml");
 
-        let settings_items_path = data_dir.join("settings.json");
+        let user_themes = self.data_dir.join("themes");
+        let bundled_themes = self.resources_dir.join("static/themes");
 
-        let weg_items_path = data_dir.join("seelenweg_items.yaml");
+        let user_placeholders = self.data_dir.join("placeholders");
+        let bundled_placeholders = self.resources_dir.join("static/placeholders");
 
-        let user_themes = data_dir.join("themes");
-        let bundled_themes = resources_dir.join("static/themes");
-
-        let user_placeholders = data_dir.join("placeholders");
-        let bundled_placeholders = resources_dir.join("static/placeholders");
-
-        let user_app_configs = data_dir.join("applications.yml");
-        let bundled_app_configs = resources_dir.join("static/apps_templates");
+        let user_app_configs = self.data_dir.join("applications.yml");
+        let bundled_app_configs = self.resources_dir.join("static/apps_templates");
 
         if event.paths.contains(&weg_items_path) {
             log::info!("Weg Items changed: {:?}", event.paths);
-            manager.load_weg_items()?;
-            manager.emit_weg_items()?;
+            self.load_weg_items()?;
+            self.emit_weg_items()?;
         }
 
-        if event.paths.contains(&settings_items_path) {
+        if event.paths.contains(&self.settings_path()) {
             log::info!("Seelen Settings changed: {:?}", event.paths);
-            manager.load_settings()?;
-            manager.emit_settings()?;
+            self.load_settings()?;
+            self.emit_settings()?;
         }
 
         if event
@@ -105,8 +116,8 @@ impl FullState {
             .any(|p| p.starts_with(&user_themes) || p.starts_with(&bundled_themes))
         {
             log::info!("Theme changed: {:?}", event.paths);
-            manager.load_themes()?;
-            manager.emit_themes()?;
+            self.load_themes()?;
+            self.emit_themes()?;
         }
 
         if event
@@ -115,8 +126,8 @@ impl FullState {
             .any(|p| p.starts_with(&user_placeholders) || p.starts_with(&bundled_placeholders))
         {
             log::info!("Placeholder changed: {:?}", event.paths);
-            manager.load_placeholders()?;
-            manager.emit_placeholders()?;
+            self.load_placeholders()?;
+            self.emit_placeholders()?;
         }
 
         if event
@@ -125,8 +136,8 @@ impl FullState {
             .any(|p| p.starts_with(&user_app_configs) || p.starts_with(&bundled_app_configs))
         {
             log::info!("Specific App Configuration changed: {:?}", event.paths);
-            manager.load_settings_by_app()?;
-            manager.emit_settings_by_app()?;
+            self.load_settings_by_app()?;
+            self.emit_settings_by_app()?;
         }
 
         Ok(())
@@ -137,17 +148,18 @@ impl FullState {
 
         let mut watcher = notify::recommended_watcher(tx)?;
 
-        let data_dir = self.handle.path().app_data_dir()?;
-        let resources_dir = self.handle.path().resource_dir()?;
-
-        watcher.watch(&data_dir, RecursiveMode::Recursive)?;
-        watcher.watch(&resources_dir, RecursiveMode::Recursive)?;
+        watcher.watch(&self.data_dir, RecursiveMode::Recursive)?;
+        watcher.watch(&self.resources_dir, RecursiveMode::Recursive)?;
 
         std::thread::spawn(move || {
             let _watcher = watcher;
             for event in rx {
                 match event {
-                    Ok(event) => log_error!(Self::process_event(event)),
+                    Ok(event) => {
+                        if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
+                            log_error!(trace_lock!(FULL_STATE).process_event(event));
+                        }
+                    }
                     Err(e) => log::error!("Seelen UI Data Watcher error: {:?}", e),
                 }
             }
@@ -158,28 +170,20 @@ impl FullState {
     }
 
     fn load_settings(&mut self) -> Result<()> {
-        let dir = self.handle.path().app_data_dir()?;
-        let path = dir.join("settings.json");
-
-        self.settings = if !path.exists() {
-            serde_json::Value::Null
-        } else {
-            serde_json::from_str(&std::fs::read_to_string(&path)?)?
-        };
-
+        let path = self.settings_path();
+        if path.exists() {
+            self.settings = serde_json::from_str(&std::fs::read_to_string(&path)?)?;
+        }
         Ok(())
     }
 
     fn load_weg_items(&mut self) -> Result<()> {
-        let dir = self.handle.path().app_data_dir()?;
-        let path = dir.join("seelenweg_items.yaml");
-
+        let path = self.data_dir.join("seelenweg_items.yaml");
         self.weg_items = if !path.exists() {
             serde_yaml::Value::Null
         } else {
             serde_yaml::from_str(&std::fs::read_to_string(&path)?)?
         };
-
         Ok(())
     }
 
@@ -216,8 +220,8 @@ impl FullState {
     }
 
     fn load_themes(&mut self) -> Result<()> {
-        let user_path = self.handle.path().app_data_dir()?.join("themes");
-        let resources_path = self.handle.path().resource_dir()?.join("static/themes");
+        let user_path = self.data_dir.join("themes");
+        let resources_path = self.resources_dir.join("static/themes");
         let entries = std::fs::read_dir(&resources_path)?.chain(std::fs::read_dir(&user_path)?);
         for entry in entries.flatten() {
             let path = entry.path();
@@ -247,12 +251,8 @@ impl FullState {
     }
 
     fn load_placeholders(&mut self) -> Result<()> {
-        let user_path = self.handle.path().app_data_dir()?.join("placeholders");
-        let resources_path = self
-            .handle
-            .path()
-            .resource_dir()?
-            .join("static/placeholders");
+        let user_path = self.data_dir.join("placeholders");
+        let resources_path = self.resources_dir.join("static/placeholders");
         let entries = std::fs::read_dir(&resources_path)?.chain(std::fs::read_dir(&user_path)?);
         for entry in entries.flatten() {
             let path = entry.path();
@@ -277,12 +277,8 @@ impl FullState {
     }
 
     fn load_settings_by_app(&mut self) -> Result<()> {
-        let user_apps_path = self.handle.path().app_data_dir()?.join("applications.yml");
-        let apps_templates_path = self
-            .handle
-            .path()
-            .resource_dir()?
-            .join("static/apps_templates");
+        let user_apps_path = self.data_dir.join("applications.yml");
+        let apps_templates_path = self.resources_dir.join("static/apps_templates");
 
         trace_lock!(REGEX_IDENTIFIERS).clear();
         self.settings_by_app.clear();
@@ -342,6 +338,46 @@ impl FullState {
     fn emit_settings_by_app(&self) -> Result<()> {
         self.handle
             .emit("settings-by-app", self.settings_by_app())?;
+        Ok(())
+    }
+
+    pub fn save_settings(&self) -> Result<()> {
+        std::fs::write(self.settings_path(), serde_json::to_string(&self.settings)?)?;
+        Ok(())
+    }
+
+    pub fn load_resource(&mut self, resource: Resource) -> Result<()> {
+        log::trace!("Loading resource: {}", resource.id);
+        let id = resource.id;
+
+        if let Some(theme) = resource.resources.theme {
+            let filename = format!("{id}.yml");
+            std::fs::write(
+                self.data_dir.join(format!("themes/{filename}")),
+                serde_yaml::to_string(&theme)?,
+            )?;
+            if !self.settings.selected_theme.contains(&filename) {
+                self.settings.selected_theme.push(filename);
+            }
+        }
+
+        if let Some(placeholder) = resource.resources.placeholder {
+            std::fs::write(
+                self.data_dir.join(format!("placeholders/{id}.yml")),
+                serde_yaml::to_string(&placeholder)?,
+            )?;
+            self.settings.fancy_toolbar.placeholder = Some(format!("{id}.yml"));
+        }
+
+        if let Some(layout) = resource.resources.layout {
+            std::fs::write(
+                self.data_dir.join(format!("layouts/{id}.yml")),
+                serde_yaml::to_string(&layout)?,
+            )?;
+            self.settings.window_manager.default_layout = Some(format!("{id}.yml"));
+        }
+
+        self.save_settings()?;
         Ok(())
     }
 }

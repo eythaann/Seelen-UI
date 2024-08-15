@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- .slu and uri now are loaded correctly on seelen ui.
+
 ### enhancements
 - add file associations for .slu files
 - add uri associations for seelen-ui:uri

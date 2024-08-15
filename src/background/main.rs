@@ -28,7 +28,7 @@ use itertools::Itertools;
 use modules::{
     cli::{
         application::{attach_console, is_just_getting_info, SEELEN_COMMAND_LINE},
-        infrastructure::Client,
+        Client,
     },
     tray::application::ensure_tray_overflow_creation,
 };

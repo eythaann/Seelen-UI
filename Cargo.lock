@@ -4260,6 +4260,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 name = "seelen-ui"
 version = "1.9.2"
 dependencies = [
+ "base64 0.22.1",
  "battery",
  "clap",
  "color-eyre",

@@ -53,7 +53,7 @@
     "fileAssociations": [
       {
         "ext": [".slu"],
-        "name": "SeelenUI.File",
+        "name": "seelen-ui.file",
         "description": "Seelen UI File",
         "mimeType": "text/plain",
         "role": "Viewer"
@@ -70,7 +70,7 @@
     "deep-link": {
       "mobile": [],
       "desktop": {
-        "schemes": ["seelen-ui"]
+        "schemes": ["seelen-ui.uri"]
       }
     }
   }

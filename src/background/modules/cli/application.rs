@@ -1,5 +1,8 @@
+use std::ffi::OsStr;
+use std::path::PathBuf;
 use std::sync::Arc;
 
+use base64::Engine;
 use clap::{Arg, ArgAction, Command};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -9,6 +12,7 @@ use crate::error_handler::Result;
 use crate::seelen::SEELEN;
 use crate::seelen_bar::FancyToolbar;
 use crate::seelen_wm::WindowManager;
+use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 
 #[macro_export]
@@ -91,12 +95,16 @@ lazy_static! {
                     .long("version")
                     .action(ArgAction::SetTrue)
                     .help("Prints the current version of Seelen."),
+                Arg::new("uri")
+                    .help("Path or URI to load.")
+                    .long_help("Path or URI to load. (example: 'C:\\path\\to\\file.slu' or 'seelen-ui.uri:example')")
+                    .value_parser(clap::value_parser!(std::string::String))
+                    .action(clap::ArgAction::Set)
             ])
             .subcommands([
                 Command::new("settings").about("Opens the Seelen settings gui."),
                 WindowManager::get_cli(),
                 FancyToolbar::get_cli(),
-                loader_command(),
             ])
     ));
 }
@@ -113,24 +121,6 @@ pub fn detach_console() -> Result<()> {
         unsafe { FreeConsole()? };
     }
     Ok(())
-}
-
-pub fn loader_command() -> Command {
-    let arg = Arg::new("value")
-        .help("Value to load.")
-        .required(true)
-        .value_parser(clap::value_parser!(std::string::String))
-        .action(clap::ArgAction::Set);
-
-    Command::new("load")
-        .about("Opens the Seelen Files or resolve URI.")
-        .arg_required_else_help(true)
-        .subcommands([
-            Command::new("file")
-                .about("Load a .slu file.")
-                .arg(arg.clone().id("path")),
-            Command::new("uri").about("Load a URI.").arg(arg.id("uri")),
-        ])
 }
 
 pub fn is_just_getting_info(matches: &clap::ArgMatches) -> Result<bool> {
@@ -152,7 +142,38 @@ pub fn is_just_getting_info(matches: &clap::ArgMatches) -> Result<bool> {
     Ok(r)
 }
 
+const URI: &str = "seelen-ui.uri:";
+const URI_MSIX: &str = "seelen-ui-msix.uri:";
+
+pub fn process_uri(uri: &str) -> Result<()> {
+    log::trace!("Loading URI: {}", uri);
+
+    let contents = if uri.starts_with(URI) {
+        uri.trim_start_matches(URI).to_string()
+    } else if uri.starts_with(URI_MSIX) {
+        uri.trim_start_matches(URI_MSIX).to_string()
+    } else {
+        let path = PathBuf::from(uri);
+        if path.is_file() && path.extension() == Some(OsStr::new("slu")) && path.exists() {
+            std::fs::read_to_string(path)?
+        } else {
+            return Err("Invalid URI format".into());
+        }
+    };
+
+    let engine = base64::engine::general_purpose::URL_SAFE_NO_PAD;
+    let decoded = engine.decode(contents.as_bytes())?;
+
+    FULL_STATE
+        .lock()
+        .load_resource(serde_yaml::from_slice(&decoded)?)
+}
+
 pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
+    if let Some(uri) = matches.get_one::<String>("uri") {
+        return process_uri(uri).map_err(|e| format!("Corrupted SLU file: {}", e).into());
+    }
+
     if let Some((subcommand, matches)) = matches.subcommand() {
         match subcommand {
             "settings" => {

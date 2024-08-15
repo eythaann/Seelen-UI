@@ -475,7 +475,7 @@ impl WindowsApi {
     pub fn monitor_name(hmonitor: HMONITOR) -> Result<String> {
         let ex_info = Self::monitor_info(hmonitor)?;
         Ok(U16CStr::from_slice_truncate(&ex_info.szDevice)
-            .map_err(|_| AppError::Generic("monitor name was not a valid u16 c string"))?
+            .map_err(|_| AppError::Seelen("monitor name was not a valid u16 c string".to_owned()))?
             .to_ustring()
             .to_string_lossy()
             .trim_start_matches(r"\\.\")

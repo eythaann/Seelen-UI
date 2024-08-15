@@ -588,18 +588,20 @@ Section Install
   ; Create file associations
   {{#each file_associations as |association| ~}}
     {{#each association.ext as |ext| ~}}
-       !insertmacro APP_ASSOCIATE "{{ext}}" "{{or association.name ext}}" "{{association-description association.description ext}}" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\",0" "Open with ${PRODUCTNAME}" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\" load file $\"%1$\""
+       !insertmacro APP_ASSOCIATE "{{ext}}" "{{or association.name ext}}" "{{association-description association.description ext}}" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\",0" "Open with ${PRODUCTNAME}" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\" $\"%1$\""
     {{/each}}
   {{/each}}
-  !insertmacro UPDATEFILEASSOC
 
   ; Register deep links
   {{#each deep_link_protocols as |protocol| ~}}
     WriteRegStr SHCTX "Software\Classes\\{{protocol}}" "URL Protocol" ""
     WriteRegStr SHCTX "Software\Classes\\{{protocol}}" "" "URL:${BUNDLEID} protocol"
     WriteRegStr SHCTX "Software\Classes\\{{protocol}}\DefaultIcon" "" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\",0"
-    WriteRegStr SHCTX "Software\Classes\\{{protocol}}\shell\open\command" "" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\" load uri $\"%1$\""
+    WriteRegStr SHCTX "Software\Classes\\{{protocol}}\shell\open\command" "" "$\"$INSTDIR\${MAINBINARYNAME}.exe$\" $\"%1$\""
   {{/each}}
+
+  ; Refresh file associations icons
+  !insertmacro UPDATEFILEASSOC
 
   ; Create uninstaller
   WriteUninstaller "$INSTDIR\uninstall.exe"
@@ -731,6 +733,8 @@ Section Uninstall
     ${EndIf}
   {{/each}}
 
+  ; Refresh file associations icons
+  !insertmacro UPDATEFILEASSOC
 
   ; Delete uninstaller
   Delete "$INSTDIR\uninstall.exe"

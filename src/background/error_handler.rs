@@ -20,8 +20,7 @@ macro_rules! define_app_errors {
 }
 
 define_app_errors!(
-    Generic(&'static str);
-    GenericString(String);
+    Seelen(String);
     Io(std::io::Error);
     Tauri(tauri::Error);
     TauriShell(tauri_plugin_shell::Error);
@@ -37,15 +36,18 @@ define_app_errors!(
     Image(image::ImageError);
     Battery(battery::Error);
     FileNotify(notify::Error);
+    Base64Decode(base64::DecodeError);
 );
+
+impl From<&str> for AppError {
+    fn from(err: &str) -> Self {
+        AppError::Seelen(err.to_owned())
+    }
+}
 
 impl std::fmt::Display for AppError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            Self::Generic(error) => write!(f, "{}", error),
-            Self::GenericString(error) => write!(f, "{}", error),
-            _ => write!(f, "{:?}", self),
-        }
+        write!(f, "{:?}", self)
     }
 }
 
