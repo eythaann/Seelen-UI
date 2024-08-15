@@ -1,7 +1,6 @@
 use itertools::Itertools;
 use windows::Win32::{
     Foundation::{HWND, POINT, RECT},
-    System::Registry,
     UI::{
         Accessibility::{
             CUIAutomation, IUIAutomation, IUIAutomationCondition, IUIAutomationElement,
@@ -11,7 +10,10 @@ use windows::Win32::{
         WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_SHOW},
     },
 };
-use winreg::{enums::HKEY_CURRENT_USER, RegKey};
+use winreg::{
+    enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS},
+    RegKey,
+};
 
 use crate::{
     error_handler::Result,
@@ -230,8 +232,7 @@ impl TrayIcon {
         });
 
         for id in ids {
-            let key =
-                settings.open_subkey_with_flags(id.to_string(), Registry::KEY_ALL_ACCESS.0)?;
+            let key = settings.open_subkey_with_flags(id.to_string(), KEY_ALL_ACCESS)?;
 
             let promoted: u32 = key.get_value("IsPromoted").unwrap_or_default();
             if promoted == 1 && WindowsApi::is_elevated()? {

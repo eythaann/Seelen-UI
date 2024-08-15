@@ -1,6 +1,8 @@
+use std::path::PathBuf;
+
 use itertools::Itertools;
 
-use crate::trace_lock;
+use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
 
 use super::{
     application::FULL_STATE,
@@ -42,4 +44,14 @@ pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
         .iter()
         .cloned()
         .collect_vec()
+}
+
+#[tauri::command]
+pub fn state_get_wallpaper() -> Result<PathBuf> {
+    WindowsApi::get_wallpaper()
+}
+
+#[tauri::command]
+pub fn state_set_wallpaper(path: String) -> Result<()> {
+    WindowsApi::set_wallpaper(path)
 }

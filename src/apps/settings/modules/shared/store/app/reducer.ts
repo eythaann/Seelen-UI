@@ -44,6 +44,7 @@ const initialState: RootState = {
     accent_lightest: '#000000',
     complement: null,
   },
+  wallpaper: null,
 };
 
 export const RootSlice = createSlice({

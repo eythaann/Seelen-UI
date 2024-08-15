@@ -2,6 +2,7 @@ import { LanguageList } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
 import { Themes } from './Themes';
+import { Wallpaper } from './Wallpaper';
 import { Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -35,9 +36,6 @@ export function General() {
           <span style={{ fontWeight: 600 }}>{t('general.startup')}</span>
           <Switch onChange={onAutoStart} value={autostartStatus} />
         </SettingsOption>
-      </SettingsGroup>
-
-      <SettingsGroup>
         <SettingsOption>
           <b>{t('general.language')}:</b>
           <Select
@@ -50,6 +48,10 @@ export function General() {
       </SettingsGroup>
 
       <Colors />
+
+      <SettingsGroup>
+        <Wallpaper />
+      </SettingsGroup>
 
       <SettingsGroup>
         <div style={{ marginBottom: '6px' }}>

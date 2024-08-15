@@ -58,4 +58,5 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
         ))
         .plugin(log_plugin_builder.build())
         .plugin(tauri_plugin_deep_link::init())
+        .plugin(tauri_plugin_http::init())
 }

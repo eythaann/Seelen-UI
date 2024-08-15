@@ -10,7 +10,14 @@
         "scope": [
           "$RESOURCE/**/*",
           "$TEMP/**/*",
-          "$DATA/**/*"
+          "$DATA/**/*",
+          "**/*.jpg",
+          "**/*.jpeg",
+          "**/*.png",
+          "**/*.gif",
+          "**/*.bmp",
+          "**/*.tif",
+          "**/*.tiff"
         ]
       }
     }
@@ -52,7 +59,9 @@
     "homepage": "https://github.com/eythaann/Seelen-UI",
     "fileAssociations": [
       {
-        "ext": [".slu"],
+        "ext": [
+          ".slu"
+        ],
         "name": "seelen-ui.file",
         "description": "Seelen UI File",
         "mimeType": "text/plain",
@@ -70,7 +79,9 @@
     "deep-link": {
       "mobile": [],
       "desktop": {
-        "schemes": ["seelen-ui.uri"]
+        "schemes": [
+          "seelen-ui.uri"
+        ]
       }
     }
   }

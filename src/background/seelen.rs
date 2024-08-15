@@ -208,6 +208,7 @@ impl Seelen {
         std::fs::create_dir_all(data_path.join("themes"))?;
         std::fs::create_dir_all(data_path.join("layouts"))?;
         std::fs::create_dir_all(data_path.join("icons"))?;
+        std::fs::create_dir_all(data_path.join("wallpapers"))?;
 
         Ok(())
     }

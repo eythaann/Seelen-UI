@@ -29,4 +29,5 @@ export interface RootState extends ISettings {
   availablePlaceholders: Placeholder[];
   autostart: boolean;
   colors: UIColors;
+  wallpaper: string | null;
 }

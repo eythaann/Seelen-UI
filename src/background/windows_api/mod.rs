@@ -5,6 +5,7 @@ mod iterator;
 pub use app_bar::*;
 pub use com::*;
 pub use iterator::*;
+use itertools::Itertools;
 use widestring::U16CStr;
 
 use std::{ffi::c_void, path::PathBuf, thread::sleep, time::Duration};
@@ -20,7 +21,7 @@ use windows::{
             GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
             PHYSICAL_MONITOR,
         },
-        Foundation::{CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, RECT},
+        Foundation::{CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT},
         Graphics::{
             Dwm::{
                 DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
@@ -59,8 +60,9 @@ use windows::{
                 IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND, GWL_EXSTYLE,
                 GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
-                SPI_GETANIMATION, SPI_SETANIMATION, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE,
-                SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
             },
         },
@@ -71,6 +73,7 @@ use crate::{
     error_handler::{AppError, Result},
     hook::HOOK_MANAGER,
     log_error, trace_lock,
+    utils::is_windows_11,
     winevent::WinEvent,
 };
 
@@ -526,6 +529,46 @@ impl WindowsApi {
             return Err(eyre!("Failed to get desktop id for: {hwnd:?}").into());
         }
         Ok(desktop_id)
+    }
+
+    pub fn get_wallpaper() -> Result<PathBuf> {
+        let mut path = [0_u16; MAX_PATH as usize];
+        unsafe {
+            SystemParametersInfoW(
+                SPI_GETDESKWALLPAPER,
+                MAX_PATH,
+                Some(path.as_mut_ptr() as _),
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS(0),
+            )?;
+        }
+        Ok(PathBuf::from(
+            U16CStr::from_slice_truncate(&path)?
+                .to_ustring()
+                .to_string_lossy(),
+        ))
+    }
+
+    pub fn set_wallpaper(path: String) -> Result<()> {
+        if !PathBuf::from(&path).exists() {
+            return Err("File not found".into());
+        }
+
+        if is_windows_11() {
+            for v_desktop in winvd::get_desktops()? {
+                v_desktop.set_wallpaper(&path)?;
+            }
+        }
+
+        let mut path = path.encode_utf16().chain(Some(0)).collect_vec();
+        unsafe {
+            SystemParametersInfoW(
+                SPI_SETDESKWALLPAPER,
+                MAX_PATH,
+                Some(path.as_mut_ptr() as _),
+                SPIF_SENDCHANGE | SPIF_UPDATEINIFILE,
+            )?;
+        }
+        Ok(())
     }
 
     pub fn get_min_animation_info() -> Result<ANIMATIONINFO> {

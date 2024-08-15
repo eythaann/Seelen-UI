@@ -14,6 +14,7 @@ export interface UserSettings {
   layouts: Layout[];
   placeholders: Placeholder[];
   env: Record<string, string>;
+  wallpaper: string | null;
 }
 
 const _defaultLayout = LayoutSchema.parse({});

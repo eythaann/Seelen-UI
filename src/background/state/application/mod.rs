@@ -6,7 +6,7 @@ use notify::{RecursiveMode, Watcher};
 use parking_lot::Mutex;
 use std::{
     collections::{HashMap, VecDeque},
-    path::PathBuf,
+    path::{Path, PathBuf},
     sync::{
         atomic::{AtomicBool, Ordering},
         Arc,
@@ -16,7 +16,7 @@ use tauri::{AppHandle, Emitter, Manager};
 
 use crate::{
     error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
-    trace_lock,
+    trace_lock, windows_api::WindowsApi,
 };
 
 use super::{
@@ -346,9 +346,24 @@ impl FullState {
         Ok(())
     }
 
+    async fn set_wallpaper(url: &str, path: &Path) -> Result<()> {
+        let response = tauri_plugin_http::reqwest::get(url).await?;
+        let contents = response.bytes().await?;
+        std::fs::write(path, &contents)?;
+        WindowsApi::set_wallpaper(path.to_string_lossy().to_string())?;
+        Ok(())
+    }
+
     pub fn load_resource(&mut self, resource: Resource) -> Result<()> {
         log::trace!("Loading resource: {}", resource.id);
         let id = resource.id;
+
+        if let Some(image_url) = resource.wallpaper {
+            let path = self.data_dir.join(format!("wallpapers/{id}.png"));
+            tauri::async_runtime::spawn(async move {
+                log_error!(Self::set_wallpaper(&image_url, &path).await);
+            });
+        }
 
         if let Some(theme) = resource.resources.theme {
             let filename = format!("{id}.yml");

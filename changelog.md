@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - .slu and uri now are loaded correctly on seelen ui.
+- allow change wallpaper from seelen settings.
 
 ### enhancements
 - add file associations for .slu files

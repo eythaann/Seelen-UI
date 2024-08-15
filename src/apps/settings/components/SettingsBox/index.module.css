@@ -5,6 +5,10 @@
   overflow: hidden;
   position: relative;
 
+  &:last-child {
+    margin-bottom: 10px;
+  }
+
   > div {
     position: absolute; /* for noise and blur */
     top: 0;

@@ -37,6 +37,8 @@ define_app_errors!(
     Battery(battery::Error);
     FileNotify(notify::Error);
     Base64Decode(base64::DecodeError);
+    WideStringNull(widestring::error::MissingNulTerminator);
+    Reqwest(tauri_plugin_http::reqwest::Error);
 );
 
 impl From<&str> for AppError {

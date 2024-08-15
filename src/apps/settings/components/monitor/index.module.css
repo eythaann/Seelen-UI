@@ -1,0 +1,28 @@
+.monitor {
+  height: 144px;
+  width: 256px;
+  border-radius: 12px;
+  background-color: var(--color-persist-gray-800);
+  padding: 8px;
+
+  .screen {
+    position: relative;
+    border-radius: 8px;
+    background: linear-gradient(
+      40deg,
+      var(--color-blue-500) 2%,
+      var(--color-blue-300) 60%,
+      var(--color-blue-100) 100%
+    );
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .wallpaper {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+    }
+  }
+}

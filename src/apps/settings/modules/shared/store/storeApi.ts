@@ -98,6 +98,7 @@ export class UserSettingsLoader {
   private _withLayouts: boolean = false;
   private _withPlaceholders: boolean = false;
   private _withThemes: boolean = true;
+  private _withWallpaper: boolean = true;
 
   withUserApps() {
     this._withUserApps = true;
@@ -114,6 +115,11 @@ export class UserSettingsLoader {
     return this;
   }
 
+  withWallpaper() {
+    this._withWallpaper = true;
+    return this;
+  }
+
   withThemes(value: boolean) {
     this._withThemes = value;
     return this;
@@ -127,6 +133,7 @@ export class UserSettingsLoader {
       layouts: [],
       placeholders: [],
       env: await invoke('get_user_envs'),
+      wallpaper: null,
     };
 
     let data =
@@ -150,6 +157,10 @@ export class UserSettingsLoader {
 
     if (this._withPlaceholders) {
       await loadUserPlaceholders(userSettings);
+    }
+
+    if (this._withWallpaper) {
+      userSettings.wallpaper = await invoke('state_get_wallpaper');
     }
 
     return userSettings;

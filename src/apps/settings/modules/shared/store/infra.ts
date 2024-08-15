@@ -58,8 +58,6 @@ export async function registerStoreEvents() {
         IsSavingSettings.current = false;
         return;
       }
-      console.log('SETTINGS CHANGED', event.payload);
-
       const currentState = store.getState();
       const newState: RootState = {
         ...currentState,
@@ -80,6 +78,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     .withLayouts()
     .withPlaceholders()
     .withUserApps()
+    .withWallpaper()
     .load(customPath);
 
   const currentState = store.getState();

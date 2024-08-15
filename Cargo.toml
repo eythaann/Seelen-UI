@@ -37,6 +37,7 @@ tauri-plugin-process = "2.0.0-beta.2"
 tauri-plugin-log = "2.0.0-beta.2"
 tauri-plugin-updater = "2.0.0-beta.2"
 tauri-plugin-deep-link = "2.0.0-beta.10"
+tauri-plugin-http = "2.0.0-beta.0"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.34"
