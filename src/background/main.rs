@@ -27,7 +27,7 @@ use exposed::register_invoke_handler;
 use itertools::Itertools;
 use modules::{
     cli::{
-        application::{attach_console, handle_cli_info, SEELEN_COMMAND_LINE},
+        application::{attach_console, is_just_getting_info, SEELEN_COMMAND_LINE},
         infrastructure::Client,
     },
     tray::application::ensure_tray_overflow_creation,
@@ -124,7 +124,7 @@ fn main() -> Result<()> {
         }
     };
 
-    if handle_cli_info(&matches)? {
+    if is_just_getting_info(&matches)? {
         return Ok(());
     }
 

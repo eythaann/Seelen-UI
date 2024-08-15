@@ -66,6 +66,12 @@
       "endpoints": [
         "https://github.com/eythaann/Seelen-UI/releases/latest/download/latest.json"
       ]
+    },
+    "deep-link": {
+      "mobile": [],
+      "desktop": {
+        "schemes": ["seelen-ui"]
+      }
     }
   }
 }

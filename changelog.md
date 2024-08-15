@@ -1,9 +1,9 @@
 # Changelog
 
 ## [Unreleased]
-## [1.9.2]
 ### enhancements
-- add file associations with .slu files
+- add file associations for .slu files
+- add uri associations for seelen-ui:uri
 - improve settings editor experience by adding live reload feature.
 
 ### fix

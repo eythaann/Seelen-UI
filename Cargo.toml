@@ -36,6 +36,7 @@ tauri-plugin-shell = "2.0.0-beta.2"
 tauri-plugin-process = "2.0.0-beta.2"
 tauri-plugin-log = "2.0.0-beta.2"
 tauri-plugin-updater = "2.0.0-beta.2"
+tauri-plugin-deep-link = "2.0.0-beta.10"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.34"
@@ -55,12 +56,11 @@ getset = "0.1.2"
 phf = "0.11.2"
 sysinfo = "0.30.12"
 battery = "0.7.8"
-# Windows Crates
+notify = "6.1.1"
 winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 winreg = "0.52.0"
+windows-core = "=0.57.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 win-screenshot = "4.0.8"
-windows-core = "=0.57.0"                                                   # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
-notify = "6.1.1"
 
 [dependencies.windows]
 version = "=0.57.0"

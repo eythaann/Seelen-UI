@@ -28,13 +28,13 @@
   "license": "Polyform Strict License",
   "dependencies": {
     "@tauri-apps/plugin-autostart": "^2.0.0-beta.2",
+    "@tauri-apps/plugin-deep-link": "^2.0.0-beta.10",
     "@tauri-apps/plugin-dialog": "^2.0.0-beta.2",
     "@tauri-apps/plugin-fs": "^2.0.0-beta.2",
     "@tauri-apps/plugin-log": "^2.0.0-beta.2",
     "@tauri-apps/plugin-process": "^2.0.0-beta.2",
     "@tauri-apps/plugin-shell": "^2.0.0-beta.2",
-    "@tauri-apps/plugin-updater": "^2.0.0-beta.2",
-    "react-icons": "^5.1.0"
+    "@tauri-apps/plugin-updater": "^2.0.0-beta.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
@@ -67,6 +67,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-i18next": "^15.0.0",
+    "react-icons": "^5.3.0",
     "react-redux": "^9.1.0",
     "readable-types": "^4.0.0",
     "redux": "^5.0.1",

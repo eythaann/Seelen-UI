@@ -102,12 +102,16 @@ lazy_static! {
 }
 
 pub fn attach_console() -> Result<()> {
-    unsafe { AttachConsole(ATTACH_PARENT_PROCESS)? };
+    if !tauri::is_dev() {
+        unsafe { AttachConsole(ATTACH_PARENT_PROCESS)? };
+    }
     Ok(())
 }
 
 pub fn detach_console() -> Result<()> {
-    unsafe { FreeConsole()? };
+    if !tauri::is_dev() {
+        unsafe { FreeConsole()? };
+    }
     Ok(())
 }
 
@@ -129,20 +133,22 @@ pub fn loader_command() -> Command {
         ])
 }
 
-pub fn handle_cli_info(matches: &clap::ArgMatches) -> Result<bool> {
+pub fn is_just_getting_info(matches: &clap::ArgMatches) -> Result<bool> {
     let mut r = false;
-    attach_console()?;
 
     if matches.get_flag("verbose") {
+        attach_console()?;
         println!("{:?}", matches);
+        detach_console()?;
     }
 
     if matches.get_flag("version") {
+        attach_console()?;
         println!("{}", env!("CARGO_PKG_VERSION"));
+        detach_console()?;
         r = true;
     }
 
-    detach_console()?;
     Ok(r)
 }
 

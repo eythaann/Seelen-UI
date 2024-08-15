@@ -57,4 +57,5 @@ pub fn register_plugins(app_builder: Builder<Wry>) -> Builder<Wry> {
             Some(vec!["--silent"]),
         ))
         .plugin(log_plugin_builder.build())
+        .plugin(tauri_plugin_deep_link::init())
 }

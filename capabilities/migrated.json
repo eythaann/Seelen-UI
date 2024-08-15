@@ -13,14 +13,15 @@
     "fancy-toolbar-hitbox/*"
   ],
   "permissions": [
-    "path:default",
-    "event:default",
-    "window:default",
-    "webview:default",
-    "app:default",
-    "resources:default",
-    "menu:default",
-    "tray:default",
+    "core:path:default",
+    "core:event:default",
+    "core:window:default",
+    "core:webview:default",
+    "core:app:default",
+    "core:resources:default",
+    "core:menu:default",
+    "core:tray:default",
+    "deep-link:default",
 
     "fs:allow-read-text-file",
     "fs:allow-write-text-file",
@@ -45,12 +46,12 @@
       ]
     },
 
-    "window:allow-show",
-    "window:allow-close",
-    "window:allow-start-dragging",
-    "window:allow-set-size",
-    "window:allow-set-position",
-    "window:allow-set-ignore-cursor-events",
+    "core:window:allow-show",
+    "core:window:allow-close",
+    "core:window:allow-start-dragging",
+    "core:window:allow-set-size",
+    "core:window:allow-set-position",
+    "core:window:allow-set-ignore-cursor-events",
 
     "autostart:allow-enable",
     "autostart:allow-disable",
