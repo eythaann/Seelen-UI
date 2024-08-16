@@ -89,7 +89,7 @@ export const SettingsSchema = z.object({
     })
     .default(['default']),
   dev_tools: z.boolean().default(false),
-  language: z.string().default(() => {
+  language: z.string().nullable().default(() => {
     if (globalThis.navigator) {
       return globalThis.navigator.language.split('-')[0] || 'en';
     }

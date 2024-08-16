@@ -91,6 +91,8 @@ impl Seelen {
     }
 
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
+        Self::ensure_folders(&app)?;
+
         log::trace!("Initializing Seelen");
         {
             *APP_HANDLE.lock() = Some(app.clone());
@@ -98,7 +100,6 @@ impl Seelen {
             self.state = Some(Arc::clone(&FULL_STATE));
         }
 
-        self.ensure_folders()?;
         if self.state().is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
         }
@@ -186,9 +187,9 @@ impl Seelen {
         Ok(())
     }
 
-    fn ensure_folders(&self) -> Result<()> {
+    fn ensure_folders(handle: &AppHandle<Wry>) -> Result<()> {
         log::trace!("Ensuring folders");
-        let path = self.handle().path();
+        let path = handle.path();
         let data_path = path.app_data_dir()?;
 
         // migration of user settings files below v1.8.3
