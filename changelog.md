@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.3]
 ### performance
 - reduce load time from ~7s to ~4s
 
