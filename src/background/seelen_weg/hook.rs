@@ -1,8 +1,11 @@
-use windows::Win32::Foundation::HWND;
+use windows::Win32::{
+    Foundation::HWND,
+    UI::WindowsAndMessaging::{FindWindowExA, EVENT_OBJECT_CREATE, EVENT_OBJECT_SHOW, SW_HIDE},
+};
 
-use crate::{error_handler::Result, windows_api::WindowsApi, winevent::WinEvent};
+use crate::{error_handler::Result, pcstr, windows_api::WindowsApi, winevent::WinEvent};
 
-use super::SeelenWeg;
+use super::{SeelenWeg, TASKBAR_CLASS};
 
 impl SeelenWeg {
     pub fn process_global_win_event(event: WinEvent, origin: HWND) -> Result<()> {
@@ -70,6 +73,57 @@ impl SeelenWeg {
             }
             _ => {}
         };
+        Ok(())
+    }
+
+    pub fn process_raw_win_event(event: u32, origin_hwnd: HWND) -> Result<()> {
+        match event {
+            EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
+                let class = WindowsApi::get_class(origin_hwnd)?;
+                let parent_class =
+                    WindowsApi::get_class(WindowsApi::get_parent(origin_hwnd)).unwrap_or_default();
+
+                if TASKBAR_CLASS
+                    .iter()
+                    .any(|t| t == &class || t == &parent_class)
+                {
+                    Self::hide_taskbar();
+                    return Ok(());
+                }
+
+                if class.eq("XamlExplorerHostIslandWindow")
+                    && WindowsApi::get_window_text(origin_hwnd).is_empty()
+                {
+                    let content_hwnd = unsafe {
+                        FindWindowExA(
+                            origin_hwnd,
+                            HWND(0),
+                            pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
+                            pcstr!("DesktopWindowXamlSource"),
+                        )
+                    };
+
+                    if content_hwnd.0 != 0 {
+                        let input_hwnd = unsafe {
+                            FindWindowExA(
+                                content_hwnd,
+                                HWND(0),
+                                pcstr!("Windows.UI.Input.InputSite.WindowClass"),
+                                None,
+                            )
+                        };
+                        if input_hwnd.0 != 0 {
+                            // can fail on volume window island
+                            let _ = WindowsApi::show_window(input_hwnd, SW_HIDE);
+                        }
+                        // can fail on volume window island
+                        let _ = WindowsApi::show_window(content_hwnd, SW_HIDE);
+                    }
+                    WindowsApi::show_window(origin_hwnd, SW_HIDE)?;
+                }
+            }
+            _ => {}
+        }
         Ok(())
     }
 }

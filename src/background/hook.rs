@@ -25,8 +25,8 @@ use winvd::{listen_desktop_events, DesktopEvent};
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::{Seelen, SEELEN},
-    seelen_weg::{SeelenWeg, TASKBAR_CLASS},
+    seelen::SEELEN,
+    seelen_weg::SeelenWeg,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
     utils::{constants::IGNORE_FOCUS, is_windows_11},
@@ -128,8 +128,6 @@ impl HookManager {
         }
 
         let mut seelen = trace_lock!(SEELEN);
-        log_error!(seelen.process_win_event(event, origin));
-
         if seelen.state().is_weg_enabled() {
             log_error!(SeelenWeg::process_global_win_event(event, origin));
         }
@@ -204,28 +202,6 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
     Ok(())
 }
 
-impl Seelen {
-    pub fn process_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
-        match event {
-            WinEvent::ObjectShow | WinEvent::ObjectCreate => {
-                // ensure that the taskbar is always hidden
-                if self.state().is_weg_enabled() {
-                    let class = WindowsApi::get_class(origin)?;
-                    let parent_class =
-                        WindowsApi::get_class(WindowsApi::get_parent(origin)).unwrap_or_default();
-                    if TASKBAR_CLASS.contains(&class.as_str())
-                        || TASKBAR_CLASS.contains(&parent_class.as_str())
-                    {
-                        SeelenWeg::hide_taskbar(true);
-                    }
-                }
-            }
-            _ => {}
-        }
-        Ok(())
-    }
-}
-
 lazy_static! {
     static ref DICT: Arc<Mutex<HashMap<isize, Instant>>> = Arc::new(Mutex::new(HashMap::new()));
 }
@@ -268,6 +244,11 @@ pub extern "system" fn win_event_hook(
 ) {
     if id_object != 0 {
         return;
+    }
+
+    if FULL_STATE.load().is_weg_enabled() {
+        // raw events should be only used for a fastest and immediately processing
+        log_error!(SeelenWeg::process_raw_win_event(event, hwnd));
     }
 
     let event = match WinEvent::try_from(event) {

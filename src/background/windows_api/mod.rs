@@ -56,13 +56,13 @@ use windows::{
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId, IsIconic,
-                IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND, GWL_EXSTYLE,
-                GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
-                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-                SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
+                IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow,
+                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
+                GWL_EXSTYLE, GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
+                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
             },
         },
@@ -346,6 +346,10 @@ impl WindowsApi {
 
     pub fn get_parent(hwnd: HWND) -> HWND {
         unsafe { GetParent(hwnd) }
+    }
+
+    pub fn get_owner(hwnd: HWND) -> HWND {
+        unsafe { GetWindow(hwnd, GW_OWNER) }
     }
 
     pub fn exe_path_by_process(process_id: u32) -> Result<String> {

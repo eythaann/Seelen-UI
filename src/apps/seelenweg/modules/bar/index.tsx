@@ -163,7 +163,7 @@ export function SeelenWeg() {
 
 function ItemByType(item: SwItem) {
   if (item.type === SpecialItemType.PinnedApp || item.type === SpecialItemType.TemporalApp) {
-    return <UserApplication key={item.exe} item={item} />;
+    return <UserApplication key={item.exe || item.opens[0] || item.title} item={item} />;
   }
 
   if (item.type === SpecialItemType.Media) {

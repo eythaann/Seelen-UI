@@ -79,6 +79,7 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
         let tray_bar_state = tray_bar.state();
         // This function will fail if taskbar is hidden
         tray_bar.set_state(AppBarDataState::AlwaysOnTop);
+        WindowsApi::show_window(tray_hwnd, SW_SHOW)?;
 
         let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
         let condition = automation.CreateTrueCondition()?;
@@ -108,6 +109,7 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
 }
 
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
+    ensure_tray_overflow_creation()?;
     let tray_from_registry = TrayIcon::enum_from_registry().unwrap_or_default();
 
     Com::run_with_context(|| unsafe {

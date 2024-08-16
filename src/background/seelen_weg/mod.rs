@@ -16,7 +16,7 @@ use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     UI::WindowsAndMessaging::{
         EnumWindows, GetParent, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE,
-        SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -26,6 +26,7 @@ use crate::{
     modules::uwp::UWP_MANAGER,
     seelen::{get_app_handle, SEELEN},
     seelen_bar::FancyToolbar,
+    state::application::FULL_STATE,
     trace_lock,
     utils::{are_overlaped, sleep_millis},
     windows_api::{AppBarData, AppBarDataState, WindowsApi},
@@ -410,28 +411,29 @@ impl SeelenWeg {
         Ok((window, hitbox))
     }
 
-    pub fn hide_taskbar(hide: bool) -> JoinHandle<()> {
-        std::thread::spawn(move || {
-            let (state, cmdshow) = if hide {
-                (AppBarDataState::AutoHide, SW_HIDE)
-            } else {
-                (AppBarDataState::AlwaysOnTop, SW_SHOWNORMAL)
-            };
-
-            match get_taskbars_handles() {
-                Ok(handles) => {
+    pub fn hide_taskbar() -> JoinHandle<()> {
+        std::thread::spawn(move || match get_taskbars_handles() {
+            Ok(handles) => {
+                let mut attempts = 0;
+                while attempts < 10 && FULL_STATE.load().is_weg_enabled() {
                     for handle in &handles {
-                        AppBarData::from_handle(*handle).set_state(state);
+                        AppBarData::from_handle(*handle).set_state(AppBarDataState::AutoHide);
+                        let _ = WindowsApi::show_window(*handle, SW_HIDE);
                     }
-                    // wait for taskbar animation before hiding it
-                    sleep_millis(1200);
-                    for handle in handles {
-                        log_error!(WindowsApi::show_window(handle, cmdshow));
-                    }
+                    attempts += 1;
+                    sleep_millis(50);
                 }
-                Err(err) => log::error!("Failed to get taskbars handles: {:?}", err),
             }
+            Err(err) => log::error!("Failed to get taskbars handles: {:?}", err),
         })
+    }
+
+    pub fn show_taskbar() -> Result<()> {
+        for hwnd in get_taskbars_handles()? {
+            AppBarData::from_handle(hwnd).set_state(AppBarDataState::AlwaysOnTop);
+            WindowsApi::show_window(hwnd, SW_SHOWNOACTIVATE)?;
+        }
+        Ok(())
     }
 }
 

@@ -150,7 +150,7 @@ impl Seelen {
         declare_system_events_handlers()?;
 
         if self.state().is_weg_enabled() {
-            SeelenWeg::hide_taskbar(true);
+            SeelenWeg::hide_taskbar();
         }
 
         log::trace!("Enumerating Monitors");
@@ -169,7 +169,7 @@ impl Seelen {
     pub fn stop(&self) {
         release_system_events_handlers();
         if self.state().is_weg_enabled() {
-            log_error!(SeelenWeg::hide_taskbar(false).join());
+            log_error!(SeelenWeg::show_taskbar());
         }
         if self.state().is_ahk_enabled() {
             Self::kill_ahk_shortcuts();
