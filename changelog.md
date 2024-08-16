@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.4]
 ### fix
 - app crashing for new users
 
