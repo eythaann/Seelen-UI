@@ -1,9 +1,10 @@
 use std::{env::temp_dir, sync::Arc};
 
+use arc_swap::ArcSwap;
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use tauri::{path::BaseDirectory, AppHandle, Manager, WebviewWindow, Wry};
+use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM},
@@ -14,18 +15,15 @@ use crate::{
     error_handler::Result,
     hook::register_win_hook,
     log_error,
-    modules::{
-        monitors::{MonitorManagerEvent, MONITOR_MANAGER},
-        uwp::UWP_MANAGER,
-    },
+    modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
     monitor::Monitor,
     seelen_shell::SeelenShell,
     seelen_weg::SeelenWeg,
     seelen_wm::WindowManager,
-    state::SeelenSettings,
+    state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, sleep_millis},
+    utils::{ahk::AutoHotKey, sleep_millis, PERFORMANCE_HELPER},
     windows_api::WindowsApi,
 };
 
@@ -48,8 +46,7 @@ pub struct Seelen {
     #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
     shell: Option<SeelenShell>,
-    #[getset(get = "pub")]
-    state: SeelenSettings,
+    state: Option<Arc<ArcSwap<FullState>>>,
 }
 
 /* ============== Getters ============== */
@@ -74,14 +71,21 @@ impl Seelen {
     pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut Monitor> {
         self.monitors.iter_mut().find(|m| m.name() == name)
     }
+
+    pub fn state(&self) -> Arc<FullState> {
+        self.state
+            .as_ref()
+            .expect("Seelen State not initialized")
+            .load_full()
+    }
 }
 
 /* ============== Methods ============== */
 impl Seelen {
-    pub fn refresh_state(&mut self) -> Result<()> {
-        self.state.refresh()?;
+    pub fn on_state_changed(&mut self) -> Result<()> {
+        let state = self.state();
         for monitor in &mut self.monitors {
-            monitor.load_settings(&self.state)?;
+            monitor.load_settings(&state)?;
         }
         Ok(())
     }
@@ -89,19 +93,16 @@ impl Seelen {
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
         {
-            self.handle = Some(app.clone());
             *APP_HANDLE.lock() = Some(app.clone());
+            self.handle = Some(app.clone());
+            self.state = Some(Arc::clone(&FULL_STATE));
         }
 
         self.ensure_folders()?;
-        trace_lock!(UWP_MANAGER).refresh()?;
-
-        let data_path = app.path().app_data_dir()?;
-        self.state = SeelenSettings::new(&data_path.join("settings.json")).unwrap_or_default();
-
-        if self.state.is_shell_enabled() {
+        if self.state().is_shell_enabled() {
             self.shell = Some(SeelenShell::new(app.clone()));
         }
+
         Ok(())
     }
 
@@ -125,58 +126,58 @@ impl Seelen {
         });
     }
 
+    fn start_async() -> Result<()> {
+        log_error!(Self::start_ahk_shortcuts());
+
+        let mut all_ready = false;
+        while !all_ready {
+            sleep_millis(10);
+            all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
+        }
+
+        log::debug!(
+            "Seelen UI ready in: {:.2}s",
+            PERFORMANCE_HELPER.lock().elapsed().as_secs_f64()
+        );
+
+        log::trace!("Enumerating windows");
+        WindowsApi::enum_windows(Some(Self::enum_windows_proc), 0)?;
+        register_win_hook()?;
+        Ok(())
+    }
+
     pub fn start(&mut self) -> Result<()> {
-        if self.state.is_weg_enabled() {
+        declare_system_events_handlers()?;
+
+        if self.state().is_weg_enabled() {
             SeelenWeg::hide_taskbar(true);
         }
 
-        self.start_ahk_shortcuts()?;
-        declare_system_events_handlers()?;
-
         log::trace!("Enumerating Monitors");
-        {
-            let mut monitor_manager = trace_lock!(MONITOR_MANAGER);
-            for (_name, id) in &monitor_manager.monitors {
-                log_error!(self.add_monitor(*id));
-            }
-            monitor_manager.listen_changes(Self::on_monitor_event);
+        let mut monitor_manager = trace_lock!(MONITOR_MANAGER);
+        for (_name, id) in &monitor_manager.monitors {
+            log_error!(self.add_monitor(*id));
         }
+        monitor_manager.listen_changes(Self::on_monitor_event);
 
-        std::thread::spawn(|| {
-            let mut all_ready = false;
-            while !all_ready {
-                sleep_millis(10);
-                all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
-            }
-
-            log::trace!("Enumerating windows");
-            WindowsApi::enum_windows(Some(Self::enum_windows_proc), 0)
-                .expect("Failed to enum windows");
-
-            register_win_hook().expect("Failed to register windows hook");
-        });
-
-        if WindowsApi::is_elevated()? && Self::is_auto_start_enabled()? {
-            // override auto-start task in case of location change, normally this happen on MSIX update
-            self.set_auto_start(true)?;
-        }
-
+        std::thread::spawn(|| log_error!(Self::start_async()));
+        std::thread::spawn(|| log_error!(Self::refresh_auto_start_path()));
         Ok(())
     }
 
     /// Stop and release all resources
     pub fn stop(&self) {
         release_system_events_handlers();
-        if self.state.is_weg_enabled() {
+        if self.state().is_weg_enabled() {
             log_error!(SeelenWeg::hide_taskbar(false).join());
         }
-        if self.state.is_ahk_enabled() {
-            self.kill_ahk_shortcuts();
+        if self.state().is_ahk_enabled() {
+            Self::kill_ahk_shortcuts();
         }
     }
 
     fn add_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
-        self.monitors.push(Monitor::new(hmonitor, &self.state)?);
+        self.monitors.push(Monitor::new(hmonitor, &self.state())?);
         Ok(())
     }
 
@@ -233,7 +234,15 @@ impl Seelen {
         Ok(stdout == "true")
     }
 
-    pub fn set_auto_start(&self, enabled: bool) -> Result<()> {
+    /// override auto-start task in case of location change, normally this happen on MSIX update
+    fn refresh_auto_start_path() -> Result<()> {
+        if WindowsApi::is_elevated()? && Self::is_auto_start_enabled()? {
+            Self::set_auto_start(true)?;
+        }
+        Ok(())
+    }
+
+    pub fn set_auto_start(enabled: bool) -> Result<()> {
         let pwsh_script = include_str!("schedule.ps1");
         let pwsh_script_path = temp_dir().join("schedule.ps1");
         std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
@@ -241,8 +250,7 @@ impl Seelen {
         let exe_path = std::env::current_exe()?;
 
         tauri::async_runtime::block_on(async move {
-            let result = self
-                .handle()
+            let result = get_app_handle()
                 .shell()
                 .command("powershell")
                 .args([
@@ -276,21 +284,22 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn start_ahk_shortcuts(&self) -> Result<()> {
+    pub fn start_ahk_shortcuts() -> Result<()> {
         // kill all running shortcuts before starting again
-        self.kill_ahk_shortcuts();
+        Self::kill_ahk_shortcuts();
 
-        if self.state.is_ahk_enabled() {
+        let state = FULL_STATE.load();
+        if state.is_ahk_enabled() {
             log::trace!("Starting seelen.ahk");
             AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.ahk"))
                 .with_lib()
                 .execute()?;
 
-            if self.state.is_window_manager_enabled() {
+            if state.is_window_manager_enabled() {
                 log::trace!("Starting seelen.wm.ahk");
                 AutoHotKey::from_template(
                     include_str!("utils/ahk/mocks/seelen.wm.ahk"),
-                    self.state.get_ahk_variables(),
+                    state.get_ahk_variables(),
                 )
                 .with_lib()
                 .execute()?;
@@ -300,9 +309,9 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn kill_ahk_shortcuts(&self) {
+    pub fn kill_ahk_shortcuts() {
         log::trace!("Killing AHK shortcuts");
-        self.handle()
+        get_app_handle()
             .shell()
             .command("powershell")
             .args([
@@ -316,12 +325,12 @@ impl Seelen {
             .expect("Failed to close ahk");
     }
 
-    pub fn show_settings(&self) -> Result<WebviewWindow> {
+    pub fn show_settings() -> Result<()> {
         log::trace!("Show settings window");
-
-        let window = self.handle().get_webview_window("settings").or_else(|| {
+        let handle = get_app_handle();
+        let window = handle.get_webview_window("settings").or_else(|| {
             tauri::WebviewWindowBuilder::new(
-                self.handle(),
+                &handle,
                 "settings",
                 tauri::WebviewUrl::App("settings/index.html".into()),
             )
@@ -341,17 +350,17 @@ impl Seelen {
             Some(window) => {
                 window.unminimize()?;
                 window.set_focus()?;
-                Ok(window)
+                Ok(())
             }
             None => Err("Failed to create settings window".into()),
         }
     }
 
-    pub fn show_update_modal(&self) -> Result<()> {
+    pub fn show_update_modal() -> Result<()> {
         log::trace!("Showing update notification window");
-
+        let handle = get_app_handle();
         // check if path is in windows apps folder
-        let installation_path = self.handle().path().resource_dir()?;
+        let installation_path = handle.path().resource_dir()?;
         if installation_path
             .to_string_lossy()
             .contains(r"\Program Files\WindowsApps\")
@@ -361,7 +370,7 @@ impl Seelen {
         }
 
         tauri::WebviewWindowBuilder::new(
-            self.handle(),
+            &handle,
             "updater",
             tauri::WebviewUrl::App("update/index.html".into()),
         )

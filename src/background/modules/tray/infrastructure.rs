@@ -18,7 +18,7 @@ fn emit_tray_info() -> Result<()> {
 static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_tray_events() -> Result<()> {
     if !REGISTERED.load(Ordering::Acquire) {
-        log::info!("Registering tray events");
+        log::trace!("Registering tray events");
         // TODO: add event listener for tray events
         REGISTERED.store(true, Ordering::Release);
     }

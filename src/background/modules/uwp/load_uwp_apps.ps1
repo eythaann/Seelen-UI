@@ -1,11 +1,3 @@
-param (
-  [string]$SavePath = ".\uwp-manifests.json"
-)
-
-if (Test-Path $SavePath) {
-  Remove-Item $SavePath
-}
-
 $packages = Get-AppxPackage
 $output = @()
 
@@ -63,7 +55,5 @@ foreach ($package in $packages) {
 
   $output += $selected
 }
-
-$output | ConvertTo-Json -Depth 3 -Compress | Out-File -FilePath $SavePath -Encoding utf8
 
 $output | ConvertTo-Json -Depth 3 -Compress

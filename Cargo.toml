@@ -63,6 +63,7 @@ winreg = "0.52.0"
 windows-core = "=0.57.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 win-screenshot = "4.0.8"
 base64 = "0.22.1"
+arc-swap = "1.7.1"
 
 [dependencies.windows]
 version = "=0.57.0"

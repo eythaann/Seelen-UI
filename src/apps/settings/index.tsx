@@ -16,8 +16,8 @@ import './styles/reset.css';
 import './styles/global.css';
 
 (async function main() {
-  getCurrentWebviewWindow().show();
   wrapConsole();
+  getCurrentWebviewWindow().show();
   const container = getRootContainer();
 
   await LoadSettingsToStore();

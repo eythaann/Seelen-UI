@@ -33,8 +33,9 @@ use modules::{
     tray::application::ensure_tray_overflow_creation,
 };
 use plugins::register_plugins;
-use seelen::SEELEN;
+use seelen::{Seelen, SEELEN};
 use tray::try_register_tray_icon;
+use utils::PERFORMANCE_HELPER;
 
 fn register_panic_hook() {
     std::panic::set_hook(Box::new(|info| {
@@ -70,24 +71,23 @@ fn register_panic_hook() {
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
     log::info!("───────────────────── Starting Seelen ─────────────────────");
     Client::listen_tcp()?;
-
-    // try it at start to avoid made it before
+    // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
 
     let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
     seelen.init(app.handle().clone())?;
 
     if !tauri::is_dev() {
-        log_error!(seelen.show_update_modal());
-
+        Seelen::show_update_modal()?;
         let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
         let matches = command.get_matches();
         if !matches.get_flag("silent") {
-            log_error!(seelen.show_settings());
+            Seelen::show_settings()?;
         }
     }
 
     seelen.start()?;
+
     log_error!(try_register_tray_icon(app));
     std::mem::forget(seelen);
     Ok(())
@@ -112,6 +112,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
 fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
+    PERFORMANCE_HELPER.lock().start();
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {

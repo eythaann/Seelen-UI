@@ -9,9 +9,9 @@ use tauri::{
 };
 
 use crate::error_handler::Result;
-use crate::seelen::SEELEN;
+use crate::log_error;
+use crate::seelen::Seelen;
 use crate::utils::sleep_millis;
-use crate::{log_error, trace_lock};
 
 pub fn try_register_tray_icon(app: &mut App) -> Result<()> {
     log::trace!("registering tray icon");
@@ -57,7 +57,7 @@ fn register_tray_icon(app: &mut App) -> Result<()> {
         .on_menu_event(
             move |app: &AppHandle, event: MenuEvent| match event.id().as_ref() {
                 "settings" => {
-                    log_error!(trace_lock!(SEELEN).show_settings());
+                    log_error!(Seelen::show_settings());
                 }
                 "pause" => {}
                 "restart" => app.restart(),
@@ -75,7 +75,7 @@ fn register_tray_icon(app: &mut App) -> Result<()> {
             } = event
             {
                 if button == MouseButton::Left && button_state == MouseButtonState::Up {
-                    log_error!(trace_lock!(SEELEN).show_settings());
+                    log_error!(Seelen::show_settings());
                 }
             }
         })

@@ -5,7 +5,7 @@ use regex::Regex;
 use tauri::{path::BaseDirectory, Manager};
 use tauri_plugin_shell::ShellExt;
 
-use crate::{error_handler::Result, seelen::get_app_handle, state::AhkShortcutConfig};
+use crate::{error_handler::Result, seelen::get_app_handle, state::domain::AhkVar};
 
 lazy_static! {
     pub static ref LIB_AHK_PATH: PathBuf = {
@@ -33,7 +33,7 @@ impl AutoHotKey {
         }
     }
 
-    pub fn from_template(template: &str, vars: HashMap<String, AhkShortcutConfig>) -> Self {
+    pub fn from_template(template: &str, vars: HashMap<String, AhkVar>) -> Self {
         Self {
             inner: Self::replace_variables(template.to_string(), vars),
         }
@@ -72,7 +72,7 @@ impl AutoHotKey {
         Ok(())
     }
 
-    fn replace_variables(template: String, vars: HashMap<String, AhkShortcutConfig>) -> String {
+    fn replace_variables(template: String, vars: HashMap<String, AhkVar>) -> String {
         let mut replaced = template.clone();
 
         for (key, value) in vars.iter() {
@@ -95,14 +95,14 @@ mod tests {
         let mut vars = HashMap::new();
         vars.insert(
             "test".to_string(),
-            AhkShortcutConfig {
+            AhkVar {
                 fancy: String::new(),
                 ahk: "!b".to_string(),
             },
         );
         vars.insert(
             "test2".to_string(),
-            AhkShortcutConfig {
+            AhkVar {
                 fancy: String::new(),
                 ahk: "!c".to_string(),
             },
@@ -131,7 +131,7 @@ mod tests {
         let mut vars = HashMap::new();
         vars.insert(
             "test".to_string(),
-            AhkShortcutConfig {
+            AhkVar {
                 fancy: String::new(),
                 ahk: "!b".to_string(),
             },

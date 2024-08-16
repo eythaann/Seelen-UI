@@ -4,9 +4,14 @@ pub mod pwsh;
 pub mod rect;
 pub mod virtual_desktop;
 
-use std::{path::PathBuf, time::Duration};
+use std::{
+    path::PathBuf,
+    time::{Duration, Instant},
+};
 
 use itertools::Itertools;
+use lazy_static::lazy_static;
+use parking_lot::Mutex;
 use tauri::{AppHandle, Manager};
 use windows::{
     core::GUID,
@@ -128,4 +133,24 @@ macro_rules! trace_lock {
             $mutex.lock()
         }
     }};
+}
+
+lazy_static! {
+    pub static ref PERFORMANCE_HELPER: Mutex<PerformanceHelper> = Mutex::new(PerformanceHelper {
+        time: Instant::now()
+    });
+}
+
+pub struct PerformanceHelper {
+    time: Instant,
+}
+
+impl PerformanceHelper {
+    pub fn start(&mut self) {
+        self.time = Instant::now();
+    }
+
+    pub fn elapsed(&self) -> Duration {
+        self.time.elapsed()
+    }
 }

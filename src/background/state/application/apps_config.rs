@@ -100,7 +100,7 @@ impl AppConfig {
 }
 
 impl FullState {
-    pub fn get_app_config_by_window(&mut self, hwnd: HWND) -> Option<&AppConfig> {
+    pub fn get_app_config_by_window(&self, hwnd: HWND) -> Option<&AppConfig> {
         // Can no cache apps that changes titles
         /* match self.cache.entry(hwnd.0) {
             Entry::Occupied(entry) => entry.get().and_then(|index| self.apps.get(index)),

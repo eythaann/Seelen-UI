@@ -192,7 +192,7 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
 
     if let DesktopEvent::WindowChanged(hwnd) = event {
         if WindowsApi::is_window(hwnd) {
-            if let Some(config) = trace_lock!(FULL_STATE).get_app_config_by_window(hwnd) {
+            if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
                 if config.options_contains(AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)?
                 {
                     winvd::pin_window(hwnd)?;
@@ -279,7 +279,7 @@ pub extern "system" fn win_event_hook(
         return;
     }
 
-    let mut hook_manager = HOOK_MANAGER.lock();
+    let mut hook_manager = trace_lock!(HOOK_MANAGER);
     hook_manager.event(event, hwnd);
 
     if let Some(synthetic_event) = event.get_synthetic(hwnd) {

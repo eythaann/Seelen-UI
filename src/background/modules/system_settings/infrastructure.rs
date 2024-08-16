@@ -14,13 +14,18 @@ fn emit_colors(colors: &UIColors) {
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_colors_events() {
-    let mut manager = trace_lock!(SYSTEM_SETTINGS);
-    if !REGISTERED.load(Ordering::Acquire) {
-        log::info!("Registering colors events");
-        manager.on_colors_change(Box::new(emit_colors));
+    let was_registered = REGISTERED.load(Ordering::Acquire);
+    if !was_registered {
         REGISTERED.store(true, Ordering::Release);
     }
-    emit_colors(&manager.get_colors().expect("Failed to get colors"));
+    std::thread::spawn(move || {
+        let mut manager = trace_lock!(SYSTEM_SETTINGS);
+        if !was_registered {
+            log::trace!("Registering colors events");
+            manager.on_colors_change(Box::new(emit_colors));
+        }
+        emit_colors(&manager.get_colors().expect("Failed to get colors"));
+    });
 }
 
 pub fn release_colors_events() {

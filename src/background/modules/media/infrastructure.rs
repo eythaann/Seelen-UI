@@ -26,18 +26,15 @@ pub fn register_media_events() {
     if !was_registered {
         REGISTERED.store(true, Ordering::Release);
     }
-
     std::thread::spawn(move || {
+        let mut manager = trace_lock!(MEDIA_MANAGER);
         if !was_registered {
-            log::info!("Registering media events");
-            let mut manager = trace_lock!(MEDIA_MANAGER);
+            log::trace!("Registering media events");
             manager.on_change_devices(emit_media_devices);
             manager.on_change_players(emit_media_sessions);
         }
-
-        let media_manager = trace_lock!(MEDIA_MANAGER);
-        emit_media_devices(media_manager.inputs(), media_manager.outputs());
-        emit_media_sessions(media_manager.playing());
+        emit_media_devices(manager.inputs(), manager.outputs());
+        emit_media_sessions(manager.playing());
     });
 }
 

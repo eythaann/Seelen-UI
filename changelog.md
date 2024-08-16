@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### performance
+- reduce load time from ~7s to ~4s
+
 ### features
 - .slu and uri now are loaded correctly on seelen ui.
 - allow change wallpaper from seelen settings.

@@ -3,7 +3,8 @@ use getset::{Getters, MutGetters};
 
 use crate::{
     error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager, state::SeelenSettings, utils::sleep_millis, windows_api::WindowsApi,
+    seelen_wm::WindowManager, state::application::FullState, utils::sleep_millis,
+    windows_api::WindowsApi,
 };
 
 use windows::Win32::Graphics::Gdi::HMONITOR;
@@ -69,7 +70,7 @@ impl Monitor {
         Ok(())
     }
 
-    pub fn load_settings(&mut self, settings: &SeelenSettings) -> Result<()> {
+    pub fn load_settings(&mut self, settings: &FullState) -> Result<()> {
         if settings.is_bar_enabled() {
             self.add_toolbar()?;
         } else {
@@ -92,7 +93,7 @@ impl Monitor {
         Ok(())
     }
 
-    pub fn new(hmonitor: HMONITOR, settings: &SeelenSettings) -> Result<Self> {
+    pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
         if hmonitor.is_invalid() {
             return Err(eyre!("Invalid Monitor").into());
         }

@@ -24,23 +24,16 @@ use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
 #[command]
-fn refresh_state() {
-    std::thread::spawn(|| {
-        log_error!(trace_lock!(SEELEN).refresh_state());
-    });
-}
-
-#[command]
 fn start_seelen_shortcuts() {
     std::thread::spawn(|| {
-        log_error!(trace_lock!(SEELEN).start_ahk_shortcuts());
+        log_error!(Seelen::start_ahk_shortcuts());
     });
 }
 
 #[command]
 fn kill_seelen_shortcuts() {
     std::thread::spawn(|| {
-        trace_lock!(SEELEN).kill_ahk_shortcuts();
+        Seelen::kill_ahk_shortcuts();
     });
 }
 
@@ -110,17 +103,17 @@ fn get_win_version() -> WinVersion {
     }
 }
 
+// https://docs.rs/tauri/latest/tauri/window/struct.WindowBuilder.html#known-issues
+// https://github.com/tauri-apps/wry/issues/583
 #[command]
-fn show_app_settings() {
-    std::thread::spawn(|| {
-        log_error!(trace_lock!(SEELEN).show_settings());
-    });
+async fn show_app_settings() {
+    log_error!(Seelen::show_settings());
 }
 
 #[command]
 fn set_auto_start(enabled: bool) {
     std::thread::spawn(move || {
-        log_error!(trace_lock!(SEELEN).set_auto_start(enabled));
+        log_error!(Seelen::set_auto_start(enabled));
     });
 }
 
@@ -164,7 +157,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
         run,
-        refresh_state,
         is_dev_mode,
         open_file,
         run_as_admin,

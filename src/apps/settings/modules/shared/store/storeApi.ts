@@ -179,8 +179,6 @@ export async function saveUserSettings(settings: Pick<UserSettings, 'jsonSetting
 
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
 
-  await invoke('refresh_state');
-
   if (settings.jsonSettings.ahkEnabled) {
     await invoke('start_seelen_shortcuts');
   } else {

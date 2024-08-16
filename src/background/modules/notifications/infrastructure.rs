@@ -14,12 +14,15 @@ fn emit_notifications(notifications: &Vec<AppNotification>) {
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_notification_events() {
-    std::thread::spawn(|| {
+    let was_registered = REGISTERED.load(Ordering::Acquire);
+    if !was_registered {
+        REGISTERED.store(true, Ordering::Release);
+    }
+    std::thread::spawn(move || {
         let mut manager = trace_lock!(NOTIFICATION_MANAGER);
-        if !REGISTERED.load(Ordering::Acquire) {
-            log::info!("Registering notifications events");
+        if !was_registered {
+            log::trace!("Registering notifications events");
             manager.on_notifications_change(emit_notifications);
-            REGISTERED.store(true, Ordering::Release);
         }
         emit_notifications(manager.notifications());
     });

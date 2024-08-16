@@ -53,7 +53,7 @@ impl PowerManager {
         if REGISTERED.load(Ordering::Acquire) {
             return Ok(());
         }
-        log::info!("Registering system power events");
+        log::trace!("Registering system power events");
 
         let wide_name: Vec<u16> = "Seelen Power Manager"
             .encode_utf16()

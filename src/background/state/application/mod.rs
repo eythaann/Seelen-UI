@@ -1,9 +1,11 @@
 mod apps_config;
 
+use arc_swap::ArcSwap;
+use getset::Getters;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use notify::{RecursiveMode, Watcher};
-use parking_lot::Mutex;
+use serde::Serialize;
 use std::{
     collections::{HashMap, VecDeque},
     path::{Path, PathBuf},
@@ -15,8 +17,12 @@ use std::{
 use tauri::{AppHandle, Emitter, Manager};
 
 use crate::{
-    error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
-    trace_lock, windows_api::WindowsApi,
+    error_handler::Result,
+    log_error,
+    modules::cli::domain::Resource,
+    seelen::{get_app_handle, SEELEN},
+    trace_lock,
+    windows_api::WindowsApi,
 };
 
 use super::{
@@ -25,20 +31,30 @@ use super::{
 };
 
 lazy_static! {
-    pub static ref FULL_STATE: Arc<Mutex<FullState>> = Arc::new(Mutex::new(
-        FullState::new().expect("Failed to create placeholders manager")
+    pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee(
+        FullState::new().expect("Failed to create State Manager")
     ));
 }
 
+#[derive(Getters, Debug, Clone, Serialize)]
 pub struct FullState {
+    #[serde(skip)]
     handle: AppHandle<tauri::Wry>,
-    themes: HashMap<String, Theme>,
-    placeholders: HashMap<String, Placeholder>,
-    settings: Settings,
-    settings_by_app: VecDeque<AppConfig>,
-    weg_items: WegItems,
+    #[serde(skip)]
     data_dir: PathBuf,
+    #[serde(skip)]
     resources_dir: PathBuf,
+    // ======== data ========
+    #[getset(get = "pub")]
+    settings: Settings,
+    #[getset(get = "pub")]
+    settings_by_app: VecDeque<AppConfig>,
+    #[getset(get = "pub")]
+    themes: HashMap<String, Theme>,
+    #[getset(get = "pub")]
+    placeholders: HashMap<String, Placeholder>,
+    #[getset(get = "pub")]
+    weg_items: WegItems,
 }
 
 static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
@@ -47,39 +63,29 @@ impl FullState {
     fn new() -> Result<Self> {
         let handle = get_app_handle();
         let mut manager = Self {
-            settings: Settings::default(),
-            weg_items: serde_yaml::Value::Null,
-            themes: HashMap::new(),
-            placeholders: HashMap::new(),
-            settings_by_app: VecDeque::new(),
-            // paths
             data_dir: handle.path().app_data_dir()?,
             resources_dir: handle.path().resource_dir()?,
             handle,
+            // ======== data ========
+            settings: Settings::default(),
+            settings_by_app: VecDeque::new(),
+            themes: HashMap::new(),
+            placeholders: HashMap::new(),
+            weg_items: serde_yaml::Value::Null,
         };
         manager.load_all()?;
         manager.start_listeners()?;
         Ok(manager)
     }
 
-    pub fn weg_items(&self) -> &WegItems {
-        &self.weg_items
+    /// shorthand of `FullState::clone` on Arc reference
+    pub fn cloned(&self) -> Self {
+        self.clone()
     }
 
-    pub fn themes(&self) -> &HashMap<String, Theme> {
-        &self.themes
-    }
-
-    pub fn placeholders(&self) -> &HashMap<String, Placeholder> {
-        &self.placeholders
-    }
-
-    pub fn settings_by_app(&self) -> &VecDeque<AppConfig> {
-        &self.settings_by_app
-    }
-
-    pub fn settings(&self) -> &Settings {
-        &self.settings
+    /// store `self` as the static `FULL_STATE` instance
+    pub fn store(self) {
+        FULL_STATE.store(Arc::new(self));
     }
 
     pub fn settings_path(&self) -> PathBuf {
@@ -157,7 +163,9 @@ impl FullState {
                 match event {
                     Ok(event) => {
                         if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
-                            log_error!(trace_lock!(FULL_STATE).process_event(event));
+                            let mut state = FULL_STATE.load().cloned();
+                            log_error!(state.process_event(event));
+                            state.store();
                         }
                     }
                     Err(e) => log::error!("Seelen UI Data Watcher error: {:?}", e),
@@ -315,6 +323,7 @@ impl FullState {
 
     fn emit_settings(&self) -> Result<()> {
         self.handle.emit("settings", self.settings())?;
+        trace_lock!(SEELEN).on_state_changed()?;
         Ok(())
     }
 

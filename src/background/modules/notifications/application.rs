@@ -100,7 +100,10 @@ impl NotificationManager {
         }
 
         if let Err(err) = self.listener.NotificationChanged(&self.event_handler) {
-            log::debug!("Failed to register notification listener using NotificationChanged: {:?}, spawning thread instead", err);
+            log::debug!(
+                "Failed to use NotificationChanged: {:?}, spawning thread instead",
+                err
+            );
             std::thread::spawn(|| -> Result<()> {
                 RELEASED.store(false, Ordering::SeqCst);
                 let listener = UserNotificationListener::Current()?;

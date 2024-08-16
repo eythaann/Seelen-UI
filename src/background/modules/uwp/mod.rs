@@ -14,8 +14,11 @@ pub static UWP_LIGHTUNPLATED_POSTFIX: &str = "_altform-lightunplated";
 pub static UWP_UNPLATED_POSTFIX: &str = "_altform-unplated";
 
 lazy_static! {
-    pub static ref UWP_MANAGER: Arc<Mutex<WindowsAppsManager>> =
-        Arc::new(Mutex::new(WindowsAppsManager::default()));
+    pub static ref UWP_MANAGER: Arc<Mutex<WindowsAppsManager>> = Arc::new(Mutex::new({
+        let mut manager = WindowsAppsManager::default();
+        manager.refresh().expect("Failed to refresh UWP manager");
+        manager
+    }));
     pub static ref UWP_TARGET_SIZE_POSTFIXES: Vec<&'static str> = vec![
         ".targetsize-256",
         ".targetsize-96",
@@ -152,17 +155,10 @@ impl WindowsAppsManager {
     }
 
     pub fn refresh(&mut self) -> Result<()> {
-        let mut script = PwshScript::new(include_str!("load_uwp_apps.ps1"));
-        let save_path = Self::get_save_path()?;
-
-        script.with_args([
-            "-SavePath",
-            save_path.to_string_lossy().trim_start_matches("\\\\?\\"),
-        ]);
-
+        let script = PwshScript::new(include_str!("load_uwp_apps.ps1"));
         let contents = tauri::async_runtime::block_on(script.execute())?;
         self.packages = serde_json::from_str(&contents)?;
-
+        std::fs::write(Self::get_save_path()?, &contents)?;
         Ok(())
     }
 

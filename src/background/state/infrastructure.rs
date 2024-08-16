@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 
-use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
+use crate::{error_handler::Result, windows_api::WindowsApi};
 
 use super::{
     application::FULL_STATE,
@@ -11,16 +11,13 @@ use super::{
 
 #[tauri::command]
 pub fn state_get_themes() -> Vec<Theme> {
-    trace_lock!(FULL_STATE)
-        .themes()
-        .values()
-        .cloned()
-        .collect_vec()
+    FULL_STATE.load().themes().values().cloned().collect_vec()
 }
 
 #[tauri::command]
 pub fn state_get_placeholders() -> Vec<Placeholder> {
-    trace_lock!(FULL_STATE)
+    FULL_STATE
+        .load()
         .placeholders()
         .values()
         .cloned()
@@ -29,17 +26,18 @@ pub fn state_get_placeholders() -> Vec<Placeholder> {
 
 #[tauri::command]
 pub fn state_get_weg_items() -> WegItems {
-    trace_lock!(FULL_STATE).weg_items().clone()
+    FULL_STATE.load().weg_items().clone()
 }
 
 #[tauri::command]
 pub fn state_get_settings() -> Settings {
-    trace_lock!(FULL_STATE).settings().clone()
+    FULL_STATE.load().settings().clone()
 }
 
 #[tauri::command]
 pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
-    trace_lock!(FULL_STATE)
+    FULL_STATE
+        .load()
         .settings_by_app()
         .iter()
         .cloned()

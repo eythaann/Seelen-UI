@@ -9,7 +9,7 @@ use parking_lot::Mutex;
 use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
-use crate::seelen::SEELEN;
+use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_bar::FancyToolbar;
 use crate::seelen_wm::WindowManager;
 use crate::state::application::FULL_STATE;
@@ -164,9 +164,10 @@ pub fn process_uri(uri: &str) -> Result<()> {
     let engine = base64::engine::general_purpose::URL_SAFE_NO_PAD;
     let decoded = engine.decode(contents.as_bytes())?;
 
-    FULL_STATE
-        .lock()
-        .load_resource(serde_yaml::from_slice(&decoded)?)
+    let mut state = FULL_STATE.load().cloned();
+    state.load_resource(serde_yaml::from_slice(&decoded)?)?;
+    state.store();
+    Ok(())
 }
 
 pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
@@ -177,7 +178,7 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
     if let Some((subcommand, matches)) = matches.subcommand() {
         match subcommand {
             "settings" => {
-                trace_lock!(SEELEN).show_settings()?;
+                Seelen::show_settings()?;
             }
             WindowManager::CLI_IDENTIFIER => {
                 if let Some(monitor) = trace_lock!(SEELEN).focused_monitor_mut() {
@@ -199,6 +200,6 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
         return Ok(());
     }
 
-    trace_lock!(SEELEN).show_settings()?;
+    Seelen::show_settings()?;
     Ok(())
 }
