@@ -9,6 +9,8 @@ import { dialog } from '../../../shared/tauri/infra';
 
 import { RootActions } from '../../../shared/store/app/reducer';
 
+import cs from './index.module.css';
+
 export function Wallpaper() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -16,7 +18,9 @@ export function Wallpaper() {
   async function loadWallpaper() {
     const file = await dialog.open({
       title: t('general.wallpaper.select'),
-      filters: [{ name: 'images', extensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tif', 'tiff'] }],
+      filters: [
+        { name: 'images', extensions: ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tif', 'tiff'] },
+      ],
     });
 
     if (!file) {
@@ -31,7 +35,11 @@ export function Wallpaper() {
     <>
       <SettingsOption>
         <Monitor />
-        <Button onClick={loadWallpaper} size="middle">{t('general.wallpaper.select')}</Button>
+        <div className={cs.wallpaperButton}>
+          <Button onClick={loadWallpaper} size="middle">
+            {t('general.wallpaper.select')}
+          </Button>
+        </div>
       </SettingsOption>
     </>
   );

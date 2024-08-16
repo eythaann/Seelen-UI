@@ -4,7 +4,7 @@ import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
 import { ParsePlaceholder } from '../../../../shared/schemas/Placeholders';
 import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { path } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { DirEntry } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 
@@ -160,7 +160,7 @@ export class UserSettingsLoader {
     }
 
     if (this._withWallpaper) {
-      userSettings.wallpaper = await invoke('state_get_wallpaper');
+      userSettings.wallpaper = convertFileSrc(await invoke('state_get_wallpaper'));
     }
 
     return userSettings;

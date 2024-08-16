@@ -15,7 +15,7 @@
   top: 0;
   left: 0;
   background-color: var(--color-gray-50);
-  transition: opacity 300ms ease-out;
+  transition: opacity 300ms linear;
   opacity: 1;
 
   &::before {

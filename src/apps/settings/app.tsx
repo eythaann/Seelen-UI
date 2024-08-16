@@ -2,7 +2,6 @@ import { useDarkMode } from '../shared/styles';
 import { Header } from './components/header';
 import { Navigation } from './components/navigation';
 import { Route } from './components/navigation/routes';
-import { emit } from '@tauri-apps/api/event';
 import { ConfigProvider, theme } from 'antd';
 import { Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -38,10 +37,11 @@ export function App() {
   let route = useSelector(RootSelectors.route);
 
   useEffect(() => {
-    let splashscreen = document.getElementById('splashscreen');
-    splashscreen?.classList.add('vanish');
-    setTimeout(() => splashscreen?.classList.add('hidden'), 300);
-    emit('register-colors-events');
+    setTimeout(() => {
+      let splashscreen = document.getElementById('splashscreen');
+      splashscreen?.classList.add('vanish');
+      setTimeout(() => splashscreen?.classList.add('hidden'), 300);
+    }, 300);
   }, []);
 
   let Component = ComponentByRout[route];

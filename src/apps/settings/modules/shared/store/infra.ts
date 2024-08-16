@@ -4,7 +4,7 @@ import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { Theme } from '../../../../shared/schemas/Theme';
 import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { listen as listenGlobal } from '@tauri-apps/api/event';
+import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep, debounce } from 'lodash';
 
@@ -67,6 +67,8 @@ export async function registerStoreEvents() {
       store.dispatch(RootActions.setState(newState));
     }, 100),
   );
+
+  await emit('register-colors-events');
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
