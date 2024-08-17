@@ -1,13 +1,11 @@
 pub mod cli;
 pub mod hook;
 
-use std::sync::atomic::Ordering;
-
 use crate::{
     error_handler::Result,
     log_error,
     seelen::get_app_handle,
-    state::{IS_TOOLBAR_ENABLED, TOOLBAR_HEIGHT},
+    state::application::FULL_STATE,
     windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
 use serde::Serialize;
@@ -111,8 +109,9 @@ impl FancyToolbar {
         let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
         let mut rect = monitor_info.monitorInfo.rcMonitor;
 
-        if IS_TOOLBAR_ENABLED.load(Ordering::Acquire) {
-            let toolbar_height = TOOLBAR_HEIGHT.load(Ordering::Acquire);
+        let state = FULL_STATE.load();
+        if state.is_bar_enabled() {
+            let toolbar_height = state.settings().fancy_toolbar.height;
             rect.top += (toolbar_height as f32 * dpi) as i32;
         }
 
@@ -132,7 +131,7 @@ impl FancyToolbar {
         let hitbox_hwnd = HWND(self.hitbox.hwnd()?.0);
 
         let dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
-        let toolbar_height = TOOLBAR_HEIGHT.load(Ordering::Acquire);
+        let toolbar_height = FULL_STATE.load().settings().fancy_toolbar.height;
 
         let mut abd = AppBarData::from_handle(hitbox_hwnd);
 
@@ -174,6 +173,7 @@ impl FancyToolbar {
             .shadow(false)
             .skip_taskbar(true)
             .always_on_top(true)
+            .drag_and_drop(false)
             .build()?,
         };
 
@@ -195,6 +195,7 @@ impl FancyToolbar {
             .shadow(false)
             .skip_taskbar(true)
             .always_on_top(true)
+            .drag_and_drop(false)
             .owner(&hitbox)?
             .build()?,
         };

@@ -26,9 +26,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
         log_error!(PowerManager::emit_system_power_info());
     });
 
-    handle.listen("register-tray-events", move |_| {
-        log_error!(register_tray_events())
-    });
+    handle.listen("register-tray-events", move |_| register_tray_events());
 
     handle.listen("register-network-events", move |_| {
         log_error!(register_network_events());

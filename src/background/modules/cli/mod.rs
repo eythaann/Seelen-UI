@@ -9,11 +9,11 @@ use std::{
 
 use application::{handle_cli_events, SEELEN_COMMAND_LINE};
 
-use crate::{error_handler::Result, log_error, trace_lock};
+use crate::{error_handler::Result, log_error, trace_lock, utils::spawn_named_thread};
 
 pub struct Client;
 impl Client {
-    const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
+    // const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
 
     fn handle_message(stream: TcpStream) {
         let mut reader = BufReader::new(stream);
@@ -51,19 +51,16 @@ impl Client {
             port.to_string(),
         )?;
 
-        std::thread::Builder::new()
-            .name("TCP Thread".to_string())
-            .stack_size(Self::BUFFER_SIZE)
-            .spawn(move || {
-                for stream in listener.incoming() {
-                    match stream {
-                        Ok(stream) => Self::handle_message(stream),
-                        Err(e) => {
-                            log::error!("Failed to accept connection: {}", e);
-                        }
+        spawn_named_thread("TCP Listener", move || {
+            for stream in listener.incoming() {
+                match stream {
+                    Ok(stream) => Self::handle_message(stream),
+                    Err(e) => {
+                        log::error!("Failed to accept connection: {}", e);
                     }
                 }
-            })?;
+            }
+        })?;
         Ok(())
     }
 

@@ -26,6 +26,7 @@ fn emit_networks(ip: String, adapters: Vec<NetworkAdapter>, has_internet: bool) 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_network_events() -> Result<()> {
     if !REGISTERED.load(Ordering::Acquire) {
+        REGISTERED.store(true, Ordering::Release);
         log::trace!("Registering network events");
         NetworkManager::register_events(move |connectivity| {
             log::trace!(target: "network", "Connectivity changed: {:?}", connectivity);
@@ -39,7 +40,6 @@ pub fn register_network_events() -> Result<()> {
                 emit_networks(ip, adapters, has_internet_ipv4 || has_internet_ipv6);
             }
         });
-        REGISTERED.store(true, Ordering::Release);
     }
 
     if let (Ok(ip), Ok(adapters)) = (get_local_ip_address(), NetworkManager::get_adapters()) {

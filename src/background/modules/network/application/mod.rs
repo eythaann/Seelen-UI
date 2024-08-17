@@ -15,7 +15,10 @@ use windows::Win32::{
 };
 
 use crate::{
-    error_handler::Result, seelen::get_app_handle, utils::pwsh::PwshScript, windows_api::Com,
+    error_handler::Result,
+    seelen::get_app_handle,
+    utils::{pwsh::PwshScript, spawn_named_thread},
+    windows_api::Com,
 };
 
 use super::domain::{NetworkAdapter, WlanProfile};
@@ -70,7 +73,7 @@ impl NetworkManager {
     where
         F: Fn(NLM_CONNECTIVITY) + Send + 'static,
     {
-        std::thread::spawn(move || {
+        spawn_named_thread("Network Manager", move || {
             let result: Result<()> = Com::run_with_context(|| {
                 let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
                 let mut last_state = None;
@@ -88,7 +91,8 @@ impl NetworkManager {
             });
 
             log::warn!("Network loop finished: {:?}", result);
-        });
+        })
+        .expect("Failed to spawn network manager loop");
     }
 
     pub async fn get_wifi_profiles() -> Result<Vec<WlanProfile>> {

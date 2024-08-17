@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app crashing by tray icon module
+
 ## [1.9.4]
 ### fix
 - app crashing for new users

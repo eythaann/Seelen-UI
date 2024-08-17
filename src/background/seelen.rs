@@ -23,7 +23,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, sleep_millis, PERFORMANCE_HELPER},
+    utils::{ahk::AutoHotKey, sleep_millis, spawn_named_thread, PERFORMANCE_HELPER},
     windows_api::WindowsApi,
 };
 
@@ -108,23 +108,21 @@ impl Seelen {
     }
 
     fn on_monitor_event(event: MonitorManagerEvent) {
-        std::thread::spawn(move || {
-            log::trace!("Monitor event: {:?}", event);
-            let mut seelen = trace_lock!(SEELEN);
-            match event {
-                MonitorManagerEvent::Added(_name, id) => {
-                    log_error!(seelen.add_monitor(id));
-                }
-                MonitorManagerEvent::Removed(_name, id) => {
-                    log_error!(seelen.remove_monitor(id));
-                }
-                MonitorManagerEvent::Updated(name, id) => {
-                    if let Some(m) = seelen.monitor_by_name_mut(&name) {
-                        m.update_handle(id);
-                    }
+        log::trace!("Monitor event: {:?}", event);
+        let mut seelen = trace_lock!(SEELEN);
+        match event {
+            MonitorManagerEvent::Added(_name, id) => {
+                log_error!(seelen.add_monitor(id));
+            }
+            MonitorManagerEvent::Removed(_name, id) => {
+                log_error!(seelen.remove_monitor(id));
+            }
+            MonitorManagerEvent::Updated(name, id) => {
+                if let Some(m) = seelen.monitor_by_name_mut(&name) {
+                    m.update_handle(id);
                 }
             }
-        });
+        }
     }
 
     fn start_async() -> Result<()> {
@@ -132,7 +130,7 @@ impl Seelen {
 
         let mut all_ready = false;
         while !all_ready {
-            sleep_millis(10);
+            sleep_millis(50);
             all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
         }
 
@@ -161,7 +159,7 @@ impl Seelen {
         }
         monitor_manager.listen_changes(Self::on_monitor_event);
 
-        std::thread::spawn(|| log_error!(Self::start_async()));
+        spawn_named_thread("Start Async", || log_error!(Self::start_async()))?;
         std::thread::spawn(|| log_error!(Self::refresh_auto_start_path()));
         Ok(())
     }
@@ -291,7 +289,7 @@ impl Seelen {
 
         let state = FULL_STATE.load();
         if state.is_ahk_enabled() {
-            log::trace!("Starting seelen.ahk");
+            log::trace!("Starting AHK shortcuts");
             AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.ahk"))
                 .with_lib()
                 .execute()?;
@@ -306,7 +304,7 @@ impl Seelen {
                 .execute()?;
             }
         }
-
+        log::trace!("AHK shortcuts started successfully");
         Ok(())
     }
 
@@ -343,6 +341,7 @@ impl Seelen {
             .visible(false)
             .decorations(false)
             .center()
+            .always_on_top(true)
             .build()
             .ok()
         });

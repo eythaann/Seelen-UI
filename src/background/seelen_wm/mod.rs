@@ -301,6 +301,7 @@ impl WindowManager {
         .transparent(true)
         .shadow(false)
         .skip_taskbar(true)
+        .drag_and_drop(false)
         .build()?;
 
         window.set_ignore_cursor_events(true)?;

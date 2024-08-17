@@ -44,6 +44,7 @@ impl Default for Settings {
 // ============== Fancy Toolbar Settings ==============
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct FancyToolbarSettings {
     /// enable or disable the fancy toolbar
     pub enabled: bool,
@@ -93,6 +94,7 @@ pub enum SeelenWegSide {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct SeelenWegSettings {
     /// enable or disable the seelenweg
     pub enabled: bool,
@@ -136,6 +138,7 @@ impl Default for SeelenWegSettings {
 // ============== Window Manager Settings ==============
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct Border {
     pub enabled: bool,
     pub width: f64,
@@ -143,12 +146,14 @@ pub struct Border {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct FloatingWindowSettings {
     pub width: f64,
     pub height: f64,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct WindowManagerSettings {
     /// enable or disable the window manager
     pub enabled: bool,
@@ -207,6 +212,7 @@ impl Default for WindowManagerSettings {
 // ============== Settings by Monitor ==============
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct Workspace {
     pub name: String,
     pub layout: String,
@@ -215,6 +221,7 @@ pub struct Workspace {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct Monitor {
     pub workspaces: Vec<Workspace>,
     pub work_area_offset: Option<Rect>,
@@ -258,6 +265,7 @@ impl AhkVar {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
+#[serde(default)]
 pub struct AhkVarList {
     pub reserve_top: AhkVar,
     pub reserve_bottom: AhkVar,

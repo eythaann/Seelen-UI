@@ -2,16 +2,10 @@ pub mod application;
 pub mod domain;
 pub mod infrastructure;
 
-use std::{
-    collections::HashMap,
-    sync::atomic::{AtomicBool, AtomicU32},
-};
+use std::collections::HashMap;
 
 use application::FullState;
 use domain::AhkVar;
-
-pub static IS_TOOLBAR_ENABLED: AtomicBool = AtomicBool::new(true);
-pub static TOOLBAR_HEIGHT: AtomicU32 = AtomicU32::new(30);
 
 impl FullState {
     pub fn is_weg_enabled(&self) -> bool {

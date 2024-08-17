@@ -29,7 +29,7 @@ use crate::{
     seelen_weg::SeelenWeg,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
-    utils::{constants::IGNORE_FOCUS, is_windows_11},
+    utils::{constants::IGNORE_FOCUS, is_windows_11, spawn_named_thread},
     windows_api::WindowsApi,
     winevent::WinEvent,
 };
@@ -271,35 +271,32 @@ pub extern "system" fn win_event_hook(
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
 
-    let stack_size = 5 * 1024 * 1024; // 5 MB
-    std::thread::Builder::new()
-        .name("win_event_hook".into())
-        .stack_size(stack_size)
-        .spawn(move || unsafe {
-            SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
+    // let stack_size = 5 * 1024 * 1024; // 5 MB
+    spawn_named_thread("WinEventHook", move || unsafe {
+        SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
 
-            let mut msg: MSG = MSG::default();
-            loop {
-                if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
-                    log::info!("windows event processing shutdown");
-                    break;
-                };
-                let _ = TranslateMessage(&msg);
-                DispatchMessageW(&msg);
-                std::thread::sleep(Duration::from_millis(10));
-            }
-        })?;
+        let mut msg: MSG = MSG::default();
+        loop {
+            if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
+                log::info!("windows event processing shutdown");
+                break;
+            };
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+            std::thread::sleep(Duration::from_millis(10));
+        }
+    })?;
 
     // Todo search why virtual desktop events are not working on windows 10
     if is_windows_11() {
-        std::thread::spawn(move || -> Result<()> {
+        spawn_named_thread("VirtualDesktopEventHook", move || -> Result<()> {
             let (sender, receiver) = std::sync::mpsc::channel::<DesktopEvent>();
             let _notifications_thread = listen_desktop_events(sender)?;
             for event in receiver {
                 log_error!(process_vd_event(event))
             }
             Ok(())
-        });
+        })?;
     }
 
     Ok(())

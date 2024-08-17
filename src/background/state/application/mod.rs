@@ -22,6 +22,7 @@ use crate::{
     modules::cli::domain::Resource,
     seelen::{get_app_handle, SEELEN},
     trace_lock,
+    utils::spawn_named_thread,
     windows_api::WindowsApi,
 };
 
@@ -157,7 +158,8 @@ impl FullState {
         watcher.watch(&self.data_dir, RecursiveMode::Recursive)?;
         watcher.watch(&self.resources_dir, RecursiveMode::Recursive)?;
 
-        std::thread::spawn(move || {
+        // Todo I think this thread is unnecessary, just try saving the watcher obj in the instance.
+        spawn_named_thread("Files Watcher", move || {
             let _watcher = watcher;
             for event in rx {
                 match event {
@@ -171,7 +173,7 @@ impl FullState {
                     Err(e) => log::error!("Seelen UI Data Watcher error: {:?}", e),
                 }
             }
-        });
+        })?;
 
         log::trace!("Seelen UI Data Watcher started!");
         Ok(())

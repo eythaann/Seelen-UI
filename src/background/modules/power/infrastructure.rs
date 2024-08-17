@@ -19,7 +19,7 @@ use windows::{
 
 use crate::{
     error_handler::Result, log_error, modules::power::domain::Battery, seelen::get_app_handle,
-    windows_api::WindowsApi,
+    utils::spawn_named_thread, windows_api::WindowsApi,
 };
 
 use super::domain::PowerStatus;
@@ -53,6 +53,7 @@ impl PowerManager {
         if REGISTERED.load(Ordering::Acquire) {
             return Ok(());
         }
+        REGISTERED.store(true, Ordering::Release);
         log::trace!("Registering system power events");
 
         let wide_name: Vec<u16> = "Seelen Power Manager"
@@ -74,7 +75,7 @@ impl PowerManager {
             RegisterClassW(&wnd_class);
         }
 
-        std::thread::spawn(move || unsafe {
+        spawn_named_thread("Power Manager Window", move || unsafe {
             let hwnd = CreateWindowExW(
                 WINDOW_EX_STYLE::default(),
                 PCWSTR(wide_class.as_ptr()),
@@ -95,16 +96,14 @@ impl PowerManager {
                 let _ = TranslateMessage(&msg);
                 DispatchMessageW(&msg);
             }
-        });
+        })?;
 
         // TODO search for a better way to do this, WM_POWERBROADCAST only register status events
         // like charging, discharging, battery low, etc.
-        std::thread::spawn(move || loop {
+        spawn_named_thread("Power Manager Loop", move || loop {
             log_error!(PowerManager::emit_system_power_info());
             std::thread::sleep(std::time::Duration::from_secs(60));
-        });
-
-        REGISTERED.store(true, Ordering::Release);
+        })?;
         Ok(())
     }
 

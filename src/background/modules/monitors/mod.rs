@@ -19,6 +19,7 @@ use windows::{
 use crate::{
     error_handler::Result,
     log_error, trace_lock,
+    utils::spawn_named_thread,
     windows_api::{MonitorEnumerator, WindowsApi},
 };
 
@@ -122,7 +123,7 @@ impl MonitorManager {
 
         let (hwnd_sender, hwnd_receiver) = crossbeam_channel::bounded::<HWND>(1);
 
-        std::thread::spawn(move || unsafe {
+        spawn_named_thread("Monitor Manager", move || unsafe {
             let hwnd = CreateWindowExW(
                 WINDOW_EX_STYLE::default(),
                 PCWSTR(wide_class.as_ptr()),
@@ -160,7 +161,7 @@ impl MonitorManager {
                 DispatchMessageW(&msg);
                 std::thread::sleep(std::time::Duration::from_millis(10));
             }
-        });
+        })?;
 
         Ok(Self {
             hwnd: hwnd_receiver.recv()?.0,

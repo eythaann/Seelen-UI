@@ -16,20 +16,21 @@ fn emit_tray_info() -> Result<()> {
 }
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
-pub fn register_tray_events() -> Result<()> {
+pub fn register_tray_events() {
     if !REGISTERED.load(Ordering::Acquire) {
         log::trace!("Registering tray events");
         // TODO: add event listener for tray events
         REGISTERED.store(true, Ordering::Release);
     }
-    emit_tray_info()?;
-    Ok(())
+    // Eythan: I don't know why but it doesn't work without the thread::spawn
+    // it makes a deadlock and app crashes
+    std::thread::spawn(|| log_error!(emit_tray_info()));
 }
 
 // TODO: remove when add event listener for tray events
 #[tauri::command]
 pub fn temp_get_by_event_tray_info() {
-    log_error!(emit_tray_info());
+    std::thread::spawn(|| log_error!(emit_tray_info()));
 }
 
 #[tauri::command]

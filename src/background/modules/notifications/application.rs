@@ -18,7 +18,7 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, log_error};
+use crate::{error_handler::Result, log_error, utils::spawn_named_thread};
 
 lazy_static! {
     pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
@@ -104,18 +104,14 @@ impl NotificationManager {
                 "Failed to use NotificationChanged: {:?}, spawning thread instead",
                 err
             );
-            std::thread::spawn(|| -> Result<()> {
+            spawn_named_thread("Notification Manager", || -> Result<()> {
                 RELEASED.store(false, Ordering::SeqCst);
-                let listener = UserNotificationListener::Current()?;
                 while !RELEASED.load(Ordering::Acquire) {
-                    log_error!(Self::internal_notifications_change(
-                        &Some(listener.clone()),
-                        &None
-                    ));
+                    log_error!(Self::internal_notifications_change(&None, &None));
                     std::thread::sleep(std::time::Duration::from_secs(1));
                 }
                 Ok(())
-            });
+            })?;
         }
 
         let u_notifications = self
@@ -139,27 +135,26 @@ impl NotificationManager {
     }
 
     fn internal_notifications_change(
-        listener: &Option<UserNotificationListener>,
+        _listener: &Option<UserNotificationListener>,
         _args: &Option<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        if let Some(listener) = listener {
-            let mut manager = NOTIFICATION_MANAGER.lock();
-            let mut current_list = manager.notifications_ids.clone();
+        let mut manager = NOTIFICATION_MANAGER.lock();
+        let mut current_list = manager.notifications_ids.clone();
 
-            for u_notification in listener
-                .GetNotificationsAsync(NotificationKinds::Toast)?
-                .get()?
-            {
-                let id = u_notification.Id()?;
-                if !current_list.contains(&id) {
-                    manager.emit_event(NotificationEvent::Added(id));
-                }
-                current_list.retain(|x| *x != id);
+        for u_notification in manager
+            .listener
+            .GetNotificationsAsync(NotificationKinds::Toast)?
+            .get()?
+        {
+            let id = u_notification.Id()?;
+            if !current_list.contains(&id) {
+                manager.emit_event(NotificationEvent::Added(id));
             }
+            current_list.retain(|x| *x != id);
+        }
 
-            for id in current_list {
-                manager.emit_event(NotificationEvent::Removed(id));
-            }
+        for id in current_list {
+            manager.emit_event(NotificationEvent::Removed(id));
         }
         Ok(())
     }

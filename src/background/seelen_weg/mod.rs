@@ -369,6 +369,7 @@ impl SeelenWeg {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
+        .drag_and_drop(false)
         .build()?;
 
         let window = tauri::WebviewWindowBuilder::new(
@@ -386,6 +387,7 @@ impl SeelenWeg {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
+        .drag_and_drop(false)
         .owner(&hitbox)?
         .build()?;
 
