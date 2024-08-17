@@ -2,33 +2,33 @@ media:
   device:
     comunications: コミュニケーション
     multimedia: マルチメディア
-  output_device: 出力機器
+  output_device: 出力デバイス
   master_volume: マスターボリューム
   input_device: 入力デバイス
   players: メディアプレーヤー
 network:
   placeholder:
     password: パスワード
-  connect: 接続する
-  not_found: ネットワークは見つかりません
-  hidden: 隠されたネットワーク
-  more: より多くのネットワーク設定
-  disconnect: 切断します
+  connect: 接続
+  not_found: ネットワークが見つかりません
+  hidden: 隠れたネットワーク
+  more: 詳しい設定
+  disconnect: 切断
 settings:
   restart: 再起動
   log_out: ログアウト
-  app_settings: アプリ設定
+  app_settings: SeelenUIの設定
   shutdown: シャットダウン
-  sleep: 寝る
+  sleep: スリープ
   title: 設定
 placeholder:
   battery_remaining: ％ 残り
-  settings: クイック設定
-  open_system_tray: システムトレイを開きます
+  settings: 設定
+  open_system_tray: システムトレイを開く
   volume: 音量
-  ethernet_connected: インターネット・アクセス
-  bluetooth_devices: Bluetooth＆Devices
+  ethernet_connected: インターネットアクセス
+  bluetooth_devices: Bluetoothとデバイス
   smart_charge: '- スマートチャージ'
-  open_user_folder: ユーザーフォルダーを開きます
+  open_user_folder: ユーザーフォルダーを開く
   ethernet_disconnected: インターネットアクセスはありません
   notifications: 通知
