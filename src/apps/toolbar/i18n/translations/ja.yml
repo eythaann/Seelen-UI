@@ -26,7 +26,7 @@ placeholder:
   settings: 設定
   open_system_tray: システムトレイを開く
   volume: 音量
-  ethernet_connected: インターネットアクセス
+  ethernet_connected: インターネット・アクセス
   bluetooth_devices: Bluetoothとデバイス
   smart_charge: '- スマートチャージ'
   open_user_folder: ユーザーフォルダーを開く
