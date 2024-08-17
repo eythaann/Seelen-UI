@@ -4349,7 +4349,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 
 [[package]]
 name = "seelen-ui"
-version = "1.9.4"
+version = "1.9.5"
 dependencies = [
  "arc-swap",
  "base64 0.22.1",
