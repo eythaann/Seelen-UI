@@ -43,6 +43,26 @@
   </tr>
 </table>
 
+
+## Table of Contents
+- [Overview](#overview)
+- [Getting Started & Installation](#getting-started--installation)
+  - [Microsoft Store (recommended)](#microsoft-store-emrecommendedem)
+  - [Winget](#winget)
+  - [.msix Installer](#msix-installer)
+  - [.exe Installer](#exe-installer)
+- [Usage](#usage)
+- [Documentation](#documentation)
+  - [Languages](./documentation/languages.md)
+  - [Toolbar](./documentation/toolbar.md)
+  - [Themes](./documentation/themes.md)
+  - [Window Manager](./documentation/windows_manager.md)
+  - [Project](./documentation/project.md)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+
 ## Overview
 Welcome to Seelen UI, where customization meets productivity, revolutionizing your Windows desktop experience. Seamlessly integrated into your system, Seelen UI unlocks a world of possibilities, offering an extensive array of customization features to sculpt your desktop into a personalized masterpiece of efficiency and style.
 
@@ -86,9 +106,16 @@ Download the latest version from the [Releases](https://github.com/eythaann/seel
 
 ## Usage
 
-Once installed or extracted, simply open the program. The easy-to-use and intuitive GUI will guide you through the configuration process. Customize your window management experience effortlessly.
+Once installed or extracted, simply open the program. The easy-to-use and intuitive GUI will guide you through the configuration process. Customize your desktop environment effortlessly.
 
-For more detailed information and advanced features, refer to the [Seelen UI Documentation](./documentation).
+## Documentation
+
+For in-depth details on various aspects of Seelen UI, explore the following documents:
+- [Languages](./documentation/languages.md) - Information regarding translations.
+- [Toolbar](./documentation/toolbar.md) - Details about customizing and using the toolbar.
+- [Themes](./documentation/themes.md) - Guidance on creating and applying themes.
+- [Window Manager](./documentation/windows_manager.md) - Instructions on configuring the window manager.
+- [Project](./documentation/project.md) - General information about the project and its structure.
 
 ## Contributing
 
@@ -105,5 +132,4 @@ See the [LICENSE](LICENSE) file for details.
 For inquiries and support, please contact me on [Discord](https://discord.gg/ABfASx5ZAJ).
 
 ## Thank You
-
 Happy window managing and customization with Seelen UI!
