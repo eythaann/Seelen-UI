@@ -66,7 +66,9 @@ Welcome to Seelen UI, where customization meets productivity, revolutionizing yo
 You can choose from different installation options based on your preference:
 
 ### Microsoft Store <em>(recommended)</em>
-Download the latest version from the [Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) page. This is the recommended option because you will receive updates and a secure version of the program.
+Download the latest version from the [Store](https://www.microsoft.com/store/productId/9P67C2D4T9FB?ocid=pdpshare) page. This is the recommended option because you will receive updates and a secure version of the program. 
+
+***Note***: It may take around 1 to 3 business days for changes to be reflected in the Microsoft Store, as updates are approved by real people in the store.
 
 ### Winget
 Install the latest version using:
@@ -74,14 +76,13 @@ Install the latest version using:
 ``` pwsh
 winget install --id Seelen.SeelenUI
 ``` 
-This option also uses the signed `.msix` package and ensures you have the latest secure version.
+This option also uses the signed `.msix` package and ensures you have the latest secure version. Similar to the Microsoft Store, it may take around 1 to 3 business days for changes to be reflected in Winget, as updates are approved by real people in the `winget-pkg` project.
 
 ### .msix Installer
-Download the `.msix` installer from the [Releases](https://github.com/eythaann/seelen-ui/releases) page. This package is signed, ensuring a secure installation.
+Download the `.msix` installer from the [Releases](https://github.com/eythaann/seelen-ui/releases) page. This package is signed, ensuring a secure installation. This is the same option as the Microsoft Store but is a portable installer.
 
-### Setup.exe
-Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the `setup.exe` installer. This option is less recommended as the installer is not signed, which may cause it to be flagged as a potential threat by some antivirus programs.
-
+### .exe Installer
+Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the `setup.exe` installer. This option is less recommended as the installer is not signed, which may cause it to be flagged as a potential threat by some antivirus programs. The setup.exe is updated more quickly than the Microsoft Store or Winget versions and also it receives notifications updates on new release.
 
 ## Usage
 
