@@ -86,7 +86,6 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
         }
     }
 
-    Seelen::show_settings()?;
     seelen.start()?;
 
     log_error!(try_register_tray_icon(app));
