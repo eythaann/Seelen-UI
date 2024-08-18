@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.7]
 ### enhancements
 - made all invoke handlers async
 
