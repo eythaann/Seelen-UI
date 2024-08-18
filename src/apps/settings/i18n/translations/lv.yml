@@ -57,7 +57,6 @@ wm:
   author: Autors
   enable: Iespējot logu pārvaldnieku
   resize_delta: Delta izmēra maiņa (%)
-  disabled_windows10: Logu pārvaldnieks nav pieejams operētājsistēmai Windows 10.
   workspace_offset: Darbvietu kompensācija (malas)
   layout: Izkārtojums
   workspace_padding: Darbvietas polsterējums

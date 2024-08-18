@@ -56,7 +56,6 @@ wm:
   description: تفصیل
   workspace_offset: ورک اسپیس آفسیٹ (مارجن)
   space_between_containers: کنٹینرز کے درمیان جگہ
-  disabled_windows10: ونڈو مینیجر ونڈوز 10 کے لئے دستیاب نہیں ہے۔
   resize_delta: ڈیلٹا کا سائز (٪)
   author: مصنف
   enable: ونڈو مینیجر کو فعال کریں

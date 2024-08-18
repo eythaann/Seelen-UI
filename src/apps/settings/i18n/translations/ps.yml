@@ -59,7 +59,6 @@ wm:
   workspace_padding: د کارډا ریسس
   space_between_containers: د کانتینرونو ترمینځ ځای
   author: لیکوال
-  disabled_windows10: د کړکۍ مدیر د وینډوز 10 لپاره شتون نلري.
   layout: ترتیب
   disabled_windows_version: د کړکۍ مدیر ستاسو د وینډوز نسخه لپاره شتون نلري.
 weg:

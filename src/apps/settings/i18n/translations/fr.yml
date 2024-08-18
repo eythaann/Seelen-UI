@@ -53,7 +53,6 @@ toolbar:
   height: Hauteur
 wm:
   enable: Activer le gestionnaire de fenêtres
-  disabled_windows10: Le gestionnaire de fenêtres n'est pas disponible pour Windows 10.
   layout: Mise en page
   author: Auteur
   description: Description

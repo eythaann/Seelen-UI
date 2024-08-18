@@ -55,7 +55,6 @@ toolbar:
   height: 高度
 wm:
   enable: 启用窗口管理器
-  disabled_windows10: 窗口管理器不适用于 Windows 10。
   layout: 布局
   author: 作者
   description: 描述

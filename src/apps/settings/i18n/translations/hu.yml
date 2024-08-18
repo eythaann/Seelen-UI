@@ -57,7 +57,6 @@ wm:
   layout: Elrendezés
   space_between_containers: Hely a konténerek között
   description: Leírás
-  disabled_windows10: Az ablakkezelő nem érhető el a Windows 10 -hez.
   enable: Engedélyezze az ablakkezelőt
   workspace_padding: Munkaterületek párnázása
   resize_delta: Átméretezze a DELTA -t (%)

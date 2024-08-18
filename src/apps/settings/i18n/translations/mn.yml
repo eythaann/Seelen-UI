@@ -60,7 +60,6 @@ wm:
   author: Зохиолч
   enable: Цонх менежерийг идэвхжүүлэх
   resize_delta: Дельтааг өөрчлөх (%)
-  disabled_windows10: Цонхны менежер Windows 10-д байхгүй байна.
   disabled_windows_version: Цонхны менежер таны Windows хувилбарт ашиглах боломжгүй.
 weg:
   items:

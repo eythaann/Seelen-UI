@@ -53,7 +53,6 @@ wm:
     width: Ertzaren zabalera
     offset: Ertzaren desplazamendua
     enable: Gaitu leihoen ertza
-  disabled_windows10: Leiho kudeatzailea ez dago erabilgarri Windows 10-erako.
   enable: Gaitu leiho kudeatzailea
   description: Deskribapen
   space_between_containers: Edukiontzien arteko espazioa

@@ -56,7 +56,6 @@ wm:
   description: აღწერილობა
   author: ავტორი
   enable: ფანჯრის მენეჯერის ჩართვა
-  disabled_windows10: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი Windows 10 -ისთვის.
   resize_delta: დელტას ზომის შეცვლა (%)
   space_between_containers: სივრცე კონტეინერებს შორის
   workspace_offset: სამუშაო ადგილები ოფსეტური (ზღვარი)

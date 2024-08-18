@@ -58,7 +58,6 @@ wm:
   enable: Omogućite menadžeru prozora
   layout: Izgled
   workspace_offset: Offset radne prostore (margine)
-  disabled_windows10: Upravitelj prozora nije dostupan za Windows 10.
   resize_delta: Promijenite veličinu Delta (%)
   space_between_containers: Prostor između kontejnera
   workspace_padding: Djelatna površina obloga

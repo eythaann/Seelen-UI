@@ -56,7 +56,6 @@ toolbar:
   height: ارتفاع
 wm:
   enable: تمكين مدير النوافذ
-  disabled_windows10: مدير النوافذ غير متوفر لنظام التشغيل Windows 10.
   layout: تَخطِيط
   author: مؤلف
   description: وصف

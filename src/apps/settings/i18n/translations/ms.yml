@@ -56,7 +56,6 @@ wm:
   enable: Dayakan Pengurus Tetingkap
   layout: Susun atur
   description: Penerangan
-  disabled_windows10: Pengurus Window tidak tersedia untuk Windows 10.
   space_between_containers: Ruang antara bekas
   workspace_offset: Ruang Kerja Offset (margin)
   resize_delta: Saiz semula delta (%)

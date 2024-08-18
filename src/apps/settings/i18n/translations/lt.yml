@@ -58,7 +58,6 @@ wm:
   enable: Įgalinkite lango tvarkyklę
   resize_delta: Pakeisti deltos dydį (%)
   layout: Išdėstymas
-  disabled_windows10: „Windows Manager“ nėra „Windows 10“.
   author: Autorius
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas

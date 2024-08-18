@@ -56,7 +56,6 @@ wm:
   author: Autor
   layout: Układ
   description: Opis
-  disabled_windows10: Menedżer okien nie jest dostępny dla systemu Windows 10.
   space_between_containers: Przestrzeń między pojemnikami
   enable: Włącz menedżer okien
   workspace_padding: Wypadki przestrzeni roboczej

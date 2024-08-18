@@ -54,7 +54,6 @@ wm:
     offset: Iparun aala
   enable: Jeki oluṣakoso window
   resize_delta: Tun ṣe Delta (%)
-  disabled_windows10: Oluṣakoso window ko wa fun Windows 10.
   layout: Agbekalẹ
   description: Isapejuwe
   space_between_containers: Aaye laarin awọn apoti

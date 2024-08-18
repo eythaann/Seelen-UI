@@ -56,7 +56,6 @@ wm:
   layout: Layout
   description: Kuvaus
   workspace_padding: Työtilat
-  disabled_windows10: 'Windows Manager ei ole käytettävissä Windows 10: lle.'
   enable: Ota ikkunanhallinta käyttöön
   resize_delta: Muuttaa Delta (%)
   space_between_containers: Konttien välinen tila

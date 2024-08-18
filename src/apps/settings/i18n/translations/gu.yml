@@ -58,7 +58,6 @@ wm:
   enable: વિન્ડો મેનેજરને સક્ષમ કરો
   workspace_offset: વર્કસ્પેસ ઓફસેટ (માર્જિન)
   workspace_padding: વર્કસ્પેસ પેડિંગ
-  disabled_windows10: વિન્ડોઝ 10 માટે વિન્ડો મેનેજર ઉપલબ્ધ નથી.
   description: વર્ણન
   author: લેખક
   resize_delta: ડેલ્ટાનું કદ બદલો (%)

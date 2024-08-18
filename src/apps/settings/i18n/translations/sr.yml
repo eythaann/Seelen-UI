@@ -57,7 +57,6 @@ wm:
   space_between_containers: Простор између контејнера
   enable: Омогући менаџер прозора
   workspace_offset: Оффсет радних простора (маржи)
-  disabled_windows10: Менаџер прозора није доступан за Виндовс 10.
   layout: Изглед
   workspace_padding: Облога за радне просторе
   resize_delta: Промените величину Делта (%)

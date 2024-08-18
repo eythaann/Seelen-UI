@@ -55,7 +55,6 @@ wm:
     width: ទទឹងព្រំដែន
   description: ការពិពណ៌នា
   workspace_padding: ចន្លោះកន្លែងធ្វើការ
-  disabled_windows10: កម្មវិធីគ្រប់គ្រងបង្អួចមិនមានសម្រាប់ Windows 10 ទេ។
   layout: ប្លង់
   author: អ្នកនិពន្ធ
   space_between_containers: ចន្លោះរវាងកុងតឺន័រ

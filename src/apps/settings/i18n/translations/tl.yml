@@ -54,7 +54,6 @@ wm:
     offset: Border Offset
     enable: Paganahin ang hangganan ng window
   author: May -akda
-  disabled_windows10: Ang window manager ay hindi magagamit para sa Windows 10.
   description: Paglalarawan
   space_between_containers: Puwang sa pagitan ng mga lalagyan
   layout: Layout

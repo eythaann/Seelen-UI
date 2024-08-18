@@ -58,7 +58,6 @@ wm:
   workspace_offset: कार्यक्षेत्र ऑफसेट (मार्जिन)
   author: लेखक
   description: विवरण
-  disabled_windows10: विंडोज 10 के लिए विंडो मैनेजर उपलब्ध नहीं है।
   workspace_padding: कार्यक्षेत्र पैडिंग
   layout: लेआउट
   enable: विंडो मैनेजर सक्षम करें

@@ -60,7 +60,6 @@ wm:
   layout: Lay -out
   workspace_padding: Workspaces -vulling
   enable: Schakel Window Manager in
-  disabled_windows10: De Window Manager is niet beschikbaar voor Windows 10.
   resize_delta: Wijzig de wijzers van delta (%)
   disabled_windows_version: De Window Manager is niet beschikbaar voor uw Windows -versie.
 weg:

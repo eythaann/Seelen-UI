@@ -55,7 +55,6 @@ wm:
     offset: Grenz Offäll
   enable: Aktivéiert Fënstere Manager
   resize_delta: Resize Delta (%)
-  disabled_windows10: Den Fenstermanager ass net verfügbar fir Windows 10.
   description: Broessdatsch
   space_between_containers: Raum tëscht Behälter
   author: Auteur

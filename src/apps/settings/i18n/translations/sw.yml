@@ -56,7 +56,6 @@ wm:
   resize_delta: Rudisha Delta (%)
   workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
   description: Maelezo
-  disabled_windows10: Meneja wa windows haipatikani kwa Windows 10.
   space_between_containers: Nafasi kati ya vyombo
   enable: Wezesha Meneja wa Dirisha
   layout: Mpangilio

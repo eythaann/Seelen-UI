@@ -57,7 +57,6 @@ toolbar:
   height: Altura
 wm:
   enable: Habilitar gestor de ventanas
-  disabled_windows10: El gestor de ventanas no está disponible para Windows 10.
   layout: Distribución
   author: Autor
   description: Descripción

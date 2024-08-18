@@ -60,7 +60,6 @@ wm:
   layout: Usporiadanie
   space_between_containers: Priestor medzi nádobami
   description: Opis
-  disabled_windows10: Správca okien nie je k dispozícii pre Windows 10.
   workspace_offset: Offsety Workspaces (marže)
   disabled_windows_version: Správca okien nie je k dispozícii pre vašu verziu systému Windows.
 weg:

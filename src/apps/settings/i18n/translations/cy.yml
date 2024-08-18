@@ -53,7 +53,6 @@ wm:
     width: Lled
     enable: Galluogi ffin ffenestr
     offset: Gwrthbwyso ar y ffin
-  disabled_windows10: Nid yw'r Rheolwr Ffenestr ar gael ar gyfer Windows 10.
   space_between_containers: Lle rhwng cynwysyddion
   author: Awduron
   description: Disgrifiadau

@@ -55,7 +55,6 @@ wm:
     offset: Offset hranic
   author: Autor
   description: Popis
-  disabled_windows10: Správce oken není k dispozici pro Windows 10.
   resize_delta: Změna velikosti delta (%)
   workspace_offset: Workspaces Offset (marže)
   layout: Rozložení

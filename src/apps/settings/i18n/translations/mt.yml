@@ -57,7 +57,6 @@ wm:
   enable: Ippermetti l-maniġer tat-twieqi
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)
-  disabled_windows10: Il-maniġer tat-twieqi mhux disponibbli għall-Windows 10.
   author: Awtur
   workspace_offset: Spazji tax-Xogħol Offset (Marġini)
   space_between_containers: Spazju bejn il-kontenituri

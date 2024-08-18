@@ -55,7 +55,6 @@ wm:
   space_between_containers: מרחב בין מכולות
   layout: מַעֲרָך
   author: מְחַבֵּר
-  disabled_windows10: מנהל החלונות אינו זמין עבור Windows 10.
   description: תיאור
   workspace_padding: מרחבי עבודה ריפוד
   enable: אפשר מנהל חלונות

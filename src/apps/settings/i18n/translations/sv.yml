@@ -60,7 +60,6 @@ wm:
   workspace_padding: Arbetsytor
   enable: Aktivera fönsterhanterare
   space_between_containers: Utrymme mellan containrar
-  disabled_windows10: Fönsterhanteraren är inte tillgänglig för Windows 10.
   workspace_offset: Arbetsytor Offset (marginaler)
   disabled_windows_version: Fönsterhanteraren är inte tillgänglig för din Windows -version.
 weg:

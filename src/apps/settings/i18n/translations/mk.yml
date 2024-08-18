@@ -56,7 +56,6 @@ wm:
   enable: Овозможи менаџер на прозорци
   workspace_padding: Подлога за работни места
   resize_delta: Променете ја големината на Делта (%)
-  disabled_windows10: Менаџерот на прозорецот не е достапен за Windows 10.
   workspace_offset: Работни места за неутрализирање (маргини)
   space_between_containers: Простор помеѓу контејнери
   layout: Распоред

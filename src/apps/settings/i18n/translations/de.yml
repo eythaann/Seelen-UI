@@ -57,7 +57,6 @@ toolbar:
   height: Höhe
 wm:
   enable: Fenstermanager aktivieren
-  disabled_windows10: Der Fenstermanager ist nicht für Windows 10 verfügbar.
   layout: Layout
   author: Autor
   description: Beschreibung

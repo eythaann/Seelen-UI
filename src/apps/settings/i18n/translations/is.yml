@@ -55,7 +55,6 @@ wm:
     offset: Landamæri offset
   description: Lýsing
   workspace_offset: Vinnusvæði offset (framlegð)
-  disabled_windows10: Gluggastjórinn er ekki í boði fyrir Windows 10.
   layout: Skipulag
   space_between_containers: Rými milli gáma
   resize_delta: Breyta stærð delta (%)

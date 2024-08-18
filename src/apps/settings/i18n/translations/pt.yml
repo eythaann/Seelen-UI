@@ -57,7 +57,6 @@ toolbar:
   height: Altura
 wm:
   enable: Habilitar Gerenciador de Janelas
-  disabled_windows10: O Gerenciador de janelas não está disponível para Windows 10.
   layout: Disposição
   author: Autor
   description: Descrição

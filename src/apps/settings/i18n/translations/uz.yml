@@ -55,7 +55,6 @@ wm:
     enable: Oynaning chegarasini yoqing
   description: Tavsif
   enable: Oyna boshqaruvchisini yoqish
-  disabled_windows10: Windows 10 uchun deraza menejeri mavjud emas.
   space_between_containers: Idishlar orasidagi bo'shliq
   workspace_offset: Ishxonalar ofset (marjalar)
   author: Muallif

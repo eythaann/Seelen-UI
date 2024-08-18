@@ -58,7 +58,6 @@ toolbar:
   height: Высота
 wm:
   enable: Включить диспетчер окон
-  disabled_windows10: Диспетчер окон недоступен для Windows 10.
   layout: Макет
   author: Автор
   description: Описание

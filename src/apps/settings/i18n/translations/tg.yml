@@ -53,7 +53,6 @@ wm:
     offset: Ҳафтаи сарҳад
     enable: Сарҳади тирезаро фаъол созед
   description: Тасвирӣ
-  disabled_windows10: Менеҷери тиреза барои Windows 10 дастрас нест.
   layout: Тарҳ
   space_between_containers: Фосила байни контейнер
   workspace_offset: Ҷойгиршавӣ

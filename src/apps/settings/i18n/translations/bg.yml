@@ -54,7 +54,6 @@ wm:
     offset: Гранично изместване
     width: Гранична ширина
   description: Описание
-  disabled_windows10: Мениджърът на прозореца не е достъпен за Windows 10.
   resize_delta: Оразмерете делтата (%)
   enable: Активирайте мениджъра на прозорци
   workspace_padding: Работни пространства подплънки

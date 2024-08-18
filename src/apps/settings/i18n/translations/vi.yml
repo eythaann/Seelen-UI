@@ -60,7 +60,6 @@ wm:
   resize_delta: Thay đổi kích thước delta (%)
   space_between_containers: Không gian giữa các container
   workspace_padding: Không gian làm việc đệm
-  disabled_windows10: Trình quản lý cửa sổ không có sẵn cho Windows 10.
   workspace_offset: Không gian làm việc bù (lề)
   disabled_windows_version: Trình quản lý cửa sổ không có sẵn cho phiên bản Windows của bạn.
 weg:

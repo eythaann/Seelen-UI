@@ -55,7 +55,6 @@ wm:
     enable: Activa la vora de la finestra
   layout: Pla
   space_between_containers: Espai entre contenidors
-  disabled_windows10: El gestor de finestres no està disponible per a Windows 10.
   workspace_offset: Offset d'espais de treball (marges)
   resize_delta: Redimensiona el delta (%)
   workspace_padding: Rado d’espais de treball

@@ -61,7 +61,6 @@ wm:
   space_between_containers: Spațiu între containere
   enable: Activați managerul de ferestre
   workspace_padding: Padding spații de lucru
-  disabled_windows10: Managerul de ferestre nu este disponibil pentru Windows 10.
   disabled_windows_version: Managerul de ferestre nu este disponibil pentru versiunea dvs. Windows.
 weg:
   items:

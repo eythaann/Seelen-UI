@@ -60,7 +60,6 @@ wm:
   resize_delta: ปรับขนาดเดลต้า (%)
   enable: เปิดใช้งาน Manager Window
   workspace_padding: ช่องว่างพื้นที่ทำงาน
-  disabled_windows10: ตัวจัดการหน้าต่างไม่สามารถใช้ได้สำหรับ Windows 10
   disabled_windows_version: ตัวจัดการหน้าต่างไม่สามารถใช้งานได้สำหรับเวอร์ชัน Windows ของคุณ
 weg:
   items:

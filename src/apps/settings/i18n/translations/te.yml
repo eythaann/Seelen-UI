@@ -57,7 +57,6 @@ wm:
   author: రచయిత
   description: వివరణ
   space_between_containers: కంటైనర్ల మధ్య ఖాళీ
-  disabled_windows10: విండోస్ 10 కోసం విండో మేనేజర్ అందుబాటులో లేదు.
   enable: విండో మేనేజర్‌ని ప్రారంభించండి
   workspace_padding: కార్యస్థలాల పాడింగ్
   workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)

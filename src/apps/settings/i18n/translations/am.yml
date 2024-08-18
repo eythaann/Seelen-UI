@@ -54,7 +54,6 @@ wm:
   description: መግለጫ
   layout: አቀማመጥ
   space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ
-  disabled_windows10: የመስክ ሥራ አስኪያጁ ለዊንዶውስ 10 አይገኝም.
   enable: የመስኮት አቀናባሪን አንቃ
   workspace_offset: የስራ ቦታዎች ማካካሻ (ማርጂኖች)
   workspace_padding: የስራ ቦታዎች ፓድ

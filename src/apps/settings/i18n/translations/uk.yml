@@ -57,7 +57,6 @@ wm:
   description: Опис
   resize_delta: Змінити розмір дельти (%)
   layout: Макет
-  disabled_windows10: Менеджер вікон недоступний для Windows 10.
   author: Автор
   workspace_offset: Зсув робочих просторів (поля)
   space_between_containers: Простір між контейнерами

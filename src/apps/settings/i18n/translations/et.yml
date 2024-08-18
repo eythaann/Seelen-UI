@@ -54,7 +54,6 @@ wm:
     offset: Piiride nihke
     enable: Luba akna piir
   space_between_containers: Konteinerite vaheline ruum
-  disabled_windows10: Windows 10 jaoks pole aknahaldur saadaval.
   workspace_offset: Tööruumide nihkumine (veerised)
   enable: Luba aknahaldur
   author: Autor

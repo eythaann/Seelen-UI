@@ -55,7 +55,6 @@ wm:
     offset: Grens offset
   author: Outeur
   description: Beskrywing
-  disabled_windows10: Die vensterbestuurder is nie beskikbaar vir Windows 10 nie.
   space_between_containers: Ruimte tussen houers
   resize_delta: Verander die grootte delta (%)
   layout: Uitleg

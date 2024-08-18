@@ -56,7 +56,6 @@ wm:
   description: 説明
   enable: ウィンドウマネージャーを有効にします
   workspace_offset: ワークスペースオフセット（マージン）
-  disabled_windows10: ウィンドウマネージャーはWindows 10では利用できません。
   space_between_containers: コンテナ間のスペース
   resize_delta: デルタのサイズ（％）
   workspace_padding: ワークスペースパディング

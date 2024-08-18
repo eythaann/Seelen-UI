@@ -57,7 +57,6 @@ wm:
   author: Yazar
   description: Tanım
   workspace_padding: Çalışma alanları dolgu
-  disabled_windows10: Pencere yöneticisi Windows 10 için mevcut değildir.
   resize_delta: Yeniden boyutlandırma delta (%)
   enable: Pencere Yöneticisini Etkinleştir
   space_between_containers: Konteynerler arasındaki boşluk

@@ -60,7 +60,6 @@ wm:
   resize_delta: Endre størrelse på Delta (%)
   workspace_offset: Arbeidsområder forskyvning (marginer)
   workspace_padding: Arbeidsområder polstring
-  disabled_windows10: Window Manager er ikke tilgjengelig for Windows 10.
   enable: Aktiver Window Manager
   disabled_windows_version: Window Manager er ikke tilgjengelig for Windows -versjonen din.
 weg:

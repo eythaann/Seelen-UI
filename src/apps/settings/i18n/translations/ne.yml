@@ -56,7 +56,6 @@ wm:
   space_between_containers: कन्टेनर बीचको ठाउँ
   workspace_offset: कार्यस्पेस अफसेट (मार्जिन)
   enable: विन्डो प्रबन्धक सक्षम गर्नुहोस्
-  disabled_windows10: विन्डो प्रबन्धक विन्डोज 10 को लागि उपलब्ध छैन।
   layout: नक्शा
   author: लेखिका
   resize_delta: रिसाइज डेल्टा (%)

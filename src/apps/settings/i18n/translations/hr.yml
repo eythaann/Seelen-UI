@@ -55,7 +55,6 @@ wm:
     enable: Omogućite obrub prozora
   description: Opis
   enable: Omogući upravitelju prozora
-  disabled_windows10: Upravitelj prozora nije dostupan za Windows 10.
   author: Autor
   workspace_offset: Pomak radnog prostora (margine)
   layout: Raspored

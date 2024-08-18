@@ -57,7 +57,6 @@ wm:
   description: Descrizione
   author: Autrice
   resize_delta: Ridimensiona Delta (%)
-  disabled_windows10: Il gestore delle finestre non è disponibile per Windows 10.
   enable: Abilita il gestore delle finestre
   space_between_containers: Spazio tra contenitori
   workspace_offset: Offset degli spazi di lavoro (margini)

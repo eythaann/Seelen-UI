@@ -58,7 +58,6 @@ wm:
   description: বর্ণনা
   resize_delta: পুনরায় আকার ডেল্টা (%)
   workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
-  disabled_windows10: উইন্ডো ম্যানেজার উইন্ডোজ 10 এর জন্য উপলভ্য নয়।
   space_between_containers: পাত্রে স্থান
   workspace_padding: ওয়ার্কস্পেস প্যাডিং
   enable: উইন্ডো ম্যানেজার সক্ষম করুন

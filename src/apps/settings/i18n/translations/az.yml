@@ -60,7 +60,6 @@ wm:
   space_between_containers: Konteynerlər arasındakı boşluq
   author: Müəllif
   workspace_offset: İş yerləri ofset (kənarları)
-  disabled_windows10: Pəncərə meneceri Windows 10 üçün mövcud deyil.
   workspace_padding: İş sahələri padding
   disabled_windows_version: Pəncərə meneceri Windows versiyanız üçün mövcud deyil.
 weg:

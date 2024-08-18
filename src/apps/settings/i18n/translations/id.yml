@@ -59,7 +59,6 @@ wm:
   enable: Aktifkan Window Manager
   resize_delta: Ubah Ubah Delta (%)
   author: Pengarang
-  disabled_windows10: Window Manager tidak tersedia untuk Windows 10.
   workspace_offset: Offset ruang kerja (margin)
   workspace_padding: Padding ruang kerja
   disabled_windows_version: Window Manager tidak tersedia untuk versi Windows Anda.

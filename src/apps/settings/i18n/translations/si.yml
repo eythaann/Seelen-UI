@@ -61,7 +61,6 @@ wm:
   workspace_padding: වැඩබිම් පිරවුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   workspace_offset: වැඩබිම් ඕෆ්සෙට් (ආන්තික)
-  disabled_windows10: Windows 10 සඳහා Window Manager නොමැත.
   disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා කවුළු කළමනාකරු ලබා ගත නොහැක.
 weg:
   items:

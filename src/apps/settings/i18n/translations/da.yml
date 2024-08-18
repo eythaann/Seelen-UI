@@ -53,7 +53,6 @@ wm:
     width: Grænsebredde
     enable: Aktivér vindues grænse
     offset: Border Offset
-  disabled_windows10: Window Manager er ikke tilgængelig til Windows 10.
   author: Forfatter
   description: Beskrivelse
   resize_delta: Ændre størrelse på Delta (%)

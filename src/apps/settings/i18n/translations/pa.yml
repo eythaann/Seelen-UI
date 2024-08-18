@@ -60,7 +60,6 @@ wm:
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
   enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
-  disabled_windows10: ਵਿੰਡੋ ਮੈਨੇਜਰ ਵਿੰਡੋਜ਼ 10 ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।
   layout: ਖਾਕਾ
   disabled_windows_version: ਵਿੰਡੋ ਮੈਨੇਜਰ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
 weg:

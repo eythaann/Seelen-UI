@@ -55,7 +55,6 @@ wm:
   description: Terîf
   author: Nivîskar
   layout: Rêz
-  disabled_windows10: Rêvebirê pencereyê ji bo Windows 10-ê nabe.
   workspace_offset: Karûbarên Workspan (Margins)
   space_between_containers: Cîhê di navbera konteyneran de
   enable: Gerînendeyê Windeyê çalak bike

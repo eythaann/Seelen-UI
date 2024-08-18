@@ -1,6 +1,8 @@
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { translate } from 'google-translate-api-x';
 import yaml from 'js-yaml';
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
 
 import { LanguageList } from '../src/apps/shared/lang';
 
@@ -14,7 +16,7 @@ async function translateObject(base: any, lang: string, mut_obj: any) {
         await translateObject(value, lang, mut_obj[key]);
       }
 
-      // avoid modify already translated values
+      // avoid modifying already translated values
       if (typeof value === 'string' && !mut_obj[key]) {
         const res = await translate(value, {
           from: 'en',
@@ -27,29 +29,79 @@ async function translateObject(base: any, lang: string, mut_obj: any) {
   );
 }
 
-async function completeTranslationsFor(app: string) {
+async function completeTranslationsFor(
+  app: string,
+  keysToUpdate: Set<string>,
+  deleteKeys: Set<string>,
+) {
   const path = `./src/apps/${app}/i18n/translations`;
 
   const en = yaml.load(readFileSync(`${path}/en.yml`, 'utf8'));
+  deleteKeysDeep(en, Array.from(deleteKeys));
+
   for (const lang of toTranslate) {
     const filePath = `${path}/${lang}.yml`;
-    console.log(filePath);
+    console.log(`Processing: ${filePath}`);
 
-    if (!existsSync(filePath)) {
-      writeFileSync(filePath, yaml.dump({}));
+    let trans: any = {};
+    if (existsSync(filePath)) {
+      trans = yaml.load(readFileSync(filePath, 'utf8'));
     }
 
-    const trans = yaml.load(readFileSync(filePath, 'utf8'));
+    deleteKeysDeep(trans, Array.from(deleteKeys));
+    deleteKeysDeep(trans, Array.from(keysToUpdate));
     await translateObject(en, lang, trans);
+
     writeFileSync(filePath, yaml.dump(trans));
   }
 }
 
+function deleteKeysDeep(obj: any, keys: string[]) {
+  for (const key of keys) {
+    deleteDeepKey(obj, key.split('.'));
+  }
+}
+
+function deleteDeepKey(obj: any, path: string[]) {
+  if (path.length === 0) {
+    return;
+  }
+
+  let temp = obj;
+  let finalKey = path.pop()!;
+
+  for (const key of path) {
+    if (typeof temp[key] !== 'object') {
+      return;
+    }
+    temp = temp[key];
+  }
+
+  delete temp[finalKey];
+}
+
 async function main() {
-  await completeTranslationsFor('toolbar');
-  await completeTranslationsFor('seelenweg');
-  await completeTranslationsFor('settings');
-  await completeTranslationsFor('update');
+  const argv = await yargs(hideBin(process.argv))
+    .option('delete', {
+      type: 'array',
+      description: 'Keys to delete from translations',
+      alias: 'd',
+      coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
+    })
+    .option('update', {
+      type: 'array',
+      description: 'Keys to update in translations',
+      alias: 'u',
+      coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
+    }).argv;
+
+  const deleteKeys = new Set(argv.delete || []);
+  const keysToUpdate = new Set(argv.update || []);
+
+  await completeTranslationsFor('toolbar', keysToUpdate, deleteKeys);
+  await completeTranslationsFor('seelenweg', keysToUpdate, deleteKeys);
+  await completeTranslationsFor('settings', keysToUpdate, deleteKeys);
+  await completeTranslationsFor('update', keysToUpdate, deleteKeys);
 }
 
 main().catch(console.error);
