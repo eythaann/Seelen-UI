@@ -49,7 +49,7 @@ function componentByModule(module: ToolbarModule) {
   if (!Component) {
     return null;
   }
-  return <Component key={module.template} module={module} />;
+  return <Component key={module.id} module={module} />;
 }
 
 export function ToolBar({ structure }: Props) {

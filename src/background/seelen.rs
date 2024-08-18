@@ -91,9 +91,9 @@ impl Seelen {
             Self::kill_ahk_shortcuts()
         });
 
-        /* for monitor in &mut self.monitors {
+        for monitor in &mut self.monitors {
             monitor.load_settings(&state)?;
-        } */
+        }
         Ok(())
     }
 
@@ -167,7 +167,9 @@ impl Seelen {
         monitor_manager.listen_changes(Self::on_monitor_event);
 
         spawn_named_thread("Start Async", || log_error!(Self::start_async()))?;
-        std::thread::spawn(|| log_error!(Self::refresh_auto_start_path()));
+        tauri::async_runtime::spawn(async {
+            log_error!(Self::refresh_auto_start_path().await);
+        });
         Ok(())
     }
 
@@ -220,73 +222,63 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn is_auto_start_enabled() -> Result<bool> {
+    pub async fn is_auto_start_enabled() -> Result<bool> {
         let handle = get_app_handle();
-        let output = tauri::async_runtime::block_on(async move {
-            handle
-                .shell()
-                .command("powershell")
-                .args([
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-NoProfile",
-                    "-Command",
-                    "[bool](Get-ScheduledTask -TaskName Seelen-UI -ErrorAction SilentlyContinue)",
-                ])
-                .output()
-                .await
-        })?;
+        let output = handle
+            .shell()
+            .command("powershell")
+            .args([
+                "-ExecutionPolicy",
+                "Bypass",
+                "-NoProfile",
+                "-Command",
+                "[bool](Get-ScheduledTask -TaskName Seelen-UI -ErrorAction SilentlyContinue)",
+            ])
+            .output()
+            .await?;
         let stdout = String::from_utf8(output.stdout)?.trim().to_lowercase();
         Ok(stdout == "true")
     }
 
     /// override auto-start task in case of location change, normally this happen on MSIX update
-    fn refresh_auto_start_path() -> Result<()> {
-        if WindowsApi::is_elevated()? && Self::is_auto_start_enabled()? {
-            Self::set_auto_start(true)?;
+    async fn refresh_auto_start_path() -> Result<()> {
+        if WindowsApi::is_elevated()? && Self::is_auto_start_enabled().await? {
+            Self::set_auto_start(true).await?;
         }
         Ok(())
     }
 
-    pub fn set_auto_start(enabled: bool) -> Result<()> {
+    pub async fn set_auto_start(enabled: bool) -> Result<()> {
         let pwsh_script = include_str!("schedule.ps1");
         let pwsh_script_path = temp_dir().join("schedule.ps1");
         std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
 
         let exe_path = std::env::current_exe()?;
 
-        tauri::async_runtime::block_on(async move {
-            let result = get_app_handle()
-                .shell()
-                .command("powershell")
-                .args([
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-NoProfile",
-                    "-File",
-                    &pwsh_script_path.to_string_lossy(),
-                    "-ExeRoute",
-                    &exe_path.to_string_lossy(),
-                    "-Enabled",
-                    if enabled { "true" } else { "false" },
-                ])
-                .output()
-                .await;
+        let output = get_app_handle()
+            .shell()
+            .command("powershell")
+            .args([
+                "-ExecutionPolicy",
+                "Bypass",
+                "-NoProfile",
+                "-File",
+                &pwsh_script_path.to_string_lossy(),
+                "-ExeRoute",
+                &exe_path.to_string_lossy(),
+                "-Enabled",
+                if enabled { "true" } else { "false" },
+            ])
+            .output()
+            .await?;
 
-            match result {
-                Ok(output) => {
-                    if !output.status.success() {
-                        let stderr = std::str::from_utf8(&output.stderr)
-                            .unwrap_or_default()
-                            .trim();
+        if !output.status.success() {
+            let stderr = std::str::from_utf8(&output.stderr)
+                .unwrap_or_default()
+                .trim();
 
-                        log::error!("schedule auto start failed: {}", stderr);
-                    }
-                }
-                Err(err) => log::error!("schedule auto start Failed to wait for process: {}", err),
-            };
-        });
-
+            log::error!("schedule auto start failed: {}", stderr);
+        }
         Ok(())
     }
 

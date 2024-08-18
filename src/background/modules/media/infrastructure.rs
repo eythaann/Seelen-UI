@@ -44,16 +44,16 @@ pub fn release_media_events() {
     }
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn media_set_default_device(id: String, role: String) -> Result<()> {
     trace_lock!(MEDIA_MANAGER).set_default_device(&id, &role)?;
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn media_next(id: String) -> Result<()> {
     if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
-        let success = tauri::async_runtime::block_on(session.TrySkipNextAsync()?)?;
+        let success = session.TrySkipNextAsync()?.get()?;
         if !success {
             return Err("failed to skip next".into());
         }
@@ -61,10 +61,10 @@ pub fn media_next(id: String) -> Result<()> {
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn media_prev(id: String) -> Result<()> {
     if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
-        let success = tauri::async_runtime::block_on(session.TrySkipPreviousAsync()?)?;
+        let success = session.TrySkipPreviousAsync()?.get()?;
         if !success {
             return Err("failed to skip previous".into());
         }
@@ -72,10 +72,10 @@ pub fn media_prev(id: String) -> Result<()> {
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn media_toggle_play_pause(id: String) -> Result<()> {
     if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
-        let success = tauri::async_runtime::block_on(session.TryTogglePlayPauseAsync()?)?;
+        let success = session.TryTogglePlayPauseAsync()?.get()?;
         if !success {
             return Err("failed to toggle play".into());
         }
@@ -83,7 +83,7 @@ pub fn media_toggle_play_pause(id: String) -> Result<()> {
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn media_toggle_mute(id: String, _session_id: Option<String>) -> Result<()> {
     let manager = trace_lock!(MEDIA_MANAGER);
     let endpoints = manager.devices_audio_endpoint();
@@ -95,7 +95,7 @@ pub fn media_toggle_mute(id: String, _session_id: Option<String>) -> Result<()> 
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn set_volume_level(id: String, _session_id: Option<String>, level: f32) -> Result<()> {
     let manager = trace_lock!(MEDIA_MANAGER);
     let endpoints = manager.devices_audio_endpoint();

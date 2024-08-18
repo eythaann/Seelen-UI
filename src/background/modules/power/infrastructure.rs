@@ -125,17 +125,17 @@ impl PowerManager {
     }
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn log_out() {
     log_error!(WindowsApi::exit_windows(EWX_LOGOFF, SHTDN_REASON_NONE));
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn suspend() {
     log_error!(WindowsApi::set_suspend_state());
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn restart() -> Result<(), String> {
     let token_handle = WindowsApi::open_process_token()?;
     let mut tkp = TOKEN_PRIVILEGES {
@@ -155,7 +155,7 @@ pub fn restart() -> Result<(), String> {
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn shutdown() -> Result<(), String> {
     let token_handle = WindowsApi::open_process_token()?;
     let mut tkp = TOKEN_PRIVILEGES {

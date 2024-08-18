@@ -9,7 +9,7 @@ use windows::Win32::{
 
 use crate::{seelen::SEELEN, trace_lock, utils::rect::Rect, windows_api::WindowsApi};
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
     let hwnd = HWND(hwnd);
 
@@ -38,21 +38,19 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn bounce_handle(webview: Webview<Wry>, hwnd: isize) {
     let monitor_id = webview.label().split("/").last().expect("No monitor ID");
     let monitor_id = monitor_id.parse::<isize>().expect("Invalid monitor ID");
 
-    std::thread::spawn(move || {
-        if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
-            if let Some(wm) = monitor.wm_mut() {
-                wm.bounce_handle(HWND(hwnd));
-            }
+    if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
+        if let Some(wm) = monitor.wm_mut() {
+            wm.bounce_handle(HWND(hwnd));
         }
-    });
+    }
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn request_focus(hwnd: isize) -> Result<(), String> {
     let hwnd = HWND(hwnd);
     log::trace!(

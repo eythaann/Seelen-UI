@@ -167,7 +167,7 @@ impl SeelenWeg {
         }
 
         log::trace!(
-            "Adding {} <=> {:?}",
+            "Adding {} <=> {}",
             hwnd.0,
             WindowsApi::get_window_text(hwnd)
         );

@@ -97,12 +97,17 @@ impl FullState {
         FULL_STATE.store(Arc::new(self));
     }
 
+    fn store_cloned(&self) {
+        FULL_STATE.store(Arc::new(self.cloned()));
+    }
+
     pub fn settings_path(&self) -> PathBuf {
         self.data_dir.join("settings.json")
     }
 
-    fn process_event(&mut self, event: &DebouncedEvent) -> Result<()> {
-        let event = &event.event;
+    fn process_event(&mut self, event: DebouncedEvent) -> Result<()> {
+        let event = event.event;
+
         let weg_items_path = self.data_dir.join("seelenweg_items.yaml");
 
         let user_themes = self.data_dir.join("themes");
@@ -117,12 +122,14 @@ impl FullState {
         if event.paths.contains(&weg_items_path) {
             log::info!("Weg Items changed");
             self.load_weg_items()?;
+            self.store_cloned();
             self.emit_weg_items()?;
         }
 
         if event.paths.contains(&self.settings_path()) {
             log::info!("Seelen Settings changed");
             self.load_settings()?;
+            self.store_cloned();
             self.emit_settings()?;
         }
 
@@ -133,6 +140,7 @@ impl FullState {
         {
             log::info!("Theme changed");
             self.load_themes()?;
+            self.store_cloned();
             self.emit_themes()?;
         }
 
@@ -143,6 +151,7 @@ impl FullState {
         {
             log::info!("Placeholder changed");
             self.load_placeholders()?;
+            self.store_cloned();
             self.emit_placeholders()?;
         }
 
@@ -153,6 +162,7 @@ impl FullState {
         {
             log::info!("Specific App Configuration changed");
             self.load_settings_by_app()?;
+            self.store_cloned();
             self.emit_settings_by_app()?;
         }
 
@@ -168,10 +178,9 @@ impl FullState {
                 Ok(events) => {
                     log::info!("Seelen UI File Watcher events: {:?}", events);
                     if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
-                        if let Some(event) = events.first() {
-                            let mut state = FULL_STATE.load().cloned();
+                        let mut state = FULL_STATE.load().cloned();
+                        for event in events {
                             log_error!(state.process_event(event));
-                            state.store();
                         }
                     }
                 }
@@ -339,7 +348,6 @@ impl FullState {
     }
 
     fn emit_settings(&self) -> Result<()> {
-        log::info!("Emitting Settings changed");
         self.handle.emit("settings-changed", self.settings())?;
         trace_lock!(SEELEN).on_state_changed()?;
         Ok(())

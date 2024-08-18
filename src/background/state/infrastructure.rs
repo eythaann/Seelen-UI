@@ -10,12 +10,12 @@ use super::{
 };
 
 #[tauri::command(async)]
-pub async fn state_get_themes() -> Vec<Theme> {
+pub fn state_get_themes() -> Vec<Theme> {
     FULL_STATE.load().themes().values().cloned().collect_vec()
 }
 
 #[tauri::command(async)]
-pub async fn state_get_placeholders() -> Vec<Placeholder> {
+pub fn state_get_placeholders() -> Vec<Placeholder> {
     FULL_STATE
         .load()
         .placeholders()
@@ -49,7 +49,7 @@ pub async fn state_get_wallpaper() -> Result<PathBuf> {
     WindowsApi::get_wallpaper()
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub async fn state_set_wallpaper(path: String) -> Result<()> {
     WindowsApi::set_wallpaper(path)
 }

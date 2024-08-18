@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- made all invoke handlers async
+
 ### fix
 - crash on registering network event
 

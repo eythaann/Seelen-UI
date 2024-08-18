@@ -12,7 +12,7 @@ pub struct Brightness {
     current: u32,
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn get_main_monitor_brightness() -> Result<Brightness, String> {
     let mut brightness = Brightness {
         min: 0,
@@ -50,7 +50,7 @@ pub fn get_main_monitor_brightness() -> Result<Brightness, String> {
     Ok(brightness)
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn set_main_monitor_brightness(brightness: u32) -> Result<(), String> {
     let result = unsafe {
         let hmonitor = WindowsApi::primary_physical_monitor()?;

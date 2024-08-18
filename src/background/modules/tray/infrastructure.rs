@@ -28,12 +28,12 @@ pub fn register_tray_events() {
 }
 
 // TODO: remove when add event listener for tray events
-#[tauri::command]
+#[tauri::command(async)]
 pub fn temp_get_by_event_tray_info() {
-    std::thread::spawn(|| log_error!(emit_tray_info()));
+    log_error!(emit_tray_info());
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn on_click_tray_icon(idx: usize) -> Result<()> {
     let icons = get_tray_icons()?;
     let icon = icons.get(idx).ok_or("tray icon index out of bounds")?;
@@ -41,7 +41,7 @@ pub fn on_click_tray_icon(idx: usize) -> Result<()> {
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn on_context_menu_tray_icon(idx: usize) -> Result<()> {
     let icons = get_tray_icons()?;
     let icon = icons.get(idx).ok_or("tray icon index out of bounds")?;

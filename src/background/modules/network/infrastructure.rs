@@ -81,7 +81,7 @@ async fn try_connect_to_profile(ssid: &str) -> Result<bool> {
     }
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn wlan_start_scanning() {
     log::trace!("Start scanning networks");
     NetworkManager::start_scanning(|list| {
@@ -90,18 +90,18 @@ pub fn wlan_start_scanning() {
     });
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn wlan_stop_scanning() {
     log::trace!("Stop scanning networks");
     NetworkManager::stop_scanning();
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub async fn wlan_get_profiles() -> Result<Vec<WlanProfile>> {
     NetworkManager::get_wifi_profiles().await
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub async fn wlan_connect(ssid: String, password: String, hidden: bool) -> Result<bool> {
     NetworkManager::add_profile(&ssid, &password, hidden).await?;
     match try_connect_to_profile(&ssid).await {
@@ -117,7 +117,7 @@ pub async fn wlan_connect(ssid: String, password: String, hidden: bool) -> Resul
     }
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub async fn wlan_disconnect() -> Result<()> {
     let handle = get_app_handle();
     let output = handle

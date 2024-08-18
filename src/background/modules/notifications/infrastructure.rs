@@ -34,13 +34,13 @@ pub fn release_notification_events() {
     }
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn notifications_close(id: u32) -> Result<()> {
     trace_lock!(NOTIFICATION_MANAGER).remove_notification(id)?;
     Ok(())
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn notifications_close_all() -> Result<()> {
     trace_lock!(NOTIFICATION_MANAGER).clear_notifications()
 }

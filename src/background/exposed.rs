@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::path::PathBuf;
 use std::process::Command;
 
-use tauri::{command, Builder, Wry};
+use tauri::{Builder, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
@@ -22,17 +22,17 @@ use crate::modules::notifications::infrastructure::*;
 use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
-#[command]
+#[tauri::command(async)]
 fn select_file_on_explorer(path: String) {
     log_error!(Command::new("explorer").args(["/select,", &path]).spawn());
 }
 
-#[command]
+#[tauri::command(async)]
 fn open_file(path: String) {
     log_error!(Command::new("explorer").args([&path]).spawn());
 }
 
-#[command]
+#[tauri::command(async)]
 fn run_as_admin(path: String) {
     tauri::async_runtime::spawn(async move {
         let app = get_app_handle();
@@ -46,7 +46,7 @@ fn run_as_admin(path: String) {
     });
 }
 
-#[command]
+#[tauri::command(async)]
 fn run(program: String, args: Vec<String>) {
     tauri::async_runtime::spawn(async move {
         log_error!(
@@ -60,66 +60,62 @@ fn run(program: String, args: Vec<String>) {
     });
 }
 
-#[command]
+#[tauri::command(async)]
 fn is_dev_mode() -> bool {
     tauri::is_dev()
 }
 
-#[command]
+#[tauri::command(async)]
 pub fn get_user_envs() -> HashMap<String, String> {
     std::env::vars().collect::<HashMap<String, String>>()
 }
 
 // https://docs.rs/tauri/latest/tauri/window/struct.WindowBuilder.html#known-issues
 // https://github.com/tauri-apps/wry/issues/583
-#[command]
-async fn show_app_settings() {
+#[tauri::command(async)]
+fn show_app_settings() {
     log_error!(Seelen::show_settings());
 }
 
-#[command]
-fn set_auto_start(enabled: bool) {
-    std::thread::spawn(move || {
-        log_error!(Seelen::set_auto_start(enabled));
-    });
+#[tauri::command(async)]
+async fn set_auto_start(enabled: bool) -> Result<()> {
+    Seelen::set_auto_start(enabled).await
 }
 
-#[command]
-fn get_auto_start_status() -> Result<bool, String> {
-    Ok(Seelen::is_auto_start_enabled()?)
+#[tauri::command(async)]
+async fn get_auto_start_status() -> Result<bool> {
+    Seelen::is_auto_start_enabled().await
 }
 
-#[command]
+#[tauri::command(async)]
 fn switch_workspace(idx: u32) {
     std::thread::spawn(move || winvd::switch_desktop(idx));
 }
 
-#[command]
-fn ensure_hitboxes_zorder() {
-    std::thread::spawn(|| -> Result<()> {
-        let seelen = trace_lock!(SEELEN);
-        for monitor in seelen.monitors() {
-            if let Some(toolbar) = monitor.toolbar() {
-                toolbar.ensure_hitbox_zorder()?;
-            }
-            if let Some(weg) = monitor.weg() {
-                weg.ensure_hitbox_zorder()?;
-            }
+#[tauri::command(async)]
+fn ensure_hitboxes_zorder() -> Result<()> {
+    let seelen = trace_lock!(SEELEN);
+    for monitor in seelen.monitors() {
+        if let Some(toolbar) = monitor.toolbar() {
+            toolbar.ensure_hitbox_zorder()?;
         }
-        Ok(())
-    });
+        if let Some(weg) = monitor.weg() {
+            weg.ensure_hitbox_zorder()?;
+        }
+    }
+    Ok(())
 }
 
-#[command]
+#[tauri::command(async)]
 fn send_keys(keys: String) -> Result<()> {
     Keyboard::new().send_keys(&keys)
 }
 
-#[command]
+#[tauri::command(async)]
 fn get_icon(path: String) -> Option<PathBuf> {
     extract_and_save_icon(&get_app_handle(), &path).ok()
 }
-#[command]
+#[tauri::command(async)]
 fn is_virtual_desktop_supported() -> bool {
     virtual_desktop_supported()
 }
