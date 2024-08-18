@@ -8,7 +8,9 @@ Thank you for your interest in contributing to this project! We welcome contribu
 2. Read the [Project Documentation](documentation/project.md) to understand the project structure and how to use it.
 3. Create a new branch for your contribution: `git checkout -b feature/new-feature`.
 4. Make your changes and ensure they are well-tested.
-5. Commit your changes: `git commit -m 'Add new feature'`.
+5. Commit your changes:
+   - Ensure that your commits are signed. You can sign commits with `git commit -S -m 'Add new feature'`.
+   - Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) syntax for commit messages, e.g., `feat: add new feature`, `fix(wm): resolve #567 issue`.
 6. Push to the branch: `git push origin feature/new-feature`.
 7. Submit a pull request.
 
@@ -26,4 +28,4 @@ All contributions to this project are subject to the terms of the [PolyForm Stri
 
 ## Contact
 
-If you have any questions or need further clarification, please feel free to contact the project maintainer at [Maintainer's Email].
+If you have any questions or need further clarification, please feel free to join our [Discord server](https://discord.gg/ABfASx5ZAJ).
