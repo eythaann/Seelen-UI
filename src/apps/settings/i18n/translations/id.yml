@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Paket Ikon
   accent_color: Aksen warna
+  wallpaper:
+    select: Pilih wallpaper
 toolbar:
   placeholder:
     select: Struktur bilah alat
@@ -60,6 +62,7 @@ wm:
   disabled_windows10: Window Manager tidak tersedia untuk Windows 10.
   workspace_offset: Offset ruang kerja (margin)
   workspace_padding: Padding ruang kerja
+  disabled_windows_version: Window Manager tidak tersedia untuk versi Windows Anda.
 weg:
   items:
     size: Ukuran item

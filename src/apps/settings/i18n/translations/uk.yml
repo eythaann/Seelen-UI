@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Пакети значків
   accent_color: Акцентний колір
+  wallpaper:
+    select: Виберіть шпалери
 toolbar:
   placeholder:
     select: Структура панелі інструментів
@@ -60,6 +62,7 @@ wm:
   workspace_offset: Зсув робочих просторів (поля)
   space_between_containers: Простір між контейнерами
   workspace_padding: Прокладка робочих просторів
+  disabled_windows_version: Менеджер вікон недоступний для вашої версії Windows.
 weg:
   items:
     label: Предмети

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikonpakker
   accent_color: Accentfarve
+  wallpaper:
+    select: Vælg tapet
 toolbar:
   placeholder:
     select: Værktøjslinjestruktur
@@ -60,6 +62,7 @@ wm:
   space_between_containers: Rum mellem containere
   workspace_padding: Arbejdsområder polstring
   workspace_offset: Arbejdsområder offset (marginer)
+  disabled_windows_version: Window Manager er ikke tilgængelig til din Windows -version.
 weg:
   items:
     label: Genstande

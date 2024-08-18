@@ -21,6 +21,7 @@ settings:
   shutdown: Leállitás
   sleep: Alvás
   title: Beállítások
+  power: Hatalom
 placeholder:
   bluetooth_devices: Bluetooth & eszközök
   ethernet_connected: internet-hozzáférés

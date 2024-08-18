@@ -29,7 +29,7 @@ use crate::{
     seelen_weg::SeelenWeg,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
-    utils::{constants::IGNORE_FOCUS, is_windows_11, spawn_named_thread},
+    utils::{constants::IGNORE_FOCUS, is_virtual_desktop_supported, spawn_named_thread},
     windows_api::WindowsApi,
     winevent::WinEvent,
 };
@@ -287,8 +287,7 @@ pub fn register_win_hook() -> Result<()> {
         }
     })?;
 
-    // Todo search why virtual desktop events are not working on windows 10
-    if is_windows_11() {
+    if is_virtual_desktop_supported() {
         spawn_named_thread("VirtualDesktopEventHook", move || -> Result<()> {
             let (sender, receiver) = std::sync::mpsc::channel::<DesktopEvent>();
             let _notifications_thread = listen_desktop_events(sender)?;

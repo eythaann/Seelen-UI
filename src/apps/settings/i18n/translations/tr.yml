@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Simge paketleri
   accent_color: Aksan rengi
+  wallpaper:
+    select: Duvar Kağıdı Seçin
 toolbar:
   placeholder:
     author: Yazar
@@ -60,6 +62,7 @@ wm:
   enable: Pencere Yöneticisini Etkinleştir
   space_between_containers: Konteynerler arasındaki boşluk
   workspace_offset: Çalışma alanları ofseti (kenar boşlukları)
+  disabled_windows_version: Pencere yöneticisi Windows sürümünüz için mevcut değildir.
 weg:
   items:
     label: Öğeler

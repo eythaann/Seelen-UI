@@ -6,6 +6,7 @@ use crate::{
     log_error,
     seelen::get_app_handle,
     state::application::FULL_STATE,
+    utils::is_virtual_desktop_supported,
     windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
 use serde::Serialize;
@@ -207,24 +208,26 @@ impl FancyToolbar {
     }
 
     fn on_store_events_ready(_: tauri::Event) {
-        std::thread::spawn(|| -> Result<()> {
-            let handler = get_app_handle();
+        // TODO refactor this implementation
+        if is_virtual_desktop_supported() {
+            std::thread::spawn(|| -> Result<()> {
+                let handler = get_app_handle();
+                let desktops = winvd::get_desktops()?;
+                let current_desktop = winvd::get_current_desktop()?;
 
-            let desktops = winvd::get_desktops()?;
-            let current_desktop = winvd::get_current_desktop()?;
-
-            let mut desktops_names = Vec::new();
-            for (i, d) in desktops.iter().enumerate() {
-                if let Ok(name) = d.get_name() {
-                    desktops_names.push(name);
-                } else {
-                    desktops_names.push(format!("Desktop {}", i + 1))
+                let mut desktops_names = Vec::new();
+                for (i, d) in desktops.iter().enumerate() {
+                    if let Ok(name) = d.get_name() {
+                        desktops_names.push(name);
+                    } else {
+                        desktops_names.push(format!("Desktop {}", i + 1))
+                    }
                 }
-            }
 
-            handler.emit("workspaces-changed", desktops_names)?;
-            handler.emit("active-workspace-changed", current_desktop.get_index()?)?;
-            Ok(())
-        });
+                handler.emit("workspaces-changed", desktops_names)?;
+                handler.emit("active-workspace-changed", current_desktop.get_index()?)?;
+                Ok(())
+            });
+        }
     }
 }

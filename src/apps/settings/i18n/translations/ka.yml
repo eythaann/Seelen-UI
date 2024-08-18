@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: ხატის პაკეტები
   accent_color: აქცენტის ფერი
+  wallpaper:
+    select: აირჩიეთ ფონი
 toolbar:
   placeholder:
     description: აღწერილობა
@@ -60,6 +62,7 @@ wm:
   workspace_offset: სამუშაო ადგილები ოფსეტური (ზღვარი)
   workspace_padding: სამუშაო ადგილები padding
   layout: გამოფენა
+  disabled_windows_version: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი თქვენი Windows ვერსიისთვის.
 weg:
   items:
     label: ნივთები

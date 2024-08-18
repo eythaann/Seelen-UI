@@ -21,6 +21,7 @@ settings:
   title: Ayarlar
   restart: Tekrar başlat
   sleep: Uyumak
+  power: Güç
 placeholder:
   battery_remaining: '% geriye kalan'
   settings: Hızlı Ayarlar

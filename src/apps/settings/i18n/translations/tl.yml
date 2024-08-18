@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Icon pack
   accent_color: Kulay ng accent
+  wallpaper:
+    select: Piliin ang wallpaper
 toolbar:
   placeholder:
     author: May -akda
@@ -60,6 +62,7 @@ wm:
   enable: Paganahin ang Window Manager
   workspace_padding: Mga workspaces padding
   resize_delta: Baguhin ang laki ng Delta (%)
+  disabled_windows_version: Ang window manager ay hindi magagamit para sa iyong bersyon ng Windows.
 weg:
   items:
     label: Mga item

@@ -21,6 +21,7 @@ settings:
   title: সেটিংস
   log_out: প্রস্থান
   shutdown: শাটডাউন
+  power: শক্তি
 placeholder:
   ethernet_connected: ইন্টারনেট সুবিধা
   smart_charge: '- স্মার্ট চার্জ'

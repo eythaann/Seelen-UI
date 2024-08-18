@@ -21,6 +21,7 @@ settings:
   app_settings: Programos nustatymai
   sleep: Miegas
   title: Nustatymai
+  power: Galia
 placeholder:
   settings: Greiti nustatymai
   smart_charge: '- Išmanus mokestis'

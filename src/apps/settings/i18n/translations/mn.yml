@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: Icon багц
   accent_color: Эргүүлэг
+  wallpaper:
+    select: Ханын зураг сонгох
 toolbar:
   placeholder:
     description: Тодорхойлолт / төрөл анги
@@ -59,6 +61,7 @@ wm:
   enable: Цонх менежерийг идэвхжүүлэх
   resize_delta: Дельтааг өөрчлөх (%)
   disabled_windows10: Цонхны менежер Windows 10-д байхгүй байна.
+  disabled_windows_version: Цонхны менежер таны Windows хувилбарт ашиглах боломжгүй.
 weg:
   items:
     label: Зүйл

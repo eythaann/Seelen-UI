@@ -21,6 +21,7 @@ settings:
   title: ການກໍານົດ
   app_settings: ການຕັ້ງຄ່າແອັບ app
   sleep: ນອນ
+  power: ພະເດດ
 placeholder:
   ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
   smart_charge: '- ຮັບຜິດຊອບສະຫຼາດ'

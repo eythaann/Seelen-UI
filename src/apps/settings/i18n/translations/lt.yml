@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: ICON PACKS
   accent_color: Akcento spalva
+  wallpaper:
+    select: Pasirinkite tapetai
 toolbar:
   placeholder:
     select: Įrankių juostos struktūra
@@ -60,6 +62,7 @@ wm:
   author: Autorius
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas
+  disabled_windows_version: „Windows Manager“ nėra jūsų „Windows“ versijai.
 weg:
   items:
     size: Prekės dydis

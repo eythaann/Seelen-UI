@@ -21,6 +21,7 @@ settings:
   app_settings: Mipangilio ya programu
   log_out: Ingia nje
   sleep: Kulala
+  power: Nguvu
 placeholder:
   ethernet_connected: Ufikiaji wa mtandao
   settings: Mipangilio ya haraka

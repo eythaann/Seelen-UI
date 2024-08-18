@@ -21,6 +21,7 @@ settings:
   sleep: Lo
   app_settings: Aplikazioaren ezarpenak
   title: Ezarpen
+  power: Botere
 placeholder:
   smart_charge: '- Karga adimentsua'
   open_user_folder: Erabiltzaile karpeta irekia

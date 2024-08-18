@@ -37,6 +37,8 @@ general:
   icon_pack:
     label: አዶዎች ፓኬጆች
   accent_color: የዝግጅት ቀለም
+  wallpaper:
+    select: የግድግዳ ወረቀት ይምረጡ
 toolbar:
   placeholder:
     description: መግለጫ
@@ -58,6 +60,7 @@ wm:
   workspace_padding: የስራ ቦታዎች ፓድ
   resize_delta: ዴልታ (%)
   author: ደራሲ ደራሲ
+  disabled_windows_version: የመስኮት አቀናባሪው ለዊንዶውስ ስሪትዎ አይገኝም.
 weg:
   items:
     zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)

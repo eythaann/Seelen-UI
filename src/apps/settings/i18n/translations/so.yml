@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: Xirmooyinka icon
   accent_color: Midab caqabad
+  wallpaper:
+    select: Xulo warqadda
 toolbar:
   placeholder:
     description: Sifo
@@ -59,6 +61,7 @@ wm:
   resize_delta: Dib u dhig Delta (%)
   space_between_containers: Meel bannaan oo u dhexeeya weelka
   workspace_padding: Goobta Goobta Goobta
+  disabled_windows_version: Maamulaha daaqada looma heli karo nooca Windows-kaaga.
 weg:
   items:
     gap: Meel udhaxeysa waxyaabaha

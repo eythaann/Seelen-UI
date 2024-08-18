@@ -46,6 +46,8 @@ general:
   icon_pack:
     label: Pacotes de ícones
   accent_color: Cor de destaque
+  wallpaper:
+    select: Selecione papel de parede
 toolbar:
   enable: Ativar barra de ferramentas sofisticada
   placeholder:
@@ -67,6 +69,7 @@ wm:
     enable: Habilitar borda da janela
     width: Largura da borda
     offset: Deslocamento de borda
+  disabled_windows_version: O gerenciador de janelas não está disponível para sua versão do Windows.
 weg:
   label: Dock/barra de tarefas
   enable: Habilitar Dock/Barra de Tarefas

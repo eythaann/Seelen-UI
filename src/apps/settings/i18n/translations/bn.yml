@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: আইকন প্যাকস
   accent_color: সুরের ধাপের রঙ
+  wallpaper:
+    select: ওয়ালপেপার নির্বাচন করুন
 toolbar:
   placeholder:
     author: লেখক
@@ -60,6 +62,7 @@ wm:
   space_between_containers: পাত্রে স্থান
   workspace_padding: ওয়ার্কস্পেস প্যাডিং
   enable: উইন্ডো ম্যানেজার সক্ষম করুন
+  disabled_windows_version: উইন্ডো ম্যানেজারটি আপনার উইন্ডোজ সংস্করণের জন্য উপলভ্য নয়।
 weg:
   items:
     size: আইটেমের আকার

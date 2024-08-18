@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: आइकन पैक
   accent_color: स्वरोंका रंग
+  wallpaper:
+    select: वॉलपेपर का चयन करें
 toolbar:
   placeholder:
     author: लेखक
@@ -60,6 +62,7 @@ wm:
   workspace_padding: कार्यक्षेत्र पैडिंग
   layout: लेआउट
   enable: विंडो मैनेजर सक्षम करें
+  disabled_windows_version: विंडो मैनेजर आपके विंडोज संस्करण के लिए उपलब्ध नहीं है।
 weg:
   items:
     visible_separators: दृश्य विभाजक

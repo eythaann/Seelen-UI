@@ -21,6 +21,7 @@ settings:
   app_settings: Танзимоти барнома
   sleep: Хоб
   title: Танзимот
+  power: Нерӯ
 placeholder:
   smart_charge: '- СПАЛ'
   ethernet_connected: Дастрасии Интернет

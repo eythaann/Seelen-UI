@@ -21,6 +21,7 @@ settings:
   title: การตั้งค่า
   shutdown: ปิดตัวลง
   log_out: ออกจากระบบ
+  power: พลัง
 placeholder:
   settings: การตั้งค่าอย่างรวดเร็ว
   open_system_tray: ถาดระบบเปิด

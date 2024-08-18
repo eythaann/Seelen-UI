@@ -21,6 +21,7 @@ settings:
   log_out: Keluar
   shutdown: Matikan
   title: Pengaturan
+  power: Kekuatan
 placeholder:
   volume: Volume
   battery_remaining: '% tersisa'

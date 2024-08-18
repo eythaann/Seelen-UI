@@ -40,6 +40,8 @@ general:
   icon_pack:
     label: icon ຊອງ
   accent_color: ສີສໍານຽງ
+  wallpaper:
+    select: ເລືອກຮູບວໍເປເປີ
 toolbar:
   placeholder:
     author: ຜູ້ຂຽນ
@@ -61,6 +63,7 @@ wm:
   workspace_padding: ພື້ນທີ່ເຮັດວຽກ Padding
   workspace_offset: ພື້ນທີ່ເຮັດວຽກຊົດເຊີຍ (ຂອບ)
   disabled_windows10: Window Manager ບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບ Windows 10.
+  disabled_windows_version: ຜູ້ຈັດການປ່ອງຢ້ຽມບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບລຸ້ນ Windows ຂອງທ່ານ.
 weg:
   items:
     label: ລາຍການ

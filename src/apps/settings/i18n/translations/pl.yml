@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Pakiety ikony
   accent_color: Kolor akcentu
+  wallpaper:
+    select: Wybierz tapetę
 toolbar:
   placeholder:
     author: Autor
@@ -60,6 +62,7 @@ wm:
   workspace_padding: Wypadki przestrzeni roboczej
   resize_delta: Zmień rozmiar Delta (%)
   workspace_offset: Przestrzenie robocze przesunięte (marginesy)
+  disabled_windows_version: Menedżer Windows nie jest dostępny dla wersji Windows.
 weg:
   items:
     label: Rzeczy

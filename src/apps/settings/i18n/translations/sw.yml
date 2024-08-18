@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: Pakiti za ikoni
   accent_color: Rangi ya lafudhi
+  wallpaper:
+    select: Chagua Ukuta
 toolbar:
   placeholder:
     description: Maelezo
@@ -59,6 +61,7 @@ wm:
   enable: Wezesha Meneja wa Dirisha
   layout: Mpangilio
   workspace_padding: Nafasi za kazi
+  disabled_windows_version: Meneja wa windows haipatikani kwa toleo lako la Windows.
 weg:
   items:
     size: Saizi ya bidhaa

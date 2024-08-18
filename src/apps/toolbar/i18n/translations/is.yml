@@ -21,6 +21,7 @@ settings:
   title: Stillingar
   shutdown: Lokun
   sleep: Sofðu
+  power: Máttur
 placeholder:
   ethernet_connected: internet aðgangur
   smart_charge: '- Snjall hleðsla'

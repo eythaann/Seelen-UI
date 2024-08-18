@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Icon pacchetti
   accent_color: Colore accento
+  wallpaper:
+    select: Seleziona sfondo
 toolbar:
   placeholder:
     author: Autrice
@@ -60,6 +62,7 @@ wm:
   space_between_containers: Spazio tra contenitori
   workspace_offset: Offset degli spazi di lavoro (margini)
   workspace_padding: Padding degli spazi di lavoro
+  disabled_windows_version: Il gestore Windows non è disponibile per la versione di Windows.
 weg:
   items:
     label: Elementi

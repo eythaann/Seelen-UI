@@ -21,6 +21,7 @@ settings:
   title: asetukset
   shutdown: Sammuttaa
   app_settings: Sovellusasetukset
+  power: Voima
 placeholder:
   bluetooth_devices: Bluetooth ja laitteet
   battery_remaining: '% jäljelle jäänyt'

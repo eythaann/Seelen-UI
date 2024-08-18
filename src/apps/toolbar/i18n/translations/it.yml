@@ -21,6 +21,7 @@ settings:
   title: Impostazioni
   sleep: Sonno
   shutdown: Fermare
+  power: Energia
 placeholder:
   ethernet_connected: accesso ad Internet
   volume: Volume

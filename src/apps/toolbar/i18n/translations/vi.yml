@@ -21,6 +21,7 @@ settings:
   title: Cài đặt
   app_settings: Cài đặt ứng dụng
   shutdown: Tắt
+  power: Quyền lực
 placeholder:
   ethernet_connected: truy cập Internet
   settings: Cài đặt nhanh

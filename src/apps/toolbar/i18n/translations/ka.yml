@@ -21,6 +21,7 @@ settings:
   log_out: შესვლა
   app_settings: პროგრამის პარამეტრები
   title: პარამეტრები
+  power: ძალა
 placeholder:
   bluetooth_devices: Bluetooth & მოწყობილობები
   battery_remaining: დარჩენილი

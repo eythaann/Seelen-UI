@@ -21,6 +21,7 @@ settings:
   title: Instellings
   app_settings: Appinstellings
   sleep: Slaap
+  power: Mag
 placeholder:
   ethernet_connected: toegang tot die internet
   battery_remaining: '% oorblywende'

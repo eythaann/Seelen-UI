@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: අයිකන ඇසුරුම්
   accent_color: උච්චාරණ වර්ණය
+  wallpaper:
+    select: බිතුපත තෝරන්න
 toolbar:
   placeholder:
     author: කර්තෘ
@@ -60,6 +62,7 @@ wm:
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   workspace_offset: වැඩබිම් ඕෆ්සෙට් (ආන්තික)
   disabled_windows10: Windows 10 සඳහා Window Manager නොමැත.
+  disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා කවුළු කළමනාකරු ලබා ගත නොහැක.
 weg:
   items:
     label: අයිතම

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Икони пакувања
   accent_color: Боја на акцент
+  wallpaper:
+    select: Изберете позадина
 toolbar:
   placeholder:
     author: Автор
@@ -60,6 +62,7 @@ wm:
   layout: Распоред
   description: Опис
   author: Автор
+  disabled_windows_version: Менаџерот на прозорецот не е достапен за вашата верзија на Windows.
 weg:
   items:
     size: Големина на артикалот

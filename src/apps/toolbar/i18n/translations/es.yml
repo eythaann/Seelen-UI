@@ -21,6 +21,7 @@ settings:
   sleep: Suspender
   restart: Reiniciar
   shutdown: Apagar
+  power: Fuerza
 placeholder:
   open_user_folder: Abrir carpeta de usuario
   open_system_tray: Abrir bandeja del sistema

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikon
   accent_color: Prízvuk
+  wallpaper:
+    select: Vyberte tapetu
 toolbar:
   placeholder:
     author: Autor
@@ -60,6 +62,7 @@ wm:
   description: Opis
   disabled_windows10: Správca okien nie je k dispozícii pre Windows 10.
   workspace_offset: Offsety Workspaces (marže)
+  disabled_windows_version: Správca okien nie je k dispozícii pre vašu verziu systému Windows.
 weg:
   items:
     size: Veľkosť položky

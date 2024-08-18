@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Pakketti tal-ikona
   accent_color: Kulur tal-aċċent
+  wallpaper:
+    select: Agħżel Wallpaper
 toolbar:
   placeholder:
     author: Awtur
@@ -60,6 +62,7 @@ wm:
   workspace_offset: Spazji tax-Xogħol Offset (Marġini)
   space_between_containers: Spazju bejn il-kontenituri
   workspace_padding: Padding tal-ispazji tax-xogħol
+  disabled_windows_version: Il-maniġer tat-twieqi mhux disponibbli għall-verżjoni tal-Windows tiegħek.
 weg:
   items:
     visible_separators: Separaturi viżibbli

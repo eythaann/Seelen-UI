@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Pecynnau eicon
   accent_color: Lliw acen
+  wallpaper:
+    select: Dewis papur wal
 toolbar:
   placeholder:
     author: Awduron
@@ -60,6 +62,7 @@ wm:
   workspace_padding: Padin lleoedd gwaith
   resize_delta: Newid maint Delta (%)
   layout: Gynllun
+  disabled_windows_version: Nid yw'r Rheolwr Ffenestr ar gael ar gyfer eich fersiwn Windows.
 weg:
   items:
     label: Eitemau

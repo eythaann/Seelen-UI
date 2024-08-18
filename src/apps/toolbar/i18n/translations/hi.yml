@@ -21,6 +21,7 @@ settings:
   title: समायोजन
   log_out: लॉग आउट
   app_settings: एप्लिकेशन सेटिंग
+  power: शक्ति
 placeholder:
   smart_charge: '- स्मार्ट चार्ज'
   battery_remaining: '% शेष'

@@ -21,6 +21,7 @@ settings:
   restart: I -restart
   log_out: Mag -log out
   title: Mga setting
+  power: Kapangyarihan
 placeholder:
   ethernet_connected: Internet access
   ethernet_disconnected: Walang internet access

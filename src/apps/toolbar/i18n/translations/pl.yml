@@ -21,6 +21,7 @@ settings:
   sleep: Spać
   shutdown: Zamknięcie
   restart: Uruchom ponownie
+  power: Moc
 placeholder:
   ethernet_connected: dostęp do Internetu
   battery_remaining: '% pozostały'

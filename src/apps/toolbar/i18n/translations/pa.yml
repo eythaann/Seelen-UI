@@ -21,6 +21,7 @@ settings:
   app_settings: ਐਪ ਸੈਟਿੰਗਾਂ
   sleep: ਨੀਂਦ
   restart: ਰੀਸਟਾਰਟ
+  power: ਸ਼ਕਤੀ
 placeholder:
   ethernet_connected: ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ
   smart_charge: '- ਸਮਾਰਟ ਚਾਰਜ'

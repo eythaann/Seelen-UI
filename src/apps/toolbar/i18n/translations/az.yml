@@ -21,6 +21,7 @@ settings:
   app_settings: Tətbiq parametrləri
   sleep: Yatmaq
   title: Parametrlər
+  power: Güc
 placeholder:
   ethernet_connected: İnternetə çıxışı
   smart_charge: '- Ağıllı yük'

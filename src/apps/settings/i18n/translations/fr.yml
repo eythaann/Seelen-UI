@@ -42,6 +42,8 @@ general:
   icon_pack:
     label: Packs d'icônes
   accent_color: Couleur accent
+  wallpaper:
+    select: Sélectionner le papier peint
 toolbar:
   enable: Activer la barre d'outils sophistiquée
   placeholder:
@@ -63,6 +65,7 @@ wm:
     enable: Activer la bordure de la fenêtre
     width: Largeur de la bordure
     offset: Décalage de bordure
+  disabled_windows_version: Le gestionnaire de fenêtres n'est pas disponible pour votre version Windows.
 weg:
   label: Dock/Barre des tâches
   enable: Activer le Dock/la barre des tâches

@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: ICon бастаҳои
   accent_color: Ранги ҳисоб
+  wallpaper:
+    select: Обер-ро интихоб кунед
 toolbar:
   placeholder:
     select: Сохтори панели асбобҳо
@@ -59,6 +61,7 @@ wm:
   enable: Фаъолсозии мудири тиреза
   resize_delta: Татбиқи Delta (%)
   workspace_padding: Worlpaces Padding
+  disabled_windows_version: Менеҷери тиреза барои версияи Windows дастрас нест.
 weg:
   items:
     zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)

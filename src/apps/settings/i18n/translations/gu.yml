@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: ચિહ્ન
   accent_color: ઉચ્ચારણ રંગ
+  wallpaper:
+    select: વ wallp લપેપર પસંદ કરો
 toolbar:
   placeholder:
     author: લેખક
@@ -60,6 +62,7 @@ wm:
   description: વર્ણન
   author: લેખક
   resize_delta: ડેલ્ટાનું કદ બદલો (%)
+  disabled_windows_version: વિંડો મેનેજર તમારા વિંડોઝ સંસ્કરણ માટે ઉપલબ્ધ નથી.
 weg:
   items:
     label: વસ્તુઓ

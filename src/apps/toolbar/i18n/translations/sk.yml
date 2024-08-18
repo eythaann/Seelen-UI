@@ -21,6 +21,7 @@ settings:
   title: nastavenie
   sleep: Spať
   app_settings: Nastavenia aplikácií
+  power: Moc
 placeholder:
   ethernet_connected: Prístup na internet
   ethernet_disconnected: Žiadny prístup na internet

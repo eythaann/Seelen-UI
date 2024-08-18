@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: Awọn akopọ aami
   accent_color: Awọ ara
+  wallpaper:
+    select: Yan Iṣẹṣọ ogiri
 toolbar:
   placeholder:
     author: Onkọwe ọkunrin
@@ -59,6 +61,7 @@ wm:
   workspace_offset: Awọn iṣẹ Iṣẹ-iṣẹ (awọn ala)
   author: Onkọwe ọkunrin
   workspace_padding: Awọn iṣẹ itasi
+  disabled_windows_version: Oluṣakoso window ko wa fun ẹya Windows rẹ.
 weg:
   items:
     visible_separators: Awọn iyatọ ti o han

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Paketa ikona
   accent_color: Akcentna boja
+  wallpaper:
+    select: Odaberite pozadinu
 toolbar:
   placeholder:
     select: Struktura alatne trake
@@ -60,6 +62,7 @@ wm:
   resize_delta: Promijenite veličinu Delta (%)
   space_between_containers: Prostor između kontejnera
   workspace_padding: Djelatna površina obloga
+  disabled_windows_version: Upravitelj prozora nije dostupan za vašu Windows verziju.
 weg:
   items:
     gap: Prostor između predmeta

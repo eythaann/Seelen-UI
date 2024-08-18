@@ -21,6 +21,7 @@ settings:
   app_settings: Ilova sozlamalari
   sleep: Uyqu
   title: Sozlash
+  power: Kuch
 placeholder:
   ethernet_connected: Internetga ulanish
   battery_remaining: '% Qolgan'

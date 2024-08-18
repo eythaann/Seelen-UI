@@ -21,6 +21,7 @@ settings:
   sleep: Sove
   app_settings: Appinnstillinger
   title: Innstillinger
+  power: Makt
 placeholder:
   battery_remaining: '% gjenstående'
   volume: Volum

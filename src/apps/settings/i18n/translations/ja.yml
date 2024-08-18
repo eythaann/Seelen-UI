@@ -37,6 +37,8 @@ general:
   icon_pack:
     label: アイコンパック
   accent_color: アクセントの色
+  wallpaper:
+    select: 壁紙を選択します
 toolbar:
   placeholder:
     description: 説明
@@ -58,6 +60,7 @@ wm:
   space_between_containers: コンテナ間のスペース
   resize_delta: デルタのサイズ（％）
   workspace_padding: ワークスペースパディング
+  disabled_windows_version: ウィンドウマネージャーは、Windowsバージョンでは利用できません。
 weg:
   items:
     size: アイテムサイズ

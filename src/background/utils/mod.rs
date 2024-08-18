@@ -3,6 +3,9 @@ pub mod constants;
 pub mod pwsh;
 pub mod rect;
 pub mod virtual_desktop;
+mod winver;
+
+pub use winver::*;
 
 use std::{
     path::PathBuf,
@@ -70,14 +73,6 @@ pub fn kebab_to_pascal(input: &str) -> String {
         }
     }
     pascal_case
-}
-
-pub fn is_windows_10() -> bool {
-    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if (&10240..&22000).contains(&x))
-}
-
-pub fn is_windows_11() -> bool {
-    matches!(os_info::get().version(), os_info::Version::Semantic(_, _, x) if x >= &22000)
 }
 
 /// Resolve paths with folder ids in the form of "{GUID}\path\to\file"

@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: ไอคอนแพ็ค
   accent_color: สีเน้น
+  wallpaper:
+    select: เลือกวอลล์เปเปอร์
 toolbar:
   placeholder:
     author: ผู้เขียน
@@ -59,6 +61,7 @@ wm:
   enable: เปิดใช้งาน Manager Window
   workspace_padding: ช่องว่างพื้นที่ทำงาน
   disabled_windows10: ตัวจัดการหน้าต่างไม่สามารถใช้ได้สำหรับ Windows 10
+  disabled_windows_version: ตัวจัดการหน้าต่างไม่สามารถใช้งานได้สำหรับเวอร์ชัน Windows ของคุณ
 weg:
   items:
     size: ขนาดรายการ

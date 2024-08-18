@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Pachete de pictograme
   accent_color: Culoare de accent
+  wallpaper:
+    select: Selectați tapet
 toolbar:
   placeholder:
     select: Structura barei de instrumente
@@ -60,6 +62,7 @@ wm:
   enable: Activați managerul de ferestre
   workspace_padding: Padding spații de lucru
   disabled_windows10: Managerul de ferestre nu este disponibil pentru Windows 10.
+  disabled_windows_version: Managerul de ferestre nu este disponibil pentru versiunea dvs. Windows.
 weg:
   items:
     size: Dimensiunea articolului

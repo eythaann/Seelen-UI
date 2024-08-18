@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Táknpakkar
   accent_color: Hreim litur
+  wallpaper:
+    select: Veldu veggfóður
 toolbar:
   placeholder:
     description: Lýsing
@@ -60,6 +62,7 @@ wm:
   author: Höfundur
   enable: Virkja gluggastjóra
   workspace_padding: Vinnusvæði padding
+  disabled_windows_version: Window Manager er ekki fáanlegur fyrir Windows útgáfuna þína.
 weg:
   items:
     label: Hlutir

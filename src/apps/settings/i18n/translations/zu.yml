@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: I-Icon Packs
   accent_color: Umbala we-Accent
+  wallpaper:
+    select: Khetha iphepha lokunamathisela odongeni
 toolbar:
   placeholder:
     author: Umlobi
@@ -60,6 +62,7 @@ wm:
   disabled_windows10: Imenenja yewindows ayitholakali ngeWindows 10.
   workspace_padding: I-Workespashe Padding
   enable: Nika amandla umphathi wewindi
+  disabled_windows_version: Imenenja yewindows ayitholakali ngenguqulo yakho yeWindows.
 weg:
   items:
     size: Usayizi wento

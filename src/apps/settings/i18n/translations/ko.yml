@@ -44,6 +44,8 @@ general:
   icon_pack:
     label: 아이콘 팩
   accent_color: 악센트 색상
+  wallpaper:
+    select: 벽지를 선택하십시오
 toolbar:
   enable: 화려한 툴바 활성화
   placeholder:
@@ -65,6 +67,7 @@ wm:
     enable: 창 테두리 활성화
     width: 테두리 너비
     offset: 테두리 오프셋
+  disabled_windows_version: Windows 버전에는 Window Manager를 사용할 수 없습니다.
 weg:
   label: 독/작업 표시줄
   enable: 독/작업 표시줄 활성화

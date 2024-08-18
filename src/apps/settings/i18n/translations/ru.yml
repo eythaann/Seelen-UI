@@ -47,6 +47,8 @@ general:
   icon_pack:
     label: Иконы пакеты
   accent_color: Акцентный цвет
+  wallpaper:
+    select: Выберите обои
 toolbar:
   enable: Включить необычную панель инструментов
   placeholder:
@@ -68,6 +70,7 @@ wm:
     enable: Включить границу окна
     width: Ширина рамки
     offset: Смещение границы
+  disabled_windows_version: Window Manager недоступен для вашей версии Windows.
 weg:
   label: Док/Панель задач
   enable: Включить док/панель задач

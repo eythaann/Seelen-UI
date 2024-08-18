@@ -21,6 +21,7 @@ settings:
   app_settings: Подешавања апликација
   title: Подешавања
   sleep: Спавати
+  power: Моћ
 placeholder:
   ethernet_disconnected: Нема приступа интернету
   ethernet_connected: Приступ интернету

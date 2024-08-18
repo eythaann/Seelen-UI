@@ -21,6 +21,7 @@ settings:
   app_settings: ایپ کی ترتیبات
   sleep: نیند
   shutdown: شٹ ڈاؤن
+  power: طاقت
 placeholder:
   ethernet_connected: انٹرنیٹ تک رسائی
   smart_charge: '- سمارٹ چارج'

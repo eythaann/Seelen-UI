@@ -21,6 +21,7 @@ settings:
   app_settings: பயன்பாட்டு அமைப்புகள்
   restart: மறுதொடக்கம்
   shutdown: பணிநிறுத்தம்
+  power: சக்தி
 placeholder:
   smart_charge: '- ஸ்மார்ட் கட்டணம்'
   settings: விரைவான அமைப்புகள்

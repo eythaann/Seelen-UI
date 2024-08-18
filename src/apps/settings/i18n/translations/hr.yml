@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikona pakiranja
   accent_color: Akcentna boja
+  wallpaper:
+    select: Odaberite Pozadina
 toolbar:
   placeholder:
     description: Opis
@@ -60,6 +62,7 @@ wm:
   resize_delta: Promijenite veličinu delta (%)
   space_between_containers: Prostor između spremnika
   workspace_padding: Radni prostori jastučići
+  disabled_windows_version: Upravitelj prozora nije dostupan za vašu Windows verziju.
 weg:
   items:
     visible_separators: Vidljivi separatori

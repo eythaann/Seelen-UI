@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: ਆਈਕਾਨ ਪੈਕ
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
+  wallpaper:
+    select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
 toolbar:
   placeholder:
     description: ਵਰਣਨ
@@ -60,6 +62,7 @@ wm:
   workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
   disabled_windows10: ਵਿੰਡੋ ਮੈਨੇਜਰ ਵਿੰਡੋਜ਼ 10 ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ।
   layout: ਖਾਕਾ
+  disabled_windows_version: ਵਿੰਡੋ ਮੈਨੇਜਰ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
 weg:
   items:
     label: ਇਕਾਈ

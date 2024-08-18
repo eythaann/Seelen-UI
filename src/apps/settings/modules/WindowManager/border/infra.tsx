@@ -38,11 +38,11 @@ export const BorderSettings = () => {
     >
       <SettingsOption>
         <span>{t('wm.border.offset')}</span>
-        <InputNumber value={offset} onChange={updateOffset} disabled={!enabled} />
+        <InputNumber value={offset} onChange={updateOffset} />
       </SettingsOption>
       <SettingsOption>
         <span>{t('wm.border.width')}</span>
-        <InputNumber value={width} onChange={updateWidth} disabled={!enabled} />
+        <InputNumber value={width} onChange={updateWidth} />
       </SettingsOption>
     </SettingsSubGroup>
   );

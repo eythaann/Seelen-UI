@@ -21,6 +21,7 @@ settings:
   sleep: Tidur
   app_settings: Tetapan aplikasi
   title: Tetapan
+  power: Kuasa
 placeholder:
   bluetooth_devices: Bluetooth & peranti
   volume: Kelantangan

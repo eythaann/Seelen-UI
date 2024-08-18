@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: ஐகான் பொதிகள்
   accent_color: உச்சரிப்பு நிறம்
+  wallpaper:
+    select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்
 toolbar:
   placeholder:
     author: நூலாசிரியர்
@@ -60,6 +62,7 @@ wm:
   disabled_windows10: விண்டோஸ் 10 க்கு சாளர மேலாளர் கிடைக்கவில்லை.
   workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
   layout: தளவமைப்பு
+  disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சாளர மேலாளர் கிடைக்கவில்லை.
 weg:
   items:
     label: பொருட்களை

@@ -21,6 +21,7 @@ settings:
   app_settings: Postavke aplikacija
   restart: Ponovno pokrenuti
   title: Postavke
+  power: Vlast
 placeholder:
   volume: Volumen
   ethernet_connected: pristup internetu

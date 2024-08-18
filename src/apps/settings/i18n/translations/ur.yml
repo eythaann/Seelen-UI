@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: آئیکن پیک
   accent_color: لہجہ رنگ
+  wallpaper:
+    select: وال پیپر منتخب کریں
 toolbar:
   placeholder:
     description: تفصیل
@@ -59,6 +61,7 @@ wm:
   author: مصنف
   enable: ونڈو مینیجر کو فعال کریں
   workspace_padding: ورک اسپیس پیڈنگ
+  disabled_windows_version: ونڈو مینیجر آپ کے ونڈوز ورژن کے لئے دستیاب نہیں ہے۔
 weg:
   items:
     label: اشیاء

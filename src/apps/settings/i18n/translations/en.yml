@@ -57,6 +57,7 @@ toolbar:
 wm:
   enable: Enable Window Manager
   disabled_windows10: The Window Manager is not available for Windows 10.
+  disabled_windows_version: The Window Manager is not available for your Windows version.
   layout: Layout
   author: Author
   description: Description

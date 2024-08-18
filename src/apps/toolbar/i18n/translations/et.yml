@@ -21,6 +21,7 @@ settings:
   app_settings: Rakenduse sätted
   sleep: Magama
   title: Sätted
+  power: Võimsus
 placeholder:
   ethernet_disconnected: Interneti -ühendus pole
   ethernet_connected: internetiühendus

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: ICON Tass
   accent_color: Akzenter Faarf
+  wallpaper:
+    select: Wielt Wallpaper
 toolbar:
   placeholder:
     select: Toolbar Struktur
@@ -60,6 +62,7 @@ wm:
   layout: Lueden
   workspace_offset: Workspaces Offset (Rand)
   workspace_padding: Aarbechtsberäich padding
+  disabled_windows_version: Den Fenstermanager ass net fir Är Windows Versioun verfügbar.
 weg:
   items:
     size: Telefonsgrouss

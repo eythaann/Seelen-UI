@@ -21,6 +21,7 @@ settings:
   sleep: 睡眠
   restart: 重启
   shutdown: 关机
+  power: 力量
 placeholder:
   open_user_folder: 打开用户文件夹
   open_system_tray: 打开系统托盘

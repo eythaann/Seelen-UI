@@ -2,7 +2,6 @@ use std::collections::HashMap;
 use std::path::PathBuf;
 use std::process::Command;
 
-use serde::Serialize;
 use tauri::{command, Builder, Wry};
 use tauri_plugin_shell::ShellExt;
 
@@ -14,7 +13,7 @@ use crate::seelen_weg::icon_extractor::extract_and_save_icon;
 use crate::seelen_wm::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
-use crate::utils::{is_windows_10, is_windows_11};
+use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
 use crate::{log_error, trace_lock};
 
 use crate::modules::media::infrastructure::*;
@@ -85,24 +84,6 @@ pub fn get_user_envs() -> HashMap<String, String> {
     std::env::vars().collect::<HashMap<String, String>>()
 }
 
-#[derive(Serialize)]
-enum WinVersion {
-    Windows10,
-    Windows11,
-    Unknown,
-}
-
-#[command]
-fn get_win_version() -> WinVersion {
-    if is_windows_11() {
-        WinVersion::Windows11
-    } else if is_windows_10() {
-        WinVersion::Windows10
-    } else {
-        WinVersion::Unknown
-    }
-}
-
 // https://docs.rs/tauri/latest/tauri/window/struct.WindowBuilder.html#known-issues
 // https://github.com/tauri-apps/wry/issues/583
 #[command]
@@ -152,6 +133,10 @@ fn send_keys(keys: String) -> Result<()> {
 fn get_icon(path: String) -> Option<PathBuf> {
     extract_and_save_icon(&get_app_handle(), &path).ok()
 }
+#[command]
+fn is_virtual_desktop_supported() -> bool {
+    virtual_desktop_supported()
+}
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
@@ -161,7 +146,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         open_file,
         run_as_admin,
         select_file_on_explorer,
-        get_win_version,
+        is_virtual_desktop_supported,
         get_user_envs,
         show_app_settings,
         switch_workspace,

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Paquets d’icones
   accent_color: Color d’accent
+  wallpaper:
+    select: Seleccioneu fons de pantalla
 toolbar:
   placeholder:
     description: Descripció
@@ -60,6 +62,7 @@ wm:
   author: Autora
   description: Descripció
   enable: Activa el gestor de finestres
+  disabled_windows_version: El Window Manager no està disponible per a la vostra versió de Windows.
 weg:
   items:
     visible_separators: Separadors visibles

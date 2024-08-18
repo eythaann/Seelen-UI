@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: आइकन प्याक
   accent_color: हिम्मता रंग
+  wallpaper:
+    select: वालपेपर चयन गर्नुहोस्
 toolbar:
   placeholder:
     description: वर्णन
@@ -59,6 +61,7 @@ wm:
   author: लेखिका
   resize_delta: रिसाइज डेल्टा (%)
   workspace_padding: कार्यक्षेत्र प्याडिंग
+  disabled_windows_version: विन्डो प्रबन्धक तपाईंको विन्डोज संस्करणका लागि उपलब्ध छैन।
 weg:
   items:
     label: वस्तुहरू

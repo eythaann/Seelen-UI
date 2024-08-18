@@ -21,6 +21,7 @@ settings:
   sleep: 절전
   restart: 다시 시작
   shutdown: 종료
+  power: 힘
 placeholder:
   open_user_folder: 사용자 폴더 열기
   open_system_tray: 시스템 트레이 열기

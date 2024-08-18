@@ -46,6 +46,8 @@ general:
   icon_pack:
     label: Paquetes de iconos
   accent_color: Acentuar el color
+  wallpaper:
+    select: Seleccionar papel tapiz
 toolbar:
   enable: Habilitar barra elegante
   placeholder:
@@ -67,6 +69,7 @@ wm:
     enable: Habilitar borde de ventana
     width: Ancho del borde
     offset: Desplazamiento del borde
+  disabled_windows_version: El Administrador de ventanas no está disponible para su versión de Windows.
 weg:
   label: Dock/Barra de tareas
   enable: Habilitar dock/barra de tareas

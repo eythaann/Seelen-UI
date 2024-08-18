@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: រូបតំណាងកញ្ចប់
   accent_color: ពណ៌សង្កត់សំឡេង
+  wallpaper:
+    select: ជ្រើសរើសផ្ទាំងរូបភាព
 toolbar:
   placeholder:
     description: ការពិពណ៌នា
@@ -60,6 +62,7 @@ wm:
   enable: បើកកម្មវិធីគ្រប់គ្រងបង្អួច
   workspace_offset: កន្លែងធ្វើការអុហ្វសិត (រឹម)
   resize_delta: ប្តូរទំហំដីសណ្តរ (%)
+  disabled_windows_version: កម្មវិធីគ្រប់គ្រងបង្អួចមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
 weg:
   items:
     label: ធាតុ

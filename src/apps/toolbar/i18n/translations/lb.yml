@@ -21,6 +21,7 @@ settings:
   app_settings: App Astellunge
   title: Astellunge
   sleep: Schlolof
+  power: Kraaftbeldscht
 placeholder:
   battery_remaining: '% bleiwen'
   bluetooth_devices: Bluetooth & Apparater

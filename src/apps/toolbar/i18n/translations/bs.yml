@@ -21,6 +21,7 @@ settings:
   app_settings: Postavke aplikacija
   sleep: Spavati
   title: Postavke
+  power: Snaga
 placeholder:
   ethernet_connected: pristup Internetu
   ethernet_disconnected: Nema pristupa internetu

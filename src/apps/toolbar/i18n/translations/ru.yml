@@ -21,6 +21,7 @@ settings:
   sleep: Спать
   restart: Перезапуск
   shutdown: Неисправность
+  power: Власть
 placeholder:
   open_user_folder: Открыть папку пользователя
   open_system_tray: Открыть системный трей

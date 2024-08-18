@@ -21,6 +21,7 @@ settings:
   restart: Перезапустити
   sleep: Сплячий
   title: Налаштування
+  power: Влада
 placeholder:
   ethernet_disconnected: Немає доступу до Інтернету
   ethernet_connected: Доступ в інтернет

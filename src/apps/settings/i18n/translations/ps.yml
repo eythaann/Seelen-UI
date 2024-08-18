@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: آیکون کڅوړه
   accent_color: تیزس رنګ
+  wallpaper:
+    select: وال پیپر غوره کړئ
 toolbar:
   placeholder:
     description: تفصیل
@@ -59,6 +61,7 @@ wm:
   author: لیکوال
   disabled_windows10: د کړکۍ مدیر د وینډوز 10 لپاره شتون نلري.
   layout: ترتیب
+  disabled_windows_version: د کړکۍ مدیر ستاسو د وینډوز نسخه لپاره شتون نلري.
 weg:
   items:
     size: د توکي اندازه

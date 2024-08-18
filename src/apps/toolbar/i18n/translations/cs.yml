@@ -21,6 +21,7 @@ settings:
   sleep: Spát
   log_out: Odhlásit se
   title: Nastavení
+  power: Moc
 placeholder:
   ethernet_disconnected: Žádný přístup k internetu
   volume: Hlasitost

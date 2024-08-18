@@ -21,6 +21,7 @@ settings:
   app_settings: Setări aplicație
   log_out: Deconectați -vă
   title: Setări
+  power: Putere
 placeholder:
   ethernet_connected: acces la internet
   ethernet_disconnected: Fara acces la internet

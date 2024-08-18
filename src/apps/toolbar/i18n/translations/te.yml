@@ -21,6 +21,7 @@ settings:
   title: సెట్టింగులు
   restart: పున art ప్రారంభం
   sleep: నిద్ర
+  power: శక్తి
 placeholder:
   ethernet_connected: ఇంటర్నెట్ సదుపాయం
   ethernet_disconnected: ఇంటర్నెట్ సదుపాయం లేదు

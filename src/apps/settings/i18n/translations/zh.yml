@@ -44,6 +44,8 @@ general:
   icon_pack:
     label: 图标包
   accent_color: 口音颜色
+  wallpaper:
+    select: 选择墙纸
 toolbar:
   enable: 启用精美工具栏
   placeholder:
@@ -65,6 +67,7 @@ wm:
     enable: 启用窗口边框
     width: 边框宽度
     offset: 边框偏移
+  disabled_windows_version: Windows Manager不适合您的Windows版本。
 weg:
   label: 停靠栏/任务栏
   enable: 启用停靠栏/任务栏

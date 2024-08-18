@@ -2,7 +2,7 @@ import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBo
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
 import { invoke } from '@tauri-apps/api/core';
-import { Select, Switch } from 'antd';
+import { ConfigProvider, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,7 +14,7 @@ import { RootSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 export function WindowManagerSettings() {
-  const [isWindows10, setIsWindows10] = useState(false);
+  const [isWinVerSupported, setIsWinVerSupported] = useState(false);
 
   const settings = useSelector(RootSelectors.windowManager);
   const layouts = useSelector(newSelectors.availableLayouts);
@@ -24,7 +24,7 @@ export function WindowManagerSettings() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    invoke<string>('get_win_version').then((ver) => setIsWindows10(ver === 'Windows10'));
+    invoke<boolean>('is_virtual_desktop_supported').then(setIsWinVerSupported);
   }, []);
 
   const onToggleEnable = (value: boolean) => {
@@ -39,10 +39,10 @@ export function WindowManagerSettings() {
 
   return (
     <>
-      {isWindows10 && (
+      {!isWinVerSupported && (
         <SettingsGroup>
           <div>
-            <p>{t('wm.disabled_windows10')}</p>
+            <p>{t('wm.disabled_windows_version')}</p>
           </div>
         </SettingsGroup>
       )}
@@ -52,43 +52,49 @@ export function WindowManagerSettings() {
           <div>
             <b>{t('wm.enable')}</b>
           </div>
-          <Switch checked={settings.enabled} onChange={onToggleEnable} disabled={isWindows10} />
-        </SettingsOption>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption>
-          <div>
-            <b>{t('wm.layout')}: </b>
-          </div>
-          <Select
-            style={{ width: '200px' }}
-            value={defaultLayout}
-            options={layouts.map((layout, idx) => ({
-              key: `layout-${idx}`,
-              label: layout.info.displayName,
-              value: layout.info.filename,
-            }))}
-            onSelect={onSelectLayout}
+          <Switch
+            checked={settings.enabled}
+            onChange={onToggleEnable}
+            disabled={!isWinVerSupported}
           />
         </SettingsOption>
-        <div>
-          <p>
-            <b>{t('wm.author')}: </b>
-            {usingLayout?.info.author}
-          </p>
-          <p>
-            <b>{t('wm.description')}: </b>
-            {usingLayout?.info.description}
-          </p>
-        </div>
       </SettingsGroup>
 
-      <GlobalPaddings />
-      <OthersConfigs />
-      <SettingsGroup>
-        <BorderSettings />
-      </SettingsGroup>
+      <ConfigProvider componentDisabled={!settings.enabled}>
+        <SettingsGroup>
+          <SettingsOption>
+            <div>
+              <b>{t('wm.layout')}: </b>
+            </div>
+            <Select
+              style={{ width: '200px' }}
+              value={defaultLayout}
+              options={layouts.map((layout, idx) => ({
+                key: `layout-${idx}`,
+                label: layout.info.displayName,
+                value: layout.info.filename,
+              }))}
+              onSelect={onSelectLayout}
+            />
+          </SettingsOption>
+          <div>
+            <p>
+              <b>{t('wm.author')}: </b>
+              {usingLayout?.info.author}
+            </p>
+            <p>
+              <b>{t('wm.description')}: </b>
+              {usingLayout?.info.description}
+            </p>
+          </div>
+        </SettingsGroup>
+
+        <GlobalPaddings />
+        <OthersConfigs />
+        <SettingsGroup>
+          <BorderSettings />
+        </SettingsGroup>
+      </ConfigProvider>
     </>
   );
 }

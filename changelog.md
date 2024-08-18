@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app crashing on 24h2
+
 ## [1.9.5]
 ### fix
 - app crashing by tray icon module

@@ -6587,7 +6587,7 @@ dependencies = [
 [[package]]
 name = "winvd"
 version = "0.0.47"
-source = "git+https://github.com/eythaann/virtualdesktopaccessor.git#b1e1da1931a2a21982396671a32a280330b1f507"
+source = "git+https://github.com/eythaann/virtualdesktopaccessor.git#cb8bfef0e07fc8e8eaa8c06fa1a91b4965b933af"
 dependencies = [
  "macro_rules_attribute",
  "windows 0.57.0",

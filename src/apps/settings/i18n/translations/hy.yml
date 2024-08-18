@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Սրբապատկերներ
   accent_color: Շեշտադրիչ գույն
+  wallpaper:
+    select: Ընտրեք Պաստառ
 toolbar:
   placeholder:
     author: Հեղինակ
@@ -60,6 +62,7 @@ wm:
   workspace_padding: Աշխատանքային տարածքների լիցքավորում
   enable: Միացնել պատուհանի կառավարիչը
   author: Հեղինակ
+  disabled_windows_version: 'Պատուհանների կառավարիչը մատչելի չէ ձեր Windows տարբերակի համար:'
 weg:
   items:
     size: Ապրանքի չափը

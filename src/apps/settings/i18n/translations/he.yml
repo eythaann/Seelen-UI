@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: חבילות אייקונים
   accent_color: צבע הדגשה
+  wallpaper:
+    select: בחר טפט
 toolbar:
   placeholder:
     author: מְחַבֵּר
@@ -59,6 +61,7 @@ wm:
   enable: אפשר מנהל חלונות
   resize_delta: שינוי גודל דלתא (%)
   workspace_offset: מרחבי עבודה קיזזו (שוליים)
+  disabled_windows_version: מנהל החלונות אינו זמין עבור גרסת Windows שלך.
 weg:
   items:
     gap: שטח בין פריטים

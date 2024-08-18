@@ -21,6 +21,7 @@ settings:
   app_settings: अनुप्रयोग सेटिंग्स
   title: बतंग
   sleep: निदाउनु
+  power: बल
 placeholder:
   ethernet_connected: इन्टरनेट पहुँच
   smart_charge: '- स्मार्ट शुल्क'

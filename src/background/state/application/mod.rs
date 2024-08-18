@@ -22,7 +22,7 @@ use crate::{
     modules::cli::domain::Resource,
     seelen::{get_app_handle, SEELEN},
     trace_lock,
-    utils::spawn_named_thread,
+    utils::{is_virtual_desktop_supported, spawn_named_thread},
     windows_api::WindowsApi,
 };
 
@@ -183,6 +183,8 @@ impl FullState {
         let path = self.settings_path();
         if path.exists() {
             self.settings = serde_json::from_str(&std::fs::read_to_string(&path)?)?;
+            self.settings.window_manager.enabled =
+                self.settings.window_manager.enabled && is_virtual_desktop_supported();
         }
         Ok(())
     }

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikoonpakkies
   accent_color: Aksentkleur
+  wallpaper:
+    select: Kies Wallpaper
 toolbar:
   placeholder:
     author: Outeur
@@ -60,6 +62,7 @@ wm:
   workspace_offset: Werkruimtes offset (marges)
   workspace_padding: Werkruimtes opvulling
   enable: Aktiveer vensterbestuurder
+  disabled_windows_version: Die vensterbestuurder is nie beskikbaar vir u Windows -weergawe nie.
 weg:
   items:
     visible_separators: Sigbare skeiers

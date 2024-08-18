@@ -17,6 +17,10 @@ export function WorkspacesModule({ module }: Props) {
 
   const { mode } = module;
 
+  if (workspaces.length === 0) {
+    return null;
+  }
+
   if (mode === WorkspaceTMMode.Dotted) {
     return (
       <Reorder.Item as="div" value={module} className="ft-bar-item" style={module.style}>

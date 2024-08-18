@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikonka paketlari
   accent_color: Urg'u rangi
+  wallpaper:
+    select: Fon rasmini tanlang
 toolbar:
   placeholder:
     description: Tavsif
@@ -60,6 +62,7 @@ wm:
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring
   workspace_padding: Ish plakding
+  disabled_windows_version: Windows versiyangiz uchun deraza menejeri mavjud emas.
 weg:
   items:
     gap: Buyumlar orasidagi bo'shliq

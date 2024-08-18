@@ -21,6 +21,7 @@ settings:
   shutdown: Tancar
   log_out: Tancar sessió
   sleep: Dormir
+  power: Força
 placeholder:
   settings: Configuració ràpida
   ethernet_disconnected: Sense accés a Internet

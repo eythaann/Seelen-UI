@@ -21,6 +21,7 @@ settings:
   restart: Рестартирам
   app_settings: Настройки на приложението
   sleep: Сън
+  power: Мощност
 placeholder:
   battery_remaining: '% остава'
   open_system_tray: Отворена система табла

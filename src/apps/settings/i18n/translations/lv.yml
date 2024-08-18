@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikonu paketes
   accent_color: Akcents
+  wallpaper:
+    select: Atlasiet fona attēlu
 toolbar:
   placeholder:
     author: Autors
@@ -60,6 +62,7 @@ wm:
   layout: Izkārtojums
   workspace_padding: Darbvietas polsterējums
   description: Apraksts
+  disabled_windows_version: Logu pārvaldnieks nav pieejams jūsu Windows versijai.
 weg:
   items:
     visible_separators: Redzami atdalītāji

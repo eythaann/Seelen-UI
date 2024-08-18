@@ -21,6 +21,7 @@ settings:
   log_out: Uitloggen
   restart: Herstarten
   sleep: Slaap
+  power: Stroom
 placeholder:
   settings: Snelle instellingen
   ethernet_disconnected: Geen toegang tot het internet

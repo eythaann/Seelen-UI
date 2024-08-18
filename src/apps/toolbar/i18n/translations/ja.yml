@@ -21,6 +21,7 @@ settings:
   shutdown: シャットダウン
   sleep: 寝る
   title: 設定
+  power: 力
 placeholder:
   battery_remaining: ％ 残り
   settings: クイック設定

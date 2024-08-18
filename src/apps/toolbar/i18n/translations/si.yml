@@ -21,6 +21,7 @@ settings:
   app_settings: යෙදුම් සැකසුම්
   log_out: ඉවත් වන්න
   sleep: නිදාගන්න
+  power: බලය
 placeholder:
   ethernet_connected: අන්තර්ජාල පිවිසුම
   battery_remaining: ඉතිරි% ඉතිරිව ඇත

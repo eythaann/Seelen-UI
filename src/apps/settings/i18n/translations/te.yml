@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: ఐకాన్ ప్యాక్‌లు
   accent_color: యాస రంగు
+  wallpaper:
+    select: వాల్‌పేపర్‌ను ఎంచుకోండి
 toolbar:
   placeholder:
     author: రచయిత
@@ -60,6 +62,7 @@ wm:
   workspace_padding: కార్యస్థలాల పాడింగ్
   workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)
   resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
+  disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం విండో మేనేజర్ అందుబాటులో లేదు.
 weg:
   items:
     label: వస్తువులు

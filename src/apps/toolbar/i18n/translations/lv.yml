@@ -21,6 +21,7 @@ settings:
   title: Iestatījumi
   restart: Restartēt
   app_settings: Lietotņu iestatījumi
+  power: Spēks
 placeholder:
   settings: Ātrie iestatījumi
   battery_remaining: '% atliekas'

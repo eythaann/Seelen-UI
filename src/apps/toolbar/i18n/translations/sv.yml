@@ -21,6 +21,7 @@ settings:
   title: inställningar
   sleep: Sova
   log_out: Logga ut
+  power: Driva
 placeholder:
   ethernet_disconnected: Ingen internetuppkoppling
   battery_remaining: '% återstående'

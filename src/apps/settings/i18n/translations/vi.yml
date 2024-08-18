@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Gói biểu tượng
   accent_color: Màu nhấn
+  wallpaper:
+    select: Chọn hình nền
 toolbar:
   placeholder:
     author: Tác giả
@@ -60,6 +62,7 @@ wm:
   workspace_padding: Không gian làm việc đệm
   disabled_windows10: Trình quản lý cửa sổ không có sẵn cho Windows 10.
   workspace_offset: Không gian làm việc bù (lề)
+  disabled_windows_version: Trình quản lý cửa sổ không có sẵn cho phiên bản Windows của bạn.
 weg:
   items:
     size: Kích thước mục

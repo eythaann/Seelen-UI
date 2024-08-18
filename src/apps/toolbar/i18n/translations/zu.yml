@@ -21,6 +21,7 @@ settings:
   title: Amasethingi
   app_settings: Izilungiselelo zohlelo lokusebenza
   sleep: Ukulala
+  power: Ubuqhwaga
 placeholder:
   settings: Izilungiselelo ezisheshayo
   open_system_tray: I-Open System Tray

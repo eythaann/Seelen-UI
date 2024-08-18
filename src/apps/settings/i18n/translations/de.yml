@@ -46,6 +46,8 @@ general:
   icon_pack:
     label: Icon Packs
   accent_color: Akzentfarbe
+  wallpaper:
+    select: Wählen Sie Hintergrundbild
 toolbar:
   enable: Elegante Werkzeugleiste aktivieren
   placeholder:
@@ -67,6 +69,7 @@ wm:
     enable: Fensterrand aktivieren
     width: Randbreite
     offset: Randversatz
+  disabled_windows_version: Der Fenstermanager ist für Ihre Windows -Version nicht verfügbar.
 weg:
   label: Dock/Taskleiste
   enable: Dock/Taskleiste aktivieren

@@ -21,6 +21,7 @@ settings:
   log_out: ውጣ
   app_settings: የመተግበሪያ ቅንጅቶች
   sleep: እንቅልፍ
+  power: ኃይል
 placeholder:
   smart_charge: '- ዘመናዊ ክፍያ'
   open_system_tray: ክፍት የስርዓት ትሪ

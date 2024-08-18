@@ -21,6 +21,7 @@ settings:
   log_out: લૉગ આઉટ
   app_settings: એપ્લિકેશન સેટિંગ્સ
   title: પતાવટ
+  power: શક્તિ
 placeholder:
   ethernet_connected: ઇન્ટરનેટનો ઉપયોગ
   open_system_tray: ખુલ્લી સિસ્ટમ ટ્રે

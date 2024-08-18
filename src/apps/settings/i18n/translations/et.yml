@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikoonipakid
   accent_color: Aktsentvärv
+  wallpaper:
+    select: Valige tapeet
 toolbar:
   placeholder:
     author: Autor
@@ -60,6 +62,7 @@ wm:
   layout: Paigutus
   workspace_padding: Tööruumide polsterdus
   resize_delta: Suuruse muutmine delta (%)
+  disabled_windows_version: Aknahaldur pole teie Windowsi versiooni jaoks saadaval.
 weg:
   items:
     visible_separators: Nähtavad eraldajad

@@ -21,6 +21,7 @@ settings:
   title: تنظیمات
   log_out: خروج
   shutdown: تعطیل
+  power: قدرت
 placeholder:
   settings: تنظیمات سریع
   ethernet_connected: دسترسی به اینترنت

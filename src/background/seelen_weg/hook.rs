@@ -118,8 +118,8 @@ impl SeelenWeg {
                         }
                         // can fail on volume window island
                         let _ = WindowsApi::show_window(content_hwnd, SW_HIDE);
+                        WindowsApi::show_window(origin_hwnd, SW_HIDE)?;
                     }
-                    WindowsApi::show_window(origin_hwnd, SW_HIDE)?;
                 }
             }
             _ => {}

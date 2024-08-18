@@ -21,6 +21,7 @@ settings:
   log_out: Wọle
   restart: Tun bẹrẹ
   sleep: Sun
+  power: Agbara
 placeholder:
   ethernet_connected: Wiwọle Intanẹẹti
   volume: Iwọn didun

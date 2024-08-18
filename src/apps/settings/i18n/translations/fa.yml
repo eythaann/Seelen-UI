@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: بسته های نماد
   accent_color: رنگ لهجه
+  wallpaper:
+    select: تصویر زمینه را انتخاب کنید
 toolbar:
   placeholder:
     description: شرح
@@ -59,6 +61,7 @@ wm:
   resize_delta: تغییر اندازه دلتا (٪)
   disabled_windows10: مدیر پنجره برای ویندوز 10 در دسترس نیست.
   workspace_padding: قسمتهای کاری PADING
+  disabled_windows_version: مدیر پنجره برای نسخه ویندوز شما در دسترس نیست.
 weg:
   items:
     label: موارد

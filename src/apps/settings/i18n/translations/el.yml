@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Εικονίδια
   accent_color: Έμφαση στο χρώμα
+  wallpaper:
+    select: Επιλέξτε ταπετσαρία
 toolbar:
   placeholder:
     select: Δομή γραμμής εργαλείων
@@ -60,6 +62,7 @@ wm:
   workspace_offset: Μετατόπιση χώρων εργασίας (περιθώρια)
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων
   resize_delta: Αλλαγή μεγέθους Delta (%)
+  disabled_windows_version: Ο διαχειριστής παραθύρων δεν είναι διαθέσιμος για την έκδοση των Windows.
 weg:
   items:
     size: Μέγεθος αντικειμένου

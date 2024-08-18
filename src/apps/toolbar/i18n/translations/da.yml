@@ -21,6 +21,7 @@ settings:
   restart: Genstart
   title: Indstillinger
   app_settings: Appindstillinger
+  power: Magt
 placeholder:
   ethernet_connected: Internetadgang
   volume: Bind

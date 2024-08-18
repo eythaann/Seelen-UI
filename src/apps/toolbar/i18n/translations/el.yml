@@ -21,6 +21,7 @@ settings:
   log_out: Αποσύνδεση
   restart: Επανεκκίνηση
   sleep: Υπνος
+  power: Εξουσία
 placeholder:
   settings: Γρήγορες ρυθμίσεις
   smart_charge: '- έξυπνη χρέωση'

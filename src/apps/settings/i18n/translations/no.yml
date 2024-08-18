@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Ikonpakker
   accent_color: Aksentfarge
+  wallpaper:
+    select: Velg bakgrunnsbilde
 toolbar:
   placeholder:
     description: Beskrivelse
@@ -60,6 +62,7 @@ wm:
   workspace_padding: Arbeidsområder polstring
   disabled_windows10: Window Manager er ikke tilgjengelig for Windows 10.
   enable: Aktiver Window Manager
+  disabled_windows_version: Window Manager er ikke tilgjengelig for Windows -versjonen din.
 weg:
   items:
     zoom_size: Zoomet størrelse (brukt til temaer)

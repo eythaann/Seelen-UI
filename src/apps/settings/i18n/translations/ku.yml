@@ -38,6 +38,8 @@ general:
   icon_pack:
     label: Packon icon
   accent_color: Rengê Accent
+  wallpaper:
+    select: Hilbijêre Wallpaper
 toolbar:
   placeholder:
     author: Nivîskar
@@ -59,6 +61,7 @@ wm:
   enable: Gerînendeyê Windeyê çalak bike
   workspace_padding: Karên xebitandinê
   resize_delta: Delta Resize (%)
+  disabled_windows_version: Rêvebirê pencereyê ji bo guhertoya weya Windows-ê nabe.
 weg:
   items:
     size: Mezinahiya tiştê

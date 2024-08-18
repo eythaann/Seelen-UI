@@ -21,6 +21,7 @@ settings:
   shutdown: Chaead
   title: Gosodiadau
   sleep: Chysger
+  power: Bwerau
 placeholder:
   open_system_tray: Hambwrdd System Agored
   smart_charge: '- Tâl craff'

@@ -39,6 +39,8 @@ general:
   icon_pack:
     label: Pictogrampakketten
   accent_color: Accent kleur
+  wallpaper:
+    select: Selecteer wallpaper
 toolbar:
   placeholder:
     author: Auteur
@@ -60,6 +62,7 @@ wm:
   enable: Schakel Window Manager in
   disabled_windows10: De Window Manager is niet beschikbaar voor Windows 10.
   resize_delta: Wijzig de wijzers van delta (%)
+  disabled_windows_version: De Window Manager is niet beschikbaar voor uw Windows -versie.
 weg:
   items:
     visible_separators: Zichtbare scheiders

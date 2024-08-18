@@ -21,6 +21,7 @@ settings:
   title: ការកំណត់
   restart: រ្យេដិតនោ
   sleep: ដមនេក
+  power: អមនាច
 placeholder:
   battery_remaining: នៅសល់%
   ethernet_connected: ការចូលប្រើអ៊ីនធឺណិត

@@ -21,6 +21,7 @@ settings:
   title: Settings
   sleep: Irqad
   app_settings: Settings tal-App
+  power: Qawwa
 placeholder:
   open_user_folder: Folder tal-utent miftuħ
   settings: Settings ta 'malajr

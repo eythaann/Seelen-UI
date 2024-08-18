@@ -21,6 +21,7 @@ settings:
   sleep: ينام
   restart: إعادة تشغيل
   shutdown: اغلق
+  power: قوة
 placeholder:
   open_user_folder: افتح مجلد المستخدم
   open_system_tray: افتح علبة النظام

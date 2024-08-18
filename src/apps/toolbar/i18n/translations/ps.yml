@@ -21,6 +21,7 @@ settings:
   title: امستنې
   sleep: ویده شه
   app_settings: د ایپ امستنې
+  power: ځواک
 placeholder:
   smart_charge: '- سمارټ چارج'
   ethernet_disconnected: هیڅ انټرنیټ لاسرسی
