@@ -10,7 +10,6 @@ import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { debounce } from 'lodash';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -111,28 +110,22 @@ export async function registerStoreEvents() {
     loadThemeCSS(userSettings);
   });
 
-  await listenGlobal<unknown>(
-    FileChange.WegItems,
-    debounce(async () => {
-      if (IsSavingPinnedItems.current) {
-        IsSavingPinnedItems.current = false;
-        return;
-      }
+  await listenGlobal<unknown>(FileChange.WegItems, async () => {
+    if (IsSavingPinnedItems.current) {
+      IsSavingPinnedItems.current = false;
+      return;
+    }
 
-      const apps = await loadPinnedItems();
-      store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
-      store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
-      store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
-    }, 100),
-  );
+    const apps = await loadPinnedItems();
+    store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
+    store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
+    store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
+  });
 
-  await listenGlobal<any>(
-    FileChange.Settings,
-    debounce(async () => {
-      await loadSettingsToStore();
-      updateHitbox();
-    }, 100),
-  );
+  await listenGlobal<any>(FileChange.Settings, async () => {
+    await loadSettingsToStore();
+    updateHitbox();
+  });
 
   await view.emitTo(view.label, 'store-events-ready');
 }

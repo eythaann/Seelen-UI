@@ -9,13 +9,13 @@ use super::{
     domain::{AppConfig, Placeholder, Settings, Theme, WegItems},
 };
 
-#[tauri::command]
-pub fn state_get_themes() -> Vec<Theme> {
+#[tauri::command(async)]
+pub async fn state_get_themes() -> Vec<Theme> {
     FULL_STATE.load().themes().values().cloned().collect_vec()
 }
 
-#[tauri::command]
-pub fn state_get_placeholders() -> Vec<Placeholder> {
+#[tauri::command(async)]
+pub async fn state_get_placeholders() -> Vec<Placeholder> {
     FULL_STATE
         .load()
         .placeholders()
@@ -24,18 +24,18 @@ pub fn state_get_placeholders() -> Vec<Placeholder> {
         .collect_vec()
 }
 
-#[tauri::command]
-pub fn state_get_weg_items() -> WegItems {
+#[tauri::command(async)]
+pub async fn state_get_weg_items() -> WegItems {
     FULL_STATE.load().weg_items().clone()
 }
 
-#[tauri::command]
-pub fn state_get_settings() -> Settings {
+#[tauri::command(async)]
+pub async fn state_get_settings() -> Settings {
     FULL_STATE.load().settings().clone()
 }
 
-#[tauri::command]
-pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
+#[tauri::command(async)]
+pub async fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
     FULL_STATE
         .load()
         .settings_by_app()
@@ -44,12 +44,12 @@ pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
         .collect_vec()
 }
 
-#[tauri::command]
-pub fn state_get_wallpaper() -> Result<PathBuf> {
+#[tauri::command(async)]
+pub async fn state_get_wallpaper() -> Result<PathBuf> {
     WindowsApi::get_wallpaper()
 }
 
 #[tauri::command]
-pub fn state_set_wallpaper(path: String) -> Result<()> {
+pub async fn state_set_wallpaper(path: String) -> Result<()> {
     WindowsApi::set_wallpaper(path)
 }

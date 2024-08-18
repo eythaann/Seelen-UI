@@ -1,3 +1,4 @@
+import { getCurrentWebview } from '@tauri-apps/api/webview';
 import * as Logger from '@tauri-apps/plugin-log';
 
 export function wrapConsole() {
@@ -9,8 +10,9 @@ export function wrapConsole() {
     trace: console.trace,
   };
 
+  const label = getCurrentWebview().label;
   const StringifyParams = (params: any[]): string => {
-    return params.reduce((a, b) => {
+    return label + ':' + params.reduce((a, b) => {
       if (typeof b === 'string') {
         return a + ' ' + b;
       }

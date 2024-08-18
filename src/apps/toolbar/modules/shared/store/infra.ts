@@ -7,7 +7,6 @@ import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { debounce } from 'lodash';
 
 import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
@@ -36,12 +35,9 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setFocused(e.payload));
   });
 
-  await listenGlobal<any>(
-    FileChange.Settings,
-    debounce(async (_event) => {
-      await loadStore();
-    }, 100),
-  );
+  await listenGlobal<any>(FileChange.Settings, async (_event) => {
+    await loadStore();
+  });
 
   await listenGlobal<PowerStatus>('power-status', (event) => {
     store.dispatch(RootActions.setPowerStatus(event.payload));
@@ -100,24 +96,21 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setColors(event.payload));
   });
 
-  await listenGlobal(
-    FileChange.Themes,
-    debounce(async () => {
-      const userSettings = await new UserSettingsLoader().load();
-      loadThemeCSS(userSettings);
-    }, 100),
-  );
+  await listenGlobal(FileChange.Themes, async () => {
+    const userSettings = await new UserSettingsLoader().load();
+    loadThemeCSS(userSettings);
+  });
 
   await listenGlobal(
     FileChange.Placeholders,
-    debounce(async () => {
+    async () => {
       if (IsSavingCustom.current) {
         IsSavingCustom.current = false;
         return;
       }
       const userSettings = await new UserSettingsLoader().withPlaceholders().load();
       setPlaceholder(userSettings);
-    }, 100),
+    },
   );
 
   await view.emitTo(view.label, 'store-events-ready');

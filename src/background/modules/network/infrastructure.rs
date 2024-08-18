@@ -42,20 +42,23 @@ pub fn register_network_events() -> Result<()> {
         });
     }
 
-    if let (Ok(ip), Ok(adapters)) = (get_local_ip_address(), NetworkManager::get_adapters()) {
-        let has_internet = Com::run_with_context(|| {
-            let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
-            let connectivity = unsafe { list_manager.GetConnectivity()? };
+    std::thread::spawn(|| -> Result<()> {
+        if let (Ok(ip), Ok(adapters)) = (get_local_ip_address(), NetworkManager::get_adapters()) {
+            let has_internet = Com::run_with_context(|| {
+                let list_manager: INetworkListManager = Com::create_instance(&NetworkListManager)?;
+                let connectivity = unsafe { list_manager.GetConnectivity()? };
 
-            let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
-                == NLM_CONNECTIVITY_IPV4_INTERNET.0;
-            let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
-                == NLM_CONNECTIVITY_IPV6_INTERNET.0;
+                let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
+                    == NLM_CONNECTIVITY_IPV4_INTERNET.0;
+                let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
+                    == NLM_CONNECTIVITY_IPV6_INTERNET.0;
 
-            Ok(has_internet_ipv4 || has_internet_ipv6)
-        })?;
-        emit_networks(ip, adapters, has_internet);
-    }
+                Ok(has_internet_ipv4 || has_internet_ipv6)
+            })?;
+            emit_networks(ip, adapters, has_internet);
+        }
+        Ok(())
+    });
 
     Ok(())
 }

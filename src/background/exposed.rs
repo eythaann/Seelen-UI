@@ -23,20 +23,6 @@ use crate::modules::power::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
 #[command]
-fn start_seelen_shortcuts() {
-    std::thread::spawn(|| {
-        log_error!(Seelen::start_ahk_shortcuts());
-    });
-}
-
-#[command]
-fn kill_seelen_shortcuts() {
-    std::thread::spawn(|| {
-        Seelen::kill_ahk_shortcuts();
-    });
-}
-
-#[command]
 fn select_file_on_explorer(path: String) {
     log_error!(Command::new("explorer").args(["/select,", &path]).spawn());
 }
@@ -178,9 +164,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         suspend,
         restart,
         shutdown,
-        // AHK
-        start_seelen_shortcuts,
-        kill_seelen_shortcuts,
         // SeelenWeg
         weg_close_app,
         weg_toggle_window_state,

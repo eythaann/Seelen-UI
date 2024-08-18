@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- crash on registering network event
+
 ## [1.9.6]
 ### fix
 - app crashing on 24h2

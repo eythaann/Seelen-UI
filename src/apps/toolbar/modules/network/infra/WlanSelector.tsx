@@ -10,26 +10,17 @@ import { useAppBlur } from '../../shared/hooks/infra';
 
 import { Selectors } from '../../shared/store/app';
 
-export function WithWlanSelector({ children }: PropsWithChildren) {
-  const [openPreview, setOpenPreview] = useState(false);
+function WlanSelector({ open }: { open: boolean }) {
   const [selected, setSelected] = useState<string | null>(null);
 
   const entries = useSelector(Selectors.wlanBssEntries);
-
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (openPreview) {
-      invoke('wlan_start_scanning');
-    } else {
+    if (!open) {
       setSelected(null);
-      invoke('wlan_stop_scanning');
     }
-  }, [openPreview]);
-
-  useAppBlur(() => {
-    setOpenPreview(false);
-  });
+  }, [open]);
 
   let ssids = new Set<string>();
   let filtered = entries
@@ -44,39 +35,63 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
     });
 
   return (
+    <div className="wlan-selector">
+      <BackgroundByLayersV2 prefix="wlan-selector" />
+      <div className="wlan-selector-entries">
+        {filtered.length === 0 && (
+          <div className="wlan-selector-empty">{t('network.not_found')}</div>
+        )}
+        {filtered.map((entry) => {
+          let ssid = entry.ssid || '__HIDDEN_SSID__';
+          return (
+            <WlanSelectorEntry
+              key={ssid}
+              entry={entry}
+              selected={selected === ssid}
+              onClick={() => setSelected(ssid)}
+            />
+          );
+        })}
+      </div>
+      <div className="wlan-selector-footer">
+        <span onClick={() => invoke('open_file', { path: 'ms-settings:network' })}>
+          {t('network.more')}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export function WithWlanSelector({ children }: PropsWithChildren) {
+  const [mounted, setMounted] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) {
+      return;
+    }
+    if (openPreview) {
+      invoke('wlan_start_scanning');
+    } else {
+      invoke('wlan_stop_scanning');
+    }
+  }, [openPreview]);
+
+  useAppBlur(() => {
+    setOpenPreview(false);
+  });
+
+  return (
     <Popover
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
       arrow={false}
-      content={
-        <>
-          <div className="wlan-selector">
-            <BackgroundByLayersV2 prefix="wlan-selector" />
-            <div className="wlan-selector-entries">
-              {filtered.length === 0 && (
-                <div className="wlan-selector-empty">{t('network.not_found')}</div>
-              )}
-              {filtered.map((entry) => {
-                let ssid = entry.ssid || '__HIDDEN_SSID__';
-                return (
-                  <WlanSelectorEntry
-                    key={ssid}
-                    entry={entry}
-                    selected={selected === ssid}
-                    onClick={() => setSelected(ssid)}
-                  />
-                );
-              })}
-            </div>
-            <div className="wlan-selector-footer">
-              <span onClick={() => invoke('open_file', { path: 'ms-settings:network' })}>
-                {t('network.more')}
-              </span>
-            </div>
-          </div>
-        </>
-      }
+      content={<WlanSelector open={openPreview} />}
     >
       {children}
     </Popover>

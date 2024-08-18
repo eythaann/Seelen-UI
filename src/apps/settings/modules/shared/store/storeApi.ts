@@ -174,16 +174,8 @@ export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
 
 export async function saveUserSettings(settings: Pick<UserSettings, 'jsonSettings' | 'yamlSettings'>) {
   const yaml_route = await resolveDataPath('applications.yml');
-
-  await saveJsonSettings(settings.jsonSettings);
-
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
-
-  if (settings.jsonSettings.ahkEnabled) {
-    await invoke('start_seelen_shortcuts');
-  } else {
-    await invoke('kill_seelen_shortcuts');
-  }
+  await saveJsonSettings(settings.jsonSettings);
 }
 
 export async function ImportApps() {

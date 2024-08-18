@@ -35,7 +35,7 @@ define_app_errors!(
     TryFromInt(std::num::TryFromIntError);
     Image(image::ImageError);
     Battery(battery::Error);
-    FileNotify(notify::Error);
+    FileNotify(notify_debouncer_full::notify::Error);
     Base64Decode(base64::DecodeError);
     WideStringNull(widestring::error::MissingNulTerminator);
     Reqwest(tauri_plugin_http::reqwest::Error);

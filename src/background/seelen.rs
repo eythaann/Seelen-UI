@@ -84,9 +84,16 @@ impl Seelen {
 impl Seelen {
     pub fn on_state_changed(&mut self) -> Result<()> {
         let state = self.state();
-        for monitor in &mut self.monitors {
+
+        log_error!(if state.is_ahk_enabled() {
+            Self::start_ahk_shortcuts()
+        } else {
+            Self::kill_ahk_shortcuts()
+        });
+
+        /* for monitor in &mut self.monitors {
             monitor.load_settings(&state)?;
-        }
+        } */
         Ok(())
     }
 
@@ -171,7 +178,7 @@ impl Seelen {
             log_error!(SeelenWeg::show_taskbar());
         }
         if self.state().is_ahk_enabled() {
-            Self::kill_ahk_shortcuts();
+            log_error!(Self::kill_ahk_shortcuts());
         }
     }
 
@@ -285,7 +292,7 @@ impl Seelen {
 
     pub fn start_ahk_shortcuts() -> Result<()> {
         // kill all running shortcuts before starting again
-        Self::kill_ahk_shortcuts();
+        Self::kill_ahk_shortcuts()?;
 
         let state = FULL_STATE.load();
         if state.is_ahk_enabled() {
@@ -308,7 +315,7 @@ impl Seelen {
         Ok(())
     }
 
-    pub fn kill_ahk_shortcuts() {
+    pub fn kill_ahk_shortcuts() -> Result<()> {
         log::trace!("Killing AHK shortcuts");
         get_app_handle()
             .shell()
@@ -320,8 +327,8 @@ impl Seelen {
                 "-Command",
                 r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*static\redis\AutoHotkey.exe*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
             ])
-            .spawn()
-            .expect("Failed to close ahk");
+            .spawn()?;
+        Ok(())
     }
 
     pub fn show_settings() -> Result<()> {

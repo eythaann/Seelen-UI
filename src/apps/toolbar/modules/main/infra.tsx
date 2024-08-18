@@ -46,7 +46,10 @@ const DividerEnd = 'CenterEnd';
 
 function componentByModule(module: ToolbarModule) {
   let Component = modulesByType[module.type];
-  return <Component key={module.id} module={module} />;
+  if (!Component) {
+    return null;
+  }
+  return <Component key={module.template} module={module} />;
 }
 
 export function ToolBar({ structure }: Props) {

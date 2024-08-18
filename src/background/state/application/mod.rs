@@ -4,7 +4,11 @@ use arc_swap::ArcSwap;
 use getset::Getters;
 use itertools::Itertools;
 use lazy_static::lazy_static;
-use notify::{RecursiveMode, Watcher};
+use notify_debouncer_full::{
+    new_debouncer,
+    notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
+    DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
+};
 use serde::Serialize;
 use std::{
     collections::{HashMap, VecDeque},
@@ -13,6 +17,7 @@ use std::{
         atomic::{AtomicBool, Ordering},
         Arc,
     },
+    time::Duration,
 };
 use tauri::{AppHandle, Emitter, Manager};
 
@@ -22,7 +27,7 @@ use crate::{
     modules::cli::domain::Resource,
     seelen::{get_app_handle, SEELEN},
     trace_lock,
-    utils::{is_virtual_desktop_supported, spawn_named_thread},
+    utils::is_virtual_desktop_supported,
     windows_api::WindowsApi,
 };
 
@@ -45,6 +50,8 @@ pub struct FullState {
     data_dir: PathBuf,
     #[serde(skip)]
     resources_dir: PathBuf,
+    #[serde(skip)]
+    watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
     #[getset(get = "pub")]
     settings: Settings,
@@ -67,6 +74,7 @@ impl FullState {
             data_dir: handle.path().app_data_dir()?,
             resources_dir: handle.path().resource_dir()?,
             handle,
+            watcher: Arc::new(None),
             // ======== data ========
             settings: Settings::default(),
             settings_by_app: VecDeque::new(),
@@ -93,7 +101,8 @@ impl FullState {
         self.data_dir.join("settings.json")
     }
 
-    fn process_event(&mut self, event: notify::Event) -> Result<()> {
+    fn process_event(&mut self, event: &DebouncedEvent) -> Result<()> {
+        let event = &event.event;
         let weg_items_path = self.data_dir.join("seelenweg_items.yaml");
 
         let user_themes = self.data_dir.join("themes");
@@ -106,13 +115,13 @@ impl FullState {
         let bundled_app_configs = self.resources_dir.join("static/apps_templates");
 
         if event.paths.contains(&weg_items_path) {
-            log::info!("Weg Items changed: {:?}", event.paths);
+            log::info!("Weg Items changed");
             self.load_weg_items()?;
             self.emit_weg_items()?;
         }
 
         if event.paths.contains(&self.settings_path()) {
-            log::info!("Seelen Settings changed: {:?}", event.paths);
+            log::info!("Seelen Settings changed");
             self.load_settings()?;
             self.emit_settings()?;
         }
@@ -122,7 +131,7 @@ impl FullState {
             .iter()
             .any(|p| p.starts_with(&user_themes) || p.starts_with(&bundled_themes))
         {
-            log::info!("Theme changed: {:?}", event.paths);
+            log::info!("Theme changed");
             self.load_themes()?;
             self.emit_themes()?;
         }
@@ -132,7 +141,7 @@ impl FullState {
             .iter()
             .any(|p| p.starts_with(&user_placeholders) || p.starts_with(&bundled_placeholders))
         {
-            log::info!("Placeholder changed: {:?}", event.paths);
+            log::info!("Placeholder changed");
             self.load_placeholders()?;
             self.emit_placeholders()?;
         }
@@ -142,7 +151,7 @@ impl FullState {
             .iter()
             .any(|p| p.starts_with(&user_app_configs) || p.starts_with(&bundled_app_configs))
         {
-            log::info!("Specific App Configuration changed: {:?}", event.paths);
+            log::info!("Specific App Configuration changed");
             self.load_settings_by_app()?;
             self.emit_settings_by_app()?;
         }
@@ -151,31 +160,35 @@ impl FullState {
     }
 
     fn start_listeners(&mut self) -> Result<()> {
-        let (tx, rx) = crossbeam_channel::unbounded();
-
-        let mut watcher = notify::recommended_watcher(tx)?;
-
-        watcher.watch(&self.data_dir, RecursiveMode::Recursive)?;
-        watcher.watch(&self.resources_dir, RecursiveMode::Recursive)?;
-
-        // Todo I think this thread is unnecessary, just try saving the watcher obj in the instance.
-        spawn_named_thread("Files Watcher", move || {
-            let _watcher = watcher;
-            for event in rx {
-                match event {
-                    Ok(event) => {
-                        if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
+        log::trace!("Starting Seelen UI Files Watcher");
+        let mut debouncer = new_debouncer(
+            Duration::from_millis(100),
+            None,
+            |result: DebounceEventResult| match result {
+                Ok(events) => {
+                    log::info!("Seelen UI File Watcher events: {:?}", events);
+                    if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
+                        if let Some(event) = events.first() {
                             let mut state = FULL_STATE.load().cloned();
                             log_error!(state.process_event(event));
                             state.store();
                         }
                     }
-                    Err(e) => log::error!("Seelen UI Data Watcher error: {:?}", e),
                 }
-            }
-        })?;
+                Err(errors) => errors
+                    .iter()
+                    .for_each(|e| log::error!("File Watcher Error: {:?}", e)),
+            },
+        )?;
 
-        log::trace!("Seelen UI Data Watcher started!");
+        debouncer
+            .watcher()
+            .watch(&self.data_dir, RecursiveMode::Recursive)?;
+        debouncer
+            .watcher()
+            .watch(&self.resources_dir, RecursiveMode::Recursive)?;
+
+        self.watcher = Arc::new(Some(debouncer));
         Ok(())
     }
 
@@ -326,7 +339,8 @@ impl FullState {
     }
 
     fn emit_settings(&self) -> Result<()> {
-        self.handle.emit("settings", self.settings())?;
+        log::info!("Emitting Settings changed");
+        self.handle.emit("settings-changed", self.settings())?;
         trace_lock!(SEELEN).on_state_changed()?;
         Ok(())
     }

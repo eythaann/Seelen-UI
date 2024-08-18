@@ -4,7 +4,6 @@ import { FileChange } from '../../../../shared/events';
 import { WindowManager } from '../../../../shared/schemas/WindowManager';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
-import { debounce } from 'lodash';
 
 import { RootActions, RootSlice } from './app';
 
@@ -26,12 +25,9 @@ export async function loadStore() {
 }
 
 export async function registerStoreEvents() {
-  await listenGlobal<any>(
-    FileChange.Settings,
-    debounce(async () => {
-      await loadStore();
-    }, 100),
-  );
+  await listenGlobal<any>(FileChange.Settings, async () => {
+    await loadStore();
+  });
 
   await listenGlobal<AddWindowPayload>('add-window', (event) => {
     store.dispatch(RootActions.addWindow(event.payload));
@@ -86,21 +82,15 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setColors(event.payload));
   });
 
-  await listenGlobal(
-    FileChange.Themes,
-    debounce(async () => {
-      const userSettings = await new UserSettingsLoader().load();
-      loadThemeCSS(userSettings);
-    }, 100),
-  );
+  await listenGlobal(FileChange.Themes, async () => {
+    const userSettings = await new UserSettingsLoader().load();
+    loadThemeCSS(userSettings);
+  });
 
-  await listenGlobal(
-    FileChange.Placeholders,
-    debounce(async () => {
-      const userSettings = await new UserSettingsLoader().withLayouts().load();
-      store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
-    }, 100),
-  );
+  await listenGlobal(FileChange.Placeholders, async () => {
+    const userSettings = await new UserSettingsLoader().withLayouts().load();
+    store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
+  });
 }
 
 function loadSettingsCSS(settings: WindowManager) {

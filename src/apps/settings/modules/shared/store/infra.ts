@@ -1,4 +1,5 @@
 import { setColorsAsCssVariables } from '../../../../shared';
+import { FileChange } from '../../../../shared/events';
 import { parseAsCamel } from '../../../../shared/schemas';
 import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { Theme } from '../../../../shared/schemas/Theme';
@@ -6,7 +7,7 @@ import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
-import { cloneDeep, debounce } from 'lodash';
+import { cloneDeep } from 'lodash';
 
 import { startup } from '../tauri/infra';
 
@@ -51,22 +52,19 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setAppsConfigurations(YamlToState_Apps(event.payload)));
   });
 
-  await listenGlobal<any>(
-    'settings',
-    debounce((event) => {
-      if (IsSavingSettings.current) {
-        IsSavingSettings.current = false;
-        return;
-      }
-      const currentState = store.getState();
-      const newState: RootState = {
-        ...currentState,
-        ...parseAsCamel(SettingsSchema, event.payload),
-        toBeSaved: false,
-      };
-      store.dispatch(RootActions.setState(newState));
-    }, 100),
-  );
+  await listenGlobal<any>(FileChange.Settings, (event) => {
+    if (IsSavingSettings.current) {
+      IsSavingSettings.current = false;
+      return;
+    }
+    const currentState = store.getState();
+    const newState: RootState = {
+      ...currentState,
+      ...parseAsCamel(SettingsSchema, event.payload),
+      toBeSaved: false,
+    };
+    store.dispatch(RootActions.setState(newState));
+  });
 
   await emit('register-colors-events');
 }
