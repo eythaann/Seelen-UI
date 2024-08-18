@@ -17,4 +17,4 @@ execSync('git commit --amend --no-edit');
 
 // delete tag created by `npm version` and create a new one
 execSync(`git tag -d v${process.env.npm_new_version}`);
-execSync(`git tag v${process.env.npm_new_version}`);
+execSync(`git tag -s v${process.env.npm_new_version}`);
