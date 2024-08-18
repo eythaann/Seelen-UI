@@ -1,5 +1,7 @@
 # Themes
 
+> **Warning:** Do not modify the files in the installation directory. These files are overwritten with each update. To make custom changes, please follow the next guide.
+
 In Seelen UI, themes are managed as layers, allowing multiple themes to be used simultaneously. Since themes are like CSS files, their order is crucial as it determines the cascade order.
 
 Themes can be either a single file or a folder containing a specific file. The file should be a `.yml` file that adheres to the [theme schema](./schemas/theme.schema.json).
