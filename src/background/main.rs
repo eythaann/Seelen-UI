@@ -69,7 +69,8 @@ fn register_panic_hook() {
 }
 
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
-    log::info!("───────────────────── Starting Seelen ─────────────────────");
+    let version = env!("CARGO_PKG_VERSION");
+    log::info!("───────────────────── Starting Seelen UI v{version} ─────────────────────");
     log::info!("Operating System: {}", os_info::get());
     Client::listen_tcp()?;
     // try it at start it on open the program to avoid do it before
