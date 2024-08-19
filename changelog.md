@@ -7,6 +7,7 @@
 
 ### fix
 - can no disable run on startup.
+- text been cut on toolbar.
 
 ## [1.9.7]
 ### enhancements

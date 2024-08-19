@@ -12,7 +12,6 @@ body {
 
 .fancy-toolbar {
   width: 100vw;
-  line-height: 1em;
 
   .ft-bar {
     position: relative;
