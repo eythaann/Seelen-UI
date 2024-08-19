@@ -70,6 +70,7 @@ fn register_panic_hook() {
 
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
     log::info!("───────────────────── Starting Seelen ─────────────────────");
+    log::info!("Operating System: {}", os_info::get());
     Client::listen_tcp()?;
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
