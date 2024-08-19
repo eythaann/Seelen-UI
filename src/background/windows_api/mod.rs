@@ -73,7 +73,7 @@ use crate::{
     error_handler::{AppError, Result},
     hook::{HOOK_MANAGER, LAST_FOREGROUNDED},
     log_error, trace_lock,
-    utils::is_windows_11,
+    utils::{is_virtual_desktop_supported, is_windows_11},
     winevent::WinEvent,
 };
 
@@ -563,7 +563,7 @@ impl WindowsApi {
             return Err("File not found".into());
         }
 
-        if is_windows_11() {
+        if is_windows_11() && is_virtual_desktop_supported() {
             for v_desktop in winvd::get_desktops()? {
                 v_desktop.set_wallpaper(&path)?;
             }

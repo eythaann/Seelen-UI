@@ -1,6 +1,6 @@
 import { Monitor } from '../../../../components/monitor';
 import { SettingsOption } from '../../../../components/SettingsBox';
-import { invoke } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -28,7 +28,7 @@ export function Wallpaper() {
     }
 
     await invoke('state_set_wallpaper', { path: file.path });
-    dispatch(RootActions.setWallpaper(file.path));
+    dispatch(RootActions.setWallpaper(convertFileSrc(file.path)));
   }
 
   return (

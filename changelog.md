@@ -9,6 +9,7 @@
 ### fix
 - can no disable run on startup.
 - text been cut on toolbar.
+- app crashing on wallpaper change on win11 24h2
 
 ## [1.9.7]
 ### enhancements
