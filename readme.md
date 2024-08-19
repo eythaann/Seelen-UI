@@ -82,7 +82,9 @@ Welcome to Seelen UI, where customization meets productivity, revolutionizing yo
   <img src="./documentation/images/mosaico.png" width="100%" alt="Seelen UI desktop">
 <br/>
 
-## Getting Started & Installation
+## Installation
+> **⚠️ Warning**: Seelen UI requires the WebView runtime to be installed. On Windows 11, it comes pre-installed with the system. However, on Windows 10, the WebView runtime is included with the `setup.exe` installer. Additionally, Microsoft Edge is necessary to function correctly. Some users may have modified their system and removed Edge, so please ensure both Edge and the WebView runtime are installed on your system.
+
 You can choose from different installation options based on your preference:
 
 ### Microsoft Store <em>(recommended)</em>
