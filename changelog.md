@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### enhancements
 - avoid recreate already existing folders.
+- separate lib and app in two crates.
 
 ### fix
 - can no disable run on startup.

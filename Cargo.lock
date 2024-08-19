@@ -4371,6 +4371,19 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 
 [[package]]
+name = "seelen-core"
+version = "1.9.7"
+dependencies = [
+ "regex",
+ "schemars",
+ "serde",
+ "serde_alias",
+ "serde_json",
+ "serde_yaml",
+ "windows 0.57.0",
+]
+
+[[package]]
 name = "seelen-ui"
 version = "1.9.7"
 dependencies = [
@@ -4390,6 +4403,7 @@ dependencies = [
  "parking_lot",
  "phf 0.11.2",
  "regex",
+ "seelen-core",
  "serde",
  "serde_json",
  "serde_yaml",
@@ -4461,6 +4475,19 @@ dependencies = [
  "erased-serde",
  "serde",
  "typeid",
+]
+
+[[package]]
+name = "serde_alias"
+version = "0.0.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2be4d78e3674912678d7c86b8c507fa72ebff66a8dd3359dc54ec97164b68474"
+dependencies = [
+ "convert_case",
+ "proc-macro-error",
+ "proc-macro2",
+ "quote",
+ "syn 1.0.109",
 ]
 
 [[package]]

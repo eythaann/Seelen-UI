@@ -1,0 +1,16 @@
+[package]
+name = "seelen-core"
+version = "1.9.7"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+serde_yaml = "0.9.34"
+serde_alias = "0.0.2"
+schemars = "0.8.21"
+regex = "1.10.4"
+
+[dependencies.windows]
+version = "=0.57.0"
+features = ["Win32_Foundation"]

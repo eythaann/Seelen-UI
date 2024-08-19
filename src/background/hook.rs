@@ -191,7 +191,7 @@ pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
     if let DesktopEvent::WindowChanged(hwnd) = event {
         if WindowsApi::is_window(hwnd) {
             if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-                if config.options_contains(AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)?
+                if config.options.contains(&AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)?
                 {
                     winvd::pin_window(hwnd)?;
                 }

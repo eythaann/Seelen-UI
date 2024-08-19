@@ -136,12 +136,7 @@ export class UserSettingsLoader {
       wallpaper: null,
     };
 
-    let data =
-      customPath && (await fs.exists(customPath))
-        ? JSON.parse(await fs.readTextFile(customPath))
-        : await invoke('state_get_settings');
-
-    userSettings.jsonSettings = parseAsCamel(SettingsSchema, data);
+    userSettings.jsonSettings = await invoke('state_get_settings', { path: customPath });
 
     if (this._withUserApps) {
       userSettings.yamlSettings = await invoke('state_get_specific_apps_configurations');

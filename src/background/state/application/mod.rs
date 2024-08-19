@@ -31,10 +31,7 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-use super::{
-    application::apps_config::REGEX_IDENTIFIERS,
-    domain::{AppConfig, Placeholder, Settings, Theme, WegItems},
-};
+use super::domain::{AppConfig, Placeholder, Settings, Theme, WegItems};
 
 lazy_static! {
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee(
@@ -201,13 +198,22 @@ impl FullState {
         Ok(())
     }
 
+    pub fn get_settings_from_path(path: PathBuf) -> Result<Settings> {
+        match path.extension() {
+            Some(ext) if ext == "json" => {
+                let mut settings: Settings =
+                    serde_json::from_str(&std::fs::read_to_string(&path)?)?;
+                settings.window_manager.enabled =
+                    settings.window_manager.enabled && is_virtual_desktop_supported();
+                Ok(settings)
+            }
+            _ => Err("Invalid settings file extension".into()),
+        }
+    }
+
     fn load_settings(&mut self) -> Result<()> {
         let path = self.settings_path();
-        if path.exists() {
-            self.settings = serde_json::from_str(&std::fs::read_to_string(&path)?)?;
-            self.settings.window_manager.enabled =
-                self.settings.window_manager.enabled && is_virtual_desktop_supported();
-        }
+        self.settings = Self::get_settings_from_path(path)?;
         Ok(())
     }
 
@@ -314,7 +320,6 @@ impl FullState {
         let user_apps_path = self.data_dir.join("applications.yml");
         let apps_templates_path = self.resources_dir.join("static/apps_templates");
 
-        trace_lock!(REGEX_IDENTIFIERS).clear();
         self.settings_by_app.clear();
 
         if user_apps_path.exists() {
@@ -333,7 +338,7 @@ impl FullState {
         }
 
         self.settings_by_app
-            .iter()
+            .iter_mut()
             .for_each(|app| app.identifier.cache_regex());
         Ok(())
     }

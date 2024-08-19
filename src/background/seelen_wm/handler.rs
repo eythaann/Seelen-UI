@@ -7,7 +7,8 @@ use windows::Win32::{
     },
 };
 
-use crate::{seelen::SEELEN, trace_lock, utils::rect::Rect, windows_api::WindowsApi};
+use crate::{seelen::SEELEN, trace_lock, windows_api::WindowsApi};
+use seelen_core::rect::Rect;
 
 #[tauri::command(async)]
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {

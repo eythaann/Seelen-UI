@@ -1,9 +1,14 @@
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use serde_alias::serde_alias;
 
-use seelen_core::rect::Rect;
+use crate::rect::Rect;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+/* In this file we use #[serde_alias(SnakeCase)] as backward compatibility from versions below v1.9.8 */
+
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct Settings {
     /// fancy toolbar config
     pub fancy_toolbar: FancyToolbarSettings,
@@ -43,8 +48,9 @@ impl Default for Settings {
 
 // ============== Fancy Toolbar Settings ==============
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct FancyToolbarSettings {
     /// enable or disable the fancy toolbar
     pub enabled: bool,
@@ -66,7 +72,7 @@ impl Default for FancyToolbarSettings {
 
 // ============== SeelenWeg Settings ==============
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Serialize, Deserialize, JsonSchema, PartialEq, Eq)]
 pub enum SeelenWegMode {
     #[serde(rename = "Full-Width")]
     FullWidth,
@@ -74,7 +80,7 @@ pub enum SeelenWegMode {
     MinContent,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Serialize, Deserialize, JsonSchema, PartialEq, Eq)]
 pub enum SeelenWegHideMode {
     /// never hide
     Never,
@@ -85,7 +91,7 @@ pub enum SeelenWegHideMode {
     OnOverlap,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Serialize, Deserialize, JsonSchema, PartialEq, Eq)]
 pub enum SeelenWegSide {
     Left,
     Right,
@@ -93,8 +99,9 @@ pub enum SeelenWegSide {
     Bottom,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct SeelenWegSettings {
     /// enable or disable the seelenweg
     pub enabled: bool,
@@ -137,23 +144,26 @@ impl Default for SeelenWegSettings {
 
 // ============== Window Manager Settings ==============
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct Border {
     pub enabled: bool,
     pub width: f64,
     pub offset: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct FloatingWindowSettings {
     pub width: f64,
     pub height: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct WindowManagerSettings {
     /// enable or disable the window manager
     pub enabled: bool,
@@ -211,8 +221,9 @@ impl Default for WindowManagerSettings {
 }
 // ============== Settings by Monitor ==============
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct Workspace {
     pub name: String,
     pub layout: String,
@@ -220,8 +231,9 @@ pub struct Workspace {
     pub gap: Option<f64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct Monitor {
     pub workspaces: Vec<Workspace>,
     pub work_area_offset: Option<Rect>,
@@ -249,7 +261,7 @@ impl Default for Monitor {
 
 // ============== Ahk Variables ==============
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct AhkVar {
     pub fancy: String,
     pub ahk: String,
@@ -264,8 +276,9 @@ impl AhkVar {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
-#[serde(default)]
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
 pub struct AhkVarList {
     pub reserve_top: AhkVar,
     pub reserve_bottom: AhkVar,
