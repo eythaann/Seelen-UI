@@ -212,12 +212,19 @@ impl Seelen {
             std::fs::remove_dir_all(&old_path)?;
         }
 
-        // user data folder
-        std::fs::create_dir_all(data_path.join("placeholders"))?;
-        std::fs::create_dir_all(data_path.join("themes"))?;
-        std::fs::create_dir_all(data_path.join("layouts"))?;
-        std::fs::create_dir_all(data_path.join("icons"))?;
-        std::fs::create_dir_all(data_path.join("wallpapers"))?;
+        let create_if_needed = move |folder: &str| -> Result<()> {
+            let path = data_path.join(folder);
+            if !path.exists() {
+                std::fs::create_dir_all(path)?;
+            }
+            Ok(())
+        };
+
+        create_if_needed("placeholders")?;
+        create_if_needed("themes")?;
+        create_if_needed("layouts")?;
+        create_if_needed("icons")?;
+        create_if_needed("wallpapers")?;
 
         Ok(())
     }

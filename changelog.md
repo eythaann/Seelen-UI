@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- avoid recreate already existing folders.
+
 ## [1.9.7]
 ### enhancements
 - made all invoke handlers async
