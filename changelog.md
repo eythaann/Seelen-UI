@@ -4,6 +4,7 @@
 ### enhancements
 - avoid recreate already existing folders.
 - separate lib and app in two crates.
+- improve click behavior on seelen weg item to make it more intuitive.
 
 ### fix
 - can no disable run on startup.

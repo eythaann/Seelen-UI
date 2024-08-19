@@ -16,7 +16,8 @@ use windows::Win32::{
     UI::{
         Accessibility::{SetWinEventHook, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
+            DispatchMessageW, GetForegroundWindow, GetMessageW, TranslateMessage, EVENT_MAX,
+            EVENT_MIN, MSG,
         },
     },
 };
@@ -37,6 +38,8 @@ use crate::{
 lazy_static! {
     pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
 }
+
+pub static LAST_FOREGROUNDED: AtomicIsize = AtomicIsize::new(0);
 
 type HookCallback = Box<dyn Fn(&mut HookManager) + Send + 'static>;
 pub struct HookManager {
@@ -113,17 +116,19 @@ impl HookManager {
         // uncomment for debug
         // Self::_log_event(event, origin);
 
+        let title = WindowsApi::get_window_text(origin);
+        if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
+            if IGNORE_FOCUS.contains(&title) {
+                return;
+            }
+            LAST_FOREGROUNDED.store(origin.0, Ordering::SeqCst);
+        }
+
+        // Stop event propagation
         if self.is_paused() {
             if self.is_waiting_for(event, origin) {
                 self.resume();
             }
-            return;
-        }
-
-        let title = WindowsApi::get_window_text(origin);
-        if (event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground)
-            && IGNORE_FOCUS.contains(&title)
-        {
             return;
         }
 
@@ -273,6 +278,7 @@ pub fn register_win_hook() -> Result<()> {
 
     // let stack_size = 5 * 1024 * 1024; // 5 MB
     spawn_named_thread("WinEventHook", move || unsafe {
+        trace_lock!(HOOK_MANAGER).event(WinEvent::SystemForeground, GetForegroundWindow());
         SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
 
         let mut msg: MSG = MSG::default();

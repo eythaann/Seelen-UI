@@ -8,6 +8,10 @@ lazy_static! {
         "Virtual desktop switching preview",
         "Virtual desktop hotkey switching preview",
         "Seelen Window Manager",
+        "SeelenWeg",
+        "SeelenWeg Hitbox",
+        "Seelen Fancy Toolbar",
+        "Seelen Fancy Toolbar Hitbox"
     ]
     .iter()
     .map(|x| x.to_string())

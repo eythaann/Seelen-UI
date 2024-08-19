@@ -1,6 +1,6 @@
 use image::ImageFormat;
 use serde::Deserialize;
-use tauri::Emitter;
+use tauri::{Emitter, WebviewWindow};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{error_handler::Result, seelen::get_app_handle, windows_api::WindowsApi};
@@ -54,27 +54,28 @@ pub fn weg_close_app(hwnd: isize) -> Result<(), String> {
 }
 
 #[tauri::command(async)]
-pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
+pub fn weg_toggle_window_state(window: WebviewWindow, hwnd: isize, exe_path: String) -> Result<()> {
     let hwnd = HWND(hwnd);
 
-    if WindowsApi::is_window(hwnd) {
-        if WindowsApi::is_cloaked(hwnd)? {
-            WindowsApi::force_set_foreground(hwnd)?;
-            return Ok(());
-        }
-
-        if WindowsApi::is_iconic(hwnd) {
-            WindowsApi::show_window(hwnd, SW_RESTORE)?;
-        } else {
-            WindowsApi::show_window(hwnd, SW_MINIMIZE)?;
-        }
-    } else {
+    // If the window is not open, open it
+    if !WindowsApi::is_window(hwnd) {
         get_app_handle()
             .shell()
             .command("explorer")
             .arg(&exe_path)
-            .spawn()
-            .expect("Could not spawn explorer on Opening App Action");
+            .spawn()?;
+        return Ok(());
+    }
+
+    if WindowsApi::is_iconic(hwnd) {
+        return WindowsApi::show_window(hwnd, SW_RESTORE);
+    }
+
+    let foreground = WindowsApi::get_foreground_window();
+    if foreground == hwnd || foreground == window.hwnd()? {
+        WindowsApi::show_window(hwnd, SW_MINIMIZE)?;
+    } else {
+        WindowsApi::force_set_foreground(hwnd)?;
     }
 
     Ok(())

@@ -71,7 +71,7 @@ use windows::{
 
 use crate::{
     error_handler::{AppError, Result},
-    hook::HOOK_MANAGER,
+    hook::{HOOK_MANAGER, LAST_FOREGROUNDED},
     log_error, trace_lock,
     utils::is_windows_11,
     winevent::WinEvent,
@@ -159,7 +159,13 @@ impl WindowsApi {
         }
     }
 
+    /// this is a modified version of the original GetForegroundWindow function
+    /// used to handle last foregrounded window ignoring some windows
     pub fn get_foreground_window() -> HWND {
+        let foreground = LAST_FOREGROUNDED.load(std::sync::atomic::Ordering::Acquire);
+        if foreground != 0 {
+            return HWND(foreground);
+        }
         unsafe { GetForegroundWindow() }
     }
 
