@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="documentation/images/logo.svg" width="44" align="top" />
+  <img src="documentation/images/logo.svg" width="44" align="top" alt="Seelen UI Logo" />
   Seelen UI
 </h1>
 
@@ -18,7 +18,7 @@
 
 </div>
 
-<img src="./documentation/images/preview.png" width="100%" alt="Seelen UI desktop">
+<img src="./documentation/images/preview.png" width="100%" alt="Screenshot of Seelen UI desktop showing a customized desktop environment">
 
 <table align="center">
   <tr>
@@ -28,7 +28,7 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Seelen UI from Microsoft Store">
-        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250px" />
+        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250px" alt="Download Seelen UI from Microsoft Store">
       </a>
     </td>
     <td align="center">
@@ -36,13 +36,12 @@
         href="https://discord.gg/ABfASx5ZAJ"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Download Seelen UI from Microsoft Store">
-        <img src="./documentation/images/discord.png" width="285px" />
+        aria-label="Join the Seelen UI Discord community">
+        <img src="./documentation/images/discord.png" width="285px" alt="Join the Seelen UI Discord community">
       </a>
     </td>
   </tr>
 </table>
-
 
 ## Table of Contents
 - [Overview](#overview)
@@ -52,6 +51,7 @@
   - [.msix Installer](#msix-installer)
   - [.exe Installer](#exe-installer)
 - [Usage](#usage)
+- [Upcoming Features](#upcoming-features)
 - [Documentation](#documentation)
   - [Languages](./documentation/languages.md)
   - [Toolbar](./documentation/toolbar.md)
@@ -62,24 +62,23 @@
 - [License](#license)
 - [Contact](#contact)
 
-
 ## Overview
 Welcome to Seelen UI, where customization meets productivity, revolutionizing your Windows desktop experience. Seamlessly integrated into your system, Seelen UI unlocks a world of possibilities, offering an extensive array of customization features to sculpt your desktop into a personalized masterpiece of efficiency and style.
 
 * **Unleash Your Creativity**: With Seelen UI, your desktop becomes a canvas, ready for your creative vision. From menus to widgets, every element can be tailored to reflect your unique style and workflow.
 
-  <img src="./documentation/images/preview2.png" width="100%" alt="Seelen UI Banner">
+  <img src="./documentation/images/preview2.png" width="100%" alt="Banner showcasing various customization options in Seelen UI">
 
 <br/>
 
 * **Boost Your Productivity**: Say goodbye to clutter and hello to organization. Seelen UI empowers you to streamline your desktop layout, ensuring that essential tools and information are always at your fingertips. Plus, with a Tiling Windows Manager for Windows, productivity reaches new heights as windows automatically arrange themselves for optimal multitasking efficiency.
 
-  <img src="./documentation/images/preview3.png" width="100%" alt="Seelen UI desktop">
+  <img src="./documentation/images/preview3.png" width="100%" alt="Seelen UI desktop with organized windows for efficient multitasking">
 <br/>
 
 * **Easy and Very Customizable Configuration**: Seelen UI offers an easy and highly customizable configuration through an intuitive user interface. Tweak every aspect of your desktop experience with ease, from colors and fonts to taskbar layouts and icon arrangements, all within a few clicks.
 
-  <img src="./documentation/images/mosaico.png" width="100%" alt="Seelen UI desktop">
+  <img src="./documentation/images/mosaico.png" width="100%" alt="Example of customizable desktop settings in Seelen UI">
 <br/>
 
 ## Installation
@@ -104,7 +103,7 @@ This option also uses the signed `.msix` package and ensures you have the latest
 Download the `.msix` installer from the [Releases](https://github.com/eythaann/seelen-ui/releases) page. This package is signed, ensuring a secure installation. This is the same option as the Microsoft Store but is a portable installer.
 
 ### .exe Installer
-Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the `setup.exe` installer. This option is less recommended as the installer is not signed, which may cause it to be flagged as a potential threat by some antivirus programs. The setup.exe is updated more quickly than the Microsoft Store or Winget versions and also it receives notifications updates on new release.
+Download the latest version from the [Releases](https://github.com/eythaann/seelen-ui/releases) page and run the `setup.exe` installer. This option is less recommended as the installer is not signed, which may cause it to be flagged as a potential threat by some antivirus programs. The `setup.exe` is updated more quickly than the Microsoft Store or Winget versions and also it receives notifications updates on new release.
 
 ## Usage
 
@@ -119,6 +118,35 @@ For in-depth details on various aspects of Seelen UI, explore the following docu
 - [Window Manager](./documentation/windows_manager.md) - Instructions on configuring the window manager.
 - [Project](./documentation/project.md) - General information about the project and its structure.
 
+## Upcoming Features
+
+I’m excited to share some upcoming features for Seelen UI! Here’s a glimpse of what’s planned for the future:
+
+### App Launcher
+I’m planning to develop an app launcher inspired by [Rofi](https://github.com/davatorium/rofi) on Linux. This feature will provide a sleek and highly customizable way to quickly access your applications.
+
+![App Launcher Preview](https://raw.githubusercontent.com/adi1090x/files/master/rofi/previews/colorful/main.gif)
+*Image courtesy of [rofi-themes](https://github.com/dctxmei/rofi-themes)*
+
+
+### Customizable Popup Widgets
+I aim to introduce a set of fully customizable popup widgets, similar to the features available in [EWW](https://github.com/elkowar/eww). These widgets will be highly configurable and adaptable to your needs, providing an enhanced and interactive way to manage your desktop environment.
+
+![Customizable Widgets Preview](https://raw.githubusercontent.com/adi1090x/widgets/main/previews/dashboard.png)
+*Image courtesy of [adi1090x](https://github.com/adi1090x/widgets)*
+
+### Custom Alt + Tab (Task Switching)
+An upgraded Alt + Tab system for task switching is on the horizon. This will offer a more visually appealing and functional experience, allowing for smoother transitions between open applications and windows.
+
+### Custom Virtual Desktops Viewer and Animations
+I’m also working on a custom virtual desktops viewer and dynamic animations to improve navigation between different workspaces. This will provide a more intuitive and immersive multitasking experience.
+
+Stay tuned for more updates as I develop these features. I appreciate your support and enthusiasm!
+
+Happy customizing!
+
+The Seelen UI Team
+
 ## Contributing
 
 We welcome contributions!
@@ -132,6 +160,3 @@ See the [LICENSE](LICENSE) file for details.
 ## Contact
 
 For inquiries and support, please contact me on [Discord](https://discord.gg/ABfASx5ZAJ).
-
-## Thank You
-Happy window managing and customization with Seelen UI!
