@@ -4,6 +4,7 @@ import { Colors } from './Colors';
 import { Themes } from './Themes';
 import { Wallpaper } from './Wallpaper';
 import { Select, Switch } from 'antd';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -14,6 +15,8 @@ import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 
 export function General() {
+  const [changingAutostart, setChangingAutostart] = useState(false);
+
   const autostartStatus = useSelector(RootSelectors.autostart);
   const language = useSelector(RootSelectors.language);
 
@@ -21,11 +24,13 @@ export function General() {
   const dispatch = useAppDispatch();
 
   const onAutoStart = async (value: boolean) => {
+    setChangingAutostart(true);
     if (value) {
       await startup.enable();
     } else {
       await startup.disable();
     }
+    setChangingAutostart(false);
     dispatch(RootActions.setAutostart(value));
   };
 
@@ -34,7 +39,7 @@ export function General() {
       <SettingsGroup>
         <SettingsOption>
           <span style={{ fontWeight: 600 }}>{t('general.startup')}</span>
-          <Switch onChange={onAutoStart} value={autostartStatus} />
+          <Switch onChange={onAutoStart} value={!!autostartStatus} loading={changingAutostart || autostartStatus === null} />
         </SettingsOption>
         <SettingsOption>
           <b>{t('general.language')}:</b>

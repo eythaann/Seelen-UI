@@ -4,6 +4,9 @@
 ### enhancements
 - avoid recreate already existing folders.
 
+### fix
+- can no disable run on startup.
+
 ## [1.9.7]
 ### enhancements
 - made all invoke handlers async

@@ -27,7 +27,7 @@ export interface RootState extends ISettings {
   availableThemes: Theme[];
   availableLayouts: Layout[];
   availablePlaceholders: Placeholder[];
-  autostart: boolean;
+  autostart: boolean | null;
   colors: UIColors;
   wallpaper: string | null;
 }

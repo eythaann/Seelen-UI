@@ -2,7 +2,7 @@ import { StateBuilder } from '../../../../../shared/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
 import i18n from '../../../../i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, pick } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
@@ -16,7 +16,7 @@ import { RootState } from '../domain';
 
 const initialState: RootState = {
   lastLoaded: null,
-  autostart: false,
+  autostart: null,
   route: Route.GENERAL,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
   seelenweg: SeelenWegSlice.getInitialState(),
@@ -63,10 +63,11 @@ export const RootSlice = createSlice({
     },
     restoreToLastLoaded: (state) => {
       if (state.lastLoaded) {
-        const newState = cloneDeep(state.lastLoaded);
-        newState.lastLoaded = cloneDeep(state.lastLoaded);
-        newState.route = state.route;
-        newState.colors = state.colors;
+        const toMaintain = pick(state, ['autostart', 'colors', 'lastLoaded']);
+        const newState = {
+          ...cloneDeep(state.lastLoaded),
+          ...toMaintain,
+        };
         i18n.changeLanguage(newState.language);
         return newState;
       }
