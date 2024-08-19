@@ -46,7 +46,7 @@
 
 ## Table of Contents
 - [Overview](#overview)
-- [Getting Started & Installation](#getting-started--installation)
+- [Installation](#installation)
   - [Microsoft Store (recommended)](#microsoft-store-emrecommendedem)
   - [Winget](#winget)
   - [.msix Installer](#msix-installer)
