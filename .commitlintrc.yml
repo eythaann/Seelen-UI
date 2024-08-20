@@ -13,6 +13,7 @@ rules:
     - "always"
     - [
         "feat", # New feature
+        "enh", # Enhancement of an existing feature
         "fix", # Bug fix
         "docs", # Documentation changes
         "style", # Code formatting, white spaces, etc.

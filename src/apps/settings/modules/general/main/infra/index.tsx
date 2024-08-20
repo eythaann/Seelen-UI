@@ -39,11 +39,17 @@ export function General() {
       <SettingsGroup>
         <SettingsOption>
           <span style={{ fontWeight: 600 }}>{t('general.startup')}</span>
-          <Switch onChange={onAutoStart} value={!!autostartStatus} loading={changingAutostart || autostartStatus === null} />
+          <Switch
+            onChange={onAutoStart}
+            value={!!autostartStatus}
+            loading={changingAutostart || autostartStatus === null}
+          />
         </SettingsOption>
         <SettingsOption>
           <b>{t('general.language')}:</b>
           <Select
+            showSearch
+            optionFilterProp="label"
             style={{ width: '200px' }}
             value={language}
             options={[...LanguageList]}

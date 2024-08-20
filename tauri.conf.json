@@ -47,7 +47,20 @@
         "sidebarImage": "static/icons/banner.bmp",
         "template": "templates/installer.nsi",
         "installMode": "perMachine",
-        "startMenuFolder": "Seelen"
+        "startMenuFolder": "Seelen",
+        "displayLanguageSelector": true,
+        "languages": [
+          "English",
+          "German",
+          "Spanish",
+          "French",
+          "Hindi",
+          "Portuguese",
+          "Japanese",
+          "Korean",
+          "SimpChinese",
+          "TradChinese"
+        ]
       }
     },
     "publisher": "Seelen",

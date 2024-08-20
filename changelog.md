@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add language selector to the nsis installer.
+- allow search on lang selector on Seelen UI Settings.
+
 ## [1.9.8]
 ### enhancements
 - avoid recreate already existing folders.

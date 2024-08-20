@@ -27,21 +27,26 @@ pub struct Settings {
     /// enable or disable dev tools tab in settings
     pub dev_tools: bool,
     /// language to use, if null the system locale is used
-    pub language: Option<String>,
+    pub language: String,
 }
 
 impl Default for Settings {
     fn default() -> Self {
+        let language = match sys_locale::get_locale() {
+            Some(l) => l.split('-').next().unwrap_or("en").to_string(),
+            None => "en".to_string(),
+        };
+
         Self {
             ahk_enabled: true,
             selected_theme: vec!["default".to_string()],
-            language: None, // default language is added in the webview using system locale
             monitors: vec![Monitor::default()],
             fancy_toolbar: FancyToolbarSettings::default(),
             seelenweg: SeelenWegSettings::default(),
             window_manager: WindowManagerSettings::default(),
             ahk_variables: AhkVarList::default(),
             dev_tools: false,
+            language,
         }
     }
 }
