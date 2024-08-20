@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.9]
 ### refactored
 - internal interfaces to improve documentation and development.
 
