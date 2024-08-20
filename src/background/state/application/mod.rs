@@ -35,9 +35,10 @@ use crate::{
 use super::domain::{AppConfig, Placeholder, Settings, Theme, WegItems};
 
 lazy_static! {
-    pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee(
+    pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
+        log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
-    ));
+    }));
 }
 
 #[derive(Getters, Debug, Clone, Serialize)]
@@ -217,17 +218,20 @@ impl FullState {
 
     fn load_settings(&mut self) -> Result<()> {
         let path = self.settings_path();
-        self.settings = Self::get_settings_from_path(path)?;
+        if path.exists() {
+            self.settings = Self::get_settings_from_path(path)?;
+        } else {
+            // save current/default settings
+            self.save_settings()?;
+        }
         Ok(())
     }
 
     fn load_weg_items(&mut self) -> Result<()> {
         let path = self.data_dir.join("seelenweg_items.yaml");
-        self.weg_items = if !path.exists() {
-            serde_yaml::Value::Null
-        } else {
-            serde_yaml::from_str(&std::fs::read_to_string(&path)?)?
-        };
+        if path.exists() {
+            self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?
+        }
         Ok(())
     }
 
@@ -393,7 +397,10 @@ impl FullState {
     }
 
     pub fn save_settings(&self) -> Result<()> {
-        std::fs::write(self.settings_path(), serde_json::to_string(&self.settings)?)?;
+        std::fs::write(
+            self.settings_path(),
+            serde_json::to_string_pretty(&self.settings)?,
+        )?;
         Ok(())
     }
 

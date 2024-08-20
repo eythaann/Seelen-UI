@@ -13,7 +13,7 @@ import { useDispatch } from 'react-redux';
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
 import { DeviceModule } from '../Device/infra';
-import { Item } from '../item/infra';
+import { GenericItem, Item } from '../item/infra';
 import { MediaModule } from '../media/infra/Module';
 import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';
@@ -24,8 +24,8 @@ import { RootActions } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
 
 const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
-  [ToolbarModuleType.Generic]: Item,
   [ToolbarModuleType.Text]: Item,
+  [ToolbarModuleType.Generic]: GenericItem,
   [ToolbarModuleType.Date]: DateModule,
   [ToolbarModuleType.Power]: PowerModule,
   [ToolbarModuleType.Settings]: SettingsModule,

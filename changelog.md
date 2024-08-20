@@ -1,9 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### refactored
+- internal interfaces to improve documentation and development.
+
 ### enhancements
 - add language selector to the nsis installer.
 - allow search on lang selector on Seelen UI Settings.
+
+### fix
+- app no opening to new users.
 
 ## [1.9.8]
 ### enhancements

@@ -1,11 +1,11 @@
 import { exposedIcons, Icon, IconName } from '../../../shared/components/Icon';
-import { ToolbarModule } from '../../../shared/schemas/Placeholders';
+import { GenericToolbarModule, ToolbarModule } from '../../../shared/schemas/Placeholders';
 import { cx } from '../../../shared/styles';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { cloneDeep } from 'lodash';
-import { evaluate } from 'mathjs';
+import { evaluate, isResultSet } from 'mathjs';
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -128,9 +128,15 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
 }
 
 export function ElementsFromEvaluated(content: any) {
-  let text: string = content;
+  let text: string = '';
 
-  if (typeof content !== 'string') {
+  if (typeof content === 'string') {
+    text = content;
+  } else if (isResultSet(content)) {
+    text = content.entries.reduce((acc: string, current: any) => {
+      return `${acc}${typeof current === 'string' ? current : JSON.stringify(current)}`;
+    }, '');
+  } else {
     text = JSON.stringify(content);
   }
 
@@ -155,11 +161,6 @@ export function Item(props: Props) {
 
   const [mounted, setMounted] = React.useState(false);
   const env = useSelector(Selectors.env);
-  const window = useSelector(Selectors.focused) || {
-    name: 'None',
-    title: 'No Window Focused',
-    exe: null,
-  };
 
   const { t } = useTranslation();
   const scope = useRef(new Scope());
@@ -180,14 +181,13 @@ export function Item(props: Props) {
   }
 
   scope.current.set('t', t);
-  scope.current.set('window', { ...window });
   if (extraVars) {
     Object.keys(extraVars).forEach((key) => {
       scope.current.set(key, extraVars[key]);
     });
   }
 
-  const elements = ElementsFromEvaluated(evaluate(template, scope.current));
+  const elements = template ? ElementsFromEvaluated(evaluate(template, scope.current)) : [];
   if (!elements.length && !children) {
     return null;
   }
@@ -229,4 +229,13 @@ export function Item(props: Props) {
       </Reorder.Item>
     </Tooltip>
   );
+}
+
+export function GenericItem({ module }: { module: GenericToolbarModule }) {
+  const window = useSelector(Selectors.focused) || {
+    name: 'None',
+    title: 'No Window Focused',
+    exe: null,
+  };
+  return <Item module={module} extraVars={{ window }} />;
 }
