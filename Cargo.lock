@@ -4385,7 +4385,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-ui"
-version = "1.9.7"
+version = "1.9.8"
 dependencies = [
  "arc-swap",
  "base64 0.22.1",

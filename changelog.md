@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.8]
 ### enhancements
 - avoid recreate already existing folders.
 - separate lib and app in two crates.
