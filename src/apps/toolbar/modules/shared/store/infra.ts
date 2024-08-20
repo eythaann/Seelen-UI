@@ -101,29 +101,26 @@ export async function registerStoreEvents() {
     loadThemeCSS(userSettings);
   });
 
-  await listenGlobal(
-    FileChange.Placeholders,
-    async () => {
-      if (IsSavingCustom.current) {
-        IsSavingCustom.current = false;
-        return;
-      }
-      const userSettings = await new UserSettingsLoader().withPlaceholders().load();
-      setPlaceholder(userSettings);
-    },
-  );
+  await listenGlobal(FileChange.Placeholders, async () => {
+    if (IsSavingCustom.current) {
+      IsSavingCustom.current = false;
+      return;
+    }
+    const userSettings = await new UserSettingsLoader().withPlaceholders().load();
+    setPlaceholder(userSettings);
+  });
 
   await view.emitTo(view.label, 'store-events-ready');
 }
 
 function setPlaceholder(userSettings: UserSettings) {
   const settings = userSettings.jsonSettings.fancyToolbar;
-  const placeholder =
-    userSettings.placeholders.find(
+  const placeholder = settings.placeholder
+    ? userSettings.placeholders.find(
       (placeholder) => placeholder.info.filename === settings.placeholder,
-    ) || null;
-
-  store.dispatch(RootActions.setPlaceholder(placeholder));
+    )
+    : null;
+  store.dispatch(RootActions.setPlaceholder(placeholder || userSettings.placeholders[0] || null));
 }
 
 export async function loadStore() {

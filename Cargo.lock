@@ -4381,6 +4381,7 @@ dependencies = [
  "serde_json",
  "serde_yaml",
  "sys-locale",
+ "uuid",
  "windows 0.57.0",
 ]
 

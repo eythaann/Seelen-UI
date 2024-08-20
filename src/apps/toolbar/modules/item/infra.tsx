@@ -158,6 +158,7 @@ export function Item(props: Props) {
   const window = useSelector(Selectors.focused) || {
     name: 'None',
     title: 'No Window Focused',
+    exe: null,
   };
 
   const { t } = useTranslation();

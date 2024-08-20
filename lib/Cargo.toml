@@ -11,6 +11,7 @@ serde_alias = "0.0.2"
 schemars = "0.8.21"
 regex = "1.10.4"
 sys-locale = "0.3.1"
+uuid = "1.8.0"
 
 [dependencies.windows]
 version = "=0.57.0"

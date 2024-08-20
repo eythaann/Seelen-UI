@@ -10,17 +10,41 @@ export interface ActiveApp {
   exe: string | null;
 }
 
+/** https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status */
 export interface PowerStatus {
-  ACLineStatus: number;
-  BatteryFlag: number;
-  BatteryLifePercent: number;
-  SystemStatusFlag: number;
-  BatteryLifeTime: number;
-  BatteryFullLifeTime: number;
+  acLineStatus: number;
+  batteryFlag: number;
+  batteryLifePercent: number;
+  systemStatusFlag: number;
+  batteryLifeTime: number;
+  batteryFullLifeTime: number;
 }
 
 export interface Battery {
-  percent: number;
+  // Static info
+  vendor: string | null;
+  model: string | null;
+  serialNumber: string | null;
+  technology: string;
+
+  // Common information
+  state: string;
+  capacity: number;
+  temperature: number | null;
+  percentage: number;
+  cycleCount: number | null;
+  smartCharging: boolean;
+
+  // Energy stats
+  energy: number;
+  energyFull: number;
+  energyFullDesign: number;
+  energyRate: number;
+  voltage: number;
+
+  // Charge stats
+  timeToFull: number | null;
+  timeToEmpty: number | null;
 }
 
 export interface TrayInfo {
@@ -29,6 +53,13 @@ export interface TrayInfo {
 }
 
 export interface NetworkAdapter {
+  name: string;
+  description: string;
+  status: 'up' | 'down';
+  dnsSuffix: string;
+  type: string;
+  gateway: string | null;
+  mac: string;
   ipv4: string | null;
   ipv6: string | null;
 }

@@ -1,7 +1,6 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../shared/schemas';
 import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
-import { ParsePlaceholder } from '../../../../shared/schemas/Placeholders';
 import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
@@ -76,23 +75,6 @@ async function loadUserLayouts(ref: UserSettings) {
   }
 }
 
-async function loadUserPlaceholders(ref: UserSettings) {
-  const selectedPlaceholder = ref.jsonSettings.fancyToolbar.placeholder;
-
-  const rawPlaceholders: any[] = await invoke('state_get_placeholders');
-  for (const rawPlaceholder of rawPlaceholders) {
-    let placeholder = ParsePlaceholder(rawPlaceholder);
-    if (placeholder) {
-      ref.placeholders.push(placeholder);
-    }
-  }
-
-  let usingPlaceholder = ref.placeholders.find((x) => x.info.filename === selectedPlaceholder);
-  if (!usingPlaceholder) {
-    ref.jsonSettings.fancyToolbar.placeholder = ref.placeholders[0]?.info.filename || null;
-  }
-}
-
 export class UserSettingsLoader {
   private _withUserApps: boolean = false;
   private _withLayouts: boolean = false;
@@ -151,7 +133,7 @@ export class UserSettingsLoader {
     }
 
     if (this._withPlaceholders) {
-      await loadUserPlaceholders(userSettings);
+      userSettings.placeholders = await invoke('state_get_placeholders');
     }
 
     if (this._withWallpaper) {
@@ -164,10 +146,15 @@ export class UserSettingsLoader {
 
 export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
   const json_route = await resolveDataPath('settings.json');
-  await fs.writeTextFile(json_route, JSON.stringify(VariableConvention.fromCamelToSnake(settings), null, 2));
+  await fs.writeTextFile(
+    json_route,
+    JSON.stringify(VariableConvention.fromCamelToSnake(settings), null, 2),
+  );
 }
 
-export async function saveUserSettings(settings: Pick<UserSettings, 'jsonSettings' | 'yamlSettings'>) {
+export async function saveUserSettings(
+  settings: Pick<UserSettings, 'jsonSettings' | 'yamlSettings'>,
+) {
   const yaml_route = await resolveDataPath('applications.yml');
   await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
   await saveJsonSettings(settings.jsonSettings);

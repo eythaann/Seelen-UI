@@ -9,6 +9,7 @@ use notify_debouncer_full::{
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
+use seelen_core::state::WindowManagerLayout;
 use serde::Serialize;
 use std::{
     collections::{HashMap, VecDeque},
@@ -59,6 +60,8 @@ pub struct FullState {
     #[getset(get = "pub")]
     placeholders: HashMap<String, Placeholder>,
     #[getset(get = "pub")]
+    layouts: HashMap<String, WindowManagerLayout>,
+    #[getset(get = "pub")]
     weg_items: WegItems,
 }
 
@@ -77,6 +80,7 @@ impl FullState {
             settings_by_app: VecDeque::new(),
             themes: HashMap::new(),
             placeholders: HashMap::new(),
+            layouts: HashMap::new(),
             weg_items: serde_yaml::Value::Null,
         };
         manager.load_all()?;
@@ -313,6 +317,13 @@ impl FullState {
                 }
             }
         }
+
+        if let Some(selected) = &self.settings.fancy_toolbar.placeholder {
+            if !self.placeholders.contains_key(selected) {
+                self.settings.fancy_toolbar.placeholder = Some("default.yml".to_owned());
+            }
+        }
+
         Ok(())
     }
 

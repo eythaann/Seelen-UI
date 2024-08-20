@@ -61,7 +61,6 @@ pub struct AppIdentifier {
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
-#[allow(dead_code)]
 pub struct AppConfig {
     pub name: String,
     pub category: Option<String>,

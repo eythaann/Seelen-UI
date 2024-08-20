@@ -11,12 +11,14 @@ use windows::Win32::{
 use crate::error_handler::{AppError, Result};
 
 #[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub enum AdapterStatus {
     Up,
     Down,
 }
 
 #[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct NetworkAdapter {
     // General information
     name: String,

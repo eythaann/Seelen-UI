@@ -5,24 +5,25 @@ use crate::error_handler::{AppError, Result};
 
 #[allow(non_snake_case)]
 #[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PowerStatus {
-    pub ACLineStatus: u8,
-    pub BatteryFlag: u8,
-    pub BatteryLifePercent: u8,
-    pub SystemStatusFlag: u8,
-    pub BatteryLifeTime: u32,
-    pub BatteryFullLifeTime: u32,
+    pub ac_line_status: u8,
+    pub battery_flag: u8,
+    pub battery_life_percent: u8,
+    pub system_status_flag: u8,
+    pub battery_life_time: u32,
+    pub battery_full_life_time: u32,
 }
 
 impl From<SYSTEM_POWER_STATUS> for PowerStatus {
     fn from(power_status: SYSTEM_POWER_STATUS) -> Self {
         Self {
-            ACLineStatus: power_status.ACLineStatus,
-            BatteryFlag: power_status.BatteryFlag,
-            BatteryLifePercent: power_status.BatteryLifePercent,
-            SystemStatusFlag: power_status.SystemStatusFlag,
-            BatteryLifeTime: power_status.BatteryLifeTime,
-            BatteryFullLifeTime: power_status.BatteryFullLifeTime,
+            ac_line_status: power_status.ACLineStatus,
+            battery_flag: power_status.BatteryFlag,
+            battery_life_percent: power_status.BatteryLifePercent,
+            system_status_flag: power_status.SystemStatusFlag,
+            battery_life_time: power_status.BatteryLifeTime,
+            battery_full_life_time: power_status.BatteryFullLifeTime,
         }
     }
 }

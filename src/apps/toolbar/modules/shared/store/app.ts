@@ -14,12 +14,12 @@ const initialState: RootState = {
   env: {},
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
-    ACLineStatus: 255,
-    BatteryFlag: 255,
-    BatteryLifePercent: 255,
-    SystemStatusFlag: 0,
-    BatteryLifeTime: -1,
-    BatteryFullLifeTime: -1,
+    acLineStatus: 255,
+    batteryFlag: 255,
+    batteryLifePercent: 255,
+    systemStatusFlag: 0,
+    batteryLifeTime: -1,
+    batteryFullLifeTime: -1,
   },
   batteries: [],
   workspaces: [],

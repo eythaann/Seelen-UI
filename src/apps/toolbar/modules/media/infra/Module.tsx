@@ -13,10 +13,27 @@ interface Props {
 }
 
 function MediaModuleItem({ module, ...rest }: Props) {
-  const { volume = 0, muted: isMuted = false } =
-    useSelector((state: any) => Selectors.mediaOutputs(state).find((d) => d.is_default_multimedia)) || {};
+  const { volume = 0, muted: isMuted = true } =
+    useSelector((state: any) =>
+      Selectors.mediaOutputs(state).find((d) => d.is_default_multimedia),
+    ) || {};
 
-  return <Item {...rest} extraVars={{ volume, isMuted }} module={module} />;
+  const { volume: inputVolume = 0, muted: inputIsMuted = true } =
+    useSelector((state: any) =>
+      Selectors.mediaInputs(state).find((d) => d.is_default_multimedia),
+    ) || {};
+
+  const mediaSession = useSelector((state: any) =>
+    Selectors.mediaSessions(state).find((d) => d.default),
+  ) || null;
+
+  return (
+    <Item
+      {...rest}
+      extraVars={{ volume, isMuted, inputVolume, inputIsMuted, mediaSession }}
+      module={module}
+    />
+  );
 }
 
 export function MediaModule({ module }: Props) {
