@@ -24,9 +24,9 @@ header:
 start:
   title: 欢迎！
   message: >-
-    欢迎使用 Seelen UI，这是一个终极的桌面环境，集成了窗口平铺管理器，以增强你的 Windows 11 体验！
+    欢迎使用 Seelen UI，这是一个终极的桌面环境，集成了窗口平铺管理器，以增强您的 Windows 11 体验！
     通过我们的直观界面和高级功能，探索一个新的效率和多任务时代。
-  message_accent: 用风格优化你的生产力！
+  message_accent: 用风格优化您的生产力！
 general:
   startup: 开机启动？
   language: 语言
@@ -97,7 +97,7 @@ apps_configurations:
   swap: 交换
   new: 新建
   bundled_title: Seelen 捆绑的应用配置
-  bundled_msg: 这些捆绑配置不可编辑，旨在为你提供最佳体验而无需定制。它们会自动配置最常用的应用程序。
+  bundled_msg: 这些捆绑配置不可编辑，旨在为您提供最佳体验而无需定制。它们会自动配置最常用的应用程序。
   confirm_delete_title: 确认删除
   confirm_delete: 确认要删除此配置吗？
   search: 搜索
@@ -140,7 +140,7 @@ extras:
   exit: 退出/退出
 shortcuts:
   enable: 启用集成快捷键 (ahk)
-  enable_tooltip: 如果你将使用 Seelen Core API 实现自己的快捷键，请禁用此项
+  enable_tooltip: 如果您将使用 Seelen Core API 实现自己的快捷键，请禁用此项
   labels:
     reserve_top: 保留顶部
     reserve_bottom: 保留底部
