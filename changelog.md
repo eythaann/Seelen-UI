@@ -8,7 +8,8 @@
 - improve interfaces and documentation.
 
 ### fix
-- styles of media module when dock is on left side
+- styles of media module when dock is on left side.
+- opened apps been removing on weg items file change.
 
 ## [1.9.9]
 ### refactored

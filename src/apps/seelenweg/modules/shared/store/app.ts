@@ -164,10 +164,6 @@ export const RootSlice = createSlice({
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
       const app = action.payload;
 
-      if (state.openApps[app.hwnd]) {
-        return;
-      }
-
       state.openApps[app.hwnd] = app;
 
       const appFilename = app.exe.split('\\').pop();
@@ -183,7 +179,9 @@ export const RootSlice = createSlice({
           )) as SwPinnedApp | undefined;
 
         if (pinedApp) {
-          pinedApp.opens.push(app.hwnd);
+          if (!pinedApp.opens.includes(app.hwnd)) {
+            pinedApp.opens.push(app.hwnd);
+          }
 
           if (pinedApp.exe !== app.exe) {
             pinedApp.exe = app.exe;

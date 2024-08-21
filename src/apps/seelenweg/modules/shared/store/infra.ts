@@ -117,9 +117,27 @@ export async function registerStoreEvents() {
     }
 
     const apps = await loadPinnedItems();
-    store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
-    store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
-    store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
+    let state = store.getState();
+
+    const leftItems = [
+      ...(await cleanSavedItems(apps.left)),
+      ...state.itemsOnLeft.filter((item) => item.type === SwItemType.TemporalApp),
+    ];
+
+    const centerItems = [
+      ...(await cleanSavedItems(apps.center)),
+      ...state.itemsOnCenter.filter((item) => item.type === SwItemType.TemporalApp),
+    ];
+
+    const rightItems = [
+      ...(await cleanSavedItems(apps.right)),
+      ...state.itemsOnRight.filter((item) => item.type === SwItemType.TemporalApp),
+    ];
+
+    store.dispatch(RootActions.setItemsOnLeft(leftItems));
+    store.dispatch(RootActions.setItemsOnCenter(centerItems));
+    store.dispatch(RootActions.setItemsOnRight(rightItems));
+    await view.emitTo(view.label, 'request-all-open-apps');
   });
 
   await listenGlobal<any>(FileChange.Settings, async () => {
@@ -127,7 +145,7 @@ export async function registerStoreEvents() {
     updateHitbox();
   });
 
-  await view.emitTo(view.label, 'store-events-ready');
+  await view.emitTo(view.label, 'request-all-open-apps');
 }
 
 function loadSettingsCSS(settings: Seelenweg) {

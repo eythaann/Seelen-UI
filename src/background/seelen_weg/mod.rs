@@ -405,10 +405,10 @@ impl SeelenWeg {
         });
 
         let label = window.label().to_string();
-        window.once("store-events-ready", move |_| {
+        window.listen("request-all-open-apps", move |_| {
             let handler = get_app_handle();
             let apps = &*OPEN_APPS.lock();
-            log_error!(handler.emit_to(label, "add-multiple-open-apps", apps));
+            log_error!(handler.emit_to(&label, "add-multiple-open-apps", apps));
         });
         Ok((window, hitbox))
     }
