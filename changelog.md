@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.10]
 ### features
 - add `getIcon` fn to the scopes of toolbar placeholders.
 
