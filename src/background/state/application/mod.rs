@@ -9,7 +9,7 @@ use notify_debouncer_full::{
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
-use seelen_core::state::WindowManagerLayout;
+use seelen_core::state::{WegItems, WindowManagerLayout};
 use serde::Serialize;
 use std::{
     collections::{HashMap, VecDeque},
@@ -32,7 +32,7 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-use super::domain::{AppConfig, Placeholder, Settings, Theme, WegItems};
+use super::domain::{AppConfig, Placeholder, Settings, Theme};
 
 lazy_static! {
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
@@ -82,7 +82,7 @@ impl FullState {
             themes: HashMap::new(),
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
-            weg_items: serde_yaml::Value::Null,
+            weg_items: WegItems::default(),
         };
         manager.load_all()?;
         manager.start_listeners()?;

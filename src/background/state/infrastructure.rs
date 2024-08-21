@@ -1,13 +1,13 @@
 use std::path::PathBuf;
 
 use itertools::Itertools;
-use seelen_core::state::WindowManagerLayout;
+use seelen_core::state::{WegItems, WindowManagerLayout};
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
 use super::{
     application::{FullState, FULL_STATE},
-    domain::{AppConfig, Placeholder, Settings, Theme, WegItems},
+    domain::{AppConfig, Placeholder, Settings, Theme},
 };
 
 #[tauri::command(async)]

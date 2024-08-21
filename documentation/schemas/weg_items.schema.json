@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Array_of_WegItem",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/WegItem"
+  },
+  "definitions": {
+    "WegItem": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "exe",
+            "execution_path",
+            "type"
+          ],
+          "properties": {
+            "exe": {
+              "description": "executable path",
+              "type": "string"
+            },
+            "execution_path": {
+              "description": "command to open the app using explorer.exe (uwp apps starts with `shell:AppsFolder`)",
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "PinnedApp"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "TemporalPin"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Separator"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Media"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "StartMenu"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
