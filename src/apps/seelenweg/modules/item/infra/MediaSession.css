@@ -5,14 +5,21 @@
 
 .media-session {
   display: grid;
-  grid-template-columns: var(--config-item-size) 1fr;
-  height: var(--config-item-size);
-  width: calc(
-    var(--config-item-size) * 3 + var(--config-space-between-items) * 2
-  ); /* 3 items + 2 spaces between */
   position: relative;
   overflow: hidden;
   border-radius: 10px;
+
+  .horizontal & {
+    grid-template-columns: var(--config-item-size) 1fr;
+    height: var(--config-item-size);
+    width: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+  }
+
+  .vertical & {
+    grid-template-rows: var(--config-item-size) 1fr;
+    height: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
+    width: var(--config-item-size);
+  }
 
   .media-session-thumbnail {
     z-index: 2;
@@ -41,16 +48,30 @@
 
     .media-session-title {
       font-size: 0.7rem;
-      line-height: 1rem;
       font-weight: 600;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
       max-width: 100%;
+      margin-top: -3px;
+      margin-right: -2px;
+
+      .vertical & {
+        display: none;
+      }
     }
 
     .media-session-actions {
-      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+
+      .vertical & {
+        flex-direction: column;
+        gap: 12px;
+      }
+
       .ant-btn {
         color: inherit !important;
         height: 16px;

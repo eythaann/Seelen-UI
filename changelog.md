@@ -7,6 +7,9 @@
 ### refactored
 - improve interfaces and documentation.
 
+### fix
+- styles of media module when dock is on left side
+
 ## [1.9.9]
 ### refactored
 - internal interfaces to improve documentation and development.
