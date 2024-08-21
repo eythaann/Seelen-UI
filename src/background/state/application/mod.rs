@@ -222,6 +222,9 @@ impl FullState {
             Some(ext) if ext == "json" => {
                 let mut settings: Settings =
                     serde_json::from_str(&std::fs::read_to_string(&path)?)?;
+                settings.language = settings
+                    .language
+                    .or_else(|| Some(Settings::get_system_language()));
                 settings.window_manager.enabled =
                     settings.window_manager.enabled && is_virtual_desktop_supported();
                 Ok(settings)

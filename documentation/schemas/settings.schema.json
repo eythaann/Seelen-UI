@@ -223,7 +223,10 @@
     "language": {
       "description": "language to use, if null the system locale is used",
       "default": "en",
-      "type": "string"
+      "type": [
+        "string",
+        "null"
+      ]
     },
     "monitors": {
       "description": "list of monitors",

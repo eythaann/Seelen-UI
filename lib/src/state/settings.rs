@@ -27,16 +27,11 @@ pub struct Settings {
     /// enable or disable dev tools tab in settings
     pub dev_tools: bool,
     /// language to use, if null the system locale is used
-    pub language: String,
+    pub language: Option<String>,
 }
 
 impl Default for Settings {
     fn default() -> Self {
-        let language = match sys_locale::get_locale() {
-            Some(l) => l.split('-').next().unwrap_or("en").to_string(),
-            None => "en".to_string(),
-        };
-
         Self {
             ahk_enabled: true,
             selected_theme: vec!["default".to_string()],
@@ -46,7 +41,16 @@ impl Default for Settings {
             window_manager: WindowManagerSettings::default(),
             ahk_variables: AhkVarList::default(),
             dev_tools: false,
-            language,
+            language: Some(Self::get_system_language()),
+        }
+    }
+}
+
+impl Settings {
+    pub fn get_system_language() -> String {
+        match sys_locale::get_locale() {
+            Some(l) => l.split('-').next().unwrap_or("en").to_string(),
+            None => "en".to_string(),
         }
     }
 }

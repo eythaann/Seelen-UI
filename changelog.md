@@ -10,6 +10,7 @@
 ### fix
 - styles of media module when dock is on left side.
 - opened apps been removing on weg items file change.
+- app crashing on update if language prop was null in the settings.json file.
 
 ## [1.9.9]
 ### refactored
