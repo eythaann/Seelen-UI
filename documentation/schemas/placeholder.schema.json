@@ -109,7 +109,7 @@
           ],
           "properties": {
             "badge": {
-              "description": "Badge will be displayed over the item, useful as notifications.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string ```",
+              "description": "Badge will be displayed over the item, useful as notifications.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function getIcon(name: string, size: number = 16): string function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string function t(path: string): string ```",
               "type": [
                 "string",
                 "null"
@@ -130,7 +130,7 @@
               ]
             },
             "onClickV2": {
-              "description": "This code will be parsed and executed when the item is clicked.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string ```",
+              "description": "This code will be parsed and executed when the item is clicked.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function getIcon(name: string, size: number = 16): string function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string function t(path: string): string ```",
               "type": [
                 "string",
                 "null"
@@ -152,12 +152,12 @@
               }
             },
             "template": {
-              "description": "Content to display in the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string ```",
+              "description": "Content to display in the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function getIcon(name: string, size: number = 16): string function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string function t(path: string): string ```",
               "default": "",
               "type": "string"
             },
             "tooltip": {
-              "description": "Content to display in tooltip of the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string ```",
+              "description": "Content to display in tooltip of the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Base Item Scope Have all icons defined on [React Icons](https://react-icons.github.io/react-icons) as properties of the object. ```js const icon: object; ``` Haves all environment variables defined on the system as properties of the object. ```js const env: object; ``` Functions to add images to the item. ```js function getIcon(name: string, size: number = 16): string function imgFromUrl (url: string, size: number = 16): string function imgFromPath (path: string, size: number = 16): string function imgFromExe (exe_path: string, size: number = 16): string function t(path: string): string ```",
               "type": [
                 "string",
                 "null"

@@ -95,9 +95,11 @@ common_item! {
     /// ```
     /// Functions to add images to the item.
     /// ```js
+    /// function getIcon(name: string, size: number = 16): string
     /// function imgFromUrl (url: string, size: number = 16): string
     /// function imgFromPath (path: string, size: number = 16): string
     /// function imgFromExe (exe_path: string, size: number = 16): string
+    /// function t(path: string): string
     /// ```
     struct TextToolbarItem {}
 

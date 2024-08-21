@@ -39,6 +39,10 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
   static iconPrefix = 'ICON:';
   static exePrefix = 'EXE:';
 
+  static getIcon(name: string, size = 16) {
+    return `[ICON:${name}:${size}]`;
+  }
+
   static imgFromUrl(url: string, size = 16) {
     if (!url) {
       return '';
@@ -170,6 +174,8 @@ export function Item(props: Props) {
 
     scope.current.set('icon', cloneDeep(exposedIcons));
     scope.current.set('env', cloneDeep(env));
+
+    scope.current.set('getIcon', StringToElement.getIcon);
     scope.current.set('imgFromUrl', StringToElement.imgFromUrl);
     scope.current.set('imgFromPath', StringToElement.imgFromPath);
     scope.current.set('imgFromExe', StringToElement.imgFromExe);

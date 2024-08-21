@@ -44,12 +44,12 @@ interface Props {
 const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
-function componentByModule(module: ToolbarModule) {
+function componentByModule(module: ToolbarModule, idx: number) {
   let Component = modulesByType[module.type];
   if (!Component) {
     return null;
   }
-  return <Component key={module.id} module={module} />;
+  return <Component key={module.id || module.template || idx} module={module} />;
 }
 
 export function ToolBar({ structure }: Props) {

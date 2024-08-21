@@ -1,55 +1,201 @@
-# Seelen UI - Toolbar
+# Seelen UI Toolbar - Layouts and Customization
+
+> **Warning:** Do not modify the files in the installation directory. These files are overwritten with each update. To make custom changes, please follow the next guide.
+
+Seelen UI allows you to fully customize your desktop environment, including the toolbar. The toolbar, also known as the "placeholder," can be configured using YAML files and tailored to your needs with various dynamic elements. This document guides you through customizing and managing toolbar items, outlining the available scopes, and providing examples.
 
 ## Placeholders
-The toolbar layout, also known as "placeholder," can be defined in a YAML file, adhering to the [placeholder schema](./schemas/placeholder.schema.json) and customized using Themes.
 
-To create a Toolbar module, follow this structure:
+The toolbar layout, referred to as the "placeholder," is defined in a YAML file that follows the [placeholder schema](./schemas/placeholder.schema.json). It can be personalized using Themes.
+
+Example:
 
 ```yaml
 left:
   - type: text
     template: concat("@", env.USERNAME)
-    onClick: open -> env.USERPROFILE
+    onClickV2: open(env.USERPROFILE)
     tooltip: '"Open user folder"'
+    style:
+      fontSize: 24
+      fontWeight: bold
 ```
 
-Note that `template`, `tooltip` and `onClick` function bodies are defined as code. This code will be evaluated at runtime using the [mathjs](https://mathjs.org/) evaluate function, similar to how Conditional Layouts work.
+## Location of Placeholder Files
 
-Also, observe that to write literal strings, you must use double quotes.
+Placeholder files must be in `.yml` or `.yaml`. The file should be located in the following directory:
+
+```text
+C:\Users{USER}\AppData\Roaming\com.seelen.seelen-ui\placeholders
+└── YourPlaceholderFile.yml
+```
+
+**Note:** The file name is used as the identifier for the placeholder configuration.
+
+### Details
+
+- **style**: The `style` property follows the React `style` prop conventions. For more details, refer to the [React style documentation](https://reactjs.org/docs/dom-elements.html#style).
+- **id**: The `id` field is used as the HTML element ID in the DOM, allowing you to apply specific styles via CSS. For general styling within the item, use the `style` property. For more advanced customizations, refer to the [themes documentation](./documentation/themes.md).
+
+## How to Use and Edit Placeholders in Seelen UI
+
+Seelen UI allows you to display dynamic information in the toolbar using placeholders. These placeholders are configured based on toolbar items, each with its own `scope` that provides access to various system properties and functions. Below is a guide on how to use them.
+
+### Base Structure of a Toolbar Item
+
+All toolbar items share a base structure that includes properties like `id`, `template`, `tooltip`, `badge`, `onClick`, `onClickV2`, and `style`, other specific properties are available for each item type, declared in the [placeholder schema](./schemas/placeholder.schema.json).
+
+> **Deprecated**: The `onClick` property is deprecated and will be removed in future versions. Please use `onClickV2` instead.
+
+### Code in YAML
+
+In Seelen UI, `template`, `tooltip`, `badge`, and `onClickV2` function bodies are defined as code. This code is evaluated at runtime using the [mathjs](https://mathjs.org/) evaluate function, similar to how Conditional Layouts operate.
+
+When writing literal strings in YAML, use double quotes:
 
 ```yaml
  tooltip: '"Open user folder"'
 ```
 
-## Evaluation Scope
+#### TextToolbarItem: The Base Scope
 
-When we say "each type has its own evaluation scope," we refer to how variables and functions within each type are accessible and interact during runtime.
+The `TextToolbarItem` serves as the foundation for all other items. The scope available to `TextToolbarItem` is also applicable to all other modules. This scope includes:
 
-In the context of the Toolbar Widget documentation, each type (such as generic or text, date, and power) has its own set of variables that it can access and manipulate. These variables and functions are defined within the scope of each type, meaning they are accessible and meaningful only within that particular type.
+```ts
+const icon: object; // All icons defined in React Icons
+const env: object;  // All environment variables defined on the system
 
-Therefore, by stating that "each type has its own evaluation scope," we emphasize that the variables and functions defined within each type are isolated and tailored to the specific functionality and requirements of that type within the Toolbar Widget.
+function getIcon(name: string, size: number = 16): string
 
-| Type | Scope |
-| ---- | ----- |
-| `generic` or `text` | `icon`, `window`, `env` |
-| `date` | `icon`, `window`, `env`, `date` |
-| `power` | `icon`, `window`, `env`, `power` |
+function imgFromUrl(url: string, size: number = 16): string
+function imgFromPath(path: string, size: number = 16): string
+function imgFromExe(exe_path: string, size: number = 16): string
 
-### Generic Module
-**Scope:** `icon` is a object of all available icons in [react-icons](https://react-icons.github.io/react-icons/), `env` is the current environment, and `window` is the current focused window.
+/**
+ * The next function is used to get a specific text by the used language.
+ * As example: `t("placeholder.notifications")`
+*/
+function t(path: string): string
+```
 
+### Available Scopes
 
-### Date Module
-**Scope:** The `date` variable represents the current date and time as a string, formatted according to the specified format in the `format` property of the Module.
+Each type of item has a specific scope that extends the properties and functions available. Below are the scopes for each item type.
 
-**Format:** is a string to parse the date in a specific format, follow the next guide of [moment-js](https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/)
+#### GenericToolbarItem Scope
 
-### Power Module
-**Scope:** The `power` variable has available the same properties exposed in the [win32 SYSTEM_POWER_STATUS interface](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status)
+This scope includes information about the currently focused window:
 
-## Icons in Templates
-### `icon.Name` vs `"[ICON:Name:12]"`
+```ts
+const window: {
+    name: string;
+    title: string;
+    exe: string | null;
+};
+```
 
-When it comes to icons, you have two options: using the variable `icon.Name` or the string `"[ICON:Name:12]"`. 
+#### DateToolbarItem Scope
 
-It's important to note that `icon.Name` will be internally converted to `"[ICON:Name]"`. You can use whichever you prefer; the only difference is that with the quoted version, you can specify the size of the icon in pixels.
+This scope allows you to display the formatted date and configure the update interval:
+
+```ts
+const date: string; // The formatted date
+```
+
+#### PowerToolbarItem Scope
+
+This scope includes information about power status and battery details:
+
+```ts
+interface PowerStatus {
+    acLineStatus: number;
+    batteryFlag: number;
+    batteryLifePercent: number;
+    systemStatusFlag: number;
+    batteryLifeTime: number;
+    batteryFullLifeTime: number;
+}
+
+interface Battery {
+    vendor: string | null;
+    model: string | null;
+    serialNumber: string | null;
+    technology: string;
+    state: string;
+    capacity: number;
+    temperature: number | null;
+    percentage: number;
+    cycleCount: number | null;
+    smartCharging: boolean;
+    energy: number;
+    energyFull: number;
+    energyFullDesign: number;
+    energyRate: number;
+    voltage: number;
+    timeToFull: number | null;
+    timeToEmpty: number | null;
+}
+
+const power: PowerStatus;
+const batteries: Battery[];
+const battery: Battery | null;
+```
+
+#### NetworkToolbarItem Scope
+
+This scope provides details about network interfaces:
+
+```ts
+interface NetworkInterface {
+    name: string;
+    description: string;
+    status: 'up' | 'down';
+    dnsSuffix: string;
+    type: string;
+    gateway: string | null;
+    mac: string;
+    ipv4: string | null;
+    ipv6: string | null;
+}
+
+const online: boolean;
+const interfaces: NetworkInterface[];
+const usingInterface: NetworkInterface | null;
+```
+
+#### MediaToolbarItem Scope
+
+This scope includes information about media sessions and volume control:
+
+```ts
+const volume: number; // Output master volume from 0 to 1
+const isMuted: boolean; // Output master volume is muted
+const inputVolume: number; // Input master volume from 0 to 1
+const inputIsMuted: boolean; // Input master volume is muted
+
+interface MediaSession {
+    id: string;
+    title: string;
+    author: string;
+    thumbnail: string | null; // Path to temporary media session image
+    playing: boolean;
+    default: boolean;
+}
+
+const mediaSession: MediaSession | null;
+```
+
+#### NotificationsToolbarItem Scope
+
+This scope provides information about notifications:
+
+```ts
+const count: number; // Number of notifications
+```
+
+#### Other Toolbar Item Scopes
+
+- **TrayToolbarItem Scope**: This module does not expand the scope of the item.
+- **DeviceToolbarItem Scope**: This module does not expand the scope of the item.
+- **SettingsToolbarItem Scope**: This module does not expand the scope of the item.
+- **WorkspaceToolbarItem Scope**: This module does not expand the scope of the item.

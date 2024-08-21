@@ -1,4 +1,4 @@
-# Themes
+# Seelen UI Themes
 
 > **Warning:** Do not modify the files in the installation directory. These files are overwritten with each update. To make custom changes, please follow the next guide.
 

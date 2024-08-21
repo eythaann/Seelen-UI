@@ -51,7 +51,7 @@ right:
       online
       ? (
         unequal(usingInterface, null) and equalText(usingInterface.type, "IEEE80211")
-          ? "[ICON:FaWifi:14]"
+          ? getIcon("FaWifi", 14)
           : icon.FaComputer
       )
       : icon.TbWorldCancel
@@ -76,8 +76,8 @@ right:
       concat(string(battery.percentage), t("placeholder.battery_remaining"), battery.smartCharging ? t("placeholder.smart_charge") : "")
     template: >-
       concat(
-        string(equalText(battery.state, "charging") ? "[ICON:MdOutlineElectricBolt:12] " : ""),
-        string(battery.smartCharging ? "[ICON:FaHeart:12] " : ""),
+        string(equalText(battery.state, "charging") ? concat(getIcon("MdOutlineElectricBolt", 12), " ") : ""),
+        string(battery.smartCharging ? concat(getIcon("FaHeart", 12), " ") : ""),
         string(
           battery.percentage > 90
           ? icon.PiBatteryFullFill
