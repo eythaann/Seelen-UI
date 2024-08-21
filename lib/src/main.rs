@@ -1,15 +1,17 @@
-use seelen_core::state::{Placeholder, Settings, Theme};
+use seelen_core::state::{AppConfig, Placeholder, Settings, Theme, WindowManagerLayout};
 
-fn write_schema<T>(filename: &str)
+fn write_schema<T>(path: &str)
 where
     T: schemars::JsonSchema,
 {
     let schema = schemars::schema_for!(T);
-    std::fs::write(filename, serde_json::to_string_pretty(&schema).unwrap()).unwrap();
+    std::fs::write(path, serde_json::to_string_pretty(&schema).unwrap()).unwrap();
 }
 
 fn main() {
-    write_schema::<Settings>("settings.schema.json");
-    write_schema::<Placeholder>("placeholder.schema.json");
-    write_schema::<Theme>("theme.schema.json");
+    write_schema::<Settings>("./dist/settings.schema.json");
+    write_schema::<Placeholder>("./dist/placeholder.schema.json");
+    write_schema::<Theme>("./dist/theme.schema.json");
+    write_schema::<WindowManagerLayout>("./dist/layout.schema.json");
+    write_schema::<Vec<AppConfig>>("./dist/settings_by_app.schema.json");
 }

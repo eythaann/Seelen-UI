@@ -1,11 +1,11 @@
-/.vscode
-/dist
-/out
-/node_modules
+.vscode
+dist
+out
+node_modules
 .env
 target
 gen
-/.cert
+.cert
 
 # Submission Files
 /scripts/SBTemp

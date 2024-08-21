@@ -118,6 +118,9 @@ impl FullState {
         let user_placeholders = self.data_dir.join("placeholders");
         let bundled_placeholders = self.resources_dir.join("static/placeholders");
 
+        let user_layouts = self.data_dir.join("layouts");
+        let bundled_layouts = self.resources_dir.join("static/layouts");
+
         let user_app_configs = self.data_dir.join("applications.yml");
         let bundled_app_configs = self.resources_dir.join("static/apps_templates");
 
@@ -155,6 +158,17 @@ impl FullState {
             self.load_placeholders()?;
             self.store_cloned();
             self.emit_placeholders()?;
+        }
+
+        if event
+            .paths
+            .iter()
+            .any(|p| p.starts_with(&user_layouts) || p.starts_with(&bundled_layouts))
+        {
+            log::info!("Layouts changed");
+            self.load_layouts()?;
+            self.store_cloned();
+            self.emit_layouts()?;
         }
 
         if event
@@ -322,10 +336,54 @@ impl FullState {
             }
         }
 
-        if let Some(selected) = &self.settings.fancy_toolbar.placeholder {
-            if !self.placeholders.contains_key(selected) {
-                self.settings.fancy_toolbar.placeholder = Some("default.yml".to_owned());
+        let selected = &mut self.settings.fancy_toolbar.placeholder;
+        if !self.placeholders.contains_key(selected) {
+            *selected = "default.yml".to_string();
+        }
+
+        Ok(())
+    }
+
+    fn load_layout_from_file(path: PathBuf) -> Result<WindowManagerLayout> {
+        match path.extension() {
+            Some(ext) if ext == "yml" || ext == "yaml" || ext == "json" => {
+                let content = std::fs::read_to_string(&path)?;
+                if ext == "json" {
+                    Ok(serde_json::from_str(&content)?)
+                } else {
+                    Ok(serde_yaml::from_str(&content)?)
+                }
             }
+            _ => Err("Invalid layout file extension".into()),
+        }
+    }
+
+    fn load_layouts(&mut self) -> Result<()> {
+        let user_path = self.data_dir.join("layouts");
+        let resources_path = self.resources_dir.join("static/layouts");
+        let entries = std::fs::read_dir(&resources_path)?.chain(std::fs::read_dir(&user_path)?);
+        for entry in entries.flatten() {
+            let path = entry.path();
+            if path.is_dir() {
+                continue;
+            }
+
+            let layout = Self::load_layout_from_file(path);
+
+            match layout {
+                Ok(mut layout) => {
+                    layout.info.filename = entry.file_name().to_string_lossy().to_string();
+                    self.layouts.insert(layout.info.filename.clone(), layout);
+                }
+                Err(err) => {
+                    log::error!("Failed to load layout ({:?}): {:?}", entry.path(), err)
+                }
+            }
+        }
+
+        let selected = &mut self.settings.window_manager.default_layout;
+        if !self.layouts.contains_key(selected) {
+            *selected = "BSP.json".to_string();
         }
 
         Ok(())
@@ -363,6 +421,7 @@ impl FullState {
         self.load_weg_items()?;
         self.load_themes()?;
         self.load_placeholders()?;
+        self.load_layouts()?;
         self.load_settings_by_app()?;
         Ok(())
     }
@@ -387,6 +446,12 @@ impl FullState {
     fn emit_placeholders(&self) -> Result<()> {
         self.handle
             .emit("placeholders", self.placeholders().values().collect_vec())?;
+        Ok(())
+    }
+
+    fn emit_layouts(&self) -> Result<()> {
+        self.handle
+            .emit("layouts", self.layouts().values().collect_vec())?;
         Ok(())
     }
 
@@ -439,7 +504,7 @@ impl FullState {
                 self.data_dir.join(format!("placeholders/{id}.yml")),
                 serde_yaml::to_string(&placeholder)?,
             )?;
-            self.settings.fancy_toolbar.placeholder = Some(format!("{id}.yml"));
+            self.settings.fancy_toolbar.placeholder = format!("{id}.yml");
         }
 
         if let Some(layout) = resource.resources.layout {
@@ -447,7 +512,7 @@ impl FullState {
                 self.data_dir.join(format!("layouts/{id}.yml")),
                 serde_yaml::to_string(&layout)?,
             )?;
-            self.settings.window_manager.default_layout = Some(format!("{id}.yml"));
+            self.settings.window_manager.default_layout = format!("{id}.yml");
         }
 
         self.save_settings()?;

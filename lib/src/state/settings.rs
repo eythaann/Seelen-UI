@@ -62,7 +62,7 @@ pub struct FancyToolbarSettings {
     /// height of the fancy toolbar
     pub height: u32,
     /// default placeholder for the fancy toolbar
-    pub placeholder: Option<String>,
+    pub placeholder: String,
 }
 
 impl Default for FancyToolbarSettings {
@@ -70,7 +70,7 @@ impl Default for FancyToolbarSettings {
         Self {
             enabled: true,
             height: 30,
-            placeholder: None,
+            placeholder: String::from("default.yml"),
         }
     }
 }
@@ -187,7 +187,7 @@ pub struct WindowManagerSettings {
     /// floating window settings
     pub floating: FloatingWindowSettings,
     /// default layout
-    pub default_layout: Option<String>,
+    pub default_layout: String,
 }
 
 impl Default for Border {
@@ -220,7 +220,7 @@ impl Default for WindowManagerSettings {
             workspace_padding: 10.0,
             global_work_area_offset: Rect::default(),
             floating: FloatingWindowSettings::default(),
-            default_layout: None, // added in frontend
+            default_layout: String::from("default.yml"),
         }
     }
 }

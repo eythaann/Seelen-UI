@@ -1,141 +1,90 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Theme",
   "type": "object",
   "properties": {
     "info": {
+      "description": "Metadata about the theme",
+      "default": {
+        "author": "",
+        "description": "",
+        "displayName": "",
+        "filename": "",
+        "tags": []
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ThemeInfo"
+        }
+      ]
+    },
+    "styles": {
+      "description": "Css Styles of the theme",
+      "default": {
+        "toolbar": "",
+        "weg": "",
+        "wm": ""
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ThemeCss"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "ThemeCss": {
       "type": "object",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "default": "Unknown"
+        "toolbar": {
+          "description": "Css Styles for the window manager",
+          "default": "",
+          "type": "string"
         },
+        "weg": {
+          "description": "Css Styles for the dock/taskbar",
+          "default": "",
+          "type": "string"
+        },
+        "wm": {
+          "description": "Css Styles for the window manager",
+          "default": "",
+          "type": "string"
+        }
+      }
+    },
+    "ThemeInfo": {
+      "type": "object",
+      "properties": {
         "author": {
-          "type": "string",
-          "default": "Unknown"
+          "description": "Author of the theme",
+          "default": "",
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "default": "Empty"
+          "description": "Description of the theme",
+          "default": "",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the theme",
+          "default": "",
+          "type": "string"
+        },
+        "filename": {
+          "description": "Filename of the theme, is overridden by the program on load.",
+          "default": "",
+          "type": "string"
         },
         "tags": {
+          "description": "Tags to be used in search",
+          "default": [],
           "type": "array",
           "items": {
             "type": "string"
-          },
-          "default": []
+          }
         }
-      },
-      "additionalProperties": false,
-      "default": {}
-    },
-    "variables": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "propertyNames": {
-        "pattern": "^\\-\\-"
-      },
-      "default": {}
-    },
-    "layers": {
-      "type": "object",
-      "properties": {
-        "weg": {
-          "type": "object",
-          "properties": {
-            "bg": {
-              "type": "number",
-              "minimum": 1,
-              "default": 1
-            },
-            "items": {
-              "type": "object",
-              "properties": {
-                "bg": {
-                  "$ref": "#/properties/layers/properties/weg/properties/bg"
-                }
-              },
-              "additionalProperties": false,
-              "default": {}
-            },
-            "contextMenu": {
-              "type": "object",
-              "properties": {
-                "bg": {
-                  "$ref": "#/properties/layers/properties/weg/properties/bg"
-                }
-              },
-              "additionalProperties": false,
-              "default": {}
-            },
-            "preview": {
-              "type": "object",
-              "properties": {
-                "bg": {
-                  "$ref": "#/properties/layers/properties/weg/properties/bg"
-                }
-              },
-              "additionalProperties": false,
-              "default": {}
-            }
-          },
-          "additionalProperties": false,
-          "default": {}
-        },
-        "toolbar": {
-          "type": "object",
-          "properties": {
-            "bg": {
-              "$ref": "#/properties/layers/properties/weg/properties/bg"
-            },
-            "fastSettings": {
-              "type": "object",
-              "properties": {
-                "bg": {
-                  "$ref": "#/properties/layers/properties/weg/properties/bg"
-                }
-              },
-              "additionalProperties": false,
-              "default": {}
-            },
-            "systemTray": {
-              "type": "object",
-              "properties": {
-                "bg": {
-                  "$ref": "#/properties/layers/properties/weg/properties/bg"
-                }
-              },
-              "additionalProperties": false,
-              "default": {}
-            }
-          },
-          "additionalProperties": false,
-          "default": {}
-        }
-      },
-      "additionalProperties": false,
-      "default": {}
-    },
-    "styles": {
-      "type": "object",
-      "properties": {
-        "weg": {
-          "type": "string",
-          "default": ""
-        },
-        "toolbar": {
-          "type": "string",
-          "default": ""
-        },
-        "wm": {
-          "type": "string",
-          "default": ""
-        }
-      },
-      "additionalProperties": false,
-      "default": {}
+      }
     }
-  },
-  "additionalProperties": false,
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  }
 }

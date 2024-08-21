@@ -140,6 +140,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_auto_start_status,
         state_get_themes,
         state_get_placeholders,
+        state_get_layouts,
         state_get_weg_items,
         state_get_settings,
         state_get_specific_apps_configurations,

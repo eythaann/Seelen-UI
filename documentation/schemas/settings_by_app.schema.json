@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Array_of_AppConfig",
+  "type": "array",
+  "items": {
+    "$ref": "#/definitions/AppConfig"
+  },
+  "definitions": {
+    "AppConfig": {
+      "type": "object",
+      "required": [
+        "identifier",
+        "name"
+      ],
+      "properties": {
+        "bound_monitor_idx": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint",
+          "minimum": 0.0
+        },
+        "bound_workspace_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "category": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "identifier": {
+          "$ref": "#/definitions/AppIdentifier"
+        },
+        "is_bundled": {
+          "default": false,
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        },
+        "options": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppExtraFlag"
+          }
+        }
+      }
+    },
+    "AppExtraFlag": {
+      "type": "string",
+      "enum": [
+        "float",
+        "force",
+        "unmanage",
+        "pinned",
+        "object_name_change",
+        "layered",
+        "border_overflow",
+        "tray_and_multi_window"
+      ]
+    },
+    "AppIdentifier": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "matching_strategy"
+      ],
+      "properties": {
+        "and": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppIdentifier"
+          }
+        },
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/AppIdentifierType"
+        },
+        "matching_strategy": {
+          "$ref": "#/definitions/MatchingStrategy"
+        },
+        "negation": {
+          "default": false,
+          "type": "boolean"
+        },
+        "or": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppIdentifier"
+          }
+        }
+      }
+    },
+    "AppIdentifierType": {
+      "type": "string",
+      "enum": [
+        "Exe",
+        "Class",
+        "Title",
+        "Path"
+      ]
+    },
+    "MatchingStrategy": {
+      "type": "string",
+      "enum": [
+        "Equals",
+        "StartsWith",
+        "EndsWith",
+        "Contains",
+        "Regex",
+        "Legacy"
+      ]
+    }
+  }
+}

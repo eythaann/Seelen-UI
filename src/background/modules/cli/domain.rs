@@ -1,6 +1,5 @@
+use seelen_core::state::{Placeholder, Theme, WindowManagerLayout};
 use serde::{Deserialize, Serialize};
-
-use crate::state::domain::{Placeholder, Theme};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Resource {
@@ -14,5 +13,5 @@ pub struct Resource {
 pub struct ResourceItems {
     pub theme: Option<Theme>,
     pub placeholder: Option<Placeholder>,
-    pub layout: Option<serde_yaml::Value>,
+    pub layout: Option<WindowManagerLayout>,
 }

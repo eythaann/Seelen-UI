@@ -1,673 +1,1175 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Settings",
   "type": "object",
   "properties": {
-    "fancy_toolbar": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "default": true
+    "ahkEnabled": {
+      "description": "enable or disable ahk",
+      "default": true,
+      "type": "boolean"
+    },
+    "ahkVariables": {
+      "description": "ahk variables",
+      "default": {
+        "decreaseHeight": {
+          "ahk": "#+-",
+          "fancy": "Win + Shift + -"
         },
-        "height": {
-          "type": "number",
-          "exclusiveMinimum": 0,
-          "default": 30
+        "decreaseWidth": {
+          "ahk": "#!-",
+          "fancy": "Win + Alt + -"
         },
-        "placeholder": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": null
+        "focusBottom": {
+          "ahk": "#+s",
+          "fancy": "Win + Shift + S"
+        },
+        "focusLatest": {
+          "ahk": "#+e",
+          "fancy": "Win + Shift + E"
+        },
+        "focusLeft": {
+          "ahk": "#+a",
+          "fancy": "Win + Shift + A"
+        },
+        "focusRight": {
+          "ahk": "#+d",
+          "fancy": "Win + Shift + D"
+        },
+        "focusTop": {
+          "ahk": "#+w",
+          "fancy": "Win + Shift + W"
+        },
+        "increaseHeight": {
+          "ahk": "#+=",
+          "fancy": "Win + Shift + ="
+        },
+        "increaseWidth": {
+          "ahk": "#!=",
+          "fancy": "Win + Alt + ="
+        },
+        "moveToWorkspace0": {
+          "ahk": "!+1",
+          "fancy": "Alt + Shift + 1"
+        },
+        "moveToWorkspace1": {
+          "ahk": "!+2",
+          "fancy": "Alt + Shift + 2"
+        },
+        "moveToWorkspace2": {
+          "ahk": "!+3",
+          "fancy": "Alt + Shift + 3"
+        },
+        "moveToWorkspace3": {
+          "ahk": "!+4",
+          "fancy": "Alt + Shift + 4"
+        },
+        "moveToWorkspace4": {
+          "ahk": "!+5",
+          "fancy": "Alt + Shift + 5"
+        },
+        "moveToWorkspace5": {
+          "ahk": "!+6",
+          "fancy": "Alt + Shift + 6"
+        },
+        "moveToWorkspace6": {
+          "ahk": "!+7",
+          "fancy": "Alt + Shift + 7"
+        },
+        "moveToWorkspace7": {
+          "ahk": "!+8",
+          "fancy": "Alt + Shift + 8"
+        },
+        "moveToWorkspace8": {
+          "ahk": "!+9",
+          "fancy": "Alt + Shift + 9"
+        },
+        "moveToWorkspace9": {
+          "ahk": "!+0",
+          "fancy": "Alt + Shift + 0"
+        },
+        "reserveBottom": {
+          "ahk": "#+k",
+          "fancy": "Win + Shift + K"
+        },
+        "reserveFloat": {
+          "ahk": "#+u",
+          "fancy": "Win + Shift + U"
+        },
+        "reserveLeft": {
+          "ahk": "#+j",
+          "fancy": "Win + Shift + J"
+        },
+        "reserveRight": {
+          "ahk": "#+l",
+          "fancy": "Win + Shift + L"
+        },
+        "reserveStack": {
+          "ahk": "#+o",
+          "fancy": "Win + Shift + O"
+        },
+        "reserveTop": {
+          "ahk": "#+i",
+          "fancy": "Win + Shift + I"
+        },
+        "restoreSizes": {
+          "ahk": "#!0",
+          "fancy": "Win + Alt + 0"
+        },
+        "sendToWorkspace0": {
+          "ahk": "#+1",
+          "fancy": "Win + Shift + 1"
+        },
+        "sendToWorkspace1": {
+          "ahk": "#+2",
+          "fancy": "Win + Shift + 2"
+        },
+        "sendToWorkspace2": {
+          "ahk": "#+3",
+          "fancy": "Win + Shift + 3"
+        },
+        "sendToWorkspace3": {
+          "ahk": "#+4",
+          "fancy": "Win + Shift + 4"
+        },
+        "sendToWorkspace4": {
+          "ahk": "#+5",
+          "fancy": "Win + Shift + 5"
+        },
+        "sendToWorkspace5": {
+          "ahk": "#+6",
+          "fancy": "Win + Shift + 6"
+        },
+        "sendToWorkspace6": {
+          "ahk": "#+7",
+          "fancy": "Win + Shift + 7"
+        },
+        "sendToWorkspace7": {
+          "ahk": "#+8",
+          "fancy": "Win + Shift + 8"
+        },
+        "sendToWorkspace8": {
+          "ahk": "#+9",
+          "fancy": "Win + Shift + 9"
+        },
+        "sendToWorkspace9": {
+          "ahk": "#+0",
+          "fancy": "Win + Shift + 0"
+        },
+        "switchWorkspace0": {
+          "ahk": "!1",
+          "fancy": "Alt + 1"
+        },
+        "switchWorkspace1": {
+          "ahk": "!2",
+          "fancy": "Alt + 2"
+        },
+        "switchWorkspace2": {
+          "ahk": "!3",
+          "fancy": "Alt + 3"
+        },
+        "switchWorkspace3": {
+          "ahk": "!4",
+          "fancy": "Alt + 4"
+        },
+        "switchWorkspace4": {
+          "ahk": "!5",
+          "fancy": "Alt + 5"
+        },
+        "switchWorkspace5": {
+          "ahk": "!6",
+          "fancy": "Alt + 6"
+        },
+        "switchWorkspace6": {
+          "ahk": "!7",
+          "fancy": "Alt + 7"
+        },
+        "switchWorkspace7": {
+          "ahk": "!8",
+          "fancy": "Alt + 8"
+        },
+        "switchWorkspace8": {
+          "ahk": "!9",
+          "fancy": "Alt + 9"
+        },
+        "switchWorkspace9": {
+          "ahk": "!0",
+          "fancy": "Alt + 0"
         }
       },
-      "additionalProperties": false,
-      "default": {}
-    },
-    "seelenweg": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "default": true
-        },
-        "mode": {
-          "type": "string",
-          "enum": [
-            "Full-Width",
-            "Min-Content"
-          ],
-          "default": "Min-Content"
-        },
-        "hide_mode": {
-          "type": "string",
-          "enum": [
-            "Never",
-            "Always",
-            "On-Overlap"
-          ],
-          "default": "On-Overlap"
-        },
-        "position": {
-          "type": "string",
-          "enum": [
-            "Left",
-            "Right",
-            "Top",
-            "Bottom"
-          ],
-          "default": "Bottom"
-        },
-        "visible_separators": {
-          "type": "boolean",
-          "default": true
-        },
-        "size": {
-          "type": "number",
-          "exclusiveMinimum": 0,
-          "default": 40,
-          "description": "Item size in pixels"
-        },
-        "zoom_size": {
-          "type": "number",
-          "exclusiveMinimum": 0,
-          "default": 70,
-          "description": "Zoomed item size in pixels"
-        },
-        "margin": {
-          "type": "number",
-          "minimum": 0,
-          "default": 8,
-          "description": "Dock/Bar margin in pixels"
-        },
-        "padding": {
-          "type": "number",
-          "minimum": 0,
-          "default": 8,
-          "description": "Dock/Bar padding in pixels"
-        },
-        "space_between_items": {
-          "type": "number",
-          "minimum": 0,
-          "default": 8,
-          "description": "Space between items (gap) in pixels"
-        }
-      },
-      "additionalProperties": false,
-      "default": {}
-    },
-    "window_manager": {
-      "type": "object",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "default": false
-        },
-        "auto_stacking_by_category": {
-          "type": "boolean",
-          "default": true
-        },
-        "border": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean",
-              "default": true
-            },
-            "width": {
-              "type": "number",
-              "minimum": 0,
-              "default": 3
-            },
-            "offset": {
-              "type": "number",
-              "default": -1
-            }
-          },
-          "additionalProperties": false,
-          "default": {}
-        },
-        "resize_delta": {
-          "type": "number",
-          "default": 10,
-          "description": "% to add or remove on resize of windows using the CLI"
-        },
-        "workspace_gap": {
-          "type": "number",
-          "minimum": 0,
-          "default": 10,
-          "description": "Space between windows"
-        },
-        "workspace_padding": {
-          "type": "number",
-          "minimum": 0,
-          "default": 10
-        },
-        "global_work_area_offset": {
-          "type": "object",
-          "properties": {
-            "top": {
-              "type": "number",
-              "default": 0
-            },
-            "left": {
-              "type": "number",
-              "default": 0
-            },
-            "right": {
-              "type": "number",
-              "default": 0
-            },
-            "bottom": {
-              "type": "number",
-              "default": 0
-            }
-          },
-          "additionalProperties": false,
-          "default": {}
-        },
-        "floating": {
-          "type": "object",
-          "properties": {
-            "width": {
-              "type": "number",
-              "exclusiveMinimum": 0,
-              "default": 800
-            },
-            "height": {
-              "type": "number",
-              "exclusiveMinimum": 0,
-              "default": 500
-            }
-          },
-          "additionalProperties": false,
-          "default": {}
-        },
-        "default_layout": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "default": null
-        }
-      },
-      "additionalProperties": false,
-      "default": {}
-    },
-    "monitors": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "workspaces": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "name": {
-                  "type": "string",
-                  "default": "New Workspace"
-                },
-                "layout": {
-                  "type": "string",
-                  "default": "BSP"
-                },
-                "padding": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "number",
-                          "minimum": 0
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                },
-                "gap": {
-                  "anyOf": [
-                    {
-                      "anyOf": [
-                        {
-                          "not": {}
-                        },
-                        {
-                          "type": "number",
-                          "minimum": 0
-                        }
-                      ]
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ]
-                }
-              },
-              "additionalProperties": false
-            },
-            "minItems": 1,
-            "default": [
-              {
-                "name": "New Workspace",
-                "layout": "BSP"
-              }
-            ]
-          },
-          "work_area_offset": {
-            "anyOf": [
-              {
-                "anyOf": [
-                  {
-                    "not": {}
-                  },
-                  {
-                    "$ref": "#/properties/window_manager/properties/global_work_area_offset"
-                  }
-                ]
-              },
-              {
-                "type": "null"
-              }
-            ]
-          },
-          "editing_workspace": {
-            "type": "number",
-            "minimum": 0,
-            "default": 0
-          }
-        },
-        "additionalProperties": false
-      },
-      "minItems": 1,
-      "default": [
+      "allOf": [
         {
-          "workspaces": [
-            {
-              "name": "New Workspace",
-              "layout": "BSP"
-            }
-          ],
-          "editing_workspace": 0
+          "$ref": "#/definitions/AhkVarList"
         }
       ]
     },
-    "ahk_enabled": {
-      "type": "boolean",
-      "default": true
+    "devTools": {
+      "description": "enable or disable dev tools tab in settings",
+      "default": false,
+      "type": "boolean"
     },
-    "ahk_variables": {
-      "type": "object",
-      "properties": {
-        "reserve_top": {
-          "type": "object",
-          "properties": {
-            "fancy": {
-              "type": "string"
-            },
-            "ahk": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "fancy",
-            "ahk"
-          ],
-          "additionalProperties": false,
-          "default": {
-            "fancy": "Win + Shift + I",
-            "ahk": "#+i"
-          }
-        },
-        "reserve_bottom": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + K",
-            "ahk": "#+k"
-          }
-        },
-        "reserve_left": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + J",
-            "ahk": "#+j"
-          }
-        },
-        "reserve_right": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + L",
-            "ahk": "#+l"
-          }
-        },
-        "reserve_float": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + U",
-            "ahk": "#+u"
-          }
-        },
-        "reserve_stack": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + O",
-            "ahk": "#+o"
-          }
-        },
-        "focus_top": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + W",
-            "ahk": "#+w"
-          }
-        },
-        "focus_bottom": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + S",
-            "ahk": "#+s"
-          }
-        },
-        "focus_left": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + A",
-            "ahk": "#+a"
-          }
-        },
-        "focus_right": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + D",
-            "ahk": "#+d"
-          }
-        },
-        "focus_latest": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + E",
-            "ahk": "#+e"
-          }
-        },
-        "increase_width": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Alt + =",
-            "ahk": "#!="
-          }
-        },
-        "decrease_width": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Alt + -",
-            "ahk": "#!-"
-          }
-        },
-        "increase_height": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + =",
-            "ahk": "#+="
-          }
-        },
-        "decrease_height": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + -",
-            "ahk": "#+-"
-          }
-        },
-        "restore_sizes": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Alt + 0",
-            "ahk": "#!0"
-          }
-        },
-        "switch_workspace_0": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 1",
-            "ahk": "!1"
-          }
-        },
-        "switch_workspace_1": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 2",
-            "ahk": "!2"
-          }
-        },
-        "switch_workspace_2": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 3",
-            "ahk": "!3"
-          }
-        },
-        "switch_workspace_3": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 4",
-            "ahk": "!4"
-          }
-        },
-        "switch_workspace_4": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 5",
-            "ahk": "!5"
-          }
-        },
-        "switch_workspace_5": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 6",
-            "ahk": "!6"
-          }
-        },
-        "switch_workspace_6": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 7",
-            "ahk": "!7"
-          }
-        },
-        "switch_workspace_7": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 8",
-            "ahk": "!8"
-          }
-        },
-        "switch_workspace_8": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 9",
-            "ahk": "!9"
-          }
-        },
-        "switch_workspace_9": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + 0",
-            "ahk": "!0"
-          }
-        },
-        "move_to_workspace_0": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 1",
-            "ahk": "!+1"
-          }
-        },
-        "move_to_workspace_1": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 2",
-            "ahk": "!+2"
-          }
-        },
-        "move_to_workspace_2": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 3",
-            "ahk": "!+3"
-          }
-        },
-        "move_to_workspace_3": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 4",
-            "ahk": "!+4"
-          }
-        },
-        "move_to_workspace_4": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 5",
-            "ahk": "!+5"
-          }
-        },
-        "move_to_workspace_5": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 6",
-            "ahk": "!+6"
-          }
-        },
-        "move_to_workspace_6": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 7",
-            "ahk": "!+7"
-          }
-        },
-        "move_to_workspace_7": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 8",
-            "ahk": "!+8"
-          }
-        },
-        "move_to_workspace_8": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 9",
-            "ahk": "!+9"
-          }
-        },
-        "move_to_workspace_9": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Alt + Shift + 0",
-            "ahk": "!+0"
-          }
-        },
-        "send_to_workspace_0": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 1",
-            "ahk": "#+1"
-          }
-        },
-        "send_to_workspace_1": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 2",
-            "ahk": "#+2"
-          }
-        },
-        "send_to_workspace_2": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 3",
-            "ahk": "#+3"
-          }
-        },
-        "send_to_workspace_3": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 4",
-            "ahk": "#+4"
-          }
-        },
-        "send_to_workspace_4": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 5",
-            "ahk": "#+5"
-          }
-        },
-        "send_to_workspace_5": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 6",
-            "ahk": "#+6"
-          }
-        },
-        "send_to_workspace_6": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 7",
-            "ahk": "#+7"
-          }
-        },
-        "send_to_workspace_7": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 8",
-            "ahk": "#+8"
-          }
-        },
-        "send_to_workspace_8": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 9",
-            "ahk": "#+9"
-          }
-        },
-        "send_to_workspace_9": {
-          "$ref": "#/properties/ahk_variables/properties/reserve_top",
-          "default": {
-            "fancy": "Win + Shift + 0",
-            "ahk": "#+0"
-          }
-        }
+    "fancyToolbar": {
+      "description": "fancy toolbar config",
+      "default": {
+        "enabled": true,
+        "height": 30,
+        "placeholder": "default.yml"
       },
-      "additionalProperties": false,
-      "default": {}
-    },
-    "selected_theme": {
-      "anyOf": [
+      "allOf": [
         {
-          "type": "string"
-        },
-        {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/FancyToolbarSettings"
         }
-      ],
-      "default": [
-        "default"
       ]
-    },
-    "dev_tools": {
-      "type": "boolean",
-      "default": false
     },
     "language": {
-      "type": "string",
-      "default": "en"
+      "description": "language to use, if null the system locale is used",
+      "default": "en",
+      "type": "string"
+    },
+    "monitors": {
+      "description": "list of monitors",
+      "default": [
+        {
+          "workAreaOffset": null,
+          "workspaces": [
+            {
+              "gap": null,
+              "layout": "BSP",
+              "name": "New Workspace",
+              "padding": null
+            }
+          ]
+        }
+      ],
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Monitor"
+      }
+    },
+    "seelenweg": {
+      "description": "seelenweg (dock/taskbar) config",
+      "default": {
+        "enabled": true,
+        "hideMode": "On-Overlap",
+        "margin": 8,
+        "mode": "Min-Content",
+        "padding": 8,
+        "position": "Bottom",
+        "size": 40,
+        "spaceBetweenItems": 8,
+        "visibleSeparators": true,
+        "zoomSize": 70
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SeelenWegSettings"
+        }
+      ]
+    },
+    "selectedTheme": {
+      "description": "list of selected themes",
+      "default": [
+        "default"
+      ],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "windowManager": {
+      "description": "window manager config",
+      "default": {
+        "autoStackingByCategory": true,
+        "border": {
+          "enabled": true,
+          "offset": -1.0,
+          "width": 3.0
+        },
+        "defaultLayout": "default.yml",
+        "enabled": false,
+        "floating": {
+          "height": 500.0,
+          "width": 800.0
+        },
+        "globalWorkAreaOffset": {
+          "bottom": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0
+        },
+        "resizeDelta": 10.0,
+        "workspaceGap": 10.0,
+        "workspacePadding": 10.0
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/WindowManagerSettings"
+        }
+      ]
     }
   },
-  "additionalProperties": false,
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "definitions": {
+    "AhkVar": {
+      "type": "object",
+      "required": [
+        "ahk",
+        "fancy"
+      ],
+      "properties": {
+        "ahk": {
+          "type": "string"
+        },
+        "fancy": {
+          "type": "string"
+        }
+      }
+    },
+    "AhkVarList": {
+      "type": "object",
+      "properties": {
+        "decreaseHeight": {
+          "default": {
+            "ahk": "#+-",
+            "fancy": "Win + Shift + -"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "decreaseWidth": {
+          "default": {
+            "ahk": "#!-",
+            "fancy": "Win + Alt + -"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "focusBottom": {
+          "default": {
+            "ahk": "#+s",
+            "fancy": "Win + Shift + S"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "focusLatest": {
+          "default": {
+            "ahk": "#+e",
+            "fancy": "Win + Shift + E"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "focusLeft": {
+          "default": {
+            "ahk": "#+a",
+            "fancy": "Win + Shift + A"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "focusRight": {
+          "default": {
+            "ahk": "#+d",
+            "fancy": "Win + Shift + D"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "focusTop": {
+          "default": {
+            "ahk": "#+w",
+            "fancy": "Win + Shift + W"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "increaseHeight": {
+          "default": {
+            "ahk": "#+=",
+            "fancy": "Win + Shift + ="
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "increaseWidth": {
+          "default": {
+            "ahk": "#!=",
+            "fancy": "Win + Alt + ="
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace0": {
+          "default": {
+            "ahk": "!+1",
+            "fancy": "Alt + Shift + 1"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace1": {
+          "default": {
+            "ahk": "!+2",
+            "fancy": "Alt + Shift + 2"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace2": {
+          "default": {
+            "ahk": "!+3",
+            "fancy": "Alt + Shift + 3"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace3": {
+          "default": {
+            "ahk": "!+4",
+            "fancy": "Alt + Shift + 4"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace4": {
+          "default": {
+            "ahk": "!+5",
+            "fancy": "Alt + Shift + 5"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace5": {
+          "default": {
+            "ahk": "!+6",
+            "fancy": "Alt + Shift + 6"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace6": {
+          "default": {
+            "ahk": "!+7",
+            "fancy": "Alt + Shift + 7"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace7": {
+          "default": {
+            "ahk": "!+8",
+            "fancy": "Alt + Shift + 8"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace8": {
+          "default": {
+            "ahk": "!+9",
+            "fancy": "Alt + Shift + 9"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "moveToWorkspace9": {
+          "default": {
+            "ahk": "!+0",
+            "fancy": "Alt + Shift + 0"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "reserveBottom": {
+          "default": {
+            "ahk": "#+k",
+            "fancy": "Win + Shift + K"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "reserveFloat": {
+          "default": {
+            "ahk": "#+u",
+            "fancy": "Win + Shift + U"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "reserveLeft": {
+          "default": {
+            "ahk": "#+j",
+            "fancy": "Win + Shift + J"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "reserveRight": {
+          "default": {
+            "ahk": "#+l",
+            "fancy": "Win + Shift + L"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "reserveStack": {
+          "default": {
+            "ahk": "#+o",
+            "fancy": "Win + Shift + O"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "reserveTop": {
+          "default": {
+            "ahk": "#+i",
+            "fancy": "Win + Shift + I"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "restoreSizes": {
+          "default": {
+            "ahk": "#!0",
+            "fancy": "Win + Alt + 0"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace0": {
+          "default": {
+            "ahk": "#+1",
+            "fancy": "Win + Shift + 1"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace1": {
+          "default": {
+            "ahk": "#+2",
+            "fancy": "Win + Shift + 2"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace2": {
+          "default": {
+            "ahk": "#+3",
+            "fancy": "Win + Shift + 3"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace3": {
+          "default": {
+            "ahk": "#+4",
+            "fancy": "Win + Shift + 4"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace4": {
+          "default": {
+            "ahk": "#+5",
+            "fancy": "Win + Shift + 5"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace5": {
+          "default": {
+            "ahk": "#+6",
+            "fancy": "Win + Shift + 6"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace6": {
+          "default": {
+            "ahk": "#+7",
+            "fancy": "Win + Shift + 7"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace7": {
+          "default": {
+            "ahk": "#+8",
+            "fancy": "Win + Shift + 8"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace8": {
+          "default": {
+            "ahk": "#+9",
+            "fancy": "Win + Shift + 9"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "sendToWorkspace9": {
+          "default": {
+            "ahk": "#+0",
+            "fancy": "Win + Shift + 0"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace0": {
+          "default": {
+            "ahk": "!1",
+            "fancy": "Alt + 1"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace1": {
+          "default": {
+            "ahk": "!2",
+            "fancy": "Alt + 2"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace2": {
+          "default": {
+            "ahk": "!3",
+            "fancy": "Alt + 3"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace3": {
+          "default": {
+            "ahk": "!4",
+            "fancy": "Alt + 4"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace4": {
+          "default": {
+            "ahk": "!5",
+            "fancy": "Alt + 5"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace5": {
+          "default": {
+            "ahk": "!6",
+            "fancy": "Alt + 6"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace6": {
+          "default": {
+            "ahk": "!7",
+            "fancy": "Alt + 7"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace7": {
+          "default": {
+            "ahk": "!8",
+            "fancy": "Alt + 8"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace8": {
+          "default": {
+            "ahk": "!9",
+            "fancy": "Alt + 9"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "switchWorkspace9": {
+          "default": {
+            "ahk": "!0",
+            "fancy": "Alt + 0"
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        }
+      }
+    },
+    "Border": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "offset": {
+          "default": -1.0,
+          "type": "number",
+          "format": "double"
+        },
+        "width": {
+          "default": 3.0,
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "FancyToolbarSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "enable or disable the fancy toolbar",
+          "default": true,
+          "type": "boolean"
+        },
+        "height": {
+          "description": "height of the fancy toolbar",
+          "default": 30,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "placeholder": {
+          "description": "default placeholder for the fancy toolbar",
+          "default": "default.yml",
+          "type": "string"
+        }
+      }
+    },
+    "FloatingWindowSettings": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "default": 500.0,
+          "type": "number",
+          "format": "double"
+        },
+        "width": {
+          "default": 800.0,
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Monitor": {
+      "type": "object",
+      "properties": {
+        "workAreaOffset": {
+          "default": null,
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Rect"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "workspaces": {
+          "default": [
+            {
+              "gap": null,
+              "layout": "BSP",
+              "name": "New Workspace",
+              "padding": null
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Workspace"
+          }
+        }
+      }
+    },
+    "Rect": {
+      "type": "object",
+      "required": [
+        "bottom",
+        "left",
+        "right",
+        "top"
+      ],
+      "properties": {
+        "bottom": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "left": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "right": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "top": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "SeelenWegHideMode": {
+      "oneOf": [
+        {
+          "description": "never hide",
+          "type": "string",
+          "enum": [
+            "Never"
+          ]
+        },
+        {
+          "description": "auto-hide always on",
+          "type": "string",
+          "enum": [
+            "Always"
+          ]
+        },
+        {
+          "description": "auto-hide only if is overlaped by the focused window",
+          "type": "string",
+          "enum": [
+            "On-Overlap"
+          ]
+        }
+      ]
+    },
+    "SeelenWegMode": {
+      "type": "string",
+      "enum": [
+        "Full-Width",
+        "Min-Content"
+      ]
+    },
+    "SeelenWegSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "enable or disable the seelenweg",
+          "default": true,
+          "type": "boolean"
+        },
+        "hideMode": {
+          "description": "When to hide the dock",
+          "default": "On-Overlap",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenWegHideMode"
+            }
+          ]
+        },
+        "margin": {
+          "description": "Dock/Taskbar margin in px",
+          "default": 8,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "mode": {
+          "description": "Dock/Taskbar mode",
+          "default": "Min-Content",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenWegMode"
+            }
+          ]
+        },
+        "padding": {
+          "description": "Dock/Taskbar padding in px",
+          "default": 8,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "position": {
+          "description": "Dock position",
+          "default": "Bottom",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenWegSide"
+            }
+          ]
+        },
+        "size": {
+          "description": "item size in px",
+          "default": 40,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "spaceBetweenItems": {
+          "description": "space between items in px",
+          "default": 8,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "visibleSeparators": {
+          "description": "enable or disable separators visibility",
+          "default": true,
+          "type": "boolean"
+        },
+        "zoomSize": {
+          "description": "zoomed item size in px",
+          "default": 70,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        }
+      }
+    },
+    "SeelenWegSide": {
+      "type": "string",
+      "enum": [
+        "Left",
+        "Right",
+        "Top",
+        "Bottom"
+      ]
+    },
+    "WindowManagerSettings": {
+      "type": "object",
+      "properties": {
+        "autoStackingByCategory": {
+          "description": "enable or disable auto stacking by category",
+          "default": true,
+          "type": "boolean"
+        },
+        "border": {
+          "description": "window manager border",
+          "default": {
+            "enabled": true,
+            "offset": -1.0,
+            "width": 3.0
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/Border"
+            }
+          ]
+        },
+        "defaultLayout": {
+          "description": "default layout",
+          "default": "default.yml",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "enable or disable the window manager",
+          "default": false,
+          "type": "boolean"
+        },
+        "floating": {
+          "description": "floating window settings",
+          "default": {
+            "height": 500.0,
+            "width": 800.0
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/FloatingWindowSettings"
+            }
+          ]
+        },
+        "globalWorkAreaOffset": {
+          "description": "default workspace margin",
+          "default": {
+            "bottom": 0,
+            "left": 0,
+            "right": 0,
+            "top": 0
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/Rect"
+            }
+          ]
+        },
+        "resizeDelta": {
+          "description": "the resize size in % to be used when resizing via cli",
+          "default": 10.0,
+          "type": "number",
+          "format": "double"
+        },
+        "workspaceGap": {
+          "description": "default gap between containers",
+          "default": 10.0,
+          "type": "number",
+          "format": "double"
+        },
+        "workspacePadding": {
+          "description": "default workspace padding",
+          "default": 10.0,
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "Workspace": {
+      "type": "object",
+      "properties": {
+        "gap": {
+          "default": null,
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        },
+        "layout": {
+          "default": "BSP",
+          "type": "string"
+        },
+        "name": {
+          "default": "New Workspace",
+          "type": "string"
+        },
+        "padding": {
+          "default": null,
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double"
+        }
+      }
+    }
+  }
 }

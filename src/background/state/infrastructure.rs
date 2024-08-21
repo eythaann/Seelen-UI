@@ -1,6 +1,7 @@
 use std::path::PathBuf;
 
 use itertools::Itertools;
+use seelen_core::state::WindowManagerLayout;
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
@@ -22,6 +23,11 @@ pub fn state_get_placeholders() -> Vec<Placeholder> {
         .values()
         .cloned()
         .collect_vec()
+}
+
+#[tauri::command(async)]
+pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
+    FULL_STATE.load().layouts().values().cloned().collect_vec()
 }
 
 #[tauri::command(async)]

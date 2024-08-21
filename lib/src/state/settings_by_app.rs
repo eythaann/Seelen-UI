@@ -1,7 +1,8 @@
 use regex::Regex;
+use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all(deserialize = "snake_case"))]
 pub enum AppExtraFlag {
     Float,
@@ -15,7 +16,7 @@ pub enum AppExtraFlag {
     TrayAndMultiWindow,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
 pub enum AppIdentifierType {
     #[serde(alias = "exe")]
     Exe,
@@ -27,7 +28,7 @@ pub enum AppIdentifierType {
     Path,
 }
 
-#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
 pub enum MatchingStrategy {
     #[serde(alias = "equals")]
     Equals,
@@ -44,7 +45,7 @@ pub enum MatchingStrategy {
     Legacy,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
 pub struct AppIdentifier {
     pub id: String,
     pub kind: AppIdentifierType,
@@ -59,20 +60,6 @@ pub struct AppIdentifier {
     #[serde(skip)]
     pub regex: Option<Regex>,
 }
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct AppConfig {
-    pub name: String,
-    pub category: Option<String>,
-    pub bound_monitor_idx: Option<usize>,
-    pub bound_workspace_name: Option<String>,
-    pub identifier: AppIdentifier,
-    #[serde(default)]
-    pub options: Vec<AppExtraFlag>,
-    #[serde(default)]
-    pub is_bundled: bool,
-}
-
 
 impl AppIdentifier {
     pub fn cache_regex(&mut self) {
@@ -135,4 +122,17 @@ impl AppIdentifier {
                 .any(|or| or.validate(title, class, exe, path))
         }
     }
+}
+
+#[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+pub struct AppConfig {
+    pub name: String,
+    pub category: Option<String>,
+    pub bound_monitor_idx: Option<usize>,
+    pub bound_workspace_name: Option<String>,
+    pub identifier: AppIdentifier,
+    #[serde(default)]
+    pub options: Vec<AppExtraFlag>,
+    #[serde(default)]
+    pub is_bundled: bool,
 }

@@ -1,275 +1,355 @@
 {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "WindowManagerLayout",
   "type": "object",
   "properties": {
     "info": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "default": "Unknown"
-        },
-        "author": {
-          "type": "string",
-          "default": "Unknown"
-        },
-        "description": {
-          "type": "string",
-          "default": "Empty"
-        }
+      "default": {
+        "author": "",
+        "description": "",
+        "displayName": "",
+        "filename": ""
       },
-      "additionalProperties": false,
-      "default": {}
+      "allOf": [
+        {
+          "$ref": "#/definitions/WManagerLayoutInfo"
+        }
+      ]
+    },
+    "noFallbackBehavior": {
+      "default": "Float",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NoFallbackBehavior"
+        }
+      ]
     },
     "structure": {
-      "anyOf": [
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "const": "Stack"
-            },
-            "subtype": {
-              "type": "string",
-              "enum": [
-                "Temporal",
-                "Permanent"
-              ],
-              "default": "Permanent"
-            },
-            "priority": {
-              "type": "number",
-              "exclusiveMinimum": 0,
-              "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
-              "default": 1
-            },
-            "growFactor": {
-              "type": "number",
-              "description": "How much of the remaining space this node will take",
-              "default": 1
-            },
-            "condition": {
-              "anyOf": [
-                {
-                  "anyOf": [
-                    {
-                      "not": {}
-                    },
-                    {
-                      "type": "string"
-                    }
-                  ]
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Math Condition for the node to be shown, e.g: n >= 3"
-            },
-            "active": {
-              "anyOf": [
-                {
-                  "type": "number",
-                  "minimum": 0,
-                  "description": "Window handle"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Window handle",
-              "default": null
-            },
-            "handles": {
-              "type": "array",
-              "items": {
-                "$ref": "#/properties/structure/anyOf/0/properties/active/anyOf/0"
-              },
-              "default": []
-            }
-          },
-          "required": [
-            "type"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "const": "Fallback"
-            },
-            "subtype": {
-              "type": "string",
-              "const": "Permanent",
-              "default": "Permanent"
-            },
-            "priority": {
-              "$ref": "#/properties/structure/anyOf/0/properties/priority"
-            },
-            "growFactor": {
-              "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
-            },
-            "condition": {
-              "$ref": "#/properties/structure/anyOf/0/properties/condition"
-            },
-            "active": {
-              "anyOf": [
-                {
-                  "$ref": "#/properties/structure/anyOf/0/properties/active/anyOf/0"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Window handle",
-              "default": null
-            },
-            "handles": {
-              "type": "array",
-              "items": {
-                "$ref": "#/properties/structure/anyOf/0/properties/active/anyOf/0"
-              },
-              "default": []
-            }
-          },
-          "required": [
-            "type"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "const": "Leaf"
-            },
-            "subtype": {
-              "$ref": "#/properties/structure/anyOf/0/properties/subtype"
-            },
-            "priority": {
-              "$ref": "#/properties/structure/anyOf/0/properties/priority"
-            },
-            "growFactor": {
-              "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
-            },
-            "condition": {
-              "$ref": "#/properties/structure/anyOf/0/properties/condition"
-            },
-            "handle": {
-              "anyOf": [
-                {
-                  "$ref": "#/properties/structure/anyOf/0/properties/active/anyOf/0"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "description": "Window handle",
-              "default": null
-            }
-          },
-          "required": [
-            "type"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "const": "Horizontal"
-            },
-            "subtype": {
-              "$ref": "#/properties/structure/anyOf/0/properties/subtype"
-            },
-            "priority": {
-              "$ref": "#/properties/structure/anyOf/0/properties/priority"
-            },
-            "growFactor": {
-              "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
-            },
-            "condition": {
-              "$ref": "#/properties/structure/anyOf/0/properties/condition"
-            },
-            "children": {
-              "type": "array",
-              "items": {
-                "$ref": "#/properties/structure"
-              },
-              "minItems": 1
-            }
-          },
-          "required": [
-            "type",
-            "children"
-          ],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "const": "Vertical"
-            },
-            "subtype": {
-              "$ref": "#/properties/structure/anyOf/0/properties/subtype"
-            },
-            "priority": {
-              "$ref": "#/properties/structure/anyOf/0/properties/priority"
-            },
-            "growFactor": {
-              "$ref": "#/properties/structure/anyOf/0/properties/growFactor"
-            },
-            "condition": {
-              "$ref": "#/properties/structure/anyOf/0/properties/condition"
-            },
-            "children": {
-              "type": "array",
-              "items": {
-                "$ref": "#/properties/structure"
-              },
-              "minItems": 1
-            }
-          },
-          "required": [
-            "type",
-            "children"
-          ],
-          "additionalProperties": false
-        }
-      ],
-      "description": "The layout tree",
       "default": {
+        "active": null,
+        "condition": null,
+        "growFactor": 1.0,
+        "handles": [],
+        "priority": 1,
+        "subtype": "Permanent",
         "type": "Fallback"
-      }
-    },
-    "no_fallback_behavior": {
-      "anyOf": [
+      },
+      "allOf": [
         {
-          "anyOf": [
-            {
-              "not": {}
-            },
-            {
-              "type": "string",
-              "enum": [
-                "Float",
-                "Unmanaged"
-              ]
-            }
-          ]
-        },
-        {
-          "type": "null"
+          "$ref": "#/definitions/WmNode"
         }
       ]
     }
   },
-  "additionalProperties": false,
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "definitions": {
+    "NoFallbackBehavior": {
+      "type": "string",
+      "enum": [
+        "Float",
+        "Unmanaged"
+      ]
+    },
+    "NodeSubtype": {
+      "type": "string",
+      "enum": [
+        "Temporal",
+        "Permanent"
+      ]
+    },
+    "WManagerLayoutInfo": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "description": "Author of the layout",
+          "default": "",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the layout",
+          "default": "",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the layout",
+          "default": "",
+          "type": "string"
+        },
+        "filename": {
+          "description": "Filename of the layout, is overridden by the program on load.",
+          "default": "",
+          "type": "string"
+        }
+      }
+    },
+    "WmNode": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "children": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WmNode"
+              }
+            },
+            "condition": {
+              "description": "Math Condition for the node to be shown, e.g: n >= 3",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "growFactor": {
+              "description": "How much of the remaining space this node will take",
+              "default": 1.0,
+              "type": "number",
+              "format": "double"
+            },
+            "priority": {
+              "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
+              "default": 1,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "subtype": {
+              "default": "Permanent",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/NodeSubtype"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Vertical"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "children": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/WmNode"
+              }
+            },
+            "condition": {
+              "description": "Math Condition for the node to be shown, e.g: n >= 3",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "growFactor": {
+              "description": "How much of the remaining space this node will take",
+              "default": 1.0,
+              "type": "number",
+              "format": "double"
+            },
+            "priority": {
+              "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
+              "default": 1,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "subtype": {
+              "default": "Permanent",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/NodeSubtype"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Horizontal"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "condition": {
+              "description": "Math Condition for the node to be shown, e.g: n >= 3",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "growFactor": {
+              "description": "How much of the remaining space this node will take",
+              "default": 1.0,
+              "type": "number",
+              "format": "double"
+            },
+            "handle": {
+              "description": "window handle (HWND) in the node",
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int"
+            },
+            "priority": {
+              "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
+              "default": 1,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "subtype": {
+              "default": "Permanent",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/NodeSubtype"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Leaf"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "active": {
+              "description": "active window handle (HWND) in the node",
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int"
+            },
+            "condition": {
+              "description": "Math Condition for the node to be shown, e.g: n >= 3",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "growFactor": {
+              "description": "How much of the remaining space this node will take",
+              "default": 1.0,
+              "type": "number",
+              "format": "double"
+            },
+            "handles": {
+              "description": "window handles (HWND) in the node",
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int"
+              }
+            },
+            "priority": {
+              "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
+              "default": 1,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "subtype": {
+              "default": "Permanent",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/NodeSubtype"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Stack"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "active": {
+              "description": "active window handle (HWND) in the node",
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "int"
+            },
+            "condition": {
+              "description": "Math Condition for the node to be shown, e.g: n >= 3",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "growFactor": {
+              "description": "How much of the remaining space this node will take",
+              "default": 1.0,
+              "type": "number",
+              "format": "double"
+            },
+            "handles": {
+              "description": "window handles (HWND) in the node",
+              "default": [],
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int"
+              }
+            },
+            "priority": {
+              "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
+              "default": 1,
+              "type": "integer",
+              "format": "uint32",
+              "minimum": 0.0
+            },
+            "subtype": {
+              "default": "Permanent",
+              "allOf": [
+                {
+                  "$ref": "#/definitions/NodeSubtype"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Fallback"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
 }

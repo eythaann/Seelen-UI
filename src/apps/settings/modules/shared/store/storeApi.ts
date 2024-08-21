@@ -1,79 +1,12 @@
 import { UserSettings } from '../../../../../shared.interfaces';
-import { parseAsCamel, safeParseAsCamel, VariableConvention } from '../../../../shared/schemas';
-import { Layout, LayoutSchema } from '../../../../shared/schemas/Layout';
+import { parseAsCamel, VariableConvention } from '../../../../shared/schemas';
 import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { DirEntry } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
-
-interface Entry extends DirEntry {
-  path: string;
-}
-
-async function getEntries(folderName: string) {
-  const bundledPath = await path.join(await path.resourceDir(), 'static', folderName);
-  const userPath = await path.join(await path.appDataDir(), folderName);
-
-  const entries: Entry[] = [];
-
-  for (const entry of await fs.readDir(bundledPath)) {
-    entries.push({
-      ...entry,
-      path: await path.join(bundledPath, entry.name),
-    });
-  }
-
-  for (const entry of await fs.readDir(userPath)) {
-    entries.push({
-      ...entry,
-      path: await path.join(userPath, entry.name),
-    });
-  }
-
-  return entries;
-}
-
-async function loadUserLayouts(ref: UserSettings) {
-  const defaultLayout = ref.jsonSettings.windowManager.defaultLayout;
-  let found = false;
-
-  for (const entry of await getEntries('layouts')) {
-    if (entry.isFile && entry.name.endsWith('.json')) {
-      let layout: Layout = JSON.parse(await fs.readTextFile(entry.path));
-
-      layout = safeParseAsCamel(LayoutSchema, layout);
-      if (!layout) {
-        continue;
-      }
-
-      const sanitizedLayout: Layout = {
-        ...layout,
-        info: {
-          ...layout.info,
-          filename: entry.name,
-        },
-      };
-
-      if (sanitizedLayout.info.displayName === 'Unknown') {
-        sanitizedLayout.info.displayName = entry.name;
-      }
-
-      if (defaultLayout === entry.name) {
-        found = true;
-      }
-
-      ref.layouts.push(sanitizedLayout);
-    }
-  }
-
-  if (!found) {
-    ref.jsonSettings.windowManager.defaultLayout = ref.layouts[0]?.info.filename || null;
-  }
-}
 
 export class UserSettingsLoader {
   private _withUserApps: boolean = false;
@@ -129,7 +62,7 @@ export class UserSettingsLoader {
     }
 
     if (this._withLayouts) {
-      await loadUserLayouts(userSettings);
+      userSettings.layouts = await invoke('state_get_layouts');
     }
 
     if (this._withPlaceholders) {
