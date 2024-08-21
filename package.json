@@ -9,7 +9,7 @@
     "dev": "nodemon --config nodemon.json",
     "test": "jest",
     "build:ui": "ts-node scripts/build.ts",
-    "build:schemas": "ts-node scripts/createJsonSchemas.ts",
+    "build:schemas": "ts-node scripts/build_schemas.ts",
     "translate": "ts-node ./scripts/translate.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",

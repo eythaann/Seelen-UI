@@ -117,8 +117,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "fc8df356-8876-445c-bb24-d0b91ec64b59",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -184,8 +186,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "8917dd3c-e730-4984-9196-6abcd855a1a0",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -265,8 +269,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "62e99c05-a17a-4c7a-b6f7-388cb80e89f0",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -332,8 +338,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "152e2c48-f4ac-4ed5-802e-0eed2d5e222f",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -399,8 +407,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "fc1cc55c-f08d-4430-82fa-5fa9e5070217",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -471,8 +481,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "be7167af-90cd-4334-8de6-88a8fd1ad508",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -543,8 +555,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "de8ad69e-c73b-45e8-a317-c0aa57f638ef",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -610,8 +624,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "59a54a5f-5013-4204-a36a-d00eefff318d",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -677,8 +693,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "9d1a7325-8ce1-4848-ac6c-2dc51789bed6",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -744,8 +762,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "02540ac5-eee6-4711-a5f6-4bc91540c6d6",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -811,8 +831,10 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "default": "72ffc210-76ff-4ad5-844c-f7d70f31318c",
-              "type": "string"
+              "type": [
+                "string",
+                "null"
+              ]
             },
             "mode": {
               "default": "dotted",

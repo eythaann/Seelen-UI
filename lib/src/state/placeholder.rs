@@ -3,10 +3,6 @@ use std::collections::HashMap;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
-fn default_id() -> String {
-    uuid::Uuid::new_v4().to_string()
-}
-
 macro_rules! common_item {
     (
         $(
@@ -21,8 +17,7 @@ macro_rules! common_item {
             #[serde(rename_all = "camelCase")]
             pub struct $name {
                 /// Id to identify the item, should be unique.
-                #[serde(default = "default_id")]
-                id: String,
+                id: Option<String>,
                 /// Content to display in the item.
                 ///
                 /// Should follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).
