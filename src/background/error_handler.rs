@@ -69,17 +69,11 @@ impl From<AppError> for String {
 impl From<tauri_plugin_shell::process::Output> for AppError {
     fn from(output: tauri_plugin_shell::process::Output) -> Self {
         if !output.stderr.is_empty() {
-            String::from_utf8(output.stderr)
-                .unwrap_or_default()
-                .trim()
-                .to_owned()
-                .into()
+            let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stderr);
+            cow.to_string().into()
         } else {
-            String::from_utf8(output.stdout)
-                .unwrap_or_default()
-                .trim()
-                .to_owned()
-                .into()
+            let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
+            cow.to_string().into()
         }
     }
 }

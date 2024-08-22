@@ -4395,6 +4395,7 @@ dependencies = [
  "clap",
  "color-eyre",
  "crossbeam-channel",
+ "encoding_rs",
  "getset",
  "image 0.25.1",
  "itertools",

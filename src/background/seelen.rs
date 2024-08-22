@@ -243,7 +243,9 @@ impl Seelen {
             ])
             .output()
             .await?;
-        let stdout = String::from_utf8(output.stdout)?.trim().to_lowercase();
+
+        let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
+        let stdout = cow.to_string().trim().to_lowercase();
         Ok(stdout == "true")
     }
 
@@ -280,11 +282,7 @@ impl Seelen {
             .await?;
 
         if !output.status.success() {
-            let stderr = std::str::from_utf8(&output.stderr)
-                .unwrap_or_default()
-                .trim();
-
-            log::error!("schedule auto start failed: {}", stderr);
+            return Err(output.into());
         }
         Ok(())
     }

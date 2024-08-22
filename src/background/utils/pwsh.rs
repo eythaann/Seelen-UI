@@ -56,7 +56,8 @@ impl PwshScript {
         std::fs::remove_file(&script_path)?;
 
         if output.status.success() {
-            Ok(String::from_utf8(output.stdout)?.trim().to_owned())
+            let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
+            Ok(cow.trim().to_string())
         } else {
             Err(output.into())
         }

@@ -34,8 +34,10 @@ use modules::{
 };
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
+use seelen_core::state::Settings;
 use tray::try_register_tray_icon;
 use utils::PERFORMANCE_HELPER;
+use windows_api::WindowsApi;
 
 fn register_panic_hook() {
     std::panic::set_hook(Box::new(|info| {
@@ -72,6 +74,8 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     let version = env!("CARGO_PKG_VERSION");
     log::info!("───────────────────── Starting Seelen UI v{version} ─────────────────────");
     log::info!("Operating System: {}", os_info::get());
+    log::info!("Locate: {:?}", Settings::get_locale());
+    log::info!("Elevated: {:?}", WindowsApi::is_elevated());
     Client::listen_tcp()?;
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());

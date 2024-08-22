@@ -47,6 +47,10 @@ impl Default for Settings {
 }
 
 impl Settings {
+    pub fn get_locale() -> Option<String> {
+        sys_locale::get_locale()
+    }
+
     pub fn get_system_language() -> String {
         match sys_locale::get_locale() {
             Some(l) => l.split('-').next().unwrap_or("en").to_string(),

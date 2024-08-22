@@ -65,6 +65,7 @@ win-screenshot = "4.0.8"
 base64 = "0.22.1"
 arc-swap = "1.7.1"
 notify-debouncer-full = "0.3.1"
+encoding_rs = "0.8.34"
 
 [dependencies.windows]
 version = "=0.57.0"
