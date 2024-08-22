@@ -7,6 +7,7 @@
 ### fix
 - route no maintaining on cancel changes on settings window.
 - cancel button no working correctly after save the settings multiple times.
+- tray module no forcing tray overflow creating on startup.
 
 ## [1.9.10]
 ### features

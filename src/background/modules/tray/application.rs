@@ -45,20 +45,40 @@ pub fn get_sub_tree(
 
 // force_tray_overflow_creation should be called before get_tray_handle
 // https://learn.microsoft.com/en-us/answers/questions/1483214/win11-22h2-(10-0-22621)-cant-support-tb-buttoncount
-pub fn get_tray_overflow_handle() -> HWND {
+pub fn get_tray_overflow_handle() -> Option<HWND> {
     unsafe {
         if is_windows_10() {
             let tray_overflow = FindWindowA(pcstr!("NotifyIconOverFlowWindow"), None);
-            FindWindowExA(tray_overflow, HWND(0), pcstr!("ToolbarWindow32"), None)
-        } else {
-            let tray_overflow = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
-            FindWindowExA(
-                tray_overflow,
-                HWND(0),
-                None,
-                pcstr!("DesktopWindowXamlSource"),
-            )
+            if tray_overflow.0 == 0 {
+                return None;
+            }
+
+            let tray_overflow_content =
+                FindWindowExA(tray_overflow, HWND(0), pcstr!("ToolbarWindow32"), None);
+
+            if tray_overflow_content.0 == 0 {
+                return None;
+            }
+
+            return Some(tray_overflow_content);
         }
+
+        let tray_overflow = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
+        if tray_overflow.0 == 0 {
+            return None;
+        }
+
+        let tray_overflow_content = FindWindowExA(
+            tray_overflow,
+            HWND(0),
+            None,
+            pcstr!("DesktopWindowXamlSource"),
+        );
+        if tray_overflow_content.0 == 0 {
+            return None;
+        }
+
+        Some(tray_overflow_content)
     }
 }
 
@@ -66,9 +86,10 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
     if !is_windows_11() {
         return Ok(());
     }
+    log::trace!("Ensuring tray overflow is created");
 
-    let tray_overflow_hwnd = get_tray_overflow_handle();
-    if tray_overflow_hwnd.0 != 0 {
+    if let Some(tray_overflow_hwnd) = get_tray_overflow_handle() {
+        log::trace!("Tray overflow already created {:x}", tray_overflow_hwnd.0);
         return Ok(());
     }
 
@@ -120,8 +141,7 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
 
         let mut children = Vec::new();
 
-        let tray_overflow = get_tray_overflow_handle();
-        if tray_overflow.0 != 0 {
+        if let Some(tray_overflow) = get_tray_overflow_handle() {
             let element: IUIAutomationElement = automation.ElementFromHandle(tray_overflow)?;
             children.extend(get_sub_tree(&element, &condition, TreeScope_Descendants)?);
         }
@@ -237,7 +257,7 @@ impl TrayIcon {
             let key = settings.open_subkey_with_flags(id.to_string(), KEY_ALL_ACCESS)?;
 
             let promoted: u32 = key.get_value("IsPromoted").unwrap_or_default();
-            if promoted == 1 && WindowsApi::is_elevated()? {
+            if promoted == 1 {
                 // avoid show tray icons directly on taskbar
                 // all icons should be in the tray overflow window
                 key.set_value("IsPromoted", &0u32)?;
