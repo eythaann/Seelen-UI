@@ -62,6 +62,7 @@ wm:
   workspace_padding: ওয়ার্কস্পেস প্যাডিং
   enable: উইন্ডো ম্যানেজার সক্ষম করুন
   disabled_windows_version: উইন্ডো ম্যানেজারটি আপনার উইন্ডোজ সংস্করণের জন্য উপলভ্য নয়।
+  disabled_windows10: উইন্ডো ম্যানেজার উইন্ডোজ 10 এর জন্য উপলভ্য নয়।
 weg:
   items:
     size: আইটেমের আকার
@@ -92,6 +93,7 @@ apps_configurations:
       unmanage: আনম্যানেজ
       force: জোর পরিচালনা
       pinned: পিনড
+      hidden: ডক/টাস্কবার থেকে লুকান
     ok_create: সৃষ্টি
     name: নাম
     workspace_placeholder: কিছুই না
@@ -103,10 +105,11 @@ apps_configurations:
     ok_readonly: নতুন হিসাবে সম্পাদনা
     monitor: মনিটর
     title_edit: সম্পাদনা {{নাম}}
-    options_label: অতিরিক্ত বিকল্প
     title_create: '{{নাম}} তৈরি করা'
     workspace: কর্মক্ষেত্র
     bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
+    weg_options_label: ডক/টাস্কবার বিকল্প
+    wm_options_label: উইন্ডো ম্যানেজার বিকল্পগুলি
   identifier:
     or: বা
     and: এবং

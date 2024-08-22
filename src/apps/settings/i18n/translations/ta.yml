@@ -62,6 +62,7 @@ wm:
   workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
   layout: தளவமைப்பு
   disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சாளர மேலாளர் கிடைக்கவில்லை.
+  disabled_windows10: விண்டோஸ் 10 க்கு சாளர மேலாளர் கிடைக்கவில்லை.
 weg:
   items:
     label: பொருட்களை
@@ -92,8 +93,8 @@ apps_configurations:
       float: மிதவை
       unmanage: நிர்வகியுங்கள்
       force: கட்டாயம் நிர்வகி
+      hidden: கப்பல்துறை/பணிப்பட்டியிலிருந்து மறைக்கவும்
     monitor: கண்காணிக்கவும்
-    options_label: கூடுதல் விருப்பங்கள்
     title_create: '{{name}} உருவாக்குகிறது'
     workspace: பணியிடம்
     workspace_placeholder: இல்லை
@@ -107,6 +108,8 @@ apps_configurations:
     ok_readonly: புதியதாக திருத்தவும்
     title_edit: திருத்துகிறது {{name}}
     bindings: பிணைப்பு (இரண்டு விருப்பங்களும் தேவை என்பதை நினைவில் கொள்ளவும்)
+    wm_options_label: சாளர மேலாளர் விருப்பங்கள்
+    weg_options_label: கப்பல்துறை/பணிப்பட்டு விருப்பங்கள்
   identifier:
     and: மற்றும்
     remove: தடுப்பை நீக்கு

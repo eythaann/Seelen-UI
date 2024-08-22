@@ -62,6 +62,7 @@ wm:
   space_between_containers: Prostor mezi kontejnery
   workspace_padding: Polstrování pracovních prostorů
   disabled_windows_version: Správce oken není k dispozici pro vaši verzi Windows.
+  disabled_windows10: Správce oken není k dispozici pro Windows 10.
 weg:
   items:
     zoom_size: Zvětšená velikost (použitá pro témata)
@@ -92,13 +93,13 @@ apps_configurations:
       float: Plovák
       unmanage: Unmanage
       pinned: Připnuto
+      hidden: Skrýt před doku/hlavním panelem
     ok_create: Vytvořit
     workspace_placeholder: Žádný
     category: Kategorie
     ok_edit: Aktualizace
     title_readonly: Prohlížení {{name}}
     category_placeholder: Žádný
-    options_label: Další možnosti
     monitor_placeholder: Žádný
     bindings: Vazba (poznámka o tom, že jsou vyžadovány obě možnosti)
     workspace: Pracovní prostor
@@ -107,6 +108,8 @@ apps_configurations:
     ok_readonly: Upravit jako nové
     name: název
     monitor: Monitor
+    weg_options_label: Možnosti doku/hlavního panelu
+    wm_options_label: Možnosti správce oken
   identifier:
     add_block: Přidat blok
     negation: Negovat odpovídající

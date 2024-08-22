@@ -12,13 +12,9 @@ import { cloneDeep } from 'lodash';
 import { startup } from '../tauri/infra';
 
 import { RootActions, RootReducer } from './app/reducer';
-import {
-  StateAppsToYamlApps,
-  StateToJsonSettings,
-  StaticSettingsToState,
-  YamlToState_Apps,
-} from './app/StateBridge';
+import { StateToJsonSettings, StaticSettingsToState } from './app/StateBridge';
 
+import { AppConfiguration } from '../../appsConfigurations/domain';
 import { RootState, UIColors } from './domain';
 
 const IsSavingSettings = { current: false };
@@ -48,8 +44,8 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setColors(event.payload));
   });
 
-  await listenGlobal<anyObject[]>('settings-by-app', (event) => {
-    store.dispatch(RootActions.setAppsConfigurations(YamlToState_Apps(event.payload)));
+  await listenGlobal<AppConfiguration[]>('settings-by-app', (event) => {
+    store.dispatch(RootActions.setAppsConfigurations(event.payload));
   });
 
   await listenGlobal<any>(FileChange.Settings, (event) => {
@@ -97,15 +93,23 @@ export const SaveStore = async () => {
     const currentState = store.getState();
     const settings = {
       jsonSettings: StateToJsonSettings(currentState),
-      yamlSettings: [
-        //...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
-        ...StateAppsToYamlApps(currentState.appsConfigurations),
-      ],
+      yamlSettings: currentState.appsConfigurations,
     };
 
     IsSavingSettings.current = true;
     await saveUserSettings(settings);
-    store.dispatch(RootActions.setToBeSaved(false));
+
+    let newState = {
+      ...currentState,
+      lastLoaded: null,
+      toBeSaved: false,
+    };
+    store.dispatch(
+      RootActions.setState({
+        ...newState,
+        lastLoaded: cloneDeep(newState),
+      }),
+    );
   } catch (error) {
     Modal.error({
       title: 'Error on Save',

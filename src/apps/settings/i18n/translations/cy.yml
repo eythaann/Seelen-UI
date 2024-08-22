@@ -62,6 +62,7 @@ wm:
   resize_delta: Newid maint Delta (%)
   layout: Gynllun
   disabled_windows_version: Nid yw'r Rheolwr Ffenestr ar gael ar gyfer eich fersiwn Windows.
+  disabled_windows10: Nid yw'r Rheolwr Ffenestr ar gael ar gyfer Windows 10.
 weg:
   items:
     label: Eitemau
@@ -92,6 +93,7 @@ apps_configurations:
       force: Rheoli Llu
       unmanage: Di -reol
       float: Harnofion
+      hidden: Cuddio rhag doc/bar tasg
     category: Categori
     ok_readonly: Golygu fel NEWYDD
     bindings: Rhwymo (nodwch fod angen y ddau opsiwn)
@@ -99,7 +101,6 @@ apps_configurations:
     monitor_placeholder: Neb
     monitor: Monitrest
     name: Alwai
-    options_label: Opsiynau ychwanegol
     title_create: Creu {{enw}}
     workspace: Gweithle
     title_readonly: Gweld {{enw}}
@@ -107,6 +108,8 @@ apps_configurations:
     category_placeholder: Neb
     title_edit: Golygu {{enw}}
     ok_create: Chrëid
+    weg_options_label: Opsiynau doc/bar tasgau
+    wm_options_label: Opsiynau Rheolwr Ffenestr
   identifier:
     matching_strategy: Strategaeth gyfatebol
     id: Dynodwr

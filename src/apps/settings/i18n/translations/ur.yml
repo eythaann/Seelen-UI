@@ -61,6 +61,7 @@ wm:
   enable: ونڈو مینیجر کو فعال کریں
   workspace_padding: ورک اسپیس پیڈنگ
   disabled_windows_version: ونڈو مینیجر آپ کے ونڈوز ورژن کے لئے دستیاب نہیں ہے۔
+  disabled_windows10: ونڈو مینیجر ونڈوز 10 کے لئے دستیاب نہیں ہے۔
 weg:
   items:
     label: اشیاء
@@ -91,6 +92,7 @@ apps_configurations:
       unmanage: غیر منظم
       float: فلوٹ
       force: فورس کا انتظام کریں
+      hidden: گودی/ٹاسک بار سے چھپائیں
     category: قسم
     ok_edit: اپ ڈیٹ
     ok_create: بنانا
@@ -101,11 +103,12 @@ apps_configurations:
     ok_readonly: نئے کے طور پر ترمیم کریں
     category_placeholder: کوئی نہیں
     monitor: مانیٹر
-    options_label: اضافی اختیارات
     name: نام
     title_edit: ترمیم {{نام}}
     workspace_placeholder: کوئی نہیں
     title_create: '{{نام}} بنانا'
+    wm_options_label: ونڈو مینیجر کے اختیارات
+    weg_options_label: گودی/ٹاسک بار کے اختیارات
   identifier:
     and: اور
     remove: بلاک کو حذف کریں

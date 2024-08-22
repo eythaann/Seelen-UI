@@ -1,6 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add a option to hide apps from the dock/taskbar, requested on #5.
+
+### fix
+- route no maintaining on cancel changes on settings window.
+- cancel button no working correctly after save the settings multiple times.
+
 ## [1.9.10]
 ### features
 - add `getIcon` fn to the scopes of toolbar placeholders.

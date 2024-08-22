@@ -13,7 +13,8 @@
         "name"
       ],
       "properties": {
-        "bound_monitor_idx": {
+        "boundMonitor": {
+          "description": "monitor index that the app should be bound to",
           "type": [
             "integer",
             "null"
@@ -21,29 +22,39 @@
           "format": "uint",
           "minimum": 0.0
         },
-        "bound_workspace_name": {
+        "boundWorkspace": {
+          "description": "workspace name that the app should be bound to",
           "type": [
             "string",
             "null"
           ]
         },
         "category": {
+          "description": "category to group the app under",
           "type": [
             "string",
             "null"
           ]
         },
         "identifier": {
-          "$ref": "#/definitions/AppIdentifier"
+          "description": "app identifier",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AppIdentifier"
+            }
+          ]
         },
-        "is_bundled": {
+        "isBundled": {
+          "description": "is this config bundled with seelen ui.",
           "default": false,
           "type": "boolean"
         },
         "name": {
+          "description": "name of the app",
           "type": "string"
         },
         "options": {
+          "description": "extra specific options/settings for the app",
           "default": [],
           "type": "array",
           "items": {
@@ -53,16 +64,42 @@
       }
     },
     "AppExtraFlag": {
-      "type": "string",
-      "enum": [
-        "float",
-        "force",
-        "unmanage",
-        "pinned",
-        "object_name_change",
-        "layered",
-        "border_overflow",
-        "tray_and_multi_window"
+      "oneOf": [
+        {
+          "description": "Start the app in the center of the screen as floating in the wm.",
+          "type": "string",
+          "enum": [
+            "float"
+          ]
+        },
+        {
+          "description": "Force manage this app in the wm.",
+          "type": "string",
+          "enum": [
+            "force"
+          ]
+        },
+        {
+          "description": "Unmanage this app in the wm.",
+          "type": "string",
+          "enum": [
+            "unmanage"
+          ]
+        },
+        {
+          "description": "Pin this app in all the virtual desktops in the wm.",
+          "type": "string",
+          "enum": [
+            "pinned"
+          ]
+        },
+        {
+          "description": "Hide this app on the dock/taskbar.",
+          "type": "string",
+          "enum": [
+            "hidden"
+          ]
+        }
       ]
     },
     "AppIdentifier": {
@@ -70,7 +107,7 @@
       "required": [
         "id",
         "kind",
-        "matching_strategy"
+        "matchingStrategy"
       ],
       "properties": {
         "and": {
@@ -86,7 +123,7 @@
         "kind": {
           "$ref": "#/definitions/AppIdentifierType"
         },
-        "matching_strategy": {
+        "matchingStrategy": {
           "$ref": "#/definitions/MatchingStrategy"
         },
         "negation": {

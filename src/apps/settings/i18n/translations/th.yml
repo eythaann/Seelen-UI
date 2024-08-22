@@ -61,6 +61,7 @@ wm:
   enable: เปิดใช้งาน Manager Window
   workspace_padding: ช่องว่างพื้นที่ทำงาน
   disabled_windows_version: ตัวจัดการหน้าต่างไม่สามารถใช้งานได้สำหรับเวอร์ชัน Windows ของคุณ
+  disabled_windows10: ตัวจัดการหน้าต่างไม่สามารถใช้ได้สำหรับ Windows 10
 weg:
   items:
     size: ขนาดรายการ
@@ -91,6 +92,7 @@ apps_configurations:
       force: บังคับให้จัดการ
       pinned: ที่ถูกตรึง
       unmanage: ไม่มีการจัดการ
+      hidden: ซ่อนจากท่าเรือ/บาร์
     title_readonly: การดู {{ชื่อ}}
     category: หมวดหมู่
     monitor_placeholder: ไม่มี
@@ -105,7 +107,8 @@ apps_configurations:
     name: ชื่อ
     bindings: การเชื่อม (หมายเหตุทั้งสองตัวเลือกเป็นสิ่งจำเป็น)
     title_create: การสร้าง {{ชื่อ}}
-    options_label: ตัวเลือกพิเศษ
+    weg_options_label: ตัวเลือกท่าเทียบเรือ/บาร์
+    wm_options_label: ตัวเลือกตัวจัดการหน้าต่าง
   identifier:
     and: และ
     or: หรือ

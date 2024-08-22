@@ -62,6 +62,7 @@ wm:
   space_between_containers: Konteynerler arasındaki boşluk
   workspace_offset: Çalışma alanları ofseti (kenar boşlukları)
   disabled_windows_version: Pencere yöneticisi Windows sürümünüz için mevcut değildir.
+  disabled_windows10: Pencere yöneticisi Windows 10 için mevcut değildir.
 weg:
   items:
     label: Öğeler
@@ -92,13 +93,13 @@ apps_configurations:
       pinned: Sabitlenmiş
       force: Zorlamak
       unmanage: Yönetilmek
+      hidden: Rıhtım/Görev Çubuğundan Gizle
     title_create: '{{Name}} oluşturmak'
     monitor: İzlemek
     category_placeholder: Hiçbiri
     ok_create: Yaratmak
     ok_edit: Güncelleme
     monitor_placeholder: Hiçbiri
-    options_label: Ekstra Seçenekler
     name: İsim
     bindings: Bağlama (Not Her iki seçeneğin de gerekli olduğunu not edin)
     category: Kategori
@@ -107,6 +108,8 @@ apps_configurations:
     workspace_placeholder: Hiçbiri
     ok_readonly: Yeni Olarak Düzenle
     title_edit: Düzenleme {{name}}
+    wm_options_label: Pencere Yöneticisi Seçenekleri
+    weg_options_label: Rıhtım/Görev Çubuğu Seçenekleri
   identifier:
     and: VE
     matching_strategy: Eşleştirme Stratejisi

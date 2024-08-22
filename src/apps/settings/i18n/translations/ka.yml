@@ -62,6 +62,7 @@ wm:
   workspace_padding: სამუშაო ადგილები padding
   layout: გამოფენა
   disabled_windows_version: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი თქვენი Windows ვერსიისთვის.
+  disabled_windows10: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი Windows 10 -ისთვის.
 weg:
   items:
     label: ნივთები
@@ -92,12 +93,12 @@ apps_configurations:
       pinned: დადგენილება
       force: ძალის მართვა
       float: ტივტივი
+      hidden: დამალვა დოკიდან/დავალებისგან
     category: კატეგორია
     ok_create: Შექმნა
     bindings: სავალდებულო (შენიშვნა საჭიროა ორივე ვარიანტი)
     category_placeholder: არაფერი
     workspace_placeholder: არაფერი
-    options_label: დამატებითი პარამეტრები
     ok_edit: განახლება
     title_edit: რედაქტირება {{სახელი}}
     workspace: სამუშაო ადგილი
@@ -107,6 +108,8 @@ apps_configurations:
     title_readonly: ნახვა {{სახელი}}
     monitor_placeholder: არაფერი
     monitor: შემოწმება
+    weg_options_label: დოკ/დავალების პანელის პარამეტრები
+    wm_options_label: ფანჯრის მენეჯერის პარამეტრები
   identifier:
     and: და
     id: პირადობა

@@ -61,6 +61,7 @@ wm:
   resize_delta: Татбиқи Delta (%)
   workspace_padding: Worlpaces Padding
   disabled_windows_version: Менеҷери тиреза барои версияи Windows дастрас нест.
+  disabled_windows10: Менеҷери тиреза барои Windows 10 дастрас нест.
 weg:
   items:
     zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
@@ -91,6 +92,7 @@ apps_configurations:
       float: Шино кардан
       pinned: Пинҳон
       force: Идоракунии қувва
+      hidden: Аз док / паноҳгоҳ пинҳон кунед
     monitor_placeholder: Ҳеь
     monitor: Назорат
     category: Категория
@@ -98,7 +100,6 @@ apps_configurations:
     workspace_placeholder: Ҳеь
     ok_create: Сохтан
     title_readonly: Дидани {{НОМ}}
-    options_label: Имконоти иловагӣ
     workspace: Корӣ
     bindings: Бодед
     name: Ном
@@ -106,6 +107,8 @@ apps_configurations:
     ok_edit: Навсозӣ
     ok_readonly: Ҳамчун нав
     title_create: Эҷоди {{НОМИ}}
+    weg_options_label: Параметрҳои Dock / Pitibar
+    wm_options_label: Имконоти мудири равзана
   identifier:
     or: Ё
     kind: Муайян мекунад

@@ -62,6 +62,7 @@ wm:
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων
   resize_delta: Αλλαγή μεγέθους Delta (%)
   disabled_windows_version: Ο διαχειριστής παραθύρων δεν είναι διαθέσιμος για την έκδοση των Windows.
+  disabled_windows10: Ο διαχειριστής παραθύρων δεν είναι διαθέσιμος για τα Windows 10.
 weg:
   items:
     size: Μέγεθος αντικειμένου
@@ -92,8 +93,8 @@ apps_configurations:
       pinned: Καρφωμένος
       force: Διαχειριστείτε τη δύναμη
       unmanage: Μη διαχείριση
+      hidden: Απόκρυψη από τη γραμμή αποβάθρας/εργασιών
     title_readonly: Προβολή {{όνομα}}
-    options_label: Επιπλέον επιλογές
     title_create: Δημιουργία {{name}}
     bindings: Σύνδεση (σημειώστε ότι και οι δύο επιλογές απαιτούνται)
     ok_readonly: Επεξεργαστείτε ως νέο
@@ -107,6 +108,8 @@ apps_configurations:
     workspace_placeholder: Κανένας
     workspace: Χώρος εργασίας
     title_edit: Επεξεργασία {{όνομα}}
+    weg_options_label: Επιλογές της γραμμής αποβάθρας/εργασιών
+    wm_options_label: Επιλογές διαχείρισης παραθύρων
   identifier:
     or: Ή
     id: Αναγνωριστικό

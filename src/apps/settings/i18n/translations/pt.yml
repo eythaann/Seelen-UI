@@ -69,6 +69,7 @@ wm:
     width: Largura da borda
     offset: Deslocamento de borda
   disabled_windows_version: O gerenciador de janelas não está disponível para sua versão do Windows.
+  disabled_windows10: O gerenciador de janelas não está disponível para o Windows 10.
 weg:
   label: Dock/barra de tarefas
   enable: Habilitar Dock/Barra de Tarefas
@@ -121,12 +122,14 @@ apps_configurations:
     ok_edit: Atualizar
     ok_create: Criar
     ok_readonly: Editar como novo
-    options_label: Opções extras
     options:
       float: Flutuador
       unmanage: Não gerenciar
       force: Forçar gerenciamento
       pinned: Fixado
+      hidden: Esconda -se da doca/barra de tarefas
+    weg_options_label: Opções de doca/barra de tarefas
+    wm_options_label: Opções do gerenciador de janelas
   identifier:
     remove: Excluir bloco
     id: Identificador

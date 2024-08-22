@@ -62,6 +62,7 @@ wm:
   author: Автор
   workspace_offset: Изместване на работните пространства (маржове)
   disabled_windows_version: Мениджърът на прозореца не е достъпен за вашата версия на Windows.
+  disabled_windows10: Мениджърът на прозореца не е достъпен за Windows 10.
 weg:
   items:
     zoom_size: Размерът на мащабиране (използван за теми)
@@ -92,6 +93,7 @@ apps_configurations:
       float: Float
       unmanage: Несъгласен
       pinned: Прикован
+      hidden: Скрийте се от Dock/Taskbar
     title_edit: Редактиране {{name}}
     title_create: Създаване {{name}}
     workspace: Работно пространство
@@ -102,11 +104,12 @@ apps_configurations:
     name: Име
     workspace_placeholder: Нито един
     bindings: Обвързване (Забележете, че и двете опции са необходими)
-    options_label: Допълнителни опции
     title_readonly: Преглед {{name}}
     monitor: Монитор
     category_placeholder: Нито един
     ok_create: Създаване
+    wm_options_label: Опции за мениджър на прозорци
+    weg_options_label: Опции за док/лента на задачите
   identifier:
     add_block: Добавете блок
     remove: Изтриване на блок

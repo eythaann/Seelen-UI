@@ -62,6 +62,7 @@ wm:
   space_between_containers: Простір між контейнерами
   workspace_padding: Прокладка робочих просторів
   disabled_windows_version: Менеджер вікон недоступний для вашої версії Windows.
+  disabled_windows10: Менеджер вікон недоступний для Windows 10.
 weg:
   items:
     label: Предмети
@@ -92,8 +93,8 @@ apps_configurations:
       float: Плавати
       pinned: Закріплений
       unmanage: Неемінь
+      hidden: Сховати з доки/панелі завдань
     ok_edit: Оновити
-    options_label: Додаткові варіанти
     monitor: Моніторинг
     category: Категорія
     title_create: Створення {{Ім'я}}
@@ -107,6 +108,8 @@ apps_configurations:
     ok_create: Створити
     name: Назва
     bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
+    weg_options_label: Параметри Dock/Taskbar
+    wm_options_label: Параметри менеджера вікон
   identifier:
     and: І
     add_block: Додати блок

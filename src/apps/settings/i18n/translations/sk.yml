@@ -62,6 +62,7 @@ wm:
   description: Opis
   workspace_offset: Offsety Workspaces (marže)
   disabled_windows_version: Správca okien nie je k dispozícii pre vašu verziu systému Windows.
+  disabled_windows10: Správca okien nie je k dispozícii pre Windows 10.
 weg:
   items:
     size: Veľkosť položky
@@ -92,6 +93,7 @@ apps_configurations:
       force: Riadiť silu
       pinned: Pripnutý
       unmanage: Nemeniť
+      hidden: Skryť pred prístaviskom/panelom úloh
     name: názov
     ok_edit: Aktualizácia
     workspace: Pracovný priestor
@@ -100,13 +102,14 @@ apps_configurations:
     bindings: Viazanie (POZNÁMKA sú potrebné obe možnosti)
     title_edit: Editovanie {{name}}
     workspace_placeholder: Žiadny
-    options_label: Ďalšie možnosti
     category_placeholder: Žiadny
     ok_create: Vytvárať
     title_readonly: Prezeranie {{name}}
     monitor_placeholder: Žiadny
     category: Kategória
     monitor: Monitor
+    wm_options_label: Možnosti správcu okien
+    weg_options_label: Možnosti doku/panela úloh
   identifier:
     remove: Vymazať blok
     negation: Negovať zladenie

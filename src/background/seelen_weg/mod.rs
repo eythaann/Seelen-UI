@@ -9,6 +9,7 @@ use icon_extractor::extract_and_save_icon;
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::state::AppExtraFlag;
 use serde::Serialize;
 use tauri::{path::BaseDirectory, Emitter, Listener, Manager, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
@@ -166,16 +167,20 @@ impl SeelenWeg {
             return;
         }
 
-        log::trace!(
-            "Adding {} <=> {}",
-            hwnd.0,
-            WindowsApi::get_window_text(hwnd)
-        );
+        let title = WindowsApi::get_window_text(hwnd);
 
+        if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
+            if config.options.contains(&AppExtraFlag::Hidden) {
+                log::trace!("Skipping by config: {} <=> {}", hwnd.0, title);
+                return;
+            }
+        }
+
+        log::trace!("Adding {} <=> {}", hwnd.0, title);
         let mut app = SeelenWegApp {
             hwnd: hwnd.0,
             exe: String::new(),
-            title: WindowsApi::get_window_text(hwnd),
+            title,
             icon_path: String::new(),
             execution_path: String::new(),
             process_hwnd: hwnd.0,

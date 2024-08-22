@@ -62,6 +62,7 @@ wm:
   workspace_padding: Mga workspaces padding
   resize_delta: Baguhin ang laki ng Delta (%)
   disabled_windows_version: Ang window manager ay hindi magagamit para sa iyong bersyon ng Windows.
+  disabled_windows10: Ang window manager ay hindi magagamit para sa Windows 10.
 weg:
   items:
     label: Mga item
@@ -92,6 +93,7 @@ apps_configurations:
       force: Pamahalaan ang Pamahalaan
       pinned: Naka -pin
       unmanage: Hindi namamahala
+      hidden: Itago mula sa pantalan/taskbar
     bindings: Ang pagbubuklod (tandaan ang parehong mga pagpipilian ay kinakailangan)
     ok_edit: I -update
     title_create: Lumilikha ng {{pangalan}}
@@ -102,11 +104,12 @@ apps_configurations:
     title_edit: Pag -edit {{pangalan}}
     category: Kategorya
     ok_readonly: I -edit bilang bago
-    options_label: Dagdag na mga pagpipilian
     workspace: Workspace
     monitor: Subaybayan
     workspace_placeholder: Wala
     name: Pangalan
+    wm_options_label: Mga pagpipilian sa Window Manager
+    weg_options_label: Mga pagpipilian sa pantalan/taskbar
   identifier:
     id: Identifier
     negation: Negate pagtutugma

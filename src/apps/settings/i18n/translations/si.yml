@@ -62,6 +62,7 @@ wm:
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   workspace_offset: වැඩබිම් ඕෆ්සෙට් (ආන්තික)
   disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා කවුළු කළමනාකරු ලබා ගත නොහැක.
+  disabled_windows10: කවුළු කළමනාකරු වින්ඩෝස් 10 සඳහා ලබා ගත නොහැක.
 weg:
   items:
     label: අයිතම
@@ -92,13 +93,13 @@ apps_configurations:
       pinned: පින් කර ඇත
       force: බල කළමනාකරණය
       unmanage: කළමනාකරණය කරන්න
+      hidden: තටාකයේ / කාර්ය තීරුවෙන් සඟවන්න
     title_create: '{{name}} නිර්මාණය කරමින්'
     monitor: නිරීක්ෂණය කරන්න
     category_placeholder: කිසිවක් නැත
     name: නම
     workspace_placeholder: කිසිවක් නැත
     monitor_placeholder: කිසිවක් නැත
-    options_label: අමතර විකල්ප
     ok_edit: යාවත්කාලීන කරන්න
     category: වර්ගය
     title_edit: '{{name}} සංස්කරණය කරමින්'
@@ -107,6 +108,8 @@ apps_configurations:
     ok_readonly: නව ලෙස සංස්කරණය කරන්න
     title_readonly: '{{name}} බලමින්'
     ok_create: නිර්මාණය කරන්න
+    weg_options_label: තටාකය / කාර්ය තීරුව විකල්ප
+    wm_options_label: කවුළු කළමනාකරුගේ විකල්ප
   identifier:
     and: සහ
     add_block: බ්ලොක් එක් කරන්න

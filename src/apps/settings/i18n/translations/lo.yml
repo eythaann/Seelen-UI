@@ -63,6 +63,7 @@ wm:
   workspace_padding: ພື້ນທີ່ເຮັດວຽກ Padding
   workspace_offset: ພື້ນທີ່ເຮັດວຽກຊົດເຊີຍ (ຂອບ)
   disabled_windows_version: ຜູ້ຈັດການປ່ອງຢ້ຽມບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບລຸ້ນ Windows ຂອງທ່ານ.
+  disabled_windows10: ຜູ້ຈັດການປ່ອງຢ້ຽມບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບ Windows 10.
 weg:
   items:
     label: ລາຍການ
@@ -93,9 +94,9 @@ apps_configurations:
       unmanage: ຍົກເລີກການຈັດການ
       pinned: ປັກໝຸດ
       force: ບັງຄັບໃຫ້ຈັດການ
+      hidden: ເຊື່ອງຈາກ Dock / Taskbar
     monitor: ຕິດຕາມກວດກາ
     title_create: ການສ້າງ {{name}}
-    options_label: ທາງເລືອກພິເສດ
     monitor_placeholder: ບໍ່ມີ
     workspace_placeholder: ບໍ່ມີ
     name: ຊື່
@@ -108,6 +109,8 @@ apps_configurations:
     ok_readonly: ແກ້ໄຂເປັນໃໝ່
     ok_create: ສ້າງ
     bindings: ການຜູກມັດ (ຫມາຍເຫດທັງສອງທາງເລືອກແມ່ນຈໍາເປັນ)
+    weg_options_label: ທາງເລືອກ Dock / Taskasbar
+    wm_options_label: ຕົວເລືອກຜູ້ຈັດການ window Manager
   identifier:
     and: ແລະ
     negation: Negate ການຈັບຄູ່

@@ -62,6 +62,7 @@ wm:
   workspace_padding: Arbejdsområder polstring
   workspace_offset: Arbejdsområder offset (marginer)
   disabled_windows_version: Window Manager er ikke tilgængelig til din Windows -version.
+  disabled_windows10: Window Manager er ikke tilgængelig til Windows 10.
 weg:
   items:
     label: Genstande
@@ -92,12 +93,12 @@ apps_configurations:
       float: Flyde
       pinned: Fastgjort
       unmanage: Uudvikling
+      hidden: Skjul for dock/proceslinje
     title_edit: Redigering {{navn}}
     monitor_placeholder: Ingen
     ok_edit: Opdatering
     workspace: Arbejdsområde
     category: Kategori
-    options_label: Ekstra muligheder
     bindings: Binding (note begge muligheder er påkrævet)
     title_readonly: Visning {{navn}}
     name: Navn
@@ -107,6 +108,8 @@ apps_configurations:
     title_create: Oprettelse af {{navn}}
     ok_create: skab
     monitor: Overvåge
+    wm_options_label: Vindueschefindstillinger
+    weg_options_label: Dock/proceslinjemuligheder
   identifier:
     id: Identifikator
     add_block: Tilføj blok

@@ -62,6 +62,7 @@ wm:
   workspace_offset: កន្លែងធ្វើការអុហ្វសិត (រឹម)
   resize_delta: ប្តូរទំហំដីសណ្តរ (%)
   disabled_windows_version: កម្មវិធីគ្រប់គ្រងបង្អួចមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
+  disabled_windows10: កម្មវិធីគ្រប់គ្រងបង្អួចមិនមានសម្រាប់វីនដូ 10 ទេ។
 weg:
   items:
     label: ធាតុ
@@ -92,13 +93,13 @@ apps_configurations:
       float: អណ្តែត
       force: គ្រប់គ្រងដោយបង្ខំ
       unmanage: មិនគ្រប់គ្រង
+      hidden: លាក់ខ្លួនពីចត / ភារកិច្ច
     workspace_placeholder: គ្មាន
     workspace: កន្លែងធ្វើការ
     monitor_placeholder: គ្មាន
     category_placeholder: គ្មាន
     category: ប្រភេទ
     name: ឈ្មោះ
-    options_label: ជម្រើសបន្ថែម
     title_create: ការបង្កើត {{name}}
     title_readonly: កំពុងមើល {{name}}
     title_edit: ការកែសម្រួល {{name}}
@@ -107,6 +108,8 @@ apps_configurations:
     ok_create: បង្កើត
     bindings: ការចង (ចំណាំជម្រើសទាំងពីរត្រូវបានទាមទារ)
     ok_readonly: កែសម្រួលដូចថ្មី។
+    weg_options_label: ជម្រើសចត / ភារកិច្ច
+    wm_options_label: ជម្រើសកម្មវិធីគ្រប់គ្រងបង្អួច
   identifier:
     and: និង
     remove: លុបប្លុក

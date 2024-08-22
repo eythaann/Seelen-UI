@@ -70,6 +70,7 @@ wm:
     width: Ширина рамки
     offset: Смещение границы
   disabled_windows_version: Window Manager недоступен для вашей версии Windows.
+  disabled_windows10: Диспетчер окон не доступен для Windows 10.
 weg:
   label: Док/Панель задач
   enable: Включить док/панель задач
@@ -122,12 +123,14 @@ apps_configurations:
     ok_edit: Обновлять
     ok_create: Создавать
     ok_readonly: Редактировать как новый
-    options_label: Дополнительные опции
     options:
       float: Плавать
       unmanage: Отменить управление
       force: Принудительное управление
       pinned: Закреплено
+      hidden: Скрыть от дока/панели задач
+    wm_options_label: Параметры Window Manager
+    weg_options_label: Параметры дока/панели задач
   identifier:
     remove: Удалить блок
     id: Идентификатор

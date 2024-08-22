@@ -61,6 +61,7 @@ wm:
   enable: Цонх менежерийг идэвхжүүлэх
   resize_delta: Дельтааг өөрчлөх (%)
   disabled_windows_version: Цонхны менежер таны Windows хувилбарт ашиглах боломжгүй.
+  disabled_windows10: Цонхны менежер Windows 10-д байхгүй байна.
 weg:
   items:
     label: Зүйл
@@ -91,6 +92,7 @@ apps_configurations:
       float: Нисэн өнгөрөх
       force: Хүч удирдах
       unmanage: Нээлттэй
+      hidden: Док / Taskbar-аас нуух
     category: Зэрэглэл
     title_readonly: Үзэх {{нэр}}
     bindings: Батлах (Анхааруулга хоёулаа сонголтыг оруулах шаардлагатай)
@@ -101,11 +103,12 @@ apps_configurations:
     workspace_placeholder: Хэн ч
     title_edit: '{{Нэр}}}}'
     ok_create: Шуүгиан дэгдээх
-    options_label: Нэмий сонголт
     ok_readonly: Шинэ болгон засах
     name: Нэр
     monitor_placeholder: Хэн ч
     title_create: Үүсгэх {{нэр}}}
+    wm_options_label: Цонх менежерийн сонголтууд
+    weg_options_label: Док / Taskbar сонголтууд
   identifier:
     id: Өмнө тайлбар
     or: ЭСВЭЛ

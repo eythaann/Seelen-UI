@@ -62,6 +62,7 @@ wm:
   resize_delta: Delta (%) ni o'zgartiring
   workspace_padding: Ish plakding
   disabled_windows_version: Windows versiyangiz uchun deraza menejeri mavjud emas.
+  disabled_windows10: Windows 10 uchun deraza menejeri mavjud emas.
 weg:
   items:
     gap: Buyumlar orasidagi bo'shliq
@@ -92,7 +93,7 @@ apps_configurations:
       pinned: Zebo
       float: Suzmoq
       unmanage: Ishtiyoq
-    options_label: Qo'shimcha variantlar
+      hidden: Dock / vazifalar panelidan yashirish
     ok_readonly: Yangi sifatida tahrirlash
     title_readonly: Ko'rish {{ism}}
     title_create: '{{Ism}} yaratish'
@@ -107,6 +108,8 @@ apps_configurations:
     ok_create: Yaratmoq
     ok_edit: Yangilamoq
     title_edit: '{{Ism}} tahrirlash'
+    wm_options_label: Oyna boshqaruvchisi variantlari
+    weg_options_label: Dok / vazifalar paneli
   identifier:
     add_block: Blokni qo'shish
     remove: Blokni o'chirish

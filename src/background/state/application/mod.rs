@@ -398,18 +398,18 @@ impl FullState {
 
         self.settings_by_app.clear();
 
-        if user_apps_path.exists() {
-            let content = std::fs::read_to_string(&user_apps_path)?;
-            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
-            self.settings_by_app.extend(apps);
-        }
-
         for entry in apps_templates_path.read_dir()?.flatten() {
             let content = std::fs::read_to_string(entry.path())?;
             let mut apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
             for app in apps.iter_mut() {
                 app.is_bundled = true;
             }
+            self.settings_by_app.extend(apps);
+        }
+
+        if user_apps_path.exists() {
+            let content = std::fs::read_to_string(&user_apps_path)?;
+            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
             self.settings_by_app.extend(apps);
         }
 

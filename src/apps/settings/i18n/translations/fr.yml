@@ -65,6 +65,7 @@ wm:
     width: Largeur de la bordure
     offset: Décalage de bordure
   disabled_windows_version: Le gestionnaire de fenêtres n'est pas disponible pour votre version Windows.
+  disabled_windows10: Le gestionnaire de fenêtres n'est pas disponible pour Windows 10.
 weg:
   label: Dock/Barre des tâches
   enable: Activer le Dock/la barre des tâches
@@ -117,12 +118,14 @@ apps_configurations:
     ok_edit: Mise à jour
     ok_create: Créer
     ok_readonly: Modifier comme nouveau
-    options_label: Options supplémentaires
     options:
       float: Flotter
       unmanage: Annuler la gestion
       force: Forcer la gestion
       pinned: Épinglé
+      hidden: Masquer à Dock / Taskbar
+    wm_options_label: Options du gestionnaire de fenêtres
+    weg_options_label: Options de quai / barre des tâches
   identifier:
     remove: Supprimer le bloc
     id: Identifiant

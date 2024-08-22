@@ -62,6 +62,7 @@ wm:
   layout: लेआउट
   enable: विंडो मैनेजर सक्षम करें
   disabled_windows_version: विंडो मैनेजर आपके विंडोज संस्करण के लिए उपलब्ध नहीं है।
+  disabled_windows10: विंडोज 10 के लिए विंडो मैनेजर उपलब्ध नहीं है।
 weg:
   items:
     visible_separators: दृश्य विभाजक
@@ -92,6 +93,7 @@ apps_configurations:
       pinned: पिन की गई
       unmanage: अमानवीय
       float: तैरना
+      hidden: डॉक/टास्कबार से छिपाएं
     title_create: '{{नाम}} बनाना'
     ok_edit: अद्यतन
     ok_readonly: नए के रूप में संपादित करें
@@ -103,10 +105,11 @@ apps_configurations:
     monitor: निगरानी करना
     category: वर्ग
     workspace_placeholder: कोई नहीं
-    options_label: अतिरिक्त विकल्प
     name: नाम
     ok_create: बनाएं
     title_readonly: '{{नाम}} देखना'
+    wm_options_label: विंडो मैनेजर विकल्प
+    weg_options_label: डॉक/टास्कबार विकल्प
   identifier:
     remove: ब्लॉक हटाएं
     add_block: ब्लॉक जोड़ें

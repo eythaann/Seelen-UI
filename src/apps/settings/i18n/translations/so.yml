@@ -61,6 +61,7 @@ wm:
   space_between_containers: Meel bannaan oo u dhexeeya weelka
   workspace_padding: Goobta Goobta Goobta
   disabled_windows_version: Maamulaha daaqada looma heli karo nooca Windows-kaaga.
+  disabled_windows10: Maamulaha daaqada ayaan loo heli karin Windows 10.
 weg:
   items:
     gap: Meel udhaxeysa waxyaabaha
@@ -91,12 +92,12 @@ apps_configurations:
       float: Sabbayn
       unmanage: Aan lahayn
       force: Xoog u maareeyaan
+      hidden: Ka qarsoon xijaabka / Turniinka
     title_create: Abuuritaanka {{Magaca {Magaca}
     bindings: Xirashada (Xusuusin labada ikhtiyaar ayaa loo baahan yahay)
     ok_readonly: Tafatir sida cusub
     monitor_placeholder: Midna
     category: Dabaqad
-    options_label: Fursadaha dheeraadka ah
     ok_edit: Cusboonaysiin
     workspace: Shaqo-joojin
     title_readonly: Daawashada {{,}
@@ -106,6 +107,8 @@ apps_configurations:
     workspace_placeholder: Midna
     ok_create: Abuurid
     title_edit: Tafatirka {{magacii}
+    weg_options_label: Dock / Fursadaha Hawlgalka
+    wm_options_label: Xulashooyinka Maamulaha daaqada
   identifier:
     remove: Tirtir xannibaadda
     matching_strategy: Istaraatiijiyadda iswaafajinta

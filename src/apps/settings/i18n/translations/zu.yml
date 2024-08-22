@@ -62,6 +62,7 @@ wm:
   workspace_padding: I-Workespashe Padding
   enable: Nika amandla umphathi wewindi
   disabled_windows_version: Imenenja yewindows ayitholakali ngenguqulo yakho yeWindows.
+  disabled_windows10: Imenenja yewindows ayitholakali ngeWindows 10.
 weg:
   items:
     size: Usayizi wento
@@ -92,6 +93,7 @@ apps_configurations:
       pinned: Uphinisiwe
       force: Cindezela Phatha
       float: Thwala amaphiko
+      hidden: Fihla kusuka edokodweni / ye-taskbar
     bindings: Ukubopha (inothi zombili izinketho ziyadingeka)
     title_readonly: Ukubuka {{igama}}
     title_create: Ukudala {{igama}}
@@ -99,7 +101,6 @@ apps_configurations:
     category_placeholder: Namunye
     monitor: Qapha
     name: Ibizo
-    options_label: Izinketho Ezengeziwe
     ok_edit: Buyekeza
     monitor_placeholder: Namunye
     workspace_placeholder: Namunye
@@ -107,6 +108,8 @@ apps_configurations:
     workspace: Indawo
     title_edit: Ukuhleleka {{igama}}
     ok_create: Dala
+    wm_options_label: Izinketho ze-Window Manager
+    weg_options_label: Izinketho ze-Dock / Taskbar
   identifier:
     remove: Susa ibhulokhi
     matching_strategy: Isu lokuqondanisa

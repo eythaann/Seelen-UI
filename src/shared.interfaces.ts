@@ -3,13 +3,15 @@ import { Placeholder } from './apps/shared/schemas/Placeholders';
 import { ISettings } from './apps/shared/schemas/Settings';
 import { Theme } from './apps/shared/schemas/Theme';
 
+import { AppConfiguration } from './apps/settings/modules/appsConfigurations/domain';
+
 export interface IRootState<T> {
   settings: T;
 }
 
 export interface UserSettings {
   jsonSettings: ISettings;
-  yamlSettings: anyObject[];
+  yamlSettings: AppConfiguration[];
   themes: Theme[];
   layouts: Layout[];
   placeholders: Placeholder[];

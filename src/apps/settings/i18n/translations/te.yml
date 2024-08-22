@@ -62,6 +62,7 @@ wm:
   workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)
   resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
   disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం విండో మేనేజర్ అందుబాటులో లేదు.
+  disabled_windows10: విండోస్ 10 కి విండో మేనేజర్ అందుబాటులో లేదు.
 weg:
   items:
     label: వస్తువులు
@@ -92,8 +93,8 @@ apps_configurations:
       float: ఫ్లోట్
       unmanage: నిర్వహించవద్దు
       force: బలవంతంగా నిర్వహించండి
+      hidden: డాక్/టాస్క్‌బార్ నుండి దాచండి
     monitor: మానిటర్
-    options_label: అదనపు ఎంపికలు
     workspace: కార్యస్థలం
     workspace_placeholder: ఏదీ లేదు
     category_placeholder: ఏదీ లేదు
@@ -107,6 +108,8 @@ apps_configurations:
     ok_readonly: కొత్తదిగా సవరించండి
     bindings: బైండింగ్ (రెండు ఎంపికలు అవసరమని గమనించండి)
     ok_create: సృష్టించు
+    weg_options_label: డాక్/టాస్క్‌బార్ ఎంపికలు
+    wm_options_label: విండో మేనేజర్ ఎంపికలు
   identifier:
     and: మరియు
     negation: సరిపోలికను తిరస్కరించండి

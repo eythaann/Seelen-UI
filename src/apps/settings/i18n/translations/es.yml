@@ -69,6 +69,7 @@ wm:
     width: Ancho del borde
     offset: Desplazamiento del borde
   disabled_windows_version: El Administrador de ventanas no está disponible para su versión de Windows.
+  disabled_windows10: El administrador de la ventana no está disponible para Windows 10.
 weg:
   label: Dock/Barra de tareas
   enable: Habilitar dock/barra de tareas
@@ -121,12 +122,14 @@ apps_configurations:
     ok_edit: Actualizar
     ok_create: Crear
     ok_readonly: Editar como nuevo
-    options_label: Opciones adicionales
     options:
       float: Flotar
       unmanage: No gestionar
       force: Forzar gestión
       pinned: Fijado
+      hidden: Esconderse del muelle/barra de tareas
+    wm_options_label: Opciones de administrador de ventanas
+    weg_options_label: Opciones de barra de muelle/tareas
   identifier:
     remove: Eliminar bloque
     id: Identificador

@@ -61,6 +61,7 @@ wm:
   resize_delta: रिसाइज डेल्टा (%)
   workspace_padding: कार्यक्षेत्र प्याडिंग
   disabled_windows_version: विन्डो प्रबन्धक तपाईंको विन्डोज संस्करणका लागि उपलब्ध छैन।
+  disabled_windows10: विन्डो प्रबन्धक विन्डोज 10 को लागि उपलब्ध छैन।
 weg:
   items:
     label: वस्तुहरू
@@ -91,11 +92,11 @@ apps_configurations:
       float: उत्रनु
       unmanage: अज्ञात
       force: शक्ति प्रबन्ध
+      hidden: डक / टास्कबारबाट लुकाउनुहोस्
     bindings: बाध्यकारी (नोटहरू दुबै विकल्पहरू आवश्यक छन्)
     ok_create: सृष्टि गर्नु्
     title_edit: '{{{Name n}}}}}}'
     ok_readonly: नयाँ जस्तै सम्पादन गर्नुहोस्
-    options_label: अतिरिक्त विकल्पहरू
     workspace: कार्यक्षेत्र
     category_placeholder: केहि पनि होइन
     ok_edit: अद्यावधिक गर्नुहोस्
@@ -106,6 +107,8 @@ apps_configurations:
     title_create: '{{Neame नाम} सिर्जना गर्दै}'
     monitor_placeholder: केहि पनि होइन
     workspace_placeholder: केहि पनि होइन
+    wm_options_label: विन्डो प्रबन्धक विकल्पहरू
+    weg_options_label: डक / टास्कबार विकल्पहरू विकल्पहरू
   identifier:
     and: र
     id: पहिचानकर्ता

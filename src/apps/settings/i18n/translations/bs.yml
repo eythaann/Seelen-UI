@@ -62,6 +62,7 @@ wm:
   space_between_containers: Prostor između kontejnera
   workspace_padding: Djelatna površina obloga
   disabled_windows_version: Upravitelj prozora nije dostupan za vašu Windows verziju.
+  disabled_windows10: Upravitelj prozora nije dostupan za Windows 10.
 weg:
   items:
     gap: Prostor između predmeta
@@ -92,6 +93,7 @@ apps_configurations:
       float: Lebdjeti
       force: Sile upravljati
       unmanage: Nevenjački
+      hidden: Sakrij se sa pristaništa / zadataka
     bindings: Vezanje (napominje su obavezne opcije)
     monitor: Monitor
     category_placeholder: Nijedan
@@ -99,7 +101,6 @@ apps_configurations:
     workspace_placeholder: Nijedan
     title_readonly: Gledanje {{ime}}
     monitor_placeholder: Nijedan
-    options_label: Dodatne opcije
     category: Kategorija
     ok_create: Stvoriti
     ok_readonly: Uredi kao novo
@@ -107,6 +108,8 @@ apps_configurations:
     workspace: Radni prostor
     title_create: Stvarajući {{ime}}
     title_edit: Uređivanje {{ime}}
+    wm_options_label: Opcije prozora upravitelja
+    weg_options_label: Opcije pristaništa / trake zadataka
   identifier:
     matching_strategy: Strategija podudaranja
     and: I

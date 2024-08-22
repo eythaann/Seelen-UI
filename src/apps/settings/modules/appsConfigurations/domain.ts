@@ -1,10 +1,14 @@
 import { IdWithIdentifier } from '../../../shared/schemas/AppsConfigurations';
 
-export enum ApplicationOptions {
+export enum WmApplicationOptions {
   Float = 'float',
   Unmanage = 'unmanage',
   ForceManage = 'force',
   Pinned = 'pinned',
+}
+
+export enum WegApplicationOptions {
+  Hidden = 'hidden',
 }
 
 export enum ApplicationIdentifier {
@@ -23,14 +27,14 @@ export enum MatchingStrategy {
   Regex = 'Regex',
 }
 
-type AppConfigurationsOptions = { [K in ApplicationOptions]: boolean };
-export interface AppConfiguration extends AppConfigurationsOptions {
+export interface AppConfiguration {
   name: string;
   category: string | null;
   workspace: string | null;
   monitor: number | null;
   identifier: IdWithIdentifier;
   isBundled: boolean;
+  options: Array<WmApplicationOptions | WegApplicationOptions>;
 }
 
 export interface AppConfigurationExtended extends AppConfiguration {
@@ -53,10 +57,7 @@ export class AppConfiguration {
         or: [],
       },
       isBundled: false,
-      [ApplicationOptions.Float]: false,
-      [ApplicationOptions.Unmanage]: false,
-      [ApplicationOptions.Pinned]: false,
-      [ApplicationOptions.ForceManage]: false,
+      options: [],
     };
   }
 }

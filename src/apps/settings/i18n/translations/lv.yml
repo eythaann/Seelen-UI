@@ -62,6 +62,7 @@ wm:
   workspace_padding: Darbvietas polsterējums
   description: Apraksts
   disabled_windows_version: Logu pārvaldnieks nav pieejams jūsu Windows versijai.
+  disabled_windows10: Logu pārvaldnieks nav pieejams operētājsistēmai Windows 10.
 weg:
   items:
     visible_separators: Redzami atdalītāji
@@ -92,6 +93,7 @@ apps_configurations:
       pinned: Saspiests
       force: Piespiest pārvaldīt
       unmanage: Pārvalde
+      hidden: Paslēpties no doka/uzdevumjoslas
     ok_edit: Atjaunināt
     monitor_placeholder: Neviens
     category: Kategorija
@@ -102,11 +104,12 @@ apps_configurations:
     workspace_placeholder: Neviens
     bindings: Iesiešana (ņemiet vērā, ka ir vajadzīgas abas opcijas)
     title_readonly: Skatoties {{name}}
-    options_label: Papildu iespējas
     category_placeholder: Neviens
     monitor: Kontrolēt
     workspace: Darba vieta
     ok_create: Radīt
+    weg_options_label: Doka/uzdevumjoslas iespējas
+    wm_options_label: Logu pārvaldnieka opcijas
   identifier:
     and: UN
     matching_strategy: Atbilstības stratēģija

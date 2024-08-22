@@ -61,6 +61,7 @@ wm:
   resize_delta: שינוי גודל דלתא (%)
   workspace_offset: מרחבי עבודה קיזזו (שוליים)
   disabled_windows_version: מנהל החלונות אינו זמין עבור גרסת Windows שלך.
+  disabled_windows10: מנהל החלונות אינו זמין עבור Windows 10.
 weg:
   items:
     gap: שטח בין פריטים
@@ -91,6 +92,7 @@ apps_configurations:
       force: כוח לנהל
       pinned: מוצמד
       unmanage: לא מנוהל
+      hidden: הסתר ממעגן/שורת משימות
     name: שֵׁם
     monitor_placeholder: אף אחד
     category_placeholder: אף אחד
@@ -100,12 +102,13 @@ apps_configurations:
     title_edit: עריכה {{name}}
     ok_readonly: ערוך כחדש
     monitor: צג
-    options_label: אפשרויות נוספות
     ok_create: לִיצוֹר
     workspace_placeholder: אף אחד
     title_create: יצירת {{name}}
     workspace: סביבת עבודה
     title_readonly: צופה {{name}}
+    wm_options_label: אפשרויות מנהל חלונות
+    weg_options_label: אפשרויות עגינה/שורת משימות
   identifier:
     id: מזהה
     or: אוֹ

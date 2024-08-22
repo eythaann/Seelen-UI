@@ -17,9 +17,8 @@ header:
 start:
   title: ようこそ！
   message: >-
-    SeelenUIにようこそ！
-    組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows 11での体験を向上させます！
-    直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
+    SeelenUIにようこそ！ 組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows
+    11での体験を向上させます！ 直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
   message_accent: あなた好みのスタイリングで生産性を最適化！
 general:
   theme:
@@ -61,6 +60,7 @@ wm:
   resize_delta: リサイズ時の変化率（％）
   workspace_padding: ワークスペースの全体の間隔
   disabled_windows_version: ウィンドウマネージャーは、Windowsバージョンでは利用できません。
+  disabled_windows10: ウィンドウマネージャーはWindows 10では利用できません。
 weg:
   items:
     size: アイテムのサイズ
@@ -91,6 +91,7 @@ apps_configurations:
       force: 強制
       pinned: ピン留め
       unmanage: 管理しない
+      hidden: ドック/タスクバーから隠れます
     category_placeholder: なし
     monitor_placeholder: なし
     workspace: ワークスペース
@@ -105,7 +106,8 @@ apps_configurations:
     title_readonly: 「{{name}}」を表示しています
     name: 名前
     title_create: '{{name}}を作成する'
-    options_label: オプション
+    weg_options_label: ドック/タスクバーオプション
+    wm_options_label: ウィンドウマネージャーオプション
   identifier:
     id: 識別子
     and: かつ

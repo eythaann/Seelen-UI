@@ -60,6 +60,7 @@ wm:
   resize_delta: ዴልታ (%)
   author: ደራሲ ደራሲ
   disabled_windows_version: የመስኮት አቀናባሪው ለዊንዶውስ ስሪትዎ አይገኝም.
+  disabled_windows10: የመስክ ሥራ አስኪያጁ ለዊንዶውስ 10 አይገኝም.
 weg:
   items:
     zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
@@ -90,6 +91,7 @@ apps_configurations:
       pinned: ተያይ ated ል
       unmanage: አለመግባባት
       force: ኃይል ማስተዳደር
+      hidden: ከ Dock / Actorbar ይደብቁ
     monitor_placeholder: የለም
     monitor: ተቆጣጠር
     category_placeholder: የለም
@@ -104,7 +106,8 @@ apps_configurations:
     title_create: '{{{ስም} መፍጠር}}'
     category: ምድብ
     ok_readonly: እንደ አዲስ ያርትዑ
-    options_label: ተጨማሪ አማራጮች
+    weg_options_label: የመርከሪያ / የተግባር አሞሌ አማራጮች
+    wm_options_label: የመስኮት አቀናባሪ አማራጮች
   identifier:
     remove: ብሎክ ሰርዝ
     and: እና

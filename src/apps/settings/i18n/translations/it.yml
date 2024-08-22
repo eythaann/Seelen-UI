@@ -62,6 +62,7 @@ wm:
   workspace_offset: Offset degli spazi di lavoro (margini)
   workspace_padding: Padding degli spazi di lavoro
   disabled_windows_version: Il gestore Windows non è disponibile per la versione di Windows.
+  disabled_windows10: Il gestore delle finestre non è disponibile per Windows 10.
 weg:
   items:
     label: Elementi
@@ -92,6 +93,7 @@ apps_configurations:
       force: Force Manage
       pinned: Appuntato
       unmanage: Unmanage
+      hidden: Nascondersi dal dock/barra delle applicazioni
     monitor_placeholder: Nessuno
     ok_create: Creare
     workspace_placeholder: Nessuno
@@ -106,7 +108,8 @@ apps_configurations:
     title_create: Creazione di {{name}}
     ok_readonly: Modifica come nuovo
     monitor: Tenere sotto controllo
-    options_label: Opzioni extra
+    weg_options_label: Opzioni dock/barra delle applicazioni
+    wm_options_label: Opzioni del gestore delle finestre
   identifier:
     and: E
     or: O

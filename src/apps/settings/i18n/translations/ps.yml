@@ -61,6 +61,7 @@ wm:
   author: لیکوال
   layout: ترتیب
   disabled_windows_version: د کړکۍ مدیر ستاسو د وینډوز نسخه لپاره شتون نلري.
+  disabled_windows10: د کړکۍ مدیر د وینډوز 10 لپاره شتون نلري.
 weg:
   items:
     size: د توکي اندازه
@@ -91,6 +92,7 @@ apps_configurations:
       pinned: پینټ شوی
       force: د ځواک اداره کول
       float: فلوټ
+      hidden: د ډیک / ټاسک بار څخه پټول
     ok_readonly: د نوي په توګه
     title_edit: د {{{{}} ترمیم کول
     category_placeholder: هیڅ نه
@@ -103,9 +105,10 @@ apps_configurations:
     name: نوم
     workspace: کاري ځای
     title_create: '{{}} رامینځته کول'
-    options_label: اضافي اختیارونه
     bindings: تړل (په یادداشت کې دواړه اختیارونه اړین دي)
     workspace_placeholder: هیڅ نه
+    wm_options_label: د کړکۍ مدیر اختیارونه
+    weg_options_label: دوک / ټاسک بار انتخابونه
   identifier:
     or: یا
     id: پېژنيزه

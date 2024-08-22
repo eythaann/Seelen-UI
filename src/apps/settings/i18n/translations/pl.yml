@@ -62,6 +62,7 @@ wm:
   resize_delta: Zmień rozmiar Delta (%)
   workspace_offset: Przestrzenie robocze przesunięte (marginesy)
   disabled_windows_version: Menedżer Windows nie jest dostępny dla wersji Windows.
+  disabled_windows10: Menedżer okien nie jest dostępny dla systemu Windows 10.
 weg:
   items:
     label: Rzeczy
@@ -92,6 +93,7 @@ apps_configurations:
       force: Siła zarządza
       pinned: Przypięty
       unmanage: Niezarządzanie
+      hidden: Ukryj się przed dokiem/paskiem zadań
     name: Nazwa
     category_placeholder: Nic
     ok_edit: Aktualizacja
@@ -103,10 +105,11 @@ apps_configurations:
     ok_readonly: Edytuj jako nowy
     title_edit: Edycja {{nazwa}}
     monitor: Monitor
-    options_label: Dodatkowe opcje
     workspace: Obszar roboczy
     bindings: Wiązanie (wymagane są obie opcje)
     title_create: Tworzenie {{nazwa}}
+    weg_options_label: Opcje DOCK/PASKTA
+    wm_options_label: Opcje menedżera okien
   identifier:
     and: I
     or: LUB

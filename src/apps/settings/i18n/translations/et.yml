@@ -62,6 +62,7 @@ wm:
   workspace_padding: Tööruumide polsterdus
   resize_delta: Suuruse muutmine delta (%)
   disabled_windows_version: Aknahaldur pole teie Windowsi versiooni jaoks saadaval.
+  disabled_windows10: Windows 10 jaoks pole aknahaldur saadaval.
 weg:
   items:
     visible_separators: Nähtavad eraldajad
@@ -92,6 +93,7 @@ apps_configurations:
       unmanage: Juhtimine
       pinned: Kinnitatud
       float: Ujuk
+      hidden: Peida doki/ülesanderiba eest
     category: Kategooria
     category_placeholder: Mitte ükski
     monitor_placeholder: Mitte ükski
@@ -99,7 +101,6 @@ apps_configurations:
     ok_readonly: Redigeerimine uuena
     ok_create: Looma
     title_create: '{{Name}} loomine'
-    options_label: Lisavalikud
     workspace_placeholder: Mitte ükski
     monitor: Ekraan
     name: Nimetus
@@ -107,6 +108,8 @@ apps_configurations:
     title_readonly: Vaatamine {{nimi}}
     bindings: Sidumine (pange tähele mõlemat suvandit)
     ok_edit: Värskendama
+    weg_options_label: Dokk/ülesanderiba valikud
+    wm_options_label: Aknahalduri valikud
   identifier:
     negation: Eitav sobitamine
     matching_strategy: Sobiv strateegia

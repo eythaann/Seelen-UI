@@ -89,7 +89,10 @@ export async function saveUserSettings(
   settings: Pick<UserSettings, 'jsonSettings' | 'yamlSettings'>,
 ) {
   const yaml_route = await resolveDataPath('applications.yml');
-  await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
+  await fs.writeTextFile(
+    yaml_route,
+    yaml.dump(settings.yamlSettings.filter((app) => !app.isBundled)),
+  );
   await saveJsonSettings(settings.jsonSettings);
 }
 
@@ -118,7 +121,7 @@ export async function ImportApps() {
 export async function ExportApps(apps: any[]) {
   const pathToSave = await dialog.save({
     title: 'Exporting Apps',
-    defaultPath: await path.join(await path.homeDir(), 'downloads/apps.yaml'),
+    defaultPath: await path.join(await path.homeDir(), 'downloads/apps.yml'),
     filters: [{ name: 'apps', extensions: ['yaml', 'yml'] }],
   });
   if (pathToSave) {

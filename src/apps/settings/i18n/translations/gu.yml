@@ -62,6 +62,7 @@ wm:
   author: લેખક
   resize_delta: ડેલ્ટાનું કદ બદલો (%)
   disabled_windows_version: વિંડો મેનેજર તમારા વિંડોઝ સંસ્કરણ માટે ઉપલબ્ધ નથી.
+  disabled_windows10: વિંડો મેનેજર વિન્ડોઝ 10 માટે ઉપલબ્ધ નથી.
 weg:
   items:
     label: વસ્તુઓ
@@ -92,7 +93,7 @@ apps_configurations:
       pinned: પિન કરેલ
       unmanage: અનમેનેજ કરો
       force: ફોર્સ મેનેજ કરો
-    options_label: વધારાના વિકલ્પો
+      hidden: ડોક/ટાસ્કબારથી છુપાવો
     title_create: '{{name}} બનાવી રહ્યાં છીએ'
     workspace_placeholder: કોઈ નહિ
     workspace: વર્કસ્પેસ
@@ -107,6 +108,8 @@ apps_configurations:
     bindings: બંધનકર્તા (નોંધો કે બંને વિકલ્પો જરૂરી છે)
     title_edit: સંપાદન {{name}}
     ok_create: બનાવો
+    wm_options_label: વિંડો મેનેજર વિકલ્પો
+    weg_options_label: ડોક/ટાસ્કબાર વિકલ્પો
   identifier:
     remove: બ્લોક કાઢી નાખો
     add_block: બ્લોક ઉમેરો

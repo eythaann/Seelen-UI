@@ -62,28 +62,6 @@ function removeAppFromState(state: RootState, searched: SwPinnedApp | SwTemporal
   }
 }
 
-function removeHwnd(state: SwItem[], searched: HWND) {
-  for (let i = 0; i < state.length; i++) {
-    const current = state[i]!;
-    if (
-      current.type !== SpecialItemType.PinnedApp &&
-      current.type !== SpecialItemType.TemporalApp
-    ) {
-      continue;
-    }
-
-    const index = current.opens.findIndex((hwnd) => hwnd === searched);
-
-    if (index !== -1) {
-      current.opens.splice(index, 1);
-      if (current.type === SpecialItemType.TemporalApp && current.opens.length === 0) {
-        state.splice(i, 1);
-      }
-      break;
-    }
-  }
-}
-
 function findApp(state: RootState, searched: SwPinnedApp | SwTemporalApp) {
   return (state.itemsOnLeft.find((app) => 'exe' in app && app.exe === searched.exe) ||
     state.itemsOnCenter.find((app) => 'exe' in app && app.exe === searched.exe) ||
@@ -168,21 +146,17 @@ export const RootSlice = createSlice({
 
       const appFilename = app.exe.split('\\').pop();
       if (appFilename) {
-        const pinedApp = (state.itemsOnLeft.find(
-          (current) => 'exe' in current && current.exe.endsWith(appFilename),
-        ) ||
-          state.itemsOnCenter.find(
-            (current) => 'exe' in current && current.exe.endsWith(appFilename),
-          ) ||
-          state.itemsOnRight.find(
-            (current) => 'exe' in current && current.exe.endsWith(appFilename),
-          )) as SwPinnedApp | undefined;
+        const cb = (current: SwItem) => 'exe' in current && current.exe.endsWith(appFilename);
+        const pinedApp = (state.itemsOnLeft.find(cb) ||
+          state.itemsOnCenter.find(cb) ||
+          state.itemsOnRight.find(cb)) as SwPinnedApp | undefined;
 
         if (pinedApp) {
           if (!pinedApp.opens.includes(app.hwnd)) {
             pinedApp.opens.push(app.hwnd);
           }
 
+          // update path to pinned apps normally changed on updates
           if (pinedApp.exe !== app.exe) {
             pinedApp.exe = app.exe;
             pinedApp.execution_path = app.execution_path;
@@ -202,9 +176,17 @@ export const RootSlice = createSlice({
     },
     removeOpenApp(state, action: PayloadAction<HWND>) {
       delete state.openApps[action.payload];
-      removeHwnd(state.itemsOnLeft, action.payload);
-      removeHwnd(state.itemsOnCenter, action.payload);
-      removeHwnd(state.itemsOnRight, action.payload);
+
+      function filter(app: SwItem) {
+        if ('opens' in app) {
+          app.opens = app.opens.filter((hwnd) => hwnd !== action.payload);
+        }
+        return app.type !== SpecialItemType.TemporalApp || app.opens.length > 0;
+      }
+
+      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
+      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
+      state.itemsOnRight = state.itemsOnRight.filter(filter);
     },
   },
 });

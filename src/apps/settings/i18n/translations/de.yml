@@ -69,6 +69,7 @@ wm:
     width: Randbreite
     offset: Randversatz
   disabled_windows_version: Der Fenstermanager ist für Ihre Windows -Version nicht verfügbar.
+  disabled_windows10: Der Fenstermanager ist für Windows 10 nicht verfügbar.
 weg:
   label: Dock/Taskleiste
   enable: Dock/Taskleiste aktivieren
@@ -121,12 +122,14 @@ apps_configurations:
     ok_edit: Aktualisieren
     ok_create: Erstellen
     ok_readonly: Als neu bearbeiten
-    options_label: Zusätzliche Optionen
     options:
       float: Schwebend
       unmanage: Nicht verwalten
       force: Verwaltung erzwingen
       pinned: Angeheftet
+      hidden: Verstecken Sie sich vor Dock/Taskleiste
+    weg_options_label: Dock/Taskleistenoptionen
+    wm_options_label: Fenstermanageroptionen
   identifier:
     remove: Block löschen
     id: Identifikator

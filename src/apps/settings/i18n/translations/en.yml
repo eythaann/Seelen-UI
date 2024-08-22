@@ -121,11 +121,14 @@ apps_configurations:
     ok_create: Create
     ok_readonly: Edit as New
     options_label: Extra Options
+    wm_options_label: Window Manager Options
+    weg_options_label: Dock/Taskbar Options
     options:
       float: Float
       unmanage: Unmanage
       force: Force Manage
       pinned: Pinned
+      hidden: Hide from dock/taskbar
   identifier:
     remove: Delete Block
     id: Identifier

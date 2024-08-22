@@ -10,7 +10,12 @@ import { useSelector } from 'react-redux';
 import { ownSelector, RootSelectors } from '../../shared/store/app/selectors';
 
 import { RootState } from '../../shared/store/domain';
-import { AppConfiguration, AppConfigurationExtended, ApplicationOptions } from '../domain';
+import {
+  AppConfiguration,
+  AppConfigurationExtended,
+  WegApplicationOptions,
+  WmApplicationOptions,
+} from '../domain';
 
 import cs from './index.module.css';
 
@@ -59,8 +64,9 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const onSelectMonitor = (value: number | null) => setApp({ ...app, monitor: value });
   const onSelectWorkspace = (value: string | null) => setApp({ ...app, workspace: value });
 
-  const onChangeOption = (option: ApplicationOptions, value: boolean) =>
-    setApp({ ...app, [option]: value });
+  const onChangeOption = (option: WmApplicationOptions | WegApplicationOptions, checked: boolean) => {
+    setApp({ ...app, options: checked ? [...app.options, option] : app.options.filter((o) => o !== option) });
+  };
 
   const monitorsOptions = monitors.map((_, i) => ({ label: `Monitor ${i + 1}`, value: i }));
   const workspaceOptions =
@@ -148,11 +154,20 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
         </SettingsGroup>
 
         <SettingsGroup>
-          <SettingsSubGroup label={t('apps_configurations.app.options_label')}>
-            {Object.values(ApplicationOptions).map((value, i) => (
+          <SettingsSubGroup label={t('apps_configurations.app.wm_options_label')}>
+            {Object.values(WmApplicationOptions).map((value, i) => (
               <SettingsOption key={i}>
                 <span>{t(`apps_configurations.app.options.${value}`)}</span>
-                <Switch value={app[value]} onChange={onChangeOption.bind(this, value)} />
+                <Switch value={app.options.includes(value)} onChange={onChangeOption.bind(this, value)} />
+              </SettingsOption>
+            ))}
+          </SettingsSubGroup>
+
+          <SettingsSubGroup label={t('apps_configurations.app.weg_options_label')}>
+            {Object.values(WegApplicationOptions).map((value, i) => (
+              <SettingsOption key={i}>
+                <span>{t(`apps_configurations.app.options.${value}`)}</span>
+                <Switch value={app.options.includes(value)} onChange={onChangeOption.bind(this, value)} />
               </SettingsOption>
             ))}
           </SettingsSubGroup>

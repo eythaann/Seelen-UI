@@ -62,6 +62,7 @@ wm:
   description: Опис
   author: Автор
   disabled_windows_version: Менаџерот на прозорецот не е достапен за вашата верзија на Windows.
+  disabled_windows10: Менаџерот на прозорецот не е достапен за Windows 10.
 weg:
   items:
     size: Големина на артикалот
@@ -92,6 +93,7 @@ apps_configurations:
       unmanage: Unmanage
       pinned: Закачен
       force: Управување со сила
+      hidden: Скриј од пристаништето/лентата со задачи
     title_edit: Уредување {{име}}
     ok_edit: Ажурирање
     category_placeholder: Ништо
@@ -103,10 +105,11 @@ apps_configurations:
     bindings: Обврзувачки (Забележете дека се потребни и двете опции)
     title_readonly: Гледање {{име}}
     monitor: Монитор
-    options_label: Дополнителни опции
     ok_readonly: Уреди како ново
     category: Категорија
     title_create: Креирање {{име}}
+    wm_options_label: Опции за управување со прозорецот
+    weg_options_label: Опции на пристаништето/лентата со задачи
   identifier:
     remove: Избриши блок
     matching_strategy: Стратегија за појавување

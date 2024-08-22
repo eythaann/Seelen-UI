@@ -62,6 +62,7 @@ wm:
   description: Descripció
   enable: Activa el gestor de finestres
   disabled_windows_version: El Window Manager no està disponible per a la vostra versió de Windows.
+  disabled_windows10: El gestor de finestres no està disponible per a Windows 10.
 weg:
   items:
     visible_separators: Separadors visibles
@@ -92,6 +93,7 @@ apps_configurations:
       float: Surar
       unmanage: Implacable
       pinned: Fixada
+      hidden: Amagueu del moll/barra de tasques
     ok_edit: Actualitzar
     workspace: Espai de treball
     name: Nom
@@ -106,7 +108,8 @@ apps_configurations:
     monitor: Observar
     title_create: Creació {{nom}}
     monitor_placeholder: Res
-    options_label: Opcions addicionals
+    weg_options_label: Opcions de moll/barra de tasques
+    wm_options_label: Opcions del gestor de finestres
   identifier:
     add_block: Afegiu bloc
     remove: Esborra el bloc

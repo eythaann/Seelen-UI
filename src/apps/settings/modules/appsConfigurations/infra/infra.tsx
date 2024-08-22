@@ -11,12 +11,12 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../shared/utils/infra';
 
 import { RootSelectors } from '../../shared/store/app/selectors';
-import { StateAppsToYamlApps, YamlToState_Apps } from '../../shared/store/app/StateBridge';
+import { YamlToState_Apps } from '../../shared/store/app/StateBridge';
 import { cx, debounce } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
-import { AppConfiguration, AppConfigurationExtended, ApplicationOptions } from '../domain';
+import { AppConfiguration, AppConfigurationExtended, WmApplicationOptions } from '../domain';
 
 import cs from './index.module.css';
 
@@ -57,7 +57,7 @@ const getColumns = (t: TFunction): ColumnsType<AppConfigurationExtended> => {
       },
       sorter: getSorterByText('category'),
     },
-    ...Object.values(ApplicationOptions).map(
+    ...Object.values(WmApplicationOptions).map(
       (option) =>
         ({
           title: t(`apps_configurations.app.options.${option}`),
@@ -183,7 +183,7 @@ export function AppsConfiguration() {
 
   const exportApps = useCallback(() => {
     const appsToExport = selectedAppsKey.map((key) => apps[key]!);
-    ExportApps(StateAppsToYamlApps(appsToExport));
+    ExportApps(appsToExport);
   }, [apps, selectedAppsKey]);
 
   const confirmDelete = useCallback(() => {

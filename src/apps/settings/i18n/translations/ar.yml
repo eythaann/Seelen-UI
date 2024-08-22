@@ -68,6 +68,7 @@ wm:
     width: عرض الحدود
     offset: إزاحة الحدود
   disabled_windows_version: مدير النافذة غير متوفر لإصدار Windows الخاص بك.
+  disabled_windows10: مدير النافذة غير متاح لنظام التشغيل Windows 10.
 weg:
   label: قفص الاتهام / شريط المهام
   enable: تمكين قفص الاتهام/شريط المهام
@@ -119,12 +120,14 @@ apps_configurations:
     ok_edit: تحديث
     ok_create: يخلق
     ok_readonly: تحرير كجديد
-    options_label: خيارات إضافية
     options:
       float: يطفو
       unmanage: غير إدارة
       force: إدارة القوة
       pinned: مثبت
+      hidden: الاختباء من قفص الاتهام/شريط المهام
+    weg_options_label: خيارات قفص الاتهام/شريط المهام
+    wm_options_label: خيارات مدير النافذة
   identifier:
     remove: حذف الحظر
     id: المعرف

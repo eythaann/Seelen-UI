@@ -61,6 +61,7 @@ wm:
   resize_delta: تغییر اندازه دلتا (٪)
   workspace_padding: قسمتهای کاری PADING
   disabled_windows_version: مدیر پنجره برای نسخه ویندوز شما در دسترس نیست.
+  disabled_windows10: مدیر پنجره برای ویندوز 10 در دسترس نیست.
 weg:
   items:
     label: موارد
@@ -91,6 +92,7 @@ apps_configurations:
       pinned: بریده شده
       unmanage: از بین بردن
       force: زور مدیریت
+      hidden: مخفی کردن از حوض/نوار وظیفه
     category: دسته بندی
     ok_edit: به روز رسانی
     category_placeholder: هیچ یک
@@ -99,13 +101,14 @@ apps_configurations:
     monitor_placeholder: هیچ یک
     ok_create: ايجاد كردن
     workspace: فضای کاری
-    options_label: گزینه های اضافی
     title_create: ایجاد {{name}}
     title_readonly: مشاهده {{نام}}
     title_edit: ویرایش {{نام}}
     bindings: اتصال (توجه داشته باشید هر دو گزینه مورد نیاز است)
     ok_readonly: ویرایش به عنوان جدید
     monitor: نظارت
+    weg_options_label: گزینه های Dock/TaskBar
+    wm_options_label: گزینه های مدیر پنجره
   identifier:
     and: وت
     or: یا

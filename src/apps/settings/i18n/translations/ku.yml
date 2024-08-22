@@ -61,6 +61,7 @@ wm:
   workspace_padding: Karên xebitandinê
   resize_delta: Delta Resize (%)
   disabled_windows_version: Rêvebirê pencereyê ji bo guhertoya weya Windows-ê nabe.
+  disabled_windows10: Rêvebirê pencereyê ji bo Windows 10-ê nabe.
 weg:
   items:
     size: Mezinahiya tiştê
@@ -91,6 +92,7 @@ apps_configurations:
       force: Hêza birêvebirin
       pinned: Pinned
       unmanage: Nedar
+      hidden: Ji Dock / Taskbar veşêrin
     monitor: Lê gûhdarkirin
     monitor_placeholder: Netû
     category_placeholder: Netû
@@ -101,11 +103,12 @@ apps_configurations:
     title_readonly: Dîtin {{NAVEN}
     bindings: Binding (Nîşe her du vebijark hewce ne)
     workspace: Workspace
-    options_label: Vebijarkên zêde
     ok_create: Xûliqandin
     workspace_placeholder: Netû
     ok_readonly: Wekî nû biguherînin
     title_edit: Editting {name}}
+    weg_options_label: Vebijarkên Dock / Taskbar
+    wm_options_label: Vebijarkên rêveberê pencereyê
   identifier:
     and: Û
     or: AN

@@ -62,6 +62,7 @@ wm:
   workspace_offset: Offset ruang kerja (margin)
   workspace_padding: Padding ruang kerja
   disabled_windows_version: Window Manager tidak tersedia untuk versi Windows Anda.
+  disabled_windows10: Window Manager tidak tersedia untuk Windows 10.
 weg:
   items:
     size: Ukuran item
@@ -92,13 +93,13 @@ apps_configurations:
       force: Memaksa mengelola
       pinned: Disematkan
       unmanage: Tidak mengelola
+      hidden: Sembunyikan dari Dock/Taskbar
     title_readonly: Melihat {{name}}
     workspace: Ruang kerja
     category_placeholder: Tidak ada
     ok_edit: Memperbarui
     monitor_placeholder: Tidak ada
     name: Nama
-    options_label: Opsi tambahan
     ok_create: Membuat
     category: Kategori
     title_edit: Editting {{name}}
@@ -107,6 +108,8 @@ apps_configurations:
     ok_readonly: Edit sebagai baru
     bindings: Mengikat (perhatikan kedua opsi itu diperlukan)
     monitor: Monitor
+    weg_options_label: Opsi Dock/Taskbar
+    wm_options_label: Opsi Manajer Jendela
   identifier:
     and: DAN
     matching_strategy: Strategi pencocokan

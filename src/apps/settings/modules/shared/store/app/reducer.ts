@@ -63,7 +63,7 @@ export const RootSlice = createSlice({
     },
     restoreToLastLoaded: (state) => {
       if (state.lastLoaded) {
-        const toMaintain = pick(state, ['autostart', 'colors', 'lastLoaded']);
+        const toMaintain = pick(state, ['autostart', 'route', 'colors', 'lastLoaded']);
         const newState = {
           ...cloneDeep(state.lastLoaded),
           ...toMaintain,

@@ -62,6 +62,7 @@ wm:
   space_between_containers: Prostor između spremnika
   workspace_padding: Radni prostori jastučići
   disabled_windows_version: Upravitelj prozora nije dostupan za vašu Windows verziju.
+  disabled_windows10: Upravitelj prozora nije dostupan za Windows 10.
 weg:
   items:
     visible_separators: Vidljivi separatori
@@ -92,13 +93,13 @@ apps_configurations:
       float: Plutati
       unmanage: Razriješiti
       pinned: Prikvačen
+      hidden: Sakrij se od pristaništa/trake
     ok_edit: Ažuriraj
     bindings: Vezivanje (napomena potrebne su obje opcije)
     title_edit: Uređivanje {{name}}
     category_placeholder: Nijedan
     ok_create: Stvoriti
     ok_readonly: Uredi kao novo
-    options_label: Dodatne opcije
     title_readonly: Pregled {{name}}
     title_create: Stvaranje {{name}}
     category: Kategorija
@@ -107,6 +108,8 @@ apps_configurations:
     workspace_placeholder: Nijedan
     name: Ime
     monitor: Monitor
+    weg_options_label: Opcije pristaništa/trake
+    wm_options_label: Opcije upravitelja prozora
   identifier:
     and: I
     negation: Negiranje podudaranja

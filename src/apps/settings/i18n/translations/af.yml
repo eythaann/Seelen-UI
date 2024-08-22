@@ -62,6 +62,7 @@ wm:
   workspace_padding: Werkruimtes opvulling
   enable: Aktiveer vensterbestuurder
   disabled_windows_version: Die vensterbestuurder is nie beskikbaar vir u Windows -weergawe nie.
+  disabled_windows10: Die vensterbestuurder is nie beskikbaar vir Windows 10 nie.
 weg:
   items:
     visible_separators: Sigbare skeiers
@@ -92,6 +93,7 @@ apps_configurations:
       force: Kragbestuur
       pinned: Vasgaan
       unmanage: Onhandiging
+      hidden: Verberg van die beskuldigdebalk/taakbalk
     ok_create: Skep
     name: Naam
     ok_readonly: Wysig as nuut
@@ -100,13 +102,14 @@ apps_configurations:
     monitor: Monitor
     title_create: Skep {{name}}
     title_readonly: Besigtig {{name}}
-    options_label: Ekstra opsies
     ok_edit: Opdateer
     workspace_placeholder: Geen
     bindings: Binding (let op albei opsies is nodig)
     workspace: Werkruimte
     category: Kategorie
     title_edit: Ingebou {{name}}
+    wm_options_label: Vensterbestuurderopsies
+    weg_options_label: Dock/taakbalkopsies
   identifier:
     remove: Vee blok uit
     add_block: Voeg blok by

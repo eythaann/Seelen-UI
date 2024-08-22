@@ -62,6 +62,7 @@ wm:
   author: Idazle
   workspace_padding: Laneko guneak betegarria
   disabled_windows_version: Leiho kudeatzailea ez dago zure Windows bertsiorako erabilgarri.
+  disabled_windows10: Leiho kudeatzailea ez dago erabilgarri Windows 10-erako.
 weg:
   items:
     gap: Elementuen arteko espazioa
@@ -92,11 +93,11 @@ apps_configurations:
       force: Indar kudeatzea
       pinned: Pipe
       unmanage: Loraza
+      hidden: Ezkutatu kai / ataza-barran
     title_readonly: '{{Name}} ikustea'
     ok_readonly: Editatu berria
     monitor: Behatu
     monitor_placeholder: Ezein ez
-    options_label: Aukera gehigarriak
     category_placeholder: Ezein ez
     category: Kategoria
     bindings: Lotura (kontuan bi aukerak behar dira)
@@ -107,6 +108,8 @@ apps_configurations:
     name: Izen
     ok_create: Sortu
     title_edit: '{{Name}} editatzea'
+    weg_options_label: Dock / ataza barrako aukerak
+    wm_options_label: Leiho kudeatzailearen aukerak
   identifier:
     add_block: Gehitu blokea
     kind: Identifikatu

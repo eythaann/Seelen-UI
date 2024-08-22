@@ -61,6 +61,7 @@ wm:
   author: Onkọwe ọkunrin
   workspace_padding: Awọn iṣẹ itasi
   disabled_windows_version: Oluṣakoso window ko wa fun ẹya Windows rẹ.
+  disabled_windows10: Oluṣakoso window ko wa fun Windows 10.
 weg:
   items:
     visible_separators: Awọn iyatọ ti o han
@@ -91,11 +92,11 @@ apps_configurations:
       float: Leke
       force: Ṣakoso ṣakoso
       pinned: Pin
+      hidden: Tọju lati dock / forbar
     name: Orukọ
     category_placeholder: Ko si
     title_readonly: Wiwo {{Orukọ}}
     bindings: Dide (Ṣe akiyesi awọn aṣayan mejeeji ni a nilo)
-    options_label: Awọn aṣayan afikun
     workspace_placeholder: Ko si
     title_create: Ṣiṣẹda {Orukọ}}
     monitor_placeholder: Ko si
@@ -106,6 +107,8 @@ apps_configurations:
     ok_readonly: Satunkọ bi tuntun
     ok_edit: Imudojuiwọn
     monitor: Aṣabojuto
+    wm_options_label: Awọn aṣayan Iṣẹ Iṣẹ window
+    weg_options_label: Dock / Awọn aṣayan Iṣẹ-ṣiṣe
   identifier:
     negation: Ibaramu tuntun
     add_block: Fi dègbé

@@ -62,6 +62,7 @@ wm:
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas
   disabled_windows_version: „Windows Manager“ nėra jūsų „Windows“ versijai.
+  disabled_windows10: „Windows Manager“ nėra „Windows 10“.
 weg:
   items:
     size: Prekės dydis
@@ -92,6 +93,7 @@ apps_configurations:
       force: Jėgos valdymas
       pinned: Prigludęs
       unmanage: Nevaldomas
+      hidden: Slėpti nuo doko/užduočių juostos
     name: vardas
     title_readonly: Peržiūra {{name}}
     monitor_placeholder: Nė vienas
@@ -102,11 +104,12 @@ apps_configurations:
     title_edit: Redagavimas {{name}}
     workspace: Darbo vieta
     workspace_placeholder: Nė vienas
-    options_label: Papildomos galimybės
     ok_edit: Atnaujinimas
     ok_create: Sukurti
     monitor: Monitorius
     ok_readonly: Redaguoti kaip naują
+    weg_options_label: „Dock“/„Taskbar“ parinktys
+    wm_options_label: „Windows Manager“ parinktys
   identifier:
     id: Identifikatorius
     negation: Neigiamas

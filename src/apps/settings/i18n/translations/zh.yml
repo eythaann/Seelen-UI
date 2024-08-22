@@ -67,6 +67,7 @@ wm:
     width: 边框宽度
     offset: 边框偏移
   disabled_windows_version: Windows Manager 不适合您的 Windows 版本。
+  disabled_windows10: Windows 10不可用窗口管理器。
 weg:
   label: 停靠栏/任务栏
   enable: 启用停靠栏/任务栏
@@ -116,12 +117,14 @@ apps_configurations:
     ok_edit: 更新
     ok_create: 创建
     ok_readonly: 作为新建编辑
-    options_label: 额外选项
     options:
       float: 浮动
       unmanage: 不管理
       force: 强制管理
       pinned: 固定
+      hidden: 隐藏码头/任务栏
+    weg_options_label: 码头/任务栏选项
+    wm_options_label: 窗口管理器选项
   identifier:
     remove: 删除块
     id: 标识符

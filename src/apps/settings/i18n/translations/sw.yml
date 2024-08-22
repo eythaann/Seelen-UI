@@ -61,6 +61,7 @@ wm:
   layout: Mpangilio
   workspace_padding: Nafasi za kazi
   disabled_windows_version: Meneja wa windows haipatikani kwa toleo lako la Windows.
+  disabled_windows10: Meneja wa windows haipatikani kwa Windows 10.
 weg:
   items:
     size: Saizi ya bidhaa
@@ -91,10 +92,10 @@ apps_configurations:
       force: Nguvu kusimamia
       pinned: Iliyoandikwa
       float: Kuelea
+      hidden: Ficha kutoka Dock/Taskbar
     title_create: Kuunda {{jina}}
     title_readonly: Kuangalia {{jina}}
     category_placeholder: Hakuna
-    options_label: Chaguzi za ziada
     monitor_placeholder: Hakuna
     monitor: Kufuatilia
     ok_edit: Sasisha
@@ -106,6 +107,8 @@ apps_configurations:
     workspace_placeholder: Hakuna
     ok_create: Unda
     title_edit: Kuhariri {{jina}}
+    weg_options_label: Chaguzi za Dock/Taskbar
+    wm_options_label: Chaguzi za Meneja wa Dirisha
   identifier:
     negation: Negate kulinganisha
     or: Au

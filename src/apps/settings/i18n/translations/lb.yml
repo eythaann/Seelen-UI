@@ -62,6 +62,7 @@ wm:
   workspace_offset: Workspaces Offset (Rand)
   workspace_padding: Aarbechtsberäich padding
   disabled_windows_version: Den Fenstermanager ass net fir Är Windows Versioun verfügbar.
+  disabled_windows10: Den Fenstermanager ass net fir Windows 10 verfügbar.
 weg:
   items:
     size: Telefonsgrouss
@@ -92,6 +93,7 @@ apps_configurations:
       pinned: Verbonnen
       force: Kraaft managen
       unmanage: Unmanage
+      hidden: Verstoppen vun Dock / Taskbar
     title_readonly: '{{{Numm}}'
     category_placeholder: Keen
     name: Numm vum Numm
@@ -103,10 +105,11 @@ apps_configurations:
     ok_edit: Olaangs
     bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
     workspace: Konschtpas
-    options_label: Extra Optiounen
     title_edit: Ännerung {{Numm}}
     title_create: Erstellen {{Numm}}
     ok_create: Erreeiert eng kreéieren
+    weg_options_label: Dock / Taskbaroptiounen
+    wm_options_label: Fenster Manager Optiounen
   identifier:
     remove: Läschen Block
     matching_strategy: Passende Strategie

@@ -62,6 +62,7 @@ wm:
   enable: Միացնել պատուհանի կառավարիչը
   author: Հեղինակ
   disabled_windows_version: 'Պատուհանների կառավարիչը մատչելի չէ ձեր Windows տարբերակի համար:'
+  disabled_windows10: 'Պատուհանների կառավարիչը մատչելի չէ Windows 10-ի համար:'
 weg:
   items:
     size: Ապրանքի չափը
@@ -92,6 +93,7 @@ apps_configurations:
       unmanage: Անօդաչուր
       force: Ուժի կառավարում
       float: Լողացող
+      hidden: Թաքցնել նավահանգիստից / առաջադրանք
     monitor_placeholder: Ոչ ոք
     category_placeholder: Ոչ ոք
     workspace_placeholder: Ոչ ոք
@@ -102,11 +104,12 @@ apps_configurations:
     category: Կատեգորիա
     ok_create: Ստեղծել
     title_readonly: Դիտում է {{Անունը}
-    options_label: Լրացուցիչ ընտրանքներ
     title_edit: Խմբագրում {{Անվան}
     ok_readonly: Խմբագրել որպես նոր
     ok_edit: Թարմացում
     title_create: Ստեղծելով {{name}
+    wm_options_label: Պատուհանների մենեջեր Ընտրանքներ
+    weg_options_label: Dock / Taskbar Ընտրանքներ
   identifier:
     or: ԿԱՄ
     and: Մի քանազոր
