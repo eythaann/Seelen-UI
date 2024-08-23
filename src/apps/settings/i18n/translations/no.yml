@@ -48,6 +48,7 @@ toolbar:
     select: Verktøylinjestruktur
   height: Høyde
   enable: Aktiver fancy verktøylinje
+  unlabelled_tray: Umerket brettikon
 wm:
   border:
     enable: Aktiver vinduets grense
@@ -110,6 +111,7 @@ apps_configurations:
     ok_readonly: Rediger som ny
     wm_options_label: Vinduslederalternativer
     weg_options_label: Dock/oppgavelinjealternativer
+    options_label: Ekstra alternativer
   identifier:
     and: OG
     kind: Identifisere av

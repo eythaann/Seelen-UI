@@ -48,6 +48,7 @@ toolbar:
     author: អ្នកនិពន្ធ
   height: កម្ពស់
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
+  unlabelled_tray: រូបតំណាងថាឡៃដែលមិនស្មោះត្រង់
 wm:
   border:
     enable: បើកស៊ុមបង្អួច
@@ -110,6 +111,7 @@ apps_configurations:
     ok_readonly: កែសម្រួលដូចថ្មី។
     weg_options_label: ជម្រើសចត / ភារកិច្ច
     wm_options_label: ជម្រើសកម្មវិធីគ្រប់គ្រងបង្អួច
+    options_label: ជម្រើសបន្ថែម
   identifier:
     and: និង
     remove: លុបប្លុក

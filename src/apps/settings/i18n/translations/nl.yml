@@ -48,6 +48,7 @@ toolbar:
     select: Werkbalkstructuur
   height: Hoogte
   enable: Schakel fancy werkbalk in
+  unlabelled_tray: Niet -geëtiketteerd ladepictogram
 wm:
   border:
     width: Grensbreedte
@@ -110,6 +111,7 @@ apps_configurations:
     name: Naam
     weg_options_label: Dock/taakbalkopties
     wm_options_label: Opties voor vensterbeheerder
+    options_label: Extra opties
   identifier:
     and: EN
     or: OF

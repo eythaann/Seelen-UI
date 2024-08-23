@@ -53,6 +53,7 @@ toolbar:
     author: 作者
     description: 描述
   height: 高度
+  unlabelled_tray: 未标记的托盘图标
 wm:
   enable: 启用窗口管理器
   layout: 布局
@@ -125,6 +126,7 @@ apps_configurations:
       hidden: 隐藏码头/任务栏
     weg_options_label: 码头/任务栏选项
     wm_options_label: 窗口管理器选项
+    options_label: 额外的选择
   identifier:
     remove: 删除块
     id: 标识符

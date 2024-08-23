@@ -48,6 +48,7 @@ toolbar:
     select: Структура алатне траке
   enable: Омогућите фанци траку са алаткама
   height: Висина
+  unlabelled_tray: Икона за отпадне траи
 wm:
   border:
     enable: Омогућите границу прозора
@@ -110,6 +111,7 @@ apps_configurations:
     bindings: Везивање (белешка су обе опције потребне)
     weg_options_label: Опције прикључке / траке задатака
     wm_options_label: Опције Виндов Манагер опције
+    options_label: Додатне опције
   identifier:
     remove: Избрисати блок
     or: Или

@@ -48,6 +48,7 @@ toolbar:
     select: Uppbygging tækjastiku
   enable: Virkja Fancy tækjastiku
   height: Hæð
+  unlabelled_tray: Ómerkt bakkatákn
 wm:
   border:
     enable: Virkja landamæri glugga
@@ -110,6 +111,7 @@ apps_configurations:
     title_edit: Breyta {{name}}
     weg_options_label: Valkostir bryggju/verkefna
     wm_options_label: Valkostir gluggastjóra
+    options_label: Auka valkostir
   identifier:
     matching_strategy: Samsvarandi stefna
     add_block: Bæta við blokk

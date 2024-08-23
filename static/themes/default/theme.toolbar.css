@@ -157,9 +157,10 @@
 .tray-item-label {
   font-size: 0.7rem;
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.tray-item-label-tooltip {
+  padding: 0 40px;
 }
 
 .wlan-selector {

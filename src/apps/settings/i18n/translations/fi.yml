@@ -48,6 +48,7 @@ toolbar:
     author: Kirjoittaja
   height: Korkeus
   enable: Ota hieno työkalurivi käyttöön
+  unlabelled_tray: Leimaton lokerokuvake
 wm:
   border:
     offset: Rajan siirtyminen
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: Monitori
     weg_options_label: Dock/tehtäväpalkin vaihtoehdot
     wm_options_label: Window Manager -vaihtoehdot
+    options_label: Ylimääräiset vaihtoehdot
   identifier:
     add_block: Lisätä
     remove: Poistaa lohko

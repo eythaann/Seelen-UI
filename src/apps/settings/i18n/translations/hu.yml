@@ -48,6 +48,7 @@ toolbar:
     select: Eszköztár szerkezete
   height: Magasság
   enable: Engedélyezze a divatos eszköztárat
+  unlabelled_tray: Jelöletlen tálca ikon
 wm:
   border:
     enable: Engedélyezze az ablak szegélyét
@@ -110,6 +111,7 @@ apps_configurations:
     ok_edit: Frissít
     weg_options_label: Dokk/tálcás lehetőségek
     wm_options_label: Ablakkezelő opciók
+    options_label: Extra lehetőségek
   identifier:
     or: VAGY
     add_block: Blokk hozzáadása

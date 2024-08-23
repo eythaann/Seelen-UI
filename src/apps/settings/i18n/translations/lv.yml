@@ -48,6 +48,7 @@ toolbar:
     select: Rīkjoslas struktūra
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
+  unlabelled_tray: Neiezīmēta paplātes ikona
 wm:
   border:
     enable: Iespējot loga robežu
@@ -110,6 +111,7 @@ apps_configurations:
     ok_create: Radīt
     weg_options_label: Doka/uzdevumjoslas iespējas
     wm_options_label: Logu pārvaldnieka opcijas
+    options_label: Papildu iespējas
   identifier:
     and: UN
     matching_strategy: Atbilstības stratēģija

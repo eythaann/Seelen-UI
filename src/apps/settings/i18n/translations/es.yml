@@ -55,6 +55,7 @@ toolbar:
     author: Autor
     description: Descripción
   height: Altura
+  unlabelled_tray: Ícono de la bandeja sin etiqueta
 wm:
   enable: Habilitar gestor de ventanas
   layout: Distribución
@@ -130,6 +131,7 @@ apps_configurations:
       hidden: Esconderse del muelle/barra de tareas
     wm_options_label: Opciones de administrador de ventanas
     weg_options_label: Opciones de barra de muelle/tareas
+    options_label: Opciones adicionales
   identifier:
     remove: Eliminar bloque
     id: Identificador

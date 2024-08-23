@@ -48,6 +48,7 @@ toolbar:
     select: সরঞ্জামদণ্ড কাঠামো
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
   height: উচ্চতা
+  unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
 wm:
   border:
     width: সীমানার প্রশস্থতা
@@ -110,6 +111,7 @@ apps_configurations:
     bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
     weg_options_label: ডক/টাস্কবার বিকল্প
     wm_options_label: উইন্ডো ম্যানেজার বিকল্পগুলি
+    options_label: অতিরিক্ত বিকল্প
   identifier:
     or: বা
     and: এবং

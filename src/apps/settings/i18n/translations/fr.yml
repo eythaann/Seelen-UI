@@ -51,6 +51,7 @@ toolbar:
     author: Auteur
     description: Description
   height: Hauteur
+  unlabelled_tray: Icône de plateau non étiquetée
 wm:
   enable: Activer le gestionnaire de fenêtres
   layout: Mise en page
@@ -126,6 +127,7 @@ apps_configurations:
       hidden: Masquer à Dock / Taskbar
     wm_options_label: Options du gestionnaire de fenêtres
     weg_options_label: Options de quai / barre des tâches
+    options_label: Des options supplémentaires
   identifier:
     remove: Supprimer le bloc
     id: Identifiant

@@ -48,6 +48,7 @@ toolbar:
     select: Isakhiwo samathuluzi
   height: Ubude
   enable: Nika amandla amathuluzi e-fancy
+  unlabelled_tray: Isithonjana se-tray esingafundile
 wm:
   border:
     enable: Nika amandla umngcele wewindi
@@ -110,6 +111,7 @@ apps_configurations:
     ok_create: Dala
     wm_options_label: Izinketho ze-Window Manager
     weg_options_label: Izinketho ze-Dock / Taskbar
+    options_label: Izinketho Ezengeziwe
   identifier:
     remove: Susa ibhulokhi
     matching_strategy: Isu lokuqondanisa

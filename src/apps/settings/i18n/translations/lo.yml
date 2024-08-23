@@ -49,6 +49,7 @@ toolbar:
     select: ໂຄງສ້າງແຖບເຄື່ອງມື
   enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
   height: ຄວາມສູງ
+  unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ
 wm:
   border:
     enable: ເປີດໃຊ້ຂອບຂອງປ່ອງຢ້ຽມ
@@ -111,6 +112,7 @@ apps_configurations:
     bindings: ການຜູກມັດ (ຫມາຍເຫດທັງສອງທາງເລືອກແມ່ນຈໍາເປັນ)
     weg_options_label: ທາງເລືອກ Dock / Taskasbar
     wm_options_label: ຕົວເລືອກຜູ້ຈັດການ window Manager
+    options_label: ທາງເລືອກພິເສດ
   identifier:
     and: ແລະ
     negation: Negate ການຈັບຄູ່

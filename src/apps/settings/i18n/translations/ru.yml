@@ -56,6 +56,7 @@ toolbar:
     author: Автор
     description: Описание
   height: Высота
+  unlabelled_tray: Некабельный икона лотка
 wm:
   enable: Включить диспетчер окон
   layout: Макет
@@ -131,6 +132,7 @@ apps_configurations:
       hidden: Скрыть от дока/панели задач
     wm_options_label: Параметры Window Manager
     weg_options_label: Параметры дока/панели задач
+    options_label: Дополнительные варианты
   identifier:
     remove: Удалить блок
     id: Идентификатор

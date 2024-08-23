@@ -48,7 +48,7 @@ export interface Battery {
 }
 
 export interface TrayInfo {
-  label: string;
+  label: string | null;
   icon: string | null;
 }
 

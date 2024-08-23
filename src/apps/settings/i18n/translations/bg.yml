@@ -48,6 +48,7 @@ toolbar:
     author: Автор
   enable: Активирайте фантастичната лента с инструменти
   height: Височина
+  unlabelled_tray: Необичана икона на таблата
 wm:
   border:
     enable: Активирайте границата на Windows
@@ -110,6 +111,7 @@ apps_configurations:
     ok_create: Създаване
     wm_options_label: Опции за мениджър на прозорци
     weg_options_label: Опции за док/лента на задачите
+    options_label: Допълнителни опции
   identifier:
     add_block: Добавете блок
     remove: Изтриване на блок

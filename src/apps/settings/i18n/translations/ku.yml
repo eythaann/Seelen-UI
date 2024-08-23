@@ -47,6 +47,7 @@ toolbar:
     select: Struktura Toolbar
   height: Bilindî
   enable: Vebijêrkek Fancy Vebijêrin
+  unlabelled_tray: Îkonê tray a bêpergal
 wm:
   border:
     width: Berfirehiya sînor
@@ -109,6 +110,7 @@ apps_configurations:
     title_edit: Editting {name}}
     weg_options_label: Vebijarkên Dock / Taskbar
     wm_options_label: Vebijarkên rêveberê pencereyê
+    options_label: Vebijarkên zêde
   identifier:
     and: Û
     or: AN

@@ -48,6 +48,7 @@ toolbar:
     select: Cấu trúc thanh công cụ
   height: Chiều cao
   enable: Kích hoạt thanh công cụ ưa thích
+  unlabelled_tray: Biểu tượng khay không ghi nhãn
 wm:
   border:
     width: Chiều rộng biên giới
@@ -110,6 +111,7 @@ apps_configurations:
     title_create: Tạo {{name}}
     weg_options_label: Tùy chọn Thanh điều khiển/Thanh nhiệm vụ
     wm_options_label: Tùy chọn Trình quản lý cửa sổ
+    options_label: Tùy chọn bổ sung
   identifier:
     and: VÀ
     or: HOẶC

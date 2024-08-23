@@ -48,6 +48,7 @@ toolbar:
     description: Descriere
   height: Înălţime
   enable: Activați bara de instrumente fantezistă
+  unlabelled_tray: Pictograma tăvii nemarcate
 wm:
   border:
     enable: Activați granița ferestrei
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: Monitor
     wm_options_label: Opțiuni manager de ferestre
     weg_options_label: Opțiuni de doc/bara de activități
+    options_label: Opțiuni suplimentare
   identifier:
     and: ȘI
     or: SAU

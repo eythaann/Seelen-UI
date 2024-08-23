@@ -48,6 +48,7 @@ toolbar:
     select: Struktura panelu nástrojů
   height: Výška
   enable: Povolte ozdobný panel nástrojů
+  unlabelled_tray: Ikona neznačené podnosy
 wm:
   border:
     width: Šířka hranic
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: Monitor
     weg_options_label: Možnosti doku/hlavního panelu
     wm_options_label: Možnosti správce oken
+    options_label: Další možnosti
   identifier:
     add_block: Přidat blok
     negation: Negovat odpovídající

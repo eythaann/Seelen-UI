@@ -48,6 +48,7 @@ toolbar:
     description: Broessdatsch
   enable: Aktivéiert Fore Toolbar
   height: Héicht
+  unlabelled_tray: Onbau Take Ikon
 wm:
   border:
     width: Grenz Breet
@@ -110,6 +111,7 @@ apps_configurations:
     ok_create: Erreeiert eng kreéieren
     weg_options_label: Dock / Taskbaroptiounen
     wm_options_label: Fenster Manager Optiounen
+    options_label: Extra Optiounen
   identifier:
     remove: Läschen Block
     matching_strategy: Passende Strategie

@@ -54,6 +54,7 @@ toolbar:
     author: مؤلف
     description: وصف
   height: ارتفاع
+  unlabelled_tray: أيقونة صينية غير محدودة
 wm:
   enable: تمكين مدير النوافذ
   layout: تَخطِيط
@@ -128,6 +129,7 @@ apps_configurations:
       hidden: الاختباء من قفص الاتهام/شريط المهام
     weg_options_label: خيارات قفص الاتهام/شريط المهام
     wm_options_label: خيارات مدير النافذة
+    options_label: خيارات إضافية
   identifier:
     remove: حذف الحظر
     id: المعرف

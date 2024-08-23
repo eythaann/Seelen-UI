@@ -48,6 +48,7 @@ toolbar:
     author: Автор
   enable: Увімкнути панель інструментів вишуканих
   height: Висота
+  unlabelled_tray: Нежитрий ікона лотка
 wm:
   border:
     width: Ширина кордону
@@ -110,6 +111,7 @@ apps_configurations:
     bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
     weg_options_label: Параметри Dock/Taskbar
     wm_options_label: Параметри менеджера вікон
+    options_label: Додаткові варіанти
   identifier:
     and: І
     add_block: Додати блок

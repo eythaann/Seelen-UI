@@ -48,6 +48,7 @@ toolbar:
     description: Опис
   height: Висина
   enable: Овозможете фенси лента со алатки
+  unlabelled_tray: Икона за обележување на послужавник
 wm:
   border:
     width: Ширина на границата
@@ -110,6 +111,7 @@ apps_configurations:
     title_create: Креирање {{име}}
     wm_options_label: Опции за управување со прозорецот
     weg_options_label: Опции на пристаништето/лентата со задачи
+    options_label: Дополнителни опции
   identifier:
     remove: Избриши блок
     matching_strategy: Стратегија за појавување

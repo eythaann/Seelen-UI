@@ -48,6 +48,7 @@ toolbar:
     author: Autor
   height: Visina
   enable: Omogućite maštovitu alatnu traku
+  unlabelled_tray: Ikona neobilježene ladice
 wm:
   border:
     offset: Offset
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: Monitor
     weg_options_label: Opcije pristaništa/trake
     wm_options_label: Opcije upravitelja prozora
+    options_label: Dodatne opcije
   identifier:
     and: I
     negation: Negiranje podudaranja

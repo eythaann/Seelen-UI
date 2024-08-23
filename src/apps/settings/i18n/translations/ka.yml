@@ -48,6 +48,7 @@ toolbar:
     select: ინსტრუმენტთა პანელის სტრუქტურა
   height: სიმაღლე
   enable: ჩართეთ ლამაზი პანელი
+  unlabelled_tray: არასასურველი უჯრის ხატი
 wm:
   border:
     enable: ფანჯრის საზღვრის ჩართვა
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: შემოწმება
     weg_options_label: დოკ/დავალების პანელის პარამეტრები
     wm_options_label: ფანჯრის მენეჯერის პარამეტრები
+    options_label: დამატებითი პარამეტრები
   identifier:
     and: და
     id: პირადობა

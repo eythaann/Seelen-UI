@@ -48,6 +48,7 @@ toolbar:
     author: Autora
   height: Altura
   enable: Activa la barra d’eines de luxe
+  unlabelled_tray: Icona de la safata no etiquetada
 wm:
   border:
     offset: Compensació fronterera
@@ -110,6 +111,7 @@ apps_configurations:
     monitor_placeholder: Res
     weg_options_label: Opcions de moll/barra de tasques
     wm_options_label: Opcions del gestor de finestres
+    options_label: Opcions addicionals
   identifier:
     add_block: Afegiu bloc
     remove: Esborra el bloc

@@ -48,6 +48,7 @@ toolbar:
     select: Verktygsfältstruktur
   height: Höjd
   enable: Aktivera snyggt verktygsfält
+  unlabelled_tray: Omärkta fackikon
 wm:
   border:
     width: Gränsbredd
@@ -110,6 +111,7 @@ apps_configurations:
     ok_readonly: Redigera som ny
     weg_options_label: Dock/Aktivitetsfältalternativ
     wm_options_label: Fönsterchefalternativ
+    options_label: Extra alternativ
   identifier:
     and: OCH
     remove: Radera block

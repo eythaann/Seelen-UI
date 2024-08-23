@@ -48,6 +48,7 @@ toolbar:
     description: Opis
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
+  unlabelled_tray: Ikona neznačeného podnosu
 wm:
   border:
     width: Šírka hranice
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: Monitor
     wm_options_label: Možnosti správcu okien
     weg_options_label: Možnosti doku/panela úloh
+    options_label: Ďalšie možnosti
   identifier:
     remove: Vymazať blok
     negation: Negovať zladenie

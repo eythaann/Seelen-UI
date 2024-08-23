@@ -48,6 +48,7 @@ toolbar:
     select: Գործիքադարակի կառուցվածքը
   enable: Միացնել Fancy Toolbar- ը
   height: Բարձրություն
+  unlabelled_tray: Unlabelled Tray Icon
 wm:
   border:
     enable: Միացնել պատուհանի սահմանը
@@ -110,6 +111,7 @@ apps_configurations:
     title_create: Ստեղծելով {{name}
     wm_options_label: Պատուհանների մենեջեր Ընտրանքներ
     weg_options_label: Dock / Taskbar Ընտրանքներ
+    options_label: Լրացուցիչ ընտրանքներ
   identifier:
     or: ԿԱՄ
     and: Մի քանազոր

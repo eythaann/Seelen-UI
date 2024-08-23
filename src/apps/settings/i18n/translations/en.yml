@@ -54,6 +54,7 @@ toolbar:
     author: Author
     description: Description
   height: Height
+  unlabelled_tray: Unlabelled Tray Icon
 wm:
   enable: Enable Window Manager
   disabled_windows10: The Window Manager is not available for Windows 10.

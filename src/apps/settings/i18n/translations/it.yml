@@ -48,6 +48,7 @@ toolbar:
     select: Struttura della barra degli strumenti
   height: Altezza
   enable: Abilita barra degli strumenti di fantasia
+  unlabelled_tray: Icona del vassoio senza etichetta
 wm:
   border:
     width: Larghezza del bordo
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: Tenere sotto controllo
     weg_options_label: Opzioni dock/barra delle applicazioni
     wm_options_label: Opzioni del gestore delle finestre
+    options_label: Opzioni extra
   identifier:
     and: E
     or: O

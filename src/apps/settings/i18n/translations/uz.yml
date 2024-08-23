@@ -48,6 +48,7 @@ toolbar:
     author: Muallif
   enable: Fashr asboblar panelini yoqing
   height: Balandlik
+  unlabelled_tray: Bojavelilmagan aşınma ikonka
 wm:
   border:
     width: Chegara kengligi
@@ -110,6 +111,7 @@ apps_configurations:
     title_edit: '{{Ism}} tahrirlash'
     wm_options_label: Oyna boshqaruvchisi variantlari
     weg_options_label: Dok / vazifalar paneli
+    options_label: Qo'shimcha variantlar
   identifier:
     add_block: Blokni qo'shish
     remove: Blokni o'chirish

@@ -48,6 +48,7 @@ toolbar:
     select: Struktura paska narzędzi
   height: Wysokość
   enable: Włącz fantazyjny pasek narzędzi
+  unlabelled_tray: Ikona nieznakowanej tacki
 wm:
   border:
     width: Szerokość granicy
@@ -110,6 +111,7 @@ apps_configurations:
     title_create: Tworzenie {{nazwa}}
     weg_options_label: Opcje DOCK/PASKTA
     wm_options_label: Opcje menedżera okien
+    options_label: Dodatkowe opcje
   identifier:
     and: I
     or: LUB

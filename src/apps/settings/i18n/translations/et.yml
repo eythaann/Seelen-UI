@@ -48,6 +48,7 @@ toolbar:
     select: Tööriistariba struktuur
   height: Kõrgus
   enable: Luba väljamõeldud tööriistariba
+  unlabelled_tray: Märgistamata salveikoon
 wm:
   border:
     width: Piirilaius
@@ -110,6 +111,7 @@ apps_configurations:
     ok_edit: Värskendama
     weg_options_label: Dokk/ülesanderiba valikud
     wm_options_label: Aknahalduri valikud
+    options_label: Lisavalikud
   identifier:
     negation: Eitav sobitamine
     matching_strategy: Sobiv strateegia

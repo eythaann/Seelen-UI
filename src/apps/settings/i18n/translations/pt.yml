@@ -55,6 +55,7 @@ toolbar:
     author: Autor
     description: Descrição
   height: Altura
+  unlabelled_tray: Ícone de bandeja não marcada
 wm:
   enable: Habilitar Gerenciador de Janelas
   layout: Disposição
@@ -130,6 +131,7 @@ apps_configurations:
       hidden: Esconda -se da doca/barra de tarefas
     weg_options_label: Opções de doca/barra de tarefas
     wm_options_label: Opções do gerenciador de janelas
+    options_label: Opções extras
   identifier:
     remove: Excluir bloco
     id: Identificador

@@ -48,6 +48,7 @@ toolbar:
     description: Paglalarawan
   height: Taas
   enable: Paganahin ang magarbong toolbar
+  unlabelled_tray: Hindi nabigong icon ng tray
 wm:
   border:
     width: Lapad ng hangganan
@@ -110,6 +111,7 @@ apps_configurations:
     name: Pangalan
     wm_options_label: Mga pagpipilian sa Window Manager
     weg_options_label: Mga pagpipilian sa pantalan/taskbar
+    options_label: Dagdag na mga pagpipilian
   identifier:
     id: Identifier
     negation: Negate pagtutugma

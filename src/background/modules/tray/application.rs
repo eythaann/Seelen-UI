@@ -4,12 +4,13 @@ use windows::Win32::{
     UI::{
         Accessibility::{
             CUIAutomation, IUIAutomation, IUIAutomationCondition, IUIAutomationElement,
-            IUIAutomationInvokePattern, TreeScope, TreeScope_Descendants, TreeScope_Subtree,
-            UIA_InvokePatternId,
+            IUIAutomationElement3, IUIAutomationInvokePattern, TreeScope, TreeScope_Descendants,
+            TreeScope_Subtree, UIA_InvokePatternId,
         },
-        WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_SHOW},
+        WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_HIDE, SW_SHOW},
     },
 };
+use windows_core::Interface;
 use winreg::{
     enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS},
     RegKey,
@@ -17,7 +18,6 @@ use winreg::{
 
 use crate::{
     error_handler::Result,
-    modules::input::Keyboard,
     pcstr,
     seelen::get_app_handle,
     seelen_weg::icon_extractor::extract_and_save_icon,
@@ -43,29 +43,34 @@ pub fn get_sub_tree(
     Ok(elements)
 }
 
-// force_tray_overflow_creation should be called before get_tray_handle
-// https://learn.microsoft.com/en-us/answers/questions/1483214/win11-22h2-(10-0-22621)-cant-support-tb-buttoncount
-pub fn get_tray_overflow_handle() -> Option<HWND> {
+fn get_tray_overflow_handle() -> Option<HWND> {
     unsafe {
         if is_windows_10() {
             let tray_overflow = FindWindowA(pcstr!("NotifyIconOverFlowWindow"), None);
             if tray_overflow.0 == 0 {
                 return None;
             }
-
-            let tray_overflow_content =
-                FindWindowExA(tray_overflow, HWND(0), pcstr!("ToolbarWindow32"), None);
-
-            if tray_overflow_content.0 == 0 {
-                return None;
-            }
-
-            return Some(tray_overflow_content);
+            return Some(tray_overflow);
         }
 
         let tray_overflow = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
         if tray_overflow.0 == 0 {
             return None;
+        }
+        Some(tray_overflow)
+    }
+}
+
+fn get_tray_overflow_content_handle() -> Option<HWND> {
+    let tray_overflow = get_tray_overflow_handle()?;
+    unsafe {
+        if is_windows_10() {
+            let tray_overflow_content =
+                FindWindowExA(tray_overflow, HWND(0), pcstr!("ToolbarWindow32"), None);
+            if tray_overflow_content.0 == 0 {
+                return None;
+            }
+            return Some(tray_overflow_content);
         }
 
         let tray_overflow_content = FindWindowExA(
@@ -77,19 +82,12 @@ pub fn get_tray_overflow_handle() -> Option<HWND> {
         if tray_overflow_content.0 == 0 {
             return None;
         }
-
         Some(tray_overflow_content)
     }
 }
 
 pub fn ensure_tray_overflow_creation() -> Result<()> {
-    if !is_windows_11() {
-        return Ok(());
-    }
-    log::trace!("Ensuring tray overflow is created");
-
-    if let Some(tray_overflow_hwnd) = get_tray_overflow_handle() {
-        log::trace!("Tray overflow already created {:x}", tray_overflow_hwnd.0);
+    if !is_windows_11() || get_tray_overflow_content_handle().is_some() {
         return Ok(());
     }
 
@@ -131,7 +129,7 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
 
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
     ensure_tray_overflow_creation()?;
-    let tray_from_registry = TrayIcon::enum_from_registry().unwrap_or_default();
+    let tray_from_registry = TrayIconManager::enum_from_registry().unwrap_or_default();
 
     Com::run_with_context(|| unsafe {
         let mut tray_elements = Vec::new();
@@ -141,7 +139,7 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
 
         let mut children = Vec::new();
 
-        if let Some(tray_overflow) = get_tray_overflow_handle() {
+        if let Some(tray_overflow) = get_tray_overflow_content_handle() {
             let element: IUIAutomationElement = automation.ElementFromHandle(tray_overflow)?;
             children.extend(get_sub_tree(&element, &condition, TreeScope_Descendants)?);
         }
@@ -149,8 +147,7 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
         let is_win10 = is_windows_10();
         for element in children {
             let name = element.CurrentName()?.to_string();
-            if !name.is_empty() && (is_win10 || element.CurrentAutomationId()? == "NotifyItemIcon")
-            {
+            if is_win10 || element.CurrentAutomationId()? == "NotifyItemIcon" {
                 let registry = tray_from_registry.iter().find(|t| {
                     let trimmed = name.trim();
                     t.initial_tooltip == trimmed
@@ -174,7 +171,7 @@ impl TrayIcon {
     pub fn info(&self) -> TrayIconInfo {
         TrayIconInfo {
             icon: self.icon().ok(),
-            label: self.name().unwrap_or("Unknown".to_string()),
+            label: self.name().ok(),
         }
     }
 
@@ -206,29 +203,36 @@ impl TrayIcon {
     }
 
     pub fn context_menu(&self) -> Result<()> {
-        let element = &self.ui_automation;
+        let element: IUIAutomationElement3 = self.ui_automation.cast()?;
+
         let mut cursor_pos = POINT::default();
         unsafe { GetCursorPos(&mut cursor_pos as *mut POINT)? };
 
-        let hwnd = unsafe { FindWindowA(None, pcstr!("System tray overflow window.")) };
+        if let Some(hwnd) = get_tray_overflow_handle() {
+            WindowsApi::show_window(hwnd, SW_SHOW)?;
+            let rect = WindowsApi::get_window_rect(hwnd);
 
-        WindowsApi::show_window(hwnd, SW_SHOW)?;
-        WindowsApi::move_window(
-            hwnd,
-            &RECT {
-                top: cursor_pos.y,
-                left: cursor_pos.x,
-                right: 0,
-                bottom: 0,
-            },
-        )?;
+            WindowsApi::move_window(
+                hwnd,
+                &RECT {
+                    top: cursor_pos.y - (rect.bottom - rect.top),
+                    left: cursor_pos.x - (rect.right - rect.left),
+                    right: 0,
+                    bottom: 0,
+                },
+            )?;
 
-        unsafe { element.SetFocus()? };
-        Keyboard::new().send_keys("{apps}")?;
+            unsafe { element.ShowContextMenu()? };
+            sleep_millis(500);
+            WindowsApi::show_window(hwnd, SW_HIDE)?;
+        }
 
         Ok(())
     }
+}
 
+struct TrayIconManager {}
+impl TrayIconManager {
     pub fn enum_from_registry() -> Result<Vec<RegistryNotifyIcon>> {
         let hkcr = RegKey::predef(HKEY_CURRENT_USER);
         let settings = hkcr.open_subkey("Control Panel\\NotifyIconSettings")?;

@@ -48,6 +48,7 @@ toolbar:
     select: Alətlər paneli quruluşu
   height: Hündürlük
   enable: Zərif alət çubuğunu aktivləşdirin
+  unlabelled_tray: Qeyri-çapsız tepsik nişanı
 wm:
   border:
     width: Sərhəd eni
@@ -110,6 +111,7 @@ apps_configurations:
     title_edit: '{{Ad}} redaktəsi'
     weg_options_label: Dock / tapşırıq çubuğu seçimləri
     wm_options_label: Pəncərə meneceri variantları
+    options_label: Əlavə seçimlər
   identifier:
     add_block: Blok əlavə edin
     negation: Uyğunlaşmanı rədd edin

@@ -47,6 +47,7 @@ toolbar:
     author: लेखिका
   height: ऊचाई
   enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
+  unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
 wm:
   border:
     offset: सीमा अफसेट
@@ -109,6 +110,7 @@ apps_configurations:
     workspace_placeholder: केहि पनि होइन
     wm_options_label: विन्डो प्रबन्धक विकल्पहरू
     weg_options_label: डक / टास्कबार विकल्पहरू विकल्पहरू
+    options_label: अतिरिक्त विकल्पहरू
   identifier:
     and: र
     id: पहिचानकर्ता

@@ -47,6 +47,7 @@ toolbar:
     select: ٹول بار کا ڈھانچہ
   enable: فینسی ٹول بار کو فعال کریں
   height: اونچائی
+  unlabelled_tray: غیر لیبلڈ ٹرے آئیکن
 wm:
   border:
     enable: ونڈو کی بارڈر کو فعال کریں
@@ -109,6 +110,7 @@ apps_configurations:
     title_create: '{{نام}} بنانا'
     wm_options_label: ونڈو مینیجر کے اختیارات
     weg_options_label: گودی/ٹاسک بار کے اختیارات
+    options_label: اضافی اختیارات
   identifier:
     and: اور
     remove: بلاک کو حذف کریں

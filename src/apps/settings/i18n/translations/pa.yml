@@ -48,6 +48,7 @@ toolbar:
     author: ਲੇਖਕ
   height: ਉਚਾਈ
   enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  unlabelled_tray: ਬਿਨਾਲੇ ਟਰੇ ਆਈਕਨ
 wm:
   border:
     offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
@@ -110,6 +111,7 @@ apps_configurations:
     title_create: '{{name}} ਬਣਾਉਣਾ'
     wm_options_label: ਵਿੰਡੋ ਮੈਨੇਜਰ ਦੇ ਵਿਕਲਪ
     weg_options_label: ਡੌਕ / ਟਾਸਕਬਾਰ ਚੋਣਾਂ
+    options_label: ਵਾਧੂ ਵਿਕਲਪ
   identifier:
     kind: ਦੁਆਰਾ ਪਛਾਣੋ
     id: ਪਛਾਣਕਰਤਾ

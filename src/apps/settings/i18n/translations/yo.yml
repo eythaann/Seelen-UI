@@ -47,6 +47,7 @@ toolbar:
     description: Isapejuwe
   height: Giga
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
+  unlabelled_tray: Alailowaya ti ko ni ile-iwe
 wm:
   border:
     enable: Jeki aala window
@@ -109,6 +110,7 @@ apps_configurations:
     monitor: Aṣabojuto
     wm_options_label: Awọn aṣayan Iṣẹ Iṣẹ window
     weg_options_label: Dock / Awọn aṣayan Iṣẹ-ṣiṣe
+    options_label: Awọn aṣayan afikun
   identifier:
     negation: Ibaramu tuntun
     add_block: Fi dègbé

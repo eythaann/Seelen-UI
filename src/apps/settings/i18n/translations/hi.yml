@@ -48,6 +48,7 @@ toolbar:
     description: विवरण
   height: ऊंचाई
   enable: फैंसी टूलबार सक्षम करें
+  unlabelled_tray: अनबेल्ड ट्रे आइकन
 wm:
   border:
     width: सीमा चौड़ाई
@@ -110,6 +111,7 @@ apps_configurations:
     title_readonly: '{{नाम}} देखना'
     wm_options_label: विंडो मैनेजर विकल्प
     weg_options_label: डॉक/टास्कबार विकल्प
+    options_label: अतिरिक्त विकल्प
   identifier:
     remove: ब्लॉक हटाएं
     add_block: ब्लॉक जोड़ें

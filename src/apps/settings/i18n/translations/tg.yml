@@ -47,6 +47,7 @@ toolbar:
     author: Муаллиф
   height: Баландӣ
   enable: Дастрас кардани панели футболи
+  unlabelled_tray: Тасвири табақаи ғайриқонунӣ
 wm:
   border:
     width: Паҳнои сарҳад
@@ -109,6 +110,7 @@ apps_configurations:
     title_create: Эҷоди {{НОМИ}}
     weg_options_label: Параметрҳои Dock / Pitibar
     wm_options_label: Имконоти мудири равзана
+    options_label: Имконоти иловагӣ
   identifier:
     or: Ё
     kind: Муайян мекунад

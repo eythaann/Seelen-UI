@@ -47,6 +47,7 @@ toolbar:
     author: Зохиолч
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
   height: Өндөрлөг
+  unlabelled_tray: Unlabelled Tray дүрс
 wm:
   border:
     offset: Хилийн офсет
@@ -109,6 +110,7 @@ apps_configurations:
     title_create: Үүсгэх {{нэр}}}
     wm_options_label: Цонх менежерийн сонголтууд
     weg_options_label: Док / Taskbar сонголтууд
+    options_label: Нэмий сонголт
   identifier:
     id: Өмнө тайлбар
     or: ЭСВЭЛ

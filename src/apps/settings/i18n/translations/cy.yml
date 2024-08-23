@@ -48,6 +48,7 @@ toolbar:
     select: Strwythur Bar Offer
   enable: Galluogi bar offer ffansi
   height: Uchder
+  unlabelled_tray: Eicon hambwrdd heb ei labelu
 wm:
   border:
     width: Lled
@@ -110,6 +111,7 @@ apps_configurations:
     ok_create: Chrëid
     weg_options_label: Opsiynau doc/bar tasgau
     wm_options_label: Opsiynau Rheolwr Ffenestr
+    options_label: Opsiynau ychwanegol
   identifier:
     matching_strategy: Strategaeth gyfatebol
     id: Dynodwr

@@ -53,6 +53,7 @@ toolbar:
     author: 작성자
     description: 설명
   height: 높이
+  unlabelled_tray: 레이블이없는 트레이 아이콘
 wm:
   enable: 윈도우 매니저 활성화
   layout: 레이아웃
@@ -127,6 +128,7 @@ apps_configurations:
       hidden: 도크/작업 표시 줄에서 숨 깁니다
     wm_options_label: 윈도우 관리자 옵션
     weg_options_label: 도크/작업 표시 줄 옵션
+    options_label: 추가 옵션
   identifier:
     remove: 블록 삭제
     id: 식별자

@@ -47,6 +47,7 @@ toolbar:
     author: لیکوال
   enable: د فینسي تورې پټه وړتیا وړ کړئ
   height: لوړوالی
+  unlabelled_tray: بې بنسټه ټری عکس
 wm:
   border:
     width: د بريد سور
@@ -109,6 +110,7 @@ apps_configurations:
     workspace_placeholder: هیڅ نه
     wm_options_label: د کړکۍ مدیر اختیارونه
     weg_options_label: دوک / ټاسک بار انتخابونه
+    options_label: اضافي اختیارونه
   identifier:
     or: یا
     id: پېژنيزه

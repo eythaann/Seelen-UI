@@ -48,6 +48,7 @@ toolbar:
     select: టూల్‌బార్ నిర్మాణం
   height: ఎత్తు
   enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
+  unlabelled_tray: లేబుల్ చేయని ట్రే చిహ్నం
 wm:
   border:
     width: అంచు వెడల్పు
@@ -110,6 +111,7 @@ apps_configurations:
     ok_create: సృష్టించు
     weg_options_label: డాక్/టాస్క్‌బార్ ఎంపికలు
     wm_options_label: విండో మేనేజర్ ఎంపికలు
+    options_label: అదనపు ఎంపికలు
   identifier:
     and: మరియు
     negation: సరిపోలికను తిరస్కరించండి

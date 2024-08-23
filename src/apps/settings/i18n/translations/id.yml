@@ -48,6 +48,7 @@ toolbar:
     author: Pengarang
   enable: Aktifkan toolbar mewah
   height: Tinggi
+  unlabelled_tray: Ikon baki tanpa label
 wm:
   border:
     offset: Offset perbatasan
@@ -110,6 +111,7 @@ apps_configurations:
     monitor: Monitor
     weg_options_label: Opsi Dock/Taskbar
     wm_options_label: Opsi Manajer Jendela
+    options_label: Opsi tambahan
   identifier:
     and: DAN
     matching_strategy: Strategi pencocokan

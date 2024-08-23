@@ -47,6 +47,7 @@ toolbar:
     select: โครงสร้างแถบเครื่องมือ
   height: ความสูง
   enable: เปิดใช้งานแถบเครื่องมือแฟนซี
+  unlabelled_tray: ไอคอนถาดที่ไม่มีป้ายกำกับ
 wm:
   border:
     width: ความกว้างชายแดน
@@ -109,6 +110,7 @@ apps_configurations:
     title_create: การสร้าง {{ชื่อ}}
     weg_options_label: ตัวเลือกท่าเทียบเรือ/บาร์
     wm_options_label: ตัวเลือกตัวจัดการหน้าต่าง
+    options_label: ตัวเลือกพิเศษ
   identifier:
     and: และ
     or: หรือ

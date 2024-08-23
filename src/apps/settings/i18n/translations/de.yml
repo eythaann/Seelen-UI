@@ -55,6 +55,7 @@ toolbar:
     author: Autor
     description: Beschreibung
   height: Höhe
+  unlabelled_tray: Entlebte Tablettikone
 wm:
   enable: Fenstermanager aktivieren
   layout: Layout
@@ -130,6 +131,7 @@ apps_configurations:
       hidden: Verstecken Sie sich vor Dock/Taskleiste
     weg_options_label: Dock/Taskleistenoptionen
     wm_options_label: Fenstermanageroptionen
+    options_label: Zusätzliche Optionen
   identifier:
     remove: Block löschen
     id: Identifikator

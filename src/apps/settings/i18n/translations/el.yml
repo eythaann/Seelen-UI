@@ -48,6 +48,7 @@ toolbar:
     description: Περιγραφή
   height: Υψος
   enable: Ενεργοποίηση φανταχτερά εργαλεία εργαλείων
+  unlabelled_tray: Εικονίδιο δίσκων χωρίς
 wm:
   border:
     offset: Μετατόπιση των συνόρων
@@ -110,6 +111,7 @@ apps_configurations:
     title_edit: Επεξεργασία {{όνομα}}
     weg_options_label: Επιλογές της γραμμής αποβάθρας/εργασιών
     wm_options_label: Επιλογές διαχείρισης παραθύρων
+    options_label: Επιπλέον επιλογές
   identifier:
     or: Ή
     id: Αναγνωριστικό

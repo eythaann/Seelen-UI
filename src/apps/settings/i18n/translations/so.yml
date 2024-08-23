@@ -47,6 +47,7 @@ toolbar:
     select: Qaab dhismeedka Qalabka
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
+  unlabelled_tray: UNIBLEMEMEMED TRAY
 wm:
   border:
     enable: Karti xadka daaqadaha
@@ -109,6 +110,7 @@ apps_configurations:
     title_edit: Tafatirka {{magacii}
     weg_options_label: Dock / Fursadaha Hawlgalka
     wm_options_label: Xulashooyinka Maamulaha daaqada
+    options_label: Fursadaha dheeraadka ah
   identifier:
     remove: Tirtir xannibaadda
     matching_strategy: Istaraatiijiyadda iswaafajinta

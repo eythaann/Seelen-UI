@@ -48,6 +48,7 @@ toolbar:
     select: මෙවලම් තීරු ව්යුහය
   height: උස
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
+  unlabelled_tray: ලැජ්ජාවේ තැටි නිරූපකය
 wm:
   border:
     width: මායිම් පළල
@@ -110,6 +111,7 @@ apps_configurations:
     ok_create: නිර්මාණය කරන්න
     weg_options_label: තටාකය / කාර්ය තීරුව විකල්ප
     wm_options_label: කවුළු කළමනාකරුගේ විකල්ප
+    options_label: අමතර විකල්ප
   identifier:
     and: සහ
     add_block: බ්ලොක් එක් කරන්න

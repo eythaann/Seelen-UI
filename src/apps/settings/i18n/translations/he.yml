@@ -47,6 +47,7 @@ toolbar:
     select: מבנה סרגל הכלים
   height: גוֹבַה
   enable: אפשר סרגל כלים מפואר
+  unlabelled_tray: אייקון מגש ללא תווית
 wm:
   border:
     offset: קיזוז גבול
@@ -109,6 +110,7 @@ apps_configurations:
     title_readonly: צופה {{name}}
     wm_options_label: אפשרויות מנהל חלונות
     weg_options_label: אפשרויות עגינה/שורת משימות
+    options_label: אפשרויות נוספות
   identifier:
     id: מזהה
     or: אוֹ

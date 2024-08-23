@@ -48,6 +48,7 @@ toolbar:
     select: Araç çubuğu yapısı
   height: Yükseklik
   enable: Süslü araç çubuğunu etkinleştirin
+  unlabelled_tray: Kabul Edilmemiş Tepsi simgesi
 wm:
   border:
     width: Sınır genişliği
@@ -110,6 +111,7 @@ apps_configurations:
     title_edit: Düzenleme {{name}}
     wm_options_label: Pencere Yöneticisi Seçenekleri
     weg_options_label: Rıhtım/Görev Çubuğu Seçenekleri
+    options_label: Ekstra Seçenekler
   identifier:
     and: VE
     matching_strategy: Eşleştirme Stratejisi

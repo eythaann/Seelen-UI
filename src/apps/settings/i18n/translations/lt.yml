@@ -48,6 +48,7 @@ toolbar:
     author: Autorius
   height: Ūgis
   enable: Įgalinkite išgalvotą įrankių juostą
+  unlabelled_tray: Nepaženklinta dėklo piktograma
 wm:
   border:
     enable: Įgalinti lango sieną
@@ -110,6 +111,7 @@ apps_configurations:
     ok_readonly: Redaguoti kaip naują
     weg_options_label: „Dock“/„Taskbar“ parinktys
     wm_options_label: „Windows Manager“ parinktys
+    options_label: Papildomos galimybės
   identifier:
     id: Identifikatorius
     negation: Neigiamas

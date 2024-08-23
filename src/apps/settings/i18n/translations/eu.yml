@@ -48,6 +48,7 @@ toolbar:
     description: Deskribapen
   enable: Gaitu tresna-barra
   height: Luzera
+  unlabelled_tray: Nahitaezko erretilua ikonoa
 wm:
   border:
     width: Ertzaren zabalera
@@ -110,6 +111,7 @@ apps_configurations:
     title_edit: '{{Name}} editatzea'
     weg_options_label: Dock / ataza barrako aukerak
     wm_options_label: Leiho kudeatzailearen aukerak
+    options_label: Aukera gehigarriak
   identifier:
     add_block: Gehitu blokea
     kind: Identifikatu

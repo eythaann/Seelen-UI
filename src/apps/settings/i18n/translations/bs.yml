@@ -48,6 +48,7 @@ toolbar:
     description: Opis
   height: Visina
   enable: Omogući fantastičnu alatnu traku
+  unlabelled_tray: Ikona neobrađene ladice
 wm:
   border:
     width: Širina granice
@@ -110,6 +111,7 @@ apps_configurations:
     title_edit: Uređivanje {{ime}}
     wm_options_label: Opcije prozora upravitelja
     weg_options_label: Opcije pristaništa / trake zadataka
+    options_label: Dodatne opcije
   identifier:
     matching_strategy: Strategija podudaranja
     and: I
