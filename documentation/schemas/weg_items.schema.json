@@ -35,9 +35,19 @@
         {
           "type": "object",
           "required": [
+            "exe",
+            "execution_path",
             "type"
           ],
           "properties": {
+            "exe": {
+              "description": "executable path",
+              "type": "string"
+            },
+            "execution_path": {
+              "description": "command to open the app using explorer.exe (uwp apps starts with `shell:AppsFolder`)",
+              "type": "string"
+            },
             "type": {
               "type": "string",
               "enum": [
