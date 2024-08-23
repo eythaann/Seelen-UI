@@ -241,6 +241,17 @@
   }
 }
 
+.media-notifier {
+  margin: var(--popups-margin);
+  width: 240px;
+  padding: 6px 24px 6px 6px;
+
+  .bg-layer-1 {
+    background-color: var(--color-gray-50);
+    border-radius: 10px;
+  }
+}
+
 .media-control-volume {
   display: flex;
   gap: 4px;

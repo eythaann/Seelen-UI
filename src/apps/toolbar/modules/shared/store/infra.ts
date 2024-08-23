@@ -7,6 +7,7 @@ import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { throttle } from 'lodash';
 
 import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
@@ -67,9 +68,12 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
-  await listenGlobal<MediaDevice[]>('media-outputs', (event) => {
-    store.dispatch(RootActions.setMediaOutputs(event.payload));
-  });
+  await listenGlobal<MediaDevice[]>(
+    'media-outputs',
+    throttle((event) => {
+      store.dispatch(RootActions.setMediaOutputs(event.payload));
+    }, 20),
+  );
 
   await listenGlobal<MediaDevice[]>('media-inputs', (event) => {
     store.dispatch(RootActions.setMediaInputs(event.payload));

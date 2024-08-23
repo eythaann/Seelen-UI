@@ -3,7 +3,7 @@ import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Popover, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
-import React, { PropsWithChildren, useCallback, useEffect, useState } from 'react';
+import React, { memo, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -11,7 +11,7 @@ import { BackgroundByLayersV2 } from '../../../../seelenweg/components/Backgroun
 import { useAppBlur } from '../../shared/hooks/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
-import { Selectors } from '../../shared/store/app';
+import { selectDefaultOutput, Selectors } from '../../shared/store/app';
 import { calcLuminance } from '../application';
 
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
@@ -134,10 +134,11 @@ interface VolumeControlProps {
   icon: React.ReactNode;
   deviceId: string;
   sessionId?: string;
+  withRightAction?: boolean;
 }
 
-export function VolumeControl(props: VolumeControlProps) {
-  const { value, icon, deviceId, sessionId } = props;
+export const VolumeControl = memo((props: VolumeControlProps) => {
+  const { value, icon, deviceId, sessionId, withRightAction = true } = props;
 
   const [internalValue, setInternalValue] = useState(value);
 
@@ -172,12 +173,14 @@ export function VolumeControl(props: VolumeControlProps) {
           formatter: (value) => `${(100 * (value || 0)).toFixed(0)}`,
         }}
       />
-      <Button type="text" onClick={() => invoke('open_file', { path: 'ms-settings:sound' })}>
-        <Icon iconName="RiEqualizerLine" />
-      </Button>
+      {withRightAction && (
+        <Button type="text" onClick={() => invoke('open_file', { path: 'ms-settings:sound' })}>
+          <Icon iconName="RiEqualizerLine" />
+        </Button>
+      )}
     </div>
   );
-}
+});
 
 function MediaControls() {
   const { t } = useTranslation();
@@ -240,21 +243,76 @@ function MediaControls() {
 }
 
 export function WithMediaControls({ children }: PropsWithChildren) {
-  const [openPreview, setOpenPreview] = useState(false);
+  const [openControls, setOpenControls] = useState(false);
+  const [openNotifier, setOpenNotifier] = useState(false);
+
+  const defaultOutput = useSelector(selectDefaultOutput);
+
+  const firstLoad = useRef(true);
+
+  const closeVolumeNotifier = useCallback(
+    debounce(() => setOpenNotifier(false), 2000),
+    [],
+  );
+
+  useEffect(() => {
+    if (!defaultOutput) {
+      return;
+    }
+
+    if (firstLoad.current) {
+      firstLoad.current = false;
+      return;
+    }
+
+    if (!openControls && !openNotifier) {
+      setOpenNotifier(true);
+    }
+    closeVolumeNotifier();
+  }, [defaultOutput?.volume]);
 
   useAppBlur(() => {
-    setOpenPreview(false);
+    setOpenControls(false);
   });
 
   return (
     <Popover
-      open={openPreview}
+      open={openControls}
       trigger="click"
-      onOpenChange={setOpenPreview}
+      onOpenChange={(open) => {
+        setOpenControls(open);
+        if (open) {
+          setOpenNotifier(false);
+        }
+      }}
       arrow={false}
       content={<MediaControls />}
+      destroyTooltipOnHide
     >
-      {children}
+      <Popover
+        open={openNotifier}
+        arrow={false}
+        onOpenChange={setOpenNotifier}
+        destroyTooltipOnHide
+        content={
+          <BackgroundByLayersV2 className="media-notifier">
+            {defaultOutput && (
+              <VolumeControl
+                value={defaultOutput.volume}
+                deviceId={defaultOutput.id}
+                icon={
+                  <Icon
+                    iconName={defaultOutput.muted ? 'IoVolumeMuteOutline' : 'IoVolumeHighOutline'}
+                  />
+                }
+                withRightAction={false}
+              />
+            )}
+          </BackgroundByLayersV2>
+        }
+      >
+        {children}
+      </Popover>
     </Popover>
   );
 }

@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add volume changed popup.
+
 ## [1.9.11]
 ### features
 - add a option to hide apps from the dock/taskbar, requested on #5.

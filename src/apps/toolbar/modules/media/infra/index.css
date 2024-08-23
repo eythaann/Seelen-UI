@@ -1,10 +1,10 @@
-.media-control {
-  .media-control-volume {
-    .ant-slider {
-      flex: 1;
-    }
+.media-control-volume {
+  .ant-slider {
+    flex: 1;
   }
+}
 
+.media-control {
   .media-control-sessions {
     position: relative;
     z-index: 1;

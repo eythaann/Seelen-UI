@@ -2,7 +2,7 @@ import { parseAsCamel } from '../../../../shared/schemas';
 import { FancyToolbarSchema } from '../../../../shared/schemas/FancyToolbar';
 import { Placeholder, ToolbarModule } from '../../../../shared/schemas/Placeholders';
 import { StateBuilder } from '../../../../shared/StateBuilder';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from './domain';
 
@@ -77,3 +77,7 @@ export const RootSlice = createSlice({
 
 export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
+
+export const selectDefaultOutput = createSelector(Selectors.mediaOutputs, (mediaOutputs) =>
+  mediaOutputs.find((d) => d.is_default_multimedia),
+);
