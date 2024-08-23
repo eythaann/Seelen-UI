@@ -47,7 +47,8 @@ toolbar:
     select: نوار ابزار
   height: قد
   enable: نوار ابزار فانتزی را فعال کنید
-  unlabelled_tray: نماد سینی بدون نام
+  auto_hide: پنهان خودکار
+  label: نوار ابزار
 wm:
   border:
     enable: مرز پنجره را فعال کنید

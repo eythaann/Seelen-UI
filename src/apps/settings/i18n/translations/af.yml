@@ -48,7 +48,8 @@ toolbar:
     select: Werkbalkstruktuur
   height: Hoogte
   enable: Aktiveer Fancy Toolbar
-  unlabelled_tray: Ongeslote skinkbord -ikoon
+  auto_hide: Outomatiese vel
+  label: Werkbalk
 wm:
   border:
     width: Grenswydte

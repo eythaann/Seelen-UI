@@ -118,6 +118,7 @@ export interface UIColors {
 
 export interface RootState extends IRootState<FancyToolbar> {
   version: number;
+  isOverlaped: boolean;
   focused: ActiveApp | null;
   placeholder: Placeholder | null;
   env: Record<string, string>;

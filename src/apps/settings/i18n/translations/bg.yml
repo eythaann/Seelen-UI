@@ -48,7 +48,8 @@ toolbar:
     author: Автор
   enable: Активирайте фантастичната лента с инструменти
   height: Височина
-  unlabelled_tray: Необичана икона на таблата
+  auto_hide: Автоматично скриване
+  label: Лента с инструменти
 wm:
   border:
     enable: Активирайте границата на Windows

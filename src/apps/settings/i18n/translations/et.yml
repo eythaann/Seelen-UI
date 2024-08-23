@@ -48,7 +48,8 @@ toolbar:
     select: Tööriistariba struktuur
   height: Kõrgus
   enable: Luba väljamõeldud tööriistariba
-  unlabelled_tray: Märgistamata salveikoon
+  auto_hide: Automaatne peida
+  label: Tööriistariba
 wm:
   border:
     width: Piirilaius

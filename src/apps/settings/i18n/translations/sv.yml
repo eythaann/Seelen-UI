@@ -48,7 +48,8 @@ toolbar:
     select: Verktygsfältstruktur
   height: Höjd
   enable: Aktivera snyggt verktygsfält
-  unlabelled_tray: Omärkta fackikon
+  auto_hide: Auto Hide
+  label: Verktygsfält
 wm:
   border:
     width: Gränsbredd

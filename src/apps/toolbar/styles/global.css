@@ -21,6 +21,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 var(--config-padding-at-side);
+    transition: transform 0.2s ease-in-out;
+
+    &.ft-bar-hidden {
+      transform: translateY(-100%);
+    }
 
     .ft-bar-left,
     .ft-bar-center,

@@ -48,7 +48,8 @@ toolbar:
     select: Eszköztár szerkezete
   height: Magasság
   enable: Engedélyezze a divatos eszköztárat
-  unlabelled_tray: Jelöletlen tálca ikon
+  auto_hide: Autóbizalom
+  label: Eszköztár
 wm:
   border:
     enable: Engedélyezze az ablak szegélyét

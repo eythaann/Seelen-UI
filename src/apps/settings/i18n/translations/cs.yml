@@ -48,7 +48,8 @@ toolbar:
     select: Struktura panelu nástrojů
   height: Výška
   enable: Povolte ozdobný panel nástrojů
-  unlabelled_tray: Ikona neznačené podnosy
+  auto_hide: Automatická skrýt
+  label: Panel nástrojů
 wm:
   border:
     width: Šířka hranic

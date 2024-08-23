@@ -48,7 +48,8 @@ toolbar:
     select: Strwythur Bar Offer
   enable: Galluogi bar offer ffansi
   height: Uchder
-  unlabelled_tray: Eicon hambwrdd heb ei labelu
+  auto_hide: Cuddio awto
+  label: Bariau
 wm:
   border:
     width: Lled

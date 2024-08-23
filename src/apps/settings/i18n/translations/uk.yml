@@ -48,7 +48,8 @@ toolbar:
     author: Автор
   enable: Увімкнути панель інструментів вишуканих
   height: Висота
-  unlabelled_tray: Нежитрий ікона лотка
+  auto_hide: Автомати
+  label: Панель інструментів
 wm:
   border:
     width: Ширина кордону

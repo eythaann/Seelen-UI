@@ -47,7 +47,8 @@ toolbar:
     author: Муаллиф
   height: Баландӣ
   enable: Дастрас кардани панели футболи
-  unlabelled_tray: Тасвири табақаи ғайриқонунӣ
+  auto_hide: Худкор Пинҳон кардани
+  label: Асбобу
 wm:
   border:
     width: Паҳнои сарҳад

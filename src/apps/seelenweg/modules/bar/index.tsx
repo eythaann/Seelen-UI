@@ -1,4 +1,4 @@
-import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
+import { AppBarHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
 import { SavedSeparatorItem } from '../../../shared/schemas/SeelenWegItems';
 import { cx } from '../../../shared/styles';
 import { WithContextMenu } from '../../components/WithContextMenu';
@@ -29,16 +29,16 @@ const Separator2: SavedSeparatorItem = {
   type: SpecialItemType.Separator,
 };
 
-function shouldBeHidden(hideMode: SeelenWegHideMode, isActive: boolean, isOverlaped: boolean) {
+function shouldBeHidden(hideMode: AppBarHideMode, isActive: boolean, isOverlaped: boolean) {
   let shouldBeHidden = false;
   switch (hideMode) {
-    case SeelenWegHideMode.Always:
+    case AppBarHideMode.Always:
       shouldBeHidden = !isActive;
       break;
-    case SeelenWegHideMode.Never:
+    case AppBarHideMode.Never:
       shouldBeHidden = false;
       break;
-    case SeelenWegHideMode.OnOverlap:
+    case AppBarHideMode.OnOverlap:
       shouldBeHidden = !isActive && isOverlaped;
   }
   return shouldBeHidden;

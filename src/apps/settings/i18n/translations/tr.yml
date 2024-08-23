@@ -48,7 +48,8 @@ toolbar:
     select: Araç çubuğu yapısı
   height: Yükseklik
   enable: Süslü araç çubuğunu etkinleştirin
-  unlabelled_tray: Kabul Edilmemiş Tepsi simgesi
+  auto_hide: Otomatik Saklama
+  label: Araç çubuğu
 wm:
   border:
     width: Sınır genişliği

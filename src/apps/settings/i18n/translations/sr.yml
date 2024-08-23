@@ -48,7 +48,8 @@ toolbar:
     select: Структура алатне траке
   enable: Омогућите фанци траку са алаткама
   height: Висина
-  unlabelled_tray: Икона за отпадне траи
+  auto_hide: Аутоматска кожа
+  label: Алатна трака
 wm:
   border:
     enable: Омогућите границу прозора

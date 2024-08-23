@@ -48,7 +48,8 @@ toolbar:
     description: Περιγραφή
   height: Υψος
   enable: Ενεργοποίηση φανταχτερά εργαλεία εργαλείων
-  unlabelled_tray: Εικονίδιο δίσκων χωρίς
+  auto_hide: Αυτόματη απόκρυψη
+  label: Γραμμή εργαλείων
 wm:
   border:
     offset: Μετατόπιση των συνόρων

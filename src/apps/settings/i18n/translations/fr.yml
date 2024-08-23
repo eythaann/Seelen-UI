@@ -51,7 +51,8 @@ toolbar:
     author: Auteur
     description: Description
   height: Hauteur
-  unlabelled_tray: Icône de plateau non étiquetée
+  auto_hide: Cachette automatique
+  label: Barre d'outils
 wm:
   enable: Activer le gestionnaire de fenêtres
   layout: Mise en page

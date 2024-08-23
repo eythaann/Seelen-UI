@@ -27,6 +27,7 @@ impl Monitor {
 
     pub fn ensure_positions(&mut self) -> Result<()> {
         if let Some(bar) = &mut self.toolbar {
+            bar.cached_monitor = self.handle;
             bar.set_positions(self.handle.0)?;
         }
         if let Some(weg) = &mut self.weg {

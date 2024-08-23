@@ -48,7 +48,8 @@ toolbar:
     description: Paglalarawan
   height: Taas
   enable: Paganahin ang magarbong toolbar
-  unlabelled_tray: Hindi nabigong icon ng tray
+  auto_hide: Auto itago
+  label: Toolbar
 wm:
   border:
     width: Lapad ng hangganan

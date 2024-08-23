@@ -48,7 +48,8 @@ toolbar:
     select: ટૂલબાર માળખું
   height: ઊંચાઈ
   enable: ફેન્સી ટૂલબાર સક્ષમ કરો
-  unlabelled_tray: અનન્ય ટ્રે ચિહ્ન
+  auto_hide: સ્વત hideપ
+  label: વમળ
 wm:
   border:
     width: સરહદની પહોળાઈ

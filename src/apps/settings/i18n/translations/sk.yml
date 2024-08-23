@@ -48,7 +48,8 @@ toolbar:
     description: Opis
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
-  unlabelled_tray: Ikona neznačeného podnosu
+  auto_hide: Automaticky skryť
+  label: Panel s nástrojmi
 wm:
   border:
     width: Šírka hranice

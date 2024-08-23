@@ -48,7 +48,8 @@ toolbar:
     author: Muallif
   enable: Fashr asboblar panelini yoqing
   height: Balandlik
-  unlabelled_tray: Bojavelilmagan aşınma ikonka
+  auto_hide: Avtomatik yashirish
+  label: Asboblar paneli
 wm:
   border:
     width: Chegara kengligi

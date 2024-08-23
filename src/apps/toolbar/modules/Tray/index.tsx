@@ -43,7 +43,7 @@ function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number })
       <OverflowTooltip
         overlayClassName="tray-item-label-tooltip"
         className="tray-item-label"
-        text={tray.label || t('toolbar.unlabelled_tray')}
+        text={tray.label || t('unlabelled_tray')}
         placement="left"
         arrow={false}
       />

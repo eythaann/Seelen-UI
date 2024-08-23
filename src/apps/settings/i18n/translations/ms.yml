@@ -48,7 +48,8 @@ toolbar:
     select: Struktur bar alat
   enable: Dayakan bar alat mewah
   height: Ketinggian
-  unlabelled_tray: Ikon dulang yang tidak dilabel
+  auto_hide: Menyembunyikan auto
+  label: Bar alat
 wm:
   border:
     enable: Dayakan sempadan tetingkap

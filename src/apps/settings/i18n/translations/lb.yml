@@ -48,7 +48,8 @@ toolbar:
     description: Broessdatsch
   enable: Aktivéiert Fore Toolbar
   height: Héicht
-  unlabelled_tray: Onbau Take Ikon
+  auto_hide: Automatesch
+  label: TO-tcstar
 wm:
   border:
     width: Grenz Breet

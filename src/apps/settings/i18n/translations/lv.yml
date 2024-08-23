@@ -48,7 +48,8 @@ toolbar:
     select: Rīkjoslas struktūra
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
-  unlabelled_tray: Neiezīmēta paplātes ikona
+  auto_hide: Auto paslēpt
+  label: Rīkjosla
 wm:
   border:
     enable: Iespējot loga robežu

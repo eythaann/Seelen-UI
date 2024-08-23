@@ -53,8 +53,10 @@ toolbar:
     select: Toolbar Structure
     author: Author
     description: Description
+  label: Toolbar
   height: Height
   unlabelled_tray: Unlabelled Tray Icon
+  auto_hide: Auto Hide
 wm:
   enable: Enable Window Manager
   disabled_windows10: The Window Manager is not available for Windows 10.

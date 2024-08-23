@@ -47,7 +47,8 @@ toolbar:
     select: Qaab dhismeedka Qalabka
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
-  unlabelled_tray: UNIBLEMEMEMED TRAY
+  auto_hide: Auto qaraha
+  label: Qalab argamiye
 wm:
   border:
     enable: Karti xadka daaqadaha

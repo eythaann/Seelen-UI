@@ -48,7 +48,8 @@ toolbar:
     select: මෙවලම් තීරු ව්යුහය
   height: උස
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
-  unlabelled_tray: ලැජ්ජාවේ තැටි නිරූපකය
+  auto_hide: ස්වයංක්රීය සැඟවීම
+  label: මෙවලම් තීරුව
 wm:
   border:
     width: මායිම් පළල

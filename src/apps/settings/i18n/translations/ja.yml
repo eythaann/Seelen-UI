@@ -46,7 +46,8 @@ toolbar:
     select: ツールバーのテーマ
   height: 高さ
   enable: ツールバーを有効にする
-  unlabelled_tray: 非標識トレイアイコン
+  auto_hide: 自動隠し
+  label: ツールバー
 wm:
   border:
     offset: 境界線の余白

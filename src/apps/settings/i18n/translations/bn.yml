@@ -48,7 +48,8 @@ toolbar:
     select: সরঞ্জামদণ্ড কাঠামো
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
   height: উচ্চতা
-  unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
+  auto_hide: অটো আড়াল
+  label: সরঞ্জামদণ্ড
 wm:
   border:
     width: সীমানার প্রশস্থতা

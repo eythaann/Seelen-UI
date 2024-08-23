@@ -48,7 +48,8 @@ toolbar:
     author: Kirjoittaja
   height: Korkeus
   enable: Ota hieno työkalurivi käyttöön
-  unlabelled_tray: Leimaton lokerokuvake
+  auto_hide: Automaattinen piilo
+  label: Työkalurivi
 wm:
   border:
     offset: Rajan siirtyminen

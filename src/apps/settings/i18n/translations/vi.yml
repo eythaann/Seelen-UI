@@ -48,7 +48,8 @@ toolbar:
     select: Cấu trúc thanh công cụ
   height: Chiều cao
   enable: Kích hoạt thanh công cụ ưa thích
-  unlabelled_tray: Biểu tượng khay không ghi nhãn
+  auto_hide: Tự động ẩn
+  label: Thanh công cụ
 wm:
   border:
     width: Chiều rộng biên giới

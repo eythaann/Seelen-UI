@@ -212,6 +212,7 @@
       "default": {
         "enabled": true,
         "height": 30,
+        "hideMode": "Never",
         "placeholder": "default.yml"
       },
       "allOf": [
@@ -871,6 +872,15 @@
           "format": "uint32",
           "minimum": 0.0
         },
+        "hideMode": {
+          "description": "hide mode",
+          "default": "Never",
+          "allOf": [
+            {
+              "$ref": "#/definitions/HideMode"
+            }
+          ]
+        },
         "placeholder": {
           "description": "default placeholder for the fancy toolbar",
           "default": "default.yml",
@@ -892,6 +902,31 @@
           "format": "double"
         }
       }
+    },
+    "HideMode": {
+      "oneOf": [
+        {
+          "description": "never hide",
+          "type": "string",
+          "enum": [
+            "Never"
+          ]
+        },
+        {
+          "description": "auto-hide always on",
+          "type": "string",
+          "enum": [
+            "Always"
+          ]
+        },
+        {
+          "description": "auto-hide only if is overlaped by the focused window",
+          "type": "string",
+          "enum": [
+            "On-Overlap"
+          ]
+        }
+      ]
     },
     "Monitor": {
       "type": "object",
@@ -950,31 +985,6 @@
         }
       }
     },
-    "SeelenWegHideMode": {
-      "oneOf": [
-        {
-          "description": "never hide",
-          "type": "string",
-          "enum": [
-            "Never"
-          ]
-        },
-        {
-          "description": "auto-hide always on",
-          "type": "string",
-          "enum": [
-            "Always"
-          ]
-        },
-        {
-          "description": "auto-hide only if is overlaped by the focused window",
-          "type": "string",
-          "enum": [
-            "On-Overlap"
-          ]
-        }
-      ]
-    },
     "SeelenWegMode": {
       "type": "string",
       "enum": [
@@ -995,7 +1005,7 @@
           "default": "On-Overlap",
           "allOf": [
             {
-              "$ref": "#/definitions/SeelenWegHideMode"
+              "$ref": "#/definitions/HideMode"
             }
           ]
         },

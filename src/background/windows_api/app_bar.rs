@@ -47,7 +47,7 @@ impl From<u32> for AppBarDataState {
     }
 }
 
-pub struct AppBarData(APPBARDATA);
+pub struct AppBarData(pub APPBARDATA);
 impl AppBarData {
     pub fn from_handle(hwnd: HWND) -> Self {
         Self(APPBARDATA {

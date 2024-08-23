@@ -48,7 +48,8 @@ toolbar:
     description: Deskribapen
   enable: Gaitu tresna-barra
   height: Luzera
-  unlabelled_tray: Nahitaezko erretilua ikonoa
+  auto_hide: Ezkutatu automatikoa
+  label: Tresna barra
 wm:
   border:
     width: Ertzaren zabalera

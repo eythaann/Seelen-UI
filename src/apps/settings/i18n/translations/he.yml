@@ -47,7 +47,8 @@ toolbar:
     select: מבנה סרגל הכלים
   height: גוֹבַה
   enable: אפשר סרגל כלים מפואר
-  unlabelled_tray: אייקון מגש ללא תווית
+  auto_hide: הסתר אוטומטי
+  label: סרגל כלים
 wm:
   border:
     offset: קיזוז גבול

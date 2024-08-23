@@ -4,6 +4,7 @@
 ### features
 - add a option to hide apps from the dock/taskbar, requested on #5.
 - update tray labels when tray icons module are open.
+- add auto-hide option to the toolbar.
 
 ### fix
 - route no maintaining on cancel changes on settings window.

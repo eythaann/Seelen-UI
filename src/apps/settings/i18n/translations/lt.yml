@@ -48,7 +48,8 @@ toolbar:
     author: Autorius
   height: Ūgis
   enable: Įgalinkite išgalvotą įrankių juostą
-  unlabelled_tray: Nepaženklinta dėklo piktograma
+  auto_hide: Automatinis slėptuvė
+  label: Įrankių juosta
 wm:
   border:
     enable: Įgalinti lango sieną

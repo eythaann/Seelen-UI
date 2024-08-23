@@ -48,7 +48,8 @@ toolbar:
     description: Опис
   height: Висина
   enable: Овозможете фенси лента со алатки
-  unlabelled_tray: Икона за обележување на послужавник
+  auto_hide: Автоматско скриј
+  label: Лента со алатки
 wm:
   border:
     width: Ширина на границата

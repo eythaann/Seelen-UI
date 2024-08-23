@@ -48,7 +48,8 @@ toolbar:
     select: Գործիքադարակի կառուցվածքը
   enable: Միացնել Fancy Toolbar- ը
   height: Բարձրություն
-  unlabelled_tray: Unlabelled Tray Icon
+  auto_hide: Ավտոմատ թաքցնել
+  label: Գործիքագոտու
 wm:
   border:
     enable: Միացնել պատուհանի սահմանը

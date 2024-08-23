@@ -56,7 +56,8 @@ toolbar:
     author: Автор
     description: Описание
   height: Высота
-  unlabelled_tray: Некабельный икона лотка
+  auto_hide: Автомальная шкура
+  label: Панель инструментов
 wm:
   enable: Включить диспетчер окон
   layout: Макет

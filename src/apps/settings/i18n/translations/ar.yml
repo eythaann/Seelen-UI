@@ -54,7 +54,8 @@ toolbar:
     author: مؤلف
     description: وصف
   height: ارتفاع
-  unlabelled_tray: أيقونة صينية غير محدودة
+  auto_hide: الاختباء التلقائي
+  label: شريط الأدوات
 wm:
   enable: تمكين مدير النوافذ
   layout: تَخطِيط

@@ -14,6 +14,12 @@ impl FancyToolbar {
             }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
                 self.focus_changed(origin)?;
+                self.handle_overlaped_status(origin)?;
+            }
+            WinEvent::ObjectLocationChange => {
+                if origin == WindowsApi::get_foreground_window() {
+                    self.handle_overlaped_status(origin)?;
+                }
             }
             WinEvent::SyntheticFullscreenStart(event_data) => {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);

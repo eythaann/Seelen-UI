@@ -1,5 +1,5 @@
 import { toPhysicalPixels } from '../shared';
-import { SeelenWegHideMode, SeelenWegSide } from '../shared/schemas/Seelenweg';
+import { AppBarHideMode, SeelenWegSide } from '../shared/schemas/Seelenweg';
 import { debounce, TimeoutIdRef } from '../shared/Timing';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -25,7 +25,7 @@ export const updateHitbox = debounce(async () => {
   const viewSize = await view.innerSize();
 
   const isAutoHideOn =
-    (hideMode !== SeelenWegHideMode.Never && isOverlaped) || hideMode === SeelenWegHideMode.Always;
+    (hideMode !== AppBarHideMode.Never && isOverlaped) || hideMode === AppBarHideMode.Always;
   const isHorizontal = position === SeelenWegSide.TOP || position === SeelenWegSide.BOTTOM;
 
   const hiddenOffsetTop =

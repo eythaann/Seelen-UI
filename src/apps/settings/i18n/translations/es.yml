@@ -55,7 +55,8 @@ toolbar:
     author: Autor
     description: Descripción
   height: Altura
-  unlabelled_tray: Ícono de la bandeja sin etiqueta
+  auto_hide: Escondite automático
+  label: Barra de herramientas
 wm:
   enable: Habilitar gestor de ventanas
   layout: Distribución

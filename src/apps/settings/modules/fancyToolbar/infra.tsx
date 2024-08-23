@@ -1,10 +1,12 @@
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
+import { AppBarHideMode } from '../../../shared/schemas/Seelenweg';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { newSelectors } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
+import { OptionsFromEnum } from '../shared/utils/app';
 import { FancyToolbarActions } from './app';
 
 export function FancyToolbarSettings() {
@@ -67,16 +69,25 @@ export function FancyToolbarSettings() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsOption>
-          <div>
-            <b>{t('toolbar.height')}</b>
-          </div>
-          <InputNumber
-            value={settings.height}
-            onChange={(value) => dispatch(FancyToolbarActions.setHeight(value || 0))}
-            min={0}
-          />
-        </SettingsOption>
+        <SettingsSubGroup label={t('toolbar.label')}>
+          <SettingsOption>
+            <span>{t('toolbar.height')}</span>
+            <InputNumber
+              value={settings.height}
+              onChange={(value) => dispatch(FancyToolbarActions.setHeight(value || 0))}
+              min={0}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <span>{t('toolbar.auto_hide')}</span>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.hideMode}
+              options={OptionsFromEnum(AppBarHideMode)}
+              onChange={(value) => dispatch(FancyToolbarActions.setHideMode(value))}
+            />
+          </SettingsOption>
+        </SettingsSubGroup>
       </SettingsGroup>
     </>
   );

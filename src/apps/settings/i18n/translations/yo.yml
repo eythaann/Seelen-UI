@@ -47,7 +47,8 @@ toolbar:
     description: Isapejuwe
   height: Giga
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
-  unlabelled_tray: Alailowaya ti ko ni ile-iwe
+  auto_hide: Ibi ipamọ aifọwọyi
+  label: Ọpa irinṣẹ
 wm:
   border:
     enable: Jeki aala window

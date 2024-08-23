@@ -6,9 +6,10 @@ use crate::{
     log_error,
     seelen::get_app_handle,
     state::application::FULL_STATE,
-    utils::is_virtual_desktop_supported,
+    utils::{are_overlaped, is_virtual_desktop_supported},
     windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
+use seelen_core::state::HideMode;
 use serde::Serialize;
 use tauri::{Emitter, Listener, Manager, WebviewWindow};
 use windows::Win32::{
@@ -21,8 +22,10 @@ pub struct FancyToolbar {
     window: WebviewWindow,
     hitbox: WebviewWindow,
     // -- -- -- --
+    pub cached_monitor: HMONITOR,
     last_focus: Option<isize>,
     hidden: bool,
+    overlaped: bool,
 }
 
 #[derive(Serialize, Clone)]
@@ -52,12 +55,42 @@ impl FancyToolbar {
             hitbox,
             last_focus: None,
             hidden: false,
+            cached_monitor: HMONITOR(-1),
+            overlaped: false,
         })
     }
 
     pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
         self.window.emit_to(self.window.label(), event, payload)?;
         Ok(())
+    }
+
+    pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
+        let rect = WindowsApi::get_window_rect_without_margins(hwnd);
+        let monitor_info = WindowsApi::monitor_info(self.cached_monitor)?;
+        let dpi = WindowsApi::get_device_pixel_ratio(self.cached_monitor)?;
+        let height = FULL_STATE.load().settings().fancy_toolbar.height;
+
+        let mut hitbox_rect = monitor_info.monitorInfo.rcMonitor;
+        hitbox_rect.bottom = hitbox_rect.top + (height as f32 * dpi) as i32;
+        Ok(are_overlaped(&hitbox_rect, &rect))
+    }
+
+    pub fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
+        if self.overlaped == is_overlaped {
+            return Ok(());
+        }
+        self.overlaped = is_overlaped;
+        self.set_positions(self.cached_monitor.0)?;
+        self.emit("set-auto-hide", self.overlaped)?;
+        Ok(())
+    }
+
+    pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
+        if !WindowsApi::is_window_visible(hwnd) {
+            return Ok(());
+        }
+        self.set_overlaped_status(self.is_overlapping(hwnd)?)
     }
 
     pub fn hide(&mut self) -> Result<()> {
@@ -131,18 +164,29 @@ impl FancyToolbar {
         let main_hwnd = HWND(self.window.hwnd()?.0);
         let hitbox_hwnd = HWND(self.hitbox.hwnd()?.0);
 
+        let state = FULL_STATE.load();
+        let settings = &state.settings().fancy_toolbar;
         let dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
-        let toolbar_height = FULL_STATE.load().settings().fancy_toolbar.height;
 
         let mut abd = AppBarData::from_handle(hitbox_hwnd);
+        if settings.hide_mode != HideMode::Never {
+            abd.unregister_bar();
+        }
 
         let mut abd_rect = rc_monitor;
-        abd_rect.bottom = abd_rect.top + (toolbar_height as f32 * dpi) as i32;
+        abd_rect.bottom = if settings.hide_mode == HideMode::Always
+            || (self.overlaped && settings.hide_mode == HideMode::OnOverlap)
+        {
+            abd_rect.top + 1
+        } else {
+            abd_rect.top + (settings.height as f32 * dpi) as i32
+        };
 
-        abd.set_edge(AppBarDataEdge::Top);
-        abd.set_rect(abd_rect);
-
-        abd.register_as_new_bar();
+        if settings.hide_mode == HideMode::Never {
+            abd.set_edge(AppBarDataEdge::Top);
+            abd.set_rect(abd_rect);
+            abd.register_as_new_bar();
+        }
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(hitbox_hwnd, &rc_monitor)?;

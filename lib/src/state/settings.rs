@@ -71,6 +71,8 @@ pub struct FancyToolbarSettings {
     pub height: u32,
     /// default placeholder for the fancy toolbar
     pub placeholder: String,
+    /// hide mode
+    pub hide_mode: HideMode,
 }
 
 impl Default for FancyToolbarSettings {
@@ -79,6 +81,7 @@ impl Default for FancyToolbarSettings {
             enabled: true,
             height: 30,
             placeholder: String::from("default.yml"),
+            hide_mode: HideMode::Never,
         }
     }
 }
@@ -94,7 +97,7 @@ pub enum SeelenWegMode {
 }
 
 #[derive(Debug, Copy, Clone, Serialize, Deserialize, JsonSchema, PartialEq, Eq)]
-pub enum SeelenWegHideMode {
+pub enum HideMode {
     /// never hide
     Never,
     /// auto-hide always on
@@ -121,7 +124,7 @@ pub struct SeelenWegSettings {
     /// Dock/Taskbar mode
     pub mode: SeelenWegMode,
     /// When to hide the dock
-    pub hide_mode: SeelenWegHideMode,
+    pub hide_mode: HideMode,
     /// Dock position
     pub position: SeelenWegSide,
     /// enable or disable separators visibility
@@ -143,7 +146,7 @@ impl Default for SeelenWegSettings {
         Self {
             enabled: true,
             mode: SeelenWegMode::MinContent,
-            hide_mode: SeelenWegHideMode::OnOverlap,
+            hide_mode: HideMode::OnOverlap,
             position: SeelenWegSide::Bottom,
             visible_separators: true,
             size: 40,

@@ -47,7 +47,8 @@ toolbar:
     select: ٹول بار کا ڈھانچہ
   enable: فینسی ٹول بار کو فعال کریں
   height: اونچائی
-  unlabelled_tray: غیر لیبلڈ ٹرے آئیکن
+  auto_hide: آٹو چھپائیں
+  label: ٹول بار
 wm:
   border:
     enable: ونڈو کی بارڈر کو فعال کریں

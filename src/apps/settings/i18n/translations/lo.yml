@@ -49,7 +49,8 @@ toolbar:
     select: ໂຄງສ້າງແຖບເຄື່ອງມື
   enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
   height: ຄວາມສູງ
-  unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ
+  auto_hide: ຊ່ອນອັດຕະໂນມັດ
+  label: ແຖບເຄື່ອງມື
 wm:
   border:
     enable: ເປີດໃຊ້ຂອບຂອງປ່ອງຢ້ຽມ

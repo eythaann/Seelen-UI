@@ -48,7 +48,8 @@ toolbar:
     select: கருவிப்பட்டி அமைப்பு
   height: உயரம்
   enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
-  unlabelled_tray: பெயரிடப்படாத தட்டு ஐகான்
+  auto_hide: ஆட்டோ மறை
+  label: கருவிப்பட்டி
 wm:
   border:
     width: பார்டர் அகலம்

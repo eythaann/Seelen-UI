@@ -47,7 +47,8 @@ toolbar:
     select: Struktura Toolbar
   height: Bilindî
   enable: Vebijêrkek Fancy Vebijêrin
-  unlabelled_tray: Îkonê tray a bêpergal
+  auto_hide: Auto Hide
+  label: Toolbar
 wm:
   border:
     width: Berfirehiya sînor

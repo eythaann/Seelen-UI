@@ -275,12 +275,12 @@ impl SeelenWeg {
         Ok(weg)
     }
 
-    pub fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
+    fn emit<S: Serialize + Clone>(&self, event: &str, payload: S) -> Result<()> {
         self.window.emit_to(self.window.label(), event, payload)?;
         Ok(())
     }
 
-    pub fn is_overlapping(&self, hwnd: HWND) -> bool {
+    fn is_overlapping(&self, hwnd: HWND) -> bool {
         let rect = WindowsApi::get_window_rect_without_margins(hwnd);
         let hitbox_rect = self.last_hitbox_rect.unwrap_or_else(|| {
             WindowsApi::get_window_rect_without_margins(HWND(

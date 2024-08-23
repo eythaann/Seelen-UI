@@ -48,7 +48,8 @@ toolbar:
     author: Autora
   height: Altura
   enable: Activa la barra d’eines de luxe
-  unlabelled_tray: Icona de la safata no etiquetada
+  auto_hide: Auto amaga
+  label: Barra d’eines
 wm:
   border:
     offset: Compensació fronterera

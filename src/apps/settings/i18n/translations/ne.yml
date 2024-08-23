@@ -47,7 +47,8 @@ toolbar:
     author: लेखिका
   height: ऊचाई
   enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
-  unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
+  auto_hide: 'स्वत: लुकाउने'
+  label: औजारपरो
 wm:
   border:
     offset: सीमा अफसेट

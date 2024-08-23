@@ -48,7 +48,8 @@ toolbar:
     author: Autor
   height: Visina
   enable: Omogućite maštovitu alatnu traku
-  unlabelled_tray: Ikona neobilježene ladice
+  auto_hide: Auto sakrij
+  label: Alatna traka
 wm:
   border:
     offset: Offset

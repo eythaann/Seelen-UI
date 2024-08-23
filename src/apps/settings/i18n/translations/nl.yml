@@ -48,7 +48,8 @@ toolbar:
     select: Werkbalkstructuur
   height: Hoogte
   enable: Schakel fancy werkbalk in
-  unlabelled_tray: Niet -geëtiketteerd ladepictogram
+  auto_hide: Auto verbergen
+  label: Werkbalk
 wm:
   border:
     width: Grensbreedte

@@ -31,6 +31,10 @@ export const store = configureStore({
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
 
+  await view.listen<boolean>('set-auto-hide', (event) => {
+    store.dispatch(RootActions.setIsOverlaped(event.payload));
+  });
+
   await view.listen<ActiveApp | null>('focus-changed', (e) => {
     store.dispatch(RootActions.setFocused(e.payload));
   });

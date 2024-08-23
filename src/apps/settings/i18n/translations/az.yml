@@ -48,7 +48,8 @@ toolbar:
     select: Alətlər paneli quruluşu
   height: Hündürlük
   enable: Zərif alət çubuğunu aktivləşdirin
-  unlabelled_tray: Qeyri-çapsız tepsik nişanı
+  auto_hide: Avtomatik gizlətmək
+  label: Alət çubuğu
 wm:
   border:
     width: Sərhəd eni

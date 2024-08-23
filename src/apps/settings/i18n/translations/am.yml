@@ -46,7 +46,8 @@ toolbar:
     author: ደራሲ ደራሲ
   height: ቁመት
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
-  unlabelled_tray: ያልተስተካከለ ትሪ አዶ
+  auto_hide: ራስ-ሰር መደበቅ
+  label: የመሣሪያ አሞሌ
 wm:
   border:
     width: ድንበር ስፋት

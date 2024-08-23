@@ -48,7 +48,8 @@ toolbar:
     select: Isakhiwo samathuluzi
   height: Ubude
   enable: Nika amandla amathuluzi e-fancy
-  unlabelled_tray: Isithonjana se-tray esingafundile
+  auto_hide: Fihla okuzenzakalelayo
+  label: Indawo yamathuluzi
 wm:
   border:
     enable: Nika amandla umngcele wewindi

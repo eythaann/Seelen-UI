@@ -48,7 +48,8 @@ toolbar:
     author: Pengarang
   enable: Aktifkan toolbar mewah
   height: Tinggi
-  unlabelled_tray: Ikon baki tanpa label
+  auto_hide: Persembunyian otomatis
+  label: Toolbar
 wm:
   border:
     offset: Offset perbatasan

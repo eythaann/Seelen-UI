@@ -48,7 +48,8 @@ toolbar:
     select: టూల్‌బార్ నిర్మాణం
   height: ఎత్తు
   enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
-  unlabelled_tray: లేబుల్ చేయని ట్రే చిహ్నం
+  auto_hide: ఆటో దాచు
+  label: టూల్‌బార్
 wm:
   border:
     width: అంచు వెడల్పు

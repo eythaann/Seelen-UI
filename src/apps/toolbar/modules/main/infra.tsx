@@ -3,12 +3,14 @@ import {
   ToolbarModule,
   ToolbarModuleType,
 } from '../../../shared/schemas/Placeholders';
+import { AppBarHideMode } from '../../../shared/schemas/Seelenweg';
+import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
-import { JSXElementConstructor, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { JSXElementConstructor, useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
@@ -19,8 +21,9 @@ import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
+import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
-import { RootActions } from '../shared/store/app';
+import { RootActions, Selectors } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
 
 const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
@@ -53,8 +56,20 @@ function componentByModule(module: ToolbarModule, idx: number) {
 }
 
 export function ToolBar({ structure }: Props) {
+  const [isActive, setActive] = useState(false);
+  const isOverlaped = useSelector(Selectors.isOverlaped);
+  const hideMode = useSelector(Selectors.settings.hideMode);
+
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
+
+  useAppActivation(() => {
+    setActive(true);
+  }, []);
+
+  useAppBlur(() => {
+    setActive(false);
+  }, []);
 
   const onReorderPinned = useCallback(
     debounce((apps: (ToolbarModule | string)[]) => {
@@ -80,6 +95,11 @@ export function ToolBar({ structure }: Props) {
     [],
   );
 
+  const shouldBeHidden =
+    !isActive &&
+    hideMode !== AppBarHideMode.Never &&
+    (isOverlaped || hideMode === AppBarHideMode.Always);
+
   return (
     <Reorder.Group
       values={[
@@ -90,7 +110,9 @@ export function ToolBar({ structure }: Props) {
         ...structure.right,
       ]}
       onReorder={onReorderPinned}
-      className="ft-bar"
+      className={cx('ft-bar', {
+        'ft-bar-hidden': shouldBeHidden,
+      })}
       axis="x"
       as="div"
     >

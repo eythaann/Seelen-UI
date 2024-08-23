@@ -48,7 +48,8 @@ toolbar:
     author: Forfatter
   enable: Aktivér fancy værktøjslinje
   height: Højde
-  unlabelled_tray: Umnæret bakkeikon
+  auto_hide: Auto skjul
+  label: Værktøjslinje
 wm:
   border:
     width: Grænsebredde

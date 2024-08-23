@@ -55,7 +55,8 @@ toolbar:
     author: Autor
     description: Beschreibung
   height: Höhe
-  unlabelled_tray: Entlebte Tablettikone
+  auto_hide: Automatisch ausblenden
+  label: Symbolleiste
 wm:
   enable: Fenstermanager aktivieren
   layout: Layout

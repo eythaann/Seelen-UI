@@ -48,7 +48,8 @@ toolbar:
     select: Struttura della barra degli strumenti
   height: Altezza
   enable: Abilita barra degli strumenti di fantasia
-  unlabelled_tray: Icona del vassoio senza etichetta
+  auto_hide: Nascondersi auto
+  label: Barra degli strumenti
 wm:
   border:
     width: Larghezza del bordo

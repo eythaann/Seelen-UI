@@ -5,7 +5,7 @@ export enum SeelenWegMode {
   MIN_CONTENT = 'Min-Content',
 }
 
-export enum SeelenWegHideMode {
+export enum AppBarHideMode {
   Never = 'Never',
   Always = 'Always',
   OnOverlap = 'On-Overlap',
@@ -21,7 +21,7 @@ export enum SeelenWegSide {
 export const SeelenWegSchema = z.object({
   enabled: z.boolean().default(true),
   mode: z.nativeEnum(SeelenWegMode).default(SeelenWegMode.MIN_CONTENT),
-  hide_mode: z.nativeEnum(SeelenWegHideMode).default(SeelenWegHideMode.OnOverlap),
+  hide_mode: z.nativeEnum(AppBarHideMode).default(AppBarHideMode.OnOverlap),
   position: z.nativeEnum(SeelenWegSide).default(SeelenWegSide.BOTTOM),
   visible_separators: z.boolean().default(true),
   size: z.number().positive().default(40).describe('Item size in pixels'),

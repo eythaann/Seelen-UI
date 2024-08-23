@@ -47,7 +47,8 @@ toolbar:
     author: Mwandishi
   enable: Wezesha zana ya dhana
   height: Urefu
-  unlabelled_tray: Icon isiyo na msingi ya tray
+  auto_hide: Kujificha kiotomatiki
+  label: Zana
 wm:
   border:
     enable: Wezesha mpaka wa dirisha

@@ -47,7 +47,8 @@ toolbar:
     author: Зохиолч
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
   height: Өндөрлөг
-  unlabelled_tray: Unlabelled Tray дүрс
+  auto_hide: Авто гүнд
+  label: Балтсний хайрцагны хэрэгсэл
 wm:
   border:
     offset: Хилийн офсет

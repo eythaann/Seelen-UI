@@ -48,7 +48,8 @@ toolbar:
     select: Uppbygging tækjastiku
   enable: Virkja Fancy tækjastiku
   height: Hæð
-  unlabelled_tray: Ómerkt bakkatákn
+  auto_hide: Sjálfvirk fela
+  label: Tækjastikur
 wm:
   border:
     enable: Virkja landamæri glugga

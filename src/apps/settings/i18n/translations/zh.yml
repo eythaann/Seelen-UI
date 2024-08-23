@@ -53,7 +53,8 @@ toolbar:
     author: 作者
     description: 描述
   height: 高度
-  unlabelled_tray: 未标记的托盘图标
+  auto_hide: 自动隐藏
+  label: 工具栏
 wm:
   enable: 启用窗口管理器
   layout: 布局

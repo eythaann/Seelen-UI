@@ -48,7 +48,8 @@ toolbar:
     description: विवरण
   height: ऊंचाई
   enable: फैंसी टूलबार सक्षम करें
-  unlabelled_tray: अनबेल्ड ट्रे आइकन
+  auto_hide: खुद से छिपना
+  label: उपकरण पट्टी
 wm:
   border:
     width: सीमा चौड़ाई

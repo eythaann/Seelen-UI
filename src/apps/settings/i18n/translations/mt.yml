@@ -48,7 +48,8 @@ toolbar:
     select: Struttura tal-Toolbar
   height: Għoli
   enable: Jippermetti toolbar tal-fancy
-  unlabelled_tray: Ikona tat-trej mhux immarkata
+  auto_hide: Auto Hide
+  label: Toolbar
 wm:
   border:
     enable: Ippermetti l-fruntiera tat-tieqa

@@ -48,7 +48,8 @@ toolbar:
     description: Descriere
   height: Înălţime
   enable: Activați bara de instrumente fantezistă
-  unlabelled_tray: Pictograma tăvii nemarcate
+  auto_hide: Ascunde auto
+  label: Bara de instrumente
 wm:
   border:
     enable: Activați granița ferestrei

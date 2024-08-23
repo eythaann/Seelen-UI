@@ -48,7 +48,8 @@ toolbar:
     select: Verktøylinjestruktur
   height: Høyde
   enable: Aktiver fancy verktøylinje
-  unlabelled_tray: Umerket brettikon
+  auto_hide: Auto Hide
+  label: Verktøylinje
 wm:
   border:
     enable: Aktiver vinduets grense

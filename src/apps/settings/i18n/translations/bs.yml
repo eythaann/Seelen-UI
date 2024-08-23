@@ -48,7 +48,8 @@ toolbar:
     description: Opis
   height: Visina
   enable: Omogući fantastičnu alatnu traku
-  unlabelled_tray: Ikona neobrađene ladice
+  auto_hide: Auto se sakrio
+  label: Alatna traka
 wm:
   border:
     width: Širina granice

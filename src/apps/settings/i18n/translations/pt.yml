@@ -55,7 +55,8 @@ toolbar:
     author: Autor
     description: Descrição
   height: Altura
-  unlabelled_tray: Ícone de bandeja não marcada
+  auto_hide: Esconda automática
+  label: Barra de ferramentas
 wm:
   enable: Habilitar Gerenciador de Janelas
   layout: Disposição
