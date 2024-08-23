@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.9.11]
 ### features
 - add a option to hide apps from the dock/taskbar, requested on #5.
 - update tray labels when tray icons module are open.
