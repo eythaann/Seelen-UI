@@ -6,7 +6,7 @@ sides:
 header:
   labels:
     info: معلومات
-    seelen_weg: گودی/ٹاسک بار
+    seelen_weg: ٹاسک بار
     developer: ڈویلپر
     general: جنرل
     seelen_bar: فینسی ٹول بار
@@ -15,8 +15,8 @@ header:
     shortcuts: شارٹ کٹ
     monitors: مانیٹر
 start:
-  title: خوش آمدید!
-  message_accent: اپنی پیداواری صلاحیت کو انداز کے ساتھ بہتر بنائیں!
+  title: عنوان
+  message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
   message: >-
     آپ کے ونڈوز 11 کے تجربے کو بڑھانے کے لئے شامل ٹائلنگ ونڈوز مینیجر کے ساتھ
     حتمی ڈیسک ٹاپ ماحول ، سیلین UI میں خوش آمدید! ہمارے بدیہی انٹرفیس اور جدید
@@ -25,8 +25,8 @@ general:
   theme:
     enabled: قابل تھیمز
     author: مصنف
-    add: تھیم شامل کریں
-    label: تھیم کی معلومات
+    add:  شامل کریں
+    label: معلومات
     tags: ٹیگز
     added: تھیم پہلے ہی شامل کیا گیا ہے
     description: تفصیل
@@ -37,7 +37,7 @@ general:
   startup: اسٹارٹ اپ پر چلائیں؟
   icon_pack:
     label: آئیکن پیک
-  accent_color: لہجہ رنگ
+  accent_color:  رنگ
   wallpaper:
     select: وال پیپر منتخب کریں
 toolbar:
@@ -77,13 +77,13 @@ weg:
   gap: گیپ
   padding: بھرتی
   width: چوڑائی
-  enable: گودی/ٹاسک بار کو فعال کریں
-  label: گودی/ٹاسک بار
+  enable: ٹاسک بار کو فعال کریں
+  label: ٹاسک بار
 devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر
-  load: بوجھ
-  settings_file: ترتیبات فائل
+  load: لوڈ
+  settings_file: سیٹنگ فاعل
   enable: ڈویلپر ٹولز کو فعال کریں
   install_folder: انسٹالیشن فولڈر
   app_folders: ایپ فولڈرز
@@ -93,7 +93,7 @@ apps_configurations:
       pinned: پن
       unmanage: غیر منظم
       float: فلوٹ
-      force: فورس کا انتظام کریں
+      force: فورس
       hidden: گودی/ٹاسک بار سے چھپائیں
     category: قسم
     ok_edit: اپ ڈیٹ
@@ -135,8 +135,8 @@ apps_configurations:
   import: درآمد
   confirm_delete_title: حذف کرنے کی تصدیق کریں
 extras:
-  links: سرکاری لنکس
-  discord: تنازعات
+  links: لنکس
+  discord: ڈسکارڈ
   relaunch: دوبارہ لانچ
   github: گٹ ہب
   version: ورژن
@@ -194,7 +194,7 @@ shortcuts:
     غیر فعال کریں
   enable: مربوط شارٹ کٹ (اے ایچ کے) کو فعال کریں
 inProgress: کام جاری ہے...
-save: بچت کریں
+save: محفوظ کریں
 delete: حذف کریں
 quit: چھوڑ دیں
 loading: لوڈنگ ...
