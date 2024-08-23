@@ -21,7 +21,7 @@ settings:
   shutdown: シャットダウン
   sleep: スリープ
   title: 設定
-  power: 力
+  power: 電源
 placeholder:
   battery_remaining: ％ 残り
   settings: 設定
@@ -33,4 +33,4 @@ placeholder:
   open_user_folder: ユーザーフォルダーを開く
   ethernet_disconnected: インターネットアクセスはありません
   notifications: 通知
-unlabelled_tray: 非標識トレイアイコン
+unlabelled_tray: ラベル無し 

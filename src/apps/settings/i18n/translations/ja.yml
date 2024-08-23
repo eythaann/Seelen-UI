@@ -46,7 +46,7 @@ toolbar:
     select: ツールバーのテーマ
   height: 高さ
   enable: ツールバーを有効にする
-  auto_hide: 自動隠し
+  auto_hide: 自動的に隠す
   label: ツールバー
 wm:
   border:
@@ -61,7 +61,7 @@ wm:
   space_between_containers: ウィンドウ間の間隔
   resize_delta: リサイズ時の変化率（％）
   workspace_padding: ワークスペースの全体の間隔
-  disabled_windows_version: ウィンドウマネージャーは、Windowsバージョンでは利用できません。
+  disabled_windows_version: ウィンドウマネージャーは、現在使用しているWindowsのバージョンでは利用できません。
   disabled_windows10: ウィンドウマネージャーはWindows 10では利用できません。
 weg:
   items:
