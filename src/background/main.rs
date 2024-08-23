@@ -9,7 +9,6 @@ mod monitor;
 mod plugins;
 mod seelen;
 mod seelen_bar;
-mod seelen_shell;
 mod seelen_weg;
 mod seelen_wm;
 mod state;
@@ -84,12 +83,12 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     seelen.init(app.handle().clone())?;
 
     if !tauri::is_dev() {
-        Seelen::show_update_modal()?;
         let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
         let matches = command.get_matches();
         if !matches.get_flag("silent") {
             Seelen::show_settings()?;
         }
+        Seelen::show_update_modal()?;
     }
 
     seelen.start()?;
@@ -118,7 +117,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
 fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
-    PERFORMANCE_HELPER.lock().start();
+    PERFORMANCE_HELPER.lock().start("init");
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {

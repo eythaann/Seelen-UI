@@ -17,7 +17,6 @@ use crate::{
     log_error,
     modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
     monitor::Monitor,
-    seelen_shell::SeelenShell,
     seelen_weg::SeelenWeg,
     seelen_wm::WindowManager,
     state::application::{FullState, FULL_STATE},
@@ -45,7 +44,6 @@ pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
     #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
-    shell: Option<SeelenShell>,
     state: Option<Arc<ArcSwap<FullState>>>,
 }
 
@@ -99,18 +97,11 @@ impl Seelen {
 
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         Self::ensure_folders(&app)?;
-
         log::trace!("Initializing Seelen");
-        {
-            *APP_HANDLE.lock() = Some(app.clone());
-            self.handle = Some(app.clone());
-            self.state = Some(Arc::clone(&FULL_STATE));
-        }
 
-        if self.state().is_shell_enabled() {
-            self.shell = Some(SeelenShell::new(app.clone()));
-        }
-
+        *APP_HANDLE.lock() = Some(app.clone());
+        self.handle = Some(app.clone());
+        self.state = Some(Arc::clone(&FULL_STATE));
         Ok(())
     }
 
@@ -143,7 +134,7 @@ impl Seelen {
 
         log::debug!(
             "Seelen UI ready in: {:.2}s",
-            PERFORMANCE_HELPER.lock().elapsed().as_secs_f64()
+            PERFORMANCE_HELPER.lock().elapsed("init").as_secs_f64()
         );
 
         log::trace!("Enumerating windows");
@@ -345,7 +336,6 @@ impl Seelen {
             .visible(false)
             .decorations(false)
             .center()
-            .always_on_top(true)
             .build()
             .ok()
         });

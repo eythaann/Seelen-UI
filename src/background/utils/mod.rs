@@ -7,6 +7,7 @@ mod winver;
 pub use winver::*;
 
 use std::{
+    collections::HashMap,
     path::PathBuf,
     time::{Duration, Instant},
 };
@@ -131,21 +132,21 @@ macro_rules! trace_lock {
 
 lazy_static! {
     pub static ref PERFORMANCE_HELPER: Mutex<PerformanceHelper> = Mutex::new(PerformanceHelper {
-        time: Instant::now()
+        time: HashMap::new(),
     });
 }
 
 pub struct PerformanceHelper {
-    time: Instant,
+    time: HashMap<String, Instant>,
 }
 
 impl PerformanceHelper {
-    pub fn start(&mut self) {
-        self.time = Instant::now();
+    pub fn start(&mut self, name: &str) {
+        self.time.insert(name.to_string(), Instant::now());
     }
 
-    pub fn elapsed(&self) -> Duration {
-        self.time.elapsed()
+    pub fn elapsed(&self, name: &str) -> Duration {
+        self.time.get(name).unwrap().elapsed()
     }
 }
 

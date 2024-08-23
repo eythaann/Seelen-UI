@@ -111,10 +111,11 @@ fn send_keys(keys: String) -> Result<()> {
     Keyboard::new().send_keys(&keys)
 }
 
-#[tauri::command(async)]
+#[tauri::command]
 fn get_icon(path: String) -> Option<PathBuf> {
     extract_and_save_icon(&get_app_handle(), &path).ok()
 }
+
 #[tauri::command(async)]
 fn is_virtual_desktop_supported() -> bool {
     virtual_desktop_supported()

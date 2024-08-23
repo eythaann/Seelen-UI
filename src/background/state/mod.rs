@@ -12,10 +12,6 @@ impl FullState {
         self.settings().seelenweg.enabled
     }
 
-    pub fn is_shell_enabled(&self) -> bool {
-        false
-    }
-
     pub fn is_bar_enabled(&self) -> bool {
         self.settings().fancy_toolbar.enabled
     }
