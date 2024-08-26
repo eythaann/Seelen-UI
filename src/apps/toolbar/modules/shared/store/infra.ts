@@ -23,6 +23,8 @@ import {
   PowerStatus,
   TrayInfo,
   UIColors,
+  Workspace,
+  WorkspaceId,
 } from './domain';
 
 export const store = configureStore({
@@ -52,11 +54,11 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setBatteries(event.payload));
   });
 
-  await listenGlobal<string[]>('workspaces-changed', (event) => {
+  await listenGlobal<Workspace[]>('workspaces-changed', (event) => {
     store.dispatch(RootActions.setWorkspaces(event.payload));
   });
 
-  await listenGlobal<number>('active-workspace-changed', (event) => {
+  await listenGlobal<WorkspaceId>('active-workspace-changed', (event) => {
     store.dispatch(RootActions.setActiveWorkspace(event.payload));
   });
 

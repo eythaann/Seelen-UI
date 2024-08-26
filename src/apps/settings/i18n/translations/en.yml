@@ -2,6 +2,7 @@ loading: Loading...
 inProgress: In Progress...
 cancel: Cancel
 save: Save
+save_and_restart: Save & Restart
 quit: Quit
 open: Open
 delete: Delete
@@ -24,9 +25,10 @@ header:
 start:
   title: Welcome!
   message: >-
-    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated tiling windows manager
-    to enhance your Windows 11 experience! Explore a new era of efficiency and multitasking with our
-    intuitive interface and advanced features.
+    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated
+    tiling windows manager to enhance your Windows 11 experience! Explore a new
+    era of efficiency and multitasking with our intuitive interface and advanced
+    features.
   message_accent: Optimize your productivity with style!
 general:
   startup: Run on startup?
@@ -55,12 +57,15 @@ toolbar:
     description: Description
   label: Toolbar
   height: Height
-  unlabelled_tray: Unlabelled Tray Icon
   auto_hide: Auto Hide
+vd:
+  disabled_windows_version: Native Virtual Desktop Strategy is not available for your Windows version.
+  strategy:
+    label: Virtual Desktop Strategy
+    native: Native
+    seelen: Seelen
 wm:
-  enable: Enable Window Manager
-  disabled_windows10: The Window Manager is not available for Windows 10.
-  disabled_windows_version: The Window Manager is not available for your Windows version.
+  enable: Enable Tiling Window Manager
   layout: Layout
   author: Author
   description: Description
@@ -103,8 +108,9 @@ apps_configurations:
   new: New
   bundled_title: App Config Bundled with Seelen
   bundled_msg: >-
-    These bundled configurations are not editable and are designed to provide you with the best
-    experience without customization. They automatically configure the most common applications for you.
+    These bundled configurations are not editable and are designed to provide
+    you with the best experience without customization. They automatically
+    configure the most common applications for you.
   confirm_delete_title: Confirm Delete
   confirm_delete: Are you sure you want to delete this configuration/s?
   search: Search

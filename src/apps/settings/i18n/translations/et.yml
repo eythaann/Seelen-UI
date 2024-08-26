@@ -57,14 +57,12 @@ wm:
     enable: Luba akna piir
   space_between_containers: Konteinerite vaheline ruum
   workspace_offset: Tööruumide nihkumine (veerised)
-  enable: Luba aknahaldur
   author: Autor
   description: Kirjeldus
   layout: Paigutus
   workspace_padding: Tööruumide polsterdus
   resize_delta: Suuruse muutmine delta (%)
-  disabled_windows_version: Aknahaldur pole teie Windowsi versiooni jaoks saadaval.
-  disabled_windows10: Windows 10 jaoks pole aknahaldur saadaval.
+  enable: Luba plaatide aknahaldur
 weg:
   items:
     visible_separators: Nähtavad eraldajad
@@ -199,3 +197,12 @@ save: Kokkuhoid
 loading: Laadimine ...
 cancel: Tühistama
 open: Avatud
+vd:
+  strategy:
+    seelen: Seelen
+    native: Põliselanik
+    label: Virtuaalne töölaua strateegia
+  disabled_windows_version: >-
+    Natiivse virtuaalse töölaua strateegia pole teie Windowsi versiooni jaoks
+    saadaval.
+save_and_restart: Salvesta ja taaskäivitage

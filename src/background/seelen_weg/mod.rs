@@ -127,14 +127,13 @@ impl SeelenWeg {
     }
 
     pub fn contains_app(hwnd: HWND) -> bool {
-        OPEN_APPS
-            .lock()
+        trace_lock!(OPEN_APPS)
             .iter()
             .any(|app| app.hwnd == hwnd.0 || app.process_hwnd == hwnd.0)
     }
 
     pub fn update_app(hwnd: HWND) {
-        let mut apps = OPEN_APPS.lock();
+        let mut apps = trace_lock!(OPEN_APPS);
         let app = apps.iter_mut().find(|app| app.hwnd == hwnd.0);
         if let Some(app) = app {
             app.title = WindowsApi::get_window_text(hwnd);
@@ -146,7 +145,7 @@ impl SeelenWeg {
 
     pub fn replace_hwnd(old: HWND, new: HWND) -> Result<()> {
         let mut found = None;
-        let mut apps = OPEN_APPS.lock();
+        let mut apps = trace_lock!(OPEN_APPS);
         for app in apps.iter_mut() {
             if app.hwnd == old.0 {
                 app.hwnd = new.0;
@@ -211,17 +210,17 @@ impl SeelenWeg {
             .emit("add-open-app", app.clone())
             .expect("Failed to emit");
 
-        OPEN_APPS.lock().push(app);
+        trace_lock!(OPEN_APPS).push(app);
     }
 
     pub fn remove_hwnd(hwnd: HWND) {
-        OPEN_APPS.lock().retain(|app| app.hwnd != hwnd.0);
+        trace_lock!(OPEN_APPS).retain(|app| app.hwnd != hwnd.0);
         get_app_handle()
             .emit("remove-open-app", hwnd.0)
             .expect("Failed to emit");
     }
 
-    pub fn is_real_window(hwnd: HWND, ignore_frame: bool) -> bool {
+    pub fn is_real_window(hwnd: HWND, include_frames: bool) -> bool {
         if !WindowsApi::is_window_visible(hwnd) {
             return false;
         }
@@ -240,7 +239,7 @@ impl SeelenWeg {
 
         let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
         if exe_path.starts_with("C:\\Windows\\SystemApps")
-            || (!ignore_frame && exe_path.ends_with("ApplicationFrameHost.exe"))
+            || (!include_frames && exe_path.ends_with("ApplicationFrameHost.exe"))
         {
             return false;
         }
@@ -412,7 +411,7 @@ impl SeelenWeg {
         let label = window.label().to_string();
         window.listen("request-all-open-apps", move |_| {
             let handler = get_app_handle();
-            let apps = &*OPEN_APPS.lock();
+            let apps = &*trace_lock!(OPEN_APPS);
             log_error!(handler.emit_to(&label, "add-multiple-open-apps", apps));
         });
         Ok((window, hitbox))
@@ -453,14 +452,14 @@ lazy_static! {
 unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
     let class = WindowsApi::get_class(hwnd).unwrap_or_default();
     if TASKBAR_CLASS.contains(&class.as_str()) {
-        FOUNDS.lock().push(hwnd);
+        trace_lock!(FOUNDS).push(hwnd);
     }
     true.into()
 }
 
 pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
     unsafe { EnumWindows(Some(enum_windows_proc), LPARAM(0))? };
-    let mut found = FOUNDS.lock();
+    let mut found = trace_lock!(FOUNDS);
     let result = found.clone();
     found.clear();
     Ok(result)

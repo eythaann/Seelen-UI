@@ -59,11 +59,9 @@ wm:
   workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
   description: Maelezo
   space_between_containers: Nafasi kati ya vyombo
-  enable: Wezesha Meneja wa Dirisha
   layout: Mpangilio
   workspace_padding: Nafasi za kazi
-  disabled_windows_version: Meneja wa windows haipatikani kwa toleo lako la Windows.
-  disabled_windows10: Meneja wa windows haipatikani kwa Windows 10.
+  enable: Washa Meneja wa Dirisha la Tiling
 weg:
   items:
     size: Saizi ya bidhaa
@@ -197,3 +195,10 @@ cancel: Ghairi
 save: Kuokoa
 quit: Acha
 open: Wazi
+vd:
+  strategy:
+    label: Mkakati wa kweli wa desktop
+    seelen: Seelen
+    native: Mzaliwa
+  disabled_windows_version: Mkakati wa asili wa desktop haupatikani kwa toleo lako la Windows.
+save_and_restart: Okoa na uanze tena

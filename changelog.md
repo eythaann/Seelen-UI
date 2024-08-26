@@ -3,6 +3,10 @@
 ## [Unreleased]
 ### features
 - add volume changed popup.
+- new custom virtual desktop implementation.
+
+### refactor
+- add strategy pattern to virtual desktops
 
 ## [1.9.11]
 ### features

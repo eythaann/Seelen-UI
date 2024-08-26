@@ -57,13 +57,11 @@ wm:
   author: Qoraa
   description: Sifo
   workspace_offset: Goobaha shaqada ayaa ka dhigtay
-  enable: Karti maamulaha daaqada
   layout: Khariidad
   resize_delta: Dib u dhig Delta (%)
   space_between_containers: Meel bannaan oo u dhexeeya weelka
   workspace_padding: Goobta Goobta Goobta
-  disabled_windows_version: Maamulaha daaqada looma heli karo nooca Windows-kaaga.
-  disabled_windows10: Maamulaha daaqada ayaan loo heli karin Windows 10.
+  enable: U oggolow maamulaha daaqadda daaqadda
 weg:
   items:
     gap: Meel udhaxeysa waxyaabaha
@@ -200,3 +198,12 @@ quit: Joojin
 save: Badbaadin
 inProgress: Horusocod ...
 open: Furid
+vd:
+  strategy:
+    seelen: Sekelen
+    label: Istaraatiijiyadda Dembelade Desktop
+    native: U dhashay
+  disabled_windows_version: >-
+    Istaraatiijiyadda Desktop-ka dalkoodu hooyo looma heli karo nooca
+    Windows-kaaga.
+save_and_restart: Badbaadin & Dib u bilow

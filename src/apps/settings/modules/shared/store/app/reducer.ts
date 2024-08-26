@@ -1,3 +1,4 @@
+import { VirtualDesktopStrategy } from '../../../../../shared/schemas/Settings';
 import { StateBuilder } from '../../../../../shared/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
 import i18n from '../../../../i18n';
@@ -22,6 +23,7 @@ const initialState: RootState = {
   seelenweg: SeelenWegSlice.getInitialState(),
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
+  toBeRestarted: false,
   monitors: MonitorsSlice.getInitialState(),
   appsConfigurations: AppsConfigSlice.getInitialState(),
   ahkEnabled: true,
@@ -45,6 +47,7 @@ const initialState: RootState = {
     complement: null,
   },
   wallpaper: null,
+  virtualDesktopStrategy: VirtualDesktopStrategy.Native,
 };
 
 export const RootSlice = createSlice({
@@ -60,6 +63,11 @@ export const RootSlice = createSlice({
       state.language = action.payload;
       state.toBeSaved = true;
       i18n.changeLanguage(action.payload);
+    },
+    setVirtualDesktopStrategy: (state, action: PayloadAction<VirtualDesktopStrategy>) => {
+      state.toBeSaved = true;
+      state.toBeRestarted = true;
+      state.virtualDesktopStrategy = action.payload;
     },
     restoreToLastLoaded: (state) => {
       if (state.lastLoaded) {

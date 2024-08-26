@@ -279,6 +279,15 @@
         "type": "string"
       }
     },
+    "virtualDesktopStrategy": {
+      "description": "what virtual desktop implementation will be used, in case Native is not available we use Seelen",
+      "default": "Native",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualDesktopStrategy"
+        }
+      ]
+    },
     "windowManager": {
       "description": "window manager config",
       "default": {
@@ -1076,6 +1085,13 @@
         "Right",
         "Top",
         "Bottom"
+      ]
+    },
+    "VirtualDesktopStrategy": {
+      "type": "string",
+      "enum": [
+        "Native",
+        "Seelen"
       ]
     },
     "WindowManagerSettings": {

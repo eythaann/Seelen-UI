@@ -1,10 +1,18 @@
+/* In this file we use #[serde_alias(SnakeCase)] as backward compatibility from versions below v1.9.8 */
+
+use std::collections::HashMap;
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 use serde_alias::serde_alias;
 
 use crate::rect::Rect;
 
-/* In this file we use #[serde_alias(SnakeCase)] as backward compatibility from versions below v1.9.8 */
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+pub enum VirtualDesktopStrategy {
+    Native,
+    Seelen,
+}
 
 #[serde_alias(SnakeCase)]
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
@@ -28,6 +36,8 @@ pub struct Settings {
     pub dev_tools: bool,
     /// language to use, if null the system locale is used
     pub language: Option<String>,
+    /// what virtual desktop implementation will be used, in case Native is not available we use Seelen
+    pub virtual_desktop_strategy: VirtualDesktopStrategy,
 }
 
 impl Default for Settings {
@@ -42,6 +52,7 @@ impl Default for Settings {
             ahk_variables: AhkVarList::default(),
             dev_tools: false,
             language: Some(Self::get_system_language()),
+            virtual_desktop_strategy: VirtualDesktopStrategy::Native,
         }
     }
 }
@@ -277,6 +288,35 @@ impl Default for Monitor {
 
 // ============== Ahk Variables ==============
 
+#[macro_export]
+macro_rules! define_struct_and_hashmap {
+    (
+        $($field:ident),*
+    ) => {
+        #[serde_alias(SnakeCase)]
+        #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+        #[serde(default, rename_all = "camelCase")]
+        pub struct AhkVarList {
+            $(
+                pub $field: AhkVar,
+            )*
+        }
+
+        impl AhkVarList {
+            pub fn as_hash_map(&self) -> HashMap<String, AhkVar> {
+                let mut map = HashMap::new();
+                $(
+                    map.insert(
+                        stringify!($field).to_string(),
+                        self.$field.clone()
+                    );
+                )*
+                map
+            }
+        }
+    };
+}
+
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 pub struct AhkVar {
     pub fancy: String,
@@ -292,57 +332,54 @@ impl AhkVar {
     }
 }
 
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
-#[serde(default, rename_all = "camelCase")]
-pub struct AhkVarList {
-    pub reserve_top: AhkVar,
-    pub reserve_bottom: AhkVar,
-    pub reserve_left: AhkVar,
-    pub reserve_right: AhkVar,
-    pub reserve_float: AhkVar,
-    pub reserve_stack: AhkVar,
-    pub focus_top: AhkVar,
-    pub focus_bottom: AhkVar,
-    pub focus_left: AhkVar,
-    pub focus_right: AhkVar,
-    pub focus_latest: AhkVar,
-    pub increase_width: AhkVar,
-    pub decrease_width: AhkVar,
-    pub increase_height: AhkVar,
-    pub decrease_height: AhkVar,
-    pub restore_sizes: AhkVar,
-    pub switch_workspace_0: AhkVar,
-    pub switch_workspace_1: AhkVar,
-    pub switch_workspace_2: AhkVar,
-    pub switch_workspace_3: AhkVar,
-    pub switch_workspace_4: AhkVar,
-    pub switch_workspace_5: AhkVar,
-    pub switch_workspace_6: AhkVar,
-    pub switch_workspace_7: AhkVar,
-    pub switch_workspace_8: AhkVar,
-    pub switch_workspace_9: AhkVar,
-    pub move_to_workspace_0: AhkVar,
-    pub move_to_workspace_1: AhkVar,
-    pub move_to_workspace_2: AhkVar,
-    pub move_to_workspace_3: AhkVar,
-    pub move_to_workspace_4: AhkVar,
-    pub move_to_workspace_5: AhkVar,
-    pub move_to_workspace_6: AhkVar,
-    pub move_to_workspace_7: AhkVar,
-    pub move_to_workspace_8: AhkVar,
-    pub move_to_workspace_9: AhkVar,
-    pub send_to_workspace_0: AhkVar,
-    pub send_to_workspace_1: AhkVar,
-    pub send_to_workspace_2: AhkVar,
-    pub send_to_workspace_3: AhkVar,
-    pub send_to_workspace_4: AhkVar,
-    pub send_to_workspace_5: AhkVar,
-    pub send_to_workspace_6: AhkVar,
-    pub send_to_workspace_7: AhkVar,
-    pub send_to_workspace_8: AhkVar,
-    pub send_to_workspace_9: AhkVar,
-}
+define_struct_and_hashmap![
+    reserve_top,
+    reserve_bottom,
+    reserve_left,
+    reserve_right,
+    reserve_float,
+    reserve_stack,
+    focus_top,
+    focus_bottom,
+    focus_left,
+    focus_right,
+    focus_latest,
+    increase_width,
+    decrease_width,
+    increase_height,
+    decrease_height,
+    restore_sizes,
+    switch_workspace_0,
+    switch_workspace_1,
+    switch_workspace_2,
+    switch_workspace_3,
+    switch_workspace_4,
+    switch_workspace_5,
+    switch_workspace_6,
+    switch_workspace_7,
+    switch_workspace_8,
+    switch_workspace_9,
+    move_to_workspace_0,
+    move_to_workspace_1,
+    move_to_workspace_2,
+    move_to_workspace_3,
+    move_to_workspace_4,
+    move_to_workspace_5,
+    move_to_workspace_6,
+    move_to_workspace_7,
+    move_to_workspace_8,
+    move_to_workspace_9,
+    send_to_workspace_0,
+    send_to_workspace_1,
+    send_to_workspace_2,
+    send_to_workspace_3,
+    send_to_workspace_4,
+    send_to_workspace_5,
+    send_to_workspace_6,
+    send_to_workspace_7,
+    send_to_workspace_8,
+    send_to_workspace_9
+];
 
 impl Default for AhkVarList {
     fn default() -> Self {

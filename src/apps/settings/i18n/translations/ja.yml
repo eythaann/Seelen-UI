@@ -56,13 +56,11 @@ wm:
   author: 製作者
   layout: レイアウト
   description: 説明
-  enable: ウィンドウマネージャーを有効にする
   workspace_offset: ワークスペース全体の間隔（マージン）
   space_between_containers: ウィンドウ間の間隔
   resize_delta: リサイズ時の変化率（％）
   workspace_padding: ワークスペースの全体の間隔
-  disabled_windows_version: ウィンドウマネージャーは、現在使用しているWindowsのバージョンでは利用できません。
-  disabled_windows10: ウィンドウマネージャーはWindows 10では利用できません。
+  enable: タイリングウィンドウマネージャーを有効にします
 weg:
   items:
     size: アイテムのサイズ
@@ -196,3 +194,10 @@ quit: 終了
 open: 開く
 save: 保存
 cancel: キャンセル
+vd:
+  strategy:
+    native: ネイティブ
+    label: 仮想デスクトップ戦略
+    seelen: シーレン
+  disabled_windows_version: Windowsバージョンでは、ネイティブの仮想デスクトップ戦略は利用できません。
+save_and_restart: 保存して再起動します

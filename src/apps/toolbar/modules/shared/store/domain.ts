@@ -1,6 +1,7 @@
 import { IRootState } from '../../../../../shared.interfaces';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { Placeholder } from '../../../../shared/schemas/Placeholders';
+import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
 
@@ -116,6 +117,12 @@ export interface UIColors {
   complement: string | null;
 }
 
+export type WorkspaceId = SoftOpaque<string, 'WorkspaceId'>;
+export interface Workspace {
+  id: WorkspaceId;
+  name: string | null;
+}
+
 export interface RootState extends IRootState<FancyToolbar> {
   version: number;
   isOverlaped: boolean;
@@ -124,8 +131,8 @@ export interface RootState extends IRootState<FancyToolbar> {
   env: Record<string, string>;
   powerStatus: PowerStatus;
   batteries: Battery[];
-  workspaces: string[];
-  activeWorkspace: number;
+  workspaces: Workspace[];
+  activeWorkspace: WorkspaceId | null;
   systemTray: TrayInfo[];
   networkAdapters: NetworkAdapter[];
   networkLocalIp: string | null;

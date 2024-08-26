@@ -57,14 +57,12 @@ wm:
     offset: Помак на границу
   description: Опис
   space_between_containers: Простор између контејнера
-  enable: Омогући менаџер прозора
   workspace_offset: Оффсет радних простора (маржи)
   layout: Изглед
   workspace_padding: Облога за радне просторе
   resize_delta: Промените величину Делта (%)
   author: Аутор
-  disabled_windows_version: Менаџер прозора није доступан за вашу Виндовс верзију.
-  disabled_windows10: Менаџер прозора није доступан за Виндовс 10.
+  enable: Омогућите менаџера прозора
 weg:
   items:
     zoom_size: Зуомирана величина (користи се за теме)
@@ -201,3 +199,12 @@ cancel: Поништити, отказати
 open: Отворен
 delete: Избрисати
 loading: Учитавање ...
+vd:
+  strategy:
+    seelen: Сеелен
+    label: Виртуелна стратегија радне површине
+    native: Наморан
+  disabled_windows_version: >-
+    Изворна стратегија виртуелне радне површине није доступна за вашу Виндовс
+    верзију.
+save_and_restart: Сачувај и поново покрените

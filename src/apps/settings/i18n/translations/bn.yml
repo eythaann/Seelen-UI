@@ -62,9 +62,7 @@ wm:
   workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
   space_between_containers: পাত্রে স্থান
   workspace_padding: ওয়ার্কস্পেস প্যাডিং
-  enable: উইন্ডো ম্যানেজার সক্ষম করুন
-  disabled_windows_version: উইন্ডো ম্যানেজারটি আপনার উইন্ডোজ সংস্করণের জন্য উপলভ্য নয়।
-  disabled_windows10: উইন্ডো ম্যানেজার উইন্ডোজ 10 এর জন্য উপলভ্য নয়।
+  enable: টাইলিং উইন্ডো ম্যানেজার সক্ষম করুন
 weg:
   items:
     size: আইটেমের আকার
@@ -201,3 +199,10 @@ save: সংরক্ষণ
 open: খোলা
 quit: প্রস্থান
 loading: লোড হচ্ছে ...
+vd:
+  strategy:
+    seelen: সিলেন
+    native: নেটিভ
+    label: ভার্চুয়াল ডেস্কটপ কৌশল
+  disabled_windows_version: নেটিভ ভার্চুয়াল ডেস্কটপ কৌশল আপনার উইন্ডোজ সংস্করণের জন্য উপলব্ধ নয়।
+save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন

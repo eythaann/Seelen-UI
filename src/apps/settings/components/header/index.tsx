@@ -1,5 +1,6 @@
 import { RouteExtraInfo } from '../navigation/routes';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { relaunch } from '@tauri-apps/plugin-process';
 import { Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -15,6 +16,7 @@ import cs from './index.module.css';
 export const Header = () => {
   let route = useAppSelector(RootSelectors.route);
   let hasChanges = useAppSelector(RootSelectors.toBeSaved);
+  let shouldRestart = useAppSelector(RootSelectors.toBeRestarted);
 
   const { t } = useTranslation();
 
@@ -24,14 +26,18 @@ export const Header = () => {
     dispatch(RootActions.restoreToLastLoaded());
   };
 
-  const SaveOrQuit = () => {
+  const SaveOrQuit = async () => {
     if (hasChanges) {
-      SaveStore();
+      await SaveStore();
+      if (shouldRestart) {
+        await relaunch();
+      }
     } else {
-      getCurrentWebviewWindow().close();
+      await getCurrentWebviewWindow().close();
     }
   };
 
+  const saveLabel = shouldRestart ? t('save_and_restart') : t('save');
   return (
     <div className={cs.Header} data-tauri-drag-region>
       <div>
@@ -52,7 +58,7 @@ export const Header = () => {
         />
         {'  '}
         <Button
-          children={hasChanges ? t('save') : t('quit')}
+          children={hasChanges ? saveLabel : t('quit')}
           type="primary"
           danger={!hasChanges}
           onClick={SaveOrQuit}

@@ -117,7 +117,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
 fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
-    PERFORMANCE_HELPER.lock().start("init");
+    trace_lock!(PERFORMANCE_HELPER).start("init");
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {

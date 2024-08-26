@@ -57,7 +57,6 @@ toolbar:
   auto_hide: الاختباء التلقائي
   label: شريط الأدوات
 wm:
-  enable: تمكين مدير النوافذ
   layout: تَخطِيط
   author: مؤلف
   description: وصف
@@ -69,8 +68,7 @@ wm:
     enable: تمكين حدود النافذة
     width: عرض الحدود
     offset: إزاحة الحدود
-  disabled_windows_version: مدير النافذة غير متوفر لإصدار Windows الخاص بك.
-  disabled_windows10: مدير النافذة غير متاح لنظام التشغيل Windows 10.
+  enable: تمكين مدير نافذة البلاط
 weg:
   label: قفص الاتهام / شريط المهام
   enable: تمكين قفص الاتهام/شريط المهام
@@ -197,3 +195,10 @@ shortcuts:
     send_to_workspace_7: أرسل إلى مساحة العمل 7
     send_to_workspace_8: أرسل إلى مساحة العمل 8
     send_to_workspace_9: أرسل إلى مساحة العمل 9
+vd:
+  strategy:
+    native: محلي
+    seelen: سيلين
+    label: استراتيجية سطح المكتب الظاهري
+  disabled_windows_version: استراتيجية سطح المكتب الافتراضية الأصلية غير متوفرة لإصدار Windows الخاص بك.
+save_and_restart: حفظ وإعادة التشغيل

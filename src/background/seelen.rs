@@ -129,12 +129,14 @@ impl Seelen {
         let mut all_ready = false;
         while !all_ready {
             sleep_millis(50);
-            all_ready = SEELEN.lock().monitors().iter().all(|m| m.is_ready());
+            all_ready = trace_lock!(SEELEN).monitors().iter().all(|m| m.is_ready());
         }
 
         log::debug!(
             "Seelen UI ready in: {:.2}s",
-            PERFORMANCE_HELPER.lock().elapsed("init").as_secs_f64()
+            trace_lock!(PERFORMANCE_HELPER)
+                .elapsed("init")
+                .as_secs_f64()
         );
 
         log::trace!("Enumerating windows");
@@ -286,6 +288,7 @@ impl Seelen {
         if state.is_ahk_enabled() {
             log::trace!("Starting AHK shortcuts");
             AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.ahk"))
+                .name("seelen.ahk")
                 .with_lib()
                 .execute()?;
 
@@ -295,6 +298,7 @@ impl Seelen {
                     include_str!("utils/ahk/mocks/seelen.wm.ahk"),
                     state.get_ahk_variables(),
                 )
+                .name("seelen.wm.ahk")
                 .with_lib()
                 .execute()?;
             }
@@ -395,7 +399,7 @@ impl Seelen {
 
         for monitor in seelen.monitors_mut() {
             if let Some(wm) = monitor.wm_mut() {
-                if WindowManager::is_manageable_window(hwnd, true) {
+                if WindowManager::is_manageable_window(hwnd) {
                     log_error!(wm.add_hwnd(hwnd));
                 }
             }

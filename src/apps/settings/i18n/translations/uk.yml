@@ -55,7 +55,6 @@ wm:
     width: Ширина кордону
     enable: Увімкнути кордон вікна
     offset: Зміщення кордону
-  enable: Увімкніть менеджер вікон
   description: Опис
   resize_delta: Змінити розмір дельти (%)
   layout: Макет
@@ -63,8 +62,7 @@ wm:
   workspace_offset: Зсув робочих просторів (поля)
   space_between_containers: Простір між контейнерами
   workspace_padding: Прокладка робочих просторів
-  disabled_windows_version: Менеджер вікон недоступний для вашої версії Windows.
-  disabled_windows10: Менеджер вікон недоступний для Windows 10.
+  enable: Увімкнути плитку диспетчера вікон
 weg:
   items:
     label: Предмети
@@ -199,3 +197,12 @@ save: Заощадити
 open: ВІДЧИНЕНО
 quit: Кинути
 loading: Завантаження ...
+vd:
+  strategy:
+    label: Віртуальна стратегія робочого столу
+    seelen: Зимовий
+    native: Рідний
+  disabled_windows_version: >-
+    Рідна віртуальна стратегія робочого столу недоступна для вашої версії
+    Windows.
+save_and_restart: Зберегти та перезапустити

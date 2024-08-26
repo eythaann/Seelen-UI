@@ -62,9 +62,7 @@ wm:
   space_between_containers: Isikhala phakathi kweziqukathi
   description: Ukufanisa
   workspace_padding: I-Workespashe Padding
-  enable: Nika amandla umphathi wewindi
-  disabled_windows_version: Imenenja yewindows ayitholakali ngenguqulo yakho yeWindows.
-  disabled_windows10: Imenenja yewindows ayitholakali ngeWindows 10.
+  enable: Nika amandla umphathi wewindi elijabulisayo
 weg:
   items:
     size: Usayizi wento
@@ -201,3 +199,10 @@ quit: Yeka
 delete: Cisha
 loading: Iyalayisha ...
 open: Vula
+vd:
+  strategy:
+    native: '-Okudabuka'
+    label: Isu le-Virtual Desktop
+    seelen: '-Kwaseshud'
+  disabled_windows_version: Isu le-Virtual desktop yendabuko alitholakali ngenguqulo yakho yeWindows.
+save_and_restart: Gcina futhi Qalisa kabusha

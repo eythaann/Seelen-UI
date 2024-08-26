@@ -58,7 +58,6 @@ toolbar:
   auto_hide: Automatisch ausblenden
   label: Symbolleiste
 wm:
-  enable: Fenstermanager aktivieren
   layout: Layout
   author: Autor
   description: Beschreibung
@@ -70,8 +69,7 @@ wm:
     enable: Fensterrand aktivieren
     width: Randbreite
     offset: Randversatz
-  disabled_windows_version: Der Fenstermanager ist für Ihre Windows -Version nicht verfügbar.
-  disabled_windows10: Der Fenstermanager ist für Windows 10 nicht verfügbar.
+  enable: Aktivieren Sie den Fliesenfenstermanager
 weg:
   label: Dock/Taskleiste
   enable: Dock/Taskleiste aktivieren
@@ -201,3 +199,12 @@ shortcuts:
     send_to_workspace_7: Zum Arbeitsbereich 7 senden
     send_to_workspace_8: Zum Arbeitsbereich 8 senden
     send_to_workspace_9: Zum Arbeitsbereich 9 senden
+vd:
+  strategy:
+    native: Einheimisch
+    seelen: Seelen
+    label: Virtuelle Desktop -Strategie
+  disabled_windows_version: >-
+    Für Ihre Windows -Version ist keine native virtuelle Desktop -Strategie
+    verfügbar.
+save_and_restart: Speichern & neu starten

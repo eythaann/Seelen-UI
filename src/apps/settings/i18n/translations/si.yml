@@ -59,12 +59,10 @@ wm:
   description: විස්තර
   layout: පිරිසැලසුම
   space_between_containers: බහාලුම් අතර අවකාශය
-  enable: කවුළු කළමනාකරු සබල කරන්න
   workspace_padding: වැඩබිම් පිරවුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   workspace_offset: වැඩබිම් ඕෆ්සෙට් (ආන්තික)
-  disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා කවුළු කළමනාකරු ලබා ගත නොහැක.
-  disabled_windows10: කවුළු කළමනාකරු වින්ඩෝස් 10 සඳහා ලබා ගත නොහැක.
+  enable: ටයිල්ලිං කවුළු කළමනාකරු සක්රීය කරන්න
 weg:
   items:
     label: අයිතම
@@ -199,3 +197,10 @@ cancel: අවලංගු කරන්න
 delete: මකන්න
 open: විවෘත
 save: සුරකින්න
+vd:
+  strategy:
+    native: ස්වදේශික
+    label: අතථ්ය ඩෙස්ක්ටොප් උපායමාර්ගය
+    seelen: සීලන්
+  disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා ස්වදේශීය අතථ්ය ඩෙස්ක්ටොප් උපාය ලබා ගත නොහැක.
+save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න

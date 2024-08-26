@@ -57,14 +57,12 @@ wm:
     enable: વિન્ડોની બોર્ડર સક્ષમ કરો
   layout: લેઆઉટ
   space_between_containers: કન્ટેનર વચ્ચે જગ્યા
-  enable: વિન્ડો મેનેજરને સક્ષમ કરો
   workspace_offset: વર્કસ્પેસ ઓફસેટ (માર્જિન)
   workspace_padding: વર્કસ્પેસ પેડિંગ
   description: વર્ણન
   author: લેખક
   resize_delta: ડેલ્ટાનું કદ બદલો (%)
-  disabled_windows_version: વિંડો મેનેજર તમારા વિંડોઝ સંસ્કરણ માટે ઉપલબ્ધ નથી.
-  disabled_windows10: વિંડો મેનેજર વિન્ડોઝ 10 માટે ઉપલબ્ધ નથી.
+  enable: ટાઇલિંગ વિંડો મેનેજરને સક્ષમ કરો
 weg:
   items:
     label: વસ્તુઓ
@@ -201,3 +199,10 @@ loading: લોડ કરી રહ્યું છે...
 inProgress: ચાલુ છે...
 cancel: રદ કરો
 quit: છોડો
+vd:
+  strategy:
+    seelen: પીઠ
+    label: વર્ચ્યુઅલ ડેસ્કટ .પ વ્યૂહરચના
+    native: મૂળ
+  disabled_windows_version: મૂળ વર્ચ્યુઅલ ડેસ્કટ .પ વ્યૂહરચના તમારા વિંડોઝ સંસ્કરણ માટે ઉપલબ્ધ નથી.
+save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો

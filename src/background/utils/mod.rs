@@ -113,19 +113,22 @@ macro_rules! trace_lock {
     ($mutex:expr) => {{
         #[cfg(feature = "trace_lock")]
         {
+            let guard = $mutex
+                .try_lock_for(std::time::Duration::from_secs(5))
+                .expect("Failed to lock");
             log::trace!(
-                "Attempting to acquire lock on {} at {}:{}",
+                "{} lock acquired at {}:{}",
                 stringify!($mutex),
                 file!(),
                 line!()
             );
-            let lock = $mutex.lock();
-            log::trace!("Successfully acquired lock on {}", stringify!($mutex));
-            lock
+            guard
         }
         #[cfg(not(feature = "trace_lock"))]
         {
-            $mutex.lock()
+            $mutex
+                .try_lock_for(std::time::Duration::from_secs(5))
+                .expect("Failed to lock")
         }
     }};
 }

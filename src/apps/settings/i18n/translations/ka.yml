@@ -57,14 +57,12 @@ wm:
     width: საზღვრის სიგანე
   description: აღწერილობა
   author: ავტორი
-  enable: ფანჯრის მენეჯერის ჩართვა
   resize_delta: დელტას ზომის შეცვლა (%)
   space_between_containers: სივრცე კონტეინერებს შორის
   workspace_offset: სამუშაო ადგილები ოფსეტური (ზღვარი)
   workspace_padding: სამუშაო ადგილები padding
   layout: გამოფენა
-  disabled_windows_version: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი თქვენი Windows ვერსიისთვის.
-  disabled_windows10: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი Windows 10 -ისთვის.
+  enable: ჩართეთ ფილების ფანჯრის მენეჯერი
 weg:
   items:
     label: ნივთები
@@ -201,3 +199,12 @@ quit: მიტოვება
 delete: წაშლა
 open: გახსნა
 cancel: გაუქმება
+vd:
+  strategy:
+    seelen: სელენი
+    label: ვირტუალური დესკტოპის სტრატეგია
+    native: მკვიდრი ქალი
+  disabled_windows_version: >-
+    მშობლიური ვირტუალური დესკტოპის სტრატეგია არ არის ხელმისაწვდომი თქვენი
+    Windows ვერსიისთვის.
+save_and_restart: შენახვა და გადატვირთვა

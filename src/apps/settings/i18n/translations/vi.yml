@@ -58,13 +58,11 @@ wm:
   description: Sự miêu tả
   author: Tác giả
   layout: Cách trình bày
-  enable: Bật trình quản lý cửa sổ
   resize_delta: Thay đổi kích thước delta (%)
   space_between_containers: Không gian giữa các container
   workspace_padding: Không gian làm việc đệm
   workspace_offset: Không gian làm việc bù (lề)
-  disabled_windows_version: Trình quản lý cửa sổ không có sẵn cho phiên bản Windows của bạn.
-  disabled_windows10: Trình quản lý cửa sổ không có sẵn cho Windows 10.
+  enable: Bật trình quản lý cửa sổ ốp lát
 weg:
   items:
     size: Kích thước mục
@@ -199,3 +197,12 @@ delete: Xóa bỏ
 inProgress: Trong tiến trình...
 save: Cứu
 cancel: Hủy bỏ
+vd:
+  strategy:
+    native: Tự nhiên
+    seelen: Seelen
+    label: Chiến lược máy tính để bàn ảo
+  disabled_windows_version: >-
+    Chiến lược máy tính để bàn ảo gốc không có sẵn cho phiên bản Windows của
+    bạn.
+save_and_restart: Lưu & Khởi động lại

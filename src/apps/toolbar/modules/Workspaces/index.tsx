@@ -25,12 +25,12 @@ export function WorkspacesModule({ module }: Props) {
     return (
       <Reorder.Item as="div" value={module} className="ft-bar-item" style={module.style}>
         <ul className="ft-bar-item-content workspaces">
-          {workspaces.map((_, idx) => (
+          {workspaces.map((w, idx) => (
             <li
-              key={idx}
+              key={w.id}
               onClick={() => invoke('switch_workspace', { idx })}
               className={cx('workspace-dot', {
-                'workspace-dot-active': idx === activeWorkspace,
+                'workspace-dot-active': w.id === activeWorkspace,
               })}
             />
           ))}
@@ -41,25 +41,27 @@ export function WorkspacesModule({ module }: Props) {
 
   return (
     <Reorder.Item as="div" id={module.id} value={module} className="ft-bar-group">
-      {workspaces.map((name, idx) => {
+      {workspaces.map((w, idx) => {
         return (
           <Tooltip
             arrow={false}
             mouseLeaveDelay={0}
             overlayClassName="ft-bar-item-tooltip"
-            title={name}
-            key={name}
+            title={w.name || `Workspace ${idx + 1}`}
+            key={w.id}
           >
             <div
               style={module.style}
               className={cx('ft-bar-item', {
                 'ft-bar-item-clickable': true,
-                'ft-bar-item-active': idx === activeWorkspace,
+                'ft-bar-item-active': w.id === activeWorkspace,
               })}
               onClick={() => invoke('switch_workspace', { idx })}
             >
               <div className="ft-bar-item-content">
-                {mode === WorkspaceTMMode.Named ? `${name}` : `${idx + 1}`}
+                {mode === WorkspaceTMMode.Named
+                  ? `${w.name || `Workspace ${idx + 1}`}`
+                  : `${idx + 1}`}
               </div>
             </div>
           </Tooltip>

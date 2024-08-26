@@ -61,10 +61,8 @@ wm:
   layout: Դասավորություն
   space_between_containers: Տիեզերք բեռնարկղերի միջեւ
   workspace_padding: Աշխատանքային տարածքների լիցքավորում
-  enable: Միացնել պատուհանի կառավարիչը
   author: Հեղինակ
-  disabled_windows_version: 'Պատուհանների կառավարիչը մատչելի չէ ձեր Windows տարբերակի համար:'
-  disabled_windows10: 'Պատուհանների կառավարիչը մատչելի չէ Windows 10-ի համար:'
+  enable: Միացնել սալիկապատման պատուհանի կառավարիչը
 weg:
   items:
     size: Ապրանքի չափը
@@ -201,3 +199,12 @@ save: Խնայել
 cancel: Չեղարկել
 delete: Ջնջել
 quit: Թողնել
+vd:
+  strategy:
+    seelen: Սեգեն
+    native: Տեղական
+    label: Վիրտուալ աշխատասեղանի ռազմավարությունը
+  disabled_windows_version: >-
+    Մայրենիի վիրտուալ աշխատասեղանի ռազմավարությունը մատչելի չէ ձեր Windows
+    տարբերակի համար:
+save_and_restart: Պահել եւ վերագործարկել

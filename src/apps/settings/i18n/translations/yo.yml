@@ -54,7 +54,6 @@ wm:
     enable: Jeki aala window
     width: Iwọn aala
     offset: Iparun aala
-  enable: Jeki oluṣakoso window
   resize_delta: Tun ṣe Delta (%)
   layout: Agbekalẹ
   description: Isapejuwe
@@ -62,8 +61,7 @@ wm:
   workspace_offset: Awọn iṣẹ Iṣẹ-iṣẹ (awọn ala)
   author: Onkọwe ọkunrin
   workspace_padding: Awọn iṣẹ itasi
-  disabled_windows_version: Oluṣakoso window ko wa fun ẹya Windows rẹ.
-  disabled_windows10: Oluṣakoso window ko wa fun Windows 10.
+  enable: Jeki oludari window
 weg:
   items:
     visible_separators: Awọn iyatọ ti o han
@@ -197,3 +195,10 @@ loading: Loading ...
 inProgress: Ni ilọsiwaju ...
 quit: Lọ kuro
 open: Ṣii
+vd:
+  strategy:
+    label: Foju tabili tabili
+    seelen: Sibẹ
+    native: Ọmọ ibilẹ ọkunrin
+  disabled_windows_version: Abitabi Ojú-iṣẹ Ọmọ-iṣẹ abinibi ko wa fun ẹya Windows rẹ.
+save_and_restart: Fipamọ & Tun bẹrẹ

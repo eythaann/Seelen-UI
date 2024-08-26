@@ -62,9 +62,7 @@ wm:
   description: विवरण
   workspace_padding: कार्यक्षेत्र पैडिंग
   layout: लेआउट
-  enable: विंडो मैनेजर सक्षम करें
-  disabled_windows_version: विंडो मैनेजर आपके विंडोज संस्करण के लिए उपलब्ध नहीं है।
-  disabled_windows10: विंडोज 10 के लिए विंडो मैनेजर उपलब्ध नहीं है।
+  enable: टाइलिंग विंडो मैनेजर सक्षम करें
 weg:
   items:
     visible_separators: दृश्य विभाजक
@@ -201,3 +199,10 @@ delete: मिटाना
 cancel: रद्द करना
 loading: लोड हो रहा है...
 quit: छोड़ना
+vd:
+  strategy:
+    native: देशी
+    seelen: सीलेन
+    label: आभासी डेस्कटॉप रणनीति
+  disabled_windows_version: देशी वर्चुअल डेस्कटॉप रणनीति आपके विंडोज संस्करण के लिए उपलब्ध नहीं है।
+save_and_restart: सहेजें और पुनरारंभ करें

@@ -59,11 +59,9 @@ wm:
   space_between_containers: Фосила байни контейнер
   workspace_offset: Ҷойгиршавӣ
   author: Муаллиф
-  enable: Фаъолсозии мудири тиреза
   resize_delta: Татбиқи Delta (%)
   workspace_padding: Worlpaces Padding
-  disabled_windows_version: Менеҷери тиреза барои версияи Windows дастрас нест.
-  disabled_windows10: Менеҷери тиреза барои Windows 10 дастрас нест.
+  enable: Фаъолсозии мудири тиреза
 weg:
   items:
     zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
@@ -198,3 +196,10 @@ quit: Баромадан
 loading: Боркунӣ ...
 cancel: Манъ кардан
 delete: Нест
+vd:
+  strategy:
+    seelen: Желен
+    native: Модарӣ
+    label: Стратегияи кории корӣ
+  disabled_windows_version: Стратегияи кории ватанӣ барои версияи Windows дастрас нест.
+save_and_restart: Наҷот ва бозоғоз

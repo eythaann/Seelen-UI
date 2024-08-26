@@ -55,7 +55,6 @@ wm:
     width: Ertzaren zabalera
     offset: Ertzaren desplazamendua
     enable: Gaitu leihoen ertza
-  enable: Gaitu leiho kudeatzailea
   description: Deskribapen
   space_between_containers: Edukiontzien arteko espazioa
   workspace_offset: Laneko espazioak desplazamendua (marjinak)
@@ -63,8 +62,7 @@ wm:
   resize_delta: RETIZE DELTA (%)
   author: Idazle
   workspace_padding: Laneko guneak betegarria
-  disabled_windows_version: Leiho kudeatzailea ez dago zure Windows bertsiorako erabilgarri.
-  disabled_windows10: Leiho kudeatzailea ez dago erabilgarri Windows 10-erako.
+  enable: Gaitu fitxa leiho kudeatzailea
 weg:
   items:
     gap: Elementuen arteko espazioa
@@ -199,3 +197,12 @@ open: Ireki
 save: Aurreztu
 loading: Kargatzen ...
 inProgress: Abian ...
+vd:
+  strategy:
+    label: Mahaigaineko estrategia birtuala
+    native: Sorterriko
+    seelen: Sekelo
+  disabled_windows_version: >-
+    Mahaigaineko estrategia birtuala ez dago erabilgarri zure Windows
+    bertsiorako.
+save_and_restart: Gorde eta berrabiarazi

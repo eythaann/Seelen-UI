@@ -58,13 +58,11 @@ wm:
   author: Autor
   resize_delta: Zmeňte veľkosť delty (%)
   workspace_padding: Čalúnenie pracovných priestorov
-  enable: Povoliť správcu okien
   layout: Usporiadanie
   space_between_containers: Priestor medzi nádobami
   description: Opis
   workspace_offset: Offsety Workspaces (marže)
-  disabled_windows_version: Správca okien nie je k dispozícii pre vašu verziu systému Windows.
-  disabled_windows10: Správca okien nie je k dispozícii pre Windows 10.
+  enable: Povoľte správcu okien obkladov
 weg:
   items:
     size: Veľkosť položky
@@ -199,3 +197,12 @@ cancel: Zrušiť
 quit: Prestať
 save: Uložiť
 delete: Vymazať
+vd:
+  strategy:
+    label: Stratégia virtuálnej plochy
+    native: Domorodý
+    seelen: Kabína
+  disabled_windows_version: >-
+    Natívna virtuálna stolná stratégia nie je k dispozícii pre vašu verziu
+    systému Windows.
+save_and_restart: Uložiť a reštartovať

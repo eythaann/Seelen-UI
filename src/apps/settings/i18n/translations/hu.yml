@@ -59,12 +59,10 @@ wm:
   layout: Elrendezés
   space_between_containers: Hely a konténerek között
   description: Leírás
-  enable: Engedélyezze az ablakkezelőt
   workspace_padding: Munkaterületek párnázása
   resize_delta: Átméretezze a DELTA -t (%)
   workspace_offset: A munkaterületek eltolása (margók)
-  disabled_windows_version: Az ablakkezelő nem érhető el a Windows verziójához.
-  disabled_windows10: Az ablakkezelő nem érhető el a Windows 10 -hez.
+  enable: Engedélyezze a csempe ablakkezelőt
 weg:
   items:
     zoom_size: Nagyított méret (a témákhoz használt)
@@ -201,3 +199,10 @@ save: Megment
 delete: Töröl
 loading: Betöltés...
 open: Nyisd ki
+vd:
+  strategy:
+    native: Bennszülött
+    seelen: Seelen
+    label: Virtuális asztali stratégia
+  disabled_windows_version: A natív virtuális asztali stratégia nem érhető el a Windows verziójához.
+save_and_restart: Mentés és újraindítás

@@ -58,7 +58,6 @@ toolbar:
   auto_hide: Esconda automática
   label: Barra de ferramentas
 wm:
-  enable: Habilitar Gerenciador de Janelas
   layout: Disposição
   author: Autor
   description: Descrição
@@ -70,8 +69,7 @@ wm:
     enable: Habilitar borda da janela
     width: Largura da borda
     offset: Deslocamento de borda
-  disabled_windows_version: O gerenciador de janelas não está disponível para sua versão do Windows.
-  disabled_windows10: O gerenciador de janelas não está disponível para o Windows 10.
+  enable: Habilitar gerente de janela de ladrilhos
 weg:
   label: Dock/barra de tarefas
   enable: Habilitar Dock/Barra de Tarefas
@@ -199,3 +197,12 @@ shortcuts:
     send_to_workspace_7: Enviar para o espaço de trabalho 7
     send_to_workspace_8: Enviar para o espaço de trabalho 8
     send_to_workspace_9: Enviar para o espaço de trabalho 9
+vd:
+  strategy:
+    native: Nativa
+    label: Estratégia de desktop virtual
+    seelen: Seelen
+  disabled_windows_version: >-
+    A estratégia de desktop virtual nativa não está disponível para sua versão
+    do Windows.
+save_and_restart: Salve e reinicie

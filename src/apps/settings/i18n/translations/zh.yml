@@ -56,7 +56,6 @@ toolbar:
   auto_hide: 自动隐藏
   label: 工具栏
 wm:
-  enable: 启用窗口管理器
   layout: 布局
   author: 作者
   description: 描述
@@ -68,8 +67,7 @@ wm:
     enable: 启用窗口边框
     width: 边框宽度
     offset: 边框偏移
-  disabled_windows_version: Windows Manager 不适合您的 Windows 版本。
-  disabled_windows10: Windows 10不可用窗口管理器。
+  enable: 启用平铺窗口管理器
 weg:
   label: 停靠栏/任务栏
   enable: 启用停靠栏/任务栏
@@ -194,3 +192,10 @@ shortcuts:
     send_to_workspace_7: 发送到工作区 7
     send_to_workspace_8: 发送到工作区 8
     send_to_workspace_9: 发送到工作区 9
+vd:
+  strategy:
+    native: 本国的
+    label: 虚拟桌面策略
+    seelen: 塞伦
+  disabled_windows_version: 本机虚拟桌面策略不适合您的Windows版本。
+save_and_restart: 保存和重新启动

@@ -9,7 +9,7 @@ use notify_debouncer_full::{
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
-use seelen_core::state::{WegItems, WindowManagerLayout};
+use seelen_core::state::{VirtualDesktopStrategy, WegItems, WindowManagerLayout};
 use serde::Serialize;
 use std::{
     collections::{HashMap, VecDeque},
@@ -225,8 +225,11 @@ impl FullState {
                 settings.language = settings
                     .language
                     .or_else(|| Some(Settings::get_system_language()));
-                settings.window_manager.enabled =
-                    settings.window_manager.enabled && is_virtual_desktop_supported();
+                if settings.virtual_desktop_strategy == VirtualDesktopStrategy::Native
+                    && !is_virtual_desktop_supported()
+                {
+                    settings.virtual_desktop_strategy = VirtualDesktopStrategy::Seelen;
+                }
                 Ok(settings)
             }
             _ => Err("Invalid settings file extension".into()),

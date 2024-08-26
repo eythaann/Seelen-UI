@@ -56,13 +56,11 @@ wm:
   description: መግለጫ
   layout: አቀማመጥ
   space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ
-  enable: የመስኮት አቀናባሪን አንቃ
   workspace_offset: የስራ ቦታዎች ማካካሻ (ማርጂኖች)
   workspace_padding: የስራ ቦታዎች ፓድ
   resize_delta: ዴልታ (%)
   author: ደራሲ ደራሲ
-  disabled_windows_version: የመስኮት አቀናባሪው ለዊንዶውስ ስሪትዎ አይገኝም.
-  disabled_windows10: የመስክ ሥራ አስኪያጁ ለዊንዶውስ 10 አይገኝም.
+  enable: የታሸገ መስኮት አቀናባሪን ያንቁ
 weg:
   items:
     zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
@@ -196,3 +194,10 @@ delete: ሰርዝ
 quit: አቁም
 loading: በመጫን ላይ ...
 save: አስቀምጥ
+vd:
+  strategy:
+    label: ምናባዊ ዴስክቶፕ ስትራቴጂ
+    seelen: እዩ
+    native: ተወላጅ
+  disabled_windows_version: ቤተኛ ምናባዊ ዴስክቶፕ ስትራቴጂ ለዊንዶውስ ስሪትዎ አይገኝም.
+save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ

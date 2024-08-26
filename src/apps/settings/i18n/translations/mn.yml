@@ -60,10 +60,8 @@ wm:
   description: Тодорхойлолт / төрөл анги
   workspace_padding: Ажлын талбарууд
   author: Зохиолч
-  enable: Цонх менежерийг идэвхжүүлэх
   resize_delta: Дельтааг өөрчлөх (%)
-  disabled_windows_version: Цонхны менежер таны Windows хувилбарт ашиглах боломжгүй.
-  disabled_windows10: Цонхны менежер Windows 10-д байхгүй байна.
+  enable: Цонхны менежерийг идэвхжүүлэх боломжийг олгох
 weg:
   items:
     label: Зүйл
@@ -198,3 +196,12 @@ cancel: Цуаах
 quit: Орхих
 open: Нээлттэй
 save: Аврах
+vd:
+  strategy:
+    seelen: Сахин суу
+    label: Виртины ширээний эсрэг стратеги
+    native: Төрөлх нутгийн
+  disabled_windows_version: >-
+    Уугуул виртуал ширээний стратеги нь таны Windows хувилбарт ашиглах
+    боломжгүй.
+save_and_restart: Хадгалах & дахин эхлүүлнэ үү

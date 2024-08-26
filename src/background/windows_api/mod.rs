@@ -58,11 +58,11 @@ use windows::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
                 GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
                 IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow,
-                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, EVENT_SYSTEM_FOREGROUND,
-                GWL_EXSTYLE, GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
-                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE,
+                GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
             },
         },
@@ -298,18 +298,24 @@ impl WindowsApi {
         std::thread::spawn(move || log_error!(Self::force_set_foreground(hwnd)));
     }
 
+    pub fn minimize_window(hwnd: HWND) -> Result<()> {
+        Self::show_window(hwnd, SW_MINIMIZE)
+    }
+
+    pub fn restore_window(hwnd: HWND) -> Result<()> {
+        Self::show_window(hwnd, SW_RESTORE)
+    }
+
     pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
+        {
+            let mut hook_manager = trace_lock!(HOOK_MANAGER);
+            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd.0);
+            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd.0);
+        }
         Self::set_minimize_animation(false)?;
-
-        let mut hook_manager = trace_lock!(HOOK_MANAGER);
-        hook_manager.pause_and_resume_after(WinEvent::SystemMinimizeEnd, hwnd);
-        hook_manager.set_resume_callback(move |hook_manager| {
-            log_error!(Self::set_minimize_animation(true));
-            hook_manager.emit_fake_win_event(EVENT_SYSTEM_FOREGROUND, hwnd);
-        });
-
         Self::show_window_async(hwnd, SW_MINIMIZE)?;
         Self::show_window_async(hwnd, SW_RESTORE)?;
+        Self::set_minimize_animation(true)?;
         Ok(())
     }
 
@@ -597,13 +603,14 @@ impl WindowsApi {
     }
 
     pub fn set_minimize_animation(enable: bool) -> Result<()> {
-        let mut anim_info = Self::get_min_animation_info()?;
-        let uiparam = anim_info.cbSize;
+        let mut anim_info = ANIMATIONINFO {
+            cbSize: core::mem::size_of::<ANIMATIONINFO>() as u32,
+            iMinAnimate: enable.into(),
+        };
         unsafe {
-            anim_info.iMinAnimate = enable.into();
             SystemParametersInfoW(
                 SPI_SETANIMATION,
-                uiparam,
+                anim_info.cbSize,
                 Some(&mut anim_info as *mut ANIMATIONINFO as *mut c_void),
                 SPIF_SENDCHANGE,
             )?;

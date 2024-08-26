@@ -57,13 +57,11 @@ wm:
   description: वर्णन
   space_between_containers: कन्टेनर बीचको ठाउँ
   workspace_offset: कार्यस्पेस अफसेट (मार्जिन)
-  enable: विन्डो प्रबन्धक सक्षम गर्नुहोस्
   layout: नक्शा
   author: लेखिका
   resize_delta: रिसाइज डेल्टा (%)
   workspace_padding: कार्यक्षेत्र प्याडिंग
-  disabled_windows_version: विन्डो प्रबन्धक तपाईंको विन्डोज संस्करणका लागि उपलब्ध छैन।
-  disabled_windows10: विन्डो प्रबन्धक विन्डोज 10 को लागि उपलब्ध छैन।
+  enable: टलिंग विन्डो प्रबन्धक सक्षम गर्नुहोस्
 weg:
   items:
     label: वस्तुहरू
@@ -200,3 +198,10 @@ open: खोल्नु
 quit: छोड्नु
 cancel: रद्द गर्नु
 save: बचाउनु
+vd:
+  strategy:
+    label: भर्चुअल डेस्कटप रणनीति
+    native: आदिवासी
+    seelen: सावधानी
+  disabled_windows_version: नेटिभ भर्चुअल डेस्कटप रणनीति तपाईंको विन्डोज संस्करणको लागि उपलब्ध छैन।
+save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'

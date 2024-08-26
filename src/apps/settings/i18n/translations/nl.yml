@@ -61,10 +61,8 @@ wm:
   description: Beschrijving
   layout: Lay -out
   workspace_padding: Workspaces -vulling
-  enable: Schakel Window Manager in
   resize_delta: Wijzig de wijzers van delta (%)
-  disabled_windows_version: De Window Manager is niet beschikbaar voor uw Windows -versie.
-  disabled_windows10: De Window Manager is niet beschikbaar voor Windows 10.
+  enable: Schakel Tiling Window Manager in
 weg:
   items:
     visible_separators: Zichtbare scheiders
@@ -201,3 +199,12 @@ inProgress: Bezig...
 loading: Bezig met laden...
 delete: Verwijderen
 cancel: Annuleren
+vd:
+  strategy:
+    native: Oorspronkelijk
+    seelen: Seelen
+    label: Virtuele desktopstrategie
+  disabled_windows_version: >-
+    Native Virtual Desktop -strategie is niet beschikbaar voor uw Windows
+    -versie.
+save_and_restart: Opslaan en opnieuw opstarten

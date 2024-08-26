@@ -62,9 +62,7 @@ wm:
   resize_delta: Endre størrelse på Delta (%)
   workspace_offset: Arbeidsområder forskyvning (marginer)
   workspace_padding: Arbeidsområder polstring
-  enable: Aktiver Window Manager
-  disabled_windows_version: Window Manager er ikke tilgjengelig for Windows -versjonen din.
-  disabled_windows10: Window Manager er ikke tilgjengelig for Windows 10.
+  enable: Aktiver flislegging av vindusleder
 weg:
   items:
     zoom_size: Zoomet størrelse (brukt til temaer)
@@ -201,3 +199,12 @@ open: Åpen
 save: Lagre
 delete: Slett
 loading: Laster ...
+vd:
+  strategy:
+    native: Innfødt
+    seelen: Seelen
+    label: Virtuell skrivebordsstrategi
+  disabled_windows_version: >-
+    Native Virtual Desktop Strategy er ikke tilgjengelig for Windows -versjonen
+    din.
+save_and_restart: Lagre og start på nytt

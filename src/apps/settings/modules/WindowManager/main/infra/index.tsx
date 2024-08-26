@@ -1,21 +1,23 @@
+import { VirtualDesktopStrategy } from '../../../../../shared/schemas/Settings';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
 import { invoke } from '@tauri-apps/api/core';
-import { ConfigProvider, Select, Switch } from 'antd';
+import { Alert, Button, ConfigProvider, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { BorderSettings } from '../../border/infra';
 
-import { newSelectors } from '../../../shared/store/app/reducer';
+import { newSelectors, RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
 
 export function WindowManagerSettings() {
   const [isWinVerSupported, setIsWinVerSupported] = useState(false);
 
+  const vdStrategy = useSelector(RootSelectors.virtualDesktopStrategy);
   const settings = useSelector(RootSelectors.windowManager);
   const layouts = useSelector(newSelectors.availableLayouts);
   const defaultLayout = useSelector(newSelectors.windowManager.defaultLayout);
@@ -26,6 +28,12 @@ export function WindowManagerSettings() {
   useEffect(() => {
     invoke<boolean>('is_virtual_desktop_supported').then(setIsWinVerSupported);
   }, []);
+
+  const onSelectVirtualDesktopStrategy = (value: VirtualDesktopStrategy) => {
+    if (value !== vdStrategy) {
+      dispatch(RootActions.setVirtualDesktopStrategy(value));
+    }
+  };
 
   const onToggleEnable = (value: boolean) => {
     dispatch(WManagerSettingsActions.setEnabled(value));
@@ -40,23 +48,43 @@ export function WindowManagerSettings() {
   return (
     <>
       {!isWinVerSupported && (
-        <SettingsGroup>
-          <div>
-            <p>{t('wm.disabled_windows_version')}</p>
-          </div>
-        </SettingsGroup>
+        <Alert
+          type="info"
+          showIcon
+          message={t('vd.disabled_windows_version')}
+          style={{ marginBottom: 10 }}
+        />
       )}
+
+      <SettingsGroup>
+        <SettingsOption>
+          <div>
+            <b>{t('vd.strategy.label')}</b>
+          </div>
+          <Button.Group>
+            <Button
+              disabled={!isWinVerSupported}
+              type={vdStrategy === VirtualDesktopStrategy.Native ? 'primary' : 'default'}
+              onClick={() => onSelectVirtualDesktopStrategy(VirtualDesktopStrategy.Native)}
+            >
+              {t('vd.strategy.native')}
+            </Button>
+            <Button
+              type={vdStrategy === VirtualDesktopStrategy.Seelen ? 'primary' : 'default'}
+              onClick={() => onSelectVirtualDesktopStrategy(VirtualDesktopStrategy.Seelen)}
+            >
+              {t('vd.strategy.seelen')}
+            </Button>
+          </Button.Group>
+        </SettingsOption>
+      </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
           <div>
             <b>{t('wm.enable')}</b>
           </div>
-          <Switch
-            checked={settings.enabled}
-            onChange={onToggleEnable}
-            disabled={!isWinVerSupported}
-          />
+          <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
       </SettingsGroup>
 

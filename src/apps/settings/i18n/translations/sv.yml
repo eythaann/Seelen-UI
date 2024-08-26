@@ -60,11 +60,9 @@ wm:
   description: Beskrivning
   resize_delta: Ändra ändra delta (%)
   workspace_padding: Arbetsytor
-  enable: Aktivera fönsterhanterare
   space_between_containers: Utrymme mellan containrar
   workspace_offset: Arbetsytor Offset (marginaler)
-  disabled_windows_version: Fönsterhanteraren är inte tillgänglig för din Windows -version.
-  disabled_windows10: Fönsterhanteraren är inte tillgänglig för Windows 10.
+  enable: Aktivera kakelfönsterhanterare
 weg:
   items:
     zoom_size: Zoomad storlek (används för teman)
@@ -201,3 +199,12 @@ inProgress: Pågående...
 open: Öppen
 cancel: Annullera
 save: Spara
+vd:
+  strategy:
+    native: Inföding
+    label: Virtuell skrivbordsstrategi
+    seelen: Seelen
+  disabled_windows_version: >-
+    Native Virtual Desktop Strategy är inte tillgänglig för din Windows
+    -version.
+save_and_restart: Spara och starta om

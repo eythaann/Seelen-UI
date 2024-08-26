@@ -56,15 +56,13 @@ wm:
     width: Širina granice
     enable: Omogućite obrub prozora
   description: Opis
-  enable: Omogući upravitelju prozora
   author: Autor
   workspace_offset: Pomak radnog prostora (margine)
   layout: Raspored
   resize_delta: Promijenite veličinu delta (%)
   space_between_containers: Prostor između spremnika
   workspace_padding: Radni prostori jastučići
-  disabled_windows_version: Upravitelj prozora nije dostupan za vašu Windows verziju.
-  disabled_windows10: Upravitelj prozora nije dostupan za Windows 10.
+  enable: Omogući upravitelj prozora za plod
 weg:
   items:
     visible_separators: Vidljivi separatori
@@ -201,3 +199,12 @@ inProgress: U nastajanju...
 save: Uštedjeti
 quit: Prestati
 open: Otvoren
+vd:
+  strategy:
+    label: Strategija virtualne radne površine
+    seelen: Izviriti
+    native: Rodni
+  disabled_windows_version: >-
+    Izvorna strategija virtualne radne površine nije dostupna za vašu Windows
+    verziju.
+save_and_restart: Spremi i ponovno pokrenite

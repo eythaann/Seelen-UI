@@ -32,3 +32,13 @@ Following Hexagonal Architecture, the `shared` folder contains utilities, schema
 ### Background Architecture
 
 The `src\background` folder does not follow a specific architecture but is based on Events Architecture.
+
+### Hierarchical Locking Order
+
+To prevent deadlocks in the application, all threads must follow the "Hierarchical Locking Order" when acquiring resources:
+
+1. **CLI**: Acquire any locks related to the command-line interface first.
+2. **DATA**: Next, acquire locks related to data access or shared data structures.
+3. **EVENT**: Finally, acquire locks related to hook or event management.
+
+This order must be respected in all threads to avoid circular wait conditions and ensure safe concurrency.

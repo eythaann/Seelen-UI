@@ -60,11 +60,9 @@ wm:
   author: ਲੇਖਕ
   space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
-  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
   layout: ਖਾਕਾ
-  disabled_windows_version: ਵਿੰਡੋ ਮੈਨੇਜਰ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
-  disabled_windows10: ਵਿੰਡੋ ਮੈਨੇਜਰ ਵਿੰਡੋਜ਼ 10 ਲਈ ਉਪਲੱਬਧ ਨਹੀਂ ਹੈ.
+  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਟਾਇਲਿੰਗ ਯੋਗ ਕਰੋ
 weg:
   items:
     label: ਇਕਾਈ
@@ -201,3 +199,10 @@ delete: ਮਿਟਾਓ
 inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
 cancel: ਰੱਦ ਕਰੋ
 quit: ਛੱਡੋ
+vd:
+  strategy:
+    label: ਵਰਚੁਅਲ ਡੈਸਕਟੌਤੀ ਰਣਨੀਤੀ
+    seelen: ਵੇਖਿਆ
+    native: ਦੇਸੀ
+  disabled_windows_version: ਦੇਸੀ ਵਰਚੁਅਲ ਡੈਸਕਟੌਪ ਰਣਨੀਤੀ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
+save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ

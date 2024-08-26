@@ -57,14 +57,12 @@ wm:
     width: Sienos plotis
   space_between_containers: Tarpas tarp konteinerių
   description: apibūdinimas
-  enable: Įgalinkite lango tvarkyklę
   resize_delta: Pakeisti deltos dydį (%)
   layout: Išdėstymas
   author: Autorius
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas
-  disabled_windows_version: „Windows Manager“ nėra jūsų „Windows“ versijai.
-  disabled_windows10: „Windows Manager“ nėra „Windows 10“.
+  enable: Įgalinkite plytelių langų tvarkyklę
 weg:
   items:
     size: Prekės dydis
@@ -199,3 +197,10 @@ inProgress: Vyksta ...
 quit: Mesti
 loading: Pakrovimas ...
 cancel: Atšaukti
+vd:
+  strategy:
+    seelen: Seelenas
+    native: Gimtoji
+    label: Virtuali darbalaukio strategija
+  disabled_windows_version: Natūralios virtualios darbalaukio strategijos nėra jūsų „Windows“ versijai.
+save_and_restart: Išsaugokite ir paleiskite iš naujo

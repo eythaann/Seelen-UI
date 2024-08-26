@@ -57,13 +57,11 @@ wm:
   description: تفصیل
   resize_delta: د ډیلټا (٪) ریموټ کړئ
   workspace_offset: د کاري ځای ځایونه (مارجینز)
-  enable: د کړکۍ مدیر ته وړ کړئ
   workspace_padding: د کارډا ریسس
   space_between_containers: د کانتینرونو ترمینځ ځای
   author: لیکوال
   layout: ترتیب
-  disabled_windows_version: د کړکۍ مدیر ستاسو د وینډوز نسخه لپاره شتون نلري.
-  disabled_windows10: د کړکۍ مدیر د وینډوز 10 لپاره شتون نلري.
+  enable: د ټی بایټس کړکۍ مدیر فعال کړئ
 weg:
   items:
     size: د توکي اندازه
@@ -198,3 +196,10 @@ cancel: لغوه کول
 loading: بارول ...
 save: خوندي کړئ
 open: خلاص
+vd:
+  strategy:
+    seelen: تلل
+    label: مجازی ډیسټاپ ستراتیژي
+    native: اصلي
+  disabled_windows_version: اصلي مجازی ډیسک ډیسک ستراتیژي ستاسو د وینډوز نسخه لپاره شتون نلري.
+save_and_restart: خوندي کول او بیا پیل کړئ

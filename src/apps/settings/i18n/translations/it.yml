@@ -59,12 +59,10 @@ wm:
   description: Descrizione
   author: Autrice
   resize_delta: Ridimensiona Delta (%)
-  enable: Abilita il gestore delle finestre
   space_between_containers: Spazio tra contenitori
   workspace_offset: Offset degli spazi di lavoro (margini)
   workspace_padding: Padding degli spazi di lavoro
-  disabled_windows_version: Il gestore Windows non è disponibile per la versione di Windows.
-  disabled_windows10: Il gestore delle finestre non è disponibile per Windows 10.
+  enable: Abilita il gestore delle finestre di piastrellatura
 weg:
   items:
     label: Elementi
@@ -201,3 +199,12 @@ quit: Esentata
 save: Salva
 loading: Caricamento...
 cancel: Annulla
+vd:
+  strategy:
+    seelen: Seelen
+    native: Nativa
+    label: Strategia desktop virtuale
+  disabled_windows_version: >-
+    La strategia desktop virtuale nativa non è disponibile per la versione di
+    Windows.
+save_and_restart: Salva e riavvia

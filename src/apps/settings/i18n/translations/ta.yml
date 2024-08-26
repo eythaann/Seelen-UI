@@ -60,11 +60,9 @@ wm:
   space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி
   workspace_padding: பணியிடங்கள் திணிப்பு
   resize_delta: டெல்டாவின் அளவை மாற்று (%)
-  enable: சாளர மேலாளரை இயக்கு
   workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
   layout: தளவமைப்பு
-  disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சாளர மேலாளர் கிடைக்கவில்லை.
-  disabled_windows10: விண்டோஸ் 10 க்கு சாளர மேலாளர் கிடைக்கவில்லை.
+  enable: டைலிங் சாளர மேலாளரை இயக்கவும்
 weg:
   items:
     label: பொருட்களை
@@ -201,3 +199,10 @@ delete: அழி
 loading: ஏற்றுகிறது...
 save: சேமிக்கவும்
 open: திற
+vd:
+  strategy:
+    native: பூர்வீகம்
+    seelen: சைலர்
+    label: மெய்நிகர் டெஸ்க்டாப் உத்தி
+  disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சொந்த மெய்நிகர் டெஸ்க்டாப் உத்தி கிடைக்கவில்லை.
+save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்

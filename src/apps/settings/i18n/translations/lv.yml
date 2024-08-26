@@ -57,14 +57,12 @@ wm:
     width: Apmales platums
   space_between_containers: Telpa starp konteineriem
   author: Autors
-  enable: Iespējot logu pārvaldnieku
   resize_delta: Delta izmēra maiņa (%)
   workspace_offset: Darbvietu kompensācija (malas)
   layout: Izkārtojums
   workspace_padding: Darbvietas polsterējums
   description: Apraksts
-  disabled_windows_version: Logu pārvaldnieks nav pieejams jūsu Windows versijai.
-  disabled_windows10: Logu pārvaldnieks nav pieejams operētājsistēmai Windows 10.
+  enable: Iespējot flīzēšanas logu pārvaldnieku
 weg:
   items:
     visible_separators: Redzami atdalītāji
@@ -199,3 +197,10 @@ quit: Atmest
 inProgress: Notiek ...
 open: Atvērt
 save: Ietaupīt
+vd:
+  strategy:
+    label: Virtuālā darbvirsmas stratēģija
+    seelen: Seelēna
+    native: Vietējais
+  disabled_windows_version: Vietējā virtuālā darbvirsmas stratēģija nav pieejama jūsu Windows versijai.
+save_and_restart: Saglabāt un restartēt

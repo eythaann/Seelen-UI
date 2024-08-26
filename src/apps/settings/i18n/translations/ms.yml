@@ -55,7 +55,6 @@ wm:
     enable: Dayakan sempadan tetingkap
     offset: Mengimbangi sempadan
     width: Lebar sempadan
-  enable: Dayakan Pengurus Tetingkap
   layout: Susun atur
   description: Penerangan
   space_between_containers: Ruang antara bekas
@@ -63,8 +62,7 @@ wm:
   resize_delta: Saiz semula delta (%)
   author: Pengarang
   workspace_padding: Padding ruang kerja
-  disabled_windows_version: Pengurus Window tidak tersedia untuk versi Windows anda.
-  disabled_windows10: Pengurus Window tidak tersedia untuk Windows 10.
+  enable: Dayakan pengurus tetingkap jubin
 weg:
   items:
     zoom_size: Saiz zum (digunakan untuk tema)
@@ -201,3 +199,10 @@ cancel: Batalkan
 delete: Padam
 inProgress: Dalam proses ...
 loading: Memuatkan ...
+vd:
+  strategy:
+    native: Asli
+    seelen: Seelen
+    label: Strategi Desktop Maya
+  disabled_windows_version: Strategi desktop maya asli tidak tersedia untuk versi Windows anda.
+save_and_restart: Jimat & mulakan semula

@@ -60,11 +60,9 @@ wm:
   description: Tanım
   workspace_padding: Çalışma alanları dolgu
   resize_delta: Yeniden boyutlandırma delta (%)
-  enable: Pencere Yöneticisini Etkinleştir
   space_between_containers: Konteynerler arasındaki boşluk
   workspace_offset: Çalışma alanları ofseti (kenar boşlukları)
-  disabled_windows_version: Pencere yöneticisi Windows sürümünüz için mevcut değildir.
-  disabled_windows10: Pencere yöneticisi Windows 10 için mevcut değildir.
+  enable: Founding Pencere Yöneticisini Etkinleştir
 weg:
   items:
     label: Öğeler
@@ -201,3 +199,10 @@ quit: Çıkış yapmak
 save: Kaydetmek
 delete: Silmek
 open: Açık
+vd:
+  strategy:
+    native: Yerli
+    seelen: Seelen
+    label: Sanal masaüstü stratejisi
+  disabled_windows_version: Windows sürümünüz için yerel sanal masaüstü stratejisi mevcut değildir.
+save_and_restart: Kaydet ve Yeniden Başlat

@@ -24,19 +24,27 @@ lazy_static! {
 
 pub struct AutoHotKey {
     inner: String,
+    name: Option<String>,
 }
 
 impl AutoHotKey {
     pub fn new(contents: &str) -> Self {
         Self {
+            name: None,
             inner: contents.to_string(),
         }
     }
 
     pub fn from_template(template: &str, vars: HashMap<String, AhkVar>) -> Self {
         Self {
+            name: None,
             inner: Self::replace_variables(template.to_string(), vars),
         }
+    }
+
+    pub fn name(mut self, name: &str) -> Self {
+        self.name = Some(name.to_string());
+        self
     }
 
     pub fn with_lib(mut self) -> Self {
@@ -47,7 +55,12 @@ impl AutoHotKey {
     }
 
     pub fn save(&self) -> Result<PathBuf> {
-        let script_path = temp_dir().join(format!("slu-{}.ahk", uuid::Uuid::new_v4()));
+        let script_path = if let Some(name) = &self.name {
+            let handle = get_app_handle();
+            handle.path().app_local_data_dir()?.join(name)
+        } else {
+            temp_dir().join(format!("slu-{}.ahk", uuid::Uuid::new_v4()))
+        };
         std::fs::write(&script_path, &self.inner)?;
         Ok(script_path)
     }

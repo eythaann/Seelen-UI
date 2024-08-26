@@ -60,11 +60,9 @@ wm:
   resize_delta: Změna velikosti delta (%)
   workspace_offset: Workspaces Offset (marže)
   layout: Rozložení
-  enable: Povolit správce oken
   space_between_containers: Prostor mezi kontejnery
   workspace_padding: Polstrování pracovních prostorů
-  disabled_windows_version: Správce oken není k dispozici pro vaši verzi Windows.
-  disabled_windows10: Správce oken není k dispozici pro Windows 10.
+  enable: Povolit správce oken obkladu
 weg:
   items:
     zoom_size: Zvětšená velikost (použitá pro témata)
@@ -199,3 +197,12 @@ quit: Přestat
 save: Uložit
 open: OTEVŘENO
 inProgress: Probíhá ...
+vd:
+  strategy:
+    native: Rodák
+    seelen: Seelen
+    label: Virtuální strategie stolních počítačů
+  disabled_windows_version: >-
+    Nativní strategie virtuálních stolních počítačů není pro vaši verzi Windows
+    k dispozici.
+save_and_restart: Uložit a restartovat

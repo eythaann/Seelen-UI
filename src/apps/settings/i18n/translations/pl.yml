@@ -59,12 +59,10 @@ wm:
   layout: Układ
   description: Opis
   space_between_containers: Przestrzeń między pojemnikami
-  enable: Włącz menedżer okien
   workspace_padding: Wypadki przestrzeni roboczej
   resize_delta: Zmień rozmiar Delta (%)
   workspace_offset: Przestrzenie robocze przesunięte (marginesy)
-  disabled_windows_version: Menedżer Windows nie jest dostępny dla wersji Windows.
-  disabled_windows10: Menedżer okien nie jest dostępny dla systemu Windows 10.
+  enable: Włącz menedżer okien kafelków
 weg:
   items:
     label: Rzeczy
@@ -199,3 +197,12 @@ delete: Usuwać
 cancel: Anulować
 save: Ratować
 open: otwarty
+vd:
+  strategy:
+    native: Rodzinny
+    seelen: Seelen
+    label: Strategia wirtualnego komputera stacjonarnego
+  disabled_windows_version: >-
+    Native Virtual Desktop Strategy nie jest dostępna dla wersji systemu
+    Windows.
+save_and_restart: Zapisz i uruchom ponownie

@@ -62,9 +62,7 @@ wm:
   layout: Uitleg
   workspace_offset: Werkruimtes offset (marges)
   workspace_padding: Werkruimtes opvulling
-  enable: Aktiveer vensterbestuurder
-  disabled_windows_version: Die vensterbestuurder is nie beskikbaar vir u Windows -weergawe nie.
-  disabled_windows10: Die vensterbestuurder is nie beskikbaar vir Windows 10 nie.
+  enable: Aktiveer teëlvensterbestuurder
 weg:
   items:
     visible_separators: Sigbare skeiers
@@ -201,3 +199,12 @@ cancel: Kanselleer
 inProgress: Aan die gang ...
 quit: Laat vaar
 delete: Verwyder
+vd:
+  strategy:
+    seelen: Seelen
+    label: Virtuele tafelrekenaarstrategie
+    native: Inheems
+  disabled_windows_version: >-
+    Inheemse virtuele tafelrekenaarstrategie is nie beskikbaar vir u Windows
+    -weergawe nie.
+save_and_restart: Stoor en herbegin

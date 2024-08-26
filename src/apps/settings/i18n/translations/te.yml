@@ -59,12 +59,10 @@ wm:
   author: రచయిత
   description: వివరణ
   space_between_containers: కంటైనర్ల మధ్య ఖాళీ
-  enable: విండో మేనేజర్‌ని ప్రారంభించండి
   workspace_padding: కార్యస్థలాల పాడింగ్
   workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)
   resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
-  disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం విండో మేనేజర్ అందుబాటులో లేదు.
-  disabled_windows10: విండోస్ 10 కి విండో మేనేజర్ అందుబాటులో లేదు.
+  enable: టైలింగ్ విండో మేనేజర్‌ను ప్రారంభించండి
 weg:
   items:
     label: వస్తువులు
@@ -201,3 +199,10 @@ save: సేవ్ చేయండి
 cancel: రద్దు చేయండి
 quit: నిష్క్రమించు
 inProgress: పురోగతిలో ఉంది...
+vd:
+  strategy:
+    label: వర్చువల్ డెస్క్‌టాప్ వ్యూహం
+    native: స్థానిక
+    seelen: సీలెన్
+  disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం స్థానిక వర్చువల్ డెస్క్‌టాప్ వ్యూహం అందుబాటులో లేదు.
+save_and_restart: సేవ్ & పున art ప్రారంభించండి

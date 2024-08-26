@@ -1,7 +1,6 @@
 import { setColorsAsCssVariables } from '../../../../shared';
 import { FileChange } from '../../../../shared/events';
-import { parseAsCamel } from '../../../../shared/schemas';
-import { SettingsSchema } from '../../../../shared/schemas/Settings';
+import { ISettings } from '../../../../shared/schemas/Settings';
 import { Theme } from '../../../../shared/schemas/Theme';
 import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
@@ -48,7 +47,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setAppsConfigurations(event.payload));
   });
 
-  await listenGlobal<any>(FileChange.Settings, (event) => {
+  await listenGlobal<ISettings>(FileChange.Settings, (event) => {
     if (IsSavingSettings.current) {
       IsSavingSettings.current = false;
       return;
@@ -56,8 +55,9 @@ export async function registerStoreEvents() {
     const currentState = store.getState();
     const newState: RootState = {
       ...currentState,
-      ...parseAsCamel(SettingsSchema, event.payload),
+      ...event.payload,
       toBeSaved: false,
+      toBeRestarted: false,
     };
     store.dispatch(RootActions.setState(newState));
   });

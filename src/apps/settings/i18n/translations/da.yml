@@ -59,12 +59,10 @@ wm:
   description: Beskrivelse
   resize_delta: Ændre størrelse på Delta (%)
   layout: Layout
-  enable: Aktivér vindueadministrator
   space_between_containers: Rum mellem containere
   workspace_padding: Arbejdsområder polstring
   workspace_offset: Arbejdsområder offset (marginer)
-  disabled_windows_version: Window Manager er ikke tilgængelig til din Windows -version.
-  disabled_windows10: Window Manager er ikke tilgængelig til Windows 10.
+  enable: Aktivér flisevindue manager
 weg:
   items:
     label: Genstande
@@ -201,3 +199,12 @@ quit: Afslut
 save: Gemme
 loading: Indlæser...
 cancel: Afbestille
+vd:
+  strategy:
+    native: Hjemmehørende
+    label: Virtuel desktopstrategi
+    seelen: Seelen
+  disabled_windows_version: >-
+    Native Virtual Desktop Strategy er ikke tilgængelig til din Windows
+    -version.
+save_and_restart: Gem & genstart

@@ -56,15 +56,13 @@ wm:
     offset: Chegara ofset
     enable: Oynaning chegarasini yoqing
   description: Tavsif
-  enable: Oyna boshqaruvchisini yoqish
   space_between_containers: Idishlar orasidagi bo'shliq
   workspace_offset: Ishxonalar ofset (marjalar)
   author: Muallif
   layout: Tartib
   resize_delta: Delta (%) ni o'zgartiring
   workspace_padding: Ish plakding
-  disabled_windows_version: Windows versiyangiz uchun deraza menejeri mavjud emas.
-  disabled_windows10: Windows 10 uchun deraza menejeri mavjud emas.
+  enable: Tiling oyna boshqaruvchisini yoqing
 weg:
   items:
     gap: Buyumlar orasidagi bo'shliq
@@ -201,3 +199,12 @@ loading: Yuklash ...
 cancel: Bekor qilmoq
 delete: O'chirmoq
 quit: Ketmoq
+vd:
+  strategy:
+    label: Virtual ish stoli strategiyasi
+    native: Mahalliy
+    seelen: Seelen
+  disabled_windows_version: >-
+    National Virtual ish strategiya strategiyasi Windows versiyangiz uchun
+    mavjud emas.
+save_and_restart: Saqlang va qayta yoqing

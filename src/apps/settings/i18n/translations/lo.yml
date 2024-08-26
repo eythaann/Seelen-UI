@@ -61,11 +61,9 @@ wm:
   layout: ແຜນຜັງ
   resize_delta: ປັບຂະໜາດ Delta (%)
   space_between_containers: ຊ່ອງຫວ່າງລະຫວ່າງບັນຈຸ
-  enable: ເປີດໃຊ້ Window Manager
   workspace_padding: ພື້ນທີ່ເຮັດວຽກ Padding
   workspace_offset: ພື້ນທີ່ເຮັດວຽກຊົດເຊີຍ (ຂອບ)
-  disabled_windows_version: ຜູ້ຈັດການປ່ອງຢ້ຽມບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບລຸ້ນ Windows ຂອງທ່ານ.
-  disabled_windows10: ຜູ້ຈັດການປ່ອງຢ້ຽມບໍ່ສາມາດໃຊ້ໄດ້ສໍາລັບ Windows 10.
+  enable: ເປີດໃຊ້ຜູ້ຈັດການປ່ອງຢ້ຽມກະເບື້ອງ
 weg:
   items:
     label: ລາຍການ
@@ -200,3 +198,10 @@ quit: ເຊົາ
 save: ບັນທຶກ
 inProgress: ຢູ່ໃນຄວາມຄືບໜ້າ...
 open: ເປີດ
+vd:
+  strategy:
+    seelen: ຊ່າງຕັດ
+    label: ຍຸດຍຸດທະສາດຂອງ desktop virtual
+    native: ຄົນພື້ນເມືອງ
+  disabled_windows_version: ກົນລະຍຸດ virtual virtual ພື້ນເມືອງແມ່ນບໍ່ມີສໍາລັບ Windows ຂອງທ່ານ.
+save_and_restart: ບັນທຶກແລະ Restart

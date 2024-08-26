@@ -23,6 +23,7 @@ export interface RootState extends ISettings {
   lastLoaded: this | null;
   route: Route;
   toBeSaved: boolean;
+  toBeRestarted: boolean;
   appsConfigurations: AppConfiguration[];
   availableThemes: Theme[];
   availableLayouts: Layout[];

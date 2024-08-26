@@ -24,7 +24,7 @@ const initialState: RootState = {
   },
   batteries: [],
   workspaces: [],
-  activeWorkspace: 0,
+  activeWorkspace: null,
   systemTray: [],
   networkAdapters: [],
   networkLocalIp: null,

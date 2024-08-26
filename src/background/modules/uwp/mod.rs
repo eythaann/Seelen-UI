@@ -10,6 +10,7 @@ use tauri::Manager;
 use crate::{
     error_handler::Result,
     seelen::get_app_handle,
+    trace_lock,
     utils::{pwsh::PwshScript, PERFORMANCE_HELPER},
 };
 
@@ -160,14 +161,14 @@ impl WindowsAppsManager {
 
     pub fn refresh(&mut self) -> Result<()> {
         log::trace!("Loading UWP packages");
-        PERFORMANCE_HELPER.lock().start("uwp");
+        trace_lock!(PERFORMANCE_HELPER).start("uwp");
         let script = PwshScript::new(include_str!("load_uwp_apps.ps1"));
         let contents = tauri::async_runtime::block_on(script.execute())?;
         self.packages = serde_json::from_str(&contents)?;
         std::fs::write(Self::get_save_path()?, &contents)?;
         log::trace!(
             "UWP packages loaded in: {:.2}s",
-            PERFORMANCE_HELPER.lock().elapsed("uwp").as_secs_f64()
+            trace_lock!(PERFORMANCE_HELPER).elapsed("uwp").as_secs_f64()
         );
         Ok(())
     }

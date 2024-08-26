@@ -7,6 +7,7 @@ use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
 use crate::modules::input::Keyboard;
+use crate::modules::virtual_desk::get_vd_manager;
 use crate::seelen::{get_app_handle, Seelen, SEELEN};
 use crate::seelen_weg::handler::*;
 use crate::seelen_weg::icon_extractor::extract_and_save_icon;
@@ -88,8 +89,8 @@ async fn get_auto_start_status() -> Result<bool> {
 }
 
 #[tauri::command(async)]
-fn switch_workspace(idx: u32) {
-    std::thread::spawn(move || winvd::switch_desktop(idx));
+fn switch_workspace(idx: usize) -> Result<()> {
+    get_vd_manager().switch_to(idx)
 }
 
 #[tauri::command(async)]

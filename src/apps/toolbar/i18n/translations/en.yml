@@ -29,8 +29,8 @@ placeholder:
   ethernet_connected: Internet access
   ethernet_disconnected: No internet access
   volume: Volume
-  battery_remaining: "% remaining"
-  smart_charge: " - Smart Charge"
+  battery_remaining: '% remaining'
+  smart_charge: ' - Smart Charge'
   settings: Quick Settings
   notifications: Notifications
 unlabelled_tray: Unlabelled Tray Icon

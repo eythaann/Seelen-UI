@@ -68,6 +68,11 @@ export const AhkVariablesSchema = z.object({
   send_to_workspace_9: AhkVarSchema.default({ fancy: 'Win + Shift + 0', ahk: '#+0' }),
 });
 
+export enum VirtualDesktopStrategy {
+  Native = 'Native',
+  Seelen = 'Seelen',
+}
+
 export const SettingsSchema = z.object({
   fancy_toolbar: FancyToolbarSchema.default({}),
   seelenweg: SeelenWegSchema.default({}),
@@ -89,12 +94,18 @@ export const SettingsSchema = z.object({
     })
     .default(['default']),
   dev_tools: z.boolean().default(false),
-  language: z.string().nullable().default(() => {
-    if (globalThis.navigator) {
-      return globalThis.navigator.language.split('-')[0] || 'en';
-    }
-    return 'en';
-  }),
+  language: z
+    .string()
+    .nullable()
+    .default(() => {
+      if (globalThis.navigator) {
+        return globalThis.navigator.language.split('-')[0] || 'en';
+      }
+      return 'en';
+    }),
+  virtual_desktop_strategy: z
+    .nativeEnum(VirtualDesktopStrategy)
+    .default(VirtualDesktopStrategy.Native),
 });
 
 export interface ISettings {
@@ -107,4 +118,5 @@ export interface ISettings {
   selectedTheme: string[];
   devTools: boolean;
   language: string;
+  virtualDesktopStrategy: VirtualDesktopStrategy;
 }

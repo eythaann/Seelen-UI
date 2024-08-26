@@ -25,8 +25,6 @@ impl FullState {
     }
 
     pub fn get_ahk_variables(&self) -> HashMap<String, AhkVar> {
-        let json_value = serde_json::to_value(&self.settings().ahk_variables)
-            .expect("Failed to serialize AHK variables");
-        serde_json::from_value(json_value).expect("Failed to deserialize AHK variables")
+        self.settings().ahk_variables.as_hash_map()
     }
 }

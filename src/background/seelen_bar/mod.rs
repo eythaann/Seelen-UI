@@ -4,11 +4,13 @@ pub mod hook;
 use crate::{
     error_handler::Result,
     log_error,
+    modules::virtual_desk::get_vd_manager,
     seelen::get_app_handle,
     state::application::FULL_STATE,
-    utils::{are_overlaped, is_virtual_desktop_supported},
+    utils::are_overlaped,
     windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
+use itertools::Itertools;
 use seelen_core::state::HideMode;
 use serde::Serialize;
 use tauri::{Emitter, Listener, Manager, WebviewWindow};
@@ -253,25 +255,17 @@ impl FancyToolbar {
 
     fn on_store_events_ready(_: tauri::Event) {
         // TODO refactor this implementation
-        if is_virtual_desktop_supported() {
-            std::thread::spawn(|| -> Result<()> {
-                let handler = get_app_handle();
-                let desktops = winvd::get_desktops()?;
-                let current_desktop = winvd::get_current_desktop()?;
-
-                let mut desktops_names = Vec::new();
-                for (i, d) in desktops.iter().enumerate() {
-                    if let Ok(name) = d.get_name() {
-                        desktops_names.push(name);
-                    } else {
-                        desktops_names.push(format!("Desktop {}", i + 1))
-                    }
-                }
-
-                handler.emit("workspaces-changed", desktops_names)?;
-                handler.emit("active-workspace-changed", current_desktop.get_index()?)?;
-                Ok(())
-            });
-        }
+        std::thread::spawn(|| -> Result<()> {
+            let handler = get_app_handle();
+            let vd = get_vd_manager();
+            let desktops = vd
+                .get_all()?
+                .iter()
+                .map(|d| d.as_serializable())
+                .collect_vec();
+            handler.emit("workspaces-changed", &desktops)?;
+            handler.emit("active-workspace-changed", vd.get_current()?.id())?;
+            Ok(())
+        });
     }
 }

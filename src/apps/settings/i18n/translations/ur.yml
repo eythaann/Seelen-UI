@@ -25,7 +25,7 @@ general:
   theme:
     enabled: قابل تھیمز
     author: مصنف
-    add:  شامل کریں
+    add: شامل کریں
     label: معلومات
     tags: ٹیگز
     added: تھیم پہلے ہی شامل کیا گیا ہے
@@ -37,7 +37,7 @@ general:
   startup: اسٹارٹ اپ پر چلائیں؟
   icon_pack:
     label: آئیکن پیک
-  accent_color:  رنگ
+  accent_color: رنگ
   wallpaper:
     select: وال پیپر منتخب کریں
 toolbar:
@@ -60,10 +60,8 @@ wm:
   space_between_containers: کنٹینرز کے درمیان جگہ
   resize_delta: ڈیلٹا کا سائز (٪)
   author: مصنف
-  enable: ونڈو مینیجر کو فعال کریں
   workspace_padding: ورک اسپیس پیڈنگ
-  disabled_windows_version: ونڈو مینیجر آپ کے ونڈوز ورژن کے لئے دستیاب نہیں ہے۔
-  disabled_windows10: ونڈو مینیجر ونڈوز 10 کے لئے دستیاب نہیں ہے۔
+  enable: ٹائلنگ ونڈو مینیجر کو فعال کریں
 weg:
   items:
     label: اشیاء
@@ -200,3 +198,10 @@ quit: چھوڑ دیں
 loading: لوڈنگ ...
 cancel: منسوخ کریں
 open: کھلا
+vd:
+  strategy:
+    seelen: سیلین
+    label: ورچوئل ڈیسک ٹاپ حکمت عملی
+    native: آبائی
+  disabled_windows_version: آپ کے ونڈوز ورژن کے لئے دیسی ورچوئل ڈیسک ٹاپ حکمت عملی دستیاب نہیں ہے۔
+save_and_restart: محفوظ کریں اور دوبارہ شروع کریں

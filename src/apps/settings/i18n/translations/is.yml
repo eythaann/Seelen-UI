@@ -61,10 +61,8 @@ wm:
   space_between_containers: Rými milli gáma
   resize_delta: Breyta stærð delta (%)
   author: Höfundur
-  enable: Virkja gluggastjóra
   workspace_padding: Vinnusvæði padding
-  disabled_windows_version: Window Manager er ekki fáanlegur fyrir Windows útgáfuna þína.
-  disabled_windows10: Gluggastjórinn er ekki í boði fyrir Windows 10.
+  enable: Virkja flísagluggastjóra
 weg:
   items:
     label: Hlutir
@@ -199,3 +197,10 @@ quit: Hættu
 open: Opið
 save: Vista
 cancel: Hætta við
+vd:
+  strategy:
+    label: Sýndarborðsstefna
+    native: Innfæddur
+    seelen: Seelen
+  disabled_windows_version: Native Virtual Desktop Strategy er ekki í boði fyrir Windows útgáfuna þína.
+save_and_restart: Vista og endurræsa

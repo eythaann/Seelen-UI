@@ -18,12 +18,12 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
+    modules::virtual_desk::get_vd_manager,
     seelen::{get_app_handle, SEELEN},
     seelen_bar::FancyToolbar,
     seelen_weg::SeelenWeg,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
-    utils::virtual_desktop::VirtualDesktopManager,
     windows_api::WindowsApi,
 };
 
@@ -69,7 +69,7 @@ impl WindowManager {
             window: Self::create_window(&handle, monitor)?,
             monitor: HMONITOR(monitor),
             apps: Vec::new(),
-            current_virtual_desktop: VirtualDesktopManager::get_current_virtual_desktop()?.id(),
+            current_virtual_desktop: get_vd_manager().get_current()?.id(),
             paused: true, // paused until complete-setup is called
             ready: false,
         })
@@ -143,7 +143,7 @@ impl WindowManager {
         }
 
         let desktop_to_add = if WindowsApi::is_cloaked(hwnd)? {
-            VirtualDesktopManager::get_by_window(hwnd)?.id()
+            get_vd_manager().get_by_window(hwnd.0)?.id()
         } else {
             self.current_virtual_desktop.clone()
         };
@@ -183,7 +183,7 @@ impl WindowManager {
                 None => return Ok(()),
             };
 
-            let current_desktop = VirtualDesktopManager::get_by_window(HWND(app.hwnd))?.id();
+            let current_desktop = get_vd_manager().get_by_window(app.hwnd)?.id();
             if app.desktop_id != current_desktop {
                 app.desktop_id = current_desktop;
             }
@@ -255,18 +255,22 @@ impl WindowManager {
 
 // UTILS AND STATICS
 impl WindowManager {
-    pub fn should_be_managed(hwnd: HWND) -> bool {
+    fn should_be_managed(hwnd: HWND) -> bool {
         if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-            return config.options.contains(&AppExtraFlag::Force) || {
-                !config.options.contains(&AppExtraFlag::Unmanage)
-                    && !config.options.contains(&AppExtraFlag::Pinned)
-                    && Self::is_manageable_window(hwnd, false)
-            };
+            if config.options.contains(&AppExtraFlag::Force) {
+                return true;
+            }
+
+            if config.options.contains(&AppExtraFlag::Unmanage)
+                || config.options.contains(&AppExtraFlag::Pinned)
+            {
+                return false;
+            }
         }
-        Self::is_manageable_window(hwnd, false)
+        Self::is_manageable_window(hwnd)
     }
 
-    pub fn is_manageable_window(hwnd: HWND, ignore_cloaked: bool) -> bool {
+    pub fn is_manageable_window(hwnd: HWND) -> bool {
         let exe = WindowsApi::exe(hwnd);
 
         if let Ok(exe) = &exe {
@@ -281,7 +285,7 @@ impl WindowManager {
         // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
         && !WindowsApi::is_iconic(hwnd)
-        && (ignore_cloaked || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
+        && (get_vd_manager().uses_cloak() || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
     }
 
     fn create_window(handle: &AppHandle<Wry>, monitor_id: isize) -> Result<WebviewWindow> {
@@ -329,7 +333,7 @@ impl WindowManager {
 
     unsafe extern "system" fn get_next_by_order_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
         // TODO search a way to handle ApplicationFrameHost.exe as well on change of virtual desktop
-        if WindowManager::is_manageable_window(hwnd, false)
+        if WindowManager::is_manageable_window(hwnd)
             && hwnd.0 != lparam.0
             && !WindowsApi::exe(hwnd).is_ok_and(|exe| &exe == "ApplicationFrameHost.exe")
         {

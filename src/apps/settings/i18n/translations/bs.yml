@@ -57,14 +57,12 @@ wm:
     offset: Offset granice
   description: Opis
   author: Autor
-  enable: Omogućite menadžeru prozora
   layout: Izgled
   workspace_offset: Offset radne prostore (margine)
   resize_delta: Promijenite veličinu Delta (%)
   space_between_containers: Prostor između kontejnera
   workspace_padding: Djelatna površina obloga
-  disabled_windows_version: Upravitelj prozora nije dostupan za vašu Windows verziju.
-  disabled_windows10: Upravitelj prozora nije dostupan za Windows 10.
+  enable: Omogući oblaganje menadžera prozora
 weg:
   items:
     gap: Prostor između predmeta
@@ -201,3 +199,10 @@ delete: Izbrisati
 save: Sačuvati
 quit: Prestati
 open: Otvoren
+vd:
+  strategy:
+    label: Virtualna strategija radne površine
+    native: Rođen
+    seelen: Seelen
+  disabled_windows_version: Native virtualna radna površina nije dostupna za vašu verziju za Windows.
+save_and_restart: Spremi i ponovno pokretanje

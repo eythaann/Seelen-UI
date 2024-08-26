@@ -58,13 +58,11 @@ wm:
   space_between_containers: Ruang antar wadah
   description: Keterangan
   layout: Tata letak
-  enable: Aktifkan Window Manager
   resize_delta: Ubah Ubah Delta (%)
   author: Pengarang
   workspace_offset: Offset ruang kerja (margin)
   workspace_padding: Padding ruang kerja
-  disabled_windows_version: Window Manager tidak tersedia untuk versi Windows Anda.
-  disabled_windows10: Window Manager tidak tersedia untuk Windows 10.
+  enable: Aktifkan Manajer Jendela Ubin
 weg:
   items:
     size: Ukuran item
@@ -201,3 +199,10 @@ inProgress: Sedang berlangsung...
 quit: Berhenti
 delete: Menghapus
 loading: Memuat...
+vd:
+  strategy:
+    native: Warga asli
+    seelen: Seelen
+    label: Strategi desktop virtual
+  disabled_windows_version: Strategi desktop virtual asli tidak tersedia untuk versi Windows Anda.
+save_and_restart: Simpan & restart

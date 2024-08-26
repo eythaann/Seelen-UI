@@ -59,11 +59,9 @@ wm:
   layout: Rêz
   workspace_offset: Karûbarên Workspan (Margins)
   space_between_containers: Cîhê di navbera konteyneran de
-  enable: Gerînendeyê Windeyê çalak bike
   workspace_padding: Karên xebitandinê
   resize_delta: Delta Resize (%)
-  disabled_windows_version: Rêvebirê pencereyê ji bo guhertoya weya Windows-ê nabe.
-  disabled_windows10: Rêvebirê pencereyê ji bo Windows 10-ê nabe.
+  enable: Gerînendeyê Windowê ya Tilî bikar bînin
 weg:
   items:
     size: Mezinahiya tiştê
@@ -200,3 +198,10 @@ open: Vekirî
 save: Rizgarkirin
 delete: Lûleêkirin
 loading: Loading ...
+vd:
+  strategy:
+    native: Welatî
+    seelen: Seelen
+    label: Stratejiya Desktop Virtual
+  disabled_windows_version: Stratejiya Desktop ya Native ya Native ji bo guhertoya weya Windows-ê nabe.
+save_and_restart: Save & Restart

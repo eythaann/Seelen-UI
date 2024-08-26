@@ -59,7 +59,6 @@ toolbar:
   auto_hide: Автомальная шкура
   label: Панель инструментов
 wm:
-  enable: Включить диспетчер окон
   layout: Макет
   author: Автор
   description: Описание
@@ -71,8 +70,7 @@ wm:
     enable: Включить границу окна
     width: Ширина рамки
     offset: Смещение границы
-  disabled_windows_version: Window Manager недоступен для вашей версии Windows.
-  disabled_windows10: Диспетчер окон не доступен для Windows 10.
+  enable: Включить менеджер по плитке окна
 weg:
   label: Док/Панель задач
   enable: Включить док/панель задач
@@ -202,3 +200,12 @@ shortcuts:
     send_to_workspace_7: Отправить в рабочую область 7
     send_to_workspace_8: Отправить в рабочую область 8
     send_to_workspace_9: Отправить в рабочую область 9
+vd:
+  strategy:
+    native: Родной
+    seelen: Сиэлен
+    label: Виртуальная стратегия рабочего стола
+  disabled_windows_version: >-
+    Нативная стратегия виртуального рабочего стола недоступна для вашей версии
+    Windows.
+save_and_restart: Сохранить и перезапустить

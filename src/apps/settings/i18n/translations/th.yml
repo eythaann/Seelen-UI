@@ -60,10 +60,8 @@ wm:
   space_between_containers: ช่องว่างระหว่างภาชนะบรรจุ
   layout: เค้าโครง
   resize_delta: ปรับขนาดเดลต้า (%)
-  enable: เปิดใช้งาน Manager Window
   workspace_padding: ช่องว่างพื้นที่ทำงาน
-  disabled_windows_version: ตัวจัดการหน้าต่างไม่สามารถใช้งานได้สำหรับเวอร์ชัน Windows ของคุณ
-  disabled_windows10: ตัวจัดการหน้าต่างไม่สามารถใช้ได้สำหรับ Windows 10
+  enable: เปิดใช้งานตัวจัดการหน้าต่างปูกระเบื้อง
 weg:
   items:
     size: ขนาดรายการ
@@ -197,3 +195,10 @@ save: บันทึก
 quit: ล้มเลิก
 open: เปิด
 loading: กำลังโหลด ...
+vd:
+  strategy:
+    native: พื้นเมือง
+    seelen: เซเล่น
+    label: กลยุทธ์เดสก์ท็อปเสมือนจริง
+  disabled_windows_version: กลยุทธ์เดสก์ท็อปเสมือนจริงไม่พร้อมใช้งานสำหรับเวอร์ชัน Windows ของคุณ
+save_and_restart: บันทึกและรีสตาร์ท

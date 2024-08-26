@@ -56,15 +56,13 @@ wm:
     width: Wisa 'tal-fruntiera
     offset: Offset tal-fruntiera
   description: Deskrizzjoni
-  enable: Ippermetti l-maniġer tat-twieqi
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)
   author: Awtur
   workspace_offset: Spazji tax-Xogħol Offset (Marġini)
   space_between_containers: Spazju bejn il-kontenituri
   workspace_padding: Padding tal-ispazji tax-xogħol
-  disabled_windows_version: Il-maniġer tat-twieqi mhux disponibbli għall-verżjoni tal-Windows tiegħek.
-  disabled_windows10: Il-maniġer tat-twieqi mhux disponibbli għall-Windows 10.
+  enable: Ippermetti maniġer tat-tieqa tal-madum
 weg:
   items:
     visible_separators: Separaturi viżibbli
@@ -199,3 +197,12 @@ open: Miftuħa
 save: Ħlief
 quit: Nieqaf
 delete: Ħassar
+vd:
+  strategy:
+    native: Nattiv
+    seelen: Seelen
+    label: Strateġija tad-desktop virtwali
+  disabled_windows_version: >-
+    L-istrateġija tad-desktop virtwali indiġena mhix disponibbli għall-verżjoni
+    tal-Windows tiegħek.
+save_and_restart: Issejvja u terġa 'tibda

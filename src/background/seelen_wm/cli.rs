@@ -1,11 +1,13 @@
 use clap::{Command, ValueEnum};
+use seelen_core::state::VirtualDesktopStrategy;
 use serde::{Deserialize, Serialize};
 use windows::Win32::Foundation::HWND;
 
 use crate::error_handler::Result;
 use crate::get_subcommands;
+use crate::modules::virtual_desk::get_vd_manager;
 use crate::seelen::Seelen;
-use crate::utils::virtual_desktop::VirtualDesktopManager;
+use crate::state::application::FULL_STATE;
 use crate::windows_api::WindowsApi;
 
 use super::WindowManager;
@@ -94,44 +96,32 @@ impl WindowManager {
                 Seelen::start_ahk_shortcuts()?;
             }
             SubCommand::SwitchWorkspace(index) => {
-                let desktops = VirtualDesktopManager::enum_virtual_desktops()?;
-                match desktops.get(index) {
-                    Some(_) => {
-                        self.pseudo_pause()?;
-                        winvd::switch_desktop(index as u32)?;
-                        /* sleep_millis(35); // to ensure avoid any artifacts */
-                        if let Some(next) = Self::get_next_by_order(HWND(0)) {
-                            WindowsApi::async_force_set_foreground(next);
-                        }
-                        self.pseudo_resume()?;
+                self.pseudo_pause()?;
+                get_vd_manager().switch_to(index)?;
+                if FULL_STATE.load().settings().virtual_desktop_strategy
+                    == VirtualDesktopStrategy::Native
+                {
+                    if let Some(next) = Self::get_next_by_order(HWND(0)) {
+                        WindowsApi::async_force_set_foreground(next);
                     }
-                    None => log::error!("Invalid workspace index: {}", index),
                 }
+                self.pseudo_resume()?;
             }
             SubCommand::SendToWorkspace(index) => {
-                let desktops = VirtualDesktopManager::enum_virtual_desktops()?;
-                match desktops.get(index) {
-                    Some(desktop) => {
-                        let to_move = WindowsApi::get_foreground_window();
-                        winvd::move_window_to_desktop(desktop.guid(), &to_move)?;
-                        if let Some(next) = Self::get_next_by_order(to_move) {
-                            WindowsApi::async_force_set_foreground(next);
-                        }
+                let to_move = WindowsApi::get_foreground_window();
+                get_vd_manager().send_to(index, to_move.0)?;
+                if FULL_STATE.load().settings().virtual_desktop_strategy
+                    == VirtualDesktopStrategy::Native
+                {
+                    if let Some(next) = Self::get_next_by_order(HWND(0)) {
+                        WindowsApi::async_force_set_foreground(next);
                     }
-                    None => log::error!("Invalid workspace index: {}", index),
                 }
             }
             SubCommand::MoveToWorkspace(index) => {
-                let desktops = VirtualDesktopManager::enum_virtual_desktops()?;
-                match desktops.get(index) {
-                    Some(desktop) => {
-                        let to_move = WindowsApi::get_foreground_window();
-                        let desktop_guid = desktop.guid();
-                        winvd::move_window_to_desktop(desktop_guid, &to_move)?;
-                        winvd::switch_desktop(desktop_guid)?;
-                    }
-                    None => log::error!("Invalid workspace index: {}", index),
-                }
+                let to_move = WindowsApi::get_foreground_window();
+                get_vd_manager().send_to(index, to_move.0)?;
+                get_vd_manager().switch_to(index)?;
             }
             SubCommand::Reserve(side) => {
                 self.reserve(side)?;

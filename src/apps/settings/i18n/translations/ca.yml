@@ -62,9 +62,7 @@ wm:
   workspace_padding: Rado d’espais de treball
   author: Autora
   description: Descripció
-  enable: Activa el gestor de finestres
-  disabled_windows_version: El Window Manager no està disponible per a la vostra versió de Windows.
-  disabled_windows10: El gestor de finestres no està disponible per a Windows 10.
+  enable: Activa el gestor de finestres de rajoles
 weg:
   items:
     visible_separators: Separadors visibles
@@ -201,3 +199,12 @@ inProgress: En progrés...
 cancel: Cancel · lar
 save: Estalviar
 quit: Abandonar
+vd:
+  strategy:
+    seelen: Seelen
+    label: Estratègia d'escriptori virtual
+    native: Nadiua
+  disabled_windows_version: >-
+    L'estratègia d'escriptori virtual nativa no està disponible per a la vostra
+    versió de Windows.
+save_and_restart: Desar i reiniciar

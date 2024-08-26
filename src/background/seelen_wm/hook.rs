@@ -1,8 +1,8 @@
 use windows::Win32::Foundation::HWND;
-use winvd::DesktopEvent;
 
 use crate::{
     error_handler::Result,
+    modules::virtual_desk::VirtualDesktopEvent,
     seelen::SEELEN,
     trace_lock,
     utils::{constants::FORCE_RETILING_AFTER_ADD, sleep_millis},
@@ -13,15 +13,15 @@ use crate::{
 use super::WindowManager;
 
 impl WindowManager {
-    pub fn process_vd_event(&mut self, event: &DesktopEvent) -> Result<()> {
+    pub fn process_vd_event(&mut self, event: &VirtualDesktopEvent) -> Result<()> {
         match event {
-            DesktopEvent::DesktopChanged { new, old: _ } => {
+            VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
                 self.discard_reservation()?;
-                self.set_active_workspace(format!("{:?}", new.get_id()?))?;
+                self.set_active_workspace(new.id())?;
             }
-            DesktopEvent::WindowChanged(hwnd) => {
-                if self.is_managed(*hwnd) {
-                    self.update_app(*hwnd)?;
+            VirtualDesktopEvent::WindowChanged(window) => {
+                if self.is_managed(HWND(*window)) {
+                    self.update_app(HWND(*window))?;
                 }
             }
             _ => {}

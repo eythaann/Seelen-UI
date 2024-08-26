@@ -8,6 +8,8 @@ use windows::Win32::{
     },
 };
 
+use crate::trace_lock;
+
 lazy_static! {
     pub static ref RegisteredBars: Mutex<Vec<isize>> = Mutex::new(Vec::new());
 }
@@ -78,7 +80,7 @@ impl AppBarData {
 
     pub fn register_as_new_bar(&mut self) {
         let mut data = self.0;
-        let mut registered = RegisteredBars.lock();
+        let mut registered = trace_lock!(RegisteredBars);
         if !registered.contains(&data.hWnd.0) {
             registered.push(data.hWnd.0);
             unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
@@ -89,6 +91,6 @@ impl AppBarData {
     pub fn unregister_bar(&mut self) {
         let mut data = self.0;
         unsafe { SHAppBarMessage(ABM_REMOVE, &mut data) };
-        RegisteredBars.lock().retain(|x| *x != data.hWnd.0);
+        trace_lock!(RegisteredBars).retain(|x| *x != data.hWnd.0);
     }
 }

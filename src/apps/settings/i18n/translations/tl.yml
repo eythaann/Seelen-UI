@@ -60,11 +60,9 @@ wm:
   space_between_containers: Puwang sa pagitan ng mga lalagyan
   layout: Layout
   workspace_offset: Workspaces Offset (Margin)
-  enable: Paganahin ang Window Manager
   workspace_padding: Mga workspaces padding
   resize_delta: Baguhin ang laki ng Delta (%)
-  disabled_windows_version: Ang window manager ay hindi magagamit para sa iyong bersyon ng Windows.
-  disabled_windows10: Ang window manager ay hindi magagamit para sa Windows 10.
+  enable: Paganahin ang manager ng window window
 weg:
   items:
     label: Mga item
@@ -202,3 +200,12 @@ cancel: Kanselahin
 quit: Huminto ka
 open: Buksan
 save: I -save
+vd:
+  strategy:
+    native: Katutubong
+    label: Diskarte sa Virtual Desktop
+    seelen: Seelen
+  disabled_windows_version: >-
+    Ang diskarte ng katutubong virtual desktop ay hindi magagamit para sa iyong
+    bersyon ng Windows.
+save_and_restart: I -save at i -restart

@@ -38,6 +38,7 @@ async function completeTranslationsFor(
 
   const en = yaml.load(readFileSync(`${path}/en.yml`, 'utf8'));
   deleteKeysDeep(en, Array.from(deleteKeys));
+  writeFileSync(`${path}/en.yml`, yaml.dump(en));
 
   for (const lang of toTranslate) {
     const filePath = `${path}/${lang}.yml`;

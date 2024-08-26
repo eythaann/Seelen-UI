@@ -58,13 +58,11 @@ wm:
   layout: Layout
   description: Kuvaus
   workspace_padding: Työtilat
-  enable: Ota ikkunanhallinta käyttöön
   resize_delta: Muuttaa Delta (%)
   space_between_containers: Konttien välinen tila
   author: Kirjoittaja
   workspace_offset: Työtilojen siirtymä (marginaalit)
-  disabled_windows_version: Windows Manager ei ole käytettävissä Windows -versiollesi.
-  disabled_windows10: 'Windows Manager ei ole käytettävissä Windows 10: lle.'
+  enable: Ota laatta -ikkunanhallinta käyttöön
 weg:
   items:
     zoom_size: Zoomoitu koko (käytetty teemoihin)
@@ -201,3 +199,12 @@ save: Tallentaa
 loading: Ladataan...
 cancel: Peruuttaa
 open: Avata
+vd:
+  strategy:
+    label: Virtuaalinen työpöytästrategia
+    seelen: Seelen
+    native: Alkuperäinen
+  disabled_windows_version: >-
+    Alkuperäinen virtuaalinen työpöytästrategia ei ole käytettävissä Windows
+    -versiollesi.
+save_and_restart: Tallenna ja käynnistä uudelleen

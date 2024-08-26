@@ -59,11 +59,9 @@ wm:
   description: شرح
   workspace_offset: مکانهای کار افست (حاشیه)
   space_between_containers: فضای بین ظروف
-  enable: مدیر پنجره را فعال کنید
   resize_delta: تغییر اندازه دلتا (٪)
   workspace_padding: قسمتهای کاری PADING
-  disabled_windows_version: مدیر پنجره برای نسخه ویندوز شما در دسترس نیست.
-  disabled_windows10: مدیر پنجره برای ویندوز 10 در دسترس نیست.
+  enable: مدیر پنجره کاشی کاری را فعال کنید
 weg:
   items:
     label: موارد
@@ -200,3 +198,10 @@ open: باز کن
 loading: بارگذاری...
 delete: حذف
 quit: ترک
+vd:
+  strategy:
+    seelen: بیچاری
+    label: استراتژی رومیزی مجازی
+    native: بومی
+  disabled_windows_version: استراتژی دسک تاپ مجازی بومی برای نسخه ویندوز شما در دسترس نیست.
+save_and_restart: ذخیره و راه اندازی مجدد

@@ -58,13 +58,11 @@ wm:
   description: Təsvir
   resize_delta: Delta'nın ölçüsünü (%)
   layout: Sxem
-  enable: Pəncərə menecerini aktivləşdirin
   space_between_containers: Konteynerlər arasındakı boşluq
   author: Müəllif
   workspace_offset: İş yerləri ofset (kənarları)
   workspace_padding: İş sahələri padding
-  disabled_windows_version: Pəncərə meneceri Windows versiyanız üçün mövcud deyil.
-  disabled_windows10: Pəncərə meneceri Windows 10 üçün mövcud deyil.
+  enable: Tiling pəncərə menecerini aktivləşdirin
 weg:
   items:
     zoom_size: Böyüdülmüş ölçü (mövzular üçün istifadə olunur)
@@ -201,3 +199,10 @@ cancel: Ləğv etmək
 quit: Çıxmaq
 open: Açıq-saçıq
 inProgress: Davam edir ...
+vd:
+  strategy:
+    seelen: Seelen
+    native: Doğma
+    label: Virtual masaüstü strategiyası
+  disabled_windows_version: Doğma Virtual Masaüstü Strategiyası Windows versiyanız üçün mövcud deyil.
+save_and_restart: Saxla və yenidən başladın

@@ -58,13 +58,11 @@ wm:
   space_between_containers: Lle rhwng cynwysyddion
   author: Awduron
   description: Disgrifiadau
-  enable: Galluogi Rheolwr Ffenestr
   workspace_offset: Gwrthbwyso lleoedd gwaith (ymylon)
   workspace_padding: Padin lleoedd gwaith
   resize_delta: Newid maint Delta (%)
   layout: Gynllun
-  disabled_windows_version: Nid yw'r Rheolwr Ffenestr ar gael ar gyfer eich fersiwn Windows.
-  disabled_windows10: Nid yw'r Rheolwr Ffenestr ar gael ar gyfer Windows 10.
+  enable: Galluogi Rheolwr Ffenestr Teils
 weg:
   items:
     label: Eitemau
@@ -201,3 +199,12 @@ save: Hiachasit
 delete: Croeswn
 quit: Gadawen
 open: Ymagorant
+vd:
+  strategy:
+    seelen: Seelen
+    native: Brodor
+    label: Strategaeth bwrdd gwaith rithwir
+  disabled_windows_version: >-
+    Nid yw strategaeth bwrdd gwaith rhithwir brodorol ar gael ar gyfer eich
+    fersiwn Windows.
+save_and_restart: Cadw ac Ailgychwyn
