@@ -15,8 +15,8 @@ import { Selectors } from './modules/shared/store/app';
 async function onMount() {
   let view = getCurrentWebviewWindow();
   await emitTo(view.label.replace('/', '-hitbox/'), 'init');
-  await view.show();
   await emit('register-colors-events');
+  await view.show();
 }
 
 export function App() {

@@ -1,13 +1,13 @@
-import { ExtraCallbacksOnActivate, ExtraCallbacksOnLeave } from '../../../events';
+import { ExtraCallbacksOnBlur, ExtraCallbacksOnFocus } from '../../../events';
 import { useEffect, useRef } from 'react';
 
 export function useAppBlur(cb: () => void, deps: any[] = []) {
   const key = useRef(crypto.randomUUID());
   useEffect(() => {
-    ExtraCallbacksOnLeave.remove(key.current);
-    ExtraCallbacksOnLeave.add(cb, key.current);
+    ExtraCallbacksOnBlur.remove(key.current);
+    ExtraCallbacksOnBlur.add(cb, key.current);
     return () => {
-      ExtraCallbacksOnLeave.remove(key.current);
+      ExtraCallbacksOnBlur.remove(key.current);
     };
   }, deps);
 }
@@ -15,10 +15,10 @@ export function useAppBlur(cb: () => void, deps: any[] = []) {
 export function useAppActivation(cb: () => void, deps: any[] = []) {
   const key = useRef(crypto.randomUUID());
   useEffect(() => {
-    ExtraCallbacksOnActivate.remove(key.current);
-    ExtraCallbacksOnActivate.add(cb, key.current);
+    ExtraCallbacksOnFocus.remove(key.current);
+    ExtraCallbacksOnFocus.add(cb, key.current);
     return () => {
-      ExtraCallbacksOnActivate.remove(key.current);
+      ExtraCallbacksOnFocus.remove(key.current);
     };
   }, deps);
 }

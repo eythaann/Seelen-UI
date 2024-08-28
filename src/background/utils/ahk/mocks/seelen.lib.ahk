@@ -73,6 +73,5 @@ ResumeWM() {
 }
 
 DebugHitboxes() {
-  RunWait(seelen " tb debug-hitbox", , "Hide")
   RunWait(seelen " weg debug-hitbox", , "Hide")
 }

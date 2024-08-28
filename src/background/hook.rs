@@ -25,8 +25,11 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
-    modules::virtual_desk::{get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager},
-    seelen::{Seelen, SEELEN},
+    modules::{
+        input::{domain::Point, Mouse},
+        virtual_desk::{get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager},
+    },
+    seelen::{get_app_handle, Seelen, SEELEN},
     seelen_weg::SeelenWeg,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
@@ -275,6 +278,20 @@ pub fn register_win_hook() -> Result<()> {
     spawn_named_thread("VirtualDesktopEventHook", move || {
         for event in receiver {
             log_error!(process_vd_event(event))
+        }
+    })?;
+
+    spawn_named_thread("MouseEventHook", || {
+        let handle = get_app_handle();
+        let mut last_pos = Point::default();
+        loop {
+            if let Ok(pos) = Mouse::get_cursor_pos() {
+                if last_pos != pos {
+                    let _ = handle.emit("global-mouse-move", &[pos.get_x(), pos.get_y()]);
+                    last_pos = pos;
+                }
+            }
+            std::thread::sleep(Duration::from_millis(66)); // 15 FPS
         }
     })?;
 

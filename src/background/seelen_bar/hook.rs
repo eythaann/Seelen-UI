@@ -24,12 +24,6 @@ impl FancyToolbar {
             WinEvent::SyntheticFullscreenStart(event_data) => {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
                 if monitor == event_data.monitor {
-                    log::trace!(
-                        "Fullscreen on {} || {} || {}",
-                        WindowsApi::exe(origin).unwrap_or_default(),
-                        WindowsApi::get_class(origin).unwrap_or_default(),
-                        WindowsApi::get_window_text(origin)
-                    );
                     self.hide()?;
                 }
             }

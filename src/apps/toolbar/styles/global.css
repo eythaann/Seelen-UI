@@ -8,10 +8,18 @@ body {
   background: transparent;
   width: 100vw;
   height: 100vh;
+  border-top: 1px solid #000;
 }
 
 .fancy-toolbar {
   width: 100vw;
+  margin-top: -1px;
+  transition: transform 0.2s ease-in-out;
+
+  &:has(.ft-bar-hidden):not(:hover) {
+    transform: translateY(calc(-100% + 1px));
+    border-bottom: 1px solid transparent;
+  }
 
   .ft-bar {
     position: relative;
@@ -21,11 +29,6 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 var(--config-padding-at-side);
-    transition: transform 0.2s ease-in-out;
-
-    &.ft-bar-hidden {
-      transform: translateY(-100%);
-    }
 
     .ft-bar-left,
     .ft-bar-center,
