@@ -53,5 +53,6 @@ export const StateToJsonSettings = (state: RootState): ISettings => {
     'ahkVariables',
     'devTools',
     'language',
+    'virtualDesktopStrategy',
   ]);
 };
