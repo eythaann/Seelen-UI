@@ -316,7 +316,10 @@ impl WinEvent {
                     return None;
                 }
 
-                if WindowsApi::is_fullscreen(origin).ok()? {
+                let fullscreened = trace_lock!(FULLSCREENED);
+                if WindowsApi::is_fullscreen(origin).ok()?
+                    && !fullscreened.iter().any(|x| x.handle == origin)
+                {
                     let data = SyntheticFullscreenData {
                         handle: origin,
                         monitor: WindowsApi::monitor_from_window(origin),
