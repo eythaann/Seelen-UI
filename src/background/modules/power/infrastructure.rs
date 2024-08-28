@@ -4,10 +4,7 @@ use tauri::Emitter;
 use windows::{
     core::PCWSTR,
     Win32::{
-        Foundation::{FALSE, HWND, LPARAM, LRESULT, WPARAM},
-        Security::{
-            AdjustTokenPrivileges, SE_PRIVILEGE_ENABLED, SE_SHUTDOWN_NAME, TOKEN_PRIVILEGES,
-        },
+        Foundation::{HWND, LPARAM, LRESULT, WPARAM},
         System::Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE},
         UI::WindowsAndMessaging::{
             CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
@@ -137,40 +134,12 @@ pub fn suspend() {
 
 #[tauri::command(async)]
 pub fn restart() -> Result<(), String> {
-    let token_handle = WindowsApi::open_process_token()?;
-    let mut tkp = TOKEN_PRIVILEGES {
-        PrivilegeCount: 1,
-        ..Default::default()
-    };
-
-    tkp.Privileges[0].Luid = WindowsApi::get_luid(PCWSTR::null(), SE_SHUTDOWN_NAME)?;
-    tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-
-    unsafe {
-        AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)
-            .expect("Could not adjust token privileges");
-    }
-
     WindowsApi::exit_windows(EWX_REBOOT, SHTDN_REASON_NONE)?;
     Ok(())
 }
 
 #[tauri::command(async)]
 pub fn shutdown() -> Result<(), String> {
-    let token_handle = WindowsApi::open_process_token()?;
-    let mut tkp = TOKEN_PRIVILEGES {
-        PrivilegeCount: 1,
-        ..Default::default()
-    };
-
-    tkp.Privileges[0].Luid = WindowsApi::get_luid(PCWSTR::null(), SE_SHUTDOWN_NAME)?;
-    tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-
-    unsafe {
-        AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)
-            .expect("Could not adjust token privileges");
-    }
-
     WindowsApi::exit_windows(EWX_SHUTDOWN, SHTDN_REASON_NONE)?;
     Ok(())
 }

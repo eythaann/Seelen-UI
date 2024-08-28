@@ -1,11 +1,13 @@
 mod app_bar;
 mod com;
 mod iterator;
+mod process;
 
 pub use app_bar::*;
 pub use com::*;
 pub use iterator::*;
 use itertools::Itertools;
+use process::ProcessInformationFlag;
 use widestring::U16CStr;
 
 use std::{ffi::c_void, path::PathBuf, thread::sleep, time::Duration};
@@ -16,12 +18,18 @@ use windows::{
     Storage::Streams::{
         DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
     },
+    Wdk::System::{
+        SystemServices::PROCESS_EXTENDED_BASIC_INFORMATION,
+        Threading::{NtQueryInformationProcess, ProcessBasicInformation},
+    },
     Win32::{
         Devices::Display::{
             GetNumberOfPhysicalMonitorsFromHMONITOR, GetPhysicalMonitorsFromHMONITOR,
             PHYSICAL_MONITOR,
         },
-        Foundation::{CloseHandle, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT},
+        Foundation::{
+            CloseHandle, FALSE, HANDLE, HMODULE, HWND, LPARAM, LUID, MAX_PATH, RECT, STATUS_SUCCESS,
+        },
         Graphics::{
             Dwm::{
                 DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
@@ -33,8 +41,9 @@ use windows::{
             },
         },
         Security::{
-            GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TOKEN_ADJUST_PRIVILEGES,
-            TOKEN_ELEVATION, TOKEN_QUERY,
+            AdjustTokenPrivileges, GetTokenInformation, LookupPrivilegeValueW, TokenElevation,
+            SE_PRIVILEGE_ENABLED, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_PRIVILEGES,
+            TOKEN_QUERY,
         },
         Storage::EnhancedStorage::PKEY_FileDescription,
         System::{
@@ -45,7 +54,7 @@ use windows::{
             Threading::{
                 GetCurrentProcess, GetCurrentProcessId, OpenProcess, OpenProcessToken,
                 QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_INFORMATION,
+                PROCESS_QUERY_INFORMATION, PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
         UI::{
@@ -345,6 +354,20 @@ impl WindowsApi {
         Ok(luid)
     }
 
+    pub fn enable_privilege(name: PCWSTR) -> Result<()> {
+        let token_handle = Self::open_process_token()?;
+        let mut tkp = TOKEN_PRIVILEGES {
+            PrivilegeCount: 1,
+            ..Default::default()
+        };
+
+        tkp.Privileges[0].Luid = Self::get_luid(PCWSTR::null(), name)?;
+        tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+
+        unsafe { AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)? };
+        Ok(())
+    }
+
     fn close_handle(handle: HANDLE) -> Result<()> {
         unsafe {
             CloseHandle(handle)?;
@@ -376,6 +399,36 @@ impl WindowsApi {
         Self::close_handle(handle)?;
 
         Ok(String::from_utf16(&path[..len as usize])?)
+    }
+
+    pub fn window_is_uwp_suspended(hwnd: HWND) -> Result<bool> {
+        let (process_id, _) = Self::window_thread_process_id(hwnd);
+        let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
+
+        let is_frozen = unsafe {
+            let mut buffer: [PROCESS_EXTENDED_BASIC_INFORMATION; 1] = std::mem::zeroed();
+            let status = NtQueryInformationProcess(
+                handle,
+                ProcessBasicInformation,
+                buffer.as_mut_ptr() as _,
+                std::mem::size_of::<PROCESS_EXTENDED_BASIC_INFORMATION>() as _,
+                0u32 as _,
+            );
+
+            if status != STATUS_SUCCESS {
+                return Err(format!(
+                    "NtQueryInformationProcess failed with status: {:x}",
+                    status.0
+                )
+                .into());
+            }
+
+            let data = buffer[0];
+            data.Anonymous.Flags & ProcessInformationFlag::IsFrozen as u32 != 0
+        };
+
+        Self::close_handle(handle)?;
+        Ok(is_frozen)
     }
 
     pub fn exe_path(hwnd: HWND) -> Result<String> {

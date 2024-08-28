@@ -36,6 +36,7 @@ use seelen::{Seelen, SEELEN};
 use seelen_core::state::Settings;
 use tray::try_register_tray_icon;
 use utils::PERFORMANCE_HELPER;
+use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
 fn register_panic_hook() {
@@ -76,6 +77,10 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     log::info!("Locate: {:?}", Settings::get_locale());
     log::info!("Elevated: {:?}", WindowsApi::is_elevated());
     Client::listen_tcp()?;
+
+    log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
+    log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
+
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
 

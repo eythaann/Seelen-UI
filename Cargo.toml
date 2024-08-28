@@ -86,11 +86,15 @@ features = [
     "Win32_System_Console",                # required to attach to console on cli mode
     "Win32_System_Registry",               # required for system tray icon module
     "Win32_Security",                      # required for power management (shutdown, reboot)
+    "Win32_System_Kernel",
     "Win32_System_Threading",
     "Win32_System_WinRT",                  # uwp apps
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
     "Win32_System_ProcessStatus",
+    "Wdk_System_Threading",                # required to get system info (NtQueryInformationProcess)
+    "Wdk_System_SystemInformation",        # required to get system info (NtQuerySystemInformation)
+    "Wdk_System_SystemServices",           # required to get system info (PROCESS_EXTENDED_BASIC_INFORMATION)
     "Win32_System_Power",                  # required for power management (battery - AC)
     "Win32_System_Shutdown",               # required for power management (shutdown)
     "Win32_Storage_EnhancedStorage",       # PKEYS and Devices/Storage/etc

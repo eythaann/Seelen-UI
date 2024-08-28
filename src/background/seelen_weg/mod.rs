@@ -225,6 +225,10 @@ impl SeelenWeg {
             return false;
         }
 
+        if WindowsApi::window_is_uwp_suspended(hwnd).unwrap_or(false) {
+            return false;
+        }
+
         let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
         if exe_path.starts_with("C:\\Windows\\SystemApps")
             || (!include_frames && exe_path.ends_with("ApplicationFrameHost.exe"))

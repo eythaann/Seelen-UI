@@ -274,14 +274,14 @@ impl WindowManager {
         let exe = WindowsApi::exe(hwnd);
 
         if let Ok(exe) = &exe {
-            if exe.ends_with("ApplicationFrameHost.exe") && SeelenWeg::is_real_window(hwnd, true) {
+            if exe.ends_with("ApplicationFrameHost.exe") && SeelenWeg::is_real_window(hwnd, false) {
                 return true;
             }
         }
 
         // Without admin some apps does not return the exe path so these should be unmanaged
         exe.is_ok()
-        && SeelenWeg::is_real_window(hwnd, true)
+        && SeelenWeg::is_real_window(hwnd, false)
         // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
         && !WindowsApi::is_iconic(hwnd)
