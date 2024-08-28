@@ -6,25 +6,20 @@ export const ExtraCallbacksOnBlur = new CallbacksManager();
 export const ExtraCallbacksOnFocus = new CallbacksManager();
 
 export function registerDocumentEvents() {
+  let appFocused = true;
   const webview = getCurrentWebviewWindow();
 
   function onAppBlur() {
+    appFocused = false;
     webview.setIgnoreCursorEvents(true);
     ExtraCallbacksOnBlur.execute();
   }
 
   function onAppFocus() {
+    appFocused = true;
     webview.setIgnoreCursorEvents(false);
     ExtraCallbacksOnFocus.execute();
   }
-
-  // TODO handle touches
-  /* webview.listen<{ x: number; y: number }>('click', (event) => {
-    let element = document.elementFromPoint(event.payload.x, event.payload.y);
-    if (element && 'click' in element && typeof element.click === 'function') {
-      element.click();
-    }
-  }); */
 
   webview.onFocusChanged((event) => {
     if (event.payload) {
@@ -49,7 +44,7 @@ export function registerDocumentEvents() {
     if (element != document.body && ignoring_cursor_events) {
       webview.setIgnoreCursorEvents(false);
       ignoring_cursor_events = false;
-    } else if (element == document.body && !ignoring_cursor_events) {
+    } else if (element == document.body && (!ignoring_cursor_events || appFocused)) {
       webview.setIgnoreCursorEvents(true);
       ignoring_cursor_events = true;
     }
