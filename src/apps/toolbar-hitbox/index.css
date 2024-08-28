@@ -1,4 +1,6 @@
-*, *:after, *:before {
+*,
+*:after,
+*:before {
   margin: 0;
   padding: 0;
   border: 0;
@@ -7,6 +9,11 @@
   vertical-align: baseline;
 }
 
-/* body {
-  background: red;
-} */
+body {
+  border-top: 1px solid #000;
+
+  &.debug-hitbox {
+    border-top: 1px solid lime;
+    background: red;
+  }
+}

@@ -7,6 +7,6 @@
   vertical-align: baseline;
 }
 
-/* body {
+body.debug-hitbox {
   background: lime;
-} */
+}

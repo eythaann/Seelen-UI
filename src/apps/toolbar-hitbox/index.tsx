@@ -39,6 +39,10 @@ async function Main() {
     document.body.addEventListener('click', onClick);
     document.body.addEventListener('touchend', onClick);
   });
+
+  view.listen('debug-hitbox', () => {
+    document.body.classList.toggle('debug-hitbox');
+  });
 }
 
 Main();

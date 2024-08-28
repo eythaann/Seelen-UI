@@ -187,11 +187,11 @@ impl WindowsApi {
 
     pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
         let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
-        let window_rect = WindowsApi::get_window_rect(hwnd);
-        Ok(window_rect.left == rc_monitor.left
-            && window_rect.top == rc_monitor.top
-            && window_rect.right == rc_monitor.right
-            && window_rect.bottom == rc_monitor.bottom)
+        let window_rect = WindowsApi::get_window_rect_without_margins(hwnd);
+        Ok(window_rect.left <= rc_monitor.left
+            && window_rect.top <= rc_monitor.top
+            && window_rect.right >= rc_monitor.right
+            && window_rect.bottom >= rc_monitor.bottom)
     }
 
     pub fn is_cloaked(hwnd: HWND) -> Result<bool> {

@@ -51,6 +51,10 @@ async function Main() {
     const { x, y } = event.payload as any;
     getCurrentWebviewWindow().setPosition(new PhysicalPosition(x, y));
   });
+
+  view.listen('debug-hitbox', () => {
+    document.body.classList.toggle('debug-hitbox');
+  });
 }
 
 Main();

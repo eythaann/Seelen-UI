@@ -1,3 +1,4 @@
+pub mod cli;
 pub mod handler;
 pub mod hook;
 pub mod icon_extractor;
@@ -29,7 +30,11 @@ use crate::{
     seelen_bar::FancyToolbar,
     state::application::FULL_STATE,
     trace_lock,
-    utils::{are_overlaped, sleep_millis},
+    utils::{
+        are_overlaped,
+        constants::{OVERLAP_BLACK_LIST_BY_EXE, OVERLAP_BLACK_LIST_BY_TITLE},
+        sleep_millis,
+    },
     windows_api::{AppBarData, AppBarDataState, WindowsApi},
 };
 
@@ -47,23 +52,6 @@ lazy_static! {
     ]);
     static ref OPEN_APPS: Mutex<Vec<SeelenWegApp>> = Mutex::new(Vec::new());
 }
-
-static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 7] = [
-    "",
-    "SeelenWeg",
-    "SeelenWeg Hitbox",
-    "Seelen Window Manager",
-    "Seelen Fancy Toolbar",
-    "Seelen Fancy Toolbar Hitbox",
-    "Program Manager",
-];
-
-static OVERLAP_BLACK_LIST_BY_EXE: [&str; 4] = [
-    "msedgewebview2.exe",
-    "SearchHost.exe",
-    "StartMenuExperienceHost.exe",
-    "ShellExperienceHost.exe",
-];
 
 #[derive(Debug, Serialize, Clone)]
 pub struct SeelenWegApp {

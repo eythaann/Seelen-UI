@@ -4,9 +4,14 @@
 ### features
 - add volume changed popup.
 - new custom virtual desktop implementation.
+- shortcut to toggle debug mode on hitboxes (Control + Win + Alt + H).
 
 ### refactor
-- add strategy pattern to virtual desktops
+- add strategy pattern to virtual desktops.
+
+### fix
+- topbar hitbox rect on auto hide equals to on-overlap.
+- bad matching fullscreen apps.
 
 ## [1.9.11]
 ### features

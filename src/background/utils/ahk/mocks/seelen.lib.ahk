@@ -71,3 +71,8 @@ PauseWM() {
 ResumeWM() {
   RunWait(seelen " wm resume", , "Hide")
 }
+
+DebugHitboxes() {
+  RunWait(seelen " tb debug-hitbox", , "Hide")
+  RunWait(seelen " weg debug-hitbox", , "Hide")
+}

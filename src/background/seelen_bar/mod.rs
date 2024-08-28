@@ -7,7 +7,10 @@ use crate::{
     modules::virtual_desk::get_vd_manager,
     seelen::get_app_handle,
     state::application::FULL_STATE,
-    utils::are_overlaped,
+    utils::{
+        are_overlaped,
+        constants::{OVERLAP_BLACK_LIST_BY_EXE, OVERLAP_BLACK_LIST_BY_TITLE},
+    },
     windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
 };
 use itertools::Itertools;
@@ -89,7 +92,12 @@ impl FancyToolbar {
     }
 
     pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
-        if !WindowsApi::is_window_visible(hwnd) {
+        let should_handle_hidden = WindowsApi::is_window_visible(hwnd)
+            && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
+            && !OVERLAP_BLACK_LIST_BY_EXE
+                .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
+
+        if !should_handle_hidden {
             return Ok(());
         }
         self.set_overlaped_status(self.is_overlapping(hwnd)?)
@@ -127,7 +135,7 @@ impl FancyToolbar {
     pub fn ensure_hitbox_zorder(&self) -> Result<()> {
         let hitbox = HWND(self.hitbox.hwnd()?.0);
         WindowsApi::bring_to(hitbox, HWND_TOPMOST)?;
-        self.set_positions(WindowsApi::monitor_from_window(hitbox).0)?;
+        self.set_positions(self.cached_monitor.0)?;
         Ok(())
     }
 }
@@ -171,28 +179,29 @@ impl FancyToolbar {
         let dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
 
         let mut abd = AppBarData::from_handle(hitbox_hwnd);
-        if settings.hide_mode != HideMode::Never {
-            abd.unregister_bar();
-        }
 
         let mut abd_rect = rc_monitor;
-        abd_rect.bottom = if settings.hide_mode == HideMode::Always
-            || (self.overlaped && settings.hide_mode == HideMode::OnOverlap)
-        {
-            abd_rect.top + 1
-        } else {
-            abd_rect.top + (settings.height as f32 * dpi) as i32
-        };
+        let mut hitbox_rect = rc_monitor;
+        abd_rect.bottom = abd_rect.top + (settings.height as f32 * dpi) as i32;
+        hitbox_rect.bottom = hitbox_rect.top + (settings.height as f32 * dpi) as i32;
 
-        if settings.hide_mode == HideMode::Never {
-            abd.set_edge(AppBarDataEdge::Top);
-            abd.set_rect(abd_rect);
-            abd.register_as_new_bar();
+        if settings.hide_mode == HideMode::Always {
+            abd_rect.bottom = abd_rect.top + 1;
+            hitbox_rect.bottom = hitbox_rect.top + 1;
+        } else if settings.hide_mode == HideMode::OnOverlap {
+            abd_rect.bottom = abd_rect.top + 1;
+            if self.overlaped {
+                hitbox_rect.bottom = hitbox_rect.top + 1;
+            }
         }
 
+        abd.set_edge(AppBarDataEdge::Top);
+        abd.set_rect(abd_rect);
+        abd.register_as_new_bar();
+
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(hitbox_hwnd, &rc_monitor)?;
-        WindowsApi::set_position(hitbox_hwnd, None, &abd_rect, SWP_NOACTIVATE)?;
+        WindowsApi::move_window(hitbox_hwnd, &hitbox_rect)?;
+        WindowsApi::set_position(hitbox_hwnd, None, &hitbox_rect, SWP_NOACTIVATE)?;
 
         WindowsApi::move_window(main_hwnd, &rc_monitor)?;
         WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;

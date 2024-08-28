@@ -39,3 +39,20 @@ lazy_static! {
     .map(|x| x.to_string())
     .collect_vec();
 }
+
+pub static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 7] = [
+    "",
+    "SeelenWeg",
+    "SeelenWeg Hitbox",
+    "Seelen Window Manager",
+    "Seelen Fancy Toolbar",
+    "Seelen Fancy Toolbar Hitbox",
+    "Program Manager",
+];
+
+pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 4] = [
+    "msedgewebview2.exe",
+    "SearchHost.exe",
+    "StartMenuExperienceHost.exe",
+    "ShellExperienceHost.exe",
+];

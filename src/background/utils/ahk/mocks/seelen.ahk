@@ -18,3 +18,7 @@ CloseIfNotRunning()
 ^#!p:: {
   ResumeWM()
 }
+
+^#!h:: {
+  DebugHitboxes()
+}
