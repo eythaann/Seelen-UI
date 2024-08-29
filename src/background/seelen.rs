@@ -6,10 +6,7 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
-use windows::Win32::{
-    Foundation::{BOOL, HWND, LPARAM},
-    Graphics::Gdi::HMONITOR,
-};
+use windows::Win32::Graphics::Gdi::HMONITOR;
 
 use crate::{
     error_handler::Result,
@@ -23,7 +20,7 @@ use crate::{
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::{ahk::AutoHotKey, sleep_millis, spawn_named_thread, PERFORMANCE_HELPER},
-    windows_api::WindowsApi,
+    windows_api::{WindowEnumerator, WindowsApi},
 };
 
 lazy_static! {
@@ -140,7 +137,22 @@ impl Seelen {
         );
 
         log::trace!("Enumerating windows");
-        WindowsApi::enum_windows(Some(Self::enum_windows_proc), 0)?;
+        WindowEnumerator::new().for_each(|hwnd| {
+            let mut seelen = trace_lock!(SEELEN);
+
+            if SeelenWeg::should_be_added(hwnd) {
+                SeelenWeg::add_hwnd(hwnd);
+            }
+
+            for monitor in seelen.monitors_mut() {
+                if let Some(wm) = monitor.wm_mut() {
+                    if WindowManager::is_manageable_window(hwnd) {
+                        log_error!(wm.add_hwnd(hwnd));
+                    }
+                }
+            }
+        })?;
+
         register_win_hook()?;
         Ok(())
     }
@@ -386,24 +398,5 @@ impl Seelen {
         .build()?;
 
         Ok(())
-    }
-}
-
-impl Seelen {
-    unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
-        let mut seelen = trace_lock!(SEELEN);
-
-        if SeelenWeg::should_be_added(hwnd) {
-            SeelenWeg::add_hwnd(hwnd);
-        }
-
-        for monitor in seelen.monitors_mut() {
-            if let Some(wm) = monitor.wm_mut() {
-                if WindowManager::is_manageable_window(hwnd) {
-                    log_error!(wm.add_hwnd(hwnd));
-                }
-            }
-        }
-        true.into()
     }
 }

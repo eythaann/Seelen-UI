@@ -127,11 +127,11 @@ impl SeelenWorkspacesManager {
     fn load(&self) -> Result<()> {
         let mut workspaces = self.workspaces();
         let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-        for hwnd in WindowEnumerator::new_refreshed()? {
+        WindowEnumerator::new().for_each(|hwnd| {
             if SeelenWeg::should_be_added(hwnd) && !WindowsApi::is_iconic(hwnd) {
                 workspace.windows.push(hwnd.0);
             }
-        }
+        })?;
         Ok(())
     }
 

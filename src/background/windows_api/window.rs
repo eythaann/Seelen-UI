@@ -63,9 +63,9 @@ impl Window {
     }
 
     pub fn children(&self) -> Result<Vec<Window>> {
-        let mut enumerator = WindowEnumerator::new(Some(self.0));
-        enumerator.refresh()?;
-        Ok(enumerator.into_iter().map(Window).collect())
+        WindowEnumerator::new()
+            .with_parent(self.0)
+            .map(Window::from)
     }
 
     pub fn is_visible(&self) -> bool {

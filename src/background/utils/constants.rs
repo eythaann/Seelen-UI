@@ -7,10 +7,7 @@ lazy_static! {
         "Task View",
         "Virtual desktop switching preview",
         "Virtual desktop hotkey switching preview",
-        "Seelen Window Manager",
-        "SeelenWeg",
-        "SeelenWeg Hitbox",
-        "Seelen Fancy Toolbar",
+        "Seelen Window Manager", // for some reason this sometimes is focused, maybe could be deleted
     ]
     .iter()
     .map(|x| x.to_string())

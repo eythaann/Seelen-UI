@@ -316,7 +316,7 @@ impl WinEvent {
                     return None;
                 }
 
-                let fullscreened = trace_lock!(FULLSCREENED);
+                let mut fullscreened = trace_lock!(FULLSCREENED);
                 if WindowsApi::is_fullscreen(origin).ok()?
                     && !fullscreened.iter().any(|x| x.handle == origin)
                 {
@@ -324,7 +324,7 @@ impl WinEvent {
                         handle: origin,
                         monitor: WindowsApi::monitor_from_window(origin),
                     };
-                    trace_lock!(FULLSCREENED).push(data);
+                    fullscreened.push(data);
                     Some(Self::SyntheticFullscreenStart(data))
                 } else {
                     None

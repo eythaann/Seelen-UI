@@ -81,7 +81,7 @@ use windows::{
 
 use crate::{
     error_handler::{AppError, Result},
-    hook::{HOOK_MANAGER, LAST_FOREGROUNDED},
+    hook::HOOK_MANAGER,
     log_error, trace_lock,
     utils::{is_virtual_desktop_supported, is_windows_11},
     winevent::WinEvent,
@@ -169,13 +169,7 @@ impl WindowsApi {
         }
     }
 
-    /// this is a modified version of the original GetForegroundWindow function
-    /// used to handle last foregrounded window ignoring some windows
     pub fn get_foreground_window() -> HWND {
-        let foreground = LAST_FOREGROUNDED.load(std::sync::atomic::Ordering::Acquire);
-        if foreground != 0 {
-            return HWND(foreground);
-        }
         unsafe { GetForegroundWindow() }
     }
 
@@ -741,23 +735,3 @@ impl WindowsApi {
         Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.get()?)
     }
 }
-
-/*
-may be this is useful later
-
-static CHILD_FROM_FRAME: AtomicIsize = AtoumicIsize::new(0);
-unsafe extern "system" fn enum_childs_uwp(hwnd: HWND, _: LPARAM) -> BOOL {
-    let exe = WindowsApi::exe(hwnd).unwrap_or_default();
-    println!("enum_childs_uwp {} {}", hwnd.0, exe);
-    if exe != "ApplicationFrameHost.exe" {
-        CHILD_FROM_FRAME.store(hwnd.0, Ordering::SeqCst);
-        return false.into();
-    }
-    true.into()
-}
-
-pub fn get_child_from_frame_host(hwnd: HWND) -> HWND {
-    CHILD_FROM_FRAME.store(0, Ordering::SeqCst);
-    unsafe { EnumChildWindows(hwnd, Some(enum_childs_uwp), LPARAM(0)) };
-    HWND(CHILD_FROM_FRAME.load(Ordering::SeqCst))
-} */

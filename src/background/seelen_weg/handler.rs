@@ -68,8 +68,6 @@ pub fn weg_toggle_window_state(window: WebviewWindow, hwnd: isize, exe_path: Str
     }
 
     if WindowsApi::is_iconic(hwnd) {
-        println!("iconic");
-
         WindowsApi::show_window(hwnd, SW_SHOWNORMAL)?;
         WindowsApi::show_window(hwnd, SW_RESTORE)?;
         return Ok(());

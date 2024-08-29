@@ -42,8 +42,6 @@ lazy_static! {
     pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
 }
 
-pub static LAST_FOREGROUNDED: AtomicIsize = AtomicIsize::new(0);
-
 pub struct HookManager {
     skip: HashMap<isize, Vec<WinEvent>>,
 }
@@ -103,11 +101,11 @@ impl HookManager {
         }
 
         let title = WindowsApi::get_window_text(origin);
-        if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
-            if IGNORE_FOCUS.contains(&title) {
-                return;
-            }
-            LAST_FOREGROUNDED.store(origin.0, Ordering::SeqCst);
+        if (event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground)
+            && IGNORE_FOCUS.contains(&title)
+        {
+            log::trace!("Skipping WinEvent::{:?}", event);
+            return;
         }
 
         std::thread::spawn(move || {
