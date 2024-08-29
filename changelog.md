@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.10.0]
 ### features
 - add volume changed popup.
 - new custom virtual desktop implementation.
