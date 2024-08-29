@@ -20,7 +20,7 @@ export interface AppFromBackground {
   icon: string;
   icon_path: string;
   hwnd: HWND;
-  process_hwnd: HWND;
+  creator_hwnd: HWND;
 }
 
 export enum AppsSides {

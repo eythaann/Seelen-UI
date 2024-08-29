@@ -11,7 +11,6 @@ lazy_static! {
         "SeelenWeg",
         "SeelenWeg Hitbox",
         "Seelen Fancy Toolbar",
-        "Seelen Fancy Toolbar Hitbox"
     ]
     .iter()
     .map(|x| x.to_string())
@@ -40,13 +39,12 @@ lazy_static! {
     .collect_vec();
 }
 
-pub static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 7] = [
+pub static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 6] = [
     "",
     "SeelenWeg",
     "SeelenWeg Hitbox",
     "Seelen Window Manager",
     "Seelen Fancy Toolbar",
-    "Seelen Fancy Toolbar Hitbox",
     "Program Manager",
 ];
 

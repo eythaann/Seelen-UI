@@ -1,8 +1,6 @@
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 
-import { store } from '../store/infra';
-
 import { getGeneratedFilesPath } from './app';
 
 import { HWND } from '../store/domain';
@@ -29,14 +27,7 @@ export async function getMissingIconPath() {
 }
 
 export async function updatePreviews(hwnds: HWND[]) {
-  const state = store.getState();
-  const process = hwnds.map((hwnd) => {
-    return {
-      hwnd,
-      process_hwnd: state.openApps[hwnd]?.process_hwnd || (0 as HWND),
-    };
-  });
-  invoke('weg_request_update_previews', { hwnds: process });
+  invoke('weg_request_update_previews', { handles: hwnds });
 }
 
 export async function iconPathFromExePath(exePath: string) {

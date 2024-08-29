@@ -82,12 +82,6 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.updateOpenAppInfo(item));
   });
 
-  await listenGlobal<AppFromBackground>('replace-open-app', async (event) => {
-    const item = (await cleanItems([event.payload]))[0]!;
-    store.dispatch(RootActions.addOpenApp(item));
-    store.dispatch(RootActions.removeOpenApp(item.process_hwnd));
-  });
-
   await listenGlobal<HWND>('set-focused-handle', (event) => {
     store.dispatch(RootActions.setFocusedHandle(event.payload));
   });

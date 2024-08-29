@@ -128,7 +128,7 @@ impl SeelenWorkspacesManager {
         let mut workspaces = self.workspaces();
         let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
         for hwnd in WindowEnumerator::new_refreshed()? {
-            if SeelenWeg::is_real_window(hwnd, true) && !WindowsApi::is_iconic(hwnd) {
+            if SeelenWeg::should_be_added(hwnd) && !WindowsApi::is_iconic(hwnd) {
                 workspace.windows.push(hwnd.0);
             }
         }
@@ -155,7 +155,7 @@ impl SeelenWorkspacesManager {
                 };
                 if let Some(owner_idx) = owner_idx {
                     self.switch_to(owner_idx)?;
-                } else if SeelenWeg::is_real_window(origin, true) {
+                } else if SeelenWeg::should_be_added(origin) {
                     log::trace!("adding window to workspace: {}", origin.0);
                     let mut workspaces = self.workspaces();
                     let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
@@ -163,7 +163,7 @@ impl SeelenWorkspacesManager {
                 }
             }
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
-                if SeelenWeg::is_real_window(origin, true) {
+                if SeelenWeg::should_be_added(origin) {
                     log::trace!("adding window to workspace: {}", origin.0);
                     let mut workspaces = self.workspaces();
                     let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;

@@ -17,8 +17,8 @@ use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     UI::WindowsAndMessaging::{
-        EnumWindows, GetParent, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE,
-        WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        EnumWindows, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, WS_EX_APPWINDOW,
+        WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -35,7 +35,7 @@ use crate::{
         constants::{OVERLAP_BLACK_LIST_BY_EXE, OVERLAP_BLACK_LIST_BY_TITLE},
         sleep_millis,
     },
-    windows_api::{AppBarData, AppBarDataState, WindowsApi},
+    windows_api::{window::Window, AppBarData, AppBarDataState, WindowsApi},
 };
 
 lazy_static! {
@@ -47,7 +47,6 @@ lazy_static! {
         "SeelenWeg Hitbox",
         "Seelen Window Manager",
         "Seelen Fancy Toolbar",
-        "Seelen Fancy Toolbar Hitbox",
         "Program Manager",
     ]);
     static ref OPEN_APPS: Mutex<Vec<SeelenWegApp>> = Mutex::new(Vec::new());
@@ -60,7 +59,7 @@ pub struct SeelenWegApp {
     title: String,
     icon_path: String,
     execution_path: String,
-    process_hwnd: isize,
+    creator_hwnd: isize,
 }
 
 #[derive(Getters, MutGetters)]
@@ -117,7 +116,7 @@ impl SeelenWeg {
     pub fn contains_app(hwnd: HWND) -> bool {
         trace_lock!(OPEN_APPS)
             .iter()
-            .any(|app| app.hwnd == hwnd.0 || app.process_hwnd == hwnd.0)
+            .any(|app| app.hwnd == hwnd.0 || app.creator_hwnd == hwnd.0)
     }
 
     pub fn update_app(hwnd: HWND) {
@@ -131,55 +130,32 @@ impl SeelenWeg {
         }
     }
 
-    pub fn replace_hwnd(old: HWND, new: HWND) -> Result<()> {
-        let mut found = None;
-        let mut apps = trace_lock!(OPEN_APPS);
-        for app in apps.iter_mut() {
-            if app.hwnd == old.0 {
-                app.hwnd = new.0;
-                found = Some(app.clone());
-                break;
-            }
-        }
-
-        if let Some(app) = found {
-            get_app_handle().emit("replace-open-app", app)?;
-        }
-
-        Ok(())
-    }
-
     pub fn add_hwnd(hwnd: HWND) {
         if Self::contains_app(hwnd) {
             return;
         }
 
-        let title = WindowsApi::get_window_text(hwnd);
+        let window = Window::from(hwnd);
+        let title = window.title();
 
-        if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-            if config.options.contains(&AppExtraFlag::Hidden) {
-                log::trace!("Skipping by config: {} <=> {}", hwnd.0, title);
-                return;
-            }
-        }
+        let creator = match window.get_frame_creator() {
+            Ok(None) => return,
+            Ok(Some(creator)) => creator,
+            Err(_) => window,
+        };
 
-        log::trace!("Adding {} <=> {}", hwnd.0, title);
         let mut app = SeelenWegApp {
             hwnd: hwnd.0,
             exe: String::new(),
             title,
             icon_path: String::new(),
             execution_path: String::new(),
-            process_hwnd: hwnd.0,
+            creator_hwnd: creator.hwnd().0,
         };
 
-        if let Ok(path) = WindowsApi::exe_path_v2(hwnd) {
+        if let Ok(path) = creator.exe() {
             app.exe = path.to_string_lossy().to_string();
-            app.icon_path = if !app.exe.is_empty() {
-                Self::extract_icon(&app.exe).unwrap_or_else(|_| Self::missing_icon())
-            } else {
-                Self::missing_icon()
-            };
+            app.icon_path = Self::extract_icon(&app.exe).unwrap_or_else(|_| Self::missing_icon());
 
             let exe = path
                 .file_name()
@@ -192,6 +168,8 @@ impl SeelenWeg {
                     .unwrap_or_else(|| app.exe.clone()),
                 None => app.exe.clone(),
             };
+        } else {
+            app.icon_path = Self::missing_icon();
         }
 
         get_app_handle()
@@ -208,13 +186,10 @@ impl SeelenWeg {
             .expect("Failed to emit");
     }
 
-    pub fn is_real_window(hwnd: HWND, include_frames: bool) -> bool {
-        if !WindowsApi::is_window_visible(hwnd) {
-            return false;
-        }
+    pub fn should_be_added(hwnd: HWND) -> bool {
+        let window = Window::from(hwnd);
 
-        let parent = unsafe { GetParent(hwnd) };
-        if parent.0 != 0 {
+        if !window.is_visible() || window.parent().is_some() {
             return false;
         }
 
@@ -225,19 +200,30 @@ impl SeelenWeg {
             return false;
         }
 
-        if WindowsApi::window_is_uwp_suspended(hwnd).unwrap_or(false) {
+        if let Ok(frame_creator) = window.get_frame_creator() {
+            if frame_creator.is_none() {
+                return false;
+            }
+        }
+
+        if WindowsApi::window_is_uwp_suspended(hwnd).unwrap_or_default() {
             return false;
         }
 
-        let exe_path = WindowsApi::exe_path(hwnd).unwrap_or_default();
-        if exe_path.starts_with("C:\\Windows\\SystemApps")
-            || (!include_frames && exe_path.ends_with("ApplicationFrameHost.exe"))
-        {
-            return false;
+        if let Ok(path) = window.exe() {
+            if path.starts_with("C:\\Windows\\SystemApps") {
+                return false;
+            }
         }
 
-        let title = WindowsApi::get_window_text(hwnd);
-        !TITLE_BLACK_LIST.contains(&title.as_str())
+        if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
+            if config.options.contains(&AppExtraFlag::Hidden) {
+                log::trace!("Skipping by config: {:?}", window);
+                return false;
+            }
+        }
+
+        !TITLE_BLACK_LIST.contains(&window.title().as_str())
     }
 
     pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {

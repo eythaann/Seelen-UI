@@ -6,12 +6,18 @@
 - new custom virtual desktop implementation.
 - shortcut to toggle debug mode on hitboxes (Control + Win + Alt + H).
 
+### enhancements
+- remove black borders of windows previews on dock.
+- improve uwp app manage on dock/taskbar.
+
 ### refactor
 - add strategy pattern to virtual desktops.
 
 ### fix
 - topbar hitbox rect on auto hide equals to on-overlap.
 - bad matching fullscreen apps.
+- suspended process (ex: Settings) been shown on dock.
+- uwp icons not loading correctly.
 
 ## [1.9.11]
 ### features

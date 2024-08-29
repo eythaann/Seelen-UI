@@ -3,12 +3,14 @@ use std::slice::Iter;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::{HDC, HMONITOR},
+    UI::WindowsAndMessaging::EnumChildWindows,
 };
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone)]
 pub struct WindowEnumerator {
+    parent: Option<HWND>,
     handles: Vec<HWND>,
 }
 
@@ -22,16 +24,24 @@ impl IntoIterator for WindowEnumerator {
 }
 
 impl WindowEnumerator {
+    pub fn new(parent: Option<HWND>) -> Self {
+        Self {
+            parent,
+            handles: Vec::new(),
+        }
+    }
+
     pub fn new_refreshed() -> Result<Self> {
-        let mut enumerator = Self::default();
+        let mut enumerator = Self::new(None);
         enumerator.refresh()?;
         Ok(enumerator)
     }
 
     pub fn refresh(&mut self) -> Result<()> {
         self.handles.clear();
+        let ptr = &mut self.handles as *mut _ as isize;
 
-        unsafe extern "system" fn get_handles_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
+        unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
             let data_ptr = lparam.0 as *mut Vec<HWND>;
             if let Some(data) = data_ptr.as_mut() {
                 data.push(hwnd);
@@ -39,7 +49,12 @@ impl WindowEnumerator {
             true.into()
         }
 
-        WindowsApi::enum_windows(Some(get_handles_proc), &mut self.handles as *mut _ as isize)
+        if let Some(parent) = self.parent {
+            unsafe { EnumChildWindows(parent, Some(enum_proc), LPARAM(ptr)).ok()? };
+        } else {
+            WindowsApi::enum_windows(Some(enum_proc), ptr)?;
+        }
+        Ok(())
     }
 
     pub fn iter(&self) -> Iter<'_, HWND> {

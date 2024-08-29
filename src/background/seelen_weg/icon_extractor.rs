@@ -186,7 +186,6 @@ pub fn extract_and_save_icon(handle: &AppHandle, exe_path: &str) -> Result<PathB
     if let Some(package) = trace_lock!(UWP_MANAGER).get_from_path(&path) {
         if let Some(uwp_icon_path) = package.get_light_icon(&filename) {
             log::debug!("Copying UWP icon from \"{}\"", uwp_icon_path.display());
-
             std::fs::copy(uwp_icon_path, &saved_icon_path)?;
             return Ok(saved_icon_path);
         }
@@ -201,5 +200,6 @@ pub fn extract_and_save_icon(handle: &AppHandle, exe_path: &str) -> Result<PathB
         }
     }
 
+    log::trace!("No icon found for \"{}\"", filename);
     Err("Failed to extract icon".into())
 }

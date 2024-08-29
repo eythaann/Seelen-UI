@@ -393,7 +393,7 @@ impl Seelen {
     unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
         let mut seelen = trace_lock!(SEELEN);
 
-        if SeelenWeg::is_real_window(hwnd, false) {
+        if SeelenWeg::should_be_added(hwnd) {
             SeelenWeg::add_hwnd(hwnd);
         }
 

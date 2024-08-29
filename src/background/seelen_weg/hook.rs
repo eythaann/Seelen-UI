@@ -11,32 +11,25 @@ impl SeelenWeg {
     pub fn process_global_win_event(event: WinEvent, origin: HWND) -> Result<()> {
         match event {
             WinEvent::ObjectShow | WinEvent::ObjectCreate => {
-                if Self::is_real_window(origin, false) {
+                if Self::should_be_added(origin) {
                     Self::add_hwnd(origin);
                 }
             }
-            WinEvent::ObjectDestroy => {
-                if Self::contains_app(origin) {
-                    Self::remove_hwnd(origin);
+            WinEvent::ObjectParentChange => {
+                let parent = WindowsApi::get_parent(origin);
+                if parent.0 != 0 && !Self::contains_app(parent) && Self::should_be_added(parent) {
+                    Self::add_hwnd(parent);
                 }
             }
-            WinEvent::ObjectHide => {
+            WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
                 if Self::contains_app(origin) {
-                    // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
-                    // parent so we can't filter it on open event but these are immediately hidden when the ApplicationFrameHost.exe parent
-                    // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
-                    let parent = WindowsApi::get_parent(origin);
-                    if parent.0 != 0 {
-                        Self::replace_hwnd(origin, parent)?;
-                    } else {
-                        Self::remove_hwnd(origin);
-                    }
+                    Self::remove_hwnd(origin);
                 }
             }
             WinEvent::ObjectNameChange => {
                 if Self::contains_app(origin) {
                     Self::update_app(origin);
-                } else if Self::is_real_window(origin, false) {
+                } else if Self::should_be_added(origin) {
                     Self::add_hwnd(origin);
                 }
             }

@@ -1,44 +1,44 @@
 use image::ImageFormat;
-use serde::Deserialize;
 use tauri::{Emitter, WebviewWindow};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{error_handler::Result, seelen::get_app_handle, windows_api::WindowsApi};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
-    UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
+    UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, SW_SHOWNORMAL, WM_CLOSE},
 };
 
 use super::SeelenWeg;
 
-#[derive(Deserialize)]
-pub struct Args {
-    hwnd: isize,
-    process_hwnd: isize,
-}
 #[tauri::command(async)]
-pub fn weg_request_update_previews(hwnds: Vec<Args>) -> Result<(), String> {
-    std::thread::spawn(move || {
-        for app in hwnds {
-            if WindowsApi::is_iconic(HWND(app.hwnd)) {
-                continue;
-            }
+pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
+    let temp_dir = std::env::temp_dir();
 
-            let temp_dir = std::env::temp_dir();
-            let hwnd = HWND(app.process_hwnd);
-            let image = SeelenWeg::capture_window(hwnd);
-            if let Some(image) = image {
-                let mut output_path = temp_dir.clone();
-                output_path.push(format!("{}.png", hwnd.0));
-                image
-                    .save_with_format(&output_path, ImageFormat::Png)
-                    .expect("could not save image");
-                get_app_handle()
-                    .emit(format!("weg-preview-update-{}", hwnd.0).as_str(), ())
-                    .expect("could not emit event");
-            }
+    for hwnd in handles {
+        let hwnd: HWND = HWND(hwnd);
+
+        if WindowsApi::is_iconic(hwnd) {
+            continue;
         }
-    });
+
+        let image = SeelenWeg::capture_window(hwnd);
+        if let Some(image) = image {
+            let rect = WindowsApi::get_window_rect_without_margins(hwnd);
+            let shadow = WindowsApi::shadow_rect(hwnd)?;
+            let width = rect.right - rect.left;
+            let height = rect.bottom - rect.top;
+
+            let image = image.crop_imm(
+                shadow.left.unsigned_abs(),
+                shadow.top.unsigned_abs(),
+                width as u32,
+                height as u32,
+            );
+
+            image.save_with_format(temp_dir.join(format!("{}.png", hwnd.0)), ImageFormat::Png)?;
+            get_app_handle().emit(format!("weg-preview-update-{}", hwnd.0).as_str(), ())?;
+        }
+    }
     Ok(())
 }
 
@@ -68,7 +68,11 @@ pub fn weg_toggle_window_state(window: WebviewWindow, hwnd: isize, exe_path: Str
     }
 
     if WindowsApi::is_iconic(hwnd) {
-        return WindowsApi::show_window(hwnd, SW_RESTORE);
+        println!("iconic");
+
+        WindowsApi::show_window(hwnd, SW_SHOWNORMAL)?;
+        WindowsApi::show_window(hwnd, SW_RESTORE)?;
+        return Ok(());
     }
 
     let foreground = WindowsApi::get_foreground_window();

@@ -2,6 +2,7 @@ mod app_bar;
 mod com;
 mod iterator;
 mod process;
+pub mod window;
 
 pub use app_bar::*;
 pub use com::*;
@@ -438,7 +439,11 @@ impl WindowsApi {
 
     pub fn exe_path_v2(hwnd: HWND) -> Result<PathBuf> {
         let (process_id, _) = Self::window_thread_process_id(hwnd);
-        Ok(PathBuf::from(Self::exe_path_by_process(process_id)?))
+        let path_string = Self::exe_path_by_process(process_id)?;
+        if path_string.is_empty() {
+            return Err("exe path is empty".into());
+        }
+        Ok(PathBuf::from(path_string))
     }
 
     pub fn exe(hwnd: HWND) -> Result<String> {

@@ -174,12 +174,12 @@ impl WindowsAppsManager {
     }
 
     pub fn get_from_path(&self, exe_path: &Path) -> Option<&UWPPackage> {
-        let exe = exe_path.file_name()?.to_str()?;
+        let exe = exe_path.file_name()?.to_string_lossy().to_string();
         self.packages.iter().find(|p| {
             exe_path.starts_with(&p.install_location)
                 && p.applications
                     .iter()
-                    .any(|app| app.executable.ends_with(exe) || app.alias.as_deref() == Some(exe))
+                    .any(|app| app.executable.ends_with(&exe) || app.alias.as_deref() == Some(&exe))
         })
     }
 }

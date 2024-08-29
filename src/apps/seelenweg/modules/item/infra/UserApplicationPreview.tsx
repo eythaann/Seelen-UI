@@ -18,13 +18,13 @@ interface PreviewProps {
 export const UserApplicationPreview = ({ hwnd }: PreviewProps) => {
   const app = useSelector(SelectOpenApp(hwnd));
 
-  const imageUrl = convertFileSrc(`${LAZY_CONSTANTS.TEMP_FOLDER}${app?.process_hwnd || 0}.png`);
+  const imageUrl = convertFileSrc(`${LAZY_CONSTANTS.TEMP_FOLDER}${app?.hwnd || 0}.png`);
 
   const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
   const [_, forceUpdate] = useReducer((x) => x + 1, 0);
 
   useEffect(() => {
-    const unlisten = listen(`weg-preview-update-${app?.process_hwnd || 0}`, () => {
+    const unlisten = listen(`weg-preview-update-${app?.hwnd || 0}`, () => {
       setImageSrc(imageUrl);
       forceUpdate();
     });
