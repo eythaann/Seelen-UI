@@ -17,8 +17,8 @@ use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     UI::WindowsAndMessaging::{
-        EnumWindows, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, WS_EX_APPWINDOW,
-        WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        EnumWindows, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL,
+        WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -415,7 +415,7 @@ impl SeelenWeg {
     pub fn show_taskbar() -> Result<()> {
         for hwnd in get_taskbars_handles()? {
             AppBarData::from_handle(hwnd).set_state(AppBarDataState::AlwaysOnTop);
-            WindowsApi::show_window(hwnd, SW_SHOWNOACTIVATE)?;
+            WindowsApi::show_window(hwnd, SW_SHOWNORMAL)?;
         }
         Ok(())
     }
