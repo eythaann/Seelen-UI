@@ -297,11 +297,9 @@ impl TryFrom<u32> for WinEvent {
 
 impl WinEvent {
     pub fn should_handle_fullscreen_events(&self, hwnd: HWND) -> bool {
-        let title = WindowsApi::get_window_text(hwnd);
-        let is_foreground_window = hwnd == WindowsApi::get_foreground_window();
-
-        (is_foreground_window || *self == Self::SystemMinimizeStart)
-            && !IGNORE_FULLSCREEN.contains(&title)
+        hwnd == WindowsApi::get_foreground_window()
+            && WindowsApi::is_window_visible(hwnd)
+            && !IGNORE_FULLSCREEN.contains(&WindowsApi::get_window_text(hwnd))
     }
 
     pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {
@@ -310,9 +308,7 @@ impl WinEvent {
             | Self::ObjectCreate
             | Self::ObjectUncloaked
             | Self::SystemMinimizeEnd => {
-                let is_creating_invisible_window =
-                    *self == Self::ObjectCreate && !WindowsApi::is_window_visible(origin);
-                if is_creating_invisible_window || !self.should_handle_fullscreen_events(origin) {
+                if !self.should_handle_fullscreen_events(origin) {
                     return None;
                 }
 
