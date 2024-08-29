@@ -279,10 +279,13 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
     }
 
     fn send_to(&self, idx: usize, window: isize) -> Result<()> {
-        if idx >= self.workspaces().len() {
-            // temporal until implement a UI to create seelen workspaces
-            self.create_many_desktop((idx + 1) - self.workspaces().len())?;
-            // return Err("Tried to send to non-existent workspace".into());
+        {
+            let len = self.workspaces().len();
+            if idx >= len {
+                // temporal until implement a UI to create seelen workspaces
+                self.create_many_desktop((idx + 1) - len)?;
+                // return Err("Tried to switch to non-existent workspace".into());
+            }
         }
         let mut workspaces = self.workspaces();
         {
