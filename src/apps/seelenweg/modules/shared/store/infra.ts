@@ -1,6 +1,7 @@
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
-import { FileChange } from '../../../../shared/events';
+import { FileChange, GlobalEvent } from '../../../../shared/events';
+import { FocusedApp } from '../../../../shared/interfaces/common';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { Theme } from '../../../../shared/schemas/Theme';
@@ -10,6 +11,7 @@ import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { debounce } from 'lodash';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -82,12 +84,14 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.updateOpenAppInfo(item));
   });
 
-  await listenGlobal<HWND>('set-focused-handle', (event) => {
-    store.dispatch(RootActions.setFocusedHandle(event.payload));
-  });
-
-  await listenGlobal<string>('set-focused-executable', (event) => {
-    store.dispatch(RootActions.setFocusedExecutable(event.payload));
+  const onFocusChanged = debounce((app: FocusedApp) => {
+    store.dispatch(RootActions.setFocusedApp(app));
+  }, 200);
+  await view.listen<FocusedApp>(GlobalEvent.FocusChanged, (e) => {
+    onFocusChanged(e.payload);
+    if (e.payload.name != 'Seelen UI') {
+      onFocusChanged.flush();
+    }
   });
 
   await listenGlobal<MediaSession[]>('media-sessions', (event) => {

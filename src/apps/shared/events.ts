@@ -5,3 +5,7 @@ export enum FileChange {
   WegItems = 'weg-items',
   Placeholders = 'placeholders',
 }
+
+export enum GlobalEvent {
+  FocusChanged = 'global-focus-changed',
+}

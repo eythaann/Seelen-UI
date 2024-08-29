@@ -1,5 +1,6 @@
 use std::{
     collections::HashMap,
+    path::PathBuf,
     sync::{
         atomic::{AtomicIsize, Ordering},
         Arc,
@@ -11,6 +12,7 @@ use color_eyre::owo_colors::OwoColorize;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use serde::Serialize;
 use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
@@ -34,16 +36,26 @@ use crate::{
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
     utils::{constants::IGNORE_FOCUS, spawn_named_thread},
-    windows_api::WindowsApi,
+    windows_api::{window::Window, WindowsApi},
     winevent::WinEvent,
 };
 
 lazy_static! {
     pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
+    // Last active window omitting all the seelen apps
+    pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0);
 }
 
 pub struct HookManager {
     skip: HashMap<isize, Vec<WinEvent>>,
+}
+
+#[derive(Serialize, Clone)]
+pub struct FocusedApp {
+    hwnd: isize,
+    title: String,
+    name: String,
+    exe: Option<PathBuf>,
 }
 
 impl HookManager {
@@ -100,12 +112,28 @@ impl HookManager {
             return;
         }
 
-        let title = WindowsApi::get_window_text(origin);
-        if (event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground)
-            && IGNORE_FOCUS.contains(&title)
-        {
-            log::trace!("Skipping WinEvent::{:?}", event);
-            return;
+        let window = Window::from(origin);
+        if event == WinEvent::SystemForeground && !window.is_seelen_window() {
+            LAST_ACTIVE_NOT_SEELEN.store(origin.0, Ordering::Relaxed);
+        }
+
+        if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
+            let title = window.title();
+            if IGNORE_FOCUS.contains(&title) {
+                log::trace!("Skipping WinEvent::{:?}", event);
+                return;
+            }
+            log_error!(get_app_handle().emit(
+                "global-focus-changed",
+                FocusedApp {
+                    title,
+                    hwnd: origin.0,
+                    name: window
+                        .app_display_name()
+                        .unwrap_or(String::from("Error on App Name")),
+                    exe: window.exe().ok(),
+                },
+            ));
         }
 
         std::thread::spawn(move || {

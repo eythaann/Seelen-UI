@@ -1,20 +1,20 @@
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
-import { FileChange } from '../../../../shared/events';
+import { FileChange, GlobalEvent } from '../../../../shared/events';
+import { FocusedApp } from '../../../../shared/interfaces/common';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { throttle } from 'lodash';
+import { debounce, throttle } from 'lodash';
 
 import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
 import {
-  ActiveApp,
   AppNotification,
   Battery,
   MediaChannelTransportData,
@@ -38,8 +38,14 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
   });
 
-  await view.listen<ActiveApp | null>('focus-changed', (e) => {
-    store.dispatch(RootActions.setFocused(e.payload));
+  const onFocusChanged = debounce((app: FocusedApp) => {
+    store.dispatch(RootActions.setFocused(app));
+  }, 200);
+  await listenGlobal<FocusedApp>(GlobalEvent.FocusChanged, (e) => {
+    onFocusChanged(e.payload);
+    if (e.payload.name != 'Seelen UI') {
+      onFocusChanged.flush();
+    }
   });
 
   await listenGlobal<any>(FileChange.Settings, async (_event) => {

@@ -84,10 +84,6 @@ impl Drop for SeelenWeg {
 // SINGLETON
 impl SeelenWeg {
     pub fn set_active_window(hwnd: HWND) -> Result<()> {
-        if WindowsApi::get_window_text(hwnd) == "Task Switching" {
-            return Ok(());
-        }
-
         let handle = get_app_handle();
         handle.emit("set-focused-handle", hwnd.0)?;
         handle.emit(

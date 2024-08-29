@@ -53,6 +53,10 @@ impl Window {
         WindowsApi::exe_path_v2(self.0)
     }
 
+    pub fn app_display_name(&self) -> Result<String> {
+        WindowsApi::get_window_display_name(self.0)
+    }
+
     pub fn parent(&self) -> Option<Window> {
         let parent = WindowsApi::get_parent(self.0);
         if parent.0 != 0 {
@@ -88,5 +92,16 @@ impl Window {
             }
         }
         Ok(None)
+    }
+
+    pub fn is_desktop(&self) -> bool {
+        WindowsApi::get_desktop_window() == self.0 || self.class() == "Progman"
+    }
+
+    pub fn is_seelen_window(&self) -> bool {
+        if let Ok(exe) = self.exe() {
+            return exe.ends_with("seelen-ui.exe");
+        }
+        false
     }
 }

@@ -26,7 +26,7 @@ export const StartMenu = memo(({ item }: Props) => {
   const size = useSelector(Selectors.settings.size);
 
   const isStartMenuOpen = useSelector((state: RootState) =>
-    startMenuExes.includes(Selectors.focusedExecutable(state)),
+    startMenuExes.includes(Selectors.focusedApp(state)?.exe || ''),
   );
 
   const { t } = useTranslation();

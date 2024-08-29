@@ -67,9 +67,9 @@ use windows::{
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
                 GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
-                IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetWindowPos, ShowWindow,
-                ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE,
-                GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
+                IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetForegroundWindow, SetWindowPos,
+                ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE,
+                GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
                 SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
                 SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
                 SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
@@ -298,16 +298,17 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn async_force_set_foreground(hwnd: HWND) {
-        std::thread::spawn(move || log_error!(Self::force_set_foreground(hwnd)));
-    }
-
     pub fn minimize_window(hwnd: HWND) -> Result<()> {
         Self::show_window(hwnd, SW_MINIMIZE)
     }
 
     pub fn restore_window(hwnd: HWND) -> Result<()> {
         Self::show_window(hwnd, SW_RESTORE)
+    }
+
+    pub fn set_foreground(hwnd: HWND) -> Result<()> {
+        unsafe { SetForegroundWindow(hwnd).ok()? };
+        Ok(())
     }
 
     pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
@@ -320,7 +321,12 @@ impl WindowsApi {
         Self::show_window_async(hwnd, SW_MINIMIZE)?;
         Self::show_window_async(hwnd, SW_RESTORE)?;
         Self::set_minimize_animation(true)?;
-        Ok(())
+
+        Self::set_foreground(hwnd)
+    }
+
+    pub fn async_force_set_foreground(hwnd: HWND) {
+        std::thread::spawn(move || log_error!(Self::force_set_foreground(hwnd)));
     }
 
     fn open_process(
@@ -380,6 +386,10 @@ impl WindowsApi {
 
     pub fn get_owner(hwnd: HWND) -> HWND {
         unsafe { GetWindow(hwnd, GW_OWNER) }
+    }
+
+    pub fn get_desktop_window() -> HWND {
+        unsafe { GetDesktopWindow() }
     }
 
     pub fn exe_path_by_process(process_id: u32) -> Result<String> {

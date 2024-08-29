@@ -1,8 +1,13 @@
+use std::sync::atomic::Ordering;
+
 use image::ImageFormat;
-use tauri::{Emitter, WebviewWindow};
+use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
-use crate::{error_handler::Result, seelen::get_app_handle, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
+    windows_api::WindowsApi,
+};
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
     UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, SW_SHOWNORMAL, WM_CLOSE},
@@ -54,7 +59,7 @@ pub fn weg_close_app(hwnd: isize) -> Result<(), String> {
 }
 
 #[tauri::command(async)]
-pub fn weg_toggle_window_state(window: WebviewWindow, hwnd: isize, exe_path: String) -> Result<()> {
+pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
     let hwnd = HWND(hwnd);
 
     // If the window is not open, open it
@@ -73,11 +78,10 @@ pub fn weg_toggle_window_state(window: WebviewWindow, hwnd: isize, exe_path: Str
         return Ok(());
     }
 
-    let foreground = WindowsApi::get_foreground_window();
-    if foreground == hwnd || foreground == window.hwnd()? {
+    if LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire) == hwnd.0 {
         WindowsApi::show_window(hwnd, SW_MINIMIZE)?;
     } else {
-        WindowsApi::force_set_foreground(hwnd)?;
+        WindowsApi::async_force_set_foreground(hwnd)
     }
 
     Ok(())

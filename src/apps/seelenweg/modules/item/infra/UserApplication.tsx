@@ -24,7 +24,9 @@ interface Props {
 
 export const UserApplication = memo(({ item }: Props) => {
   const size = useSelector(Selectors.settings.size);
-  const isFocused = useSelector((state: RootState) => item.opens.includes(state.focusedHandle));
+  const isFocused = useSelector(
+    (state: RootState) => state.focusedApp && item.opens.includes(state.focusedApp.hwnd),
+  );
 
   const [openPreview, setOpenPreview] = useState(false);
 

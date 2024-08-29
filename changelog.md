@@ -18,6 +18,7 @@
 - bad matching fullscreen apps.
 - suspended process (ex: Settings) been shown on dock.
 - uwp icons not loading correctly.
+- bad focused app matching strategy.
 
 ## [1.9.11]
 ### features

@@ -1,4 +1,5 @@
 import { IRootState } from '../../../../../shared.interfaces';
+import { FocusedApp } from '../../../../shared/interfaces/common';
 import { Seelenweg } from '../../../../shared/schemas/Seelenweg';
 import {
   SavedMediaItem,
@@ -76,8 +77,7 @@ export interface RootState extends IRootState<Seelenweg> {
   itemsOnRight: SwItem[];
   openApps: Record<HWND, AppFromBackground>;
   // ----------------------
-  focusedHandle: HWND;
-  focusedExecutable: string;
+  focusedApp: FocusedApp | null;
   isOverlaped: boolean;
   mediaSessions: MediaSession[];
   colors: UIColors;

@@ -1,15 +1,10 @@
 import { IRootState } from '../../../../../shared.interfaces';
+import { FocusedApp } from '../../../../shared/interfaces/common';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { Placeholder } from '../../../../shared/schemas/Placeholders';
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
-
-export interface ActiveApp {
-  name: string;
-  title: string;
-  exe: string | null;
-}
 
 /** https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status */
 export interface PowerStatus {
@@ -126,7 +121,7 @@ export interface Workspace {
 export interface RootState extends IRootState<FancyToolbar> {
   version: number;
   isOverlaped: boolean;
-  focused: ActiveApp | null;
+  focused: FocusedApp | null;
   placeholder: Placeholder | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
