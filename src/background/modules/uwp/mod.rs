@@ -41,7 +41,7 @@ lazy_static! {
 }
 
 #[derive(Deserialize, Debug, Default)]
-#[serde(rename_all = "PascalCase")]
+#[serde(default, rename_all = "PascalCase")]
 #[allow(dead_code)]
 pub struct UWPPackage {
     name: String,
