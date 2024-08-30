@@ -37,8 +37,12 @@ foreach ($package in $packages) {
     continue
   }
 
-  $resolvedInstallLocation = $package.InstallLocation
+  $resolvedInstallLocation = ""
   
+  if ($null -ne $package.InstallLocation) {
+    $resolvedInstallLocation = $package.InstallLocation
+  }
+
   # Resolve install location in case it's a symlink
   $target = (Get-Item -Path $package.InstallLocation).Target
   if ($target -is [array]) {
