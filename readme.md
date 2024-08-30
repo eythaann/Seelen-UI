@@ -56,7 +56,7 @@
   - [Languages](./documentation/languages.md)
   - [Toolbar](./documentation/toolbar.md)
   - [Themes](./documentation/themes.md)
-  - [Window Manager](./documentation/windows_manager.md)
+  - [Window Manager](./documentation/window_manager.md)
   - [Project](./documentation/project.md)
 - [Contributing](#contributing)
 - [License](#license)
