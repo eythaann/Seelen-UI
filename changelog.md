@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.10.1]
 ### fix
 - app crashing if uwp package has missing path.
 - app no working fine on multiple monitors.
