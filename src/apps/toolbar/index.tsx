@@ -18,7 +18,7 @@ import './styles/global.css';
 
 async function Main() {
   wrapConsole();
-  registerDocumentEvents();
+  await registerDocumentEvents();
 
   const container = getRootContainer();
 

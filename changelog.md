@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app crashing if uwp package has missing path.
+- app no working fine on multiple monitors.
+
 ## [1.10.0]
 ### features
 - add volume changed popup.
