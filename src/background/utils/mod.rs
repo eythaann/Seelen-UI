@@ -110,7 +110,10 @@ pub fn app_data_path(handle: &AppHandle) -> PathBuf {
 
 #[macro_export]
 macro_rules! trace_lock {
-    ($mutex:expr) => {{
+    ($mutex:expr) => {
+        trace_lock!($mutex, 5)
+    };
+    ($mutex:expr, $duration:expr) => {{
         #[cfg(feature = "trace_lock")]
         {
             let guard = $mutex
@@ -127,7 +130,7 @@ macro_rules! trace_lock {
         #[cfg(not(feature = "trace_lock"))]
         {
             $mutex
-                .try_lock_for(std::time::Duration::from_secs(5))
+                .try_lock_for(std::time::Duration::from_secs($duration))
                 .expect("Failed to lock")
         }
     }};

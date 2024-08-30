@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app crashing on enumerating many monitors or on large load.
+
 ## [1.10.1]
 ### fix
 - app crashing if uwp package has missing path.

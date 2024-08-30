@@ -165,11 +165,11 @@ impl Seelen {
         }
 
         log::trace!("Enumerating Monitors");
-        let mut monitor_manager = trace_lock!(MONITOR_MANAGER);
-        for (_name, id) in &monitor_manager.monitors {
-            log_error!(self.add_monitor(*id));
+        let monitors = trace_lock!(MONITOR_MANAGER).monitors.clone();
+        for (_name, id) in monitors {
+            log_error!(self.add_monitor(id));
         }
-        monitor_manager.listen_changes(Self::on_monitor_event);
+        trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
 
         spawn_named_thread("Start Async", || log_error!(Self::start_async()))?;
         tauri::async_runtime::spawn(async {
