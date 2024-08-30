@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.10.2]
 ### fix
 - app crashing on enumerating many monitors or on large load.
 
