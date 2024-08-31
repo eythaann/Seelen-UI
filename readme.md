@@ -28,7 +28,7 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download Seelen UI from Microsoft Store">
-        <img src="https://get.microsoft.com/images/en-us%20dark.svg" height="80px" alt="Download Seelen UI from Microsoft Store">
+        <img src="https://get.microsoft.com/images/en-us%20dark.svg" width="250px" alt="Download Seelen UI from Microsoft Store">
       </a>
     </td>
     <td align="center">
@@ -37,7 +37,7 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Join the Seelen UI Discord community">
-        <img src="./documentation/images/discord.png" height="80px" alt="Join the Seelen UI Discord community">
+        <img src="./documentation/images/discord.png" width="230px" alt="Join the Seelen UI Discord community">
       </a>
     </td>
   </tr>
