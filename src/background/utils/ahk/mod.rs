@@ -1,26 +1,10 @@
 use std::{collections::HashMap, env::temp_dir, path::PathBuf};
 
-use lazy_static::lazy_static;
 use regex::Regex;
 use tauri::{path::BaseDirectory, Manager};
 use tauri_plugin_shell::ShellExt;
 
 use crate::{error_handler::Result, seelen::get_app_handle, state::domain::AhkVar};
-
-lazy_static! {
-    pub static ref LIB_AHK_PATH: PathBuf = {
-        let mut lib_ahk = AutoHotKey::new(include_str!("mocks/seelen.lib.ahk"));
-
-        lib_ahk.inner = lib_ahk.inner.replace(
-            "SEELEN_UI_EXE_PATH",
-            &std::env::current_exe()
-                .expect("Failed to get current exe path")
-                .to_string_lossy(),
-        );
-
-        lib_ahk.save().expect("Failed to load lib.ahk")
-    };
-}
 
 pub struct AutoHotKey {
     inner: String,
@@ -31,7 +15,12 @@ impl AutoHotKey {
     pub fn new(contents: &str) -> Self {
         Self {
             name: None,
-            inner: contents.to_string(),
+            inner: contents.replace(
+                "SEELEN_UI_EXE_PATH",
+                &std::env::current_exe()
+                    .expect("Failed to get current exe path")
+                    .to_string_lossy(),
+            ),
         }
     }
 
@@ -44,13 +33,6 @@ impl AutoHotKey {
 
     pub fn name(mut self, name: &str) -> Self {
         self.name = Some(name.to_string());
-        self
-    }
-
-    pub fn with_lib(mut self) -> Self {
-        self.inner = self
-            .inner
-            .replace("seelen.lib.ahk", &LIB_AHK_PATH.to_string_lossy());
         self
     }
 

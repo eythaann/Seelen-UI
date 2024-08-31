@@ -298,20 +298,22 @@ impl Seelen {
 
         let state = FULL_STATE.load();
         if state.is_ahk_enabled() {
-            log::trace!("Starting AHK shortcuts");
+            log::trace!("Creating AHK shortcuts");
+
+            AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.lib.ahk"))
+                .name("seelen.lib.ahk")
+                .save()?;
+
             AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.ahk"))
                 .name("seelen.ahk")
-                .with_lib()
                 .execute()?;
 
             if state.is_window_manager_enabled() {
-                log::trace!("Starting seelen.wm.ahk");
                 AutoHotKey::from_template(
                     include_str!("utils/ahk/mocks/seelen.wm.ahk"),
                     state.get_ahk_variables(),
                 )
                 .name("seelen.wm.ahk")
-                .with_lib()
                 .execute()?;
             }
         }

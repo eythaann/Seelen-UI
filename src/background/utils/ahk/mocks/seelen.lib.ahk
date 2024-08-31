@@ -75,3 +75,11 @@ ResumeWM() {
 DebugHitboxes() {
   RunWait(seelen " weg debug-hitbox", , "Hide")
 }
+
+ToggleWinEventTracing() {
+  RunWait(seelen " debugger toggle-win-events", , "Hide")
+}
+
+ToggleMutexLockTracing() {
+  RunWait(seelen " debugger toggle-trace-lock", , "Hide")
+}

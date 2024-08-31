@@ -9,6 +9,7 @@ pub use winver::*;
 use std::{
     collections::HashMap,
     path::PathBuf,
+    sync::atomic::AtomicBool,
     time::{Duration, Instant},
 };
 
@@ -108,31 +109,25 @@ pub fn app_data_path(handle: &AppHandle) -> PathBuf {
         .expect("Failed to resolve App Data path")
 }
 
+pub static TRACE_LOCK_ENABLED: AtomicBool = AtomicBool::new(false);
 #[macro_export]
 macro_rules! trace_lock {
     ($mutex:expr) => {
         trace_lock!($mutex, 5)
     };
     ($mutex:expr, $duration:expr) => {{
-        #[cfg(feature = "trace_lock")]
-        {
-            let guard = $mutex
-                .try_lock_for(std::time::Duration::from_secs(5))
-                .expect("Failed to lock");
+        let guard = $mutex
+            .try_lock_for(std::time::Duration::from_secs($duration))
+            .expect("Failed to lock");
+        if $crate::utils::TRACE_LOCK_ENABLED.load(std::sync::atomic::Ordering::Relaxed) {
             log::trace!(
                 "{} lock acquired at {}:{}",
                 stringify!($mutex),
                 file!(),
                 line!()
             );
-            guard
         }
-        #[cfg(not(feature = "trace_lock"))]
-        {
-            $mutex
-                .try_lock_for(std::time::Duration::from_secs($duration))
-                .expect("Failed to lock")
-        }
+        guard
     }};
 }
 

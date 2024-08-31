@@ -121,4 +121,3 @@ features = [
 # If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.
 custom-protocol = ["tauri/custom-protocol"]
 devtools = ["tauri/devtools"]
-trace_lock = []

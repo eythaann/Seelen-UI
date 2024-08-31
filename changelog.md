@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add debugger cli toggles to tracing more info on logs.
+
+### fix
+- saving ahk lib in wrong location.
+
 ## [1.10.2]
 ### fix
 - app crashing on enumerating many monitors or on large load.

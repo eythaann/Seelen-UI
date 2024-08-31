@@ -22,3 +22,11 @@ CloseIfNotRunning()
 ^#!h:: {
   DebugHitboxes()
 }
+
+^#!l:: {
+  ToggleWinEventTracing()
+}
+
+^#!t:: {
+  ToggleMutexLockTracing()
+}

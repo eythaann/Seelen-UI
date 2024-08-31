@@ -2,7 +2,7 @@ use std::{
     collections::HashMap,
     path::PathBuf,
     sync::{
-        atomic::{AtomicIsize, Ordering},
+        atomic::{AtomicBool, AtomicIsize, Ordering},
         Arc,
     },
     time::{Duration, Instant},
@@ -46,6 +46,8 @@ lazy_static! {
     pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0);
 }
 
+pub static WIN_EVENTS_ENABLED: AtomicBool = AtomicBool::new(false);
+
 pub struct HookManager {
     skip: HashMap<isize, Vec<WinEvent>>,
 }
@@ -77,6 +79,10 @@ impl HookManager {
     }
 
     pub fn skip_done(&mut self, event: WinEvent, hwnd: isize) {
+        if WIN_EVENTS_ENABLED.load(Ordering::Relaxed) {
+            log::debug!("Skipping WinEvent::{:?}", event);
+        }
+
         if let Some(v) = self.skip.get_mut(&hwnd) {
             if let Some(pos) = v.iter().position(|e| e == &event) {
                 v.remove(pos);
@@ -87,13 +93,13 @@ impl HookManager {
         }
     }
 
-    fn _log_event(event: WinEvent, origin: HWND) {
-        if event == WinEvent::ObjectLocationChange {
+    fn log_event(event: WinEvent, origin: HWND) {
+        if !WIN_EVENTS_ENABLED.load(Ordering::Relaxed) || event == WinEvent::ObjectLocationChange {
             return;
         }
 
-        println!(
-            "{:?}({}) || {} || {} || {:<20}",
+        log::debug!(
+            "{:?}({}) || {} || {} || {}",
             event.green(),
             origin.0,
             WindowsApi::exe(origin).unwrap_or_default(),
@@ -103,11 +109,9 @@ impl HookManager {
     }
 
     pub fn event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
-        // uncomment for debug
-        // Self::_log_event(event, origin);
+        Self::log_event(event, origin);
 
         if self.should_skip(event, origin.0) {
-            log::trace!("Skipping WinEvent::{:?}", event);
             self.skip_done(event, origin.0);
             return;
         }
