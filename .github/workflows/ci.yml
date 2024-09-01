@@ -11,7 +11,7 @@ on:
 
 jobs:
   check-js:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -30,6 +30,8 @@ jobs:
         with:
           toolchain: nightly-2024-06-25
       - uses: Swatinem/rust-cache@v2
+
+      - run: mkdir dist
 
       - name: Linter
         run: |-
