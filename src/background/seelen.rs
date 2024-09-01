@@ -386,7 +386,7 @@ impl Seelen {
             "updater",
             tauri::WebviewUrl::App("update/index.html".into()),
         )
-        .inner_size(500.0, 240.0)
+        .inner_size(500.0, 260.0)
         .maximizable(false)
         .minimizable(true)
         .resizable(false)

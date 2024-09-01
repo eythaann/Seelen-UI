@@ -1,9 +1,9 @@
-name: "Release"
+name: "Pre-Release"
 
 on:
   push:
     tags:
-      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-beta.[0-9]+"
   workflow_dispatch:
 
 jobs:
@@ -14,29 +14,31 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
       - run: npm clean-install
       - run: npm run lint
       - run: npm run test
 
-  create-release:
+  create-pre-release:
     needs: run-tests-and-linter
     runs-on: ubuntu-latest
     permissions:
       contents: write
     outputs:
-      release_id: ${{ steps.create-release.outputs.result }}
+      release_id: ${{ steps.create-pre-release.outputs.result }}
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
 
       - name: Get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Create release
-        id: create-release
+        id: create-pre-release
         uses: actions/github-script@v7
         with:
           script: |
@@ -53,12 +55,12 @@ jobs:
               body: releaseNotes,
               generate_release_notes: true,
               draft: true,
-              prerelease: false,
+              prerelease: true,
             });
             return data.id;
 
   build-installers:
-    needs: create-release
+    needs: create-pre-release
     permissions:
       contents: write
     strategy:
@@ -75,14 +77,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
 
       - name: Install Rust Nightly
         uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2024-06-25
+      - uses: Swatinem/rust-cache@v2
 
       - name: Install frontend dependencies
-        run: npm install
+        run: npm clean-install
 
       - uses: tauri-apps/tauri-action@v0
         env:
@@ -90,24 +94,8 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
-          releaseId: ${{ needs.create-release.outputs.release_id }}
+          releaseId: ${{ needs.create-pre-release.outputs.release_id }}
           args: ${{ matrix.args }}
-
-      - name: Install winget
-        if: matrix.platform == 'windows-latest'
-        uses: Cyberboss/install-winget@v1
-
-      - name: Install MSIX dependencies
-        if: matrix.platform == 'windows-latest'
-        shell: powershell
-        run: |
-          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
-          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
-
-      - name: Bundle MSIX
-        if: matrix.platform == 'windows-latest'
-        run: npx ts-node scripts/bundle.msix.ts
 
       - name: Upload artifacts
         id: artifact-upload-step
@@ -119,40 +107,16 @@ jobs:
       - name: Output artifact ID
         run: echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
 
-  microsoft-store-submission:
-    needs: build-installers
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-bundle
-          path: target/release/bundle
-
-      # Use Store Broker to publish to Microsoft Store
-      - name: Submit to Partner Center (aka DevCenter)
-        shell: pwsh
-        run: |
-          ./scripts/SubmitToStore.ps1
-        env:
-          PartnerCenterStoreId: ${{ secrets.MS_PRODUCT_ID }}
-          PartnerCenterTenantId: ${{ secrets.MS_TENANT_ID }}
-          PartnerCenterClientId: ${{ secrets.MS_CLIENT_ID }}
-          PartnerCenterClientSecret: ${{ secrets.MS_CLIENT_SECRET }}
-          SBDisableTelemetry: true
-
   publish-release:
-    needs: [build-installers, create-release]
+    needs: [build-installers, create-pre-release]
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Publish release
+      - name: Publish pre-release
         uses: actions/github-script@v7
         env:
-          releaseId: ${{ needs.create-release.outputs.release_id }}
+          releaseId: ${{ needs.create-pre-release.outputs.release_id }}
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
@@ -178,28 +142,3 @@ jobs:
               release_id: process.env.releaseId,
               draft: false,
             });
-
-  discord:
-    needs: publish-release
-    name: Send Announcement To Discord Server
-    runs-on: ubuntu-latest
-    steps:
-      - name: Discord notification
-        uses: LeGitHubDeTai/github-to-discord@main
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_USERNAME: Seelen
-          DISCORD_AVATAR: https://raw.githubusercontent.com/eythaann/Seelen-UI/master/documentation/images/logo_with_margins.png
-
-          AUTHOR_NAME: eythaann
-          AUTHOR_URL: "https://github.com/eythaann"
-          AUTHOR_AVATAR: "https://avatars.githubusercontent.com/u/76607907?v=4"
-
-          MESSAGE_TITLE: Seelen UI
-          MESSAGE_DESCRIPTION: A new release of Seelen UI has been published
-          MESSAGE_COLOR: 5814783
-
-          SECTION_NAME: "ChangeLog"
-
-          FOOTER_TEXT: "Seelen Inc."
-          FOOTER_URL: "https://github.com/eythaann/seelen-ui"
