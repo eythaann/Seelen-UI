@@ -7,20 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-tests-and-linter:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-      - run: npm clean-install
-      - run: npm run lint
-      - run: npm run test
+  continuous-integration:
+    uses: ./.github/workflows/ci.yml
 
   create-pre-release:
-    needs: run-tests-and-linter
+    needs: continuous-integration
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -29,11 +20,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
-
       - name: Get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
@@ -97,18 +83,8 @@ jobs:
           releaseId: ${{ needs.create-pre-release.outputs.release_id }}
           args: ${{ matrix.args }}
 
-      - name: Upload artifacts
-        id: artifact-upload-step
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-bundle
-          path: target/release/bundle
-
-      - name: Output artifact ID
-        run: echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
-
   publish-release:
-    needs: [build-installers, create-pre-release]
+    needs: build-installers
     permissions:
       contents: write
     runs-on: ubuntu-latest

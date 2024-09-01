@@ -8,6 +8,7 @@ on:
     branches:
       - master
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   js-test-and-linter:
