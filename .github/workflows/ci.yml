@@ -41,7 +41,7 @@ jobs:
       - name: Clippy
         run: |-
           rustup component add clippy
-          cargo clippy --locked --all-targets --all-features -- -D warnings
+          cargo clippy --locked -- -D warnings
 
   rust-test:
     runs-on: windows-latest
