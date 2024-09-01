@@ -3,6 +3,7 @@ use image::ImageBuffer;
 use image::RgbaImage;
 use itertools::Itertools;
 use tauri::AppHandle;
+use tauri::Manager;
 use widestring::U16CString;
 use windows::core::PCWSTR;
 use windows::Win32::Graphics::Gdi::CreateCompatibleDC;
@@ -25,12 +26,12 @@ use std::arch::x86_64::_mm_setr_epi8;
 #[cfg(target_arch = "x86_64")]
 use std::arch::x86_64::_mm_shuffle_epi8;
 use std::arch::x86_64::_mm_storeu_si128;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 
 use crate::error_handler::Result;
 use crate::modules::uwp::UWP_MANAGER;
+use crate::seelen::get_app_handle;
 use crate::trace_lock;
-use crate::utils::app_data_path;
 
 /// Convert BGRA to RGBA
 ///
@@ -164,7 +165,7 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
 ///
 /// If the icon already exists, it returns the path instead overriding, this is needed for allow user custom icons.
 pub fn extract_and_save_icon(handle: &AppHandle, exe_path: &str) -> Result<PathBuf> {
-    let gen_icons_paths = app_data_path(handle).join("icons");
+    let gen_icons_paths = handle.path().app_data_dir()?.join("icons");
     if !gen_icons_paths.exists() {
         std::fs::create_dir_all(&gen_icons_paths)?;
     }
@@ -192,6 +193,50 @@ pub fn extract_and_save_icon(handle: &AppHandle, exe_path: &str) -> Result<PathB
     }
 
     let images = get_images_from_exe(exe_path);
+    if let Ok(images) = images {
+        // icon on index 0 always is the app showed icon
+        if let Some(icon) = images.first() {
+            icon.save(&saved_icon_path)?;
+            return Ok(saved_icon_path);
+        }
+    }
+
+    log::trace!("No icon found for \"{}\"", filename);
+    Err("Failed to extract icon".into())
+}
+
+/// returns the path of the icon extracted from the executable or copied if is an UWP app.
+///
+/// If the icon already exists, it returns the path instead overriding, this is needed for allow user custom icons.
+pub fn extract_and_save_icon_v2<T: AsRef<Path>>(path: T) -> Result<PathBuf> {
+    let gen_icons_paths = get_app_handle().path().app_data_dir()?.join("icons");
+    if !gen_icons_paths.exists() {
+        std::fs::create_dir_all(&gen_icons_paths)?;
+    }
+
+    let path = path.as_ref();
+    let filename = path
+        .file_name()
+        .unwrap_or_default()
+        .to_string_lossy()
+        .to_string();
+    let saved_icon_path = gen_icons_paths.join(filename.replace(".exe", ".png"));
+
+    if saved_icon_path.exists() {
+        return Ok(saved_icon_path);
+    }
+
+    log::trace!("Extracting icon for \"{}\"", filename);
+
+    if let Some(package) = trace_lock!(UWP_MANAGER).get_from_path(path) {
+        if let Some(uwp_icon_path) = package.get_light_icon(&filename) {
+            log::debug!("Copying UWP icon from \"{}\"", uwp_icon_path.display());
+            std::fs::copy(uwp_icon_path, &saved_icon_path)?;
+            return Ok(saved_icon_path);
+        }
+    }
+
+    let images = get_images_from_exe(path.to_string_lossy().as_ref());
     if let Ok(images) = images {
         // icon on index 0 always is the app showed icon
         if let Some(icon) = images.first() {

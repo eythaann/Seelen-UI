@@ -473,7 +473,7 @@
           ],
           "properties": {
             "badge": {
-              "description": "Badge will be displayed over the item, useful as notifications.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; }\n\nconst mediaSession: MediaSession | null; ```",
+              "description": "Badge will be displayed over the item, useful as notifications.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; owner: { name: string; iconPath: string | null; } | null; }\n\nconst mediaSession: MediaSession | null; ```",
               "type": [
                 "string",
                 "null"
@@ -494,7 +494,7 @@
               ]
             },
             "onClickV2": {
-              "description": "This code will be parsed and executed when the item is clicked.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; }\n\nconst mediaSession: MediaSession | null; ```",
+              "description": "This code will be parsed and executed when the item is clicked.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; owner: { name: string; iconPath: string | null; } | null; }\n\nconst mediaSession: MediaSession | null; ```",
               "type": [
                 "string",
                 "null"
@@ -516,12 +516,12 @@
               }
             },
             "template": {
-              "description": "Content to display in the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; }\n\nconst mediaSession: MediaSession | null; ```",
+              "description": "Content to display in the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; owner: { name: string; iconPath: string | null; } | null; }\n\nconst mediaSession: MediaSession | null; ```",
               "default": "",
               "type": "string"
             },
             "tooltip": {
-              "description": "Content to display in tooltip of the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; }\n\nconst mediaSession: MediaSession | null; ```",
+              "description": "Content to display in tooltip of the item.\n\nShould follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).\n\n## Media Item Scope ```ts const volume: number; // output master volume from 0 to 1 const isMuted: boolean; // output master volume is muted const inputVolume: number; // input master volume from 0 to 1 const inputIsMuted: boolean; // input master volume is muted\n\ninterface MediaSession { id: string; title: string; author: string; thumbnail: string | null; // path to temporal media session image playing: boolean; default: boolean; owner: { name: string; iconPath: string | null; } | null; }\n\nconst mediaSession: MediaSession | null; ```",
               "type": [
                 "string",
                 "null"

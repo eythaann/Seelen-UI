@@ -63,7 +63,20 @@ export function MediaSession({ item }: { item: SavedMediaItem }) {
               backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
             }}
           >
-            <img className="media-session-thumbnail" src={src} draggable={false} />
+            <div className="media-session-thumbnail-container">
+              {session?.owner && (
+                <img
+                  className="media-session-app-icon"
+                  src={convertFileSrc(
+                    session.owner.iconPath
+                      ? session.owner.iconPath
+                      : LAZY_CONSTANTS.MISSING_ICON_PATH,
+                  )}
+                  draggable={false}
+                />
+              )}
+              <img className="media-session-thumbnail" src={src} draggable={false} />
+            </div>
             <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
 
             <div className="media-session-info">

@@ -8,6 +8,8 @@ use windows::Win32::{
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
+use super::window::Window;
+
 #[derive(Debug, Clone)]
 pub struct WindowEnumerator {
     parent: Option<HWND>,
@@ -52,8 +54,7 @@ impl WindowEnumerator {
             true.into()
         }
 
-        let ptr = &mut callback as *mut _ as isize;
-        self.enumerate(enum_proc, LPARAM(ptr))
+        self.enumerate(enum_proc, LPARAM(&mut callback as *mut _ as isize))
     }
 
     /// Will call the callback for each window while enumerating.
@@ -63,9 +64,8 @@ impl WindowEnumerator {
         F: FnMut(HWND) -> T + Sync,
         T: Sync,
     {
-        type MapCallback<'a, T> = Box<dyn FnMut(HWND) -> T + 'a>;
         struct MapCallbackWrapper<'a, T> {
-            cb: MapCallback<'a, T>,
+            cb: Box<dyn FnMut(HWND) -> T + 'a>,
             processed: Vec<T>,
         }
 
@@ -81,9 +81,39 @@ impl WindowEnumerator {
             processed: Vec::new(),
         };
 
-        let ptr = &mut wrapper as *mut _ as isize;
-        self.enumerate(enum_proc::<T>, LPARAM(ptr))?;
+        self.enumerate(enum_proc::<T>, LPARAM(&mut wrapper as *mut _ as isize))?;
         Ok(wrapper.processed)
+    }
+
+    /// Will return the first window that matches the condition specified by the callback.
+    /// If no window matches the condition, it will return None.
+    pub fn find<F>(&self, cb: F) -> Result<Option<Window>>
+    where
+        F: FnMut(Window) -> bool + Sync,
+    {
+        struct FindCallbackWrapper<'a> {
+            cb: Box<dyn FnMut(Window) -> bool + 'a>,
+            result: Option<Window>,
+        }
+
+        unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
+            if let Some(wrapper) = (lparam.0 as *mut FindCallbackWrapper).as_mut() {
+                if wrapper.result.is_none() && (wrapper.cb)(Window::from(hwnd)) {
+                    wrapper.result = Some(Window::from(hwnd));
+                    // for some reason returning false is not stopping the enumeration
+                    // return false.into();
+                }
+            }
+            true.into()
+        }
+
+        let mut wrapper = FindCallbackWrapper {
+            cb: Box::new(cb),
+            result: None,
+        };
+
+        self.enumerate(enum_proc, LPARAM(&mut wrapper as *mut _ as isize))?;
+        Ok(wrapper.result)
     }
 }
 

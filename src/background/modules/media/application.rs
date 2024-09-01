@@ -36,13 +36,15 @@ use crate::{
     error_handler::Result,
     log_error,
     seelen::get_app_handle,
-    seelen_weg::icon_extractor::extract_and_save_icon,
+    seelen_weg::icon_extractor::{extract_and_save_icon, extract_and_save_icon_v2},
     trace_lock,
     utils::pcwstr,
-    windows_api::{Com, WindowsApi},
+    windows_api::{Com, WindowEnumerator, WindowsApi},
 };
 
-use super::domain::{Device, DeviceChannel, IPolicyConfig, MediaPlayer, PolicyConfig};
+use super::domain::{
+    Device, DeviceChannel, IPolicyConfig, MediaPlayer, MediaPlayerOwner, PolicyConfig,
+};
 
 lazy_static! {
     pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> = Arc::new(Mutex::new(
@@ -551,33 +553,44 @@ impl MediaManager {
         &mut self,
         session: GlobalSystemMediaTransportControlsSession,
     ) -> Result<()> {
+        let source_app_user_model_id = session.SourceAppUserModelId()?.to_string_lossy();
         let properties = session.TryGetMediaPropertiesAsync()?.get()?;
 
         let playback_info = session.GetPlaybackInfo()?;
         let status = playback_info.PlaybackStatus()?;
-        let id = session.SourceAppUserModelId()?.to_string_lossy();
+
+        let owner = WindowEnumerator::new().find(|w| {
+            if let Some(id) = w.app_user_model_id() {
+                return id == source_app_user_model_id;
+            }
+            false
+        })?;
 
         self.playing.push(MediaPlayer {
+            id: source_app_user_model_id.clone(),
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
+            owner: owner.map(|w| MediaPlayerOwner {
+                name: w.title(),
+                icon_path: w.exe().and_then(extract_and_save_icon_v2).ok(),
+            }),
             thumbnail: properties
                 .Thumbnail()
                 .ok()
                 .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
             playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
             default: false,
-            id: id.clone(),
         });
 
         // listen for media transport events
         self.media_player_event_tokens.insert(
-            id.clone(),
+            source_app_user_model_id.clone(),
             (
                 session.MediaPropertiesChanged(&self.media_player_properties_event_handler)?,
                 session.PlaybackInfoChanged(&self.media_player_playback_event_handler)?,
             ),
         );
-        self.media_players.insert(id, session);
+        self.media_players.insert(source_app_user_model_id, session);
         Ok(())
     }
 

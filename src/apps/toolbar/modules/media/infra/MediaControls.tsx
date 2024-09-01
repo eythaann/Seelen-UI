@@ -50,7 +50,20 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
         backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
       }}
     >
-      <img className="media-session-thumbnail" src={src} draggable={false} />
+      <div className="media-session-thumbnail-container">
+        {session.owner && (
+          <Tooltip title={session.owner.name} placement="bottom">
+            <img
+              className="media-session-app-icon"
+              src={convertFileSrc(
+                session.owner.iconPath ? session.owner.iconPath : LAZY_CONSTANTS.MISSING_ICON_PATH,
+              )}
+              draggable={false}
+            />
+          </Tooltip>
+        )}
+        <img className="media-session-thumbnail" src={src} draggable={false} />
+      </div>
       <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
 
       <div className="media-session-info" style={{ color }}>

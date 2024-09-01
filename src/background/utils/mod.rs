@@ -16,7 +16,6 @@ use std::{
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use tauri::{AppHandle, Manager};
 use windows::{
     core::GUID,
     Win32::{
@@ -100,13 +99,6 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
     }
 
     Ok(path_buf)
-}
-
-pub fn app_data_path(handle: &AppHandle) -> PathBuf {
-    handle
-        .path()
-        .app_data_dir()
-        .expect("Failed to resolve App Data path")
 }
 
 pub static TRACE_LOCK_ENABLED: AtomicBool = AtomicBool::new(false);

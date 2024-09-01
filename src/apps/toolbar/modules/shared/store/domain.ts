@@ -67,6 +67,10 @@ export interface MediaChannelTransportData {
   thumbnail: string | null;
   playing: boolean;
   default: boolean;
+  owner: {
+    name: string;
+    iconPath: string | null;
+  } | null;
 }
 
 export interface MediaDeviceChannel {

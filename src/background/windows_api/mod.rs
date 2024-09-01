@@ -46,7 +46,9 @@ use windows::{
             SE_PRIVILEGE_ENABLED, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_PRIVILEGES,
             TOKEN_QUERY,
         },
-        Storage::EnhancedStorage::PKEY_FileDescription,
+        Storage::{
+            EnhancedStorage::PKEY_FileDescription, Packaging::Appx::GetApplicationUserModelId,
+        },
         System::{
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
@@ -61,8 +63,9 @@ use windows::{
         UI::{
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
-                IShellItem2, IVirtualDesktopManager, SHCreateItemFromParsingName,
-                VirtualDesktopManager, SIGDN_NORMALDISPLAY,
+                IShellItem2, IVirtualDesktopManager,
+                PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow},
+                SHCreateItemFromParsingName, VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
@@ -337,7 +340,7 @@ impl WindowsApi {
         unsafe { Ok(OpenProcess(access_rights, inherit_handle, process_id)?) }
     }
 
-    pub fn open_process_token() -> Result<HANDLE> {
+    pub fn open_current_process_token() -> Result<HANDLE> {
         let mut token_handle: HANDLE = HANDLE(0);
         unsafe {
             OpenProcessToken(
@@ -356,7 +359,7 @@ impl WindowsApi {
     }
 
     pub fn enable_privilege(name: PCWSTR) -> Result<()> {
-        let token_handle = Self::open_process_token()?;
+        let token_handle = Self::open_current_process_token()?;
         let mut tkp = TOKEN_PRIVILEGES {
             PrivilegeCount: 1,
             ..Default::default()
@@ -469,6 +472,24 @@ impl WindowsApi {
         let wide_path: Vec<u16> = path.encode_utf16().chain(Some(0)).collect();
         let item = unsafe { SHCreateItemFromParsingName(PCWSTR(wide_path.as_ptr()), None)? };
         Ok(item)
+    }
+
+    pub fn get_property_store_for_window(hwnd: HWND) -> Result<IPropertyStore> {
+        Ok(unsafe { SHGetPropertyStoreForWindow(hwnd)? })
+    }
+
+    pub fn get_window_app_user_model_id(hwnd: HWND) -> Result<String> {
+        let (process_id, _) = Self::window_thread_process_id(hwnd);
+        let handle = Self::process_handle(process_id)?;
+
+        let mut buffer = vec![0u16; 1024];
+        let mut size = buffer.len() as u32;
+        unsafe { GetApplicationUserModelId(handle, &mut size, PWSTR(buffer.as_mut_ptr())).ok()? };
+
+        Self::close_handle(handle)?;
+        Ok(String::from_utf16(&buffer[..size as usize])?
+            .trim_end_matches('\0')
+            .to_string())
     }
 
     pub fn get_window_display_name(hwnd: HWND) -> Result<String> {
@@ -698,7 +719,7 @@ impl WindowsApi {
             let mut elevation = TOKEN_ELEVATION::default();
             let mut ret_len = 0;
 
-            let token_handle = Self::open_process_token()?;
+            let token_handle = Self::open_current_process_token()?;
 
             GetTokenInformation(
                 token_handle,

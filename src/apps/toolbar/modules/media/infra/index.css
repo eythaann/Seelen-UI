@@ -24,18 +24,6 @@
     }
   }
 
-  .media-session-thumbnail {
-    z-index: 2;
-  }
-
-  .media-session-blurred-thumbnail {
-    filter: blur(15px) brightness(125%) contrast(125%);
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: fill;
-  }
-
   .media-device-group {
     display: flex;
     flex-direction: column;

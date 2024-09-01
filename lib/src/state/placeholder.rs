@@ -208,6 +208,10 @@ common_item! {
     ///     thumbnail: string | null; // path to temporal media session image
     ///     playing: boolean;
     ///     default: boolean;
+    ///     owner: {
+    ///         name: string;
+    ///         iconPath: string | null;
+    ///     } | null;
     /// }
     ///
     /// const mediaSession: MediaSession | null;

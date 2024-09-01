@@ -41,6 +41,10 @@ impl Window {
         self.0
     }
 
+    pub fn app_user_model_id(&self) -> Option<String> {
+        WindowsApi::get_window_app_user_model_id(self.0).ok()
+    }
+
     pub fn title(&self) -> String {
         WindowsApi::get_window_text(self.0)
     }
@@ -70,6 +74,10 @@ impl Window {
         WindowEnumerator::new()
             .with_parent(self.0)
             .map(Window::from)
+    }
+
+    pub fn is_window(&self) -> bool {
+        WindowsApi::is_window(self.0)
     }
 
     pub fn is_visible(&self) -> bool {

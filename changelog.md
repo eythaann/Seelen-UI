@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### enhancements
 - add debugger cli toggles to tracing more info on logs.
+- media modules now exports the app related to the media player.
 
 ### fix
 - saving ahk lib in wrong location.

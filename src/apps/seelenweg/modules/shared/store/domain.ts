@@ -38,6 +38,10 @@ export interface MediaSession {
   thumbnail: string | null;
   playing: boolean;
   default: boolean;
+  owner: {
+    name: string;
+    iconPath: string | null;
+  } | null;
 }
 
 export type SwPinnedApp = modify<
