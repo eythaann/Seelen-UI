@@ -23,7 +23,7 @@ jobs:
       - run: npm run test
 
   rust-linter:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@master
@@ -41,7 +41,7 @@ jobs:
       - name: Clippy
         run: |-
           rustup component add clippy
-          cargo clippy --locked -- -D warnings
+          cargo clippy --locked --all-targets -- -D warnings
 
   rust-test:
     runs-on: windows-latest
