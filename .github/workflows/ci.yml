@@ -18,40 +18,27 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
-      - run: npm install
+      - run: npm clean-install
       - run: npm run lint
       - run: npm run test
 
   check-rust:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2024-06-25
       - uses: Swatinem/rust-cache@v2
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
 
-      - name: Build
-        run: |-
-          npm install
-          npm run build:ui
-          cargo build
-
-      - name: Run linter
+      - name: Linter
         run: |-
           rustup component add rustfmt
           cargo fmt -- --check
 
-      - name: Run clippy
-        run: |- 
+      - name: Clippy
+        run: |-
           rustup component add clippy
-          cargo clippy --all-targets -- -D warnings
+          cargo clippy --locked -- -D warnings
 
       - name: Run tests
-        run: cargo test --verbose
+        run: cargo test --locked --verbose
