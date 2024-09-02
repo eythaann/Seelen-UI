@@ -5,7 +5,10 @@ use std::{
 
 use windows::Win32::Foundation::HWND;
 
-use crate::error_handler::Result;
+use crate::{
+    error_handler::Result, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
+    seelen_wm::WindowManager,
+};
 
 use super::{WindowEnumerator, WindowsApi};
 
@@ -106,9 +109,16 @@ impl Window {
         WindowsApi::get_desktop_window() == self.0 || self.class() == "Progman"
     }
 
-    pub fn is_seelen_window(&self) -> bool {
+    pub fn is_seelen_overlay(&self) -> bool {
         if let Ok(exe) = self.exe() {
-            return exe.ends_with("seelen-ui.exe");
+            return exe.ends_with("seelen-ui.exe")
+                && [
+                    FancyToolbar::TITLE,
+                    WindowManager::TITLE,
+                    SeelenWeg::TITLE,
+                    SeelenWeg::TITLE_HITBOX,
+                ]
+                .contains(&self.title().as_str());
         }
         false
     }

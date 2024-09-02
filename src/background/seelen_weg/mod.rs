@@ -326,6 +326,9 @@ impl SeelenWeg {
 }
 
 impl SeelenWeg {
+    pub const TITLE: &'static str = "SeelenWeg";
+    pub const TITLE_HITBOX: &'static str = "SeelenWeg Hitbox";
+
     const TARGET: &'static str = "seelenweg";
     const TARGET_HITBOX: &'static str = "seelenweg-hitbox";
 
@@ -337,7 +340,7 @@ impl SeelenWeg {
             format!("{}/{}", Self::TARGET_HITBOX, postfix),
             tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
         )
-        .title("SeelenWeg Hitbox")
+        .title(Self::TITLE_HITBOX)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)
@@ -355,7 +358,7 @@ impl SeelenWeg {
             format!("{}/{}", Self::TARGET, postfix),
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
         )
-        .title("SeelenWeg")
+        .title(Self::TITLE)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)

@@ -10,7 +10,7 @@ use crate::{
 };
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
-    UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, SW_SHOWNORMAL, WM_CLOSE},
+    UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
 };
 
 use super::SeelenWeg;
@@ -73,7 +73,6 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
     }
 
     if WindowsApi::is_iconic(hwnd) {
-        WindowsApi::show_window(hwnd, SW_SHOWNORMAL)?;
         WindowsApi::show_window(hwnd, SW_RESTORE)?;
         return Ok(());
     }

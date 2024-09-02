@@ -54,6 +54,7 @@ impl Drop for WindowManager {
 }
 
 impl WindowManager {
+    pub const TITLE: &'static str = "Seelen Window Manager";
     pub const TARGET: &'static str = "window-manager";
     pub const VIRTUAL_PREVIEWS: [&'static str; 2] = [
         "Virtual desktop switching preview",
@@ -296,7 +297,7 @@ impl WindowManager {
             format!("{}/{}", Self::TARGET, monitor_id),
             tauri::WebviewUrl::App("seelen_wm/index.html".into()),
         )
-        .title("Seelen Window Manager")
+        .title(Self::TITLE)
         .maximizable(false)
         .minimizable(false)
         .resizable(false)

@@ -117,6 +117,7 @@ impl FancyToolbar {
 
 // statics
 impl FancyToolbar {
+    pub const TITLE: &'static str = "Seelen Fancy Toolbar";
     const TARGET: &'static str = "fancy-toolbar";
 
     /// Work area no works fine on multiple monitors
@@ -180,7 +181,7 @@ impl FancyToolbar {
                 label,
                 tauri::WebviewUrl::App("toolbar/index.html".into()),
             )
-            .title("Seelen Fancy Toolbar")
+            .title(Self::TITLE)
             .maximizable(false)
             .minimizable(false)
             .resizable(false)

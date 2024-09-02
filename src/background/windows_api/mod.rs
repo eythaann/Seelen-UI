@@ -72,10 +72,10 @@ use windows::{
                 GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
                 IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetForegroundWindow, SetWindowPos,
                 ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
-                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-                SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                GWL_STYLE, GW_OWNER, HWND_TOP, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
+                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
             },
         },
@@ -320,12 +320,15 @@ impl WindowsApi {
             hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd.0);
             hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd.0);
         }
+
         Self::set_minimize_animation(false)?;
-        Self::show_window_async(hwnd, SW_MINIMIZE)?;
-        Self::show_window_async(hwnd, SW_RESTORE)?;
+        Self::show_window(hwnd, SW_MINIMIZE)?;
+        Self::show_window(hwnd, SW_RESTORE)?;
         Self::set_minimize_animation(true)?;
 
-        Self::set_foreground(hwnd)
+        Self::bring_to(hwnd, HWND_TOP)?;
+        Self::set_foreground(hwnd)?;
+        Ok(())
     }
 
     pub fn async_force_set_foreground(hwnd: HWND) {

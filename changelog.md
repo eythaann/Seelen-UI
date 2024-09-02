@@ -4,6 +4,9 @@
 ### enhancements
 - clean weg items on load to remove duped items and apps/files that don't exist.
 
+### fix
+- can not restore settings window.
+
 ## [1.10.3]
 ### features
 - add beta channel

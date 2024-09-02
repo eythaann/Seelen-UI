@@ -117,7 +117,7 @@ impl HookManager {
         }
 
         let window = Window::from(origin);
-        if event == WinEvent::SystemForeground && !window.is_seelen_window() {
+        if event == WinEvent::SystemForeground && !window.is_seelen_overlay() {
             LAST_ACTIVE_NOT_SEELEN.store(origin.0, Ordering::Relaxed);
         }
 
