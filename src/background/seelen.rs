@@ -80,11 +80,17 @@ impl Seelen {
     pub fn on_state_changed(&mut self) -> Result<()> {
         let state = self.state();
 
-        log_error!(if state.is_ahk_enabled() {
-            Self::start_ahk_shortcuts()
+        if state.is_ahk_enabled() {
+            Self::start_ahk_shortcuts()?;
         } else {
-            Self::kill_ahk_shortcuts()
-        });
+            Self::kill_ahk_shortcuts()?;
+        }
+
+        if state.is_weg_enabled() {
+            SeelenWeg::hide_taskbar();
+        } else {
+            SeelenWeg::restore_taskbar()?;
+        }
 
         for monitor in &mut self.monitors {
             monitor.load_settings(&state)?;
@@ -182,7 +188,7 @@ impl Seelen {
     pub fn stop(&self) {
         release_system_events_handlers();
         if self.state().is_weg_enabled() {
-            log_error!(SeelenWeg::show_taskbar());
+            log_error!(SeelenWeg::restore_taskbar());
         }
         if self.state().is_ahk_enabled() {
             log_error!(Self::kill_ahk_shortcuts());

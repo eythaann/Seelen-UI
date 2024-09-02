@@ -3,7 +3,7 @@ pub mod handler;
 pub mod hook;
 pub mod icon_extractor;
 
-use std::thread::JoinHandle;
+use std::{collections::HashMap, thread::JoinHandle};
 
 use getset::{Getters, MutGetters};
 use icon_extractor::extract_and_save_icon;
@@ -400,7 +400,9 @@ impl SeelenWeg {
                 let mut attempts = 0;
                 while attempts < 10 && FULL_STATE.load().is_weg_enabled() {
                     for handle in &handles {
-                        AppBarData::from_handle(*handle).set_state(AppBarDataState::AutoHide);
+                        let app_bar = AppBarData::from_handle(*handle);
+                        trace_lock!(TASKBAR_STATE_ON_INIT).insert(handle.0, app_bar.state());
+                        app_bar.set_state(AppBarDataState::AutoHide);
                         let _ = WindowsApi::show_window(*handle, SW_HIDE);
                     }
                     attempts += 1;
@@ -411,9 +413,13 @@ impl SeelenWeg {
         })
     }
 
-    pub fn show_taskbar() -> Result<()> {
+    pub fn restore_taskbar() -> Result<()> {
         for hwnd in get_taskbars_handles()? {
-            AppBarData::from_handle(hwnd).set_state(AppBarDataState::AlwaysOnTop);
+            AppBarData::from_handle(hwnd).set_state(
+                *trace_lock!(TASKBAR_STATE_ON_INIT)
+                    .get(&hwnd.0)
+                    .unwrap_or(&AppBarDataState::AlwaysOnTop),
+            );
             WindowsApi::show_window(hwnd, SW_SHOWNORMAL)?;
         }
         Ok(())
@@ -421,6 +427,8 @@ impl SeelenWeg {
 }
 
 lazy_static! {
+    pub static ref TASKBAR_STATE_ON_INIT: Mutex<HashMap<isize, AppBarDataState>> =
+        Mutex::new(HashMap::new());
     pub static ref FOUNDS: Mutex<Vec<HWND>> = Mutex::new(Vec::new());
     pub static ref TASKBAR_CLASS: Vec<&'static str> =
         Vec::from(["Shell_TrayWnd", "Shell_SecondaryTrayWnd",]);
