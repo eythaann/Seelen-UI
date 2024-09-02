@@ -14,6 +14,7 @@ use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_
 use crate::error_handler::Result;
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_bar::FancyToolbar;
+use crate::seelen_rofi::SeelenRofi;
 use crate::seelen_weg::SeelenWeg;
 use crate::seelen_wm::WindowManager;
 use crate::state::application::FULL_STATE;
@@ -111,6 +112,7 @@ lazy_static! {
                 FancyToolbar::get_cli(),
                 WindowManager::get_cli(),
                 SeelenWeg::get_cli(),
+                SeelenRofi::get_cli(),
             ])
     ));
 }
@@ -209,6 +211,14 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
                 for monitor in seelen.monitors_mut() {
                     if let Some(weg) = monitor.weg_mut() {
                         weg.process(matches)?;
+                    }
+                }
+            }
+            SeelenRofi::CLI_IDENTIFIER => {
+                let mut seelen = trace_lock!(SEELEN);
+                for monitor in seelen.monitors_mut() {
+                    if let Some(rofi) = monitor.rofi_mut() {
+                        rofi.process(matches)?;
                     }
                 }
             }

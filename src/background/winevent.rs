@@ -93,6 +93,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
 
 use crate::trace_lock;
 use crate::utils::constants::IGNORE_FULLSCREEN;
+use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 
 lazy_static! {
@@ -297,9 +298,11 @@ impl TryFrom<u32> for WinEvent {
 
 impl WinEvent {
     pub fn should_handle_fullscreen_events(&self, hwnd: HWND) -> bool {
+        let window = Window::from(hwnd);
         hwnd == WindowsApi::get_foreground_window()
-            && WindowsApi::is_window_visible(hwnd)
-            && !IGNORE_FULLSCREEN.contains(&WindowsApi::get_window_text(hwnd))
+            && window.is_visible()
+            && !IGNORE_FULLSCREEN.contains(&window.title())
+            && !window.is_seelen_overlay()
     }
 
     pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {

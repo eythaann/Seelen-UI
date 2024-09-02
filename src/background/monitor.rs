@@ -2,9 +2,9 @@ use color_eyre::eyre::eyre;
 use getset::{Getters, MutGetters};
 
 use crate::{
-    error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager, state::application::FullState, utils::sleep_millis,
-    windows_api::WindowsApi,
+    error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_rofi::SeelenRofi,
+    seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::application::FullState,
+    utils::sleep_millis, windows_api::WindowsApi,
 };
 
 use windows::Win32::Graphics::Gdi::HMONITOR;
@@ -17,6 +17,7 @@ pub struct Monitor {
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
     wm: Option<WindowManager>,
+    rofi: Option<SeelenRofi>,
 }
 
 impl Monitor {
@@ -64,6 +65,13 @@ impl Monitor {
         Ok(())
     }
 
+    fn add_rofi(&mut self) -> Result<()> {
+        if self.rofi.is_none() {
+            self.rofi = Some(SeelenRofi::new()?)
+        }
+        Ok(())
+    }
+
     fn add_wm(&mut self) -> Result<()> {
         if self.wm.is_none() {
             self.wm = Some(WindowManager::new(self.handle.0)?)
@@ -90,6 +98,10 @@ impl Monitor {
             self.wm = None;
         }
 
+        if self.handle == WindowsApi::primary_monitor() {
+            self.add_rofi()?;
+        }
+
         self.ensure_positions()?;
         Ok(())
     }
@@ -104,6 +116,7 @@ impl Monitor {
             toolbar: None,
             weg: None,
             wm: None,
+            rofi: None,
         };
         monitor.load_settings(settings)?;
         Ok(monitor)

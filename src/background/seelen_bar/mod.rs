@@ -11,7 +11,7 @@ use crate::{
         are_overlaped,
         constants::{OVERLAP_BLACK_LIST_BY_EXE, OVERLAP_BLACK_LIST_BY_TITLE},
     },
-    windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
+    windows_api::{window::Window, AppBarData, AppBarDataEdge, WindowsApi},
 };
 use itertools::Itertools;
 use seelen_core::state::HideMode;
@@ -79,7 +79,9 @@ impl FancyToolbar {
     }
 
     pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
-        let should_handle_hidden = WindowsApi::is_window_visible(hwnd)
+        let window = Window::from(hwnd);
+        let should_handle_hidden = window.is_visible()
+            && !window.is_seelen_overlay()
             && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
             && !OVERLAP_BLACK_LIST_BY_EXE
                 .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
