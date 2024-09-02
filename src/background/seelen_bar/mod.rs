@@ -59,7 +59,7 @@ impl FancyToolbar {
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
-        let rect = WindowsApi::get_window_rect_without_margins(hwnd);
+        let rect = WindowsApi::get_window_rect_without_shadow(hwnd);
         let monitor_info = WindowsApi::monitor_info(self.cached_monitor)?;
         let dpi = WindowsApi::get_device_pixel_ratio(self.cached_monitor)?;
         let height = FULL_STATE.load().settings().fancy_toolbar.height;

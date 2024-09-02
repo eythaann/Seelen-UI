@@ -254,9 +254,9 @@ impl SeelenWeg {
     }
 
     fn is_overlapping(&self, hwnd: HWND) -> bool {
-        let rect = WindowsApi::get_window_rect_without_margins(hwnd);
+        let rect = WindowsApi::get_window_rect_without_shadow(hwnd);
         let hitbox_rect = self.last_hitbox_rect.unwrap_or_else(|| {
-            WindowsApi::get_window_rect_without_margins(HWND(
+            WindowsApi::get_window_rect_without_shadow(HWND(
                 self.hitbox.hwnd().expect("Failed to get hitbox handle").0,
             ))
         });
@@ -270,7 +270,7 @@ impl SeelenWeg {
 
         self.overlaped = is_overlaped;
         self.last_hitbox_rect = if self.overlaped {
-            Some(WindowsApi::get_window_rect_without_margins(HWND(
+            Some(WindowsApi::get_window_rect_without_shadow(HWND(
                 self.hitbox.hwnd()?.0,
             )))
         } else {

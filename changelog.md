@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### enhancements
 - clean weg items on load to remove duped items and apps/files that don't exist.
+- remove 1/2px thickness border on window manager border.
+- remove 1/2px black border on some previews of apps.
 
 ### fix
 - can not restore settings window.

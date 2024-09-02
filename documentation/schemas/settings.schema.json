@@ -299,7 +299,7 @@
         "autoStackingByCategory": true,
         "border": {
           "enabled": true,
-          "offset": -1.0,
+          "offset": 0.0,
           "width": 3.0
         },
         "defaultLayout": "default.yml",
@@ -860,7 +860,7 @@
           "type": "boolean"
         },
         "offset": {
-          "default": -1.0,
+          "default": 0.0,
           "type": "number",
           "format": "double"
         },
@@ -1111,7 +1111,7 @@
           "description": "window manager border",
           "default": {
             "enabled": true,
-            "offset": -1.0,
+            "offset": 0.0,
             "width": 3.0
           },
           "allOf": [

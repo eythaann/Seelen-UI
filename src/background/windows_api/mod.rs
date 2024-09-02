@@ -34,7 +34,8 @@ use windows::{
         Graphics::{
             Dwm::{
                 DwmGetWindowAttribute, DWMWA_CLOAKED, DWMWA_EXTENDED_FRAME_BOUNDS,
-                DWMWINDOWATTRIBUTE, DWM_CLOAKED_APP, DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
+                DWMWA_VISIBLE_FRAME_BORDER_THICKNESS, DWMWINDOWATTRIBUTE, DWM_CLOAKED_APP,
+                DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
                 EnumDisplayMonitors, GetMonitorInfoW, MonitorFromWindow, HDC, HMONITOR,
@@ -194,7 +195,7 @@ impl WindowsApi {
 
     pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
         let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
-        let window_rect = WindowsApi::get_window_rect_without_margins(hwnd);
+        let window_rect = WindowsApi::get_window_rect_without_shadow(hwnd);
         Ok(window_rect.left <= rc_monitor.left
             && window_rect.top <= rc_monitor.top
             && window_rect.right >= rc_monitor.right
@@ -533,14 +534,24 @@ impl WindowsApi {
     }
 
     pub fn get_window_rect(hwnd: HWND) -> RECT {
-        let mut rect = unsafe { std::mem::zeroed() };
+        let mut rect = RECT::default();
         unsafe { GetWindowRect(hwnd, &mut rect).ok() };
         rect
     }
 
+    pub fn get_window_thickness(hwnd: HWND) -> u32 {
+        let mut thickness = 0u32;
+        let _ = Self::dwm_get_window_attribute(
+            hwnd,
+            DWMWA_VISIBLE_FRAME_BORDER_THICKNESS,
+            &mut thickness,
+        );
+        thickness
+    }
+
     // some windows like explorer.exe have a shadow margin
-    pub fn get_window_rect_without_margins(hwnd: HWND) -> RECT {
-        let mut rect = unsafe { std::mem::zeroed() };
+    pub fn get_window_rect_without_shadow(hwnd: HWND) -> RECT {
+        let mut rect = RECT::default();
         if Self::dwm_get_window_attribute(hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, &mut rect).is_ok() {
             rect
         } else {
@@ -599,17 +610,27 @@ impl WindowsApi {
     }
 
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {
-        let window_rect = Self::get_window_rect_without_margins(hwnd);
+        let rect_without_shadow = Self::get_window_rect_without_shadow(hwnd);
 
-        let mut shadow_rect = Default::default();
-        unsafe { GetWindowRect(hwnd, &mut shadow_rect)? };
+        let mut rect_with_shadow = Default::default();
+        unsafe { GetWindowRect(hwnd, &mut rect_with_shadow)? };
 
-        Ok(RECT {
-            left: shadow_rect.left - window_rect.left,
-            top: shadow_rect.top - window_rect.top,
-            right: shadow_rect.right - window_rect.right,
-            bottom: shadow_rect.bottom - window_rect.bottom,
-        })
+        let mut shadow_rect = RECT {
+            left: rect_with_shadow.left - rect_without_shadow.left,
+            top: rect_with_shadow.top - rect_without_shadow.top,
+            right: rect_with_shadow.right - rect_without_shadow.right,
+            bottom: rect_with_shadow.bottom - rect_without_shadow.bottom,
+        };
+
+        if !Self::is_maximized(hwnd) {
+            let thickness = Self::get_window_thickness(hwnd) as i32;
+            shadow_rect.left -= thickness;
+            shadow_rect.top -= thickness;
+            shadow_rect.right += thickness;
+            shadow_rect.bottom += thickness;
+        }
+
+        Ok(shadow_rect)
     }
 
     pub fn _get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {

@@ -220,7 +220,7 @@ impl Default for Border {
         Self {
             enabled: true,
             width: 3.0,
-            offset: -1.0,
+            offset: 0.0,
         }
     }
 }

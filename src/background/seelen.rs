@@ -15,7 +15,6 @@ use crate::{
     modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
     monitor::Monitor,
     seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager,
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
@@ -152,7 +151,7 @@ impl Seelen {
 
             for monitor in seelen.monitors_mut() {
                 if let Some(wm) = monitor.wm_mut() {
-                    if WindowManager::is_manageable_window(hwnd) {
+                    if wm.should_be_added(hwnd) {
                         log_error!(wm.add_hwnd(hwnd));
                     }
                 }
