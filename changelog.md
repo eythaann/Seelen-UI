@@ -6,6 +6,8 @@
 
 ### fix
 - can not restore settings window.
+- taskbar not been restored when changing weg enabled state.
+- taskbar been restored always as not autohide, now it will restored as initial state.
 
 ## [1.10.3]
 ### features
@@ -17,8 +19,6 @@
 
 ### fix
 - saving ahk lib in wrong location.
-- taskbar not been restored when changing weg enabled state.
-- taskbar been restored always as not autohide, now it will restored as initial state.
 
 ## [1.10.2]
 ### fix
