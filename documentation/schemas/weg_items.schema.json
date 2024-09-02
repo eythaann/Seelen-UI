@@ -59,9 +59,13 @@
         {
           "type": "object",
           "required": [
+            "id",
             "type"
           ],
           "properties": {
+            "id": {
+              "type": "string"
+            },
             "type": {
               "type": "string",
               "enum": [

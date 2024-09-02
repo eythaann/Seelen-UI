@@ -250,7 +250,8 @@ impl FullState {
     fn load_weg_items(&mut self) -> Result<()> {
         let path = self.data_dir.join("seelenweg_items.yaml");
         if path.exists() {
-            self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?
+            self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?;
+            self.weg_items.clean_all_items();
         }
         Ok(())
     }

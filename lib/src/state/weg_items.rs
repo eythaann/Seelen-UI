@@ -1,3 +1,5 @@
+use std::{collections::HashSet, path::PathBuf};
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -22,7 +24,7 @@ pub struct TemporalPinnedWegItem {
 pub enum WegItem {
     PinnedApp(PinnedWegItem),
     TemporalPin(TemporalPinnedWegItem),
-    Separator,
+    Separator { id: String },
     Media,
     StartMenu,
 }
@@ -45,5 +47,59 @@ impl Default for WegItems {
             })],
             right: vec![WegItem::Media],
         }
+    }
+}
+
+impl WegItems {
+    fn clean_items(dict: &mut HashSet<String>, items: Vec<WegItem>) -> Vec<WegItem> {
+        let mut result = Vec::new();
+        for item in items {
+            match &item {
+                WegItem::PinnedApp(app) => {
+                    if !dict.contains(&app.exe) {
+                        dict.insert(app.exe.clone());
+                        // remove apps that don't exist
+                        if PathBuf::from(&app.exe).exists() {
+                            result.push(item);
+                        }
+                    }
+                }
+                WegItem::TemporalPin(app) => {
+                    if !dict.contains(&app.exe) {
+                        dict.insert(app.exe.clone());
+                        // remove apps that don't exist
+                        if PathBuf::from(&app.exe).exists() {
+                            result.push(item);
+                        }
+                    }
+                }
+                WegItem::Separator { id } => {
+                    if !dict.contains(id) {
+                        dict.insert(id.clone());
+                        result.push(item);
+                    }
+                }
+                WegItem::StartMenu => {
+                    if !dict.contains("StartMenu") {
+                        result.push(item);
+                        dict.insert("StartMenu".to_owned());
+                    }
+                }
+                WegItem::Media => {
+                    if !dict.contains("Media") {
+                        result.push(item);
+                        dict.insert("Media".to_owned());
+                    }
+                }
+            }
+        }
+        result
+    }
+
+    pub fn clean_all_items(&mut self) {
+        let mut dict = HashSet::new();
+        self.left = Self::clean_items(&mut dict, std::mem::take(&mut self.left));
+        self.center = Self::clean_items(&mut dict, std::mem::take(&mut self.center));
+        self.right = Self::clean_items(&mut dict, std::mem::take(&mut self.right));
     }
 }
