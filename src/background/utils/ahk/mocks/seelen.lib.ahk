@@ -83,3 +83,7 @@ ToggleWinEventTracing() {
 ToggleMutexLockTracing() {
   RunWait(seelen " debugger toggle-trace-lock", , "Hide")
 }
+
+ToggleAppLauncher() {
+  RunWait(seelen " launcher toggle", , "Hide")
+}

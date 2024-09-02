@@ -18,9 +18,6 @@ lazy_static! {
         "Task View",
         "Virtual desktop switching preview",
         "Virtual desktop hotkey switching preview",
-        "Seelen Window Manager",
-        "Seelen Fancy Toolbar",
-        "SeelenWeg"
     ]
     .iter()
     .map(|x| x.to_string())
@@ -36,14 +33,7 @@ lazy_static! {
     .collect_vec();
 }
 
-pub static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 6] = [
-    "",
-    "SeelenWeg",
-    "SeelenWeg Hitbox",
-    "Seelen Window Manager",
-    "Seelen Fancy Toolbar",
-    "Program Manager",
-];
+pub static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 2] = ["", "Program Manager"];
 
 pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 4] = [
     "msedgewebview2.exe",
