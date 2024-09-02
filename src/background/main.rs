@@ -9,6 +9,7 @@ mod monitor;
 mod plugins;
 mod seelen;
 mod seelen_bar;
+mod seelen_rofi;
 mod seelen_weg;
 mod seelen_wm;
 mod state;

@@ -39,6 +39,7 @@ define_app_errors!(
     Base64Decode(base64::DecodeError);
     WideStringNull(widestring::error::MissingNulTerminator);
     Reqwest(tauri_plugin_http::reqwest::Error);
+    WinScreenshot(win_screenshot::capture::WSError);
 );
 
 impl From<&str> for AppError {

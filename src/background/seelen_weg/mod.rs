@@ -43,10 +43,6 @@ lazy_static! {
         "",
         "Task Switching",
         "DesktopWindowXamlSource",
-        "SeelenWeg",
-        "SeelenWeg Hitbox",
-        "Seelen Window Manager",
-        "Seelen Fancy Toolbar",
         "Program Manager",
     ]);
     static ref OPEN_APPS: Mutex<Vec<SeelenWegApp>> = Mutex::new(Vec::new());
@@ -185,7 +181,7 @@ impl SeelenWeg {
     pub fn should_be_added(hwnd: HWND) -> bool {
         let window = Window::from(hwnd);
 
-        if !window.is_visible() || window.parent().is_some() {
+        if !window.is_visible() || window.parent().is_some() || window.is_seelen_overlay() {
             return false;
         }
 
@@ -282,8 +278,10 @@ impl SeelenWeg {
     }
 
     pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
+        let window = Window::from(hwnd);
         let should_handle_hidden = self.ready
-            && WindowsApi::is_window_visible(hwnd)
+            && window.is_visible()
+            && !window.is_seelen_overlay()
             && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
             && !OVERLAP_BLACK_LIST_BY_EXE
                 .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());

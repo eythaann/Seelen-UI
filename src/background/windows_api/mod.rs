@@ -38,8 +38,8 @@ use windows::{
                 DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromWindow, HDC, HMONITOR,
-                MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
+                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint, MonitorFromWindow, HDC,
+                HMONITOR, MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
             },
         },
         Security::{
@@ -86,7 +86,9 @@ use windows::{
 use crate::{
     error_handler::{AppError, Result},
     hook::HOOK_MANAGER,
-    log_error, trace_lock,
+    log_error,
+    modules::input::Mouse,
+    trace_lock,
     utils::{is_virtual_desktop_supported, is_windows_11},
     winevent::WinEvent,
 };
@@ -566,6 +568,13 @@ impl WindowsApi {
 
     pub fn monitor_from_window(hwnd: HWND) -> HMONITOR {
         unsafe { MonitorFromWindow(hwnd, MONITOR_DEFAULTTOPRIMARY) }
+    }
+
+    pub fn monitor_from_cursor_point() -> HMONITOR {
+        if let Ok(point) = Mouse::get_cursor_pos() {
+            return unsafe { MonitorFromPoint(*point.as_ref(), MONITOR_DEFAULTTOPRIMARY) };
+        }
+        Self::primary_monitor()
     }
 
     pub fn primary_monitor() -> HMONITOR {
