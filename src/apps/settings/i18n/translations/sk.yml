@@ -206,3 +206,5 @@ vd:
     Natívna virtuálna stolná stratégia nie je k dispozícii pre vašu verziu
     systému Windows.
 save_and_restart: Uložiť a reštartovať
+beta_channel:
+  enable: Povoliť beta kanál (iba prostredníctvom GitHub)

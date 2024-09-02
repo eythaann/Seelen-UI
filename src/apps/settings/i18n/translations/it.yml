@@ -208,3 +208,5 @@ vd:
     La strategia desktop virtuale nativa non è disponibile per la versione di
     Windows.
 save_and_restart: Salva e riavvia
+beta_channel:
+  enable: Abilita Beta Channel (solo tramite GitHub)

@@ -203,3 +203,5 @@ vd:
     label: Стратегияи кории корӣ
   disabled_windows_version: Стратегияи кории ватанӣ барои версияи Windows дастрас нест.
 save_and_restart: Наҷот ва бозоғоз
+beta_channel:
+  enable: Фаъолсозии канали бета (танҳо тавассути Github)

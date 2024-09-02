@@ -206,3 +206,5 @@ vd:
     Gebierteg virtuell Desktop Strategie ass net fir Är Windows Versioun
     verfügbar.
 save_and_restart: Spuert & nei starten
+beta_channel:
+  enable: Aktivéiert Beta Kanal (nëmmen iwwer Github)

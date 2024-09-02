@@ -48,6 +48,7 @@ const initialState: RootState = {
   },
   wallpaper: null,
   virtualDesktopStrategy: VirtualDesktopStrategy.Native,
+  betaChannel: false,
 };
 
 export const RootSlice = createSlice({
@@ -84,6 +85,10 @@ export const RootSlice = createSlice({
     setDevTools: (state, action: PayloadAction<boolean>) => {
       state.toBeSaved = true;
       state.devTools = action.payload;
+    },
+    setBetaChannel: (state, action: PayloadAction<boolean>) => {
+      state.toBeSaved = true;
+      state.betaChannel = action.payload;
     },
     setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
       let themes = new Set(action.payload);

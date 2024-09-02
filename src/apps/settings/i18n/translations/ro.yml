@@ -208,3 +208,5 @@ vd:
     Strategia de desktop virtuală nativă nu este disponibilă pentru versiunea
     dvs. Windows.
 save_and_restart: Salvați și reporniți
+beta_channel:
+  enable: Activați canalul beta (numai prin GitHub)

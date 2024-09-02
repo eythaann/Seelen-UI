@@ -201,3 +201,5 @@ vd:
     native: ተወላጅ
   disabled_windows_version: ቤተኛ ምናባዊ ዴስክቶፕ ስትራቴጂ ለዊንዶውስ ስሪትዎ አይገኝም.
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
+beta_channel:
+  enable: የቤታ ጣቢያን ያንቁ (በጊትብሎክ ብቻ)

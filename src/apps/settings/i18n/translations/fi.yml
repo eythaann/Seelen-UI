@@ -208,3 +208,5 @@ vd:
     Alkuperäinen virtuaalinen työpöytästrategia ei ole käytettävissä Windows
     -versiollesi.
 save_and_restart: Tallenna ja käynnistä uudelleen
+beta_channel:
+  enable: Ota beetakanava käyttöön (vain GitHubin kautta)

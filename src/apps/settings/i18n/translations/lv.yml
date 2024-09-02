@@ -204,3 +204,5 @@ vd:
     native: Vietējais
   disabled_windows_version: Vietējā virtuālā darbvirsmas stratēģija nav pieejama jūsu Windows versijai.
 save_and_restart: Saglabāt un restartēt
+beta_channel:
+  enable: Iespējot beta kanālu (tikai caur github)

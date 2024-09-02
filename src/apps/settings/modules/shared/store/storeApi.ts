@@ -1,6 +1,5 @@
 import { UserSettings } from '../../../../../shared.interfaces';
-import { parseAsCamel, VariableConvention } from '../../../../shared/schemas';
-import { SettingsSchema } from '../../../../shared/schemas/Settings';
+import { VariableConvention } from '../../../../shared/schemas';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
@@ -40,9 +39,18 @@ export class UserSettingsLoader {
     return this;
   }
 
+  onlySettings() {
+    this._withUserApps = false;
+    this._withLayouts = false;
+    this._withPlaceholders = false;
+    this._withThemes = false;
+    this._withWallpaper = false;
+    return this;
+  }
+
   async load(customPath?: string): Promise<UserSettings> {
     const userSettings: UserSettings = {
-      jsonSettings: parseAsCamel(SettingsSchema, {}),
+      jsonSettings: await invoke('state_get_settings', { path: customPath }),
       yamlSettings: [],
       themes: [],
       layouts: [],
@@ -50,8 +58,6 @@ export class UserSettingsLoader {
       env: await invoke('get_user_envs'),
       wallpaper: null,
     };
-
-    userSettings.jsonSettings = await invoke('state_get_settings', { path: customPath });
 
     if (this._withUserApps) {
       userSettings.yamlSettings = await invoke('state_get_specific_apps_configurations');

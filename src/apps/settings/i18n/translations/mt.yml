@@ -206,3 +206,5 @@ vd:
     L-istrateġija tad-desktop virtwali indiġena mhix disponibbli għall-verżjoni
     tal-Windows tiegħek.
 save_and_restart: Issejvja u terġa 'tibda
+beta_channel:
+  enable: Enable Beta Channel (biss permezz ta 'Github)

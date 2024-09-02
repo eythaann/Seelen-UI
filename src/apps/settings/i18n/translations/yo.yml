@@ -202,3 +202,5 @@ vd:
     native: Ọmọ ibilẹ ọkunrin
   disabled_windows_version: Abitabi Ojú-iṣẹ Ọmọ-iṣẹ abinibi ko wa fun ẹya Windows rẹ.
 save_and_restart: Fipamọ & Tun bẹrẹ
+beta_channel:
+  enable: Jeki ikanni Beta (Nikan nipasẹ Gittib)

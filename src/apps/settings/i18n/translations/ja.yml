@@ -201,3 +201,5 @@ vd:
     seelen: シーレン
   disabled_windows_version: Windowsバージョンでは、ネイティブの仮想デスクトップ戦略は利用できません。
 save_and_restart: 保存して再起動します
+beta_channel:
+  enable: ベータチャネルを有効にする（Github経由のみ）

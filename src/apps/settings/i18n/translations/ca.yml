@@ -208,3 +208,5 @@ vd:
     L'estratègia d'escriptori virtual nativa no està disponible per a la vostra
     versió de Windows.
 save_and_restart: Desar i reiniciar
+beta_channel:
+  enable: Activa el canal beta (només mitjançant GitHub)

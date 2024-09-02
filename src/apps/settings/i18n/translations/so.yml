@@ -207,3 +207,5 @@ vd:
     Istaraatiijiyadda Desktop-ka dalkoodu hooyo looma heli karo nooca
     Windows-kaaga.
 save_and_restart: Badbaadin & Dib u bilow
+beta_channel:
+  enable: Ku xooji beta channel (oo keliya githab)

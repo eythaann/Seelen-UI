@@ -1,7 +1,9 @@
+import { wasInstalledUsingMSIX } from '../../../shared';
 import { Icon } from '../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { exit, relaunch } from '@tauri-apps/plugin-process';
 import { Button, Switch } from 'antd';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -11,13 +13,24 @@ import cs from './infra.module.css';
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 
 export function Information() {
+  const [isMsixBuild, setIsMsixBuild] = useState(false);
+
   const devTools = useSelector(newSelectors.devTools);
+  const betaChannel = useSelector(newSelectors.betaChannel);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
+  useEffect(() => {
+    wasInstalledUsingMSIX().then(setIsMsixBuild);
+  }, []);
+
   function onToggleDevTools(value: boolean) {
     dispatch(RootActions.setDevTools(value));
+  }
+
+  function onToggleBetaChannel(value: boolean) {
+    dispatch(RootActions.setBetaChannel(value));
   }
 
   return (
@@ -52,6 +65,10 @@ export function Information() {
         <SettingsOption>
           <span>{t('devtools.enable')}</span>
           <Switch value={devTools} onChange={onToggleDevTools} />
+        </SettingsOption>
+        <SettingsOption>
+          <span>{t('beta_channel.enable')}</span>
+          <Switch value={!isMsixBuild && betaChannel} onChange={onToggleBetaChannel} disabled={isMsixBuild}/>
         </SettingsOption>
       </SettingsGroup>
 

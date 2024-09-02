@@ -206,3 +206,5 @@ vd:
     Native Virtual Desktop Strategy nie jest dostępna dla wersji systemu
     Windows.
 save_and_restart: Zapisz i uruchom ponownie
+beta_channel:
+  enable: Włącz kanał beta (tylko przez GitHub)

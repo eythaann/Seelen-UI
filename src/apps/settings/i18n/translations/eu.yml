@@ -206,3 +206,5 @@ vd:
     Mahaigaineko estrategia birtuala ez dago erabilgarri zure Windows
     bertsiorako.
 save_and_restart: Gorde eta berrabiarazi
+beta_channel:
+  enable: Gaitu beta kanala (GitHub bidez bakarrik)

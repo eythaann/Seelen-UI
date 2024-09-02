@@ -202,3 +202,5 @@ vd:
     native: Mzaliwa
   disabled_windows_version: Mkakati wa asili wa desktop haupatikani kwa toleo lako la Windows.
 save_and_restart: Okoa na uanze tena
+beta_channel:
+  enable: Wezesha Kituo cha Beta (kupitia GitHub tu)

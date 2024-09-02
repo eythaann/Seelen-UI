@@ -208,3 +208,5 @@ vd:
     Native Virtual Desktop Strategy er ikke tilgjengelig for Windows -versjonen
     din.
 save_and_restart: Lagre og start på nytt
+beta_channel:
+  enable: Aktiver Beta Channel (bare via GitHub)

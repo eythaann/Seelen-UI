@@ -201,3 +201,5 @@ vd:
     seelen: Seelen
   disabled_windows_version: Windows 버전에는 기본 가상 데스크톱 전략을 사용할 수 없습니다.
 save_and_restart: 저장 및 재시작
+beta_channel:
+  enable: 베타 채널 활성화 (Github를 통해서만)

@@ -206,3 +206,5 @@ vd:
     label: Strategi Desktop Maya
   disabled_windows_version: Strategi desktop maya asli tidak tersedia untuk versi Windows anda.
 save_and_restart: Jimat & mulakan semula
+beta_channel:
+  enable: Dayakan Saluran Beta (hanya melalui GitHub)

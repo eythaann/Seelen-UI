@@ -204,3 +204,5 @@ vd:
     native: នៃកមនើត
   disabled_windows_version: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិតដើមមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
+beta_channel:
+  enable: បើកដំណើរការឆានែលបេតា (បានតែតាមរយៈ Github)

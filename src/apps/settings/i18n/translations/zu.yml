@@ -206,3 +206,5 @@ vd:
     seelen: '-Kwaseshud'
   disabled_windows_version: Isu le-Virtual desktop yendabuko alitholakali ngenguqulo yakho yeWindows.
 save_and_restart: Gcina futhi Qalisa kabusha
+beta_channel:
+  enable: Nika amandla isiteshi se-beta (kuphela nge-github)

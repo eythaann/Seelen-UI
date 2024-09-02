@@ -208,3 +208,5 @@ vd:
     Native Virtual Desktop -strategie is niet beschikbaar voor uw Windows
     -versie.
 save_and_restart: Opslaan en opnieuw opstarten
+beta_channel:
+  enable: Schakel Beta Channel in (alleen via GitHub)

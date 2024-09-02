@@ -208,3 +208,5 @@ vd:
     La estrategia de escritorio virtual nativa no está disponible para su
     versión de Windows.
 save_and_restart: Guardar y reiniciar
+beta_channel:
+  enable: Habilitar el canal beta (solo a través de Github)

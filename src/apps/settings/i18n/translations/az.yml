@@ -206,3 +206,5 @@ vd:
     label: Virtual masaüstü strategiyası
   disabled_windows_version: Doğma Virtual Masaüstü Strategiyası Windows versiyanız üçün mövcud deyil.
 save_and_restart: Saxla və yenidən başladın
+beta_channel:
+  enable: Beta kanalını aktivləşdirin (yalnız GitHub vasitəsilə)

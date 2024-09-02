@@ -204,3 +204,5 @@ vd:
     seelen: සීලන්
   disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා ස්වදේශීය අතථ්ය ඩෙස්ක්ටොප් උපාය ලබා ගත නොහැක.
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
+beta_channel:
+  enable: බීටා නාලිකාව සක්රීය කරන්න (GitHub හරහා පමණි)

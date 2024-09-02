@@ -54,5 +54,6 @@ export const StateToJsonSettings = (state: RootState): ISettings => {
     'devTools',
     'language',
     'virtualDesktopStrategy',
+    'betaChannel',
   ]);
 };

@@ -206,3 +206,5 @@ vd:
     seelen: Seelen
   disabled_windows_version: Native virtualna radna površina nije dostupna za vašu verziju za Windows.
 save_and_restart: Spremi i ponovno pokretanje
+beta_channel:
+  enable: Omogući beta kanal (samo putem GitHub)

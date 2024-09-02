@@ -206,3 +206,5 @@ vd:
     label: Virtuális asztali stratégia
   disabled_windows_version: A natív virtuális asztali stratégia nem érhető el a Windows verziójához.
 save_and_restart: Mentés és újraindítás
+beta_channel:
+  enable: Engedélyezze a béta -csatornát (csak a githubon keresztül)

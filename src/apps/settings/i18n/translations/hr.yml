@@ -208,3 +208,5 @@ vd:
     Izvorna strategija virtualne radne površine nije dostupna za vašu Windows
     verziju.
 save_and_restart: Spremi i ponovno pokrenite
+beta_channel:
+  enable: Omogući beta kanal (samo putem GitHub -a)

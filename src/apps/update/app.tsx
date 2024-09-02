@@ -1,3 +1,4 @@
+import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 import { useDarkMode } from '../shared/styles';
 import { UpdateModal } from './update';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -11,20 +12,20 @@ export function App() {
   const isDarkMode = useDarkMode();
 
   useEffect(() => {
-    const webview = getCurrentWebviewWindow();
-    check({})
-      .then((update) => {
-        if (!update) {
-          webview.close();
-          return;
-        }
-        webview.show();
-        setUpdate(update);
-      })
-      .catch((e) => {
-        console.error(e);
+    async function checkUpdate() {
+      const webview = getCurrentWebviewWindow();
+      const update = await check({});
+      const { jsonSettings } = await new UserSettingsLoader().onlySettings().load();
+
+      if (!update || (!jsonSettings.betaChannel && update.version.includes('beta'))) {
         webview.close();
-      });
+        return;
+      }
+
+      webview.show();
+      setUpdate(update);
+    }
+    checkUpdate().catch(() => getCurrentWebviewWindow().close());
   }, []);
 
   if (!update) {

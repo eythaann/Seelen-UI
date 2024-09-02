@@ -205,3 +205,5 @@ vd:
     seelen: सावधानी
   disabled_windows_version: नेटिभ भर्चुअल डेस्कटप रणनीति तपाईंको विन्डोज संस्करणको लागि उपलब्ध छैन।
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
+beta_channel:
+  enable: Beta च्यानल सक्षम गर्नुहोस् (github मार्फत मात्र)

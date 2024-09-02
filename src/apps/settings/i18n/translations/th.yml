@@ -202,3 +202,5 @@ vd:
     label: กลยุทธ์เดสก์ท็อปเสมือนจริง
   disabled_windows_version: กลยุทธ์เดสก์ท็อปเสมือนจริงไม่พร้อมใช้งานสำหรับเวอร์ชัน Windows ของคุณ
 save_and_restart: บันทึกและรีสตาร์ท
+beta_channel:
+  enable: เปิดใช้งานช่องเบต้า (ผ่าน GitHub เท่านั้น)

@@ -204,3 +204,5 @@ vd:
     label: Virtuali darbalaukio strategija
   disabled_windows_version: Natūralios virtualios darbalaukio strategijos nėra jūsų „Windows“ versijai.
 save_and_restart: Išsaugokite ir paleiskite iš naujo
+beta_channel:
+  enable: Įgalinti beta kanalą (tik per „GitHub“)

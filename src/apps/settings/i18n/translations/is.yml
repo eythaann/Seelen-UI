@@ -204,3 +204,5 @@ vd:
     seelen: Seelen
   disabled_windows_version: Native Virtual Desktop Strategy er ekki í boði fyrir Windows útgáfuna þína.
 save_and_restart: Vista og endurræsa
+beta_channel:
+  enable: Virkja beta rás (aðeins í gegnum Github)

@@ -206,3 +206,5 @@ vd:
     label: Sanal masaüstü stratejisi
   disabled_windows_version: Windows sürümünüz için yerel sanal masaüstü stratejisi mevcut değildir.
 save_and_restart: Kaydet ve Yeniden Başlat
+beta_channel:
+  enable: Beta kanalını etkinleştirin (yalnızca Github aracılığıyla)

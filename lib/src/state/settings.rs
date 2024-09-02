@@ -38,6 +38,8 @@ pub struct Settings {
     pub language: Option<String>,
     /// what virtual desktop implementation will be used, in case Native is not available we use Seelen
     pub virtual_desktop_strategy: VirtualDesktopStrategy,
+    /// enable experimental/beta updates
+    pub beta_channel: bool,
 }
 
 impl Default for Settings {
@@ -53,6 +55,7 @@ impl Default for Settings {
             dev_tools: false,
             language: Some(Self::get_system_language()),
             virtual_desktop_strategy: VirtualDesktopStrategy::Native,
+            beta_channel: false,
         }
     }
 }

@@ -209,3 +209,5 @@ vd:
     Ang diskarte ng katutubong virtual desktop ay hindi magagamit para sa iyong
     bersyon ng Windows.
 save_and_restart: I -save at i -restart
+beta_channel:
+  enable: Paganahin ang Beta Channel (sa pamamagitan lamang ng Github)

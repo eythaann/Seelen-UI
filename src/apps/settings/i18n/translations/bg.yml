@@ -206,3 +206,5 @@ vd:
     native: Роден
   disabled_windows_version: Native Virtual Desktop Strategy не е налична за вашата версия на Windows.
 save_and_restart: Запазване и рестартиране
+beta_channel:
+  enable: Активиране на бета канал (само чрез GitHub)

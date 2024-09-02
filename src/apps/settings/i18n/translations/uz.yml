@@ -208,3 +208,5 @@ vd:
     National Virtual ish strategiya strategiyasi Windows versiyangiz uchun
     mavjud emas.
 save_and_restart: Saqlang va qayta yoqing
+beta_channel:
+  enable: Beta kanalini yoqing (faqat gitub orqali)

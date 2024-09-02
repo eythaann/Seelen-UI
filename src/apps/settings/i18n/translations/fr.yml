@@ -204,3 +204,5 @@ vd:
     La stratégie de bureau virtuelle native n'est pas disponible pour votre
     version Windows.
 save_and_restart: Enregistrer et redémarrer
+beta_channel:
+  enable: Activer le canal bêta (uniquement via GitHub)

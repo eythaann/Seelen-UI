@@ -1,7 +1,9 @@
 # Changelog
 
 ## [Unreleased]
-## [1.10.3-beta.1]
+### features
+- add beta channel
+
 ### enhancements
 - add debugger cli toggles to tracing more info on logs.
 - media modules now exports the app related to the media player.

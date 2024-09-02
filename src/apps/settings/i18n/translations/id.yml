@@ -206,3 +206,5 @@ vd:
     label: Strategi desktop virtual
   disabled_windows_version: Strategi desktop virtual asli tidak tersedia untuk versi Windows Anda.
 save_and_restart: Simpan & restart
+beta_channel:
+  enable: Aktifkan saluran beta (hanya melalui github)

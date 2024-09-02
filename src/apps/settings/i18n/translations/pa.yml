@@ -206,3 +206,5 @@ vd:
     native: ਦੇਸੀ
   disabled_windows_version: ਦੇਸੀ ਵਰਚੁਅਲ ਡੈਸਕਟੌਪ ਰਣਨੀਤੀ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
+beta_channel:
+  enable: ਬੀਟਾ ਚੈਨਲ ਨੂੰ ਸਮਰੱਥ ਕਰੋ (ਸਿਰਫ ਗੀਥੱਬ ਰਾਹੀਂ)

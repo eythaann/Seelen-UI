@@ -208,3 +208,5 @@ vd:
     Nid yw strategaeth bwrdd gwaith rhithwir brodorol ar gael ar gyfer eich
     fersiwn Windows.
 save_and_restart: Cadw ac Ailgychwyn
+beta_channel:
+  enable: Galluogi sianel beta (dim ond trwy github)

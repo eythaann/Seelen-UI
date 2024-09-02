@@ -199,3 +199,5 @@ vd:
     seelen: 塞伦
   disabled_windows_version: 本机虚拟桌面策略不适合您的Windows版本。
 save_and_restart: 保存和重新启动
+beta_channel:
+  enable: 启用Beta通道（仅通过GitHub）

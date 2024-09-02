@@ -205,3 +205,5 @@ vd:
     label: Stratejiya Desktop Virtual
   disabled_windows_version: Stratejiya Desktop ya Native ya Native ji bo guhertoya weya Windows-ê nabe.
 save_and_restart: Save & Restart
+beta_channel:
+  enable: Channel Beta (tenê bi rêya Github) çalak bikin)

@@ -1,7 +1,7 @@
-import { FancyToolbar, FancyToolbarSchema } from './FancyToolbar';
-import { Monitor, MonitorSchema } from './Monitors';
-import { Seelenweg, SeelenWegSchema } from './Seelenweg';
-import { WindowManager, WindowManagerSchema } from './WindowManager';
+import { FancyToolbar } from './FancyToolbar';
+import { Monitor } from './Monitors';
+import { Seelenweg } from './Seelenweg';
+import { WindowManager } from './WindowManager';
 import z from 'zod';
 
 export type AhkVariables = Record<string, AhkVar>;
@@ -73,41 +73,6 @@ export enum VirtualDesktopStrategy {
   Seelen = 'Seelen',
 }
 
-export const SettingsSchema = z.object({
-  fancy_toolbar: FancyToolbarSchema.default({}),
-  seelenweg: SeelenWegSchema.default({}),
-  window_manager: WindowManagerSchema.default({}),
-  monitors: z
-    .array(MonitorSchema)
-    .min(1)
-    .default([MonitorSchema.parse({})]),
-  ahk_enabled: z.boolean().default(true),
-  ahk_variables: AhkVariablesSchema.default({}),
-  selected_theme: z
-    .union([z.string(), z.array(z.string())])
-    .transform((arg) => {
-      // backward compatibility with versions before 1.4.0
-      if (arg === 'default.json') {
-        return ['default'];
-      }
-      return Array.isArray(arg) ? arg : [arg];
-    })
-    .default(['default']),
-  dev_tools: z.boolean().default(false),
-  language: z
-    .string()
-    .nullable()
-    .default(() => {
-      if (globalThis.navigator) {
-        return globalThis.navigator.language.split('-')[0] || 'en';
-      }
-      return 'en';
-    }),
-  virtual_desktop_strategy: z
-    .nativeEnum(VirtualDesktopStrategy)
-    .default(VirtualDesktopStrategy.Native),
-});
-
 export interface ISettings {
   fancyToolbar: FancyToolbar;
   seelenweg: Seelenweg;
@@ -119,4 +84,5 @@ export interface ISettings {
   devTools: boolean;
   language: string;
   virtualDesktopStrategy: VirtualDesktopStrategy;
+  betaChannel: boolean;
 }

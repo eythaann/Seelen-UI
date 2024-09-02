@@ -205,3 +205,5 @@ vd:
     native: بومی
   disabled_windows_version: استراتژی دسک تاپ مجازی بومی برای نسخه ویندوز شما در دسترس نیست.
 save_and_restart: ذخیره و راه اندازی مجدد
+beta_channel:
+  enable: کانال بتا را فعال کنید (فقط از طریق GitHub)

@@ -206,3 +206,5 @@ vd:
     Natiivse virtuaalse töölaua strateegia pole teie Windowsi versiooni jaoks
     saadaval.
 save_and_restart: Salvesta ja taaskäivitage
+beta_channel:
+  enable: Luba beetakanal (ainult GitHubi kaudu)

@@ -206,3 +206,5 @@ vd:
     Nativní strategie virtuálních stolních počítačů není pro vaši verzi Windows
     k dispozici.
 save_and_restart: Uložit a restartovat
+beta_channel:
+  enable: Povolit beta kanál (pouze přes GitHub)
