@@ -1,3 +1,4 @@
+import { UIColors } from '../../../../../../lib/src/system_state';
 import { setColorsAsCssVariables } from '../../../../shared';
 import { FileChange } from '../../../../shared/events';
 import { ISettings } from '../../../../shared/schemas/Settings';
@@ -14,7 +15,7 @@ import { RootActions, RootReducer } from './app/reducer';
 import { StateToJsonSettings, StaticSettingsToState } from './app/StateBridge';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';
-import { RootState, UIColors } from './domain';
+import { RootState } from './domain';
 
 const IsSavingSettings = { current: false };
 

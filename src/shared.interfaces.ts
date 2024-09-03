@@ -1,3 +1,5 @@
+import { UIColors } from '../lib/src/system_state';
+
 import { Layout, LayoutSchema, NoFallbackBehavior } from './apps/shared/schemas/Layout';
 import { Placeholder } from './apps/shared/schemas/Placeholders';
 import { ISettings } from './apps/shared/schemas/Settings';
@@ -7,6 +9,7 @@ import { AppConfiguration } from './apps/settings/modules/appsConfigurations/dom
 
 export interface IRootState<T> {
   settings: T;
+  colors: UIColors;
 }
 
 export interface UserSettings {

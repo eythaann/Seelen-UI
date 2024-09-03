@@ -23,6 +23,9 @@
       "jest"
     ],
     "skipLibCheck": true,
+    "paths": {
+      "seelen-core": ["./lib/src/lib.ts"],
+    }
   },
   "exclude": [
     "node_modules",

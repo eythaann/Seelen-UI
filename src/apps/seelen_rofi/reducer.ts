@@ -1,13 +1,13 @@
+import { UIColors } from '../../../lib/src/system_state';
+import { IRootState } from '../../shared.interfaces';
 import { StateBuilder } from '../shared/StateBuilder';
-import { UIColors } from '../shared/styles';
 import { createSlice } from '@reduxjs/toolkit';
 
-interface RootState {
-  colors: UIColors;
-}
+interface RootState extends IRootState<{}> {}
 
 const initialState: RootState = {
   colors: UIColors.default(),
+  settings: {},
 };
 
 export const RootSlice = createSlice({
