@@ -10,6 +10,8 @@ pub struct ThemeCss {
     pub toolbar: String,
     /// Css Styles for the window manager
     pub wm: String,
+    /// Css Styles for the app launcher
+    pub launcher: String,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]

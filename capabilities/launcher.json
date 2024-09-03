@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/windows-schema.json",
+  "identifier": "launcher",
+  "windows": [
+    "seelen-launcher"
+  ],
+  "permissions": [
+    "log:default",
+    "core:webview:default",
+    "core:window:default",
+    "core:event:default",
+    "core:window:allow-set-ignore-cursor-events",
+    "core:window:allow-hide"
+  ]
+}
