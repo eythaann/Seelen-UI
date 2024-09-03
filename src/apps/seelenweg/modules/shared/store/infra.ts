@@ -1,3 +1,4 @@
+import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { FileChange, GlobalEvent } from '../../../../shared/events';
@@ -17,7 +18,7 @@ import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { AppFromBackground, HWND, MediaSession, SwItem, UIColors } from './domain';
+import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

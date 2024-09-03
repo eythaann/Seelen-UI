@@ -1,3 +1,4 @@
+import { UIColors } from '../../../lib/src/system_state';
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 import { setColorsAsCssVariables } from '.';
 import { Theme } from './schemas/Theme';
@@ -42,36 +43,6 @@ export function useDarkMode() {
   });
 
   return isDarkMode;
-}
-
-export interface UIColors {
-  background: string;
-  foreground: string;
-  accent_darkest: string;
-  accent_darker: string;
-  accent_dark: string;
-  accent: string;
-  accent_light: string;
-  accent_lighter: string;
-  accent_lightest: string;
-  complement: string | null;
-}
-
-export class UIColors {
-  static default(): UIColors {
-    return {
-      background: '#ffffff',
-      foreground: '#000000',
-      accent_darkest: '#990000',
-      accent_darker: '#aa0000',
-      accent_dark: '#bb0000',
-      accent: '#cc0000',
-      accent_light: '#dd0000',
-      accent_lighter: '#ee0000',
-      accent_lightest: '#ff0000',
-      complement: null,
-    };
-  }
 }
 
 async function loadThemes(_themes?: Theme[]) {
@@ -120,9 +91,9 @@ async function loadThemes(_themes?: Theme[]) {
 }
 
 export async function StartThemingTool(dispatch: anyFunction) {
-  await listen<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
-    dispatch({ type: 'main/setColors', payload: event.payload });
+  UIColors.onChange((colors) => {
+    setColorsAsCssVariables(colors);
+    dispatch({ type: 'main/setColors', payload: colors });
   });
 
   await listen<Theme[]>('themes', (event) => {

@@ -3,13 +3,12 @@ use std::sync::Arc;
 use crate::{error_handler::Result, log_error, trace_lock};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::system_state::UIColors;
 use windows::{
     Foundation::{EventRegistrationToken, TypedEventHandler},
     UI::ViewManagement::{UIColorType, UISettings},
 };
 use windows_core::IInspectable;
-
-use super::domain::UIColors;
 
 lazy_static! {
     pub static ref SYSTEM_SETTINGS: Arc<Mutex<SystemSettings>> = Arc::new(Mutex::new(
