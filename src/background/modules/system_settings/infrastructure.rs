@@ -1,10 +1,11 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
+use seelen_core::system_state::UIColors;
 use tauri::Emitter;
 
 use crate::{log_error, seelen::get_app_handle, trace_lock};
 
-use super::{application::SYSTEM_SETTINGS, domain::UIColors};
+use super::application::SYSTEM_SETTINGS;
 
 fn emit_colors(colors: &UIColors) {
     get_app_handle()

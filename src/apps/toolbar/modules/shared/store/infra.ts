@@ -1,3 +1,4 @@
+import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
@@ -22,7 +23,6 @@ import {
   NetworkAdapter,
   PowerStatus,
   TrayInfo,
-  UIColors,
   Workspace,
   WorkspaceId,
 } from './domain';

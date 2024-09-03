@@ -1,3 +1,4 @@
+import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { FileChange } from '../../../../shared/events';
@@ -8,7 +9,7 @@ import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { RootActions, RootSlice } from './app';
 
 import { Reservation, Sizing } from '../../layout/domain';
-import { AddWindowPayload, DesktopId, FocusAction, UIColors } from './domain';
+import { AddWindowPayload, DesktopId, FocusAction } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

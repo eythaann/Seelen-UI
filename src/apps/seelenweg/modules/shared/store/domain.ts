@@ -62,19 +62,6 @@ export type SwTemporalApp = modify<
 
 export type SwItem = SwPinnedApp | SwTemporalApp | SavedSeparatorItem | SavedMediaItem | StartMenuItem;
 
-export interface UIColors {
-  background: string;
-  foreground: string;
-  accent_darkest: string;
-  accent_darker: string;
-  accent_dark: string;
-  accent: string;
-  accent_light: string;
-  accent_lighter: string;
-  accent_lightest: string;
-  complement: string | null;
-}
-
 export interface RootState extends IRootState<Seelenweg> {
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
@@ -84,5 +71,4 @@ export interface RootState extends IRootState<Seelenweg> {
   focusedApp: FocusedApp | null;
   isOverlaped: boolean;
   mediaSessions: MediaSession[];
-  colors: UIColors;
 }
