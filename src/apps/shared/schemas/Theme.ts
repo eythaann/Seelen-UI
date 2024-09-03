@@ -9,6 +9,7 @@ export const ThemeSchema = z.object({
     weg: z.string(),
     toolbar: z.string(),
     wm: z.string(),
+    launcher: z.string(),
   }),
 });
 

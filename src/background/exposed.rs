@@ -30,7 +30,7 @@ fn select_file_on_explorer(path: String) {
 
 #[tauri::command(async)]
 fn open_file(path: String) {
-    log_error!(Command::new("explorer").args([&path]).spawn());
+    log_error!(Command::new("cmd").args(["/c", "explorer", &path]).spawn());
 }
 
 #[tauri::command(async)]

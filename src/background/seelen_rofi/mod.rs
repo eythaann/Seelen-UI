@@ -11,7 +11,7 @@ pub struct SeelenRofi {
 
 impl SeelenRofi {
     pub const TITLE: &str = "Seelen App Launcher";
-    pub const TARGET: &str = "seelen-rofi";
+    pub const TARGET: &str = "seelen-launcher";
 
     pub fn new() -> Result<Self> {
         Ok(Self {
@@ -27,6 +27,7 @@ impl SeelenRofi {
         WindowsApi::set_position(self.window.hwnd()?, None, &rc_monitor, SWP_NOACTIVATE)?;
         std::thread::sleep(std::time::Duration::from_millis(100));
         self.window.show()?;
+        self.window.set_focus()?;
         Ok(())
     }
 

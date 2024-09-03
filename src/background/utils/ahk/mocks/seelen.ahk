@@ -31,5 +31,4 @@ CloseIfNotRunning()
   ToggleMutexLockTracing()
 }
 
-LWin::ToggleAppLauncher()
-RWin::ToggleAppLauncher()
+LWin & Space::ToggleAppLauncher()
