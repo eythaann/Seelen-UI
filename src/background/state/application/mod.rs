@@ -285,6 +285,10 @@ impl FullState {
             theme.styles.wm = std::fs::read_to_string(path.join("theme.wm.css"))?;
         }
 
+        if path.join("theme.launcher.css").exists() {
+            theme.styles.launcher = std::fs::read_to_string(path.join("theme.launcher.css"))?;
+        }
+
         Ok(theme)
     }
 

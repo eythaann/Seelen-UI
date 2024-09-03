@@ -29,12 +29,12 @@ export class UserSettingsLoader {
     return this;
   }
 
-  withWallpaper() {
-    this._withWallpaper = true;
+  withWallpaper(value: boolean = true) {
+    this._withWallpaper = value;
     return this;
   }
 
-  withThemes(value: boolean) {
+  withThemes(value: boolean = true) {
     this._withThemes = value;
     return this;
   }
