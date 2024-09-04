@@ -1,4 +1,3 @@
-import { AppBarHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
 import { SavedSeparatorItem } from '../../../shared/schemas/SeelenWegItems';
 import { cx } from '../../../shared/styles';
 import { WithContextMenu } from '../../components/WithContextMenu';
@@ -8,6 +7,7 @@ import { Reorder } from 'framer-motion';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { HideMode, SeelenWegMode, SeelenWegSide } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { MediaSession } from '../item/infra/MediaSession';
@@ -29,16 +29,16 @@ const Separator2: SavedSeparatorItem = {
   type: SpecialItemType.Separator,
 };
 
-function shouldBeHidden(hideMode: AppBarHideMode, isActive: boolean, isOverlaped: boolean) {
+function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean) {
   let shouldBeHidden = false;
   switch (hideMode) {
-    case AppBarHideMode.Always:
+    case HideMode.Always:
       shouldBeHidden = !isActive;
       break;
-    case AppBarHideMode.Never:
+    case HideMode.Never:
       shouldBeHidden = false;
       break;
-    case AppBarHideMode.OnOverlap:
+    case HideMode.OnOverlap:
       shouldBeHidden = !isActive && isOverlaped;
   }
   return shouldBeHidden;
@@ -69,13 +69,13 @@ export function SeelenWeg() {
     (sideElements: number, centerElements: number) => {
       let size = '1px';
 
-      if (settings.mode === SeelenWegMode.FULL_WIDTH) {
+      if (settings.mode === SeelenWegMode.FullWidth) {
         size = `calc(50% - (${settings.size + settings.spaceBetweenItems}px * ${
           sideElements + centerElements / 2
         }) - ${settings.spaceBetweenItems}px)`;
       }
 
-      if (settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM) {
+      if (settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom) {
         return {
           width: size,
         };
@@ -114,7 +114,7 @@ export function SeelenWeg() {
   }, []);
 
   const isHorizontal =
-    settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM;
+    settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
@@ -126,7 +126,7 @@ export function SeelenWeg() {
         className={cx('taskbar', settings.position.toLowerCase(), {
           horizontal: isHorizontal,
           vertical: !isHorizontal,
-          'full-width': settings.mode === SeelenWegMode.FULL_WIDTH,
+          'full-width': settings.mode === SeelenWegMode.FullWidth,
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
         })}
       >

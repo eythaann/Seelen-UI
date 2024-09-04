@@ -1,8 +1,8 @@
 import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
-import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { Placeholder } from '../../../../shared/schemas/Placeholders';
 import { SoftOpaque } from 'readable-types';
+import { FancyToolbarSettings } from 'seelen-core';
 
 import { WlanBssEntry } from '../../network/domain';
 
@@ -109,7 +109,7 @@ export interface Workspace {
   name: string | null;
 }
 
-export interface RootState extends IRootState<FancyToolbar> {
+export interface RootState extends IRootState<FancyToolbarSettings> {
   version: number;
   isOverlaped: boolean;
   focused: FocusedApp | null;

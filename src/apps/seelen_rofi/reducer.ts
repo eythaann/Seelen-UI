@@ -1,7 +1,7 @@
-import { UIColors } from '../../../lib/src/system_state';
 import { IRootState } from '../../shared.interfaces';
 import { StateBuilder } from '../shared/StateBuilder';
 import { createSlice } from '@reduxjs/toolkit';
+import { UIColors } from 'seelen-core';
 
 interface RootState extends IRootState<{}> {}
 

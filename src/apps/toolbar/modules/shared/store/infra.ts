@@ -1,15 +1,15 @@
-import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
-import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
+import { UIColors } from 'seelen-core';
+import { FancyToolbarSettings } from 'seelen-core';
 
 import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
@@ -117,8 +117,6 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await initUIColors();
-
   await listenGlobal(FileChange.Placeholders, async () => {
     if (IsSavingCustom.current) {
       IsSavingCustom.current = false;
@@ -128,6 +126,7 @@ export async function registerStoreEvents() {
     setPlaceholder(userSettings);
   });
 
+  await initUIColors();
   await StartThemingTool();
   await view.emitTo(view.label, 'store-events-ready');
 }
@@ -155,7 +154,7 @@ export async function loadStore() {
   store.dispatch(RootActions.setEnv(userSettings.env));
 }
 
-export function loadSettingsCSS(settings: FancyToolbar) {
+export function loadSettingsCSS(settings: FancyToolbarSettings) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-height', `${settings.height}px`);

@@ -1,5 +1,5 @@
-import { getRootElement } from '../../../lib/src/utils';
 import { path } from '@tauri-apps/api';
+import { getRootElement } from 'seelen-core';
 
 export const getRootContainer = getRootElement;
 

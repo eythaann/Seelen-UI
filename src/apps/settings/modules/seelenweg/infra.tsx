@@ -1,7 +1,7 @@
-import { AppBarHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { HideMode, SeelenWegMode, SeelenWegSide } from 'seelen-core';
 
 import { useAppDispatch, useAppSelector } from '../shared/utils/infra';
 
@@ -46,7 +46,7 @@ export const SeelenWegSettings = () => {
             <Select
               style={{ width: '120px' }}
               value={settings.hideMode}
-              options={OptionsFromEnum(AppBarHideMode)}
+              options={OptionsFromEnum(HideMode)}
               onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
             />
           </SettingsOption>

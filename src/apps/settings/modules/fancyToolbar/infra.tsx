@@ -1,8 +1,8 @@
-import { AppBarHideMode } from '../../../shared/schemas/Seelenweg';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { HideMode } from 'seelen-core';
 
 import { newSelectors } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
@@ -83,7 +83,7 @@ export function FancyToolbarSettings() {
             <Select
               style={{ width: '120px' }}
               value={settings.hideMode}
-              options={OptionsFromEnum(AppBarHideMode)}
+              options={OptionsFromEnum(HideMode)}
               onChange={(value) => dispatch(FancyToolbarActions.setHideMode(value))}
             />
           </SettingsOption>

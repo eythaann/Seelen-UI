@@ -1,8 +1,6 @@
-import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
-import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { StartThemingTool } from '../../../../shared/styles';
 import { updateHitbox } from '../../../events';
@@ -12,6 +10,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
+import { SeelenWegMode, SeelenWegSettings, SeelenWegSide, UIColors } from 'seelen-core';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -59,7 +58,7 @@ export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
   const updateHitboxIfNeeded = () => {
     const { mode } = store.getState().settings;
-    if (mode === SeelenWegMode.MIN_CONTENT) {
+    if (mode === SeelenWegMode.MinContent) {
       updateHitbox();
     }
   };
@@ -148,7 +147,7 @@ export async function registerStoreEvents() {
   await view.emitTo(view.label, 'request-all-open-apps');
 }
 
-function loadSettingsCSS(settings: Seelenweg) {
+function loadSettingsCSS(settings: SeelenWegSettings) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-margin', `${settings.margin}px`);
@@ -159,22 +158,22 @@ function loadSettingsCSS(settings: Seelenweg) {
   styles.setProperty('--config-space-between-items', `${settings.spaceBetweenItems}px`);
 
   switch (settings.position) {
-    case SeelenWegSide.TOP:
+    case SeelenWegSide.Top:
       styles.setProperty('--config-by-position-justify-content', 'center');
       styles.setProperty('--config-by-position-align-items', 'flex-start');
       styles.setProperty('--config-by-position-flex-direction', 'row');
       break;
-    case SeelenWegSide.BOTTOM:
+    case SeelenWegSide.Bottom:
       styles.setProperty('--config-by-position-justify-content', 'center');
       styles.setProperty('--config-by-position-align-items', 'flex-end');
       styles.setProperty('--config-by-position-flex-direction', 'row');
       break;
-    case SeelenWegSide.LEFT:
+    case SeelenWegSide.Left:
       styles.setProperty('--config-by-position-justify-content', 'flex-start');
       styles.setProperty('--config-by-position-align-items', 'center');
       styles.setProperty('--config-by-position-flex-direction', 'column');
       break;
-    case SeelenWegSide.RIGHT:
+    case SeelenWegSide.Right:
       styles.setProperty('--config-by-position-justify-content', 'flex-end');
       styles.setProperty('--config-by-position-align-items', 'center');
       styles.setProperty('--config-by-position-flex-direction', 'column');

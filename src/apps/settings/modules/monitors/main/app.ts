@@ -1,8 +1,7 @@
-import { parseAsCamel } from '../../../../shared/schemas';
-import { Monitor, MonitorSchema, Workspace, WorkspaceSchema } from '../../../../shared/schemas/Monitors';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Monitor, Workspace } from 'seelen-core';
 
-const initialState: Monitor[] = [parseAsCamel(MonitorSchema, {})];
+const initialState: Monitor[] = [];
 
 interface ForMonitor {
   monitorIdx: number;
@@ -20,7 +19,7 @@ export const MonitorsSlice = createSlice({
       state.splice(action.payload, 1);
     },
     insert: (state, action: PayloadAction<number>) => {
-      state.splice(action.payload, 0, parseAsCamel(MonitorSchema, {}));
+      state.splice(action.payload, 0, { ...new Monitor() });
     },
     changeEditingWorkspace: (state, action: PayloadAction<ForWorkspace>) => {
       const { monitorIdx, workspaceIdx } = action.payload;
@@ -28,7 +27,7 @@ export const MonitorsSlice = createSlice({
       if (!monitor) {
         return;
       }
-      monitor.edditingWorkspace = workspaceIdx;
+      monitor.editingWorkspace = workspaceIdx;
     },
     newWorkspace: (state, action: PayloadAction<ForMonitor & { name: string }>) => {
       const { monitorIdx, name } = action.payload;
@@ -36,7 +35,7 @@ export const MonitorsSlice = createSlice({
       if (!monitor) {
         return;
       }
-      const newWorkspace = parseAsCamel(WorkspaceSchema, {});
+      const newWorkspace = { ...new Workspace() };
       const length = monitor.workspaces.push(newWorkspace);
       newWorkspace.name = name || `Workspace ${length}`;
     },

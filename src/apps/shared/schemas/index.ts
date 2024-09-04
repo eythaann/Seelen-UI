@@ -67,19 +67,6 @@ export class VariableConvention {
   }
 }
 
-export function parseAsCamel(schema: z.Schema, value: any) {
-  return VariableConvention.fromSnakeToCamel(schema.parse(value));
-}
-
-export function safeParseAsCamel(schema: z.Schema, value: any) {
-  let result = schema.safeParse(value);
-  if (result.error) {
-    console.error(result.error);
-    return;
-  }
-  return VariableConvention.fromSnakeToCamel(result.data);
-}
-
 export const CreatorInfoSchema = z.object({
   displayName: z.string().default('Unknown'),
   author: z.string().default('Unknown'),
