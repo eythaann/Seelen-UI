@@ -1,4 +1,4 @@
-import { ExportApps, ImportApps } from '../../shared/store/storeApi';
+import { ExportApps } from '../../shared/store/storeApi';
 import { EditAppModal } from './EditModal';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
@@ -11,7 +11,6 @@ import { useDispatch } from 'react-redux';
 import { useAppSelector } from '../../shared/utils/infra';
 
 import { RootSelectors } from '../../shared/store/app/selectors';
-import { YamlToState_Apps } from '../../shared/store/app/StateBridge';
 import { cx, debounce } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
@@ -172,9 +171,10 @@ export function AppsConfiguration() {
   const { t } = useTranslation();
 
   const importApps = useCallback(async () => {
-    const yamlApps = await ImportApps();
+    // TODO reimplement Import Apps
+    /* const yamlApps = await ImportApps();
     const newApps = YamlToState_Apps(yamlApps);
-    dispatch(AppsConfigActions.push(newApps));
+    dispatch(AppsConfigActions.push(newApps)); */
   }, []);
 
   const performSwap = useCallback(() => {

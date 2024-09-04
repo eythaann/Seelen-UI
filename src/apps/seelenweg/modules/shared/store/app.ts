@@ -1,8 +1,8 @@
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { savePinnedItems } from './storeApi';
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
+import { SeelenWegSettings, UIColors } from 'seelen-core';
 
-import { SeelenWegSlice } from '../../bar/app';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 
 import {
@@ -23,20 +23,9 @@ const initialState: RootState = {
   openApps: {},
   focusedApp: null,
   isOverlaped: false,
-  settings: SeelenWegSlice.getInitialState(),
+  settings: new SeelenWegSettings(),
   mediaSessions: [],
-  colors: {
-    background: '#ffffff',
-    foreground: '#000000',
-    accent_darkest: '#000000',
-    accent_darker: '#000000',
-    accent_dark: '#000000',
-    accent: '#000000',
-    accent_light: '#000000',
-    accent_lighter: '#000000',
-    accent_lightest: '#000000',
-    complement: null,
-  },
+  colors: UIColors.default(),
 };
 
 function removeAppFromState(state: RootState, searched: SwPinnedApp | SwTemporalApp) {

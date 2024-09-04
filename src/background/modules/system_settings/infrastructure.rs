@@ -7,7 +7,7 @@ use super::application::SYSTEM_SETTINGS;
 
 fn emit_colors(colors: &UIColors) {
     get_app_handle()
-        .emit("colors", colors)
+        .emit("colors-changed", colors)
         .expect("failed to emit");
 }
 

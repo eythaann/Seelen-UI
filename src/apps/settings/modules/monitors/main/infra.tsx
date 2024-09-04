@@ -23,7 +23,7 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
     return null;
   }
 
-  const workspace = monitor.workspaces[monitor.edditingWorkspace]!;
+  const workspace = monitor.workspaces[monitor.editingWorkspace || 0]!;
   const LayoutExample = LayoutExamples[workspace.layout];
 
   const containerPadding = defaultOnNull(
@@ -64,7 +64,7 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
             {LayoutExample && <LayoutExample containerPadding={containerPadding} workspacePadding={workspacePadding} />}
           </div>
         </div>
-        <AdvancedConfig workspaceIdx={monitor.edditingWorkspace} monitorIdx={monitorIdx} />
+        <AdvancedConfig workspaceIdx={monitor.editingWorkspace || 0} monitorIdx={monitorIdx} />
         <Button type="primary" danger disabled={monitorIdx === 0} onClick={onDelete}>
           Delete
         </Button>
@@ -77,7 +77,7 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
           <div className={cs.title}>Monitor {monitorIdx + 1}</div>
           <Select
             className={cs.workspaceSelector}
-            value={monitor.edditingWorkspace}
+            value={monitor.editingWorkspace}
             dropdownRender={(menu) => (
               <>
                 {menu}
@@ -97,7 +97,7 @@ export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
             onChange={onChangeWorkspace}
           />
         </div>
-        <WorkspaceConfig monitorIdx={monitorIdx} workspaceIdx={monitor.edditingWorkspace} />
+        <WorkspaceConfig monitorIdx={monitorIdx} workspaceIdx={monitor.editingWorkspace || 0} />
       </SettingsGroup>
     </div>
   );

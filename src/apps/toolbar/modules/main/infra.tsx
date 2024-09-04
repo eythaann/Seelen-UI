@@ -3,7 +3,6 @@ import {
   ToolbarModule,
   ToolbarModuleType,
 } from '../../../shared/schemas/Placeholders';
-import { AppBarHideMode } from '../../../shared/schemas/Seelenweg';
 import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
@@ -11,6 +10,7 @@ import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { HideMode } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
@@ -97,8 +97,8 @@ export function ToolBar({ structure }: Props) {
 
   const shouldBeHidden =
     !isActive &&
-    hideMode !== AppBarHideMode.Never &&
-    (isOverlaped || hideMode === AppBarHideMode.Always);
+    hideMode !== HideMode.Never &&
+    (isOverlaped || hideMode === HideMode.Always);
 
   return (
     <Reorder.Group

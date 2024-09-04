@@ -23,8 +23,8 @@ async function Main() {
   const container = getRootContainer();
 
   await loadConstants();
-  await registerStoreEvents();
   await loadStore();
+  await registerStoreEvents();
   await loadTranslations();
 
   createRoot(container).render(

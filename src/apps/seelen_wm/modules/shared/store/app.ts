@@ -1,11 +1,10 @@
 import { defaultLayout } from '../../../../../shared.interfaces';
 import { toPhysicalPixels } from '../../../../shared';
-import { parseAsCamel } from '../../../../shared/schemas';
-import { WindowManagerSchema } from '../../../../shared/schemas/WindowManager';
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';
+import { UIColors, WindowManagerSettings } from 'seelen-core';
 
 import { NodeImpl, reIndexContainer } from '../../layout/app';
 
@@ -22,19 +21,8 @@ const initialState: RootState = {
   activeWindow: 0,
   lastManagedActivated: null,
   reservation: null,
-  settings: parseAsCamel(WindowManagerSchema, {}),
-  colors: {
-    background: '#ffffff',
-    foreground: '#000000',
-    accent_darkest: '#000000',
-    accent_darker: '#000000',
-    accent_dark: '#000000',
-    accent: '#000000',
-    accent_light: '#000000',
-    accent_lighter: '#000000',
-    accent_lightest: '#000000',
-    complement: null,
-  },
+  settings: new WindowManagerSettings(),
+  colors: UIColors.default(),
 };
 
 export const RootSlice = createSlice({

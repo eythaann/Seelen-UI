@@ -1,8 +1,8 @@
 import { toPhysicalPixels } from '../shared';
-import { AppBarHideMode, SeelenWegSide } from '../shared/schemas/Seelenweg';
 import { debounce, TimeoutIdRef } from '../shared/Timing';
 import { emitTo } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { HideMode, SeelenWegSide } from 'seelen-core';
 
 import { store } from './modules/shared/store/infra';
 
@@ -25,13 +25,13 @@ export const updateHitbox = debounce(async () => {
   const viewSize = await view.innerSize();
 
   const isAutoHideOn =
-    (hideMode !== AppBarHideMode.Never && isOverlaped) || hideMode === AppBarHideMode.Always;
-  const isHorizontal = position === SeelenWegSide.TOP || position === SeelenWegSide.BOTTOM;
+    (hideMode !== HideMode.Never && isOverlaped) || hideMode === HideMode.Always;
+  const isHorizontal = position === SeelenWegSide.Top || position === SeelenWegSide.Bottom;
 
   const hiddenOffsetTop =
-    position === SeelenWegSide.TOP ? viewPosition.y : viewPosition.y + viewSize.height - 1;
+    position === SeelenWegSide.Top ? viewPosition.y : viewPosition.y + viewSize.height - 1;
   const hiddenOffsetLeft =
-    position === SeelenWegSide.LEFT ? viewPosition.x : viewPosition.x + viewSize.width - 1;
+    position === SeelenWegSide.Left ? viewPosition.x : viewPosition.x + viewSize.width - 1;
   emitTo(hitboxTarget, 'move', {
     x:
       isAutoHideOn && !isHorizontal

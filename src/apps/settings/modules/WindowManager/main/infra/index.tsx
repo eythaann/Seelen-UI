@@ -1,4 +1,3 @@
-import { VirtualDesktopStrategy } from '../../../../../shared/schemas/Settings';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { GlobalPaddings } from './GlobalPaddings';
 import { OthersConfigs } from './Others';
@@ -7,6 +6,7 @@ import { Alert, Button, ConfigProvider, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { VirtualDesktopStrategy } from 'seelen-core';
 
 import { BorderSettings } from '../../border/infra';
 
