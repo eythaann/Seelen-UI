@@ -44,10 +44,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
         register_notification_events();
     });
 
-    handle.listen("register-colors-events", move |_| {
-        register_colors_events();
-    });
-
+    register_colors_events();
     Ok(())
 }
 

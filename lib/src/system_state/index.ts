@@ -14,7 +14,7 @@ export interface UIColors {
 }
 
 export class UIColors extends Obtainable<UIColors>(
-  InvokeHandler.GetUIColors,
+  InvokeHandler.GetSystemColors,
   EventHandler.UIColors,
 ) {
   static default(): UIColors {

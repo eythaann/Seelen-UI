@@ -4,7 +4,7 @@ import { ISettings } from '../../../../shared/schemas/Settings';
 import { Theme } from '../../../../shared/schemas/Theme';
 import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
+import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
 
@@ -28,6 +28,15 @@ export type store = {
   getState: () => RootState;
 };
 
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    UIColors.setAssCssVariables(colors);
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
+
 export async function registerStoreEvents() {
   await listenGlobal<any[]>('placeholders', async () => {
     const userSettings = await new UserSettingsLoader().withPlaceholders().load();
@@ -38,10 +47,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setAvailableThemes(event.payload));
   });
 
-  await listenGlobal<UIColors>('colors', (event) => {
-    UIColors.setAssCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
-  });
+  await initUIColors();
 
   await listenGlobal<AppConfiguration[]>('settings-by-app', (event) => {
     store.dispatch(RootActions.setAppsConfigurations(event.payload));
@@ -61,8 +67,6 @@ export async function registerStoreEvents() {
     };
     store.dispatch(RootActions.setState(newState));
   });
-
-  await emit('register-colors-events');
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {

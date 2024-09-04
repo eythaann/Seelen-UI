@@ -46,6 +46,15 @@ async function cleanSavedItems(items: SwSavedItem[]): Promise<SwItem[]> {
   return result;
 }
 
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    UIColors.setAssCssVariables(colors);
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
+
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
   const updateHitboxIfNeeded = () => {
@@ -98,10 +107,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
-  await listenGlobal<UIColors>('colors', (event) => {
-    UIColors.setAssCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
-  });
+  await initUIColors();
 
   await listenGlobal<unknown>(FileChange.WegItems, async () => {
     if (IsSavingPinnedItems.current) {

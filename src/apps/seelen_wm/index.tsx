@@ -28,7 +28,6 @@ async function Main() {
       getCurrentWebviewWindow().show();
       let view = getCurrentWebviewWindow();
       view.emitTo(view.label, 'complete-setup');
-      view.emit('register-colors-events');
     }, []);
 
     return (

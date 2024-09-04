@@ -7,14 +7,16 @@ export const store = configureStore({
   reducer: RootSlice.reducer,
 });
 
-function loadColors(colors: UIColors) {
-  UIColors.setAssCssVariables(colors);
-  store.dispatch(RootActions.setColors(colors));
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    UIColors.setAssCssVariables(colors);
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
 }
 
 export async function initStore() {
-  loadColors(await UIColors.getAsync());
-  await UIColors.onChange(loadColors);
-
+  await initUIColors();
   await StartThemingTool();
 }
