@@ -1,5 +1,5 @@
 media:
-  master_volume: Основной объем
+  master_volume: Основная громкость
   output_device: Устройство вывода
   input_device: Устройство ввода
   players: Медиаплееры
@@ -7,30 +7,30 @@ media:
     multimedia: Мультимедиа
     comunications: Коммуникации
 network:
-  not_found: Сети не найдены
-  more: Дополнительные настройки сети
+  not_found: Не найдено ни одной сети
+  more: Больше настроек сети
   hidden: Скрытая сеть
   placeholder:
     password: Пароль
   disconnect: Отключить
-  connect: Соединять
+  connect: Подключить
 settings:
   title: Настройки
   app_settings: Настройки приложения
-  log_out: Выйти
-  sleep: Спать
-  restart: Перезапуск
-  shutdown: Неисправность
-  power: Власть
+  log_out: Выход из системы
+  sleep: Спящий режим
+  restart: Перезагрузка
+  shutdown: Завершение работы
+  power: Питание
 placeholder:
   open_user_folder: Открыть папку пользователя
   open_system_tray: Открыть системный трей
   bluetooth_devices: Bluetooth и устройства
-  ethernet_connected: доступ в Интернет
-  ethernet_disconnected: Нет доступа в Интернет
-  volume: Объем
-  battery_remaining: '% оставшийся'
+  ethernet_connected: Сеть
+  ethernet_disconnected: Нет сети
+  volume: Громкость
+  battery_remaining: 'Осталось %'
   smart_charge: '- Умная зарядка'
   settings: Быстрые настройки
   notifications: Уведомления
-unlabelled_tray: Некабельный икона лотка
+unlabelled_tray: Иконка трея без надписи
