@@ -219,13 +219,13 @@ export function AppsConfiguration() {
   );
 
   return (
-    <>
+    <div className={cs.container}>
       <Table
         loading={loading}
         dataSource={data}
         columns={columns}
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 330, x: '100vw' }}
+        pagination={{ pageSize: 25 }}
+        scroll={{ y: 'calc(100vh - 150px)', x: '100vw' }}
         className={cs.table}
         rowSelection={{
           selectedRowKeys: selectedAppsKey,
@@ -251,6 +251,6 @@ export function AppsConfiguration() {
           {t('apps_configurations.swap')}
         </Button>
       </div>
-    </>
+    </div>
   );
 }
