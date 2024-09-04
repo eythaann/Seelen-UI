@@ -1,5 +1,4 @@
 import { UIColors } from '../../../../../../lib/src/system_state';
-import { setColorsAsCssVariables } from '../../../../shared';
 import { FileChange } from '../../../../shared/events';
 import { ISettings } from '../../../../shared/schemas/Settings';
 import { Theme } from '../../../../shared/schemas/Theme';
@@ -40,7 +39,7 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
+    UIColors.setAssCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
   });
 
