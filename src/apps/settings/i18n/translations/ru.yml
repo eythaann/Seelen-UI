@@ -1,40 +1,40 @@
 loading: Загрузка...
-inProgress: В ходе выполнения...
+inProgress: В процессе...
 cancel: Отмена
-save: Сохранять
-quit: Покидать
+save: Сохранить
+quit: Закрыть
 open: Открыть
 delete: Удалить
 sides:
-  left: Левый
-  right: Верно
-  top: Вершина
-  bottom: Нижний
+  left: Слева
+  right: Справа
+  top: Сверху
+  bottom: Снизу
 header:
   labels:
-    general: Общий
-    seelen_bar: Необычная панель инструментов
-    seelen_wm: Оконный менеджер
-    seelen_weg: Док/Панель задач
+    general: Общее
+    seelen_bar: Верхняя панель
+    seelen_wm: Менеджер окон
+    seelen_weg: Панель задач
     monitors: Мониторы
-    specific_apps: Конкретные приложения
+    specific_apps: Приложения
     shortcuts: Ярлыки
     developer: Разработчик
     info: Информация
 start:
   title: Добро пожаловать!
   message: >-
-    Добро пожаловать в пользовательский интерфейс Seelen, идеальную среду
-    рабочего стола со встроенным тайловым менеджером окон, который улучшит вашу
-    работу с Windows 11! Откройте для себя новую эру эффективности и
-    многозадачности благодаря нашему интуитивно понятному интерфейсу и
-    расширенным функциям.
+    Добро пожаловать в Seelen UI, превосходное окружение рабочего стола
+    со встроенным менеджером окон с плиточным расположением для улучшения
+    работы с Windows 11! Откройте для себя новую эру эффективности и
+    многозадачности благодаря интуитивно понятному интерфейсу и расширенным
+    возможностям.
   message_accent: Оптимизируйте свою производительность стильно!
 general:
-  startup: Выполняться при запуске?
+  startup: Автозапускать при включении системы
   language: Язык
   theme:
-    label: Информация о теме
+    label: Темы
     placeholder: Выберите тему
     author: Автор
     description: Описание
@@ -42,102 +42,102 @@ general:
     added: Тема уже добавлена
     enabled: Включенные темы
     tags: Теги
-    available: Доступный
-    selected: Выбран
+    available: Доступные
+    selected: Выбранные
   icon_pack:
-    label: Иконы пакеты
+    label: Наборы иконок
   accent_color: Акцентный цвет
   wallpaper:
     select: Выберите обои
 toolbar:
-  enable: Включить необычную панель инструментов
+  enable: Включить
   placeholder:
-    select: Структура панели инструментов
+    select: Структура верхней панели
     author: Автор
     description: Описание
   height: Высота
-  auto_hide: Автомальная шкура
-  label: Панель инструментов
+  auto_hide: Автоскрытие
+  label: Верхняя панель
 wm:
   layout: Макет
   author: Автор
   description: Описание
   space_between_containers: Пространство между контейнерами
-  workspace_padding: Заполнение рабочих пространств
-  workspace_offset: Смещение рабочих пространств (поля)
-  resize_delta: Изменение размера Дельты (%)
+  workspace_padding: Внутренний отступ рабочего пространства
+  workspace_offset: Внешний отступ рабочего пространства
+  resize_delta: Изменить размер дельты (%)
   border:
-    enable: Включить границу окна
-    width: Ширина рамки
+    enable: Включить границу окон
+    width: Ширина границы
     offset: Смещение границы
   enable: Включить менеджер по плитке окна
 weg:
-  label: Док/Панель задач
-  enable: Включить док/панель задач
+  label: Панель задач
+  enable: Включить
   width: Ширина
-  auto_hide: Авто-скрытие
-  dock_side: Док-сайд
-  padding: Заполнение
-  margin: Допуск
-  gap: Зазор
+  auto_hide: Автоскрытие
+  dock_side: Расположение
+  padding: Внутренний отступ
+  margin: Внешний отступ
+  gap: Разрыв
   items:
-    label: Предметы
-    size: Размер товара
+    label: Иконки
+    size: Размер иконок
     zoom_size: Увеличенный размер (используется для тем)
-    gap: Пространство между элементами
-    visible_separators: Видимые разделители
+    gap: Расстояние между иконок
+    visible_separators: Разделители
 devtools:
   enable: Включить инструменты разработчика
-  app_folders: Папки приложений
+  app_folders: Папки приложения
   install_folder: Папка установки
   data_folder: Папка данных
   settings_file: Файл настроек
   custom_config_file: Загрузить пользовательский файл конфигурации
-  load: Нагрузка
+  load: Загрузить
 apps_configurations:
-  import: Импортировать
+  import: Импорт
   export: Экспорт
   delete: Удалить
-  swap: Менять
+  swap: Сменить
   new: Новый
   bundled_title: Конфигурация приложения в комплекте с Seelen
   bundled_msg: >-
-    Эти связанные конфигурации не подлежат редактированию и предназначены для
-    обеспечения максимального удобства без настройки. Они автоматически
+    Эти встроенные конфигурации не подлежат редактированию и созданы для того,
+    чтобы обеспечить вам максимальное удобство без настройки. Они автоматически
     настраивают для вас наиболее распространенные приложения.
-  confirm_delete_title: Подтвердите удаление
-  confirm_delete: Вы уверены, что хотите удалить эту конфигурацию?
+  confirm_delete_title: Подтверждение удаления
+  confirm_delete: Удалить эту конфигурацию?
   search: Поиск
   app:
-    name: Имя
+    name: Название
     category: Категория
-    category_placeholder: Никто
-    bindings: Привязка (обратите внимание, что необходимы оба параметра)
+    category_placeholder: Нет
+    bindings: Привязка (оба параметра обязательны)
     monitor: Монитор
-    monitor_placeholder: Никто
-    workspace: Рабочая среда
-    workspace_placeholder: Никто
-    title_edit: Редактирование {{name}}
+    monitor_placeholder: Нет
+    workspace: Рабочая область
+    workspace_placeholder: Нет
+    title_edit: Изменение {{name}}
     title_create: Создание {{name}}
     title_readonly: Просмотр {{name}}
-    ok_edit: Обновлять
-    ok_create: Создавать
-    ok_readonly: Редактировать как новый
+    ok_edit: Обновить
+    ok_create: Создать
+    ok_readonly: Изменить как новое
     options:
-      float: Плавать
-      unmanage: Отменить управление
-      force: Принудительное управление
+      float: Плавающее
+      unmanage: Неуправляемое
+      force: Управлять принудительно
       pinned: Закреплено
-      hidden: Скрыть от дока/панели задач
-    wm_options_label: Параметры Window Manager
-    weg_options_label: Параметры дока/панели задач
-    options_label: Дополнительные варианты
+      hidden: Скрыть из панели задач
+    wm_options_label: Параметры управления окном
+    weg_options_label: Параметры панели задач
+    options_label: Дополнительные параметры
   identifier:
     remove: Удалить блок
     id: Идентификатор
-    kind: Определить по
-    matching_strategy: Соответствующая стратегия
-    negation: Отрицательное соответствие
+    kind: Идентифицировать по
+    matching_strategy: Стратегия подбора
+    negation: Отрицательный подбор
     and: И
     or: ИЛИ
     add_block: Добавить блок
@@ -145,29 +145,27 @@ extras:
   version: Версия
   links: Официальные ссылки
   github: GitHub
-  discord: Раздор
-  relaunch: Перезапуск
-  exit: Выйти/выйти
+  discord: Discord
+  relaunch: Перезапустить
+  exit: Выйти
 shortcuts:
   enable: Включить встроенные ярлыки (ahk)
-  enable_tooltip: >-
-    Отключите, если вы будете реализовывать свои собственные ярлыки с помощью
-    API Seelen Core.
+  enable_tooltip: Отключите, если будете реализовывать собственные ярлыки с помощью Seelen Core Api
   labels:
-    reserve_top: Резервный топ
-    reserve_bottom: Резервное дно
-    reserve_left: Резервный левый
-    reserve_right: Резервное право
-    reserve_float: Резервный плавающий
-    reserve_stack: Резервный стек
-    focus_top: Фокус Топ
-    focus_bottom: Фокус внизу
-    focus_left: Фокус влево
-    focus_right: Фокус вправо
-    focus_latest: Фокус последних
+    reserve_top: Зарезервировать верх
+    reserve_bottom: Зарезервировать низ
+    reserve_left: Зарезервировать лево
+    reserve_right: Зарезервировать право
+    reserve_float: Зарезервировать плавующее
+    reserve_stack: Зарезервировать стек
+    focus_top: Фокус верха
+    focus_bottom: Фокус низа
+    focus_left: Фокус лева
+    focus_right: Фокус права
+    focus_latest: Фокус последнего
     increase_width: Увеличить ширину
     decrease_width: Уменьшить ширину
-    increase_height: Увеличение высоты
+    increase_height: Увеличить высоты
     decrease_height: Уменьшить высоту
     restore_sizes: Восстановить размеры
     switch_workspace_0: Переключиться на рабочую область 0
@@ -202,12 +200,12 @@ shortcuts:
     send_to_workspace_9: Отправить в рабочую область 9
 vd:
   strategy:
-    native: Родной
-    seelen: Сиэлен
-    label: Виртуальная стратегия рабочего стола
+    native: Нативная
+    seelen: Seelen
+    label: Стратегия виртуального рабочего стола
   disabled_windows_version: >-
     Нативная стратегия виртуального рабочего стола недоступна для вашей версии
     Windows.
 save_and_restart: Сохранить и перезапустить
 beta_channel:
-  enable: Включить бета -канал (только через GitHub)
+  enable: Включить канал «Бета» (только через GitHub)
