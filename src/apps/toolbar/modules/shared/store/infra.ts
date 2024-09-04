@@ -1,10 +1,10 @@
 import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
+import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
@@ -109,13 +109,8 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
+    UIColors.setAssCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
-  });
-
-  await listenGlobal(FileChange.Themes, async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
   });
 
   await listenGlobal(FileChange.Placeholders, async () => {
@@ -127,6 +122,7 @@ export async function registerStoreEvents() {
     setPlaceholder(userSettings);
   });
 
+  await StartThemingTool();
   await view.emitTo(view.label, 'store-events-ready');
 }
 
@@ -148,7 +144,6 @@ export async function loadStore() {
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));
 
-  loadThemeCSS(userSettings);
   setPlaceholder(userSettings);
 
   store.dispatch(RootActions.setEnv(userSettings.env));

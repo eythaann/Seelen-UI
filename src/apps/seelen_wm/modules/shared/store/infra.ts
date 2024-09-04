@@ -1,8 +1,8 @@
 import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { FileChange } from '../../../../shared/events';
 import { WindowManager } from '../../../../shared/schemas/WindowManager';
+import { StartThemingTool } from '../../../../shared/styles';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 
@@ -22,7 +22,6 @@ export async function loadStore() {
   store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
-  loadThemeCSS(userSettings);
 }
 
 export async function registerStoreEvents() {
@@ -79,19 +78,16 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
+    UIColors.setAssCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
-  });
-
-  await listenGlobal(FileChange.Themes, async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
   });
 
   await listenGlobal(FileChange.Placeholders, async () => {
     const userSettings = await new UserSettingsLoader().withLayouts().load();
     store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
   });
+
+  await StartThemingTool();
 }
 
 function loadSettingsCSS(settings: WindowManager) {

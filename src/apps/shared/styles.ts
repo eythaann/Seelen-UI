@@ -1,8 +1,6 @@
-import { UIColors } from '../../../lib/src/system_state';
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
-import { setColorsAsCssVariables } from '.';
 import { Theme } from './schemas/Theme';
-import { emit, listen } from '@tauri-apps/api/event';
+import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect, useState } from 'react';
 
@@ -90,16 +88,9 @@ async function loadThemes(_themes?: Theme[]) {
   }
 }
 
-export async function StartThemingTool(dispatch: anyFunction) {
-  UIColors.onChange((colors) => {
-    setColorsAsCssVariables(colors);
-    dispatch({ type: 'main/setColors', payload: colors });
-  });
-
+export async function StartThemingTool() {
   await listen<Theme[]>('themes', (event) => {
     loadThemes(event.payload);
   });
-
   await loadThemes();
-  await emit('register-colors-events');
 }

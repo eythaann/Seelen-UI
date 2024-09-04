@@ -11,7 +11,7 @@ export enum EventHandler {
 
 export function Obtainable<T>(invokeKey: InvokeHandler, eventKey: EventHandler) {
   return class {
-    static async obtain(): Promise<T> {
+    static async getAsync(): Promise<T> {
       return await invoke(invokeKey);
     }
 

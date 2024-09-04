@@ -1,11 +1,10 @@
 import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
 import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
-import { Theme } from '../../../../shared/schemas/Theme';
+import { StartThemingTool } from '../../../../shared/styles';
 import { updateHitbox } from '../../../events';
 import i18n from '../../../i18n';
 import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
@@ -100,13 +99,8 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
+    UIColors.setAssCssVariables(event.payload);
     store.dispatch(RootActions.setColors(event.payload));
-  });
-
-  await listenGlobal<Theme[]>(FileChange.Themes, async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
   });
 
   await listenGlobal<unknown>(FileChange.WegItems, async () => {
@@ -144,6 +138,7 @@ export async function registerStoreEvents() {
     updateHitbox();
   });
 
+  await StartThemingTool();
   await view.emitTo(view.label, 'request-all-open-apps');
 }
 
@@ -187,7 +182,6 @@ async function loadSettingsToStore() {
   const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
-  loadThemeCSS(userSettings);
 }
 
 export async function loadStore() {
