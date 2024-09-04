@@ -17,6 +17,8 @@ header:
     seelen_bar: Fancy Toolbar
     seelen_wm: Window Manager
     seelen_weg: Dock/Taskbar
+    seelen_rofi: App Launcher
+    seelen_wall: The Wall
     monitors: Monitors
     specific_apps: Specific Apps
     shortcuts: Shortcuts
@@ -82,7 +84,7 @@ weg:
   enable: Enable Dock/Taskbar
   width: Width
   auto_hide: Auto Hide
-  dock_side: Dock Side
+  dock_side: Position
   padding: Padding
   margin: Margin
   gap: Gap
