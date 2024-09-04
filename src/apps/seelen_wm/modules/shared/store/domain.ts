@@ -1,7 +1,7 @@
 import { IRootState } from '../../../../../shared.interfaces';
 import { Layout } from '../../../../shared/schemas/Layout';
-import { WindowManager } from '../../../../shared/schemas/WindowManager';
 import { SoftOpaque } from 'readable-types';
+import { WindowManagerSettings } from 'seelen-core';
 
 import { Reservation } from '../../layout/domain';
 import { HWND } from '../utils/domain';
@@ -21,7 +21,7 @@ export enum FocusAction {
   Latest = 'Latest',
 }
 
-export interface RootState extends IRootState<WindowManager> {
+export interface RootState extends IRootState<WindowManagerSettings> {
   availableLayouts: Layout[];
   workspaces: Record<DesktopId, Workspace>;
   activeWorkspace: DesktopId;

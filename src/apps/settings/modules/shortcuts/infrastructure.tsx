@@ -3,6 +3,7 @@ import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Input, Switch, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { AhkVarList } from 'seelen-core';
 
 import { RootActions } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
@@ -20,7 +21,7 @@ export function Shortcuts() {
     dispatch(RootActions.setToBeSaved(true));
   };
 
-  const onChangeVar = (name: string, e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onChangeVar = (name: keyof AhkVarList, e: React.KeyboardEvent<HTMLInputElement>) => {
     const result = KeyCodeToAHK(e);
     if (result) {
       dispatch(AhkVariablesActions.setVariable({ name, value: result }));
@@ -51,7 +52,7 @@ export function Shortcuts() {
                 <div>{t(`shortcuts.labels.${VariableConvention.camelToSnake(key)}`)}</div>
                 <Input
                   value={value.fancy}
-                  onKeyDown={(e) => onChangeVar(key, e)}
+                  onKeyDown={(e) => onChangeVar(key as keyof AhkVarList, e)}
                 />
               </SettingsOption>
             );

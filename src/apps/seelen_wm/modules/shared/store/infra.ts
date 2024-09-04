@@ -1,10 +1,9 @@
-import { UIColors } from '../../../../../../lib/src/system_state';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { FileChange } from '../../../../shared/events';
-import { WindowManager } from '../../../../shared/schemas/WindowManager';
 import { StartThemingTool } from '../../../../shared/styles';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
+import { UIColors, WindowManagerSettings } from 'seelen-core';
 
 import { RootActions, RootSlice } from './app';
 
@@ -13,7 +12,6 @@ import { AddWindowPayload, DesktopId, FocusAction } from './domain';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
-  devTools: true,
 });
 
 export async function loadStore() {
@@ -96,7 +94,7 @@ export async function registerStoreEvents() {
   await StartThemingTool();
 }
 
-function loadSettingsCSS(settings: WindowManager) {
+function loadSettingsCSS(settings: WindowManagerSettings) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-padding', `${settings.workspacePadding}px`);

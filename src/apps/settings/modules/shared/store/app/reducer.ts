@@ -1,9 +1,9 @@
-import { VirtualDesktopStrategy } from '../../../../../shared/schemas/Settings';
 import { StateBuilder } from '../../../../../shared/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
 import i18n from '../../../../i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cloneDeep, pick } from 'lodash';
+import { SeelenWegSettings, UIColors, VirtualDesktopStrategy } from 'seelen-core';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
@@ -20,7 +20,7 @@ const initialState: RootState = {
   autostart: null,
   route: Route.GENERAL,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
-  seelenweg: SeelenWegSlice.getInitialState(),
+  seelenweg: new SeelenWegSettings(),
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,
@@ -34,18 +34,7 @@ const initialState: RootState = {
   selectedTheme: [],
   devTools: false,
   language: navigator.language.split('-')[0] || 'en',
-  colors: {
-    background: '#ffffff',
-    foreground: '#000000',
-    accent_darkest: '#000000',
-    accent_darker: '#000000',
-    accent_dark: '#000000',
-    accent: '#000000',
-    accent_light: '#000000',
-    accent_lighter: '#000000',
-    accent_lightest: '#000000',
-    complement: null,
-  },
+  colors: UIColors.default(),
   wallpaper: null,
   virtualDesktopStrategy: VirtualDesktopStrategy.Native,
   betaChannel: false,

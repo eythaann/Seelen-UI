@@ -1,7 +1,7 @@
-import { UIColors } from '../../../lib/src/system_state';
 import { StartThemingTool } from '../shared/styles';
 import { RootActions, RootSlice } from './reducer';
 import { configureStore } from '@reduxjs/toolkit';
+import { UIColors } from 'seelen-core';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

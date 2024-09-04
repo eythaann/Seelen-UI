@@ -1,6 +1,5 @@
 import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
-import { Seelenweg } from '../../../../shared/schemas/Seelenweg';
 import {
   SavedMediaItem,
   SavedPinnedApp,
@@ -9,6 +8,7 @@ import {
   SwItemType as SpecialItemType,
 } from '../../../../shared/schemas/SeelenWegItems';
 import { modify } from 'readable-types';
+import { SeelenWegSettings } from 'seelen-core';
 
 export type HWND = number & {};
 
@@ -62,7 +62,7 @@ export type SwTemporalApp = modify<
 
 export type SwItem = SwPinnedApp | SwTemporalApp | SavedSeparatorItem | SavedMediaItem | StartMenuItem;
 
-export interface RootState extends IRootState<Seelenweg> {
+export interface RootState extends IRootState<SeelenWegSettings> {
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
   itemsOnRight: SwItem[];

@@ -3,10 +3,12 @@ import { listen } from '@tauri-apps/api/event';
 
 export enum InvokeHandler {
   GetSystemColors = 'get_system_colors',
+  StateGetSettings = 'state_get_settings',
 }
 
 export enum EventHandler {
-  UIColors = 'colors',
+  UIColors = 'colors-changed',
+  Settings = 'settings-changed',
 }
 
 export function Obtainable<T>(invokeKey: InvokeHandler, eventKey: EventHandler) {
