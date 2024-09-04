@@ -3,7 +3,7 @@ import { useDarkMode } from '../shared/styles';
 import { ErrorBoundary } from './components/Error';
 import { updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
-import { emit, emitTo } from '@tauri-apps/api/event';
+import { emitTo } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
@@ -17,7 +17,6 @@ async function onMount() {
   await emitTo(view.label.replace('/', '-hitbox/'), 'init');
   await view.show();
   await view.emitTo(view.label, 'complete-setup');
-  await emit('register-colors-events');
 }
 export function App() {
   const isDarkMode = useDarkMode();

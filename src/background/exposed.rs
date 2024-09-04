@@ -21,6 +21,7 @@ use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
 use crate::modules::notifications::infrastructure::*;
 use crate::modules::power::infrastructure::*;
+use crate::modules::system_settings::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
 #[tauri::command(async)]
@@ -137,6 +138,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         ensure_hitboxes_zorder,
         send_keys,
         get_icon,
+        get_system_colors,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,
