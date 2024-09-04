@@ -1,3 +1,11 @@
+.container {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr 40px;
+  grid-template-columns: 100%;
+}
+
 .newBtn {
   width: 100%;
   background-color: var(--color-green-600);
@@ -49,11 +57,11 @@
 }
 
 .footer {
-  display: flex;
-  gap: 10px;
-  align-items: center;
   position: absolute;
   bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 
   button {
     width: 80px;

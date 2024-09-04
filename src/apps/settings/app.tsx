@@ -22,6 +22,8 @@ import { RootSelectors } from './modules/shared/store/app/selectors';
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.GENERAL]: General,
   [Route.MONITORS]: Monitors,
+  [Route.SEELEN_ROFI]: () => 'TODO',
+  [Route.SEELEN_WALL]: () => 'TODO',
   [Route.SHORTCUTS]: Shortcuts,
   [Route.SPECIFIC_APPS]: AppsConfiguration,
   [Route.INFO]: Information,
