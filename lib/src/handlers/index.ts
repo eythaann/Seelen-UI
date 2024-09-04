@@ -2,7 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 
 export enum InvokeHandler {
-  GetUIColors = 'get_ui_colors',
+  GetSystemColors = 'get_system_colors',
 }
 
 export enum EventHandler {

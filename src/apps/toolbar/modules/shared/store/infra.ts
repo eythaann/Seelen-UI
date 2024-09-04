@@ -31,6 +31,15 @@ export const store = configureStore({
   reducer: RootSlice.reducer,
 });
 
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    UIColors.setAssCssVariables(colors);
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
+
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
 
@@ -108,10 +117,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await listenGlobal<UIColors>('colors', (event) => {
-    UIColors.setAssCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
-  });
+  await initUIColors();
 
   await listenGlobal(FileChange.Placeholders, async () => {
     if (IsSavingCustom.current) {

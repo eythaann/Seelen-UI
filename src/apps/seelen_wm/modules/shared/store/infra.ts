@@ -24,7 +24,18 @@ export async function loadStore() {
   loadSettingsCSS(settings);
 }
 
+async function loadUIColors() {
+  function loadColors(colors: UIColors) {
+    UIColors.setAssCssVariables(colors);
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
+
 export async function registerStoreEvents() {
+  await loadUIColors();
+
   await listenGlobal<any>(FileChange.Settings, async () => {
     await loadStore();
   });
@@ -75,11 +86,6 @@ export async function registerStoreEvents() {
   await listenGlobal<AddWindowPayload>('update-window', (event) => {
     store.dispatch(RootActions.removeWindow(event.payload.hwnd));
     store.dispatch(RootActions.addWindow(event.payload));
-  });
-
-  await listenGlobal<UIColors>('colors', (event) => {
-    UIColors.setAssCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
   });
 
   await listenGlobal(FileChange.Placeholders, async () => {
