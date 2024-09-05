@@ -1,8 +1,8 @@
 import { Dropdown, Menu } from 'antd';
 import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { PropsWithChildren, useState } from 'react';
+import { useWindowFocusChange } from 'seelen-core';
 
-import { useAppBlur } from '../modules/shared/hooks/infra';
 import { BackgroundByLayersV2 } from './BackgroundByLayers/infra';
 
 interface Props extends PropsWithChildren {
@@ -12,8 +12,10 @@ interface Props extends PropsWithChildren {
 export function WithContextMenu({ children, items }: Props) {
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
-  useAppBlur(() => {
-    setOpenContextMenu(false);
+  useWindowFocusChange((focused) => {
+    if (!focused) {
+      setOpenContextMenu(false);
+    }
   });
 
   return (

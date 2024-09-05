@@ -1,5 +1,6 @@
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::state::SeelenWegSide;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT},
     UI::Shell::{
@@ -20,6 +21,17 @@ pub enum AppBarDataEdge {
     Top = ABE_TOP as isize,
     Right = ABE_RIGHT as isize,
     Bottom = ABE_BOTTOM as isize,
+}
+
+impl From<SeelenWegSide> for AppBarDataEdge {
+    fn from(val: SeelenWegSide) -> Self {
+        match val {
+            SeelenWegSide::Left => AppBarDataEdge::Left,
+            SeelenWegSide::Top => AppBarDataEdge::Top,
+            SeelenWegSide::Right => AppBarDataEdge::Right,
+            SeelenWegSide::Bottom => AppBarDataEdge::Bottom,
+        }
+    }
 }
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters

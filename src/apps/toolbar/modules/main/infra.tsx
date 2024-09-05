@@ -10,7 +10,7 @@ import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode } from 'seelen-core';
+import { HideMode, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
@@ -21,7 +21,6 @@ import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
-import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
@@ -56,20 +55,16 @@ function componentByModule(module: ToolbarModule, idx: number) {
 }
 
 export function ToolBar({ structure }: Props) {
-  const [isActive, setActive] = useState(false);
+  const [isAppFocused, setAppFocus] = useState(false);
   const isOverlaped = useSelector(Selectors.isOverlaped);
   const hideMode = useSelector(Selectors.settings.hideMode);
 
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
 
-  useAppActivation(() => {
-    setActive(true);
-  }, []);
-
-  useAppBlur(() => {
-    setActive(false);
-  }, []);
+  useWindowFocusChange((focused) => {
+    setAppFocus(focused);
+  });
 
   const onReorderPinned = useCallback(
     debounce((apps: (ToolbarModule | string)[]) => {
@@ -96,7 +91,7 @@ export function ToolBar({ structure }: Props) {
   );
 
   const shouldBeHidden =
-    !isActive &&
+    !isAppFocused &&
     hideMode !== HideMode.Never &&
     (isOverlaped || hideMode === HideMode.Always);
 

@@ -7,13 +7,12 @@ import { Reorder } from 'framer-motion';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode, SeelenWegMode, SeelenWegSide } from 'seelen-core';
+import { HideMode, SeelenWegMode, SeelenWegSide, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { MediaSession } from '../item/infra/MediaSession';
 import { StartMenu } from '../item/infra/StartMenu';
 import { UserApplication } from '../item/infra/UserApplication';
-import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 
@@ -57,13 +56,9 @@ export function SeelenWeg() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  useAppBlur(() => {
-    setActive(false);
-  }, [settings]);
-
-  useAppActivation(() => {
-    setActive(true);
-  }, [settings]);
+  useWindowFocusChange((focused) => {
+    setActive(focused);
+  });
 
   const getSeparatorComplementarySize = useCallback(
     (sideElements: number, centerElements: number) => {

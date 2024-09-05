@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- make the dock/taskbar solid when hide mode is `never`.
+
 ## [1.10.5]
 ### fix
 - app crashing on IMMDevice disconnection.

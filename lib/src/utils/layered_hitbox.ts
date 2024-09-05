@@ -1,29 +1,20 @@
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
-import { CallbacksManager } from './modules/shared/utils/app';
-
-export const ExtraCallbacksOnBlur = new CallbacksManager();
-export const ExtraCallbacksOnFocus = new CallbacksManager();
-
-export async function registerDocumentEvents() {
-  let appFocused = true;
+export async function declareDocumentAsLayeredHitbox() {
   const webview = getCurrentWebviewWindow();
+  const { x, y } = await webview.outerPosition();
+  const { width, height } = await webview.outerSize();
+
+  await webview.setIgnoreCursorEvents(true);
+  let ignoring_cursor_events = true;
+  let appFocused = true;
+
+  let webviewRect = { x, y, width, height };
 
   webview.onFocusChanged((event) => {
     appFocused = event.payload;
     webview.setIgnoreCursorEvents(!appFocused);
-    if (appFocused) {
-      return ExtraCallbacksOnFocus.execute();
-    }
-    ExtraCallbacksOnBlur.execute();
   });
-
-  // this is started as true on rust side but to be secure we set it to false
-  let ignoring_cursor_events = false;
-
-  const { x, y } = await webview.outerPosition();
-  const { width, height } = await webview.outerSize();
-  let webviewRect = { x, y, width, height };
 
   webview.onMoved((e) => {
     webviewRect.x = e.payload.x;

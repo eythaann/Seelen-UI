@@ -9,9 +9,9 @@ import { motion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
-import { useAppBlur } from '../../shared/hooks/infra';
 import { updatePreviews } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
@@ -32,8 +32,10 @@ export const UserApplication = memo(({ item }: Props) => {
 
   const { t } = useTranslation();
 
-  useAppBlur(() => {
-    setOpenPreview(false);
+  useWindowFocusChange((focused) => {
+    if (!focused) {
+      setOpenPreview(false);
+    }
   });
 
   useEffect(() => {

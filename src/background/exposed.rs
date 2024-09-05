@@ -6,16 +6,16 @@ use tauri::{Builder, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
+use crate::log_error;
 use crate::modules::input::Keyboard;
 use crate::modules::virtual_desk::get_vd_manager;
-use crate::seelen::{get_app_handle, Seelen, SEELEN};
+use crate::seelen::{get_app_handle, Seelen};
 use crate::seelen_weg::handler::*;
 use crate::seelen_weg::icon_extractor::extract_and_save_icon;
 use crate::seelen_wm::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
 use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
-use crate::{log_error, trace_lock};
 
 use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
@@ -95,20 +95,6 @@ fn switch_workspace(idx: usize) -> Result<()> {
 }
 
 #[tauri::command(async)]
-fn ensure_hitboxes_zorder() -> Result<()> {
-    let seelen = trace_lock!(SEELEN);
-    for monitor in seelen.monitors() {
-        if let Some(toolbar) = monitor.toolbar() {
-            toolbar.ensure_hitbox_zorder()?;
-        }
-        if let Some(weg) = monitor.weg() {
-            weg.ensure_hitbox_zorder()?;
-        }
-    }
-    Ok(())
-}
-
-#[tauri::command(async)]
 fn send_keys(keys: String) -> Result<()> {
     Keyboard::new().send_keys(&keys)
 }
@@ -135,7 +121,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_user_envs,
         show_app_settings,
         switch_workspace,
-        ensure_hitboxes_zorder,
         send_keys,
         get_icon,
         get_system_colors,

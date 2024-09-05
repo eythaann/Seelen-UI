@@ -1,3 +1,6 @@
+export * from './hooks';
+export * from './layered_hitbox';
+
 export function getRootElement() {
   const element = document.getElementById('root');
   if (!element) {
