@@ -6,11 +6,11 @@ import { Popover, Slider, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra';
 import { VolumeControl } from '../media/infra/MediaControls';
-import { useAppBlur } from '../shared/hooks/infra';
 
 import { Selectors } from '../shared/store/app';
 
@@ -56,8 +56,10 @@ export function SettingsModule({ module }: Props) {
       });
   }, [openPreview]);
 
-  useAppBlur(() => {
-    setOpenPreview(false);
+  useWindowFocusChange((focused) => {
+    if (!focused) {
+      setOpenPreview(false);
+    }
   });
 
   return (

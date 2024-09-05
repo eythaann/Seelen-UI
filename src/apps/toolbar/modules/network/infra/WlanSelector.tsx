@@ -4,9 +4,9 @@ import { Popover } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
-import { useAppBlur } from '../../shared/hooks/infra';
 
 import { Selectors } from '../../shared/store/app';
 
@@ -81,8 +81,10 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
     }
   }, [openPreview]);
 
-  useAppBlur(() => {
-    setOpenPreview(false);
+  useWindowFocusChange((focused) => {
+    if (!focused) {
+      setOpenPreview(false);
+    }
   });
 
   return (

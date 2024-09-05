@@ -1,10 +1,10 @@
 import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
-import { registerDocumentEvents } from './events';
 import i18n, { loadTranslations } from './i18n';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
+import { declareDocumentAsLayeredHitbox } from 'seelen-core';
 
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
 import { loadConstants } from './modules/shared/utils/infra';
@@ -18,7 +18,7 @@ import './styles/global.css';
 
 async function Main() {
   wrapConsole();
-  await registerDocumentEvents();
+  await declareDocumentAsLayeredHitbox();
 
   const container = getRootContainer();
 

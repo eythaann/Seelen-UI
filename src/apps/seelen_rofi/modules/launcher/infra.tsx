@@ -1,9 +1,9 @@
-import { useAppActivation } from '../../events';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { AutoComplete, Checkbox, Select, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import { KeyboardEventHandler, useRef, useState } from 'react';
+import { useWindowFocusChange } from 'seelen-core';
 
 interface Item {
   label: string;
@@ -53,8 +53,10 @@ export function Launcher() {
 
   const input = useRef<HTMLInputElement>(null);
 
-  useAppActivation(() => {
-    input.current?.focus();
+  useWindowFocusChange((focused) => {
+    if (focused) {
+      input.current?.focus();
+    }
   });
 
   const nextRunner = () => {

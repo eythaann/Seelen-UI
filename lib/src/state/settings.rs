@@ -172,6 +172,14 @@ impl Default for SeelenWegSettings {
     }
 }
 
+impl SeelenWegSettings {
+    /// total height or width of the dock, depending on the Position
+    pub fn total_size(&self) -> u32 {
+        self.size + (self.padding * 2) + (self.margin * 2)
+    }
+
+}
+
 // ============== Window Manager Settings ==============
 
 #[serde_alias(SnakeCase)]

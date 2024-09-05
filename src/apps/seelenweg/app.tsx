@@ -1,9 +1,7 @@
 import { getRootContainer } from '../shared';
 import { useDarkMode } from '../shared/styles';
 import { ErrorBoundary } from './components/Error';
-import { updateHitbox } from './events';
 import { SeelenWeg } from './modules/bar';
-import { emitTo } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
@@ -13,8 +11,6 @@ import { Selectors } from './modules/shared/store/app';
 
 async function onMount() {
   let view = getCurrentWebviewWindow();
-  updateHitbox();
-  await emitTo(view.label.replace('/', '-hitbox/'), 'init');
   await view.show();
   await view.emitTo(view.label, 'complete-setup');
 }
