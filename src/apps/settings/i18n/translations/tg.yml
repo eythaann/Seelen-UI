@@ -14,6 +14,8 @@ header:
     developer: Таҳиякунанда
     seelen_bar: Панели футбол
     info: Ахбор
+    seelen_wall: Девор
+    seelen_rofi: Барномасоз
 start:
   message_accent: Ҳосилнокии худро бо услуб оптимед кунед!
   message: >-
@@ -73,10 +75,10 @@ weg:
   enable: Dock / Travelar
   padding: Тахтача
   width: Васеъ
-  dock_side: Тарафи док
   auto_hide: Худкор Пинҳон кардани
   gap: Фосила
   margin: Маржа
+  dock_side: Вазъият
 devtools:
   custom_config_file: Файли танзимоти танзими фармоишӣ
   load: Сарборӣ

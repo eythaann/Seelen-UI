@@ -21,6 +21,8 @@ header:
     shortcuts: Ярлыки
     developer: Разработчик
     info: Информация
+    seelen_wall: Стена
+    seelen_rofi: Приложение пусковая установка
 start:
   title: Добро пожаловать!
   message: >-

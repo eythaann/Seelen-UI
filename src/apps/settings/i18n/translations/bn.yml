@@ -14,6 +14,8 @@ header:
     shortcuts: শর্টকাটস
     specific_apps: নির্দিষ্ট অ্যাপ্লিকেশন
     seelen_wm: উইন্ডো ম্যানেজার
+    seelen_wall: প্রাচীর
+    seelen_rofi: অ্যাপ লঞ্চার
 start:
   title: স্বাগত!
   message: >-
@@ -71,13 +73,13 @@ weg:
     label: আইটেম
     zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
   auto_hide: স্বয়ং চামড়া
-  dock_side: ডক সাইড
   width: প্রস্থ
   gap: ফাঁক
   margin: মার্জিন
   enable: ডক/টাস্কবার সক্ষম করুন
   label: ডক/টাস্কবার
   padding: প্যাডিং
+  dock_side: অবস্থান
 devtools:
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
   settings_file: সেটিংস ফাইল

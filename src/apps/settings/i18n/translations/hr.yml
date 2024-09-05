@@ -14,6 +14,8 @@ header:
     monitors: Monitori
     shortcuts: Prečac
     developer: Programer
+    seelen_wall: Zid
+    seelen_rofi: Pokretač aplikacija
 start:
   message_accent: Optimizirajte svoju produktivnost stilom!
   message: >-
@@ -77,7 +79,7 @@ weg:
   gap: Jaz
   margin: Margina
   enable: Omogućite pristanište/zadaću
-  dock_side: Priključak
+  dock_side: Položaj
 devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
   data_folder: Mapa podataka

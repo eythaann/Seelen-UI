@@ -14,6 +14,8 @@ header:
     seelen_wm: ຜູ້ຈັດການປ່ອງຢ້ຽມ
     monitors: ຈໍພາບ
     developer: ນັກພັດທະນາ
+    seelen_wall: ກໍາແພງ
+    seelen_rofi: App Launcher
 start:
   title: ຍິນດີຕ້ອນຮັບ!
   message_accent: ເພີ່ມປະສິດທິພາບການຜະລິດຂອງເຈົ້າດ້ວຍຮູບແບບ!
@@ -78,7 +80,7 @@ weg:
   padding: padding
   gap: ຊ່ອງຫວ່າງ
   enable: ເປີດໃຊ້ Dock/Taskbar
-  dock_side: Dock Side
+  dock_side: ຕໍາແຫນ່ງ
 devtools:
   custom_config_file: ໂຫຼດໄຟລ໌ການຕັ້ງຄ່າແບບກຳນົດເອງ
   enable: ເປີດໃຊ້ເຄື່ອງມືນັກພັດທະນາ

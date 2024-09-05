@@ -14,6 +14,8 @@ header:
     seelen_bar: نوار ابزار فانتزی
     seelen_weg: اسکله/نوار وظیفه
     specific_apps: برنامه های خاص
+    seelen_rofi: پرتاب برنامه
+    seelen_wall: دیوار
 start:
   title: خوش آمدی!
   message_accent: بهره وری خود را با سبک بهینه کنید!
@@ -73,10 +75,10 @@ weg:
   gap: شکاف
   margin: لبه
   label: اسکله/نوار وظیفه
-  dock_side: طرف اسکله
   auto_hide: پنهان خودکار
   enable: Dock/TaskBar را فعال کنید
   width: عرض
+  dock_side: موقعیت
 devtools:
   load: بار
   install_folder: پوشه نصب

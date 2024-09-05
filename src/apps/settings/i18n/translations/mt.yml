@@ -14,6 +14,8 @@ header:
     seelen_weg: Dock / Taskbar
     developer: Żviluppatur
     monitors: Monitors
+    seelen_wall: Il-ħajt
+    seelen_rofi: APP Lancher
 start:
   title: Merħba!
   message: >-
@@ -70,7 +72,6 @@ weg:
     gap: Spazju bejn l-oġġetti
     size: Daqs tal-oġġett
     zoom_size: Daqs miżjud (użat għat-temi)
-  dock_side: Naħa tal-baċir
   label: Dock / Taskbar
   width: Wisa '
   enable: Enable Dock / Taskbar
@@ -78,6 +79,7 @@ weg:
   auto_hide: Auto Hide
   padding: Ikkuttunar
   margin: Marġni
+  dock_side: Pożizzjoni
 devtools:
   data_folder: Folder tad-dejta
   install_folder: Folder tal-installazzjoni

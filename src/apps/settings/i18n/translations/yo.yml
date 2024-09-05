@@ -14,6 +14,8 @@ header:
     monitors: Awọn diirarito
     shortcuts: Awọn ọna abuja
     specific_apps: Apps Pataki
+    seelen_wall: Odi
+    seelen_rofi: Ifilọlẹ app
 start:
   message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
   message: >-
@@ -73,10 +75,10 @@ weg:
   gap: Alafo
   label: Dock / forkbar
   enable: Muu dock / forkbar
-  dock_side: Ẹgbẹ dock
   auto_hide: Ibi ipamọ aifọwọyi
   margin: Ẹlẹsin
   padding: Fidigọdi silẹ
+  dock_side: Ipo
 devtools:
   app_folders: Awọn folda App
   install_folder: Filese Fifi sori ẹrọ

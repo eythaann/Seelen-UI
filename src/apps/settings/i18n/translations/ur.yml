@@ -14,6 +14,8 @@ header:
     seelen_wm: ونڈو مینیجر
     shortcuts: شارٹ کٹ
     monitors: مانیٹر
+    seelen_rofi: ایپ لانچر
+    seelen_wall: دیوار
 start:
   title: عنوان
   message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
@@ -71,12 +73,12 @@ weg:
     visible_separators: مرئی جداکار
   auto_hide: خود بخود چھپ جانا
   margin: مارجن
-  dock_side: گودی کی طرف
   gap: گیپ
   padding: بھرتی
   width: چوڑائی
   enable: ٹاسک بار کو فعال کریں
   label: ٹاسک بار
+  dock_side: پوزیشن
 devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر

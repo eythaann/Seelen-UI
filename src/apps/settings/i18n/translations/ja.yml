@@ -14,6 +14,8 @@ header:
     monitors: モニター
     seelen_weg: ドック（タスクバー）
     seelen_bar: ツールバー
+    seelen_wall: 壁
+    seelen_rofi: アプリランチャー
 start:
   title: ようこそ！
   message: >-
@@ -74,8 +76,8 @@ weg:
   padding: 余白
   label: ドック（タスクバー）
   auto_hide: 自動的に隠す
-  dock_side: ドックの位置
   enable: ドック（タスクバー）を有効にする
+  dock_side: 位置
 devtools:
   load: ロード
   data_folder: データフォルダー

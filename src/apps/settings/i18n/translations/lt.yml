@@ -14,6 +14,8 @@ header:
     info: Informacija
     shortcuts: Nuorodos
     general: Bendrasis
+    seelen_wall: Siena
+    seelen_rofi: Programos paleidimo priemonė
 start:
   title: Sveiki!
   message_accent: Optimizuokite savo produktyvumą stiliumi!
@@ -76,8 +78,8 @@ weg:
   label: „Dock“/„Taskbar“
   width: Plotis
   enable: Įgalinti doką/užduočių juostą
-  dock_side: Doko pusė
   gap: Tarpas
+  dock_side: Pozicija
 devtools:
   settings_file: Nustatymų failas
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą

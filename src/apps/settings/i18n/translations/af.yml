@@ -14,6 +14,8 @@ header:
     seelen_weg: Dock/Taakbalk
     info: Informasie
     specific_apps: Spesifieke programme
+    seelen_wall: Die muur
+    seelen_rofi: App -lanseerder
 start:
   title: Welkom!
   message: >-
@@ -70,7 +72,6 @@ weg:
     gap: Ruimte tussen items
     zoom_size: Ingezoomde grootte (gebruik vir temas)
     size: Itemgrootte
-  dock_side: Dokkant
   label: Dock/Taakbalk
   margin: Marge
   enable: Aktiveer dok/taakbalk
@@ -78,6 +79,7 @@ weg:
   auto_hide: Outo -vel
   padding: Opvulling
   gap: Gat
+  dock_side: Posisie
 devtools:
   app_folders: APP -vouers
   load: Vrag

@@ -14,6 +14,8 @@ header:
     specific_apps: Konkrétne aplikácie
     general: Všeobecný
     seelen_wm: Správca okien
+    seelen_wall: Stena
+    seelen_rofi: Spúšťač aplikácií
 start:
   title: Vitajte!
   message: >-
@@ -77,7 +79,7 @@ weg:
   auto_hide: Automaticky skryť
   padding: Vypchávka
   margin: Okraj
-  dock_side: Strana
+  dock_side: Pozícia
 devtools:
   enable: Povoľte vývojárskym nástrojom
   custom_config_file: Načítať vlastný konfiguračný súbor

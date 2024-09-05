@@ -14,6 +14,8 @@ header:
     info: Informatioun
     shortcuts: Ofkierpsen
     seelen_weg: Dock / Taskbar
+    seelen_wall: D'Mauer
+    seelen_rofi: App launcher
 start:
   title: Wëllkomm!
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
@@ -73,11 +75,11 @@ weg:
   width: Breet
   label: Dock / Taskbar
   padding: Padding
-  dock_side: Dock Säit
   auto_hide: Automatesch
   margin: Den Jean-Margin
   gap: Knënn
   enable: Aktivéiert Dock / Taskbar
+  dock_side: Positioun un
 devtools:
   app_folders: App Classeure
   enable: Aktivéiert Entwéckler Tools

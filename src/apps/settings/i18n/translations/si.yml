@@ -14,6 +14,8 @@ header:
     shortcuts: කෙටිමං
     seelen_wm: කවුළු කළමනාකරු
     seelen_weg: ඩොක්/කාර්ය තීරුව
+    seelen_rofi: යෙදුම් දියත් කිරීම
+    seelen_wall: බිත්තිය
 start:
   title: සාදරයෙන් පිළිගනිමු!
   message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
@@ -75,9 +77,9 @@ weg:
   padding: පෑඩිං
   width: පළල
   enable: Dock/Taskbar සබල කරන්න
-  dock_side: ඩොක් පැත්ත
   gap: පරතරය
   margin: ආන්තිකය
+  dock_side: තනතුර
 devtools:
   enable: සංවර්ධක මෙවලම් සබල කරන්න
   install_folder: ස්ථාපන ෆෝල්ඩරය
