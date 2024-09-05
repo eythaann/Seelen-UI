@@ -52,40 +52,20 @@ body {
   }
 
   &.horizontal {
-    height: calc(
-      var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
-    );
+    height: calc(var(--config-item-size) + var(--config-padding) * 2);
     width: min-content;
 
     &.full-width {
       width: calc(100vw - var(--config-margin) * 2);
     }
-
-    &.top {
-      padding-top: calc(var(--config-padding) + var(--config-additional-side-padding));
-    }
-
-    &.bottom {
-      padding-bottom: calc(var(--config-padding) + var(--config-additional-side-padding));
-    }
   }
 
   &.vertical {
-    width: calc(
-      var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
-    );
+    width: calc(var(--config-item-size) + var(--config-padding) * 2);
     height: min-content;
 
     &.full-width {
       height: calc(100vh - var(--config-margin) * 2);
-    }
-
-    &.left {
-      padding-left: calc(var(--config-padding) + var(--config-additional-side-padding));
-    }
-
-    &.right {
-      padding-right: calc(var(--config-padding) + var(--config-additional-side-padding));
     }
   }
 
@@ -133,8 +113,8 @@ body {
 
     .weg-item-open-sign {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: 2px;
+      height: 2px;
       background-color: var(--color-gray-600);
       opacity: 0;
 
@@ -147,29 +127,27 @@ body {
       }
 
       .vertical & {
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .horizontal & {
-        left: 50%;
         transform: translateX(-50%);
       }
 
+      .horizontal & {
+        transform: translateY(-50%);
+      }
+
       .top & {
-        bottom: calc(100% + var(--config-additional-side-padding));
+        bottom: calc(100% + var(--config-padding) / 2);
       }
 
       .bottom & {
-        top: calc(100% + var(--config-additional-side-padding));
+        top: calc(100% + var(--config-padding) / 2);
       }
 
       .left & {
-        right: calc(100% + var(--config-additional-side-padding));
+        right: calc(100% + var(--config-padding) / 2);
       }
 
       .right & {
-        left: calc(100% + var(--config-additional-side-padding));
+        left: calc(100% + var(--config-padding) / 2);
       }
     }
   }

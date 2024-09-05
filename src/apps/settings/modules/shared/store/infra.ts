@@ -76,6 +76,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     .withLayouts()
     .withPlaceholders()
     .withUserApps()
+    .withThemes()
     .withWallpaper()
     .load(customPath);
 
