@@ -11,8 +11,8 @@ export class UserSettingsLoader {
   private _withUserApps: boolean = false;
   private _withLayouts: boolean = false;
   private _withPlaceholders: boolean = false;
-  private _withThemes: boolean = true;
-  private _withWallpaper: boolean = true;
+  private _withThemes: boolean = false;
+  private _withWallpaper: boolean = false;
 
   withUserApps() {
     this._withUserApps = true;
@@ -29,13 +29,13 @@ export class UserSettingsLoader {
     return this;
   }
 
-  withWallpaper(value: boolean = true) {
-    this._withWallpaper = value;
+  withWallpaper() {
+    this._withWallpaper = true;
     return this;
   }
 
-  withThemes(value: boolean = true) {
-    this._withThemes = value;
+  withThemes() {
+    this._withThemes = true;
     return this;
   }
 

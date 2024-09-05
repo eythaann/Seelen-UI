@@ -32,7 +32,7 @@ export const SavePlaceholderAsCustom = debounce(async () => {
 
   await writeTextFile(filePath, yaml.dump(toBeSaved));
 
-  let { jsonSettings } = await new UserSettingsLoader().withThemes(false).load();
+  let { jsonSettings } = await new UserSettingsLoader().load();
   jsonSettings.fancyToolbar.placeholder = toBeSaved.info.filename;
 
   IsSavingCustom.current = true;

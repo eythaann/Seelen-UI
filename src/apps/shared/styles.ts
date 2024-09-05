@@ -2,7 +2,7 @@ import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect, useState } from 'react';
-import { Theme } from 'seelen-core';
+import { EventHandler, Settings, Theme } from 'seelen-core';
 
 type Args = undefined | string | { [x: string]: any };
 export const cx = (...args: Args[]): string => {
@@ -43,22 +43,15 @@ export function useDarkMode() {
   return isDarkMode;
 }
 
-async function loadThemes(_themes?: Theme[]) {
-  const seelenState = await new UserSettingsLoader().withThemes(!_themes).load();
-
-  let selected = seelenState.jsonSettings.selectedTheme;
-  let themes =
-    _themes ||
-    seelenState.themes
-      .filter((theme) => selected.includes(theme.info.filename))
-      .sort((a, b) => {
-        return selected.indexOf(a.info.filename) - selected.indexOf(b.info.filename);
-      });
-
-  console.log(themes);
+async function loadThemes(allThemes: Theme[], selected: string[]) {
+  let themes = allThemes
+    .filter((theme) => selected.includes(theme.info.filename))
+    .sort((a, b) => {
+      return selected.indexOf(a.info.filename) - selected.indexOf(b.info.filename);
+    });
 
   if (themes.length === 0) {
-    let defaultTheme = seelenState.themes.find((theme) => theme.info.filename === 'default');
+    let defaultTheme = themes.find((theme) => theme.info.filename === 'default');
     themes = defaultTheme ? [defaultTheme] : [];
   }
 
@@ -89,8 +82,19 @@ async function loadThemes(_themes?: Theme[]) {
 }
 
 export async function StartThemingTool() {
+  const userSettings = await new UserSettingsLoader().withThemes().load();
+  let allThemes = userSettings.themes;
+  let selected = userSettings.jsonSettings.selectedTheme;
+
   await listen<Theme[]>('themes', (event) => {
-    loadThemes(event.payload);
+    allThemes = event.payload;
+    loadThemes(allThemes, selected);
   });
-  await loadThemes();
+
+  await listen<Settings>(EventHandler.Settings, (event) => {
+    selected = event.payload.selectedTheme;
+    loadThemes(allThemes, selected);
+  });
+
+  await loadThemes(allThemes, selected);
 }
