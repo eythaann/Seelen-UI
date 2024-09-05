@@ -21,6 +21,8 @@ header:
     shortcuts: Kurzbefehle
     developer: Entwickler
     info: Information
+    seelen_wall: Die Wand
+    seelen_rofi: App Launcher
 start:
   title: Willkommen!
   message: >-
@@ -75,7 +77,6 @@ weg:
   enable: Dock/Taskleiste aktivieren
   width: Breite
   auto_hide: Automatisch ausblenden
-  dock_side: Dock-Seite
   padding: Polsterung
   margin: Rand
   gap: Abstand
@@ -85,6 +86,7 @@ weg:
     zoom_size: Vergrößerte Größe (für Themen verwendet)
     gap: Abstand zwischen Elementen
     visible_separators: Sichtbare Trennzeichen
+  dock_side: Position
 devtools:
   enable: Entwicklerwerkzeuge aktivieren
   app_folders: Anwendungsordner

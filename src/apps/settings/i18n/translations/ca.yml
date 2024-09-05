@@ -14,6 +14,8 @@ header:
     monitors: Monitors
     specific_apps: Aplicacions específiques
     general: General
+    seelen_wall: La paret
+    seelen_rofi: Llançador d'aplicacions
 start:
   title: Benvingut!
   message_accent: Optimitzeu la vostra productivitat amb estil.
@@ -71,13 +73,13 @@ weg:
     size: Mida de l'article
     gap: Espai entre articles
   enable: Activa el moll/la barra de tasques
-  dock_side: Costat del moll
   gap: Escletxa
   margin: Marge
   padding: Encoir
   width: Amplada
   label: Moll/barra de tasques
   auto_hide: Amaga automàtic
+  dock_side: Posició
 devtools:
   load: Carregar
   data_folder: Carpeta de dades

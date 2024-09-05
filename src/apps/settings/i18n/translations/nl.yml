@@ -14,6 +14,8 @@ header:
     seelen_weg: Dock/taakbalk
     seelen_bar: Fancy werkbalk
     shortcuts: Snelkoppelingen
+    seelen_wall: De muur
+    seelen_rofi: Apparter
 start:
   message_accent: Optimaliseer uw productiviteit met stijl!
   title: Welkom!
@@ -77,7 +79,7 @@ weg:
   width: Breedte
   label: Dock/taakbalk
   enable: Schakel dock/taakbalk in
-  dock_side: Dokzijde
+  dock_side: Positie
 devtools:
   load: Laden
   data_folder: Gegevensmap

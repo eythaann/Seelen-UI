@@ -14,6 +14,8 @@ header:
     seelen_weg: ចត/របារភារកិច្ច
     seelen_bar: របារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
     specific_apps: កម្មវិធីជាក់លាក់
+    seelen_wall: ជញ្ជាំង
+    seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
 start:
   title: សូមស្វាគមន៍!
   message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
@@ -77,7 +79,7 @@ weg:
   gap: គម្លាត
   margin: រឹម
   enable: បើកដំណើរការ Dock/Taskbar
-  dock_side: ចំហៀងចត
+  dock_side: តីតាមង
 devtools:
   install_folder: ថតឯកសារដំឡើង
   enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍

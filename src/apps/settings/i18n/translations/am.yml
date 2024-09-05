@@ -14,6 +14,8 @@ header:
     seelen_bar: Fancy የመሣሪያ አሞሌ
     monitors: ተቆጣጣሪዎች
     seelen_wm: የመስኮት አቀናባሪ
+    seelen_wall: ግድግዳው
+    seelen_rofi: የመተግበሪያ አስጀማሪ
 start:
   title: እንኳን ደህና መጣህ!
   message: >-
@@ -75,7 +77,7 @@ weg:
   width: ስፋት
   gap: ክፍተት
   label: Dock / Accorbar
-  dock_side: ጎን
+  dock_side: አቀማመጥ
 devtools:
   app_folders: የመተግበሪያ አቃፊዎች
   data_folder: የውሂብ አቃፊ

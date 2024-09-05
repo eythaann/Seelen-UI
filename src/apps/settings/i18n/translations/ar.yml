@@ -21,6 +21,8 @@ header:
     shortcuts: الاختصارات
     developer: مطور
     info: معلومة
+    seelen_wall: الجدار
+    seelen_rofi: قاذفة التطبيق
 start:
   title: مرحباً!
   message: >-
@@ -74,7 +76,6 @@ weg:
   enable: تمكين قفص الاتهام/شريط المهام
   width: عرض
   auto_hide: اخفاء تلقائي
-  dock_side: جانب الرصيف
   padding: حشوة
   margin: هامِش
   gap: فجوة
@@ -84,6 +85,7 @@ weg:
     zoom_size: الحجم المكبر (يستخدم للموضوعات)
     gap: المسافة بين العناصر
     visible_separators: فواصل مرئية
+  dock_side: موضع
 devtools:
   enable: تمكين أدوات المطور
   app_folders: مجلدات التطبيق

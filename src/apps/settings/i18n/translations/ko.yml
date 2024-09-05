@@ -21,6 +21,8 @@ header:
     shortcuts: 단축키
     developer: 개발자
     info: 정보
+    seelen_wall: 벽
+    seelen_rofi: 앱 런처
 start:
   title: 환영합니다!
   message: >-
@@ -73,7 +75,6 @@ weg:
   enable: 독/작업 표시줄 활성화
   width: 너비
   auto_hide: 자동 숨기기
-  dock_side: 독 측면
   padding: 패딩
   margin: 여백
   gap: 간격
@@ -83,6 +84,7 @@ weg:
     zoom_size: 확대된 크기 (테마에 사용됨)
     gap: 항목 간 간격
     visible_separators: 보이는 구분선
+  dock_side: 위치
 devtools:
   enable: 개발자 도구 활성화
   app_folders: 앱 폴더

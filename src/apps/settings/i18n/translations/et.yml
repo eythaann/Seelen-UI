@@ -14,6 +14,8 @@ header:
     developer: Arendaja
     info: Teave
     seelen_bar: Väljamõeldud tööriistariba
+    seelen_wall: Sein
+    seelen_rofi: Rakenduse käivitaja
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
@@ -76,8 +78,8 @@ weg:
   gap: Lüngad
   auto_hide: Automaatne peida
   margin: Marginaal
-  dock_side: Doki pool
   enable: Luba dokk/ülesanderiba
+  dock_side: Positsioon
 devtools:
   app_folders: Rakenduse kaustad
   data_folder: Andmekaust

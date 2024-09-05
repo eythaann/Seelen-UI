@@ -14,6 +14,8 @@ header:
     seelen_bar: Divatos eszköztár
     shortcuts: Parancsikonok
     seelen_wm: Ablakvezető
+    seelen_rofi: Alkalmazásindító
+    seelen_wall: A fal
 start:
   title: Üdvözöljük!
   message: >-
@@ -75,9 +77,9 @@ weg:
   width: Szélesség
   gap: Rés
   margin: Árrés
-  dock_side: Dokkoló oldal
   label: Dokk/tálca
   enable: Engedélyezze a dokkolót/tálcát
+  dock_side: Pozíció
 devtools:
   load: Betöltés
   app_folders: App mappák

@@ -14,6 +14,8 @@ header:
     seelen_wm: Менаџер прозора
     specific_apps: Специфичне апликације
     developer: Разводнички
+    seelen_wall: Зид
+    seelen_rofi: Лаунцхер
 start:
   title: Добродошли!
   message_accent: Оптимизирајте своју продуктивност стилом!
@@ -76,8 +78,8 @@ weg:
   padding: Подлокнути
   width: Ширина
   margin: Маргина
-  dock_side: Пристаниште
   auto_hide: Аутоматска кожа
+  dock_side: Положај
 devtools:
   enable: Омогућите алате за програмере
   load: Оптеретити

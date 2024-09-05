@@ -14,6 +14,8 @@ header:
     developer: Developer
     specific_apps: Tukoy na apps
     seelen_weg: Dock/Taskbar
+    seelen_wall: Ang pader
+    seelen_rofi: App launcher
 start:
   message: >-
     Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
@@ -76,8 +78,8 @@ weg:
   label: Dock/Taskbar
   margin: Margin
   auto_hide: Auto itago
-  dock_side: Dock side
   gap: Gap
+  dock_side: Posisyon
 devtools:
   custom_config_file: I -load ang pasadyang config file
   app_folders: Mga folder ng app

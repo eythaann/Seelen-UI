@@ -14,6 +14,8 @@ header:
     developer: Utvikler
     seelen_weg: Dock/oppgavelinje
     monitors: Skjermer
+    seelen_rofi: App Launcher
+    seelen_wall: Veggen
 start:
   title: Velkommen!
   message: >-
@@ -75,9 +77,9 @@ weg:
   margin: Margin
   gap: Mellomrom
   padding: Polstring
-  dock_side: Dock Side
   label: Dock/oppgavelinje
   enable: Aktiver dock/oppgavelinje
+  dock_side: Stilling
 devtools:
   load: Laste
   custom_config_file: Last inn tilpasset konfigurasjonsfil

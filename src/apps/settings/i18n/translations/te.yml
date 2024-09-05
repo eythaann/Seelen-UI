@@ -14,6 +14,8 @@ header:
     specific_apps: నిర్దిష్ట యాప్‌లు
     seelen_bar: ఫ్యాన్సీ టూల్‌బార్
     seelen_weg: డాక్/టాస్క్‌బార్
+    seelen_wall: గోడ
+    seelen_rofi: అనువర్తన లాంచర్
 start:
   title: స్వాగతం!
   message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
@@ -77,7 +79,7 @@ weg:
   gap: గ్యాప్
   width: వెడల్పు
   enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
-  dock_side: డాక్ సైడ్
+  dock_side: స్థానం
 devtools:
   enable: డెవలపర్ సాధనాలను ప్రారంభించండి
   custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి

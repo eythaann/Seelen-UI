@@ -14,6 +14,8 @@ header:
     specific_apps: Specifikke apps
     shortcuts: Genveje
     monitors: Monitors
+    seelen_wall: Væggen
+    seelen_rofi: App Launcher
 start:
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
@@ -77,7 +79,7 @@ weg:
   gap: Gap
   padding: Polstring
   label: Dock/proceslinje
-  dock_side: Dock side
+  dock_side: Position
 devtools:
   enable: Aktivér udviklerværktøjer
   settings_file: Indstillinger fil

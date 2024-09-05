@@ -14,6 +14,8 @@ header:
     seelen_wm: Maamulaha daaqada
     developer: Abuuris
     info: War
+    seelen_wall: Derbiga
+    seelen_rofi: App furaha
 start:
   message: >-
     Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
@@ -69,7 +71,6 @@ weg:
     size: Shayga cabirka
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
     visible_separators: Kala-sooca muuqda
-  dock_side: Dhinaceeda dhinaceeda
   width: Ballac
   enable: Kartida DOCK / Turniinka
   gap: Dalool
@@ -77,6 +78,7 @@ weg:
   margin: Margin
   label: Dock / Tootshar
   auto_hide: Auto qaraha
+  dock_side: Meel
 devtools:
   app_folders: Faylka app
   install_folder: Xeerka rakibaadda

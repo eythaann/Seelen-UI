@@ -14,6 +14,8 @@ header:
     info: सुचना
     general: जर्नेल
     seelen_wm: वान प्रबन्धक
+    seelen_wall: भित्ता
+    seelen_rofi: फोटो लन्चर
 start:
   message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
   message: >-
@@ -71,12 +73,12 @@ weg:
     zoom_size: Zoomed आकार (थिमका लागि प्रयोग गरिएको)
   padding: प्याडडि .्वन
   margin: स्पानलिन
-  dock_side: डक पक्ष
   width: चौडाई
   auto_hide: 'स्वत: लुकाउने'
   gap: अन्तराल
   enable: डक / टास्कबार सक्षम गर्नुहोस्
   label: डक / टास्कबार
+  dock_side: स्थिति
 devtools:
   app_folders: निल्डर
   custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्

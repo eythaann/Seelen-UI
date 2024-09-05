@@ -14,6 +14,8 @@ header:
     seelen_wm: Цонхны менежер
     monitors: Хэлэлт авагч
     info: Мэдээлэл
+    seelen_wall: Хана
+    seelen_rofi: Програм идэвхжсэн
 start:
   message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
   message: >-
@@ -70,13 +72,13 @@ weg:
     size: Зүйлийн хэмжээ
     visible_separators: Харагдах тусгаарлагч
   enable: Док / Taskbar-г идэвхжүүлэх
-  dock_side: Дохын тухай
   label: Док / Taskbar
   width: Өргөн
   padding: Дэвсгэр
   margin: Саруулган өвс
   gap: Цонх
   auto_hide: Авто гүнд
+  dock_side: Байрлал
 devtools:
   settings_file: Тохиргооын нэр
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
