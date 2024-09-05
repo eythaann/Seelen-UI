@@ -1,8 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### refactor
+- refactors, more and more refactors, refactors for everyone.
+
 ### features
 - make the dock/taskbar solid when hide mode is `never`.
+- add app launcher (rofi for windows).
 
 ## [1.10.6]
 ### fix
