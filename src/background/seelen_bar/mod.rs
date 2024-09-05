@@ -20,12 +20,14 @@ use tauri::{Emitter, Listener, Manager, WebviewWindow};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
     window: WebviewWindow,
     pub cached_monitor: HMONITOR,
+    /// Is the rect that the toolbar should have when it isn't hidden
+    pub theoretical_rect: RECT,
     last_focus: Option<isize>,
     hidden: bool,
     overlaped: bool,
@@ -49,6 +51,7 @@ impl FancyToolbar {
             last_focus: None,
             hidden: false,
             cached_monitor: HMONITOR(-1),
+            theoretical_rect: RECT::default(),
             overlaped: false,
         })
     }
@@ -59,14 +62,8 @@ impl FancyToolbar {
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
-        let rect = WindowsApi::get_window_rect_without_shadow(hwnd);
-        let monitor_info = WindowsApi::monitor_info(self.cached_monitor)?;
-        let dpi = WindowsApi::get_device_pixel_ratio(self.cached_monitor)?;
-        let height = FULL_STATE.load().settings().fancy_toolbar.height;
-
-        let mut hitbox_rect = monitor_info.monitorInfo.rcMonitor;
-        hitbox_rect.bottom = hitbox_rect.top + (height as f32 * dpi) as i32;
-        Ok(are_overlaped(&hitbox_rect, &rect))
+        let window_rect = WindowsApi::get_window_rect_without_shadow(hwnd);
+        Ok(are_overlaped(&self.theoretical_rect, &window_rect))
     }
 
     pub fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
@@ -108,13 +105,6 @@ impl FancyToolbar {
         self.last_focus = Some(hwnd.0);
         Ok(())
     }
-
-    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        let hwnd = HWND(self.window.hwnd()?.0);
-        WindowsApi::bring_to(hwnd, HWND_TOPMOST)?;
-        self.set_positions(self.cached_monitor.0)?;
-        Ok(())
-    }
 }
 
 // statics
@@ -139,36 +129,41 @@ impl FancyToolbar {
         Ok(rect)
     }
 
-    pub fn set_positions(&self, monitor: isize) -> Result<()> {
+    pub fn set_positions(&mut self, monitor: isize) -> Result<()> {
+        let hwnd = HWND(self.window.hwnd()?.0);
         let hmonitor = HMONITOR(monitor);
+
         if hmonitor.is_invalid() {
             return Err("Invalid Monitor".into());
         }
-
-        let monitor_info = WindowsApi::monitor_info(hmonitor)?;
-        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
-
-        let main_hwnd = HWND(self.window.hwnd()?.0);
+        self.cached_monitor = hmonitor;
 
         let state = FULL_STATE.load();
         let settings = &state.settings().fancy_toolbar;
 
-        let mut abd = AppBarData::from_handle(main_hwnd);
-        let mut abd_rect = rc_monitor;
-        if settings.hide_mode == HideMode::Always || settings.hide_mode == HideMode::OnOverlap {
-            abd_rect.bottom = abd_rect.top + 1;
-        } else {
-            let dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
-            abd_rect.bottom = abd_rect.top + (settings.height as f32 * dpi) as i32;
-        }
+        let monitor_info = WindowsApi::monitor_info(hmonitor)?;
+        let monitor_dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
+        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
+        self.theoretical_rect = RECT {
+            bottom: rc_monitor.top + (settings.height as f32 * monitor_dpi) as i32,
+            ..rc_monitor
+        };
 
+        let mut abd = AppBarData::from_handle(hwnd);
+        let abd_rect = match settings.hide_mode {
+            HideMode::Never => self.theoretical_rect,
+            _ => RECT {
+                bottom: rc_monitor.top + 1,
+                ..rc_monitor
+            },
+        };
         abd.set_edge(AppBarDataEdge::Top);
         abd.set_rect(abd_rect);
         abd.register_as_new_bar();
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(main_hwnd, &rc_monitor)?;
-        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
+        WindowsApi::move_window(hwnd, &rc_monitor)?;
+        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
         Ok(())
     }
 

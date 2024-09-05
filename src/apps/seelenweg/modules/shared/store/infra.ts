@@ -3,14 +3,13 @@ import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { StartThemingTool } from '../../../../shared/styles';
-import { updateHitbox } from '../../../events';
 import i18n from '../../../i18n';
 import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
-import { SeelenWegMode, SeelenWegSettings, SeelenWegSide, UIColors } from 'seelen-core';
+import { SeelenWegSettings, SeelenWegSide, UIColors } from 'seelen-core';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -56,16 +55,9 @@ async function initUIColors() {
 
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
-  const updateHitboxIfNeeded = () => {
-    const { mode } = store.getState().settings;
-    if (mode === SeelenWegMode.MinContent) {
-      updateHitbox();
-    }
-  };
 
   await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
-    updateHitbox();
   });
 
   await listenGlobal<AppFromBackground[]>('add-multiple-open-apps', async (event) => {
@@ -73,18 +65,15 @@ export async function registerStoreEvents() {
     for (const item of items) {
       store.dispatch(RootActions.addOpenApp(item));
     }
-    updateHitboxIfNeeded();
   });
 
   await listenGlobal<AppFromBackground>('add-open-app', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.addOpenApp(item));
-    updateHitboxIfNeeded();
   });
 
   await listenGlobal<HWND>('remove-open-app', (event) => {
     store.dispatch(RootActions.removeOpenApp(event.payload));
-    updateHitboxIfNeeded();
   });
 
   await listenGlobal<AppFromBackground>('update-open-app-info', async (event) => {
@@ -140,7 +129,6 @@ export async function registerStoreEvents() {
 
   await listenGlobal<any>(FileChange.Settings, async () => {
     await loadSettingsToStore();
-    updateHitbox();
   });
 
   await StartThemingTool();

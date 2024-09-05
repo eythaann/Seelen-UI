@@ -10,15 +10,16 @@ use icon_extractor::extract_and_save_icon;
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::AppExtraFlag;
+use seelen_core::state::{AppExtraFlag, HideMode, SeelenWegSide};
 use serde::Serialize;
 use tauri::{path::BaseDirectory, Emitter, Listener, Manager, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
+    Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        EnumWindows, HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL,
-        WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        EnumWindows, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW,
+        WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -61,19 +62,18 @@ pub struct SeelenWegApp {
 #[derive(Getters, MutGetters)]
 pub struct SeelenWeg {
     window: WebviewWindow<Wry>,
-    hitbox: WebviewWindow<Wry>,
     #[getset(get = "pub")]
     ready: bool,
     hidden: bool,
     overlaped: bool,
-    last_hitbox_rect: Option<RECT>,
+    /// Is the rect that the dock should have when it isn't hidden
+    pub theoretical_rect: RECT,
 }
 
 impl Drop for SeelenWeg {
     fn drop(&mut self) {
         log::info!("Dropping {}", self.window.label());
         log_error!(self.window.destroy());
-        log_error!(self.hitbox.destroy());
     }
 }
 
@@ -230,15 +230,12 @@ impl SeelenWeg {
 impl SeelenWeg {
     pub fn new(postfix: &str) -> Result<Self> {
         log::info!("Creating {}/{}", Self::TARGET, postfix);
-        let (window, hitbox) = Self::create_window(postfix)?;
-
         let weg = Self {
-            window,
-            hitbox,
+            window: Self::create_window(postfix)?,
             ready: false,
             hidden: false,
             overlaped: false,
-            last_hitbox_rect: None,
+            theoretical_rect: RECT::default(),
         };
 
         Ok(weg)
@@ -249,30 +246,16 @@ impl SeelenWeg {
         Ok(())
     }
 
-    fn is_overlapping(&self, hwnd: HWND) -> bool {
-        let rect = WindowsApi::get_window_rect_without_shadow(hwnd);
-        let hitbox_rect = self.last_hitbox_rect.unwrap_or_else(|| {
-            WindowsApi::get_window_rect_without_shadow(HWND(
-                self.hitbox.hwnd().expect("Failed to get hitbox handle").0,
-            ))
-        });
-        are_overlaped(&hitbox_rect, &rect)
+    pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
+        let window_rect = WindowsApi::get_window_rect_without_shadow(hwnd);
+        Ok(are_overlaped(&self.theoretical_rect, &window_rect))
     }
 
     pub fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
         if self.overlaped == is_overlaped {
             return Ok(());
         }
-
         self.overlaped = is_overlaped;
-        self.last_hitbox_rect = if self.overlaped {
-            Some(WindowsApi::get_window_rect_without_shadow(HWND(
-                self.hitbox.hwnd()?.0,
-            )))
-        } else {
-            None
-        };
-
         self.emit("set-auto-hide", self.overlaped)?;
         Ok(())
     }
@@ -290,66 +273,73 @@ impl SeelenWeg {
             return Ok(());
         }
 
-        self.set_overlaped_status(self.is_overlapping(hwnd))
+        self.set_overlaped_status(self.is_overlapping(hwnd)?)
     }
 
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
-        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_HIDE)?;
         self.hidden = true;
         Ok(())
     }
 
     pub fn show(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
-        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.hidden = false;
         Ok(())
     }
 
-    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        WindowsApi::bring_to(self.hitbox.hwnd()?, HWND_TOPMOST)?;
-        self.set_positions(WindowsApi::monitor_from_window(self.window.hwnd()?).0)?;
-        Ok(())
-    }
-
-    pub fn set_positions(&self, monitor_id: isize) -> Result<()> {
+    pub fn set_positions(&mut self, monitor_id: isize) -> Result<()> {
         let rc_work = FancyToolbar::get_work_area_by_monitor(monitor_id)?;
-        let main_hwnd = HWND(self.window.hwnd()?.0);
-        // pre set position before resize in case of multiples dpi
-        WindowsApi::move_window(main_hwnd, &rc_work)?;
-        WindowsApi::set_position(main_hwnd, None, &rc_work, SWP_NOACTIVATE)?;
+        let hwnd = HWND(self.window.hwnd()?.0);
+
+        let state = FULL_STATE.load();
+        let settings = &state.settings().seelenweg;
+        let monitor_dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor_id))?;
+        let total_size = (settings.total_size() as f32 * monitor_dpi) as i32;
+
+        self.theoretical_rect = rc_work;
+        let mut hidden_rect = rc_work;
+        match settings.position {
+            SeelenWegSide::Left => {
+                self.theoretical_rect.right = self.theoretical_rect.left + total_size;
+                hidden_rect.right = hidden_rect.left + 1;
+            }
+            SeelenWegSide::Right => {
+                self.theoretical_rect.left = self.theoretical_rect.right - total_size;
+                hidden_rect.left = hidden_rect.right - 1;
+            }
+            SeelenWegSide::Top => {
+                self.theoretical_rect.bottom = self.theoretical_rect.top + total_size;
+                hidden_rect.bottom = hidden_rect.top + 1;
+            }
+            SeelenWegSide::Bottom => {
+                self.theoretical_rect.top = self.theoretical_rect.bottom - total_size;
+                hidden_rect.top = hidden_rect.bottom - 1;
+            }
+        }
+
+        let mut abd = AppBarData::from_handle(hwnd);
+        let abd_rect = match settings.hide_mode {
+            HideMode::Never => self.theoretical_rect,
+            _ => hidden_rect,
+        };
+        abd.set_edge(settings.position.into());
+        abd.set_rect(abd_rect);
+        abd.register_as_new_bar();
+
+        // pre set position for resize in case of multiples dpi
+        WindowsApi::move_window(hwnd, &rc_work)?;
+        WindowsApi::set_position(hwnd, None, &rc_work, SWP_NOACTIVATE)?;
         Ok(())
     }
 }
 
 impl SeelenWeg {
     pub const TITLE: &'static str = "SeelenWeg";
-    pub const TITLE_HITBOX: &'static str = "SeelenWeg Hitbox";
-
     const TARGET: &'static str = "seelenweg";
-    const TARGET_HITBOX: &'static str = "seelenweg-hitbox";
 
-    fn create_window(postfix: &str) -> Result<(WebviewWindow, WebviewWindow)> {
+    fn create_window(postfix: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
-
-        let hitbox = tauri::WebviewWindowBuilder::new(
-            &manager,
-            format!("{}/{}", Self::TARGET_HITBOX, postfix),
-            tauri::WebviewUrl::App("seelenweg-hitbox/index.html".into()),
-        )
-        .title(Self::TITLE_HITBOX)
-        .maximizable(false)
-        .minimizable(false)
-        .resizable(false)
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .skip_taskbar(true)
-        .always_on_top(true)
-        .drag_and_drop(false)
-        .build()?;
 
         let window = tauri::WebviewWindowBuilder::new(
             &manager,
@@ -367,7 +357,6 @@ impl SeelenWeg {
         .skip_taskbar(true)
         .always_on_top(true)
         .drag_and_drop(false)
-        .owner(&hitbox)?
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
@@ -389,7 +378,7 @@ impl SeelenWeg {
             let apps = &*trace_lock!(OPEN_APPS);
             log_error!(handler.emit_to(&label, "add-multiple-open-apps", apps));
         });
-        Ok((window, hitbox))
+        Ok(window)
     }
 
     pub fn hide_taskbar() -> JoinHandle<()> {

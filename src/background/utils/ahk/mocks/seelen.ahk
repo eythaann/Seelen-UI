@@ -19,10 +19,6 @@ CloseIfNotRunning()
   ResumeWM()
 }
 
-^#!h:: {
-  DebugHitboxes()
-}
-
 ^#!l:: {
   ToggleWinEventTracing()
 }

@@ -6,9 +6,9 @@ import { debounce } from 'lodash';
 import React, { memo, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
-import { useAppBlur } from '../../shared/hooks/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { selectDefaultOutput, Selectors } from '../../shared/store/app';
@@ -284,8 +284,10 @@ export function WithMediaControls({ children }: PropsWithChildren) {
     closeVolumeNotifier();
   }, [defaultOutput?.volume]);
 
-  useAppBlur(() => {
-    setOpenControls(false);
+  useWindowFocusChange((focused) => {
+    if (!focused) {
+      setOpenControls(false);
+    }
   });
 
   return (

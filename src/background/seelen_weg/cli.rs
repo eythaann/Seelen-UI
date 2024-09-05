@@ -1,5 +1,4 @@
 use clap::Command;
-use tauri::Emitter;
 
 use crate::{error_handler::Result, get_subcommands};
 
@@ -8,8 +7,6 @@ use super::SeelenWeg;
 get_subcommands![
     /** Open Dev Tools (only works if the app is running in dev mode) */
     Debug,
-    /** Shows the invisible hitbox */
-    DebugHitbox,
 ];
 
 impl SeelenWeg {
@@ -28,10 +25,6 @@ impl SeelenWeg {
             SubCommand::Debug => {
                 #[cfg(any(debug_assertions, feature = "devtools"))]
                 self.window.open_devtools();
-            }
-            SubCommand::DebugHitbox => {
-                self.hitbox
-                    .emit_to(self.hitbox.label(), "debug-hitbox", ())?;
             }
         };
         Ok(())

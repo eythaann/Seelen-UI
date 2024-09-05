@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- make the dock/taskbar solid when hide mode is `never`.
+
 ## [1.10.4]
 ### enhancements
 - clean weg items on load to remove duped items and apps/files that don't exist.

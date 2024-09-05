@@ -116,7 +116,6 @@ impl Window {
                     FancyToolbar::TITLE,
                     WindowManager::TITLE,
                     SeelenWeg::TITLE,
-                    SeelenWeg::TITLE_HITBOX,
                     SeelenRofi::TITLE,
                 ]
                 .contains(&self.title().as_str());

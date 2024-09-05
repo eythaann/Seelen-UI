@@ -72,10 +72,6 @@ ResumeWM() {
   RunWait(seelen " wm resume", , "Hide")
 }
 
-DebugHitboxes() {
-  RunWait(seelen " weg debug-hitbox", , "Hide")
-}
-
 ToggleWinEventTracing() {
   RunWait(seelen " debugger toggle-win-events", , "Hide")
 }
