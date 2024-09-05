@@ -15,7 +15,7 @@ async function main() {
   const container = getRootContainer();
   wrapConsole();
 
-  let { jsonSettings } = await new UserSettingsLoader().withThemes(false).load();
+  let { jsonSettings } = await new UserSettingsLoader().load();
   await loadTranslations();
   i18n.changeLanguage(jsonSettings.language);
 
