@@ -14,6 +14,8 @@ header:
     developer: Natblygwr
     seelen_weg: Doc/bar tasgau
     seelen_bar: Bar offer ffansi
+    seelen_wall: Y wal
+    seelen_rofi: Lansiwr ap
 start:
   message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
   title: Croeso!
@@ -75,9 +77,9 @@ weg:
   label: Doc/bar tasgau
   width: Lled
   padding: Padin
-  dock_side: Ochr doc
   margin: Ngherlong
   gap: Bwlch
+  dock_side: Safle
 devtools:
   data_folder: Ffolder data
   custom_config_file: Llwythwch ffeil ffurfweddu arfer

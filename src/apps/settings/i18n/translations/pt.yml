@@ -21,6 +21,8 @@ header:
     shortcuts: Atalhos
     developer: Desenvolvedor
     info: Informação
+    seelen_rofi: Lançador de aplicativos
+    seelen_wall: A parede
 start:
   title: Bem-vindo!
   message: >-
@@ -75,7 +77,6 @@ weg:
   enable: Habilitar Dock/Barra de Tarefas
   width: Largura
   auto_hide: Ocultar automaticamente
-  dock_side: Lado da doca
   padding: Preenchimento
   margin: Margem
   gap: Brecha
@@ -85,6 +86,7 @@ weg:
     zoom_size: Tamanho ampliado (usado para temas)
     gap: Espaço entre itens
     visible_separators: Separadores Visíveis
+  dock_side: Posição
 devtools:
   enable: Habilitar ferramentas para desenvolvedores
   app_folders: Pastas de aplicativos

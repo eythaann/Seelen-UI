@@ -14,6 +14,8 @@ header:
     seelen_weg: Dock/Taskbar
     general: Mkuu
     monitors: Wachunguzi
+    seelen_rofi: Kizindua programu
+    seelen_wall: Ukuta
 start:
   message_accent: Boresha tija yako na mtindo!
   message: >-
@@ -70,13 +72,13 @@ weg:
     zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
     visible_separators: Watenganisho unaoonekana
   gap: Pengo
-  dock_side: Kizimbani
   width: Upana
   margin: Margin
   padding: Padding
   auto_hide: Kujificha kiotomatiki
   label: Dock/Taskbar
   enable: Wezesha Dock/Taskbar
+  dock_side: Msimamo
 devtools:
   app_folders: Folda za programu
   enable: Wezesha zana za msanidi programu

@@ -14,6 +14,8 @@ header:
     general: Jeneral
     seelen_weg: Dock / ataza barra
     seelen_bar: Fancy tresna barra
+    seelen_wall: Horma
+    seelen_rofi: App Launcher
 start:
   message: >-
     Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
@@ -73,11 +75,11 @@ weg:
   auto_hide: Ezkutatu automatikoa
   width: Zabalera
   enable: Gaitu kaia / ataza barra
-  dock_side: Kaiaren alde
   margin: Emandar
   gap: Tarte
   label: Dock / ataza barra
   padding: Betegarri
+  dock_side: Kokaleku
 devtools:
   enable: Gaitu garatzaileen tresnak
   load: Zamatu

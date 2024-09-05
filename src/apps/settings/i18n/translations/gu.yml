@@ -14,6 +14,8 @@ header:
     info: માહિતી
     specific_apps: વિશિષ્ટ એપ્લિકેશનો
     seelen_wm: વિન્ડો મેનેજર
+    seelen_wall: દિવાલ
+    seelen_rofi: હાથ
 start:
   title: સ્વાગત છે!
   message_accent: શૈલી સાથે તમારી ઉત્પાદકતાને ઑપ્ટિમાઇઝ કરો!
@@ -77,7 +79,7 @@ weg:
   enable: ડોક/ટાસ્કબારને સક્ષમ કરો
   width: પહોળાઈ
   gap: ગેપ
-  dock_side: ડોક સાઇડ
+  dock_side: પદ
 devtools:
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો

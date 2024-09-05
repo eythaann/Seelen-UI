@@ -14,6 +14,8 @@ header:
     info: معلومات
     monitors: څارونکي
     shortcuts: لنډوکونه
+    seelen_rofi: د اپلیکیشن لانچر
+    seelen_wall: دېوال
 start:
   title: ښه راغلاست!
   message_accent: د سټایل سره خپل محصول غوره کړئ!
@@ -76,7 +78,7 @@ weg:
   gap: تشې
   enable: دوک / ټاسک بار فعال کړئ
   auto_hide: آٹو پټول
-  dock_side: ډیک اړخ
+  dock_side: موقعیت
 devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   enable: د پراختیا کونکي وسیلې فعال کړئ

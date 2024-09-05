@@ -14,6 +14,8 @@ header:
     seelen_weg: கப்பல்துறை/பணிப்பட்டி
     specific_apps: குறிப்பிட்ட பயன்பாடுகள்
     seelen_bar: ஆடம்பரமான கருவிப்பட்டி
+    seelen_wall: சுவர்
+    seelen_rofi: பயன்பாட்டு துவக்கி
 start:
   title: வரவேற்பு!
   message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
@@ -77,7 +79,7 @@ weg:
   gap: இடைவெளி
   width: அகலம்
   enable: டாக்/டாஸ்க்பாரை இயக்கவும்
-  dock_side: டாக் சைட்
+  dock_side: நிலை
 devtools:
   install_folder: நிறுவல் கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு

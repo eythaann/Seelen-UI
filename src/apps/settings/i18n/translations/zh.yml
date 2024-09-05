@@ -21,6 +21,8 @@ header:
     shortcuts: 快捷键
     developer: 开发者
     info: 信息
+    seelen_wall: 墙
+    seelen_rofi: 应用启动器
 start:
   title: 欢迎！
   message: >-
@@ -73,7 +75,6 @@ weg:
   enable: 启用停靠栏/任务栏
   width: 宽度
   auto_hide: 自动隐藏
-  dock_side: 停靠位置
   padding: 内边距
   margin: 边距
   gap: 间距
@@ -83,6 +84,7 @@ weg:
     zoom_size: 放大尺寸（用于主题）
     gap: 项目间距
     visible_separators: 可见分隔符
+  dock_side: 位置
 devtools:
   enable: 启用开发者工具
   app_folders: 应用程序文件夹

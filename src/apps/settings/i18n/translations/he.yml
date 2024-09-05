@@ -14,6 +14,8 @@ header:
     seelen_wm: מנהל חלונות
     seelen_bar: סרגל כלים מפואר
     monitors: צגים
+    seelen_rofi: משגר אפליקציות
+    seelen_wall: הקיר
 start:
   title: ברוך הבא!
   message: >-
@@ -75,8 +77,8 @@ weg:
   label: שורת המזח/המשימות
   margin: שולים
   enable: הפעל את המזח/שורת המשימות
-  dock_side: צד המזח
   padding: ריפוד
+  dock_side: מַצָב
 devtools:
   load: לִטעוֹן
   install_folder: תיקיית התקנה

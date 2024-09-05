@@ -14,6 +14,8 @@ header:
     shortcuts: მალსახმობები
     seelen_wm: ფანჯრის მენეჯერი
     specific_apps: კონკრეტული პროგრამები
+    seelen_rofi: აპლიკაციის გამშვები
+    seelen_wall: კედელი
 start:
   message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
   title: კეთილი იყოს თქვენი მობრძანება!
@@ -76,8 +78,8 @@ weg:
   padding: ბადება
   margin: ზღვარი
   gap: ხარპი
-  dock_side: დოკის მხარე
   enable: ჩართეთ dock/taskbar
+  dock_side: პოზიცია
 devtools:
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
   app_folders: აპლიკაციის საქაღალდეები

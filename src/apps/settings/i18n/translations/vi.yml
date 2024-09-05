@@ -14,6 +14,8 @@ header:
     seelen_weg: Dock/Thanh tác vụ
     seelen_wm: Quản lý cửa sổ
     shortcuts: Phím tắt
+    seelen_rofi: Ứng dụng Launcher
+    seelen_wall: Bức tường
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -76,8 +78,8 @@ weg:
   enable: Bật Dock/Thanh tác vụ
   padding: Đệm
   label: Dock/Thanh tác vụ
-  dock_side: Phía bến tàu
   auto_hide: Tự động ẩn
+  dock_side: Chức vụ
 devtools:
   load: Trọng tải
   app_folders: Thư mục ứng dụng

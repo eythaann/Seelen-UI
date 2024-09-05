@@ -21,6 +21,8 @@ header:
     shortcuts: Ярлыки
     developer: Разработчик
     info: Информация
+    seelen_wall: Стена
+    seelen_rofi: Приложение пусковая установка
 start:
   title: Добро пожаловать!
   message: >-
@@ -76,7 +78,6 @@ weg:
   enable: Включить док/панель задач
   width: Ширина
   auto_hide: Авто-скрытие
-  dock_side: Док-сайд
   padding: Заполнение
   margin: Допуск
   gap: Зазор
@@ -86,6 +87,7 @@ weg:
     zoom_size: Увеличенный размер (используется для тем)
     gap: Пространство между элементами
     visible_separators: Видимые разделители
+  dock_side: Позиция
 devtools:
   enable: Включить инструменты разработчика
   app_folders: Папки приложений

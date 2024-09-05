@@ -14,6 +14,8 @@ header:
     specific_apps: Muayyan ilovalar
     shortcuts: Yorliqlar
     seelen_weg: Dok / vazifalar paneli
+    seelen_wall: Devor
+    seelen_rofi: Ilovani ishga tushirish vositasi
 start:
   message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
   message: >-
@@ -72,12 +74,12 @@ weg:
     visible_separators: Ko'rinadigan ajratuvchi
   label: Dok / vazifalar paneli
   padding: Plomba
-  dock_side: Dok
   width: Kenglik
   auto_hide: Avtomatik yashirish
   enable: Dock / vazifalar panelini yoqing
   gap: Bo'shliq
   margin: Marja
+  dock_side: Pozitsiya
 devtools:
   install_folder: O'rnatish papkasini o'rnatish
   enable: Ishlab chiqaruvchi vositalarni yoqish

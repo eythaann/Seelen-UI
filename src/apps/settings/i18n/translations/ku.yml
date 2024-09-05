@@ -14,6 +14,8 @@ header:
     shortcuts: Kurtefîlm
     specific_apps: Serlêdanên taybetî
     monitors: Çavdêr
+    seelen_wall: Dîwar
+    seelen_rofi: App launcher
 start:
   title: Bi xêr hatî!
   message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
@@ -73,10 +75,10 @@ weg:
   width: Berî
   enable: Dock / Taskbar çalak bikin
   margin: Radihêj
-  dock_side: Dock aliyê
   auto_hide: Auto Hide
   label: Dock / Taskbar
   padding: Padding
+  dock_side: Rewş
 devtools:
   load: Dawetkirin
   app_folders: Pelên App

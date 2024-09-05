@@ -14,6 +14,8 @@ header:
     developer: Розробник
     seelen_wm: Менеджер вікон
     shortcuts: Ярлики
+    seelen_rofi: Запуск програми
+    seelen_wall: Стіна
 start:
   title: Ласкаво просимо!
   message_accent: Оптимізуйте свою продуктивність стилем!
@@ -77,7 +79,7 @@ weg:
   gap: Розрив
   width: Ширина
   padding: Прокладка
-  dock_side: Причал
+  dock_side: Позиція
 devtools:
   load: Навантаження
   app_folders: Папки додатків

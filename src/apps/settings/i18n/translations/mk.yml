@@ -14,6 +14,8 @@ header:
     seelen_weg: Док/лента со задачи
     monitors: Монитори
     specific_apps: Специфични апликации
+    seelen_rofi: Апликатор за лансирање
+    seelen_wall: Theидот
 start:
   title: Добредојдовте!
   message_accent: Оптимизирајте ја вашата продуктивност со стил!
@@ -71,13 +73,13 @@ weg:
     visible_separators: Видливи сепаратори
     gap: Простор помеѓу предмети
   width: Ширина
-  dock_side: Страна на пристаништето
   enable: Овозможете пристаниште/лента со задачи
   auto_hide: Автоматско скриј
   gap: Јаз
   margin: Маргина
   padding: Подлога
   label: Док/лента со задачи
+  dock_side: Позиција
 devtools:
   load: Оптоварување
   custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација

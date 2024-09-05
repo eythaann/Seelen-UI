@@ -14,6 +14,8 @@ header:
     info: Տեղեկություն
     shortcuts: Դյուրանցումներ
     seelen_wm: Պատուհանների կառավարիչ
+    seelen_rofi: Ծրագրի գործարկիչ
+    seelen_wall: Պատը
 start:
   title: Բարի գալուստ
   message: >-
@@ -72,12 +74,12 @@ weg:
     zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
   enable: Միացնել Dock / Taskbar
   width: Լայնություն
-  dock_side: Նավահանգիստ
   auto_hide: Ավտոմատ թաքցնել
   margin: Լուսանցք
   gap: Բացվածք
   label: Dock / Taskbar
   padding: Լիցք
+  dock_side: Դիրք
 devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ

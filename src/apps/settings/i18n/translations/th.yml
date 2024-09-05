@@ -14,6 +14,8 @@ header:
     seelen_wm: ผู้จัดการหน้าต่าง
     monitors: จอภาพ
     shortcuts: ทางลัด
+    seelen_wall: กำแพง
+    seelen_rofi: แอพ Launcher
 start:
   title: ยินดีต้อนรับ!
   message_accent: เพิ่มประสิทธิภาพการทำงานของคุณอย่างมีสไตล์!
@@ -76,7 +78,7 @@ weg:
   margin: ระยะขอบ
   label: แท่นวาง/บาร์
   enable: เปิดใช้งาน Dock/Task -Babar
-  dock_side: ด้านท่าเรือ
+  dock_side: ตำแหน่ง
 devtools:
   settings_file: ไฟล์การตั้งค่า
   install_folder: โฟลเดอร์การติดตั้ง

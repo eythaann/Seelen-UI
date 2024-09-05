@@ -14,6 +14,8 @@ header:
     specific_apps: Sérstök forrit
     developer: Hönnuður
     seelen_weg: Bryggju/verkefnabar
+    seelen_wall: Vegginn
+    seelen_rofi: App Launcher
 start:
   title: Velkominn!
   message_accent: Fínstilltu framleiðni þína með stæl!
@@ -72,12 +74,12 @@ weg:
     visible_separators: Sýnilegir skilju
   width: Breidd
   label: Bryggju/verkefnabar
-  dock_side: Bryggjuhlið
   enable: Virkja bryggju/verkefnastiku
   gap: Bil
   auto_hide: Sjálfvirk fela
   margin: Framlegð
   padding: Padding
+  dock_side: Staða
 devtools:
   load: Hlaða
   app_folders: App möppur

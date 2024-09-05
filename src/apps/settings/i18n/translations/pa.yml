@@ -14,6 +14,8 @@ header:
     info: ਜਾਣਕਾਰੀ
     developer: ਵਿਕਾਸਕਾਰ
     seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
+    seelen_rofi: ਐਪ ਲਾਂਚਰ
+    seelen_wall: ਕੰਧ
 start:
   message: >-
     Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows 11 ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
@@ -72,12 +74,12 @@ weg:
     visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
   enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   padding: ਪੈਡਿੰਗ
-  dock_side: ਡੌਕ ਸਾਈਡ
   auto_hide: ਆਟੋ ਓਹਲੇ
   gap: ਪਾੜਾ
   width: ਚੌੜਾਈ
   margin: ਹਾਸ਼ੀਏ
   label: ਡੌਕ/ਟਾਸਕਬਾਰ
+  dock_side: ਸਥਿਤੀ
 devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ

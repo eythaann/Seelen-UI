@@ -14,6 +14,8 @@ header:
     seelen_wm: Upravitelj prozora
     info: Informacije
     shortcuts: Prečice
+    seelen_wall: Zid
+    seelen_rofi: Pokretanje aplikacija
 start:
   title: Dobrodošli!
   message_accent: Optimizirajte svoju produktivnost sa stilom!
@@ -73,11 +75,11 @@ weg:
   width: Širina
   auto_hide: Auto se sakrio
   gap: Jaz
-  dock_side: Priključak
   margin: Marža
   label: Dock / programska traka
   padding: Obloga
   enable: Omogući pristanište / traku zadataka
+  dock_side: Položaj
 devtools:
   app_folders: App Mape
   settings_file: Datoteka postavki
