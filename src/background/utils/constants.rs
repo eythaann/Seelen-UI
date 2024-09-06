@@ -1,7 +1,14 @@
+use std::path::PathBuf;
+
 use itertools::Itertools;
 use lazy_static::lazy_static;
+use tauri::{path::BaseDirectory, Manager};
+
+use crate::{error_handler::Result, seelen::get_app_handle};
 
 lazy_static! {
+    static ref ICONS: Icons = Icons::instance().expect("Failed to load icons paths");
+
     pub static ref IGNORE_FOCUS: Vec<String> = [
         "Task Switching",
         "Task View",
@@ -41,3 +48,22 @@ pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 4] = [
     "StartMenuExperienceHost.exe",
     "ShellExperienceHost.exe",
 ];
+
+pub struct Icons {
+    missing_app: PathBuf,
+}
+
+impl Icons {
+    fn instance() -> Result<Self> {
+        let handle = get_app_handle();
+        Ok(Self {
+            missing_app: handle
+                .path()
+                .resolve("static/icons/missing.png", BaseDirectory::Resource)?,
+        })
+    }
+
+    pub fn missing_app() -> PathBuf {
+        ICONS.missing_app.clone()
+    }
+}

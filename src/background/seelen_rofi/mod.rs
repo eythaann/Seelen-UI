@@ -1,12 +1,30 @@
 pub mod cli;
+pub mod handler;
 
-use tauri::WebviewWindow;
+use std::{ffi::OsStr, path::PathBuf};
+
+use serde::Serialize;
+use tauri::{path::BaseDirectory, Manager, WebviewWindow};
 use windows::Win32::UI::WindowsAndMessaging::SWP_NOACTIVATE;
 
-use crate::{error_handler::Result, seelen::get_app_handle, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result, seelen::get_app_handle,
+    seelen_weg::icon_extractor::extract_and_save_icon_v2, utils::constants::Icons,
+    windows_api::WindowsApi,
+};
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct SeelenRofiApp {
+    pub label: String,
+    pub icon: PathBuf,
+    pub path: PathBuf,
+    pub execution_path: String,
+}
 
 pub struct SeelenRofi {
     window: WebviewWindow,
+    pub apps: Vec<SeelenRofiApp>,
 }
 
 impl SeelenRofi {
@@ -15,8 +33,54 @@ impl SeelenRofi {
 
     pub fn new() -> Result<Self> {
         Ok(Self {
+            // apps should be loaded first because it takes a long time on start and its needed by webview
+            apps: Self::load_apps()?,
             window: Self::create_window()?,
         })
+    }
+
+    fn load_dir(dir: PathBuf) -> Result<Vec<SeelenRofiApp>> {
+        let mut apps = Vec::new();
+        for entry in std::fs::read_dir(dir)?.flatten() {
+            let file_type = entry.file_type()?;
+            let path = entry.path();
+
+            if file_type.is_dir() {
+                match Self::load_dir(path) {
+                    Ok(app) => apps.extend(app),
+                    Err(e) => log::error!("{:?}", e),
+                }
+                continue;
+            }
+
+            if file_type.is_file() && path.extension() != Some(OsStr::new("ini")) {
+                apps.push(SeelenRofiApp {
+                    label: path.file_stem().unwrap().to_string_lossy().to_string(),
+                    icon: extract_and_save_icon_v2(&path).unwrap_or_else(|_| Icons::missing_app()),
+                    execution_path: path.to_string_lossy().to_string(),
+                    path,
+                })
+            }
+        }
+        Ok(apps)
+    }
+
+    fn load_apps() -> Result<Vec<SeelenRofiApp>> {
+        let mut result = Vec::new();
+
+        let apps = Self::load_dir(PathBuf::from(
+            r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs",
+        ))?;
+        result.extend(apps);
+
+        let apps = Self::load_dir(get_app_handle().path().resolve(
+            r"Microsoft\Windows\Start Menu\Programs",
+            BaseDirectory::Data,
+        )?)?;
+        result.extend(apps);
+
+        result.sort_by_key(|app| app.label.to_lowercase());
+        Ok(result)
     }
 
     pub fn show(&self) -> Result<()> {

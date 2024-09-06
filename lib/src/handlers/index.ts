@@ -3,7 +3,8 @@ import { listen } from '@tauri-apps/api/event';
 
 export enum InvokeHandler {
   GetSystemColors = 'get_system_colors',
-  StateGetSettings = 'state_get_settings',
+  GetSettings = 'state_get_settings',
+  GetLauncherApps = 'launcher_get_apps',
 }
 
 export enum EventHandler {

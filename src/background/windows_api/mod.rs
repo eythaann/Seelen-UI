@@ -10,8 +10,15 @@ pub use iterator::*;
 use itertools::Itertools;
 use process::ProcessInformationFlag;
 use widestring::U16CStr;
+use windows_core::Interface;
 
-use std::{ffi::c_void, path::PathBuf, thread::sleep, time::Duration};
+use std::{
+    ffi::{c_void, OsString},
+    os::windows::ffi::{OsStrExt, OsStringExt},
+    path::{Path, PathBuf},
+    thread::sleep,
+    time::Duration,
+};
 
 use color_eyre::eyre::eyre;
 use windows::{
@@ -48,9 +55,11 @@ use windows::{
             TOKEN_QUERY,
         },
         Storage::{
-            EnhancedStorage::PKEY_FileDescription, Packaging::Appx::GetApplicationUserModelId,
+            EnhancedStorage::PKEY_FileDescription, FileSystem::WIN32_FIND_DATAW,
+            Packaging::Appx::GetApplicationUserModelId,
         },
         System::{
+            Com::{IPersistFile, STGM_READ},
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
@@ -64,9 +73,9 @@ use windows::{
         UI::{
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
-                IShellItem2, IVirtualDesktopManager,
+                IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow},
-                SHCreateItemFromParsingName, VirtualDesktopManager, SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, ShellLink, VirtualDesktopManager, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
@@ -496,6 +505,27 @@ impl WindowsApi {
         Ok(String::from_utf16(&buffer[..size as usize])?
             .trim_end_matches('\0')
             .to_string())
+    }
+
+    pub fn resolve_lnk_target(lnk_path: &Path) -> Result<PathBuf> {
+        Com::run_with_context(|| {
+            let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
+            let lnk_wide = lnk_path
+                .as_os_str()
+                .encode_wide()
+                .chain(Some(0))
+                .collect_vec();
+
+            let persist_file: IPersistFile = shell_link.cast()?;
+            unsafe { persist_file.Load(PCWSTR(lnk_wide.as_ptr()), STGM_READ)? };
+
+            let mut target_path = vec![0u16; MAX_PATH as usize];
+            let mut idk = WIN32_FIND_DATAW::default();
+            unsafe { shell_link.GetPath(&mut target_path, &mut idk, 0)? };
+
+            target_path.retain(|x| *x != 0);
+            Ok(PathBuf::from(OsString::from_wide(&target_path)))
+        })
     }
 
     pub fn get_window_display_name(hwnd: HWND) -> Result<String> {

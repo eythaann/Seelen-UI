@@ -53,8 +53,8 @@ body {
 
 .launcher-body {
   display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: flex-start;
   overflow: auto;
   height: 100%;
 }
@@ -70,6 +70,7 @@ body {
 
 .launcher-item {
   width: 100%;
+  height: min-content;
   display: flex;
   align-items: center;
   gap: 20px;

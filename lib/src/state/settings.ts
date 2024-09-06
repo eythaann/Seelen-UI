@@ -25,7 +25,7 @@ export enum SeelenWegSide {
 }
 
 export class Settings extends Obtainable<Settings>(
-  InvokeHandler.StateGetSettings,
+  InvokeHandler.GetSettings,
   EventHandler.Settings,
 ) {
   fancyToolbar: FancyToolbarSettings = new FancyToolbarSettings();
