@@ -8,6 +8,12 @@
 - make the dock/taskbar solid when hide mode is `never`.
 - add app launcher (rofi for windows).
 
+### enhancements
+- improve quality icons from all app/files items.
+
+### fix
+- missing icons for files with a different extension than `exe`.
+
 ## [1.10.6]
 ### fix
 - tray module only working when the system language is english.

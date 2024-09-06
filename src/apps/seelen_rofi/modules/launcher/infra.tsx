@@ -1,39 +1,57 @@
-import { invoke } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { AutoComplete, Checkbox, Select, Tooltip } from 'antd';
+import { AutoComplete, Checkbox, Dropdown, Menu, Select, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import { KeyboardEventHandler, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useWindowFocusChange } from 'seelen-core';
+
+import { Selectors } from '../shared/store/app';
+import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
 
 interface Item {
   label: string;
   icon: string;
   path: string;
+  executionPath: string;
 }
 
 export function Item(props: { item: Item }) {
   const {
-    item: { label, icon, path },
+    item: { label, icon, executionPath, path },
   } = props;
 
   function onClick() {
-    invoke('open_file', { path });
+    invoke('open_file', { executionPath });
+    getCurrentWindow().hide();
   }
 
+  let shortPath = executionPath.slice(executionPath.indexOf('\\Programs\\') + 10);
   return (
-    <button className="launcher-item" onClick={onClick}>
-      <img className="launcher-item-icon" src={icon} />
-      <span className="launcher-item-label">{label}</span>
-      <span className="launcher-item-path">({path})</span>
-    </button>
+    <Dropdown
+      trigger={['contextMenu']}
+      dropdownRender={() => (
+        <Menu
+          items={[
+            {
+              label: 'Open File Location',
+              key: 'open',
+              onClick() {
+                invoke('select_file_on_explorer', { path });
+              },
+            },
+          ]}
+        />
+      )}
+    >
+      <button className="launcher-item" onClick={onClick}>
+        <img className="launcher-item-icon" src={convertFileSrc(icon)} />
+        <OverflowTooltip className="launcher-item-label" text={label} />
+        <OverflowTooltip className="launcher-item-path" text={shortPath} />
+      </button>
+    </Dropdown>
   );
 }
-
-const mockedItems = Array.from({ length: 40 }, (_, i) => ({
-  label: `Item ${i}`,
-  icon: 'https://via.placeholder.com/256',
-  path: `item-${i}`,
-}));
 
 enum Runner {
   Run = 'run',
@@ -51,11 +69,16 @@ export function Launcher() {
   const [command, setCommand] = useState('');
   const [runner, setRunner] = useState(Runner.Run);
 
+  const apps = useSelector(Selectors.apps);
+
   const input = useRef<HTMLInputElement>(null);
 
   useWindowFocusChange((focused) => {
     if (focused) {
       input.current?.focus();
+    } else {
+      setCommand('');
+      getCurrentWindow().hide();
     }
   });
 
@@ -71,9 +94,7 @@ export function Launcher() {
     }))
     .filter((option) => option.label.toLowerCase().includes(command.toLowerCase()));
 
-  const items = mockedItems.filter((item) =>
-    item.label.toLowerCase().includes(command.toLowerCase()),
-  );
+  const items = apps.filter((item) => item.label.toLowerCase().includes(command.toLowerCase()));
 
   const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.ctrlKey && e.key === 'Tab') {
@@ -94,7 +115,6 @@ export function Launcher() {
     if (!showHistory || matchingHistory.length === 0) {
       if (e.key === 'Enter') {
         invoke('open_file', { path: command });
-        setCommand('');
         getCurrentWindow().hide();
         return;
       }
@@ -135,7 +155,7 @@ export function Launcher() {
       </div>
       <div className="launcher-body">
         {items.map((item) => (
-          <Item key={item.path} item={item} />
+          <Item key={item.executionPath} item={item} />
         ))}
       </div>
       <div className="launcher-footer">

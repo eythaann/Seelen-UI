@@ -20,6 +20,10 @@ impl FullState {
         self.settings().window_manager.enabled
     }
 
+    pub fn is_rofi_enabled(&self) -> bool {
+        true
+    }
+
     pub fn is_ahk_enabled(&self) -> bool {
         self.settings().ahk_enabled
     }

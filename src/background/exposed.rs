@@ -10,6 +10,7 @@ use crate::log_error;
 use crate::modules::input::Keyboard;
 use crate::modules::virtual_desk::get_vd_manager;
 use crate::seelen::{get_app_handle, Seelen};
+use crate::seelen_rofi::handler::*;
 use crate::seelen_weg::handler::*;
 use crate::seelen_weg::icon_extractor::extract_and_save_icon;
 use crate::seelen_wm::handler::*;
@@ -158,6 +159,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         set_window_position,
         bounce_handle,
         request_focus,
+        // App Launcher
+        launcher_get_apps,
         // tray icons
         temp_get_by_event_tray_info,
         on_click_tray_icon,

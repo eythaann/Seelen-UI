@@ -14,6 +14,7 @@ use crate::{
     log_error,
     modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
     monitor::Monitor,
+    seelen_rofi::SeelenRofi,
     seelen_weg::SeelenWeg,
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
@@ -41,6 +42,8 @@ pub struct Seelen {
     #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
     state: Option<Arc<ArcSwap<FullState>>>,
+    #[getset(get = "pub", get_mut = "pub")]
+    rofi: Option<SeelenRofi>,
 }
 
 /* ============== Getters ============== */
@@ -76,19 +79,38 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
+    fn init_rofi(&self) {
+        if self.rofi.is_none() {
+            std::thread::spawn(|| -> Result<()> {
+                let rofi = SeelenRofi::new()?;
+                trace_lock!(SEELEN).rofi = Some(rofi);
+                Ok(())
+            });
+        }
+    }
+
+    fn remove_rofi(&mut self) {
+        self.rofi = None;
+    }
+
     pub fn on_state_changed(&mut self) -> Result<()> {
         let state = self.state();
 
-        if state.is_ahk_enabled() {
-            Self::start_ahk_shortcuts()?;
-        } else {
-            Self::kill_ahk_shortcuts()?;
+        match state.is_ahk_enabled() {
+            true => Self::start_ahk_shortcuts()?,
+            false => Self::kill_ahk_shortcuts()?,
         }
 
-        if state.is_weg_enabled() {
-            SeelenWeg::hide_taskbar();
-        } else {
-            SeelenWeg::restore_taskbar()?;
+        match state.is_weg_enabled() {
+            true => {
+                SeelenWeg::hide_taskbar();
+            }
+            false => SeelenWeg::restore_taskbar()?,
+        }
+
+        match state.is_rofi_enabled() {
+            true => self.init_rofi(),
+            false => self.remove_rofi(),
         }
 
         for monitor in &mut self.monitors {
@@ -167,6 +189,10 @@ impl Seelen {
 
         if self.state().is_weg_enabled() {
             SeelenWeg::hide_taskbar();
+        }
+
+        if self.state().is_rofi_enabled() {
+            self.init_rofi();
         }
 
         log::trace!("Enumerating Monitors");

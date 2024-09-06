@@ -206,12 +206,24 @@ impl FullState {
             },
         )?;
 
-        debouncer
-            .watcher()
-            .watch(&self.data_dir, RecursiveMode::Recursive)?;
-        debouncer
-            .watcher()
-            .watch(&self.resources_dir, RecursiveMode::Recursive)?;
+        let paths = vec![
+            // settings
+            self.settings_path(),
+            self.data_dir.join("seelenweg_items.yaml"),
+            // resources
+            self.data_dir.join("themes"),
+            self.data_dir.join("placeholders"),
+            self.data_dir.join("layouts"),
+            self.data_dir.join("applications.yml"),
+            self.resources_dir.join("static/themes"),
+            self.resources_dir.join("static/placeholders"),
+            self.resources_dir.join("static/layouts"),
+            self.resources_dir.join("static/apps_templates"),
+        ];
+
+        for path in paths {
+            debouncer.watcher().watch(&path, RecursiveMode::Recursive)?;
+        }
 
         self.watcher = Arc::new(Some(debouncer));
         Ok(())

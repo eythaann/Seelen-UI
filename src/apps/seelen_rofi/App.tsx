@@ -1,9 +1,10 @@
 import { useDarkMode } from '../shared/styles';
-import { Selectors } from './reducer';
 import { ConfigProvider, theme } from 'antd';
 import { useSelector } from 'react-redux';
 
 import { Launcher } from './modules/launcher/infra';
+
+import { Selectors } from './modules/shared/store/app';
 
 export function App() {
   const isDarkMode = useDarkMode();
