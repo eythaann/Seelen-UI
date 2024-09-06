@@ -8,6 +8,12 @@
 - make the dock/taskbar solid when hide mode is `never`.
 - add app launcher (rofi for windows).
 
+### enhancements
+- improve quality icons from all app/files items.
+
+### fix
+- missing icons for files with a different extension than `exe`.
+
 ## [1.10.4]
 ### enhancements
 - clean weg items on load to remove duped items and apps/files that don't exist.

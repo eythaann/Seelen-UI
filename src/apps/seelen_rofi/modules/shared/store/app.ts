@@ -1,12 +1,12 @@
-import { IRootState } from '../../shared.interfaces';
-import { StateBuilder } from '../shared/StateBuilder';
+import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice } from '@reduxjs/toolkit';
 import { UIColors } from 'seelen-core';
 
-interface RootState extends IRootState<{}> {}
+import { LauncherState } from './domain';
 
-const initialState: RootState = {
+const initialState: LauncherState = {
   colors: UIColors.default(),
+  apps: [],
   settings: {},
 };
 

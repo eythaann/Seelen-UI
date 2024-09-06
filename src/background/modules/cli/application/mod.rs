@@ -215,11 +215,8 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
                 }
             }
             SeelenRofi::CLI_IDENTIFIER => {
-                let mut seelen = trace_lock!(SEELEN);
-                for monitor in seelen.monitors_mut() {
-                    if let Some(rofi) = monitor.rofi_mut() {
-                        rofi.process(matches)?;
-                    }
+                if let Some(rofi) = trace_lock!(SEELEN).rofi_mut() {
+                    rofi.process(matches)?;
                 }
             }
             _ => {}
