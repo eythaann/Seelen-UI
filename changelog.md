@@ -1,13 +1,13 @@
 # Changelog
 
 ## [Unreleased]
-## [2.0.0-beta.1]
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
 
 ### features
 - make the dock/taskbar solid when hide mode is `never`.
 - add app launcher (rofi for windows).
+- add seelen wall (rain-meter and wallpaper engine alternatives).
 
 ### enhancements
 - improve quality icons from all app/files items.

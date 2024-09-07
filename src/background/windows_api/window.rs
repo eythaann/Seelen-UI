@@ -7,7 +7,7 @@ use windows::Win32::Foundation::HWND;
 
 use crate::{
     error_handler::Result, seelen_bar::FancyToolbar, seelen_rofi::SeelenRofi,
-    seelen_weg::SeelenWeg, seelen_wm::WindowManager,
+    seelen_wall::SeelenWall, seelen_weg::SeelenWeg, seelen_wm::WindowManager,
 };
 
 use super::{WindowEnumerator, WindowsApi};
@@ -117,6 +117,7 @@ impl Window {
                     WindowManager::TITLE,
                     SeelenWeg::TITLE,
                     SeelenRofi::TITLE,
+                    SeelenWall::TITLE,
                 ]
                 .contains(&self.title().as_str());
         }

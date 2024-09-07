@@ -2,9 +2,9 @@ use color_eyre::eyre::eyre;
 use getset::{Getters, MutGetters};
 
 use crate::{
-    error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_weg::SeelenWeg,
-    seelen_wm::WindowManager, state::application::FullState, utils::sleep_millis,
-    windows_api::WindowsApi,
+    error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_wall::SeelenWall,
+    seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::application::FullState,
+    utils::sleep_millis, windows_api::WindowsApi,
 };
 
 use windows::Win32::Graphics::Gdi::HMONITOR;
@@ -17,9 +17,26 @@ pub struct Monitor {
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
     wm: Option<WindowManager>,
+    wall: Option<SeelenWall>,
 }
 
 impl Monitor {
+    pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
+        if hmonitor.is_invalid() {
+            return Err(eyre!("Invalid Monitor").into());
+        }
+        let mut monitor = Self {
+            handle: hmonitor,
+            name: WindowsApi::monitor_name(hmonitor)?,
+            toolbar: None,
+            weg: None,
+            wm: None,
+            wall: None,
+        };
+        monitor.load_settings(settings)?;
+        Ok(monitor)
+    }
+
     pub fn update_handle(&mut self, id: HMONITOR) {
         self.handle = id;
         log_error!(self.ensure_positions());
@@ -32,6 +49,9 @@ impl Monitor {
         }
         if let Some(weg) = &mut self.weg {
             weg.set_positions(self.handle.0)?;
+        }
+        if let Some(wall) = &mut self.wall {
+            wall.set_position(self.handle)?;
         }
         Ok(())
     }
@@ -71,6 +91,13 @@ impl Monitor {
         Ok(())
     }
 
+    fn add_wall(&mut self) -> Result<()> {
+        if self.wall.is_none() {
+            self.wall = Some(SeelenWall::new(&self.name)?)
+        }
+        Ok(())
+    }
+
     pub fn load_settings(&mut self, settings: &FullState) -> Result<()> {
         if settings.is_bar_enabled() {
             self.add_toolbar()?;
@@ -90,23 +117,14 @@ impl Monitor {
             self.wm = None;
         }
 
+        if settings.is_wall_enabled() {
+            self.add_wall()?;
+        } else {
+            self.wall = None;
+        }
+
         self.ensure_positions()?;
         Ok(())
-    }
-
-    pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
-        if hmonitor.is_invalid() {
-            return Err(eyre!("Invalid Monitor").into());
-        }
-        let mut monitor = Self {
-            handle: hmonitor,
-            name: WindowsApi::monitor_name(hmonitor)?,
-            toolbar: None,
-            weg: None,
-            wm: None,
-        };
-        monitor.load_settings(settings)?;
-        Ok(monitor)
     }
 
     pub fn is_focused(&self) -> bool {

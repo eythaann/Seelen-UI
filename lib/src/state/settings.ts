@@ -24,6 +24,10 @@ export enum SeelenWegSide {
   Bottom = 'Bottom',
 }
 
+export class SeelenWallSettings {
+  enabled: boolean = true;
+}
+
 export class Settings extends Obtainable<Settings>(
   InvokeHandler.GetSettings,
   EventHandler.Settings,
@@ -31,6 +35,7 @@ export class Settings extends Obtainable<Settings>(
   fancyToolbar: FancyToolbarSettings = new FancyToolbarSettings();
   seelenweg: SeelenWegSettings = new SeelenWegSettings();
   windowManager: WindowManagerSettings = new WindowManagerSettings();
+  wall: SeelenWallSettings = new SeelenWallSettings();
   monitors: Monitor[] = [new Monitor()];
   ahkEnabled: boolean = true;
   ahkVariables: AhkVarList = new AhkVarList();

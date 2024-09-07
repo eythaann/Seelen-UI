@@ -710,6 +710,18 @@ impl WindowsApi {
         ))
     }
 
+    pub fn remove_wallpaper() -> Result<()> {
+        unsafe {
+            SystemParametersInfoW(
+                SPI_SETDESKWALLPAPER,
+                0,
+                None,
+                SPIF_SENDCHANGE | SPIF_UPDATEINIFILE,
+            )?;
+        }
+        Ok(())
+    }
+
     pub fn set_wallpaper(path: String) -> Result<()> {
         if !PathBuf::from(&path).exists() {
             return Err("File not found".into());

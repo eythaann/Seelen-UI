@@ -293,6 +293,17 @@
         }
       ]
     },
+    "wall": {
+      "description": "background and virtual desktops config",
+      "default": {
+        "enabled": true
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SeelenWallSettings"
+        }
+      ]
+    },
     "windowManager": {
       "description": "window manager config",
       "default": {
@@ -996,6 +1007,15 @@
         "top": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "SeelenWallSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
         }
       }
     },
