@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.10.5]
 ### fix
 - app crashing on IMMDevice disconnection.
 
