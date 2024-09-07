@@ -210,11 +210,11 @@ impl FullState {
             // settings
             self.settings_path(),
             self.data_dir.join("seelenweg_items.yaml"),
+            self.data_dir.join("applications.yml"),
             // resources
             self.data_dir.join("themes"),
             self.data_dir.join("placeholders"),
             self.data_dir.join("layouts"),
-            self.data_dir.join("applications.yml"),
             self.resources_dir.join("static/themes"),
             self.resources_dir.join("static/placeholders"),
             self.resources_dir.join("static/layouts"),
@@ -232,17 +232,7 @@ impl FullState {
     pub fn get_settings_from_path(path: PathBuf) -> Result<Settings> {
         match path.extension() {
             Some(ext) if ext == "json" => {
-                let mut settings: Settings =
-                    serde_json::from_str(&std::fs::read_to_string(&path)?)?;
-                settings.language = settings
-                    .language
-                    .or_else(|| Some(Settings::get_system_language()));
-                if settings.virtual_desktop_strategy == VirtualDesktopStrategy::Native
-                    && !is_virtual_desktop_supported()
-                {
-                    settings.virtual_desktop_strategy = VirtualDesktopStrategy::Seelen;
-                }
-                Ok(settings)
+                Ok(serde_json::from_str(&std::fs::read_to_string(&path)?)?)
             }
             _ => Err("Invalid settings file extension".into()),
         }
@@ -250,10 +240,20 @@ impl FullState {
 
     fn load_settings(&mut self) -> Result<()> {
         let path = self.settings_path();
-        if path.exists() {
+        let path_exists = path.exists();
+        if path_exists {
             self.settings = Self::get_settings_from_path(path)?;
-        } else {
-            // save current/default settings
+        }
+
+        if self.settings.language.is_none() {
+            self.settings.language = Some(Settings::get_system_language());
+        }
+
+        if !is_virtual_desktop_supported() {
+            self.settings.virtual_desktop_strategy = VirtualDesktopStrategy::Seelen;
+        }
+
+        if !path_exists {
             self.save_settings()?;
         }
         Ok(())
@@ -264,6 +264,8 @@ impl FullState {
         if path.exists() {
             self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?;
             self.weg_items.clean_all_items();
+        } else {
+            std::fs::write(path, serde_yaml::to_string(&self.weg_items)?)?;
         }
         Ok(())
     }
@@ -412,11 +414,29 @@ impl FullState {
         Ok(())
     }
 
+    fn save_settings_by_app(&self) -> Result<()> {
+        let data = self
+            .settings_by_app
+            .iter()
+            .filter(|app| !app.is_bundled)
+            .cloned()
+            .collect_vec();
+        std::fs::write(
+            self.data_dir.join("applications.yml"),
+            serde_yaml::to_string(&data)?,
+        )?;
+        Ok(())
+    }
+
     fn load_settings_by_app(&mut self) -> Result<()> {
         let user_apps_path = self.data_dir.join("applications.yml");
         let apps_templates_path = self.resources_dir.join("static/apps_templates");
 
         self.settings_by_app.clear();
+        if !user_apps_path.exists() {
+            // save empty array on appdata dir
+            self.save_settings_by_app()?;
+        }
 
         for entry in apps_templates_path.read_dir()?.flatten() {
             let content = std::fs::read_to_string(entry.path())?;
