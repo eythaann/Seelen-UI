@@ -8,7 +8,7 @@ use tauri::{path::BaseDirectory, Manager, WebviewWindow};
 use windows::Win32::UI::WindowsAndMessaging::SWP_NOACTIVATE;
 
 use crate::{
-    error_handler::Result, seelen::get_app_handle,
+    error_handler::Result, log_error, seelen::get_app_handle,
     seelen_weg::icon_extractor::extract_and_save_icon_v2, utils::constants::Icons,
     windows_api::WindowsApi,
 };
@@ -27,11 +27,19 @@ pub struct SeelenRofi {
     pub apps: Vec<SeelenRofiApp>,
 }
 
+impl Drop for SeelenRofi {
+    fn drop(&mut self) {
+        log::info!("Dropping {}", self.window.label());
+        log_error!(self.window.destroy());
+    }
+}
+
 impl SeelenRofi {
     pub const TITLE: &str = "Seelen App Launcher";
     pub const TARGET: &str = "seelen-launcher";
 
     pub fn new() -> Result<Self> {
+        log::info!("Creating {}", Self::TARGET);
         Ok(Self {
             // apps should be loaded first because it takes a long time on start and its needed by webview
             apps: Self::load_apps()?,

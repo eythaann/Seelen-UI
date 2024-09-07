@@ -12,7 +12,6 @@ import { Selectors } from './modules/shared/store/app';
 async function onMount() {
   let view = getCurrentWebviewWindow();
   await view.show();
-  await view.emitTo(view.label, 'complete-setup');
 }
 export function App() {
   const isDarkMode = useDarkMode();

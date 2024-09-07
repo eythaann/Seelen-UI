@@ -146,11 +146,17 @@ pub struct PerformanceHelper {
 
 impl PerformanceHelper {
     pub fn start(&mut self, name: &str) {
+        log::debug!("{} start", name);
         self.time.insert(name.to_string(), Instant::now());
     }
 
     pub fn elapsed(&self, name: &str) -> Duration {
         self.time.get(name).unwrap().elapsed()
+    }
+
+    pub fn end(&mut self, name: &str) {
+        log::debug!("{} end in: {:.2}s", name, self.elapsed(name).as_secs_f64());
+        self.time.remove(name);
     }
 }
 

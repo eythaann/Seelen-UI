@@ -131,20 +131,4 @@ impl Monitor {
         let hwnd = WindowsApi::get_foreground_window();
         self.handle == WindowsApi::monitor_from_window(hwnd)
     }
-
-    pub fn is_ready(&self) -> bool {
-        if let Some(weg) = &self.weg {
-            if !weg.ready() {
-                return false;
-            }
-        }
-
-        if let Some(wm) = &self.wm {
-            if !wm.ready() {
-                return false;
-            }
-        }
-
-        true
-    }
 }

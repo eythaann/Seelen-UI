@@ -27,7 +27,7 @@ use crate::{
     error_handler::Result,
     log_error,
     modules::uwp::UWP_MANAGER,
-    seelen::{get_app_handle, SEELEN},
+    seelen::get_app_handle,
     seelen_bar::FancyToolbar,
     state::application::FULL_STATE,
     trace_lock,
@@ -62,8 +62,6 @@ pub struct SeelenWegApp {
 #[derive(Getters, MutGetters)]
 pub struct SeelenWeg {
     window: WebviewWindow<Wry>,
-    #[getset(get = "pub")]
-    ready: bool,
     hidden: bool,
     overlaped: bool,
     /// Is the rect that the dock should have when it isn't hidden
@@ -154,7 +152,7 @@ impl SeelenWeg {
                 .unwrap_or_default()
                 .to_string_lossy()
                 .to_string();
-            app.execution_path = match trace_lock!(UWP_MANAGER).get_from_path(&path) {
+            app.execution_path = match trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
                 Some(package) => package
                     .get_shell_path(&exe)
                     .unwrap_or_else(|| app.exe.clone()),
@@ -232,7 +230,6 @@ impl SeelenWeg {
         log::info!("Creating {}/{}", Self::TARGET, postfix);
         let weg = Self {
             window: Self::create_window(postfix)?,
-            ready: false,
             hidden: false,
             overlaped: false,
             theoretical_rect: RECT::default(),
@@ -262,8 +259,7 @@ impl SeelenWeg {
 
     pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
         let window = Window::from(hwnd);
-        let should_handle_hidden = self.ready
-            && window.is_visible()
+        let should_handle_hidden = window.is_visible()
             && !window.is_seelen_overlay()
             && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
             && !OVERLAP_BLACK_LIST_BY_EXE
@@ -360,17 +356,6 @@ impl SeelenWeg {
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
-
-        let postfix = postfix.to_string();
-        window.once("complete-setup", move |_event| {
-            std::thread::spawn(move || {
-                if let Some(monitor) = trace_lock!(SEELEN).monitor_by_name_mut(&postfix) {
-                    if let Some(weg) = monitor.weg_mut() {
-                        weg.ready = true;
-                    }
-                }
-            });
-        });
 
         let label = window.label().to_string();
         window.listen("request-all-open-apps", move |_| {

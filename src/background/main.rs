@@ -32,12 +32,13 @@ use modules::{
         Client,
     },
     tray::application::ensure_tray_overflow_creation,
+    uwp::UWP_MANAGER,
 };
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
 use seelen_core::state::Settings;
 use tray::try_register_tray_icon;
-use utils::PERFORMANCE_HELPER;
+use utils::{spawn_named_thread, PERFORMANCE_HELPER};
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
@@ -80,14 +81,21 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     log::info!("Elevated: {:?}", WindowsApi::is_elevated());
     Client::listen_tcp()?;
 
+    let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
+    seelen.init(app.handle().clone())?;
+
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
 
+    // init the UWP manager this took a long time so we spawn it in the background
+    // the most of the apps need this so we init it and the beginning of the program
+    spawn_named_thread("UWP Manager Init", || {
+        // lazy variables are initialized when they are accessed
+        UWP_MANAGER.is_locked();
+    })?;
+
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
-
-    let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
-    seelen.init(app.handle().clone())?;
 
     if !tauri::is_dev() {
         let command = trace_lock!(SEELEN_COMMAND_LINE).clone();

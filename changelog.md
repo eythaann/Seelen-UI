@@ -11,6 +11,7 @@
 
 ### enhancements
 - improve quality icons from all app/files items.
+- improve init loading performance.
 
 ### fix
 - missing icons for files with a different extension than `exe`.

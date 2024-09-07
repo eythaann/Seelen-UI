@@ -160,16 +160,12 @@ impl WindowsAppsManager {
     }
 
     pub fn refresh(&mut self) -> Result<()> {
-        log::trace!("Loading UWP packages");
-        trace_lock!(PERFORMANCE_HELPER).start("uwp");
+        trace_lock!(PERFORMANCE_HELPER).start("UWP Packages");
         let script = PwshScript::new(include_str!("load_uwp_apps.ps1"));
         let contents = tauri::async_runtime::block_on(script.execute())?;
         self.packages = serde_json::from_str(&contents)?;
         std::fs::write(Self::get_save_path()?, &contents)?;
-        log::trace!(
-            "UWP packages loaded in: {:.2}s",
-            trace_lock!(PERFORMANCE_HELPER).elapsed("uwp").as_secs_f64()
-        );
+        trace_lock!(PERFORMANCE_HELPER).end("UWP Packages");
         Ok(())
     }
 

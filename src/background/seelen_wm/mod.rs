@@ -320,7 +320,6 @@ impl WindowManager {
                 if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
                     if let Some(wm) = monitor.wm_mut() {
                         wm.paused = false;
-                        wm.ready = true;
                         wm.window
                             .emit("set-active-workspace", &wm.current_virtual_desktop)?;
                     }
