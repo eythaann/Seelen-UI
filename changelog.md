@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app crashing on IMMDevice disconnection.
+
 ## [1.10.4]
 ### enhancements
 - clean weg items on load to remove duped items and apps/files that don't exist.

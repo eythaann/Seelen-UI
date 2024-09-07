@@ -56,6 +56,7 @@ lazy_static! {
         Arc::new(Mutex::new(HashMap::new()));
 }
 
+#[derive(Debug)]
 enum MediaEvent {
     DeviceAdded(String),
     DeviceRemoved(String),
@@ -543,6 +544,10 @@ impl MediaManager {
     fn release_device(&mut self, device_id: &str) -> Result<()> {
         if let Some((endpoint, callback)) = self.devices_audio_endpoint.remove(device_id) {
             unsafe { endpoint.UnregisterControlChangeNotify(&callback)? };
+            // avoid call drop and IUnknown::Release because the COM object was removed on device disconnection
+            // and call Release on a unexciting object can produce a deadlock
+            std::mem::forget(endpoint);
+            std::mem::forget(callback);
         }
         self.inputs.retain(|d| d.id != device_id);
         self.outputs.retain(|d| d.id != device_id);
