@@ -24,6 +24,10 @@ impl FullState {
         true
     }
 
+    pub fn is_wall_enabled(&self) -> bool {
+        self.settings().wall.enabled
+    }
+
     pub fn is_ahk_enabled(&self) -> bool {
         self.settings().ahk_enabled
     }

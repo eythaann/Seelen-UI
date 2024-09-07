@@ -24,6 +24,8 @@ pub struct Settings {
     pub seelenweg: SeelenWegSettings,
     /// window manager config
     pub window_manager: WindowManagerSettings,
+    /// background and virtual desktops config
+    pub wall: SeelenWallSettings,
     /// list of monitors
     pub monitors: Vec<Monitor>,
     /// enable or disable ahk
@@ -51,6 +53,7 @@ impl Default for Settings {
             fancy_toolbar: FancyToolbarSettings::default(),
             seelenweg: SeelenWegSettings::default(),
             window_manager: WindowManagerSettings::default(),
+            wall: SeelenWallSettings::default(),
             ahk_variables: AhkVarList::default(),
             dev_tools: false,
             language: Some(Self::get_system_language()),
@@ -294,6 +297,20 @@ impl Default for Monitor {
             workspaces: vec![Workspace::default()],
             work_area_offset: None,
         }
+    }
+}
+
+// ================= Seelen Wall ================
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
+pub struct SeelenWallSettings {
+    pub enabled: bool,
+}
+
+impl Default for SeelenWallSettings {
+    fn default() -> Self {
+        Self { enabled: true }
     }
 }
 

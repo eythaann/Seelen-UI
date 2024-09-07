@@ -1,0 +1,13 @@
+{
+  "$schema": "../gen/schemas/windows-schema.json",
+  "identifier": "wall",
+  "description": "permissions for wall",
+  "local": true,
+  "windows": [
+    "seelen-wall/*"
+  ],
+  "permissions": [
+    "core:webview:default",
+    "log:default"
+  ]
+}
