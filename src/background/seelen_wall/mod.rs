@@ -15,6 +15,22 @@ pub struct SeelenWall {
     window: WebviewWindow,
 }
 
+impl Drop for SeelenWall {
+    fn drop(&mut self) {
+        log::info!("Dropping {}", self.window.label());
+        log_error!(self.window.destroy());
+    }
+}
+
+impl SeelenWall {
+    pub fn new(postfix: &str) -> Result<Self> {
+        log::info!("Creating {}", Self::TARGET);
+        Ok(Self {
+            window: Self::create_window(postfix)?,
+        })
+    }
+}
+
 // statics
 impl SeelenWall {
     pub const TITLE: &str = "Seelen Wall";
@@ -79,13 +95,5 @@ impl SeelenWall {
 
         window.set_always_on_bottom(true)?;
         Ok(window)
-    }
-}
-
-impl SeelenWall {
-    pub fn new(postfix: &str) -> Result<Self> {
-        Ok(Self {
-            window: Self::create_window(postfix)?,
-        })
     }
 }

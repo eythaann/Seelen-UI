@@ -19,7 +19,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, sleep_millis, spawn_named_thread, PERFORMANCE_HELPER},
+    utils::{ahk::AutoHotKey, spawn_named_thread, PERFORMANCE_HELPER},
     windows_api::{WindowEnumerator, WindowsApi},
 };
 
@@ -119,6 +119,7 @@ impl Seelen {
         Ok(())
     }
 
+    /// Initialize Seelen and Lazy static variables
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         Self::ensure_folders(&app)?;
         log::trace!("Initializing Seelen");
@@ -148,29 +149,13 @@ impl Seelen {
     }
 
     fn start_async() -> Result<()> {
-        log_error!(Self::start_ahk_shortcuts());
-
-        let mut all_ready = false;
-        while !all_ready {
-            sleep_millis(50);
-            all_ready = trace_lock!(SEELEN).monitors().iter().all(|m| m.is_ready());
-        }
-
-        log::debug!(
-            "Seelen UI ready in: {:.2}s",
-            trace_lock!(PERFORMANCE_HELPER)
-                .elapsed("init")
-                .as_secs_f64()
-        );
-
-        log::trace!("Enumerating windows");
+        trace_lock!(PERFORMANCE_HELPER).start("enumerating_windows");
         WindowEnumerator::new().for_each(|hwnd| {
-            let mut seelen = trace_lock!(SEELEN);
-
             if SeelenWeg::should_be_added(hwnd) {
                 SeelenWeg::add_hwnd(hwnd);
             }
 
+            let mut seelen = trace_lock!(SEELEN);
             for monitor in seelen.monitors_mut() {
                 if let Some(wm) = monitor.wm_mut() {
                     if wm.should_be_added(hwnd) {
@@ -179,8 +164,12 @@ impl Seelen {
                 }
             }
         })?;
+        trace_lock!(PERFORMANCE_HELPER).end("enumerating_windows");
 
+        log_error!(Self::start_ahk_shortcuts());
         register_win_hook()?;
+
+        trace_lock!(PERFORMANCE_HELPER).end("init");
         Ok(())
     }
 
@@ -203,6 +192,7 @@ impl Seelen {
         trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
 
         spawn_named_thread("Start Async", || log_error!(Self::start_async()))?;
+
         tauri::async_runtime::spawn(async {
             log_error!(Self::refresh_auto_start_path().await);
         });

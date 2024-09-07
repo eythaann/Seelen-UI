@@ -19,14 +19,12 @@ import './styles/global.css';
 async function Main() {
   wrapConsole();
   await declareDocumentAsLayeredHitbox();
-
-  const container = getRootContainer();
-
   await loadConstants();
   await loadStore();
   await registerStoreEvents();
   await loadTranslations();
 
+  const container = getRootContainer();
   createRoot(container).render(
     <Provider store={store}>
       <I18nextProvider i18n={i18n}>

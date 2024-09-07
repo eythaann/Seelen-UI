@@ -280,7 +280,7 @@ pub fn extract_and_save_icon_v2<T: AsRef<Path>>(path: T) -> Result<PathBuf> {
 
     // try get icons for UWP/Msix apps
     if ext == Some(OsStr::new("exe")) {
-        if let Some(package) = trace_lock!(UWP_MANAGER).get_from_path(path) {
+        if let Some(package) = trace_lock!(UWP_MANAGER, 10).get_from_path(path) {
             if let Some(uwp_icon_path) = package.get_light_icon(&filename) {
                 log::debug!("Copying UWP icon from \"{}\"", uwp_icon_path.display());
                 std::fs::copy(uwp_icon_path, &path_to_save)?;
