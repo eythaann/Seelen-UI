@@ -1,11 +1,15 @@
 use tauri::WebviewWindow;
 use windows::Win32::{
-    Foundation::HWND,
+    Foundation::{HWND, LPARAM, WPARAM},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{FindWindowA, SetParent, SWP_NOACTIVATE},
+    UI::WindowsAndMessaging::{
+        FindWindowA, FindWindowExA, PostMessageW, SetParent, SWP_NOACTIVATE,
+    },
 };
 
-use crate::{error_handler::Result, pcstr, seelen::get_app_handle, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result, log_error, pcstr, seelen::get_app_handle, windows_api::WindowsApi,
+};
 
 pub struct SeelenWall {
     window: WebviewWindow,
@@ -24,22 +28,32 @@ impl SeelenWall {
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(main_hwnd, &rc_monitor)?;
         WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
+        std::thread::spawn(move || log_error!(Self::try_set_under_progman(main_hwnd)));
+        Ok(())
+    }
 
+    fn try_set_under_progman(hwnd: HWND) -> Result<()> {
         let progman = unsafe { FindWindowA(pcstr!("Progman"), None) };
         if progman.0 == 0 {
-            return Ok(());
+            return Err("Failed to find progman window".into());
         }
 
-        /* let worker = unsafe { FindWindowExA(progman, HWND(0), pcstr!("WorkerW"), None) };
+        // Send 0x052C to Progman. This message directs Progman to spawn a WorkerW
+        // behind the desktop icons. If it is already there, nothing happens.
+        unsafe { PostMessageW(progman, 0x052C, WPARAM(0xD), LPARAM(0x1))? };
+
+        let mut worker = unsafe { FindWindowExA(progman, HWND(0), pcstr!("WorkerW"), None) };
+        let mut attempts = 0;
+        while worker.0 == 0 && attempts < 10 {
+            attempts += 1;
+            std::thread::sleep(std::time::Duration::from_millis(100));
+            worker = unsafe { FindWindowExA(progman, HWND(0), pcstr!("WorkerW"), None) };
+        }
+
         if worker.0 == 0 {
-            return Ok(());
-        } */
-
-        unsafe {
-            SetParent(main_hwnd, progman);
+            return Err("Failed to find/create progman worker window".into());
         }
-
-        WindowsApi::remove_wallpaper()?;
+        unsafe { SetParent(hwnd, worker) };
         Ok(())
     }
 
