@@ -5,16 +5,9 @@ export async function declareDocumentAsLayeredHitbox() {
   const { x, y } = await webview.outerPosition();
   const { width, height } = await webview.outerSize();
 
-  await webview.setIgnoreCursorEvents(true);
-  let ignoring_cursor_events = true;
-  let appFocused = true;
-
   let webviewRect = { x, y, width, height };
-
-  webview.onFocusChanged((event) => {
-    appFocused = event.payload;
-    webview.setIgnoreCursorEvents(!appFocused);
-  });
+  let ignoring_cursor_events = true;
+  await webview.setIgnoreCursorEvents(true);
 
   webview.onMoved((e) => {
     webviewRect.x = e.payload.x;
@@ -48,13 +41,15 @@ export async function declareDocumentAsLayeredHitbox() {
     const adjustedX = (mouseX - windowX) / window.devicePixelRatio;
     const adjustedY = (mouseY - windowY) / window.devicePixelRatio;
 
-    let element = document.elementFromPoint(adjustedX, adjustedY);
-    if (element != document.body && ignoring_cursor_events) {
-      webview.setIgnoreCursorEvents(false);
-      ignoring_cursor_events = false;
-    } else if (element == document.body && (!ignoring_cursor_events || appFocused)) {
-      webview.setIgnoreCursorEvents(true);
+    let isOverBody = document.elementFromPoint(adjustedX, adjustedY) == document.body;
+    if (isOverBody && !ignoring_cursor_events) {
       ignoring_cursor_events = true;
+      webview.setIgnoreCursorEvents(true);
+    }
+
+    if (!isOverBody && ignoring_cursor_events) {
+      ignoring_cursor_events = false;
+      webview.setIgnoreCursorEvents(false);
     }
   });
 }

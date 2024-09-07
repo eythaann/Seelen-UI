@@ -14,6 +14,7 @@
 
 ### fix
 - missing icons for files with a different extension than `exe`.
+- losing cursor events on clicking a dock item.
 
 ## [1.10.5]
 ### fix
