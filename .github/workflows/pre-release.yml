@@ -84,21 +84,22 @@ jobs:
           args: ${{ matrix.args }}
 
   publish-release:
-    needs: build-installers
+    needs: [build-installers, create-pre-release]
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Publish pre-release
         uses: actions/github-script@v7
+        env:
+          releaseId: ${{ needs.create-pre-release.outputs.release_id }}
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
-            const releaseId = ${{ needs.create-pre-release.outputs.release_id }};
             const result = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: releaseId,
+              release_id: process.env.releaseId,
             });
 
             result.data.forEach(async (asset) => {
