@@ -1,4 +1,3 @@
-import { SavedSeparatorItem } from '../../../shared/schemas/SeelenWegItems';
 import { cx } from '../../../shared/styles';
 import { WithContextMenu } from '../../components/WithContextMenu';
 import { savePinnedItems } from '../shared/store/storeApi';
@@ -7,7 +6,7 @@ import { Reorder } from 'framer-motion';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode, SeelenWegMode, SeelenWegSide, useWindowFocusChange } from 'seelen-core';
+import { HideMode, SeelenWegMode, SeelenWegSide, SeparatorWegItem, SwItemType, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { MediaSession } from '../item/infra/MediaSession';
@@ -16,16 +15,18 @@ import { UserApplication } from '../item/infra/UserApplication';
 
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { SpecialItemType, SwItem } from '../shared/store/domain';
+import { SwItem } from '../shared/store/domain';
 
 import './index.css';
 
-const Separator1: SavedSeparatorItem = {
-  type: SpecialItemType.Separator,
+const Separator1: SeparatorWegItem = {
+  id: '1',
+  type: SwItemType.Separator,
 };
 
-const Separator2: SavedSeparatorItem = {
-  type: SpecialItemType.Separator,
+const Separator2: SeparatorWegItem = {
+  id: '2',
+  type: SwItemType.Separator,
 };
 
 function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean) {
@@ -83,7 +84,7 @@ export function SeelenWeg() {
     [settings],
   );
 
-  const onReorderPinned = useCallback((apps: (SavedSeparatorItem | SwItem)[]) => {
+  const onReorderPinned = useCallback((apps: SwItem[]) => {
     let extractedPinned: SwItem[] = [];
 
     apps.forEach((app) => {
@@ -99,7 +100,7 @@ export function SeelenWeg() {
         return;
       }
 
-      if (app.type !== SpecialItemType.Separator) {
+      if (app.type !== SwItemType.Separator) {
         extractedPinned.push(app);
       }
     });
@@ -157,15 +158,19 @@ export function SeelenWeg() {
 }
 
 function ItemByType(item: SwItem) {
-  if (item.type === SpecialItemType.PinnedApp || item.type === SpecialItemType.TemporalApp) {
+  if (item.type === SwItemType.PinnedApp) {
+    return <UserApplication key={item.exe} item={item} />;
+  }
+
+  if (item.type === SwItemType.TemporalApp) {
     return <UserApplication key={item.exe || item.opens[0] || item.title} item={item} />;
   }
 
-  if (item.type === SpecialItemType.Media) {
+  if (item.type === SwItemType.Media) {
     return <MediaSession key={'media-item'} item={item} />;
   }
 
-  if (item.type === SpecialItemType.Start) {
+  if (item.type === SwItemType.Start) {
     return <StartMenu key={'start-menu'} item={item} />;
   }
 

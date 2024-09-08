@@ -16,10 +16,14 @@ import { updatePreviews } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
 
-import { RootState, SwPinnedApp, SwTemporalApp } from '../../shared/store/domain';
+import {
+  ExtendedPinnedWegItem,
+  ExtendedTemporalWegItem,
+  RootState,
+} from '../../shared/store/domain';
 
 interface Props {
-  item: SwPinnedApp | SwTemporalApp;
+  item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;
 }
 
 export const UserApplication = memo(({ item }: Props) => {

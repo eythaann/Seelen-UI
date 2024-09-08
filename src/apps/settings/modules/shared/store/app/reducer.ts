@@ -3,7 +3,13 @@ import { Route } from '../../../../components/navigation/routes';
 import i18n from '../../../../i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cloneDeep, pick } from 'lodash';
-import { SeelenWegSettings, UIColors, VirtualDesktopStrategy } from 'seelen-core';
+import {
+  SeelenLauncherSettings,
+  SeelenWallSettings,
+  SeelenWegSettings,
+  UIColors,
+  VirtualDesktopStrategy,
+} from 'seelen-core';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
@@ -21,6 +27,8 @@ const initialState: RootState = {
   route: Route.GENERAL,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
   seelenweg: new SeelenWegSettings(),
+  wall: new SeelenWallSettings(),
+  launcher: new SeelenLauncherSettings(),
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,

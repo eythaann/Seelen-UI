@@ -28,6 +28,10 @@ export class SeelenWallSettings {
   enabled: boolean = true;
 }
 
+export class SeelenLauncherSettings {
+  enabled: boolean = true;
+}
+
 export class Settings extends Obtainable<Settings>(
   InvokeHandler.GetSettings,
   EventHandler.Settings,
@@ -36,6 +40,7 @@ export class Settings extends Obtainable<Settings>(
   seelenweg: SeelenWegSettings = new SeelenWegSettings();
   windowManager: WindowManagerSettings = new WindowManagerSettings();
   wall: SeelenWallSettings = new SeelenWallSettings();
+  launcher: SeelenLauncherSettings = new SeelenLauncherSettings();
   monitors: Monitor[] = [new Monitor()];
   ahkEnabled: boolean = true;
   ahkVariables: AhkVarList = new AhkVarList();

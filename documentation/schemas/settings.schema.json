@@ -234,6 +234,17 @@
         "null"
       ]
     },
+    "launcher": {
+      "description": "App launcher settings",
+      "default": {
+        "enabled": true
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SeelenLauncherSettings"
+        }
+      ]
+    },
     "monitors": {
       "description": "list of monitors",
       "default": [
@@ -1007,6 +1018,15 @@
         "top": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "SeelenLauncherSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
         }
       }
     },

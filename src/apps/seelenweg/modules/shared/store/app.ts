@@ -1,19 +1,18 @@
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { savePinnedItems } from './storeApi';
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { SeelenWegSettings, UIColors } from 'seelen-core';
+import { SeelenWegSettings, SwItemType, UIColors } from 'seelen-core';
 
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 
 import {
   AppFromBackground,
   AppsSides,
+  ExtendedPinnedWegItem,
+  ExtendedTemporalWegItem,
   HWND,
   RootState,
-  SpecialItemType,
   SwItem,
-  SwPinnedApp,
-  SwTemporalApp,
 } from './domain';
 
 const initialState: RootState = {
@@ -28,7 +27,10 @@ const initialState: RootState = {
   colors: UIColors.default(),
 };
 
-function removeAppFromState(state: RootState, searched: SwPinnedApp | SwTemporalApp) {
+function removeAppFromState(
+  state: RootState,
+  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
+) {
   const search = (app: SwItem) => 'exe' in app && app.exe === searched.exe;
 
   let index = state.itemsOnLeft.findIndex(search);
@@ -50,12 +52,12 @@ function removeAppFromState(state: RootState, searched: SwPinnedApp | SwTemporal
   }
 }
 
-function findApp(state: RootState, searched: SwPinnedApp | SwTemporalApp) {
+function findApp(state: RootState, searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem) {
   return (state.itemsOnLeft.find((app) => 'exe' in app && app.exe === searched.exe) ||
     state.itemsOnCenter.find((app) => 'exe' in app && app.exe === searched.exe) ||
     state.itemsOnRight.find((app) => 'exe' in app && app.exe === searched.exe)) as
-    | SwPinnedApp
-    | SwTemporalApp
+    | ExtendedPinnedWegItem
+    | ExtendedTemporalWegItem
     | undefined;
 }
 
@@ -64,20 +66,20 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    unPin(state, action: PayloadAction<SwPinnedApp | SwTemporalApp>) {
+    unPin(state, action: PayloadAction<ExtendedPinnedWegItem | ExtendedTemporalWegItem>) {
       const found = findApp(state, action.payload);
       if (found) {
-        found.type = SpecialItemType.TemporalApp;
+        found.type = SwItemType.TemporalApp;
         if (found.opens.length === 0) {
           removeAppFromState(state, found);
         }
       }
     },
-    pinApp(state, action: PayloadAction<{ app: SwTemporalApp; side: AppsSides }>) {
+    pinApp(state, action: PayloadAction<{ app: ExtendedTemporalWegItem; side: AppsSides }>) {
       const { app, side } = action.payload;
 
       const appToPin = findApp(state, app) || app;
-      appToPin.type = SpecialItemType.PinnedApp;
+      appToPin.type = SwItemType.PinnedApp;
 
       switch (side) {
         case AppsSides.Left:
@@ -97,15 +99,15 @@ export const RootSlice = createSlice({
     },
     addMediaModule(state) {
       const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
-      if (!all.some((current) => current.type === SpecialItemType.Media)) {
+      if (!all.some((current) => current.type === SwItemType.Media)) {
         state.itemsOnRight.push({
-          type: SpecialItemType.Media,
+          type: SwItemType.Media,
         });
       }
       savePinnedItems(current(state));
     },
     removeMediaModule(state) {
-      const filter = (current: SwItem) => current.type !== SpecialItemType.Media;
+      const filter = (current: SwItem) => current.type !== SwItemType.Media;
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
@@ -113,15 +115,15 @@ export const RootSlice = createSlice({
     },
     addStartModule(state) {
       const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
-      if (!all.some((current) => current.type === SpecialItemType.Start)) {
+      if (!all.some((current) => current.type === SwItemType.Start)) {
         state.itemsOnLeft.unshift({
-          type: SpecialItemType.Start,
+          type: SwItemType.Start,
         });
       }
       savePinnedItems(current(state));
     },
     removeStartModule(state) {
-      const filter = (current: SwItem) => current.type !== SpecialItemType.Start;
+      const filter = (current: SwItem) => current.type !== SwItemType.Start;
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
@@ -137,7 +139,7 @@ export const RootSlice = createSlice({
         const cb = (current: SwItem) => 'exe' in current && current.exe.endsWith(appFilename);
         const pinedApp = (state.itemsOnLeft.find(cb) ||
           state.itemsOnCenter.find(cb) ||
-          state.itemsOnRight.find(cb)) as SwPinnedApp | undefined;
+          state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
 
         if (pinedApp) {
           if (!pinedApp.opens.includes(app.hwnd)) {
@@ -169,7 +171,7 @@ export const RootSlice = createSlice({
         if ('opens' in app) {
           app.opens = app.opens.filter((hwnd) => hwnd !== action.payload);
         }
-        return app.type !== SpecialItemType.TemporalApp || app.opens.length > 0;
+        return app.type !== SwItemType.TemporalApp || app.opens.length > 0;
       }
 
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
@@ -183,10 +185,10 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isPinnedApp = (item: SwItem): item is SwPinnedApp => {
-  return item.type === SpecialItemType.PinnedApp;
+export const isPinnedApp = (item: SwItem): item is ExtendedPinnedWegItem => {
+  return item.type === SwItemType.PinnedApp;
 };
 
-export const isTemporalApp = (item: SwItem): item is SwTemporalApp => {
-  return item.type === SpecialItemType.TemporalApp;
+export const isTemporalApp = (item: SwItem): item is ExtendedTemporalWegItem => {
+  return item.type === SwItemType.TemporalApp;
 };

@@ -1,6 +1,6 @@
-import { SwItemType } from '../../../../shared/schemas/SeelenWegItems';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
+import { SwItemType } from 'seelen-core';
 
 import { store } from '../../shared/store/infra';
 

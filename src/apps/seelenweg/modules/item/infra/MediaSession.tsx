@@ -1,5 +1,4 @@
 import { Icon } from '../../../../shared/components/Icon';
-import { SavedMediaItem } from '../../../../shared/schemas/SeelenWegItems';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
@@ -9,6 +8,7 @@ import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { MediaWegItem } from 'seelen-core';
 
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
@@ -21,7 +21,7 @@ const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
 const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
-export function MediaSession({ item }: { item: SavedMediaItem }) {
+export function MediaSession({ item }: { item: MediaWegItem }) {
   const [luminance, setLuminance] = useState(0);
 
   const sessions = useSelector(Selectors.mediaSessions);
