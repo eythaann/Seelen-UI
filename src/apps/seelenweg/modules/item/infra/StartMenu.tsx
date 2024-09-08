@@ -1,4 +1,3 @@
-import { StartMenuItem } from '../../../../shared/schemas/SeelenWegItems';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
@@ -7,6 +6,7 @@ import { motion } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { StartWegItem } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
@@ -15,7 +15,7 @@ import { Selectors } from '../../shared/store/app';
 import { RootState } from '../../shared/store/domain';
 
 interface Props {
-  item: StartMenuItem;
+  item: StartWegItem;
 }
 
 const startMenuExes = ['SearchHost.exe', 'StartMenuExperienceHost.exe'];

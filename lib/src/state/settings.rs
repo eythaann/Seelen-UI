@@ -26,6 +26,8 @@ pub struct Settings {
     pub window_manager: WindowManagerSettings,
     /// background and virtual desktops config
     pub wall: SeelenWallSettings,
+    /// App launcher settings
+    pub launcher: SeelenLauncherSettings,
     /// list of monitors
     pub monitors: Vec<Monitor>,
     /// enable or disable ahk
@@ -54,6 +56,7 @@ impl Default for Settings {
             seelenweg: SeelenWegSettings::default(),
             window_manager: WindowManagerSettings::default(),
             wall: SeelenWallSettings::default(),
+            launcher: SeelenLauncherSettings::default(),
             ahk_variables: AhkVarList::default(),
             dev_tools: false,
             language: Some(Self::get_system_language()),
@@ -180,7 +183,6 @@ impl SeelenWegSettings {
     pub fn total_size(&self) -> u32 {
         self.size + (self.padding * 2) + (self.margin * 2)
     }
-
 }
 
 // ============== Window Manager Settings ==============
@@ -297,6 +299,20 @@ impl Default for Monitor {
             workspaces: vec![Workspace::default()],
             work_area_offset: None,
         }
+    }
+}
+
+// ================= Seelen Launcher ================
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
+pub struct SeelenLauncherSettings {
+    pub enabled: bool,
+}
+
+impl Default for SeelenLauncherSettings {
+    fn default() -> Self {
+        Self { enabled: true }
     }
 }
 

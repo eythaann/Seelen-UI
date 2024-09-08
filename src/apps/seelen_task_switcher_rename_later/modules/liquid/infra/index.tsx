@@ -32,7 +32,7 @@ const chart = function () {
       'link',
       d3
         .forceLink(links)
-        .id((d) => d.id)
+        .id((d: any) => d.id)
         .distance(200)
         .strength(1),
     )
@@ -57,7 +57,7 @@ const chart = function () {
     .selectAll()
     .data(links)
     .join('line')
-    .attr('stroke-width', (d) => Math.sqrt(d.value));
+    .attr('stroke-width', (d: any) => Math.sqrt(d.value));
 
   const node = svg
     .append('g')
@@ -73,12 +73,12 @@ const chart = function () {
   node.append('title').text((d) => d.id);
 
   // Add a drag behavior.
-  node.call(d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended));
+  node.call(d3.drag().on('start', dragstarted).on('drag', dragged).on('end', dragended) as any);
 
   // Set the position attributes of links and nodes each time the simulation ticks.
   function ticked() {
     link
-      .attr('x1', (d) => {
+      .attr('x1', (d: any) => {
         let x = d.source.x;
         if ([Placement.Right, Placement.TopRight, Placement.BottomRight].includes(d.placement)) {
           return x + MINI_DESKTOP_WIDTH;
@@ -88,7 +88,7 @@ const chart = function () {
         }
         return x;
       })
-      .attr('y1', (d) => {
+      .attr('y1', (d: any) => {
         let y = d.source.y;
         if ([Placement.Bottom, Placement.BottomLeft, Placement.BottomRight].includes(d.placement)) {
           return y + MINI_DESKTOP_HEIGHT;
@@ -98,7 +98,7 @@ const chart = function () {
         }
         return y;
       })
-      .attr('x2', (d) => {
+      .attr('x2', (d: any) => {
         let x = d.target.x;
         if ([Placement.Left, Placement.TopLeft, Placement.BottomLeft].includes(d.placement)) {
           return x + MINI_DESKTOP_WIDTH;
@@ -108,7 +108,7 @@ const chart = function () {
         }
         return x;
       })
-      .attr('y2', (d) => {
+      .attr('y2', (d: any) => {
         let y = d.target.y;
         if ([Placement.Top, Placement.TopLeft, Placement.TopRight].includes(d.placement)) {
           return y + MINI_DESKTOP_HEIGHT;
@@ -119,25 +119,25 @@ const chart = function () {
         return y;
       });
 
-    node.attr('x', (d) => d.x).attr('y', (d) => d.y);
+    (node as any).attr('x', (d: any) => d.x).attr('y', (d: any) => d.y);
   }
 
   // Reheat the simulation when drag starts, and fix the subject position.
-  function dragstarted(event) {
+  function dragstarted(event: any) {
     if (!event.active) simulation.alphaTarget(0.3).restart();
     event.subject.fx = event.subject.x;
     event.subject.fy = event.subject.y;
   }
 
   // Update the subject (dragged node) position during drag.
-  function dragged(event) {
+  function dragged(event: any) {
     event.subject.fx = event.x;
     event.subject.fy = event.y;
   }
 
   // Restore the target alpha so the simulation cools after dragging ends.
   // Unfix the subject position now that it’s no longer being dragged.
-  function dragended(event) {
+  function dragended(event: any) {
     if (!event.active) simulation.alphaTarget(0);
     event.subject.fx = null;
     event.subject.fy = null;

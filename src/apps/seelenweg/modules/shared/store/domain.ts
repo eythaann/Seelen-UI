@@ -1,18 +1,16 @@
 import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
-import {
-  SavedMediaItem,
-  SavedPinnedApp,
-  SavedSeparatorItem,
-  StartMenuItem,
-  SwItemType as SpecialItemType,
-} from '../../../../shared/schemas/SeelenWegItems';
 import { modify } from 'readable-types';
-import { SeelenWegSettings } from 'seelen-core';
+import {
+  MediaWegItem,
+  PinnedWegItem,
+  SeelenWegSettings,
+  SeparatorWegItem,
+  StartWegItem,
+  SwItemType,
+} from 'seelen-core';
 
 export type HWND = number & {};
-
-export { SpecialItemType };
 
 export interface AppFromBackground {
   title: string;
@@ -44,8 +42,8 @@ export interface MediaSession {
   } | null;
 }
 
-export type SwPinnedApp = modify<
-  SavedPinnedApp,
+export type ExtendedPinnedWegItem = modify<
+  PinnedWegItem,
   {
     icon: string;
     title: string;
@@ -53,14 +51,19 @@ export type SwPinnedApp = modify<
   }
 >;
 
-export type SwTemporalApp = modify<
-  SwPinnedApp,
+export type ExtendedTemporalWegItem = modify<
+  ExtendedPinnedWegItem,
   {
-    type: SpecialItemType.TemporalApp;
+    type: SwItemType.TemporalApp;
   }
 >;
 
-export type SwItem = SwPinnedApp | SwTemporalApp | SavedSeparatorItem | SavedMediaItem | StartMenuItem;
+export type SwItem =
+  | ExtendedPinnedWegItem
+  | ExtendedTemporalWegItem
+  | SeparatorWegItem
+  | MediaWegItem
+  | StartWegItem;
 
 export interface RootState extends IRootState<SeelenWegSettings> {
   itemsOnLeft: SwItem[];

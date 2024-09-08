@@ -1,7 +1,6 @@
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
-import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
 import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
@@ -9,7 +8,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
-import { SeelenWegSettings, SeelenWegSide, UIColors } from 'seelen-core';
+import { SeelenWegSettings, SeelenWegSide, SwItemType, UIColors, WegItem } from 'seelen-core';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -30,14 +29,15 @@ async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground
   return result;
 }
 
-async function cleanSavedItems(items: SwSavedItem[]): Promise<SwItem[]> {
+async function cleanSavedItems(items: WegItem[]): Promise<SwItem[]> {
   const result: SwItem[] = [];
 
   for (const item of items) {
     if (item.type === SwItemType.PinnedApp) {
       result.push(await SwPinnedAppUtils.fromSaved(item));
     } else {
-      result.push(item);
+      // TODO remove assert
+      result.push(item as SwItem);
     }
   }
 

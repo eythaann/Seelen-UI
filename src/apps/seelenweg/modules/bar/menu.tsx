@@ -9,7 +9,7 @@ import { store } from '../shared/store/infra';
 
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
-import { AppsSides, SwPinnedApp, SwTemporalApp } from '../shared/store/domain';
+import { AppsSides, ExtendedPinnedWegItem, ExtendedTemporalWegItem } from '../shared/store/domain';
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {
   return [
@@ -37,7 +37,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
   ];
 }
 
-export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp): ItemType[] {
+export function getMenuForItem(t: TFunction, item: ExtendedPinnedWegItem | ExtendedTemporalWegItem): ItemType[] {
   const isPinned = isPinnedApp(item);
 
   const pin = (side: AppsSides) => {

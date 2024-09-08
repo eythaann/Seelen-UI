@@ -1,14 +1,9 @@
-import {
-  SwItemType,
-  SwSavedItem,
-  SwSaveFile,
-  SwSaveFileSchema,
-} from '../../../../shared/schemas/SeelenWegItems';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { debounce } from 'lodash';
+import { SwItemType, WegItem, WegItems } from 'seelen-core';
 
 import { store } from './infra';
 
@@ -20,7 +15,7 @@ export const IsSavingPinnedItems = {
 
 export const savePinnedItems = debounce(
   async (state: RootState = store.getState()): Promise<void> => {
-    const cb = (acc: SwSavedItem[], item: SwItem) => {
+    const cb = (acc: WegItem[], item: SwItem) => {
       switch (item.type) {
         case SwItemType.TemporalApp:
           break;
@@ -38,7 +33,7 @@ export const savePinnedItems = debounce(
       return acc;
     };
 
-    const data: SwSaveFile = {
+    const data: WegItems = {
       left: state.itemsOnLeft.reduce(cb, []),
       center: state.itemsOnCenter.reduce(cb, []),
       right: state.itemsOnRight.reduce(cb, []),
@@ -51,7 +46,6 @@ export const savePinnedItems = debounce(
   1000,
 );
 
-export const loadPinnedItems = async (): Promise<SwSaveFile> => {
-  let items = await invoke<json>('state_get_weg_items');
-  return SwSaveFileSchema.parse(items || {});
+export const loadPinnedItems = async (): Promise<WegItems> => {
+  return invoke<WegItems>('state_get_weg_items');
 };
