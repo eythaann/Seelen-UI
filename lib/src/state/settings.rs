@@ -327,6 +327,7 @@ pub enum SeelenLauncherMonitor {
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenLauncherRunner {
+    pub id: String,
     pub label: String,
     pub program: String,
     pub readonly: bool,
@@ -347,13 +348,15 @@ impl Default for SeelenLauncherSettings {
             monitor: SeelenLauncherMonitor::MouseOver,
             runners: vec![
                 SeelenLauncherRunner {
-                    label: "t:app_launcher.runners.explorer".to_string(),
-                    program: "explorer.exe".to_string(),
+                    id: "RUN".to_owned(),
+                    label: "t:app_launcher.runners.explorer".to_owned(),
+                    program: "explorer.exe".to_owned(),
                     readonly: true,
                 },
                 SeelenLauncherRunner {
-                    label: "t:app_launcher.runners.cmd".to_string(),
-                    program: "cmd.exe".to_string(),
+                    id: "CMD".to_owned(),
+                    label: "t:app_launcher.runners.cmd".to_owned(),
+                    program: "cmd.exe".to_owned(),
                     readonly: true,
                 },
             ],
@@ -366,6 +369,11 @@ impl SeelenLauncherSettings {
         let mut dict = HashSet::new();
         self.runners
             .retain(|runner| !runner.program.is_empty() && dict.insert(runner.program.clone()));
+        for runner in &mut self.runners {
+            if runner.id.is_empty() {
+                runner.id = uuid::Uuid::new_v4().to_string();
+            }
+        }
     }
 }
 

@@ -7,8 +7,8 @@
   "permissions": [
     "log:default",
     "core:webview:default",
-    "core:window:default",
     "core:event:default",
+    "core:window:default",
     "core:window:allow-set-ignore-cursor-events",
     "core:window:allow-hide"
   ]

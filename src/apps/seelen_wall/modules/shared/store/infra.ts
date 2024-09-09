@@ -8,7 +8,7 @@ export const store = configureStore({
 });
 
 export async function initStore() {
-  let settings = await Settings.getAsync();
+  const settings = await Settings.getAsync();
 
   store.dispatch(Actions.setSettings(settings.wall));
   Settings.onChange((settings) => {

@@ -241,11 +241,13 @@
         "monitor": "Mouse-Over",
         "runners": [
           {
+            "id": "RUN",
             "label": "t:app_launcher.runners.explorer",
             "program": "explorer.exe",
             "readonly": true
           },
           {
+            "id": "CMD",
             "label": "t:app_launcher.runners.cmd",
             "program": "cmd.exe",
             "readonly": true
@@ -1046,6 +1048,10 @@
     "SeelenLauncherRunner": {
       "type": "object",
       "properties": {
+        "id": {
+          "default": "",
+          "type": "string"
+        },
         "label": {
           "default": "",
           "type": "string"
@@ -1078,11 +1084,13 @@
         "runners": {
           "default": [
             {
+              "id": "RUN",
               "label": "t:app_launcher.runners.explorer",
               "program": "explorer.exe",
               "readonly": true
             },
             {
+              "id": "CMD",
               "label": "t:app_launcher.runners.cmd",
               "program": "cmd.exe",
               "readonly": true

@@ -53,22 +53,15 @@ export function Item(props: { item: Item }) {
   );
 }
 
-enum Runner {
-  Run = 'run',
-  Command = 'command',
-}
-
-const history: Record<Runner, string[]> = {
-  [Runner.Run]: ['%temp%', 'shell:AppsFolder', '%appdata%'],
-  [Runner.Command]: ['DEL /A /Q "%localappdata%\\IconCache.db"'],
-};
+const history: Record<string, string[]> = {};
 
 export function Launcher() {
   const [showHelp, setShowHelp] = useState(true);
   const [showHistory, setShowHistory] = useState(false);
   const [command, setCommand] = useState('');
-  const [runner, setRunner] = useState(Runner.Run);
+  const [selectedRunner, setSelectedRunner] = useState(0);
 
+  const { runners } = useSelector(Selectors.settings);
   const apps = useSelector(Selectors.apps);
 
   const input = useRef<HTMLInputElement>(null);
@@ -82,12 +75,10 @@ export function Launcher() {
     }
   });
 
-  const nextRunner = () => {
-    let runners = Object.values(Runner);
-    setRunner(runners[(runners.indexOf(runner) + 1) % runners.length]!);
-  };
+  const nextRunner = () => setSelectedRunner((current) => (current + 1) % runners.length);
 
-  const matchingHistory = history[runner]
+  const selectedHistory = history[selectedRunner] || [];
+  const matchingHistory = selectedHistory
     .map((path) => ({
       label: path,
       value: path,
@@ -127,11 +118,12 @@ export function Launcher() {
         <Tooltip open={showHelp} title="Ctrl + Tab" placement="left">
           <Select
             className="launcher-header-runner-selector"
-            value={runner}
-            onChange={setRunner}
-            options={Object.values(Runner).map((runner) => ({
-              label: runner,
-              value: runner,
+            value={selectedRunner}
+            onChange={setSelectedRunner}
+            options={runners.map((runner, idx) => ({
+              key: runner.id,
+              label: runner.label,
+              value: idx,
             }))}
           />
         </Tooltip>

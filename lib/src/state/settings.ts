@@ -42,6 +42,7 @@ export enum SeelenLauncherMonitor {
 }
 
 export class SeelenLauncherRunner {
+  id: string = crypto.randomUUID();
   label: string = '';
   program: string = '';
   readonly: boolean = false;

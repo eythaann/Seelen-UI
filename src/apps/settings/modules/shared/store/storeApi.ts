@@ -76,7 +76,8 @@ export class UserSettingsLoader {
     }
 
     if (this._withWallpaper) {
-      userSettings.wallpaper = convertFileSrc(await invoke('state_get_wallpaper'));
+      let wallpaper = await invoke<string>('state_get_wallpaper');
+      userSettings.wallpaper = wallpaper ? convertFileSrc(wallpaper) : null;
     }
 
     return userSettings;
