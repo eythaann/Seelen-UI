@@ -1,9 +1,9 @@
 import { StartThemingTool } from '../../../../shared/styles';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
-import { InvokeHandler, Settings, UIColors } from 'seelen-core';
+import { InvokeHandler, LauncherHistory, Settings, UIColors } from 'seelen-core';
 
-import { RootActions, RootSlice } from './app';
+import { Actions, RootSlice } from './app';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -12,21 +12,22 @@ export const store = configureStore({
 async function initUIColors() {
   function loadColors(colors: UIColors) {
     UIColors.setAssCssVariables(colors);
-    store.dispatch(RootActions.setColors(colors));
+    store.dispatch(Actions.setColors(colors));
   }
   loadColors(await UIColors.getAsync());
   await UIColors.onChange(loadColors);
 }
 
 export async function initStore() {
+  const dispatch = store.dispatch;
   const settings = await Settings.getAsync();
 
-  store.dispatch(RootActions.setApps(await invoke(InvokeHandler.GetLauncherApps)));
-  store.dispatch(RootActions.setSettings(settings.launcher));
+  dispatch(Actions.setSettings(settings.launcher));
+  dispatch(Actions.setApps(await invoke(InvokeHandler.GetLauncherApps)));
+  dispatch(Actions.setHistory(await LauncherHistory.getAsync()));
 
-  Settings.onChange((settings) => {
-    store.dispatch(RootActions.setSettings(settings.launcher));
-  });
+  Settings.onChange((settings) => dispatch(Actions.setSettings(settings.launcher)));
+  LauncherHistory.onChange((history) => dispatch(Actions.setHistory(history)));
 
   await initUIColors();
   await StartThemingTool();

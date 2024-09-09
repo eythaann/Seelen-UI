@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import { useWindowFocusChange } from 'seelen-core';
 
 import { Selectors } from '../shared/store/app';
+import { SaveHistory } from './app';
 import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
 
 interface Item {
@@ -53,43 +54,34 @@ export function Item(props: { item: Item }) {
   );
 }
 
-const history: Record<string, string[]> = {};
-
 export function Launcher() {
   const [showHelp, setShowHelp] = useState(true);
   const [showHistory, setShowHistory] = useState(false);
   const [command, setCommand] = useState('');
   const [selectedRunner, setSelectedRunner] = useState(0);
 
-  const { runners } = useSelector(Selectors.settings);
+  const history = useSelector(Selectors.history);
+  const runners = useSelector(Selectors.settings.runners);
   const apps = useSelector(Selectors.apps);
 
-  const input = useRef<HTMLInputElement>(null);
+  const selectorRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const helpRef = useRef<HTMLInputElement>(null);
 
   useWindowFocusChange((focused) => {
     if (focused) {
-      input.current?.focus();
+      inputRef.current?.focus();
     } else {
       setCommand('');
       getCurrentWindow().hide();
     }
   });
 
-  const nextRunner = () => setSelectedRunner((current) => (current + 1) % runners.length);
-
-  const selectedHistory = history[selectedRunner] || [];
-  const matchingHistory = selectedHistory
-    .map((path) => ({
-      label: path,
-      value: path,
-    }))
-    .filter((option) => option.label.toLowerCase().includes(command.toLowerCase()));
-
-  const items = apps.filter((item) => item.label.toLowerCase().includes(command.toLowerCase()));
-
   const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.ctrlKey && e.key === 'Tab') {
-      nextRunner();
+      setSelectedRunner(
+        (current) => (e.shiftKey ? current + runners.length - 1 : current + 1) % runners.length,
+      );
       return;
     }
 
@@ -98,8 +90,8 @@ export function Launcher() {
       return;
     }
 
-    if (e.ctrlKey && e.key === 's') {
-      input.current?.focus();
+    if (e.ctrlKey && e.key === 'f') {
+      inputRef.current?.focus();
       return;
     }
 
@@ -107,16 +99,28 @@ export function Launcher() {
       if (e.key === 'Enter') {
         invoke('open_file', { path: command });
         getCurrentWindow().hide();
+        SaveHistory({
+          ...history,
+          [selectedRunner]: [...new Set([command, ...(history[selectedRunner] || [])])],
+        });
         return;
       }
     }
   };
+
+  const selectedHistory = history[selectedRunner] || [];
+  const matchingHistory = selectedHistory
+    .filter((value) => value.toLowerCase().includes(command.toLowerCase()))
+    .map((value) => ({ value }));
+
+  const items = apps.filter((item) => item.label.toLowerCase().includes(command.toLowerCase()));
 
   return (
     <motion.div className="launcher" onKeyDown={onKeyDown}>
       <div className="launcher-header">
         <Tooltip open={showHelp} title="Ctrl + Tab" placement="left">
           <Select
+            ref={selectorRef as any}
             className="launcher-header-runner-selector"
             value={selectedRunner}
             onChange={setSelectedRunner}
@@ -125,12 +129,18 @@ export function Launcher() {
               label: runner.label,
               value: idx,
             }))}
+            onKeyDown={(e) => {
+              if (e.shiftKey && e.key === 'Tab') {
+                helpRef.current?.focus();
+                e.preventDefault();
+              }
+            }}
           />
         </Tooltip>
-        <Tooltip open={showHelp} title="Ctrl + S" placement="top">
+        <Tooltip open={showHelp} title="Ctrl + F" placement="top">
           <Tooltip open={showHelp} title="Enter" placement="right">
             <AutoComplete
-              ref={input as any}
+              ref={inputRef as any}
               className="launcher-header-command-input"
               placeholder="App, Command or Path..."
               options={matchingHistory}
@@ -145,13 +155,25 @@ export function Launcher() {
           </Tooltip>
         </Tooltip>
       </div>
-      <div className="launcher-body">
-        {items.map((item) => (
-          <Item key={item.executionPath} item={item} />
-        ))}
-      </div>
+      <Tooltip open={showHelp} title="Tab / Shift + Tab" placement="left">
+        <div className="launcher-body">
+          {items.map((item) => (
+            <Item key={item.executionPath} item={item} />
+          ))}
+        </div>
+      </Tooltip>
       <div className="launcher-footer">
-        <Checkbox checked={showHelp} onChange={(e) => setShowHelp(e.target.checked)}>
+        <Checkbox
+          ref={helpRef as any}
+          checked={showHelp}
+          onChange={(e) => setShowHelp(e.target.checked)}
+          onKeyDown={(e) => {
+            if (e.key === 'Tab') {
+              selectorRef.current?.focus();
+              e.preventDefault();
+            }
+          }}
+        >
           <Tooltip open={showHelp} title="Ctrl + H" placement="right">
             Show Shortcuts
           </Tooltip>

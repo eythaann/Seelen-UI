@@ -6,7 +6,7 @@ use seelen_core::state::{WegItems, WindowManagerLayout};
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
 use super::{
-    application::{FullState, FULL_STATE},
+    application::{FullState, LauncherHistory, FULL_STATE},
     domain::{AppConfig, Placeholder, Settings, Theme},
 };
 
@@ -33,6 +33,11 @@ pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
 #[tauri::command(async)]
 pub fn state_get_weg_items() -> WegItems {
     FULL_STATE.load().weg_items().clone()
+}
+
+#[tauri::command(async)]
+pub fn state_get_history() -> LauncherHistory {
+    FULL_STATE.load().history().clone()
 }
 
 #[tauri::command(async)]

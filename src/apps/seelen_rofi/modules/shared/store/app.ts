@@ -7,6 +7,7 @@ import { LauncherState } from './domain';
 const initialState: LauncherState = {
   colors: UIColors.default(),
   apps: [],
+  history: {},
   settings: { ...new SeelenLauncherSettings() },
 };
 
@@ -18,5 +19,5 @@ export const RootSlice = createSlice({
   },
 });
 
-export const RootActions = RootSlice.actions;
+export const Actions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
