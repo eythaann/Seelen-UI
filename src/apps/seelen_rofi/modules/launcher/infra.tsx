@@ -22,7 +22,7 @@ export function Item(props: { item: Item }) {
   } = props;
 
   function onClick() {
-    invoke('open_file', { executionPath });
+    invoke('open_file', { path: executionPath });
     getCurrentWindow().hide();
   }
 
