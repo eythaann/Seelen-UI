@@ -15,3 +15,35 @@ export class Rect {
   right = 0;
   bottom = 0;
 }
+
+export function disableWebviewShortcutsAndContextMenu() {
+  document.addEventListener('keydown', function (event) {
+    // prevent refresh
+    if (event.key === 'F5') {
+      event.preventDefault();
+    }
+
+    // prevent close
+    if (event.altKey && event.key === 'F4') {
+      event.preventDefault();
+    }
+
+    // others
+    if (event.ctrlKey) {
+      switch (event.key) {
+        case 'r': // reload
+        case 'f': // search
+        case 'g': // find
+        case 'p': // print
+        case 'j': // downloads
+        case 'u': // source
+          event.preventDefault();
+          break;
+      }
+    }
+  });
+
+  document.addEventListener('contextmenu', function (event) {
+    event.preventDefault();
+  });
+}

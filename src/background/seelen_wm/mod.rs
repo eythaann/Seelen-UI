@@ -298,8 +298,9 @@ impl WindowManager {
             tauri::WebviewUrl::App("seelen_wm/index.html".into()),
         )
         .title(Self::TITLE)
-        .maximizable(false)
         .minimizable(false)
+        .maximizable(false)
+        .closable(false)
         .resizable(false)
         .visible(true)
         .decorations(false)

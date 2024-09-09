@@ -1,5 +1,6 @@
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 import * as Logger from '@tauri-apps/plugin-log';
+import { disableWebviewShortcutsAndContextMenu } from 'seelen-core';
 
 export function wrapConsole() {
   const WebConsole = {
@@ -12,12 +13,16 @@ export function wrapConsole() {
 
   const label = getCurrentWebview().label;
   const StringifyParams = (params: any[]): string => {
-    return label + ':' + params.reduce((a, b) => {
-      if (typeof b === 'string') {
-        return a + ' ' + b;
-      }
-      return a + ' ' + JSON.stringify(b, null, 2);
-    }, '');
+    return (
+      label +
+      ':' +
+      params.reduce((a, b) => {
+        if (typeof b === 'string') {
+          return a + ' ' + b;
+        }
+        return a + ' ' + JSON.stringify(b, null, 2);
+      }, '')
+    );
   };
 
   window.addEventListener('unhandledrejection', (event) => {
@@ -49,21 +54,5 @@ export function wrapConsole() {
     Logger.trace(StringifyParams(params));
   };
 
-  disableRefreshAndContextMenu();
-}
-
-export function disableRefreshAndContextMenu() {
-  document.addEventListener('keydown', function (event) {
-    if (
-      event.key === 'F5' ||
-      (event.ctrlKey && event.key === 'r') ||
-      (event.metaKey && event.key === 'r')
-    ) {
-      event.preventDefault();
-    }
-  });
-
-  document.addEventListener('contextmenu', function (event) {
-    event.preventDefault();
-  });
+  disableWebviewShortcutsAndContextMenu();
 }

@@ -343,8 +343,9 @@ impl SeelenWeg {
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
         )
         .title(Self::TITLE)
-        .maximizable(false)
         .minimizable(false)
+        .maximizable(false)
+        .closable(false)
         .resizable(false)
         .visible(false)
         .decorations(false)
