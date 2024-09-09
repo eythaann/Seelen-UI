@@ -1,4 +1,5 @@
 mod apps_config;
+mod events;
 
 use arc_swap::ArcSwap;
 use getset::Getters;
@@ -20,16 +21,11 @@ use std::{
     },
     time::Duration,
 };
-use tauri::{AppHandle, Emitter, Manager};
+use tauri::{AppHandle, Manager};
 
 use crate::{
-    error_handler::Result,
-    log_error,
-    modules::cli::domain::Resource,
-    seelen::{get_app_handle, SEELEN},
-    trace_lock,
-    utils::is_virtual_desktop_supported,
-    windows_api::WindowsApi,
+    error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
+    utils::is_virtual_desktop_supported, windows_api::WindowsApi,
 };
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
@@ -40,6 +36,8 @@ lazy_static! {
         FullState::new().expect("Failed to create State Manager")
     }));
 }
+
+pub type LauncherHistory = HashMap<String, Vec<String>>;
 
 #[derive(Getters, Debug, Clone, Serialize)]
 pub struct FullState {
@@ -64,6 +62,8 @@ pub struct FullState {
     layouts: HashMap<String, WindowManagerLayout>,
     #[getset(get = "pub")]
     weg_items: WegItems,
+    #[getset(get = "pub")]
+    history: LauncherHistory,
 }
 
 static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
@@ -83,6 +83,7 @@ impl FullState {
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
             weg_items: WegItems::default(),
+            history: HashMap::new(),
         };
         manager.load_all()?;
         manager.start_listeners()?;
@@ -110,6 +111,8 @@ impl FullState {
     fn process_event(&mut self, event: DebouncedEvent) -> Result<()> {
         let event = event.event;
 
+        let history_path = self.data_dir.join("history");
+
         let weg_items_path = self.data_dir.join("seelenweg_items.yaml");
 
         let user_themes = self.data_dir.join("themes");
@@ -129,6 +132,13 @@ impl FullState {
             self.load_weg_items()?;
             self.store_cloned();
             self.emit_weg_items()?;
+        }
+
+        if event.paths.contains(&history_path) {
+            log::info!("History changed");
+            self.load_history()?;
+            self.store_cloned();
+            self.emit_history()?;
         }
 
         if event.paths.contains(&self.settings_path()) {
@@ -206,11 +216,12 @@ impl FullState {
             },
         )?;
 
-        let paths = vec![
-            // settings
+        let paths: Vec<PathBuf> = vec![
+            // settings & user data
             self.settings_path(),
             self.data_dir.join("seelenweg_items.yaml"),
             self.data_dir.join("applications.yml"),
+            self.data_dir.join("history"),
             // resources
             self.data_dir.join("themes"),
             self.data_dir.join("placeholders"),
@@ -456,6 +467,16 @@ impl FullState {
         Ok(())
     }
 
+    fn load_history(&mut self) -> Result<()> {
+        let history_path = self.data_dir.join("history");
+        if history_path.exists() {
+            self.history = serde_yaml::from_str(&std::fs::read_to_string(&history_path)?)?;
+        } else {
+            std::fs::write(history_path, serde_yaml::to_string(&self.history)?)?;
+        }
+        Ok(())
+    }
+
     fn load_all(&mut self) -> Result<()> {
         self.load_settings()?;
         self.load_weg_items()?;
@@ -463,41 +484,7 @@ impl FullState {
         self.load_placeholders()?;
         self.load_layouts()?;
         self.load_settings_by_app()?;
-        Ok(())
-    }
-
-    fn emit_settings(&self) -> Result<()> {
-        self.handle.emit("settings-changed", self.settings())?;
-        trace_lock!(SEELEN).on_state_changed()?;
-        Ok(())
-    }
-
-    fn emit_weg_items(&self) -> Result<()> {
-        self.handle.emit("weg-items", self.weg_items())?;
-        Ok(())
-    }
-
-    fn emit_themes(&self) -> Result<()> {
-        self.handle
-            .emit("themes", self.themes().values().collect_vec())?;
-        Ok(())
-    }
-
-    fn emit_placeholders(&self) -> Result<()> {
-        self.handle
-            .emit("placeholders", self.placeholders().values().collect_vec())?;
-        Ok(())
-    }
-
-    fn emit_layouts(&self) -> Result<()> {
-        self.handle
-            .emit("layouts", self.layouts().values().collect_vec())?;
-        Ok(())
-    }
-
-    fn emit_settings_by_app(&self) -> Result<()> {
-        self.handle
-            .emit("settings-by-app", self.settings_by_app())?;
+        self.load_history()?;
         Ok(())
     }
 

@@ -93,7 +93,7 @@ impl Seelen {
         self.rofi = None;
     }
 
-    pub fn on_state_changed(&mut self) -> Result<()> {
+    pub fn on_settings_change(&mut self) -> Result<()> {
         let state = self.state();
 
         match state.is_ahk_enabled() {
