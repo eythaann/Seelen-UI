@@ -1,7 +1,6 @@
 # Changelog
 
 ## [Unreleased]
-## [2.0.0-beta.2]
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
 
@@ -17,6 +16,7 @@
 ### fix
 - missing icons for files with a different extension than `exe`.
 - losing cursor events on clicking a dock item.
+- app allowing be closed via Alt + F4.
 
 ## [1.10.6]
 ### fix

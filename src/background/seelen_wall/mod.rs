@@ -81,10 +81,10 @@ impl SeelenWall {
             tauri::WebviewUrl::App("seelen_wall/index.html".into()),
         )
         .title(Self::TITLE)
-        .maximizable(false)
         .minimizable(false)
-        .resizable(false)
+        .maximizable(false)
         .closable(false)
+        .resizable(false)
         .decorations(false)
         .shadow(false)
         .visible(false)

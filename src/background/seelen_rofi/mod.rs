@@ -115,8 +115,9 @@ impl SeelenRofi {
             tauri::WebviewUrl::App("seelen_rofi/index.html".into()),
         )
         .title(Self::TITLE)
-        .maximizable(false)
         .minimizable(false)
+        .maximizable(false)
+        .closable(false)
         .resizable(false)
         .visible(false) // change to false after finish development
         .transparent(true)
