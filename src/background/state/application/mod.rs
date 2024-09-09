@@ -243,10 +243,7 @@ impl FullState {
         let path_exists = path.exists();
         if path_exists {
             self.settings = Self::get_settings_from_path(path)?;
-        }
-
-        if self.settings.language.is_none() {
-            self.settings.language = Some(Settings::get_system_language());
+            self.settings.clean();
         }
 
         if !is_virtual_desktop_supported() {
@@ -263,7 +260,7 @@ impl FullState {
         let path = self.data_dir.join("seelenweg_items.yaml");
         if path.exists() {
             self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?;
-            self.weg_items.clean_all_items();
+            self.weg_items.clean();
         } else {
             std::fs::write(path, serde_yaml::to_string(&self.weg_items)?)?;
         }

@@ -1,0 +1,22 @@
+.backgroundList {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .background {
+    display: grid;
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    border-radius: 8px;
+    grid-template-columns: 100px 1fr 40px;
+    background-color: var(--color-white);
+  }
+
+  .backgroundAdd {
+    align-self: flex-end;
+    width: 40px;
+    margin: 8px 8px 0 0;
+  }
+}

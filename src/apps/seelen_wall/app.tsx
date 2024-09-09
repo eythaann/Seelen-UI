@@ -1,29 +1,31 @@
-import { convertFileSrc } from '@tauri-apps/api/core';
-import { ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
-const path = 'C:\\Users\\dlmqc\\Downloads\\white-moonflower-field-katana-moewalls-com.mp4';
+import { Wallpaper } from './modules/wallpaper/infra';
+
+import { Selectors } from './modules/shared/store/app';
+
+function useInterval(cb: () => void, ms: number) {
+  const ref = useRef<NodeJS.Timeout | null>(null);
+  const clearLastInterval = () => {
+    if (ref.current) {
+      clearInterval(ref.current);
+    }
+  };
+  useEffect(() => {
+    clearLastInterval();
+    ref.current = setInterval(cb, ms);
+    return clearLastInterval;
+  }, [ms]);
+}
 
 export function App() {
-  let wallpaper: ReactNode = null;
+  const [currentBg, setCurrentBg] = useState(0);
 
-  if (path.endsWith('.mp4')) {
-    wallpaper = (
-      <video
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        src={convertFileSrc(path)}
-        autoPlay
-        loop
-        muted
-        playsInline
-        disableRemotePlayback
-      />
-    );
-  }
+  const { backgrounds, interval } = useSelector(Selectors.settings);
 
-  return (
-    <>
-      {!wallpaper && <div className="wallpaper-empty">Seelen UI - No wallpaper</div>}
-      {wallpaper}
-    </>
-  );
+  useInterval(() => setCurrentBg((currentIdx) => currentIdx + 1), interval * 1000);
+
+  const background = backgrounds[currentBg % backgrounds.length];
+  return <Wallpaper path={background?.path || ''} />;
 }

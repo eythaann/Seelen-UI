@@ -1,7 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { Settings } from 'seelen-core';
 
-import { RootSlice } from './app';
+import { Actions, RootSlice } from './app';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
 });
+
+export async function initStore() {
+  let settings = await Settings.getAsync();
+
+  store.dispatch(Actions.setSettings(settings.wall));
+  Settings.onChange((settings) => {
+    store.dispatch(Actions.setSettings(settings.wall));
+  });
+}
