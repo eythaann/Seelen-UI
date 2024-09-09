@@ -1,7 +1,7 @@
 import { StartThemingTool } from '../../../../shared/styles';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
-import { InvokeHandler, UIColors } from 'seelen-core';
+import { InvokeHandler, Settings, UIColors } from 'seelen-core';
 
 import { RootActions, RootSlice } from './app';
 
@@ -19,7 +19,14 @@ async function initUIColors() {
 }
 
 export async function initStore() {
+  const settings = await Settings.getAsync();
+
   store.dispatch(RootActions.setApps(await invoke(InvokeHandler.GetLauncherApps)));
+  store.dispatch(RootActions.setSettings(settings.launcher));
+
+  Settings.onChange((settings) => {
+    store.dispatch(RootActions.setSettings(settings.launcher));
+  });
 
   await initUIColors();
   await StartThemingTool();

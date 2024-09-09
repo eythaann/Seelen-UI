@@ -82,7 +82,7 @@ export function AppLauncherSettings() {
           axis="y"
         >
           {runners.map((runner, idx) => (
-            <Reorder.Item key={runner.program || idx} value={runner} className={cs.runner}>
+            <Reorder.Item key={runner.id} value={runner} className={cs.runner}>
               <Input
                 value={runner.label}
                 placeholder="-"

@@ -87,6 +87,7 @@ impl SeelenWall {
         .closable(false)
         .decorations(false)
         .shadow(false)
+        .visible(false)
         .disable_drag_drop_handler()
         .skip_taskbar(true)
         // idk why I add this but lively wallpaper has it XD
