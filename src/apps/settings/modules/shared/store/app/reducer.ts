@@ -48,15 +48,27 @@ const initialState: RootState = {
   betaChannel: false,
 };
 
+function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {
+  return (state: S, action: A) => {
+    (state as RootState).toBeSaved = true;
+    return fn(state, action);
+  };
+}
+
+const reducers = reducersFor(initialState);
 export const RootSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    ...reducersFor(initialState),
+    ...reducers,
     setState: (_state, action: PayloadAction<RootState>) => {
       i18n.changeLanguage(action.payload.language);
       return action.payload;
     },
+    setWall: toBeSaved(reducers.setWall),
+    setLauncher: toBeSaved(reducers.setLauncher),
+    setDevTools: toBeSaved(reducers.setDevTools),
+    setBetaChannel: toBeSaved(reducers.setBetaChannel),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       state.toBeSaved = true;
@@ -78,14 +90,6 @@ export const RootSlice = createSlice({
         return newState;
       }
       return state;
-    },
-    setDevTools: (state, action: PayloadAction<boolean>) => {
-      state.toBeSaved = true;
-      state.devTools = action.payload;
-    },
-    setBetaChannel: (state, action: PayloadAction<boolean>) => {
-      state.toBeSaved = true;
-      state.betaChannel = action.payload;
     },
     setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
       let themes = new Set(action.payload);

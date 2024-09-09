@@ -1,9 +1,13 @@
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice } from '@reduxjs/toolkit';
+import { SeelenWallSettings, UIColors } from 'seelen-core';
 
 import { RootState } from './domain';
 
-const initialState: RootState = {};
+const initialState: RootState = {
+  settings: new SeelenWallSettings(),
+  colors: UIColors.default(),
+};
 
 export const RootSlice = createSlice({
   name: 'root',

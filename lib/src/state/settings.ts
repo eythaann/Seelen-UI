@@ -24,12 +24,33 @@ export enum SeelenWegSide {
   Bottom = 'Bottom',
 }
 
+export class SeelenWallWallpaper {
+  id: string = crypto.randomUUID();
+  path: string = '';
+}
+
 export class SeelenWallSettings {
   enabled: boolean = true;
+  backgrounds: SeelenWallWallpaper[] = [];
+  /** Interval in seconds */
+  interval: number = 60;
+}
+
+export enum SeelenLauncherMonitor {
+  Primary = 'Primary',
+  MouseOver = 'Mouse-Over',
+}
+
+export class SeelenLauncherRunner {
+  label: string = '';
+  program: string = '';
+  readonly: boolean = false;
 }
 
 export class SeelenLauncherSettings {
   enabled: boolean = true;
+  monitor: SeelenLauncherMonitor = SeelenLauncherMonitor.MouseOver;
+  runners: SeelenLauncherRunner[] = [];
 }
 
 export class Settings extends Obtainable<Settings>(

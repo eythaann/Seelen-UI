@@ -80,11 +80,12 @@ export function isValidIconName(str: string) {
 
 interface typesPropsIcon {
   iconName: IconName;
+  size?: string | number;
   propsIcon?: IconBaseProps;
 }
 
 export function Icon(props: typesPropsIcon) {
-  const { iconName, propsIcon } = props;
+  const { iconName, size, propsIcon } = props;
 
   const Icon = icons[iconName] || null;
 
@@ -94,7 +95,7 @@ export function Icon(props: typesPropsIcon) {
 
   return (
     <i className={cs.icon}>
-      <Icon {...propsIcon} />
+      <Icon size={size} {...propsIcon} />
     </i>
   );
 }

@@ -96,7 +96,7 @@ impl WegItems {
         result
     }
 
-    pub fn clean_all_items(&mut self) {
+    pub fn clean(&mut self) {
         let mut dict = HashSet::new();
         self.left = Self::clean_items(&mut dict, std::mem::take(&mut self.left));
         self.center = Self::clean_items(&mut dict, std::mem::take(&mut self.center));

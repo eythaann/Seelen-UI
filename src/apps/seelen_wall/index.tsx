@@ -3,7 +3,7 @@ import { wrapConsole } from '../shared/ConsoleWrapper';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
-import { store } from './modules/shared/store/infra';
+import { initStore, store } from './modules/shared/store/infra';
 
 import { App } from './app';
 
@@ -13,6 +13,8 @@ import './styles/global.css';
 
 async function Main() {
   wrapConsole();
+  await initStore();
+
   const container = getRootContainer();
   createRoot(container).render(
     <Provider store={store}>

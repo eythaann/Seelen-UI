@@ -237,7 +237,20 @@
     "launcher": {
       "description": "App launcher settings",
       "default": {
-        "enabled": true
+        "enabled": true,
+        "monitor": "Mouse-Over",
+        "runners": [
+          {
+            "label": "t:app_launcher.runners.explorer",
+            "program": "explorer.exe",
+            "readonly": true
+          },
+          {
+            "label": "t:app_launcher.runners.cmd",
+            "program": "cmd.exe",
+            "readonly": true
+          }
+        ]
       },
       "allOf": [
         {
@@ -307,7 +320,9 @@
     "wall": {
       "description": "background and virtual desktops config",
       "default": {
-        "enabled": true
+        "backgrounds": [],
+        "enabled": true,
+        "interval": 60
       },
       "allOf": [
         {
@@ -1021,21 +1036,100 @@
         }
       }
     },
+    "SeelenLauncherMonitor": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "Mouse-Over"
+      ]
+    },
+    "SeelenLauncherRunner": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "program": {
+          "default": "",
+          "type": "string"
+        },
+        "readonly": {
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
     "SeelenLauncherSettings": {
       "type": "object",
       "properties": {
         "enabled": {
           "default": true,
           "type": "boolean"
+        },
+        "monitor": {
+          "default": "Mouse-Over",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenLauncherMonitor"
+            }
+          ]
+        },
+        "runners": {
+          "default": [
+            {
+              "label": "t:app_launcher.runners.explorer",
+              "program": "explorer.exe",
+              "readonly": true
+            },
+            {
+              "label": "t:app_launcher.runners.cmd",
+              "program": "cmd.exe",
+              "readonly": true
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeelenLauncherRunner"
+          }
         }
       }
     },
     "SeelenWallSettings": {
       "type": "object",
       "properties": {
+        "backgrounds": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeelenWallWallpaper"
+          }
+        },
         "enabled": {
           "default": true,
           "type": "boolean"
+        },
+        "interval": {
+          "description": "update interval in seconds",
+          "default": 60,
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0.0
+        }
+      }
+    },
+    "SeelenWallWallpaper": {
+      "type": "object",
+      "required": [
+        "id",
+        "path"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
         }
       }
     },

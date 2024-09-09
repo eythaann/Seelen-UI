@@ -1,6 +1,9 @@
 /* In this file we use #[serde_alias(SnakeCase)] as backward compatibility from versions below v1.9.8 */
 
-use std::collections::HashMap;
+use std::{
+    collections::{HashMap, HashSet},
+    path::PathBuf,
+};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -75,6 +78,15 @@ impl Settings {
         match sys_locale::get_locale() {
             Some(l) => l.split('-').next().unwrap_or("en").to_string(),
             None => "en".to_string(),
+        }
+    }
+
+    pub fn clean(&mut self) {
+        self.launcher.clean();
+        self.wall.clean();
+
+        if self.language.is_none() {
+            self.language = Some(Self::get_system_language());
         }
     }
 }
@@ -305,28 +317,89 @@ impl Default for Monitor {
 // ================= Seelen Launcher ================
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub enum SeelenLauncherMonitor {
+    Primary,
+    #[serde(rename = "Mouse-Over")]
+    MouseOver,
+}
+
+#[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
+pub struct SeelenLauncherRunner {
+    pub label: String,
+    pub program: String,
+    pub readonly: bool,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenLauncherSettings {
     pub enabled: bool,
+    pub monitor: SeelenLauncherMonitor,
+    pub runners: Vec<SeelenLauncherRunner>,
 }
 
 impl Default for SeelenLauncherSettings {
     fn default() -> Self {
-        Self { enabled: true }
+        Self {
+            enabled: true,
+            monitor: SeelenLauncherMonitor::MouseOver,
+            runners: vec![
+                SeelenLauncherRunner {
+                    label: "t:app_launcher.runners.explorer".to_string(),
+                    program: "explorer.exe".to_string(),
+                    readonly: true,
+                },
+                SeelenLauncherRunner {
+                    label: "t:app_launcher.runners.cmd".to_string(),
+                    program: "cmd.exe".to_string(),
+                    readonly: true,
+                },
+            ],
+        }
+    }
+}
+
+impl SeelenLauncherSettings {
+    pub fn clean(&mut self) {
+        let mut dict = HashSet::new();
+        self.runners
+            .retain(|runner| !runner.program.is_empty() && dict.insert(runner.program.clone()));
     }
 }
 
 // ================= Seelen Wall ================
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct SeelenWallWallpaper {
+    pub id: String,
+    pub path: PathBuf,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
 pub struct SeelenWallSettings {
     pub enabled: bool,
+    pub backgrounds: Vec<SeelenWallWallpaper>,
+    /// update interval in seconds
+    pub interval: u64,
 }
 
 impl Default for SeelenWallSettings {
     fn default() -> Self {
-        Self { enabled: true }
+        Self {
+            enabled: true,
+            backgrounds: vec![],
+            interval: 60,
+        }
+    }
+}
+
+impl SeelenWallSettings {
+    pub fn clean(&mut self) {
+        self.backgrounds.retain(|b| b.path.exists());
     }
 }
 
