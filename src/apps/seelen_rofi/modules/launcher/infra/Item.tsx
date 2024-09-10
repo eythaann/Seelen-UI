@@ -1,12 +1,13 @@
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Dropdown, Menu } from 'antd';
+import { memo } from 'react';
 
 import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
 
 import { StartMenuApp } from '../../shared/store/domain';
 
-export const Item = ({ item, hidden }: { item: StartMenuApp; hidden: boolean }) => {
+export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolean }) => {
   const { label, icon, executionPath, path } = item;
 
   function onClick() {
@@ -44,4 +45,4 @@ export const Item = ({ item, hidden }: { item: StartMenuApp; hidden: boolean }) 
       </button>
     </Dropdown>
   );
-};
+});
