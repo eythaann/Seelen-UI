@@ -1,7 +1,8 @@
-import packageJson from '../package.json';
 import { execSync } from 'child_process';
 import { readFileSync } from 'fs';
 import toml from 'toml';
+
+import packageJson from '../package.json';
 
 let dependencies = { ...packageJson.dependencies, ...packageJson.devDependencies };
 let toUpdate: string[] = [];

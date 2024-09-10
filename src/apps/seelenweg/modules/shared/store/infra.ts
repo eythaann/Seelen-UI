@@ -1,9 +1,3 @@
-import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { FileChange, GlobalEvent } from '../../../../shared/events';
-import { FocusedApp } from '../../../../shared/interfaces/common';
-import { StartThemingTool } from '../../../../shared/styles';
-import i18n from '../../../i18n';
-import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
@@ -15,6 +9,13 @@ import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
 import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
+
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
+import { FileChange, GlobalEvent } from '../../../../shared/events';
+import { FocusedApp } from '../../../../shared/interfaces/common';
+import { StartThemingTool } from '../../../../shared/styles';
+import i18n from '../../../i18n';
+import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

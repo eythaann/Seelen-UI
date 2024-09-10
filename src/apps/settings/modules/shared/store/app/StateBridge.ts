@@ -1,8 +1,9 @@
-import { UserSettings } from '../../../../../../shared.interfaces';
 import { pick } from 'lodash';
 import { Settings } from 'seelen-core';
 
 import { RootState } from '../domain';
+
+import { UserSettings } from '../../../../../../shared.interfaces';
 
 export const StaticSettingsToState = (userSettings: UserSettings, state: RootState): RootState => {
   const { jsonSettings, yamlSettings, themes, layouts, placeholders, wallpaper } = userSettings;

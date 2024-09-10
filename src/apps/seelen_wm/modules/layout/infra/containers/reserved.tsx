@@ -1,9 +1,10 @@
-import { cx } from '../../../../../shared/styles';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
 
 import { Reservation } from '../../domain';
+
+import { cx } from '../../../../../shared/styles';
 
 export function ReservedContainer({ reservation }: { reservation: Reservation }) {
   const { floating } = useSelector(Selectors.settings);

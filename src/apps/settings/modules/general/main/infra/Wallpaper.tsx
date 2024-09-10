@@ -1,5 +1,3 @@
-import { Monitor } from '../../../../components/monitor';
-import { SettingsOption } from '../../../../components/SettingsBox';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +7,8 @@ import { dialog } from '../../../shared/tauri/infra';
 
 import { RootActions } from '../../../shared/store/app/reducer';
 
+import { Monitor } from '../../../../components/monitor';
+import { SettingsOption } from '../../../../components/SettingsBox';
 import cs from './index.module.css';
 
 export function Wallpaper() {

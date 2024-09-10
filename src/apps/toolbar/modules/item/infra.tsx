@@ -1,6 +1,3 @@
-import { exposedIcons, Icon, IconName } from '../../../shared/components/Icon';
-import { GenericToolbarModule, ToolbarModule } from '../../../shared/schemas/Placeholders';
-import { cx } from '../../../shared/styles';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
@@ -14,6 +11,10 @@ import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';
 import { performClick, safeEval, Scope } from './app';
+
+import { exposedIcons, Icon, IconName } from '../../../shared/components/Icon';
+import { GenericToolbarModule, ToolbarModule } from '../../../shared/schemas/Placeholders';
+import { cx } from '../../../shared/styles';
 
 interface Props extends PropsWithChildren {
   module: ToolbarModule;

@@ -1,4 +1,3 @@
-import { WlanSelectorEntry } from './WlanSelectorEntry';
 import { invoke } from '@tauri-apps/api/core';
 import { Popover } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
@@ -9,6 +8,8 @@ import { useWindowFocusChange } from 'seelen-core';
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
+
+import { WlanSelectorEntry } from './WlanSelectorEntry';
 
 function WlanSelector({ open }: { open: boolean }) {
   const [selected, setSelected] = useState<string | null>(null);

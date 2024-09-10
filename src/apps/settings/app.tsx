@@ -1,7 +1,3 @@
-import { useDarkMode } from '../shared/styles';
-import { Header } from './components/header';
-import { Navigation } from './components/navigation';
-import { Route } from './components/navigation/routes';
 import { ConfigProvider, theme } from 'antd';
 import { Suspense, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -20,6 +16,11 @@ import { WindowManagerSettings } from './modules/WindowManager/main/infra';
 
 import { newSelectors } from './modules/shared/store/app/reducer';
 import { RootSelectors } from './modules/shared/store/app/selectors';
+
+import { useDarkMode } from '../shared/styles';
+import { Header } from './components/header';
+import { Navigation } from './components/navigation';
+import { Route } from './components/navigation/routes';
 
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.GENERAL]: General,

@@ -1,5 +1,3 @@
-import { Icon } from '../../../../shared/components/Icon';
-import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Popover, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
@@ -15,6 +13,9 @@ import { selectDefaultOutput, Selectors } from '../../shared/store/app';
 import { calcLuminance } from '../application';
 
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
+
+import { Icon } from '../../../../shared/components/Icon';
+import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 
 import './index.css';
 

@@ -1,9 +1,10 @@
-import { StartThemingTool } from '../../../../shared/styles';
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { InvokeHandler, LauncherHistory, Settings, UIColors } from 'seelen-core';
 
 import { Actions, RootSlice } from './app';
+
+import { StartThemingTool } from '../../../../shared/styles';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

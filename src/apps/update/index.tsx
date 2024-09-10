@@ -1,11 +1,12 @@
-import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
-import { getRootContainer } from '../shared';
-import { wrapConsole } from '../shared/ConsoleWrapper';
-import i18n, { loadTranslations } from './i18n';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 
 import { App } from './app';
+
+import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
+import { getRootContainer } from '../shared';
+import { wrapConsole } from '../shared/ConsoleWrapper';
+import i18n, { loadTranslations } from './i18n';
 
 import './styles/colors.css';
 import './styles/reset.css';

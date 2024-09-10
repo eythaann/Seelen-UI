@@ -1,4 +1,3 @@
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Switch } from 'antd';
@@ -9,6 +8,8 @@ import { resolveDataPath } from '../shared/config/infra';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 import { LoadCustomConfigFile } from './app';
+
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export function DeveloperTools() {
   const devTools = useSelector(newSelectors.devTools);

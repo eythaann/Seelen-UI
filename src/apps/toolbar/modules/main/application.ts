@@ -1,13 +1,14 @@
-import {
-  saveJsonSettings,
-  UserSettingsLoader,
-} from '../../../settings/modules/shared/store/storeApi';
 import { path } from '@tauri-apps/api';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { cloneDeep, debounce } from 'lodash';
 
 import { store } from '../shared/store/infra';
+
+import {
+  saveJsonSettings,
+  UserSettingsLoader,
+} from '../../../settings/modules/shared/store/storeApi';
 
 export const IsSavingCustom = {
   current: false,

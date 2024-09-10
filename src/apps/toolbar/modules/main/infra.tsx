@@ -1,11 +1,3 @@
-import {
-  Placeholder,
-  ToolbarModule,
-  ToolbarModuleType,
-} from '../../../shared/schemas/Placeholders';
-import { cx } from '../../../shared/styles';
-import { TrayModule } from '../Tray';
-import { WorkspacesModule } from '../Workspaces';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useState } from 'react';
@@ -24,6 +16,15 @@ import { SettingsModule } from '../Settings/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
+
+import {
+  Placeholder,
+  ToolbarModule,
+  ToolbarModuleType,
+} from '../../../shared/schemas/Placeholders';
+import { cx } from '../../../shared/styles';
+import { TrayModule } from '../Tray';
+import { WorkspacesModule } from '../Workspaces';
 
 const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
   [ToolbarModuleType.Text]: Item,

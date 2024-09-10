@@ -1,4 +1,3 @@
-import { savePinnedItems } from '../shared/store/storeApi';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, MenuProps, Popover } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
@@ -10,6 +9,8 @@ import { store } from '../shared/store/infra';
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
 import { AppsSides, ExtendedPinnedWegItem, ExtendedTemporalWegItem } from '../shared/store/domain';
+
+import { savePinnedItems } from '../shared/store/storeApi';
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {
   return [

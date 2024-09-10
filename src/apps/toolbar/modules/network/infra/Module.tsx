@@ -1,5 +1,3 @@
-import { NetworkTM } from '../../../../shared/schemas/Placeholders';
-import { WithWlanSelector } from './WlanSelector';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,6 +5,9 @@ import { useSelector } from 'react-redux';
 import { Item } from '../../item/infra';
 
 import { Selectors } from '../../shared/store/app';
+
+import { NetworkTM } from '../../../../shared/schemas/Placeholders';
+import { WithWlanSelector } from './WlanSelector';
 
 interface Props {
   module: NetworkTM;

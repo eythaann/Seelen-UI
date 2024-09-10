@@ -1,5 +1,3 @@
-import { StateBuilder } from '../../../../shared/StateBuilder';
-import { savePinnedItems } from './storeApi';
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { SeelenWegSettings, SwItemType, UIColors } from 'seelen-core';
 
@@ -14,6 +12,9 @@ import {
   RootState,
   SwItem,
 } from './domain';
+
+import { StateBuilder } from '../../../../shared/StateBuilder';
+import { savePinnedItems } from './storeApi';
 
 const initialState: RootState = {
   itemsOnLeft: [],

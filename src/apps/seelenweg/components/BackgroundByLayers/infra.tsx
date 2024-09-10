@@ -1,7 +1,8 @@
-import { cx } from '../../../shared/styles';
 import { HTMLAttributes, PropsWithChildren } from 'react';
 
 import cs from './infra.module.css';
+
+import { cx } from '../../../shared/styles';
 
 interface PropsV2 extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {
   className?: string;

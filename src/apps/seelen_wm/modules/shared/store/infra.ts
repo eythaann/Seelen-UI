@@ -1,6 +1,3 @@
-import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { FileChange } from '../../../../shared/events';
-import { StartThemingTool } from '../../../../shared/styles';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { UIColors, WindowManagerSettings } from 'seelen-core';
@@ -9,6 +6,10 @@ import { RootActions, RootSlice } from './app';
 
 import { Reservation, Sizing } from '../../layout/domain';
 import { AddWindowPayload, DesktopId, FocusAction } from './domain';
+
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
+import { FileChange } from '../../../../shared/events';
+import { StartThemingTool } from '../../../../shared/styles';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,

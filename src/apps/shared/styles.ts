@@ -1,8 +1,9 @@
-import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect, useState } from 'react';
 import { EventHandler, Settings, Theme } from 'seelen-core';
+
+import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
 type Args = undefined | string | { [x: string]: any };
 export const cx = (...args: Args[]): string => {

@@ -1,6 +1,3 @@
-import { defaultLayout } from '../../../../../shared.interfaces';
-import { toPhysicalPixels } from '../../../../shared';
-import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';
@@ -10,6 +7,10 @@ import { NodeImpl, reIndexContainer } from '../../layout/app';
 
 import { Reservation, Sizing } from '../../layout/domain';
 import { AddWindowPayload, DesktopId, FocusAction, RootState } from './domain';
+
+import { defaultLayout } from '../../../../../shared.interfaces';
+import { toPhysicalPixels } from '../../../../shared';
+import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   version: 0,

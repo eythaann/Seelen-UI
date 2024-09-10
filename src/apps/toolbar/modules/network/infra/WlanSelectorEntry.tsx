@@ -1,11 +1,12 @@
-import { Icon, IconName } from '../../../../shared/components/Icon';
-import { cx } from '../../../../shared/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { WlanBssEntry, WlanProfile } from '../domain';
+
+import { Icon, IconName } from '../../../../shared/components/Icon';
+import { cx } from '../../../../shared/styles';
 
 export function WlanSelectorEntry(props: {
   entry: WlanBssEntry;

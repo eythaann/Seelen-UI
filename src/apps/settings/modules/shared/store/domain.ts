@@ -1,9 +1,10 @@
-import { Layout } from '../../../../shared/schemas/Layout';
-import { Placeholder } from '../../../../shared/schemas/Placeholders';
-import { Route } from '../../../components/navigation/routes';
 import { Settings, Theme, UIColors } from 'seelen-core';
 
 import { AppConfiguration } from '../../appsConfigurations/domain';
+
+import { Layout } from '../../../../shared/schemas/Layout';
+import { Placeholder } from '../../../../shared/schemas/Placeholders';
+import { Route } from '../../../components/navigation/routes';
 
 export interface RootState extends Settings {
   lastLoaded: this | null;

@@ -1,11 +1,12 @@
-import { toPhysicalPixels } from '../../../../../shared';
-import { cx } from '../../../../../shared/styles';
-import { ReservedContainer } from './reserved';
 import { invoke } from '@tauri-apps/api/core';
 import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../../../shared/store/app';
+
+import { toPhysicalPixels } from '../../../../../shared';
+import { cx } from '../../../../../shared/styles';
+import { ReservedContainer } from './reserved';
 
 interface Props {
   hwnd: number;

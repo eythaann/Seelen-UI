@@ -1,5 +1,3 @@
-import { ExportApps } from '../../shared/store/storeApi';
-import { EditAppModal } from './EditModal';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import { TFunction } from 'i18next';
@@ -17,6 +15,8 @@ import { AppsConfigActions } from '../app/reducer';
 
 import { AppConfiguration, AppConfigurationExtended, WmApplicationOptions } from '../domain';
 
+import { ExportApps } from '../../shared/store/storeApi';
+import { EditAppModal } from './EditModal';
 import cs from './index.module.css';
 
 const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index: number) => {

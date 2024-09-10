@@ -1,13 +1,14 @@
-import { getRootContainer } from '../shared';
-import { useDarkMode } from '../shared/styles';
-import { ErrorBoundary } from './components/Error';
-import { SeelenWeg } from './modules/bar';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from './modules/shared/store/app';
+
+import { getRootContainer } from '../shared';
+import { useDarkMode } from '../shared/styles';
+import { ErrorBoundary } from './components/Error';
+import { SeelenWeg } from './modules/bar';
 
 async function onMount() {
   let view = getCurrentWebviewWindow();

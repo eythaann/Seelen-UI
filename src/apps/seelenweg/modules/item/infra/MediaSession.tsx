@@ -1,7 +1,3 @@
-import { Icon } from '../../../../shared/components/Icon';
-import { WithContextMenu } from '../../../components/WithContextMenu';
-import { DraggableItem } from './DraggableItem';
-import { getMenuForItem } from './Menu';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Button } from 'antd';
@@ -14,6 +10,11 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { calcLuminance } from '../../../../toolbar/modules/media/application';
 import { Selectors } from '../../shared/store/app';
+
+import { Icon } from '../../../../shared/components/Icon';
+import { WithContextMenu } from '../../../components/WithContextMenu';
+import { DraggableItem } from './DraggableItem';
+import { getMenuForItem } from './Menu';
 
 import './MediaSession.css';
 

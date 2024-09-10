@@ -1,4 +1,3 @@
-import i18n from '../../i18n';
 import { Modal } from 'antd';
 
 import { SaveStore, store } from '../shared/store/infra';
@@ -6,6 +5,7 @@ import { startup } from '../shared/tauri/infra';
 
 import { RootActions } from '../shared/store/app/reducer';
 
+import i18n from '../../i18n';
 import cs from './index.module.css';
 
 export const StartUser = () => {

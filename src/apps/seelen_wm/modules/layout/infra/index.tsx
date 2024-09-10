@@ -1,12 +1,13 @@
-import { cx } from '../../../../shared/styles';
-import { FallbackContainer } from './containers/fallback';
-import { LeafContainer } from './containers/leaf';
 import { useSelector } from 'react-redux';
 
 import { SelectCurrentWorkspace, Selectors } from '../../shared/store/app';
 import { NodeImpl } from '../app';
 
 import { Node } from '../domain';
+
+import { cx } from '../../../../shared/styles';
+import { FallbackContainer } from './containers/fallback';
+import { LeafContainer } from './containers/leaf';
 
 import './index.css';
 

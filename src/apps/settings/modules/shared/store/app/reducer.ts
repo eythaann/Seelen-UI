@@ -1,6 +1,3 @@
-import { StateBuilder } from '../../../../../shared/StateBuilder';
-import { Route } from '../../../../components/navigation/routes';
-import i18n from '../../../../i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cloneDeep, pick } from 'lodash';
 import {
@@ -20,6 +17,10 @@ import { SeelenManagerSlice } from '../../../WindowManager/main/app';
 import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 
 import { RootState } from '../domain';
+
+import { StateBuilder } from '../../../../../shared/StateBuilder';
+import { Route } from '../../../../components/navigation/routes';
+import i18n from '../../../../i18n';
 
 const initialState: RootState = {
   lastLoaded: null,

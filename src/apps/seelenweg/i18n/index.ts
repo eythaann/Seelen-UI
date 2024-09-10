@@ -1,7 +1,8 @@
-import { Lang } from '../../shared/lang';
 import i18n from 'i18next';
 import yaml from 'js-yaml';
 import { initReactI18next } from 'react-i18next';
+
+import { Lang } from '../../shared/lang';
 
 i18n.use(initReactI18next).init(
   {

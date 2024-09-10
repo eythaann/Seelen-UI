@@ -1,10 +1,9 @@
 import { UIColors } from 'seelen-core';
 import { Settings, Theme } from 'seelen-core';
 
+import { AppConfiguration } from './apps/settings/modules/appsConfigurations/domain';
 import { Layout, LayoutSchema, NoFallbackBehavior } from './apps/shared/schemas/Layout';
 import { Placeholder } from './apps/shared/schemas/Placeholders';
-
-import { AppConfiguration } from './apps/settings/modules/appsConfigurations/domain';
 export interface IRootState<T> {
   settings: T;
   colors: UIColors;

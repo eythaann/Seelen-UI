@@ -1,4 +1,3 @@
-import { SettingsGroup } from '../../../components/SettingsBox';
 import { Button, Input, Select, Space } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -12,6 +11,8 @@ import { AdvancedConfig } from './infra_advanced';
 import { getMonitorSelector, RootSelectors, SeelenWmSelectors } from '../../shared/store/app/selectors';
 import { defaultOnNull } from '../../shared/utils/app';
 import { MonitorsActions } from './app';
+
+import { SettingsGroup } from '../../../components/SettingsBox';
 
 export const MonitorConfig = ({ monitorIdx }: { monitorIdx: number }) => {
   const [newWorkspaceName, setNewWorkspaceName] = useState('');

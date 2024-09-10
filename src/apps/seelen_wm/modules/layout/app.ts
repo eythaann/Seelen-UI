@@ -1,3 +1,10 @@
+import { clone } from 'lodash';
+import { evaluate } from 'mathjs';
+
+import { FocusAction } from '../shared/store/domain';
+import { HWND } from '../shared/utils/domain';
+import { BranchNode, Node, Reservation, Sizing } from './domain';
+
 import {
   FallbackNode,
   HorizontalBranchNode,
@@ -7,12 +14,6 @@ import {
   StackNode,
   VerticalBranchNode,
 } from '../../../shared/schemas/Layout';
-import { clone } from 'lodash';
-import { evaluate } from 'mathjs';
-
-import { FocusAction } from '../shared/store/domain';
-import { HWND } from '../shared/utils/domain';
-import { BranchNode, Node, Reservation, Sizing } from './domain';
 
 export function clearContainer(container: Node): void {
   switch (container.type) {

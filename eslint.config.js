@@ -23,9 +23,9 @@ module.exports = [
           groups: [
             [''],
             ['.*/(infra|infrastructure).*'],
-            ['.*/app'],
+            ['.*/app.*'],
             ['.*/domain.*'],
-            ['.*.module.css$'],
+            ['\\.+/', '.*.module.css$'],
             ['.*.css$'],
           ],
         },
