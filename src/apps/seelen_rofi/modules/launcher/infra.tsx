@@ -77,7 +77,21 @@ export function Launcher() {
     }
   });
 
-  const onKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
+  const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    if (!showHistory || matchingHistory.length === 0) {
+      if (e.key === 'Enter') {
+        invoke('open_file', { path: command });
+        getCurrentWindow().hide();
+        SaveHistory({
+          ...history,
+          [selectedRunner]: [...new Set([command, ...(history[selectedRunner] || [])])],
+        });
+        return;
+      }
+    }
+  };
+
+  const onDocumentKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.ctrlKey && e.key === 'Tab') {
       setSelectedRunner(
         (current) => (e.shiftKey ? current + runners.length - 1 : current + 1) % runners.length,
@@ -94,18 +108,6 @@ export function Launcher() {
       inputRef.current?.focus();
       return;
     }
-
-    if (!showHistory || matchingHistory.length === 0) {
-      if (e.key === 'Enter') {
-        invoke('open_file', { path: command });
-        getCurrentWindow().hide();
-        SaveHistory({
-          ...history,
-          [selectedRunner]: [...new Set([command, ...(history[selectedRunner] || [])])],
-        });
-        return;
-      }
-    }
   };
 
   const selectedHistory = history[selectedRunner] || [];
@@ -116,7 +118,7 @@ export function Launcher() {
   const items = apps.filter((item) => item.label.toLowerCase().includes(command.toLowerCase()));
 
   return (
-    <motion.div className="launcher" onKeyDown={onKeyDown}>
+    <motion.div className="launcher" onKeyDown={onDocumentKeyDown}>
       <div className="launcher-header">
         <Tooltip open={showHelp} title="Ctrl + Tab" placement="left">
           <Select
@@ -149,6 +151,7 @@ export function Launcher() {
               onChange={setCommand}
               open={showHistory}
               onDropdownVisibleChange={setShowHistory}
+              onInputKeyDown={onInputKeyDown}
               autoFocus
               allowClear
             />
