@@ -1,4 +1,3 @@
-import { RouteExtraInfo } from '../navigation/routes';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { relaunch } from '@tauri-apps/plugin-process';
 import { Button, Tooltip } from 'antd';
@@ -11,6 +10,7 @@ import { useAppSelector } from '../../modules/shared/utils/infra';
 import { RootActions } from '../../modules/shared/store/app/reducer';
 import { RootSelectors } from '../../modules/shared/store/app/selectors';
 
+import { RouteExtraInfo } from '../navigation/routes';
 import cs from './index.module.css';
 
 export const Header = () => {

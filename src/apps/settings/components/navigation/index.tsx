@@ -1,4 +1,3 @@
-import { Route, RouteIcons, WorkingInProgressRoutes } from './routes';
 import { Tooltip } from 'antd';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +8,7 @@ import { RootActions } from '../../modules/shared/store/app/reducer';
 import { RootSelectors } from '../../modules/shared/store/app/selectors';
 import { cx } from '../../modules/shared/utils/app';
 
+import { Route, RouteIcons, WorkingInProgressRoutes } from './routes';
 import cs from './index.module.css';
 
 interface ItemProps {

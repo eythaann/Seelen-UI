@@ -1,4 +1,3 @@
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { invoke } from '@tauri-apps/api/core';
 import { ColorPicker } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -6,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { newSelectors } from '../../../shared/store/app/reducer';
 
+import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import cs from './index.module.css';
 
 export function Colors() {

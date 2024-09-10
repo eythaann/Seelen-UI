@@ -1,5 +1,3 @@
-import { NotificationsTM } from '../../../../shared/schemas/Placeholders';
-import { Notifications } from './Notifications';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
 import { useEffect, useState } from 'react';
@@ -11,6 +9,9 @@ import { Item } from '../../item/infra';
 import { Selectors } from '../../shared/store/app';
 
 import { RootState } from '../../shared/store/domain';
+
+import { NotificationsTM } from '../../../../shared/schemas/Placeholders';
+import { Notifications } from './Notifications';
 
 interface Props {
   module: NotificationsTM;

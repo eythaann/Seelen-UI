@@ -1,4 +1,3 @@
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +7,8 @@ import { newSelectors } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
 import { OptionsFromEnum } from '../shared/utils/app';
 import { FancyToolbarActions } from './app';
+
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export function FancyToolbarSettings() {
   const settings = useSelector(RootSelectors.fancyToolbar);

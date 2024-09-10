@@ -1,4 +1,3 @@
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Button, Input, Select, Switch } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +8,7 @@ import { newSelectors, RootActions } from '../shared/store/app/reducer';
 import { OptionsFromEnum } from '../shared/utils/app';
 import { Icon } from 'src/apps/shared/components/Icon';
 
+import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import cs from './index.module.css';
 
 export function AppLauncherSettings() {

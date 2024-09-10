@@ -1,6 +1,3 @@
-import { IdWithIdentifier } from '../../../../shared/schemas/AppsConfigurations';
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
-import { Identifier } from './Identifier';
 import { createSelector } from '@reduxjs/toolkit';
 import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
@@ -17,6 +14,9 @@ import {
   WmApplicationOptions,
 } from '../domain';
 
+import { IdWithIdentifier } from '../../../../shared/schemas/AppsConfigurations';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
+import { Identifier } from './Identifier';
 import cs from './index.module.css';
 
 interface Props {

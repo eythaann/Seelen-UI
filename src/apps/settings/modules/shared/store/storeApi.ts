@@ -1,11 +1,12 @@
-import { UserSettings } from '../../../../../shared.interfaces';
-import { VariableConvention } from '../../../../shared/schemas';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
 
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
+
+import { UserSettings } from '../../../../../shared.interfaces';
+import { VariableConvention } from '../../../../shared/schemas';
 
 export class UserSettingsLoader {
   private _withUserApps: boolean = false;

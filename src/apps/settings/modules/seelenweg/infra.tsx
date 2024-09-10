@@ -1,4 +1,3 @@
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { Button, InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { HideMode, SeelenWegMode, SeelenWegSide } from 'seelen-core';
@@ -9,6 +8,8 @@ import { RootSelectors } from '../shared/store/app/selectors';
 import { OptionsFromEnum } from '../shared/utils/app';
 import { SeelenWegActions } from './app';
 import { Icon } from 'src/apps/shared/components/Icon';
+
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export const SeelenWegSettings = () => {
   const settings = useAppSelector(RootSelectors.seelenweg);

@@ -1,4 +1,3 @@
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { Button, InputNumber, Modal } from 'antd';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -9,6 +8,8 @@ import cs from './infra.module.css';
 import { getMonitorSelector, getWorkspaceSelector } from '../../shared/store/app/selectors';
 import { Rect } from '../../shared/utils/app/Rect';
 import { MonitorsActions } from './app';
+
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 
 interface Props {
   workspaceIdx: number;

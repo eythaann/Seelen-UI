@@ -1,5 +1,3 @@
-import { OverflowTooltip } from '../../../shared/components/OverflowTooltip';
-import { TrayTM } from '../../../shared/schemas/Placeholders';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
@@ -15,6 +13,9 @@ import { LAZY_CONSTANTS } from '../shared/utils/infra';
 import { Selectors } from '../shared/store/app';
 
 import { TrayInfo } from '../shared/store/domain';
+
+import { OverflowTooltip } from '../../../shared/components/OverflowTooltip';
+import { TrayTM } from '../../../shared/schemas/Placeholders';
 
 interface Props {
   module: TrayTM;

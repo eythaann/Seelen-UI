@@ -1,5 +1,3 @@
-import { ErrorBoundary } from '../seelenweg/components/Error';
-import { wrapConsole } from '../shared/ConsoleWrapper';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -7,6 +5,9 @@ import { Provider } from 'react-redux';
 
 import { Layout } from './modules/layout/infra';
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
+
+import { ErrorBoundary } from '../seelenweg/components/Error';
+import { wrapConsole } from '../shared/ConsoleWrapper';
 
 import './styles/colors.css';
 import './styles/variables.css';

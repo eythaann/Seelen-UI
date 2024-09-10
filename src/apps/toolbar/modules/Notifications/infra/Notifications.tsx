@@ -1,4 +1,3 @@
-import { Icon } from '../../../../shared/components/Icon';
 import { invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -8,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
+
+import { Icon } from '../../../../shared/components/Icon';
 
 // Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
 const EPOCH_DIFF_MILLISECONDS = 11644473600000n;

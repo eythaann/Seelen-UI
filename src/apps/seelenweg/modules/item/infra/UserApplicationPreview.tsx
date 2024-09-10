@@ -1,4 +1,3 @@
-import { Icon } from '../../../../shared/components/Icon';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { Spin } from 'antd';
@@ -10,6 +9,8 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 import { SelectOpenApp } from '../../shared/store/app';
 
 import { HWND } from '../../shared/store/domain';
+
+import { Icon } from '../../../../shared/components/Icon';
 
 interface PreviewProps {
   hwnd: HWND;

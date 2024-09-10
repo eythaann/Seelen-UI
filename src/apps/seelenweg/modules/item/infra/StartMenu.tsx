@@ -1,6 +1,3 @@
-import { WithContextMenu } from '../../../components/WithContextMenu';
-import { DraggableItem } from './DraggableItem';
-import { getMenuForItem } from './Menu';
 import { invoke } from '@tauri-apps/api/core';
 import { motion } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
@@ -13,6 +10,10 @@ import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/inf
 import { Selectors } from '../../shared/store/app';
 
 import { RootState } from '../../shared/store/domain';
+
+import { WithContextMenu } from '../../../components/WithContextMenu';
+import { DraggableItem } from './DraggableItem';
+import { getMenuForItem } from './Menu';
 
 interface Props {
   item: StartWegItem;

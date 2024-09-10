@@ -1,8 +1,9 @@
-import { StateBuilder } from '../../../../shared/StateBuilder';
 import { createSlice } from '@reduxjs/toolkit';
 import { SeelenLauncherSettings, UIColors } from 'seelen-core';
 
 import { LauncherState } from './domain';
+
+import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: LauncherState = {
   colors: UIColors.default(),

@@ -1,5 +1,3 @@
-import { VariableConvention } from '../../../shared/schemas';
-import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 import { Input, Switch, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +6,9 @@ import { AhkVarList } from 'seelen-core';
 import { RootActions } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';
 import { AhkVariablesActions, KeyCodeToAHK } from './app';
+
+import { VariableConvention } from '../../../shared/schemas';
+import { SettingsGroup, SettingsOption } from '../../components/SettingsBox';
 
 export function Shortcuts() {
   const ahkEnable = useSelector(RootSelectors.ahkEnabled);

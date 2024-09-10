@@ -1,10 +1,10 @@
-import { cx } from '../../../shared/styles';
 import { motion, useAnimationControls } from 'framer-motion';
 import { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 
 import { newSelectors } from '../../modules/shared/store/app/reducer';
 
+import { cx } from '../../../shared/styles';
 import cs from './index.module.css';
 
 interface Props extends PropsWithChildren, React.HTMLAttributes<HTMLDivElement> {}

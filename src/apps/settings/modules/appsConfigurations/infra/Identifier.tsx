@@ -1,3 +1,8 @@
+import { Button, Input, Select, Switch } from 'antd';
+import { useTranslation } from 'react-i18next';
+
+import { OptionsFromEnum } from '../../shared/utils/app';
+
 import { Icon } from '../../../../shared/components/Icon';
 import {
   ApplicationIdentifier,
@@ -5,11 +10,6 @@ import {
   MatchingStrategy,
 } from '../../../../shared/schemas/AppsConfigurations';
 import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
-import { Button, Input, Select, Switch } from 'antd';
-import { useTranslation } from 'react-i18next';
-
-import { OptionsFromEnum } from '../../shared/utils/app';
-
 import cs from './Identifier.module.css';
 
 interface Props {

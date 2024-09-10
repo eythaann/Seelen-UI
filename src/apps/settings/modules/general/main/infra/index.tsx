@@ -1,8 +1,3 @@
-import { LanguageList } from '../../../../../shared/lang';
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
-import { Colors } from './Colors';
-import { Themes } from './Themes';
-import { Wallpaper } from './Wallpaper';
 import { Select, Switch } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +8,12 @@ import { useAppDispatch } from '../../../shared/utils/infra';
 
 import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
+
+import { LanguageList } from '../../../../../shared/lang';
+import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
+import { Colors } from './Colors';
+import { Themes } from './Themes';
+import { Wallpaper } from './Wallpaper';
 
 export function General() {
   const [changingAutostart, setChangingAutostart] = useState(false);

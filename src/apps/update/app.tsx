@@ -1,10 +1,11 @@
-import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
-import { useDarkMode } from '../shared/styles';
-import { UpdateModal } from './update';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { check, Update } from '@tauri-apps/plugin-updater';
 import { ConfigProvider, theme } from 'antd';
 import { useEffect, useState } from 'react';
+
+import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
+import { useDarkMode } from '../shared/styles';
+import { UpdateModal } from './update';
 
 export function App() {
   const [update, setUpdate] = useState<Update | null>(null);

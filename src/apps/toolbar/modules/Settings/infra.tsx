@@ -1,5 +1,3 @@
-import { Icon } from '../../../shared/components/Icon';
-import { SettingsToolbarModule } from '../../../shared/schemas/Placeholders';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Popover, Slider, Tooltip } from 'antd';
@@ -15,6 +13,9 @@ import { VolumeControl } from '../media/infra/MediaControls';
 import { Selectors } from '../shared/store/app';
 
 import { RootState } from '../shared/store/domain';
+
+import { Icon } from '../../../shared/components/Icon';
+import { SettingsToolbarModule } from '../../../shared/schemas/Placeholders';
 
 interface Props {
   module: SettingsToolbarModule;

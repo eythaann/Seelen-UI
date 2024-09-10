@@ -1,8 +1,9 @@
-import { mocked_desktops } from '../mock';
 import * as d3 from 'd3';
 import { useEffect, useRef } from 'react';
 
 import { Placement } from '../../shared/store/domain';
+
+import { mocked_desktops } from '../mock';
 
 const data = {
   nodes: mocked_desktops.map((d) => d.asData()),

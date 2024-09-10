@@ -1,5 +1,3 @@
-import { FileChange } from '../../../../shared/events';
-import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
@@ -8,11 +6,14 @@ import { Settings, Theme, UIColors } from 'seelen-core';
 
 import { startup } from '../tauri/infra';
 
+import { AppConfiguration } from '../../appsConfigurations/domain';
 import { RootActions, RootReducer } from './app/reducer';
 import { StateToJsonSettings, StaticSettingsToState } from './app/StateBridge';
 
-import { AppConfiguration } from '../../appsConfigurations/domain';
 import { RootState } from './domain';
+
+import { FileChange } from '../../../../shared/events';
+import { saveUserSettings, UserSettingsLoader } from './storeApi';
 
 const IsSavingSettings = { current: false };
 

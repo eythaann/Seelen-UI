@@ -1,11 +1,12 @@
-import { getRootContainer } from '../shared';
-import { wrapConsole } from '../shared/ConsoleWrapper';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import { store } from './modules/shared/store/infra';
 
 import { App } from './app';
+
+import { getRootContainer } from '../shared';
+import { wrapConsole } from '../shared/ConsoleWrapper';
 
 import './styles/colors.css';
 import './styles/reset.css';

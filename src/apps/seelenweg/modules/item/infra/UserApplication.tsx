@@ -1,8 +1,3 @@
-import { cx } from '../../../../shared/styles';
-import { WithContextMenu } from '../../../components/WithContextMenu';
-import { getMenuForItem } from '../../bar/menu';
-import { DraggableItem } from './DraggableItem';
-import { UserApplicationPreview } from './UserApplicationPreview';
 import { invoke } from '@tauri-apps/api/core';
 import { Popover } from 'antd';
 import { motion } from 'framer-motion';
@@ -21,6 +16,12 @@ import {
   ExtendedTemporalWegItem,
   RootState,
 } from '../../shared/store/domain';
+
+import { cx } from '../../../../shared/styles';
+import { WithContextMenu } from '../../../components/WithContextMenu';
+import { getMenuForItem } from '../../bar/menu';
+import { DraggableItem } from './DraggableItem';
+import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
   item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;

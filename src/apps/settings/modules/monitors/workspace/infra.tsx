@@ -1,4 +1,3 @@
-import { SettingsOption } from '../../../components/SettingsBox';
 import { InputNumber, Select } from 'antd';
 import { useDispatch } from 'react-redux';
 
@@ -10,6 +9,8 @@ import { OptionsFromEnum } from '../../shared/utils/app';
 import { MonitorsActions } from '../main/app';
 
 import { Layout } from '../layouts/domain';
+
+import { SettingsOption } from '../../../components/SettingsBox';
 
 interface Props {
   monitorIdx: number;

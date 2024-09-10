@@ -1,63 +1,20 @@
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { AutoComplete, Checkbox, Dropdown, Menu, Select, Tooltip } from 'antd';
+import { AutoComplete, Checkbox, Select, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import { KeyboardEventHandler, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useWindowFocusChange } from 'seelen-core';
 
-import { Selectors } from '../shared/store/app';
-import { SaveHistory } from './app';
-import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
+import { Selectors } from '../../shared/store/app';
+import { SaveHistory } from '../app';
 
-interface Item {
-  label: string;
-  icon: string;
-  path: string;
-  executionPath: string;
-}
-
-export function Item(props: { item: Item }) {
-  const {
-    item: { label, icon, executionPath, path },
-  } = props;
-
-  function onClick() {
-    invoke('open_file', { path: executionPath });
-    getCurrentWindow().hide();
-  }
-
-  let shortPath = executionPath.slice(executionPath.indexOf('\\Programs\\') + 10);
-  return (
-    <Dropdown
-      trigger={['contextMenu']}
-      dropdownRender={() => (
-        <Menu
-          items={[
-            {
-              label: 'Open File Location',
-              key: 'open',
-              onClick() {
-                invoke('select_file_on_explorer', { path });
-              },
-            },
-          ]}
-        />
-      )}
-    >
-      <button className="launcher-item" onClick={onClick}>
-        <img className="launcher-item-icon" src={convertFileSrc(icon)} />
-        <OverflowTooltip className="launcher-item-label" text={label} />
-        <OverflowTooltip className="launcher-item-path" text={shortPath} />
-      </button>
-    </Dropdown>
-  );
-}
+import { Item } from './Item';
 
 export function Launcher() {
   const [showHelp, setShowHelp] = useState(true);
   const [showHistory, setShowHistory] = useState(false);
-  const [command, setCommand] = useState('');
+  const [_command, _setCommand] = useState('');
   const [selectedRunner, setSelectedRunner] = useState(0);
 
   const history = useSelector(Selectors.history);
@@ -72,7 +29,7 @@ export function Launcher() {
     if (focused) {
       inputRef.current?.focus();
     } else {
-      setCommand('');
+      _setCommand('');
       getCurrentWindow().hide();
     }
   });
@@ -110,12 +67,11 @@ export function Launcher() {
     }
   };
 
+  const command = _command.trim().toLowerCase();
   const selectedHistory = history[selectedRunner] || [];
   const matchingHistory = selectedHistory
-    .filter((value) => value.toLowerCase().includes(command.toLowerCase()))
+    .filter((value) => value.toLowerCase().includes(command))
     .map((value) => ({ value }));
-
-  const items = apps.filter((item) => item.label.toLowerCase().includes(command.toLowerCase()));
 
   return (
     <motion.div className="launcher" onKeyDown={onDocumentKeyDown}>
@@ -147,8 +103,8 @@ export function Launcher() {
               placeholder="App, Command or Path..."
               options={matchingHistory}
               filterOption
-              value={command}
-              onChange={setCommand}
+              value={_command}
+              onChange={_setCommand}
               open={showHistory}
               onDropdownVisibleChange={setShowHistory}
               onInputKeyDown={onInputKeyDown}
@@ -160,8 +116,12 @@ export function Launcher() {
       </div>
       <Tooltip open={showHelp} title="Tab / Shift + Tab" placement="left">
         <div className="launcher-body">
-          {items.map((item) => (
-            <Item key={item.executionPath} item={item} />
+          {apps.map((item) => (
+            <Item
+              key={item.executionPath}
+              item={item}
+              hidden={item.label.toLowerCase().includes(command)}
+            />
           ))}
         </div>
       </Tooltip>

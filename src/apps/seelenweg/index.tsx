@@ -1,6 +1,3 @@
-import { getRootContainer } from '../shared';
-import { wrapConsole } from '../shared/ConsoleWrapper';
-import i18n, { loadTranslations } from './i18n';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
@@ -10,6 +7,10 @@ import { loadStore, registerStoreEvents, store } from './modules/shared/store/in
 import { loadConstants } from './modules/shared/utils/infra';
 
 import { App } from './app';
+
+import { getRootContainer } from '../shared';
+import { wrapConsole } from '../shared/ConsoleWrapper';
+import i18n, { loadTranslations } from './i18n';
 
 import './styles/colors.css';
 import './styles/variables.css';

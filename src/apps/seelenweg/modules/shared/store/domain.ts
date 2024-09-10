@@ -1,5 +1,3 @@
-import { IRootState } from '../../../../../shared.interfaces';
-import { FocusedApp } from '../../../../shared/interfaces/common';
 import { modify } from 'readable-types';
 import {
   MediaWegItem,
@@ -9,6 +7,9 @@ import {
   StartWegItem,
   SwItemType,
 } from 'seelen-core';
+
+import { IRootState } from '../../../../../shared.interfaces';
+import { FocusedApp } from '../../../../shared/interfaces/common';
 
 export type HWND = number & {};
 

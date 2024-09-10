@@ -1,6 +1,6 @@
-import { DeviceTM } from '../../../shared/schemas/Placeholders';
-
 import { Item } from '../item/infra';
+
+import { DeviceTM } from '../../../shared/schemas/Placeholders';
 
 interface Props {
   module: DeviceTM;
