@@ -1,5 +1,5 @@
 import { Select, Tooltip } from 'antd';
-import { RefObject } from 'react';
+import { forwardRef, RefObject } from 'react';
 
 interface RunnerSelectorProps {
   selectedRunner: number;
@@ -9,16 +9,13 @@ interface RunnerSelectorProps {
   showHelp: boolean;
 }
 
-export const RunnerSelector = ({
-  selectedRunner,
-  runners,
-  setSelectedRunner,
-  helpRef,
-  showHelp,
-}: RunnerSelectorProps) => {
+export const RunnerSelector = forwardRef((props: RunnerSelectorProps, ref) => {
+  const { selectedRunner, runners, setSelectedRunner, helpRef, showHelp } = props;
+
   return (
     <Tooltip open={showHelp} title="Ctrl + Tab" placement="left">
       <Select
+        ref={ref as any}
         className="launcher-header-runner-selector"
         value={selectedRunner}
         onChange={setSelectedRunner}
@@ -36,4 +33,4 @@ export const RunnerSelector = ({
       />
     </Tooltip>
   );
-};
+});
