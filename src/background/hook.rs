@@ -250,7 +250,7 @@ pub fn location_delay_completed(origin: HWND) -> bool {
 pub extern "system" fn win_event_hook(
     _h_win_event_hook: HWINEVENTHOOK,
     event: u32,
-    hwnd: HWND,
+    origin: HWND,
     id_object: i32,
     _id_child: i32,
     _id_event_thread: u32,
@@ -262,25 +262,24 @@ pub extern "system" fn win_event_hook(
 
     if FULL_STATE.load().is_weg_enabled() {
         // raw events should be only used for a fastest and immediately processing
-        log_error!(SeelenWeg::process_raw_win_event(event, hwnd));
+        log_error!(SeelenWeg::process_raw_win_event(event, origin));
     }
 
-    let event = match WinEvent::try_from(event) {
-        Ok(event) => event,
-        Err(_) => return,
-    };
+    let event = WinEvent::from(event);
 
-    if event == WinEvent::ObjectLocationChange && !location_delay_completed(hwnd) {
+    if event == WinEvent::ObjectLocationChange && !location_delay_completed(origin) {
         return;
     }
 
     // Follows lock order: CLI -> DATA -> EVENT to avoid deadlocks
     let mut seelen = trace_lock!(SEELEN);
     let mut hook_manager = trace_lock!(HOOK_MANAGER);
-    hook_manager.event(event, hwnd, &mut seelen);
+    hook_manager.event(event, origin, &mut seelen);
 
-    if let Some(synthetic_event) = event.get_synthetic(hwnd) {
-        hook_manager.event(synthetic_event, hwnd, &mut seelen);
+    if let Ok(synthetics) = event.get_synthetics(origin) {
+        for synthetic_event in synthetics {
+            hook_manager.event(synthetic_event, origin, &mut seelen)
+        }
     }
 }
 

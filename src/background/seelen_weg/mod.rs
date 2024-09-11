@@ -62,7 +62,6 @@ pub struct SeelenWegApp {
 #[derive(Getters, MutGetters)]
 pub struct SeelenWeg {
     window: WebviewWindow<Wry>,
-    hidden: bool,
     overlaped: bool,
     /// Is the rect that the dock should have when it isn't hidden
     pub theoretical_rect: RECT,
@@ -71,6 +70,9 @@ pub struct SeelenWeg {
 impl Drop for SeelenWeg {
     fn drop(&mut self) {
         log::info!("Dropping {}", self.window.label());
+        if let Ok(hwnd) = self.window.hwnd() {
+            AppBarData::from_handle(hwnd).unregister_bar();
+        }
         log_error!(self.window.destroy());
     }
 }
@@ -230,7 +232,6 @@ impl SeelenWeg {
         log::info!("Creating {}/{}", Self::TARGET, postfix);
         let weg = Self {
             window: Self::create_window(postfix)?,
-            hidden: false,
             overlaped: false,
             theoretical_rect: RECT::default(),
         };
@@ -244,7 +245,7 @@ impl SeelenWeg {
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
-        let window_rect = WindowsApi::get_window_rect_without_shadow(hwnd);
+        let window_rect = WindowsApi::get_inner_window_rect(hwnd);
         Ok(are_overlaped(&self.theoretical_rect, &window_rect))
     }
 
@@ -268,19 +269,16 @@ impl SeelenWeg {
         if !should_handle_hidden {
             return Ok(());
         }
-
         self.set_overlaped_status(self.is_overlapping(hwnd)?)
     }
 
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
-        self.hidden = true;
         Ok(())
     }
 
     pub fn show(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
-        self.hidden = false;
         Ok(())
     }
 
@@ -315,13 +313,14 @@ impl SeelenWeg {
         }
 
         let mut abd = AppBarData::from_handle(hwnd);
-        let abd_rect = match settings.hide_mode {
-            HideMode::Never => self.theoretical_rect,
-            _ => hidden_rect,
+        match settings.hide_mode {
+            HideMode::Never => {
+                abd.set_edge(settings.position.into());
+                abd.set_rect(self.theoretical_rect);
+                abd.register_as_new_bar();
+            }
+            _ => abd.unregister_bar(),
         };
-        abd.set_edge(settings.position.into());
-        abd.set_rect(abd_rect);
-        abd.register_as_new_bar();
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(hwnd, &rc_work)?;

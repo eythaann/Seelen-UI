@@ -20,16 +20,6 @@ lazy_static! {
     .map(|x| x.to_string())
     .collect_vec();
 
-    pub static ref IGNORE_FULLSCREEN: Vec<String> = [
-        "Task Switching",
-        "Task View",
-        "Virtual desktop switching preview",
-        "Virtual desktop hotkey switching preview",
-    ]
-    .iter()
-    .map(|x| x.to_string())
-    .collect_vec();
-
     /**
      * Some UWP apps like WhatsApp are resized after be opened,
      * this list will be used to resize them back after a delay.

@@ -1,5 +1,5 @@
 /**
- * The styles in this file are only structurals for Seelenweg,
+ * The styles in this file are only structural for Seelenweg,
  * all the design should be added to the default theme css.
  */
 body {
@@ -14,10 +14,32 @@ body {
 }
 
 /** Root Styles */
-.SeelenWeg {
+#root {
   height: min-content;
   width: min-content;
-  margin: var(--config-margin);
+  transition: transform 0.2s ease-in-out;
+
+  &:not(:hover) {
+    &:has(.taskbar.hidden.left) {
+      transform: translateX(calc(-100% + 1px));
+      border-right: 1px solid transparent;
+    }
+
+    &:has(.taskbar.hidden.right) {
+      transform: translateX(calc(100% - 1px));
+      border-left: 1px solid transparent;
+    }
+
+    &:has(.taskbar.hidden.top) {
+      transform: translateY(calc(-100% + 1px));
+      border-bottom: 1px solid transparent;
+    }
+
+    &:has(.taskbar.hidden.bottom) {
+      transform: translateY(calc(100% - 1px));
+      border-top: 1px solid transparent;
+    }
+  }
 }
 
 /** Taskbar Styles */
@@ -25,31 +47,12 @@ body {
   position: relative;
   overflow: visible;
   padding: var(--config-padding);
-  transition: transform 0.2s ease-in-out;
-
+  margin: var(--config-margin);
   display: flex;
   justify-content: var(--config-by-position-justify-content);
   align-items: var(--config-by-position-align-items);
   flex-direction: var(--config-by-position-flex-direction);
   gap: var(--config-space-between-items);
-
-  &.hidden {
-    &.left {
-      transform: translateX(calc(-100% - var(--config-margin)));
-    }
-
-    &.right {
-      transform: translateX(calc(100% + var(--config-margin)));
-    }
-
-    &.top {
-      transform: translateY(calc(-100% - var(--config-margin)));
-    }
-
-    &.bottom {
-      transform: translateY(calc(100% + var(--config-margin)));
-    }
-  }
 
   &.horizontal {
     height: calc(var(--config-item-size) + var(--config-padding) * 2);
