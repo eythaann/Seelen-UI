@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
-import { UIColors } from 'seelen-core';
+import { SeelenEvent, UIColors } from 'seelen-core';
 import { FancyToolbarSettings } from 'seelen-core';
 
 import { IsSavingCustom } from '../../main/application';
@@ -23,7 +23,6 @@ import {
 
 import { UserSettings } from '../../../../../shared.interfaces';
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
@@ -51,14 +50,14 @@ export async function registerStoreEvents() {
   const onFocusChanged = debounce((app: FocusedApp) => {
     store.dispatch(RootActions.setFocused(app));
   }, 200);
-  await listenGlobal<FocusedApp>(GlobalEvent.FocusChanged, (e) => {
+  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     onFocusChanged(e.payload);
     if (e.payload.name != 'Seelen UI') {
       onFocusChanged.flush();
     }
   });
 
-  await listenGlobal<any>(FileChange.Settings, async (_event) => {
+  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async (_event) => {
     await loadStore();
   });
 
@@ -118,7 +117,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await listenGlobal(FileChange.Placeholders, async () => {
+  await listenGlobal(SeelenEvent.StatePlaceholdersChanged, async () => {
     if (IsSavingCustom.current) {
       IsSavingCustom.current = false;
       return;

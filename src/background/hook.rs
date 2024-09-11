@@ -12,6 +12,7 @@ use color_eyre::owo_colors::OwoColorize;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::handlers::SeelenEvent;
 use serde::Serialize;
 use tauri::Emitter;
 use windows::Win32::{
@@ -128,7 +129,7 @@ impl HookManager {
                 return;
             }
             log_error!(get_app_handle().emit(
-                "global-focus-changed",
+                SeelenEvent::GlobalFocusChanged,
                 FocusedApp {
                     title,
                     hwnd: origin.0,
@@ -191,11 +192,15 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
                 .iter()
                 .map(|d| d.as_serializable())
                 .collect_vec();
-            seelen.handle().emit("workspaces-changed", &desktops)?;
+            seelen
+                .handle()
+                .emit(SeelenEvent::WorkspacesChanged, &desktops)?;
         }
 
         VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
-            seelen.handle().emit("active-workspace-changed", new.id())?;
+            seelen
+                .handle()
+                .emit(SeelenEvent::ActiveWorkspaceChanged, new.id())?;
         }
         VirtualDesktopEvent::WindowChanged(window) => {
             let hwnd = HWND(window);
@@ -316,7 +321,7 @@ pub fn register_win_hook() -> Result<()> {
         loop {
             if let Ok(pos) = Mouse::get_cursor_pos() {
                 if last_pos != pos {
-                    let _ = handle.emit("global-mouse-move", &[pos.get_x(), pos.get_y()]);
+                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.get_x(), pos.get_y()]);
                     last_pos = pos;
                 }
             }

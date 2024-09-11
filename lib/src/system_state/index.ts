@@ -1,4 +1,4 @@
-import { EventHandler, Obtainable, SeelenCommand } from '../handlers';
+import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers';
 
 export interface UIColors {
   background: string;
@@ -15,7 +15,7 @@ export interface UIColors {
 
 export class UIColors extends Obtainable<UIColors>(
   SeelenCommand.GetSystemColors,
-  EventHandler.UIColors,
+  SeelenEvent.ColorsChanged,
 ) {
   static default(): UIColors {
     return {

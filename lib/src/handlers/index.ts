@@ -1,22 +1,13 @@
 export * from './invokers';
+export * from './events';
 
 import { invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 
+import { SeelenEvent } from './events';
 import { SeelenCommand } from './invokers';
 
-export enum EventHandler {
-  UIColors = 'colors-changed',
-  Settings = 'settings-changed',
-  WegItems = 'weg-items',
-  Themes = 'themes',
-  Placeholders = 'placeholders',
-  Layouts = 'layouts',
-  SettingsByApp = 'settings-by-app',
-  History = 'history',
-}
-
-export function Obtainable<T>(invokeKey: SeelenCommand, eventKey: EventHandler) {
+export function Obtainable<T>(invokeKey: SeelenCommand, eventKey: SeelenEvent) {
   return class {
     static async getAsync(): Promise<T> {
       return await invoke(invokeKey);

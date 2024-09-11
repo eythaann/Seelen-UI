@@ -1,4 +1,5 @@
 use clap::{Command, ValueEnum};
+use seelen_core::handlers::SeelenEvent;
 use seelen_core::state::VirtualDesktopStrategy;
 use serde::{Deserialize, Serialize};
 use windows::Win32::Foundation::HWND;
@@ -76,12 +77,12 @@ impl WindowManager {
     }
 
     pub fn reserve(&self, side: AllowedReservations) -> Result<()> {
-        self.emit("set-reservation", side)?;
+        self.emit(SeelenEvent::WMSetReservation, side)?;
         Ok(())
     }
 
     pub fn discard_reservation(&self) -> Result<()> {
-        self.emit("set-reservation", ())?;
+        self.emit(SeelenEvent::WMSetReservation, ())?;
         Ok(())
     }
 
@@ -134,16 +135,16 @@ impl WindowManager {
                 self.window.open_devtools();
             }
             SubCommand::Height(action) => {
-                self.emit("update-height", action)?;
+                self.emit(SeelenEvent::WMUpdateHeight, action)?;
             }
             SubCommand::Width(action) => {
-                self.emit("update-width", action)?;
+                self.emit(SeelenEvent::WMUpdateWidth, action)?;
             }
             SubCommand::ResetWorkspaceSize => {
-                self.emit("reset-workspace-size", ())?;
+                self.emit(SeelenEvent::WMResetWorkspaceSize, ())?;
             }
             SubCommand::Focus(side) => {
-                self.emit("focus", side)?;
+                self.emit(SeelenEvent::WMFocus, side)?;
             }
         };
         Ok(())

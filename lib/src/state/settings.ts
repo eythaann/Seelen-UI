@@ -1,4 +1,4 @@
-import { EventHandler, Obtainable, SeelenCommand } from '../handlers';
+import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers';
 import { Rect } from '../utils';
 
 export enum VirtualDesktopStrategy {
@@ -56,7 +56,7 @@ export class SeelenLauncherSettings {
 
 export class Settings extends Obtainable<Settings>(
   SeelenCommand.StateGetSettings,
-  EventHandler.Settings,
+  SeelenEvent.StateSettingsChanged,
 ) {
   fancyToolbar: FancyToolbarSettings = new FancyToolbarSettings();
   seelenweg: SeelenWegSettings = new SeelenWegSettings();

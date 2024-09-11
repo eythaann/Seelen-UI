@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
-import { UIColors, WindowManagerSettings } from 'seelen-core';
+import { SeelenEvent, UIColors, WindowManagerSettings } from 'seelen-core';
 
 import { RootActions, RootSlice } from './app';
 
@@ -8,7 +8,6 @@ import { Reservation, Sizing } from '../../layout/domain';
 import { AddWindowPayload, DesktopId, FocusAction } from './domain';
 
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { FileChange } from '../../../../shared/events';
 import { StartThemingTool } from '../../../../shared/styles';
 
 export const store = configureStore({
@@ -35,7 +34,7 @@ async function loadUIColors() {
 export async function registerStoreEvents() {
   await loadUIColors();
 
-  await listenGlobal<any>(FileChange.Settings, async () => {
+  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async () => {
     await loadStore();
   });
 
@@ -87,7 +86,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.addWindow(event.payload));
   });
 
-  await listenGlobal(FileChange.Placeholders, async () => {
+  await listenGlobal(SeelenEvent.StateLayoutsChanged, async () => {
     const userSettings = await new UserSettingsLoader().withLayouts().load();
     store.dispatch(RootActions.setAvailableLayouts(userSettings.layouts));
   });
