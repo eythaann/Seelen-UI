@@ -1,5 +1,6 @@
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
+import { SeelenCommand } from 'seelen-core';
 
 import { getGeneratedFilesPath } from './app';
 
@@ -27,7 +28,7 @@ export async function getMissingIconPath() {
 }
 
 export async function updatePreviews(hwnds: HWND[]) {
-  invoke('weg_request_update_previews', { handles: hwnds });
+  invoke(SeelenCommand.WegRequestUpdatePreviews, { handles: hwnds });
 }
 
 export async function iconPathFromExePath(exePath: string) {

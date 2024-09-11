@@ -2,7 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useSelector } from 'react-redux';
-import { WorkspacesTM, WorkspaceTMMode } from 'seelen-core';
+import { SeelenCommand, WorkspacesTM, WorkspaceTMMode } from 'seelen-core';
 
 import { Selectors } from '../shared/store/app';
 
@@ -29,7 +29,7 @@ export function WorkspacesModule({ module }: Props) {
           {workspaces.map((w, idx) => (
             <li
               key={w.id}
-              onClick={() => invoke('switch_workspace', { idx })}
+              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { idx })}
               className={cx('workspace-dot', {
                 'workspace-dot-active': w.id === activeWorkspace,
               })}
@@ -57,7 +57,7 @@ export function WorkspacesModule({ module }: Props) {
                 'ft-bar-item-clickable': true,
                 'ft-bar-item-active': w.id === activeWorkspace,
               })}
-              onClick={() => invoke('switch_workspace', { idx })}
+              onClick={() => invoke(SeelenCommand.SwitchWorkspace, { idx })}
             >
               <div className="ft-bar-item-content">
                 {mode === WorkspaceTMMode.Named

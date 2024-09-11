@@ -4,7 +4,7 @@ import { debounce } from 'lodash';
 import React, { memo, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
@@ -94,15 +94,15 @@ function Device({ device }: { device: MediaDevice }) {
 
   const onClickMultimedia = () => {
     if (!device.is_default_multimedia) {
-      invoke('media_set_default_device', { id: device.id, role: 'multimedia' })
-        .then(() => invoke('media_set_default_device', { id: device.id, role: 'console' }))
+      invoke(SeelenCommand.MediaSetDefaultDevice, { id: device.id, role: 'multimedia' })
+        .then(() => invoke(SeelenCommand.MediaSetDefaultDevice, { id: device.id, role: 'console' }))
         .catch(console.error);
     }
   };
 
   const onClickCommunications = () => {
     if (!device.is_default_communications) {
-      invoke('media_set_default_device', { id: device.id, role: 'communications' }).catch(
+      invoke(SeelenCommand.MediaSetDefaultDevice, { id: device.id, role: 'communications' }).catch(
         console.error,
       );
     }
@@ -162,7 +162,7 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
 
   const onExternalChange = useCallback(
     debounce((value: number) => {
-      invoke('set_volume_level', { id: deviceId, level: value }).catch(console.error);
+      invoke(SeelenCommand.SetVolumeLevel, { id: deviceId, level: value }).catch(console.error);
     }, 100),
     [deviceId, sessionId],
   );
@@ -174,7 +174,7 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
 
   return (
     <div className="media-control-volume">
-      <Button type="text" onClick={() => invoke('media_toggle_mute', { id: deviceId })}>
+      <Button type="text" onClick={() => invoke(SeelenCommand.MediaToggleMute, { id: deviceId })}>
         {icon}
       </Button>
       <Slider
@@ -188,7 +188,7 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
         }}
       />
       {withRightAction && (
-        <Button type="text" onClick={() => invoke('open_file', { path: 'ms-settings:sound' })}>
+        <Button type="text" onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:sound' })}>
           <Icon iconName="RiEqualizerLine" />
         </Button>
       )}

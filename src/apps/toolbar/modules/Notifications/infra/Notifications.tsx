@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
@@ -27,7 +28,7 @@ export function Notifications() {
         <Button
           size="small"
           onClick={() => {
-            invoke('notifications_close_all').catch(console.error);
+            invoke(SeelenCommand.NotificationsCloseAll).catch(console.error);
           }}
         >
           Clear all
@@ -57,7 +58,7 @@ export function Notifications() {
                   size="small"
                   type="text"
                   onClick={() => {
-                    invoke('notifications_close', { id: notification.id }).catch(console.error);
+                    invoke(SeelenCommand.NotificationsClose, { id: notification.id }).catch(console.error);
                   }}
                 >
                   <Icon iconName="IoClose" />
@@ -89,7 +90,7 @@ export function Notifications() {
           size="small"
           type="text"
           onClick={() => {
-            invoke('open_file', { path: 'ms-settings:notifications' }).catch(console.error);
+            invoke(SeelenCommand.OpenFile, { path: 'ms-settings:notifications' }).catch(console.error);
           }}
         >
           Go to notifications settings

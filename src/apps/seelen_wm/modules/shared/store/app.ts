@@ -5,6 +5,7 @@ import {
   NodeSubtype,
   NodeType,
   NoFallbackBehavior,
+  SeelenCommand,
   UIColors,
   WindowManagerLayout,
   WindowManagerSettings,
@@ -83,7 +84,7 @@ export const RootSlice = createSlice({
       const setFloatingSize = () => {
         const top = toPhysicalPixels(window.screen.height / 2 - state.settings.floating.height / 2);
         const left = toPhysicalPixels(window.screen.width / 2 - state.settings.floating.width / 2);
-        invoke('set_window_position', {
+        invoke(SeelenCommand.SetWindowPosition, {
           hwnd,
           rect: {
             top,
@@ -96,7 +97,7 @@ export const RootSlice = createSlice({
 
       if (state.reservation) {
         if (state.reservation === Reservation.Float) {
-          invoke('bounce_handle', { hwnd });
+          invoke(SeelenCommand.BounceHandle, { hwnd });
           setFloatingSize();
           successfullyAdded = true;
         } else if (state.lastManagedActivated) {
@@ -122,7 +123,7 @@ export const RootSlice = createSlice({
         state.lastManagedActivated = hwnd;
         state.activeWindow = hwnd;
       } else {
-        invoke('bounce_handle', { hwnd });
+        invoke(SeelenCommand.BounceHandle, { hwnd });
         if (!workspace.layout.noFallbackBehavior) {
           console.error(
             'Layout can\'t handle the window, FallbackNode and noFallbackBehavior are not defined in layout',
@@ -194,7 +195,7 @@ export const RootSlice = createSlice({
       }
 
       if (action.payload === FocusAction.Latest) {
-        invoke('request_focus', { hwnd: state.lastManagedActivated });
+        invoke(SeelenCommand.RequestFocus, { hwnd: state.lastManagedActivated });
         return;
       }
 
@@ -202,7 +203,7 @@ export const RootSlice = createSlice({
       const next = node.getNodeAtSide(state.lastManagedActivated, action.payload);
       if (next) {
         const nextNode = NodeImpl.from(next);
-        invoke('request_focus', { hwnd: nextNode.currentHandle || 0 });
+        invoke(SeelenCommand.RequestFocus, { hwnd: nextNode.currentHandle || 0 });
       }
     },
   },

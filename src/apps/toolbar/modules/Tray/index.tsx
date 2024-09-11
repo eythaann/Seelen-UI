@@ -4,7 +4,7 @@ import { Popover } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 import { TrayTM } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -30,11 +30,11 @@ function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number })
     <li
       className="tray-item"
       onClick={() => {
-        invoke('on_click_tray_icon', { idx });
+        invoke(SeelenCommand.OnClickTrayIcon, { idx });
         onAction();
       }}
       onContextMenu={() => {
-        invoke('on_context_menu_tray_icon', { idx });
+        invoke(SeelenCommand.OnContextMenuTrayIcon, { idx });
         onAction();
       }}
     >
@@ -71,7 +71,7 @@ export function TrayModule({ module }: Props) {
   useEffect(() => {
     if (openPreview) {
       intervalId.current = setInterval(() => {
-        invoke('temp_get_by_event_tray_info');
+        invoke(SeelenCommand.TempGetByEventTrayInfo);
       }, 1000);
     } else if (intervalId) {
       clearInterval(intervalId.current);

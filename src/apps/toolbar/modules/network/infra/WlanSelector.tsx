@@ -3,7 +3,7 @@ import { Popover } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
@@ -55,7 +55,7 @@ function WlanSelector({ open }: { open: boolean }) {
         })}
       </div>
       <div className="wlan-selector-footer">
-        <span onClick={() => invoke('open_file', { path: 'ms-settings:network' })}>
+        <span onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:network' })}>
           {t('network.more')}
         </span>
       </div>
@@ -76,9 +76,9 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
       return;
     }
     if (openPreview) {
-      invoke('wlan_start_scanning');
+      invoke(SeelenCommand.WlanStartScanning);
     } else {
-      invoke('wlan_stop_scanning');
+      invoke(SeelenCommand.WlanStopScanning);
     }
   }, [openPreview]);
 

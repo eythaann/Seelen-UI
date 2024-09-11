@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { StartWegItem } from 'seelen-core';
+import { SeelenCommand, StartWegItem } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
@@ -52,7 +52,7 @@ export const StartMenu = memo(({ item }: Props) => {
           style={{ height: size, aspectRatio: '1/1' }}
           onClick={() => {
             if (!startMenuOpenRef.current) {
-              invoke('send_keys', { keys: '{win}' });
+              invoke(SeelenCommand.SendKeys, { keys: '{win}' });
             }
           }}
           onContextMenu={(e) => e.stopPropagation()}

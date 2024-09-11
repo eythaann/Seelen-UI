@@ -1,6 +1,7 @@
 import { invoke } from '@tauri-apps/api/core';
 import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { Selectors } from '../../../shared/store/app';
 
@@ -28,7 +29,7 @@ export function LeafContainer({ hwnd, growFactor }: Props) {
     const domRect = ref.current.getBoundingClientRect();
     const top = domRect.top + window.screenY + border;
     const left = domRect.left + window.screenX + border;
-    invoke('set_window_position', {
+    invoke(SeelenCommand.SetWindowPosition, {
       hwnd: hwnd,
       rect: {
         top: toPhysicalPixels(top),

@@ -1,6 +1,7 @@
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
+import { SeelenCommand } from 'seelen-core';
 
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
@@ -51,33 +52,33 @@ export class UserSettingsLoader {
 
   async load(customPath?: string): Promise<UserSettings> {
     const userSettings: UserSettings = {
-      jsonSettings: await invoke('state_get_settings', { path: customPath }),
+      jsonSettings: await invoke(SeelenCommand.StateGetSettings, { path: customPath }),
       yamlSettings: [],
       themes: [],
       layouts: [],
       placeholders: [],
-      env: await invoke('get_user_envs'),
+      env: await invoke(SeelenCommand.GetUserEnvs),
       wallpaper: null,
     };
 
     if (this._withUserApps) {
-      userSettings.yamlSettings = await invoke('state_get_specific_apps_configurations');
+      userSettings.yamlSettings = await invoke(SeelenCommand.StateGetSpecificAppsConfigurations);
     }
 
     if (this._withThemes) {
-      userSettings.themes = await invoke('state_get_themes');
+      userSettings.themes = await invoke(SeelenCommand.StateGetThemes);
     }
 
     if (this._withLayouts) {
-      userSettings.layouts = await invoke('state_get_layouts');
+      userSettings.layouts = await invoke(SeelenCommand.StateGetLayouts);
     }
 
     if (this._withPlaceholders) {
-      userSettings.placeholders = await invoke('state_get_placeholders');
+      userSettings.placeholders = await invoke(SeelenCommand.StateGetPlaceholders);
     }
 
     if (this._withWallpaper) {
-      let wallpaper = await invoke<string>('state_get_wallpaper');
+      let wallpaper = await invoke<string>(SeelenCommand.StateGetWallpaper);
       userSettings.wallpaper = wallpaper ? convertFileSrc(wallpaper) : null;
     }
 

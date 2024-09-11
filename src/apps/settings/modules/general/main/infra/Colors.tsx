@@ -2,6 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { ColorPicker } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { newSelectors } from '../../../shared/store/app/reducer';
 
@@ -20,7 +21,7 @@ export function Colors() {
         <div
           onClickCapture={(e) => {
             e.stopPropagation();
-            invoke('open_file', { path: 'ms-settings:colors' }).catch(console.error);
+            invoke(SeelenCommand.OpenFile, { path: 'ms-settings:colors' }).catch(console.error);
           }}
         >
           <ColorPicker value={colors.accent} disabledAlpha showText />
