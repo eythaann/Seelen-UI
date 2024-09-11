@@ -1,9 +1,6 @@
-import { Settings, Theme, UIColors } from 'seelen-core';
+import { AppConfiguration, Settings, Theme, UIColors, WindowManagerLayout } from 'seelen-core';
+import { Placeholder } from 'seelen-core';
 
-import { AppConfiguration } from '../../appsConfigurations/domain';
-
-import { Layout } from '../../../../shared/schemas/Layout';
-import { Placeholder } from '../../../../shared/schemas/Placeholders';
 import { Route } from '../../../components/navigation/routes';
 
 export interface RootState extends Settings {
@@ -13,7 +10,7 @@ export interface RootState extends Settings {
   toBeRestarted: boolean;
   appsConfigurations: AppConfiguration[];
   availableThemes: Theme[];
-  availableLayouts: Layout[];
+  availableLayouts: WindowManagerLayout[];
   availablePlaceholders: Placeholder[];
   autostart: boolean | null;
   wallpaper: string | null;

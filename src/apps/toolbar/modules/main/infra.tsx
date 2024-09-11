@@ -3,6 +3,11 @@ import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HideMode, useWindowFocusChange } from 'seelen-core';
+import {
+  Placeholder,
+  ToolbarModule,
+  ToolbarModuleType,
+} from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
@@ -17,11 +22,6 @@ import { SettingsModule } from '../Settings/infra';
 import { RootActions, Selectors } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
 
-import {
-  Placeholder,
-  ToolbarModule,
-  ToolbarModuleType,
-} from '../../../shared/schemas/Placeholders';
 import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';

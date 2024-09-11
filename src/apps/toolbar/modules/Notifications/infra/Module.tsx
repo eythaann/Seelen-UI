@@ -3,6 +3,7 @@ import { Popover } from 'antd';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useWindowFocusChange } from 'seelen-core';
+import { NotificationsTM } from 'seelen-core';
 
 import { Item } from '../../item/infra';
 
@@ -10,7 +11,6 @@ import { Selectors } from '../../shared/store/app';
 
 import { RootState } from '../../shared/store/domain';
 
-import { NotificationsTM } from '../../../../shared/schemas/Placeholders';
 import { Notifications } from './Notifications';
 
 interface Props {

@@ -1,20 +1,16 @@
 import { Button, Input, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { AppIdentifier, AppIdentifierType, MatchingStrategy } from 'seelen-core';
 
 import { OptionsFromEnum } from '../../shared/utils/app';
 
 import { Icon } from '../../../../shared/components/Icon';
-import {
-  ApplicationIdentifier,
-  IdWithIdentifier,
-  MatchingStrategy,
-} from '../../../../shared/schemas/AppsConfigurations';
 import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
 import cs from './Identifier.module.css';
 
 interface Props {
-  identifier: IdWithIdentifier;
-  onChange: (id: IdWithIdentifier) => void;
+  identifier: AppIdentifier;
+  onChange: (id: AppIdentifier) => void;
   onRemove?: () => void;
 }
 
@@ -27,7 +23,7 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
     onChange({ ...identifier, id: e.target.value });
   };
 
-  const onSelectKind = (value: ApplicationIdentifier) => {
+  const onSelectKind = (value: AppIdentifierType) => {
     onChange({ ...identifier, kind: value });
   };
 
@@ -39,11 +35,11 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
     onChange({ ...identifier, negation: value });
   };
 
-  const onChangeAndItem = (idx: number, value: IdWithIdentifier) => {
+  const onChangeAndItem = (idx: number, value: AppIdentifier) => {
     onChange({ ...identifier, and: identifier.and.map((id, i) => (i === idx ? value : id)) });
   };
 
-  const onChangeOrItem = (idx: number, value: IdWithIdentifier) => {
+  const onChangeOrItem = (idx: number, value: AppIdentifier) => {
     onChange({ ...identifier, or: identifier.or.map((id, i) => (i === idx ? value : id)) });
   };
 
@@ -56,11 +52,11 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
   };
 
   const onAddAndItem = () => {
-    onChange({ ...identifier, and: [IdWithIdentifier.default(), ...identifier.and] });
+    onChange({ ...identifier, and: [AppIdentifier.create(), ...identifier.and] });
   };
 
   const onAddOrItem = () => {
-    onChange({ ...identifier, or: [IdWithIdentifier.default(), ...identifier.or] });
+    onChange({ ...identifier, or: [AppIdentifier.create(), ...identifier.or] });
   };
 
   return (
@@ -82,7 +78,7 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
           <span>{t('apps_configurations.identifier.kind')}</span>
           <Select
             value={kind}
-            options={OptionsFromEnum(ApplicationIdentifier)}
+            options={OptionsFromEnum(AppIdentifierType)}
             onSelect={onSelectKind}
           />
         </SettingsOption>

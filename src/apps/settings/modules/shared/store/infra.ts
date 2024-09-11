@@ -2,11 +2,10 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
-import { Settings, Theme, UIColors } from 'seelen-core';
+import { AppConfiguration, Settings, Theme, UIColors } from 'seelen-core';
 
 import { startup } from '../tauri/infra';
 
-import { AppConfiguration } from '../../appsConfigurations/domain';
 import { RootActions, RootReducer } from './app/reducer';
 import { StateToJsonSettings, StaticSettingsToState } from './app/StateBridge';
 

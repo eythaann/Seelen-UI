@@ -1,6 +1,6 @@
-import { Item } from '../item/infra';
+import { DeviceTM } from 'seelen-core';
 
-import { DeviceTM } from '../../../shared/schemas/Placeholders';
+import { Item } from '../item/infra';
 
 interface Props {
   module: DeviceTM;

@@ -1,4 +1,4 @@
-import { FallbackNode, HorizontalBranchNode, LeafNode, StackNode, VerticalBranchNode } from '../../../shared/schemas/Layout';
+import { WmFallbackNode, WmHorizontalNode, WmLeafNode, WmStackNode, WmVerticalNode } from 'seelen-core';
 
 export enum Reservation {
   Left = 'Left',
@@ -14,7 +14,7 @@ export enum Sizing {
   Decrease = 'Decrease',
 }
 
-export type BranchNode = HorizontalBranchNode | VerticalBranchNode;
-export type Node = LeafNode | FallbackNode | BranchNode | StackNode;
+export type BranchNode = WmHorizontalNode | WmVerticalNode;
+export type Node = WmLeafNode | WmFallbackNode | BranchNode | WmStackNode;
 
 export const MAX_ALLOWED_ELEMENTS_PER_ROW = 10;

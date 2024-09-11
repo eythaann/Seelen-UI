@@ -2,10 +2,10 @@ import { invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useSelector } from 'react-redux';
+import { WorkspacesTM, WorkspaceTMMode } from 'seelen-core';
 
 import { Selectors } from '../shared/store/app';
 
-import { WorkspacesTM, WorkspaceTMMode } from '../../../shared/schemas/Placeholders';
 import { cx } from '../../../shared/styles';
 
 interface Props {

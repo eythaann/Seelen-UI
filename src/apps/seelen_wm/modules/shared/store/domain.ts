@@ -1,15 +1,14 @@
 import { SoftOpaque } from 'readable-types';
-import { WindowManagerSettings } from 'seelen-core';
+import { WindowManagerLayout, WindowManagerSettings } from 'seelen-core';
 
 import { Reservation } from '../../layout/domain';
 import { HWND } from '../utils/domain';
 
 import { IRootState } from '../../../../../shared.interfaces';
-import { Layout } from '../../../../shared/schemas/Layout';
 
 interface Workspace {
   name: string;
-  layout: Layout;
+  layout: WindowManagerLayout;
 }
 
 export type DesktopId = SoftOpaque<string, 'DesktopId'>;
@@ -23,7 +22,7 @@ export enum FocusAction {
 }
 
 export interface RootState extends IRootState<WindowManagerSettings> {
-  availableLayouts: Layout[];
+  availableLayouts: WindowManagerLayout[];
   workspaces: Record<DesktopId, Workspace>;
   activeWorkspace: DesktopId;
   /** current focused window handle */

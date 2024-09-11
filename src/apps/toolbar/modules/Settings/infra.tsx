@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useWindowFocusChange } from 'seelen-core';
+import { SettingsToolbarModule } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra';
@@ -15,7 +16,6 @@ import { Selectors } from '../shared/store/app';
 import { RootState } from '../shared/store/domain';
 
 import { Icon } from '../../../shared/components/Icon';
-import { SettingsToolbarModule } from '../../../shared/schemas/Placeholders';
 
 interface Props {
   module: SettingsToolbarModule;

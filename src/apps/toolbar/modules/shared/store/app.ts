@@ -1,9 +1,9 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { FancyToolbarSettings, UIColors } from 'seelen-core';
+import { Placeholder, ToolbarModule } from 'seelen-core';
 
 import { RootState } from './domain';
 
-import { Placeholder, ToolbarModule } from '../../../../shared/schemas/Placeholders';
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {

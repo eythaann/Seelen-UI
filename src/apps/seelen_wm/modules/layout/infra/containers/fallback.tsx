@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
+import { WmFallbackNode } from 'seelen-core';
 
 import { Selectors } from '../../../shared/store/app';
 
-import { FallbackNode } from '../../../../../shared/schemas/Layout';
 import { cx } from '../../../../../shared/styles';
 import { LeafContainer } from './leaf';
 
 interface Props {
-  node: FallbackNode;
+  node: WmFallbackNode;
 }
 
 export function FallbackContainer({ node }: Props) {
@@ -21,9 +21,11 @@ export function FallbackContainer({ node }: Props) {
       className={cx('wm-container', 'wm-stack')}
     >
       {node.handles.length > 1 && (
-        <div className={cx('wm-stack-bar', {
-          'wm-stack-bar-with-borders': border.enabled,
-        })}>
+        <div
+          className={cx('wm-stack-bar', {
+            'wm-stack-bar-with-borders': border.enabled,
+          })}
+        >
           {node.handles.map((handle) => (
             <div key={handle} className="wm-stack-bar-item">
               {handle}

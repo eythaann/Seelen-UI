@@ -6,6 +6,7 @@ import { evaluate, isResultSet } from 'mathjs';
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { GenericToolbarModule, ToolbarModule } from 'seelen-core';
 
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
@@ -13,7 +14,6 @@ import { Selectors } from '../shared/store/app';
 import { performClick, safeEval, Scope } from './app';
 
 import { exposedIcons, Icon, IconName } from '../../../shared/components/Icon';
-import { GenericToolbarModule, ToolbarModule } from '../../../shared/schemas/Placeholders';
 import { cx } from '../../../shared/styles';
 
 interface Props extends PropsWithChildren {

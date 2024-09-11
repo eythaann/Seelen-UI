@@ -1,11 +1,11 @@
 import { SoftOpaque } from 'readable-types';
 import { FancyToolbarSettings } from 'seelen-core';
+import { Placeholder } from 'seelen-core';
 
 import { WlanBssEntry } from '../../network/domain';
 
 import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
-import { Placeholder } from '../../../../shared/schemas/Placeholders';
 
 /** https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status */
 export interface PowerStatus {
