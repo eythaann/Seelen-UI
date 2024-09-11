@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-import { AppConfiguration } from '../domain';
+import { AppConfiguration } from 'seelen-core';
 
 const initialState: AppConfiguration[] = [];
 

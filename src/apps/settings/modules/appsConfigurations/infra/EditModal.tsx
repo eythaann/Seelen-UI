@@ -3,18 +3,13 @@ import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { AppConfiguration, AppExtraFlag, AppIdentifier } from 'seelen-core';
 
 import { ownSelector, RootSelectors } from '../../shared/store/app/selectors';
 
 import { RootState } from '../../shared/store/domain';
-import {
-  AppConfiguration,
-  AppConfigurationExtended,
-  WegApplicationOptions,
-  WmApplicationOptions,
-} from '../domain';
+import { AppConfigurationExtended, WegApplicationOptions, WmApplicationOptions } from '../domain';
 
-import { IdWithIdentifier } from '../../../../shared/schemas/AppsConfigurations';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { Identifier } from './Identifier';
 import cs from './index.module.css';
@@ -30,7 +25,7 @@ interface Props {
 
 const getAppSelector = (idx: number | undefined, isNew: boolean) =>
   createSelector([ownSelector], (state: RootState) => {
-    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.default();
+    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.create();
   });
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
@@ -59,19 +54,25 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const updateCategory = (e: React.ChangeEvent<HTMLInputElement>) =>
     setApp({ ...app, category: e.target.value || null });
 
-  const onChangeIdentifier = (identifier: IdWithIdentifier) => setApp({ ...app, identifier });
+  const onChangeIdentifier = (identifier: AppIdentifier) => setApp({ ...app, identifier });
 
-  const onSelectMonitor = (value: number | null) => setApp({ ...app, monitor: value });
-  const onSelectWorkspace = (value: string | null) => setApp({ ...app, workspace: value });
+  const onSelectMonitor = (value: number | null) => setApp({ ...app, boundMonitor: value });
+  const onSelectWorkspace = (value: string | null) => setApp({ ...app, boundWorkspace: value });
 
-  const onChangeOption = (option: WmApplicationOptions | WegApplicationOptions, checked: boolean) => {
-    setApp({ ...app, options: checked ? [...app.options, option] : app.options.filter((o) => o !== option) });
+  const onChangeOption = (
+    option: AppExtraFlag,
+    checked: boolean,
+  ) => {
+    setApp({
+      ...app,
+      options: checked ? [...app.options, option] : app.options.filter((o) => o !== option),
+    });
   };
 
   const monitorsOptions = monitors.map((_, i) => ({ label: `Monitor ${i + 1}`, value: i }));
   const workspaceOptions =
-    app.monitor != null && monitors[app.monitor]
-      ? monitors[app.monitor]?.workspaces.map(({ name }) => ({ label: name, value: name }))
+    app.boundMonitor != null && monitors[app.boundMonitor]
+      ? monitors[app.boundMonitor]?.workspaces.map(({ name }) => ({ label: name, value: name }))
       : [];
 
   let title = t('apps_configurations.app.title_edit');
@@ -131,7 +132,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
             <SettingsOption>
               <span>{t('apps_configurations.app.monitor')}</span>
               <Select
-                value={app.monitor}
+                value={app.boundMonitor}
                 placeholder={t('apps_configurations.app.monitor_placeholder')}
                 allowClear
                 options={monitorsOptions}
@@ -142,7 +143,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
             <SettingsOption>
               <span>{t('apps_configurations.app.workspace')}</span>
               <Select
-                value={app.workspace}
+                value={app.boundWorkspace}
                 placeholder={t('apps_configurations.app.workspace_placeholder')}
                 allowClear
                 options={workspaceOptions}
@@ -158,7 +159,10 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
             {Object.values(WmApplicationOptions).map((value, i) => (
               <SettingsOption key={i}>
                 <span>{t(`apps_configurations.app.options.${value}`)}</span>
-                <Switch value={app.options.includes(value)} onChange={onChangeOption.bind(this, value)} />
+                <Switch
+                  value={app.options.includes(value as any as AppExtraFlag)}
+                  onChange={onChangeOption.bind(this, value as any as AppExtraFlag)}
+                />
               </SettingsOption>
             ))}
           </SettingsSubGroup>
@@ -167,7 +171,10 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
             {Object.values(WegApplicationOptions).map((value, i) => (
               <SettingsOption key={i}>
                 <span>{t(`apps_configurations.app.options.${value}`)}</span>
-                <Switch value={app.options.includes(value)} onChange={onChangeOption.bind(this, value)} />
+                <Switch
+                  value={app.options.includes(value as any as AppExtraFlag)}
+                  onChange={onChangeOption.bind(this, value as any as AppExtraFlag)}
+                />
               </SettingsOption>
             ))}
           </SettingsSubGroup>

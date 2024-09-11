@@ -1,19 +1,18 @@
 import { clone } from 'lodash';
 import { evaluate } from 'mathjs';
+import {
+  NodeSubtype,
+  NodeType,
+  WmFallbackNode,
+  WmHorizontalNode,
+  WmLeafNode,
+  WmStackNode,
+  WmVerticalNode,
+} from 'seelen-core';
 
 import { FocusAction } from '../shared/store/domain';
 import { HWND } from '../shared/utils/domain';
 import { BranchNode, Node, Reservation, Sizing } from './domain';
-
-import {
-  FallbackNode,
-  HorizontalBranchNode,
-  LeafNode,
-  NodeSubtype,
-  NodeType,
-  StackNode,
-  VerticalBranchNode,
-} from '../../../shared/schemas/Layout';
 
 export function clearContainer(container: Node): void {
   switch (container.type) {
@@ -65,13 +64,14 @@ export class NodeImpl<T extends Node> {
    * @param insertAfter the priority of the node to insert after
    * @returns a new leaf node
    */
-  static newLeaf(handle: HWND | null, insertAfter: number = 0): LeafNode {
+  static newLeaf(handle: HWND | null, insertAfter: number = 0): WmLeafNode {
     return {
       type: NodeType.Leaf,
       subtype: NodeSubtype.Temporal,
       priority: insertAfter + 1,
       growFactor: 1,
       handle,
+      condition: null,
     };
   }
 
@@ -117,27 +117,27 @@ export class NodeImpl<T extends Node> {
     return null;
   }
 
-  isLeaf(): this is NodeImpl<LeafNode> {
+  isLeaf(): this is NodeImpl<WmLeafNode> {
     return this.ref.type === NodeType.Leaf;
   }
 
-  isFallback(): this is NodeImpl<FallbackNode> {
+  isFallback(): this is NodeImpl<WmFallbackNode> {
     return this.ref.type === NodeType.Fallback;
   }
 
-  isStack(): this is NodeImpl<StackNode> {
+  isStack(): this is NodeImpl<WmStackNode> {
     return this.ref.type === NodeType.Stack;
   }
 
-  isBranch(): this is NodeImpl<BranchNode> {
+  isBranch(): this is NodeImpl<WmVerticalNode | WmHorizontalNode> {
     return this.ref.type === NodeType.Horizontal || this.ref.type === NodeType.Vertical;
   }
 
-  isHorizontal(): this is NodeImpl<HorizontalBranchNode> {
+  isHorizontal(): this is NodeImpl<WmHorizontalNode> {
     return this.ref.type === NodeType.Horizontal;
   }
 
-  isVertical(): this is NodeImpl<VerticalBranchNode> {
+  isVertical(): this is NodeImpl<WmVerticalNode> {
     return this.ref.type === NodeType.Vertical;
   }
 
@@ -242,7 +242,7 @@ export class NodeImpl<T extends Node> {
     return false;
   }
 
-  mutateToStacked(): NodeImpl<FallbackNode> {
+  mutateToStacked(): NodeImpl<WmFallbackNode> {
     if (this.isLeaf()) {
       let ref = this.ref as any;
       ref.type = NodeType.Fallback;
@@ -262,7 +262,7 @@ export class NodeImpl<T extends Node> {
       throw new Error('Cannot mutate branch to stacked');
     }
 
-    return this as NodeImpl<FallbackNode>;
+    return this as NodeImpl<WmFallbackNode>;
   }
 
   mutateToBranch(type: NodeType.Horizontal | NodeType.Vertical): NodeImpl<BranchNode> {
@@ -332,7 +332,7 @@ export class NodeImpl<T extends Node> {
     }
   }
 
-  getNodeContaining(searched: HWND): LeafNode | FallbackNode | null {
+  getNodeContaining(searched: HWND): WmLeafNode | WmFallbackNode | null {
     if (this.isLeaf()) {
       return this.ref.handle === searched ? this.ref : null;
     }
@@ -446,7 +446,7 @@ export class NodeImpl<T extends Node> {
     this.reIndexingGrowFactor();
   }
 
-  getLeafByPriority(): LeafNode | FallbackNode | StackNode | null {
+  getLeafByPriority(): WmLeafNode | WmFallbackNode | WmStackNode | null {
     if (this.isLeaf()) {
       return this.ref.handle ? this.ref : null;
     }
@@ -469,7 +469,7 @@ export class NodeImpl<T extends Node> {
     return null;
   }
 
-  getNodeAtSide(from: HWND, side: FocusAction): LeafNode | FallbackNode | StackNode | null {
+  getNodeAtSide(from: HWND, side: FocusAction): WmLeafNode | WmFallbackNode | WmStackNode | null {
     const result = this.getNodeContaining(from);
     if (!result) {
       console.error('Could not find node containing handle', from);

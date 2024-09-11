@@ -1,14 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
 import { cloneDeep } from 'lodash';
-import { UIColors, WindowManagerSettings } from 'seelen-core';
+import {
+  NodeSubtype,
+  NodeType,
+  NoFallbackBehavior,
+  UIColors,
+  WindowManagerLayout,
+  WindowManagerSettings,
+} from 'seelen-core';
 
 import { NodeImpl, reIndexContainer } from '../../layout/app';
 
 import { Reservation, Sizing } from '../../layout/domain';
 import { AddWindowPayload, DesktopId, FocusAction, RootState } from './domain';
 
-import { defaultLayout } from '../../../../../shared.interfaces';
 import { toPhysicalPixels } from '../../../../shared';
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
@@ -24,6 +30,25 @@ const initialState: RootState = {
   reservation: null,
   settings: new WindowManagerSettings(),
   colors: UIColors.default(),
+};
+
+let defaultLayout: WindowManagerLayout = {
+  info: {
+    displayName: 'Default',
+    author: 'Seelen',
+    description: 'The default layout',
+    filename: 'default',
+  },
+  structure: {
+    type: NodeType.Fallback,
+    subtype: NodeSubtype.Permanent,
+    priority: 1,
+    growFactor: 1,
+    handles: [],
+    active: null,
+    condition: null,
+  },
+  noFallbackBehavior: NoFallbackBehavior.Float,
 };
 
 export const RootSlice = createSlice({

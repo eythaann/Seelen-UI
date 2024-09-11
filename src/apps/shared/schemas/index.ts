@@ -1,5 +1,3 @@
-import z from 'zod';
-
 export class VariableConvention {
   static snakeToCamel(text: string) {
     let camel = '';
@@ -66,10 +64,3 @@ export class VariableConvention {
     return VariableConvention.deepKeyParser(value, VariableConvention.camelToSnake);
   }
 }
-
-export const CreatorInfoSchema = z.object({
-  displayName: z.string().default('Unknown'),
-  author: z.string().default('Unknown'),
-  description: z.string().default('Empty'),
-  filename: z.string().default(''),
-});

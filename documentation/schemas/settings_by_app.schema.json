@@ -155,8 +155,7 @@
         "StartsWith",
         "EndsWith",
         "Contains",
-        "Regex",
-        "Legacy"
+        "Regex"
       ]
     }
   }

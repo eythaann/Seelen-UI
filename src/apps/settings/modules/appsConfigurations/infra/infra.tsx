@@ -5,6 +5,7 @@ import { cloneDeep } from 'lodash';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { AppConfiguration } from 'seelen-core';
 
 import { useAppSelector } from '../../shared/utils/infra';
 
@@ -13,7 +14,7 @@ import { cx, debounce } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
-import { AppConfiguration, AppConfigurationExtended, WmApplicationOptions } from '../domain';
+import { AppConfigurationExtended, WmApplicationOptions } from '../domain';
 
 import { ExportApps } from '../../shared/store/storeApi';
 import { EditAppModal } from './EditModal';
