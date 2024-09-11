@@ -75,7 +75,9 @@ use windows::{
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow},
-                SHCreateItemFromParsingName, ShellLink, VirtualDesktopManager, SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, SHQueryUserNotificationState, ShellLink,
+                VirtualDesktopManager, QUERY_USER_NOTIFICATION_STATE, QUNS_RUNNING_D3D_FULL_SCREEN,
+                SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
@@ -87,6 +89,7 @@ use windows::{
                 SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
                 SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
+                WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -204,9 +207,17 @@ impl WindowsApi {
         unsafe { IsZoomed(hwnd) }.into()
     }
 
+    pub fn get_notification_state() -> Result<QUERY_USER_NOTIFICATION_STATE> {
+        Ok(unsafe { SHQueryUserNotificationState()? })
+    }
+
+    pub fn is_gaming_mode() -> Result<bool> {
+        Ok(Self::get_notification_state()? == QUNS_RUNNING_D3D_FULL_SCREEN)
+    }
+
     pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
         let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
-        let window_rect = WindowsApi::get_window_rect_without_shadow(hwnd);
+        let window_rect = WindowsApi::get_inner_window_rect(hwnd);
         Ok(window_rect.left <= rc_monitor.left
             && window_rect.top <= rc_monitor.top
             && window_rect.right >= rc_monitor.right
@@ -561,17 +572,17 @@ impl WindowsApi {
                 u32::try_from(std::mem::size_of::<T>())?,
             )?;
         }
-
         Ok(())
     }
 
-    pub fn get_window_rect(hwnd: HWND) -> RECT {
+    /// this is the real window rect
+    pub fn get_outer_window_rect(hwnd: HWND) -> RECT {
         let mut rect = RECT::default();
         unsafe { GetWindowRect(hwnd, &mut rect).ok() };
         rect
     }
 
-    pub fn get_window_thickness(hwnd: HWND) -> u32 {
+    fn get_window_thickness(hwnd: HWND) -> u32 {
         let mut thickness = 0u32;
         let _ = Self::dwm_get_window_attribute(
             hwnd,
@@ -581,15 +592,23 @@ impl WindowsApi {
         thickness
     }
 
-    // some windows like explorer.exe have a shadow margin
-    pub fn get_window_rect_without_shadow(hwnd: HWND) -> RECT {
+    /// this is the rect of the window removing the outer frame
+    pub fn get_inner_window_rect(hwnd: HWND) -> RECT {
         let mut rect = RECT::default();
-        if Self::dwm_get_window_attribute(hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, &mut rect).is_ok() {
-            rect
-        } else {
-            unsafe { GetWindowRect(hwnd, &mut rect).ok() };
-            rect
+        if Self::dwm_get_window_attribute(hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, &mut rect).is_err() {
+            rect = Self::get_outer_window_rect(hwnd);
         }
+
+        let styles = Self::get_styles(hwnd);
+        if styles.contains(WS_THICKFRAME) || styles.contains(WS_SIZEBOX) {
+            let thickness = Self::get_window_thickness(hwnd) as i32;
+            rect.left += thickness;
+            rect.top += thickness;
+            rect.right -= thickness;
+            rect.bottom -= thickness;
+        }
+
+        rect
     }
 
     pub fn desktop_window() -> HWND {
@@ -649,27 +668,14 @@ impl WindowsApi {
     }
 
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {
-        let rect_without_shadow = Self::get_window_rect_without_shadow(hwnd);
-
-        let mut rect_with_shadow = Default::default();
-        unsafe { GetWindowRect(hwnd, &mut rect_with_shadow)? };
-
-        let mut shadow_rect = RECT {
-            left: rect_with_shadow.left - rect_without_shadow.left,
-            top: rect_with_shadow.top - rect_without_shadow.top,
-            right: rect_with_shadow.right - rect_without_shadow.right,
-            bottom: rect_with_shadow.bottom - rect_without_shadow.bottom,
-        };
-
-        if !Self::is_maximized(hwnd) {
-            let thickness = Self::get_window_thickness(hwnd) as i32;
-            shadow_rect.left -= thickness;
-            shadow_rect.top -= thickness;
-            shadow_rect.right += thickness;
-            shadow_rect.bottom += thickness;
-        }
-
-        Ok(shadow_rect)
+        let inner_rect = Self::get_inner_window_rect(hwnd);
+        let outer_rect = Self::get_outer_window_rect(hwnd);
+        Ok(RECT {
+            left: outer_rect.left - inner_rect.left,
+            top: outer_rect.top - inner_rect.top,
+            right: outer_rect.right - inner_rect.right,
+            bottom: outer_rect.bottom - inner_rect.bottom,
+        })
     }
 
     pub fn _get_virtual_desktop_manager() -> Result<IVirtualDesktopManager> {

@@ -61,7 +61,6 @@ impl SeelenWeg {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
                 if monitor == event_data.monitor {
                     self.show()?;
-                    self.set_overlaped_status(false)?;
                 }
             }
             _ => {}

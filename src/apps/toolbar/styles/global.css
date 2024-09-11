@@ -8,19 +8,19 @@ body {
   background: transparent;
   width: 100vw;
   height: 100vh;
-  border-top: 1px solid #000;
 }
 
-.fancy-toolbar {
+#root {
   width: 100vw;
-  margin-top: -1px;
   transition: transform 0.2s ease-in-out;
 
   &:has(.ft-bar-hidden):not(:hover) {
     transform: translateY(calc(-100% + 1px));
     border-bottom: 1px solid transparent;
   }
+}
 
+.fancy-toolbar {
   .ft-bar {
     position: relative;
     width: 100%;

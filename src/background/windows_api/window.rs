@@ -56,6 +56,7 @@ impl Window {
         WindowsApi::get_class(self.0).unwrap_or_default()
     }
 
+    /// will fail if process is restricted and the invoker is not running as admin
     pub fn exe(&self) -> Result<PathBuf> {
         WindowsApi::exe_path_v2(self.0)
     }
@@ -85,6 +86,10 @@ impl Window {
 
     pub fn is_visible(&self) -> bool {
         WindowsApi::is_window_visible(self.0)
+    }
+
+    pub fn is_fullscreen(&self) -> bool {
+        WindowsApi::is_fullscreen(self.0).unwrap_or(false)
     }
 
     /// is the window an Application Frame Host

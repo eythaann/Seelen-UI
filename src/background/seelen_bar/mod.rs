@@ -29,7 +29,6 @@ pub struct FancyToolbar {
     /// Is the rect that the toolbar should have when it isn't hidden
     pub theoretical_rect: RECT,
     last_focus: Option<isize>,
-    hidden: bool,
     overlaped: bool,
 }
 
@@ -49,7 +48,6 @@ impl FancyToolbar {
         Ok(Self {
             window: Self::create_window(postfix)?,
             last_focus: None,
-            hidden: false,
             cached_monitor: HMONITOR(-1),
             theoretical_rect: RECT::default(),
             overlaped: false,
@@ -62,7 +60,7 @@ impl FancyToolbar {
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
-        let window_rect = WindowsApi::get_window_rect_without_shadow(hwnd);
+        let window_rect = WindowsApi::get_inner_window_rect(hwnd);
         Ok(are_overlaped(&self.theoretical_rect, &window_rect))
     }
 
@@ -91,13 +89,11 @@ impl FancyToolbar {
 
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
-        self.hidden = true;
         Ok(())
     }
 
     pub fn show(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
-        self.hidden = false;
         Ok(())
     }
 
@@ -150,16 +146,14 @@ impl FancyToolbar {
         };
 
         let mut abd = AppBarData::from_handle(hwnd);
-        let abd_rect = match settings.hide_mode {
-            HideMode::Never => self.theoretical_rect,
-            _ => RECT {
-                bottom: rc_monitor.top + 1,
-                ..rc_monitor
-            },
+        match settings.hide_mode {
+            HideMode::Never => {
+                abd.set_edge(AppBarDataEdge::Top);
+                abd.set_rect(self.theoretical_rect);
+                abd.register_as_new_bar();
+            }
+            _ => abd.unregister_bar(),
         };
-        abd.set_edge(AppBarDataEdge::Top);
-        abd.set_rect(abd_rect);
-        abd.register_as_new_bar();
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(hwnd, &rc_monitor)?;

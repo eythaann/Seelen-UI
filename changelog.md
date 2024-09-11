@@ -13,6 +13,7 @@
 ### enhancements
 - improve quality icons from all app/files items.
 - improve init loading performance.
+- improve fullscreen matching system.
 
 ### fix
 - missing icons for files with a different extension than `exe`.
