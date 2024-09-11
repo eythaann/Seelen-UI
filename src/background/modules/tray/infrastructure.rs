@@ -1,6 +1,7 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use itertools::Itertools;
+use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
 use crate::{
@@ -11,7 +12,7 @@ use crate::{
 fn emit_tray_info() -> Result<()> {
     let handle = get_app_handle();
     let payload = get_tray_icons()?.iter().map(|t| t.info()).collect_vec();
-    handle.emit("tray-info", payload)?;
+    handle.emit(SeelenEvent::TrayInfo, payload)?;
     Ok(())
 }
 

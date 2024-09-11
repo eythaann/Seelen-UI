@@ -1,5 +1,6 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
+use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Networking::NetworkListManager::{
@@ -18,9 +19,9 @@ use super::{
 
 fn emit_networks(ip: String, adapters: Vec<NetworkAdapter>, has_internet: bool) {
     let handle = get_app_handle();
-    log_error!(handle.emit("network-default-local-ip", ip));
-    log_error!(handle.emit("network-adapters", adapters));
-    log_error!(handle.emit("network-internet-connection", has_internet));
+    log_error!(handle.emit(SeelenEvent::NetworkDefaultLocalIp, ip));
+    log_error!(handle.emit(SeelenEvent::NetworkAdapters, adapters));
+    log_error!(handle.emit(SeelenEvent::NetworkInternetConnection, has_internet));
 }
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);
@@ -86,7 +87,7 @@ pub fn wlan_start_scanning() {
     log::trace!("Start scanning networks");
     NetworkManager::start_scanning(|list| {
         let app = get_app_handle();
-        log_error!(app.emit("wlan-scanned", &list));
+        log_error!(app.emit(SeelenEvent::NetworkWlanScanned, &list));
     });
 }
 

@@ -10,7 +10,10 @@ use icon_extractor::extract_and_save_icon;
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::{AppExtraFlag, HideMode, SeelenWegSide};
+use seelen_core::{
+    handlers::SeelenEvent,
+    state::{AppExtraFlag, HideMode, SeelenWegSide},
+};
 use serde::Serialize;
 use tauri::{path::BaseDirectory, Emitter, Listener, Manager, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
@@ -77,9 +80,9 @@ impl Drop for SeelenWeg {
 impl SeelenWeg {
     pub fn set_active_window(hwnd: HWND) -> Result<()> {
         let handle = get_app_handle();
-        handle.emit("set-focused-handle", hwnd.0)?;
+        handle.emit(SeelenEvent::WegSetFocusedHandle, hwnd.0)?;
         handle.emit(
-            "set-focused-executable",
+            SeelenEvent::WegSetFocusedExecutable,
             WindowsApi::exe(hwnd).unwrap_or_default(),
         )?;
         Ok(())
@@ -113,7 +116,7 @@ impl SeelenWeg {
         if let Some(app) = app {
             app.title = WindowsApi::get_window_text(hwnd);
             get_app_handle()
-                .emit("update-open-app-info", app.clone())
+                .emit(SeelenEvent::WegUpdateOpenAppInfo, app.clone())
                 .expect("Failed to emit");
         }
     }
@@ -161,7 +164,7 @@ impl SeelenWeg {
         }
 
         get_app_handle()
-            .emit("add-open-app", app.clone())
+            .emit(SeelenEvent::WegAddOpenApp, app.clone())
             .expect("Failed to emit");
 
         trace_lock!(OPEN_APPS).push(app);
@@ -170,7 +173,7 @@ impl SeelenWeg {
     pub fn remove_hwnd(hwnd: HWND) {
         trace_lock!(OPEN_APPS).retain(|app| app.hwnd != hwnd.0);
         get_app_handle()
-            .emit("remove-open-app", hwnd.0)
+            .emit(SeelenEvent::WegRemoveOpenApp, hwnd.0)
             .expect("Failed to emit");
     }
 
@@ -250,7 +253,7 @@ impl SeelenWeg {
             return Ok(());
         }
         self.overlaped = is_overlaped;
-        self.emit("set-auto-hide", self.overlaped)?;
+        self.emit(SeelenEvent::WegOverlaped, self.overlaped)?;
         Ok(())
     }
 

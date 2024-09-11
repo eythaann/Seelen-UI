@@ -1,4 +1,4 @@
-import { EventHandler, Obtainable, SeelenCommand } from '../handlers';
+import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers';
 
 export * from './theme';
 export * from './settings';
@@ -12,5 +12,5 @@ export interface LauncherHistory {
 }
 export const LauncherHistory = Obtainable<LauncherHistory>(
   SeelenCommand.StateGetHistory,
-  EventHandler.History,
+  SeelenEvent.StateHistoryChanged,
 );

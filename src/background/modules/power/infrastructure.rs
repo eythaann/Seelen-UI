@@ -1,5 +1,6 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
+use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 use windows::{
     core::PCWSTR,
@@ -108,7 +109,7 @@ impl PowerManager {
         let handle = get_app_handle();
 
         let power_status: PowerStatus = WindowsApi::get_system_power_status()?.into();
-        handle.emit("power-status", power_status)?;
+        handle.emit(SeelenEvent::PowerStatus, power_status)?;
 
         let mut batteries: Vec<Battery> = Vec::new();
         let manager = battery::Manager::new()?;
@@ -116,7 +117,7 @@ impl PowerManager {
             batteries.push(battery.try_into()?);
         }
 
-        handle.emit("batteries-status", batteries)?;
+        handle.emit(SeelenEvent::BatteriesStatus, batteries)?;
 
         Ok(())
     }

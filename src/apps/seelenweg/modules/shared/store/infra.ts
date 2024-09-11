@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
-import { SeelenWegSettings, SeelenWegSide, SwItemType, UIColors, WegItem } from 'seelen-core';
+import { SeelenEvent, SeelenWegSettings, SeelenWegSide, SwItemType, UIColors, WegItem } from 'seelen-core';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -11,7 +11,6 @@ import { RootActions, RootSlice } from './app';
 import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
 
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { FileChange, GlobalEvent } from '../../../../shared/events';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
@@ -85,7 +84,7 @@ export async function registerStoreEvents() {
   const onFocusChanged = debounce((app: FocusedApp) => {
     store.dispatch(RootActions.setFocusedApp(app));
   }, 200);
-  await view.listen<FocusedApp>(GlobalEvent.FocusChanged, (e) => {
+  await view.listen<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     onFocusChanged(e.payload);
     if (e.payload.name != 'Seelen UI') {
       onFocusChanged.flush();
@@ -98,7 +97,7 @@ export async function registerStoreEvents() {
 
   await initUIColors();
 
-  await listenGlobal<unknown>(FileChange.WegItems, async () => {
+  await listenGlobal<unknown>(SeelenEvent.StateWegItemsChanged, async () => {
     if (IsSavingPinnedItems.current) {
       IsSavingPinnedItems.current = false;
       return;
@@ -128,7 +127,7 @@ export async function registerStoreEvents() {
     await view.emitTo(view.label, 'request-all-open-apps');
   });
 
-  await listenGlobal<any>(FileChange.Settings, async () => {
+  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async () => {
     await loadSettingsToStore();
   });
 

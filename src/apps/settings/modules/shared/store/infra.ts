@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
-import { AppConfiguration, Settings, Theme, UIColors } from 'seelen-core';
+import { AppConfiguration, SeelenEvent, Settings, Theme, UIColors } from 'seelen-core';
 
 import { startup } from '../tauri/infra';
 
@@ -11,7 +11,6 @@ import { StateToJsonSettings, StaticSettingsToState } from './app/StateBridge';
 
 import { RootState } from './domain';
 
-import { FileChange } from '../../../../shared/events';
 import { saveUserSettings, UserSettingsLoader } from './storeApi';
 
 const IsSavingSettings = { current: false };
@@ -51,7 +50,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setAppsConfigurations(event.payload));
   });
 
-  await listenGlobal<Settings>(FileChange.Settings, (event) => {
+  await listenGlobal<Settings>(SeelenEvent.StateSettingsChanged, (event) => {
     if (IsSavingSettings.current) {
       IsSavingSettings.current = false;
       return;

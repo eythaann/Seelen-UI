@@ -5,6 +5,7 @@ pub mod hook;
 use std::sync::atomic::{AtomicIsize, Ordering};
 
 use getset::{Getters, MutGetters};
+use seelen_core::handlers::SeelenEvent;
 use serde::Serialize;
 use tauri::{AppHandle, Emitter, Listener, WebviewWindow, Wry};
 use windows::Win32::{
@@ -123,7 +124,7 @@ impl WindowManager {
                 HWND(0)
             }
         };
-        self.emit("set-active-window", hwnd.0)?;
+        self.emit(SeelenEvent::WMSetActiveWindow, hwnd.0)?;
         Ok(())
     }
 
@@ -133,8 +134,10 @@ impl WindowManager {
         }
         log::trace!("Setting active workspace to: {}", virtual_desktop_id);
         self.current_virtual_desktop = virtual_desktop_id;
-        self.window
-            .emit("set-active-workspace", &self.current_virtual_desktop)?;
+        self.window.emit(
+            SeelenEvent::WMSetActiveWorkspace,
+            &self.current_virtual_desktop,
+        )?;
         Ok(())
     }
 
@@ -169,7 +172,7 @@ impl WindowManager {
             is_floating,
         };
 
-        self.emit("add-window", &app)?;
+        self.emit(SeelenEvent::WMAddWindow, &app)?;
         self.apps.push(app);
         Ok(true)
     }
@@ -190,7 +193,7 @@ impl WindowManager {
             }
             app.clone()
         };
-        self.emit("update-window", app)?;
+        self.emit(SeelenEvent::WMUpdateWindow, app)?;
         Ok(())
     }
 
@@ -218,13 +221,13 @@ impl WindowManager {
             hwnd.0,
             WindowsApi::get_window_text(hwnd)
         );
-        self.emit("remove-window", hwnd.0)?;
+        self.emit(SeelenEvent::WMRemoveWindow, hwnd.0)?;
         Ok(true)
     }
 
     pub fn force_retiling(&self) -> Result<()> {
         log::trace!("Forcing retiling");
-        self.emit("force-retiling", ())?;
+        self.emit(SeelenEvent::WMForceRetiling, ())?;
         Ok(())
     }
 
@@ -321,8 +324,10 @@ impl WindowManager {
                 if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
                     if let Some(wm) = monitor.wm_mut() {
                         wm.paused = false;
-                        wm.window
-                            .emit("set-active-workspace", &wm.current_virtual_desktop)?;
+                        wm.window.emit(
+                            SeelenEvent::WMSetActiveWorkspace,
+                            &wm.current_virtual_desktop,
+                        )?;
                     }
                 }
                 Ok(())

@@ -1,3 +1,4 @@
+use seelen_core::handlers::SeelenEvent;
 use std::sync::atomic::{AtomicBool, Ordering};
 use tauri::Emitter;
 use windows::core::GUID;
@@ -11,13 +12,16 @@ use super::domain::{Device, MediaPlayer};
 
 fn emit_media_sessions(playing: &Vec<MediaPlayer>) {
     let app = get_app_handle();
-    app.emit("media-sessions", playing).expect("failed to emit");
+    app.emit(SeelenEvent::MediaSessions, playing)
+        .expect("failed to emit");
 }
 
 fn emit_media_devices(inputs: &Vec<Device>, outputs: &Vec<Device>) {
     let app = get_app_handle();
-    app.emit("media-inputs", inputs).expect("failed to emit");
-    app.emit("media-outputs", outputs).expect("failed to emit");
+    app.emit(SeelenEvent::MediaInputs, inputs)
+        .expect("failed to emit");
+    app.emit(SeelenEvent::MediaOutputs, outputs)
+        .expect("failed to emit");
 }
 
 static REGISTERED: AtomicBool = AtomicBool::new(false);

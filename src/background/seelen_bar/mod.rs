@@ -11,7 +11,7 @@ use crate::{
     windows_api::{window::Window, AppBarData, AppBarDataEdge, WindowsApi},
 };
 use itertools::Itertools;
-use seelen_core::state::HideMode;
+use seelen_core::{handlers::SeelenEvent, state::HideMode};
 use serde::Serialize;
 use tauri::{Emitter, Listener, Manager, WebviewWindow};
 use windows::Win32::{
@@ -66,7 +66,7 @@ impl FancyToolbar {
             return Ok(());
         }
         self.overlaped = is_overlaped;
-        self.emit("set-auto-hide", self.overlaped)?;
+        self.emit(SeelenEvent::ToolbarOverlaped, self.overlaped)?;
         Ok(())
     }
 
@@ -195,8 +195,8 @@ impl FancyToolbar {
                 .iter()
                 .map(|d| d.as_serializable())
                 .collect_vec();
-            handler.emit("workspaces-changed", &desktops)?;
-            handler.emit("active-workspace-changed", vd.get_current()?.id())?;
+            handler.emit(SeelenEvent::WorkspacesChanged, &desktops)?;
+            handler.emit(SeelenEvent::ActiveWorkspaceChanged, vd.get_current()?.id())?;
             Ok(())
         });
     }

@@ -1,7 +1,7 @@
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect, useState } from 'react';
-import { EventHandler, Settings, Theme } from 'seelen-core';
+import { SeelenEvent, Settings, Theme } from 'seelen-core';
 
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
@@ -92,7 +92,7 @@ export async function StartThemingTool() {
     loadThemes(allThemes, selected);
   });
 
-  await listen<Settings>(EventHandler.Settings, (event) => {
+  await listen<Settings>(SeelenEvent.StateSettingsChanged, (event) => {
     selected = event.payload.selectedTheme;
     loadThemes(allThemes, selected);
   });
