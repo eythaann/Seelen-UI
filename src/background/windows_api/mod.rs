@@ -217,7 +217,7 @@ impl WindowsApi {
 
     pub fn is_fullscreen(hwnd: HWND) -> Result<bool> {
         let rc_monitor = WindowsApi::monitor_rect(WindowsApi::monitor_from_window(hwnd))?;
-        let window_rect = WindowsApi::get_inner_window_rect(hwnd);
+        let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
         Ok(window_rect.left <= rc_monitor.left
             && window_rect.top <= rc_monitor.top
             && window_rect.right >= rc_monitor.right
@@ -575,11 +575,11 @@ impl WindowsApi {
         Ok(())
     }
 
-    /// this is the real window rect
-    pub fn get_outer_window_rect(hwnd: HWND) -> RECT {
+    /// Get the window rect including drop shadow
+    pub fn get_outer_window_rect(hwnd: HWND) -> Result<RECT> {
         let mut rect = RECT::default();
-        unsafe { GetWindowRect(hwnd, &mut rect).ok() };
-        rect
+        unsafe { GetWindowRect(hwnd, &mut rect)? };
+        Ok(rect)
     }
 
     fn get_window_thickness(hwnd: HWND) -> u32 {
@@ -592,11 +592,12 @@ impl WindowsApi {
         thickness
     }
 
-    /// this is the rect of the window removing the outer frame
-    pub fn get_inner_window_rect(hwnd: HWND) -> RECT {
+    /// return the window rect excluding drop shadow & thick border
+    /// https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowrect#remarks
+    pub fn get_inner_window_rect(hwnd: HWND) -> Result<RECT> {
         let mut rect = RECT::default();
         if Self::dwm_get_window_attribute(hwnd, DWMWA_EXTENDED_FRAME_BOUNDS, &mut rect).is_err() {
-            rect = Self::get_outer_window_rect(hwnd);
+            rect = Self::get_outer_window_rect(hwnd)?;
         }
 
         let styles = Self::get_styles(hwnd);
@@ -608,7 +609,7 @@ impl WindowsApi {
             rect.bottom -= thickness;
         }
 
-        rect
+        Ok(rect)
     }
 
     pub fn desktop_window() -> HWND {
@@ -668,8 +669,8 @@ impl WindowsApi {
     }
 
     pub fn shadow_rect(hwnd: HWND) -> Result<RECT> {
-        let inner_rect = Self::get_inner_window_rect(hwnd);
-        let outer_rect = Self::get_outer_window_rect(hwnd);
+        let outer_rect = Self::get_outer_window_rect(hwnd)?;
+        let inner_rect = Self::get_inner_window_rect(hwnd)?;
         Ok(RECT {
             left: outer_rect.left - inner_rect.left,
             top: outer_rect.top - inner_rect.top,

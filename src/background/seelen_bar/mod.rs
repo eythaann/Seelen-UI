@@ -7,10 +7,7 @@ use crate::{
     modules::virtual_desk::get_vd_manager,
     seelen::get_app_handle,
     state::application::FULL_STATE,
-    utils::{
-        are_overlaped,
-        constants::{OVERLAP_BLACK_LIST_BY_EXE, OVERLAP_BLACK_LIST_BY_TITLE},
-    },
+    utils::{are_overlaped, constants::OVERLAP_BLACK_LIST_BY_EXE},
     windows_api::{window::Window, AppBarData, AppBarDataEdge, WindowsApi},
 };
 use itertools::Itertools;
@@ -60,7 +57,7 @@ impl FancyToolbar {
     }
 
     pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
-        let window_rect = WindowsApi::get_inner_window_rect(hwnd);
+        let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
         Ok(are_overlaped(&self.theoretical_rect, &window_rect))
     }
 
@@ -75,16 +72,12 @@ impl FancyToolbar {
 
     pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
         let window = Window::from(hwnd);
-        let should_handle_hidden = window.is_visible()
+        let is_overlaped = self.is_overlapping(hwnd)?
+            && !window.is_desktop()
             && !window.is_seelen_overlay()
-            && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
             && !OVERLAP_BLACK_LIST_BY_EXE
                 .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
-
-        if !should_handle_hidden {
-            return Ok(());
-        }
-        self.set_overlaped_status(self.is_overlapping(hwnd)?)
+        self.set_overlaped_status(is_overlaped)
     }
 
     pub fn hide(&mut self) -> Result<()> {

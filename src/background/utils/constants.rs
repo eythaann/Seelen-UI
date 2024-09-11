@@ -30,8 +30,6 @@ lazy_static! {
     .collect_vec();
 }
 
-pub static OVERLAP_BLACK_LIST_BY_TITLE: [&str; 2] = ["", "Program Manager"];
-
 pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 4] = [
     "msedgewebview2.exe",
     "SearchHost.exe",

@@ -35,6 +35,10 @@ pub fn sleep_millis(millis: u64) {
 }
 
 pub fn are_overlaped(a: &RECT, b: &RECT) -> bool {
+    let zeroed = RECT::default();
+    if a == &zeroed || b == &zeroed {
+        return false;
+    }
     if a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom {
         return false;
     }

@@ -28,7 +28,7 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
 
         let image = SeelenWeg::capture_window(hwnd);
         if let Some(image) = image {
-            let rect = WindowsApi::get_inner_window_rect(hwnd);
+            let rect = WindowsApi::get_inner_window_rect(hwnd)?;
             let shadow = WindowsApi::shadow_rect(hwnd)?;
             let width = rect.right - rect.left;
             let height = rect.bottom - rect.top;
