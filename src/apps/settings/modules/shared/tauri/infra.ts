@@ -1,16 +1,17 @@
 import { invoke } from '@tauri-apps/api/core';
 import * as oldStartup from '@tauri-apps/plugin-autostart';
+import { SeelenCommand } from 'seelen-core';
 
 export * as dialog from '@tauri-apps/plugin-dialog';
 export * as fs from '@tauri-apps/plugin-fs';
 
 export class startup {
   static async enable(): Promise<void> {
-    await invoke('set_auto_start', { enabled: true });
+    await invoke(SeelenCommand.SetAutoStart, { enabled: true });
   }
 
   static async disable(): Promise<void> {
-    await invoke('set_auto_start', { enabled: false });
+    await invoke(SeelenCommand.SetAutoStart, { enabled: false });
   }
 
   static async isEnabled(): Promise<boolean> {

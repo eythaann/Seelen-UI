@@ -4,7 +4,7 @@ import { Checkbox, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import { KeyboardEventHandler, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 
 import { Selectors } from '../../shared/store/app';
 import { SaveHistory } from '../app';
@@ -46,7 +46,7 @@ export function Launcher() {
   const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (!showHistory || matchingHistory.length === 0) {
       if (e.key === 'Enter') {
-        invoke('open_file', { path: command });
+        invoke(SeelenCommand.OpenFile, { path: command });
         getCurrentWindow().hide();
         if (selectedRunner) {
           SaveHistory({

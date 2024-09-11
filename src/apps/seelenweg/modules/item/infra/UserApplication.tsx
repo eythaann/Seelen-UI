@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 import { updatePreviews } from '../../shared/utils/infra';
@@ -84,7 +84,7 @@ export const UserApplication = memo(({ item }: Props) => {
             style={{ height: size, aspectRatio: '1/1' }}
             onClick={() => {
               let hwnd = item.opens[0] || 0;
-              invoke('weg_toggle_window_state', { hwnd, exePath: item.execution_path });
+              invoke(SeelenCommand.WegToggleWindowState, { hwnd, exePath: item.execution_path });
             }}
             onContextMenu={(e) => e.stopPropagation()}
           >

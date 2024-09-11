@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { invoke } from '@tauri-apps/api/core';
-import { InvokeHandler, LauncherHistory, Settings, UIColors } from 'seelen-core';
+import { LauncherHistory, SeelenCommand, Settings, UIColors } from 'seelen-core';
 
 import { Actions, RootSlice } from './app';
 
@@ -24,7 +24,7 @@ export async function initStore() {
   const settings = await Settings.getAsync();
 
   dispatch(Actions.setSettings(settings.launcher));
-  dispatch(Actions.setApps(await invoke(InvokeHandler.GetLauncherApps)));
+  dispatch(Actions.setApps(await invoke(SeelenCommand.LauncherGetApps)));
   dispatch(Actions.setHistory(await LauncherHistory.getAsync()));
 
   Settings.onChange((settings) => dispatch(Actions.setSettings(settings.launcher)));

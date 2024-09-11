@@ -2,6 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { Button, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SeelenCommand } from 'seelen-core';
 
 import { WlanBssEntry, WlanProfile } from '../domain';
 
@@ -43,7 +44,7 @@ export function WlanSelectorEntry(props: {
     }
 
     if (entry.connected) {
-      invoke('wlan_disconnect').then(() => setLoading(false), onrejected);
+      invoke(SeelenCommand.WlanDisconnect).then(() => setLoading(false), onrejected);
       return;
     }
 

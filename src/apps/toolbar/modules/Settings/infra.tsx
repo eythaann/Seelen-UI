@@ -4,7 +4,7 @@ import { Popover, Slider, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 import { SettingsToolbarModule } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -82,7 +82,7 @@ export function SettingsModule({ module }: Props) {
             >
               <button
                 className="fast-settings-item-title-button"
-                onClick={() => invoke('show_app_settings')}
+                onClick={() => invoke(SeelenCommand.ShowAppSettings)}
               >
                 <Icon iconName="RiSettings4Fill" />
               </button>
@@ -132,22 +132,22 @@ export function SettingsModule({ module }: Props) {
           <span className="fast-settings-label">{t('settings.power')}</span>
           <div className="fast-settings-item fast-settings-power">
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')}>
-              <button className="fast-settings-item-button" onClick={() => invoke('log_out')}>
+              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.LogOut)}>
                 <Icon iconName="BiLogOut" />
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.sleep')}>
-              <button className="fast-settings-item-button" onClick={() => invoke('suspend')}>
+              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.Suspend)}>
                 <Icon iconName="BiMoon" />
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
-              <button className="fast-settings-item-button" onClick={() => invoke('restart')}>
+              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.Restart)}>
                 <Icon iconName="VscDebugRestart" />
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.shutdown')}>
-              <button className="fast-settings-item-button" onClick={() => invoke('shutdown')}>
+              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.Shutdown)}>
                 <Icon iconName="GrPower" />
               </button>
             </Tooltip>

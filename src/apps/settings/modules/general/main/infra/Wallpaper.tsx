@@ -2,6 +2,7 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { dialog } from '../../../shared/tauri/infra';
 
@@ -27,7 +28,7 @@ export function Wallpaper() {
       return;
     }
 
-    await invoke('state_set_wallpaper', { path: file.path });
+    await invoke(SeelenCommand.StateSetWallpaper, { path: file.path });
     dispatch(RootActions.setWallpaper(convertFileSrc(file.path)));
   }
 

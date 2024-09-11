@@ -3,6 +3,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { Button, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { resolveDataPath } from '../shared/config/infra';
 
@@ -22,15 +23,15 @@ export function DeveloperTools() {
   }
 
   async function openSettingsFile() {
-    invoke('open_file', { path: await resolveDataPath('settings.json') });
+    invoke(SeelenCommand.OpenFile, { path: await resolveDataPath('settings.json') });
   }
 
   async function openInstallFolder() {
-    invoke('open_file', { path: await path.resourceDir() });
+    invoke(SeelenCommand.OpenFile, { path: await path.resourceDir() });
   }
 
   async function openDataFolder() {
-    invoke('open_file', { path: await path.appDataDir() });
+    invoke(SeelenCommand.OpenFile, { path: await path.appDataDir() });
   }
 
   return (

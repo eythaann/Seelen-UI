@@ -2,6 +2,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { Menu, MenuProps, Popover } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
+import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { store } from '../shared/store/infra';
@@ -32,7 +33,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       key: 'settings',
       label: t('taskbar_menu.settings'),
       onClick() {
-        invoke('show_app_settings');
+        invoke(SeelenCommand.ShowAppSettings);
       },
     },
   ];
@@ -107,12 +108,12 @@ export function getMenuForItem(t: TFunction, item: ExtendedPinnedWegItem | Exten
     {
       key: 'weg_select_file_on_explorer',
       label: t('app_menu.open_file_location'),
-      onClick: () => invoke('select_file_on_explorer', { path: item.exe }),
+      onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.exe }),
     },
     {
       key: 'weg_runas',
       label: t('app_menu.run_as'),
-      onClick: () => invoke('run_as_admin', { path: item.execution_path }),
+      onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.execution_path }),
     },
   );
 
@@ -131,7 +132,7 @@ export function getMenuForItem(t: TFunction, item: ExtendedPinnedWegItem | Exten
         label: item.opens.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
         onClick() {
           item.opens.forEach((hwnd) => {
-            invoke('weg_close_app', { hwnd });
+            invoke(SeelenCommand.WegCloseApp, { hwnd });
           });
         },
         danger: true,

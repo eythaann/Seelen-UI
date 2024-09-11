@@ -2,6 +2,7 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Dropdown, Menu } from 'antd';
 import { memo } from 'react';
+import { SeelenCommand } from 'seelen-core';
 
 import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
 
@@ -11,7 +12,7 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
   const { label, icon, executionPath, path } = item;
 
   function onClick() {
-    invoke('open_file', { path: executionPath });
+    invoke(SeelenCommand.OpenFile, { path: executionPath });
     getCurrentWindow().hide();
   }
 
@@ -27,7 +28,7 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
               label: 'Open File Location',
               key: 'open',
               onClick() {
-                invoke('select_file_on_explorer', { path });
+                invoke(SeelenCommand.SelectFileOnExplorer, { path });
               },
             },
           ]}
