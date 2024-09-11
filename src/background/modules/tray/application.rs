@@ -210,7 +210,7 @@ impl TrayIcon {
 
         if let Some(hwnd) = get_tray_overflow_handle() {
             WindowsApi::show_window(hwnd, SW_SHOW)?;
-            let rect = WindowsApi::get_outer_window_rect(hwnd);
+            let rect = WindowsApi::get_outer_window_rect(hwnd)?;
 
             WindowsApi::move_window(
                 hwnd,
