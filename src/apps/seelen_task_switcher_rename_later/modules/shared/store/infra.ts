@@ -4,11 +4,9 @@ import { RootSlice } from './app';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoreActions: true,
-        ignoreState: true,
-      },
-    }),
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });

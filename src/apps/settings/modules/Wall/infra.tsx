@@ -67,9 +67,8 @@ export function WallSettings() {
           <b>{t('wall.enable')}</b>
           <Switch value={enabled} onChange={onChangeEnabled} />
         </SettingsOption>
-
         <SettingsOption>
-          <b>{t('wall.interval')} (s)</b>
+          <b>{t('wall.interval')}</b>
           <InputNumber value={interval} onChange={onChangeInterval} min={1} />
         </SettingsOption>
       </SettingsGroup>

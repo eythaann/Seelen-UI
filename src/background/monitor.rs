@@ -51,7 +51,7 @@ impl Monitor {
             weg.set_positions(self.handle.0)?;
         }
         if let Some(wall) = &mut self.wall {
-            wall.set_position(self.handle)?;
+            wall.set_position()?;
         }
         Ok(())
     }
@@ -93,7 +93,7 @@ impl Monitor {
 
     fn add_wall(&mut self) -> Result<()> {
         if self.wall.is_none() {
-            self.wall = Some(SeelenWall::new(&self.name)?)
+            self.wall = Some(SeelenWall::new()?)
         }
         Ok(())
     }
@@ -117,7 +117,7 @@ impl Monitor {
             self.wm = None;
         }
 
-        if settings.is_wall_enabled() {
+        if settings.is_wall_enabled() && self.handle == WindowsApi::primary_monitor() {
             self.add_wall()?;
         } else {
             self.wall = None;

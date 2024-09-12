@@ -25,7 +25,7 @@ interface Props {
 
 const getAppSelector = (idx: number | undefined, isNew: boolean) =>
   createSelector([ownSelector], (state: RootState) => {
-    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.create();
+    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.placeholder();
   });
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {

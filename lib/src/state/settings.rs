@@ -11,85 +11,7 @@ use serde_alias::serde_alias;
 
 use crate::rect::Rect;
 
-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
-pub enum VirtualDesktopStrategy {
-    Native,
-    Seelen,
-}
-
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
-#[serde(default, rename_all = "camelCase")]
-pub struct Settings {
-    /// fancy toolbar config
-    pub fancy_toolbar: FancyToolbarSettings,
-    /// seelenweg (dock/taskbar) config
-    pub seelenweg: SeelenWegSettings,
-    /// window manager config
-    pub window_manager: WindowManagerSettings,
-    /// background and virtual desktops config
-    pub wall: SeelenWallSettings,
-    /// App launcher settings
-    pub launcher: SeelenLauncherSettings,
-    /// list of monitors
-    pub monitors: Vec<Monitor>,
-    /// enable or disable ahk
-    pub ahk_enabled: bool,
-    /// ahk variables
-    pub ahk_variables: AhkVarList,
-    /// list of selected themes
-    pub selected_theme: Vec<String>,
-    /// enable or disable dev tools tab in settings
-    pub dev_tools: bool,
-    /// language to use, if null the system locale is used
-    pub language: Option<String>,
-    /// what virtual desktop implementation will be used, in case Native is not available we use Seelen
-    pub virtual_desktop_strategy: VirtualDesktopStrategy,
-    /// enable experimental/beta updates
-    pub beta_channel: bool,
-}
-
-impl Default for Settings {
-    fn default() -> Self {
-        Self {
-            ahk_enabled: true,
-            selected_theme: vec!["default".to_string()],
-            monitors: vec![Monitor::default()],
-            fancy_toolbar: FancyToolbarSettings::default(),
-            seelenweg: SeelenWegSettings::default(),
-            window_manager: WindowManagerSettings::default(),
-            wall: SeelenWallSettings::default(),
-            launcher: SeelenLauncherSettings::default(),
-            ahk_variables: AhkVarList::default(),
-            dev_tools: false,
-            language: Some(Self::get_system_language()),
-            virtual_desktop_strategy: VirtualDesktopStrategy::Native,
-            beta_channel: false,
-        }
-    }
-}
-
-impl Settings {
-    pub fn get_locale() -> Option<String> {
-        sys_locale::get_locale()
-    }
-
-    pub fn get_system_language() -> String {
-        match sys_locale::get_locale() {
-            Some(l) => l.split('-').next().unwrap_or("en").to_string(),
-            None => "en".to_string(),
-        }
-    }
-
-    pub fn clean(&mut self) {
-        self.launcher.clean();
-        self.wall.clean();
-
-        if self.language.is_none() {
-            self.language = Some(Self::get_system_language());
-        }
-    }
-}
+use super::MonitorConfiguration;
 
 // ============== Fancy Toolbar Settings ==============
 
@@ -229,11 +151,12 @@ pub struct WindowManagerSettings {
     /// the resize size in % to be used when resizing via cli
     pub resize_delta: f64,
     /// default gap between containers
-    pub workspace_gap: f64,
+    pub workspace_gap: u32,
     /// default workspace padding
-    pub workspace_padding: f64,
+    pub workspace_padding: u32,
     /// default workspace margin
-    pub global_work_area_offset: Rect,
+    #[serde(alias = "global_work_area_offset")]
+    pub workspace_margin: Rect,
     /// floating window settings
     pub floating: FloatingWindowSettings,
     /// default layout
@@ -266,50 +189,11 @@ impl Default for WindowManagerSettings {
             auto_stacking_by_category: true,
             border: Border::default(),
             resize_delta: 10.0,
-            workspace_gap: 10.0,
-            workspace_padding: 10.0,
-            global_work_area_offset: Rect::default(),
+            workspace_gap: 10,
+            workspace_padding: 10,
+            workspace_margin: Rect::default(),
             floating: FloatingWindowSettings::default(),
             default_layout: String::from("default.yml"),
-        }
-    }
-}
-// ============== Settings by Monitor ==============
-
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
-#[serde(default, rename_all = "camelCase")]
-pub struct Workspace {
-    pub name: String,
-    pub layout: String,
-    pub padding: Option<f64>,
-    pub gap: Option<f64>,
-}
-
-#[serde_alias(SnakeCase)]
-#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
-#[serde(default, rename_all = "camelCase")]
-pub struct Monitor {
-    pub workspaces: Vec<Workspace>,
-    pub work_area_offset: Option<Rect>,
-}
-
-impl Default for Workspace {
-    fn default() -> Self {
-        Self {
-            name: "New Workspace".to_string(),
-            layout: "BSP".to_string(),
-            padding: None,
-            gap: None,
-        }
-    }
-}
-
-impl Default for Monitor {
-    fn default() -> Self {
-        Self {
-            workspaces: vec![Workspace::default()],
-            work_area_offset: None,
         }
     }
 }
@@ -555,6 +439,88 @@ impl Default for AhkVarList {
             send_to_workspace_7: AhkVar::new("Win + Shift + 8", "#+8"),
             send_to_workspace_8: AhkVar::new("Win + Shift + 9", "#+9"),
             send_to_workspace_9: AhkVar::new("Win + Shift + 0", "#+0"),
+        }
+    }
+}
+
+// ======================== Final Settings Struct ===============================
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+pub enum VirtualDesktopStrategy {
+    Native,
+    Seelen,
+}
+
+#[serde_alias(SnakeCase)]
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(default, rename_all = "camelCase")]
+pub struct Settings {
+    /// fancy toolbar config
+    pub fancy_toolbar: FancyToolbarSettings,
+    /// seelenweg (dock/taskbar) config
+    pub seelenweg: SeelenWegSettings,
+    /// window manager config
+    pub window_manager: WindowManagerSettings,
+    /// background and virtual desktops config
+    pub wall: SeelenWallSettings,
+    /// App launcher settings
+    pub launcher: SeelenLauncherSettings,
+    /// list of monitors
+    pub monitors: Vec<MonitorConfiguration>,
+    /// enable or disable ahk
+    pub ahk_enabled: bool,
+    /// ahk variables
+    pub ahk_variables: AhkVarList,
+    /// list of selected themes
+    pub selected_theme: Vec<String>,
+    /// enable or disable dev tools tab in settings
+    pub dev_tools: bool,
+    /// language to use, if null the system locale is used
+    pub language: Option<String>,
+    /// what virtual desktop implementation will be used, in case Native is not available we use Seelen
+    pub virtual_desktop_strategy: VirtualDesktopStrategy,
+    /// enable experimental/beta updates
+    pub beta_channel: bool,
+}
+
+impl Default for Settings {
+    fn default() -> Self {
+        Self {
+            ahk_enabled: true,
+            selected_theme: vec!["default".to_string()],
+            monitors: vec![MonitorConfiguration::default()],
+            fancy_toolbar: FancyToolbarSettings::default(),
+            seelenweg: SeelenWegSettings::default(),
+            window_manager: WindowManagerSettings::default(),
+            wall: SeelenWallSettings::default(),
+            launcher: SeelenLauncherSettings::default(),
+            ahk_variables: AhkVarList::default(),
+            dev_tools: false,
+            language: Some(Self::get_system_language()),
+            virtual_desktop_strategy: VirtualDesktopStrategy::Native,
+            beta_channel: false,
+        }
+    }
+}
+
+impl Settings {
+    pub fn get_locale() -> Option<String> {
+        sys_locale::get_locale()
+    }
+
+    pub fn get_system_language() -> String {
+        match sys_locale::get_locale() {
+            Some(l) => l.split('-').next().unwrap_or("en").to_string(),
+            None => "en".to_string(),
+        }
+    }
+
+    pub fn clean(&mut self) {
+        self.launcher.clean();
+        self.wall.clean();
+
+        if self.language.is_none() {
+            self.language = Some(Self::get_system_language());
         }
     }
 }

@@ -9,7 +9,7 @@ const initialState: LauncherState = {
   colors: UIColors.default(),
   apps: [],
   history: {},
-  settings: { ...new SeelenLauncherSettings() },
+  settings: new SeelenLauncherSettings(),
 };
 
 export const RootSlice = createSlice({

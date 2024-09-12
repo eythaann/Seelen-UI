@@ -12,6 +12,11 @@ import { StartThemingTool } from '../../../../shared/styles';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 export async function loadStore() {
@@ -100,10 +105,10 @@ function loadSettingsCSS(settings: WindowManagerSettings) {
   styles.setProperty('--config-padding', `${settings.workspacePadding}px`);
   styles.setProperty('--config-containers-gap', `${settings.workspaceGap}px`);
 
-  styles.setProperty('--config-margin-top', `${settings.globalWorkAreaOffset.top}px`);
-  styles.setProperty('--config-margin-left', `${settings.globalWorkAreaOffset.left}px`);
-  styles.setProperty('--config-margin-right', `${settings.globalWorkAreaOffset.right}px`);
-  styles.setProperty('--config-margin-bottom', `${settings.globalWorkAreaOffset.bottom}px`);
+  styles.setProperty('--config-margin-top', `${settings.workspaceMargin.top}px`);
+  styles.setProperty('--config-margin-left', `${settings.workspaceMargin.left}px`);
+  styles.setProperty('--config-margin-right', `${settings.workspaceMargin.right}px`);
+  styles.setProperty('--config-margin-bottom', `${settings.workspaceMargin.bottom}px`);
 
   styles.setProperty('--config-border-offset', `${settings.border.offset}px`);
   styles.setProperty('--config-border-width', `${settings.border.width}px`);

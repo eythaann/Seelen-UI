@@ -1,24 +1,19 @@
 .group {
-  padding: 10px 20px;
+  padding: 10px 14px;
   font-size: 0.9rem;
   border-radius: var(--config-border-radius);
   overflow: hidden;
   position: relative;
+  flex: 1;
+  margin-bottom: 10px;
 
-  &:last-child {
-    margin-bottom: 10px;
-  }
-
-  > div {
+  .noise,
+  .blur {
     position: absolute; /* for noise and blur */
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-  }
-
-  &:not(:last-child) {
-    margin-bottom: 20px;
   }
 
   .noise {
@@ -35,17 +30,11 @@
   .content {
     position: relative;
     z-index: 1;
-
-    > .box,
-    > .subgroup {
-      &:not(:last-child) {
-        padding-bottom: 6px;
-        margin-bottom: 6px;
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 
     .box {
-      padding: 5px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -55,16 +44,19 @@
       }
     }
 
-    .subtitle {
-      font-weight: 600;
-    }
-
     .subgroup {
-      padding-left: 10px;
+      .subtitle {
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
 
-      .box {
-        > span:first-child::before {
-          content: "- ";
+      .content {
+        padding-left: 10px;
+
+        .box {
+          > span:first-child::before {
+            content: "- ";
+          }
         }
       }
     }

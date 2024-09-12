@@ -81,15 +81,16 @@ use windows::{
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW, GetWindowThreadProcessId,
-                IsIconic, IsWindow, IsWindowVisible, IsZoomed, SetForegroundWindow, SetWindowPos,
-                ShowWindow, ShowWindowAsync, SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, HWND_TOP, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
-                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
-                WS_SIZEBOX, WS_THICKFRAME,
+                GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
+                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
+                SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE, GW_OWNER, HWND_TOP,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
+                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
+                SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER,
+                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
+                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -655,6 +656,18 @@ impl WindowsApi {
             .to_string_lossy()
             .trim_start_matches(r"\\.\")
             .to_string())
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen
+    pub fn virtual_screen_rect() -> Result<RECT> {
+        let mut rect = RECT::default();
+        unsafe {
+            rect.left = GetSystemMetrics(SM_XVIRTUALSCREEN);
+            rect.top = GetSystemMetrics(SM_YVIRTUALSCREEN);
+            rect.right = rect.left + GetSystemMetrics(SM_CXVIRTUALSCREEN);
+            rect.bottom = rect.top + GetSystemMetrics(SM_CYVIRTUALSCREEN);
+        }
+        Ok(rect)
     }
 
     pub fn monitor_info(hmonitor: HMONITOR) -> Result<MONITORINFOEXW> {

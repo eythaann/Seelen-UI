@@ -52,11 +52,11 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
   };
 
   const onAddAndItem = () => {
-    onChange({ ...identifier, and: [AppIdentifier.create(), ...identifier.and] });
+    onChange({ ...identifier, and: [AppIdentifier.placeholder(), ...identifier.and] });
   };
 
   const onAddOrItem = () => {
-    onChange({ ...identifier, or: [AppIdentifier.create(), ...identifier.or] });
+    onChange({ ...identifier, or: [AppIdentifier.placeholder(), ...identifier.or] });
   };
 
   return (

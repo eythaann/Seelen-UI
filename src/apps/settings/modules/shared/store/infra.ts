@@ -17,6 +17,11 @@ const IsSavingSettings = { current: false };
 
 export const store = configureStore({
   reducer: RootReducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;

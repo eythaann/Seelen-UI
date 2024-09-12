@@ -31,7 +31,7 @@ export function AppLauncherSettings() {
   }
 
   function onAddRunner() {
-    onChangeRunners([...runners, { ...new SeelenLauncherRunner() }]);
+    onChangeRunners([...runners, new SeelenLauncherRunner()]);
   }
 
   function onRemoveRunner(idx: number) {
@@ -74,7 +74,7 @@ export function AppLauncherSettings() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <b>{t('app_launcher.runners')}</b>
+        <b>{t('app_launcher.runners.label')}</b>
         <Reorder.Group
           values={runners}
           onReorder={onChangeRunners}
@@ -84,7 +84,9 @@ export function AppLauncherSettings() {
           {runners.map((runner, idx) => (
             <Reorder.Item key={runner.id} value={runner} className={cs.runner}>
               <Input
-                value={runner.label}
+                value={
+                  runner.label.startsWith('t:') ? t(runner.label.replace('t:', '')) : runner.label
+                }
                 placeholder="-"
                 disabled={runner.readonly}
                 onChange={(e) => onChangeRunnerLabel(idx, e.target.value)}

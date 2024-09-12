@@ -16,12 +16,10 @@ export enum Route {
   INFO = 'info',
 }
 
-export const WorkingInProgressRoutes = [Route.MONITORS];
-
 export const RouteExtraInfo: { [key in Route]?: string } = {
   [Route.SPECIFIC_APPS]: `
     Seelen UI use only one identifier per app (first match found) so the order in how are specificated is important,
-    the latest added will be priorized, as note the table is sorted by default from latest to old.
+    the latest added will be prioritized, as note the table is sorted by default from latest to old.
   `,
 };
 

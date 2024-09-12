@@ -18,6 +18,11 @@ import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground[]> {

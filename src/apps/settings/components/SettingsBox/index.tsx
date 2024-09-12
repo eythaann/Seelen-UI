@@ -22,10 +22,10 @@ interface SubGroupProps {
 
 export const SettingsSubGroup = ({ children, label, disableOptions }: SubGroupProps) => {
   return (
-    <div>
+    <div className={cs.subgroup}>
       <div className={cs.subtitle}>{label}</div>
       <ConfigProvider componentDisabled={disableOptions}>
-        <div className={cs.subgroup}>{children}</div>
+        <div className={cs.content}>{children}</div>
       </ConfigProvider>
     </div>
   );
