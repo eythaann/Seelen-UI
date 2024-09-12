@@ -1,5 +1,6 @@
 import { Obtainable, SeelenCommand, SeelenEvent } from '../handlers';
 import { Rect } from '../utils';
+import { MonitorConfiguration } from './settings_by_monitor';
 
 export enum VirtualDesktopStrategy {
   Native = 'Native',
@@ -63,7 +64,7 @@ export class Settings extends Obtainable<Settings>(
   windowManager: WindowManagerSettings = new WindowManagerSettings();
   wall: SeelenWallSettings = new SeelenWallSettings();
   launcher: SeelenLauncherSettings = new SeelenLauncherSettings();
-  monitors: Monitor[] = [new Monitor()];
+  monitors: MonitorConfiguration[] = [new MonitorConfiguration()];
   ahkEnabled: boolean = true;
   ahkVariables: AhkVarList = new AhkVarList();
   selectedTheme: string[] = ['default'];
@@ -111,23 +112,9 @@ export class WindowManagerSettings {
   resizeDelta: number = 10.0;
   workspaceGap: number = 10.0;
   workspacePadding: number = 10.0;
-  globalWorkAreaOffset: Rect = new Rect();
+  workspaceMargin: Rect = new Rect();
   floating: FloatingWindowSettings = new FloatingWindowSettings();
   defaultLayout: string = 'default.yml';
-}
-
-export class Workspace {
-  name: string = 'New Workspace';
-  layout: string = 'BSP';
-  padding: number | null = null;
-  gap: number | null = null;
-}
-
-export class Monitor {
-  workspaces: Workspace[] = [new Workspace()];
-  workAreaOffset: Rect | null = null;
-  /** This is only used internally on settings, rust provider does not contain this key */
-  editingWorkspace?: number;
 }
 
 export class AhkVar {

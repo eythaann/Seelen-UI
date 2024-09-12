@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 
 import { AppLauncherSettings } from './modules/AppLauncher/infra';
 import { AppsConfiguration } from './modules/appsConfigurations/infra/infra';
+import { SettingsByMonitor } from './modules/ByMonitor/infra';
 import { DeveloperTools } from './modules/developer/infra';
 import { FancyToolbarSettings } from './modules/fancyToolbar/infra';
 import { General } from './modules/general/main/infra';
 import { Information } from './modules/information/infrastructure';
-import { Monitors } from './modules/monitors/main/infra';
 import { SeelenWegSettings } from './modules/seelenweg/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
 import { WallSettings } from './modules/Wall/infra';
@@ -24,7 +24,7 @@ import { Route } from './components/navigation/routes';
 
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.GENERAL]: General,
-  [Route.MONITORS]: Monitors,
+  [Route.MONITORS]: SettingsByMonitor,
   [Route.SEELEN_ROFI]: AppLauncherSettings,
   [Route.SEELEN_WALL]: WallSettings,
   [Route.SHORTCUTS]: Shortcuts,

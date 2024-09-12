@@ -11,7 +11,6 @@ export enum WegApplicationOptions {
   Hidden = `${AppExtraFlag.Hidden}`,
 }
 
-console.log(WmApplicationOptions, WegApplicationOptions);
 export interface AppConfigurationExtended extends AppConfiguration {
   key: number;
 }

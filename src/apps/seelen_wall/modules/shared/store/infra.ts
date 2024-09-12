@@ -5,6 +5,11 @@ import { Actions, RootSlice } from './app';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 export async function initStore() {

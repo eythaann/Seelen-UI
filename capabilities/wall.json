@@ -4,7 +4,7 @@
   "description": "permissions for wall",
   "local": true,
   "windows": [
-    "seelen-wall/*"
+    "seelen-wall"
   ],
   "permissions": [
     "log:default",

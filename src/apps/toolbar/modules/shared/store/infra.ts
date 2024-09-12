@@ -29,6 +29,11 @@ import i18n from '../../../i18n';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 async function initUIColors() {
@@ -82,7 +87,6 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<MediaChannelTransportData[]>('media-sessions', (event) => {
-    console.log(event.payload);
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 

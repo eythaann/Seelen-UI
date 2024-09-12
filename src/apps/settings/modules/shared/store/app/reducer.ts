@@ -10,7 +10,6 @@ import {
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
-import { MonitorsSlice } from '../../../monitors/main/app';
 import { SeelenWegSlice } from '../../../seelenweg/app';
 import { AhkVariablesSlice } from '../../../shortcuts/app';
 import { SeelenManagerSlice } from '../../../WindowManager/main/app';
@@ -33,7 +32,7 @@ const initialState: RootState = {
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,
-  monitors: MonitorsSlice.getInitialState(),
+  monitors: [],
   appsConfigurations: AppsConfigSlice.getInitialState(),
   ahkEnabled: true,
   ahkVariables: AhkVariablesSlice.getInitialState(),
@@ -70,6 +69,7 @@ export const RootSlice = createSlice({
     setLauncher: toBeSaved(reducers.setLauncher),
     setDevTools: toBeSaved(reducers.setDevTools),
     setBetaChannel: toBeSaved(reducers.setBetaChannel),
+    setMonitors: toBeSaved(reducers.setMonitors),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       state.toBeSaved = true;
@@ -115,10 +115,6 @@ export const RootSlice = createSlice({
       .addMatcher(matcher(SeelenWegSlice), (state, action) => {
         state.toBeSaved = true;
         state.seelenweg = SeelenWegSlice.reducer(state.seelenweg, action);
-      })
-      .addMatcher(matcher(MonitorsSlice), (state, action) => {
-        state.toBeSaved = true;
-        state.monitors = MonitorsSlice.reducer(state.monitors, action);
       })
       .addMatcher(matcher(AppsConfigSlice), (state, action) => {
         state.toBeSaved = true;

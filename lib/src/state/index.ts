@@ -6,6 +6,7 @@ export * from './weg_items';
 export * from './wm_layout';
 export * from './placeholder';
 export * from './settings_by_app';
+export * from './settings_by_monitor';
 
 export interface LauncherHistory {
   [x: string]: string[];

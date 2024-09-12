@@ -8,6 +8,11 @@ import { StartThemingTool } from '../../../../shared/styles';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 async function initUIColors() {

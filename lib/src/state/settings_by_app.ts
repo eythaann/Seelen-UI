@@ -31,7 +31,7 @@ export interface AppIdentifier {
 }
 
 export class AppIdentifier {
-  static create(): AppIdentifier {
+  static placeholder(): AppIdentifier {
     return {
       id: 'new-app.exe',
       kind: AppIdentifierType.Exe,
@@ -54,13 +54,13 @@ export interface AppConfiguration {
 }
 
 export class AppConfiguration {
-  static create(): AppConfiguration {
+  static placeholder(): AppConfiguration {
     return {
       name: 'New App',
       category: null,
       boundWorkspace: null,
       boundMonitor: null,
-      identifier: AppIdentifier.create(),
+      identifier: AppIdentifier.placeholder(),
       isBundled: false,
       options: [],
     };

@@ -1,4 +1,3 @@
-import { Tooltip } from 'antd';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,7 +7,7 @@ import { RootActions } from '../../modules/shared/store/app/reducer';
 import { RootSelectors } from '../../modules/shared/store/app/selectors';
 import { cx } from '../../modules/shared/utils/app';
 
-import { Route, RouteIcons, WorkingInProgressRoutes } from './routes';
+import { Route, RouteIcons } from './routes';
 import cs from './index.module.css';
 
 interface ItemProps {
@@ -21,25 +20,19 @@ const Item = ({ route, isActive }: ItemProps) => {
 
   let dispatch = useAppDispatch();
   let onclick = useCallback(() => {
-    if (WorkingInProgressRoutes.includes(route)) {
-      return;
-    }
     dispatch(RootActions.setRoute(route));
   }, []);
 
   return (
-    <Tooltip title={WorkingInProgressRoutes.includes(route) ? t('inProgress') : undefined}>
-      <div
-        onClick={onclick.bind(route)}
-        className={cx(cs.item, {
-          [cs.active!]: isActive,
-        })}
-      >
-        <span className={cs.icon}>{RouteIcons[route]}</span>
-        <span className={cs.label}>{t(`header.labels.${route}`)}</span>
-      </div>
-    </Tooltip>
-
+    <div
+      onClick={onclick.bind(route)}
+      className={cx(cs.item, {
+        [cs.active!]: isActive,
+      })}
+    >
+      <span className={cs.icon}>{RouteIcons[route]}</span>
+      <span className={cs.label}>{t(`header.labels.${route}`)}</span>
+    </div>
   );
 };
 

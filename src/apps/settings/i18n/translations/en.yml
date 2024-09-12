@@ -6,6 +6,9 @@ save_and_restart: Save & Restart
 quit: Quit
 open: Open
 delete: Delete
+insert: Insert
+more: More
+inherit: Inherit
 sides:
   left: Left
   right: Right
@@ -151,6 +154,19 @@ apps_configurations:
     and: AND
     or: OR
     add_block: Add Block
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Enable Seelen Wall
+  interval: Change wallpaper every (seconds)
+  backgrounds: Wallpapers
+app_launcher:
+  enable: Enable App Launcher
+  monitor: Monitor to show
+  runners:
+    label: Runners
+    explorer: Run
+    cmd: Command
 extras:
   version: Version
   links: Official Links
