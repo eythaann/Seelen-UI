@@ -1,8 +1,8 @@
 .backgroundList {
-  margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-bottom: 8px;
 
   .background {
     display: grid;
@@ -13,10 +13,10 @@
     grid-template-columns: 100px 1fr 40px;
     background-color: var(--color-white);
   }
+}
 
-  .backgroundAdd {
-    align-self: flex-end;
-    width: 40px;
-    margin: 8px 8px 0 0;
-  }
+.backgroundAdd {
+  align-self: flex-end;
+  width: 40px;
+  margin-right: 8px;
 }

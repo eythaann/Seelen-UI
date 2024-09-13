@@ -209,3 +209,20 @@ vd:
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
 beta_channel:
   enable: Бета сувгийг идэвхжүүлэх (зөвхөн Github)
+monitors_configurations:
+  label: Хяналт {{индекс}}
+wall:
+  backgrounds: Ханын цаас
+  no_background: Хоосон слайпешт, оронд нь.
+  enable: Seelen Ханыг идэвхжүүл
+  interval: БИДНИЙ ХӨГЖЛИЙН ХУВЬЦАА (секунд)
+app_launcher:
+  runners:
+    explorer: Урсгал
+    cmd: Тушаах
+    label: Төгс эелдэг
+  monitor: Бие шоу хийх террут
+  enable: App Leader-ийг идэвхжүүлэх
+inherit: Удамших
+more: Илүү / их олон
+insert: Оруулах

@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Commando
+    explorer: Loop
+footer:
+  shortcuts: Toon snelkoppelingen

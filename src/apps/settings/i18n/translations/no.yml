@@ -212,3 +212,20 @@ vd:
 save_and_restart: Lagre og start på nytt
 beta_channel:
   enable: Aktiver Beta Channel (bare via GitHub)
+monitors_configurations:
+  label: Overvåke {{indeks}}
+wall:
+  backgrounds: Bakgrunnsbilder
+  enable: Aktiver Seelen Wall
+  no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
+  interval: Endre bakgrunnsbilder hver (sekunder)
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Løp
+    label: Løpere
+  monitor: Overvåke for å vise
+  enable: Aktiver appstarter
+more: Flere
+inherit: Arve
+insert: Sett inn

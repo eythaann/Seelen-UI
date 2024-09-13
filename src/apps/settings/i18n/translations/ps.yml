@@ -207,3 +207,20 @@ vd:
 save_and_restart: خوندي کول او بیا پیل کړئ
 beta_channel:
   enable: د بیټا چینل فعال کړئ (یوازې د ګیټوب له لارې)
+monitors_configurations:
+  label: د {{{پلس} نظارت وکړئ}
+wall:
+  backgrounds: والپيپرونه
+  no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
+  enable: د نیکي دیوال فعال کړئ
+  interval: وال پیپر هر (ثانیې)
+app_launcher:
+  runners:
+    explorer: منډه وهل
+    cmd: قومانده
+    label: چلوونکي
+  monitor: څارنه کول
+  enable: د اپلیکیشن لیسچر وړ کړئ
+more: نور
+inherit: میراث
+insert: دننه کړئ

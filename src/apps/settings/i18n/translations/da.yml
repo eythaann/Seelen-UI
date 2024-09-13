@@ -212,3 +212,20 @@ vd:
 save_and_restart: Gem & genstart
 beta_channel:
   enable: Aktivér beta -kanal (kun via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Baggrunde
+  no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
+  interval: Skift tapet hver (sekunder)
+  enable: Aktivér Seelen Wall
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Løbe
+    label: Løbere
+  monitor: Overvågning at vise
+  enable: Aktivér app Launcher
+more: Mere
+inherit: Arve
+insert: Indsæt

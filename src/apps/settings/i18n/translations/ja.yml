@@ -205,3 +205,20 @@ vd:
 save_and_restart: 保存して再起動します
 beta_channel:
   enable: ベータチャネルを有効にする（Github経由のみ）
+monitors_configurations:
+  label: モニター{{index}}
+wall:
+  enable: Seelen Wallを有効にします
+  no_background: 代わりにテーマの背景を使用して、空のスライドショー。
+  backgrounds: 壁紙
+  interval: 壁紙を毎回変更する（秒）
+app_launcher:
+  runners:
+    cmd: 指示
+    explorer: 走る
+    label: ランナー
+  enable: アプリランチャーを有効にします
+  monitor: 表示するために監視します
+more: もっと
+insert: 入れる
+inherit: 継承

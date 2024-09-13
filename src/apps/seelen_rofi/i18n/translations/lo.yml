@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: ແລ່ນ
+    cmd: ບັນຊາ
+footer:
+  shortcuts: ສະແດງທາງລັດ

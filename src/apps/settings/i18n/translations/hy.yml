@@ -212,3 +212,20 @@ vd:
 save_and_restart: Պահել եւ վերագործարկել
 beta_channel:
   enable: Միացնել Beta ալիքը (միայն Github- ի միջոցով)
+monitors_configurations:
+  label: Մոնիտոր {{ինդեքս}
+wall:
+  backgrounds: Պաստառներ
+  enable: Միացնել Seelen Wall- ը
+  interval: Փոխեք պաստառները ամեն (վայրկյան)
+  no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
+app_launcher:
+  runners:
+    label: Վազողներ
+    cmd: Հրաման
+    explorer: Վազք
+  monitor: Մոնիտոր, ցույց տալու համար
+  enable: Միացնել ծրագրի արձակումը
+more: Ավելի շատ
+inherit: Ժառանգել
+insert: Տեղադրել

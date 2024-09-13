@@ -210,3 +210,20 @@ vd:
 save_and_restart: Saxla və yenidən başladın
 beta_channel:
   enable: Beta kanalını aktivləşdirin (yalnız GitHub vasitəsilə)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  interval: Hər (saniyə) divar kağızı dəyişdirin
+  backgrounds: Divar kağızları
+  enable: Seelen Divarını aktivləşdirin
+  no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
+app_launcher:
+  runners:
+    label: Qaçışçı
+    explorer: Qaçmaq
+    cmd: Əmr etmək
+  enable: Tətbiq başlatıcısını aktivləşdirin
+  monitor: Göstərmək üçün monitor
+more: Daha çox
+inherit: Varis olmaq
+insert: Daxil etmək

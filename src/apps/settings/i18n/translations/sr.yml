@@ -212,3 +212,20 @@ vd:
 save_and_restart: Сачувај и поново покрените
 beta_channel:
   enable: Омогући бета канал (само преко ГитХуб)
+monitors_configurations:
+  label: Монитор {{Индек}}
+wall:
+  interval: Промените позадину сваке (секунде)
+  no_background: Празан презентацију, уместо тога користећи прибор за тему.
+  enable: Омогућите Виселен зид
+  backgrounds: Позадине
+app_launcher:
+  runners:
+    cmd: Командант
+    label: Тркачи
+    explorer: Трчати
+  monitor: Монитор за приказивање
+  enable: Омогући бацач апликација
+insert: Уметнути
+inherit: Наследити
+more: Више

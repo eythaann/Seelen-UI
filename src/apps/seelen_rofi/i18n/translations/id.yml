@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Berlari
+    cmd: Memerintah
+footer:
+  shortcuts: Tampilkan jalan pintas

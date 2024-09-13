@@ -208,3 +208,20 @@ vd:
 save_and_restart: Saglabāt un restartēt
 beta_channel:
   enable: Iespējot beta kanālu (tikai caur github)
+monitors_configurations:
+  label: Monitors {{indekss}}
+wall:
+  enable: Iespējot Seelen Wall
+  no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
+  interval: Ikreiz nomainiet tapetes (sekundes)
+  backgrounds: Tapetes
+app_launcher:
+  runners:
+    explorer: Izkropļot
+    label: Skrējēji
+    cmd: Vadība
+  monitor: Uzraudzīt, lai parādītu
+  enable: Iespējot lietotņu palaišanas ierīci
+inherit: Mantot
+insert: Ievietot
+more: Vairāk

@@ -206,3 +206,20 @@ vd:
 save_and_restart: حفظ وإعادة التشغيل
 beta_channel:
   enable: تمكين قناة بيتا (فقط عبر جيثب)
+monitors_configurations:
+  label: شاشة {{index}}
+wall:
+  enable: تمكين جدار سيلين
+  backgrounds: خلفيات
+  no_background: عرض شرائح فارغ ، باستخدام خلفية السمة بدلاً من ذلك.
+  interval: تغيير خلفية كل (ثواني)
+app_launcher:
+  runners:
+    explorer: يجري
+    cmd: يأمر
+    label: المتسابقين
+  enable: تمكين قاذفة التطبيق
+  monitor: شاشة لإظهار
+insert: أدخل
+more: أكثر
+inherit: ورث

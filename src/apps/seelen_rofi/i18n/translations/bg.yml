@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Изпълнете
+    cmd: Команда
+footer:
+  shortcuts: Покажете преки пътища

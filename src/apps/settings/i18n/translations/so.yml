@@ -211,3 +211,20 @@ vd:
 save_and_restart: Badbaadin & Dib u bilow
 beta_channel:
   enable: Ku xooji beta channel (oo keliya githab)
+monitors_configurations:
+  label: Kormeer {{tus ind ind}}
+wall:
+  enable: U oggolow derbiga Selen
+  no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
+  interval: Beddel waraaqda derbiga kasta (ilbidhiqsi kasta)
+  backgrounds: Darf-biyoodka
+app_launcher:
+  runners:
+    cmd: Amrid
+    label: Orodyahannada
+    explorer: Ordid
+  enable: U oggolow appka bilaabista
+  monitor: Kormeer si loo muujiyo
+inherit: Dhaxlid
+insert: Gelin
+more: Ka badan

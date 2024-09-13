@@ -210,3 +210,20 @@ vd:
 save_and_restart: Salvesta ja taaskäivitage
 beta_channel:
   enable: Luba beetakanal (ainult GitHubi kaudu)
+monitors_configurations:
+  label: Monitor {{indeks}}
+wall:
+  backgrounds: Taustapildid
+  interval: Muutke tapeet iga (sekundit)
+  no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
+  enable: Luba Seeleni sein
+app_launcher:
+  runners:
+    cmd: Käsk
+    label: Jooksjad
+    explorer: Jooksma
+  enable: Luba rakenduse käivitaja
+  monitor: Monitor, mida näidata
+more: Rohkem
+insert: Sisestama
+inherit: Pärima

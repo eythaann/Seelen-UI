@@ -208,3 +208,20 @@ vd:
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
 beta_channel:
   enable: បើកដំណើរការឆានែលបេតា (បានតែតាមរយៈ Github)
+monitors_configurations:
+  label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
+wall:
+  enable: បើកជញ្ជាំង Seelen
+  backgrounds: ផាបផេច
+  no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
+  interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរាល់វិនាទី (វិនាទី)
+app_launcher:
+  runners:
+    label: រត់តមនាង
+    cmd: ការបង្គាប់
+    explorer: ការរត់
+  enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
+  monitor: ម៉ូនីទ័របង្ហាញ
+insert: រចក
+more: រេចីនចាង
+inherit: តតយលមរតក

@@ -212,3 +212,20 @@ vd:
 save_and_restart: შენახვა და გადატვირთვა
 beta_channel:
   enable: ბეტა არხის ჩართვა (მხოლოდ Github- ის საშუალებით)
+monitors_configurations:
+  label: მონიტორი {{ინდექსი}}
+wall:
+  no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
+  backgrounds: ფონები
+  enable: ჩართეთ seelen კედელი
+  interval: ფონი შეცვალეთ ყოველ (წამში)
+app_launcher:
+  runners:
+    cmd: ბრძანება
+    label: მორბენალი
+    explorer: სირბილი
+  monitor: მონიტორის ჩვენება
+  enable: ჩართეთ აპლიკაციის გამშვები
+more: მეტი
+insert: ჩასმა
+inherit: მემკვიდრეობით მიღება

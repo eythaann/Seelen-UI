@@ -212,3 +212,20 @@ vd:
 save_and_restart: Speichern & neu starten
 beta_channel:
   enable: Aktivieren Sie den Beta -Kanal (nur über Github)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Aktivieren Sie Seelen Wall
+  no_background: Leere Diashow, verwendete stattdessen den Hintergrund des Themas.
+  interval: Wechseln Sie die Hintergrundbild jeden (Sekunden)
+  backgrounds: Hintergrundbilder
+app_launcher:
+  runners:
+    cmd: Befehl
+    explorer: Laufen
+    label: Läuferinnen
+  enable: App Launcher aktivieren
+  monitor: Überwachen Sie zu zeigen
+insert: Einfügen
+more: Mehr
+inherit: Erben

@@ -212,3 +212,20 @@ vd:
 save_and_restart: Зачувај и рестартирај
 beta_channel:
   enable: Овозможете бета канал (само преку Github)
+monitors_configurations:
+  label: Монитор {{индекс}}
+wall:
+  backgrounds: Позадини
+  interval: Променете ја позадината на секои (секунди)
+  enable: Овозможете го Селен Вол
+  no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
+app_launcher:
+  runners:
+    explorer: Трчај
+    cmd: Команда
+    label: Тркачи
+  enable: Овозможете фрлач на апликации
+  monitor: Монитор за да се покаже
+inherit: Наследник
+insert: Вметнете
+more: Повеќе

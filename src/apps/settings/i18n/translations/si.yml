@@ -208,3 +208,20 @@ vd:
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
 beta_channel:
   enable: බීටා නාලිකාව සක්රීය කරන්න (GitHub හරහා පමණි)
+monitors_configurations:
+  label: '{{දර්ශකය} u අධීක්ෂණය කරන්න'
+wall:
+  interval: සෑම (තත්පර) බිතුපත වෙනස් කරන්න
+  no_background: හිස් විනිවිදක දර්ශනය, ඒ වෙනුවට තේමාවේ පසුබිම භාවිතා කිරීම.
+  enable: සක්රිය කළ බිත්තිය සක්රීය කරන්න
+  backgrounds: බිතුපත්
+app_launcher:
+  runners:
+    cmd: විධානය
+    label: ධාවකයන්
+    explorer: දුවන්න
+  monitor: පෙන්වීමට අධීක්ෂණය
+  enable: යෙදුම් දියත් කරන්නා සක්රීය කරන්න
+more: තව
+insert: ඇතුළු කරන්න
+inherit: උරුම වේ

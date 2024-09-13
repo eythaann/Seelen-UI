@@ -210,3 +210,20 @@ vd:
 save_and_restart: Запазване и рестартиране
 beta_channel:
   enable: Активиране на бета канал (само чрез GitHub)
+monitors_configurations:
+  label: Монитор {{index}}
+wall:
+  enable: Активирайте стената на Seelen
+  backgrounds: Тапети
+  no_background: Празно слайдшоу, вместо това използвайки фона на темата.
+  interval: Сменяйте тапетите на всеки (секунди)
+app_launcher:
+  runners:
+    cmd: Команда
+    explorer: Изпълнете
+    label: Бегачи
+  enable: Активирайте стартиращия APP
+  monitor: Монитор да се покаже
+more: Още
+inherit: Наследяване
+insert: Вмъкнете

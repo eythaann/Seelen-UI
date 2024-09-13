@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Fut
+    cmd: Parancs
+footer:
+  shortcuts: Mutassa meg a parancsikonokat

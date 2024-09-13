@@ -206,3 +206,20 @@ vd:
 save_and_restart: บันทึกและรีสตาร์ท
 beta_channel:
   enable: เปิดใช้งานช่องเบต้า (ผ่าน GitHub เท่านั้น)
+monitors_configurations:
+  label: ตรวจสอบ {{index}}
+wall:
+  enable: เปิดใช้งาน Seeelen Wall
+  backgrounds: วอลเปเปอร์
+  no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
+  interval: เปลี่ยนวอลล์เปเปอร์ทุกครั้ง (วินาที)
+app_launcher:
+  runners:
+    cmd: สั่งการ
+    explorer: วิ่ง
+    label: นักวิ่ง
+  monitor: ตรวจสอบเพื่อแสดง
+  enable: เปิดใช้งานแอป Launcher
+more: มากกว่า
+insert: แทรก
+inherit: สืบทอด

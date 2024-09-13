@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Běh
+    cmd: Příkaz
+footer:
+  shortcuts: Zobrazit zkratky

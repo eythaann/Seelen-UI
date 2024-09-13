@@ -212,3 +212,20 @@ vd:
 save_and_restart: Spremi i ponovno pokrenite
 beta_channel:
   enable: Omogući beta kanal (samo putem GitHub -a)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Omogući Seelen zid
+  backgrounds: Pozadine
+  no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
+  interval: Promijenite pozadinu svake (sekunde)
+app_launcher:
+  runners:
+    cmd: Naredba
+    explorer: Trčanje
+    label: Trkači
+  enable: Omogućite pokretač aplikacija
+  monitor: Monitor za prikaz
+more: Više
+insert: Umetnuti
+inherit: Naslijediti

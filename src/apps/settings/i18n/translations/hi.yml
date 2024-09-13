@@ -210,3 +210,20 @@ vd:
 save_and_restart: सहेजें और पुनरारंभ करें
 beta_channel:
   enable: बीटा चैनल को सक्षम करें (केवल GitHub के माध्यम से)
+monitors_configurations:
+  label: मॉनिटर {{इंडेक्स}}
+wall:
+  backgrounds: वॉलपेपर
+  enable: सेलेन वॉल को सक्षम करें
+  no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
+  interval: वॉलपेपर हर (सेकंड) बदलें
+app_launcher:
+  runners:
+    explorer: दौड़ना
+    cmd: आज्ञा
+    label: धावकों
+  monitor: दिखाने के लिए मॉनिटर
+  enable: ऐप लॉन्चर सक्षम करें
+inherit: इनहेरिट
+more: अधिक
+insert: डालना

@@ -209,3 +209,20 @@ vd:
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
 beta_channel:
   enable: Beta च्यानल सक्षम गर्नुहोस् (github मार्फत मात्र)
+monitors_configurations:
+  label: मोनिटर \ inchtax}}
+wall:
+  interval: वालपेपरहरू प्रत्येक (सेकेन्ड) परिवर्तन गर्नुहोस्
+  backgrounds: वालपेपरहरू
+  no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
+  enable: देख्न सकेनौं
+app_launcher:
+  runners:
+    label: धागक
+    cmd: आदेश
+    explorer: दगुर्ने काम
+  monitor: देखाउनको लागि मोनिटर
+  enable: अनुप्रयोग सुरुवातकर्तालाई सक्षम गर्नुहोस्
+more: अरु
+inherit: बाबु बाजेबाट पाउनु
+insert: घुसाउनु

@@ -38,7 +38,6 @@ export const store = configureStore({
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
-    UIColors.setAssCssVariables(colors);
     store.dispatch(RootActions.setColors(colors));
   }
   loadColors(await UIColors.getAsync());

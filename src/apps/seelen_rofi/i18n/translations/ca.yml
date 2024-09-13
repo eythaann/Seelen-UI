@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Manar
+    explorer: Dirigir
+footer:
+  shortcuts: Mostra dreceres

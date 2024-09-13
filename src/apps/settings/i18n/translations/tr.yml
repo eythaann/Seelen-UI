@@ -210,3 +210,20 @@ vd:
 save_and_restart: Kaydet ve Yeniden Başlat
 beta_channel:
   enable: Beta kanalını etkinleştirin (yalnızca Github aracılığıyla)
+monitors_configurations:
+  label: Monitör {{index}}
+wall:
+  no_background: Bunun yerine temanın arka planını kullanarak boş slayt gösterisi.
+  backgrounds: Duvar kağıtları
+  interval: Duvar kağıdını her (saniye) değiştir
+  enable: Seelen Duvarını Etkinleştir
+app_launcher:
+  runners:
+    cmd: Emretmek
+    explorer: Koşmak
+    label: Koşucular
+  monitor: Gösterilecek Monitör
+  enable: Uygulama başlatıcısını etkinleştir
+insert: Sokmak
+more: Daha
+inherit: Miras almak

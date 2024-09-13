@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Rozkaz
+    explorer: Uruchomić
+footer:
+  shortcuts: Pokaż skróty

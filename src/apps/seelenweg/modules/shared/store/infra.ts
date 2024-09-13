@@ -51,7 +51,6 @@ async function cleanSavedItems(items: WegItem[]): Promise<SwItem[]> {
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
-    UIColors.setAssCssVariables(colors);
     store.dispatch(RootActions.setColors(colors));
   }
   loadColors(await UIColors.getAsync());

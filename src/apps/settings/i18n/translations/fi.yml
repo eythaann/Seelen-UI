@@ -212,3 +212,20 @@ vd:
 save_and_restart: Tallenna ja käynnistä uudelleen
 beta_channel:
   enable: Ota beetakanava käyttöön (vain GitHubin kautta)
+monitors_configurations:
+  label: Monitor {{hakemisto}}
+wall:
+  interval: Vaihda taustakuva joka (sekunti)
+  enable: Ota Seelen seinälle käyttöön
+  no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
+  backgrounds: Taustakuvat
+app_launcher:
+  runners:
+    cmd: Komento
+    label: Juoksijat
+    explorer: Juoksua
+  monitor: Tarkkailla
+  enable: Ota sovelluksen kantoraketti käyttöön
+more: Lisää
+inherit: Periä
+insert: Lisätä

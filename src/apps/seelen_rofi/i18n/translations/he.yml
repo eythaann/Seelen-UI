@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: לָרוּץ
+    cmd: פְּקוּדָה
+footer:
+  shortcuts: הצג קיצורי דרך

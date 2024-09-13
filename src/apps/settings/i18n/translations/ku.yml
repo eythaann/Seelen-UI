@@ -209,3 +209,20 @@ vd:
 save_and_restart: Save & Restart
 beta_channel:
   enable: Channel Beta (tenê bi rêya Github) çalak bikin)
+monitors_configurations:
+  label: Monitor {{Index-}
+wall:
+  backgrounds: Wallpapers
+  enable: Dîwarê Seelen çalak bike
+  interval: Wallpaper her (seconds)
+  no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
+app_launcher:
+  runners:
+    cmd: Ferman
+    explorer: Rev
+    label: Runners
+  enable: Launcher App çalak bikin
+  monitor: Monitor to Show
+insert: Lêzêdekirin
+inherit: Mîratgirtin
+more: Zêde

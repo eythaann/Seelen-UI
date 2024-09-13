@@ -209,3 +209,20 @@ vd:
 save_and_restart: ذخیره و راه اندازی مجدد
 beta_channel:
   enable: کانال بتا را فعال کنید (فقط از طریق GitHub)
+monitors_configurations:
+  label: مانیتور {{فهرست}}
+wall:
+  backgrounds: تصاویر پس زمینه
+  enable: Seelen Wall را فعال کنید
+  interval: تصویر زمینه را هر (ثانیه) تغییر دهید
+  no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
+app_launcher:
+  runners:
+    cmd: فرمان
+    explorer: دویدن
+    label: دونده
+  monitor: نظارت برای نمایش
+  enable: پرتاب برنامه را فعال کنید
+inherit: ارث
+more: بیشتر
+insert: درج کردن

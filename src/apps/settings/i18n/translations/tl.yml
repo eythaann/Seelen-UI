@@ -213,3 +213,20 @@ vd:
 save_and_restart: I -save at i -restart
 beta_channel:
   enable: Paganahin ang Beta Channel (sa pamamagitan lamang ng Github)
+monitors_configurations:
+  label: Subaybayan {{index}}
+wall:
+  backgrounds: Wallpaper
+  enable: Paganahin ang Seelen Wall
+  no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
+  interval: Baguhin ang wallpaper bawat (segundo)
+app_launcher:
+  runners:
+    explorer: Tumakbo
+    label: Mga mananakbo
+    cmd: Utos
+  enable: Paganahin ang launcher ng app
+  monitor: Subaybayan upang ipakita
+insert: Ipasok
+more: Higit pa
+inherit: Magmana

@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Τρέξιμο
+    cmd: Εντολή
+footer:
+  shortcuts: Εμφάνιση συντομεύσεων

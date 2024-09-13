@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: ሩጫ
+    cmd: ትእዛዝ
+footer:
+  shortcuts: አቋራጮችን አሳይ

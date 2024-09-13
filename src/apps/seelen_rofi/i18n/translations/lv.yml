@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Izkropļot
+    cmd: Vadība
+footer:
+  shortcuts: Rādīt īsceļus

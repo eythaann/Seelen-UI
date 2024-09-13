@@ -29,7 +29,6 @@ export async function loadStore() {
 
 async function loadUIColors() {
   function loadColors(colors: UIColors) {
-    UIColors.setAssCssVariables(colors);
     store.dispatch(RootActions.setColors(colors));
   }
   loadColors(await UIColors.getAsync());

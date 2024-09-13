@@ -210,3 +210,20 @@ vd:
 save_and_restart: Salve e reinicie
 beta_channel:
   enable: Ativar canal beta (apenas via github)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Papéis de parede
+  interval: Mude o papel de parede a cada (segundos)
+  enable: Ativar parede de Seelen
+  no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
+app_launcher:
+  runners:
+    cmd: Comando
+    explorer: Correr
+    label: Corredoras
+  monitor: Monitor para mostrar
+  enable: Ativar lançador de aplicativos
+insert: Inserir
+more: Mais
+inherit: Herdar

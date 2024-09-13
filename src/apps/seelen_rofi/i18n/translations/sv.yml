@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Sikt
+footer:
+  shortcuts: Visa genvägar

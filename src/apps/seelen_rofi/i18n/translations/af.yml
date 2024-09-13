@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Kommandeer
+    explorer: Wedloop
+footer:
+  shortcuts: Wys kortpaaie

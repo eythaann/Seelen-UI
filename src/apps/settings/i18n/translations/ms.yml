@@ -210,3 +210,20 @@ vd:
 save_and_restart: Jimat & mulakan semula
 beta_channel:
   enable: Dayakan Saluran Beta (hanya melalui GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  interval: Tukar kertas dinding setiap (saat)
+  enable: Dayakan dinding Seelen
+  backgrounds: Kertas dinding
+  no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
+app_launcher:
+  runners:
+    explorer: Jalankan
+    label: Pelari
+    cmd: Perintah
+  monitor: Pantau untuk menunjukkan
+  enable: Dayakan Pelancar App
+inherit: Mewarisi
+more: Lebih
+insert: Masukkan

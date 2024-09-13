@@ -206,3 +206,20 @@ vd:
 save_and_restart: שמור והפעלה מחדש
 beta_channel:
   enable: אפשר ערוץ בטא (רק באמצעות github)
+monitors_configurations:
+  label: צג {{index}}
+wall:
+  backgrounds: טפטים
+  no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
+  interval: החלף טפטים כל (שניות)
+  enable: אפשר קיר Seelen
+app_launcher:
+  runners:
+    cmd: פְּקוּדָה
+    explorer: לָרוּץ
+    label: רצים
+  monitor: צג כדי להציג
+  enable: הפעל משגר אפליקציות
+inherit: לָרֶשֶׁת
+more: יוֹתֵר
+insert: לְהַכנִיס
