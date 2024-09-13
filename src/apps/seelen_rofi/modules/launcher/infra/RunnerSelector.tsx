@@ -1,5 +1,6 @@
 import { Select, Tooltip } from 'antd';
 import { forwardRef, RefObject } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface RunnerSelectorProps {
   selectedRunner: number;
@@ -12,6 +13,8 @@ interface RunnerSelectorProps {
 export const RunnerSelector = forwardRef((props: RunnerSelectorProps, ref) => {
   const { selectedRunner, runners, setSelectedRunner, helpRef, showHelp } = props;
 
+  const { t } = useTranslation();
+
   return (
     <Tooltip open={showHelp} title="Ctrl + Tab" placement="left">
       <Select
@@ -21,7 +24,7 @@ export const RunnerSelector = forwardRef((props: RunnerSelectorProps, ref) => {
         onChange={setSelectedRunner}
         options={runners.map((runner, idx) => ({
           key: runner.id,
-          label: runner.label,
+          label: runner.label.startsWith('t:') ? t(runner.label.replace('t:', '')) : runner.label,
           value: idx,
         }))}
         onKeyDown={(e) => {

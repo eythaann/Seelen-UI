@@ -3,6 +3,7 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Checkbox, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
 import { KeyboardEventHandler, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 
@@ -26,6 +27,8 @@ export function Launcher() {
   const selectorRef = useRef<HTMLInputElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const helpRef = useRef<HTMLInputElement>(null);
+
+  const { t } = useTranslation();
 
   useWindowFocusChange((focused) => {
     if (focused) {
@@ -124,7 +127,7 @@ export function Launcher() {
           }}
         >
           <Tooltip open={showHelp} title="Ctrl + H" placement="right">
-            Show Shortcuts
+            {t('footer.shortcuts')}
           </Tooltip>
         </Checkbox>
       </div>

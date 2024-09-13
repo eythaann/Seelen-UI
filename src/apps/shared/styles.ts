@@ -1,7 +1,7 @@
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect, useState } from 'react';
-import { SeelenEvent, Settings, Theme } from 'seelen-core';
+import { Settings, Theme } from 'seelen-core';
 
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
@@ -44,56 +44,56 @@ export function useDarkMode() {
   return isDarkMode;
 }
 
+const KeyByLabel: Record<string, string> = {
+  'fancy-toolbar': 'toolbar',
+  seelenweg: 'weg',
+  'window-manager': 'wm',
+  'seelen-launcher': 'launcher',
+  'seelen-wall': 'wall',
+};
+
 async function loadThemes(allThemes: Theme[], selected: string[]) {
-  let themes = allThemes
+  const themes = allThemes
     .filter((theme) => selected.includes(theme.info.filename))
     .sort((a, b) => {
       return selected.indexOf(a.info.filename) - selected.indexOf(b.info.filename);
     });
 
-  if (themes.length === 0) {
-    let defaultTheme = themes.find((theme) => theme.info.filename === 'default');
-    themes = defaultTheme ? [defaultTheme] : [];
+  const webviewId = getCurrentWebviewWindow().label;
+  const [label, _monitor] = webviewId.split('/');
+  if (!label) {
+    return;
   }
 
-  const label = getCurrentWebviewWindow().label;
-  let theme_key: keyof Theme['styles'] | null = null;
-  if (label.startsWith('fancy-toolbar')) {
-    theme_key = 'toolbar';
-  } else if (label.startsWith('seelenweg')) {
-    theme_key = 'weg';
-  } else if (label.startsWith('window-manager')) {
-    theme_key = 'wm';
-  } else if (label.startsWith('seelen-launcher')) {
-    theme_key = 'launcher';
-  }
-
+  const theme_key = KeyByLabel[label] as keyof Theme['styles'] | undefined;
   if (!theme_key) {
     return;
   }
 
-  document.getElementById(theme_key)?.remove();
+  document.getElementById(webviewId)?.remove();
   let element = document.createElement('style');
-  element.id = theme_key.toString();
+  element.id = webviewId;
   element.textContent = '';
-  document.head.appendChild(element);
+
   for (const theme of themes) {
     element.textContent += theme.styles[theme_key] + '\n';
   }
+
+  document.head.appendChild(element);
 }
 
 export async function StartThemingTool() {
   const userSettings = await new UserSettingsLoader().withThemes().load();
   let allThemes = userSettings.themes;
-  let selected = userSettings.jsonSettings.selectedTheme;
+  let selected = userSettings.jsonSettings.selectedThemes;
 
   await listen<Theme[]>('themes', (event) => {
     allThemes = event.payload;
     loadThemes(allThemes, selected);
   });
 
-  await listen<Settings>(SeelenEvent.StateSettingsChanged, (event) => {
-    selected = event.payload.selectedTheme;
+  await Settings.onChange((settings) => {
+    selected = settings.selectedThemes;
     loadThemes(allThemes, selected);
   });
 
