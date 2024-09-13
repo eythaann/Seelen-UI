@@ -1,7 +1,6 @@
 # Changelog
 
 ## [Unreleased]
-## [2.0.0-beta.3]
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
 
@@ -14,6 +13,8 @@
 - improve quality icons from all app/files items.
 - improve init loading performance.
 - improve fullscreen matching system.
+- reduce UI total size from 355mb to 121mb.
+- reduce Installer size from 75mb to 40mb.
 
 ### fix
 - missing icons for files with a different extension than `exe`.

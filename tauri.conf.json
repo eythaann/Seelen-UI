@@ -23,7 +23,7 @@
     }
   },
   "build": {
-    "beforeBuildCommand": "npm run build:ui",
+    "beforeBuildCommand": "npm run build:ui -- --production",
     "frontendDist": "dist",
     "features": []
   },
