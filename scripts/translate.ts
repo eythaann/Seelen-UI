@@ -103,6 +103,7 @@ async function main() {
   await completeTranslationsFor('seelenweg', keysToUpdate, deleteKeys);
   await completeTranslationsFor('settings', keysToUpdate, deleteKeys);
   await completeTranslationsFor('update', keysToUpdate, deleteKeys);
+  await completeTranslationsFor('seelen_rofi', keysToUpdate, deleteKeys);
 }
 
 main().catch(console.error);

@@ -67,7 +67,7 @@ export class Settings extends Obtainable<Settings>(
   monitors: MonitorConfiguration[] = [new MonitorConfiguration()];
   ahkEnabled: boolean = true;
   ahkVariables: AhkVarList = new AhkVarList();
-  selectedTheme: string[] = ['default'];
+  selectedThemes: string[] = ['default'];
   devTools: boolean = false;
   language: string = '';
   virtualDesktopStrategy: VirtualDesktopStrategy = VirtualDesktopStrategy.Native;

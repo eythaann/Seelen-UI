@@ -254,7 +254,7 @@ impl FullState {
         let path_exists = path.exists();
         if path_exists {
             self.settings = Self::get_settings_from_path(path)?;
-            self.settings.clean();
+            self.settings.sanitize();
         }
 
         if !is_virtual_desktop_supported() {
@@ -271,7 +271,7 @@ impl FullState {
         let path = self.data_dir.join("seelenweg_items.yaml");
         if path.exists() {
             self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?;
-            self.weg_items.clean();
+            self.weg_items.sanitize();
         } else {
             std::fs::write(path, serde_yaml::to_string(&self.weg_items)?)?;
         }
@@ -521,8 +521,8 @@ impl FullState {
                 self.data_dir.join(format!("themes/{filename}")),
                 serde_yaml::to_string(&theme)?,
             )?;
-            if !self.settings.selected_theme.contains(&filename) {
-                self.settings.selected_theme.push(filename);
+            if !self.settings.selected_themes.contains(&filename) {
+                self.settings.selected_themes.push(filename);
             }
         }
 

@@ -309,7 +309,7 @@
         }
       ]
     },
-    "selectedTheme": {
+    "selectedThemes": {
       "description": "list of selected themes",
       "default": [
         "default"

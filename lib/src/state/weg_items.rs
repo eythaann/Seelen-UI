@@ -51,7 +51,7 @@ impl Default for WegItems {
 }
 
 impl WegItems {
-    fn clean_items(dict: &mut HashSet<String>, items: Vec<WegItem>) -> Vec<WegItem> {
+    fn sanitize_items(dict: &mut HashSet<String>, items: Vec<WegItem>) -> Vec<WegItem> {
         let mut result = Vec::new();
         for item in items {
             match &item {
@@ -96,10 +96,10 @@ impl WegItems {
         result
     }
 
-    pub fn clean(&mut self) {
+    pub fn sanitize(&mut self) {
         let mut dict = HashSet::new();
-        self.left = Self::clean_items(&mut dict, std::mem::take(&mut self.left));
-        self.center = Self::clean_items(&mut dict, std::mem::take(&mut self.center));
-        self.right = Self::clean_items(&mut dict, std::mem::take(&mut self.right));
+        self.left = Self::sanitize_items(&mut dict, std::mem::take(&mut self.left));
+        self.center = Self::sanitize_items(&mut dict, std::mem::take(&mut self.center));
+        self.right = Self::sanitize_items(&mut dict, std::mem::take(&mut self.right));
     }
 }

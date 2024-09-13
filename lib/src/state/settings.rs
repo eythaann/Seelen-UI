@@ -249,7 +249,7 @@ impl Default for SeelenLauncherSettings {
 }
 
 impl SeelenLauncherSettings {
-    pub fn clean(&mut self) {
+    pub fn sanitize(&mut self) {
         let mut dict = HashSet::new();
         self.runners
             .retain(|runner| !runner.program.is_empty() && dict.insert(runner.program.clone()));
@@ -290,7 +290,7 @@ impl Default for SeelenWallSettings {
 }
 
 impl SeelenWallSettings {
-    pub fn clean(&mut self) {
+    pub fn sanitize(&mut self) {
         self.backgrounds.retain(|b| b.path.exists());
     }
 }
@@ -472,7 +472,8 @@ pub struct Settings {
     /// ahk variables
     pub ahk_variables: AhkVarList,
     /// list of selected themes
-    pub selected_theme: Vec<String>,
+    #[serde(alias = "selected_theme")]
+    pub selected_themes: Vec<String>,
     /// enable or disable dev tools tab in settings
     pub dev_tools: bool,
     /// language to use, if null the system locale is used
@@ -487,7 +488,7 @@ impl Default for Settings {
     fn default() -> Self {
         Self {
             ahk_enabled: true,
-            selected_theme: vec!["default".to_string()],
+            selected_themes: vec!["default".to_string()],
             monitors: vec![MonitorConfiguration::default()],
             fancy_toolbar: FancyToolbarSettings::default(),
             seelenweg: SeelenWegSettings::default(),
@@ -515,12 +516,17 @@ impl Settings {
         }
     }
 
-    pub fn clean(&mut self) {
-        self.launcher.clean();
-        self.wall.clean();
+    pub fn sanitize(&mut self) {
+        self.launcher.sanitize();
+        self.wall.sanitize();
 
         if self.language.is_none() {
             self.language = Some(Self::get_system_language());
+        }
+
+        let default_theme = "default".to_owned();
+        if !self.selected_themes.contains(&default_theme) {
+            self.selected_themes.push(default_theme);
         }
     }
 }

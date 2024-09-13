@@ -39,7 +39,7 @@ const initialState: RootState = {
   availableThemes: [],
   availableLayouts: [],
   availablePlaceholders: [],
-  selectedTheme: [],
+  selectedThemes: [],
   devTools: false,
   language: navigator.language.split('-')[0] || 'en',
   colors: UIColors.default(),
@@ -92,17 +92,17 @@ export const RootSlice = createSlice({
       }
       return state;
     },
-    setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
+    setSelectedThemes: (state, action: PayloadAction<string[]>) => {
       let themes = new Set(action.payload);
       if (!themes.has('default')) {
         themes.add('default');
       }
       state.toBeSaved = true;
-      state.selectedTheme = Array.from(themes);
+      state.selectedThemes = Array.from(themes);
     },
     removeTheme: (state, action: PayloadAction<string>) => {
       state.toBeSaved = true;
-      state.selectedTheme = state.selectedTheme.filter((x) => x !== action.payload);
+      state.selectedThemes = state.selectedThemes.filter((x) => x !== action.payload);
     },
   },
   selectors: selectorsFor(initialState),

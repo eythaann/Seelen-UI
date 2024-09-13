@@ -10,7 +10,7 @@ import cs from './index.module.css';
 
 export function Themes() {
   const themes = useSelector(RootSelectors.availableThemes);
-  const usingThemes = useSelector(RootSelectors.selectedTheme);
+  const usingThemes = useSelector(RootSelectors.selectedThemes);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ export function Themes() {
       titles={[t('general.theme.available'), t('general.theme.selected')]}
       targetKeys={usingThemes}
       onChange={(selected) => {
-        dispatch(RootActions.setSelectedTheme(selected as string[]));
+        dispatch(RootActions.setSelectedThemes(selected as string[]));
       }}
       className={cs.transfer}
       showSelectAll={false}
@@ -40,7 +40,7 @@ export function Themes() {
           <Reorder.Group
             onReorder={(values) => {
               if (direction === 'right') {
-                dispatch(RootActions.setSelectedTheme(values.map((theme) => theme.info.filename)));
+                dispatch(RootActions.setSelectedThemes(values.map((theme) => theme.info.filename)));
               }
             }}
             axis="y"
