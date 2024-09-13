@@ -210,3 +210,20 @@ vd:
 save_and_restart: సేవ్ & పున art ప్రారంభించండి
 beta_channel:
   enable: బీటా ఛానెల్‌ను ప్రారంభించండి (గితుబ్ ద్వారా మాత్రమే)
+monitors_configurations:
+  label: మానిటర్ {{సూచిక}}
+wall:
+  enable: సీలెన్ గోడను ప్రారంభించండి
+  interval: ప్రతి (సెకన్లు) వాల్‌పేపర్‌ను మార్చండి
+  no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
+  backgrounds: వాల్‌పేపర్లు
+app_launcher:
+  runners:
+    label: రన్నర్లు
+    explorer: రన్
+    cmd: కమాండ్
+  monitor: చూపించడానికి మానిటర్
+  enable: అనువర్తన లాంచర్‌ను ప్రారంభించండి
+inherit: వారసత్వంగా
+insert: చొప్పించండి
+more: మరిన్ని

@@ -210,3 +210,20 @@ vd:
 save_and_restart: Зберегти та перезапустити
 beta_channel:
   enable: Увімкнути бета -канал (лише через Github)
+monitors_configurations:
+  label: Монітор {{index}}
+wall:
+  enable: Увімкнути стіну Seelen
+  no_background: Порожнє слайд -шоу, використовуючи фон теми.
+  backgrounds: Шпалери
+  interval: Змінюйте шпалери кожні (секунди)
+app_launcher:
+  runners:
+    explorer: Пробігати
+    cmd: Командування
+    label: Бігуни
+  enable: Увімкнути запуску додатків
+  monitor: Монітор, щоб показати
+insert: Вставляти
+inherit: Успадкувати
+more: Більше

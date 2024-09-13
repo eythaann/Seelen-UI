@@ -209,3 +209,20 @@ vd:
 save_and_restart: ບັນທຶກແລະ Restart
 beta_channel:
   enable: ເປີດໃຊ້ຊ່ອງທາງເບຕ້າ (ພຽງແຕ່ຜ່ານ Github)
+monitors_configurations:
+  label: Monitor {{{{ດັດສະນີ}}
+wall:
+  enable: ເປີດໃຊ້ Setelen Wall
+  no_background: ການສະໄລ້ທີ່ເປົ່າ, ໂດຍໃຊ້ພື້ນຫລັງຂອງຫົວຂໍ້ແທນ.
+  interval: ປ່ຽນຮູບວໍເປເປີທຸກໆ (ວິນາທີ)
+  backgrounds: ຮູບວໍເປເປີ
+app_launcher:
+  runners:
+    explorer: ແລ່ນ
+    label: ນັກແລ່ນ
+    cmd: ບັນຊາ
+  monitor: ຕິດຕາມເພື່ອສະແດງ
+  enable: ເປີດໃຊ້ງານ App Launcher
+insert: ຊອນເຂົ້າ
+more: ຫຼາຍ
+inherit: ມູນມໍລະດົກ

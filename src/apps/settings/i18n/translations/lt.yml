@@ -208,3 +208,20 @@ vd:
 save_and_restart: Išsaugokite ir paleiskite iš naujo
 beta_channel:
   enable: Įgalinti beta kanalą (tik per „GitHub“)
+monitors_configurations:
+  label: Monitorius {{index}}
+wall:
+  backgrounds: Tapetai
+  enable: Įgalinkite Seeleno sieną
+  interval: Keiskite tapetų kiekvieną (sekundes)
+  no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
+app_launcher:
+  runners:
+    explorer: Bėgti
+    label: Bėgikai
+    cmd: Komanda
+  enable: Įgalinti programos paleidimo priemonę
+  monitor: Monitorius, kad parodytumėte
+inherit: Paveldėti
+insert: Įterpti
+more: Daugiau

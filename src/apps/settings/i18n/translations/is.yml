@@ -208,3 +208,20 @@ vd:
 save_and_restart: Vista og endurræsa
 beta_channel:
   enable: Virkja beta rás (aðeins í gegnum Github)
+monitors_configurations:
+  label: Monitor {{Index}}
+wall:
+  backgrounds: Veggfóður
+  interval: Skiptu um veggfóður á hverju (sekúndum)
+  enable: Virkja Seelen Wall
+  no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
+app_launcher:
+  runners:
+    label: Hlauparar
+    cmd: Skipan
+    explorer: Hlaupa
+  enable: Virkja App Launcher
+  monitor: Fylgjast með því að sýna
+inherit: Erfa
+more: Meira
+insert: Settu inn

@@ -203,3 +203,20 @@ vd:
 save_and_restart: 保存和重新启动
 beta_channel:
   enable: 启用Beta通道（仅通过GitHub）
+monitors_configurations:
+  label: 监视{{index}}
+wall:
+  backgrounds: 壁纸
+  interval: 每次更改壁纸（秒）
+  no_background: 使用主题的背景为空幻灯片。
+  enable: 启用S​​eelen Wall
+app_launcher:
+  runners:
+    cmd: 命令
+    explorer: 跑步
+    label: 跑步者
+  monitor: 显示显示
+  enable: 启用应用启动器
+insert: 插入
+inherit: 继承
+more: 更多的

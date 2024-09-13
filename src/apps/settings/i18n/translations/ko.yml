@@ -205,3 +205,20 @@ vd:
 save_and_restart: 저장 및 재시작
 beta_channel:
   enable: 베타 채널 활성화 (Github를 통해서만)
+monitors_configurations:
+  label: 모니터 {{index}}
+wall:
+  no_background: 대신 테마의 배경을 사용하여 빈 슬라이드 쇼를 비우십시오.
+  enable: Seelen Wall을 활성화하십시오
+  interval: 매번 벽지 변경 (초)
+  backgrounds: 월페이퍼
+app_launcher:
+  runners:
+    explorer: 달리다
+    cmd: 명령
+    label: 주자
+  enable: 앱 런처 활성화
+  monitor: 보여줄 모니터
+more: 더
+insert: 끼워 넣다
+inherit: 상속

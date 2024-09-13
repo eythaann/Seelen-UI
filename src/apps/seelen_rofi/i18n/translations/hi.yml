@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: दौड़ना
+    cmd: आज्ञा
+footer:
+  shortcuts: शॉर्टकट दिखाओ

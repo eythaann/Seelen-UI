@@ -1,7 +1,7 @@
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect, useState } from 'react';
-import { Settings, Theme } from 'seelen-core';
+import { Settings, Theme, UIColors } from 'seelen-core';
 
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
@@ -96,6 +96,9 @@ export async function StartThemingTool() {
     selected = settings.selectedThemes;
     loadThemes(allThemes, selected);
   });
+
+  UIColors.setAssCssVariables(await UIColors.getAsync());
+  UIColors.onChange(UIColors.setAssCssVariables);
 
   await loadThemes(allThemes, selected);
 }

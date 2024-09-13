@@ -5,7 +5,10 @@
   overflow: hidden;
   position: relative;
   flex: 1;
-  margin-bottom: 10px;
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
 
   .noise,
   .blur {

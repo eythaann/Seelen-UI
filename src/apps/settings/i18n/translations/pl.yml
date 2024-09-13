@@ -210,3 +210,20 @@ vd:
 save_and_restart: Zapisz i uruchom ponownie
 beta_channel:
   enable: Włącz kanał beta (tylko przez GitHub)
+monitors_configurations:
+  label: Monitor {{indeks}}
+wall:
+  interval: Zmień tapetę co (sekundy)
+  no_background: Pusty pokaz slajdów, zamiast tego używając tła motywu.
+  enable: Włącz ścianę Seelen
+  backgrounds: Tapety
+app_launcher:
+  runners:
+    explorer: Uruchomić
+    cmd: Rozkaz
+    label: Biegacze
+  monitor: Monitor, aby pokazać
+  enable: Włącz uruchamianie aplikacji
+inherit: Dziedziczyć
+more: Więcej
+insert: Wstawić

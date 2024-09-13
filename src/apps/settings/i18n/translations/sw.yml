@@ -206,3 +206,20 @@ vd:
 save_and_restart: Okoa na uanze tena
 beta_channel:
   enable: Wezesha Kituo cha Beta (kupitia GitHub tu)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Wezesha ukuta wa Seelen
+  no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
+  backgrounds: Wallpapers
+  interval: Badilisha Ukuta kila (sekunde)
+app_launcher:
+  runners:
+    label: Wakimbiaji
+    explorer: Kukimbia
+    cmd: Amri
+  monitor: Fuatilia kuonyesha
+  enable: Wezesha Kizindua cha Programu
+more: Zaidi
+inherit: Urithi
+insert: Ingiza

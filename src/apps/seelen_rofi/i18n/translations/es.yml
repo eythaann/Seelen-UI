@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Correr
+    cmd: Dominio
+footer:
+  shortcuts: Mostrar atajos

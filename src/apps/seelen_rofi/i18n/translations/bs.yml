@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Trčati
+    cmd: Naredba
+footer:
+  shortcuts: Prikaži prečice

@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Käsk
+    explorer: Jooksma
+footer:
+  shortcuts: Näita otseteid

@@ -212,3 +212,20 @@ vd:
 save_and_restart: Desar i reiniciar
 beta_channel:
   enable: Activa el canal beta (només mitjançant GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Fons de pantalla
+  no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
+  interval: Canvieu el fons de pantalla cada (segons)
+  enable: Activa la paret de Seelen
+app_launcher:
+  runners:
+    label: Corredors
+    explorer: Dirigir
+    cmd: Manar
+  monitor: Monitoritzar per mostrar
+  enable: Activa el llançador d'aplicacions
+insert: Inserir
+inherit: Heretar
+more: Més

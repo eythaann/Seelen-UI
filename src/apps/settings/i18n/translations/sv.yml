@@ -212,3 +212,20 @@ vd:
 save_and_restart: Spara och starta om
 beta_channel:
   enable: Aktivera betakanal (endast via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Tomt bildspel, med temas bakgrund istället.
+  interval: Ändra tapeter varannan (sekunder)
+  enable: Aktivera Seelen Wall
+  backgrounds: Tapeter
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Sikt
+    label: Löpare
+  monitor: Övervaka att visa
+  enable: Aktivera App Launcher
+more: Mer
+inherit: Ärva
+insert: Infoga

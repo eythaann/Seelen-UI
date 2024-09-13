@@ -210,3 +210,20 @@ vd:
 save_and_restart: Spuert & nei starten
 beta_channel:
   enable: Aktivéiert Beta Kanal (nëmmen iwwer Github)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Wallpapers
+  interval: Ännerung Wallpaper all (Sekonnen)
+  enable: Aktivéiert Sendelen Mauer
+  no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
+app_launcher:
+  runners:
+    cmd: Kommun de Kommentar
+    label: Leefer
+    explorer: Lafe
+  enable: Aktivéiert App Launcher
+  monitor: Monitor fir ze weisen
+more: Méi kleng
+insert: INor andafen
+inherit: Ontherrit

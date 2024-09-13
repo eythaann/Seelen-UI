@@ -210,3 +210,20 @@ vd:
 save_and_restart: Mentés és újraindítás
 beta_channel:
   enable: Engedélyezze a béta -csatornát (csak a githubon keresztül)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Engedélyezze a Seelen Wall -ot
+  backgrounds: Háttérképek
+  no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
+  interval: Változtassa meg a háttérképet minden (másodperc)
+app_launcher:
+  runners:
+    cmd: Parancs
+    explorer: Fut
+    label: Futók
+  monitor: Monitor, hogy megmutassa
+  enable: Engedélyezze az alkalmazás indítóját
+inherit: Örököl
+more: Több
+insert: Beilleszt

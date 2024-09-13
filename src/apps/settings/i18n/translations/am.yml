@@ -205,3 +205,20 @@ vd:
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 beta_channel:
   enable: የቤታ ጣቢያን ያንቁ (በጊትብሎክ ብቻ)
+monitors_configurations:
+  label: ይቆጣጠሩ {{አው.ፊ.}}}}
+wall:
+  backgrounds: የግድግዳ ወረቀቶች
+  interval: የግድግዳ ወረቀት እያንዳንዱን (ሰከንዶች) ይለውጡ
+  no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
+  enable: የጥንቃቄ ግድግዳ አንቃ
+app_launcher:
+  runners:
+    explorer: ሩጫ
+    cmd: ትእዛዝ
+    label: ሯጮች
+  monitor: ለማሳየት መከታተል
+  enable: የመተግበሪያ አስጀማሪን አንቃ
+insert: ያስገቡ
+more: ተጨማሪ
+inherit: ውርስ

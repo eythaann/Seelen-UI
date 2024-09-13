@@ -6,12 +6,14 @@ use serde::{Deserialize, Serialize};
 pub struct ThemeCss {
     /// Css Styles for the dock/taskbar
     pub weg: String,
-    /// Css Styles for the window manager
+    /// Css Styles for the toolbar
     pub toolbar: String,
     /// Css Styles for the window manager
     pub wm: String,
     /// Css Styles for the app launcher
     pub launcher: String,
+    /// Css Styles for the wall
+    pub wall: String,
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]

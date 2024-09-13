@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: 命令
+    explorer: 跑步
+footer:
+  shortcuts: 显示快捷方式

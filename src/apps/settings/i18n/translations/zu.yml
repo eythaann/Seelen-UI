@@ -210,3 +210,22 @@ vd:
 save_and_restart: Gcina futhi Qalisa kabusha
 beta_channel:
   enable: Nika amandla isiteshi se-beta (kuphela nge-github)
+monitors_configurations:
+  label: Qapha {{inkomba}}
+wall:
+  backgrounds: Ama-Wallpaper
+  no_background: >-
+    Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
+    esikhundleni.
+  enable: Nika amandla udonga lwe-Seleen
+  interval: Shintsha iphepha lokunamathisela odongeni wonke (amasekhondi)
+app_launcher:
+  runners:
+    explorer: Gijima
+    label: Abagebhe
+    cmd: Juba
+  monitor: Qapha ukukhombisa
+  enable: Nika amandla isiqalisi sohlelo lokusebenza
+more: Okuningi
+inherit: Dla ifa
+insert: Faka

@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Juoksua
+    cmd: Komento
+footer:
+  shortcuts: Näytä pikakuvakkeet

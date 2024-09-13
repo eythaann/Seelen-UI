@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Emretmek
+    explorer: Koşmak
+footer:
+  shortcuts: Kısayolları göster

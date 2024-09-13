@@ -212,3 +212,22 @@ vd:
 save_and_restart: Guardar y reiniciar
 beta_channel:
   enable: Habilitar el canal beta (solo a través de Github)
+monitors_configurations:
+  label: Monitor {{índice}}
+wall:
+  interval: Cambiar papel tapiz cada (segundos)
+  no_background: >-
+    Presentación de diapositivas vacías, utilizando el fondo del tema en su
+    lugar.
+  backgrounds: Fondos de pantalla
+  enable: Habilitar la pared de Seelen
+app_launcher:
+  runners:
+    explorer: Correr
+    label: Corredoras
+    cmd: Dominio
+  enable: Habilitar el lanzador de aplicaciones
+  monitor: Monitor para mostrar
+inherit: Heredar
+insert: Insertar
+more: Más

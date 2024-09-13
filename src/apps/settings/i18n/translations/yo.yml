@@ -206,3 +206,20 @@ vd:
 save_and_restart: Fipamọ & Tun bẹrẹ
 beta_channel:
   enable: Jeki ikanni Beta (Nikan nipasẹ Gittib)
+monitors_configurations:
+  label: Adirẹsi {{Ṣe atọka}}
+wall:
+  backgrounds: Ogiri ogiri
+  interval: Yi ogiri ogiri gbogbo (awọn aaya)
+  enable: Jeki ogiri Eelen
+  no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
+app_launcher:
+  runners:
+    explorer: Sare
+    label: Awọn asayan
+    cmd: Paṣẹ
+  enable: Jeki Ifilọlẹ app
+  monitor: Atẹle lati fihan
+inherit: Jogun
+more: Diẹ sii
+insert: Fisi

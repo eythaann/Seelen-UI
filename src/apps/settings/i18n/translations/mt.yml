@@ -210,3 +210,20 @@ vd:
 save_and_restart: Issejvja u terġa 'tibda
 beta_channel:
   enable: Enable Beta Channel (biss permezz ta 'Github)
+monitors_configurations:
+  label: Monitor {{indiċi}}
+wall:
+  enable: Jippermetti ħajt tas-seelen
+  interval: Ibdel il-wallpaper kull (sekondi)
+  backgrounds: Wallpapers
+  no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
+app_launcher:
+  runners:
+    explorer: Ġirja
+    label: Runners
+    cmd: Kmand
+  monitor: Tissorvelja biex turi
+  enable: Enable App Launcher
+inherit: Jirtu
+insert: Daħħal
+more: Aktar

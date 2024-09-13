@@ -210,3 +210,20 @@ vd:
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
 beta_channel:
   enable: ਬੀਟਾ ਚੈਨਲ ਨੂੰ ਸਮਰੱਥ ਕਰੋ (ਸਿਰਫ ਗੀਥੱਬ ਰਾਹੀਂ)
+monitors_configurations:
+  label: ਨਿਗਰਾਨੀ {{ਇੰਡੈਕਸ}
+wall:
+  no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
+  backgrounds: ਵਾਲਪੇਪਰ
+  interval: ਵਾਲਪੇਪਰ ਨੂੰ ਹਰ (ਸਕਿੰਟ) ਬਦਲੋ
+  enable: ਧੁੱਪ ਦੀ ਕੰਧ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+app_launcher:
+  runners:
+    label: ਦੌੜਾਕ
+    cmd: ਕਮਾਂਡ
+    explorer: ਚਲਾਓ
+  monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
+  enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+more: ਹੋਰ
+inherit: ਵਿਰਾਸਤ
+insert: ਸੰਮਿਲਿਤ ਕਰੋ

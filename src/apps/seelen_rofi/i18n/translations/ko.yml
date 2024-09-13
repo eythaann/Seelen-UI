@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: 달리다
+    cmd: 명령
+footer:
+  shortcuts: 쇼트 컷을 보여줍니다

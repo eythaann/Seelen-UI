@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Perintah
+    explorer: Jalankan
+footer:
+  shortcuts: Tunjukkan pintasan

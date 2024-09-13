@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Командование
+    explorer: Бегать
+footer:
+  shortcuts: Показать ярлыки

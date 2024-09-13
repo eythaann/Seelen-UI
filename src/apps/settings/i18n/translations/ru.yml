@@ -213,3 +213,20 @@ vd:
 save_and_restart: Сохранить и перезапустить
 beta_channel:
   enable: Включить бета -канал (только через GitHub)
+monitors_configurations:
+  label: Монитор {{index}}
+wall:
+  interval: Измените обои каждый (секунды)
+  backgrounds: Обои
+  no_background: Пустое слайд -шоу, используя фон темы.
+  enable: Включить стену Сиэлен
+app_launcher:
+  runners:
+    explorer: Бегать
+    cmd: Командование
+    label: Бегуны
+  monitor: Монитор, чтобы показать
+  enable: Включить запуск приложения
+inherit: Наследовать
+insert: Вставлять
+more: Более

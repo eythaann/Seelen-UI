@@ -210,3 +210,20 @@ vd:
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
 beta_channel:
   enable: બીટા ચેનલને સક્ષમ કરો (ફક્ત ગીથબ દ્વારા)
+monitors_configurations:
+  label: મોનિટર કરો {{અનુક્રમણિકા}}
+wall:
+  backgrounds: વ wallpapers લપેપર્સ
+  interval: દરેક (સેકંડ) વ wallp લપેપર બદલો
+  no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
+  enable: સીલેન દિવાલને સક્ષમ કરો
+app_launcher:
+  runners:
+    explorer: દોડવું
+    label: દોડવીરો
+    cmd: આદેશ આપવો
+  enable: એપ્લિકેશન લ laun ંચરને સક્ષમ કરો
+  monitor: બતાવવા માટે નિરીક્ષણ કરો
+more: વધારે
+inherit: વારસો મેળવવો
+insert: દાખલ કરવું

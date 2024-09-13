@@ -75,25 +75,30 @@ export function WallSettings() {
 
       <SettingsGroup>
         <b>{t('wall.backgrounds')}</b>
-        <Reorder.Group
-          values={backgrounds}
-          onReorder={onChangeBackgrounds}
-          className={cs.backgroundList}
-          axis="y"
-        >
-          {backgrounds.map((bg, idx) => (
-            <Reorder.Item key={bg.id} value={bg} className={cs.background}>
-              <img src={convertFileSrc(bg.path)} />
-              <b>{bg.path.split('\\').pop()}</b>
-              <Button type="primary" onClick={() => onRemoveBackground(idx)}>
-                <Icon iconName="IoTrash" size={14} />
-              </Button>
-            </Reorder.Item>
-          ))}
+        {!!backgrounds.length && (
+          <Reorder.Group
+            values={backgrounds}
+            onReorder={onChangeBackgrounds}
+            className={cs.backgroundList}
+            axis="y"
+          >
+            {backgrounds.map((bg, idx) => (
+              <Reorder.Item key={bg.id} value={bg} className={cs.background}>
+                <img src={convertFileSrc(bg.path)} />
+                <b>{bg.path.split('\\').pop()}</b>
+                <Button type="primary" onClick={() => onRemoveBackground(idx)}>
+                  <Icon iconName="IoTrash" size={14} />
+                </Button>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
+        )}
+        <SettingsOption>
+          <div>{!backgrounds.length && t('wall.no_background')}</div>
           <Button type="primary" className={cs.backgroundAdd} onClick={onAddBackgrounds}>
             <Icon iconName="MdLibraryAdd" size={14} />
           </Button>
-        </Reorder.Group>
+        </SettingsOption>
       </SettingsGroup>
     </>
   );

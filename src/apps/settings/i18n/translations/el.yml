@@ -212,3 +212,20 @@ vd:
 save_and_restart: Αποθήκευση & επανεκκίνηση
 beta_channel:
   enable: Ενεργοποίηση βήτα καναλιού (μόνο μέσω GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
+  enable: Ενεργοποιήστε το Wall Seelen
+  interval: Αλλάξτε ταπετσαρία κάθε (δευτερόλεπτα)
+  backgrounds: Ταπετσαρίες
+app_launcher:
+  runners:
+    explorer: Τρέξιμο
+    cmd: Εντολή
+    label: Δρομείς
+  monitor: Παρακολούθηση για εμφάνιση
+  enable: Ενεργοποίηση εκτοξευτή εφαρμογών
+inherit: Κληρονομώ
+more: Περισσότερο
+insert: Εισάγω

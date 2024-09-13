@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: حکم
+    explorer: چلائیں
+footer:
+  shortcuts: شارٹ کٹ دکھائیں

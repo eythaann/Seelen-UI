@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Chạy
+    cmd: Yêu cầu
+footer:
+  shortcuts: Hiển thị các phím tắt

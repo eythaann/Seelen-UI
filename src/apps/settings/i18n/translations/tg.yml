@@ -207,3 +207,20 @@ vd:
 save_and_restart: Наҷот ва бозоғоз
 beta_channel:
   enable: Фаъолсозии канали бета (танҳо тавассути Github)
+monitors_configurations:
+  label: Монитор {Индекс}}
+wall:
+  enable: Фаъолсозии девори Selece
+  interval: Девори ҳар (сония) -ро иваз кунед
+  backgrounds: Обои обу
+  no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
+app_launcher:
+  runners:
+    label: Давандагон
+    explorer: Давидан
+    cmd: Фармон
+  monitor: Нишон додани назорат
+  enable: Фаъолсозии Apple
+more: Бештар
+inherit: Мерос гирифтан
+insert: Илова кардан

@@ -7,6 +7,8 @@ export interface ThemeCssByApp {
   wm: string;
   /** Css Styles for the app launcher */
   launcher: string;
+  /** Css Styles for the wall */
+  wall: string;
 }
 
 export interface ThemeInfo {

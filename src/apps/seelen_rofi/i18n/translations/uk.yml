@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: Пробігати
+    cmd: Командування
+footer:
+  shortcuts: Показати ярлики

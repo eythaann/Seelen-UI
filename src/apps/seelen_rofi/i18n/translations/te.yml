@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    explorer: రన్
+    cmd: కమాండ్
+footer:
+  shortcuts: సత్వరమార్గాలను చూపించు

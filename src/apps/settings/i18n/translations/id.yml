@@ -210,3 +210,20 @@ vd:
 save_and_restart: Simpan & restart
 beta_channel:
   enable: Aktifkan saluran beta (hanya melalui github)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Wallpaper
+  enable: Aktifkan Seelen Wall
+  interval: Ubah wallpaper setiap (detik)
+  no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
+app_launcher:
+  runners:
+    cmd: Memerintah
+    explorer: Berlari
+    label: Pelari
+  enable: Aktifkan peluncur aplikasi
+  monitor: Monitor untuk ditampilkan
+insert: Menyisipkan
+more: Lagi
+inherit: Mewarisi

@@ -212,3 +212,20 @@ vd:
 save_and_restart: Stoor en herbegin
 beta_channel:
   enable: Aktiveer beta -kanaal (slegs via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
+  interval: Verander plakpapier elke (sekondes)
+  enable: Aktiveer Seelen Wall
+  backgrounds: Agtergronde
+app_launcher:
+  runners:
+    explorer: Wedloop
+    label: Hardlopers
+    cmd: Kommandeer
+  enable: Aktiveer App Launcher
+  monitor: Monitor om te wys
+insert: Invoeg
+more: Meer
+inherit: Erf

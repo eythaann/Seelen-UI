@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Settings } from 'seelen-core';
 
 import { Actions, RootSlice } from './app';
+import { StartThemingTool } from 'src/apps/shared/styles';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -19,4 +20,6 @@ export async function initStore() {
   Settings.onChange((settings) => {
     store.dispatch(Actions.setSettings(settings.wall));
   });
+
+  StartThemingTool();
 }

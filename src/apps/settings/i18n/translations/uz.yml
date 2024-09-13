@@ -212,3 +212,20 @@ vd:
 save_and_restart: Saqlang va qayta yoqing
 beta_channel:
   enable: Beta kanalini yoqing (faqat gitub orqali)
+monitors_configurations:
+  label: '{{Indeks}}'
+wall:
+  backgrounds: Fon rasmlari
+  no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
+  interval: Har bir (soniya) devor qog'ozini o'zgartiring
+  enable: Seelen devorini yoqing
+app_launcher:
+  runners:
+    cmd: Buyruq
+    label: Yuguruvchilar
+    explorer: Yugurish
+  monitor: Ko'rish uchun monitor
+  enable: APP ishga tushirishni yoqish
+more: Ko'proq
+inherit: Meros qilib olmoq
+insert: Qo'shmoq

@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Հրաման
+    explorer: Վազք
+footer:
+  shortcuts: Show ուցադրել դյուրանցումները

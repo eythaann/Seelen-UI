@@ -210,3 +210,20 @@ vd:
 save_and_restart: Uložit a restartovat
 beta_channel:
   enable: Povolit beta kanál (pouze přes GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Povolte zeď Seelen
+  backgrounds: Tapety
+  no_background: Prázdná prezentace místo toho za použití pozadí tématu.
+  interval: Změňte tapetu každý (sekundy)
+app_launcher:
+  runners:
+    explorer: Běh
+    cmd: Příkaz
+    label: Běžci
+  enable: Povolit spouštěč aplikací
+  monitor: Monitorovat
+insert: Vložit
+inherit: Zdědit
+more: Více

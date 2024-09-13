@@ -1,0 +1,6 @@
+app_launcher:
+  runners:
+    cmd: Komanda
+    explorer: Bėgti
+footer:
+  shortcuts: Rodyti nuorodas

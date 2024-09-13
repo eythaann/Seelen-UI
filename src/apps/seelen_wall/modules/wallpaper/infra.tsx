@@ -28,7 +28,7 @@ export function Wallpaper({ path }: { path: string }) {
 
   return (
     <>
-      {!wallpaper && <div className="wallpaper-empty">Seelen UI - No wallpaper</div>}
+      {!wallpaper && <div className="wallpaper-empty" />}
       {wallpaper}
     </>
   );

@@ -212,3 +212,20 @@ vd:
 save_and_restart: Opslaan en opnieuw opstarten
 beta_channel:
   enable: Schakel Beta Channel in (alleen via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  interval: Verander wallpaper elke (seconden)
+  backgrounds: Wallpapers
+  no_background: Lege diavoorstelling, in plaats daarvan met de achtergrond van het thema.
+  enable: Schakel Selen -muur in
+app_launcher:
+  runners:
+    cmd: Commando
+    explorer: Loop
+    label: Lopers wierners
+  monitor: Monitor om te laten zien
+  enable: Schakel App Launcher in
+inherit: Erven
+more: Meer
+insert: Invoegen

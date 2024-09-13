@@ -208,3 +208,20 @@ vd:
 save_and_restart: Enregistrer et redémarrer
 beta_channel:
   enable: Activer le canal bêta (uniquement via GitHub)
+monitors_configurations:
+  label: Moniteur {{index}}
+wall:
+  interval: Changer de papier peint chaque (seconde)
+  enable: Activer Seelen Wall
+  backgrounds: Fonds d'écran
+  no_background: Vide de diaporama, en utilisant à la place l'arrière-plan du thème.
+app_launcher:
+  runners:
+    explorer: Courir
+    cmd: Commande
+    label: Coureuses
+  monitor: Surveiller à montrer
+  enable: Activer le lanceur d'applications
+more: Plus
+inherit: Hériter
+insert: Insérer

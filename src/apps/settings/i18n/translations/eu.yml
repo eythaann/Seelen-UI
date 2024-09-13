@@ -210,3 +210,20 @@ vd:
 save_and_restart: Gorde eta berrabiarazi
 beta_channel:
   enable: Gaitu beta kanala (GitHub bidez bakarrik)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Gaitu Seelen horma
+  interval: Aldatu horma-irudia (segundo)
+  backgrounds: Horma-irudiak
+  no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
+app_launcher:
+  runners:
+    label: Kornollari
+    explorer: Korrika
+    cmd: Agindu
+  monitor: Monitorea erakusteko
+  enable: Gaitu aplikazioaren abiarazlea
+inherit: Jarauntsi
+insert: Txertatu
+more: Gehiago
