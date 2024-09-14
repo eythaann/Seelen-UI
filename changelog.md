@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [1.10.6]
 ### fix
 - tray module only working when the system language is english.
 
