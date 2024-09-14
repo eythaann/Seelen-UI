@@ -195,6 +195,7 @@ shortcuts:
     Huwag paganahin kung ipatutupad mo ang iyong sariling mga shortcut gamit ang
     Seelen Core API
   enable: Paganahin ang Integrated Shortcut (AHK)
+  reset: I -reset sa mga default
 inProgress: Sa pag -unlad ...
 delete: Tanggalin
 loading: Naglo -load ...

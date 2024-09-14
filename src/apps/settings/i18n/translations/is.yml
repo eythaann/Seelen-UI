@@ -192,6 +192,7 @@ shortcuts:
     switch_workspace_4: Skiptu yfir í vinnusvæði 4
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
+  reset: Endurstilla í vanskil
 delete: Eyða
 loading: Hleðsla ...
 inProgress: Í vinnslu...

@@ -194,6 +194,7 @@ shortcuts:
     Seelen Core API'sını kullanarak kendi kısayollarınızı uygulayacaksanız devre
     dışı bırakın
   enable: Entegre Kısayolları Etkinleştir (AHK)
+  reset: Varsayılanlara sıfırlayın
 cancel: İptal etmek
 inProgress: Devam etmekte...
 loading: Yükleniyor...

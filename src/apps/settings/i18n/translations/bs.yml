@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Onemogućite ako ćete implementirati vlastite prečice koristeći Seelen Core
     API
+  reset: Resetiranje na zadane vrijednosti
 loading: Učitavanje...
 inProgress: U toku...
 cancel: Otkazati

@@ -85,7 +85,7 @@ interface typesPropsIcon {
 }
 
 export function Icon(props: typesPropsIcon) {
-  const { iconName, size, propsIcon } = props;
+  const { iconName, size, propsIcon, ...rest } = props;
 
   const Icon = icons[iconName] || null;
 
@@ -94,7 +94,7 @@ export function Icon(props: typesPropsIcon) {
   }
 
   return (
-    <i className={cs.icon}>
+    <i {...rest} className={cs.icon}>
       <Icon size={size} {...propsIcon} />
     </i>
   );

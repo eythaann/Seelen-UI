@@ -194,6 +194,7 @@ shortcuts:
     Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
     -sovellusliittymällä
   enable: Ota integroidut pikakuvakkeet käyttöön (AHK)
+  reset: Palauta laiminlyöntiin
 inProgress: Käynnissä...
 delete: Poistaa
 quit: Lopettaa

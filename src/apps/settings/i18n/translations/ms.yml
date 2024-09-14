@@ -194,6 +194,7 @@ shortcuts:
     Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
     teras Seelen
   enable: Dayakan Pintasan Bersepadu (AHK)
+  reset: Tetapkan semula ke lalai
 open: Buka
 save: Simpan
 quit: Berhenti

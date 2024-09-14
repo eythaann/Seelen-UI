@@ -118,55 +118,59 @@ export class WindowManagerSettings {
 }
 
 export class AhkVar {
-  fancy: string = '';
-  ahk: string = '';
+  fancy: string;
+  ahk: string;
+  constructor(fancy: string = '', ahk: string = '') {
+    this.fancy = fancy;
+    this.ahk = ahk;
+  }
 }
 
 export class AhkVarList {
-  reserve_top = new AhkVar();
-  reserve_bottom = new AhkVar();
-  reserve_left = new AhkVar();
-  reserve_right = new AhkVar();
-  reserve_float = new AhkVar();
-  reserve_stack = new AhkVar();
-  focus_top = new AhkVar();
-  focus_bottom = new AhkVar();
-  focus_left = new AhkVar();
-  focus_right = new AhkVar();
-  focus_latest = new AhkVar();
-  increase_width = new AhkVar();
-  decrease_width = new AhkVar();
-  increase_height = new AhkVar();
-  decrease_height = new AhkVar();
-  restore_sizes = new AhkVar();
-  switch_workspace_0 = new AhkVar();
-  switch_workspace_1 = new AhkVar();
-  switch_workspace_2 = new AhkVar();
-  switch_workspace_3 = new AhkVar();
-  switch_workspace_4 = new AhkVar();
-  switch_workspace_5 = new AhkVar();
-  switch_workspace_6 = new AhkVar();
-  switch_workspace_7 = new AhkVar();
-  switch_workspace_8 = new AhkVar();
-  switch_workspace_9 = new AhkVar();
-  move_to_workspace_0 = new AhkVar();
-  move_to_workspace_1 = new AhkVar();
-  move_to_workspace_2 = new AhkVar();
-  move_to_workspace_3 = new AhkVar();
-  move_to_workspace_4 = new AhkVar();
-  move_to_workspace_5 = new AhkVar();
-  move_to_workspace_6 = new AhkVar();
-  move_to_workspace_7 = new AhkVar();
-  move_to_workspace_8 = new AhkVar();
-  move_to_workspace_9 = new AhkVar();
-  send_to_workspace_0 = new AhkVar();
-  send_to_workspace_1 = new AhkVar();
-  send_to_workspace_2 = new AhkVar();
-  send_to_workspace_3 = new AhkVar();
-  send_to_workspace_4 = new AhkVar();
-  send_to_workspace_5 = new AhkVar();
-  send_to_workspace_6 = new AhkVar();
-  send_to_workspace_7 = new AhkVar();
-  send_to_workspace_8 = new AhkVar();
-  send_to_workspace_9 = new AhkVar();
+  reserveTop = new AhkVar('Win + Shift + I', '#+i');
+  reserveBottom = new AhkVar('Win + Shift + K', '#+k');
+  reserveLeft = new AhkVar('Win + Shift + J', '#+j');
+  reserveRight = new AhkVar('Win + Shift + L', '#+l');
+  reserveFloat = new AhkVar('Win + Shift + U', '#+u');
+  reserveStack = new AhkVar('Win + Shift + O', '#+o');
+  focusTop = new AhkVar('Win + Shift + W', '#+w');
+  focusBottom = new AhkVar('Win + Shift + S', '#+s');
+  focusLeft = new AhkVar('Win + Shift + A', '#+a');
+  focusRight = new AhkVar('Win + Shift + D', '#+d');
+  focusLatest = new AhkVar('Win + Shift + E', '#+e');
+  increaseWidth = new AhkVar('Win + Alt + =', '#!=');
+  decreaseWidth = new AhkVar('Win + Alt + -', '#!-');
+  increaseHeight = new AhkVar('Win + Shift + =', '#+=');
+  decreaseHeight = new AhkVar('Win + Shift + -', '#+-');
+  restoreSizes = new AhkVar('Win + Alt + 0', '#!0');
+  switchWorkspace0 = new AhkVar('Alt + 1', '!1');
+  switchWorkspace1 = new AhkVar('Alt + 2', '!2');
+  switchWorkspace2 = new AhkVar('Alt + 3', '!3');
+  switchWorkspace3 = new AhkVar('Alt + 4', '!4');
+  switchWorkspace4 = new AhkVar('Alt + 5', '!5');
+  switchWorkspace5 = new AhkVar('Alt + 6', '!6');
+  switchWorkspace6 = new AhkVar('Alt + 7', '!7');
+  switchWorkspace7 = new AhkVar('Alt + 8', '!8');
+  switchWorkspace8 = new AhkVar('Alt + 9', '!9');
+  switchWorkspace9 = new AhkVar('Alt + 0', '!0');
+  moveToWorkspace0 = new AhkVar('Alt + Shift + 1', '!+1');
+  moveToWorkspace1 = new AhkVar('Alt + Shift + 2', '!+2');
+  moveToWorkspace2 = new AhkVar('Alt + Shift + 3', '!+3');
+  moveToWorkspace3 = new AhkVar('Alt + Shift + 4', '!+4');
+  moveToWorkspace4 = new AhkVar('Alt + Shift + 5', '!+5');
+  moveToWorkspace5 = new AhkVar('Alt + Shift + 6', '!+6');
+  moveToWorkspace6 = new AhkVar('Alt + Shift + 7', '!+7');
+  moveToWorkspace7 = new AhkVar('Alt + Shift + 8', '!+8');
+  moveToWorkspace8 = new AhkVar('Alt + Shift + 9', '!+9');
+  moveToWorkspace9 = new AhkVar('Alt + Shift + 0', '!+0');
+  sendToWorkspace0 = new AhkVar('Win + Shift + 1', '#+1');
+  sendToWorkspace1 = new AhkVar('Win + Shift + 2', '#+2');
+  sendToWorkspace2 = new AhkVar('Win + Shift + 3', '#+3');
+  sendToWorkspace3 = new AhkVar('Win + Shift + 4', '#+4');
+  sendToWorkspace4 = new AhkVar('Win + Shift + 5', '#+5');
+  sendToWorkspace5 = new AhkVar('Win + Shift + 6', '#+6');
+  sendToWorkspace6 = new AhkVar('Win + Shift + 7', '#+7');
+  sendToWorkspace7 = new AhkVar('Win + Shift + 8', '#+8');
+  sendToWorkspace8 = new AhkVar('Win + Shift + 9', '#+9');
+  sendToWorkspace9 = new AhkVar('Win + Shift + 0', '#+0');
 }

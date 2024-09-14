@@ -194,6 +194,7 @@ shortcuts:
     Onemogući ako ćete implementirati vlastite prečace pomoću Seelen Core API
     -ja
   enable: Omogućite integrirane prečace (AHK)
+  reset: Ponovno postavite na zadane vrijednosti
 cancel: Otkazati
 loading: Učitavam...
 delete: Izbrisati

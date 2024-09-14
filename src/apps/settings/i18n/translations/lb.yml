@@ -192,6 +192,7 @@ shortcuts:
     reserve_float: Reservéiert Float
   enable: Aktivéiert integréiert Ofkiirzungen (AHK)
   enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
+  reset: Reset op Defaults
 inProgress: A Beaarbechtung...
 loading: Lueden ...
 open: Ëmen e gratis

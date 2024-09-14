@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Disabilita se implementerai i tuoi collegamenti utilizzando l'API Core
     Seelen
+  reset: Ripristina le impostazioni predefinite
 delete: Eliminare
 inProgress: In corso...
 open: Aprire

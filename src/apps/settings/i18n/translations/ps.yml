@@ -191,6 +191,7 @@ shortcuts:
     increase_height: قد زیاتول
   enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
   enable: مدغم شوي لنډیزونه (اه)
+  reset: د افلاسیون لپاره بیا تنظیمول
 inProgress: د پرمختګ په حال کې...
 quit: پرېښودل
 delete: حذف کول

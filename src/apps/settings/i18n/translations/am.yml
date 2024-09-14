@@ -189,6 +189,7 @@ shortcuts:
     decrease_width: ስፋት መቀነስ
   enable: የተቀናጁ አቋራጮችን (AHK)
   enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
+  reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
 inProgress: በሂደት ላይ...
 open: ክፈት
 cancel: ይቅር

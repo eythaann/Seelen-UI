@@ -194,6 +194,7 @@ shortcuts:
     Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
     Core API
   enable: Aktiver integrerte snarveier (AHK)
+  reset: Tilbakestill til standardverdier
 cancel: Avbryt
 inProgress: I prosess...
 quit: Slutte

@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core
     API
+  reset: Nulstil til misligholdelser
 inProgress: I gang...
 open: Åben
 delete: Slet

@@ -192,6 +192,7 @@ shortcuts:
     move_to_workspace_9: Přesuňte se do pracovního prostoru 9
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
+  reset: Resetovat na výchozí hodnoty
 cancel: zrušení
 delete: Vymazat
 loading: Načítání...

@@ -193,6 +193,7 @@ shortcuts:
     focus_bottom: ໂຟກັສລຸ່ມ
   enable_tooltip: ປິດໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ Seelen Core Api
   enable: ເປີດໃຊ້ທາງລັດປະສົມປະສານ (ahk)
+  reset: ຕັ້ງຄ່າຄືນໃຫມ່
 cancel: ຍົກເລີກ
 loading: ກຳລັງໂຫລດ...
 delete: ລຶບ

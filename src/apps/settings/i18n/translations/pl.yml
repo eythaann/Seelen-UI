@@ -192,6 +192,7 @@ shortcuts:
     send_to_workspace_7: Wyślij na przestrzeń roboczą 7
   enable_tooltip: Wyłącz, jeśli zaimplementujesz własne skróty za pomocą API Seelen Core
   enable: Włącz zintegrowane skróty (AHK)
+  reset: Zresetuj do domyślnych
 loading: Ładowanie...
 quit: Zrezygnować
 inProgress: W trakcie...

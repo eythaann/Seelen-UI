@@ -193,6 +193,7 @@ shortcuts:
   enable_tooltip: >-
     Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh
     bikin
+  reset: Reset to Default
 cancel: Bişûndekirin
 inProgress: Ez teslîm nabim...
 quit: Devjêberdan

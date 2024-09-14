@@ -177,6 +177,7 @@ extras:
   exit: Quit/Exit
 shortcuts:
   enable: Enable Integrated Shortcuts (ahk)
+  reset: Reset to Defaults
   enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api
   labels:
     reserve_top: Reserve Top

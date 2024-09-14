@@ -78,6 +78,9 @@ export const AhkVariablesSlice = createSlice({
     setVariable(state, action: PayloadAction<{ name: keyof AhkVarList; value: AhkVar }>) {
       state[action.payload.name] = action.payload.value;
     },
+    reset() {
+      return { ...new AhkVarList() };
+    },
   },
 });
 

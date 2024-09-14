@@ -200,6 +200,7 @@ shortcuts:
     send_to_workspace_7: Отправить в рабочую область 7
     send_to_workspace_8: Отправить в рабочую область 8
     send_to_workspace_9: Отправить в рабочую область 9
+  reset: Сбросить по умолчанию
 vd:
   strategy:
     native: Нативная

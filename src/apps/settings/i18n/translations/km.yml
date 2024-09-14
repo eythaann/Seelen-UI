@@ -192,6 +192,7 @@ shortcuts:
     focus_bottom: ផ្ដោតបាត
   enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api
   enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
+  reset: កំណត់ឡើងវិញនូវលំនាំដើម
 cancel: បោះបង់
 inProgress: កំពុង​ដំណើរការ...
 delete: លុប

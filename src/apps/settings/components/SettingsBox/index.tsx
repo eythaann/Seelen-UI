@@ -17,14 +17,14 @@ export const SettingsGroup = ({ children }: Props) => {
 interface SubGroupProps {
   children: React.ReactNode;
   label: React.ReactNode;
-  disableOptions?: boolean;
+  disabled?: boolean;
 }
 
-export const SettingsSubGroup = ({ children, label, disableOptions }: SubGroupProps) => {
+export const SettingsSubGroup = ({ children, label, disabled }: SubGroupProps) => {
   return (
     <div className={cs.subgroup}>
       <div className={cs.subtitle}>{label}</div>
-      <ConfigProvider componentDisabled={disableOptions}>
+      <ConfigProvider componentDisabled={disabled}>
         <div className={cs.content}>{children}</div>
       </ConfigProvider>
     </div>

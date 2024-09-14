@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriile comenzi rapide folosind API -ul
     Seelen Core
+  reset: Resetați la valorile implicite
 delete: Șterge
 inProgress: În curs...
 loading: Se încarcă...

@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Desactiveu si implementareu les vostres pròpies dreceres mitjançant l'API de
     Seelen Core
+  reset: Restableix als valors predeterminats
 loading: Carregant ...
 open: Obrir
 delete: Esborrar

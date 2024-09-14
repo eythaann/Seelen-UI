@@ -197,6 +197,7 @@ shortcuts:
     send_to_workspace_7: Envoyer à Workspace 7
     send_to_workspace_8: Envoyer à l'espace de travail 8
     send_to_workspace_9: Envoyer à l'espace de travail 9
+  reset: Réinitialiser les valeurs par défaut
 vd:
   strategy:
     native: Indigène

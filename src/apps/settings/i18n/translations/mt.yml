@@ -192,6 +192,7 @@ shortcuts:
     send_to_workspace_3: Ibgħat lill-Ispazju tax-Xogħol 3
   enable: Enable Shortcuts Integrati (AHK)
   enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core
+  reset: Irrisettja għal nuqqasijiet
 loading: Tagħbija...
 inProgress: Fil-progress...
 cancel: Ikkanċella

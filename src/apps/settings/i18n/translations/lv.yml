@@ -192,6 +192,7 @@ shortcuts:
     send_to_workspace_3: Nosūtīt uz darbvietu 3
   enable: Iespējot integrētus saīsnes (AHK)
   enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
+  reset: Atiestatīt uz noklusējuma
 delete: Dzēst
 cancel: Atcelt
 loading: Iekraušana ...

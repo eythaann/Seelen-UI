@@ -194,6 +194,7 @@ shortcuts:
     Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
     parancsikonjait
   enable: Engedélyezze az integrált parancsikonokat (AHK)
+  reset: Alapértelmezés visszaállítása az alapértelmezésekre
 inProgress: Folyamatban...
 quit: Kilépés
 cancel: Megszünteti

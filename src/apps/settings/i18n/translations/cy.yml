@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan
     ddefnyddio API craidd Seelen
+  reset: Ailosod i ddiffygion
 inProgress: Ar y gweill...
 loading: Llwytho ...
 cancel: Chansliff
