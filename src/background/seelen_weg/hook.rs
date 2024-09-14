@@ -92,7 +92,7 @@ impl SeelenWeg {
                             origin_hwnd,
                             HWND(0),
                             pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
-                            pcstr!("DesktopWindowXamlSource"),
+                            None,
                         )
                     };
 

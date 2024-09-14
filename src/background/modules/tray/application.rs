@@ -76,8 +76,8 @@ fn get_tray_overflow_content_handle() -> Option<HWND> {
         let tray_overflow_content = FindWindowExA(
             tray_overflow,
             HWND(0),
+            pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
             None,
-            pcstr!("DesktopWindowXamlSource"),
         );
         if tray_overflow_content.0 == 0 {
             return None;

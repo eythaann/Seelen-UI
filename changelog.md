@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- tray module only working when the system language is english.
+
 ## [1.10.5]
 ### fix
 - app crashing on IMMDevice disconnection.
