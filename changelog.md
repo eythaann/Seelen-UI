@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.0-beta.4]
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
 
