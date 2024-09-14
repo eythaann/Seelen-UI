@@ -190,6 +190,7 @@ shortcuts:
     move_to_workspace_7: ย้ายไปที่เวิร์กสเปซ 7
   enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
   enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API
+  reset: รีเซ็ตเป็นค่าเริ่มต้น
 inProgress: กำลังดำเนินการ...
 cancel: ยกเลิก
 delete: ลบ

@@ -192,6 +192,7 @@ shortcuts:
     send_to_workspace_7: Надіслати на робочу область 7
   enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
   enable: Увімкнути інтегровані ярлики (AHK)
+  reset: Скидання за замовчуванням
 delete: Видаляти
 inProgress: В процесі...
 cancel: Скасувати

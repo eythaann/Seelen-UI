@@ -190,6 +190,7 @@ shortcuts:
     decrease_height: ירידה בגובה
   enable: אפשר קיצורי דרך משולבים (AHK)
   enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
+  reset: אפס לברירות מחדל
 inProgress: בתהליך...
 loading: טוען...
 open: לִפְתוֹחַ

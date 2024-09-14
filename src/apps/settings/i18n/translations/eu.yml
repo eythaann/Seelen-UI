@@ -192,6 +192,7 @@ shortcuts:
     focus_top: Focus Top
   enable: Gaitu lasterbide integratuak (Ahk)
   enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
+  reset: Berrezarri lehenetsitakoak
 cancel: Indargabetu
 quit: Laga
 delete: Ezabatu

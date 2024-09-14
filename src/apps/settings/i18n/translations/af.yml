@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen
     Core API
+  reset: Herstel na standaard
 open: Oopmaak
 loading: Laai ...
 save: Red

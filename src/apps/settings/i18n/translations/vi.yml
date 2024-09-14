@@ -192,6 +192,7 @@ shortcuts:
     focus_left: Tập trung trái
   enable: Bật các phím tắt tích hợp (AHK)
   enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
+  reset: Đặt lại về mặc định
 loading: Đang tải...
 open: Mở
 quit: Từ bỏ

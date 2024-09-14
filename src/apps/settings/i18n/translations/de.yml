@@ -201,6 +201,7 @@ shortcuts:
     send_to_workspace_7: Zum Arbeitsbereich 7 senden
     send_to_workspace_8: Zum Arbeitsbereich 8 senden
     send_to_workspace_9: Zum Arbeitsbereich 9 senden
+  reset: Auf Standards zurücksetzen
 vd:
   strategy:
     native: Einheimisch

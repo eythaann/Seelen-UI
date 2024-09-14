@@ -191,6 +191,7 @@ shortcuts:
     send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
   enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
   enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
+  reset: Үндсэндээ тохируулах
 inProgress: Явагдаж байна ...
 delete: Эдгээх
 loading: Ачаалах ...

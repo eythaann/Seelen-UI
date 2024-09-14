@@ -192,6 +192,7 @@ shortcuts:
     restore_sizes: Obnoviť veľkosti
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
+  reset: Reset na predvolené hodnoty
 inProgress: Prebieha ...
 loading: Načítava...
 open: OTVORENÉ

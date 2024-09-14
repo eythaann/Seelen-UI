@@ -192,6 +192,7 @@ shortcuts:
     focus_bottom: පහළට අවධානය යොමු කරන්න
   enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
   enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
+  reset: පෙරනිමි වෙත නැවත සකසන්න
 loading: පූරණය වෙමින්...
 quit: ඉවත්
 inProgress: ප්රගතියේ...

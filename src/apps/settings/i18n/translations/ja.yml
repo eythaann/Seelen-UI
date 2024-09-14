@@ -189,6 +189,7 @@ shortcuts:
     send_to_workspace_7: ワークスペース7に送信
   enable: AutoHotkeyを使用した統合ショートカットを有効にする
   enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください
+  reset: デフォルトにリセットします
 delete: 消去
 loading: 読み込み中...
 inProgress: 近日実装予定...

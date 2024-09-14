@@ -192,6 +192,7 @@ shortcuts:
     switch_workspace_9: Lülitage Workspace 9 -le
   enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
   enable: Lubage integreeritud otseteed (AHK)
+  reset: Lähtestage vaikeseadetele
 inProgress: Pooleli ...
 delete: Kustutama
 quit: Loobuma

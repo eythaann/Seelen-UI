@@ -190,6 +190,7 @@ shortcuts:
     move_to_workspace_9: Hoja kwa nafasi ya kazi 9
   enable: Wezesha njia za mkato zilizojumuishwa (AHK)
   enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
+  reset: Rudisha kwa defaults
 inProgress: Inaendelea...
 loading: Inapakia ...
 delete: Futa

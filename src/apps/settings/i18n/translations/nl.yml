@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Schakel uit of u uw eigen snelkoppelingen implementeert met behulp van de
     Selen Core API
+  reset: Reset naar standaardwaarden
 quit: Ontslag nemen
 open: Open
 save: Redden

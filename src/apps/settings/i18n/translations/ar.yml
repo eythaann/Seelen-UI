@@ -197,6 +197,7 @@ shortcuts:
     send_to_workspace_7: أرسل إلى مساحة العمل 7
     send_to_workspace_8: أرسل إلى مساحة العمل 8
     send_to_workspace_9: أرسل إلى مساحة العمل 9
+  reset: إعادة ضبط على الافتراضات
 vd:
   strategy:
     native: محلي

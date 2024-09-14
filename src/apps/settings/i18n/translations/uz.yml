@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
     o'chiring
+  reset: Standartlarga qayta o'rnating
 inProgress: Jarayonda...
 open: Ochiq
 save: Tejash

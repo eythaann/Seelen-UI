@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Inaktivera om du kommer att implementera dina egna genvägar med Seelen Core
     API
+  reset: Återställas till standardvärden
 loading: Läser in...
 quit: Sluta
 delete: Radera

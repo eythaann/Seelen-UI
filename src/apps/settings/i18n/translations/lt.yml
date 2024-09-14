@@ -192,6 +192,7 @@ shortcuts:
     focus_bottom: Fokusavimo dugnas
   enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
+  reset: Iš naujo nustatykite pagal numatytuosius nustatymus
 delete: Ištrinti
 open: Atviras
 save: Sutaupyti

@@ -196,6 +196,7 @@ shortcuts:
     send_to_workspace_7: 작업 공간 7으로 보내기
     send_to_workspace_8: 작업 공간 8으로 보내기
     send_to_workspace_9: 작업 공간 9으로 보내기
+  reset: 기본값으로 재설정하십시오
 vd:
   strategy:
     native: 토종의

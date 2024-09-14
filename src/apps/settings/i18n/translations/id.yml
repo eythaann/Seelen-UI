@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri
     menggunakan API Inti Seelen
+  reset: Reset ke default
 open: Membuka
 cancel: Membatalkan
 save: Menyimpan

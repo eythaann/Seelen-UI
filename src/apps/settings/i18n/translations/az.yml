@@ -194,6 +194,7 @@ shortcuts:
   enable_tooltip: >-
     Seelen Core API istifadə edərək öz qısa yollarınızı həyata keçirə bilsəniz
     deaktiv edin
+  reset: Defoltlara yenidən qurun
 save: Yadda saxla
 loading: Yükləmə ...
 delete: Silmək

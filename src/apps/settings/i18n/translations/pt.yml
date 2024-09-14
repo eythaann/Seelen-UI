@@ -199,6 +199,7 @@ shortcuts:
     send_to_workspace_7: Enviar para o espaço de trabalho 7
     send_to_workspace_8: Enviar para o espaço de trabalho 8
     send_to_workspace_9: Enviar para o espaço de trabalho 9
+  reset: Redefinir para padrões
 vd:
   strategy:
     native: Nativa
