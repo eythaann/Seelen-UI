@@ -4,3 +4,8 @@ app_launcher:
     cmd: Команда
 footer:
   shortcuts: Покажете кратенки
+header:
+  search: Апликација, команда или патека
+item:
+  pin: Игла до пристаништето
+  open_location: Отворете ја локацијата на датотеката

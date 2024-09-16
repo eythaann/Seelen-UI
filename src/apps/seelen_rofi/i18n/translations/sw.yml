@@ -4,3 +4,8 @@ app_launcher:
     explorer: Kukimbia
 footer:
   shortcuts: Onyesha njia za mkato
+header:
+  search: Programu, amri au njia
+item:
+  open_location: Fungua eneo la faili
+  pin: Piga kizimbani

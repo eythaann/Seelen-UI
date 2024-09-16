@@ -156,6 +156,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         weg_close_app,
         weg_toggle_window_state,
         weg_request_update_previews,
+        weg_pin_item,
         // Windows Manager
         set_window_position,
         bounce_handle,

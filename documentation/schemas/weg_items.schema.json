@@ -11,17 +11,38 @@
         {
           "type": "object",
           "required": [
+            "is_dir",
+            "path",
+            "type"
+          ],
+          "properties": {
+            "is_dir": {
+              "type": "boolean"
+            },
+            "path": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "Pinned"
+              ]
+            }
+          }
+        },
+        {
+          "type": "object",
+          "required": [
             "exe",
             "execution_path",
             "type"
           ],
           "properties": {
             "exe": {
-              "description": "executable path",
               "type": "string"
             },
             "execution_path": {
-              "description": "command to open the app using explorer.exe (uwp apps starts with `shell:AppsFolder`)",
+              "description": "command to open the app using explorer.exe (UWP apps start with `shell:AppsFolder`)",
               "type": "string"
             },
             "type": {
@@ -41,11 +62,10 @@
           ],
           "properties": {
             "exe": {
-              "description": "executable path",
               "type": "string"
             },
             "execution_path": {
-              "description": "command to open the app using explorer.exe (uwp apps starts with `shell:AppsFolder`)",
+              "description": "command to open the app using explorer.exe (UWP apps start with `shell:AppsFolder`)",
               "type": "string"
             },
             "type": {

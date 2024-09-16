@@ -4,3 +4,8 @@ app_launcher:
     explorer: Урсгал
 footer:
   shortcuts: Товчлолыг харуул
+header:
+  search: Апп, тушаал эсвэл зам
+item:
+  open_location: Нээлттэй файлын байршлыг нээнэ үү
+  pin: Док руу зүү

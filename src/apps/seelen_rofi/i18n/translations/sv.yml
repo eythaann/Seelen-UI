@@ -4,3 +4,8 @@ app_launcher:
     explorer: Sikt
 footer:
   shortcuts: Visa genvägar
+header:
+  search: App, kommando eller sökväg
+item:
+  open_location: Öppen filplats
+  pin: Kippa

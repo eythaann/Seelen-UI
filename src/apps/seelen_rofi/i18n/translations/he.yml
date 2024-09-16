@@ -4,3 +4,8 @@ app_launcher:
     cmd: פְּקוּדָה
 footer:
   shortcuts: הצג קיצורי דרך
+header:
+  search: אפליקציה, פקודה או נתיב
+item:
+  pin: סיכה לעגינה
+  open_location: פתח את מיקום הקובץ

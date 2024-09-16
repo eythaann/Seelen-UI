@@ -4,3 +4,8 @@ app_launcher:
     cmd: Командант
 footer:
   shortcuts: Прикажи пречице
+header:
+  search: Апликација, наредбу или стаза
+item:
+  pin: ПИН за пристајање
+  open_location: Отворите локацију датотеке

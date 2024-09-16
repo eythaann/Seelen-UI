@@ -4,3 +4,8 @@ app_launcher:
     explorer: วิ่ง
 footer:
   shortcuts: แสดงทางลัด
+header:
+  search: แอพคำสั่งหรือเส้นทาง
+item:
+  pin: พินไปที่ท่าเรือ
+  open_location: เปิดตำแหน่งไฟล์

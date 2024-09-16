@@ -40,6 +40,7 @@ lazy_static! {
 pub type LauncherHistory = HashMap<String, Vec<String>>;
 
 #[derive(Getters, Debug, Clone, Serialize)]
+#[getset(get = "pub")]
 pub struct FullState {
     #[serde(skip)]
     handle: AppHandle<tauri::Wry>,
@@ -50,19 +51,12 @@ pub struct FullState {
     #[serde(skip)]
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
-    #[getset(get = "pub")]
     settings: Settings,
-    #[getset(get = "pub")]
     settings_by_app: VecDeque<AppConfig>,
-    #[getset(get = "pub")]
     themes: HashMap<String, Theme>,
-    #[getset(get = "pub")]
     placeholders: HashMap<String, Placeholder>,
-    #[getset(get = "pub")]
     layouts: HashMap<String, WindowManagerLayout>,
-    #[getset(get = "pub")]
-    weg_items: WegItems,
-    #[getset(get = "pub")]
+    pub weg_items: WegItems,
     history: LauncherHistory,
 }
 
@@ -273,7 +267,7 @@ impl FullState {
             self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?;
             self.weg_items.sanitize();
         } else {
-            std::fs::write(path, serde_yaml::to_string(&self.weg_items)?)?;
+            self.save_weg_items()?;
         }
         Ok(())
     }
@@ -497,6 +491,12 @@ impl FullState {
             self.settings_path(),
             serde_json::to_string_pretty(&self.settings)?,
         )?;
+        Ok(())
+    }
+
+    pub fn save_weg_items(&self) -> Result<()> {
+        let path = self.data_dir.join("seelenweg_items.yaml");
+        std::fs::write(path, serde_yaml::to_string(&self.weg_items)?)?;
         Ok(())
     }
 

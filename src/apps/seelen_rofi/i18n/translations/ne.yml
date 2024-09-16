@@ -4,3 +4,8 @@ app_launcher:
     cmd: आदेश
 footer:
   shortcuts: सर्टकटहरू देखाउनुहोस्
+header:
+  search: अनुप्रयोग, आदेश वा मार्ग
+item:
+  pin: पिन गर्न पिन
+  open_location: फाइल स्थान खोल्नुहोस्

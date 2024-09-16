@@ -48,6 +48,7 @@ export enum SeelenCommand {
   WegCloseApp = 'weg_close_app',
   WegToggleWindowState = 'weg_toggle_window_state',
   WegRequestUpdatePreviews = 'weg_request_update_previews',
+  WegPinItem = 'weg_pin_item',
 
   // Windows Manager
   SetWindowPosition = 'set_window_position',

@@ -4,3 +4,8 @@ app_launcher:
     explorer: სირბილი
 footer:
   shortcuts: აჩვენეთ მალსახმობები
+header:
+  search: აპლიკაცია, ბრძანება ან გზა
+item:
+  pin: Pin dock
+  open_location: გახსენით ფაილის ადგილმდებარეობა

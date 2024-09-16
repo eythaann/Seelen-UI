@@ -7,6 +7,7 @@ import { getGeneratedFilesPath } from './app';
 import { HWND } from '../store/domain';
 
 export const LAZY_CONSTANTS = {
+  FOLDER_ICON_PATH: '',
   MISSING_ICON_PATH: '',
   DEFAULT_THUMBNAIL: '',
   TEMP_FOLDER: '',
@@ -20,6 +21,12 @@ export async function loadConstants() {
     'static',
     'icons',
     'default_thumbnail.jpg',
+  );
+  LAZY_CONSTANTS.FOLDER_ICON_PATH = await path.resolve(
+    await path.resourceDir(),
+    'static',
+    'icons',
+    'folder.svg',
   );
 }
 

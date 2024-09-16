@@ -4,3 +4,8 @@ app_launcher:
     explorer: Uruchomić
 footer:
   shortcuts: Pokaż skróty
+header:
+  search: Aplikacja, polecenie lub ścieżka
+item:
+  open_location: Otwórz lokalizację pliku
+  pin: Pin do Dock

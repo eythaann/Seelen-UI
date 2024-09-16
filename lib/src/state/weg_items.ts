@@ -1,5 +1,6 @@
 export enum SwItemType {
   PinnedApp = 'PinnedApp',
+  Pinned = 'Pinned',
   TemporalApp = 'TemporalPin',
   Separator = 'Separator',
   Media = 'Media',
@@ -7,6 +8,12 @@ export enum SwItemType {
 }
 
 export interface PinnedWegItem {
+  type: SwItemType.Pinned;
+  path: string;
+  is_dir: boolean;
+};
+
+export interface PinnedAppWegItem {
   type: SwItemType.PinnedApp;
   /** executable path */
   exe: string;
@@ -37,6 +44,7 @@ export interface StartWegItem {
 
 export type WegItem =
   | PinnedWegItem
+  | PinnedAppWegItem
   | TemporalPinnedWegItem
   | SeparatorWegItem
   | MediaWegItem

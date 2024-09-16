@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { HideMode, SeelenWegMode, SeelenWegSide, SeparatorWegItem, SwItemType, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
+import { FileOrFolder } from '../item/infra/File';
 import { MediaSession } from '../item/infra/MediaSession';
 import { StartMenu } from '../item/infra/StartMenu';
 import { UserApplication } from '../item/infra/UserApplication';
@@ -159,6 +160,10 @@ export function SeelenWeg() {
 }
 
 function ItemByType(item: SwItem) {
+  if (item.type === SwItemType.Pinned) {
+    return <FileOrFolder key={item.path} item={item} />;
+  }
+
   if (item.type === SwItemType.PinnedApp) {
     return <UserApplication key={item.exe} item={item} />;
   }

@@ -5,6 +5,7 @@ import { LauncherHistory, SeelenCommand, Settings, UIColors } from 'seelen-core'
 import { Actions, RootSlice } from './app';
 
 import { StartThemingTool } from '../../../../shared/styles';
+import i18n from '../../../i18n';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -27,12 +28,17 @@ export async function initStore() {
   const dispatch = store.dispatch;
   const settings = await Settings.getAsync();
 
+  i18n.changeLanguage(settings.language);
+
   dispatch(Actions.setSettings(settings.launcher));
   dispatch(Actions.setApps(await invoke(SeelenCommand.LauncherGetApps)));
   dispatch(Actions.setHistory(await LauncherHistory.getAsync()));
 
-  Settings.onChange((settings) => dispatch(Actions.setSettings(settings.launcher)));
   LauncherHistory.onChange((history) => dispatch(Actions.setHistory(history)));
+  Settings.onChange((settings) => {
+    i18n.changeLanguage(settings.language);
+    dispatch(Actions.setSettings(settings.launcher));
+  });
 
   await initUIColors();
   await StartThemingTool();

@@ -4,3 +4,8 @@ app_launcher:
     explorer: Loop
 footer:
   shortcuts: Toon snelkoppelingen
+header:
+  search: App, opdracht of pad
+item:
+  pin: Pin om aan te meren
+  open_location: Open de bestandslocatie

@@ -1,5 +1,6 @@
 import { AutoComplete, Tooltip } from 'antd';
 import { KeyboardEventHandler, RefObject } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface CommandInputProps {
   command: string;
@@ -21,13 +22,15 @@ export const CommandInput = ({
   onInputKeyDown,
   inputRef,
   showHelp,
-}: CommandInputProps) => (
-  <Tooltip open={showHelp} title="Ctrl + F" placement="top">
+}: CommandInputProps) => {
+  const { t } = useTranslation();
+
+  return <Tooltip open={showHelp} title="Ctrl + F" placement="top">
     <Tooltip open={showHelp} title="Enter" placement="right">
       <AutoComplete
         ref={inputRef as any}
         className="launcher-header-command-input"
-        placeholder="App, Command or Path..."
+        placeholder={t('header.search')}
         options={matchingHistory}
         filterOption
         value={command}
@@ -39,5 +42,5 @@ export const CommandInput = ({
         allowClear
       />
     </Tooltip>
-  </Tooltip>
-);
+  </Tooltip>;
+};

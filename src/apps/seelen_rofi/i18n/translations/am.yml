@@ -4,3 +4,8 @@ app_launcher:
     cmd: ትእዛዝ
 footer:
   shortcuts: አቋራጮችን አሳይ
+header:
+  search: መተግበሪያ, ትእዛዝ ወይም ዱካ
+item:
+  open_location: የፋይል ቦታ ይክፈቱ
+  pin: ፒን

@@ -1,13 +1,13 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { SeelenWegSettings, SwItemType, UIColors } from 'seelen-core';
+import { PinnedWegItem, SeelenWegSettings, SwItemType, UIColors } from 'seelen-core';
 
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 
 import {
   AppFromBackground,
   AppsSides,
-  ExtendedPinnedWegItem,
-  ExtendedTemporalWegItem,
+  ExtendedPinnedAppWegItem,
+  ExtendedTemporalAppWegItem,
   HWND,
   RootState,
   SwItem,
@@ -30,7 +30,7 @@ const initialState: RootState = {
 
 function removeAppFromState(
   state: RootState,
-  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
+  searched: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
 ) {
   const search = (app: SwItem) => 'exe' in app && app.exe === searched.exe;
 
@@ -53,12 +53,15 @@ function removeAppFromState(
   }
 }
 
-function findApp(state: RootState, searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem) {
+function findApp(
+  state: RootState,
+  searched: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
+) {
   return (state.itemsOnLeft.find((app) => 'exe' in app && app.exe === searched.exe) ||
     state.itemsOnCenter.find((app) => 'exe' in app && app.exe === searched.exe) ||
     state.itemsOnRight.find((app) => 'exe' in app && app.exe === searched.exe)) as
-    | ExtendedPinnedWegItem
-    | ExtendedTemporalWegItem
+    | ExtendedPinnedAppWegItem
+    | ExtendedTemporalAppWegItem
     | undefined;
 }
 
@@ -67,16 +70,13 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    unPin(state, action: PayloadAction<ExtendedPinnedWegItem | ExtendedTemporalWegItem>) {
-      const found = findApp(state, action.payload);
-      if (found) {
-        found.type = SwItemType.TemporalApp;
-        if (found.opens.length === 0) {
-          removeAppFromState(state, found);
-        }
-      }
+    unpin(state, action: PayloadAction<PinnedWegItem>) {
+      const filter = (item: any) => !('path' in item) || item.path !== action.payload.path;
+      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
+      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
+      state.itemsOnRight = state.itemsOnRight.filter(filter);
     },
-    pinApp(state, action: PayloadAction<{ app: ExtendedTemporalWegItem; side: AppsSides }>) {
+    pinApp(state, action: PayloadAction<{ app: ExtendedTemporalAppWegItem; side: AppsSides }>) {
       const { app, side } = action.payload;
 
       const appToPin = findApp(state, app) || app;
@@ -96,6 +96,15 @@ export const RootSlice = createSlice({
           state.itemsOnRight.push(appToPin);
           break;
         default:
+      }
+    },
+    unPinApp(state, action: PayloadAction<ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem>) {
+      const found = findApp(state, action.payload);
+      if (found) {
+        found.type = SwItemType.TemporalApp;
+        if (found.opens.length === 0) {
+          removeAppFromState(state, found);
+        }
       }
     },
     addMediaModule(state) {
@@ -140,7 +149,7 @@ export const RootSlice = createSlice({
         const cb = (current: SwItem) => 'exe' in current && current.exe.endsWith(appFilename);
         const pinedApp = (state.itemsOnLeft.find(cb) ||
           state.itemsOnCenter.find(cb) ||
-          state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
+          state.itemsOnRight.find(cb)) as ExtendedPinnedAppWegItem | undefined;
 
         if (pinedApp) {
           if (!pinedApp.opens.includes(app.hwnd)) {
@@ -186,10 +195,10 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isPinnedApp = (item: SwItem): item is ExtendedPinnedWegItem => {
+export const isPinnedApp = (item: SwItem): item is ExtendedPinnedAppWegItem => {
   return item.type === SwItemType.PinnedApp;
 };
 
-export const isTemporalApp = (item: SwItem): item is ExtendedTemporalWegItem => {
+export const isTemporalApp = (item: SwItem): item is ExtendedTemporalAppWegItem => {
   return item.type === SwItemType.TemporalApp;
 };

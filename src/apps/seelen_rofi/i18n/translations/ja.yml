@@ -4,3 +4,8 @@ app_launcher:
     cmd: 指示
 footer:
   shortcuts: ショートカットを表示します
+header:
+  search: アプリ、コマンド、またはパス
+item:
+  pin: ドックにピン
+  open_location: ファイルの場所を開きます

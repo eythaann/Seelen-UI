@@ -4,3 +4,8 @@ app_launcher:
     cmd: قومانده
 footer:
   shortcuts: لنډیزونه وښیه
+header:
+  search: ایپ، قومانده یا لاره
+item:
+  open_location: د فایل ځای خلاص کړئ
+  pin: پنبې پنبه

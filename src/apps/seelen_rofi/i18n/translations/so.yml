@@ -4,3 +4,8 @@ app_launcher:
     explorer: Ordid
 footer:
   shortcuts: Muuji gaagaaban
+header:
+  search: App, amar ama dariiqa
+item:
+  pin: Pin to dock
+  open_location: Goobta faylka furan

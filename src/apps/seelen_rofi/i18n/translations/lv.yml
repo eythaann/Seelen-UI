@@ -4,3 +4,8 @@ app_launcher:
     cmd: Vadība
 footer:
   shortcuts: Rādīt īsceļus
+header:
+  search: Lietotne, komanda vai ceļš
+item:
+  pin: Piespraudiet piestātnei
+  open_location: Atveriet faila atrašanās vietu

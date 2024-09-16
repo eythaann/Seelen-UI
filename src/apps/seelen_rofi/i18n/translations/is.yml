@@ -4,3 +4,8 @@ app_launcher:
     explorer: Hlaupa
 footer:
   shortcuts: Sýna flýtileiðir
+header:
+  search: App, skipun eða slóð
+item:
+  open_location: Opnaðu staðsetningu skráar
+  pin: Pinna við bryggju

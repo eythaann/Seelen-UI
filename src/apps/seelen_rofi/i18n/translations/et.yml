@@ -4,3 +4,8 @@ app_launcher:
     explorer: Jooksma
 footer:
   shortcuts: Näita otseteid
+header:
+  search: Rakendus, käsk või tee
+item:
+  pin: PIN -kood dokkimiseks
+  open_location: Avatud faili asukoht
