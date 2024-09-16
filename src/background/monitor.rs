@@ -20,6 +20,8 @@ pub struct Monitor {
     wall: Option<SeelenWall>,
 }
 
+unsafe impl Send for Monitor {}
+
 impl Monitor {
     pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
         if hmonitor.is_invalid() {
@@ -45,10 +47,10 @@ impl Monitor {
     pub fn ensure_positions(&mut self) -> Result<()> {
         if let Some(bar) = &mut self.toolbar {
             bar.cached_monitor = self.handle;
-            bar.set_positions(self.handle.0)?;
+            bar.set_positions(self.handle)?;
         }
         if let Some(weg) = &mut self.weg {
-            weg.set_positions(self.handle.0)?;
+            weg.set_positions(self.handle)?;
         }
         if let Some(wall) = &mut self.wall {
             wall.set_position()?;
@@ -86,7 +88,7 @@ impl Monitor {
 
     fn add_wm(&mut self) -> Result<()> {
         if self.wm.is_none() {
-            self.wm = Some(WindowManager::new(self.handle.0)?)
+            self.wm = Some(WindowManager::new(self.handle)?)
         }
         Ok(())
     }

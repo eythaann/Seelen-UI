@@ -137,8 +137,15 @@ impl WindowsApi {
         callback: MONITORENUMPROC,
         callback_data_address: isize,
     ) -> Result<()> {
-        unsafe { EnumDisplayMonitors(HDC(0), None, callback, LPARAM(callback_data_address)) }
-            .ok()?;
+        unsafe {
+            EnumDisplayMonitors(
+                HDC::default(),
+                None,
+                callback,
+                LPARAM(callback_data_address),
+            )
+        }
+        .ok()?;
         Ok(())
     }
 
@@ -300,15 +307,7 @@ impl WindowsApi {
             Some(_) => flags,
             None => SWP_NOZORDER | flags,
         };
-        let order = order.unwrap_or(HWND(0));
-
-        if uflags.contains(SWP_ASYNCWINDOWPOS) {
-            let rect = *rect;
-            std::thread::spawn(move || Self::_set_position(hwnd, order, rect, uflags));
-            return Ok(());
-        }
-
-        Self::_set_position(hwnd, order, *rect, uflags)
+        Self::_set_position(hwnd, order.unwrap_or_default(), *rect, uflags)
     }
 
     pub fn move_window(hwnd: HWND, rect: &RECT) -> Result<()> {
@@ -341,8 +340,8 @@ impl WindowsApi {
     pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
         {
             let mut hook_manager = trace_lock!(HOOK_MANAGER);
-            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd.0);
-            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd.0);
+            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
+            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
         }
 
         Self::set_minimize_animation(false)?;
@@ -356,7 +355,8 @@ impl WindowsApi {
     }
 
     pub fn async_force_set_foreground(hwnd: HWND) {
-        std::thread::spawn(move || log_error!(Self::force_set_foreground(hwnd)));
+        let hwnd = hwnd.0 as isize;
+        std::thread::spawn(move || log_error!(Self::force_set_foreground(HWND(hwnd as _))));
     }
 
     fn open_process(
@@ -368,13 +368,16 @@ impl WindowsApi {
     }
 
     pub fn open_current_process_token() -> Result<HANDLE> {
-        let mut token_handle: HANDLE = HANDLE(0);
+        let mut token_handle = HANDLE::default();
         unsafe {
             OpenProcessToken(
                 Self::current_process(),
                 TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY,
                 &mut token_handle,
             )?;
+        }
+        if token_handle.is_invalid() {
+            return Err("OpenProcessToken failed".into());
         }
         Ok(token_handle)
     }
@@ -411,11 +414,13 @@ impl WindowsApi {
     }
 
     pub fn get_parent(hwnd: HWND) -> HWND {
-        unsafe { GetParent(hwnd) }
+        // TODO change unwrap_or_default and return a result instead
+        unsafe { GetParent(hwnd).unwrap_or_default() }
     }
 
     pub fn get_owner(hwnd: HWND) -> HWND {
-        unsafe { GetWindow(hwnd, GW_OWNER) }
+        // TODO change unwrap_or_default and return a result instead
+        unsafe { GetWindow(hwnd, GW_OWNER).unwrap_or_default() }
     }
 
     pub fn get_desktop_window() -> HWND {

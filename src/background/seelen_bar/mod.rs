@@ -25,7 +25,7 @@ pub struct FancyToolbar {
     pub cached_monitor: HMONITOR,
     /// Is the rect that the toolbar should have when it isn't hidden
     pub theoretical_rect: RECT,
-    last_focus: Option<isize>,
+    last_focus: Option<HWND>,
     overlaped: bool,
 }
 
@@ -45,7 +45,7 @@ impl FancyToolbar {
         Ok(Self {
             window: Self::create_window(postfix)?,
             last_focus: None,
-            cached_monitor: HMONITOR(-1),
+            cached_monitor: HMONITOR::default(),
             theoretical_rect: RECT::default(),
             overlaped: false,
         })
@@ -91,7 +91,7 @@ impl FancyToolbar {
     }
 
     pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
-        self.last_focus = Some(hwnd.0);
+        self.last_focus = Some(hwnd);
         Ok(())
     }
 }
@@ -103,10 +103,10 @@ impl FancyToolbar {
 
     /// Work area no works fine on multiple monitors
     /// so we use this functions that only takes the toolbar in account
-    pub fn get_work_area_by_monitor(monitor: isize) -> Result<RECT> {
-        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor))?;
+    pub fn get_work_area_by_monitor(monitor: HMONITOR) -> Result<RECT> {
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
 
-        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+        let dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let mut rect = monitor_info.monitorInfo.rcMonitor;
 
         let state = FULL_STATE.load();
@@ -118,20 +118,16 @@ impl FancyToolbar {
         Ok(rect)
     }
 
-    pub fn set_positions(&mut self, monitor: isize) -> Result<()> {
+    pub fn set_positions(&mut self, monitor: HMONITOR) -> Result<()> {
         let hwnd = HWND(self.window.hwnd()?.0);
-        let hmonitor = HMONITOR(monitor);
 
-        if hmonitor.is_invalid() {
-            return Err("Invalid Monitor".into());
-        }
-        self.cached_monitor = hmonitor;
+        self.cached_monitor = monitor;
 
         let state = FULL_STATE.load();
         let settings = &state.settings().fancy_toolbar;
 
-        let monitor_info = WindowsApi::monitor_info(hmonitor)?;
-        let monitor_dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
+        let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let rc_monitor = monitor_info.monitorInfo.rcMonitor;
         self.theoretical_rect = RECT {
             bottom: rc_monitor.top + (settings.height as f32 * monitor_dpi) as i32,

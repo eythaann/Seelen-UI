@@ -66,8 +66,8 @@ impl SeelenWorkspace {
     fn remove_window(&mut self, window: isize) -> Result<()> {
         self.windows.retain(|w| *w != window);
         WindowsApi::set_minimize_animation(false)?;
-        trace_lock!(HOOK_MANAGER).skip(WinEvent::SystemMinimizeStart, window);
-        WindowsApi::minimize_window(HWND(window))?;
+        trace_lock!(HOOK_MANAGER).skip(WinEvent::SystemMinimizeStart, HWND(window as _));
+        WindowsApi::minimize_window(HWND(window as _))?;
         WindowsApi::set_minimize_animation(true)?;
         Ok(())
     }
@@ -76,8 +76,9 @@ impl SeelenWorkspace {
         WindowsApi::set_minimize_animation(false)?;
         let mut hook_manager = trace_lock!(HOOK_MANAGER);
         for window in &self.windows {
-            hook_manager.skip(WinEvent::SystemMinimizeStart, *window);
-            WindowsApi::minimize_window(HWND(*window))?;
+            let hwnd = HWND(*window as _);
+            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
+            WindowsApi::minimize_window(hwnd)?;
         }
         WindowsApi::set_minimize_animation(true)?;
         Ok(())
@@ -87,10 +88,10 @@ impl SeelenWorkspace {
         WindowsApi::set_minimize_animation(false)?;
         let mut hook_manager = trace_lock!(HOOK_MANAGER);
         for window in &self.windows {
-            let hwnd = HWND(*window);
+            let hwnd = HWND(*window as _);
             // if is switching by restored window on other workspace it will be already shown
             if WindowsApi::is_iconic(hwnd) {
-                hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd.0);
+                hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
                 WindowsApi::restore_window(hwnd)?;
             }
         }
@@ -129,7 +130,7 @@ impl SeelenWorkspacesManager {
         let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
         WindowEnumerator::new().for_each(|hwnd| {
             if SeelenWeg::should_be_added(hwnd) && !WindowsApi::is_iconic(hwnd) {
-                workspace.windows.push(hwnd.0);
+                workspace.windows.push(hwnd.0 as isize);
             }
         })?;
         Ok(())
@@ -137,37 +138,36 @@ impl SeelenWorkspacesManager {
 
     /// should be called on a thread to avoid deadlocks
     pub fn on_win_event(&self, event: WinEvent, origin: HWND) -> Result<()> {
+        let addr = origin.0 as isize;
         match event {
             WinEvent::SystemMinimizeStart | WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
                 let mut workspaces = self.workspaces();
                 let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-                if workspace.windows.contains(&origin.0) {
-                    log::trace!("removing window: {}", origin.0);
-                    workspace.windows.retain(|w| *w != origin.0);
+                if workspace.windows.contains(&addr) {
+                    log::trace!("removing window: {}", addr);
+                    workspace.windows.retain(|w| *w != addr);
                 }
             }
             WinEvent::SystemMinimizeEnd => {
                 let owner_idx = {
                     let workspaces = self.workspaces();
-                    workspaces
-                        .iter()
-                        .position(|w| w.windows.contains(&origin.0))
+                    workspaces.iter().position(|w| w.windows.contains(&addr))
                 };
                 if let Some(owner_idx) = owner_idx {
                     self.switch_to(owner_idx)?;
                 } else if SeelenWeg::should_be_added(origin) {
-                    log::trace!("adding window to workspace: {}", origin.0);
+                    log::trace!("adding window to workspace: {}", addr);
                     let mut workspaces = self.workspaces();
                     let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-                    workspace.windows.push(origin.0);
+                    workspace.windows.push(addr);
                 }
             }
             WinEvent::ObjectCreate | WinEvent::ObjectShow => {
                 if SeelenWeg::should_be_added(origin) {
-                    log::trace!("adding window to workspace: {}", origin.0);
+                    log::trace!("adding window to workspace: {}", addr);
                     let mut workspaces = self.workspaces();
                     let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-                    workspace.windows.push(origin.0);
+                    workspace.windows.push(addr);
                 }
             }
             _ => {}

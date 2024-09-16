@@ -73,8 +73,8 @@ impl PowerManager {
             RegisterClassW(&wnd_class);
         }
 
-        spawn_named_thread("Power Manager Window", move || unsafe {
-            let hwnd = CreateWindowExW(
+        let hwnd = unsafe {
+            CreateWindowExW(
                 WINDOW_EX_STYLE::default(),
                 PCWSTR(wide_class.as_ptr()),
                 PCWSTR(wide_name.as_ptr()),
@@ -87,8 +87,12 @@ impl PowerManager {
                 None,
                 h_module,
                 None,
-            );
+            )?
+        };
 
+        let addr = hwnd.0 as isize;
+        spawn_named_thread("Power Manager Message Loop", move || unsafe {
+            let hwnd = HWND(addr as _);
             let mut msg = MSG::default();
             while GetMessageW(&mut msg, hwnd, 0, 0).into() {
                 let _ = TranslateMessage(&msg);

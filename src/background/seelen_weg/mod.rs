@@ -18,10 +18,10 @@ use serde::Serialize;
 use tauri::{path::BaseDirectory, Emitter, Listener, Manager, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
-    Foundation::{BOOL, HWND, LPARAM, RECT},
+    Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        EnumWindows, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW,
+        SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW,
         WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
@@ -35,7 +35,7 @@ use crate::{
     state::application::FULL_STATE,
     trace_lock,
     utils::{are_overlaped, constants::OVERLAP_BLACK_LIST_BY_EXE, sleep_millis},
-    windows_api::{window::Window, AppBarData, AppBarDataState, WindowsApi},
+    windows_api::{window::Window, AppBarData, AppBarDataState, WindowEnumerator, WindowsApi},
 };
 
 lazy_static! {
@@ -80,7 +80,7 @@ impl Drop for SeelenWeg {
 impl SeelenWeg {
     pub fn set_active_window(hwnd: HWND) -> Result<()> {
         let handle = get_app_handle();
-        handle.emit(SeelenEvent::WegSetFocusedHandle, hwnd.0)?;
+        handle.emit(SeelenEvent::WegSetFocusedHandle, hwnd.0 as isize)?;
         handle.emit(
             SeelenEvent::WegSetFocusedExecutable,
             WindowsApi::exe(hwnd).unwrap_or_default(),
@@ -105,14 +105,16 @@ impl SeelenWeg {
     }
 
     pub fn contains_app(hwnd: HWND) -> bool {
+        let addr = hwnd.0 as isize;
         trace_lock!(OPEN_APPS)
             .iter()
-            .any(|app| app.hwnd == hwnd.0 || app.creator_hwnd == hwnd.0)
+            .any(|app| app.hwnd == addr || app.creator_hwnd == addr)
     }
 
     pub fn update_app(hwnd: HWND) {
+        let addr = hwnd.0 as isize;
         let mut apps = trace_lock!(OPEN_APPS);
-        let app = apps.iter_mut().find(|app| app.hwnd == hwnd.0);
+        let app = apps.iter_mut().find(|app| app.hwnd == addr);
         if let Some(app) = app {
             app.title = WindowsApi::get_window_text(hwnd);
             get_app_handle()
@@ -136,12 +138,12 @@ impl SeelenWeg {
         };
 
         let mut app = SeelenWegApp {
-            hwnd: hwnd.0,
+            hwnd: hwnd.0 as isize,
             exe: String::new(),
             title,
             icon_path: String::new(),
             execution_path: String::new(),
-            creator_hwnd: creator.hwnd().0,
+            creator_hwnd: creator.hwnd().0 as isize,
         };
 
         if let Ok(path) = creator.exe() {
@@ -171,9 +173,10 @@ impl SeelenWeg {
     }
 
     pub fn remove_hwnd(hwnd: HWND) {
-        trace_lock!(OPEN_APPS).retain(|app| app.hwnd != hwnd.0);
+        let addr = hwnd.0 as isize;
+        trace_lock!(OPEN_APPS).retain(|app| app.hwnd != addr);
         get_app_handle()
-            .emit(SeelenEvent::WegRemoveOpenApp, hwnd.0)
+            .emit(SeelenEvent::WegRemoveOpenApp, addr)
             .expect("Failed to emit");
     }
 
@@ -218,7 +221,7 @@ impl SeelenWeg {
     }
 
     pub fn capture_window(hwnd: HWND) -> Option<DynamicImage> {
-        capture_window(hwnd.0).ok().map(|buf| {
+        capture_window(hwnd.0 as isize).ok().map(|buf| {
             let image = RgbaImage::from_raw(buf.width, buf.height, buf.pixels).unwrap_or_default();
             DynamicImage::ImageRgba8(image)
         })
@@ -277,13 +280,13 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn set_positions(&mut self, monitor_id: isize) -> Result<()> {
-        let rc_work = FancyToolbar::get_work_area_by_monitor(monitor_id)?;
+    pub fn set_positions(&mut self, monitor: HMONITOR) -> Result<()> {
+        let rc_work = FancyToolbar::get_work_area_by_monitor(monitor)?;
         let hwnd = HWND(self.window.hwnd()?.0);
 
         let state = FULL_STATE.load();
         let settings = &state.settings().seelenweg;
-        let monitor_dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor_id))?;
+        let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let total_size = (settings.total_size() as f32 * monitor_dpi) as i32;
 
         self.theoretical_rect = rc_work;
@@ -368,7 +371,8 @@ impl SeelenWeg {
                 while attempts < 10 && FULL_STATE.load().is_weg_enabled() {
                     for handle in &handles {
                         let app_bar = AppBarData::from_handle(*handle);
-                        trace_lock!(TASKBAR_STATE_ON_INIT).insert(handle.0, app_bar.state());
+                        trace_lock!(TASKBAR_STATE_ON_INIT)
+                            .insert(handle.0 as isize, app_bar.state());
                         app_bar.set_state(AppBarDataState::AutoHide);
                         let _ = WindowsApi::show_window(*handle, SW_HIDE);
                     }
@@ -384,7 +388,7 @@ impl SeelenWeg {
         for hwnd in get_taskbars_handles()? {
             AppBarData::from_handle(hwnd).set_state(
                 *trace_lock!(TASKBAR_STATE_ON_INIT)
-                    .get(&hwnd.0)
+                    .get(&(hwnd.0 as isize))
                     .unwrap_or(&AppBarDataState::AlwaysOnTop),
             );
             WindowsApi::show_window(hwnd, SW_SHOWNORMAL)?;
@@ -396,23 +400,17 @@ impl SeelenWeg {
 lazy_static! {
     pub static ref TASKBAR_STATE_ON_INIT: Mutex<HashMap<isize, AppBarDataState>> =
         Mutex::new(HashMap::new());
-    pub static ref FOUNDS: Mutex<Vec<HWND>> = Mutex::new(Vec::new());
     pub static ref TASKBAR_CLASS: Vec<&'static str> =
         Vec::from(["Shell_TrayWnd", "Shell_SecondaryTrayWnd",]);
 }
 
-unsafe extern "system" fn enum_windows_proc(hwnd: HWND, _: LPARAM) -> BOOL {
-    let class = WindowsApi::get_class(hwnd).unwrap_or_default();
-    if TASKBAR_CLASS.contains(&class.as_str()) {
-        trace_lock!(FOUNDS).push(hwnd);
-    }
-    true.into()
-}
-
 pub fn get_taskbars_handles() -> Result<Vec<HWND>> {
-    unsafe { EnumWindows(Some(enum_windows_proc), LPARAM(0))? };
-    let mut found = trace_lock!(FOUNDS);
-    let result = found.clone();
-    found.clear();
-    Ok(result)
+    let mut founds = Vec::new();
+    WindowEnumerator::new().for_each(|hwnd| {
+        let class = WindowsApi::get_class(hwnd).unwrap_or_default();
+        if TASKBAR_CLASS.contains(&class.as_str()) {
+            founds.push(hwnd);
+        }
+    })?;
+    Ok(founds)
 }

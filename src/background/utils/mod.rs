@@ -91,7 +91,7 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
             let guid = part.trim_start_matches('{').trim_end_matches('}');
             let rfid = GUID::from(guid);
             let string_path = unsafe {
-                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, HANDLE(0))?.to_string()?
+                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, HANDLE::default())?.to_string()?
             };
 
             path_buf.push(string_path);

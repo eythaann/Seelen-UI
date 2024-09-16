@@ -17,7 +17,10 @@ impl SeelenWeg {
             }
             WinEvent::ObjectParentChange => {
                 let parent = WindowsApi::get_parent(origin);
-                if parent.0 != 0 && !Self::contains_app(parent) && Self::should_be_added(parent) {
+                if !parent.is_invalid()
+                    && !Self::contains_app(parent)
+                    && Self::should_be_added(parent)
+                {
                     Self::add_hwnd(parent);
                 }
             }
@@ -89,22 +92,24 @@ impl SeelenWeg {
                     let content_hwnd = unsafe {
                         FindWindowExA(
                             origin_hwnd,
-                            HWND(0),
+                            HWND::default(),
                             pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
                             pcstr!("DesktopWindowXamlSource"),
                         )
+                        .unwrap_or_default()
                     };
 
-                    if content_hwnd.0 != 0 {
+                    if !content_hwnd.is_invalid() {
                         let input_hwnd = unsafe {
                             FindWindowExA(
                                 content_hwnd,
-                                HWND(0),
+                                HWND::default(),
                                 pcstr!("Windows.UI.Input.InputSite.WindowClass"),
                                 None,
                             )
+                            .unwrap_or_default()
                         };
-                        if input_hwnd.0 != 0 {
+                        if !input_hwnd.is_invalid() {
                             // can fail on volume window island
                             let _ = WindowsApi::show_window(input_hwnd, SW_HIDE);
                         }

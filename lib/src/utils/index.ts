@@ -17,7 +17,7 @@ export class Rect {
 }
 
 export function disableWebviewShortcutsAndContextMenu() {
-  document.addEventListener('keydown', function (event) {
+  window.addEventListener('keydown', function (event) {
     // prevent refresh
     if (event.key === 'F5') {
       event.preventDefault();
@@ -42,8 +42,7 @@ export function disableWebviewShortcutsAndContextMenu() {
       }
     }
   });
-
-  document.addEventListener('contextmenu', function (event) {
-    event.preventDefault();
-  });
+  window.addEventListener('contextmenu', (e) => e.preventDefault());
+  window.addEventListener('drop', (e) => e.preventDefault());
+  window.addEventListener('dragover', (e) => e.preventDefault());
 }

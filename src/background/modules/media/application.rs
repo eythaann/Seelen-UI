@@ -87,7 +87,7 @@ enum MediaEvent {
 #[windows_core::implement(IMMNotificationClient)]
 struct MediaManagerEvents;
 
-impl IMMNotificationClient_Impl for MediaManagerEvents {
+impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
     fn OnDefaultDeviceChanged(
         &self,
         flow: EDataFlow,
@@ -205,7 +205,7 @@ struct MediaDeviceEventHandler {
     device_id: String,
 }
 
-impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
+impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler_Impl {
     fn OnNotify(
         &self,
         data: *mut windows::Win32::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA,
@@ -221,7 +221,7 @@ impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
     }
 }
 
-impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
+impl IAudioSessionNotification_Impl for MediaDeviceEventHandler_Impl {
     fn OnSessionCreated(
         &self,
         _new_session: Option<&IAudioSessionControl>,
@@ -234,7 +234,7 @@ impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
 #[windows::core::implement(IAudioSessionEvents)]
 struct MediaSessionEventHandler;
 
-impl IAudioSessionEvents_Impl for MediaSessionEventHandler {
+impl IAudioSessionEvents_Impl for MediaSessionEventHandler_Impl {
     fn OnChannelVolumeChanged(
         &self,
         _channel_count: u32,

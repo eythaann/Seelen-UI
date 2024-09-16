@@ -20,8 +20,8 @@ impl WindowManager {
                 self.set_active_workspace(new.id())?;
             }
             VirtualDesktopEvent::WindowChanged(window) => {
-                if self.is_managed(HWND(*window)) {
-                    self.update_app(HWND(*window))?;
+                if self.is_managed(HWND(*window as _)) {
+                    self.update_app(HWND(*window as _))?;
                 }
             }
             _ => {}

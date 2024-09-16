@@ -12,7 +12,7 @@ use seelen_core::rect::Rect;
 
 #[tauri::command(async)]
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
-    let hwnd = HWND(hwnd);
+    let hwnd = HWND(hwnd as _);
 
     if !WindowsApi::is_window(hwnd) || WindowsApi::is_iconic(hwnd) {
         return Ok(());
@@ -46,14 +46,14 @@ pub fn bounce_handle(webview: Webview<Wry>, hwnd: isize) {
 
     if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
         if let Some(wm) = monitor.wm_mut() {
-            wm.bounce_handle(HWND(hwnd));
+            wm.bounce_handle(HWND(hwnd as _));
         }
     }
 }
 
 #[tauri::command(async)]
 pub fn request_focus(hwnd: isize) -> Result<(), String> {
-    let hwnd = HWND(hwnd);
+    let hwnd = HWND(hwnd as _);
     log::trace!(
         "Requesting focus on {:?} - {} , {:?}",
         hwnd,

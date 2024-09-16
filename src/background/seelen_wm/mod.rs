@@ -62,14 +62,14 @@ impl WindowManager {
         "Virtual desktop hotkey switching preview",
     ];
 
-    pub fn new(monitor: isize) -> Result<Self> {
-        log::info!("Creating Tiling Windows Manager / {}", monitor);
+    pub fn new(monitor: HMONITOR) -> Result<Self> {
+        log::info!("Creating Tiling Windows Manager");
 
         let handle = get_app_handle();
 
         Ok(Self {
             window: Self::create_window(&handle, monitor)?,
-            monitor: HMONITOR(monitor),
+            monitor,
             apps: Vec::new(),
             current_virtual_desktop: get_vd_manager().get_current()?.id(),
             paused: true, // paused until complete-setup is called
@@ -93,11 +93,11 @@ impl WindowManager {
     }
 
     pub fn get_app(&self, hwnd: HWND) -> Option<&ManagingApp> {
-        self.apps.iter().find(|app| app.hwnd == hwnd.0)
+        self.apps.iter().find(|app| app.hwnd == hwnd.0 as isize)
     }
 
     pub fn get_app_mut(&mut self, hwnd: HWND) -> Option<&mut ManagingApp> {
-        self.apps.iter_mut().find(|app| app.hwnd == hwnd.0)
+        self.apps.iter_mut().find(|app| app.hwnd == hwnd.0 as isize)
     }
 
     pub fn set_active_window(&mut self, hwnd: HWND) -> Result<()> {
@@ -106,8 +106,8 @@ impl WindowManager {
         }
 
         log::trace!(
-            "Setting active window to {} <=> {:?}",
-            hwnd.0,
+            "Setting active window to {:?} <=> {:?}",
+            hwnd,
             WindowsApi::get_window_text(hwnd),
         );
 
@@ -121,10 +121,10 @@ impl WindowManager {
             }
             false => {
                 self.pseudo_pause()?;
-                HWND(0)
+                HWND::default()
             }
         };
-        self.emit(SeelenEvent::WMSetActiveWindow, hwnd.0)?;
+        self.emit(SeelenEvent::WMSetActiveWindow, hwnd.0 as isize)?;
         Ok(())
     }
 
@@ -147,7 +147,7 @@ impl WindowManager {
         }
 
         let desktop_to_add = if WindowsApi::is_cloaked(hwnd)? {
-            get_vd_manager().get_by_window(hwnd.0)?.id()
+            get_vd_manager().get_by_window(hwnd.0 as _)?.id()
         } else {
             self.current_virtual_desktop.clone()
         };
@@ -155,7 +155,7 @@ impl WindowManager {
         log::trace!(
             "Adding {}({}) <=> {} on desktop: {}",
             WindowsApi::exe(hwnd).unwrap_or_default(),
-            hwnd.0,
+            hwnd.0 as isize,
             WindowsApi::get_window_text(hwnd),
             desktop_to_add
         );
@@ -166,7 +166,7 @@ impl WindowManager {
         }
 
         let app = ManagingApp {
-            hwnd: hwnd.0,
+            hwnd: hwnd.0 as _,
             monitor: WindowsApi::monitor_name(WindowsApi::monitor_from_window(hwnd))?,
             desktop_id: desktop_to_add,
             is_floating,
@@ -208,7 +208,7 @@ impl WindowManager {
         if self.paused || !self.is_managed(hwnd) {
             return false;
         }
-        self.apps.retain(|x| x.hwnd != hwnd.0);
+        self.apps.retain(|x| x.hwnd != hwnd.0 as isize);
         true
     }
 
@@ -217,11 +217,11 @@ impl WindowManager {
             return Ok(false);
         }
         log::trace!(
-            "Removing {} <=> {:?}",
-            hwnd.0,
+            "Removing {:?} <=> {:?}",
+            hwnd,
             WindowsApi::get_window_text(hwnd)
         );
-        self.emit(SeelenEvent::WMRemoveWindow, hwnd.0)?;
+        self.emit(SeelenEvent::WMRemoveWindow, hwnd.0 as isize)?;
         Ok(true)
     }
 
@@ -292,12 +292,12 @@ impl WindowManager {
         && (get_vd_manager().uses_cloak() || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
     }
 
-    fn create_window(handle: &AppHandle<Wry>, monitor_id: isize) -> Result<WebviewWindow> {
-        let work_area = FancyToolbar::get_work_area_by_monitor(monitor_id)?;
+    fn create_window(handle: &AppHandle<Wry>, monitor: HMONITOR) -> Result<WebviewWindow> {
+        let work_area = FancyToolbar::get_work_area_by_monitor(monitor)?;
 
         let window = tauri::WebviewWindowBuilder::<Wry, AppHandle<Wry>>::new(
             handle,
-            format!("{}/{}", Self::TARGET, monitor_id),
+            format!("{}/{}", Self::TARGET, monitor.0 as isize),
             tauri::WebviewUrl::App("seelen_wm/index.html".into()),
         )
         .title(Self::TITLE)
@@ -315,13 +315,14 @@ impl WindowManager {
 
         window.set_ignore_cursor_events(true)?;
 
-        let main_hwnd = HWND(window.hwnd()?.0);
+        let main_hwnd = window.hwnd()?;
         WindowsApi::move_window(main_hwnd, &work_area)?;
         WindowsApi::set_position(main_hwnd, Some(HWND_TOPMOST), &work_area, SWP_NOACTIVATE)?;
 
+        let addr = monitor.0 as isize;
         window.once("complete-setup", move |_event| {
             std::thread::spawn(move || -> Result<()> {
-                if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
+                if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(addr) {
                     if let Some(wm) = monitor.wm_mut() {
                         wm.paused = false;
                         wm.window.emit(
@@ -340,10 +341,10 @@ impl WindowManager {
     unsafe extern "system" fn get_next_by_order_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
         // TODO search a way to handle ApplicationFrameHost.exe as well on change of virtual desktop
         if WindowManager::is_manageable_window(hwnd)
-            && hwnd.0 != lparam.0
+            && hwnd.0 as isize != lparam.0
             && !WindowsApi::exe(hwnd).is_ok_and(|exe| &exe == "ApplicationFrameHost.exe")
         {
-            NEXT.store(hwnd.0, Ordering::SeqCst);
+            NEXT.store(hwnd.0 as isize, Ordering::SeqCst);
             return false.into();
         }
         true.into()
@@ -351,12 +352,12 @@ impl WindowManager {
 
     pub fn get_next_by_order(hwnd: HWND) -> Option<HWND> {
         NEXT.store(0, Ordering::SeqCst);
-        unsafe { EnumWindows(Some(Self::get_next_by_order_proc), LPARAM(hwnd.0)) }.ok();
+        unsafe { EnumWindows(Some(Self::get_next_by_order_proc), LPARAM(hwnd.0 as isize)) }.ok();
         let result = NEXT.load(Ordering::SeqCst);
         if result == 0 {
             return None;
         }
-        Some(HWND(result))
+        Some(HWND(result as _))
     }
 }
 

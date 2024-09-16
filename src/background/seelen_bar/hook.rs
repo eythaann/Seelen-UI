@@ -8,7 +8,7 @@ impl FancyToolbar {
     pub fn process_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
         match event {
             WinEvent::ObjectNameChange => {
-                if self.last_focus == Some(origin.0) {
+                if self.last_focus == Some(origin) {
                     self.focus_changed(origin)?;
                 }
             }

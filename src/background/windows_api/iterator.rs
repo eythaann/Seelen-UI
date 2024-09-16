@@ -42,14 +42,14 @@ impl WindowEnumerator {
     /// If enumeration fails it will return error.
     pub fn for_each<F>(&self, cb: F) -> Result<()>
     where
-        F: FnMut(HWND) + Sync,
+        F: FnMut(HWND),
     {
         type ForEachCallback<'a> = Box<dyn FnMut(HWND) + 'a>;
         let mut callback: ForEachCallback = Box::new(cb);
 
         unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
             if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
-                (*boxed)(hwnd)
+                (*boxed)(hwnd);
             }
             true.into()
         }
@@ -61,8 +61,7 @@ impl WindowEnumerator {
     /// If enumeration fails it will return error.
     pub fn map<F, T>(&self, cb: F) -> Result<Vec<T>>
     where
-        F: FnMut(HWND) -> T + Sync,
-        T: Sync,
+        F: FnMut(HWND) -> T,
     {
         struct MapCallbackWrapper<'a, T> {
             cb: Box<dyn FnMut(HWND) -> T + 'a>,
@@ -89,7 +88,7 @@ impl WindowEnumerator {
     /// If no window matches the condition, it will return None.
     pub fn find<F>(&self, cb: F) -> Result<Option<Window>>
     where
-        F: FnMut(Window) -> bool + Sync,
+        F: FnMut(Window) -> bool,
     {
         struct FindCallbackWrapper<'a> {
             cb: Box<dyn FnMut(Window) -> bool + 'a>,
