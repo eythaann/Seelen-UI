@@ -4,3 +4,8 @@ app_launcher:
     cmd: Фармон
 footer:
   shortcuts: Миёнабурҳоро нишон диҳед
+header:
+  search: Барнома, фармон ё роҳ
+item:
+  pin: PIN ба Dock
+  open_location: Кушодани макони кушод

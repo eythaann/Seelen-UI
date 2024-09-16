@@ -4,3 +4,8 @@ app_launcher:
     explorer: چلائیں
 footer:
   shortcuts: شارٹ کٹ دکھائیں
+header:
+  search: ایپ ، کمانڈ یا راستہ
+item:
+  pin: گودی سے پن
+  open_location: فائل کا مقام کھولیں

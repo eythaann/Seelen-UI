@@ -4,3 +4,8 @@ app_launcher:
     cmd: Naredba
 footer:
   shortcuts: Prikaži prečice
+header:
+  search: Aplikacija, naredba ili staza
+item:
+  pin: Pin za pristajanje
+  open_location: Otvorite lokaciju datoteke

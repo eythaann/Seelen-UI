@@ -4,3 +4,8 @@ app_launcher:
     cmd: Εντολή
 footer:
   shortcuts: Εμφάνιση συντομεύσεων
+header:
+  search: Εφαρμογή, εντολή ή διαδρομή
+item:
+  open_location: Ανοίξτε την τοποθεσία αρχείου
+  pin: Καρφίτσα στην αποβάθρα

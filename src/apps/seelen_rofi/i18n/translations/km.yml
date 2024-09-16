@@ -4,3 +4,8 @@ app_launcher:
     explorer: ការរត់
 footer:
   shortcuts: បង្ហាញផ្លូវកាត់
+header:
+  search: កម្មវិធីពាក្យបញ្ជាឬផ្លូវ
+item:
+  open_location: បើកទីតាំងឯកសារ
+  pin: ម្ជុលទៅចត

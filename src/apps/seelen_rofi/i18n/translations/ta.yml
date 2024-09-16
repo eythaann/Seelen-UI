@@ -4,3 +4,8 @@ app_launcher:
     cmd: கட்டளை
 footer:
   shortcuts: குறுக்குவழிகளைக் காட்டு
+header:
+  search: பயன்பாடு, கட்டளை அல்லது பாதை
+item:
+  open_location: கோப்பு இருப்பிடத்தைத் திறக்கவும்
+  pin: கப்பல்துறைக்கு முள்

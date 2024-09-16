@@ -4,3 +4,8 @@ app_launcher:
     explorer: Rev
 footer:
   shortcuts: Kurtefîlm nîşan bide
+header:
+  search: App, emir an rê
+item:
+  open_location: Cihê pelê vekirî
+  pin: Pin to Dock

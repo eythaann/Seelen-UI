@@ -4,3 +4,8 @@ app_launcher:
     cmd: ບັນຊາ
 footer:
   shortcuts: ສະແດງທາງລັດ
+header:
+  search: ແອັບ, Command ຫຼື Path
+item:
+  pin: PIN ໃຫ້ DOCK
+  open_location: ເປີດສະຖານທີ່ເອກະສານ

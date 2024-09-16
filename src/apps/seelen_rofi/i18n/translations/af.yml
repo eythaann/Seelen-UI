@@ -4,3 +4,8 @@ app_launcher:
     explorer: Wedloop
 footer:
   shortcuts: Wys kortpaaie
+header:
+  search: App, opdrag of pad
+item:
+  open_location: Oop lêlokasie
+  pin: Pin to Dock

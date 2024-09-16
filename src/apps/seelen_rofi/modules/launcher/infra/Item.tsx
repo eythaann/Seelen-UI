@@ -2,6 +2,7 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Dropdown, Menu } from 'antd';
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { SeelenCommand } from 'seelen-core';
 
 import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
@@ -10,6 +11,8 @@ import { StartMenuApp } from '../../shared/store/domain';
 
 export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolean }) => {
   const { label, icon, executionPath, path } = item;
+
+  const { t } = useTranslation();
 
   function onClick() {
     invoke(SeelenCommand.OpenFile, { path: executionPath });
@@ -25,7 +28,14 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
         <Menu
           items={[
             {
-              label: 'Open File Location',
+              label: t('item.pin'),
+              key: 'pin',
+              onClick() {
+                invoke(SeelenCommand.WegPinItem, { path });
+              },
+            },
+            {
+              label: t('item.open_location'),
               key: 'open',
               onClick() {
                 invoke(SeelenCommand.SelectFileOnExplorer, { path });

@@ -4,3 +4,8 @@ app_launcher:
     explorer: Бегать
 footer:
   shortcuts: Показать ярлыки
+header:
+  search: Приложение, команда или путь
+item:
+  pin: Прикованная к пристани
+  open_location: Откройте местоположение файла

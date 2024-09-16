@@ -12,8 +12,8 @@ import { updatePreviews } from '../../shared/utils/infra';
 import { Selectors } from '../../shared/store/app';
 
 import {
-  ExtendedPinnedWegItem,
-  ExtendedTemporalWegItem,
+  ExtendedPinnedAppWegItem,
+  ExtendedTemporalAppWegItem,
   RootState,
 } from '../../shared/store/domain';
 
@@ -24,7 +24,7 @@ import { DraggableItem } from './DraggableItem';
 import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
-  item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;
+  item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem;
 }
 
 export const UserApplication = memo(({ item }: Props) => {

@@ -4,3 +4,8 @@ app_launcher:
     cmd: Kommando
 footer:
   shortcuts: Vis genveje
+header:
+  search: App, kommando eller sti
+item:
+  open_location: Åben filplacering
+  pin: Pin til dock

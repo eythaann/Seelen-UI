@@ -1,12 +1,13 @@
-use std::sync::atomic::Ordering;
+use std::{path::PathBuf, sync::atomic::Ordering};
 
 use image::ImageFormat;
+use seelen_core::state::WegItem;
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
-    windows_api::WindowsApi,
+    error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, modules::uwp::UWP_MANAGER,
+    seelen::get_app_handle, state::application::FULL_STATE, trace_lock, windows_api::WindowsApi,
 };
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
@@ -83,5 +84,32 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
         WindowsApi::async_force_set_foreground(hwnd)
     }
 
+    Ok(())
+}
+
+#[tauri::command(async)]
+pub fn weg_pin_item(path: PathBuf) -> Result<()> {
+    let mut state = FULL_STATE.load().cloned();
+
+    let item = if path.ends_with(".exe") {
+        let mut execution_path = None;
+        if let Some(package) = trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
+            if let Some(app) = path.file_name() {
+                execution_path = package.get_shell_path(app.to_string_lossy().as_ref());
+            }
+        }
+        WegItem::PinnedApp {
+            exe: path.clone(),
+            execution_path: execution_path.unwrap_or(path.to_string_lossy().to_string()),
+        }
+    } else {
+        WegItem::Pinned {
+            is_dir: path.is_dir(),
+            path,
+        }
+    };
+
+    state.weg_items.center.insert(0, item);
+    state.save_weg_items()?;
     Ok(())
 }

@@ -4,3 +4,8 @@ app_launcher:
     cmd: Əmr etmək
 footer:
   shortcuts: Qısa yol göstərmək
+header:
+  search: Tətbiq, əmr və ya yol
+item:
+  open_location: Fayl yeri açın
+  pin: Doka pin

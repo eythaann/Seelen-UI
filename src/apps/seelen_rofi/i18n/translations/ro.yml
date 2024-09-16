@@ -4,3 +4,8 @@ app_launcher:
     explorer: Alerga
 footer:
   shortcuts: Afișați comenzile rapide
+header:
+  search: Aplicație, comandă sau cale
+item:
+  open_location: Deschideți locația fișierului
+  pin: Pin la doc

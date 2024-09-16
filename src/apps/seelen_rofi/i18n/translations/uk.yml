@@ -4,3 +4,8 @@ app_launcher:
     cmd: Командування
 footer:
   shortcuts: Показати ярлики
+header:
+  search: Додаток, команда або шлях
+item:
+  pin: PIN до причалу
+  open_location: Розташування відкритого файлу

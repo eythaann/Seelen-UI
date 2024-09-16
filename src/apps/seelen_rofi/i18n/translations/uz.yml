@@ -4,3 +4,8 @@ app_launcher:
     explorer: Yugurish
 footer:
   shortcuts: Yorliqlarni ko'rsating
+header:
+  search: Ilova, buyruq yoki yo'l
+item:
+  pin: Dok uchun pin
+  open_location: Fayl joylashuvi

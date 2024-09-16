@@ -4,3 +4,8 @@ app_launcher:
     cmd: Komento
 footer:
   shortcuts: Näytä pikakuvakkeet
+header:
+  search: Sovellus, komento tai polku
+item:
+  pin: Pistä tippaan
+  open_location: Avaa tiedoston sijainti

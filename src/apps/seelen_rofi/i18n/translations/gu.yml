@@ -4,3 +4,8 @@ app_launcher:
     explorer: દોડવું
 footer:
   shortcuts: શોર્ટકટ્સ બતાવો
+header:
+  search: એપ્લિકેશન, આદેશ અથવા પાથ
+item:
+  open_location: ફાઇલ સ્થાન ખોલો
+  pin: ગોદી પર પિન કરવા માટે

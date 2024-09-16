@@ -9,7 +9,7 @@ import { store } from '../shared/store/infra';
 
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
-import { AppsSides, ExtendedPinnedWegItem, ExtendedTemporalWegItem } from '../shared/store/domain';
+import { AppsSides, ExtendedPinnedAppWegItem, ExtendedTemporalAppWegItem } from '../shared/store/domain';
 
 import { savePinnedItems } from '../shared/store/storeApi';
 
@@ -39,7 +39,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
   ];
 }
 
-export function getMenuForItem(t: TFunction, item: ExtendedPinnedWegItem | ExtendedTemporalWegItem): ItemType[] {
+export function getMenuForItem(t: TFunction, item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem): ItemType[] {
   const isPinned = isPinnedApp(item);
 
   const pin = (side: AppsSides) => {
@@ -56,7 +56,7 @@ export function getMenuForItem(t: TFunction, item: ExtendedPinnedWegItem | Exten
       label: t('app_menu.unpin'),
       key: 'weg_unpin_app',
       onClick: () => {
-        store.dispatch(RootActions.unPin(item));
+        store.dispatch(RootActions.unPinApp(item));
         savePinnedItems();
       },
     });

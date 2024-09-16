@@ -4,3 +4,8 @@ app_launcher:
     cmd: Commande
 footer:
   shortcuts: Montrer les raccourcis
+header:
+  search: Application, commande ou chemin
+item:
+  pin: Épingle à docker
+  open_location: Emplacement du fichier ouvert

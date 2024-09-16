@@ -4,3 +4,8 @@ app_launcher:
     explorer: Lafe
 footer:
   shortcuts: Show Ofkiirzungen
+header:
+  search: App, Kommando oder Wee
+item:
+  open_location: Open Dateiplaz
+  pin: PIN op Dock

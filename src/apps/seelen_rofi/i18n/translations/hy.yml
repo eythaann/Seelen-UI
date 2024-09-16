@@ -4,3 +4,8 @@ app_launcher:
     explorer: Վազք
 footer:
   shortcuts: Show ուցադրել դյուրանցումները
+header:
+  search: Ծրագիր, հրաման կամ ուղի
+item:
+  pin: Քորոց դեպի նավահանգիստ
+  open_location: Բաց ֆայլի գտնվելու վայրը
