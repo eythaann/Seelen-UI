@@ -78,27 +78,27 @@ impl SeelenWall {
     }
 
     fn try_set_under_progman(hwnd: HWND) -> Result<()> {
-        let progman = unsafe { FindWindowA(pcstr!("Progman"), None) };
-        if progman.0 == 0 {
-            return Err("Failed to find progman window".into());
-        }
+        let progman = unsafe { FindWindowA(pcstr!("Progman"), None)? };
 
         // Send 0x052C to Progman. This message directs Progman to spawn a WorkerW
         // behind the desktop icons. If it is already there, nothing happens.
         unsafe { PostMessageW(progman, 0x052C, WPARAM(0xD), LPARAM(0x1))? };
 
-        let mut worker = unsafe { FindWindowExA(progman, HWND(0), pcstr!("WorkerW"), None) };
+        let mut worker =
+            unsafe { FindWindowExA(progman, HWND::default(), pcstr!("WorkerW"), None) };
         let mut attempts = 0;
-        while worker.0 == 0 && attempts < 10 {
+        while worker.is_err() && attempts < 10 {
             attempts += 1;
             std::thread::sleep(std::time::Duration::from_millis(100));
-            worker = unsafe { FindWindowExA(progman, HWND(0), pcstr!("WorkerW"), None) };
+            worker = unsafe { FindWindowExA(progman, HWND::default(), pcstr!("WorkerW"), None) };
         }
 
-        if worker.0 == 0 {
-            return Err("Failed to find/create progman worker window".into());
+        match worker {
+            Ok(w) => {
+                unsafe { SetParent(hwnd, w)? };
+                Ok(())
+            }
+            Err(_) => Err("Failed to find/create progman worker window".into()),
         }
-        unsafe { SetParent(hwnd, worker) };
-        Ok(())
     }
 }

@@ -46,18 +46,10 @@ pub fn get_sub_tree(
 fn get_tray_overflow_handle() -> Option<HWND> {
     unsafe {
         if is_windows_10() {
-            let tray_overflow = FindWindowA(pcstr!("NotifyIconOverFlowWindow"), None);
-            if tray_overflow.0 == 0 {
-                return None;
-            }
-            return Some(tray_overflow);
+            FindWindowA(pcstr!("NotifyIconOverFlowWindow"), None).ok()
+        } else {
+            FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None).ok()
         }
-
-        let tray_overflow = FindWindowA(pcstr!("TopLevelWindowForOverflowXamlIsland"), None);
-        if tray_overflow.0 == 0 {
-            return None;
-        }
-        Some(tray_overflow)
     }
 }
 
@@ -65,24 +57,22 @@ fn get_tray_overflow_content_handle() -> Option<HWND> {
     let tray_overflow = get_tray_overflow_handle()?;
     unsafe {
         if is_windows_10() {
-            let tray_overflow_content =
-                FindWindowExA(tray_overflow, HWND(0), pcstr!("ToolbarWindow32"), None);
-            if tray_overflow_content.0 == 0 {
-                return None;
-            }
-            return Some(tray_overflow_content);
+            FindWindowExA(
+                tray_overflow,
+                HWND::default(),
+                pcstr!("ToolbarWindow32"),
+                None,
+            )
+            .ok()
+        } else {
+            FindWindowExA(
+                tray_overflow,
+                HWND::default(),
+                pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
+                None,
+            )
+            .ok()
         }
-
-        let tray_overflow_content = FindWindowExA(
-            tray_overflow,
-            HWND(0),
-            pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
-            None,
-        );
-        if tray_overflow_content.0 == 0 {
-            return None;
-        }
-        Some(tray_overflow_content)
     }
 }
 
@@ -92,7 +82,7 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
     }
 
     Com::run_with_context(|| unsafe {
-        let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None);
+        let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None)?;
 
         let tray_bar = AppBarData::from_handle(tray_hwnd);
         let tray_bar_state = tray_bar.state();

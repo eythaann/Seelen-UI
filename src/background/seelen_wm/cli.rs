@@ -102,7 +102,7 @@ impl WindowManager {
                 if FULL_STATE.load().settings().virtual_desktop_strategy
                     == VirtualDesktopStrategy::Native
                 {
-                    if let Some(next) = Self::get_next_by_order(HWND(0)) {
+                    if let Some(next) = Self::get_next_by_order(HWND::default()) {
                         WindowsApi::async_force_set_foreground(next);
                     }
                 }
@@ -110,18 +110,18 @@ impl WindowManager {
             }
             SubCommand::SendToWorkspace(index) => {
                 let to_move = WindowsApi::get_foreground_window();
-                get_vd_manager().send_to(index, to_move.0)?;
+                get_vd_manager().send_to(index, to_move.0 as _)?;
                 if FULL_STATE.load().settings().virtual_desktop_strategy
                     == VirtualDesktopStrategy::Native
                 {
-                    if let Some(next) = Self::get_next_by_order(HWND(0)) {
+                    if let Some(next) = Self::get_next_by_order(HWND::default()) {
                         WindowsApi::async_force_set_foreground(next);
                     }
                 }
             }
             SubCommand::MoveToWorkspace(index) => {
                 let to_move = WindowsApi::get_foreground_window();
-                get_vd_manager().send_to(index, to_move.0)?;
+                get_vd_manager().send_to(index, to_move.0 as _)?;
                 get_vd_manager().switch_to(index)?;
             }
             SubCommand::Reserve(side) => {

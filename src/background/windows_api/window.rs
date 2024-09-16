@@ -34,7 +34,7 @@ impl Debug for Window {
 
 impl Display for Window {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "Window({:x})", self.0 .0)
+        write!(f, "Window({:?})", self.0)
     }
 }
 
@@ -67,7 +67,7 @@ impl Window {
 
     pub fn parent(&self) -> Option<Window> {
         let parent = WindowsApi::get_parent(self.0);
-        if parent.0 != 0 {
+        if !parent.is_invalid() {
             Some(Window(parent))
         } else {
             None

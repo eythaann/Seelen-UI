@@ -106,6 +106,8 @@ pub struct SyntheticFullscreenData {
     pub monitor: HMONITOR,
 }
 
+unsafe impl Send for SyntheticFullscreenData {}
+
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 #[repr(u32)]
 #[allow(dead_code)]

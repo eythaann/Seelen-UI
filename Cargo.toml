@@ -21,24 +21,24 @@ incremental = true
 rustflags = ["-Z", "threads=8"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-beta", features = [] }
+tauri-build = { version = "2.0.0-rc", features = [] }
 
 [dependencies]
 seelen-core = { path = "./lib" }
-tauri = { version = "2.0.0-beta", features = [
+tauri = { version = "2.0.0-rc", features = [
     "protocol-asset",
     "tray-icon",
     "image-png",
 ] }
-tauri-plugin-fs = "2.0.0-beta.2"
-tauri-plugin-dialog = "2.0.0-beta.2"
-tauri-plugin-autostart = "2.0.0-beta.2"
-tauri-plugin-shell = "2.0.0-beta.2"
-tauri-plugin-process = "2.0.0-beta.2"
-tauri-plugin-log = "2.0.0-beta.2"
-tauri-plugin-updater = "2.0.0-beta.2"
-tauri-plugin-deep-link = "2.0.0-beta.10"
-tauri-plugin-http = "2.0.0-beta.0"
+tauri-plugin-fs = "2.0.0-rc"
+tauri-plugin-dialog = "2.0.0-rc"
+tauri-plugin-autostart = "2.0.0-rc"
+tauri-plugin-shell = "2.0.0-rc"
+tauri-plugin-process = "2.0.0-rc"
+tauri-plugin-log = "2.0.0-rc"
+tauri-plugin-updater = "2.0.0-rc"
+tauri-plugin-deep-link = "2.0.0-rc"
+tauri-plugin-http = "2.0.0-rc"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.34"
@@ -60,7 +60,7 @@ sysinfo = "0.30.12"
 battery = "0.7.8"
 winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 winreg = "0.52.0"
-windows-core = "=0.57.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-core = "=0.58.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 win-screenshot = "4.0.8"
 base64 = "0.22.1"
 arc-swap = "1.7.1"
@@ -68,7 +68,7 @@ notify-debouncer-full = "0.3.1"
 encoding_rs = "0.8.34"
 
 [dependencies.windows]
-version = "=0.57.0"
+version = "=0.58.0"
 features = [
     "Win32_Foundation",
     "ApplicationModel",

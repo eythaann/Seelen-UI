@@ -20,8 +20,8 @@ use super::SeelenWeg;
 pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
     let temp_dir = std::env::temp_dir();
 
-    for hwnd in handles {
-        let hwnd: HWND = HWND(hwnd);
+    for addr in handles {
+        let hwnd: HWND = HWND(addr as _);
 
         if WindowsApi::is_iconic(hwnd) {
             continue;
@@ -41,27 +41,22 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
                 height as u32,
             );
 
-            image.save_with_format(temp_dir.join(format!("{}.png", hwnd.0)), ImageFormat::Png)?;
-            get_app_handle().emit(format!("weg-preview-update-{}", hwnd.0).as_str(), ())?;
+            image.save_with_format(temp_dir.join(format!("{}.png", addr)), ImageFormat::Png)?;
+            get_app_handle().emit(format!("weg-preview-update-{}", addr).as_str(), ())?;
         }
     }
     Ok(())
 }
 
 #[tauri::command(async)]
-pub fn weg_close_app(hwnd: isize) -> Result<(), String> {
-    let hwnd = HWND(hwnd);
-    unsafe {
-        match PostMessageW(hwnd, WM_CLOSE, WPARAM(0), LPARAM(0)) {
-            Ok(()) => Ok(()),
-            Err(_) => Err("could not close window".to_owned()),
-        }
-    }
+pub fn weg_close_app(hwnd: isize) -> Result<()> {
+    unsafe { PostMessageW(HWND(hwnd as _), WM_CLOSE, WPARAM(0), LPARAM(0))? };
+    Ok(())
 }
 
 #[tauri::command(async)]
 pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
-    let hwnd = HWND(hwnd);
+    let hwnd = HWND(hwnd as _);
 
     // If the window is not open, open it
     if !WindowsApi::is_window(hwnd) {
@@ -78,7 +73,7 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
         return Ok(());
     }
 
-    if LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire) == hwnd.0 {
+    if LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire) == hwnd.0 as isize {
         WindowsApi::show_window(hwnd, SW_MINIMIZE)?;
     } else {
         WindowsApi::async_force_set_foreground(hwnd)

@@ -44,7 +44,7 @@ use crate::{
 lazy_static! {
     pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
     // Last active window omitting all the seelen apps
-    pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0);
+    pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0 as _);
 }
 
 pub static WIN_EVENTS_ENABLED: AtomicBool = AtomicBool::new(false);
@@ -68,22 +68,23 @@ impl HookManager {
         }
     }
 
-    pub fn skip(&mut self, event: WinEvent, hwnd: isize) {
-        self.skip.entry(hwnd).or_default().push(event)
+    pub fn skip(&mut self, event: WinEvent, hwnd: HWND) {
+        self.skip.entry(hwnd.0 as _).or_default().push(event)
     }
 
-    pub fn should_skip(&self, event: WinEvent, hwnd: isize) -> bool {
-        if let Some(v) = self.skip.get(&hwnd) {
+    pub fn should_skip(&self, event: WinEvent, hwnd: HWND) -> bool {
+        if let Some(v) = self.skip.get(&(hwnd.0 as _)) {
             return v.contains(&event);
         }
         false
     }
 
-    pub fn skip_done(&mut self, event: WinEvent, hwnd: isize) {
+    pub fn skip_done(&mut self, event: WinEvent, hwnd: HWND) {
         if WIN_EVENTS_ENABLED.load(Ordering::Relaxed) {
             log::debug!("Skipping WinEvent::{:?}", event);
         }
 
+        let hwnd = hwnd.0 as isize;
         if let Some(v) = self.skip.get_mut(&hwnd) {
             if let Some(pos) = v.iter().position(|e| e == &event) {
                 v.remove(pos);
@@ -100,7 +101,7 @@ impl HookManager {
         }
 
         log::debug!(
-            "{:?}({}) || {} || {} || {}",
+            "{:?}({:?}) || {} || {} || {}",
             event.green(),
             origin.0,
             WindowsApi::exe(origin).unwrap_or_default(),
@@ -112,14 +113,14 @@ impl HookManager {
     pub fn event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
         Self::log_event(event, origin);
 
-        if self.should_skip(event, origin.0) {
-            self.skip_done(event, origin.0);
+        if self.should_skip(event, origin) {
+            self.skip_done(event, origin);
             return;
         }
 
         let window = Window::from(origin);
         if event == WinEvent::SystemForeground && !window.is_seelen_overlay() {
-            LAST_ACTIVE_NOT_SEELEN.store(origin.0, Ordering::Relaxed);
+            LAST_ACTIVE_NOT_SEELEN.store(origin.0 as _, Ordering::Relaxed);
         }
 
         if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
@@ -132,7 +133,7 @@ impl HookManager {
                 SeelenEvent::GlobalFocusChanged,
                 FocusedApp {
                     title,
-                    hwnd: origin.0,
+                    hwnd: origin.0 as _,
                     name: window
                         .app_display_name()
                         .unwrap_or(String::from("Error on App Name")),
@@ -141,9 +142,10 @@ impl HookManager {
             ));
         }
 
+        let addr = origin.0 as isize;
         std::thread::spawn(move || {
             if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
-                log_error!(vd.on_win_event(event, origin));
+                log_error!(vd.on_win_event(event, HWND(addr as _)));
             }
         });
 
@@ -203,7 +205,7 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
                 .emit(SeelenEvent::ActiveWorkspaceChanged, new.id())?;
         }
         VirtualDesktopEvent::WindowChanged(window) => {
-            let hwnd = HWND(window);
+            let hwnd = HWND(window as _);
             if WindowsApi::is_window(hwnd) {
                 if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
                     let vd = get_vd_manager();
@@ -230,9 +232,9 @@ pub fn location_delay_completed(origin: HWND) -> bool {
     let last = LAST_LOCATION_CHANGED.load(Ordering::Acquire);
     let mut dict = trace_lock!(DICT);
 
-    let should_continue = match dict.entry(origin.0) {
+    let should_continue = match dict.entry(origin.0 as _) {
         std::collections::hash_map::Entry::Occupied(mut entry) => {
-            if last != origin.0 || entry.get().elapsed() > Duration::from_millis(50) {
+            if last != origin.0 as isize || entry.get().elapsed() > Duration::from_millis(50) {
                 entry.insert(Instant::now());
                 true
             } else {
@@ -246,7 +248,7 @@ pub fn location_delay_completed(origin: HWND) -> bool {
     };
 
     if should_continue {
-        LAST_LOCATION_CHANGED.store(origin.0, Ordering::Release);
+        LAST_LOCATION_CHANGED.store(origin.0 as _, Ordering::Release);
     }
 
     should_continue
@@ -297,7 +299,7 @@ pub fn register_win_hook() -> Result<()> {
 
         let mut msg: MSG = MSG::default();
         loop {
-            if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
+            if !GetMessageW(&mut msg, HWND::default(), 0, 0).as_bool() {
                 log::info!("windows event processing shutdown");
                 break;
             };

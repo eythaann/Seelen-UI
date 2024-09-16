@@ -93,8 +93,9 @@ impl AppBarData {
     pub fn register_as_new_bar(&mut self) {
         let mut data = self.0;
         let mut registered = trace_lock!(RegisteredBars);
-        if !registered.contains(&data.hWnd.0) {
-            registered.push(data.hWnd.0);
+        let addr = data.hWnd.0 as isize;
+        if !registered.contains(&addr) {
+            registered.push(addr);
             unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
         }
         unsafe { SHAppBarMessage(ABM_SETPOS, &mut data) };
@@ -103,6 +104,6 @@ impl AppBarData {
     pub fn unregister_bar(&mut self) {
         let mut data = self.0;
         unsafe { SHAppBarMessage(ABM_REMOVE, &mut data) };
-        trace_lock!(RegisteredBars).retain(|x| *x != data.hWnd.0);
+        trace_lock!(RegisteredBars).retain(|x| *x != data.hWnd.0 as isize);
     }
 }

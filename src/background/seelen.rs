@@ -62,7 +62,9 @@ impl Seelen {
     }
 
     pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut Monitor> {
-        self.monitors.iter_mut().find(|m| m.handle().0 == id)
+        self.monitors
+            .iter_mut()
+            .find(|m| m.handle().0 as isize == id)
     }
 
     pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut Monitor> {

@@ -18,7 +18,7 @@ use windows::{
 
 use crate::{
     error_handler::Result,
-    log_error, trace_lock,
+    trace_lock,
     utils::spawn_named_thread,
     windows_api::{MonitorEnumerator, WindowsApi},
 };
@@ -39,16 +39,14 @@ pub enum MonitorManagerEvent {
 type OnMonitorsChange = Box<dyn Fn(MonitorManagerEvent) + Send + Sync>;
 
 pub struct MonitorManager {
-    hwnd: isize,
+    _hwnd: HWND,
     pub monitors: Vec<(String, HMONITOR)>,
     callbacks: Vec<OnMonitorsChange>,
 }
 
-impl MonitorManager {
-    pub fn hwnd(self) -> HWND {
-        HWND(self.hwnd)
-    }
+unsafe impl Send for MonitorManager {}
 
+impl MonitorManager {
     pub extern "system" fn window_proc(
         window: HWND,
         message: u32,
@@ -121,10 +119,8 @@ impl MonitorManager {
             RegisterClassW(&wnd_class);
         }
 
-        let (hwnd_sender, hwnd_receiver) = crossbeam_channel::bounded::<HWND>(1);
-
-        spawn_named_thread("Monitor Manager", move || unsafe {
-            let hwnd = CreateWindowExW(
+        let hwnd = unsafe {
+            CreateWindowExW(
                 WINDOW_EX_STYLE::default(),
                 PCWSTR(wide_class.as_ptr()),
                 PCWSTR(wide_name.as_ptr()),
@@ -137,25 +133,29 @@ impl MonitorManager {
                 None,
                 h_module,
                 None,
-            );
+            )?
+        };
 
-            log_error!(hwnd_sender.send(hwnd));
+        let mut notification_filter = DEV_BROADCAST_DEVICEINTERFACE_W {
+            dbcc_size: std::mem::size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>() as u32,
+            dbcc_devicetype: DBT_DEVTYP_DEVICEINTERFACE.0,
+            dbcc_reserved: 0,
+            dbcc_classguid: GUID_DEVINTERFACE_MONITOR,
+            dbcc_name: [0; 1],
+        };
 
-            let mut notification_filter = DEV_BROADCAST_DEVICEINTERFACE_W {
-                dbcc_size: std::mem::size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>() as u32,
-                dbcc_devicetype: DBT_DEVTYP_DEVICEINTERFACE.0,
-                dbcc_reserved: 0,
-                dbcc_classguid: GUID_DEVINTERFACE_MONITOR,
-                dbcc_name: [0; 1],
-            };
-
-            log_error!(RegisterDeviceNotificationW(
+        unsafe {
+            RegisterDeviceNotificationW(
                 hwnd,
                 &mut notification_filter as *mut _ as *mut _,
                 DEVICE_NOTIFY_WINDOW_HANDLE,
-            ));
+            )?
+        };
 
+        let addr = hwnd.0 as isize;
+        spawn_named_thread("Monitor Manager Message Loop", move || unsafe {
             let mut msg = MSG::default();
+            let hwnd = HWND(addr as _);
             while GetMessageW(&mut msg, hwnd, 0, 0).into() {
                 let _ = TranslateMessage(&msg);
                 DispatchMessageW(&msg);
@@ -164,7 +164,7 @@ impl MonitorManager {
         })?;
 
         Ok(Self {
-            hwnd: hwnd_receiver.recv()?.0,
+            _hwnd: hwnd,
             callbacks: Vec::new(),
             monitors: Self::get_monitors()?,
         })
