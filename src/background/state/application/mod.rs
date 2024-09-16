@@ -10,10 +10,13 @@ use notify_debouncer_full::{
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
+use parking_lot::Mutex;
 use seelen_core::state::{VirtualDesktopStrategy, WegItems, WindowManagerLayout};
 use serde::Serialize;
 use std::{
     collections::{HashMap, VecDeque},
+    fs::{File, OpenOptions},
+    io::{Seek, Write},
     path::{Path, PathBuf},
     sync::{
         atomic::{AtomicBool, Ordering},
@@ -25,16 +28,30 @@ use tauri::{AppHandle, Manager};
 
 use crate::{
     error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
-    utils::is_virtual_desktop_supported, windows_api::WindowsApi,
+    trace_lock, utils::is_virtual_desktop_supported, windows_api::WindowsApi,
 };
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
 
 lazy_static! {
+    static ref DATA_DIR: PathBuf = get_app_handle().path().app_data_dir().unwrap();
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
         log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
     }));
+    static ref OPEN_OPTIONS: OpenOptions = {
+        let mut options = OpenOptions::new();
+        options.write(true).create(true);
+        options
+    };
+    static ref USER_SETTINGS_PATH: PathBuf = DATA_DIR.join("settings.json");
+    static ref USER_SETTINGS_FILE: Arc<Mutex<File>> = Arc::new(Mutex::new(
+        OPEN_OPTIONS.open(USER_SETTINGS_PATH.as_path()).unwrap()
+    ));
+    static ref WEG_ITEMS_PATH: PathBuf = DATA_DIR.join("seelenweg_items.yaml");
+    static ref WEG_ITEMS_FILE: Arc<Mutex<File>> = Arc::new(Mutex::new(
+        OPEN_OPTIONS.open(WEG_ITEMS_PATH.as_path()).unwrap()
+    ));
 }
 
 pub type LauncherHistory = HashMap<String, Vec<String>>;
@@ -94,20 +111,14 @@ impl FullState {
         FULL_STATE.store(Arc::new(self));
     }
 
-    fn store_cloned(&self) {
+    pub fn store_cloned(&self) {
         FULL_STATE.store(Arc::new(self.cloned()));
-    }
-
-    pub fn settings_path(&self) -> PathBuf {
-        self.data_dir.join("settings.json")
     }
 
     fn process_event(&mut self, event: DebouncedEvent) -> Result<()> {
         let event = event.event;
 
         let history_path = self.data_dir.join("history");
-
-        let weg_items_path = self.data_dir.join("seelenweg_items.yaml");
 
         let user_themes = self.data_dir.join("themes");
         let bundled_themes = self.resources_dir.join("static/themes");
@@ -121,7 +132,7 @@ impl FullState {
         let user_app_configs = self.data_dir.join("applications.yml");
         let bundled_app_configs = self.resources_dir.join("static/apps_templates");
 
-        if event.paths.contains(&weg_items_path) {
+        if event.paths.contains(&WEG_ITEMS_PATH) {
             log::info!("Weg Items changed");
             self.load_weg_items()?;
             self.store_cloned();
@@ -135,7 +146,7 @@ impl FullState {
             self.emit_history()?;
         }
 
-        if event.paths.contains(&self.settings_path()) {
+        if event.paths.contains(&USER_SETTINGS_PATH) {
             log::info!("Seelen Settings changed");
             self.load_settings()?;
             self.store_cloned();
@@ -212,8 +223,8 @@ impl FullState {
 
         let paths: Vec<PathBuf> = vec![
             // settings & user data
-            self.settings_path(),
-            self.data_dir.join("seelenweg_items.yaml"),
+            USER_SETTINGS_PATH.to_path_buf(),
+            WEG_ITEMS_PATH.to_path_buf(),
             self.data_dir.join("applications.yml"),
             self.data_dir.join("history"),
             // resources
@@ -234,20 +245,19 @@ impl FullState {
         Ok(())
     }
 
-    pub fn get_settings_from_path(path: PathBuf) -> Result<Settings> {
+    pub fn get_settings_from_path(path: &Path) -> Result<Settings> {
         match path.extension() {
             Some(ext) if ext == "json" => {
-                Ok(serde_json::from_str(&std::fs::read_to_string(&path)?)?)
+                Ok(serde_json::from_str(&std::fs::read_to_string(path)?)?)
             }
             _ => Err("Invalid settings file extension".into()),
         }
     }
 
     fn load_settings(&mut self) -> Result<()> {
-        let path = self.settings_path();
-        let path_exists = path.exists();
+        let path_exists = USER_SETTINGS_PATH.exists();
         if path_exists {
-            self.settings = Self::get_settings_from_path(path)?;
+            self.settings = Self::get_settings_from_path(&USER_SETTINGS_PATH)?;
             self.settings.sanitize();
         }
 
@@ -262,9 +272,9 @@ impl FullState {
     }
 
     fn load_weg_items(&mut self) -> Result<()> {
-        let path = self.data_dir.join("seelenweg_items.yaml");
-        if path.exists() {
-            self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?;
+        if WEG_ITEMS_PATH.exists() {
+            self.weg_items =
+                serde_yaml::from_str(&std::fs::read_to_string(WEG_ITEMS_PATH.as_path())?)?;
             self.weg_items.sanitize();
         } else {
             self.save_weg_items()?;
@@ -487,16 +497,16 @@ impl FullState {
     }
 
     pub fn save_settings(&self) -> Result<()> {
-        std::fs::write(
-            self.settings_path(),
-            serde_json::to_string_pretty(&self.settings)?,
-        )?;
+        let mut file = trace_lock!(USER_SETTINGS_FILE);
+        file.rewind()?;
+        file.write_all(serde_yaml::to_string(&self.settings)?.as_bytes())?;
         Ok(())
     }
 
     pub fn save_weg_items(&self) -> Result<()> {
-        let path = self.data_dir.join("seelenweg_items.yaml");
-        std::fs::write(path, serde_yaml::to_string(&self.weg_items)?)?;
+        let mut file = trace_lock!(WEG_ITEMS_FILE);
+        file.rewind()?;
+        file.write_all(serde_yaml::to_string(&self.weg_items)?.as_bytes())?;
         Ok(())
     }
 

@@ -1,7 +1,6 @@
 # Changelog
 
 ## [Unreleased]
-## [2.0.0-beta.4]
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
 
@@ -17,6 +16,7 @@
 - improve fullscreen matching system.
 - reduce UI total size from 355mb to 121mb.
 - reduce Installer size from 75mb to 40mb.
+- allow drop files, apps and folders into the dock to pin them.
 
 ### fix
 - missing icons for files with a different extension than `exe`.

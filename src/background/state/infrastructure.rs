@@ -43,7 +43,9 @@ pub fn state_get_history() -> LauncherHistory {
 #[tauri::command(async)]
 pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
     if let Some(path) = path {
-        FullState::get_settings_from_path(path)
+        let mut settings = FullState::get_settings_from_path(&path)?;
+        settings.sanitize();
+        Ok(settings)
     } else {
         Ok(FULL_STATE.load().settings().clone())
     }
