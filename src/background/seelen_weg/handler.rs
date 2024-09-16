@@ -105,6 +105,8 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
     };
 
     state.weg_items.center.insert(0, item);
+    state.emit_weg_items()?;
     state.save_weg_items()?;
+    state.store();
     Ok(())
 }

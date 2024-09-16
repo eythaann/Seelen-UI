@@ -1,7 +1,9 @@
+import { invoke } from '@tauri-apps/api/core';
+import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
-import { declareDocumentAsLayeredHitbox } from 'seelen-core';
+import { declareDocumentAsLayeredHitbox, SeelenCommand } from 'seelen-core';
 
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
 import { loadConstants } from './modules/shared/utils/infra';
@@ -24,6 +26,14 @@ async function Main() {
   await loadStore();
   await registerStoreEvents();
   await loadTranslations();
+
+  getCurrentWebviewWindow().onDragDropEvent(async (e) => {
+    if (e.payload.type === 'drop') {
+      for (const path of e.payload.paths) {
+        await invoke(SeelenCommand.WegPinItem, { path });
+      }
+    }
+  });
 
   const container = getRootContainer();
   createRoot(container).render(

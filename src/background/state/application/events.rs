@@ -14,7 +14,7 @@ impl FullState {
         Ok(())
     }
 
-    pub(super) fn emit_weg_items(&self) -> Result<()> {
+    pub fn emit_weg_items(&self) -> Result<()> {
         self.handle
             .emit(SeelenEvent::StateWegItemsChanged, self.weg_items())?;
         Ok(())

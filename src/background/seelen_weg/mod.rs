@@ -350,7 +350,6 @@ impl SeelenWeg {
         .shadow(false)
         .skip_taskbar(true)
         .always_on_top(true)
-        .drag_and_drop(false)
         .build()?;
 
         window.set_ignore_cursor_events(true)?;
