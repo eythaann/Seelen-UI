@@ -3,8 +3,8 @@ use getset::{Getters, MutGetters};
 
 use crate::{
     error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_wall::SeelenWall,
-    seelen_weg::SeelenWeg, seelen_wm::WindowManager, state::application::FullState,
-    utils::sleep_millis, windows_api::WindowsApi,
+    seelen_weg::SeelenWeg, seelen_wm_v2::instance::WindowManagerV2, state::application::FullState,
+    windows_api::WindowsApi,
 };
 
 use windows::Win32::Graphics::Gdi::HMONITOR;
@@ -16,7 +16,7 @@ pub struct Monitor {
     name: String,
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
-    wm: Option<WindowManager>,
+    wm: Option<WindowManagerV2>,
     wall: Option<SeelenWall>,
 }
 
@@ -46,11 +46,13 @@ impl Monitor {
 
     pub fn ensure_positions(&mut self) -> Result<()> {
         if let Some(bar) = &mut self.toolbar {
-            bar.cached_monitor = self.handle;
-            bar.set_positions(self.handle)?;
+            bar.set_position(self.handle)?;
         }
         if let Some(weg) = &mut self.weg {
-            weg.set_positions(self.handle)?;
+            weg.set_position(self.handle)?;
+        }
+        if let Some(wm) = &mut self.wm {
+            wm.set_position(self.handle)?;
         }
         if let Some(wall) = &mut self.wall {
             wall.set_position()?;
@@ -60,21 +62,7 @@ impl Monitor {
 
     fn add_toolbar(&mut self) -> Result<()> {
         if self.toolbar.is_none() {
-            // Tauri can fail the on creation of the first window, thats's why we only should retry
-            // for the first window created, the next windows should work normally.
-            // Update(08/13/2024): I think this can be removed on recent tauri versions
-            for attempt in 1..4 {
-                match FancyToolbar::new(&self.name) {
-                    Ok(bar) => {
-                        self.toolbar = Some(bar);
-                        break;
-                    }
-                    Err(e) => {
-                        log::error!("Failed to create Toolbar (attempt {}): {}", attempt, e);
-                        sleep_millis(30);
-                    }
-                }
-            }
+            self.toolbar = Some(FancyToolbar::new(&self.name)?);
         }
         Ok(())
     }
@@ -88,7 +76,7 @@ impl Monitor {
 
     fn add_wm(&mut self) -> Result<()> {
         if self.wm.is_none() {
-            self.wm = Some(WindowManager::new(self.handle)?)
+            self.wm = Some(WindowManagerV2::new(&self.name)?)
         }
         Ok(())
     }
@@ -113,7 +101,7 @@ impl Monitor {
             self.weg = None;
         }
 
-        if settings.is_window_manager_enabled() && self.handle == WindowsApi::primary_monitor() {
+        if settings.is_window_manager_enabled() {
             self.add_wm()?;
         } else {
             self.wm = None;

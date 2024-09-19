@@ -5,8 +5,12 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 function cleanOldFiles() {
-  if (fs.existsSync('dist')) {
-    fs.rmSync('dist', { recursive: true });
+  const dir = 'dist';
+  if (fs.existsSync(dir)) {
+    fs.readdirSync(dir).forEach((file) => {
+      const filePath = path.join(dir, file);
+      fs.rmSync(filePath, { recursive: true, force: true });
+    });
   }
 }
 

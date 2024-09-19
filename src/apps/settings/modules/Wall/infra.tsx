@@ -48,7 +48,7 @@ export function WallSettings() {
     }
 
     for (const file of [files].flat()) {
-      newBackgrounds.push({ ...new SeelenWallWallpaper(), path: file.path });
+      newBackgrounds.push({ ...new SeelenWallWallpaper(), path: file });
     }
 
     onChangeBackgrounds([...backgrounds, ...newBackgrounds]);

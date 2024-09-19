@@ -37,12 +37,15 @@ export enum SeelenEvent {
   WMUpdateWidth = 'update-width',
   WMResetWorkspaceSize = 'reset-workspace-size',
   WMFocus = 'focus',
-  WMSetActiveWindow = 'set-active-window',
   WMSetActiveWorkspace = 'set-active-workspace',
   WMAddWindow = 'add-window',
   WMUpdateWindow = 'update-window',
   WMRemoveWindow = 'remove-window',
-  WMForceRetiling = 'force-retiling',
+
+  WMForceRetiling = 'wm-force-retiling',
+  WMSetLayout = 'wm-set-layout',
+  WMSetOverlayVisibility = 'wm-set-overlay-visibility',
+  WMSetActiveWindow = 'wm-set-active-window',
 
   StateSettingsChanged = 'settings-changed',
   StateWegItemsChanged = 'weg-items',

@@ -15,10 +15,13 @@ interface Props {
 }
 
 export function LeafContainer({ hwnd, growFactor }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
+  const _version = useSelector(Selectors._version);
+
   const reservation = useSelector(Selectors.reservation);
   const activeWindow = useSelector(Selectors.activeWindow);
   const borderSettings = useSelector(Selectors.settings.border);
+
+  const ref = useRef<HTMLDivElement>(null);
 
   const updateSize = useCallback(() => {
     if (!ref.current) {

@@ -34,6 +34,7 @@ use crate::{
     },
     seelen::{get_app_handle, Seelen, SEELEN},
     seelen_weg::SeelenWeg,
+    seelen_wm_v2::instance::WindowManagerV2,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
     utils::{constants::IGNORE_FOCUS, spawn_named_thread},
@@ -153,6 +154,10 @@ impl HookManager {
             log_error!(SeelenWeg::process_global_win_event(event, origin));
         }
 
+        if seelen.state().is_window_manager_enabled() {
+            log_error!(WindowManagerV2::process_win_event(event, &window));
+        }
+
         for monitor in seelen.monitors_mut() {
             if let Some(toolbar) = monitor.toolbar_mut() {
                 log_error!(toolbar.process_win_event(event, origin));
@@ -161,20 +166,13 @@ impl HookManager {
             if let Some(weg) = monitor.weg_mut() {
                 log_error!(weg.process_individual_win_event(event, origin));
             }
-
-            if let Some(wm) = monitor.wm_mut() {
-                log_error!(wm.process_win_event(event, origin));
-            }
         }
     }
 }
 
 pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
-    let mut seelen = trace_lock!(SEELEN);
-    for monitor in seelen.monitors_mut() {
-        if let Some(wm) = monitor.wm_mut() {
-            log_error!(wm.process_vd_event(&event));
-        }
+    if FULL_STATE.load().is_window_manager_enabled() {
+        log_error!(WindowManagerV2::process_vd_event(&event));
     }
 
     match event {
@@ -194,15 +192,11 @@ pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
                 .iter()
                 .map(|d| d.as_serializable())
                 .collect_vec();
-            seelen
-                .handle()
-                .emit(SeelenEvent::WorkspacesChanged, &desktops)?;
+            get_app_handle().emit(SeelenEvent::WorkspacesChanged, &desktops)?;
         }
 
         VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
-            seelen
-                .handle()
-                .emit(SeelenEvent::ActiveWorkspaceChanged, new.id())?;
+            get_app_handle().emit(SeelenEvent::ActiveWorkspaceChanged, new.id())?;
         }
         VirtualDesktopEvent::WindowChanged(window) => {
             let hwnd = HWND(window as _);

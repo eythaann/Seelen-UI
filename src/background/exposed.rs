@@ -159,7 +159,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         weg_pin_item,
         // Windows Manager
         set_window_position,
-        bounce_handle,
         request_focus,
         // App Launcher
         launcher_get_apps,

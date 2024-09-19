@@ -11,8 +11,9 @@ import {
 } from 'seelen-core';
 
 import { FocusAction } from '../shared/store/domain';
-import { HWND } from '../shared/utils/domain';
 import { BranchNode, Node, Reservation, Sizing } from './domain';
+
+type HWND = number;
 
 export function clearContainer(container: Node): void {
   switch (container.type) {

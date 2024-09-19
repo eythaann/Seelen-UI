@@ -68,13 +68,13 @@ pub struct FullState {
     #[serde(skip)]
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
-    settings: Settings,
-    settings_by_app: VecDeque<AppConfig>,
-    themes: HashMap<String, Theme>,
-    placeholders: HashMap<String, Placeholder>,
-    layouts: HashMap<String, WindowManagerLayout>,
+    pub settings: Settings,
+    pub settings_by_app: VecDeque<AppConfig>,
+    pub themes: HashMap<String, Theme>,
+    pub placeholders: HashMap<String, Placeholder>,
+    pub layouts: HashMap<String, WindowManagerLayout>,
     pub weg_items: WegItems,
-    history: LauncherHistory,
+    pub history: LauncherHistory,
 }
 
 static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
