@@ -14,15 +14,15 @@ macro_rules! common_item {
             #[serde(rename_all = "camelCase")]
             pub struct $name {
                 #[serde(default = "WmNode::default_subtype")]
-                subtype: NodeSubtype,
+                pub subtype: NodeSubtype,
                 /// Order in how the tree will be traversed (1 = first, 2 = second, etc.)
                 #[serde(default = "WmNode::default_priority")]
-                priority: u32,
+                pub priority: u32,
                 /// How much of the remaining space this node will take
                 #[serde(default = "WmNode::default_grow_factor")]
-                grow_factor: f64,
+                pub grow_factor: f64,
                 /// Math Condition for the node to be shown, e.g: n >= 3
-                condition: Option<String>,
+                pub condition: Option<String>,
                 $($rest)*
             }
         )*
@@ -32,29 +32,29 @@ macro_rules! common_item {
 common_item! {
     struct WmVerticalNode {
         #[serde(default)]
-        children: Vec<WmNode>,
+        pub children: Vec<WmNode>,
     }
     struct WmHorizontalNode {
         #[serde(default)]
-        children: Vec<WmNode>,
+        pub children: Vec<WmNode>,
     }
     struct WmLeafNode {
         /// window handle (HWND) in the node
-        handle: Option<isize>,
+        pub handle: Option<isize>,
     }
     struct WmStackNode {
         /// active window handle (HWND) in the node
-        active: Option<isize>,
+        pub active: Option<isize>,
         /// window handles (HWND) in the node
         #[serde(default)]
-        handles: Vec<isize>,
+        pub handles: Vec<isize>,
     }
     struct WmFallbackNode {
         /// active window handle (HWND) in the node
-        active: Option<isize>,
+        pub active: Option<isize>,
         /// window handles (HWND) in the node
         #[serde(default)]
-        handles: Vec<isize>,
+        pub handles: Vec<isize>,
     }
 }
 

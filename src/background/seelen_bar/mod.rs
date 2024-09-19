@@ -22,7 +22,6 @@ use windows::Win32::{
 
 pub struct FancyToolbar {
     window: WebviewWindow,
-    pub cached_monitor: HMONITOR,
     /// Is the rect that the toolbar should have when it isn't hidden
     pub theoretical_rect: RECT,
     last_focus: Option<HWND>,
@@ -45,7 +44,6 @@ impl FancyToolbar {
         Ok(Self {
             window: Self::create_window(postfix)?,
             last_focus: None,
-            cached_monitor: HMONITOR::default(),
             theoretical_rect: RECT::default(),
             overlaped: false,
         })
@@ -118,10 +116,8 @@ impl FancyToolbar {
         Ok(rect)
     }
 
-    pub fn set_positions(&mut self, monitor: HMONITOR) -> Result<()> {
+    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
         let hwnd = HWND(self.window.hwnd()?.0);
-
-        self.cached_monitor = monitor;
 
         let state = FULL_STATE.load();
         let settings = &state.settings().fancy_toolbar;
@@ -177,7 +173,7 @@ impl FancyToolbar {
         };
 
         window.set_ignore_cursor_events(true)?;
-        window.once("store-events-ready", Self::on_store_events_ready);
+        window.listen("store-events-ready", Self::on_store_events_ready);
         Ok(window)
     }
 

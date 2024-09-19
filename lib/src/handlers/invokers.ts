@@ -52,7 +52,6 @@ export enum SeelenCommand {
 
   // Windows Manager
   SetWindowPosition = 'set_window_position',
-  BounceHandle = 'bounce_handle',
   RequestFocus = 'request_focus',
 
   // App Launcher

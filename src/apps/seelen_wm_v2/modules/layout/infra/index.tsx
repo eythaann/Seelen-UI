@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { SelectCurrentWorkspace, Selectors } from '../../shared/store/app';
+import { Selectors } from '../../shared/store/app';
 import { NodeImpl } from '../app';
 
 import { Node } from '../domain';
@@ -11,8 +11,8 @@ import { LeafContainer } from './containers/leaf';
 
 import './index.css';
 
-export function Container({ container }: { container: Node }) {
-  const node = NodeImpl.from(container);
+export function Container({ node: _node }: { node: Node }) {
+  const node = NodeImpl.from(_node);
 
   if (node.isEmpty()) {
     return null;
@@ -32,10 +32,10 @@ export function Container({ container }: { container: Node }) {
         style={{
           flexGrow: node.inner.growFactor,
         }}
-        className={cx('wm-container', `wm-${container.type.toLowerCase()}`)}
+        className={cx('wm-container', `wm-${_node.type.toLowerCase()}`)}
       >
         {node.inner.children.map((child, idx) => (
-          <Container key={idx} container={child} />
+          <Container key={idx} node={child} />
         ))}
       </div>
     );
@@ -45,12 +45,11 @@ export function Container({ container }: { container: Node }) {
 }
 
 export function Layout() {
-  const workspace = useSelector(SelectCurrentWorkspace);
-  const version = useSelector(Selectors.version);
+  const layout = useSelector(Selectors.layout);
 
-  if (!workspace) {
+  if (!layout) {
     return null;
   }
 
-  return <Container key={version} container={workspace.layout.structure} />;
+  return <Container node={layout} />;
 }

@@ -1,13 +1,11 @@
-use tauri::{Webview, Wry};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     UI::WindowsAndMessaging::{
-        SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOOWNERZORDER, SWP_NOSENDCHANGING,
-        SWP_NOZORDER,
+        SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOSENDCHANGING,
     },
 };
 
-use crate::{seelen::SEELEN, trace_lock, windows_api::WindowsApi};
+use crate::windows_api::WindowsApi;
 use seelen_core::rect::Rect;
 
 #[tauri::command(async)]
@@ -29,26 +27,9 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
             right: rect.right + shadow.right,
             bottom: rect.bottom + shadow.bottom,
         },
-        SWP_NOACTIVATE
-            | SWP_NOCOPYBITS
-            | SWP_NOZORDER
-            | SWP_NOOWNERZORDER
-            | SWP_ASYNCWINDOWPOS
-            | SWP_NOSENDCHANGING,
+        SWP_NOACTIVATE | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS | SWP_NOSENDCHANGING,
     )?;
     Ok(())
-}
-
-#[tauri::command(async)]
-pub fn bounce_handle(webview: Webview<Wry>, hwnd: isize) {
-    let monitor_id = webview.label().split("/").last().expect("No monitor ID");
-    let monitor_id = monitor_id.parse::<isize>().expect("Invalid monitor ID");
-
-    if let Some(monitor) = trace_lock!(SEELEN).monitor_by_id_mut(monitor_id) {
-        if let Some(wm) = monitor.wm_mut() {
-            wm.bounce_handle(HWND(hwnd as _));
-        }
-    }
 }
 
 #[tauri::command(async)]

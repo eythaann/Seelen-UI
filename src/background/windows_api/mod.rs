@@ -1,6 +1,7 @@
 mod app_bar;
 mod com;
 mod iterator;
+pub mod monitor;
 mod process;
 pub mod window;
 
@@ -651,6 +652,13 @@ impl WindowsApi {
         };
 
         Ok(p_physical_monitors[0])
+    }
+
+    pub fn monitor_index(hmonitor: HMONITOR) -> Result<usize> {
+        Ok(MonitorEnumerator::get_all()?
+            .into_iter()
+            .position(|m| m == hmonitor)
+            .ok_or("could not find monitor index")?)
     }
 
     pub fn monitor_name(hmonitor: HMONITOR) -> Result<String> {

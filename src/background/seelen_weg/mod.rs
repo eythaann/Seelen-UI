@@ -123,6 +123,14 @@ impl SeelenWeg {
         }
     }
 
+    pub fn enumerate_all_windows() -> Result<()> {
+        WindowEnumerator::new().for_each(|hwnd| {
+            if Self::should_be_added(hwnd) {
+                Self::add_hwnd(hwnd);
+            }
+        })
+    }
+
     pub fn add_hwnd(hwnd: HWND) {
         if Self::contains_app(hwnd) {
             return;
@@ -280,7 +288,7 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn set_positions(&mut self, monitor: HMONITOR) -> Result<()> {
+    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
         let rc_work = FancyToolbar::get_work_area_by_monitor(monitor)?;
         let hwnd = HWND(self.window.hwnd()?.0);
 

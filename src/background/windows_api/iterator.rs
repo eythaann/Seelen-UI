@@ -1,5 +1,3 @@
-use std::slice::Iter;
-
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::{HDC, HMONITOR},
@@ -117,28 +115,11 @@ impl WindowEnumerator {
 }
 
 #[derive(Debug, Clone, Default)]
-pub struct MonitorEnumerator {
-    handles: Vec<HMONITOR>,
-}
-
-impl IntoIterator for MonitorEnumerator {
-    type Item = HMONITOR;
-    type IntoIter = std::vec::IntoIter<HMONITOR>;
-
-    fn into_iter(self) -> Self::IntoIter {
-        self.handles.into_iter()
-    }
-}
+pub struct MonitorEnumerator;
 
 impl MonitorEnumerator {
-    pub fn new_refreshed() -> Result<Self> {
-        let mut enumerator = Self::default();
-        enumerator.refresh()?;
-        Ok(enumerator)
-    }
-
-    pub fn refresh(&mut self) -> Result<()> {
-        self.handles.clear();
+    pub fn get_all() -> Result<Vec<HMONITOR>> {
+        let mut handles = Vec::new();
 
         unsafe extern "system" fn get_handles_proc(
             hmonitor: HMONITOR,
@@ -153,13 +134,7 @@ impl MonitorEnumerator {
             true.into()
         }
 
-        WindowsApi::enum_display_monitors(
-            Some(get_handles_proc),
-            &mut self.handles as *mut _ as isize,
-        )
-    }
-
-    pub fn iter(&self) -> Iter<'_, HMONITOR> {
-        self.handles.iter()
+        WindowsApi::enum_display_monitors(Some(get_handles_proc), &mut handles as *mut _ as isize)?;
+        Ok(handles)
     }
 }

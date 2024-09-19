@@ -16,11 +16,12 @@ use crate::{
     monitor::Monitor,
     seelen_rofi::SeelenRofi,
     seelen_weg::SeelenWeg,
+    seelen_wm_v2::instance::WindowManagerV2,
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
     utils::{ahk::AutoHotKey, spawn_named_thread, PERFORMANCE_HELPER},
-    windows_api::{WindowEnumerator, WindowsApi},
+    windows_api::WindowsApi,
 };
 
 lazy_static! {
@@ -152,20 +153,15 @@ impl Seelen {
 
     fn start_async() -> Result<()> {
         trace_lock!(PERFORMANCE_HELPER).start("enumerating_windows");
-        WindowEnumerator::new().for_each(|hwnd| {
-            if SeelenWeg::should_be_added(hwnd) {
-                SeelenWeg::add_hwnd(hwnd);
-            }
 
-            let mut seelen = trace_lock!(SEELEN);
-            for monitor in seelen.monitors_mut() {
-                if let Some(wm) = monitor.wm_mut() {
-                    if wm.should_be_added(hwnd) {
-                        log_error!(wm.add_hwnd(hwnd));
-                    }
-                }
-            }
-        })?;
+        if FULL_STATE.load().is_weg_enabled() {
+            SeelenWeg::enumerate_all_windows()?;
+        }
+
+        if FULL_STATE.load().is_window_manager_enabled() {
+            WindowManagerV2::enumerate_all_windows()?;
+        }
+
         trace_lock!(PERFORMANCE_HELPER).end("enumerating_windows");
 
         log_error!(Self::start_ahk_shortcuts());

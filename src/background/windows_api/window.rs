@@ -6,11 +6,16 @@ use std::{
 use windows::Win32::Foundation::HWND;
 
 use crate::{
-    error_handler::Result, seelen_bar::FancyToolbar, seelen_rofi::SeelenRofi,
-    seelen_wall::SeelenWall, seelen_weg::SeelenWeg, seelen_wm::WindowManager,
+    error_handler::Result,
+    modules::virtual_desk::{get_vd_manager, VirtualDesktop},
+    seelen_bar::FancyToolbar,
+    seelen_rofi::SeelenRofi,
+    seelen_wall::SeelenWall,
+    seelen_weg::SeelenWeg,
+    seelen_wm_v2::instance::WindowManagerV2,
 };
 
-use super::{WindowEnumerator, WindowsApi};
+use super::{monitor::Monitor, WindowEnumerator, WindowsApi};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Window(HWND);
@@ -40,8 +45,12 @@ impl Display for Window {
 
 pub const APP_FRAME_HOST_PATH: &str = "C:\\Windows\\System32\\ApplicationFrameHost.exe";
 impl Window {
-    pub fn hwnd(self) -> HWND {
+    pub fn hwnd(&self) -> HWND {
         self.0
+    }
+
+    pub fn address(&self) -> isize {
+        self.0 .0 as isize
     }
 
     pub fn app_user_model_id(&self) -> Option<String> {
@@ -80,12 +89,36 @@ impl Window {
             .map(Window::from)
     }
 
+    pub fn monitor(&self) -> Monitor {
+        Monitor::from(WindowsApi::monitor_from_window(self.0))
+    }
+
+    pub fn workspace(&self) -> Result<VirtualDesktop> {
+        get_vd_manager().get_by_window(self.address())
+    }
+
     pub fn is_window(&self) -> bool {
         WindowsApi::is_window(self.0)
     }
 
     pub fn is_visible(&self) -> bool {
         WindowsApi::is_window_visible(self.0)
+    }
+
+    pub fn is_minimized(&self) -> bool {
+        WindowsApi::is_iconic(self.0)
+    }
+
+    pub fn is_maximized(&self) -> bool {
+        WindowsApi::is_maximized(self.0)
+    }
+
+    pub fn is_cloaked(&self) -> bool {
+        WindowsApi::is_cloaked(self.0).unwrap_or(false)
+    }
+
+    pub fn is_foreground(&self) -> bool {
+        WindowsApi::get_foreground_window() == self.0
     }
 
     pub fn is_fullscreen(&self) -> bool {
@@ -119,7 +152,7 @@ impl Window {
             return exe.ends_with("seelen-ui.exe")
                 && [
                     FancyToolbar::TITLE,
-                    WindowManager::TITLE,
+                    WindowManagerV2::TITLE,
                     SeelenWeg::TITLE,
                     SeelenRofi::TITLE,
                     SeelenWall::TITLE,

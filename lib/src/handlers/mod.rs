@@ -40,12 +40,15 @@ impl SeelenEvent {
     pub const WMUpdateWidth: &str = "update-width";
     pub const WMResetWorkspaceSize: &str = "reset-workspace-size";
     pub const WMFocus: &str = "focus";
-    pub const WMSetActiveWindow: &str = "set-active-window";
     pub const WMSetActiveWorkspace: &str = "set-active-workspace";
     pub const WMAddWindow: &str = "add-window";
     pub const WMUpdateWindow: &str = "update-window";
     pub const WMRemoveWindow: &str = "remove-window";
-    pub const WMForceRetiling: &str = "force-retiling";
+    
+    pub const WMForceRetiling: &str = "wm-force-retiling";
+    pub const WMSetLayout: &str = "wm-set-layout";
+    pub const WMSetOverlayVisibility: &str = "wm-set-overlay-visibility";
+    pub const WMSetActiveWindow: &str = "wm-set-active-window";
 
     pub const StateSettingsChanged: &str = "settings-changed";
     pub const StateWegItemsChanged: &str = "weg-items";

@@ -172,7 +172,7 @@ impl MonitorManager {
 
     fn get_monitors() -> Result<Vec<(String, HMONITOR)>> {
         let mut monitors = Vec::new();
-        for m in MonitorEnumerator::new_refreshed()? {
+        for m in MonitorEnumerator::get_all()? {
             monitors.push((WindowsApi::monitor_name(m)?, m));
         }
         Ok(monitors)

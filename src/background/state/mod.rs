@@ -9,30 +9,41 @@ use domain::AhkVar;
 
 impl FullState {
     pub fn is_weg_enabled(&self) -> bool {
-        self.settings().seelenweg.enabled
+        self.settings.seelenweg.enabled
     }
 
     pub fn is_bar_enabled(&self) -> bool {
-        self.settings().fancy_toolbar.enabled
+        self.settings.fancy_toolbar.enabled
     }
 
     pub fn is_window_manager_enabled(&self) -> bool {
-        self.settings().window_manager.enabled
+        self.settings.window_manager.enabled
     }
 
     pub fn is_rofi_enabled(&self) -> bool {
-        true
+        self.settings.launcher.enabled
     }
 
     pub fn is_wall_enabled(&self) -> bool {
-        self.settings().wall.enabled
+        self.settings.wall.enabled
     }
 
     pub fn is_ahk_enabled(&self) -> bool {
-        self.settings().ahk_enabled
+        self.settings.ahk_enabled
     }
 
     pub fn get_ahk_variables(&self) -> HashMap<String, AhkVar> {
-        self.settings().ahk_variables.as_hash_map()
+        self.settings.ahk_variables.as_hash_map()
+    }
+
+    pub fn get_wm_layout_id(&self, monitor_idx: usize, workspace_idx: usize) -> String {
+        let default = self.settings.window_manager.default_layout.clone();
+        match self.settings.monitors.get(monitor_idx) {
+            Some(monitor) => match monitor.workspaces.get(workspace_idx) {
+                Some(workspace) => workspace.layout.clone().unwrap_or(default),
+                None => default,
+            },
+            None => default,
+        }
     }
 }
