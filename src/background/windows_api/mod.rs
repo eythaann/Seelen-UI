@@ -766,6 +766,11 @@ impl WindowsApi {
         Ok(())
     }
 
+    pub fn refresh_desktop() -> Result<()> {
+        unsafe { SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, None, SPIF_UPDATEINIFILE)? };
+        Ok(())
+    }
+
     pub fn get_min_animation_info() -> Result<ANIMATIONINFO> {
         let mut anim_info: ANIMATIONINFO = unsafe { core::mem::zeroed() };
         anim_info.cbSize = core::mem::size_of::<ANIMATIONINFO>() as u32;
