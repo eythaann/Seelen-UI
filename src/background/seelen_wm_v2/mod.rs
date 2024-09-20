@@ -15,12 +15,12 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
-    modules::virtual_desk::get_vd_manager,
+    modules::virtual_desk::{get_vd_manager, VirtualDesktop},
     seelen::get_app_handle,
     seelen_weg::SeelenWeg,
     state::application::FULL_STATE,
     trace_lock,
-    windows_api::{window::Window, WindowEnumerator, WindowsApi},
+    windows_api::{monitor::Monitor, window::Window, WindowEnumerator, WindowsApi},
 };
 
 impl WindowManagerV2 {
@@ -78,22 +78,35 @@ impl WindowManagerV2 {
 
     fn add(window: &Window) -> Result<()> {
         let mut state = trace_lock!(WM_STATE);
-        let monitor_id = window.monitor().id()?;
-
         let vd_manager = get_vd_manager();
-        let workspace_id = if vd_manager.uses_cloak() && window.is_cloaked() {
-            window.workspace()?.id()
-        } else {
-            vd_manager.get_current()?.id()
-        };
+        let current_workspace_id = vd_manager.get_current()?.id();
 
-        if let Some(m) = state.get_monitor_mut(&monitor_id) {
-            if let Some(w) = m.get_workspace_mut(&workspace_id) {
-                w.add_window(window);
+        let mut monitor_id = window.monitor().id()?;
+        let mut workspace_id = window.workspace()?.id();
+
+        if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
+            if let Some(index) = config.bound_monitor {
+                if let Some(monitor) = Monitor::at(index) {
+                    monitor_id = monitor.id()?;
+                }
+            }
+            if let Some(index) = config.bound_workspace {
+                vd_manager.send_to(index, window.address())?;
+                vd_manager.switch_to(index)?;
+                if let Some(workspace) = vd_manager.get(index)? {
+                    workspace_id = workspace.id();
+                }
+            }
+        }
+
+        if let Some(monitor) = state.get_monitor_mut(&monitor_id) {
+            let workspace = monitor.get_workspace_mut(&workspace_id);
+            workspace.add_window(window);
+            if workspace_id == current_workspace_id {
                 get_app_handle().emit_to(
                     format!("{}/{}", Self::TARGET, monitor_id),
                     SeelenEvent::WMSetLayout,
-                    w.get_root_node().map(|n| n.inner()),
+                    workspace.get_root_node().map(|n| n.inner()),
                 )?;
             }
         }
@@ -115,6 +128,20 @@ impl WindowManagerV2 {
                     )?;
                 }
             }
+        }
+        Ok(())
+    }
+
+    fn workspace_changed(current: &VirtualDesktop) -> Result<()> {
+        let mut state = trace_lock!(WM_STATE);
+        let workspace_id = current.id();
+        for (monitor_id, monitor) in state.monitors.iter_mut() {
+            let workspace = monitor.get_workspace_mut(&workspace_id);
+            get_app_handle().emit_to(
+                format!("{}/{}", Self::TARGET, monitor_id),
+                SeelenEvent::WMSetLayout,
+                workspace.get_root_node().map(|n| n.inner()),
+            )?;
         }
         Ok(())
     }

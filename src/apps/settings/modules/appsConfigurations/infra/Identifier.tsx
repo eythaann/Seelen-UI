@@ -61,72 +61,66 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
 
   return (
     <SettingsGroup>
-      <div>
-        {onRemove && (
-          <SettingsOption>
-            <span>{t('apps_configurations.identifier.remove')}</span>
-            <Button type="text" danger onClick={onRemove} className={cs.removeButton}>
-              <Icon iconName="IoTrash" />
-            </Button>
-          </SettingsOption>
-        )}
+      {onRemove && (
         <SettingsOption>
-          <span>{t('apps_configurations.identifier.id')}</span>
-          <Input value={id} onChange={onChangeId} />
-        </SettingsOption>
-        <SettingsOption>
-          <span>{t('apps_configurations.identifier.kind')}</span>
-          <Select
-            value={kind}
-            options={OptionsFromEnum(AppIdentifierType)}
-            onSelect={onSelectKind}
-          />
-        </SettingsOption>
-        <SettingsOption>
-          <span>{t('apps_configurations.identifier.matching_strategy')}</span>
-          <Select
-            value={matchingStrategy}
-            options={OptionsFromEnum(MatchingStrategy)}
-            onSelect={onSelectMatchingStrategy}
-          />
-        </SettingsOption>
-        <SettingsOption>
-          <span>{t('apps_configurations.identifier.negation')}</span>
-          <Switch value={identifier.negation} onChange={onChangeNegation} />
-        </SettingsOption>
-
-        <hr />
-
-        <SettingsOption>
-          <b>{t('apps_configurations.identifier.and')}</b>
-          <Button type="dashed" onClick={onAddAndItem}>
-            {t('apps_configurations.identifier.add_block')}
+          <span>{t('apps_configurations.identifier.remove')}</span>
+          <Button type="text" danger onClick={onRemove} className={cs.removeButton}>
+            <Icon iconName="IoTrash" />
           </Button>
         </SettingsOption>
-        {identifier.and.map((id, idx) => (
-          <Identifier
-            key={idx}
-            identifier={id}
-            onChange={(value) => onChangeAndItem(idx, value)}
-            onRemove={() => onRemoveAndItem(idx)}
-          />
-        ))}
+      )}
+      <SettingsOption>
+        <span>{t('apps_configurations.identifier.id')}</span>
+        <Input value={id} onChange={onChangeId} />
+      </SettingsOption>
+      <SettingsOption>
+        <span>{t('apps_configurations.identifier.kind')}</span>
+        <Select value={kind} options={OptionsFromEnum(AppIdentifierType)} onSelect={onSelectKind} />
+      </SettingsOption>
+      <SettingsOption>
+        <span>{t('apps_configurations.identifier.matching_strategy')}</span>
+        <Select
+          value={matchingStrategy}
+          options={OptionsFromEnum(MatchingStrategy)}
+          onSelect={onSelectMatchingStrategy}
+        />
+      </SettingsOption>
+      <SettingsOption>
+        <span>{t('apps_configurations.identifier.negation')}</span>
+        <Switch value={identifier.negation} onChange={onChangeNegation} />
+      </SettingsOption>
 
-        <SettingsOption>
-          <b>{t('apps_configurations.identifier.or')}</b>
-          <Button type="dashed" onClick={onAddOrItem}>
-            {t('apps_configurations.identifier.add_block')}
-          </Button>
-        </SettingsOption>
-        {identifier.or.map((id, idx) => (
-          <Identifier
-            key={idx}
-            identifier={id}
-            onChange={(value) => onChangeOrItem(idx, value)}
-            onRemove={() => onRemoveOrItem(idx)}
-          />
-        ))}
-      </div>
+      <hr />
+
+      <SettingsOption>
+        <b>{t('apps_configurations.identifier.and')}</b>
+        <Button type="dashed" onClick={onAddAndItem}>
+          {t('apps_configurations.identifier.add_block')}
+        </Button>
+      </SettingsOption>
+      {identifier.and.map((id, idx) => (
+        <Identifier
+          key={idx}
+          identifier={id}
+          onChange={(value) => onChangeAndItem(idx, value)}
+          onRemove={() => onRemoveAndItem(idx)}
+        />
+      ))}
+
+      <SettingsOption>
+        <b>{t('apps_configurations.identifier.or')}</b>
+        <Button type="dashed" onClick={onAddOrItem}>
+          {t('apps_configurations.identifier.add_block')}
+        </Button>
+      </SettingsOption>
+      {identifier.or.map((id, idx) => (
+        <Identifier
+          key={idx}
+          identifier={id}
+          onChange={(value) => onChangeOrItem(idx, value)}
+          onRemove={() => onRemoveOrItem(idx)}
+        />
+      ))}
     </SettingsGroup>
   );
 }

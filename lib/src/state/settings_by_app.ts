@@ -47,7 +47,7 @@ export interface AppConfiguration {
   name: string;
   category: string | null;
   boundMonitor: number | null;
-  boundWorkspace: string | null;
+  boundWorkspace: number | null;
   identifier: AppIdentifier;
   options: Array<AppExtraFlag>;
   isBundled: boolean;

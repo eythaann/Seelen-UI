@@ -57,12 +57,9 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const onChangeIdentifier = (identifier: AppIdentifier) => setApp({ ...app, identifier });
 
   const onSelectMonitor = (value: number | null) => setApp({ ...app, boundMonitor: value });
-  const onSelectWorkspace = (value: string | null) => setApp({ ...app, boundWorkspace: value });
+  const onSelectWorkspace = (value: number | null) => setApp({ ...app, boundWorkspace: value });
 
-  const onChangeOption = (
-    option: AppExtraFlag,
-    checked: boolean,
-  ) => {
+  const onChangeOption = (option: AppExtraFlag, checked: boolean) => {
     setApp({
       ...app,
       options: checked ? [...app.options, option] : app.options.filter((o) => o !== option),
@@ -70,10 +67,10 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   };
 
   const monitorsOptions = monitors.map((_, i) => ({ label: `Monitor ${i + 1}`, value: i }));
-  const workspaceOptions =
-    app.boundMonitor != null && monitors[app.boundMonitor]
-      ? monitors[app.boundMonitor]?.workspaces.map(({ name }) => ({ label: name, value: name }))
-      : [];
+  const workspaceOptions = Array.from({ length: 10 }).map((_, i) => ({
+    label: `Workspace ${i + 1}`,
+    value: i,
+  }));
 
   let title = t('apps_configurations.app.title_edit');
   let okText = t('apps_configurations.app.ok_edit');
@@ -109,20 +106,18 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
         )}
 
         <SettingsGroup>
-          <div>
-            <SettingsOption>
-              <span>{t('apps_configurations.app.name')}</span>
-              <Input value={app.name} onChange={updateName} required />
-            </SettingsOption>
-            <SettingsOption>
-              <span>{t('apps_configurations.app.category')}</span>
-              <Input
-                value={app.category || ''}
-                placeholder={t('apps_configurations.app.category_placeholder')}
-                onChange={updateCategory}
-              />
-            </SettingsOption>
-          </div>
+          <SettingsOption>
+            <span>{t('apps_configurations.app.name')}</span>
+            <Input value={app.name} onChange={updateName} required />
+          </SettingsOption>
+          <SettingsOption>
+            <span>{t('apps_configurations.app.category')}</span>
+            <Input
+              value={app.category || ''}
+              placeholder={t('apps_configurations.app.category_placeholder')}
+              onChange={updateCategory}
+            />
+          </SettingsOption>
         </SettingsGroup>
 
         <Identifier identifier={app.identifier} onChange={onChangeIdentifier} />
@@ -137,7 +132,6 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
                 allowClear
                 options={monitorsOptions}
                 onChange={onSelectMonitor}
-                disabled // Todo(eythan) remove when enable monitors on release
               />
             </SettingsOption>
             <SettingsOption>
@@ -148,7 +142,6 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
                 allowClear
                 options={workspaceOptions}
                 onChange={onSelectWorkspace}
-                disabled // Todo(eythan) remove when enable monitors on release
               />
             </SettingsOption>
           </SettingsSubGroup>

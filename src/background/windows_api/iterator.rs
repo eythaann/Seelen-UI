@@ -6,7 +6,7 @@ use windows::Win32::{
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
-use super::window::Window;
+use super::{monitor::Monitor, window::Window};
 
 #[derive(Debug, Clone)]
 pub struct WindowEnumerator {
@@ -130,6 +130,26 @@ impl MonitorEnumerator {
             let data_ptr = lparam.0 as *mut Vec<HMONITOR>;
             if let Some(data) = data_ptr.as_mut() {
                 data.push(hmonitor);
+            }
+            true.into()
+        }
+
+        WindowsApi::enum_display_monitors(Some(get_handles_proc), &mut handles as *mut _ as isize)?;
+        Ok(handles)
+    }
+
+    pub fn get_all_v2() -> Result<Vec<Monitor>> {
+        let mut handles = Vec::new();
+
+        unsafe extern "system" fn get_handles_proc(
+            hmonitor: HMONITOR,
+            _hdc: HDC,
+            _rect_clip: *mut RECT,
+            lparam: LPARAM,
+        ) -> BOOL {
+            let data_ptr = lparam.0 as *mut Vec<Monitor>;
+            if let Some(data) = data_ptr.as_mut() {
+                data.push(Monitor::from(hmonitor));
             }
             true.into()
         }

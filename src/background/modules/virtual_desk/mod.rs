@@ -1,3 +1,4 @@
+mod cli;
 mod native;
 mod workspaces;
 
@@ -10,7 +11,7 @@ use std::sync::Arc;
 use crate::{error_handler::Result, state::application::FULL_STATE};
 
 lazy_static! {
-    static ref VIRTUAL_DESKTOP_MANAGER: Arc<ArcSwap<VirtualDesktopManager>> =
+    pub static ref VIRTUAL_DESKTOP_MANAGER: Arc<ArcSwap<VirtualDesktopManager>> =
         Arc::new(ArcSwap::from_pointee(
             match FULL_STATE.load().settings().virtual_desktop_strategy {
                 VirtualDesktopStrategy::Native =>
@@ -202,6 +203,8 @@ pub enum VirtualDesktopEvent {
         old_index: usize,
         new_index: usize,
     },
+    /// Emitted when a window is moved of the virtual desktop.
+    /// If using native implementation, it also will be triggered when the window is created/destroyed
     WindowChanged(isize),
 }
 
