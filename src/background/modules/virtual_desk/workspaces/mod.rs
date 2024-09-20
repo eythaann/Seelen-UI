@@ -1,3 +1,5 @@
+mod hook;
+
 use std::{
     path::PathBuf,
     sync::{
@@ -13,17 +15,12 @@ use serde::{Deserialize, Serialize};
 use crate::{
     error_handler::{AppError, Result},
     hook::HOOK_MANAGER,
-    log_error,
-    seelen_weg::SeelenWeg,
-    trace_lock,
-    windows_api::{WindowEnumerator, WindowsApi},
+    log_error, trace_lock,
+    windows_api::WindowsApi,
     winevent::WinEvent,
 };
 
-use super::{
-    get_vd_manager, VirtualDesktop, VirtualDesktopEvent, VirtualDesktopManagerTrait,
-    VirtualDesktopTrait,
-};
+use super::{VirtualDesktop, VirtualDesktopEvent, VirtualDesktopManagerTrait, VirtualDesktopTrait};
 use windows::Win32::{
     Foundation::HWND,
     UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE},
@@ -88,12 +85,13 @@ impl SeelenWorkspace {
 
     fn restore(&self) -> Result<()> {
         let mut hook_manager = trace_lock!(HOOK_MANAGER);
-        for window in &self.windows {
+        for window in self.windows.iter() {
             let hwnd = HWND(*window as _);
             // if is switching by restored window on other workspace it will be already shown
-            if WindowsApi::is_window(hwnd) {
+            if WindowsApi::is_window(hwnd) && WindowsApi::is_iconic(hwnd) {
                 hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
-                WindowsApi::show_window_async(hwnd, SW_RESTORE)?;
+                // show_window_async will restore the windows unsorted so we use sync show here
+                WindowsApi::show_window(hwnd, SW_RESTORE)?;
             }
         }
         Ok(())
@@ -108,7 +106,7 @@ pub struct SeelenWorkspacesManager {
     pinned: Mutex<Vec<isize>>,
 }
 
-fn none_err() -> AppError {
+pub fn none_err() -> AppError {
     "Seelen Workspace not found".into()
 }
 
@@ -120,67 +118,30 @@ impl SeelenWorkspacesManager {
             pinned: Mutex::new(Vec::new()),
             sender: ArcSwap::new(Arc::new(None)),
         };
-        log_error!(manager.load());
+        log_error!(manager.enumerate());
         manager
     }
 
-    /// TODO: try to move windows on others native virtual desktops to only one.
-    fn load(&self) -> Result<()> {
-        let mut workspaces = self.workspaces();
-        let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-        WindowEnumerator::new().for_each(|hwnd| {
-            if SeelenWeg::should_be_added(hwnd) && !WindowsApi::is_iconic(hwnd) {
-                workspace.windows.push(hwnd.0 as isize);
-            }
-        })?;
-        Ok(())
+    fn with_workspaces<F, T>(&self, f: F) -> T
+    where
+        F: FnOnce(&mut Vec<SeelenWorkspace>) -> T,
+    {
+        f(trace_lock!(self.workspaces).as_mut())
     }
 
-    /// should be called on a thread to avoid deadlocks
-    pub fn on_win_event(&self, event: WinEvent, origin: HWND) -> Result<()> {
-        let addr = origin.0 as isize;
-        match event {
-            WinEvent::SystemMinimizeStart | WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
-                let mut workspaces = self.workspaces();
-                let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-                if workspace.windows.contains(&addr) {
-                    log::trace!("removing window: {}", addr);
-                    workspace.windows.retain(|w| *w != addr);
-                }
-            }
-            WinEvent::SystemMinimizeEnd => {
-                let owner_idx = {
-                    let workspaces = self.workspaces();
-                    workspaces.iter().position(|w| w.windows.contains(&addr))
-                };
-                if let Some(owner_idx) = owner_idx {
-                    std::thread::spawn(move || log_error!(get_vd_manager().switch_to(owner_idx)));
-                } else if SeelenWeg::should_be_added(origin) {
-                    log::trace!("adding window to workspace: {}", addr);
-                    let mut workspaces = self.workspaces();
-                    let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-                    workspace.windows.push(addr);
-                }
-            }
-            WinEvent::ObjectCreate | WinEvent::ObjectShow => {
-                if SeelenWeg::should_be_added(origin) {
-                    log::trace!("adding window to workspace: {}", addr);
-                    let mut workspaces = self.workspaces();
-                    let workspace = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-                    workspace.windows.push(addr);
-                }
-            }
-            _ => {}
+    /// if workspace is not found it will return None
+    fn with_workspace<F, T>(&self, idx: usize, f: F) -> Option<T>
+    where
+        F: FnOnce(&mut SeelenWorkspace) -> T,
+    {
+        if let Some(workspace) = trace_lock!(self.workspaces).get_mut(idx) {
+            return Some(f(workspace));
         }
-        Ok(())
+        None
     }
 
-    fn _current(&self) -> usize {
+    fn current_idx(&self) -> usize {
         self.current.load(Ordering::Relaxed)
-    }
-
-    fn workspaces(&self) -> MutexGuard<'_, Vec<SeelenWorkspace>> {
-        trace_lock!(self.workspaces)
     }
 
     fn pinned(&self) -> MutexGuard<'_, Vec<isize>> {
@@ -214,104 +175,101 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
     fn create_desktop(&self) -> Result<()> {
         log::trace!("Creating new seelen workspace");
         let desk = SeelenWorkspace::new();
-        self.workspaces().push(desk.clone());
+        self.with_workspaces(|workspaces| workspaces.push(desk.clone()));
         self.emit(VirtualDesktopEvent::DesktopCreated(desk.into()))?;
         Ok(())
     }
 
     fn get(&self, idx: usize) -> Result<Option<VirtualDesktop>> {
-        Ok(self.workspaces().get(idx).map(Into::into))
+        Ok(self.with_workspace(idx, |workspace| workspace.clone().into()))
     }
 
     fn get_by_window(&self, window: isize) -> Result<VirtualDesktop> {
         if self.is_pinned_window(window)? {
             return self.get_current();
         }
-        let vd = {
-            self.workspaces()
+        self.with_workspaces(|workspaces| {
+            workspaces
                 .iter()
                 .find(|w| w.windows.contains(&window))
                 .map(Into::into)
-        };
-        vd.or_else(|| self.get_current().ok()).ok_or_else(none_err)
+                .or_else(|| self.get_current().ok().map(Into::into))
+        })
+        .ok_or_else(none_err)
     }
 
     fn get_all(&self) -> Result<Vec<VirtualDesktop>> {
-        Ok(self.workspaces().iter().map(Into::into).collect())
+        Ok(self.with_workspaces(|workspaces| workspaces.iter().map(Into::into).collect()))
     }
 
     fn get_current(&self) -> Result<VirtualDesktop> {
-        Ok(self
-            .workspaces()
-            .get(self._current())
-            .ok_or_else(none_err)?
-            .into())
+        self.with_workspace(self.current_idx(), |workspace| workspace.clone().into())
+            .ok_or_else(none_err)
     }
 
     fn get_current_idx(&self) -> Result<usize> {
-        Ok(self._current())
+        Ok(self.current_idx())
     }
 
     fn switch_to(&self, idx: usize) -> Result<()> {
-        if idx == self._current() {
+        if idx == self.current_idx() {
             return Ok(());
         }
 
-        {
-            let len = self.workspaces().len();
-            if idx >= len {
-                // temporal until implement a UI to create seelen workspaces
-                self.create_many_desktop((idx + 1) - len)?;
-                // return Err("Tried to switch to non-existent workspace".into());
-            }
+        let len = self.with_workspaces(|w| w.len());
+        if idx >= len {
+            // temporal until implement a UI to create seelen workspaces
+            self.create_many_desktop((idx + 1) - len)?;
+            // return Err("Tried to switch to non-existent workspace".into());
         }
 
-        let workspaces = self.workspaces();
-        let old = workspaces.get(self._current()).ok_or_else(none_err)?;
-        self.current.store(idx, Ordering::SeqCst);
-        let new = workspaces.get(self._current()).ok_or_else(none_err)?;
+        self.with_workspaces(|workspaces| {
+            let old = workspaces.get(self.current_idx()).ok_or_else(none_err)?;
+            self.current.store(idx, Ordering::SeqCst);
+            let new = workspaces.get(self.current_idx()).ok_or_else(none_err)?;
 
-        old.hide()?;
-        self.emit(VirtualDesktopEvent::DesktopChanged {
-            new: new.into(),
-            old: old.into(),
-        })?;
-        new.restore()?;
-        Ok(())
+            old.hide()?;
+            self.emit(VirtualDesktopEvent::DesktopChanged {
+                new: new.into(),
+                old: old.into(),
+            })?;
+            new.restore()?;
+            Ok(())
+        })
     }
 
     fn send_to(&self, idx: usize, window: isize) -> Result<()> {
-        {
-            let len = self.workspaces().len();
-            if idx >= len {
-                // temporal until implement a UI to create seelen workspaces
-                self.create_many_desktop((idx + 1) - len)?;
-                // return Err("Tried to switch to non-existent workspace".into());
-            }
-        }
-        let mut workspaces = self.workspaces();
-        let old_idx = workspaces
-            .iter()
-            .position(|w| w.windows.contains(&window))
-            .ok_or_else(none_err)?;
-
-        if old_idx == idx {
-            return Ok(());
+        let len = self.with_workspaces(|w| w.len());
+        if idx >= len {
+            // temporal until implement a UI to create seelen workspaces
+            self.create_many_desktop((idx + 1) - len)?;
+            // return Err("Tried to switch to non-existent workspace".into());
         }
 
-        {
-            let old = workspaces.get_mut(old_idx).ok_or_else(none_err)?;
-            old.remove_window(window)?;
-        }
-        {
-            let new = workspaces.get_mut(idx).ok_or_else(none_err)?;
-            new.windows.push(window);
-            if self._current() == idx {
-                new.restore()?;
+        self.with_workspaces(|workspaces| {
+            let old_idx = workspaces
+                .iter()
+                .position(|w| w.windows.contains(&window))
+                .ok_or_else(none_err)?;
+
+            if old_idx == idx {
+                return Ok(());
             }
-        }
-        self.emit(VirtualDesktopEvent::WindowChanged(window))?;
-        Ok(())
+
+            {
+                let old = workspaces.get_mut(old_idx).ok_or_else(none_err)?;
+                old.remove_window(window)?;
+            }
+            {
+                let new = workspaces.get_mut(idx).ok_or_else(none_err)?;
+                new.windows.push(window);
+                if self.current_idx() == idx {
+                    new.restore()?;
+                }
+            }
+
+            self.emit(VirtualDesktopEvent::WindowChanged(window))
+        })
     }
 
     fn pin_window(&self, hwnd: isize) -> Result<()> {

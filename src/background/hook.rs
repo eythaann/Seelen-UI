@@ -144,16 +144,18 @@ impl HookManager {
         }
 
         if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
-            log_error!(vd.on_win_event(event, origin));
+            log_error!(vd.on_win_event(event, &window));
         }
 
         if seelen.state().is_weg_enabled() {
-            log_error!(SeelenWeg::process_global_win_event(event, origin));
+            std::thread::spawn(move || {
+                log_error!(SeelenWeg::process_global_win_event(event, &window));
+            });
         }
 
         if seelen.state().is_window_manager_enabled() {
             std::thread::spawn(move || {
-                log_error!(WindowManagerV2::process_win_event(event, &window))
+                log_error!(WindowManagerV2::process_win_event(event, &window));
             });
         }
 
