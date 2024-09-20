@@ -1,6 +1,7 @@
 use tauri::WebviewWindow;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT, WPARAM},
+    Graphics::Gdi::{InvalidateRect, UpdateWindow},
     UI::WindowsAndMessaging::{
         FindWindowA, FindWindowExA, PostMessageW, SetParent, SWP_NOACTIVATE,
     },
@@ -68,12 +69,13 @@ impl SeelenWall {
                 left: 0,
                 right: rect.right - rect.left,
                 bottom: rect.bottom - rect.top,
-            }
+            };
         }
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(main_hwnd, &rect)?;
         WindowsApi::set_position(main_hwnd, None, &rect, SWP_NOACTIVATE)?;
+        Self::refresh_desktop()?;
         Ok(())
     }
 
@@ -95,10 +97,23 @@ impl SeelenWall {
 
         match worker {
             Ok(w) => {
-                unsafe { SetParent(hwnd, w)? };
+                unsafe {
+                    SetParent(hwnd, w)?;
+                }
                 Ok(())
             }
             Err(_) => Err("Failed to find/create progman worker window".into()),
         }
+    }
+
+    fn refresh_desktop() -> Result<()> {
+        unsafe {
+            let progman = FindWindowA(pcstr!("Progman"), None)?;
+            let shell_view =
+                FindWindowExA(progman, HWND::default(), pcstr!("SHELLDLL_DefView"), None)?;
+            InvalidateRect(shell_view, None, true).ok()?;
+            UpdateWindow(shell_view).ok()?;
+        }
+        Ok(())
     }
 }
