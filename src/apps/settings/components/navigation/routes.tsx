@@ -9,9 +9,9 @@ export enum Route {
   SEELEN_ROFI = 'seelen_rofi',
   SEELEN_WALL = 'seelen_wall',
   SEELEN_WEG = 'seelen_weg',
+  SHORTCUTS = 'shortcuts',
   MONITORS = 'monitors',
   SPECIFIC_APPS = 'specific_apps',
-  SHORTCUTS = 'shortcuts',
   DEVELOPER = 'developer',
   INFO = 'info',
 }

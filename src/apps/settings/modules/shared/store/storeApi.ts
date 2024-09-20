@@ -120,7 +120,7 @@ export async function ImportApps() {
   }
 
   for (const file of [files].flat()) {
-    const processed = yaml.load(await fs.readTextFile(file.path));
+    const processed = yaml.load(await fs.readTextFile(file));
     data.push(...(Array.isArray(processed) ? processed : []));
   }
 

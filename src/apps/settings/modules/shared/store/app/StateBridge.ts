@@ -23,7 +23,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'fancyToolbar',
     'windowManager',
     'seelenweg',
-    'selectedTheme',
+    'selectedThemes',
     'monitors',
     'ahkEnabled',
     'ahkVariables',
