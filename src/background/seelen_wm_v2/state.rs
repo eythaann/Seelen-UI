@@ -1,4 +1,7 @@
-use std::{collections::HashMap, sync::Arc};
+use std::{
+    collections::{hash_map::Entry, HashMap},
+    sync::Arc,
+};
 
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -8,7 +11,7 @@ use crate::{
     error_handler::Result,
     modules::virtual_desk::get_vd_manager,
     state::application::FULL_STATE,
-    windows_api::{window::Window, MonitorEnumerator, WindowsApi},
+    windows_api::{monitor::Monitor, window::Window, MonitorEnumerator, WindowsApi},
 };
 
 use super::node_impl::WmNodeImpl;
@@ -28,6 +31,7 @@ pub struct WMV2StateWorkspace {
 
 #[derive(Debug, Default)]
 pub struct WMV2StateMonitor {
+    pub id: String,
     pub workspaces: HashMap<String, WMV2StateWorkspace>,
 }
 
@@ -39,30 +43,17 @@ pub struct WMV2State {
 impl WMV2State {
     fn init() -> Result<Self> {
         let mut state = WMV2State::default();
-        let settings = FULL_STATE.load();
 
         let workspaces = get_vd_manager().get_all()?;
         for (monitor_idx, hmonitor) in MonitorEnumerator::get_all()?.into_iter().enumerate() {
             let mut monitor = WMV2StateMonitor::default();
-
             for (workspace_idx, w) in workspaces.iter().enumerate() {
-                let mut workspace = WMV2StateWorkspace {
-                    layout_info: None,
-                    root: None,
-                    no_fallback_behavior: NoFallbackBehavior::Float,
-                };
-
-                let layout_id = settings.get_wm_layout_id(monitor_idx, workspace_idx);
-                if let Some(l) = settings.layouts.get(&layout_id).cloned() {
-                    workspace.layout_info = Some(l.info);
-                    workspace.root = Some(WmNodeImpl::new(l.structure));
-                    workspace.no_fallback_behavior = l.no_fallback_behavior;
-                }
-
-                monitor.workspaces.insert(w.id(), workspace);
+                monitor
+                    .workspaces
+                    .insert(w.id(), WMV2StateWorkspace::new(monitor_idx, workspace_idx));
             }
-
             let id = WindowsApi::monitor_name(hmonitor)?;
+            monitor.id = id.clone();
             state.monitors.insert(id, monitor);
         }
 
@@ -79,8 +70,28 @@ impl WMV2State {
 }
 
 impl WMV2StateMonitor {
-    pub fn get_workspace_mut(&mut self, workspace_id: &str) -> Option<&mut WMV2StateWorkspace> {
-        self.workspaces.get_mut(workspace_id)
+    pub fn create_workspace(monitor_idx: usize, workspace_id: &str) -> Result<WMV2StateWorkspace> {
+        for (workspace_idx, w) in get_vd_manager().get_all()?.iter().enumerate() {
+            if w.id() == workspace_id {
+                return Ok(WMV2StateWorkspace::new(monitor_idx, workspace_idx));
+            }
+        }
+        Err("Invalid workspace id".into())
+    }
+
+    pub fn get_workspace_mut(&mut self, workspace_id: &str) -> &mut WMV2StateWorkspace {
+        match self.workspaces.entry(workspace_id.to_string()) {
+            Entry::Occupied(e) => e.into_mut(),
+            Entry::Vacant(e) => {
+                let monitor_idx = Monitor::by_id(&self.id)
+                    .expect("Failed to get monitor")
+                    .index()
+                    .expect("Failed to get monitor index");
+                let new_workspace = Self::create_workspace(monitor_idx, workspace_id)
+                    .expect("Failed to ensure workspace");
+                e.insert(new_workspace)
+            }
+        }
     }
 
     pub fn contains(&self, window: &Window) -> bool {
@@ -89,6 +100,24 @@ impl WMV2StateMonitor {
 }
 
 impl WMV2StateWorkspace {
+    pub fn new(monitor_idx: usize, workspace_idx: usize) -> Self {
+        let mut workspace = Self {
+            layout_info: None,
+            root: None,
+            no_fallback_behavior: NoFallbackBehavior::Float,
+        };
+
+        let settings = FULL_STATE.load();
+        let layout_id = settings.get_wm_layout_id(monitor_idx, workspace_idx);
+        if let Some(l) = settings.layouts.get(&layout_id).cloned() {
+            workspace.layout_info = Some(l.info);
+            workspace.root = Some(WmNodeImpl::new(l.structure));
+            workspace.no_fallback_behavior = l.no_fallback_behavior;
+        }
+
+        workspace
+    }
+
     pub fn get_root_node(&self) -> Option<&WmNodeImpl> {
         self.root.as_ref()
     }

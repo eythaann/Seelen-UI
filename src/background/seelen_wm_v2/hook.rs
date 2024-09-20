@@ -6,19 +6,22 @@ use crate::{
 use super::WindowManagerV2;
 
 impl WindowManagerV2 {
-    pub fn process_vd_event(_event: &VirtualDesktopEvent) -> Result<()> {
-        /* match event {
+    pub fn process_vd_event(event: &VirtualDesktopEvent) -> Result<()> {
+        match event {
             VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
-                Self::discard_reservation()?;
-                Self::set_active_workspace(new.id())?;
+                // Self::discard_reservation()?;
+                Self::workspace_changed(new)?;
             }
             VirtualDesktopEvent::WindowChanged(window) => {
-                if Self::is_managed(HWND(*window as _)) {
-                    Self::update_app(HWND(*window as _))?;
+                log::trace!("window changed: {:?}", window);
+                let window = &Window::from(*window);
+                if Self::is_managed(window) {
+                    Self::remove(window)?;
+                    Self::add(window)?;
                 }
             }
             _ => {}
-        } */
+        }
         Ok(())
     }
 

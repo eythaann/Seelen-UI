@@ -152,6 +152,8 @@ impl Seelen {
     }
 
     fn start_async() -> Result<()> {
+        register_win_hook()?;
+
         trace_lock!(PERFORMANCE_HELPER).start("enumerating_windows");
 
         if FULL_STATE.load().is_weg_enabled() {
@@ -165,7 +167,6 @@ impl Seelen {
         trace_lock!(PERFORMANCE_HELPER).end("enumerating_windows");
 
         log_error!(Self::start_ahk_shortcuts());
-        register_win_hook()?;
 
         trace_lock!(PERFORMANCE_HELPER).end("init");
         Ok(())
@@ -326,6 +327,13 @@ impl Seelen {
             AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.ahk"))
                 .name("seelen.ahk")
                 .execute()?;
+
+            AutoHotKey::from_template(
+                include_str!("utils/ahk/mocks/seelen.vd.ahk"),
+                state.get_ahk_variables(),
+            )
+            .name("seelen.vd.ahk")
+            .execute()?;
 
             if state.is_window_manager_enabled() {
                 AutoHotKey::from_template(

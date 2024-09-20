@@ -3,12 +3,14 @@
 ## [Unreleased]
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
+- reimplementation of Tiling Window Manager.
 
 ### features
 - make the dock/taskbar solid when hide mode is `never`.
 - add app launcher (rofi for windows).
 - add seelen wall (rain-meter and wallpaper engine alternatives).
 - expose function to pin items into the dock.
+- settings by monitor.
 
 ### enhancements
 - improve quality icons from all app/files items.
@@ -17,6 +19,7 @@
 - reduce UI total size from 355mb to 121mb.
 - reduce Installer size from 75mb to 40mb.
 - allow drop files, apps and folders into the dock to pin them.
+- now Virtual Desktop shortcuts doesn't require Tiling WM be enabled to work.
 
 ### fix
 - missing icons for files with a different extension than `exe`.

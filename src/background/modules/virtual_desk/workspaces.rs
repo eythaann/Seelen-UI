@@ -20,8 +20,14 @@ use crate::{
     winevent::WinEvent,
 };
 
-use super::{VirtualDesktop, VirtualDesktopEvent, VirtualDesktopManagerTrait, VirtualDesktopTrait};
-use windows::Win32::Foundation::HWND;
+use super::{
+    get_vd_manager, VirtualDesktop, VirtualDesktopEvent, VirtualDesktopManagerTrait,
+    VirtualDesktopTrait,
+};
+use windows::Win32::{
+    Foundation::HWND,
+    UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE},
+};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SeelenWorkspace {
     id: String,
@@ -65,37 +71,31 @@ impl SeelenWorkspace {
 
     fn remove_window(&mut self, window: isize) -> Result<()> {
         self.windows.retain(|w| *w != window);
-        WindowsApi::set_minimize_animation(false)?;
         trace_lock!(HOOK_MANAGER).skip(WinEvent::SystemMinimizeStart, HWND(window as _));
-        WindowsApi::minimize_window(HWND(window as _))?;
-        WindowsApi::set_minimize_animation(true)?;
+        WindowsApi::show_window_async(HWND(window as _), SW_FORCEMINIMIZE)?;
         Ok(())
     }
 
-    fn hide(&mut self) -> Result<()> {
-        WindowsApi::set_minimize_animation(false)?;
+    fn hide(&self) -> Result<()> {
         let mut hook_manager = trace_lock!(HOOK_MANAGER);
         for window in &self.windows {
             let hwnd = HWND(*window as _);
             hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
-            WindowsApi::minimize_window(hwnd)?;
+            WindowsApi::show_window_async(hwnd, SW_MINIMIZE)?;
         }
-        WindowsApi::set_minimize_animation(true)?;
         Ok(())
     }
 
     fn restore(&self) -> Result<()> {
-        WindowsApi::set_minimize_animation(false)?;
         let mut hook_manager = trace_lock!(HOOK_MANAGER);
         for window in &self.windows {
             let hwnd = HWND(*window as _);
             // if is switching by restored window on other workspace it will be already shown
-            if WindowsApi::is_iconic(hwnd) {
+            if WindowsApi::is_window(hwnd) {
                 hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
-                WindowsApi::restore_window(hwnd)?;
+                WindowsApi::show_window_async(hwnd, SW_RESTORE)?;
             }
         }
-        WindowsApi::set_minimize_animation(true)?;
         Ok(())
     }
 }
@@ -154,7 +154,7 @@ impl SeelenWorkspacesManager {
                     workspaces.iter().position(|w| w.windows.contains(&addr))
                 };
                 if let Some(owner_idx) = owner_idx {
-                    self.switch_to(owner_idx)?;
+                    std::thread::spawn(move || log_error!(get_vd_manager().switch_to(owner_idx)));
                 } else if SeelenWeg::should_be_added(origin) {
                     log::trace!("adding window to workspace: {}", addr);
                     let mut workspaces = self.workspaces();
@@ -188,9 +188,12 @@ impl SeelenWorkspacesManager {
     }
 
     fn emit(&self, event: VirtualDesktopEvent) -> Result<()> {
-        if let Some(sender) = self.sender.load().as_ref() {
-            sender.send(event).map_err(|_| "Failed to send event")?;
-        }
+        let sender = self.sender.load_full();
+        std::thread::spawn(move || {
+            if let Some(sender) = sender.as_ref() {
+                log_error!(sender.send(event));
+            }
+        });
         Ok(())
     }
 
@@ -250,6 +253,10 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
     }
 
     fn switch_to(&self, idx: usize) -> Result<()> {
+        if idx == self._current() {
+            return Ok(());
+        }
+
         {
             let len = self.workspaces().len();
             if idx >= len {
@@ -259,22 +266,17 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
             }
         }
 
-        let mut workspaces = self.workspaces();
-        let old = {
-            let old = workspaces.get_mut(self._current()).ok_or_else(none_err)?;
-            old.hide()?;
-            old.clone()
-        };
-
+        let workspaces = self.workspaces();
+        let old = workspaces.get(self._current()).ok_or_else(none_err)?;
         self.current.store(idx, Ordering::SeqCst);
-
         let new = workspaces.get(self._current()).ok_or_else(none_err)?;
-        new.restore()?;
 
+        old.hide()?;
         self.emit(VirtualDesktopEvent::DesktopChanged {
             new: new.into(),
             old: old.into(),
         })?;
+        new.restore()?;
         Ok(())
     }
 
@@ -288,17 +290,25 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
             }
         }
         let mut workspaces = self.workspaces();
+        let old_idx = workspaces
+            .iter()
+            .position(|w| w.windows.contains(&window))
+            .ok_or_else(none_err)?;
+
+        if old_idx == idx {
+            return Ok(());
+        }
+
         {
-            let old_idx = workspaces
-                .iter()
-                .position(|w| w.windows.contains(&window))
-                .ok_or_else(none_err)?;
             let old = workspaces.get_mut(old_idx).ok_or_else(none_err)?;
             old.remove_window(window)?;
         }
         {
             let new = workspaces.get_mut(idx).ok_or_else(none_err)?;
             new.windows.push(window);
+            if self._current() == idx {
+                new.restore()?;
+            }
         }
         self.emit(VirtualDesktopEvent::WindowChanged(window))?;
         Ok(())

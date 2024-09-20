@@ -12,6 +12,7 @@ use parking_lot::Mutex;
 use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
+use crate::modules::virtual_desk::{VirtualDesktopManager, VIRTUAL_DESKTOP_MANAGER};
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_bar::FancyToolbar;
 use crate::seelen_rofi::SeelenRofi;
@@ -107,6 +108,7 @@ lazy_static! {
             ])
             .subcommands([
                 Command::new("settings").about("Opens the Seelen settings gui."),
+                VirtualDesktopManager::get_cli(),
                 CliDebugger::get_cli(),
                 FancyToolbar::get_cli(),
                 // WindowManager::get_cli(),
@@ -186,6 +188,9 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
         match subcommand {
             "settings" => {
                 Seelen::show_settings()?;
+            }
+            VirtualDesktopManager::CLI_IDENTIFIER => {
+                VIRTUAL_DESKTOP_MANAGER.load().process(matches)?;
             }
             CliDebugger::CLI_IDENTIFIER => {
                 CliDebugger::process(matches)?;

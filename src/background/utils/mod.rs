@@ -134,7 +134,7 @@ macro_rules! trace_lock {
             }
         }
 
-        guard.expect("Mutex was poisoned")
+        guard.expect("Mutex deadlocked")
     }};
 }
 

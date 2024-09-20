@@ -8,8 +8,6 @@ interface Props {
 
 export const SettingsGroup = ({ children }: Props) => {
   return <div className={cs.group}>
-    <div className={cs.blur}/>
-    <div className={cs.noise}/>
     <div className={cs.content}>{children}</div>
   </div>;
 };
@@ -42,7 +40,7 @@ type OptionProps =
 
 export const SettingsOption = (props: OptionProps) => {
   return (
-    <div className={cs.box}>
+    <div className={cs.setting}>
       {'children' in props ? (
         props.children
       ) : (

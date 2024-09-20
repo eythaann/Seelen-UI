@@ -143,19 +143,18 @@ impl HookManager {
             ));
         }
 
-        let addr = origin.0 as isize;
-        std::thread::spawn(move || {
-            if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
-                log_error!(vd.on_win_event(event, HWND(addr as _)));
-            }
-        });
+        if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
+            log_error!(vd.on_win_event(event, origin));
+        }
 
         if seelen.state().is_weg_enabled() {
             log_error!(SeelenWeg::process_global_win_event(event, origin));
         }
 
         if seelen.state().is_window_manager_enabled() {
-            log_error!(WindowManagerV2::process_win_event(event, &window));
+            std::thread::spawn(move || {
+                log_error!(WindowManagerV2::process_win_event(event, &window))
+            });
         }
 
         for monitor in seelen.monitors_mut() {

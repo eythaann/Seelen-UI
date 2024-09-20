@@ -134,8 +134,8 @@ pub struct AppConfig {
     pub category: Option<String>,
     /// monitor index that the app should be bound to
     pub bound_monitor: Option<usize>,
-    /// workspace name that the app should be bound to
-    pub bound_workspace: Option<String>,
+    /// workspace index that the app should be bound to
+    pub bound_workspace: Option<usize>,
     /// app identifier
     pub identifier: AppIdentifier,
     /// extra specific options/settings for the app

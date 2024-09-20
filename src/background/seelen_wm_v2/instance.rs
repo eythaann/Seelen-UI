@@ -63,13 +63,12 @@ impl WindowManagerV2 {
 
                 if let Some(m) = state.get_monitor_mut(&monitor_id) {
                     let workspace_id = get_vd_manager().get_current()?.id();
-                    if let Some(w) = m.get_workspace_mut(&workspace_id) {
-                        app.emit_to(
-                            format!("{}/{}", Self::TARGET, monitor_id),
-                            SeelenEvent::WMSetLayout,
-                            w.get_root_node().map(|n| n.inner()),
-                        )?;
-                    }
+                    let w = m.get_workspace_mut(&workspace_id);
+                    app.emit_to(
+                        format!("{}/{}", Self::TARGET, monitor_id),
+                        SeelenEvent::WMSetLayout,
+                        w.get_root_node().map(|n| n.inner()),
+                    )?;
                 }
 
                 app.emit(
