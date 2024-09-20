@@ -69,12 +69,12 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
     }
 
     if WindowsApi::is_iconic(hwnd) {
-        WindowsApi::show_window(hwnd, SW_RESTORE)?;
+        WindowsApi::show_window_async(hwnd, SW_RESTORE)?;
         return Ok(());
     }
 
     if LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire) == hwnd.0 as isize {
-        WindowsApi::show_window(hwnd, SW_MINIMIZE)?;
+        WindowsApi::show_window_async(hwnd, SW_MINIMIZE)?;
     } else {
         WindowsApi::async_force_set_foreground(hwnd)
     }

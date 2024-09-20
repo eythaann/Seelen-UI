@@ -3,12 +3,18 @@ use windows::Win32::{
     UI::WindowsAndMessaging::{FindWindowExA, EVENT_OBJECT_CREATE, EVENT_OBJECT_SHOW, SW_HIDE},
 };
 
-use crate::{error_handler::Result, pcstr, windows_api::WindowsApi, winevent::WinEvent};
+use crate::{
+    error_handler::Result,
+    pcstr,
+    windows_api::{window::Window, WindowsApi},
+    winevent::WinEvent,
+};
 
 use super::{SeelenWeg, TASKBAR_CLASS};
 
 impl SeelenWeg {
-    pub fn process_global_win_event(event: WinEvent, origin: HWND) -> Result<()> {
+    pub fn process_global_win_event(event: WinEvent, window: &Window) -> Result<()> {
+        let origin = window.hwnd();
         match event {
             WinEvent::ObjectShow | WinEvent::ObjectCreate => {
                 if Self::should_be_added(origin) {
@@ -16,12 +22,13 @@ impl SeelenWeg {
                 }
             }
             WinEvent::ObjectParentChange => {
-                let parent = WindowsApi::get_parent(origin);
-                if !parent.is_invalid()
-                    && !Self::contains_app(parent)
-                    && Self::should_be_added(parent)
-                {
-                    Self::add_hwnd(parent);
+                if let Some(parent) = window.parent() {
+                    if Self::contains_app(window.hwnd()) {
+                        Self::remove_hwnd(origin);
+                    }
+                    if !Self::contains_app(parent.hwnd()) && Self::should_be_added(parent.hwnd()) {
+                        Self::add_hwnd(parent.hwnd());
+                    }
                 }
             }
             WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
