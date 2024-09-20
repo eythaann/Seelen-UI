@@ -13,9 +13,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    /* backdrop-filter: blur(20px); */
-    background-color: var(--color-gray-100);
-    /* opacity: 0.8; */
+    backdrop-filter: brightness(0.95);
+    border-radius: var(--config-border-radius);
   }
 
   &:not(:last-child) {

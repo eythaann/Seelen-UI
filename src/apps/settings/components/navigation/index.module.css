@@ -1,13 +1,15 @@
 .navigation {
-  background-color: var(--primary-color);
-  color: var(--secondary-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
   grid-row: 1/3;
+  background-color: var(--color-persist-gray-900);
+  color: var(--color-persist-gray-50);
   width: 180px;
+  padding: 10px;
   transition: width 300ms ease, padding 300ms ease;
+
+  display: grid;
+  grid-template-rows: 1fr min-content;
+  grid-template-columns: 1fr;
+  gap: 10px;
 
   &.tableView {
     padding: 10px 6px;
@@ -20,10 +22,24 @@
     }
   }
 
+  .navigationMain {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
   .group {
     display: flex;
     flex-direction: column;
     gap: 6px;
+  }
+
+  .separator {
+    width: 100%;
+    height: 1px;
+    background-color: var(--color-persist-gray-700);
   }
 
   .item {

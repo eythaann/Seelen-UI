@@ -40,9 +40,20 @@ export const Navigation = memo(() => {
   let current = useAppSelector(RootSelectors.route);
   let devTools = useAppSelector(RootSelectors.devTools);
 
-  let routes = Object.values(Route).filter(
-    (r) => (r !== Route.DEVELOPER || devTools) && r !== Route.INFO,
-  );
+  let general = [
+    Route.GENERAL,
+    Route.SEELEN_BAR,
+    Route.SEELEN_WM,
+    Route.SEELEN_WALL,
+    Route.SEELEN_WEG,
+    Route.SHORTCUTS,
+  ];
+
+  let advanced = [Route.MONITORS, Route.SPECIFIC_APPS];
+
+  let developer = [Route.DEVELOPER];
+
+  const Mapper = (route: Route) => <Item key={route} route={route} isActive={current === route} />;
 
   return (
     <div
@@ -50,10 +61,16 @@ export const Navigation = memo(() => {
         [cs.tableView!]: current === Route.SPECIFIC_APPS,
       })}
     >
-      <div className={cs.group}>
-        {routes.map((route) => (
-          <Item key={route} route={route} isActive={current === route} />
-        ))}
+      <div className={cs.navigationMain}>
+        <div className={cs.group}>{general.map(Mapper)}</div>
+        <div className={cs.separator} />
+        <div className={cs.group}>{advanced.map(Mapper)}</div>
+        {devTools && (
+          <>
+            <div className={cs.separator} />
+            <div className={cs.group}>{developer.map(Mapper)}</div>
+          </>
+        )}
       </div>
       <Item key={Route.INFO} route={Route.INFO} isActive={current === Route.INFO} />
     </div>

@@ -28,8 +28,8 @@ export function Wallpaper() {
       return;
     }
 
-    await invoke(SeelenCommand.StateSetWallpaper, { path: file.path });
-    dispatch(RootActions.setWallpaper(convertFileSrc(file.path)));
+    await invoke(SeelenCommand.StateSetWallpaper, { path: file });
+    dispatch(RootActions.setWallpaper(convertFileSrc(file)));
   }
 
   return (
