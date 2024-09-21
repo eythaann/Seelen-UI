@@ -40,22 +40,23 @@ export const StartMenu = memo(({ item }: Props) => {
   }, [isStartMenuOpen]);
 
   return (
-    <WithContextMenu items={getMenuForItem(t, item)}>
-      <DraggableItem
-        value={item}
-        className="weg-item"
-        onClick={() => {
-          if (!startMenuOpenRef.current) {
-            invoke(SeelenCommand.SendKeys, { keys: '{win}' });
-          }
-        }}
-        onContextMenu={(e) => e.stopPropagation()}
-      >
-        <BackgroundByLayersV2 prefix="item" />
-        <div className="weg-item-icon">
-          <div className="weg-item-icon-start" />
+    <DraggableItem item={item}>
+      <WithContextMenu items={getMenuForItem(t, item)}>
+        <div
+          className="weg-item"
+          onClick={() => {
+            if (!startMenuOpenRef.current) {
+              invoke(SeelenCommand.SendKeys, { keys: '{win}' });
+            }
+          }}
+          onContextMenu={(e) => e.stopPropagation()}
+        >
+          <BackgroundByLayersV2 prefix="item" />
+          <div className="weg-item-icon">
+            <div className="weg-item-icon-start" />
+          </div>
         </div>
-      </DraggableItem>
-    </WithContextMenu>
+      </WithContextMenu>
+    </DraggableItem>
   );
 });

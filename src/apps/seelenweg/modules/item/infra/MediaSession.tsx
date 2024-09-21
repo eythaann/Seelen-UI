@@ -55,57 +55,57 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
   };
 
   return (
-    <WithContextMenu items={getMenuForItem(t, item)}>
-      <DraggableItem
-        value={item}
-        className="media-session-container"
-        onContextMenu={(e) => e.stopPropagation()}
-      >
-        <div
-          className="media-session"
-          style={{
-            backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
-          }}
-        >
-          <div className="media-session-thumbnail-container">
-            {session?.owner && (
-              <img
-                className="media-session-app-icon"
-                src={convertFileSrc(
-                  session.owner.iconPath ? session.owner.iconPath : LAZY_CONSTANTS.MISSING_ICON_PATH,
-                )}
-                draggable={false}
-              />
-            )}
-            <img className="media-session-thumbnail" src={src} draggable={false} />
-          </div>
-          <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
-
-          <div className="media-session-info">
-            <span className="media-session-title" style={{ color }}>
-              {session?.title || 'No Media'}
-            </span>
-            <div className="media-session-actions">
-              <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
-                <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color, size: 12 }} />
-              </Button>
-              <Button
-                type="text"
-                size="small"
-                onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
-              >
-                <Icon
-                  iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
-                  propsIcon={{ color, size: 12 }}
+    <DraggableItem item={item}>
+      <WithContextMenu items={getMenuForItem(t, item)}>
+        <div className="media-session-container" onContextMenu={(e) => e.stopPropagation()}>
+          <div
+            className="media-session"
+            style={{
+              backgroundColor: `rgb(${filteredLuminance}, ${filteredLuminance}, ${filteredLuminance})`,
+            }}
+          >
+            <div className="media-session-thumbnail-container">
+              {session?.owner && (
+                <img
+                  className="media-session-app-icon"
+                  src={convertFileSrc(
+                    session.owner.iconPath
+                      ? session.owner.iconPath
+                      : LAZY_CONSTANTS.MISSING_ICON_PATH,
+                  )}
+                  draggable={false}
                 />
-              </Button>
-              <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
-                <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color, size: 12 }} />
-              </Button>
+              )}
+              <img className="media-session-thumbnail" src={src} draggable={false} />
+            </div>
+            <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
+
+            <div className="media-session-info">
+              <span className="media-session-title" style={{ color }}>
+                {session?.title || 'No Media'}
+              </span>
+              <div className="media-session-actions">
+                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
+                  <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color, size: 12 }} />
+                </Button>
+                <Button
+                  type="text"
+                  size="small"
+                  onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
+                >
+                  <Icon
+                    iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
+                    propsIcon={{ color, size: 12 }}
+                  />
+                </Button>
+                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
+                  <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color, size: 12 }} />
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </DraggableItem>
-    </WithContextMenu>
+      </WithContextMenu>
+    </DraggableItem>
   );
 }
