@@ -34,7 +34,53 @@
   }
 }
 
+/* This will act like a hitbox for items */
+.weg-item::before {
+  content: "";
+  position: absolute;
+  /* border: solid 1px red; */
+}
+
+.vertical .weg-item::before {
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% + var(--config-padding) + var(--config-margin));
+  height: calc(100% + var(--config-space-between-items));
+}
+
+.horizontal .weg-item::before {
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + var(--config-space-between-items));
+  height: calc(100% + var(--config-padding) + var(--config-margin));
+}
+
+.bottom .weg-item::before {
+  top: 0;
+}
+
+.top .weg-item::before {
+  bottom: 0;
+}
+
+.left .weg-item::before {
+  right: 0;
+}
+
+.right .weg-item::before {
+  left: 0;
+}
+
 .weg-item {
+  --item-size-diff: calc(var(--config-item-zoom-size) - var(--config-item-size));
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: var(--config-item-size);
+  height: var(--config-item-size);
+  transition: width, height, 100ms cubic-bezier(0.25, 1, 0.5, 1);
+
   .item-bg-layer-1 {
     background-color: var(--color-gray-100);
     border-radius: 25%;
@@ -42,20 +88,39 @@
     transition: background-color 0.2s ease-in-out;
   }
 
-  &:hover {
-    .item-bg-layer-1 {
-      background-color: var(--color-gray-400);
-    }
-  }
-
   &:active {
     filter: brightness(0.4);
   }
 
-  &:not(:active) {
-    transition-property: filter;
-    transition-duration: 0.2s;
-    transition-timing-function: ease-in-out;
+  /*   &:not(:active) {
+      transition-property: filter;
+      transition-duration: 0.2s;
+      transition-timing-function: ease-in-out;
+    }
+   */
+  &:has(+ .weg-item + .weg-item:hover) {
+    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+  }
+
+  &:has(+ .weg-item:hover) {
+    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+  }
+
+  &:hover {
+    width: var(--config-item-zoom-size);
+    height: var(--config-item-zoom-size);
+
+    + .weg-item {
+      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+
+      + .weg-item {
+        width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+        height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+      }
+    }
   }
 }
 

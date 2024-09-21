@@ -1,5 +1,4 @@
 import { invoke } from '@tauri-apps/api/core';
-import { motion } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -24,8 +23,6 @@ const startMenuExes = ['SearchHost.exe', 'StartMenuExperienceHost.exe'];
 export const StartMenu = memo(({ item }: Props) => {
   const startMenuOpenRef = useRef(false);
 
-  const size = useSelector(Selectors.settings.size);
-
   const isStartMenuOpen = useSelector((state: RootState) =>
     startMenuExes.includes(Selectors.focusedApp(state)?.exe || ''),
   );
@@ -43,26 +40,22 @@ export const StartMenu = memo(({ item }: Props) => {
   }, [isStartMenuOpen]);
 
   return (
-    <DraggableItem item={item}>
-      <WithContextMenu items={getMenuForItem(t, item)}>
-        <motion.div
-          className="weg-item"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          style={{ height: size, aspectRatio: '1/1' }}
-          onClick={() => {
-            if (!startMenuOpenRef.current) {
-              invoke(SeelenCommand.SendKeys, { keys: '{win}' });
-            }
-          }}
-          onContextMenu={(e) => e.stopPropagation()}
-        >
-          <BackgroundByLayersV2 prefix="item" />
-          <div className="weg-item-icon">
-            <div className="weg-item-icon-start" />
-          </div>
-        </motion.div>
-      </WithContextMenu>
-    </DraggableItem>
+    <WithContextMenu items={getMenuForItem(t, item)}>
+      <DraggableItem
+        value={item}
+        className="weg-item"
+        onClick={() => {
+          if (!startMenuOpenRef.current) {
+            invoke(SeelenCommand.SendKeys, { keys: '{win}' });
+          }
+        }}
+        onContextMenu={(e) => e.stopPropagation()}
+      >
+        <BackgroundByLayersV2 prefix="item" />
+        <div className="weg-item-icon">
+          <div className="weg-item-icon-start" />
+        </div>
+      </DraggableItem>
+    </WithContextMenu>
   );
 });
