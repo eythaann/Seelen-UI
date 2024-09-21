@@ -99,10 +99,8 @@ use windows::{
 
 use crate::{
     error_handler::{AppError, Result},
-    hook::HOOK_MANAGER,
-    log_error,
+    hook::HookManager,
     modules::input::Mouse,
-    trace_lock,
     utils::{is_virtual_desktop_supported, is_windows_11},
     winevent::WinEvent,
 };
@@ -338,26 +336,22 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn force_set_foreground(hwnd: HWND) -> Result<()> {
-        {
-            let mut hook_manager = trace_lock!(HOOK_MANAGER);
-            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
-            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
-        }
-
-        Self::set_minimize_animation(false)?;
-        Self::show_window(hwnd, SW_MINIMIZE)?;
-        Self::show_window(hwnd, SW_RESTORE)?;
-        Self::set_minimize_animation(true)?;
-
-        Self::bring_to(hwnd, HWND_TOP)?;
-        Self::set_foreground(hwnd)?;
-        Ok(())
-    }
-
     pub fn async_force_set_foreground(hwnd: HWND) {
         let hwnd = hwnd.0 as isize;
-        std::thread::spawn(move || log_error!(Self::force_set_foreground(HWND(hwnd as _))));
+        HookManager::run_with_async(move |hook_manager| {
+            let hwnd = HWND(hwnd as _);
+
+            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
+            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
+
+            Self::set_minimize_animation(false)?;
+            Self::show_window(hwnd, SW_MINIMIZE)?;
+            Self::show_window(hwnd, SW_RESTORE)?;
+            Self::set_minimize_animation(true)?;
+
+            Self::bring_to(hwnd, HWND_TOP)?;
+            Self::set_foreground(hwnd)
+        });
     }
 
     fn open_process(

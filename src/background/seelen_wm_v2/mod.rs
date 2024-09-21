@@ -91,7 +91,9 @@ impl WindowManagerV2 {
                 }
             }
             if let Some(index) = config.bound_workspace {
-                vd_manager.send_to(index, window.address())?;
+                let addr = window.address();
+                vd_manager.send_to(index, addr)?;
+                std::thread::sleep(std::time::Duration::from_millis(20));
                 vd_manager.switch_to(index)?;
                 if let Some(workspace) = vd_manager.get(index)? {
                     workspace_id = workspace.id();

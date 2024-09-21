@@ -5,11 +5,11 @@ use windows::Win32::{
     },
 };
 
-use crate::windows_api::WindowsApi;
+use crate::{error_handler::Result, windows_api::WindowsApi};
 use seelen_core::rect::Rect;
 
 #[tauri::command(async)]
-pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
+pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
     let hwnd = HWND(hwnd as _);
 
     if !WindowsApi::is_window(hwnd) || WindowsApi::is_iconic(hwnd) {
@@ -33,7 +33,7 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<(), String> {
 }
 
 #[tauri::command(async)]
-pub fn request_focus(hwnd: isize) -> Result<(), String> {
+pub fn request_focus(hwnd: isize) -> Result<()> {
     let hwnd = HWND(hwnd as _);
     log::trace!(
         "Requesting focus on {:?} - {} , {:?}",
@@ -46,6 +46,6 @@ pub fn request_focus(hwnd: isize) -> Result<(), String> {
         return Ok(());
     }
 
-    WindowsApi::force_set_foreground(hwnd)?;
+    WindowsApi::async_force_set_foreground(hwnd);
     Ok(())
 }

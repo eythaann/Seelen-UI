@@ -5,6 +5,7 @@ use std::{
         atomic::{AtomicBool, AtomicIsize, Ordering},
         Arc,
     },
+    thread::JoinHandle,
     time::{Duration, Instant},
 };
 
@@ -43,8 +44,8 @@ use crate::{
 };
 
 lazy_static! {
-    pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
-    // Last active window omitting all the seelen apps
+    static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
+    // Last active window omitting all the seelen overlays
     pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0 as _);
 }
 
@@ -63,24 +64,33 @@ pub struct FocusedApp {
 }
 
 impl HookManager {
-    pub fn new() -> Self {
+    fn new() -> Self {
         Self {
             skip: HashMap::new(),
         }
+    }
+
+    pub fn run_with_async<F, T>(f: F) -> JoinHandle<T>
+    where
+        F: FnOnce(&mut HookManager) -> T,
+        F: Send + 'static,
+        T: Send + 'static,
+    {
+        std::thread::spawn(move || f(&mut *trace_lock!(HOOK_MANAGER)))
     }
 
     pub fn skip(&mut self, event: WinEvent, hwnd: HWND) {
         self.skip.entry(hwnd.0 as _).or_default().push(event)
     }
 
-    pub fn should_skip(&self, event: WinEvent, hwnd: HWND) -> bool {
+    fn should_skip(&self, event: WinEvent, hwnd: HWND) -> bool {
         if let Some(v) = self.skip.get(&(hwnd.0 as _)) {
             return v.contains(&event);
         }
         false
     }
 
-    pub fn skip_done(&mut self, event: WinEvent, hwnd: HWND) {
+    fn skip_done(&mut self, event: WinEvent, hwnd: HWND) {
         if WIN_EVENTS_ENABLED.load(Ordering::Relaxed) {
             log::debug!("Skipping WinEvent::{:?}", event);
         }
@@ -111,7 +121,7 @@ impl HookManager {
         );
     }
 
-    pub fn event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
+    fn event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
         Self::log_event(event, origin);
 
         if self.should_skip(event, origin) {
