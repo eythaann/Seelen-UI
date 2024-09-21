@@ -11,8 +11,8 @@ import { App } from './App';
 import { registerDocumentEvents } from './events';
 import i18n, { loadTranslations } from './i18n';
 
-import './styles/reset.css';
-import './styles/colors.css';
+import '../shared/styles/reset.css';
+import '../shared/styles/colors.css';
 
 async function Main() {
   wrapConsole();

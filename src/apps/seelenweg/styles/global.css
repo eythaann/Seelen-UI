@@ -110,9 +110,6 @@ body {
 
   .weg-item {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
     .weg-item-open-sign {
       position: absolute;

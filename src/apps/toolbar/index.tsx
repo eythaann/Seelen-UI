@@ -12,9 +12,9 @@ import { getRootContainer } from '../shared';
 import { wrapConsole } from '../shared/ConsoleWrapper';
 import i18n, { loadTranslations } from './i18n';
 
-import './styles/colors.css';
+import '../shared/styles/colors.css';
 import './styles/variables.css';
-import './styles/reset.css';
+import '../shared/styles/reset.css';
 import './styles/global.css';
 
 async function Main() {

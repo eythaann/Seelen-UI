@@ -21,6 +21,7 @@
 - reduce Installer size from 75mb to 40mb.
 - allow drop files, apps and folders into the dock to pin them.
 - now Virtual Desktop shortcuts doesn't require Tiling WM be enabled to work.
+- now Themes are wrapped in a CSS layer, making easier the override theming.
 
 ### fix
 - missing icons for files with a different extension than `exe`.

@@ -76,7 +76,8 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
   element.textContent = '';
 
   for (const theme of themes) {
-    element.textContent += theme.styles[theme_key] + '\n';
+    let layerName = theme.info.filename.replace(/[\.]/g, '-') + '-theme';
+    element.textContent += `@layer ${layerName} {\n${theme.styles[theme_key]}\n}\n`;
   }
 
   document.head.appendChild(element);

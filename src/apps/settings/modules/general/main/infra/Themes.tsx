@@ -27,8 +27,12 @@ export function Themes() {
       dataSource={dataSource}
       titles={[t('general.theme.available'), t('general.theme.selected')]}
       targetKeys={usingThemes}
-      onChange={(selected) => {
-        dispatch(RootActions.setSelectedThemes(selected as string[]));
+      onChange={(selected, direction, movedKeys) => {
+        if (direction === 'right') {
+          dispatch(RootActions.setSelectedThemes([...usingThemes, ...(movedKeys as string[])]));
+        } else {
+          dispatch(RootActions.setSelectedThemes(selected as string[]));
+        }
       }}
       className={cs.transfer}
       showSelectAll={false}

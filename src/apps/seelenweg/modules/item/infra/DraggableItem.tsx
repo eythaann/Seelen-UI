@@ -1,20 +1,17 @@
 import { Reorder } from 'framer-motion';
-import { PropsWithChildren, useRef } from 'react';
+import { useRef } from 'react';
 
-import { SwItem } from '../../shared/store/domain';
+type _props = Parameters<typeof Reorder.Item>[0];
 
-interface Props extends PropsWithChildren {
-  item: SwItem;
-}
+interface Props extends _props {}
 
-export function DraggableItem({ children, item }: Props) {
+export function DraggableItem({ children, ...rest }: Props) {
   const isDragging = useRef(false);
 
   return (
     <Reorder.Item
+      {...rest}
       as="div"
-      value={item}
-      className="weg-item-drag-container"
       onDragStart={() => {
         isDragging.current = true;
       }}

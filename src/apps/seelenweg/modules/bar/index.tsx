@@ -2,7 +2,14 @@ import { Reorder } from 'framer-motion';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode, SeelenWegMode, SeelenWegSide, SeparatorWegItem, SwItemType, useWindowFocusChange } from 'seelen-core';
+import {
+  HideMode,
+  SeelenWegMode,
+  SeelenWegSide,
+  SeparatorWegItem,
+  SwItemType,
+  useWindowFocusChange,
+} from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { FileOrFolder } from '../item/infra/File';
@@ -18,8 +25,6 @@ import { cx } from '../../../shared/styles';
 import { WithContextMenu } from '../../components/WithContextMenu';
 import { savePinnedItems } from '../shared/store/storeApi';
 import { getSeelenWegMenu } from './menu';
-
-import './index.css';
 
 const Separator1: SeparatorWegItem = {
   id: '1',
@@ -173,11 +178,11 @@ function ItemByType(item: SwItem) {
   }
 
   if (item.type === SwItemType.Media) {
-    return <MediaSession key={'media-item'} item={item} />;
+    return <MediaSession key="media-item" item={item} />;
   }
 
   if (item.type === SwItemType.Start) {
-    return <StartMenu key={'start-menu'} item={item} />;
+    return <StartMenu key="start-menu" item={item} />;
   }
 
   return null;
