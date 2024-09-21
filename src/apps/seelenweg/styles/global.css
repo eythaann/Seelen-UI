@@ -72,6 +72,10 @@ body {
     }
   }
 
+  &:has(.weg-item-drag-container.dragging) {
+    pointer-events: none;
+  }
+
   .weg-separator {
     z-index: 1 !important; /* Override inline style */
 
@@ -104,50 +108,6 @@ body {
 
       &:last-child {
         margin-right: calc(var(--config-space-between-items) * -1);
-      }
-    }
-  }
-
-  .weg-item {
-    position: relative;
-
-    .weg-item-open-sign {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background-color: var(--color-gray-600);
-      opacity: 0;
-
-      &.weg-item-open-sign-active {
-        opacity: 1;
-      }
-
-      &.weg-item-open-sign-focused {
-        background-color: var(--config-accent-color);
-      }
-
-      .vertical & {
-        transform: translateX(-50%);
-      }
-
-      .horizontal & {
-        transform: translateY(-50%);
-      }
-
-      .top & {
-        bottom: calc(100% + var(--config-padding) / 2);
-      }
-
-      .bottom & {
-        top: calc(100% + var(--config-padding) / 2);
-      }
-
-      .left & {
-        right: calc(100% + var(--config-padding) / 2);
-      }
-
-      .right & {
-        left: calc(100% + var(--config-padding) / 2);
       }
     }
   }

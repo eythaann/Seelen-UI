@@ -32,22 +32,23 @@ export const FileOrFolder = memo(({ item }: Props) => {
   }, [item]);
 
   return (
-    <WithContextMenu items={getMenuForItem(t, item)}>
-      <DraggableItem
-        value={item}
-        className="weg-item"
-        onClick={() => {
-          invoke(SeelenCommand.OpenFile, { path: item.path });
-        }}
-        onContextMenu={(e) => e.stopPropagation()}
-      >
-        <BackgroundByLayersV2 prefix="item" />
-        {iconSrc.endsWith('.svg') ? (
-          <InlineSVG className="weg-item-icon" src={iconSrc} />
-        ) : (
-          <img className="weg-item-icon" src={iconSrc} draggable={false} />
-        )}
-      </DraggableItem>
-    </WithContextMenu>
+    <DraggableItem item={item}>
+      <WithContextMenu items={getMenuForItem(t, item)}>
+        <div
+          className="weg-item"
+          onClick={() => {
+            invoke(SeelenCommand.OpenFile, { path: item.path });
+          }}
+          onContextMenu={(e) => e.stopPropagation()}
+        >
+          <BackgroundByLayersV2 prefix="item" />
+          {iconSrc.endsWith('.svg') ? (
+            <InlineSVG className="weg-item-icon" src={iconSrc} />
+          ) : (
+            <img className="weg-item-icon" src={iconSrc} draggable={false} />
+          )}
+        </div>
+      </WithContextMenu>
+    </DraggableItem>
   );
 });

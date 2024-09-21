@@ -71,9 +71,39 @@
   left: 0;
 }
 
-.weg-item {
+.weg-item-drag-container:not(.dragging) {
   --item-size-diff: calc(var(--config-item-zoom-size) - var(--config-item-size));
 
+  &:has(+ .weg-item-drag-container + .weg-item-drag-container:hover) .weg-item {
+    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+  }
+
+  &:has(+ .weg-item-drag-container:hover) .weg-item {
+    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+  }
+
+  &:hover {
+    .weg-item {
+      width: var(--config-item-zoom-size);
+      height: var(--config-item-zoom-size);
+    }
+
+    + .weg-item-drag-container > .weg-item {
+      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+    }
+
+    + .weg-item-drag-container + .weg-item-drag-container .weg-item {
+      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+    }
+  }
+}
+
+.weg-item {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,45 +111,31 @@
   height: var(--config-item-size);
   transition: width, height, 100ms cubic-bezier(0.25, 1, 0.5, 1);
 
-  .item-bg-layer-1 {
+  .bg-layer-1 {
     background-color: var(--color-gray-100);
     border-radius: 25%;
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
-    transition: background-color 0.2s ease-in-out;
   }
 
   &:active {
-    filter: brightness(0.4);
-  }
-
-  /*   &:not(:active) {
-      transition-property: filter;
-      transition-duration: 0.2s;
-      transition-timing-function: ease-in-out;
+    .bg-layer-1 {
+      filter: brightness(0.8);
     }
-   */
-  &:has(+ .weg-item + .weg-item:hover) {
-    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+
+    .weg-item-icon,
+    .weg-item-icon-start {
+      transform: scale(0.8);
+    }
   }
 
-  &:has(+ .weg-item:hover) {
-    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-  }
+  &:not(:active) {
+    .bg-layer-1 {
+      transition: filter 0.2s linear;
+    }
 
-  &:hover {
-    width: var(--config-item-zoom-size);
-    height: var(--config-item-zoom-size);
-
-    + .weg-item {
-      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-
-      + .weg-item {
-        width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-        height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-      }
+    .weg-item-icon,
+    .weg-item-icon-start {
+      transition: transform 0.2s linear;
     }
   }
 }
@@ -144,16 +160,47 @@
 }
 
 .weg-item-open-sign {
-  transition-property: width, height, opacity, background-color, border-radius;
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 6px;
+  background-color: var(--color-gray-600);
+  opacity: 0;
+  transition-property: width, height, transform, opacity, background-color, border-radius;
   transition-duration: 0.2s;
   transition-timing-function: linear;
-  border-radius: 4px;
+
+  .vertical & {
+    transform: translateX(-50%);
+  }
+
+  .horizontal & {
+    transform: translateY(-50%);
+  }
+
+  .top & {
+    bottom: calc(100% + var(--config-padding) / 2);
+  }
+
+  .bottom & {
+    top: calc(100% + var(--config-padding) / 2);
+  }
+
+  .left & {
+    right: calc(100% + var(--config-padding) / 2);
+  }
+
+  .right & {
+    left: calc(100% + var(--config-padding) / 2);
+  }
 
   &.weg-item-open-sign-active {
-    --empty-rule: "delete me on use";
+    opacity: 1;
   }
 
   &.weg-item-open-sign-focused {
+    background-color: var(--config-accent-color);
+
     .vertical & {
       height: 50%;
     }

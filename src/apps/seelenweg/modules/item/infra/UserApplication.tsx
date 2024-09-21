@@ -52,45 +52,46 @@ export const UserApplication = memo(({ item }: Props) => {
   }, [item]);
 
   return (
-    <WithContextMenu items={getMenuForItem(t, item) || []}>
-      <Popover
-        open={openPreview}
-        mouseEnterDelay={0.4}
-        placement="top"
-        onOpenChange={(open) => setOpenPreview(open && !!item.opens.length)}
-        trigger="hover"
-        arrow={false}
-        content={
-          <BackgroundByLayersV2
-            className="weg-item-preview-container"
-            onMouseMoveCapture={(e) => e.stopPropagation()}
-            prefix="preview"
-          >
-            {item.opens.map((hwnd) => (
-              <UserApplicationPreview key={hwnd} hwnd={hwnd} />
-            ))}
-          </BackgroundByLayersV2>
-        }
-      >
-        <DraggableItem
-          value={item}
-          className="weg-item"
-          onClick={() => {
-            let hwnd = item.opens[0] || 0;
-            invoke(SeelenCommand.WegToggleWindowState, { hwnd, exePath: item.execution_path });
-          }}
-          onContextMenu={(e) => e.stopPropagation()}
+    <DraggableItem item={item}>
+      <WithContextMenu items={getMenuForItem(t, item) || []}>
+        <Popover
+          open={openPreview}
+          mouseEnterDelay={0.4}
+          placement="top"
+          onOpenChange={(open) => setOpenPreview(open && !!item.opens.length)}
+          trigger="hover"
+          arrow={false}
+          content={
+            <BackgroundByLayersV2
+              className="weg-item-preview-container"
+              onMouseMoveCapture={(e) => e.stopPropagation()}
+              prefix="preview"
+            >
+              {item.opens.map((hwnd) => (
+                <UserApplicationPreview key={hwnd} hwnd={hwnd} />
+              ))}
+            </BackgroundByLayersV2>
+          }
         >
-          <BackgroundByLayersV2 prefix="item" />
-          <img className="weg-item-icon" src={item.icon} draggable={false} />
           <div
-            className={cx('weg-item-open-sign', {
-              'weg-item-open-sign-active': !!item.opens.length,
-              'weg-item-open-sign-focused': isFocused,
-            })}
-          />
-        </DraggableItem>
-      </Popover>
-    </WithContextMenu>
+            className="weg-item"
+            onClick={() => {
+              let hwnd = item.opens[0] || 0;
+              invoke(SeelenCommand.WegToggleWindowState, { hwnd, exePath: item.execution_path });
+            }}
+            onContextMenu={(e) => e.stopPropagation()}
+          >
+            <BackgroundByLayersV2 prefix="item" />
+            <img className="weg-item-icon" src={item.icon} draggable={false} />
+            <div
+              className={cx('weg-item-open-sign', {
+                'weg-item-open-sign-active': !!item.opens.length,
+                'weg-item-open-sign-focused': isFocused,
+              })}
+            />
+          </div>
+        </Popover>
+      </WithContextMenu>
+    </DraggableItem>
   );
 });
