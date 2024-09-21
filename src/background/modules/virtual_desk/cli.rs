@@ -49,6 +49,7 @@ impl VirtualDesktopManager {
             }
             SubCommand::MoveToWorkspace(index) => {
                 self.send_to(index, WindowsApi::get_foreground_window().0 as isize)?;
+                std::thread::sleep(std::time::Duration::from_millis(20));
                 self.switch_to(index)?;
             }
             _ => log::warn!("Unimplemented command: {:?}", subcommand),

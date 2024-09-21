@@ -117,21 +117,20 @@ macro_rules! trace_lock {
     };
     ($mutex:expr, $duration:expr) => {{
         let guard = $mutex.try_lock_for(std::time::Duration::from_secs($duration));
-        if $crate::utils::TRACE_LOCK_ENABLED.load(std::sync::atomic::Ordering::Relaxed) {
-            let guard_name = stringify!($mutex);
-            if guard.is_none() {
-                let map = $crate::utils::LAST_SUCCESSFUL_LOCK.lock();
-                log::info!(
-                    "Error: Last successful lock for mutex {} was at: {:?}",
-                    guard_name,
-                    map.get(guard_name)
-                );
-            } else {
-                let mut map = $crate::utils::LAST_SUCCESSFUL_LOCK.lock();
-                let location = format!("{}:{}", file!(), line!());
-                log::trace!("{} lock acquired at {}", guard_name, location);
-                map.insert(guard_name.to_owned(), location);
+        let guard_name = stringify!($mutex);
+        if guard.is_none() {
+            let mut panic_msg = format!("{} mutex is deadlocked", guard_name);
+            if let Some(path) = $crate::utils::LAST_SUCCESSFUL_LOCK.lock().get(guard_name) {
+                panic_msg = format!("{}, last successful aquire was at {}", panic_msg, path);
             }
+            panic!("{}", panic_msg);
+        }
+
+        if $crate::utils::TRACE_LOCK_ENABLED.load(std::sync::atomic::Ordering::Relaxed) {
+            let mut map = $crate::utils::LAST_SUCCESSFUL_LOCK.lock();
+            let location = format!("{}:{}", file!(), line!());
+            log::trace!("{} lock acquired at {}", guard_name, location);
+            map.insert(guard_name.to_owned(), location);
         }
 
         guard.expect("Mutex deadlocked")
