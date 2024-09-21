@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.0-beta.5]
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
 - reimplementation of Tiling Window Manager.
