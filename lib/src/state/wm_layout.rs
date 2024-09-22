@@ -80,6 +80,26 @@ impl WmNode {
     fn default_grow_factor() -> f64 {
         1f64
     }
+
+    pub fn priority(&self) -> u32 {
+        match self {
+            WmNode::Vertical(n) => n.priority,
+            WmNode::Horizontal(n) => n.priority,
+            WmNode::Leaf(n) => n.priority,
+            WmNode::Stack(n) => n.priority,
+            WmNode::Fallback(n) => n.priority,
+        }
+    }
+
+    pub fn condition(&self) -> Option<&String> {
+        match self {
+            WmNode::Vertical(n) => n.condition.as_ref(),
+            WmNode::Horizontal(n) => n.condition.as_ref(),
+            WmNode::Leaf(n) => n.condition.as_ref(),
+            WmNode::Stack(n) => n.condition.as_ref(),
+            WmNode::Fallback(n) => n.condition.as_ref(),
+        }
+    }
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
