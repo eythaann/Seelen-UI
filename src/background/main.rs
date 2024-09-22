@@ -12,7 +12,6 @@ mod seelen_bar;
 mod seelen_rofi;
 mod seelen_wall;
 mod seelen_weg;
-mod seelen_wm;
 mod seelen_wm_v2;
 mod state;
 mod system;

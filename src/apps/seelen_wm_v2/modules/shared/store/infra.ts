@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { listen } from '@tauri-apps/api/event';
+import { getCurrentWebview } from '@tauri-apps/api/webview';
 import { SeelenEvent, Settings, UIColors, WmNode } from 'seelen-core';
 
 import { Actions, RootSlice } from './app';
@@ -42,12 +43,13 @@ async function loadUIColors() {
 }
 
 export async function loadStore() {
+  const view = getCurrentWebview();
   await loadUIColors();
 
   setSettings(await Settings.getAsync());
   await Settings.onChange(setSettings);
 
-  await listen<WmNode | null>(SeelenEvent.WMSetLayout, (e) => {
+  await view.listen<WmNode | null>(SeelenEvent.WMSetLayout, (e) => {
     store.dispatch(Actions.setLayout(e.payload));
   });
 

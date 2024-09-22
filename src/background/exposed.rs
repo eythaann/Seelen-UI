@@ -13,7 +13,7 @@ use crate::seelen::{get_app_handle, Seelen};
 use crate::seelen_rofi::handler::*;
 use crate::seelen_weg::handler::*;
 use crate::seelen_weg::icon_extractor::extract_and_save_icon;
-use crate::seelen_wm::handler::*;
+use crate::seelen_wm_v2::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
 use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
