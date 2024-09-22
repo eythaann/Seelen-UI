@@ -148,10 +148,19 @@ impl WindowManagerV2 {
         Ok(())
     }
 
+    pub fn clear_state() {
+        trace_lock!(WM_STATE).monitors.clear();
+    }
+
+    pub fn init_state() -> Result<()> {
+        trace_lock!(WM_STATE).init()
+    }
+
     pub fn enumerate_all_windows() -> Result<()> {
         WindowEnumerator::new().for_each(|hwnd| {
-            if Self::should_be_managed(hwnd) {
-                log_error!(Self::add(&Window::from(hwnd)));
+            let window = Window::from(hwnd);
+            if !Self::is_managed(&window) && Self::should_be_managed(hwnd) {
+                log_error!(Self::add(&window));
             }
         })
     }
