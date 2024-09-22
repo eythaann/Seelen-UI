@@ -17,16 +17,20 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
     }
 
     WindowsApi::unmaximize_window(hwnd)?;
+
     let shadow = WindowsApi::shadow_rect(hwnd)?;
+    let rect = RECT {
+        top: rect.top + shadow.top,
+        left: rect.left + shadow.left,
+        right: rect.right + shadow.right,
+        bottom: rect.bottom + shadow.bottom,
+    };
+
+    WindowsApi::move_window(hwnd, &rect)?;
     WindowsApi::set_position(
         hwnd,
         None,
-        &RECT {
-            top: rect.top + shadow.top,
-            left: rect.left + shadow.left,
-            right: rect.right + shadow.right,
-            bottom: rect.bottom + shadow.bottom,
-        },
+        &rect,
         SWP_NOACTIVATE | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS | SWP_NOSENDCHANGING,
     )?;
     Ok(())

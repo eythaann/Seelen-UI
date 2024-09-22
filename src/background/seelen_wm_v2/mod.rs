@@ -1,3 +1,4 @@
+pub mod handler;
 pub mod hook;
 pub mod instance;
 pub mod node_impl;
