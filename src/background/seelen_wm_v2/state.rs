@@ -151,7 +151,11 @@ impl WMV2StateWorkspace {
 
     pub fn remove_window(&mut self, window: &Window) {
         if let Some(node) = self.get_root_node_mut() {
-            node.remove_window(window);
+            let residual = node.remove_window(window);
+            if !residual.is_empty() {
+                log::warn!("Current Layout is full, and fallback container was not found");
+                // TODO
+            }
         }
     }
 
