@@ -1,4 +1,4 @@
-use std::{path::PathBuf, sync::atomic::Ordering};
+use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
 
 use image::ImageFormat;
 use seelen_core::state::WegItem;
@@ -83,10 +83,14 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn weg_pin_item(path: PathBuf) -> Result<()> {
+pub fn weg_pin_item(mut path: PathBuf) -> Result<()> {
     let mut state = FULL_STATE.load().cloned();
 
-    let item = if path.ends_with(".exe") {
+    if path.extension() == Some(OsStr::new("lnk")) {
+        path = WindowsApi::resolve_lnk_target(&path)?;
+    }
+
+    let item = if path.extension() == Some(OsStr::new("exe")) {
         let mut execution_path = None;
         if let Some(package) = trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
             if let Some(app) = path.file_name() {

@@ -5,7 +5,6 @@ export interface StartMenuApp {
   label: string;
   icon: string;
   path: string;
-  executionPath: string;
 }
 
 export interface LauncherState extends IRootState<SeelenLauncherSettings> {

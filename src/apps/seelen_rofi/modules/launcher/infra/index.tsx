@@ -107,7 +107,7 @@ export function Launcher() {
         <div className="launcher-body">
           {apps.map((item) => (
             <Item
-              key={item.executionPath}
+              key={item.path}
               item={item}
               hidden={!item.label.toLowerCase().includes(command)}
             />

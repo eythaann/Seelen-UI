@@ -19,7 +19,6 @@ pub struct SeelenRofiApp {
     pub label: String,
     pub icon: PathBuf,
     pub path: PathBuf,
-    pub execution_path: String,
 }
 
 pub struct SeelenRofi {
@@ -65,7 +64,6 @@ impl SeelenRofi {
                 apps.push(SeelenRofiApp {
                     label: path.file_stem().unwrap().to_string_lossy().to_string(),
                     icon: extract_and_save_icon_v2(&path).unwrap_or_else(|_| Icons::missing_app()),
-                    execution_path: path.to_string_lossy().to_string(),
                     path,
                 })
             }

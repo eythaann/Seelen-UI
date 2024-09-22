@@ -10,16 +10,16 @@ import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
 import { StartMenuApp } from '../../shared/store/domain';
 
 export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolean }) => {
-  const { label, icon, executionPath, path } = item;
+  const { label, icon, path } = item;
 
   const { t } = useTranslation();
 
   function onClick() {
-    invoke(SeelenCommand.OpenFile, { path: executionPath });
+    invoke(SeelenCommand.OpenFile, { path });
     getCurrentWindow().hide();
   }
 
-  const shortPath = executionPath.slice(executionPath.indexOf('\\Programs\\') + 10);
+  const shortPath = path.slice(path.indexOf('\\Programs\\') + 10);
 
   return (
     <Dropdown
