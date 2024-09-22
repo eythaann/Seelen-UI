@@ -56,30 +56,33 @@ impl WmNodeImpl {
         Ok(())
     }
 
-    fn _remove_window(node: &mut WmNode, window: &Window) {
-        match node {
+    /// will drain the node and return a list of window handles
+    fn _drain(root: &mut WmNode) -> Vec<isize> {
+        let mut handles = Vec::new();
+        match root {
             WmNode::Leaf(leaf) => {
-                if leaf.handle == Some(window.address()) {
-                    leaf.handle = None;
+                if let Some(handle) = leaf.handle.take() {
+                    handles.push(handle);
                 }
             }
             WmNode::Stack(stack) => {
-                stack.handles.retain(|&x| x != window.address());
+                handles.append(&mut stack.handles);
             }
             WmNode::Fallback(fallback) => {
-                fallback.handles.retain(|&x| x != window.address());
+                handles.append(&mut fallback.handles);
             }
             WmNode::Vertical(vertical) => {
                 for child in vertical.children.iter_mut() {
-                    Self::_remove_window(child, window);
+                    handles.append(&mut Self::_drain(child));
                 }
             }
             WmNode::Horizontal(horizontal) => {
                 for child in horizontal.children.iter_mut() {
-                    Self::_remove_window(child, window);
+                    handles.append(&mut Self::_drain(child));
                 }
             }
         }
+        handles
     }
 
     fn _contains(node: &WmNode, window: &Window) -> bool {
@@ -111,8 +114,17 @@ impl WmNodeImpl {
         Self::_try_add_window(self.inner_mut(), window)
     }
 
-    pub fn remove_window(&mut self, window: &Window) {
-        Self::_remove_window(self.inner_mut(), window);
+    /// will make a reindexing after removing the window, if the reindexing fails,
+    /// will return the window handles that was not reindexed
+    pub fn remove_window(&mut self, window: &Window) -> Vec<isize> {
+        let handles = Self::_drain(self.inner_mut());
+        let mut residual = Vec::new();
+        for handle in handles {
+            if handle != window.address() && self.try_add_window(&Window::from(handle)).is_err() {
+                residual.push(handle);
+            }
+        }
+        residual
     }
 
     pub fn contains(&self, window: &Window) -> bool {
