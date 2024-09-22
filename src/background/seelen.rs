@@ -111,6 +111,14 @@ impl Seelen {
             false => SeelenWeg::restore_taskbar()?,
         }
 
+        match state.is_window_manager_enabled() {
+            true => {
+                WindowManagerV2::init_state()?;
+                WindowManagerV2::enumerate_all_windows()?;
+            }
+            false => WindowManagerV2::clear_state(),
+        }
+
         match state.is_rofi_enabled() {
             true => self.init_rofi(),
             false => self.remove_rofi(),

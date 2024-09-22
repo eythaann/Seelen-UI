@@ -17,9 +17,13 @@ use crate::{
 use super::node_impl::WmNodeImpl;
 
 lazy_static! {
-    pub static ref WM_STATE: Arc<Mutex<WMV2State>> = Arc::new(Mutex::new(
-        WMV2State::init().expect("Failed to initialize Window Manager State")
-    ));
+    pub static ref WM_STATE: Arc<Mutex<WMV2State>> = Arc::new(Mutex::new({
+        let mut state = WMV2State::default();
+        state
+            .init()
+            .expect("Failed to initialize Window Manager State");
+        state
+    }));
 }
 
 #[derive(Debug)]
@@ -41,23 +45,30 @@ pub struct WMV2State {
 }
 
 impl WMV2State {
-    fn init() -> Result<Self> {
-        let mut state = WMV2State::default();
-
+    /// will enumarate all monitors and workspaces
+    pub fn init(&mut self) -> Result<()> {
         let workspaces = get_vd_manager().get_all()?;
         for (monitor_idx, hmonitor) in MonitorEnumerator::get_all()?.into_iter().enumerate() {
+            let id = WindowsApi::monitor_name(hmonitor)?;
+            if self.monitors.contains_key(&id) {
+                continue;
+            }
+
             let mut monitor = WMV2StateMonitor::default();
             for (workspace_idx, w) in workspaces.iter().enumerate() {
+                if monitor.workspaces.contains_key(&w.id()) {
+                    continue;
+                }
+
                 monitor
                     .workspaces
                     .insert(w.id(), WMV2StateWorkspace::new(monitor_idx, workspace_idx));
             }
-            let id = WindowsApi::monitor_name(hmonitor)?;
-            monitor.id = id.clone();
-            state.monitors.insert(id, monitor);
-        }
 
-        Ok(state)
+            monitor.id = id.clone();
+            self.monitors.insert(id, monitor);
+        }
+        Ok(())
     }
 
     pub fn get_monitor_mut(&mut self, monitor_id: &str) -> Option<&mut WMV2StateMonitor> {
