@@ -40,6 +40,7 @@ define_app_errors!(
     WideStringNull(widestring::error::MissingNulTerminator);
     Reqwest(tauri_plugin_http::reqwest::Error);
     WinScreenshot(win_screenshot::capture::WSError);
+    EvalExpr(evalexpr::EvalexprError);
 );
 
 impl From<&str> for AppError {

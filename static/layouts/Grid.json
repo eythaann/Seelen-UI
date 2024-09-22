@@ -12,11 +12,12 @@
       {
         "type": "Vertical",
         "priority": 3,
-        "condition": "total >= 5",
+        "condition": "managed >= 4",
         "children": [
           {
             "type": "Leaf",
-            "condition": "total >= 8"
+            "condition": "managed >= 7",
+            "priority": 3
           },
           {
             "type": "Leaf"
@@ -27,19 +28,13 @@
         ]
       },
       {
-        "type": "Leaf",
-        "priority": 1,
-        "condition": "total == 5"
-      },
-      {
         "type": "Vertical",
         "priority": 1,
-        "condition": "total != 5",
         "children": [
           {
             "type": "Leaf",
             "priority": 3,
-            "condition": "total >= 9"
+            "condition": "if(is_reindexing, managed == 9, managed == 8)"
           },
           {
             "type": "Leaf",
@@ -47,7 +42,7 @@
           },
           {
             "type": "Leaf",
-            "condition": "total == 4 or total >= 6",
+            "condition": "if(is_reindexing, managed == 4 || managed >= 6, managed == 3 || managed >= 5)",
             "priority": 2
           }
         ]
@@ -55,11 +50,11 @@
       {
         "type": "Vertical",
         "priority": 2,
-        "condition": "total > 1",
         "children": [
           {
             "type": "Leaf",
-            "condition": "total >= 7"
+            "condition": "if(is_reindexing, managed >= 7, managed >= 6)",
+            "priority": 3
           },
           {
             "type": "Leaf"

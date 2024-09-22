@@ -138,14 +138,12 @@ impl WMV2StateWorkspace {
     }
 
     pub fn add_window(&mut self, window: &Window) {
-        let was_added = match self.get_root_node_mut() {
-            Some(node) => node.try_add_window(window).is_ok(),
-            None => false,
-        };
-
-        if !was_added {
-            log::warn!("Current Layout is full, and fallback container was not found");
-            // TODO
+        if let Some(node) = self.get_root_node_mut() {
+            let residual = node.try_add_window(window);
+            if !residual.is_empty() {
+                log::warn!("Current Layout is full, and fallback container was not found");
+                // TODO
+            }
         }
     }
 

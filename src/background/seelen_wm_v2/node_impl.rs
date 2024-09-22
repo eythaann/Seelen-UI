@@ -1,3 +1,5 @@
+use evalexpr::{context_map, eval_with_context, HashMapContext};
+use itertools::Itertools;
 use seelen_core::state::WmNode;
 
 use crate::{error_handler::Result, windows_api::window::Window};
@@ -18,14 +20,30 @@ impl WmNodeImpl {
         &mut self.0
     }
 
+    fn is_node_enabled(condition: Option<&String>, context: &HashMapContext) -> bool {
+        match condition {
+            None => true,
+            Some(condition) => {
+                let result = eval_with_context(condition, context).and_then(|v| v.as_boolean());
+                result.is_ok_and(|is_enabled| is_enabled)
+            }
+        }
+    }
+
     /// will fail if the node is full
-    fn _try_add_window(node: &mut WmNode, window: &Window) -> Result<()> {
+    fn _try_add_window(node: &mut WmNode, window: &Window, context: &HashMapContext) -> Result<()> {
         let addr = window.address();
+
+        if !Self::is_node_enabled(node.condition(), context) {
+            return Err("DISABLED".into());
+        }
+
         match node {
             WmNode::Leaf(leaf) => {
                 if leaf.handle.is_some() {
                     return Err("FULL".into());
                 }
+
                 leaf.handle = Some(addr);
             }
             WmNode::Stack(_stack) => {
@@ -37,16 +55,24 @@ impl WmNodeImpl {
                 fallback.active = Some(addr);
             }
             WmNode::Vertical(vertical) => {
-                for child in vertical.children.iter_mut() {
-                    if Self::_try_add_window(child, window).is_ok() {
+                for child in vertical
+                    .children
+                    .iter_mut()
+                    .sorted_by(|a, b| a.priority().cmp(&b.priority()))
+                {
+                    if Self::_try_add_window(child, window, context).is_ok() {
                         return Ok(());
                     }
                 }
                 return Err("FULL".into());
             }
             WmNode::Horizontal(horizontal) => {
-                for child in horizontal.children.iter_mut() {
-                    if Self::_try_add_window(child, window).is_ok() {
+                for child in horizontal
+                    .children
+                    .iter_mut()
+                    .sorted_by(|a, b| a.priority().cmp(&b.priority()))
+                {
+                    if Self::_try_add_window(child, window, context).is_ok() {
                         return Ok(());
                     }
                 }
@@ -72,12 +98,20 @@ impl WmNodeImpl {
                 handles.append(&mut fallback.handles);
             }
             WmNode::Vertical(vertical) => {
-                for child in vertical.children.iter_mut() {
+                for child in vertical
+                    .children
+                    .iter_mut()
+                    .sorted_by(|a, b| a.priority().cmp(&b.priority()))
+                {
                     handles.append(&mut Self::_drain(child));
                 }
             }
             WmNode::Horizontal(horizontal) => {
-                for child in horizontal.children.iter_mut() {
+                for child in horizontal
+                    .children
+                    .iter_mut()
+                    .sorted_by(|a, b| a.priority().cmp(&b.priority()))
+                {
                     handles.append(&mut Self::_drain(child));
                 }
             }
@@ -109,18 +143,65 @@ impl WmNodeImpl {
         }
     }
 
-    /// will fail if the node is full
-    pub fn try_add_window(&mut self, window: &Window) -> Result<()> {
-        Self::_try_add_window(self.inner_mut(), window)
+    fn _len(node: &WmNode) -> usize {
+        match node {
+            WmNode::Leaf(leaf) => leaf.handle.is_some() as usize,
+            WmNode::Stack(stack) => stack.handles.len(),
+            WmNode::Fallback(fallback) => fallback.handles.len(),
+            WmNode::Vertical(vertical) => vertical.children.iter().map(Self::_len).sum(),
+            WmNode::Horizontal(horizontal) => horizontal.children.iter().map(Self::_len).sum(),
+        }
     }
 
-    /// will make a reindexing after removing the window, if the reindexing fails,
-    /// will return the window handles that was not reindexed
-    pub fn remove_window(&mut self, window: &Window) -> Vec<isize> {
+    fn create_context(len: usize, is_reindexing: bool) -> HashMapContext {
+        context_map! {
+            "managed" => len as i64,
+            "is_reindexing" => is_reindexing
+        }
+        .expect("Failed to create context")
+    }
+
+    /// If adding the new window is successful, a reindexing will be done.
+    ///
+    /// **Note:** Reindexing can fail on add some windows so it will return failed handles as residual
+    pub fn try_add_window(&mut self, window: &Window) -> Vec<isize> {
+        let len = Self::_len(self.inner());
+        let context = Self::create_context(len, false);
+        if Self::_try_add_window(self.inner_mut(), window, &context).is_err() {
+            return vec![window.address()];
+        }
+
+        // reindexing to handle logical condition like `managed < 4`
+        let context = Self::create_context(len + 1, true);
         let handles = Self::_drain(self.inner_mut());
         let mut residual = Vec::new();
         for handle in handles {
-            if handle != window.address() && self.try_add_window(&Window::from(handle)).is_err() {
+            if Self::_try_add_window(self.inner_mut(), &Window::from(handle), &context).is_err() {
+                residual.push(handle);
+            }
+        }
+        residual
+    }
+
+    /// Will make a reindexing ignoring the removed window.
+    ///
+    /// **Note:** Reindexing can fail on add some windows so it will return failed handles as residual
+    pub fn remove_window(&mut self, window: &Window) -> Vec<isize> {
+        let handles = Self::_drain(self.inner_mut());
+        let context = Self::create_context(
+            if handles.contains(&window.address()) {
+                handles.len() - 1
+            } else {
+                handles.len()
+            },
+            true,
+        );
+
+        let mut residual = Vec::new();
+        for handle in handles {
+            if handle != window.address()
+                && Self::_try_add_window(self.inner_mut(), &Window::from(handle), &context).is_err()
+            {
                 residual.push(handle);
             }
         }
