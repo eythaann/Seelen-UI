@@ -241,10 +241,10 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
 
         let mut workspaces = trace_lock!(self.workspaces);
 
-        let old_idx = workspaces
-            .iter()
-            .position(|w| w.windows.contains(&window))
-            .ok_or_else(none_err)?;
+        let old_idx = match workspaces.iter().position(|w| w.windows.contains(&window)) {
+            Some(idx) => idx,
+            None => return Ok(()),
+        };
 
         if old_idx == idx {
             return Ok(());
