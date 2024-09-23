@@ -15,10 +15,7 @@ use crate::{
     windows_api::{monitor::Monitor, window::Window, MonitorEnumerator, WindowsApi},
 };
 
-use super::{
-    cli::{Axis, Sizing},
-    node_impl::WmNodeImpl,
-};
+use super::{cli::Axis, node_impl::WmNodeImpl};
 
 lazy_static! {
     pub static ref WM_STATE: Arc<Mutex<WmV2State>> = Arc::new(Mutex::new({
@@ -205,70 +202,107 @@ impl WmV2State {
         None
     }
 
+    /// # Parameters
+    ///
+    /// - `window`: A reference to the window whose size is being updated.
+    /// - `axis`: The axis along which the size update will occur (horizontal or vertical).
+    /// - `percentage`: The percentage by which the window size will be updated. Can be positive or negative.
+    /// - `relative`: Determines how the percentage is interpreted. If `true`, the percentage is relative to
+    ///   the current window size. If `false`, it's relative to the total workspace size.
+    ///
     pub fn update_size(
         &self,
         window: &Window,
         axis: Axis,
-        action: Sizing,
         percentage: f32,
+        relative: bool,
     ) -> Result<(&WmV2StateMonitor, &WmV2StateWorkspace)> {
         if let Some((m, w, trace)) = self.trace_to(window) {
-            let valid_parents = trace
-                .into_iter()
-                .rev()
-                .filter(|n| match n {
-                    WmNode::Horizontal(inner) => {
-                        axis == Axis::Width
-                            && inner
+            let mut siblins_with_window_node = &Vec::new();
+
+            for n in trace.iter().rev() {
+                match n {
+                    WmNode::Horizontal(inner) => match axis {
+                        Axis::Horizontal | Axis::Left | Axis::Right => {
+                            if inner
                                 .children
                                 .iter()
-                                .filter(|n| n.len() > 0)
+                                .filter(|n| !n.is_empty())
                                 .collect_vec()
                                 .len()
                                 >= 2
-                    }
-                    WmNode::Vertical(inner) => {
-                        axis == Axis::Height
-                            && inner
+                            {
+                                siblins_with_window_node = &inner.children;
+                                break;
+                            }
+                        }
+                        _ => {}
+                    },
+                    WmNode::Vertical(inner) => match axis {
+                        Axis::Horizontal | Axis::Top | Axis::Bottom => {
+                            if inner
                                 .children
                                 .iter()
-                                .filter(|n| n.len() > 0)
+                                .filter(|n| !n.is_empty())
                                 .collect_vec()
                                 .len()
                                 >= 2
-                    }
-                    _ => false,
+                            {
+                                siblins_with_window_node = &inner.children;
+                                break;
+                            }
+                        }
+                        _ => {}
+                    },
+                    _ => {}
+                }
+            }
+
+            if siblins_with_window_node.is_empty() {
+                log::warn!("Can't change size if the window is alone on axis");
+                return Ok((m, w));
+            }
+
+            let (node_of_window_idx, node_of_window) = siblins_with_window_node
+                .iter()
+                .find_position(|n| WmNodeImpl::new((*n).clone()).contains(window))
+                .expect("The algorithm at the top of this function is wrong / broken");
+
+            let siblins = siblins_with_window_node
+                .iter()
+                .enumerate()
+                .filter(|(idx, n)| {
+                    *idx != node_of_window_idx
+                        && match axis {
+                            Axis::Horizontal | Axis::Vertical => true,
+                            Axis::Left | Axis::Top => *idx < node_of_window_idx,
+                            Axis::Bottom | Axis::Right => *idx > node_of_window_idx,
+                        }
+                        && !n.is_empty()
                 })
                 .collect_vec();
 
-            let update_sizes = |children: &Vec<WmNode>| {
-                let total_pai: f32 = children.iter().map(|n| n.grow_factor().get()).sum();
+            if siblins.is_empty() {
+                log::warn!(
+                    "Can't change size at {:?} if there are no other windows on that side",
+                    axis
+                );
+                return Ok((m, w));
+            }
 
-                let to_grow = total_pai * percentage / 100f32;
-                let to_reduce = to_grow / (children.len() - 1) as f32;
+            let total_pie: f32 = siblins.iter().map(|(_, n)| n.grow_factor().get()).sum();
+            let window_portion = node_of_window.grow_factor().get();
 
-                for n in children {
-                    if WmNodeImpl::new((*n).clone()).contains(window) {
-                        n.grow_factor().set(match action {
-                            Sizing::Increase => n.grow_factor().get() + to_grow,
-                            Sizing::Decrease => n.grow_factor().get() - to_grow,
-                        });
-                    } else {
-                        n.grow_factor().set(match action {
-                            Sizing::Increase => n.grow_factor().get() - to_reduce,
-                            Sizing::Decrease => n.grow_factor().get() + to_reduce,
-                        });
-                    }
-                }
-            };
+            let to_grow = if relative { window_portion } else { total_pie } * percentage / 100f32;
+            let to_reduce = to_grow / siblins.len() as f32;
 
-            match valid_parents.first() {
-                Some(WmNode::Vertical(inner)) => update_sizes(&inner.children),
-                Some(WmNode::Horizontal(inner)) => update_sizes(&inner.children),
-                _ => log::warn!("Can't change width if the window is alone"),
+            node_of_window.grow_factor().set(window_portion + to_grow);
+            for (_, n) in siblins {
+                n.grow_factor().set(n.grow_factor().get() - to_reduce);
             }
             return Ok((m, w));
         }
-        Err("Trying to change size of a unmanaged window".into())
+
+        Err("Trying to change size of an unmanaged window".into())
     }
 }
