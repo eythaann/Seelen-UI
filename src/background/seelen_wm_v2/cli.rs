@@ -40,8 +40,12 @@ pub enum Sizing {
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, ValueEnum)]
 pub enum Axis {
-    Width,
-    Height,
+    Horizontal,
+    Vertical,
+    Top,
+    Bottom,
+    Left,
+    Right,
 }
 
 get_subcommands![
@@ -113,9 +117,13 @@ impl WindowManagerV2 {
             }
             SubCommand::Width(action) => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
-                let percentage = FULL_STATE.load().settings.window_manager.resize_delta;
+                let percentage = match action {
+                    Sizing::Increase => FULL_STATE.load().settings.window_manager.resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager.resize_delta,
+                };
+
                 let state = trace_lock!(WM_STATE);
-                let (m, w) = state.update_size(&foreground, Axis::Width, action, percentage)?;
+                let (m, w) = state.update_size(&foreground, Axis::Horizontal, percentage, false)?;
                 get_app_handle().emit_to(
                     format!("{}/{}", Self::TARGET, m.id),
                     SeelenEvent::WMSetLayout,
@@ -124,9 +132,13 @@ impl WindowManagerV2 {
             }
             SubCommand::Height(action) => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
-                let percentage = FULL_STATE.load().settings.window_manager.resize_delta;
+                let percentage = match action {
+                    Sizing::Increase => FULL_STATE.load().settings.window_manager.resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager.resize_delta,
+                };
+
                 let state = trace_lock!(WM_STATE);
-                let (m, w) = state.update_size(&foreground, Axis::Height, action, percentage)?;
+                let (m, w) = state.update_size(&foreground, Axis::Vertical, percentage, false)?;
                 get_app_handle().emit_to(
                     format!("{}/{}", Self::TARGET, m.id),
                     SeelenEvent::WMSetLayout,

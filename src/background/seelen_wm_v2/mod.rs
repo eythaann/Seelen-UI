@@ -7,7 +7,7 @@ pub mod state;
 
 use instance::WindowManagerV2;
 use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};
-use state::WM_STATE;
+use state::{WmV2StateWorkspace, WM_STATE};
 use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
@@ -63,8 +63,17 @@ impl WindowManagerV2 {
         trace_lock!(WM_STATE).contains(window)
     }
 
-    fn force_retiling() -> Result {
+    fn force_retiling() -> Result<()> {
         get_app_handle().emit(SeelenEvent::WMForceRetiling, ())?;
+        Ok(())
+    }
+
+    fn render_workspace(monitor_id: &str, w: &WmV2StateWorkspace) -> Result<()> {
+        get_app_handle().emit_to(
+            format!("{}/{}", Self::TARGET, monitor_id),
+            SeelenEvent::WMSetLayout,
+            w.get_root_node(),
+        )?;
         Ok(())
     }
 

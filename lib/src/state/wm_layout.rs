@@ -144,6 +144,10 @@ impl WmNode {
             WmNode::Horizontal(n) => n.children.iter().map(Self::len).sum(),
         }
     }
+
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
 }
 
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
