@@ -4455,7 +4455,7 @@ dependencies = [
  "serde_yaml",
  "sys-locale",
  "uuid",
- "windows 0.57.0",
+ "windows 0.58.0",
 ]
 
 [[package]]

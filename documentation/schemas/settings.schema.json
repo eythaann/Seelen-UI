@@ -1362,7 +1362,7 @@
           "description": "the resize size in % to be used when resizing via cli",
           "default": 10.0,
           "type": "number",
-          "format": "double"
+          "format": "float"
         },
         "workspaceGap": {
           "description": "default gap between containers",

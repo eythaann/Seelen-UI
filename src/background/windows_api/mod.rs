@@ -100,7 +100,7 @@ use windows::{
 use crate::{
     error_handler::{AppError, Result},
     hook::HookManager,
-    modules::input::Mouse,
+    modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
     winevent::WinEvent,
 };
@@ -626,6 +626,10 @@ impl WindowsApi {
             return unsafe { MonitorFromPoint(*point.as_ref(), MONITOR_DEFAULTTOPRIMARY) };
         }
         Self::primary_monitor()
+    }
+
+    pub fn monitor_from_point(point: &Point) -> HMONITOR {
+        unsafe { MonitorFromPoint(*point.as_ref(), MONITOR_DEFAULTTOPRIMARY) }
     }
 
     pub fn primary_monitor() -> HMONITOR {

@@ -1,6 +1,6 @@
 use windows::Win32::Graphics::Gdi::HMONITOR;
 
-use crate::error_handler::Result;
+use crate::{error_handler::Result, modules::input::domain::Point};
 
 use super::{MonitorEnumerator, WindowsApi};
 
@@ -9,6 +9,13 @@ pub struct Monitor(HMONITOR);
 
 impl From<HMONITOR> for Monitor {
     fn from(hmonitor: HMONITOR) -> Self {
+        Self(hmonitor)
+    }
+}
+
+impl From<&Point> for Monitor {
+    fn from(point: &Point) -> Self {
+        let hmonitor = WindowsApi::monitor_from_point(point);
         Self(hmonitor)
     }
 }

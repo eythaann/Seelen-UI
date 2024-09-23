@@ -13,9 +13,9 @@ impl WindowManagerV2 {
                 Self::workspace_changed(new)?;
             }
             VirtualDesktopEvent::WindowChanged(window) => {
-                log::trace!("window changed: {:?}", window);
                 let window = &Window::from(*window);
                 if Self::is_managed(window) {
+                    log::trace!("window changed: {:?}", window);
                     Self::remove(window)?;
                     Self::add(window)?;
                 }

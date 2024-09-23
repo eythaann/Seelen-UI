@@ -149,7 +149,7 @@ pub struct WindowManagerSettings {
     /// window manager border
     pub border: Border,
     /// the resize size in % to be used when resizing via cli
-    pub resize_delta: f64,
+    pub resize_delta: f32,
     /// default gap between containers
     pub workspace_gap: u32,
     /// default workspace padding

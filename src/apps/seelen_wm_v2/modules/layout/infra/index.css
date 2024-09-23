@@ -12,6 +12,10 @@
   flex-basis: 0%;
   gap: var(--config-containers-gap);
 
+  &:first-child:last-child {
+    flex-grow: 1 !important; /* force be full size on single window */
+  }
+
   &.wm-leaf {
     border-radius: 10px;
 
