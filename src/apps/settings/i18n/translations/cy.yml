@@ -16,6 +16,7 @@ header:
     seelen_bar: Bar offer ffansi
     seelen_wall: Y wal
     seelen_rofi: Lansiwr ap
+    virtual_desk: Penbyrddau Rhithwir
 start:
   message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
   title: Croeso!
@@ -174,7 +175,6 @@ shortcuts:
     focus_bottom: Ffocws Gwaelod
     restore_sizes: Adfer Meintiau
     switch_workspace_4: Newid i Workpace 4
-    switch_workspace_1: Newid i Workpace 1
     move_to_workspace_7: Symud i Workpace 7
     send_to_workspace_6: Anfonwch i Workpace 6
     send_to_workspace_2: Anfonwch i Workpace 2
@@ -185,11 +185,12 @@ shortcuts:
     send_to_workspace_1: Anfonwch i Workpace 1
     move_to_workspace_2: Symud i Workpace 2
     reserve_float: Arnofio wrth gefn
-    switch_workspace_0: Newid i Workpace 0
     send_to_workspace_3: Anfonwch i Workpace 3
     move_to_workspace_4: Symud i Workpace 4
     move_to_workspace_1: Symud i Workpace 1
     send_to_workspace_0: Anfon i Workpace 0
+    switch_workspace_0: Newid i Workpace 1
+    switch_workspace_1: Newid i Workpace 2
   enable: Galluogi llwybrau byr integredig (AHK)
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan

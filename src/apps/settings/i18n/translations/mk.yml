@@ -16,6 +16,7 @@ header:
     specific_apps: Специфични апликации
     seelen_rofi: Апликатор за лансирање
     seelen_wall: Theидот
+    virtual_desk: Виртуелни работна површина
 start:
   title: Добредојдовте!
   message_accent: Оптимизирајте ја вашата продуктивност со стил!
@@ -156,7 +157,6 @@ shortcuts:
     reserve_float: Резерва плови
     send_to_workspace_2: Испратете на работниот простор 2
     focus_top: Фокус врвот
-    switch_workspace_1: Префрлете се на работниот простор 1
     send_to_workspace_0: Испратете на работниот простор 0
     reserve_stack: Резервен магацин
     increase_height: Зголемете ја висината
@@ -176,7 +176,6 @@ shortcuts:
     switch_workspace_7: Префрлете се на работниот простор 7
     switch_workspace_4: Префрлете се на работниот простор 4
     focus_left: Фокусот лево
-    switch_workspace_0: Префрлете се на работниот простор 0
     send_to_workspace_4: Испратете на работниот простор 4
     focus_latest: Фокусирајте се најновите
     switch_workspace_6: Префрлете се на работниот простор 6
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_4: Преместете се на работниот простор 4
     move_to_workspace_9: Преместете се на работниот простор 9
     switch_workspace_3: Префрлете се на работниот простор 3
+    switch_workspace_0: Префрлете се на работниот простор 1
+    switch_workspace_1: Префрлете се на работниот простор 2
   enable_tooltip: >-
     Оневозможете ако ги имплементирате вашите сопствени кратенки со користење на
     API на Core Seelen

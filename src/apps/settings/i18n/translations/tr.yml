@@ -16,6 +16,7 @@ header:
     shortcuts: Kısayollar
     seelen_wall: Duvar
     seelen_rofi: Uygulama başlatıcısı
+    virtual_desk: Sanal masaüstleri
 start:
   title: Hoş geldin!
   message_accent: Verimliliğinizi stille optimize edin!
@@ -161,7 +162,6 @@ shortcuts:
     switch_workspace_3: Çalışma Alanına Geçin 3
     decrease_width: Genişliği Azalt
     move_to_workspace_6: Çalışma Alanına Taşın 6
-    switch_workspace_1: Çalışma Alanına Geç 1
     switch_workspace_8: Çalışma Alanı 8'e geç
     reserve_left: Sola gitme
     switch_workspace_9: Çalışma Alanına geç 9
@@ -177,7 +177,6 @@ shortcuts:
     send_to_workspace_2: Çalışma Alanına Gönder 2
     move_to_workspace_3: Çalışma Alanına Taşın 3
     send_to_workspace_5: Çalışma Alanına Gönder 5
-    switch_workspace_0: Çalışma alanına geç 0
     focus_bottom: Dip
     switch_workspace_7: Çalışma Alanı 7'ye geç
     send_to_workspace_9: Çalışma Alanına Gönder 9
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_9: Çalışma Alanına Taşın 9
     send_to_workspace_7: Çalışma Alanına Gönder 7
     switch_workspace_5: Çalışma Alanı 5'e geç
+    switch_workspace_0: Çalışma Alanına Geç 1
+    switch_workspace_1: Çalışma Alanı 2'ye geçin
   enable_tooltip: >-
     Seelen Core API'sını kullanarak kendi kısayollarınızı uygulayacaksanız devre
     dışı bırakın

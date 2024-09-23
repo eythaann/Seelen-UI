@@ -16,6 +16,7 @@ header:
     seelen_bar: ஆடம்பரமான கருவிப்பட்டி
     seelen_wall: சுவர்
     seelen_rofi: பயன்பாட்டு துவக்கி
+    virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
 start:
   title: வரவேற்பு!
   message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
@@ -149,7 +150,6 @@ shortcuts:
     increase_height: உயரத்தை அதிகரிக்கவும்
     restore_sizes: அளவுகளை மீட்டமை
     increase_width: அகலத்தை அதிகரிக்கவும்
-    switch_workspace_1: பணியிடத்திற்கு மாறவும் 1
     send_to_workspace_4: பணியிடத்திற்கு அனுப்பு 4
     move_to_workspace_5: பணியிடத்திற்கு நகர்த்து 5
     reserve_right: ரிசர்வ் ரைட்
@@ -157,7 +157,6 @@ shortcuts:
     send_to_workspace_1: பணியிடத்திற்கு அனுப்பு 1
     send_to_workspace_0: பணியிடம் 0க்கு அனுப்பவும்
     focus_right: ஃபோகஸ் ரைட்
-    switch_workspace_0: பணியிடம் 0க்கு மாறவும்
     reserve_float: ரிசர்வ் ஃப்ளோட்
     reserve_left: ரிசர்வ் இடது
     switch_workspace_5: பணியிடத்திற்கு மாறவும் 5
@@ -190,6 +189,8 @@ shortcuts:
     switch_workspace_9: பணியிடத்திற்கு மாறவும் 9
     focus_bottom: கீழே கவனம் செலுத்துங்கள்
     switch_workspace_7: பணியிடம் 7க்கு மாறவும்
+    switch_workspace_1: பணியிடம் 2 க்கு மாறவும்
+    switch_workspace_0: பணியிடம் 1 க்கு மாறவும்
   enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
   enable_tooltip: >-
     சீலன் கோர் ஏபிஐ பயன்படுத்தி உங்கள் சொந்த ஷார்ட்கட்களை செயல்படுத்தினால்

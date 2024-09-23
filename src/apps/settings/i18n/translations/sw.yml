@@ -16,6 +16,7 @@ header:
     monitors: Wachunguzi
     seelen_rofi: Kizindua programu
     seelen_wall: Ukuta
+    virtual_desk: Dawati za kweli
 start:
   message_accent: Boresha tija yako na mtindo!
   message: >-
@@ -157,7 +158,6 @@ shortcuts:
     switch_workspace_9: Badilika kwa nafasi ya kazi 9
     switch_workspace_8: Badilika kwa nafasi ya kazi 8
     move_to_workspace_5: Hoja kwa nafasi ya kazi 5
-    switch_workspace_1: Badilika kwenye nafasi ya kazi 1
     send_to_workspace_1: Tuma kwa nafasi ya kazi 1
     send_to_workspace_8: Tuma kwa nafasi ya kazi 8
     send_to_workspace_5: Tuma kwa nafasi ya kazi 5
@@ -183,11 +183,12 @@ shortcuts:
     switch_workspace_4: Badilika kwa nafasi ya kazi 4
     send_to_workspace_3: Tuma kwa nafasi ya kazi 3
     move_to_workspace_1: Hoja kwa nafasi ya kazi 1
-    switch_workspace_0: Badilika kwenye nafasi ya kazi 0
     send_to_workspace_7: Tuma kwa nafasi ya kazi 7
     move_to_workspace_4: Hoja kwa nafasi ya kazi 4
     send_to_workspace_9: Tuma kwa nafasi ya kazi 9
     move_to_workspace_9: Hoja kwa nafasi ya kazi 9
+    switch_workspace_1: Badilika kwenye nafasi ya kazi 2
+    switch_workspace_0: Badilika kwenye nafasi ya kazi 1
   enable: Wezesha njia za mkato zilizojumuishwa (AHK)
   enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
   reset: Rudisha kwa defaults

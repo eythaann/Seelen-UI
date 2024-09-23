@@ -44,8 +44,8 @@ export const Navigation = memo(() => {
     Route.GENERAL,
     Route.SEELEN_BAR,
     Route.SEELEN_WM,
-    Route.SEELEN_WALL,
     Route.SEELEN_WEG,
+    Route.SEELEN_WALL,
     Route.SHORTCUTS,
   ];
 

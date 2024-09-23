@@ -23,6 +23,7 @@ header:
     info: 信息
     seelen_wall: 墙
     seelen_rofi: 应用启动器
+    virtual_desk: 虚拟桌面
 start:
   title: 欢迎！
   message: >-
@@ -164,8 +165,6 @@ shortcuts:
     increase_height: 增加高度
     decrease_height: 减少高度
     restore_sizes: 恢复大小
-    switch_workspace_0: 切换到工作区 0
-    switch_workspace_1: 切换到工作区 1
     switch_workspace_2: 切换到工作区 2
     switch_workspace_3: 切换到工作区 3
     switch_workspace_4: 切换到工作区 4
@@ -194,6 +193,8 @@ shortcuts:
     send_to_workspace_7: 发送到工作区 7
     send_to_workspace_8: 发送到工作区 8
     send_to_workspace_9: 发送到工作区 9
+    switch_workspace_1: 切换到工作区2
+    switch_workspace_0: 切换到工作区1
   reset: 重置为默认值
 vd:
   strategy:

@@ -16,6 +16,7 @@ header:
     seelen_wm: Menedżer okien
     seelen_wall: Ściana
     seelen_rofi: Uruchamianie aplikacji
+    virtual_desk: Wirtualne komputery stacjonarne
 start:
   title: Powitanie!
   message: >-
@@ -168,7 +169,6 @@ shortcuts:
     send_to_workspace_0: Wyślij do obszaru roboczego 0
     focus_bottom: Focus Dim
     send_to_workspace_5: Wyślij do obszaru roboczego 5
-    switch_workspace_0: Przejdź na obszar roboczy 0
     reserve_bottom: Rezerwować dno
     send_to_workspace_4: Wyślij na przestrzeń roboczą 4
     reserve_top: Rezerwuj top
@@ -177,7 +177,6 @@ shortcuts:
     switch_workspace_8: Przełącz się na przestrzeń roboczą 8
     switch_workspace_9: Przejdź na obszar roboczy 9
     switch_workspace_2: Przełącz się na przestrzeń roboczą 2
-    switch_workspace_1: Przejdź na obszar roboczy 1
     reserve_float: Rezerwować pływak
     move_to_workspace_5: Przenieś się do obszaru roboczego 5
     move_to_workspace_8: Przenieś się do obszaru roboczego 8
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_9: Przenieś się do obszaru roboczego 9
     send_to_workspace_1: Wyślij do obszaru roboczego 1
     send_to_workspace_7: Wyślij na przestrzeń roboczą 7
+    switch_workspace_1: Przełącz się na przestrzeń roboczą 2
+    switch_workspace_0: Przejdź na obszar roboczy 1
   enable_tooltip: Wyłącz, jeśli zaimplementujesz własne skróty za pomocą API Seelen Core
   enable: Włącz zintegrowane skróty (AHK)
   reset: Zresetuj do domyślnych

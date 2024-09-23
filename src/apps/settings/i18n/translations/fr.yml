@@ -23,6 +23,7 @@ header:
     info: Information
     seelen_wall: Le mur
     seelen_rofi: Lanceur d'applications
+    virtual_desk: Desktops virtuels
 start:
   title: Accueillir!
   message: "Bienvenue dans Seelen UI, l'environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows 11\_! Explorez une nouvelle ère d'efficacité et de multitâche avec notre interface intuitive et nos fonctionnalités avancées."
@@ -167,8 +168,6 @@ shortcuts:
     increase_height: Augmenter la hauteur
     decrease_height: Diminuer la hauteur
     restore_sizes: Restaurer les tailles
-    switch_workspace_0: Passer à l'espace de travail 0
-    switch_workspace_1: Passer à l'espace de travail 1
     switch_workspace_2: Passer à l'espace de travail 2
     switch_workspace_3: Passer à l'espace de travail 3
     switch_workspace_4: Passer à l'espace de travail 4
@@ -197,6 +196,8 @@ shortcuts:
     send_to_workspace_7: Envoyer à Workspace 7
     send_to_workspace_8: Envoyer à l'espace de travail 8
     send_to_workspace_9: Envoyer à l'espace de travail 9
+    switch_workspace_1: Passez à l'espace de travail 2
+    switch_workspace_0: Passez à l'espace de travail 1
   reset: Réinitialiser les valeurs par défaut
 vd:
   strategy:

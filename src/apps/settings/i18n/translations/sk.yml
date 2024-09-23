@@ -16,6 +16,7 @@ header:
     seelen_wm: Správca okien
     seelen_wall: Stena
     seelen_rofi: Spúšťač aplikácií
+    virtual_desk: Virtuálne stolné počítače
 start:
   title: Vitajte!
   message: >-
@@ -159,7 +160,6 @@ shortcuts:
     reserve_stack: Zásobník
     move_to_workspace_7: Presuňte sa do pracovného priestoru 7
     send_to_workspace_1: Pošlite do pracovného priestoru 1
-    switch_workspace_1: Prepnite na pracovný priestor 1
     send_to_workspace_5: Pošlite do pracovného priestoru 5
     reserve_left: Vľavo
     reserve_top: Horná časť
@@ -183,13 +183,14 @@ shortcuts:
     switch_workspace_6: Prepnite na pracovný priestor 6
     focus_left: Vľavo
     reserve_float: Plavák
-    switch_workspace_0: Prepnite na pracovný priestor 0
     focus_latest: Najnovší
     send_to_workspace_7: Pošlite do pracovného priestoru 7
     send_to_workspace_3: Pošlite do pracovného priestoru 3
     move_to_workspace_1: Presun do pracovného priestoru 1
     increase_width: Zväčšenie
     restore_sizes: Obnoviť veľkosti
+    switch_workspace_0: Prepnite na pracovný priestor 1
+    switch_workspace_1: Prepnite na pracovný priestor 2
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
   reset: Reset na predvolené hodnoty

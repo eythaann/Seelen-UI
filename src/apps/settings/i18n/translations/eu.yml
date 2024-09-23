@@ -16,6 +16,7 @@ header:
     seelen_bar: Fancy tresna barra
     seelen_wall: Horma
     seelen_rofi: App Launcher
+    virtual_desk: Mahaigain birtualak
 start:
   message: >-
     Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
@@ -155,7 +156,6 @@ shortcuts:
     switch_workspace_2: Aldatu Workspace 2ra
     move_to_workspace_1: Mugitu lan-eremura 1
     focus_bottom: Fokua Behean
-    switch_workspace_0: Aldatu Workspace 0ra
     focus_latest: Fokua azkena
     increase_height: Altuera handitzea
     switch_workspace_8: Aldatu lan-eremura 8
@@ -183,13 +183,14 @@ shortcuts:
     switch_workspace_4: Aldatu Workspace 4ra
     move_to_workspace_0: Mugitu 0 lanera
     send_to_workspace_2: Bidali Workspace 2ra
-    switch_workspace_1: Aldatu lan-eremura 1
     send_to_workspace_3: Bidali lantokira 3
     send_to_workspace_0: Bidali lan-eremura 0
     reserve_float: Erreserba karroza
     send_to_workspace_9: Bidali Workspace 9ra
     send_to_workspace_1: Bidali lan-eremura 1
     focus_top: Focus Top
+    switch_workspace_1: Aldatu Workspace 2ra
+    switch_workspace_0: Aldatu lan-eremura 1
   enable: Gaitu lasterbide integratuak (Ahk)
   enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
   reset: Berrezarri lehenetsitakoak

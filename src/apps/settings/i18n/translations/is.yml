@@ -16,6 +16,7 @@ header:
     seelen_weg: Bryggju/verkefnabar
     seelen_wall: Vegginn
     seelen_rofi: App Launcher
+    virtual_desk: Sýndarskjáborð
 start:
   title: Velkominn!
   message_accent: Fínstilltu framleiðni þína með stæl!
@@ -181,15 +182,15 @@ shortcuts:
     switch_workspace_3: Skiptu yfir í vinnusvæði 3
     focus_top: Fókus toppur
     send_to_workspace_3: Senda á Workspace 3
-    switch_workspace_0: Skiptu yfir í vinnusvæði 0
     reserve_float: Varasjóður flot
-    switch_workspace_1: Skiptu yfir í vinnusvæði 1
     send_to_workspace_2: Sendu á Workspace 2
     switch_workspace_8: Skiptu yfir í vinnusvæði 8
     move_to_workspace_3: Farðu í vinnusvæði 3
     send_to_workspace_5: Sendu á Workspace 5
     send_to_workspace_0: Sendu á Workspace 0
     switch_workspace_4: Skiptu yfir í vinnusvæði 4
+    switch_workspace_0: Skiptu yfir í vinnusvæði 1
+    switch_workspace_1: Skiptu yfir í vinnusvæði 2
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
   reset: Endurstilla í vanskil

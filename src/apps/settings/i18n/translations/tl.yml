@@ -16,6 +16,7 @@ header:
     seelen_weg: Dock/Taskbar
     seelen_wall: Ang pader
     seelen_rofi: App launcher
+    virtual_desk: Mga Virtual Desktop
 start:
   message: >-
     Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
@@ -187,10 +188,10 @@ shortcuts:
     focus_right: Tama ang ituon
     move_to_workspace_1: Lumipat sa Workspace 1
     switch_workspace_8: Lumipat sa Workspace 8
-    switch_workspace_1: Lumipat sa Workspace 1
-    switch_workspace_0: Lumipat sa workspace 0
     send_to_workspace_7: Ipadala sa Workspace 7
     send_to_workspace_3: Ipadala sa Workspace 3
+    switch_workspace_1: Lumipat sa Workspace 2
+    switch_workspace_0: Lumipat sa Workspace 1
   enable_tooltip: >-
     Huwag paganahin kung ipatutupad mo ang iyong sariling mga shortcut gamit ang
     Seelen Core API

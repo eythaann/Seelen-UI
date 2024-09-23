@@ -16,6 +16,7 @@ header:
     developer: Разводнички
     seelen_wall: Зид
     seelen_rofi: Лаунцхер
+    virtual_desk: Виртуелни радне површине
 start:
   title: Добродошли!
   message_accent: Оптимизирајте своју продуктивност стилом!
@@ -159,7 +160,6 @@ shortcuts:
     focus_right: Фокусирати право
     move_to_workspace_5: Пређите на радни простор 5
     increase_height: Повећати висину
-    switch_workspace_1: Пређите на радни простор 1
     send_to_workspace_5: Пошаљи на радни простор 5
     switch_workspace_4: Пређите на радни простор 4
     switch_workspace_5: Пређите на радни простор 5
@@ -170,7 +170,6 @@ shortcuts:
     reserve_float: Резерват
     move_to_workspace_0: Пређите на радни простор 0
     move_to_workspace_9: Пређите на радни простор 9
-    switch_workspace_0: Пређите на радни простор 0
     increase_width: Повећати ширину
     move_to_workspace_7: Пређите на радни простор 7
     reserve_right: Резервисати право
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_2: Пређите на радни простор 2
     send_to_workspace_3: Пошаљи на радни простор 3
     move_to_workspace_1: Прелазак на радни простор 1
+    switch_workspace_1: Пређите на радни простор 2
+    switch_workspace_0: Пређите на радни простор 1
   enable_tooltip: >-
     Онемогућите ако ћете имплементирати сопствене пречице користећи СЕЕЛЕН ЦОРЕ
     АПИ

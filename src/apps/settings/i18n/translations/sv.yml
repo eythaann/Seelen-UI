@@ -16,6 +16,7 @@ header:
     shortcuts: Genvägar
     seelen_rofi: Appstart
     seelen_wall: Väggen
+    virtual_desk: Virtuella stationära datorer
 start:
   title: Välkommen!
   message_accent: Optimera din produktivitet med stil!
@@ -159,7 +160,6 @@ shortcuts:
     move_to_workspace_0: Flytta till arbetsytan 0
     send_to_workspace_8: Skicka till Workspace 8
     decrease_height: Minskande höjd
-    switch_workspace_0: Byt till arbetsyta 0
     send_to_workspace_0: Skicka till Workspace 0
     reserve_stack: Reservstack
     send_to_workspace_5: Skicka till Workspace 5
@@ -187,9 +187,10 @@ shortcuts:
     switch_workspace_4: Byt till arbetsyta 4
     reserve_left: Reservera vänster
     move_to_workspace_4: Flytta till Workspace 4
-    switch_workspace_1: Byt till arbetsyta 1
     move_to_workspace_5: Flytta till arbetsytan 5
     focus_right: Fokusera rätt
+    switch_workspace_0: Byt till arbetsyta 1
+    switch_workspace_1: Byt till arbetsyta 2
   enable: Aktivera integrerade genvägar (AHK)
   enable_tooltip: >-
     Inaktivera om du kommer att implementera dina egna genvägar med Seelen Core

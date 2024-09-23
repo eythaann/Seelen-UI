@@ -16,6 +16,7 @@ header:
     general: Bendrasis
     seelen_wall: Siena
     seelen_rofi: Programos paleidimo priemonė
+    virtual_desk: Virtualūs staliniai kompiuteriai
 start:
   title: Sveiki!
   message_accent: Optimizuokite savo produktyvumą stiliumi!
@@ -159,7 +160,6 @@ shortcuts:
     reserve_float: Atsargos plūdė
     send_to_workspace_2: Siųsti į 2 darbo vietą
     move_to_workspace_5: Pereikite į 5 darbo vietą
-    switch_workspace_1: Perjunkite į 1 darbo vietą
     focus_top: Fokusavimo viršus
     focus_latest: Sutelkite naujausią
     send_to_workspace_5: Siųsti į 5 darbo vietą
@@ -178,7 +178,6 @@ shortcuts:
     switch_workspace_6: Perjunkite į 6 darbo vietą
     move_to_workspace_7: Pereikite į 7 darbo vietą
     move_to_workspace_8: Pereikite į 8 darbo vietą
-    switch_workspace_0: Perjunkite į darbo vietą 0
     switch_workspace_5: Perjunkite į 5 darbo vietą
     send_to_workspace_7: Siųsti į „Workspace 7“
     send_to_workspace_3: Siųsti į 3 „Workspace“
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_0: Pereikite į 0 darbo vietą
     reserve_stack: Rezervo kaminas
     focus_bottom: Fokusavimo dugnas
+    switch_workspace_1: Perjunkite į 2 darbo vietą
+    switch_workspace_0: Perjunkite į 1 darbo vietą
   enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus

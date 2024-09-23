@@ -16,6 +16,7 @@ header:
     seelen_bar: Väljamõeldud tööriistariba
     seelen_wall: Sein
     seelen_rofi: Rakenduse käivitaja
+    virtual_desk: Virtuaalsed töölauad
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
@@ -145,7 +146,6 @@ extras:
 shortcuts:
   labels:
     increase_width: Suurendama laiust
-    switch_workspace_1: Lülitage tööalale 1
     send_to_workspace_9: Saada Workspace 9
     move_to_workspace_7: Kolige tööruumi 7
     switch_workspace_2: Lülitage tööruum 2
@@ -156,7 +156,6 @@ shortcuts:
     move_to_workspace_5: Kolige tööruumi 5
     focus_left: Fookus vasakule
     switch_workspace_4: Lülitage tööruum 4
-    switch_workspace_0: Lülitage tööalale 0
     focus_top: Fookus ülaosa
     focus_latest: Keskenduda uusim
     move_to_workspace_0: Liikuge tööruumi 0
@@ -190,6 +189,8 @@ shortcuts:
     switch_workspace_3: Lülitage tööruum 3
     switch_workspace_5: Lülitage tööruum 5
     switch_workspace_9: Lülitage Workspace 9 -le
+    switch_workspace_1: Lülitage tööruum 2
+    switch_workspace_0: Lülitage tööalale 1
   enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
   enable: Lubage integreeritud otseteed (AHK)
   reset: Lähtestage vaikeseadetele

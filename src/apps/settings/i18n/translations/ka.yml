@@ -16,6 +16,7 @@ header:
     specific_apps: კონკრეტული პროგრამები
     seelen_rofi: აპლიკაციის გამშვები
     seelen_wall: კედელი
+    virtual_desk: ვირტუალური სამუშაო მაგიდა
 start:
   message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
   title: კეთილი იყოს თქვენი მობრძანება!
@@ -153,7 +154,6 @@ shortcuts:
     reserve_stack: სარეზერვო დასტა
     focus_right: ფოკუსირება სწორად
     move_to_workspace_8: გადავიდეთ სამუშაო ადგილებზე 8
-    switch_workspace_0: გადადით სამუშაო ადგილებზე 0
     switch_workspace_2: გადადით სამუშაო ადგილებზე 2
     switch_workspace_9: გადადით სამუშაო ადგილებზე 9
     focus_latest: ფოკუსირება უახლესი
@@ -174,7 +174,6 @@ shortcuts:
     focus_bottom: ფოკუსირება
     switch_workspace_4: გადადით სამუშაო ადგილებზე 4
     focus_left: ფოკუსირება მარცხნივ
-    switch_workspace_1: გადადით სამუშაო ადგილებზე 1
     move_to_workspace_2: გადავიდეთ სამუშაო ადგილებზე 2
     send_to_workspace_9: გაგზავნეთ სამუშაო სივრცეში 9
     move_to_workspace_0: გადადით სამუშაო ადგილებზე 0
@@ -190,6 +189,8 @@ shortcuts:
     send_to_workspace_8: გაგზავნეთ სამუშაო სივრცეში 8
     switch_workspace_5: გადადით სამუშაო ადგილებზე 5
     reserve_float: სარეზერვო float
+    switch_workspace_1: გადადით სამუშაო ადგილებზე 2
+    switch_workspace_0: გადადით სამუშაო ადგილებზე 1
   enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
   enable_tooltip: >-
     გამორთეთ, თუ თქვენ განახორციელებთ საკუთარ მალსახმობებს Seelen Core API– ს

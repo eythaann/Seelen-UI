@@ -16,6 +16,7 @@ header:
     shortcuts: لنډوکونه
     seelen_rofi: د اپلیکیشن لانچر
     seelen_wall: دېوال
+    virtual_desk: مجازی ډیسټاپونه
 start:
   title: ښه راغلاست!
   message_accent: د سټایل سره خپل محصول غوره کړئ!
@@ -158,7 +159,6 @@ shortcuts:
     send_to_workspace_4: کارځای ته واستوئ
     switch_workspace_4: د کارځای ته وسپارئ
     switch_workspace_5: د کارځای 5 ته لاړشئ
-    switch_workspace_1: د کارځای 1 ته لاړشئ
     move_to_workspace_8: د کارځای ته لاړشئ
     send_to_workspace_7: کارځای ته واستوئ
     reserve_top: خوندي پټی
@@ -176,7 +176,6 @@ shortcuts:
     move_to_workspace_0: د کارځای 0 ته لاړشئ
     send_to_workspace_0: کارځای ته واستوئ
     focus_top: فوکس سر
-    switch_workspace_0: د کارځای 0 ته لاړشئ
     focus_bottom: ښکته
     reserve_stack: ریزرو سټیک
     switch_workspace_7: د کارځای ته لاړشئ
@@ -189,6 +188,8 @@ shortcuts:
     send_to_workspace_8: کارځای ته واستوئ
     restore_sizes: اندازونه بحال کړئ
     increase_height: قد زیاتول
+    switch_workspace_1: د کارځای 2 ته لاړشئ
+    switch_workspace_0: د کارځای 1 ته لاړشئ
   enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
   enable: مدغم شوي لنډیزونه (اه)
   reset: د افلاسیون لپاره بیا تنظیمول

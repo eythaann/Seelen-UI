@@ -16,6 +16,7 @@ header:
     shortcuts: Amashoshothi
     seelen_wall: Udonga
     seelen_rofi: Isiqalisi sohlelo lokusebenza
+    virtual_desk: Ama-Virtual Desktops
 start:
   message: >-
     Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
@@ -166,7 +167,6 @@ shortcuts:
     move_to_workspace_9: Hambisa ku-Workpace 9
     switch_workspace_2: Shintshela ku-Workpace 2
     send_to_workspace_4: Thumela kwi-Workpace 4
-    switch_workspace_0: Shintshela ku-Workpace 0
     send_to_workspace_8: Thumela ku-Workpace 8
     reserve_left: Indawo esele
     focus_left: Gxila kwesokunxele
@@ -183,13 +183,14 @@ shortcuts:
     move_to_workspace_5: Hambisa ku-Workpace 5
     reserve_float: Indawo yokuntanta
     send_to_workspace_3: Thumela ku-Workpace 3
-    switch_workspace_1: Shintshela ku-Workpace 1
     send_to_workspace_5: Thumela ku-Workpace 5
     send_to_workspace_9: Thumela ku-Workpace 9
     send_to_workspace_2: Thumela ku-Workpace 2
     switch_workspace_4: Shintshela ku-Workpace 4
     switch_workspace_8: Shintshela ku-Workpace 8
     switch_workspace_6: Shintshela ku-Workpace 6
+    switch_workspace_0: Shintshela ku-Workpace 1
+    switch_workspace_1: Shintshela ku-Workpace 2
   enable: Nika amandla izinqamuleli ezihlanganisiwe (Ahk)
   enable_tooltip: >-
     Khubaza uma uzosebenzisa izinqamuleli zakho usebenzisa i-Seelen Core Core

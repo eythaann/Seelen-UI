@@ -23,6 +23,7 @@ header:
     info: Информация
     seelen_wall: Стена
     seelen_rofi: Приложение пусковая установка
+    virtual_desk: Виртуальные рабочие столы
 start:
   title: Добро пожаловать!
   message: >-
@@ -170,8 +171,6 @@ shortcuts:
     increase_height: Увеличить высоты
     decrease_height: Уменьшить высоту
     restore_sizes: Восстановить размеры
-    switch_workspace_0: Переключиться на рабочую область 0
-    switch_workspace_1: Переключиться на рабочую область 1
     switch_workspace_2: Переключиться на рабочую область 2
     switch_workspace_3: Переключиться на рабочую область 3
     switch_workspace_4: Переключиться на рабочую область 4
@@ -200,6 +199,8 @@ shortcuts:
     send_to_workspace_7: Отправить в рабочую область 7
     send_to_workspace_8: Отправить в рабочую область 8
     send_to_workspace_9: Отправить в рабочую область 9
+    switch_workspace_0: Переключитесь на рабочее пространство 1
+    switch_workspace_1: Переключитесь на рабочую область 2
   reset: Сбросить по умолчанию
 vd:
   strategy:

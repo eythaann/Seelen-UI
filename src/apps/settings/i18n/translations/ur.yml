@@ -16,6 +16,7 @@ header:
     monitors: مانیٹر
     seelen_rofi: ایپ لانچر
     seelen_wall: دیوار
+    virtual_desk: ورچوئل ڈیسک ٹاپس
 start:
   title: عنوان
   message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
@@ -174,13 +175,11 @@ shortcuts:
     send_to_workspace_3: ورک اسپیس 3 کو بھیجیں
     reserve_bottom: ریزرو نیچے
     move_to_workspace_0: ورک اسپیس 0 میں منتقل کریں
-    switch_workspace_1: ورک اسپیس 1 پر سوئچ کریں
     switch_workspace_4: ورک اسپیس 4 پر سوئچ کریں
     move_to_workspace_1: ورک اسپیس 1 میں منتقل کریں
     switch_workspace_3: ورک اسپیس 3 پر سوئچ کریں
     switch_workspace_7: ورک اسپیس 7 پر سوئچ کریں
     reserve_right: ٹھیک ہے
-    switch_workspace_0: ورک اسپیس 0 پر سوئچ کریں
     move_to_workspace_7: ورک اسپیس 7 میں منتقل کریں
     send_to_workspace_6: ورک اسپیس 6 کو بھیجیں
     increase_height: اونچائی میں اضافہ
@@ -189,6 +188,8 @@ shortcuts:
     restore_sizes: سائز کو بحال کریں
     move_to_workspace_9: ورک اسپیس 9 میں منتقل کریں
     move_to_workspace_2: ورک اسپیس 2 میں منتقل کریں
+    switch_workspace_1: ورک اسپیس 2 پر سوئچ کریں
+    switch_workspace_0: ورک اسپیس 1 پر سوئچ کریں
   enable_tooltip: >-
     اگر آپ سیلین کور API کا استعمال کرتے ہوئے اپنے شارٹ کٹ کو نافذ کریں گے تو
     غیر فعال کریں

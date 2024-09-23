@@ -16,6 +16,7 @@ header:
     shortcuts: Pintasan
     seelen_wall: Dinding
     seelen_rofi: Pelancar App
+    virtual_desk: Desktop maya
 start:
   title: Selamat datang!
   message_accent: Mengoptimumkan produktiviti anda dengan gaya!
@@ -170,7 +171,6 @@ shortcuts:
     send_to_workspace_9: Hantar ke Ruang Kerja 9
     send_to_workspace_2: Hantar ke Ruang Kerja 2
     send_to_workspace_5: Hantar ke Ruang Kerja 5
-    switch_workspace_1: Beralih ke ruang kerja 1
     decrease_width: Mengurangkan lebar
     reserve_bottom: Bawah simpanan
     send_to_workspace_0: Hantar ke Ruang Kerja 0
@@ -182,7 +182,6 @@ shortcuts:
     move_to_workspace_6: Pindah ke Ruang Kerja 6
     increase_height: Meningkatkan ketinggian
     switch_workspace_2: Beralih ke ruang kerja 2
-    switch_workspace_0: Beralih ke ruang kerja 0
     reserve_float: Rizab terapung
     reserve_top: Rizab atas
     reserve_left: Rizab kiri
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_1: Pindah ke Ruang Kerja 1
     send_to_workspace_7: Hantar ke Ruang Kerja 7
     send_to_workspace_3: Hantar ke Ruang Kerja 3
+    switch_workspace_1: Beralih ke ruang kerja 2
+    switch_workspace_0: Beralih ke ruang kerja 1
   enable_tooltip: >-
     Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
     teras Seelen

@@ -16,6 +16,7 @@ header:
     specific_apps: App specifiche
     seelen_wall: Il muro
     seelen_rofi: APP LAVANTOLA
+    virtual_desk: Desktop virtuali
 start:
   title: Benvenuta!
   message: >-
@@ -147,7 +148,6 @@ shortcuts:
     reserve_float: Float di riserva
     move_to_workspace_5: Passa all'area di lavoro 5
     move_to_workspace_2: Passa all'area di lavoro 2
-    switch_workspace_1: Passa all'area di lavoro 1
     move_to_workspace_4: Passa all'area di lavoro 4
     focus_bottom: Focus Bottom
     focus_top: Focus top
@@ -176,7 +176,6 @@ shortcuts:
     switch_workspace_2: Passa all'area di lavoro 2
     focus_latest: Focus Ultime
     send_to_workspace_1: Invia a Workspace 1
-    switch_workspace_0: Passa all'area di lavoro 0
     focus_left: Focus a sinistra
     switch_workspace_6: Passa all'area di lavoro 6
     move_to_workspace_8: Passa all'area di lavoro 8
@@ -190,6 +189,8 @@ shortcuts:
     switch_workspace_5: Passa all'area di lavoro 5
     switch_workspace_3: Passa all'area di lavoro 3
     move_to_workspace_7: Passa all'area di lavoro 7
+    switch_workspace_0: Passa all'area di lavoro 1
+    switch_workspace_1: Passa all'area di lavoro 2
   enable: Abilita scorciatoie integrate (AHK)
   enable_tooltip: >-
     Disabilita se implementerai i tuoi collegamenti utilizzando l'API Core

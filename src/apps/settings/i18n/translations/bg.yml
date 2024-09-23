@@ -16,6 +16,7 @@ header:
     shortcuts: Преки пътища
     seelen_rofi: Изстрелване на приложението
     seelen_wall: Стената
+    virtual_desk: Виртуални настолни компютри
 start:
   title: Добре дошли!
   message: >-
@@ -159,7 +160,6 @@ shortcuts:
     send_to_workspace_0: Изпратете в работното пространство 0
     send_to_workspace_4: Изпратете в работното пространство 4
     send_to_workspace_1: Изпратете в работното пространство 1
-    switch_workspace_1: Превключете в работното пространство 1
     move_to_workspace_6: Преместете се в работно пространство 6
     send_to_workspace_8: Изпратете в работното пространство 8
     send_to_workspace_6: Изпратете в Workspace 6
@@ -170,7 +170,6 @@ shortcuts:
     decrease_width: Намалете ширината
     switch_workspace_2: Превключете в работното пространство 2
     decrease_height: Намаляване на височината
-    switch_workspace_0: Превключете в работното пространство 0
     move_to_workspace_5: Преместете се в работното пространство 5
     move_to_workspace_2: Преместете се в работното пространство 2
     send_to_workspace_2: Изпратете в работното пространство 2
@@ -190,6 +189,8 @@ shortcuts:
     send_to_workspace_5: Изпратете в работното пространство 5
     increase_height: Увеличете височината
     move_to_workspace_3: Преместете се в работното пространство 3
+    switch_workspace_0: Превключете в работното пространство 1
+    switch_workspace_1: Превключете в работното пространство 2
   enable_tooltip: >-
     Деактивирайте, ако ще внедрите свои собствени преки пътища с помощта на API
     на Core Seelen

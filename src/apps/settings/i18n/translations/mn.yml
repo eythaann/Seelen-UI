@@ -16,6 +16,7 @@ header:
     info: Мэдээлэл
     seelen_wall: Хана
     seelen_rofi: Програм идэвхжсэн
+    virtual_desk: Виржопын ширээний гутал
 start:
   message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
   message: >-
@@ -160,7 +161,6 @@ shortcuts:
     switch_workspace_6: Ажлын талбарт шилжих 6
     move_to_workspace_1: Ажлын талбар руу шилжих 1
     reserve_left: Зуух Зүүн
-    switch_workspace_1: Ажлын талбарт шилжих 1
     switch_workspace_5: Ажлын талбар руу шилжих 5
     move_to_workspace_8: Ажлын талбар руу шилжих 8
     focus_right: Домог
@@ -168,7 +168,6 @@ shortcuts:
     increase_height: Дээд хэмжээг нэмэгдүүлэх
     reserve_bottom: Нөөцийг нөөцлөх
     move_to_workspace_6: Ажлын талбар руу шилжих 6
-    switch_workspace_0: Ажлын талбар руу шилжих 0
     move_to_workspace_7: Ажлын талбар руу шилжих 7
     send_to_workspace_4: Ажлын талбарт илгээх 4
     move_to_workspace_3: Ажлын талбар руу шилжих 3
@@ -189,6 +188,8 @@ shortcuts:
     restore_sizes: Хэмжээг сэргээх
     switch_workspace_9: Ажлын талбарт шилжих 9
     send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
+    switch_workspace_0: Ажлын талбарт шилжих 1
+    switch_workspace_1: Ажлын талбарт 2 руу шилжих
   enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
   enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
   reset: Үндсэндээ тохируулах

@@ -16,6 +16,7 @@ header:
     specific_apps: Apps Pataki
     seelen_wall: Odi
     seelen_rofi: Ifilọlẹ app
+    virtual_desk: Awọn orisun itẹwe foju
 start:
   message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
   message: >-
@@ -162,7 +163,6 @@ shortcuts:
     focus_left: Idojukọ osi
     move_to_workspace_3: Gbe si ibi-iṣẹ 3
     reserve_float: Dase leefofo loju omi
-    switch_workspace_1: Yipada si ibi-iṣẹ 1
     switch_workspace_9: Yipada si ibi-iṣẹ 9
     switch_workspace_2: Yipada si ibi-iṣẹ 2
     move_to_workspace_0: Gbe si ibi-iṣẹ 0
@@ -172,7 +172,6 @@ shortcuts:
     send_to_workspace_6: Firanṣẹ si ibi-iṣẹ 6
     send_to_workspace_7: Firanṣẹ si ibi-iṣẹ 7
     reserve_stack: Ipilẹ akopọ
-    switch_workspace_0: Yipada si ibi-iṣẹ 0
     send_to_workspace_9: Firanṣẹ si ibi-iṣẹ 9
     move_to_workspace_4: Gbe si ibi-iṣẹ 4
     move_to_workspace_8: Gbe si ibi-iṣẹ 8
@@ -188,6 +187,8 @@ shortcuts:
     focus_bottom: Idojukọ Idojukọ
     send_to_workspace_4: Firanṣẹ si ibi-iṣẹ 4
     reserve_left: Reserve osi
+    switch_workspace_1: Yipada si ibi-iṣẹ 2
+    switch_workspace_0: Yipada si ibi-iṣẹ 1
   enable: Mu awọn ọna abuja ti o sopọ mọ (Ahk)
   enable_tooltip: Muu Ti o ba yoo ṣe awọn ọna abuja tirẹ nipa lilo APEN mojuto API
   reset: Tun si awọn aseku

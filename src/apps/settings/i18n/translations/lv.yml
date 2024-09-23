@@ -16,6 +16,7 @@ header:
     monitors: Monitori
     seelen_wall: Siena
     seelen_rofi: Lietotņu palaišana
+    virtual_desk: Virtuālās galddatori
 start:
   message_accent: Optimizējiet savu produktivitāti ar stilu!
   message: >-
@@ -165,7 +166,6 @@ shortcuts:
     send_to_workspace_8: Nosūtīt uz darbvietu 8
     send_to_workspace_2: Nosūtīt uz darbvietu 2
     increase_height: Palielināt augstumu
-    switch_workspace_0: Pārslēdzieties uz darbvietu 0
     restore_sizes: Atjaunot izmērus
     send_to_workspace_4: Nosūtiet uz Workspace 4
     send_to_workspace_9: Nosūtīt uz darbvietu 9
@@ -174,7 +174,6 @@ shortcuts:
     reserve_bottom: Rezervēt apakšdaļu
     reserve_right: Rezervēt pa labi
     switch_workspace_5: Pārslēdzieties uz Workspace 5
-    switch_workspace_1: Pārslēdzieties uz 1. darbvietu
     reserve_left: Rezervēt pa kreisi
     switch_workspace_8: Pārslēdzieties uz darbvietu 8
     reserve_float: Rezerves pludiņš
@@ -190,6 +189,8 @@ shortcuts:
     reserve_stack: Rezerves kaudze
     decrease_width: Samazināt platumu
     send_to_workspace_3: Nosūtīt uz darbvietu 3
+    switch_workspace_0: Pārslēdzieties uz 1. darbvietu
+    switch_workspace_1: Pārslēdzieties uz darbvietu 2
   enable: Iespējot integrētus saīsnes (AHK)
   enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
   reset: Atiestatīt uz noklusējuma

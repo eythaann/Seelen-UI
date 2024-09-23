@@ -16,6 +16,7 @@ header:
     specific_apps: កម្មវិធីជាក់លាក់
     seelen_wall: ជញ្ជាំង
     seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
+    virtual_desk: ផ្ទៃតុនិម្មិត
 start:
   title: សូមស្វាគមន៍!
   message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
@@ -174,7 +175,6 @@ shortcuts:
     switch_workspace_4: ប្តូរទៅកន្លែងធ្វើការ 4
     move_to_workspace_3: ផ្លាស់ទីទៅកន្លែងធ្វើការ 3
     increase_width: បង្កើនទទឹង
-    switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 0
     switch_workspace_5: ប្តូរទៅកន្លែងធ្វើការ 5
     reserve_left: កក់ទុកខាងឆ្វេង
     move_to_workspace_6: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៦
@@ -183,13 +183,14 @@ shortcuts:
     move_to_workspace_8: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៨
     send_to_workspace_8: ផ្ញើទៅកន្លែងធ្វើការ ៨
     send_to_workspace_6: ផ្ញើទៅកន្លែងធ្វើការ ៦
-    switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 1
     switch_workspace_9: ប្តូរទៅកន្លែងធ្វើការ 9
     switch_workspace_6: ប្តូរទៅកន្លែងធ្វើការ 6
     move_to_workspace_9: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៩
     move_to_workspace_1: ផ្លាស់ទីទៅកន្លែងធ្វើការ 1
     switch_workspace_7: ប្តូរទៅកន្លែងធ្វើការ 7
     focus_bottom: ផ្ដោតបាត
+    switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 1
+    switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 2
   enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api
   enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
   reset: កំណត់ឡើងវិញនូវលំនាំដើម

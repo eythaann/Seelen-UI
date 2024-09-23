@@ -16,6 +16,7 @@ header:
     seelen_wm: Ablakvezető
     seelen_rofi: Alkalmazásindító
     seelen_wall: A fal
+    virtual_desk: Virtuális asztali számítógépek
 start:
   title: Üdvözöljük!
   message: >-
@@ -161,7 +162,6 @@ shortcuts:
     focus_bottom: Fókusz alsó
     increase_width: Növelje a szélességet
     send_to_workspace_3: Küldje el a Workspace 3 -ot
-    switch_workspace_0: Váltás a 0 munkaterületre
     move_to_workspace_2: Költözni a 2. munkaterületre
     send_to_workspace_1: Küldje el az 1. munkaterületre
     move_to_workspace_3: Költözni a Munkaterületre 3
@@ -184,12 +184,13 @@ shortcuts:
     send_to_workspace_4: Küldje el a Workspace 4 -et
     switch_workspace_5: Váltás az 5. munkaterületre
     switch_workspace_3: Váltás a 3. munkaterületre
-    switch_workspace_1: Váltás az 1. munkaterületre
     reserve_bottom: Tartalék alsó rész
     decrease_width: Csökken a szélesség
     send_to_workspace_9: Küldje el a munkaterületre 9
     move_to_workspace_6: Költözni a 6. munkaterületre
     send_to_workspace_7: Küldje el a Workspace 7 -et
+    switch_workspace_0: Váltás az 1. munkaterületre
+    switch_workspace_1: Váltás a 2. munkaterületre
   enable_tooltip: >-
     Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
     parancsikonjait

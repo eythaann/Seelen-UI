@@ -16,6 +16,7 @@ header:
     seelen_wm: વિન્ડો મેનેજર
     seelen_wall: દિવાલ
     seelen_rofi: હાથ
+    virtual_desk: વર્ચ્યુઅલ ડેસ્કટ .પ
 start:
   title: સ્વાગત છે!
   message_accent: શૈલી સાથે તમારી ઉત્પાદકતાને ઑપ્ટિમાઇઝ કરો!
@@ -146,8 +147,6 @@ shortcuts:
   labels:
     send_to_workspace_2: વર્કસ્પેસ 2 પર મોકલો
     send_to_workspace_1: વર્કસ્પેસ 1 પર મોકલો
-    switch_workspace_0: વર્કસ્પેસ 0 પર સ્વિચ કરો
-    switch_workspace_1: વર્કસ્પેસ 1 પર સ્વિચ કરો
     switch_workspace_6: વર્કસ્પેસ 6 પર સ્વિચ કરો
     send_to_workspace_7: વર્કસ્પેસ પર મોકલો 7
     send_to_workspace_5: વર્કસ્પેસ 5 પર મોકલો
@@ -190,6 +189,8 @@ shortcuts:
     switch_workspace_3: વર્કસ્પેસ 3 પર સ્વિચ કરો
     focus_bottom: ફોકસ બોટમ
     switch_workspace_7: વર્કસ્પેસ 7 પર સ્વિચ કરો
+    switch_workspace_0: વર્કસ્પેસ 1 પર સ્વિચ કરો
+    switch_workspace_1: વર્કસ્પેસ 2 પર સ્વિચ કરો
   enable_tooltip: >-
     જો તમે સીલેન કોર એપીઆઈનો ઉપયોગ કરીને તમારા પોતાના શોર્ટકટ્સનો અમલ કરશો તો
     અક્ષમ કરો
