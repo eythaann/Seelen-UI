@@ -3,6 +3,8 @@ use std::fmt::Display;
 
 use windows::Win32::Foundation::POINT;
 
+use seelen_core::rect::Rect;
+
 /// A Point type stores the x and y position.
 #[derive(Clone, Copy, PartialEq, Eq, Default)]
 pub struct Point(POINT);
@@ -21,6 +23,13 @@ impl Point {
     /// Retrieves the y position.
     pub fn get_y(&self) -> i32 {
         self.0.y
+    }
+
+    pub fn is_inside_rect(&self, rect: &Rect) -> bool {
+        self.0.x >= rect.left
+            && self.0.x <= rect.right
+            && self.0.y >= rect.top
+            && self.0.y <= rect.bottom
     }
 }
 

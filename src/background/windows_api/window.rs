@@ -1,3 +1,4 @@
+use seelen_core::rect::Rect;
 use std::{
     fmt::{Debug, Display},
     path::PathBuf,
@@ -82,6 +83,14 @@ impl Window {
 
     pub fn app_display_name(&self) -> Result<String> {
         WindowsApi::get_window_display_name(self.0)
+    }
+
+    pub fn outer_rect(&self) -> Result<Rect> {
+        Ok(WindowsApi::get_outer_window_rect(self.hwnd())?.into())
+    }
+
+    pub fn inner_rect(&self) -> Result<Rect> {
+        Ok(WindowsApi::get_inner_window_rect(self.hwnd())?.into())
     }
 
     pub fn parent(&self) -> Option<Window> {

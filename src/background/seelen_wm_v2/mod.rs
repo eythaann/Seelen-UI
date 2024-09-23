@@ -1,3 +1,4 @@
+pub mod cli;
 pub mod handler;
 pub mod hook;
 pub mod instance;
@@ -109,7 +110,7 @@ impl WindowManagerV2 {
                 get_app_handle().emit_to(
                     format!("{}/{}", Self::TARGET, monitor_id),
                     SeelenEvent::WMSetLayout,
-                    workspace.get_root_node().map(|n| n.inner()),
+                    workspace.get_root_node(),
                 )?;
             }
         }
@@ -120,6 +121,7 @@ impl WindowManagerV2 {
         let mut state = trace_lock!(WM_STATE);
         let current_workspace = get_vd_manager().get_current()?.id();
 
+        // TODO this can be optimized, later
         for (monitor_id, monitor) in state.monitors.iter_mut() {
             for (workspace_id, workspace) in monitor.workspaces.iter_mut() {
                 workspace.remove_window(window);
@@ -127,7 +129,7 @@ impl WindowManagerV2 {
                     get_app_handle().emit_to(
                         format!("{}/{}", Self::TARGET, monitor_id),
                         SeelenEvent::WMSetLayout,
-                        workspace.get_root_node().map(|n| n.inner()),
+                        workspace.get_root_node(),
                     )?;
                 }
             }
@@ -143,7 +145,7 @@ impl WindowManagerV2 {
             get_app_handle().emit_to(
                 format!("{}/{}", Self::TARGET, monitor_id),
                 SeelenEvent::WMSetLayout,
-                workspace.get_root_node().map(|n| n.inner()),
+                workspace.get_root_node(),
             )?;
         }
         Ok(())

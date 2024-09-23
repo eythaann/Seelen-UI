@@ -26,7 +26,7 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
         bottom: rect.bottom + shadow.bottom,
     };
 
-    WindowsApi::move_window(hwnd, &rect)?;
+    // WindowsApi::move_window(hwnd, &rect)?;
     WindowsApi::set_position(
         hwnd,
         None,

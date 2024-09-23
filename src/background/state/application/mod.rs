@@ -54,6 +54,8 @@ lazy_static! {
     ));
 }
 
+static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
+
 pub type LauncherHistory = HashMap<String, Vec<String>>;
 
 #[derive(Getters, Debug, Clone, Serialize)]
@@ -77,7 +79,7 @@ pub struct FullState {
     pub history: LauncherHistory,
 }
 
-static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
+unsafe impl Sync for FullState {}
 
 impl FullState {
     fn new() -> Result<Self> {

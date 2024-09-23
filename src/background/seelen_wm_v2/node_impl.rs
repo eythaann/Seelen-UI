@@ -2,7 +2,7 @@ use evalexpr::{context_map, eval_with_context, HashMapContext};
 use itertools::Itertools;
 use seelen_core::state::WmNode;
 
-use crate::{error_handler::Result, windows_api::window::Window};
+use crate::{error_handler::Result, modules::input::domain::Point, windows_api::window::Window};
 
 #[derive(Debug)]
 pub struct WmNodeImpl(WmNode);
@@ -119,38 +119,95 @@ impl WmNodeImpl {
         handles
     }
 
-    fn _contains(node: &WmNode, window: &Window) -> bool {
-        match node {
-            WmNode::Leaf(leaf) => leaf.handle == Some(window.address()),
-            WmNode::Stack(stack) => stack.handles.contains(&window.address()),
-            WmNode::Fallback(fallback) => fallback.handles.contains(&window.address()),
+    fn _trace<'a>(root: &'a WmNode, window: &Window) -> Vec<&'a WmNode> {
+        let mut nodes = Vec::new();
+        match root {
+            WmNode::Leaf(leaf) => {
+                if leaf.handle == Some(window.address()) {
+                    nodes.push(root);
+                }
+            }
+            WmNode::Stack(stack) => {
+                if stack.handles.contains(&window.address()) {
+                    nodes.push(root);
+                }
+            }
+            WmNode::Fallback(fallback) => {
+                if fallback.handles.contains(&window.address()) {
+                    nodes.push(root);
+                }
+            }
             WmNode::Vertical(vertical) => {
                 for child in vertical.children.iter() {
-                    if Self::_contains(child, window) {
-                        return true;
+                    let mut sub_trace = Self::_trace(child, window);
+                    if !sub_trace.is_empty() {
+                        nodes.push(root);
+                        nodes.append(&mut sub_trace);
+                        break;
                     }
                 }
-                false
             }
             WmNode::Horizontal(horizontal) => {
                 for child in horizontal.children.iter() {
-                    if Self::_contains(child, window) {
-                        return true;
+                    let mut sub_trace = Self::_trace(child, window);
+                    if !sub_trace.is_empty() {
+                        nodes.push(root);
+                        nodes.append(&mut sub_trace);
+                        break;
                     }
                 }
-                false
             }
         }
+        nodes
     }
 
-    fn _len(node: &WmNode) -> usize {
-        match node {
-            WmNode::Leaf(leaf) => leaf.handle.is_some() as usize,
-            WmNode::Stack(stack) => stack.handles.len(),
-            WmNode::Fallback(fallback) => fallback.handles.len(),
-            WmNode::Vertical(vertical) => vertical.children.iter().map(Self::_len).sum(),
-            WmNode::Horizontal(horizontal) => horizontal.children.iter().map(Self::_len).sum(),
-        }
+    fn _get_node_at_point<'a>(
+        root: &'a mut WmNode,
+        point: &Point,
+    ) -> Result<Option<&'a mut WmNode>> {
+        match root {
+            WmNode::Leaf(leaf) => {
+                if let Some(handle) = leaf.handle {
+                    let window = Window::from(handle);
+                    if point.is_inside_rect(&window.inner_rect()?) {
+                        return Ok(Some(root));
+                    }
+                }
+            }
+            WmNode::Stack(stack) => {
+                if let Some(handle) = stack.active {
+                    let window = Window::from(handle);
+                    if point.is_inside_rect(&window.inner_rect()?) {
+                        return Ok(Some(root));
+                    }
+                }
+            }
+            WmNode::Fallback(fallback) => {
+                if let Some(handle) = fallback.active {
+                    let window = Window::from(handle);
+                    if point.is_inside_rect(&window.inner_rect()?) {
+                        return Ok(Some(root));
+                    }
+                }
+            }
+            WmNode::Vertical(vertical) => {
+                for child in vertical.children.iter_mut() {
+                    let node = Self::_get_node_at_point(child, point)?;
+                    if node.is_some() {
+                        return Ok(node);
+                    }
+                }
+            }
+            WmNode::Horizontal(horizontal) => {
+                for child in horizontal.children.iter_mut() {
+                    let node = Self::_get_node_at_point(child, point)?;
+                    if node.is_some() {
+                        return Ok(node);
+                    }
+                }
+            }
+        };
+        Ok(None)
     }
 
     fn create_context(len: usize, is_reindexing: bool) -> HashMapContext {
@@ -165,7 +222,7 @@ impl WmNodeImpl {
     ///
     /// **Note:** Reindexing can fail on add some windows so it will return failed handles as residual
     pub fn try_add_window(&mut self, window: &Window) -> Vec<isize> {
-        let len = Self::_len(self.inner());
+        let len = self.inner().len();
         let context = Self::create_context(len, false);
         if Self::_try_add_window(self.inner_mut(), window, &context).is_err() {
             return vec![window.address()];
@@ -209,6 +266,14 @@ impl WmNodeImpl {
     }
 
     pub fn contains(&self, window: &Window) -> bool {
-        Self::_contains(self.inner(), window)
+        !Self::_trace(self.inner(), window).is_empty()
+    }
+
+    pub fn trace(&self, window: &Window) -> Vec<&WmNode> {
+        Self::_trace(self.inner(), window)
+    }
+
+    pub fn get_node_at_point(&mut self, point: &Point) -> Result<Option<&mut WmNode>> {
+        Self::_get_node_at_point(self.inner_mut(), point)
     }
 }

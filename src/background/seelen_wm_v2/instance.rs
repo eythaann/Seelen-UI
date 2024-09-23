@@ -11,7 +11,7 @@ use crate::{
 
 #[derive(Getters, MutGetters)]
 pub struct WindowManagerV2 {
-    window: WebviewWindow,
+    pub window: WebviewWindow,
 }
 
 impl Drop for WindowManagerV2 {
@@ -67,7 +67,7 @@ impl WindowManagerV2 {
                     app.emit_to(
                         format!("{}/{}", Self::TARGET, monitor_id),
                         SeelenEvent::WMSetLayout,
-                        w.get_root_node().map(|n| n.inner()),
+                        w.get_root_node(),
                     )?;
                 }
 
