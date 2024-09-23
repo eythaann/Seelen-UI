@@ -16,6 +16,7 @@ header:
     general: Yleinen
     seelen_rofi: Sovelluskäynnistys
     seelen_wall: Seinä
+    virtual_desk: Virtuaalinen työpöytä
 start:
   title: Tervetuloa!
   message_accent: Optimoi tuottavuus tyylillä!
@@ -179,17 +180,17 @@ shortcuts:
     reserve_stack: Varantopino
     reserve_float: Varaa kelluva
     switch_workspace_9: Vaihda työtilaan 9
-    switch_workspace_0: Vaihda työtilaan 0
     reserve_right: Varaa oikea
     send_to_workspace_6: Lähetä työtilaan 6
     move_to_workspace_5: Siirry työtilaan 5
-    switch_workspace_1: Vaihda työtilaan 1
     focus_left: Focus jäljellä
     send_to_workspace_4: Lähetä työtilaan 4
     send_to_workspace_2: Lähetä työtilaan 2
     send_to_workspace_7: Lähetä työtilaan 7
     move_to_workspace_4: Siirry työtilaan 4
     send_to_workspace_3: Lähetä työtilaan 3
+    switch_workspace_1: Vaihda työtilaan 2
+    switch_workspace_0: Vaihda työtilaan 1
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
     -sovellusliittymällä

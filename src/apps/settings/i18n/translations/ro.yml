@@ -16,6 +16,7 @@ header:
     monitors: Monitoare
     seelen_wall: Peretele
     seelen_rofi: Lansator de aplicații
+    virtual_desk: Desktop -uri virtuale
 start:
   title: Bine ati venit!
   message_accent: Optimizează -ți productivitatea cu stil!
@@ -145,8 +146,6 @@ extras:
 shortcuts:
   labels:
     move_to_workspace_8: Mutați -vă la spațiul de lucru 8
-    switch_workspace_1: Treceți la spațiul de lucru 1
-    switch_workspace_0: Treceți la spațiul de lucru 0
     switch_workspace_3: Treceți la spațiul de lucru 3
     send_to_workspace_0: Trimiteți la spațiul de lucru 0
     send_to_workspace_5: Trimiteți la spațiul de lucru 5
@@ -190,6 +189,8 @@ shortcuts:
     switch_workspace_8: Treceți la spațiul de lucru 8
     focus_top: Focus top
     move_to_workspace_7: Mutați -vă la spațiul de lucru 7
+    switch_workspace_0: Treceți la spațiul de lucru 1
+    switch_workspace_1: Treceți la spațiul de lucru 2
   enable: Activați comenzi rapide integrate (AHK)
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriile comenzi rapide folosind API -ul

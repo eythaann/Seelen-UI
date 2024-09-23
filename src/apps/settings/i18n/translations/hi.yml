@@ -16,6 +16,7 @@ header:
     info: जानकारी
     seelen_wall: दीवार
     seelen_rofi: ऐप लॉन्चर
+    virtual_desk: आभासी डेस्कटॉप्स
 start:
   message_accent: शैली के साथ अपनी उत्पादकता का अनुकूलन करें!
   message: >-
@@ -144,7 +145,6 @@ extras:
   version: संस्करण
 shortcuts:
   labels:
-    switch_workspace_1: कार्यक्षेत्र 1 पर स्विच करें
     reserve_right: आरक्षित अधिकार
     move_to_workspace_1: कार्यक्षेत्र 1 पर जाएं
     switch_workspace_2: कार्यक्षेत्र 2 पर स्विच करें
@@ -185,11 +185,12 @@ shortcuts:
     send_to_workspace_6: कार्यक्षेत्र 6 को भेजें
     move_to_workspace_5: कार्यक्षेत्र 5 पर जाएं
     send_to_workspace_9: कार्यक्षेत्र 9 को भेजें
-    switch_workspace_0: कार्यक्षेत्र पर स्विच करें 0
     switch_workspace_7: कार्यक्षेत्र 7 पर स्विच करें
     reserve_float: रिजर्व फ्लोट
     switch_workspace_3: कार्यक्षेत्र 3 पर स्विच करें
     move_to_workspace_7: कार्यक्षेत्र 7 पर जाएं
+    switch_workspace_1: कार्यक्षेत्र 2 पर स्विच करें
+    switch_workspace_0: कार्यक्षेत्र 1 पर स्विच करें
   enable: एकीकृत शॉर्टकट (AHK) सक्षम करें
   enable_tooltip: >-
     अक्षम करें यदि आप सेलेन कोर एपीआई का उपयोग करके अपने स्वयं के शॉर्टकट को

@@ -16,6 +16,7 @@ header:
     seelen_wm: वान प्रबन्धक
     seelen_wall: भित्ता
     seelen_rofi: फोटो लन्चर
+    virtual_desk: भर्चुअल डेस्कटपहरू
 start:
   message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
   message: >-
@@ -147,7 +148,6 @@ shortcuts:
     send_to_workspace_8: कार्यक्षेत्र to मा पठाउनुहोस्
     move_to_workspace_3: कार्यक्षेत्र in मा सार्नुहोस्
     increase_height: उचाइ बढाउनुहोस्
-    switch_workspace_0: कार्यक्षेत्र 0 मा स्विच गर्नुहोस्
     send_to_workspace_9: कार्यक्षेत्र to मा पठाउनुहोस्
     reserve_bottom: रिजर्व तल
     move_to_workspace_8: कार्यक्षेत्र to मा सार्नुहोस्
@@ -169,7 +169,6 @@ shortcuts:
     move_to_workspace_6: कार्यक्षेत्र in मा सार्नुहोस्
     switch_workspace_6: कार्यक्षेत्र in मा स्विच गर्नुहोस्
     focus_bottom: फोकस तल
-    switch_workspace_1: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
     send_to_workspace_7: कार्यक्षेत्र to मा पठाउनुहोस्
     increase_width: चौडाई बढाउनुहोस्
     move_to_workspace_7: कार्यस्थान to मा सार्नुहोस्
@@ -189,6 +188,8 @@ shortcuts:
     reserve_right: रिजर्व सहि
     restore_sizes: आकार पुनर्स्थापना गर्नुहोस्
     switch_workspace_9: कार्यक्षेत्र in मा स्विच गर्नुहोस्
+    switch_workspace_0: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
+    switch_workspace_1: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
   enable_tooltip: >-
     असक्षम गर्नुहोस् यदि तपाईं देखिने कोर एपीआई प्रयोग गरेर तपाईंको आफ्नै
     सर्टकटहरू लागू गर्नुहुन्छ भने असक्षम गर्नुहोस्

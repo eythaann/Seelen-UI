@@ -16,6 +16,7 @@ header:
     seelen_wm: የመስኮት አቀናባሪ
     seelen_wall: ግድግዳው
     seelen_rofi: የመተግበሪያ አስጀማሪ
+    virtual_desk: ምናባዊ ዴስክቶፕስ
 start:
   title: እንኳን ደህና መጣህ!
   message: >-
@@ -146,8 +147,6 @@ shortcuts:
     increase_height: ቁመት ይጨምሩ
     send_to_workspace_1: ወደ የስራ ቦታ 1 ይላኩ 1
     reserve_bottom: የተጠባበቅ ክፍል
-    switch_workspace_1: ወደ የሥራ ቦታ 1 ቀይር
-    switch_workspace_0: ወደ የሥራ ቦታ 0 ይቀይሩ
     move_to_workspace_0: ወደ የሥራ ቦታ 0 ይሂዱ
     send_to_workspace_5: ወደ የሥራ ቦታ 5 ይላኩ
     switch_workspace_9: ወደ የሥራ ቦታ 9 ቀይር
@@ -187,6 +186,8 @@ shortcuts:
     restore_sizes: መጠኖች ወደነበሩበት ይመልሱ
     reserve_right: መብት
     decrease_width: ስፋት መቀነስ
+    switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
+    switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
   enable: የተቀናጁ አቋራጮችን (AHK)
   enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
   reset: ወደ ነባሪዎች ዳግም ያስጀምሩ

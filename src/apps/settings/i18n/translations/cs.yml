@@ -16,6 +16,7 @@ header:
     shortcuts: Zkratky
     seelen_rofi: Spouštěč aplikací
     seelen_wall: Zeď
+    virtual_desk: Virtuální stolní počítače
 start:
   title: Vítejte!
   message: >-
@@ -170,13 +171,11 @@ shortcuts:
     decrease_width: Snížit šířku
     move_to_workspace_3: Přesuňte se do pracovního prostoru 3
     switch_workspace_6: Přepněte do pracovního prostoru 6
-    switch_workspace_0: Přepněte do pracovního prostoru 0
     reserve_left: Rezerva vlevo
     increase_width: Zvětšit šířku
     restore_sizes: Obnovení velikosti
     reserve_stack: Rezervní zásobník
     switch_workspace_7: Přepněte do pracovního prostoru 7
-    switch_workspace_1: Přepněte do pracovního prostoru 1
     switch_workspace_5: Přepněte do pracovního prostoru 5
     focus_right: Zaměřte se správně
     focus_left: Zaostření doleva
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_7: Přesuňte se do pracovního prostoru 7
     send_to_workspace_7: Odeslat do pracovního prostoru 7
     move_to_workspace_9: Přesuňte se do pracovního prostoru 9
+    switch_workspace_1: Přepněte do pracovního prostoru 2
+    switch_workspace_0: Přepněte do pracovního prostoru 1
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
   reset: Resetovat na výchozí hodnoty

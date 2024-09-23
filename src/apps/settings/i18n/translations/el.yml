@@ -16,6 +16,7 @@ header:
     seelen_weg: Λέσχη εργασιών
     seelen_wall: Ο τοίχος
     seelen_rofi: Εκτοξευτής εφαρμογών
+    virtual_desk: Εικονικοί επιτραπέζιοι
 start:
   message_accent: Βελτιστοποιήστε την παραγωγικότητά σας με στυλ!
   title: Καλως ΗΡΘΑΤΕ!
@@ -149,7 +150,6 @@ shortcuts:
     reserve_float: Επιφυλάκισμα
     reserve_right: Διατηρήστε το δικαίωμα
     switch_workspace_4: Μεταβείτε στο χώρο εργασίας 4
-    switch_workspace_1: Μεταβείτε στο χώρο εργασίας 1
     reserve_bottom: Αποθεματικός
     focus_bottom: Επικεντρωμένος κάτω
     focus_top: Επικεντρώνεται στην κορυφή
@@ -160,7 +160,6 @@ shortcuts:
     reserve_top: Επιφυλάξτε την κορυφή
     reserve_left: Αποθεματικό αριστερά
     switch_workspace_7: Μεταβείτε στο χώρο εργασίας 7
-    switch_workspace_0: Μεταβείτε στο χώρο εργασίας 0
     send_to_workspace_6: Αποστολή στο χώρο εργασίας 6
     increase_height: Ύψος αύξησης
     send_to_workspace_8: Αποστολή στο χώρο εργασίας 8
@@ -190,6 +189,8 @@ shortcuts:
     send_to_workspace_0: Αποστολή στο χώρο εργασίας 0
     send_to_workspace_9: Αποστολή στο χώρο εργασίας 9
     move_to_workspace_0: Μετακίνηση στο χώρο εργασίας 0
+    switch_workspace_1: Μεταβείτε στο χώρο εργασίας 2
+    switch_workspace_0: Μεταβείτε στο χώρο εργασίας 1
   enable: Ενεργοποίηση ολοκληρωμένων συντομεύσεων (AHK)
   enable_tooltip: >-
     Απενεργοποιήστε εάν θα εφαρμόσετε τις δικές σας συντομεύσεις χρησιμοποιώντας

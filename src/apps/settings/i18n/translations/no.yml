@@ -16,6 +16,7 @@ header:
     monitors: Skjermer
     seelen_rofi: App Launcher
     seelen_wall: Veggen
+    virtual_desk: Virtuelle stasjonære maskiner
 start:
   title: Velkommen!
   message: >-
@@ -146,14 +147,12 @@ shortcuts:
   labels:
     focus_latest: Fokusere siste
     reserve_left: Reserve igjen
-    switch_workspace_1: Bytt til arbeidsområdet 1
     focus_top: Fokus topp
     switch_workspace_2: Bytt til arbeidsområdet 2
     send_to_workspace_8: Send til arbeidsområdet 8
     switch_workspace_7: Bytt til arbeidsområdet 7
     increase_width: Øke bredden
     send_to_workspace_4: Send til arbeidsområdet 4
-    switch_workspace_0: Bytt til arbeidsområdet 0
     decrease_width: Redusere bredden
     move_to_workspace_4: Flytt til arbeidsområdet 4
     reserve_bottom: Reserve bunn
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_3: Flytt til arbeidsområdet 3
     send_to_workspace_7: Send til arbeidsområdet 7
     send_to_workspace_3: Send til arbeidsområdet 3
+    switch_workspace_0: Bytt til arbeidsområdet 1
+    switch_workspace_1: Bytt til arbeidsområdet 2
   enable_tooltip: >-
     Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
     Core API

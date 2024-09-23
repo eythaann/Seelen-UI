@@ -16,6 +16,7 @@ header:
     general: General
     seelen_wall: Divar
     seelen_rofi: App başlatıcısı
+    virtual_desk: Virtual masaüstü
 start:
   title: Xoş gəliş edin!
   message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
@@ -183,13 +184,13 @@ shortcuts:
     move_to_workspace_9: İş sahəsinə 9-a keçin
     move_to_workspace_0: İş sahəsinə 0 hərəkət edin
     send_to_workspace_4: İş sahəsinə 4 göndərin
-    switch_workspace_0: İş sahəsinə 0 keçin
     switch_workspace_2: İş sahəsinə 2 keçin
-    switch_workspace_1: İş sahəsinə 1 keçin
     send_to_workspace_2: İş sahəsinə 2 göndərin
     send_to_workspace_0: 0 iş sahəsinə göndərin
     send_to_workspace_3: İş sahəsinə göndərin 3
     reserve_float: Ehtiyat float
+    switch_workspace_0: İş sahəsinə 1 keçin
+    switch_workspace_1: İş sahəsinə 2 keçin
   enable: İnteqrasiya edilmiş qısa yolları (AHK) aktivləşdirin
   enable_tooltip: >-
     Seelen Core API istifadə edərək öz qısa yollarınızı həyata keçirə bilsəniz

@@ -16,6 +16,7 @@ header:
     shortcuts: ทางลัด
     seelen_wall: กำแพง
     seelen_rofi: แอพ Launcher
+    virtual_desk: เดสก์ท็อปเสมือนจริง
 start:
   title: ยินดีต้อนรับ!
   message_accent: เพิ่มประสิทธิภาพการทำงานของคุณอย่างมีสไตล์!
@@ -154,7 +155,6 @@ shortcuts:
     send_to_workspace_2: ส่งไปยังเวิร์กสเปซ 2
     reserve_top: สำรองด้านบน
     decrease_height: ลดความสูง
-    switch_workspace_0: สลับไปที่เวิร์กสเปซ 0
     reserve_bottom: สำรองด้านล่าง
     move_to_workspace_8: ย้ายไปที่เวิร์กสเปซ 8
     reserve_float: สำรองลอย
@@ -162,7 +162,6 @@ shortcuts:
     move_to_workspace_2: ย้ายไปที่เวิร์กสเปซ 2
     move_to_workspace_4: ย้ายไปที่เวิร์กสเปซ 4
     switch_workspace_6: เปลี่ยนไปใช้พื้นที่ทำงาน 6
-    switch_workspace_1: เปลี่ยนไปใช้พื้นที่ทำงาน 1
     move_to_workspace_5: ย้ายไปที่เวิร์กสเปซ 5
     move_to_workspace_0: ย้ายไปที่เวิร์กสเปซ 0
     switch_workspace_9: เปลี่ยนไปใช้พื้นที่ทำงาน 9
@@ -188,6 +187,8 @@ shortcuts:
     send_to_workspace_7: ส่งไปยังเวิร์กสเปซ 7
     send_to_workspace_4: ส่งไปยังเวิร์กสเปซ 4
     move_to_workspace_7: ย้ายไปที่เวิร์กสเปซ 7
+    switch_workspace_0: เปลี่ยนไปใช้พื้นที่ทำงาน 1
+    switch_workspace_1: สลับไปที่ Workspace 2
   enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
   enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API
   reset: รีเซ็ตเป็นค่าเริ่มต้น

@@ -23,6 +23,7 @@ header:
     info: 정보
     seelen_wall: 벽
     seelen_rofi: 앱 런처
+    virtual_desk: 가상 데스크톱
 start:
   title: 환영합니다!
   message: >-
@@ -166,8 +167,6 @@ shortcuts:
     increase_height: 높이 증가
     decrease_height: 높이 감소
     restore_sizes: 크기 복원
-    switch_workspace_0: 작업 공간 0으로 전환
-    switch_workspace_1: 작업 공간 1으로 전환
     switch_workspace_2: 작업 공간 2로 전환
     switch_workspace_3: 작업 공간 3으로 전환
     switch_workspace_4: 작업 공간 4로 전환
@@ -196,6 +195,8 @@ shortcuts:
     send_to_workspace_7: 작업 공간 7으로 보내기
     send_to_workspace_8: 작업 공간 8으로 보내기
     send_to_workspace_9: 작업 공간 9으로 보내기
+    switch_workspace_1: 작업 공간으로 전환합니다
+    switch_workspace_0: 작업 공간으로 전환 1
   reset: 기본값으로 재설정하십시오
 vd:
   strategy:

@@ -16,6 +16,7 @@ header:
     seelen_weg: Dock / Taskbar
     seelen_wall: D'Mauer
     seelen_rofi: App launcher
+    virtual_desk: Virtuell Desktops
 start:
   title: Wëllkomm!
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
@@ -157,7 +158,6 @@ shortcuts:
     switch_workspace_9: Wiesselt op Workspace 9
     switch_workspace_3: Wiesselt op Workspace 3
     switch_workspace_8: Schalt op Workspace 8
-    switch_workspace_0: Schalt op Aarbechtsberäich 0
     focus_latest: Fokusséieren dat lescht
     focus_top: Fokusséieren Top
     move_to_workspace_1: Gitt op Aarbechtsberäich 1
@@ -175,7 +175,6 @@ shortcuts:
     move_to_workspace_8: Plënnert op Workspace 8
     move_to_workspace_2: Plënnert op Aarbechtsberäich 2
     send_to_workspace_3: Schéckt op Aarbechtsberäich 3
-    switch_workspace_1: Schalt op Aarbechtsberäich 1
     move_to_workspace_0: Plënnert op Workspace 0
     move_to_workspace_9: Plënnert op Workspace 9
     move_to_workspace_7: Plënnert op Workspace 7
@@ -190,6 +189,8 @@ shortcuts:
     reserve_top: Reserve Top
     send_to_workspace_2: Schéckt op Aarbechtsberäich 2
     reserve_float: Reservéiert Float
+    switch_workspace_1: Schalt op Aarbechtsberäich 2
+    switch_workspace_0: Schalt op Aarbechtsberäich 1
   enable: Aktivéiert integréiert Ofkiirzungen (AHK)
   enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
   reset: Reset op Defaults

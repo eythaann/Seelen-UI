@@ -16,6 +16,7 @@ header:
     shortcuts: Ярлики
     seelen_rofi: Запуск програми
     seelen_wall: Стіна
+    virtual_desk: Віртуальні настільні ПК
 start:
   title: Ласкаво просимо!
   message_accent: Оптимізуйте свою продуктивність стилем!
@@ -148,10 +149,8 @@ shortcuts:
     move_to_workspace_4: Переходити до робочої області 4
     move_to_workspace_2: Перехід до робочої області 2
     focus_latest: Фокус найновіший
-    switch_workspace_0: Перехід на робочу область 0
     switch_workspace_7: Перехід на робочу область 7
     switch_workspace_2: Перехід на робочу область 2
-    switch_workspace_1: Перехід на робочу область 1
     increase_width: Збільшити ширину
     switch_workspace_3: Перехід на робочу область 3
     move_to_workspace_9: Переходити до робочої області 9
@@ -190,6 +189,8 @@ shortcuts:
     send_to_workspace_6: Надіслати на робочу область 6
     focus_right: Фокус правильно
     send_to_workspace_7: Надіслати на робочу область 7
+    switch_workspace_0: Перехід на робочу область 1
+    switch_workspace_1: Перехід на робочу область 2
   enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
   enable: Увімкнути інтегровані ярлики (AHK)
   reset: Скидання за замовчуванням

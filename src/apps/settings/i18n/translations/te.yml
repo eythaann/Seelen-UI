@@ -16,6 +16,7 @@ header:
     seelen_weg: డాక్/టాస్క్‌బార్
     seelen_wall: గోడ
     seelen_rofi: అనువర్తన లాంచర్
+    virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
 start:
   title: స్వాగతం!
   message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
@@ -148,10 +149,8 @@ shortcuts:
     reserve_right: రిజర్వ్ హక్కు
     reserve_left: రిజర్వ్ ఎడమ
     increase_height: ఎత్తు పెంచండి
-    switch_workspace_0: కార్యస్థలం 0కి మారండి
     reserve_bottom: రిజర్వ్ బాటమ్
     send_to_workspace_0: కార్యస్థలం 0కి పంపండి
-    switch_workspace_1: కార్యస్థలానికి మారండి 1
     move_to_workspace_4: కార్యస్థలానికి తరలించు 4
     switch_workspace_6: కార్యస్థలానికి మారండి 6
     reserve_top: రిజర్వ్ టాప్
@@ -190,6 +189,8 @@ shortcuts:
     send_to_workspace_8: కార్యస్థలానికి పంపండి 8
     switch_workspace_7: కార్యస్థలానికి మారండి 7
     focus_bottom: ఫోకస్ బాటమ్
+    switch_workspace_0: వర్క్‌స్పేస్ 1 కి మారండి
+    switch_workspace_1: వర్క్‌స్పేస్ 2 కి మారండి
   enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
   enable_tooltip: >-
     మీరు సీలెన్ కోర్ Apiని ఉపయోగించి మీ స్వంత సత్వరమార్గాలను అమలు చేస్తే

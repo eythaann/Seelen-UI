@@ -16,6 +16,7 @@ header:
     shortcuts: Snelkoppelingen
     seelen_wall: De muur
     seelen_rofi: Apparter
+    virtual_desk: Virtuele desktops
 start:
   message_accent: Optimaliseer uw productiviteit met stijl!
   title: Welkom!
@@ -147,9 +148,7 @@ shortcuts:
     decrease_width: Breedte afnemen
     move_to_workspace_6: Ga naar werkruimte 6
     move_to_workspace_2: Ga naar werkruimte 2
-    switch_workspace_1: Schakel over naar werkruimte 1
     switch_workspace_6: Schakel over naar werkruimte 6
-    switch_workspace_0: Schakel over naar werkruimte 0
     move_to_workspace_4: Ga naar werkruimte 4
     move_to_workspace_9: Ga naar werkruimte 9
     increase_height: Verhoog de hoogte
@@ -190,6 +189,8 @@ shortcuts:
     send_to_workspace_4: Stuur naar werkruimte 4
     focus_right: Focus goed
     focus_bottom: Focusbodem
+    switch_workspace_0: Schakel over naar werkruimte 1
+    switch_workspace_1: Schakel over naar werkruimte 2
   enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
   enable_tooltip: >-
     Schakel uit of u uw eigen snelkoppelingen implementeert met behulp van de

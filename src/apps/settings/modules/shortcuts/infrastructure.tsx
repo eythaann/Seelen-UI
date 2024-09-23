@@ -117,7 +117,7 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_wm')}>
+        <SettingsSubGroup label={t('header.labels.virtual_desk')}>
           <AhkOptions
             variables={[
               'switchWorkspace0',
@@ -137,7 +137,7 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_wm')}>
+        <SettingsSubGroup label={t('header.labels.virtual_desk')}>
           <AhkOptions
             variables={[
               'sendToWorkspace0',
@@ -157,7 +157,7 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <SettingsSubGroup label={t('header.labels.seelen_wm')}>
+        <SettingsSubGroup label={t('header.labels.virtual_desk')}>
           <AhkOptions
             variables={[
               'moveToWorkspace0',

@@ -16,6 +16,7 @@ header:
     specific_apps: Spesifieke programme
     seelen_wall: Die muur
     seelen_rofi: App -lanseerder
+    virtual_desk: Virtuele tafelrekenaars
 start:
   title: Welkom!
   message: >-
@@ -152,7 +153,6 @@ shortcuts:
     reserve_right: Reserveer reg
     move_to_workspace_0: Beweeg na werkruimte 0
     reserve_float: Reservaat vlot
-    switch_workspace_0: Skakel oor na werkruimte 0
     focus_right: Fokus reg
     switch_workspace_7: Skakel oor na Workspace 7
     move_to_workspace_4: Beweeg na Workspace 4
@@ -164,7 +164,6 @@ shortcuts:
     send_to_workspace_6: Stuur na Workspace 6
     send_to_workspace_3: Stuur na Workspace 3
     send_to_workspace_8: Stuur na Workspace 8
-    switch_workspace_1: Skakel oor na werkruimte 1
     move_to_workspace_7: Beweeg na Workspace 7
     move_to_workspace_6: Beweeg na Workspace 6
     send_to_workspace_5: Stuur na Workspace 5
@@ -190,6 +189,8 @@ shortcuts:
     decrease_height: Verminder hoogte
     reserve_bottom: Reservaat onder
     focus_latest: Fokus nuut
+    switch_workspace_0: Skakel oor na werkruimte 1
+    switch_workspace_1: Skakel oor na Workspace 2
   enable: Aktiveer geïntegreerde kortpaaie (AHK)
   enable_tooltip: >-
     Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen

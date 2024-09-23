@@ -16,6 +16,7 @@ header:
     info: War
     seelen_wall: Derbiga
     seelen_rofi: App furaha
+    virtual_desk: Desktops Virtual
 start:
   message: >-
     Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
@@ -173,7 +174,6 @@ shortcuts:
     move_to_workspace_9: U dhaqaaq goobta shaqada 9
     reserve_float: Keydka sabuuradda
     reserve_stack: Reebs Rap
-    switch_workspace_1: U beddelo goobta shaqada 1
     send_to_workspace_3: U dir goobta shaqada 3
     send_to_workspace_1: U dir goobta shaqada 1
     switch_workspace_7: U beddelo goobta shaqada 7
@@ -184,11 +184,12 @@ shortcuts:
     reserve_left: Kaydsanaanta bidix
     send_to_workspace_2: U dir goobta shaqada 2
     send_to_workspace_0: U dir goobta shaqada 0
-    switch_workspace_0: U beddelo goobta shaqada 0
     decrease_height: Hoos u dhig dhererka
     switch_workspace_4: U beddelo goobta shaqada 4
     move_to_workspace_6: U dhaqaaq goobta shaqada 6
     switch_workspace_6: U beddelo goobta shaqada 6
+    switch_workspace_1: U beddelo goobta shaqada 2
+    switch_workspace_0: U beddelo goobta shaqada 1
   enable: U fududee fulinta isku dhafan ee isku dhafan (Ahk)
   enable_tooltip: >-
     Disable Haddii aad hirgelin doontid gaagaaban adiga oo adeegsanaya api-ka

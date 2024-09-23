@@ -16,6 +16,7 @@ header:
     monitors: Monitors
     seelen_wall: Væggen
     seelen_rofi: App Launcher
+    virtual_desk: Virtuelle desktops
 start:
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
@@ -173,7 +174,6 @@ shortcuts:
     move_to_workspace_7: Flyt til arbejdsområde 7
     reserve_left: Reserve til venstre
     reserve_float: Reserve float
-    switch_workspace_1: Skift til arbejdsområde 1
     switch_workspace_7: Skift til arbejdsområde 7
     switch_workspace_4: Skift til arbejdsområde 4
     switch_workspace_2: Skift til arbejdsområde 2
@@ -186,10 +186,11 @@ shortcuts:
     increase_height: Øg højde
     focus_bottom: Fokusbund
     switch_workspace_6: Skift til arbejdsområde 6
-    switch_workspace_0: Skift til arbejdsområdet 0
     move_to_workspace_3: Flyt til arbejdsområde 3
     focus_right: Fokusere rigtigt
     send_to_workspace_5: Send til arbejdsområde 5
+    switch_workspace_1: Skift til arbejdsområde 2
+    switch_workspace_0: Skift til arbejdsområde 1
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core

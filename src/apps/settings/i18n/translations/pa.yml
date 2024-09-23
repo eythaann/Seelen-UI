@@ -16,6 +16,7 @@ header:
     seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
     seelen_rofi: ਐਪ ਲਾਂਚਰ
     seelen_wall: ਕੰਧ
+    virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
 start:
   message: >-
     Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows 11 ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
@@ -167,7 +168,6 @@ shortcuts:
     switch_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
     move_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
     send_to_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਭੇਜੋ
-    switch_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
     send_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਭੇਜੋ
     send_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਭੇਜੋ
     move_to_workspace_1: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
@@ -176,7 +176,6 @@ shortcuts:
     restore_sizes: ਆਕਾਰ ਰੀਸਟੋਰ ਕਰੋ
     increase_height: ਉਚਾਈ ਵਧਾਓ
     send_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਭੇਜੋ
-    switch_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਜਾਓ
     focus_left: ਖੱਬੇ ਪਾਸੇ ਫੋਕਸ ਕਰੋ
     move_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
     send_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਭੇਜੋ
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
     focus_latest: ਫੋਕਸ ਤਾਜ਼ਾ
     switch_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਜਾਓ
+    switch_workspace_0: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
+    switch_workspace_1: ਵਰਕਸਪੇਸ 2 ਤੇ ਜਾਓ
   enable_tooltip: >-
     ਅਸਮਰੱਥ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ ਕੋਰ ਏਪੀਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ਾਰਟਕੱਟ
     ਲਾਗੂ ਕਰਦੇ ਹੋ

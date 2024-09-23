@@ -16,6 +16,7 @@ header:
     shortcuts: Pintasan
     seelen_wall: Dindingnya
     seelen_rofi: Peluncur Aplikasi
+    virtual_desk: Desktop virtual
 start:
   message: >-
     Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
@@ -154,7 +155,6 @@ shortcuts:
     focus_right: Fokus benar
     reserve_stack: Tumpukan Cadangan
     reserve_bottom: Cadangan Bawah
-    switch_workspace_1: Beralih ke ruang kerja 1
     switch_workspace_9: Beralih ke ruang kerja 9
     reserve_float: Cadangan float
     increase_height: Tingkatkan tinggi
@@ -172,7 +172,6 @@ shortcuts:
     send_to_workspace_5: Kirim ke Workspace 5
     send_to_workspace_0: Kirim ke ruang kerja 0
     focus_latest: Fokus Terbaru
-    switch_workspace_0: Beralih ke ruang kerja 0
     move_to_workspace_8: Pindah ke ruang kerja 8
     move_to_workspace_5: Pindah ke ruang kerja 5
     move_to_workspace_6: Pindah ke ruang kerja 6
@@ -190,6 +189,8 @@ shortcuts:
     decrease_width: Penurunan lebar
     send_to_workspace_7: Kirim ke Workspace 7
     send_to_workspace_3: Kirim ke Workspace 3
+    switch_workspace_1: Beralih ke ruang kerja 2
+    switch_workspace_0: Beralih ke ruang kerja 1
   enable: Aktifkan pintasan terintegrasi (AHK)
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri

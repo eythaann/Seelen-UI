@@ -23,6 +23,7 @@ header:
     info: معلومة
     seelen_wall: الجدار
     seelen_rofi: قاذفة التطبيق
+    virtual_desk: أجهزة الكمبيوتر المكتبية الافتراضية
 start:
   title: مرحباً!
   message: >-
@@ -167,8 +168,6 @@ shortcuts:
     increase_height: زيادة الارتفاع
     decrease_height: تقليل الارتفاع
     restore_sizes: استعادة الأحجام
-    switch_workspace_0: قم بالتبديل إلى مساحة العمل 0
-    switch_workspace_1: قم بالتبديل إلى مساحة العمل 1
     switch_workspace_2: قم بالتبديل إلى مساحة العمل 2
     switch_workspace_3: قم بالتبديل إلى مساحة العمل 3
     switch_workspace_4: قم بالتبديل إلى مساحة العمل 4
@@ -197,6 +196,8 @@ shortcuts:
     send_to_workspace_7: أرسل إلى مساحة العمل 7
     send_to_workspace_8: أرسل إلى مساحة العمل 8
     send_to_workspace_9: أرسل إلى مساحة العمل 9
+    switch_workspace_1: التبديل إلى مساحة العمل 2
+    switch_workspace_0: التبديل إلى مساحة العمل 1
   reset: إعادة ضبط على الافتراضات
 vd:
   strategy:

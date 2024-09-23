@@ -16,6 +16,7 @@ header:
     shortcuts: Phím tắt
     seelen_rofi: Ứng dụng Launcher
     seelen_wall: Bức tường
+    virtual_desk: Máy tính để bàn ảo
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -153,8 +154,6 @@ shortcuts:
     send_to_workspace_9: Gửi đến không gian làm việc 9
     reserve_top: Dự trữ hàng đầu
     focus_bottom: Focus bottom
-    switch_workspace_1: Chuyển sang không gian làm việc 1
-    switch_workspace_0: Chuyển sang không gian làm việc 0
     reserve_stack: Ngân hàng dự trữ
     switch_workspace_3: Chuyển sang không gian làm việc 3
     increase_height: Tăng chiều cao
@@ -190,6 +189,8 @@ shortcuts:
     reserve_left: Dự trữ trái
     send_to_workspace_7: Gửi đến không gian làm việc 7
     focus_left: Tập trung trái
+    switch_workspace_0: Chuyển sang không gian làm việc 1
+    switch_workspace_1: Chuyển sang không gian làm việc 2
   enable: Bật các phím tắt tích hợp (AHK)
   enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
   reset: Đặt lại về mặc định

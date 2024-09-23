@@ -16,6 +16,7 @@ header:
     seelen_wm: উইন্ডো ম্যানেজার
     seelen_wall: প্রাচীর
     seelen_rofi: অ্যাপ লঞ্চার
+    virtual_desk: ভার্চুয়াল ডেস্কটপস
 start:
   title: স্বাগত!
   message: >-
@@ -174,11 +175,9 @@ shortcuts:
     move_to_workspace_9: ওয়ার্কস্পেস 9 এ যান
     reserve_float: রিজার্ভ ফ্লোট
     send_to_workspace_3: ওয়ার্কস্পেস 3 এ প্রেরণ করুন
-    switch_workspace_1: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
     switch_workspace_7: ওয়ার্কস্পেস 7 এ স্যুইচ করুন
     focus_bottom: ফোকাস নীচে
     move_to_workspace_1: ওয়ার্কস্পেস 1 এ যান
-    switch_workspace_0: ওয়ার্কস্পেস 0 এ স্যুইচ করুন
     move_to_workspace_0: ওয়ার্কস্পেস 0 এ যান
     decrease_width: প্রস্থ হ্রাস
     restore_sizes: আকার পুনরুদ্ধার
@@ -190,6 +189,8 @@ shortcuts:
     focus_left: ফোকাস বাম
     move_to_workspace_8: ওয়ার্কস্পেস 8 এ যান
     reserve_top: রিজার্ভ শীর্ষ
+    switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
+    switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
   enable_tooltip: >-
     আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
     অক্ষম করুন

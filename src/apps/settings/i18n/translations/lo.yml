@@ -16,6 +16,7 @@ header:
     developer: ນັກພັດທະນາ
     seelen_wall: ກໍາແພງ
     seelen_rofi: App Launcher
+    virtual_desk: virtual desktops
 start:
   title: ຍິນດີຕ້ອນຮັບ!
   message_accent: ເພີ່ມປະສິດທິພາບການຜະລິດຂອງເຈົ້າດ້ວຍຮູບແບບ!
@@ -155,9 +156,7 @@ shortcuts:
     send_to_workspace_2: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 2
     send_to_workspace_9: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 9
     move_to_workspace_7: ຍ້າຍໄປບ່ອນເຮັດວຽກ 7
-    switch_workspace_0: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 0
     send_to_workspace_5: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 5
-    switch_workspace_1: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 1
     switch_workspace_6: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 6
     focus_right: ໂຟກັສຂວາ
     focus_left: ໂຟກັສຊ້າຍ
@@ -191,6 +190,8 @@ shortcuts:
     switch_workspace_4: ສະຫຼັບໄປບ່ອນເຮັດວຽກ 4
     send_to_workspace_8: ສົ່ງໄປທີ່ບ່ອນເຮັດວຽກ 8
     focus_bottom: ໂຟກັສລຸ່ມ
+    switch_workspace_1: ປ່ຽນໄປເຮັດ Workspace 2
+    switch_workspace_0: ປ່ຽນໄປເຮັດວຽກ 1
   enable_tooltip: ປິດໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ Seelen Core Api
   enable: ເປີດໃຊ້ທາງລັດປະສົມປະສານ (ahk)
   reset: ຕັ້ງຄ່າຄືນໃຫມ່

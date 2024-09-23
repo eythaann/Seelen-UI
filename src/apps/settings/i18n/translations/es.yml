@@ -23,6 +23,7 @@ header:
     info: Información
     seelen_rofi: Lanzador de aplicaciones
     seelen_wall: La pared
+    virtual_desk: Escritorios virtuales
 start:
   title: ¡Bienvenido!
   message: >-
@@ -171,8 +172,6 @@ shortcuts:
     increase_height: Aumentar altura
     decrease_height: Disminuir altura
     restore_sizes: Restaurar tamaños
-    switch_workspace_0: Cambiar al espacio de trabajo 0
-    switch_workspace_1: Cambiar al espacio de trabajo 1
     switch_workspace_2: Cambiar al espacio de trabajo 2
     switch_workspace_3: Cambiar al espacio de trabajo 3
     switch_workspace_4: Cambiar al espacio de trabajo 4
@@ -201,6 +200,8 @@ shortcuts:
     send_to_workspace_7: Enviar al espacio de trabajo 7
     send_to_workspace_8: Enviar al espacio de trabajo 8
     send_to_workspace_9: Enviar al espacio de trabajo 9
+    switch_workspace_0: Cambiar al espacio de trabajo 1
+    switch_workspace_1: Cambiar al espacio de trabajo 2
   reset: Reiniciar a los valores predeterminados
 vd:
   strategy:

@@ -16,6 +16,7 @@ header:
     seelen_weg: ඩොක්/කාර්ය තීරුව
     seelen_rofi: යෙදුම් දියත් කිරීම
     seelen_wall: බිත්තිය
+    virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
 start:
   title: සාදරයෙන් පිළිගනිමු!
   message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
@@ -149,7 +150,6 @@ shortcuts:
     increase_height: උස වැඩි කරන්න
     send_to_workspace_2: Workspace 2 වෙත යවන්න
     send_to_workspace_5: වැඩබිම වෙත යවන්න 5
-    switch_workspace_0: Workspace 0 වෙත මාරු වන්න
     move_to_workspace_7: වැඩබිම වෙත ගෙන යන්න 7
     send_to_workspace_3: වැඩබිම වෙත යවන්න 3
     send_to_workspace_9: Workspace 9 වෙත යවන්න
@@ -161,7 +161,6 @@ shortcuts:
     send_to_workspace_1: කාර්ය ඉඩ 1 වෙත යවන්න
     focus_latest: නවතම අවධානය යොමු කරන්න
     focus_left: වමට අවධානය යොමු කරන්න
-    switch_workspace_1: කාර්ය ඉඩ 1 වෙත මාරු වන්න
     move_to_workspace_5: වැඩබිම වෙත ගෙන යන්න 5
     decrease_height: උස අඩු කරන්න
     reserve_bottom: සංචිත පතුලේ
@@ -190,6 +189,8 @@ shortcuts:
     move_to_workspace_6: වැඩබිම වෙත ගෙන යන්න 6
     switch_workspace_7: වැඩබිම 7 වෙත මාරු වන්න
     focus_bottom: පහළට අවධානය යොමු කරන්න
+    switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
+    switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
   enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
   enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
   reset: පෙරනිමි වෙත නැවත සකසන්න

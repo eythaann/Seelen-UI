@@ -16,6 +16,7 @@ header:
     seelen_weg: Dok / vazifalar paneli
     seelen_wall: Devor
     seelen_rofi: Ilovani ishga tushirish vositasi
+    virtual_desk: Virtual ish stollari
 start:
   message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
   message: >-
@@ -149,7 +150,6 @@ shortcuts:
     increase_height: Balandlikni oshirish
     switch_workspace_7: Ish maydoni 7-ga o'ting
     move_to_workspace_5: Ish maydoni 5 ga o'ting 5
-    switch_workspace_0: Ish maydoni 0 ga o'ting
     switch_workspace_6: Ish maydoni 6 ga o'tish
     reserve_bottom: Zaxira pastki
     move_to_workspace_1: Ish maydoni 1 ga o'ting 1
@@ -187,9 +187,10 @@ shortcuts:
     send_to_workspace_6: Ish maydoni 6-ga yuboring
     move_to_workspace_7: Ish maydoni 7-ga o'ting
     switch_workspace_4: Ish maydoni 4-ga o'ting
-    switch_workspace_1: Ish maydoni 1 ga o'tish
     send_to_workspace_3: Ish maydoni 3-ga yuboring
     send_to_workspace_0: Ish maydoni 0 ga yuboring
+    switch_workspace_0: Ish maydoni 1 ga o'tish
+    switch_workspace_1: Ish maydoni 2-ga o'ting
   enable: Birlashtirilgan yorliqlarni yoqish (AHK)
   enable_tooltip: >-
     Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
