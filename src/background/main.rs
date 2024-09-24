@@ -37,6 +37,9 @@ use modules::{
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
 use seelen_core::state::Settings;
+use tauri::webview_version;
+use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_shell::ShellExt;
 use tray::try_register_tray_icon;
 use utils::{spawn_named_thread, PERFORMANCE_HELPER};
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
@@ -73,14 +76,37 @@ fn register_panic_hook() {
     }));
 }
 
-fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
+fn print_initial_information() {
     let version = env!("CARGO_PKG_VERSION");
     log::info!("───────────────────── Starting Seelen UI v{version} ─────────────────────");
     log::info!("Operating System: {}", os_info::get());
-    log::info!("Locate: {:?}", Settings::get_locale());
-    log::info!("Elevated: {:?}", WindowsApi::is_elevated());
-    Client::listen_tcp()?;
+    log::info!("WebView2 Runtime: {:?}", webview_version());
+    log::info!("Elevated        : {:?}", WindowsApi::is_elevated());
+    log::info!("Locate          : {:?}", Settings::get_locale());
+}
 
+fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
+    print_initial_information();
+    if webview_version().is_err() {
+        let ok_pressed = app
+            .dialog()
+            .message("Seelen UI requires Webview2 Runtime. Please install it.")
+            .title("WebView2 Runtime not found")
+            .kind(MessageDialogKind::Error)
+            .ok_button_label("Go to download page")
+            .blocking_show();
+
+        if ok_pressed {
+            app.shell().open(
+            "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download",
+            None,
+        )?;
+        }
+        app.handle().exit(1);
+        return Ok(());
+    }
+
+    Client::listen_tcp()?;
     let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
     seelen.init(app.handle().clone())?;
 
@@ -122,8 +148,11 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             }
         }
         tauri::RunEvent::Exit => {
-            log::info!("───────────────────── Exiting Seelen ─────────────────────");
-            trace_lock!(SEELEN).stop()
+            log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
+            let seelen = trace_lock!(SEELEN);
+            if seelen.initialized() {
+                seelen.stop();
+            }
         }
         _ => {}
     }
