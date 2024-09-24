@@ -183,10 +183,6 @@ impl Seelen {
     pub fn start(&mut self) -> Result<()> {
         declare_system_events_handlers()?;
 
-        if self.state().is_weg_enabled() {
-            SeelenWeg::hide_taskbar();
-        }
-
         if self.state().is_rofi_enabled() {
             self.init_rofi();
         }
