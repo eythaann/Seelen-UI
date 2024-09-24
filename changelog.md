@@ -30,6 +30,7 @@
 - missing icons for files with a different extension than `exe`.
 - losing cursor events on clicking a dock item.
 - app allowing be closed via Alt + F4.
+- native taskbar being hidden regardless of whether the program starts successfully or not.
 
 ## [1.10.5]
 ### fix
