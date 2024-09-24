@@ -40,9 +40,10 @@ pub fn get_app_handle() -> AppHandle<Wry> {
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
     handle: Option<AppHandle<Wry>>,
+    state: Option<Arc<ArcSwap<FullState>>>,
+    initialized: bool,
     #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
-    state: Option<Arc<ArcSwap<FullState>>>,
     #[getset(get = "pub", get_mut = "pub")]
     rofi: Option<SeelenRofi>,
 }
@@ -52,6 +53,10 @@ impl Seelen {
     /** Ensure Seelen is initialized first before calling */
     pub fn handle(&self) -> &AppHandle<Wry> {
         self.handle.as_ref().unwrap()
+    }
+
+    pub fn initialized(&self) -> bool {
+        self.initialized
     }
 
     pub fn focused_monitor(&self) -> Option<&Monitor> {
@@ -138,6 +143,7 @@ impl Seelen {
         *APP_HANDLE.lock() = Some(app.clone());
         self.handle = Some(app.clone());
         self.state = Some(Arc::clone(&FULL_STATE));
+        self.initialized = true;
         Ok(())
     }
 
