@@ -501,7 +501,7 @@ impl FullState {
     pub fn save_settings(&self) -> Result<()> {
         let mut file = trace_lock!(USER_SETTINGS_FILE);
         file.rewind()?;
-        file.write_all(serde_yaml::to_string(&self.settings)?.as_bytes())?;
+        file.write_all(serde_json::to_string_pretty(&self.settings)?.as_bytes())?;
         Ok(())
     }
 
