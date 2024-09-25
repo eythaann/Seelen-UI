@@ -19,7 +19,7 @@ use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
-        Accessibility::{SetWinEventHook, HWINEVENTHOOK},
+        Accessibility::{SetWinEventHook, UnhookWinEvent, HWINEVENTHOOK},
         WindowsAndMessaging::{
             DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
         },
@@ -260,7 +260,7 @@ pub fn location_delay_completed(origin: HWND) -> bool {
 }
 
 pub extern "system" fn win_event_hook(
-    _h_win_event_hook: HWINEVENTHOOK,
+    hook_handle: HWINEVENTHOOK,
     event: u32,
     origin: HWND,
     id_object: i32,
@@ -268,6 +268,15 @@ pub extern "system" fn win_event_hook(
     _id_event_thread: u32,
     _dwms_event_time: u32,
 ) {
+    let hook_was_invalidated = hook_handle.is_invalid();
+    if !Seelen::is_running() {
+        if !hook_was_invalidated {
+            log::trace!("Exiting WinEventHook");
+            let _ = unsafe { UnhookWinEvent(hook_handle) };
+        }
+        return;
+    }
+
     if id_object != 0 {
         return;
     }
@@ -298,19 +307,15 @@ pub extern "system" fn win_event_hook(
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
 
-    // let stack_size = 5 * 1024 * 1024; // 5 MB
     spawn_named_thread("WinEventHook", move || unsafe {
         SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
-
         let mut msg: MSG = MSG::default();
         loop {
             if !GetMessageW(&mut msg, HWND::default(), 0, 0).as_bool() {
-                log::info!("windows event processing shutdown");
                 break;
             };
             let _ = TranslateMessage(&msg);
             DispatchMessageW(&msg);
-            std::thread::sleep(Duration::from_millis(10));
         }
     })?;
 

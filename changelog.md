@@ -33,6 +33,7 @@
 - app allowing be closed via Alt + F4.
 - native taskbar being hidden regardless of whether the program starts successfully or not.
 - app continuing running when the program fails to start (case: WebView2 Runtime not installed).
+- no stoping correctly secondary processes/threads on app close.
 
 ## [1.10.5]
 ### fix
