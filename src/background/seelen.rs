@@ -128,12 +128,12 @@ impl Seelen {
     }
 
     /// Initialize Seelen and Lazy static variables
-    pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
+    pub fn init(&mut self, handle: &AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
         APP_HANDLE
-            .set(app.clone())
+            .set(handle.to_owned())
             .map_err(|_| "Failed to set app handle")?;
-        Self::ensure_folders(&app)?;
+        Self::ensure_folders(handle)?;
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
