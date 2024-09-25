@@ -15,7 +15,7 @@ export function Icon(props: typesPropsIcon) {
       {...rest}
       src={`../icons/${iconName}.svg`}
       className={cs.icon}
-      style={{ width: size, height: size, color }}
+      style={{ height: size, color }}
     />
   );
 }
