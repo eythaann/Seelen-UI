@@ -281,7 +281,7 @@
             "margin": null,
             "padding": null
           },
-          "workspaces": []
+          "workspacesV2": []
         }
       ],
       "type": "array",
@@ -1047,7 +1047,7 @@
             }
           ]
         },
-        "workspaces": {
+        "workspacesV2": {
           "description": "list of settings by workspace on this monitor",
           "default": [],
           "type": "array",

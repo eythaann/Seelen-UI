@@ -39,7 +39,7 @@ impl FullState {
     pub fn get_wm_layout_id(&self, monitor_idx: usize, workspace_idx: usize) -> String {
         let default = self.settings.window_manager.default_layout.clone();
         match self.settings.monitors.get(monitor_idx) {
-            Some(monitor) => match monitor.workspaces.get(workspace_idx) {
+            Some(monitor) => match monitor.workspaces_v2.get(workspace_idx) {
                 Some(workspace) => workspace.layout.clone().unwrap_or(default),
                 None => default,
             },
