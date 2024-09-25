@@ -19,11 +19,7 @@ export async function declareDocumentAsLayeredHitbox() {
     webviewRect.height = e.payload.height;
   });
 
-  webview.listen<[x: number, y: number]>('global-mouse-move', async (event) => {
-    if (!(await webview.isVisible())) {
-      return;
-    }
-
+  webview.listen<[x: number, y: number]>('global-mouse-move', (event) => {
     const [mouseX, mouseY] = event.payload;
     let { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
 
