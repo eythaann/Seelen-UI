@@ -34,7 +34,7 @@ impl WindowManagerV2 {
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let window = tauri::WebviewWindowBuilder::new(
-            &get_app_handle(),
+            get_app_handle(),
             format!("{}/{}", Self::TARGET, monitor_id),
             tauri::WebviewUrl::App("seelen_wm_v2/index.html".into()),
         )

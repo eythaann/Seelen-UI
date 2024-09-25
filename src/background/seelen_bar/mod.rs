@@ -153,7 +153,7 @@ impl FancyToolbar {
         let window = match manager.get_webview_window(&label) {
             Some(window) => window,
             None => tauri::WebviewWindowBuilder::new(
-                &manager,
+                manager,
                 label,
                 tauri::WebviewUrl::App("toolbar/index.html".into()),
             )

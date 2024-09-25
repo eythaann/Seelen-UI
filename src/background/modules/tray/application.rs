@@ -175,7 +175,7 @@ impl TrayIcon {
         }
 
         let path = self.registry.as_ref().unwrap().executable_path.clone();
-        let icon = extract_and_save_icon(&get_app_handle(), &path)?;
+        let icon = extract_and_save_icon(get_app_handle(), &path)?;
         Ok(icon
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")

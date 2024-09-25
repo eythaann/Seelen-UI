@@ -1,9 +1,8 @@
 use std::{
     env::temp_dir,
-    sync::{atomic::AtomicBool, Arc},
+    sync::{atomic::AtomicBool, Arc, OnceLock},
 };
 
-use arc_swap::ArcSwap;
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -29,22 +28,20 @@ use crate::{
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
-    pub static ref APP_HANDLE: Arc<Mutex<Option<AppHandle<Wry>>>> = Arc::new(Mutex::new(None));
 }
 
+static APP_HANDLE: OnceLock<AppHandle<Wry>> = OnceLock::new();
 static SEELEN_IS_RUNNING: AtomicBool = AtomicBool::new(false);
 
-pub fn get_app_handle() -> AppHandle<Wry> {
+pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
     APP_HANDLE
-        .lock()
-        .clone()
+        .get()
         .expect("get_app_handle called but app is still not initialized")
 }
 
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
-    state: Option<Arc<ArcSwap<FullState>>>,
     #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
     #[getset(get = "pub", get_mut = "pub")]
@@ -76,10 +73,7 @@ impl Seelen {
     }
 
     pub fn state(&self) -> Arc<FullState> {
-        self.state
-            .as_ref()
-            .expect("Seelen State not initialized")
-            .load_full()
+        FULL_STATE.load_full()
     }
 }
 
@@ -136,9 +130,10 @@ impl Seelen {
     /// Initialize Seelen and Lazy static variables
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
-        *APP_HANDLE.lock() = Some(app.clone());
+        APP_HANDLE
+            .set(app.clone())
+            .map_err(|_| "Failed to set app handle")?;
         Self::ensure_folders(&app)?;
-        self.state = Some(Arc::clone(&FULL_STATE));
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
@@ -377,7 +372,7 @@ impl Seelen {
         let handle = get_app_handle();
         let window = handle.get_webview_window("settings").or_else(|| {
             tauri::WebviewWindowBuilder::new(
-                &handle,
+                handle,
                 "settings",
                 tauri::WebviewUrl::App("settings/index.html".into()),
             )
@@ -415,7 +410,7 @@ impl Seelen {
         }
 
         tauri::WebviewWindowBuilder::new(
-            &handle,
+            handle,
             "updater",
             tauri::WebviewUrl::App("update/index.html".into()),
         )

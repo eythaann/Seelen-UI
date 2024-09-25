@@ -98,7 +98,7 @@ impl SeelenWeg {
     }
 
     pub fn extract_icon(exe_path: &str) -> Result<String> {
-        Ok(extract_and_save_icon(&get_app_handle(), exe_path)?
+        Ok(extract_and_save_icon(get_app_handle(), exe_path)?
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")
             .to_string())
@@ -343,7 +343,7 @@ impl SeelenWeg {
         let manager = get_app_handle();
 
         let window = tauri::WebviewWindowBuilder::new(
-            &manager,
+            manager,
             format!("{}/{}", Self::TARGET, postfix),
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
         )
