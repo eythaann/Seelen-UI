@@ -1,5 +1,5 @@
 {
-  "$schema": "node_modules/@tauri-apps/cli/schema.json",
+  "$schema": "node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Seelen UI",
   "identifier": "com.seelen.seelen-ui",
   "version": "package.json",
@@ -29,7 +29,6 @@
   },
   "bundle": {
     "active": true,
-    "createUpdaterArtifacts": "v1Compatible",
     "resources": [
       "static/**/*"
     ],
