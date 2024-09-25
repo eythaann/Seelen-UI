@@ -1,4 +1,7 @@
-use std::{env::temp_dir, sync::Arc};
+use std::{
+    env::temp_dir,
+    sync::{atomic::AtomicBool, Arc},
+};
 
 use arc_swap::ArcSwap;
 use getset::{Getters, MutGetters};
@@ -29,6 +32,8 @@ lazy_static! {
     pub static ref APP_HANDLE: Arc<Mutex<Option<AppHandle<Wry>>>> = Arc::new(Mutex::new(None));
 }
 
+static SEELEN_IS_RUNNING: AtomicBool = AtomicBool::new(false);
+
 pub fn get_app_handle() -> AppHandle<Wry> {
     APP_HANDLE
         .lock()
@@ -39,9 +44,7 @@ pub fn get_app_handle() -> AppHandle<Wry> {
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
-    handle: Option<AppHandle<Wry>>,
     state: Option<Arc<ArcSwap<FullState>>>,
-    initialized: bool,
     #[getset(get = "pub", get_mut = "pub")]
     monitors: Vec<Monitor>,
     #[getset(get = "pub", get_mut = "pub")]
@@ -50,13 +53,8 @@ pub struct Seelen {
 
 /* ============== Getters ============== */
 impl Seelen {
-    /** Ensure Seelen is initialized first before calling */
-    pub fn handle(&self) -> &AppHandle<Wry> {
-        self.handle.as_ref().unwrap()
-    }
-
-    pub fn initialized(&self) -> bool {
-        self.initialized
+    pub fn is_running() -> bool {
+        SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Relaxed)
     }
 
     pub fn focused_monitor(&self) -> Option<&Monitor> {
@@ -137,13 +135,11 @@ impl Seelen {
 
     /// Initialize Seelen and Lazy static variables
     pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
-        Self::ensure_folders(&app)?;
         log::trace!("Initializing Seelen");
-
         *APP_HANDLE.lock() = Some(app.clone());
-        self.handle = Some(app.clone());
+        Self::ensure_folders(&app)?;
         self.state = Some(Arc::clone(&FULL_STATE));
-        self.initialized = true;
+        SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
 
@@ -210,6 +206,8 @@ impl Seelen {
 
     /// Stop and release all resources
     pub fn stop(&self) {
+        SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
+
         release_system_events_handlers();
         if self.state().is_weg_enabled() {
             log_error!(SeelenWeg::restore_taskbar());
