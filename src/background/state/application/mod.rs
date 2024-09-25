@@ -24,7 +24,7 @@ use std::{
     },
     time::Duration,
 };
-use tauri::{AppHandle, Manager};
+use tauri::Manager;
 
 use crate::{
     error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
@@ -62,8 +62,6 @@ pub type LauncherHistory = HashMap<String, Vec<String>>;
 #[getset(get = "pub")]
 pub struct FullState {
     #[serde(skip)]
-    handle: AppHandle<tauri::Wry>,
-    #[serde(skip)]
     data_dir: PathBuf,
     #[serde(skip)]
     resources_dir: PathBuf,
@@ -87,7 +85,6 @@ impl FullState {
         let mut manager = Self {
             data_dir: handle.path().app_data_dir()?,
             resources_dir: handle.path().resource_dir()?,
-            handle,
             watcher: Arc::new(None),
             // ======== data ========
             settings: Settings::default(),

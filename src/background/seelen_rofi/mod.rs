@@ -108,7 +108,7 @@ impl SeelenRofi {
 
     fn create_window() -> Result<WebviewWindow> {
         let window = tauri::WebviewWindowBuilder::new(
-            &get_app_handle(),
+            get_app_handle(),
             Self::TARGET,
             tauri::WebviewUrl::App("seelen_rofi/index.html".into()),
         )

@@ -36,7 +36,7 @@ impl SeelenWall {
     fn create_window() -> Result<WebviewWindow> {
         let handle = get_app_handle();
         let window = tauri::WebviewWindowBuilder::new(
-            &handle,
+            handle,
             Self::TARGET,
             tauri::WebviewUrl::App("seelen_wall/index.html".into()),
         )

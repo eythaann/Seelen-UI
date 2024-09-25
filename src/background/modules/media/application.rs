@@ -477,7 +477,7 @@ impl MediaManager {
                             .to_string()?,
                     }
                     .replace(".exe", "");
-                    icon_path = extract_and_save_icon(&get_app_handle(), &path)
+                    icon_path = extract_and_save_icon(get_app_handle(), &path)
                         .ok()
                         .map(|p| p.to_string_lossy().to_string());
                 }

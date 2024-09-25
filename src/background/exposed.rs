@@ -102,7 +102,7 @@ fn send_keys(keys: String) -> Result<()> {
 
 #[tauri::command]
 fn get_icon(path: String) -> Option<PathBuf> {
-    extract_and_save_icon(&get_app_handle(), &path).ok()
+    extract_and_save_icon(get_app_handle(), &path).ok()
 }
 
 #[tauri::command(async)]
