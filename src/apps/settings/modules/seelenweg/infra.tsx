@@ -54,7 +54,7 @@ export const SeelenWegSettings = () => {
           </SettingsOption>
           <SettingsOption>
             <div>{t('weg.dock_side')}</div>
-            <Button.Group>
+            <Button.Group style={{ width: '120px' }}>
               {Object.values(SeelenWegSide).map((side) => (
                 <Button
                   key={side}
