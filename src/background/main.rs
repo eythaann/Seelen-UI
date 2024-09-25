@@ -106,9 +106,9 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
         return Ok(());
     }
 
+    let mut seelen = trace_lock!(SEELEN);
+    seelen.init(app.handle())?;
     Client::listen_tcp()?;
-    let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
-    seelen.init(app.handle().clone())?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
@@ -133,9 +133,7 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     }
 
     seelen.start()?;
-
     log_error!(try_register_tray_icon(app));
-    std::mem::forget(seelen);
     Ok(())
 }
 
