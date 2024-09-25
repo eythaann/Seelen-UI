@@ -77,7 +77,7 @@ export function Information() {
         <SettingsOption>
           <span>{t('extras.relaunch')}</span>
           <Button type="dashed" onClick={relaunch} style={{ width: '50px' }}>
-            <Icon iconName="IoReload" propsIcon={{ size: 12 }} />
+            <Icon iconName="IoReload" size={12} />
           </Button>
         </SettingsOption>
         <SettingsOption>

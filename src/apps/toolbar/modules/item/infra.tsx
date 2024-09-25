@@ -13,7 +13,7 @@ import { LAZY_CONSTANTS } from '../shared/utils/infra';
 import { Selectors } from '../shared/store/app';
 import { performClick, safeEval, Scope } from './app';
 
-import { exposedIcons, Icon, IconName } from '../../../shared/components/Icon';
+import { Icon } from '../../../shared/components/Icon';
 import { cx } from '../../../shared/styles';
 
 interface Props extends PropsWithChildren {
@@ -120,12 +120,7 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
 
     if (this.isIcon()) {
       const [_, iconName, size] = this.props.text.split(':');
-      return (
-        <Icon
-          iconName={iconName as IconName}
-          propsIcon={{ size: size ? size + 'px' : undefined }}
-        />
-      );
+      return <Icon iconName={iconName || ''} size={size ? size + 'px' : undefined} />;
     }
 
     return <span>{this.props.text}</span>;
@@ -173,7 +168,6 @@ export function Item(props: Props) {
   useEffect(() => {
     scope.current.loadInvokeActions();
 
-    scope.current.set('icon', cloneDeep(exposedIcons));
     scope.current.set('env', cloneDeep(env));
 
     scope.current.set('getIcon', StringToElement.getIcon);
@@ -194,19 +188,25 @@ export function Item(props: Props) {
     });
   }
 
-  const elements = template ? ElementsFromEvaluated(evaluate(template, scope.current)) : [];
+  function parseStringToElements(text: string) {
+    /// backward compatibility with v1 icon object
+    let expr = text.replaceAll(/icon\.(\w+)/g, 'getIcon("$1")');
+    return ElementsFromEvaluated(evaluate(expr, scope.current));
+  }
+
+  const elements = template ? parseStringToElements(template) : [];
   if (!elements.length && !children) {
     return null;
   }
 
-  const badgeContent = badge ? ElementsFromEvaluated(evaluate(badge, scope.current)) : null;
+  const badgeContent = badge ? parseStringToElements(badge) : null;
 
   return (
     <Tooltip
       arrow={false}
       mouseLeaveDelay={0}
       overlayClassName="ft-bar-item-tooltip"
-      title={tooltip ? ElementsFromEvaluated(evaluate(tooltip, scope.current)) : undefined}
+      title={tooltip ? parseStringToElements(tooltip) : undefined}
     >
       <Reorder.Item
         id={id}

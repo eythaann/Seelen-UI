@@ -104,7 +104,7 @@ export function WlanSelectorEntry(props: {
       onClick={onClick}
     >
       <div className="wlan-entry-info">
-        <Icon iconName={signalIcon} propsIcon={{ size: 20 }} />
+        <Icon iconName={signalIcon} size={20} />
         <span className="wlan-entry-info-ssid">{entry.ssid || t('network.hidden')}</span>
       </div>
       {showFields && (

@@ -72,16 +72,16 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
         <span className="media-session-author">{session.author}</span>
         <div className="media-session-actions">
           <Button type="text" onClick={onClickBtn.bind(null, 'media_prev')}>
-            <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color }} />
+            <Icon iconName="TbPlayerSkipBackFilled" color={color} />
           </Button>
           <Button type="text" onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}>
             <Icon
               iconName={session.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
-              propsIcon={{ color }}
+              color={color}
             />
           </Button>
           <Button type="text" onClick={onClickBtn.bind(null, 'media_next')}>
-            <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color }} />
+            <Icon iconName="TbPlayerSkipForwardFilled" color={color} />
           </Button>
         </div>
       </div>
@@ -116,7 +116,7 @@ function Device({ device }: { device: MediaDevice }) {
             type={device.is_default_multimedia ? 'primary' : 'default'}
             onClick={onClickMultimedia}
           >
-            <Icon iconName="IoMusicalNotes" propsIcon={{ size: 18 }} />
+            <Icon iconName="IoMusicalNotes" size={18} />
           </Button>
         </Tooltip>
         <Tooltip title={t('media.device.comunications')}>
@@ -188,7 +188,10 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
         }}
       />
       {withRightAction && (
-        <Button type="text" onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:sound' })}>
+        <Button
+          type="text"
+          onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:sound' })}
+        >
           <Icon iconName="RiEqualizerLine" />
         </Button>
       )}

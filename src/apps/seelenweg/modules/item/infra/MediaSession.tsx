@@ -86,7 +86,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
               </span>
               <div className="media-session-actions">
                 <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
-                  <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color, size: 12 }} />
+                  <Icon iconName="TbPlayerSkipBackFilled" color={color} size={12} />
                 </Button>
                 <Button
                   type="text"
@@ -95,11 +95,12 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
                 >
                   <Icon
                     iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
-                    propsIcon={{ color, size: 12 }}
+                    color={color}
+                    size={12}
                   />
                 </Button>
                 <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
-                  <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color, size: 12 }} />
+                  <Icon iconName="TbPlayerSkipForwardFilled" color={color} size={12} />
                 </Button>
               </div>
             </div>
