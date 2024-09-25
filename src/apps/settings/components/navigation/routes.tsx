@@ -29,7 +29,7 @@ export const RouteIcons: Record<Route, React.ReactNode> = {
   [Route.SEELEN_BAR]: <Icon iconName="BiSolidDockTop" />,
   [Route.SEELEN_WEG]: <Icon iconName="BiDockBottom" />,
   [Route.SEELEN_ROFI]: <Icon iconName="MdRocketLaunch" />,
-  [Route.SEELEN_WM]: <Icon iconName="BsGrid1X2Fill" propsIcon={{ size: 14 }} />,
+  [Route.SEELEN_WM]: <Icon iconName="BsGrid1X2Fill" size={14} />,
   [Route.SEELEN_WALL]: <Icon iconName="PiWallDuotone" />,
   [Route.SPECIFIC_APPS]: <Icon iconName="IoIosApps" />,
   [Route.SHORTCUTS]: <Icon iconName="MdLaunch" />,

@@ -54,18 +54,16 @@ export const SeelenWegSettings = () => {
           </SettingsOption>
           <SettingsOption>
             <div>{t('weg.dock_side')}</div>
-            <Button.Group style={{ width: '120px' }}>
-              {
-                Object.values(SeelenWegSide).map((side) => (
-                  <Button
-                    key={side}
-                    type={side === settings.position ? 'primary' : 'default'}
-                    onClick={() => dispatch(SeelenWegActions.setPosition(side))}
-                  >
-                    <Icon iconName={`CgToolbar${side}`} propsIcon={{ size: 18 }} />
-                  </Button>
-                ))
-              }
+            <Button.Group>
+              {Object.values(SeelenWegSide).map((side) => (
+                <Button
+                  key={side}
+                  type={side === settings.position ? 'primary' : 'default'}
+                  onClick={() => dispatch(SeelenWegActions.setPosition(side))}
+                >
+                  <Icon iconName={`CgToolbar${side}`} size={18} />
+                </Button>
+              ))}
             </Button.Group>
           </SettingsOption>
           <SettingsOption>

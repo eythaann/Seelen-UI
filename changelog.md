@@ -20,8 +20,8 @@
 - improve quality icons from all app/files items.
 - improve init loading performance.
 - improve fullscreen matching system.
-- reduce UI total size from 355mb to 121mb.
-- reduce Installer size from 75mb to 40mb.
+- reduce UI total size from 355mb (v1) to 121mb (v2-beta4) to 93mb (v2-beta8).
+- reduce Installer size from 75mb (v1) to 40mb (v2-beta4) to 28.8mb (v2-beta8).
 - allow drop files, apps and folders into the dock to pin them.
 - now Virtual Desktop shortcuts doesn't require Tiling WM be enabled to work.
 - now Themes are wrapped in a CSS layer, making easier the override theming.
