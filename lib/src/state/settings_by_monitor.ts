@@ -53,5 +53,5 @@ export class MonitorConfiguration {
   weg: SeelenWegSettingsByMonitor = new SeelenWegSettingsByMonitor();
   wm: WindowManagerSettingsByMonitor = new WindowManagerSettingsByMonitor();
   /** list of settings by workspace on this monitor */
-  workspaces: WorkspaceConfiguration[] = [];
+  workspacesV2: WorkspaceConfiguration[] = [];
 }

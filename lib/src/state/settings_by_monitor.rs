@@ -98,5 +98,5 @@ pub struct MonitorConfiguration {
     pub wm: WindowManagerSettingsByMonitor,
     pub wall: SeelenWallSettingsByMonitor,
     /// list of settings by workspace on this monitor
-    pub workspaces: Vec<WorkspaceConfiguration>,
+    pub workspaces_v2: Vec<WorkspaceConfiguration>,
 }
