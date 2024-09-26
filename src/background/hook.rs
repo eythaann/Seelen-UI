@@ -49,7 +49,7 @@ lazy_static! {
     pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0 as _);
 }
 
-pub static WIN_EVENTS_ENABLED: AtomicBool = AtomicBool::new(false);
+pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
 
 pub struct HookManager {
     skip: HashMap<isize, Vec<WinEvent>>,
@@ -91,7 +91,7 @@ impl HookManager {
     }
 
     fn skip_done(&mut self, event: WinEvent, hwnd: HWND) {
-        if WIN_EVENTS_ENABLED.load(Ordering::Relaxed) {
+        if LOG_WIN_EVENTS.load(Ordering::Relaxed) {
             log::debug!("Skipping WinEvent::{:?}", event);
         }
 
@@ -107,7 +107,7 @@ impl HookManager {
     }
 
     fn log_event(event: WinEvent, origin: HWND) {
-        if !WIN_EVENTS_ENABLED.load(Ordering::Relaxed) || event == WinEvent::ObjectLocationChange {
+        if !LOG_WIN_EVENTS.load(Ordering::Relaxed) || event == WinEvent::ObjectLocationChange {
             return;
         }
 
@@ -137,7 +137,9 @@ impl HookManager {
         if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
             let title = window.title();
             if IGNORE_FOCUS.contains(&title) {
-                log::trace!("Skipping WinEvent::{:?}", event);
+                if LOG_WIN_EVENTS.load(Ordering::Relaxed) {
+                    log::trace!("Skipping WinEvent::{:?}", event);
+                }
                 return;
             }
             log_error!(get_app_handle().emit(

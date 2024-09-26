@@ -1,5 +1,5 @@
 import { Tooltip, TooltipProps } from 'antd';
-import { useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 import { cx } from '../../styles';
 import cs from './index.module.css';
@@ -12,7 +12,7 @@ interface Props {
   arrow?: TooltipProps['arrow'];
 }
 
-export function OverflowTooltip({ text, className, ...rest }: Props) {
+function _OverflowTooltip({ text, className, ...rest }: Props) {
   const textRef = useRef<HTMLSpanElement>(null);
   const [isOverflow, setIsOverflow] = useState(false);
 
@@ -34,3 +34,5 @@ export function OverflowTooltip({ text, className, ...rest }: Props) {
     </Tooltip>
   );
 }
+
+export const OverflowTooltip = memo(_OverflowTooltip);
