@@ -26,6 +26,7 @@
 - now Virtual Desktop shortcuts doesn't require Tiling WM be enabled to work.
 - now Themes are wrapped in a CSS layer, making easier the override theming.
 - allow change size of Window Manager Layouts via window resizing with the mouse.
+- allow close windows by middle clicking on dock items.
 
 ### fix
 - missing icons for files with a different extension than `exe`.

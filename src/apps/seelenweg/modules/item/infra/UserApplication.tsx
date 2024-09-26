@@ -76,8 +76,16 @@ export const UserApplication = memo(({ item }: Props) => {
           <div
             className="weg-item"
             onClick={() => {
-              let hwnd = item.opens[0] || 0;
-              invoke(SeelenCommand.WegToggleWindowState, { hwnd, exePath: item.execution_path });
+              let hwnd = item.opens[0];
+              if (hwnd) {
+                invoke(SeelenCommand.WegToggleWindowState, { hwnd, exePath: item.execution_path });
+              }
+            }}
+            onAuxClick={(e) => {
+              let hwnd = item.opens[0];
+              if (e.button === 1 && hwnd) {
+                invoke(SeelenCommand.WegCloseApp, { hwnd });
+              }
             }}
             onContextMenu={(e) => e.stopPropagation()}
           >
