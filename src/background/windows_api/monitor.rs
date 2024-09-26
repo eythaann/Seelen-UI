@@ -6,10 +6,18 @@ use super::{MonitorEnumerator, WindowsApi};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Monitor(HMONITOR);
+unsafe impl Send for Monitor {}
+unsafe impl Sync for Monitor {}
 
 impl From<HMONITOR> for Monitor {
     fn from(hmonitor: HMONITOR) -> Self {
         Self(hmonitor)
+    }
+}
+
+impl From<isize> for Monitor {
+    fn from(hmonitor: isize) -> Self {
+        Self(HMONITOR(hmonitor as _))
     }
 }
 
