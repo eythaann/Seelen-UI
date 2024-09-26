@@ -4,7 +4,7 @@ import { getRootElement } from 'seelen-core';
 export const getRootContainer = getRootElement;
 
 export function toPhysicalPixels(size: number): number {
-  return Math.floor(size * window.devicePixelRatio);
+  return Math.round(size * window.devicePixelRatio);
 }
 
 export async function wasInstalledUsingMSIX() {

@@ -1,4 +1,5 @@
 import { invoke } from '@tauri-apps/api/core';
+import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { SeelenCommand } from 'seelen-core';
@@ -23,27 +24,30 @@ export function LeafContainer({ hwnd, growFactor }: Props) {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const updateSize = useCallback(() => {
+  const updateSize = useCallback(async () => {
     if (!ref.current) {
       return;
     }
 
     const border = borderSettings.enabled ? borderSettings.width + borderSettings.offset : 0;
     const domRect = ref.current.getBoundingClientRect();
-    const top = domRect.top + window.screenY + border;
-    const left = domRect.left + window.screenX + border;
+    const { x: windowX, y: windowY } = await getCurrentWindow().outerPosition();
+    const top = windowY + toPhysicalPixels(domRect.top + border);
+    const left = windowX + toPhysicalPixels(domRect.left + border);
     invoke(SeelenCommand.SetWindowPosition, {
       hwnd: hwnd,
       rect: {
-        top: toPhysicalPixels(top),
-        left: toPhysicalPixels(left),
-        right: toPhysicalPixels(left + domRect.width - border * 2),
-        bottom: toPhysicalPixels(top + domRect.height - border * 2),
+        top,
+        left,
+        right: left + toPhysicalPixels(domRect.width - border * 2),
+        bottom: top + toPhysicalPixels(domRect.height - border * 2),
       },
     });
   }, [hwnd]);
 
-  useEffect(updateSize);
+  useEffect(() => {
+    updateSize();
+  });
 
   const isFocused = activeWindow === hwnd;
   return (

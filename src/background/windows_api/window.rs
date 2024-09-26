@@ -20,9 +20,7 @@ use super::{monitor::Monitor, WindowEnumerator, WindowsApi};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Window(HWND);
-
 unsafe impl Send for Window {}
-
 unsafe impl Sync for Window {}
 
 impl From<HWND> for Window {

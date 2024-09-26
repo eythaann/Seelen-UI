@@ -14,6 +14,7 @@
 - add seelen wall (rain-meter and wallpaper engine alternatives).
 - expose function to pin items into the dock.
 - settings by monitor.
+- window manager multimonitor support.
 
 ### enhancements
 - improve quality icons from all app/files items.
