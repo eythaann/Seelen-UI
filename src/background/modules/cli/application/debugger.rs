@@ -3,7 +3,7 @@ use std::sync::atomic::Ordering;
 use clap::Command;
 
 use crate::{
-    error_handler::Result, get_subcommands, hook::WIN_EVENTS_ENABLED, utils::TRACE_LOCK_ENABLED,
+    error_handler::Result, get_subcommands, hook::LOG_WIN_EVENTS, utils::TRACE_LOCK_ENABLED,
 };
 
 get_subcommands![
@@ -28,10 +28,7 @@ impl CliDebugger {
         let subcommand = SubCommand::try_from(matches)?;
         match subcommand {
             SubCommand::ToggleWinEvents => {
-                WIN_EVENTS_ENABLED.store(
-                    !WIN_EVENTS_ENABLED.load(Ordering::Acquire),
-                    Ordering::Release,
-                );
+                LOG_WIN_EVENTS.store(!LOG_WIN_EVENTS.load(Ordering::Acquire), Ordering::Release);
             }
             SubCommand::ToggleTraceLock => {
                 TRACE_LOCK_ENABLED.store(

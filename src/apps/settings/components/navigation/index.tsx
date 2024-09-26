@@ -46,6 +46,7 @@ export const Navigation = memo(() => {
     Route.SEELEN_WM,
     Route.SEELEN_WEG,
     Route.SEELEN_WALL,
+    Route.SEELEN_ROFI,
     Route.SHORTCUTS,
   ];
 
