@@ -17,6 +17,7 @@ header:
     seelen_wall: Siena
     seelen_rofi: Lietotņu palaišana
     virtual_desk: Virtuālās galddatori
+    home: Mājas
 start:
   message_accent: Optimizējiet savu produktivitāti ar stilu!
   message: >-
@@ -227,3 +228,4 @@ app_launcher:
 inherit: Mantot
 insert: Ievietot
 more: Vairāk
+close: Tuvs

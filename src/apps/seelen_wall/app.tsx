@@ -1,24 +1,11 @@
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useInterval } from 'seelen-core';
 
 import { Wallpaper } from './modules/wallpaper/infra';
 
 import { Selectors } from './modules/shared/store/app';
-
-function useInterval(cb: () => void, ms: number) {
-  const ref = useRef<NodeJS.Timeout | null>(null);
-  const clearLastInterval = () => {
-    if (ref.current) {
-      clearInterval(ref.current);
-    }
-  };
-  useEffect(() => {
-    clearLastInterval();
-    ref.current = setInterval(cb, ms);
-    return clearLastInterval;
-  }, [ms]);
-}
 
 export function App() {
   const [currentBg, setCurrentBg] = useState(0);

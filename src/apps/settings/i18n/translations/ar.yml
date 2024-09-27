@@ -24,6 +24,7 @@ header:
     seelen_wall: الجدار
     seelen_rofi: قاذفة التطبيق
     virtual_desk: أجهزة الكمبيوتر المكتبية الافتراضية
+    home: بيت
 start:
   title: مرحباً!
   message: >-
@@ -225,3 +226,4 @@ app_launcher:
 insert: أدخل
 more: أكثر
 inherit: ورث
+close: يغلق

@@ -17,6 +17,7 @@ header:
     seelen_rofi: د اپلیکیشن لانچر
     seelen_wall: دېوال
     virtual_desk: مجازی ډیسټاپونه
+    home: کور
 start:
   title: ښه راغلاست!
   message_accent: د سټایل سره خپل محصول غوره کړئ!
@@ -226,3 +227,4 @@ app_launcher:
 more: نور
 inherit: میراث
 insert: دننه کړئ
+close: بندول

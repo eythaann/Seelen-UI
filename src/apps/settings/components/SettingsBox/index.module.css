@@ -56,3 +56,9 @@
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .group::before {
+    backdrop-filter: brightness(0.8);
+  }
+}

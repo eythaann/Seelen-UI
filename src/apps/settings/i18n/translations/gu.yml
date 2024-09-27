@@ -17,6 +17,7 @@ header:
     seelen_wall: દિવાલ
     seelen_rofi: હાથ
     virtual_desk: વર્ચ્યુઅલ ડેસ્કટ .પ
+    home: ઘર
 start:
   title: સ્વાગત છે!
   message_accent: શૈલી સાથે તમારી ઉત્પાદકતાને ઑપ્ટિમાઇઝ કરો!
@@ -229,3 +230,4 @@ app_launcher:
 more: વધારે
 inherit: વારસો મેળવવો
 insert: દાખલ કરવું
+close: બંધ

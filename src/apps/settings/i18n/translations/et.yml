@@ -17,6 +17,7 @@ header:
     seelen_wall: Sein
     seelen_rofi: Rakenduse käivitaja
     virtual_desk: Virtuaalsed töölauad
+    home: Kodu
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
@@ -229,3 +230,4 @@ app_launcher:
 more: Rohkem
 insert: Sisestama
 inherit: Pärima
+close: Sulgur

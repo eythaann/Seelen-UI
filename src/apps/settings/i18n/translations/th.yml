@@ -17,6 +17,7 @@ header:
     seelen_wall: กำแพง
     seelen_rofi: แอพ Launcher
     virtual_desk: เดสก์ท็อปเสมือนจริง
+    home: บ้าน
 start:
   title: ยินดีต้อนรับ!
   message_accent: เพิ่มประสิทธิภาพการทำงานของคุณอย่างมีสไตล์!
@@ -225,3 +226,4 @@ app_launcher:
 more: มากกว่า
 insert: แทรก
 inherit: สืบทอด
+close: ปิด

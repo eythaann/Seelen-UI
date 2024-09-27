@@ -24,6 +24,7 @@ header:
     seelen_rofi: Lanzador de aplicaciones
     seelen_wall: La pared
     virtual_desk: Escritorios virtuales
+    home: Hogar
 start:
   title: ¡Bienvenido!
   message: >-
@@ -233,3 +234,4 @@ app_launcher:
 inherit: Heredar
 insert: Insertar
 more: Más
+close: Cerca

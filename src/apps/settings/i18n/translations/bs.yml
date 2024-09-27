@@ -17,6 +17,7 @@ header:
     seelen_wall: Zid
     seelen_rofi: Pokretanje aplikacija
     virtual_desk: Virtualne radne površine
+    home: Dom
 start:
   title: Dobrodošli!
   message_accent: Optimizirajte svoju produktivnost sa stilom!
@@ -229,3 +230,4 @@ app_launcher:
 inherit: Nasljediti
 insert: Umetnuti
 more: Više
+close: Zatvoriti

@@ -17,6 +17,7 @@ header:
     seelen_wall: Dindingnya
     seelen_rofi: Peluncur Aplikasi
     virtual_desk: Desktop virtual
+    home: Rumah
 start:
   message: >-
     Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
@@ -229,3 +230,4 @@ app_launcher:
 insert: Menyisipkan
 more: Lagi
 inherit: Mewarisi
+close: Menutup

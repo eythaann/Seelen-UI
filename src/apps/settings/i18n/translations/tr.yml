@@ -17,6 +17,7 @@ header:
     seelen_wall: Duvar
     seelen_rofi: Uygulama başlatıcısı
     virtual_desk: Sanal masaüstleri
+    home: Ev
 start:
   title: Hoş geldin!
   message_accent: Verimliliğinizi stille optimize edin!
@@ -229,3 +230,4 @@ app_launcher:
 insert: Sokmak
 more: Daha
 inherit: Miras almak
+close: Kapalı

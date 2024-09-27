@@ -17,6 +17,7 @@ header:
     seelen_wall: প্রাচীর
     seelen_rofi: অ্যাপ লঞ্চার
     virtual_desk: ভার্চুয়াল ডেস্কটপস
+    home: বাড়ি
 start:
   title: স্বাগত!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 inherit: উত্তরাধিকারী
 insert: .োকান
 more: আরও
+close: বন্ধ

@@ -4,6 +4,7 @@ cancel: Cancel
 save: Save
 save_and_restart: Save & Restart
 quit: Quit
+close: Close
 open: Open
 delete: Delete
 insert: Insert
@@ -16,6 +17,7 @@ sides:
   bottom: Bottom
 header:
   labels:
+    home: Home
     general: General
     seelen_bar: Fancy Toolbar
     seelen_wm: Window Manager

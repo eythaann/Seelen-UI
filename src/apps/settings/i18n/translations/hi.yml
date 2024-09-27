@@ -17,6 +17,7 @@ header:
     seelen_wall: दीवार
     seelen_rofi: ऐप लॉन्चर
     virtual_desk: आभासी डेस्कटॉप्स
+    home: घर
 start:
   message_accent: शैली के साथ अपनी उत्पादकता का अनुकूलन करें!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 inherit: इनहेरिट
 more: अधिक
 insert: डालना
+close: बंद करना

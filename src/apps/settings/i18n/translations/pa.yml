@@ -17,6 +17,7 @@ header:
     seelen_rofi: ਐਪ ਲਾਂਚਰ
     seelen_wall: ਕੰਧ
     virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
+    home: ਘਰ
 start:
   message: >-
     Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows 11 ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
@@ -229,3 +230,4 @@ app_launcher:
 more: ਹੋਰ
 inherit: ਵਿਰਾਸਤ
 insert: ਸੰਮਿਲਿਤ ਕਰੋ
+close: ਨੇੜੇ

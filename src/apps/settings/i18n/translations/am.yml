@@ -17,6 +17,7 @@ header:
     seelen_wall: ግድግዳው
     seelen_rofi: የመተግበሪያ አስጀማሪ
     virtual_desk: ምናባዊ ዴስክቶፕስ
+    home: ቤት
 start:
   title: እንኳን ደህና መጣህ!
   message: >-
@@ -224,3 +225,4 @@ app_launcher:
 insert: ያስገቡ
 more: ተጨማሪ
 inherit: ውርስ
+close: ገጠመ

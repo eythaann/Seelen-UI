@@ -17,6 +17,7 @@ header:
     seelen_rofi: Appstart
     seelen_wall: Väggen
     virtual_desk: Virtuella stationära datorer
+    home: Hem
 start:
   title: Välkommen!
   message_accent: Optimera din produktivitet med stil!
@@ -231,3 +232,4 @@ app_launcher:
 more: Mer
 inherit: Ärva
 insert: Infoga
+close: Nära

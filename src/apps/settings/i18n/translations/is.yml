@@ -17,6 +17,7 @@ header:
     seelen_wall: Vegginn
     seelen_rofi: App Launcher
     virtual_desk: Sýndarskjáborð
+    home: Heim
 start:
   title: Velkominn!
   message_accent: Fínstilltu framleiðni þína með stæl!
@@ -227,3 +228,4 @@ app_launcher:
 inherit: Erfa
 more: Meira
 insert: Settu inn
+close: Lokaðu

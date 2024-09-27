@@ -17,6 +17,7 @@ header:
     seelen_wall: भित्ता
     seelen_rofi: फोटो लन्चर
     virtual_desk: भर्चुअल डेस्कटपहरू
+    home: घर
 start:
   message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
   message: >-
@@ -228,3 +229,4 @@ app_launcher:
 more: अरु
 inherit: बाबु बाजेबाट पाउनु
 insert: घुसाउनु
+close: घनिष्ट

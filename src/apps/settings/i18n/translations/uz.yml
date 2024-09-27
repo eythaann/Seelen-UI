@@ -17,6 +17,7 @@ header:
     seelen_wall: Devor
     seelen_rofi: Ilovani ishga tushirish vositasi
     virtual_desk: Virtual ish stollari
+    home: Uy
 start:
   message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
   message: >-
@@ -231,3 +232,4 @@ app_launcher:
 more: Ko'proq
 inherit: Meros qilib olmoq
 insert: Qo'shmoq
+close: Yaqin

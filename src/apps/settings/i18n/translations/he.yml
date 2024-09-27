@@ -17,6 +17,7 @@ header:
     seelen_rofi: משגר אפליקציות
     seelen_wall: הקיר
     virtual_desk: שולחנות עבודה וירטואליים
+    home: בַּיִת
 start:
   title: ברוך הבא!
   message: >-
@@ -225,3 +226,4 @@ app_launcher:
 inherit: לָרֶשֶׁת
 more: יוֹתֵר
 insert: לְהַכנִיס
+close: לִסְגוֹר

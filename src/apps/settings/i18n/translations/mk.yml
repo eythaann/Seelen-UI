@@ -17,6 +17,7 @@ header:
     seelen_rofi: Апликатор за лансирање
     seelen_wall: Theидот
     virtual_desk: Виртуелни работна површина
+    home: Дома
 start:
   title: Добредојдовте!
   message_accent: Оптимизирајте ја вашата продуктивност со стил!
@@ -231,3 +232,4 @@ app_launcher:
 inherit: Наследник
 insert: Вметнете
 more: Повеќе
+close: Затвори

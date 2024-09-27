@@ -17,6 +17,7 @@ header:
     seelen_rofi: Spouštěč aplikací
     seelen_wall: Zeď
     virtual_desk: Virtuální stolní počítače
+    home: Domov
 start:
   title: Vítejte!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 insert: Vložit
 inherit: Zdědit
 more: Více
+close: Blízko

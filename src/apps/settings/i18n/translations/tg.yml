@@ -17,6 +17,7 @@ header:
     seelen_wall: Девор
     seelen_rofi: Барномасоз
     virtual_desk: Мизи кории виртуалӣ
+    home: Хона
 start:
   message_accent: Ҳосилнокии худро бо услуб оптимед кунед!
   message: >-
@@ -226,3 +227,4 @@ app_launcher:
 more: Бештар
 inherit: Мерос гирифтан
 insert: Илова кардан
+close: Наздик

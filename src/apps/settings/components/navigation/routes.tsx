@@ -3,6 +3,7 @@ import React from 'react';
 import { Icon } from '../../../shared/components/Icon';
 
 export enum Route {
+  HOME = 'home',
   GENERAL = 'general',
   SEELEN_BAR = 'seelen_bar',
   SEELEN_WM = 'seelen_wm',
@@ -24,6 +25,7 @@ export const RouteExtraInfo: { [key in Route]?: string } = {
 };
 
 export const RouteIcons: Record<Route, React.ReactNode> = {
+  [Route.HOME]: <Icon iconName="TbHome" />,
   [Route.GENERAL]: <Icon iconName="RiSettings3Fill" />,
   [Route.MONITORS]: <Icon iconName="PiMonitorBold" />,
   [Route.SEELEN_BAR]: <Icon iconName="BiSolidDockTop" />,

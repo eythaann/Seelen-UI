@@ -17,6 +17,7 @@ header:
     seelen_rofi: Изстрелване на приложението
     seelen_wall: Стената
     virtual_desk: Виртуални настолни компютри
+    home: Начало
 start:
   title: Добре дошли!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 more: Още
 inherit: Наследяване
 insert: Вмъкнете
+close: Затворете

@@ -17,6 +17,7 @@ header:
     seelen_wall: Væggen
     seelen_rofi: App Launcher
     virtual_desk: Virtuelle desktops
+    home: Hjem
 start:
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
@@ -231,3 +232,4 @@ app_launcher:
 more: Mere
 inherit: Arve
 insert: Indsæt
+close: Tæt

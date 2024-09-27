@@ -17,6 +17,7 @@ header:
     seelen_rofi: Запуск програми
     seelen_wall: Стіна
     virtual_desk: Віртуальні настільні ПК
+    home: Домашній
 start:
   title: Ласкаво просимо!
   message_accent: Оптимізуйте свою продуктивність стилем!
@@ -229,3 +230,4 @@ app_launcher:
 insert: Вставляти
 inherit: Успадкувати
 more: Більше
+close: Закривати

@@ -21,8 +21,10 @@ import { useDarkMode } from '../shared/styles';
 import { Header } from './components/header';
 import { Navigation } from './components/navigation';
 import { Route } from './components/navigation/routes';
+import { Home } from './modules/Home';
 
 const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
+  [Route.HOME]: Home,
   [Route.GENERAL]: General,
   [Route.MONITORS]: SettingsByMonitor,
   [Route.SEELEN_ROFI]: AppLauncherSettings,
