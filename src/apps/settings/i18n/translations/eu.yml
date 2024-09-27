@@ -17,6 +17,7 @@ header:
     seelen_wall: Horma
     seelen_rofi: App Launcher
     virtual_desk: Mahaigain birtualak
+    home: Etxe
 start:
   message: >-
     Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
@@ -229,3 +230,4 @@ app_launcher:
 inherit: Jarauntsi
 insert: Txertatu
 more: Gehiago
+close: Hurbileko

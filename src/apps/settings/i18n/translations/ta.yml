@@ -17,6 +17,7 @@ header:
     seelen_wall: சுவர்
     seelen_rofi: பயன்பாட்டு துவக்கி
     virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
+    home: வீடு
 start:
   title: வரவேற்பு!
   message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
@@ -229,3 +230,4 @@ app_launcher:
 insert: செருகவும்
 inherit: மரபு
 more: மேலும்
+close: மூடு

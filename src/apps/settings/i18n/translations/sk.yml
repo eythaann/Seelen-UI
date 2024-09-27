@@ -17,6 +17,7 @@ header:
     seelen_wall: Stena
     seelen_rofi: Spúšťač aplikácií
     virtual_desk: Virtuálne stolné počítače
+    home: Domov
 start:
   title: Vitajte!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 more: Viac
 insert: Vložiť
 inherit: Zdediť
+close: Zatvoriť

@@ -24,7 +24,7 @@ import i18n from '../../../../i18n';
 const initialState: RootState = {
   lastLoaded: null,
   autostart: null,
-  route: Route.GENERAL,
+  route: Route.HOME,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
   seelenweg: new SeelenWegSettings(),
   wall: new SeelenWallSettings(),

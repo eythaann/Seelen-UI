@@ -24,6 +24,7 @@ header:
     seelen_wall: 墙
     seelen_rofi: 应用启动器
     virtual_desk: 虚拟桌面
+    home: 家
 start:
   title: 欢迎！
   message: >-
@@ -222,3 +223,4 @@ app_launcher:
 insert: 插入
 inherit: 继承
 more: 更多的
+close: 关闭

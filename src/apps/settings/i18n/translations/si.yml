@@ -17,6 +17,7 @@ header:
     seelen_rofi: යෙදුම් දියත් කිරීම
     seelen_wall: බිත්තිය
     virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
+    home: මුල් පිටුව
 start:
   title: සාදරයෙන් පිළිගනිමු!
   message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
@@ -227,3 +228,4 @@ app_launcher:
 more: තව
 insert: ඇතුළු කරන්න
 inherit: උරුම වේ
+close: වසන්න

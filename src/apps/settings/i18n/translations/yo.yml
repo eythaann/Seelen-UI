@@ -17,6 +17,7 @@ header:
     seelen_wall: Odi
     seelen_rofi: Ifilọlẹ app
     virtual_desk: Awọn orisun itẹwe foju
+    home: Ile
 start:
   message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
   message: >-
@@ -225,3 +226,4 @@ app_launcher:
 inherit: Jogun
 more: Diẹ sii
 insert: Fisi
+close: Sunmọ

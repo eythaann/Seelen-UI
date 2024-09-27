@@ -17,6 +17,7 @@ header:
     seelen_wall: ກໍາແພງ
     seelen_rofi: App Launcher
     virtual_desk: virtual desktops
+    home: ບ້ານ
 start:
   title: ຍິນດີຕ້ອນຮັບ!
   message_accent: ເພີ່ມປະສິດທິພາບການຜະລິດຂອງເຈົ້າດ້ວຍຮູບແບບ!
@@ -228,3 +229,4 @@ app_launcher:
 insert: ຊອນເຂົ້າ
 more: ຫຼາຍ
 inherit: ມູນມໍລະດົກ
+close: ປິດ

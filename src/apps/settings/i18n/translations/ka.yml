@@ -17,6 +17,7 @@ header:
     seelen_rofi: აპლიკაციის გამშვები
     seelen_wall: კედელი
     virtual_desk: ვირტუალური სამუშაო მაგიდა
+    home: სახლი
 start:
   message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
   title: კეთილი იყოს თქვენი მობრძანება!
@@ -231,3 +232,4 @@ app_launcher:
 more: მეტი
 insert: ჩასმა
 inherit: მემკვიდრეობით მიღება
+close: ახლო

@@ -17,6 +17,7 @@ header:
     seelen_rofi: Ứng dụng Launcher
     seelen_wall: Bức tường
     virtual_desk: Máy tính để bàn ảo
+    home: Trang chủ
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -229,3 +230,4 @@ app_launcher:
 insert: Chèn
 more: Hơn
 inherit: Kế thừa
+close: Đóng

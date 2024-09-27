@@ -17,6 +17,7 @@ header:
     seelen_wall: Il muro
     seelen_rofi: APP LAVANTOLA
     virtual_desk: Desktop virtuali
+    home: Casa
 start:
   title: Benvenuta!
   message: >-
@@ -231,3 +232,4 @@ app_launcher:
 insert: Inserire
 inherit: Ereditare
 more: Di più
+close: Vicina

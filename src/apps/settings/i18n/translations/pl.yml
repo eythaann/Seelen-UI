@@ -17,6 +17,7 @@ header:
     seelen_wall: Ściana
     seelen_rofi: Uruchamianie aplikacji
     virtual_desk: Wirtualne komputery stacjonarne
+    home: Dom
 start:
   title: Powitanie!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 inherit: Dziedziczyć
 more: Więcej
 insert: Wstawić
+close: Zamknąć

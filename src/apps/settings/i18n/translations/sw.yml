@@ -17,6 +17,7 @@ header:
     seelen_rofi: Kizindua programu
     seelen_wall: Ukuta
     virtual_desk: Dawati za kweli
+    home: Nyumbani
 start:
   message_accent: Boresha tija yako na mtindo!
   message: >-
@@ -225,3 +226,4 @@ app_launcher:
 more: Zaidi
 inherit: Urithi
 insert: Ingiza
+close: Karibu

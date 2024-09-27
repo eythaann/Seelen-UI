@@ -17,6 +17,7 @@ header:
     seelen_wall: Ang pader
     seelen_rofi: App launcher
     virtual_desk: Mga Virtual Desktop
+    home: Home
 start:
   message: >-
     Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
@@ -232,3 +233,4 @@ app_launcher:
 insert: Ipasok
 more: Higit pa
 inherit: Magmana
+close: Malapit

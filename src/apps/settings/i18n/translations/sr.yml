@@ -17,6 +17,7 @@ header:
     seelen_wall: Зид
     seelen_rofi: Лаунцхер
     virtual_desk: Виртуелни радне површине
+    home: Дом
 start:
   title: Добродошли!
   message_accent: Оптимизирајте своју продуктивност стилом!
@@ -231,3 +232,4 @@ app_launcher:
 insert: Уметнути
 inherit: Наследити
 more: Више
+close: Затворити

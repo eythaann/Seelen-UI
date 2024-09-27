@@ -17,6 +17,7 @@ header:
     seelen_wall: Siena
     seelen_rofi: Programos paleidimo priemonė
     virtual_desk: Virtualūs staliniai kompiuteriai
+    home: Namai
 start:
   title: Sveiki!
   message_accent: Optimizuokite savo produktyvumą stiliumi!
@@ -227,3 +228,4 @@ app_launcher:
 inherit: Paveldėti
 insert: Įterpti
 more: Daugiau
+close: Uždaryti

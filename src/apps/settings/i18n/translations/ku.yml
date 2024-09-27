@@ -17,6 +17,7 @@ header:
     seelen_wall: Dîwar
     seelen_rofi: App launcher
     virtual_desk: Desktopên Virtual
+    home: Xane
 start:
   title: Bi xêr hatî!
   message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
@@ -228,3 +229,4 @@ app_launcher:
 insert: Lêzêdekirin
 inherit: Mîratgirtin
 more: Zêde
+close: Nêzîkî

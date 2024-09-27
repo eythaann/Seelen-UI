@@ -17,6 +17,7 @@ header:
     seelen_wall: Dinding
     seelen_rofi: Pelancar App
     virtual_desk: Desktop maya
+    home: Rumah
 start:
   title: Selamat datang!
   message_accent: Mengoptimumkan produktiviti anda dengan gaya!
@@ -229,3 +230,4 @@ app_launcher:
 inherit: Mewarisi
 more: Lebih
 insert: Masukkan
+close: Tutup

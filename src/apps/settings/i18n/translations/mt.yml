@@ -17,6 +17,7 @@ header:
     seelen_wall: Il-ħajt
     seelen_rofi: APP Lancher
     virtual_desk: Desktops virtwali
+    home: Id-dar
 start:
   title: Merħba!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 inherit: Jirtu
 insert: Daħħal
 more: Aktar
+close: Viċin

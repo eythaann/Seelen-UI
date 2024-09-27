@@ -17,6 +17,7 @@ header:
     seelen_wall: De muur
     seelen_rofi: Apparter
     virtual_desk: Virtuele desktops
+    home: Thuis
 start:
   message_accent: Optimaliseer uw productiviteit met stijl!
   title: Welkom!
@@ -231,3 +232,4 @@ app_launcher:
 inherit: Erven
 more: Meer
 insert: Invoegen
+close: Dichtbij

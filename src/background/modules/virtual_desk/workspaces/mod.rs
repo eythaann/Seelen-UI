@@ -179,11 +179,13 @@ impl VirtualDesktopManagerTrait for SeelenWorkspacesManager {
         if self.is_pinned_window(window)? {
             return self.get_current();
         }
-        trace_lock!(self.workspaces)
-            .iter()
-            .find(|w| w.windows.contains(&window))
-            .map(Into::into)
-            .or_else(|| self.get_current().ok().map(Into::into))
+        let desk = {
+            trace_lock!(self.workspaces)
+                .iter()
+                .find(|w| w.windows.contains(&window))
+                .map(Into::into)
+        };
+        desk.or_else(|| self.get_current().ok())
             .ok_or_else(none_err)
     }
 

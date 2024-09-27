@@ -17,6 +17,7 @@ header:
     seelen_rofi: پرتاب برنامه
     seelen_wall: دیوار
     virtual_desk: دسک تاپ مجازی
+    home: خانه
 start:
   title: خوش آمدی!
   message_accent: بهره وری خود را با سبک بهینه کنید!
@@ -228,3 +229,4 @@ app_launcher:
 inherit: ارث
 more: بیشتر
 insert: درج کردن
+close: نزدیک

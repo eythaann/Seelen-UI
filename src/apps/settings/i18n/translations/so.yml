@@ -17,6 +17,7 @@ header:
     seelen_wall: Derbiga
     seelen_rofi: App furaha
     virtual_desk: Desktops Virtual
+    home: Guri
 start:
   message: >-
     Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
@@ -230,3 +231,4 @@ app_launcher:
 inherit: Dhaxlid
 insert: Gelin
 more: Ka badan
+close: Xirid

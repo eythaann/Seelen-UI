@@ -17,6 +17,7 @@ header:
     seelen_wall: ជញ្ជាំង
     seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
     virtual_desk: ផ្ទៃតុនិម្មិត
+    home: ផ្ទហ
 start:
   title: សូមស្វាគមន៍!
   message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
@@ -227,3 +228,4 @@ app_launcher:
 insert: រចក
 more: រេចីនចាង
 inherit: តតយលមរតក
+close: បិត

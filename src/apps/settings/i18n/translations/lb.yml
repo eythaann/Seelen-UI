@@ -17,6 +17,7 @@ header:
     seelen_wall: D'Mauer
     seelen_rofi: App launcher
     virtual_desk: Virtuell Desktops
+    home: Doheem
 start:
   title: Wëllkomm!
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
@@ -229,3 +230,4 @@ app_launcher:
 more: Méi kleng
 insert: INor andafen
 inherit: Ontherrit
+close: Zoumaachen

@@ -17,6 +17,7 @@ header:
     seelen_wall: Udonga
     seelen_rofi: Isiqalisi sohlelo lokusebenza
     virtual_desk: Ama-Virtual Desktops
+    home: Ikhaya
 start:
   message: >-
     Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
@@ -231,3 +232,4 @@ app_launcher:
 more: Okuningi
 inherit: Dla ifa
 insert: Faka
+close: Ngokuminyanisa

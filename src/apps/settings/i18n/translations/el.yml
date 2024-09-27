@@ -17,6 +17,7 @@ header:
     seelen_wall: Ο τοίχος
     seelen_rofi: Εκτοξευτής εφαρμογών
     virtual_desk: Εικονικοί επιτραπέζιοι
+    home: Σπίτι
 start:
   message_accent: Βελτιστοποιήστε την παραγωγικότητά σας με στυλ!
   title: Καλως ΗΡΘΑΤΕ!
@@ -231,3 +232,4 @@ app_launcher:
 inherit: Κληρονομώ
 more: Περισσότερο
 insert: Εισάγω
+close: Κοντά

@@ -17,6 +17,7 @@ header:
     seelen_wall: La paret
     seelen_rofi: Llançador d'aplicacions
     virtual_desk: Desktops virtuals
+    home: Casa
 start:
   title: Benvingut!
   message_accent: Optimitzeu la vostra productivitat amb estil.
@@ -231,3 +232,4 @@ app_launcher:
 insert: Inserir
 inherit: Heretar
 more: Més
+close: Tancar -se

@@ -17,6 +17,7 @@ header:
     seelen_rofi: ایپ لانچر
     seelen_wall: دیوار
     virtual_desk: ورچوئل ڈیسک ٹاپس
+    home: گھر
 start:
   title: عنوان
   message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
@@ -228,3 +229,4 @@ app_launcher:
 inherit: وراثت
 insert: داخل کریں
 more: زیادہ
+close: بند کریں

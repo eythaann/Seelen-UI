@@ -17,6 +17,7 @@ header:
     seelen_rofi: Alkalmazásindító
     seelen_wall: A fal
     virtual_desk: Virtuális asztali számítógépek
+    home: Otthon
 start:
   title: Üdvözöljük!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 inherit: Örököl
 more: Több
 insert: Beilleszt
+close: Közeli

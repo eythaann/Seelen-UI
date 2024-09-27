@@ -17,6 +17,7 @@ header:
     seelen_wall: Die muur
     seelen_rofi: App -lanseerder
     virtual_desk: Virtuele tafelrekenaars
+    home: Tuiste
 start:
   title: Welkom!
   message: >-
@@ -231,3 +232,4 @@ app_launcher:
 insert: Invoeg
 more: Meer
 inherit: Erf
+close: Dig

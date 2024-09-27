@@ -24,6 +24,7 @@ header:
     seelen_wall: Стена
     seelen_rofi: Приложение пусковая установка
     virtual_desk: Виртуальные рабочие столы
+    home: Дом
 start:
   title: Добро пожаловать!
   message: >-
@@ -232,3 +233,4 @@ app_launcher:
 inherit: Наследовать
 insert: Вставлять
 more: Более
+close: Закрывать

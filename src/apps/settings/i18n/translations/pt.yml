@@ -24,6 +24,7 @@ header:
     seelen_rofi: Lançador de aplicativos
     seelen_wall: A parede
     virtual_desk: Desktops virtuais
+    home: Lar
 start:
   title: Bem-vindo!
   message: >-
@@ -229,3 +230,4 @@ app_launcher:
 insert: Inserir
 more: Mais
 inherit: Herdar
+close: Fechar

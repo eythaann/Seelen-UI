@@ -41,6 +41,7 @@ export const Navigation = memo(() => {
   let devTools = useAppSelector(RootSelectors.devTools);
 
   let general = [
+    Route.HOME,
     Route.GENERAL,
     Route.SEELEN_BAR,
     Route.SEELEN_WM,
@@ -59,7 +60,7 @@ export const Navigation = memo(() => {
   return (
     <div
       className={cx(cs.navigation, {
-        [cs.tableView!]: current === Route.SPECIFIC_APPS,
+        [cs.tableView!]: [Route.HOME, Route.SPECIFIC_APPS].includes(current),
       })}
     >
       <div className={cs.navigationMain}>

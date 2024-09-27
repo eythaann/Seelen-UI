@@ -17,6 +17,7 @@ header:
     seelen_wall: Хана
     seelen_rofi: Програм идэвхжсэн
     virtual_desk: Виржопын ширээний гутал
+    home: Гэр
 start:
   message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
   message: >-
@@ -228,3 +229,4 @@ app_launcher:
 inherit: Удамших
 more: Илүү / их олон
 insert: Оруулах
+close: Ойр дөхөм

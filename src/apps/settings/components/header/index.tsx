@@ -58,7 +58,7 @@ export const Header = () => {
         />
         {'  '}
         <Button
-          children={hasChanges ? saveLabel : t('quit')}
+          children={hasChanges ? saveLabel : t('close')}
           type="primary"
           danger={!hasChanges}
           onClick={SaveOrQuit}

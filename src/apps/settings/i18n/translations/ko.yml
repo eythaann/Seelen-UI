@@ -24,6 +24,7 @@ header:
     seelen_wall: 벽
     seelen_rofi: 앱 런처
     virtual_desk: 가상 데스크톱
+    home: 집
 start:
   title: 환영합니다!
   message: >-
@@ -224,3 +225,4 @@ app_launcher:
 more: 더
 insert: 끼워 넣다
 inherit: 상속
+close: 닫다

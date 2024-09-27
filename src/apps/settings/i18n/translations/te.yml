@@ -17,6 +17,7 @@ header:
     seelen_wall: గోడ
     seelen_rofi: అనువర్తన లాంచర్
     virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
+    home: హోమ్
 start:
   title: స్వాగతం!
   message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
@@ -229,3 +230,4 @@ app_launcher:
 inherit: వారసత్వంగా
 insert: చొప్పించండి
 more: మరిన్ని
+close: దగ్గరగా
