@@ -1,5 +1,5 @@
 import { SoftOpaque } from 'readable-types';
-import { FancyToolbarSettings } from 'seelen-core';
+import { FancyToolbarSettings, Settings } from 'seelen-core';
 import { Placeholder } from 'seelen-core';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -110,7 +110,7 @@ export interface Workspace {
   name: string | null;
 }
 
-export interface RootState extends IRootState<FancyToolbarSettings> {
+export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settings, 'dateFormat'> {
   version: number;
   isOverlaped: boolean;
   focused: FocusedApp | null;

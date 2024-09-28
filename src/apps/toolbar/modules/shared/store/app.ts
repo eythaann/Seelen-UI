@@ -8,6 +8,7 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   version: 0,
+  dateFormat: '',
   isOverlaped: false,
   focused: null,
   placeholder: null,

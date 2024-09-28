@@ -119,10 +119,10 @@ common_item! {
     /// const date: string; // the formatted date
     /// ```
     struct DateToolbarItem {
-        /// Time unit to refresh the showing date
+        /// @deprecated -- v2 uses settings date format instead (it will perform the minimal updates) 
         #[serde(default = "DateToolbarItem::default_interval")]
         each: DateUpdateInterval,
-        /// Format of the date, see [moment.js displaying format](https://momentjs.com/docs/#/displaying/format/)
+        /// @deprecated -- v2 uses settings date format instead
         #[serde(default = "DateToolbarItem::default_format")]
         format: String,
     }

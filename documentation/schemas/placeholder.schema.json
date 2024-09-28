@@ -254,7 +254,7 @@
               ]
             },
             "each": {
-              "description": "Time unit to refresh the showing date",
+              "description": "@deprecated -- v2 uses settings date format instead (it will perform the minimal updates)",
               "default": "minute",
               "allOf": [
                 {
@@ -263,7 +263,7 @@
               ]
             },
             "format": {
-              "description": "Format of the date, see [moment.js displaying format](https://momentjs.com/docs/#/displaying/format/)",
+              "description": "@deprecated -- v2 uses settings date format instead",
               "default": "MMM Do, HH:mm",
               "type": "string"
             },

@@ -6,7 +6,7 @@ import { SeelenCommand } from 'seelen-core';
 
 import { WlanBssEntry, WlanProfile } from '../domain';
 
-import { Icon, IconName } from '../../../../shared/components/Icon';
+import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
 
 export function WlanSelectorEntry(props: {
@@ -86,7 +86,7 @@ export function WlanSelectorEntry(props: {
       .catch(onrejected);
   }
 
-  let signalIcon: IconName = 'GrWifiNone';
+  let signalIcon = 'GrWifiNone';
   if (entry.signal > 75) {
     signalIcon = 'GrWifi';
   } else if (entry.signal > 50) {

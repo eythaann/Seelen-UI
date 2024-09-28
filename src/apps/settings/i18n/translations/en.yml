@@ -41,6 +41,7 @@ start:
 general:
   startup: Run on startup?
   language: Language
+  date_format: Date Format
   theme:
     label: Themes
     placeholder: Select theme

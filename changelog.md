@@ -15,6 +15,7 @@
 - expose function to pin items into the dock.
 - settings by monitor.
 - window manager multimonitor support.
+- allow users change date format directly on UI settings.
 
 ### enhancements
 - improve quality icons from all app/files items.

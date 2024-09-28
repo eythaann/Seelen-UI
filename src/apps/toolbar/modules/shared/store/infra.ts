@@ -151,6 +151,7 @@ export async function loadStore() {
 
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));
+  store.dispatch(RootActions.setDateFormat(userSettings.jsonSettings.dateFormat));
 
   setPlaceholder(userSettings);
 

@@ -29,6 +29,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'ahkVariables',
     'devTools',
     'language',
+    'dateFormat',
     'virtualDesktopStrategy',
     'betaChannel',
     'wall',

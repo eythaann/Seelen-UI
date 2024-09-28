@@ -478,6 +478,8 @@ pub struct Settings {
     pub dev_tools: bool,
     /// language to use, if null the system locale is used
     pub language: Option<String>,
+    /// MomentJS date format
+    pub date_format: String,
     /// what virtual desktop implementation will be used, in case Native is not available we use Seelen
     pub virtual_desktop_strategy: VirtualDesktopStrategy,
     /// enable experimental/beta updates
@@ -498,6 +500,7 @@ impl Default for Settings {
             ahk_variables: AhkVarList::default(),
             dev_tools: false,
             language: Some(Self::get_system_language()),
+            date_format: "ddd D MMM, hh:mm A".to_owned(),
             virtual_desktop_strategy: VirtualDesktopStrategy::Native,
             beta_channel: false,
         }
