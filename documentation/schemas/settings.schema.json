@@ -207,6 +207,11 @@
       "default": false,
       "type": "boolean"
     },
+    "dateFormat": {
+      "description": "MomentJS date format",
+      "default": "ddd D MMM, hh:mm A",
+      "type": "string"
+    },
     "devTools": {
       "description": "enable or disable dev tools tab in settings",
       "default": false,

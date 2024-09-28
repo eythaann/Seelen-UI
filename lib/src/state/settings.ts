@@ -70,6 +70,7 @@ export class Settings extends Obtainable<Settings>(
   selectedThemes: string[] = ['default'];
   devTools: boolean = false;
   language: string = '';
+  dateFormat: string = 'ddd D MMM, hh:mm A';
   virtualDesktopStrategy: VirtualDesktopStrategy = VirtualDesktopStrategy.Native;
   betaChannel: boolean = false;
 }

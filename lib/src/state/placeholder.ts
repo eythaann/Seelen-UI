@@ -53,7 +53,9 @@ export interface TrayTM extends BaseToolbarModule {
 
 export interface DateToolbarModule extends BaseToolbarModule {
   type: ToolbarModuleType.Date;
+  /** @deprecated v2 uses settings date format instead (it will perform the minimal updates) */
   each: TimeUnit;
+  /** @deprecated v2 uses settings date format instead */
   format: string;
 }
 

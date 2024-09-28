@@ -42,6 +42,7 @@ const initialState: RootState = {
   selectedThemes: [],
   devTools: false,
   language: navigator.language.split('-')[0] || 'en',
+  dateFormat: 'ddd D MMM, hh:mm A',
   colors: UIColors.default(),
   wallpaper: null,
   virtualDesktopStrategy: VirtualDesktopStrategy.Native,
@@ -65,6 +66,7 @@ export const RootSlice = createSlice({
       i18n.changeLanguage(action.payload.language);
       return action.payload;
     },
+    setDateFormat: toBeSaved(reducers.setDateFormat),
     setWall: toBeSaved(reducers.setWall),
     setLauncher: toBeSaved(reducers.setLauncher),
     setDevTools: toBeSaved(reducers.setDevTools),
