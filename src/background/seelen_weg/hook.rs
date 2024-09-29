@@ -18,7 +18,7 @@ impl SeelenWeg {
         match event {
             WinEvent::ObjectShow | WinEvent::ObjectCreate => {
                 if Self::should_be_added(origin) {
-                    Self::add_hwnd(origin);
+                    Self::add_hwnd(origin)?;
                 }
             }
             WinEvent::ObjectParentChange => {
@@ -27,7 +27,7 @@ impl SeelenWeg {
                         Self::remove_hwnd(origin);
                     }
                     if !Self::contains_app(parent.hwnd()) && Self::should_be_added(parent.hwnd()) {
-                        Self::add_hwnd(parent.hwnd());
+                        Self::add_hwnd(parent.hwnd())?;
                     }
                 }
             }
@@ -40,7 +40,7 @@ impl SeelenWeg {
                 if Self::contains_app(origin) {
                     Self::update_app(origin);
                 } else if Self::should_be_added(origin) {
-                    Self::add_hwnd(origin);
+                    Self::add_hwnd(origin)?;
                 }
             }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {

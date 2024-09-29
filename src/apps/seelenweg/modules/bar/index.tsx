@@ -165,16 +165,16 @@ export function SeelenWeg() {
 }
 
 function ItemByType(item: SwItem) {
-  if (item.type === SwItemType.Pinned) {
+  if (item.type === SwItemType.Pinned && item.path) {
     return <FileOrFolder key={item.path} item={item} />;
   }
 
-  if (item.type === SwItemType.PinnedApp) {
+  if (item.type === SwItemType.PinnedApp && item.exe) {
     return <UserApplication key={item.exe} item={item} />;
   }
 
-  if (item.type === SwItemType.TemporalApp) {
-    return <UserApplication key={item.exe || item.opens[0] || item.title} item={item} />;
+  if (item.type === SwItemType.TemporalApp && item.exe) {
+    return <UserApplication key={item.exe} item={item} />;
   }
 
   if (item.type === SwItemType.Media) {
