@@ -45,6 +45,7 @@ general:
   accent_color: ઉચ્ચારણ રંગ
   wallpaper:
     select: વ wallp લપેપર પસંદ કરો
+  date_format: તારીખ ફોર્મેટ
 toolbar:
   placeholder:
     author: લેખક
@@ -231,3 +232,5 @@ more: વધારે
 inherit: વારસો મેળવવો
 insert: દાખલ કરવું
 close: બંધ
+update:
+  available: અપડેટ ઉપલબ્ધ!

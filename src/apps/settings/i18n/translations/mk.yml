@@ -45,6 +45,7 @@ general:
   accent_color: Боја на акцент
   wallpaper:
     select: Изберете позадина
+  date_format: Формат на датум
 toolbar:
   placeholder:
     author: Автор
@@ -233,3 +234,5 @@ inherit: Наследник
 insert: Вметнете
 more: Повеќе
 close: Затвори
+update:
+  available: Ажурирање достапно!

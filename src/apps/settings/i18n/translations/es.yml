@@ -52,6 +52,7 @@ general:
   accent_color: Acentuar el color
   wallpaper:
     select: Seleccionar papel tapiz
+  date_format: Formato de fecha
 toolbar:
   enable: Habilitar barra elegante
   placeholder:
@@ -235,3 +236,5 @@ inherit: Heredar
 insert: Insertar
 more: Más
 close: Cerca
+update:
+  available: Actualización disponible!

@@ -45,6 +45,7 @@ general:
   accent_color: Vurğu
   wallpaper:
     select: Divar kağızı seçin
+  date_format: Tarix formatı
 toolbar:
   placeholder:
     author: Müəllif
@@ -231,3 +232,5 @@ more: Daha çox
 inherit: Varis olmaq
 insert: Daxil etmək
 close: Yaxın
+update:
+  available: YENİLƏNİB!

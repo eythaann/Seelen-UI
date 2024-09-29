@@ -45,6 +45,7 @@ general:
   accent_color: সুরের ধাপের রঙ
   wallpaper:
     select: ওয়ালপেপার নির্বাচন করুন
+  date_format: তারিখ ফর্ম্যাট
 toolbar:
   placeholder:
     author: লেখক
@@ -231,3 +232,5 @@ inherit: উত্তরাধিকারী
 insert: .োকান
 more: আরও
 close: বন্ধ
+update:
+  available: আপডেট উপলব্ধ!

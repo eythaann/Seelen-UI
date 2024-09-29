@@ -45,6 +45,7 @@ general:
   accent_color: Accentfärg
   wallpaper:
     select: Välj tapeter
+  date_format: Datumformat
 toolbar:
   placeholder:
     description: Beskrivning
@@ -233,3 +234,5 @@ more: Mer
 inherit: Ärva
 insert: Infoga
 close: Nära
+update:
+  available: Uppdatering tillgänglig!

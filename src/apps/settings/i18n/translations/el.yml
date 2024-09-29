@@ -45,6 +45,7 @@ general:
   accent_color: Έμφαση στο χρώμα
   wallpaper:
     select: Επιλέξτε ταπετσαρία
+  date_format: Μορφή ημερομηνίας
 toolbar:
   placeholder:
     select: Δομή γραμμής εργαλείων
@@ -233,3 +234,5 @@ inherit: Κληρονομώ
 more: Περισσότερο
 insert: Εισάγω
 close: Κοντά
+update:
+  available: Διαθέσιμη ενημέρωση!

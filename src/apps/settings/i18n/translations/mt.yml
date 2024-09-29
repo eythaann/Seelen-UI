@@ -45,6 +45,7 @@ general:
   accent_color: Kulur tal-aċċent
   wallpaper:
     select: Agħżel Wallpaper
+  date_format: Format tad-data
 toolbar:
   placeholder:
     author: Awtur
@@ -231,3 +232,5 @@ inherit: Jirtu
 insert: Daħħal
 more: Aktar
 close: Viċin
+update:
+  available: Aġġornament disponibbli!

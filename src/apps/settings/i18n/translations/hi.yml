@@ -45,6 +45,7 @@ general:
   accent_color: स्वरोंका रंग
   wallpaper:
     select: वॉलपेपर का चयन करें
+  date_format: तारिख का प्रारूप
 toolbar:
   placeholder:
     author: लेखक
@@ -231,3 +232,5 @@ inherit: इनहेरिट
 more: अधिक
 insert: डालना
 close: बंद करना
+update:
+  available: उपलब्ध अद्यतन!

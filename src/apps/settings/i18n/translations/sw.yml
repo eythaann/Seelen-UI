@@ -44,6 +44,7 @@ general:
   accent_color: Rangi ya lafudhi
   wallpaper:
     select: Chagua Ukuta
+  date_format: Muundo wa tarehe
 toolbar:
   placeholder:
     description: Maelezo
@@ -227,3 +228,5 @@ more: Zaidi
 inherit: Urithi
 insert: Ingiza
 close: Karibu
+update:
+  available: Sasisha inapatikana!

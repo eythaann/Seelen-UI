@@ -45,6 +45,7 @@ general:
   accent_color: Accentfarve
   wallpaper:
     select: Vælg tapet
+  date_format: Datoformat
 toolbar:
   placeholder:
     select: Værktøjslinjestruktur
@@ -233,3 +234,5 @@ more: Mere
 inherit: Arve
 insert: Indsæt
 close: Tæt
+update:
+  available: Opdatering tilgængelig!

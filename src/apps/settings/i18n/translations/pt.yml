@@ -52,6 +52,7 @@ general:
   accent_color: Cor de destaque
   wallpaper:
     select: Selecione papel de parede
+  date_format: Formato de data
 toolbar:
   enable: Ativar barra de ferramentas sofisticada
   placeholder:
@@ -231,3 +232,5 @@ insert: Inserir
 more: Mais
 inherit: Herdar
 close: Fechar
+update:
+  available: Atualização disponível!

@@ -45,6 +45,7 @@ general:
   accent_color: Korostusväri
   wallpaper:
     select: Valitse taustakuva
+  date_format: Päiväysmuoto
 toolbar:
   placeholder:
     description: Kuvaus
@@ -233,3 +234,5 @@ more: Lisää
 inherit: Periä
 insert: Lisätä
 close: Lähellä
+update:
+  available: Päivitä saatavilla!

@@ -45,6 +45,7 @@ general:
   accent_color: აქცენტის ფერი
   wallpaper:
     select: აირჩიეთ ფონი
+  date_format: თარიღის ფორმატი
 toolbar:
   placeholder:
     description: აღწერილობა
@@ -233,3 +234,5 @@ more: მეტი
 insert: ჩასმა
 inherit: მემკვიდრეობით მიღება
 close: ახლო
+update:
+  available: განახლება ხელმისაწვდომია!

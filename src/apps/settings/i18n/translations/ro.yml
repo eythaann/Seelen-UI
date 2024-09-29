@@ -45,6 +45,7 @@ general:
   accent_color: Culoare de accent
   wallpaper:
     select: Selectați tapet
+  date_format: Formatul datei
 toolbar:
   placeholder:
     select: Structura barei de instrumente
@@ -233,3 +234,5 @@ inherit: Moşteni
 more: Mai mult
 insert: Introduce
 close: Aproape
+update:
+  available: Actualizare disponibilă!

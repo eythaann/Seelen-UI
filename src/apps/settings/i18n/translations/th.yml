@@ -44,6 +44,7 @@ general:
   accent_color: สีเน้น
   wallpaper:
     select: เลือกวอลล์เปเปอร์
+  date_format: รูปแบบวันที่
 toolbar:
   placeholder:
     author: ผู้เขียน
@@ -227,3 +228,5 @@ more: มากกว่า
 insert: แทรก
 inherit: สืบทอด
 close: ปิด
+update:
+  available: อัปเดตพร้อมใช้งาน!

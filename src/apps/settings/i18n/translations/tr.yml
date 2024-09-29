@@ -45,6 +45,7 @@ general:
   accent_color: Aksan rengi
   wallpaper:
     select: Duvar Kağıdı Seçin
+  date_format: Tarih biçimi
 toolbar:
   placeholder:
     author: Yazar
@@ -231,3 +232,5 @@ insert: Sokmak
 more: Daha
 inherit: Miras almak
 close: Kapalı
+update:
+  available: Güncelleme mevcut!

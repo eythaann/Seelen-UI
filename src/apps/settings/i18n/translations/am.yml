@@ -43,6 +43,7 @@ general:
   accent_color: የዝግጅት ቀለም
   wallpaper:
     select: የግድግዳ ወረቀት ይምረጡ
+  date_format: የቀን ቅርጸት
 toolbar:
   placeholder:
     description: መግለጫ
@@ -226,3 +227,5 @@ insert: ያስገቡ
 more: ተጨማሪ
 inherit: ውርስ
 close: ገጠመ
+update:
+  available: ዝመና ይገኛል!

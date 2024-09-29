@@ -44,6 +44,7 @@ general:
   accent_color: رنگ لهجه
   wallpaper:
     select: تصویر زمینه را انتخاب کنید
+  date_format: قالب تاریخ
 toolbar:
   placeholder:
     description: شرح
@@ -230,3 +231,5 @@ inherit: ارث
 more: بیشتر
 insert: درج کردن
 close: نزدیک
+update:
+  available: بروزرسانی موجود!

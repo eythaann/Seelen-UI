@@ -45,6 +45,7 @@ general:
   accent_color: Kolor akcentu
   wallpaper:
     select: Wybierz tapetę
+  date_format: Format daty
 toolbar:
   placeholder:
     author: Autor
@@ -231,3 +232,5 @@ inherit: Dziedziczyć
 more: Więcej
 insert: Wstawić
 close: Zamknąć
+update:
+  available: Aktualizacja dostępna!

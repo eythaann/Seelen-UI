@@ -7,6 +7,7 @@
 ### refactor
 - refactors, more and more refactors, refactors for everyone.
 - reimplementation of Tiling Window Manager.
+- remove Update modal at startup by an update button on settings.
 
 ### features
 - make the dock/taskbar solid when hide mode is `never`.

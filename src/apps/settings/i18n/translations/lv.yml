@@ -45,6 +45,7 @@ general:
   accent_color: Akcents
   wallpaper:
     select: Atlasiet fona attēlu
+  date_format: Datuma formāts
 toolbar:
   placeholder:
     author: Autors
@@ -229,3 +230,5 @@ inherit: Mantot
 insert: Ievietot
 more: Vairāk
 close: Tuvs
+update:
+  available: Pieejams atjauninājums!

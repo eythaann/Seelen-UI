@@ -44,6 +44,7 @@ general:
   accent_color: צבע הדגשה
   wallpaper:
     select: בחר טפט
+  date_format: פורמט תאריך
 toolbar:
   placeholder:
     author: מְחַבֵּר
@@ -227,3 +228,5 @@ inherit: לָרֶשֶׁת
 more: יוֹתֵר
 insert: לְהַכנִיס
 close: לִסְגוֹר
+update:
+  available: עדכון זמין!

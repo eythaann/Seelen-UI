@@ -45,6 +45,7 @@ general:
   accent_color: Aksentkleur
   wallpaper:
     select: Kies Wallpaper
+  date_format: Datumformaat
 toolbar:
   placeholder:
     author: Outeur
@@ -233,3 +234,5 @@ insert: Invoeg
 more: Meer
 inherit: Erf
 close: Dig
+update:
+  available: Opdatering beskikbaar!

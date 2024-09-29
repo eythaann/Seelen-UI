@@ -45,6 +45,7 @@ general:
   accent_color: Боја нагласности
   wallpaper:
     select: Изаберите Позадина
+  date_format: Формат датума
 toolbar:
   placeholder:
     description: Опис
@@ -233,3 +234,5 @@ insert: Уметнути
 inherit: Наследити
 more: Више
 close: Затворити
+update:
+  available: Ажурирање доступно!

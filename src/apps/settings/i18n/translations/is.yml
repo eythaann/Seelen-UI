@@ -45,6 +45,7 @@ general:
   accent_color: Hreim litur
   wallpaper:
     select: Veldu veggfóður
+  date_format: Dagsetningarsnið
 toolbar:
   placeholder:
     description: Lýsing
@@ -229,3 +230,5 @@ inherit: Erfa
 more: Meira
 insert: Settu inn
 close: Lokaðu
+update:
+  available: Uppfærsla í boði!

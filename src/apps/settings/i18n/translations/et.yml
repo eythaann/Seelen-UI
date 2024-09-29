@@ -45,6 +45,7 @@ general:
   accent_color: Aktsentvärv
   wallpaper:
     select: Valige tapeet
+  date_format: Kuupäeva vorming
 toolbar:
   placeholder:
     author: Autor
@@ -231,3 +232,5 @@ more: Rohkem
 insert: Sisestama
 inherit: Pärima
 close: Sulgur
+update:
+  available: Värskendage saadaval!
