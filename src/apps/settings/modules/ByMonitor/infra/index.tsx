@@ -139,18 +139,18 @@ export function MonitorConfig({
             <b>{t('toolbar.enable')}</b>
             <Switch value={m.tb.enabled} onChange={(v) => onToggle('tb', v)} />
           </SettingsOption>
-          <SettingsOption>
+          {/* <SettingsOption>
             <b>{t('wm.enable')}</b>
             <Switch value={m.wm.enabled} onChange={(v) => onToggle('wm', v)} />
-          </SettingsOption>
+          </SettingsOption> */}
           <SettingsOption>
             <b>{t('weg.enable')}</b>
             <Switch value={m.weg.enabled} onChange={(v) => onToggle('weg', v)} />
           </SettingsOption>
-          <SettingsOption>
+          {/* <SettingsOption>
             <b>{t('wall.enable')}</b>
             <Switch value={m.wall.enabled} onChange={(v) => onToggle('wall', v)} />
-          </SettingsOption>
+          </SettingsOption> */}
         </SettingsGroup>
       </div>
     </SettingsGroup>
