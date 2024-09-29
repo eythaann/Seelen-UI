@@ -126,58 +126,53 @@ impl SeelenWeg {
     pub fn enumerate_all_windows() -> Result<()> {
         WindowEnumerator::new().for_each(|hwnd| {
             if Self::should_be_added(hwnd) {
-                Self::add_hwnd(hwnd);
+                log_error!(Self::add_hwnd(hwnd));
             }
         })
     }
 
-    pub fn add_hwnd(hwnd: HWND) {
+    pub fn add_hwnd(hwnd: HWND) -> Result<()> {
         if Self::contains_app(hwnd) {
-            return;
+            return Ok(());
         }
 
         let window = Window::from(hwnd);
-        let title = window.title();
-
         let creator = match window.get_frame_creator() {
-            Ok(None) => return,
+            Ok(None) => return Ok(()),
             Ok(Some(creator)) => creator,
             Err(_) => window,
         };
 
+        let path = creator.exe()?;
         let mut app = SeelenWegApp {
             hwnd: hwnd.0 as isize,
-            exe: String::new(),
-            title,
+            title: creator.title(),
+            exe: path.to_string_lossy().to_string(),
             icon_path: String::new(),
             execution_path: String::new(),
             creator_hwnd: creator.hwnd().0 as isize,
         };
 
-        if let Ok(path) = creator.exe() {
-            app.exe = path.to_string_lossy().to_string();
-            app.icon_path = Self::extract_icon(&app.exe).unwrap_or_else(|_| Self::missing_icon());
+        app.icon_path = Self::extract_icon(&app.exe).unwrap_or_else(|_| Self::missing_icon());
 
-            let exe = path
-                .file_name()
-                .unwrap_or_default()
-                .to_string_lossy()
-                .to_string();
-            app.execution_path = match trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
-                Some(package) => package
-                    .get_shell_path(&exe)
-                    .unwrap_or_else(|| app.exe.clone()),
-                None => app.exe.clone(),
-            };
-        } else {
-            app.icon_path = Self::missing_icon();
-        }
+        let exe = path
+            .file_name()
+            .unwrap_or_default()
+            .to_string_lossy()
+            .to_string();
+        app.execution_path = match trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
+            Some(package) => package
+                .get_shell_path(&exe)
+                .unwrap_or_else(|| app.exe.clone()),
+            None => app.exe.clone(),
+        };
 
         get_app_handle()
             .emit(SeelenEvent::WegAddOpenApp, app.clone())
             .expect("Failed to emit");
 
         trace_lock!(OPEN_APPS).push(app);
+        Ok(())
     }
 
     pub fn remove_hwnd(hwnd: HWND) {
@@ -212,10 +207,13 @@ impl SeelenWeg {
             return false;
         }
 
-        if let Ok(path) = window.exe() {
-            if path.starts_with("C:\\Windows\\SystemApps") {
-                return false;
+        match window.exe() {
+            Ok(path) => {
+                if path.starts_with("C:\\Windows\\SystemApps") {
+                    return false;
+                }
             }
+            Err(_) => return false,
         }
 
         if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
