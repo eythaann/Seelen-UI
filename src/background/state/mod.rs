@@ -12,8 +12,24 @@ impl FullState {
         self.settings.seelenweg.enabled
     }
 
+    pub fn is_weg_enabled_on_monitor(&self, monitor_idx: usize) -> bool {
+        let is_global_enabled = self.is_weg_enabled();
+        match self.settings.monitors.get(monitor_idx) {
+            Some(monitor) => is_global_enabled && monitor.weg.enabled,
+            None => is_global_enabled,
+        }
+    }
+
     pub fn is_bar_enabled(&self) -> bool {
         self.settings.fancy_toolbar.enabled
+    }
+
+    pub fn is_bar_enabled_on_monitor(&self, monitor_idx: usize) -> bool {
+        let is_global_enabled = self.is_bar_enabled();
+        match self.settings.monitors.get(monitor_idx) {
+            Some(monitor) => is_global_enabled && monitor.tb.enabled,
+            None => is_global_enabled,
+        }
     }
 
     pub fn is_window_manager_enabled(&self) -> bool {

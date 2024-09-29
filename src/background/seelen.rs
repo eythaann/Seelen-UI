@@ -13,9 +13,9 @@ use windows::Win32::Graphics::Gdi::HMONITOR;
 use crate::{
     error_handler::Result,
     hook::register_win_hook,
+    instance::SeelenInstanceContainer,
     log_error,
     modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
-    monitor::Monitor,
     seelen_rofi::SeelenRofi,
     seelen_weg::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
@@ -43,7 +43,7 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
     #[getset(get = "pub", get_mut = "pub")]
-    monitors: Vec<Monitor>,
+    monitors: Vec<SeelenInstanceContainer>,
     #[getset(get = "pub", get_mut = "pub")]
     rofi: Option<SeelenRofi>,
 }
@@ -54,21 +54,21 @@ impl Seelen {
         SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Relaxed)
     }
 
-    pub fn focused_monitor(&self) -> Option<&Monitor> {
+    pub fn focused_monitor(&self) -> Option<&SeelenInstanceContainer> {
         self.monitors.iter().find(|m| m.is_focused())
     }
 
-    pub fn focused_monitor_mut(&mut self) -> Option<&mut Monitor> {
+    pub fn focused_monitor_mut(&mut self) -> Option<&mut SeelenInstanceContainer> {
         self.monitors.iter_mut().find(|m| m.is_focused())
     }
 
-    pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut Monitor> {
+    pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut SeelenInstanceContainer> {
         self.monitors
             .iter_mut()
             .find(|m| m.handle().0 as isize == id)
     }
 
-    pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut Monitor> {
+    pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut SeelenInstanceContainer> {
         self.monitors.iter_mut().find(|m| m.name() == name)
     }
 
@@ -213,7 +213,8 @@ impl Seelen {
     }
 
     fn add_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
-        self.monitors.push(Monitor::new(hmonitor, &self.state())?);
+        self.monitors
+            .push(SeelenInstanceContainer::new(hmonitor, &self.state())?);
         Ok(())
     }
 

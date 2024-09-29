@@ -4,8 +4,8 @@
 mod error_handler;
 mod exposed;
 mod hook;
+mod instance;
 mod modules;
-mod monitor;
 mod plugins;
 mod seelen;
 mod seelen_bar;

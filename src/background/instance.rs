@@ -2,17 +2,23 @@ use color_eyre::eyre::eyre;
 use getset::{Getters, MutGetters};
 
 use crate::{
-    error_handler::Result, log_error, seelen_bar::FancyToolbar, seelen_wall::SeelenWall,
-    seelen_weg::SeelenWeg, seelen_wm_v2::instance::WindowManagerV2, state::application::FullState,
-    windows_api::WindowsApi,
+    error_handler::Result,
+    log_error,
+    seelen_bar::FancyToolbar,
+    seelen_wall::SeelenWall,
+    seelen_weg::SeelenWeg,
+    seelen_wm_v2::instance::WindowManagerV2,
+    state::application::FullState,
+    windows_api::{monitor::Monitor, WindowsApi},
 };
 
 use windows::Win32::Graphics::Gdi::HMONITOR;
 
 #[derive(Getters, MutGetters)]
 #[getset(get = "pub", get_mut = "pub")]
-pub struct Monitor {
+pub struct SeelenInstanceContainer {
     handle: HMONITOR,
+    monitor: Monitor,
     name: String,
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
@@ -20,27 +26,29 @@ pub struct Monitor {
     wall: Option<SeelenWall>,
 }
 
-unsafe impl Send for Monitor {}
+unsafe impl Send for SeelenInstanceContainer {}
 
-impl Monitor {
+impl SeelenInstanceContainer {
     pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
         if hmonitor.is_invalid() {
             return Err(eyre!("Invalid Monitor").into());
         }
-        let mut monitor = Self {
+        let mut instance = Self {
             handle: hmonitor,
+            monitor: Monitor::from(hmonitor),
             name: WindowsApi::monitor_name(hmonitor)?,
             toolbar: None,
             weg: None,
             wm: None,
             wall: None,
         };
-        monitor.load_settings(settings)?;
-        Ok(monitor)
+        instance.load_settings(settings)?;
+        Ok(instance)
     }
 
     pub fn update_handle(&mut self, id: HMONITOR) {
         self.handle = id;
+        self.monitor = Monitor::from(id);
         log_error!(self.ensure_positions());
     }
 
@@ -90,13 +98,13 @@ impl Monitor {
     }
 
     pub fn load_settings(&mut self, settings: &FullState) -> Result<()> {
-        if settings.is_bar_enabled() {
+        if settings.is_bar_enabled_on_monitor(self.monitor.index()?) {
             self.add_toolbar()?;
         } else {
             self.toolbar = None;
         }
 
-        if settings.is_weg_enabled() {
+        if settings.is_weg_enabled_on_monitor(self.monitor.index()?) {
             self.add_weg()?;
         } else {
             self.weg = None;
