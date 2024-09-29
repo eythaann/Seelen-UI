@@ -43,6 +43,7 @@ general:
   accent_color: アクセントカラー
   wallpaper:
     select: 壁紙を選択
+  date_format: 日付形式
 toolbar:
   placeholder:
     description: 説明
@@ -226,3 +227,5 @@ more: もっと
 insert: 入れる
 inherit: 継承
 close: 近い
+update:
+  available: 更新が利用可能です！

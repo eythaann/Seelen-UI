@@ -45,6 +45,7 @@ general:
   accent_color: உச்சரிப்பு நிறம்
   wallpaper:
     select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்
+  date_format: தேதி வடிவம்
 toolbar:
   placeholder:
     author: நூலாசிரியர்
@@ -231,3 +232,5 @@ insert: செருகவும்
 inherit: மரபு
 more: மேலும்
 close: மூடு
+update:
+  available: புதுப்பிப்பு கிடைக்கிறது!

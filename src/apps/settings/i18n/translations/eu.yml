@@ -45,6 +45,7 @@ general:
   accent_color: Azentu kolorea
   wallpaper:
     select: Hautatu horma-irudia
+  date_format: Data formatua
 toolbar:
   placeholder:
     select: Tresna-barraren egitura
@@ -231,3 +232,5 @@ inherit: Jarauntsi
 insert: Txertatu
 more: Gehiago
 close: Hurbileko
+update:
+  available: Eguneratu eskuragarri!

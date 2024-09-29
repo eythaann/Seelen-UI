@@ -230,3 +230,5 @@ shortcuts:
     send_to_workspace_7: Send to Workspace 8
     send_to_workspace_8: Send to Workspace 9
     send_to_workspace_9: Send to Workspace 10
+update:
+  available: Update Available!

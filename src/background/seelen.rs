@@ -395,38 +395,4 @@ impl Seelen {
             None => Err("Failed to create settings window".into()),
         }
     }
-
-    pub fn show_update_modal() -> Result<()> {
-        log::trace!("Showing update notification window");
-        let handle = get_app_handle();
-        // check if path is in windows apps folder
-        let installation_path = handle.path().resource_dir()?;
-        if installation_path
-            .to_string_lossy()
-            .contains(r"\Program Files\WindowsApps\")
-        {
-            log::trace!("Skipping update notification because it is installed as MSIX");
-            return Ok(());
-        }
-
-        tauri::WebviewWindowBuilder::new(
-            handle,
-            "updater",
-            tauri::WebviewUrl::App("update/index.html".into()),
-        )
-        .inner_size(500.0, 260.0)
-        .maximizable(false)
-        .minimizable(true)
-        .resizable(false)
-        .title("Update Available")
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .center()
-        .always_on_top(true)
-        .build()?;
-
-        Ok(())
-    }
 }

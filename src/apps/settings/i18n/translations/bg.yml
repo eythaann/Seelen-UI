@@ -45,6 +45,7 @@ general:
   accent_color: Цвят на акцент
   wallpaper:
     select: Изберете тапет
+  date_format: Формат на дата
 toolbar:
   placeholder:
     description: Описание
@@ -231,3 +232,5 @@ more: Още
 inherit: Наследяване
 insert: Вмъкнете
 close: Затворете
+update:
+  available: Налична актуализация!

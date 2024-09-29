@@ -45,6 +45,7 @@ general:
   accent_color: උච්චාරණ වර්ණය
   wallpaper:
     select: බිතුපත තෝරන්න
+  date_format: දිනය ආකෘතිය
 toolbar:
   placeholder:
     author: කර්තෘ
@@ -229,3 +230,5 @@ more: තව
 insert: ඇතුළු කරන්න
 inherit: උරුම වේ
 close: වසන්න
+update:
+  available: යාවත්කාලීන කිරීම!

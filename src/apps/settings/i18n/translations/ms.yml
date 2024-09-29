@@ -45,6 +45,7 @@ general:
   accent_color: Warna aksen
   wallpaper:
     select: Pilih kertas dinding
+  date_format: Format tarikh
 toolbar:
   placeholder:
     description: Penerangan
@@ -231,3 +232,5 @@ inherit: Mewarisi
 more: Lebih
 insert: Masukkan
 close: Tutup
+update:
+  available: Kemas kini tersedia!

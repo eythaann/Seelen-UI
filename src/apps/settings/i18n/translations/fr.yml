@@ -48,6 +48,7 @@ general:
   accent_color: Couleur accent
   wallpaper:
     select: Sélectionner le papier peint
+  date_format: Format de date
 toolbar:
   enable: Activer la barre d'outils sophistiquée
   placeholder:
@@ -229,3 +230,5 @@ more: Plus
 inherit: Hériter
 insert: Insérer
 close: Fermer
+update:
+  available: Mise à jour disponible!

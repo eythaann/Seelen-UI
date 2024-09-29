@@ -45,6 +45,7 @@ general:
   accent_color: Kulay ng accent
   wallpaper:
     select: Piliin ang wallpaper
+  date_format: Format ng petsa
 toolbar:
   placeholder:
     author: May -akda
@@ -234,3 +235,5 @@ insert: Ipasok
 more: Higit pa
 inherit: Magmana
 close: Malapit
+update:
+  available: Mag -update Magagamit!

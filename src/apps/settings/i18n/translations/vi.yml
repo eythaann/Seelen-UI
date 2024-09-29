@@ -45,6 +45,7 @@ general:
   accent_color: Màu nhấn
   wallpaper:
     select: Chọn hình nền
+  date_format: Định dạng ngày
 toolbar:
   placeholder:
     author: Tác giả
@@ -231,3 +232,5 @@ insert: Chèn
 more: Hơn
 inherit: Kế thừa
 close: Đóng
+update:
+  available: Cập nhật có sẵn!

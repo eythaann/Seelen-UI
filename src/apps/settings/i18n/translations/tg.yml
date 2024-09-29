@@ -44,6 +44,7 @@ general:
   accent_color: Ранги ҳисоб
   wallpaper:
     select: Обер-ро интихоб кунед
+  date_format: Шакли сана
 toolbar:
   placeholder:
     select: Сохтори панели асбобҳо
@@ -228,3 +229,5 @@ more: Бештар
 inherit: Мерос гирифтан
 insert: Илова кардан
 close: Наздик
+update:
+  available: Навсозӣ!

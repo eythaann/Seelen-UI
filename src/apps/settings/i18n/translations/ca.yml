@@ -45,6 +45,7 @@ general:
   accent_color: Color d’accent
   wallpaper:
     select: Seleccioneu fons de pantalla
+  date_format: Format de la data
 toolbar:
   placeholder:
     description: Descripció
@@ -233,3 +234,5 @@ insert: Inserir
 inherit: Heretar
 more: Més
 close: Tancar -se
+update:
+  available: Actualitzeu disponible.

@@ -45,6 +45,7 @@ general:
   accent_color: Aksentfarge
   wallpaper:
     select: Velg bakgrunnsbilde
+  date_format: Datoformat
 toolbar:
   placeholder:
     description: Beskrivelse
@@ -233,3 +234,5 @@ more: Flere
 inherit: Arve
 insert: Sett inn
 close: Lukke
+update:
+  available: Oppdatering tilgjengelig!

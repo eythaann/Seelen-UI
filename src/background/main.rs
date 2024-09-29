@@ -125,11 +125,9 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
 
     if !tauri::is_dev() {
         let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
-        let matches = command.get_matches();
-        if !matches.get_flag("silent") {
+        if !command.get_matches().get_flag("silent") {
             Seelen::show_settings()?;
         }
-        Seelen::show_update_modal()?;
     }
 
     seelen.start()?;

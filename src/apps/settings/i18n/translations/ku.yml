@@ -44,6 +44,7 @@ general:
   accent_color: Rengê Accent
   wallpaper:
     select: Hilbijêre Wallpaper
+  date_format: Formata Date
 toolbar:
   placeholder:
     author: Nivîskar
@@ -230,3 +231,5 @@ insert: Lêzêdekirin
 inherit: Mîratgirtin
 more: Zêde
 close: Nêzîkî
+update:
+  available: Nûvekirin!

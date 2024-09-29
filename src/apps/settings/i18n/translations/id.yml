@@ -45,6 +45,7 @@ general:
   accent_color: Aksen warna
   wallpaper:
     select: Pilih wallpaper
+  date_format: Format tanggal
 toolbar:
   placeholder:
     select: Struktur bilah alat
@@ -231,3 +232,5 @@ insert: Menyisipkan
 more: Lagi
 inherit: Mewarisi
 close: Menutup
+update:
+  available: Perbarui Tersedia!

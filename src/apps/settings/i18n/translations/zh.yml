@@ -50,6 +50,7 @@ general:
   accent_color: 强调色
   wallpaper:
     select: 选择壁纸
+  date_format: 日期格式
 toolbar:
   enable: 启用精美工具栏
   placeholder:
@@ -224,3 +225,5 @@ insert: 插入
 inherit: 继承
 more: 更多的
 close: 关闭
+update:
+  available: 更新可用！

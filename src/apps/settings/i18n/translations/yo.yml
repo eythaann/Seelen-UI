@@ -44,6 +44,7 @@ general:
   accent_color: Awọ ara
   wallpaper:
     select: Yan Iṣẹṣọ ogiri
+  date_format: Ọna kika ọjọ
 toolbar:
   placeholder:
     author: Onkọwe ọkunrin
@@ -227,3 +228,5 @@ inherit: Jogun
 more: Diẹ sii
 insert: Fisi
 close: Sunmọ
+update:
+  available: Imudojuiwọn wa!

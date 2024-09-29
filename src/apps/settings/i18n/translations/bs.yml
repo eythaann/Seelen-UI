@@ -45,6 +45,7 @@ general:
   accent_color: Akcentna boja
   wallpaper:
     select: Odaberite pozadinu
+  date_format: Format datuma
 toolbar:
   placeholder:
     select: Struktura alatne trake
@@ -231,3 +232,5 @@ inherit: Nasljediti
 insert: Umetnuti
 more: Više
 close: Zatvoriti
+update:
+  available: Ažuriraj dostupno!

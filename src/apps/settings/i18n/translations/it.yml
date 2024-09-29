@@ -45,6 +45,7 @@ general:
   accent_color: Colore accento
   wallpaper:
     select: Seleziona sfondo
+  date_format: Formato della data
 toolbar:
   placeholder:
     author: Autrice
@@ -233,3 +234,5 @@ insert: Inserire
 inherit: Ereditare
 more: Di più
 close: Vicina
+update:
+  available: Aggiornamento disponibile!

@@ -45,6 +45,7 @@ general:
   accent_color: Prízvuk
   wallpaper:
     select: Vyberte tapetu
+  date_format: Formát
 toolbar:
   placeholder:
     author: Autor
@@ -231,3 +232,5 @@ more: Viac
 insert: Vložiť
 inherit: Zdediť
 close: Zatvoriť
+update:
+  available: Aktualizácia k dispozícii!

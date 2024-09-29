@@ -45,6 +45,7 @@ general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   wallpaper:
     select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
+  date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
 toolbar:
   placeholder:
     description: ਵਰਣਨ
@@ -231,3 +232,5 @@ more: ਹੋਰ
 inherit: ਵਿਰਾਸਤ
 insert: ਸੰਮਿਲਿਤ ਕਰੋ
 close: ਨੇੜੇ
+update:
+  available: ਅਪਡੇਟ ਉਪਲਬਧ!

@@ -63,8 +63,7 @@
 
     "log:allow-log",
 
-    "updater:allow-check",
-    "updater:allow-download-and-install",
+    "updater:default",
 
     "shell:allow-open"
   ]

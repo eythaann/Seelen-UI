@@ -45,6 +45,7 @@ general:
   accent_color: Akcentus szín
   wallpaper:
     select: Válassza ki a háttérképet
+  date_format: Dátum formátum
 toolbar:
   placeholder:
     description: Leírás
@@ -231,3 +232,5 @@ inherit: Örököl
 more: Több
 insert: Beilleszt
 close: Közeli
+update:
+  available: A frissítés elérhető!

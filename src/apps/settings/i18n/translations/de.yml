@@ -52,6 +52,7 @@ general:
   accent_color: Akzentfarbe
   wallpaper:
     select: Wählen Sie Hintergrundbild
+  date_format: Datumsformat
 toolbar:
   enable: Elegante Werkzeugleiste aktivieren
   placeholder:
@@ -233,3 +234,5 @@ insert: Einfügen
 more: Mehr
 inherit: Erben
 close: Schließen
+update:
+  available: Update verfügbar!

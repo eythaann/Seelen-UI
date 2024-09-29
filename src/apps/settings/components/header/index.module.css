@@ -8,7 +8,10 @@
   display: flex;
   justify-content: space-between;
 
-  button {
-    min-width: 60px;
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 }

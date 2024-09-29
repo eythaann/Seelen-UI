@@ -51,6 +51,7 @@ general:
   accent_color: لون لهجة
   wallpaper:
     select: حدد خلفية
+  date_format: تنسيق التاريخ
 toolbar:
   enable: تمكين شريط الأدوات الفاخر
   placeholder:
@@ -227,3 +228,5 @@ insert: أدخل
 more: أكثر
 inherit: ورث
 close: يغلق
+update:
+  available: تحديث متاح!

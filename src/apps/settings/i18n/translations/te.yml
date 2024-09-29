@@ -45,6 +45,7 @@ general:
   accent_color: యాస రంగు
   wallpaper:
     select: వాల్‌పేపర్‌ను ఎంచుకోండి
+  date_format: తేదీ ఆకృతి
 toolbar:
   placeholder:
     author: రచయిత
@@ -231,3 +232,5 @@ inherit: వారసత్వంగా
 insert: చొప్పించండి
 more: మరిన్ని
 close: దగ్గరగా
+update:
+  available: నవీకరణ అందుబాటులో ఉంది!

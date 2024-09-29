@@ -50,6 +50,7 @@ general:
   accent_color: 악센트 색상
   wallpaper:
     select: 벽지를 선택하십시오
+  date_format: 날짜 형식
 toolbar:
   enable: 화려한 툴바 활성화
   placeholder:
@@ -226,3 +227,5 @@ more: 더
 insert: 끼워 넣다
 inherit: 상속
 close: 닫다
+update:
+  available: 사용 가능한 업데이트!

@@ -44,6 +44,7 @@ general:
   accent_color: हिम्मता रंग
   wallpaper:
     select: वालपेपर चयन गर्नुहोस्
+  date_format: मिति ढाँचा
 toolbar:
   placeholder:
     description: वर्णन
@@ -230,3 +231,5 @@ more: अरु
 inherit: बाबु बाजेबाट पाउनु
 insert: घुसाउनु
 close: घनिष्ट
+update:
+  available: अपडेट उपलब्ध!

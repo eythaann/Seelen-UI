@@ -45,6 +45,7 @@ general:
   accent_color: Շեշտադրիչ գույն
   wallpaper:
     select: Ընտրեք Պաստառ
+  date_format: Ամսաթիվ ձեւաչափ
 toolbar:
   placeholder:
     author: Հեղինակ
@@ -233,3 +234,5 @@ more: Ավելի շատ
 inherit: Ժառանգել
 insert: Տեղադրել
 close: Սերտ
+update:
+  available: 'Թարմացրեք մատչելի:'

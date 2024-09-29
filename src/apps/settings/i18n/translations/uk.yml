@@ -45,6 +45,7 @@ general:
   accent_color: Акцентний колір
   wallpaper:
     select: Виберіть шпалери
+  date_format: Формат дати
 toolbar:
   placeholder:
     select: Структура панелі інструментів
@@ -231,3 +232,5 @@ insert: Вставляти
 inherit: Успадкувати
 more: Більше
 close: Закривати
+update:
+  available: Оновлення доступне!

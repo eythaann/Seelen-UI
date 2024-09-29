@@ -45,6 +45,7 @@ general:
   accent_color: Akzenter Faarf
   wallpaper:
     select: Wielt Wallpaper
+  date_format: Datum Format
 toolbar:
   placeholder:
     select: Toolbar Struktur
@@ -231,3 +232,5 @@ more: Méi kleng
 insert: INor andafen
 inherit: Ontherrit
 close: Zoumaachen
+update:
+  available: Update verfügbar!

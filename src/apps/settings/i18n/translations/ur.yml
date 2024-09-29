@@ -44,6 +44,7 @@ general:
   accent_color: رنگ
   wallpaper:
     select: وال پیپر منتخب کریں
+  date_format: تاریخ کی شکل
 toolbar:
   placeholder:
     description: تفصیل
@@ -230,3 +231,5 @@ inherit: وراثت
 insert: داخل کریں
 more: زیادہ
 close: بند کریں
+update:
+  available: تازہ کاری دستیاب!

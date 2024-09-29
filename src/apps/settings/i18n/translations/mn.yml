@@ -44,6 +44,7 @@ general:
   accent_color: Эргүүлэг
   wallpaper:
     select: Ханын зураг сонгох
+  date_format: Огноо формат
 toolbar:
   placeholder:
     description: Тодорхойлолт / төрөл анги
@@ -230,3 +231,5 @@ inherit: Удамших
 more: Илүү / их олон
 insert: Оруулах
 close: Ойр дөхөм
+update:
+  available: Шинэчлэх боломжтой!

@@ -53,6 +53,7 @@ general:
   accent_color: Акцентный цвет
   wallpaper:
     select: Выберите обои
+  date_format: Формат даты
 toolbar:
   enable: Включить
   placeholder:
@@ -232,3 +233,5 @@ inherit: Наследовать
 insert: Вставлять
 more: Более
 close: Закрывать
+update:
+  available: Обновление доступно!

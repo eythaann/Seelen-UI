@@ -45,6 +45,7 @@ general:
   accent_color: ពណ៌សង្កត់សំឡេង
   wallpaper:
     select: ជ្រើសរើសផ្ទាំងរូបភាព
+  date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
 toolbar:
   placeholder:
     description: ការពិពណ៌នា
@@ -229,3 +230,5 @@ insert: រចក
 more: រេចីនចាង
 inherit: តតយលមរតក
 close: បិត
+update:
+  available: មានបច្ចុប្បន្នភាព!

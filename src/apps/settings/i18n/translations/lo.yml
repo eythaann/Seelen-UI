@@ -46,6 +46,7 @@ general:
   accent_color: ສີສໍານຽງ
   wallpaper:
     select: ເລືອກຮູບວໍເປເປີ
+  date_format: ຮູບແບບວັນທີ
 toolbar:
   placeholder:
     author: ຜູ້ຂຽນ
@@ -230,3 +231,5 @@ insert: ຊອນເຂົ້າ
 more: ຫຼາຍ
 inherit: ມູນມໍລະດົກ
 close: ປິດ
+update:
+  available: ປັບປຸງໃຫ້ທັນສະໄຫມ!

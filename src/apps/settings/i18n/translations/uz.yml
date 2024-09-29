@@ -45,6 +45,7 @@ general:
   accent_color: Urg'u rangi
   wallpaper:
     select: Fon rasmini tanlang
+  date_format: Sana formati
 toolbar:
   placeholder:
     description: Tavsif
@@ -233,3 +234,5 @@ more: Ko'proq
 inherit: Meros qilib olmoq
 insert: Qo'shmoq
 close: Yaqin
+update:
+  available: Yangilanish mavjud!

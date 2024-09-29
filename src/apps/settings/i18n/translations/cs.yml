@@ -45,6 +45,7 @@ general:
   accent_color: Accent Color
   wallpaper:
     select: Vyberte tapetu
+  date_format: Formát data
 toolbar:
   placeholder:
     author: Autor
@@ -231,3 +232,5 @@ insert: Vložit
 inherit: Zdědit
 more: Více
 close: Blízko
+update:
+  available: Aktualizace k dispozici!

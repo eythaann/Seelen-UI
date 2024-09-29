@@ -45,6 +45,7 @@ general:
   accent_color: Umbala we-Accent
   wallpaper:
     select: Khetha iphepha lokunamathisela odongeni
+  date_format: Ifomethi yosuku
 toolbar:
   placeholder:
     author: Umlobi
@@ -233,3 +234,5 @@ more: Okuningi
 inherit: Dla ifa
 insert: Faka
 close: Ngokuminyanisa
+update:
+  available: Ukuvuselelwa Kuyatholakala!

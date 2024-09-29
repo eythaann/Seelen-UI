@@ -45,6 +45,7 @@ general:
   accent_color: Akcento spalva
   wallpaper:
     select: Pasirinkite tapetai
+  date_format: Datos formatas
 toolbar:
   placeholder:
     select: Įrankių juostos struktūra
@@ -229,3 +230,5 @@ inherit: Paveldėti
 insert: Įterpti
 more: Daugiau
 close: Uždaryti
+update:
+  available: Galima atnaujinti!

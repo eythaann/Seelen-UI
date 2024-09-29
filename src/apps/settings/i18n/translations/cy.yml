@@ -45,6 +45,7 @@ general:
   accent_color: Lliw acen
   wallpaper:
     select: Dewis papur wal
+  date_format: Fformat dyddiad
 toolbar:
   placeholder:
     author: Awduron
@@ -233,3 +234,5 @@ inherit: Hetifedd
 more: Mwy
 insert: Mewnosodem
 close: Chaewch
+update:
+  available: Diweddariad ar gael!
