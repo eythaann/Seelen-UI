@@ -1,10 +1,10 @@
 update:
   cancel: Daha sonra
-  version: Versiyon
-  title: Güncelleme uygun!
+  version: Sürüm
+  title: Güncelleme mevcut!
   date: Tarih
-  extra_info: Değişikliğin tamamını okumak için lütfen ChangeLog sayfasını ziyaret edin
-  page: Github Sürüm Sayfası
-  downloading: İndirme ...
-  download: Güncelleme ve Kurulum
-  installing: Yükleme ...
+  extra_info: Değişikliklerin tamamını okumak için lütfen değişiklik günlüğü sayfasını ziyaret edin
+  page: GitHub Sürüm Sayfası
+  downloading: İndiriliyor...
+  download: Güncelle ve Yükle
+  installing: Yükleniyor...
