@@ -5,7 +5,6 @@ use crate::{
     error_handler::Result,
     log_error,
     seelen_bar::FancyToolbar,
-    seelen_wall::SeelenWall,
     seelen_weg::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
     state::application::FullState,
@@ -23,7 +22,6 @@ pub struct SeelenInstanceContainer {
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
     wm: Option<WindowManagerV2>,
-    wall: Option<SeelenWall>,
 }
 
 unsafe impl Send for SeelenInstanceContainer {}
@@ -40,7 +38,6 @@ impl SeelenInstanceContainer {
             toolbar: None,
             weg: None,
             wm: None,
-            wall: None,
         };
         instance.load_settings(settings)?;
         Ok(instance)
@@ -61,9 +58,6 @@ impl SeelenInstanceContainer {
         }
         if let Some(wm) = &mut self.wm {
             wm.set_position(self.handle)?;
-        }
-        if let Some(wall) = &mut self.wall {
-            wall.set_position()?;
         }
         Ok(())
     }
@@ -90,13 +84,6 @@ impl SeelenInstanceContainer {
         Ok(())
     }
 
-    fn add_wall(&mut self) -> Result<()> {
-        if self.wall.is_none() {
-            self.wall = Some(SeelenWall::new()?)
-        }
-        Ok(())
-    }
-
     pub fn load_settings(&mut self, settings: &FullState) -> Result<()> {
         if settings.is_bar_enabled_on_monitor(self.monitor.index()?) {
             self.add_toolbar()?;
@@ -114,12 +101,6 @@ impl SeelenInstanceContainer {
             self.add_wm()?;
         } else {
             self.wm = None;
-        }
-
-        if settings.is_wall_enabled() && self.handle == WindowsApi::primary_monitor() {
-            self.add_wall()?;
-        } else {
-            self.wall = None;
         }
 
         self.ensure_positions()?;

@@ -39,6 +39,7 @@
 - app continuing running when the program fails to start (case: WebView2 Runtime not installed).
 - no stoping correctly secondary processes/threads on app close.
 - showing unmanageable windows on dock.
+- restart seelen-ui button not working properly.
 
 ## [1.10.6]
 ### fix

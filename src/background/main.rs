@@ -87,6 +87,8 @@ fn print_initial_information() {
 
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
     print_initial_information();
+    Client::listen_tcp()?;
+
     if webview_version().is_err() {
         let ok_pressed = app
             .dialog()
@@ -108,7 +110,6 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
 
     let mut seelen = trace_lock!(SEELEN);
     seelen.init(app.handle())?;
-    Client::listen_tcp()?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
@@ -153,6 +154,17 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
     }
 }
 
+fn is_already_runnning() -> bool {
+    let mut sys = sysinfo::System::new();
+    sys.refresh_processes();
+    sys.processes()
+        .values()
+        .filter(|p| p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")))
+        .collect_vec()
+        .len()
+        > 1
+}
+
 fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
@@ -161,7 +173,7 @@ fn main() -> Result<()> {
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {
         Ok(m) => m,
-        // (help, --help or -h) is also managed as error
+        // (help, --help or -h) are managed as error
         Err(e) => {
             attach_console()?;
             e.print()?;
@@ -173,12 +185,17 @@ fn main() -> Result<()> {
         return Ok(());
     }
 
-    let mut sys = sysinfo::System::new();
-    sys.refresh_processes();
-    let already_running = sys.processes_by_name("seelen-ui.exe").collect_vec().len() > 1;
+    if is_already_runnning() {
+        let mut attempts = 0;
+        let mut connection = Client::connect_tcp();
 
-    if already_running {
-        if let Ok(stream) = Client::connect_tcp() {
+        while connection.is_err() && attempts < 10 {
+            attempts += 1;
+            std::thread::sleep(std::time::Duration::from_millis(100));
+            connection = Client::connect_tcp();
+        }
+
+        if let Ok(stream) = connection {
             let mut writer = BufWriter::new(stream);
 
             let args = std::env::args().collect_vec();
@@ -186,8 +203,15 @@ fn main() -> Result<()> {
 
             writer.write_all(msg.as_bytes()).expect("could not write");
             writer.flush().expect("could not flush");
+            return Ok(());
         }
-        return Ok(());
+
+        // if the connection fails probably is because the app is been closing
+        // so we check if the app is already running again to see if we have to
+        // let the instance be created or not
+        if is_already_runnning() {
+            return Ok(());
+        }
     }
 
     let mut app_builder = tauri::Builder::default();

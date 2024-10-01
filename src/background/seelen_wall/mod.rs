@@ -58,7 +58,7 @@ impl SeelenWall {
         Ok(window)
     }
 
-    pub fn set_position(&self) -> Result<()> {
+    pub fn update_position(&self) -> Result<()> {
         let mut rect = WindowsApi::virtual_screen_rect()?;
         let main_hwnd = HWND(self.window.hwnd()?.0);
 

@@ -17,6 +17,7 @@ use crate::{
     log_error,
     modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
     seelen_rofi::SeelenRofi,
+    seelen_wall::SeelenWall,
     seelen_weg::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
     state::application::{FullState, FULL_STATE},
@@ -46,6 +47,8 @@ pub struct Seelen {
     monitors: Vec<SeelenInstanceContainer>,
     #[getset(get = "pub", get_mut = "pub")]
     rofi: Option<SeelenRofi>,
+    #[getset(get = "pub", get_mut = "pub")]
+    wall: Option<SeelenWall>,
 }
 
 /* ============== Getters ============== */
@@ -79,18 +82,25 @@ impl Seelen {
 
 /* ============== Methods ============== */
 impl Seelen {
-    fn init_rofi(&self) {
+    fn add_rofi(&mut self) -> Result<()> {
         if self.rofi.is_none() {
-            std::thread::spawn(|| -> Result<()> {
-                let rofi = SeelenRofi::new()?;
-                trace_lock!(SEELEN).rofi = Some(rofi);
-                Ok(())
-            });
+            self.rofi = Some(SeelenRofi::new()?);
         }
+        Ok(())
     }
 
-    fn remove_rofi(&mut self) {
-        self.rofi = None;
+    fn add_wall(&mut self) -> Result<()> {
+        if self.wall.is_none() {
+            self.wall = Some(SeelenWall::new()?)
+        }
+        Ok(())
+    }
+
+    fn refresh_windows_positions(&self) -> Result<()> {
+        if let Some(wall) = &self.wall {
+            wall.update_position()?;
+        }
+        Ok(())
     }
 
     pub fn on_settings_change(&mut self) -> Result<()> {
@@ -101,11 +111,10 @@ impl Seelen {
             false => Self::kill_ahk_shortcuts()?,
         }
 
-        match state.is_weg_enabled() {
-            true => {
-                SeelenWeg::hide_taskbar();
-            }
-            false => SeelenWeg::restore_taskbar()?,
+        if state.is_weg_enabled() {
+            SeelenWeg::hide_taskbar();
+        } else {
+            SeelenWeg::restore_taskbar()?;
         }
 
         match state.is_window_manager_enabled() {
@@ -117,13 +126,20 @@ impl Seelen {
         }
 
         match state.is_rofi_enabled() {
-            true => self.init_rofi(),
-            false => self.remove_rofi(),
+            true => self.add_rofi()?,
+            false => self.rofi = None,
+        }
+
+        match state.is_wall_enabled() {
+            true => self.add_wall()?,
+            false => self.wall = None,
         }
 
         for monitor in &mut self.monitors {
             monitor.load_settings(&state)?;
         }
+
+        self.refresh_windows_positions()?;
         Ok(())
     }
 
@@ -157,10 +173,6 @@ impl Seelen {
     }
 
     fn start_async() -> Result<()> {
-        register_win_hook()?;
-
-        trace_lock!(PERFORMANCE_HELPER).start("enumerating_windows");
-
         if FULL_STATE.load().is_weg_enabled() {
             SeelenWeg::enumerate_all_windows()?;
         }
@@ -169,30 +181,32 @@ impl Seelen {
             WindowManagerV2::enumerate_all_windows()?;
         }
 
-        trace_lock!(PERFORMANCE_HELPER).end("enumerating_windows");
-
-        log_error!(Self::start_ahk_shortcuts());
-
+        Self::start_ahk_shortcuts()?;
         trace_lock!(PERFORMANCE_HELPER).end("init");
         Ok(())
     }
 
     pub fn start(&mut self) -> Result<()> {
+        register_win_hook()?;
         declare_system_events_handlers()?;
 
         if self.state().is_rofi_enabled() {
-            self.init_rofi();
+            self.add_rofi()?;
         }
 
-        log::trace!("Enumerating Monitors");
+        if self.state().is_wall_enabled() {
+            self.add_wall()?;
+        }
+
+        log::trace!("Enumerating Monitors & Creating Instances");
         let monitors = trace_lock!(MONITOR_MANAGER).monitors.clone();
         for (_name, id) in monitors {
             log_error!(self.add_monitor(id));
         }
         trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
 
+        self.refresh_windows_positions()?;
         spawn_named_thread("Start Async", || log_error!(Self::start_async()))?;
-
         tauri::async_runtime::spawn(async {
             log_error!(Self::refresh_auto_start_path().await);
         });
