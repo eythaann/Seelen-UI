@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { NetworkTM } from 'seelen-core';
 
-import { Item } from '../../item/infra';
+import { Item } from '../../item/infra/infra';
 
 import { Selectors } from '../../shared/store/app';
 

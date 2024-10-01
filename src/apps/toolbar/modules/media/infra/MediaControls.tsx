@@ -311,7 +311,7 @@ export function WithMediaControls({ children }: PropsWithChildren) {
       <Popover
         open={openNotifier}
         arrow={false}
-        onOpenChange={setOpenNotifier}
+        trigger={[]}
         destroyTooltipOnHide
         content={
           <BackgroundByLayersV2 className="media-notifier">

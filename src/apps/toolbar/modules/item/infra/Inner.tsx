@@ -6,17 +6,17 @@ import { evaluate, isResultSet } from 'mathjs';
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { GenericToolbarModule, ToolbarModule } from 'seelen-core';
+import { ToolbarModule } from 'seelen-core';
 
-import { LAZY_CONSTANTS } from '../shared/utils/infra';
+import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
-import { Selectors } from '../shared/store/app';
-import { performClick, safeEval, Scope } from './app';
+import { Selectors } from '../../shared/store/app';
+import { performClick, safeEval, Scope } from '../app';
 
-import { Icon } from '../../../shared/components/Icon';
-import { cx } from '../../../shared/styles';
+import { Icon } from '../../../../shared/components/Icon';
+import { cx } from '../../../../shared/styles';
 
-interface Props extends PropsWithChildren {
+export interface InnerItemProps extends PropsWithChildren {
   module: ToolbarModule;
   extraVars?: Record<string, any>;
   active?: boolean;
@@ -148,7 +148,7 @@ export function ElementsFromEvaluated(content: any) {
   return result;
 }
 
-export function Item(props: Props) {
+export function InnerItem(props: InnerItemProps) {
   const {
     extraVars,
     module,
@@ -156,6 +156,7 @@ export function Item(props: Props) {
     onClick: onClickProp,
     onKeydown: onKeydownProp,
     children,
+    ...rest
   } = props;
   const { template, tooltip, onClick: oldOnClick, onClickV2, style, id, badge } = module;
 
@@ -209,6 +210,7 @@ export function Item(props: Props) {
       title={tooltip ? parseStringToElements(tooltip) : undefined}
     >
       <Reorder.Item
+        {...rest}
         id={id}
         style={style}
         className={cx('ft-bar-item', {
@@ -236,13 +238,4 @@ export function Item(props: Props) {
       </Reorder.Item>
     </Tooltip>
   );
-}
-
-export function GenericItem({ module }: { module: GenericToolbarModule }) {
-  const window = useSelector(Selectors.focused) || {
-    name: 'None',
-    title: 'No Window Focused',
-    exe: null,
-  };
-  return <Item module={module} extraVars={{ window }} />;
 }

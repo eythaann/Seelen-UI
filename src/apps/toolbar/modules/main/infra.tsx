@@ -12,7 +12,7 @@ import {
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
 import { DeviceModule } from '../Device/infra';
-import { GenericItem, Item } from '../item/infra';
+import { GenericItem, Item } from '../item/infra/infra';
 import { MediaModule } from '../media/infra/Module';
 import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';

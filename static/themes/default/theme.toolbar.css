@@ -449,3 +449,15 @@
     font-weight: 600;
   }
 }
+
+.ft-bar-item-context-menu-container {
+  .bg-layer-1 {
+    background-color: var(--color-gray-100);
+    border-radius: 10px;
+  }
+
+  .ft-bar-item-context-menu {
+    .ft-bar-item-context-menu-item {
+    }
+  }
+}

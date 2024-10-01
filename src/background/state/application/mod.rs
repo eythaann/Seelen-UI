@@ -366,6 +366,7 @@ impl FullState {
 
             match placeholder {
                 Ok(mut placeholder) => {
+                    placeholder.sanitize();
                     placeholder.info.filename = entry.file_name().to_string_lossy().to_string();
                     self.placeholders
                         .insert(placeholder.info.filename.clone(), placeholder);

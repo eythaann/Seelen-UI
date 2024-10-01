@@ -117,10 +117,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -186,10 +184,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -269,10 +265,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -338,10 +332,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -407,10 +399,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -481,10 +471,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -555,10 +543,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -624,10 +610,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -693,10 +677,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -762,10 +744,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "onClick": {
               "description": "Deprecated use `onClickV2` instead.",
@@ -831,10 +811,8 @@
             },
             "id": {
               "description": "Id to identify the item, should be unique.",
-              "type": [
-                "string",
-                "null"
-              ]
+              "default": "",
+              "type": "string"
             },
             "mode": {
               "default": "dotted",

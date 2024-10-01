@@ -8,7 +8,7 @@ import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 import { TrayTM } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
-import { Item } from '../item/infra';
+import { Item } from '../item/infra/infra';
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';

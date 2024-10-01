@@ -62,6 +62,14 @@ export const RootSlice = createSlice({
         state.placeholder.right = action.payload;
       }
     },
+    removeItem(state, action: PayloadAction<string>) {
+      let id = action.payload;
+      if (state.placeholder) {
+        state.placeholder.left = state.placeholder.left.filter((d) => d.id !== id);
+        state.placeholder.center = state.placeholder.center.filter((d) => d.id !== id);
+        state.placeholder.right = state.placeholder.right.filter((d) => d.id !== id);
+      }
+    },
   },
 });
 

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { DateToolbarModule, useInterval } from 'seelen-core';
 
-import { Item } from '../item/infra';
+import { Item } from '../item/infra/infra';
 
 import { Selectors } from '../shared/store/app';
 

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { useWindowFocusChange } from 'seelen-core';
 import { NotificationsTM } from 'seelen-core';
 
-import { Item } from '../../item/infra';
+import { Item } from '../../item/infra/infra';
 
 import { Selectors } from '../../shared/store/app';
 
