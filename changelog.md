@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.0-beta.13]
 ## [2.0.0-beta.12]
 ### breaking changes
 - Window Manager Layout Conditions was reimplemented, old conditions (v1) will fail.
