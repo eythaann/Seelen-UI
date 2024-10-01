@@ -40,6 +40,7 @@
 - no stoping correctly secondary processes/threads on app close.
 - showing unmanageable windows on dock.
 - restart seelen-ui button not working properly.
+- tray icons not working on others language than english.
 
 ## [1.10.6]
 ### fix

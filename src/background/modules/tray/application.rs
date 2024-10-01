@@ -134,10 +134,9 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
             children.extend(get_sub_tree(&element, &condition, TreeScope_Descendants)?);
         }
 
-        let is_win10 = is_windows_10();
         for element in children {
             let name = element.CurrentName()?.to_string();
-            if is_win10 || element.CurrentAutomationId()? == "NotifyItemIcon" {
+            if !element.CurrentAutomationId()?.is_empty() {
                 let registry = tray_from_registry.iter().find(|t| {
                     let trimmed = name.trim();
                     t.initial_tooltip == trimmed
