@@ -10,20 +10,17 @@ interface PropsV2 extends PropsWithChildren, HTMLAttributes<HTMLDivElement> {
   prefix?: string;
 }
 
-export function BackgroundByLayersV2({
-  children,
-  className,
-  prefix: _prefix,
-  ...divProps
-}: PropsV2) {
-  const prefix = _prefix ? _prefix + '-' : '';
-
+export function BackgroundByLayersV2({ children, className, prefix, ...divProps }: PropsV2) {
   let background = (
     <div className={cs.background}>
       {Array.from({ length: 10 }, (_, index) => (
         <div
           key={index}
-          className={cx(cs.layer, `${prefix}bg-layer-${index + 1}`, `bg-layer-${index + 1}`)}
+          className={
+            prefix
+              ? cx(cs.layer, `bg-layer-${index + 1}`, `${prefix}-bg-layer-${index + 1}`)
+              : cx(cs.layer, `bg-layer-${index + 1}`)
+          }
         />
       ))}
     </div>

@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -17,7 +17,8 @@ macro_rules! common_item {
             #[serde(rename_all = "camelCase")]
             pub struct $name {
                 /// Id to identify the item, should be unique.
-                id: Option<String>,
+                #[serde(default)]
+                id: String,
                 /// Content to display in the item.
                 ///
                 /// Should follow the [mathjs expression syntax](https://mathjs.org/docs/expressions/syntax.html).
@@ -119,7 +120,7 @@ common_item! {
     /// const date: string; // the formatted date
     /// ```
     struct DateToolbarItem {
-        /// @deprecated -- v2 uses settings date format instead (it will perform the minimal updates) 
+        /// @deprecated -- v2 uses settings date format instead (it will perform the minimal updates)
         #[serde(default = "DateToolbarItem::default_interval")]
         each: DateUpdateInterval,
         /// @deprecated -- v2 uses settings date format instead
@@ -280,6 +281,40 @@ pub enum ToolbarItem {
     Workspaces(WorkspaceToolbarItem),
 }
 
+impl ToolbarItem {
+    pub fn id(&self) -> String {
+        match self {
+            ToolbarItem::Text(item) => item.id.clone(),
+            ToolbarItem::Generic(item) => item.id.clone(),
+            ToolbarItem::Date(item) => item.id.clone(),
+            ToolbarItem::Power(item) => item.id.clone(),
+            ToolbarItem::Network(item) => item.id.clone(),
+            ToolbarItem::Media(item) => item.id.clone(),
+            ToolbarItem::Notifications(item) => item.id.clone(),
+            ToolbarItem::Tray(item) => item.id.clone(),
+            ToolbarItem::Device(item) => item.id.clone(),
+            ToolbarItem::Settings(item) => item.id.clone(),
+            ToolbarItem::Workspaces(item) => item.id.clone(),
+        }
+    }
+
+    pub fn set_id(&mut self, id: String) {
+        match self {
+            ToolbarItem::Text(item) => item.id = id,
+            ToolbarItem::Generic(item) => item.id = id,
+            ToolbarItem::Date(item) => item.id = id,
+            ToolbarItem::Power(item) => item.id = id,
+            ToolbarItem::Network(item) => item.id = id,
+            ToolbarItem::Media(item) => item.id = id,
+            ToolbarItem::Notifications(item) => item.id = id,
+            ToolbarItem::Tray(item) => item.id = id,
+            ToolbarItem::Device(item) => item.id = id,
+            ToolbarItem::Settings(item) => item.id = id,
+            ToolbarItem::Workspaces(item) => item.id = id,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
 pub struct PlaceholderInfo {
@@ -304,4 +339,27 @@ pub struct Placeholder {
     pub center: Vec<ToolbarItem>,
     /// Items to be displayed in the toolbar
     pub right: Vec<ToolbarItem>,
+}
+
+impl Placeholder {
+    fn sanitize_items(dict: &mut HashSet<String>, items: Vec<ToolbarItem>) -> Vec<ToolbarItem> {
+        let mut result = Vec::new();
+        for mut item in items {
+            if item.id().is_empty() {
+                item.set_id(uuid::Uuid::new_v4().to_string());
+            }
+            if !dict.contains(&item.id()) {
+                dict.insert(item.id());
+                result.push(item);
+            }
+        }
+        result
+    }
+
+    pub fn sanitize(&mut self) {
+        let mut dict = HashSet::new();
+        self.left = Self::sanitize_items(&mut dict, std::mem::take(&mut self.left));
+        self.center = Self::sanitize_items(&mut dict, std::mem::take(&mut self.center));
+        self.right = Self::sanitize_items(&mut dict, std::mem::take(&mut self.right));
+    }
 }

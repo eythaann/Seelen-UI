@@ -18,6 +18,7 @@
 - settings by monitor.
 - window manager multimonitor support.
 - allow users change date format directly on UI settings.
+- add context menu to toolbar items.
 
 ### enhancements
 - improve quality icons from all app/files items.

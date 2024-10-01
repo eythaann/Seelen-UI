@@ -8,7 +8,7 @@ import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 import { SettingsToolbarModule } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
-import { Item } from '../item/infra';
+import { Item } from '../item/infra/infra';
 import { VolumeControl } from '../media/infra/MediaControls';
 
 import { Selectors } from '../shared/store/app';
