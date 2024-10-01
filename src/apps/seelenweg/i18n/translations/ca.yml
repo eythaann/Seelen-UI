@@ -2,6 +2,8 @@ taskbar_menu:
   start: Afegiu el mòdul d'inici
   settings: Configuració oberta
   media: Afegiu el mòdul de suports
+  add_folder: Pin carpeta personalitzada
+  add_file: Pin el fitxer personalitzat
 app_menu:
   pin_to_left: Pin a l’esquerra
   close: Tanca

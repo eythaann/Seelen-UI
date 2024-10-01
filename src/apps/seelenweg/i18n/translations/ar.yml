@@ -2,6 +2,8 @@ taskbar_menu:
   media: إضافة وحدة الوسائط
   start: إضافة وحدة البداية
   settings: أفتح الإعدادات
+  add_file: PIN ملف مخصص
+  add_folder: المجلد المخصص دبوس
 app_menu:
   unpin: إزالة التثبيت
   pin: دبوس

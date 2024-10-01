@@ -6,10 +6,15 @@ import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { store } from '../shared/store/infra';
+import { dialog } from 'src/apps/settings/modules/shared/tauri/infra';
 
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
-import { AppsSides, ExtendedPinnedAppWegItem, ExtendedTemporalAppWegItem } from '../shared/store/domain';
+import {
+  AppsSides,
+  ExtendedPinnedAppWegItem,
+  ExtendedTemporalAppWegItem,
+} from '../shared/store/domain';
 
 import { savePinnedItems } from '../shared/store/storeApi';
 
@@ -30,6 +35,38 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       },
     },
     {
+      type: 'divider',
+    },
+    {
+      key: 'add-item',
+      label: t('taskbar_menu.add_file'),
+      async onClick() {
+        const files = await dialog.open({
+          title: t('taskbar_menu.add_file'),
+          multiple: true,
+        });
+        for (const path of files || []) {
+          await invoke(SeelenCommand.WegPinItem, { path });
+        }
+      },
+    },
+    {
+      key: 'add-folder',
+      label: t('taskbar_menu.add_folder'),
+      async onClick() {
+        const folder = await dialog.open({
+          title: t('taskbar_menu.add_folder'),
+          directory: true,
+        });
+        if (folder) {
+          await invoke(SeelenCommand.WegPinItem, { path: folder });
+        }
+      },
+    },
+    {
+      type: 'divider',
+    },
+    {
       key: 'settings',
       label: t('taskbar_menu.settings'),
       onClick() {
@@ -39,7 +76,10 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
   ];
 }
 
-export function getMenuForItem(t: TFunction, item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem): ItemType[] {
+export function getMenuForItem(
+  t: TFunction,
+  item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
+): ItemType[] {
   const isPinned = isPinnedApp(item);
 
   const pin = (side: AppsSides) => {

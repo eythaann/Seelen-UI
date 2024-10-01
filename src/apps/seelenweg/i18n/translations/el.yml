@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Ανοίξτε τις ρυθμίσεις
   media: Προσθήκη ενότητας μέσων
   start: Προσθήκη μονάδας εκκίνησης
+  add_folder: Pin προσαρμοσμένος φάκελος
+  add_file: PIN προσαρμοσμένο αρχείο
 app_menu:
   close_multiple: Κλείσ'τα όλα
   close: Κλείσε

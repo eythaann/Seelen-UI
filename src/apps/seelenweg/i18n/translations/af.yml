@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Open instellings
   start: Voeg beginmodule by
   media: Voeg mediasmodule by
+  add_folder: Pin Custom Folder
+  add_file: Pin Custom File
 app_menu:
   close: Naby
   pin: Speld

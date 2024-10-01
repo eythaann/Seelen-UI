@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Otvorite postavke
   media: Dodajte medijski modul
   start: Dodajte početni modul
+  add_folder: PIN prilagođena mapa
+  add_file: PIN prilagođena datoteka
 app_menu:
   close: Zatvoriti
   open_file_location: Otvorite lokaciju datoteke

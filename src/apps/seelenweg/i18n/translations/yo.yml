@@ -2,6 +2,8 @@ taskbar_menu:
   start: Ṣafikun module Bẹrẹ
   media: Ṣafikun module Media
   settings: Ṣi Eto
+  add_file: Faili aṣa
+  add_folder: Folda aṣa aṣa
 app_menu:
   run_as: Run bi alakoso
   pin_to_center: PIN si ile-iṣẹ

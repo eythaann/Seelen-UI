@@ -1,6 +1,8 @@
 taskbar_menu:
   media: Add Media Module
   start: Add Start Module
+  add_file: Pin Custom File
+  add_folder: Pin Custom Folder
   settings: Open Settings
 app_menu:
   unpin: Unpin

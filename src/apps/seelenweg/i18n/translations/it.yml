@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Impostazioni aperte
   start: Aggiungi il modulo Start
   media: Aggiungi il modulo multimediale
+  add_file: Pin File personalizzato
+  add_folder: Cartella personalizzata del perno
 app_menu:
   copy_handles: Copia maniglie
   pin_to_center: Pin al centro

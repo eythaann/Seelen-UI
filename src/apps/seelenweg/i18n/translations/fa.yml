@@ -2,6 +2,8 @@ taskbar_menu:
   settings: تنظیمات باز
   media: ماژول رسانه را اضافه کنید
   start: ماژول شروع را اضافه کنید
+  add_file: پرونده سفارشی
+  add_folder: پوشه سفارشی پین
 app_menu:
   pin: پین کردن
   close: بستن

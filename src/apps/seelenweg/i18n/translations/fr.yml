@@ -2,6 +2,8 @@ taskbar_menu:
   media: Ajouter un module multimédia
   start: Ajouter un module de démarrage
   settings: Ouvrir les paramètres
+  add_folder: PIN FOLDER CUSTOM
+  add_file: Fichier personnalisé d'épingle
 app_menu:
   unpin: Détacher
   pin: Épingle
