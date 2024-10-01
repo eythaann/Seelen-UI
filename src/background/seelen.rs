@@ -23,7 +23,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, spawn_named_thread, PERFORMANCE_HELPER},
+    utils::{ahk::AutoHotKey, PERFORMANCE_HELPER},
     windows_api::WindowsApi,
 };
 
@@ -172,7 +172,7 @@ impl Seelen {
         }
     }
 
-    fn start_async() -> Result<()> {
+    async fn start_async() -> Result<()> {
         if FULL_STATE.load().is_weg_enabled() {
             SeelenWeg::enumerate_all_windows()?;
         }
@@ -182,12 +182,11 @@ impl Seelen {
         }
 
         Self::start_ahk_shortcuts()?;
-        trace_lock!(PERFORMANCE_HELPER).end("init");
+        Self::refresh_auto_start_path().await?;
         Ok(())
     }
 
     pub fn start(&mut self) -> Result<()> {
-        register_win_hook()?;
         declare_system_events_handlers()?;
 
         if self.state().is_rofi_enabled() {
@@ -206,9 +205,12 @@ impl Seelen {
         trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
 
         self.refresh_windows_positions()?;
-        spawn_named_thread("Start Async", || log_error!(Self::start_async()))?;
+        register_win_hook()?;
+
         tauri::async_runtime::spawn(async {
-            log_error!(Self::refresh_auto_start_path().await);
+            trace_lock!(PERFORMANCE_HELPER).start("lazy setup");
+            log_error!(Self::start_async().await);
+            trace_lock!(PERFORMANCE_HELPER).end("lazy setup");
         });
         Ok(())
     }

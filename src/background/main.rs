@@ -133,6 +133,7 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
 
     seelen.start()?;
     log_error!(try_register_tray_icon(app));
+    trace_lock!(PERFORMANCE_HELPER).end("setup");
     Ok(())
 }
 
@@ -168,7 +169,7 @@ fn is_already_runnning() -> bool {
 fn main() -> Result<()> {
     color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
-    trace_lock!(PERFORMANCE_HELPER).start("init");
+    trace_lock!(PERFORMANCE_HELPER).start("setup");
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {
