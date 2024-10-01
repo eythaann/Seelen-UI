@@ -2,6 +2,8 @@ taskbar_menu:
   start: Bættu við Start Module
   media: Bættu við Media Module
   settings: Opnar stillingar
+  add_file: Pinna sérsniðna skrá
+  add_folder: Pinna sérsniðna möppu
 app_menu:
   pin_to_left: Pinna til vinstri
   pin_to_center: Pinna í miðju

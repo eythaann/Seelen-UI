@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Ochiq sozlamalar
   start: Boshlash moduli qo'shing
   media: Media modul qo'shing
+  add_file: PIN-kod
+  add_folder: Shaxsiy papka
 app_menu:
   unpin: Chetlashmoq
   pin_to_right: O'ngga pin

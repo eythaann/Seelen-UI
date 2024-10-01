@@ -2,6 +2,8 @@ taskbar_menu:
   settings: खुला सेटिंग्स
   media: मिडिया मोड्युल थप्नुहोस्
   start: स्टार्ट मोड्युल थप्नुहोस्
+  add_folder: पिन कस्टम फोल्डर
+  add_file: पिन अनुकूलन फाइल
 app_menu:
   run_as: प्रशासक रूपमा चलाउन
   pin_to_left: बाँया बायाँ

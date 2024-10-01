@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Отворени настройки
   media: Добавете медиен модул
   start: Добавете старт модул
+  add_file: ПИН Персонализиран файл
+  add_folder: ПИН Персонализирана папка
 app_menu:
   close: Близо
   close_multiple: Затвори всички

@@ -212,7 +212,7 @@
 }
 
 .weg-context-menu-container {
-  padding: 6px;
+  padding: 3px;
 
   .menu-bg-layer-1 {
     background-color: var(--color-gray-100);

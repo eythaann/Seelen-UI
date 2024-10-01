@@ -2,6 +2,8 @@ taskbar_menu:
   media: Adjon hozzá média modult
   settings: Nyisd meg a beállításokat
   start: Adja hozzá a Start modult
+  add_folder: Pin egyéni mappa
+  add_file: Pin egyedi fájl
 app_menu:
   pin_to_right: Pin jobbra
   unpin: Kibont

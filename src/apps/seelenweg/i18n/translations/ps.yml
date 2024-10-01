@@ -2,6 +2,8 @@ taskbar_menu:
   settings: خلاص امستنې
   media: د میډیا موډول اضافه کړئ
   start: د پیل ماډل اضافه کړئ
+  add_folder: د ګمرکونو فولډر
+  add_file: دود دودیز فایل
 app_menu:
   copy_handles: لاسوندونه کاپي کوي
   pin_to_center: مرکز ته پن

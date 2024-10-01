@@ -2,6 +2,8 @@ taskbar_menu:
   settings: ເປີດການຕັ້ງຄ່າ
   media: ຕື່ມການໂມດູນສື່
   start: ເພີ່ມໂມດູນ Start
+  add_file: PIN File Custom
+  add_folder: PIN Custom FOLLER
 app_menu:
   run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
   close_multiple: ປິດທັງຫມົດ

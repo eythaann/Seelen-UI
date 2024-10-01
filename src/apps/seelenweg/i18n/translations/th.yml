@@ -2,6 +2,8 @@ taskbar_menu:
   settings: เปิดการตั้งค่า
   start: เพิ่มโมดูลเริ่มต้น
   media: เพิ่มโมดูลสื่อ
+  add_file: ไฟล์ที่กำหนดเองพิน
+  add_folder: โฟลเดอร์ที่กำหนดเองพิน
 app_menu:
   close: ปิด
   pin: เข็มหมุด

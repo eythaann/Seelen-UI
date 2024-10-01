@@ -2,6 +2,8 @@ taskbar_menu:
   media: Adicionar módulo de mídia
   start: Adicionar módulo inicial
   settings: Abrir configurações
+  add_file: PIN File personalizado
+  add_folder: Pin Pasta Custom
 app_menu:
   unpin: Liberar
   pin: Alfinete

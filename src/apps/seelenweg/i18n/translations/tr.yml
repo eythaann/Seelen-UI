@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Ayarları aç
   media: Medya Modülü Ekle
   start: Başlat modülü ekle
+  add_file: Özel dosyayı pin
+  add_folder: Özel klasöre pin
 app_menu:
   open_file_location: Dosya konumunu aç
   run_as: Yönetici olarak çalıştır
