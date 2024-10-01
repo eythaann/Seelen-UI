@@ -282,7 +282,7 @@ impl WindowsApi {
         rect: RECT,
         flags: SET_WINDOW_POS_FLAGS,
     ) -> Result<()> {
-        unsafe {
+        let result = unsafe {
             SetWindowPos(
                 hwnd,
                 order,
@@ -291,7 +291,12 @@ impl WindowsApi {
                 (rect.right - rect.left).abs(),
                 (rect.bottom - rect.top).abs(),
                 flags,
-            )?;
+            )
+        };
+        if let Err(error) = result {
+            if !error.code().is_ok() {
+                return Err(error.into());
+            }
         }
         Ok(())
     }
