@@ -150,7 +150,6 @@ impl Seelen {
             .set(handle.to_owned())
             .map_err(|_| "Failed to set app handle")?;
         Self::ensure_folders(handle)?;
-        SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         Ok(())
     }
 
@@ -187,6 +186,7 @@ impl Seelen {
     }
 
     pub fn start(&mut self) -> Result<()> {
+        SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         declare_system_events_handlers()?;
 
         if self.state().is_rofi_enabled() {
@@ -197,10 +197,14 @@ impl Seelen {
             self.add_wall()?;
         }
 
+        if self.state().is_weg_enabled() {
+            SeelenWeg::hide_taskbar();
+        }
+
         log::trace!("Enumerating Monitors & Creating Instances");
         let monitors = trace_lock!(MONITOR_MANAGER).monitors.clone();
         for (_name, id) in monitors {
-            log_error!(self.add_monitor(id));
+            self.add_monitor(id)?;
         }
         trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
 
@@ -212,7 +216,7 @@ impl Seelen {
             log_error!(Self::start_async().await);
             trace_lock!(PERFORMANCE_HELPER).end("lazy setup");
         });
-        Ok(())
+        Err("UPSSSSS".into())
     }
 
     /// Stop and release all resources

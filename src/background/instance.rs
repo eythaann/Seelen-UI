@@ -72,7 +72,6 @@ impl SeelenInstanceContainer {
     fn add_weg(&mut self) -> Result<()> {
         if self.weg.is_none() {
             self.weg = Some(SeelenWeg::new(&self.name)?);
-            SeelenWeg::hide_taskbar();
         }
         Ok(())
     }
