@@ -216,7 +216,7 @@ impl Seelen {
             log_error!(Self::start_async().await);
             trace_lock!(PERFORMANCE_HELPER).end("lazy setup");
         });
-        Err("UPSSSSS".into())
+        Ok(())
     }
 
     /// Stop and release all resources
