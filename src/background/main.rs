@@ -85,7 +85,7 @@ fn print_initial_information() {
     log::info!("Locate          : {:?}", Settings::get_locale());
 }
 
-fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
+fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     Client::listen_tcp()?;
 
@@ -100,10 +100,11 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
 
         if ok_pressed {
             app.shell().open(
-            "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download",
-            None,
-        )?;
+                "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download",
+                None,
+            )?;
         }
+
         app.handle().exit(1);
         return Ok(());
     }
@@ -167,8 +168,8 @@ fn is_already_runnning() -> bool {
 }
 
 fn main() -> Result<()> {
-    color_eyre::install().expect("Failed to install color_eyre");
     register_panic_hook();
+    color_eyre::install()?;
     trace_lock!(PERFORMANCE_HELPER).start("setup");
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
@@ -200,10 +201,10 @@ fn main() -> Result<()> {
             let mut writer = BufWriter::new(stream);
 
             let args = std::env::args().collect_vec();
-            let msg = serde_json::to_string(&args).expect("could not serialize");
+            let msg = serde_json::to_string(&args)?;
 
-            writer.write_all(msg.as_bytes()).expect("could not write");
-            writer.flush().expect("could not flush");
+            writer.write_all(msg.as_bytes())?;
+            writer.flush()?;
             return Ok(());
         }
 
@@ -220,9 +221,15 @@ fn main() -> Result<()> {
     app_builder = register_invoke_handler(app_builder);
 
     let app = app_builder
-        .setup(setup)
+        .setup(|app| {
+            if let Err(err) = setup(app) {
+                log::error!("Error while setting up: {:?}", err);
+                app.handle().exit(1);
+            }
+            Ok(())
+        })
         .build(tauri::generate_context!())
-        .expect("error while building tauri application");
+        .expect("Error while building tauri application");
 
     app.run(app_callback);
     Ok(())
