@@ -93,6 +93,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
 
 use crate::error_handler::Result;
 use crate::trace_lock;
+use crate::utils::constants::NATIVE_UI_POPUP_CLASSES;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 
@@ -307,7 +308,8 @@ impl WinEvent {
                     let window = Window::from(origin);
                     let is_origin_fullscreen = window.is_fullscreen()
                         && !window.is_desktop()
-                        && !window.is_seelen_overlay();
+                        && !window.is_seelen_overlay()
+                        && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str());
 
                     match *latest_fullscreened {
                         Some(latest) if latest.handle == origin => {
@@ -324,6 +326,7 @@ impl WinEvent {
                             }
                             // if new foregrounded window is fullscreen emit it
                             if is_origin_fullscreen {
+                                log::trace!("Fullscreened: {:?}", window);
                                 let data = SyntheticFullscreenData {
                                     handle: origin,
                                     monitor: WindowsApi::monitor_from_window(origin),
