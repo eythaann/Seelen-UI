@@ -24,13 +24,13 @@ impl FancyToolbar {
             WinEvent::SyntheticFullscreenStart(event_data) => {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
                 if monitor == event_data.monitor {
-                    self.hide()?;
+                    self.send_to_bottom()?;
                 }
             }
             WinEvent::SyntheticFullscreenEnd(event_data) => {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
                 if monitor == event_data.monitor {
-                    self.show()?;
+                    self.bring_to_top_most()?;
                 }
             }
             _ => {}

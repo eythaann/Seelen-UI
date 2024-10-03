@@ -21,8 +21,8 @@ use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
     UI::WindowsAndMessaging::{
-        SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE, SW_SHOWNORMAL, WS_EX_APPWINDOW,
-        WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        HWND_BOTTOM, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNORMAL, WS_EX_APPWINDOW, WS_EX_NOACTIVATE,
+        WS_EX_TOOLWINDOW,
     },
 };
 
@@ -281,13 +281,14 @@ impl SeelenWeg {
         self.set_overlaped_status(is_overlaped)
     }
 
-    pub fn hide(&mut self) -> Result<()> {
-        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
+    pub fn send_to_bottom(&mut self) -> Result<()> {
+        self.window.set_always_on_top(false)?;
+        WindowsApi::bring_to(self.window.hwnd()?, HWND_BOTTOM)?;
         Ok(())
     }
 
-    pub fn show(&mut self) -> Result<()> {
-        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+    pub fn bring_to_top_most(&mut self) -> Result<()> {
+        self.window.set_always_on_top(true)?;
         Ok(())
     }
 
