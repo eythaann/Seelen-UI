@@ -30,6 +30,12 @@ lazy_static! {
     .collect_vec();
 }
 
+pub static NATIVE_UI_POPUP_CLASSES: [&str; 3] = [
+    "ForegroundStaging",            // Task Switching and Task View
+    "XamlExplorerHostIslandWindow", // Task Switching, Task View and other popups
+    "ControlCenterWindow",          // Windows 11 right panel with quick settings
+];
+
 pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 4] = [
     "msedgewebview2.exe",
     "SearchHost.exe",
