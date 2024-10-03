@@ -1,6 +1,5 @@
 use std::collections::HashMap;
 use std::path::PathBuf;
-use std::process::Command;
 
 use tauri::{Builder, Wry};
 use tauri_plugin_shell::ShellExt;
@@ -26,13 +25,23 @@ use crate::modules::system_settings::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
 #[tauri::command(async)]
-fn select_file_on_explorer(path: String) {
-    log_error!(Command::new("explorer").args(["/select,", &path]).spawn());
+fn select_file_on_explorer(path: String) -> Result<()> {
+    get_app_handle()
+        .shell()
+        .command("explorer")
+        .args(["/select,", &path])
+        .spawn()?;
+    Ok(())
 }
 
 #[tauri::command(async)]
-fn open_file(path: String) {
-    log_error!(Command::new("cmd").args(["/c", "explorer", &path]).spawn());
+fn open_file(path: String) -> Result<()> {
+    get_app_handle()
+        .shell()
+        .command("cmd")
+        .args(["/c", "explorer", &path])
+        .spawn()?;
+    Ok(())
 }
 
 #[tauri::command(async)]
