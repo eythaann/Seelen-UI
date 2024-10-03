@@ -59,7 +59,7 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
     let hwnd = HWND(hwnd as _);
 
     // If the window is not open, open it
-    if !WindowsApi::is_window(hwnd) {
+    if hwnd.is_invalid() || !WindowsApi::is_window(hwnd) {
         get_app_handle()
             .shell()
             .command("explorer")
