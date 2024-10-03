@@ -76,10 +76,10 @@ export const UserApplication = memo(({ item }: Props) => {
           <div
             className="weg-item"
             onClick={() => {
-              let hwnd = item.opens[0];
-              if (hwnd) {
-                invoke(SeelenCommand.WegToggleWindowState, { hwnd, exePath: item.execution_path });
-              }
+              invoke(SeelenCommand.WegToggleWindowState, {
+                hwnd: item.opens[0] || 0,
+                exePath: item.execution_path,
+              });
             }}
             onAuxClick={(e) => {
               let hwnd = item.opens[0];
