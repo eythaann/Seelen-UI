@@ -1,9 +1,6 @@
 # Changelog
 
 ## [Unreleased]
-## [2.0.0-beta.14]
-## [2.0.0-beta.13]
-## [2.0.0-beta.12]
 ### breaking changes
 - Window Manager Layout Conditions was reimplemented, old conditions (v1) will fail.
 
@@ -33,6 +30,7 @@
 - now Themes are wrapped in a CSS layer, making easier the override theming.
 - allow change size of Window Manager Layouts via window resizing with the mouse.
 - allow close windows by middle clicking on dock items.
+- show icon of app in media players that are not uwp/msix.
 
 ### fix
 - missing icons for files with a different extension than `exe`.
