@@ -194,6 +194,13 @@ impl SeelenWeg {
             return false;
         }
 
+        // this class is used for edge tabs to be shown as independent windows on alt + tab
+        // this only applies when the new tab is created it is binded to explorer.exe for some reason
+        // maybe we can search/learn more about edge tabs later.
+        if window.class() == "Windows.Internal.Shell.TabProxyWindow" {
+            return false;
+        }
+
         let ex_style = WindowsApi::get_ex_styles(hwnd);
         if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
             && !ex_style.contains(WS_EX_APPWINDOW)

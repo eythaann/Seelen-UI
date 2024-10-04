@@ -42,6 +42,7 @@
 - showing unmanageable windows on dock.
 - restart seelen-ui button not working properly.
 - tray icons not working on others language than english.
+- edge tabs open in file explorer.
 
 ## [1.10.5]
 ### fix
