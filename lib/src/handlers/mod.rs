@@ -8,6 +8,8 @@ impl SeelenEvent {
     pub const GlobalFocusChanged: &str = "global-focus-changed";
     pub const GlobalMouseMove: &str = "global-mouse-move";
 
+    pub const HandleLayeredHitboxes: &str = "handle-layered";
+
     pub const MediaSessions: &str = "media-sessions";
     pub const MediaInputs: &str = "media-inputs";
     pub const MediaOutputs: &str = "media-outputs";

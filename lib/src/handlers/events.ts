@@ -5,6 +5,8 @@ export enum SeelenEvent {
   GlobalFocusChanged = 'global-focus-changed',
   GlobalMouseMove = 'global-mouse-move',
 
+  HandleLayeredHitboxes = 'handle-layered',
+
   MediaSessions = 'media-sessions',
   MediaInputs = 'media-inputs',
   MediaOutputs = 'media-outputs',

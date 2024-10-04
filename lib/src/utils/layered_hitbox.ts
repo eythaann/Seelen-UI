@@ -1,5 +1,7 @@
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 
+import { SeelenEvent } from '../handlers';
+
 export async function declareDocumentAsLayeredHitbox() {
   const webview = getCurrentWebviewWindow();
   const { x, y } = await webview.outerPosition();
@@ -7,6 +9,7 @@ export async function declareDocumentAsLayeredHitbox() {
 
   let webviewRect = { x, y, width, height };
   let ignoring_cursor_events = true;
+  let is_layered_enabled = true;
   await webview.setIgnoreCursorEvents(true);
 
   webview.onMoved((e) => {
@@ -19,7 +22,15 @@ export async function declareDocumentAsLayeredHitbox() {
     webviewRect.height = e.payload.height;
   });
 
-  webview.listen<[x: number, y: number]>('global-mouse-move', (event) => {
+  webview.listen<boolean>(SeelenEvent.HandleLayeredHitboxes, (event) => {
+    is_layered_enabled = event.payload;
+  });
+
+  webview.listen<[x: number, y: number]>(SeelenEvent.GlobalMouseMove, (event) => {
+    if (!is_layered_enabled) {
+      return;
+    }
+
     const [mouseX, mouseY] = event.payload;
     let { x: windowX, y: windowY, width: windowWidth, height: windowHeight } = webviewRect;
 
