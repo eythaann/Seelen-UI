@@ -16,11 +16,11 @@ use crate::{
 use itertools::Itertools;
 use seelen_core::{handlers::SeelenEvent, state::HideMode};
 use serde::Serialize;
-use tauri::{Emitter, Listener, Manager, WebviewWindow};
+use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{HWND_BOTTOM, SWP_NOACTIVATE},
+    UI::WindowsAndMessaging::{SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
@@ -82,14 +82,23 @@ impl FancyToolbar {
         self.set_overlaped_status(is_overlaped)
     }
 
-    pub fn send_to_bottom(&mut self) -> Result<()> {
-        self.window.set_always_on_top(false)?;
-        WindowsApi::bring_to(self.window.hwnd()?, HWND_BOTTOM)?;
+    pub fn hide(&mut self) -> Result<()> {
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
+        self.window.emit_to(
+            self.window.label(),
+            SeelenEvent::HandleLayeredHitboxes,
+            false,
+        )?;
         Ok(())
     }
 
-    pub fn bring_to_top_most(&mut self) -> Result<()> {
-        self.window.set_always_on_top(true)?;
+    pub fn show(&mut self) -> Result<()> {
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        self.window.emit_to(
+            self.window.label(),
+            SeelenEvent::HandleLayeredHitboxes,
+            true,
+        )?;
         Ok(())
     }
 
@@ -155,27 +164,23 @@ impl FancyToolbar {
         let manager = get_app_handle();
 
         let label = format!("{}/{}", Self::TARGET, postfix);
-        let window = match manager.get_webview_window(&label) {
-            Some(window) => window,
-            None => tauri::WebviewWindowBuilder::new(
-                manager,
-                label,
-                tauri::WebviewUrl::App("toolbar/index.html".into()),
-            )
-            .title(Self::TITLE)
-            .minimizable(false)
-            .maximizable(false)
-            .closable(false)
-            .resizable(false)
-            .visible(false)
-            .decorations(false)
-            .transparent(true)
-            .shadow(false)
-            .skip_taskbar(true)
-            .always_on_top(true)
-            .drag_and_drop(false)
-            .build()?,
-        };
+        let window = tauri::WebviewWindowBuilder::new(
+            manager,
+            label,
+            tauri::WebviewUrl::App("toolbar/index.html".into()),
+        )
+        .title(Self::TITLE)
+        .minimizable(false)
+        .maximizable(false)
+        .closable(false)
+        .resizable(false)
+        .visible(false)
+        .decorations(false)
+        .transparent(true)
+        .shadow(false)
+        .skip_taskbar(true)
+        .always_on_top(true)
+        .build()?;
 
         window.set_ignore_cursor_events(true)?;
         window.listen("store-events-ready", Self::on_store_events_ready);
