@@ -63,7 +63,10 @@ impl Window {
     }
 
     pub fn app_user_model_id(&self) -> Option<String> {
-        WindowsApi::get_window_app_user_model_id(self.0).ok()
+        if let Ok(id) = WindowsApi::get_window_app_user_model_id_uwp(self.0) {
+            return Some(id);
+        }
+        WindowsApi::get_window_app_user_model_id_exe(self.0).ok()
     }
 
     pub fn title(&self) -> String {

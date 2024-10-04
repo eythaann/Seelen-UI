@@ -23,7 +23,7 @@ use std::{
 
 use color_eyre::eyre::eyre;
 use windows::{
-    core::{GUID, PCWSTR, PWSTR},
+    core::{BSTR, GUID, PCWSTR, PWSTR},
     Storage::Streams::{
         DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
     },
@@ -56,7 +56,8 @@ use windows::{
             TOKEN_QUERY,
         },
         Storage::{
-            EnhancedStorage::PKEY_FileDescription, FileSystem::WIN32_FIND_DATAW,
+            EnhancedStorage::{PKEY_AppUserModel_ID, PKEY_FileDescription},
+            FileSystem::WIN32_FIND_DATAW,
             Packaging::Appx::GetApplicationUserModelId,
         },
         System::{
@@ -510,7 +511,18 @@ impl WindowsApi {
         Ok(unsafe { SHGetPropertyStoreForWindow(hwnd)? })
     }
 
-    pub fn get_window_app_user_model_id(hwnd: HWND) -> Result<String> {
+    /// this only works for exe apps
+    pub fn get_window_app_user_model_id_exe(hwnd: HWND) -> Result<String> {
+        let store = Self::get_property_store_for_window(hwnd)?;
+        let value = unsafe { store.GetValue(&PKEY_AppUserModel_ID)? };
+        if value.is_empty() {
+            return Err("No AppUserModel_ID".into());
+        }
+        Ok(BSTR::try_from(&value)?.to_string())
+    }
+
+    /// this only works for UWP/MSIX apps
+    pub fn get_window_app_user_model_id_uwp(hwnd: HWND) -> Result<String> {
         let (process_id, _) = Self::window_thread_process_id(hwnd);
         let handle = Self::process_handle(process_id)?;
 

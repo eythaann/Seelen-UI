@@ -312,6 +312,7 @@
   aspect-ratio: 1/1;
   right: 5%;
   bottom: 5%;
+  object-fit: contain;
 }
 
 .media-session-thumbnail {
