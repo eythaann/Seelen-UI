@@ -536,8 +536,8 @@ impl Settings {
         }
 
         let default_icon_pack = "system".to_owned();
-        if !self.selected_themes.contains(&default_icon_pack) {
-            self.selected_themes.insert(0, default_icon_pack);
+        if !self.icon_packs.contains(&default_icon_pack) {
+            self.icon_packs.insert(0, default_icon_pack);
         }
     }
 }

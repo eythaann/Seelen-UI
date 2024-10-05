@@ -47,7 +47,7 @@ export function Item(props: InnerItemProps) {
         </BackgroundByLayersV2>
       )}
     >
-      <InnerItem {...props} />
+      <InnerItem {...props} clickable={!!props.onClick} />
     </Dropdown>
   );
 }
