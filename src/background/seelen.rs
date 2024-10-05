@@ -272,7 +272,7 @@ impl Seelen {
         create_if_needed("placeholders")?;
         create_if_needed("themes")?;
         create_if_needed("layouts")?;
-        create_if_needed("icons/default")?;
+        create_if_needed("icons/system")?;
         create_if_needed("wallpapers")?;
 
         Ok(())

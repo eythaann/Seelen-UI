@@ -62,8 +62,10 @@ impl Window {
         self.0 .0 as isize
     }
 
+    /// this could return the process user model id if it is a uwp
+    /// or the app user model id asigned to the window via property-store
     pub fn app_user_model_id(&self) -> Option<String> {
-        if let Ok(id) = self.process().app_user_model_id() {
+        if let Ok(id) = self.process().package_app_user_model_id() {
             return Some(id);
         }
         WindowsApi::get_window_app_user_model_id_exe(self.0).ok()
@@ -87,7 +89,10 @@ impl Window {
     }
 
     pub fn app_display_name(&self) -> Result<String> {
-        WindowsApi::get_window_display_name(self.0)
+        if let Ok(info) = self.process().package_app_info() {
+            return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
+        }
+        WindowsApi::get_executable_display_name(self.0)
     }
 
     pub fn outer_rect(&self) -> Result<Rect> {

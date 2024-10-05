@@ -3,7 +3,7 @@ pub mod handler;
 pub mod hook;
 pub mod icon_extractor;
 
-use std::{collections::HashMap, thread::JoinHandle};
+use std::{collections::HashMap, path::PathBuf, thread::JoinHandle};
 
 use getset::{Getters, MutGetters};
 use icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
@@ -54,9 +54,9 @@ lazy_static! {
 #[derive(Debug, Serialize, Clone)]
 pub struct SeelenWegApp {
     hwnd: isize,
-    exe: String,
+    exe: PathBuf,
     title: String,
-    icon_path: String,
+    icon_path: PathBuf,
     execution_path: String,
     creator_hwnd: isize,
 }
@@ -130,30 +130,29 @@ impl SeelenWeg {
             Err(_) => window,
         };
 
-        let path = creator.exe()?;
+        let program_path = creator.exe()?;
         let mut app = SeelenWegApp {
             hwnd: hwnd.0 as isize,
             title: creator.title(),
-            exe: path.to_string_lossy().to_string(),
-            icon_path: String::new(),
-            execution_path: String::new(),
+            exe: program_path.clone(),
+            execution_path: program_path.to_string_lossy().to_string(),
+            icon_path: Default::default(),
             creator_hwnd: creator.hwnd().0 as isize,
         };
 
-        if let Ok(umid) = window.process().app_user_model_id() {
-            println!("??????????????? => {:?}", umid);
-
-            app.execution_path = format!("shell:AppsFolder\\{umid}");
-            app.icon_path = extract_and_save_icon_umid(&umid)
-                .unwrap_or_else(|_| Icons::missing_app())
-                .to_string_lossy()
-                .to_string();
+        if let Some(umid) = creator.app_user_model_id() {
+            println!("UMID: {umid}");
+            if umid.contains("!") {
+                app.execution_path = format!("shell:AppsFolder\\{umid}");
+                app.icon_path =
+                    extract_and_save_icon_umid(&umid).unwrap_or_else(|_| Icons::missing_app())
+            } else {
+                app.icon_path = extract_and_save_icon_from_file(program_path)
+                    .unwrap_or_else(|_| Icons::missing_app());
+            }
         } else {
-            app.execution_path = app.exe.clone();
-            app.icon_path = extract_and_save_icon_from_file(path)
-                .unwrap_or_else(|_| Icons::missing_app())
-                .to_string_lossy()
-                .to_string();
+            app.icon_path = extract_and_save_icon_from_file(program_path)
+                .unwrap_or_else(|_| Icons::missing_app());
         }
 
         get_app_handle()
@@ -174,8 +173,16 @@ impl SeelenWeg {
 
     pub fn should_be_added(hwnd: HWND) -> bool {
         let window = Window::from(hwnd);
+        let path = match window.process().program_path() {
+            Ok(path) => path,
+            Err(_) => return false,
+        };
 
-        if !window.is_visible() || window.parent().is_some() || window.is_seelen_overlay() {
+        if path.starts_with("C:\\Windows\\SystemApps")
+            || !window.is_visible()
+            || window.parent().is_some()
+            || window.is_seelen_overlay()
+        {
             return false;
         }
 
@@ -201,15 +208,6 @@ impl SeelenWeg {
 
         if WindowsApi::window_is_uwp_suspended(hwnd).unwrap_or_default() {
             return false;
-        }
-
-        match window.exe() {
-            Ok(path) => {
-                if path.starts_with("C:\\Windows\\SystemApps") {
-                    return false;
-                }
-            }
-            Err(_) => return false,
         }
 
         if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {

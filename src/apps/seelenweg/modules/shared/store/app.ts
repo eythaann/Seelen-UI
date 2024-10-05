@@ -57,12 +57,15 @@ function findApp(
   state: RootState,
   searched: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
 ) {
-  return (state.itemsOnLeft.find((app) => 'exe' in app && app.exe === searched.exe) ||
-    state.itemsOnCenter.find((app) => 'exe' in app && app.exe === searched.exe) ||
-    state.itemsOnRight.find((app) => 'exe' in app && app.exe === searched.exe)) as
-    | ExtendedPinnedAppWegItem
-    | ExtendedTemporalAppWegItem
-    | undefined;
+  return (state.itemsOnLeft.find(
+    (app) => 'execution_path' in app && app.execution_path === searched.execution_path,
+  ) ||
+    state.itemsOnCenter.find(
+      (app) => 'execution_path' in app && app.execution_path === searched.execution_path,
+    ) ||
+    state.itemsOnRight.find(
+      (app) => 'execution_path' in app && app.execution_path === searched.execution_path,
+    )) as ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem | undefined;
 }
 
 export const RootSlice = createSlice({
@@ -140,33 +143,41 @@ export const RootSlice = createSlice({
       savePinnedItems(current(state));
     },
     addOpenApp(state, action: PayloadAction<AppFromBackground>) {
-      const app = action.payload;
+      const new_app = action.payload;
 
-      state.openApps[app.hwnd] = app;
+      state.openApps[new_app.hwnd] = new_app;
 
-      const appFilename = app.exe.split('\\').pop();
-      if (appFilename) {
-        const cb = (current: SwItem) => 'exe' in current && current.exe.endsWith(appFilename);
-        const pinedApp = (state.itemsOnLeft.find(cb) ||
-          state.itemsOnCenter.find(cb) ||
-          state.itemsOnRight.find(cb)) as ExtendedPinnedAppWegItem | undefined;
+      let cb = (current: SwItem) =>
+        'execution_path' in current && current.execution_path === new_app.execution_path;
+      let pinedApp = (state.itemsOnLeft.find(cb) ||
+        state.itemsOnCenter.find(cb) ||
+        state.itemsOnRight.find(cb)) as ExtendedPinnedAppWegItem | undefined;
 
-        if (pinedApp) {
-          if (!pinedApp.opens.includes(app.hwnd)) {
-            pinedApp.opens.push(app.hwnd);
-          }
-
-          // update path to pinned apps normally changed on updates
-          if (pinedApp.exe !== app.exe) {
-            pinedApp.exe = app.exe;
-            pinedApp.execution_path = app.execution_path;
-            savePinnedItems(current(state));
-          }
-          return;
+      if (!pinedApp && !new_app.execution_path.startsWith('shell:AppsFolder')) {
+        const appFilename = new_app.execution_path.split('\\').pop();
+        if (appFilename) {
+          cb = (current: SwItem) => 'exe' in current && current.execution_path.endsWith(appFilename);
+          pinedApp = (state.itemsOnLeft.find(cb) ||
+            state.itemsOnCenter.find(cb) ||
+            state.itemsOnRight.find(cb)) as ExtendedPinnedAppWegItem | undefined;
         }
       }
 
-      state.itemsOnCenter.push(SwTemporalAppUtils.fromBackground(app));
+      if (!pinedApp) {
+        state.itemsOnCenter.push(SwTemporalAppUtils.fromBackground(new_app));
+        return;
+      }
+
+      if (!pinedApp.opens.includes(new_app.hwnd)) {
+        pinedApp.opens.push(new_app.hwnd);
+      }
+
+      // update path to pinned apps normally changed on updates
+      if (pinedApp.exe !== new_app.exe) {
+        pinedApp.exe = new_app.exe;
+        pinedApp.execution_path = new_app.execution_path;
+        savePinnedItems(current(state));
+      }
     },
     updateOpenAppInfo(state, action: PayloadAction<AppFromBackground>) {
       const found = state.openApps[action.payload.hwnd];
