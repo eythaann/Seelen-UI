@@ -58,4 +58,12 @@ impl FullState {
         get_app_handle().emit(SeelenEvent::StateHistoryChanged, self.history())?;
         Ok(())
     }
+
+    pub(super) fn emit_icon_packs(&self) -> Result<()> {
+        get_app_handle().emit(
+            SeelenEvent::StateIconPacksChanged,
+            trace_lock!(self.icon_packs()).values().collect_vec(),
+        )?;
+        Ok(())
+    }
 }

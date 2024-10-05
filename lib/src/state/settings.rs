@@ -474,6 +474,8 @@ pub struct Settings {
     /// list of selected themes
     #[serde(alias = "selected_theme")]
     pub selected_themes: Vec<String>,
+    /// list of selected icon packs
+    pub icon_packs: Vec<String>,
     /// enable or disable dev tools tab in settings
     pub dev_tools: bool,
     /// language to use, if null the system locale is used
@@ -491,6 +493,7 @@ impl Default for Settings {
         Self {
             ahk_enabled: true,
             selected_themes: vec!["default".to_string()],
+            icon_packs: vec!["system".to_string()],
             monitors: vec![MonitorConfiguration::default()],
             fancy_toolbar: FancyToolbarSettings::default(),
             seelenweg: SeelenWegSettings::default(),
@@ -529,7 +532,12 @@ impl Settings {
 
         let default_theme = "default".to_owned();
         if !self.selected_themes.contains(&default_theme) {
-            self.selected_themes.push(default_theme);
+            self.selected_themes.insert(0, default_theme);
+        }
+
+        let default_icon_pack = "system".to_owned();
+        if !self.selected_themes.contains(&default_icon_pack) {
+            self.selected_themes.insert(0, default_icon_pack);
         }
     }
 }

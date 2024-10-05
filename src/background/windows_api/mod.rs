@@ -3,6 +3,7 @@ mod com;
 mod iterator;
 pub mod monitor;
 mod process;
+mod string_utils;
 pub mod window;
 
 pub use app_bar::*;
@@ -58,7 +59,6 @@ use windows::{
         Storage::{
             EnhancedStorage::{PKEY_AppUserModel_ID, PKEY_FileDescription},
             FileSystem::WIN32_FIND_DATAW,
-            Packaging::Appx::GetApplicationUserModelId,
         },
         System::{
             Com::{IPersistFile, STGM_READ},
@@ -403,7 +403,7 @@ impl WindowsApi {
         Ok(())
     }
 
-    fn close_handle(handle: HANDLE) -> Result<()> {
+    pub fn close_handle(handle: HANDLE) -> Result<()> {
         unsafe {
             CloseHandle(handle)?;
         }
@@ -426,20 +426,6 @@ impl WindowsApi {
 
     pub fn get_desktop_window() -> HWND {
         unsafe { GetDesktopWindow() }
-    }
-
-    pub fn exe_path_by_process(process_id: u32) -> Result<String> {
-        let mut len = 512_u32;
-        let mut path: Vec<u16> = vec![0; len as usize];
-        let text_ptr = path.as_mut_ptr();
-
-        let handle = Self::process_handle(process_id)?;
-        unsafe {
-            QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
-        }
-        Self::close_handle(handle)?;
-
-        Ok(String::from_utf16(&path[..len as usize])?)
     }
 
     pub fn window_is_uwp_suspended(hwnd: HWND) -> Result<bool> {
@@ -470,6 +456,20 @@ impl WindowsApi {
 
         Self::close_handle(handle)?;
         Ok(is_frozen)
+    }
+
+    pub fn exe_path_by_process(process_id: u32) -> Result<String> {
+        let mut len = 512_u32;
+        let mut path: Vec<u16> = vec![0; len as usize];
+        let text_ptr = path.as_mut_ptr();
+
+        let handle = Self::process_handle(process_id)?;
+        unsafe {
+            QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
+        }
+        Self::close_handle(handle)?;
+
+        Ok(String::from_utf16(&path[..len as usize])?)
     }
 
     pub fn exe_path(hwnd: HWND) -> Result<String> {
@@ -519,21 +519,6 @@ impl WindowsApi {
             return Err("No AppUserModel_ID".into());
         }
         Ok(BSTR::try_from(&value)?.to_string())
-    }
-
-    /// this only works for UWP/MSIX apps
-    pub fn get_window_app_user_model_id_uwp(hwnd: HWND) -> Result<String> {
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
-        let handle = Self::process_handle(process_id)?;
-
-        let mut buffer = vec![0u16; 1024];
-        let mut size = buffer.len() as u32;
-        unsafe { GetApplicationUserModelId(handle, &mut size, PWSTR(buffer.as_mut_ptr())).ok()? };
-
-        Self::close_handle(handle)?;
-        Ok(String::from_utf16(&buffer[..size as usize])?
-            .trim_end_matches('\0')
-            .to_string())
     }
 
     pub fn resolve_lnk_target(lnk_path: &Path) -> Result<PathBuf> {
@@ -859,9 +844,9 @@ impl WindowsApi {
         Ok(power_status)
     }
 
-    pub fn extract_thumbnail_from_stream(
+    pub fn stream_to_dynamic_image(
         stream: IRandomAccessStreamWithContentType,
-    ) -> Result<PathBuf> {
+    ) -> Result<image::DynamicImage> {
         let size = stream.Size()?;
         let mut buffer = vec![0u8; size as usize];
 
@@ -872,9 +857,15 @@ impl WindowsApi {
         data_reader.ReadBytes(&mut buffer)?;
 
         let image = image::load_from_memory_with_format(&buffer, image::ImageFormat::Png)?;
+        Ok(image)
+    }
+
+    pub fn extract_thumbnail_from_stream(
+        stream: IRandomAccessStreamWithContentType,
+    ) -> Result<PathBuf> {
+        let image = Self::stream_to_dynamic_image(stream)?;
         let image_path = std::env::temp_dir().join(format!("{}.png", uuid::Uuid::new_v4()));
         image.save(&image_path)?;
-
         Ok(image_path)
     }
 

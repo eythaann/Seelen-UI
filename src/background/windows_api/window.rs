@@ -16,7 +16,7 @@ use crate::{
     seelen_wm_v2::instance::WindowManagerV2,
 };
 
-use super::{monitor::Monitor, WindowEnumerator, WindowsApi};
+use super::{monitor::Monitor, process::Process, WindowEnumerator, WindowsApi};
 
 #[derive(Clone, Copy, PartialEq, Eq)]
 pub struct Window(HWND);
@@ -63,7 +63,7 @@ impl Window {
     }
 
     pub fn app_user_model_id(&self) -> Option<String> {
-        if let Ok(id) = WindowsApi::get_window_app_user_model_id_uwp(self.0) {
+        if let Ok(id) = self.process().app_user_model_id() {
             return Some(id);
         }
         WindowsApi::get_window_app_user_model_id_exe(self.0).ok()
@@ -75,6 +75,10 @@ impl Window {
 
     pub fn class(&self) -> String {
         WindowsApi::get_class(self.0).unwrap_or_default()
+    }
+
+    pub fn process(&self) -> Process {
+        Process::from_window(self)
     }
 
     /// will fail if process is restricted and the invoker is not running as admin

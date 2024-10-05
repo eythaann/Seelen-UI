@@ -9,7 +9,7 @@ use windows::Win32::UI::WindowsAndMessaging::SWP_NOACTIVATE;
 
 use crate::{
     error_handler::Result, log_error, seelen::get_app_handle,
-    seelen_weg::icon_extractor::extract_and_save_icon_v2, utils::constants::Icons,
+    seelen_weg::icon_extractor::extract_and_save_icon_from_file, utils::constants::Icons,
     windows_api::WindowsApi,
 };
 
@@ -63,7 +63,8 @@ impl SeelenRofi {
             if file_type.is_file() && path.extension() != Some(OsStr::new("ini")) {
                 apps.push(SeelenRofiApp {
                     label: path.file_stem().unwrap().to_string_lossy().to_string(),
-                    icon: extract_and_save_icon_v2(&path).unwrap_or_else(|_| Icons::missing_app()),
+                    icon: extract_and_save_icon_from_file(&path)
+                        .unwrap_or_else(|_| Icons::missing_app()),
                     path,
                 })
             }

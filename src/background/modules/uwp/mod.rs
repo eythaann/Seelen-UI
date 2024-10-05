@@ -159,7 +159,7 @@ impl WindowsAppsManager {
             .join("uwp_manifests.json"))
     }
 
-    pub fn refresh(&mut self) -> Result<()> {
+    fn refresh(&mut self) -> Result<()> {
         trace_lock!(PERFORMANCE_HELPER).start("UWP Packages");
         let script = PwshScript::new(include_str!("load_uwp_apps.ps1"));
         let contents = tauri::async_runtime::block_on(script.execute())?;
@@ -167,6 +167,10 @@ impl WindowsAppsManager {
         std::fs::write(Self::get_save_path()?, &contents)?;
         trace_lock!(PERFORMANCE_HELPER).end("UWP Packages");
         Ok(())
+    }
+
+    pub fn packages(&self) -> &[UWPPackage] {
+        &self.packages
     }
 
     pub fn get_from_path(&self, exe_path: &Path) -> Option<&UWPPackage> {
