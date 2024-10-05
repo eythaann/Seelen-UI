@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    cmd: 命令
-    explorer: 跑步
+    cmd: 命令行
+    explorer: 文件资源管理器
 footer:
   shortcuts: 显示快捷方式
 header:
