@@ -6,8 +6,8 @@ use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, modules::uwp::UWP_MANAGER,
-    seelen::get_app_handle, state::application::FULL_STATE, trace_lock, windows_api::WindowsApi,
+    error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
+    state::application::FULL_STATE, windows_api::WindowsApi,
 };
 use windows::Win32::{
     Foundation::{HWND, LPARAM, WPARAM},
@@ -91,15 +91,16 @@ pub fn weg_pin_item(mut path: PathBuf) -> Result<()> {
     }
 
     let item = if path.extension() == Some(OsStr::new("exe")) {
-        let mut execution_path = None;
-        if let Some(package) = trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
+        // let execution_path = None;
+        // todo add support to UWP on seelen rofi
+        /* if let Some(package) = trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
             if let Some(app) = path.file_name() {
                 execution_path = package.get_shell_path(app.to_string_lossy().as_ref());
             }
-        }
+        } */
         WegItem::PinnedApp {
             exe: path.clone(),
-            execution_path: execution_path.unwrap_or(path.to_string_lossy().to_string()),
+            execution_path: path.to_string_lossy().to_string(),
         }
     } else {
         WegItem::Pinned {

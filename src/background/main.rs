@@ -32,7 +32,6 @@ use modules::{
         Client,
     },
     tray::application::ensure_tray_overflow_creation,
-    uwp::UWP_MANAGER,
 };
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
@@ -41,7 +40,7 @@ use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 use tray::try_register_tray_icon;
-use utils::{spawn_named_thread, PERFORMANCE_HELPER};
+use utils::PERFORMANCE_HELPER;
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
@@ -116,13 +115,6 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
-
-    // init the UWP manager this took a long time so we spawn it in the background
-    // the most of the apps need this so we init it and the beginning of the program
-    spawn_named_thread("UWP Manager Init", || {
-        // lazy variables are initialized when they are accessed
-        UWP_MANAGER.is_locked();
-    })?;
 
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());

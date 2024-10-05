@@ -7,5 +7,4 @@ pub mod notifications;
 pub mod power;
 pub mod system_settings;
 pub mod tray;
-pub mod uwp;
 pub mod virtual_desk;
