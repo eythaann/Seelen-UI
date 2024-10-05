@@ -194,9 +194,9 @@ shortcuts:
     send_to_workspace_9: 发送到工作区 9
 vd:
   strategy:
-    native: 本国的
+    native: 系统
     label: 虚拟桌面策略
-    seelen: 塞伦
+    seelen: Seelen
   disabled_windows_version: 本机虚拟桌面策略不适合您的Windows版本。
 save_and_restart: 保存和重新启动
 beta_channel:
