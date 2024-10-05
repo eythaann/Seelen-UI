@@ -68,6 +68,7 @@ export class Settings extends Obtainable<Settings>(
   ahkEnabled: boolean = true;
   ahkVariables: AhkVarList = new AhkVarList();
   selectedThemes: string[] = ['default'];
+  iconPacks: string[] = ['system'];
   devTools: boolean = false;
   language: string = '';
   dateFormat: string = 'ddd D MMM, hh:mm A';

@@ -35,8 +35,7 @@ use windows_core::Interface;
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::get_app_handle,
-    seelen_weg::icon_extractor::{extract_and_save_icon, extract_and_save_icon_v2},
+    seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
     utils::pcwstr,
     windows_api::{Com, WindowEnumerator, WindowsApi},
@@ -477,7 +476,7 @@ impl MediaManager {
                             .to_string()?,
                     }
                     .replace(".exe", "");
-                    icon_path = extract_and_save_icon(get_app_handle(), &path)
+                    icon_path = extract_and_save_icon_from_file(&path)
                         .ok()
                         .map(|p| p.to_string_lossy().to_string());
                 }
@@ -576,8 +575,15 @@ impl MediaManager {
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
             owner: owner.map(|w| MediaPlayerOwner {
-                name: w.title(),
-                icon_path: w.exe().and_then(extract_and_save_icon_v2).ok(),
+                name: w
+                    .app_display_name()
+                    .unwrap_or_else(|_| "Unknown App".to_string()),
+                icon_path: w
+                    .process()
+                    .app_user_model_id()
+                    .and_then(extract_and_save_icon_umid)
+                    .or_else(|_| w.exe().and_then(extract_and_save_icon_from_file))
+                    .ok(),
             }),
             thumbnail: properties
                 .Thumbnail()

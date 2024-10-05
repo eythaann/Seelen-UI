@@ -11,7 +11,9 @@ use crate::modules::virtual_desk::get_vd_manager;
 use crate::seelen::{get_app_handle, Seelen};
 use crate::seelen_rofi::handler::*;
 use crate::seelen_weg::handler::*;
-use crate::seelen_weg::icon_extractor::extract_and_save_icon;
+use crate::seelen_weg::icon_extractor::{
+    extract_and_save_icon_from_file, extract_and_save_icon_umid,
+};
 use crate::seelen_wm_v2::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
@@ -111,7 +113,11 @@ fn send_keys(keys: String) -> Result<()> {
 
 #[tauri::command]
 fn get_icon(path: String) -> Option<PathBuf> {
-    extract_and_save_icon(get_app_handle(), &path).ok()
+    if path.starts_with("shell:AppsFolder") {
+        let umid = path.replace("shell:AppsFolder\\", "");
+        return extract_and_save_icon_umid(&umid).ok();
+    }
+    extract_and_save_icon_from_file(&path).ok()
 }
 
 #[tauri::command(async)]

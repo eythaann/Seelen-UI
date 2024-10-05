@@ -1,8 +1,8 @@
 use color_eyre::eyre::eyre;
 use image::{GenericImageView, ImageBuffer, RgbaImage};
 use itertools::Itertools;
-use tauri::{AppHandle, Manager};
 use windows::core::PCWSTR;
+use windows::ApplicationModel::AppInfo;
 use windows::Win32::{
     Graphics::Gdi::{
         CreateCompatibleDC, DeleteDC, DeleteObject, GetDIBits, SelectObject, BITMAPINFO,
@@ -25,9 +25,7 @@ use std::os::windows::ffi::OsStrExt;
 use std::path::{Path, PathBuf};
 
 use crate::error_handler::Result;
-use crate::modules::uwp::UWP_MANAGER;
-use crate::seelen::get_app_handle;
-use crate::trace_lock;
+use crate::state::application::FULL_STATE;
 use crate::windows_api::WindowsApi;
 
 /// Convert BGRA to RGBA
@@ -242,64 +240,79 @@ pub fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
 /// returns the path of the icon extracted from the executable or copied if is an UWP app.
 ///
 /// If the icon already exists, it returns the path instead overriding, this is needed for allow user custom icons.
-pub fn extract_and_save_icon(_handle: &AppHandle, file_path: &str) -> Result<PathBuf> {
-    extract_and_save_icon_v2(PathBuf::from(file_path))
-}
-
-/// returns the path of the icon extracted from the executable or copied if is an UWP app.
-///
-/// If the icon already exists, it returns the path instead overriding, this is needed for allow user custom icons.
-pub fn extract_and_save_icon_v2<T: AsRef<Path>>(path: T) -> Result<PathBuf> {
+pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBuf> {
     let path = path.as_ref();
-    if path.is_dir() {
-        return Err("Path is a directory".into());
+    if !path.exists() || path.is_dir() {
+        return Err("Path is not a file".into());
     }
 
-    let gen_icons_paths = get_app_handle().path().app_data_dir()?.join("icons");
-    if !gen_icons_paths.exists() {
-        std::fs::create_dir_all(&gen_icons_paths)?;
+    let state = FULL_STATE.load();
+    if let Some(icon) = state.get_icon_by_key(&path.to_string_lossy()) {
+        return Ok(icon);
     }
+
+    let icon_filename = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
+    let icon_path = state
+        .icon_packs_folder()
+        .join("system")
+        .join(&icon_filename);
 
     let file_name = path.file_name().ok_or("Failed to get file name")?;
-    let path_to_save = gen_icons_paths.join(file_name).with_extension("png");
-    if path_to_save.exists() {
-        return Ok(path_to_save);
-    }
-
-    let filename = file_name.to_string_lossy().to_string();
-    log::trace!("Extracting icon for \"{}\"", filename);
-
     let ext = path.extension();
+
+    log::trace!(
+        "Extracting icon for \"{}\"",
+        file_name.to_string_lossy().to_string()
+    );
 
     // try get icons for URLs
     if ext == Some(OsStr::new("url")) {
         let icon = get_icon_from_url_file(path)?;
-        icon.save(&path_to_save)?;
-        return Ok(path_to_save);
-    }
-
-    // try get icons for UWP/Msix apps
-    if ext == Some(OsStr::new("exe")) {
-        if let Some(package) = trace_lock!(UWP_MANAGER, 10).get_from_path(path) {
-            if let Some(uwp_icon_path) = package.get_light_icon(&filename) {
-                log::debug!("Copying UWP icon from \"{}\"", uwp_icon_path.display());
-                std::fs::copy(uwp_icon_path, &path_to_save)?;
-                return Ok(path_to_save);
-            }
-        }
+        icon.save(&icon_path)?;
+        state.push_icon_to_defaults(path.to_string_lossy().as_ref(), &icon_filename)?;
+        return Ok(icon_path);
     }
 
     // try get the icon directly from the file
     if let Ok(icon) = get_icon_from_file(path) {
-        icon.save(&path_to_save)?;
-        return Ok(path_to_save);
+        icon.save(&icon_path)?;
+        state.push_icon_to_defaults(path.to_string_lossy().as_ref(), &icon_filename)?;
+        return Ok(icon_path);
     }
 
     // if the lnk don't have an icon, try to extract it from the target
     if ext == Some(OsStr::new("lnk")) {
         let target = WindowsApi::resolve_lnk_target(path)?;
-        return extract_and_save_icon_v2(&target);
+        return extract_and_save_icon_from_file(&target);
     }
 
     Err("Failed to extract icon".into())
+}
+
+/// returns the path of the icon extracted from the app with the specified user model id.
+pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf> {
+    let app_umid = app_umid.as_ref();
+
+    let state = FULL_STATE.load();
+    if let Some(icon) = state.get_icon_by_key(app_umid) {
+        return Ok(icon);
+    }
+
+    let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
+    let stream = app_info.DisplayInfo()?.GetLogo(windows::Foundation::Size {
+        Width: 256.0,
+        Height: 256.0,
+    })?;
+
+    let image = WindowsApi::stream_to_dynamic_image(stream.OpenReadAsync()?.get()?)?.into_rgba8();
+    let image = crop_transparent_borders(&image);
+
+    let relative_path = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
+    let image_path = state
+        .icon_packs_folder()
+        .join("system")
+        .join(&relative_path);
+    image.save(&image_path)?;
+    state.push_icon_to_defaults(app_umid, &relative_path)?;
+    Ok(image_path)
 }

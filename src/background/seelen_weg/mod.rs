@@ -6,7 +6,7 @@ pub mod icon_extractor;
 use std::{collections::HashMap, thread::JoinHandle};
 
 use getset::{Getters, MutGetters};
-use icon_extractor::extract_and_save_icon;
+use icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -15,7 +15,7 @@ use seelen_core::{
     state::{AppExtraFlag, HideMode, SeelenWegSide},
 };
 use serde::Serialize;
-use tauri::{path::BaseDirectory, Emitter, Listener, Manager, WebviewWindow, Wry};
+use tauri::{Emitter, Listener, WebviewWindow, Wry};
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
     Foundation::{HWND, RECT},
@@ -29,14 +29,13 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
-    modules::uwp::UWP_MANAGER,
     seelen::get_app_handle,
     seelen_bar::FancyToolbar,
     state::application::FULL_STATE,
     trace_lock,
     utils::{
         are_overlaped,
-        constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
+        constants::{Icons, NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
         sleep_millis,
     },
     windows_api::{window::Window, AppBarData, AppBarDataState, WindowEnumerator, WindowsApi},
@@ -92,22 +91,6 @@ impl SeelenWeg {
         Ok(())
     }
 
-    pub fn missing_icon() -> String {
-        get_app_handle()
-            .path()
-            .resolve("static/icons/missing.png", BaseDirectory::Resource)
-            .expect("Failed to resolve default icon path")
-            .to_string_lossy()
-            .to_uppercase()
-    }
-
-    pub fn extract_icon(exe_path: &str) -> Result<String> {
-        Ok(extract_and_save_icon(get_app_handle(), exe_path)?
-            .to_string_lossy()
-            .trim_start_matches("\\\\?\\")
-            .to_string())
-    }
-
     pub fn contains_app(hwnd: HWND) -> bool {
         let addr = hwnd.0 as isize;
         trace_lock!(OPEN_APPS)
@@ -157,19 +140,21 @@ impl SeelenWeg {
             creator_hwnd: creator.hwnd().0 as isize,
         };
 
-        app.icon_path = Self::extract_icon(&app.exe).unwrap_or_else(|_| Self::missing_icon());
+        if let Ok(umid) = window.process().app_user_model_id() {
+            println!("??????????????? => {:?}", umid);
 
-        let exe = path
-            .file_name()
-            .unwrap_or_default()
-            .to_string_lossy()
-            .to_string();
-        app.execution_path = match trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
-            Some(package) => package
-                .get_shell_path(&exe)
-                .unwrap_or_else(|| app.exe.clone()),
-            None => app.exe.clone(),
-        };
+            app.execution_path = format!("shell:AppsFolder\\{umid}");
+            app.icon_path = extract_and_save_icon_umid(&umid)
+                .unwrap_or_else(|_| Icons::missing_app())
+                .to_string_lossy()
+                .to_string();
+        } else {
+            app.execution_path = app.exe.clone();
+            app.icon_path = extract_and_save_icon_from_file(path)
+                .unwrap_or_else(|_| Icons::missing_app())
+                .to_string_lossy()
+                .to_string();
+        }
 
         get_app_handle()
             .emit(SeelenEvent::WegAddOpenApp, app.clone())

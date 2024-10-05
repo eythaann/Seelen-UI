@@ -59,4 +59,5 @@ impl SeelenEvent {
     pub const StateLayoutsChanged: &str = "layouts";
     pub const StateSettingsByAppChanged: &str = "settings-by-app";
     pub const StateHistoryChanged: &str = "history";
+    pub const StateIconPacksChanged: &str = "icon-packs";
 }

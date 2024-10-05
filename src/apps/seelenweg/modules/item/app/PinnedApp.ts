@@ -8,7 +8,7 @@ import { ExtendedPinnedAppWegItem } from '../../shared/store/domain';
 export class SwPinnedAppUtils {
   static async fromSaved(item: PinnedAppWegItem): Promise<ExtendedPinnedAppWegItem> {
     let icon_path =
-      (await invoke<string | null>('get_icon', { path: item.exe })) ||
+      (await invoke<string | null>('get_icon', { path: item.execution_path })) ||
       LAZY_CONSTANTS.MISSING_ICON_PATH;
 
     return {

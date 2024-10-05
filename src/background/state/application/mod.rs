@@ -1,5 +1,6 @@
 mod apps_config;
 mod events;
+mod icons;
 
 use arc_swap::ArcSwap;
 use getset::Getters;
@@ -11,8 +12,7 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::state::{VirtualDesktopStrategy, WegItems, WindowManagerLayout};
-use serde::Serialize;
+use seelen_core::state::{IconPack, VirtualDesktopStrategy, WegItems, WindowManagerLayout};
 use std::{
     collections::{HashMap, VecDeque},
     fs::{File, OpenOptions},
@@ -58,19 +58,17 @@ static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
 
 pub type LauncherHistory = HashMap<String, Vec<String>>;
 
-#[derive(Getters, Debug, Clone, Serialize)]
+#[derive(Getters, Debug, Clone)]
 #[getset(get = "pub")]
 pub struct FullState {
-    #[serde(skip)]
     data_dir: PathBuf,
-    #[serde(skip)]
     resources_dir: PathBuf,
-    #[serde(skip)]
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
     pub settings: Settings,
     pub settings_by_app: VecDeque<AppConfig>,
     pub themes: HashMap<String, Theme>,
+    pub icon_packs: Arc<Mutex<HashMap<String, IconPack>>>,
     pub placeholders: HashMap<String, Placeholder>,
     pub layouts: HashMap<String, WindowManagerLayout>,
     pub weg_items: WegItems,
@@ -90,6 +88,7 @@ impl FullState {
             settings: Settings::default(),
             settings_by_app: VecDeque::new(),
             themes: HashMap::new(),
+            icon_packs: Arc::new(Mutex::new(HashMap::new())),
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
             weg_items: WegItems::default(),
@@ -130,6 +129,13 @@ impl FullState {
 
         let user_app_configs = self.data_dir.join("applications.yml");
         let bundled_app_configs = self.resources_dir.join("static/apps_templates");
+
+        if event.paths.contains(&self.icon_packs_folder()) {
+            log::info!("Icons Packs changed");
+            self.load_icons_packs()?;
+            self.store_cloned();
+            self.emit_icon_packs()?;
+        }
 
         if event.paths.contains(&WEG_ITEMS_PATH) {
             log::info!("Weg Items changed");
@@ -206,7 +212,7 @@ impl FullState {
             None,
             |result: DebounceEventResult| match result {
                 Ok(events) => {
-                    log::info!("Seelen UI File Watcher events: {:?}", events);
+                    // log::info!("Seelen UI File Watcher events: {:?}", events);
                     if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
                         let mut state = FULL_STATE.load().cloned();
                         for event in events {
@@ -228,6 +234,7 @@ impl FullState {
             self.data_dir.join("history"),
             // resources
             self.data_dir.join("themes"),
+            self.icon_packs_folder(),
             self.data_dir.join("placeholders"),
             self.data_dir.join("layouts"),
             self.resources_dir.join("static/themes"),
@@ -489,6 +496,7 @@ impl FullState {
         self.load_settings()?;
         self.load_weg_items()?;
         self.load_themes()?;
+        self.load_icons_packs()?;
         self.load_placeholders()?;
         self.load_layouts()?;
         self.load_settings_by_app()?;

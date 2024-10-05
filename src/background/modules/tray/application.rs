@@ -19,8 +19,7 @@ use winreg::{
 use crate::{
     error_handler::Result,
     pcstr,
-    seelen::get_app_handle,
-    seelen_weg::icon_extractor::extract_and_save_icon,
+    seelen_weg::icon_extractor::extract_and_save_icon_from_file,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
     windows_api::{AppBarData, AppBarDataState, Com, WindowsApi},
 };
@@ -174,7 +173,7 @@ impl TrayIcon {
         }
 
         let path = self.registry.as_ref().unwrap().executable_path.clone();
-        let icon = extract_and_save_icon(get_app_handle(), &path)?;
+        let icon = extract_and_save_icon_from_file(&path)?;
         Ok(icon
             .to_string_lossy()
             .trim_start_matches("\\\\?\\")

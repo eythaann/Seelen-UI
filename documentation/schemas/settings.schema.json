@@ -231,6 +231,16 @@
         }
       ]
     },
+    "iconPacks": {
+      "description": "list of selected icon packs",
+      "default": [
+        "system"
+      ],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "language": {
       "description": "language to use, if null the system locale is used",
       "default": "en",
