@@ -1,11 +1,14 @@
 use std::path::PathBuf;
 
-use windows::Win32::{
-    Foundation::HANDLE,
-    Storage::Packaging::Appx::{
-        GetApplicationUserModelId, GetPackageFamilyName, GetPackageFullName,
+use windows::{
+    ApplicationModel::AppInfo,
+    Win32::{
+        Foundation::HANDLE,
+        Storage::Packaging::Appx::{
+            GetApplicationUserModelId, GetPackageFamilyName, GetPackageFullName,
+        },
+        System::Threading::PROCESS_QUERY_INFORMATION,
     },
-    System::Threading::PROCESS_QUERY_INFORMATION,
 };
 
 use crate::error_handler::Result;
@@ -66,7 +69,8 @@ impl Process {
         })?
     }
 
-    pub fn app_user_model_id(&self) -> Result<String> {
+    /// package app user model id
+    pub fn package_app_user_model_id(&self) -> Result<String> {
         self.with_handle(|hprocess| {
             let mut len = 1024_u32;
             let mut id = WindowsString::new_to_fill(len as usize);
@@ -75,7 +79,12 @@ impl Process {
         })?
     }
 
-    pub fn exe_path(&self) -> Result<PathBuf> {
+    pub fn package_app_info(&self) -> Result<AppInfo> {
+        let app_info = AppInfo::GetFromAppUserModelId(&self.package_app_user_model_id()?.into())?;
+        Ok(app_info)
+    }
+
+    pub fn program_path(&self) -> Result<PathBuf> {
         let path_string = WindowsApi::exe_path_by_process(self.0)?;
         if path_string.is_empty() {
             return Err("exe path is empty".into());

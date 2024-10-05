@@ -170,11 +170,11 @@ function ItemByType(item: SwItem) {
   }
 
   if (item.type === SwItemType.PinnedApp && item.exe) {
-    return <UserApplication key={item.exe} item={item} />;
+    return <UserApplication key={item.execution_path} item={item} />;
   }
 
   if (item.type === SwItemType.TemporalApp && item.exe) {
-    return <UserApplication key={item.exe} item={item} />;
+    return <UserApplication key={item.execution_path} item={item} />;
   }
 
   if (item.type === SwItemType.Media) {

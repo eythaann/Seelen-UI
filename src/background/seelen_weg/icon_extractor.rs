@@ -269,14 +269,14 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
     if ext == Some(OsStr::new("url")) {
         let icon = get_icon_from_url_file(path)?;
         icon.save(&icon_path)?;
-        state.push_icon_to_defaults(path.to_string_lossy().as_ref(), &icon_filename)?;
+        state.push_and_save_system_icon(path.to_string_lossy().as_ref(), &icon_filename)?;
         return Ok(icon_path);
     }
 
     // try get the icon directly from the file
     if let Ok(icon) = get_icon_from_file(path) {
         icon.save(&icon_path)?;
-        state.push_icon_to_defaults(path.to_string_lossy().as_ref(), &icon_filename)?;
+        state.push_and_save_system_icon(path.to_string_lossy().as_ref(), &icon_filename)?;
         return Ok(icon_path);
     }
 
@@ -313,6 +313,6 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
         .join("system")
         .join(&relative_path);
     image.save(&image_path)?;
-    state.push_icon_to_defaults(app_umid, &relative_path)?;
+    state.push_and_save_system_icon(app_umid, &relative_path)?;
     Ok(image_path)
 }

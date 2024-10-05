@@ -62,26 +62,24 @@ impl WegItems {
                 }
                 WegItem::PinnedApp {
                     exe,
-                    execution_path: _,
+                    execution_path,
                 } => {
-                    let exe = exe.to_string_lossy().to_string();
-                    if !dict.contains(&exe) {
-                        dict.insert(exe.clone());
+                    if !dict.contains(execution_path) {
+                        dict.insert(execution_path.clone());
                         // remove apps that don't exist
-                        if PathBuf::from(&exe).exists() {
+                        if PathBuf::from(exe).exists() {
                             result.push(item);
                         }
                     }
                 }
                 WegItem::TemporalPin {
                     exe,
-                    execution_path: _,
+                    execution_path,
                 } => {
-                    let exe = exe.to_string_lossy().to_string();
-                    if !dict.contains(&exe) {
-                        dict.insert(exe.clone());
+                    if !dict.contains(execution_path) {
+                        dict.insert(execution_path.clone());
                         // remove apps that don't exist
-                        if PathBuf::from(&exe).exists() {
+                        if PathBuf::from(exe).exists() {
                             result.push(item);
                         }
                     }

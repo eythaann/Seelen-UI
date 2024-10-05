@@ -563,6 +563,7 @@ impl MediaManager {
         let playback_info = session.GetPlaybackInfo()?;
         let status = playback_info.PlaybackStatus()?;
 
+        // this is only needed when the player is not a uwp app like firefox player as example
         let owner = WindowEnumerator::new().find(|w| {
             if let Some(id) = w.app_user_model_id() {
                 return id == source_app_user_model_id;
@@ -579,11 +580,9 @@ impl MediaManager {
                     .app_display_name()
                     .unwrap_or_else(|_| "Unknown App".to_string()),
                 icon_path: w
-                    .process()
                     .app_user_model_id()
-                    .and_then(extract_and_save_icon_umid)
-                    .or_else(|_| w.exe().and_then(extract_and_save_icon_from_file))
-                    .ok(),
+                    .and_then(|umid| extract_and_save_icon_umid(&umid).ok())
+                    .or_else(|| w.exe().and_then(extract_and_save_icon_from_file).ok()),
             }),
             thumbnail: properties
                 .Thumbnail()

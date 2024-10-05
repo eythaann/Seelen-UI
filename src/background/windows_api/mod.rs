@@ -542,7 +542,7 @@ impl WindowsApi {
         })
     }
 
-    pub fn get_window_display_name(hwnd: HWND) -> Result<String> {
+    pub fn get_executable_display_name(hwnd: HWND) -> Result<String> {
         let shell_item = Self::get_shell_item(&Self::exe_path(hwnd)?)?;
         unsafe {
             match shell_item.GetString(&PKEY_FileDescription) {

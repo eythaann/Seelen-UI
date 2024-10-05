@@ -51,7 +51,7 @@ impl FullState {
         Ok(())
     }
 
-    pub fn push_icon_to_defaults(&self, key: &str, icon: &Path) -> Result<()> {
+    pub fn push_and_save_system_icon(&self, key: &str, icon: &Path) -> Result<()> {
         let mut icon_packs = trace_lock!(self.icon_packs);
         let default_icon_pack = icon_packs.get_mut("system").unwrap();
         default_icon_pack.apps.insert(
@@ -59,8 +59,12 @@ impl FullState {
             icon.to_owned(),
         );
 
-        let metadata_path = self.icon_packs_folder().join("system").join("metadata.yml");
-        std::fs::write(&metadata_path, serde_yaml::to_string(default_icon_pack)?)?;
+        let folder = self.icon_packs_folder().join("system");
+        std::fs::create_dir_all(&folder)?;
+        std::fs::write(
+            folder.join("metadata.yml"),
+            serde_yaml::to_string(default_icon_pack)?,
+        )?;
         Ok(())
     }
 
