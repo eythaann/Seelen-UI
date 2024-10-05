@@ -65,7 +65,7 @@
 }
 
 .ft-bar-item-clickable {
-  padding: 4px;
+  padding: 1px 4px;
   border-radius: 6px;
 
   &:hover {

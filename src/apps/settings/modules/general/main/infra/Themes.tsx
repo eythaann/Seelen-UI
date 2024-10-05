@@ -10,7 +10,9 @@ import cs from './index.module.css';
 
 export function Themes() {
   const themes = useSelector(RootSelectors.availableThemes);
-  const usingThemes = useSelector(RootSelectors.selectedThemes);
+  const usingThemes = useSelector(RootSelectors.selectedThemes).filter((x) =>
+    themes.some((y) => y.info.filename === x),
+  );
 
   const dispatch = useDispatch();
   const { t } = useTranslation();

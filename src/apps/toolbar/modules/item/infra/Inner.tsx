@@ -20,6 +20,7 @@ export interface InnerItemProps extends PropsWithChildren {
   module: ToolbarModule;
   extraVars?: Record<string, any>;
   active?: boolean;
+  clickable?: boolean;
   // needed for dropdown/popup wrappers
   onClick?: (e: React.MouseEvent) => void;
   onKeydown?: (e: React.KeyboardEvent) => void;
@@ -156,6 +157,7 @@ export function InnerItem(props: InnerItemProps) {
     onClick: onClickProp,
     onKeydown: onKeydownProp,
     children,
+    clickable = true,
     ...rest
   } = props;
   const { template, tooltip, onClick: oldOnClick, onClickV2, style, id, badge } = module;
@@ -214,7 +216,8 @@ export function InnerItem(props: InnerItemProps) {
         id={id}
         style={style}
         className={cx('ft-bar-item', {
-          'ft-bar-item-clickable': oldOnClick || onClickProp || onClickV2,
+          // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
+          'ft-bar-item-clickable': clickable || oldOnClick || onClickV2,
           'ft-bar-item-active': active,
         })}
         onKeyDown={onKeydownProp}

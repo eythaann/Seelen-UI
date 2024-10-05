@@ -31,6 +31,7 @@
 - allow change size of Window Manager Layouts via window resizing with the mouse.
 - allow close windows by middle clicking on dock items.
 - show icon of app in media players that are not uwp/msix.
+- show pwa apps like a separeted app from browser on dock.
 
 ### fix
 - missing icons for files with a different extension than `exe`.
