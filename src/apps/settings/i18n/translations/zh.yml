@@ -21,10 +21,10 @@ header:
     shortcuts: 快捷键
     developer: 开发者
     info: 信息
-    seelen_wall: 墙
+    seelen_wall: Seelen 壁纸
     seelen_rofi: 应用启动器
     virtual_desk: 虚拟桌面
-    home: 家
+    home: 首页
 start:
   title: 欢迎！
   message: >-
@@ -200,9 +200,9 @@ shortcuts:
   reset: 重置为默认值
 vd:
   strategy:
-    native: 本国的
+    native: 系统
     label: 虚拟桌面策略
-    seelen: 塞伦
+    seelen: Seelen
   disabled_windows_version: 本机虚拟桌面策略不适合您的Windows版本。
 save_and_restart: 保存和重新启动
 beta_channel:
@@ -216,9 +216,9 @@ wall:
   enable: 启用S​​eelen Wall
 app_launcher:
   runners:
-    cmd: 命令
-    explorer: 跑步
-    label: 跑步者
+    cmd: 命令行
+    explorer: 文件资源管理器
+    label: 设置
   monitor: 显示显示
   enable: 启用应用启动器
 insert: 插入
