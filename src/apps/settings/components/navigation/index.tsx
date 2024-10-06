@@ -1,5 +1,5 @@
 import { Tooltip } from 'antd';
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../../modules/shared/utils/infra';
@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../modules/shared/utils/infra
 import { RootActions } from '../../modules/shared/store/app/reducer';
 import { RootSelectors } from '../../modules/shared/store/app/selectors';
 import { cx } from '../../modules/shared/utils/app';
+import { Icon } from 'src/apps/shared/components/Icon';
 
 import { Route, RouteIcons } from './routes';
 import cs from './index.module.css';
@@ -34,33 +35,31 @@ const Item = ({ route, isActive, collapsed }: ItemProps) => {
           [cs.active!]: isActive,
         })}
       >
-        <span className={cs.icon}>{RouteIcons[route]}</span>
+        {RouteIcons[route]}
         <span className={cs.label}>{label}</span>
       </div>
     </Tooltip>
   );
 };
 
+const general = [
+  Route.HOME,
+  Route.GENERAL,
+  Route.SEELEN_BAR,
+  Route.SEELEN_WM,
+  Route.SEELEN_WEG,
+  Route.SEELEN_WALL,
+  Route.SEELEN_ROFI,
+  Route.SHORTCUTS,
+];
+const advanced = [Route.MONITORS, Route.SPECIFIC_APPS];
+const developer = [Route.DEVELOPER];
+
 export const Navigation = memo(() => {
+  const [collapsed, setCollapsed] = useState(false);
   let current = useAppSelector(RootSelectors.route);
   let devTools = useAppSelector(RootSelectors.devTools);
 
-  let general = [
-    Route.HOME,
-    Route.GENERAL,
-    Route.SEELEN_BAR,
-    Route.SEELEN_WM,
-    Route.SEELEN_WEG,
-    Route.SEELEN_WALL,
-    Route.SEELEN_ROFI,
-    Route.SHORTCUTS,
-  ];
-
-  let advanced = [Route.MONITORS, Route.SPECIFIC_APPS];
-
-  let developer = [Route.DEVELOPER];
-
-  const collapsed = [Route.HOME, Route.SPECIFIC_APPS].includes(current);
   const Mapper = (route: Route) => (
     <Item key={route} route={route} isActive={current === route} collapsed={collapsed} />
   );
@@ -68,10 +67,19 @@ export const Navigation = memo(() => {
   return (
     <div
       className={cx(cs.navigation, {
-        [cs.tableView!]: collapsed,
+        [cs.collapsed!]: collapsed,
       })}
     >
-      <div className={cs.navigationMain}>
+      <div className={cs.header}>
+        <img src="./logo.svg" onClick={() => setCollapsed(!collapsed)} />
+        <h1>Seelen UI</h1>
+        <Icon
+          className={cs.chevron}
+          iconName="FaChevronLeft"
+          onClick={() => setCollapsed(!collapsed)}
+        />
+      </div>
+      <div className={cs.body}>
         <div className={cs.group}>{general.map(Mapper)}</div>
         <div className={cs.separator} />
         <div className={cs.group}>{advanced.map(Mapper)}</div>
@@ -82,7 +90,14 @@ export const Navigation = memo(() => {
           </>
         )}
       </div>
-      <Item key={Route.INFO} route={Route.INFO} isActive={current === Route.INFO} collapsed={collapsed} />
+      <div className={cs.footer}>
+        <Item
+          key={Route.INFO}
+          route={Route.INFO}
+          isActive={current === Route.INFO}
+          collapsed={collapsed}
+        />
+      </div>
     </div>
   );
 });
