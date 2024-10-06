@@ -3,7 +3,7 @@
   background-color: var(--color-persist-gray-900);
   color: var(--color-persist-gray-50);
   width: 180px;
-  padding: 10px;
+  padding: 10px 10px 10px 6px;
   transition: width 300ms ease, padding 300ms ease;
 
   display: grid;
@@ -12,8 +12,8 @@
   gap: 10px;
 
   &.tableView {
-    padding: 10px 6px;
-    width: 40px;
+    padding: 10px 6px 10px 4px;
+    width: 44px;
 
     .item {
       .label {
@@ -28,17 +28,27 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    direction: rtl;
+    padding-left: 2px;
+
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
   }
 
   .group {
     display: flex;
     flex-direction: column;
     gap: 6px;
+    direction: ltr;
   }
 
   .separator {
     width: 100%;
     height: 1px;
+    min-height: 1px;
     background-color: var(--color-persist-gray-700);
   }
 
@@ -51,7 +61,7 @@
     font-size: 0.8rem;
     font-weight: 600;
     border-radius: var(--config-border-radius);
-    transition: background-color 300ms ease;
+    transition: background-color 200ms ease-out;
 
     &:hover {
       background-color: var(--config-accent-light-color);
@@ -75,13 +85,5 @@
       text-wrap: nowrap;
       transition: opacity 300ms ease;
     }
-  }
-}
-
-/* Maintains colors on dark mode */
-@media (prefers-color-scheme: dark) {
-  .navigation {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
   }
 }
