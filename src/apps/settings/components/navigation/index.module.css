@@ -3,26 +3,63 @@
   background-color: var(--color-persist-gray-900);
   color: var(--color-persist-gray-50);
   width: 180px;
-  padding: 10px 10px 10px 6px;
   transition: width 300ms ease, padding 300ms ease;
 
   display: grid;
-  grid-template-rows: 1fr min-content;
+  grid-template-rows: 50px 1fr min-content;
   grid-template-columns: 1fr;
-  gap: 10px;
 
-  &.tableView {
-    padding: 10px 6px 10px 4px;
-    width: 44px;
+  &.collapsed {
+    width: 50px;
+  }
 
-    .item {
-      .label {
-        opacity: 0;
+  .header {
+    margin: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--color-persist-gray-700);
+
+    > img {
+      width: 24px;
+      transition: padding 100ms linear;
+    }
+
+    > h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      flex: 1;
+      text-wrap: nowrap;
+    }
+
+    .chevron {
+      height: 20px;
+      width: 20px;
+      padding: 0 2px;
+      transition: transform 300ms linear;
+    }
+
+    .collapsed & {
+      gap: 0;
+      justify-content: space-between;
+
+      > h1 {
+        display: none;
+      }
+
+      > img {
+        padding-right: 4px;
+      }
+
+      .chevron {
+        width: 6px;
+        transform: rotate(180deg);
       }
     }
   }
 
-  .navigationMain {
+  .body {
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -32,10 +69,18 @@
     overflow-y: scroll;
     direction: rtl;
     padding-left: 2px;
+    padding: 10px 10px 10px 8px;
+    margin-left: 2px;
 
     &::-webkit-scrollbar {
       width: 2px;
     }
+  }
+
+  .footer {
+    margin: 0 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--color-persist-gray-700);
   }
 
   .group {
@@ -53,13 +98,13 @@
   }
 
   .item {
-    padding: 3px 5px;
+    height: 30px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    font-size: 0.8rem;
-    font-weight: 600;
+    padding: 0 5px;
     border-radius: var(--config-border-radius);
     transition: background-color 200ms ease-out;
 
@@ -71,19 +116,20 @@
       background-color: var(--config-accent-color);
     }
 
-    .icon {
-      width: 18px;
-      min-width: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    :global(.slu-icon) {
+      width: 20px;
+      min-width: 20px;
     }
 
     .label {
       margin-left: 5px;
-      opacity: 1;
       text-wrap: nowrap;
-      transition: opacity 300ms ease;
+      font-size: 0.8rem;
+      font-weight: 600;
+
+      .collapsed & {
+        display: none;
+      }
     }
   }
 }

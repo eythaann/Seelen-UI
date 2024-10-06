@@ -88,7 +88,9 @@ async function main() {
   });
 
   appFolders.forEach((folder) => {
-    fs.cpSync(`src/apps/${folder}/index.html`, `dist/${folder}/index.html`);
+    let source = `src/apps/${folder}/public`;
+    let target = `dist/${folder}`;
+    fs.cpSync(source, target, { recursive: true });
   });
   console.timeEnd('Build UI');
 

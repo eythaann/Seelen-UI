@@ -63,7 +63,7 @@ export const Header = () => {
   const saveLabel = shouldRestart ? t('save_and_restart') : t('save');
   return (
     <div className={cs.Header} data-tauri-drag-region>
-      <div>
+      <div className={cs.title}>
         {t(`header.labels.${route}`)}
         {RouteExtraInfo[route] && (
           <Tooltip title={RouteExtraInfo[route]}>

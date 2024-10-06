@@ -1,0 +1,21 @@
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 10px 10px;
+}
+
+.miniStore {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+  gap: 10px;
+
+  .product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px;
+    background-color: var(--color-gray-50);
+    border-radius: 8px;
+  }
+}
