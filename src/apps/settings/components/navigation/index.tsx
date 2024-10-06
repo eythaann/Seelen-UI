@@ -1,3 +1,4 @@
+import { Tooltip } from 'antd';
 import { memo, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -13,9 +14,10 @@ import cs from './index.module.css';
 interface ItemProps {
   route: Route;
   isActive: boolean;
+  collapsed: boolean;
 }
 
-const Item = ({ route, isActive }: ItemProps) => {
+const Item = ({ route, isActive, collapsed }: ItemProps) => {
   const { t } = useTranslation();
 
   let dispatch = useAppDispatch();
@@ -23,16 +25,19 @@ const Item = ({ route, isActive }: ItemProps) => {
     dispatch(RootActions.setRoute(route));
   }, []);
 
+  let label = t(`header.labels.${route}`);
   return (
-    <div
-      onClick={onclick.bind(route)}
-      className={cx(cs.item, {
-        [cs.active!]: isActive,
-      })}
-    >
-      <span className={cs.icon}>{RouteIcons[route]}</span>
-      <span className={cs.label}>{t(`header.labels.${route}`)}</span>
-    </div>
+    <Tooltip placement="right" title={collapsed ? label : null}>
+      <div
+        onClick={onclick.bind(route)}
+        className={cx(cs.item, {
+          [cs.active!]: isActive,
+        })}
+      >
+        <span className={cs.icon}>{RouteIcons[route]}</span>
+        <span className={cs.label}>{label}</span>
+      </div>
+    </Tooltip>
   );
 };
 
@@ -55,12 +60,15 @@ export const Navigation = memo(() => {
 
   let developer = [Route.DEVELOPER];
 
-  const Mapper = (route: Route) => <Item key={route} route={route} isActive={current === route} />;
+  const collapsed = [Route.HOME, Route.SPECIFIC_APPS].includes(current);
+  const Mapper = (route: Route) => (
+    <Item key={route} route={route} isActive={current === route} collapsed={collapsed} />
+  );
 
   return (
     <div
       className={cx(cs.navigation, {
-        [cs.tableView!]: [Route.HOME, Route.SPECIFIC_APPS].includes(current),
+        [cs.tableView!]: collapsed,
       })}
     >
       <div className={cs.navigationMain}>
@@ -74,7 +82,7 @@ export const Navigation = memo(() => {
           </>
         )}
       </div>
-      <Item key={Route.INFO} route={Route.INFO} isActive={current === Route.INFO} />
+      <Item key={Route.INFO} route={Route.INFO} isActive={current === Route.INFO} collapsed={collapsed} />
     </div>
   );
 });
