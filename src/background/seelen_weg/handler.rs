@@ -10,8 +10,8 @@ use crate::{
     state::application::FULL_STATE, windows_api::WindowsApi,
 };
 use windows::Win32::{
-    Foundation::{HWND, LPARAM, WPARAM},
-    UI::WindowsAndMessaging::{PostMessageW, SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
+    Foundation::HWND,
+    UI::WindowsAndMessaging::{SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
 };
 
 use super::SeelenWeg;
@@ -50,8 +50,7 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn weg_close_app(hwnd: isize) -> Result<()> {
-    unsafe { PostMessageW(HWND(hwnd as _), WM_CLOSE, WPARAM(0), LPARAM(0))? };
-    Ok(())
+    WindowsApi::post_message(HWND(hwnd as _), WM_CLOSE, 0, 0)
 }
 
 #[tauri::command(async)]

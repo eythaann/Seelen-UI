@@ -42,7 +42,7 @@ pub fn get_sub_tree(
     Ok(elements)
 }
 
-fn get_tray_overflow_handle() -> Option<HWND> {
+pub fn get_tray_overflow_handle() -> Option<HWND> {
     unsafe {
         if is_windows_10() {
             FindWindowA(pcstr!("NotifyIconOverFlowWindow"), None).ok()
@@ -96,8 +96,8 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
         let element_array = element.FindAll(TreeScope_Subtree, &condition)?;
         for index in 0..element_array.Length().unwrap_or(0) {
             let element = element_array.GetElement(index)?;
-            if element.CurrentName()? == "Show Hidden Icons"
-                && element.CurrentAutomationId()? == "SystemTrayIcon"
+            if element.CurrentAutomationId()? == "SystemTrayIcon"
+                && element.CurrentClassName()? == "SystemTray.NormalButton"
             {
                 let invoker = element
                     .GetCurrentPatternAs::<IUIAutomationInvokePattern>(UIA_InvokePatternId)?;
@@ -105,15 +105,17 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
                 invoker.Invoke()?;
                 sleep_millis(10);
                 invoker.Invoke()?;
-
-                tray_bar.set_state(tray_bar_state);
-                return Ok(());
+                break;
             }
         }
 
         tray_bar.set_state(tray_bar_state);
-        Err("Failed to force tray overflow creation".into())
-    })
+        Ok(())
+    })?;
+    if get_tray_overflow_content_handle().is_none() {
+        return Err("Failed to create tray overflow".into());
+    }
+    Ok(())
 }
 
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
