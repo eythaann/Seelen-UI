@@ -40,7 +40,7 @@ export function WallSettings() {
     const files = await dialog.open({
       multiple: true,
       title: t('wall.select'),
-      filters: [{ name: 'Media', extensions: ['mp4', 'mkv', 'wav', 'png', 'jpg', 'jpeg', 'gif'] }],
+      filters: [{ name: 'Media', extensions: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'mp4', 'mkv', 'wav'] }],
     });
 
     if (!files) {
