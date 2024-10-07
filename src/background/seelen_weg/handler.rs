@@ -23,6 +23,11 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
     for addr in handles {
         let hwnd: HWND = HWND(addr as _);
 
+        if hwnd.is_invalid() || !WindowsApi::is_window_visible(hwnd) {
+            SeelenWeg::remove_hwnd(hwnd);
+            continue;
+        }
+
         if WindowsApi::is_iconic(hwnd) {
             continue;
         }
@@ -50,7 +55,13 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn weg_close_app(hwnd: isize) -> Result<()> {
-    WindowsApi::post_message(HWND(hwnd as _), WM_CLOSE, 0, 0)
+    let hwnd = HWND(hwnd as _);
+    if !WindowsApi::is_window_visible(hwnd) {
+        SeelenWeg::remove_hwnd(hwnd);
+    } else {
+        WindowsApi::post_message(hwnd, WM_CLOSE, 0, 0)?;
+    }
+    Ok(())
 }
 
 #[tauri::command(async)]
@@ -58,7 +69,8 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
     let hwnd = HWND(hwnd as _);
 
     // If the window is not open, open it
-    if hwnd.is_invalid() || !WindowsApi::is_window(hwnd) {
+    if hwnd.is_invalid() || !WindowsApi::is_window_visible(hwnd) {
+        SeelenWeg::remove_hwnd(hwnd);
         get_app_handle()
             .shell()
             .command("explorer")
