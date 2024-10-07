@@ -23,7 +23,7 @@
 
     > img {
       width: 24px;
-      transition: padding 100ms linear;
+      transition: width 100ms linear;
     }
 
     > h1 {
@@ -36,7 +36,7 @@
     .chevron {
       height: 20px;
       width: 20px;
-      padding: 0 2px;
+      padding: 5px;
       transition: transform 300ms linear;
     }
 
@@ -49,11 +49,12 @@
       }
 
       > img {
-        padding-right: 4px;
+        width: 20px;
       }
 
       .chevron {
-        width: 6px;
+        width: 10px;
+        padding: 5px 0;
         transform: rotate(180deg);
       }
     }

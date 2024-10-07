@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 export function Wallpaper({ path }: { path: string }) {
   let wallpaper: ReactNode = null;
-  if (['.png', '.jpg', '.jpeg', '.gif'].some((ext) => path.endsWith(ext))) {
+  if (['.png', '.jpg', '.jpeg', '.webp', '.gif'].some((ext) => path.endsWith(ext))) {
     wallpaper = (
       <img
         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
