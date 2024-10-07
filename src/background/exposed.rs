@@ -1,10 +1,11 @@
 use std::collections::HashMap;
 use std::path::PathBuf;
 
-use tauri::{Builder, Wry};
+use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
+use crate::hook::HookManager;
 use crate::log_error;
 use crate::modules::input::Keyboard;
 use crate::modules::virtual_desk::get_vd_manager;
@@ -18,6 +19,8 @@ use crate::seelen_wm_v2::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
 use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
+use crate::windows_api::WindowsApi;
+use crate::winevent::{SyntheticFullscreenData, WinEvent};
 
 use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
@@ -111,7 +114,7 @@ fn send_keys(keys: String) -> Result<()> {
     Keyboard::new().send_keys(&keys)
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 fn get_icon(path: String) -> Option<PathBuf> {
     if path.starts_with("shell:AppsFolder") {
         let umid = path.replace("shell:AppsFolder\\", "");
@@ -123,6 +126,19 @@ fn get_icon(path: String) -> Option<PathBuf> {
 #[tauri::command(async)]
 fn is_virtual_desktop_supported() -> bool {
     virtual_desktop_supported()
+}
+
+#[tauri::command(async)]
+fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Result<()> {
+    let handle = webview.hwnd()?;
+    let monitor = WindowsApi::monitor_from_window(handle);
+    let event = if value {
+        WinEvent::SyntheticFullscreenStart(SyntheticFullscreenData { handle, monitor })
+    } else {
+        WinEvent::SyntheticFullscreenEnd(SyntheticFullscreenData { handle, monitor })
+    };
+    HookManager::emit_event(event, handle);
+    Ok(())
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
@@ -140,6 +156,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         send_keys,
         get_icon,
         get_system_colors,
+        simulate_fullscreen,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,

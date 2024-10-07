@@ -8,6 +8,7 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 const initialState: RootState = {
   settings: new SeelenWallSettings(),
   colors: UIColors.default(),
+  stop: false,
 };
 
 export const RootSlice = createSlice({

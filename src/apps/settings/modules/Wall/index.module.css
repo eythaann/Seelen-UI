@@ -12,6 +12,18 @@
     border-radius: 8px;
     grid-template-columns: 100px 1fr 40px;
     background-color: var(--color-white);
+
+    .image {
+      border-radius: 8px;
+      height: 60px;
+    }
+
+    .video {
+      height: 60px;
+      padding: 0 40px;
+      border-radius: 8px;
+      background-color: var(--color-gray-200);
+    }
   }
 }
 

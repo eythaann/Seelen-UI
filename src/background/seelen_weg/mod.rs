@@ -141,7 +141,6 @@ impl SeelenWeg {
         };
 
         if let Some(umid) = creator.app_user_model_id() {
-            println!("UMID: {umid}");
             if umid.contains("!") {
                 app.execution_path = format!("shell:AppsFolder\\{umid}");
                 app.icon_path =
