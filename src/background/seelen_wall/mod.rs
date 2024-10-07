@@ -1,3 +1,5 @@
+mod hook;
+
 use tauri::WebviewWindow;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT, WPARAM},

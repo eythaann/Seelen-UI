@@ -49,6 +49,8 @@ export enum SeelenEvent {
   WMSetOverlayVisibility = 'wm-set-overlay-visibility',
   WMSetActiveWindow = 'wm-set-active-window',
 
+  WallStop = 'wall-stop',
+
   StateSettingsChanged = 'settings-changed',
   StateWegItemsChanged = 'weg-items',
   StateThemesChanged = 'themes',

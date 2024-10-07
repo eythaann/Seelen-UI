@@ -121,7 +121,7 @@ impl HookManager {
         );
     }
 
-    fn event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
+    fn _event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
         Self::log_event(event, origin);
 
         if self.should_skip(event, origin) {
@@ -155,29 +155,68 @@ impl HookManager {
             ));
         }
 
+        let log_error_event = move |name: &str, result: Result<()>| {
+            if let Err(err) = result {
+                log::error!(
+                    "{} => Event: {:?} Error: {:?} Window: {:?}",
+                    name,
+                    event,
+                    err,
+                    window
+                );
+            }
+        };
+
         if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
-            log_error!(vd.on_win_event(event, &window));
+            log_error_event("Virtual Desk", vd.on_win_event(event, &window));
         }
 
-        if seelen.state().is_weg_enabled() {
+        let app_state = seelen.state();
+        if app_state.is_weg_enabled() {
             std::thread::spawn(move || {
-                log_error!(SeelenWeg::process_global_win_event(event, &window));
+                log_error_event(
+                    "Weg Global",
+                    SeelenWeg::process_global_win_event(event, &window),
+                );
             });
         }
 
-        if seelen.state().is_window_manager_enabled() {
+        if app_state.is_window_manager_enabled() {
             std::thread::spawn(move || {
-                log_error!(WindowManagerV2::process_win_event(event, &window));
+                log_error_event(
+                    "WM Global",
+                    WindowManagerV2::process_win_event(event, &window),
+                );
             });
+        }
+
+        if let Some(wall) = seelen.wall_mut() {
+            log_error_event("Wall Instance", wall.process_win_event(event, &window));
         }
 
         for monitor in seelen.monitors_mut() {
             if let Some(toolbar) = monitor.toolbar_mut() {
-                log_error!(toolbar.process_win_event(event, origin));
+                log_error_event("Toolbar Instance", toolbar.process_win_event(event, origin));
             }
 
             if let Some(weg) = monitor.weg_mut() {
-                log_error!(weg.process_individual_win_event(event, origin));
+                log_error_event(
+                    "Weg Instance",
+                    weg.process_individual_win_event(event, origin),
+                );
+            }
+        }
+    }
+
+    pub fn emit_event(event: WinEvent, origin: HWND) {
+        // Follows lock order: CLI -> DATA -> EVENT to avoid deadlocks
+        let mut seelen = trace_lock!(SEELEN);
+        let mut hook_manager = trace_lock!(HOOK_MANAGER);
+        hook_manager._event(event, origin, &mut seelen);
+
+        if let Ok(synthetics) = event.get_synthetics(origin) {
+            for synthetic_event in synthetics {
+                hook_manager._event(synthetic_event, origin, &mut seelen)
             }
         }
     }
@@ -289,21 +328,10 @@ pub extern "system" fn win_event_hook(
     }
 
     let event = WinEvent::from(event);
-
     if event == WinEvent::ObjectLocationChange && !location_delay_completed(origin) {
         return;
     }
-
-    // Follows lock order: CLI -> DATA -> EVENT to avoid deadlocks
-    let mut seelen = trace_lock!(SEELEN);
-    let mut hook_manager = trace_lock!(HOOK_MANAGER);
-    hook_manager.event(event, origin, &mut seelen);
-
-    if let Ok(synthetics) = event.get_synthetics(origin) {
-        for synthetic_event in synthetics {
-            hook_manager.event(synthetic_event, origin, &mut seelen)
-        }
-    }
+    HookManager::emit_event(event, origin)
 }
 
 pub fn register_win_hook() -> Result<()> {

@@ -40,7 +40,9 @@ export function WallSettings() {
     const files = await dialog.open({
       multiple: true,
       title: t('wall.select'),
-      filters: [{ name: 'Media', extensions: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'mp4', 'mkv', 'wav'] }],
+      filters: [
+        { name: 'Media', extensions: ['jpg', 'jpeg', 'png', 'webp', 'gif', 'mp4', 'mkv', 'wav'] },
+      ],
     });
 
     if (!files) {
@@ -82,15 +84,25 @@ export function WallSettings() {
             className={cs.backgroundList}
             axis="y"
           >
-            {backgrounds.map((bg, idx) => (
-              <Reorder.Item key={bg.id} value={bg} className={cs.background}>
-                <img src={convertFileSrc(bg.path)} />
-                <b>{bg.path.split('\\').pop()}</b>
-                <Button type="primary" onClick={() => onRemoveBackground(idx)}>
-                  <Icon iconName="IoTrash" size={14} />
-                </Button>
-              </Reorder.Item>
-            ))}
+            {backgrounds.map((bg, idx) => {
+              let is_video = ['mp4', 'mkv', 'wav'].some((ext) => bg.path.endsWith(ext));
+
+              return (
+                <Reorder.Item key={bg.id} value={bg} className={cs.background}>
+                  {is_video ? (
+                    <div className={cs.video}>
+                      <Icon iconName="FaVideo" />
+                    </div>
+                  ) : (
+                    <img className={cs.image} src={convertFileSrc(bg.path)} />
+                  )}
+                  <b>{bg.path.split('\\').pop()}</b>
+                  <Button type="primary" onClick={() => onRemoveBackground(idx)}>
+                    <Icon iconName="IoTrash" size={14} />
+                  </Button>
+                </Reorder.Item>
+              );
+            })}
           </Reorder.Group>
         )}
         <SettingsOption>

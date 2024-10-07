@@ -52,6 +52,8 @@ impl SeelenEvent {
     pub const WMSetOverlayVisibility: &str = "wm-set-overlay-visibility";
     pub const WMSetActiveWindow: &str = "wm-set-active-window";
 
+    pub const WallStop: &str = "wall-stop";
+
     pub const StateSettingsChanged: &str = "settings-changed";
     pub const StateWegItemsChanged: &str = "weg-items";
     pub const StateThemesChanged: &str = "themes";

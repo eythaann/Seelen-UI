@@ -12,6 +12,7 @@ export enum SeelenCommand {
   SendKeys = 'send_keys',
   GetIcon = 'get_icon',
   GetSystemColors = 'get_system_colors',
+  SimulateFullscreen = 'simulate_fullscreen',
 
   // Seelen Settings
   SetAutoStart = 'set_auto_start',
