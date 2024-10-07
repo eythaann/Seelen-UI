@@ -38,7 +38,7 @@ use crate::{
     seelen_wm_v2::instance::WindowManagerV2,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
-    utils::{constants::IGNORE_FOCUS, spawn_named_thread},
+    utils::spawn_named_thread,
     windows_api::{window::Window, WindowsApi},
     winevent::WinEvent,
 };
@@ -84,6 +84,10 @@ impl HookManager {
     }
 
     fn should_skip(&self, event: WinEvent, hwnd: HWND) -> bool {
+        // skip foreground on invisible windows
+        if event == WinEvent::SystemForeground && !WindowsApi::is_window_visible(hwnd) {
+            return true;
+        }
         if let Some(v) = self.skip.get(&(hwnd.0 as _)) {
             return v.contains(&event);
         }
@@ -136,12 +140,6 @@ impl HookManager {
 
         if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
             let title = window.title();
-            if IGNORE_FOCUS.contains(&title) {
-                if LOG_WIN_EVENTS.load(Ordering::Relaxed) {
-                    log::trace!("Skipping WinEvent::{:?}", event);
-                }
-                return;
-            }
             log_error!(get_app_handle().emit(
                 SeelenEvent::GlobalFocusChanged,
                 FocusedApp {
