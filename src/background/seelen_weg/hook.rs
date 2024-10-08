@@ -58,7 +58,7 @@ impl SeelenWeg {
                 self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {
-                if window.title() == Self::TITLE {
+                if window.hwnd() == self.window.hwnd()? {
                     self.set_position(window.monitor().raw())?;
                 }
                 if origin == WindowsApi::get_foreground_window() {
