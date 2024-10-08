@@ -28,6 +28,7 @@ define_app_errors!(
     Windows(windows::core::Error);
     SerdeJson(serde_json::Error);
     SerdeYaml(serde_yaml::Error);
+    SerdeXml(quick_xml::de::DeError);
     Utf8(std::string::FromUtf8Error);
     Utf16(std::string::FromUtf16Error);
     CrossbeamRecv(crossbeam_channel::RecvError);
