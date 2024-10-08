@@ -2,7 +2,6 @@ use color_eyre::eyre::eyre;
 use image::{GenericImageView, ImageBuffer, RgbaImage};
 use itertools::Itertools;
 use windows::core::PCWSTR;
-use windows::ApplicationModel::AppInfo;
 use windows::Win32::{
     Graphics::Gdi::{
         CreateCompatibleDC, DeleteDC, DeleteObject, GetDIBits, SelectObject, BITMAPINFO,
@@ -25,6 +24,7 @@ use std::os::windows::ffi::OsStrExt;
 use std::path::{Path, PathBuf};
 
 use crate::error_handler::Result;
+use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;
 use crate::windows_api::WindowsApi;
 
@@ -298,21 +298,14 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
         return Ok(icon);
     }
 
-    let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
-    let stream = app_info.DisplayInfo()?.GetLogo(windows::Foundation::Size {
-        Width: 256.0,
-        Height: 256.0,
-    })?;
-
-    let image = WindowsApi::stream_to_dynamic_image(stream.OpenReadAsync()?.get()?)?.into_rgba8();
-    let image = crop_transparent_borders(&image);
+    let app_icon = UwpManager::get_high_quality_icon_path(app_umid)?;
 
     let relative_path = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
     let image_path = state
         .icon_packs_folder()
         .join("system")
         .join(&relative_path);
-    image.save(&image_path)?;
+    std::fs::copy(app_icon, &image_path)?;
     state.push_and_save_system_icon(app_umid, &relative_path)?;
     Ok(image_path)
 }
