@@ -91,14 +91,19 @@ impl Seelen {
 
     fn add_wall(&mut self) -> Result<()> {
         if self.wall.is_none() {
-            self.wall = Some(SeelenWall::new()?)
+            let wall = SeelenWall::new()?;
+            wall.update_position()?;
+            self.wall = Some(wall)
         }
         Ok(())
     }
 
-    fn refresh_windows_positions(&self) -> Result<()> {
+    fn refresh_windows_positions(&mut self) -> Result<()> {
         if let Some(wall) = &self.wall {
             wall.update_position()?;
+        }
+        for monitor in &mut self.monitors {
+            monitor.ensure_positions()?;
         }
         Ok(())
     }
@@ -208,14 +213,14 @@ impl Seelen {
         }
         trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
 
-        self.refresh_windows_positions()?;
-        register_win_hook()?;
-
         tauri::async_runtime::spawn(async {
             trace_lock!(PERFORMANCE_HELPER).start("lazy setup");
             log_error!(Self::start_async().await);
             trace_lock!(PERFORMANCE_HELPER).end("lazy setup");
         });
+
+        self.refresh_windows_positions()?;
+        register_win_hook()?;
         Ok(())
     }
 

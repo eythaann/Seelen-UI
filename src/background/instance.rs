@@ -40,6 +40,7 @@ impl SeelenInstanceContainer {
             wm: None,
         };
         instance.load_settings(settings)?;
+        instance.ensure_positions()?;
         Ok(instance)
     }
 
@@ -101,8 +102,6 @@ impl SeelenInstanceContainer {
         } else {
             self.wm = None;
         }
-
-        self.ensure_positions()?;
         Ok(())
     }
 

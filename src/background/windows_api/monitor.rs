@@ -29,6 +29,10 @@ impl From<&Point> for Monitor {
 }
 
 impl Monitor {
+    pub fn raw(&self) -> HMONITOR {
+        self.0
+    }
+
     pub fn id(&self) -> Result<String> {
         WindowsApi::monitor_name(self.0)
     }
