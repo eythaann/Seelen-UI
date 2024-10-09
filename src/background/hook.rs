@@ -9,7 +9,6 @@ use std::{
     time::{Duration, Instant},
 };
 
-use color_eyre::owo_colors::OwoColorize;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -114,10 +113,21 @@ impl HookManager {
         if !LOG_WIN_EVENTS.load(Ordering::Relaxed) || event == WinEvent::ObjectLocationChange {
             return;
         }
+        let event_value = {
+            #[cfg(dev)]
+            {
+                use owo_colors::OwoColorize;
+                event.green()
+            }
+            #[cfg(not(dev))]
+            {
+                &event
+            }
+        };
 
         log::debug!(
             "{:?}({:?}) || {} || {} || {}",
-            event.green(),
+            event_value,
             origin.0,
             WindowsApi::exe(origin).unwrap_or_default(),
             WindowsApi::get_class(origin).unwrap_or_default(),
