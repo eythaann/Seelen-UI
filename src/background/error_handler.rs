@@ -2,29 +2,38 @@ macro_rules! define_app_errors {
     ($(
         $variant:ident($error_type:ty);
     )*) => {
-        #[derive(Debug)]
-        pub enum AppError {
-            $(
-                $variant($error_type),
-            )*
-        }
-
         $(
             impl From<$error_type> for AppError {
                 fn from(err: $error_type) -> Self {
-                    AppError::$variant(err)
+                    let backtrace = backtrace::Backtrace::new();
+                    AppError { msg: format!("{}({:?})", stringify!($variant), err), backtrace }
                 }
             }
         )*
     };
 }
 
+#[macro_export]
+macro_rules! log_error {
+    ($($result:expr),*) => {
+        $(
+            if let Err(err) = $result {
+                log::error!("{:?}", err);
+            }
+        )*
+    };
+}
+
+pub struct AppError {
+    msg: String,
+    backtrace: backtrace::Backtrace,
+}
+
 define_app_errors!(
-    Seelen(String);
+    Custom(String);
     Io(std::io::Error);
     Tauri(tauri::Error);
     TauriShell(tauri_plugin_shell::Error);
-    Eyre(color_eyre::eyre::Error);
     Windows(windows::core::Error);
     SerdeJson(serde_json::Error);
     SerdeYaml(serde_yaml::Error);
@@ -44,9 +53,52 @@ define_app_errors!(
     EvalExpr(evalexpr::EvalexprError);
 );
 
-impl From<&str> for AppError {
-    fn from(err: &str) -> Self {
-        AppError::Seelen(err.to_owned())
+impl std::fmt::Debug for AppError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "{}", self.msg)?;
+
+        let frames = self.backtrace.frames();
+        if !frames.is_empty() {
+            writeln!(f)?;
+        }
+
+        let mut index = 0;
+        for frame in frames {
+            for symbol in frame.symbols() {
+                let name = match symbol.name() {
+                    Some(name) => name.to_string(),
+                    None => continue,
+                };
+
+                // skip backtrace traces
+                if name.starts_with("backtrace") {
+                    continue;
+                }
+
+                // 2) skip trace of other modules/libraries specially tracing of tao and tauri libs
+                if !name.starts_with("seelen_ui") {
+                    index += 1;
+                    continue;
+                }
+
+                writeln!(f, "    {}: {}", index, name)?;
+                if let Some(file) = symbol.filename() {
+                    write!(f, "        at: \"{}", file.to_string_lossy())?;
+                    if let Some(line) = symbol.lineno() {
+                        write!(f, ":{}", line)?;
+                        if let Some(col) = symbol.colno() {
+                            write!(f, ":{}", col)?;
+                        }
+                    }
+                    writeln!(f, "\"")?;
+                } else {
+                    writeln!(f, "    at: <unknown>")?
+                }
+
+                index += 1;
+            }
+        }
+        Ok(())
     }
 }
 
@@ -56,16 +108,16 @@ impl std::fmt::Display for AppError {
     }
 }
 
+impl From<&str> for AppError {
+    fn from(err: &str) -> Self {
+        err.to_owned().into()
+    }
+}
+
 // needed to tauri::command macro (exposed functions to frontend)
 impl From<AppError> for tauri::ipc::InvokeError {
     fn from(val: AppError) -> Self {
         tauri::ipc::InvokeError::from(val.to_string())
-    }
-}
-
-impl From<AppError> for String {
-    fn from(err: AppError) -> String {
-        format!("{}", err)
     }
 }
 
@@ -81,33 +133,4 @@ impl From<tauri_plugin_shell::process::Output> for AppError {
     }
 }
 
-impl std::error::Error for AppError {
-    fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
-        match self {
-            AppError::Eyre(err) => Some(err.root_cause()),
-            AppError::Io(err) => Some(err),
-            AppError::Tauri(err) => Some(err),
-            AppError::Windows(err) => Some(err),
-            AppError::SerdeJson(err) => Some(err),
-            AppError::Utf8(err) => Some(err),
-            AppError::Utf16(err) => Some(err),
-            AppError::CrossbeamRecv(err) => Some(err),
-            AppError::TauriShell(err) => Some(err),
-            AppError::TryFromInt(err) => Some(err),
-            _ => None,
-        }
-    }
-}
-
-pub type Result<T = (), E = AppError> = core::result::Result<T, E>;
-
-#[macro_export]
-macro_rules! log_error {
-    ($($result:expr),*) => {
-        $(
-            if let Err(err) = $result {
-                log::error!("{:?}", err);
-            }
-        )*
-    };
-}
+pub type Result<T = ()> = core::result::Result<T, AppError>;

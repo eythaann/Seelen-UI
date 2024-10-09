@@ -67,10 +67,10 @@ macro_rules! get_subcommands {
                                 Ok(SubCommand::$subcommand$(($((sub_matches.get_one(stringify!($arg_name)) as Option<&$arg_type>).unwrap().clone()),*))?)
                             },
                         )*
-                        _ => Err(color_eyre::eyre::eyre!("Unknown subcommand.").into()),
+                        _ => Err("Unknown subcommand.".into()),
                     }
                 } else {
-                    Err(color_eyre::eyre::eyre!("No subcommand was provided.").into())
+                    Err("No subcommand was provided.".into())
                 }
             }
         }

@@ -138,13 +138,13 @@ pub fn suspend() {
 }
 
 #[tauri::command(async)]
-pub fn restart() -> Result<(), String> {
+pub fn restart() -> Result<()> {
     WindowsApi::exit_windows(EWX_REBOOT, SHTDN_REASON_NONE)?;
     Ok(())
 }
 
 #[tauri::command(async)]
-pub fn shutdown() -> Result<(), String> {
+pub fn shutdown() -> Result<()> {
     WindowsApi::exit_windows(EWX_SHUTDOWN, SHTDN_REASON_NONE)?;
     Ok(())
 }

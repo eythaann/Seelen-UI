@@ -22,7 +22,6 @@ use std::{
     time::Duration,
 };
 
-use color_eyre::eyre::eyre;
 use windows::{
     core::{BSTR, GUID, PCWSTR, PWSTR},
     Storage::Streams::{
@@ -100,7 +99,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::{AppError, Result},
+    error_handler::Result,
     hook::HookManager,
     modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
@@ -196,7 +195,7 @@ impl WindowsApi {
             if ProcessIdToSessionId(process_id, &mut session_id).is_ok() {
                 Ok(session_id)
             } else {
-                Err(eyre!("could not determine current session id").into())
+                Err("could not determine current session id".into())
             }
         }
     }
@@ -496,7 +495,7 @@ impl WindowsApi {
         Ok(Self::exe_path(hwnd)?
             .split('\\')
             .last()
-            .ok_or_else(|| eyre!("there is no last element"))?
+            .ok_or("there is no last element")?
             .to_string())
     }
 
@@ -670,7 +669,7 @@ impl WindowsApi {
     pub fn monitor_name(hmonitor: HMONITOR) -> Result<String> {
         let ex_info = Self::monitor_info(hmonitor)?;
         Ok(U16CStr::from_slice_truncate(&ex_info.szDevice)
-            .map_err(|_| AppError::Seelen("monitor name was not a valid u16 c string".to_owned()))?
+            .map_err(|_| "monitor name was not a valid u16 c string")?
             .to_ustring()
             .to_string_lossy()
             .trim_start_matches(r"\\.\")
@@ -727,7 +726,7 @@ impl WindowsApi {
             }
         }
         if desktop_id.to_u128() == 0 {
-            return Err(eyre!("Failed to get desktop id for: {hwnd:?}").into());
+            return Err(format!("Failed to get desktop id for: {hwnd:?}").into());
         }
         Ok(desktop_id)
     }
@@ -816,7 +815,7 @@ impl WindowsApi {
     pub fn set_suspend_state() -> Result<()> {
         let success = unsafe { SetSuspendState(false, true, false).as_bool() };
         if !success {
-            return Err(eyre!("Failed to set suspend state").into());
+            return Err("Failed to set suspend state".into());
         }
         Ok(())
     }

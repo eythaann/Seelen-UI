@@ -1,4 +1,3 @@
-use color_eyre::eyre::eyre;
 use image::{GenericImageView, ImageBuffer, RgbaImage};
 use itertools::Itertools;
 use windows::core::PCWSTR;
@@ -57,7 +56,7 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
         };
 
         if !GetIconInfoExW(*hicon, &mut icon_info).as_bool() {
-            return Err(eyre!("Failed to get icon info").into());
+            return Err("Failed to get icon info".into());
         }
         let hdc_screen = CreateCompatibleDC(None);
         let hdc_mem = CreateCompatibleDC(hdc_screen);
@@ -89,7 +88,7 @@ pub fn convert_hicon_to_rgba_image(hicon: &HICON) -> Result<RgbaImage> {
             DIB_RGB_COLORS,
         ) == 0
         {
-            return Err(eyre!("Failed to get dibits").into());
+            return Err("Failed to get dibits".into());
         }
 
         // Clean up
@@ -201,7 +200,7 @@ pub fn get_icon_from_file(path: &Path) -> Result<RgbaImage> {
         // file_info.iIcon = 0 is a valid icon but it is the default icon for files on Windows
         // so we will handle this as no icon to avoid generate unnecessary artifacts
         if result == 0 || file_info.iIcon == 0 {
-            return Err(eyre!("Failed to get icon").into());
+            return Err("Failed to get icon".into());
         }
 
         let image_list: IImageList = SHGetImageList(SHIL_JUMBO as i32)?;
@@ -222,8 +221,8 @@ pub fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
 
     let mut path = None;
     // in theory .url files are encoded in UTF-8 so we don't need to use OsString
-    for line in reader.lines().map_while(Result::ok) {
-        if let Some(stripped) = line.strip_prefix("IconFile=") {
+    for line in reader.lines() {
+        if let Some(stripped) = line?.strip_prefix("IconFile=") {
             path = Some(PathBuf::from(stripped));
             break;
         }
@@ -231,7 +230,7 @@ pub fn get_icon_from_url_file(path: &Path) -> Result<RgbaImage> {
 
     let path = match path {
         Some(icon_file) => icon_file,
-        None => return Err(eyre!("Failed to get icon").into()),
+        None => return Err("Failed to get icon".into()),
     };
 
     get_icon_from_file(&path)

@@ -22,7 +22,6 @@ mod winevent;
 
 use std::io::{BufWriter, Write};
 
-use color_eyre::owo_colors::OwoColorize;
 use error_handler::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
@@ -44,8 +43,8 @@ use utils::PERFORMANCE_HELPER;
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
-fn register_panic_hook() {
-    std::panic::set_hook(Box::new(|info| {
+fn register_panic_hook() -> Result<()> {
+    std::panic::set_hook(Box::new(move |info| {
         let cause = info
             .payload()
             .downcast_ref::<String>()
@@ -69,10 +68,11 @@ fn register_panic_hook() {
 
         log::error!(
             "A panic occurred:\n  Cause: {}\n  Location: {}",
-            cause.cyan(),
-            string_location.purple()
+            cause,
+            string_location
         );
     }));
+    Ok(())
 }
 
 fn print_initial_information() {
@@ -162,8 +162,7 @@ fn is_already_runnning() -> bool {
 }
 
 fn main() -> Result<()> {
-    register_panic_hook();
-    color_eyre::install()?;
+    register_panic_hook()?;
     trace_lock!(PERFORMANCE_HELPER).start("setup");
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();

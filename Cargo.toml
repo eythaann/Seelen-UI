@@ -20,6 +20,13 @@ path = "src/background/main.rs"
 incremental = true
 rustflags = ["-Z", "threads=8"]
 
+[profile.release]
+debug = 1
+opt-level = "z"
+lto = true
+codegen-units = 1
+rustflags = ["-Z", "threads=8"]
+
 [build-dependencies]
 tauri-build = { version = "2.0.0-rc", features = [] }
 
@@ -42,7 +49,6 @@ tauri-plugin-http = "2.0.0-rc"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.34"
-color-eyre = "0.6.2"
 lazy_static = "1.4.0"
 parking_lot = "0.12.1"
 log = "0.4"
@@ -68,6 +74,8 @@ notify-debouncer-full = "0.3.1"
 encoding_rs = "0.8.34"
 evalexpr = "=11.3.0"
 quick-xml = { version = "0.36.2", features = ["serialize", "encoding"] }
+backtrace = "0.3.71"
+owo-colors = "4.1.0"
 
 [dependencies.windows]
 version = "=0.58.0"

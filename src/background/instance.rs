@@ -1,4 +1,3 @@
-use color_eyre::eyre::eyre;
 use getset::{Getters, MutGetters};
 
 use crate::{
@@ -29,7 +28,7 @@ unsafe impl Send for SeelenInstanceContainer {}
 impl SeelenInstanceContainer {
     pub fn new(hmonitor: HMONITOR, settings: &FullState) -> Result<Self> {
         if hmonitor.is_invalid() {
-            return Err(eyre!("Invalid Monitor").into());
+            return Err("Invalid Monitor".into());
         }
         let mut instance = Self {
             handle: hmonitor,

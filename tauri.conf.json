@@ -30,9 +30,10 @@
   },
   "bundle": {
     "active": true,
-    "resources": [
-      "static/**/*"
-    ],
+    "resources": {
+      "static/": "static/",
+      "target/release/seelen_ui.pdb": "seelen_ui.pdb"
+    },
     "targets": [
       "nsis"
     ],
@@ -50,16 +51,23 @@
         "startMenuFolder": "Seelen",
         "displayLanguageSelector": true,
         "languages": [
-          "English",
-          "German",
-          "Spanish",
-          "French",
-          "Hindi",
-          "Portuguese",
-          "Japanese",
-          "Korean",
-          "SimpChinese",
-          "TradChinese"
+          "arabic",
+          "bulgarian",
+          "dutch",
+          "english",
+          "german",
+          "italian",
+          "japanese",
+          "korean",
+          "portuguesebr",
+          "russian",
+          "tradchinese",
+          "simpchinese",
+          "french",
+          "spanish",
+          "persian",
+          "turkish",
+          "swedish"
         ]
       }
     },
