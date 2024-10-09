@@ -31,8 +31,7 @@
   "bundle": {
     "active": true,
     "resources": {
-      "static/": "static/",
-      "target/release/seelen_ui.pdb": "seelen_ui.pdb"
+      "static/": "static/"
     },
     "targets": [
       "nsis"
@@ -56,7 +55,6 @@
           "dutch",
           "english",
           "german",
-          "italian",
           "japanese",
           "korean",
           "portuguesebr",
@@ -65,7 +63,6 @@
           "simpchinese",
           "french",
           "spanish",
-          "persian",
           "turkish",
           "swedish"
         ]
