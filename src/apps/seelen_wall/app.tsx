@@ -12,6 +12,7 @@ export function App() {
   const [currentBg, setCurrentBg] = useState(0);
   const [scope, animate] = useAnimate<HTMLDivElement>();
 
+  const version = useSelector(Selectors.version);
   const { backgrounds, interval } = useSelector(Selectors.settings);
 
   useInterval(() => {
@@ -32,6 +33,7 @@ export function App() {
   }
   return (
     <Wallpaper
+      key={version}
       path={background.path}
       containerRef={scope}
       onLoad={() => {

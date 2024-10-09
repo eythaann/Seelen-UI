@@ -6,6 +6,7 @@ import { RootState } from './domain';
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
+  version: 0,
   settings: new SeelenWallSettings(),
   colors: UIColors.default(),
   stop: false,

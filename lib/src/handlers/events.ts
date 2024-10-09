@@ -4,6 +4,7 @@ export enum SeelenEvent {
 
   GlobalFocusChanged = 'global-focus-changed',
   GlobalMouseMove = 'global-mouse-move',
+  GlobalMonitorsChanged = 'global-monitors-changed',
 
   HandleLayeredHitboxes = 'handle-layered',
 
