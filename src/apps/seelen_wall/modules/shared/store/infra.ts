@@ -27,5 +27,10 @@ export async function initStore() {
     store.dispatch(Actions.setStop(payload));
   });
 
+  webview.listen(SeelenEvent.GlobalMonitorsChanged, () => {
+    let version = store.getState().version;
+    store.dispatch(Actions.setVersion(version + 1));
+  });
+
   StartThemingTool();
 }

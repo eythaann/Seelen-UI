@@ -6,7 +6,8 @@ use std::{
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
+use seelen_core::handlers::SeelenEvent;
+use tauri::{path::BaseDirectory, AppHandle, Emitter, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Graphics::Gdi::HMONITOR;
 
@@ -103,7 +104,9 @@ impl Seelen {
             wall.update_position()?;
         }
         for monitor in &mut self.monitors {
-            monitor.ensure_positions()?;
+            if WindowsApi::monitor_info(*monitor.handle()).is_ok() {
+                monitor.ensure_positions()?;
+            }
         }
         Ok(())
     }
@@ -159,21 +162,20 @@ impl Seelen {
     }
 
     fn on_monitor_event(event: MonitorManagerEvent) {
-        log::trace!("Monitor event: {:?}", event);
-        let mut seelen = trace_lock!(SEELEN);
         match event {
             MonitorManagerEvent::Added(_name, id) => {
-                log_error!(seelen.add_monitor(id));
+                log_error!(trace_lock!(SEELEN).add_monitor(id));
             }
             MonitorManagerEvent::Removed(_name, id) => {
-                log_error!(seelen.remove_monitor(id));
+                log_error!(trace_lock!(SEELEN).remove_monitor(id));
             }
             MonitorManagerEvent::Updated(name, id) => {
-                if let Some(m) = seelen.monitor_by_name_mut(&name) {
+                if let Some(m) = trace_lock!(SEELEN).monitor_by_name_mut(&name) {
                     m.update_handle(id);
                 }
             }
         }
+        log_error!(get_app_handle().emit(SeelenEvent::GlobalMonitorsChanged, ()));
     }
 
     async fn start_async() -> Result<()> {
@@ -240,11 +242,13 @@ impl Seelen {
     fn add_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
         self.monitors
             .push(SeelenInstanceContainer::new(hmonitor, &self.state())?);
+        self.refresh_windows_positions()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
         self.monitors.retain(|m| m.handle() != &hmonitor);
+        self.refresh_windows_positions()?;
         Ok(())
     }
 

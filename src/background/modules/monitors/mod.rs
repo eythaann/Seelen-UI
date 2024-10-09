@@ -18,7 +18,7 @@ use windows::{
 
 use crate::{
     error_handler::Result,
-    trace_lock,
+    log_error, trace_lock,
     utils::spawn_named_thread,
     windows_api::{MonitorEnumerator, WindowsApi},
 };
@@ -39,7 +39,6 @@ pub enum MonitorManagerEvent {
 type OnMonitorsChange = Box<dyn Fn(MonitorManagerEvent) + Send + Sync>;
 
 pub struct MonitorManager {
-    _hwnd: HWND,
     pub monitors: Vec<(String, HMONITOR)>,
     callbacks: Vec<OnMonitorsChange>,
 }
@@ -47,23 +46,23 @@ pub struct MonitorManager {
 unsafe impl Send for MonitorManager {}
 
 impl MonitorManager {
-    pub extern "system" fn window_proc(
+    unsafe extern "system" fn window_proc(
         window: HWND,
         message: u32,
         wparam: WPARAM,
         lparam: LPARAM,
     ) -> LRESULT {
-        unsafe {
-            match message {
-                // Added based on this https://stackoverflow.com/a/33762334
-                WM_DISPLAYCHANGE | WM_SETTINGCHANGE | WM_DEVICECHANGE => {
-                    // log::debug!("Dispatching {}, {:?}, {:?}", message, wparam, lparam);
+        match message {
+            // Added based on this https://stackoverflow.com/a/33762334
+            WM_DISPLAYCHANGE | WM_SETTINGCHANGE | WM_DEVICECHANGE => {
+                // log::debug!("Dispatching {}, {:?}, {:?}", message, wparam, lparam);
+                std::thread::spawn(move || {
                     let mut manager = trace_lock!(MONITOR_MANAGER);
 
                     let mut old_list = manager.monitors.clone();
                     let new_list = match Self::get_monitors() {
                         Ok(monitors) => monitors,
-                        Err(_) => return LRESULT(0),
+                        Err(_) => return,
                     };
 
                     for (name, id) in &new_list {
@@ -89,14 +88,14 @@ impl MonitorManager {
                     }
 
                     manager.monitors = new_list.into_iter().collect();
-                    LRESULT(0)
-                }
-                _ => DefWindowProcW(window, message, wparam, lparam),
+                });
+                LRESULT(0)
             }
+            _ => DefWindowProcW(window, message, wparam, lparam),
         }
     }
 
-    pub fn new() -> Result<Self> {
+    unsafe fn create_background_window() -> Result<()> {
         let wide_name: Vec<u16> = "Seelen Monitor Manager"
             .encode_utf16()
             .chain(Some(0))
@@ -115,9 +114,7 @@ impl MonitorManager {
             ..Default::default()
         };
 
-        unsafe {
-            RegisterClassW(&wnd_class);
-        }
+        RegisterClassW(&wnd_class);
 
         let hwnd = unsafe {
             CreateWindowExW(
@@ -144,27 +141,27 @@ impl MonitorManager {
             dbcc_name: [0; 1],
         };
 
-        unsafe {
-            RegisterDeviceNotificationW(
-                hwnd,
-                &mut notification_filter as *mut _ as *mut _,
-                DEVICE_NOTIFY_WINDOW_HANDLE,
-            )?
-        };
+        RegisterDeviceNotificationW(
+            hwnd,
+            &mut notification_filter as *mut _ as *mut _,
+            DEVICE_NOTIFY_WINDOW_HANDLE,
+        )?;
 
-        let addr = hwnd.0 as isize;
-        spawn_named_thread("Monitor Manager Message Loop", move || unsafe {
-            let mut msg = MSG::default();
-            let hwnd = HWND(addr as _);
-            while GetMessageW(&mut msg, hwnd, 0, 0).into() {
-                let _ = TranslateMessage(&msg);
-                DispatchMessageW(&msg);
-                std::thread::sleep(std::time::Duration::from_millis(10));
-            }
+        let mut msg = MSG::default();
+        while GetMessageW(&mut msg, hwnd, 0, 0).as_bool() {
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+
+        Ok(())
+    }
+
+    pub fn new() -> Result<Self> {
+        spawn_named_thread("Monitor Manager", || unsafe {
+            log_error!(Self::create_background_window());
         })?;
 
         Ok(Self {
-            _hwnd: hwnd,
             callbacks: Vec::new(),
             monitors: Self::get_monitors()?,
         })
