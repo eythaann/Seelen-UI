@@ -67,8 +67,8 @@ fn get_tray_overflow_content_handle() -> Option<HWND> {
             FindWindowExA(
                 tray_overflow,
                 HWND::default(),
+                pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
                 None,
-                pcstr!("DesktopWindowXamlSource"),
             )
             .ok()
         }
