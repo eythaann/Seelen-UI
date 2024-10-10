@@ -14,7 +14,6 @@ import { LanguageList } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
 import { Themes } from './Themes';
-import { Wallpaper } from './Wallpaper';
 
 export function General() {
   const [changingAutostart, setChangingAutostart] = useState(false);
@@ -87,10 +86,6 @@ export function General() {
       </SettingsGroup>
 
       <Colors />
-
-      <SettingsGroup>
-        <Wallpaper />
-      </SettingsGroup>
 
       <SettingsGroup>
         <div style={{ marginBottom: '6px' }}>

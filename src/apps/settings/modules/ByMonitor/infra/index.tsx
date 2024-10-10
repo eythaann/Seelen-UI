@@ -75,9 +75,10 @@ export function MoreMonitorConfig({ index, monitor: m, onChange }: MoreMonitorCo
     });
   }
 
+  // todo(eythan) more settings will be disabled until we have a finished implementation
   return (
     <>
-      <Button type="default" onClick={() => setOpen(true)}>
+      <Button type="default" onClick={() => setOpen(true)} disabled>
         {t('more')}
       </Button>
       <Modal
