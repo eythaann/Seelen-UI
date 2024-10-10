@@ -14,6 +14,10 @@ header:
     specific_apps: నిర్దిష్ట యాప్‌లు
     seelen_bar: ఫ్యాన్సీ టూల్‌బార్
     seelen_weg: డాక్/టాస్క్‌బార్
+    seelen_wall: గోడ
+    seelen_rofi: అనువర్తన లాంచర్
+    virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
+    home: హోమ్
 start:
   title: స్వాగతం!
   message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
@@ -41,6 +45,7 @@ general:
   accent_color: యాస రంగు
   wallpaper:
     select: వాల్‌పేపర్‌ను ఎంచుకోండి
+  date_format: తేదీ ఆకృతి
 toolbar:
   placeholder:
     author: రచయిత
@@ -77,7 +82,7 @@ weg:
   gap: గ్యాప్
   width: వెడల్పు
   enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
-  dock_side: డాక్ సైడ్
+  dock_side: స్థానం
 devtools:
   enable: డెవలపర్ సాధనాలను ప్రారంభించండి
   custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి
@@ -146,10 +151,8 @@ shortcuts:
     reserve_right: రిజర్వ్ హక్కు
     reserve_left: రిజర్వ్ ఎడమ
     increase_height: ఎత్తు పెంచండి
-    switch_workspace_0: కార్యస్థలం 0కి మారండి
     reserve_bottom: రిజర్వ్ బాటమ్
     send_to_workspace_0: కార్యస్థలం 0కి పంపండి
-    switch_workspace_1: కార్యస్థలానికి మారండి 1
     move_to_workspace_4: కార్యస్థలానికి తరలించు 4
     switch_workspace_6: కార్యస్థలానికి మారండి 6
     reserve_top: రిజర్వ్ టాప్
@@ -188,10 +191,13 @@ shortcuts:
     send_to_workspace_8: కార్యస్థలానికి పంపండి 8
     switch_workspace_7: కార్యస్థలానికి మారండి 7
     focus_bottom: ఫోకస్ బాటమ్
+    switch_workspace_0: వర్క్‌స్పేస్ 1 కి మారండి
+    switch_workspace_1: వర్క్‌స్పేస్ 2 కి మారండి
   enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
   enable_tooltip: >-
     మీరు సీలెన్ కోర్ Apiని ఉపయోగించి మీ స్వంత సత్వరమార్గాలను అమలు చేస్తే
     నిలిపివేయండి
+  reset: డిఫాల్ట్‌లకు రీసెట్ చేయండి
 loading: లోడ్...
 delete: తొలగించు
 open: తెరవండి
@@ -208,3 +214,23 @@ vd:
 save_and_restart: సేవ్ & పున art ప్రారంభించండి
 beta_channel:
   enable: బీటా ఛానెల్‌ను ప్రారంభించండి (గితుబ్ ద్వారా మాత్రమే)
+monitors_configurations:
+  label: మానిటర్ {{సూచిక}}
+wall:
+  enable: సీలెన్ గోడను ప్రారంభించండి
+  interval: ప్రతి (సెకన్లు) వాల్‌పేపర్‌ను మార్చండి
+  no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
+  backgrounds: వాల్‌పేపర్లు
+app_launcher:
+  runners:
+    label: రన్నర్లు
+    explorer: రన్
+    cmd: కమాండ్
+  monitor: చూపించడానికి మానిటర్
+  enable: అనువర్తన లాంచర్‌ను ప్రారంభించండి
+inherit: వారసత్వంగా
+insert: చొప్పించండి
+more: మరిన్ని
+close: దగ్గరగా
+update:
+  available: నవీకరణ అందుబాటులో ఉంది!

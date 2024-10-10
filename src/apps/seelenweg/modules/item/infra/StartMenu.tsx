@@ -1,12 +1,8 @@
-import { StartMenuItem } from '../../../../shared/schemas/SeelenWegItems';
-import { WithContextMenu } from '../../../components/WithContextMenu';
-import { DraggableItem } from './DraggableItem';
-import { getMenuForItem } from './Menu';
 import { invoke } from '@tauri-apps/api/core';
-import { motion } from 'framer-motion';
 import { memo, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { SeelenCommand, StartWegItem } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
@@ -14,16 +10,18 @@ import { Selectors } from '../../shared/store/app';
 
 import { RootState } from '../../shared/store/domain';
 
+import { WithContextMenu } from '../../../components/WithContextMenu';
+import { DraggableItem } from './DraggableItem';
+import { getMenuForItem } from './Menu';
+
 interface Props {
-  item: StartMenuItem;
+  item: StartWegItem;
 }
 
 const startMenuExes = ['SearchHost.exe', 'StartMenuExperienceHost.exe'];
 
 export const StartMenu = memo(({ item }: Props) => {
   const startMenuOpenRef = useRef(false);
-
-  const size = useSelector(Selectors.settings.size);
 
   const isStartMenuOpen = useSelector((state: RootState) =>
     startMenuExes.includes(Selectors.focusedApp(state)?.exe || ''),
@@ -44,14 +42,11 @@ export const StartMenu = memo(({ item }: Props) => {
   return (
     <DraggableItem item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
-        <motion.div
+        <div
           className="weg-item"
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          style={{ height: size, aspectRatio: '1/1' }}
           onClick={() => {
             if (!startMenuOpenRef.current) {
-              invoke('send_keys', { keys: '{win}' });
+              invoke(SeelenCommand.SendKeys, { keys: '{win}' });
             }
           }}
           onContextMenu={(e) => e.stopPropagation()}
@@ -60,7 +55,7 @@ export const StartMenu = memo(({ item }: Props) => {
           <div className="weg-item-icon">
             <div className="weg-item-icon-start" />
           </div>
-        </motion.div>
+        </div>
       </WithContextMenu>
     </DraggableItem>
   );

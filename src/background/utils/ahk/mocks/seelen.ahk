@@ -19,10 +19,6 @@ CloseIfNotRunning()
   ResumeWM()
 }
 
-^#!h:: {
-  DebugHitboxes()
-}
-
 ^#!l:: {
   ToggleWinEventTracing()
 }
@@ -30,3 +26,5 @@ CloseIfNotRunning()
 ^#!t:: {
   ToggleMutexLockTracing()
 }
+
+LWin & Space::ToggleAppLauncher()

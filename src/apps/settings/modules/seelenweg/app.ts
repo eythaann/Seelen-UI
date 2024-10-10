@@ -1,10 +1,9 @@
-import { parseAsCamel } from '../../../shared/schemas';
-import { Seelenweg, SeelenWegSchema } from '../../../shared/schemas/Seelenweg';
 import { createSlice } from '@reduxjs/toolkit';
+import { SeelenWegSettings } from 'seelen-core';
 
 import { reducersFor, selectorsFor } from '../shared/utils/app';
 
-const initialState: Seelenweg = parseAsCamel(SeelenWegSchema, {});
+const initialState = new SeelenWegSettings();
 
 export const SeelenWegSlice = createSlice({
   name: 'seelenweg',

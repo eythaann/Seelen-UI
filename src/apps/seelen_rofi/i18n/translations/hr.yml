@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Naredba
+    explorer: Trčanje
+footer:
+  shortcuts: Prikaži prečace
+header:
+  search: Aplikacija, naredba ili put
+item:
+  open_location: Otvorena lokacija datoteke
+  pin: Pin do pristaništa

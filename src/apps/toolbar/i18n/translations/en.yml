@@ -1,3 +1,5 @@
+context_menu:
+  remove: Remove Item
 media:
   master_volume: Master Volume
   output_device: Output device

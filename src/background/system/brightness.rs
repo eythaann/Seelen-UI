@@ -3,7 +3,7 @@ use windows::Win32::Devices::Display::{
     GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness,
 };
 
-use crate::windows_api::WindowsApi;
+use crate::{error_handler::Result, windows_api::WindowsApi};
 
 #[derive(Debug, Serialize)]
 pub struct Brightness {
@@ -13,7 +13,7 @@ pub struct Brightness {
 }
 
 #[tauri::command(async)]
-pub fn get_main_monitor_brightness() -> Result<Brightness, String> {
+pub fn get_main_monitor_brightness() -> Result<Brightness> {
     let mut brightness = Brightness {
         min: 0,
         max: 0,
@@ -32,7 +32,7 @@ pub fn get_main_monitor_brightness() -> Result<Brightness, String> {
         );
 
         if result == 0 {
-            return Err("GetMonitorCapabilities failed".to_string());
+            return Err("GetMonitorCapabilities failed".into());
         }
 
         result = GetMonitorBrightness(
@@ -43,7 +43,7 @@ pub fn get_main_monitor_brightness() -> Result<Brightness, String> {
         );
 
         if result == 0 {
-            return Err("GetMonitorBrightness failed".to_string());
+            return Err("GetMonitorBrightness failed".into());
         }
     }
 
@@ -51,13 +51,13 @@ pub fn get_main_monitor_brightness() -> Result<Brightness, String> {
 }
 
 #[tauri::command(async)]
-pub fn set_main_monitor_brightness(brightness: u32) -> Result<(), String> {
+pub fn set_main_monitor_brightness(brightness: u32) -> Result<()> {
     let result = unsafe {
         let hmonitor = WindowsApi::primary_physical_monitor()?;
         SetMonitorBrightness(hmonitor.hPhysicalMonitor, brightness)
     };
     if result == 0 {
-        return Err("SetMonitorBrightness failed".to_string());
+        return Err("SetMonitorBrightness failed".into());
     }
     Ok(())
 }

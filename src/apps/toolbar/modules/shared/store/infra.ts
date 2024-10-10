@@ -1,14 +1,9 @@
-import { UserSettings } from '../../../../../shared.interfaces';
-import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
-import { FileChange, GlobalEvent } from '../../../../shared/events';
-import { FocusedApp } from '../../../../shared/interfaces/common';
-import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
-import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
+import { SeelenEvent, UIColors } from 'seelen-core';
+import { FancyToolbarSettings } from 'seelen-core';
 
 import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
@@ -22,14 +17,32 @@ import {
   NetworkAdapter,
   PowerStatus,
   TrayInfo,
-  UIColors,
   Workspace,
   WorkspaceId,
 } from './domain';
 
+import { UserSettings } from '../../../../../shared.interfaces';
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
+import { FocusedApp } from '../../../../shared/interfaces/common';
+import { StartThemingTool } from '../../../../shared/styles';
+import i18n from '../../../i18n';
+
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
+
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
 
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
@@ -41,14 +54,14 @@ export async function registerStoreEvents() {
   const onFocusChanged = debounce((app: FocusedApp) => {
     store.dispatch(RootActions.setFocused(app));
   }, 200);
-  await listenGlobal<FocusedApp>(GlobalEvent.FocusChanged, (e) => {
+  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     onFocusChanged(e.payload);
     if (e.payload.name != 'Seelen UI') {
       onFocusChanged.flush();
     }
   });
 
-  await listenGlobal<any>(FileChange.Settings, async (_event) => {
+  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async (_event) => {
     await loadStore();
   });
 
@@ -73,7 +86,6 @@ export async function registerStoreEvents() {
   });
 
   await listenGlobal<MediaChannelTransportData[]>('media-sessions', (event) => {
-    console.log(event.payload);
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
@@ -108,17 +120,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
-  });
-
-  await listenGlobal(FileChange.Themes, async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
-  });
-
-  await listenGlobal(FileChange.Placeholders, async () => {
+  await listenGlobal(SeelenEvent.StatePlaceholdersChanged, async () => {
     if (IsSavingCustom.current) {
       IsSavingCustom.current = false;
       return;
@@ -127,6 +129,8 @@ export async function registerStoreEvents() {
     setPlaceholder(userSettings);
   });
 
+  await initUIColors();
+  await StartThemingTool();
   await view.emitTo(view.label, 'store-events-ready');
 }
 
@@ -147,14 +151,14 @@ export async function loadStore() {
 
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));
+  store.dispatch(RootActions.setDateFormat(userSettings.jsonSettings.dateFormat));
 
-  loadThemeCSS(userSettings);
   setPlaceholder(userSettings);
 
   store.dispatch(RootActions.setEnv(userSettings.env));
 }
 
-export function loadSettingsCSS(settings: FancyToolbar) {
+export function loadSettingsCSS(settings: FancyToolbarSettings) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-height', `${settings.height}px`);

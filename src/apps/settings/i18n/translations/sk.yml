@@ -14,6 +14,10 @@ header:
     specific_apps: Konkrétne aplikácie
     general: Všeobecný
     seelen_wm: Správca okien
+    seelen_wall: Stena
+    seelen_rofi: Spúšťač aplikácií
+    virtual_desk: Virtuálne stolné počítače
+    home: Domov
 start:
   title: Vitajte!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Prízvuk
   wallpaper:
     select: Vyberte tapetu
+  date_format: Formát
 toolbar:
   placeholder:
     author: Autor
@@ -77,7 +82,7 @@ weg:
   auto_hide: Automaticky skryť
   padding: Vypchávka
   margin: Okraj
-  dock_side: Strana
+  dock_side: Pozícia
 devtools:
   enable: Povoľte vývojárskym nástrojom
   custom_config_file: Načítať vlastný konfiguračný súbor
@@ -157,7 +162,6 @@ shortcuts:
     reserve_stack: Zásobník
     move_to_workspace_7: Presuňte sa do pracovného priestoru 7
     send_to_workspace_1: Pošlite do pracovného priestoru 1
-    switch_workspace_1: Prepnite na pracovný priestor 1
     send_to_workspace_5: Pošlite do pracovného priestoru 5
     reserve_left: Vľavo
     reserve_top: Horná časť
@@ -181,15 +185,17 @@ shortcuts:
     switch_workspace_6: Prepnite na pracovný priestor 6
     focus_left: Vľavo
     reserve_float: Plavák
-    switch_workspace_0: Prepnite na pracovný priestor 0
     focus_latest: Najnovší
     send_to_workspace_7: Pošlite do pracovného priestoru 7
     send_to_workspace_3: Pošlite do pracovného priestoru 3
     move_to_workspace_1: Presun do pracovného priestoru 1
     increase_width: Zväčšenie
     restore_sizes: Obnoviť veľkosti
+    switch_workspace_0: Prepnite na pracovný priestor 1
+    switch_workspace_1: Prepnite na pracovný priestor 2
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
+  reset: Reset na predvolené hodnoty
 inProgress: Prebieha ...
 loading: Načítava...
 open: OTVORENÉ
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Uložiť a reštartovať
 beta_channel:
   enable: Povoliť beta kanál (iba prostredníctvom GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
+  enable: Povoliť stenu Seelen
+  interval: Vymeňte tapetu každú (sekundy)
+  backgrounds: Tapety
+app_launcher:
+  runners:
+    label: Bežec
+    explorer: Spustenie
+    cmd: Príkaz
+  enable: Povoliť spúšťač aplikácií
+  monitor: Monitorovať, aby sa ukázal
+more: Viac
+insert: Vložiť
+inherit: Zdediť
+close: Zatvoriť
+update:
+  available: Aktualizácia k dispozícii!

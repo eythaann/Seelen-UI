@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Otwórz ustawienia
   start: Dodaj moduł Start
   media: Dodaj moduł nośnika
+  add_file: Plik niestandardowy
+  add_folder: Pin Custom Folder
 app_menu:
   unpin: Odpiąć
   pin: Szpilka

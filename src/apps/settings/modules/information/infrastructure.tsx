@@ -1,6 +1,3 @@
-import { wasInstalledUsingMSIX } from '../../../shared';
-import { Icon } from '../../../shared/components/Icon';
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { exit, relaunch } from '@tauri-apps/plugin-process';
 import { Button, Switch } from 'antd';
 import { useEffect, useState } from 'react';
@@ -11,6 +8,10 @@ import { EnvConfig } from '../shared/config/infra';
 import cs from './infra.module.css';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
+
+import { wasInstalledUsingMSIX } from '../../../shared';
+import { Icon } from '../../../shared/components/Icon';
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export function Information() {
   const [isMsixBuild, setIsMsixBuild] = useState(false);
@@ -76,7 +77,7 @@ export function Information() {
         <SettingsOption>
           <span>{t('extras.relaunch')}</span>
           <Button type="dashed" onClick={relaunch} style={{ width: '50px' }}>
-            <Icon iconName="IoReload" propsIcon={{ size: 12 }} />
+            <Icon iconName="IoReload" size={12} />
           </Button>
         </SettingsOption>
         <SettingsOption>

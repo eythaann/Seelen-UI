@@ -1,5 +1,5 @@
 {
-  "$schema": "node_modules/@tauri-apps/cli/schema.json",
+  "$schema": "node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Seelen UI",
   "identifier": "com.seelen.seelen-ui",
   "version": "package.json",
@@ -14,25 +14,25 @@
           "**/*.jpg",
           "**/*.jpeg",
           "**/*.png",
+          "**/*.webp",
           "**/*.gif",
-          "**/*.bmp",
-          "**/*.tif",
-          "**/*.tiff"
+          "**/*.mp4",
+          "**/*.mkv",
+          "**/*.wav"
         ]
       }
     }
   },
   "build": {
-    "beforeBuildCommand": "npm run build:ui",
+    "beforeBuildCommand": "npm run build:ui -- --production",
     "frontendDist": "dist",
     "features": []
   },
   "bundle": {
     "active": true,
-    "createUpdaterArtifacts": "v1Compatible",
-    "resources": [
-      "static/**/*"
-    ],
+    "resources": {
+      "static/": "static/"
+    },
     "targets": [
       "nsis"
     ],
@@ -50,16 +50,21 @@
         "startMenuFolder": "Seelen",
         "displayLanguageSelector": true,
         "languages": [
-          "English",
-          "German",
-          "Spanish",
-          "French",
-          "Hindi",
-          "Portuguese",
-          "Japanese",
-          "Korean",
-          "SimpChinese",
-          "TradChinese"
+          "arabic",
+          "bulgarian",
+          "dutch",
+          "english",
+          "german",
+          "japanese",
+          "korean",
+          "portuguesebr",
+          "russian",
+          "tradchinese",
+          "simpchinese",
+          "french",
+          "spanish",
+          "turkish",
+          "swedish"
         ]
       }
     },

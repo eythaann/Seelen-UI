@@ -14,6 +14,10 @@ header:
     seelen_weg: கப்பல்துறை/பணிப்பட்டி
     specific_apps: குறிப்பிட்ட பயன்பாடுகள்
     seelen_bar: ஆடம்பரமான கருவிப்பட்டி
+    seelen_wall: சுவர்
+    seelen_rofi: பயன்பாட்டு துவக்கி
+    virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
+    home: வீடு
 start:
   title: வரவேற்பு!
   message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
@@ -41,6 +45,7 @@ general:
   accent_color: உச்சரிப்பு நிறம்
   wallpaper:
     select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்
+  date_format: தேதி வடிவம்
 toolbar:
   placeholder:
     author: நூலாசிரியர்
@@ -77,7 +82,7 @@ weg:
   gap: இடைவெளி
   width: அகலம்
   enable: டாக்/டாஸ்க்பாரை இயக்கவும்
-  dock_side: டாக் சைட்
+  dock_side: நிலை
 devtools:
   install_folder: நிறுவல் கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு
@@ -147,7 +152,6 @@ shortcuts:
     increase_height: உயரத்தை அதிகரிக்கவும்
     restore_sizes: அளவுகளை மீட்டமை
     increase_width: அகலத்தை அதிகரிக்கவும்
-    switch_workspace_1: பணியிடத்திற்கு மாறவும் 1
     send_to_workspace_4: பணியிடத்திற்கு அனுப்பு 4
     move_to_workspace_5: பணியிடத்திற்கு நகர்த்து 5
     reserve_right: ரிசர்வ் ரைட்
@@ -155,7 +159,6 @@ shortcuts:
     send_to_workspace_1: பணியிடத்திற்கு அனுப்பு 1
     send_to_workspace_0: பணியிடம் 0க்கு அனுப்பவும்
     focus_right: ஃபோகஸ் ரைட்
-    switch_workspace_0: பணியிடம் 0க்கு மாறவும்
     reserve_float: ரிசர்வ் ஃப்ளோட்
     reserve_left: ரிசர்வ் இடது
     switch_workspace_5: பணியிடத்திற்கு மாறவும் 5
@@ -188,10 +191,13 @@ shortcuts:
     switch_workspace_9: பணியிடத்திற்கு மாறவும் 9
     focus_bottom: கீழே கவனம் செலுத்துங்கள்
     switch_workspace_7: பணியிடம் 7க்கு மாறவும்
+    switch_workspace_1: பணியிடம் 2 க்கு மாறவும்
+    switch_workspace_0: பணியிடம் 1 க்கு மாறவும்
   enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
   enable_tooltip: >-
     சீலன் கோர் ஏபிஐ பயன்படுத்தி உங்கள் சொந்த ஷார்ட்கட்களை செயல்படுத்தினால்
     முடக்கவும்
+  reset: இயல்புநிலைக்கு மீட்டமைக்கவும்
 inProgress: செயல்பாட்டில் உள்ளது...
 cancel: ரத்து செய்
 quit: விட்டுவிட
@@ -208,3 +214,23 @@ vd:
 save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்
 beta_channel:
   enable: பீட்டா சேனலை இயக்கவும் (கிதுப் வழியாக மட்டுமே)
+monitors_configurations:
+  label: கண்காணிக்கவும் {{குறியீட்டு}}}
+wall:
+  no_background: வெற்று ஸ்லைடுஷோ, அதற்கு பதிலாக கருப்பொருளின் பின்னணியைப் பயன்படுத்துகிறது.
+  enable: சீலன் சுவரை இயக்கவும்
+  backgrounds: வால்பேப்பர்கள்
+  interval: ஒவ்வொரு (விநாடிகளிலும்) வால்பேப்பரை மாற்றவும்
+app_launcher:
+  runners:
+    label: ஓட்டப்பந்தய வீரர்கள்
+    explorer: ஓடு
+    cmd: கட்டளை
+  monitor: காண்பிக்க கண்காணிக்கவும்
+  enable: பயன்பாட்டு துவக்கியை இயக்கவும்
+insert: செருகவும்
+inherit: மரபு
+more: மேலும்
+close: மூடு
+update:
+  available: புதுப்பிப்பு கிடைக்கிறது!

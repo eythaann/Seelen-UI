@@ -14,6 +14,10 @@ header:
     info: ਜਾਣਕਾਰੀ
     developer: ਵਿਕਾਸਕਾਰ
     seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
+    seelen_rofi: ਐਪ ਲਾਂਚਰ
+    seelen_wall: ਕੰਧ
+    virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
+    home: ਘਰ
 start:
   message: >-
     Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows 11 ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
@@ -41,6 +45,7 @@ general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   wallpaper:
     select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
+  date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
 toolbar:
   placeholder:
     description: ਵਰਣਨ
@@ -72,12 +77,12 @@ weg:
     visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
   enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   padding: ਪੈਡਿੰਗ
-  dock_side: ਡੌਕ ਸਾਈਡ
   auto_hide: ਆਟੋ ਓਹਲੇ
   gap: ਪਾੜਾ
   width: ਚੌੜਾਈ
   margin: ਹਾਸ਼ੀਏ
   label: ਡੌਕ/ਟਾਸਕਬਾਰ
+  dock_side: ਸਥਿਤੀ
 devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
@@ -165,7 +170,6 @@ shortcuts:
     switch_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
     move_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
     send_to_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਭੇਜੋ
-    switch_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
     send_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਭੇਜੋ
     send_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਭੇਜੋ
     move_to_workspace_1: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
@@ -174,7 +178,6 @@ shortcuts:
     restore_sizes: ਆਕਾਰ ਰੀਸਟੋਰ ਕਰੋ
     increase_height: ਉਚਾਈ ਵਧਾਓ
     send_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਭੇਜੋ
-    switch_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਜਾਓ
     focus_left: ਖੱਬੇ ਪਾਸੇ ਫੋਕਸ ਕਰੋ
     move_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
     send_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਭੇਜੋ
@@ -188,10 +191,13 @@ shortcuts:
     move_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
     focus_latest: ਫੋਕਸ ਤਾਜ਼ਾ
     switch_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਜਾਓ
+    switch_workspace_0: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
+    switch_workspace_1: ਵਰਕਸਪੇਸ 2 ਤੇ ਜਾਓ
   enable_tooltip: >-
     ਅਸਮਰੱਥ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ ਕੋਰ ਏਪੀਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ਾਰਟਕੱਟ
     ਲਾਗੂ ਕਰਦੇ ਹੋ
   enable: ਏਕੀਕ੍ਰਿਤ ਸ਼ਾਰਟਕੱਟ (ahk) ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
 open: ਖੋਲ੍ਹੋ
 loading: ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 save: ਸੇਵ ਕਰੋ
@@ -208,3 +214,23 @@ vd:
 save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
 beta_channel:
   enable: ਬੀਟਾ ਚੈਨਲ ਨੂੰ ਸਮਰੱਥ ਕਰੋ (ਸਿਰਫ ਗੀਥੱਬ ਰਾਹੀਂ)
+monitors_configurations:
+  label: ਨਿਗਰਾਨੀ {{ਇੰਡੈਕਸ}
+wall:
+  no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
+  backgrounds: ਵਾਲਪੇਪਰ
+  interval: ਵਾਲਪੇਪਰ ਨੂੰ ਹਰ (ਸਕਿੰਟ) ਬਦਲੋ
+  enable: ਧੁੱਪ ਦੀ ਕੰਧ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+app_launcher:
+  runners:
+    label: ਦੌੜਾਕ
+    cmd: ਕਮਾਂਡ
+    explorer: ਚਲਾਓ
+  monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
+  enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+more: ਹੋਰ
+inherit: ਵਿਰਾਸਤ
+insert: ਸੰਮਿਲਿਤ ਕਰੋ
+close: ਨੇੜੇ
+update:
+  available: ਅਪਡੇਟ ਉਪਲਬਧ!

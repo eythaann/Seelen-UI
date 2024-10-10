@@ -14,6 +14,10 @@ header:
     specific_apps: Aplicații specifice
     seelen_bar: Bara de instrumente fantezistă
     monitors: Monitoare
+    seelen_wall: Peretele
+    seelen_rofi: Lansator de aplicații
+    virtual_desk: Desktop -uri virtuale
+    home: Acasă
 start:
   title: Bine ati venit!
   message_accent: Optimizează -ți productivitatea cu stil!
@@ -41,6 +45,7 @@ general:
   accent_color: Culoare de accent
   wallpaper:
     select: Selectați tapet
+  date_format: Formatul datei
 toolbar:
   placeholder:
     select: Structura barei de instrumente
@@ -77,7 +82,7 @@ weg:
   margin: Marjă
   enable: Activați Dock/Bara de activități
   padding: Căptușeală
-  dock_side: Partea de doc
+  dock_side: Poziţie
 devtools:
   load: Sarcină
   data_folder: Folder de date
@@ -143,8 +148,6 @@ extras:
 shortcuts:
   labels:
     move_to_workspace_8: Mutați -vă la spațiul de lucru 8
-    switch_workspace_1: Treceți la spațiul de lucru 1
-    switch_workspace_0: Treceți la spațiul de lucru 0
     switch_workspace_3: Treceți la spațiul de lucru 3
     send_to_workspace_0: Trimiteți la spațiul de lucru 0
     send_to_workspace_5: Trimiteți la spațiul de lucru 5
@@ -188,10 +191,13 @@ shortcuts:
     switch_workspace_8: Treceți la spațiul de lucru 8
     focus_top: Focus top
     move_to_workspace_7: Mutați -vă la spațiul de lucru 7
+    switch_workspace_0: Treceți la spațiul de lucru 1
+    switch_workspace_1: Treceți la spațiul de lucru 2
   enable: Activați comenzi rapide integrate (AHK)
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriile comenzi rapide folosind API -ul
     Seelen Core
+  reset: Resetați la valorile implicite
 delete: Șterge
 inProgress: În curs...
 loading: Se încarcă...
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Salvați și reporniți
 beta_channel:
   enable: Activați canalul beta (numai prin GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Activați Seelen Wall
+  no_background: Slideshow gol, folosind în schimb fundalul temei.
+  interval: Schimbați tapet fiecare (secunde)
+  backgrounds: Imagini de fundal
+app_launcher:
+  runners:
+    cmd: Comanda
+    label: Alergători
+    explorer: Alerga
+  enable: Activați lansatorul de aplicații
+  monitor: Monitor pentru a arăta
+inherit: Moşteni
+more: Mai mult
+insert: Introduce
+close: Aproape
+update:
+  available: Actualizare disponibilă!

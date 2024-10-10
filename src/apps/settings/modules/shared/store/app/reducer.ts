@@ -1,13 +1,15 @@
-import { VirtualDesktopStrategy } from '../../../../../shared/schemas/Settings';
-import { StateBuilder } from '../../../../../shared/StateBuilder';
-import { Route } from '../../../../components/navigation/routes';
-import i18n from '../../../../i18n';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cloneDeep, pick } from 'lodash';
+import {
+  SeelenLauncherSettings,
+  SeelenWallSettings,
+  SeelenWegSettings,
+  UIColors,
+  VirtualDesktopStrategy,
+} from 'seelen-core';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
-import { MonitorsSlice } from '../../../monitors/main/app';
 import { SeelenWegSlice } from '../../../seelenweg/app';
 import { AhkVariablesSlice } from '../../../shortcuts/app';
 import { SeelenManagerSlice } from '../../../WindowManager/main/app';
@@ -15,51 +17,61 @@ import { matcher, reducersFor, selectorsFor } from '../../utils/app';
 
 import { RootState } from '../domain';
 
+import { StateBuilder } from '../../../../../shared/StateBuilder';
+import { Route } from '../../../../components/navigation/routes';
+import i18n from '../../../../i18n';
+
 const initialState: RootState = {
   lastLoaded: null,
   autostart: null,
-  route: Route.GENERAL,
+  route: Route.HOME,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
-  seelenweg: SeelenWegSlice.getInitialState(),
+  seelenweg: new SeelenWegSettings(),
+  wall: new SeelenWallSettings(),
+  launcher: new SeelenLauncherSettings(),
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,
-  monitors: MonitorsSlice.getInitialState(),
+  monitors: [],
   appsConfigurations: AppsConfigSlice.getInitialState(),
   ahkEnabled: true,
   ahkVariables: AhkVariablesSlice.getInitialState(),
   availableThemes: [],
   availableLayouts: [],
   availablePlaceholders: [],
-  selectedTheme: [],
+  selectedThemes: [],
   devTools: false,
   language: navigator.language.split('-')[0] || 'en',
-  colors: {
-    background: '#ffffff',
-    foreground: '#000000',
-    accent_darkest: '#000000',
-    accent_darker: '#000000',
-    accent_dark: '#000000',
-    accent: '#000000',
-    accent_light: '#000000',
-    accent_lighter: '#000000',
-    accent_lightest: '#000000',
-    complement: null,
-  },
+  dateFormat: 'ddd D MMM, hh:mm A',
+  colors: UIColors.default(),
   wallpaper: null,
   virtualDesktopStrategy: VirtualDesktopStrategy.Native,
   betaChannel: false,
 };
 
+function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {
+  return (state: S, action: A) => {
+    (state as RootState).toBeSaved = true;
+    return fn(state, action);
+  };
+}
+
+const reducers = reducersFor(initialState);
 export const RootSlice = createSlice({
   name: 'main',
   initialState,
   reducers: {
-    ...reducersFor(initialState),
+    ...reducers,
     setState: (_state, action: PayloadAction<RootState>) => {
       i18n.changeLanguage(action.payload.language);
       return action.payload;
     },
+    setDateFormat: toBeSaved(reducers.setDateFormat),
+    setWall: toBeSaved(reducers.setWall),
+    setLauncher: toBeSaved(reducers.setLauncher),
+    setDevTools: toBeSaved(reducers.setDevTools),
+    setBetaChannel: toBeSaved(reducers.setBetaChannel),
+    setMonitors: toBeSaved(reducers.setMonitors),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       state.toBeSaved = true;
@@ -82,25 +94,17 @@ export const RootSlice = createSlice({
       }
       return state;
     },
-    setDevTools: (state, action: PayloadAction<boolean>) => {
-      state.toBeSaved = true;
-      state.devTools = action.payload;
-    },
-    setBetaChannel: (state, action: PayloadAction<boolean>) => {
-      state.toBeSaved = true;
-      state.betaChannel = action.payload;
-    },
-    setSelectedTheme: (state, action: PayloadAction<RootState['selectedTheme']>) => {
+    setSelectedThemes: (state, action: PayloadAction<string[]>) => {
       let themes = new Set(action.payload);
       if (!themes.has('default')) {
         themes.add('default');
       }
       state.toBeSaved = true;
-      state.selectedTheme = Array.from(themes);
+      state.selectedThemes = Array.from(themes);
     },
     removeTheme: (state, action: PayloadAction<string>) => {
       state.toBeSaved = true;
-      state.selectedTheme = state.selectedTheme.filter((x) => x !== action.payload);
+      state.selectedThemes = state.selectedThemes.filter((x) => x !== action.payload);
     },
   },
   selectors: selectorsFor(initialState),
@@ -113,10 +117,6 @@ export const RootSlice = createSlice({
       .addMatcher(matcher(SeelenWegSlice), (state, action) => {
         state.toBeSaved = true;
         state.seelenweg = SeelenWegSlice.reducer(state.seelenweg, action);
-      })
-      .addMatcher(matcher(MonitorsSlice), (state, action) => {
-        state.toBeSaved = true;
-        state.monitors = MonitorsSlice.reducer(state.monitors, action);
       })
       .addMatcher(matcher(AppsConfigSlice), (state, action) => {
         state.toBeSaved = true;

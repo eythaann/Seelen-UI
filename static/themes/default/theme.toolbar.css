@@ -65,7 +65,7 @@
 }
 
 .ft-bar-item-clickable {
-  padding: 4px;
+  padding: 1px 4px;
   border-radius: 6px;
 
   &:hover {
@@ -312,6 +312,7 @@
   aspect-ratio: 1/1;
   right: 5%;
   bottom: 5%;
+  object-fit: contain;
 }
 
 .media-session-thumbnail {
@@ -447,5 +448,17 @@
 
   .notification-body-title {
     font-weight: 600;
+  }
+}
+
+.ft-bar-item-context-menu-container {
+  .bg-layer-1 {
+    background-color: var(--color-gray-100);
+    border-radius: 10px;
+  }
+
+  .ft-bar-item-context-menu {
+    .ft-bar-item-context-menu-item {
+    }
   }
 }

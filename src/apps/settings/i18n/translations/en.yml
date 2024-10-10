@@ -4,8 +4,12 @@ cancel: Cancel
 save: Save
 save_and_restart: Save & Restart
 quit: Quit
+close: Close
 open: Open
 delete: Delete
+insert: Insert
+more: More
+inherit: Inherit
 sides:
   left: Left
   right: Right
@@ -13,15 +17,19 @@ sides:
   bottom: Bottom
 header:
   labels:
+    home: Home
     general: General
     seelen_bar: Fancy Toolbar
     seelen_wm: Window Manager
     seelen_weg: Dock/Taskbar
+    seelen_rofi: App Launcher
+    seelen_wall: The Wall
     monitors: Monitors
     specific_apps: Specific Apps
     shortcuts: Shortcuts
     developer: Developer
     info: Information
+    virtual_desk: Virtual Desktops
 start:
   title: Welcome!
   message: >-
@@ -33,6 +41,7 @@ start:
 general:
   startup: Run on startup?
   language: Language
+  date_format: Date Format
   theme:
     label: Themes
     placeholder: Select theme
@@ -82,7 +91,7 @@ weg:
   enable: Enable Dock/Taskbar
   width: Width
   auto_hide: Auto Hide
-  dock_side: Dock Side
+  dock_side: Position
   padding: Padding
   margin: Margin
   gap: Gap
@@ -149,6 +158,20 @@ apps_configurations:
     and: AND
     or: OR
     add_block: Add Block
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Enable Seelen Wall
+  interval: Change wallpaper every (seconds)
+  backgrounds: Wallpapers
+  no_background: Empty slideshow, using theme's background instead.
+app_launcher:
+  enable: Enable App Launcher
+  monitor: Monitor to show
+  runners:
+    label: Runners
+    explorer: Run
+    cmd: Command
 extras:
   version: Version
   links: Official Links
@@ -158,6 +181,7 @@ extras:
   exit: Quit/Exit
 shortcuts:
   enable: Enable Integrated Shortcuts (ahk)
+  reset: Reset to Defaults
   enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api
   labels:
     reserve_top: Reserve Top
@@ -176,33 +200,35 @@ shortcuts:
     increase_height: Increase Height
     decrease_height: Decrease Height
     restore_sizes: Restore Sizes
-    switch_workspace_0: Switch to Workspace 0
-    switch_workspace_1: Switch to Workspace 1
-    switch_workspace_2: Switch to Workspace 2
-    switch_workspace_3: Switch to Workspace 3
-    switch_workspace_4: Switch to Workspace 4
-    switch_workspace_5: Switch to Workspace 5
-    switch_workspace_6: Switch to Workspace 6
-    switch_workspace_7: Switch to Workspace 7
-    switch_workspace_8: Switch to Workspace 8
-    switch_workspace_9: Switch to Workspace 9
-    move_to_workspace_0: Move to Workspace 0
-    move_to_workspace_1: Move to Workspace 1
-    move_to_workspace_2: Move to Workspace 2
-    move_to_workspace_3: Move to Workspace 3
-    move_to_workspace_4: Move to Workspace 4
-    move_to_workspace_5: Move to Workspace 5
-    move_to_workspace_6: Move to Workspace 6
-    move_to_workspace_7: Move to Workspace 7
-    move_to_workspace_8: Move to Workspace 8
-    move_to_workspace_9: Move to Workspace 9
-    send_to_workspace_0: Send to Workspace 0
-    send_to_workspace_1: Send to Workspace 1
-    send_to_workspace_2: Send to Workspace 2
-    send_to_workspace_3: Send to Workspace 3
-    send_to_workspace_4: Send to Workspace 4
-    send_to_workspace_5: Send to Workspace 5
-    send_to_workspace_6: Send to Workspace 6
-    send_to_workspace_7: Send to Workspace 7
-    send_to_workspace_8: Send to Workspace 8
-    send_to_workspace_9: Send to Workspace 9
+    switch_workspace_0: Switch to Workspace 1
+    switch_workspace_1: Switch to Workspace 2
+    switch_workspace_2: Switch to Workspace 3
+    switch_workspace_3: Switch to Workspace 4
+    switch_workspace_4: Switch to Workspace 5
+    switch_workspace_5: Switch to Workspace 6
+    switch_workspace_6: Switch to Workspace 7
+    switch_workspace_7: Switch to Workspace 8
+    switch_workspace_8: Switch to Workspace 9
+    switch_workspace_9: Switch to Workspace 10
+    move_to_workspace_0: Move to Workspace 1
+    move_to_workspace_1: Move to Workspace 2
+    move_to_workspace_2: Move to Workspace 3
+    move_to_workspace_3: Move to Workspace 4
+    move_to_workspace_4: Move to Workspace 5
+    move_to_workspace_5: Move to Workspace 6
+    move_to_workspace_6: Move to Workspace 7
+    move_to_workspace_7: Move to Workspace 8
+    move_to_workspace_8: Move to Workspace 9
+    move_to_workspace_9: Move to Workspace 10
+    send_to_workspace_0: Send to Workspace 1
+    send_to_workspace_1: Send to Workspace 2
+    send_to_workspace_2: Send to Workspace 3
+    send_to_workspace_3: Send to Workspace 4
+    send_to_workspace_4: Send to Workspace 5
+    send_to_workspace_5: Send to Workspace 6
+    send_to_workspace_6: Send to Workspace 7
+    send_to_workspace_7: Send to Workspace 8
+    send_to_workspace_8: Send to Workspace 9
+    send_to_workspace_9: Send to Workspace 10
+update:
+  available: Update Available!

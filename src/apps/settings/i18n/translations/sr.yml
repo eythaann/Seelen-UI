@@ -14,6 +14,10 @@ header:
     seelen_wm: Менаџер прозора
     specific_apps: Специфичне апликације
     developer: Разводнички
+    seelen_wall: Зид
+    seelen_rofi: Лаунцхер
+    virtual_desk: Виртуелни радне површине
+    home: Дом
 start:
   title: Добродошли!
   message_accent: Оптимизирајте своју продуктивност стилом!
@@ -41,6 +45,7 @@ general:
   accent_color: Боја нагласности
   wallpaper:
     select: Изаберите Позадина
+  date_format: Формат датума
 toolbar:
   placeholder:
     description: Опис
@@ -76,8 +81,8 @@ weg:
   padding: Подлокнути
   width: Ширина
   margin: Маргина
-  dock_side: Пристаниште
   auto_hide: Аутоматска кожа
+  dock_side: Положај
 devtools:
   enable: Омогућите алате за програмере
   load: Оптеретити
@@ -157,7 +162,6 @@ shortcuts:
     focus_right: Фокусирати право
     move_to_workspace_5: Пређите на радни простор 5
     increase_height: Повећати висину
-    switch_workspace_1: Пређите на радни простор 1
     send_to_workspace_5: Пошаљи на радни простор 5
     switch_workspace_4: Пређите на радни простор 4
     switch_workspace_5: Пређите на радни простор 5
@@ -168,7 +172,6 @@ shortcuts:
     reserve_float: Резерват
     move_to_workspace_0: Пређите на радни простор 0
     move_to_workspace_9: Пређите на радни простор 9
-    switch_workspace_0: Пређите на радни простор 0
     increase_width: Повећати ширину
     move_to_workspace_7: Пређите на радни простор 7
     reserve_right: Резервисати право
@@ -188,10 +191,13 @@ shortcuts:
     move_to_workspace_2: Пређите на радни простор 2
     send_to_workspace_3: Пошаљи на радни простор 3
     move_to_workspace_1: Прелазак на радни простор 1
+    switch_workspace_1: Пређите на радни простор 2
+    switch_workspace_0: Пређите на радни простор 1
   enable_tooltip: >-
     Онемогућите ако ћете имплементирати сопствене пречице користећи СЕЕЛЕН ЦОРЕ
     АПИ
   enable: Омогућите интегрисане пречице (АХК)
+  reset: Ресетујте на подразумеване вредности
 quit: Одустати
 inProgress: У току...
 save: сачувати
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Сачувај и поново покрените
 beta_channel:
   enable: Омогући бета канал (само преко ГитХуб)
+monitors_configurations:
+  label: Монитор {{Индек}}
+wall:
+  interval: Промените позадину сваке (секунде)
+  no_background: Празан презентацију, уместо тога користећи прибор за тему.
+  enable: Омогућите Виселен зид
+  backgrounds: Позадине
+app_launcher:
+  runners:
+    cmd: Командант
+    label: Тркачи
+    explorer: Трчати
+  monitor: Монитор за приказивање
+  enable: Омогући бацач апликација
+insert: Уметнути
+inherit: Наследити
+more: Више
+close: Затворити
+update:
+  available: Ажурирање доступно!

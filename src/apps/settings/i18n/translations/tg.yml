@@ -14,6 +14,10 @@ header:
     developer: Таҳиякунанда
     seelen_bar: Панели футбол
     info: Ахбор
+    seelen_wall: Девор
+    seelen_rofi: Барномасоз
+    virtual_desk: Мизи кории виртуалӣ
+    home: Хона
 start:
   message_accent: Ҳосилнокии худро бо услуб оптимед кунед!
   message: >-
@@ -40,6 +44,7 @@ general:
   accent_color: Ранги ҳисоб
   wallpaper:
     select: Обер-ро интихоб кунед
+  date_format: Шакли сана
 toolbar:
   placeholder:
     select: Сохтори панели асбобҳо
@@ -73,10 +78,10 @@ weg:
   enable: Dock / Travelar
   padding: Тахтача
   width: Васеъ
-  dock_side: Тарафи док
   auto_hide: Худкор Пинҳон кардани
   gap: Фосила
   margin: Маржа
+  dock_side: Вазъият
 devtools:
   custom_config_file: Файли танзимоти танзими фармоишӣ
   load: Сарборӣ
@@ -152,7 +157,6 @@ shortcuts:
     send_to_workspace_7: Ба корҳо фиристед 7
     send_to_workspace_5: Ба кории 5 фиристед
     move_to_workspace_9: Ба фазои 9 ҳаракат кунед
-    switch_workspace_0: Гузариш ба Prowspace 0
     increase_width: Паҳнои васеъ
     decrease_height: Баландиро кам мекунад
     send_to_workspace_3: Ба кории 3 фиристед 3
@@ -180,15 +184,17 @@ shortcuts:
     reserve_right: Зарф аз тарафи
     restore_sizes: Барқарор кардан
     move_to_workspace_3: Ба кории 3 ҳаракат кунед
-    switch_workspace_1: Гузариш ба Prowspace 1
     switch_workspace_5: Гузариш ба корҳо 5
     send_to_workspace_0: Ба кории 0 фиристед
     focus_top: Фокус ба боло
     move_to_workspace_4: Ба фазои 4 ҳаракат кунед
     move_to_workspace_2: Ба фазои кории 2 гузаред
     decrease_width: Пойафзол коҳиш диҳед
+    switch_workspace_1: Гузариш ба корҳо 2
+    switch_workspace_0: Гузариш ба Prowspace 1
   enable: Миёнабурҳои ҳамгирошударо фаъол созед (AHK)
   enable_tooltip: Агар шумо миёнабурҳои худро бо истифода аз Seelen Cear Secten истифода баред
+  reset: Аз нав танзимкунии пешфарз
 inProgress: Дар ҷараён...
 open: Кушодан
 save: Пул захира кардан
@@ -205,3 +211,23 @@ vd:
 save_and_restart: Наҷот ва бозоғоз
 beta_channel:
   enable: Фаъолсозии канали бета (танҳо тавассути Github)
+monitors_configurations:
+  label: Монитор {Индекс}}
+wall:
+  enable: Фаъолсозии девори Selece
+  interval: Девори ҳар (сония) -ро иваз кунед
+  backgrounds: Обои обу
+  no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
+app_launcher:
+  runners:
+    label: Давандагон
+    explorer: Давидан
+    cmd: Фармон
+  monitor: Нишон додани назорат
+  enable: Фаъолсозии Apple
+more: Бештар
+inherit: Мерос гирифтан
+insert: Илова кардан
+close: Наздик
+update:
+  available: Навсозӣ!

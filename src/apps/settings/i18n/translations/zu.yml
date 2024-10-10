@@ -14,6 +14,10 @@ header:
     specific_apps: Izinhlelo zokusebenza ezikhethekile
     monitors: Ukuqapha
     shortcuts: Amashoshothi
+    seelen_wall: Udonga
+    seelen_rofi: Isiqalisi sohlelo lokusebenza
+    virtual_desk: Ama-Virtual Desktops
+    home: Ikhaya
 start:
   message: >-
     Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
@@ -41,6 +45,7 @@ general:
   accent_color: Umbala we-Accent
   wallpaper:
     select: Khetha iphepha lokunamathisela odongeni
+  date_format: Ifomethi yosuku
 toolbar:
   placeholder:
     author: Umlobi
@@ -72,12 +77,12 @@ weg:
     zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
   width: Ububanzi
   gap: Insungubezi
-  dock_side: Uhlangothi lwedokodo
   enable: Nika amandla i-Dock / Taskbar
   auto_hide: Fihla okuzenzakalelayo
   padding: Idilidi
   margin: Image
   label: Dock / taskbar
+  dock_side: Ukuma
 devtools:
   install_folder: Ifolda yokufaka
   data_folder: Ifolda yedatha
@@ -164,7 +169,6 @@ shortcuts:
     move_to_workspace_9: Hambisa ku-Workpace 9
     switch_workspace_2: Shintshela ku-Workpace 2
     send_to_workspace_4: Thumela kwi-Workpace 4
-    switch_workspace_0: Shintshela ku-Workpace 0
     send_to_workspace_8: Thumela ku-Workpace 8
     reserve_left: Indawo esele
     focus_left: Gxila kwesokunxele
@@ -181,17 +185,19 @@ shortcuts:
     move_to_workspace_5: Hambisa ku-Workpace 5
     reserve_float: Indawo yokuntanta
     send_to_workspace_3: Thumela ku-Workpace 3
-    switch_workspace_1: Shintshela ku-Workpace 1
     send_to_workspace_5: Thumela ku-Workpace 5
     send_to_workspace_9: Thumela ku-Workpace 9
     send_to_workspace_2: Thumela ku-Workpace 2
     switch_workspace_4: Shintshela ku-Workpace 4
     switch_workspace_8: Shintshela ku-Workpace 8
     switch_workspace_6: Shintshela ku-Workpace 6
+    switch_workspace_0: Shintshela ku-Workpace 1
+    switch_workspace_1: Shintshela ku-Workpace 2
   enable: Nika amandla izinqamuleli ezihlanganisiwe (Ahk)
   enable_tooltip: >-
     Khubaza uma uzosebenzisa izinqamuleli zakho usebenzisa i-Seelen Core Core
     API
+  reset: Setha kabusha okuzenzakalelayo
 inProgress: Kuyaqhubeka...
 cancel: Hlikihla
 save: Hlenga
@@ -208,3 +214,25 @@ vd:
 save_and_restart: Gcina futhi Qalisa kabusha
 beta_channel:
   enable: Nika amandla isiteshi se-beta (kuphela nge-github)
+monitors_configurations:
+  label: Qapha {{inkomba}}
+wall:
+  backgrounds: Ama-Wallpaper
+  no_background: >-
+    Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
+    esikhundleni.
+  enable: Nika amandla udonga lwe-Seleen
+  interval: Shintsha iphepha lokunamathisela odongeni wonke (amasekhondi)
+app_launcher:
+  runners:
+    explorer: Gijima
+    label: Abagebhe
+    cmd: Juba
+  monitor: Qapha ukukhombisa
+  enable: Nika amandla isiqalisi sohlelo lokusebenza
+more: Okuningi
+inherit: Dla ifa
+insert: Faka
+close: Ngokuminyanisa
+update:
+  available: Ukuvuselelwa Kuyatholakala!

@@ -14,6 +14,10 @@ header:
     info: सुचना
     general: जर्नेल
     seelen_wm: वान प्रबन्धक
+    seelen_wall: भित्ता
+    seelen_rofi: फोटो लन्चर
+    virtual_desk: भर्चुअल डेस्कटपहरू
+    home: घर
 start:
   message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
   message: >-
@@ -40,6 +44,7 @@ general:
   accent_color: हिम्मता रंग
   wallpaper:
     select: वालपेपर चयन गर्नुहोस्
+  date_format: मिति ढाँचा
 toolbar:
   placeholder:
     description: वर्णन
@@ -71,12 +76,12 @@ weg:
     zoom_size: Zoomed आकार (थिमका लागि प्रयोग गरिएको)
   padding: प्याडडि .्वन
   margin: स्पानलिन
-  dock_side: डक पक्ष
   width: चौडाई
   auto_hide: 'स्वत: लुकाउने'
   gap: अन्तराल
   enable: डक / टास्कबार सक्षम गर्नुहोस्
   label: डक / टास्कबार
+  dock_side: स्थिति
 devtools:
   app_folders: निल्डर
   custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्
@@ -145,7 +150,6 @@ shortcuts:
     send_to_workspace_8: कार्यक्षेत्र to मा पठाउनुहोस्
     move_to_workspace_3: कार्यक्षेत्र in मा सार्नुहोस्
     increase_height: उचाइ बढाउनुहोस्
-    switch_workspace_0: कार्यक्षेत्र 0 मा स्विच गर्नुहोस्
     send_to_workspace_9: कार्यक्षेत्र to मा पठाउनुहोस्
     reserve_bottom: रिजर्व तल
     move_to_workspace_8: कार्यक्षेत्र to मा सार्नुहोस्
@@ -167,7 +171,6 @@ shortcuts:
     move_to_workspace_6: कार्यक्षेत्र in मा सार्नुहोस्
     switch_workspace_6: कार्यक्षेत्र in मा स्विच गर्नुहोस्
     focus_bottom: फोकस तल
-    switch_workspace_1: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
     send_to_workspace_7: कार्यक्षेत्र to मा पठाउनुहोस्
     increase_width: चौडाई बढाउनुहोस्
     move_to_workspace_7: कार्यस्थान to मा सार्नुहोस्
@@ -187,10 +190,13 @@ shortcuts:
     reserve_right: रिजर्व सहि
     restore_sizes: आकार पुनर्स्थापना गर्नुहोस्
     switch_workspace_9: कार्यक्षेत्र in मा स्विच गर्नुहोस्
+    switch_workspace_0: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
+    switch_workspace_1: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
   enable_tooltip: >-
     असक्षम गर्नुहोस् यदि तपाईं देखिने कोर एपीआई प्रयोग गरेर तपाईंको आफ्नै
     सर्टकटहरू लागू गर्नुहुन्छ भने असक्षम गर्नुहोस्
   enable: एकीकृत सर्टकट सक्षम गर्नुहोस् (AHK)
+  reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
 inProgress: प्रगति हुदैछ...
 delete: मेटाउन
 loading: लोड गर्दै ...
@@ -207,3 +213,23 @@ vd:
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
 beta_channel:
   enable: Beta च्यानल सक्षम गर्नुहोस् (github मार्फत मात्र)
+monitors_configurations:
+  label: मोनिटर \ inchtax}}
+wall:
+  interval: वालपेपरहरू प्रत्येक (सेकेन्ड) परिवर्तन गर्नुहोस्
+  backgrounds: वालपेपरहरू
+  no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
+  enable: देख्न सकेनौं
+app_launcher:
+  runners:
+    label: धागक
+    cmd: आदेश
+    explorer: दगुर्ने काम
+  monitor: देखाउनको लागि मोनिटर
+  enable: अनुप्रयोग सुरुवातकर्तालाई सक्षम गर्नुहोस्
+more: अरु
+inherit: बाबु बाजेबाट पाउनु
+insert: घुसाउनु
+close: घनिष्ट
+update:
+  available: अपडेट उपलब्ध!

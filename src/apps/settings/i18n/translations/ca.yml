@@ -14,6 +14,10 @@ header:
     monitors: Monitors
     specific_apps: Aplicacions específiques
     general: General
+    seelen_wall: La paret
+    seelen_rofi: Llançador d'aplicacions
+    virtual_desk: Desktops virtuals
+    home: Casa
 start:
   title: Benvingut!
   message_accent: Optimitzeu la vostra productivitat amb estil.
@@ -41,6 +45,7 @@ general:
   accent_color: Color d’accent
   wallpaper:
     select: Seleccioneu fons de pantalla
+  date_format: Format de la data
 toolbar:
   placeholder:
     description: Descripció
@@ -71,13 +76,13 @@ weg:
     size: Mida de l'article
     gap: Espai entre articles
   enable: Activa el moll/la barra de tasques
-  dock_side: Costat del moll
   gap: Escletxa
   margin: Marge
   padding: Encoir
   width: Amplada
   label: Moll/barra de tasques
   auto_hide: Amaga automàtic
+  dock_side: Posició
 devtools:
   load: Carregar
   data_folder: Carpeta de dades
@@ -157,7 +162,6 @@ shortcuts:
     decrease_width: Disminuir l'amplada
     move_to_workspace_3: Desplaceu -vos a l'espai de treball 3
     focus_right: Centra't a la dreta
-    switch_workspace_0: Canvia a l'espai de treball 0
     move_to_workspace_5: Desplaceu -vos a l'espai de treball 5
     focus_bottom: Focus Bottom
     send_to_workspace_3: Envia a l’espai de treball 3
@@ -186,12 +190,14 @@ shortcuts:
     move_to_workspace_8: Traslladar -se a l'espai de treball 8
     send_to_workspace_0: Enviar a l’espai de treball 0
     send_to_workspace_4: Enviar a l’espai de treball 4
-    switch_workspace_1: Canvieu a l'espai de treball 1
     send_to_workspace_1: Envia a l'espai de treball 1
+    switch_workspace_0: Canvia a l'espai de treball 1
+    switch_workspace_1: Canvia a l'espai de treball 2
   enable: Activa les dreceres integrades (AHK)
   enable_tooltip: >-
     Desactiveu si implementareu les vostres pròpies dreceres mitjançant l'API de
     Seelen Core
+  reset: Restableix als valors predeterminats
 loading: Carregant ...
 open: Obrir
 delete: Esborrar
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Desar i reiniciar
 beta_channel:
   enable: Activa el canal beta (només mitjançant GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Fons de pantalla
+  no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
+  interval: Canvieu el fons de pantalla cada (segons)
+  enable: Activa la paret de Seelen
+app_launcher:
+  runners:
+    label: Corredors
+    explorer: Dirigir
+    cmd: Manar
+  monitor: Monitoritzar per mostrar
+  enable: Activa el llançador d'aplicacions
+insert: Inserir
+inherit: Heretar
+more: Més
+close: Tancar -se
+update:
+  available: Actualitzeu disponible.

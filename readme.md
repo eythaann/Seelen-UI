@@ -67,18 +67,32 @@ Seelen UI is a tool designed to enhance your Windows desktop experience with a f
 
 * **Customize Your Desktop**: Seelen UI lets you tailor your desktop to fit your style and needs. You can adjust menus, widgets, and other elements to create a workspace that works best for you.
 
-  <img src="./documentation/images/preview2.png" width="100%" alt="Banner showcasing various customization options in Seelen UI">
+  ![Seelen UI Minimal Desktop](./documentation/images/preview2.png)
 
 <br/>
 
 * **Enhance Your Productivity**: Seelen UI helps you organize your desktop efficiently. With a Tiling Windows Manager, windows automatically arrange themselves to support multitasking, making your work more streamlined.
+  
+  ![Seelen UI Tiling Window Manager](./documentation/images/twm_preview.png)
 
-  <img src="./documentation/images/preview3.png" width="100%" alt="Seelen UI desktop with organized windows for efficient multitasking">
+<br/>
+
+* **Enjoy your music**: With an integrated media module that's compatible with most music players, Seelen UI allows you to enjoy your music seamlessly. You can pause, resume, and skip tracks at any time without the need to open additional windows.
+  
+  ![Seelen UI Media Module](./documentation/images/media_module_preview.png)
+
+<br/>
+
+* **Be faster!**: With the app launcher inpired in Rofi, Seelen UI provides a simple and intuitive way to quickly access your applications and ejecute commands.
+
+  ![Seelen UI App Launcher](./documentation/images/app_launcher_preview.png)
+
 <br/>
 
 * **User-Friendly Configuration**: Seelen UI offers an intuitive interface for easy customization. Adjust settings such as themes, taskbar layouts, icons, etc. With just a few clicks.
 
-  <img src="./documentation/images/mosaico.png" width="100%" alt="Example of customizable desktop settings in Seelen UI">
+  ![Seelen UI Settings](./documentation/images/settings_preview.png)
+
 <br/>
 
 ## Installation
@@ -124,7 +138,7 @@ For in-depth details on various aspects of Seelen UI, explore the following docu
 
 I’m excited to share some upcoming features for Seelen UI! Here’s a glimpse of what’s planned for the future:
 
-### App Launcher
+### ~~App Launcher~~ ✅
 I’m planning to develop an app launcher inspired by [Rofi](https://github.com/davatorium/rofi) on Linux. This feature will provide a sleek and highly customizable way to quickly access your applications.
 
 ![App Launcher Preview](https://raw.githubusercontent.com/adi1090x/files/master/rofi/previews/colorful/main.gif)

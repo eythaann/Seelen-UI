@@ -2,6 +2,8 @@ taskbar_menu:
   settings: 設定を開く
   media: メディアモジュールを追加
   start: 開始モジュールを追加
+  add_file: ピンカスタムファイル
+  add_folder: ピンカスタムフォルダー
 app_menu:
   pin: ピン留め
   open_file_location: ファイルの場所を開く

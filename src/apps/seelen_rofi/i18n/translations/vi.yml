@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Chạy
+    cmd: Yêu cầu
+footer:
+  shortcuts: Hiển thị các phím tắt
+header:
+  search: Ứng dụng, lệnh hoặc đường dẫn
+item:
+  pin: Ghim vào bến
+  open_location: Mở vị trí tệp

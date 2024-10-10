@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock/Taakbalk
     info: Informasie
     specific_apps: Spesifieke programme
+    seelen_wall: Die muur
+    seelen_rofi: App -lanseerder
+    virtual_desk: Virtuele tafelrekenaars
+    home: Tuiste
 start:
   title: Welkom!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Aksentkleur
   wallpaper:
     select: Kies Wallpaper
+  date_format: Datumformaat
 toolbar:
   placeholder:
     author: Outeur
@@ -70,7 +75,6 @@ weg:
     gap: Ruimte tussen items
     zoom_size: Ingezoomde grootte (gebruik vir temas)
     size: Itemgrootte
-  dock_side: Dokkant
   label: Dock/Taakbalk
   margin: Marge
   enable: Aktiveer dok/taakbalk
@@ -78,6 +82,7 @@ weg:
   auto_hide: Outo -vel
   padding: Opvulling
   gap: Gat
+  dock_side: Posisie
 devtools:
   app_folders: APP -vouers
   load: Vrag
@@ -150,7 +155,6 @@ shortcuts:
     reserve_right: Reserveer reg
     move_to_workspace_0: Beweeg na werkruimte 0
     reserve_float: Reservaat vlot
-    switch_workspace_0: Skakel oor na werkruimte 0
     focus_right: Fokus reg
     switch_workspace_7: Skakel oor na Workspace 7
     move_to_workspace_4: Beweeg na Workspace 4
@@ -162,7 +166,6 @@ shortcuts:
     send_to_workspace_6: Stuur na Workspace 6
     send_to_workspace_3: Stuur na Workspace 3
     send_to_workspace_8: Stuur na Workspace 8
-    switch_workspace_1: Skakel oor na werkruimte 1
     move_to_workspace_7: Beweeg na Workspace 7
     move_to_workspace_6: Beweeg na Workspace 6
     send_to_workspace_5: Stuur na Workspace 5
@@ -188,10 +191,13 @@ shortcuts:
     decrease_height: Verminder hoogte
     reserve_bottom: Reservaat onder
     focus_latest: Fokus nuut
+    switch_workspace_0: Skakel oor na werkruimte 1
+    switch_workspace_1: Skakel oor na Workspace 2
   enable: Aktiveer geïntegreerde kortpaaie (AHK)
   enable_tooltip: >-
     Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen
     Core API
+  reset: Herstel na standaard
 open: Oopmaak
 loading: Laai ...
 save: Red
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Stoor en herbegin
 beta_channel:
   enable: Aktiveer beta -kanaal (slegs via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
+  interval: Verander plakpapier elke (sekondes)
+  enable: Aktiveer Seelen Wall
+  backgrounds: Agtergronde
+app_launcher:
+  runners:
+    explorer: Wedloop
+    label: Hardlopers
+    cmd: Kommandeer
+  enable: Aktiveer App Launcher
+  monitor: Monitor om te wys
+insert: Invoeg
+more: Meer
+inherit: Erf
+close: Dig
+update:
+  available: Opdatering beskikbaar!

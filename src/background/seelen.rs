@@ -1,88 +1,122 @@
-use std::{env::temp_dir, sync::Arc};
+use std::{
+    env::temp_dir,
+    sync::{atomic::AtomicBool, Arc, OnceLock},
+};
 
-use arc_swap::ArcSwap;
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use tauri::{path::BaseDirectory, AppHandle, Manager, Wry};
+use seelen_core::handlers::SeelenEvent;
+use tauri::{path::BaseDirectory, AppHandle, Emitter, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Graphics::Gdi::HMONITOR;
 
 use crate::{
     error_handler::Result,
     hook::register_win_hook,
+    instance::SeelenInstanceContainer,
     log_error,
     modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
-    monitor::Monitor,
+    seelen_rofi::SeelenRofi,
+    seelen_wall::SeelenWall,
     seelen_weg::SeelenWeg,
+    seelen_wm_v2::instance::WindowManagerV2,
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, sleep_millis, spawn_named_thread, PERFORMANCE_HELPER},
-    windows_api::{WindowEnumerator, WindowsApi},
+    utils::{ahk::AutoHotKey, PERFORMANCE_HELPER},
+    windows_api::WindowsApi,
 };
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
-    pub static ref APP_HANDLE: Arc<Mutex<Option<AppHandle<Wry>>>> = Arc::new(Mutex::new(None));
 }
 
-pub fn get_app_handle() -> AppHandle<Wry> {
+static APP_HANDLE: OnceLock<AppHandle<Wry>> = OnceLock::new();
+static SEELEN_IS_RUNNING: AtomicBool = AtomicBool::new(false);
+
+pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
     APP_HANDLE
-        .lock()
-        .clone()
+        .get()
         .expect("get_app_handle called but app is still not initialized")
 }
 
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
-    handle: Option<AppHandle<Wry>>,
     #[getset(get = "pub", get_mut = "pub")]
-    monitors: Vec<Monitor>,
-    state: Option<Arc<ArcSwap<FullState>>>,
+    monitors: Vec<SeelenInstanceContainer>,
+    #[getset(get = "pub", get_mut = "pub")]
+    rofi: Option<SeelenRofi>,
+    #[getset(get = "pub", get_mut = "pub")]
+    wall: Option<SeelenWall>,
 }
 
 /* ============== Getters ============== */
 impl Seelen {
-    /** Ensure Seelen is initialized first before calling */
-    pub fn handle(&self) -> &AppHandle<Wry> {
-        self.handle.as_ref().unwrap()
+    pub fn is_running() -> bool {
+        SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Relaxed)
     }
 
-    pub fn focused_monitor(&self) -> Option<&Monitor> {
+    pub fn focused_monitor(&self) -> Option<&SeelenInstanceContainer> {
         self.monitors.iter().find(|m| m.is_focused())
     }
 
-    pub fn focused_monitor_mut(&mut self) -> Option<&mut Monitor> {
+    pub fn focused_monitor_mut(&mut self) -> Option<&mut SeelenInstanceContainer> {
         self.monitors.iter_mut().find(|m| m.is_focused())
     }
 
-    pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut Monitor> {
-        self.monitors.iter_mut().find(|m| m.handle().0 == id)
+    pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut SeelenInstanceContainer> {
+        self.monitors
+            .iter_mut()
+            .find(|m| m.handle().0 as isize == id)
     }
 
-    pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut Monitor> {
+    pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut SeelenInstanceContainer> {
         self.monitors.iter_mut().find(|m| m.name() == name)
     }
 
     pub fn state(&self) -> Arc<FullState> {
-        self.state
-            .as_ref()
-            .expect("Seelen State not initialized")
-            .load_full()
+        FULL_STATE.load_full()
     }
 }
 
 /* ============== Methods ============== */
 impl Seelen {
-    pub fn on_state_changed(&mut self) -> Result<()> {
+    fn add_rofi(&mut self) -> Result<()> {
+        if self.rofi.is_none() {
+            self.rofi = Some(SeelenRofi::new()?);
+        }
+        Ok(())
+    }
+
+    fn add_wall(&mut self) -> Result<()> {
+        if self.wall.is_none() {
+            let wall = SeelenWall::new()?;
+            wall.update_position()?;
+            self.wall = Some(wall)
+        }
+        Ok(())
+    }
+
+    fn refresh_windows_positions(&mut self) -> Result<()> {
+        if let Some(wall) = &self.wall {
+            wall.update_position()?;
+        }
+        for monitor in &mut self.monitors {
+            if WindowsApi::monitor_info(*monitor.handle()).is_ok() {
+                monitor.ensure_positions()?;
+            }
+        }
+        Ok(())
+    }
+
+    pub fn on_settings_change(&mut self) -> Result<()> {
         let state = self.state();
 
-        if state.is_ahk_enabled() {
-            Self::start_ahk_shortcuts()?;
-        } else {
-            Self::kill_ahk_shortcuts()?;
+        match state.is_ahk_enabled() {
+            true => Self::start_ahk_shortcuts()?,
+            false => Self::kill_ahk_shortcuts()?,
         }
 
         if state.is_weg_enabled() {
@@ -91,100 +125,111 @@ impl Seelen {
             SeelenWeg::restore_taskbar()?;
         }
 
+        match state.is_window_manager_enabled() {
+            true => {
+                WindowManagerV2::init_state()?;
+                WindowManagerV2::enumerate_all_windows()?;
+            }
+            false => WindowManagerV2::clear_state(),
+        }
+
+        match state.is_rofi_enabled() {
+            true => self.add_rofi()?,
+            false => self.rofi = None,
+        }
+
+        match state.is_wall_enabled() {
+            true => self.add_wall()?,
+            false => self.wall = None,
+        }
+
         for monitor in &mut self.monitors {
             monitor.load_settings(&state)?;
         }
+
+        self.refresh_windows_positions()?;
         Ok(())
     }
 
-    pub fn init(&mut self, app: AppHandle<Wry>) -> Result<()> {
-        Self::ensure_folders(&app)?;
+    /// Initialize Seelen and Lazy static variables
+    pub fn init(&mut self, handle: &AppHandle<Wry>) -> Result<()> {
         log::trace!("Initializing Seelen");
-
-        *APP_HANDLE.lock() = Some(app.clone());
-        self.handle = Some(app.clone());
-        self.state = Some(Arc::clone(&FULL_STATE));
+        APP_HANDLE
+            .set(handle.to_owned())
+            .map_err(|_| "Failed to set app handle")?;
+        Self::ensure_folders(handle)?;
         Ok(())
     }
 
     fn on_monitor_event(event: MonitorManagerEvent) {
-        log::trace!("Monitor event: {:?}", event);
-        let mut seelen = trace_lock!(SEELEN);
         match event {
             MonitorManagerEvent::Added(_name, id) => {
-                log_error!(seelen.add_monitor(id));
+                log_error!(trace_lock!(SEELEN).add_monitor(id));
             }
             MonitorManagerEvent::Removed(_name, id) => {
-                log_error!(seelen.remove_monitor(id));
+                log_error!(trace_lock!(SEELEN).remove_monitor(id));
             }
             MonitorManagerEvent::Updated(name, id) => {
-                if let Some(m) = seelen.monitor_by_name_mut(&name) {
+                if let Some(m) = trace_lock!(SEELEN).monitor_by_name_mut(&name) {
                     m.update_handle(id);
                 }
             }
         }
+        log_error!(get_app_handle().emit(SeelenEvent::GlobalMonitorsChanged, ()));
     }
 
-    fn start_async() -> Result<()> {
-        log_error!(Self::start_ahk_shortcuts());
-
-        let mut all_ready = false;
-        while !all_ready {
-            sleep_millis(50);
-            all_ready = trace_lock!(SEELEN).monitors().iter().all(|m| m.is_ready());
+    async fn start_async() -> Result<()> {
+        if FULL_STATE.load().is_weg_enabled() {
+            SeelenWeg::enumerate_all_windows()?;
         }
 
-        log::debug!(
-            "Seelen UI ready in: {:.2}s",
-            trace_lock!(PERFORMANCE_HELPER)
-                .elapsed("init")
-                .as_secs_f64()
-        );
+        if FULL_STATE.load().is_window_manager_enabled() {
+            WindowManagerV2::enumerate_all_windows()?;
+        }
 
-        log::trace!("Enumerating windows");
-        WindowEnumerator::new().for_each(|hwnd| {
-            let mut seelen = trace_lock!(SEELEN);
-
-            if SeelenWeg::should_be_added(hwnd) {
-                SeelenWeg::add_hwnd(hwnd);
-            }
-
-            for monitor in seelen.monitors_mut() {
-                if let Some(wm) = monitor.wm_mut() {
-                    if wm.should_be_added(hwnd) {
-                        log_error!(wm.add_hwnd(hwnd));
-                    }
-                }
-            }
-        })?;
-
-        register_win_hook()?;
+        Self::start_ahk_shortcuts()?;
+        Self::refresh_auto_start_path().await?;
         Ok(())
     }
 
     pub fn start(&mut self) -> Result<()> {
+        SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
         declare_system_events_handlers()?;
+
+        if self.state().is_rofi_enabled() {
+            self.add_rofi()?;
+        }
+
+        if self.state().is_wall_enabled() {
+            self.add_wall()?;
+        }
 
         if self.state().is_weg_enabled() {
             SeelenWeg::hide_taskbar();
         }
 
-        log::trace!("Enumerating Monitors");
+        log::trace!("Enumerating Monitors & Creating Instances");
         let monitors = trace_lock!(MONITOR_MANAGER).monitors.clone();
         for (_name, id) in monitors {
-            log_error!(self.add_monitor(id));
+            self.add_monitor(id)?;
         }
         trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
 
-        spawn_named_thread("Start Async", || log_error!(Self::start_async()))?;
         tauri::async_runtime::spawn(async {
-            log_error!(Self::refresh_auto_start_path().await);
+            trace_lock!(PERFORMANCE_HELPER).start("lazy setup");
+            log_error!(Self::start_async().await);
+            trace_lock!(PERFORMANCE_HELPER).end("lazy setup");
         });
+
+        self.refresh_windows_positions()?;
+        register_win_hook()?;
         Ok(())
     }
 
     /// Stop and release all resources
     pub fn stop(&self) {
+        SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
+
         release_system_events_handlers();
         if self.state().is_weg_enabled() {
             log_error!(SeelenWeg::restore_taskbar());
@@ -195,12 +240,15 @@ impl Seelen {
     }
 
     fn add_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
-        self.monitors.push(Monitor::new(hmonitor, &self.state())?);
+        self.monitors
+            .push(SeelenInstanceContainer::new(hmonitor, &self.state())?);
+        self.refresh_windows_positions()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
         self.monitors.retain(|m| m.handle() != &hmonitor);
+        self.refresh_windows_positions()?;
         Ok(())
     }
 
@@ -233,7 +281,7 @@ impl Seelen {
         create_if_needed("placeholders")?;
         create_if_needed("themes")?;
         create_if_needed("layouts")?;
-        create_if_needed("icons")?;
+        create_if_needed("icons/system")?;
         create_if_needed("wallpapers")?;
 
         Ok(())
@@ -313,6 +361,13 @@ impl Seelen {
                 .name("seelen.ahk")
                 .execute()?;
 
+            AutoHotKey::from_template(
+                include_str!("utils/ahk/mocks/seelen.vd.ahk"),
+                state.get_ahk_variables(),
+            )
+            .name("seelen.vd.ahk")
+            .execute()?;
+
             if state.is_window_manager_enabled() {
                 AutoHotKey::from_template(
                     include_str!("utils/ahk/mocks/seelen.wm.ahk"),
@@ -347,15 +402,13 @@ impl Seelen {
         let handle = get_app_handle();
         let window = handle.get_webview_window("settings").or_else(|| {
             tauri::WebviewWindowBuilder::new(
-                &handle,
+                handle,
                 "settings",
                 tauri::WebviewUrl::App("settings/index.html".into()),
             )
             .title("Settings")
-            .inner_size(720.0, 480.0)
-            .maximizable(false)
-            .minimizable(true)
-            .resizable(false)
+            .inner_size(750.0, 480.0)
+            .min_inner_size(700.0, 400.0)
             .visible(false)
             .decorations(false)
             .center()
@@ -371,39 +424,5 @@ impl Seelen {
             }
             None => Err("Failed to create settings window".into()),
         }
-    }
-
-    pub fn show_update_modal() -> Result<()> {
-        log::trace!("Showing update notification window");
-        let handle = get_app_handle();
-        // check if path is in windows apps folder
-        let installation_path = handle.path().resource_dir()?;
-        if installation_path
-            .to_string_lossy()
-            .contains(r"\Program Files\WindowsApps\")
-        {
-            log::trace!("Skipping update notification because it is installed as MSIX");
-            return Ok(());
-        }
-
-        tauri::WebviewWindowBuilder::new(
-            &handle,
-            "updater",
-            tauri::WebviewUrl::App("update/index.html".into()),
-        )
-        .inner_size(500.0, 260.0)
-        .maximizable(false)
-        .minimizable(true)
-        .resizable(false)
-        .title("Update Available")
-        .visible(false)
-        .decorations(false)
-        .transparent(true)
-        .shadow(false)
-        .center()
-        .always_on_top(true)
-        .build()?;
-
-        Ok(())
     }
 }

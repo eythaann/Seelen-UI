@@ -14,6 +14,10 @@ header:
     seelen_wm: Manajer Jendela
     specific_apps: Aplikasi tertentu
     shortcuts: Pintasan
+    seelen_wall: Dindingnya
+    seelen_rofi: Peluncur Aplikasi
+    virtual_desk: Desktop virtual
+    home: Rumah
 start:
   message: >-
     Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
@@ -41,6 +45,7 @@ general:
   accent_color: Aksen warna
   wallpaper:
     select: Pilih wallpaper
+  date_format: Format tanggal
 toolbar:
   placeholder:
     select: Struktur bilah alat
@@ -77,7 +82,7 @@ weg:
   padding: Lapisan
   width: Lebar
   gap: Celah
-  dock_side: Sisi dermaga
+  dock_side: Posisi
 devtools:
   settings_file: File Pengaturan
   install_folder: Folder Instalasi
@@ -152,7 +157,6 @@ shortcuts:
     focus_right: Fokus benar
     reserve_stack: Tumpukan Cadangan
     reserve_bottom: Cadangan Bawah
-    switch_workspace_1: Beralih ke ruang kerja 1
     switch_workspace_9: Beralih ke ruang kerja 9
     reserve_float: Cadangan float
     increase_height: Tingkatkan tinggi
@@ -170,7 +174,6 @@ shortcuts:
     send_to_workspace_5: Kirim ke Workspace 5
     send_to_workspace_0: Kirim ke ruang kerja 0
     focus_latest: Fokus Terbaru
-    switch_workspace_0: Beralih ke ruang kerja 0
     move_to_workspace_8: Pindah ke ruang kerja 8
     move_to_workspace_5: Pindah ke ruang kerja 5
     move_to_workspace_6: Pindah ke ruang kerja 6
@@ -188,10 +191,13 @@ shortcuts:
     decrease_width: Penurunan lebar
     send_to_workspace_7: Kirim ke Workspace 7
     send_to_workspace_3: Kirim ke Workspace 3
+    switch_workspace_1: Beralih ke ruang kerja 2
+    switch_workspace_0: Beralih ke ruang kerja 1
   enable: Aktifkan pintasan terintegrasi (AHK)
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri
     menggunakan API Inti Seelen
+  reset: Reset ke default
 open: Membuka
 cancel: Membatalkan
 save: Menyimpan
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Simpan & restart
 beta_channel:
   enable: Aktifkan saluran beta (hanya melalui github)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Wallpaper
+  enable: Aktifkan Seelen Wall
+  interval: Ubah wallpaper setiap (detik)
+  no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
+app_launcher:
+  runners:
+    cmd: Memerintah
+    explorer: Berlari
+    label: Pelari
+  enable: Aktifkan peluncur aplikasi
+  monitor: Monitor untuk ditampilkan
+insert: Menyisipkan
+more: Lagi
+inherit: Mewarisi
+close: Menutup
+update:
+  available: Perbarui Tersedia!

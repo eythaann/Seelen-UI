@@ -1,10 +1,11 @@
-import { IRootState } from '../../../../../shared.interfaces';
-import { FocusedApp } from '../../../../shared/interfaces/common';
-import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
-import { Placeholder } from '../../../../shared/schemas/Placeholders';
 import { SoftOpaque } from 'readable-types';
+import { FancyToolbarSettings, Settings } from 'seelen-core';
+import { Placeholder } from 'seelen-core';
 
 import { WlanBssEntry } from '../../network/domain';
+
+import { IRootState } from '../../../../../shared.interfaces';
+import { FocusedApp } from '../../../../shared/interfaces/common';
 
 /** https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status */
 export interface PowerStatus {
@@ -103,26 +104,13 @@ export interface AppNotification {
   date: number;
 }
 
-export interface UIColors {
-  background: string;
-  foreground: string;
-  accent_darkest: string;
-  accent_darker: string;
-  accent_dark: string;
-  accent: string;
-  accent_light: string;
-  accent_lighter: string;
-  accent_lightest: string;
-  complement: string | null;
-}
-
 export type WorkspaceId = SoftOpaque<string, 'WorkspaceId'>;
 export interface Workspace {
   id: WorkspaceId;
   name: string | null;
 }
 
-export interface RootState extends IRootState<FancyToolbar> {
+export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settings, 'dateFormat'> {
   version: number;
   isOverlaped: boolean;
   focused: FocusedApp | null;
@@ -141,5 +129,4 @@ export interface RootState extends IRootState<FancyToolbar> {
   mediaOutputs: MediaDevice[];
   mediaInputs: MediaDevice[];
   notifications: AppNotification[];
-  colors: UIColors;
 }

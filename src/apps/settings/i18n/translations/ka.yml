@@ -14,6 +14,10 @@ header:
     shortcuts: მალსახმობები
     seelen_wm: ფანჯრის მენეჯერი
     specific_apps: კონკრეტული პროგრამები
+    seelen_rofi: აპლიკაციის გამშვები
+    seelen_wall: კედელი
+    virtual_desk: ვირტუალური სამუშაო მაგიდა
+    home: სახლი
 start:
   message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
   title: კეთილი იყოს თქვენი მობრძანება!
@@ -41,6 +45,7 @@ general:
   accent_color: აქცენტის ფერი
   wallpaper:
     select: აირჩიეთ ფონი
+  date_format: თარიღის ფორმატი
 toolbar:
   placeholder:
     description: აღწერილობა
@@ -76,8 +81,8 @@ weg:
   padding: ბადება
   margin: ზღვარი
   gap: ხარპი
-  dock_side: დოკის მხარე
   enable: ჩართეთ dock/taskbar
+  dock_side: პოზიცია
 devtools:
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
   app_folders: აპლიკაციის საქაღალდეები
@@ -151,7 +156,6 @@ shortcuts:
     reserve_stack: სარეზერვო დასტა
     focus_right: ფოკუსირება სწორად
     move_to_workspace_8: გადავიდეთ სამუშაო ადგილებზე 8
-    switch_workspace_0: გადადით სამუშაო ადგილებზე 0
     switch_workspace_2: გადადით სამუშაო ადგილებზე 2
     switch_workspace_9: გადადით სამუშაო ადგილებზე 9
     focus_latest: ფოკუსირება უახლესი
@@ -172,7 +176,6 @@ shortcuts:
     focus_bottom: ფოკუსირება
     switch_workspace_4: გადადით სამუშაო ადგილებზე 4
     focus_left: ფოკუსირება მარცხნივ
-    switch_workspace_1: გადადით სამუშაო ადგილებზე 1
     move_to_workspace_2: გადავიდეთ სამუშაო ადგილებზე 2
     send_to_workspace_9: გაგზავნეთ სამუშაო სივრცეში 9
     move_to_workspace_0: გადადით სამუშაო ადგილებზე 0
@@ -188,10 +191,13 @@ shortcuts:
     send_to_workspace_8: გაგზავნეთ სამუშაო სივრცეში 8
     switch_workspace_5: გადადით სამუშაო ადგილებზე 5
     reserve_float: სარეზერვო float
+    switch_workspace_1: გადადით სამუშაო ადგილებზე 2
+    switch_workspace_0: გადადით სამუშაო ადგილებზე 1
   enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
   enable_tooltip: >-
     გამორთეთ, თუ თქვენ განახორციელებთ საკუთარ მალსახმობებს Seelen Core API– ს
     გამოყენებით
+  reset: გადატვირთვა ნაგულისხმევებზე
 save: Გადარჩენა
 inProgress: Პროგრესირებს...
 loading: Ჩატვირთვა...
@@ -210,3 +216,23 @@ vd:
 save_and_restart: შენახვა და გადატვირთვა
 beta_channel:
   enable: ბეტა არხის ჩართვა (მხოლოდ Github- ის საშუალებით)
+monitors_configurations:
+  label: მონიტორი {{ინდექსი}}
+wall:
+  no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
+  backgrounds: ფონები
+  enable: ჩართეთ seelen კედელი
+  interval: ფონი შეცვალეთ ყოველ (წამში)
+app_launcher:
+  runners:
+    cmd: ბრძანება
+    label: მორბენალი
+    explorer: სირბილი
+  monitor: მონიტორის ჩვენება
+  enable: ჩართეთ აპლიკაციის გამშვები
+more: მეტი
+insert: ჩასმა
+inherit: მემკვიდრეობით მიღება
+close: ახლო
+update:
+  available: განახლება ხელმისაწვდომია!

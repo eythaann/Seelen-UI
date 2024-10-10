@@ -1,26 +1,28 @@
-import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
-import { FileChange, GlobalEvent } from '../../../../shared/events';
-import { FocusedApp } from '../../../../shared/interfaces/common';
-import { Seelenweg, SeelenWegMode, SeelenWegSide } from '../../../../shared/schemas/Seelenweg';
-import { SwItemType, SwSavedItem } from '../../../../shared/schemas/SeelenWegItems';
-import { Theme } from '../../../../shared/schemas/Theme';
-import { updateHitbox } from '../../../events';
-import i18n from '../../../i18n';
-import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
+import { SeelenEvent, SeelenWegSettings, SeelenWegSide, SwItemType, UIColors, WegItem } from 'seelen-core';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { AppFromBackground, HWND, MediaSession, SwItem, UIColors } from './domain';
+import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
+
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
+import { FocusedApp } from '../../../../shared/interfaces/common';
+import { StartThemingTool } from '../../../../shared/styles';
+import i18n from '../../../i18n';
+import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground[]> {
@@ -32,32 +34,34 @@ async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground
   return result;
 }
 
-async function cleanSavedItems(items: SwSavedItem[]): Promise<SwItem[]> {
+async function cleanSavedItems(items: WegItem[]): Promise<SwItem[]> {
   const result: SwItem[] = [];
 
   for (const item of items) {
     if (item.type === SwItemType.PinnedApp) {
       result.push(await SwPinnedAppUtils.fromSaved(item));
     } else {
-      result.push(item);
+      // TODO remove assert
+      result.push(item as SwItem);
     }
   }
 
   return result;
 }
 
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
+
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
-  const updateHitboxIfNeeded = () => {
-    const { mode } = store.getState().settings;
-    if (mode === SeelenWegMode.MIN_CONTENT) {
-      updateHitbox();
-    }
-  };
 
   await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
-    updateHitbox();
   });
 
   await listenGlobal<AppFromBackground[]>('add-multiple-open-apps', async (event) => {
@@ -65,18 +69,15 @@ export async function registerStoreEvents() {
     for (const item of items) {
       store.dispatch(RootActions.addOpenApp(item));
     }
-    updateHitboxIfNeeded();
   });
 
   await listenGlobal<AppFromBackground>('add-open-app', async (event) => {
     const item = (await cleanItems([event.payload]))[0]!;
     store.dispatch(RootActions.addOpenApp(item));
-    updateHitboxIfNeeded();
   });
 
   await listenGlobal<HWND>('remove-open-app', (event) => {
     store.dispatch(RootActions.removeOpenApp(event.payload));
-    updateHitboxIfNeeded();
   });
 
   await listenGlobal<AppFromBackground>('update-open-app-info', async (event) => {
@@ -87,7 +88,7 @@ export async function registerStoreEvents() {
   const onFocusChanged = debounce((app: FocusedApp) => {
     store.dispatch(RootActions.setFocusedApp(app));
   }, 200);
-  await view.listen<FocusedApp>(GlobalEvent.FocusChanged, (e) => {
+  await view.listen<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
     onFocusChanged(e.payload);
     if (e.payload.name != 'Seelen UI') {
       onFocusChanged.flush();
@@ -98,17 +99,9 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
-  await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
-  });
+  await initUIColors();
 
-  await listenGlobal<Theme[]>(FileChange.Themes, async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
-  });
-
-  await listenGlobal<unknown>(FileChange.WegItems, async () => {
+  await listenGlobal<unknown>(SeelenEvent.StateWegItemsChanged, async () => {
     if (IsSavingPinnedItems.current) {
       IsSavingPinnedItems.current = false;
       return;
@@ -138,15 +131,15 @@ export async function registerStoreEvents() {
     await view.emitTo(view.label, 'request-all-open-apps');
   });
 
-  await listenGlobal<any>(FileChange.Settings, async () => {
+  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async () => {
     await loadSettingsToStore();
-    updateHitbox();
   });
 
+  await StartThemingTool();
   await view.emitTo(view.label, 'request-all-open-apps');
 }
 
-function loadSettingsCSS(settings: Seelenweg) {
+function loadSettingsCSS(settings: SeelenWegSettings) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-margin', `${settings.margin}px`);
@@ -157,22 +150,22 @@ function loadSettingsCSS(settings: Seelenweg) {
   styles.setProperty('--config-space-between-items', `${settings.spaceBetweenItems}px`);
 
   switch (settings.position) {
-    case SeelenWegSide.TOP:
+    case SeelenWegSide.Top:
       styles.setProperty('--config-by-position-justify-content', 'center');
       styles.setProperty('--config-by-position-align-items', 'flex-start');
       styles.setProperty('--config-by-position-flex-direction', 'row');
       break;
-    case SeelenWegSide.BOTTOM:
+    case SeelenWegSide.Bottom:
       styles.setProperty('--config-by-position-justify-content', 'center');
       styles.setProperty('--config-by-position-align-items', 'flex-end');
       styles.setProperty('--config-by-position-flex-direction', 'row');
       break;
-    case SeelenWegSide.LEFT:
+    case SeelenWegSide.Left:
       styles.setProperty('--config-by-position-justify-content', 'flex-start');
       styles.setProperty('--config-by-position-align-items', 'center');
       styles.setProperty('--config-by-position-flex-direction', 'column');
       break;
-    case SeelenWegSide.RIGHT:
+    case SeelenWegSide.Right:
       styles.setProperty('--config-by-position-justify-content', 'flex-end');
       styles.setProperty('--config-by-position-align-items', 'center');
       styles.setProperty('--config-by-position-flex-direction', 'column');
@@ -186,7 +179,6 @@ async function loadSettingsToStore() {
   const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
   loadSettingsCSS(settings);
-  loadThemeCSS(userSettings);
 }
 
 export async function loadStore() {

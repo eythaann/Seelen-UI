@@ -14,6 +14,10 @@ header:
     info: માહિતી
     specific_apps: વિશિષ્ટ એપ્લિકેશનો
     seelen_wm: વિન્ડો મેનેજર
+    seelen_wall: દિવાલ
+    seelen_rofi: હાથ
+    virtual_desk: વર્ચ્યુઅલ ડેસ્કટ .પ
+    home: ઘર
 start:
   title: સ્વાગત છે!
   message_accent: શૈલી સાથે તમારી ઉત્પાદકતાને ઑપ્ટિમાઇઝ કરો!
@@ -41,6 +45,7 @@ general:
   accent_color: ઉચ્ચારણ રંગ
   wallpaper:
     select: વ wallp લપેપર પસંદ કરો
+  date_format: તારીખ ફોર્મેટ
 toolbar:
   placeholder:
     author: લેખક
@@ -77,7 +82,7 @@ weg:
   enable: ડોક/ટાસ્કબારને સક્ષમ કરો
   width: પહોળાઈ
   gap: ગેપ
-  dock_side: ડોક સાઇડ
+  dock_side: પદ
 devtools:
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો
@@ -144,8 +149,6 @@ shortcuts:
   labels:
     send_to_workspace_2: વર્કસ્પેસ 2 પર મોકલો
     send_to_workspace_1: વર્કસ્પેસ 1 પર મોકલો
-    switch_workspace_0: વર્કસ્પેસ 0 પર સ્વિચ કરો
-    switch_workspace_1: વર્કસ્પેસ 1 પર સ્વિચ કરો
     switch_workspace_6: વર્કસ્પેસ 6 પર સ્વિચ કરો
     send_to_workspace_7: વર્કસ્પેસ પર મોકલો 7
     send_to_workspace_5: વર્કસ્પેસ 5 પર મોકલો
@@ -188,10 +191,13 @@ shortcuts:
     switch_workspace_3: વર્કસ્પેસ 3 પર સ્વિચ કરો
     focus_bottom: ફોકસ બોટમ
     switch_workspace_7: વર્કસ્પેસ 7 પર સ્વિચ કરો
+    switch_workspace_0: વર્કસ્પેસ 1 પર સ્વિચ કરો
+    switch_workspace_1: વર્કસ્પેસ 2 પર સ્વિચ કરો
   enable_tooltip: >-
     જો તમે સીલેન કોર એપીઆઈનો ઉપયોગ કરીને તમારા પોતાના શોર્ટકટ્સનો અમલ કરશો તો
     અક્ષમ કરો
   enable: સંકલિત શૉર્ટકટ્સ સક્ષમ કરો (ahk)
+  reset: ડિફોલ્ટ પર ફરીથી સેટ કરો
 open: ખુલ્લા
 delete: કાઢી નાખો
 save: સાચવો
@@ -208,3 +214,23 @@ vd:
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
 beta_channel:
   enable: બીટા ચેનલને સક્ષમ કરો (ફક્ત ગીથબ દ્વારા)
+monitors_configurations:
+  label: મોનિટર કરો {{અનુક્રમણિકા}}
+wall:
+  backgrounds: વ wallpapers લપેપર્સ
+  interval: દરેક (સેકંડ) વ wallp લપેપર બદલો
+  no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
+  enable: સીલેન દિવાલને સક્ષમ કરો
+app_launcher:
+  runners:
+    explorer: દોડવું
+    label: દોડવીરો
+    cmd: આદેશ આપવો
+  enable: એપ્લિકેશન લ laun ંચરને સક્ષમ કરો
+  monitor: બતાવવા માટે નિરીક્ષણ કરો
+more: વધારે
+inherit: વારસો મેળવવો
+insert: દાખલ કરવું
+close: બંધ
+update:
+  available: અપડેટ ઉપલબ્ધ!

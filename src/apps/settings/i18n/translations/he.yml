@@ -14,6 +14,10 @@ header:
     seelen_wm: מנהל חלונות
     seelen_bar: סרגל כלים מפואר
     monitors: צגים
+    seelen_rofi: משגר אפליקציות
+    seelen_wall: הקיר
+    virtual_desk: שולחנות עבודה וירטואליים
+    home: בַּיִת
 start:
   title: ברוך הבא!
   message: >-
@@ -40,6 +44,7 @@ general:
   accent_color: צבע הדגשה
   wallpaper:
     select: בחר טפט
+  date_format: פורמט תאריך
 toolbar:
   placeholder:
     author: מְחַבֵּר
@@ -75,8 +80,8 @@ weg:
   label: שורת המזח/המשימות
   margin: שולים
   enable: הפעל את המזח/שורת המשימות
-  dock_side: צד המזח
   padding: ריפוד
+  dock_side: מַצָב
 devtools:
   load: לִטעוֹן
   install_folder: תיקיית התקנה
@@ -159,7 +164,6 @@ shortcuts:
     send_to_workspace_0: שלח לסביבת עבודה 0
     move_to_workspace_2: לעבור לסביבת העבודה 2
     move_to_workspace_1: לעבור לסביבת העבודה 1
-    switch_workspace_1: עבור לסביבת העבודה 1
     increase_width: הגדל את הרוחב
     move_to_workspace_7: לעבור לסביבת העבודה 7
     send_to_workspace_5: שלח לסביבת העבודה 5
@@ -173,7 +177,6 @@ shortcuts:
     switch_workspace_9: עבור לסביבת העבודה 9
     reserve_top: עליון מילואים
     switch_workspace_6: לעבור לסביבת עבודה 6
-    switch_workspace_0: לעבור לסביבת עבודה 0
     focus_bottom: מיקוד תחתון
     send_to_workspace_4: שלח לסביבת העבודה 4
     switch_workspace_2: עבור לסביבת העבודה 2
@@ -186,8 +189,11 @@ shortcuts:
     send_to_workspace_8: שלח לסביבת עבודה 8
     send_to_workspace_2: שלח לסביבת עבודה 2
     decrease_height: ירידה בגובה
+    switch_workspace_1: עבור לסביבת העבודה 2
+    switch_workspace_0: עבור לסביבת העבודה 1
   enable: אפשר קיצורי דרך משולבים (AHK)
   enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
+  reset: אפס לברירות מחדל
 inProgress: בתהליך...
 loading: טוען...
 open: לִפְתוֹחַ
@@ -204,3 +210,23 @@ vd:
 save_and_restart: שמור והפעלה מחדש
 beta_channel:
   enable: אפשר ערוץ בטא (רק באמצעות github)
+monitors_configurations:
+  label: צג {{index}}
+wall:
+  backgrounds: טפטים
+  no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
+  interval: החלף טפטים כל (שניות)
+  enable: אפשר קיר Seelen
+app_launcher:
+  runners:
+    cmd: פְּקוּדָה
+    explorer: לָרוּץ
+    label: רצים
+  monitor: צג כדי להציג
+  enable: הפעל משגר אפליקציות
+inherit: לָרֶשֶׁת
+more: יוֹתֵר
+insert: לְהַכנִיס
+close: לִסְגוֹר
+update:
+  available: עדכון זמין!

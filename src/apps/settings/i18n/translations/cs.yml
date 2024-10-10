@@ -14,6 +14,10 @@ header:
     monitors: Monitory
     specific_apps: Konkrétní aplikace
     shortcuts: Zkratky
+    seelen_rofi: Spouštěč aplikací
+    seelen_wall: Zeď
+    virtual_desk: Virtuální stolní počítače
+    home: Domov
 start:
   title: Vítejte!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Accent Color
   wallpaper:
     select: Vyberte tapetu
+  date_format: Formát data
 toolbar:
   placeholder:
     author: Autor
@@ -77,7 +82,7 @@ weg:
   width: Šířka
   gap: Mezera
   padding: Polstrování
-  dock_side: Dock Side
+  dock_side: Pozice
 devtools:
   data_folder: Datová složka
   settings_file: Nastavení souboru
@@ -168,13 +173,11 @@ shortcuts:
     decrease_width: Snížit šířku
     move_to_workspace_3: Přesuňte se do pracovního prostoru 3
     switch_workspace_6: Přepněte do pracovního prostoru 6
-    switch_workspace_0: Přepněte do pracovního prostoru 0
     reserve_left: Rezerva vlevo
     increase_width: Zvětšit šířku
     restore_sizes: Obnovení velikosti
     reserve_stack: Rezervní zásobník
     switch_workspace_7: Přepněte do pracovního prostoru 7
-    switch_workspace_1: Přepněte do pracovního prostoru 1
     switch_workspace_5: Přepněte do pracovního prostoru 5
     focus_right: Zaměřte se správně
     focus_left: Zaostření doleva
@@ -188,8 +191,11 @@ shortcuts:
     move_to_workspace_7: Přesuňte se do pracovního prostoru 7
     send_to_workspace_7: Odeslat do pracovního prostoru 7
     move_to_workspace_9: Přesuňte se do pracovního prostoru 9
+    switch_workspace_1: Přepněte do pracovního prostoru 2
+    switch_workspace_0: Přepněte do pracovního prostoru 1
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
+  reset: Resetovat na výchozí hodnoty
 cancel: zrušení
 delete: Vymazat
 loading: Načítání...
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Uložit a restartovat
 beta_channel:
   enable: Povolit beta kanál (pouze přes GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Povolte zeď Seelen
+  backgrounds: Tapety
+  no_background: Prázdná prezentace místo toho za použití pozadí tématu.
+  interval: Změňte tapetu každý (sekundy)
+app_launcher:
+  runners:
+    explorer: Běh
+    cmd: Příkaz
+    label: Běžci
+  enable: Povolit spouštěč aplikací
+  monitor: Monitorovat
+insert: Vložit
+inherit: Zdědit
+more: Více
+close: Blízko
+update:
+  available: Aktualizace k dispozici!

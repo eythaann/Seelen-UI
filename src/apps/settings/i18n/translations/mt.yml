@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock / Taskbar
     developer: Żviluppatur
     monitors: Monitors
+    seelen_wall: Il-ħajt
+    seelen_rofi: APP Lancher
+    virtual_desk: Desktops virtwali
+    home: Id-dar
 start:
   title: Merħba!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Kulur tal-aċċent
   wallpaper:
     select: Agħżel Wallpaper
+  date_format: Format tad-data
 toolbar:
   placeholder:
     author: Awtur
@@ -70,7 +75,6 @@ weg:
     gap: Spazju bejn l-oġġetti
     size: Daqs tal-oġġett
     zoom_size: Daqs miżjud (użat għat-temi)
-  dock_side: Naħa tal-baċir
   label: Dock / Taskbar
   width: Wisa '
   enable: Enable Dock / Taskbar
@@ -78,6 +82,7 @@ weg:
   auto_hide: Auto Hide
   padding: Ikkuttunar
   margin: Marġni
+  dock_side: Pożizzjoni
 devtools:
   data_folder: Folder tad-dejta
   install_folder: Folder tal-installazzjoni
@@ -173,14 +178,12 @@ shortcuts:
     switch_workspace_4: Aqleb għall-Ispazju tax-Xogħol 4
     send_to_workspace_2: Ibgħat lill-Ispazju tax-Xogħol 2
     send_to_workspace_8: Ibgħat lill-Ispazju tax-Xogħol 8
-    switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 1
     focus_right: Iffoka t-tajjeb
     move_to_workspace_3: Mexxi għall-Ispazju tax-Xogħol 3
     send_to_workspace_0: Ibgħat lill-Ispazju tax-Xogħol 0
     decrease_height: Tnaqqas l-għoli
     switch_workspace_8: Aqleb għall-Ispazju tax-Xogħol 8
     switch_workspace_9: Aqleb għall-Ispazju tax-Xogħol 9
-    switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 0
     move_to_workspace_7: Mexxi għall-Ispazju tax-Xogħol 7
     send_to_workspace_9: Ibgħat lill-Ispazju tax-Xogħol 9
     switch_workspace_2: Aqleb għall-Ispazju tax-Xogħol 2
@@ -188,8 +191,11 @@ shortcuts:
     move_to_workspace_8: Mexxi għall-Ispazju tax-Xogħol 8
     focus_latest: Iffoka l-aħħar
     send_to_workspace_3: Ibgħat lill-Ispazju tax-Xogħol 3
+    switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 1
+    switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 2
   enable: Enable Shortcuts Integrati (AHK)
   enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core
+  reset: Irrisettja għal nuqqasijiet
 loading: Tagħbija...
 inProgress: Fil-progress...
 cancel: Ikkanċella
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Issejvja u terġa 'tibda
 beta_channel:
   enable: Enable Beta Channel (biss permezz ta 'Github)
+monitors_configurations:
+  label: Monitor {{indiċi}}
+wall:
+  enable: Jippermetti ħajt tas-seelen
+  interval: Ibdel il-wallpaper kull (sekondi)
+  backgrounds: Wallpapers
+  no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
+app_launcher:
+  runners:
+    explorer: Ġirja
+    label: Runners
+    cmd: Kmand
+  monitor: Tissorvelja biex turi
+  enable: Enable App Launcher
+inherit: Jirtu
+insert: Daħħal
+more: Aktar
+close: Viċin
+update:
+  available: Aġġornament disponibbli!

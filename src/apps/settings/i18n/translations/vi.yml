@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock/Thanh tác vụ
     seelen_wm: Quản lý cửa sổ
     shortcuts: Phím tắt
+    seelen_rofi: Ứng dụng Launcher
+    seelen_wall: Bức tường
+    virtual_desk: Máy tính để bàn ảo
+    home: Trang chủ
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -41,6 +45,7 @@ general:
   accent_color: Màu nhấn
   wallpaper:
     select: Chọn hình nền
+  date_format: Định dạng ngày
 toolbar:
   placeholder:
     author: Tác giả
@@ -76,8 +81,8 @@ weg:
   enable: Bật Dock/Thanh tác vụ
   padding: Đệm
   label: Dock/Thanh tác vụ
-  dock_side: Phía bến tàu
   auto_hide: Tự động ẩn
+  dock_side: Chức vụ
 devtools:
   load: Trọng tải
   app_folders: Thư mục ứng dụng
@@ -151,8 +156,6 @@ shortcuts:
     send_to_workspace_9: Gửi đến không gian làm việc 9
     reserve_top: Dự trữ hàng đầu
     focus_bottom: Focus bottom
-    switch_workspace_1: Chuyển sang không gian làm việc 1
-    switch_workspace_0: Chuyển sang không gian làm việc 0
     reserve_stack: Ngân hàng dự trữ
     switch_workspace_3: Chuyển sang không gian làm việc 3
     increase_height: Tăng chiều cao
@@ -188,8 +191,11 @@ shortcuts:
     reserve_left: Dự trữ trái
     send_to_workspace_7: Gửi đến không gian làm việc 7
     focus_left: Tập trung trái
+    switch_workspace_0: Chuyển sang không gian làm việc 1
+    switch_workspace_1: Chuyển sang không gian làm việc 2
   enable: Bật các phím tắt tích hợp (AHK)
   enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
+  reset: Đặt lại về mặc định
 loading: Đang tải...
 open: Mở
 quit: Từ bỏ
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Lưu & Khởi động lại
 beta_channel:
   enable: Bật kênh Beta (chỉ qua GitHub)
+monitors_configurations:
+  label: Màn hình {{index}}
+wall:
+  interval: Thay đổi hình nền mỗi (giây)
+  no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
+  backgrounds: Hình nền
+  enable: Bật tường Seelen
+app_launcher:
+  runners:
+    explorer: Chạy
+    cmd: Yêu cầu
+    label: Người chạy bộ
+  enable: Bật trình khởi chạy ứng dụng
+  monitor: Giám sát để hiển thị
+insert: Chèn
+more: Hơn
+inherit: Kế thừa
+close: Đóng
+update:
+  available: Cập nhật có sẵn!

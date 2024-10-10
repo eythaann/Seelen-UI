@@ -1,11 +1,13 @@
-import { Icon, IconName } from '../../../../shared/components/Icon';
-import { cx } from '../../../../shared/styles';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Input } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SeelenCommand } from 'seelen-core';
 
 import { WlanBssEntry, WlanProfile } from '../domain';
+
+import { Icon } from '../../../../shared/components/Icon';
+import { cx } from '../../../../shared/styles';
 
 export function WlanSelectorEntry(props: {
   entry: WlanBssEntry;
@@ -42,7 +44,7 @@ export function WlanSelectorEntry(props: {
     }
 
     if (entry.connected) {
-      invoke('wlan_disconnect').then(() => setLoading(false), onrejected);
+      invoke(SeelenCommand.WlanDisconnect).then(() => setLoading(false), onrejected);
       return;
     }
 
@@ -84,7 +86,7 @@ export function WlanSelectorEntry(props: {
       .catch(onrejected);
   }
 
-  let signalIcon: IconName = 'GrWifiNone';
+  let signalIcon = 'GrWifiNone';
   if (entry.signal > 75) {
     signalIcon = 'GrWifi';
   } else if (entry.signal > 50) {
@@ -102,7 +104,7 @@ export function WlanSelectorEntry(props: {
       onClick={onClick}
     >
       <div className="wlan-entry-info">
-        <Icon iconName={signalIcon} propsIcon={{ size: 20 }} />
+        <Icon iconName={signalIcon} size={20} />
         <span className="wlan-entry-info-ssid">{entry.ssid || t('network.hidden')}</span>
       </div>
       {showFields && (

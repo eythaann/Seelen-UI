@@ -1,29 +1,30 @@
+import { invoke } from '@tauri-apps/api/core';
+import { Popover } from 'antd';
+import { memo, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
+
+import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
+import { updatePreviews } from '../../shared/utils/infra';
+
+import {
+  ExtendedPinnedAppWegItem,
+  ExtendedTemporalAppWegItem,
+  RootState,
+} from '../../shared/store/domain';
+
 import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { getMenuForItem } from '../../bar/menu';
 import { DraggableItem } from './DraggableItem';
 import { UserApplicationPreview } from './UserApplicationPreview';
-import { invoke } from '@tauri-apps/api/core';
-import { Popover } from 'antd';
-import { motion } from 'framer-motion';
-import { memo, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-
-import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
-import { useAppBlur } from '../../shared/hooks/infra';
-import { updatePreviews } from '../../shared/utils/infra';
-
-import { Selectors } from '../../shared/store/app';
-
-import { RootState, SwPinnedApp, SwTemporalApp } from '../../shared/store/domain';
 
 interface Props {
-  item: SwPinnedApp | SwTemporalApp;
+  item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem;
 }
 
 export const UserApplication = memo(({ item }: Props) => {
-  const size = useSelector(Selectors.settings.size);
   const isFocused = useSelector(
     (state: RootState) => state.focusedApp && item.opens.includes(state.focusedApp.hwnd),
   );
@@ -32,8 +33,10 @@ export const UserApplication = memo(({ item }: Props) => {
 
   const { t } = useTranslation();
 
-  useAppBlur(() => {
-    setOpenPreview(false);
+  useWindowFocusChange((focused) => {
+    if (!focused) {
+      setOpenPreview(false);
+    }
   });
 
   useEffect(() => {
@@ -70,14 +73,19 @@ export const UserApplication = memo(({ item }: Props) => {
             </BackgroundByLayersV2>
           }
         >
-          <motion.div
+          <div
             className="weg-item"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            style={{ height: size, aspectRatio: '1/1' }}
             onClick={() => {
-              let hwnd = item.opens[0] || 0;
-              invoke('weg_toggle_window_state', { hwnd, exePath: item.execution_path });
+              invoke(SeelenCommand.WegToggleWindowState, {
+                hwnd: item.opens[0] || 0,
+                exePath: item.execution_path,
+              });
+            }}
+            onAuxClick={(e) => {
+              let hwnd = item.opens[0];
+              if (e.button === 1 && hwnd) {
+                invoke(SeelenCommand.WegCloseApp, { hwnd });
+              }
             }}
             onContextMenu={(e) => e.stopPropagation()}
           >
@@ -89,7 +97,7 @@ export const UserApplication = memo(({ item }: Props) => {
                 'weg-item-open-sign-focused': isFocused,
               })}
             />
-          </motion.div>
+          </div>
         </Popover>
       </WithContextMenu>
     </DraggableItem>

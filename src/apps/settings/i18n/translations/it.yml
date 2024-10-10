@@ -14,6 +14,10 @@ header:
     seelen_bar: Barra degli strumenti di fantasia
     seelen_wm: Gestore delle finestre
     specific_apps: App specifiche
+    seelen_wall: Il muro
+    seelen_rofi: APP LAVANTOLA
+    virtual_desk: Desktop virtuali
+    home: Casa
 start:
   title: Benvenuta!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Colore accento
   wallpaper:
     select: Seleziona sfondo
+  date_format: Formato della data
 toolbar:
   placeholder:
     author: Autrice
@@ -77,7 +82,7 @@ weg:
   gap: Spacco
   label: Dock/TaskBar
   enable: Abilita dock/barra delle applicazioni
-  dock_side: Lato dock
+  dock_side: Posizione
 devtools:
   load: Carico
   custom_config_file: Carica il file di configurazione personalizzato
@@ -145,7 +150,6 @@ shortcuts:
     reserve_float: Float di riserva
     move_to_workspace_5: Passa all'area di lavoro 5
     move_to_workspace_2: Passa all'area di lavoro 2
-    switch_workspace_1: Passa all'area di lavoro 1
     move_to_workspace_4: Passa all'area di lavoro 4
     focus_bottom: Focus Bottom
     focus_top: Focus top
@@ -174,7 +178,6 @@ shortcuts:
     switch_workspace_2: Passa all'area di lavoro 2
     focus_latest: Focus Ultime
     send_to_workspace_1: Invia a Workspace 1
-    switch_workspace_0: Passa all'area di lavoro 0
     focus_left: Focus a sinistra
     switch_workspace_6: Passa all'area di lavoro 6
     move_to_workspace_8: Passa all'area di lavoro 8
@@ -188,10 +191,13 @@ shortcuts:
     switch_workspace_5: Passa all'area di lavoro 5
     switch_workspace_3: Passa all'area di lavoro 3
     move_to_workspace_7: Passa all'area di lavoro 7
+    switch_workspace_0: Passa all'area di lavoro 1
+    switch_workspace_1: Passa all'area di lavoro 2
   enable: Abilita scorciatoie integrate (AHK)
   enable_tooltip: >-
     Disabilita se implementerai i tuoi collegamenti utilizzando l'API Core
     Seelen
+  reset: Ripristina le impostazioni predefinite
 delete: Eliminare
 inProgress: In corso...
 open: Aprire
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Salva e riavvia
 beta_channel:
   enable: Abilita Beta Channel (solo tramite GitHub)
+monitors_configurations:
+  label: Monitor {{indice}}
+wall:
+  backgrounds: Sfondi
+  enable: Abilita Seelen Wall
+  interval: Cambia lo sfondo ogni (secondi)
+  no_background: Svuota vuota, usando invece lo sfondo del tema.
+app_launcher:
+  runners:
+    cmd: Comando
+    explorer: Correre
+    label: Corridori
+  enable: Abilita il lanciatore di app
+  monitor: Monitorare da mostrare
+insert: Inserire
+inherit: Ereditare
+more: Di più
+close: Vicina
+update:
+  available: Aggiornamento disponibile!

@@ -21,6 +21,10 @@ header:
     shortcuts: 단축키
     developer: 개발자
     info: 정보
+    seelen_wall: 벽
+    seelen_rofi: 앱 런처
+    virtual_desk: 가상 데스크톱
+    home: 집
 start:
   title: 환영합니다!
   message: >-
@@ -46,6 +50,7 @@ general:
   accent_color: 악센트 색상
   wallpaper:
     select: 벽지를 선택하십시오
+  date_format: 날짜 형식
 toolbar:
   enable: 화려한 툴바 활성화
   placeholder:
@@ -73,7 +78,6 @@ weg:
   enable: 독/작업 표시줄 활성화
   width: 너비
   auto_hide: 자동 숨기기
-  dock_side: 독 측면
   padding: 패딩
   margin: 여백
   gap: 간격
@@ -83,6 +87,7 @@ weg:
     zoom_size: 확대된 크기 (테마에 사용됨)
     gap: 항목 간 간격
     visible_separators: 보이는 구분선
+  dock_side: 위치
 devtools:
   enable: 개발자 도구 활성화
   app_folders: 앱 폴더
@@ -164,8 +169,6 @@ shortcuts:
     increase_height: 높이 증가
     decrease_height: 높이 감소
     restore_sizes: 크기 복원
-    switch_workspace_0: 작업 공간 0으로 전환
-    switch_workspace_1: 작업 공간 1으로 전환
     switch_workspace_2: 작업 공간 2로 전환
     switch_workspace_3: 작업 공간 3으로 전환
     switch_workspace_4: 작업 공간 4로 전환
@@ -194,6 +197,9 @@ shortcuts:
     send_to_workspace_7: 작업 공간 7으로 보내기
     send_to_workspace_8: 작업 공간 8으로 보내기
     send_to_workspace_9: 작업 공간 9으로 보내기
+    switch_workspace_1: 작업 공간으로 전환합니다
+    switch_workspace_0: 작업 공간으로 전환 1
+  reset: 기본값으로 재설정하십시오
 vd:
   strategy:
     native: 토종의
@@ -203,3 +209,23 @@ vd:
 save_and_restart: 저장 및 재시작
 beta_channel:
   enable: 베타 채널 활성화 (Github를 통해서만)
+monitors_configurations:
+  label: 모니터 {{index}}
+wall:
+  no_background: 대신 테마의 배경을 사용하여 빈 슬라이드 쇼를 비우십시오.
+  enable: Seelen Wall을 활성화하십시오
+  interval: 매번 벽지 변경 (초)
+  backgrounds: 월페이퍼
+app_launcher:
+  runners:
+    explorer: 달리다
+    cmd: 명령
+    label: 주자
+  enable: 앱 런처 활성화
+  monitor: 보여줄 모니터
+more: 더
+insert: 끼워 넣다
+inherit: 상속
+close: 닫다
+update:
+  available: 사용 가능한 업데이트!

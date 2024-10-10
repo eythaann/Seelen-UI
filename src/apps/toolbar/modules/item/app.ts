@@ -1,5 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { evaluate } from 'mathjs';
+import { SeelenCommand } from 'seelen-core';
 
 /** @deprecated remove on v2 */
 export enum Actions {
@@ -25,7 +26,7 @@ export function performClick(onClick: string | null, scope: any) {
   switch (action) {
     case Actions.Open:
       if (argument) {
-        invoke('open_file', { path: evaluate(argument, scope) });
+        invoke(SeelenCommand.OpenFile, { path: evaluate(argument, scope) });
       }
       break;
     case Actions.CopyToClipboard:
@@ -34,7 +35,7 @@ export function performClick(onClick: string | null, scope: any) {
       }
     case Actions.SwitchWorkspace:
       if (argument) {
-        invoke('switch_workspace', { idx: evaluate(argument, scope) });
+        invoke(SeelenCommand.SwitchWorkspace, { idx: evaluate(argument, scope) });
       }
   }
 }
@@ -71,10 +72,10 @@ export class Scope {
 
 const ActionsScope = {
   open(path: string) {
-    invoke('open_file', { path }).catch(console.error);
+    invoke(SeelenCommand.OpenFile, { path }).catch(console.error);
   },
   run(program: string, ...args: string[]) {
-    invoke('run', { program, args }).catch(console.error);
+    invoke(SeelenCommand.Run, { program, args }).catch(console.error);
   },
   copyClipboard(text: string) {
     navigator.clipboard.writeText(text);

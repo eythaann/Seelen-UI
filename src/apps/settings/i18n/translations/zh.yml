@@ -21,6 +21,10 @@ header:
     shortcuts: 快捷键
     developer: 开发者
     info: 信息
+    seelen_wall: Seelen 壁纸
+    seelen_rofi: 应用启动器
+    virtual_desk: 虚拟桌面
+    home: 首页
 start:
   title: 欢迎！
   message: >-
@@ -46,6 +50,7 @@ general:
   accent_color: 强调色
   wallpaper:
     select: 选择壁纸
+  date_format: 日期格式
 toolbar:
   enable: 启用精美工具栏
   placeholder:
@@ -73,7 +78,6 @@ weg:
   enable: 启用停靠栏/任务栏
   width: 宽度
   auto_hide: 自动隐藏
-  dock_side: 停靠位置
   padding: 内边距
   margin: 边距
   gap: 间距
@@ -83,6 +87,7 @@ weg:
     zoom_size: 放大尺寸（用于主题）
     gap: 项目间距
     visible_separators: 可见分隔符
+  dock_side: 位置
 devtools:
   enable: 启用开发者工具
   app_folders: 应用程序文件夹
@@ -162,8 +167,6 @@ shortcuts:
     increase_height: 增加高度
     decrease_height: 减少高度
     restore_sizes: 恢复大小
-    switch_workspace_0: 切换到工作区 0
-    switch_workspace_1: 切换到工作区 1
     switch_workspace_2: 切换到工作区 2
     switch_workspace_3: 切换到工作区 3
     switch_workspace_4: 切换到工作区 4
@@ -192,12 +195,35 @@ shortcuts:
     send_to_workspace_7: 发送到工作区 7
     send_to_workspace_8: 发送到工作区 8
     send_to_workspace_9: 发送到工作区 9
+    switch_workspace_1: 切换到工作区2
+    switch_workspace_0: 切换到工作区1
+  reset: 重置为默认值
 vd:
   strategy:
-    native: 本国的
+    native: 系统
     label: 虚拟桌面策略
-    seelen: 塞伦
+    seelen: Seelen
   disabled_windows_version: 本机虚拟桌面策略不适合您的Windows版本。
 save_and_restart: 保存和重新启动
 beta_channel:
   enable: 启用Beta通道（仅通过GitHub）
+monitors_configurations:
+  label: 监视{{index}}
+wall:
+  backgrounds: 壁纸
+  interval: 每次更改壁纸（秒）
+  no_background: 使用主题的背景为空幻灯片。
+  enable: 启用S​​eelen Wall
+app_launcher:
+  runners:
+    cmd: 命令行
+    explorer: 文件资源管理器
+    label: 设置
+  monitor: 显示显示
+  enable: 启用应用启动器
+insert: 插入
+inherit: 继承
+more: 更多的
+close: 关闭
+update:
+  available: 更新可用！

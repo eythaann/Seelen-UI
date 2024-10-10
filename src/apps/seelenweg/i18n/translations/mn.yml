@@ -2,6 +2,8 @@ taskbar_menu:
   settings: АВир танилцуулга
   media: Медиа модулийг нэмнэ
   start: Эхлэх модулийг нэмнэ үү
+  add_file: PIN захиалгын файл
+  add_folder: Пин захиалгын хавтас
 app_menu:
   run_as: Администратороор ажиллуулах
   unpin: Нууц

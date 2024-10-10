@@ -14,6 +14,10 @@ header:
     monitors: Näytöt
     specific_apps: Erityiset sovellukset
     general: Yleinen
+    seelen_rofi: Sovelluskäynnistys
+    seelen_wall: Seinä
+    virtual_desk: Virtuaalinen työpöytä
+    home: Kotiin
 start:
   title: Tervetuloa!
   message_accent: Optimoi tuottavuus tyylillä!
@@ -41,6 +45,7 @@ general:
   accent_color: Korostusväri
   wallpaper:
     select: Valitse taustakuva
+  date_format: Päiväysmuoto
 toolbar:
   placeholder:
     description: Kuvaus
@@ -77,7 +82,7 @@ weg:
   padding: Pehmuste
   label: Telakka/tehtäväpalkki
   enable: Ota Dock/tehtäväpalkki käyttöön
-  dock_side: Laituri
+  dock_side: Sijainti
 devtools:
   load: Ladata
   custom_config_file: Lataa mukautettu konfigurointitiedosto
@@ -177,21 +182,22 @@ shortcuts:
     reserve_stack: Varantopino
     reserve_float: Varaa kelluva
     switch_workspace_9: Vaihda työtilaan 9
-    switch_workspace_0: Vaihda työtilaan 0
     reserve_right: Varaa oikea
     send_to_workspace_6: Lähetä työtilaan 6
     move_to_workspace_5: Siirry työtilaan 5
-    switch_workspace_1: Vaihda työtilaan 1
     focus_left: Focus jäljellä
     send_to_workspace_4: Lähetä työtilaan 4
     send_to_workspace_2: Lähetä työtilaan 2
     send_to_workspace_7: Lähetä työtilaan 7
     move_to_workspace_4: Siirry työtilaan 4
     send_to_workspace_3: Lähetä työtilaan 3
+    switch_workspace_1: Vaihda työtilaan 2
+    switch_workspace_0: Vaihda työtilaan 1
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
     -sovellusliittymällä
   enable: Ota integroidut pikakuvakkeet käyttöön (AHK)
+  reset: Palauta laiminlyöntiin
 inProgress: Käynnissä...
 delete: Poistaa
 quit: Lopettaa
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Tallenna ja käynnistä uudelleen
 beta_channel:
   enable: Ota beetakanava käyttöön (vain GitHubin kautta)
+monitors_configurations:
+  label: Monitor {{hakemisto}}
+wall:
+  interval: Vaihda taustakuva joka (sekunti)
+  enable: Ota Seelen seinälle käyttöön
+  no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
+  backgrounds: Taustakuvat
+app_launcher:
+  runners:
+    cmd: Komento
+    label: Juoksijat
+    explorer: Juoksua
+  monitor: Tarkkailla
+  enable: Ota sovelluksen kantoraketti käyttöön
+more: Lisää
+inherit: Periä
+insert: Lisätä
+close: Lähellä
+update:
+  available: Päivitä saatavilla!

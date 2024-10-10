@@ -1,15 +1,22 @@
-import { savePinnedItems } from '../shared/store/storeApi';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, MenuProps, Popover } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
+import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { store } from '../shared/store/infra';
+import { dialog } from 'src/apps/settings/modules/shared/tauri/infra';
 
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
-import { AppsSides, SwPinnedApp, SwTemporalApp } from '../shared/store/domain';
+import {
+  AppsSides,
+  ExtendedPinnedAppWegItem,
+  ExtendedTemporalAppWegItem,
+} from '../shared/store/domain';
+
+import { savePinnedItems } from '../shared/store/storeApi';
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {
   return [
@@ -28,16 +35,51 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       },
     },
     {
+      type: 'divider',
+    },
+    {
+      key: 'add-item',
+      label: t('taskbar_menu.add_file'),
+      async onClick() {
+        const files = await dialog.open({
+          title: t('taskbar_menu.add_file'),
+          multiple: true,
+        });
+        for (const path of files || []) {
+          await invoke(SeelenCommand.WegPinItem, { path });
+        }
+      },
+    },
+    {
+      key: 'add-folder',
+      label: t('taskbar_menu.add_folder'),
+      async onClick() {
+        const folder = await dialog.open({
+          title: t('taskbar_menu.add_folder'),
+          directory: true,
+        });
+        if (folder) {
+          await invoke(SeelenCommand.WegPinItem, { path: folder });
+        }
+      },
+    },
+    {
+      type: 'divider',
+    },
+    {
       key: 'settings',
       label: t('taskbar_menu.settings'),
       onClick() {
-        invoke('show_app_settings');
+        invoke(SeelenCommand.ShowAppSettings);
       },
     },
   ];
 }
 
-export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp): ItemType[] {
+export function getMenuForItem(
+  t: TFunction,
+  item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
+): ItemType[] {
   const isPinned = isPinnedApp(item);
 
   const pin = (side: AppsSides) => {
@@ -54,7 +96,7 @@ export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp):
       label: t('app_menu.unpin'),
       key: 'weg_unpin_app',
       onClick: () => {
-        store.dispatch(RootActions.unPin(item));
+        store.dispatch(RootActions.unPinApp(item));
         savePinnedItems();
       },
     });
@@ -106,12 +148,12 @@ export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp):
     {
       key: 'weg_select_file_on_explorer',
       label: t('app_menu.open_file_location'),
-      onClick: () => invoke('select_file_on_explorer', { path: item.exe }),
+      onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.exe }),
     },
     {
       key: 'weg_runas',
       label: t('app_menu.run_as'),
-      onClick: () => invoke('run_as_admin', { path: item.execution_path }),
+      onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.execution_path }),
     },
   );
 
@@ -130,7 +172,7 @@ export function getMenuForItem(t: TFunction, item: SwPinnedApp | SwTemporalApp):
         label: item.opens.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
         onClick() {
           item.opens.forEach((hwnd) => {
-            invoke('weg_close_app', { hwnd });
+            invoke(SeelenCommand.WegCloseApp, { hwnd });
           });
         },
         danger: true,

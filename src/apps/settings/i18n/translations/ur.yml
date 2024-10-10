@@ -14,6 +14,10 @@ header:
     seelen_wm: ونڈو مینیجر
     shortcuts: شارٹ کٹ
     monitors: مانیٹر
+    seelen_rofi: ایپ لانچر
+    seelen_wall: دیوار
+    virtual_desk: ورچوئل ڈیسک ٹاپس
+    home: گھر
 start:
   title: عنوان
   message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
@@ -40,6 +44,7 @@ general:
   accent_color: رنگ
   wallpaper:
     select: وال پیپر منتخب کریں
+  date_format: تاریخ کی شکل
 toolbar:
   placeholder:
     description: تفصیل
@@ -71,12 +76,12 @@ weg:
     visible_separators: مرئی جداکار
   auto_hide: خود بخود چھپ جانا
   margin: مارجن
-  dock_side: گودی کی طرف
   gap: گیپ
   padding: بھرتی
   width: چوڑائی
   enable: ٹاسک بار کو فعال کریں
   label: ٹاسک بار
+  dock_side: پوزیشن
 devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر
@@ -172,13 +177,11 @@ shortcuts:
     send_to_workspace_3: ورک اسپیس 3 کو بھیجیں
     reserve_bottom: ریزرو نیچے
     move_to_workspace_0: ورک اسپیس 0 میں منتقل کریں
-    switch_workspace_1: ورک اسپیس 1 پر سوئچ کریں
     switch_workspace_4: ورک اسپیس 4 پر سوئچ کریں
     move_to_workspace_1: ورک اسپیس 1 میں منتقل کریں
     switch_workspace_3: ورک اسپیس 3 پر سوئچ کریں
     switch_workspace_7: ورک اسپیس 7 پر سوئچ کریں
     reserve_right: ٹھیک ہے
-    switch_workspace_0: ورک اسپیس 0 پر سوئچ کریں
     move_to_workspace_7: ورک اسپیس 7 میں منتقل کریں
     send_to_workspace_6: ورک اسپیس 6 کو بھیجیں
     increase_height: اونچائی میں اضافہ
@@ -187,10 +190,13 @@ shortcuts:
     restore_sizes: سائز کو بحال کریں
     move_to_workspace_9: ورک اسپیس 9 میں منتقل کریں
     move_to_workspace_2: ورک اسپیس 2 میں منتقل کریں
+    switch_workspace_1: ورک اسپیس 2 پر سوئچ کریں
+    switch_workspace_0: ورک اسپیس 1 پر سوئچ کریں
   enable_tooltip: >-
     اگر آپ سیلین کور API کا استعمال کرتے ہوئے اپنے شارٹ کٹ کو نافذ کریں گے تو
     غیر فعال کریں
   enable: مربوط شارٹ کٹ (اے ایچ کے) کو فعال کریں
+  reset: ڈیفالٹس کو دوبارہ ترتیب دیں
 inProgress: کام جاری ہے...
 save: محفوظ کریں
 delete: حذف کریں
@@ -207,3 +213,23 @@ vd:
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
 beta_channel:
   enable: بیٹا چینل کو فعال کریں (صرف گٹھب کے ذریعے)
+monitors_configurations:
+  label: مانیٹر {{انڈیکس}}
+wall:
+  enable: سیلن وال کو فعال کریں
+  no_background: اس کے بجائے تھیم کے پس منظر کا استعمال کرتے ہوئے ، خالی سلائیڈ شو۔
+  interval: وال پیپر ہر (سیکنڈ) تبدیل کریں
+  backgrounds: وال پیپر
+app_launcher:
+  runners:
+    cmd: حکم
+    explorer: چلائیں
+    label: رنرز
+  monitor: ظاہر کرنے کے لئے مانیٹر
+  enable: ایپ لانچر کو فعال کریں
+inherit: وراثت
+insert: داخل کریں
+more: زیادہ
+close: بند کریں
+update:
+  available: تازہ کاری دستیاب!

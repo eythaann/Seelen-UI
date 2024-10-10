@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Løp
+footer:
+  shortcuts: Vis snarveier
+header:
+  search: App, kommando eller sti
+item:
+  pin: Pin til Dock
+  open_location: Åpen filplassering

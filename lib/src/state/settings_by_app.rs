@@ -32,7 +32,7 @@ pub enum AppIdentifierType {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
 pub enum MatchingStrategy {
-    #[serde(alias = "equals")]
+    #[serde(alias = "equals", alias = "legacy", alias = "Legacy")]
     Equals,
     #[serde(alias = "startsWith")]
     StartsWith,
@@ -42,9 +42,6 @@ pub enum MatchingStrategy {
     Contains,
     #[serde(alias = "regex")]
     Regex,
-    // only for backwards compatibility
-    #[serde(alias = "legacy")]
-    Legacy,
 }
 
 #[serde_alias(SnakeCase)]
@@ -60,7 +57,6 @@ pub struct AppIdentifier {
     pub and: Vec<AppIdentifier>,
     #[serde(default)]
     pub or: Vec<AppIdentifier>,
-    // cache
     #[serde(skip)]
     pub regex: Option<Regex>,
 }
@@ -77,7 +73,7 @@ impl AppIdentifier {
 
     pub fn validate(&self, title: &str, class: &str, exe: &str, path: &str) -> bool {
         let mut self_result = match self.matching_strategy {
-            MatchingStrategy::Legacy | MatchingStrategy::Equals => match self.kind {
+            MatchingStrategy::Equals => match self.kind {
                 AppIdentifierType::Title => title.eq(&self.id),
                 AppIdentifierType::Class => class.eq(&self.id),
                 AppIdentifierType::Exe => exe.eq(&self.id),
@@ -138,8 +134,8 @@ pub struct AppConfig {
     pub category: Option<String>,
     /// monitor index that the app should be bound to
     pub bound_monitor: Option<usize>,
-    /// workspace name that the app should be bound to
-    pub bound_workspace: Option<String>,
+    /// workspace index that the app should be bound to
+    pub bound_workspace: Option<usize>,
     /// app identifier
     pub identifier: AppIdentifier,
     /// extra specific options/settings for the app

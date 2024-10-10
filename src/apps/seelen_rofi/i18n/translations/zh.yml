@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: 命令行
+    explorer: 文件资源管理器
+footer:
+  shortcuts: 显示快捷方式
+header:
+  search: 应用，命令或路径
+item:
+  pin: 引脚到停靠
+  open_location: 打开文件位置

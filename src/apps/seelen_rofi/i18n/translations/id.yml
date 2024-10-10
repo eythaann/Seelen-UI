@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Berlari
+    cmd: Memerintah
+footer:
+  shortcuts: Tampilkan jalan pintas
+header:
+  search: Aplikasi, perintah atau jalur
+item:
+  open_location: Buka Lokasi File
+  pin: Pin untuk berlabuh

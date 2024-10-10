@@ -14,6 +14,10 @@ header:
     seelen_bar: نوار ابزار فانتزی
     seelen_weg: اسکله/نوار وظیفه
     specific_apps: برنامه های خاص
+    seelen_rofi: پرتاب برنامه
+    seelen_wall: دیوار
+    virtual_desk: دسک تاپ مجازی
+    home: خانه
 start:
   title: خوش آمدی!
   message_accent: بهره وری خود را با سبک بهینه کنید!
@@ -40,6 +44,7 @@ general:
   accent_color: رنگ لهجه
   wallpaper:
     select: تصویر زمینه را انتخاب کنید
+  date_format: قالب تاریخ
 toolbar:
   placeholder:
     description: شرح
@@ -73,10 +78,10 @@ weg:
   gap: شکاف
   margin: لبه
   label: اسکله/نوار وظیفه
-  dock_side: طرف اسکله
   auto_hide: پنهان خودکار
   enable: Dock/TaskBar را فعال کنید
   width: عرض
+  dock_side: موقعیت
 devtools:
   load: بار
   install_folder: پوشه نصب
@@ -154,7 +159,6 @@ shortcuts:
     send_to_workspace_3: ارسال به فضای کاری 3
     send_to_workspace_8: ارسال به فضای کاری 8
     focus_bottom: پایین تمرکز
-    switch_workspace_1: تغییر به فضای کاری 1
     reserve_bottom: قسمت پایین ذخیره
     send_to_workspace_7: ارسال به فضای کاری 7
     focus_top: تمرکز بالا
@@ -163,7 +167,6 @@ shortcuts:
     switch_workspace_9: تغییر به فضای کاری 9
     decrease_height: کاهش قد
     move_to_workspace_5: حرکت به فضای کاری 5
-    switch_workspace_0: تغییر به فضای کاری 0
     focus_latest: آخرین تمرکز
     move_to_workspace_7: حرکت به فضای کاری 7
     move_to_workspace_4: حرکت به فضای کاری 4
@@ -187,10 +190,13 @@ shortcuts:
     switch_workspace_2: تغییر به فضای کاری 2
     restore_sizes: اندازه ها را بازیابی کنید
     reserve_right: حق رزرو
+    switch_workspace_0: تغییر به فضای کاری 1
+    switch_workspace_1: تغییر به فضای کاری 2
   enable_tooltip: >-
     اگر میانبرهای خود را با استفاده از API Seelen Core پیاده سازی خواهید کرد ،
     غیرفعال کنید
   enable: میانبرهای یکپارچه (AHK) را فعال کنید
+  reset: تنظیم مجدد به پیش فرض
 inProgress: در حال پیش رفت...
 cancel: لغو کردن
 save: صرفه جویی
@@ -207,3 +213,23 @@ vd:
 save_and_restart: ذخیره و راه اندازی مجدد
 beta_channel:
   enable: کانال بتا را فعال کنید (فقط از طریق GitHub)
+monitors_configurations:
+  label: مانیتور {{فهرست}}
+wall:
+  backgrounds: تصاویر پس زمینه
+  enable: Seelen Wall را فعال کنید
+  interval: تصویر زمینه را هر (ثانیه) تغییر دهید
+  no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
+app_launcher:
+  runners:
+    cmd: فرمان
+    explorer: دویدن
+    label: دونده
+  monitor: نظارت برای نمایش
+  enable: پرتاب برنامه را فعال کنید
+inherit: ارث
+more: بیشتر
+insert: درج کردن
+close: نزدیک
+update:
+  available: بروزرسانی موجود!

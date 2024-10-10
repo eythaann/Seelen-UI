@@ -91,13 +91,23 @@ use windows::Win32::UI::WindowsAndMessaging::{
     EVENT_SYSTEM_SWITCHEND, EVENT_SYSTEM_SWITCHER_APPDROPPED,
 };
 
+use crate::error_handler::Result;
 use crate::trace_lock;
-use crate::utils::constants::IGNORE_FULLSCREEN;
+use crate::utils::constants::NATIVE_UI_POPUP_CLASSES;
+use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 
 lazy_static! {
-    static ref FULLSCREENED: Mutex<Vec<SyntheticFullscreenData>> = Mutex::new(Vec::new());
+    static ref FULLSCREENED: Mutex<Option<SyntheticFullscreenData>> = Mutex::new(None);
 }
+
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub struct SyntheticFullscreenData {
+    pub handle: HWND,
+    pub monitor: HMONITOR,
+}
+
+unsafe impl Send for SyntheticFullscreenData {}
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 #[repr(u32)]
@@ -187,184 +197,149 @@ pub enum WinEvent {
     UiaEventIdStart = EVENT_UIA_EVENTID_START,
     UiaPropIdSEnd = EVENT_UIA_PROPID_END,
     UiaPropIdStart = EVENT_UIA_PROPID_START,
+    /// Fallback for unknown/missing Win32 events
+    Unknown(u32),
     // ================== Synthetic events ==================
     SyntheticFullscreenStart(SyntheticFullscreenData),
     SyntheticFullscreenEnd(SyntheticFullscreenData),
 }
 
-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
-pub struct SyntheticFullscreenData {
-    pub handle: HWND,
-    pub monitor: HMONITOR,
-}
-
-impl TryFrom<u32> for WinEvent {
-    type Error = ();
-
-    fn try_from(value: u32) -> Result<Self, Self::Error> {
+impl From<u32> for WinEvent {
+    fn from(value: u32) -> Self {
         match value {
-            EVENT_AIA_END => Ok(Self::AiaEnd),
-            EVENT_AIA_START => Ok(Self::AiaStart),
-            EVENT_CONSOLE_CARET => Ok(Self::ConsoleCaret),
-            EVENT_CONSOLE_END => Ok(Self::ConsoleEnd),
-            EVENT_CONSOLE_END_APPLICATION => Ok(Self::ConsoleEndApplication),
-            EVENT_CONSOLE_LAYOUT => Ok(Self::ConsoleLayout),
-            EVENT_CONSOLE_START_APPLICATION => Ok(Self::ConsoleStartApplication),
-            EVENT_CONSOLE_UPDATE_REGION => Ok(Self::ConsoleUpdateRegion),
-            EVENT_CONSOLE_UPDATE_SCROLL => Ok(Self::ConsoleUpdateScroll),
-            EVENT_CONSOLE_UPDATE_SIMPLE => Ok(Self::ConsoleUpdateSimple),
-            EVENT_OBJECT_ACCELERATORCHANGE => Ok(Self::ObjectAcceleratorChange),
-            EVENT_OBJECT_CLOAKED => Ok(Self::ObjectCloaked),
-            EVENT_OBJECT_CONTENTSCROLLED => Ok(Self::ObjectContentScrolled),
-            EVENT_OBJECT_CREATE => Ok(Self::ObjectCreate),
-            EVENT_OBJECT_DEFACTIONCHANGE => Ok(Self::ObjectDefActionChange),
-            EVENT_OBJECT_DESCRIPTIONCHANGE => Ok(Self::ObjectDescriptionChange),
-            EVENT_OBJECT_DESTROY => Ok(Self::ObjectDestroy),
-            EVENT_OBJECT_DRAGCANCEL => Ok(Self::ObjectDragCancel),
-            EVENT_OBJECT_DRAGCOMPLETE => Ok(Self::ObjectDragComplete),
-            EVENT_OBJECT_DRAGDROPPED => Ok(Self::ObjectDragDropped),
-            EVENT_OBJECT_DRAGENTER => Ok(Self::ObjectDragEnter),
-            EVENT_OBJECT_DRAGLEAVE => Ok(Self::ObjectDragLeave),
-            EVENT_OBJECT_DRAGSTART => Ok(Self::ObjectDragStart),
-            EVENT_OBJECT_END => Ok(Self::ObjectEnd),
-            EVENT_OBJECT_FOCUS => Ok(Self::ObjectFocus),
-            EVENT_OBJECT_HELPCHANGE => Ok(Self::ObjectHelpChange),
-            EVENT_OBJECT_HIDE => Ok(Self::ObjectHide),
-            EVENT_OBJECT_HOSTEDOBJECTSINVALIDATED => Ok(Self::ObjectHostedObjectsInvalidated),
-            EVENT_OBJECT_IME_CHANGE => Ok(Self::ObjectImeChange),
-            EVENT_OBJECT_IME_HIDE => Ok(Self::ObjectImeHide),
-            EVENT_OBJECT_IME_SHOW => Ok(Self::ObjectImeShow),
-            EVENT_OBJECT_INVOKED => Ok(Self::ObjectInvoked),
-            EVENT_OBJECT_LIVEREGIONCHANGED => Ok(Self::ObjectLiveRegionChanged),
-            EVENT_OBJECT_LOCATIONCHANGE => Ok(Self::ObjectLocationChange),
-            EVENT_OBJECT_NAMECHANGE => Ok(Self::ObjectNameChange),
-            EVENT_OBJECT_PARENTCHANGE => Ok(Self::ObjectParentChange),
-            EVENT_OBJECT_REORDER => Ok(Self::ObjectReorder),
-            EVENT_OBJECT_SELECTION => Ok(Self::ObjectSelection),
-            EVENT_OBJECT_SELECTIONADD => Ok(Self::ObjectSelectionAdd),
-            EVENT_OBJECT_SELECTIONREMOVE => Ok(Self::ObjectSelectionRemove),
-            EVENT_OBJECT_SELECTIONWITHIN => Ok(Self::ObjectSelectionWithin),
-            EVENT_OBJECT_SHOW => Ok(Self::ObjectShow),
-            EVENT_OBJECT_STATECHANGE => Ok(Self::ObjectStateChange),
+            EVENT_AIA_END => Self::AiaEnd,
+            EVENT_AIA_START => Self::AiaStart,
+            EVENT_CONSOLE_CARET => Self::ConsoleCaret,
+            EVENT_CONSOLE_END => Self::ConsoleEnd,
+            EVENT_CONSOLE_END_APPLICATION => Self::ConsoleEndApplication,
+            EVENT_CONSOLE_LAYOUT => Self::ConsoleLayout,
+            EVENT_CONSOLE_START_APPLICATION => Self::ConsoleStartApplication,
+            EVENT_CONSOLE_UPDATE_REGION => Self::ConsoleUpdateRegion,
+            EVENT_CONSOLE_UPDATE_SCROLL => Self::ConsoleUpdateScroll,
+            EVENT_CONSOLE_UPDATE_SIMPLE => Self::ConsoleUpdateSimple,
+            EVENT_OBJECT_ACCELERATORCHANGE => Self::ObjectAcceleratorChange,
+            EVENT_OBJECT_CLOAKED => Self::ObjectCloaked,
+            EVENT_OBJECT_CONTENTSCROLLED => Self::ObjectContentScrolled,
+            EVENT_OBJECT_CREATE => Self::ObjectCreate,
+            EVENT_OBJECT_DEFACTIONCHANGE => Self::ObjectDefActionChange,
+            EVENT_OBJECT_DESCRIPTIONCHANGE => Self::ObjectDescriptionChange,
+            EVENT_OBJECT_DESTROY => Self::ObjectDestroy,
+            EVENT_OBJECT_DRAGCANCEL => Self::ObjectDragCancel,
+            EVENT_OBJECT_DRAGCOMPLETE => Self::ObjectDragComplete,
+            EVENT_OBJECT_DRAGDROPPED => Self::ObjectDragDropped,
+            EVENT_OBJECT_DRAGENTER => Self::ObjectDragEnter,
+            EVENT_OBJECT_DRAGLEAVE => Self::ObjectDragLeave,
+            EVENT_OBJECT_DRAGSTART => Self::ObjectDragStart,
+            EVENT_OBJECT_END => Self::ObjectEnd,
+            EVENT_OBJECT_FOCUS => Self::ObjectFocus,
+            EVENT_OBJECT_HELPCHANGE => Self::ObjectHelpChange,
+            EVENT_OBJECT_HIDE => Self::ObjectHide,
+            EVENT_OBJECT_HOSTEDOBJECTSINVALIDATED => Self::ObjectHostedObjectsInvalidated,
+            EVENT_OBJECT_IME_CHANGE => Self::ObjectImeChange,
+            EVENT_OBJECT_IME_HIDE => Self::ObjectImeHide,
+            EVENT_OBJECT_IME_SHOW => Self::ObjectImeShow,
+            EVENT_OBJECT_INVOKED => Self::ObjectInvoked,
+            EVENT_OBJECT_LIVEREGIONCHANGED => Self::ObjectLiveRegionChanged,
+            EVENT_OBJECT_LOCATIONCHANGE => Self::ObjectLocationChange,
+            EVENT_OBJECT_NAMECHANGE => Self::ObjectNameChange,
+            EVENT_OBJECT_PARENTCHANGE => Self::ObjectParentChange,
+            EVENT_OBJECT_REORDER => Self::ObjectReorder,
+            EVENT_OBJECT_SELECTION => Self::ObjectSelection,
+            EVENT_OBJECT_SELECTIONADD => Self::ObjectSelectionAdd,
+            EVENT_OBJECT_SELECTIONREMOVE => Self::ObjectSelectionRemove,
+            EVENT_OBJECT_SELECTIONWITHIN => Self::ObjectSelectionWithin,
+            EVENT_OBJECT_SHOW => Self::ObjectShow,
+            EVENT_OBJECT_STATECHANGE => Self::ObjectStateChange,
             EVENT_OBJECT_TEXTEDIT_CONVERSIONTARGETCHANGED => {
-                Ok(Self::ObjectTextEditConversionTargetChanged)
+                Self::ObjectTextEditConversionTargetChanged
             }
-            EVENT_OBJECT_TEXTSELECTIONCHANGED => Ok(Self::ObjectTextSelectionChanged),
-            EVENT_OBJECT_UNCLOAKED => Ok(Self::ObjectUncloaked),
-            EVENT_OBJECT_VALUECHANGE => Ok(Self::ObjectValueChange),
-            EVENT_OEM_DEFINED_END => Ok(Self::OemDefinedEnd),
-            EVENT_OEM_DEFINED_START => Ok(Self::OemDefinedStart),
-            EVENT_SYSTEM_ALERT => Ok(Self::SystemAlert),
-            EVENT_SYSTEM_ARRANGMENTPREVIEW => Ok(Self::SystemArrangementPreview),
-            EVENT_SYSTEM_CAPTUREEND => Ok(Self::SystemCaptureEnd),
-            EVENT_SYSTEM_CAPTURESTART => Ok(Self::SystemCaptureStart),
-            EVENT_SYSTEM_CONTEXTHELPEND => Ok(Self::SystemContextHelpEnd),
-            EVENT_SYSTEM_CONTEXTHELPSTART => Ok(Self::SystemContextHelpStart),
-            EVENT_SYSTEM_DESKTOPSWITCH => Ok(Self::SystemDesktopSwitch),
-            EVENT_SYSTEM_DIALOGEND => Ok(Self::SystemDialogEnd),
-            EVENT_SYSTEM_DIALOGSTART => Ok(Self::SystemDialogStart),
-            EVENT_SYSTEM_DRAGDROPEND => Ok(Self::SystemDragDropEnd),
-            EVENT_SYSTEM_DRAGDROPSTART => Ok(Self::SystemDragDropStart),
-            EVENT_SYSTEM_END => Ok(Self::SystemEnd),
-            EVENT_SYSTEM_FOREGROUND => Ok(Self::SystemForeground),
-            EVENT_SYSTEM_IME_KEY_NOTIFICATION => Ok(Self::SystemImeKeyNotification),
-            EVENT_SYSTEM_MENUEND => Ok(Self::SystemMenuEnd),
-            EVENT_SYSTEM_MENUPOPUPEND => Ok(Self::SystemMenuPopupEnd),
-            EVENT_SYSTEM_MENUPOPUPSTART => Ok(Self::SystemMenuPopupStart),
-            EVENT_SYSTEM_MENUSTART => Ok(Self::SystemMenuStart),
-            EVENT_SYSTEM_MINIMIZEEND => Ok(Self::SystemMinimizeEnd),
-            EVENT_SYSTEM_MINIMIZESTART => Ok(Self::SystemMinimizeStart),
-            EVENT_SYSTEM_MOVESIZEEND => Ok(Self::SystemMoveSizeEnd),
-            EVENT_SYSTEM_MOVESIZESTART => Ok(Self::SystemMoveSizeStart),
-            EVENT_SYSTEM_SCROLLINGEND => Ok(Self::SystemScrollingEnd),
-            EVENT_SYSTEM_SCROLLINGSTART => Ok(Self::SystemScrollingStart),
-            EVENT_SYSTEM_SOUND => Ok(Self::SystemSound),
-            EVENT_SYSTEM_SWITCHEND => Ok(Self::SystemSwitchEnd),
-            EVENT_SYSTEM_SWITCHER_APPDROPPED => Ok(Self::SystemSwitcherAppDropped),
-            EVENT_SYSTEM_SWITCHER_APPGRABBED => Ok(Self::SystemSwitcherAppGrabbed),
-            EVENT_SYSTEM_SWITCHER_APPOVERTARGET => Ok(Self::SystemSwitcherAppOverTarget),
-            EVENT_SYSTEM_SWITCHER_CANCELLED => Ok(Self::SystemSwitcherCancelled),
-            EVENT_SYSTEM_SWITCHSTART => Ok(Self::SystemSwitchStart),
-            EVENT_UIA_EVENTID_END => Ok(Self::UiaEventIdSEnd),
-            EVENT_UIA_EVENTID_START => Ok(Self::UiaEventIdStart),
-            EVENT_UIA_PROPID_END => Ok(Self::UiaPropIdSEnd),
-            EVENT_UIA_PROPID_START => Ok(Self::UiaPropIdStart),
-
-            _ => Err(()),
+            EVENT_OBJECT_TEXTSELECTIONCHANGED => Self::ObjectTextSelectionChanged,
+            EVENT_OBJECT_UNCLOAKED => Self::ObjectUncloaked,
+            EVENT_OBJECT_VALUECHANGE => Self::ObjectValueChange,
+            EVENT_OEM_DEFINED_END => Self::OemDefinedEnd,
+            EVENT_OEM_DEFINED_START => Self::OemDefinedStart,
+            EVENT_SYSTEM_ALERT => Self::SystemAlert,
+            EVENT_SYSTEM_ARRANGMENTPREVIEW => Self::SystemArrangementPreview,
+            EVENT_SYSTEM_CAPTUREEND => Self::SystemCaptureEnd,
+            EVENT_SYSTEM_CAPTURESTART => Self::SystemCaptureStart,
+            EVENT_SYSTEM_CONTEXTHELPEND => Self::SystemContextHelpEnd,
+            EVENT_SYSTEM_CONTEXTHELPSTART => Self::SystemContextHelpStart,
+            EVENT_SYSTEM_DESKTOPSWITCH => Self::SystemDesktopSwitch,
+            EVENT_SYSTEM_DIALOGEND => Self::SystemDialogEnd,
+            EVENT_SYSTEM_DIALOGSTART => Self::SystemDialogStart,
+            EVENT_SYSTEM_DRAGDROPEND => Self::SystemDragDropEnd,
+            EVENT_SYSTEM_DRAGDROPSTART => Self::SystemDragDropStart,
+            EVENT_SYSTEM_END => Self::SystemEnd,
+            EVENT_SYSTEM_FOREGROUND => Self::SystemForeground,
+            EVENT_SYSTEM_IME_KEY_NOTIFICATION => Self::SystemImeKeyNotification,
+            EVENT_SYSTEM_MENUEND => Self::SystemMenuEnd,
+            EVENT_SYSTEM_MENUPOPUPEND => Self::SystemMenuPopupEnd,
+            EVENT_SYSTEM_MENUPOPUPSTART => Self::SystemMenuPopupStart,
+            EVENT_SYSTEM_MENUSTART => Self::SystemMenuStart,
+            EVENT_SYSTEM_MINIMIZEEND => Self::SystemMinimizeEnd,
+            EVENT_SYSTEM_MINIMIZESTART => Self::SystemMinimizeStart,
+            EVENT_SYSTEM_MOVESIZEEND => Self::SystemMoveSizeEnd,
+            EVENT_SYSTEM_MOVESIZESTART => Self::SystemMoveSizeStart,
+            EVENT_SYSTEM_SCROLLINGEND => Self::SystemScrollingEnd,
+            EVENT_SYSTEM_SCROLLINGSTART => Self::SystemScrollingStart,
+            EVENT_SYSTEM_SOUND => Self::SystemSound,
+            EVENT_SYSTEM_SWITCHEND => Self::SystemSwitchEnd,
+            EVENT_SYSTEM_SWITCHER_APPDROPPED => Self::SystemSwitcherAppDropped,
+            EVENT_SYSTEM_SWITCHER_APPGRABBED => Self::SystemSwitcherAppGrabbed,
+            EVENT_SYSTEM_SWITCHER_APPOVERTARGET => Self::SystemSwitcherAppOverTarget,
+            EVENT_SYSTEM_SWITCHER_CANCELLED => Self::SystemSwitcherCancelled,
+            EVENT_SYSTEM_SWITCHSTART => Self::SystemSwitchStart,
+            EVENT_UIA_EVENTID_END => Self::UiaEventIdSEnd,
+            EVENT_UIA_EVENTID_START => Self::UiaEventIdStart,
+            EVENT_UIA_PROPID_END => Self::UiaPropIdSEnd,
+            EVENT_UIA_PROPID_START => Self::UiaPropIdStart,
+            _ => Self::Unknown(value),
         }
     }
 }
 
 impl WinEvent {
-    pub fn should_handle_fullscreen_events(&self, hwnd: HWND) -> bool {
-        hwnd == WindowsApi::get_foreground_window()
-            && WindowsApi::is_window_visible(hwnd)
-            && !IGNORE_FULLSCREEN.contains(&WindowsApi::get_window_text(hwnd))
-    }
-
-    pub fn get_synthetic(&self, origin: HWND) -> Option<WinEvent> {
+    pub fn get_synthetics(&self, origin: HWND) -> Result<Vec<WinEvent>> {
+        let mut synthetics = Vec::new();
         match self {
-            Self::ObjectShow
-            | Self::ObjectCreate
-            | Self::ObjectUncloaked
-            | Self::SystemMinimizeEnd => {
-                if !self.should_handle_fullscreen_events(origin) {
-                    return None;
-                }
+            Self::SystemForeground | Self::ObjectLocationChange => {
+                if origin == WindowsApi::get_foreground_window() {
+                    let mut latest_fullscreened = trace_lock!(FULLSCREENED);
+                    let window = Window::from(origin);
+                    let is_origin_fullscreen = window.is_fullscreen()
+                        && !window.is_desktop()
+                        && !window.is_seelen_overlay()
+                        && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str());
 
-                let mut fullscreened = trace_lock!(FULLSCREENED);
-                if WindowsApi::is_fullscreen(origin).ok()?
-                    && !fullscreened.iter().any(|x| x.handle == origin)
-                {
-                    let data = SyntheticFullscreenData {
-                        handle: origin,
-                        monitor: WindowsApi::monitor_from_window(origin),
-                    };
-                    fullscreened.push(data);
-                    Some(Self::SyntheticFullscreenStart(data))
-                } else {
-                    None
+                    match *latest_fullscreened {
+                        Some(latest) if latest.handle == origin => {
+                            // exiting fullscreen
+                            if !is_origin_fullscreen {
+                                *latest_fullscreened = None;
+                                synthetics.push(Self::SyntheticFullscreenEnd(latest));
+                            }
+                        }
+                        _ => {
+                            // remove fullscreen of latest when foregrounding another window
+                            if let Some(old) = latest_fullscreened.take() {
+                                synthetics.push(Self::SyntheticFullscreenEnd(old));
+                            }
+                            // if new foregrounded window is fullscreen emit it
+                            if is_origin_fullscreen {
+                                log::trace!("Fullscreened: {:?}", window);
+                                let data = SyntheticFullscreenData {
+                                    handle: origin,
+                                    monitor: WindowsApi::monitor_from_window(origin),
+                                };
+                                *latest_fullscreened = Some(data);
+                                synthetics.push(Self::SyntheticFullscreenStart(data));
+                            }
+                        }
+                    }
                 }
             }
-            Self::ObjectHide
-            | Self::ObjectDestroy
-            | Self::ObjectCloaked
-            | Self::SystemMinimizeStart => {
-                let mut fullscreened = trace_lock!(FULLSCREENED);
-                if let Some(index) = fullscreened.iter().position(|x| x.handle == origin) {
-                    let data = fullscreened.remove(index);
-                    Some(Self::SyntheticFullscreenEnd(data))
-                } else {
-                    None
-                }
-            }
-            Self::ObjectLocationChange => {
-                if !self.should_handle_fullscreen_events(origin) {
-                    return None;
-                }
-
-                let mut fullscreened = trace_lock!(FULLSCREENED);
-                let was_fullscreen = fullscreened.iter().position(|x| x.handle == origin);
-                let is_fullscreen = WindowsApi::is_fullscreen(origin).ok()?;
-
-                // state no changed
-                if was_fullscreen.is_some() == is_fullscreen {
-                    return None;
-                }
-
-                if let Some(index) = was_fullscreen {
-                    let data = fullscreened.remove(index);
-                    Some(Self::SyntheticFullscreenEnd(data))
-                } else {
-                    let data = SyntheticFullscreenData {
-                        handle: origin,
-                        monitor: WindowsApi::monitor_from_window(origin),
-                    };
-                    fullscreened.push(data);
-                    Some(Self::SyntheticFullscreenStart(data))
-                }
-            }
-            _ => None,
-        }
+            _ => {}
+        };
+        Ok(synthetics)
     }
 }

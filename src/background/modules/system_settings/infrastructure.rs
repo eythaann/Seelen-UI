@@ -1,35 +1,28 @@
-use std::sync::atomic::{AtomicBool, Ordering};
-
+use seelen_core::{handlers::SeelenEvent, system_state::UIColors};
 use tauri::Emitter;
 
-use crate::{log_error, seelen::get_app_handle, trace_lock};
+use crate::{error_handler::Result, log_error, seelen::get_app_handle, trace_lock};
 
-use super::{application::SYSTEM_SETTINGS, domain::UIColors};
+use super::application::SYSTEM_SETTINGS;
 
 fn emit_colors(colors: &UIColors) {
     get_app_handle()
-        .emit("colors", colors)
+        .emit(SeelenEvent::ColorsChanged, colors)
         .expect("failed to emit");
 }
 
-static REGISTERED: AtomicBool = AtomicBool::new(false);
 pub fn register_colors_events() {
-    let was_registered = REGISTERED.load(Ordering::Acquire);
-    if !was_registered {
-        REGISTERED.store(true, Ordering::Release);
-    }
     std::thread::spawn(move || {
         let mut manager = trace_lock!(SYSTEM_SETTINGS);
-        if !was_registered {
-            log::trace!("Registering colors events");
-            manager.on_colors_change(Box::new(emit_colors));
-        }
-        emit_colors(&manager.get_colors().expect("Failed to get colors"));
+        manager.on_colors_change(Box::new(emit_colors));
     });
 }
 
 pub fn release_colors_events() {
-    if REGISTERED.load(Ordering::Acquire) {
-        log_error!(trace_lock!(SYSTEM_SETTINGS).release());
-    }
+    log_error!(trace_lock!(SYSTEM_SETTINGS).release());
+}
+
+#[tauri::command(async)]
+pub fn get_system_colors() -> Result<UIColors> {
+    trace_lock!(SYSTEM_SETTINGS).get_colors()
 }

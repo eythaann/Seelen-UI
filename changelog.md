@@ -1,6 +1,50 @@
 # Changelog
 
 ## [Unreleased]
+### breaking changes
+- Window Manager Layout Conditions was reimplemented, old conditions (v1) will fail.
+
+### refactor
+- refactors, more and more refactors, refactors for everyone.
+- reimplementation of Tiling Window Manager.
+- remove Update modal at startup by an update button on settings.
+
+### features
+- make the dock/taskbar solid when hide mode is `never`.
+- add app launcher (rofi for windows).
+- add seelen wall (rain-meter and wallpaper engine alternatives).
+- expose function to pin items into the dock.
+- settings by monitor.
+- window manager multimonitor support.
+- allow users change date format directly on UI settings.
+- add context menu to toolbar items.
+
+### enhancements
+- improve quality icons from all app/files items.
+- improve init loading performance.
+- improve fullscreen matching system.
+- reduce UI total size from 355mb (v1) to 121mb (v2-beta4) to 93mb (v2-beta8).
+- reduce Installer size from 75mb (v1) to 40mb (v2-beta4) to 28.8mb (v2-beta8).
+- allow drop files, apps and folders into the dock to pin them.
+- now Virtual Desktop shortcuts doesn't require Tiling WM be enabled to work.
+- now Themes are wrapped in a CSS layer, making easier the override theming.
+- allow change size of Window Manager Layouts via window resizing with the mouse.
+- allow close windows by middle clicking on dock items.
+- show icon of app in media players that are not uwp/msix.
+- show pwa apps like a separeted app from browser on dock.
+
+### fix
+- missing icons for files with a different extension than `exe`.
+- losing cursor events on clicking a dock item.
+- app allowing be closed via Alt + F4.
+- native taskbar being hidden regardless of whether the program starts successfully or not.
+- app continuing running when the program fails to start (case: WebView2 Runtime not installed).
+- no stoping correctly secondary processes/threads on app close.
+- showing unmanageable windows on dock.
+- restart seelen-ui button not working properly.
+- tray icons not working on others language than english.
+- edge tabs open in file explorer.
+
 ## [1.10.6]
 ### fix
 - tray module only working when the system language is english.

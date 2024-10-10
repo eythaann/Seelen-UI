@@ -21,6 +21,10 @@ header:
     shortcuts: Atajos
     developer: Desarrollador
     info: Información
+    seelen_rofi: Lanzador de aplicaciones
+    seelen_wall: La pared
+    virtual_desk: Escritorios virtuales
+    home: Hogar
 start:
   title: ¡Bienvenido!
   message: >-
@@ -48,6 +52,7 @@ general:
   accent_color: Acentuar el color
   wallpaper:
     select: Seleccionar papel tapiz
+  date_format: Formato de fecha
 toolbar:
   enable: Habilitar barra elegante
   placeholder:
@@ -75,7 +80,6 @@ weg:
   enable: Habilitar dock/barra de tareas
   width: Ancho
   auto_hide: Ocultar automáticamente
-  dock_side: Lado del dock
   padding: Relleno
   margin: Margen
   gap: Espacio
@@ -85,6 +89,7 @@ weg:
     zoom_size: Tamaño ampliado (usado para temas)
     gap: Espacio entre elementos
     visible_separators: Separadores visibles
+  dock_side: Posición
 devtools:
   enable: Habilitar herramientas de desarrollador
   app_folders: Carpetas de aplicaciones
@@ -169,8 +174,6 @@ shortcuts:
     increase_height: Aumentar altura
     decrease_height: Disminuir altura
     restore_sizes: Restaurar tamaños
-    switch_workspace_0: Cambiar al espacio de trabajo 0
-    switch_workspace_1: Cambiar al espacio de trabajo 1
     switch_workspace_2: Cambiar al espacio de trabajo 2
     switch_workspace_3: Cambiar al espacio de trabajo 3
     switch_workspace_4: Cambiar al espacio de trabajo 4
@@ -199,6 +202,9 @@ shortcuts:
     send_to_workspace_7: Enviar al espacio de trabajo 7
     send_to_workspace_8: Enviar al espacio de trabajo 8
     send_to_workspace_9: Enviar al espacio de trabajo 9
+    switch_workspace_0: Cambiar al espacio de trabajo 1
+    switch_workspace_1: Cambiar al espacio de trabajo 2
+  reset: Reiniciar a los valores predeterminados
 vd:
   strategy:
     native: Nativa
@@ -210,3 +216,25 @@ vd:
 save_and_restart: Guardar y reiniciar
 beta_channel:
   enable: Habilitar el canal beta (solo a través de Github)
+monitors_configurations:
+  label: Monitor {{índice}}
+wall:
+  interval: Cambiar papel tapiz cada (segundos)
+  no_background: >-
+    Presentación de diapositivas vacías, utilizando el fondo del tema en su
+    lugar.
+  backgrounds: Fondos de pantalla
+  enable: Habilitar la pared de Seelen
+app_launcher:
+  runners:
+    explorer: Correr
+    label: Corredoras
+    cmd: Dominio
+  enable: Habilitar el lanzador de aplicaciones
+  monitor: Monitor para mostrar
+inherit: Heredar
+insert: Insertar
+more: Más
+close: Cerca
+update:
+  available: Actualización disponible!

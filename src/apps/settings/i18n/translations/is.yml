@@ -14,6 +14,10 @@ header:
     specific_apps: Sérstök forrit
     developer: Hönnuður
     seelen_weg: Bryggju/verkefnabar
+    seelen_wall: Vegginn
+    seelen_rofi: App Launcher
+    virtual_desk: Sýndarskjáborð
+    home: Heim
 start:
   title: Velkominn!
   message_accent: Fínstilltu framleiðni þína með stæl!
@@ -41,6 +45,7 @@ general:
   accent_color: Hreim litur
   wallpaper:
     select: Veldu veggfóður
+  date_format: Dagsetningarsnið
 toolbar:
   placeholder:
     description: Lýsing
@@ -72,12 +77,12 @@ weg:
     visible_separators: Sýnilegir skilju
   width: Breidd
   label: Bryggju/verkefnabar
-  dock_side: Bryggjuhlið
   enable: Virkja bryggju/verkefnastiku
   gap: Bil
   auto_hide: Sjálfvirk fela
   margin: Framlegð
   padding: Padding
+  dock_side: Staða
 devtools:
   load: Hlaða
   app_folders: App möppur
@@ -179,17 +184,18 @@ shortcuts:
     switch_workspace_3: Skiptu yfir í vinnusvæði 3
     focus_top: Fókus toppur
     send_to_workspace_3: Senda á Workspace 3
-    switch_workspace_0: Skiptu yfir í vinnusvæði 0
     reserve_float: Varasjóður flot
-    switch_workspace_1: Skiptu yfir í vinnusvæði 1
     send_to_workspace_2: Sendu á Workspace 2
     switch_workspace_8: Skiptu yfir í vinnusvæði 8
     move_to_workspace_3: Farðu í vinnusvæði 3
     send_to_workspace_5: Sendu á Workspace 5
     send_to_workspace_0: Sendu á Workspace 0
     switch_workspace_4: Skiptu yfir í vinnusvæði 4
+    switch_workspace_0: Skiptu yfir í vinnusvæði 1
+    switch_workspace_1: Skiptu yfir í vinnusvæði 2
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
+  reset: Endurstilla í vanskil
 delete: Eyða
 loading: Hleðsla ...
 inProgress: Í vinnslu...
@@ -206,3 +212,23 @@ vd:
 save_and_restart: Vista og endurræsa
 beta_channel:
   enable: Virkja beta rás (aðeins í gegnum Github)
+monitors_configurations:
+  label: Monitor {{Index}}
+wall:
+  backgrounds: Veggfóður
+  interval: Skiptu um veggfóður á hverju (sekúndum)
+  enable: Virkja Seelen Wall
+  no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
+app_launcher:
+  runners:
+    label: Hlauparar
+    cmd: Skipan
+    explorer: Hlaupa
+  enable: Virkja App Launcher
+  monitor: Fylgjast með því að sýna
+inherit: Erfa
+more: Meira
+insert: Settu inn
+close: Lokaðu
+update:
+  available: Uppfærsla í boði!

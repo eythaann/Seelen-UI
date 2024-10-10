@@ -1,8 +1,5 @@
-import { parseAsCamel } from '../../../shared/schemas';
-import { AhkVar, AhkVariables, AhkVariablesSchema } from '../../../shared/schemas/Settings';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-import { selectorsFor } from '../shared/utils/app';
+import { AhkVar, AhkVarList } from 'seelen-core';
 
 function getAHK(code: string): string | undefined {
   if (code.startsWith('Key')) {
@@ -71,15 +68,18 @@ export function KeyCodeToAHK(e: React.KeyboardEvent<HTMLInputElement>) {
   };
 }
 
-const initialState: AhkVariables = parseAsCamel(AhkVariablesSchema, {});
+const initialState = new AhkVarList();
 
 export const AhkVariablesSlice = createSlice({
   name: 'AhkVariables',
   initialState,
-  selectors: selectorsFor(initialState),
+  selectors: {},
   reducers: {
-    setVariable(state, action: PayloadAction<{ name: string; value: AhkVar }>) {
+    setVariable(state, action: PayloadAction<{ name: keyof AhkVarList; value: AhkVar }>) {
       state[action.payload.name] = action.payload.value;
+    },
+    reset() {
+      return { ...new AhkVarList() };
     },
   },
 });

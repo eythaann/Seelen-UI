@@ -14,6 +14,10 @@ header:
     seelen_wm: Maamulaha daaqada
     developer: Abuuris
     info: War
+    seelen_wall: Derbiga
+    seelen_rofi: App furaha
+    virtual_desk: Desktops Virtual
+    home: Guri
 start:
   message: >-
     Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
@@ -40,6 +44,7 @@ general:
   accent_color: Midab caqabad
   wallpaper:
     select: Xulo warqadda
+  date_format: Taariikh format
 toolbar:
   placeholder:
     description: Sifo
@@ -69,7 +74,6 @@ weg:
     size: Shayga cabirka
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
     visible_separators: Kala-sooca muuqda
-  dock_side: Dhinaceeda dhinaceeda
   width: Ballac
   enable: Kartida DOCK / Turniinka
   gap: Dalool
@@ -77,6 +81,7 @@ weg:
   margin: Margin
   label: Dock / Tootshar
   auto_hide: Auto qaraha
+  dock_side: Meel
 devtools:
   app_folders: Faylka app
   install_folder: Xeerka rakibaadda
@@ -171,7 +176,6 @@ shortcuts:
     move_to_workspace_9: U dhaqaaq goobta shaqada 9
     reserve_float: Keydka sabuuradda
     reserve_stack: Reebs Rap
-    switch_workspace_1: U beddelo goobta shaqada 1
     send_to_workspace_3: U dir goobta shaqada 3
     send_to_workspace_1: U dir goobta shaqada 1
     switch_workspace_7: U beddelo goobta shaqada 7
@@ -182,15 +186,17 @@ shortcuts:
     reserve_left: Kaydsanaanta bidix
     send_to_workspace_2: U dir goobta shaqada 2
     send_to_workspace_0: U dir goobta shaqada 0
-    switch_workspace_0: U beddelo goobta shaqada 0
     decrease_height: Hoos u dhig dhererka
     switch_workspace_4: U beddelo goobta shaqada 4
     move_to_workspace_6: U dhaqaaq goobta shaqada 6
     switch_workspace_6: U beddelo goobta shaqada 6
+    switch_workspace_1: U beddelo goobta shaqada 2
+    switch_workspace_0: U beddelo goobta shaqada 1
   enable: U fududee fulinta isku dhafan ee isku dhafan (Ahk)
   enable_tooltip: >-
     Disable Haddii aad hirgelin doontid gaagaaban adiga oo adeegsanaya api-ka
     quruxda badan
+  reset: Dib u dejiso defafyada
 loading: Loading ...
 cancel: Burin
 delete: Tirtirid
@@ -209,3 +215,23 @@ vd:
 save_and_restart: Badbaadin & Dib u bilow
 beta_channel:
   enable: Ku xooji beta channel (oo keliya githab)
+monitors_configurations:
+  label: Kormeer {{tus ind ind}}
+wall:
+  enable: U oggolow derbiga Selen
+  no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
+  interval: Beddel waraaqda derbiga kasta (ilbidhiqsi kasta)
+  backgrounds: Darf-biyoodka
+app_launcher:
+  runners:
+    cmd: Amrid
+    label: Orodyahannada
+    explorer: Ordid
+  enable: U oggolow appka bilaabista
+  monitor: Kormeer si loo muujiyo
+inherit: Dhaxlid
+insert: Gelin
+more: Ka badan
+close: Xirid
+update:
+  available: Cusboonaysiinta la heli karo!

@@ -14,6 +14,10 @@ header:
     shortcuts: শর্টকাটস
     specific_apps: নির্দিষ্ট অ্যাপ্লিকেশন
     seelen_wm: উইন্ডো ম্যানেজার
+    seelen_wall: প্রাচীর
+    seelen_rofi: অ্যাপ লঞ্চার
+    virtual_desk: ভার্চুয়াল ডেস্কটপস
+    home: বাড়ি
 start:
   title: স্বাগত!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: সুরের ধাপের রঙ
   wallpaper:
     select: ওয়ালপেপার নির্বাচন করুন
+  date_format: তারিখ ফর্ম্যাট
 toolbar:
   placeholder:
     author: লেখক
@@ -71,13 +76,13 @@ weg:
     label: আইটেম
     zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
   auto_hide: স্বয়ং চামড়া
-  dock_side: ডক সাইড
   width: প্রস্থ
   gap: ফাঁক
   margin: মার্জিন
   enable: ডক/টাস্কবার সক্ষম করুন
   label: ডক/টাস্কবার
   padding: প্যাডিং
+  dock_side: অবস্থান
 devtools:
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
   settings_file: সেটিংস ফাইল
@@ -172,11 +177,9 @@ shortcuts:
     move_to_workspace_9: ওয়ার্কস্পেস 9 এ যান
     reserve_float: রিজার্ভ ফ্লোট
     send_to_workspace_3: ওয়ার্কস্পেস 3 এ প্রেরণ করুন
-    switch_workspace_1: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
     switch_workspace_7: ওয়ার্কস্পেস 7 এ স্যুইচ করুন
     focus_bottom: ফোকাস নীচে
     move_to_workspace_1: ওয়ার্কস্পেস 1 এ যান
-    switch_workspace_0: ওয়ার্কস্পেস 0 এ স্যুইচ করুন
     move_to_workspace_0: ওয়ার্কস্পেস 0 এ যান
     decrease_width: প্রস্থ হ্রাস
     restore_sizes: আকার পুনরুদ্ধার
@@ -188,10 +191,13 @@ shortcuts:
     focus_left: ফোকাস বাম
     move_to_workspace_8: ওয়ার্কস্পেস 8 এ যান
     reserve_top: রিজার্ভ শীর্ষ
+    switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
+    switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
   enable_tooltip: >-
     আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
     অক্ষম করুন
   enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
+  reset: ডিফল্টে পুনরায় সেট করুন
 inProgress: চলমান...
 cancel: বাতিল
 delete: মুছে ফেলা
@@ -208,3 +214,23 @@ vd:
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
 beta_channel:
   enable: বিটা চ্যানেল সক্ষম করুন (কেবল গিটহাবের মাধ্যমে)
+monitors_configurations:
+  label: '{{সূচক}} মনিটর'
+wall:
+  enable: সিলেন প্রাচীর সক্ষম করুন
+  backgrounds: ওয়ালপেপার
+  no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
+  interval: প্রতি ওয়ালপেপার পরিবর্তন করুন (সেকেন্ড)
+app_launcher:
+  runners:
+    explorer: চালানো
+    cmd: কমান্ড
+    label: রানার্স
+  enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
+  monitor: দেখানোর জন্য মনিটর
+inherit: উত্তরাধিকারী
+insert: .োকান
+more: আরও
+close: বন্ধ
+update:
+  available: আপডেট উপলব্ধ!

@@ -21,6 +21,10 @@ header:
     shortcuts: الاختصارات
     developer: مطور
     info: معلومة
+    seelen_wall: الجدار
+    seelen_rofi: قاذفة التطبيق
+    virtual_desk: أجهزة الكمبيوتر المكتبية الافتراضية
+    home: بيت
 start:
   title: مرحباً!
   message: >-
@@ -47,6 +51,7 @@ general:
   accent_color: لون لهجة
   wallpaper:
     select: حدد خلفية
+  date_format: تنسيق التاريخ
 toolbar:
   enable: تمكين شريط الأدوات الفاخر
   placeholder:
@@ -74,7 +79,6 @@ weg:
   enable: تمكين قفص الاتهام/شريط المهام
   width: عرض
   auto_hide: اخفاء تلقائي
-  dock_side: جانب الرصيف
   padding: حشوة
   margin: هامِش
   gap: فجوة
@@ -84,6 +88,7 @@ weg:
     zoom_size: الحجم المكبر (يستخدم للموضوعات)
     gap: المسافة بين العناصر
     visible_separators: فواصل مرئية
+  dock_side: موضع
 devtools:
   enable: تمكين أدوات المطور
   app_folders: مجلدات التطبيق
@@ -165,8 +170,6 @@ shortcuts:
     increase_height: زيادة الارتفاع
     decrease_height: تقليل الارتفاع
     restore_sizes: استعادة الأحجام
-    switch_workspace_0: قم بالتبديل إلى مساحة العمل 0
-    switch_workspace_1: قم بالتبديل إلى مساحة العمل 1
     switch_workspace_2: قم بالتبديل إلى مساحة العمل 2
     switch_workspace_3: قم بالتبديل إلى مساحة العمل 3
     switch_workspace_4: قم بالتبديل إلى مساحة العمل 4
@@ -195,6 +198,9 @@ shortcuts:
     send_to_workspace_7: أرسل إلى مساحة العمل 7
     send_to_workspace_8: أرسل إلى مساحة العمل 8
     send_to_workspace_9: أرسل إلى مساحة العمل 9
+    switch_workspace_1: التبديل إلى مساحة العمل 2
+    switch_workspace_0: التبديل إلى مساحة العمل 1
+  reset: إعادة ضبط على الافتراضات
 vd:
   strategy:
     native: محلي
@@ -204,3 +210,23 @@ vd:
 save_and_restart: حفظ وإعادة التشغيل
 beta_channel:
   enable: تمكين قناة بيتا (فقط عبر جيثب)
+monitors_configurations:
+  label: شاشة {{index}}
+wall:
+  enable: تمكين جدار سيلين
+  backgrounds: خلفيات
+  no_background: عرض شرائح فارغ ، باستخدام خلفية السمة بدلاً من ذلك.
+  interval: تغيير خلفية كل (ثواني)
+app_launcher:
+  runners:
+    explorer: يجري
+    cmd: يأمر
+    label: المتسابقين
+  enable: تمكين قاذفة التطبيق
+  monitor: شاشة لإظهار
+insert: أدخل
+more: أكثر
+inherit: ورث
+close: يغلق
+update:
+  available: تحديث متاح!

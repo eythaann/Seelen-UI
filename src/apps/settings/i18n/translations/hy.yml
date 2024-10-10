@@ -14,6 +14,10 @@ header:
     info: Տեղեկություն
     shortcuts: Դյուրանցումներ
     seelen_wm: Պատուհանների կառավարիչ
+    seelen_rofi: Ծրագրի գործարկիչ
+    seelen_wall: Պատը
+    virtual_desk: Վիրտուալ աշխատասեղաններ
+    home: Տուն
 start:
   title: Բարի գալուստ
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Շեշտադրիչ գույն
   wallpaper:
     select: Ընտրեք Պաստառ
+  date_format: Ամսաթիվ ձեւաչափ
 toolbar:
   placeholder:
     author: Հեղինակ
@@ -72,12 +77,12 @@ weg:
     zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
   enable: Միացնել Dock / Taskbar
   width: Լայնություն
-  dock_side: Նավահանգիստ
   auto_hide: Ավտոմատ թաքցնել
   margin: Լուսանցք
   gap: Բացվածք
   label: Dock / Taskbar
   padding: Լիցք
+  dock_side: Դիրք
 devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ
@@ -166,13 +171,11 @@ shortcuts:
     switch_workspace_6: Անցեք Workspace- ին 6
     focus_right: Կենտրոնանալ ճիշտ
     send_to_workspace_9: Ուղարկել Workspace 9-ին
-    switch_workspace_1: Անցեք աշխատանքային տարածքին 1
     send_to_workspace_4: Ուղարկել Workspace 4-ին
     move_to_workspace_2: Տեղափոխվել դեպի Workspace 2
     switch_workspace_9: Անցեք Workspace- ին 9
     move_to_workspace_8: Տեղափոխել Workpace 8
     switch_workspace_7: Անցեք Workspace- ին 7
-    switch_workspace_0: Անցեք Workspace- ին 0
     send_to_workspace_7: Ուղարկել Workspace 7-ին
     focus_left: Կենտրոնանալ ձախ
     increase_height: Բարձրացնել բարձրությունը
@@ -188,10 +191,13 @@ shortcuts:
     move_to_workspace_4: Տեղափոխել Workpace 4-ին
     reserve_top: Ամրագրեք վերեւ
     switch_workspace_8: Անցեք Workspace- ին 8
+    switch_workspace_0: Անցեք աշխատանքային տարածքին 1
+    switch_workspace_1: Անցեք Workspace- ին 2
   enable: Միացնել ինտեգրված դյուրանցումները (AHK)
   enable_tooltip: >-
     Անջատեք, եթե դուք կիրականացնեք ձեր սեփական դյուրանցումները `օգտագործելով
     Seelen Core API- ն
+  reset: Վերականգնել կանխադրված
 inProgress: Ընթացքի մեջ է...
 loading: Բեռնում ...
 open: Բաց անել
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Պահել եւ վերագործարկել
 beta_channel:
   enable: Միացնել Beta ալիքը (միայն Github- ի միջոցով)
+monitors_configurations:
+  label: Մոնիտոր {{ինդեքս}
+wall:
+  backgrounds: Պաստառներ
+  enable: Միացնել Seelen Wall- ը
+  interval: Փոխեք պաստառները ամեն (վայրկյան)
+  no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
+app_launcher:
+  runners:
+    label: Վազողներ
+    cmd: Հրաման
+    explorer: Վազք
+  monitor: Մոնիտոր, ցույց տալու համար
+  enable: Միացնել ծրագրի արձակումը
+more: Ավելի շատ
+inherit: Ժառանգել
+insert: Տեղադրել
+close: Սերտ
+update:
+  available: 'Թարմացրեք մատչելի:'

@@ -207,6 +207,11 @@
       "default": false,
       "type": "boolean"
     },
+    "dateFormat": {
+      "description": "MomentJS date format",
+      "default": "ddd D MMM, hh:mm A",
+      "type": "string"
+    },
     "devTools": {
       "description": "enable or disable dev tools tab in settings",
       "default": false,
@@ -226,32 +231,77 @@
         }
       ]
     },
+    "iconPacks": {
+      "description": "list of selected icon packs",
+      "default": [
+        "system"
+      ],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "language": {
       "description": "language to use, if null the system locale is used",
-      "default": "en",
+      "default": "es",
       "type": [
         "string",
         "null"
+      ]
+    },
+    "launcher": {
+      "description": "App launcher settings",
+      "default": {
+        "enabled": true,
+        "monitor": "Mouse-Over",
+        "runners": [
+          {
+            "id": "RUN",
+            "label": "t:app_launcher.runners.explorer",
+            "program": "explorer.exe",
+            "readonly": true
+          },
+          {
+            "id": "CMD",
+            "label": "t:app_launcher.runners.cmd",
+            "program": "cmd.exe",
+            "readonly": true
+          }
+        ]
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SeelenLauncherSettings"
+        }
       ]
     },
     "monitors": {
       "description": "list of monitors",
       "default": [
         {
-          "workAreaOffset": null,
-          "workspaces": [
-            {
-              "gap": null,
-              "layout": "BSP",
-              "name": "New Workspace",
-              "padding": null
-            }
-          ]
+          "tb": {
+            "enabled": true
+          },
+          "wall": {
+            "backgrounds": null,
+            "enabled": true
+          },
+          "weg": {
+            "enabled": true
+          },
+          "wm": {
+            "enabled": true,
+            "gap": null,
+            "layout": null,
+            "margin": null,
+            "padding": null
+          },
+          "workspacesV2": []
         }
       ],
       "type": "array",
       "items": {
-        "$ref": "#/definitions/Monitor"
+        "$ref": "#/definitions/MonitorConfiguration"
       }
     },
     "seelenweg": {
@@ -274,7 +324,7 @@
         }
       ]
     },
-    "selectedTheme": {
+    "selectedThemes": {
       "description": "list of selected themes",
       "default": [
         "default"
@@ -293,6 +343,19 @@
         }
       ]
     },
+    "wall": {
+      "description": "background and virtual desktops config",
+      "default": {
+        "backgrounds": [],
+        "enabled": true,
+        "interval": 60
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SeelenWallSettings"
+        }
+      ]
+    },
     "windowManager": {
       "description": "window manager config",
       "default": {
@@ -308,15 +371,15 @@
           "height": 500.0,
           "width": 800.0
         },
-        "globalWorkAreaOffset": {
+        "resizeDelta": 10.0,
+        "workspaceGap": 10,
+        "workspaceMargin": {
           "bottom": 0,
           "left": 0,
           "right": 0,
           "top": 0
         },
-        "resizeDelta": 10.0,
-        "workspaceGap": 10.0,
-        "workspacePadding": 10.0
+        "workspacePadding": 10
       },
       "allOf": [
         {
@@ -902,6 +965,15 @@
         }
       }
     },
+    "FancyToolbarSettingsByMonitor": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        }
+      }
+    },
     "FloatingWindowSettings": {
       "type": "object",
       "properties": {
@@ -942,32 +1014,60 @@
         }
       ]
     },
-    "Monitor": {
+    "MonitorConfiguration": {
       "type": "object",
       "properties": {
-        "workAreaOffset": {
-          "default": null,
-          "anyOf": [
+        "tb": {
+          "default": {
+            "enabled": true
+          },
+          "allOf": [
             {
-              "$ref": "#/definitions/Rect"
-            },
-            {
-              "type": "null"
+              "$ref": "#/definitions/FancyToolbarSettingsByMonitor"
             }
           ]
         },
-        "workspaces": {
-          "default": [
+        "wall": {
+          "default": {
+            "backgrounds": null,
+            "enabled": true
+          },
+          "allOf": [
             {
-              "gap": null,
-              "layout": "BSP",
-              "name": "New Workspace",
-              "padding": null
+              "$ref": "#/definitions/SeelenWallSettingsByMonitor"
             }
-          ],
+          ]
+        },
+        "weg": {
+          "default": {
+            "enabled": true
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenWegSettingsByMonitor"
+            }
+          ]
+        },
+        "wm": {
+          "default": {
+            "enabled": true,
+            "gap": null,
+            "layout": null,
+            "margin": null,
+            "padding": null
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/WindowManagerSettingsByMonitor"
+            }
+          ]
+        },
+        "workspacesV2": {
+          "description": "list of settings by workspace on this monitor",
+          "default": [],
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Workspace"
+            "$ref": "#/definitions/WorkspaceConfiguration"
           }
         }
       }
@@ -996,6 +1096,128 @@
         "top": {
           "type": "integer",
           "format": "int32"
+        }
+      }
+    },
+    "SeelenLauncherMonitor": {
+      "type": "string",
+      "enum": [
+        "primary",
+        "Mouse-Over"
+      ]
+    },
+    "SeelenLauncherRunner": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "default": "",
+          "type": "string"
+        },
+        "label": {
+          "default": "",
+          "type": "string"
+        },
+        "program": {
+          "default": "",
+          "type": "string"
+        },
+        "readonly": {
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "SeelenLauncherSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "monitor": {
+          "default": "Mouse-Over",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SeelenLauncherMonitor"
+            }
+          ]
+        },
+        "runners": {
+          "default": [
+            {
+              "id": "RUN",
+              "label": "t:app_launcher.runners.explorer",
+              "program": "explorer.exe",
+              "readonly": true
+            },
+            {
+              "id": "CMD",
+              "label": "t:app_launcher.runners.cmd",
+              "program": "cmd.exe",
+              "readonly": true
+            }
+          ],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeelenLauncherRunner"
+          }
+        }
+      }
+    },
+    "SeelenWallSettings": {
+      "type": "object",
+      "properties": {
+        "backgrounds": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SeelenWallWallpaper"
+          }
+        },
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
+        "interval": {
+          "description": "update interval in seconds",
+          "default": 60,
+          "type": "integer",
+          "format": "uint64",
+          "minimum": 0.0
+        }
+      }
+    },
+    "SeelenWallSettingsByMonitor": {
+      "type": "object",
+      "properties": {
+        "backgrounds": {
+          "default": null,
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SeelenWallWallpaper"
+          }
+        },
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        }
+      }
+    },
+    "SeelenWallWallpaper": {
+      "type": "object",
+      "required": [
+        "id",
+        "path"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
         }
       }
     },
@@ -1083,6 +1305,15 @@
         }
       }
     },
+    "SeelenWegSettingsByMonitor": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        }
+      }
+    },
     "SeelenWegSide": {
       "type": "string",
       "enum": [
@@ -1142,7 +1373,20 @@
             }
           ]
         },
-        "globalWorkAreaOffset": {
+        "resizeDelta": {
+          "description": "the resize size in % to be used when resizing via cli",
+          "default": 10.0,
+          "type": "number",
+          "format": "float"
+        },
+        "workspaceGap": {
+          "description": "default gap between containers",
+          "default": 10,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "workspaceMargin": {
           "description": "default workspace margin",
           "default": {
             "bottom": 0,
@@ -1156,54 +1400,107 @@
             }
           ]
         },
-        "resizeDelta": {
-          "description": "the resize size in % to be used when resizing via cli",
-          "default": 10.0,
-          "type": "number",
-          "format": "double"
-        },
-        "workspaceGap": {
-          "description": "default gap between containers",
-          "default": 10.0,
-          "type": "number",
-          "format": "double"
-        },
         "workspacePadding": {
           "description": "default workspace padding",
-          "default": 10.0,
-          "type": "number",
-          "format": "double"
+          "default": 10,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
         }
       }
     },
-    "Workspace": {
+    "WindowManagerSettingsByMonitor": {
       "type": "object",
       "properties": {
+        "enabled": {
+          "default": true,
+          "type": "boolean"
+        },
         "gap": {
           "default": null,
           "type": [
-            "number",
+            "integer",
             "null"
           ],
-          "format": "double"
+          "format": "uint32",
+          "minimum": 0.0
         },
         "layout": {
-          "default": "BSP",
-          "type": "string"
+          "default": null,
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "name": {
-          "default": "New Workspace",
-          "type": "string"
+        "margin": {
+          "default": null,
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Rect"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "padding": {
           "default": null,
           "type": [
-            "number",
+            "integer",
             "null"
           ],
-          "format": "double"
+          "format": "uint32",
+          "minimum": 0.0
         }
       }
+    },
+    "WorkspaceConfiguration": {
+      "type": "object",
+      "required": [
+        "identifier"
+      ],
+      "properties": {
+        "backgrounds": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "$ref": "#/definitions/SeelenWallWallpaper"
+          }
+        },
+        "identifier": {
+          "$ref": "#/definitions/WorkspaceIdentifier"
+        },
+        "layout": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "WorkspaceIdentifier": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "kind": {
+          "$ref": "#/definitions/WorkspaceIdentifierType"
+        }
+      }
+    },
+    "WorkspaceIdentifierType": {
+      "type": "string",
+      "enum": [
+        "Name",
+        "Index"
+      ]
     }
   }
 }

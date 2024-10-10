@@ -14,6 +14,10 @@ header:
     seelen_wm: Цонхны менежер
     monitors: Хэлэлт авагч
     info: Мэдээлэл
+    seelen_wall: Хана
+    seelen_rofi: Програм идэвхжсэн
+    virtual_desk: Виржопын ширээний гутал
+    home: Гэр
 start:
   message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
   message: >-
@@ -40,6 +44,7 @@ general:
   accent_color: Эргүүлэг
   wallpaper:
     select: Ханын зураг сонгох
+  date_format: Огноо формат
 toolbar:
   placeholder:
     description: Тодорхойлолт / төрөл анги
@@ -70,13 +75,13 @@ weg:
     size: Зүйлийн хэмжээ
     visible_separators: Харагдах тусгаарлагч
   enable: Док / Taskbar-г идэвхжүүлэх
-  dock_side: Дохын тухай
   label: Док / Taskbar
   width: Өргөн
   padding: Дэвсгэр
   margin: Саруулган өвс
   gap: Цонх
   auto_hide: Авто гүнд
+  dock_side: Байрлал
 devtools:
   settings_file: Тохиргооын нэр
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
@@ -158,7 +163,6 @@ shortcuts:
     switch_workspace_6: Ажлын талбарт шилжих 6
     move_to_workspace_1: Ажлын талбар руу шилжих 1
     reserve_left: Зуух Зүүн
-    switch_workspace_1: Ажлын талбарт шилжих 1
     switch_workspace_5: Ажлын талбар руу шилжих 5
     move_to_workspace_8: Ажлын талбар руу шилжих 8
     focus_right: Домог
@@ -166,7 +170,6 @@ shortcuts:
     increase_height: Дээд хэмжээг нэмэгдүүлэх
     reserve_bottom: Нөөцийг нөөцлөх
     move_to_workspace_6: Ажлын талбар руу шилжих 6
-    switch_workspace_0: Ажлын талбар руу шилжих 0
     move_to_workspace_7: Ажлын талбар руу шилжих 7
     send_to_workspace_4: Ажлын талбарт илгээх 4
     move_to_workspace_3: Ажлын талбар руу шилжих 3
@@ -187,8 +190,11 @@ shortcuts:
     restore_sizes: Хэмжээг сэргээх
     switch_workspace_9: Ажлын талбарт шилжих 9
     send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
+    switch_workspace_0: Ажлын талбарт шилжих 1
+    switch_workspace_1: Ажлын талбарт 2 руу шилжих
   enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
   enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
+  reset: Үндсэндээ тохируулах
 inProgress: Явагдаж байна ...
 delete: Эдгээх
 loading: Ачаалах ...
@@ -207,3 +213,23 @@ vd:
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
 beta_channel:
   enable: Бета сувгийг идэвхжүүлэх (зөвхөн Github)
+monitors_configurations:
+  label: Хяналт {{индекс}}
+wall:
+  backgrounds: Ханын цаас
+  no_background: Хоосон слайпешт, оронд нь.
+  enable: Seelen Ханыг идэвхжүүл
+  interval: БИДНИЙ ХӨГЖЛИЙН ХУВЬЦАА (секунд)
+app_launcher:
+  runners:
+    explorer: Урсгал
+    cmd: Тушаах
+    label: Төгс эелдэг
+  monitor: Бие шоу хийх террут
+  enable: App Leader-ийг идэвхжүүлэх
+inherit: Удамших
+more: Илүү / их олон
+insert: Оруулах
+close: Ойр дөхөм
+update:
+  available: Шинэчлэх боломжтой!

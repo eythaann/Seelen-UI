@@ -2,6 +2,8 @@ taskbar_menu:
   settings: سیٹنگ
   media: میڈیا ماڈیول شامل کریں
   start: اسٹارٹ ماڈیول شامل کریں
+  add_folder: کسٹم فولڈر کو پن
+  add_file: کسٹم فائل کو پن کریں
 app_menu:
   close_multiple: سب بند کرو
   run_as: انتظامیہ کے طورپر چلانا

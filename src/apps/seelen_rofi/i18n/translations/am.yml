@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: ሩጫ
+    cmd: ትእዛዝ
+footer:
+  shortcuts: አቋራጮችን አሳይ
+header:
+  search: መተግበሪያ, ትእዛዝ ወይም ዱካ
+item:
+  open_location: የፋይል ቦታ ይክፈቱ
+  pin: ፒን

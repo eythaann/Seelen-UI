@@ -63,7 +63,7 @@ impl VirtualDesktopManagerTrait for NativeVirtualDesktopManager {
     }
 
     fn get_by_window(&self, window: isize) -> Result<VirtualDesktop> {
-        Ok(winvd::get_desktop_by_window(HWND(window))?.into())
+        Ok(winvd::get_desktop_by_window(HWND(window as _))?.into())
     }
 
     fn get_all(&self) -> Result<Vec<VirtualDesktop>> {
@@ -87,22 +87,22 @@ impl VirtualDesktopManagerTrait for NativeVirtualDesktopManager {
     }
 
     fn send_to(&self, idx: usize, hwnd: isize) -> Result<()> {
-        winvd::move_window_to_desktop(idx as u32, &HWND(hwnd))?;
+        winvd::move_window_to_desktop(idx as u32, &HWND(hwnd as _))?;
         Ok(())
     }
 
     fn pin_window(&self, hwnd: isize) -> Result<()> {
-        winvd::pin_window(HWND(hwnd))?;
+        winvd::pin_window(HWND(hwnd as _))?;
         Ok(())
     }
 
     fn unpin_window(&self, hwnd: isize) -> Result<()> {
-        winvd::unpin_window(HWND(hwnd))?;
+        winvd::unpin_window(HWND(hwnd as _))?;
         Ok(())
     }
 
     fn is_pinned_window(&self, hwnd: isize) -> Result<bool> {
-        Ok(winvd::is_pinned_window(HWND(hwnd))?)
+        Ok(winvd::is_pinned_window(HWND(hwnd as _))?)
     }
 
     fn listen_events(&self, sender: std::sync::mpsc::Sender<VirtualDesktopEvent>) -> Result<()> {
@@ -143,7 +143,9 @@ impl From<DesktopEvent> for VirtualDesktopEvent {
                 old_index: old_index as usize,
                 new_index: new_index as usize,
             },
-            DesktopEvent::WindowChanged(window) => VirtualDesktopEvent::WindowChanged(window.0),
+            DesktopEvent::WindowChanged(window) => {
+                VirtualDesktopEvent::WindowChanged(window.0 as _)
+            }
         }
     }
 }

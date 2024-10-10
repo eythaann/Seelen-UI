@@ -14,6 +14,10 @@ header:
     specific_apps: Specifika appar
     seelen_bar: Fint verktygsfält
     shortcuts: Genvägar
+    seelen_rofi: Appstart
+    seelen_wall: Väggen
+    virtual_desk: Virtuella stationära datorer
+    home: Hem
 start:
   title: Välkommen!
   message_accent: Optimera din produktivitet med stil!
@@ -41,6 +45,7 @@ general:
   accent_color: Accentfärg
   wallpaper:
     select: Välj tapeter
+  date_format: Datumformat
 toolbar:
   placeholder:
     description: Beskrivning
@@ -77,7 +82,7 @@ weg:
   padding: Stoppning
   margin: Marginal
   enable: Aktivera bryggor/aktivitetsfält
-  dock_side: Brygga
+  dock_side: Placera
 devtools:
   install_folder: Installationsmapp
   load: Ladda
@@ -157,7 +162,6 @@ shortcuts:
     move_to_workspace_0: Flytta till arbetsytan 0
     send_to_workspace_8: Skicka till Workspace 8
     decrease_height: Minskande höjd
-    switch_workspace_0: Byt till arbetsyta 0
     send_to_workspace_0: Skicka till Workspace 0
     reserve_stack: Reservstack
     send_to_workspace_5: Skicka till Workspace 5
@@ -185,13 +189,15 @@ shortcuts:
     switch_workspace_4: Byt till arbetsyta 4
     reserve_left: Reservera vänster
     move_to_workspace_4: Flytta till Workspace 4
-    switch_workspace_1: Byt till arbetsyta 1
     move_to_workspace_5: Flytta till arbetsytan 5
     focus_right: Fokusera rätt
+    switch_workspace_0: Byt till arbetsyta 1
+    switch_workspace_1: Byt till arbetsyta 2
   enable: Aktivera integrerade genvägar (AHK)
   enable_tooltip: >-
     Inaktivera om du kommer att implementera dina egna genvägar med Seelen Core
     API
+  reset: Återställas till standardvärden
 loading: Läser in...
 quit: Sluta
 delete: Radera
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Spara och starta om
 beta_channel:
   enable: Aktivera betakanal (endast via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Tomt bildspel, med temas bakgrund istället.
+  interval: Ändra tapeter varannan (sekunder)
+  enable: Aktivera Seelen Wall
+  backgrounds: Tapeter
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Sikt
+    label: Löpare
+  monitor: Övervaka att visa
+  enable: Aktivera App Launcher
+more: Mer
+inherit: Ärva
+insert: Infoga
+close: Nära
+update:
+  available: Uppdatering tillgänglig!

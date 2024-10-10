@@ -2,6 +2,8 @@ taskbar_menu:
   start: પ્રારંભ મોડ્યુલ ઉમેરો
   settings: ખુલ્લી સેટિંગ્સ
   media: મીડિયા મોડ્યુલ ઉમેરો
+  add_folder: પિન કસ્ટમ ફોલ્ડર
+  add_file: પિન કસ્ટમ ફાઇલ
 app_menu:
   close: બંધ
   pin_to_center: કેન્દ્રથી પિનથી કેન્દ્રમાં

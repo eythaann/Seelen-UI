@@ -1,0 +1,34 @@
+.backgroundList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+
+  .background {
+    display: grid;
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    border-radius: 8px;
+    grid-template-columns: 100px 1fr 40px;
+    background-color: var(--color-white);
+
+    .image {
+      border-radius: 8px;
+      height: 60px;
+    }
+
+    .video {
+      height: 60px;
+      padding: 0 40px;
+      border-radius: 8px;
+      background-color: var(--color-gray-200);
+    }
+  }
+}
+
+.backgroundAdd {
+  align-self: flex-end;
+  width: 40px;
+  margin-right: 8px;
+}

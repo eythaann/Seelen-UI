@@ -14,6 +14,10 @@ header:
     seelen_bar: Fancy የመሣሪያ አሞሌ
     monitors: ተቆጣጣሪዎች
     seelen_wm: የመስኮት አቀናባሪ
+    seelen_wall: ግድግዳው
+    seelen_rofi: የመተግበሪያ አስጀማሪ
+    virtual_desk: ምናባዊ ዴስክቶፕስ
+    home: ቤት
 start:
   title: እንኳን ደህና መጣህ!
   message: >-
@@ -39,6 +43,7 @@ general:
   accent_color: የዝግጅት ቀለም
   wallpaper:
     select: የግድግዳ ወረቀት ይምረጡ
+  date_format: የቀን ቅርጸት
 toolbar:
   placeholder:
     description: መግለጫ
@@ -75,7 +80,7 @@ weg:
   width: ስፋት
   gap: ክፍተት
   label: Dock / Accorbar
-  dock_side: ጎን
+  dock_side: አቀማመጥ
 devtools:
   app_folders: የመተግበሪያ አቃፊዎች
   data_folder: የውሂብ አቃፊ
@@ -144,8 +149,6 @@ shortcuts:
     increase_height: ቁመት ይጨምሩ
     send_to_workspace_1: ወደ የስራ ቦታ 1 ይላኩ 1
     reserve_bottom: የተጠባበቅ ክፍል
-    switch_workspace_1: ወደ የሥራ ቦታ 1 ቀይር
-    switch_workspace_0: ወደ የሥራ ቦታ 0 ይቀይሩ
     move_to_workspace_0: ወደ የሥራ ቦታ 0 ይሂዱ
     send_to_workspace_5: ወደ የሥራ ቦታ 5 ይላኩ
     switch_workspace_9: ወደ የሥራ ቦታ 9 ቀይር
@@ -185,8 +188,11 @@ shortcuts:
     restore_sizes: መጠኖች ወደነበሩበት ይመልሱ
     reserve_right: መብት
     decrease_width: ስፋት መቀነስ
+    switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
+    switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
   enable: የተቀናጁ አቋራጮችን (AHK)
   enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
+  reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
 inProgress: በሂደት ላይ...
 open: ክፈት
 cancel: ይቅር
@@ -203,3 +209,23 @@ vd:
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
 beta_channel:
   enable: የቤታ ጣቢያን ያንቁ (በጊትብሎክ ብቻ)
+monitors_configurations:
+  label: ይቆጣጠሩ {{አው.ፊ.}}}}
+wall:
+  backgrounds: የግድግዳ ወረቀቶች
+  interval: የግድግዳ ወረቀት እያንዳንዱን (ሰከንዶች) ይለውጡ
+  no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
+  enable: የጥንቃቄ ግድግዳ አንቃ
+app_launcher:
+  runners:
+    explorer: ሩጫ
+    cmd: ትእዛዝ
+    label: ሯጮች
+  monitor: ለማሳየት መከታተል
+  enable: የመተግበሪያ አስጀማሪን አንቃ
+insert: ያስገቡ
+more: ተጨማሪ
+inherit: ውርስ
+close: ገጠመ
+update:
+  available: ዝመና ይገኛል!

@@ -14,6 +14,10 @@ header:
     shortcuts: शॉर्टकट
     monitors: पर नज़र रखता है
     info: जानकारी
+    seelen_wall: दीवार
+    seelen_rofi: ऐप लॉन्चर
+    virtual_desk: आभासी डेस्कटॉप्स
+    home: घर
 start:
   message_accent: शैली के साथ अपनी उत्पादकता का अनुकूलन करें!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: स्वरोंका रंग
   wallpaper:
     select: वॉलपेपर का चयन करें
+  date_format: तारिख का प्रारूप
 toolbar:
   placeholder:
     author: लेखक
@@ -75,9 +80,9 @@ weg:
   label: डॉक/टास्टरबार
   gap: अंतर
   enable: डॉक/टास्कबार सक्षम करें
-  dock_side: डॉक साइड
   auto_hide: खुद से छिपना
   margin: अंतर
+  dock_side: पद
 devtools:
   install_folder: स्थापना फ़ोल्डर
   load: भार
@@ -142,7 +147,6 @@ extras:
   version: संस्करण
 shortcuts:
   labels:
-    switch_workspace_1: कार्यक्षेत्र 1 पर स्विच करें
     reserve_right: आरक्षित अधिकार
     move_to_workspace_1: कार्यक्षेत्र 1 पर जाएं
     switch_workspace_2: कार्यक्षेत्र 2 पर स्विच करें
@@ -183,15 +187,17 @@ shortcuts:
     send_to_workspace_6: कार्यक्षेत्र 6 को भेजें
     move_to_workspace_5: कार्यक्षेत्र 5 पर जाएं
     send_to_workspace_9: कार्यक्षेत्र 9 को भेजें
-    switch_workspace_0: कार्यक्षेत्र पर स्विच करें 0
     switch_workspace_7: कार्यक्षेत्र 7 पर स्विच करें
     reserve_float: रिजर्व फ्लोट
     switch_workspace_3: कार्यक्षेत्र 3 पर स्विच करें
     move_to_workspace_7: कार्यक्षेत्र 7 पर जाएं
+    switch_workspace_1: कार्यक्षेत्र 2 पर स्विच करें
+    switch_workspace_0: कार्यक्षेत्र 1 पर स्विच करें
   enable: एकीकृत शॉर्टकट (AHK) सक्षम करें
   enable_tooltip: >-
     अक्षम करें यदि आप सेलेन कोर एपीआई का उपयोग करके अपने स्वयं के शॉर्टकट को
     लागू करेंगे
+  reset: डिफ़ॉल्ट पर पुनः सेट करें
 inProgress: प्रगति पर है...
 save: बचाना
 open: खुला
@@ -208,3 +214,23 @@ vd:
 save_and_restart: सहेजें और पुनरारंभ करें
 beta_channel:
   enable: बीटा चैनल को सक्षम करें (केवल GitHub के माध्यम से)
+monitors_configurations:
+  label: मॉनिटर {{इंडेक्स}}
+wall:
+  backgrounds: वॉलपेपर
+  enable: सेलेन वॉल को सक्षम करें
+  no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
+  interval: वॉलपेपर हर (सेकंड) बदलें
+app_launcher:
+  runners:
+    explorer: दौड़ना
+    cmd: आज्ञा
+    label: धावकों
+  monitor: दिखाने के लिए मॉनिटर
+  enable: ऐप लॉन्चर सक्षम करें
+inherit: इनहेरिट
+more: अधिक
+insert: डालना
+close: बंद करना
+update:
+  available: उपलब्ध अद्यतन!

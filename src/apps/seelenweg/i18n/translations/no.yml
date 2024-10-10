@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Åpne innstillinger
   start: Legg til startmodul
   media: Legg til mediemodul
+  add_file: Pin tilpasset fil
+  add_folder: Pin tilpasset mappe
 app_menu:
   open_file_location: Åpne fil plassering
   close: Lukk

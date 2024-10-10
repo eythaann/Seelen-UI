@@ -14,6 +14,10 @@ header:
     shortcuts: කෙටිමං
     seelen_wm: කවුළු කළමනාකරු
     seelen_weg: ඩොක්/කාර්ය තීරුව
+    seelen_rofi: යෙදුම් දියත් කිරීම
+    seelen_wall: බිත්තිය
+    virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
+    home: මුල් පිටුව
 start:
   title: සාදරයෙන් පිළිගනිමු!
   message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
@@ -41,6 +45,7 @@ general:
   accent_color: උච්චාරණ වර්ණය
   wallpaper:
     select: බිතුපත තෝරන්න
+  date_format: දිනය ආකෘතිය
 toolbar:
   placeholder:
     author: කර්තෘ
@@ -75,9 +80,9 @@ weg:
   padding: පෑඩිං
   width: පළල
   enable: Dock/Taskbar සබල කරන්න
-  dock_side: ඩොක් පැත්ත
   gap: පරතරය
   margin: ආන්තිකය
+  dock_side: තනතුර
 devtools:
   enable: සංවර්ධක මෙවලම් සබල කරන්න
   install_folder: ස්ථාපන ෆෝල්ඩරය
@@ -147,7 +152,6 @@ shortcuts:
     increase_height: උස වැඩි කරන්න
     send_to_workspace_2: Workspace 2 වෙත යවන්න
     send_to_workspace_5: වැඩබිම වෙත යවන්න 5
-    switch_workspace_0: Workspace 0 වෙත මාරු වන්න
     move_to_workspace_7: වැඩබිම වෙත ගෙන යන්න 7
     send_to_workspace_3: වැඩබිම වෙත යවන්න 3
     send_to_workspace_9: Workspace 9 වෙත යවන්න
@@ -159,7 +163,6 @@ shortcuts:
     send_to_workspace_1: කාර්ය ඉඩ 1 වෙත යවන්න
     focus_latest: නවතම අවධානය යොමු කරන්න
     focus_left: වමට අවධානය යොමු කරන්න
-    switch_workspace_1: කාර්ය ඉඩ 1 වෙත මාරු වන්න
     move_to_workspace_5: වැඩබිම වෙත ගෙන යන්න 5
     decrease_height: උස අඩු කරන්න
     reserve_bottom: සංචිත පතුලේ
@@ -188,8 +191,11 @@ shortcuts:
     move_to_workspace_6: වැඩබිම වෙත ගෙන යන්න 6
     switch_workspace_7: වැඩබිම 7 වෙත මාරු වන්න
     focus_bottom: පහළට අවධානය යොමු කරන්න
+    switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
+    switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
   enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
   enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
+  reset: පෙරනිමි වෙත නැවත සකසන්න
 loading: පූරණය වෙමින්...
 quit: ඉවත්
 inProgress: ප්රගතියේ...
@@ -206,3 +212,23 @@ vd:
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
 beta_channel:
   enable: බීටා නාලිකාව සක්රීය කරන්න (GitHub හරහා පමණි)
+monitors_configurations:
+  label: '{{දර්ශකය} u අධීක්ෂණය කරන්න'
+wall:
+  interval: සෑම (තත්පර) බිතුපත වෙනස් කරන්න
+  no_background: හිස් විනිවිදක දර්ශනය, ඒ වෙනුවට තේමාවේ පසුබිම භාවිතා කිරීම.
+  enable: සක්රිය කළ බිත්තිය සක්රීය කරන්න
+  backgrounds: බිතුපත්
+app_launcher:
+  runners:
+    cmd: විධානය
+    label: ධාවකයන්
+    explorer: දුවන්න
+  monitor: පෙන්වීමට අධීක්ෂණය
+  enable: යෙදුම් දියත් කරන්නා සක්රීය කරන්න
+more: තව
+insert: ඇතුළු කරන්න
+inherit: උරුම වේ
+close: වසන්න
+update:
+  available: යාවත්කාලීන කිරීම!

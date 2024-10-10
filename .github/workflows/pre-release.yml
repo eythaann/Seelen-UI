@@ -84,7 +84,7 @@ jobs:
           args: ${{ matrix.args }}
 
   publish-release:
-    needs: build-installers
+    needs: [build-installers, create-pre-release]
     permissions:
       contents: write
     runs-on: ubuntu-latest

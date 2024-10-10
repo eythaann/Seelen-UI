@@ -1,18 +1,19 @@
-import { VirtualDesktopStrategy } from '../../../../../shared/schemas/Settings';
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
-import { GlobalPaddings } from './GlobalPaddings';
-import { OthersConfigs } from './Others';
 import { invoke } from '@tauri-apps/api/core';
 import { Alert, Button, ConfigProvider, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { VirtualDesktopStrategy } from 'seelen-core';
 
 import { BorderSettings } from '../../border/infra';
 
 import { newSelectors, RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
+
+import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
+import { GlobalPaddings } from './GlobalPaddings';
+import { OthersConfigs } from './Others';
 
 export function WindowManagerSettings() {
   const [isWinVerSupported, setIsWinVerSupported] = useState(false);

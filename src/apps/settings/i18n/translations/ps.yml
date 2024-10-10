@@ -14,6 +14,10 @@ header:
     info: معلومات
     monitors: څارونکي
     shortcuts: لنډوکونه
+    seelen_rofi: د اپلیکیشن لانچر
+    seelen_wall: دېوال
+    virtual_desk: مجازی ډیسټاپونه
+    home: کور
 start:
   title: ښه راغلاست!
   message_accent: د سټایل سره خپل محصول غوره کړئ!
@@ -40,6 +44,7 @@ general:
   accent_color: تیزس رنګ
   wallpaper:
     select: وال پیپر غوره کړئ
+  date_format: د نیټې ب .ه
 toolbar:
   placeholder:
     description: تفصیل
@@ -76,7 +81,7 @@ weg:
   gap: تشې
   enable: دوک / ټاسک بار فعال کړئ
   auto_hide: آٹو پټول
-  dock_side: ډیک اړخ
+  dock_side: موقعیت
 devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   enable: د پراختیا کونکي وسیلې فعال کړئ
@@ -156,7 +161,6 @@ shortcuts:
     send_to_workspace_4: کارځای ته واستوئ
     switch_workspace_4: د کارځای ته وسپارئ
     switch_workspace_5: د کارځای 5 ته لاړشئ
-    switch_workspace_1: د کارځای 1 ته لاړشئ
     move_to_workspace_8: د کارځای ته لاړشئ
     send_to_workspace_7: کارځای ته واستوئ
     reserve_top: خوندي پټی
@@ -174,7 +178,6 @@ shortcuts:
     move_to_workspace_0: د کارځای 0 ته لاړشئ
     send_to_workspace_0: کارځای ته واستوئ
     focus_top: فوکس سر
-    switch_workspace_0: د کارځای 0 ته لاړشئ
     focus_bottom: ښکته
     reserve_stack: ریزرو سټیک
     switch_workspace_7: د کارځای ته لاړشئ
@@ -187,8 +190,11 @@ shortcuts:
     send_to_workspace_8: کارځای ته واستوئ
     restore_sizes: اندازونه بحال کړئ
     increase_height: قد زیاتول
+    switch_workspace_1: د کارځای 2 ته لاړشئ
+    switch_workspace_0: د کارځای 1 ته لاړشئ
   enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
   enable: مدغم شوي لنډیزونه (اه)
+  reset: د افلاسیون لپاره بیا تنظیمول
 inProgress: د پرمختګ په حال کې...
 quit: پرېښودل
 delete: حذف کول
@@ -205,3 +211,23 @@ vd:
 save_and_restart: خوندي کول او بیا پیل کړئ
 beta_channel:
   enable: د بیټا چینل فعال کړئ (یوازې د ګیټوب له لارې)
+monitors_configurations:
+  label: د {{{پلس} نظارت وکړئ}
+wall:
+  backgrounds: والپيپرونه
+  no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
+  enable: د نیکي دیوال فعال کړئ
+  interval: وال پیپر هر (ثانیې)
+app_launcher:
+  runners:
+    explorer: منډه وهل
+    cmd: قومانده
+    label: چلوونکي
+  monitor: څارنه کول
+  enable: د اپلیکیشن لیسچر وړ کړئ
+more: نور
+inherit: میراث
+insert: دننه کړئ
+close: بندول
+update:
+  available: اوسمهالول شتون لري!

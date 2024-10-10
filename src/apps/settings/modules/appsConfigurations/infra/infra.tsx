@@ -1,5 +1,3 @@
-import { ExportApps, ImportApps } from '../../shared/store/storeApi';
-import { EditAppModal } from './EditModal';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import { TFunction } from 'i18next';
@@ -7,17 +5,19 @@ import { cloneDeep } from 'lodash';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
+import { AppConfiguration } from 'seelen-core';
 
 import { useAppSelector } from '../../shared/utils/infra';
 
 import { RootSelectors } from '../../shared/store/app/selectors';
-import { YamlToState_Apps } from '../../shared/store/app/StateBridge';
 import { cx, debounce } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
 
-import { AppConfiguration, AppConfigurationExtended, WmApplicationOptions } from '../domain';
+import { AppConfigurationExtended, WmApplicationOptions } from '../domain';
 
+import { ExportApps } from '../../shared/store/storeApi';
+import { EditAppModal } from './EditModal';
 import cs from './index.module.css';
 
 const ReadonlySwitch = (value: boolean, record: AppConfigurationExtended, _index: number) => {
@@ -172,9 +172,10 @@ export function AppsConfiguration() {
   const { t } = useTranslation();
 
   const importApps = useCallback(async () => {
-    const yamlApps = await ImportApps();
+    // TODO reimplement Import Apps
+    /* const yamlApps = await ImportApps();
     const newApps = YamlToState_Apps(yamlApps);
-    dispatch(AppsConfigActions.push(newApps));
+    dispatch(AppsConfigActions.push(newApps)); */
   }, []);
 
   const performSwap = useCallback(() => {
@@ -219,13 +220,13 @@ export function AppsConfiguration() {
   );
 
   return (
-    <>
+    <div className={cs.container}>
       <Table
         loading={loading}
         dataSource={data}
         columns={columns}
-        pagination={{ pageSize: 50 }}
-        scroll={{ y: 330, x: '100vw' }}
+        pagination={{ pageSize: 25 }}
+        scroll={{ y: 'calc(100vh - 150px)', x: '100vw' }}
         className={cs.table}
         rowSelection={{
           selectedRowKeys: selectedAppsKey,
@@ -251,6 +252,6 @@ export function AppsConfiguration() {
           {t('apps_configurations.swap')}
         </Button>
       </div>
-    </>
+    </div>
   );
 }

@@ -14,6 +14,10 @@ header:
     specific_apps: Specifikke apps
     shortcuts: Genveje
     monitors: Monitors
+    seelen_wall: Væggen
+    seelen_rofi: App Launcher
+    virtual_desk: Virtuelle desktops
+    home: Hjem
 start:
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
@@ -41,6 +45,7 @@ general:
   accent_color: Accentfarve
   wallpaper:
     select: Vælg tapet
+  date_format: Datoformat
 toolbar:
   placeholder:
     select: Værktøjslinjestruktur
@@ -77,7 +82,7 @@ weg:
   gap: Gap
   padding: Polstring
   label: Dock/proceslinje
-  dock_side: Dock side
+  dock_side: Position
 devtools:
   enable: Aktivér udviklerværktøjer
   settings_file: Indstillinger fil
@@ -171,7 +176,6 @@ shortcuts:
     move_to_workspace_7: Flyt til arbejdsområde 7
     reserve_left: Reserve til venstre
     reserve_float: Reserve float
-    switch_workspace_1: Skift til arbejdsområde 1
     switch_workspace_7: Skift til arbejdsområde 7
     switch_workspace_4: Skift til arbejdsområde 4
     switch_workspace_2: Skift til arbejdsområde 2
@@ -184,14 +188,16 @@ shortcuts:
     increase_height: Øg højde
     focus_bottom: Fokusbund
     switch_workspace_6: Skift til arbejdsområde 6
-    switch_workspace_0: Skift til arbejdsområdet 0
     move_to_workspace_3: Flyt til arbejdsområde 3
     focus_right: Fokusere rigtigt
     send_to_workspace_5: Send til arbejdsområde 5
+    switch_workspace_1: Skift til arbejdsområde 2
+    switch_workspace_0: Skift til arbejdsområde 1
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core
     API
+  reset: Nulstil til misligholdelser
 inProgress: I gang...
 open: Åben
 delete: Slet
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Gem & genstart
 beta_channel:
   enable: Aktivér beta -kanal (kun via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Baggrunde
+  no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
+  interval: Skift tapet hver (sekunder)
+  enable: Aktivér Seelen Wall
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Løbe
+    label: Løbere
+  monitor: Overvågning at vise
+  enable: Aktivér app Launcher
+more: Mere
+inherit: Arve
+insert: Indsæt
+close: Tæt
+update:
+  available: Opdatering tilgængelig!

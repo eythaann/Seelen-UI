@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: రన్
+    cmd: కమాండ్
+footer:
+  shortcuts: సత్వరమార్గాలను చూపించు
+header:
+  search: అనువర్తనం, ఆదేశం లేదా మార్గం
+item:
+  open_location: ఫైల్ స్థానం తెరవండి
+  pin: పిన్ టు డాక్

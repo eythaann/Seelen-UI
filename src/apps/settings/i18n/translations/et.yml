@@ -14,6 +14,10 @@ header:
     developer: Arendaja
     info: Teave
     seelen_bar: Väljamõeldud tööriistariba
+    seelen_wall: Sein
+    seelen_rofi: Rakenduse käivitaja
+    virtual_desk: Virtuaalsed töölauad
+    home: Kodu
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
@@ -41,6 +45,7 @@ general:
   accent_color: Aktsentvärv
   wallpaper:
     select: Valige tapeet
+  date_format: Kuupäeva vorming
 toolbar:
   placeholder:
     author: Autor
@@ -76,8 +81,8 @@ weg:
   gap: Lüngad
   auto_hide: Automaatne peida
   margin: Marginaal
-  dock_side: Doki pool
   enable: Luba dokk/ülesanderiba
+  dock_side: Positsioon
 devtools:
   app_folders: Rakenduse kaustad
   data_folder: Andmekaust
@@ -143,7 +148,6 @@ extras:
 shortcuts:
   labels:
     increase_width: Suurendama laiust
-    switch_workspace_1: Lülitage tööalale 1
     send_to_workspace_9: Saada Workspace 9
     move_to_workspace_7: Kolige tööruumi 7
     switch_workspace_2: Lülitage tööruum 2
@@ -154,7 +158,6 @@ shortcuts:
     move_to_workspace_5: Kolige tööruumi 5
     focus_left: Fookus vasakule
     switch_workspace_4: Lülitage tööruum 4
-    switch_workspace_0: Lülitage tööalale 0
     focus_top: Fookus ülaosa
     focus_latest: Keskenduda uusim
     move_to_workspace_0: Liikuge tööruumi 0
@@ -188,8 +191,11 @@ shortcuts:
     switch_workspace_3: Lülitage tööruum 3
     switch_workspace_5: Lülitage tööruum 5
     switch_workspace_9: Lülitage Workspace 9 -le
+    switch_workspace_1: Lülitage tööruum 2
+    switch_workspace_0: Lülitage tööalale 1
   enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
   enable: Lubage integreeritud otseteed (AHK)
+  reset: Lähtestage vaikeseadetele
 inProgress: Pooleli ...
 delete: Kustutama
 quit: Loobuma
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Salvesta ja taaskäivitage
 beta_channel:
   enable: Luba beetakanal (ainult GitHubi kaudu)
+monitors_configurations:
+  label: Monitor {{indeks}}
+wall:
+  backgrounds: Taustapildid
+  interval: Muutke tapeet iga (sekundit)
+  no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
+  enable: Luba Seeleni sein
+app_launcher:
+  runners:
+    cmd: Käsk
+    label: Jooksjad
+    explorer: Jooksma
+  enable: Luba rakenduse käivitaja
+  monitor: Monitor, mida näidata
+more: Rohkem
+insert: Sisestama
+inherit: Pärima
+close: Sulgur
+update:
+  available: Värskendage saadaval!

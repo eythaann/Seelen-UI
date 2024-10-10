@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Perintah
+    explorer: Jalankan
+footer:
+  shortcuts: Tunjukkan pintasan
+header:
+  search: Aplikasi, Perintah atau Laluan
+item:
+  pin: Pin ke dok
+  open_location: Buka lokasi fail

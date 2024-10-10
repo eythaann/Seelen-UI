@@ -14,6 +14,10 @@ header:
     shortcuts: Qısaylıq
     seelen_bar: Xülya alətlər paneli
     general: General
+    seelen_wall: Divar
+    seelen_rofi: App başlatıcısı
+    virtual_desk: Virtual masaüstü
+    home: Evdə
 start:
   title: Xoş gəliş edin!
   message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
@@ -41,6 +45,7 @@ general:
   accent_color: Vurğu
   wallpaper:
     select: Divar kağızı seçin
+  date_format: Tarix formatı
 toolbar:
   placeholder:
     author: Müəllif
@@ -70,7 +75,6 @@ weg:
     label: Maddələr
     gap: Əşyalar arasındakı boşluq
     size: Maddə ölçüsü
-  dock_side: Dok tərəfi
   margin: Kənarə
   auto_hide: Avtomatik gizlətmək
   padding: Paddend
@@ -78,6 +82,7 @@ weg:
   gap: Gap
   label: Dock / tapşırıq çubuğu
   enable: Dock / tapşırıq çubuğunu aktivləşdirin
+  dock_side: Mövqe
 devtools:
   app_folders: Tətbiq qovluqları
   data_folder: Məlumat qovluğu
@@ -181,17 +186,18 @@ shortcuts:
     move_to_workspace_9: İş sahəsinə 9-a keçin
     move_to_workspace_0: İş sahəsinə 0 hərəkət edin
     send_to_workspace_4: İş sahəsinə 4 göndərin
-    switch_workspace_0: İş sahəsinə 0 keçin
     switch_workspace_2: İş sahəsinə 2 keçin
-    switch_workspace_1: İş sahəsinə 1 keçin
     send_to_workspace_2: İş sahəsinə 2 göndərin
     send_to_workspace_0: 0 iş sahəsinə göndərin
     send_to_workspace_3: İş sahəsinə göndərin 3
     reserve_float: Ehtiyat float
+    switch_workspace_0: İş sahəsinə 1 keçin
+    switch_workspace_1: İş sahəsinə 2 keçin
   enable: İnteqrasiya edilmiş qısa yolları (AHK) aktivləşdirin
   enable_tooltip: >-
     Seelen Core API istifadə edərək öz qısa yollarınızı həyata keçirə bilsəniz
     deaktiv edin
+  reset: Defoltlara yenidən qurun
 save: Yadda saxla
 loading: Yükləmə ...
 delete: Silmək
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Saxla və yenidən başladın
 beta_channel:
   enable: Beta kanalını aktivləşdirin (yalnız GitHub vasitəsilə)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  interval: Hər (saniyə) divar kağızı dəyişdirin
+  backgrounds: Divar kağızları
+  enable: Seelen Divarını aktivləşdirin
+  no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
+app_launcher:
+  runners:
+    label: Qaçışçı
+    explorer: Qaçmaq
+    cmd: Əmr etmək
+  enable: Tətbiq başlatıcısını aktivləşdirin
+  monitor: Göstərmək üçün monitor
+more: Daha çox
+inherit: Varis olmaq
+insert: Daxil etmək
+close: Yaxın
+update:
+  available: YENİLƏNİB!

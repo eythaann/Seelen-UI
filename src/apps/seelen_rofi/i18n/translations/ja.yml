@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: 走る
+    cmd: 指示
+footer:
+  shortcuts: ショートカットを表示します
+header:
+  search: アプリ、コマンド、またはパス
+item:
+  pin: ドックにピン
+  open_location: ファイルの場所を開きます

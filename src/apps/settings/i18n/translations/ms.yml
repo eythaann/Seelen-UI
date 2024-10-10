@@ -14,6 +14,10 @@ header:
     seelen_bar: Bar alat mewah
     monitors: Monitor
     shortcuts: Pintasan
+    seelen_wall: Dinding
+    seelen_rofi: Pelancar App
+    virtual_desk: Desktop maya
+    home: Rumah
 start:
   title: Selamat datang!
   message_accent: Mengoptimumkan produktiviti anda dengan gaya!
@@ -41,6 +45,7 @@ general:
   accent_color: Warna aksen
   wallpaper:
     select: Pilih kertas dinding
+  date_format: Format tarikh
 toolbar:
   placeholder:
     description: Penerangan
@@ -77,7 +82,7 @@ weg:
   gap: Jurang
   label: Dock/Taskbar
   auto_hide: Menyembunyikan auto
-  dock_side: Sebelah dok
+  dock_side: Kedudukan
 devtools:
   load: Beban
   data_folder: Folder Data
@@ -168,7 +173,6 @@ shortcuts:
     send_to_workspace_9: Hantar ke Ruang Kerja 9
     send_to_workspace_2: Hantar ke Ruang Kerja 2
     send_to_workspace_5: Hantar ke Ruang Kerja 5
-    switch_workspace_1: Beralih ke ruang kerja 1
     decrease_width: Mengurangkan lebar
     reserve_bottom: Bawah simpanan
     send_to_workspace_0: Hantar ke Ruang Kerja 0
@@ -180,7 +184,6 @@ shortcuts:
     move_to_workspace_6: Pindah ke Ruang Kerja 6
     increase_height: Meningkatkan ketinggian
     switch_workspace_2: Beralih ke ruang kerja 2
-    switch_workspace_0: Beralih ke ruang kerja 0
     reserve_float: Rizab terapung
     reserve_top: Rizab atas
     reserve_left: Rizab kiri
@@ -188,10 +191,13 @@ shortcuts:
     move_to_workspace_1: Pindah ke Ruang Kerja 1
     send_to_workspace_7: Hantar ke Ruang Kerja 7
     send_to_workspace_3: Hantar ke Ruang Kerja 3
+    switch_workspace_1: Beralih ke ruang kerja 2
+    switch_workspace_0: Beralih ke ruang kerja 1
   enable_tooltip: >-
     Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
     teras Seelen
   enable: Dayakan Pintasan Bersepadu (AHK)
+  reset: Tetapkan semula ke lalai
 open: Buka
 save: Simpan
 quit: Berhenti
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Jimat & mulakan semula
 beta_channel:
   enable: Dayakan Saluran Beta (hanya melalui GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  interval: Tukar kertas dinding setiap (saat)
+  enable: Dayakan dinding Seelen
+  backgrounds: Kertas dinding
+  no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
+app_launcher:
+  runners:
+    explorer: Jalankan
+    label: Pelari
+    cmd: Perintah
+  monitor: Pantau untuk menunjukkan
+  enable: Dayakan Pelancar App
+inherit: Mewarisi
+more: Lebih
+insert: Masukkan
+close: Tutup
+update:
+  available: Kemas kini tersedia!

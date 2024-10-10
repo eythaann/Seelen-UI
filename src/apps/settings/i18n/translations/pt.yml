@@ -21,6 +21,10 @@ header:
     shortcuts: Atalhos
     developer: Desenvolvedor
     info: Informação
+    seelen_rofi: Lançador de aplicativos
+    seelen_wall: A parede
+    virtual_desk: Desktops virtuais
+    home: Lar
 start:
   title: Bem-vindo!
   message: >-
@@ -48,6 +52,7 @@ general:
   accent_color: Cor de destaque
   wallpaper:
     select: Selecione papel de parede
+  date_format: Formato de data
 toolbar:
   enable: Ativar barra de ferramentas sofisticada
   placeholder:
@@ -75,7 +80,6 @@ weg:
   enable: Habilitar Dock/Barra de Tarefas
   width: Largura
   auto_hide: Ocultar automaticamente
-  dock_side: Lado da doca
   padding: Preenchimento
   margin: Margem
   gap: Brecha
@@ -85,6 +89,7 @@ weg:
     zoom_size: Tamanho ampliado (usado para temas)
     gap: Espaço entre itens
     visible_separators: Separadores Visíveis
+  dock_side: Posição
 devtools:
   enable: Habilitar ferramentas para desenvolvedores
   app_folders: Pastas de aplicativos
@@ -167,8 +172,6 @@ shortcuts:
     increase_height: Aumentar a altura
     decrease_height: Diminuir Altura
     restore_sizes: Restaurar tamanhos
-    switch_workspace_0: Mudar para o espaço de trabalho 0
-    switch_workspace_1: Mudar para o espaço de trabalho 1
     switch_workspace_2: Mudar para o espaço de trabalho 2
     switch_workspace_3: Mudar para o espaço de trabalho 3
     switch_workspace_4: Mudar para o espaço de trabalho 4
@@ -197,6 +200,9 @@ shortcuts:
     send_to_workspace_7: Enviar para o espaço de trabalho 7
     send_to_workspace_8: Enviar para o espaço de trabalho 8
     send_to_workspace_9: Enviar para o espaço de trabalho 9
+    switch_workspace_0: Mudar para o espaço de trabalho 1
+    switch_workspace_1: Mudar para o espaço de trabalho 2
+  reset: Redefinir para padrões
 vd:
   strategy:
     native: Nativa
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Salve e reinicie
 beta_channel:
   enable: Ativar canal beta (apenas via github)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Papéis de parede
+  interval: Mude o papel de parede a cada (segundos)
+  enable: Ativar parede de Seelen
+  no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
+app_launcher:
+  runners:
+    cmd: Comando
+    explorer: Correr
+    label: Corredoras
+  monitor: Monitor para mostrar
+  enable: Ativar lançador de aplicativos
+insert: Inserir
+more: Mais
+inherit: Herdar
+close: Fechar
+update:
+  available: Atualização disponível!

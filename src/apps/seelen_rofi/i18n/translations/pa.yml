@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: ਕਮਾਂਡ
+    explorer: ਚਲਾਓ
+footer:
+  shortcuts: ਸ਼ਾਰਟਕੱਟ ਦਿਖਾਓ
+header:
+  search: ਐਪ, ਕਮਾਂਡ ਜਾਂ ਮਾਰਗ
+item:
+  pin: ਡੌਕ ਕਰਨ ਲਈ ਪਿੰਨ
+  open_location: ਓਪਨ ਫਾਈਲ ਟਿਕਾਣਾ

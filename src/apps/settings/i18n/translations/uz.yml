@@ -14,6 +14,10 @@ header:
     specific_apps: Muayyan ilovalar
     shortcuts: Yorliqlar
     seelen_weg: Dok / vazifalar paneli
+    seelen_wall: Devor
+    seelen_rofi: Ilovani ishga tushirish vositasi
+    virtual_desk: Virtual ish stollari
+    home: Uy
 start:
   message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Urg'u rangi
   wallpaper:
     select: Fon rasmini tanlang
+  date_format: Sana formati
 toolbar:
   placeholder:
     description: Tavsif
@@ -72,12 +77,12 @@ weg:
     visible_separators: Ko'rinadigan ajratuvchi
   label: Dok / vazifalar paneli
   padding: Plomba
-  dock_side: Dok
   width: Kenglik
   auto_hide: Avtomatik yashirish
   enable: Dock / vazifalar panelini yoqing
   gap: Bo'shliq
   margin: Marja
+  dock_side: Pozitsiya
 devtools:
   install_folder: O'rnatish papkasini o'rnatish
   enable: Ishlab chiqaruvchi vositalarni yoqish
@@ -147,7 +152,6 @@ shortcuts:
     increase_height: Balandlikni oshirish
     switch_workspace_7: Ish maydoni 7-ga o'ting
     move_to_workspace_5: Ish maydoni 5 ga o'ting 5
-    switch_workspace_0: Ish maydoni 0 ga o'ting
     switch_workspace_6: Ish maydoni 6 ga o'tish
     reserve_bottom: Zaxira pastki
     move_to_workspace_1: Ish maydoni 1 ga o'ting 1
@@ -185,13 +189,15 @@ shortcuts:
     send_to_workspace_6: Ish maydoni 6-ga yuboring
     move_to_workspace_7: Ish maydoni 7-ga o'ting
     switch_workspace_4: Ish maydoni 4-ga o'ting
-    switch_workspace_1: Ish maydoni 1 ga o'tish
     send_to_workspace_3: Ish maydoni 3-ga yuboring
     send_to_workspace_0: Ish maydoni 0 ga yuboring
+    switch_workspace_0: Ish maydoni 1 ga o'tish
+    switch_workspace_1: Ish maydoni 2-ga o'ting
   enable: Birlashtirilgan yorliqlarni yoqish (AHK)
   enable_tooltip: >-
     Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
     o'chiring
+  reset: Standartlarga qayta o'rnating
 inProgress: Jarayonda...
 open: Ochiq
 save: Tejash
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Saqlang va qayta yoqing
 beta_channel:
   enable: Beta kanalini yoqing (faqat gitub orqali)
+monitors_configurations:
+  label: '{{Indeks}}'
+wall:
+  backgrounds: Fon rasmlari
+  no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
+  interval: Har bir (soniya) devor qog'ozini o'zgartiring
+  enable: Seelen devorini yoqing
+app_launcher:
+  runners:
+    cmd: Buyruq
+    label: Yuguruvchilar
+    explorer: Yugurish
+  monitor: Ko'rish uchun monitor
+  enable: APP ishga tushirishni yoqish
+more: Ko'proq
+inherit: Meros qilib olmoq
+insert: Qo'shmoq
+close: Yaqin
+update:
+  available: Yangilanish mavjud!

@@ -12,10 +12,12 @@ use parking_lot::Mutex;
 use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
+use crate::modules::virtual_desk::{VirtualDesktopManager, VIRTUAL_DESKTOP_MANAGER};
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_bar::FancyToolbar;
+use crate::seelen_rofi::SeelenRofi;
 use crate::seelen_weg::SeelenWeg;
-use crate::seelen_wm::WindowManager;
+use crate::seelen_wm_v2::instance::WindowManagerV2;
 use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 
@@ -65,10 +67,10 @@ macro_rules! get_subcommands {
                                 Ok(SubCommand::$subcommand$(($((sub_matches.get_one(stringify!($arg_name)) as Option<&$arg_type>).unwrap().clone()),*))?)
                             },
                         )*
-                        _ => Err(color_eyre::eyre::eyre!("Unknown subcommand.").into()),
+                        _ => Err("Unknown subcommand.".into()),
                     }
                 } else {
-                    Err(color_eyre::eyre::eyre!("No subcommand was provided.").into())
+                    Err("No subcommand was provided.".into())
                 }
             }
         }
@@ -107,10 +109,12 @@ lazy_static! {
             ])
             .subcommands([
                 Command::new("settings").about("Opens the Seelen settings gui."),
+                VirtualDesktopManager::get_cli(),
                 CliDebugger::get_cli(),
                 FancyToolbar::get_cli(),
-                WindowManager::get_cli(),
+                WindowManagerV2::get_cli(),
                 SeelenWeg::get_cli(),
+                SeelenRofi::get_cli(),
             ])
     ));
 }
@@ -186,15 +190,14 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
             "settings" => {
                 Seelen::show_settings()?;
             }
+            VirtualDesktopManager::CLI_IDENTIFIER => {
+                VIRTUAL_DESKTOP_MANAGER.load().process(matches)?;
+            }
             CliDebugger::CLI_IDENTIFIER => {
                 CliDebugger::process(matches)?;
             }
-            WindowManager::CLI_IDENTIFIER => {
-                if let Some(monitor) = trace_lock!(SEELEN).focused_monitor_mut() {
-                    if let Some(wm) = monitor.wm_mut() {
-                        wm.process(matches)?;
-                    }
-                }
+            WindowManagerV2::CLI_IDENTIFIER => {
+                WindowManagerV2::process(matches)?;
             }
             FancyToolbar::CLI_IDENTIFIER => {
                 let mut seelen = trace_lock!(SEELEN);
@@ -210,6 +213,11 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
                     if let Some(weg) = monitor.weg_mut() {
                         weg.process(matches)?;
                     }
+                }
+            }
+            SeelenRofi::CLI_IDENTIFIER => {
+                if let Some(rofi) = trace_lock!(SEELEN).rofi_mut() {
+                    rofi.process(matches)?;
                 }
             }
             _ => {}

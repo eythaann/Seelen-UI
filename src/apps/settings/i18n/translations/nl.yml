@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock/taakbalk
     seelen_bar: Fancy werkbalk
     shortcuts: Snelkoppelingen
+    seelen_wall: De muur
+    seelen_rofi: Apparter
+    virtual_desk: Virtuele desktops
+    home: Thuis
 start:
   message_accent: Optimaliseer uw productiviteit met stijl!
   title: Welkom!
@@ -41,6 +45,7 @@ general:
   accent_color: Accent kleur
   wallpaper:
     select: Selecteer wallpaper
+  date_format: Datumformaat
 toolbar:
   placeholder:
     author: Auteur
@@ -77,7 +82,7 @@ weg:
   width: Breedte
   label: Dock/taakbalk
   enable: Schakel dock/taakbalk in
-  dock_side: Dokzijde
+  dock_side: Positie
 devtools:
   load: Laden
   data_folder: Gegevensmap
@@ -145,9 +150,7 @@ shortcuts:
     decrease_width: Breedte afnemen
     move_to_workspace_6: Ga naar werkruimte 6
     move_to_workspace_2: Ga naar werkruimte 2
-    switch_workspace_1: Schakel over naar werkruimte 1
     switch_workspace_6: Schakel over naar werkruimte 6
-    switch_workspace_0: Schakel over naar werkruimte 0
     move_to_workspace_4: Ga naar werkruimte 4
     move_to_workspace_9: Ga naar werkruimte 9
     increase_height: Verhoog de hoogte
@@ -188,10 +191,13 @@ shortcuts:
     send_to_workspace_4: Stuur naar werkruimte 4
     focus_right: Focus goed
     focus_bottom: Focusbodem
+    switch_workspace_0: Schakel over naar werkruimte 1
+    switch_workspace_1: Schakel over naar werkruimte 2
   enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
   enable_tooltip: >-
     Schakel uit of u uw eigen snelkoppelingen implementeert met behulp van de
     Selen Core API
+  reset: Reset naar standaardwaarden
 quit: Ontslag nemen
 open: Open
 save: Redden
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Opslaan en opnieuw opstarten
 beta_channel:
   enable: Schakel Beta Channel in (alleen via GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  interval: Verander wallpaper elke (seconden)
+  backgrounds: Wallpapers
+  no_background: Lege diavoorstelling, in plaats daarvan met de achtergrond van het thema.
+  enable: Schakel Selen -muur in
+app_launcher:
+  runners:
+    cmd: Commando
+    explorer: Loop
+    label: Lopers wierners
+  monitor: Monitor om te laten zien
+  enable: Schakel App Launcher in
+inherit: Erven
+more: Meer
+insert: Invoegen
+close: Dichtbij
+update:
+  available: Update beschikbaar!

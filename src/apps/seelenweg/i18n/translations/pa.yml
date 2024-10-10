@@ -2,6 +2,8 @@ taskbar_menu:
   settings: ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ
   media: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਸ਼ਾਮਲ ਕਰੋ
   start: ਸਟਾਰਟ ਮੋਡੀ ule ਲ ਸ਼ਾਮਲ ਕਰੋ
+  add_file: ਪਿੰਨ ਕਸਟਮ ਫਾਈਲ
+  add_folder: ਪਿੰਨ ਕਸਟਮ ਫੋਲਡਰ
 app_menu:
   close_multiple: ਸਾਰੇ ਬੰਦ ਕਰੋ
   pin_to_center: ਕੇਂਦਰ ਨੂੰ ਪਿੰਨ

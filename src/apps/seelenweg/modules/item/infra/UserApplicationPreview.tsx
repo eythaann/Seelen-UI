@@ -1,15 +1,17 @@
-import { Icon } from '../../../../shared/components/Icon';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { Spin } from 'antd';
 import { MouseEvent, useEffect, useReducer, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { SelectOpenApp } from '../../shared/store/app';
 
 import { HWND } from '../../shared/store/domain';
+
+import { Icon } from '../../../../shared/components/Icon';
 
 interface PreviewProps {
   hwnd: HWND;
@@ -35,7 +37,7 @@ export const UserApplicationPreview = ({ hwnd }: PreviewProps) => {
 
   const onClose = (e: MouseEvent) => {
     e.stopPropagation();
-    invoke('weg_close_app', { hwnd });
+    invoke(SeelenCommand.WegCloseApp, { hwnd });
   };
 
   if (!app) {
@@ -46,7 +48,7 @@ export const UserApplicationPreview = ({ hwnd }: PreviewProps) => {
     <div
       className="weg-item-preview"
       onClick={() =>
-        invoke('weg_toggle_window_state', { hwnd: app.hwnd || 0, exePath: app.execution_path })
+        invoke(SeelenCommand.WegToggleWindowState, { hwnd: app.hwnd || 0, exePath: app.execution_path })
       }
     >
       <div className="weg-item-preview-topbar">

@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Mở cài đặt
   media: Thêm mô -đun phương tiện
   start: Thêm mô -đun bắt đầu
+  add_folder: Pin thư mục tùy chỉnh
+  add_file: Pin tùy chỉnh tệp
 app_menu:
   open_file_location: Mở vị trí file
   close_multiple: Đóng tất cả

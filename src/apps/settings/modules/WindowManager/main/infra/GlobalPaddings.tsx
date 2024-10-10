@@ -1,5 +1,4 @@
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../../components/SettingsBox';
-import { InputNumber } from 'antd';
+import { Button, InputNumber } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
 
@@ -8,62 +7,126 @@ import { useAppSelector } from '../../../shared/utils/infra';
 import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
 import { Rect } from '../../../shared/utils/app/Rect';
 import { WManagerSettingsActions } from '../app';
+import { Icon } from 'src/apps/shared/components/Icon';
+
+import {
+  SettingsGroup,
+  SettingsOption,
+  SettingsSubGroup,
+} from '../../../../components/SettingsBox';
 
 export const GlobalPaddings = () => {
   const workspaceGap = useAppSelector(SeelenWmSelectors.workspaceGap);
   const workspacePadding = useAppSelector(SeelenWmSelectors.workspacePadding);
-  const workAreaOffset = useAppSelector(SeelenWmSelectors.globalWorkAreaOffset);
+  const workAreaOffset = useAppSelector(SeelenWmSelectors.workspaceMargin);
 
   const dispatch = useDispatch();
-  const { t } = useTranslation();
 
   const onChangeGlobalOffset = (side: keyof Rect, value: number | null) => {
     dispatch(
-      WManagerSettingsActions.setGlobalWorkAreaOffset({
+      WManagerSettingsActions.setWorkspaceMargin({
         ...workAreaOffset,
-        [side]: value || 0,
+        [side]: Math.round(value || 0),
       }),
     );
   };
 
   const onChangeDefaultGap = (value: number | null) => {
-    dispatch(WManagerSettingsActions.setWorkspaceGap(value || 0));
+    dispatch(WManagerSettingsActions.setWorkspaceGap(Math.round(value || 0)));
   };
 
   const onChangeDefaultPadding = (value: number | null) => {
-    dispatch(WManagerSettingsActions.setWorkspacePadding(value || 0));
+    dispatch(WManagerSettingsActions.setWorkspacePadding(Math.round(value || 0)));
   };
 
   return (
+    <WindowManagerSpacingSettings
+      gap={workspaceGap}
+      padding={workspacePadding}
+      margins={workAreaOffset}
+      onChangeGap={onChangeDefaultGap}
+      onChangePadding={onChangeDefaultPadding}
+      onChangeMargins={onChangeGlobalOffset}
+    />
+  );
+};
+
+interface WindowManagerSpacingSettings {
+  gap: number | null;
+  padding: number | null;
+  margins: Rect | null;
+  onChangeGap: (v: number | null) => void;
+  onChangePadding: (v: number | null) => void;
+  onChangeMargins: (side: keyof Rect, value: number | null) => void;
+  onClear?: () => void;
+}
+
+export function WindowManagerSpacingSettings(props: WindowManagerSpacingSettings) {
+  const { gap, padding, margins, onChangeGap, onChangePadding, onChangeMargins, onClear } = props;
+
+  const { t } = useTranslation();
+
+  return (
     <SettingsGroup>
-      <div>
+      {onClear && (
         <SettingsOption>
-          <span>{t('wm.space_between_containers')}</span>
-          <InputNumber value={workspaceGap} onChange={onChangeDefaultGap} />
+          <span>{t('header.labels.seelen_wm')}</span>
+          <Button onClick={onClear}>
+            <Icon iconName="IoTrash" size={14} />
+          </Button>
         </SettingsOption>
-        <SettingsOption>
-          <span>{t('wm.workspace_padding')}</span>
-          <InputNumber value={workspacePadding} onChange={onChangeDefaultPadding} />
-        </SettingsOption>
-      </div>
+      )}
+      <SettingsOption>
+        <b>{t('wm.space_between_containers')}</b>
+        <InputNumber value={gap} onChange={onChangeGap} min={0} placeholder={t('inherit')} />
+      </SettingsOption>
+      <SettingsOption>
+        <b>{t('wm.workspace_padding')}</b>
+        <InputNumber
+          value={padding}
+          onChange={onChangePadding}
+          min={0}
+          placeholder={t('inherit')}
+        />
+      </SettingsOption>
       <SettingsSubGroup label={t('wm.workspace_offset')}>
         <SettingsOption>
           <span>{t('sides.left')}</span>
-          <InputNumber value={workAreaOffset.left} onChange={onChangeGlobalOffset.bind(this, 'left')} />
+          <InputNumber
+            value={margins?.left}
+            onChange={onChangeMargins.bind(null, 'left')}
+            min={0}
+            placeholder={t('inherit')}
+          />
         </SettingsOption>
         <SettingsOption>
           <span>{t('sides.top')}</span>
-          <InputNumber value={workAreaOffset.top} onChange={onChangeGlobalOffset.bind(this, 'top')} />
+          <InputNumber
+            value={margins?.top}
+            onChange={onChangeMargins.bind(null, 'top')}
+            min={0}
+            placeholder={t('inherit')}
+          />
         </SettingsOption>
         <SettingsOption>
           <span>{t('sides.right')}</span>
-          <InputNumber value={workAreaOffset.right} onChange={onChangeGlobalOffset.bind(this, 'right')} />
+          <InputNumber
+            value={margins?.right}
+            onChange={onChangeMargins.bind(null, 'right')}
+            min={0}
+            placeholder={t('inherit')}
+          />
         </SettingsOption>
         <SettingsOption>
           <span>{t('sides.bottom')}</span>
-          <InputNumber value={workAreaOffset.bottom} onChange={onChangeGlobalOffset.bind(this, 'bottom')} />
+          <InputNumber
+            value={margins?.bottom}
+            onChange={onChangeMargins.bind(null, 'bottom')}
+            min={0}
+            placeholder={t('inherit')}
+          />
         </SettingsOption>
       </SettingsSubGroup>
     </SettingsGroup>
   );
-};
+}

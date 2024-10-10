@@ -35,8 +35,7 @@ use windows_core::Interface;
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::get_app_handle,
-    seelen_weg::icon_extractor::{extract_and_save_icon, extract_and_save_icon_v2},
+    seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
     utils::pcwstr,
     windows_api::{Com, WindowEnumerator, WindowsApi},
@@ -87,7 +86,7 @@ enum MediaEvent {
 #[windows_core::implement(IMMNotificationClient)]
 struct MediaManagerEvents;
 
-impl IMMNotificationClient_Impl for MediaManagerEvents {
+impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
     fn OnDefaultDeviceChanged(
         &self,
         flow: EDataFlow,
@@ -205,7 +204,7 @@ struct MediaDeviceEventHandler {
     device_id: String,
 }
 
-impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
+impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler_Impl {
     fn OnNotify(
         &self,
         data: *mut windows::Win32::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA,
@@ -221,7 +220,7 @@ impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
     }
 }
 
-impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
+impl IAudioSessionNotification_Impl for MediaDeviceEventHandler_Impl {
     fn OnSessionCreated(
         &self,
         _new_session: Option<&IAudioSessionControl>,
@@ -234,7 +233,7 @@ impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
 #[windows::core::implement(IAudioSessionEvents)]
 struct MediaSessionEventHandler;
 
-impl IAudioSessionEvents_Impl for MediaSessionEventHandler {
+impl IAudioSessionEvents_Impl for MediaSessionEventHandler_Impl {
     fn OnChannelVolumeChanged(
         &self,
         _channel_count: u32,
@@ -477,7 +476,7 @@ impl MediaManager {
                             .to_string()?,
                     }
                     .replace(".exe", "");
-                    icon_path = extract_and_save_icon(&get_app_handle(), &path)
+                    icon_path = extract_and_save_icon_from_file(&path)
                         .ok()
                         .map(|p| p.to_string_lossy().to_string());
                 }
@@ -564,6 +563,7 @@ impl MediaManager {
         let playback_info = session.GetPlaybackInfo()?;
         let status = playback_info.PlaybackStatus()?;
 
+        // this is only needed when the player is not a uwp app like firefox player as example
         let owner = WindowEnumerator::new().find(|w| {
             if let Some(id) = w.app_user_model_id() {
                 return id == source_app_user_model_id;
@@ -576,8 +576,13 @@ impl MediaManager {
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
             owner: owner.map(|w| MediaPlayerOwner {
-                name: w.title(),
-                icon_path: w.exe().and_then(extract_and_save_icon_v2).ok(),
+                name: w
+                    .app_display_name()
+                    .unwrap_or_else(|_| "Unknown App".to_string()),
+                icon_path: w
+                    .app_user_model_id()
+                    .and_then(|umid| extract_and_save_icon_umid(&umid).ok())
+                    .or_else(|| w.exe().and_then(extract_and_save_icon_from_file).ok()),
             }),
             thumbnail: properties
                 .Thumbnail()

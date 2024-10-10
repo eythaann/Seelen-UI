@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: दौड़ना
+    cmd: आज्ञा
+footer:
+  shortcuts: शॉर्टकट दिखाओ
+header:
+  search: ऐप, कमांड या पथ
+item:
+  open_location: फ़ाइल के स्थान को खोलें
+  pin: पिन टू डॉक

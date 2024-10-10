@@ -21,6 +21,10 @@ header:
     shortcuts: Kurzbefehle
     developer: Entwickler
     info: Information
+    seelen_wall: Die Wand
+    seelen_rofi: App Launcher
+    virtual_desk: Virtuelle Desktops
+    home: Heim
 start:
   title: Willkommen!
   message: >-
@@ -48,6 +52,7 @@ general:
   accent_color: Akzentfarbe
   wallpaper:
     select: Wählen Sie Hintergrundbild
+  date_format: Datumsformat
 toolbar:
   enable: Elegante Werkzeugleiste aktivieren
   placeholder:
@@ -75,7 +80,6 @@ weg:
   enable: Dock/Taskleiste aktivieren
   width: Breite
   auto_hide: Automatisch ausblenden
-  dock_side: Dock-Seite
   padding: Polsterung
   margin: Rand
   gap: Abstand
@@ -85,6 +89,7 @@ weg:
     zoom_size: Vergrößerte Größe (für Themen verwendet)
     gap: Abstand zwischen Elementen
     visible_separators: Sichtbare Trennzeichen
+  dock_side: Position
 devtools:
   enable: Entwicklerwerkzeuge aktivieren
   app_folders: Anwendungsordner
@@ -169,8 +174,6 @@ shortcuts:
     increase_height: Höhe vergrößern
     decrease_height: Höhe verkleinern
     restore_sizes: Größen wiederherstellen
-    switch_workspace_0: Zum Arbeitsbereich 0 wechseln
-    switch_workspace_1: Zum Arbeitsbereich 1 wechseln
     switch_workspace_2: Zum Arbeitsbereich 2 wechseln
     switch_workspace_3: Zum Arbeitsbereich 3 wechseln
     switch_workspace_4: Zum Arbeitsbereich 4 wechseln
@@ -199,6 +202,9 @@ shortcuts:
     send_to_workspace_7: Zum Arbeitsbereich 7 senden
     send_to_workspace_8: Zum Arbeitsbereich 8 senden
     send_to_workspace_9: Zum Arbeitsbereich 9 senden
+    switch_workspace_0: Wechseln Sie zum Arbeitsbereich 1
+    switch_workspace_1: Wechseln Sie zum Arbeitsbereich 2
+  reset: Auf Standards zurücksetzen
 vd:
   strategy:
     native: Einheimisch
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Speichern & neu starten
 beta_channel:
   enable: Aktivieren Sie den Beta -Kanal (nur über Github)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Aktivieren Sie Seelen Wall
+  no_background: Leere Diashow, verwendete stattdessen den Hintergrund des Themas.
+  interval: Wechseln Sie die Hintergrundbild jeden (Sekunden)
+  backgrounds: Hintergrundbilder
+app_launcher:
+  runners:
+    cmd: Befehl
+    explorer: Laufen
+    label: Läuferinnen
+  enable: App Launcher aktivieren
+  monitor: Überwachen Sie zu zeigen
+insert: Einfügen
+more: Mehr
+inherit: Erben
+close: Schließen
+update:
+  available: Update verfügbar!

@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IconPack",
+  "type": "object",
+  "properties": {
+    "apps": {
+      "description": "Key can be user model id, filename or a full path.\n\nValue is the path to the icon relative to the icon pack folder.",
+      "default": {},
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "info": {
+      "default": {
+        "author": "Unknown",
+        "description": "",
+        "displayName": "Unknown",
+        "filename": "",
+        "tags": []
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceMetadata"
+        }
+      ]
+    }
+  },
+  "definitions": {
+    "ResourceMetadata": {
+      "type": "object",
+      "properties": {
+        "author": {
+          "default": "Unknown",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "type": "string"
+        },
+        "displayName": {
+          "default": "Unknown",
+          "type": "string"
+        },
+        "filename": {
+          "default": "",
+          "type": "string"
+        },
+        "tags": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

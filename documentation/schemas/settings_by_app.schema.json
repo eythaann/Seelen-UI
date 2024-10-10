@@ -23,11 +23,13 @@
           "minimum": 0.0
         },
         "boundWorkspace": {
-          "description": "workspace name that the app should be bound to",
+          "description": "workspace index that the app should be bound to",
           "type": [
-            "string",
+            "integer",
             "null"
-          ]
+          ],
+          "format": "uint",
+          "minimum": 0.0
         },
         "category": {
           "description": "category to group the app under",
@@ -155,8 +157,7 @@
         "StartsWith",
         "EndsWith",
         "Contains",
-        "Regex",
-        "Legacy"
+        "Regex"
       ]
     }
   }

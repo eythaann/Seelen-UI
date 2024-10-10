@@ -21,6 +21,10 @@ header:
     shortcuts: Raccourcis
     developer: Développeur
     info: Information
+    seelen_wall: Le mur
+    seelen_rofi: Lanceur d'applications
+    virtual_desk: Desktops virtuels
+    home: Maison
 start:
   title: Accueillir!
   message: "Bienvenue dans Seelen UI, l'environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows 11\_! Explorez une nouvelle ère d'efficacité et de multitâche avec notre interface intuitive et nos fonctionnalités avancées."
@@ -44,6 +48,7 @@ general:
   accent_color: Couleur accent
   wallpaper:
     select: Sélectionner le papier peint
+  date_format: Format de date
 toolbar:
   enable: Activer la barre d'outils sophistiquée
   placeholder:
@@ -71,7 +76,6 @@ weg:
   enable: Activer le Dock/la barre des tâches
   width: Largeur
   auto_hide: Masquage automatique
-  dock_side: Côté quai
   padding: Rembourrage
   margin: Marge
   gap: Écart
@@ -81,6 +85,7 @@ weg:
     zoom_size: Taille agrandie (utilisée pour les thèmes)
     gap: Espace entre les éléments
     visible_separators: Séparateurs visibles
+  dock_side: Position
 devtools:
   enable: Activer les outils de développement
   app_folders: Dossiers d'applications
@@ -165,8 +170,6 @@ shortcuts:
     increase_height: Augmenter la hauteur
     decrease_height: Diminuer la hauteur
     restore_sizes: Restaurer les tailles
-    switch_workspace_0: Passer à l'espace de travail 0
-    switch_workspace_1: Passer à l'espace de travail 1
     switch_workspace_2: Passer à l'espace de travail 2
     switch_workspace_3: Passer à l'espace de travail 3
     switch_workspace_4: Passer à l'espace de travail 4
@@ -195,6 +198,9 @@ shortcuts:
     send_to_workspace_7: Envoyer à Workspace 7
     send_to_workspace_8: Envoyer à l'espace de travail 8
     send_to_workspace_9: Envoyer à l'espace de travail 9
+    switch_workspace_1: Passez à l'espace de travail 2
+    switch_workspace_0: Passez à l'espace de travail 1
+  reset: Réinitialiser les valeurs par défaut
 vd:
   strategy:
     native: Indigène
@@ -206,3 +212,23 @@ vd:
 save_and_restart: Enregistrer et redémarrer
 beta_channel:
   enable: Activer le canal bêta (uniquement via GitHub)
+monitors_configurations:
+  label: Moniteur {{index}}
+wall:
+  interval: Changer de papier peint chaque (seconde)
+  enable: Activer Seelen Wall
+  backgrounds: Fonds d'écran
+  no_background: Vide de diaporama, en utilisant à la place l'arrière-plan du thème.
+app_launcher:
+  runners:
+    explorer: Courir
+    cmd: Commande
+    label: Coureuses
+  monitor: Surveiller à montrer
+  enable: Activer le lanceur d'applications
+more: Plus
+inherit: Hériter
+insert: Insérer
+close: Fermer
+update:
+  available: Mise à jour disponible!

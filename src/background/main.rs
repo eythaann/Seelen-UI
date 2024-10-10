@@ -4,13 +4,15 @@
 mod error_handler;
 mod exposed;
 mod hook;
+mod instance;
 mod modules;
-mod monitor;
 mod plugins;
 mod seelen;
 mod seelen_bar;
+mod seelen_rofi;
+mod seelen_wall;
 mod seelen_weg;
-mod seelen_wm;
+mod seelen_wm_v2;
 mod state;
 mod system;
 mod tray;
@@ -20,7 +22,6 @@ mod winevent;
 
 use std::io::{BufWriter, Write};
 
-use color_eyre::owo_colors::OwoColorize;
 use error_handler::Result;
 use exposed::register_invoke_handler;
 use itertools::Itertools;
@@ -34,13 +35,16 @@ use modules::{
 use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
 use seelen_core::state::Settings;
+use tauri::webview_version;
+use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use tauri_plugin_shell::ShellExt;
 use tray::try_register_tray_icon;
 use utils::PERFORMANCE_HELPER;
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
-fn register_panic_hook() {
-    std::panic::set_hook(Box::new(|info| {
+fn register_panic_hook() -> Result<()> {
+    std::panic::set_hook(Box::new(move |info| {
         let cause = info
             .payload()
             .downcast_ref::<String>()
@@ -64,19 +68,50 @@ fn register_panic_hook() {
 
         log::error!(
             "A panic occurred:\n  Cause: {}\n  Location: {}",
-            cause.cyan(),
-            string_location.purple()
+            cause,
+            string_location
         );
     }));
+    Ok(())
 }
 
-fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Error>> {
+fn print_initial_information() {
     let version = env!("CARGO_PKG_VERSION");
     log::info!("───────────────────── Starting Seelen UI v{version} ─────────────────────");
     log::info!("Operating System: {}", os_info::get());
-    log::info!("Locate: {:?}", Settings::get_locale());
-    log::info!("Elevated: {:?}", WindowsApi::is_elevated());
+    log::info!("WebView2 Runtime: {:?}", webview_version());
+    log::info!("Elevated        : {:?}", WindowsApi::is_elevated());
+    log::info!("Locate          : {:?}", Settings::get_locale());
+}
+
+fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<()> {
+    match webview_version() {
+        Ok(_version) => Ok(()),
+        Err(_) => {
+            let ok_pressed = app
+                .dialog()
+                .message("Seelen UI requires Webview2 Runtime. Please install it.")
+                .title("WebView2 Runtime not found")
+                .kind(MessageDialogKind::Error)
+                .ok_button_label("Go to download page")
+                .blocking_show();
+            if ok_pressed {
+                let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
+                app.shell().open(url, None)?;
+            }
+            Err("Webview2 Runtime not found".into())
+        }
+    }
+}
+
+fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
+    print_initial_information();
     Client::listen_tcp()?;
+
+    validate_webview_runtime_is_installed(app.handle())?;
+
+    let mut seelen = trace_lock!(SEELEN);
+    seelen.init(app.handle())?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
@@ -84,22 +119,16 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<(), Box<dyn std::error::Err
     // try it at start it on open the program to avoid do it before
     log_error!(ensure_tray_overflow_creation());
 
-    let mut seelen = unsafe { SEELEN.make_guard_unchecked() };
-    seelen.init(app.handle().clone())?;
-
     if !tauri::is_dev() {
         let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
-        let matches = command.get_matches();
-        if !matches.get_flag("silent") {
+        if !command.get_matches().get_flag("silent") {
             Seelen::show_settings()?;
         }
-        Seelen::show_update_modal()?;
     }
 
     seelen.start()?;
-
     log_error!(try_register_tray_icon(app));
-    std::mem::forget(seelen);
+    trace_lock!(PERFORMANCE_HELPER).end("setup");
     Ok(())
 }
 
@@ -112,22 +141,34 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
             }
         }
         tauri::RunEvent::Exit => {
-            log::info!("───────────────────── Exiting Seelen ─────────────────────");
-            trace_lock!(SEELEN).stop()
+            log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
+            if Seelen::is_running() {
+                trace_lock!(SEELEN).stop();
+            }
         }
         _ => {}
     }
 }
 
+fn is_already_runnning() -> bool {
+    let mut sys = sysinfo::System::new();
+    sys.refresh_processes();
+    sys.processes()
+        .values()
+        .filter(|p| p.exe().is_some_and(|path| path.ends_with("seelen-ui.exe")))
+        .collect_vec()
+        .len()
+        > 1
+}
+
 fn main() -> Result<()> {
-    color_eyre::install().expect("Failed to install color_eyre");
-    register_panic_hook();
-    trace_lock!(PERFORMANCE_HELPER).start("init");
+    register_panic_hook()?;
+    trace_lock!(PERFORMANCE_HELPER).start("setup");
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {
         Ok(m) => m,
-        // (help, --help or -h) is also managed as error
+        // (help, --help or -h) are managed as error
         Err(e) => {
             attach_console()?;
             e.print()?;
@@ -139,21 +180,33 @@ fn main() -> Result<()> {
         return Ok(());
     }
 
-    let mut sys = sysinfo::System::new();
-    sys.refresh_processes();
-    let already_running = sys.processes_by_name("seelen-ui.exe").collect_vec().len() > 1;
+    if is_already_runnning() {
+        let mut attempts = 0;
+        let mut connection = Client::connect_tcp();
 
-    if already_running {
-        if let Ok(stream) = Client::connect_tcp() {
+        while connection.is_err() && attempts < 10 {
+            attempts += 1;
+            std::thread::sleep(std::time::Duration::from_millis(100));
+            connection = Client::connect_tcp();
+        }
+
+        if let Ok(stream) = connection {
             let mut writer = BufWriter::new(stream);
 
             let args = std::env::args().collect_vec();
-            let msg = serde_json::to_string(&args).expect("could not serialize");
+            let msg = serde_json::to_string(&args)?;
 
-            writer.write_all(msg.as_bytes()).expect("could not write");
-            writer.flush().expect("could not flush");
+            writer.write_all(msg.as_bytes())?;
+            writer.flush()?;
+            return Ok(());
         }
-        return Ok(());
+
+        // if the connection fails probably is because the app is been closing
+        // so we check if the app is already running again to see if we have to
+        // let the instance be created or not
+        if is_already_runnning() {
+            return Ok(());
+        }
     }
 
     let mut app_builder = tauri::Builder::default();
@@ -161,9 +214,15 @@ fn main() -> Result<()> {
     app_builder = register_invoke_handler(app_builder);
 
     let app = app_builder
-        .setup(setup)
+        .setup(|app| {
+            if let Err(err) = setup(app) {
+                log::error!("Error while setting up: {:?}", err);
+                app.handle().exit(1);
+            }
+            Ok(())
+        })
         .build(tauri::generate_context!())
-        .expect("error while building tauri application");
+        .expect("Error while building tauri application");
 
     app.run(app_callback);
     Ok(())

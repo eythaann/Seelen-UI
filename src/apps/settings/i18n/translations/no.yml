@@ -14,6 +14,10 @@ header:
     developer: Utvikler
     seelen_weg: Dock/oppgavelinje
     monitors: Skjermer
+    seelen_rofi: App Launcher
+    seelen_wall: Veggen
+    virtual_desk: Virtuelle stasjonære maskiner
+    home: Hjem
 start:
   title: Velkommen!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Aksentfarge
   wallpaper:
     select: Velg bakgrunnsbilde
+  date_format: Datoformat
 toolbar:
   placeholder:
     description: Beskrivelse
@@ -75,9 +80,9 @@ weg:
   margin: Margin
   gap: Mellomrom
   padding: Polstring
-  dock_side: Dock Side
   label: Dock/oppgavelinje
   enable: Aktiver dock/oppgavelinje
+  dock_side: Stilling
 devtools:
   load: Laste
   custom_config_file: Last inn tilpasset konfigurasjonsfil
@@ -144,14 +149,12 @@ shortcuts:
   labels:
     focus_latest: Fokusere siste
     reserve_left: Reserve igjen
-    switch_workspace_1: Bytt til arbeidsområdet 1
     focus_top: Fokus topp
     switch_workspace_2: Bytt til arbeidsområdet 2
     send_to_workspace_8: Send til arbeidsområdet 8
     switch_workspace_7: Bytt til arbeidsområdet 7
     increase_width: Øke bredden
     send_to_workspace_4: Send til arbeidsområdet 4
-    switch_workspace_0: Bytt til arbeidsområdet 0
     decrease_width: Redusere bredden
     move_to_workspace_4: Flytt til arbeidsområdet 4
     reserve_bottom: Reserve bunn
@@ -188,10 +191,13 @@ shortcuts:
     move_to_workspace_3: Flytt til arbeidsområdet 3
     send_to_workspace_7: Send til arbeidsområdet 7
     send_to_workspace_3: Send til arbeidsområdet 3
+    switch_workspace_0: Bytt til arbeidsområdet 1
+    switch_workspace_1: Bytt til arbeidsområdet 2
   enable_tooltip: >-
     Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
     Core API
   enable: Aktiver integrerte snarveier (AHK)
+  reset: Tilbakestill til standardverdier
 cancel: Avbryt
 inProgress: I prosess...
 quit: Slutte
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Lagre og start på nytt
 beta_channel:
   enable: Aktiver Beta Channel (bare via GitHub)
+monitors_configurations:
+  label: Overvåke {{indeks}}
+wall:
+  backgrounds: Bakgrunnsbilder
+  enable: Aktiver Seelen Wall
+  no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
+  interval: Endre bakgrunnsbilder hver (sekunder)
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Løp
+    label: Løpere
+  monitor: Overvåke for å vise
+  enable: Aktiver appstarter
+more: Flere
+inherit: Arve
+insert: Sett inn
+close: Lukke
+update:
+  available: Oppdatering tilgjengelig!

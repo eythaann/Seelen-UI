@@ -1,12 +1,13 @@
-import { MediaTM } from '../../../../shared/schemas/Placeholders';
-import { WithMediaControls } from './MediaControls';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { MediaTM } from 'seelen-core';
 
-import { Item } from '../../item/infra';
+import { Item } from '../../item/infra/infra';
 
 import { Selectors } from '../../shared/store/app';
+
+import { WithMediaControls } from './MediaControls';
 
 interface Props {
   module: MediaTM;

@@ -14,6 +14,10 @@ header:
     monitors: モニター
     seelen_weg: ドック（タスクバー）
     seelen_bar: ツールバー
+    seelen_wall: 壁
+    seelen_rofi: アプリランチャー
+    virtual_desk: 仮想デスクトップ
+    home: 家
 start:
   title: ようこそ！
   message: >-
@@ -39,6 +43,7 @@ general:
   accent_color: アクセントカラー
   wallpaper:
     select: 壁紙を選択
+  date_format: 日付形式
 toolbar:
   placeholder:
     description: 説明
@@ -74,8 +79,8 @@ weg:
   padding: 余白
   label: ドック（タスクバー）
   auto_hide: 自動的に隠す
-  dock_side: ドックの位置
   enable: ドック（タスクバー）を有効にする
+  dock_side: 位置
 devtools:
   load: ロード
   data_folder: データフォルダー
@@ -161,10 +166,8 @@ shortcuts:
     switch_workspace_7: ワークスペース7に切り替え
     reserve_bottom: 下側を予約
     focus_right: 右にフォーカス
-    switch_workspace_1: ワークスペース1に切り替え
     reserve_right: 右側を予約
     switch_workspace_8: ワークスペース8に切り替え
-    switch_workspace_0: ワークスペース0に切り替え
     send_to_workspace_8: ワークスペース8に送信
     move_to_workspace_8: ワークスペース8に移動
     switch_workspace_6: ワークスペース6に切り替え
@@ -185,8 +188,11 @@ shortcuts:
     move_to_workspace_5: ワークスペース5に移動
     focus_left: 左にフォーカス
     send_to_workspace_7: ワークスペース7に送信
+    switch_workspace_0: ワークスペースに切り替えます1
+    switch_workspace_1: ワークスペースに切り替えます2
   enable: AutoHotkeyを使用した統合ショートカットを有効にする
   enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください
+  reset: デフォルトにリセットします
 delete: 消去
 loading: 読み込み中...
 inProgress: 近日実装予定...
@@ -203,3 +209,23 @@ vd:
 save_and_restart: 保存して再起動します
 beta_channel:
   enable: ベータチャネルを有効にする（Github経由のみ）
+monitors_configurations:
+  label: モニター{{index}}
+wall:
+  enable: Seelen Wallを有効にします
+  no_background: 代わりにテーマの背景を使用して、空のスライドショー。
+  backgrounds: 壁紙
+  interval: 壁紙を毎回変更する（秒）
+app_launcher:
+  runners:
+    cmd: 指示
+    explorer: 走る
+    label: ランナー
+  enable: アプリランチャーを有効にします
+  monitor: 表示するために監視します
+more: もっと
+insert: 入れる
+inherit: 継承
+close: 近い
+update:
+  available: 更新が利用可能です！

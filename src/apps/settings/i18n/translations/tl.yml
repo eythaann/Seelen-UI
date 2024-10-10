@@ -14,6 +14,10 @@ header:
     developer: Developer
     specific_apps: Tukoy na apps
     seelen_weg: Dock/Taskbar
+    seelen_wall: Ang pader
+    seelen_rofi: App launcher
+    virtual_desk: Mga Virtual Desktop
+    home: Home
 start:
   message: >-
     Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
@@ -41,6 +45,7 @@ general:
   accent_color: Kulay ng accent
   wallpaper:
     select: Piliin ang wallpaper
+  date_format: Format ng petsa
 toolbar:
   placeholder:
     author: May -akda
@@ -76,8 +81,8 @@ weg:
   label: Dock/Taskbar
   margin: Margin
   auto_hide: Auto itago
-  dock_side: Dock side
   gap: Gap
+  dock_side: Posisyon
 devtools:
   custom_config_file: I -load ang pasadyang config file
   app_folders: Mga folder ng app
@@ -185,14 +190,15 @@ shortcuts:
     focus_right: Tama ang ituon
     move_to_workspace_1: Lumipat sa Workspace 1
     switch_workspace_8: Lumipat sa Workspace 8
-    switch_workspace_1: Lumipat sa Workspace 1
-    switch_workspace_0: Lumipat sa workspace 0
     send_to_workspace_7: Ipadala sa Workspace 7
     send_to_workspace_3: Ipadala sa Workspace 3
+    switch_workspace_1: Lumipat sa Workspace 2
+    switch_workspace_0: Lumipat sa Workspace 1
   enable_tooltip: >-
     Huwag paganahin kung ipatutupad mo ang iyong sariling mga shortcut gamit ang
     Seelen Core API
   enable: Paganahin ang Integrated Shortcut (AHK)
+  reset: I -reset sa mga default
 inProgress: Sa pag -unlad ...
 delete: Tanggalin
 loading: Naglo -load ...
@@ -211,3 +217,23 @@ vd:
 save_and_restart: I -save at i -restart
 beta_channel:
   enable: Paganahin ang Beta Channel (sa pamamagitan lamang ng Github)
+monitors_configurations:
+  label: Subaybayan {{index}}
+wall:
+  backgrounds: Wallpaper
+  enable: Paganahin ang Seelen Wall
+  no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
+  interval: Baguhin ang wallpaper bawat (segundo)
+app_launcher:
+  runners:
+    explorer: Tumakbo
+    label: Mga mananakbo
+    cmd: Utos
+  enable: Paganahin ang launcher ng app
+  monitor: Subaybayan upang ipakita
+insert: Ipasok
+more: Higit pa
+inherit: Magmana
+close: Malapit
+update:
+  available: Mag -update Magagamit!

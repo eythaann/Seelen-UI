@@ -1,4 +1,3 @@
-import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { InputNumber } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
@@ -7,6 +6,8 @@ import { useAppSelector } from '../../../shared/utils/infra';
 
 import { SeelenWmSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
+
+import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 
 export const OthersConfigs = () => {
   const resizeDelta = useAppSelector(SeelenWmSelectors.resizeDelta);

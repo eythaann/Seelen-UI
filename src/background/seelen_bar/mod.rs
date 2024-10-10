@@ -9,25 +9,25 @@ use crate::{
     state::application::FULL_STATE,
     utils::{
         are_overlaped,
-        constants::{OVERLAP_BLACK_LIST_BY_EXE, OVERLAP_BLACK_LIST_BY_TITLE},
+        constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
     },
-    windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
+    windows_api::{window::Window, AppBarData, AppBarDataEdge, WindowsApi},
 };
 use itertools::Itertools;
-use seelen_core::state::HideMode;
+use seelen_core::{handlers::SeelenEvent, state::HideMode};
 use serde::Serialize;
-use tauri::{Emitter, Listener, Manager, WebviewWindow};
+use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
     window: WebviewWindow,
-    pub cached_monitor: HMONITOR,
-    last_focus: Option<isize>,
-    hidden: bool,
+    /// Is the rect that the toolbar should have when it isn't hidden
+    pub theoretical_rect: RECT,
+    last_focus: Option<HWND>,
     overlaped: bool,
 }
 
@@ -47,8 +47,7 @@ impl FancyToolbar {
         Ok(Self {
             window: Self::create_window(postfix)?,
             last_focus: None,
-            hidden: false,
-            cached_monitor: HMONITOR(-1),
+            theoretical_rect: RECT::default(),
             overlaped: false,
         })
     }
@@ -58,59 +57,53 @@ impl FancyToolbar {
         Ok(())
     }
 
-    pub fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
-        let rect = WindowsApi::get_window_rect_without_shadow(hwnd);
-        let monitor_info = WindowsApi::monitor_info(self.cached_monitor)?;
-        let dpi = WindowsApi::get_device_pixel_ratio(self.cached_monitor)?;
-        let height = FULL_STATE.load().settings().fancy_toolbar.height;
-
-        let mut hitbox_rect = monitor_info.monitorInfo.rcMonitor;
-        hitbox_rect.bottom = hitbox_rect.top + (height as f32 * dpi) as i32;
-        Ok(are_overlaped(&hitbox_rect, &rect))
+    fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
+        let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
+        Ok(are_overlaped(&self.theoretical_rect, &window_rect))
     }
 
-    pub fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
+    fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
         if self.overlaped == is_overlaped {
             return Ok(());
         }
         self.overlaped = is_overlaped;
-        self.emit("set-auto-hide", self.overlaped)?;
+        self.emit(SeelenEvent::ToolbarOverlaped, self.overlaped)?;
         Ok(())
     }
 
     pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
-        let should_handle_hidden = WindowsApi::is_window_visible(hwnd)
-            && !OVERLAP_BLACK_LIST_BY_TITLE.contains(&WindowsApi::get_window_text(hwnd).as_str())
+        let window = Window::from(hwnd);
+        let is_overlaped = self.is_overlapping(hwnd)?
+            && !window.is_desktop()
+            && !window.is_seelen_overlay()
+            && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str())
             && !OVERLAP_BLACK_LIST_BY_EXE
                 .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
-
-        if !should_handle_hidden {
-            return Ok(());
-        }
-        self.set_overlaped_status(self.is_overlapping(hwnd)?)
+        self.set_overlaped_status(is_overlaped)
     }
 
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
-        self.hidden = true;
+        self.window.emit_to(
+            self.window.label(),
+            SeelenEvent::HandleLayeredHitboxes,
+            false,
+        )?;
         Ok(())
     }
 
     pub fn show(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
-        self.hidden = false;
+        self.window.emit_to(
+            self.window.label(),
+            SeelenEvent::HandleLayeredHitboxes,
+            true,
+        )?;
         Ok(())
     }
 
     pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
-        self.last_focus = Some(hwnd.0);
-        Ok(())
-    }
-
-    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        let hwnd = HWND(self.window.hwnd()?.0);
-        WindowsApi::bring_to(hwnd, HWND_TOPMOST)?;
-        self.set_positions(self.cached_monitor.0)?;
+        self.last_focus = Some(hwnd);
         Ok(())
     }
 }
@@ -122,10 +115,10 @@ impl FancyToolbar {
 
     /// Work area no works fine on multiple monitors
     /// so we use this functions that only takes the toolbar in account
-    pub fn get_work_area_by_monitor(monitor: isize) -> Result<RECT> {
-        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor))?;
+    pub fn get_work_area_by_monitor(monitor: HMONITOR) -> Result<RECT> {
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
 
-        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+        let dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let mut rect = monitor_info.monitorInfo.rcMonitor;
 
         let state = FULL_STATE.load();
@@ -137,36 +130,33 @@ impl FancyToolbar {
         Ok(rect)
     }
 
-    pub fn set_positions(&self, monitor: isize) -> Result<()> {
-        let hmonitor = HMONITOR(monitor);
-        if hmonitor.is_invalid() {
-            return Err("Invalid Monitor".into());
-        }
-
-        let monitor_info = WindowsApi::monitor_info(hmonitor)?;
-        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
-
-        let main_hwnd = HWND(self.window.hwnd()?.0);
+    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
+        let hwnd = HWND(self.window.hwnd()?.0);
 
         let state = FULL_STATE.load();
         let settings = &state.settings().fancy_toolbar;
 
-        let mut abd = AppBarData::from_handle(main_hwnd);
-        let mut abd_rect = rc_monitor;
-        if settings.hide_mode == HideMode::Always || settings.hide_mode == HideMode::OnOverlap {
-            abd_rect.bottom = abd_rect.top + 1;
-        } else {
-            let dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
-            abd_rect.bottom = abd_rect.top + (settings.height as f32 * dpi) as i32;
-        }
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
+        let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
+        let rc_monitor = monitor_info.monitorInfo.rcMonitor;
+        self.theoretical_rect = RECT {
+            bottom: rc_monitor.top + (settings.height as f32 * monitor_dpi) as i32,
+            ..rc_monitor
+        };
 
-        abd.set_edge(AppBarDataEdge::Top);
-        abd.set_rect(abd_rect);
-        abd.register_as_new_bar();
+        let mut abd = AppBarData::from_handle(hwnd);
+        match settings.hide_mode {
+            HideMode::Never => {
+                abd.set_edge(AppBarDataEdge::Top);
+                abd.set_rect(self.theoretical_rect);
+                abd.register_as_new_bar();
+            }
+            _ => abd.unregister_bar(),
+        };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(main_hwnd, &rc_monitor)?;
-        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
+        WindowsApi::move_window(hwnd, &rc_monitor)?;
+        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
         Ok(())
     }
 
@@ -174,29 +164,26 @@ impl FancyToolbar {
         let manager = get_app_handle();
 
         let label = format!("{}/{}", Self::TARGET, postfix);
-        let window = match manager.get_webview_window(&label) {
-            Some(window) => window,
-            None => tauri::WebviewWindowBuilder::new(
-                &manager,
-                label,
-                tauri::WebviewUrl::App("toolbar/index.html".into()),
-            )
-            .title(Self::TITLE)
-            .maximizable(false)
-            .minimizable(false)
-            .resizable(false)
-            .visible(false)
-            .decorations(false)
-            .transparent(true)
-            .shadow(false)
-            .skip_taskbar(true)
-            .always_on_top(true)
-            .drag_and_drop(false)
-            .build()?,
-        };
+        let window = tauri::WebviewWindowBuilder::new(
+            manager,
+            label,
+            tauri::WebviewUrl::App("toolbar/index.html".into()),
+        )
+        .title(Self::TITLE)
+        .minimizable(false)
+        .maximizable(false)
+        .closable(false)
+        .resizable(false)
+        .visible(false)
+        .decorations(false)
+        .transparent(true)
+        .shadow(false)
+        .skip_taskbar(true)
+        .always_on_top(true)
+        .build()?;
 
         window.set_ignore_cursor_events(true)?;
-        window.once("store-events-ready", Self::on_store_events_ready);
+        window.listen("store-events-ready", Self::on_store_events_ready);
         Ok(window)
     }
 
@@ -210,8 +197,8 @@ impl FancyToolbar {
                 .iter()
                 .map(|d| d.as_serializable())
                 .collect_vec();
-            handler.emit("workspaces-changed", &desktops)?;
-            handler.emit("active-workspace-changed", vd.get_current()?.id())?;
+            handler.emit(SeelenEvent::WorkspacesChanged, &desktops)?;
+            handler.emit(SeelenEvent::ActiveWorkspaceChanged, vd.get_current()?.id())?;
             Ok(())
         });
     }

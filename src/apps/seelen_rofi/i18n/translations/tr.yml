@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Emretmek
+    explorer: Koşmak
+footer:
+  shortcuts: Kısayolları göster
+header:
+  search: Uygulama, komut veya yol
+item:
+  pin: Pin Dock
+  open_location: Dosya Konumu Aç

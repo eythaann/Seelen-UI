@@ -1,13 +1,15 @@
-import { AppBarHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
-import { InputNumber, Select, Switch } from 'antd';
+import { Button, InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { HideMode, SeelenWegMode, SeelenWegSide } from 'seelen-core';
 
 import { useAppDispatch, useAppSelector } from '../shared/utils/infra';
 
 import { RootSelectors } from '../shared/store/app/selectors';
 import { OptionsFromEnum } from '../shared/utils/app';
 import { SeelenWegActions } from './app';
+import { Icon } from 'src/apps/shared/components/Icon';
+
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export const SeelenWegSettings = () => {
   const settings = useAppSelector(RootSelectors.seelenweg);
@@ -46,18 +48,23 @@ export const SeelenWegSettings = () => {
             <Select
               style={{ width: '120px' }}
               value={settings.hideMode}
-              options={OptionsFromEnum(AppBarHideMode)}
+              options={OptionsFromEnum(HideMode)}
               onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
             />
           </SettingsOption>
           <SettingsOption>
             <div>{t('weg.dock_side')}</div>
-            <Select
-              style={{ width: '120px' }}
-              value={settings.position}
-              options={OptionsFromEnum(SeelenWegSide)}
-              onChange={(value) => dispatch(SeelenWegActions.setPosition(value))}
-            />
+            <Button.Group style={{ width: '120px' }}>
+              {Object.values(SeelenWegSide).map((side) => (
+                <Button
+                  key={side}
+                  type={side === settings.position ? 'primary' : 'default'}
+                  onClick={() => dispatch(SeelenWegActions.setPosition(side))}
+                >
+                  <Icon iconName={`CgToolbar${side}`} size={18} />
+                </Button>
+              ))}
+            </Button.Group>
           </SettingsOption>
           <SettingsOption>
             <div>{t('weg.margin')}</div>
@@ -101,7 +108,10 @@ export const SeelenWegSettings = () => {
           </SettingsOption>
           <SettingsOption>
             <div>{t('weg.items.visible_separators')}</div>
-            <Switch checked={settings.visibleSeparators} onChange={(value) => dispatch(SeelenWegActions.setVisibleSeparators(value))} />
+            <Switch
+              checked={settings.visibleSeparators}
+              onChange={(value) => dispatch(SeelenWegActions.setVisibleSeparators(value))}
+            />
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>

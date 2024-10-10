@@ -1,5 +1,3 @@
-use std::slice::Iter;
-
 use windows::Win32::{
     Foundation::{BOOL, HWND, LPARAM, RECT},
     Graphics::Gdi::{HDC, HMONITOR},
@@ -8,7 +6,7 @@ use windows::Win32::{
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
-use super::window::Window;
+use super::{monitor::Monitor, window::Window};
 
 #[derive(Debug, Clone)]
 pub struct WindowEnumerator {
@@ -42,14 +40,14 @@ impl WindowEnumerator {
     /// If enumeration fails it will return error.
     pub fn for_each<F>(&self, cb: F) -> Result<()>
     where
-        F: FnMut(HWND) + Sync,
+        F: FnMut(HWND),
     {
         type ForEachCallback<'a> = Box<dyn FnMut(HWND) + 'a>;
         let mut callback: ForEachCallback = Box::new(cb);
 
         unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
             if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
-                (*boxed)(hwnd)
+                (*boxed)(hwnd);
             }
             true.into()
         }
@@ -61,8 +59,7 @@ impl WindowEnumerator {
     /// If enumeration fails it will return error.
     pub fn map<F, T>(&self, cb: F) -> Result<Vec<T>>
     where
-        F: FnMut(HWND) -> T + Sync,
-        T: Sync,
+        F: FnMut(HWND) -> T,
     {
         struct MapCallbackWrapper<'a, T> {
             cb: Box<dyn FnMut(HWND) -> T + 'a>,
@@ -89,7 +86,7 @@ impl WindowEnumerator {
     /// If no window matches the condition, it will return None.
     pub fn find<F>(&self, cb: F) -> Result<Option<Window>>
     where
-        F: FnMut(Window) -> bool + Sync,
+        F: FnMut(Window) -> bool,
     {
         struct FindCallbackWrapper<'a> {
             cb: Box<dyn FnMut(Window) -> bool + 'a>,
@@ -118,28 +115,11 @@ impl WindowEnumerator {
 }
 
 #[derive(Debug, Clone, Default)]
-pub struct MonitorEnumerator {
-    handles: Vec<HMONITOR>,
-}
-
-impl IntoIterator for MonitorEnumerator {
-    type Item = HMONITOR;
-    type IntoIter = std::vec::IntoIter<HMONITOR>;
-
-    fn into_iter(self) -> Self::IntoIter {
-        self.handles.into_iter()
-    }
-}
+pub struct MonitorEnumerator;
 
 impl MonitorEnumerator {
-    pub fn new_refreshed() -> Result<Self> {
-        let mut enumerator = Self::default();
-        enumerator.refresh()?;
-        Ok(enumerator)
-    }
-
-    pub fn refresh(&mut self) -> Result<()> {
-        self.handles.clear();
+    pub fn get_all() -> Result<Vec<HMONITOR>> {
+        let mut handles = Vec::new();
 
         unsafe extern "system" fn get_handles_proc(
             hmonitor: HMONITOR,
@@ -154,13 +134,27 @@ impl MonitorEnumerator {
             true.into()
         }
 
-        WindowsApi::enum_display_monitors(
-            Some(get_handles_proc),
-            &mut self.handles as *mut _ as isize,
-        )
+        WindowsApi::enum_display_monitors(Some(get_handles_proc), &mut handles as *mut _ as isize)?;
+        Ok(handles)
     }
 
-    pub fn iter(&self) -> Iter<'_, HMONITOR> {
-        self.handles.iter()
+    pub fn get_all_v2() -> Result<Vec<Monitor>> {
+        let mut handles = Vec::new();
+
+        unsafe extern "system" fn get_handles_proc(
+            hmonitor: HMONITOR,
+            _hdc: HDC,
+            _rect_clip: *mut RECT,
+            lparam: LPARAM,
+        ) -> BOOL {
+            let data_ptr = lparam.0 as *mut Vec<Monitor>;
+            if let Some(data) = data_ptr.as_mut() {
+                data.push(Monitor::from(hmonitor));
+            }
+            true.into()
+        }
+
+        WindowsApi::enum_display_monitors(Some(get_handles_proc), &mut handles as *mut _ as isize)?;
+        Ok(handles)
     }
 }

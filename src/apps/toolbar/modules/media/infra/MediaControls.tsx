@@ -1,20 +1,21 @@
-import { Icon } from '../../../../shared/components/Icon';
-import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Popover, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
 import React, { memo, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
-import { useAppBlur } from '../../shared/hooks/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { selectDefaultOutput, Selectors } from '../../shared/store/app';
 import { calcLuminance } from '../application';
 
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
+
+import { Icon } from '../../../../shared/components/Icon';
+import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 
 import './index.css';
 
@@ -71,16 +72,16 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
         <span className="media-session-author">{session.author}</span>
         <div className="media-session-actions">
           <Button type="text" onClick={onClickBtn.bind(null, 'media_prev')}>
-            <Icon iconName="TbPlayerSkipBackFilled" propsIcon={{ color }} />
+            <Icon iconName="TbPlayerSkipBackFilled" color={color} />
           </Button>
           <Button type="text" onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}>
             <Icon
               iconName={session.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
-              propsIcon={{ color }}
+              color={color}
             />
           </Button>
           <Button type="text" onClick={onClickBtn.bind(null, 'media_next')}>
-            <Icon iconName="TbPlayerSkipForwardFilled" propsIcon={{ color }} />
+            <Icon iconName="TbPlayerSkipForwardFilled" color={color} />
           </Button>
         </div>
       </div>
@@ -93,15 +94,15 @@ function Device({ device }: { device: MediaDevice }) {
 
   const onClickMultimedia = () => {
     if (!device.is_default_multimedia) {
-      invoke('media_set_default_device', { id: device.id, role: 'multimedia' })
-        .then(() => invoke('media_set_default_device', { id: device.id, role: 'console' }))
+      invoke(SeelenCommand.MediaSetDefaultDevice, { id: device.id, role: 'multimedia' })
+        .then(() => invoke(SeelenCommand.MediaSetDefaultDevice, { id: device.id, role: 'console' }))
         .catch(console.error);
     }
   };
 
   const onClickCommunications = () => {
     if (!device.is_default_communications) {
-      invoke('media_set_default_device', { id: device.id, role: 'communications' }).catch(
+      invoke(SeelenCommand.MediaSetDefaultDevice, { id: device.id, role: 'communications' }).catch(
         console.error,
       );
     }
@@ -115,7 +116,7 @@ function Device({ device }: { device: MediaDevice }) {
             type={device.is_default_multimedia ? 'primary' : 'default'}
             onClick={onClickMultimedia}
           >
-            <Icon iconName="IoMusicalNotes" propsIcon={{ size: 18 }} />
+            <Icon iconName="IoMusicalNotes" size={18} />
           </Button>
         </Tooltip>
         <Tooltip title={t('media.device.comunications')}>
@@ -161,7 +162,7 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
 
   const onExternalChange = useCallback(
     debounce((value: number) => {
-      invoke('set_volume_level', { id: deviceId, level: value }).catch(console.error);
+      invoke(SeelenCommand.SetVolumeLevel, { id: deviceId, level: value }).catch(console.error);
     }, 100),
     [deviceId, sessionId],
   );
@@ -173,7 +174,7 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
 
   return (
     <div className="media-control-volume">
-      <Button type="text" onClick={() => invoke('media_toggle_mute', { id: deviceId })}>
+      <Button type="text" onClick={() => invoke(SeelenCommand.MediaToggleMute, { id: deviceId })}>
         {icon}
       </Button>
       <Slider
@@ -187,7 +188,10 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
         }}
       />
       {withRightAction && (
-        <Button type="text" onClick={() => invoke('open_file', { path: 'ms-settings:sound' })}>
+        <Button
+          type="text"
+          onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:sound' })}
+        >
           <Icon iconName="RiEqualizerLine" />
         </Button>
       )}
@@ -284,8 +288,10 @@ export function WithMediaControls({ children }: PropsWithChildren) {
     closeVolumeNotifier();
   }, [defaultOutput?.volume]);
 
-  useAppBlur(() => {
-    setOpenControls(false);
+  useWindowFocusChange((focused) => {
+    if (!focused) {
+      setOpenControls(false);
+    }
   });
 
   return (
@@ -305,7 +311,7 @@ export function WithMediaControls({ children }: PropsWithChildren) {
       <Popover
         open={openNotifier}
         arrow={false}
-        onOpenChange={setOpenNotifier}
+        trigger={[]}
         destroyTooltipOnHide
         content={
           <BackgroundByLayersV2 className="media-notifier">

@@ -14,6 +14,10 @@ header:
     monitors: Monitori
     shortcuts: Prečac
     developer: Programer
+    seelen_wall: Zid
+    seelen_rofi: Pokretač aplikacija
+    virtual_desk: Virtualna radna računala
+    home: Dom
 start:
   message_accent: Optimizirajte svoju produktivnost stilom!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Akcentna boja
   wallpaper:
     select: Odaberite Pozadina
+  date_format: Format datuma
 toolbar:
   placeholder:
     description: Opis
@@ -77,7 +82,7 @@ weg:
   gap: Jaz
   margin: Margina
   enable: Omogućite pristanište/zadaću
-  dock_side: Priključak
+  dock_side: Položaj
 devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
   data_folder: Mapa podataka
@@ -160,7 +165,6 @@ shortcuts:
     switch_workspace_2: Prebacite se na radni prostor 2
     switch_workspace_3: Prebacite se na radni prostor 3
     send_to_workspace_6: Pošaljite u radni prostor 6
-    switch_workspace_1: Prebacite se na radni prostor 1
     move_to_workspace_7: Pomaknite se u radni prostor 7
     increase_width: Povećati širinu
     move_to_workspace_8: Pomaknite se u radni prostor 8
@@ -179,7 +183,6 @@ shortcuts:
     move_to_workspace_9: Pomaknite se u radni prostor 9
     reserve_right: Rezervirati
     switch_workspace_9: Prebacite se na radni prostor 9
-    switch_workspace_0: Prebacite se na radni prostor 0
     move_to_workspace_0: Pomaknite se u radni prostor 0
     focus_bottom: Fokus dna
     reserve_stack: Rezerva
@@ -188,10 +191,13 @@ shortcuts:
     reserve_bottom: Rezervirati
     send_to_workspace_7: Pošaljite u radni prostor 7
     send_to_workspace_3: Pošaljite u radni prostor 3
+    switch_workspace_0: Prebacite se na radni prostor 1
+    switch_workspace_1: Prebacite se na radni prostor 2
   enable_tooltip: >-
     Onemogući ako ćete implementirati vlastite prečace pomoću Seelen Core API
     -ja
   enable: Omogućite integrirane prečace (AHK)
+  reset: Ponovno postavite na zadane vrijednosti
 cancel: Otkazati
 loading: Učitavam...
 delete: Izbrisati
@@ -210,3 +216,23 @@ vd:
 save_and_restart: Spremi i ponovno pokrenite
 beta_channel:
   enable: Omogući beta kanal (samo putem GitHub -a)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Omogući Seelen zid
+  backgrounds: Pozadine
+  no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
+  interval: Promijenite pozadinu svake (sekunde)
+app_launcher:
+  runners:
+    cmd: Naredba
+    explorer: Trčanje
+    label: Trkači
+  enable: Omogućite pokretač aplikacija
+  monitor: Monitor za prikaz
+more: Više
+insert: Umetnuti
+inherit: Naslijediti
+close: Zatvoriti
+update:
+  available: Ažuriranje dostupno!

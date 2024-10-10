@@ -1,5 +1,6 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
+use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
 use crate::{error_handler::Result, log_error, seelen::get_app_handle, trace_lock};
@@ -8,7 +9,7 @@ use super::application::{AppNotification, NOTIFICATION_MANAGER};
 
 fn emit_notifications(notifications: &Vec<AppNotification>) {
     get_app_handle()
-        .emit("notifications", notifications)
+        .emit(SeelenEvent::Notifications, notifications)
         .expect("failed to emit");
 }
 

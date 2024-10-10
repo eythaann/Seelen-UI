@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Paṣẹ
+    explorer: Sare
+footer:
+  shortcuts: Ṣe awọn ọna abuja
+header:
+  search: App, aṣẹ tabi ọna
+item:
+  pin: Pin si Dock
+  open_location: Ṣii ipo faili ṣii

@@ -14,6 +14,10 @@ header:
     specific_apps: Belirli uygulamalar
     monitors: Monitörler
     shortcuts: Kısayollar
+    seelen_wall: Duvar
+    seelen_rofi: Uygulama başlatıcısı
+    virtual_desk: Sanal masaüstleri
+    home: Ev
 start:
   title: Hoş geldin!
   message_accent: Verimliliğinizi stille optimize edin!
@@ -41,6 +45,7 @@ general:
   accent_color: Aksan rengi
   wallpaper:
     select: Duvar Kağıdı Seçin
+  date_format: Tarih biçimi
 toolbar:
   placeholder:
     author: Yazar
@@ -77,7 +82,7 @@ weg:
   margin: Marj
   enable: Dock/görev çubuğunu etkinleştir
   label: Rıhtım/görev çubuğu
-  dock_side: Rıhtım tarafı
+  dock_side: Konum
 devtools:
   custom_config_file: Özel Yapılandırma Dosyasını Yükle
   settings_file: Ayarlar Dosyası
@@ -159,7 +164,6 @@ shortcuts:
     switch_workspace_3: Çalışma Alanına Geçin 3
     decrease_width: Genişliği Azalt
     move_to_workspace_6: Çalışma Alanına Taşın 6
-    switch_workspace_1: Çalışma Alanına Geç 1
     switch_workspace_8: Çalışma Alanı 8'e geç
     reserve_left: Sola gitme
     switch_workspace_9: Çalışma Alanına geç 9
@@ -175,7 +179,6 @@ shortcuts:
     send_to_workspace_2: Çalışma Alanına Gönder 2
     move_to_workspace_3: Çalışma Alanına Taşın 3
     send_to_workspace_5: Çalışma Alanına Gönder 5
-    switch_workspace_0: Çalışma alanına geç 0
     focus_bottom: Dip
     switch_workspace_7: Çalışma Alanı 7'ye geç
     send_to_workspace_9: Çalışma Alanına Gönder 9
@@ -188,10 +191,13 @@ shortcuts:
     move_to_workspace_9: Çalışma Alanına Taşın 9
     send_to_workspace_7: Çalışma Alanına Gönder 7
     switch_workspace_5: Çalışma Alanı 5'e geç
+    switch_workspace_0: Çalışma Alanına Geç 1
+    switch_workspace_1: Çalışma Alanı 2'ye geçin
   enable_tooltip: >-
     Seelen Core API'sını kullanarak kendi kısayollarınızı uygulayacaksanız devre
     dışı bırakın
   enable: Entegre Kısayolları Etkinleştir (AHK)
+  reset: Varsayılanlara sıfırlayın
 cancel: İptal etmek
 inProgress: Devam etmekte...
 loading: Yükleniyor...
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Kaydet ve Yeniden Başlat
 beta_channel:
   enable: Beta kanalını etkinleştirin (yalnızca Github aracılığıyla)
+monitors_configurations:
+  label: Monitör {{index}}
+wall:
+  no_background: Bunun yerine temanın arka planını kullanarak boş slayt gösterisi.
+  backgrounds: Duvar kağıtları
+  interval: Duvar kağıdını her (saniye) değiştir
+  enable: Seelen Duvarını Etkinleştir
+app_launcher:
+  runners:
+    cmd: Emretmek
+    explorer: Koşmak
+    label: Koşucular
+  monitor: Gösterilecek Monitör
+  enable: Uygulama başlatıcısını etkinleştir
+insert: Sokmak
+more: Daha
+inherit: Miras almak
+close: Kapalı
+update:
+  available: Güncelleme mevcut!

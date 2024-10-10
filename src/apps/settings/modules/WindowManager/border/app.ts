@@ -1,10 +1,9 @@
-import { parseAsCamel } from '../../../../shared/schemas';
-import { Border, BorderSchema } from '../../../../shared/schemas/WindowManager';
 import { createSlice } from '@reduxjs/toolkit';
+import { Border } from 'seelen-core';
 
 import { reducersFor, selectorsFor } from '../../shared/utils/app';
 
-const initialState: Border = parseAsCamel(BorderSchema, {});
+const initialState = new Border();
 
 export const BorderSlice = createSlice({
   name: 'windowManager/border',

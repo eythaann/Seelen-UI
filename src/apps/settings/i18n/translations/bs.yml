@@ -14,6 +14,10 @@ header:
     seelen_wm: Upravitelj prozora
     info: Informacije
     shortcuts: Prečice
+    seelen_wall: Zid
+    seelen_rofi: Pokretanje aplikacija
+    virtual_desk: Virtualne radne površine
+    home: Dom
 start:
   title: Dobrodošli!
   message_accent: Optimizirajte svoju produktivnost sa stilom!
@@ -41,6 +45,7 @@ general:
   accent_color: Akcentna boja
   wallpaper:
     select: Odaberite pozadinu
+  date_format: Format datuma
 toolbar:
   placeholder:
     select: Struktura alatne trake
@@ -73,11 +78,11 @@ weg:
   width: Širina
   auto_hide: Auto se sakrio
   gap: Jaz
-  dock_side: Priključak
   margin: Marža
   label: Dock / programska traka
   padding: Obloga
   enable: Omogući pristanište / traku zadataka
+  dock_side: Položaj
 devtools:
   app_folders: App Mape
   settings_file: Datoteka postavki
@@ -154,7 +159,6 @@ shortcuts:
     switch_workspace_6: Prebacite se na radni prostor 6
     decrease_height: Smanjenje visine
     focus_latest: Fokus najnovije
-    switch_workspace_0: Prebacite se na radni prostor 0
     reserve_left: Rezerva
     reserve_bottom: Rezervno dno
     move_to_workspace_3: Premjestiti na radni prostor 3
@@ -185,13 +189,15 @@ shortcuts:
     send_to_workspace_3: Pošalji u radni prostor 3
     send_to_workspace_1: Pošaljite u radni prostor 1
     send_to_workspace_2: Pošalji u radni prostor 2
-    switch_workspace_1: Prebacite se na radni prostor 1
     send_to_workspace_7: Pošalji u radni prostor 7
     move_to_workspace_8: Premjestiti na radni prostor 8
+    switch_workspace_0: Prebacite se na radni prostor 1
+    switch_workspace_1: Prebacite se na radni prostor 2
   enable: Omogući integrirane prečice (AHK)
   enable_tooltip: >-
     Onemogućite ako ćete implementirati vlastite prečice koristeći Seelen Core
     API
+  reset: Resetiranje na zadane vrijednosti
 loading: Učitavanje...
 inProgress: U toku...
 cancel: Otkazati
@@ -208,3 +214,23 @@ vd:
 save_and_restart: Spremi i ponovno pokretanje
 beta_channel:
   enable: Omogući beta kanal (samo putem GitHub)
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Pozadine
+  no_background: Prazno prezentacija, koristeći temu, umjesto toga.
+  interval: Promenite pozadinu svake (sekunde)
+  enable: Omogući Seelen Wall
+app_launcher:
+  runners:
+    cmd: Naredba
+    explorer: Trčati
+    label: Trkači
+  monitor: Monitor za prikaz
+  enable: Omogući pokretač aplikacija
+inherit: Nasljediti
+insert: Umetnuti
+more: Više
+close: Zatvoriti
+update:
+  available: Ažuriraj dostupno!
