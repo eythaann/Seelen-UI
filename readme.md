@@ -73,7 +73,7 @@ Seelen UI is a tool designed to enhance your Windows desktop experience with a f
 
 * **Enhance Your Productivity**: Seelen UI helps you organize your desktop efficiently. With a Tiling Windows Manager, windows automatically arrange themselves to support multitasking, making your work more streamlined.
   
-  ![Seelen UI Tiling Window Manager](./documentation/images/preview3.png)
+  ![Seelen UI Tiling Window Manager](./documentation/images/twm_preview.png)
 
 <br/>
 
@@ -91,7 +91,7 @@ Seelen UI is a tool designed to enhance your Windows desktop experience with a f
 
 * **User-Friendly Configuration**: Seelen UI offers an intuitive interface for easy customization. Adjust settings such as themes, taskbar layouts, icons, etc. With just a few clicks.
 
-  ![Seelen UI Settings](./documentation/images/mosaico.png)
+  ![Seelen UI Settings](./documentation/images/settings_preview.png)
 
 <br/>
 
