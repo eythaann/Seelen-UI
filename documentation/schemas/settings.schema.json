@@ -243,7 +243,7 @@
     },
     "language": {
       "description": "language to use, if null the system locale is used",
-      "default": "es",
+      "default": "en",
       "type": [
         "string",
         "null"

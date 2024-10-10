@@ -45,6 +45,10 @@
 - tray icons not working on others language than english.
 - edge tabs open in file explorer.
 
+## [1.10.6]
+### fix
+- tray module only working when the system language is english.
+
 ## [1.10.5]
 ### fix
 - app crashing on IMMDevice disconnection.

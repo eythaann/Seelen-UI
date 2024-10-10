@@ -105,7 +105,7 @@ impl SeelenWeg {
                             origin_hwnd,
                             HWND::default(),
                             pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
-                            pcstr!("DesktopWindowXamlSource"),
+                            None,
                         )
                         .unwrap_or_default()
                     };
