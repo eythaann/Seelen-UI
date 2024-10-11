@@ -228,7 +228,7 @@ pub struct SeelenLauncherSettings {
 impl Default for SeelenLauncherSettings {
     fn default() -> Self {
         Self {
-            enabled: true,
+            enabled: false,
             monitor: SeelenLauncherMonitor::MouseOver,
             runners: vec![
                 SeelenLauncherRunner {
@@ -330,6 +330,8 @@ macro_rules! define_struct_and_hashmap {
 pub struct AhkVar {
     pub fancy: String,
     pub ahk: String,
+    #[serde(default)]
+    pub readonly: bool,
 }
 
 impl AhkVar {
@@ -337,11 +339,18 @@ impl AhkVar {
         Self {
             fancy: f.to_string(),
             ahk: ahk.to_string(),
+            readonly: false,
         }
+    }
+
+    pub fn readonly(mut self) -> Self {
+        self.readonly = true;
+        self
     }
 }
 
 define_struct_and_hashmap![
+    toggle_launcher,
     reserve_top,
     reserve_bottom,
     reserve_left,
@@ -387,12 +396,18 @@ define_struct_and_hashmap![
     send_to_workspace_6,
     send_to_workspace_7,
     send_to_workspace_8,
-    send_to_workspace_9
+    send_to_workspace_9,
+    misc_open_settings,
+    misc_toggle_lock_tracing,
+    misc_toggle_win_event_tracing
 ];
 
 impl Default for AhkVarList {
     fn default() -> Self {
         Self {
+            // launcher
+            toggle_launcher: AhkVar::new("Win + Space", "LWin & Space").readonly(),
+            // wm
             reserve_top: AhkVar::new("Win + Shift + I", "#+i"),
             reserve_bottom: AhkVar::new("Win + Shift + K", "#+k"),
             reserve_left: AhkVar::new("Win + Shift + J", "#+j"),
@@ -409,6 +424,7 @@ impl Default for AhkVarList {
             increase_height: AhkVar::new("Win + Shift + =", "#+="),
             decrease_height: AhkVar::new("Win + Shift + -", "#+-"),
             restore_sizes: AhkVar::new("Win + Alt + 0", "#!0"),
+            // virtual desktops
             switch_workspace_0: AhkVar::new("Alt + 1", "!1"),
             switch_workspace_1: AhkVar::new("Alt + 2", "!2"),
             switch_workspace_2: AhkVar::new("Alt + 3", "!3"),
@@ -439,6 +455,10 @@ impl Default for AhkVarList {
             send_to_workspace_7: AhkVar::new("Win + Shift + 8", "#+8"),
             send_to_workspace_8: AhkVar::new("Win + Shift + 9", "#+9"),
             send_to_workspace_9: AhkVar::new("Win + Shift + 0", "#+0"),
+            // miscellaneous
+            misc_open_settings: AhkVar::new("Win + K", "#k").readonly(),
+            misc_toggle_lock_tracing: AhkVar::new("Ctrl + Win + Alt + T", "^#!t").readonly(),
+            misc_toggle_win_event_tracing: AhkVar::new("Ctrl + Win + Alt + L", "^#!l").readonly(),
         }
     }
 }

@@ -10,6 +10,7 @@ delete: Delete
 insert: Insert
 more: More
 inherit: Inherit
+miscellaneous: Miscellaneous
 sides:
   left: Left
   right: Right
@@ -183,7 +184,9 @@ shortcuts:
   enable: Enable Integrated Shortcuts (ahk)
   reset: Reset to Defaults
   enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api
+  readonly_tooltip: This is a read-only shortcut
   labels:
+    toggle_launcher: Toogle
     reserve_top: Reserve Top
     reserve_bottom: Reserve Bottom
     reserve_left: Reserve Left
@@ -230,5 +233,8 @@ shortcuts:
     send_to_workspace_7: Send to Workspace 8
     send_to_workspace_8: Send to Workspace 9
     send_to_workspace_9: Send to Workspace 10
+    misc_open_settings: Open Settings
+    misc_toggle_lock_tracing: Toggle Lock Tracing (logs)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logs)
 update:
   available: Update Available!

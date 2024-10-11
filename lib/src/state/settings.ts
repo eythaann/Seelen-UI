@@ -50,7 +50,7 @@ export class SeelenLauncherRunner {
 }
 
 export class SeelenLauncherSettings {
-  enabled: boolean = true;
+  enabled: boolean = false;
   monitor: SeelenLauncherMonitor = SeelenLauncherMonitor.MouseOver;
   runners: SeelenLauncherRunner[] = [];
 }
@@ -122,13 +122,19 @@ export class WindowManagerSettings {
 export class AhkVar {
   fancy: string;
   ahk: string;
+  readonly: boolean = false;
+
   constructor(fancy: string = '', ahk: string = '') {
     this.fancy = fancy;
     this.ahk = ahk;
   }
 }
 
+/// TODO: find the way to avoid duplicated code between rust and this class
 export class AhkVarList {
+  // launcher
+  toggleLauncher = new AhkVar('Win + Space', 'LWin & Space');
+  // wm
   reserveTop = new AhkVar('Win + Shift + I', '#+i');
   reserveBottom = new AhkVar('Win + Shift + K', '#+k');
   reserveLeft = new AhkVar('Win + Shift + J', '#+j');
@@ -145,6 +151,7 @@ export class AhkVarList {
   increaseHeight = new AhkVar('Win + Shift + =', '#+=');
   decreaseHeight = new AhkVar('Win + Shift + -', '#+-');
   restoreSizes = new AhkVar('Win + Alt + 0', '#!0');
+  // virtual desktops
   switchWorkspace0 = new AhkVar('Alt + 1', '!1');
   switchWorkspace1 = new AhkVar('Alt + 2', '!2');
   switchWorkspace2 = new AhkVar('Alt + 3', '!3');
@@ -175,4 +182,8 @@ export class AhkVarList {
   sendToWorkspace7 = new AhkVar('Win + Shift + 8', '#+8');
   sendToWorkspace8 = new AhkVar('Win + Shift + 9', '#+9');
   sendToWorkspace9 = new AhkVar('Win + Shift + 0', '#+0');
+  // miscellaneous
+  miscOpenSettings = new AhkVar('Win + K', '#k');
+  miscToggleLockTracing = new AhkVar('Ctrl + Win + Alt + T', '^#!t');
+  miscToggleWinEventTracing = new AhkVar('Ctrl + Win + Alt + L', '^#!l');
 }

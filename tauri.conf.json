@@ -30,9 +30,9 @@
   },
   "bundle": {
     "active": true,
-    "resources": {
-      "static/": "static/"
-    },
+    "resources": [
+      "static/**/*"
+    ],
     "targets": [
       "nsis"
     ],

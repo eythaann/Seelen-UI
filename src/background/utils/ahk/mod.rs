@@ -24,7 +24,7 @@ impl AutoHotKey {
         }
     }
 
-    pub fn from_template(template: &str, vars: HashMap<String, AhkVar>) -> Self {
+    pub fn from_template(template: &str, vars: &HashMap<String, AhkVar>) -> Self {
         Self {
             name: None,
             inner: Self::replace_variables(template.to_string(), vars),
@@ -67,7 +67,7 @@ impl AutoHotKey {
         Ok(())
     }
 
-    fn replace_variables(template: String, vars: HashMap<String, AhkVar>) -> String {
+    fn replace_variables(template: String, vars: &HashMap<String, AhkVar>) -> String {
         let mut replaced = template.clone();
 
         for (key, value) in vars.iter() {
@@ -93,6 +93,7 @@ mod tests {
             AhkVar {
                 fancy: String::new(),
                 ahk: "!b".to_string(),
+                readonly: false,
             },
         );
         vars.insert(
@@ -100,6 +101,7 @@ mod tests {
             AhkVar {
                 fancy: String::new(),
                 ahk: "!c".to_string(),
+                readonly: false,
             },
         );
 
@@ -108,17 +110,21 @@ mod tests {
         ;test
         x:: anything()
         ;test2
-        x:: anything2()
+        x:: {
+          anything2()
+        }
         "#
         .to_owned();
 
         let expected = r#"
         ; other comment
         !b:: anything()
-        !c:: anything2()
+        !c:: {
+          anything2()
+        }
         "#;
 
-        assert_eq!(AutoHotKey::replace_variables(template, vars), expected);
+        assert_eq!(AutoHotKey::replace_variables(template, &vars), expected);
     }
 
     #[test]
@@ -129,6 +135,7 @@ mod tests {
             AhkVar {
                 fancy: String::new(),
                 ahk: "!b".to_string(),
+                readonly: false,
             },
         );
 
@@ -148,6 +155,6 @@ mod tests {
         ;missing_shortcut:: anything2()
         "#;
 
-        assert_eq!(AutoHotKey::replace_variables(template, vars), expected);
+        assert_eq!(AutoHotKey::replace_variables(template, &vars), expected);
     }
 }

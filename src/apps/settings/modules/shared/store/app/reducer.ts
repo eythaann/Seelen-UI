@@ -39,6 +39,7 @@ const initialState: RootState = {
   availableThemes: [],
   availableLayouts: [],
   availablePlaceholders: [],
+  iconPacks: [],
   selectedThemes: [],
   devTools: false,
   language: navigator.language.split('-')[0] || 'en',

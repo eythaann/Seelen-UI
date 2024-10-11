@@ -25,7 +25,7 @@ function getAHK(code: string): string | undefined {
   return;
 }
 
-export function KeyCodeToAHK(e: React.KeyboardEvent<HTMLInputElement>) {
+export function KeyCodeToAHK(e: React.KeyboardEvent<HTMLInputElement>): AhkVar | undefined {
   e.preventDefault();
   let fancy = '';
   let ahk = '';
@@ -65,6 +65,7 @@ export function KeyCodeToAHK(e: React.KeyboardEvent<HTMLInputElement>) {
   return {
     fancy,
     ahk,
+    readonly: false,
   };
 }
 

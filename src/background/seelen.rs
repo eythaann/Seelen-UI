@@ -345,6 +345,7 @@ impl Seelen {
         Ok(())
     }
 
+    // TODO: split ahk logic into another file/module
     pub fn start_ahk_shortcuts() -> Result<()> {
         // kill all running shortcuts before starting again
         Self::kill_ahk_shortcuts()?;
@@ -352,28 +353,32 @@ impl Seelen {
         let state = FULL_STATE.load();
         if state.is_ahk_enabled() {
             log::trace!("Creating AHK shortcuts");
+            let vars = state.get_ahk_variables();
 
             AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.lib.ahk"))
                 .name("seelen.lib.ahk")
                 .save()?;
 
-            AutoHotKey::new(include_str!("utils/ahk/mocks/seelen.ahk"))
+            AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.ahk"), &vars)
                 .name("seelen.ahk")
                 .execute()?;
 
-            AutoHotKey::from_template(
-                include_str!("utils/ahk/mocks/seelen.vd.ahk"),
-                state.get_ahk_variables(),
-            )
-            .name("seelen.vd.ahk")
-            .execute()?;
+            AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.vd.ahk"), &vars)
+                .name("seelen.vd.ahk")
+                .execute()?;
 
             if state.is_window_manager_enabled() {
+                AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.wm.ahk"), &vars)
+                    .name("seelen.wm.ahk")
+                    .execute()?;
+            }
+
+            if state.is_rofi_enabled() {
                 AutoHotKey::from_template(
-                    include_str!("utils/ahk/mocks/seelen.wm.ahk"),
-                    state.get_ahk_variables(),
+                    include_str!("utils/ahk/mocks/seelen.launcher.ahk"),
+                    &vars,
                 )
-                .name("seelen.wm.ahk")
+                .name("seelen.launcher.ahk")
                 .execute()?;
             }
         }
@@ -381,6 +386,7 @@ impl Seelen {
         Ok(())
     }
 
+    // TODO: split ahk logic into another file/module
     pub fn kill_ahk_shortcuts() -> Result<()> {
         log::trace!("Killing AHK shortcuts");
         get_app_handle()

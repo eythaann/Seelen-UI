@@ -28,7 +28,17 @@ function AhkOptions({ variables, onChangeVar }: AhkOptionsProps) {
     return (
       <SettingsOption key={key}>
         <div>{t(`shortcuts.labels.${VariableConvention.camelToSnake(key)}`)}</div>
-        <Input value={value.fancy} onKeyDown={(e) => onChangeVar(key as keyof AhkVarList, e)} />
+        <Tooltip title={value.readonly ? t('shortcuts.readonly_tooltip') : null}>
+          <Input
+            value={value.fancy}
+            disabled={value.readonly}
+            onKeyDown={(e) => {
+              if (!value.readonly) {
+                onChangeVar(key as keyof AhkVarList, e);
+              }
+            }}
+          />
+        </Tooltip>
       </SettingsOption>
     );
   });
@@ -74,6 +84,12 @@ export function Shortcuts() {
             <Icon iconName="TbRefresh" />
           </Button>
         </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsSubGroup label={t('header.labels.seelen_rofi')}>
+          <AhkOptions variables={['toggleLauncher']} onChangeVar={onChangeVar} />
+        </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>
@@ -171,6 +187,15 @@ export function Shortcuts() {
               'moveToWorkspace8',
               'moveToWorkspace9',
             ]}
+            onChangeVar={onChangeVar}
+          />
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsSubGroup label={t('miscellaneous')}>
+          <AhkOptions
+            variables={['miscOpenSettings', 'miscToggleLockTracing', 'miscToggleWinEventTracing']}
             onChangeVar={onChangeVar}
           />
         </SettingsSubGroup>
