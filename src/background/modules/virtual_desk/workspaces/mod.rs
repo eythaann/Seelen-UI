@@ -82,8 +82,10 @@ impl SeelenWorkspace {
         HookManager::run_with_async(move |hook_manager| {
             for addr in win_address {
                 let hwnd = HWND(addr as _);
-                hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
-                log_error!(WindowsApi::show_window_async(hwnd, SW_MINIMIZE));
+                if WindowsApi::is_window(hwnd) {
+                    hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
+                    log_error!(WindowsApi::show_window_async(hwnd, SW_MINIMIZE));
+                }
             }
         });
     }
