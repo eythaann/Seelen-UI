@@ -1,7 +1,7 @@
 sides:
-  top: Superiore
+  top: Sopra
   left: Sinistra
-  bottom: Metter il fondo a
+  bottom: Sotto
   right: Destra
 header:
   labels:
@@ -14,8 +14,8 @@ header:
     seelen_bar: Barra degli strumenti di fantasia
     seelen_wm: Gestore delle finestre
     specific_apps: App specifiche
-    seelen_wall: Il muro
-    seelen_rofi: APP LAVANTOLA
+    seelen_wall: Sfondo
+    seelen_rofi: Lanciatore di applicazioni
     virtual_desk: Desktop virtuali
     home: Casa
 start:
@@ -52,7 +52,7 @@ toolbar:
     description: Descrizione
     select: Struttura della barra degli strumenti
   height: Altezza
-  enable: Abilita barra degli strumenti di fantasia
+  enable: Abilita barra degli strumenti
   auto_hide: Nascondersi auto
   label: Barra degli strumenti
 wm:
@@ -233,6 +233,6 @@ app_launcher:
 insert: Inserire
 inherit: Ereditare
 more: Di più
-close: Vicina
+close: Esci
 update:
   available: Aggiornamento disponibile!
