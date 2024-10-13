@@ -40,11 +40,12 @@ jobs:
         run: npm clean-install
 
       - name: Change version
+        shell: pwsh  # Ejecuta los comandos en PowerShell.
         run: |
-          CURRENT_VERSION=$(jq -r '.version' package.json)
-          TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          NIGHTLY_VERSION="${CURRENT_VERSION}+nightly.${TIMESTAMP}"
-          npm version "$NIGHTLY_VERSION" --no-git-tag-version
+          $currentVersion = (Get-Content package.json | ConvertFrom-Json).version
+          $timestamp = Get-Date -Format "yyyyMMddHHmmss"
+          $nightlyVersion = "$currentVersion-nightly.$timestamp"
+          npm version $nightlyVersion --no-git-tag-version
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - uses: tauri-apps/tauri-action@v0
