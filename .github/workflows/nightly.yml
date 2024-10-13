@@ -39,21 +39,11 @@ jobs:
       - name: Install frontend dependencies
         run: npm clean-install
 
-      # Update tag and pre-release
-      # - Update (force-push) tag to the commit that is used in the workflow.
-      # - Upload artifacts defined by the user.
-      - uses: pyTooling/Actions/releaser@r0
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: nightly
-          rm: false
-          files: none
-
       - name: Change version
         run: |
           CURRENT_VERSION=$(jq -r '.version' package.json)
           TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          NIGHTLY_VERSION="${CURRENT_VERSION}-nightly.${TIMESTAMP}"
+          NIGHTLY_VERSION="${CURRENT_VERSION}+nightly.${TIMESTAMP}"
           npm version "$NIGHTLY_VERSION" --no-git-tag-version
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
