@@ -17,18 +17,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: git fetch --tags --prune
-      - name: Remove existing 'nightly' tag (if exists)
-        run: |
-          git tag -d nightly
-          git push origin :refs/tags/nightly
 
-      - name: Create new 'nightly' tag on latest commit
+      - name: Create or update 'nightly' tag (force overwrite)
         run: |
-          git tag nightly
-          git push origin --tags
+          git tag -f nightly
+          git push origin --force --tags
 
       - name: Confirm the tag was updated
         run: git ls-remote --tags origin
+
+      - name: Ensure release is updated to the latest commit
+        run: |
+          gh release edit nightly --tag nightly --target $(git rev-parse HEAD) --draft=false
+
+      - name: Verify release status
+        run: gh release view nightly
 
   build-installers:
     needs: continuous-integration
@@ -89,3 +92,35 @@ jobs:
           releaseName: Seelen UI Nightly
           prerelease: true
           args: ${{ matrix.args }}
+
+  publish-release:
+    needs: build-installers
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish release
+        uses: actions/github-script@v7
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          script: |
+            const result = await github.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: process.env.releaseId,
+            });
+             result.data.forEach(async (asset) => {
+              if (asset.name.endsWith('.sig')) {
+                await github.rest.repos.deleteReleaseAsset({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  asset_id: asset.id,
+                });
+              }
+            });
+             await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: process.env.releaseId,
+              draft: false,
+            });
