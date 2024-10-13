@@ -1,9 +1,8 @@
 use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
 
 use image::ImageFormat;
-use seelen_core::state::WegItem;
+use seelen_core::state::{PinnedWegItemData, WegItem};
 use tauri::Emitter;
-use tauri_plugin_shell::ShellExt;
 
 use crate::{
     error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
@@ -65,17 +64,11 @@ pub fn weg_close_app(hwnd: isize) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
+pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
     let hwnd = HWND(hwnd as _);
 
-    // If the window is not open, open it
     if hwnd.is_invalid() || !WindowsApi::is_window_visible(hwnd) {
         SeelenWeg::remove_hwnd(hwnd);
-        get_app_handle()
-            .shell()
-            .command("explorer")
-            .arg(&exe_path)
-            .spawn()?;
         return Ok(());
     }
 
@@ -94,33 +87,26 @@ pub fn weg_toggle_window_state(hwnd: isize, exe_path: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn weg_pin_item(mut path: PathBuf) -> Result<()> {
-    let mut state = FULL_STATE.load().cloned();
-
-    if path.extension() == Some(OsStr::new("lnk")) {
-        path = WindowsApi::resolve_lnk_target(&path)?;
-    }
-
-    let item = if path.extension() == Some(OsStr::new("exe")) {
-        // let execution_path = None;
-        // todo add support to UWP on seelen rofi
-        /* if let Some(package) = trace_lock!(UWP_MANAGER, 10).get_from_path(&path) {
-            if let Some(app) = path.file_name() {
-                execution_path = package.get_shell_path(app.to_string_lossy().as_ref());
-            }
-        } */
-        WegItem::PinnedApp {
-            exe: path.clone(),
-            execution_path: path.to_string_lossy().to_string(),
-        }
-    } else {
-        WegItem::Pinned {
-            is_dir: path.is_dir(),
-            path,
-        }
+pub fn weg_pin_item(path: PathBuf) -> Result<()> {
+    // todo add support to UWP for seelen rofi
+    let mut data = PinnedWegItemData {
+        path: path.clone(),
+        is_dir: path.is_dir(),
+        execution_command: path.to_string_lossy().to_string(),
+        execution_arguments: None,
     };
 
-    state.weg_items.center.insert(0, item);
+    if path.extension() == Some(OsStr::new("lnk")) {
+        let (program, arguments) = WindowsApi::resolve_lnk_target(&path)?;
+        data.is_dir = program.is_dir();
+        data.execution_command = program.to_string_lossy().to_string();
+        if !arguments.is_empty() {
+            data.execution_arguments = Some(arguments.to_string_lossy().to_string());
+        }
+    }
+
+    let mut state = FULL_STATE.load().cloned();
+    state.weg_items.center.insert(0, WegItem::Pinned(data));
     state.emit_weg_items()?;
     state.save_weg_items()?;
     state.store();

@@ -11,12 +11,13 @@ pub use com::*;
 pub use iterator::*;
 use itertools::Itertools;
 use process::ProcessInformationFlag;
+use string_utils::WindowsString;
 use widestring::U16CStr;
 use windows_core::Interface;
 
 use std::{
     ffi::{c_void, OsString},
-    os::windows::ffi::{OsStrExt, OsStringExt},
+    os::windows::ffi::OsStrExt,
     path::{Path, PathBuf},
     thread::sleep,
     time::Duration,
@@ -91,8 +92,9 @@ use windows::{
                 SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
                 SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER,
                 SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
+                WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -356,7 +358,7 @@ impl WindowsApi {
             hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
 
             Self::set_minimize_animation(false)?;
-            Self::show_window(hwnd, SW_MINIMIZE)?;
+            Self::show_window(hwnd, SW_FORCEMINIMIZE)?;
             Self::show_window(hwnd, SW_RESTORE)?;
             Self::set_minimize_animation(true)?;
 
@@ -526,7 +528,8 @@ impl WindowsApi {
         Ok(BSTR::try_from(&value)?.to_string())
     }
 
-    pub fn resolve_lnk_target(lnk_path: &Path) -> Result<PathBuf> {
+    /// return the program and arguments
+    pub fn resolve_lnk_target(lnk_path: &Path) -> Result<(PathBuf, OsString)> {
         Com::run_with_context(|| {
             let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
             let lnk_wide = lnk_path
@@ -538,12 +541,17 @@ impl WindowsApi {
             let persist_file: IPersistFile = shell_link.cast()?;
             unsafe { persist_file.Load(PCWSTR(lnk_wide.as_ptr()), STGM_READ)? };
 
-            let mut target_path = vec![0u16; MAX_PATH as usize];
+            let mut target_path = WindowsString::new_to_fill(1024);
             let mut idk = WIN32_FIND_DATAW::default();
-            unsafe { shell_link.GetPath(&mut target_path, &mut idk, 0)? };
+            unsafe { shell_link.GetPath(target_path.as_mut_slice(), &mut idk, 0)? };
 
-            target_path.retain(|x| *x != 0);
-            Ok(PathBuf::from(OsString::from_wide(&target_path)))
+            let mut arguments = WindowsString::new_to_fill(1024);
+            unsafe { shell_link.GetArguments(arguments.as_mut_slice())? };
+
+            Ok((
+                PathBuf::from(target_path.to_os_string()),
+                arguments.to_os_string(),
+            ))
         })
     }
 

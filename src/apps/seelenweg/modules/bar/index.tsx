@@ -166,15 +166,17 @@ export function SeelenWeg() {
 
 function ItemByType(item: SwItem) {
   if (item.type === SwItemType.Pinned && item.path) {
-    return <FileOrFolder key={item.path} item={item} />;
+    if (
+      item.execution_command.startsWith('shell:AppsFolder') ||
+      item.execution_command.endsWith('.exe')
+    ) {
+      return <UserApplication key={item.execution_command} item={item} />;
+    }
+    return <FileOrFolder key={item.execution_command} item={item} />;
   }
 
-  if (item.type === SwItemType.PinnedApp && item.exe) {
-    return <UserApplication key={item.execution_path} item={item} />;
-  }
-
-  if (item.type === SwItemType.TemporalApp && item.exe) {
-    return <UserApplication key={item.execution_path} item={item} />;
+  if (item.type === SwItemType.TemporalApp && item.path) {
+    return <UserApplication key={item.execution_command} item={item} />;
   }
 
   if (item.type === SwItemType.Media) {

@@ -1,7 +1,6 @@
 import { modify } from 'readable-types';
 import {
   MediaWegItem,
-  PinnedAppWegItem,
   PinnedWegItem,
   SeelenWegSettings,
   SeparatorWegItem,
@@ -44,8 +43,8 @@ export interface MediaSession {
   } | null;
 }
 
-export type ExtendedPinnedAppWegItem = modify<
-  PinnedAppWegItem,
+export type ExtendedPinnedWegItem = modify<
+  PinnedWegItem,
   {
     icon: string;
     title: string;
@@ -53,17 +52,16 @@ export type ExtendedPinnedAppWegItem = modify<
   }
 >;
 
-export type ExtendedTemporalAppWegItem = modify<
-  ExtendedPinnedAppWegItem,
+export type ExtendedTemporalWegItem = modify<
+  ExtendedPinnedWegItem,
   {
     type: SwItemType.TemporalApp;
   }
 >;
 
 export type SwItem =
-  | PinnedWegItem
-  | ExtendedPinnedAppWegItem
-  | ExtendedTemporalAppWegItem
+  | ExtendedPinnedWegItem
+  | ExtendedTemporalWegItem
   | SeparatorWegItem
   | MediaWegItem
   | StartWegItem;

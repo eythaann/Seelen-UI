@@ -47,9 +47,9 @@ export const UserApplicationPreview = ({ hwnd }: PreviewProps) => {
   return (
     <div
       className="weg-item-preview"
-      onClick={() =>
-        invoke(SeelenCommand.WegToggleWindowState, { hwnd: app.hwnd || 0, exePath: app.execution_path })
-      }
+      onClick={() => {
+        invoke(SeelenCommand.WegToggleWindowState, { hwnd: app.hwnd });
+      }}
     >
       <div className="weg-item-preview-topbar">
         <div className="weg-item-preview-title">{app.title}</div>

@@ -1,5 +1,4 @@
 export enum SwItemType {
-  PinnedApp = 'PinnedApp',
   Pinned = 'Pinned',
   TemporalApp = 'TemporalPin',
   Separator = 'Separator',
@@ -10,23 +9,17 @@ export enum SwItemType {
 export interface PinnedWegItem {
   type: SwItemType.Pinned;
   path: string;
+  execution_command: string;
+  execution_arguments: null | string;
   is_dir: boolean;
-};
-
-export interface PinnedAppWegItem {
-  type: SwItemType.PinnedApp;
-  /** executable path */
-  exe: string;
-  /** command to open the app using explorer.exe (UWP apps start with `shell:AppsFolder`) */
-  execution_path: string;
 }
 
 export interface TemporalPinnedWegItem {
   type: SwItemType.TemporalApp;
-  /** executable path */
-  exe: string;
-  /** command to open the app using explorer.exe (UWP apps start with `shell:AppsFolder`) */
-  execution_path: string;
+  path: string;
+  execution_command: string;
+  execution_arguments: null | string;
+  is_dir: boolean;
 }
 
 export interface SeparatorWegItem {
@@ -44,7 +37,6 @@ export interface StartWegItem {
 
 export type WegItem =
   | PinnedWegItem
-  | PinnedAppWegItem
   | TemporalPinnedWegItem
   | SeparatorWegItem
   | MediaWegItem

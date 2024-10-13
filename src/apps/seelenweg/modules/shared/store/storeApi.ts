@@ -19,11 +19,13 @@ export const savePinnedItems = debounce(
       switch (item.type) {
         case SwItemType.TemporalApp:
           break;
-        case SwItemType.PinnedApp:
+        case SwItemType.Pinned:
           acc.push({
             type: item.type,
-            exe: item.exe,
-            execution_path: item.execution_path,
+            path: item.path,
+            execution_command: item.execution_command,
+            execution_arguments: item.execution_arguments,
+            is_dir: item.is_dir,
           });
           break;
         default:

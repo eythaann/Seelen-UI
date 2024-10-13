@@ -9,8 +9,8 @@ import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/inf
 import { updatePreviews } from '../../shared/utils/infra';
 
 import {
-  ExtendedPinnedAppWegItem,
-  ExtendedTemporalAppWegItem,
+  ExtendedPinnedWegItem,
+  ExtendedTemporalWegItem,
   RootState,
 } from '../../shared/store/domain';
 
@@ -21,7 +21,7 @@ import { DraggableItem } from './DraggableItem';
 import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
-  item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem;
+  item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;
 }
 
 export const UserApplication = memo(({ item }: Props) => {
@@ -76,10 +76,19 @@ export const UserApplication = memo(({ item }: Props) => {
           <div
             className="weg-item"
             onClick={() => {
-              invoke(SeelenCommand.WegToggleWindowState, {
-                hwnd: item.opens[0] || 0,
-                exePath: item.execution_path,
-              });
+              let hwnd = item.opens[0];
+              if (!hwnd) {
+                if (item.path.endsWith('.lnk')) {
+                  invoke(SeelenCommand.OpenFile, { path: item.path });
+                } else {
+                  invoke(SeelenCommand.OpenFile, {
+                    path: item.execution_command,
+                    args: item.execution_arguments,
+                  });
+                }
+              } else {
+                invoke(SeelenCommand.WegToggleWindowState, { hwnd });
+              }
             }}
             onAuxClick={(e) => {
               let hwnd = item.opens[0];

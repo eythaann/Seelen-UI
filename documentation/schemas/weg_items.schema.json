@@ -11,15 +11,29 @@
         {
           "type": "object",
           "required": [
-            "is_dir",
             "path",
             "type"
           ],
           "properties": {
+            "execution_arguments": {
+              "description": "Arguments to pass to the program. Second parameter of `start \"\" \"$1\" \"$2\"`",
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "execution_command": {
+              "description": "Program, file or folder to execute/open when clicking the item. First parameter of `start \"\" \"$1\" \"$2\"`.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.",
+              "default": "",
+              "type": "string"
+            },
             "is_dir": {
+              "description": "true if self.path is a folder",
+              "default": false,
               "type": "boolean"
             },
             "path": {
+              "description": "Direct path to file, forder or program.\n\nPWA: In case of pwa programs this will be the creator of the process, will point to the browser executable so this is not unique across PWA apps, and can't be used to identify apps. Also this can't be used to launch the app.\n\nUWP: In case of UWP apps this will be the path to the app executable, but this can be used to invoke the app instead should be used the `shell:AppsFolder` + app user model id.",
               "type": "string"
             },
             "type": {
@@ -33,45 +47,35 @@
         {
           "type": "object",
           "required": [
-            "exe",
-            "execution_path",
+            "path",
             "type"
           ],
           "properties": {
-            "exe": {
-              "type": "string"
-            },
-            "execution_path": {
-              "description": "command to open the app using explorer.exe (UWP apps start with `shell:AppsFolder`)",
-              "type": "string"
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "PinnedApp"
+            "execution_arguments": {
+              "description": "Arguments to pass to the program. Second parameter of `start \"\" \"$1\" \"$2\"`",
+              "type": [
+                "string",
+                "null"
               ]
-            }
-          }
-        },
-        {
-          "type": "object",
-          "required": [
-            "exe",
-            "execution_path",
-            "type"
-          ],
-          "properties": {
-            "exe": {
+            },
+            "execution_command": {
+              "description": "Program, file or folder to execute/open when clicking the item. First parameter of `start \"\" \"$1\" \"$2\"`.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.",
+              "default": "",
               "type": "string"
             },
-            "execution_path": {
-              "description": "command to open the app using explorer.exe (UWP apps start with `shell:AppsFolder`)",
+            "is_dir": {
+              "description": "true if self.path is a folder",
+              "default": false,
+              "type": "boolean"
+            },
+            "path": {
+              "description": "Direct path to file, forder or program.\n\nPWA: In case of pwa programs this will be the creator of the process, will point to the browser executable so this is not unique across PWA apps, and can't be used to identify apps. Also this can't be used to launch the app.\n\nUWP: In case of UWP apps this will be the path to the app executable, but this can be used to invoke the app instead should be used the `shell:AppsFolder` + app user model id.",
               "type": "string"
             },
             "type": {
               "type": "string",
               "enum": [
-                "TemporalPin"
+                "Temporal"
               ]
             }
           }

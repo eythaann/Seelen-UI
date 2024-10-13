@@ -38,7 +38,7 @@ async function cleanSavedItems(items: WegItem[]): Promise<SwItem[]> {
   const result: SwItem[] = [];
 
   for (const item of items) {
-    if (item.type === SwItemType.PinnedApp) {
+    if (item.type === SwItemType.Pinned) {
       result.push(await SwPinnedAppUtils.fromSaved(item));
     } else {
       // TODO remove assert

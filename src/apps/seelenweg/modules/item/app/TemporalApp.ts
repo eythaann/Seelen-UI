@@ -4,7 +4,7 @@ import { SwItemType } from 'seelen-core';
 import { fs } from '../../../../settings/modules/shared/tauri/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
-import { AppFromBackground, ExtendedTemporalAppWegItem } from '../../shared/store/domain';
+import { AppFromBackground, ExtendedTemporalWegItem } from '../../shared/store/domain';
 
 export class SwTemporalAppUtils {
   static async clean(item: AppFromBackground): Promise<AppFromBackground> {
@@ -15,12 +15,14 @@ export class SwTemporalAppUtils {
     return item;
   }
 
-  static fromBackground(item: AppFromBackground): ExtendedTemporalAppWegItem {
+  static fromBackground(item: AppFromBackground): ExtendedTemporalWegItem {
     return {
       type: SwItemType.TemporalApp,
       icon: item.icon || '',
-      exe: item.exe,
-      execution_path: item.execution_path,
+      path: item.exe,
+      execution_command: item.execution_path,
+      execution_arguments: null,
+      is_dir: false,
       title: item.exe.split('\\').at(-1) || 'Unknown',
       opens: [item.hwnd],
     };

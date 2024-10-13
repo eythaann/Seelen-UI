@@ -1,3 +1,5 @@
+use std::os::windows::ffi::OsStringExt;
+
 use windows_core::{PCWSTR, PWSTR};
 
 pub struct WindowsString {
@@ -5,10 +7,25 @@ pub struct WindowsString {
 }
 
 impl WindowsString {
-    pub fn new_to_fill(len: usize) -> Self {
+    pub fn new_to_fill(capacity: usize) -> Self {
         Self {
-            inner: vec![0; len],
+            inner: vec![0; capacity],
         }
+    }
+
+    pub fn len(&self) -> usize {
+        self.inner
+            .iter()
+            .position(|c| *c == 0)
+            .expect("Invalid UTF16 Windows String")
+    }
+
+    pub fn as_slice(&self) -> &[u16] {
+        &self.inner
+    }
+
+    pub fn as_mut_slice(&mut self) -> &mut [u16] {
+        &mut self.inner
     }
 
     pub fn as_pcwstr(&self) -> PCWSTR {
@@ -17,6 +34,10 @@ impl WindowsString {
 
     pub fn as_pwstr(&mut self) -> PWSTR {
         PWSTR(self.inner.as_mut_ptr())
+    }
+
+    pub fn to_os_string(&self) -> std::ffi::OsString {
+        std::ffi::OsString::from_wide(&self.inner[..self.len()])
     }
 }
 

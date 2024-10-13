@@ -1,19 +1,21 @@
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { PinnedWegItem, SeelenCommand } from 'seelen-core';
+import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import InlineSVG from 'src/apps/seelenweg/components/InlineSvg';
 
+import { ExtendedPinnedWegItem } from '../../shared/store/domain';
+
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
 interface Props {
-  item: PinnedWegItem;
+  item: ExtendedPinnedWegItem;
 }
 
 export const FileOrFolder = memo(({ item }: Props) => {
@@ -24,7 +26,7 @@ export const FileOrFolder = memo(({ item }: Props) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (!item.is_dir) {
+    if (item.path.endsWith('lnk') || !item.is_dir) {
       invoke<string | null>(SeelenCommand.GetIcon, { path: item.path }).then((icon) => {
         setIconSrc(convertFileSrc(icon || LAZY_CONSTANTS.MISSING_ICON_PATH));
       });

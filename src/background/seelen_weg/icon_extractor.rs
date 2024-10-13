@@ -281,7 +281,7 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
 
     // if the lnk don't have an icon, try to extract it from the target
     if ext == Some(OsStr::new("lnk")) {
-        let target = WindowsApi::resolve_lnk_target(path)?;
+        let (target, _) = WindowsApi::resolve_lnk_target(path)?;
         return extract_and_save_icon_from_file(&target);
     }
 

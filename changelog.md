@@ -1,6 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### refactor
+- unification of SeelenWeg pinned files, folder and apps in a single structure.
+
+### enhancements
+- improve open_file function to allow arguments.
+
+### fix
+- not getting icons directly from .lnk files
+
 ## [2.0.0]
 ### breaking changes
 - Window Manager Layout Conditions was reimplemented, old conditions (v1) will fail.

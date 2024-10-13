@@ -12,8 +12,8 @@ import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
 import {
   AppsSides,
-  ExtendedPinnedAppWegItem,
-  ExtendedTemporalAppWegItem,
+  ExtendedPinnedWegItem,
+  ExtendedTemporalWegItem,
 } from '../shared/store/domain';
 
 import { savePinnedItems } from '../shared/store/storeApi';
@@ -78,7 +78,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
 
 export function getMenuForItem(
   t: TFunction,
-  item: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
+  item: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
 ): ItemType[] {
   const isPinned = isPinnedApp(item);
 
@@ -148,12 +148,12 @@ export function getMenuForItem(
     {
       key: 'weg_select_file_on_explorer',
       label: t('app_menu.open_file_location'),
-      onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.exe }),
+      onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path }),
     },
     {
       key: 'weg_runas',
       label: t('app_menu.run_as'),
-      onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.execution_path }),
+      onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.execution_command }),
     },
   );
 

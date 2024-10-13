@@ -6,8 +6,8 @@ import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import {
   AppFromBackground,
   AppsSides,
-  ExtendedPinnedAppWegItem,
-  ExtendedTemporalAppWegItem,
+  ExtendedPinnedWegItem,
+  ExtendedTemporalWegItem,
   HWND,
   RootState,
   SwItem,
@@ -30,9 +30,9 @@ const initialState: RootState = {
 
 function removeAppFromState(
   state: RootState,
-  searched: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
+  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
 ) {
-  const search = (app: SwItem) => 'exe' in app && app.exe === searched.exe;
+  const search = (app: SwItem) => 'path' in app && app.path === searched.path;
 
   let index = state.itemsOnLeft.findIndex(search);
   if (index !== -1) {
@@ -55,17 +55,17 @@ function removeAppFromState(
 
 function findApp(
   state: RootState,
-  searched: ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem,
+  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
 ) {
   return (state.itemsOnLeft.find(
-    (app) => 'execution_path' in app && app.execution_path === searched.execution_path,
+    (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
   ) ||
     state.itemsOnCenter.find(
-      (app) => 'execution_path' in app && app.execution_path === searched.execution_path,
+      (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
     ) ||
     state.itemsOnRight.find(
-      (app) => 'execution_path' in app && app.execution_path === searched.execution_path,
-    )) as ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem | undefined;
+      (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
+    )) as ExtendedPinnedWegItem | ExtendedTemporalWegItem | undefined;
 }
 
 export const RootSlice = createSlice({
@@ -79,11 +79,11 @@ export const RootSlice = createSlice({
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
     },
-    pinApp(state, action: PayloadAction<{ app: ExtendedTemporalAppWegItem; side: AppsSides }>) {
+    pinApp(state, action: PayloadAction<{ app: ExtendedTemporalWegItem; side: AppsSides }>) {
       const { app, side } = action.payload;
 
       const appToPin = findApp(state, app) || app;
-      appToPin.type = SwItemType.PinnedApp;
+      appToPin.type = SwItemType.Pinned;
 
       switch (side) {
         case AppsSides.Left:
@@ -101,7 +101,7 @@ export const RootSlice = createSlice({
         default:
       }
     },
-    unPinApp(state, action: PayloadAction<ExtendedPinnedAppWegItem | ExtendedTemporalAppWegItem>) {
+    unPinApp(state, action: PayloadAction<ExtendedPinnedWegItem | ExtendedTemporalWegItem>) {
       const found = findApp(state, action.payload);
       if (found) {
         found.type = SwItemType.TemporalApp;
@@ -148,18 +148,18 @@ export const RootSlice = createSlice({
       state.openApps[new_app.hwnd] = new_app;
 
       let cb = (current: SwItem) =>
-        'execution_path' in current && current.execution_path === new_app.execution_path;
+        'execution_command' in current && current.execution_command === new_app.execution_path;
       let pinedApp = (state.itemsOnLeft.find(cb) ||
         state.itemsOnCenter.find(cb) ||
-        state.itemsOnRight.find(cb)) as ExtendedPinnedAppWegItem | undefined;
+        state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
 
       if (!pinedApp && !new_app.execution_path.startsWith('shell:AppsFolder')) {
         const appFilename = new_app.execution_path.split('\\').pop();
         if (appFilename) {
-          cb = (current: SwItem) => 'exe' in current && current.execution_path.endsWith(appFilename);
+          cb = (current: SwItem) => 'path' in current && current.execution_command.endsWith(appFilename);
           pinedApp = (state.itemsOnLeft.find(cb) ||
             state.itemsOnCenter.find(cb) ||
-            state.itemsOnRight.find(cb)) as ExtendedPinnedAppWegItem | undefined;
+            state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
         }
       }
 
@@ -173,9 +173,9 @@ export const RootSlice = createSlice({
       }
 
       // update path to pinned apps normally changed on updates
-      if (pinedApp.exe !== new_app.exe) {
-        pinedApp.exe = new_app.exe;
-        pinedApp.execution_path = new_app.execution_path;
+      if (pinedApp.path !== new_app.exe) {
+        pinedApp.path = new_app.exe;
+        pinedApp.execution_command = new_app.execution_path;
         savePinnedItems(current(state));
       }
     },
@@ -206,10 +206,10 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isPinnedApp = (item: SwItem): item is ExtendedPinnedAppWegItem => {
-  return item.type === SwItemType.PinnedApp;
+export const isPinnedApp = (item: SwItem): item is ExtendedPinnedWegItem => {
+  return item.type === SwItemType.Pinned;
 };
 
-export const isTemporalApp = (item: SwItem): item is ExtendedTemporalAppWegItem => {
+export const isTemporalApp = (item: SwItem): item is ExtendedTemporalWegItem => {
   return item.type === SwItemType.TemporalApp;
 };
