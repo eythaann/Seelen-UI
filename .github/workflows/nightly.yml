@@ -26,13 +26,6 @@ jobs:
       - name: Confirm the tag was updated
         run: git ls-remote --tags origin
 
-      - name: Ensure release is updated to the latest commit
-        run: |
-          gh release edit nightly --tag nightly --target $(git rev-parse HEAD) --draft=false
-
-      - name: Verify release status
-        run: gh release view nightly
-
   build-installers:
     needs: continuous-integration
     permissions:
@@ -93,23 +86,31 @@ jobs:
           prerelease: true
           args: ${{ matrix.args }}
 
-  publish-release:
+  remove-old-artifacts:
     needs: build-installers
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - name: Publish release
+      - name: Remove Signatures and Old Artifacts
         uses: actions/github-script@v7
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
+            const tagName = 'nightly';
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: tagName,
+            });
+
             const result = await github.rest.repos.listReleaseAssets({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              release_id: process.env.releaseId,
+              release_id: release.data.id,
             });
-             result.data.forEach(async (asset) => {
+
+            result.data.forEach(async (asset) => {
               if (asset.name.endsWith('.sig')) {
                 await github.rest.repos.deleteReleaseAsset({
                   owner: context.repo.owner,
@@ -117,10 +118,4 @@ jobs:
                   asset_id: asset.id,
                 });
               }
-            });
-             await github.rest.repos.updateRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: process.env.releaseId,
-              draft: false,
             });
