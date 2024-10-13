@@ -19,15 +19,13 @@ jobs:
 
       - name: Remove existing 'nightly' tag (if exists)
         run: |
-          if git rev-parse refs/tags/nightly >/dev/null 2>&1; then
-            git tag -d nightly
-            git push origin :refs/tags/nightly
-          fi
+          git tag -d nightly
+          git push origin :refs/tags/nightly
 
       - name: Create new 'nightly' tag on latest commit
         run: |
           git tag nightly
-          git push origin nightly
+          git push origin --tags
 
       - name: Confirm the tag was updated
         run: git ls-remote --tags origin
