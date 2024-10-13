@@ -49,7 +49,7 @@ jobs:
             const currentVersion = packageJson.version;
 
             const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
-            const nightlyVersion = `${currentVersion}+nightly.${timestamp}`;
+            const nightlyVersion = `${currentVersion}+${timestamp}`;
 
             packageJson.version = nightlyVersion;
             fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
