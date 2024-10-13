@@ -39,13 +39,24 @@ jobs:
       - name: Install frontend dependencies
         run: npm clean-install
 
-      - name: Change version
-        shell: pwsh  # Ejecuta los comandos en PowerShell.
-        run: |
-          $currentVersion = (Get-Content package.json | ConvertFrom-Json).version
-          $timestamp = Get-Date -Format "yyyyMMddHHmmss"
-          $nightlyVersion = "$currentVersion-nightly.$timestamp"
-          npm version $nightlyVersion --no-git-tag-version
+      - name: Change version to nightly
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+
+            const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const currentVersion = packageJson.version;
+
+            const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
+            const nightlyVersion = `${currentVersion}+nightly.${timestamp}`;
+
+            packageJson.version = nightlyVersion;
+            fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+
+            let cargoTomlContent = fs.readFileSync('Cargo.toml', 'utf-8');
+            cargoTomlContent = cargoTomlContent.replace(/^version\s*=\s*".*"/m, `version = "${nightlyVersion}"`);
+            fs.writeFileSync('Cargo.toml', cargoTomlContent);
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - uses: tauri-apps/tauri-action@v0
