@@ -10,6 +10,28 @@ jobs:
   continuous-integration:
     uses: ./.github/workflows/ci.yml
 
+  update-tag:
+    needs: continuous-integration
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Remove existing 'nightly' tag (if exists)
+        run: |
+          if git rev-parse refs/tags/nightly >/dev/null 2>&1; then
+            git tag -d nightly
+            git push origin :refs/tags/nightly
+          fi
+
+      - name: Create new 'nightly' tag on latest commit
+        run: |
+          git tag nightly
+          git push origin nightly
+
+      - name: Confirm the tag was updated
+        run: git ls-remote --tags origin
+
   build-installers:
     needs: continuous-integration
     permissions:
