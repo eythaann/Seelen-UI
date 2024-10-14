@@ -193,9 +193,14 @@ shortcuts:
     switch_workspace_4: Skiptu yfir í vinnusvæði 4
     switch_workspace_0: Skiptu yfir í vinnusvæði 1
     switch_workspace_1: Skiptu yfir í vinnusvæði 2
+    misc_open_settings: Opnar stillingar
+    misc_toggle_lock_tracing: Skiptu um rekja lás (logs)
+    toggle_launcher: Toogle
+    misc_toggle_win_event_tracing: Skiptu um Win Event Tracing (logs)
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
   reset: Endurstilla í vanskil
+  readonly_tooltip: Þetta er aðeins skrifvarinn
 delete: Eyða
 loading: Hleðsla ...
 inProgress: Í vinnslu...
@@ -210,8 +215,6 @@ vd:
     seelen: Seelen
   disabled_windows_version: Native Virtual Desktop Strategy er ekki í boði fyrir Windows útgáfuna þína.
 save_and_restart: Vista og endurræsa
-beta_channel:
-  enable: Virkja beta rás (aðeins í gegnum Github)
 monitors_configurations:
   label: Monitor {{Index}}
 wall:
@@ -232,3 +235,6 @@ insert: Settu inn
 close: Lokaðu
 update:
   available: Uppfærsla í boði!
+  channel: Uppfæra rás
+  downloading: Niðurhal ...
+miscellaneous: Ýmislegt

@@ -34,3 +34,5 @@ placeholder:
   bluetooth_devices: บลูทู ธ และอุปกรณ์
   notifications: การแจ้งเตือน
 unlabelled_tray: ไอคอนถาดที่ไม่มีป้ายกำกับ
+context_menu:
+  remove: ลบรายการ

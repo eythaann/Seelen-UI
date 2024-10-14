@@ -193,11 +193,16 @@ shortcuts:
     focus_latest: Fokus nuut
     switch_workspace_0: Skakel oor na werkruimte 1
     switch_workspace_1: Skakel oor na Workspace 2
+    misc_open_settings: Open instellings
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Wisselslotopsporing (logs)
+    misc_toggle_win_event_tracing: Skakel wen -byeenkomsopsporing (logs)
   enable: Aktiveer geïntegreerde kortpaaie (AHK)
   enable_tooltip: >-
     Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen
     Core API
   reset: Herstel na standaard
+  readonly_tooltip: Dit is 'n leesalleen kortpad
 open: Oopmaak
 loading: Laai ...
 save: Red
@@ -214,8 +219,6 @@ vd:
     Inheemse virtuele tafelrekenaarstrategie is nie beskikbaar vir u Windows
     -weergawe nie.
 save_and_restart: Stoor en herbegin
-beta_channel:
-  enable: Aktiveer beta -kanaal (slegs via GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ inherit: Erf
 close: Dig
 update:
   available: Opdatering beskikbaar!
+  downloading: Aflaai ...
+  channel: Update Channel
+miscellaneous: Verskillend

@@ -34,3 +34,5 @@ placeholder:
   settings: Schnelleinstellungen
   notifications: Benachrichtigungen
 unlabelled_tray: Entlebte Tablettikone
+context_menu:
+  remove: Gegenstand entfernen

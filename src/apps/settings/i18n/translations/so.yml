@@ -192,11 +192,16 @@ shortcuts:
     switch_workspace_6: U beddelo goobta shaqada 6
     switch_workspace_1: U beddelo goobta shaqada 2
     switch_workspace_0: U beddelo goobta shaqada 1
+    misc_toggle_lock_tracing: Ku wareeji raadinta qufulka (logs)
+    misc_open_settings: Meel furan
+    misc_toggle_win_event_tracing: Ku guuleysta raadinta dhacdada dhacdada (logs)
+    toggle_launcher: Ooleexad
   enable: U fududee fulinta isku dhafan ee isku dhafan (Ahk)
   enable_tooltip: >-
     Disable Haddii aad hirgelin doontid gaagaaban adiga oo adeegsanaya api-ka
     quruxda badan
   reset: Dib u dejiso defafyada
+  readonly_tooltip: Tani waa gaagaaban oo keliya oo keliya
 loading: Loading ...
 cancel: Burin
 delete: Tirtirid
@@ -213,8 +218,6 @@ vd:
     Istaraatiijiyadda Desktop-ka dalkoodu hooyo looma heli karo nooca
     Windows-kaaga.
 save_and_restart: Badbaadin & Dib u bilow
-beta_channel:
-  enable: Ku xooji beta channel (oo keliya githab)
 monitors_configurations:
   label: Kormeer {{tus ind ind}}
 wall:
@@ -235,3 +238,6 @@ more: Ka badan
 close: Xirid
 update:
   available: Cusboonaysiinta la heli karo!
+  downloading: Soo dejinta ...
+  channel: Cusboonaysiinta Kanaalka
+miscellaneous: Kala duduwan

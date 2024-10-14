@@ -463,6 +463,29 @@ impl Default for AhkVarList {
     }
 }
 
+// ========================== Seelen Updates ==============================
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+pub enum UpdateChannel {
+    Release,
+    Beta,
+    Nightly,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub struct UpdaterSettings {
+    pub channel: UpdateChannel,
+}
+
+impl Default for UpdaterSettings {
+    fn default() -> Self {
+        Self {
+            channel: UpdateChannel::Release,
+        }
+    }
+}
+
 // ======================== Final Settings Struct ===============================
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
@@ -504,8 +527,8 @@ pub struct Settings {
     pub date_format: String,
     /// what virtual desktop implementation will be used, in case Native is not available we use Seelen
     pub virtual_desktop_strategy: VirtualDesktopStrategy,
-    /// enable experimental/beta updates
-    pub beta_channel: bool,
+    /// Updater Settings
+    pub updater: UpdaterSettings,
 }
 
 impl Default for Settings {
@@ -525,7 +548,7 @@ impl Default for Settings {
             language: Some(Self::get_system_language()),
             date_format: "ddd D MMM, hh:mm A".to_owned(),
             virtual_desktop_strategy: VirtualDesktopStrategy::Native,
-            beta_channel: false,
+            updater: UpdaterSettings::default(),
         }
     }
 }

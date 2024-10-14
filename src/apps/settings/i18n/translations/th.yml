@@ -191,9 +191,14 @@ shortcuts:
     move_to_workspace_7: ย้ายไปที่เวิร์กสเปซ 7
     switch_workspace_0: เปลี่ยนไปใช้พื้นที่ทำงาน 1
     switch_workspace_1: สลับไปที่ Workspace 2
+    toggle_launcher: ตัก
+    misc_toggle_win_event_tracing: สลับการติดตามเหตุการณ์ (บันทึก)
+    misc_open_settings: เปิดการตั้งค่า
+    misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)
   enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
   enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API
   reset: รีเซ็ตเป็นค่าเริ่มต้น
+  readonly_tooltip: นี่คือทางลัดแบบอ่านอย่างเดียว
 inProgress: กำลังดำเนินการ...
 cancel: ยกเลิก
 delete: ลบ
@@ -208,8 +213,6 @@ vd:
     label: กลยุทธ์เดสก์ท็อปเสมือนจริง
   disabled_windows_version: กลยุทธ์เดสก์ท็อปเสมือนจริงไม่พร้อมใช้งานสำหรับเวอร์ชัน Windows ของคุณ
 save_and_restart: บันทึกและรีสตาร์ท
-beta_channel:
-  enable: เปิดใช้งานช่องเบต้า (ผ่าน GitHub เท่านั้น)
 monitors_configurations:
   label: ตรวจสอบ {{index}}
 wall:
@@ -230,3 +233,6 @@ inherit: สืบทอด
 close: ปิด
 update:
   available: อัปเดตพร้อมใช้งาน!
+  downloading: ดาวน์โหลด ...
+  channel: อัปเดตช่อง
+miscellaneous: เบ็ดเตล็ด

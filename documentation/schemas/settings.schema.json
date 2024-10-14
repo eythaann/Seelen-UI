@@ -268,11 +268,6 @@
         }
       ]
     },
-    "betaChannel": {
-      "description": "enable experimental/beta updates",
-      "default": false,
-      "type": "boolean"
-    },
     "dateFormat": {
       "description": "MomentJS date format",
       "default": "ddd D MMM, hh:mm A",
@@ -399,6 +394,17 @@
       "items": {
         "type": "string"
       }
+    },
+    "updater": {
+      "description": "Updater Settings",
+      "default": {
+        "channel": "Release"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdaterSettings"
+        }
+      ]
     },
     "virtualDesktopStrategy": {
       "description": "what virtual desktop implementation will be used, in case Native is not available we use Seelen",
@@ -1486,6 +1492,25 @@
         "Top",
         "Bottom"
       ]
+    },
+    "UpdateChannel": {
+      "type": "string",
+      "enum": [
+        "Release",
+        "Beta",
+        "Nightly"
+      ]
+    },
+    "UpdaterSettings": {
+      "type": "object",
+      "required": [
+        "channel"
+      ],
+      "properties": {
+        "channel": {
+          "$ref": "#/definitions/UpdateChannel"
+        }
+      }
     },
     "VirtualDesktopStrategy": {
       "type": "string",

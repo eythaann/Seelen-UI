@@ -192,11 +192,16 @@ shortcuts:
     switch_workspace_9: कार्यक्षेत्र in मा स्विच गर्नुहोस्
     switch_workspace_0: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
     switch_workspace_1: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
+    misc_open_settings: खुला सेटिंग्स
+    misc_toggle_win_event_tracing: टगल जीत घटना ट्रेसिंग (लग)
+    misc_toggle_lock_tracing: टगल लक ट्रेसिंग (लग)
+    toggle_launcher: Toogle
   enable_tooltip: >-
     असक्षम गर्नुहोस् यदि तपाईं देखिने कोर एपीआई प्रयोग गरेर तपाईंको आफ्नै
     सर्टकटहरू लागू गर्नुहुन्छ भने असक्षम गर्नुहोस्
   enable: एकीकृत सर्टकट सक्षम गर्नुहोस् (AHK)
   reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
+  readonly_tooltip: यो एक पढ्न-मात्र सर्टकट हो
 inProgress: प्रगति हुदैछ...
 delete: मेटाउन
 loading: लोड गर्दै ...
@@ -211,8 +216,6 @@ vd:
     seelen: सावधानी
   disabled_windows_version: नेटिभ भर्चुअल डेस्कटप रणनीति तपाईंको विन्डोज संस्करणको लागि उपलब्ध छैन।
 save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
-beta_channel:
-  enable: Beta च्यानल सक्षम गर्नुहोस् (github मार्फत मात्र)
 monitors_configurations:
   label: मोनिटर \ inchtax}}
 wall:
@@ -233,3 +236,6 @@ insert: घुसाउनु
 close: घनिष्ट
 update:
   available: अपडेट उपलब्ध!
+  channel: अद्यावधिक च्यानल
+  downloading: डाउनलोड गर्दै ...
+miscellaneous: विविघ

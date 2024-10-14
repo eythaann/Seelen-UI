@@ -110,8 +110,6 @@ devtools:
   settings_file: Settings File
   custom_config_file: Load Custom Config File
   load: Load
-beta_channel:
-  enable: Enable Beta Channel (Only via GitHub)
 apps_configurations:
   import: Import
   export: Export
@@ -238,3 +236,5 @@ shortcuts:
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (logs)
 update:
   available: Update Available!
+  downloading: Downloading...
+  channel: Update Channel

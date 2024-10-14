@@ -34,3 +34,5 @@ placeholder:
   settings: द्रुत सेटिंग्स
   notifications: सूचना
 unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
+context_menu:
+  remove: वस्तु हटाउनुहोस्

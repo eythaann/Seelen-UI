@@ -193,11 +193,16 @@ shortcuts:
     switch_workspace_6: Shintshela ku-Workpace 6
     switch_workspace_0: Shintshela ku-Workpace 1
     switch_workspace_1: Shintshela ku-Workpace 2
+    misc_toggle_win_event_tracing: Guqula u-Win Traceng (izingodo)
+    misc_open_settings: Vula izilungiselelo
+    misc_toggle_lock_tracing: Guqula ukukhiya ukulandelela (izingodo)
+    toggle_launcher: Isigwegwe
   enable: Nika amandla izinqamuleli ezihlanganisiwe (Ahk)
   enable_tooltip: >-
     Khubaza uma uzosebenzisa izinqamuleli zakho usebenzisa i-Seelen Core Core
     API
   reset: Setha kabusha okuzenzakalelayo
+  readonly_tooltip: Lesi isinqamuleli esifundwayo kuphela
 inProgress: Kuyaqhubeka...
 cancel: Hlikihla
 save: Hlenga
@@ -212,8 +217,6 @@ vd:
     seelen: '-Kwaseshud'
   disabled_windows_version: Isu le-Virtual desktop yendabuko alitholakali ngenguqulo yakho yeWindows.
 save_and_restart: Gcina futhi Qalisa kabusha
-beta_channel:
-  enable: Nika amandla isiteshi se-beta (kuphela nge-github)
 monitors_configurations:
   label: Qapha {{inkomba}}
 wall:
@@ -236,3 +239,6 @@ insert: Faka
 close: Ngokuminyanisa
 update:
   available: Ukuvuselelwa Kuyatholakala!
+  channel: Isiteshi sokuvuselela
+  downloading: Ukulanda ...
+miscellaneous: '-Nhlobonhlobo'

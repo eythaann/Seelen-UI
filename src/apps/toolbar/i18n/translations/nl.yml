@@ -34,3 +34,5 @@ placeholder:
   smart_charge: '- Slimme lading'
   notifications: Meldingen
 unlabelled_tray: Niet -geëtiketteerd ladepictogram
+context_menu:
+  remove: Verwijder het item

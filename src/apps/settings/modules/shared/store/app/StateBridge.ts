@@ -32,7 +32,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'language',
     'dateFormat',
     'virtualDesktopStrategy',
-    'betaChannel',
+    'updater',
     'wall',
     'launcher',
   ]);

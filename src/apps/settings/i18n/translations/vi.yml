@@ -193,9 +193,14 @@ shortcuts:
     focus_left: Tập trung trái
     switch_workspace_0: Chuyển sang không gian làm việc 1
     switch_workspace_1: Chuyển sang không gian làm việc 2
+    misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)
+    misc_open_settings: Mở cài đặt
+    toggle_launcher: TOGLE
+    misc_toggle_win_event_tracing: Chuyển đổi theo dõi sự kiện (nhật ký)
   enable: Bật các phím tắt tích hợp (AHK)
   enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
   reset: Đặt lại về mặc định
+  readonly_tooltip: Đây là một lối tắt chỉ đọc
 loading: Đang tải...
 open: Mở
 quit: Từ bỏ
@@ -212,8 +217,6 @@ vd:
     Chiến lược máy tính để bàn ảo gốc không có sẵn cho phiên bản Windows của
     bạn.
 save_and_restart: Lưu & Khởi động lại
-beta_channel:
-  enable: Bật kênh Beta (chỉ qua GitHub)
 monitors_configurations:
   label: Màn hình {{index}}
 wall:
@@ -234,3 +237,6 @@ inherit: Kế thừa
 close: Đóng
 update:
   available: Cập nhật có sẵn!
+  channel: Cập nhật kênh
+  downloading: Tải xuống ...
+miscellaneous: Linh tinh

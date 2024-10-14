@@ -193,9 +193,14 @@ shortcuts:
     switch_workspace_9: Lülitage Workspace 9 -le
     switch_workspace_1: Lülitage tööruum 2
     switch_workspace_0: Lülitage tööalale 1
+    misc_open_settings: Avatud sätted
+    toggle_launcher: Toogle
+    misc_toggle_win_event_tracing: Lülitage võidu sündmuste jälgimine (logid)
+    misc_toggle_lock_tracing: Lülitage lukustusjälg (logid)
   enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
   enable: Lubage integreeritud otseteed (AHK)
   reset: Lähtestage vaikeseadetele
+  readonly_tooltip: See on kirjutuskaitstud otsetee
 inProgress: Pooleli ...
 delete: Kustutama
 quit: Loobuma
@@ -212,8 +217,6 @@ vd:
     Natiivse virtuaalse töölaua strateegia pole teie Windowsi versiooni jaoks
     saadaval.
 save_and_restart: Salvesta ja taaskäivitage
-beta_channel:
-  enable: Luba beetakanal (ainult GitHubi kaudu)
 monitors_configurations:
   label: Monitor {{indeks}}
 wall:
@@ -234,3 +237,6 @@ inherit: Pärima
 close: Sulgur
 update:
   available: Värskendage saadaval!
+  channel: Värskenduskanal
+  downloading: Allalaadimine ...
+miscellaneous: Mitmesuguseid

@@ -34,3 +34,5 @@ placeholder:
   open_system_tray: Sistem Tepsisini Aç
   notifications: Bildirimler
 unlabelled_tray: Etiketlenmemiş Tepsi Simgesi
+context_menu:
+  remove: Öğeyi kaldır

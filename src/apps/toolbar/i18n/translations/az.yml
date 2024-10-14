@@ -34,3 +34,5 @@ placeholder:
   battery_remaining: Qalan
   notifications: Bildirişlər
 unlabelled_tray: Qeyri-çapsız tepsik nişanı
+context_menu:
+  remove: Elementləri çıxarın

@@ -34,3 +34,5 @@ placeholder:
   open_system_tray: Opinn kerfisbakki
   notifications: Tilkynningar
 unlabelled_tray: Ómerkt bakkatákn
+context_menu:
+  remove: Fjarlægðu hlutinn

@@ -34,3 +34,5 @@ placeholder:
   ethernet_disconnected: ინტერნეტი არ არის
   notifications: შეტყობინებები
 unlabelled_tray: არასასურველი უჯრის ხატი
+context_menu:
+  remove: ამოიღეთ ელემენტი

@@ -200,7 +200,12 @@ shortcuts:
     send_to_workspace_9: Envoyer à l'espace de travail 9
     switch_workspace_1: Passez à l'espace de travail 2
     switch_workspace_0: Passez à l'espace de travail 1
+    toggle_launcher: Toogle
+    misc_open_settings: Paramètres ouvrir
+    misc_toggle_lock_tracing: Togue de verrouillage (journaux)
+    misc_toggle_win_event_tracing: Togle Win Event Traçage (journaux)
   reset: Réinitialiser les valeurs par défaut
+  readonly_tooltip: Ceci est un raccourci en lecture seule
 vd:
   strategy:
     native: Indigène
@@ -210,8 +215,6 @@ vd:
     La stratégie de bureau virtuelle native n'est pas disponible pour votre
     version Windows.
 save_and_restart: Enregistrer et redémarrer
-beta_channel:
-  enable: Activer le canal bêta (uniquement via GitHub)
 monitors_configurations:
   label: Moniteur {{index}}
 wall:
@@ -232,3 +235,6 @@ insert: Insérer
 close: Fermer
 update:
   available: Mise à jour disponible!
+  downloading: Téléchargement...
+  channel: Mettre à jour le canal
+miscellaneous: Divers

@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_3: Kirim ke Workspace 3
     switch_workspace_1: Beralih ke ruang kerja 2
     switch_workspace_0: Beralih ke ruang kerja 1
+    toggle_launcher: TOOGLE
+    misc_open_settings: Buka Pengaturan
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (Log)
+    misc_toggle_lock_tracing: Take Toggle Lock Tracing (Log)
   enable: Aktifkan pintasan terintegrasi (AHK)
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri
     menggunakan API Inti Seelen
   reset: Reset ke default
+  readonly_tooltip: Ini adalah jalan pintas yang hanya membaca
 open: Membuka
 cancel: Membatalkan
 save: Menyimpan
@@ -212,8 +217,6 @@ vd:
     label: Strategi desktop virtual
   disabled_windows_version: Strategi desktop virtual asli tidak tersedia untuk versi Windows Anda.
 save_and_restart: Simpan & restart
-beta_channel:
-  enable: Aktifkan saluran beta (hanya melalui github)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -234,3 +237,6 @@ inherit: Mewarisi
 close: Menutup
 update:
   available: Perbarui Tersedia!
+  channel: Perbarui saluran
+  downloading: Mengunduh ...
+miscellaneous: Aneka ragam

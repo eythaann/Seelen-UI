@@ -34,3 +34,5 @@ placeholder:
   ethernet_connected: Интернэт интернет нэвтрэх
   notifications: Мэдэгдэл
 unlabelled_tray: Unlabelled Tray дүрс
+context_menu:
+  remove: Зүйлийг арилгах

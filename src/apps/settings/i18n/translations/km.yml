@@ -193,9 +193,14 @@ shortcuts:
     focus_bottom: ផ្ដោតបាត
     switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 1
     switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 2
+    toggle_launcher: យកតាមថា Google
+    misc_toggle_win_event_tracing: បិទ / បើកព្រឹត្តិការណ៍ឈ្នះ (កំណត់ហេតុ)
+    misc_toggle_lock_tracing: បិទបើកការចាក់សោរ (កំណត់ហេតុ)
+    misc_open_settings: បើកការកំណត់
   enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api
   enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
   reset: កំណត់ឡើងវិញនូវលំនាំដើម
+  readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
 cancel: បោះបង់
 inProgress: កំពុង​ដំណើរការ...
 delete: លុប
@@ -210,8 +215,6 @@ vd:
     native: នៃកមនើត
   disabled_windows_version: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិតដើមមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
 save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
-beta_channel:
-  enable: បើកដំណើរការឆានែលបេតា (បានតែតាមរយៈ Github)
 monitors_configurations:
   label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
 wall:
@@ -232,3 +235,6 @@ inherit: តតយលមរតក
 close: បិត
 update:
   available: មានបច្ចុប្បន្នភាព!
+  downloading: ទាញយក ...
+  channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
+miscellaneous: ដេលមានផ្នេកខុសក្នា

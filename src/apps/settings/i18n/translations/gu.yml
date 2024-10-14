@@ -193,11 +193,16 @@ shortcuts:
     switch_workspace_7: વર્કસ્પેસ 7 પર સ્વિચ કરો
     switch_workspace_0: વર્કસ્પેસ 1 પર સ્વિચ કરો
     switch_workspace_1: વર્કસ્પેસ 2 પર સ્વિચ કરો
+    misc_open_settings: ખુલ્લી સેટિંગ્સ
+    misc_toggle_lock_tracing: ટ g ગલ લ lock ક ટ્રેસિંગ (લોગ)
+    toggle_launcher: ટૂલેગ
+    misc_toggle_win_event_tracing: ટ g ગલ વિન ઇવેન્ટ ટ્રેસિંગ (લોગ)
   enable_tooltip: >-
     જો તમે સીલેન કોર એપીઆઈનો ઉપયોગ કરીને તમારા પોતાના શોર્ટકટ્સનો અમલ કરશો તો
     અક્ષમ કરો
   enable: સંકલિત શૉર્ટકટ્સ સક્ષમ કરો (ahk)
   reset: ડિફોલ્ટ પર ફરીથી સેટ કરો
+  readonly_tooltip: આ ફક્ત એક વાંચવા માટે શોર્ટકટ છે
 open: ખુલ્લા
 delete: કાઢી નાખો
 save: સાચવો
@@ -212,8 +217,6 @@ vd:
     native: મૂળ
   disabled_windows_version: મૂળ વર્ચ્યુઅલ ડેસ્કટ .પ વ્યૂહરચના તમારા વિંડોઝ સંસ્કરણ માટે ઉપલબ્ધ નથી.
 save_and_restart: સાચવો અને ફરીથી પ્રારંભ કરો
-beta_channel:
-  enable: બીટા ચેનલને સક્ષમ કરો (ફક્ત ગીથબ દ્વારા)
 monitors_configurations:
   label: મોનિટર કરો {{અનુક્રમણિકા}}
 wall:
@@ -234,3 +237,6 @@ insert: દાખલ કરવું
 close: બંધ
 update:
   available: અપડેટ ઉપલબ્ધ!
+  downloading: ડાઉનલોડ ...
+  channel: અપડેટ
+miscellaneous: પરચુરણ

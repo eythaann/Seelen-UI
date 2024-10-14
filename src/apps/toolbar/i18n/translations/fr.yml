@@ -34,3 +34,5 @@ placeholder:
   settings: Réglages rapides
   notifications: Notifications
 unlabelled_tray: Icône de plateau non étiquetée
+context_menu:
+  remove: Supprimer

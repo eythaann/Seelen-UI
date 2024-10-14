@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_5: Send til arbejdsområde 5
     switch_workspace_1: Skift til arbejdsområde 2
     switch_workspace_0: Skift til arbejdsområde 1
+    misc_open_settings: Åbne indstillinger
+    toggle_launcher: Toogle
+    misc_toggle_win_event_tracing: Toggle win begivenhedssporing (logfiler)
+    misc_toggle_lock_tracing: Skiftlåssporing (logfiler)
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core
     API
   reset: Nulstil til misligholdelser
+  readonly_tooltip: Dette er en skrivebeskyttet genvej
 inProgress: I gang...
 open: Åben
 delete: Slet
@@ -214,8 +219,6 @@ vd:
     Native Virtual Desktop Strategy er ikke tilgængelig til din Windows
     -version.
 save_and_restart: Gem & genstart
-beta_channel:
-  enable: Aktivér beta -kanal (kun via GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ insert: Indsæt
 close: Tæt
 update:
   available: Opdatering tilgængelig!
+  channel: Opdateringskanal
+  downloading: Download ...
+miscellaneous: Diverse

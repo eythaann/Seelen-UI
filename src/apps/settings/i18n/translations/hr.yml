@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_3: Pošaljite u radni prostor 3
     switch_workspace_0: Prebacite se na radni prostor 1
     switch_workspace_1: Prebacite se na radni prostor 2
+    toggle_launcher: Naleti
+    misc_toggle_win_event_tracing: Pregazivanje traganja događaja (zapisnici)
+    misc_toggle_lock_tracing: Preklopljenje zaključavanja (zapisnici)
+    misc_open_settings: Otvorene postavke
   enable_tooltip: >-
     Onemogući ako ćete implementirati vlastite prečace pomoću Seelen Core API
     -ja
   enable: Omogućite integrirane prečace (AHK)
   reset: Ponovno postavite na zadane vrijednosti
+  readonly_tooltip: Ovo je prečac samo za čitanje
 cancel: Otkazati
 loading: Učitavam...
 delete: Izbrisati
@@ -214,8 +219,6 @@ vd:
     Izvorna strategija virtualne radne površine nije dostupna za vašu Windows
     verziju.
 save_and_restart: Spremi i ponovno pokrenite
-beta_channel:
-  enable: Omogući beta kanal (samo putem GitHub -a)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ inherit: Naslijediti
 close: Zatvoriti
 update:
   available: Ažuriranje dostupno!
+  downloading: Preuzimanje ...
+  channel: Kanal za ažuriranje
+miscellaneous: Razni

@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_1: Envia a l'espai de treball 1
     switch_workspace_0: Canvia a l'espai de treball 1
     switch_workspace_1: Canvia a l'espai de treball 2
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Tornada de tancament de bloqueig (registres)
+    misc_toggle_win_event_tracing: Toggle Win Traça (registres)
+    misc_open_settings: Configuració oberta
   enable: Activa les dreceres integrades (AHK)
   enable_tooltip: >-
     Desactiveu si implementareu les vostres pròpies dreceres mitjançant l'API de
     Seelen Core
   reset: Restableix als valors predeterminats
+  readonly_tooltip: Aquesta és una drecera de només lectura
 loading: Carregant ...
 open: Obrir
 delete: Esborrar
@@ -214,8 +219,6 @@ vd:
     L'estratègia d'escriptori virtual nativa no està disponible per a la vostra
     versió de Windows.
 save_and_restart: Desar i reiniciar
-beta_channel:
-  enable: Activa el canal beta (només mitjançant GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ more: Més
 close: Tancar -se
 update:
   available: Actualitzeu disponible.
+  downloading: Descarregant ...
+  channel: Canal d'actualització
+miscellaneous: Divers

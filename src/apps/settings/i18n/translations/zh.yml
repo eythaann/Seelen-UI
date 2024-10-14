@@ -197,7 +197,12 @@ shortcuts:
     send_to_workspace_9: 发送到工作区 9
     switch_workspace_1: 切换到工作区 1
     switch_workspace_0: 切换到工作区 0
+    misc_toggle_win_event_tracing: 切换Win事件跟踪（日志）
+    toggle_launcher: 托格尔
+    misc_toggle_lock_tracing: 切换锁定跟踪（日志）
+    misc_open_settings: 打开设置
   reset: 重置为默认值
+  readonly_tooltip: 这是只读的捷径
 vd:
   strategy:
     native: 系统
@@ -205,8 +210,6 @@ vd:
     seelen: Seelen
   disabled_windows_version: 本机虚拟桌面策略不适合您的 Windows 版本。
 save_and_restart: 保存和重新启动
-beta_channel:
-  enable: 启用 Beta 通道（仅通过 GitHub）
 monitors_configurations:
   label: 监视 {{index}}
 wall:
@@ -227,3 +230,6 @@ more: 更多
 close: 关闭
 update:
   available: 有新的版本更新！
+  downloading: 下载...
+  channel: 更新频道
+miscellaneous: 各种各样的

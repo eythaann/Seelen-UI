@@ -34,3 +34,5 @@ placeholder:
   ethernet_disconnected: インターネットアクセスはありません
   notifications: 通知
 unlabelled_tray: ラベル無し
+context_menu:
+  remove: アイテムを削除します

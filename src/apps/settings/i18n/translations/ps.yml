@@ -192,9 +192,14 @@ shortcuts:
     increase_height: قد زیاتول
     switch_workspace_1: د کارځای 2 ته لاړشئ
     switch_workspace_0: د کارځای 1 ته لاړشئ
+    toggle_launcher: مالګي
+    misc_open_settings: خلاص امستنې
+    misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
+    misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
   enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
   enable: مدغم شوي لنډیزونه (اه)
   reset: د افلاسیون لپاره بیا تنظیمول
+  readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
 inProgress: د پرمختګ په حال کې...
 quit: پرېښودل
 delete: حذف کول
@@ -209,8 +214,6 @@ vd:
     native: اصلي
   disabled_windows_version: اصلي مجازی ډیسک ډیسک ستراتیژي ستاسو د وینډوز نسخه لپاره شتون نلري.
 save_and_restart: خوندي کول او بیا پیل کړئ
-beta_channel:
-  enable: د بیټا چینل فعال کړئ (یوازې د ګیټوب له لارې)
 monitors_configurations:
   label: د {{{پلس} نظارت وکړئ}
 wall:
@@ -231,3 +234,6 @@ insert: دننه کړئ
 close: بندول
 update:
   available: اوسمهالول شتون لري!
+  downloading: دانلود ...
+  channel: چینل تازه کول
+miscellaneous: متفرقه

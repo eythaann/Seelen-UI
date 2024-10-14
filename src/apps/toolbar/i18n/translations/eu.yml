@@ -34,3 +34,5 @@ placeholder:
   ethernet_disconnected: Ez da Interneteko sarbiderik
   notifications: Jakinarazpenak
 unlabelled_tray: Nahitaezko erretilua ikonoa
+context_menu:
+  remove: Kendu elementua

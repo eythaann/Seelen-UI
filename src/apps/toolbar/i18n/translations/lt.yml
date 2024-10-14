@@ -34,3 +34,5 @@ placeholder:
   open_user_folder: Atidaryti vartotojo aplanką
   notifications: Pranešimai
 unlabelled_tray: Nepaženklinta dėklo piktograma
+context_menu:
+  remove: Pašalinkite elementą

@@ -34,3 +34,5 @@ placeholder:
   smart_charge: '- Biaya Cerdas'
   notifications: Pemberitahuan
 unlabelled_tray: Ikon baki tanpa label
+context_menu:
+  remove: Hapus item

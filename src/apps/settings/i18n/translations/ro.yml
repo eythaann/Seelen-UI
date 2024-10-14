@@ -193,11 +193,16 @@ shortcuts:
     move_to_workspace_7: Mutați -vă la spațiul de lucru 7
     switch_workspace_0: Treceți la spațiul de lucru 1
     switch_workspace_1: Treceți la spațiul de lucru 2
+    misc_toggle_win_event_tracing: Toggle Win Win Tracing (Jurnals)
+    misc_toggle_lock_tracing: Comutarea blocării de blocare (jurnalele)
+    toggle_launcher: Toogle
+    misc_open_settings: Setări deschise
   enable: Activați comenzi rapide integrate (AHK)
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriile comenzi rapide folosind API -ul
     Seelen Core
   reset: Resetați la valorile implicite
+  readonly_tooltip: Aceasta este o scurtătură numai pentru citire
 delete: Șterge
 inProgress: În curs...
 loading: Se încarcă...
@@ -214,8 +219,6 @@ vd:
     Strategia de desktop virtuală nativă nu este disponibilă pentru versiunea
     dvs. Windows.
 save_and_restart: Salvați și reporniți
-beta_channel:
-  enable: Activați canalul beta (numai prin GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ insert: Introduce
 close: Aproape
 update:
   available: Actualizare disponibilă!
+  channel: Actualizare canal
+  downloading: Descărcare ...
+miscellaneous: Diverse

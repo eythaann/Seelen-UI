@@ -34,3 +34,5 @@ placeholder:
   smart_charge: '- Încărcare inteligentă'
   notifications: Notificări
 unlabelled_tray: Pictograma tăvii nemarcate
+context_menu:
+  remove: Eliminați elementul

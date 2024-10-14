@@ -34,3 +34,5 @@ placeholder:
   ethernet_disconnected: Tiada akses Internet
   notifications: Pemberitahuan
 unlabelled_tray: Ikon dulang yang tidak dilabel
+context_menu:
+  remove: Keluarkan item

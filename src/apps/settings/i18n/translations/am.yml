@@ -190,9 +190,14 @@ shortcuts:
     decrease_width: ስፋት መቀነስ
     switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
     switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
+    misc_open_settings: ክፍት ቅንብሮች
+    misc_toggle_lock_tracing: መቆለፊያ መቆለፊያ (ምዝግብ ማስታወሻዎች)
+    toggle_launcher: ሻይ
+    misc_toggle_win_event_tracing: የ UNSCUCT PORTERSERSESTERE (ምዝግብ ማስታወሻዎች)
   enable: የተቀናጁ አቋራጮችን (AHK)
   enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
   reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
+  readonly_tooltip: ይህ የተነበበ ብቻ አቋራጭ ነው
 inProgress: በሂደት ላይ...
 open: ክፈት
 cancel: ይቅር
@@ -207,8 +212,6 @@ vd:
     native: ተወላጅ
   disabled_windows_version: ቤተኛ ምናባዊ ዴስክቶፕ ስትራቴጂ ለዊንዶውስ ስሪትዎ አይገኝም.
 save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
-beta_channel:
-  enable: የቤታ ጣቢያን ያንቁ (በጊትብሎክ ብቻ)
 monitors_configurations:
   label: ይቆጣጠሩ {{አው.ፊ.}}}}
 wall:
@@ -229,3 +232,6 @@ inherit: ውርስ
 close: ገጠመ
 update:
   available: ዝመና ይገኛል!
+  downloading: ማውረድ ...
+  channel: ጣቢያውን አዘምን
+miscellaneous: ልዩነቶች

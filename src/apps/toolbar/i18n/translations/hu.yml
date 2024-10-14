@@ -34,3 +34,5 @@ placeholder:
   open_user_folder: Nyissa meg a felhasználói mappát
   notifications: Értesítések
 unlabelled_tray: Jelöletlen tálca ikon
+context_menu:
+  remove: Távolítsa el az elemet

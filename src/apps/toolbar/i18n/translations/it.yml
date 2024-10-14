@@ -34,3 +34,5 @@ placeholder:
   open_system_tray: Vassoio di sistema aperto
   notifications: Notifiche
 unlabelled_tray: Icona del vassoio senza etichetta
+context_menu:
+  remove: Rimuovere l'articolo

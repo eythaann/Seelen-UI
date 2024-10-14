@@ -193,9 +193,14 @@ shortcuts:
     restore_sizes: Obnoviť veľkosti
     switch_workspace_0: Prepnite na pracovný priestor 1
     switch_workspace_1: Prepnite na pracovný priestor 2
+    misc_open_settings: Otvorené nastavenia
+    misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
+    misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
+    toggle_launcher: Bludník
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
   reset: Reset na predvolené hodnoty
+  readonly_tooltip: Toto je skratka iba na čítanie
 inProgress: Prebieha ...
 loading: Načítava...
 open: OTVORENÉ
@@ -212,8 +217,6 @@ vd:
     Natívna virtuálna stolná stratégia nie je k dispozícii pre vašu verziu
     systému Windows.
 save_and_restart: Uložiť a reštartovať
-beta_channel:
-  enable: Povoliť beta kanál (iba prostredníctvom GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -234,3 +237,6 @@ inherit: Zdediť
 close: Zatvoriť
 update:
   available: Aktualizácia k dispozícii!
+  downloading: Sťahovanie ...
+  channel: Kanál
+miscellaneous: Rôznorodý

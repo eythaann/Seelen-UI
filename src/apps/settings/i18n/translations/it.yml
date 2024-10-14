@@ -193,11 +193,16 @@ shortcuts:
     move_to_workspace_7: Passa all'area di lavoro 7
     switch_workspace_0: Passa all'area di lavoro 1
     switch_workspace_1: Passa all'area di lavoro 2
+    misc_toggle_win_event_tracing: Taggle Win Event Tracing (Logs)
+    misc_open_settings: Impostazioni aperte
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Attiva il tracciamento del blocco (tronchi)
   enable: Abilita scorciatoie integrate (AHK)
   enable_tooltip: >-
     Disabilita se implementerai i tuoi collegamenti utilizzando l'API Core
     Seelen
   reset: Ripristina le impostazioni predefinite
+  readonly_tooltip: Questo è un collegamento di sola lettura
 delete: Eliminare
 inProgress: In corso...
 open: Aprire
@@ -214,8 +219,6 @@ vd:
     La strategia desktop virtuale nativa non è disponibile per la versione di
     Windows.
 save_and_restart: Salva e riavvia
-beta_channel:
-  enable: Abilita Beta Channel (solo tramite GitHub)
 monitors_configurations:
   label: Monitor {{indice}}
 wall:
@@ -236,3 +239,6 @@ more: Di più
 close: Esci
 update:
   available: Aggiornamento disponibile!
+  downloading: Download ...
+  channel: Canale di aggiornamento
+miscellaneous: Varie

@@ -5,6 +5,7 @@ import {
   SeelenWallSettings,
   SeelenWegSettings,
   UIColors,
+  UpdateChannel,
   VirtualDesktopStrategy,
 } from 'seelen-core';
 
@@ -47,12 +48,22 @@ const initialState: RootState = {
   colors: UIColors.default(),
   wallpaper: null,
   virtualDesktopStrategy: VirtualDesktopStrategy.Native,
-  betaChannel: false,
+  updater: {
+    channel: UpdateChannel.Release,
+  },
 };
 
 function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {
   return (state: S, action: A) => {
     (state as RootState).toBeSaved = true;
+    return fn(state, action);
+  };
+}
+
+function toBeSavedAndRestarted<S, A, R>(fn: (state: S, action: A) => R) {
+  return (state: S, action: A) => {
+    (state as RootState).toBeSaved = true;
+    (state as RootState).toBeRestarted = true;
     return fn(state, action);
   };
 }
@@ -71,18 +82,14 @@ export const RootSlice = createSlice({
     setWall: toBeSaved(reducers.setWall),
     setLauncher: toBeSaved(reducers.setLauncher),
     setDevTools: toBeSaved(reducers.setDevTools),
-    setBetaChannel: toBeSaved(reducers.setBetaChannel),
+    setUpdater: toBeSavedAndRestarted(reducers.setUpdater),
     setMonitors: toBeSaved(reducers.setMonitors),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       state.toBeSaved = true;
       i18n.changeLanguage(action.payload);
     },
-    setVirtualDesktopStrategy: (state, action: PayloadAction<VirtualDesktopStrategy>) => {
-      state.toBeSaved = true;
-      state.toBeRestarted = true;
-      state.virtualDesktopStrategy = action.payload;
-    },
+    setVirtualDesktopStrategy: toBeSavedAndRestarted(reducers.setVirtualDesktopStrategy),
     restoreToLastLoaded: (state) => {
       if (state.lastLoaded) {
         const toMaintain = pick(state, ['autostart', 'route', 'colors', 'lastLoaded']);

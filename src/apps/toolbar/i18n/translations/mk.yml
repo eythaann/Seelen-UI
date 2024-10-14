@@ -34,3 +34,5 @@ placeholder:
   ethernet_disconnected: Нема пристап до Интернет
   notifications: Известувања
 unlabelled_tray: Икона за обележување на послужавник
+context_menu:
+  remove: Отстранете ја ставката

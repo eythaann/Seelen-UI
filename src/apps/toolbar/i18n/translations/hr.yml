@@ -34,3 +34,5 @@ placeholder:
   bluetooth_devices: Bluetooth i uređaji
   notifications: Obavijesti
 unlabelled_tray: Ikona neobilježene ladice
+context_menu:
+  remove: Uklonite predmet

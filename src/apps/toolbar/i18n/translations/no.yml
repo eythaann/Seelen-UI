@@ -34,3 +34,5 @@ placeholder:
   open_user_folder: Åpne brukermappe
   notifications: Varsler
 unlabelled_tray: Umerket brettikon
+context_menu:
+  remove: Fjern varen

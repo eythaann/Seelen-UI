@@ -192,9 +192,14 @@ shortcuts:
     send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
     switch_workspace_0: Ажлын талбарт шилжих 1
     switch_workspace_1: Ажлын талбарт 2 руу шилжих
+    misc_toggle_win_event_tracing: Тогтмол үйл явдлын үеэр Togge To
+    toggle_launcher: Бурх
+    misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)
+    misc_open_settings: АВир танилцуулга
   enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
   enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
   reset: Үндсэндээ тохируулах
+  readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
 inProgress: Явагдаж байна ...
 delete: Эдгээх
 loading: Ачаалах ...
@@ -211,8 +216,6 @@ vd:
     Уугуул виртуал ширээний стратеги нь таны Windows хувилбарт ашиглах
     боломжгүй.
 save_and_restart: Хадгалах & дахин эхлүүлнэ үү
-beta_channel:
-  enable: Бета сувгийг идэвхжүүлэх (зөвхөн Github)
 monitors_configurations:
   label: Хяналт {{индекс}}
 wall:
@@ -233,3 +236,6 @@ insert: Оруулах
 close: Ойр дөхөм
 update:
   available: Шинэчлэх боломжтой!
+  downloading: Татаж авах ...
+  channel: Суваг шинэчлэх
+miscellaneous: Олон төрлийн

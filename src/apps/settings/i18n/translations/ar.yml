@@ -200,7 +200,12 @@ shortcuts:
     send_to_workspace_9: أرسل إلى مساحة العمل 9
     switch_workspace_1: التبديل إلى مساحة العمل 2
     switch_workspace_0: التبديل إلى مساحة العمل 1
+    misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)
+    misc_toggle_win_event_tracing: تبديل الفوز تتبع حدث (سجلات)
+    misc_open_settings: فتح الإعدادات
+    toggle_launcher: دبليو
   reset: إعادة ضبط على الافتراضات
+  readonly_tooltip: هذا اختصار للقراءة فقط
 vd:
   strategy:
     native: محلي
@@ -208,8 +213,6 @@ vd:
     label: استراتيجية سطح المكتب الظاهري
   disabled_windows_version: استراتيجية سطح المكتب الافتراضية الأصلية غير متوفرة لإصدار Windows الخاص بك.
 save_and_restart: حفظ وإعادة التشغيل
-beta_channel:
-  enable: تمكين قناة بيتا (فقط عبر جيثب)
 monitors_configurations:
   label: شاشة {{index}}
 wall:
@@ -230,3 +233,6 @@ inherit: ورث
 close: يغلق
 update:
   available: تحديث متاح!
+  channel: تحديث قناة
+  downloading: تنزيل ...
+miscellaneous: متنوع

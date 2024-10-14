@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_0: Anfon i Workpace 0
     switch_workspace_0: Newid i Workpace 1
     switch_workspace_1: Newid i Workpace 2
+    misc_open_settings: Gosodiadau Agored
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Olrhain clo togl (logiau)
+    misc_toggle_win_event_tracing: Olrhain Digwyddiad Win Toggle (Logiau)
   enable: Galluogi llwybrau byr integredig (AHK)
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan
     ddefnyddio API craidd Seelen
   reset: Ailosod i ddiffygion
+  readonly_tooltip: Llwybr byr darllen yn unig yw hwn
 inProgress: Ar y gweill...
 loading: Llwytho ...
 cancel: Chansliff
@@ -214,8 +219,6 @@ vd:
     Nid yw strategaeth bwrdd gwaith rhithwir brodorol ar gael ar gyfer eich
     fersiwn Windows.
 save_and_restart: Cadw ac Ailgychwyn
-beta_channel:
-  enable: Galluogi sianel beta (dim ond trwy github)
 monitors_configurations:
   label: Monitro {{mynegai}}
 wall:
@@ -236,3 +239,6 @@ insert: Mewnosodem
 close: Chaewch
 update:
   available: Diweddariad ar gael!
+  downloading: Lawrlwytho ...
+  channel: Diweddaru Sianel
+miscellaneous: Hamddenol

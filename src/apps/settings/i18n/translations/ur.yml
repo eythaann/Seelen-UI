@@ -192,11 +192,16 @@ shortcuts:
     move_to_workspace_2: ورک اسپیس 2 میں منتقل کریں
     switch_workspace_1: ورک اسپیس 2 پر سوئچ کریں
     switch_workspace_0: ورک اسپیس 1 پر سوئچ کریں
+    misc_open_settings: کھلی ترتیبات
+    toggle_launcher: ٹوگل
+    misc_toggle_lock_tracing: ٹوگل لاک ٹریسنگ (نوشتہ جات)
+    misc_toggle_win_event_tracing: ٹوگل ون ایونٹ ٹریسنگ (لاگ)
   enable_tooltip: >-
     اگر آپ سیلین کور API کا استعمال کرتے ہوئے اپنے شارٹ کٹ کو نافذ کریں گے تو
     غیر فعال کریں
   enable: مربوط شارٹ کٹ (اے ایچ کے) کو فعال کریں
   reset: ڈیفالٹس کو دوبارہ ترتیب دیں
+  readonly_tooltip: یہ صرف ایک پڑھنے والا شارٹ کٹ ہے
 inProgress: کام جاری ہے...
 save: محفوظ کریں
 delete: حذف کریں
@@ -211,8 +216,6 @@ vd:
     native: آبائی
   disabled_windows_version: آپ کے ونڈوز ورژن کے لئے دیسی ورچوئل ڈیسک ٹاپ حکمت عملی دستیاب نہیں ہے۔
 save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
-beta_channel:
-  enable: بیٹا چینل کو فعال کریں (صرف گٹھب کے ذریعے)
 monitors_configurations:
   label: مانیٹر {{انڈیکس}}
 wall:
@@ -233,3 +236,6 @@ more: زیادہ
 close: بند کریں
 update:
   available: تازہ کاری دستیاب!
+  channel: چینل کو اپ ڈیٹ کریں
+  downloading: ڈاؤن لوڈ کرنا ...
+miscellaneous: متفرق

@@ -193,9 +193,14 @@ shortcuts:
     send_to_workspace_3: Ibgħat lill-Ispazju tax-Xogħol 3
     switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 1
     switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 2
+    misc_toggle_win_event_tracing: Toggle Win Avveniment Traċċar (zkuk)
+    misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)
+    toggle_launcher: Toogle
+    misc_open_settings: Settings miftuħa
   enable: Enable Shortcuts Integrati (AHK)
   enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core
   reset: Irrisettja għal nuqqasijiet
+  readonly_tooltip: Din hija shortcut li jinqara biss
 loading: Tagħbija...
 inProgress: Fil-progress...
 cancel: Ikkanċella
@@ -212,8 +217,6 @@ vd:
     L-istrateġija tad-desktop virtwali indiġena mhix disponibbli għall-verżjoni
     tal-Windows tiegħek.
 save_and_restart: Issejvja u terġa 'tibda
-beta_channel:
-  enable: Enable Beta Channel (biss permezz ta 'Github)
 monitors_configurations:
   label: Monitor {{indiċi}}
 wall:
@@ -234,3 +237,6 @@ more: Aktar
 close: Viċin
 update:
   available: Aġġornament disponibbli!
+  channel: Aġġorna l-kanal
+  downloading: Tniżżil ...
+miscellaneous: Varji

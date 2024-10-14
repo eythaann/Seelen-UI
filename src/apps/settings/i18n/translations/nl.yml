@@ -193,11 +193,16 @@ shortcuts:
     focus_bottom: Focusbodem
     switch_workspace_0: Schakel over naar werkruimte 1
     switch_workspace_1: Schakel over naar werkruimte 2
+    toggle_launcher: Togele
+    misc_toggle_lock_tracing: Schakelvergrendeling traceren (logboeken)
+    misc_open_settings: Open instellingen
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (Logs)
   enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
   enable_tooltip: >-
     Schakel uit of u uw eigen snelkoppelingen implementeert met behulp van de
     Selen Core API
   reset: Reset naar standaardwaarden
+  readonly_tooltip: Dit is een alleen-lezen snelkoppeling
 quit: Ontslag nemen
 open: Open
 save: Redden
@@ -214,8 +219,6 @@ vd:
     Native Virtual Desktop -strategie is niet beschikbaar voor uw Windows
     -versie.
 save_and_restart: Opslaan en opnieuw opstarten
-beta_channel:
-  enable: Schakel Beta Channel in (alleen via GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ insert: Invoegen
 close: Dichtbij
 update:
   available: Update beschikbaar!
+  downloading: Downloaden ...
+  channel: Updatekanaal
+miscellaneous: Gemengd

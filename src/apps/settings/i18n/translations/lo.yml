@@ -194,9 +194,14 @@ shortcuts:
     focus_bottom: ໂຟກັສລຸ່ມ
     switch_workspace_1: ປ່ຽນໄປເຮັດ Workspace 2
     switch_workspace_0: ປ່ຽນໄປເຮັດວຽກ 1
+    misc_toggle_lock_tracing: Toggle Lock Tracing (ບັນທຶກ)
+    toggle_launcher: ກໍາຄ່າ
+    misc_open_settings: ເປີດການຕັ້ງຄ່າ
+    misc_toggle_win_event_tracing: Toggle WIN ການແຂ່ງຂັນເຫດການ (ບັນທຶກ)
   enable_tooltip: ປິດໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ Seelen Core Api
   enable: ເປີດໃຊ້ທາງລັດປະສົມປະສານ (ahk)
   reset: ຕັ້ງຄ່າຄືນໃຫມ່
+  readonly_tooltip: ນີ້ແມ່ນທາງລັດທີ່ອ່ານເທົ່ານັ້ນ
 cancel: ຍົກເລີກ
 loading: ກຳລັງໂຫລດ...
 delete: ລຶບ
@@ -211,8 +216,6 @@ vd:
     native: ຄົນພື້ນເມືອງ
   disabled_windows_version: ກົນລະຍຸດ virtual virtual ພື້ນເມືອງແມ່ນບໍ່ມີສໍາລັບ Windows ຂອງທ່ານ.
 save_and_restart: ບັນທຶກແລະ Restart
-beta_channel:
-  enable: ເປີດໃຊ້ຊ່ອງທາງເບຕ້າ (ພຽງແຕ່ຜ່ານ Github)
 monitors_configurations:
   label: Monitor {{{{ດັດສະນີ}}
 wall:
@@ -233,3 +236,6 @@ inherit: ມູນມໍລະດົກ
 close: ປິດ
 update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!
+  downloading: ການດາວໂຫລດ ...
+  channel: ຊ່ອງທາງການປັບປຸງ
+miscellaneous: ຫຼາຢ

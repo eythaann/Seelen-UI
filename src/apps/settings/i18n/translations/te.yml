@@ -193,11 +193,16 @@ shortcuts:
     focus_bottom: ఫోకస్ బాటమ్
     switch_workspace_0: వర్క్‌స్పేస్ 1 కి మారండి
     switch_workspace_1: వర్క్‌స్పేస్ 2 కి మారండి
+    misc_open_settings: సెట్టింగులు తెరవండి
+    misc_toggle_lock_tracing: లాక్ ట్రేసింగ్ (లాగ్‌లు) టోగుల్ చేయండి
+    misc_toggle_win_event_tracing: విన్ ఈవెంట్ ట్రేసింగ్ (లాగ్స్) ను టోగుల్ చేయండి
+    toggle_launcher: TOOGLE
   enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
   enable_tooltip: >-
     మీరు సీలెన్ కోర్ Apiని ఉపయోగించి మీ స్వంత సత్వరమార్గాలను అమలు చేస్తే
     నిలిపివేయండి
   reset: డిఫాల్ట్‌లకు రీసెట్ చేయండి
+  readonly_tooltip: ఇది చదవడానికి మాత్రమే సత్వరమార్గం
 loading: లోడ్...
 delete: తొలగించు
 open: తెరవండి
@@ -212,8 +217,6 @@ vd:
     seelen: సీలెన్
   disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం స్థానిక వర్చువల్ డెస్క్‌టాప్ వ్యూహం అందుబాటులో లేదు.
 save_and_restart: సేవ్ & పున art ప్రారంభించండి
-beta_channel:
-  enable: బీటా ఛానెల్‌ను ప్రారంభించండి (గితుబ్ ద్వారా మాత్రమే)
 monitors_configurations:
   label: మానిటర్ {{సూచిక}}
 wall:
@@ -234,3 +237,6 @@ more: మరిన్ని
 close: దగ్గరగా
 update:
   available: నవీకరణ అందుబాటులో ఉంది!
+  channel: ఛానెల్‌ను నవీకరించండి
+  downloading: డౌన్‌లోడ్ ...
+miscellaneous: ఇతరాలు

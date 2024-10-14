@@ -193,11 +193,16 @@ shortcuts:
     reserve_float: სარეზერვო float
     switch_workspace_1: გადადით სამუშაო ადგილებზე 2
     switch_workspace_0: გადადით სამუშაო ადგილებზე 1
+    misc_toggle_win_event_tracing: გადარიცხეთ მოიგეთ ღონისძიების კვალი (ჟურნალი)
+    misc_toggle_lock_tracing: ჩაკეტილი საკეტის კვალი (ჟურნალი)
+    misc_open_settings: ღია პარამეტრები
+    toggle_launcher: ტოგლი
   enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
   enable_tooltip: >-
     გამორთეთ, თუ თქვენ განახორციელებთ საკუთარ მალსახმობებს Seelen Core API– ს
     გამოყენებით
   reset: გადატვირთვა ნაგულისხმევებზე
+  readonly_tooltip: ეს არის მხოლოდ წაკითხული მალსახმობი
 save: Გადარჩენა
 inProgress: Პროგრესირებს...
 loading: Ჩატვირთვა...
@@ -214,8 +219,6 @@ vd:
     მშობლიური ვირტუალური დესკტოპის სტრატეგია არ არის ხელმისაწვდომი თქვენი
     Windows ვერსიისთვის.
 save_and_restart: შენახვა და გადატვირთვა
-beta_channel:
-  enable: ბეტა არხის ჩართვა (მხოლოდ Github- ის საშუალებით)
 monitors_configurations:
   label: მონიტორი {{ინდექსი}}
 wall:
@@ -236,3 +239,6 @@ inherit: მემკვიდრეობით მიღება
 close: ახლო
 update:
   available: განახლება ხელმისაწვდომია!
+  downloading: ჩამოტვირთვა ...
+  channel: განაახლეთ არხი
+miscellaneous: შერეული

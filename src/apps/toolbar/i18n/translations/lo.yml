@@ -34,3 +34,5 @@ placeholder:
   settings: ການຕັ້ງຄ່າດ່ວນ
   notifications: ແຈ້ງການ
 unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ
+context_menu:
+  remove: ເອົາລາຍການ

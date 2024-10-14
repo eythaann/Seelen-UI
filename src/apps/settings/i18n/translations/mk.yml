@@ -193,11 +193,16 @@ shortcuts:
     switch_workspace_3: Префрлете се на работниот простор 3
     switch_workspace_0: Префрлете се на работниот простор 1
     switch_workspace_1: Префрлете се на работниот простор 2
+    misc_toggle_lock_tracing: Следење на заклучување на заклучување (логови)
+    misc_toggle_win_event_tracing: Вклучување
+    toggle_launcher: Тогл
+    misc_open_settings: Отворете ги поставките
   enable_tooltip: >-
     Оневозможете ако ги имплементирате вашите сопствени кратенки со користење на
     API на Core Seelen
   enable: Овозможете интегрирани кратенки (AHK)
   reset: Ресетирајте се на стандардно
+  readonly_tooltip: Ова е кратенка само за читање
 inProgress: Во тек...
 delete: Избриши
 cancel: Откажи
@@ -214,8 +219,6 @@ vd:
     Домородната стратегија за виртуелна работна површина не е достапна за вашата
     верзија на Windows.
 save_and_restart: Зачувај и рестартирај
-beta_channel:
-  enable: Овозможете бета канал (само преку Github)
 monitors_configurations:
   label: Монитор {{индекс}}
 wall:
@@ -236,3 +239,6 @@ more: Повеќе
 close: Затвори
 update:
   available: Ажурирање достапно!
+  downloading: Преземање ...
+  channel: Ажурирање на каналот
+miscellaneous: Различни

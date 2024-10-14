@@ -34,3 +34,5 @@ placeholder:
   settings: Rychlé nastavení
   notifications: Oznámení
 unlabelled_tray: Ikona neznačené podnosy
+context_menu:
+  remove: Odebrat položku

@@ -192,11 +192,16 @@ shortcuts:
     reserve_right: حق رزرو
     switch_workspace_0: تغییر به فضای کاری 1
     switch_workspace_1: تغییر به فضای کاری 2
+    toggle_launcher: جنجال
+    misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)
+    misc_toggle_win_event_tracing: Toggle Win Tracing (سیاهههای مربوط)
+    misc_open_settings: تنظیمات باز
   enable_tooltip: >-
     اگر میانبرهای خود را با استفاده از API Seelen Core پیاده سازی خواهید کرد ،
     غیرفعال کنید
   enable: میانبرهای یکپارچه (AHK) را فعال کنید
   reset: تنظیم مجدد به پیش فرض
+  readonly_tooltip: این یک میانبر فقط خواندنی است
 inProgress: در حال پیش رفت...
 cancel: لغو کردن
 save: صرفه جویی
@@ -211,8 +216,6 @@ vd:
     native: بومی
   disabled_windows_version: استراتژی دسک تاپ مجازی بومی برای نسخه ویندوز شما در دسترس نیست.
 save_and_restart: ذخیره و راه اندازی مجدد
-beta_channel:
-  enable: کانال بتا را فعال کنید (فقط از طریق GitHub)
 monitors_configurations:
   label: مانیتور {{فهرست}}
 wall:
@@ -233,3 +236,6 @@ insert: درج کردن
 close: نزدیک
 update:
   available: بروزرسانی موجود!
+  channel: کانال
+  downloading: بارگیری ...
+miscellaneous: متفاوتی

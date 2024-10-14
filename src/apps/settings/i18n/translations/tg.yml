@@ -192,9 +192,14 @@ shortcuts:
     decrease_width: Пойафзол коҳиш диҳед
     switch_workspace_1: Гузариш ба корҳо 2
     switch_workspace_0: Гузариш ба Prowspace 1
+    misc_toggle_lock_tracing: Todge Cound Tracking (гузоришҳо)
+    misc_open_settings: Танзимоти кушода
+    misc_toggle_win_event_tracing: Гузариш ба ғолиб Tweacing (гузоришҳо)
+    toggle_launcher: Бачаҳо
   enable: Миёнабурҳои ҳамгирошударо фаъол созед (AHK)
   enable_tooltip: Агар шумо миёнабурҳои худро бо истифода аз Seelen Cear Secten истифода баред
   reset: Аз нав танзимкунии пешфарз
+  readonly_tooltip: Ин як миёнабурҳои ягона аст
 inProgress: Дар ҷараён...
 open: Кушодан
 save: Пул захира кардан
@@ -209,8 +214,6 @@ vd:
     label: Стратегияи кории корӣ
   disabled_windows_version: Стратегияи кории ватанӣ барои версияи Windows дастрас нест.
 save_and_restart: Наҷот ва бозоғоз
-beta_channel:
-  enable: Фаъолсозии канали бета (танҳо тавассути Github)
 monitors_configurations:
   label: Монитор {Индекс}}
 wall:
@@ -231,3 +234,6 @@ insert: Илова кардан
 close: Наздик
 update:
   available: Навсозӣ!
+  channel: Навсозӣ канал
+  downloading: Зеркашӣ кунед ...
+miscellaneous: Дигар

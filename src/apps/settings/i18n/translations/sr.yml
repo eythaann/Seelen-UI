@@ -193,11 +193,16 @@ shortcuts:
     move_to_workspace_1: Прелазак на радни простор 1
     switch_workspace_1: Пређите на радни простор 2
     switch_workspace_0: Пређите на радни простор 1
+    misc_toggle_win_event_tracing: Пребацивање тражења догађаја Вин (Дневци)
+    misc_open_settings: Отвори подешавања
+    toggle_launcher: Тоогле
+    misc_toggle_lock_tracing: Укључите тражење закључавања (трупци)
   enable_tooltip: >-
     Онемогућите ако ћете имплементирати сопствене пречице користећи СЕЕЛЕН ЦОРЕ
     АПИ
   enable: Омогућите интегрисане пречице (АХК)
   reset: Ресетујте на подразумеване вредности
+  readonly_tooltip: Ово је пречица само за читање
 quit: Одустати
 inProgress: У току...
 save: сачувати
@@ -214,8 +219,6 @@ vd:
     Изворна стратегија виртуелне радне површине није доступна за вашу Виндовс
     верзију.
 save_and_restart: Сачувај и поново покрените
-beta_channel:
-  enable: Омогући бета канал (само преко ГитХуб)
 monitors_configurations:
   label: Монитор {{Индек}}
 wall:
@@ -236,3 +239,6 @@ more: Више
 close: Затворити
 update:
   available: Ажурирање доступно!
+  downloading: Преузимање ...
+  channel: Ажурирај канал
+miscellaneous: Остало

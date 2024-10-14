@@ -6,9 +6,11 @@
 
 ### enhancements
 - improve open_file function to allow arguments.
+- allow to users select update channel between release, beta and nightly.
 
 ### fix
-- not getting icons directly from .lnk files
+- not getting icons directly from .lnk files.
+- users not recieving update notification on settings header.
 
 ## [2.0.0]
 ### breaking changes

@@ -34,3 +34,5 @@ placeholder:
   volume: Zväzok
   notifications: Oznámenia
 unlabelled_tray: Ikona neznačeného podnosu
+context_menu:
+  remove: Odstrániť

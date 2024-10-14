@@ -193,11 +193,16 @@ shortcuts:
     move_to_workspace_0: Μετακίνηση στο χώρο εργασίας 0
     switch_workspace_1: Μεταβείτε στο χώρο εργασίας 2
     switch_workspace_0: Μεταβείτε στο χώρο εργασίας 1
+    toggle_launcher: Τσούγκο
+    misc_toggle_lock_tracing: Εναλλαγή Lock Tracing (αρχεία καταγραφής)
+    misc_toggle_win_event_tracing: Εναλλαγή εντοπισμού συμβάντων Win (Logs)
+    misc_open_settings: Ανοίξτε τις ρυθμίσεις
   enable: Ενεργοποίηση ολοκληρωμένων συντομεύσεων (AHK)
   enable_tooltip: >-
     Απενεργοποιήστε εάν θα εφαρμόσετε τις δικές σας συντομεύσεις χρησιμοποιώντας
     το API Seelen Core
   reset: Επαναφορά σε προεπιλογές
+  readonly_tooltip: Αυτή είναι μια συντόμευση μόνο για ανάγνωση
 loading: Φόρτωση...
 inProgress: Σε εξέλιξη...
 cancel: Ματαίωση
@@ -214,8 +219,6 @@ vd:
     Η εγγενής στρατηγική εικονικής επιφάνειας εργασίας δεν είναι διαθέσιμη για
     την έκδοση των Windows.
 save_and_restart: Αποθήκευση & επανεκκίνηση
-beta_channel:
-  enable: Ενεργοποίηση βήτα καναλιού (μόνο μέσω GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ insert: Εισάγω
 close: Κοντά
 update:
   available: Διαθέσιμη ενημέρωση!
+  channel: Κανάλι ενημέρωσης
+  downloading: Λήψη ...
+miscellaneous: Ανάμικτος

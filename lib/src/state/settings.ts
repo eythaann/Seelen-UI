@@ -55,6 +55,16 @@ export class SeelenLauncherSettings {
   runners: SeelenLauncherRunner[] = [];
 }
 
+export enum UpdateChannel {
+  Release = 'Release',
+  Beta = 'Beta',
+  Nightly = 'Nightly',
+}
+
+export class UpdaterSettings {
+  channel: UpdateChannel = UpdateChannel.Nightly;
+}
+
 export class Settings extends Obtainable<Settings>(
   SeelenCommand.StateGetSettings,
   SeelenEvent.StateSettingsChanged,
@@ -73,7 +83,7 @@ export class Settings extends Obtainable<Settings>(
   language: string = '';
   dateFormat: string = 'ddd D MMM, hh:mm A';
   virtualDesktopStrategy: VirtualDesktopStrategy = VirtualDesktopStrategy.Native;
-  betaChannel: boolean = false;
+  updater: UpdaterSettings = new UpdaterSettings();
 }
 
 export class FancyToolbarSettings {

@@ -202,7 +202,12 @@ shortcuts:
     send_to_workspace_9: Enviar para o espaço de trabalho 9
     switch_workspace_0: Mudar para o espaço de trabalho 1
     switch_workspace_1: Mudar para o espaço de trabalho 2
+    misc_open_settings: Abra as configurações
+    misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
+    toggle_launcher: Toogle
+    misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
   reset: Redefinir para padrões
+  readonly_tooltip: Este é um atalho somente leitura
 vd:
   strategy:
     native: Nativa
@@ -212,8 +217,6 @@ vd:
     A estratégia de desktop virtual nativa não está disponível para sua versão
     do Windows.
 save_and_restart: Salve e reinicie
-beta_channel:
-  enable: Ativar canal beta (apenas via github)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -234,3 +237,6 @@ inherit: Herdar
 close: Fechar
 update:
   available: Atualização disponível!
+  channel: Atualizar canal
+  downloading: Download ...
+miscellaneous: Variada

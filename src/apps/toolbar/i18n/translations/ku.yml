@@ -34,3 +34,5 @@ placeholder:
   battery_remaining: '% mayî'
   notifications: Notifications
 unlabelled_tray: Îkonê tray a bêpergal
+context_menu:
+  remove: Tiştê rakirin

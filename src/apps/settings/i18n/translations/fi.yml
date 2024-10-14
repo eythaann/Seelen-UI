@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_3: Lähetä työtilaan 3
     switch_workspace_1: Vaihda työtilaan 2
     switch_workspace_0: Vaihda työtilaan 1
+    misc_open_settings: Avaa asetukset
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)
+    misc_toggle_win_event_tracing: Vaihda Win Win Event Tracing (lokit)
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
     -sovellusliittymällä
   enable: Ota integroidut pikakuvakkeet käyttöön (AHK)
   reset: Palauta laiminlyöntiin
+  readonly_tooltip: Tämä on vain luku-pikakuvake
 inProgress: Käynnissä...
 delete: Poistaa
 quit: Lopettaa
@@ -214,8 +219,6 @@ vd:
     Alkuperäinen virtuaalinen työpöytästrategia ei ole käytettävissä Windows
     -versiollesi.
 save_and_restart: Tallenna ja käynnistä uudelleen
-beta_channel:
-  enable: Ota beetakanava käyttöön (vain GitHubin kautta)
 monitors_configurations:
   label: Monitor {{hakemisto}}
 wall:
@@ -236,3 +239,6 @@ insert: Lisätä
 close: Lähellä
 update:
   available: Päivitä saatavilla!
+  downloading: Lataaminen ...
+  channel: Päivityskanava
+miscellaneous: Sekalainen

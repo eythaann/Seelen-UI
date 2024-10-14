@@ -193,9 +193,14 @@ shortcuts:
     send_to_workspace_3: Nosūtīt uz darbvietu 3
     switch_workspace_0: Pārslēdzieties uz 1. darbvietu
     switch_workspace_1: Pārslēdzieties uz darbvietu 2
+    misc_toggle_lock_tracing: Pārslēdziet slēdzenes izsekošanu (baļķi)
+    misc_open_settings: Atvērti iestatījumi
+    misc_toggle_win_event_tracing: Pārslēdziet uzvaru notikumu izsekošanu (žurnāli)
+    toggle_launcher: Toogle
   enable: Iespējot integrētus saīsnes (AHK)
   enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
   reset: Atiestatīt uz noklusējuma
+  readonly_tooltip: Tas ir tikai lasāms saīsne
 delete: Dzēst
 cancel: Atcelt
 loading: Iekraušana ...
@@ -210,8 +215,6 @@ vd:
     native: Vietējais
   disabled_windows_version: Vietējā virtuālā darbvirsmas stratēģija nav pieejama jūsu Windows versijai.
 save_and_restart: Saglabāt un restartēt
-beta_channel:
-  enable: Iespējot beta kanālu (tikai caur github)
 monitors_configurations:
   label: Monitors {{indekss}}
 wall:
@@ -232,3 +235,6 @@ more: Vairāk
 close: Tuvs
 update:
   available: Pieejams atjauninājums!
+  channel: Atjaunināt kanālu
+  downloading: Lejupielāde ...
+miscellaneous: Dažāds

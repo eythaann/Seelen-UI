@@ -192,11 +192,16 @@ shortcuts:
     move_to_workspace_6: Move to Workspace 6
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_0: Switch to Workspace 1
+    misc_open_settings: Mîhengên vekirî
+    toggle_launcher: Tox kirin
+    misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
   enable: Kurtefîlmên entegre (AHK) çalak bikin
   enable_tooltip: >-
     Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh
     bikin
   reset: Reset to Default
+  readonly_tooltip: Ev kurteyek xwendinê ye
 cancel: Bişûndekirin
 inProgress: Ez teslîm nabim...
 quit: Devjêberdan
@@ -211,8 +216,6 @@ vd:
     label: Stratejiya Desktop Virtual
   disabled_windows_version: Stratejiya Desktop ya Native ya Native ji bo guhertoya weya Windows-ê nabe.
 save_and_restart: Save & Restart
-beta_channel:
-  enable: Channel Beta (tenê bi rêya Github) çalak bikin)
 monitors_configurations:
   label: Monitor {{Index-}
 wall:
@@ -233,3 +236,6 @@ more: Zêde
 close: Nêzîkî
 update:
   available: Nûvekirin!
+  downloading: Daxistin ...
+  channel: Kanala Nûve
+miscellaneous: Lihevket

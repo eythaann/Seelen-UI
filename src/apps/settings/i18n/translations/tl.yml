@@ -194,11 +194,16 @@ shortcuts:
     send_to_workspace_3: Ipadala sa Workspace 3
     switch_workspace_1: Lumipat sa Workspace 2
     switch_workspace_0: Lumipat sa Workspace 1
+    misc_open_settings: Buksan ang mga setting
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (log)
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Toggle lock tracing (log)
   enable_tooltip: >-
     Huwag paganahin kung ipatutupad mo ang iyong sariling mga shortcut gamit ang
     Seelen Core API
   enable: Paganahin ang Integrated Shortcut (AHK)
   reset: I -reset sa mga default
+  readonly_tooltip: Ito ay isang shortcut na basahin lamang
 inProgress: Sa pag -unlad ...
 delete: Tanggalin
 loading: Naglo -load ...
@@ -215,8 +220,6 @@ vd:
     Ang diskarte ng katutubong virtual desktop ay hindi magagamit para sa iyong
     bersyon ng Windows.
 save_and_restart: I -save at i -restart
-beta_channel:
-  enable: Paganahin ang Beta Channel (sa pamamagitan lamang ng Github)
 monitors_configurations:
   label: Subaybayan {{index}}
 wall:
@@ -237,3 +240,6 @@ inherit: Magmana
 close: Malapit
 update:
   available: Mag -update Magagamit!
+  downloading: Pag -download ...
+  channel: I -update ang channel
+miscellaneous: Miscellaneous

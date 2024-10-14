@@ -191,9 +191,14 @@ shortcuts:
     reserve_left: Reserve osi
     switch_workspace_1: Yipada si ibi-iṣẹ 2
     switch_workspace_0: Yipada si ibi-iṣẹ 1
+    toggle_launcher: Home
+    misc_open_settings: Ṣi Eto
+    misc_toggle_win_event_tracing: Tongo Win Iṣẹlẹ iṣẹlẹ (awọn àkọọlẹ)
+    misc_toggle_lock_tracing: Titiipa titiipa (awọn àkọọlẹ)
   enable: Mu awọn ọna abuja ti o sopọ mọ (Ahk)
   enable_tooltip: Muu Ti o ba yoo ṣe awọn ọna abuja tirẹ nipa lilo APEN mojuto API
   reset: Tun si awọn aseku
+  readonly_tooltip: Eyi jẹ ọna abuja-kika
 delete: Paarẹ
 cancel: Fagilee
 save: Fipamọ
@@ -208,8 +213,6 @@ vd:
     native: Ọmọ ibilẹ ọkunrin
   disabled_windows_version: Abitabi Ojú-iṣẹ Ọmọ-iṣẹ abinibi ko wa fun ẹya Windows rẹ.
 save_and_restart: Fipamọ & Tun bẹrẹ
-beta_channel:
-  enable: Jeki ikanni Beta (Nikan nipasẹ Gittib)
 monitors_configurations:
   label: Adirẹsi {{Ṣe atọka}}
 wall:
@@ -230,3 +233,6 @@ insert: Fisi
 close: Sunmọ
 update:
   available: Imudojuiwọn wa!
+  downloading: Gbigba lati ayelujara ...
+  channel: Ohun elo imudojuiwọn
+miscellaneous: Oriṣiriṣi

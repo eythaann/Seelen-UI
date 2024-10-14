@@ -193,9 +193,14 @@ shortcuts:
     reserve_float: Reservéiert Float
     switch_workspace_1: Schalt op Aarbechtsberäich 2
     switch_workspace_0: Schalt op Aarbechtsberäich 1
+    misc_open_settings: Oppen Astellungen
+    misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
+    toggle_launcher: Zänn
+    misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
   enable: Aktivéiert integréiert Ofkiirzungen (AHK)
   enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
   reset: Reset op Defaults
+  readonly_tooltip: Dëst ass e Lies-nëmme Mangel
 inProgress: A Beaarbechtung...
 loading: Lueden ...
 open: Ëmen e gratis
@@ -212,8 +217,6 @@ vd:
     Gebierteg virtuell Desktop Strategie ass net fir Är Windows Versioun
     verfügbar.
 save_and_restart: Spuert & nei starten
-beta_channel:
-  enable: Aktivéiert Beta Kanal (nëmmen iwwer Github)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -234,3 +237,6 @@ inherit: Ontherrit
 close: Zoumaachen
 update:
   available: Update verfügbar!
+  channel: Update Kanal
+  downloading: NËMMEN ...
+miscellaneous: Erleeën

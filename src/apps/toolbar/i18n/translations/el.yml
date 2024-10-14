@@ -34,3 +34,5 @@ placeholder:
   ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο
   notifications: Ειδοποιήσεις
 unlabelled_tray: Εικονίδιο δίσκων χωρίς
+context_menu:
+  remove: Αφαιρέστε το αντικείμενο

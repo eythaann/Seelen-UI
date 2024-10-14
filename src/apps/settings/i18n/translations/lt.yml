@@ -193,9 +193,14 @@ shortcuts:
     focus_bottom: Fokusavimo dugnas
     switch_workspace_1: Perjunkite į 2 darbo vietą
     switch_workspace_0: Perjunkite į 1 darbo vietą
+    misc_open_settings: Atidaryti nustatymai
+    misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
   enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus
+  readonly_tooltip: Tai tik skaitomas nuoroda
 delete: Ištrinti
 open: Atviras
 save: Sutaupyti
@@ -210,8 +215,6 @@ vd:
     label: Virtuali darbalaukio strategija
   disabled_windows_version: Natūralios virtualios darbalaukio strategijos nėra jūsų „Windows“ versijai.
 save_and_restart: Išsaugokite ir paleiskite iš naujo
-beta_channel:
-  enable: Įgalinti beta kanalą (tik per „GitHub“)
 monitors_configurations:
   label: Monitorius {{index}}
 wall:
@@ -232,3 +235,6 @@ more: Daugiau
 close: Uždaryti
 update:
   available: Galima atnaujinti!
+  downloading: Atsisiuntimas ...
+  channel: Atnaujinkite kanalą
+miscellaneous: Įvairūs

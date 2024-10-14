@@ -193,9 +193,14 @@ shortcuts:
     focus_top: Focus Top
     switch_workspace_1: Aldatu Workspace 2ra
     switch_workspace_0: Aldatu lan-eremura 1
+    misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
+    toggle_launcher: Tooogle
+    misc_open_settings: Ezarpenak irekitzea
+    misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
   enable: Gaitu lasterbide integratuak (Ahk)
   enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
   reset: Berrezarri lehenetsitakoak
+  readonly_tooltip: Hau irakurtzeko lasterbidea da
 cancel: Indargabetu
 quit: Laga
 delete: Ezabatu
@@ -212,8 +217,6 @@ vd:
     Mahaigaineko estrategia birtuala ez dago erabilgarri zure Windows
     bertsiorako.
 save_and_restart: Gorde eta berrabiarazi
-beta_channel:
-  enable: Gaitu beta kanala (GitHub bidez bakarrik)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -234,3 +237,6 @@ more: Gehiago
 close: Hurbileko
 update:
   available: Eguneratu eskuragarri!
+  downloading: Deskargatzen ...
+  channel: Eguneratu kanala
+miscellaneous: Heterogeneo

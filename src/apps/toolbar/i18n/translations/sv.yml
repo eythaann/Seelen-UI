@@ -34,3 +34,5 @@ placeholder:
   smart_charge: '- Smart laddning'
   notifications: Meddelanden
 unlabelled_tray: Omärkta fackikon
+context_menu:
+  remove: Ta bort objektet

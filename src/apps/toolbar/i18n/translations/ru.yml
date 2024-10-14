@@ -29,8 +29,10 @@ placeholder:
   ethernet_connected: Сеть
   ethernet_disconnected: Нет сети
   volume: Громкость
-  battery_remaining: 'Осталось %'
+  battery_remaining: Осталось %
   smart_charge: '- Умная зарядка'
   settings: Быстрые настройки
   notifications: Уведомления
 unlabelled_tray: Иконка трея без надписи
+context_menu:
+  remove: Удалить предмет

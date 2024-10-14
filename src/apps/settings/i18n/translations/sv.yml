@@ -193,11 +193,16 @@ shortcuts:
     focus_right: Fokusera rätt
     switch_workspace_0: Byt till arbetsyta 1
     switch_workspace_1: Byt till arbetsyta 2
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (loggar)
+    misc_open_settings: Öppna inställningar
+    toggle_launcher: Togna
+    misc_toggle_lock_tracing: TOGGLE LOCK TRACING (loggar)
   enable: Aktivera integrerade genvägar (AHK)
   enable_tooltip: >-
     Inaktivera om du kommer att implementera dina egna genvägar med Seelen Core
     API
   reset: Återställas till standardvärden
+  readonly_tooltip: Detta är en skrivskyddad genväg
 loading: Läser in...
 quit: Sluta
 delete: Radera
@@ -214,8 +219,6 @@ vd:
     Native Virtual Desktop Strategy är inte tillgänglig för din Windows
     -version.
 save_and_restart: Spara och starta om
-beta_channel:
-  enable: Aktivera betakanal (endast via GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -236,3 +239,6 @@ insert: Infoga
 close: Nära
 update:
   available: Uppdatering tillgänglig!
+  channel: Uppdateringskanal
+  downloading: Nedladdning ...
+miscellaneous: Diverse

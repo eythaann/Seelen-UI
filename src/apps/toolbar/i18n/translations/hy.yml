@@ -34,3 +34,5 @@ placeholder:
   smart_charge: '- Խելացի վճար'
   notifications: Ծանուցումներ
 unlabelled_tray: Unlabelled Tray Icon
+context_menu:
+  remove: Հեռացրեք կետը

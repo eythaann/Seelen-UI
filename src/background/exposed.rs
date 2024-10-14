@@ -6,7 +6,6 @@ use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
 use crate::hook::HookManager;
-use crate::log_error;
 use crate::modules::input::Keyboard;
 use crate::modules::virtual_desk::get_vd_manager;
 use crate::seelen::{get_app_handle, Seelen};
@@ -21,6 +20,7 @@ use crate::system::brightness::*;
 use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
 use crate::windows_api::WindowsApi;
 use crate::winevent::{SyntheticFullscreenData, WinEvent};
+use crate::{log_error, utils};
 
 use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
@@ -144,6 +144,22 @@ fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Resul
     Ok(())
 }
 
+#[tauri::command(async)]
+async fn check_for_updates() -> Result<bool> {
+    Ok(utils::updater::check_for_updates().await?.is_some())
+}
+
+#[tauri::command(async)]
+async fn install_last_available_update() -> Result<()> {
+    let update = utils::updater::check_for_updates()
+        .await?
+        .ok_or("There is no update available")?;
+    utils::updater::trace_update_intallation(update).await?;
+    get_app_handle().restart();
+    #[allow(unreachable_code)]
+    Ok(())
+}
+
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
     app_builder.invoke_handler(tauri::generate_handler![
         // General
@@ -160,6 +176,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_icon,
         get_system_colors,
         simulate_fullscreen,
+        check_for_updates,
+        install_last_available_update,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,

@@ -193,9 +193,14 @@ shortcuts:
     move_to_workspace_9: Přesuňte se do pracovního prostoru 9
     switch_workspace_1: Přepněte do pracovního prostoru 2
     switch_workspace_0: Přepněte do pracovního prostoru 1
+    toggle_launcher: Toogle
+    misc_toggle_lock_tracing: Tracing Lock Tracing (protokoly)
+    misc_toggle_win_event_tracing: Tracing události vítězství na přepínání (protokoly)
+    misc_open_settings: Otevřené nastavení
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
   reset: Resetovat na výchozí hodnoty
+  readonly_tooltip: Toto je zkratka pouze pro čtení
 cancel: zrušení
 delete: Vymazat
 loading: Načítání...
@@ -212,8 +217,6 @@ vd:
     Nativní strategie virtuálních stolních počítačů není pro vaši verzi Windows
     k dispozici.
 save_and_restart: Uložit a restartovat
-beta_channel:
-  enable: Povolit beta kanál (pouze přes GitHub)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -234,3 +237,6 @@ more: Více
 close: Blízko
 update:
   available: Aktualizace k dispozici!
+  downloading: Stahování ...
+  channel: Aktualizovat kanál
+miscellaneous: Smíšený

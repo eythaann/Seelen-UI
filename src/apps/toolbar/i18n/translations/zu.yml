@@ -34,3 +34,5 @@ placeholder:
   ethernet_disconnected: Akukho ukufinyelela kwe-inthanethi
   notifications: Izaziso
 unlabelled_tray: Isithonjana se-tray esingafundile
+context_menu:
+  remove: Susa into

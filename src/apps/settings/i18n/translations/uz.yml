@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_0: Ish maydoni 0 ga yuboring
     switch_workspace_0: Ish maydoni 1 ga o'tish
     switch_workspace_1: Ish maydoni 2-ga o'ting
+    misc_open_settings: Ochiq sozlamalar
+    misc_toggle_lock_tracing: Qulfni qaytarish (jurnallar)
+    toggle_launcher: Rang-barogle
+    misc_toggle_win_event_tracing: Tap The The The The Trecing (jurnallar)
   enable: Birlashtirilgan yorliqlarni yoqish (AHK)
   enable_tooltip: >-
     Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
     o'chiring
   reset: Standartlarga qayta o'rnating
+  readonly_tooltip: Bu faqat o'qish faqat yorliqidir
 inProgress: Jarayonda...
 open: Ochiq
 save: Tejash
@@ -214,8 +219,6 @@ vd:
     National Virtual ish strategiya strategiyasi Windows versiyangiz uchun
     mavjud emas.
 save_and_restart: Saqlang va qayta yoqing
-beta_channel:
-  enable: Beta kanalini yoqing (faqat gitub orqali)
 monitors_configurations:
   label: '{{Indeks}}'
 wall:
@@ -236,3 +239,6 @@ insert: Qo'shmoq
 close: Yaqin
 update:
   available: Yangilanish mavjud!
+  channel: Kanalni yangilash
+  downloading: Yuklab olish ...
+miscellaneous: Har xil

@@ -193,11 +193,16 @@ shortcuts:
     reserve_top: রিজার্ভ শীর্ষ
     switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
     switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
+    misc_open_settings: ওপেন সেটিংস
+    toggle_launcher: টোগল
+    misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)
+    misc_toggle_win_event_tracing: টগল উইন ইভেন্ট ট্রেসিং (লগস)
   enable_tooltip: >-
     আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
     অক্ষম করুন
   enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
   reset: ডিফল্টে পুনরায় সেট করুন
+  readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
 inProgress: চলমান...
 cancel: বাতিল
 delete: মুছে ফেলা
@@ -212,8 +217,6 @@ vd:
     label: ভার্চুয়াল ডেস্কটপ কৌশল
   disabled_windows_version: নেটিভ ভার্চুয়াল ডেস্কটপ কৌশল আপনার উইন্ডোজ সংস্করণের জন্য উপলব্ধ নয়।
 save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
-beta_channel:
-  enable: বিটা চ্যানেল সক্ষম করুন (কেবল গিটহাবের মাধ্যমে)
 monitors_configurations:
   label: '{{সূচক}} মনিটর'
 wall:
@@ -234,3 +237,6 @@ more: আরও
 close: বন্ধ
 update:
   available: আপডেট উপলব্ধ!
+  channel: আপডেট চ্যানেল
+  downloading: ডাউনলোড ...
+miscellaneous: বিবিধ

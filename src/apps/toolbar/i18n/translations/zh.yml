@@ -34,3 +34,5 @@ placeholder:
   settings: 快速设置
   notifications: 通知
 unlabelled_tray: 未标记的托盘图标
+context_menu:
+  remove: 删除项目

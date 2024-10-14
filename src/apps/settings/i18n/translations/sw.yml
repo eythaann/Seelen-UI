@@ -191,9 +191,14 @@ shortcuts:
     move_to_workspace_9: Hoja kwa nafasi ya kazi 9
     switch_workspace_1: Badilika kwenye nafasi ya kazi 2
     switch_workspace_0: Badilika kwenye nafasi ya kazi 1
+    misc_open_settings: Mipangilio ya Fungua
+    misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
+    misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
+    toggle_launcher: Toogle
   enable: Wezesha njia za mkato zilizojumuishwa (AHK)
   enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
   reset: Rudisha kwa defaults
+  readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
 inProgress: Inaendelea...
 loading: Inapakia ...
 delete: Futa
@@ -208,8 +213,6 @@ vd:
     native: Mzaliwa
   disabled_windows_version: Mkakati wa asili wa desktop haupatikani kwa toleo lako la Windows.
 save_and_restart: Okoa na uanze tena
-beta_channel:
-  enable: Wezesha Kituo cha Beta (kupitia GitHub tu)
 monitors_configurations:
   label: Monitor {{index}}
 wall:
@@ -230,3 +233,6 @@ insert: Ingiza
 close: Karibu
 update:
   available: Sasisha inapatikana!
+  downloading: Kupakua ...
+  channel: Sasisha kituo
+miscellaneous: Miscellaneous

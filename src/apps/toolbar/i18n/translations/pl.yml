@@ -34,3 +34,5 @@ placeholder:
   open_system_tray: Otwórz tacę systemową
   notifications: Powiadomienia
 unlabelled_tray: Ikona nieznakowanej tacki
+context_menu:
+  remove: Usuń element

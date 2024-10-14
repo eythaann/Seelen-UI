@@ -190,9 +190,14 @@ shortcuts:
     send_to_workspace_7: ワークスペース7に送信
     switch_workspace_0: ワークスペースに切り替えます1
     switch_workspace_1: ワークスペースに切り替えます2
+    toggle_launcher: トゥーグル
+    misc_toggle_win_event_tracing: トグルウィンイベントトレース（ログ）
+    misc_toggle_lock_tracing: トグルロックトレース（ログ）
+    misc_open_settings: 設定を開く
   enable: AutoHotkeyを使用した統合ショートカットを有効にする
   enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください
   reset: デフォルトにリセットします
+  readonly_tooltip: これは読み取り専用のショートカットです
 delete: 消去
 loading: 読み込み中...
 inProgress: 近日実装予定...
@@ -207,8 +212,6 @@ vd:
     seelen: シーレン
   disabled_windows_version: Windowsバージョンでは、ネイティブの仮想デスクトップ戦略は利用できません。
 save_and_restart: 保存して再起動します
-beta_channel:
-  enable: ベータチャネルを有効にする（Github経由のみ）
 monitors_configurations:
   label: モニター{{index}}
 wall:
@@ -229,3 +232,6 @@ inherit: 継承
 close: 近い
 update:
   available: 更新が利用可能です！
+  downloading: ダウンロード...
+  channel: チャネルを更新します
+miscellaneous: その他

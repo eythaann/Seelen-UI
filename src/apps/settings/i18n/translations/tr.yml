@@ -24,8 +24,8 @@ start:
   message: >-
     Seelen UI'a hoş geldiniz, Windows 11 deneyiminizi geliştirmek için entegre
     bir döşeme pencere yöneticisi ile en iyi masaüstü ortamı! Kullanıcı dostu
-    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevlerde
-    yeni bir çağı keşfedin.
+    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevlerde yeni
+    bir çağı keşfedin.
 general:
   theme:
     description: Açıklama
@@ -130,9 +130,9 @@ apps_configurations:
   search: Ara
   import: İçe Aktar
   bundled_msg: >-
-    Bu paketlenmiş yapılandırmalar düzenlenemez ve özelleştirme olmadan size
-    en iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları
-    sizin için otomatik olarak yapılandırır.
+    Bu paketlenmiş yapılandırmalar düzenlenemez ve özelleştirme olmadan size en
+    iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları sizin için
+    otomatik olarak yapılandırır.
   delete: Sil
   new: Yeni
   bundled_title: Seelen ile Birlikte Gelen Uygulama Yapılandırması
@@ -193,11 +193,16 @@ shortcuts:
     switch_workspace_5: Çalışma Alanı 6'ya Geç
     switch_workspace_0: Çalışma Alanı 1'e Geç
     switch_workspace_1: Çalışma Alanı 2'ye Geç
+    misc_open_settings: Ayarlar Aç
+    misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
+    misc_toggle_lock_tracing: Kilit izleme (kütükler)
+    toggle_launcher: Toogle
   enable_tooltip: >-
-    Seelen Core API kullanarak kendi kısayollarınızı uygulayacaksanız devre
-    dışı bırakın
+    Seelen Core API kullanarak kendi kısayollarınızı uygulayacaksanız devre dışı
+    bırakın
   enable: Entegre Kısayolları Etkinleştir (ahk)
   reset: Varsayılanlara Sıfırla
+  readonly_tooltip: Bu salt okunur bir kısayol
 cancel: İptal Et
 inProgress: Devam Ediyor...
 loading: Yükleniyor...
@@ -212,8 +217,6 @@ vd:
     label: Sanal Masaüstü Stratejisi
   disabled_windows_version: Yerli Sanal Masaüstü Stratejisi Windows sürümünüz için mevcut değil.
 save_and_restart: Kaydet ve Yeniden Başlat
-beta_channel:
-  enable: Beta Kanalını Etkinleştir (Sadece GitHub üzerinden)
 monitors_configurations:
   label: Monitör {{index}}
 wall:
@@ -234,3 +237,6 @@ inherit: Devral
 close: Kapat
 update:
   available: Güncelleme Mevcut!
+  downloading: İndirme ...
+  channel: Güncelleme kanalı
+miscellaneous: Çeşitli

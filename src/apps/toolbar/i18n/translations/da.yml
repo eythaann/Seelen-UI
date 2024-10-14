@@ -34,3 +34,5 @@ placeholder:
   open_system_tray: Åben systembakke
   notifications: Underretninger
 unlabelled_tray: Umnæret bakkeikon
+context_menu:
+  remove: Fjern varen

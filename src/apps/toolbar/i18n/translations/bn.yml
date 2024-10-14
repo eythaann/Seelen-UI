@@ -34,3 +34,5 @@ placeholder:
   open_user_folder: ব্যবহারকারী ফোল্ডারটি খুলুন
   notifications: বিজ্ঞপ্তি
 unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
+context_menu:
+  remove: আইটেম সরান

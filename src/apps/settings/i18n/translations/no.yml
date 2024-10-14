@@ -193,11 +193,16 @@ shortcuts:
     send_to_workspace_3: Send til arbeidsområdet 3
     switch_workspace_0: Bytt til arbeidsområdet 1
     switch_workspace_1: Bytt til arbeidsområdet 2
+    misc_toggle_lock_tracing: Toggle Lock Tracing (logger)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logger)
+    misc_open_settings: Åpne innstillinger
+    toggle_launcher: Toogle
   enable_tooltip: >-
     Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
     Core API
   enable: Aktiver integrerte snarveier (AHK)
   reset: Tilbakestill til standardverdier
+  readonly_tooltip: Dette er en leselinje-snarvei
 cancel: Avbryt
 inProgress: I prosess...
 quit: Slutte
@@ -214,8 +219,6 @@ vd:
     Native Virtual Desktop Strategy er ikke tilgjengelig for Windows -versjonen
     din.
 save_and_restart: Lagre og start på nytt
-beta_channel:
-  enable: Aktiver Beta Channel (bare via GitHub)
 monitors_configurations:
   label: Overvåke {{indeks}}
 wall:
@@ -236,3 +239,6 @@ insert: Sett inn
 close: Lukke
 update:
   available: Oppdatering tilgjengelig!
+  downloading: Last ned ...
+  channel: Oppdateringskanal
+miscellaneous: Diverse

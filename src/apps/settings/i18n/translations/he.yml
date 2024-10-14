@@ -191,9 +191,14 @@ shortcuts:
     decrease_height: ירידה בגובה
     switch_workspace_1: עבור לסביבת העבודה 2
     switch_workspace_0: עבור לסביבת העבודה 1
+    misc_toggle_win_event_tracing: מעקב אחר WIN WIN (יומנים)
+    misc_open_settings: הגדרות פתוחות
+    misc_toggle_lock_tracing: מעקב אחר נעילת נעילה (יומנים)
+    toggle_launcher: Toogle
   enable: אפשר קיצורי דרך משולבים (AHK)
   enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
   reset: אפס לברירות מחדל
+  readonly_tooltip: זהו קיצור דרך לקריאה בלבד
 inProgress: בתהליך...
 loading: טוען...
 open: לִפְתוֹחַ
@@ -208,8 +213,6 @@ vd:
     seelen: Seelen
   disabled_windows_version: אסטרטגיית שולחן עבודה וירטואלית מקורית אינה זמינה עבור גרסת Windows שלך.
 save_and_restart: שמור והפעלה מחדש
-beta_channel:
-  enable: אפשר ערוץ בטא (רק באמצעות github)
 monitors_configurations:
   label: צג {{index}}
 wall:
@@ -230,3 +233,6 @@ insert: לְהַכנִיס
 close: לִסְגוֹר
 update:
   available: עדכון זמין!
+  channel: ערוץ עדכון
+  downloading: מוריד ...
+miscellaneous: שונות

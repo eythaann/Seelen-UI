@@ -193,9 +193,14 @@ shortcuts:
     focus_bottom: පහළට අවධානය යොමු කරන්න
     switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
     switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
+    toggle_launcher: බෙල්ල්
+    misc_toggle_win_event_tracing: ටොගල් ජයග්රාහී සිදුවීම් ලුහුබැඳීම (ල logs ු-සටහන්)
+    misc_open_settings: විවෘත සැකසුම්
+    misc_toggle_lock_tracing: ටොගල් අගුල ලුහුබැඳීම (ල logs ු-සටහන්)
   enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
   enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
   reset: පෙරනිමි වෙත නැවත සකසන්න
+  readonly_tooltip: මෙය කියවීමට පමණක් කෙටිමඟකි
 loading: පූරණය වෙමින්...
 quit: ඉවත්
 inProgress: ප්රගතියේ...
@@ -210,8 +215,6 @@ vd:
     seelen: සීලන්
   disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා ස්වදේශීය අතථ්ය ඩෙස්ක්ටොප් උපාය ලබා ගත නොහැක.
 save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
-beta_channel:
-  enable: බීටා නාලිකාව සක්රීය කරන්න (GitHub හරහා පමණි)
 monitors_configurations:
   label: '{{දර්ශකය} u අධීක්ෂණය කරන්න'
 wall:
@@ -232,3 +235,6 @@ inherit: උරුම වේ
 close: වසන්න
 update:
   available: යාවත්කාලීන කිරීම!
+  channel: නාලිකාව යාවත්කාලීන කරන්න
+  downloading: බාගත කිරීම ...
+miscellaneous: විවිධ

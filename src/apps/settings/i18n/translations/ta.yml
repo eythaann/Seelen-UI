@@ -193,11 +193,16 @@ shortcuts:
     switch_workspace_7: பணியிடம் 7க்கு மாறவும்
     switch_workspace_1: பணியிடம் 2 க்கு மாறவும்
     switch_workspace_0: பணியிடம் 1 க்கு மாறவும்
+    misc_open_settings: திறந்த அமைப்புகள்
+    toggle_launcher: டூக்
+    misc_toggle_win_event_tracing: வெற்றி நிகழ்வு தடமறிதல் (பதிவுகள்)
+    misc_toggle_lock_tracing: பூட்டு தடமறிதல் (பதிவுகள்)
   enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
   enable_tooltip: >-
     சீலன் கோர் ஏபிஐ பயன்படுத்தி உங்கள் சொந்த ஷார்ட்கட்களை செயல்படுத்தினால்
     முடக்கவும்
   reset: இயல்புநிலைக்கு மீட்டமைக்கவும்
+  readonly_tooltip: இது படிக்க மட்டும் குறுக்குவழி
 inProgress: செயல்பாட்டில் உள்ளது...
 cancel: ரத்து செய்
 quit: விட்டுவிட
@@ -212,8 +217,6 @@ vd:
     label: மெய்நிகர் டெஸ்க்டாப் உத்தி
   disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சொந்த மெய்நிகர் டெஸ்க்டாப் உத்தி கிடைக்கவில்லை.
 save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்
-beta_channel:
-  enable: பீட்டா சேனலை இயக்கவும் (கிதுப் வழியாக மட்டுமே)
 monitors_configurations:
   label: கண்காணிக்கவும் {{குறியீட்டு}}}
 wall:
@@ -234,3 +237,6 @@ more: மேலும்
 close: மூடு
 update:
   available: புதுப்பிப்பு கிடைக்கிறது!
+  downloading: பதிவிறக்கம் ...
+  channel: சேனலைப் புதுப்பிக்கவும்
+miscellaneous: இதர

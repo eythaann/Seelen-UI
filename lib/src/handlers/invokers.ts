@@ -1,3 +1,5 @@
+import { invoke as tauriInvoke, InvokeArgs, InvokeOptions } from '@tauri-apps/api/core';
+
 export enum SeelenCommand {
   // General
   Run = 'run',
@@ -13,6 +15,9 @@ export enum SeelenCommand {
   GetIcon = 'get_icon',
   GetSystemColors = 'get_system_colors',
   SimulateFullscreen = 'simulate_fullscreen',
+  CheckForUpdates = 'check_for_updates',
+  /** Restart the app after install the update so it returns a promise resolved with `never` */
+  InstallLastAvailableUpdate = 'install_last_available_update',
 
   // Seelen Settings
   SetAutoStart = 'set_auto_start',
@@ -73,4 +78,19 @@ export enum SeelenCommand {
   // Notifications
   NotificationsClose = 'notifications_close',
   NotificationsCloseAll = 'notifications_close_all',
+}
+
+type ReturnTypeByCommand = Record<SeelenCommand, unknown> & {
+  [SeelenCommand.CheckForUpdates]: boolean;
+  [SeelenCommand.InstallLastAvailableUpdate]: never;
+};
+
+export type SeelenCommandReturn<T extends SeelenCommand> = ReturnTypeByCommand[T];
+
+export async function invoke<T extends SeelenCommand>(
+  command: T,
+  args?: InvokeArgs,
+  options?: InvokeOptions,
+): Promise<SeelenCommandReturn<T>> {
+  return tauriInvoke(command, args, options);
 }

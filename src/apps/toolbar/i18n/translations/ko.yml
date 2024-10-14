@@ -34,3 +34,5 @@ placeholder:
   settings: 빠른 설정
   notifications: 알림
 unlabelled_tray: 레이블이없는 트레이 아이콘
+context_menu:
+  remove: 항목을 제거하십시오
