@@ -23,7 +23,7 @@
               ]
             },
             "execution_command": {
-              "description": "Program, file or folder to execute/open when clicking the item. First parameter of `start \"\" \"$1\" \"$2\"`.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.",
+              "description": "Program, file or folder to execute/open when clicking the item. First parameter of `start \"\" \"$1\" \"$2\"`.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.\n\nNote: this field is mandatory and will be filled with `path` if it is not set",
               "default": "",
               "type": "string"
             },
@@ -59,7 +59,7 @@
               ]
             },
             "execution_command": {
-              "description": "Program, file or folder to execute/open when clicking the item. First parameter of `start \"\" \"$1\" \"$2\"`.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.",
+              "description": "Program, file or folder to execute/open when clicking the item. First parameter of `start \"\" \"$1\" \"$2\"`.\n\nExclusion: On `.lnk` files this is the target of the link and when open action is triggered, this field and arguments are ignored, using the link file as command.\n\nImportant: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.\n\nNote: this field is mandatory and will be filled with `path` if it is not set",
               "default": "",
               "type": "string"
             },

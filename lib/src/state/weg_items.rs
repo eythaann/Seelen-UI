@@ -21,6 +21,8 @@ pub struct PinnedWegItemData {
     /// this field and arguments are ignored, using the link file as command.
     ///
     /// Important: This should be unique across all weg items because this is used as identifier, dupes will be removed on load.
+    ///
+    /// Note: this field is mandatory and will be filled with `path` if it is not set
     #[serde(default, alias = "execution_path")]
     pub execution_command: String,
     /// Arguments to pass to the program. Second parameter of `start "" "$1" "$2"`
@@ -69,24 +71,30 @@ impl Default for WegItems {
 impl WegItems {
     fn sanitize_items(dict: &mut HashSet<String>, items: Vec<WegItem>) -> Vec<WegItem> {
         let mut result = Vec::new();
-        for item in items {
-            match &item {
+        for mut item in items {
+            match &mut item {
                 WegItem::Pinned(data) => {
+                    if !data.path.exists() {
+                        continue;
+                    }
+                    if data.execution_command.is_empty() {
+                        data.execution_command = data.path.to_string_lossy().to_string();
+                    }
                     if !dict.contains(&data.execution_command) {
                         dict.insert(data.execution_command.clone());
-                        // remove files that don't exist
-                        if data.path.exists() {
-                            result.push(item);
-                        }
+                        result.push(item);
                     }
                 }
                 WegItem::Temporal(data) => {
+                    if !data.path.exists() {
+                        continue;
+                    }
+                    if data.execution_command.is_empty() {
+                        data.execution_command = data.path.to_string_lossy().to_string();
+                    }
                     if !dict.contains(&data.execution_command) {
                         dict.insert(data.execution_command.clone());
-                        // remove files that don't exist
-                        if data.path.exists() {
-                            result.push(item);
-                        }
+                        result.push(item);
                     }
                 }
                 WegItem::Separator { id } => {
@@ -97,14 +105,14 @@ impl WegItems {
                 }
                 WegItem::StartMenu => {
                     if !dict.contains("StartMenu") {
-                        result.push(item);
                         dict.insert("StartMenu".to_owned());
+                        result.push(item);
                     }
                 }
                 WegItem::Media => {
                     if !dict.contains("Media") {
-                        result.push(item);
                         dict.insert("Media".to_owned());
+                        result.push(item);
                     }
                 }
             }
