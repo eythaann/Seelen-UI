@@ -83,7 +83,7 @@ Seelen UI is a tool designed to enhance your Windows desktop experience with a f
 
 <br/>
 
-* **Be faster!**: With the app launcher inpired in Rofi, Seelen UI provides a simple and intuitive way to quickly access your applications and ejecute commands.
+* **Be faster!**: With the app launcher inspired by Rofi, Seelen UI provides a simple and intuitive way to quickly access your applications and execute commands.
 
   ![Seelen UI App Launcher](./documentation/images/app_launcher_preview.png)
 
