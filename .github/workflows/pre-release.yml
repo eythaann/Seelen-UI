@@ -1,37 +1,13 @@
 name: "Pre-Release"
 
 on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+-(beta|rc).[0-9]+"
   workflow_dispatch:
-    inputs:
-      version:
-        type: string
-        required: true
-        description: "Version to build"
 
 jobs:
-  validate-inputs:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Validate version format
-        # regex obtained from https://semver.org
-        run: |
-          VERSION="${{ github.event.inputs.version }}"
-          SEMVER_REGEX="^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$"
-          if [[ ! $VERSION =~ $SEMVER_REGEX ]]; then
-            echo "Error: The version '${VERSION}' is not a valid SemVer format (MAJOR.MINOR.PATCH)."
-            exit 1
-          fi
-      - name: Check if tag exists
-        env:
-          VERSION: ${{ github.event.inputs.version }}
-        run: |
-          if git ls-remote --tags origin | grep -q "refs/tags/$VERSION"; then
-            echo "Error: Tag '${VERSION}' already exists."
-            exit 1
-          fi
-
   continuous-integration:
-    needs: validate-inputs
     uses: ./.github/workflows/ci.yml
 
   create-pre-release:
@@ -41,25 +17,11 @@ jobs:
       contents: write
     outputs:
       release_id: ${{ steps.create-pre-release.outputs.result }}
-    env:
-      VERSION: ${{ github.event.inputs.version }}
+
     steps:
       - uses: actions/checkout@v4
-
-      - name: Change version
-        uses: actions/github-script@v6
-        with:
-          script: |
-            const fs = require('fs');
-            const version = process.env.VERSION;
-
-            const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-            packageJson.version = version;
-            fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
-
-            let cargoTomlContent = fs.readFileSync('Cargo.toml', 'utf-8');
-            cargoTomlContent = cargoTomlContent.replace(/^version\s*=\s*".*"/m, `version = "${version}"`);
-            fs.writeFileSync('Cargo.toml', cargoTomlContent);
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 
       - name: Create release
         id: create-pre-release
@@ -68,14 +30,14 @@ jobs:
           script: |
             const fs = require('fs');
             const changelogContent = fs.readFileSync('changelog.md', 'utf-8');
-            const regex = new RegExp(`(?<=\\[Unreleased\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
+            const regex = new RegExp(`(?<=\\[${process.env.PACKAGE_VERSION}\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
             const releaseNotes = changelogContent.match(regex)?.[0].trim() || '';
 
             const { data } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              tag_name: `v${process.env.VERSION}`,
-              name: `Seelen UI v${process.env.VERSION}`,
+              tag_name: `v${process.env.PACKAGE_VERSION}`,
+              name: `Seelen UI v${process.env.PACKAGE_VERSION}`,
               body: releaseNotes,
               generate_release_notes: true,
               draft: true,
