@@ -17,8 +17,7 @@ jobs:
           VERSION: ${{ github.event.inputs.version }}
         # regex obtained from https://semver.org
         run: |
-          SEMVER_REGEX="^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$"
-          if [[ ! "$VERSION" =~ $SEMVER_REGEX ]]; then
+          if [[ ! "$VERSION" =~ ^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-((?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$ ]]; then
             echo "Error: The version '${VERSION}' is not a valid SemVer format (MAJOR.MINOR.PATCH)."
             exit 1
           fi
