@@ -11,6 +11,8 @@
 ### fix
 - not getting icons directly from .lnk files.
 - users not recieving update notification on settings header.
+- start-menu item on dock not closing native start menu.
+- default theme wallpaper showing cut on ultra-wide monitors.
 
 ## [2.0.0]
 ### breaking changes
