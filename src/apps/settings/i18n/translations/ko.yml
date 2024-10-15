@@ -200,9 +200,9 @@ shortcuts:
     switch_workspace_1: 작업 공간으로 전환합니다
     switch_workspace_0: 작업 공간으로 전환 1
     misc_toggle_lock_tracing: 토글 잠금 추적 (로그)
-    toggle_launcher: 토글
     misc_open_settings: 열기 설정
     misc_toggle_win_event_tracing: 토글 윈 이벤트 추적 (로그)
+    toggle_launcher: 비녀장
   reset: 기본값으로 재설정하십시오
   readonly_tooltip: 이것은 읽기 전용 단축키입니다
 vd:

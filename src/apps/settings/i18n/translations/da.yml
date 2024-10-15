@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_1: Skift til arbejdsområde 2
     switch_workspace_0: Skift til arbejdsområde 1
     misc_open_settings: Åbne indstillinger
-    toggle_launcher: Toogle
     misc_toggle_win_event_tracing: Toggle win begivenhedssporing (logfiler)
     misc_toggle_lock_tracing: Skiftlåssporing (logfiler)
+    toggle_launcher: Skift
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core

@@ -194,7 +194,7 @@ shortcuts:
     misc_toggle_win_event_tracing: מעקב אחר WIN WIN (יומנים)
     misc_open_settings: הגדרות פתוחות
     misc_toggle_lock_tracing: מעקב אחר נעילת נעילה (יומנים)
-    toggle_launcher: Toogle
+    toggle_launcher: לְמַתֵג
   enable: אפשר קיצורי דרך משולבים (AHK)
   enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
   reset: אפס לברירות מחדל

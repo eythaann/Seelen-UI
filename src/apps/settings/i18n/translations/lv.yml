@@ -196,7 +196,7 @@ shortcuts:
     misc_toggle_lock_tracing: Pārslēdziet slēdzenes izsekošanu (baļķi)
     misc_open_settings: Atvērti iestatījumi
     misc_toggle_win_event_tracing: Pārslēdziet uzvaru notikumu izsekošanu (žurnāli)
-    toggle_launcher: Toogle
+    toggle_launcher: Pārslēgt
   enable: Iespējot integrētus saīsnes (AHK)
   enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
   reset: Atiestatīt uz noklusējuma

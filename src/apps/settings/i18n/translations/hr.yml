@@ -193,10 +193,10 @@ shortcuts:
     send_to_workspace_3: Pošaljite u radni prostor 3
     switch_workspace_0: Prebacite se na radni prostor 1
     switch_workspace_1: Prebacite se na radni prostor 2
-    toggle_launcher: Naleti
     misc_toggle_win_event_tracing: Pregazivanje traganja događaja (zapisnici)
     misc_toggle_lock_tracing: Preklopljenje zaključavanja (zapisnici)
     misc_open_settings: Otvorene postavke
+    toggle_launcher: Prebacivanje
   enable_tooltip: >-
     Onemogući ako ćete implementirati vlastite prečace pomoću Seelen Core API
     -ja

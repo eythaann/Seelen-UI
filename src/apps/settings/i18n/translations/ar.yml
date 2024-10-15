@@ -203,7 +203,7 @@ shortcuts:
     misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)
     misc_toggle_win_event_tracing: تبديل الفوز تتبع حدث (سجلات)
     misc_open_settings: فتح الإعدادات
-    toggle_launcher: دبليو
+    toggle_launcher: تبديل
   reset: إعادة ضبط على الافتراضات
   readonly_tooltip: هذا اختصار للقراءة فقط
 vd:

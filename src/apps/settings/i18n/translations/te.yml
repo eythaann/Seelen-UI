@@ -196,7 +196,7 @@ shortcuts:
     misc_open_settings: సెట్టింగులు తెరవండి
     misc_toggle_lock_tracing: లాక్ ట్రేసింగ్ (లాగ్‌లు) టోగుల్ చేయండి
     misc_toggle_win_event_tracing: విన్ ఈవెంట్ ట్రేసింగ్ (లాగ్స్) ను టోగుల్ చేయండి
-    toggle_launcher: TOOGLE
+    toggle_launcher: టోగుల్
   enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
   enable_tooltip: >-
     మీరు సీలెన్ కోర్ Apiని ఉపయోగించి మీ స్వంత సత్వరమార్గాలను అమలు చేస్తే

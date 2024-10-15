@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_1: Vaihda työtilaan 2
     switch_workspace_0: Vaihda työtilaan 1
     misc_open_settings: Avaa asetukset
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)
     misc_toggle_win_event_tracing: Vaihda Win Win Event Tracing (lokit)
+    toggle_launcher: Vaihtaa
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
     -sovellusliittymällä

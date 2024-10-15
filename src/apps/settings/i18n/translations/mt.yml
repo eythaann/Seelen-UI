@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 2
     misc_toggle_win_event_tracing: Toggle Win Avveniment Traċċar (zkuk)
     misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)
-    toggle_launcher: Toogle
     misc_open_settings: Settings miftuħa
+    toggle_launcher: Toggle
   enable: Enable Shortcuts Integrati (AHK)
   enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core
   reset: Irrisettja għal nuqqasijiet

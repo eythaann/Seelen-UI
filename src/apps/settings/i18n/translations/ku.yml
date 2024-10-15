@@ -193,9 +193,9 @@ shortcuts:
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_0: Switch to Workspace 1
     misc_open_settings: Mîhengên vekirî
-    toggle_launcher: Tox kirin
     misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
+    toggle_launcher: Toggle
   enable: Kurtefîlmên entegre (AHK) çalak bikin
   enable_tooltip: >-
     Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh

@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: Passa all'area di lavoro 2
     misc_toggle_win_event_tracing: Taggle Win Event Tracing (Logs)
     misc_open_settings: Impostazioni aperte
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Attiva il tracciamento del blocco (tronchi)
+    toggle_launcher: Attivare
   enable: Abilita scorciatoie integrate (AHK)
   enable_tooltip: >-
     Disabilita se implementerai i tuoi collegamenti utilizzando l'API Core

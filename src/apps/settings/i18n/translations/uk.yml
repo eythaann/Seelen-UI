@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_0: Перехід на робочу область 1
     switch_workspace_1: Перехід на робочу область 2
     misc_open_settings: Відкриті налаштування
-    toggle_launcher: ТОГОЛЬ
     misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
     misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
+    toggle_launcher: Перемикатися
   enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
   enable: Увімкнути інтегровані ярлики (AHK)
   reset: Скидання за замовчуванням

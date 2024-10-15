@@ -193,10 +193,10 @@ shortcuts:
     focus_bottom: පහළට අවධානය යොමු කරන්න
     switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
     switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
-    toggle_launcher: බෙල්ල්
     misc_toggle_win_event_tracing: ටොගල් ජයග්රාහී සිදුවීම් ලුහුබැඳීම (ල logs ු-සටහන්)
     misc_open_settings: විවෘත සැකසුම්
     misc_toggle_lock_tracing: ටොගල් අගුල ලුහුබැඳීම (ල logs ු-සටහන්)
+    toggle_launcher: ටොගල කරන්න
   enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
   enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
   reset: පෙරනිමි වෙත නැවත සකසන්න

@@ -198,9 +198,9 @@ shortcuts:
     switch_workspace_1: 切换到工作区 1
     switch_workspace_0: 切换到工作区 0
     misc_toggle_win_event_tracing: 切换Win事件跟踪（日志）
-    toggle_launcher: 托格尔
     misc_toggle_lock_tracing: 切换锁定跟踪（日志）
     misc_open_settings: 打开设置
+    toggle_launcher: 切换
   reset: 重置为默认值
   readonly_tooltip: 这是只读的捷径
 vd:

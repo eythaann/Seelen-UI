@@ -192,10 +192,10 @@ shortcuts:
     reserve_right: حق رزرو
     switch_workspace_0: تغییر به فضای کاری 1
     switch_workspace_1: تغییر به فضای کاری 2
-    toggle_launcher: جنجال
     misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)
     misc_toggle_win_event_tracing: Toggle Win Tracing (سیاهههای مربوط)
     misc_open_settings: تنظیمات باز
+    toggle_launcher: پیچیدن
   enable_tooltip: >-
     اگر میانبرهای خود را با استفاده از API Seelen Core پیاده سازی خواهید کرد ،
     غیرفعال کنید

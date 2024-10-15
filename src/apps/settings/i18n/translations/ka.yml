@@ -196,7 +196,7 @@ shortcuts:
     misc_toggle_win_event_tracing: გადარიცხეთ მოიგეთ ღონისძიების კვალი (ჟურნალი)
     misc_toggle_lock_tracing: ჩაკეტილი საკეტის კვალი (ჟურნალი)
     misc_open_settings: ღია პარამეტრები
-    toggle_launcher: ტოგლი
+    toggle_launcher: შეცვლა
   enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
   enable_tooltip: >-
     გამორთეთ, თუ თქვენ განახორციელებთ საკუთარ მალსახმობებს Seelen Core API– ს

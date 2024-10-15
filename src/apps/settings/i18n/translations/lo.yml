@@ -195,9 +195,9 @@ shortcuts:
     switch_workspace_1: ປ່ຽນໄປເຮັດ Workspace 2
     switch_workspace_0: ປ່ຽນໄປເຮັດວຽກ 1
     misc_toggle_lock_tracing: Toggle Lock Tracing (ບັນທຶກ)
-    toggle_launcher: ກໍາຄ່າ
     misc_open_settings: ເປີດການຕັ້ງຄ່າ
     misc_toggle_win_event_tracing: Toggle WIN ການແຂ່ງຂັນເຫດການ (ບັນທຶກ)
+    toggle_launcher: ສະຫຼັບ
   enable_tooltip: ປິດໃຊ້ງານຖ້າທ່ານຈະປະຕິບັດທາງລັດຂອງທ່ານເອງໂດຍໃຊ້ Seelen Core Api
   enable: ເປີດໃຊ້ທາງລັດປະສົມປະສານ (ahk)
   reset: ຕັ້ງຄ່າຄືນໃຫມ່

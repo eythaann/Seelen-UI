@@ -193,10 +193,10 @@ shortcuts:
     send_to_workspace_3: Kirim ke Workspace 3
     switch_workspace_1: Beralih ke ruang kerja 2
     switch_workspace_0: Beralih ke ruang kerja 1
-    toggle_launcher: TOOGLE
     misc_open_settings: Buka Pengaturan
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Log)
     misc_toggle_lock_tracing: Take Toggle Lock Tracing (Log)
+    toggle_launcher: Toggle
   enable: Aktifkan pintasan terintegrasi (AHK)
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri

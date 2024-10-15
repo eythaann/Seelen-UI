@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_0: Beralih ke ruang kerja 1
     misc_toggle_win_event_tracing: Togol Menang Mengesan Acara (Log)
     misc_toggle_lock_tracing: Togol mengesan kunci (log)
-    toggle_launcher: Toogle
     misc_open_settings: Buka Tetapan
+    toggle_launcher: Togol
   enable_tooltip: >-
     Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
     teras Seelen

@@ -193,10 +193,10 @@ shortcuts:
     send_to_workspace_1: Envia a l'espai de treball 1
     switch_workspace_0: Canvia a l'espai de treball 1
     switch_workspace_1: Canvia a l'espai de treball 2
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Tornada de tancament de bloqueig (registres)
     misc_toggle_win_event_tracing: Toggle Win Traça (registres)
     misc_open_settings: Configuració oberta
+    toggle_launcher: Essibent
   enable: Activa les dreceres integrades (AHK)
   enable_tooltip: >-
     Desactiveu si implementareu les vostres pròpies dreceres mitjançant l'API de

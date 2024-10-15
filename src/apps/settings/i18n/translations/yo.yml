@@ -191,10 +191,10 @@ shortcuts:
     reserve_left: Reserve osi
     switch_workspace_1: Yipada si ibi-iṣẹ 2
     switch_workspace_0: Yipada si ibi-iṣẹ 1
-    toggle_launcher: Home
     misc_open_settings: Ṣi Eto
     misc_toggle_win_event_tracing: Tongo Win Iṣẹlẹ iṣẹlẹ (awọn àkọọlẹ)
     misc_toggle_lock_tracing: Titiipa titiipa (awọn àkọọlẹ)
+    toggle_launcher: Aijiya
   enable: Mu awọn ọna abuja ti o sopọ mọ (Ahk)
   enable_tooltip: Muu Ti o ba yoo ṣe awọn ọna abuja tirẹ nipa lilo APEN mojuto API
   reset: Tun si awọn aseku

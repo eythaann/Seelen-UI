@@ -206,8 +206,8 @@ shortcuts:
     switch_workspace_1: Wechseln Sie zum Arbeitsbereich 2
     misc_toggle_lock_tracing: Schaltersperrverfolgung (Protokolle)
     misc_open_settings: Einstellungen geöffnet
-    toggle_launcher: Toogle
     misc_toggle_win_event_tracing: Verfolgung des Sieg -Ereignisses (Protokolle) umschalten
+    toggle_launcher: Umschalten
   reset: Auf Standards zurücksetzen
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
 vd:

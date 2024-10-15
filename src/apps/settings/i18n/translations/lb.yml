@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_0: Schalt op Aarbechtsberäich 1
     misc_open_settings: Oppen Astellungen
     misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
-    toggle_launcher: Zänn
     misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
+    toggle_launcher: Talzkle
   enable: Aktivéiert integréiert Ofkiirzungen (AHK)
   enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
   reset: Reset op Defaults

@@ -207,7 +207,7 @@ shortcuts:
     misc_toggle_lock_tracing: Rastreo de bloqueo de al revés (registros)
     misc_open_settings: Abrir configuración
     misc_toggle_win_event_tracing: Rastreo de eventos para alternar (registros)
-    toggle_launcher: Togogle
+    toggle_launcher: Palanca
   reset: Reiniciar a los valores predeterminados
   readonly_tooltip: Este es un atajo de solo lectura
 vd:

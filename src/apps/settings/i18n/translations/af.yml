@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_0: Skakel oor na werkruimte 1
     switch_workspace_1: Skakel oor na Workspace 2
     misc_open_settings: Open instellings
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Wisselslotopsporing (logs)
     misc_toggle_win_event_tracing: Skakel wen -byeenkomsopsporing (logs)
+    toggle_launcher: Wissel
   enable: Aktiveer geïntegreerde kortpaaie (AHK)
   enable_tooltip: >-
     Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen

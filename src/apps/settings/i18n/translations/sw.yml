@@ -194,7 +194,7 @@ shortcuts:
     misc_open_settings: Mipangilio ya Fungua
     misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
     misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
-    toggle_launcher: Toogle
+    toggle_launcher: Kugeuza
   enable: Wezesha njia za mkato zilizojumuishwa (AHK)
   enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
   reset: Rudisha kwa defaults

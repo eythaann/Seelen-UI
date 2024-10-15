@@ -196,7 +196,7 @@ shortcuts:
     misc_toggle_lock_tracing: Kilid izləmə (qeydlər)
     misc_toggle_win_event_tracing: TOXGE WIN TƏDBİRLƏRİ İSTƏYİR (LOGS)
     misc_open_settings: Parametrləri açın
-    toggle_launcher: Toogle
+    toggle_launcher: Keçid etmək
   enable: İnteqrasiya edilmiş qısa yolları (AHK) aktivləşdirin
   enable_tooltip: >-
     Seelen Core API istifadə edərək öz qısa yollarınızı həyata keçirə bilsəniz

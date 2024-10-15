@@ -184,7 +184,7 @@ shortcuts:
   enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api
   readonly_tooltip: This is a read-only shortcut
   labels:
-    toggle_launcher: Toogle
+    toggle_launcher: Toggle
     reserve_top: Reserve Top
     reserve_bottom: Reserve Bottom
     reserve_left: Reserve Left

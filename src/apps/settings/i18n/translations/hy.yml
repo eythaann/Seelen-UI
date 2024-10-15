@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: Անցեք Workspace- ին 2
     misc_open_settings: Բաց պարամետրեր
     misc_toggle_win_event_tracing: Անջատեք շահեք իրադարձության հետագծումը (տեղեկամատյաններ)
-    toggle_launcher: Chogle
     misc_toggle_lock_tracing: Փոփոխեք կողպեքի հետեւում (տեղեկամատյաններ)
+    toggle_launcher: Փոփոխվել
   enable: Միացնել ինտեգրված դյուրանցումները (AHK)
   enable_tooltip: >-
     Անջատեք, եթե դուք կիրականացնեք ձեր սեփական դյուրանցումները `օգտագործելով

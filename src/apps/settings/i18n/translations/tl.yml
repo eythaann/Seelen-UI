@@ -196,8 +196,8 @@ shortcuts:
     switch_workspace_0: Lumipat sa Workspace 1
     misc_open_settings: Buksan ang mga setting
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (log)
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Toggle lock tracing (log)
+    toggle_launcher: Toggle
   enable_tooltip: >-
     Huwag paganahin kung ipatutupad mo ang iyong sariling mga shortcut gamit ang
     Seelen Core API

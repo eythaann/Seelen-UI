@@ -193,10 +193,10 @@ shortcuts:
     send_to_workspace_7: Wyślij na przestrzeń roboczą 7
     switch_workspace_1: Przełącz się na przestrzeń roboczą 2
     switch_workspace_0: Przejdź na obszar roboczy 1
-    toggle_launcher: Toogle
     misc_open_settings: Otwórz ustawienia
     misc_toggle_win_event_tracing: Przełączanie zdarzeń wygranych (dzienniki)
     misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)
+    toggle_launcher: Dźwignia kolankowa
   enable_tooltip: Wyłącz, jeśli zaimplementujesz własne skróty za pomocą API Seelen Core
   enable: Włącz zintegrowane skróty (AHK)
   reset: Zresetuj do domyślnych

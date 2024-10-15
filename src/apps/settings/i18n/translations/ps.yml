@@ -192,10 +192,10 @@ shortcuts:
     increase_height: قد زیاتول
     switch_workspace_1: د کارځای 2 ته لاړشئ
     switch_workspace_0: د کارځای 1 ته لاړشئ
-    toggle_launcher: مالګي
     misc_open_settings: خلاص امستنې
     misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
     misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
+    toggle_launcher: ټګول
   enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
   enable: مدغم شوي لنډیزونه (اه)
   reset: د افلاسیون لپاره بیا تنظیمول

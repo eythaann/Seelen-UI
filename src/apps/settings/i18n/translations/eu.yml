@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_1: Aldatu Workspace 2ra
     switch_workspace_0: Aldatu lan-eremura 1
     misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
-    toggle_launcher: Tooogle
     misc_open_settings: Ezarpenak irekitzea
     misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
+    toggle_launcher: Txandatu
   enable: Gaitu lasterbide integratuak (Ahk)
   enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
   reset: Berrezarri lehenetsitakoak

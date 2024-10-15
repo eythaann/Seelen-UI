@@ -190,10 +190,10 @@ shortcuts:
     send_to_workspace_7: ワークスペース7に送信
     switch_workspace_0: ワークスペースに切り替えます1
     switch_workspace_1: ワークスペースに切り替えます2
-    toggle_launcher: トゥーグル
     misc_toggle_win_event_tracing: トグルウィンイベントトレース（ログ）
     misc_toggle_lock_tracing: トグルロックトレース（ログ）
     misc_open_settings: 設定を開く
+    toggle_launcher: トグル
   enable: AutoHotkeyを使用した統合ショートカットを有効にする
   enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください
   reset: デフォルトにリセットします

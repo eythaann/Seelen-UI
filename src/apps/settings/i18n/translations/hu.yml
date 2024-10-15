@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: Váltás a 2. munkaterületre
     misc_toggle_win_event_tracing: Váltás a győzelem események nyomon követése (naplók)
     misc_open_settings: Nyissa meg a beállításokat
-    toggle_launcher: Tekercs
     misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
+    toggle_launcher: Váltás
   enable_tooltip: >-
     Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
     parancsikonjait

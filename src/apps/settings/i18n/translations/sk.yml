@@ -196,7 +196,7 @@ shortcuts:
     misc_open_settings: Otvorené nastavenia
     misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
     misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
-    toggle_launcher: Bludník
+    toggle_launcher: Prepínanie
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
   reset: Reset na predvolené hodnoty

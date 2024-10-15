@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: વર્કસ્પેસ 2 પર સ્વિચ કરો
     misc_open_settings: ખુલ્લી સેટિંગ્સ
     misc_toggle_lock_tracing: ટ g ગલ લ lock ક ટ્રેસિંગ (લોગ)
-    toggle_launcher: ટૂલેગ
     misc_toggle_win_event_tracing: ટ g ગલ વિન ઇવેન્ટ ટ્રેસિંગ (લોગ)
+    toggle_launcher: ટોકવું
   enable_tooltip: >-
     જો તમે સીલેન કોર એપીઆઈનો ઉપયોગ કરીને તમારા પોતાના શોર્ટકટ્સનો અમલ કરશો તો
     અક્ષમ કરો

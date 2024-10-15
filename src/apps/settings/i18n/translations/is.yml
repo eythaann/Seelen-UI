@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: Skiptu yfir í vinnusvæði 2
     misc_open_settings: Opnar stillingar
     misc_toggle_lock_tracing: Skiptu um rekja lás (logs)
-    toggle_launcher: Toogle
     misc_toggle_win_event_tracing: Skiptu um Win Event Tracing (logs)
+    toggle_launcher: Skiptu
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
   reset: Endurstilla í vanskil

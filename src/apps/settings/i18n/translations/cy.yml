@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_0: Newid i Workpace 1
     switch_workspace_1: Newid i Workpace 2
     misc_open_settings: Gosodiadau Agored
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Olrhain clo togl (logiau)
     misc_toggle_win_event_tracing: Olrhain Digwyddiad Win Toggle (Logiau)
+    toggle_launcher: Toglio
   enable: Galluogi llwybrau byr integredig (AHK)
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan

@@ -204,8 +204,8 @@ shortcuts:
     switch_workspace_1: Mudar para o espaço de trabalho 2
     misc_open_settings: Abra as configurações
     misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
-    toggle_launcher: Toogle
     misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
+    toggle_launcher: Alternar
   reset: Redefinir para padrões
   readonly_tooltip: Este é um atalho somente leitura
 vd:

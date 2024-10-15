@@ -196,7 +196,7 @@ shortcuts:
     misc_open_settings: Ayarlar Aç
     misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
     misc_toggle_lock_tracing: Kilit izleme (kütükler)
-    toggle_launcher: Toogle
+    toggle_launcher: Geçiş yapmak
   enable_tooltip: >-
     Seelen Core API kullanarak kendi kısayollarınızı uygulayacaksanız devre dışı
     bırakın

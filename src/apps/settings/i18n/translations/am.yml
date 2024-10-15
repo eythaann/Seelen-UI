@@ -192,8 +192,8 @@ shortcuts:
     switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
     misc_open_settings: ክፍት ቅንብሮች
     misc_toggle_lock_tracing: መቆለፊያ መቆለፊያ (ምዝግብ ማስታወሻዎች)
-    toggle_launcher: ሻይ
     misc_toggle_win_event_tracing: የ UNSCUCT PORTERSERSESTERE (ምዝግብ ማስታወሻዎች)
+    toggle_launcher: መቀላቀል
   enable: የተቀናጁ አቋራጮችን (AHK)
   enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
   reset: ወደ ነባሪዎች ዳግም ያስጀምሩ

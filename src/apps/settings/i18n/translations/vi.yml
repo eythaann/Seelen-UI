@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: Chuyển sang không gian làm việc 2
     misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)
     misc_open_settings: Mở cài đặt
-    toggle_launcher: TOGLE
     misc_toggle_win_event_tracing: Chuyển đổi theo dõi sự kiện (nhật ký)
+    toggle_launcher: Chuyển đổi
   enable: Bật các phím tắt tích hợp (AHK)
   enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
   reset: Đặt lại về mặc định

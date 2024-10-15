@@ -193,9 +193,9 @@ shortcuts:
     switch_workspace_1: ورک اسپیس 2 پر سوئچ کریں
     switch_workspace_0: ورک اسپیس 1 پر سوئچ کریں
     misc_open_settings: کھلی ترتیبات
-    toggle_launcher: ٹوگل
     misc_toggle_lock_tracing: ٹوگل لاک ٹریسنگ (نوشتہ جات)
     misc_toggle_win_event_tracing: ٹوگل ون ایونٹ ٹریسنگ (لاگ)
+    toggle_launcher: ٹوگل
   enable_tooltip: >-
     اگر آپ سیلین کور API کا استعمال کرتے ہوئے اپنے شارٹ کٹ کو نافذ کریں گے تو
     غیر فعال کریں

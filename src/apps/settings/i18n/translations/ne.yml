@@ -195,7 +195,7 @@ shortcuts:
     misc_open_settings: खुला सेटिंग्स
     misc_toggle_win_event_tracing: टगल जीत घटना ट्रेसिंग (लग)
     misc_toggle_lock_tracing: टगल लक ट्रेसिंग (लग)
-    toggle_launcher: Toogle
+    toggle_launcher: धट लगाउनु
   enable_tooltip: >-
     असक्षम गर्नुहोस् यदि तपाईं देखिने कोर एपीआई प्रयोग गरेर तपाईंको आफ्नै
     सर्टकटहरू लागू गर्नुहुन्छ भने असक्षम गर्नुहोस्

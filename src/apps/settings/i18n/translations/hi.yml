@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_1: कार्यक्षेत्र 2 पर स्विच करें
     switch_workspace_0: कार्यक्षेत्र 1 पर स्विच करें
     misc_open_settings: खुली सेटिंग
-    toggle_launcher: टॉगल करें
     misc_toggle_lock_tracing: टॉगल लॉक ट्रेसिंग (लॉग)
     misc_toggle_win_event_tracing: टॉगल जीत इवेंट ट्रेसिंग (लॉग)
+    toggle_launcher: टॉगल
   enable: एकीकृत शॉर्टकट (AHK) सक्षम करें
   enable_tooltip: >-
     अक्षम करें यदि आप सेलेन कोर एपीआई का उपयोग करके अपने स्वयं के शॉर्टकट को

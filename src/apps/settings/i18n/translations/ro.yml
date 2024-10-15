@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_1: Treceți la spațiul de lucru 2
     misc_toggle_win_event_tracing: Toggle Win Win Tracing (Jurnals)
     misc_toggle_lock_tracing: Comutarea blocării de blocare (jurnalele)
-    toggle_launcher: Toogle
     misc_open_settings: Setări deschise
+    toggle_launcher: Comutați
   enable: Activați comenzi rapide integrate (AHK)
   enable_tooltip: >-
     Dezactivați dacă veți implementa propriile comenzi rapide folosind API -ul

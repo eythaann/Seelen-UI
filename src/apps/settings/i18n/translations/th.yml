@@ -191,10 +191,10 @@ shortcuts:
     move_to_workspace_7: ย้ายไปที่เวิร์กสเปซ 7
     switch_workspace_0: เปลี่ยนไปใช้พื้นที่ทำงาน 1
     switch_workspace_1: สลับไปที่ Workspace 2
-    toggle_launcher: ตัก
     misc_toggle_win_event_tracing: สลับการติดตามเหตุการณ์ (บันทึก)
     misc_open_settings: เปิดการตั้งค่า
     misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)
+    toggle_launcher: สลับ
   enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
   enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API
   reset: รีเซ็ตเป็นค่าเริ่มต้น

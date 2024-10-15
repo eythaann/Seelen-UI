@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_0: Perjunkite į 1 darbo vietą
     misc_open_settings: Atidaryti nustatymai
     misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
+    toggle_launcher: Perjungti
   enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus

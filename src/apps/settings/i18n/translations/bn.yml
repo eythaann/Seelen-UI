@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
     switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
     misc_open_settings: ওপেন সেটিংস
-    toggle_launcher: টোগল
     misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)
     misc_toggle_win_event_tracing: টগল উইন ইভেন্ট ট্রেসিং (লগস)
+    toggle_launcher: টগল
   enable_tooltip: >-
     আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
     অক্ষম করুন

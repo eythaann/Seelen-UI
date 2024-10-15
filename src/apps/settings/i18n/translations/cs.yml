@@ -193,10 +193,10 @@ shortcuts:
     move_to_workspace_9: Přesuňte se do pracovního prostoru 9
     switch_workspace_1: Přepněte do pracovního prostoru 2
     switch_workspace_0: Přepněte do pracovního prostoru 1
-    toggle_launcher: Toogle
     misc_toggle_lock_tracing: Tracing Lock Tracing (protokoly)
     misc_toggle_win_event_tracing: Tracing události vítězství na přepínání (protokoly)
     misc_open_settings: Otevřené nastavení
+    toggle_launcher: Přepínač
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
   reset: Resetovat na výchozí hodnoty

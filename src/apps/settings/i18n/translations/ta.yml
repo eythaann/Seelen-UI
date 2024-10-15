@@ -194,9 +194,9 @@ shortcuts:
     switch_workspace_1: பணியிடம் 2 க்கு மாறவும்
     switch_workspace_0: பணியிடம் 1 க்கு மாறவும்
     misc_open_settings: திறந்த அமைப்புகள்
-    toggle_launcher: டூக்
     misc_toggle_win_event_tracing: வெற்றி நிகழ்வு தடமறிதல் (பதிவுகள்)
     misc_toggle_lock_tracing: பூட்டு தடமறிதல் (பதிவுகள்)
+    toggle_launcher: மாற்று
   enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
   enable_tooltip: >-
     சீலன் கோர் ஏபிஐ பயன்படுத்தி உங்கள் சொந்த ஷார்ட்கட்களை செயல்படுத்தினால்

@@ -195,8 +195,8 @@ shortcuts:
     switch_workspace_0: Пређите на радни простор 1
     misc_toggle_win_event_tracing: Пребацивање тражења догађаја Вин (Дневци)
     misc_open_settings: Отвори подешавања
-    toggle_launcher: Тоогле
     misc_toggle_lock_tracing: Укључите тражење закључавања (трупци)
+    toggle_launcher: Пребацивање
   enable_tooltip: >-
     Онемогућите ако ћете имплементирати сопствене пречице користећи СЕЕЛЕН ЦОРЕ
     АПИ
