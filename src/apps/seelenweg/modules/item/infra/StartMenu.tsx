@@ -1,5 +1,5 @@
 import { invoke } from '@tauri-apps/api/core';
-import { memo, useEffect, useRef } from 'react';
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { SeelenCommand, StartWegItem } from 'seelen-core';
@@ -7,8 +7,6 @@ import { SeelenCommand, StartWegItem } from 'seelen-core';
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
-
-import { RootState } from '../../shared/store/domain';
 
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
@@ -21,23 +19,11 @@ interface Props {
 const startMenuExes = ['SearchHost.exe', 'StartMenuExperienceHost.exe'];
 
 export const StartMenu = memo(({ item }: Props) => {
-  const startMenuOpenRef = useRef(false);
-
-  const isStartMenuOpen = useSelector((state: RootState) =>
-    startMenuExes.includes(Selectors.focusedApp(state)?.exe || ''),
-  );
+  const focused = useSelector(Selectors.focusedApp);
 
   const { t } = useTranslation();
 
-  useEffect(() => {
-    if (!isStartMenuOpen) {
-      setTimeout(() => {
-        startMenuOpenRef.current = isStartMenuOpen;
-      }, 100);
-    } else {
-      startMenuOpenRef.current = isStartMenuOpen;
-    }
-  }, [isStartMenuOpen]);
+  const isStartMenuOpen = startMenuExes.some((program) => (focused?.exe || '').endsWith(program));
 
   return (
     <DraggableItem item={item}>
@@ -45,7 +31,7 @@ export const StartMenu = memo(({ item }: Props) => {
         <div
           className="weg-item"
           onClick={() => {
-            if (!startMenuOpenRef.current) {
+            if (!isStartMenuOpen) {
               invoke(SeelenCommand.SendKeys, { keys: '{win}' });
             }
           }}
