@@ -138,6 +138,11 @@ apps_configurations:
     Dës gebündelt Konfiguratiounen sinn net geännert a sinn entwéckelt fir Iech
     déi bescht Erfahrung ouni Personnalisatioun ze ginn. Si konfiguréieren
     automatesch déi heefegst Uwendungen fir Iech.
+  extra_info: >-
+    Svelt UI benotzen nëmmen een identifizéierer pro App (Virdeel net fonnt),
+    sou wéi kënne bestëmmten onbestëmmt ass wichteg, well den Dësch bestëmmt
+    gëtt geschafaf, wéi Den Tabell aus alstoën ass, sou wéi den Dësch par
+    rapport ass.
 extras:
   version: Erëm
   links: Offiziell Linken

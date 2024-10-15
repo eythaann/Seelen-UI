@@ -138,6 +138,11 @@ apps_configurations:
     Queste configurazioni in bundle non sono modificabili e sono progettate per
     offrirti la migliore esperienza senza personalizzazione. Configurano
     automaticamente le applicazioni più comuni per te.
+  extra_info: >-
+    L'interfaccia utente di Seelen utilizza un solo identificatore per app
+    (prima corrispondenza trovata), quindi l'ordine in che modo sono specifici è
+    importante, l'ultimo aggiunto sarà prioritario, poiché nota che la tabella
+    viene ordinata per impostazione predefinita dall'ultimo a vecchio.
 extras:
   relaunch: Rilancio
   discord: Discordia

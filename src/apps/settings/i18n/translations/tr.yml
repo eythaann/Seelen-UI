@@ -138,6 +138,11 @@ apps_configurations:
   bundled_title: Seelen ile Birlikte Gelen Uygulama Yapılandırması
   confirm_delete: Bu yapılandırmayı silmek istediğinizden emin misiniz?
   confirm_delete_title: Silmeyi Onayla
+  extra_info: >-
+    Seelen UI, uygulama başına yalnızca bir tanımlayıcı kullanır (ilk eşleşme
+    bulundu), bu nedenle nasıl belirlendiği sırası önemlidir, tablonun
+    varsayılan olarak en yeniden eskiye doğru sıralandığını unutmayın, en son
+    eklenenlere öncelik verilecektir.
 extras:
   github: GitHub
   links: Resmi Bağlantılar

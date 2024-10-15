@@ -137,6 +137,9 @@ apps_configurations:
   bundled_title: App Confic bi seelen
   confirm_delete: Ma hûn guman dikin ku hûn dixwazin vê konfigurasyonê / s jêbirin?
   swap: Sofet
+  extra_info: >-
+    Selen UI tenê yek nasnameyê bikar tînin (yekem maça ku tê dîtin) ji ber vê
+    yekê fermanê girîng e.
 extras:
   version: Awa
   links: Girêdanên fermî

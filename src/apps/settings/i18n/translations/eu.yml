@@ -138,6 +138,11 @@ apps_configurations:
   search: Araketa
   swap: Tratu
   confirm_delete_title: Berretsi Ezabatu
+  extra_info: >-
+    Seelen UIk aplikazio bakoitzeko identifikatzaile bakarra erabili (lehen
+    partidua aurkitu da), beraz, zehatz-mehatz azaltzen da, azken erantsia
+    lehentasuna izango da, ohar gisa taula lehenetsi da lehenetsitakoa
+    zaharretik azkenetik ordenatuta.
 extras:
   github: Github
   discord: Deskudun

@@ -138,6 +138,10 @@ apps_configurations:
     çox yayılmış tətbiqləri konfiqurasiya edirlər.
   import: İdxal etmək
   swap: Dəyişdirmək
+  extra_info: >-
+    Seelen UI, bir tətbiq başına yalnız bir identifikatordan istifadə edir (ilk
+    matç tapıldı), buna görə əmiklər necə vacibdir, ən son əlavə olaraq,
+    cədvəlin ən sondan köhnəyə görə sıralandığı üçün prioritetləşdiriləcəkdir.
 extras:
   version: Versiya
   relaunch: Başsız

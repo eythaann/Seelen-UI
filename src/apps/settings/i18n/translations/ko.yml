@@ -142,6 +142,9 @@ apps_configurations:
     and: 그리고
     or: 또는
     add_block: 블록 추가
+  extra_info: >-
+    Seelen UI는 앱당 하나의 식별자 만 사용하므로 (첫 번째 일치) 구체화 된 방법의 순서는 중요합니다. 최신 추가로 추가 된 최신
+    정보는 기본적으로 기본적으로 정렬됩니다.
 extras:
   version: 버전
   links: 공식 링크

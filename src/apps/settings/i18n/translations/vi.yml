@@ -138,6 +138,10 @@ apps_configurations:
     Các cấu hình đi kèm này không thể chỉnh sửa và được thiết kế để cung cấp cho
     bạn trải nghiệm tốt nhất mà không cần tùy chỉnh. Chúng tự động định cấu hình
     các ứng dụng phổ biến nhất cho bạn.
+  extra_info: >-
+    Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu
+    tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ
+    được ưu tiên, vì ghi chú được sắp xếp theo mặc định từ mới nhất đến cũ.
 extras:
   version: Phiên bản
   discord: Bất hòa

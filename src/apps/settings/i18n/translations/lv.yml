@@ -138,6 +138,11 @@ apps_configurations:
     sniegtu jums vislabāko pieredzi bez pielāgošanas. Tie automātiski konfigurē
     jums visizplatītākās lietojumprogrammas.
   delete: Dzēst
+  extra_info: >-
+    Seelen lietotāja saskarnē katrai lietotnei tiek izmantots tikai viens
+    identifikators (atrasta pirmā atbilstība), tāpēc ir svarīga secība, kādā tie
+    tiek norādīti, un jaunākajam pievienotajam tiks piešķirta prioritāte, jo
+    ņemiet vērā, ka tabula pēc noklusējuma tiek kārtota no jaunākā uz veco.
 extras:
   relaunch: Atsākšana
   links: Oficiālas saites

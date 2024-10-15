@@ -138,6 +138,11 @@ apps_configurations:
     poskytli najlepší zážitok bez prispôsobenia. Automaticky nakonfigurujú pre
     vás najbežnejšie aplikácie.
   swap: Vymeniť
+  extra_info: >-
+    Používateľské rozhranie Seelen používa iba jeden identifikátor na aplikáciu
+    (prvá nájdená zhoda), takže poradie, v akom sú špecifikované, je dôležité.
+    Najnovšie pridané budú mať prioritu, pretože tabuľka je predvolene zoradená
+    od najnovšieho po staré.
 extras:
   relaunch: Reštart
   version: Verzia

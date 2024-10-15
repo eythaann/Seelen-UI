@@ -138,6 +138,11 @@ apps_configurations:
   confirm_delete_title: Bekræft slet
   search: Søg
   import: Importere
+  extra_info: >-
+    Seelen UI bruger kun én identifikator pr. app (første match fundet), så
+    rækkefølgen i, hvordan de specificeres, er vigtig, det senest tilføjede vil
+    blive prioriteret, da bemærk, at tabellen er sorteret som standard fra
+    seneste til gammel.
 extras:
   exit: Afslut/exit
   links: Officielle links

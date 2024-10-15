@@ -138,6 +138,11 @@ apps_configurations:
     Te konfiguracje pakietowe nie są edytowalne i mają na celu zapewnienie
     najlepszych wrażeń bez dostosowywania. Automatycznie konfigurują dla Ciebie
     najczęstsze aplikacje.
+  extra_info: >-
+    Interfejs użytkownika Seelen używa tylko jednego identyfikatora na aplikację
+    (znaleziono pierwsze dopasowanie), dlatego ważna jest kolejność podawania.
+    Priorytet będzie mieć najnowszy dodany, ponieważ tabela jest domyślnie
+    sortowana od najnowszego do starego.
 extras:
   relaunch: Wznowienie
   version: Wersja

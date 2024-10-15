@@ -138,6 +138,11 @@ apps_configurations:
   new: Yangi
   delete: O'chirmoq
   swap: Almashmoq
+  extra_info: >-
+    Seelen UI har bir ilovada faqat bitta identifikatordan foydalanadi (birinchi
+    moslik topildi), shuning uchun qanday belgilanish tartibi muhim, oxirgi
+    qoʻshilganlar ustuvor boʻladi, chunki jadval sukut boʻyicha oxirgidan
+    eskisiga saralanganligini unutmang.
 extras:
   exit: Chiqish / chiqish
   links: Rasmiy havolalar

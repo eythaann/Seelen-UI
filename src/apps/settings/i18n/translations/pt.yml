@@ -145,6 +145,11 @@ apps_configurations:
     and: E
     or: OU
     add_block: Adicionar bloco
+  extra_info: >-
+    A interface do usuário da Seelen usa apenas um identificador por aplicativo
+    (primeira partida encontrada); portanto, o pedido em como são específicos é
+    importante, o mais recente adicionado será priorizado, pois note que a
+    tabela é classificada por padrão do mais recente ao antigo.
 extras:
   version: Versão
   links: Links Oficiais

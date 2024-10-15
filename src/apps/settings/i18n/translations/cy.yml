@@ -138,6 +138,11 @@ apps_configurations:
   search: Chwiloon
   delete: Croeswn
   swap: Trwciff
+  extra_info: >-
+    Mae Seelen UI yn defnyddio dim ond un dynodwr i bob app (y gêm gyntaf a
+    ddarganfuwyd) felly mae'r gorchymyn yn sut yn cael ei nodi yn bwysig, bydd
+    yr ychwanegiad diweddaraf yn cael ei flaenoriaethu, fel nodyn mae'r tabl yn
+    cael ei ddidoli yn ddiofyn o'r diweddaraf i'r hen.
 extras:
   relaunch: Hail -deirion
   github: Github

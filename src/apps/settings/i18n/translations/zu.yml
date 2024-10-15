@@ -138,6 +138,11 @@ apps_configurations:
     Lokhu kulungiswa okuhlanganisiwe akuhlelekile futhi kuklanyelwe ukukunikeza
     okuhlangenwe nakho okuhle kakhulu ngaphandle kokwenza ngokwezifiso.
     Balungiselela ngokuzenzakalelayo izicelo ezivame kakhulu kuwe.
+  extra_info: >-
+    I-Seelen UI isebenzisa kuphela isikhombi esisodwa sohlelo lokusebenza
+    ngalunye (umdlalo wokuqala otholakala) ngakho-ke i-oda lokuthi libalulekile
+    kanjani, njengoba itafula lakamuva lizobekwa phambili, njengoba inothi
+    lihlelwe ngokuzenzakalela kusuka kwakamuva kuya kwakamuva kuya kwakamuva.
 extras:
   links: Izixhumanisi ezisemthethweni
   relaunch: Qondisa amandla ehlehliseyo

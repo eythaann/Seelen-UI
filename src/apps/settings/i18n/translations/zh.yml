@@ -140,6 +140,9 @@ apps_configurations:
     and: 与
     or: 或
     add_block: 添加块
+  extra_info: >-
+    SEELEN
+    UI仅使用每个应用程序使用一个标识符（第一次匹配），因此“如何指定”的顺序很重要，最新添加的添加将得到优先级，因为注意表的默认情况下是从最新到旧的。
 extras:
   version: 版本
   links: 官方链接

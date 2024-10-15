@@ -138,6 +138,11 @@ apps_configurations:
   swap: Menukar
   import: Impor
   new: Baru
+  extra_info: >-
+    Seelen UI Gunakan hanya satu pengidentifikasi per aplikasi (Pertandingan
+    Pertama Ditemukan) sehingga pesanan dalam bagaimana spesifisasi itu penting,
+    yang ditambahkan terbaru akan diprioritaskan, seperti yang dicatat tabel
+    diurutkan secara default dari yang terbaru ke yang lama.
 extras:
   github: GitHub
   relaunch: Peluncuran kembali

@@ -145,6 +145,11 @@ apps_configurations:
     and: UND
     or: ODER
     add_block: Block hinzufügen
+  extra_info: >-
+    Seelen UI Verwenden Sie nur einen Kenner pro App (zuerst übereinstimmend
+    gefunden). Die Reihenfolge, in der spezifisch ist, ist wichtig. Die neueste
+    hinzugefügte zusätzliche wird priorisiert, da die Tabelle standardmäßig von
+    der neuesten nach alt sortiert wird.
 extras:
   version: Version
   links: Offizielle Links

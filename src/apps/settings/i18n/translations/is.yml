@@ -138,6 +138,11 @@ apps_configurations:
     forritin fyrir þig.
   new: Nýtt
   swap: Skiptu um
+  extra_info: >-
+    Seelen UI Notaðu aðeins eitt auðkenni á hvert forrit (fyrsta samsvörun sem
+    fannst) þannig að röðin í því hvernig eru sértæk er mikilvæg, nýjasta bætt
+    við verður forgangsraðað, eins og athugið að töflunni er flokkað sjálfgefið
+    frá nýjasta til gamla.
 extras:
   github: GitHub
   links: Opinberir hlekkir

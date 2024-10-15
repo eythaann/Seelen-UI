@@ -137,6 +137,12 @@ apps_configurations:
     Qaabeyntan xirmada ma aha wax aan la taabtaan oo loogu talagalay inay ku
     siiyaan khibradda ugu fiican ee aan la helin. Waxay si otomaatig ah u
     habeeyaan codsiyada ugu caansan adiga.
+  extra_info: >-
+    Seelen UI waxay isticmaashaa hal aqoonsi oo app kasta ah (ciyaartii ugu
+    horaysay ee la helay) markaa siday u kala horreeyaan sida loo cayimay ayaa
+    muhiim ah, waxa ugu dambeeya ee lagu daray ayaa la kala hormarin doonaa,
+    sida la ogsoon yahay in miiska si caadi ah loo soocay kii u dambeeyay ilaa
+    kii hore.
 extras:
   exit: Jooji / bixitaan
   github: GitHub

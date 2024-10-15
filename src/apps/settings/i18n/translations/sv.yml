@@ -138,6 +138,11 @@ apps_configurations:
     dig den bästa upplevelsen utan anpassning. De konfigurerar automatiskt de
     vanligaste applikationerna för dig.
   bundled_title: App config bunded med seelen
+  extra_info: >-
+    Seelen UI använder endast en identifierare per app (första matchningen
+    hittas) så ordningen i hur de specificeras är viktig, det senast tillagda
+    kommer att prioriteras, som observera att tabellen sorteras som standard
+    från senaste till gammal.
 extras:
   exit: Sluta/avsluta
   discord: Disharmoni

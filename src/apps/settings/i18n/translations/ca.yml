@@ -138,6 +138,11 @@ apps_configurations:
     automàticament les aplicacions més habituals per a vosaltres.
   delete: Esborrar
   swap: Canviar
+  extra_info: >-
+    La interfície d'usuari de Seelen només utilitza un identificador per
+    aplicació (primer partit que es troba), de manera que l'ordre de com
+    s'especifica és important, es prioritzarà l'últim afegit, ja que nota que la
+    taula s'ordena de manera predeterminada de l'antiga a la vella.
 extras:
   github: Github
   exit: Deixar/sortir

@@ -138,6 +138,11 @@ apps_configurations:
     beste ervaring zonder aanpassing te bieden. Ze configureren automatisch de
     meest voorkomende toepassingen voor u.
   bundled_title: App -configuratie gebundeld met selen
+  extra_info: >-
+    De Seelen UI gebruikt slechts één ID per app (eerste gevonden match), dus de
+    volgorde waarin ze worden gespecificeerd is belangrijk. De laatst
+    toegevoegde krijgt prioriteit, aangezien de tabel standaard wordt gesorteerd
+    van nieuwste naar oude.
 extras:
   relaunch: Opnieuw lanceren
   discord: Meningsverschil

@@ -138,6 +138,11 @@ apps_configurations:
   import: Import
   confirm_delete_title: Bekreft slett
   bundled_title: App Config samlet med Seelen
+  extra_info: >-
+    Seelen-brukergrensesnittet bruker kun én identifikator per app (første treff
+    funnet), så rekkefølgen i hvordan spesifikasjonene er viktig, det siste lagt
+    til vil bli prioritert, da merk at tabellen er sortert som standard fra
+    nyeste til gammel.
 extras:
   version: Versjon
   github: Github

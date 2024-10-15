@@ -138,6 +138,7 @@ apps_configurations:
   new: ਨਵਾਂ
   bundled_title: ਐਪ ਕੌਂਫਿਗ ਸੀਲੇਨ ਨਾਲ ਬੰਡਲ ਕੀਤੀ ਗਈ
   import: ਆਯਾਤ ਕਰੋ
+  extra_info: ਵੇਖਣਯੋਗ UI ਪ੍ਰਤੀ ਐਪ ਨੂੰ ਸਿਰਫ ਇਕ ਪਛਾਣਕਰਤਾ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ
 extras:
   discord: ਵਿਵਾਦ
   links: ਅਧਿਕਾਰਤ ਲਿੰਕ

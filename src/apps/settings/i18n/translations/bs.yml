@@ -138,6 +138,11 @@ apps_configurations:
     aplikacije za vas.
   delete: Izbrisati
   swap: Swap
+  extra_info: >-
+    Seelen UI Koristite samo jedan identifikator po aplikaciji (prvo pronađeno),
+    tako da je narudžba u tome kako je specifično, najnoviji dodani bit će
+    prioritet, jer je u priopćenju tablica po zadanim postavkama sortirana iz
+    posljednjeg.
 extras:
   exit: Prestanite / izlaz
   links: Službene veze

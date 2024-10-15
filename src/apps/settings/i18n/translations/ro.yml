@@ -138,6 +138,11 @@ apps_configurations:
     automat cele mai frecvente aplicații pentru dvs.
   swap: Swap
   confirm_delete: Ești sigur că vrei să ștergi această configurație/s?
+  extra_info: >-
+    Seelen UI folosește un singur identificator pe aplicație (prima potrivire
+    găsită), astfel încât ordinea în modul în care este specificată este
+    importantă, cea mai recentă adăugată va fi prioritară, deoarece notă tabelul
+    este sortat în mod implicit de la cel mai recent la vechi.
 extras:
   github: Github
   relaunch: Relansare

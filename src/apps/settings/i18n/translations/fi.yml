@@ -138,6 +138,11 @@ apps_configurations:
     tarjoamaan sinulle paras kokemus ilman räätälöintiä. Ne määrittelevät
     sinulle yleisimmät sovellukset automaattisesti.
   bundled_title: APP -konfigurointi, joka on mukana Seelenin kanssa
+  extra_info: >-
+    Seelen -käyttöliittymä käyttää vain yhtä tunnistetta sovellusta kohden
+    (ensimmäinen ottelu löydetty), joten tilaus kuinka spesifikaatio on tärkeä,
+    viimeisin lisätty lisätään etusijalle, kuten huomaa, että taulukko
+    lajitellaan oletuksena viimeisimmästä vanhaan.
 extras:
   exit: Lopettaa/poistua
   relaunch: Käynnistää uudelleen

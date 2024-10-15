@@ -138,6 +138,10 @@ apps_configurations:
   bundled_title: A Seelen -vel csomagolt alkalmazás konfigurációja
   import: Behozatal
   confirm_delete: Biztos benne, hogy törölni akarja ezt a konfigurációt/S -t?
+  extra_info: >-
+    A Seelen UI alkalmazásonként csak egy azonosítót használ (az első egyezés
+    található), ezért fontos a sorrend, a legutolsó hozzáadott lesz prioritás,
+    mivel a táblázat alapértelmezés szerint a legújabbtól a régiig van rendezve.
 extras:
   relaunch: Újraindít
   exit: Kilépés/kilépés

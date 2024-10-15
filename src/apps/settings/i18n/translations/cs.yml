@@ -138,6 +138,11 @@ apps_configurations:
   delete: Vymazat
   import: Import
   new: Nový
+  extra_info: >-
+    SEELEN UI Použijte pouze jeden identifikátor na aplikaci (první nalezený
+    zápas), takže pořadí v tom, jak jsou specifikovány, je důležitá, nejnovější
+    přidaná bude upřednostňována, protože poznámka je tabulka ve výchozím
+    nastavení tříděna od nejnovějších až starých.
 extras:
   relaunch: Opětovné
   links: Oficiální odkazy

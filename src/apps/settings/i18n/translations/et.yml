@@ -138,6 +138,10 @@ apps_configurations:
   new: Uus
   confirm_delete_title: Kinnitage kustutamine
   bundled_title: Rakenduse konfiguratsioon, mis on komplekteeritud Seeleniga
+  extra_info: >-
+    Seeleni kasutajaliides kasutab rakenduse kohta ainult ühte identifikaatorit
+    (leiti esimene vaste), seega on määramise järjekord oluline, viimati lisatud
+    on prioriteediks, kuna tabel sorteeritakse vaikimisi uusimast vanani.
 extras:
   exit: Lõpeta/väljumine
   relaunch: Taaskäivitama

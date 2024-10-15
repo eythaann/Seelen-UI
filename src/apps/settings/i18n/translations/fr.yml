@@ -141,6 +141,11 @@ apps_configurations:
     and: ET
     or: OU
     add_block: Ajouter un bloc
+  extra_info: >-
+    Seelen UI utilise un seul identifiant par application (premier match
+    trouvé), donc l'ordre dans How Are Speciteated est important, le dernier
+    ajouté sera prioritaire, car le tableau est trié par défaut du dernier à
+    l'ancien.
 extras:
   version: Version
   links: Liens officiels

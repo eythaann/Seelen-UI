@@ -138,6 +138,11 @@ apps_configurations:
   confirm_delete_title: Patvirtinkite ištrynti
   export: Eksportas
   bundled_title: APP CONFIC sujungta su „Seelen“
+  extra_info: >-
+    „Seelen“ vartotojo sąsaja naudoja tik vieną identifikatorių vienai programai
+    (rasta pirmoji atitiktis), todėl svarbi tvarka, kaip nurodyta, bus teikiama
+    pirmenybė naujausiai pridėtai, nes pagal numatytuosius nustatymus lentelė
+    rūšiuojama nuo naujausios iki senesnės.
 extras:
   links: Oficialios nuorodos
   github: Github

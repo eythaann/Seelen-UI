@@ -22,6 +22,7 @@ async function translateObject(base: any, lang: string, mut_obj: any) {
           from: 'en',
           to: lang,
           forceTo: true,
+          forceBatch: false,
         });
         mut_obj[key] = res.text;
       }

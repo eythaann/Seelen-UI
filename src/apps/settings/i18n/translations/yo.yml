@@ -136,6 +136,10 @@ apps_configurations:
     Awọn atunto ti a dapọ mọ ko ṣe deede ati pe a ṣe apẹrẹ lati fun ọ ni iriri
     ti o dara julọ laisi isọdi. Wọn tunto awọn ohun elo ti o wọpọ julọ fun ọ.
   import: Aṣagbewọle lati ilẹ okeere
+  extra_info: >-
+    Sisen UI Nikan idakan kan fun app (ere akọkọ ti a rii) nitorinaa ni alaye ni
+    pataki, bi a ṣe le ṣe akiyesi tabili ti o wa ni lẹsẹsẹ nipasẹ aiyipada si
+    atijọ.
 extras:
   discord: Di eniyan
   github: Gitter

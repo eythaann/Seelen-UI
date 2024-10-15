@@ -138,6 +138,11 @@ apps_configurations:
   delete: Ħassar
   new: Ġdid
   swap: Tpartit
+  extra_info: >-
+    Seelen UI tuża identifikatur wieħed biss għal kull app (l-ewwel tqabbil
+    misjub) sabiex l-ordni ta 'kif huma speċifikati hija importanti, l-aħħar
+    miżjuda se tkun prijoritizzata, peress li nnota li t-tabella hija magħżula
+    b'mod awtomatiku mill-aktar tard għall-qadim.
 extras:
   relaunch: Tnedija mill-ġdid
   github: Github

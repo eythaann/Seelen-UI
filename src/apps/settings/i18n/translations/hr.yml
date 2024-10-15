@@ -138,6 +138,11 @@ apps_configurations:
   delete: Izbrisati
   confirm_delete_title: Potvrdi Delete
   search: traži
+  extra_info: >-
+    Seelen UI koristi samo jedan identifikator po aplikaciji (prvo pronađeno
+    podudaranje) tako da je redoslijed u načinu na koji su specificirani važan,
+    najnovije dodano će imati prioritet, imajte na umu da je tablica sortirana
+    prema zadanim postavkama od najnovijeg prema starom.
 extras:
   relaunch: Ponovno pokretanje
   github: Ždrijeb

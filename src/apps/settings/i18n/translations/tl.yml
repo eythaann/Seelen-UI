@@ -139,6 +139,12 @@ apps_configurations:
   confirm_delete_title: Kumpirmahin ang Tanggalin
   new: Bago
   swap: Ipagpalit
+  extra_info: >-
+    Ang Seelen UI ay gumagamit lamang ng isang identifier bawat app (unang tugma
+    na natagpuan) kaya ang pagkakasunud -sunod sa kung paano ang tinukoy ay
+    mahalaga, ang pinakabagong idinagdag ay unahin, dahil ang tala ang
+    talahanayan ay pinagsunod -sunod ng default mula sa pinakabagong hanggang sa
+    luma.
 extras:
   relaunch: Muling pagsasaayos
   version: Bersyon

@@ -138,6 +138,11 @@ apps_configurations:
     Konfigurasi yang dibundel ini tidak dapat diedit dan direka untuk memberi
     anda pengalaman terbaik tanpa penyesuaian. Mereka secara automatik
     mengkonfigurasi aplikasi yang paling biasa untuk anda.
+  extra_info: >-
+    UI Seelen hanya menggunakan satu pengecam bagi setiap apl (padanan pertama
+    ditemui) jadi susunan cara dikhususkan adalah penting, penambahan terkini
+    akan diutamakan, kerana ambil perhatian bahawa jadual diisih secara lalai
+    dari terkini ke lama.
 extras:
   links: Pautan Rasmi
   github: Github

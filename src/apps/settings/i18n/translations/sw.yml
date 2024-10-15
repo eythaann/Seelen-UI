@@ -136,6 +136,11 @@ apps_configurations:
   import: Kuagiza
   confirm_delete_title: Thibitisha Futa
   swap: Kubadilishana
+  extra_info: >-
+    Seelen UI hutumia kitambulisho kimoja tu kwa kila programu (kwanza
+    kupatikana) kwa hivyo mpangilio wa jinsi ulivyobainishwa ni muhimu, ya hivi
+    punde zaidi yatapewa kipaumbele, kwani kumbuka jedwali hupangwa kwa
+    chaguo-msingi kutoka kwa hivi karibuni hadi vya zamani.
 extras:
   relaunch: Kuzindua tena
   discord: Ugomvi

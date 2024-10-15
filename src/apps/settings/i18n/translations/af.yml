@@ -138,6 +138,11 @@ apps_configurations:
   confirm_delete: Is u seker dat u hierdie konfigurasie/s wil uitvee?
   swap: Ruil
   search: Soek
+  extra_info: >-
+    Seelen UI gebruik slegs een identifiseerder per app (eerste wedstryd
+    gevind), dus die volgorde in hoe dit gespesifiseer is, is belangrik, die
+    nuutste bygevoeg sal geprioritiseer word, aangesien die tabel standaard van
+    die nuutste na oud gesorteer is.
 extras:
   relaunch: Herlaai
   links: Amptelike skakels
