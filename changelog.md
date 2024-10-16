@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.2]
 ### fix
 - infinite render loop on settings home page, fetching news.
 
