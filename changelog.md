@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.1]
 ### refactor
 - unification of SeelenWeg pinned files, folder and apps in a single structure.
 
