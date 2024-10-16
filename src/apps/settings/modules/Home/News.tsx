@@ -54,7 +54,7 @@ export function NoticeSlider() {
       setNews(news.filter((item) => item !== null) as New[]);
     }
     fetchData();
-  });
+  }, []);
 
   useInterval(
     () => {

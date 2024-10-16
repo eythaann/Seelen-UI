@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- infinite render loop on settings home page, fetching news.
+
 ## [2.0.1]
 ### refactor
 - unification of SeelenWeg pinned files, folder and apps in a single structure.
