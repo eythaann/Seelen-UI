@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{WegItems, WindowManagerLayout};
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
 
 use super::{
     application::{FullState, LauncherHistory, FULL_STATE},
@@ -32,7 +32,9 @@ pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
 
 #[tauri::command(async)]
 pub fn state_get_weg_items() -> WegItems {
-    FULL_STATE.load().weg_items().clone()
+    let state = FULL_STATE.load();
+    let items = trace_lock!(state.weg_items);
+    items.clone()
 }
 
 #[tauri::command(async)]

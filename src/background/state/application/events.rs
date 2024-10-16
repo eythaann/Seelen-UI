@@ -1,5 +1,5 @@
 use itertools::Itertools;
-use seelen_core::handlers::SeelenEvent;
+use seelen_core::{handlers::SeelenEvent, state::WegItems};
 use tauri::Emitter;
 
 use crate::{
@@ -17,8 +17,8 @@ impl FullState {
         Ok(())
     }
 
-    pub fn emit_weg_items(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StateWegItemsChanged, self.weg_items())?;
+    pub fn emit_weg_items(&self, items: &WegItems) -> Result<()> {
+        get_app_handle().emit(SeelenEvent::StateWegItemsChanged, items)?;
         Ok(())
     }
 

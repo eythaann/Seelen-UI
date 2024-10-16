@@ -6,7 +6,7 @@ use tauri::Emitter;
 
 use crate::{
     error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
-    state::application::FULL_STATE, windows_api::WindowsApi,
+    state::application::FULL_STATE, trace_lock, windows_api::WindowsApi,
 };
 use windows::Win32::{
     Foundation::HWND,
@@ -105,11 +105,11 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         }
     }
 
-    let mut state = FULL_STATE.load().cloned();
-    state.weg_items.center.insert(0, WegItem::Pinned(data));
-    state.weg_items.sanitize();
-    state.emit_weg_items()?;
-    state.save_weg_items()?;
-    state.store();
+    let state = FULL_STATE.load();
+    let mut weg_items = trace_lock!(state.weg_items);
+    weg_items.center.insert(0, WegItem::Pinned(data));
+    weg_items.sanitize();
+    state.emit_weg_items(&weg_items)?;
+    state.save_weg_items(&weg_items)?;
     Ok(())
 }

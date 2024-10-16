@@ -71,7 +71,7 @@ pub struct FullState {
     pub icon_packs: Arc<Mutex<HashMap<String, IconPack>>>,
     pub placeholders: HashMap<String, Placeholder>,
     pub layouts: HashMap<String, WindowManagerLayout>,
-    pub weg_items: WegItems,
+    pub weg_items: Arc<Mutex<WegItems>>,
     pub history: LauncherHistory,
 }
 
@@ -91,7 +91,7 @@ impl FullState {
             icon_packs: Arc::new(Mutex::new(HashMap::new())),
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
-            weg_items: WegItems::default(),
+            weg_items: Arc::new(Mutex::new(WegItems::default())),
             history: HashMap::new(),
         };
         manager.load_all()?;
@@ -141,7 +141,7 @@ impl FullState {
             log::info!("Weg Items changed");
             self.load_weg_items()?;
             self.store_cloned();
-            self.emit_weg_items()?;
+            self.emit_weg_items(&*trace_lock!(self.weg_items))?;
         }
 
         if event.paths.contains(&history_path) {
@@ -278,12 +278,12 @@ impl FullState {
     }
 
     fn load_weg_items(&mut self) -> Result<()> {
+        let mut current = trace_lock!(self.weg_items);
         if WEG_ITEMS_PATH.exists() {
-            self.weg_items =
-                serde_yaml::from_str(&std::fs::read_to_string(WEG_ITEMS_PATH.as_path())?)?;
-            self.weg_items.sanitize();
+            *current = serde_yaml::from_str(&std::fs::read_to_string(WEG_ITEMS_PATH.as_path())?)?;
+            current.sanitize();
         } else {
-            self.save_weg_items()?;
+            self.save_weg_items(&current)?;
         }
         Ok(())
     }
@@ -511,10 +511,11 @@ impl FullState {
         Ok(())
     }
 
-    pub fn save_weg_items(&self) -> Result<()> {
+    pub fn save_weg_items(&self, items: &WegItems) -> Result<()> {
         let mut file = trace_lock!(WEG_ITEMS_FILE);
         file.rewind()?;
-        file.write_all(serde_yaml::to_string(&self.weg_items)?.as_bytes())?;
+        file.write_all(serde_yaml::to_string(items)?.as_bytes())?;
+        file.flush()?;
         Ok(())
     }
 
