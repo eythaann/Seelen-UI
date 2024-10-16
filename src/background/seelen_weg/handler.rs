@@ -107,6 +107,7 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
 
     let mut state = FULL_STATE.load().cloned();
     state.weg_items.center.insert(0, WegItem::Pinned(data));
+    state.weg_items.sanitize();
     state.emit_weg_items()?;
     state.save_weg_items()?;
     state.store();

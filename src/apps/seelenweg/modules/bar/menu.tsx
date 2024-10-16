@@ -10,11 +10,7 @@ import { dialog } from 'src/apps/settings/modules/shared/tauri/infra';
 
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
-import {
-  AppsSides,
-  ExtendedPinnedWegItem,
-  ExtendedTemporalWegItem,
-} from '../shared/store/domain';
+import { AppsSides, ExtendedPinnedWegItem, ExtendedTemporalWegItem } from '../shared/store/domain';
 
 import { savePinnedItems } from '../shared/store/storeApi';
 
@@ -44,6 +40,10 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
         const files = await dialog.open({
           title: t('taskbar_menu.add_file'),
           multiple: true,
+          filters: [
+            { name: 'lnk', extensions: ['lnk'] },
+            { name: '*', extensions: ['*'] },
+          ],
         });
         for (const path of files || []) {
           await invoke(SeelenCommand.WegPinItem, { path });
