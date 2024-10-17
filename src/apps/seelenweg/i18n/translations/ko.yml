@@ -1,9 +1,9 @@
 taskbar_menu:
   media: 미디어 모듈 추가
-  start: 시작 모듈 추가
+  start: 시작 버튼 추가
   settings: 설정 열기
-  add_file: 핀 사용자 정의 파일
-  add_folder: 핀 사용자 정의 폴더
+  add_file: 사용자 정의 파일 추가
+  add_folder: 사용자 정의 폴더 추가
 app_menu:
   unpin: 고정 해제
   pin: 고정
@@ -18,4 +18,4 @@ app_menu:
 media_menu:
   remove: 미디어 모듈 제거
 start_menu:
-  remove: 시작 모듈 제거
+  remove: 시작 버튼 제거
