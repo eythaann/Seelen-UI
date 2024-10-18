@@ -11,11 +11,11 @@ pub struct PinnedWegItemData {
     /// browser executable so this is not unique across PWA apps, and can't be used to identify apps.
     /// Also this can't be used to launch the app.
     ///
-    /// UWP: In case of UWP apps this will be the path to the app executable, but this can be used to
+    /// UWP: In case of UWP apps this will be the path to the app executable, but this can't be used to
     /// invoke the app instead should be used the `shell:AppsFolder` + app user model id.
     #[serde(alias = "exe")]
     pub path: PathBuf,
-    /// Program, file or folder to execute/open when clicking the item. First parameter of `start "" "$1" "$2"`.
+    /// Program, file or folder to execute/open when clicking the item.
     ///
     /// Exclusion: On `.lnk` files this is the target of the link and when open action is triggered,
     /// this field and arguments are ignored, using the link file as command.
@@ -25,8 +25,6 @@ pub struct PinnedWegItemData {
     /// Note: this field is mandatory and will be filled with `path` if it is not set
     #[serde(default, alias = "execution_path")]
     pub execution_command: String,
-    /// Arguments to pass to the program. Second parameter of `start "" "$1" "$2"`
-    pub execution_arguments: Option<String>,
     /// true if self.path is a folder
     #[serde(default)]
     pub is_dir: bool,
@@ -60,7 +58,6 @@ impl Default for WegItems {
             center: vec![WegItem::Pinned(PinnedWegItemData {
                 path: "C:\\Windows\\explorer.exe".into(),
                 execution_command: "C:\\Windows\\explorer.exe".into(),
-                execution_arguments: None,
                 is_dir: false,
             })],
             right: vec![WegItem::Media],

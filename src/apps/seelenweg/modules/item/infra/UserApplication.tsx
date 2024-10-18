@@ -81,10 +81,7 @@ export const UserApplication = memo(({ item }: Props) => {
                 if (item.path.endsWith('.lnk')) {
                   invoke(SeelenCommand.OpenFile, { path: item.path });
                 } else {
-                  invoke(SeelenCommand.OpenFile, {
-                    path: item.execution_command,
-                    args: item.execution_arguments,
-                  });
+                  invoke(SeelenCommand.OpenFile, { path: item.execution_command });
                 }
               } else {
                 invoke(SeelenCommand.WegToggleWindowState, { hwnd });

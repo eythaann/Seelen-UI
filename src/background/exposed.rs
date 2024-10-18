@@ -41,14 +41,13 @@ fn select_file_on_explorer(path: String) -> Result<()> {
 
 #[tauri::command(async)]
 fn open_file(path: String, args: Option<String>) -> Result<()> {
-    let mut command = get_app_handle()
+    // TODO: search a way to allow arguments without executing apps as admin (try using .lnk files and explorer)
+    let _args = args;
+    get_app_handle()
         .shell()
         .command("cmd")
-        .args(["/C", "start", "", &path]);
-    if let Some(arg) = args {
-        command = command.arg(&arg);
-    }
-    command.spawn()?;
+        .args(["/c", "explorer", &path])
+        .spawn()?;
     Ok(())
 }
 

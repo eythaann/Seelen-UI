@@ -93,16 +93,12 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         path: path.clone(),
         is_dir: path.is_dir(),
         execution_command: path.to_string_lossy().to_string(),
-        execution_arguments: None,
     };
 
     if path.extension() == Some(OsStr::new("lnk")) {
-        let (program, arguments) = WindowsApi::resolve_lnk_target(&path)?;
+        let (program, _arguments) = WindowsApi::resolve_lnk_target(&path)?;
         data.is_dir = program.is_dir();
         data.execution_command = program.to_string_lossy().to_string();
-        if !arguments.is_empty() {
-            data.execution_arguments = Some(arguments.to_string_lossy().to_string());
-        }
     }
 
     let state = FULL_STATE.load();

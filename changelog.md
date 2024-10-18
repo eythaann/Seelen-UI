@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- apps being runned as admin instead normal.
+
 ## [2.0.2]
 ### fix
 - infinite render loop on settings home page, fetching news.

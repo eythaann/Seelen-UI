@@ -21,7 +21,6 @@ export class SwTemporalAppUtils {
       icon: item.icon || '',
       path: item.exe,
       execution_command: item.execution_path,
-      execution_arguments: null,
       is_dir: false,
       title: item.exe.split('\\').at(-1) || 'Unknown',
       opens: [item.hwnd],

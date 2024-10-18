@@ -10,7 +10,6 @@ export interface PinnedWegItem {
   type: SwItemType.Pinned;
   path: string;
   execution_command: string;
-  execution_arguments: null | string;
   is_dir: boolean;
 }
 
@@ -18,7 +17,6 @@ export interface TemporalPinnedWegItem {
   type: SwItemType.TemporalApp;
   path: string;
   execution_command: string;
-  execution_arguments: null | string;
   is_dir: boolean;
 }
 
