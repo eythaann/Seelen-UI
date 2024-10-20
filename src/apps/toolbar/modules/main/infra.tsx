@@ -1,27 +1,30 @@
+import { Reorder, useForceUpdate } from 'framer-motion';
+import { debounce } from 'lodash';
+import { JSXElementConstructor, useCallback, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HideMode, useWindowFocusChange } from 'seelen-core';
 import {
   Placeholder,
   ToolbarModule,
   ToolbarModuleType,
-} from '../../../shared/schemas/Placeholders';
-import { TrayModule } from '../Tray';
-import { WorkspacesModule } from '../Workspaces';
-import { Reorder, useForceUpdate } from 'framer-motion';
-import { debounce } from 'lodash';
-import { JSXElementConstructor, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+} from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
 import { DeviceModule } from '../Device/infra';
-import { GenericItem, Item } from '../item/infra';
+import { GenericItem, Item } from '../item/infra/infra';
 import { MediaModule } from '../media/infra/Module';
 import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
 
-import { RootActions } from '../shared/store/app';
+import { RootActions, Selectors } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
+
+import { cx } from '../../../shared/styles';
+import { TrayModule } from '../Tray';
+import { WorkspacesModule } from '../Workspaces';
 
 const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
   [ToolbarModuleType.Text]: Item,
@@ -53,8 +56,16 @@ function componentByModule(module: ToolbarModule, idx: number) {
 }
 
 export function ToolBar({ structure }: Props) {
+  const [isAppFocused, setAppFocus] = useState(false);
+  const isOverlaped = useSelector(Selectors.isOverlaped);
+  const hideMode = useSelector(Selectors.settings.hideMode);
+
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
+
+  useWindowFocusChange((focused) => {
+    setAppFocus(focused);
+  });
 
   const onReorderPinned = useCallback(
     debounce((apps: (ToolbarModule | string)[]) => {
@@ -80,6 +91,9 @@ export function ToolBar({ structure }: Props) {
     [],
   );
 
+  const shouldBeHidden =
+    !isAppFocused && hideMode !== HideMode.Never && (isOverlaped || hideMode === HideMode.Always);
+
   return (
     <Reorder.Group
       values={[
@@ -90,7 +104,9 @@ export function ToolBar({ structure }: Props) {
         ...structure.right,
       ]}
       onReorder={onReorderPinned}
-      className="ft-bar"
+      className={cx('ft-bar', {
+        'ft-bar-hidden': shouldBeHidden,
+      })}
       axis="x"
       as="div"
     >

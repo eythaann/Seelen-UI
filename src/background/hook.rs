@@ -1,110 +1,133 @@
 use std::{
     collections::HashMap,
+    path::PathBuf,
     sync::{
-        atomic::{AtomicIsize, Ordering},
+        atomic::{AtomicBool, AtomicIsize, Ordering},
         Arc,
     },
+    thread::JoinHandle,
     time::{Duration, Instant},
 };
 
-use color_eyre::owo_colors::OwoColorize;
+use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::handlers::SeelenEvent;
+use serde::Serialize;
 use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
     UI::{
-        Accessibility::{SetWinEventHook, HWINEVENTHOOK},
+        Accessibility::{SetWinEventHook, UnhookWinEvent, HWINEVENTHOOK},
         WindowsAndMessaging::{
-            DispatchMessageW, GetForegroundWindow, GetMessageW, TranslateMessage, EVENT_MAX,
-            EVENT_MIN, MSG,
+            DispatchMessageW, GetMessageW, TranslateMessage, EVENT_MAX, EVENT_MIN, MSG,
         },
     },
 };
-use winvd::{listen_desktop_events, DesktopEvent};
 
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::SEELEN,
+    modules::{
+        input::{domain::Point, Mouse},
+        virtual_desk::{get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager},
+    },
+    seelen::{get_app_handle, Seelen, SEELEN},
     seelen_weg::SeelenWeg,
+    seelen_wm_v2::instance::WindowManagerV2,
     state::{application::FULL_STATE, domain::AppExtraFlag},
     trace_lock,
-    utils::{constants::IGNORE_FOCUS, is_virtual_desktop_supported, spawn_named_thread},
-    windows_api::WindowsApi,
+    utils::spawn_named_thread,
+    windows_api::{window::Window, WindowsApi},
     winevent::WinEvent,
 };
 
 lazy_static! {
-    pub static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
+    static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
+    // Last active window omitting all the seelen overlays
+    pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0 as _);
 }
 
-pub static LAST_FOREGROUNDED: AtomicIsize = AtomicIsize::new(0);
+pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
 
-type HookCallback = Box<dyn Fn(&mut HookManager) + Send + 'static>;
 pub struct HookManager {
-    paused: bool,
-    waiting_event: Option<WinEvent>,
-    waiting_hwnd: Option<HWND>,
-    resume_cb: Option<HookCallback>,
+    skip: HashMap<isize, Vec<WinEvent>>,
+}
+
+#[derive(Serialize, Clone)]
+pub struct FocusedApp {
+    hwnd: isize,
+    title: String,
+    name: String,
+    exe: Option<PathBuf>,
 }
 
 impl HookManager {
-    pub fn new() -> Self {
+    fn new() -> Self {
         Self {
-            paused: false,
-            waiting_event: None,
-            waiting_hwnd: None,
-            resume_cb: None,
+            skip: HashMap::new(),
         }
     }
 
-    pub fn pause(&mut self) {
-        self.paused = true;
-    }
-
-    pub fn resume(&mut self) {
-        self.paused = false;
-        if let Some(cb) = self.resume_cb.take() {
-            cb(self);
-        }
-    }
-
-    pub fn is_paused(&self) -> bool {
-        self.paused
-    }
-
-    pub fn pause_and_resume_after(&mut self, event: WinEvent, hwnd: HWND) {
-        self.pause();
-        self.waiting_event = Some(event);
-        self.waiting_hwnd = Some(hwnd);
-    }
-
-    pub fn set_resume_callback<F>(&mut self, cb: F)
+    pub fn run_with_async<F, T>(f: F) -> JoinHandle<T>
     where
-        F: Fn(&mut HookManager) + Send + 'static,
+        F: FnOnce(&mut HookManager) -> T,
+        F: Send + 'static,
+        T: Send + 'static,
     {
-        self.resume_cb = Some(Box::new(cb));
+        std::thread::spawn(move || f(&mut *trace_lock!(HOOK_MANAGER)))
     }
 
-    pub fn is_waiting_for(&self, event: WinEvent, hwnd: HWND) -> bool {
-        self.waiting_event == Some(event) && self.waiting_hwnd == Some(hwnd)
+    pub fn skip(&mut self, event: WinEvent, hwnd: HWND) {
+        self.skip.entry(hwnd.0 as _).or_default().push(event)
     }
 
-    pub fn emit_fake_win_event(&mut self, event: u32, hwnd: HWND) {
-        std::thread::spawn(move || {
-            win_event_hook(HWINEVENTHOOK::default(), event, hwnd, 0, 0, 0, 0);
-        });
+    fn should_skip(&self, event: WinEvent, hwnd: HWND) -> bool {
+        // skip foreground on invisible windows
+        if event == WinEvent::SystemForeground && !WindowsApi::is_window_visible(hwnd) {
+            return true;
+        }
+        if let Some(v) = self.skip.get(&(hwnd.0 as _)) {
+            return v.contains(&event);
+        }
+        false
     }
 
-    pub fn _log_event(event: WinEvent, origin: HWND) {
-        if event == WinEvent::ObjectLocationChange {
+    fn skip_done(&mut self, event: WinEvent, hwnd: HWND) {
+        if LOG_WIN_EVENTS.load(Ordering::Relaxed) {
+            log::debug!("Skipping WinEvent::{:?}", event);
+        }
+
+        let hwnd = hwnd.0 as isize;
+        if let Some(v) = self.skip.get_mut(&hwnd) {
+            if let Some(pos) = v.iter().position(|e| e == &event) {
+                v.remove(pos);
+            }
+            if v.is_empty() {
+                self.skip.remove(&hwnd);
+            }
+        }
+    }
+
+    fn log_event(event: WinEvent, origin: HWND) {
+        if !LOG_WIN_EVENTS.load(Ordering::Relaxed) || event == WinEvent::ObjectLocationChange {
             return;
         }
+        let event_value = {
+            #[cfg(dev)]
+            {
+                use owo_colors::OwoColorize;
+                event.green()
+            }
+            #[cfg(not(dev))]
+            {
+                &event
+            }
+        };
 
-        println!(
-            "{:?}({:x}) || {} || {} || {:<20}",
-            event.green(),
+        log::debug!(
+            "{:?}({:?}) || {} || {} || {}",
+            event_value,
             origin.0,
             WindowsApi::exe(origin).unwrap_or_default(),
             WindowsApi::get_class(origin).unwrap_or_default(),
@@ -112,96 +135,143 @@ impl HookManager {
         );
     }
 
-    pub fn event(&mut self, event: WinEvent, origin: HWND) {
-        // uncomment for debug
-        // Self::_log_event(event, origin);
+    fn _event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
+        Self::log_event(event, origin);
 
-        let title = WindowsApi::get_window_text(origin);
-        if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
-            if IGNORE_FOCUS.contains(&title) {
-                return;
-            }
-            LAST_FOREGROUNDED.store(origin.0, Ordering::SeqCst);
-        }
-
-        // Stop event propagation
-        if self.is_paused() {
-            if self.is_waiting_for(event, origin) {
-                self.resume();
-            }
+        if self.should_skip(event, origin) {
+            self.skip_done(event, origin);
             return;
         }
 
-        let mut seelen = trace_lock!(SEELEN);
-        if seelen.state().is_weg_enabled() {
-            log_error!(SeelenWeg::process_global_win_event(event, origin));
+        let window = Window::from(origin);
+        if event == WinEvent::SystemForeground && !window.is_seelen_overlay() {
+            LAST_ACTIVE_NOT_SEELEN.store(origin.0 as _, Ordering::Relaxed);
+        }
+
+        if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
+            let title = window.title();
+            log_error!(get_app_handle().emit(
+                SeelenEvent::GlobalFocusChanged,
+                FocusedApp {
+                    title,
+                    hwnd: origin.0 as _,
+                    name: window
+                        .app_display_name()
+                        .unwrap_or(String::from("Error on App Name")),
+                    exe: window.exe().ok(),
+                },
+            ));
+        }
+
+        let log_error_event = move |name: &str, result: Result<()>| {
+            if let Err(err) = result {
+                log::error!(
+                    "{} => Event: {:?} Error: {:?} Window: {:?}",
+                    name,
+                    event,
+                    err,
+                    window
+                );
+            }
+        };
+
+        if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
+            log_error_event("Virtual Desk", vd.on_win_event(event, &window));
+        }
+
+        let app_state = seelen.state();
+        if app_state.is_weg_enabled() {
+            std::thread::spawn(move || {
+                log_error_event(
+                    "Weg Global",
+                    SeelenWeg::process_global_win_event(event, &window),
+                );
+            });
+        }
+
+        if app_state.is_window_manager_enabled() {
+            std::thread::spawn(move || {
+                log_error_event(
+                    "WM Global",
+                    WindowManagerV2::process_win_event(event, &window),
+                );
+            });
+        }
+
+        if let Some(wall) = seelen.wall_mut() {
+            log_error_event("Wall Instance", wall.process_win_event(event, &window));
         }
 
         for monitor in seelen.monitors_mut() {
             if let Some(toolbar) = monitor.toolbar_mut() {
-                log_error!(toolbar.process_win_event(event, origin));
+                log_error_event("Toolbar Instance", toolbar.process_win_event(event, origin));
             }
 
             if let Some(weg) = monitor.weg_mut() {
-                log_error!(weg.process_individual_win_event(event, origin));
+                log_error_event(
+                    "Weg Instance",
+                    weg.process_individual_win_event(event, origin),
+                );
             }
+        }
+    }
 
-            if let Some(wm) = monitor.wm_mut() {
-                log_error!(wm.process_win_event(event, origin));
+    pub fn emit_event(event: WinEvent, origin: HWND) {
+        // Follows lock order: CLI -> DATA -> EVENT to avoid deadlocks
+        let mut seelen = trace_lock!(SEELEN);
+        let mut hook_manager = trace_lock!(HOOK_MANAGER);
+        hook_manager._event(event, origin, &mut seelen);
+
+        if let Ok(synthetics) = event.get_synthetics(origin) {
+            for synthetic_event in synthetics {
+                hook_manager._event(synthetic_event, origin, &mut seelen)
             }
         }
     }
 }
 
-pub fn process_vd_event(event: DesktopEvent) -> Result<()> {
-    let mut seelen = trace_lock!(SEELEN);
-    for monitor in seelen.monitors_mut() {
-        if let Some(wm) = monitor.wm_mut() {
-            log_error!(wm.process_vd_event(&event));
-        }
+pub fn process_vd_event(event: VirtualDesktopEvent) -> Result<()> {
+    if FULL_STATE.load().is_window_manager_enabled() {
+        log_error!(WindowManagerV2::process_vd_event(&event));
     }
 
     match event {
-        DesktopEvent::DesktopCreated(_)
-        | DesktopEvent::DesktopDestroyed {
+        VirtualDesktopEvent::DesktopCreated(_)
+        | VirtualDesktopEvent::DesktopDestroyed {
             destroyed: _,
             fallback: _,
         }
-        | DesktopEvent::DesktopMoved {
+        | VirtualDesktopEvent::DesktopMoved {
             desktop: _,
             old_index: _,
             new_index: _,
         }
-        | DesktopEvent::DesktopNameChanged(_, _) => {
-            let desktops = winvd::get_desktops()?;
-            let mut desktops_names = Vec::new();
-            for (i, d) in desktops.iter().enumerate() {
-                if let Ok(name) = d.get_name() {
-                    desktops_names.push(name);
-                } else {
-                    desktops_names.push(format!("Desktop {}", i + 1))
-                }
-            }
-            seelen.handle().emit("workspaces-changed", desktops_names)?;
+        | VirtualDesktopEvent::DesktopNameChanged(_, _) => {
+            let desktops = get_vd_manager()
+                .get_all()?
+                .iter()
+                .map(|d| d.as_serializable())
+                .collect_vec();
+            get_app_handle().emit(SeelenEvent::WorkspacesChanged, &desktops)?;
         }
 
-        DesktopEvent::DesktopChanged { new, old: _ } => {
-            seelen
-                .handle()
-                .emit("active-workspace-changed", new.get_index()?)?;
+        VirtualDesktopEvent::DesktopChanged { new, old: _ } => {
+            get_app_handle().emit(SeelenEvent::ActiveWorkspaceChanged, new.id())?;
+        }
+        VirtualDesktopEvent::WindowChanged(window) => {
+            let hwnd = HWND(window as _);
+            if WindowsApi::is_window(hwnd) {
+                if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
+                    let vd = get_vd_manager();
+                    if config.options.contains(&AppExtraFlag::Pinned)
+                        && !vd.is_pinned_window(window)?
+                    {
+                        vd.pin_window(window)?;
+                    }
+                }
+            }
         }
         _ => {}
-    }
-
-    if let DesktopEvent::WindowChanged(hwnd) = event {
-        if WindowsApi::is_window(hwnd) {
-            if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-                if config.options.contains(&AppExtraFlag::Pinned) && !winvd::is_pinned_window(hwnd)?
-                {
-                    winvd::pin_window(hwnd)?;
-                }
-            }
-        }
     }
 
     Ok(())
@@ -216,9 +286,9 @@ pub fn location_delay_completed(origin: HWND) -> bool {
     let last = LAST_LOCATION_CHANGED.load(Ordering::Acquire);
     let mut dict = trace_lock!(DICT);
 
-    let should_continue = match dict.entry(origin.0) {
+    let should_continue = match dict.entry(origin.0 as _) {
         std::collections::hash_map::Entry::Occupied(mut entry) => {
-            if last != origin.0 || entry.get().elapsed() > Duration::from_millis(50) {
+            if last != origin.0 as isize || entry.get().elapsed() > Duration::from_millis(50) {
                 entry.insert(Instant::now());
                 true
             } else {
@@ -232,77 +302,82 @@ pub fn location_delay_completed(origin: HWND) -> bool {
     };
 
     if should_continue {
-        LAST_LOCATION_CHANGED.store(origin.0, Ordering::Release);
+        LAST_LOCATION_CHANGED.store(origin.0 as _, Ordering::Release);
     }
 
     should_continue
 }
 
 pub extern "system" fn win_event_hook(
-    _h_win_event_hook: HWINEVENTHOOK,
+    hook_handle: HWINEVENTHOOK,
     event: u32,
-    hwnd: HWND,
+    origin: HWND,
     id_object: i32,
     _id_child: i32,
     _id_event_thread: u32,
     _dwms_event_time: u32,
 ) {
+    let hook_was_invalidated = hook_handle.is_invalid();
+    if !Seelen::is_running() {
+        if !hook_was_invalidated {
+            log::trace!("Exiting WinEventHook");
+            let _ = unsafe { UnhookWinEvent(hook_handle) };
+        }
+        return;
+    }
+
     if id_object != 0 {
         return;
     }
 
     if FULL_STATE.load().is_weg_enabled() {
         // raw events should be only used for a fastest and immediately processing
-        log_error!(SeelenWeg::process_raw_win_event(event, hwnd));
+        log_error!(SeelenWeg::process_raw_win_event(event, origin));
     }
 
-    let event = match WinEvent::try_from(event) {
-        Ok(event) => event,
-        Err(_) => return,
-    };
-
-    if event == WinEvent::ObjectLocationChange && !location_delay_completed(hwnd) {
+    let event = WinEvent::from(event);
+    if event == WinEvent::ObjectLocationChange && !location_delay_completed(origin) {
         return;
     }
-
-    let mut hook_manager = trace_lock!(HOOK_MANAGER);
-    hook_manager.event(event, hwnd);
-
-    if let Some(synthetic_event) = event.get_synthetic(hwnd) {
-        hook_manager.event(synthetic_event, hwnd);
-    }
+    HookManager::emit_event(event, origin)
 }
 
 pub fn register_win_hook() -> Result<()> {
     log::trace!("Registering Windows and Virtual Desktop Hooks");
 
-    // let stack_size = 5 * 1024 * 1024; // 5 MB
     spawn_named_thread("WinEventHook", move || unsafe {
-        trace_lock!(HOOK_MANAGER).event(WinEvent::SystemForeground, GetForegroundWindow());
         SetWinEventHook(EVENT_MIN, EVENT_MAX, None, Some(win_event_hook), 0, 0, 0);
-
         let mut msg: MSG = MSG::default();
         loop {
-            if !GetMessageW(&mut msg, HWND(0), 0, 0).as_bool() {
-                log::info!("windows event processing shutdown");
+            if !GetMessageW(&mut msg, HWND::default(), 0, 0).as_bool() {
                 break;
             };
             let _ = TranslateMessage(&msg);
             DispatchMessageW(&msg);
-            std::thread::sleep(Duration::from_millis(10));
         }
     })?;
 
-    if is_virtual_desktop_supported() {
-        spawn_named_thread("VirtualDesktopEventHook", move || -> Result<()> {
-            let (sender, receiver) = std::sync::mpsc::channel::<DesktopEvent>();
-            let _notifications_thread = listen_desktop_events(sender)?;
-            for event in receiver {
-                log_error!(process_vd_event(event))
+    let (sender, receiver) = std::sync::mpsc::channel::<VirtualDesktopEvent>();
+    get_vd_manager().listen_events(sender)?;
+    spawn_named_thread("VirtualDesktopEventHook", move || {
+        for event in receiver {
+            log_error!(process_vd_event(event))
+        }
+    })?;
+
+    spawn_named_thread("MouseEventHook", || {
+        let handle = get_app_handle();
+        let mut last_pos = Point::default();
+        loop {
+            if let Ok(pos) = Mouse::get_cursor_pos() {
+                if last_pos != pos {
+                    let _ = handle.emit(SeelenEvent::GlobalMouseMove, &[pos.get_x(), pos.get_y()]);
+                    last_pos = pos;
+                }
             }
-            Ok(())
-        })?;
-    }
+            std::thread::sleep(Duration::from_millis(66)); // 15 FPS
+        }
+    })?;
 
     Ok(())
 }

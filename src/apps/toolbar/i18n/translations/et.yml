@@ -33,3 +33,6 @@ placeholder:
   settings: Kiired seaded
   volume: Maht
   notifications: Teatised
+unlabelled_tray: Märgistamata salveikoon
+context_menu:
+  remove: Eemaldage üksus

@@ -1,0 +1,120 @@
+name: "Pre-Release"
+
+on:
+  push:
+    tags:
+      - "v[0-9]+\\.[0-9]+\\.[0-9]+-(beta|rc)\\.[0-9]+"
+  workflow_dispatch:
+
+jobs:
+  continuous-integration:
+    uses: ./.github/workflows/ci.yml
+
+  create-pre-release:
+    needs: continuous-integration
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      release_id: ${{ steps.create-pre-release.outputs.result }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get version
+        run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
+
+      - name: Create release
+        id: create-pre-release
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const changelogContent = fs.readFileSync('changelog.md', 'utf-8');
+            const regex = new RegExp(`(?<=\\[Unreleased\\]\\s)([\\s\\S]*?)(?=\\s## \\[)`, 'g');
+            const releaseNotes = changelogContent.match(regex)?.[0].trim() || '';
+
+            const { data } = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: `v${process.env.PACKAGE_VERSION}`,
+              name: `Seelen UI v${process.env.PACKAGE_VERSION}`,
+              body: releaseNotes,
+              generate_release_notes: true,
+              draft: true,
+              prerelease: true,
+            });
+            return data.id;
+
+  build-installers:
+    needs: create-pre-release
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "windows-latest"
+            args: ""
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Rust Nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2024-06-25
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install frontend dependencies
+        run: npm clean-install
+
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          releaseId: ${{ needs.create-pre-release.outputs.release_id }}
+          args: ${{ matrix.args }}
+
+  publish-release:
+    needs: [build-installers, create-pre-release]
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish pre-release
+        uses: actions/github-script@v7
+        env:
+          releaseId: ${{ needs.create-pre-release.outputs.release_id }}
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          script: |
+            const result = await github.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: process.env.releaseId,
+            });
+
+            result.data.forEach(async (asset) => {
+              if (asset.name.endsWith('.sig')) {
+                await github.rest.repos.deleteReleaseAsset({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  asset_id: asset.id,
+                });
+              }
+            });
+
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: process.env.releaseId,
+              draft: false,
+            });

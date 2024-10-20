@@ -1,6 +1,6 @@
 .icon {
+  height: 1rem;
   > svg {
-    font-size: 1rem;
     vertical-align: middle;
   }
 }

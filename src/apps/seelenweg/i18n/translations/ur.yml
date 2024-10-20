@@ -1,7 +1,9 @@
 taskbar_menu:
-  settings: کھلی ترتیبات
+  settings: سیٹنگ
   media: میڈیا ماڈیول شامل کریں
   start: اسٹارٹ ماڈیول شامل کریں
+  add_folder: کسٹم فولڈر کو پن
+  add_file: کسٹم فائل کو پن کریں
 app_menu:
   close_multiple: سب بند کرو
   run_as: انتظامیہ کے طورپر چلانا
@@ -9,8 +11,8 @@ app_menu:
   pin_to_left: بائیں سے پن
   pin: پن
   unpin: انپن
-  pin_to_right: دائیں سے دائیں
-  pin_to_center: سنٹر ٹو سینٹر
+  pin_to_right: دائیں سے پن
+  pin_to_center: سینٹر سے پن
   open_file_location: فائل کا مقام کھولیں
   copy_handles: کاپی ہینڈلز
 media_menu:

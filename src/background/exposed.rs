@@ -1,35 +1,54 @@
 use std::collections::HashMap;
 use std::path::PathBuf;
-use std::process::Command;
 
-use tauri::{Builder, Wry};
+use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
 use crate::error_handler::Result;
+use crate::hook::HookManager;
 use crate::modules::input::Keyboard;
-use crate::seelen::{get_app_handle, Seelen, SEELEN};
+use crate::modules::virtual_desk::get_vd_manager;
+use crate::seelen::{get_app_handle, Seelen};
+use crate::seelen_rofi::handler::*;
 use crate::seelen_weg::handler::*;
-use crate::seelen_weg::icon_extractor::extract_and_save_icon;
-use crate::seelen_wm::handler::*;
+use crate::seelen_weg::icon_extractor::{
+    extract_and_save_icon_from_file, extract_and_save_icon_umid,
+};
+use crate::seelen_wm_v2::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
 use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
-use crate::{log_error, trace_lock};
+use crate::windows_api::WindowsApi;
+use crate::winevent::{SyntheticFullscreenData, WinEvent};
+use crate::{log_error, utils};
 
 use crate::modules::media::infrastructure::*;
 use crate::modules::network::infrastructure::*;
 use crate::modules::notifications::infrastructure::*;
 use crate::modules::power::infrastructure::*;
+use crate::modules::system_settings::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
 
 #[tauri::command(async)]
-fn select_file_on_explorer(path: String) {
-    log_error!(Command::new("explorer").args(["/select,", &path]).spawn());
+fn select_file_on_explorer(path: String) -> Result<()> {
+    get_app_handle()
+        .shell()
+        .command("explorer")
+        .args(["/select,", &path])
+        .spawn()?;
+    Ok(())
 }
 
 #[tauri::command(async)]
-fn open_file(path: String) {
-    log_error!(Command::new("explorer").args([&path]).spawn());
+fn open_file(path: String, args: Option<String>) -> Result<()> {
+    // TODO: search a way to allow arguments without executing apps as admin (try using .lnk files and explorer)
+    let _args = args;
+    get_app_handle()
+        .shell()
+        .command("cmd")
+        .args(["/c", "explorer", &path])
+        .spawn()?;
+    Ok(())
 }
 
 #[tauri::command(async)]
@@ -88,22 +107,8 @@ async fn get_auto_start_status() -> Result<bool> {
 }
 
 #[tauri::command(async)]
-fn switch_workspace(idx: u32) {
-    std::thread::spawn(move || winvd::switch_desktop(idx));
-}
-
-#[tauri::command(async)]
-fn ensure_hitboxes_zorder() -> Result<()> {
-    let seelen = trace_lock!(SEELEN);
-    for monitor in seelen.monitors() {
-        if let Some(toolbar) = monitor.toolbar() {
-            toolbar.ensure_hitbox_zorder()?;
-        }
-        if let Some(weg) = monitor.weg() {
-            weg.ensure_hitbox_zorder()?;
-        }
-    }
-    Ok(())
+fn switch_workspace(idx: usize) -> Result<()> {
+    get_vd_manager().switch_to(idx)
 }
 
 #[tauri::command(async)]
@@ -113,11 +118,45 @@ fn send_keys(keys: String) -> Result<()> {
 
 #[tauri::command(async)]
 fn get_icon(path: String) -> Option<PathBuf> {
-    extract_and_save_icon(&get_app_handle(), &path).ok()
+    if path.starts_with("shell:AppsFolder") {
+        let umid = path.replace("shell:AppsFolder\\", "");
+        return extract_and_save_icon_umid(&umid).ok();
+    }
+    extract_and_save_icon_from_file(&path).ok()
 }
+
 #[tauri::command(async)]
 fn is_virtual_desktop_supported() -> bool {
     virtual_desktop_supported()
+}
+
+#[tauri::command(async)]
+fn simulate_fullscreen(webview: WebviewWindow<tauri::Wry>, value: bool) -> Result<()> {
+    let handle = webview.hwnd()?;
+    let monitor = WindowsApi::monitor_from_window(handle);
+    let event = if value {
+        WinEvent::SyntheticFullscreenStart(SyntheticFullscreenData { handle, monitor })
+    } else {
+        WinEvent::SyntheticFullscreenEnd(SyntheticFullscreenData { handle, monitor })
+    };
+    HookManager::emit_event(event, handle);
+    Ok(())
+}
+
+#[tauri::command(async)]
+async fn check_for_updates() -> Result<bool> {
+    Ok(utils::updater::check_for_updates().await?.is_some())
+}
+
+#[tauri::command(async)]
+async fn install_last_available_update() -> Result<()> {
+    let update = utils::updater::check_for_updates()
+        .await?
+        .ok_or("There is no update available")?;
+    utils::updater::trace_update_intallation(update).await?;
+    get_app_handle().restart();
+    #[allow(unreachable_code)]
+    Ok(())
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
@@ -132,9 +171,12 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         get_user_envs,
         show_app_settings,
         switch_workspace,
-        ensure_hitboxes_zorder,
         send_keys,
         get_icon,
+        get_system_colors,
+        simulate_fullscreen,
+        check_for_updates,
+        install_last_available_update,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,
@@ -146,6 +188,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         state_get_specific_apps_configurations,
         state_get_wallpaper,
         state_set_wallpaper,
+        state_get_history,
         // Media
         media_prev,
         media_toggle_play_pause,
@@ -165,10 +208,12 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         weg_close_app,
         weg_toggle_window_state,
         weg_request_update_previews,
+        weg_pin_item,
         // Windows Manager
         set_window_position,
-        bounce_handle,
         request_focus,
+        // App Launcher
+        launcher_get_apps,
         // tray icons
         temp_get_by_event_tray_info,
         on_click_tray_icon,

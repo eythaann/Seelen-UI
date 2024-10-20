@@ -14,6 +14,10 @@ header:
     seelen_bar: Divatos eszköztár
     shortcuts: Parancsikonok
     seelen_wm: Ablakvezető
+    seelen_rofi: Alkalmazásindító
+    seelen_wall: A fal
+    virtual_desk: Virtuális asztali számítógépek
+    home: Otthon
 start:
   title: Üdvözöljük!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Akcentus szín
   wallpaper:
     select: Válassza ki a háttérképet
+  date_format: Dátum formátum
 toolbar:
   placeholder:
     description: Leírás
@@ -48,6 +53,8 @@ toolbar:
     select: Eszköztár szerkezete
   height: Magasság
   enable: Engedélyezze a divatos eszköztárat
+  auto_hide: Autóbizalom
+  label: Eszköztár
 wm:
   border:
     enable: Engedélyezze az ablak szegélyét
@@ -57,11 +64,10 @@ wm:
   layout: Elrendezés
   space_between_containers: Hely a konténerek között
   description: Leírás
-  enable: Engedélyezze az ablakkezelőt
   workspace_padding: Munkaterületek párnázása
   resize_delta: Átméretezze a DELTA -t (%)
   workspace_offset: A munkaterületek eltolása (margók)
-  disabled_windows_version: Az ablakkezelő nem érhető el a Windows verziójához.
+  enable: Engedélyezze a csempe ablakkezelőt
 weg:
   items:
     zoom_size: Nagyított méret (a témákhoz használt)
@@ -74,9 +80,9 @@ weg:
   width: Szélesség
   gap: Rés
   margin: Árrés
-  dock_side: Dokkoló oldal
   label: Dokk/tálca
   enable: Engedélyezze a dokkolót/tálcát
+  dock_side: Pozíció
 devtools:
   load: Betöltés
   app_folders: App mappák
@@ -92,6 +98,7 @@ apps_configurations:
       force: Erőkezelés
       unmanage: Menedzsment
       pinned: Rögzített
+      hidden: Rejtőzik a dokkból/tálcánból
     ok_readonly: Szerkesztés újként
     name: Név
     ok_create: Teremt
@@ -105,8 +112,10 @@ apps_configurations:
     title_edit: '{{Név}} szerkesztés'
     title_create: '{{Név}} létrehozása'
     monitor: Monitor
-    options_label: Extra lehetőségek
     ok_edit: Frissít
+    weg_options_label: Dokk/tálcás lehetőségek
+    wm_options_label: Ablakkezelő opciók
+    options_label: Extra lehetőségek
   identifier:
     or: VAGY
     add_block: Blokk hozzáadása
@@ -129,6 +138,10 @@ apps_configurations:
   bundled_title: A Seelen -vel csomagolt alkalmazás konfigurációja
   import: Behozatal
   confirm_delete: Biztos benne, hogy törölni akarja ezt a konfigurációt/S -t?
+  extra_info: >-
+    A Seelen UI alkalmazásonként csak egy azonosítót használ (az első egyezés
+    található), ezért fontos a sorrend, a legutolsó hozzáadott lesz prioritás,
+    mivel a táblázat alapértelmezés szerint a legújabbtól a régiig van rendezve.
 extras:
   relaunch: Újraindít
   exit: Kilépés/kilépés
@@ -155,7 +168,6 @@ shortcuts:
     focus_bottom: Fókusz alsó
     increase_width: Növelje a szélességet
     send_to_workspace_3: Küldje el a Workspace 3 -ot
-    switch_workspace_0: Váltás a 0 munkaterületre
     move_to_workspace_2: Költözni a 2. munkaterületre
     send_to_workspace_1: Küldje el az 1. munkaterületre
     move_to_workspace_3: Költözni a Munkaterületre 3
@@ -178,16 +190,23 @@ shortcuts:
     send_to_workspace_4: Küldje el a Workspace 4 -et
     switch_workspace_5: Váltás az 5. munkaterületre
     switch_workspace_3: Váltás a 3. munkaterületre
-    switch_workspace_1: Váltás az 1. munkaterületre
     reserve_bottom: Tartalék alsó rész
     decrease_width: Csökken a szélesség
     send_to_workspace_9: Küldje el a munkaterületre 9
     move_to_workspace_6: Költözni a 6. munkaterületre
     send_to_workspace_7: Küldje el a Workspace 7 -et
+    switch_workspace_0: Váltás az 1. munkaterületre
+    switch_workspace_1: Váltás a 2. munkaterületre
+    misc_toggle_win_event_tracing: Váltás a győzelem események nyomon követése (naplók)
+    misc_open_settings: Nyissa meg a beállításokat
+    misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
+    toggle_launcher: Váltás
   enable_tooltip: >-
     Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
     parancsikonjait
   enable: Engedélyezze az integrált parancsikonokat (AHK)
+  reset: Alapértelmezés visszaállítása az alapértelmezésekre
+  readonly_tooltip: Ez egy csak olvasható parancsikon
 inProgress: Folyamatban...
 quit: Kilépés
 cancel: Megszünteti
@@ -195,3 +214,33 @@ save: Megment
 delete: Töröl
 loading: Betöltés...
 open: Nyisd ki
+vd:
+  strategy:
+    native: Bennszülött
+    seelen: Seelen
+    label: Virtuális asztali stratégia
+  disabled_windows_version: A natív virtuális asztali stratégia nem érhető el a Windows verziójához.
+save_and_restart: Mentés és újraindítás
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Engedélyezze a Seelen Wall -ot
+  backgrounds: Háttérképek
+  no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
+  interval: Változtassa meg a háttérképet minden (másodperc)
+app_launcher:
+  runners:
+    cmd: Parancs
+    explorer: Fut
+    label: Futók
+  monitor: Monitor, hogy megmutassa
+  enable: Engedélyezze az alkalmazás indítóját
+inherit: Örököl
+more: Több
+insert: Beilleszt
+close: Közeli
+update:
+  available: A frissítés elérhető!
+  channel: Frissítési csatorna
+  downloading: Letöltés ...
+miscellaneous: Különféle

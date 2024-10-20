@@ -4,7 +4,7 @@ use windows::Win32::UI::Accessibility::IUIAutomationElement;
 #[derive(Debug, Clone, Serialize)]
 pub struct TrayIconInfo {
     pub icon: Option<String>,
-    pub label: String,
+    pub label: Option<String>,
 }
 
 pub struct TrayIcon {

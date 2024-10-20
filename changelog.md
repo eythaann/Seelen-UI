@@ -1,6 +1,144 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.3]
+### fix
+- apps being runned as admin instead normal.
+
+## [2.0.2]
+### fix
+- infinite render loop on settings home page, fetching news.
+
+## [2.0.1]
+### refactor
+- unification of SeelenWeg pinned files, folder and apps in a single structure.
+
+### enhancements
+- improve open_file function to allow arguments.
+- allow to users select update channel between release, beta and nightly.
+
+### fix
+- not getting icons directly from .lnk files.
+- users not recieving update notification on settings header.
+- start-menu item on dock not closing native start menu.
+- default theme wallpaper showing cut on ultra-wide monitors.
+
+## [2.0.0]
+### breaking changes
+- Window Manager Layout Conditions was reimplemented, old conditions (v1) will fail.
+
+### refactor
+- refactors, more and more refactors, refactors for everyone.
+- reimplementation of Tiling Window Manager.
+- remove Update modal at startup by an update button on settings.
+
+### features
+- make the dock/taskbar solid when hide mode is `never`.
+- add app launcher (rofi for windows).
+- add seelen wall (rain-meter and wallpaper engine alternatives).
+- expose function to pin items into the dock.
+- settings by monitor.
+- window manager multimonitor support.
+- allow users change date format directly on UI settings.
+- add context menu to toolbar items.
+
+### enhancements
+- improve quality icons from all app/files items.
+- improve init loading performance.
+- improve fullscreen matching system.
+- reduce UI total size from 355mb (v1) to 121mb (v2-beta4) to 93mb (v2-beta8).
+- reduce Installer size from 75mb (v1) to 40mb (v2-beta4) to 28.8mb (v2-beta8).
+- allow drop files, apps and folders into the dock to pin them.
+- now Virtual Desktop shortcuts doesn't require Tiling WM be enabled to work.
+- now Themes are wrapped in a CSS layer, making easier the override theming.
+- allow change size of Window Manager Layouts via window resizing with the mouse.
+- allow close windows by middle clicking on dock items.
+- show icon of app in media players that are not uwp/msix.
+- show pwa apps like a separeted app from browser on dock.
+
+### fix
+- missing icons for files with a different extension than `exe`.
+- losing cursor events on clicking a dock item.
+- app allowing be closed via Alt + F4.
+- native taskbar being hidden regardless of whether the program starts successfully or not.
+- app continuing running when the program fails to start (case: WebView2 Runtime not installed).
+- no stoping correctly secondary processes/threads on app close.
+- showing unmanageable windows on dock.
+- restart seelen-ui button not working properly.
+- tray icons not working on others language than english.
+- edge tabs open in file explorer.
+
+## [1.10.6]
+### fix
+- tray module only working when the system language is english.
+
+## [1.10.5]
+### fix
+- app crashing on IMMDevice disconnection.
+
+## [1.10.4]
+### enhancements
+- clean weg items on load to remove duped items and apps/files that don't exist.
+- remove 1/2px thickness border on window manager border.
+- remove 1/2px black border on some previews of apps.
+
+### fix
+- can not restore settings window.
+- taskbar not been restored when changing weg enabled state.
+- taskbar been restored always as not autohide, now it will restored as initial state.
+
+## [1.10.3]
+### features
+- add beta channel
+
+### enhancements
+- add debugger cli toggles to tracing more info on logs.
+- media modules now exports the app related to the media player.
+
+### fix
+- saving ahk lib in wrong location.
+
+## [1.10.2]
+### fix
+- app crashing on enumerating many monitors or on large load.
+
+## [1.10.1]
+### fix
+- app crashing if uwp package has missing path.
+- app no working fine on multiple monitors.
+
+## [1.10.0]
+### features
+- add volume changed popup.
+- new custom virtual desktop implementation.
+- shortcut to toggle debug mode on hitboxes (Control + Win + Alt + H).
+
+### enhancements
+- remove black borders of windows previews on dock.
+- improve uwp app manage on dock/taskbar.
+
+### refactor
+- add strategy pattern to virtual desktops.
+
+### fix
+- topbar hitbox rect on auto hide equals to on-overlap.
+- bad matching fullscreen apps.
+- suspended process (ex: Settings) been shown on dock.
+- uwp icons not loading correctly.
+- bad focused app matching strategy.
+
+## [1.9.11]
+### features
+- add a option to hide apps from the dock/taskbar, requested on #5.
+- update tray labels when tray icons module are open.
+- add auto-hide option to the toolbar.
+
+### fix
+- route no maintaining on cancel changes on settings window.
+- cancel button no working correctly after save the settings multiple times.
+- tray module no forcing tray overflow creating on startup.
+- native taskbar not been restored on close.
+
 ## [1.9.10]
 ### features
 - add `getIcon` fn to the scopes of toolbar placeholders.

@@ -1,4 +1,6 @@
 mod apps_config;
+mod events;
+mod icons;
 
 use arc_swap::ArcSwap;
 use getset::Getters;
@@ -9,10 +11,12 @@ use notify_debouncer_full::{
     notify::{ReadDirectoryChangesWatcher, RecursiveMode, Watcher},
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
-use seelen_core::state::WindowManagerLayout;
-use serde::Serialize;
+use parking_lot::Mutex;
+use seelen_core::state::{IconPack, VirtualDesktopStrategy, WegItems, WindowManagerLayout};
 use std::{
     collections::{HashMap, VecDeque},
+    fs::{File, OpenOptions},
+    io::{Seek, Write},
     path::{Path, PathBuf},
     sync::{
         atomic::{AtomicBool, Ordering},
@@ -20,53 +24,58 @@ use std::{
     },
     time::Duration,
 };
-use tauri::{AppHandle, Emitter, Manager};
+use tauri::Manager;
 
 use crate::{
-    error_handler::Result,
-    log_error,
-    modules::cli::domain::Resource,
-    seelen::{get_app_handle, SEELEN},
-    trace_lock,
-    utils::is_virtual_desktop_supported,
-    windows_api::WindowsApi,
+    error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
+    trace_lock, utils::is_virtual_desktop_supported, windows_api::WindowsApi,
 };
 
-use super::domain::{AppConfig, Placeholder, Settings, Theme, WegItems};
+use super::domain::{AppConfig, Placeholder, Settings, Theme};
 
 lazy_static! {
+    static ref DATA_DIR: PathBuf = get_app_handle().path().app_data_dir().unwrap();
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
         log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
     }));
-}
-
-#[derive(Getters, Debug, Clone, Serialize)]
-pub struct FullState {
-    #[serde(skip)]
-    handle: AppHandle<tauri::Wry>,
-    #[serde(skip)]
-    data_dir: PathBuf,
-    #[serde(skip)]
-    resources_dir: PathBuf,
-    #[serde(skip)]
-    watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
-    // ======== data ========
-    #[getset(get = "pub")]
-    settings: Settings,
-    #[getset(get = "pub")]
-    settings_by_app: VecDeque<AppConfig>,
-    #[getset(get = "pub")]
-    themes: HashMap<String, Theme>,
-    #[getset(get = "pub")]
-    placeholders: HashMap<String, Placeholder>,
-    #[getset(get = "pub")]
-    layouts: HashMap<String, WindowManagerLayout>,
-    #[getset(get = "pub")]
-    weg_items: WegItems,
+    static ref OPEN_OPTIONS: OpenOptions = {
+        let mut options = OpenOptions::new();
+        options.write(true).create(true);
+        options
+    };
+    static ref USER_SETTINGS_PATH: PathBuf = DATA_DIR.join("settings.json");
+    static ref USER_SETTINGS_FILE: Arc<Mutex<File>> = Arc::new(Mutex::new(
+        OPEN_OPTIONS.open(USER_SETTINGS_PATH.as_path()).unwrap()
+    ));
+    static ref WEG_ITEMS_PATH: PathBuf = DATA_DIR.join("seelenweg_items.yaml");
+    static ref WEG_ITEMS_FILE: Arc<Mutex<File>> = Arc::new(Mutex::new(
+        OPEN_OPTIONS.open(WEG_ITEMS_PATH.as_path()).unwrap()
+    ));
 }
 
 static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
+
+pub type LauncherHistory = HashMap<String, Vec<String>>;
+
+#[derive(Getters, Debug, Clone)]
+#[getset(get = "pub")]
+pub struct FullState {
+    data_dir: PathBuf,
+    resources_dir: PathBuf,
+    watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
+    // ======== data ========
+    pub settings: Settings,
+    pub settings_by_app: VecDeque<AppConfig>,
+    pub themes: HashMap<String, Theme>,
+    pub icon_packs: Arc<Mutex<HashMap<String, IconPack>>>,
+    pub placeholders: HashMap<String, Placeholder>,
+    pub layouts: HashMap<String, WindowManagerLayout>,
+    pub weg_items: Arc<Mutex<WegItems>>,
+    pub history: LauncherHistory,
+}
+
+unsafe impl Sync for FullState {}
 
 impl FullState {
     fn new() -> Result<Self> {
@@ -74,15 +83,16 @@ impl FullState {
         let mut manager = Self {
             data_dir: handle.path().app_data_dir()?,
             resources_dir: handle.path().resource_dir()?,
-            handle,
             watcher: Arc::new(None),
             // ======== data ========
             settings: Settings::default(),
             settings_by_app: VecDeque::new(),
             themes: HashMap::new(),
+            icon_packs: Arc::new(Mutex::new(HashMap::new())),
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
-            weg_items: serde_yaml::Value::Null,
+            weg_items: Arc::new(Mutex::new(WegItems::default())),
+            history: HashMap::new(),
         };
         manager.load_all()?;
         manager.start_listeners()?;
@@ -99,18 +109,14 @@ impl FullState {
         FULL_STATE.store(Arc::new(self));
     }
 
-    fn store_cloned(&self) {
+    pub fn store_cloned(&self) {
         FULL_STATE.store(Arc::new(self.cloned()));
-    }
-
-    pub fn settings_path(&self) -> PathBuf {
-        self.data_dir.join("settings.json")
     }
 
     fn process_event(&mut self, event: DebouncedEvent) -> Result<()> {
         let event = event.event;
 
-        let weg_items_path = self.data_dir.join("seelenweg_items.yaml");
+        let history_path = self.data_dir.join("history");
 
         let user_themes = self.data_dir.join("themes");
         let bundled_themes = self.resources_dir.join("static/themes");
@@ -124,14 +130,28 @@ impl FullState {
         let user_app_configs = self.data_dir.join("applications.yml");
         let bundled_app_configs = self.resources_dir.join("static/apps_templates");
 
-        if event.paths.contains(&weg_items_path) {
+        if event.paths.contains(&self.icon_packs_folder()) {
+            log::info!("Icons Packs changed");
+            self.load_icons_packs()?;
+            self.store_cloned();
+            self.emit_icon_packs()?;
+        }
+
+        if event.paths.contains(&WEG_ITEMS_PATH) {
             log::info!("Weg Items changed");
             self.load_weg_items()?;
             self.store_cloned();
-            self.emit_weg_items()?;
+            self.emit_weg_items(&*trace_lock!(self.weg_items))?;
         }
 
-        if event.paths.contains(&self.settings_path()) {
+        if event.paths.contains(&history_path) {
+            log::info!("History changed");
+            self.load_history()?;
+            self.store_cloned();
+            self.emit_history()?;
+        }
+
+        if event.paths.contains(&USER_SETTINGS_PATH) {
             log::info!("Seelen Settings changed");
             self.load_settings()?;
             self.store_cloned();
@@ -192,7 +212,7 @@ impl FullState {
             None,
             |result: DebounceEventResult| match result {
                 Ok(events) => {
-                    log::info!("Seelen UI File Watcher events: {:?}", events);
+                    // log::info!("Seelen UI File Watcher events: {:?}", events);
                     if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
                         let mut state = FULL_STATE.load().cloned();
                         for event in events {
@@ -206,48 +226,64 @@ impl FullState {
             },
         )?;
 
-        debouncer
-            .watcher()
-            .watch(&self.data_dir, RecursiveMode::Recursive)?;
-        debouncer
-            .watcher()
-            .watch(&self.resources_dir, RecursiveMode::Recursive)?;
+        let paths: Vec<PathBuf> = vec![
+            // settings & user data
+            USER_SETTINGS_PATH.to_path_buf(),
+            WEG_ITEMS_PATH.to_path_buf(),
+            self.data_dir.join("applications.yml"),
+            self.data_dir.join("history"),
+            // resources
+            self.data_dir.join("themes"),
+            self.icon_packs_folder(),
+            self.data_dir.join("placeholders"),
+            self.data_dir.join("layouts"),
+            self.resources_dir.join("static/themes"),
+            self.resources_dir.join("static/placeholders"),
+            self.resources_dir.join("static/layouts"),
+            self.resources_dir.join("static/apps_templates"),
+        ];
+
+        for path in paths {
+            debouncer.watcher().watch(&path, RecursiveMode::Recursive)?;
+        }
 
         self.watcher = Arc::new(Some(debouncer));
         Ok(())
     }
 
-    pub fn get_settings_from_path(path: PathBuf) -> Result<Settings> {
+    pub fn get_settings_from_path(path: &Path) -> Result<Settings> {
         match path.extension() {
             Some(ext) if ext == "json" => {
-                let mut settings: Settings =
-                    serde_json::from_str(&std::fs::read_to_string(&path)?)?;
-                settings.language = settings
-                    .language
-                    .or_else(|| Some(Settings::get_system_language()));
-                settings.window_manager.enabled =
-                    settings.window_manager.enabled && is_virtual_desktop_supported();
-                Ok(settings)
+                Ok(serde_json::from_str(&std::fs::read_to_string(path)?)?)
             }
             _ => Err("Invalid settings file extension".into()),
         }
     }
 
     fn load_settings(&mut self) -> Result<()> {
-        let path = self.settings_path();
-        if path.exists() {
-            self.settings = Self::get_settings_from_path(path)?;
-        } else {
-            // save current/default settings
+        let path_exists = USER_SETTINGS_PATH.exists();
+        if path_exists {
+            self.settings = Self::get_settings_from_path(&USER_SETTINGS_PATH)?;
+            self.settings.sanitize();
+        }
+
+        if !is_virtual_desktop_supported() {
+            self.settings.virtual_desktop_strategy = VirtualDesktopStrategy::Seelen;
+        }
+
+        if !path_exists {
             self.save_settings()?;
         }
         Ok(())
     }
 
     fn load_weg_items(&mut self) -> Result<()> {
-        let path = self.data_dir.join("seelenweg_items.yaml");
-        if path.exists() {
-            self.weg_items = serde_yaml::from_str(&std::fs::read_to_string(&path)?)?
+        let mut current = trace_lock!(self.weg_items);
+        if WEG_ITEMS_PATH.exists() {
+            *current = serde_yaml::from_str(&std::fs::read_to_string(WEG_ITEMS_PATH.as_path())?)?;
+            current.sanitize();
+        } else {
+            self.save_weg_items(&current)?;
         }
         Ok(())
     }
@@ -279,6 +315,14 @@ impl FullState {
 
         if path.join("theme.wm.css").exists() {
             theme.styles.wm = std::fs::read_to_string(path.join("theme.wm.css"))?;
+        }
+
+        if path.join("theme.launcher.css").exists() {
+            theme.styles.launcher = std::fs::read_to_string(path.join("theme.launcher.css"))?;
+        }
+
+        if path.join("theme.wall.css").exists() {
+            theme.styles.wall = std::fs::read_to_string(path.join("theme.wall.css"))?;
         }
 
         Ok(theme)
@@ -329,6 +373,7 @@ impl FullState {
 
             match placeholder {
                 Ok(mut placeholder) => {
+                    placeholder.sanitize();
                     placeholder.info.filename = entry.file_name().to_string_lossy().to_string();
                     self.placeholders
                         .insert(placeholder.info.filename.clone(), placeholder);
@@ -392,16 +437,28 @@ impl FullState {
         Ok(())
     }
 
+    fn save_settings_by_app(&self) -> Result<()> {
+        let data = self
+            .settings_by_app
+            .iter()
+            .filter(|app| !app.is_bundled)
+            .cloned()
+            .collect_vec();
+        std::fs::write(
+            self.data_dir.join("applications.yml"),
+            serde_yaml::to_string(&data)?,
+        )?;
+        Ok(())
+    }
+
     fn load_settings_by_app(&mut self) -> Result<()> {
         let user_apps_path = self.data_dir.join("applications.yml");
         let apps_templates_path = self.resources_dir.join("static/apps_templates");
 
         self.settings_by_app.clear();
-
-        if user_apps_path.exists() {
-            let content = std::fs::read_to_string(&user_apps_path)?;
-            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
-            self.settings_by_app.extend(apps);
+        if !user_apps_path.exists() {
+            // save empty array on appdata dir
+            self.save_settings_by_app()?;
         }
 
         for entry in apps_templates_path.read_dir()?.flatten() {
@@ -413,9 +470,25 @@ impl FullState {
             self.settings_by_app.extend(apps);
         }
 
+        if user_apps_path.exists() {
+            let content = std::fs::read_to_string(&user_apps_path)?;
+            let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
+            self.settings_by_app.extend(apps);
+        }
+
         self.settings_by_app
             .iter_mut()
             .for_each(|app| app.identifier.cache_regex());
+        Ok(())
+    }
+
+    fn load_history(&mut self) -> Result<()> {
+        let history_path = self.data_dir.join("history");
+        if history_path.exists() {
+            self.history = serde_yaml::from_str(&std::fs::read_to_string(&history_path)?)?;
+        } else {
+            std::fs::write(history_path, serde_yaml::to_string(&self.history)?)?;
+        }
         Ok(())
     }
 
@@ -423,52 +496,26 @@ impl FullState {
         self.load_settings()?;
         self.load_weg_items()?;
         self.load_themes()?;
+        self.load_icons_packs()?;
         self.load_placeholders()?;
         self.load_layouts()?;
         self.load_settings_by_app()?;
-        Ok(())
-    }
-
-    fn emit_settings(&self) -> Result<()> {
-        self.handle.emit("settings-changed", self.settings())?;
-        trace_lock!(SEELEN).on_state_changed()?;
-        Ok(())
-    }
-
-    fn emit_weg_items(&self) -> Result<()> {
-        self.handle.emit("weg-items", self.weg_items())?;
-        Ok(())
-    }
-
-    fn emit_themes(&self) -> Result<()> {
-        self.handle
-            .emit("themes", self.themes().values().collect_vec())?;
-        Ok(())
-    }
-
-    fn emit_placeholders(&self) -> Result<()> {
-        self.handle
-            .emit("placeholders", self.placeholders().values().collect_vec())?;
-        Ok(())
-    }
-
-    fn emit_layouts(&self) -> Result<()> {
-        self.handle
-            .emit("layouts", self.layouts().values().collect_vec())?;
-        Ok(())
-    }
-
-    fn emit_settings_by_app(&self) -> Result<()> {
-        self.handle
-            .emit("settings-by-app", self.settings_by_app())?;
+        self.load_history()?;
         Ok(())
     }
 
     pub fn save_settings(&self) -> Result<()> {
-        std::fs::write(
-            self.settings_path(),
-            serde_json::to_string_pretty(&self.settings)?,
-        )?;
+        let mut file = trace_lock!(USER_SETTINGS_FILE);
+        file.rewind()?;
+        file.write_all(serde_json::to_string_pretty(&self.settings)?.as_bytes())?;
+        Ok(())
+    }
+
+    pub fn save_weg_items(&self, items: &WegItems) -> Result<()> {
+        let mut file = trace_lock!(WEG_ITEMS_FILE);
+        file.rewind()?;
+        file.write_all(serde_yaml::to_string(items)?.as_bytes())?;
+        file.flush()?;
         Ok(())
     }
 
@@ -497,8 +544,8 @@ impl FullState {
                 self.data_dir.join(format!("themes/{filename}")),
                 serde_yaml::to_string(&theme)?,
             )?;
-            if !self.settings.selected_theme.contains(&filename) {
-                self.settings.selected_theme.push(filename);
+            if !self.settings.selected_themes.contains(&filename) {
+                self.settings.selected_themes.push(filename);
             }
         }
 

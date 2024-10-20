@@ -33,3 +33,6 @@ placeholder:
   settings: ਤੇਜ਼ ਸੈਟਿੰਗ
   open_system_tray: ਸਿਸਟਮ ਟਰੇ ਖੋਲ੍ਹੋ
   notifications: ਸੂਚਨਾਵਾਂ
+unlabelled_tray: ਬਿਨਾਲੇ ਟਰੇ ਆਈਕਨ
+context_menu:
+  remove: ਆਈਟਮ ਹਟਾਓ

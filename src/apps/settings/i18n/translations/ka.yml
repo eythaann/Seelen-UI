@@ -14,6 +14,10 @@ header:
     shortcuts: მალსახმობები
     seelen_wm: ფანჯრის მენეჯერი
     specific_apps: კონკრეტული პროგრამები
+    seelen_rofi: აპლიკაციის გამშვები
+    seelen_wall: კედელი
+    virtual_desk: ვირტუალური სამუშაო მაგიდა
+    home: სახლი
 start:
   message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
   title: კეთილი იყოს თქვენი მობრძანება!
@@ -41,6 +45,7 @@ general:
   accent_color: აქცენტის ფერი
   wallpaper:
     select: აირჩიეთ ფონი
+  date_format: თარიღის ფორმატი
 toolbar:
   placeholder:
     description: აღწერილობა
@@ -48,6 +53,8 @@ toolbar:
     select: ინსტრუმენტთა პანელის სტრუქტურა
   height: სიმაღლე
   enable: ჩართეთ ლამაზი პანელი
+  auto_hide: ავტო დამალვა
+  label: ინსტრუმენტთა პანელი
 wm:
   border:
     enable: ფანჯრის საზღვრის ჩართვა
@@ -55,13 +62,12 @@ wm:
     width: საზღვრის სიგანე
   description: აღწერილობა
   author: ავტორი
-  enable: ფანჯრის მენეჯერის ჩართვა
   resize_delta: დელტას ზომის შეცვლა (%)
   space_between_containers: სივრცე კონტეინერებს შორის
   workspace_offset: სამუშაო ადგილები ოფსეტური (ზღვარი)
   workspace_padding: სამუშაო ადგილები padding
   layout: გამოფენა
-  disabled_windows_version: ფანჯრის მენეჯერი არ არის ხელმისაწვდომი თქვენი Windows ვერსიისთვის.
+  enable: ჩართეთ ფილების ფანჯრის მენეჯერი
 weg:
   items:
     label: ნივთები
@@ -75,8 +81,8 @@ weg:
   padding: ბადება
   margin: ზღვარი
   gap: ხარპი
-  dock_side: დოკის მხარე
   enable: ჩართეთ dock/taskbar
+  dock_side: პოზიცია
 devtools:
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
   app_folders: აპლიკაციის საქაღალდეები
@@ -92,12 +98,12 @@ apps_configurations:
       pinned: დადგენილება
       force: ძალის მართვა
       float: ტივტივი
+      hidden: დამალვა დოკიდან/დავალებისგან
     category: კატეგორია
     ok_create: Შექმნა
     bindings: სავალდებულო (შენიშვნა საჭიროა ორივე ვარიანტი)
     category_placeholder: არაფერი
     workspace_placeholder: არაფერი
-    options_label: დამატებითი პარამეტრები
     ok_edit: განახლება
     title_edit: რედაქტირება {{სახელი}}
     workspace: სამუშაო ადგილი
@@ -107,6 +113,9 @@ apps_configurations:
     title_readonly: ნახვა {{სახელი}}
     monitor_placeholder: არაფერი
     monitor: შემოწმება
+    weg_options_label: დოკ/დავალების პანელის პარამეტრები
+    wm_options_label: ფანჯრის მენეჯერის პარამეტრები
+    options_label: დამატებითი პარამეტრები
   identifier:
     and: და
     id: პირადობა
@@ -129,6 +138,11 @@ apps_configurations:
   swap: გაცვლა
   delete: წაშლა
   new: ახალი
+  extra_info: >-
+    Seelen ui გამოიყენეთ მხოლოდ ერთი იდენტიფიკატორი თითო აპლიკაციაში (პირველი
+    მატჩი ნაპოვნი), ასე რომ, თუ როგორ არის სპეციფიკურია სპეციფიკური, შეკვეთა,
+    უახლესი დამატებული პრიორიტეტული იქნება, რადგან შენიშვნა ცხრილი დალაგებულია
+    ნაგულისხმევი უახლესიდან ძველამდე.
 extras:
   version: ვერსია
   exit: დატოვება/გასვლა
@@ -147,7 +161,6 @@ shortcuts:
     reserve_stack: სარეზერვო დასტა
     focus_right: ფოკუსირება სწორად
     move_to_workspace_8: გადავიდეთ სამუშაო ადგილებზე 8
-    switch_workspace_0: გადადით სამუშაო ადგილებზე 0
     switch_workspace_2: გადადით სამუშაო ადგილებზე 2
     switch_workspace_9: გადადით სამუშაო ადგილებზე 9
     focus_latest: ფოკუსირება უახლესი
@@ -168,7 +181,6 @@ shortcuts:
     focus_bottom: ფოკუსირება
     switch_workspace_4: გადადით სამუშაო ადგილებზე 4
     focus_left: ფოკუსირება მარცხნივ
-    switch_workspace_1: გადადით სამუშაო ადგილებზე 1
     move_to_workspace_2: გადავიდეთ სამუშაო ადგილებზე 2
     send_to_workspace_9: გაგზავნეთ სამუშაო სივრცეში 9
     move_to_workspace_0: გადადით სამუშაო ადგილებზე 0
@@ -184,10 +196,18 @@ shortcuts:
     send_to_workspace_8: გაგზავნეთ სამუშაო სივრცეში 8
     switch_workspace_5: გადადით სამუშაო ადგილებზე 5
     reserve_float: სარეზერვო float
+    switch_workspace_1: გადადით სამუშაო ადგილებზე 2
+    switch_workspace_0: გადადით სამუშაო ადგილებზე 1
+    misc_toggle_win_event_tracing: გადარიცხეთ მოიგეთ ღონისძიების კვალი (ჟურნალი)
+    misc_toggle_lock_tracing: ჩაკეტილი საკეტის კვალი (ჟურნალი)
+    misc_open_settings: ღია პარამეტრები
+    toggle_launcher: შეცვლა
   enable: ინტეგრირებული მალსახმობების ჩართვა (AHK)
   enable_tooltip: >-
     გამორთეთ, თუ თქვენ განახორციელებთ საკუთარ მალსახმობებს Seelen Core API– ს
     გამოყენებით
+  reset: გადატვირთვა ნაგულისხმევებზე
+  readonly_tooltip: ეს არის მხოლოდ წაკითხული მალსახმობი
 save: Გადარჩენა
 inProgress: Პროგრესირებს...
 loading: Ჩატვირთვა...
@@ -195,3 +215,35 @@ quit: მიტოვება
 delete: წაშლა
 open: გახსნა
 cancel: გაუქმება
+vd:
+  strategy:
+    seelen: სელენი
+    label: ვირტუალური დესკტოპის სტრატეგია
+    native: მკვიდრი ქალი
+  disabled_windows_version: >-
+    მშობლიური ვირტუალური დესკტოპის სტრატეგია არ არის ხელმისაწვდომი თქვენი
+    Windows ვერსიისთვის.
+save_and_restart: შენახვა და გადატვირთვა
+monitors_configurations:
+  label: მონიტორი {{ინდექსი}}
+wall:
+  no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
+  backgrounds: ფონები
+  enable: ჩართეთ seelen კედელი
+  interval: ფონი შეცვალეთ ყოველ (წამში)
+app_launcher:
+  runners:
+    cmd: ბრძანება
+    label: მორბენალი
+    explorer: სირბილი
+  monitor: მონიტორის ჩვენება
+  enable: ჩართეთ აპლიკაციის გამშვები
+more: მეტი
+insert: ჩასმა
+inherit: მემკვიდრეობით მიღება
+close: ახლო
+update:
+  available: განახლება ხელმისაწვდომია!
+  downloading: ჩამოტვირთვა ...
+  channel: განაახლეთ არხი
+miscellaneous: შერეული

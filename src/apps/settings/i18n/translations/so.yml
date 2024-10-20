@@ -14,6 +14,10 @@ header:
     seelen_wm: Maamulaha daaqada
     developer: Abuuris
     info: War
+    seelen_wall: Derbiga
+    seelen_rofi: App furaha
+    virtual_desk: Desktops Virtual
+    home: Guri
 start:
   message: >-
     Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
@@ -40,6 +44,7 @@ general:
   accent_color: Midab caqabad
   wallpaper:
     select: Xulo warqadda
+  date_format: Taariikh format
 toolbar:
   placeholder:
     description: Sifo
@@ -47,6 +52,8 @@ toolbar:
     select: Qaab dhismeedka Qalabka
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
+  auto_hide: Auto qaraha
+  label: Qalab argamiye
 wm:
   border:
     enable: Karti xadka daaqadaha
@@ -55,12 +62,11 @@ wm:
   author: Qoraa
   description: Sifo
   workspace_offset: Goobaha shaqada ayaa ka dhigtay
-  enable: Karti maamulaha daaqada
   layout: Khariidad
   resize_delta: Dib u dhig Delta (%)
   space_between_containers: Meel bannaan oo u dhexeeya weelka
   workspace_padding: Goobta Goobta Goobta
-  disabled_windows_version: Maamulaha daaqada looma heli karo nooca Windows-kaaga.
+  enable: U oggolow maamulaha daaqadda daaqadda
 weg:
   items:
     gap: Meel udhaxeysa waxyaabaha
@@ -68,7 +74,6 @@ weg:
     size: Shayga cabirka
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
     visible_separators: Kala-sooca muuqda
-  dock_side: Dhinaceeda dhinaceeda
   width: Ballac
   enable: Kartida DOCK / Turniinka
   gap: Dalool
@@ -76,6 +81,7 @@ weg:
   margin: Margin
   label: Dock / Tootshar
   auto_hide: Auto qaraha
+  dock_side: Meel
 devtools:
   app_folders: Faylka app
   install_folder: Xeerka rakibaadda
@@ -91,12 +97,12 @@ apps_configurations:
       float: Sabbayn
       unmanage: Aan lahayn
       force: Xoog u maareeyaan
+      hidden: Ka qarsoon xijaabka / Turniinka
     title_create: Abuuritaanka {{Magaca {Magaca}
     bindings: Xirashada (Xusuusin labada ikhtiyaar ayaa loo baahan yahay)
     ok_readonly: Tafatir sida cusub
     monitor_placeholder: Midna
     category: Dabaqad
-    options_label: Fursadaha dheeraadka ah
     ok_edit: Cusboonaysiin
     workspace: Shaqo-joojin
     title_readonly: Daawashada {{,}
@@ -106,6 +112,9 @@ apps_configurations:
     workspace_placeholder: Midna
     ok_create: Abuurid
     title_edit: Tafatirka {{magacii}
+    weg_options_label: Dock / Fursadaha Hawlgalka
+    wm_options_label: Xulashooyinka Maamulaha daaqada
+    options_label: Fursadaha dheeraadka ah
   identifier:
     remove: Tirtir xannibaadda
     matching_strategy: Istaraatiijiyadda iswaafajinta
@@ -128,6 +137,12 @@ apps_configurations:
     Qaabeyntan xirmada ma aha wax aan la taabtaan oo loogu talagalay inay ku
     siiyaan khibradda ugu fiican ee aan la helin. Waxay si otomaatig ah u
     habeeyaan codsiyada ugu caansan adiga.
+  extra_info: >-
+    Seelen UI waxay isticmaashaa hal aqoonsi oo app kasta ah (ciyaartii ugu
+    horaysay ee la helay) markaa siday u kala horreeyaan sida loo cayimay ayaa
+    muhiim ah, waxa ugu dambeeya ee lagu daray ayaa la kala hormarin doonaa,
+    sida la ogsoon yahay in miiska si caadi ah loo soocay kii u dambeeyay ilaa
+    kii hore.
 extras:
   exit: Jooji / bixitaan
   github: GitHub
@@ -167,7 +182,6 @@ shortcuts:
     move_to_workspace_9: U dhaqaaq goobta shaqada 9
     reserve_float: Keydka sabuuradda
     reserve_stack: Reebs Rap
-    switch_workspace_1: U beddelo goobta shaqada 1
     send_to_workspace_3: U dir goobta shaqada 3
     send_to_workspace_1: U dir goobta shaqada 1
     switch_workspace_7: U beddelo goobta shaqada 7
@@ -178,15 +192,22 @@ shortcuts:
     reserve_left: Kaydsanaanta bidix
     send_to_workspace_2: U dir goobta shaqada 2
     send_to_workspace_0: U dir goobta shaqada 0
-    switch_workspace_0: U beddelo goobta shaqada 0
     decrease_height: Hoos u dhig dhererka
     switch_workspace_4: U beddelo goobta shaqada 4
     move_to_workspace_6: U dhaqaaq goobta shaqada 6
     switch_workspace_6: U beddelo goobta shaqada 6
+    switch_workspace_1: U beddelo goobta shaqada 2
+    switch_workspace_0: U beddelo goobta shaqada 1
+    misc_toggle_lock_tracing: Ku wareeji raadinta qufulka (logs)
+    misc_open_settings: Meel furan
+    misc_toggle_win_event_tracing: Ku guuleysta raadinta dhacdada dhacdada (logs)
+    toggle_launcher: Ka wareego
   enable: U fududee fulinta isku dhafan ee isku dhafan (Ahk)
   enable_tooltip: >-
     Disable Haddii aad hirgelin doontid gaagaaban adiga oo adeegsanaya api-ka
     quruxda badan
+  reset: Dib u dejiso defafyada
+  readonly_tooltip: Tani waa gaagaaban oo keliya oo keliya
 loading: Loading ...
 cancel: Burin
 delete: Tirtirid
@@ -194,3 +215,35 @@ quit: Joojin
 save: Badbaadin
 inProgress: Horusocod ...
 open: Furid
+vd:
+  strategy:
+    seelen: Sekelen
+    label: Istaraatiijiyadda Dembelade Desktop
+    native: U dhashay
+  disabled_windows_version: >-
+    Istaraatiijiyadda Desktop-ka dalkoodu hooyo looma heli karo nooca
+    Windows-kaaga.
+save_and_restart: Badbaadin & Dib u bilow
+monitors_configurations:
+  label: Kormeer {{tus ind ind}}
+wall:
+  enable: U oggolow derbiga Selen
+  no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
+  interval: Beddel waraaqda derbiga kasta (ilbidhiqsi kasta)
+  backgrounds: Darf-biyoodka
+app_launcher:
+  runners:
+    cmd: Amrid
+    label: Orodyahannada
+    explorer: Ordid
+  enable: U oggolow appka bilaabista
+  monitor: Kormeer si loo muujiyo
+inherit: Dhaxlid
+insert: Gelin
+more: Ka badan
+close: Xirid
+update:
+  available: Cusboonaysiinta la heli karo!
+  downloading: Soo dejinta ...
+  channel: Cusboonaysiinta Kanaalka
+miscellaneous: Kala duduwan

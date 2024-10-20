@@ -21,6 +21,10 @@ header:
     shortcuts: Raccourcis
     developer: Développeur
     info: Information
+    seelen_wall: Le mur
+    seelen_rofi: Lanceur d'applications
+    virtual_desk: Desktops virtuels
+    home: Maison
 start:
   title: Accueillir!
   message: "Bienvenue dans Seelen UI, l'environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows 11\_! Explorez une nouvelle ère d'efficacité et de multitâche avec notre interface intuitive et nos fonctionnalités avancées."
@@ -44,6 +48,7 @@ general:
   accent_color: Couleur accent
   wallpaper:
     select: Sélectionner le papier peint
+  date_format: Format de date
 toolbar:
   enable: Activer la barre d'outils sophistiquée
   placeholder:
@@ -51,8 +56,9 @@ toolbar:
     author: Auteur
     description: Description
   height: Hauteur
+  auto_hide: Cachette automatique
+  label: Barre d'outils
 wm:
-  enable: Activer le gestionnaire de fenêtres
   layout: Mise en page
   author: Auteur
   description: Description
@@ -64,13 +70,12 @@ wm:
     enable: Activer la bordure de la fenêtre
     width: Largeur de la bordure
     offset: Décalage de bordure
-  disabled_windows_version: Le gestionnaire de fenêtres n'est pas disponible pour votre version Windows.
+  enable: Activer le gestionnaire de fenêtres en carrelage
 weg:
   label: Dock/Barre des tâches
   enable: Activer le Dock/la barre des tâches
   width: Largeur
   auto_hide: Masquage automatique
-  dock_side: Côté quai
   padding: Rembourrage
   margin: Marge
   gap: Écart
@@ -80,6 +85,7 @@ weg:
     zoom_size: Taille agrandie (utilisée pour les thèmes)
     gap: Espace entre les éléments
     visible_separators: Séparateurs visibles
+  dock_side: Position
 devtools:
   enable: Activer les outils de développement
   app_folders: Dossiers d'applications
@@ -117,12 +123,15 @@ apps_configurations:
     ok_edit: Mise à jour
     ok_create: Créer
     ok_readonly: Modifier comme nouveau
-    options_label: Options supplémentaires
     options:
       float: Flotter
       unmanage: Annuler la gestion
       force: Forcer la gestion
       pinned: Épinglé
+      hidden: Masquer à Dock / Taskbar
+    wm_options_label: Options du gestionnaire de fenêtres
+    weg_options_label: Options de quai / barre des tâches
+    options_label: Des options supplémentaires
   identifier:
     remove: Supprimer le bloc
     id: Identifiant
@@ -132,6 +141,11 @@ apps_configurations:
     and: ET
     or: OU
     add_block: Ajouter un bloc
+  extra_info: >-
+    Seelen UI utilise un seul identifiant par application (premier match
+    trouvé), donc l'ordre dans How Are Speciteated est important, le dernier
+    ajouté sera prioritaire, car le tableau est trié par défaut du dernier à
+    l'ancien.
 extras:
   version: Version
   links: Liens officiels
@@ -161,8 +175,6 @@ shortcuts:
     increase_height: Augmenter la hauteur
     decrease_height: Diminuer la hauteur
     restore_sizes: Restaurer les tailles
-    switch_workspace_0: Passer à l'espace de travail 0
-    switch_workspace_1: Passer à l'espace de travail 1
     switch_workspace_2: Passer à l'espace de travail 2
     switch_workspace_3: Passer à l'espace de travail 3
     switch_workspace_4: Passer à l'espace de travail 4
@@ -191,3 +203,43 @@ shortcuts:
     send_to_workspace_7: Envoyer à Workspace 7
     send_to_workspace_8: Envoyer à l'espace de travail 8
     send_to_workspace_9: Envoyer à l'espace de travail 9
+    switch_workspace_1: Passez à l'espace de travail 2
+    switch_workspace_0: Passez à l'espace de travail 1
+    misc_open_settings: Paramètres ouvrir
+    misc_toggle_lock_tracing: Togue de verrouillage (journaux)
+    misc_toggle_win_event_tracing: Togle Win Event Traçage (journaux)
+    toggle_launcher: Basculer
+  reset: Réinitialiser les valeurs par défaut
+  readonly_tooltip: Ceci est un raccourci en lecture seule
+vd:
+  strategy:
+    native: Indigène
+    label: Stratégie de bureau virtuelle
+    seelen: Seelen
+  disabled_windows_version: >-
+    La stratégie de bureau virtuelle native n'est pas disponible pour votre
+    version Windows.
+save_and_restart: Enregistrer et redémarrer
+monitors_configurations:
+  label: Moniteur {{index}}
+wall:
+  interval: Changer de papier peint chaque (seconde)
+  enable: Activer Seelen Wall
+  backgrounds: Fonds d'écran
+  no_background: Vide de diaporama, en utilisant à la place l'arrière-plan du thème.
+app_launcher:
+  runners:
+    explorer: Courir
+    cmd: Commande
+    label: Coureuses
+  monitor: Surveiller à montrer
+  enable: Activer le lanceur d'applications
+more: Plus
+inherit: Hériter
+insert: Insérer
+close: Fermer
+update:
+  available: Mise à jour disponible!
+  downloading: Téléchargement...
+  channel: Mettre à jour le canal
+miscellaneous: Divers

@@ -1,20 +1,22 @@
 pub mod ahk;
 pub mod constants;
 pub mod pwsh;
+pub mod updater;
 pub mod virtual_desktop;
 mod winver;
 
 pub use winver::*;
 
 use std::{
+    collections::HashMap,
     path::PathBuf,
+    sync::atomic::AtomicBool,
     time::{Duration, Instant},
 };
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use tauri::{AppHandle, Manager};
 use windows::{
     core::GUID,
     Win32::{
@@ -34,6 +36,10 @@ pub fn sleep_millis(millis: u64) {
 }
 
 pub fn are_overlaped(a: &RECT, b: &RECT) -> bool {
+    let zeroed = RECT::default();
+    if a == &zeroed || b == &zeroed {
+        return false;
+    }
     if a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom {
         return false;
     }
@@ -86,7 +92,7 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
             let guid = part.trim_start_matches('{').trim_end_matches('}');
             let rfid = GUID::from(guid);
             let string_path = unsafe {
-                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, HANDLE(0))?.to_string()?
+                SHGetKnownFolderPath(&rfid as _, KF_FLAG_DEFAULT, HANDLE::default())?.to_string()?
             };
 
             path_buf.push(string_path);
@@ -100,52 +106,61 @@ pub fn resolve_guid_path<S: AsRef<str>>(path: S) -> Result<PathBuf> {
     Ok(path_buf)
 }
 
-pub fn app_data_path(handle: &AppHandle) -> PathBuf {
-    handle
-        .path()
-        .app_data_dir()
-        .expect("Failed to resolve App Data path")
+pub static TRACE_LOCK_ENABLED: AtomicBool = AtomicBool::new(false);
+lazy_static::lazy_static! {
+    pub static ref LAST_SUCCESSFUL_LOCK: Mutex<HashMap<String, String>> = Mutex::new(HashMap::new());
 }
 
 #[macro_export]
 macro_rules! trace_lock {
-    ($mutex:expr) => {{
-        #[cfg(feature = "trace_lock")]
-        {
-            log::trace!(
-                "Attempting to acquire lock on {} at {}:{}",
-                stringify!($mutex),
-                file!(),
-                line!()
-            );
-            let lock = $mutex.lock();
-            log::trace!("Successfully acquired lock on {}", stringify!($mutex));
-            lock
+    ($mutex:expr) => {
+        trace_lock!($mutex, 5)
+    };
+    ($mutex:expr, $duration:expr) => {{
+        let guard = $mutex.try_lock_for(std::time::Duration::from_secs($duration));
+        let guard_name = stringify!($mutex);
+        if guard.is_none() {
+            let mut panic_msg = format!("{} mutex is deadlocked", guard_name);
+            if let Some(path) = $crate::utils::LAST_SUCCESSFUL_LOCK.lock().get(guard_name) {
+                panic_msg = format!("{}, last successful aquire was at {}", panic_msg, path);
+            }
+            panic!("{}", panic_msg);
         }
-        #[cfg(not(feature = "trace_lock"))]
-        {
-            $mutex.lock()
+
+        if $crate::utils::TRACE_LOCK_ENABLED.load(std::sync::atomic::Ordering::Relaxed) {
+            let mut map = $crate::utils::LAST_SUCCESSFUL_LOCK.lock();
+            let location = format!("{}:{}", file!(), line!());
+            log::trace!("{} lock acquired at {}", guard_name, location);
+            map.insert(guard_name.to_owned(), location);
         }
+
+        guard.expect("Mutex deadlocked")
     }};
 }
 
 lazy_static! {
     pub static ref PERFORMANCE_HELPER: Mutex<PerformanceHelper> = Mutex::new(PerformanceHelper {
-        time: Instant::now()
+        time: HashMap::new(),
     });
 }
 
 pub struct PerformanceHelper {
-    time: Instant,
+    time: HashMap<String, Instant>,
 }
 
 impl PerformanceHelper {
-    pub fn start(&mut self) {
-        self.time = Instant::now();
+    pub fn start(&mut self, name: &str) {
+        log::debug!("{} start", name);
+        self.time.insert(name.to_string(), Instant::now());
     }
 
-    pub fn elapsed(&self) -> Duration {
-        self.time.elapsed()
+    pub fn elapsed(&self, name: &str) -> Duration {
+        self.time.get(name).unwrap().elapsed()
+    }
+
+    pub fn end(&mut self, name: &str) {
+        log::debug!("{} end in: {:.2}s", name, self.elapsed(name).as_secs_f64());
+        self.time.remove(name);
     }
 }
 

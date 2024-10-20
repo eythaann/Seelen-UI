@@ -14,6 +14,10 @@ header:
     seelen_bar: Fancy narzędzi
     shortcuts: Skróty
     seelen_wm: Menedżer okien
+    seelen_wall: Ściana
+    seelen_rofi: Uruchamianie aplikacji
+    virtual_desk: Wirtualne komputery stacjonarne
+    home: Dom
 start:
   title: Powitanie!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Kolor akcentu
   wallpaper:
     select: Wybierz tapetę
+  date_format: Format daty
 toolbar:
   placeholder:
     author: Autor
@@ -48,6 +53,8 @@ toolbar:
     select: Struktura paska narzędzi
   height: Wysokość
   enable: Włącz fantazyjny pasek narzędzi
+  auto_hide: Auto Hide
+  label: Pasek narzędzi
 wm:
   border:
     width: Szerokość granicy
@@ -57,11 +64,10 @@ wm:
   layout: Układ
   description: Opis
   space_between_containers: Przestrzeń między pojemnikami
-  enable: Włącz menedżer okien
   workspace_padding: Wypadki przestrzeni roboczej
   resize_delta: Zmień rozmiar Delta (%)
   workspace_offset: Przestrzenie robocze przesunięte (marginesy)
-  disabled_windows_version: Menedżer Windows nie jest dostępny dla wersji Windows.
+  enable: Włącz menedżer okien kafelków
 weg:
   items:
     label: Rzeczy
@@ -76,7 +82,7 @@ weg:
   enable: Włącz dok/pasek zadań
   margin: Margines
   label: Dock/Pasek zadań
-  dock_side: Strona dokująca
+  dock_side: Pozycja
 devtools:
   load: Obciążenie
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny
@@ -92,6 +98,7 @@ apps_configurations:
       force: Siła zarządza
       pinned: Przypięty
       unmanage: Niezarządzanie
+      hidden: Ukryj się przed dokiem/paskiem zadań
     name: Nazwa
     category_placeholder: Nic
     ok_edit: Aktualizacja
@@ -103,10 +110,12 @@ apps_configurations:
     ok_readonly: Edytuj jako nowy
     title_edit: Edycja {{nazwa}}
     monitor: Monitor
-    options_label: Dodatkowe opcje
     workspace: Obszar roboczy
     bindings: Wiązanie (wymagane są obie opcje)
     title_create: Tworzenie {{nazwa}}
+    weg_options_label: Opcje DOCK/PASKTA
+    wm_options_label: Opcje menedżera okien
+    options_label: Dodatkowe opcje
   identifier:
     and: I
     or: LUB
@@ -129,6 +138,11 @@ apps_configurations:
     Te konfiguracje pakietowe nie są edytowalne i mają na celu zapewnienie
     najlepszych wrażeń bez dostosowywania. Automatycznie konfigurują dla Ciebie
     najczęstsze aplikacje.
+  extra_info: >-
+    Interfejs użytkownika Seelen używa tylko jednego identyfikatora na aplikację
+    (znaleziono pierwsze dopasowanie), dlatego ważna jest kolejność podawania.
+    Priorytet będzie mieć najnowszy dodany, ponieważ tabela jest domyślnie
+    sortowana od najnowszego do starego.
 extras:
   relaunch: Wznowienie
   version: Wersja
@@ -162,7 +176,6 @@ shortcuts:
     send_to_workspace_0: Wyślij do obszaru roboczego 0
     focus_bottom: Focus Dim
     send_to_workspace_5: Wyślij do obszaru roboczego 5
-    switch_workspace_0: Przejdź na obszar roboczy 0
     reserve_bottom: Rezerwować dno
     send_to_workspace_4: Wyślij na przestrzeń roboczą 4
     reserve_top: Rezerwuj top
@@ -171,7 +184,6 @@ shortcuts:
     switch_workspace_8: Przełącz się na przestrzeń roboczą 8
     switch_workspace_9: Przejdź na obszar roboczy 9
     switch_workspace_2: Przełącz się na przestrzeń roboczą 2
-    switch_workspace_1: Przejdź na obszar roboczy 1
     reserve_float: Rezerwować pływak
     move_to_workspace_5: Przenieś się do obszaru roboczego 5
     move_to_workspace_8: Przenieś się do obszaru roboczego 8
@@ -184,8 +196,16 @@ shortcuts:
     move_to_workspace_9: Przenieś się do obszaru roboczego 9
     send_to_workspace_1: Wyślij do obszaru roboczego 1
     send_to_workspace_7: Wyślij na przestrzeń roboczą 7
+    switch_workspace_1: Przełącz się na przestrzeń roboczą 2
+    switch_workspace_0: Przejdź na obszar roboczy 1
+    misc_open_settings: Otwórz ustawienia
+    misc_toggle_win_event_tracing: Przełączanie zdarzeń wygranych (dzienniki)
+    misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)
+    toggle_launcher: Dźwignia kolankowa
   enable_tooltip: Wyłącz, jeśli zaimplementujesz własne skróty za pomocą API Seelen Core
   enable: Włącz zintegrowane skróty (AHK)
+  reset: Zresetuj do domyślnych
+  readonly_tooltip: To jest skrót tylko do odczytu
 loading: Ładowanie...
 quit: Zrezygnować
 inProgress: W trakcie...
@@ -193,3 +213,35 @@ delete: Usuwać
 cancel: Anulować
 save: Ratować
 open: otwarty
+vd:
+  strategy:
+    native: Rodzinny
+    seelen: Seelen
+    label: Strategia wirtualnego komputera stacjonarnego
+  disabled_windows_version: >-
+    Native Virtual Desktop Strategy nie jest dostępna dla wersji systemu
+    Windows.
+save_and_restart: Zapisz i uruchom ponownie
+monitors_configurations:
+  label: Monitor {{indeks}}
+wall:
+  interval: Zmień tapetę co (sekundy)
+  no_background: Pusty pokaz slajdów, zamiast tego używając tła motywu.
+  enable: Włącz ścianę Seelen
+  backgrounds: Tapety
+app_launcher:
+  runners:
+    explorer: Uruchomić
+    cmd: Rozkaz
+    label: Biegacze
+  monitor: Monitor, aby pokazać
+  enable: Włącz uruchamianie aplikacji
+inherit: Dziedziczyć
+more: Więcej
+insert: Wstawić
+close: Zamknąć
+update:
+  available: Aktualizacja dostępna!
+  downloading: Ściąganie...
+  channel: Kanał aktualizacji
+miscellaneous: Różnorodny

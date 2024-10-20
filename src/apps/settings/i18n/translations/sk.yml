@@ -14,6 +14,10 @@ header:
     specific_apps: Konkrétne aplikácie
     general: Všeobecný
     seelen_wm: Správca okien
+    seelen_wall: Stena
+    seelen_rofi: Spúšťač aplikácií
+    virtual_desk: Virtuálne stolné počítače
+    home: Domov
 start:
   title: Vitajte!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Prízvuk
   wallpaper:
     select: Vyberte tapetu
+  date_format: Formát
 toolbar:
   placeholder:
     author: Autor
@@ -48,6 +53,8 @@ toolbar:
     description: Opis
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
+  auto_hide: Automaticky skryť
+  label: Panel s nástrojmi
 wm:
   border:
     width: Šírka hranice
@@ -56,12 +63,11 @@ wm:
   author: Autor
   resize_delta: Zmeňte veľkosť delty (%)
   workspace_padding: Čalúnenie pracovných priestorov
-  enable: Povoliť správcu okien
   layout: Usporiadanie
   space_between_containers: Priestor medzi nádobami
   description: Opis
   workspace_offset: Offsety Workspaces (marže)
-  disabled_windows_version: Správca okien nie je k dispozícii pre vašu verziu systému Windows.
+  enable: Povoľte správcu okien obkladov
 weg:
   items:
     size: Veľkosť položky
@@ -76,7 +82,7 @@ weg:
   auto_hide: Automaticky skryť
   padding: Vypchávka
   margin: Okraj
-  dock_side: Strana
+  dock_side: Pozícia
 devtools:
   enable: Povoľte vývojárskym nástrojom
   custom_config_file: Načítať vlastný konfiguračný súbor
@@ -92,6 +98,7 @@ apps_configurations:
       force: Riadiť silu
       pinned: Pripnutý
       unmanage: Nemeniť
+      hidden: Skryť pred prístaviskom/panelom úloh
     name: názov
     ok_edit: Aktualizácia
     workspace: Pracovný priestor
@@ -100,13 +107,15 @@ apps_configurations:
     bindings: Viazanie (POZNÁMKA sú potrebné obe možnosti)
     title_edit: Editovanie {{name}}
     workspace_placeholder: Žiadny
-    options_label: Ďalšie možnosti
     category_placeholder: Žiadny
     ok_create: Vytvárať
     title_readonly: Prezeranie {{name}}
     monitor_placeholder: Žiadny
     category: Kategória
     monitor: Monitor
+    wm_options_label: Možnosti správcu okien
+    weg_options_label: Možnosti doku/panela úloh
+    options_label: Ďalšie možnosti
   identifier:
     remove: Vymazať blok
     negation: Negovať zladenie
@@ -129,6 +138,11 @@ apps_configurations:
     poskytli najlepší zážitok bez prispôsobenia. Automaticky nakonfigurujú pre
     vás najbežnejšie aplikácie.
   swap: Vymeniť
+  extra_info: >-
+    Používateľské rozhranie Seelen používa iba jeden identifikátor na aplikáciu
+    (prvá nájdená zhoda), takže poradie, v akom sú špecifikované, je dôležité.
+    Najnovšie pridané budú mať prioritu, pretože tabuľka je predvolene zoradená
+    od najnovšieho po staré.
 extras:
   relaunch: Reštart
   version: Verzia
@@ -153,7 +167,6 @@ shortcuts:
     reserve_stack: Zásobník
     move_to_workspace_7: Presuňte sa do pracovného priestoru 7
     send_to_workspace_1: Pošlite do pracovného priestoru 1
-    switch_workspace_1: Prepnite na pracovný priestor 1
     send_to_workspace_5: Pošlite do pracovného priestoru 5
     reserve_left: Vľavo
     reserve_top: Horná časť
@@ -177,15 +190,22 @@ shortcuts:
     switch_workspace_6: Prepnite na pracovný priestor 6
     focus_left: Vľavo
     reserve_float: Plavák
-    switch_workspace_0: Prepnite na pracovný priestor 0
     focus_latest: Najnovší
     send_to_workspace_7: Pošlite do pracovného priestoru 7
     send_to_workspace_3: Pošlite do pracovného priestoru 3
     move_to_workspace_1: Presun do pracovného priestoru 1
     increase_width: Zväčšenie
     restore_sizes: Obnoviť veľkosti
+    switch_workspace_0: Prepnite na pracovný priestor 1
+    switch_workspace_1: Prepnite na pracovný priestor 2
+    misc_open_settings: Otvorené nastavenia
+    misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
+    misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
+    toggle_launcher: Prepínanie
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
+  reset: Reset na predvolené hodnoty
+  readonly_tooltip: Toto je skratka iba na čítanie
 inProgress: Prebieha ...
 loading: Načítava...
 open: OTVORENÉ
@@ -193,3 +213,35 @@ cancel: Zrušiť
 quit: Prestať
 save: Uložiť
 delete: Vymazať
+vd:
+  strategy:
+    label: Stratégia virtuálnej plochy
+    native: Domorodý
+    seelen: Kabína
+  disabled_windows_version: >-
+    Natívna virtuálna stolná stratégia nie je k dispozícii pre vašu verziu
+    systému Windows.
+save_and_restart: Uložiť a reštartovať
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
+  enable: Povoliť stenu Seelen
+  interval: Vymeňte tapetu každú (sekundy)
+  backgrounds: Tapety
+app_launcher:
+  runners:
+    label: Bežec
+    explorer: Spustenie
+    cmd: Príkaz
+  enable: Povoliť spúšťač aplikácií
+  monitor: Monitorovať, aby sa ukázal
+more: Viac
+insert: Vložiť
+inherit: Zdediť
+close: Zatvoriť
+update:
+  available: Aktualizácia k dispozícii!
+  downloading: Sťahovanie ...
+  channel: Kanál
+miscellaneous: Rôznorodý

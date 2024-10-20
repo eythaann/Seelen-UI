@@ -35,14 +35,15 @@ use windows_core::Interface;
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::get_app_handle,
-    seelen_weg::icon_extractor::extract_and_save_icon,
+    seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
     utils::pcwstr,
-    windows_api::{Com, WindowsApi},
+    windows_api::{Com, WindowEnumerator, WindowsApi},
 };
 
-use super::domain::{Device, DeviceChannel, IPolicyConfig, MediaPlayer, PolicyConfig};
+use super::domain::{
+    Device, DeviceChannel, IPolicyConfig, MediaPlayer, MediaPlayerOwner, PolicyConfig,
+};
 
 lazy_static! {
     pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> = Arc::new(Mutex::new(
@@ -54,6 +55,7 @@ lazy_static! {
         Arc::new(Mutex::new(HashMap::new()));
 }
 
+#[derive(Debug)]
 enum MediaEvent {
     DeviceAdded(String),
     DeviceRemoved(String),
@@ -84,7 +86,7 @@ enum MediaEvent {
 #[windows_core::implement(IMMNotificationClient)]
 struct MediaManagerEvents;
 
-impl IMMNotificationClient_Impl for MediaManagerEvents {
+impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
     fn OnDefaultDeviceChanged(
         &self,
         flow: EDataFlow,
@@ -202,7 +204,7 @@ struct MediaDeviceEventHandler {
     device_id: String,
 }
 
-impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
+impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler_Impl {
     fn OnNotify(
         &self,
         data: *mut windows::Win32::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA,
@@ -218,7 +220,7 @@ impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler {
     }
 }
 
-impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
+impl IAudioSessionNotification_Impl for MediaDeviceEventHandler_Impl {
     fn OnSessionCreated(
         &self,
         _new_session: Option<&IAudioSessionControl>,
@@ -231,7 +233,7 @@ impl IAudioSessionNotification_Impl for MediaDeviceEventHandler {
 #[windows::core::implement(IAudioSessionEvents)]
 struct MediaSessionEventHandler;
 
-impl IAudioSessionEvents_Impl for MediaSessionEventHandler {
+impl IAudioSessionEvents_Impl for MediaSessionEventHandler_Impl {
     fn OnChannelVolumeChanged(
         &self,
         _channel_count: u32,
@@ -474,7 +476,7 @@ impl MediaManager {
                             .to_string()?,
                     }
                     .replace(".exe", "");
-                    icon_path = extract_and_save_icon(&get_app_handle(), &path)
+                    icon_path = extract_and_save_icon_from_file(&path)
                         .ok()
                         .map(|p| p.to_string_lossy().to_string());
                 }
@@ -541,6 +543,10 @@ impl MediaManager {
     fn release_device(&mut self, device_id: &str) -> Result<()> {
         if let Some((endpoint, callback)) = self.devices_audio_endpoint.remove(device_id) {
             unsafe { endpoint.UnregisterControlChangeNotify(&callback)? };
+            // avoid call drop and IUnknown::Release because the COM object was removed on device disconnection
+            // and call Release on a unexciting object can produce a deadlock
+            std::mem::forget(endpoint);
+            std::mem::forget(callback);
         }
         self.inputs.retain(|d| d.id != device_id);
         self.outputs.retain(|d| d.id != device_id);
@@ -551,33 +557,50 @@ impl MediaManager {
         &mut self,
         session: GlobalSystemMediaTransportControlsSession,
     ) -> Result<()> {
+        let source_app_user_model_id = session.SourceAppUserModelId()?.to_string_lossy();
         let properties = session.TryGetMediaPropertiesAsync()?.get()?;
 
         let playback_info = session.GetPlaybackInfo()?;
         let status = playback_info.PlaybackStatus()?;
-        let id = session.SourceAppUserModelId()?.to_string_lossy();
+
+        // this is only needed when the player is not a uwp app like firefox player as example
+        let owner = WindowEnumerator::new().find(|w| {
+            if let Some(id) = w.app_user_model_id() {
+                return id == source_app_user_model_id;
+            }
+            false
+        })?;
 
         self.playing.push(MediaPlayer {
+            id: source_app_user_model_id.clone(),
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
+            owner: owner.map(|w| MediaPlayerOwner {
+                name: w
+                    .app_display_name()
+                    .unwrap_or_else(|_| "Unknown App".to_string()),
+                icon_path: w
+                    .app_user_model_id()
+                    .and_then(|umid| extract_and_save_icon_umid(&umid).ok())
+                    .or_else(|| w.exe().and_then(extract_and_save_icon_from_file).ok()),
+            }),
             thumbnail: properties
                 .Thumbnail()
                 .ok()
                 .and_then(|stream| WindowsApi::extract_thumbnail_from_ref(stream).ok()),
             playing: status == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
             default: false,
-            id: id.clone(),
         });
 
         // listen for media transport events
         self.media_player_event_tokens.insert(
-            id.clone(),
+            source_app_user_model_id.clone(),
             (
                 session.MediaPropertiesChanged(&self.media_player_properties_event_handler)?,
                 session.PlaybackInfoChanged(&self.media_player_playback_event_handler)?,
             ),
         );
-        self.media_players.insert(id, session);
+        self.media_players.insert(source_app_user_model_id, session);
         Ok(())
     }
 

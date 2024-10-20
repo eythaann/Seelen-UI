@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Tumakbo
+    cmd: Utos
+footer:
+  shortcuts: Ipakita ang mga shortcut
+header:
+  search: App, utos o landas
+item:
+  pin: Pin sa pantalan
+  open_location: Buksan ang lokasyon ng file

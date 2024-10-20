@@ -14,6 +14,10 @@ header:
     info: Informacija
     shortcuts: Nuorodos
     general: Bendrasis
+    seelen_wall: Siena
+    seelen_rofi: Programos paleidimo priemonė
+    virtual_desk: Virtualūs staliniai kompiuteriai
+    home: Namai
 start:
   title: Sveiki!
   message_accent: Optimizuokite savo produktyvumą stiliumi!
@@ -41,6 +45,7 @@ general:
   accent_color: Akcento spalva
   wallpaper:
     select: Pasirinkite tapetai
+  date_format: Datos formatas
 toolbar:
   placeholder:
     select: Įrankių juostos struktūra
@@ -48,6 +53,8 @@ toolbar:
     author: Autorius
   height: Ūgis
   enable: Įgalinkite išgalvotą įrankių juostą
+  auto_hide: Automatinis slėptuvė
+  label: Įrankių juosta
 wm:
   border:
     enable: Įgalinti lango sieną
@@ -55,13 +62,12 @@ wm:
     width: Sienos plotis
   space_between_containers: Tarpas tarp konteinerių
   description: apibūdinimas
-  enable: Įgalinkite lango tvarkyklę
   resize_delta: Pakeisti deltos dydį (%)
   layout: Išdėstymas
   author: Autorius
   workspace_offset: Darbo vietos poslinkis (paraštės)
   workspace_padding: Darbo vietų pamušalas
-  disabled_windows_version: „Windows Manager“ nėra jūsų „Windows“ versijai.
+  enable: Įgalinkite plytelių langų tvarkyklę
 weg:
   items:
     size: Prekės dydis
@@ -75,8 +81,8 @@ weg:
   label: „Dock“/„Taskbar“
   width: Plotis
   enable: Įgalinti doką/užduočių juostą
-  dock_side: Doko pusė
   gap: Tarpas
+  dock_side: Pozicija
 devtools:
   settings_file: Nustatymų failas
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
@@ -92,6 +98,7 @@ apps_configurations:
       force: Jėgos valdymas
       pinned: Prigludęs
       unmanage: Nevaldomas
+      hidden: Slėpti nuo doko/užduočių juostos
     name: vardas
     title_readonly: Peržiūra {{name}}
     monitor_placeholder: Nė vienas
@@ -102,11 +109,13 @@ apps_configurations:
     title_edit: Redagavimas {{name}}
     workspace: Darbo vieta
     workspace_placeholder: Nė vienas
-    options_label: Papildomos galimybės
     ok_edit: Atnaujinimas
     ok_create: Sukurti
     monitor: Monitorius
     ok_readonly: Redaguoti kaip naują
+    weg_options_label: „Dock“/„Taskbar“ parinktys
+    wm_options_label: „Windows Manager“ parinktys
+    options_label: Papildomos galimybės
   identifier:
     id: Identifikatorius
     negation: Neigiamas
@@ -129,6 +138,11 @@ apps_configurations:
   confirm_delete_title: Patvirtinkite ištrynti
   export: Eksportas
   bundled_title: APP CONFIC sujungta su „Seelen“
+  extra_info: >-
+    „Seelen“ vartotojo sąsaja naudoja tik vieną identifikatorių vienai programai
+    (rasta pirmoji atitiktis), todėl svarbi tvarka, kaip nurodyta, bus teikiama
+    pirmenybė naujausiai pridėtai, nes pagal numatytuosius nustatymus lentelė
+    rūšiuojama nuo naujausios iki senesnės.
 extras:
   links: Oficialios nuorodos
   github: Github
@@ -153,7 +167,6 @@ shortcuts:
     reserve_float: Atsargos plūdė
     send_to_workspace_2: Siųsti į 2 darbo vietą
     move_to_workspace_5: Pereikite į 5 darbo vietą
-    switch_workspace_1: Perjunkite į 1 darbo vietą
     focus_top: Fokusavimo viršus
     focus_latest: Sutelkite naujausią
     send_to_workspace_5: Siųsti į 5 darbo vietą
@@ -172,7 +185,6 @@ shortcuts:
     switch_workspace_6: Perjunkite į 6 darbo vietą
     move_to_workspace_7: Pereikite į 7 darbo vietą
     move_to_workspace_8: Pereikite į 8 darbo vietą
-    switch_workspace_0: Perjunkite į darbo vietą 0
     switch_workspace_5: Perjunkite į 5 darbo vietą
     send_to_workspace_7: Siųsti į „Workspace 7“
     send_to_workspace_3: Siųsti į 3 „Workspace“
@@ -184,8 +196,16 @@ shortcuts:
     move_to_workspace_0: Pereikite į 0 darbo vietą
     reserve_stack: Rezervo kaminas
     focus_bottom: Fokusavimo dugnas
+    switch_workspace_1: Perjunkite į 2 darbo vietą
+    switch_workspace_0: Perjunkite į 1 darbo vietą
+    misc_open_settings: Atidaryti nustatymai
+    misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
+    misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
+    toggle_launcher: Perjungti
   enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
+  reset: Iš naujo nustatykite pagal numatytuosius nustatymus
+  readonly_tooltip: Tai tik skaitomas nuoroda
 delete: Ištrinti
 open: Atviras
 save: Sutaupyti
@@ -193,3 +213,33 @@ inProgress: Vyksta ...
 quit: Mesti
 loading: Pakrovimas ...
 cancel: Atšaukti
+vd:
+  strategy:
+    seelen: Seelenas
+    native: Gimtoji
+    label: Virtuali darbalaukio strategija
+  disabled_windows_version: Natūralios virtualios darbalaukio strategijos nėra jūsų „Windows“ versijai.
+save_and_restart: Išsaugokite ir paleiskite iš naujo
+monitors_configurations:
+  label: Monitorius {{index}}
+wall:
+  backgrounds: Tapetai
+  enable: Įgalinkite Seeleno sieną
+  interval: Keiskite tapetų kiekvieną (sekundes)
+  no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
+app_launcher:
+  runners:
+    explorer: Bėgti
+    label: Bėgikai
+    cmd: Komanda
+  enable: Įgalinti programos paleidimo priemonę
+  monitor: Monitorius, kad parodytumėte
+inherit: Paveldėti
+insert: Įterpti
+more: Daugiau
+close: Uždaryti
+update:
+  available: Galima atnaujinti!
+  downloading: Atsisiuntimas ...
+  channel: Atnaujinkite kanalą
+miscellaneous: Įvairūs

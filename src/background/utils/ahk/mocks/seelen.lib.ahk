@@ -16,9 +16,36 @@ CloseIfNotRunning() {
   SetTimer(CloseIfNotRunning, 1000)
 }
 
-OpenSettings(){
+; ================= Main =================
+OpenSettings() {
   RunWait(seelen " settings", , "Hide")
 }
+
+; ================= Debug =================
+
+ToggleWinEventTracing() {
+  RunWait(seelen " debugger toggle-win-events", , "Hide")
+}
+
+ToggleMutexLockTracing() {
+  RunWait(seelen " debugger toggle-trace-lock", , "Hide")
+}
+
+; ================= Virtual desktop =================
+
+SwitchWorkspace(idx) {
+  RunWait(seelen " vd switch-workspace " idx, , "Hide")
+}
+
+MoveToWorkspace(idx) {
+  RunWait(seelen " vd move-to-workspace " idx, , "Hide")
+}
+
+SendToWorkspace(idx) {
+  RunWait(seelen " vd send-to-workspace " idx, , "Hide")
+}
+
+; ================= Tiling Window Manager =================
 
 Reserve(reservation) {
   RunWait(seelen " wm reserve " reservation, , "Hide")
@@ -48,18 +75,6 @@ focus(action) {
   RunWait(seelen " wm focus " action, , "Hide")
 }
 
-SwitchWorkspace(idx) {
-  RunWait(seelen " wm switch-workspace " idx, , "Hide")
-}
-
-MoveToWorkspace(idx) {
-  RunWait(seelen " wm move-to-workspace " idx, , "Hide")
-}
-
-SendToWorkspace(idx) {
-  RunWait(seelen " wm send-to-workspace " idx, , "Hide")
-}
-
 PauseWM() {
   RunWait(seelen " wm pause", , "Hide")
 }
@@ -70,4 +85,10 @@ PauseWM() {
  */
 ResumeWM() {
   RunWait(seelen " wm resume", , "Hide")
+}
+
+; ================= App Launcher =================
+
+ToggleAppLauncher() {
+  RunWait(seelen " launcher toggle", , "Hide")
 }

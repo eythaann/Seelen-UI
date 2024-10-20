@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock/Thanh tác vụ
     seelen_wm: Quản lý cửa sổ
     shortcuts: Phím tắt
+    seelen_rofi: Ứng dụng Launcher
+    seelen_wall: Bức tường
+    virtual_desk: Máy tính để bàn ảo
+    home: Trang chủ
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -41,6 +45,7 @@ general:
   accent_color: Màu nhấn
   wallpaper:
     select: Chọn hình nền
+  date_format: Định dạng ngày
 toolbar:
   placeholder:
     author: Tác giả
@@ -48,6 +53,8 @@ toolbar:
     select: Cấu trúc thanh công cụ
   height: Chiều cao
   enable: Kích hoạt thanh công cụ ưa thích
+  auto_hide: Tự động ẩn
+  label: Thanh công cụ
 wm:
   border:
     width: Chiều rộng biên giới
@@ -56,12 +63,11 @@ wm:
   description: Sự miêu tả
   author: Tác giả
   layout: Cách trình bày
-  enable: Bật trình quản lý cửa sổ
   resize_delta: Thay đổi kích thước delta (%)
   space_between_containers: Không gian giữa các container
   workspace_padding: Không gian làm việc đệm
   workspace_offset: Không gian làm việc bù (lề)
-  disabled_windows_version: Trình quản lý cửa sổ không có sẵn cho phiên bản Windows của bạn.
+  enable: Bật trình quản lý cửa sổ ốp lát
 weg:
   items:
     size: Kích thước mục
@@ -75,8 +81,8 @@ weg:
   enable: Bật Dock/Thanh tác vụ
   padding: Đệm
   label: Dock/Thanh tác vụ
-  dock_side: Phía bến tàu
   auto_hide: Tự động ẩn
+  dock_side: Chức vụ
 devtools:
   load: Trọng tải
   app_folders: Thư mục ứng dụng
@@ -92,6 +98,7 @@ apps_configurations:
       force: Quản lý lực lượng
       pinned: Ghim
       unmanage: Không quản lý
+      hidden: Ẩn từ Dock/Thanh tác vụ
     category_placeholder: Không có
     category: Loại
     ok_edit: Cập nhật
@@ -103,10 +110,12 @@ apps_configurations:
     bindings: Binding (Lưu ý cả hai tùy chọn đều được yêu cầu)
     monitor: Màn hình
     title_readonly: Xem {{name}}
-    options_label: Tùy chọn bổ sung
     workspace: Không gian làm việc
     ok_readonly: Chỉnh sửa như mới
     title_create: Tạo {{name}}
+    weg_options_label: Tùy chọn Thanh điều khiển/Thanh nhiệm vụ
+    wm_options_label: Tùy chọn Trình quản lý cửa sổ
+    options_label: Tùy chọn bổ sung
   identifier:
     and: VÀ
     or: HOẶC
@@ -129,6 +138,10 @@ apps_configurations:
     Các cấu hình đi kèm này không thể chỉnh sửa và được thiết kế để cung cấp cho
     bạn trải nghiệm tốt nhất mà không cần tùy chỉnh. Chúng tự động định cấu hình
     các ứng dụng phổ biến nhất cho bạn.
+  extra_info: >-
+    Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu
+    tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ
+    được ưu tiên, vì ghi chú được sắp xếp theo mặc định từ mới nhất đến cũ.
 extras:
   version: Phiên bản
   discord: Bất hòa
@@ -147,8 +160,6 @@ shortcuts:
     send_to_workspace_9: Gửi đến không gian làm việc 9
     reserve_top: Dự trữ hàng đầu
     focus_bottom: Focus bottom
-    switch_workspace_1: Chuyển sang không gian làm việc 1
-    switch_workspace_0: Chuyển sang không gian làm việc 0
     reserve_stack: Ngân hàng dự trữ
     switch_workspace_3: Chuyển sang không gian làm việc 3
     increase_height: Tăng chiều cao
@@ -184,8 +195,16 @@ shortcuts:
     reserve_left: Dự trữ trái
     send_to_workspace_7: Gửi đến không gian làm việc 7
     focus_left: Tập trung trái
+    switch_workspace_0: Chuyển sang không gian làm việc 1
+    switch_workspace_1: Chuyển sang không gian làm việc 2
+    misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)
+    misc_open_settings: Mở cài đặt
+    misc_toggle_win_event_tracing: Chuyển đổi theo dõi sự kiện (nhật ký)
+    toggle_launcher: Chuyển đổi
   enable: Bật các phím tắt tích hợp (AHK)
   enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
+  reset: Đặt lại về mặc định
+  readonly_tooltip: Đây là một lối tắt chỉ đọc
 loading: Đang tải...
 open: Mở
 quit: Từ bỏ
@@ -193,3 +212,35 @@ delete: Xóa bỏ
 inProgress: Trong tiến trình...
 save: Cứu
 cancel: Hủy bỏ
+vd:
+  strategy:
+    native: Tự nhiên
+    seelen: Seelen
+    label: Chiến lược máy tính để bàn ảo
+  disabled_windows_version: >-
+    Chiến lược máy tính để bàn ảo gốc không có sẵn cho phiên bản Windows của
+    bạn.
+save_and_restart: Lưu & Khởi động lại
+monitors_configurations:
+  label: Màn hình {{index}}
+wall:
+  interval: Thay đổi hình nền mỗi (giây)
+  no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
+  backgrounds: Hình nền
+  enable: Bật tường Seelen
+app_launcher:
+  runners:
+    explorer: Chạy
+    cmd: Yêu cầu
+    label: Người chạy bộ
+  enable: Bật trình khởi chạy ứng dụng
+  monitor: Giám sát để hiển thị
+insert: Chèn
+more: Hơn
+inherit: Kế thừa
+close: Đóng
+update:
+  available: Cập nhật có sẵn!
+  channel: Cập nhật kênh
+  downloading: Tải xuống ...
+miscellaneous: Linh tinh

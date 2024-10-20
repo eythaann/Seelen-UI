@@ -3,41 +3,44 @@ use windows::Win32::{
     UI::WindowsAndMessaging::{FindWindowExA, EVENT_OBJECT_CREATE, EVENT_OBJECT_SHOW, SW_HIDE},
 };
 
-use crate::{error_handler::Result, pcstr, windows_api::WindowsApi, winevent::WinEvent};
+use crate::{
+    error_handler::Result,
+    pcstr,
+    windows_api::{window::Window, WindowsApi},
+    winevent::WinEvent,
+};
 
 use super::{SeelenWeg, TASKBAR_CLASS};
 
 impl SeelenWeg {
-    pub fn process_global_win_event(event: WinEvent, origin: HWND) -> Result<()> {
+    pub fn process_global_win_event(event: WinEvent, window: &Window) -> Result<()> {
+        let origin = window.hwnd();
         match event {
             WinEvent::ObjectShow | WinEvent::ObjectCreate => {
-                if Self::is_real_window(origin, false) {
-                    Self::add_hwnd(origin);
+                if Self::should_be_added(origin) {
+                    Self::add_hwnd(origin)?;
                 }
             }
-            WinEvent::ObjectDestroy => {
-                if Self::contains_app(origin) {
-                    Self::remove_hwnd(origin);
-                }
-            }
-            WinEvent::ObjectHide => {
-                if Self::contains_app(origin) {
-                    // We filter apps with parents but UWP apps using ApplicationFrameHost.exe are initialized without
-                    // parent so we can't filter it on open event but these are immediately hidden when the ApplicationFrameHost.exe parent
-                    // is assigned to the window. After that we replace the window hwnd to its parent and remove child from the list
-                    let parent = WindowsApi::get_parent(origin);
-                    if parent.0 != 0 {
-                        Self::replace_hwnd(origin, parent)?;
-                    } else {
+            WinEvent::ObjectParentChange => {
+                if let Some(parent) = window.parent() {
+                    if Self::contains_app(window.hwnd()) {
                         Self::remove_hwnd(origin);
                     }
+                    if !Self::contains_app(parent.hwnd()) && Self::should_be_added(parent.hwnd()) {
+                        Self::add_hwnd(parent.hwnd())?;
+                    }
+                }
+            }
+            WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
+                if Self::contains_app(origin) {
+                    Self::remove_hwnd(origin);
                 }
             }
             WinEvent::ObjectNameChange => {
                 if Self::contains_app(origin) {
                     Self::update_app(origin);
-                } else if Self::is_real_window(origin, false) {
-                    Self::add_hwnd(origin);
+                } else if Self::should_be_added(origin) {
+                    Self::add_hwnd(origin)?;
                 }
             }
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
@@ -49,11 +52,15 @@ impl SeelenWeg {
     }
 
     pub fn process_individual_win_event(&mut self, event: WinEvent, origin: HWND) -> Result<()> {
+        let window = Window::from(origin);
         match event {
             WinEvent::SystemForeground | WinEvent::ObjectFocus => {
                 self.handle_overlaped_status(origin)?;
             }
             WinEvent::ObjectLocationChange => {
+                if window.hwnd() == self.window.hwnd()? {
+                    self.set_position(window.monitor().raw())?;
+                }
                 if origin == WindowsApi::get_foreground_window() {
                     self.handle_overlaped_status(origin)?;
                 }
@@ -68,7 +75,6 @@ impl SeelenWeg {
                 let monitor = WindowsApi::monitor_from_window(self.window.hwnd()?);
                 if monitor == event_data.monitor {
                     self.show()?;
-                    self.set_overlaped_status(false)?;
                 }
             }
             _ => {}
@@ -97,22 +103,24 @@ impl SeelenWeg {
                     let content_hwnd = unsafe {
                         FindWindowExA(
                             origin_hwnd,
-                            HWND(0),
+                            HWND::default(),
                             pcstr!("Windows.UI.Composition.DesktopWindowContentBridge"),
-                            pcstr!("DesktopWindowXamlSource"),
+                            None,
                         )
+                        .unwrap_or_default()
                     };
 
-                    if content_hwnd.0 != 0 {
+                    if !content_hwnd.is_invalid() {
                         let input_hwnd = unsafe {
                             FindWindowExA(
                                 content_hwnd,
-                                HWND(0),
+                                HWND::default(),
                                 pcstr!("Windows.UI.Input.InputSite.WindowClass"),
                                 None,
                             )
+                            .unwrap_or_default()
                         };
-                        if input_hwnd.0 != 0 {
+                        if !input_hwnd.is_invalid() {
                             // can fail on volume window island
                             let _ = WindowsApi::show_window(input_hwnd, SW_HIDE);
                         }

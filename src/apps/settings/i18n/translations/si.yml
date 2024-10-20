@@ -14,6 +14,10 @@ header:
     shortcuts: කෙටිමං
     seelen_wm: කවුළු කළමනාකරු
     seelen_weg: ඩොක්/කාර්ය තීරුව
+    seelen_rofi: යෙදුම් දියත් කිරීම
+    seelen_wall: බිත්තිය
+    virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
+    home: මුල් පිටුව
 start:
   title: සාදරයෙන් පිළිගනිමු!
   message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
@@ -41,6 +45,7 @@ general:
   accent_color: උච්චාරණ වර්ණය
   wallpaper:
     select: බිතුපත තෝරන්න
+  date_format: දිනය ආකෘතිය
 toolbar:
   placeholder:
     author: කර්තෘ
@@ -48,6 +53,8 @@ toolbar:
     select: මෙවලම් තීරු ව්යුහය
   height: උස
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
+  auto_hide: ස්වයංක්රීය සැඟවීම
+  label: මෙවලම් තීරුව
 wm:
   border:
     width: මායිම් පළල
@@ -57,11 +64,10 @@ wm:
   description: විස්තර
   layout: පිරිසැලසුම
   space_between_containers: බහාලුම් අතර අවකාශය
-  enable: කවුළු කළමනාකරු සබල කරන්න
   workspace_padding: වැඩබිම් පිරවුම
   resize_delta: ඩෙල්ටා ප්‍රමාණය වෙනස් කරන්න (%)
   workspace_offset: වැඩබිම් ඕෆ්සෙට් (ආන්තික)
-  disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා කවුළු කළමනාකරු ලබා ගත නොහැක.
+  enable: ටයිල්ලිං කවුළු කළමනාකරු සක්රීය කරන්න
 weg:
   items:
     label: අයිතම
@@ -74,9 +80,9 @@ weg:
   padding: පෑඩිං
   width: පළල
   enable: Dock/Taskbar සබල කරන්න
-  dock_side: ඩොක් පැත්ත
   gap: පරතරය
   margin: ආන්තිකය
+  dock_side: තනතුර
 devtools:
   enable: සංවර්ධක මෙවලම් සබල කරන්න
   install_folder: ස්ථාපන ෆෝල්ඩරය
@@ -92,13 +98,13 @@ apps_configurations:
       pinned: පින් කර ඇත
       force: බල කළමනාකරණය
       unmanage: කළමනාකරණය කරන්න
+      hidden: තටාකයේ / කාර්ය තීරුවෙන් සඟවන්න
     title_create: '{{name}} නිර්මාණය කරමින්'
     monitor: නිරීක්ෂණය කරන්න
     category_placeholder: කිසිවක් නැත
     name: නම
     workspace_placeholder: කිසිවක් නැත
     monitor_placeholder: කිසිවක් නැත
-    options_label: අමතර විකල්ප
     ok_edit: යාවත්කාලීන කරන්න
     category: වර්ගය
     title_edit: '{{name}} සංස්කරණය කරමින්'
@@ -107,6 +113,9 @@ apps_configurations:
     ok_readonly: නව ලෙස සංස්කරණය කරන්න
     title_readonly: '{{name}} බලමින්'
     ok_create: නිර්මාණය කරන්න
+    weg_options_label: තටාකය / කාර්ය තීරුව විකල්ප
+    wm_options_label: කවුළු කළමනාකරුගේ විකල්ප
+    options_label: අමතර විකල්ප
   identifier:
     and: සහ
     add_block: බ්ලොක් එක් කරන්න
@@ -129,6 +138,10 @@ apps_configurations:
     අත්දැකීම ලබා දීමට සැලසුම් කර ඇත. ඔවුන් ඔබ සඳහා වඩාත් පොදු යෙදුම්
     ස්වයංක්‍රීයව වින්‍යාස කරයි.
   confirm_delete: ඔබට මෙම වින්‍යාසය/s මැකීමට අවශ්‍ය බව විශ්වාසද?
+  extra_info: >-
+    Applow Applay Apan Applen UI යෙදුමට එක් අනන්යතාවයක් භාවිතා කරන්න (පළමු තරගය
+    හමු විය) එබැවින් නිශ්චිතව දක්වන අනුපිළිවෙල වැදගත් ය, නවතම එකතු කරන ලද නවතම
+    එකතු කරනු ලැබේ, නවතම නම නවතම නවතම දක්වා පෙරනිමියෙන්.
 extras:
   version: පිටපත
   discord: අසමගිය
@@ -143,7 +156,6 @@ shortcuts:
     increase_height: උස වැඩි කරන්න
     send_to_workspace_2: Workspace 2 වෙත යවන්න
     send_to_workspace_5: වැඩබිම වෙත යවන්න 5
-    switch_workspace_0: Workspace 0 වෙත මාරු වන්න
     move_to_workspace_7: වැඩබිම වෙත ගෙන යන්න 7
     send_to_workspace_3: වැඩබිම වෙත යවන්න 3
     send_to_workspace_9: Workspace 9 වෙත යවන්න
@@ -155,7 +167,6 @@ shortcuts:
     send_to_workspace_1: කාර්ය ඉඩ 1 වෙත යවන්න
     focus_latest: නවතම අවධානය යොමු කරන්න
     focus_left: වමට අවධානය යොමු කරන්න
-    switch_workspace_1: කාර්ය ඉඩ 1 වෙත මාරු වන්න
     move_to_workspace_5: වැඩබිම වෙත ගෙන යන්න 5
     decrease_height: උස අඩු කරන්න
     reserve_bottom: සංචිත පතුලේ
@@ -184,8 +195,16 @@ shortcuts:
     move_to_workspace_6: වැඩබිම වෙත ගෙන යන්න 6
     switch_workspace_7: වැඩබිම 7 වෙත මාරු වන්න
     focus_bottom: පහළට අවධානය යොමු කරන්න
+    switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
+    switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
+    misc_toggle_win_event_tracing: ටොගල් ජයග්රාහී සිදුවීම් ලුහුබැඳීම (ල logs ු-සටහන්)
+    misc_open_settings: විවෘත සැකසුම්
+    misc_toggle_lock_tracing: ටොගල් අගුල ලුහුබැඳීම (ල logs ු-සටහන්)
+    toggle_launcher: ටොගල කරන්න
   enable_tooltip: ඔබ Seelen Core Api භාවිතයෙන් ඔබේම කෙටිමං ක්‍රියාත්මක කරන්නේ නම් අබල කරන්න
   enable: ඒකාබද්ධ කෙටිමං සබල කරන්න (ahk)
+  reset: පෙරනිමි වෙත නැවත සකසන්න
+  readonly_tooltip: මෙය කියවීමට පමණක් කෙටිමඟකි
 loading: පූරණය වෙමින්...
 quit: ඉවත්
 inProgress: ප්රගතියේ...
@@ -193,3 +212,33 @@ cancel: අවලංගු කරන්න
 delete: මකන්න
 open: විවෘත
 save: සුරකින්න
+vd:
+  strategy:
+    native: ස්වදේශික
+    label: අතථ්ය ඩෙස්ක්ටොප් උපායමාර්ගය
+    seelen: සීලන්
+  disabled_windows_version: ඔබගේ වින්ඩෝස් අනුවාදය සඳහා ස්වදේශීය අතථ්ය ඩෙස්ක්ටොප් උපාය ලබා ගත නොහැක.
+save_and_restart: සුරකින්න සහ නැවත ආරම්භ කරන්න
+monitors_configurations:
+  label: '{{දර්ශකය} u අධීක්ෂණය කරන්න'
+wall:
+  interval: සෑම (තත්පර) බිතුපත වෙනස් කරන්න
+  no_background: හිස් විනිවිදක දර්ශනය, ඒ වෙනුවට තේමාවේ පසුබිම භාවිතා කිරීම.
+  enable: සක්රිය කළ බිත්තිය සක්රීය කරන්න
+  backgrounds: බිතුපත්
+app_launcher:
+  runners:
+    cmd: විධානය
+    label: ධාවකයන්
+    explorer: දුවන්න
+  monitor: පෙන්වීමට අධීක්ෂණය
+  enable: යෙදුම් දියත් කරන්නා සක්රීය කරන්න
+more: තව
+insert: ඇතුළු කරන්න
+inherit: උරුම වේ
+close: වසන්න
+update:
+  available: යාවත්කාලීන කිරීම!
+  channel: නාලිකාව යාවත්කාලීන කරන්න
+  downloading: බාගත කිරීම ...
+miscellaneous: විවිධ

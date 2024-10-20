@@ -33,3 +33,6 @@ placeholder:
   open_user_folder: Open gebruikersmap
   open_system_tray: Oop stelselbak
   notifications: Kennisgewings
+unlabelled_tray: Ongeslote skinkbord -ikoon
+context_menu:
+  remove: Verwyder die item

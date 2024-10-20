@@ -1,13 +1,11 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
+use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 use windows::{
     core::PCWSTR,
     Win32::{
-        Foundation::{FALSE, HWND, LPARAM, LRESULT, WPARAM},
-        Security::{
-            AdjustTokenPrivileges, SE_PRIVILEGE_ENABLED, SE_SHUTDOWN_NAME, TOKEN_PRIVILEGES,
-        },
+        Foundation::{HWND, LPARAM, LRESULT, WPARAM},
         System::Shutdown::{EWX_LOGOFF, EWX_REBOOT, EWX_SHUTDOWN, SHTDN_REASON_NONE},
         UI::WindowsAndMessaging::{
             CreateWindowExW, DefWindowProcW, DispatchMessageW, GetMessageW, PostQuitMessage,
@@ -75,8 +73,8 @@ impl PowerManager {
             RegisterClassW(&wnd_class);
         }
 
-        spawn_named_thread("Power Manager Window", move || unsafe {
-            let hwnd = CreateWindowExW(
+        let hwnd = unsafe {
+            CreateWindowExW(
                 WINDOW_EX_STYLE::default(),
                 PCWSTR(wide_class.as_ptr()),
                 PCWSTR(wide_name.as_ptr()),
@@ -89,8 +87,12 @@ impl PowerManager {
                 None,
                 h_module,
                 None,
-            );
+            )?
+        };
 
+        let addr = hwnd.0 as isize;
+        spawn_named_thread("Power Manager Message Loop", move || unsafe {
+            let hwnd = HWND(addr as _);
             let mut msg = MSG::default();
             while GetMessageW(&mut msg, hwnd, 0, 0).into() {
                 let _ = TranslateMessage(&msg);
@@ -111,7 +113,7 @@ impl PowerManager {
         let handle = get_app_handle();
 
         let power_status: PowerStatus = WindowsApi::get_system_power_status()?.into();
-        handle.emit("power-status", power_status)?;
+        handle.emit(SeelenEvent::PowerStatus, power_status)?;
 
         let mut batteries: Vec<Battery> = Vec::new();
         let manager = battery::Manager::new()?;
@@ -119,7 +121,7 @@ impl PowerManager {
             batteries.push(battery.try_into()?);
         }
 
-        handle.emit("batteries-status", batteries)?;
+        handle.emit(SeelenEvent::BatteriesStatus, batteries)?;
 
         Ok(())
     }
@@ -136,41 +138,13 @@ pub fn suspend() {
 }
 
 #[tauri::command(async)]
-pub fn restart() -> Result<(), String> {
-    let token_handle = WindowsApi::open_process_token()?;
-    let mut tkp = TOKEN_PRIVILEGES {
-        PrivilegeCount: 1,
-        ..Default::default()
-    };
-
-    tkp.Privileges[0].Luid = WindowsApi::get_luid(PCWSTR::null(), SE_SHUTDOWN_NAME)?;
-    tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-
-    unsafe {
-        AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)
-            .expect("Could not adjust token privileges");
-    }
-
+pub fn restart() -> Result<()> {
     WindowsApi::exit_windows(EWX_REBOOT, SHTDN_REASON_NONE)?;
     Ok(())
 }
 
 #[tauri::command(async)]
-pub fn shutdown() -> Result<(), String> {
-    let token_handle = WindowsApi::open_process_token()?;
-    let mut tkp = TOKEN_PRIVILEGES {
-        PrivilegeCount: 1,
-        ..Default::default()
-    };
-
-    tkp.Privileges[0].Luid = WindowsApi::get_luid(PCWSTR::null(), SE_SHUTDOWN_NAME)?;
-    tkp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
-
-    unsafe {
-        AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)
-            .expect("Could not adjust token privileges");
-    }
-
+pub fn shutdown() -> Result<()> {
     WindowsApi::exit_windows(EWX_SHUTDOWN, SHTDN_REASON_NONE)?;
     Ok(())
 }

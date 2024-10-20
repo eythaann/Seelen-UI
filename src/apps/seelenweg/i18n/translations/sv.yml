@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Öppna Inställningar
   start: Lägg till startmodul
   media: Lägg till mediemodul
+  add_file: Pin Custom File
+  add_folder: Stift anpassad mapp
 app_menu:
   pin: Stift
   close_multiple: Stäng alla

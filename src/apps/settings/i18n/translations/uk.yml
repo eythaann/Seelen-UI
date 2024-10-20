@@ -14,6 +14,10 @@ header:
     developer: Розробник
     seelen_wm: Менеджер вікон
     shortcuts: Ярлики
+    seelen_rofi: Запуск програми
+    seelen_wall: Стіна
+    virtual_desk: Віртуальні настільні ПК
+    home: Домашній
 start:
   title: Ласкаво просимо!
   message_accent: Оптимізуйте свою продуктивність стилем!
@@ -41,6 +45,7 @@ general:
   accent_color: Акцентний колір
   wallpaper:
     select: Виберіть шпалери
+  date_format: Формат дати
 toolbar:
   placeholder:
     select: Структура панелі інструментів
@@ -48,12 +53,13 @@ toolbar:
     author: Автор
   enable: Увімкнути панель інструментів вишуканих
   height: Висота
+  auto_hide: Автомати
+  label: Панель інструментів
 wm:
   border:
     width: Ширина кордону
     enable: Увімкнути кордон вікна
     offset: Зміщення кордону
-  enable: Увімкніть менеджер вікон
   description: Опис
   resize_delta: Змінити розмір дельти (%)
   layout: Макет
@@ -61,7 +67,7 @@ wm:
   workspace_offset: Зсув робочих просторів (поля)
   space_between_containers: Простір між контейнерами
   workspace_padding: Прокладка робочих просторів
-  disabled_windows_version: Менеджер вікон недоступний для вашої версії Windows.
+  enable: Увімкнути плитку диспетчера вікон
 weg:
   items:
     label: Предмети
@@ -76,7 +82,7 @@ weg:
   gap: Розрив
   width: Ширина
   padding: Прокладка
-  dock_side: Причал
+  dock_side: Позиція
 devtools:
   load: Навантаження
   app_folders: Папки додатків
@@ -92,8 +98,8 @@ apps_configurations:
       float: Плавати
       pinned: Закріплений
       unmanage: Неемінь
+      hidden: Сховати з доки/панелі завдань
     ok_edit: Оновити
-    options_label: Додаткові варіанти
     monitor: Моніторинг
     category: Категорія
     title_create: Створення {{Ім'я}}
@@ -107,6 +113,9 @@ apps_configurations:
     ok_create: Створити
     name: Назва
     bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
+    weg_options_label: Параметри Dock/Taskbar
+    wm_options_label: Параметри менеджера вікон
+    options_label: Додаткові варіанти
   identifier:
     and: І
     add_block: Додати блок
@@ -129,6 +138,11 @@ apps_configurations:
     того, щоб забезпечити вам найкращий досвід без налаштування. Вони
     автоматично налаштовують для вас найпоширеніші програми.
   new: Новачок
+  extra_info: >-
+    SEELEN інтерфейс використовує лише один ідентифікатор на додаток (знайдено
+    першу відповідність), тому порядок у тому, як це специфічно, є важливим,
+    останній доданий буде пріоритетним, оскільки примітка таблиця відсортована
+    за замовчуванням від останнього до старого.
 extras:
   links: Офіційні посилання
   relaunch: Відновлювати
@@ -142,10 +156,8 @@ shortcuts:
     move_to_workspace_4: Переходити до робочої області 4
     move_to_workspace_2: Перехід до робочої області 2
     focus_latest: Фокус найновіший
-    switch_workspace_0: Перехід на робочу область 0
     switch_workspace_7: Перехід на робочу область 7
     switch_workspace_2: Перехід на робочу область 2
-    switch_workspace_1: Перехід на робочу область 1
     increase_width: Збільшити ширину
     switch_workspace_3: Перехід на робочу область 3
     move_to_workspace_9: Переходити до робочої області 9
@@ -184,8 +196,16 @@ shortcuts:
     send_to_workspace_6: Надіслати на робочу область 6
     focus_right: Фокус правильно
     send_to_workspace_7: Надіслати на робочу область 7
+    switch_workspace_0: Перехід на робочу область 1
+    switch_workspace_1: Перехід на робочу область 2
+    misc_open_settings: Відкриті налаштування
+    misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
+    misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
+    toggle_launcher: Перемикатися
   enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
   enable: Увімкнути інтегровані ярлики (AHK)
+  reset: Скидання за замовчуванням
+  readonly_tooltip: Це ярлик лише для читання
 delete: Видаляти
 inProgress: В процесі...
 cancel: Скасувати
@@ -193,3 +213,35 @@ save: Заощадити
 open: ВІДЧИНЕНО
 quit: Кинути
 loading: Завантаження ...
+vd:
+  strategy:
+    label: Віртуальна стратегія робочого столу
+    seelen: Зимовий
+    native: Рідний
+  disabled_windows_version: >-
+    Рідна віртуальна стратегія робочого столу недоступна для вашої версії
+    Windows.
+save_and_restart: Зберегти та перезапустити
+monitors_configurations:
+  label: Монітор {{index}}
+wall:
+  enable: Увімкнути стіну Seelen
+  no_background: Порожнє слайд -шоу, використовуючи фон теми.
+  backgrounds: Шпалери
+  interval: Змінюйте шпалери кожні (секунди)
+app_launcher:
+  runners:
+    explorer: Пробігати
+    cmd: Командування
+    label: Бігуни
+  enable: Увімкнути запуску додатків
+  monitor: Монітор, щоб показати
+insert: Вставляти
+inherit: Успадкувати
+more: Більше
+close: Закривати
+update:
+  available: Оновлення доступне!
+  downloading: Завантаження ...
+  channel: Канал оновлення
+miscellaneous: Різний

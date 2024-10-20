@@ -4,6 +4,7 @@ use std::{
         atomic::{AtomicBool, Ordering},
         Arc,
     },
+    time::Duration,
 };
 
 use lazy_static::lazy_static;
@@ -138,7 +139,9 @@ impl NotificationManager {
         _listener: &Option<UserNotificationListener>,
         _args: &Option<UserNotificationChangedEventArgs>,
     ) -> windows_core::Result<()> {
-        let mut manager = NOTIFICATION_MANAGER.lock();
+        let mut manager = NOTIFICATION_MANAGER
+            .try_lock_for(Duration::from_secs(5))
+            .expect("Failed to lock");
         let mut current_list = manager.notifications_ids.clone();
 
         for u_notification in manager

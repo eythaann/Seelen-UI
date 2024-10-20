@@ -22,6 +22,7 @@ async function translateObject(base: any, lang: string, mut_obj: any) {
           from: 'en',
           to: lang,
           forceTo: true,
+          forceBatch: false,
         });
         mut_obj[key] = res.text;
       }
@@ -38,6 +39,7 @@ async function completeTranslationsFor(
 
   const en = yaml.load(readFileSync(`${path}/en.yml`, 'utf8'));
   deleteKeysDeep(en, Array.from(deleteKeys));
+  writeFileSync(`${path}/en.yml`, yaml.dump(en));
 
   for (const lang of toTranslate) {
     const filePath = `${path}/${lang}.yml`;
@@ -101,7 +103,7 @@ async function main() {
   await completeTranslationsFor('toolbar', keysToUpdate, deleteKeys);
   await completeTranslationsFor('seelenweg', keysToUpdate, deleteKeys);
   await completeTranslationsFor('settings', keysToUpdate, deleteKeys);
-  await completeTranslationsFor('update', keysToUpdate, deleteKeys);
+  await completeTranslationsFor('seelen_rofi', keysToUpdate, deleteKeys);
 }
 
 main().catch(console.error);

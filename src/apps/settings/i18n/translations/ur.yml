@@ -6,7 +6,7 @@ sides:
 header:
   labels:
     info: معلومات
-    seelen_weg: گودی/ٹاسک بار
+    seelen_weg: ٹاسک بار
     developer: ڈویلپر
     general: جنرل
     seelen_bar: فینسی ٹول بار
@@ -14,9 +14,13 @@ header:
     seelen_wm: ونڈو مینیجر
     shortcuts: شارٹ کٹ
     monitors: مانیٹر
+    seelen_rofi: ایپ لانچر
+    seelen_wall: دیوار
+    virtual_desk: ورچوئل ڈیسک ٹاپس
+    home: گھر
 start:
-  title: خوش آمدید!
-  message_accent: اپنی پیداواری صلاحیت کو انداز کے ساتھ بہتر بنائیں!
+  title: عنوان
+  message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
   message: >-
     آپ کے ونڈوز 11 کے تجربے کو بڑھانے کے لئے شامل ٹائلنگ ونڈوز مینیجر کے ساتھ
     حتمی ڈیسک ٹاپ ماحول ، سیلین UI میں خوش آمدید! ہمارے بدیہی انٹرفیس اور جدید
@@ -25,8 +29,8 @@ general:
   theme:
     enabled: قابل تھیمز
     author: مصنف
-    add: تھیم شامل کریں
-    label: تھیم کی معلومات
+    add: شامل کریں
+    label: معلومات
     tags: ٹیگز
     added: تھیم پہلے ہی شامل کیا گیا ہے
     description: تفصیل
@@ -37,9 +41,10 @@ general:
   startup: اسٹارٹ اپ پر چلائیں؟
   icon_pack:
     label: آئیکن پیک
-  accent_color: لہجہ رنگ
+  accent_color: رنگ
   wallpaper:
     select: وال پیپر منتخب کریں
+  date_format: تاریخ کی شکل
 toolbar:
   placeholder:
     description: تفصیل
@@ -47,6 +52,8 @@ toolbar:
     select: ٹول بار کا ڈھانچہ
   enable: فینسی ٹول بار کو فعال کریں
   height: اونچائی
+  auto_hide: آٹو چھپائیں
+  label: ٹول بار
 wm:
   border:
     enable: ونڈو کی بارڈر کو فعال کریں
@@ -58,9 +65,8 @@ wm:
   space_between_containers: کنٹینرز کے درمیان جگہ
   resize_delta: ڈیلٹا کا سائز (٪)
   author: مصنف
-  enable: ونڈو مینیجر کو فعال کریں
   workspace_padding: ورک اسپیس پیڈنگ
-  disabled_windows_version: ونڈو مینیجر آپ کے ونڈوز ورژن کے لئے دستیاب نہیں ہے۔
+  enable: ٹائلنگ ونڈو مینیجر کو فعال کریں
 weg:
   items:
     label: اشیاء
@@ -70,17 +76,17 @@ weg:
     visible_separators: مرئی جداکار
   auto_hide: خود بخود چھپ جانا
   margin: مارجن
-  dock_side: گودی کی طرف
   gap: گیپ
   padding: بھرتی
   width: چوڑائی
-  enable: گودی/ٹاسک بار کو فعال کریں
-  label: گودی/ٹاسک بار
+  enable: ٹاسک بار کو فعال کریں
+  label: ٹاسک بار
+  dock_side: پوزیشن
 devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر
-  load: بوجھ
-  settings_file: ترتیبات فائل
+  load: لوڈ
+  settings_file: سیٹنگ فاعل
   enable: ڈویلپر ٹولز کو فعال کریں
   install_folder: انسٹالیشن فولڈر
   app_folders: ایپ فولڈرز
@@ -90,7 +96,8 @@ apps_configurations:
       pinned: پن
       unmanage: غیر منظم
       float: فلوٹ
-      force: فورس کا انتظام کریں
+      force: فورس
+      hidden: گودی/ٹاسک بار سے چھپائیں
     category: قسم
     ok_edit: اپ ڈیٹ
     ok_create: بنانا
@@ -101,11 +108,13 @@ apps_configurations:
     ok_readonly: نئے کے طور پر ترمیم کریں
     category_placeholder: کوئی نہیں
     monitor: مانیٹر
-    options_label: اضافی اختیارات
     name: نام
     title_edit: ترمیم {{نام}}
     workspace_placeholder: کوئی نہیں
     title_create: '{{نام}} بنانا'
+    wm_options_label: ونڈو مینیجر کے اختیارات
+    weg_options_label: گودی/ٹاسک بار کے اختیارات
+    options_label: اضافی اختیارات
   identifier:
     and: اور
     remove: بلاک کو حذف کریں
@@ -128,9 +137,14 @@ apps_configurations:
   bundled_title: ایپ کنفیگ سیلن کے ساتھ بنڈل
   import: درآمد
   confirm_delete_title: حذف کرنے کی تصدیق کریں
+  extra_info: >-
+    Seelen UI فی ایپ صرف ایک شناخت کنندہ کا استعمال کرتا ہے (پہلا میچ ملا) لہذا
+    ترتیب کس طرح مخصوص کی گئی ہے اہم ہے، تازہ ترین شامل کو ترجیح دی جائے گی،
+    کیونکہ نوٹ کریں کہ جدول کو ڈیفالٹ سے تازہ ترین سے پرانے تک ترتیب دیا جاتا
+    ہے۔
 extras:
-  links: سرکاری لنکس
-  discord: تنازعات
+  links: لنکس
+  discord: ڈسکارڈ
   relaunch: دوبارہ لانچ
   github: گٹ ہب
   version: ورژن
@@ -168,13 +182,11 @@ shortcuts:
     send_to_workspace_3: ورک اسپیس 3 کو بھیجیں
     reserve_bottom: ریزرو نیچے
     move_to_workspace_0: ورک اسپیس 0 میں منتقل کریں
-    switch_workspace_1: ورک اسپیس 1 پر سوئچ کریں
     switch_workspace_4: ورک اسپیس 4 پر سوئچ کریں
     move_to_workspace_1: ورک اسپیس 1 میں منتقل کریں
     switch_workspace_3: ورک اسپیس 3 پر سوئچ کریں
     switch_workspace_7: ورک اسپیس 7 پر سوئچ کریں
     reserve_right: ٹھیک ہے
-    switch_workspace_0: ورک اسپیس 0 پر سوئچ کریں
     move_to_workspace_7: ورک اسپیس 7 میں منتقل کریں
     send_to_workspace_6: ورک اسپیس 6 کو بھیجیں
     increase_height: اونچائی میں اضافہ
@@ -183,14 +195,52 @@ shortcuts:
     restore_sizes: سائز کو بحال کریں
     move_to_workspace_9: ورک اسپیس 9 میں منتقل کریں
     move_to_workspace_2: ورک اسپیس 2 میں منتقل کریں
+    switch_workspace_1: ورک اسپیس 2 پر سوئچ کریں
+    switch_workspace_0: ورک اسپیس 1 پر سوئچ کریں
+    misc_open_settings: کھلی ترتیبات
+    misc_toggle_lock_tracing: ٹوگل لاک ٹریسنگ (نوشتہ جات)
+    misc_toggle_win_event_tracing: ٹوگل ون ایونٹ ٹریسنگ (لاگ)
+    toggle_launcher: ٹوگل
   enable_tooltip: >-
     اگر آپ سیلین کور API کا استعمال کرتے ہوئے اپنے شارٹ کٹ کو نافذ کریں گے تو
     غیر فعال کریں
   enable: مربوط شارٹ کٹ (اے ایچ کے) کو فعال کریں
+  reset: ڈیفالٹس کو دوبارہ ترتیب دیں
+  readonly_tooltip: یہ صرف ایک پڑھنے والا شارٹ کٹ ہے
 inProgress: کام جاری ہے...
-save: بچت کریں
+save: محفوظ کریں
 delete: حذف کریں
 quit: چھوڑ دیں
 loading: لوڈنگ ...
 cancel: منسوخ کریں
 open: کھلا
+vd:
+  strategy:
+    seelen: سیلین
+    label: ورچوئل ڈیسک ٹاپ حکمت عملی
+    native: آبائی
+  disabled_windows_version: آپ کے ونڈوز ورژن کے لئے دیسی ورچوئل ڈیسک ٹاپ حکمت عملی دستیاب نہیں ہے۔
+save_and_restart: محفوظ کریں اور دوبارہ شروع کریں
+monitors_configurations:
+  label: مانیٹر {{انڈیکس}}
+wall:
+  enable: سیلن وال کو فعال کریں
+  no_background: اس کے بجائے تھیم کے پس منظر کا استعمال کرتے ہوئے ، خالی سلائیڈ شو۔
+  interval: وال پیپر ہر (سیکنڈ) تبدیل کریں
+  backgrounds: وال پیپر
+app_launcher:
+  runners:
+    cmd: حکم
+    explorer: چلائیں
+    label: رنرز
+  monitor: ظاہر کرنے کے لئے مانیٹر
+  enable: ایپ لانچر کو فعال کریں
+inherit: وراثت
+insert: داخل کریں
+more: زیادہ
+close: بند کریں
+update:
+  available: تازہ کاری دستیاب!
+  channel: چینل کو اپ ڈیٹ کریں
+  downloading: ڈاؤن لوڈ کرنا ...
+miscellaneous: متفرق

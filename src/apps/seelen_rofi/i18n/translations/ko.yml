@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: 탐색
+    cmd: 명령
+footer:
+  shortcuts: 단축키 표시
+header:
+  search: 앱, 명령 또는 경로
+item:
+  open_location: 파일 위치 열기
+  pin: 독/작업 표시줄에 고정하기

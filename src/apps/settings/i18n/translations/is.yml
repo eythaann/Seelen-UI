@@ -14,6 +14,10 @@ header:
     specific_apps: Sérstök forrit
     developer: Hönnuður
     seelen_weg: Bryggju/verkefnabar
+    seelen_wall: Vegginn
+    seelen_rofi: App Launcher
+    virtual_desk: Sýndarskjáborð
+    home: Heim
 start:
   title: Velkominn!
   message_accent: Fínstilltu framleiðni þína með stæl!
@@ -41,6 +45,7 @@ general:
   accent_color: Hreim litur
   wallpaper:
     select: Veldu veggfóður
+  date_format: Dagsetningarsnið
 toolbar:
   placeholder:
     description: Lýsing
@@ -48,6 +53,8 @@ toolbar:
     select: Uppbygging tækjastiku
   enable: Virkja Fancy tækjastiku
   height: Hæð
+  auto_hide: Sjálfvirk fela
+  label: Tækjastikur
 wm:
   border:
     enable: Virkja landamæri glugga
@@ -59,9 +66,8 @@ wm:
   space_between_containers: Rými milli gáma
   resize_delta: Breyta stærð delta (%)
   author: Höfundur
-  enable: Virkja gluggastjóra
   workspace_padding: Vinnusvæði padding
-  disabled_windows_version: Window Manager er ekki fáanlegur fyrir Windows útgáfuna þína.
+  enable: Virkja flísagluggastjóra
 weg:
   items:
     label: Hlutir
@@ -71,12 +77,12 @@ weg:
     visible_separators: Sýnilegir skilju
   width: Breidd
   label: Bryggju/verkefnabar
-  dock_side: Bryggjuhlið
   enable: Virkja bryggju/verkefnastiku
   gap: Bil
   auto_hide: Sjálfvirk fela
   margin: Framlegð
   padding: Padding
+  dock_side: Staða
 devtools:
   load: Hlaða
   app_folders: App möppur
@@ -92,11 +98,11 @@ apps_configurations:
       float: Fljóta
       pinned: Fest
       force: Valdastjórnun
+      hidden: Fela fyrir bryggju/verkefnastiku
     monitor_placeholder: Enginn
     workspace_placeholder: Enginn
     name: Nafn
     category_placeholder: Enginn
-    options_label: Auka valkostir
     title_create: Búa til {{nafn}}
     ok_readonly: Breyta sem nýjum
     title_readonly: Skoða {{nafn}}
@@ -107,6 +113,9 @@ apps_configurations:
     ok_edit: UPDATE
     ok_create: Búa til
     title_edit: Breyta {{name}}
+    weg_options_label: Valkostir bryggju/verkefna
+    wm_options_label: Valkostir gluggastjóra
+    options_label: Auka valkostir
   identifier:
     matching_strategy: Samsvarandi stefna
     add_block: Bæta við blokk
@@ -129,6 +138,11 @@ apps_configurations:
     forritin fyrir þig.
   new: Nýtt
   swap: Skiptu um
+  extra_info: >-
+    Seelen UI Notaðu aðeins eitt auðkenni á hvert forrit (fyrsta samsvörun sem
+    fannst) þannig að röðin í því hvernig eru sértæk er mikilvæg, nýjasta bætt
+    við verður forgangsraðað, eins og athugið að töflunni er flokkað sjálfgefið
+    frá nýjasta til gamla.
 extras:
   github: GitHub
   links: Opinberir hlekkir
@@ -175,17 +189,23 @@ shortcuts:
     switch_workspace_3: Skiptu yfir í vinnusvæði 3
     focus_top: Fókus toppur
     send_to_workspace_3: Senda á Workspace 3
-    switch_workspace_0: Skiptu yfir í vinnusvæði 0
     reserve_float: Varasjóður flot
-    switch_workspace_1: Skiptu yfir í vinnusvæði 1
     send_to_workspace_2: Sendu á Workspace 2
     switch_workspace_8: Skiptu yfir í vinnusvæði 8
     move_to_workspace_3: Farðu í vinnusvæði 3
     send_to_workspace_5: Sendu á Workspace 5
     send_to_workspace_0: Sendu á Workspace 0
     switch_workspace_4: Skiptu yfir í vinnusvæði 4
+    switch_workspace_0: Skiptu yfir í vinnusvæði 1
+    switch_workspace_1: Skiptu yfir í vinnusvæði 2
+    misc_open_settings: Opnar stillingar
+    misc_toggle_lock_tracing: Skiptu um rekja lás (logs)
+    misc_toggle_win_event_tracing: Skiptu um Win Event Tracing (logs)
+    toggle_launcher: Skiptu
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
+  reset: Endurstilla í vanskil
+  readonly_tooltip: Þetta er aðeins skrifvarinn
 delete: Eyða
 loading: Hleðsla ...
 inProgress: Í vinnslu...
@@ -193,3 +213,33 @@ quit: Hættu
 open: Opið
 save: Vista
 cancel: Hætta við
+vd:
+  strategy:
+    label: Sýndarborðsstefna
+    native: Innfæddur
+    seelen: Seelen
+  disabled_windows_version: Native Virtual Desktop Strategy er ekki í boði fyrir Windows útgáfuna þína.
+save_and_restart: Vista og endurræsa
+monitors_configurations:
+  label: Monitor {{Index}}
+wall:
+  backgrounds: Veggfóður
+  interval: Skiptu um veggfóður á hverju (sekúndum)
+  enable: Virkja Seelen Wall
+  no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
+app_launcher:
+  runners:
+    label: Hlauparar
+    cmd: Skipan
+    explorer: Hlaupa
+  enable: Virkja App Launcher
+  monitor: Fylgjast með því að sýna
+inherit: Erfa
+more: Meira
+insert: Settu inn
+close: Lokaðu
+update:
+  available: Uppfærsla í boði!
+  channel: Uppfæra rás
+  downloading: Niðurhal ...
+miscellaneous: Ýmislegt

@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: විධානය
+    explorer: දුවන්න
+footer:
+  shortcuts: කෙටිමං පෙන්වන්න
+header:
+  search: යෙදුම, අණ හෝ මාවත
+item:
+  pin: තටාකයට පින් කරන්න
+  open_location: ගොනු ස්ථානය විවෘත කරන්න

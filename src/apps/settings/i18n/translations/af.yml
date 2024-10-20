@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock/Taakbalk
     info: Informasie
     specific_apps: Spesifieke programme
+    seelen_wall: Die muur
+    seelen_rofi: App -lanseerder
+    virtual_desk: Virtuele tafelrekenaars
+    home: Tuiste
 start:
   title: Welkom!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Aksentkleur
   wallpaper:
     select: Kies Wallpaper
+  date_format: Datumformaat
 toolbar:
   placeholder:
     author: Outeur
@@ -48,6 +53,8 @@ toolbar:
     select: Werkbalkstruktuur
   height: Hoogte
   enable: Aktiveer Fancy Toolbar
+  auto_hide: Outomatiese vel
+  label: Werkbalk
 wm:
   border:
     width: Grenswydte
@@ -60,8 +67,7 @@ wm:
   layout: Uitleg
   workspace_offset: Werkruimtes offset (marges)
   workspace_padding: Werkruimtes opvulling
-  enable: Aktiveer vensterbestuurder
-  disabled_windows_version: Die vensterbestuurder is nie beskikbaar vir u Windows -weergawe nie.
+  enable: Aktiveer teëlvensterbestuurder
 weg:
   items:
     visible_separators: Sigbare skeiers
@@ -69,7 +75,6 @@ weg:
     gap: Ruimte tussen items
     zoom_size: Ingezoomde grootte (gebruik vir temas)
     size: Itemgrootte
-  dock_side: Dokkant
   label: Dock/Taakbalk
   margin: Marge
   enable: Aktiveer dok/taakbalk
@@ -77,6 +82,7 @@ weg:
   auto_hide: Outo -vel
   padding: Opvulling
   gap: Gat
+  dock_side: Posisie
 devtools:
   app_folders: APP -vouers
   load: Vrag
@@ -92,6 +98,7 @@ apps_configurations:
       force: Kragbestuur
       pinned: Vasgaan
       unmanage: Onhandiging
+      hidden: Verberg van die beskuldigdebalk/taakbalk
     ok_create: Skep
     name: Naam
     ok_readonly: Wysig as nuut
@@ -100,13 +107,15 @@ apps_configurations:
     monitor: Monitor
     title_create: Skep {{name}}
     title_readonly: Besigtig {{name}}
-    options_label: Ekstra opsies
     ok_edit: Opdateer
     workspace_placeholder: Geen
     bindings: Binding (let op albei opsies is nodig)
     workspace: Werkruimte
     category: Kategorie
     title_edit: Ingebou {{name}}
+    wm_options_label: Vensterbestuurderopsies
+    weg_options_label: Dock/taakbalkopsies
+    options_label: Ekstra opsies
   identifier:
     remove: Vee blok uit
     add_block: Voeg blok by
@@ -129,6 +138,11 @@ apps_configurations:
   confirm_delete: Is u seker dat u hierdie konfigurasie/s wil uitvee?
   swap: Ruil
   search: Soek
+  extra_info: >-
+    Seelen UI gebruik slegs een identifiseerder per app (eerste wedstryd
+    gevind), dus die volgorde in hoe dit gespesifiseer is, is belangrik, die
+    nuutste bygevoeg sal geprioritiseer word, aangesien die tabel standaard van
+    die nuutste na oud gesorteer is.
 extras:
   relaunch: Herlaai
   links: Amptelike skakels
@@ -146,7 +160,6 @@ shortcuts:
     reserve_right: Reserveer reg
     move_to_workspace_0: Beweeg na werkruimte 0
     reserve_float: Reservaat vlot
-    switch_workspace_0: Skakel oor na werkruimte 0
     focus_right: Fokus reg
     switch_workspace_7: Skakel oor na Workspace 7
     move_to_workspace_4: Beweeg na Workspace 4
@@ -158,7 +171,6 @@ shortcuts:
     send_to_workspace_6: Stuur na Workspace 6
     send_to_workspace_3: Stuur na Workspace 3
     send_to_workspace_8: Stuur na Workspace 8
-    switch_workspace_1: Skakel oor na werkruimte 1
     move_to_workspace_7: Beweeg na Workspace 7
     move_to_workspace_6: Beweeg na Workspace 6
     send_to_workspace_5: Stuur na Workspace 5
@@ -184,10 +196,18 @@ shortcuts:
     decrease_height: Verminder hoogte
     reserve_bottom: Reservaat onder
     focus_latest: Fokus nuut
+    switch_workspace_0: Skakel oor na werkruimte 1
+    switch_workspace_1: Skakel oor na Workspace 2
+    misc_open_settings: Open instellings
+    misc_toggle_lock_tracing: Wisselslotopsporing (logs)
+    misc_toggle_win_event_tracing: Skakel wen -byeenkomsopsporing (logs)
+    toggle_launcher: Wissel
   enable: Aktiveer geïntegreerde kortpaaie (AHK)
   enable_tooltip: >-
     Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen
     Core API
+  reset: Herstel na standaard
+  readonly_tooltip: Dit is 'n leesalleen kortpad
 open: Oopmaak
 loading: Laai ...
 save: Red
@@ -195,3 +215,35 @@ cancel: Kanselleer
 inProgress: Aan die gang ...
 quit: Laat vaar
 delete: Verwyder
+vd:
+  strategy:
+    seelen: Seelen
+    label: Virtuele tafelrekenaarstrategie
+    native: Inheems
+  disabled_windows_version: >-
+    Inheemse virtuele tafelrekenaarstrategie is nie beskikbaar vir u Windows
+    -weergawe nie.
+save_and_restart: Stoor en herbegin
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
+  interval: Verander plakpapier elke (sekondes)
+  enable: Aktiveer Seelen Wall
+  backgrounds: Agtergronde
+app_launcher:
+  runners:
+    explorer: Wedloop
+    label: Hardlopers
+    cmd: Kommandeer
+  enable: Aktiveer App Launcher
+  monitor: Monitor om te wys
+insert: Invoeg
+more: Meer
+inherit: Erf
+close: Dig
+update:
+  available: Opdatering beskikbaar!
+  downloading: Aflaai ...
+  channel: Update Channel
+miscellaneous: Verskillend

@@ -14,6 +14,10 @@ header:
     general: Jeneral
     seelen_weg: Dock / ataza barra
     seelen_bar: Fancy tresna barra
+    seelen_wall: Horma
+    seelen_rofi: App Launcher
+    virtual_desk: Mahaigain birtualak
+    home: Etxe
 start:
   message: >-
     Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
@@ -41,6 +45,7 @@ general:
   accent_color: Azentu kolorea
   wallpaper:
     select: Hautatu horma-irudia
+  date_format: Data formatua
 toolbar:
   placeholder:
     select: Tresna-barraren egitura
@@ -48,12 +53,13 @@ toolbar:
     description: Deskribapen
   enable: Gaitu tresna-barra
   height: Luzera
+  auto_hide: Ezkutatu automatikoa
+  label: Tresna barra
 wm:
   border:
     width: Ertzaren zabalera
     offset: Ertzaren desplazamendua
     enable: Gaitu leihoen ertza
-  enable: Gaitu leiho kudeatzailea
   description: Deskribapen
   space_between_containers: Edukiontzien arteko espazioa
   workspace_offset: Laneko espazioak desplazamendua (marjinak)
@@ -61,7 +67,7 @@ wm:
   resize_delta: RETIZE DELTA (%)
   author: Idazle
   workspace_padding: Laneko guneak betegarria
-  disabled_windows_version: Leiho kudeatzailea ez dago zure Windows bertsiorako erabilgarri.
+  enable: Gaitu fitxa leiho kudeatzailea
 weg:
   items:
     gap: Elementuen arteko espazioa
@@ -72,11 +78,11 @@ weg:
   auto_hide: Ezkutatu automatikoa
   width: Zabalera
   enable: Gaitu kaia / ataza barra
-  dock_side: Kaiaren alde
   margin: Emandar
   gap: Tarte
   label: Dock / ataza barra
   padding: Betegarri
+  dock_side: Kokaleku
 devtools:
   enable: Gaitu garatzaileen tresnak
   load: Zamatu
@@ -92,11 +98,11 @@ apps_configurations:
       force: Indar kudeatzea
       pinned: Pipe
       unmanage: Loraza
+      hidden: Ezkutatu kai / ataza-barran
     title_readonly: '{{Name}} ikustea'
     ok_readonly: Editatu berria
     monitor: Behatu
     monitor_placeholder: Ezein ez
-    options_label: Aukera gehigarriak
     category_placeholder: Ezein ez
     category: Kategoria
     bindings: Lotura (kontuan bi aukerak behar dira)
@@ -107,6 +113,9 @@ apps_configurations:
     name: Izen
     ok_create: Sortu
     title_edit: '{{Name}} editatzea'
+    weg_options_label: Dock / ataza barrako aukerak
+    wm_options_label: Leiho kudeatzailearen aukerak
+    options_label: Aukera gehigarriak
   identifier:
     add_block: Gehitu blokea
     kind: Identifikatu
@@ -129,6 +138,11 @@ apps_configurations:
   search: Araketa
   swap: Tratu
   confirm_delete_title: Berretsi Ezabatu
+  extra_info: >-
+    Seelen UIk aplikazio bakoitzeko identifikatzaile bakarra erabili (lehen
+    partidua aurkitu da), beraz, zehatz-mehatz azaltzen da, azken erantsia
+    lehentasuna izango da, ohar gisa taula lehenetsi da lehenetsitakoa
+    zaharretik azkenetik ordenatuta.
 extras:
   github: Github
   discord: Deskudun
@@ -149,7 +163,6 @@ shortcuts:
     switch_workspace_2: Aldatu Workspace 2ra
     move_to_workspace_1: Mugitu lan-eremura 1
     focus_bottom: Fokua Behean
-    switch_workspace_0: Aldatu Workspace 0ra
     focus_latest: Fokua azkena
     increase_height: Altuera handitzea
     switch_workspace_8: Aldatu lan-eremura 8
@@ -177,15 +190,22 @@ shortcuts:
     switch_workspace_4: Aldatu Workspace 4ra
     move_to_workspace_0: Mugitu 0 lanera
     send_to_workspace_2: Bidali Workspace 2ra
-    switch_workspace_1: Aldatu lan-eremura 1
     send_to_workspace_3: Bidali lantokira 3
     send_to_workspace_0: Bidali lan-eremura 0
     reserve_float: Erreserba karroza
     send_to_workspace_9: Bidali Workspace 9ra
     send_to_workspace_1: Bidali lan-eremura 1
     focus_top: Focus Top
+    switch_workspace_1: Aldatu Workspace 2ra
+    switch_workspace_0: Aldatu lan-eremura 1
+    misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
+    misc_open_settings: Ezarpenak irekitzea
+    misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
+    toggle_launcher: Txandatu
   enable: Gaitu lasterbide integratuak (Ahk)
   enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
+  reset: Berrezarri lehenetsitakoak
+  readonly_tooltip: Hau irakurtzeko lasterbidea da
 cancel: Indargabetu
 quit: Laga
 delete: Ezabatu
@@ -193,3 +213,35 @@ open: Ireki
 save: Aurreztu
 loading: Kargatzen ...
 inProgress: Abian ...
+vd:
+  strategy:
+    label: Mahaigaineko estrategia birtuala
+    native: Sorterriko
+    seelen: Sekelo
+  disabled_windows_version: >-
+    Mahaigaineko estrategia birtuala ez dago erabilgarri zure Windows
+    bertsiorako.
+save_and_restart: Gorde eta berrabiarazi
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Gaitu Seelen horma
+  interval: Aldatu horma-irudia (segundo)
+  backgrounds: Horma-irudiak
+  no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
+app_launcher:
+  runners:
+    label: Kornollari
+    explorer: Korrika
+    cmd: Agindu
+  monitor: Monitorea erakusteko
+  enable: Gaitu aplikazioaren abiarazlea
+inherit: Jarauntsi
+insert: Txertatu
+more: Gehiago
+close: Hurbileko
+update:
+  available: Eguneratu eskuragarri!
+  downloading: Deskargatzen ...
+  channel: Eguneratu kanala
+miscellaneous: Heterogeneo

@@ -180,6 +180,10 @@ interface MediaSession {
     thumbnail: string | null; // Path to temporary media session image
     playing: boolean;
     default: boolean;
+    owner: {
+        name: string;
+        iconPath: string | null;
+    } | null;
 }
 
 const mediaSession: MediaSession | null;

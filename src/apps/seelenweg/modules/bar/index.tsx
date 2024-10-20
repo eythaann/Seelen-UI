@@ -1,44 +1,51 @@
-import { SeelenWegHideMode, SeelenWegMode, SeelenWegSide } from '../../../shared/schemas/Seelenweg';
-import { SavedSeparatorItem } from '../../../shared/schemas/SeelenWegItems';
-import { cx } from '../../../shared/styles';
-import { WithContextMenu } from '../../components/WithContextMenu';
-import { savePinnedItems } from '../shared/store/storeApi';
-import { getSeelenWegMenu } from './menu';
 import { Reorder } from 'framer-motion';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import {
+  HideMode,
+  SeelenWegMode,
+  SeelenWegSide,
+  SeparatorWegItem,
+  SwItemType,
+  useWindowFocusChange,
+} from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
+import { FileOrFolder } from '../item/infra/File';
 import { MediaSession } from '../item/infra/MediaSession';
 import { StartMenu } from '../item/infra/StartMenu';
 import { UserApplication } from '../item/infra/UserApplication';
-import { useAppActivation, useAppBlur } from '../shared/hooks/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 
-import { SpecialItemType, SwItem } from '../shared/store/domain';
+import { SwItem } from '../shared/store/domain';
 
-import './index.css';
+import { cx } from '../../../shared/styles';
+import { WithContextMenu } from '../../components/WithContextMenu';
+import { savePinnedItems } from '../shared/store/storeApi';
+import { getSeelenWegMenu } from './menu';
 
-const Separator1: SavedSeparatorItem = {
-  type: SpecialItemType.Separator,
+const Separator1: SeparatorWegItem = {
+  id: '1',
+  type: SwItemType.Separator,
 };
 
-const Separator2: SavedSeparatorItem = {
-  type: SpecialItemType.Separator,
+const Separator2: SeparatorWegItem = {
+  id: '2',
+  type: SwItemType.Separator,
 };
 
-function shouldBeHidden(hideMode: SeelenWegHideMode, isActive: boolean, isOverlaped: boolean) {
+function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean) {
   let shouldBeHidden = false;
   switch (hideMode) {
-    case SeelenWegHideMode.Always:
+    case HideMode.Always:
       shouldBeHidden = !isActive;
       break;
-    case SeelenWegHideMode.Never:
+    case HideMode.Never:
       shouldBeHidden = false;
       break;
-    case SeelenWegHideMode.OnOverlap:
+    case HideMode.OnOverlap:
       shouldBeHidden = !isActive && isOverlaped;
   }
   return shouldBeHidden;
@@ -57,25 +64,21 @@ export function SeelenWeg() {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  useAppBlur(() => {
-    setActive(false);
-  }, [settings]);
-
-  useAppActivation(() => {
-    setActive(true);
-  }, [settings]);
+  useWindowFocusChange((focused) => {
+    setActive(focused);
+  });
 
   const getSeparatorComplementarySize = useCallback(
     (sideElements: number, centerElements: number) => {
       let size = '1px';
 
-      if (settings.mode === SeelenWegMode.FULL_WIDTH) {
+      if (settings.mode === SeelenWegMode.FullWidth) {
         size = `calc(50% - (${settings.size + settings.spaceBetweenItems}px * ${
           sideElements + centerElements / 2
         }) - ${settings.spaceBetweenItems}px)`;
       }
 
-      if (settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM) {
+      if (settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom) {
         return {
           width: size,
         };
@@ -88,7 +91,7 @@ export function SeelenWeg() {
     [settings],
   );
 
-  const onReorderPinned = useCallback((apps: (SavedSeparatorItem | SwItem)[]) => {
+  const onReorderPinned = useCallback((apps: SwItem[]) => {
     let extractedPinned: SwItem[] = [];
 
     apps.forEach((app) => {
@@ -104,7 +107,7 @@ export function SeelenWeg() {
         return;
       }
 
-      if (app.type !== SpecialItemType.Separator) {
+      if (app.type !== SwItemType.Separator) {
         extractedPinned.push(app);
       }
     });
@@ -114,7 +117,7 @@ export function SeelenWeg() {
   }, []);
 
   const isHorizontal =
-    settings.position === SeelenWegSide.TOP || settings.position === SeelenWegSide.BOTTOM;
+    settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
@@ -126,7 +129,7 @@ export function SeelenWeg() {
         className={cx('taskbar', settings.position.toLowerCase(), {
           horizontal: isHorizontal,
           vertical: !isHorizontal,
-          'full-width': settings.mode === SeelenWegMode.FULL_WIDTH,
+          'full-width': settings.mode === SeelenWegMode.FullWidth,
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
         })}
       >
@@ -162,16 +165,26 @@ export function SeelenWeg() {
 }
 
 function ItemByType(item: SwItem) {
-  if (item.type === SpecialItemType.PinnedApp || item.type === SpecialItemType.TemporalApp) {
-    return <UserApplication key={item.exe || item.opens[0] || item.title} item={item} />;
+  if (item.type === SwItemType.Pinned && item.path) {
+    if (
+      item.execution_command.startsWith('shell:AppsFolder') ||
+      item.execution_command.endsWith('.exe')
+    ) {
+      return <UserApplication key={item.execution_command} item={item} />;
+    }
+    return <FileOrFolder key={item.execution_command} item={item} />;
   }
 
-  if (item.type === SpecialItemType.Media) {
-    return <MediaSession key={'media-item'} item={item} />;
+  if (item.type === SwItemType.TemporalApp && item.path) {
+    return <UserApplication key={item.execution_command} item={item} />;
   }
 
-  if (item.type === SpecialItemType.Start) {
-    return <StartMenu key={'start-menu'} item={item} />;
+  if (item.type === SwItemType.Media) {
+    return <MediaSession key="media-item" item={item} />;
+  }
+
+  if (item.type === SwItemType.Start) {
+    return <StartMenu key="start-menu" item={item} />;
   }
 
   return null;

@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Трчај
+    cmd: Команда
+footer:
+  shortcuts: Покажете кратенки
+header:
+  search: Апликација, команда или патека
+item:
+  pin: Игла до пристаништето
+  open_location: Отворете ја локацијата на датотеката

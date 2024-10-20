@@ -1,5 +1,6 @@
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
+use seelen_core::state::SeelenWegSide;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT},
     UI::Shell::{
@@ -7,6 +8,8 @@ use windows::Win32::{
         ABM_REMOVE, ABM_SETPOS, ABM_SETSTATE, ABS_ALWAYSONTOP, ABS_AUTOHIDE, APPBARDATA,
     },
 };
+
+use crate::trace_lock;
 
 lazy_static! {
     pub static ref RegisteredBars: Mutex<Vec<isize>> = Mutex::new(Vec::new());
@@ -18,6 +21,17 @@ pub enum AppBarDataEdge {
     Top = ABE_TOP as isize,
     Right = ABE_RIGHT as isize,
     Bottom = ABE_BOTTOM as isize,
+}
+
+impl From<SeelenWegSide> for AppBarDataEdge {
+    fn from(val: SeelenWegSide) -> Self {
+        match val {
+            SeelenWegSide::Left => AppBarDataEdge::Left,
+            SeelenWegSide::Top => AppBarDataEdge::Top,
+            SeelenWegSide::Right => AppBarDataEdge::Right,
+            SeelenWegSide::Bottom => AppBarDataEdge::Bottom,
+        }
+    }
 }
 
 /// https://learn.microsoft.com/en-us/windows/win32/shell/abm-setstate#parameters
@@ -47,7 +61,7 @@ impl From<u32> for AppBarDataState {
     }
 }
 
-pub struct AppBarData(APPBARDATA);
+pub struct AppBarData(pub APPBARDATA);
 impl AppBarData {
     pub fn from_handle(hwnd: HWND) -> Self {
         Self(APPBARDATA {
@@ -78,9 +92,10 @@ impl AppBarData {
 
     pub fn register_as_new_bar(&mut self) {
         let mut data = self.0;
-        let mut registered = RegisteredBars.lock();
-        if !registered.contains(&data.hWnd.0) {
-            registered.push(data.hWnd.0);
+        let mut registered = trace_lock!(RegisteredBars);
+        let addr = data.hWnd.0 as isize;
+        if !registered.contains(&addr) {
+            registered.push(addr);
             unsafe { SHAppBarMessage(ABM_NEW, &mut data) };
         }
         unsafe { SHAppBarMessage(ABM_SETPOS, &mut data) };
@@ -89,6 +104,6 @@ impl AppBarData {
     pub fn unregister_bar(&mut self) {
         let mut data = self.0;
         unsafe { SHAppBarMessage(ABM_REMOVE, &mut data) };
-        RegisteredBars.lock().retain(|x| *x != data.hWnd.0);
+        trace_lock!(RegisteredBars).retain(|x| *x != data.hWnd.0 as isize);
     }
 }

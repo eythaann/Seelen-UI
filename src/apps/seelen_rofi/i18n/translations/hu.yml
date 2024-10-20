@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Fut
+    cmd: Parancs
+footer:
+  shortcuts: Mutassa meg a parancsikonokat
+header:
+  search: Alkalmazás, parancs vagy elérési út
+item:
+  pin: Pin a dokkolóhoz
+  open_location: Nyissa meg a fájl helyét

@@ -37,7 +37,7 @@
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Join the Seelen UI Discord community">
-        <img src="./documentation/images/discord.png" width="285px" alt="Join the Seelen UI Discord community">
+        <img src="./documentation/images/discord.png" width="230px" alt="Join the Seelen UI Discord community">
       </a>
     </td>
   </tr>
@@ -56,33 +56,49 @@
   - [Languages](./documentation/languages.md)
   - [Toolbar](./documentation/toolbar.md)
   - [Themes](./documentation/themes.md)
-  - [Window Manager](./documentation/windows_manager.md)
+  - [Window Manager](./documentation/window_manager.md)
   - [Project](./documentation/project.md)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 
 ## Overview
-Welcome to Seelen UI, where customization meets productivity, revolutionizing your Windows desktop experience. Seamlessly integrated into your system, Seelen UI unlocks a world of possibilities, offering an extensive array of customization features to sculpt your desktop into a personalized masterpiece of efficiency and style.
+Seelen UI is a tool designed to enhance your Windows desktop experience with a focus on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you to personalize your desktop and optimize your workflow.
 
-* **Unleash Your Creativity**: With Seelen UI, your desktop becomes a canvas, ready for your creative vision. From menus to widgets, every element can be tailored to reflect your unique style and workflow.
+* **Customize Your Desktop**: Seelen UI lets you tailor your desktop to fit your style and needs. You can adjust menus, widgets, and other elements to create a workspace that works best for you.
 
-  <img src="./documentation/images/preview2.png" width="100%" alt="Banner showcasing various customization options in Seelen UI">
+  ![Seelen UI Minimal Desktop](./documentation/images/preview2.png)
 
 <br/>
 
-* **Boost Your Productivity**: Say goodbye to clutter and hello to organization. Seelen UI empowers you to streamline your desktop layout, ensuring that essential tools and information are always at your fingertips. Plus, with a Tiling Windows Manager for Windows, productivity reaches new heights as windows automatically arrange themselves for optimal multitasking efficiency.
+* **Enhance Your Productivity**: Seelen UI helps you organize your desktop efficiently. With a Tiling Windows Manager, windows automatically arrange themselves to support multitasking, making your work more streamlined.
+  
+  ![Seelen UI Tiling Window Manager](./documentation/images/twm_preview.png)
 
-  <img src="./documentation/images/preview3.png" width="100%" alt="Seelen UI desktop with organized windows for efficient multitasking">
 <br/>
 
-* **Easy and Very Customizable Configuration**: Seelen UI offers an easy and highly customizable configuration through an intuitive user interface. Tweak every aspect of your desktop experience with ease, from colors and fonts to taskbar layouts and icon arrangements, all within a few clicks.
+* **Enjoy your music**: With an integrated media module that's compatible with most music players, Seelen UI allows you to enjoy your music seamlessly. You can pause, resume, and skip tracks at any time without the need to open additional windows.
+  
+  ![Seelen UI Media Module](./documentation/images/media_module_preview.png)
 
-  <img src="./documentation/images/mosaico.png" width="100%" alt="Example of customizable desktop settings in Seelen UI">
+<br/>
+
+* **Be faster!**: With an app launcher inspired by Rofi, Seelen UI provides a simple and intuitive way to quickly access your applications and execute commands.
+
+  ![Seelen UI App Launcher](./documentation/images/app_launcher_preview.png)
+
+<br/>
+
+* **User-Friendly Configuration**: Seelen UI offers an intuitive interface for easy customization. Adjust settings such as themes, taskbar layouts, icons, etc. With just a few clicks.
+
+  ![Seelen UI Settings](./documentation/images/settings_preview.png)
+
 <br/>
 
 ## Installation
 > **⚠️ Warning**: Seelen UI requires the WebView runtime to be installed. On Windows 11, it comes pre-installed with the system. However, on Windows 10, the WebView runtime is included with the `setup.exe` installer. Additionally, Microsoft Edge is necessary to function correctly. Some users may have modified their system and removed Edge, so please ensure both Edge and the WebView runtime are installed on your system.
+
+> **🗒️ Note**: On fresh installations of Windows, the app might show a white or dark screen. You only need to update your Windows through Windows Update and restart your PC.
 
 You can choose from different installation options based on your preference:
 
@@ -122,7 +138,7 @@ For in-depth details on various aspects of Seelen UI, explore the following docu
 
 I’m excited to share some upcoming features for Seelen UI! Here’s a glimpse of what’s planned for the future:
 
-### App Launcher
+### ~~App Launcher~~ ✅
 I’m planning to develop an app launcher inspired by [Rofi](https://github.com/davatorium/rofi) on Linux. This feature will provide a sleek and highly customizable way to quickly access your applications.
 
 ![App Launcher Preview](https://raw.githubusercontent.com/adi1090x/files/master/rofi/previews/colorful/main.gif)
@@ -160,3 +176,34 @@ See the [LICENSE](LICENSE) file for details.
 ## Contact
 
 For inquiries and support, please contact me on [Discord](https://discord.gg/ABfASx5ZAJ).
+
+## See you later
+
+```
+                   .      .&     _,x&"``
+                    & .   &'  ;.&&'
+              &.  . &.&     .0&&&;&""`
+         .    '&  &.&&&  .&&&&&'
+       .&         ;&&& &&&&&'
+      &&          &&&&&&&&     &&&
+     0&    .     &&&&&&&&""
+    &&   .0     &&&&&&&
+   0&& .&'     &&&&&&
+  :&&&&&    . &&&&& 
+  0&&&&    & &&&&&
+  &&&&'   &&&&&&&               .&&&x&
+  &&&&   :&&&&&0.&'        , .&&&&&&&&&&;.
+  &&&&.  &&&&&&&&        .&&&&&&&&&&'               .
+  0&&&&  &&&&&&&       ,&&&&&&&&&&&&                &
+  :&&&&; &&&&&0       ,;&&&&&&&&&&&             ;  .0
+   0&&&&&&&&&&0     ,;&&&&&&&&&&&&&             &  &;
+    0&&&&&&&&&&0   :',;".&&&&&&".&             && &0
+     0&&&&&&&&&0  ',;',&&&&&" ,&'             &&&&0
+      0&&&&&&&&&0 ,x&&&&" .&&&              &&&&0
+        0&&&&&& .&&&&"'''"&&"&&            &&&&&0
+         0&& .&&;``       `&: :&         &&&&&&0
+            &"' &&&&&&&&   &"& &"&   &&&&&&&&0
+              0&&&&&&&&&&&&&&&&&&&&&&&&&0
+                 0&&&&&&&&&&&&&&&&&&&0         Seelen
+                      0&&&&&&&&&0
+```

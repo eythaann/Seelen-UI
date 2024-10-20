@@ -1,3 +1,5 @@
+use std::cell::Cell;
+
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
@@ -14,15 +16,15 @@ macro_rules! common_item {
             #[serde(rename_all = "camelCase")]
             pub struct $name {
                 #[serde(default = "WmNode::default_subtype")]
-                subtype: NodeSubtype,
+                pub subtype: NodeSubtype,
                 /// Order in how the tree will be traversed (1 = first, 2 = second, etc.)
                 #[serde(default = "WmNode::default_priority")]
-                priority: u32,
+                pub priority: u32,
                 /// How much of the remaining space this node will take
                 #[serde(default = "WmNode::default_grow_factor")]
-                grow_factor: f64,
+                pub grow_factor: Cell<f32>,
                 /// Math Condition for the node to be shown, e.g: n >= 3
-                condition: Option<String>,
+                pub condition: Option<String>,
                 $($rest)*
             }
         )*
@@ -31,30 +33,30 @@ macro_rules! common_item {
 
 common_item! {
     struct WmVerticalNode {
-        #[serde(default)]
-        children: Vec<WmNode>,
+        pub children: Vec<WmNode>,
     }
     struct WmHorizontalNode {
-        #[serde(default)]
-        children: Vec<WmNode>,
+        pub children: Vec<WmNode>,
     }
     struct WmLeafNode {
         /// window handle (HWND) in the node
-        handle: Option<isize>,
+        pub handle: Option<isize>,
     }
     struct WmStackNode {
         /// active window handle (HWND) in the node
-        active: Option<isize>,
+        #[serde(skip_deserializing)]
+        pub active: Option<isize>,
         /// window handles (HWND) in the node
-        #[serde(default)]
-        handles: Vec<isize>,
+        #[serde(skip_deserializing)]
+        pub handles: Vec<isize>,
     }
     struct WmFallbackNode {
         /// active window handle (HWND) in the node
-        active: Option<isize>,
+        #[serde(skip_deserializing)]
+        pub active: Option<isize>,
         /// window handles (HWND) in the node
-        #[serde(default)]
-        handles: Vec<isize>,
+        #[serde(skip_deserializing)]
+        pub handles: Vec<isize>,
     }
 }
 
@@ -68,6 +70,28 @@ pub enum WmNode {
     Fallback(WmFallbackNode),
 }
 
+fn format_children(children: &[WmNode]) -> String {
+    let mut result = Vec::new();
+    for child in children {
+        result.push(child.to_string());
+    }
+    result.join(", ")
+}
+
+impl std::fmt::Display for WmNode {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            WmNode::Vertical(node) => write!(f, "Vertical [{}]", format_children(&node.children)),
+            WmNode::Horizontal(node) => {
+                write!(f, "Horizontal [{}]", format_children(&node.children))
+            }
+            WmNode::Leaf(node) => write!(f, "Leaf({:?})", node.handle),
+            WmNode::Stack(node) => write!(f, "Stack({:?})", node.handles),
+            WmNode::Fallback(node) => write!(f, "Fallback({:?})", node.handles),
+        }
+    }
+}
+
 impl WmNode {
     fn default_subtype() -> NodeSubtype {
         NodeSubtype::Permanent
@@ -77,8 +101,52 @@ impl WmNode {
         1
     }
 
-    fn default_grow_factor() -> f64 {
-        1f64
+    fn default_grow_factor() -> Cell<f32> {
+        Cell::new(1.0)
+    }
+
+    pub fn priority(&self) -> u32 {
+        match self {
+            WmNode::Leaf(n) => n.priority,
+            WmNode::Stack(n) => n.priority,
+            WmNode::Fallback(n) => n.priority,
+            WmNode::Vertical(n) => n.priority,
+            WmNode::Horizontal(n) => n.priority,
+        }
+    }
+
+    pub fn grow_factor(&self) -> &Cell<f32> {
+        match self {
+            WmNode::Leaf(n) => &n.grow_factor,
+            WmNode::Stack(n) => &n.grow_factor,
+            WmNode::Fallback(n) => &n.grow_factor,
+            WmNode::Vertical(n) => &n.grow_factor,
+            WmNode::Horizontal(n) => &n.grow_factor,
+        }
+    }
+
+    pub fn condition(&self) -> Option<&String> {
+        match self {
+            WmNode::Leaf(n) => n.condition.as_ref(),
+            WmNode::Stack(n) => n.condition.as_ref(),
+            WmNode::Fallback(n) => n.condition.as_ref(),
+            WmNode::Vertical(n) => n.condition.as_ref(),
+            WmNode::Horizontal(n) => n.condition.as_ref(),
+        }
+    }
+
+    pub fn len(&self) -> usize {
+        match self {
+            WmNode::Leaf(n) => n.handle.is_some() as usize,
+            WmNode::Stack(n) => n.handles.len(),
+            WmNode::Fallback(n) => n.handles.len(),
+            WmNode::Vertical(n) => n.children.iter().map(Self::len).sum(),
+            WmNode::Horizontal(n) => n.children.iter().map(Self::len).sum(),
+        }
+    }
+
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
     }
 }
 

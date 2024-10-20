@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Korrika
+    cmd: Agindu
+footer:
+  shortcuts: Erakutsi lasterbideak
+header:
+  search: Aplikazioa, komandoa edo bidea
+item:
+  open_location: Ireki fitxategiaren kokapena
+  pin: Pin kaia

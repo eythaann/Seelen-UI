@@ -1,19 +1,21 @@
 taskbar_menu:
-  settings: Ayarları aç
+  settings: Ayarları Aç
   media: Medya Modülü Ekle
-  start: Başlat modülü ekle
+  start: Başlat Modülü Ekle
+  add_file: Özel Dosya Sabitle
+  add_folder: Özel Klasör Sabitle
 app_menu:
-  open_file_location: Dosya konumunu aç
-  run_as: Yönetici olarak çalıştır
-  pin: Toplu iğne
-  close_multiple: Hepsini kapat
-  close: Kapalı
-  pin_to_center: Merkeze pin
-  copy_handles: Kopyala Kulpları
-  pin_to_right: Sağa sabit
-  unpin: Bitirmek
-  pin_to_left: Sola pin
+  open_file_location: Dosya Konumunu Aç
+  run_as: Yönetici Olarak Çalıştır
+  pin: Sabitle
+  close_multiple: Tümünü Kapat
+  close: Kapat
+  pin_to_center: Ortaya Sabitle
+  copy_handles: Tanıtıcıları Kopyala
+  pin_to_right: Sağa Sabitle
+  unpin: Sabitlenmeyi Kaldır
+  pin_to_left: Sola Sabitle
 media_menu:
   remove: Medya Modülünü Kaldır
 start_menu:
-  remove: Başlat modülü kaldır
+  remove: Başlat Modülünü Kaldır

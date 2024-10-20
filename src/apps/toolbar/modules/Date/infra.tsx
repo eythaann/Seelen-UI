@@ -1,29 +1,29 @@
-import { DateToolbarModule, TimeUnit } from '../../../shared/schemas/Placeholders';
 import moment from 'moment';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { DateToolbarModule, useInterval } from 'seelen-core';
 
-import { Item } from '../item/infra';
+import { Item } from '../item/infra/infra';
+
+import { Selectors } from '../shared/store/app';
 
 interface Props {
   module: DateToolbarModule;
 }
 
-const timeByUnit = {
-  [TimeUnit.SECOND]: 1000,
-  [TimeUnit.MINUTE]: 1000 * 60,
-  [TimeUnit.HOUR]: 1000 * 60 * 60,
-  [TimeUnit.DAY]: 1000 * 60 * 60 * 24,
-};
-
 export function DateModule({ module }: Props) {
-  const [date, setDate] = useState(moment().format(module.format));
+  const dateFormat = useSelector(Selectors.dateFormat);
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      setDate(moment().format(module.format));
-    }, timeByUnit[module.each]);
-    return () => clearInterval(id);
-  }, [module]);
+  const [date, setDate] = useState(moment().format(dateFormat));
+
+  let interval = dateFormat.includes('ss') ? 1000 : 1000 * 60;
+  useInterval(
+    () => {
+      setDate(moment().format(dateFormat));
+    },
+    interval,
+    [dateFormat],
+  );
 
   return <Item extraVars={{ date }} module={module} />;
 }

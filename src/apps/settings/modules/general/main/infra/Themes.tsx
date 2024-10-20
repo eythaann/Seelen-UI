@@ -10,7 +10,9 @@ import cs from './index.module.css';
 
 export function Themes() {
   const themes = useSelector(RootSelectors.availableThemes);
-  const usingThemes = useSelector(RootSelectors.selectedTheme);
+  const usingThemes = useSelector(RootSelectors.selectedThemes).filter((x) =>
+    themes.some((y) => y.info.filename === x),
+  );
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -27,8 +29,12 @@ export function Themes() {
       dataSource={dataSource}
       titles={[t('general.theme.available'), t('general.theme.selected')]}
       targetKeys={usingThemes}
-      onChange={(selected) => {
-        dispatch(RootActions.setSelectedTheme(selected as string[]));
+      onChange={(selected, direction, movedKeys) => {
+        if (direction === 'right') {
+          dispatch(RootActions.setSelectedThemes([...usingThemes, ...(movedKeys as string[])]));
+        } else {
+          dispatch(RootActions.setSelectedThemes(selected as string[]));
+        }
       }}
       className={cs.transfer}
       showSelectAll={false}
@@ -40,7 +46,7 @@ export function Themes() {
           <Reorder.Group
             onReorder={(values) => {
               if (direction === 'right') {
-                dispatch(RootActions.setSelectedTheme(values.map((theme) => theme.info.filename)));
+                dispatch(RootActions.setSelectedThemes(values.map((theme) => theme.info.filename)));
               }
             }}
             axis="y"

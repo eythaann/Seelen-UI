@@ -2,6 +2,8 @@ taskbar_menu:
   media: Media modulu əlavə edin
   start: Başlama modulu əlavə edin
   settings: Parametrləri açın
+  add_folder: Xüsusi qovluğu vurun
+  add_file: Xüsusi faylı pin edin
 app_menu:
   close: Yaxın
   pin: Pin

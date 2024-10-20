@@ -1,16 +1,18 @@
-import { parseAsCamel } from '../../../../shared/schemas';
-import { FancyToolbarSchema } from '../../../../shared/schemas/FancyToolbar';
-import { Placeholder, ToolbarModule } from '../../../../shared/schemas/Placeholders';
-import { StateBuilder } from '../../../../shared/StateBuilder';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FancyToolbarSettings, UIColors } from 'seelen-core';
+import { Placeholder, ToolbarModule } from 'seelen-core';
 
 import { RootState } from './domain';
 
+import { StateBuilder } from '../../../../shared/StateBuilder';
+
 const initialState: RootState = {
   version: 0,
+  dateFormat: '',
+  isOverlaped: false,
   focused: null,
   placeholder: null,
-  settings: parseAsCamel(FancyToolbarSchema, {}),
+  settings: new FancyToolbarSettings(),
   env: {},
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
@@ -23,7 +25,7 @@ const initialState: RootState = {
   },
   batteries: [],
   workspaces: [],
-  activeWorkspace: 0,
+  activeWorkspace: null,
   systemTray: [],
   networkAdapters: [],
   networkLocalIp: null,
@@ -33,18 +35,7 @@ const initialState: RootState = {
   mediaOutputs: [],
   mediaInputs: [],
   notifications: [],
-  colors: {
-    background: '#ffffff',
-    foreground: '#000000',
-    accent_darkest: '#000000',
-    accent_darker: '#000000',
-    accent_dark: '#000000',
-    accent: '#000000',
-    accent_light: '#000000',
-    accent_lighter: '#000000',
-    accent_lightest: '#000000',
-    complement: null,
-  },
+  colors: UIColors.default(),
 };
 
 export const RootSlice = createSlice({
@@ -71,8 +62,20 @@ export const RootSlice = createSlice({
         state.placeholder.right = action.payload;
       }
     },
+    removeItem(state, action: PayloadAction<string>) {
+      let id = action.payload;
+      if (state.placeholder) {
+        state.placeholder.left = state.placeholder.left.filter((d) => d.id !== id);
+        state.placeholder.center = state.placeholder.center.filter((d) => d.id !== id);
+        state.placeholder.right = state.placeholder.right.filter((d) => d.id !== id);
+      }
+    },
   },
 });
 
 export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
+
+export const selectDefaultOutput = createSelector(Selectors.mediaOutputs, (mediaOutputs) =>
+  mediaOutputs.find((d) => d.is_default_multimedia),
+);

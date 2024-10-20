@@ -33,3 +33,6 @@ placeholder:
   ethernet_disconnected: இணைய அணுகல் இல்லை
   bluetooth_devices: புளூடூத் & சாதனங்கள்
   notifications: அறிவிப்புகள்
+unlabelled_tray: பெயரிடப்படாத தட்டு ஐகான்
+context_menu:
+  remove: உருப்படியை அகற்று

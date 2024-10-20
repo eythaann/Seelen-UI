@@ -14,6 +14,10 @@ header:
     seelen_weg: கப்பல்துறை/பணிப்பட்டி
     specific_apps: குறிப்பிட்ட பயன்பாடுகள்
     seelen_bar: ஆடம்பரமான கருவிப்பட்டி
+    seelen_wall: சுவர்
+    seelen_rofi: பயன்பாட்டு துவக்கி
+    virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
+    home: வீடு
 start:
   title: வரவேற்பு!
   message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
@@ -41,6 +45,7 @@ general:
   accent_color: உச்சரிப்பு நிறம்
   wallpaper:
     select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்
+  date_format: தேதி வடிவம்
 toolbar:
   placeholder:
     author: நூலாசிரியர்
@@ -48,6 +53,8 @@ toolbar:
     select: கருவிப்பட்டி அமைப்பு
   height: உயரம்
   enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
+  auto_hide: ஆட்டோ மறை
+  label: கருவிப்பட்டி
 wm:
   border:
     width: பார்டர் அகலம்
@@ -58,10 +65,9 @@ wm:
   space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி
   workspace_padding: பணியிடங்கள் திணிப்பு
   resize_delta: டெல்டாவின் அளவை மாற்று (%)
-  enable: சாளர மேலாளரை இயக்கு
   workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
   layout: தளவமைப்பு
-  disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சாளர மேலாளர் கிடைக்கவில்லை.
+  enable: டைலிங் சாளர மேலாளரை இயக்கவும்
 weg:
   items:
     label: பொருட்களை
@@ -76,7 +82,7 @@ weg:
   gap: இடைவெளி
   width: அகலம்
   enable: டாக்/டாஸ்க்பாரை இயக்கவும்
-  dock_side: டாக் சைட்
+  dock_side: நிலை
 devtools:
   install_folder: நிறுவல் கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு
@@ -92,8 +98,8 @@ apps_configurations:
       float: மிதவை
       unmanage: நிர்வகியுங்கள்
       force: கட்டாயம் நிர்வகி
+      hidden: கப்பல்துறை/பணிப்பட்டியிலிருந்து மறைக்கவும்
     monitor: கண்காணிக்கவும்
-    options_label: கூடுதல் விருப்பங்கள்
     title_create: '{{name}} உருவாக்குகிறது'
     workspace: பணியிடம்
     workspace_placeholder: இல்லை
@@ -107,6 +113,9 @@ apps_configurations:
     ok_readonly: புதியதாக திருத்தவும்
     title_edit: திருத்துகிறது {{name}}
     bindings: பிணைப்பு (இரண்டு விருப்பங்களும் தேவை என்பதை நினைவில் கொள்ளவும்)
+    wm_options_label: சாளர மேலாளர் விருப்பங்கள்
+    weg_options_label: கப்பல்துறை/பணிப்பட்டு விருப்பங்கள்
+    options_label: கூடுதல் விருப்பங்கள்
   identifier:
     and: மற்றும்
     remove: தடுப்பை நீக்கு
@@ -129,6 +138,12 @@ apps_configurations:
   search: தேடு
   swap: இடமாற்று
   new: புதியது
+  extra_info: >-
+    Seelen UI ஆனது ஒரு பயன்பாட்டிற்கு ஒரே ஒரு அடையாளங்காட்டியை மட்டுமே
+    பயன்படுத்துகிறது (முதல் பொருத்தம் கண்டறியப்பட்டது) எனவே எப்படி
+    குறிப்பிடப்படுகிறது என்பதற்கான வரிசை முக்கியமானது, சமீபத்திய சேர்க்கைக்கு
+    முன்னுரிமை அளிக்கப்படும், ஏனெனில் அட்டவணையானது சமீபத்தியது முதல் பழையது வரை
+    இயல்புநிலையாக வரிசைப்படுத்தப்படும்.
 extras:
   discord: கருத்து வேறுபாடு
   exit: வெளியேறு/வெளியேறு
@@ -143,7 +158,6 @@ shortcuts:
     increase_height: உயரத்தை அதிகரிக்கவும்
     restore_sizes: அளவுகளை மீட்டமை
     increase_width: அகலத்தை அதிகரிக்கவும்
-    switch_workspace_1: பணியிடத்திற்கு மாறவும் 1
     send_to_workspace_4: பணியிடத்திற்கு அனுப்பு 4
     move_to_workspace_5: பணியிடத்திற்கு நகர்த்து 5
     reserve_right: ரிசர்வ் ரைட்
@@ -151,7 +165,6 @@ shortcuts:
     send_to_workspace_1: பணியிடத்திற்கு அனுப்பு 1
     send_to_workspace_0: பணியிடம் 0க்கு அனுப்பவும்
     focus_right: ஃபோகஸ் ரைட்
-    switch_workspace_0: பணியிடம் 0க்கு மாறவும்
     reserve_float: ரிசர்வ் ஃப்ளோட்
     reserve_left: ரிசர்வ் இடது
     switch_workspace_5: பணியிடத்திற்கு மாறவும் 5
@@ -184,10 +197,18 @@ shortcuts:
     switch_workspace_9: பணியிடத்திற்கு மாறவும் 9
     focus_bottom: கீழே கவனம் செலுத்துங்கள்
     switch_workspace_7: பணியிடம் 7க்கு மாறவும்
+    switch_workspace_1: பணியிடம் 2 க்கு மாறவும்
+    switch_workspace_0: பணியிடம் 1 க்கு மாறவும்
+    misc_open_settings: திறந்த அமைப்புகள்
+    misc_toggle_win_event_tracing: வெற்றி நிகழ்வு தடமறிதல் (பதிவுகள்)
+    misc_toggle_lock_tracing: பூட்டு தடமறிதல் (பதிவுகள்)
+    toggle_launcher: மாற்று
   enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
   enable_tooltip: >-
     சீலன் கோர் ஏபிஐ பயன்படுத்தி உங்கள் சொந்த ஷார்ட்கட்களை செயல்படுத்தினால்
     முடக்கவும்
+  reset: இயல்புநிலைக்கு மீட்டமைக்கவும்
+  readonly_tooltip: இது படிக்க மட்டும் குறுக்குவழி
 inProgress: செயல்பாட்டில் உள்ளது...
 cancel: ரத்து செய்
 quit: விட்டுவிட
@@ -195,3 +216,33 @@ delete: அழி
 loading: ஏற்றுகிறது...
 save: சேமிக்கவும்
 open: திற
+vd:
+  strategy:
+    native: பூர்வீகம்
+    seelen: சைலர்
+    label: மெய்நிகர் டெஸ்க்டாப் உத்தி
+  disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சொந்த மெய்நிகர் டெஸ்க்டாப் உத்தி கிடைக்கவில்லை.
+save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்
+monitors_configurations:
+  label: கண்காணிக்கவும் {{குறியீட்டு}}}
+wall:
+  no_background: வெற்று ஸ்லைடுஷோ, அதற்கு பதிலாக கருப்பொருளின் பின்னணியைப் பயன்படுத்துகிறது.
+  enable: சீலன் சுவரை இயக்கவும்
+  backgrounds: வால்பேப்பர்கள்
+  interval: ஒவ்வொரு (விநாடிகளிலும்) வால்பேப்பரை மாற்றவும்
+app_launcher:
+  runners:
+    label: ஓட்டப்பந்தய வீரர்கள்
+    explorer: ஓடு
+    cmd: கட்டளை
+  monitor: காண்பிக்க கண்காணிக்கவும்
+  enable: பயன்பாட்டு துவக்கியை இயக்கவும்
+insert: செருகவும்
+inherit: மரபு
+more: மேலும்
+close: மூடு
+update:
+  available: புதுப்பிப்பு கிடைக்கிறது!
+  downloading: பதிவிறக்கம் ...
+  channel: சேனலைப் புதுப்பிக்கவும்
+miscellaneous: இதர

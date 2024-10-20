@@ -1,35 +1,38 @@
 media:
   device:
-    comunications: مواصلات
+    comunications: کمیونیکیشن
     multimedia: ملٹی میڈیا
   input_device: ان پٹ ڈیوائس
   output_device: آؤٹ پٹ ڈیوائس
-  master_volume: ماسٹر جلد
+  master_volume: ماسٹر والیم
   players: میڈیا پلیئرز
 network:
   placeholder:
     password: پاس ورڈ
-  disconnect: منقطع
+  disconnect: ڈسکنیکٹ
   hidden: پوشیدہ نیٹ ورک
   not_found: کوئی نیٹ ورک نہیں ملا
-  connect: جڑیں
-  more: نیٹ ورک کی مزید ترتیبات
+  connect: کنیکٹ
+  more: نیٹورک کی مزید معلومات
 settings:
-  restart: دوبارہ شروع کریں
+  restart: ریسٹارٹ
   log_out: لاگ آوٹ
-  title: ترتیبات
+  title: عنوان
   app_settings: ایپ کی ترتیبات
-  sleep: نیند
+  sleep: سلیپ
   shutdown: شٹ ڈاؤن
-  power: طاقت
+  power: پاور
 placeholder:
-  ethernet_connected: انٹرنیٹ تک رسائی
+  ethernet_connected: ایتھر نیٹ کنیکٹڈ
   smart_charge: '- سمارٹ چارج'
   open_system_tray: اوپن سسٹم ٹرے
-  battery_remaining: ٪ باقی
-  ethernet_disconnected: انٹرنیٹ تک رسائی نہیں ہے
+  battery_remaining: ٪ یٹری
+  ethernet_disconnected: ایتھر نیٹ ڈسکنیکٹ
   open_user_folder: صارف فولڈر کھولیں
-  settings: فوری ترتیبات
+  settings: سیٹٹنگ
   bluetooth_devices: بلوٹوتھ اور ڈیوائسز
-  volume: حجم
+  volume: والیم
   notifications: اطلاعات
+unlabelled_tray: غیر لیبلڈ ٹرے آئیکن
+context_menu:
+  remove: آئٹم کو ہٹا دیں

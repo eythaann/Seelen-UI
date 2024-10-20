@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Manar
+    explorer: Dirigir
+footer:
+  shortcuts: Mostra dreceres
+header:
+  search: Aplicació, ordre o ruta
+item:
+  open_location: Obriu la ubicació del fitxer
+  pin: Pin a Dock

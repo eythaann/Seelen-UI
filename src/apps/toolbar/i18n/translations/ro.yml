@@ -33,3 +33,6 @@ placeholder:
   open_system_tray: Tava de sistem deschisă
   smart_charge: '- Încărcare inteligentă'
   notifications: Notificări
+unlabelled_tray: Pictograma tăvii nemarcate
+context_menu:
+  remove: Eliminați elementul

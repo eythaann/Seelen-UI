@@ -14,6 +14,10 @@ header:
     specific_apps: Izinhlelo zokusebenza ezikhethekile
     monitors: Ukuqapha
     shortcuts: Amashoshothi
+    seelen_wall: Udonga
+    seelen_rofi: Isiqalisi sohlelo lokusebenza
+    virtual_desk: Ama-Virtual Desktops
+    home: Ikhaya
 start:
   message: >-
     Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
@@ -41,6 +45,7 @@ general:
   accent_color: Umbala we-Accent
   wallpaper:
     select: Khetha iphepha lokunamathisela odongeni
+  date_format: Ifomethi yosuku
 toolbar:
   placeholder:
     author: Umlobi
@@ -48,6 +53,8 @@ toolbar:
     select: Isakhiwo samathuluzi
   height: Ubude
   enable: Nika amandla amathuluzi e-fancy
+  auto_hide: Fihla okuzenzakalelayo
+  label: Indawo yamathuluzi
 wm:
   border:
     enable: Nika amandla umngcele wewindi
@@ -60,8 +67,7 @@ wm:
   space_between_containers: Isikhala phakathi kweziqukathi
   description: Ukufanisa
   workspace_padding: I-Workespashe Padding
-  enable: Nika amandla umphathi wewindi
-  disabled_windows_version: Imenenja yewindows ayitholakali ngenguqulo yakho yeWindows.
+  enable: Nika amandla umphathi wewindi elijabulisayo
 weg:
   items:
     size: Usayizi wento
@@ -71,12 +77,12 @@ weg:
     zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
   width: Ububanzi
   gap: Insungubezi
-  dock_side: Uhlangothi lwedokodo
   enable: Nika amandla i-Dock / Taskbar
   auto_hide: Fihla okuzenzakalelayo
   padding: Idilidi
   margin: Image
   label: Dock / taskbar
+  dock_side: Ukuma
 devtools:
   install_folder: Ifolda yokufaka
   data_folder: Ifolda yedatha
@@ -92,6 +98,7 @@ apps_configurations:
       pinned: Uphinisiwe
       force: Cindezela Phatha
       float: Thwala amaphiko
+      hidden: Fihla kusuka edokodweni / ye-taskbar
     bindings: Ukubopha (inothi zombili izinketho ziyadingeka)
     title_readonly: Ukubuka {{igama}}
     title_create: Ukudala {{igama}}
@@ -99,7 +106,6 @@ apps_configurations:
     category_placeholder: Namunye
     monitor: Qapha
     name: Ibizo
-    options_label: Izinketho Ezengeziwe
     ok_edit: Buyekeza
     monitor_placeholder: Namunye
     workspace_placeholder: Namunye
@@ -107,6 +113,9 @@ apps_configurations:
     workspace: Indawo
     title_edit: Ukuhleleka {{igama}}
     ok_create: Dala
+    wm_options_label: Izinketho ze-Window Manager
+    weg_options_label: Izinketho ze-Dock / Taskbar
+    options_label: Izinketho Ezengeziwe
   identifier:
     remove: Susa ibhulokhi
     matching_strategy: Isu lokuqondanisa
@@ -129,6 +138,11 @@ apps_configurations:
     Lokhu kulungiswa okuhlanganisiwe akuhlelekile futhi kuklanyelwe ukukunikeza
     okuhlangenwe nakho okuhle kakhulu ngaphandle kokwenza ngokwezifiso.
     Balungiselela ngokuzenzakalelayo izicelo ezivame kakhulu kuwe.
+  extra_info: >-
+    I-Seelen UI isebenzisa kuphela isikhombi esisodwa sohlelo lokusebenza
+    ngalunye (umdlalo wokuqala otholakala) ngakho-ke i-oda lokuthi libalulekile
+    kanjani, njengoba itafula lakamuva lizobekwa phambili, njengoba inothi
+    lihlelwe ngokuzenzakalela kusuka kwakamuva kuya kwakamuva kuya kwakamuva.
 extras:
   links: Izixhumanisi ezisemthethweni
   relaunch: Qondisa amandla ehlehliseyo
@@ -160,7 +174,6 @@ shortcuts:
     move_to_workspace_9: Hambisa ku-Workpace 9
     switch_workspace_2: Shintshela ku-Workpace 2
     send_to_workspace_4: Thumela kwi-Workpace 4
-    switch_workspace_0: Shintshela ku-Workpace 0
     send_to_workspace_8: Thumela ku-Workpace 8
     reserve_left: Indawo esele
     focus_left: Gxila kwesokunxele
@@ -177,17 +190,24 @@ shortcuts:
     move_to_workspace_5: Hambisa ku-Workpace 5
     reserve_float: Indawo yokuntanta
     send_to_workspace_3: Thumela ku-Workpace 3
-    switch_workspace_1: Shintshela ku-Workpace 1
     send_to_workspace_5: Thumela ku-Workpace 5
     send_to_workspace_9: Thumela ku-Workpace 9
     send_to_workspace_2: Thumela ku-Workpace 2
     switch_workspace_4: Shintshela ku-Workpace 4
     switch_workspace_8: Shintshela ku-Workpace 8
     switch_workspace_6: Shintshela ku-Workpace 6
+    switch_workspace_0: Shintshela ku-Workpace 1
+    switch_workspace_1: Shintshela ku-Workpace 2
+    misc_toggle_win_event_tracing: Guqula u-Win Traceng (izingodo)
+    misc_open_settings: Vula izilungiselelo
+    misc_toggle_lock_tracing: Guqula ukukhiya ukulandelela (izingodo)
+    toggle_launcher: Ukuguqula
   enable: Nika amandla izinqamuleli ezihlanganisiwe (Ahk)
   enable_tooltip: >-
     Khubaza uma uzosebenzisa izinqamuleli zakho usebenzisa i-Seelen Core Core
     API
+  reset: Setha kabusha okuzenzakalelayo
+  readonly_tooltip: Lesi isinqamuleli esifundwayo kuphela
 inProgress: Kuyaqhubeka...
 cancel: Hlikihla
 save: Hlenga
@@ -195,3 +215,35 @@ quit: Yeka
 delete: Cisha
 loading: Iyalayisha ...
 open: Vula
+vd:
+  strategy:
+    native: '-Okudabuka'
+    label: Isu le-Virtual Desktop
+    seelen: '-Kwaseshud'
+  disabled_windows_version: Isu le-Virtual desktop yendabuko alitholakali ngenguqulo yakho yeWindows.
+save_and_restart: Gcina futhi Qalisa kabusha
+monitors_configurations:
+  label: Qapha {{inkomba}}
+wall:
+  backgrounds: Ama-Wallpaper
+  no_background: >-
+    Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
+    esikhundleni.
+  enable: Nika amandla udonga lwe-Seleen
+  interval: Shintsha iphepha lokunamathisela odongeni wonke (amasekhondi)
+app_launcher:
+  runners:
+    explorer: Gijima
+    label: Abagebhe
+    cmd: Juba
+  monitor: Qapha ukukhombisa
+  enable: Nika amandla isiqalisi sohlelo lokusebenza
+more: Okuningi
+inherit: Dla ifa
+insert: Faka
+close: Ngokuminyanisa
+update:
+  available: Ukuvuselelwa Kuyatholakala!
+  channel: Isiteshi sokuvuselela
+  downloading: Ukulanda ...
+miscellaneous: '-Nhlobonhlobo'

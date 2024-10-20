@@ -65,7 +65,7 @@
 }
 
 .ft-bar-item-clickable {
-  padding: 4px;
+  padding: 1px 4px;
   border-radius: 6px;
 
   &:hover {
@@ -157,9 +157,10 @@
 .tray-item-label {
   font-size: 0.7rem;
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+}
+
+.tray-item-label-tooltip {
+  padding: 0 40px;
 }
 
 .wlan-selector {
@@ -240,6 +241,17 @@
   }
 }
 
+.media-notifier {
+  margin: var(--popups-margin);
+  width: 240px;
+  padding: 6px 24px 6px 6px;
+
+  .bg-layer-1 {
+    background-color: var(--color-gray-50);
+    border-radius: 10px;
+  }
+}
+
 .media-control-volume {
   display: flex;
   gap: 4px;
@@ -287,12 +299,36 @@
   height: min-content;
 }
 
+.media-session-thumbnail-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+}
+
+.media-session-app-icon {
+  position: absolute;
+  z-index: 3;
+  width: 25%;
+  aspect-ratio: 1/1;
+  right: 5%;
+  bottom: 5%;
+  object-fit: contain;
+}
+
 .media-session-thumbnail {
   border-radius: 8px;
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: contain;
   background: #0004;
+}
+
+.media-session-blurred-thumbnail {
+  filter: blur(15px) brightness(125%) contrast(125%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 .media-session-info {
@@ -412,5 +448,17 @@
 
   .notification-body-title {
     font-weight: 600;
+  }
+}
+
+.ft-bar-item-context-menu-container {
+  .bg-layer-1 {
+    background-color: var(--color-gray-100);
+    border-radius: 10px;
+  }
+
+  .ft-bar-item-context-menu {
+    .ft-bar-item-context-menu-item {
+    }
   }
 }

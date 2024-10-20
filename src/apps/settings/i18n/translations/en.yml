@@ -2,9 +2,15 @@ loading: Loading...
 inProgress: In Progress...
 cancel: Cancel
 save: Save
+save_and_restart: Save & Restart
 quit: Quit
+close: Close
 open: Open
 delete: Delete
+insert: Insert
+more: More
+inherit: Inherit
+miscellaneous: Miscellaneous
 sides:
   left: Left
   right: Right
@@ -12,25 +18,31 @@ sides:
   bottom: Bottom
 header:
   labels:
+    home: Home
     general: General
     seelen_bar: Fancy Toolbar
     seelen_wm: Window Manager
     seelen_weg: Dock/Taskbar
+    seelen_rofi: App Launcher
+    seelen_wall: The Wall
     monitors: Monitors
     specific_apps: Specific Apps
     shortcuts: Shortcuts
     developer: Developer
     info: Information
+    virtual_desk: Virtual Desktops
 start:
   title: Welcome!
   message: >-
-    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated tiling windows manager
-    to enhance your Windows 11 experience! Explore a new era of efficiency and multitasking with our
-    intuitive interface and advanced features.
+    Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated
+    tiling windows manager to enhance your Windows 11 experience! Explore a new
+    era of efficiency and multitasking with our intuitive interface and advanced
+    features.
   message_accent: Optimize your productivity with style!
 general:
   startup: Run on startup?
   language: Language
+  date_format: Date Format
   theme:
     label: Themes
     placeholder: Select theme
@@ -53,11 +65,17 @@ toolbar:
     select: Toolbar Structure
     author: Author
     description: Description
+  label: Toolbar
   height: Height
+  auto_hide: Auto Hide
+vd:
+  disabled_windows_version: Native Virtual Desktop Strategy is not available for your Windows version.
+  strategy:
+    label: Virtual Desktop Strategy
+    native: Native
+    seelen: Seelen
 wm:
-  enable: Enable Window Manager
-  disabled_windows10: The Window Manager is not available for Windows 10.
-  disabled_windows_version: The Window Manager is not available for your Windows version.
+  enable: Enable Tiling Window Manager
   layout: Layout
   author: Author
   description: Description
@@ -74,7 +92,7 @@ weg:
   enable: Enable Dock/Taskbar
   width: Width
   auto_hide: Auto Hide
-  dock_side: Dock Side
+  dock_side: Position
   padding: Padding
   margin: Margin
   gap: Gap
@@ -100,8 +118,13 @@ apps_configurations:
   new: New
   bundled_title: App Config Bundled with Seelen
   bundled_msg: >-
-    These bundled configurations are not editable and are designed to provide you with the best
-    experience without customization. They automatically configure the most common applications for you.
+    These bundled configurations are not editable and are designed to provide
+    you with the best experience without customization. They automatically
+    configure the most common applications for you.
+  extra_info: >-
+    Seelen UI use only one identifier per app (first match found) so the order
+    in how are specificated is important, the latest added will be prioritized,
+    as note the table is sorted by default from latest to old.
   confirm_delete_title: Confirm Delete
   confirm_delete: Are you sure you want to delete this configuration/s?
   search: Search
@@ -121,11 +144,14 @@ apps_configurations:
     ok_create: Create
     ok_readonly: Edit as New
     options_label: Extra Options
+    wm_options_label: Window Manager Options
+    weg_options_label: Dock/Taskbar Options
     options:
       float: Float
       unmanage: Unmanage
       force: Force Manage
       pinned: Pinned
+      hidden: Hide from dock/taskbar
   identifier:
     remove: Delete Block
     id: Identifier
@@ -135,6 +161,20 @@ apps_configurations:
     and: AND
     or: OR
     add_block: Add Block
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Enable Seelen Wall
+  interval: Change wallpaper every (seconds)
+  backgrounds: Wallpapers
+  no_background: Empty slideshow, using theme's background instead.
+app_launcher:
+  enable: Enable App Launcher
+  monitor: Monitor to show
+  runners:
+    label: Runners
+    explorer: Run
+    cmd: Command
 extras:
   version: Version
   links: Official Links
@@ -144,8 +184,11 @@ extras:
   exit: Quit/Exit
 shortcuts:
   enable: Enable Integrated Shortcuts (ahk)
+  reset: Reset to Defaults
   enable_tooltip: Disable if you will implement your own shortcuts using the Seelen Core Api
+  readonly_tooltip: This is a read-only shortcut
   labels:
+    toggle_launcher: Toggle
     reserve_top: Reserve Top
     reserve_bottom: Reserve Bottom
     reserve_left: Reserve Left
@@ -162,33 +205,40 @@ shortcuts:
     increase_height: Increase Height
     decrease_height: Decrease Height
     restore_sizes: Restore Sizes
-    switch_workspace_0: Switch to Workspace 0
-    switch_workspace_1: Switch to Workspace 1
-    switch_workspace_2: Switch to Workspace 2
-    switch_workspace_3: Switch to Workspace 3
-    switch_workspace_4: Switch to Workspace 4
-    switch_workspace_5: Switch to Workspace 5
-    switch_workspace_6: Switch to Workspace 6
-    switch_workspace_7: Switch to Workspace 7
-    switch_workspace_8: Switch to Workspace 8
-    switch_workspace_9: Switch to Workspace 9
-    move_to_workspace_0: Move to Workspace 0
-    move_to_workspace_1: Move to Workspace 1
-    move_to_workspace_2: Move to Workspace 2
-    move_to_workspace_3: Move to Workspace 3
-    move_to_workspace_4: Move to Workspace 4
-    move_to_workspace_5: Move to Workspace 5
-    move_to_workspace_6: Move to Workspace 6
-    move_to_workspace_7: Move to Workspace 7
-    move_to_workspace_8: Move to Workspace 8
-    move_to_workspace_9: Move to Workspace 9
-    send_to_workspace_0: Send to Workspace 0
-    send_to_workspace_1: Send to Workspace 1
-    send_to_workspace_2: Send to Workspace 2
-    send_to_workspace_3: Send to Workspace 3
-    send_to_workspace_4: Send to Workspace 4
-    send_to_workspace_5: Send to Workspace 5
-    send_to_workspace_6: Send to Workspace 6
-    send_to_workspace_7: Send to Workspace 7
-    send_to_workspace_8: Send to Workspace 8
-    send_to_workspace_9: Send to Workspace 9
+    switch_workspace_0: Switch to Workspace 1
+    switch_workspace_1: Switch to Workspace 2
+    switch_workspace_2: Switch to Workspace 3
+    switch_workspace_3: Switch to Workspace 4
+    switch_workspace_4: Switch to Workspace 5
+    switch_workspace_5: Switch to Workspace 6
+    switch_workspace_6: Switch to Workspace 7
+    switch_workspace_7: Switch to Workspace 8
+    switch_workspace_8: Switch to Workspace 9
+    switch_workspace_9: Switch to Workspace 10
+    move_to_workspace_0: Move to Workspace 1
+    move_to_workspace_1: Move to Workspace 2
+    move_to_workspace_2: Move to Workspace 3
+    move_to_workspace_3: Move to Workspace 4
+    move_to_workspace_4: Move to Workspace 5
+    move_to_workspace_5: Move to Workspace 6
+    move_to_workspace_6: Move to Workspace 7
+    move_to_workspace_7: Move to Workspace 8
+    move_to_workspace_8: Move to Workspace 9
+    move_to_workspace_9: Move to Workspace 10
+    send_to_workspace_0: Send to Workspace 1
+    send_to_workspace_1: Send to Workspace 2
+    send_to_workspace_2: Send to Workspace 3
+    send_to_workspace_3: Send to Workspace 4
+    send_to_workspace_4: Send to Workspace 5
+    send_to_workspace_5: Send to Workspace 6
+    send_to_workspace_6: Send to Workspace 7
+    send_to_workspace_7: Send to Workspace 8
+    send_to_workspace_8: Send to Workspace 9
+    send_to_workspace_9: Send to Workspace 10
+    misc_open_settings: Open Settings
+    misc_toggle_lock_tracing: Toggle Lock Tracing (logs)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logs)
+update:
+  available: Update Available!
+  downloading: Downloading...
+  channel: Update Channel

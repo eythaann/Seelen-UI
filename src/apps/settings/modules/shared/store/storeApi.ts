@@ -1,19 +1,20 @@
-import { UserSettings } from '../../../../../shared.interfaces';
-import { parseAsCamel, VariableConvention } from '../../../../shared/schemas';
-import { SettingsSchema } from '../../../../shared/schemas/Settings';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
+import { SeelenCommand } from 'seelen-core';
 
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
+
+import { UserSettings } from '../../../../../shared.interfaces';
+import { VariableConvention } from '../../../../shared/schemas';
 
 export class UserSettingsLoader {
   private _withUserApps: boolean = false;
   private _withLayouts: boolean = false;
   private _withPlaceholders: boolean = false;
-  private _withThemes: boolean = true;
-  private _withWallpaper: boolean = true;
+  private _withThemes: boolean = false;
+  private _withWallpaper: boolean = false;
 
   withUserApps() {
     this._withUserApps = true;
@@ -35,42 +36,50 @@ export class UserSettingsLoader {
     return this;
   }
 
-  withThemes(value: boolean) {
-    this._withThemes = value;
+  withThemes() {
+    this._withThemes = true;
+    return this;
+  }
+
+  onlySettings() {
+    this._withUserApps = false;
+    this._withLayouts = false;
+    this._withPlaceholders = false;
+    this._withThemes = false;
+    this._withWallpaper = false;
     return this;
   }
 
   async load(customPath?: string): Promise<UserSettings> {
     const userSettings: UserSettings = {
-      jsonSettings: parseAsCamel(SettingsSchema, {}),
+      jsonSettings: await invoke(SeelenCommand.StateGetSettings, { path: customPath }),
       yamlSettings: [],
       themes: [],
       layouts: [],
       placeholders: [],
-      env: await invoke('get_user_envs'),
+      env: await invoke(SeelenCommand.GetUserEnvs),
       wallpaper: null,
     };
 
-    userSettings.jsonSettings = await invoke('state_get_settings', { path: customPath });
-
     if (this._withUserApps) {
-      userSettings.yamlSettings = await invoke('state_get_specific_apps_configurations');
+      userSettings.yamlSettings = await invoke(SeelenCommand.StateGetSpecificAppsConfigurations);
     }
 
     if (this._withThemes) {
-      userSettings.themes = await invoke('state_get_themes');
+      userSettings.themes = await invoke(SeelenCommand.StateGetThemes);
     }
 
     if (this._withLayouts) {
-      userSettings.layouts = await invoke('state_get_layouts');
+      userSettings.layouts = await invoke(SeelenCommand.StateGetLayouts);
     }
 
     if (this._withPlaceholders) {
-      userSettings.placeholders = await invoke('state_get_placeholders');
+      userSettings.placeholders = await invoke(SeelenCommand.StateGetPlaceholders);
     }
 
     if (this._withWallpaper) {
-      userSettings.wallpaper = convertFileSrc(await invoke('state_get_wallpaper'));
+      let wallpaper = await invoke<string>(SeelenCommand.StateGetWallpaper);
+      userSettings.wallpaper = wallpaper ? convertFileSrc(wallpaper) : null;
     }
 
     return userSettings;
@@ -89,7 +98,10 @@ export async function saveUserSettings(
   settings: Pick<UserSettings, 'jsonSettings' | 'yamlSettings'>,
 ) {
   const yaml_route = await resolveDataPath('applications.yml');
-  await fs.writeTextFile(yaml_route, yaml.dump(settings.yamlSettings));
+  await fs.writeTextFile(
+    yaml_route,
+    yaml.dump(settings.yamlSettings.filter((app) => !app.isBundled)),
+  );
   await saveJsonSettings(settings.jsonSettings);
 }
 
@@ -108,7 +120,7 @@ export async function ImportApps() {
   }
 
   for (const file of [files].flat()) {
-    const processed = yaml.load(await fs.readTextFile(file.path));
+    const processed = yaml.load(await fs.readTextFile(file));
     data.push(...(Array.isArray(processed) ? processed : []));
   }
 
@@ -118,7 +130,7 @@ export async function ImportApps() {
 export async function ExportApps(apps: any[]) {
   const pathToSave = await dialog.save({
     title: 'Exporting Apps',
-    defaultPath: await path.join(await path.homeDir(), 'downloads/apps.yaml'),
+    defaultPath: await path.join(await path.homeDir(), 'downloads/apps.yml'),
     filters: [{ name: 'apps', extensions: ['yaml', 'yml'] }],
   });
   if (pathToSave) {

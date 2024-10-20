@@ -33,3 +33,6 @@ placeholder:
   settings: Бързи настройки
   bluetooth_devices: Bluetooth & устройства
   notifications: Известия
+unlabelled_tray: Необичана икона на таблата
+context_menu:
+  remove: Премахнете елемента

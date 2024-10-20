@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Correr
+    cmd: Dominio
+footer:
+  shortcuts: Mostrar atajos
+header:
+  search: Aplicación, comando o ruta
+item:
+  open_location: Abra la ubicación del archivo
+  pin: Pin para acoplar

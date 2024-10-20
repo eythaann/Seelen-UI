@@ -33,3 +33,6 @@ placeholder:
   volume: Zapremina
   bluetooth_devices: Bluetooth i uređaji
   notifications: Obavijesti
+unlabelled_tray: Ikona neobrađene ladice
+context_menu:
+  remove: Uklonite stavku

@@ -21,6 +21,10 @@ header:
     shortcuts: Atalhos
     developer: Desenvolvedor
     info: Informação
+    seelen_rofi: Lançador de aplicativos
+    seelen_wall: A parede
+    virtual_desk: Desktops virtuais
+    home: Lar
 start:
   title: Bem-vindo!
   message: >-
@@ -48,6 +52,7 @@ general:
   accent_color: Cor de destaque
   wallpaper:
     select: Selecione papel de parede
+  date_format: Formato de data
 toolbar:
   enable: Ativar barra de ferramentas sofisticada
   placeholder:
@@ -55,8 +60,9 @@ toolbar:
     author: Autor
     description: Descrição
   height: Altura
+  auto_hide: Esconda automática
+  label: Barra de ferramentas
 wm:
-  enable: Habilitar Gerenciador de Janelas
   layout: Disposição
   author: Autor
   description: Descrição
@@ -68,13 +74,12 @@ wm:
     enable: Habilitar borda da janela
     width: Largura da borda
     offset: Deslocamento de borda
-  disabled_windows_version: O gerenciador de janelas não está disponível para sua versão do Windows.
+  enable: Habilitar gerente de janela de ladrilhos
 weg:
   label: Dock/barra de tarefas
   enable: Habilitar Dock/Barra de Tarefas
   width: Largura
   auto_hide: Ocultar automaticamente
-  dock_side: Lado da doca
   padding: Preenchimento
   margin: Margem
   gap: Brecha
@@ -84,6 +89,7 @@ weg:
     zoom_size: Tamanho ampliado (usado para temas)
     gap: Espaço entre itens
     visible_separators: Separadores Visíveis
+  dock_side: Posição
 devtools:
   enable: Habilitar ferramentas para desenvolvedores
   app_folders: Pastas de aplicativos
@@ -121,12 +127,15 @@ apps_configurations:
     ok_edit: Atualizar
     ok_create: Criar
     ok_readonly: Editar como novo
-    options_label: Opções extras
     options:
       float: Flutuador
       unmanage: Não gerenciar
       force: Forçar gerenciamento
       pinned: Fixado
+      hidden: Esconda -se da doca/barra de tarefas
+    weg_options_label: Opções de doca/barra de tarefas
+    wm_options_label: Opções do gerenciador de janelas
+    options_label: Opções extras
   identifier:
     remove: Excluir bloco
     id: Identificador
@@ -136,6 +145,11 @@ apps_configurations:
     and: E
     or: OU
     add_block: Adicionar bloco
+  extra_info: >-
+    A interface do usuário da Seelen usa apenas um identificador por aplicativo
+    (primeira partida encontrada); portanto, o pedido em como são específicos é
+    importante, o mais recente adicionado será priorizado, pois note que a
+    tabela é classificada por padrão do mais recente ao antigo.
 extras:
   version: Versão
   links: Links Oficiais
@@ -163,8 +177,6 @@ shortcuts:
     increase_height: Aumentar a altura
     decrease_height: Diminuir Altura
     restore_sizes: Restaurar tamanhos
-    switch_workspace_0: Mudar para o espaço de trabalho 0
-    switch_workspace_1: Mudar para o espaço de trabalho 1
     switch_workspace_2: Mudar para o espaço de trabalho 2
     switch_workspace_3: Mudar para o espaço de trabalho 3
     switch_workspace_4: Mudar para o espaço de trabalho 4
@@ -193,3 +205,43 @@ shortcuts:
     send_to_workspace_7: Enviar para o espaço de trabalho 7
     send_to_workspace_8: Enviar para o espaço de trabalho 8
     send_to_workspace_9: Enviar para o espaço de trabalho 9
+    switch_workspace_0: Mudar para o espaço de trabalho 1
+    switch_workspace_1: Mudar para o espaço de trabalho 2
+    misc_open_settings: Abra as configurações
+    misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
+    misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
+    toggle_launcher: Alternar
+  reset: Redefinir para padrões
+  readonly_tooltip: Este é um atalho somente leitura
+vd:
+  strategy:
+    native: Nativa
+    label: Estratégia de desktop virtual
+    seelen: Seelen
+  disabled_windows_version: >-
+    A estratégia de desktop virtual nativa não está disponível para sua versão
+    do Windows.
+save_and_restart: Salve e reinicie
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Papéis de parede
+  interval: Mude o papel de parede a cada (segundos)
+  enable: Ativar parede de Seelen
+  no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
+app_launcher:
+  runners:
+    cmd: Comando
+    explorer: Correr
+    label: Corredoras
+  monitor: Monitor para mostrar
+  enable: Ativar lançador de aplicativos
+insert: Inserir
+more: Mais
+inherit: Herdar
+close: Fechar
+update:
+  available: Atualização disponível!
+  channel: Atualizar canal
+  downloading: Download ...
+miscellaneous: Variada

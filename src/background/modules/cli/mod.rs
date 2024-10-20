@@ -9,7 +9,9 @@ use std::{
 
 use application::{handle_cli_events, SEELEN_COMMAND_LINE};
 
-use crate::{error_handler::Result, log_error, trace_lock, utils::spawn_named_thread};
+use crate::{
+    error_handler::Result, log_error, seelen::Seelen, trace_lock, utils::spawn_named_thread,
+};
 
 pub struct Client;
 impl Client {
@@ -53,6 +55,10 @@ impl Client {
 
         spawn_named_thread("TCP Listener", move || {
             for stream in listener.incoming() {
+                if !Seelen::is_running() {
+                    log::trace!("Exiting TCP Listener");
+                    break;
+                }
                 match stream {
                     Ok(stream) => Self::handle_message(stream),
                     Err(e) => {

@@ -14,6 +14,10 @@ header:
     specific_apps: Specifikke apps
     shortcuts: Genveje
     monitors: Monitors
+    seelen_wall: Væggen
+    seelen_rofi: App Launcher
+    virtual_desk: Virtuelle desktops
+    home: Hjem
 start:
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
@@ -41,6 +45,7 @@ general:
   accent_color: Accentfarve
   wallpaper:
     select: Vælg tapet
+  date_format: Datoformat
 toolbar:
   placeholder:
     select: Værktøjslinjestruktur
@@ -48,6 +53,8 @@ toolbar:
     author: Forfatter
   enable: Aktivér fancy værktøjslinje
   height: Højde
+  auto_hide: Auto skjul
+  label: Værktøjslinje
 wm:
   border:
     width: Grænsebredde
@@ -57,11 +64,10 @@ wm:
   description: Beskrivelse
   resize_delta: Ændre størrelse på Delta (%)
   layout: Layout
-  enable: Aktivér vindueadministrator
   space_between_containers: Rum mellem containere
   workspace_padding: Arbejdsområder polstring
   workspace_offset: Arbejdsområder offset (marginer)
-  disabled_windows_version: Window Manager er ikke tilgængelig til din Windows -version.
+  enable: Aktivér flisevindue manager
 weg:
   items:
     label: Genstande
@@ -76,7 +82,7 @@ weg:
   gap: Gap
   padding: Polstring
   label: Dock/proceslinje
-  dock_side: Dock side
+  dock_side: Position
 devtools:
   enable: Aktivér udviklerværktøjer
   settings_file: Indstillinger fil
@@ -92,12 +98,12 @@ apps_configurations:
       float: Flyde
       pinned: Fastgjort
       unmanage: Uudvikling
+      hidden: Skjul for dock/proceslinje
     title_edit: Redigering {{navn}}
     monitor_placeholder: Ingen
     ok_edit: Opdatering
     workspace: Arbejdsområde
     category: Kategori
-    options_label: Ekstra muligheder
     bindings: Binding (note begge muligheder er påkrævet)
     title_readonly: Visning {{navn}}
     name: Navn
@@ -107,6 +113,9 @@ apps_configurations:
     title_create: Oprettelse af {{navn}}
     ok_create: skab
     monitor: Overvåge
+    wm_options_label: Vindueschefindstillinger
+    weg_options_label: Dock/proceslinjemuligheder
+    options_label: Ekstra muligheder
   identifier:
     id: Identifikator
     add_block: Tilføj blok
@@ -129,6 +138,11 @@ apps_configurations:
   confirm_delete_title: Bekræft slet
   search: Søg
   import: Importere
+  extra_info: >-
+    Seelen UI bruger kun én identifikator pr. app (første match fundet), så
+    rækkefølgen i, hvordan de specificeres, er vigtig, det senest tilføjede vil
+    blive prioriteret, da bemærk, at tabellen er sorteret som standard fra
+    seneste til gammel.
 extras:
   exit: Afslut/exit
   links: Officielle links
@@ -167,7 +181,6 @@ shortcuts:
     move_to_workspace_7: Flyt til arbejdsområde 7
     reserve_left: Reserve til venstre
     reserve_float: Reserve float
-    switch_workspace_1: Skift til arbejdsområde 1
     switch_workspace_7: Skift til arbejdsområde 7
     switch_workspace_4: Skift til arbejdsområde 4
     switch_workspace_2: Skift til arbejdsområde 2
@@ -180,14 +193,21 @@ shortcuts:
     increase_height: Øg højde
     focus_bottom: Fokusbund
     switch_workspace_6: Skift til arbejdsområde 6
-    switch_workspace_0: Skift til arbejdsområdet 0
     move_to_workspace_3: Flyt til arbejdsområde 3
     focus_right: Fokusere rigtigt
     send_to_workspace_5: Send til arbejdsområde 5
+    switch_workspace_1: Skift til arbejdsområde 2
+    switch_workspace_0: Skift til arbejdsområde 1
+    misc_open_settings: Åbne indstillinger
+    misc_toggle_win_event_tracing: Toggle win begivenhedssporing (logfiler)
+    misc_toggle_lock_tracing: Skiftlåssporing (logfiler)
+    toggle_launcher: Skift
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core
     API
+  reset: Nulstil til misligholdelser
+  readonly_tooltip: Dette er en skrivebeskyttet genvej
 inProgress: I gang...
 open: Åben
 delete: Slet
@@ -195,3 +215,35 @@ quit: Afslut
 save: Gemme
 loading: Indlæser...
 cancel: Afbestille
+vd:
+  strategy:
+    native: Hjemmehørende
+    label: Virtuel desktopstrategi
+    seelen: Seelen
+  disabled_windows_version: >-
+    Native Virtual Desktop Strategy er ikke tilgængelig til din Windows
+    -version.
+save_and_restart: Gem & genstart
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Baggrunde
+  no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
+  interval: Skift tapet hver (sekunder)
+  enable: Aktivér Seelen Wall
+app_launcher:
+  runners:
+    cmd: Kommando
+    explorer: Løbe
+    label: Løbere
+  monitor: Overvågning at vise
+  enable: Aktivér app Launcher
+more: Mere
+inherit: Arve
+insert: Indsæt
+close: Tæt
+update:
+  available: Opdatering tilgængelig!
+  channel: Opdateringskanal
+  downloading: Download ...
+miscellaneous: Diverse

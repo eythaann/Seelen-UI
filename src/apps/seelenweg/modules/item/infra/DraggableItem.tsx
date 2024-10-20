@@ -8,25 +8,22 @@ interface Props extends PropsWithChildren {
 }
 
 export function DraggableItem({ children, item }: Props) {
-  const isDragging = useRef(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <Reorder.Item
       as="div"
+      ref={ref}
       value={item}
+      drag
       className="weg-item-drag-container"
       onDragStart={() => {
-        isDragging.current = true;
+        ref.current?.classList.add('dragging');
       }}
       onDragEnd={() => {
         setTimeout(() => {
-          isDragging.current = false;
+          ref.current?.classList.remove('dragging');
         }, 150);
-      }}
-      onClickCapture={(e) => {
-        if (isDragging.current) {
-          e.stopPropagation();
-        }
       }}
     >
       {children}

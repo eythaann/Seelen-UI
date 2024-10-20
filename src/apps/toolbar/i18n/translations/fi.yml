@@ -33,3 +33,6 @@ placeholder:
   smart_charge: '- Älykäs maksu'
   volume: Tilavuus
   notifications: Ilmoitukset
+unlabelled_tray: Leimaton lokerokuvake
+context_menu:
+  remove: Poistaa kohde

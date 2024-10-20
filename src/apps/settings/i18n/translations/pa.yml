@@ -14,6 +14,10 @@ header:
     info: ਜਾਣਕਾਰੀ
     developer: ਵਿਕਾਸਕਾਰ
     seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
+    seelen_rofi: ਐਪ ਲਾਂਚਰ
+    seelen_wall: ਕੰਧ
+    virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
+    home: ਘਰ
 start:
   message: >-
     Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows 11 ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
@@ -41,6 +45,7 @@ general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   wallpaper:
     select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
+  date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
 toolbar:
   placeholder:
     description: ਵਰਣਨ
@@ -48,6 +53,8 @@ toolbar:
     author: ਲੇਖਕ
   height: ਉਚਾਈ
   enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  auto_hide: ਆਟੋ ਓਹਲੇ
+  label: ਟੂਲਬਾਰ
 wm:
   border:
     offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
@@ -58,10 +65,9 @@ wm:
   author: ਲੇਖਕ
   space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
   resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
-  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
   layout: ਖਾਕਾ
-  disabled_windows_version: ਵਿੰਡੋ ਮੈਨੇਜਰ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
+  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਟਾਇਲਿੰਗ ਯੋਗ ਕਰੋ
 weg:
   items:
     label: ਇਕਾਈ
@@ -71,12 +77,12 @@ weg:
     visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
   enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   padding: ਪੈਡਿੰਗ
-  dock_side: ਡੌਕ ਸਾਈਡ
   auto_hide: ਆਟੋ ਓਹਲੇ
   gap: ਪਾੜਾ
   width: ਚੌੜਾਈ
   margin: ਹਾਸ਼ੀਏ
   label: ਡੌਕ/ਟਾਸਕਬਾਰ
+  dock_side: ਸਥਿਤੀ
 devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
@@ -92,6 +98,7 @@ apps_configurations:
       pinned: ਪਿੰਨ ਕੀਤਾ
       unmanage: ਅਪ੍ਰਬੰਧਿਤ ਕਰੋ
       force: ਫੋਰਸ ਪ੍ਰਬੰਧਨ
+      hidden: ਡੌਕ / ਟਾਸਕਬਾਰ ਤੋਂ ਲੁਕੋ
     category: ਸ਼੍ਰੇਣੀ
     bindings: ਬਾਈਡਿੰਗ (ਨੋਟ ਕਰੋ ਕਿ ਦੋਵੇਂ ਵਿਕਲਪ ਲੋੜੀਂਦੇ ਹਨ)
     monitor_placeholder: ਕੋਈ ਨਹੀਂ
@@ -106,6 +113,8 @@ apps_configurations:
     ok_edit: ਅਪਡੇਟ
     monitor: ਮਾਨੀਟਰ
     title_create: '{{name}} ਬਣਾਉਣਾ'
+    wm_options_label: ਵਿੰਡੋ ਮੈਨੇਜਰ ਦੇ ਵਿਕਲਪ
+    weg_options_label: ਡੌਕ / ਟਾਸਕਬਾਰ ਚੋਣਾਂ
     options_label: ਵਾਧੂ ਵਿਕਲਪ
   identifier:
     kind: ਦੁਆਰਾ ਪਛਾਣੋ
@@ -129,6 +138,7 @@ apps_configurations:
   new: ਨਵਾਂ
   bundled_title: ਐਪ ਕੌਂਫਿਗ ਸੀਲੇਨ ਨਾਲ ਬੰਡਲ ਕੀਤੀ ਗਈ
   import: ਆਯਾਤ ਕਰੋ
+  extra_info: ਵੇਖਣਯੋਗ UI ਪ੍ਰਤੀ ਐਪ ਨੂੰ ਸਿਰਫ ਇਕ ਪਛਾਣਕਰਤਾ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ
 extras:
   discord: ਵਿਵਾਦ
   links: ਅਧਿਕਾਰਤ ਲਿੰਕ
@@ -161,7 +171,6 @@ shortcuts:
     switch_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
     move_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
     send_to_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਭੇਜੋ
-    switch_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
     send_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਭੇਜੋ
     send_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਭੇਜੋ
     move_to_workspace_1: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
@@ -170,7 +179,6 @@ shortcuts:
     restore_sizes: ਆਕਾਰ ਰੀਸਟੋਰ ਕਰੋ
     increase_height: ਉਚਾਈ ਵਧਾਓ
     send_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਭੇਜੋ
-    switch_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਜਾਓ
     focus_left: ਖੱਬੇ ਪਾਸੇ ਫੋਕਸ ਕਰੋ
     move_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
     send_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਭੇਜੋ
@@ -184,10 +192,18 @@ shortcuts:
     move_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
     focus_latest: ਫੋਕਸ ਤਾਜ਼ਾ
     switch_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਜਾਓ
+    switch_workspace_0: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
+    switch_workspace_1: ਵਰਕਸਪੇਸ 2 ਤੇ ਜਾਓ
+    misc_toggle_lock_tracing: ਟੌਗਲ ਲਾਕ ਟਰੇਸਿੰਗ (ਲੌਗ)
+    misc_toggle_win_event_tracing: ਵਿਨ ਈਵੈਂਟ ਟਰੇਸਿੰਗ (ਲੌਗ) ਨੂੰ ਟੌਗਲ ਕਰੋ
+    misc_open_settings: ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ
+    toggle_launcher: ਟੌਗਲ
   enable_tooltip: >-
     ਅਸਮਰੱਥ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ ਕੋਰ ਏਪੀਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ਾਰਟਕੱਟ
     ਲਾਗੂ ਕਰਦੇ ਹੋ
   enable: ਏਕੀਕ੍ਰਿਤ ਸ਼ਾਰਟਕੱਟ (ahk) ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
+  readonly_tooltip: ਇਹ ਸਿਰਫ ਇਕੋ ਸ਼ਾਰਟਕੱਟ ਹੈ
 open: ਖੋਲ੍ਹੋ
 loading: ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
 save: ਸੇਵ ਕਰੋ
@@ -195,3 +211,33 @@ delete: ਮਿਟਾਓ
 inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
 cancel: ਰੱਦ ਕਰੋ
 quit: ਛੱਡੋ
+vd:
+  strategy:
+    label: ਵਰਚੁਅਲ ਡੈਸਕਟੌਤੀ ਰਣਨੀਤੀ
+    seelen: ਵੇਖਿਆ
+    native: ਦੇਸੀ
+  disabled_windows_version: ਦੇਸੀ ਵਰਚੁਅਲ ਡੈਸਕਟੌਪ ਰਣਨੀਤੀ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
+save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
+monitors_configurations:
+  label: ਨਿਗਰਾਨੀ {{ਇੰਡੈਕਸ}
+wall:
+  no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
+  backgrounds: ਵਾਲਪੇਪਰ
+  interval: ਵਾਲਪੇਪਰ ਨੂੰ ਹਰ (ਸਕਿੰਟ) ਬਦਲੋ
+  enable: ਧੁੱਪ ਦੀ ਕੰਧ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+app_launcher:
+  runners:
+    label: ਦੌੜਾਕ
+    cmd: ਕਮਾਂਡ
+    explorer: ਚਲਾਓ
+  monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
+  enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+more: ਹੋਰ
+inherit: ਵਿਰਾਸਤ
+insert: ਸੰਮਿਲਿਤ ਕਰੋ
+close: ਨੇੜੇ
+update:
+  available: ਅਪਡੇਟ ਉਪਲਬਧ!
+  channel: ਚੈਨਲ ਅਪਡੇਟ ਕਰੋ
+  downloading: ਡਾ ing ਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ...
+miscellaneous: ਫੁਟਕਲ

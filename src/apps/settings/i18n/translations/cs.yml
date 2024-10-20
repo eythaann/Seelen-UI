@@ -14,6 +14,10 @@ header:
     monitors: Monitory
     specific_apps: Konkrétní aplikace
     shortcuts: Zkratky
+    seelen_rofi: Spouštěč aplikací
+    seelen_wall: Zeď
+    virtual_desk: Virtuální stolní počítače
+    home: Domov
 start:
   title: Vítejte!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Accent Color
   wallpaper:
     select: Vyberte tapetu
+  date_format: Formát data
 toolbar:
   placeholder:
     author: Autor
@@ -48,6 +53,8 @@ toolbar:
     select: Struktura panelu nástrojů
   height: Výška
   enable: Povolte ozdobný panel nástrojů
+  auto_hide: Automatická skrýt
+  label: Panel nástrojů
 wm:
   border:
     width: Šířka hranic
@@ -58,10 +65,9 @@ wm:
   resize_delta: Změna velikosti delta (%)
   workspace_offset: Workspaces Offset (marže)
   layout: Rozložení
-  enable: Povolit správce oken
   space_between_containers: Prostor mezi kontejnery
   workspace_padding: Polstrování pracovních prostorů
-  disabled_windows_version: Správce oken není k dispozici pro vaši verzi Windows.
+  enable: Povolit správce oken obkladu
 weg:
   items:
     zoom_size: Zvětšená velikost (použitá pro témata)
@@ -76,7 +82,7 @@ weg:
   width: Šířka
   gap: Mezera
   padding: Polstrování
-  dock_side: Dock Side
+  dock_side: Pozice
 devtools:
   data_folder: Datová složka
   settings_file: Nastavení souboru
@@ -92,13 +98,13 @@ apps_configurations:
       float: Plovák
       unmanage: Unmanage
       pinned: Připnuto
+      hidden: Skrýt před doku/hlavním panelem
     ok_create: Vytvořit
     workspace_placeholder: Žádný
     category: Kategorie
     ok_edit: Aktualizace
     title_readonly: Prohlížení {{name}}
     category_placeholder: Žádný
-    options_label: Další možnosti
     monitor_placeholder: Žádný
     bindings: Vazba (poznámka o tom, že jsou vyžadovány obě možnosti)
     workspace: Pracovní prostor
@@ -107,6 +113,9 @@ apps_configurations:
     ok_readonly: Upravit jako nové
     name: název
     monitor: Monitor
+    weg_options_label: Možnosti doku/hlavního panelu
+    wm_options_label: Možnosti správce oken
+    options_label: Další možnosti
   identifier:
     add_block: Přidat blok
     negation: Negovat odpovídající
@@ -129,6 +138,11 @@ apps_configurations:
   delete: Vymazat
   import: Import
   new: Nový
+  extra_info: >-
+    SEELEN UI Použijte pouze jeden identifikátor na aplikaci (první nalezený
+    zápas), takže pořadí v tom, jak jsou specifikovány, je důležitá, nejnovější
+    přidaná bude upřednostňována, protože poznámka je tabulka ve výchozím
+    nastavení tříděna od nejnovějších až starých.
 extras:
   relaunch: Opětovné
   links: Oficiální odkazy
@@ -164,13 +178,11 @@ shortcuts:
     decrease_width: Snížit šířku
     move_to_workspace_3: Přesuňte se do pracovního prostoru 3
     switch_workspace_6: Přepněte do pracovního prostoru 6
-    switch_workspace_0: Přepněte do pracovního prostoru 0
     reserve_left: Rezerva vlevo
     increase_width: Zvětšit šířku
     restore_sizes: Obnovení velikosti
     reserve_stack: Rezervní zásobník
     switch_workspace_7: Přepněte do pracovního prostoru 7
-    switch_workspace_1: Přepněte do pracovního prostoru 1
     switch_workspace_5: Přepněte do pracovního prostoru 5
     focus_right: Zaměřte se správně
     focus_left: Zaostření doleva
@@ -184,8 +196,16 @@ shortcuts:
     move_to_workspace_7: Přesuňte se do pracovního prostoru 7
     send_to_workspace_7: Odeslat do pracovního prostoru 7
     move_to_workspace_9: Přesuňte se do pracovního prostoru 9
+    switch_workspace_1: Přepněte do pracovního prostoru 2
+    switch_workspace_0: Přepněte do pracovního prostoru 1
+    misc_toggle_lock_tracing: Tracing Lock Tracing (protokoly)
+    misc_toggle_win_event_tracing: Tracing události vítězství na přepínání (protokoly)
+    misc_open_settings: Otevřené nastavení
+    toggle_launcher: Přepínač
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
+  reset: Resetovat na výchozí hodnoty
+  readonly_tooltip: Toto je zkratka pouze pro čtení
 cancel: zrušení
 delete: Vymazat
 loading: Načítání...
@@ -193,3 +213,35 @@ quit: Přestat
 save: Uložit
 open: OTEVŘENO
 inProgress: Probíhá ...
+vd:
+  strategy:
+    native: Rodák
+    seelen: Seelen
+    label: Virtuální strategie stolních počítačů
+  disabled_windows_version: >-
+    Nativní strategie virtuálních stolních počítačů není pro vaši verzi Windows
+    k dispozici.
+save_and_restart: Uložit a restartovat
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Povolte zeď Seelen
+  backgrounds: Tapety
+  no_background: Prázdná prezentace místo toho za použití pozadí tématu.
+  interval: Změňte tapetu každý (sekundy)
+app_launcher:
+  runners:
+    explorer: Běh
+    cmd: Příkaz
+    label: Běžci
+  enable: Povolit spouštěč aplikací
+  monitor: Monitorovat
+insert: Vložit
+inherit: Zdědit
+more: Více
+close: Blízko
+update:
+  available: Aktualizace k dispozici!
+  downloading: Stahování ...
+  channel: Aktualizovat kanál
+miscellaneous: Smíšený

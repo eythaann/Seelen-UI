@@ -11,10 +11,20 @@
 
 CloseIfNotRunning()
 
-; Open Settings
-#k:: OpenSettings()
-
 ; Resume Window Manager
 ^#!p:: {
   ResumeWM()
+}
+
+;misc_open_settings
+x:: OpenSettings()
+
+;misc_toggle_lock_tracing
+x:: {
+  ToggleWinEventTracing()
+}
+
+;misc_toggle_win_event_tracing
+x:: {
+  ToggleMutexLockTracing()
 }

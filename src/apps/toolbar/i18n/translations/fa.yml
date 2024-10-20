@@ -33,3 +33,6 @@ placeholder:
   smart_charge: '- شارژ هوشمند'
   open_user_folder: پوشه کاربر را باز کنید
   notifications: اطلاعیه
+unlabelled_tray: نماد سینی بدون نام
+context_menu:
+  remove: حذف مورد

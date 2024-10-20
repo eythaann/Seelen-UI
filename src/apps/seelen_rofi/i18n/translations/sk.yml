@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Príkaz
+    explorer: Spustenie
+footer:
+  shortcuts: Zobraziť skratky
+header:
+  search: Aplikácia, príkaz alebo cesta
+item:
+  open_location: Otvorte umiestnenie súboru
+  pin: Pin do prístavu

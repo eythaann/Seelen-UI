@@ -33,3 +33,6 @@ placeholder:
   smart_charge: '- розумний заряд'
   open_user_folder: Відкрийте папку користувача
   notifications: Сповіщення
+unlabelled_tray: Нежитрий ікона лотка
+context_menu:
+  remove: Видаліть елемент

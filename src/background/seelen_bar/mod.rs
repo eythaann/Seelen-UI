@@ -4,54 +4,51 @@ pub mod hook;
 use crate::{
     error_handler::Result,
     log_error,
+    modules::virtual_desk::get_vd_manager,
     seelen::get_app_handle,
     state::application::FULL_STATE,
-    utils::is_virtual_desktop_supported,
-    windows_api::{AppBarData, AppBarDataEdge, WindowsApi},
+    utils::{
+        are_overlaped,
+        constants::{NATIVE_UI_POPUP_CLASSES, OVERLAP_BLACK_LIST_BY_EXE},
+    },
+    windows_api::{window::Window, AppBarData, AppBarDataEdge, WindowsApi},
 };
+use itertools::Itertools;
+use seelen_core::{handlers::SeelenEvent, state::HideMode};
 use serde::Serialize;
-use tauri::{Emitter, Listener, Manager, WebviewWindow};
+use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{HWND_TOPMOST, SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
     window: WebviewWindow,
-    hitbox: WebviewWindow,
-    // -- -- -- --
-    last_focus: Option<isize>,
-    hidden: bool,
-}
-
-#[derive(Serialize, Clone)]
-pub struct ActiveApp {
-    title: String,
-    name: String,
-    exe: Option<String>,
+    /// Is the rect that the toolbar should have when it isn't hidden
+    pub theoretical_rect: RECT,
+    last_focus: Option<HWND>,
+    overlaped: bool,
 }
 
 impl Drop for FancyToolbar {
     fn drop(&mut self) {
         log::info!("Dropping {}", self.window.label());
-        if let Ok(hwnd) = self.hitbox.hwnd() {
+        if let Ok(hwnd) = self.window.hwnd() {
             AppBarData::from_handle(hwnd).unregister_bar();
         }
         log_error!(self.window.destroy());
-        log_error!(self.hitbox.destroy());
     }
 }
 
 impl FancyToolbar {
     pub fn new(postfix: &str) -> Result<Self> {
         log::info!("Creating {}/{}", Self::TARGET, postfix);
-        let (window, hitbox) = Self::create_window(postfix)?;
         Ok(Self {
-            window,
-            hitbox,
+            window: Self::create_window(postfix)?,
             last_focus: None,
-            hidden: false,
+            theoretical_rect: RECT::default(),
+            overlaped: false,
         })
     }
 
@@ -60,54 +57,68 @@ impl FancyToolbar {
         Ok(())
     }
 
+    fn is_overlapping(&self, hwnd: HWND) -> Result<bool> {
+        let window_rect = WindowsApi::get_inner_window_rect(hwnd)?;
+        Ok(are_overlaped(&self.theoretical_rect, &window_rect))
+    }
+
+    fn set_overlaped_status(&mut self, is_overlaped: bool) -> Result<()> {
+        if self.overlaped == is_overlaped {
+            return Ok(());
+        }
+        self.overlaped = is_overlaped;
+        self.emit(SeelenEvent::ToolbarOverlaped, self.overlaped)?;
+        Ok(())
+    }
+
+    pub fn handle_overlaped_status(&mut self, hwnd: HWND) -> Result<()> {
+        let window = Window::from(hwnd);
+        let is_overlaped = self.is_overlapping(hwnd)?
+            && !window.is_desktop()
+            && !window.is_seelen_overlay()
+            && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str())
+            && !OVERLAP_BLACK_LIST_BY_EXE
+                .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
+        self.set_overlaped_status(is_overlaped)
+    }
+
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
-        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_HIDE)?;
-        self.hidden = true;
+        self.window.emit_to(
+            self.window.label(),
+            SeelenEvent::HandleLayeredHitboxes,
+            false,
+        )?;
         Ok(())
     }
 
     pub fn show(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
-        WindowsApi::show_window_async(self.hitbox.hwnd()?, SW_SHOWNOACTIVATE)?;
-        self.hidden = false;
-        Ok(())
-    }
-
-    pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
-        let title = WindowsApi::get_window_text(hwnd);
-        self.last_focus = Some(hwnd.0);
-        self.emit(
-            "focus-changed",
-            ActiveApp {
-                title,
-                name: WindowsApi::get_window_display_name(hwnd)
-                    .unwrap_or(String::from("Error on App Name")),
-                exe: WindowsApi::exe_path(hwnd).ok(),
-            },
+        self.window.emit_to(
+            self.window.label(),
+            SeelenEvent::HandleLayeredHitboxes,
+            true,
         )?;
         Ok(())
     }
 
-    pub fn ensure_hitbox_zorder(&self) -> Result<()> {
-        let hitbox = HWND(self.hitbox.hwnd()?.0);
-        WindowsApi::bring_to(hitbox, HWND_TOPMOST)?;
-        self.set_positions(WindowsApi::monitor_from_window(hitbox).0)?;
+    pub fn focus_changed(&mut self, hwnd: HWND) -> Result<()> {
+        self.last_focus = Some(hwnd);
         Ok(())
     }
 }
 
 // statics
 impl FancyToolbar {
+    pub const TITLE: &'static str = "Seelen Fancy Toolbar";
     const TARGET: &'static str = "fancy-toolbar";
-    const TARGET_HITBOX: &'static str = "fancy-toolbar-hitbox";
 
     /// Work area no works fine on multiple monitors
     /// so we use this functions that only takes the toolbar in account
-    pub fn get_work_area_by_monitor(monitor: isize) -> Result<RECT> {
-        let monitor_info = WindowsApi::monitor_info(HMONITOR(monitor))?;
+    pub fn get_work_area_by_monitor(monitor: HMONITOR) -> Result<RECT> {
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
 
-        let dpi = WindowsApi::get_device_pixel_ratio(HMONITOR(monitor))?;
+        let dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let mut rect = monitor_info.monitorInfo.rcMonitor;
 
         let state = FULL_STATE.load();
@@ -119,115 +130,76 @@ impl FancyToolbar {
         Ok(rect)
     }
 
-    pub fn set_positions(&self, monitor: isize) -> Result<()> {
-        let hmonitor = HMONITOR(monitor);
-        if hmonitor.is_invalid() {
-            return Err("Invalid Monitor".into());
-        }
+    pub fn set_position(&mut self, monitor: HMONITOR) -> Result<()> {
+        let hwnd = HWND(self.window.hwnd()?.0);
 
-        let monitor_info = WindowsApi::monitor_info(hmonitor)?;
+        let state = FULL_STATE.load();
+        let settings = &state.settings().fancy_toolbar;
+
+        let monitor_info = WindowsApi::monitor_info(monitor)?;
+        let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let rc_monitor = monitor_info.monitorInfo.rcMonitor;
+        self.theoretical_rect = RECT {
+            bottom: rc_monitor.top + (settings.height as f32 * monitor_dpi) as i32,
+            ..rc_monitor
+        };
 
-        let main_hwnd = HWND(self.window.hwnd()?.0);
-        let hitbox_hwnd = HWND(self.hitbox.hwnd()?.0);
-
-        let dpi = WindowsApi::get_device_pixel_ratio(hmonitor)?;
-        let toolbar_height = FULL_STATE.load().settings().fancy_toolbar.height;
-
-        let mut abd = AppBarData::from_handle(hitbox_hwnd);
-
-        let mut abd_rect = rc_monitor;
-        abd_rect.bottom = abd_rect.top + (toolbar_height as f32 * dpi) as i32;
-
-        abd.set_edge(AppBarDataEdge::Top);
-        abd.set_rect(abd_rect);
-
-        abd.register_as_new_bar();
+        let mut abd = AppBarData::from_handle(hwnd);
+        match settings.hide_mode {
+            HideMode::Never => {
+                abd.set_edge(AppBarDataEdge::Top);
+                abd.set_rect(self.theoretical_rect);
+                abd.register_as_new_bar();
+            }
+            _ => abd.unregister_bar(),
+        };
 
         // pre set position for resize in case of multiples dpi
-        WindowsApi::move_window(hitbox_hwnd, &rc_monitor)?;
-        WindowsApi::set_position(hitbox_hwnd, None, &abd_rect, SWP_NOACTIVATE)?;
-
-        WindowsApi::move_window(main_hwnd, &rc_monitor)?;
-        WindowsApi::set_position(main_hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
+        WindowsApi::move_window(hwnd, &rc_monitor)?;
+        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
         Ok(())
     }
 
-    fn create_window(postfix: &str) -> Result<(WebviewWindow, WebviewWindow)> {
+    fn create_window(postfix: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
 
-        let label = format!("{}/{}", Self::TARGET_HITBOX, postfix);
-        let hitbox = match manager.get_webview_window(&label) {
-            Some(window) => window,
-            None => tauri::WebviewWindowBuilder::new(
-                &manager,
-                label,
-                tauri::WebviewUrl::App("toolbar-hitbox/index.html".into()),
-            )
-            .title("Seelen Fancy Toolbar Hitbox")
-            .maximizable(false)
-            .minimizable(false)
-            .resizable(false)
-            .visible(false)
-            .decorations(false)
-            .transparent(true)
-            .shadow(false)
-            .skip_taskbar(true)
-            .always_on_top(true)
-            .drag_and_drop(false)
-            .build()?,
-        };
-
         let label = format!("{}/{}", Self::TARGET, postfix);
-        let window = match manager.get_webview_window(&label) {
-            Some(window) => window,
-            None => tauri::WebviewWindowBuilder::new(
-                &manager,
-                label,
-                tauri::WebviewUrl::App("toolbar/index.html".into()),
-            )
-            .title("Seelen Fancy Toolbar")
-            .maximizable(false)
-            .minimizable(false)
-            .resizable(false)
-            .visible(false)
-            .decorations(false)
-            .transparent(true)
-            .shadow(false)
-            .skip_taskbar(true)
-            .always_on_top(true)
-            .drag_and_drop(false)
-            .owner(&hitbox)?
-            .build()?,
-        };
+        let window = tauri::WebviewWindowBuilder::new(
+            manager,
+            label,
+            tauri::WebviewUrl::App("toolbar/index.html".into()),
+        )
+        .title(Self::TITLE)
+        .minimizable(false)
+        .maximizable(false)
+        .closable(false)
+        .resizable(false)
+        .visible(false)
+        .decorations(false)
+        .transparent(true)
+        .shadow(false)
+        .skip_taskbar(true)
+        .always_on_top(true)
+        .build()?;
 
         window.set_ignore_cursor_events(true)?;
-
-        window.once("store-events-ready", Self::on_store_events_ready);
-        Ok((window, hitbox))
+        window.listen("store-events-ready", Self::on_store_events_ready);
+        Ok(window)
     }
 
     fn on_store_events_ready(_: tauri::Event) {
         // TODO refactor this implementation
-        if is_virtual_desktop_supported() {
-            std::thread::spawn(|| -> Result<()> {
-                let handler = get_app_handle();
-                let desktops = winvd::get_desktops()?;
-                let current_desktop = winvd::get_current_desktop()?;
-
-                let mut desktops_names = Vec::new();
-                for (i, d) in desktops.iter().enumerate() {
-                    if let Ok(name) = d.get_name() {
-                        desktops_names.push(name);
-                    } else {
-                        desktops_names.push(format!("Desktop {}", i + 1))
-                    }
-                }
-
-                handler.emit("workspaces-changed", desktops_names)?;
-                handler.emit("active-workspace-changed", current_desktop.get_index()?)?;
-                Ok(())
-            });
-        }
+        std::thread::spawn(|| -> Result<()> {
+            let handler = get_app_handle();
+            let vd = get_vd_manager();
+            let desktops = vd
+                .get_all()?
+                .iter()
+                .map(|d| d.as_serializable())
+                .collect_vec();
+            handler.emit(SeelenEvent::WorkspacesChanged, &desktops)?;
+            handler.emit(SeelenEvent::ActiveWorkspaceChanged, vd.get_current()?.id())?;
+            Ok(())
+        });
     }
 }

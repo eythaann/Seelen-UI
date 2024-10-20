@@ -2,6 +2,8 @@ taskbar_menu:
   settings: Atidaryti nustatymai
   start: Pridėkite pradžios modulį
   media: Pridėkite laikmenos modulį
+  add_file: PIN pasirinktinis failas
+  add_folder: PIN pasirinktinis aplankas
 app_menu:
   pin_to_center: Kaištis iki centro
   close: Uždaryti

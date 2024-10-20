@@ -14,6 +14,10 @@ header:
     seelen_wm: Цонхны менежер
     monitors: Хэлэлт авагч
     info: Мэдээлэл
+    seelen_wall: Хана
+    seelen_rofi: Програм идэвхжсэн
+    virtual_desk: Виржопын ширээний гутал
+    home: Гэр
 start:
   message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
   message: >-
@@ -40,6 +44,7 @@ general:
   accent_color: Эргүүлэг
   wallpaper:
     select: Ханын зураг сонгох
+  date_format: Огноо формат
 toolbar:
   placeholder:
     description: Тодорхойлолт / төрөл анги
@@ -47,6 +52,8 @@ toolbar:
     author: Зохиолч
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
   height: Өндөрлөг
+  auto_hide: Авто гүнд
+  label: Балтсний хайрцагны хэрэгсэл
 wm:
   border:
     offset: Хилийн офсет
@@ -58,9 +65,8 @@ wm:
   description: Тодорхойлолт / төрөл анги
   workspace_padding: Ажлын талбарууд
   author: Зохиолч
-  enable: Цонх менежерийг идэвхжүүлэх
   resize_delta: Дельтааг өөрчлөх (%)
-  disabled_windows_version: Цонхны менежер таны Windows хувилбарт ашиглах боломжгүй.
+  enable: Цонхны менежерийг идэвхжүүлэх боломжийг олгох
 weg:
   items:
     label: Зүйл
@@ -69,13 +75,13 @@ weg:
     size: Зүйлийн хэмжээ
     visible_separators: Харагдах тусгаарлагч
   enable: Док / Taskbar-г идэвхжүүлэх
-  dock_side: Дохын тухай
   label: Док / Taskbar
   width: Өргөн
   padding: Дэвсгэр
   margin: Саруулган өвс
   gap: Цонх
   auto_hide: Авто гүнд
+  dock_side: Байрлал
 devtools:
   settings_file: Тохиргооын нэр
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
@@ -91,6 +97,7 @@ apps_configurations:
       float: Нисэн өнгөрөх
       force: Хүч удирдах
       unmanage: Нээлттэй
+      hidden: Док / Taskbar-аас нуух
     category: Зэрэглэл
     title_readonly: Үзэх {{нэр}}
     bindings: Батлах (Анхааруулга хоёулаа сонголтыг оруулах шаардлагатай)
@@ -101,11 +108,13 @@ apps_configurations:
     workspace_placeholder: Хэн ч
     title_edit: '{{Нэр}}}}'
     ok_create: Шуүгиан дэгдээх
-    options_label: Нэмий сонголт
     ok_readonly: Шинэ болгон засах
     name: Нэр
     monitor_placeholder: Хэн ч
     title_create: Үүсгэх {{нэр}}}
+    wm_options_label: Цонх менежерийн сонголтууд
+    weg_options_label: Док / Taskbar сонголтууд
+    options_label: Нэмий сонголт
   identifier:
     id: Өмнө тайлбар
     or: ЭСВЭЛ
@@ -128,6 +137,10 @@ apps_configurations:
     түгээмэл програмуудыг автоматаар тохируулдаг.
   search: Эрэл хайгуул хийх
   export: Гадаадад гаргах
+  extra_info: >-
+    Seelen ui нь App тутамд зөвхөн нэг танигчийг ашигладаг (эхний тоглолт
+    олдсон) нь хамгийн чухал нь хамгийн чухал бөгөөд хүснэгтийг хуучин
+    хувилбараас эхлээд эрэмбэлсэн байдлаар эрэмбэлэгдсэн байх ёстой.
 extras:
   github: Github
   relaunch: OradAUN
@@ -154,7 +167,6 @@ shortcuts:
     switch_workspace_6: Ажлын талбарт шилжих 6
     move_to_workspace_1: Ажлын талбар руу шилжих 1
     reserve_left: Зуух Зүүн
-    switch_workspace_1: Ажлын талбарт шилжих 1
     switch_workspace_5: Ажлын талбар руу шилжих 5
     move_to_workspace_8: Ажлын талбар руу шилжих 8
     focus_right: Домог
@@ -162,7 +174,6 @@ shortcuts:
     increase_height: Дээд хэмжээг нэмэгдүүлэх
     reserve_bottom: Нөөцийг нөөцлөх
     move_to_workspace_6: Ажлын талбар руу шилжих 6
-    switch_workspace_0: Ажлын талбар руу шилжих 0
     move_to_workspace_7: Ажлын талбар руу шилжих 7
     send_to_workspace_4: Ажлын талбарт илгээх 4
     move_to_workspace_3: Ажлын талбар руу шилжих 3
@@ -183,8 +194,16 @@ shortcuts:
     restore_sizes: Хэмжээг сэргээх
     switch_workspace_9: Ажлын талбарт шилжих 9
     send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
+    switch_workspace_0: Ажлын талбарт шилжих 1
+    switch_workspace_1: Ажлын талбарт 2 руу шилжих
+    misc_toggle_win_event_tracing: Тогтмол үйл явдлын үеэр Togge To
+    misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)
+    misc_open_settings: АВир танилцуулга
+    toggle_launcher: Дугуй унах
   enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
   enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
+  reset: Үндсэндээ тохируулах
+  readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
 inProgress: Явагдаж байна ...
 delete: Эдгээх
 loading: Ачаалах ...
@@ -192,3 +211,35 @@ cancel: Цуаах
 quit: Орхих
 open: Нээлттэй
 save: Аврах
+vd:
+  strategy:
+    seelen: Сахин суу
+    label: Виртины ширээний эсрэг стратеги
+    native: Төрөлх нутгийн
+  disabled_windows_version: >-
+    Уугуул виртуал ширээний стратеги нь таны Windows хувилбарт ашиглах
+    боломжгүй.
+save_and_restart: Хадгалах & дахин эхлүүлнэ үү
+monitors_configurations:
+  label: Хяналт {{индекс}}
+wall:
+  backgrounds: Ханын цаас
+  no_background: Хоосон слайпешт, оронд нь.
+  enable: Seelen Ханыг идэвхжүүл
+  interval: БИДНИЙ ХӨГЖЛИЙН ХУВЬЦАА (секунд)
+app_launcher:
+  runners:
+    explorer: Урсгал
+    cmd: Тушаах
+    label: Төгс эелдэг
+  monitor: Бие шоу хийх террут
+  enable: App Leader-ийг идэвхжүүлэх
+inherit: Удамших
+more: Илүү / их олон
+insert: Оруулах
+close: Ойр дөхөм
+update:
+  available: Шинэчлэх боломжтой!
+  downloading: Татаж авах ...
+  channel: Суваг шинэчлэх
+miscellaneous: Олон төрлийн

@@ -14,6 +14,10 @@ header:
     shortcuts: শর্টকাটস
     specific_apps: নির্দিষ্ট অ্যাপ্লিকেশন
     seelen_wm: উইন্ডো ম্যানেজার
+    seelen_wall: প্রাচীর
+    seelen_rofi: অ্যাপ লঞ্চার
+    virtual_desk: ভার্চুয়াল ডেস্কটপস
+    home: বাড়ি
 start:
   title: স্বাগত!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: সুরের ধাপের রঙ
   wallpaper:
     select: ওয়ালপেপার নির্বাচন করুন
+  date_format: তারিখ ফর্ম্যাট
 toolbar:
   placeholder:
     author: লেখক
@@ -48,6 +53,8 @@ toolbar:
     select: সরঞ্জামদণ্ড কাঠামো
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
   height: উচ্চতা
+  auto_hide: অটো আড়াল
+  label: সরঞ্জামদণ্ড
 wm:
   border:
     width: সীমানার প্রশস্থতা
@@ -60,8 +67,7 @@ wm:
   workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
   space_between_containers: পাত্রে স্থান
   workspace_padding: ওয়ার্কস্পেস প্যাডিং
-  enable: উইন্ডো ম্যানেজার সক্ষম করুন
-  disabled_windows_version: উইন্ডো ম্যানেজারটি আপনার উইন্ডোজ সংস্করণের জন্য উপলভ্য নয়।
+  enable: টাইলিং উইন্ডো ম্যানেজার সক্ষম করুন
 weg:
   items:
     size: আইটেমের আকার
@@ -70,13 +76,13 @@ weg:
     label: আইটেম
     zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
   auto_hide: স্বয়ং চামড়া
-  dock_side: ডক সাইড
   width: প্রস্থ
   gap: ফাঁক
   margin: মার্জিন
   enable: ডক/টাস্কবার সক্ষম করুন
   label: ডক/টাস্কবার
   padding: প্যাডিং
+  dock_side: অবস্থান
 devtools:
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
   settings_file: সেটিংস ফাইল
@@ -92,6 +98,7 @@ apps_configurations:
       unmanage: আনম্যানেজ
       force: জোর পরিচালনা
       pinned: পিনড
+      hidden: ডক/টাস্কবার থেকে লুকান
     ok_create: সৃষ্টি
     name: নাম
     workspace_placeholder: কিছুই না
@@ -103,10 +110,12 @@ apps_configurations:
     ok_readonly: নতুন হিসাবে সম্পাদনা
     monitor: মনিটর
     title_edit: সম্পাদনা {{নাম}}
-    options_label: অতিরিক্ত বিকল্প
     title_create: '{{নাম}} তৈরি করা'
     workspace: কর্মক্ষেত্র
     bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
+    weg_options_label: ডক/টাস্কবার বিকল্প
+    wm_options_label: উইন্ডো ম্যানেজার বিকল্পগুলি
+    options_label: অতিরিক্ত বিকল্প
   identifier:
     or: বা
     and: এবং
@@ -129,6 +138,11 @@ apps_configurations:
     এই বান্ডিলযুক্ত কনফিগারেশনগুলি সম্পাদনাযোগ্য নয় এবং আপনাকে কাস্টমাইজেশন
     ছাড়াই সেরা অভিজ্ঞতা সরবরাহ করার জন্য ডিজাইন করা হয়েছে। তারা
     স্বয়ংক্রিয়ভাবে আপনার জন্য সর্বাধিক সাধারণ অ্যাপ্লিকেশনগুলি কনফিগার করে।
+  extra_info: >-
+    সিলেন ইউআই প্রতি অ্যাপ্লিকেশনটিতে কেবলমাত্র একটি শনাক্তকারী ব্যবহার করুন
+    (প্রথম ম্যাচটি পাওয়া গেছে) সুতরাং কীভাবে নির্দিষ্ট করা হয়েছে তার ক্রমটি
+    গুরুত্বপূর্ণ, সর্বশেষ যোগ করা অগ্রাধিকার দেওয়া হবে, কারণ দ্রষ্টব্য টেবিলটি
+    সর্বশেষ থেকে পুরানো পর্যন্ত ডিফল্টরূপে বাছাই করা হয়েছে।
 extras:
   version: সংস্করণ
   relaunch: পুনরায় চালু
@@ -168,11 +182,9 @@ shortcuts:
     move_to_workspace_9: ওয়ার্কস্পেস 9 এ যান
     reserve_float: রিজার্ভ ফ্লোট
     send_to_workspace_3: ওয়ার্কস্পেস 3 এ প্রেরণ করুন
-    switch_workspace_1: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
     switch_workspace_7: ওয়ার্কস্পেস 7 এ স্যুইচ করুন
     focus_bottom: ফোকাস নীচে
     move_to_workspace_1: ওয়ার্কস্পেস 1 এ যান
-    switch_workspace_0: ওয়ার্কস্পেস 0 এ স্যুইচ করুন
     move_to_workspace_0: ওয়ার্কস্পেস 0 এ যান
     decrease_width: প্রস্থ হ্রাস
     restore_sizes: আকার পুনরুদ্ধার
@@ -184,10 +196,18 @@ shortcuts:
     focus_left: ফোকাস বাম
     move_to_workspace_8: ওয়ার্কস্পেস 8 এ যান
     reserve_top: রিজার্ভ শীর্ষ
+    switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
+    switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
+    misc_open_settings: ওপেন সেটিংস
+    misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)
+    misc_toggle_win_event_tracing: টগল উইন ইভেন্ট ট্রেসিং (লগস)
+    toggle_launcher: টগল
   enable_tooltip: >-
     আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
     অক্ষম করুন
   enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
+  reset: ডিফল্টে পুনরায় সেট করুন
+  readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
 inProgress: চলমান...
 cancel: বাতিল
 delete: মুছে ফেলা
@@ -195,3 +215,33 @@ save: সংরক্ষণ
 open: খোলা
 quit: প্রস্থান
 loading: লোড হচ্ছে ...
+vd:
+  strategy:
+    seelen: সিলেন
+    native: নেটিভ
+    label: ভার্চুয়াল ডেস্কটপ কৌশল
+  disabled_windows_version: নেটিভ ভার্চুয়াল ডেস্কটপ কৌশল আপনার উইন্ডোজ সংস্করণের জন্য উপলব্ধ নয়।
+save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
+monitors_configurations:
+  label: '{{সূচক}} মনিটর'
+wall:
+  enable: সিলেন প্রাচীর সক্ষম করুন
+  backgrounds: ওয়ালপেপার
+  no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
+  interval: প্রতি ওয়ালপেপার পরিবর্তন করুন (সেকেন্ড)
+app_launcher:
+  runners:
+    explorer: চালানো
+    cmd: কমান্ড
+    label: রানার্স
+  enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
+  monitor: দেখানোর জন্য মনিটর
+inherit: উত্তরাধিকারী
+insert: .োকান
+more: আরও
+close: বন্ধ
+update:
+  available: আপডেট উপলব্ধ!
+  channel: আপডেট চ্যানেল
+  downloading: ডাউনলোড ...
+miscellaneous: বিবিধ

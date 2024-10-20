@@ -14,6 +14,10 @@ header:
     developer: Arendaja
     info: Teave
     seelen_bar: Väljamõeldud tööriistariba
+    seelen_wall: Sein
+    seelen_rofi: Rakenduse käivitaja
+    virtual_desk: Virtuaalsed töölauad
+    home: Kodu
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
@@ -41,6 +45,7 @@ general:
   accent_color: Aktsentvärv
   wallpaper:
     select: Valige tapeet
+  date_format: Kuupäeva vorming
 toolbar:
   placeholder:
     author: Autor
@@ -48,6 +53,8 @@ toolbar:
     select: Tööriistariba struktuur
   height: Kõrgus
   enable: Luba väljamõeldud tööriistariba
+  auto_hide: Automaatne peida
+  label: Tööriistariba
 wm:
   border:
     width: Piirilaius
@@ -55,13 +62,12 @@ wm:
     enable: Luba akna piir
   space_between_containers: Konteinerite vaheline ruum
   workspace_offset: Tööruumide nihkumine (veerised)
-  enable: Luba aknahaldur
   author: Autor
   description: Kirjeldus
   layout: Paigutus
   workspace_padding: Tööruumide polsterdus
   resize_delta: Suuruse muutmine delta (%)
-  disabled_windows_version: Aknahaldur pole teie Windowsi versiooni jaoks saadaval.
+  enable: Luba plaatide aknahaldur
 weg:
   items:
     visible_separators: Nähtavad eraldajad
@@ -75,8 +81,8 @@ weg:
   gap: Lüngad
   auto_hide: Automaatne peida
   margin: Marginaal
-  dock_side: Doki pool
   enable: Luba dokk/ülesanderiba
+  dock_side: Positsioon
 devtools:
   app_folders: Rakenduse kaustad
   data_folder: Andmekaust
@@ -92,6 +98,7 @@ apps_configurations:
       unmanage: Juhtimine
       pinned: Kinnitatud
       float: Ujuk
+      hidden: Peida doki/ülesanderiba eest
     category: Kategooria
     category_placeholder: Mitte ükski
     monitor_placeholder: Mitte ükski
@@ -99,7 +106,6 @@ apps_configurations:
     ok_readonly: Redigeerimine uuena
     ok_create: Looma
     title_create: '{{Name}} loomine'
-    options_label: Lisavalikud
     workspace_placeholder: Mitte ükski
     monitor: Ekraan
     name: Nimetus
@@ -107,6 +113,9 @@ apps_configurations:
     title_readonly: Vaatamine {{nimi}}
     bindings: Sidumine (pange tähele mõlemat suvandit)
     ok_edit: Värskendama
+    weg_options_label: Dokk/ülesanderiba valikud
+    wm_options_label: Aknahalduri valikud
+    options_label: Lisavalikud
   identifier:
     negation: Eitav sobitamine
     matching_strategy: Sobiv strateegia
@@ -129,6 +138,10 @@ apps_configurations:
   new: Uus
   confirm_delete_title: Kinnitage kustutamine
   bundled_title: Rakenduse konfiguratsioon, mis on komplekteeritud Seeleniga
+  extra_info: >-
+    Seeleni kasutajaliides kasutab rakenduse kohta ainult ühte identifikaatorit
+    (leiti esimene vaste), seega on määramise järjekord oluline, viimati lisatud
+    on prioriteediks, kuna tabel sorteeritakse vaikimisi uusimast vanani.
 extras:
   exit: Lõpeta/väljumine
   relaunch: Taaskäivitama
@@ -139,7 +152,6 @@ extras:
 shortcuts:
   labels:
     increase_width: Suurendama laiust
-    switch_workspace_1: Lülitage tööalale 1
     send_to_workspace_9: Saada Workspace 9
     move_to_workspace_7: Kolige tööruumi 7
     switch_workspace_2: Lülitage tööruum 2
@@ -150,7 +162,6 @@ shortcuts:
     move_to_workspace_5: Kolige tööruumi 5
     focus_left: Fookus vasakule
     switch_workspace_4: Lülitage tööruum 4
-    switch_workspace_0: Lülitage tööalale 0
     focus_top: Fookus ülaosa
     focus_latest: Keskenduda uusim
     move_to_workspace_0: Liikuge tööruumi 0
@@ -184,8 +195,16 @@ shortcuts:
     switch_workspace_3: Lülitage tööruum 3
     switch_workspace_5: Lülitage tööruum 5
     switch_workspace_9: Lülitage Workspace 9 -le
+    switch_workspace_1: Lülitage tööruum 2
+    switch_workspace_0: Lülitage tööalale 1
+    misc_open_settings: Avatud sätted
+    misc_toggle_win_event_tracing: Lülitage võidu sündmuste jälgimine (logid)
+    misc_toggle_lock_tracing: Lülitage lukustusjälg (logid)
+    toggle_launcher: Lülituma
   enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
   enable: Lubage integreeritud otseteed (AHK)
+  reset: Lähtestage vaikeseadetele
+  readonly_tooltip: See on kirjutuskaitstud otsetee
 inProgress: Pooleli ...
 delete: Kustutama
 quit: Loobuma
@@ -193,3 +212,35 @@ save: Kokkuhoid
 loading: Laadimine ...
 cancel: Tühistama
 open: Avatud
+vd:
+  strategy:
+    seelen: Seelen
+    native: Põliselanik
+    label: Virtuaalne töölaua strateegia
+  disabled_windows_version: >-
+    Natiivse virtuaalse töölaua strateegia pole teie Windowsi versiooni jaoks
+    saadaval.
+save_and_restart: Salvesta ja taaskäivitage
+monitors_configurations:
+  label: Monitor {{indeks}}
+wall:
+  backgrounds: Taustapildid
+  interval: Muutke tapeet iga (sekundit)
+  no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
+  enable: Luba Seeleni sein
+app_launcher:
+  runners:
+    cmd: Käsk
+    label: Jooksjad
+    explorer: Jooksma
+  enable: Luba rakenduse käivitaja
+  monitor: Monitor, mida näidata
+more: Rohkem
+insert: Sisestama
+inherit: Pärima
+close: Sulgur
+update:
+  available: Värskendage saadaval!
+  channel: Värskenduskanal
+  downloading: Allalaadimine ...
+miscellaneous: Mitmesuguseid

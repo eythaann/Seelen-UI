@@ -1,19 +1,15 @@
-import { UserSettings } from '../../../../../shared.interfaces';
-import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
-import { loadThemeCSS, setColorsAsCssVariables } from '../../../../shared';
-import { FileChange } from '../../../../shared/events';
-import { FancyToolbar } from '../../../../shared/schemas/FancyToolbar';
-import i18n from '../../../i18n';
 import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
+import { debounce, throttle } from 'lodash';
+import { SeelenEvent, UIColors } from 'seelen-core';
+import { FancyToolbarSettings } from 'seelen-core';
 
 import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
 import {
-  ActiveApp,
   AppNotification,
   Battery,
   MediaChannelTransportData,
@@ -21,21 +17,51 @@ import {
   NetworkAdapter,
   PowerStatus,
   TrayInfo,
-  UIColors,
+  Workspace,
+  WorkspaceId,
 } from './domain';
+
+import { UserSettings } from '../../../../../shared.interfaces';
+import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
+import { FocusedApp } from '../../../../shared/interfaces/common';
+import { StartThemingTool } from '../../../../shared/styles';
+import i18n from '../../../i18n';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
+
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
 
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
 
-  await view.listen<ActiveApp | null>('focus-changed', (e) => {
-    store.dispatch(RootActions.setFocused(e.payload));
+  await view.listen<boolean>('set-auto-hide', (event) => {
+    store.dispatch(RootActions.setIsOverlaped(event.payload));
   });
 
-  await listenGlobal<any>(FileChange.Settings, async (_event) => {
+  const onFocusChanged = debounce((app: FocusedApp) => {
+    store.dispatch(RootActions.setFocused(app));
+  }, 200);
+  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
+    onFocusChanged(e.payload);
+    if (e.payload.name != 'Seelen UI') {
+      onFocusChanged.flush();
+    }
+  });
+
+  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async (_event) => {
     await loadStore();
   });
 
@@ -47,11 +73,11 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setBatteries(event.payload));
   });
 
-  await listenGlobal<string[]>('workspaces-changed', (event) => {
+  await listenGlobal<Workspace[]>('workspaces-changed', (event) => {
     store.dispatch(RootActions.setWorkspaces(event.payload));
   });
 
-  await listenGlobal<number>('active-workspace-changed', (event) => {
+  await listenGlobal<WorkspaceId>('active-workspace-changed', (event) => {
     store.dispatch(RootActions.setActiveWorkspace(event.payload));
   });
 
@@ -63,9 +89,12 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
-  await listenGlobal<MediaDevice[]>('media-outputs', (event) => {
-    store.dispatch(RootActions.setMediaOutputs(event.payload));
-  });
+  await listenGlobal<MediaDevice[]>(
+    'media-outputs',
+    throttle((event) => {
+      store.dispatch(RootActions.setMediaOutputs(event.payload));
+    }, 20),
+  );
 
   await listenGlobal<MediaDevice[]>('media-inputs', (event) => {
     store.dispatch(RootActions.setMediaInputs(event.payload));
@@ -91,17 +120,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
-  });
-
-  await listenGlobal(FileChange.Themes, async () => {
-    const userSettings = await new UserSettingsLoader().load();
-    loadThemeCSS(userSettings);
-  });
-
-  await listenGlobal(FileChange.Placeholders, async () => {
+  await listenGlobal(SeelenEvent.StatePlaceholdersChanged, async () => {
     if (IsSavingCustom.current) {
       IsSavingCustom.current = false;
       return;
@@ -110,6 +129,8 @@ export async function registerStoreEvents() {
     setPlaceholder(userSettings);
   });
 
+  await initUIColors();
+  await StartThemingTool();
   await view.emitTo(view.label, 'store-events-ready');
 }
 
@@ -130,14 +151,14 @@ export async function loadStore() {
 
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));
+  store.dispatch(RootActions.setDateFormat(userSettings.jsonSettings.dateFormat));
 
-  loadThemeCSS(userSettings);
   setPlaceholder(userSettings);
 
   store.dispatch(RootActions.setEnv(userSettings.env));
 }
 
-export function loadSettingsCSS(settings: FancyToolbar) {
+export function loadSettingsCSS(settings: FancyToolbarSettings) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-height', `${settings.height}px`);

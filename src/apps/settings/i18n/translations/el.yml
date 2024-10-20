@@ -14,6 +14,10 @@ header:
     shortcuts: Συντομεύσεις
     specific_apps: Συγκεκριμένες εφαρμογές
     seelen_weg: Λέσχη εργασιών
+    seelen_wall: Ο τοίχος
+    seelen_rofi: Εκτοξευτής εφαρμογών
+    virtual_desk: Εικονικοί επιτραπέζιοι
+    home: Σπίτι
 start:
   message_accent: Βελτιστοποιήστε την παραγωγικότητά σας με στυλ!
   title: Καλως ΗΡΘΑΤΕ!
@@ -41,6 +45,7 @@ general:
   accent_color: Έμφαση στο χρώμα
   wallpaper:
     select: Επιλέξτε ταπετσαρία
+  date_format: Μορφή ημερομηνίας
 toolbar:
   placeholder:
     select: Δομή γραμμής εργαλείων
@@ -48,6 +53,8 @@ toolbar:
     description: Περιγραφή
   height: Υψος
   enable: Ενεργοποίηση φανταχτερά εργαλεία εργαλείων
+  auto_hide: Αυτόματη απόκρυψη
+  label: Γραμμή εργαλείων
 wm:
   border:
     offset: Μετατόπιση των συνόρων
@@ -57,11 +64,10 @@ wm:
   author: Συγγραφέας
   layout: Διάταξη
   workspace_padding: Πλατύφυλλα
-  enable: Ενεργοποίηση διαχειριστή παραθύρων
   workspace_offset: Μετατόπιση χώρων εργασίας (περιθώρια)
   space_between_containers: Χώρος μεταξύ των εμπορευματοκιβωτίων
   resize_delta: Αλλαγή μεγέθους Delta (%)
-  disabled_windows_version: Ο διαχειριστής παραθύρων δεν είναι διαθέσιμος για την έκδοση των Windows.
+  enable: Ενεργοποίηση διαχειριστή παραθύρων πλακιδίων
 weg:
   items:
     size: Μέγεθος αντικειμένου
@@ -76,7 +82,7 @@ weg:
   auto_hide: Αυτόματη απόκρυψη
   label: Λέσχη εργασιών
   enable: Ενεργοποίηση λίστα/γραμμή εργασιών
-  dock_side: Πλευρά αποβάθρας
+  dock_side: Θέση
 devtools:
   data_folder: Φάκελος δεδομένων
   custom_config_file: Φόρτωση προσαρμοσμένου αρχείου ρυθμίσεων
@@ -92,8 +98,8 @@ apps_configurations:
       pinned: Καρφωμένος
       force: Διαχειριστείτε τη δύναμη
       unmanage: Μη διαχείριση
+      hidden: Απόκρυψη από τη γραμμή αποβάθρας/εργασιών
     title_readonly: Προβολή {{όνομα}}
-    options_label: Επιπλέον επιλογές
     title_create: Δημιουργία {{name}}
     bindings: Σύνδεση (σημειώστε ότι και οι δύο επιλογές απαιτούνται)
     ok_readonly: Επεξεργαστείτε ως νέο
@@ -107,6 +113,9 @@ apps_configurations:
     workspace_placeholder: Κανένας
     workspace: Χώρος εργασίας
     title_edit: Επεξεργασία {{όνομα}}
+    weg_options_label: Επιλογές της γραμμής αποβάθρας/εργασιών
+    wm_options_label: Επιλογές διαχείρισης παραθύρων
+    options_label: Επιπλέον επιλογές
   identifier:
     or: Ή
     id: Αναγνωριστικό
@@ -129,6 +138,12 @@ apps_configurations:
     Αυτές οι συνδεδεμένες διαμορφώσεις δεν είναι επεξεργάσιμες και έχουν
     σχεδιαστεί για να σας παρέχουν την καλύτερη εμπειρία χωρίς προσαρμογή.
     Διαμορφώνουν αυτόματα τις πιο συνηθισμένες εφαρμογές για εσάς.
+  extra_info: >-
+    Η διεπαφή χρήστη Seelen χρησιμοποιεί μόνο ένα αναγνωριστικό ανά εφαρμογή
+    (βρέθηκε η πρώτη αντιστοίχιση), επομένως η σειρά στον τρόπο καθορισμού είναι
+    σημαντική, τα πιο πρόσφατα που προστέθηκαν θα τεθούν σε προτεραιότητα, καθώς
+    σημειώστε ότι ο πίνακας ταξινομείται από προεπιλογή από το πιο πρόσφατο στο
+    παλαιό.
 extras:
   relaunch: Ξεκίνησα ξανά
   exit: Εγκατάλειψη/έξοδο
@@ -143,7 +158,6 @@ shortcuts:
     reserve_float: Επιφυλάκισμα
     reserve_right: Διατηρήστε το δικαίωμα
     switch_workspace_4: Μεταβείτε στο χώρο εργασίας 4
-    switch_workspace_1: Μεταβείτε στο χώρο εργασίας 1
     reserve_bottom: Αποθεματικός
     focus_bottom: Επικεντρωμένος κάτω
     focus_top: Επικεντρώνεται στην κορυφή
@@ -154,7 +168,6 @@ shortcuts:
     reserve_top: Επιφυλάξτε την κορυφή
     reserve_left: Αποθεματικό αριστερά
     switch_workspace_7: Μεταβείτε στο χώρο εργασίας 7
-    switch_workspace_0: Μεταβείτε στο χώρο εργασίας 0
     send_to_workspace_6: Αποστολή στο χώρο εργασίας 6
     increase_height: Ύψος αύξησης
     send_to_workspace_8: Αποστολή στο χώρο εργασίας 8
@@ -184,10 +197,18 @@ shortcuts:
     send_to_workspace_0: Αποστολή στο χώρο εργασίας 0
     send_to_workspace_9: Αποστολή στο χώρο εργασίας 9
     move_to_workspace_0: Μετακίνηση στο χώρο εργασίας 0
+    switch_workspace_1: Μεταβείτε στο χώρο εργασίας 2
+    switch_workspace_0: Μεταβείτε στο χώρο εργασίας 1
+    misc_toggle_lock_tracing: Εναλλαγή Lock Tracing (αρχεία καταγραφής)
+    misc_toggle_win_event_tracing: Εναλλαγή εντοπισμού συμβάντων Win (Logs)
+    misc_open_settings: Ανοίξτε τις ρυθμίσεις
+    toggle_launcher: Μπαρέτα
   enable: Ενεργοποίηση ολοκληρωμένων συντομεύσεων (AHK)
   enable_tooltip: >-
     Απενεργοποιήστε εάν θα εφαρμόσετε τις δικές σας συντομεύσεις χρησιμοποιώντας
     το API Seelen Core
+  reset: Επαναφορά σε προεπιλογές
+  readonly_tooltip: Αυτή είναι μια συντόμευση μόνο για ανάγνωση
 loading: Φόρτωση...
 inProgress: Σε εξέλιξη...
 cancel: Ματαίωση
@@ -195,3 +216,35 @@ delete: Διαγράφω
 quit: Εγκαταλείπω
 save: Αποθηκεύσετε
 open: Ανοιξε
+vd:
+  strategy:
+    native: Ντόπιος
+    label: Εικονική στρατηγική επιφάνειας εργασίας
+    seelen: Σένεν
+  disabled_windows_version: >-
+    Η εγγενής στρατηγική εικονικής επιφάνειας εργασίας δεν είναι διαθέσιμη για
+    την έκδοση των Windows.
+save_and_restart: Αποθήκευση & επανεκκίνηση
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
+  enable: Ενεργοποιήστε το Wall Seelen
+  interval: Αλλάξτε ταπετσαρία κάθε (δευτερόλεπτα)
+  backgrounds: Ταπετσαρίες
+app_launcher:
+  runners:
+    explorer: Τρέξιμο
+    cmd: Εντολή
+    label: Δρομείς
+  monitor: Παρακολούθηση για εμφάνιση
+  enable: Ενεργοποίηση εκτοξευτή εφαρμογών
+inherit: Κληρονομώ
+more: Περισσότερο
+insert: Εισάγω
+close: Κοντά
+update:
+  available: Διαθέσιμη ενημέρωση!
+  channel: Κανάλι ενημέρωσης
+  downloading: Λήψη ...
+miscellaneous: Ανάμικτος

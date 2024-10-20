@@ -14,6 +14,10 @@ header:
     shortcuts: शॉर्टकट
     monitors: पर नज़र रखता है
     info: जानकारी
+    seelen_wall: दीवार
+    seelen_rofi: ऐप लॉन्चर
+    virtual_desk: आभासी डेस्कटॉप्स
+    home: घर
 start:
   message_accent: शैली के साथ अपनी उत्पादकता का अनुकूलन करें!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: स्वरोंका रंग
   wallpaper:
     select: वॉलपेपर का चयन करें
+  date_format: तारिख का प्रारूप
 toolbar:
   placeholder:
     author: लेखक
@@ -48,6 +53,8 @@ toolbar:
     description: विवरण
   height: ऊंचाई
   enable: फैंसी टूलबार सक्षम करें
+  auto_hide: खुद से छिपना
+  label: उपकरण पट्टी
 wm:
   border:
     width: सीमा चौड़ाई
@@ -60,8 +67,7 @@ wm:
   description: विवरण
   workspace_padding: कार्यक्षेत्र पैडिंग
   layout: लेआउट
-  enable: विंडो मैनेजर सक्षम करें
-  disabled_windows_version: विंडो मैनेजर आपके विंडोज संस्करण के लिए उपलब्ध नहीं है।
+  enable: टाइलिंग विंडो मैनेजर सक्षम करें
 weg:
   items:
     visible_separators: दृश्य विभाजक
@@ -74,9 +80,9 @@ weg:
   label: डॉक/टास्टरबार
   gap: अंतर
   enable: डॉक/टास्कबार सक्षम करें
-  dock_side: डॉक साइड
   auto_hide: खुद से छिपना
   margin: अंतर
+  dock_side: पद
 devtools:
   install_folder: स्थापना फ़ोल्डर
   load: भार
@@ -92,6 +98,7 @@ apps_configurations:
       pinned: पिन की गई
       unmanage: अमानवीय
       float: तैरना
+      hidden: डॉक/टास्कबार से छिपाएं
     title_create: '{{नाम}} बनाना'
     ok_edit: अद्यतन
     ok_readonly: नए के रूप में संपादित करें
@@ -103,10 +110,12 @@ apps_configurations:
     monitor: निगरानी करना
     category: वर्ग
     workspace_placeholder: कोई नहीं
-    options_label: अतिरिक्त विकल्प
     name: नाम
     ok_create: बनाएं
     title_readonly: '{{नाम}} देखना'
+    wm_options_label: विंडो मैनेजर विकल्प
+    weg_options_label: डॉक/टास्कबार विकल्प
+    options_label: अतिरिक्त विकल्प
   identifier:
     remove: ब्लॉक हटाएं
     add_block: ब्लॉक जोड़ें
@@ -129,6 +138,11 @@ apps_configurations:
   swap: बदलना
   import: आयात
   search: खोज
+  extra_info: >-
+    Seelen UI प्रति ऐप केवल एक पहचानकर्ता का उपयोग करता है (पहला मैच मिला) इसलिए
+    कि कैसे विशिष्ट है, इसका क्रम महत्वपूर्ण है, नवीनतम जोड़ा को प्राथमिकता दी
+    जाएगी, क्योंकि ध्यान दें कि तालिका को डिफ़ॉल्ट रूप से नवीनतम से पुराने तक
+    सॉर्ट किया गया है।
 extras:
   discord: कलह
   relaunch: 'पुन: लॉन्च'
@@ -138,7 +152,6 @@ extras:
   version: संस्करण
 shortcuts:
   labels:
-    switch_workspace_1: कार्यक्षेत्र 1 पर स्विच करें
     reserve_right: आरक्षित अधिकार
     move_to_workspace_1: कार्यक्षेत्र 1 पर जाएं
     switch_workspace_2: कार्यक्षेत्र 2 पर स्विच करें
@@ -179,15 +192,22 @@ shortcuts:
     send_to_workspace_6: कार्यक्षेत्र 6 को भेजें
     move_to_workspace_5: कार्यक्षेत्र 5 पर जाएं
     send_to_workspace_9: कार्यक्षेत्र 9 को भेजें
-    switch_workspace_0: कार्यक्षेत्र पर स्विच करें 0
     switch_workspace_7: कार्यक्षेत्र 7 पर स्विच करें
     reserve_float: रिजर्व फ्लोट
     switch_workspace_3: कार्यक्षेत्र 3 पर स्विच करें
     move_to_workspace_7: कार्यक्षेत्र 7 पर जाएं
+    switch_workspace_1: कार्यक्षेत्र 2 पर स्विच करें
+    switch_workspace_0: कार्यक्षेत्र 1 पर स्विच करें
+    misc_open_settings: खुली सेटिंग
+    misc_toggle_lock_tracing: टॉगल लॉक ट्रेसिंग (लॉग)
+    misc_toggle_win_event_tracing: टॉगल जीत इवेंट ट्रेसिंग (लॉग)
+    toggle_launcher: टॉगल
   enable: एकीकृत शॉर्टकट (AHK) सक्षम करें
   enable_tooltip: >-
     अक्षम करें यदि आप सेलेन कोर एपीआई का उपयोग करके अपने स्वयं के शॉर्टकट को
     लागू करेंगे
+  reset: डिफ़ॉल्ट पर पुनः सेट करें
+  readonly_tooltip: यह केवल एक रीड-शॉर्टकट है
 inProgress: प्रगति पर है...
 save: बचाना
 open: खुला
@@ -195,3 +215,33 @@ delete: मिटाना
 cancel: रद्द करना
 loading: लोड हो रहा है...
 quit: छोड़ना
+vd:
+  strategy:
+    native: देशी
+    seelen: सीलेन
+    label: आभासी डेस्कटॉप रणनीति
+  disabled_windows_version: देशी वर्चुअल डेस्कटॉप रणनीति आपके विंडोज संस्करण के लिए उपलब्ध नहीं है।
+save_and_restart: सहेजें और पुनरारंभ करें
+monitors_configurations:
+  label: मॉनिटर {{इंडेक्स}}
+wall:
+  backgrounds: वॉलपेपर
+  enable: सेलेन वॉल को सक्षम करें
+  no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
+  interval: वॉलपेपर हर (सेकंड) बदलें
+app_launcher:
+  runners:
+    explorer: दौड़ना
+    cmd: आज्ञा
+    label: धावकों
+  monitor: दिखाने के लिए मॉनिटर
+  enable: ऐप लॉन्चर सक्षम करें
+inherit: इनहेरिट
+more: अधिक
+insert: डालना
+close: बंद करना
+update:
+  available: उपलब्ध अद्यतन!
+  channel: अद्यतन चैनल
+  downloading: डाउनलोड करना ...
+miscellaneous: मिश्रित

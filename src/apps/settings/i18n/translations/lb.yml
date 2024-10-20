@@ -14,6 +14,10 @@ header:
     info: Informatioun
     shortcuts: Ofkierpsen
     seelen_weg: Dock / Taskbar
+    seelen_wall: D'Mauer
+    seelen_rofi: App launcher
+    virtual_desk: Virtuell Desktops
+    home: Doheem
 start:
   title: Wëllkomm!
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
@@ -41,6 +45,7 @@ general:
   accent_color: Akzenter Faarf
   wallpaper:
     select: Wielt Wallpaper
+  date_format: Datum Format
 toolbar:
   placeholder:
     select: Toolbar Struktur
@@ -48,12 +53,13 @@ toolbar:
     description: Broessdatsch
   enable: Aktivéiert Fore Toolbar
   height: Héicht
+  auto_hide: Automatesch
+  label: TO-tcstar
 wm:
   border:
     width: Grenz Breet
     enable: Aktivéiert Fenster Grenz
     offset: Grenz Offäll
-  enable: Aktivéiert Fënstere Manager
   resize_delta: Resize Delta (%)
   description: Broessdatsch
   space_between_containers: Raum tëscht Behälter
@@ -61,7 +67,7 @@ wm:
   layout: Lueden
   workspace_offset: Workspaces Offset (Rand)
   workspace_padding: Aarbechtsberäich padding
-  disabled_windows_version: Den Fenstermanager ass net fir Är Windows Versioun verfügbar.
+  enable: Aktivéiert Fenster-Manager
 weg:
   items:
     size: Telefonsgrouss
@@ -72,11 +78,11 @@ weg:
   width: Breet
   label: Dock / Taskbar
   padding: Padding
-  dock_side: Dock Säit
   auto_hide: Automatesch
   margin: Den Jean-Margin
   gap: Knënn
   enable: Aktivéiert Dock / Taskbar
+  dock_side: Positioun un
 devtools:
   app_folders: App Classeure
   enable: Aktivéiert Entwéckler Tools
@@ -92,6 +98,7 @@ apps_configurations:
       pinned: Verbonnen
       force: Kraaft managen
       unmanage: Unmanage
+      hidden: Verstoppen vun Dock / Taskbar
     title_readonly: '{{{Numm}}'
     category_placeholder: Keen
     name: Numm vum Numm
@@ -103,10 +110,12 @@ apps_configurations:
     ok_edit: Olaangs
     bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
     workspace: Konschtpas
-    options_label: Extra Optiounen
     title_edit: Ännerung {{Numm}}
     title_create: Erstellen {{Numm}}
     ok_create: Erreeiert eng kreéieren
+    weg_options_label: Dock / Taskbaroptiounen
+    wm_options_label: Fenster Manager Optiounen
+    options_label: Extra Optiounen
   identifier:
     remove: Läschen Block
     matching_strategy: Passende Strategie
@@ -129,6 +138,11 @@ apps_configurations:
     Dës gebündelt Konfiguratiounen sinn net geännert a sinn entwéckelt fir Iech
     déi bescht Erfahrung ouni Personnalisatioun ze ginn. Si konfiguréieren
     automatesch déi heefegst Uwendungen fir Iech.
+  extra_info: >-
+    Svelt UI benotzen nëmmen een identifizéierer pro App (Virdeel net fonnt),
+    sou wéi kënne bestëmmten onbestëmmt ass wichteg, well den Dësch bestëmmt
+    gëtt geschafaf, wéi Den Tabell aus alstoën ass, sou wéi den Dësch par
+    rapport ass.
 extras:
   version: Erëm
   links: Offiziell Linken
@@ -151,7 +165,6 @@ shortcuts:
     switch_workspace_9: Wiesselt op Workspace 9
     switch_workspace_3: Wiesselt op Workspace 3
     switch_workspace_8: Schalt op Workspace 8
-    switch_workspace_0: Schalt op Aarbechtsberäich 0
     focus_latest: Fokusséieren dat lescht
     focus_top: Fokusséieren Top
     move_to_workspace_1: Gitt op Aarbechtsberäich 1
@@ -169,7 +182,6 @@ shortcuts:
     move_to_workspace_8: Plënnert op Workspace 8
     move_to_workspace_2: Plënnert op Aarbechtsberäich 2
     send_to_workspace_3: Schéckt op Aarbechtsberäich 3
-    switch_workspace_1: Schalt op Aarbechtsberäich 1
     move_to_workspace_0: Plënnert op Workspace 0
     move_to_workspace_9: Plënnert op Workspace 9
     move_to_workspace_7: Plënnert op Workspace 7
@@ -184,8 +196,16 @@ shortcuts:
     reserve_top: Reserve Top
     send_to_workspace_2: Schéckt op Aarbechtsberäich 2
     reserve_float: Reservéiert Float
+    switch_workspace_1: Schalt op Aarbechtsberäich 2
+    switch_workspace_0: Schalt op Aarbechtsberäich 1
+    misc_open_settings: Oppen Astellungen
+    misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
+    misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
+    toggle_launcher: Talzkle
   enable: Aktivéiert integréiert Ofkiirzungen (AHK)
   enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
+  reset: Reset op Defaults
+  readonly_tooltip: Dëst ass e Lies-nëmme Mangel
 inProgress: A Beaarbechtung...
 loading: Lueden ...
 open: Ëmen e gratis
@@ -193,3 +213,35 @@ delete: Läschen
 cancel: Ofbriechen
 quit: Ness
 save: Spuerwäit
+vd:
+  strategy:
+    label: Virtuell Desktop Strategie
+    seelen: Gesieg
+    native: Native
+  disabled_windows_version: >-
+    Gebierteg virtuell Desktop Strategie ass net fir Är Windows Versioun
+    verfügbar.
+save_and_restart: Spuert & nei starten
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Wallpapers
+  interval: Ännerung Wallpaper all (Sekonnen)
+  enable: Aktivéiert Sendelen Mauer
+  no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
+app_launcher:
+  runners:
+    cmd: Kommun de Kommentar
+    label: Leefer
+    explorer: Lafe
+  enable: Aktivéiert App Launcher
+  monitor: Monitor fir ze weisen
+more: Méi kleng
+insert: INor andafen
+inherit: Ontherrit
+close: Zoumaachen
+update:
+  available: Update verfügbar!
+  channel: Update Kanal
+  downloading: NËMMEN ...
+miscellaneous: Erleeën

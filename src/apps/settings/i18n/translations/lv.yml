@@ -14,6 +14,10 @@ header:
     general: Ģenerāldirektors
     seelen_weg: Doks/uzdevumjosla
     monitors: Monitori
+    seelen_wall: Siena
+    seelen_rofi: Lietotņu palaišana
+    virtual_desk: Virtuālās galddatori
+    home: Mājas
 start:
   message_accent: Optimizējiet savu produktivitāti ar stilu!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Akcents
   wallpaper:
     select: Atlasiet fona attēlu
+  date_format: Datuma formāts
 toolbar:
   placeholder:
     author: Autors
@@ -48,6 +53,8 @@ toolbar:
     select: Rīkjoslas struktūra
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
+  auto_hide: Auto paslēpt
+  label: Rīkjosla
 wm:
   border:
     enable: Iespējot loga robežu
@@ -55,13 +62,12 @@ wm:
     width: Apmales platums
   space_between_containers: Telpa starp konteineriem
   author: Autors
-  enable: Iespējot logu pārvaldnieku
   resize_delta: Delta izmēra maiņa (%)
   workspace_offset: Darbvietu kompensācija (malas)
   layout: Izkārtojums
   workspace_padding: Darbvietas polsterējums
   description: Apraksts
-  disabled_windows_version: Logu pārvaldnieks nav pieejams jūsu Windows versijai.
+  enable: Iespējot flīzēšanas logu pārvaldnieku
 weg:
   items:
     visible_separators: Redzami atdalītāji
@@ -76,7 +82,7 @@ weg:
   enable: Iespējot doku/uzdevumjoslu
   margin: Robeža
   width: Platums
-  dock_side: Doka puse
+  dock_side: Pozīcija
 devtools:
   install_folder: Instalēšanas mape
   enable: Iespējot izstrādātāju rīkus
@@ -92,6 +98,7 @@ apps_configurations:
       pinned: Saspiests
       force: Piespiest pārvaldīt
       unmanage: Pārvalde
+      hidden: Paslēpties no doka/uzdevumjoslas
     ok_edit: Atjaunināt
     monitor_placeholder: Neviens
     category: Kategorija
@@ -102,11 +109,13 @@ apps_configurations:
     workspace_placeholder: Neviens
     bindings: Iesiešana (ņemiet vērā, ka ir vajadzīgas abas opcijas)
     title_readonly: Skatoties {{name}}
-    options_label: Papildu iespējas
     category_placeholder: Neviens
     monitor: Kontrolēt
     workspace: Darba vieta
     ok_create: Radīt
+    weg_options_label: Doka/uzdevumjoslas iespējas
+    wm_options_label: Logu pārvaldnieka opcijas
+    options_label: Papildu iespējas
   identifier:
     and: UN
     matching_strategy: Atbilstības stratēģija
@@ -129,6 +138,11 @@ apps_configurations:
     sniegtu jums vislabāko pieredzi bez pielāgošanas. Tie automātiski konfigurē
     jums visizplatītākās lietojumprogrammas.
   delete: Dzēst
+  extra_info: >-
+    Seelen lietotāja saskarnē katrai lietotnei tiek izmantots tikai viens
+    identifikators (atrasta pirmā atbilstība), tāpēc ir svarīga secība, kādā tie
+    tiek norādīti, un jaunākajam pievienotajam tiks piešķirta prioritāte, jo
+    ņemiet vērā, ka tabula pēc noklusējuma tiek kārtota no jaunākā uz veco.
 extras:
   relaunch: Atsākšana
   links: Oficiālas saites
@@ -159,7 +173,6 @@ shortcuts:
     send_to_workspace_8: Nosūtīt uz darbvietu 8
     send_to_workspace_2: Nosūtīt uz darbvietu 2
     increase_height: Palielināt augstumu
-    switch_workspace_0: Pārslēdzieties uz darbvietu 0
     restore_sizes: Atjaunot izmērus
     send_to_workspace_4: Nosūtiet uz Workspace 4
     send_to_workspace_9: Nosūtīt uz darbvietu 9
@@ -168,7 +181,6 @@ shortcuts:
     reserve_bottom: Rezervēt apakšdaļu
     reserve_right: Rezervēt pa labi
     switch_workspace_5: Pārslēdzieties uz Workspace 5
-    switch_workspace_1: Pārslēdzieties uz 1. darbvietu
     reserve_left: Rezervēt pa kreisi
     switch_workspace_8: Pārslēdzieties uz darbvietu 8
     reserve_float: Rezerves pludiņš
@@ -184,8 +196,16 @@ shortcuts:
     reserve_stack: Rezerves kaudze
     decrease_width: Samazināt platumu
     send_to_workspace_3: Nosūtīt uz darbvietu 3
+    switch_workspace_0: Pārslēdzieties uz 1. darbvietu
+    switch_workspace_1: Pārslēdzieties uz darbvietu 2
+    misc_toggle_lock_tracing: Pārslēdziet slēdzenes izsekošanu (baļķi)
+    misc_open_settings: Atvērti iestatījumi
+    misc_toggle_win_event_tracing: Pārslēdziet uzvaru notikumu izsekošanu (žurnāli)
+    toggle_launcher: Pārslēgt
   enable: Iespējot integrētus saīsnes (AHK)
   enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
+  reset: Atiestatīt uz noklusējuma
+  readonly_tooltip: Tas ir tikai lasāms saīsne
 delete: Dzēst
 cancel: Atcelt
 loading: Iekraušana ...
@@ -193,3 +213,33 @@ quit: Atmest
 inProgress: Notiek ...
 open: Atvērt
 save: Ietaupīt
+vd:
+  strategy:
+    label: Virtuālā darbvirsmas stratēģija
+    seelen: Seelēna
+    native: Vietējais
+  disabled_windows_version: Vietējā virtuālā darbvirsmas stratēģija nav pieejama jūsu Windows versijai.
+save_and_restart: Saglabāt un restartēt
+monitors_configurations:
+  label: Monitors {{indekss}}
+wall:
+  enable: Iespējot Seelen Wall
+  no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
+  interval: Ikreiz nomainiet tapetes (sekundes)
+  backgrounds: Tapetes
+app_launcher:
+  runners:
+    explorer: Izkropļot
+    label: Skrējēji
+    cmd: Vadība
+  monitor: Uzraudzīt, lai parādītu
+  enable: Iespējot lietotņu palaišanas ierīci
+inherit: Mantot
+insert: Ievietot
+more: Vairāk
+close: Tuvs
+update:
+  available: Pieejams atjauninājums!
+  channel: Atjaunināt kanālu
+  downloading: Lejupielāde ...
+miscellaneous: Dažāds

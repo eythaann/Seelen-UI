@@ -1,14 +1,16 @@
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { resolveDataPath } from '../shared/config/infra';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 import { LoadCustomConfigFile } from './app';
+
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export function DeveloperTools() {
   const devTools = useSelector(newSelectors.devTools);
@@ -21,15 +23,19 @@ export function DeveloperTools() {
   }
 
   async function openSettingsFile() {
-    invoke('open_file', { path: await resolveDataPath('settings.json') });
+    invoke(SeelenCommand.OpenFile, { path: await resolveDataPath('settings.json') });
   }
 
   async function openInstallFolder() {
-    invoke('open_file', { path: await path.resourceDir() });
+    invoke(SeelenCommand.OpenFile, { path: await path.resourceDir() });
   }
 
   async function openDataFolder() {
-    invoke('open_file', { path: await path.appDataDir() });
+    invoke(SeelenCommand.OpenFile, { path: await path.appDataDir() });
+  }
+
+  async function simulateFullscreen(value: boolean) {
+    invoke(SeelenCommand.SimulateFullscreen, { value });
   }
 
   return (
@@ -62,6 +68,13 @@ export function DeveloperTools() {
         <SettingsOption>
           <span>{t('devtools.custom_config_file')}:</span>
           <Button onClick={LoadCustomConfigFile}>{t('devtools.load')}</Button>
+        </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <span>{t('devtools.simulate_fullscreen')}</span>
+          <Switch onChange={simulateFullscreen} />
         </SettingsOption>
       </SettingsGroup>
     </>

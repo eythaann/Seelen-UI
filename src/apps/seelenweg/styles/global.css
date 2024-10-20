@@ -1,5 +1,5 @@
 /**
- * The styles in this file are only structurals for Seelenweg,
+ * The styles in this file are only structural for Seelenweg,
  * all the design should be added to the default theme css.
  */
 body {
@@ -14,10 +14,32 @@ body {
 }
 
 /** Root Styles */
-.SeelenWeg {
+#root {
   height: min-content;
   width: min-content;
-  margin: var(--config-margin);
+  transition: transform 0.2s ease-in-out;
+
+  &:not(:hover) {
+    &:has(.taskbar.hidden.left) {
+      transform: translateX(calc(-100% + 1px));
+      border-right: 1px solid transparent;
+    }
+
+    &:has(.taskbar.hidden.right) {
+      transform: translateX(calc(100% - 1px));
+      border-left: 1px solid transparent;
+    }
+
+    &:has(.taskbar.hidden.top) {
+      transform: translateY(calc(-100% + 1px));
+      border-bottom: 1px solid transparent;
+    }
+
+    &:has(.taskbar.hidden.bottom) {
+      transform: translateY(calc(100% - 1px));
+      border-top: 1px solid transparent;
+    }
+  }
 }
 
 /** Taskbar Styles */
@@ -25,68 +47,33 @@ body {
   position: relative;
   overflow: visible;
   padding: var(--config-padding);
-  transition: transform 0.2s ease-in-out;
-
+  margin: var(--config-margin);
   display: flex;
   justify-content: var(--config-by-position-justify-content);
   align-items: var(--config-by-position-align-items);
   flex-direction: var(--config-by-position-flex-direction);
   gap: var(--config-space-between-items);
 
-  &.hidden {
-    &.left {
-      transform: translateX(calc(-100% - var(--config-margin)));
-    }
-
-    &.right {
-      transform: translateX(calc(100% + var(--config-margin)));
-    }
-
-    &.top {
-      transform: translateY(calc(-100% - var(--config-margin)));
-    }
-
-    &.bottom {
-      transform: translateY(calc(100% + var(--config-margin)));
-    }
-  }
-
   &.horizontal {
-    height: calc(
-      var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
-    );
+    height: calc(var(--config-item-size) + var(--config-padding) * 2);
     width: min-content;
 
     &.full-width {
       width: calc(100vw - var(--config-margin) * 2);
     }
-
-    &.top {
-      padding-top: calc(var(--config-padding) + var(--config-additional-side-padding));
-    }
-
-    &.bottom {
-      padding-bottom: calc(var(--config-padding) + var(--config-additional-side-padding));
-    }
   }
 
   &.vertical {
-    width: calc(
-      var(--config-item-size) + var(--config-additional-side-padding) + var(--config-padding) * 2
-    );
+    width: calc(var(--config-item-size) + var(--config-padding) * 2);
     height: min-content;
 
     &.full-width {
       height: calc(100vh - var(--config-margin) * 2);
     }
+  }
 
-    &.left {
-      padding-left: calc(var(--config-padding) + var(--config-additional-side-padding));
-    }
-
-    &.right {
-      padding-right: calc(var(--config-padding) + var(--config-additional-side-padding));
-    }
+  &:has(.weg-item-drag-container.dragging) {
+    pointer-events: none;
   }
 
   .weg-separator {
@@ -121,55 +108,6 @@ body {
 
       &:last-child {
         margin-right: calc(var(--config-space-between-items) * -1);
-      }
-    }
-  }
-
-  .weg-item {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .weg-item-open-sign {
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background-color: var(--color-gray-600);
-      opacity: 0;
-
-      &.weg-item-open-sign-active {
-        opacity: 1;
-      }
-
-      &.weg-item-open-sign-focused {
-        background-color: var(--config-accent-color);
-      }
-
-      .vertical & {
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .horizontal & {
-        left: 50%;
-        transform: translateX(-50%);
-      }
-
-      .top & {
-        bottom: calc(100% + var(--config-additional-side-padding));
-      }
-
-      .bottom & {
-        top: calc(100% + var(--config-additional-side-padding));
-      }
-
-      .left & {
-        right: calc(100% + var(--config-additional-side-padding));
-      }
-
-      .right & {
-        left: calc(100% + var(--config-additional-side-padding));
       }
     }
   }

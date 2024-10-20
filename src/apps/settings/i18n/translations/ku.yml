@@ -14,6 +14,10 @@ header:
     shortcuts: Kurtefîlm
     specific_apps: Serlêdanên taybetî
     monitors: Çavdêr
+    seelen_wall: Dîwar
+    seelen_rofi: App launcher
+    virtual_desk: Desktopên Virtual
+    home: Xane
 start:
   title: Bi xêr hatî!
   message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
@@ -40,6 +44,7 @@ general:
   accent_color: Rengê Accent
   wallpaper:
     select: Hilbijêre Wallpaper
+  date_format: Formata Date
 toolbar:
   placeholder:
     author: Nivîskar
@@ -47,6 +52,8 @@ toolbar:
     select: Struktura Toolbar
   height: Bilindî
   enable: Vebijêrkek Fancy Vebijêrin
+  auto_hide: Auto Hide
+  label: Toolbar
 wm:
   border:
     width: Berfirehiya sînor
@@ -57,10 +64,9 @@ wm:
   layout: Rêz
   workspace_offset: Karûbarên Workspan (Margins)
   space_between_containers: Cîhê di navbera konteyneran de
-  enable: Gerînendeyê Windeyê çalak bike
   workspace_padding: Karên xebitandinê
   resize_delta: Delta Resize (%)
-  disabled_windows_version: Rêvebirê pencereyê ji bo guhertoya weya Windows-ê nabe.
+  enable: Gerînendeyê Windowê ya Tilî bikar bînin
 weg:
   items:
     size: Mezinahiya tiştê
@@ -72,10 +78,10 @@ weg:
   width: Berî
   enable: Dock / Taskbar çalak bikin
   margin: Radihêj
-  dock_side: Dock aliyê
   auto_hide: Auto Hide
   label: Dock / Taskbar
   padding: Padding
+  dock_side: Rewş
 devtools:
   load: Dawetkirin
   app_folders: Pelên App
@@ -91,6 +97,7 @@ apps_configurations:
       force: Hêza birêvebirin
       pinned: Pinned
       unmanage: Nedar
+      hidden: Ji Dock / Taskbar veşêrin
     monitor: Lê gûhdarkirin
     monitor_placeholder: Netû
     category_placeholder: Netû
@@ -101,11 +108,13 @@ apps_configurations:
     title_readonly: Dîtin {{NAVEN}
     bindings: Binding (Nîşe her du vebijark hewce ne)
     workspace: Workspace
-    options_label: Vebijarkên zêde
     ok_create: Xûliqandin
     workspace_placeholder: Netû
     ok_readonly: Wekî nû biguherînin
     title_edit: Editting {name}}
+    weg_options_label: Vebijarkên Dock / Taskbar
+    wm_options_label: Vebijarkên rêveberê pencereyê
+    options_label: Vebijarkên zêde
   identifier:
     and: Û
     or: AN
@@ -128,6 +137,9 @@ apps_configurations:
   bundled_title: App Confic bi seelen
   confirm_delete: Ma hûn guman dikin ku hûn dixwazin vê konfigurasyonê / s jêbirin?
   swap: Sofet
+  extra_info: >-
+    Selen UI tenê yek nasnameyê bikar tînin (yekem maça ku tê dîtin) ji ber vê
+    yekê fermanê girîng e.
 extras:
   version: Awa
   links: Girêdanên fermî
@@ -156,12 +168,10 @@ shortcuts:
     switch_workspace_6: Switch to Workspace 6
     restore_sizes: Mezinan sererast bikin
     reserve_right: Rasterast rast bikin
-    switch_workspace_0: Switch to Workspace 0
     switch_workspace_7: Switch to Workspace 7
     reserve_left: Rezertê çepê
     focus_left: Focus çep
     send_to_workspace_2: Ji Workspace 2 re bişînin
-    switch_workspace_1: Switch to Workspace 1
     reserve_float: Float rezervan
     move_to_workspace_0: Move to Workspace 0
     send_to_workspace_0: Ji Workspace 0 re bişînin
@@ -183,10 +193,18 @@ shortcuts:
     move_to_workspace_2: Move to Workspace 2
     reserve_bottom: Binê binê
     move_to_workspace_6: Move to Workspace 6
+    switch_workspace_1: Switch to Workspace 2
+    switch_workspace_0: Switch to Workspace 1
+    misc_open_settings: Mîhengên vekirî
+    misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
+    toggle_launcher: Toggle
   enable: Kurtefîlmên entegre (AHK) çalak bikin
   enable_tooltip: >-
     Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh
     bikin
+  reset: Reset to Default
+  readonly_tooltip: Ev kurteyek xwendinê ye
 cancel: Bişûndekirin
 inProgress: Ez teslîm nabim...
 quit: Devjêberdan
@@ -194,3 +212,33 @@ open: Vekirî
 save: Rizgarkirin
 delete: Lûleêkirin
 loading: Loading ...
+vd:
+  strategy:
+    native: Welatî
+    seelen: Seelen
+    label: Stratejiya Desktop Virtual
+  disabled_windows_version: Stratejiya Desktop ya Native ya Native ji bo guhertoya weya Windows-ê nabe.
+save_and_restart: Save & Restart
+monitors_configurations:
+  label: Monitor {{Index-}
+wall:
+  backgrounds: Wallpapers
+  enable: Dîwarê Seelen çalak bike
+  interval: Wallpaper her (seconds)
+  no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
+app_launcher:
+  runners:
+    cmd: Ferman
+    explorer: Rev
+    label: Runners
+  enable: Launcher App çalak bikin
+  monitor: Monitor to Show
+insert: Lêzêdekirin
+inherit: Mîratgirtin
+more: Zêde
+close: Nêzîkî
+update:
+  available: Nûvekirin!
+  downloading: Daxistin ...
+  channel: Kanala Nûve
+miscellaneous: Lihevket

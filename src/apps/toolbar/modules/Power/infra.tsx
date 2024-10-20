@@ -1,9 +1,9 @@
-import { PowerToolbarModule } from '../../../shared/schemas/Placeholders';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { PowerToolbarModule } from 'seelen-core';
 
-import { Item } from '../item/infra';
+import { Item } from '../item/infra/infra';
 
 import { Selectors } from '../shared/store/app';
 

@@ -33,3 +33,6 @@ placeholder:
   smart_charge: '- Carga Inteligente'
   settings: Configurações rápidas
   notifications: Notificações
+unlabelled_tray: Ícone de bandeja não marcada
+context_menu:
+  remove: Remova o item

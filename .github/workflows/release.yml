@@ -3,24 +3,15 @@ name: "Release"
 on:
   push:
     tags:
-      - "v*"
-  # Allows you to run this workflow manually from the Actions tab
+      - "v[0-9]+.[0-9]+.[0-9]+"
   workflow_dispatch:
 
 jobs:
-  run-tests-and-linter:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - run: npm clean-install
-      - run: npm run lint
-      - run: npm run test
+  continuous-integration:
+    uses: ./.github/workflows/ci.yml
 
   create-release:
-    needs: run-tests-and-linter
+    needs: continuous-integration
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -29,10 +20,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Get version
         run: echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> $GITHUB_ENV
 

@@ -2,7 +2,7 @@ cargo-features = ["profile-rustflags"]
 
 [package]
 name = "seelen-ui"
-version = "1.9.10"
+version = "2.0.3"
 description = "Seelen UI Background"
 authors = ["eythaann"]
 license = "Polyform Strict License"
@@ -20,34 +20,40 @@ path = "src/background/main.rs"
 incremental = true
 rustflags = ["-Z", "threads=8"]
 
+[profile.release]
+debug = 1
+opt-level = "z"
+lto = true
+codegen-units = 1
+rustflags = ["-Z", "threads=8"]
+
 [build-dependencies]
-tauri-build = { version = "2.0.0-beta", features = [] }
+tauri-build = { version = "2.0.0-rc", features = [] }
 
 [dependencies]
 seelen-core = { path = "./lib" }
-tauri = { version = "2.0.0-beta", features = [
+tauri = { version = "2.0.0-rc", features = [
     "protocol-asset",
     "tray-icon",
     "image-png",
 ] }
-tauri-plugin-fs = "2.0.0-beta.2"
-tauri-plugin-dialog = "2.0.0-beta.2"
-tauri-plugin-autostart = "2.0.0-beta.2"
-tauri-plugin-shell = "2.0.0-beta.2"
-tauri-plugin-process = "2.0.0-beta.2"
-tauri-plugin-log = "2.0.0-beta.2"
-tauri-plugin-updater = "2.0.0-beta.2"
-tauri-plugin-deep-link = "2.0.0-beta.10"
-tauri-plugin-http = "2.0.0-beta.0"
+tauri-plugin-fs = "2.0.0-rc"
+tauri-plugin-dialog = "2.0.0-rc"
+tauri-plugin-autostart = "2.0.0-rc"
+tauri-plugin-shell = "2.0.0-rc"
+tauri-plugin-process = "2.0.0-rc"
+tauri-plugin-log = "2.0.0-rc"
+tauri-plugin-updater = "2.0.0-rc"
+tauri-plugin-deep-link = "2.0.0-rc"
+tauri-plugin-http = "2.0.0-rc"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_yaml = "0.9.34"
-color-eyre = "0.6.2"
 lazy_static = "1.4.0"
 parking_lot = "0.12.1"
 log = "0.4"
 uuid = "1.8.0"
-image = "0.25.0"
+image = { version = "0.25.1", features = ["ico"] }
 widestring = "1.0.2"
 itertools = "0.12.1"
 clap = { version = "4.5.4", features = ["derive", "string"] }
@@ -60,14 +66,19 @@ sysinfo = "0.30.12"
 battery = "0.7.8"
 winvd = { git = "https://github.com/eythaann/virtualdesktopaccessor.git" }
 winreg = "0.52.0"
-windows-core = "=0.57.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
+windows-core = "=0.58.0" # windows-rs already depends and reexports this, but we need it as a direct dependency (implement macro)
 win-screenshot = "4.0.8"
 base64 = "0.22.1"
 arc-swap = "1.7.1"
 notify-debouncer-full = "0.3.1"
+encoding_rs = "0.8.34"
+evalexpr = "=11.3.0"
+quick-xml = { version = "0.36.2", features = ["serialize", "encoding"] }
+backtrace = "0.3.71"
+owo-colors = "4.1.0"
 
 [dependencies.windows]
-version = "=0.57.0"
+version = "=0.58.0"
 features = [
     "Win32_Foundation",
     "ApplicationModel",
@@ -85,14 +96,20 @@ features = [
     "Win32_System_Console",                # required to attach to console on cli mode
     "Win32_System_Registry",               # required for system tray icon module
     "Win32_Security",                      # required for power management (shutdown, reboot)
+    "Win32_System_Kernel",
     "Win32_System_Threading",
     "Win32_System_WinRT",                  # uwp apps
     "Win32_System_StationsAndDesktops",
     "Win32_System_RemoteDesktop",
     "Win32_System_ProcessStatus",
+    "Wdk_System_Threading",                # required to get system info (NtQueryInformationProcess)
+    "Wdk_System_SystemInformation",        # required to get system info (NtQuerySystemInformation)
+    "Wdk_System_SystemServices",           # required to get system info (PROCESS_EXTENDED_BASIC_INFORMATION)
     "Win32_System_Power",                  # required for power management (battery - AC)
     "Win32_System_Shutdown",               # required for power management (shutdown)
+    "Win32_Storage_FileSystem",            # PKEYS and Devices/Storage/etc
     "Win32_Storage_EnhancedStorage",       # PKEYS and Devices/Storage/etc
+    "Win32_Storage_Packaging_Appx",        # UWP apps
     "Win32_Media_Audio_Endpoints",         # required for audio module
     "Win32_Media_DeviceManager",           # required for audio module
     "Media",                               # required for audio module
@@ -116,4 +133,3 @@ features = [
 # If you use cargo directly instead of tauri's cli you can use this feature flag to switch between tauri's `dev` and `build` modes.
 custom-protocol = ["tauri/custom-protocol"]
 devtools = ["tauri/devtools"]
-trace_lock = []

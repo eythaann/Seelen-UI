@@ -1,19 +1,21 @@
 use regex::Regex;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
+use serde_alias::serde_alias;
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
-#[serde(rename_all(deserialize = "snake_case"))]
+#[serde(rename_all = "snake_case")]
 pub enum AppExtraFlag {
+    /// Start the app in the center of the screen as floating in the wm.
     Float,
+    /// Force manage this app in the wm.
     Force,
+    /// Unmanage this app in the wm.
     Unmanage,
+    /// Pin this app in all the virtual desktops in the wm.
     Pinned,
-    // only for backwards compatibility
-    ObjectNameChange,
-    Layered,
-    BorderOverflow,
-    TrayAndMultiWindow,
+    /// Hide this app on the dock/taskbar.
+    Hidden,
 }
 
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
@@ -30,7 +32,7 @@ pub enum AppIdentifierType {
 
 #[derive(Clone, Debug, Eq, PartialEq, Serialize, Deserialize, JsonSchema)]
 pub enum MatchingStrategy {
-    #[serde(alias = "equals")]
+    #[serde(alias = "equals", alias = "legacy", alias = "Legacy")]
     Equals,
     #[serde(alias = "startsWith")]
     StartsWith,
@@ -40,12 +42,11 @@ pub enum MatchingStrategy {
     Contains,
     #[serde(alias = "regex")]
     Regex,
-    // only for backwards compatibility
-    #[serde(alias = "legacy")]
-    Legacy,
 }
 
+#[serde_alias(SnakeCase)]
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
 pub struct AppIdentifier {
     pub id: String,
     pub kind: AppIdentifierType,
@@ -56,7 +57,6 @@ pub struct AppIdentifier {
     pub and: Vec<AppIdentifier>,
     #[serde(default)]
     pub or: Vec<AppIdentifier>,
-    // cache
     #[serde(skip)]
     pub regex: Option<Regex>,
 }
@@ -73,7 +73,7 @@ impl AppIdentifier {
 
     pub fn validate(&self, title: &str, class: &str, exe: &str, path: &str) -> bool {
         let mut self_result = match self.matching_strategy {
-            MatchingStrategy::Legacy | MatchingStrategy::Equals => match self.kind {
+            MatchingStrategy::Equals => match self.kind {
                 AppIdentifierType::Title => title.eq(&self.id),
                 AppIdentifierType::Class => class.eq(&self.id),
                 AppIdentifierType::Exe => exe.eq(&self.id),
@@ -124,15 +124,24 @@ impl AppIdentifier {
     }
 }
 
+#[serde_alias(SnakeCase)]
 #[derive(Clone, Debug, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
 pub struct AppConfig {
+    /// name of the app
     pub name: String,
+    /// category to group the app under
     pub category: Option<String>,
-    pub bound_monitor_idx: Option<usize>,
-    pub bound_workspace_name: Option<String>,
+    /// monitor index that the app should be bound to
+    pub bound_monitor: Option<usize>,
+    /// workspace index that the app should be bound to
+    pub bound_workspace: Option<usize>,
+    /// app identifier
     pub identifier: AppIdentifier,
+    /// extra specific options/settings for the app
     #[serde(default)]
     pub options: Vec<AppExtraFlag>,
+    /// is this config bundled with seelen ui.
     #[serde(default)]
     pub is_bundled: bool,
 }

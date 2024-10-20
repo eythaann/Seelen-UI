@@ -15,20 +15,24 @@ header:
     general: 通用
     seelen_bar: 精美工具栏
     seelen_wm: 窗口管理器
-    seelen_weg: 停靠栏/任务栏
+    seelen_weg: Dock 栏 / 任务栏
     monitors: 显示器
     specific_apps: 特定应用
     shortcuts: 快捷键
     developer: 开发者
     info: 信息
+    seelen_wall: Seelen 壁纸
+    seelen_rofi: 应用启动器
+    virtual_desk: 虚拟桌面
+    home: 首页
 start:
   title: 欢迎！
   message: >-
-    欢迎使用 Seelen UI，这是一个终极的桌面环境，集成了窗口平铺管理器，以增强您的 Windows 11 体验！
-    通过我们的直观界面和高级功能，探索一个新的效率和多任务时代。
+    欢迎使用 Seelen UI，这是一个提供了终极桌面环境的应用，集成了窗口平铺管理器等功能，以增强您的 Windows 体验！
+    您可以通过我们直观的界面和高级功能，探索一个更高效率和多任务时代。
   message_accent: 用风格优化您的生产力！
 general:
-  startup: 开机启动？
+  startup: 开机自启
   language: 语言
   theme:
     label: 主题信息
@@ -46,6 +50,7 @@ general:
   accent_color: 强调色
   wallpaper:
     select: 选择壁纸
+  date_format: 日期格式
 toolbar:
   enable: 启用精美工具栏
   placeholder:
@@ -53,26 +58,26 @@ toolbar:
     author: 作者
     description: 描述
   height: 高度
+  auto_hide: 自动隐藏
+  label: 工具栏
 wm:
-  enable: 启用窗口管理器
   layout: 布局
   author: 作者
   description: 描述
   space_between_containers: 容器之间的空间
   workspace_padding: 工作区内边距
-  workspace_offset: 工作区偏移（边距）
+  workspace_offset: 工作区偏移边距
   resize_delta: 调整大小增量（%）
   border:
     enable: 启用窗口边框
     width: 边框宽度
     offset: 边框偏移
-  disabled_windows_version: Windows Manager 不适合您的 Windows 版本。
+  enable: 启用平铺窗口管理器
 weg:
-  label: 停靠栏/任务栏
-  enable: 启用停靠栏/任务栏
+  label: Dock 栏 / 任务栏
+  enable: 启用 Dock 栏 / 任务栏
   width: 宽度
   auto_hide: 自动隐藏
-  dock_side: 停靠位置
   padding: 内边距
   margin: 边距
   gap: 间距
@@ -82,6 +87,7 @@ weg:
     zoom_size: 放大尺寸（用于主题）
     gap: 项目间距
     visible_separators: 可见分隔符
+  dock_side: 位置
 devtools:
   enable: 启用开发者工具
   app_folders: 应用程序文件夹
@@ -97,7 +103,7 @@ apps_configurations:
   swap: 交换
   new: 新建
   bundled_title: Seelen 捆绑的应用配置
-  bundled_msg: 这些捆绑配置不可编辑，旨在为您提供最佳体验而无需定制。它们会自动配置最常用的应用程序。
+  bundled_msg: Seelen UI 为了您提供最佳体验而您无需定制，所以这些捆绑配置不可编辑。它们会自动配置最常用的应用程序。
   confirm_delete_title: 确认删除
   confirm_delete: 确认要删除此配置吗？
   search: 搜索
@@ -115,13 +121,16 @@ apps_configurations:
     title_readonly: 查看 {{name}}
     ok_edit: 更新
     ok_create: 创建
-    ok_readonly: 作为新建编辑
-    options_label: 额外选项
+    ok_readonly: 作为新建项目编辑
     options:
       float: 浮动
       unmanage: 不管理
       force: 强制管理
       pinned: 固定
+      hidden: 隐藏 Dock 栏 / 任务栏
+    weg_options_label: Dock 栏 / 任务栏 选项
+    wm_options_label: 窗口管理器选项
+    options_label: 其他
   identifier:
     remove: 删除块
     id: 标识符
@@ -131,16 +140,19 @@ apps_configurations:
     and: 与
     or: 或
     add_block: 添加块
+  extra_info: >-
+    SEELEN
+    UI仅使用每个应用程序使用一个标识符（第一次匹配），因此“如何指定”的顺序很重要，最新添加的添加将得到优先级，因为注意表的默认情况下是从最新到旧的。
 extras:
   version: 版本
   links: 官方链接
   github: GitHub
   discord: Discord
   relaunch: 重新启动
-  exit: 退出/退出
+  exit: 退出 / 关闭
 shortcuts:
   enable: 启用集成快捷键 (ahk)
-  enable_tooltip: 如果您将使用 Seelen Core API 实现自己的快捷键，请禁用此项
+  enable_tooltip: 如果您将使用 Seelen Core API 实现自己的快捷键，请禁用此项。
   labels:
     reserve_top: 保留顶部
     reserve_bottom: 保留底部
@@ -158,8 +170,6 @@ shortcuts:
     increase_height: 增加高度
     decrease_height: 减少高度
     restore_sizes: 恢复大小
-    switch_workspace_0: 切换到工作区 0
-    switch_workspace_1: 切换到工作区 1
     switch_workspace_2: 切换到工作区 2
     switch_workspace_3: 切换到工作区 3
     switch_workspace_4: 切换到工作区 4
@@ -188,3 +198,41 @@ shortcuts:
     send_to_workspace_7: 发送到工作区 7
     send_to_workspace_8: 发送到工作区 8
     send_to_workspace_9: 发送到工作区 9
+    switch_workspace_1: 切换到工作区 1
+    switch_workspace_0: 切换到工作区 0
+    misc_toggle_win_event_tracing: 切换Win事件跟踪（日志）
+    misc_toggle_lock_tracing: 切换锁定跟踪（日志）
+    misc_open_settings: 打开设置
+    toggle_launcher: 切换
+  reset: 重置为默认值
+  readonly_tooltip: 这是只读的捷径
+vd:
+  strategy:
+    native: 系统
+    label: 虚拟桌面策略
+    seelen: Seelen
+  disabled_windows_version: 本机虚拟桌面策略不适合您的 Windows 版本。
+save_and_restart: 保存和重新启动
+monitors_configurations:
+  label: 监视 {{index}}
+wall:
+  backgrounds: 壁纸
+  interval: 每次更改壁纸（秒）
+  no_background: 使用主题的背景为空幻灯片。
+  enable: 启用 S​​eelen Wall
+app_launcher:
+  runners:
+    cmd: 命令行
+    explorer: 文件管理器
+    label: 设置
+  monitor: 显示显示
+  enable: 启用应用启动器
+insert: 插入
+inherit: 继承
+more: 更多
+close: 关闭
+update:
+  available: 有新的版本更新！
+  downloading: 下载...
+  channel: 更新频道
+miscellaneous: 各种各样的

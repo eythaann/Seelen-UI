@@ -1,17 +1,17 @@
-import { IRootState } from '../../../../../shared.interfaces';
-import { Seelenweg } from '../../../../shared/schemas/Seelenweg';
-import {
-  SavedMediaItem,
-  SavedPinnedApp,
-  SavedSeparatorItem,
-  StartMenuItem,
-  SwItemType as SpecialItemType,
-} from '../../../../shared/schemas/SeelenWegItems';
 import { modify } from 'readable-types';
+import {
+  MediaWegItem,
+  PinnedWegItem,
+  SeelenWegSettings,
+  SeparatorWegItem,
+  StartWegItem,
+  SwItemType,
+} from 'seelen-core';
+
+import { IRootState } from '../../../../../shared.interfaces';
+import { FocusedApp } from '../../../../shared/interfaces/common';
 
 export type HWND = number & {};
-
-export { SpecialItemType };
 
 export interface AppFromBackground {
   title: string;
@@ -20,7 +20,7 @@ export interface AppFromBackground {
   icon: string;
   icon_path: string;
   hwnd: HWND;
-  process_hwnd: HWND;
+  creator_hwnd: HWND;
 }
 
 export enum AppsSides {
@@ -37,10 +37,14 @@ export interface MediaSession {
   thumbnail: string | null;
   playing: boolean;
   default: boolean;
+  owner: {
+    name: string;
+    iconPath: string | null;
+  } | null;
 }
 
-export type SwPinnedApp = modify<
-  SavedPinnedApp,
+export type ExtendedPinnedWegItem = modify<
+  PinnedWegItem,
   {
     icon: string;
     title: string;
@@ -48,37 +52,27 @@ export type SwPinnedApp = modify<
   }
 >;
 
-export type SwTemporalApp = modify<
-  SwPinnedApp,
+export type ExtendedTemporalWegItem = modify<
+  ExtendedPinnedWegItem,
   {
-    type: SpecialItemType.TemporalApp;
+    type: SwItemType.TemporalApp;
   }
 >;
 
-export type SwItem = SwPinnedApp | SwTemporalApp | SavedSeparatorItem | SavedMediaItem | StartMenuItem;
+export type SwItem =
+  | ExtendedPinnedWegItem
+  | ExtendedTemporalWegItem
+  | SeparatorWegItem
+  | MediaWegItem
+  | StartWegItem;
 
-export interface UIColors {
-  background: string;
-  foreground: string;
-  accent_darkest: string;
-  accent_darker: string;
-  accent_dark: string;
-  accent: string;
-  accent_light: string;
-  accent_lighter: string;
-  accent_lightest: string;
-  complement: string | null;
-}
-
-export interface RootState extends IRootState<Seelenweg> {
+export interface RootState extends IRootState<SeelenWegSettings> {
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
   itemsOnRight: SwItem[];
   openApps: Record<HWND, AppFromBackground>;
   // ----------------------
-  focusedHandle: HWND;
-  focusedExecutable: string;
+  focusedApp: FocusedApp | null;
   isOverlaped: boolean;
   mediaSessions: MediaSession[];
-  colors: UIColors;
 }

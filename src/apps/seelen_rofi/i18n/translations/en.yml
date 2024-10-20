@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Run
+    cmd: Command
+header:
+  search: App, Command or Path
+item:
+  pin: Pin to Dock
+  open_location: Open File Location
+footer:
+  shortcuts: Show Shortcuts

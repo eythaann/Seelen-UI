@@ -1,15 +1,13 @@
-import { parseAsCamel } from '../../../shared/schemas';
-import { FancyToolbar, FancyToolbarSchema } from '../../../shared/schemas/FancyToolbar';
 import { createSlice } from '@reduxjs/toolkit';
+import { FancyToolbarSettings } from 'seelen-core';
 
-import { reducersFor, selectorsFor } from '../shared/utils/app';
+import { reducersFor } from '../shared/utils/app';
 
-const initialState: FancyToolbar = parseAsCamel(FancyToolbarSchema, {});
+const initialState = new FancyToolbarSettings();
 
 export const FancyToolbarSlice = createSlice({
   name: 'fancyToolbar',
   initialState,
-  selectors: selectorsFor(initialState),
   reducers: reducersFor(initialState),
 });
 

@@ -6,11 +6,9 @@
   "windows": [
     "settings",
     "seelenweg/*",
-    "seelenweg-hitbox/*",
     "updater",
     "window-manager/*",
-    "fancy-toolbar/*",
-    "fancy-toolbar-hitbox/*"
+    "fancy-toolbar/*"
   ],
   "permissions": [
     "core:path:default",
@@ -65,8 +63,7 @@
 
     "log:allow-log",
 
-    "updater:allow-check",
-    "updater:allow-download-and-install",
+    "updater:default",
 
     "shell:allow-open"
   ]

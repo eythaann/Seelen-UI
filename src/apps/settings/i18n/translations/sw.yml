@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock/Taskbar
     general: Mkuu
     monitors: Wachunguzi
+    seelen_rofi: Kizindua programu
+    seelen_wall: Ukuta
+    virtual_desk: Dawati za kweli
+    home: Nyumbani
 start:
   message_accent: Boresha tija yako na mtindo!
   message: >-
@@ -40,6 +44,7 @@ general:
   accent_color: Rangi ya lafudhi
   wallpaper:
     select: Chagua Ukuta
+  date_format: Muundo wa tarehe
 toolbar:
   placeholder:
     description: Maelezo
@@ -47,6 +52,8 @@ toolbar:
     author: Mwandishi
   enable: Wezesha zana ya dhana
   height: Urefu
+  auto_hide: Kujificha kiotomatiki
+  label: Zana
 wm:
   border:
     enable: Wezesha mpaka wa dirisha
@@ -57,10 +64,9 @@ wm:
   workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
   description: Maelezo
   space_between_containers: Nafasi kati ya vyombo
-  enable: Wezesha Meneja wa Dirisha
   layout: Mpangilio
   workspace_padding: Nafasi za kazi
-  disabled_windows_version: Meneja wa windows haipatikani kwa toleo lako la Windows.
+  enable: Washa Meneja wa Dirisha la Tiling
 weg:
   items:
     size: Saizi ya bidhaa
@@ -69,13 +75,13 @@ weg:
     zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
     visible_separators: Watenganisho unaoonekana
   gap: Pengo
-  dock_side: Kizimbani
   width: Upana
   margin: Margin
   padding: Padding
   auto_hide: Kujificha kiotomatiki
   label: Dock/Taskbar
   enable: Wezesha Dock/Taskbar
+  dock_side: Msimamo
 devtools:
   app_folders: Folda za programu
   enable: Wezesha zana za msanidi programu
@@ -91,10 +97,10 @@ apps_configurations:
       force: Nguvu kusimamia
       pinned: Iliyoandikwa
       float: Kuelea
+      hidden: Ficha kutoka Dock/Taskbar
     title_create: Kuunda {{jina}}
     title_readonly: Kuangalia {{jina}}
     category_placeholder: Hakuna
-    options_label: Chaguzi za ziada
     monitor_placeholder: Hakuna
     monitor: Kufuatilia
     ok_edit: Sasisha
@@ -106,6 +112,9 @@ apps_configurations:
     workspace_placeholder: Hakuna
     ok_create: Unda
     title_edit: Kuhariri {{jina}}
+    weg_options_label: Chaguzi za Dock/Taskbar
+    wm_options_label: Chaguzi za Meneja wa Dirisha
+    options_label: Chaguzi za ziada
   identifier:
     negation: Negate kulinganisha
     or: Au
@@ -127,6 +136,11 @@ apps_configurations:
   import: Kuagiza
   confirm_delete_title: Thibitisha Futa
   swap: Kubadilishana
+  extra_info: >-
+    Seelen UI hutumia kitambulisho kimoja tu kwa kila programu (kwanza
+    kupatikana) kwa hivyo mpangilio wa jinsi ulivyobainishwa ni muhimu, ya hivi
+    punde zaidi yatapewa kipaumbele, kwani kumbuka jedwali hupangwa kwa
+    chaguo-msingi kutoka kwa hivi karibuni hadi vya zamani.
 extras:
   relaunch: Kuzindua tena
   discord: Ugomvi
@@ -151,7 +165,6 @@ shortcuts:
     switch_workspace_9: Badilika kwa nafasi ya kazi 9
     switch_workspace_8: Badilika kwa nafasi ya kazi 8
     move_to_workspace_5: Hoja kwa nafasi ya kazi 5
-    switch_workspace_1: Badilika kwenye nafasi ya kazi 1
     send_to_workspace_1: Tuma kwa nafasi ya kazi 1
     send_to_workspace_8: Tuma kwa nafasi ya kazi 8
     send_to_workspace_5: Tuma kwa nafasi ya kazi 5
@@ -177,13 +190,20 @@ shortcuts:
     switch_workspace_4: Badilika kwa nafasi ya kazi 4
     send_to_workspace_3: Tuma kwa nafasi ya kazi 3
     move_to_workspace_1: Hoja kwa nafasi ya kazi 1
-    switch_workspace_0: Badilika kwenye nafasi ya kazi 0
     send_to_workspace_7: Tuma kwa nafasi ya kazi 7
     move_to_workspace_4: Hoja kwa nafasi ya kazi 4
     send_to_workspace_9: Tuma kwa nafasi ya kazi 9
     move_to_workspace_9: Hoja kwa nafasi ya kazi 9
+    switch_workspace_1: Badilika kwenye nafasi ya kazi 2
+    switch_workspace_0: Badilika kwenye nafasi ya kazi 1
+    misc_open_settings: Mipangilio ya Fungua
+    misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
+    misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
+    toggle_launcher: Kugeuza
   enable: Wezesha njia za mkato zilizojumuishwa (AHK)
   enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
+  reset: Rudisha kwa defaults
+  readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
 inProgress: Inaendelea...
 loading: Inapakia ...
 delete: Futa
@@ -191,3 +211,33 @@ cancel: Ghairi
 save: Kuokoa
 quit: Acha
 open: Wazi
+vd:
+  strategy:
+    label: Mkakati wa kweli wa desktop
+    seelen: Seelen
+    native: Mzaliwa
+  disabled_windows_version: Mkakati wa asili wa desktop haupatikani kwa toleo lako la Windows.
+save_and_restart: Okoa na uanze tena
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  enable: Wezesha ukuta wa Seelen
+  no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
+  backgrounds: Wallpapers
+  interval: Badilisha Ukuta kila (sekunde)
+app_launcher:
+  runners:
+    label: Wakimbiaji
+    explorer: Kukimbia
+    cmd: Amri
+  monitor: Fuatilia kuonyesha
+  enable: Wezesha Kizindua cha Programu
+more: Zaidi
+inherit: Urithi
+insert: Ingiza
+close: Karibu
+update:
+  available: Sasisha inapatikana!
+  downloading: Kupakua ...
+  channel: Sasisha kituo
+miscellaneous: Miscellaneous

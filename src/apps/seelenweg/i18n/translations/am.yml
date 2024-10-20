@@ -2,6 +2,8 @@ taskbar_menu:
   media: የሚዲያ ሞዱል ያክሉ
   settings: ክፍት ቅንብሮች
   start: የመነሻ ሞጁል ያክሉ
+  add_file: የፒን ብጁ ፋይል
+  add_folder: የፒን ብጁ አቃፊ
 app_menu:
   close: ገጠመ
   pin_to_left: ፒን ወደ ግራ

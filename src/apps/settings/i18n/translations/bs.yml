@@ -14,6 +14,10 @@ header:
     seelen_wm: Upravitelj prozora
     info: Informacije
     shortcuts: Prečice
+    seelen_wall: Zid
+    seelen_rofi: Pokretanje aplikacija
+    virtual_desk: Virtualne radne površine
+    home: Dom
 start:
   title: Dobrodošli!
   message_accent: Optimizirajte svoju produktivnost sa stilom!
@@ -41,6 +45,7 @@ general:
   accent_color: Akcentna boja
   wallpaper:
     select: Odaberite pozadinu
+  date_format: Format datuma
 toolbar:
   placeholder:
     select: Struktura alatne trake
@@ -48,6 +53,8 @@ toolbar:
     description: Opis
   height: Visina
   enable: Omogući fantastičnu alatnu traku
+  auto_hide: Auto se sakrio
+  label: Alatna traka
 wm:
   border:
     width: Širina granice
@@ -55,13 +62,12 @@ wm:
     offset: Offset granice
   description: Opis
   author: Autor
-  enable: Omogućite menadžeru prozora
   layout: Izgled
   workspace_offset: Offset radne prostore (margine)
   resize_delta: Promijenite veličinu Delta (%)
   space_between_containers: Prostor između kontejnera
   workspace_padding: Djelatna površina obloga
-  disabled_windows_version: Upravitelj prozora nije dostupan za vašu Windows verziju.
+  enable: Omogući oblaganje menadžera prozora
 weg:
   items:
     gap: Prostor između predmeta
@@ -72,11 +78,11 @@ weg:
   width: Širina
   auto_hide: Auto se sakrio
   gap: Jaz
-  dock_side: Priključak
   margin: Marža
   label: Dock / programska traka
   padding: Obloga
   enable: Omogući pristanište / traku zadataka
+  dock_side: Položaj
 devtools:
   app_folders: App Mape
   settings_file: Datoteka postavki
@@ -92,6 +98,7 @@ apps_configurations:
       float: Lebdjeti
       force: Sile upravljati
       unmanage: Nevenjački
+      hidden: Sakrij se sa pristaništa / zadataka
     bindings: Vezanje (napominje su obavezne opcije)
     monitor: Monitor
     category_placeholder: Nijedan
@@ -99,7 +106,6 @@ apps_configurations:
     workspace_placeholder: Nijedan
     title_readonly: Gledanje {{ime}}
     monitor_placeholder: Nijedan
-    options_label: Dodatne opcije
     category: Kategorija
     ok_create: Stvoriti
     ok_readonly: Uredi kao novo
@@ -107,6 +113,9 @@ apps_configurations:
     workspace: Radni prostor
     title_create: Stvarajući {{ime}}
     title_edit: Uređivanje {{ime}}
+    wm_options_label: Opcije prozora upravitelja
+    weg_options_label: Opcije pristaništa / trake zadataka
+    options_label: Dodatne opcije
   identifier:
     matching_strategy: Strategija podudaranja
     and: I
@@ -129,6 +138,11 @@ apps_configurations:
     aplikacije za vas.
   delete: Izbrisati
   swap: Swap
+  extra_info: >-
+    Seelen UI Koristite samo jedan identifikator po aplikaciji (prvo pronađeno),
+    tako da je narudžba u tome kako je specifično, najnoviji dodani bit će
+    prioritet, jer je u priopćenju tablica po zadanim postavkama sortirana iz
+    posljednjeg.
 extras:
   exit: Prestanite / izlaz
   links: Službene veze
@@ -150,7 +164,6 @@ shortcuts:
     switch_workspace_6: Prebacite se na radni prostor 6
     decrease_height: Smanjenje visine
     focus_latest: Fokus najnovije
-    switch_workspace_0: Prebacite se na radni prostor 0
     reserve_left: Rezerva
     reserve_bottom: Rezervno dno
     move_to_workspace_3: Premjestiti na radni prostor 3
@@ -181,13 +194,20 @@ shortcuts:
     send_to_workspace_3: Pošalji u radni prostor 3
     send_to_workspace_1: Pošaljite u radni prostor 1
     send_to_workspace_2: Pošalji u radni prostor 2
-    switch_workspace_1: Prebacite se na radni prostor 1
     send_to_workspace_7: Pošalji u radni prostor 7
     move_to_workspace_8: Premjestiti na radni prostor 8
+    switch_workspace_0: Prebacite se na radni prostor 1
+    switch_workspace_1: Prebacite se na radni prostor 2
+    misc_toggle_lock_tracing: Prebacivanje zaključavanja (trupci)
+    misc_open_settings: Otvorite postavke
+    misc_toggle_win_event_tracing: Toggle win za praćenje događaja (trupci)
+    toggle_launcher: Preklopiti
   enable: Omogući integrirane prečice (AHK)
   enable_tooltip: >-
     Onemogućite ako ćete implementirati vlastite prečice koristeći Seelen Core
     API
+  reset: Resetiranje na zadane vrijednosti
+  readonly_tooltip: Ovo je prečica za čitanje
 loading: Učitavanje...
 inProgress: U toku...
 cancel: Otkazati
@@ -195,3 +215,33 @@ delete: Izbrisati
 save: Sačuvati
 quit: Prestati
 open: Otvoren
+vd:
+  strategy:
+    label: Virtualna strategija radne površine
+    native: Rođen
+    seelen: Seelen
+  disabled_windows_version: Native virtualna radna površina nije dostupna za vašu verziju za Windows.
+save_and_restart: Spremi i ponovno pokretanje
+monitors_configurations:
+  label: Monitor {{index}}
+wall:
+  backgrounds: Pozadine
+  no_background: Prazno prezentacija, koristeći temu, umjesto toga.
+  interval: Promenite pozadinu svake (sekunde)
+  enable: Omogući Seelen Wall
+app_launcher:
+  runners:
+    cmd: Naredba
+    explorer: Trčati
+    label: Trkači
+  monitor: Monitor za prikaz
+  enable: Omogući pokretač aplikacija
+inherit: Nasljediti
+insert: Umetnuti
+more: Više
+close: Zatvoriti
+update:
+  available: Ažuriraj dostupno!
+  channel: Ažuriraj kanal
+  downloading: Preuzimanje ...
+miscellaneous: Ostalo

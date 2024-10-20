@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: কমান্ড
+    explorer: চালানো
+footer:
+  shortcuts: শর্টকাটগুলি দেখান
+header:
+  search: অ্যাপ্লিকেশন, কমান্ড বা পথ
+item:
+  pin: ডক পিন
+  open_location: ফাইলের অবস্থান খুলুন

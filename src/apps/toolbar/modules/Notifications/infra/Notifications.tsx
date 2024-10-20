@@ -1,13 +1,15 @@
-import { Icon } from '../../../../shared/components/Icon';
 import { invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
+import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
+
+import { Icon } from '../../../../shared/components/Icon';
 
 // Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
 const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
@@ -26,7 +28,7 @@ export function Notifications() {
         <Button
           size="small"
           onClick={() => {
-            invoke('notifications_close_all').catch(console.error);
+            invoke(SeelenCommand.NotificationsCloseAll).catch(console.error);
           }}
         >
           Clear all
@@ -56,7 +58,7 @@ export function Notifications() {
                   size="small"
                   type="text"
                   onClick={() => {
-                    invoke('notifications_close', { id: notification.id }).catch(console.error);
+                    invoke(SeelenCommand.NotificationsClose, { id: notification.id }).catch(console.error);
                   }}
                 >
                   <Icon iconName="IoClose" />
@@ -88,7 +90,7 @@ export function Notifications() {
           size="small"
           type="text"
           onClick={() => {
-            invoke('open_file', { path: 'ms-settings:notifications' }).catch(console.error);
+            invoke(SeelenCommand.OpenFile, { path: 'ms-settings:notifications' }).catch(console.error);
           }}
         >
           Go to notifications settings

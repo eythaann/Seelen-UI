@@ -33,3 +33,6 @@ placeholder:
   bluetooth_devices: Bluetooth a Dyfeisiau
   volume: Nghyfrol
   notifications: Hysbysiadau
+unlabelled_tray: Eicon hambwrdd heb ei labelu
+context_menu:
+  remove: Tynnwch yr eitem

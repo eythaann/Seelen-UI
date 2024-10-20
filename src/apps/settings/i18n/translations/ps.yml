@@ -14,6 +14,10 @@ header:
     info: معلومات
     monitors: څارونکي
     shortcuts: لنډوکونه
+    seelen_rofi: د اپلیکیشن لانچر
+    seelen_wall: دېوال
+    virtual_desk: مجازی ډیسټاپونه
+    home: کور
 start:
   title: ښه راغلاست!
   message_accent: د سټایل سره خپل محصول غوره کړئ!
@@ -40,6 +44,7 @@ general:
   accent_color: تیزس رنګ
   wallpaper:
     select: وال پیپر غوره کړئ
+  date_format: د نیټې ب .ه
 toolbar:
   placeholder:
     description: تفصیل
@@ -47,6 +52,8 @@ toolbar:
     author: لیکوال
   enable: د فینسي تورې پټه وړتیا وړ کړئ
   height: لوړوالی
+  auto_hide: آٹو پټول
+  label: توکپټه
 wm:
   border:
     width: د بريد سور
@@ -55,12 +62,11 @@ wm:
   description: تفصیل
   resize_delta: د ډیلټا (٪) ریموټ کړئ
   workspace_offset: د کاري ځای ځایونه (مارجینز)
-  enable: د کړکۍ مدیر ته وړ کړئ
   workspace_padding: د کارډا ریسس
   space_between_containers: د کانتینرونو ترمینځ ځای
   author: لیکوال
   layout: ترتیب
-  disabled_windows_version: د کړکۍ مدیر ستاسو د وینډوز نسخه لپاره شتون نلري.
+  enable: د ټی بایټس کړکۍ مدیر فعال کړئ
 weg:
   items:
     size: د توکي اندازه
@@ -75,7 +81,7 @@ weg:
   gap: تشې
   enable: دوک / ټاسک بار فعال کړئ
   auto_hide: آٹو پټول
-  dock_side: ډیک اړخ
+  dock_side: موقعیت
 devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   enable: د پراختیا کونکي وسیلې فعال کړئ
@@ -91,6 +97,7 @@ apps_configurations:
       pinned: پینټ شوی
       force: د ځواک اداره کول
       float: فلوټ
+      hidden: د ډیک / ټاسک بار څخه پټول
     ok_readonly: د نوي په توګه
     title_edit: د {{{{}} ترمیم کول
     category_placeholder: هیڅ نه
@@ -103,9 +110,11 @@ apps_configurations:
     name: نوم
     workspace: کاري ځای
     title_create: '{{}} رامینځته کول'
-    options_label: اضافي اختیارونه
     bindings: تړل (په یادداشت کې دواړه اختیارونه اړین دي)
     workspace_placeholder: هیڅ نه
+    wm_options_label: د کړکۍ مدیر اختیارونه
+    weg_options_label: دوک / ټاسک بار انتخابونه
+    options_label: اضافي اختیارونه
   identifier:
     or: یا
     id: پېژنيزه
@@ -128,6 +137,10 @@ apps_configurations:
   confirm_delete_title: ړنګول تایید کړئ
   export: صادرات
   bundled_title: د اپلیکیشن سره ایپ بنډل شوی
+  extra_info: >-
+    سیلین UI په هر اپلیکیشن کې یوازې یو پیژندونکی کاروي (لومړی میچ وموندل شو) نو
+    د مشخص کولو څرنګوالي ترتیب مهم دی ، وروستي اضافه شوي به لومړیتوب ورکړل شي ،
+    ځکه چې یادونه وکړئ جدول له وروستي څخه زاړه ته په ډیفالټ ډول ترتیب شوی.
 extras:
   links: رسمي اړیکې
   exit: پریښودل / وتل
@@ -152,7 +165,6 @@ shortcuts:
     send_to_workspace_4: کارځای ته واستوئ
     switch_workspace_4: د کارځای ته وسپارئ
     switch_workspace_5: د کارځای 5 ته لاړشئ
-    switch_workspace_1: د کارځای 1 ته لاړشئ
     move_to_workspace_8: د کارځای ته لاړشئ
     send_to_workspace_7: کارځای ته واستوئ
     reserve_top: خوندي پټی
@@ -170,7 +182,6 @@ shortcuts:
     move_to_workspace_0: د کارځای 0 ته لاړشئ
     send_to_workspace_0: کارځای ته واستوئ
     focus_top: فوکس سر
-    switch_workspace_0: د کارځای 0 ته لاړشئ
     focus_bottom: ښکته
     reserve_stack: ریزرو سټیک
     switch_workspace_7: د کارځای ته لاړشئ
@@ -183,8 +194,16 @@ shortcuts:
     send_to_workspace_8: کارځای ته واستوئ
     restore_sizes: اندازونه بحال کړئ
     increase_height: قد زیاتول
+    switch_workspace_1: د کارځای 2 ته لاړشئ
+    switch_workspace_0: د کارځای 1 ته لاړشئ
+    misc_open_settings: خلاص امستنې
+    misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
+    misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
+    toggle_launcher: ټګول
   enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
   enable: مدغم شوي لنډیزونه (اه)
+  reset: د افلاسیون لپاره بیا تنظیمول
+  readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
 inProgress: د پرمختګ په حال کې...
 quit: پرېښودل
 delete: حذف کول
@@ -192,3 +211,33 @@ cancel: لغوه کول
 loading: بارول ...
 save: خوندي کړئ
 open: خلاص
+vd:
+  strategy:
+    seelen: تلل
+    label: مجازی ډیسټاپ ستراتیژي
+    native: اصلي
+  disabled_windows_version: اصلي مجازی ډیسک ډیسک ستراتیژي ستاسو د وینډوز نسخه لپاره شتون نلري.
+save_and_restart: خوندي کول او بیا پیل کړئ
+monitors_configurations:
+  label: د {{{پلس} نظارت وکړئ}
+wall:
+  backgrounds: والپيپرونه
+  no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
+  enable: د نیکي دیوال فعال کړئ
+  interval: وال پیپر هر (ثانیې)
+app_launcher:
+  runners:
+    explorer: منډه وهل
+    cmd: قومانده
+    label: چلوونکي
+  monitor: څارنه کول
+  enable: د اپلیکیشن لیسچر وړ کړئ
+more: نور
+inherit: میراث
+insert: دننه کړئ
+close: بندول
+update:
+  available: اوسمهالول شتون لري!
+  downloading: دانلود ...
+  channel: چینل تازه کول
+miscellaneous: متفرقه

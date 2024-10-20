@@ -13,14 +13,18 @@ sides:
 header:
   labels:
     general: 일반
-    seelen_bar: 화려한 툴바
+    seelen_bar: 툴바
     seelen_wm: 윈도우 매니저
     seelen_weg: 독/작업 표시줄
     monitors: 모니터
-    specific_apps: 특정 앱
+    specific_apps: 개별 앱 설정
     shortcuts: 단축키
     developer: 개발자
     info: 정보
+    seelen_wall: 배경화면
+    seelen_rofi: 앱 런처
+    virtual_desk: 가상 데스크톱
+    home: 홈
 start:
   title: 환영합니다!
   message: >-
@@ -28,7 +32,7 @@ start:
     환경입니다! 직관적인 인터페이스와 고급 기능을 통해 효율성과 멀티태스킹의 새로운 시대를 탐험해 보세요.
   message_accent: 스타일로 생산성을 최적화하세요!
 general:
-  startup: 시작 시 실행하시겠습니까?
+  startup: 시작 시 실행
   language: 언어
   theme:
     label: 테마 정보
@@ -40,48 +44,50 @@ general:
     enabled: 활성화된 테마
     tags: 태그
     available: 사용 가능
-    selected: 선택된
+    selected: 선택됨
   icon_pack:
     label: 아이콘 팩
-  accent_color: 악센트 색상
+  accent_color: 강조 색상
   wallpaper:
-    select: 벽지를 선택하십시오
+    select: 배경화면을 선택하세요
+  date_format: 날짜 형식
 toolbar:
-  enable: 화려한 툴바 활성화
+  enable: 툴바 활성화
   placeholder:
-    select: 툴바 구조
+    select: 툴바 형식
     author: 작성자
     description: 설명
   height: 높이
+  auto_hide: 자동 숨기기
+  label: 도구 모음
 wm:
-  enable: 윈도우 매니저 활성화
   layout: 레이아웃
   author: 작성자
   description: 설명
   space_between_containers: 컨테이너 간 간격
-  workspace_padding: 작업 공간 패딩
-  workspace_offset: 작업 공간 오프셋 (여백)
-  resize_delta: 크기 조정 델타 (%)
+  workspace_padding: 작업 공간 안쪽 여백
+  workspace_offset: 작업 공간 바깥 여백
+  resize_delta: 크기 조정 수치 (%)
   border:
     enable: 창 테두리 활성화
     width: 테두리 너비
-    offset: 테두리 오프셋
-  disabled_windows_version: Windows 버전에는 Window Manager를 사용할 수 없습니다.
+    offset: 테두리 여백
+  enable: 타일링 윈도우 관리자 활성화
 weg:
   label: 독/작업 표시줄
   enable: 독/작업 표시줄 활성화
   width: 너비
   auto_hide: 자동 숨기기
-  dock_side: 독 측면
-  padding: 패딩
-  margin: 여백
+  padding: 안쪽 여백
+  margin: 바깥 여백
   gap: 간격
   items:
     label: 항목
     size: 항목 크기
     zoom_size: 확대된 크기 (테마에 사용됨)
     gap: 항목 간 간격
-    visible_separators: 보이는 구분선
+    visible_separators: 구분선 표시
+  dock_side: 위치
 devtools:
   enable: 개발자 도구 활성화
   app_folders: 앱 폴더
@@ -94,14 +100,14 @@ apps_configurations:
   import: 가져오기
   export: 내보내기
   delete: 삭제
-  swap: 교환
+  swap: 교체
   new: 새로 만들기
-  bundled_title: Seelen과 함께 제공되는 앱 구성
+  bundled_title: Seelen에서 제공한 설정
   bundled_msg: >-
-    이러한 번들 구성은 편집할 수 없으며 맞춤화 없이 최상의 경험을 제공하도록 설계되었습니다. 가장 일반적인 응용 프로그램을 자동으로
-    구성합니다.
-  confirm_delete_title: 삭제 확인
-  confirm_delete: 이 구성을 삭제하시겠습니까?
+    이러한 미리 구성된 설정은 편집할 수 없으며, 수정하지 않고 최상의 경험을 제공하도록 설계되었습니다.
+    자주 사용되는 프로그램을 자동으로 구성합니다.
+  confirm_delete_title: 삭제하시겠습니까?
+  confirm_delete: 정말로 이 설정을 삭제하시겠습니까?
   search: 검색
   app:
     name: 이름
@@ -112,27 +118,33 @@ apps_configurations:
     monitor_placeholder: 없음
     workspace: 작업 공간
     workspace_placeholder: 없음
-    title_edit: '{{name}} 편집 중'
-    title_create: '{{name}} 생성 중'
+    title_edit: '{{name}} 편집'
+    title_create: '{{name}} 만들기'
     title_readonly: '{{name}} 보기'
-    ok_edit: 업데이트
-    ok_create: 생성
-    ok_readonly: 새로 편집
-    options_label: 추가 옵션
+    ok_edit: 수정하기
+    ok_create: 만들기
+    ok_readonly: 복사본으로 편집
     options:
-      float: 부유
-      unmanage: 관리 안 함
+      float: 플로팅
+      unmanage: 관리 안함
       force: 강제 관리
-      pinned: 고정됨
+      pinned: 고정
+      hidden: 독/작업 표시줄에 숨기기
+    wm_options_label: 윈도우 관리자 옵션
+    weg_options_label: 독/작업 표시줄 옵션
+    options_label: 추가 옵션
   identifier:
     remove: 블록 삭제
     id: 식별자
     kind: 식별 기준
-    matching_strategy: 매칭 전략
-    negation: 매칭 부정
+    matching_strategy: 식별 방법
+    negation: 조건이 반대일때 식별하기
     and: 그리고
     or: 또는
     add_block: 블록 추가
+  extra_info: >-
+    Seelen UI는 앱당 (가장 먼저 일치한) 하나의 식별자만 사용하므로 식별된 순서는 중요합니다.
+    가장 최근에 추가된 항목이 우선순위를 정합니다. 참고로 테이블은 기본적으로 최신순 부터 오래된 순서로 정렬됩니다.
 extras:
   version: 버전
   links: 공식 링크
@@ -148,45 +160,81 @@ shortcuts:
     reserve_bottom: 하단 예약
     reserve_left: 왼쪽 예약
     reserve_right: 오른쪽 예약
-    reserve_float: 부유 예약
+    reserve_float: 플로팅 예약
     reserve_stack: 스택 예약
-    focus_top: 상단 집중
-    focus_bottom: 하단 집중
-    focus_left: 왼쪽 집중
-    focus_right: 오른쪽 집중
-    focus_latest: 최신 집중
+    focus_top: 상단에 포커스
+    focus_bottom: 하단에 포커스
+    focus_left: 왼쪽에 포커스
+    focus_right: 오른쪽에 포커스
+    focus_latest: 마지막으로 사용했던 윈도우 포커스
     increase_width: 너비 증가
     decrease_width: 너비 감소
     increase_height: 높이 증가
     decrease_height: 높이 감소
     restore_sizes: 크기 복원
-    switch_workspace_0: 작업 공간 0으로 전환
-    switch_workspace_1: 작업 공간 1으로 전환
-    switch_workspace_2: 작업 공간 2로 전환
-    switch_workspace_3: 작업 공간 3으로 전환
-    switch_workspace_4: 작업 공간 4로 전환
-    switch_workspace_5: 작업 공간 5로 전환
-    switch_workspace_6: 작업 공간 6으로 전환
-    switch_workspace_7: 작업 공간 7로 전환
-    switch_workspace_8: 작업 공간 8로 전환
-    switch_workspace_9: 작업 공간 9로 전환
-    move_to_workspace_0: 작업 공간 0으로 이동
-    move_to_workspace_1: 작업 공간 1으로 이동
-    move_to_workspace_2: 작업 공간 2로 이동
-    move_to_workspace_3: 작업 공간 3으로 이동
-    move_to_workspace_4: 작업 공간 4로 이동
-    move_to_workspace_5: 작업 공간 5로 이동
-    move_to_workspace_6: 작업 공간 6으로 이동
-    move_to_workspace_7: 작업 공간 7로 이동
-    move_to_workspace_8: 작업 공간 8으로 이동
-    move_to_workspace_9: 작업 공간 9으로 이동
-    send_to_workspace_0: 작업 공간 0으로 보내기
-    send_to_workspace_1: 작업 공간 1으로 보내기
-    send_to_workspace_2: 작업 공간 2로 보내기
-    send_to_workspace_3: 작업 공간 3으로 보내기
-    send_to_workspace_4: 작업 공간 4로 보내기
-    send_to_workspace_5: 작업 공간 5로 보내기
-    send_to_workspace_6: 작업 공간 6으로 보내기
-    send_to_workspace_7: 작업 공간 7으로 보내기
-    send_to_workspace_8: 작업 공간 8으로 보내기
-    send_to_workspace_9: 작업 공간 9으로 보내기
+    switch_workspace_0: 작업 공간 1로 전환
+    switch_workspace_1: 작업 공간 2로 전환
+    switch_workspace_2: 작업 공간 3으로 전환
+    switch_workspace_3: 작업 공간 4로 전환
+    switch_workspace_4: 작업 공간 5로 전환
+    switch_workspace_5: 작업 공간 6으로 전환
+    switch_workspace_6: 작업 공간 7로 전환
+    switch_workspace_7: 작업 공간 8로 전환
+    switch_workspace_8: 작업 공간 9로 전환
+    switch_workspace_9: 작업 공간 10으로 전환
+    move_to_workspace_0: 작업 공간 1로 이동
+    move_to_workspace_1: 작업 공간 2로 이동
+    move_to_workspace_2: 작업 공간 3으로 이동
+    move_to_workspace_3: 작업 공간 4로 이동
+    move_to_workspace_4: 작업 공간 5로 이동
+    move_to_workspace_5: 작업 공간 6으로 이동
+    move_to_workspace_6: 작업 공간 7로 이동
+    move_to_workspace_7: 작업 공간 8로 이동
+    move_to_workspace_8: 작업 공간 9로 이동
+    move_to_workspace_9: 작업 공간 10으로 이동
+    send_to_workspace_0: 작업 공간 1로 보내기
+    send_to_workspace_1: 작업 공간 2로 보내기
+    send_to_workspace_2: 작업 공간 3으로 보내기
+    send_to_workspace_3: 작업 공간 4로 보내기
+    send_to_workspace_4: 작업 공간 5로 보내기
+    send_to_workspace_5: 작업 공간 6으로 보내기
+    send_to_workspace_6: 작업 공간 7로 보내기
+    send_to_workspace_7: 작업 공간 8로 보내기
+    send_to_workspace_8: 작업 공간 9로 보내기
+    send_to_workspace_9: 작업 공간 10으로 보내기
+    misc_open_settings: 설정 열기
+    misc_toggle_lock_tracing: 잠금 로그 추척 토글
+    misc_toggle_win_event_tracing: 윈도우 이벤트 로그 추적 토글
+    toggle_launcher: 런처 토글
+  reset: 기본값으로 재설정
+  readonly_tooltip: 읽기 전용 단축키
+vd:
+  strategy:
+    native: 시스템 기본
+    label: 가상 데스크탑 모드
+    seelen: Seelen
+  disabled_windows_version: Windows 버전에는 시스템 기본 가상 데스크톱 모드를 사용할 수 없습니다.
+save_and_restart: 저장 및 재시작
+monitors_configurations:
+  label: 모니터 {{index}}
+wall:
+  no_background: 배경화면이 없습니다. 테마에 내장된 배경화면을 대신 사용합니다.
+  enable: Seelen 배경화면 활성화
+  interval: 주기적으로 배경화면 변경하기 (초)
+  backgrounds: 배경화면
+app_launcher:
+  runners:
+    explorer: 탐색
+    cmd: 명령
+    label: 실행 프로그램
+  enable: 앱 런처 활성화
+  monitor: 보여줄 화면
+more: 더보기
+insert: 추가
+inherit: 상속
+close: 닫기
+update:
+  available: 사용 가능한 업데이트가 존재합니다
+  downloading: 다운로드 중...
+  channel: 업데이트 채널
+miscellaneous: 기타

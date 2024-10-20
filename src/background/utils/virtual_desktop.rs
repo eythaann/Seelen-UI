@@ -1,12 +1,13 @@
-use color_eyre::eyre::eyre;
-use windows::{core::GUID, Win32::Foundation::HWND};
+use windows::core::GUID;
 use winreg::{enums::HKEY_CURRENT_USER, RegKey};
 
 use crate::{error_handler::Result, windows_api::WindowsApi};
 
-pub struct VirtualDesktopManager {}
+use super::is_windows_10;
 
-pub struct VirtualDesktop {
+pub struct RegistryVirtualDesktopManager {}
+
+pub struct RegistryVirtualDesktop {
     #[allow(dead_code)]
     id: [u8; 16],
     guid: GUID,
@@ -14,7 +15,7 @@ pub struct VirtualDesktop {
     name: String,
 }
 
-impl From<GUID> for VirtualDesktop {
+impl From<GUID> for RegistryVirtualDesktop {
     fn from(guid: GUID) -> Self {
         let mut id: Vec<u8> = Vec::new();
         id.append(&mut guid.data1.to_le_bytes().to_vec());
@@ -30,7 +31,7 @@ impl From<GUID> for VirtualDesktop {
     }
 }
 
-impl From<Vec<u8>> for VirtualDesktop {
+impl From<Vec<u8>> for RegistryVirtualDesktop {
     fn from(id: Vec<u8>) -> Self {
         Self {
             id: id.clone().try_into().expect("Invalid id length"),
@@ -45,7 +46,7 @@ impl From<Vec<u8>> for VirtualDesktop {
     }
 }
 
-impl VirtualDesktop {
+impl RegistryVirtualDesktop {
     pub fn id(&self) -> String {
         format!("{:?}", self.guid)
     }
@@ -55,58 +56,30 @@ impl VirtualDesktop {
     }
 }
 
-impl VirtualDesktopManager {
-    pub fn enum_virtual_desktops() -> Result<Vec<VirtualDesktop>> {
-        let session_id = WindowsApi::current_session_id()?;
+impl RegistryVirtualDesktopManager {
+    fn get_virtual_desktops_folder() -> Result<RegKey> {
         let hkcu = RegKey::predef(HKEY_CURRENT_USER);
-
-        // This is the path on Windows 10
-        let mut current = hkcu
-        .open_subkey(format!(
-            r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\{session_id}\VirtualDesktops"
-        ))
-        .ok()
-        .and_then(
-            |desktops| match desktops.get_raw_value("VirtualDesktopIDs") {
-                Ok(current) => Option::from(current.bytes),
-                Err(_) => None,
-            },
-        );
-
-        // This is the path on Windows 11
-        if current.is_none() {
-            current = hkcu
-                .open_subkey(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops")
-                .ok()
-                .and_then(
-                    |desktops| match desktops.get_raw_value("VirtualDesktopIDs") {
-                        Ok(current) => Option::from(current.bytes),
-                        Err(_) => None,
-                    },
-                );
-        }
-
-        match current {
-            Some(current) => {
-                let mut result = Vec::new();
-                for desktop_id in current.chunks_exact(16).map(Vec::from) {
-                    result.push(VirtualDesktop::from(desktop_id))
-                }
-                Ok(result)
-            }
-            None => Err(eyre!("could not determine current virtual desktop").into()),
-        }
+        Ok(if is_windows_10() {
+            let session_id = WindowsApi::current_session_id()?;
+            hkcu.open_subkey(format!(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SessionInfo\{session_id}\VirtualDesktops"))?
+        } else {
+            hkcu.open_subkey(r"SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VirtualDesktops")?
+        })
     }
 
-    pub fn get_by_window(hwnd: HWND) -> Result<VirtualDesktop> {
-        Ok(VirtualDesktop::from(
-            winvd::get_desktop_by_window(hwnd)?.get_id()?,
-        ))
+    pub fn enum_virtual_desktops() -> Result<Vec<RegistryVirtualDesktop>> {
+        let desktops = Self::get_virtual_desktops_folder()?;
+        let current = desktops.get_raw_value("VirtualDesktopIDs")?.bytes;
+        let mut result = Vec::new();
+        for desktop_id in current.chunks_exact(16).map(Vec::from) {
+            result.push(RegistryVirtualDesktop::from(desktop_id))
+        }
+        Ok(result)
     }
 
-    pub fn get_current_virtual_desktop() -> Result<VirtualDesktop> {
-        Ok(VirtualDesktop::from(
-            winvd::get_current_desktop()?.get_id()?,
-        ))
+    pub fn current_virtual_desktops() -> Result<RegistryVirtualDesktop> {
+        let desktops = Self::get_virtual_desktops_folder()?;
+        let current = desktops.get_raw_value("CurrentVirtualDesktop")?;
+        Ok(RegistryVirtualDesktop::from(current.bytes))
     }
 }

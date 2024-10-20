@@ -1,7 +1,7 @@
 sides:
-  top: Superiore
+  top: Sopra
   left: Sinistra
-  bottom: Metter il fondo a
+  bottom: Sotto
   right: Destra
 header:
   labels:
@@ -14,6 +14,10 @@ header:
     seelen_bar: Barra degli strumenti di fantasia
     seelen_wm: Gestore delle finestre
     specific_apps: App specifiche
+    seelen_wall: Sfondo
+    seelen_rofi: Lanciatore di applicazioni
+    virtual_desk: Desktop virtuali
+    home: Casa
 start:
   title: Benvenuta!
   message: >-
@@ -41,13 +45,16 @@ general:
   accent_color: Colore accento
   wallpaper:
     select: Seleziona sfondo
+  date_format: Formato della data
 toolbar:
   placeholder:
     author: Autrice
     description: Descrizione
     select: Struttura della barra degli strumenti
   height: Altezza
-  enable: Abilita barra degli strumenti di fantasia
+  enable: Abilita barra degli strumenti
+  auto_hide: Nascondersi auto
+  label: Barra degli strumenti
 wm:
   border:
     width: Larghezza del bordo
@@ -57,11 +64,10 @@ wm:
   description: Descrizione
   author: Autrice
   resize_delta: Ridimensiona Delta (%)
-  enable: Abilita il gestore delle finestre
   space_between_containers: Spazio tra contenitori
   workspace_offset: Offset degli spazi di lavoro (margini)
   workspace_padding: Padding degli spazi di lavoro
-  disabled_windows_version: Il gestore Windows non è disponibile per la versione di Windows.
+  enable: Abilita il gestore delle finestre di piastrellatura
 weg:
   items:
     label: Elementi
@@ -76,7 +82,7 @@ weg:
   gap: Spacco
   label: Dock/TaskBar
   enable: Abilita dock/barra delle applicazioni
-  dock_side: Lato dock
+  dock_side: Posizione
 devtools:
   load: Carico
   custom_config_file: Carica il file di configurazione personalizzato
@@ -92,6 +98,7 @@ apps_configurations:
       force: Force Manage
       pinned: Appuntato
       unmanage: Unmanage
+      hidden: Nascondersi dal dock/barra delle applicazioni
     monitor_placeholder: Nessuno
     ok_create: Creare
     workspace_placeholder: Nessuno
@@ -106,6 +113,8 @@ apps_configurations:
     title_create: Creazione di {{name}}
     ok_readonly: Modifica come nuovo
     monitor: Tenere sotto controllo
+    weg_options_label: Opzioni dock/barra delle applicazioni
+    wm_options_label: Opzioni del gestore delle finestre
     options_label: Opzioni extra
   identifier:
     and: E
@@ -129,6 +138,11 @@ apps_configurations:
     Queste configurazioni in bundle non sono modificabili e sono progettate per
     offrirti la migliore esperienza senza personalizzazione. Configurano
     automaticamente le applicazioni più comuni per te.
+  extra_info: >-
+    L'interfaccia utente di Seelen utilizza un solo identificatore per app
+    (prima corrispondenza trovata), quindi l'ordine in che modo sono specifici è
+    importante, l'ultimo aggiunto sarà prioritario, poiché nota che la tabella
+    viene ordinata per impostazione predefinita dall'ultimo a vecchio.
 extras:
   relaunch: Rilancio
   discord: Discordia
@@ -141,7 +155,6 @@ shortcuts:
     reserve_float: Float di riserva
     move_to_workspace_5: Passa all'area di lavoro 5
     move_to_workspace_2: Passa all'area di lavoro 2
-    switch_workspace_1: Passa all'area di lavoro 1
     move_to_workspace_4: Passa all'area di lavoro 4
     focus_bottom: Focus Bottom
     focus_top: Focus top
@@ -170,7 +183,6 @@ shortcuts:
     switch_workspace_2: Passa all'area di lavoro 2
     focus_latest: Focus Ultime
     send_to_workspace_1: Invia a Workspace 1
-    switch_workspace_0: Passa all'area di lavoro 0
     focus_left: Focus a sinistra
     switch_workspace_6: Passa all'area di lavoro 6
     move_to_workspace_8: Passa all'area di lavoro 8
@@ -184,10 +196,18 @@ shortcuts:
     switch_workspace_5: Passa all'area di lavoro 5
     switch_workspace_3: Passa all'area di lavoro 3
     move_to_workspace_7: Passa all'area di lavoro 7
+    switch_workspace_0: Passa all'area di lavoro 1
+    switch_workspace_1: Passa all'area di lavoro 2
+    misc_toggle_win_event_tracing: Taggle Win Event Tracing (Logs)
+    misc_open_settings: Impostazioni aperte
+    misc_toggle_lock_tracing: Attiva il tracciamento del blocco (tronchi)
+    toggle_launcher: Attivare
   enable: Abilita scorciatoie integrate (AHK)
   enable_tooltip: >-
     Disabilita se implementerai i tuoi collegamenti utilizzando l'API Core
     Seelen
+  reset: Ripristina le impostazioni predefinite
+  readonly_tooltip: Questo è un collegamento di sola lettura
 delete: Eliminare
 inProgress: In corso...
 open: Aprire
@@ -195,3 +215,35 @@ quit: Esentata
 save: Salva
 loading: Caricamento...
 cancel: Annulla
+vd:
+  strategy:
+    seelen: Seelen
+    native: Nativa
+    label: Strategia desktop virtuale
+  disabled_windows_version: >-
+    La strategia desktop virtuale nativa non è disponibile per la versione di
+    Windows.
+save_and_restart: Salva e riavvia
+monitors_configurations:
+  label: Monitor {{indice}}
+wall:
+  backgrounds: Sfondi
+  enable: Abilita Seelen Wall
+  interval: Cambia lo sfondo ogni (secondi)
+  no_background: Svuota vuota, usando invece lo sfondo del tema.
+app_launcher:
+  runners:
+    cmd: Comando
+    explorer: Correre
+    label: Corridori
+  enable: Abilita il lanciatore di app
+  monitor: Monitorare da mostrare
+insert: Inserire
+inherit: Ereditare
+more: Di più
+close: Esci
+update:
+  available: Aggiornamento disponibile!
+  downloading: Download ...
+  channel: Canale di aggiornamento
+miscellaneous: Varie

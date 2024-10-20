@@ -1,30 +1,27 @@
-import { setColorsAsCssVariables } from '../../../../shared';
-import { FileChange } from '../../../../shared/events';
-import { parseAsCamel } from '../../../../shared/schemas';
-import { SettingsSchema } from '../../../../shared/schemas/Settings';
-import { Theme } from '../../../../shared/schemas/Theme';
-import { saveUserSettings, UserSettingsLoader } from './storeApi';
 import { configureStore } from '@reduxjs/toolkit';
-import { emit, listen as listenGlobal } from '@tauri-apps/api/event';
+import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
+import { AppConfiguration, SeelenEvent, Settings, Theme, UIColors } from 'seelen-core';
 
 import { startup } from '../tauri/infra';
 
 import { RootActions, RootReducer } from './app/reducer';
-import {
-  StateAppsToYamlApps,
-  StateToJsonSettings,
-  StaticSettingsToState,
-  YamlToState_Apps,
-} from './app/StateBridge';
+import { StateToJsonSettings, StaticSettingsToState } from './app/StateBridge';
 
-import { RootState, UIColors } from './domain';
+import { RootState } from './domain';
+
+import { saveUserSettings, UserSettingsLoader } from './storeApi';
 
 const IsSavingSettings = { current: false };
 
 export const store = configureStore({
   reducer: RootReducer,
+  middleware(getDefaultMiddleware) {
+    return getDefaultMiddleware({
+      serializableCheck: false,
+    });
+  },
 });
 
 export type AppDispatch = typeof store.dispatch;
@@ -32,6 +29,15 @@ export type store = {
   dispatch: AppDispatch;
   getState: () => RootState;
 };
+
+async function initUIColors() {
+  function loadColors(colors: UIColors) {
+    UIColors.setAssCssVariables(colors);
+    store.dispatch(RootActions.setColors(colors));
+  }
+  loadColors(await UIColors.getAsync());
+  await UIColors.onChange(loadColors);
+}
 
 export async function registerStoreEvents() {
   await listenGlobal<any[]>('placeholders', async () => {
@@ -43,16 +49,13 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setAvailableThemes(event.payload));
   });
 
-  await listenGlobal<UIColors>('colors', (event) => {
-    setColorsAsCssVariables(event.payload);
-    store.dispatch(RootActions.setColors(event.payload));
+  await initUIColors();
+
+  await listenGlobal<AppConfiguration[]>('settings-by-app', (event) => {
+    store.dispatch(RootActions.setAppsConfigurations(event.payload));
   });
 
-  await listenGlobal<anyObject[]>('settings-by-app', (event) => {
-    store.dispatch(RootActions.setAppsConfigurations(YamlToState_Apps(event.payload)));
-  });
-
-  await listenGlobal<any>(FileChange.Settings, (event) => {
+  await listenGlobal<Settings>(SeelenEvent.StateSettingsChanged, (event) => {
     if (IsSavingSettings.current) {
       IsSavingSettings.current = false;
       return;
@@ -60,13 +63,12 @@ export async function registerStoreEvents() {
     const currentState = store.getState();
     const newState: RootState = {
       ...currentState,
-      ...parseAsCamel(SettingsSchema, event.payload),
+      ...event.payload,
       toBeSaved: false,
+      toBeRestarted: false,
     };
     store.dispatch(RootActions.setState(newState));
   });
-
-  await emit('register-colors-events');
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
@@ -78,6 +80,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     .withLayouts()
     .withPlaceholders()
     .withUserApps()
+    .withThemes()
     .withWallpaper()
     .load(customPath);
 
@@ -97,15 +100,23 @@ export const SaveStore = async () => {
     const currentState = store.getState();
     const settings = {
       jsonSettings: StateToJsonSettings(currentState),
-      yamlSettings: [
-        //...StateAppsToYamlApps(currentState.appsTemplates.flatMap((x) => x.apps), true),
-        ...StateAppsToYamlApps(currentState.appsConfigurations),
-      ],
+      yamlSettings: currentState.appsConfigurations,
     };
 
     IsSavingSettings.current = true;
     await saveUserSettings(settings);
-    store.dispatch(RootActions.setToBeSaved(false));
+
+    let newState = {
+      ...currentState,
+      lastLoaded: null,
+      toBeSaved: false,
+    };
+    store.dispatch(
+      RootActions.setState({
+        ...newState,
+        lastLoaded: cloneDeep(newState),
+      }),
+    );
   } catch (error) {
     Modal.error({
       title: 'Error on Save',

@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Gorchmynnwn
+    explorer: Redych
+footer:
+  shortcuts: Dangos llwybrau byr
+header:
+  search: Ap, gorchymyn neu lwybr
+item:
+  open_location: Lleoliad Ffeil Agored
+  pin: Pin i doc

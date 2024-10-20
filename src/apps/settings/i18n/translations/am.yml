@@ -14,6 +14,10 @@ header:
     seelen_bar: Fancy የመሣሪያ አሞሌ
     monitors: ተቆጣጣሪዎች
     seelen_wm: የመስኮት አቀናባሪ
+    seelen_wall: ግድግዳው
+    seelen_rofi: የመተግበሪያ አስጀማሪ
+    virtual_desk: ምናባዊ ዴስክቶፕስ
+    home: ቤት
 start:
   title: እንኳን ደህና መጣህ!
   message: >-
@@ -39,6 +43,7 @@ general:
   accent_color: የዝግጅት ቀለም
   wallpaper:
     select: የግድግዳ ወረቀት ይምረጡ
+  date_format: የቀን ቅርጸት
 toolbar:
   placeholder:
     description: መግለጫ
@@ -46,6 +51,8 @@ toolbar:
     author: ደራሲ ደራሲ
   height: ቁመት
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
+  auto_hide: ራስ-ሰር መደበቅ
+  label: የመሣሪያ አሞሌ
 wm:
   border:
     width: ድንበር ስፋት
@@ -54,12 +61,11 @@ wm:
   description: መግለጫ
   layout: አቀማመጥ
   space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ
-  enable: የመስኮት አቀናባሪን አንቃ
   workspace_offset: የስራ ቦታዎች ማካካሻ (ማርጂኖች)
   workspace_padding: የስራ ቦታዎች ፓድ
   resize_delta: ዴልታ (%)
   author: ደራሲ ደራሲ
-  disabled_windows_version: የመስኮት አቀናባሪው ለዊንዶውስ ስሪትዎ አይገኝም.
+  enable: የታሸገ መስኮት አቀናባሪን ያንቁ
 weg:
   items:
     zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
@@ -74,7 +80,7 @@ weg:
   width: ስፋት
   gap: ክፍተት
   label: Dock / Accorbar
-  dock_side: ጎን
+  dock_side: አቀማመጥ
 devtools:
   app_folders: የመተግበሪያ አቃፊዎች
   data_folder: የውሂብ አቃፊ
@@ -90,6 +96,7 @@ apps_configurations:
       pinned: ተያይ ated ል
       unmanage: አለመግባባት
       force: ኃይል ማስተዳደር
+      hidden: ከ Dock / Actorbar ይደብቁ
     monitor_placeholder: የለም
     monitor: ተቆጣጠር
     category_placeholder: የለም
@@ -104,6 +111,8 @@ apps_configurations:
     title_create: '{{{ስም} መፍጠር}}'
     category: ምድብ
     ok_readonly: እንደ አዲስ ያርትዑ
+    weg_options_label: የመርከሪያ / የተግባር አሞሌ አማራጮች
+    wm_options_label: የመስኮት አቀናባሪ አማራጮች
     options_label: ተጨማሪ አማራጮች
   identifier:
     remove: ብሎክ ሰርዝ
@@ -126,6 +135,10 @@ apps_configurations:
   export: ወደ ውጭ ይላኩ
   swap: መቀያየር
   import: ማስመጣት
+  extra_info: >-
+    Seelen UI በአንድ መተግበሪያ አንድ መለያ ብቻ ነው የሚጠቀመው (የመጀመሪያው ግጥሚያ ተገኝቷል) ስለዚህ እንዴት
+    እንደሚገለጹ ቅደም ተከተላቸው አስፈላጊ ነው፣ የቅርብ ጊዜዎቹ የተጨመሩት ቅድሚያ ይሰጣቸዋል፣ ምክንያቱም ሰንጠረዡ ከቅርቡ
+    ወደ አሮጌው በነባሪ የተደረደረ ነው።
 extras:
   links: ኦፊሴላዊ አገናኞች
   github: Github
@@ -140,8 +153,6 @@ shortcuts:
     increase_height: ቁመት ይጨምሩ
     send_to_workspace_1: ወደ የስራ ቦታ 1 ይላኩ 1
     reserve_bottom: የተጠባበቅ ክፍል
-    switch_workspace_1: ወደ የሥራ ቦታ 1 ቀይር
-    switch_workspace_0: ወደ የሥራ ቦታ 0 ይቀይሩ
     move_to_workspace_0: ወደ የሥራ ቦታ 0 ይሂዱ
     send_to_workspace_5: ወደ የሥራ ቦታ 5 ይላኩ
     switch_workspace_9: ወደ የሥራ ቦታ 9 ቀይር
@@ -181,8 +192,16 @@ shortcuts:
     restore_sizes: መጠኖች ወደነበሩበት ይመልሱ
     reserve_right: መብት
     decrease_width: ስፋት መቀነስ
+    switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
+    switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
+    misc_open_settings: ክፍት ቅንብሮች
+    misc_toggle_lock_tracing: መቆለፊያ መቆለፊያ (ምዝግብ ማስታወሻዎች)
+    misc_toggle_win_event_tracing: የ UNSCUCT PORTERSERSESTERE (ምዝግብ ማስታወሻዎች)
+    toggle_launcher: መቀላቀል
   enable: የተቀናጁ አቋራጮችን (AHK)
   enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
+  reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
+  readonly_tooltip: ይህ የተነበበ ብቻ አቋራጭ ነው
 inProgress: በሂደት ላይ...
 open: ክፈት
 cancel: ይቅር
@@ -190,3 +209,33 @@ delete: ሰርዝ
 quit: አቁም
 loading: በመጫን ላይ ...
 save: አስቀምጥ
+vd:
+  strategy:
+    label: ምናባዊ ዴስክቶፕ ስትራቴጂ
+    seelen: እዩ
+    native: ተወላጅ
+  disabled_windows_version: ቤተኛ ምናባዊ ዴስክቶፕ ስትራቴጂ ለዊንዶውስ ስሪትዎ አይገኝም.
+save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
+monitors_configurations:
+  label: ይቆጣጠሩ {{አው.ፊ.}}}}
+wall:
+  backgrounds: የግድግዳ ወረቀቶች
+  interval: የግድግዳ ወረቀት እያንዳንዱን (ሰከንዶች) ይለውጡ
+  no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
+  enable: የጥንቃቄ ግድግዳ አንቃ
+app_launcher:
+  runners:
+    explorer: ሩጫ
+    cmd: ትእዛዝ
+    label: ሯጮች
+  monitor: ለማሳየት መከታተል
+  enable: የመተግበሪያ አስጀማሪን አንቃ
+insert: ያስገቡ
+more: ተጨማሪ
+inherit: ውርስ
+close: ገጠመ
+update:
+  available: ዝመና ይገኛል!
+  downloading: ማውረድ ...
+  channel: ጣቢያውን አዘምን
+miscellaneous: ልዩነቶች

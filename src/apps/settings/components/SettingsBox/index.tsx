@@ -8,8 +8,6 @@ interface Props {
 
 export const SettingsGroup = ({ children }: Props) => {
   return <div className={cs.group}>
-    <div className={cs.blur}/>
-    <div className={cs.noise}/>
     <div className={cs.content}>{children}</div>
   </div>;
 };
@@ -17,15 +15,15 @@ export const SettingsGroup = ({ children }: Props) => {
 interface SubGroupProps {
   children: React.ReactNode;
   label: React.ReactNode;
-  disableOptions?: boolean;
+  disabled?: boolean;
 }
 
-export const SettingsSubGroup = ({ children, label, disableOptions }: SubGroupProps) => {
+export const SettingsSubGroup = ({ children, label, disabled }: SubGroupProps) => {
   return (
-    <div>
+    <div className={cs.subgroup}>
       <div className={cs.subtitle}>{label}</div>
-      <ConfigProvider componentDisabled={disableOptions}>
-        <div className={cs.subgroup}>{children}</div>
+      <ConfigProvider componentDisabled={disabled}>
+        <div className={cs.content}>{children}</div>
       </ConfigProvider>
     </div>
   );
@@ -42,7 +40,7 @@ type OptionProps =
 
 export const SettingsOption = (props: OptionProps) => {
   return (
-    <div className={cs.box}>
+    <div className={cs.setting}>
       {'children' in props ? (
         props.children
       ) : (

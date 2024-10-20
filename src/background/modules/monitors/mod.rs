@@ -39,33 +39,30 @@ pub enum MonitorManagerEvent {
 type OnMonitorsChange = Box<dyn Fn(MonitorManagerEvent) + Send + Sync>;
 
 pub struct MonitorManager {
-    hwnd: isize,
     pub monitors: Vec<(String, HMONITOR)>,
     callbacks: Vec<OnMonitorsChange>,
 }
 
-impl MonitorManager {
-    pub fn hwnd(self) -> HWND {
-        HWND(self.hwnd)
-    }
+unsafe impl Send for MonitorManager {}
 
-    pub extern "system" fn window_proc(
+impl MonitorManager {
+    unsafe extern "system" fn window_proc(
         window: HWND,
         message: u32,
         wparam: WPARAM,
         lparam: LPARAM,
     ) -> LRESULT {
-        unsafe {
-            match message {
-                // Added based on this https://stackoverflow.com/a/33762334
-                WM_DISPLAYCHANGE | WM_SETTINGCHANGE | WM_DEVICECHANGE => {
-                    // log::debug!("Dispatching {}, {:?}, {:?}", message, wparam, lparam);
+        match message {
+            // Added based on this https://stackoverflow.com/a/33762334
+            WM_DISPLAYCHANGE | WM_SETTINGCHANGE | WM_DEVICECHANGE => {
+                // log::debug!("Dispatching {}, {:?}, {:?}", message, wparam, lparam);
+                std::thread::spawn(move || {
                     let mut manager = trace_lock!(MONITOR_MANAGER);
 
                     let mut old_list = manager.monitors.clone();
                     let new_list = match Self::get_monitors() {
                         Ok(monitors) => monitors,
-                        Err(_) => return LRESULT(0),
+                        Err(_) => return,
                     };
 
                     for (name, id) in &new_list {
@@ -91,14 +88,14 @@ impl MonitorManager {
                     }
 
                     manager.monitors = new_list.into_iter().collect();
-                    LRESULT(0)
-                }
-                _ => DefWindowProcW(window, message, wparam, lparam),
+                });
+                LRESULT(0)
             }
+            _ => DefWindowProcW(window, message, wparam, lparam),
         }
     }
 
-    pub fn new() -> Result<Self> {
+    unsafe fn create_background_window() -> Result<()> {
         let wide_name: Vec<u16> = "Seelen Monitor Manager"
             .encode_utf16()
             .chain(Some(0))
@@ -117,14 +114,10 @@ impl MonitorManager {
             ..Default::default()
         };
 
-        unsafe {
-            RegisterClassW(&wnd_class);
-        }
+        RegisterClassW(&wnd_class);
 
-        let (hwnd_sender, hwnd_receiver) = crossbeam_channel::bounded::<HWND>(1);
-
-        spawn_named_thread("Monitor Manager", move || unsafe {
-            let hwnd = CreateWindowExW(
+        let hwnd = unsafe {
+            CreateWindowExW(
                 WINDOW_EX_STYLE::default(),
                 PCWSTR(wide_class.as_ptr()),
                 PCWSTR(wide_name.as_ptr()),
@@ -137,34 +130,38 @@ impl MonitorManager {
                 None,
                 h_module,
                 None,
-            );
+            )?
+        };
 
-            log_error!(hwnd_sender.send(hwnd));
+        let mut notification_filter = DEV_BROADCAST_DEVICEINTERFACE_W {
+            dbcc_size: std::mem::size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>() as u32,
+            dbcc_devicetype: DBT_DEVTYP_DEVICEINTERFACE.0,
+            dbcc_reserved: 0,
+            dbcc_classguid: GUID_DEVINTERFACE_MONITOR,
+            dbcc_name: [0; 1],
+        };
 
-            let mut notification_filter = DEV_BROADCAST_DEVICEINTERFACE_W {
-                dbcc_size: std::mem::size_of::<DEV_BROADCAST_DEVICEINTERFACE_W>() as u32,
-                dbcc_devicetype: DBT_DEVTYP_DEVICEINTERFACE.0,
-                dbcc_reserved: 0,
-                dbcc_classguid: GUID_DEVINTERFACE_MONITOR,
-                dbcc_name: [0; 1],
-            };
+        RegisterDeviceNotificationW(
+            hwnd,
+            &mut notification_filter as *mut _ as *mut _,
+            DEVICE_NOTIFY_WINDOW_HANDLE,
+        )?;
 
-            log_error!(RegisterDeviceNotificationW(
-                hwnd,
-                &mut notification_filter as *mut _ as *mut _,
-                DEVICE_NOTIFY_WINDOW_HANDLE,
-            ));
+        let mut msg = MSG::default();
+        while GetMessageW(&mut msg, hwnd, 0, 0).as_bool() {
+            let _ = TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
 
-            let mut msg = MSG::default();
-            while GetMessageW(&mut msg, hwnd, 0, 0).into() {
-                let _ = TranslateMessage(&msg);
-                DispatchMessageW(&msg);
-                std::thread::sleep(std::time::Duration::from_millis(10));
-            }
+        Ok(())
+    }
+
+    pub fn new() -> Result<Self> {
+        spawn_named_thread("Monitor Manager", || unsafe {
+            log_error!(Self::create_background_window());
         })?;
 
         Ok(Self {
-            hwnd: hwnd_receiver.recv()?.0,
             callbacks: Vec::new(),
             monitors: Self::get_monitors()?,
         })
@@ -172,7 +169,7 @@ impl MonitorManager {
 
     fn get_monitors() -> Result<Vec<(String, HMONITOR)>> {
         let mut monitors = Vec::new();
-        for m in MonitorEnumerator::new_refreshed()? {
+        for m in MonitorEnumerator::get_all()? {
             monitors.push((WindowsApi::monitor_name(m)?, m));
         }
         Ok(monitors)

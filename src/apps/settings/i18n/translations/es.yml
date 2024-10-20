@@ -21,6 +21,10 @@ header:
     shortcuts: Atajos
     developer: Desarrollador
     info: Información
+    seelen_rofi: Lanzador de aplicaciones
+    seelen_wall: La pared
+    virtual_desk: Escritorios virtuales
+    home: Hogar
 start:
   title: ¡Bienvenido!
   message: >-
@@ -48,6 +52,7 @@ general:
   accent_color: Acentuar el color
   wallpaper:
     select: Seleccionar papel tapiz
+  date_format: Formato de fecha
 toolbar:
   enable: Habilitar barra elegante
   placeholder:
@@ -55,8 +60,9 @@ toolbar:
     author: Autor
     description: Descripción
   height: Altura
+  auto_hide: Escondite automático
+  label: Barra de herramientas
 wm:
-  enable: Habilitar gestor de ventanas
   layout: Distribución
   author: Autor
   description: Descripción
@@ -68,13 +74,12 @@ wm:
     enable: Habilitar borde de ventana
     width: Ancho del borde
     offset: Desplazamiento del borde
-  disabled_windows_version: El Administrador de ventanas no está disponible para su versión de Windows.
+  enable: Habilitar el administrador de la ventana de mosaico
 weg:
   label: Dock/Barra de tareas
   enable: Habilitar dock/barra de tareas
   width: Ancho
   auto_hide: Ocultar automáticamente
-  dock_side: Lado del dock
   padding: Relleno
   margin: Margen
   gap: Espacio
@@ -84,6 +89,7 @@ weg:
     zoom_size: Tamaño ampliado (usado para temas)
     gap: Espacio entre elementos
     visible_separators: Separadores visibles
+  dock_side: Posición
 devtools:
   enable: Habilitar herramientas de desarrollador
   app_folders: Carpetas de aplicaciones
@@ -121,12 +127,15 @@ apps_configurations:
     ok_edit: Actualizar
     ok_create: Crear
     ok_readonly: Editar como nuevo
-    options_label: Opciones adicionales
     options:
       float: Flotar
       unmanage: No gestionar
       force: Forzar gestión
       pinned: Fijado
+      hidden: Esconderse del muelle/barra de tareas
+    wm_options_label: Opciones de administrador de ventanas
+    weg_options_label: Opciones de barra de muelle/tareas
+    options_label: Opciones adicionales
   identifier:
     remove: Eliminar bloque
     id: Identificador
@@ -136,6 +145,12 @@ apps_configurations:
     and: Y (AND)
     or: O (OR)
     add_block: Agregar bloque
+  extra_info: >-
+    La interfaz de usuario de Seelen usa solo un identificador por aplicación
+    (primera coincidencia encontrada), por lo que el orden en cómo se
+    especifican es importante; se dará prioridad a los últimos agregados, como
+    se indica en la tabla, que de forma predeterminada está ordenada de la más
+    reciente a la más antigua.
 extras:
   version: Versión
   links: Enlaces oficiales
@@ -165,8 +180,6 @@ shortcuts:
     increase_height: Aumentar altura
     decrease_height: Disminuir altura
     restore_sizes: Restaurar tamaños
-    switch_workspace_0: Cambiar al espacio de trabajo 0
-    switch_workspace_1: Cambiar al espacio de trabajo 1
     switch_workspace_2: Cambiar al espacio de trabajo 2
     switch_workspace_3: Cambiar al espacio de trabajo 3
     switch_workspace_4: Cambiar al espacio de trabajo 4
@@ -195,3 +208,45 @@ shortcuts:
     send_to_workspace_7: Enviar al espacio de trabajo 7
     send_to_workspace_8: Enviar al espacio de trabajo 8
     send_to_workspace_9: Enviar al espacio de trabajo 9
+    switch_workspace_0: Cambiar al espacio de trabajo 1
+    switch_workspace_1: Cambiar al espacio de trabajo 2
+    misc_toggle_lock_tracing: Rastreo de bloqueo de al revés (registros)
+    misc_open_settings: Abrir configuración
+    misc_toggle_win_event_tracing: Rastreo de eventos para alternar (registros)
+    toggle_launcher: Palanca
+  reset: Reiniciar a los valores predeterminados
+  readonly_tooltip: Este es un atajo de solo lectura
+vd:
+  strategy:
+    native: Nativa
+    seelen: Seelen
+    label: Estrategia de escritorio virtual
+  disabled_windows_version: >-
+    La estrategia de escritorio virtual nativa no está disponible para su
+    versión de Windows.
+save_and_restart: Guardar y reiniciar
+monitors_configurations:
+  label: Monitor {{índice}}
+wall:
+  interval: Cambiar papel tapiz cada (segundos)
+  no_background: >-
+    Presentación de diapositivas vacías, utilizando el fondo del tema en su
+    lugar.
+  backgrounds: Fondos de pantalla
+  enable: Habilitar la pared de Seelen
+app_launcher:
+  runners:
+    explorer: Correr
+    label: Corredoras
+    cmd: Dominio
+  enable: Habilitar el lanzador de aplicaciones
+  monitor: Monitor para mostrar
+inherit: Heredar
+insert: Insertar
+more: Más
+close: Cerca
+update:
+  available: Actualización disponible!
+  downloading: Descarga ...
+  channel: Actualizar el canal
+miscellaneous: Misceláneas

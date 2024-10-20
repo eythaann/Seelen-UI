@@ -4,8 +4,8 @@ media:
   input_device: 입력 장치
   players: 미디어 플레이어
   device:
-    multimedia: 멀티미디어
-    comunications: 통신
+    multimedia: 멀티미디어 장치
+    comunications: 통신 장치
 network:
   not_found: 네트워크를 찾을 수 없음
   more: 추가 네트워크 설정
@@ -21,15 +21,18 @@ settings:
   sleep: 절전
   restart: 다시 시작
   shutdown: 종료
-  power: 힘
+  power: 전원
 placeholder:
   open_user_folder: 사용자 폴더 열기
   open_system_tray: 시스템 트레이 열기
   bluetooth_devices: 블루투스 및 장치
   ethernet_connected: 인터넷 연결됨
-  ethernet_disconnected: 인터넷 연결 안 됨
+  ethernet_disconnected: 인터넷 연결 안됨
   volume: 볼륨
   battery_remaining: '% 남음'
   smart_charge: ' - 스마트 충전'
   settings: 빠른 설정
   notifications: 알림
+unlabelled_tray: 텍스트가 없는 트레이
+context_menu:
+  remove: 항목 제거

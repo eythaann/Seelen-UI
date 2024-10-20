@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    cmd: Komut İstemi
+    explorer: Çalıştır
+footer:
+  shortcuts: Kısayolları Göster
+header:
+  search: Uygulama, Komut veya Dizin
+item:
+  pin: Dock'a Sabitle
+  open_location: Dosya Konumunu Aç

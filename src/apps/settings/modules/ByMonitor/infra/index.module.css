@@ -1,0 +1,24 @@
+.itemContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .itemLeft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+
+      > button {
+        flex: 1;
+      }
+    }
+  }
+}

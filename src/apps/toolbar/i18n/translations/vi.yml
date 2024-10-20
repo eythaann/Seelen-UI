@@ -33,3 +33,6 @@ placeholder:
   smart_charge: '- Phí thông minh'
   battery_remaining: '% còn lại'
   notifications: Thông báo
+unlabelled_tray: Biểu tượng khay không ghi nhãn
+context_menu:
+  remove: Xóa vật phẩm

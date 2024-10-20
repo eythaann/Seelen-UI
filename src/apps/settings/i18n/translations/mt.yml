@@ -14,6 +14,10 @@ header:
     seelen_weg: Dock / Taskbar
     developer: Żviluppatur
     monitors: Monitors
+    seelen_wall: Il-ħajt
+    seelen_rofi: APP Lancher
+    virtual_desk: Desktops virtwali
+    home: Id-dar
 start:
   title: Merħba!
   message: >-
@@ -41,6 +45,7 @@ general:
   accent_color: Kulur tal-aċċent
   wallpaper:
     select: Agħżel Wallpaper
+  date_format: Format tad-data
 toolbar:
   placeholder:
     author: Awtur
@@ -48,20 +53,21 @@ toolbar:
     select: Struttura tal-Toolbar
   height: Għoli
   enable: Jippermetti toolbar tal-fancy
+  auto_hide: Auto Hide
+  label: Toolbar
 wm:
   border:
     enable: Ippermetti l-fruntiera tat-tieqa
     width: Wisa 'tal-fruntiera
     offset: Offset tal-fruntiera
   description: Deskrizzjoni
-  enable: Ippermetti l-maniġer tat-twieqi
   layout: Tqassim
   resize_delta: Daqs mill-ġdid Delta (%)
   author: Awtur
   workspace_offset: Spazji tax-Xogħol Offset (Marġini)
   space_between_containers: Spazju bejn il-kontenituri
   workspace_padding: Padding tal-ispazji tax-xogħol
-  disabled_windows_version: Il-maniġer tat-twieqi mhux disponibbli għall-verżjoni tal-Windows tiegħek.
+  enable: Ippermetti maniġer tat-tieqa tal-madum
 weg:
   items:
     visible_separators: Separaturi viżibbli
@@ -69,7 +75,6 @@ weg:
     gap: Spazju bejn l-oġġetti
     size: Daqs tal-oġġett
     zoom_size: Daqs miżjud (użat għat-temi)
-  dock_side: Naħa tal-baċir
   label: Dock / Taskbar
   width: Wisa '
   enable: Enable Dock / Taskbar
@@ -77,6 +82,7 @@ weg:
   auto_hide: Auto Hide
   padding: Ikkuttunar
   margin: Marġni
+  dock_side: Pożizzjoni
 devtools:
   data_folder: Folder tad-dejta
   install_folder: Folder tal-installazzjoni
@@ -92,8 +98,8 @@ apps_configurations:
       float: Galleġġjant
       pinned: Imqabbad
       force: Forza ta 'tmexxija
+      hidden: Aħbi mill-baċir / taskbar
     title_readonly: Wiri {{isem}}
-    options_label: Għażliet żejda
     monitor: Tissorvelja
     ok_readonly: Editja bħala ġdida
     name: Isem
@@ -107,6 +113,9 @@ apps_configurations:
     bindings: Torbot (innota ż-żewġ għażliet huma meħtieġa)
     title_edit: Editting {{isem}}
     monitor_placeholder: Xejn
+    wm_options_label: Għażliet tal-Maniġer tat-Tieqa
+    weg_options_label: Għażliet tal-baċir / taskbar
+    options_label: Għażliet żejda
   identifier:
     matching_strategy: Strateġija ta 'tqabbil
     and: U
@@ -129,6 +138,11 @@ apps_configurations:
   delete: Ħassar
   new: Ġdid
   swap: Tpartit
+  extra_info: >-
+    Seelen UI tuża identifikatur wieħed biss għal kull app (l-ewwel tqabbil
+    misjub) sabiex l-ordni ta 'kif huma speċifikati hija importanti, l-aħħar
+    miżjuda se tkun prijoritizzata, peress li nnota li t-tabella hija magħżula
+    b'mod awtomatiku mill-aktar tard għall-qadim.
 extras:
   relaunch: Tnedija mill-ġdid
   github: Github
@@ -169,14 +183,12 @@ shortcuts:
     switch_workspace_4: Aqleb għall-Ispazju tax-Xogħol 4
     send_to_workspace_2: Ibgħat lill-Ispazju tax-Xogħol 2
     send_to_workspace_8: Ibgħat lill-Ispazju tax-Xogħol 8
-    switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 1
     focus_right: Iffoka t-tajjeb
     move_to_workspace_3: Mexxi għall-Ispazju tax-Xogħol 3
     send_to_workspace_0: Ibgħat lill-Ispazju tax-Xogħol 0
     decrease_height: Tnaqqas l-għoli
     switch_workspace_8: Aqleb għall-Ispazju tax-Xogħol 8
     switch_workspace_9: Aqleb għall-Ispazju tax-Xogħol 9
-    switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 0
     move_to_workspace_7: Mexxi għall-Ispazju tax-Xogħol 7
     send_to_workspace_9: Ibgħat lill-Ispazju tax-Xogħol 9
     switch_workspace_2: Aqleb għall-Ispazju tax-Xogħol 2
@@ -184,8 +196,16 @@ shortcuts:
     move_to_workspace_8: Mexxi għall-Ispazju tax-Xogħol 8
     focus_latest: Iffoka l-aħħar
     send_to_workspace_3: Ibgħat lill-Ispazju tax-Xogħol 3
+    switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 1
+    switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 2
+    misc_toggle_win_event_tracing: Toggle Win Avveniment Traċċar (zkuk)
+    misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)
+    misc_open_settings: Settings miftuħa
+    toggle_launcher: Toggle
   enable: Enable Shortcuts Integrati (AHK)
   enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core
+  reset: Irrisettja għal nuqqasijiet
+  readonly_tooltip: Din hija shortcut li jinqara biss
 loading: Tagħbija...
 inProgress: Fil-progress...
 cancel: Ikkanċella
@@ -193,3 +213,35 @@ open: Miftuħa
 save: Ħlief
 quit: Nieqaf
 delete: Ħassar
+vd:
+  strategy:
+    native: Nattiv
+    seelen: Seelen
+    label: Strateġija tad-desktop virtwali
+  disabled_windows_version: >-
+    L-istrateġija tad-desktop virtwali indiġena mhix disponibbli għall-verżjoni
+    tal-Windows tiegħek.
+save_and_restart: Issejvja u terġa 'tibda
+monitors_configurations:
+  label: Monitor {{indiċi}}
+wall:
+  enable: Jippermetti ħajt tas-seelen
+  interval: Ibdel il-wallpaper kull (sekondi)
+  backgrounds: Wallpapers
+  no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
+app_launcher:
+  runners:
+    explorer: Ġirja
+    label: Runners
+    cmd: Kmand
+  monitor: Tissorvelja biex turi
+  enable: Enable App Launcher
+inherit: Jirtu
+insert: Daħħal
+more: Aktar
+close: Viċin
+update:
+  available: Aġġornament disponibbli!
+  channel: Aġġorna l-kanal
+  downloading: Tniżżil ...
+miscellaneous: Varji

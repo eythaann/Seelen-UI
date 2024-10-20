@@ -15,5 +15,5 @@ export async function LoadCustomConfigFile() {
     return;
   }
 
-  LoadSettingsToStore(file.path);
+  LoadSettingsToStore(file);
 }

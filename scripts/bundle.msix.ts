@@ -1,9 +1,10 @@
-import packageJson from '../package.json';
-import tauriConfig from '../tauri.conf.json';
 import { execSync } from 'child_process';
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
+
+import packageJson from '../package.json';
+import tauriConfig from '../tauri.conf.json';
 
 console.info('Building MSIX...');
 const msixCmdsPath = path.resolve('target/release/msix/commands.txt');

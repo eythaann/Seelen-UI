@@ -1,16 +1,14 @@
 name: Continuous Integration
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - master
   workflow_dispatch:
+  workflow_call:
 
 jobs:
-  check-js:
+  js-test-and-linter:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,40 +16,38 @@ jobs:
         with:
           node-version: 20
           cache: "npm"
-      - run: npm install
+      - run: npm clean-install
       - run: npm run lint
       - run: npm run test
 
-  check-rust:
+  rust-linter:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: nightly-2024-06-25
       - uses: Swatinem/rust-cache@v2
-      
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: "npm"
 
-      - name: Build
-        run: |-
-          npm install
-          npm run build:ui
-          cargo build
+      - run: mkdir dist
 
-      - name: Run linter
+      - name: Linter
         run: |-
           rustup component add rustfmt
           cargo fmt -- --check
 
-      - name: Run clippy
-        run: |- 
+      - name: Clippy
+        run: |-
           rustup component add clippy
-          cargo clippy --all-targets -- -D warnings
+          cargo clippy --locked --all-targets -- -D warnings
 
-      - name: Run tests
-        run: cargo test --verbose
+  rust-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2024-06-25
+      - uses: Swatinem/rust-cache@v2
+      - run: mkdir dist
+      - run: cargo test --locked --verbose

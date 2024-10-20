@@ -1,17 +1,17 @@
-import { IdWithIdentifier } from '../../../../shared/schemas/AppsConfigurations';
-import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
-import { Identifier } from './Identifier';
 import { createSelector } from '@reduxjs/toolkit';
 import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { AppConfiguration, AppExtraFlag, AppIdentifier } from 'seelen-core';
 
 import { ownSelector, RootSelectors } from '../../shared/store/app/selectors';
 
 import { RootState } from '../../shared/store/domain';
-import { AppConfiguration, AppConfigurationExtended, ApplicationOptions } from '../domain';
+import { AppConfigurationExtended, WegApplicationOptions, WmApplicationOptions } from '../domain';
 
+import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
+import { Identifier } from './Identifier';
 import cs from './index.module.css';
 
 interface Props {
@@ -25,7 +25,7 @@ interface Props {
 
 const getAppSelector = (idx: number | undefined, isNew: boolean) =>
   createSelector([ownSelector], (state: RootState) => {
-    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.default();
+    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.placeholder();
   });
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
@@ -54,19 +54,23 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
   const updateCategory = (e: React.ChangeEvent<HTMLInputElement>) =>
     setApp({ ...app, category: e.target.value || null });
 
-  const onChangeIdentifier = (identifier: IdWithIdentifier) => setApp({ ...app, identifier });
+  const onChangeIdentifier = (identifier: AppIdentifier) => setApp({ ...app, identifier });
 
-  const onSelectMonitor = (value: number | null) => setApp({ ...app, monitor: value });
-  const onSelectWorkspace = (value: string | null) => setApp({ ...app, workspace: value });
+  const onSelectMonitor = (value: number | null) => setApp({ ...app, boundMonitor: value });
+  const onSelectWorkspace = (value: number | null) => setApp({ ...app, boundWorkspace: value });
 
-  const onChangeOption = (option: ApplicationOptions, value: boolean) =>
-    setApp({ ...app, [option]: value });
+  const onChangeOption = (option: AppExtraFlag, checked: boolean) => {
+    setApp({
+      ...app,
+      options: checked ? [...app.options, option] : app.options.filter((o) => o !== option),
+    });
+  };
 
   const monitorsOptions = monitors.map((_, i) => ({ label: `Monitor ${i + 1}`, value: i }));
-  const workspaceOptions =
-    app.monitor != null && monitors[app.monitor]
-      ? monitors[app.monitor]?.workspaces.map(({ name }) => ({ label: name, value: name }))
-      : [];
+  const workspaceOptions = Array.from({ length: 10 }).map((_, i) => ({
+    label: `Workspace ${i + 1}`,
+    value: i,
+  }));
 
   let title = t('apps_configurations.app.title_edit');
   let okText = t('apps_configurations.app.ok_edit');
@@ -102,20 +106,18 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
         )}
 
         <SettingsGroup>
-          <div>
-            <SettingsOption>
-              <span>{t('apps_configurations.app.name')}</span>
-              <Input value={app.name} onChange={updateName} required />
-            </SettingsOption>
-            <SettingsOption>
-              <span>{t('apps_configurations.app.category')}</span>
-              <Input
-                value={app.category || ''}
-                placeholder={t('apps_configurations.app.category_placeholder')}
-                onChange={updateCategory}
-              />
-            </SettingsOption>
-          </div>
+          <SettingsOption>
+            <span>{t('apps_configurations.app.name')}</span>
+            <Input value={app.name} onChange={updateName} required />
+          </SettingsOption>
+          <SettingsOption>
+            <span>{t('apps_configurations.app.category')}</span>
+            <Input
+              value={app.category || ''}
+              placeholder={t('apps_configurations.app.category_placeholder')}
+              onChange={updateCategory}
+            />
+          </SettingsOption>
         </SettingsGroup>
 
         <Identifier identifier={app.identifier} onChange={onChangeIdentifier} />
@@ -125,34 +127,47 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
             <SettingsOption>
               <span>{t('apps_configurations.app.monitor')}</span>
               <Select
-                value={app.monitor}
+                value={app.boundMonitor}
                 placeholder={t('apps_configurations.app.monitor_placeholder')}
                 allowClear
                 options={monitorsOptions}
                 onChange={onSelectMonitor}
-                disabled // Todo(eythan) remove when enable monitors on release
               />
             </SettingsOption>
             <SettingsOption>
               <span>{t('apps_configurations.app.workspace')}</span>
               <Select
-                value={app.workspace}
+                value={app.boundWorkspace}
                 placeholder={t('apps_configurations.app.workspace_placeholder')}
                 allowClear
                 options={workspaceOptions}
                 onChange={onSelectWorkspace}
-                disabled // Todo(eythan) remove when enable monitors on release
               />
             </SettingsOption>
           </SettingsSubGroup>
         </SettingsGroup>
 
         <SettingsGroup>
-          <SettingsSubGroup label={t('apps_configurations.app.options_label')}>
-            {Object.values(ApplicationOptions).map((value, i) => (
+          <SettingsSubGroup label={t('apps_configurations.app.wm_options_label')}>
+            {Object.values(WmApplicationOptions).map((value, i) => (
               <SettingsOption key={i}>
                 <span>{t(`apps_configurations.app.options.${value}`)}</span>
-                <Switch value={app[value]} onChange={onChangeOption.bind(this, value)} />
+                <Switch
+                  value={app.options.includes(value as any as AppExtraFlag)}
+                  onChange={onChangeOption.bind(this, value as any as AppExtraFlag)}
+                />
+              </SettingsOption>
+            ))}
+          </SettingsSubGroup>
+
+          <SettingsSubGroup label={t('apps_configurations.app.weg_options_label')}>
+            {Object.values(WegApplicationOptions).map((value, i) => (
+              <SettingsOption key={i}>
+                <span>{t(`apps_configurations.app.options.${value}`)}</span>
+                <Switch
+                  value={app.options.includes(value as any as AppExtraFlag)}
+                  onChange={onChangeOption.bind(this, value as any as AppExtraFlag)}
+                />
               </SettingsOption>
             ))}
           </SettingsSubGroup>

@@ -1,33 +1,18 @@
-import { Layout } from '../../../../shared/schemas/Layout';
-import { Placeholder } from '../../../../shared/schemas/Placeholders';
-import { ISettings } from '../../../../shared/schemas/Settings';
-import { Theme } from '../../../../shared/schemas/Theme';
+import { AppConfiguration, Settings, Theme, UIColors, WindowManagerLayout } from 'seelen-core';
+import { Placeholder } from 'seelen-core';
+
 import { Route } from '../../../components/navigation/routes';
 
-import { AppConfiguration } from '../../appsConfigurations/domain';
-
-export interface UIColors {
-  background: string;
-  foreground: string;
-  accent_darkest: string;
-  accent_darker: string;
-  accent_dark: string;
-  accent: string;
-  accent_light: string;
-  accent_lighter: string;
-  accent_lightest: string;
-  complement: string | null;
-}
-
-export interface RootState extends ISettings {
+export interface RootState extends Settings {
   lastLoaded: this | null;
   route: Route;
   toBeSaved: boolean;
+  toBeRestarted: boolean;
   appsConfigurations: AppConfiguration[];
   availableThemes: Theme[];
-  availableLayouts: Layout[];
+  availableLayouts: WindowManagerLayout[];
   availablePlaceholders: Placeholder[];
   autostart: boolean | null;
-  colors: UIColors;
   wallpaper: string | null;
+  colors: UIColors;
 }

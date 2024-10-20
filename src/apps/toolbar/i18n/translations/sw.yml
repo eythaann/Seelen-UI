@@ -33,3 +33,6 @@ placeholder:
   volume: Kiasi
   battery_remaining: Imebaki
   notifications: Arifa
+unlabelled_tray: Icon isiyo na msingi ya tray
+context_menu:
+  remove: Ondoa kipengee

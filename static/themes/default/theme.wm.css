@@ -2,7 +2,7 @@
   &.wm-leaf-with-borders {
     border-style: solid;
     border-width: var(--config-border-width);
-    border-color: var(--config-accent-dark-color);
+    border-color: var(--config-accent-light-color);
 
     &.wm-leaf-focused {
       border-color: var(--config-accent-lighter-color);

@@ -1,0 +1,11 @@
+app_launcher:
+  runners:
+    explorer: Běh
+    cmd: Příkaz
+footer:
+  shortcuts: Zobrazit zkratky
+header:
+  search: Aplikace, příkaz nebo cesta
+item:
+  open_location: Otevřete umístění souboru
+  pin: Pin to Dock

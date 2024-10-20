@@ -1,5 +1,5 @@
 {
-  "$schema": "node_modules/@tauri-apps/cli/schema.json",
+  "$schema": "node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Seelen UI",
   "identifier": "com.seelen.seelen-ui",
   "version": "package.json",
@@ -14,22 +14,23 @@
           "**/*.jpg",
           "**/*.jpeg",
           "**/*.png",
+          "**/*.webp",
           "**/*.gif",
-          "**/*.bmp",
-          "**/*.tif",
-          "**/*.tiff"
+          "**/*.mp4",
+          "**/*.mkv",
+          "**/*.wav"
         ]
       }
     }
   },
   "build": {
-    "beforeBuildCommand": "npm run build:ui",
+    "beforeBuildCommand": "npm run build:ui -- --production",
     "frontendDist": "dist",
     "features": []
   },
   "bundle": {
     "active": true,
-    "createUpdaterArtifacts": "v1Compatible",
+    "createUpdaterArtifacts": true,
     "resources": [
       "static/**/*"
     ],
@@ -50,16 +51,21 @@
         "startMenuFolder": "Seelen",
         "displayLanguageSelector": true,
         "languages": [
-          "English",
-          "German",
-          "Spanish",
-          "French",
-          "Hindi",
-          "Portuguese",
-          "Japanese",
-          "Korean",
-          "SimpChinese",
-          "TradChinese"
+          "arabic",
+          "bulgarian",
+          "dutch",
+          "english",
+          "german",
+          "japanese",
+          "korean",
+          "portuguesebr",
+          "russian",
+          "tradchinese",
+          "simpchinese",
+          "french",
+          "spanish",
+          "turkish",
+          "swedish"
         ]
       }
     },
@@ -86,7 +92,8 @@
     "updater": {
       "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDQ4QjU1RUI0NEM0NzBERUIKUldUckRVZE10RjYxU0lpaERvdklYL05DVlg0Sk9EVngvaEgzZjMvU1NNemJTZXZ1K0dNVXU3ZkQK",
       "endpoints": [
-        "https://github.com/eythaann/Seelen-UI/releases/latest/download/latest.json"
+        "https://github.com/eythaann/Seelen-UI/releases/latest/download/latest.json",
+        "https://github.com/eythaann/Seelen-UI/releases/download/nightly/latest.json"
       ]
     },
     "deep-link": {

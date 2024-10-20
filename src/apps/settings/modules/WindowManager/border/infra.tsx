@@ -1,4 +1,3 @@
-import { SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 import { InputNumber, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -6,6 +5,8 @@ import { useAppDispatch, useAppSelector, useDispatchCallback } from '../../share
 
 import { BorderSelectors } from '../../shared/store/app/selectors';
 import { BorderActions } from './app';
+
+import { SettingsOption, SettingsSubGroup } from '../../../components/SettingsBox';
 
 export const BorderSettings = () => {
   const enabled = useAppSelector(BorderSelectors.enabled);

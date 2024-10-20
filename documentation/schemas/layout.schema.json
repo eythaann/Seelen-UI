@@ -86,11 +86,11 @@
         {
           "type": "object",
           "required": [
+            "children",
             "type"
           ],
           "properties": {
             "children": {
-              "default": [],
               "type": "array",
               "items": {
                 "$ref": "#/definitions/WmNode"
@@ -107,7 +107,7 @@
               "description": "How much of the remaining space this node will take",
               "default": 1.0,
               "type": "number",
-              "format": "double"
+              "format": "float"
             },
             "priority": {
               "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
@@ -135,11 +135,11 @@
         {
           "type": "object",
           "required": [
+            "children",
             "type"
           ],
           "properties": {
             "children": {
-              "default": [],
               "type": "array",
               "items": {
                 "$ref": "#/definitions/WmNode"
@@ -156,7 +156,7 @@
               "description": "How much of the remaining space this node will take",
               "default": 1.0,
               "type": "number",
-              "format": "double"
+              "format": "float"
             },
             "priority": {
               "description": "Order in how the tree will be traversed (1 = first, 2 = second, etc.)",
@@ -198,7 +198,7 @@
               "description": "How much of the remaining space this node will take",
               "default": 1.0,
               "type": "number",
-              "format": "double"
+              "format": "float"
             },
             "handle": {
               "description": "window handle (HWND) in the node",
@@ -239,6 +239,8 @@
           "properties": {
             "active": {
               "description": "active window handle (HWND) in the node",
+              "default": null,
+              "readOnly": true,
               "type": [
                 "integer",
                 "null"
@@ -256,11 +258,12 @@
               "description": "How much of the remaining space this node will take",
               "default": 1.0,
               "type": "number",
-              "format": "double"
+              "format": "float"
             },
             "handles": {
               "description": "window handles (HWND) in the node",
               "default": [],
+              "readOnly": true,
               "type": "array",
               "items": {
                 "type": "integer",
@@ -298,6 +301,8 @@
           "properties": {
             "active": {
               "description": "active window handle (HWND) in the node",
+              "default": null,
+              "readOnly": true,
               "type": [
                 "integer",
                 "null"
@@ -315,11 +320,12 @@
               "description": "How much of the remaining space this node will take",
               "default": 1.0,
               "type": "number",
-              "format": "double"
+              "format": "float"
             },
             "handles": {
               "description": "window handles (HWND) in the node",
               "default": [],
+              "readOnly": true,
               "type": "array",
               "items": {
                 "type": "integer",

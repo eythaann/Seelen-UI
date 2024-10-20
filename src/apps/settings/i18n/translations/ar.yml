@@ -21,6 +21,10 @@ header:
     shortcuts: الاختصارات
     developer: مطور
     info: معلومة
+    seelen_wall: الجدار
+    seelen_rofi: قاذفة التطبيق
+    virtual_desk: أجهزة الكمبيوتر المكتبية الافتراضية
+    home: بيت
 start:
   title: مرحباً!
   message: >-
@@ -47,6 +51,7 @@ general:
   accent_color: لون لهجة
   wallpaper:
     select: حدد خلفية
+  date_format: تنسيق التاريخ
 toolbar:
   enable: تمكين شريط الأدوات الفاخر
   placeholder:
@@ -54,8 +59,9 @@ toolbar:
     author: مؤلف
     description: وصف
   height: ارتفاع
+  auto_hide: الاختباء التلقائي
+  label: شريط الأدوات
 wm:
-  enable: تمكين مدير النوافذ
   layout: تَخطِيط
   author: مؤلف
   description: وصف
@@ -67,13 +73,12 @@ wm:
     enable: تمكين حدود النافذة
     width: عرض الحدود
     offset: إزاحة الحدود
-  disabled_windows_version: مدير النافذة غير متوفر لإصدار Windows الخاص بك.
+  enable: تمكين مدير نافذة البلاط
 weg:
   label: قفص الاتهام / شريط المهام
   enable: تمكين قفص الاتهام/شريط المهام
   width: عرض
   auto_hide: اخفاء تلقائي
-  dock_side: جانب الرصيف
   padding: حشوة
   margin: هامِش
   gap: فجوة
@@ -83,6 +88,7 @@ weg:
     zoom_size: الحجم المكبر (يستخدم للموضوعات)
     gap: المسافة بين العناصر
     visible_separators: فواصل مرئية
+  dock_side: موضع
 devtools:
   enable: تمكين أدوات المطور
   app_folders: مجلدات التطبيق
@@ -119,12 +125,15 @@ apps_configurations:
     ok_edit: تحديث
     ok_create: يخلق
     ok_readonly: تحرير كجديد
-    options_label: خيارات إضافية
     options:
       float: يطفو
       unmanage: غير إدارة
       force: إدارة القوة
       pinned: مثبت
+      hidden: الاختباء من قفص الاتهام/شريط المهام
+    weg_options_label: خيارات قفص الاتهام/شريط المهام
+    wm_options_label: خيارات مدير النافذة
+    options_label: خيارات إضافية
   identifier:
     remove: حذف الحظر
     id: المعرف
@@ -134,6 +143,10 @@ apps_configurations:
     and: و
     or: أو
     add_block: أضف بلوك
+  extra_info: >-
+    تستخدم واجهة مستخدم Seelen معرفًا واحدًا فقط لكل تطبيق (تم العثور على أول
+    تطابق) لذا فإن الترتيب في كيفية التحديد مهم، وسيتم إعطاء الأولوية لآخر
+    إضافة، كما لاحظ أنه يتم فرز الجدول افتراضيًا من الأحدث إلى الأقدم.
 extras:
   version: إصدار
   links: الروابط الرسمية
@@ -161,8 +174,6 @@ shortcuts:
     increase_height: زيادة الارتفاع
     decrease_height: تقليل الارتفاع
     restore_sizes: استعادة الأحجام
-    switch_workspace_0: قم بالتبديل إلى مساحة العمل 0
-    switch_workspace_1: قم بالتبديل إلى مساحة العمل 1
     switch_workspace_2: قم بالتبديل إلى مساحة العمل 2
     switch_workspace_3: قم بالتبديل إلى مساحة العمل 3
     switch_workspace_4: قم بالتبديل إلى مساحة العمل 4
@@ -191,3 +202,41 @@ shortcuts:
     send_to_workspace_7: أرسل إلى مساحة العمل 7
     send_to_workspace_8: أرسل إلى مساحة العمل 8
     send_to_workspace_9: أرسل إلى مساحة العمل 9
+    switch_workspace_1: التبديل إلى مساحة العمل 2
+    switch_workspace_0: التبديل إلى مساحة العمل 1
+    misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)
+    misc_toggle_win_event_tracing: تبديل الفوز تتبع حدث (سجلات)
+    misc_open_settings: فتح الإعدادات
+    toggle_launcher: تبديل
+  reset: إعادة ضبط على الافتراضات
+  readonly_tooltip: هذا اختصار للقراءة فقط
+vd:
+  strategy:
+    native: محلي
+    seelen: سيلين
+    label: استراتيجية سطح المكتب الظاهري
+  disabled_windows_version: استراتيجية سطح المكتب الافتراضية الأصلية غير متوفرة لإصدار Windows الخاص بك.
+save_and_restart: حفظ وإعادة التشغيل
+monitors_configurations:
+  label: شاشة {{index}}
+wall:
+  enable: تمكين جدار سيلين
+  backgrounds: خلفيات
+  no_background: عرض شرائح فارغ ، باستخدام خلفية السمة بدلاً من ذلك.
+  interval: تغيير خلفية كل (ثواني)
+app_launcher:
+  runners:
+    explorer: يجري
+    cmd: يأمر
+    label: المتسابقين
+  enable: تمكين قاذفة التطبيق
+  monitor: شاشة لإظهار
+insert: أدخل
+more: أكثر
+inherit: ورث
+close: يغلق
+update:
+  available: تحديث متاح!
+  channel: تحديث قناة
+  downloading: تنزيل ...
+miscellaneous: متنوع

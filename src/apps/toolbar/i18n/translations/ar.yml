@@ -33,3 +33,6 @@ placeholder:
   smart_charge: '- الشحن الذكي'
   settings: الإعدادات السريعة
   notifications: إشعارات
+unlabelled_tray: أيقونة صينية غير محدودة
+context_menu:
+  remove: إزالة العنصر

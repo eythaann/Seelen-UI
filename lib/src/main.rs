@@ -1,4 +1,6 @@
-use seelen_core::state::{AppConfig, Placeholder, Settings, Theme, WindowManagerLayout};
+use seelen_core::state::{
+    AppConfig, IconPack, Placeholder, Settings, Theme, WegItem, WindowManagerLayout,
+};
 
 fn write_schema<T>(path: &str)
 where
@@ -14,4 +16,6 @@ fn main() {
     write_schema::<Theme>("./dist/theme.schema.json");
     write_schema::<WindowManagerLayout>("./dist/layout.schema.json");
     write_schema::<Vec<AppConfig>>("./dist/settings_by_app.schema.json");
+    write_schema::<Vec<WegItem>>("./dist/weg_items.schema.json");
+    write_schema::<IconPack>("./dist/icon_pack.schema.json");
 }

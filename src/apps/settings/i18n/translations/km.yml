@@ -14,6 +14,10 @@ header:
     seelen_weg: ចត/របារភារកិច្ច
     seelen_bar: របារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
     specific_apps: កម្មវិធីជាក់លាក់
+    seelen_wall: ជញ្ជាំង
+    seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
+    virtual_desk: ផ្ទៃតុនិម្មិត
+    home: ផ្ទហ
 start:
   title: សូមស្វាគមន៍!
   message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
@@ -41,6 +45,7 @@ general:
   accent_color: ពណ៌សង្កត់សំឡេង
   wallpaper:
     select: ជ្រើសរើសផ្ទាំងរូបភាព
+  date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
 toolbar:
   placeholder:
     description: ការពិពណ៌នា
@@ -48,6 +53,8 @@ toolbar:
     author: អ្នកនិពន្ធ
   height: កម្ពស់
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
+  auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
+  label: របាររបន៍របយ័ត្ន។ រប
 wm:
   border:
     enable: បើកស៊ុមបង្អួច
@@ -58,10 +65,9 @@ wm:
   layout: ប្លង់
   author: អ្នកនិពន្ធ
   space_between_containers: ចន្លោះរវាងកុងតឺន័រ
-  enable: បើកកម្មវិធីគ្រប់គ្រងបង្អួច
   workspace_offset: កន្លែងធ្វើការអុហ្វសិត (រឹម)
   resize_delta: ប្តូរទំហំដីសណ្តរ (%)
-  disabled_windows_version: កម្មវិធីគ្រប់គ្រងបង្អួចមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
+  enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងបង្អួច
 weg:
   items:
     label: ធាតុ
@@ -76,7 +82,7 @@ weg:
   gap: គម្លាត
   margin: រឹម
   enable: បើកដំណើរការ Dock/Taskbar
-  dock_side: ចំហៀងចត
+  dock_side: តីតាមង
 devtools:
   install_folder: ថតឯកសារដំឡើង
   enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍
@@ -92,13 +98,13 @@ apps_configurations:
       float: អណ្តែត
       force: គ្រប់គ្រងដោយបង្ខំ
       unmanage: មិនគ្រប់គ្រង
+      hidden: លាក់ខ្លួនពីចត / ភារកិច្ច
     workspace_placeholder: គ្មាន
     workspace: កន្លែងធ្វើការ
     monitor_placeholder: គ្មាន
     category_placeholder: គ្មាន
     category: ប្រភេទ
     name: ឈ្មោះ
-    options_label: ជម្រើសបន្ថែម
     title_create: ការបង្កើត {{name}}
     title_readonly: កំពុងមើល {{name}}
     title_edit: ការកែសម្រួល {{name}}
@@ -107,6 +113,9 @@ apps_configurations:
     ok_create: បង្កើត
     bindings: ការចង (ចំណាំជម្រើសទាំងពីរត្រូវបានទាមទារ)
     ok_readonly: កែសម្រួលដូចថ្មី។
+    weg_options_label: ជម្រើសចត / ភារកិច្ច
+    wm_options_label: ជម្រើសកម្មវិធីគ្រប់គ្រងបង្អួច
+    options_label: ជម្រើសបន្ថែម
   identifier:
     and: និង
     remove: លុបប្លុក
@@ -129,6 +138,10 @@ apps_configurations:
     ហើយ​ត្រូវ​បាន​រចនា​ឡើង​ដើម្បី​ផ្ដល់​ឱ្យ​អ្នក​នូវ​បទ​ពិសោធ​ដ៏​ល្អ​បំផុត​ដោយ​មិន​ចាំបាច់​ប្ដូរ​តាម​បំណង។
     ពួកគេកំណត់រចនាសម្ព័ន្ធកម្មវិធីធម្មតាបំផុតសម្រាប់អ្នកដោយស្វ័យប្រវត្តិ។
   confirm_delete: តើអ្នកប្រាកដថាចង់លុបការកំណត់រចនាសម្ព័ន្ធនេះទេ?
+  extra_info: >-
+    Seeen UI ប្រើគ្រឿងសម្គាល់តែមួយប៉ុណ្ណោះក្នុងមួយកម្មវិធីមួយ
+    (រកឃើញការប្រកួតដំបូង)
+    ដូច្នេះការបញ្ជាទិញក្នុងរបៀបណាដែលមានលក្ខណៈសំខាន់គឺសំខាន់បំផុតនោះនៅពេលដែលការកត់ចំណាំតារាងត្រូវបានតម្រៀបតាមលំនាំដើមពីចុងក្រោយ។
 extras:
   version: កំណែ
   github: GitHub
@@ -168,7 +181,6 @@ shortcuts:
     switch_workspace_4: ប្តូរទៅកន្លែងធ្វើការ 4
     move_to_workspace_3: ផ្លាស់ទីទៅកន្លែងធ្វើការ 3
     increase_width: បង្កើនទទឹង
-    switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 0
     switch_workspace_5: ប្តូរទៅកន្លែងធ្វើការ 5
     reserve_left: កក់ទុកខាងឆ្វេង
     move_to_workspace_6: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៦
@@ -177,15 +189,22 @@ shortcuts:
     move_to_workspace_8: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៨
     send_to_workspace_8: ផ្ញើទៅកន្លែងធ្វើការ ៨
     send_to_workspace_6: ផ្ញើទៅកន្លែងធ្វើការ ៦
-    switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 1
     switch_workspace_9: ប្តូរទៅកន្លែងធ្វើការ 9
     switch_workspace_6: ប្តូរទៅកន្លែងធ្វើការ 6
     move_to_workspace_9: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៩
     move_to_workspace_1: ផ្លាស់ទីទៅកន្លែងធ្វើការ 1
     switch_workspace_7: ប្តូរទៅកន្លែងធ្វើការ 7
     focus_bottom: ផ្ដោតបាត
+    switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 1
+    switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 2
+    misc_toggle_win_event_tracing: បិទ / បើកព្រឹត្តិការណ៍ឈ្នះ (កំណត់ហេតុ)
+    misc_toggle_lock_tracing: បិទបើកការចាក់សោរ (កំណត់ហេតុ)
+    misc_open_settings: បើកការកំណត់
+    toggle_launcher: តន្លេ
   enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api
   enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
+  reset: កំណត់ឡើងវិញនូវលំនាំដើម
+  readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
 cancel: បោះបង់
 inProgress: កំពុង​ដំណើរការ...
 delete: លុប
@@ -193,3 +212,33 @@ loading: កំពុង​ផ្ទុក...
 save: រក្សាទុក
 quit: ឈប់
 open: បើក
+vd:
+  strategy:
+    label: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិត
+    seelen: កន្លេងតមខ្ច៉ាត់សែល
+    native: នៃកមនើត
+  disabled_windows_version: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិតដើមមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
+save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
+monitors_configurations:
+  label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
+wall:
+  enable: បើកជញ្ជាំង Seelen
+  backgrounds: ផាបផេច
+  no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
+  interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរាល់វិនាទី (វិនាទី)
+app_launcher:
+  runners:
+    label: រត់តមនាង
+    cmd: ការបង្គាប់
+    explorer: ការរត់
+  enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
+  monitor: ម៉ូនីទ័របង្ហាញ
+insert: រចក
+more: រេចីនចាង
+inherit: តតយលមរតក
+close: បិត
+update:
+  available: មានបច្ចុប្បន្នភាព!
+  downloading: ទាញយក ...
+  channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
+miscellaneous: ដេលមានផ្នេកខុសក្នា

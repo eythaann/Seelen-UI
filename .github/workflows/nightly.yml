@@ -1,0 +1,121 @@
+name: Nightly
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  continuous-integration:
+    uses: ./.github/workflows/ci.yml
+
+  update-tag:
+    needs: continuous-integration
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - run: git fetch --tags --prune
+
+      - name: Create or update 'nightly' tag (force overwrite)
+        run: |
+          git tag -f nightly
+          git push origin --force --tags
+
+      - name: Confirm the tag was updated
+        run: git ls-remote --tags origin
+
+  build-installers:
+    needs: continuous-integration
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "windows-latest"
+            args: ""
+
+    runs-on: ${{ matrix.platform }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Rust Nightly
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2024-06-25
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install frontend dependencies
+        run: npm clean-install
+
+      - name: Change version to nightly
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+
+            const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const currentVersion = packageJson.version;
+
+            const timestamp = new Date().toISOString().replace(/[-:T]/g, '').slice(0, 14);
+            const nightlyVersion = `${currentVersion}+${timestamp}`;
+
+            packageJson.version = nightlyVersion;
+            fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2));
+
+            let cargoTomlContent = fs.readFileSync('Cargo.toml', 'utf-8');
+            cargoTomlContent = cargoTomlContent.replace(/^version\s*=\s*".*"/m, `version = "${nightlyVersion}"`);
+            fs.writeFileSync('Cargo.toml', cargoTomlContent);
+
+      # If build fails we will be without a nightly build until the next push or workflow_dispatch
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: nightly
+          releaseName: Seelen UI Nightly
+          prerelease: true
+          args: ${{ matrix.args }}
+
+  remove-old-artifacts:
+    needs: build-installers
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove Signatures and Old Artifacts
+        uses: actions/github-script@v7
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          script: |
+            const tagName = 'nightly';
+            const release = await github.rest.repos.getReleaseByTag({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag: tagName,
+            });
+
+            const result = await github.rest.repos.listReleaseAssets({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: release.data.id,
+            });
+
+            result.data.forEach(async (asset) => {
+              if (asset.name.endsWith('.sig')) {
+                await github.rest.repos.deleteReleaseAsset({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  asset_id: asset.id,
+                });
+              }
+            });
