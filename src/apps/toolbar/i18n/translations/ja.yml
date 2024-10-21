@@ -3,7 +3,7 @@ media:
     comunications: コミュニケーション
     multimedia: マルチメディア
   output_device: 出力デバイス
-  master_volume: マスターボリューム
+  master_volume: ボリューム
   input_device: 入力デバイス
   players: メディアプレーヤー
 network:
@@ -24,15 +24,15 @@ settings:
   power: 電源
 placeholder:
   battery_remaining: ％ 残り
-  settings: 設定
+  settings: SeelenUIの設定
   open_system_tray: システムトレイを開く
   volume: 音量
   ethernet_connected: インターネットアクセス
   bluetooth_devices: Bluetoothとデバイス
   smart_charge: '- スマートチャージ'
   open_user_folder: ユーザーフォルダーを開く
-  ethernet_disconnected: インターネットアクセスはありません
+  ethernet_disconnected: インターネットアクセスなし
   notifications: 通知
 unlabelled_tray: ラベル無し
 context_menu:
-  remove: アイテムを削除します
+  remove: アイテムを削除
