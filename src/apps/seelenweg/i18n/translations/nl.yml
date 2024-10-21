@@ -9,10 +9,10 @@ app_menu:
   pin_to_left: Pin naar links
   run_as: Als administrator uitvoeren
   pin: Pin
-  close: Dichtbij
+  close: Sluiten
   pin_to_right: Pin naar rechts
   open_file_location: Open de bestandslocatie
-  pin_to_center: Pin tot het midden
+  pin_to_center: Pin in het midden
   copy_handles: Kopieer handgrepen
   unpin: Losmaken
 media_menu:
