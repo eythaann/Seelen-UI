@@ -1,4 +1,4 @@
-loading: Laden...
+loading: Am Laden...
 inProgress: In Bearbeitung...
 cancel: Abbrechen
 save: Speichern
@@ -13,8 +13,8 @@ sides:
 header:
   labels:
     general: Allgemein
-    seelen_bar: Elegante Werkzeugleiste
-    seelen_wm: Fenstermanager
+    seelen_bar: Werkzeugleiste
+    seelen_wm: Tiling Window Manager
     seelen_weg: Dock/Taskleiste
     monitors: Monitore
     specific_apps: Spezifische Apps
@@ -24,17 +24,17 @@ header:
     seelen_wall: Die Wand
     seelen_rofi: App Launcher
     virtual_desk: Virtuelle Desktops
-    home: Heim
+    home: Home
 start:
   title: Willkommen!
   message: >-
     Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
-    integrierten Kachel-Fenstermanager, um dein Windows 11-Erlebnis zu
+    integrierten Fenstermanager, um dein Windows 11-Erlebnis zu
     verbessern! Erkunde eine neue Ära der Effizienz und Multitasking mit unserer
     intuitiven Oberfläche und fortschrittlichen Funktionen.
   message_accent: Optimiere deine Produktivität mit Stil!
 general:
-  startup: Beim Start ausführen?
+  startup: Beim Hochfahren ausführen?
   language: Sprache
   theme:
     label: Themeninformation
@@ -69,12 +69,12 @@ wm:
   space_between_containers: Abstand zwischen Containern
   workspace_padding: Arbeitsbereichs-Padding
   workspace_offset: Arbeitsbereichs-Versatz (Ränder)
-  resize_delta: Größenänderung Delta (%)
+  resize_delta: Relative Größenänderung (%)
   border:
     enable: Fensterrand aktivieren
     width: Randbreite
     offset: Randversatz
-  enable: Aktivieren Sie den Fliesenfenstermanager
+  enable: Aktivieren Sie den Tiling Window Manager
 weg:
   label: Dock/Taskleiste
   enable: Dock/Taskleiste aktivieren
@@ -102,7 +102,7 @@ apps_configurations:
   import: Importieren
   export: Exportieren
   delete: Löschen
-  swap: Tauschen
+  swap: Austauschen
   new: Neu
   bundled_title: Mit Seelen gebündelte App-Konfiguration
   bundled_msg: >-
@@ -124,18 +124,18 @@ apps_configurations:
     title_edit: '{{name}} bearbeiten'
     title_create: '{{name}} erstellen'
     title_readonly: '{{name}} ansehen'
-    ok_edit: Aktualisieren
+    ok_edit: Ändern
     ok_create: Erstellen
     ok_readonly: Als neu bearbeiten
+    options_label: Zusätzliche Optionen
+    wm_options_label: Fenstermanageroptionen
+    weg_options_label: Dock/Taskleistenoptionen
     options:
       float: Schwebend
       unmanage: Nicht verwalten
       force: Verwaltung erzwingen
       pinned: Angeheftet
-      hidden: Verstecken Sie sich vor Dock/Taskleiste
-    weg_options_label: Dock/Taskleistenoptionen
-    wm_options_label: Fenstermanageroptionen
-    options_label: Zusätzliche Optionen
+      hidden: Vor Dock/Taskleiste verstecken
   identifier:
     remove: Block löschen
     id: Identifikator
@@ -156,9 +156,9 @@ extras:
   github: GitHub
   discord: Discord
   relaunch: Neu starten
-  exit: Beenden/Verlassen
+  exit: Beenden
 shortcuts:
-  enable: Integrierte Kurzbefehle (ahk) aktivieren
+  enable: Integrierte Kurzbefehle aktivieren (ahk)
   enable_tooltip: >-
     Deaktivieren, wenn du deine eigenen Kurzbefehle mit der Seelen Core API
     implementierst
@@ -217,33 +217,33 @@ shortcuts:
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
 vd:
   strategy:
-    native: Einheimisch
+    native: Nativ
     seelen: Seelen
-    label: Virtuelle Desktop -Strategie
+    label: Virtuelle Desktop-Strategie
   disabled_windows_version: >-
-    Für Ihre Windows -Version ist keine native virtuelle Desktop -Strategie
+    Für Ihre Windows-Version ist keine native virtuelle Desktop-Strategie
     verfügbar.
 save_and_restart: Speichern & neu starten
 monitors_configurations:
   label: Monitor {{index}}
 wall:
   enable: Aktivieren Sie Seelen Wall
-  no_background: Leere Diashow, verwendete stattdessen den Hintergrund des Themas.
-  interval: Wechseln Sie die Hintergrundbild jeden (Sekunden)
+  no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
+  interval: Wechseln Sie das Hintergrundbild alle [Sekunden]
   backgrounds: Hintergrundbilder
 app_launcher:
   runners:
     cmd: Befehl
-    explorer: Laufen
-    label: Läuferinnen
+    explorer: Run
+    label: Runner
   enable: App Launcher aktivieren
-  monitor: Überwachen Sie zu zeigen
+  monitor: Monitor zum Anzeigen
 insert: Einfügen
 more: Mehr
 inherit: Erben
 close: Schließen
 update:
   available: Update verfügbar!
-  downloading: Herunterladen ...
-  channel: Kanal aktualisieren
+  downloading: Am Herunterladen ...
+  channel: Update-Kanal
 miscellaneous: Verschiedenes
