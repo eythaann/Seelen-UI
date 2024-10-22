@@ -14,6 +14,7 @@ export enum SeelenWegMode {
 
 export enum HideMode {
   Never = 'Never',
+  NeverWithoutPlaceholder = 'Never without placeholder',
   Always = 'Always',
   OnOverlap = 'On-Overlap',
 }

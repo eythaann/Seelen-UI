@@ -92,7 +92,7 @@ export function ToolBar({ structure }: Props) {
   );
 
   const shouldBeHidden =
-    !isAppFocused && hideMode !== HideMode.Never && (isOverlaped || hideMode === HideMode.Always);
+    !isAppFocused && hideMode !== HideMode.Never && ((isOverlaped && hideMode === HideMode.OnOverlap) || hideMode == HideMode.Always);
 
   return (
     <Reorder.Group
