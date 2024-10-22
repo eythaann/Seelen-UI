@@ -3,10 +3,12 @@ import { Popover } from 'antd';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, SeelenWegSide, useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 import { updatePreviews } from '../../shared/utils/infra';
+
+import { Selectors } from '../../shared/store/app';
 
 import {
   ExtendedPinnedWegItem,
@@ -30,8 +32,28 @@ export const UserApplication = memo(({ item }: Props) => {
   );
 
   const [openPreview, setOpenPreview] = useState(false);
+  const settings = useSelector(Selectors.settings);
 
   const { t } = useTranslation();
+  const calculatePlacement = (position: any) => {
+    switch (position) {
+      case SeelenWegSide.Bottom: {
+        return 'top';
+      }
+      case SeelenWegSide.Top: {
+        return 'bottom';
+      }
+      case SeelenWegSide.Left: {
+        return 'right';
+      }
+      case SeelenWegSide.Right: {
+        return 'left';
+      }
+      default: {
+        throw new Error('Not Implemented!');
+      }
+    }
+  };
 
   useWindowFocusChange((focused) => {
     if (!focused) {
@@ -57,7 +79,7 @@ export const UserApplication = memo(({ item }: Props) => {
         <Popover
           open={openPreview}
           mouseEnterDelay={0.4}
-          placement="top"
+          placement={calculatePlacement(settings.position)}
           onOpenChange={(open) => setOpenPreview(open && !!item.opens.length)}
           trigger="hover"
           arrow={false}
