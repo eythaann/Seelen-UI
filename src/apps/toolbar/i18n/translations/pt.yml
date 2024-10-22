@@ -21,7 +21,7 @@ settings:
   sleep: Dormir
   restart: Reiniciar
   shutdown: Desligar
-  power: Poder
+  power: Energia
 placeholder:
   open_user_folder: Abra a pasta do usuário
   open_system_tray: Abra a bandeja do sistema
