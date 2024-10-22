@@ -50,7 +50,7 @@ export const UserApplication = memo(({ item }: Props) => {
         return 'left';
       }
       default: {
-        return 'bottom';
+        throw new Error('Not Implemented!');
       }
     }
   };
