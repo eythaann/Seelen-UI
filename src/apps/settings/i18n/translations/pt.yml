@@ -7,9 +7,9 @@ open: Abrir
 delete: Excluir
 sides:
   left: Esquerda
-  right: Certo
-  top: Principal
-  bottom: Fundo
+  right: Direita
+  top: Topo
+  bottom: Abaixo
 header:
   labels:
     general: Em geral
@@ -24,7 +24,7 @@ header:
     seelen_rofi: Lançador de aplicativos
     seelen_wall: A parede
     virtual_desk: Desktops virtuais
-    home: Lar
+    home: Início
 start:
   title: Bem-vindo!
   message: >-
@@ -35,7 +35,7 @@ start:
   message_accent: Otimize sua produtividade com estilo!
 general:
   startup: Executar ao iniciar?
-  language: Linguagem
+  language: Idioma
   theme:
     label: Informações do tema
     placeholder: Selecione o tema
@@ -60,7 +60,7 @@ toolbar:
     author: Autor
     description: Descrição
   height: Altura
-  auto_hide: Esconda automática
+  auto_hide: Esconder automaticamente
   label: Barra de ferramentas
 wm:
   layout: Disposição
@@ -69,12 +69,12 @@ wm:
   space_between_containers: Espaço entre contêineres
   workspace_padding: Preenchimento de espaços de trabalho
   workspace_offset: Deslocamento de espaços de trabalho (margens)
-  resize_delta: Redimensionar Delta (%)
+  resize_delta: Delta de redimensionamento (%)
   border:
     enable: Habilitar borda da janela
     width: Largura da borda
     offset: Deslocamento de borda
-  enable: Habilitar gerente de janela de ladrilhos
+  enable: Habilitar gerenciador de janela de ladrilhos
 weg:
   label: Dock/barra de tarefas
   enable: Habilitar Dock/Barra de Tarefas
@@ -82,9 +82,9 @@ weg:
   auto_hide: Ocultar automaticamente
   padding: Preenchimento
   margin: Margem
-  gap: Brecha
+  gap: Espaçamento
   items:
-    label: Unid
+    label: Item
     size: Tamanho do item
     zoom_size: Tamanho ampliado (usado para temas)
     gap: Espaço entre itens
@@ -107,7 +107,7 @@ apps_configurations:
   bundled_title: Configuração do aplicativo incluída no Seelen
   bundled_msg: >-
     Essas configurações agrupadas não são editáveis ​​e foram projetadas para
-    fornecer a melhor experiência sem personalização. Eles configuram
+    fornecer a melhor experiência sem personalização. Elas configuram
     automaticamente os aplicativos mais comuns para você.
   confirm_delete_title: Confirmar exclusão
   confirm_delete: Tem certeza de que deseja excluir esta(s) configuração(ões)?
@@ -132,7 +132,7 @@ apps_configurations:
       unmanage: Não gerenciar
       force: Forçar gerenciamento
       pinned: Fixado
-      hidden: Esconda -se da doca/barra de tarefas
+      hidden: Esconder-se da doca/barra de tarefas
     weg_options_label: Opções de doca/barra de tarefas
     wm_options_label: Opções do gerenciador de janelas
     options_label: Opções extras
@@ -147,14 +147,14 @@ apps_configurations:
     add_block: Adicionar bloco
   extra_info: >-
     A interface do usuário da Seelen usa apenas um identificador por aplicativo
-    (primeira partida encontrada); portanto, o pedido em como são específicos é
-    importante, o mais recente adicionado será priorizado, pois note que a
-    tabela é classificada por padrão do mais recente ao antigo.
+    (primeira correspondência encontrada), então a ordem em que são especificados é
+    importante, o último adicionado será priorizado, pois note que a tabela é 
+    classificada por padrão do mais recente ao mais antigo.
 extras:
   version: Versão
   links: Links Oficiais
   github: GitHub
-  discord: Discórdia
+  discord: Discord
   relaunch: Relançar
   exit: Sair/Sair
 shortcuts:
@@ -164,7 +164,7 @@ shortcuts:
     reserve_top: Reserva Superior
     reserve_bottom: Reserva Inferior
     reserve_left: Reserva à Esquerda
-    reserve_right: Direito de reserva
+    reserve_right: Reserva à Direita
     reserve_float: Reserva Flutuante
     reserve_stack: Pilha de Reserva
     focus_top: Foco Superior
@@ -208,7 +208,7 @@ shortcuts:
     switch_workspace_0: Mudar para o espaço de trabalho 1
     switch_workspace_1: Mudar para o espaço de trabalho 2
     misc_open_settings: Abra as configurações
-    misc_toggle_lock_tracing: Traçar o traçado de trava (logs)
+    misc_toggle_lock_tracing: Alternar o rastreamento de bloqueio (logs)
     misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
     toggle_launcher: Alternar
   reset: Redefinir para padrões
@@ -232,7 +232,7 @@ wall:
 app_launcher:
   runners:
     cmd: Comando
-    explorer: Correr
+    explorer: Executar
     label: Corredoras
   monitor: Monitor para mostrar
   enable: Ativar lançador de aplicativos
@@ -244,4 +244,4 @@ update:
   available: Atualização disponível!
   channel: Atualizar canal
   downloading: Download ...
-miscellaneous: Variada
+miscellaneous: Miscelânea
