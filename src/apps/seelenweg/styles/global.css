@@ -15,29 +15,58 @@ body {
 
 /** Root Styles */
 #root {
+  position: absolute;
+  
   height: min-content;
   width: min-content;
-  transition: transform 0.2s ease-in-out;
+
+  &:has(.taskbar.hidden.left) {
+    left: 0;
+    transition: left 0.2s ease-in-out;
+  }
+
+  &:has(.taskbar.hidden.right) {
+    right: 0;
+    transition: right 0.2s ease-in-out;
+  }
+
+  &:has(.taskbar.hidden.top) {
+    top: 0;
+    transition: top 0.2s ease-in-out;
+  }
+
+  &:has(.taskbar.hidden.bottom) {
+    bottom: 0;
+    transition: bottom 0.2s ease-in-out;
+  }
 
   &:not(:hover) {
     &:has(.taskbar.hidden.left) {
-      transform: translateX(calc(-100% + 1px));
-      border-right: 1px solid transparent;
+      left: calc(((var(--config-item-size) + ((var(--config-padding) + var(--config-margin)) * 2)) * -1) + 1px);
+      border-bottom: 1px solid transparent;
+
+      transition: left 0.2s ease-in-out 0.8s;
     }
 
     &:has(.taskbar.hidden.right) {
-      transform: translateX(calc(100% - 1px));
-      border-left: 1px solid transparent;
+      right: calc(((var(--config-item-size) + ((var(--config-padding) + var(--config-margin)) * 2)) * -1) + 1px);
+      border-bottom: 1px solid transparent;
+
+      transition: right 0.2s ease-in-out 0.8s;
     }
 
     &:has(.taskbar.hidden.top) {
-      transform: translateY(calc(-100% + 1px));
+      top: calc(((var(--config-item-size) + ((var(--config-padding) + var(--config-margin)) * 2)) * -1) + 1px);
       border-bottom: 1px solid transparent;
+
+      transition: top 0.2s ease-in-out 0.8s;
     }
 
     &:has(.taskbar.hidden.bottom) {
-      transform: translateY(calc(100% - 1px));
+      bottom: calc(((var(--config-item-size) + ((var(--config-padding) + var(--config-margin)) * 2)) * -1) + 1px);
       border-top: 1px solid transparent;
+
+      transition: bottom 0.2s ease-in-out 0.8s;
     }
   }
 }
