@@ -201,7 +201,6 @@ impl Default for WindowManagerSettings {
 // ================= Seelen Launcher ================
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
-#[serde(rename_all = "camelCase")]
 pub enum SeelenLauncherMonitor {
     Primary,
     #[serde(rename = "Mouse-Over")]
