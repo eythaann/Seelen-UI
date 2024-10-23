@@ -386,6 +386,28 @@
   }
 }
 
+@keyframes text-highlight {
+  0% { color: var(--color-gray-300); }
+  66% { color: var(--config-accent-color); }
+  100% { color: var(--color-gray-300); }
+}
+
+.notification-arrival {
+  margin: var(--popups-margin);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
+  padding: 0 2px;  
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  & .notification-header-info {
+    animation: text-highlight 5s ease-in-out infinite;
+  }
+}
+
 .notifications-header {
   display: flex;
   align-items: center;

@@ -25,3 +25,17 @@ export function useInterval(cb: () => void, ms: number, deps: any[] = []) {
     return clearLastInterval;
   }, [ms, ...deps]);
 }
+
+export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
+  const ref = useRef<NodeJS.Timeout | null>(null);
+  const clearLastTimeout = () => {
+    if (ref.current) {
+      clearTimeout(ref.current);
+    }
+  };
+  useEffect(() => {
+    clearLastTimeout();
+    ref.current = setTimeout(cb, ms);
+    return clearLastTimeout;
+  }, [ms, ...deps]);
+}
