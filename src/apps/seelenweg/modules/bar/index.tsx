@@ -42,6 +42,7 @@ function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: bool
     case HideMode.Always:
       shouldBeHidden = !isActive;
       break;
+    case HideMode.NeverWithoutPlaceholder:
     case HideMode.Never:
       shouldBeHidden = false;
       break;

@@ -1169,6 +1169,13 @@
           ]
         },
         {
+          "description": "Never hide, but do not make a placeholder for it",
+          "type": "string",
+          "enum": [
+            "Never without placeholder"
+          ]
+        },
+        {
           "description": "auto-hide always on",
           "type": "string",
           "enum": [

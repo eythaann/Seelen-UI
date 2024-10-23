@@ -54,6 +54,9 @@ pub enum SeelenWegMode {
 pub enum HideMode {
     /// never hide
     Never,
+    /// Never hide, but do not make a placeholder for it
+    #[serde(rename = "Never without placeholder")]
+    NeverWithoutPlaceholder,
     /// auto-hide always on
     Always,
     /// auto-hide only if is overlaped by the focused window
