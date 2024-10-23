@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- app crashing when changing settings on app launcher.
+- app previews on wrong position on dock.
+
 ## [2.0.3]
 ### fix
 - apps being runned as admin instead normal.
