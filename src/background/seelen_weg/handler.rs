@@ -77,10 +77,11 @@ pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
         return Ok(());
     }
 
-    if LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire) == hwnd.0 as isize {
+    let last_active = LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire);
+    if last_active == hwnd.0 as isize {
         WindowsApi::show_window_async(hwnd, SW_MINIMIZE)?;
     } else {
-        WindowsApi::async_force_set_foreground(hwnd)
+        WindowsApi::set_foreground(hwnd)?;
     }
 
     Ok(())
