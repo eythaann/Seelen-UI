@@ -2,15 +2,14 @@ import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode, useWindowFocusChange } from 'seelen-core';
 import {
-  Placeholder,
+  HideMode, Placeholder,
   ToolbarModule,
-  ToolbarModuleType,
+  ToolbarModuleType, useWindowFocusChange,
 } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
-import { DateModule } from '../Date/infra';
+import { DateModule } from '../Date/infra/Module';
 import { DeviceModule } from '../Device/infra';
 import { GenericItem, Item } from '../item/infra/infra';
 import { MediaModule } from '../media/infra/Module';
