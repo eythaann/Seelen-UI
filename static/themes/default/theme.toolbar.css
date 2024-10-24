@@ -462,3 +462,58 @@
     }
   }
 }
+
+.calendar-container {
+  margin: var(--popups-margin);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
+  padding: var(--popups-margin);  
+  overflow-y: hidden;
+  overflow-x: hidden;
+
+  .bg-layer-1 {
+    opacity: 0.4;
+    filter: saturate(0);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: cover;
+    border-radius: 12px;
+  }
+
+  .bg-layer-2 {
+    opacity: 0.85;
+    background-color: var(--color-gray-100);
+    border-radius: 12px;
+  }
+  
+  & .calendar {
+    padding: var(--popups-margin); 
+    
+    --rdp-accent-color: var(--config-accent-color) !important;
+
+    & .rdp-month_caption {
+      font-style: italic !important;
+      border-bottom: solid 1px var(--color-gray-400);
+    }
+
+    & .rdp-weekdays {
+      font-style: italic !important;
+      opacity: 0.4 !important;
+      border-bottom: solid 1px rgba(var(--config-accent-color-rgb), 0.2) !important;
+    }
+    
+    & .rdp-week_number {
+      vertical-align: middle;
+      font-style: italic !important;
+      opacity: 0.4 !important;
+      border-right: solid 1px rgba(var(--config-accent-color-rgb), 0.2) !important;
+    }
+
+    & .rdp-day {
+      vertical-align: middle;
+      background-color: rgba(175, 175, 175, 0.05) !important;
+    }
+  }
+}

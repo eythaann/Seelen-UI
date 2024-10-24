@@ -34,7 +34,8 @@
     "@tauri-apps/plugin-log": "^2.0.0-beta.2",
     "@tauri-apps/plugin-process": "^2.0.0-beta.2",
     "@tauri-apps/plugin-shell": "^2.0.0-beta.2",
-    "@tauri-apps/plugin-updater": "^2.0.0-beta.2"
+    "@tauri-apps/plugin-updater": "^2.0.0-beta.2",
+    "react-day-picker": "^9.2.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
@@ -43,8 +44,8 @@
     "@stylistic/eslint-plugin": "^1.6.2",
     "@tauri-apps/api": "^2.0.0-beta.4",
     "@tauri-apps/cli": "^2.0.0-beta.8",
-    "@types/glob": "^8.1.0",
     "@types/d3": "^7.4.3",
+    "@types/glob": "^8.1.0",
     "@types/jest": "^29.5.12",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.7",
