@@ -10,12 +10,12 @@ header:
     developer: Ontwikkelaar
     general: Algemeen
     specific_apps: Specifieke apps
-    monitors: Monitoren
+    monitors: Monitors
     seelen_weg: Dock/taakbalk
     seelen_bar: Fancy werkbalk
     shortcuts: Snelkoppelingen
-    seelen_wall: De muur
-    seelen_rofi: Apparter
+    seelen_wall: Achtergrond
+    seelen_rofi: Appstarter
     virtual_desk: Virtuele desktops
     home: Thuis
 start:
@@ -53,7 +53,7 @@ toolbar:
     select: Werkbalkstructuur
   height: Hoogte
   enable: Schakel fancy werkbalk in
-  auto_hide: Auto verbergen
+  auto_hide: Automatisch verbergen
   label: Werkbalk
 wm:
   border:
@@ -71,14 +71,14 @@ wm:
 weg:
   items:
     visible_separators: Zichtbare scheiders
-    size: Artikelgrootte
+    size: Item grootte
     zoom_size: Ingezoomde grootte (gebruikt voor thema's)
     label: Items
     gap: Ruimte tussen items
   padding: Vulling
   margin: Marge
   gap: Gat
-  auto_hide: Auto Hide
+  auto_hide: Automatisch Verbergen
   width: Breedte
   label: Dock/taakbalk
   enable: Schakel dock/taakbalk in
@@ -94,10 +94,10 @@ devtools:
 apps_configurations:
   app:
     options:
-      float: Vlot
-      force: Force beheren
+      float: Zweven
+      force: Geforceerd beheren
       pinned: Vastgemaakt
-      unmanage: Onschadelijk
+      unmanage: Niet beheren
       hidden: Verbergen zich voor Dock/Taskbar
     category_placeholder: Geen
     ok_create: Creëren
@@ -109,7 +109,7 @@ apps_configurations:
     title_edit: Bewerken {{name}}
     ok_readonly: Bewerken als nieuw
     title_create: Het maken van {{name}}
-    bindings: Binding (merk op beide opties vereist)
+    bindings: Binding (beide opties zijn vereist)
     workspace_placeholder: Geen
     monitor: Monitor
     name: Naam
@@ -122,14 +122,14 @@ apps_configurations:
     remove: Verwijder blok
     matching_strategy: Matching -strategie
     add_block: Block toevoegen
-    id: Identificatier
+    id: Identificatie
     negation: Ontkennen matching
     kind: Identificeren door
-  swap: Ruil
+  swap: Ruilen
   confirm_delete_title: Bevestig verwijderen
   export: Exporteren
   new: Nieuw
-  confirm_delete: Weet u zeker dat u deze configuratie/en) wilt verwijderen?
+  confirm_delete: Weet u zeker dat u deze configuratie(s) wilt verwijderen?
   delete: Verwijderen
   import: Importeren
   search: Zoekopdracht
@@ -137,87 +137,87 @@ apps_configurations:
     Deze gebundelde configuraties zijn niet bewerkbaar en zijn ontworpen om u de
     beste ervaring zonder aanpassing te bieden. Ze configureren automatisch de
     meest voorkomende toepassingen voor u.
-  bundled_title: App -configuratie gebundeld met selen
+  bundled_title: App -configuratie gebundeld met Seelen
   extra_info: >-
-    De Seelen UI gebruikt slechts één ID per app (eerste gevonden match), dus de
+    Seelen UI gebruikt slechts één ID per app (eerste gevonden match), dus de
     volgorde waarin ze worden gespecificeerd is belangrijk. De laatst
     toegevoegde krijgt prioriteit, aangezien de tabel standaard wordt gesorteerd
     van nieuwste naar oude.
 extras:
-  relaunch: Opnieuw lanceren
-  discord: Meningsverschil
+  relaunch: Opnieuw starten
+  discord: Discord
   exit: Stop/exit
   version: Versie
   links: Officiële links
-  github: Gitub
+  github: GitHub
 shortcuts:
   labels:
-    decrease_width: Breedte afnemen
-    move_to_workspace_6: Ga naar werkruimte 6
-    move_to_workspace_2: Ga naar werkruimte 2
+    decrease_width: Breedte verminderen
+    move_to_workspace_6: Verplaats naar werkruimte 6
+    move_to_workspace_2: Verplaats naar werkruimte 2
     switch_workspace_6: Schakel over naar werkruimte 6
-    move_to_workspace_4: Ga naar werkruimte 4
-    move_to_workspace_9: Ga naar werkruimte 9
-    increase_height: Verhoog de hoogte
-    move_to_workspace_7: Ga naar werkruimte 7
+    move_to_workspace_4: Verplaats naar werkruimte 4
+    move_to_workspace_9: Verplaats naar werkruimte 9
+    increase_height: Hoogte verhogen
+    move_to_workspace_7: Verplaats naar werkruimte 7
     focus_top: Focus Top
     focus_latest: Focus nieuwste
-    reserve_stack: Reservetapel
+    reserve_stack: Reservestapel
     reserve_left: Reserveer links
     send_to_workspace_0: Stuur naar werkruimte 0
     reserve_float: Reserve Float
     send_to_workspace_2: Stuur naar werkruimte 2
     switch_workspace_3: Schakel over naar werkruimte 3
     switch_workspace_4: Schakel over naar werkruimte 4
-    move_to_workspace_1: Ga naar werkruimte 1
+    move_to_workspace_1: Verplaats naar werkruimte 1
     switch_workspace_5: Schakel over naar werkruimte 5
     send_to_workspace_8: Stuur naar werkruimte 8
     switch_workspace_9: Schakel over naar werkruimte 9
     focus_left: Focus links
     decrease_height: De hoogte verminderen
-    move_to_workspace_8: Ga naar werkruimte 8
+    move_to_workspace_8: Verplaats naar werkruimte 8
     switch_workspace_2: Schakel over naar werkruimte 2
     send_to_workspace_1: Stuur naar werkruimte 1
-    move_to_workspace_5: Ga naar werkruimte 5
-    increase_width: Verhoog de breedte
+    move_to_workspace_5: Verplaats naar werkruimte 5
+    increase_width: Breedte vermeerderen
     send_to_workspace_7: Stuur naar werkruimte 7
     send_to_workspace_3: Stuur naar werkruimte 3
-    move_to_workspace_3: Ga naar werkruimte 3
+    move_to_workspace_3: Verplaatsen naar werkruimte 3
     send_to_workspace_5: Stuur naar werkruimte 5
     reserve_top: Reserveer top
     send_to_workspace_6: Stuur naar werkruimte 6
-    reserve_right: Reserve recht
+    reserve_right: Reserveer rechts
     switch_workspace_7: Schakel over naar werkruimte 7
-    reserve_bottom: Reserve bodem
-    move_to_workspace_0: Ga naar de werkruimte 0
+    reserve_bottom: Reserveer bodem
+    move_to_workspace_0: Verplaats naar de werkruimte 0
     switch_workspace_8: Schakel over naar werkruimte 8
     restore_sizes: Herstel de maten
     send_to_workspace_9: Stuur naar werkruimte 9
     send_to_workspace_4: Stuur naar werkruimte 4
-    focus_right: Focus goed
-    focus_bottom: Focusbodem
+    focus_right: Focus rechts
+    focus_bottom: Focus bodem
     switch_workspace_0: Schakel over naar werkruimte 1
     switch_workspace_1: Schakel over naar werkruimte 2
-    misc_toggle_lock_tracing: Schakelvergrendeling traceren (logboeken)
+    misc_toggle_lock_tracing: Schakel vergrendeling traceren (logboeken)
     misc_open_settings: Open instellingen
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Logs)
     toggle_launcher: Schakelaar
   enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
   enable_tooltip: >-
-    Schakel uit of u uw eigen snelkoppelingen implementeert met behulp van de
-    Selen Core API
+    Schakel uit als u uw eigen snelkoppelingen implementeert met behulp van de
+    Seelen Core API
   reset: Reset naar standaardwaarden
   readonly_tooltip: Dit is een alleen-lezen snelkoppeling
-quit: Ontslag nemen
+quit: Afsluiten
 open: Open
-save: Redden
+save: Opslaan
 inProgress: Bezig...
 loading: Bezig met laden...
 delete: Verwijderen
 cancel: Annuleren
 vd:
   strategy:
-    native: Oorspronkelijk
+    native: Native
     seelen: Seelen
     label: Virtuele desktopstrategie
   disabled_windows_version: >-
@@ -227,21 +227,21 @@ save_and_restart: Opslaan en opnieuw opstarten
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  interval: Verander wallpaper elke (seconden)
-  backgrounds: Wallpapers
-  no_background: Lege diavoorstelling, in plaats daarvan met de achtergrond van het thema.
-  enable: Schakel Selen -muur in
+  interval: Verander achtergrond elke (seconden)
+  backgrounds: Achtergronden
+  no_background: Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het thema.
+  enable: Schakel Seelen -achtergrond in
 app_launcher:
   runners:
     cmd: Commando
-    explorer: Loop
-    label: Lopers wierners
+    explorer: Uitvoeren
+    label: Uitvoerders
   monitor: Monitor om te laten zien
   enable: Schakel App Launcher in
 inherit: Erven
 more: Meer
 insert: Invoegen
-close: Dichtbij
+close: Sluiten
 update:
   available: Update beschikbaar!
   downloading: Downloaden ...

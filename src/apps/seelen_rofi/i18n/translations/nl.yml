@@ -1,11 +1,11 @@
 app_launcher:
   runners:
     cmd: Commando
-    explorer: Loop
+    explorer: Uitvoeren
 footer:
   shortcuts: Toon snelkoppelingen
 header:
   search: App, opdracht of pad
 item:
-  pin: Pin om aan te meren
+  pin: Vastmaken aan Dock
   open_location: Open de bestandslocatie

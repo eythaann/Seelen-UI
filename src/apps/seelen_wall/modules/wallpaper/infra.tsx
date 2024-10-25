@@ -32,21 +32,13 @@ export function Wallpaper({ path, containerRef, onLoad, onError }: Props) {
   }, [stoped]);
 
   if (['.png', '.jpg', '.jpeg', '.webp', '.gif'].some((ext) => path.endsWith(ext))) {
-    wallpaper = (
-      <img
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-        src={convertFileSrc(path)}
-        onLoad={onLoad}
-        onError={onError}
-      />
-    );
+    wallpaper = <img src={convertFileSrc(path)} onLoad={onLoad} onError={onError} />;
   }
 
   if (['.mp4', '.mkv', '.wav'].some((ext) => path.endsWith(ext))) {
     wallpaper = (
       <video
         ref={videoRef}
-        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
         src={convertFileSrc(path)}
         onLoadedData={onLoad}
         onError={onError}
@@ -59,5 +51,9 @@ export function Wallpaper({ path, containerRef, onLoad, onError }: Props) {
     );
   }
 
-  return <div ref={containerRef}>{wallpaper}</div>;
+  return (
+    <div ref={containerRef} className="wallpaper-container">
+      {wallpaper}
+    </div>
+  );
 }
