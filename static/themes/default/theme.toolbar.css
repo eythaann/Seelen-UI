@@ -462,3 +462,99 @@
     }
   }
 }
+
+.calendar-container {
+  margin: var(--popups-margin);
+  width: 350px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
+
+  .bg-layer-1 {
+    opacity: 0.4;
+    filter: saturate(0);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: cover;
+    border-radius: 12px;
+  }
+
+  .bg-layer-2 {
+    opacity: 0.85;
+    background-color: var(--color-gray-100);
+    border-radius: 12px;
+  }
+
+  & .calendar.ant-picker-calendar {
+    background: transparent !important;
+
+    & .calendar-header {
+      & .calendar-header-placeholder {
+        flex: 1;
+      }
+
+      > .calendar-date {
+        font-size: 1.25em;
+        margin: 5px;
+        font-style: italic;
+      }
+
+      > .calendar-navigator {
+        &:hover {
+          color: var(--config-accent-color);
+        }
+
+        font-size: 1.25em;
+        padding: 3px 8px;
+        margin: 2px;
+        cursor: pointer;
+        background-color: transparent;
+
+        transition: color 0.4s ease-in-out;
+      }
+    }
+
+    & .ant-picker-panel {
+      background: transparent !important;
+
+      & .ant-picker-content thead th {
+        border-bottom: solid 1px rgba(var(--config-accent-color-rgb), 0.2);
+        font-style: italic;
+        line-height: 2em !important;
+      }
+
+      & .ant-picker-cell {
+        text-align: center;
+        vertical-align: middle;
+        background-color: rgba(175, 175, 175, 0.1) !important;
+
+        pointer-events: none;
+
+        &:not(.ant-picker-cell-in-view) {
+          opacity: 0;
+        }
+
+        &.ant-picker-cell-in-view {
+          background: rgba();
+          
+          & > .ant-picker-calendar-date::before {
+              content: unset !important;
+          }
+          
+          &.ant-picker-cell-selected > .ant-picker-calendar-date.ant-picker-cell-inner {
+            background: transparent !important;
+          }
+          
+          &.ant-picker-cell-today > .ant-picker-calendar-date > .ant-picker-calendar-date-value {
+            color: var(--config-accent-color);
+          }
+          
+          &.ant-picker-cell-selected:not(.ant-picker-cell-today) > .ant-picker-calendar-date > .ant-picker-calendar-date-value {
+            color: inherit;
+          }
+        }
+      }
+    }
+  }
+}
