@@ -141,8 +141,7 @@ apps_configurations:
     or: 或
     add_block: 添加块
   extra_info: >-
-    SEELEN
-    UI仅使用每个应用程序使用一个标识符（第一次匹配），因此“如何指定”的顺序很重要，最新添加的添加将得到优先级，因为注意表的默认情况下是从最新到旧的。
+    Seelen UI 仅使用每个应用程序使用一个标识符（第一次匹配），因此“如何指定”的顺序很重要，最新添加的添加将得到优先级，因为注意表的默认情况下是从最新到旧的。
 extras:
   version: 版本
   links: 官方链接
@@ -200,7 +199,7 @@ shortcuts:
     send_to_workspace_9: 发送到工作区 9
     switch_workspace_1: 切换到工作区 1
     switch_workspace_0: 切换到工作区 0
-    misc_toggle_win_event_tracing: 切换Win事件跟踪（日志）
+    misc_toggle_win_event_tracing: 切换 Windows 事件跟踪（日志）
     misc_toggle_lock_tracing: 切换锁定跟踪（日志）
     misc_open_settings: 打开设置
     toggle_launcher: 切换
