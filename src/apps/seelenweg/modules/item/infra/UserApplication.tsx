@@ -78,7 +78,7 @@ export const UserApplication = memo(({ item }: Props) => {
       <WithContextMenu items={getMenuForItem(t, item) || []}>
         <Popover
           open={openPreview}
-          mouseEnterDelay={0.4}
+          mouseEnterDelay={0.8}
           placement={calculatePlacement(settings.position)}
           onOpenChange={(open) => setOpenPreview(open && !!item.opens.length)}
           trigger="hover"
