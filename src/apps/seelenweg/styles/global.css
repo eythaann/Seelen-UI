@@ -23,8 +23,6 @@ body {
   &:has(.taskbar.hidden)::after {
     content: '';
     position: fixed;
-    width: 100vw;
-    height: 5px;
   }
 
   &:has(.taskbar.hidden.left) {
@@ -56,7 +54,7 @@ body {
       top: 0;
       right: 0;
       width: 100vw;
-      height: 1px;
+      height: 5px;
     }
 
     top: 0;
