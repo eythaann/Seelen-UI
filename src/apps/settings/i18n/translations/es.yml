@@ -22,7 +22,7 @@ header:
     developer: Desarrollador
     info: Información
     seelen_rofi: Lanzador de aplicaciones
-    seelen_wall: La pared
+    seelen_wall: Fondo de pantalla
     virtual_desk: Escritorios virtuales
     home: Hogar
 start:
@@ -49,7 +49,7 @@ general:
     selected: Seleccionada
   icon_pack:
     label: Paquetes de iconos
-  accent_color: Acentuar el color
+  accent_color: Color de acento
   wallpaper:
     select: Seleccionar papel tapiz
   date_format: Formato de fecha
@@ -213,7 +213,7 @@ shortcuts:
     misc_toggle_lock_tracing: Rastreo de bloqueo de al revés (registros)
     misc_open_settings: Abrir configuración
     misc_toggle_win_event_tracing: Rastreo de eventos para alternar (registros)
-    toggle_launcher: Palanca
+    toggle_launcher: Probably
   reset: Reiniciar a los valores predeterminados
   readonly_tooltip: Este es un atajo de solo lectura
 vd:
@@ -233,7 +233,7 @@ wall:
     Presentación de diapositivas vacías, utilizando el fondo del tema en su
     lugar.
   backgrounds: Fondos de pantalla
-  enable: Habilitar la pared de Seelen
+  enable: Habilitar Fondo de pantalla de Seelen
 app_launcher:
   runners:
     explorer: Correr
@@ -244,7 +244,7 @@ app_launcher:
 inherit: Heredar
 insert: Insertar
 more: Más
-close: Cerca
+close: Cerrar
 update:
   available: Actualización disponible!
   downloading: Descarga ...
