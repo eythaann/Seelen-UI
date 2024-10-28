@@ -9,12 +9,18 @@ import { WlanBssEntry, WlanProfile } from '../domain';
 import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
 
-export function WlanSelectorEntry(props: {
+export interface WlanSelectorEntryProps {
   entry: WlanBssEntry;
   selected: boolean;
   onClick: () => void;
-}) {
-  let { entry, selected, onClick } = props;
+  className?: string;
+  icon?: string;
+  loading?: boolean;
+  buttonDisabled?: boolean;
+}
+
+export function WlanSelectorEntry(props: WlanSelectorEntryProps) {
+  let { entry, selected, onClick, icon, className, buttonDisabled } = props;
 
   let [loading, setLoading] = useState(false);
   let [showFields, setShowFields] = useState(false);
@@ -87,7 +93,9 @@ export function WlanSelectorEntry(props: {
   }
 
   let signalIcon = 'GrWifiNone';
-  if (entry.signal > 75) {
+  if (icon) {
+    signalIcon = icon;
+  } else if (entry.signal > 75) {
     signalIcon = 'GrWifi';
   } else if (entry.signal > 50) {
     signalIcon = 'GrWifiMedium';
@@ -98,7 +106,7 @@ export function WlanSelectorEntry(props: {
   return (
     <div
       key={entry.bssid}
-      className={cx('wlan-entry', {
+      className={cx('wlan-entry', className, {
         'wlan-entry-selected': selected,
       })}
       onClick={onClick}
@@ -131,7 +139,7 @@ export function WlanSelectorEntry(props: {
           />
         </form>
       )}
-      {selected && (
+      { (!buttonDisabled && selected) && (
         <div className="wlan-entry-actions">
           <Button type="primary" onClick={onConnection} loading={loading} disabled={loading}>
             {entry.connected ? t('network.disconnect') : t('network.connect')}

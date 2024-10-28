@@ -181,6 +181,7 @@
   padding: 8px;
   flex: 1;
   overflow-y: auto;
+  border-top: solid 1px var(--color-gray-300);
 
   .wlan-selector-empty {
     font-style: italic;
@@ -193,12 +194,14 @@
   border-radius: 8px;
   gap: 10px;
 
+  transition: background-color 0.3s ease-in-out;
+
   &:hover {
     background-color: var(--color-gray-200);
   }
 
   &.wlan-entry-selected {
-    background-color: rgba(var(--config-accent-color-rgb), 0.2);
+    background-color: var(--color-gray-400);
   }
 }
 
@@ -212,6 +215,15 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.wlan-entry-selected.wlan-entry-connected {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+
+  background-color: rgba(var(--config-accent-color-rgb), 0.2);
+
+  padding: 15px 20px;
 }
 
 .wlan-selector-footer {
