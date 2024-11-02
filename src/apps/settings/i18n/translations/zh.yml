@@ -35,7 +35,7 @@ general:
   startup: 开机自启
   language: 语言
   theme:
-    label: 主题设置
+    label: 主题信息
     placeholder: 选择主题
     author: 作者
     description: 描述
@@ -54,7 +54,7 @@ general:
 toolbar:
   enable: 启用精美工具栏
   placeholder:
-    select: 选择工具栏结构
+    select: 工具栏结构
     author: 作者
     description: 描述
   height: 工具栏高度
@@ -66,7 +66,7 @@ wm:
   description: 描述
   space_between_containers: 容器间距
   workspace_padding: 工作区内边距
-  workspace_offset: 工作区偏移
+  workspace_offset: 工作区偏移边距
   resize_delta: 调整大小增量（%）
   border:
     enable: 启用窗口边框
@@ -87,7 +87,7 @@ weg:
     zoom_size: 放大尺寸（用于主题）
     gap: 项目间距
     visible_separators: 可见分隔符
-  dock_side: 显示位置
+  dock_side: 位置
 devtools:
   enable: 启用开发者工具
   app_folders: 应用程序文件夹
@@ -102,7 +102,7 @@ apps_configurations:
   delete: 删除
   swap: 互换
   new: 新建
-  bundled_title: Seelen 捆绑应用配置
+  bundled_title: Seelen 捆绑的应用配置
   bundled_msg: Seelen UI 提供最佳体验，您无需定制，因此这些预配置不可编辑。它们自动配置最常用的应用程序。
   confirm_delete_title: 确认删除
   confirm_delete: 确认是否删除此配置？
