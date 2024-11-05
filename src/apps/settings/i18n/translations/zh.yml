@@ -1,4 +1,4 @@
-loading: 加载中...
+loading: 正在加载...
 inProgress: 进行中...
 cancel: 取消
 save: 保存
@@ -6,31 +6,31 @@ quit: 退出
 open: 打开
 delete: 删除
 sides:
-  left: 左
-  right: 右
-  top: 上
-  bottom: 下
+  left: 左侧
+  right: 右侧
+  top: 上方
+  bottom: 下方
 header:
   labels:
-    general: 通用
+    general: 通用设置
     seelen_bar: 精美工具栏
     seelen_wm: 窗口管理器
     seelen_weg: Dock 栏 / 任务栏
     monitors: 显示器
     specific_apps: 特定应用
     shortcuts: 快捷键
-    developer: 开发者
+    developer: 开发者工具
     info: 信息
     seelen_wall: Seelen 壁纸
     seelen_rofi: 应用启动器
     virtual_desk: 虚拟桌面
     home: 首页
 start:
-  title: 欢迎！
+  title: 欢迎使用！
   message: >-
-    欢迎使用 Seelen UI，这是一个提供了终极桌面环境的应用，集成了窗口平铺管理器等功能，以增强您的 Windows 体验！
-    您可以通过我们直观的界面和高级功能，探索一个更高效率和多任务时代。
-  message_accent: 用风格优化您的生产力！
+    欢迎使用 Seelen UI，这是一款提供终极桌面环境的应用，集成了窗口平铺管理器等功能，旨在增强您的 Windows 使用体验！
+    您可以通过我们的直观界面和高级功能，探索一个更高效的多任务时代。
+  message_accent: 用风格提升您的生产力！
 general:
   startup: 开机自启
   language: 语言
@@ -43,8 +43,8 @@ general:
     added: 主题已添加
     enabled: 启用主题
     tags: 标签
-    selected: 选定
-    available: 可用的
+    selected: 选定主题
+    available: 可用主题
   icon_pack:
     label: 图标包
   accent_color: 主题色
@@ -57,24 +57,24 @@ toolbar:
     select: 工具栏结构
     author: 作者
     description: 描述
-  height: 高度
+  height: 工具栏高度
   auto_hide: 自动隐藏
-  label: 工具栏
+  label: 工具栏设置
 wm:
-  layout: 布局
+  layout: 窗口布局
   author: 作者
   description: 描述
-  space_between_containers: 容器之间的空间
+  space_between_containers: 容器间距
   workspace_padding: 工作区内边距
   workspace_offset: 工作区偏移边距
   resize_delta: 调整大小增量（%）
   border:
     enable: 启用窗口边框
     width: 边框宽度
-    offset: 边框偏移
+    offset: 边框偏移边距
   enable: 启用平铺窗口管理器
 weg:
-  label: Dock 栏 / 任务栏
+  label: Dock 栏 / 任务栏设置
   enable: 启用 Dock 栏 / 任务栏
   width: 宽度
   auto_hide: 自动隐藏
@@ -103,15 +103,15 @@ apps_configurations:
   swap: 互换
   new: 新建
   bundled_title: Seelen 捆绑的应用配置
-  bundled_msg: Seelen UI 为了您提供最佳体验而您无需定制，所以这些捆绑配置不可编辑。它们会自动配置最常用的应用程序。
+  bundled_msg: Seelen UI 提供最佳体验，您无需定制，因此这些预配置不可编辑。它们自动配置最常用的应用程序。
   confirm_delete_title: 确认删除
-  confirm_delete: 确认要删除此配置吗？
+  confirm_delete: 确认是否删除此配置？
   search: 搜索
   app:
     name: 名称
     category: 分类
     category_placeholder: 无
-    bindings: 绑定（需要两个选项）
+    bindings: 绑定（需选择两个选项）
     monitor: 显示器
     monitor_placeholder: 无
     workspace: 工作区
@@ -142,17 +142,17 @@ apps_configurations:
     add_block: 添加块
   extra_info: >-
     Seelen UI 
-    仅使用每个应用程序使用一个标识符（第一次匹配），因此“如何指定”的顺序很重要，最新添加的添加将得到优先级，因为注意表的默认情况下是从最新到旧的。
+    只为每个应用程序使用一个标识符（第一次匹配），因此“如何指定”的顺序非常重要。最近添加的标识符会优先考虑，因为注册表的默认排序是从最新到最旧的。
 extras:
   version: 版本
   links: 官方链接
   github: GitHub
   discord: Discord
-  relaunch: 重新启动
+  relaunch: 重启应用
   exit: 退出 / 关闭
 shortcuts:
   enable: 启用集成快捷键 (ahk)
-  enable_tooltip: 如果您将使用 Seelen Core API 实现自己设置的快捷键，那么请禁用此项。
+  enable_tooltip: 如果您将使用 Seelen Core API 实现自定义快捷键，请禁用此项。
   labels:
     reserve_top: 保留顶部
     reserve_bottom: 保留底部
@@ -211,21 +211,21 @@ vd:
     native: 系统
     label: 虚拟桌面策略
     seelen: Seelen
-  disabled_windows_version: 本虚拟桌面策略不适合您的 Windows 版本。
-save_and_restart: 保存并重新启动
+  disabled_windows_version: 本虚拟桌面策略不支持您的 Windows 版本。
+save_and_restart: 保存并重启应用
 monitors_configurations:
   label: 监视 {{index}}
 wall:
   backgrounds: 壁纸
   interval: 每次更改壁纸（秒）
-  no_background: 使用的该主题背景为空幻灯片。
-  enable: 启用 S​​eelen Wall
+  no_background: 使用的该主题背景为空幻灯片
+  enable: 启用 Seelen Wall
 app_launcher:
   runners:
     cmd: 命令行
     explorer: 文件管理器
     label: 设置
-  monitor: 显示显示
+  monitor: 显示设置
   enable: 启用应用启动器
 insert: 插入
 inherit: 继承
@@ -233,6 +233,6 @@ more: 更多
 close: 关闭
 update:
   available: 有新的版本更新！
-  downloading: 下载...
+  downloading: 下载中...
   channel: 更新频道
-miscellaneous: 各种各样其他的设置
+miscellaneous: 各种其他设置
