@@ -32,7 +32,7 @@ function removeAppFromState(
   state: RootState,
   searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
 ) {
-  const search = (app: SwItem) => 'path' in app && app.path === searched.path;
+  const search = (app: SwItem) => 'execution_command' in app && app.execution_command === searched.execution_command;
 
   let index = state.itemsOnLeft.findIndex(search);
   if (index !== -1) {
