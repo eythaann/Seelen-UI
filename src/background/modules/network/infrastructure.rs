@@ -103,8 +103,14 @@ pub async fn wlan_get_profiles() -> Result<Vec<WlanProfile>> {
 }
 
 #[tauri::command(async)]
-pub async fn wlan_connect(ssid: String, password: String, hidden: bool) -> Result<bool> {
-    NetworkManager::add_profile(&ssid, &password, hidden).await?;
+pub async fn wlan_connect(ssid: String, password: Option<String>, hidden: bool) -> Result<bool> {
+    if let Some(passphrase) = password {
+        NetworkManager::add_profile(&ssid, &passphrase, hidden).await?;
+    } else {
+        let passphrase = String::new();
+        NetworkManager::add_profile(&ssid, &passphrase, hidden).await?;
+    }
+
     match try_connect_to_profile(&ssid).await {
         Ok(true) => Ok(true),
         Ok(false) => {

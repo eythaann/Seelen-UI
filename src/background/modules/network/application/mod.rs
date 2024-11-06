@@ -106,12 +106,18 @@ impl NetworkManager {
 
     pub async fn add_profile(ssid: &str, password: &str, hidden: bool) -> Result<()> {
         log::trace!("Adding profile {}", ssid);
-
-        // Be sure that xml is using tabs instead of spaces for indentation
-        let profile_xml = include_str!("profile.template.xml")
-            .replace("{ssid}", ssid)
-            .replace("{password}", password)
-            .replace("{hidden}", if hidden { "true" } else { "false" });
+        let profile_xml = if password.is_empty() {
+            // Be sure that xml is using tabs instead of spaces for indentation
+            include_str!("profile.template.empty.xml")
+                .replace("{ssid}", ssid)
+                .replace("{hidden}", if hidden { "true" } else { "false" })
+        } else {
+            // Be sure that xml is using tabs instead of spaces for indentation
+            include_str!("profile.template.xml")
+                .replace("{ssid}", ssid)
+                .replace("{password}", password)
+                .replace("{hidden}", if hidden { "true" } else { "false" })
+        };
 
         let profile_path = temp_dir().join(format!("slu-{}-profile.xml", ssid));
 

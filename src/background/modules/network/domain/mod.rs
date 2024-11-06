@@ -154,7 +154,7 @@ pub struct WlanProfile {
     ssid: String,
     authentication: String,
     encryption: String,
-    password: String,
+    password: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
