@@ -35,8 +35,8 @@ start:
   title: Welcome!
   message: >-
     Welcome to Seelen UI, the ultimate Desktop Environment with an incorporated
-    tiling windows manager to enhance your Windows experience! Explore a new
-    era of efficiency and multitasking with our intuitive interface and advanced
+    tiling windows manager to enhance your Windows experience! Explore a new era
+    of efficiency and multitasking with our intuitive interface and advanced
     features.
   message_accent: Optimize your productivity with style!
 general:
@@ -68,6 +68,8 @@ toolbar:
   label: Toolbar
   height: Height
   auto_hide: Auto Hide
+  delay_to_show: Delay to show
+  delay_to_hide: Delay to hide
 vd:
   disabled_windows_version: Native Virtual Desktop Strategy is not available for your Windows version.
   strategy:
@@ -102,6 +104,8 @@ weg:
     zoom_size: Zoomed Size (used for themes)
     gap: Space Between Items
     visible_separators: Visible Separators
+  delay_to_show: Delay to show
+  delay_to_hide: Delay to hide
 devtools:
   enable: Enable Developer Tools
   app_folders: App Folders

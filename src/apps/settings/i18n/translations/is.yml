@@ -55,6 +55,8 @@ toolbar:
   height: Hæð
   auto_hide: Sjálfvirk fela
   label: Tækjastikur
+  delay_to_show: Seinkun á sýningu
+  delay_to_hide: Seinkun á að fela
 wm:
   border:
     enable: Virkja landamæri glugga
@@ -83,6 +85,8 @@ weg:
   margin: Framlegð
   padding: Padding
   dock_side: Staða
+  delay_to_hide: Seinkun á að fela
+  delay_to_show: Seinkun á sýningu
 devtools:
   load: Hlaða
   app_folders: App möppur

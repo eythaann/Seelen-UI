@@ -12,17 +12,20 @@ body {
 
 #root {
   position: absolute;
-
   width: 100vw;
   top: 0;
-
   transition: top 0.2s ease-in-out;
+
+  &:has(.ft-bar-delayed) {
+    transition-delay: var(--config-time-before-hide);
+    &:hover {
+      transition-delay: var(--config-time-before-show);
+    }
+  }
 
   &:has(.ft-bar-hidden):not(:hover) {
     top: calc(var(--config-height) * -1 + 1px);
     border-bottom: 1px solid transparent;
-
-    transition: top 0.2s ease-in-out 0.8s;
   }
 }
 

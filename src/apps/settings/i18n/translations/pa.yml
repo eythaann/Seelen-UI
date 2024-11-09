@@ -55,6 +55,8 @@ toolbar:
   enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   auto_hide: ਆਟੋ ਓਹਲੇ
   label: ਟੂਲਬਾਰ
+  delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
+  delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
 wm:
   border:
     offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
@@ -83,6 +85,8 @@ weg:
   margin: ਹਾਸ਼ੀਏ
   label: ਡੌਕ/ਟਾਸਕਬਾਰ
   dock_side: ਸਥਿਤੀ
+  delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
+  delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
 devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ

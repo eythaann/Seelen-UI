@@ -14,6 +14,8 @@ export function FancyToolbarSettings() {
   const settings = useSelector(RootSelectors.fancyToolbar);
   const placeholders = useSelector(newSelectors.availablePlaceholders);
   const selectedStructure = useSelector(newSelectors.fancyToolbar.placeholder);
+  const delayToShow = useSelector(newSelectors.fancyToolbar.delayToShow);
+  const delayToHide = useSelector(newSelectors.fancyToolbar.delayToHide);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -34,18 +36,14 @@ export function FancyToolbarSettings() {
     <>
       <SettingsGroup>
         <SettingsOption>
-          <div>
-            <b>{t('toolbar.enable')}</b>
-          </div>
+          <b>{t('toolbar.enable')}</b>
           <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
       </SettingsGroup>
 
       <SettingsGroup>
         <SettingsOption>
-          <div>
-            <b>{t('toolbar.placeholder.select')}: </b>
-          </div>
+          <b>{t('toolbar.placeholder.select')}: </b>
           <Select
             style={{ width: '200px' }}
             value={selectedStructure}
@@ -72,20 +70,50 @@ export function FancyToolbarSettings() {
       <SettingsGroup>
         <SettingsSubGroup label={t('toolbar.label')}>
           <SettingsOption>
-            <span>{t('toolbar.height')}</span>
+            <b>{t('toolbar.height')}</b>
             <InputNumber
               value={settings.height}
               onChange={(value) => dispatch(FancyToolbarActions.setHeight(value || 0))}
               min={0}
             />
           </SettingsOption>
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsSubGroup
+          label={
+            <SettingsOption>
+              <b>{t('toolbar.auto_hide')}</b>
+              <Select
+                style={{ width: '120px' }}
+                value={settings.hideMode}
+                options={OptionsFromEnum(HideMode)}
+                onChange={(value) => dispatch(FancyToolbarActions.setHideMode(value))}
+              />
+            </SettingsOption>
+          }
+        >
           <SettingsOption>
-            <span>{t('toolbar.auto_hide')}</span>
-            <Select
-              style={{ width: '120px' }}
-              value={settings.hideMode}
-              options={OptionsFromEnum(HideMode)}
-              onChange={(value) => dispatch(FancyToolbarActions.setHideMode(value))}
+            <b>{t('toolbar.delay_to_show')} (ms)</b>
+            <InputNumber
+              value={delayToShow}
+              min={0}
+              disabled={settings.hideMode === HideMode.Never}
+              onChange={(value) => {
+                dispatch(FancyToolbarActions.setDelayToShow(value || 0));
+              }}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <b>{t('toolbar.delay_to_hide')} (ms)</b>
+            <InputNumber
+              value={delayToHide}
+              min={0}
+              disabled={settings.hideMode === HideMode.Never}
+              onChange={(value) => {
+                dispatch(FancyToolbarActions.setDelayToHide(value || 0));
+              }}
             />
           </SettingsOption>
         </SettingsSubGroup>

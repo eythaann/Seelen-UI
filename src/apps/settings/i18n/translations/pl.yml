@@ -22,8 +22,8 @@ start:
   title: Powitanie!
   message: >-
     Witamy w Seelen UI, ostatecznym środowisku komputerowym z włączonym
-    menedżerem Windows Windows, aby poprawić Twoje wrażenia z systemu Windows
-    ! Przeglądaj nową erę wydajności i wielozadaniowości z naszym intuicyjnym
+    menedżerem Windows Windows, aby poprawić Twoje wrażenia z systemu Windows !
+    Przeglądaj nową erę wydajności i wielozadaniowości z naszym intuicyjnym
     interfejsem i zaawansowanymi funkcjami.
   message_accent: Zoptymalizuj swoją wydajność za pomocą stylu!
 general:
@@ -55,6 +55,8 @@ toolbar:
   enable: Włącz fantazyjny pasek narzędzi
   auto_hide: Auto Hide
   label: Pasek narzędzi
+  delay_to_hide: Opóźnienie w ukryciu
+  delay_to_show: Opóźnienie w pokazie
 wm:
   border:
     width: Szerokość granicy
@@ -83,6 +85,8 @@ weg:
   margin: Margines
   label: Dock/Pasek zadań
   dock_side: Pozycja
+  delay_to_show: Opóźnienie w pokazie
+  delay_to_hide: Opóźnienie w ukryciu
 devtools:
   load: Obciążenie
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny

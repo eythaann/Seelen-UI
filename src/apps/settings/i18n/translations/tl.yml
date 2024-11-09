@@ -55,6 +55,8 @@ toolbar:
   enable: Paganahin ang magarbong toolbar
   auto_hide: Auto itago
   label: Toolbar
+  delay_to_hide: Delay sa pagtatago
+  delay_to_show: Pagkaantala sa pagpapakita
 wm:
   border:
     width: Lapad ng hangganan
@@ -83,6 +85,8 @@ weg:
   auto_hide: Auto itago
   gap: Gap
   dock_side: Posisyon
+  delay_to_show: Pagkaantala sa pagpapakita
+  delay_to_hide: Delay sa pagtatago
 devtools:
   custom_config_file: I -load ang pasadyang config file
   app_folders: Mga folder ng app

@@ -91,6 +91,8 @@ export class FancyToolbarSettings {
   height: number = 30;
   placeholder: string = 'default.yml';
   hideMode: HideMode = HideMode.Never;
+  delayToShow: number = 100;
+  delayToHide: number = 800;
 }
 
 export class SeelenWegSettings {
@@ -104,6 +106,8 @@ export class SeelenWegSettings {
   margin: number = 8;
   padding: number = 8;
   spaceBetweenItems: number = 8;
+  delayToShow: number = 100;
+  delayToHide: number = 800;
 }
 
 export class Border {

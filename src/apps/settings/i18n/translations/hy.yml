@@ -55,6 +55,8 @@ toolbar:
   height: Բարձրություն
   auto_hide: Ավտոմատ թաքցնել
   label: Գործիքագոտու
+  delay_to_hide: Հետաձգել թաքցնելը
+  delay_to_show: Ցուցադրման ուշացում
 wm:
   border:
     enable: Միացնել պատուհանի սահմանը
@@ -83,6 +85,8 @@ weg:
   label: Dock / Taskbar
   padding: Լիցք
   dock_side: Դիրք
+  delay_to_show: Ցուցադրման ուշացում
+  delay_to_hide: Հետաձգել թաքցնելը
 devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ

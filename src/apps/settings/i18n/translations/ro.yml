@@ -23,8 +23,8 @@ start:
   message_accent: Optimizează -ți productivitatea cu stil!
   message: >-
     Bine ați venit la Seelen UI, mediul de desktop final cu un manager Windows
-    de gresie încorporat pentru a vă îmbunătăți experiența Windows! Explorați
-    o nouă eră de eficiență și multitasking cu interfața noastră intuitivă și
+    de gresie încorporat pentru a vă îmbunătăți experiența Windows! Explorați o
+    nouă eră de eficiență și multitasking cu interfața noastră intuitivă și
     caracteristicile avansate.
 general:
   theme:
@@ -55,6 +55,8 @@ toolbar:
   enable: Activați bara de instrumente fantezistă
   auto_hide: Ascunde auto
   label: Bara de instrumente
+  delay_to_hide: Întârzie să te ascunzi
+  delay_to_show: Întârzieți afișarea
 wm:
   border:
     enable: Activați granița ferestrei
@@ -83,6 +85,8 @@ weg:
   enable: Activați Dock/Bara de activități
   padding: Căptușeală
   dock_side: Poziţie
+  delay_to_hide: Întârzie să te ascunzi
+  delay_to_show: Întârzieți afișarea
 devtools:
   load: Sarcină
   data_folder: Folder de date

@@ -54,6 +54,8 @@ toolbar:
   enable: เปิดใช้งานแถบเครื่องมือแฟนซี
   auto_hide: ซ่อนอัตโนมัติ
   label: แถบเครื่องมือ
+  delay_to_show: ล่าช้าในการแสดง
+  delay_to_hide: ล่าช้าในการซ่อน
 wm:
   border:
     width: ความกว้างชายแดน
@@ -82,6 +84,8 @@ weg:
   label: แท่นวาง/บาร์
   enable: เปิดใช้งาน Dock/Task -Babar
   dock_side: ตำแหน่ง
+  delay_to_show: ล่าช้าในการแสดง
+  delay_to_hide: ล่าช้าในการซ่อน
 devtools:
   settings_file: ไฟล์การตั้งค่า
   install_folder: โฟลเดอร์การติดตั้ง

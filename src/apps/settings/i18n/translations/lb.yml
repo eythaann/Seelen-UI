@@ -23,8 +23,8 @@ start:
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
   message: >-
     Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute
-    Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng
-    nei Ära vun Effizienz a Multits mat eisen intuitiven Interface a
+    Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng nei
+    Ära vun Effizienz a Multits mat eisen intuitiven Interface a
     fortgeschratgeschen Features.
 general:
   theme:
@@ -55,6 +55,8 @@ toolbar:
   height: Héicht
   auto_hide: Automatesch
   label: TO-tcstar
+  delay_to_show: Verspéidung fir ze weisen
+  delay_to_hide: Verspéidung ze verstoppen
 wm:
   border:
     width: Grenz Breet
@@ -83,6 +85,8 @@ weg:
   gap: Knënn
   enable: Aktivéiert Dock / Taskbar
   dock_side: Positioun un
+  delay_to_show: Verspéidung fir ze weisen
+  delay_to_hide: Verspéidung ze verstoppen
 devtools:
   app_folders: App Classeure
   enable: Aktivéiert Entwéckler Tools

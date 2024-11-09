@@ -55,6 +55,8 @@ toolbar:
   enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
   auto_hide: ஆட்டோ மறை
   label: கருவிப்பட்டி
+  delay_to_show: காட்ட தாமதம்
+  delay_to_hide: மறைக்க தாமதம்
 wm:
   border:
     width: பார்டர் அகலம்
@@ -83,6 +85,8 @@ weg:
   width: அகலம்
   enable: டாக்/டாஸ்க்பாரை இயக்கவும்
   dock_side: நிலை
+  delay_to_show: காட்ட தாமதம்
+  delay_to_hide: மறைக்க தாமதம்
 devtools:
   install_folder: நிறுவல் கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு

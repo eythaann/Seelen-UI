@@ -54,6 +54,8 @@ toolbar:
   height: Өндөрлөг
   auto_hide: Авто гүнд
   label: Балтсний хайрцагны хэрэгсэл
+  delay_to_hide: Нуухыг хойшлуулах
+  delay_to_show: Үзүүлэхийг хойшлуулсан
 wm:
   border:
     offset: Хилийн офсет
@@ -82,6 +84,8 @@ weg:
   gap: Цонх
   auto_hide: Авто гүнд
   dock_side: Байрлал
+  delay_to_show: Үзүүлэхийг хойшлуулсан
+  delay_to_hide: Нуухыг хойшлуулах
 devtools:
   settings_file: Тохиргооын нэр
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх

@@ -55,6 +55,8 @@ toolbar:
   enable: Nika amandla amathuluzi e-fancy
   auto_hide: Fihla okuzenzakalelayo
   label: Indawo yamathuluzi
+  delay_to_show: Libazisa ukubonisa
+  delay_to_hide: Libazise ukucasha
 wm:
   border:
     enable: Nika amandla umngcele wewindi
@@ -83,6 +85,8 @@ weg:
   margin: Image
   label: Dock / taskbar
   dock_side: Ukuma
+  delay_to_show: Libazisa ukubonisa
+  delay_to_hide: Libazise ukucasha
 devtools:
   install_folder: Ifolda yokufaka
   data_folder: Ifolda yedatha

@@ -22,8 +22,8 @@ start:
   title: Benvenuta!
   message: >-
     Benvenuti a Seelen UI, l'ambiente desktop finale con un gestore Windows
-    incorporato per migliorare la tua esperienza di Windows! Esplora una
-    nuova era di efficienza e multitasking con la nostra interfaccia intuitiva e
+    incorporato per migliorare la tua esperienza di Windows! Esplora una nuova
+    era di efficienza e multitasking con la nostra interfaccia intuitiva e
     funzionalità avanzate.
   message_accent: Ottimizza la tua produttività con stile!
 general:
@@ -55,6 +55,8 @@ toolbar:
   enable: Abilita barra degli strumenti
   auto_hide: Nascondersi auto
   label: Barra degli strumenti
+  delay_to_hide: Ritardo per nascondersi
+  delay_to_show: Ritardo per la presentazione
 wm:
   border:
     width: Larghezza del bordo
@@ -83,6 +85,8 @@ weg:
   label: Dock/TaskBar
   enable: Abilita dock/barra delle applicazioni
   dock_side: Posizione
+  delay_to_hide: Ritardo per nascondersi
+  delay_to_show: Ritardo per la presentazione
 devtools:
   load: Carico
   custom_config_file: Carica il file di configurazione personalizzato

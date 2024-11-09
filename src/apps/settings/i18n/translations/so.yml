@@ -54,6 +54,8 @@ toolbar:
   height: Dherer
   auto_hide: Auto qaraha
   label: Qalab argamiye
+  delay_to_hide: Dib u dhig si loo qariyo
+  delay_to_show: Dib u dhig si loo muujiyo
 wm:
   border:
     enable: Karti xadka daaqadaha
@@ -82,6 +84,8 @@ weg:
   label: Dock / Tootshar
   auto_hide: Auto qaraha
   dock_side: Meel
+  delay_to_show: Dib u dhig si loo muujiyo
+  delay_to_hide: Dib u dhig si loo qariyo
 devtools:
   app_folders: Faylka app
   install_folder: Xeerka rakibaadda

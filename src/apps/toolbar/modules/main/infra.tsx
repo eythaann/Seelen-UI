@@ -1,13 +1,9 @@
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
-import { JSXElementConstructor, useCallback, useState } from 'react';
+import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HideMode, useWindowFocusChange } from 'seelen-core';
-import {
-  Placeholder,
-  ToolbarModule,
-  ToolbarModuleType,
-} from 'seelen-core';
+import { Placeholder, ToolbarModule, ToolbarModuleType } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
@@ -57,6 +53,8 @@ function componentByModule(module: ToolbarModule, idx: number) {
 
 export function ToolBar({ structure }: Props) {
   const [isAppFocused, setAppFocus] = useState(false);
+  const [delayed, setDelayed] = useState(false);
+
   const isOverlaped = useSelector(Selectors.isOverlaped);
   const hideMode = useSelector(Selectors.settings.hideMode);
 
@@ -66,6 +64,26 @@ export function ToolBar({ structure }: Props) {
   useWindowFocusChange((focused) => {
     setAppFocus(focused);
   });
+
+  useLayoutEffect(() => {
+    switch (hideMode) {
+      case HideMode.Always:
+        setDelayed(true);
+        break;
+      case HideMode.Never:
+        setDelayed(false);
+        break;
+      case HideMode.OnOverlap:
+        if (!isOverlaped) {
+          setDelayed(false);
+          break;
+        }
+        setTimeout(() => {
+          setDelayed(true);
+        }, 300);
+        break;
+    }
+  }, [isOverlaped, hideMode]);
 
   const onReorderPinned = useCallback(
     debounce((apps: (ToolbarModule | string)[]) => {
@@ -106,6 +124,7 @@ export function ToolBar({ structure }: Props) {
       onReorder={onReorderPinned}
       className={cx('ft-bar', {
         'ft-bar-hidden': shouldBeHidden,
+        'ft-bar-delayed': delayed,
       })}
       axis="x"
       as="div"

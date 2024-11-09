@@ -23,9 +23,9 @@ start:
   message_accent: Optimizuokite savo produktyvumą stiliumi!
   message: >-
     Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“
-    plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį!
-    Naršykite naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi
-    intuityvia sąsaja ir pažangiomis funkcijomis.
+    plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį! Naršykite
+    naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi intuityvia
+    sąsaja ir pažangiomis funkcijomis.
 general:
   theme:
     enabled: Įgalintos temos
@@ -55,6 +55,8 @@ toolbar:
   enable: Įgalinkite išgalvotą įrankių juostą
   auto_hide: Automatinis slėptuvė
   label: Įrankių juosta
+  delay_to_hide: Vėluoti paslėpti
+  delay_to_show: Delsimas parodyti
 wm:
   border:
     enable: Įgalinti lango sieną
@@ -83,6 +85,8 @@ weg:
   enable: Įgalinti doką/užduočių juostą
   gap: Tarpas
   dock_side: Pozicija
+  delay_to_hide: Vėluoti paslėpti
+  delay_to_show: Delsimas parodyti
 devtools:
   settings_file: Nustatymų failas
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą

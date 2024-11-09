@@ -55,6 +55,8 @@ toolbar:
   height: Висота
   auto_hide: Автомати
   label: Панель інструментів
+  delay_to_show: Затримка, щоб показати
+  delay_to_hide: Затримка, щоб сховатися
 wm:
   border:
     width: Ширина кордону
@@ -83,6 +85,8 @@ weg:
   width: Ширина
   padding: Прокладка
   dock_side: Позиція
+  delay_to_show: Затримка, щоб показати
+  delay_to_hide: Затримка, щоб сховатися
 devtools:
   load: Навантаження
   app_folders: Папки додатків

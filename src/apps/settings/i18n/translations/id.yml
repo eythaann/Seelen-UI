@@ -55,6 +55,8 @@ toolbar:
   height: Tinggi
   auto_hide: Persembunyian otomatis
   label: Toolbar
+  delay_to_show: Keterlambatan untuk ditampilkan
+  delay_to_hide: Penundaan untuk bersembunyi
 wm:
   border:
     offset: Offset perbatasan
@@ -83,6 +85,8 @@ weg:
   width: Lebar
   gap: Celah
   dock_side: Posisi
+  delay_to_hide: Penundaan untuk bersembunyi
+  delay_to_show: Keterlambatan untuk ditampilkan
 devtools:
   settings_file: File Pengaturan
   install_folder: Folder Instalasi

@@ -22,9 +22,9 @@ start:
   title: Merħba!
   message: >-
     Merħba għal Seelen UI, l-ambjent tad-desktop aħħari b'maniġġ tal-Windows
-    tal-madum inkorporat biex itejjeb l-esperjenza tal-Windows tiegħek!
-    Esplora era ġdida ta 'effiċjenza u multitasking bl-interface intuwittiv
-    tagħna u karatteristiċi avvanzati.
+    tal-madum inkorporat biex itejjeb l-esperjenza tal-Windows tiegħek! Esplora
+    era ġdida ta 'effiċjenza u multitasking bl-interface intuwittiv tagħna u
+    karatteristiċi avvanzati.
   message_accent: Ottimizza l-produttività tiegħek bl-istil!
 general:
   theme:
@@ -55,6 +55,8 @@ toolbar:
   enable: Jippermetti toolbar tal-fancy
   auto_hide: Auto Hide
   label: Toolbar
+  delay_to_show: Dewmien biex juri
+  delay_to_hide: Dewmien biex jinħbew
 wm:
   border:
     enable: Ippermetti l-fruntiera tat-tieqa
@@ -83,6 +85,8 @@ weg:
   padding: Ikkuttunar
   margin: Marġni
   dock_side: Pożizzjoni
+  delay_to_show: Dewmien biex juri
+  delay_to_hide: Dewmien biex jinħbew
 devtools:
   data_folder: Folder tad-dejta
   install_folder: Folder tal-installazzjoni

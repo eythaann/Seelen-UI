@@ -4,7 +4,7 @@ const tsEslint = require('typescript-eslint');
 
 module.exports = [
   {
-    ignores: ['node_modules/', '.git/', 'dist/', 'target/'],
+    ignores: ['node_modules/', '.git/', 'dist/', 'target/', '.dist/'],
   },
   {
     files: ['**/*.{js,jsx,ts,tsx,mjs}'],

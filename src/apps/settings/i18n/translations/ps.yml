@@ -54,6 +54,8 @@ toolbar:
   height: لوړوالی
   auto_hide: آٹو پټول
   label: توکپټه
+  delay_to_hide: د پټولو لپاره ځنډ
+  delay_to_show: د ښودلو لپاره ځنډ
 wm:
   border:
     width: د بريد سور
@@ -82,6 +84,8 @@ weg:
   enable: دوک / ټاسک بار فعال کړئ
   auto_hide: آٹو پټول
   dock_side: موقعیت
+  delay_to_hide: د پټولو لپاره ځنډ
+  delay_to_show: د ښودلو لپاره ځنډ
 devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   enable: د پراختیا کونکي وسیلې فعال کړئ

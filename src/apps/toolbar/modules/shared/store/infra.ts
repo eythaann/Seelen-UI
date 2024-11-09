@@ -162,4 +162,6 @@ export function loadSettingsCSS(settings: FancyToolbarSettings) {
   const styles = document.documentElement.style;
 
   styles.setProperty('--config-height', `${settings.height}px`);
+  styles.setProperty('--config-time-before-show', `${settings.delayToShow}ms`);
+  styles.setProperty('--config-time-before-hide', `${settings.delayToHide}ms`);
 }

@@ -47,12 +47,6 @@
 
     .content {
       padding-left: 10px;
-
-      .setting {
-        > span:first-child::before {
-          content: "- ";
-        }
-      }
     }
   }
 }

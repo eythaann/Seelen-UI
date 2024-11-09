@@ -54,6 +54,8 @@ toolbar:
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
   auto_hide: Ibi ipamọ aifọwọyi
   label: Ọpa irinṣẹ
+  delay_to_show: Idaduro lati ṣafihan
+  delay_to_hide: Idaduro lati tọju
 wm:
   border:
     enable: Jeki aala window
@@ -82,6 +84,8 @@ weg:
   margin: Ẹlẹsin
   padding: Fidigọdi silẹ
   dock_side: Ipo
+  delay_to_show: Idaduro lati ṣafihan
+  delay_to_hide: Idaduro lati tọju
 devtools:
   app_folders: Awọn folda App
   install_folder: Filese Fifi sori ẹrọ

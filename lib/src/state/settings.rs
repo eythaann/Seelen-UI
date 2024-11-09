@@ -27,6 +27,10 @@ pub struct FancyToolbarSettings {
     pub placeholder: String,
     /// hide mode
     pub hide_mode: HideMode,
+    /// delay to show the toolbar on Mouse Hover in milliseconds
+    pub delay_to_show: u32,
+    /// delay to hide the toolbar on Mouse Leave in milliseconds
+    pub delay_to_hide: u32,
 }
 
 impl Default for FancyToolbarSettings {
@@ -36,6 +40,8 @@ impl Default for FancyToolbarSettings {
             height: 30,
             placeholder: String::from("default.yml"),
             hide_mode: HideMode::Never,
+            delay_to_show: 100,
+            delay_to_hide: 800,
         }
     }
 }
@@ -93,6 +99,10 @@ pub struct SeelenWegSettings {
     pub padding: u32,
     /// space between items in px
     pub space_between_items: u32,
+    /// delay to show the toolbar on Mouse Hover in milliseconds
+    pub delay_to_show: u32,
+    /// delay to hide the toolbar on Mouse Leave in milliseconds
+    pub delay_to_hide: u32,
 }
 
 impl Default for SeelenWegSettings {
@@ -108,6 +118,8 @@ impl Default for SeelenWegSettings {
             margin: 8,
             padding: 8,
             space_between_items: 8,
+            delay_to_show: 100,
+            delay_to_hide: 800,
         }
     }
 }

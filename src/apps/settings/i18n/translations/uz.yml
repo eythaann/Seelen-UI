@@ -55,6 +55,8 @@ toolbar:
   height: Balandlik
   auto_hide: Avtomatik yashirish
   label: Asboblar paneli
+  delay_to_hide: Yashirish uchun kechikish
+  delay_to_show: Ko'rsatish uchun kechikish
 wm:
   border:
     width: Chegara kengligi
@@ -83,6 +85,8 @@ weg:
   gap: Bo'shliq
   margin: Marja
   dock_side: Pozitsiya
+  delay_to_show: Ko'rsatish uchun kechikish
+  delay_to_hide: Yashirish uchun kechikish
 devtools:
   install_folder: O'rnatish papkasini o'rnatish
   enable: Ishlab chiqaruvchi vositalarni yoqish

@@ -29,8 +29,8 @@ start:
   title: ¡Bienvenido!
   message: >-
     ¡Bienvenido a Seelen UI, el entorno de escritorio definitivo con un gestor
-    de ventanas en mosaico incorporado para mejorar tu experiencia en Windows
-    ! Explora una nueva era de eficiencia y multitarea con nuestra interfaz
+    de ventanas en mosaico incorporado para mejorar tu experiencia en Windows !
+    Explora una nueva era de eficiencia y multitarea con nuestra interfaz
     intuitiva y funciones avanzadas.
   message_accent: ¡Optimiza tu productividad con estilo!
 general:
@@ -62,6 +62,8 @@ toolbar:
   height: Altura
   auto_hide: Escondite automático
   label: Barra de herramientas
+  delay_to_hide: Retraso para esconderse
+  delay_to_show: Retraso para mostrar
 wm:
   layout: Distribución
   author: Autor
@@ -90,6 +92,8 @@ weg:
     gap: Espacio entre elementos
     visible_separators: Separadores visibles
   dock_side: Posición
+  delay_to_hide: Retraso para esconderse
+  delay_to_show: Retraso para mostrar
 devtools:
   enable: Habilitar herramientas de desarrollador
   app_folders: Carpetas de aplicaciones

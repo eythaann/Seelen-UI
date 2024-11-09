@@ -23,8 +23,8 @@ start:
   message: >-
     Vitajte v používateľskom rozhraní Seelen, v konečnom prostredí Desktop so
     začleneným obkladom Windows Manager, aby ste vylepšili váš zážitok z systému
-    Windows! Preskúmajte novú éru účinnosti a multitaskingu s naším
-    intuitívnym rozhraním a pokročilými funkciami.
+    Windows! Preskúmajte novú éru účinnosti a multitaskingu s naším intuitívnym
+    rozhraním a pokročilými funkciami.
   message_accent: Optimalizujte svoju produktivitu štýlom!
 general:
   theme:
@@ -55,6 +55,8 @@ toolbar:
   height: Výška
   auto_hide: Automaticky skryť
   label: Panel s nástrojmi
+  delay_to_hide: Odložiť skryť
+  delay_to_show: Oneskorenie zobrazenia
 wm:
   border:
     width: Šírka hranice
@@ -83,6 +85,8 @@ weg:
   padding: Vypchávka
   margin: Okraj
   dock_side: Pozícia
+  delay_to_show: Oneskorenie zobrazenia
+  delay_to_hide: Odložiť skryť
 devtools:
   enable: Povoľte vývojárskym nástrojom
   custom_config_file: Načítať vlastný konfiguračný súbor

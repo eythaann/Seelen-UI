@@ -55,6 +55,8 @@ toolbar:
   enable: Omogući fantastičnu alatnu traku
   auto_hide: Auto se sakrio
   label: Alatna traka
+  delay_to_show: Kašnjenje za prikaz
+  delay_to_hide: Odložite da se sakrijete
 wm:
   border:
     width: Širina granice
@@ -83,6 +85,8 @@ weg:
   padding: Obloga
   enable: Omogući pristanište / traku zadataka
   dock_side: Položaj
+  delay_to_hide: Odložite da se sakrijete
+  delay_to_show: Kašnjenje za prikaz
 devtools:
   app_folders: App Mape
   settings_file: Datoteka postavki

@@ -60,6 +60,8 @@ toolbar:
   height: 높이
   auto_hide: 자동 숨기기
   label: 도구 모음
+  delay_to_hide: 숨기기 지연
+  delay_to_show: 표시 지연
 wm:
   layout: 레이아웃
   author: 작성자
@@ -88,6 +90,8 @@ weg:
     gap: 항목 간 간격
     visible_separators: 구분선 표시
   dock_side: 위치
+  delay_to_show: 표시 지연
+  delay_to_hide: 숨기기 지연
 devtools:
   enable: 개발자 도구 활성화
   app_folders: 앱 폴더
@@ -104,8 +108,8 @@ apps_configurations:
   new: 새로 만들기
   bundled_title: Seelen에서 제공한 설정
   bundled_msg: >-
-    이러한 미리 구성된 설정은 편집할 수 없으며, 수정하지 않고 최상의 경험을 제공하도록 설계되었습니다.
-    자주 사용되는 프로그램을 자동으로 구성합니다.
+    이러한 미리 구성된 설정은 편집할 수 없으며, 수정하지 않고 최상의 경험을 제공하도록 설계되었습니다. 자주 사용되는 프로그램을 자동으로
+    구성합니다.
   confirm_delete_title: 삭제하시겠습니까?
   confirm_delete: 정말로 이 설정을 삭제하시겠습니까?
   search: 검색
@@ -143,8 +147,8 @@ apps_configurations:
     or: 또는
     add_block: 블록 추가
   extra_info: >-
-    Seelen UI는 앱당 (가장 먼저 일치한) 하나의 식별자만 사용하므로 식별된 순서는 중요합니다.
-    가장 최근에 추가된 항목이 우선순위를 정합니다. 참고로 테이블은 기본적으로 최신순 부터 오래된 순서로 정렬됩니다.
+    Seelen UI는 앱당 (가장 먼저 일치한) 하나의 식별자만 사용하므로 식별된 순서는 중요합니다. 가장 최근에 추가된 항목이 우선순위를
+    정합니다. 참고로 테이블은 기본적으로 최신순 부터 오래된 순서로 정렬됩니다.
 extras:
   version: 버전
   links: 공식 링크

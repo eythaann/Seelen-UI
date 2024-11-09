@@ -54,6 +54,8 @@ toolbar:
   enable: Vebijêrkek Fancy Vebijêrin
   auto_hide: Auto Hide
   label: Toolbar
+  delay_to_show: Dereng nîşan bide
+  delay_to_hide: Dereng ji bo veşartinê
 wm:
   border:
     width: Berfirehiya sînor
@@ -82,6 +84,8 @@ weg:
   label: Dock / Taskbar
   padding: Padding
   dock_side: Rewş
+  delay_to_hide: Dereng ji bo veşartinê
+  delay_to_show: Dereng nîşan bide
 devtools:
   load: Dawetkirin
   app_folders: Pelên App

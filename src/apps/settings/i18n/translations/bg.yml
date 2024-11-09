@@ -55,6 +55,8 @@ toolbar:
   height: Височина
   auto_hide: Автоматично скриване
   label: Лента с инструменти
+  delay_to_show: Забавяне за показване
+  delay_to_hide: Забавяне, за да се скрие
 wm:
   border:
     enable: Активирайте границата на Windows
@@ -83,6 +85,8 @@ weg:
   label: Док/лента на задачите
   gap: Пропаст
   dock_side: Позиция
+  delay_to_show: Забавяне за показване
+  delay_to_hide: Забавяне, за да се скрие
 devtools:
   app_folders: Папки на приложения
   custom_config_file: Заредете персонализиран конфигурационен файл

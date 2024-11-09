@@ -55,6 +55,8 @@ toolbar:
   enable: Omogućite maštovitu alatnu traku
   auto_hide: Auto sakrij
   label: Alatna traka
+  delay_to_hide: Odgoda za skrivanje
+  delay_to_show: Odgoditi prikaz
 wm:
   border:
     offset: Offset
@@ -83,6 +85,8 @@ weg:
   margin: Margina
   enable: Omogućite pristanište/zadaću
   dock_side: Položaj
+  delay_to_hide: Odgoda za skrivanje
+  delay_to_show: Odgoditi prikaz
 devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
   data_folder: Mapa podataka

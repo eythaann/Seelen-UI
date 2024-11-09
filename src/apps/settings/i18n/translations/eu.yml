@@ -55,6 +55,8 @@ toolbar:
   height: Luzera
   auto_hide: Ezkutatu automatikoa
   label: Tresna barra
+  delay_to_hide: Ezkutatzeko atzeratu
+  delay_to_show: Erakusteko atzerapena
 wm:
   border:
     width: Ertzaren zabalera
@@ -83,6 +85,8 @@ weg:
   label: Dock / ataza barra
   padding: Betegarri
   dock_side: Kokaleku
+  delay_to_hide: Ezkutatzeko atzeratu
+  delay_to_show: Erakusteko atzerapena
 devtools:
   enable: Gaitu garatzaileen tresnak
   load: Zamatu

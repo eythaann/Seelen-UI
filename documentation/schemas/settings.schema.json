@@ -281,6 +281,8 @@
     "fancyToolbar": {
       "description": "fancy toolbar config",
       "default": {
+        "delayToHide": 800,
+        "delayToShow": 100,
         "enabled": true,
         "height": 30,
         "hideMode": "Never",
@@ -368,6 +370,8 @@
     "seelenweg": {
       "description": "seelenweg (dock/taskbar) config",
       "default": {
+        "delayToHide": 800,
+        "delayToShow": 100,
         "enabled": true,
         "hideMode": "On-Overlap",
         "margin": 8,
@@ -1107,6 +1111,20 @@
     "FancyToolbarSettings": {
       "type": "object",
       "properties": {
+        "delayToHide": {
+          "description": "delay to hide the toolbar on Mouse Leave in milliseconds",
+          "default": 800,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "delayToShow": {
+          "description": "delay to show the toolbar on Mouse Hover in milliseconds",
+          "default": 100,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
         "enabled": {
           "description": "enable or disable the fancy toolbar",
           "default": true,
@@ -1401,6 +1419,20 @@
     "SeelenWegSettings": {
       "type": "object",
       "properties": {
+        "delayToHide": {
+          "description": "delay to hide the toolbar on Mouse Leave in milliseconds",
+          "default": 800,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "delayToShow": {
+          "description": "delay to show the toolbar on Mouse Hover in milliseconds",
+          "default": 100,
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
         "enabled": {
           "description": "enable or disable the seelenweg",
           "default": true,

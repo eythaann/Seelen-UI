@@ -29,9 +29,9 @@ start:
   title: Willkommen!
   message: >-
     Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
-    integrierten Fenstermanager, um dein Windows-Erlebnis zu
-    verbessern! Erkunde eine neue Ära der Effizienz und Multitasking mit unserer
-    intuitiven Oberfläche und fortschrittlichen Funktionen.
+    integrierten Fenstermanager, um dein Windows-Erlebnis zu verbessern! Erkunde
+    eine neue Ära der Effizienz und Multitasking mit unserer intuitiven
+    Oberfläche und fortschrittlichen Funktionen.
   message_accent: Optimiere deine Produktivität mit Stil!
 general:
   startup: Beim Hochfahren ausführen?
@@ -62,6 +62,8 @@ toolbar:
   height: Höhe
   auto_hide: Automatisch ausblenden
   label: Symbolleiste
+  delay_to_hide: Verzögerung zum Verstecken
+  delay_to_show: Verzögerung beim Anzeigen
 wm:
   layout: Layout
   author: Autor
@@ -90,6 +92,8 @@ weg:
     gap: Abstand zwischen Elementen
     visible_separators: Sichtbare Trennzeichen
   dock_side: Position
+  delay_to_show: Verzögerung beim Anzeigen
+  delay_to_hide: Verzögerung zum Verstecken
 devtools:
   enable: Entwicklerwerkzeuge aktivieren
   app_folders: Anwendungsordner

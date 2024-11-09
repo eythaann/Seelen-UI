@@ -4,4 +4,7 @@
 
   --config-accent-color: #ff0000;
   --config-accent-color-rgb: 255, 0, 0;
+
+  --config-time-before-hide: 800ms;
+  --config-time-before-show: 100ms;
 }

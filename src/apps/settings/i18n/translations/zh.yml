@@ -60,6 +60,8 @@ toolbar:
   height: 工具栏高度
   auto_hide: 自动隐藏
   label: 工具栏设置
+  delay_to_hide: 延迟隐藏
+  delay_to_show: 延迟显示
 wm:
   layout: 窗口布局
   author: 作者
@@ -88,6 +90,8 @@ weg:
     gap: 项目间距
     visible_separators: 可见分隔符
   dock_side: 位置
+  delay_to_hide: 延迟隐藏
+  delay_to_show: 延迟显示
 devtools:
   enable: 启用开发者工具
   app_folders: 应用程序文件夹

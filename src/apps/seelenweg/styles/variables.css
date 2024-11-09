@@ -9,4 +9,7 @@
   --config-by-position-justify-content: center;
   --config-by-position-align-items: flex-end;
   --config-by-position-flex-direction: row;
+
+  --config-time-before-hide: 800ms;
+  --config-time-before-show: 100ms;
 }

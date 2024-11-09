@@ -55,6 +55,8 @@ toolbar:
   enable: ჩართეთ ლამაზი პანელი
   auto_hide: ავტო დამალვა
   label: ინსტრუმენტთა პანელი
+  delay_to_hide: დაგვიანებით დამალვა
+  delay_to_show: დაგვიანებით ჩვენება
 wm:
   border:
     enable: ფანჯრის საზღვრის ჩართვა
@@ -83,6 +85,8 @@ weg:
   gap: ხარპი
   enable: ჩართეთ dock/taskbar
   dock_side: პოზიცია
+  delay_to_hide: დაგვიანებით დამალვა
+  delay_to_show: დაგვიანებით ჩვენება
 devtools:
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
   app_folders: აპლიკაციის საქაღალდეები

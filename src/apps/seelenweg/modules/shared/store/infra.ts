@@ -2,7 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
-import { SeelenEvent, SeelenWegSettings, SeelenWegSide, SwItemType, UIColors, WegItem } from 'seelen-core';
+import {
+  SeelenEvent,
+  SeelenWegSettings,
+  SeelenWegSide,
+  SwItemType,
+  UIColors,
+  WegItem,
+} from 'seelen-core';
 
 import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
@@ -144,6 +151,9 @@ function loadSettingsCSS(settings: SeelenWegSettings) {
 
   styles.setProperty('--config-margin', `${settings.margin}px`);
   styles.setProperty('--config-padding', `${settings.padding}px`);
+
+  styles.setProperty('--config-time-before-show', `${settings.delayToShow}ms`);
+  styles.setProperty('--config-time-before-hide', `${settings.delayToHide}ms`);
 
   styles.setProperty('--config-item-size', `${settings.size}px`);
   styles.setProperty('--config-item-zoom-size', `${settings.zoomSize}px`);

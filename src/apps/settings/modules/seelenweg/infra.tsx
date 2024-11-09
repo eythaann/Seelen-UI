@@ -44,15 +44,6 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
           <SettingsOption>
-            <div>{t('weg.auto_hide')}</div>
-            <Select
-              style={{ width: '120px' }}
-              value={settings.hideMode}
-              options={OptionsFromEnum(HideMode)}
-              onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
-            />
-          </SettingsOption>
-          <SettingsOption>
             <div>{t('weg.dock_side')}</div>
             <Button.Group style={{ width: '120px' }}>
               {Object.values(SeelenWegSide).map((side) => (
@@ -78,6 +69,45 @@ export const SeelenWegSettings = () => {
             <InputNumber
               value={settings.padding}
               onChange={(value) => dispatch(SeelenWegActions.setPadding(value || 0))}
+            />
+          </SettingsOption>
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsSubGroup
+          label={
+            <SettingsOption>
+              <b>{t('weg.auto_hide')}</b>
+              <Select
+                style={{ width: '120px' }}
+                value={settings.hideMode}
+                options={OptionsFromEnum(HideMode)}
+                onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
+              />
+            </SettingsOption>
+          }
+        >
+          <SettingsOption>
+            <span>{t('weg.delay_to_show')} (ms)</span>
+            <InputNumber
+              value={settings.delayToShow}
+              min={0}
+              disabled={settings.hideMode === HideMode.Never}
+              onChange={(value) => {
+                dispatch(SeelenWegActions.setDelayToShow(value || 0));
+              }}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <span>{t('weg.delay_to_hide')} (ms)</span>
+            <InputNumber
+              value={settings.delayToHide}
+              min={0}
+              disabled={settings.hideMode === HideMode.Never}
+              onChange={(value) => {
+                dispatch(SeelenWegActions.setDelayToHide(value || 0));
+              }}
             />
           </SettingsOption>
         </SettingsSubGroup>

@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add new settings to delay the show and hide of dock and toolbar.
+
+### fix
+- dock and toolbar animations
+
 ## [2.0.4]
 ### fix
 - app crashing when changing settings on app launcher.

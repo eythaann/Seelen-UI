@@ -55,6 +55,8 @@ toolbar:
   enable: Aktiver fancy verktøylinje
   auto_hide: Auto Hide
   label: Verktøylinje
+  delay_to_hide: Utsett å skjule
+  delay_to_show: Forsinkelse med visning
 wm:
   border:
     enable: Aktiver vinduets grense
@@ -83,6 +85,8 @@ weg:
   label: Dock/oppgavelinje
   enable: Aktiver dock/oppgavelinje
   dock_side: Stilling
+  delay_to_show: Forsinkelse med visning
+  delay_to_hide: Utsett å skjule
 devtools:
   load: Laste
   custom_config_file: Last inn tilpasset konfigurasjonsfil

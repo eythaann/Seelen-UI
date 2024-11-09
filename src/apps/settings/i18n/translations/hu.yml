@@ -55,6 +55,8 @@ toolbar:
   enable: Engedélyezze a divatos eszköztárat
   auto_hide: Autóbizalom
   label: Eszköztár
+  delay_to_hide: Késleltesse az elrejtést
+  delay_to_show: Megjelenítés késleltetése
 wm:
   border:
     enable: Engedélyezze az ablak szegélyét
@@ -83,6 +85,8 @@ weg:
   label: Dokk/tálca
   enable: Engedélyezze a dokkolót/tálcát
   dock_side: Pozíció
+  delay_to_hide: Késleltesse az elrejtést
+  delay_to_show: Megjelenítés késleltetése
 devtools:
   load: Betöltés
   app_folders: App mappák

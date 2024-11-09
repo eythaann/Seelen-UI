@@ -21,9 +21,9 @@ header:
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
-    quản lý Windows được kết hợp để nâng cao trải nghiệm Windows của bạn!
-    Khám phá một kỷ nguyên mới của hiệu quả và đa nhiệm với giao diện trực quan
-    và các tính năng nâng cao của chúng tôi.
+    quản lý Windows được kết hợp để nâng cao trải nghiệm Windows của bạn! Khám
+    phá một kỷ nguyên mới của hiệu quả và đa nhiệm với giao diện trực quan và
+    các tính năng nâng cao của chúng tôi.
   message_accent: Tối ưu hóa năng suất của bạn với phong cách!
   title: Chào mừng!
 general:
@@ -55,6 +55,8 @@ toolbar:
   enable: Kích hoạt thanh công cụ ưa thích
   auto_hide: Tự động ẩn
   label: Thanh công cụ
+  delay_to_hide: Trì hoãn việc ẩn giấu
+  delay_to_show: Trì hoãn hiển thị
 wm:
   border:
     width: Chiều rộng biên giới
@@ -83,6 +85,8 @@ weg:
   label: Dock/Thanh tác vụ
   auto_hide: Tự động ẩn
   dock_side: Chức vụ
+  delay_to_show: Trì hoãn hiển thị
+  delay_to_hide: Trì hoãn việc ẩn giấu
 devtools:
   load: Trọng tải
   app_folders: Thư mục ứng dụng

@@ -55,6 +55,8 @@ toolbar:
   enable: Schakel fancy werkbalk in
   auto_hide: Automatisch verbergen
   label: Werkbalk
+  delay_to_show: Vertraging om te tonen
+  delay_to_hide: Vertraging om te verbergen
 wm:
   border:
     width: Grensbreedte
@@ -83,6 +85,8 @@ weg:
   label: Dock/taakbalk
   enable: Schakel dock/taakbalk in
   dock_side: Positie
+  delay_to_hide: Vertraging om te verbergen
+  delay_to_show: Vertraging om te tonen
 devtools:
   load: Laden
   data_folder: Gegevensmap
@@ -229,7 +233,9 @@ monitors_configurations:
 wall:
   interval: Verander achtergrond elke (seconden)
   backgrounds: Achtergronden
-  no_background: Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het thema.
+  no_background: >-
+    Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
+    thema.
   enable: Schakel Seelen -achtergrond in
 app_launcher:
   runners:

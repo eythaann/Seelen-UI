@@ -23,8 +23,8 @@ start:
   title: Velkommen!
   message: >-
     Velkommen til Seelen UI, det ultimative desktopmiljø med en inkorporeret
-    Flising Windows Manager for at forbedre din Windows -oplevelse! Udforsk
-    en ny æra med effektivitet og multitasking med vores intuitive interface og
+    Flising Windows Manager for at forbedre din Windows -oplevelse! Udforsk en
+    ny æra med effektivitet og multitasking med vores intuitive interface og
     avancerede funktioner.
 general:
   theme:
@@ -55,6 +55,8 @@ toolbar:
   height: Højde
   auto_hide: Auto skjul
   label: Værktøjslinje
+  delay_to_show: Forsinket fremvisning
+  delay_to_hide: Forsink med at skjule
 wm:
   border:
     width: Grænsebredde
@@ -83,6 +85,8 @@ weg:
   padding: Polstring
   label: Dock/proceslinje
   dock_side: Position
+  delay_to_hide: Forsink med at skjule
+  delay_to_show: Forsinket fremvisning
 devtools:
   enable: Aktivér udviklerværktøjer
   settings_file: Indstillinger fil

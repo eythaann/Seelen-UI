@@ -58,6 +58,8 @@ toolbar:
   height: Hauteur
   auto_hide: Cachette automatique
   label: Barre d'outils
+  delay_to_hide: Retarder pour se cacher
+  delay_to_show: Retard à afficher
 wm:
   layout: Mise en page
   author: Auteur
@@ -86,6 +88,8 @@ weg:
     gap: Espace entre les éléments
     visible_separators: Séparateurs visibles
   dock_side: Position
+  delay_to_hide: Retarder pour se cacher
+  delay_to_show: Retard à afficher
 devtools:
   enable: Activer les outils de développement
   app_folders: Dossiers d'applications

@@ -55,6 +55,8 @@ toolbar:
   enable: Luba väljamõeldud tööriistariba
   auto_hide: Automaatne peida
   label: Tööriistariba
+  delay_to_show: Näitamisega viivitus
+  delay_to_hide: Viivitage peitmine
 wm:
   border:
     width: Piirilaius
@@ -83,6 +85,8 @@ weg:
   margin: Marginaal
   enable: Luba dokk/ülesanderiba
   dock_side: Positsioon
+  delay_to_show: Näitamisega viivitus
+  delay_to_hide: Viivitage peitmine
 devtools:
   app_folders: Rakenduse kaustad
   data_folder: Andmekaust

@@ -55,6 +55,8 @@ toolbar:
   enable: Aktiveer Fancy Toolbar
   auto_hide: Outomatiese vel
   label: Werkbalk
+  delay_to_hide: Vertraag om weg te steek
+  delay_to_show: Vertraag om te wys
 wm:
   border:
     width: Grenswydte
@@ -83,6 +85,8 @@ weg:
   padding: Opvulling
   gap: Gat
   dock_side: Posisie
+  delay_to_hide: Vertraag om weg te steek
+  delay_to_show: Vertraag om te wys
 devtools:
   app_folders: APP -vouers
   load: Vrag

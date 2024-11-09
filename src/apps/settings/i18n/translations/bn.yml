@@ -55,6 +55,8 @@ toolbar:
   height: উচ্চতা
   auto_hide: অটো আড়াল
   label: সরঞ্জামদণ্ড
+  delay_to_show: দেখাতে বিলম্ব
+  delay_to_hide: আড়াল করতে বিলম্ব
 wm:
   border:
     width: সীমানার প্রশস্থতা
@@ -83,6 +85,8 @@ weg:
   label: ডক/টাস্কবার
   padding: প্যাডিং
   dock_side: অবস্থান
+  delay_to_show: দেখাতে বিলম্ব
+  delay_to_hide: আড়াল করতে বিলম্ব
 devtools:
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
   settings_file: সেটিংস ফাইল

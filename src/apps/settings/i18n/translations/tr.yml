@@ -22,8 +22,8 @@ start:
   title: Hoş Geldiniz!
   message_accent: Verimliliğinizi stil ile optimize edin!
   message: >-
-    Seelen UI'a hoş geldiniz, Windows deneyiminizi geliştirmek için entegre
-    bir döşeme pencere yöneticisi ile en iyi masaüstü ortamı! Kullanıcı dostu
+    Seelen UI'a hoş geldiniz, Windows deneyiminizi geliştirmek için entegre bir
+    döşeme pencere yöneticisi ile en iyi masaüstü ortamı! Kullanıcı dostu
     arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevlerde yeni
     bir çağı keşfedin.
 general:
@@ -55,6 +55,8 @@ toolbar:
   enable: Şık Araç Çubuğunu Etkinleştir
   auto_hide: Otomatik Gizle
   label: Araç Çubuğu
+  delay_to_hide: Gizlenmeyi geciktir
+  delay_to_show: Gösterme gecikmesi
 wm:
   border:
     width: Kenar Genişliği
@@ -83,6 +85,8 @@ weg:
   enable: Dock/Görev Çubuğunu Etkinleştir
   label: Dock/Görev Çubuğu
   dock_side: Konum
+  delay_to_hide: Gizlenmeyi geciktir
+  delay_to_show: Gösterme gecikmesi
 devtools:
   custom_config_file: Özel Yapılandırma Dosyası Yükle
   settings_file: Ayarlar Dosyası

@@ -55,6 +55,8 @@ toolbar:
   enable: Activa la barra d’eines de luxe
   auto_hide: Auto amaga
   label: Barra d’eines
+  delay_to_hide: Tarda en amagar-se
+  delay_to_show: Retard per mostrar
 wm:
   border:
     offset: Compensació fronterera
@@ -83,6 +85,8 @@ weg:
   label: Moll/barra de tasques
   auto_hide: Amaga automàtic
   dock_side: Posició
+  delay_to_hide: Tarda en amagar-se
+  delay_to_show: Retard per mostrar
 devtools:
   load: Carregar
   data_folder: Carpeta de dades

@@ -1,5 +1,5 @@
 import { Reorder } from 'framer-motion';
-import { useCallback, useState } from 'react';
+import { useCallback, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -52,6 +52,9 @@ function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: bool
 }
 
 export function SeelenWeg() {
+  const [isActive, setActive] = useState(false);
+  const [delayed, setDelayed] = useState(false);
+
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
 
@@ -59,14 +62,32 @@ export function SeelenWeg() {
   const pinnedOnCenter = useSelector(Selectors.itemsOnCenter);
   const pinnedOnRight = useSelector(Selectors.itemsOnRight);
 
-  const [isActive, setActive] = useState(false);
-
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
   useWindowFocusChange((focused) => {
     setActive(focused);
   });
+
+  useLayoutEffect(() => {
+    switch (settings.hideMode) {
+      case HideMode.Always:
+        setDelayed(true);
+        break;
+      case HideMode.Never:
+        setDelayed(false);
+        break;
+      case HideMode.OnOverlap:
+        if (!isOverlaped) {
+          setDelayed(false);
+          break;
+        }
+        setTimeout(() => {
+          setDelayed(true);
+        }, 300);
+        break;
+    }
+  }, [isOverlaped, settings]);
 
   const getSeparatorComplementarySize = useCallback(
     (sideElements: number, centerElements: number) => {
@@ -131,6 +152,7 @@ export function SeelenWeg() {
           vertical: !isHorizontal,
           'full-width': settings.mode === SeelenWegMode.FullWidth,
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
+          delayed,
         })}
       >
         <BackgroundByLayersV2 prefix="taskbar" />

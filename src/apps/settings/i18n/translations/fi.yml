@@ -23,9 +23,9 @@ start:
   message_accent: Optimoi tuottavuus tyylillä!
   message: >-
     Tervetuloa Seelen UI: hen, Ultimate Desktop -ympäristöön, jossa on
-    sisällytetty laatoitus Windows Manager, parantaaksesi Windows
-    -kokemustasi! Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen
-    intuitiivisella rajapinnalla ja edistyneillä ominaisuuksilla.
+    sisällytetty laatoitus Windows Manager, parantaaksesi Windows -kokemustasi!
+    Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen intuitiivisella
+    rajapinnalla ja edistyneillä ominaisuuksilla.
 general:
   theme:
     description: Kuvaus
@@ -55,6 +55,8 @@ toolbar:
   enable: Ota hieno työkalurivi käyttöön
   auto_hide: Automaattinen piilo
   label: Työkalurivi
+  delay_to_hide: Viive piilottaa
+  delay_to_show: Viive näyttöön
 wm:
   border:
     offset: Rajan siirtyminen
@@ -83,6 +85,8 @@ weg:
   label: Telakka/tehtäväpalkki
   enable: Ota Dock/tehtäväpalkki käyttöön
   dock_side: Sijainti
+  delay_to_hide: Viive piilottaa
+  delay_to_show: Viive näyttöön
 devtools:
   load: Ladata
   custom_config_file: Lataa mukautettu konfigurointitiedosto

@@ -53,6 +53,8 @@ toolbar:
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
   auto_hide: ራስ-ሰር መደበቅ
   label: የመሣሪያ አሞሌ
+  delay_to_hide: ለመደበቅ መዘግየት
+  delay_to_show: ለማሳየት መዘግየት
 wm:
   border:
     width: ድንበር ስፋት
@@ -81,6 +83,8 @@ weg:
   gap: ክፍተት
   label: Dock / Accorbar
   dock_side: አቀማመጥ
+  delay_to_hide: ለመደበቅ መዘግየት
+  delay_to_show: ለማሳየት መዘግየት
 devtools:
   app_folders: የመተግበሪያ አቃፊዎች
   data_folder: የውሂብ አቃፊ

@@ -55,6 +55,8 @@ toolbar:
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
   auto_hide: ස්වයංක්රීය සැඟවීම
   label: මෙවලම් තීරුව
+  delay_to_hide: සැඟවීමට ප්රමාද
+  delay_to_show: පෙන්වීමට ප්‍රමාදය
 wm:
   border:
     width: මායිම් පළල
@@ -83,6 +85,8 @@ weg:
   gap: පරතරය
   margin: ආන්තිකය
   dock_side: තනතුර
+  delay_to_hide: සැඟවීමට ප්රමාද
+  delay_to_show: පෙන්වීමට ප්‍රමාදය
 devtools:
   enable: සංවර්ධක මෙවලම් සබල කරන්න
   install_folder: ස්ථාපන ෆෝල්ඩරය

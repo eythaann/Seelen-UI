@@ -55,6 +55,8 @@ toolbar:
   enable: Povolte ozdobný panel nástrojů
   auto_hide: Automatická skrýt
   label: Panel nástrojů
+  delay_to_show: Zpoždění zobrazení
+  delay_to_hide: Odložit se schovat
 wm:
   border:
     width: Šířka hranic
@@ -83,6 +85,8 @@ weg:
   gap: Mezera
   padding: Polstrování
   dock_side: Pozice
+  delay_to_hide: Odložit se schovat
+  delay_to_show: Zpoždění zobrazení
 devtools:
   data_folder: Datová složka
   settings_file: Nastavení souboru

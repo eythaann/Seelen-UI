@@ -55,6 +55,8 @@ toolbar:
   enable: Zərif alət çubuğunu aktivləşdirin
   auto_hide: Avtomatik gizlətmək
   label: Alət çubuğu
+  delay_to_show: Göstərmək üçün gecikmə
+  delay_to_hide: Gizlətmək üçün gecikmə
 wm:
   border:
     width: Sərhəd eni
@@ -83,6 +85,8 @@ weg:
   label: Dock / tapşırıq çubuğu
   enable: Dock / tapşırıq çubuğunu aktivləşdirin
   dock_side: Mövqe
+  delay_to_show: Göstərmək üçün gecikmə
+  delay_to_hide: Gizlətmək üçün gecikmə
 devtools:
   app_folders: Tətbiq qovluqları
   data_folder: Məlumat qovluğu

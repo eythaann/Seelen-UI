@@ -23,9 +23,9 @@ start:
   message_accent: Optimera din produktivitet med stil!
   message: >-
     Välkommen till Seelen UI, den ultimata skrivbordsmiljön med en införlivad
-    kakling Windows Manager för att förbättra din Windows -upplevelse!
-    Utforska en ny era av effektivitet och multitasking med vårt intuitiva
-    gränssnitt och avancerade funktioner.
+    kakling Windows Manager för att förbättra din Windows -upplevelse! Utforska
+    en ny era av effektivitet och multitasking med vårt intuitiva gränssnitt och
+    avancerade funktioner.
 general:
   theme:
     add: Lägga till tema
@@ -55,6 +55,8 @@ toolbar:
   enable: Aktivera snyggt verktygsfält
   auto_hide: Auto Hide
   label: Verktygsfält
+  delay_to_show: Fördröjning att visa
+  delay_to_hide: Dröjsmål att gömma sig
 wm:
   border:
     width: Gränsbredd
@@ -83,6 +85,8 @@ weg:
   margin: Marginal
   enable: Aktivera bryggor/aktivitetsfält
   dock_side: Placera
+  delay_to_show: Fördröjning att visa
+  delay_to_hide: Dröjsmål att gömma sig
 devtools:
   install_folder: Installationsmapp
   load: Ladda
