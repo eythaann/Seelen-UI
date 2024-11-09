@@ -1,67 +1,89 @@
 pub struct SeelenEvent;
 
-#[allow(non_upper_case_globals)]
-impl SeelenEvent {
-    pub const WorkspacesChanged: &str = "workspaces-changed";
-    pub const ActiveWorkspaceChanged: &str = "active-workspace-changed";
+macro_rules! slu_events_declaration {
+    ($($name:ident = $value:literal,)*) => {
+        #[allow(non_upper_case_globals)]
+        impl SeelenEvent {
+            $(
+                pub const $name: &str = $value;
+            )*
 
-    pub const GlobalFocusChanged: &str = "global-focus-changed";
-    pub const GlobalMouseMove: &str = "global-mouse-move";
-    pub const GlobalMonitorsChanged: &str = "global-monitors-changed";
+            #[allow(dead_code)]
+            pub(crate) fn generate_ts_file(path: &str) {
+                let content: Vec<String> = vec![
+                    "// This file was generated via rust macros. Don't modify manually.".to_owned(),
+                    "export enum SeelenEvent {".to_owned(),
+                    $(
+                        format!("  {} = '{}',", stringify!($name), Self::$name),
+                    )*
+                    "}".to_owned(),
+                ];
+                std::fs::write(path, content.join("\n")).unwrap();
+            }
+        }
+    };
+}
 
+slu_events_declaration! {
+    WorkspacesChanged = "workspaces-changed",
+    ActiveWorkspaceChanged = "active-workspace-changed",
 
-    pub const HandleLayeredHitboxes: &str = "handle-layered";
+    GlobalFocusChanged = "global-focus-changed",
+    GlobalMouseMove = "global-mouse-move",
+    GlobalMonitorsChanged = "global-monitors-changed",
 
-    pub const MediaSessions: &str = "media-sessions";
-    pub const MediaInputs: &str = "media-inputs";
-    pub const MediaOutputs: &str = "media-outputs";
+    HandleLayeredHitboxes = "handle-layered",
 
-    pub const NetworkDefaultLocalIp: &str = "network-default-local-ip";
-    pub const NetworkAdapters: &str = "network-adapters";
-    pub const NetworkInternetConnection: &str = "network-internet-connection";
-    pub const NetworkWlanScanned: &str = "wlan-scanned";
+    MediaSessions = "media-sessions",
+    MediaInputs = "media-inputs",
+    MediaOutputs = "media-outputs",
 
-    pub const Notifications: &str = "notifications";
+    NetworkDefaultLocalIp = "network-default-local-ip",
+    NetworkAdapters = "network-adapters",
+    NetworkInternetConnection = "network-internet-connection",
+    NetworkWlanScanned = "wlan-scanned",
 
-    pub const PowerStatus: &str = "power-status";
-    pub const BatteriesStatus: &str = "batteries-status";
+    Notifications = "notifications",
 
-    pub const ColorsChanged: &str = "colors-changed";
+    PowerStatus = "power-status",
+    BatteriesStatus = "batteries-status",
 
-    pub const TrayInfo: &str = "tray-info";
+    ColorsChanged = "colors-changed",
 
-    pub const ToolbarOverlaped: &str = "set-auto-hide";
+    TrayInfo = "tray-info",
 
-    pub const WegOverlaped: &str = "set-auto-hide";
-    pub const WegSetFocusedHandle: &str = "set-focused-handle";
-    pub const WegSetFocusedExecutable: &str = "set-focused-executable";
-    pub const WegUpdateOpenAppInfo: &str = "update-open-app-info";
-    pub const WegAddOpenApp: &str = "add-open-app";
-    pub const WegRemoveOpenApp: &str = "remove-open-app";
+    ToolbarOverlaped = "set-auto-hide",
 
-    pub const WMSetReservation: &str = "set-reservation";
-    pub const WMUpdateHeight: &str = "update-height";
-    pub const WMUpdateWidth: &str = "update-width";
-    pub const WMResetWorkspaceSize: &str = "reset-workspace-size";
-    pub const WMFocus: &str = "focus";
-    pub const WMSetActiveWorkspace: &str = "set-active-workspace";
-    pub const WMAddWindow: &str = "add-window";
-    pub const WMUpdateWindow: &str = "update-window";
-    pub const WMRemoveWindow: &str = "remove-window";
+    WegOverlaped = "set-auto-hide",
+    WegSetFocusedHandle = "set-focused-handle",
+    WegSetFocusedExecutable = "set-focused-executable",
+    WegUpdateOpenAppInfo = "update-open-app-info",
+    WegAddOpenApp = "add-open-app",
+    WegRemoveOpenApp = "remove-open-app",
+
+    WMSetReservation = "set-reservation",
+    WMUpdateHeight = "update-height",
+    WMUpdateWidth = "update-width",
+    WMResetWorkspaceSize = "reset-workspace-size",
+    WMFocus = "focus",
+    WMSetActiveWorkspace = "set-active-workspace",
+    WMAddWindow = "add-window",
+    WMUpdateWindow = "update-window",
+    WMRemoveWindow = "remove-window",
     
-    pub const WMForceRetiling: &str = "wm-force-retiling";
-    pub const WMSetLayout: &str = "wm-set-layout";
-    pub const WMSetOverlayVisibility: &str = "wm-set-overlay-visibility";
-    pub const WMSetActiveWindow: &str = "wm-set-active-window";
+    WMForceRetiling = "wm-force-retiling",
+    WMSetLayout = "wm-set-layout",
+    WMSetOverlayVisibility = "wm-set-overlay-visibility",
+    WMSetActiveWindow = "wm-set-active-window",
 
-    pub const WallStop: &str = "wall-stop";
+    WallStop = "wall-stop",
 
-    pub const StateSettingsChanged: &str = "settings-changed";
-    pub const StateWegItemsChanged: &str = "weg-items";
-    pub const StateThemesChanged: &str = "themes";
-    pub const StatePlaceholdersChanged: &str = "placeholders";
-    pub const StateLayoutsChanged: &str = "layouts";
-    pub const StateSettingsByAppChanged: &str = "settings-by-app";
-    pub const StateHistoryChanged: &str = "history";
-    pub const StateIconPacksChanged: &str = "icon-packs";
+    StateSettingsChanged = "settings-changed",
+    StateWegItemsChanged = "weg-items",
+    StateThemesChanged = "themes",
+    StatePlaceholdersChanged = "placeholders",
+    StateLayoutsChanged = "layouts",
+    StateSettingsByAppChanged = "settings-by-app",
+    StateHistoryChanged = "history",
+    StateIconPacksChanged = "icon-packs",
 }
