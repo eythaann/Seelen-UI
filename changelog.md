@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - allow change default output volume using mouse wheel on media module items.
+- add mini calendar to date module.
 
 ### enhancements
 - add new settings to delay the show and hide of dock and toolbar.

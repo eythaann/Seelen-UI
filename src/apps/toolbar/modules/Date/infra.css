@@ -1,0 +1,10 @@
+.calendar-container {
+  .calendar, .ant-picker-panel {
+    background: transparent;
+  }
+
+  .ant-picker-cell {
+    text-align: center;
+    vertical-align: middle;
+  }
+}

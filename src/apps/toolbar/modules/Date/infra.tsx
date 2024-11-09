@@ -7,6 +7,8 @@ import { Item } from '../item/infra/infra';
 
 import { Selectors } from '../shared/store/app';
 
+import { WithDateCalendar } from './Calendar';
+
 interface Props {
   module: DateToolbarModule;
 }
@@ -25,5 +27,9 @@ export function DateModule({ module }: Props) {
     [dateFormat],
   );
 
-  return <Item extraVars={{ date }} module={module} />;
+  return (
+    <WithDateCalendar>
+      <Item extraVars={{ date }} module={module} />
+    </WithDateCalendar>
+  );
 }

@@ -64,6 +64,18 @@
   }
 }
 
+.ft-bar-item-context-menu-container {
+  .bg-layer-1 {
+    background-color: var(--color-gray-100);
+    border-radius: 10px;
+  }
+
+  .ft-bar-item-context-menu {
+    .ft-bar-item-context-menu-item {
+    }
+  }
+}
+
 .ft-bar-item-clickable {
   padding: 1px 4px;
   border-radius: 6px;
@@ -396,7 +408,7 @@
 
   .bg-layer-2 {
     opacity: 0.95;
-    background-color: var(--color-gray-100);
+    background-color: var(--color-gray-50);
     border-radius: 12px;
   }
 }
@@ -494,14 +506,8 @@
   }
 }
 
-.ft-bar-item-context-menu-container {
-  .bg-layer-1 {
-    background-color: var(--color-gray-100);
-    border-radius: 10px;
-  }
-
-  .ft-bar-item-context-menu {
-    .ft-bar-item-context-menu-item {
-    }
-  }
+.calendar-container {
+  width: 300px;
+  background-color: var(--color-gray-50);
+  border-radius: 10px;
 }
