@@ -1,6 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
-import { Popover, Slider, Tooltip } from 'antd';
+import { Popover, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -29,7 +29,7 @@ interface Brightness {
 
 export function SettingsModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
-  const [brightness, setBrightness] = useState<Brightness>({
+  const [_brightness, setBrightness] = useState<Brightness>({
     min: 0,
     max: 0,
     current: 0,
@@ -117,7 +117,7 @@ export function SettingsModule({ module }: Props) {
             </div>
           )}
 
-          {brightness.max > 0 && (
+          {/* brightness.max > 0 && (
             <div className="fast-settings-item">
               <Icon iconName="CiBrightnessUp" />
               <Slider
@@ -127,7 +127,7 @@ export function SettingsModule({ module }: Props) {
                 max={brightness.max}
               />
             </div>
-          )}
+          ) */}
 
           <span className="fast-settings-label">{t('settings.power')}</span>
           <div className="fast-settings-item fast-settings-power">
