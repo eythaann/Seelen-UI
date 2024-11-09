@@ -94,6 +94,7 @@ use windows::Win32::UI::WindowsAndMessaging::{
 use crate::error_handler::Result;
 use crate::trace_lock;
 use crate::utils::constants::NATIVE_UI_POPUP_CLASSES;
+use crate::utils::constants::OVERLAP_BLACK_LIST_BY_EXE;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 
@@ -309,7 +310,9 @@ impl WinEvent {
                     let is_origin_fullscreen = window.is_fullscreen()
                         && !window.is_desktop()
                         && !window.is_seelen_overlay()
-                        && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str());
+                        && !NATIVE_UI_POPUP_CLASSES.contains(&window.class().as_str())
+                        && !OVERLAP_BLACK_LIST_BY_EXE
+                            .contains(&WindowsApi::exe(origin).unwrap_or_default().as_str());
 
                     match *latest_fullscreened {
                         Some(latest) if latest.handle == origin => {

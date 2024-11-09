@@ -18,3 +18,11 @@
     matching_strategy: contains
   options:
     - unmanage
+
+- name: Xbox Game Bar
+  identifier:
+    id: GameBar.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - hidden
