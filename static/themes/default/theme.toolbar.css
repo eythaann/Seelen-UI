@@ -239,6 +239,21 @@
     background-color: var(--color-gray-50);
     border-radius: 10px;
   }
+
+  .media-device-group {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 20vh;
+    gap: 6px;
+
+    .media-device {
+      display: grid;
+      align-items: center;
+      grid-template-columns: 50px 1fr;
+      gap: 6px;
+    }
+  }
 }
 
 .media-notifier {
@@ -387,9 +402,15 @@
 }
 
 @keyframes text-highlight {
-  0% { color: var(--color-gray-300); }
-  66% { color: var(--config-accent-color); }
-  100% { color: var(--color-gray-300); }
+  0% {
+    color: var(--color-gray-300);
+  }
+  66% {
+    color: var(--config-accent-color);
+  }
+  100% {
+    color: var(--color-gray-300);
+  }
 }
 
 .notification-arrival {
@@ -399,7 +420,7 @@
   flex-direction: column;
   gap: 10px;
   max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
-  padding: 0 2px;  
+  padding: 0 2px;
   overflow-y: hidden;
   overflow-x: hidden;
 

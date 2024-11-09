@@ -23,17 +23,4 @@
       color: inherit !important;
     }
   }
-
-  .media-device-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-
-    .media-device {
-      display: grid;
-      align-items: center;
-      grid-template-columns: 50px 1fr;
-      gap: 6px;
-    }
-  }
 }
