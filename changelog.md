@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.5]
 ### features
 - allow change default output volume using mouse wheel on media module items.
 - add mini calendar to date module.
