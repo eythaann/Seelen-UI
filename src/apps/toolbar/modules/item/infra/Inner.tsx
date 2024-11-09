@@ -21,6 +21,7 @@ export interface InnerItemProps extends PropsWithChildren {
   extraVars?: Record<string, any>;
   active?: boolean;
   clickable?: boolean;
+  onWheel?: (e: React.WheelEvent) => void;
   // needed for dropdown/popup wrappers
   onClick?: (e: React.MouseEvent) => void;
   onKeydown?: (e: React.KeyboardEvent) => void;
@@ -156,6 +157,7 @@ export function InnerItem(props: InnerItemProps) {
     active,
     onClick: onClickProp,
     onKeydown: onKeydownProp,
+    onWheel: onWheelProp,
     children,
     clickable = true,
     ...rest
@@ -220,6 +222,7 @@ export function InnerItem(props: InnerItemProps) {
           'ft-bar-item-clickable': clickable || oldOnClick || onClickV2,
           'ft-bar-item-active': active,
         })}
+        onWheel={onWheelProp}
         onKeyDown={onKeydownProp}
         onClick={(e) => {
           onClickProp?.(e);
