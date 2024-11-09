@@ -10,6 +10,7 @@
 
 ### fix
 - dock and toolbar animations
+- fix update notifications for release and nightly channels.
 
 ## [2.0.4]
 ### fix
