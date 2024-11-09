@@ -25,12 +25,13 @@ pub static NATIVE_UI_POPUP_CLASSES: [&str; 3] = [
     "ControlCenterWindow",          // Windows 11 right panel with quick settings
 ];
 
-pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 5] = [
+pub static OVERLAP_BLACK_LIST_BY_EXE: [&str; 6] = [
     "msedgewebview2.exe",
     "SearchHost.exe",
     "StartMenuExperienceHost.exe",
     "ShellExperienceHost.exe",
-    "GameBar.exe", // Windows Xbox Game Bar
+    "GameBar.exe",      // Windows Xbox Game Bar
+    "SnippingTool.exe", // Windows Snipping Tool
 ];
 
 pub struct Icons {
