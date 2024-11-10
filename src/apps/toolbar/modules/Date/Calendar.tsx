@@ -1,4 +1,4 @@
-import { Calendar, Popover } from 'antd';
+import { Calendar, Popover, Row } from 'antd';
 import moment, { Moment } from 'moment';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import { PropsWithChildren, useCallback, useState, WheelEvent } from 'react';
@@ -6,6 +6,8 @@ import { useWindowFocusChange } from 'seelen-core';
 
 import './infra.css';
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
+
+import { Icon } from 'src/apps/shared/components/Icon';
 
 const MomentCalendar = Calendar.generateCalendar<Moment>(momentGenerateConfig);
 
@@ -27,8 +29,24 @@ function DateCalendar() {
   }, []);
 
   return (
-    <BackgroundByLayersV2 className="calendar-container" prefix="calendar">
-      <MomentCalendar value={date} onChange={setDate} className="calendar" fullscreen={false} />
+    <BackgroundByLayersV2 className="calendar-container" prefix="calendar" onWheel={_onWheel}>
+      <MomentCalendar
+        value={date}
+        onChange={setDate}
+        className="calendar"
+        fullscreen={false}
+        headerRender={() => {
+          return (
+            <Row className="calendar-header">
+              <span className="calendar-date">{date.format('MMMM YYYY')}</span>
+              <div className="calendar-header-placeholder"/>
+              <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(-1, 'months'))}><Icon iconName="AiOutlineLeft" /></button>
+              <button className="calendar-navigator" onClick={() => setDate(moment().startOf('month'))}><Icon iconName="AiOutlineHome" /></button>
+              <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(1, 'months'))}><Icon iconName="AiOutlineRight" /></button>
+            </Row>
+          );
+        }}
+      />
     </BackgroundByLayersV2>
   );
 }
