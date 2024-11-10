@@ -1,4 +1,4 @@
-use std::{collections::HashMap, path::PathBuf, sync::Arc};
+use std::{collections::HashMap, path::PathBuf, sync::Arc, time::Duration};
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -700,6 +700,13 @@ impl MediaManager {
                 }
             }
             MediaEvent::MediaPlayerAdded(session) => {
+                // load_media_transport_session could fail with 0x80070015 "The device is not ready."
+                // when trying to load a recently added player so we retry a few times
+                let mut max_attempts = 0;
+                while session.TryGetMediaPropertiesAsync()?.get().is_err() && max_attempts < 15 {
+                    max_attempts += 1;
+                    std::thread::sleep(Duration::from_millis(10));
+                }
                 self.load_media_transport_session(session)?;
             }
             MediaEvent::MediaPlayerRemoved(id) => {
