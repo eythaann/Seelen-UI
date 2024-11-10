@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 
 import { Selectors } from './modules/shared/store/app';
 
-import { getRootContainer } from '../shared';
 import { useDarkMode } from '../shared/styles';
 import { ErrorBoundary } from './components/Error';
 import { SeelenWeg } from './modules/bar';
@@ -24,7 +23,6 @@ export function App() {
 
   return (
     <ConfigProvider
-      getPopupContainer={getRootContainer}
       componentSize="small"
       theme={{
         token: {

@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- popups and context menus fast flashing.
+- media player app not appearing on media module (weg & toolbar).
+
 ## [2.0.5]
 ### features
 - allow change default output volume using mouse wheel on media module items.

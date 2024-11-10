@@ -8,7 +8,6 @@ import { ToolBar } from './modules/main/infra';
 import { Selectors } from './modules/shared/store/app';
 
 import { ErrorBoundary } from '../seelenweg/components/Error';
-import { getRootContainer } from '../shared';
 import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 
@@ -30,7 +29,6 @@ export function App() {
 
   return (
     <ConfigProvider
-      getPopupContainer={() => getRootContainer()}
       theme={{
         token: {
           colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
