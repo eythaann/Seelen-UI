@@ -1,4 +1,4 @@
-import { Calendar, Popover } from 'antd';
+import { Calendar, Popover, Row } from 'antd';
 import moment, { Moment } from 'moment';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import { PropsWithChildren, useCallback, useState, WheelEvent } from 'react';
@@ -7,13 +7,15 @@ import { useWindowFocusChange } from 'seelen-core';
 import './infra.css';
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 
+import { Icon } from '../../../shared/components/Icon';
+import { cx } from '../../../shared/styles';
+
 const MomentCalendar = Calendar.generateCalendar<Moment>(momentGenerateConfig);
 
 function DateCalendar() {
   const [date, setDate] = useState(moment());
 
-  // Todo: this could be cool to be correctly implemented later
-  const _onWheel = useCallback((e: WheelEvent<HTMLDivElement>) => {
+  const onWheel = useCallback((e: WheelEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -28,7 +30,30 @@ function DateCalendar() {
 
   return (
     <BackgroundByLayersV2 className="calendar-container" prefix="calendar">
-      <MomentCalendar value={date} onChange={setDate} className="calendar" fullscreen={false} />
+      <div onWheel={onWheel}>
+        <MomentCalendar
+          value={date}
+          onChange={setDate}
+          className="calendar"
+          fullscreen={false}
+          headerRender={() => {
+            return (
+              <Row className="calendar-header">
+                <span className="calendar-date">{date.format('MMMM YYYY')}</span>
+                <div className="calendar-header-placeholder"/>
+                <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(-1, 'months'))}><Icon iconName="AiOutlineLeft" /></button>
+                <button className="calendar-navigator" onClick={() => setDate(moment().startOf('month'))}><Icon iconName="AiOutlineHome" /></button>
+                <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(1, 'months'))}><Icon iconName="AiOutlineRight" /></button>
+              </Row>
+            );
+          }}
+          fullCellRender={(current, info) => (
+            <div className={cx('calendar-cell-value', {
+              'calendar-cell-today': current.isSame(info.today, 'date'),
+              'calendar-cell-off-month': current.month() != date.month(),
+            })}>{Number(current.format('DD'))}</div>
+          )}/>
+      </div>
     </BackgroundByLayersV2>
   );
 }
