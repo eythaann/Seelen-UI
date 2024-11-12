@@ -524,8 +524,7 @@
   }
 
   .bg-layer-2 {
-    opacity: 0.85;
-    background-color: var(--color-gray-100);
+    background-color: var(--color-gray-50);
     border-radius: 12px;
   }
 
@@ -540,12 +539,23 @@
     padding-top: 6px;
 
     &.calendar-cell-off-month {
-      opacity: 0;
+      opacity: 0.8;
     }
 
     &.calendar-cell-today {
+      &::before {
+        content: '';
+        position: absolute;
+        top: calc(10% - 2px);
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        background-color: var(--color-white);
+        border-radius: 25%;
+        z-index: -1;
+      }
+
       color: var(--config-accent-color);
-      background-color:  var(--color-gray-100);
     }
   }
 
