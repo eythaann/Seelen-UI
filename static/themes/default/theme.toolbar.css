@@ -538,6 +538,8 @@
     background-color: rgba(175, 175, 175, 0.1);
     padding-top: 6px;
 
+    transition: color 0.4s ease-in-out;
+
     &.calendar-cell-off-month {
       opacity: 0.8;
     }
@@ -551,11 +553,19 @@
         width: 80%;
         height: 80%;
         background-color: var(--color-white);
-        border-radius: 25%;
+        border-radius: 12px;
         z-index: -1;
       }
 
       color: var(--config-accent-color);
+    }
+
+    &.calendar-cell-month {
+      padding-top: 18px;
+
+      &:hover {
+        color: var(--config-accent-color);
+      }
     }
   }
 
@@ -566,9 +576,18 @@
     }
 
     > .calendar-date {
+      &:hover {
+        color: var(--config-accent-color);
+
+      }
+      
       font-size: 1.25em;
       margin: 5px;
       font-style: italic;
+      text-decoration: underline;
+      cursor: pointer;
+
+      transition: color 0.4s ease-in-out;
     }
 
     > .calendar-navigator {

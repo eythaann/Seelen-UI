@@ -1,4 +1,5 @@
 import { Calendar, Popover, Row } from 'antd';
+import { CalendarMode } from 'antd/es/calendar/generateCalendar';
 import moment, { Moment } from 'moment';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import { PropsWithChildren, useCallback, useState, WheelEvent } from 'react';
@@ -14,6 +15,7 @@ const MomentCalendar = Calendar.generateCalendar<Moment>(momentGenerateConfig);
 
 function DateCalendar() {
   const [date, setDate] = useState(moment());
+  const [viewMode, setViewMode] = useState<CalendarMode | undefined>('month');
 
   const onWheel = useCallback((e: WheelEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -24,7 +26,7 @@ function DateCalendar() {
       date
         .clone()
         .startOf('month')
-        .add(isUp ? 1 : -1, 'months'),
+        .add(isUp ? 1 : -1, viewMode as moment.unitOfTime.Base),
     );
   }, []);
 
@@ -36,22 +38,34 @@ function DateCalendar() {
           onChange={setDate}
           className="calendar"
           fullscreen={false}
-          headerRender={() => {
-            return (
-              <Row className="calendar-header">
-                <span className="calendar-date">{date.format('MMMM YYYY')}</span>
-                <div className="calendar-header-placeholder"/>
-                <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(-1, 'months'))}><Icon iconName="AiOutlineLeft" /></button>
-                <button className="calendar-navigator" onClick={() => setDate(moment().startOf('month'))}><Icon iconName="AiOutlineHome" /></button>
-                <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(1, 'months'))}><Icon iconName="AiOutlineRight" /></button>
-              </Row>
-            );
-          }}
-          fullCellRender={(current, info) => (
+          mode={viewMode}
+          headerRender={(props) => props.type == 'month' ? (
+            <Row className="calendar-header">
+              <span className="calendar-date" onClick={() => setViewMode('year')}>{date.format('MMMM YYYY')}</span>
+              <div className="calendar-header-placeholder"/>
+              <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(-1, 'months'))}><Icon iconName="AiOutlineLeft" /></button>
+              <button className="calendar-navigator" onClick={() => setDate(moment().startOf('month'))}><Icon iconName="AiOutlineHome" /></button>
+              <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('month').add(1, 'months'))}><Icon iconName="AiOutlineRight" /></button>
+            </Row>
+          ) : (
+            <Row className="calendar-header">
+              <span className="calendar-date" onClick={() => setViewMode('month')}>{date.format('YYYY')}</span>
+              <div className="calendar-header-placeholder"/>
+              <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('year').add(-1, 'years'))}><Icon iconName="AiOutlineLeft" /></button>
+              <button className="calendar-navigator" onClick={() => setDate(moment().startOf('month'))}><Icon iconName="AiOutlineHome" /></button>
+              <button className="calendar-navigator" onClick={() => setDate(date.clone().startOf('year').add(1, 'years'))}><Icon iconName="AiOutlineRight" /></button>
+            </Row>
+          )}
+          fullCellRender={(current, info) => info.type == 'date' ? (
             <div className={cx('calendar-cell-value', {
               'calendar-cell-today': current.isSame(info.today, 'date'),
               'calendar-cell-off-month': current.month() != date.month(),
             })}>{Number(current.format('DD'))}</div>
+          ) : (
+            <div className={cx('calendar-cell-value', 'calendar-cell-month', { 'calendar-cell-today': current.startOf('month').isSame(info.today.startOf('month'), 'date') })} onClick={() => {
+              setDate(current);
+              setViewMode('month');
+            }}>{current.format('MMMM')}</div>
           )}/>
       </div>
     </BackgroundByLayersV2>
