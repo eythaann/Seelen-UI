@@ -1,0 +1,67 @@
+info:
+  displayName: Tray Icons
+  author: luisfos.xyz
+  description: System tray closer to native windows icons
+  tags: ['toolbar']
+styles:
+  toolbar: |
+    .tray-list {
+      padding: 10px;
+      max-height: 50vh;
+      display: grid;
+      /*grid-template-columns: repeat(auto-fill, minmax(1.5rem, 1fr));*/
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      overflow: visible;
+    }
+
+    .tray-item {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* Center icons within grid cells */
+      position: relative;
+      border-radius: 8px;
+      padding: 8px;
+      height: min-content;
+
+      &:hover {
+        background-color: rgba(var(--config-accent-color-rgb), 0.2);      
+      }
+      
+      &:hover .tray-item-label {        
+        opacity: 1;
+        transition-delay: 0.2s; 
+      }
+    }
+
+    .tray-item-icon {
+      width: 1rem;
+      height: 1rem;
+      min-height: 1rem;
+      min-width: 1rem;
+    }
+    
+    .tray-item-label {
+      display: block;
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      font-weight: 600;
+      background-color: rgba(0, 0, 0, 0.85);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      pointer-events: none;
+      margin-bottom: 4px;
+      overflow: visible;
+      z-index: 1;      
+      opacity: 0;
+      transition: opacity 0.1s ease-in-out;
+    }    
+
+    .tray-item-label-tooltip {
+      padding: 0 40px;
+    }
