@@ -87,7 +87,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   }, [openPreview || openContextMenu]);
 
   return (
-    <DraggableItem item={item} className={cx({ 'opened-associated-view': openPreview || openContextMenu })}>
+    <DraggableItem item={item} className={cx({ 'associated-view-open': openPreview || openContextMenu })}>
       <WithContextMenu items={getMenuForItem(t, item) || []} onOpenChange={(isOpen) => {
         setOpenContextMenu(isOpen);
         if (openPreview && isOpen) {
