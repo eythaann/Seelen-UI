@@ -96,9 +96,11 @@ Seelen UI is a tool designed to enhance your Windows desktop experience with a f
 <br/>
 
 ## Installation
-> **⚠️ Warning**: Seelen UI requires the WebView runtime to be installed. On Windows 11, it comes pre-installed with the system. However, on Windows 10, the WebView runtime is included with the `setup.exe` installer. Additionally, Microsoft Edge is necessary to function correctly. Some users may have modified their system and removed Edge, so please ensure both Edge and the WebView runtime are installed on your system.
+> [!CAUTION]
+> Seelen UI requires the WebView runtime to be installed. On Windows 11, it comes pre-installed with the system. However, on Windows 10, the WebView runtime is included with the `setup.exe` installer. Additionally, Microsoft Edge is necessary to function correctly. Some users may have modified their system and removed Edge, so please ensure both Edge and the WebView runtime are installed on your system.
 
-> **🗒️ Note**: On fresh installations of Windows, the app might show a white or dark screen. You only need to update your Windows through Windows Update and restart your PC.
+> [!NOTE]
+> On fresh installations of Windows, the app might show a white or dark screen. You only need to update your Windows through Windows Update and restart your PC.
 
 You can choose from different installation options based on your preference:
 
