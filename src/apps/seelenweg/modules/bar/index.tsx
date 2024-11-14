@@ -36,24 +36,30 @@ const Separator2: SeparatorWegItem = {
   type: SwItemType.Separator,
 };
 
-function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean) {
+function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean, associatedPopupOpenCount: number) {
   let shouldBeHidden = false;
   switch (hideMode) {
     case HideMode.Always:
-      shouldBeHidden = !isActive;
+      shouldBeHidden = !isActive && (associatedPopupOpenCount == 0);
       break;
     case HideMode.Never:
       shouldBeHidden = false;
       break;
     case HideMode.OnOverlap:
-      shouldBeHidden = !isActive && isOverlaped;
+      shouldBeHidden = !isActive && isOverlaped && (associatedPopupOpenCount == 0);
   }
   return shouldBeHidden;
+}
+
+function calculateOpenedAssociatedPopupValue(currentValue: number, currentChange: boolean): number {
+  const newValue = currentValue + (currentChange ? 1 : -1);
+  return newValue >= 0 ? newValue : currentValue;
 }
 
 export function SeelenWeg() {
   const [isActive, setActive] = useState(false);
   const [delayed, setDelayed] = useState(false);
+  const [openedAssociatedPopup, setOpenedAssociatedPopup] = useState(0);
 
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
@@ -66,6 +72,8 @@ export function SeelenWeg() {
   const { t } = useTranslation();
 
   useWindowFocusChange((focused) => {
+    if (focused)
+      setOpenedAssociatedPopup(0);
     setActive(focused);
   });
 
@@ -151,13 +159,12 @@ export function SeelenWeg() {
           horizontal: isHorizontal,
           vertical: !isHorizontal,
           'full-width': settings.mode === SeelenWegMode.FullWidth,
-          hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
+          hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped, openedAssociatedPopup),
           delayed,
-        })}
-      >
+        })}>
         <BackgroundByLayersV2 prefix="taskbar" />
         {[
-          ...pinnedOnLeft.map(ItemByType),
+          ...pinnedOnLeft.map((item: SwItem) => ItemByType(item, (isOpen) => setOpenedAssociatedPopup(calculateOpenedAssociatedPopupValue(openedAssociatedPopup, isOpen)))),
           <Reorder.Item
             as="div"
             key="separator1"
@@ -168,7 +175,7 @@ export function SeelenWeg() {
             drag={false}
             style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
           />,
-          ...pinnedOnCenter.map(ItemByType),
+          ...pinnedOnCenter.map((item: SwItem) => ItemByType(item, (isOpen) => setOpenedAssociatedPopup(calculateOpenedAssociatedPopupValue(openedAssociatedPopup, isOpen)))),
           <Reorder.Item
             as="div"
             key="separator2"
@@ -179,26 +186,26 @@ export function SeelenWeg() {
             drag={false}
             style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
           />,
-          ...pinnedOnRight.map(ItemByType),
+          ...pinnedOnRight.map((item: SwItem) => ItemByType(item, (isOpen) => setOpenedAssociatedPopup(calculateOpenedAssociatedPopupValue(openedAssociatedPopup, isOpen)))),
         ]}
       </Reorder.Group>
     </WithContextMenu>
   );
 }
 
-function ItemByType(item: SwItem) {
+function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
   if (item.type === SwItemType.Pinned && item.path) {
     if (
       item.execution_command.startsWith('shell:AppsFolder') ||
       item.execution_command.endsWith('.exe')
     ) {
-      return <UserApplication key={item.execution_command} item={item} />;
+      return <UserApplication key={item.execution_command} item={item} onItemAssociatedViewOpenChanged={callback} />;
     }
     return <FileOrFolder key={item.execution_command} item={item} />;
   }
 
   if (item.type === SwItemType.TemporalApp && item.path) {
-    return <UserApplication key={item.execution_command} item={item} />;
+    return <UserApplication key={item.execution_command} item={item} onItemAssociatedViewOpenChanged={callback} />;
   }
 
   if (item.type === SwItemType.Media) {

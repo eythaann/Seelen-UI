@@ -7,9 +7,10 @@ import { BackgroundByLayersV2 } from './BackgroundByLayers/infra';
 
 interface Props extends PropsWithChildren {
   items: ItemType<MenuItemType>[];
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
-export function WithContextMenu({ children, items }: Props) {
+export function WithContextMenu({ children, items, onOpenChange }: Props) {
   const [openContextMenu, setOpenContextMenu] = useState(false);
 
   useWindowFocusChange((focused) => {
@@ -22,7 +23,11 @@ export function WithContextMenu({ children, items }: Props) {
     <Dropdown
       placement="topLeft"
       open={openContextMenu}
-      onOpenChange={setOpenContextMenu}
+      onOpenChange={(isOpen) => {
+        setOpenContextMenu(isOpen);
+        if (onOpenChange)
+          onOpenChange(isOpen);
+      }}
       trigger={['contextMenu']}
       dropdownRender={() => (
         <BackgroundByLayersV2
