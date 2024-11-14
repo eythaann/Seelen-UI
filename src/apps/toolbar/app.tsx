@@ -33,6 +33,13 @@ export function App() {
         token: {
           colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
         },
+        components: {
+          Calendar: {
+            fullBg: 'transparent',
+            fullPanelBg: 'transparent',
+            itemActiveBg: 'transparent',
+          },
+        },
         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >

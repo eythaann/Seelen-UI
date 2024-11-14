@@ -507,7 +507,101 @@
 }
 
 .calendar-container {
-  width: 300px;
-  background-color: var(--color-gray-50);
-  border-radius: 10px;
+  margin: var(--popups-margin);
+  width: 350px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: calc(100vh - var(--config-height) - (var(--popups-margin) * 2));
+
+  .bg-layer-1 {
+    opacity: 0.4;
+    filter: saturate(0);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='10' numOctaves='3' stitchTiles='stitch '/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: cover;
+    border-radius: 12px;
+  }
+
+  .bg-layer-2 {
+    background-color: var(--color-gray-50);
+    border-radius: 12px;
+  }
+
+  & .calendar-cell-value {
+    position: relative;
+
+    top: 6px;
+    height: calc(100% + 12px);
+
+    text-align: center;
+    background-color: rgba(175, 175, 175, 0.1);
+    padding-top: 6px;
+
+    transition: color 0.4s ease-in-out;
+
+    &.calendar-cell-off-month {
+      opacity: 0.8;
+    }
+
+    &.calendar-cell-today {
+      &::before {
+        content: '';
+        position: absolute;
+        top: calc(10% - 2px);
+        left: 10%;
+        width: 80%;
+        height: 80%;
+        background-color: var(--color-white);
+        border-radius: 12px;
+        z-index: -1;
+      }
+
+      color: var(--config-accent-color);
+    }
+
+    &.calendar-cell-month {
+      padding-top: 18px;
+
+      &:hover {
+        color: var(--config-accent-color);
+      }
+    }
+  }
+
+
+  & .calendar-header {
+    & .calendar-header-placeholder {
+      flex: 1;
+    }
+
+    > .calendar-date {
+      &:hover {
+        color: var(--config-accent-color);
+
+      }
+      
+      font-size: 1.25em;
+      margin: 5px;
+      font-style: italic;
+      text-decoration: underline;
+      cursor: pointer;
+
+      transition: color 0.4s ease-in-out;
+    }
+
+    > .calendar-navigator {
+      &:hover {
+        color: var(--config-accent-color);
+      }
+
+      font-size: 1.25em;
+      padding: 3px 8px;
+      margin: 2px;
+      cursor: pointer;
+      background-color: transparent;
+
+      transition: color 0.4s ease-in-out;
+    }
+  }
 }
