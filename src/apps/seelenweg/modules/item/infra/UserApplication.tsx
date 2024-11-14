@@ -25,10 +25,11 @@ import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
   item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;
-  onItemAssociatedViewOpenChanged?: (isOpen: boolean) => void;
+  // This will be triggered in case preview or context menu is opened from this item, or both of them closed.
+  onAssociatedViewOpenChanged?: (isOpen: boolean) => void;
 }
 
-export const UserApplication = memo(({ item, onItemAssociatedViewOpenChanged }: Props) => {
+export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
   const isFocused = useSelector(
     (state: RootState) => state.focusedApp && item.opens.includes(state.focusedApp.hwnd),
   );
@@ -80,8 +81,8 @@ export const UserApplication = memo(({ item, onItemAssociatedViewOpenChanged }: 
   }, [item]);
 
   useEffect(() => {
-    if (onItemAssociatedViewOpenChanged) {
-      onItemAssociatedViewOpenChanged(openPreview || openContextMenu);
+    if (onAssociatedViewOpenChanged) {
+      onAssociatedViewOpenChanged(openPreview || openContextMenu);
     }
   }, [openPreview || openContextMenu]);
 

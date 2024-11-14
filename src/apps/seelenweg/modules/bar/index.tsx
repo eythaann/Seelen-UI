@@ -36,22 +36,22 @@ const Separator2: SeparatorWegItem = {
   type: SwItemType.Separator,
 };
 
-function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean, associatedPopupOpenCount: number) {
+function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean, associatedViewCounter: number) {
   let shouldBeHidden = false;
   switch (hideMode) {
     case HideMode.Always:
-      shouldBeHidden = !isActive && (associatedPopupOpenCount == 0);
+      shouldBeHidden = !isActive && (associatedViewCounter == 0);
       break;
     case HideMode.Never:
       shouldBeHidden = false;
       break;
     case HideMode.OnOverlap:
-      shouldBeHidden = !isActive && isOverlaped && (associatedPopupOpenCount == 0);
+      shouldBeHidden = !isActive && isOverlaped && (associatedViewCounter == 0);
   }
   return shouldBeHidden;
 }
 
-function calculateOpenedAssociatedPopupValue(currentValue: number, currentChange: boolean): number {
+function calculateAssociatedViewCounter(currentValue: number, currentChange: boolean): number {
   const newValue = currentValue + (currentChange ? 1 : -1);
   return newValue >= 0 ? newValue : currentValue;
 }
@@ -59,7 +59,8 @@ function calculateOpenedAssociatedPopupValue(currentValue: number, currentChange
 export function SeelenWeg() {
   const [isActive, setActive] = useState(false);
   const [delayed, setDelayed] = useState(false);
-  const [openedAssociatedPopup, setOpenedAssociatedPopup] = useState(0);
+  // Counts every associated window in the bar and will act as a reverse mutex for the hide functionality
+  const [associatedViewCounter, setAssociatedViewCounter] = useState(0);
 
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
@@ -73,7 +74,7 @@ export function SeelenWeg() {
 
   useWindowFocusChange((focused) => {
     if (focused)
-      setOpenedAssociatedPopup(0);
+      setAssociatedViewCounter(0);
     setActive(focused);
   });
 
@@ -159,12 +160,12 @@ export function SeelenWeg() {
           horizontal: isHorizontal,
           vertical: !isHorizontal,
           'full-width': settings.mode === SeelenWegMode.FullWidth,
-          hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped, openedAssociatedPopup),
+          hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped, associatedViewCounter),
           delayed,
         })}>
         <BackgroundByLayersV2 prefix="taskbar" />
         {[
-          ...pinnedOnLeft.map((item: SwItem) => ItemByType(item, (isOpen) => setOpenedAssociatedPopup(calculateOpenedAssociatedPopupValue(openedAssociatedPopup, isOpen)))),
+          ...pinnedOnLeft.map((item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter(calculateAssociatedViewCounter(associatedViewCounter, isOpen)))),
           <Reorder.Item
             as="div"
             key="separator1"
@@ -175,7 +176,7 @@ export function SeelenWeg() {
             drag={false}
             style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
           />,
-          ...pinnedOnCenter.map((item: SwItem) => ItemByType(item, (isOpen) => setOpenedAssociatedPopup(calculateOpenedAssociatedPopupValue(openedAssociatedPopup, isOpen)))),
+          ...pinnedOnCenter.map((item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter(calculateAssociatedViewCounter(associatedViewCounter, isOpen)))),
           <Reorder.Item
             as="div"
             key="separator2"
@@ -186,7 +187,7 @@ export function SeelenWeg() {
             drag={false}
             style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
           />,
-          ...pinnedOnRight.map((item: SwItem) => ItemByType(item, (isOpen) => setOpenedAssociatedPopup(calculateOpenedAssociatedPopupValue(openedAssociatedPopup, isOpen)))),
+          ...pinnedOnRight.map((item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter(calculateAssociatedViewCounter(associatedViewCounter, isOpen)))),
         ]}
       </Reorder.Group>
     </WithContextMenu>
@@ -199,13 +200,13 @@ function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
       item.execution_command.startsWith('shell:AppsFolder') ||
       item.execution_command.endsWith('.exe')
     ) {
-      return <UserApplication key={item.execution_command} item={item} onItemAssociatedViewOpenChanged={callback} />;
+      return <UserApplication key={item.execution_command} item={item} onAssociatedViewOpenChanged={callback} />;
     }
     return <FileOrFolder key={item.execution_command} item={item} />;
   }
 
   if (item.type === SwItemType.TemporalApp && item.path) {
-    return <UserApplication key={item.execution_command} item={item} onItemAssociatedViewOpenChanged={callback} />;
+    return <UserApplication key={item.execution_command} item={item} onAssociatedViewOpenChanged={callback} />;
   }
 
   if (item.type === SwItemType.Media) {
