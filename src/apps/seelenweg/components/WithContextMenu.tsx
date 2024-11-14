@@ -30,16 +30,22 @@ export function WithContextMenu({ children, items, onOpenChange }: Props) {
       }}
       trigger={['contextMenu']}
       dropdownRender={() => (
-        <BackgroundByLayersV2
-          className="weg-context-menu-container"
-          prefix="menu"
-        >
-          <Menu
-            className="weg-context-menu"
-            onMouseMoveCapture={(e) => e.stopPropagation()}
-            items={items}
-          />
-        </BackgroundByLayersV2>
+        items.length != 0 ?
+          (<BackgroundByLayersV2
+            className="weg-context-menu-container"
+            prefix="menu"
+            onContextMenu={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+          >
+            <Menu
+              className="weg-context-menu"
+              onMouseMoveCapture={(e) => e.stopPropagation()}
+              items={items}
+            />
+          </BackgroundByLayersV2>) :
+          <></>
       )}
     >
       {children}

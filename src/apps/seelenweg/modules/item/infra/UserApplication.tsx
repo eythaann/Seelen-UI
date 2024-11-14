@@ -101,17 +101,20 @@ export const UserApplication = memo(({ item, onItemAssociatedViewOpenChanged }: 
           trigger="hover"
           arrow={false}
           content={
-            <BackgroundByLayersV2
-              className="weg-item-preview-container"
-              onMouseMoveCapture={(e) => e.stopPropagation()}
-              prefix="preview"
-            >
-              <div className="weg-item-preview-scrollbar">
-                {item.opens.map((hwnd) => (
-                  <UserApplicationPreview key={hwnd} hwnd={hwnd} />
-                ))}
-              </div>
-            </BackgroundByLayersV2>
+            <WithContextMenu items={[]}>
+              <BackgroundByLayersV2
+                className="weg-item-preview-container"
+                onMouseMoveCapture={(e) => e.stopPropagation()}
+                onContextMenu={(e) => e.stopPropagation()}
+                prefix="preview"
+              >
+                <div className="weg-item-preview-scrollbar">
+                  {item.opens.map((hwnd) => (
+                    <UserApplicationPreview key={hwnd} hwnd={hwnd} />
+                  ))}
+                </div>
+              </BackgroundByLayersV2>
+            </WithContextMenu>
           }
         >
           <div
