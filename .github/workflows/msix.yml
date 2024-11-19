@@ -23,7 +23,7 @@ jobs:
             const latestRelease = await github.rest.repos.getLatestRelease({ owner, repo });
 
             // Check if .msix file exists in the release assets
-            const msixAsset = latestRelease.data.assets.find(asset => asset.name.endsWith('.msix'));
+            const msixAsset = latestRelease.data.assets.find(asset => asset.name.toLowerCase().endsWith('.msix'));
 
             if (msixAsset) {
               core.setOutput('MSIX_ALREADY_EXIST', 'true');
