@@ -169,13 +169,16 @@ body {
 
 .weg-item-preview-container {
   position: relative;
-  display: flex;
   max-width: 100vw;
-  overflow-x: auto;
   gap: var(--config-space-between-items);
+  
+  .weg-item-preview-scrollbar {
+    display: flex;
+    overflow-x: auto;
 
-  &::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .weg-item-preview {
