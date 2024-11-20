@@ -1,6 +1,7 @@
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
+import moment from 'moment';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -12,6 +13,7 @@ import { Item } from '../item/infra/infra';
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';
+import { FocusedApp } from 'src/apps/shared/interfaces/common';
 
 import { TrayInfo } from '../shared/store/domain';
 
@@ -29,13 +31,19 @@ function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number })
   return (
     <li
       className="tray-item"
-      onClick={() => {
+      onClick={((e) => {
         invoke(SeelenCommand.OnClickTrayIcon, { idx });
-        onAction();
-      }}
-      onContextMenu={() => {
+        onAction(false);
+
+        e.preventDefault();
+        e.stopPropagation();
+      })}
+      onContextMenu={(e) => {
         invoke(SeelenCommand.OnContextMenuTrayIcon, { idx });
-        onAction();
+        onAction(true);
+
+        e.preventDefault();
+        e.stopPropagation();
       }}
     >
       <div className="tray-item-icon">
@@ -54,19 +62,30 @@ function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number })
 
 export function TrayModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
+  const [currentFocus, setCurrentFocus] = useState(false);
 
   const trayList = useSelector(Selectors.systemTray);
+  const focusedApp: FocusedApp | undefined = useSelector(Selectors.focused);
   let intervalId = useRef<any>(null);
 
   useEffect(() => {
     emit('register-tray-events');
   }, []);
 
+  let blockUntil = useRef(moment(new Date()));
   useWindowFocusChange((focused) => {
-    if (!focused) {
+    if (!focused && blockUntil.current < moment(new Date())) {
       setOpenPreview(false);
     }
+
+    setCurrentFocus(focused);
   });
+
+  useEffect(() => {
+    if (!currentFocus && blockUntil.current < moment(new Date())) {
+      setOpenPreview(false);
+    }
+  }, [focusedApp]);
 
   useEffect(() => {
     if (openPreview) {
@@ -90,7 +109,11 @@ export function TrayModule({ module }: Props) {
         <BackgroundByLayersV2 className="tray" prefix="tray">
           <ul className="tray-list">
             {trayList.map((tray, idx) => (
-              <TrayItem key={idx} idx={idx} tray={tray} onAction={() => setOpenPreview(false)} />
+              <TrayItem key={idx} idx={idx} tray={tray} onAction={(isContextMenu) => {
+                if (isContextMenu) {
+                  blockUntil.current = moment(new Date()).add(1, 's');
+                }
+              }} />
             ))}
           </ul>
         </BackgroundByLayersV2>
