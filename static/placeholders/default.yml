@@ -3,106 +3,27 @@ info:
   author: eythaann,
   description: Default toolbar layout good for many devices.
 left:
-  - type: generic
-    template: concat("@", env.USERNAME)
-    onClickV2: open(env.USERPROFILE)
-    tooltip: t("placeholder.open_user_folder")
-    style:
-      flexShrink: 0
+  - "@default/user-folder"
 
-  - type: generic
-    template: '"|"'
+  - type: text
+    template: '"//"'
 
-  - type: generic
-    template: concat(imgFromExe(window.exe), "  ", window.name)
-    style:
-      flexShrink: 0
+  - "@default/focused-app"
 
   - type: generic
     template: >
       window.title ? "-" : ""
 
-  - type: generic
-    template: window.title
-    style:
-      flexShrink: 2
+  - "@default/focused-app-title"
 
 center:
-  - type: date
-    each: minute
-    format: ddd D MMM, hh:mm A
-    template: date
+  - "@default/date"
 
 right:
-  - type: tray
-    template: icon.BsThreeDots
-    tooltip: t("placeholder.open_system_tray")
-
-  - type: device
-    template: icon.TbBluetoothConnected
-    onClick: open -> "ms-settings:connecteddevices"
-    tooltip: t("placeholder.bluetooth_devices")
-
-  - type: network
-    withWlanSelector: true
-    tooltip: >-
-      online ? t("placeholder.ethernet_connected") : t("placeholder.ethernet_disconnected")
-    template: >-
-      online
-      ? (
-        unequal(usingInterface, null) and equalText(usingInterface.type, "IEEE80211")
-          ? getIcon("FaWifi", 14)
-          : icon.FaComputer
-      )
-      : icon.TbWorldCancel
-
-  - type: media
-    withMediaControls: true
-    template: >-
-      isMuted
-      ? icon.IoVolumeMuteOutline
-      : volume >= 0.66
-      ? icon.IoVolumeHighOutline
-      : volume >= 0.33
-      ? icon.IoVolumeMediumOutline
-      : volume != 0
-      ? icon.IoVolumeLowOutline
-      : icon.IoVolumeOffOutline
-    tooltip: >-
-      concat(t("placeholder.volume"), ": ", string(round(volume * 100)), "%")
-
-  - type: power
-    tooltip: >-
-      concat(string(battery.percentage), t("placeholder.battery_remaining"), battery.smartCharging ? t("placeholder.smart_charge") : "")
-    template: >-
-      concat(
-        string(equalText(battery.state, "charging") ? concat(getIcon("MdOutlineElectricBolt", 12), " ") : ""),
-        string(battery.smartCharging ? concat(getIcon("FaHeart", 12), " ") : ""),
-        string(
-          battery.percentage > 90
-          ? icon.PiBatteryFullFill
-          : battery.percentage > 66
-          ? icon.PiBatteryHighFill
-          : battery.percentage > 33
-          ? icon.PiBatteryMediumFill
-          : battery.percentage > 5
-          ? icon.PiBatteryLowFill
-          : icon.PiBatteryWarning
-        ),
-        "  ",
-        string(battery.percentage),
-        "%"
-      )
-    onClick: open -> "ms-settings:powersleep"
-
-  - type: notifications
-    template: >-
-      count > 0 ? icon.MdNotificationsActive : icon.MdOutlineNotifications
-    badge: >-
-      count > 0 ? count : ""
-    tooltip: >-
-      concat(t("placeholder.notifications"), ": ", string(count))
-
-  - type: settings
-    template: icon.LuSettings2
-    tooltip: t("placeholder.settings")
+  - "@default/system-tray"
+  - "@default/bluetooth"
+  - "@default/network"
+  - "@default/media"
+  - "@default/power"
+  - "@default/notifications"
+  - "@default/quick-settings"

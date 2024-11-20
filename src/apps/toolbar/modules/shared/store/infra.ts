@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
-import { SeelenEvent, UIColors } from 'seelen-core';
+import { PluginList, SeelenEvent, UIColors } from 'seelen-core';
 import { FancyToolbarSettings } from 'seelen-core';
 
 import { IsSavingCustom } from '../../main/application';
@@ -127,6 +127,11 @@ export async function registerStoreEvents() {
     }
     const userSettings = await new UserSettingsLoader().withPlaceholders().load();
     setPlaceholder(userSettings);
+  });
+
+  store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).forCurrentWidget()));
+  await PluginList.onChange((list) => {
+    store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
   });
 
   await initUIColors();

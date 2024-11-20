@@ -1,0 +1,17 @@
+id: "@default/media"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: media
+  withMediaControls: true
+  template: >-
+    isMuted
+    ? icon.IoVolumeMuteOutline
+    : volume >= 0.66
+    ? icon.IoVolumeHighOutline
+    : volume >= 0.33
+    ? icon.IoVolumeMediumOutline
+    : volume != 0
+    ? icon.IoVolumeLowOutline
+    : icon.IoVolumeOffOutline
+  tooltip: >-
+    concat(t("placeholder.volume"), ": ", string(round(volume * 100)), "%")

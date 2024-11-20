@@ -1,7 +1,6 @@
 import { listen } from '@tauri-apps/api/event';
-import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { useEffect, useState } from 'react';
-import { Settings, Theme, UIColors } from 'seelen-core';
+import { getCurrentWidget, Settings, Theme, UIColors } from 'seelen-core';
 
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
@@ -45,11 +44,11 @@ export function useDarkMode() {
 }
 
 const KeyByLabel: Record<string, string> = {
-  'fancy-toolbar': 'toolbar',
-  seelenweg: 'weg',
-  'window-manager': 'wm',
-  'seelen-launcher': 'launcher',
-  'seelen-wall': 'wall',
+  '@seelen/fancy-toolbar': 'toolbar',
+  '@seelen/weg': 'weg',
+  '@seelen/window-manager': 'wm',
+  '@seelen/launcher': 'launcher',
+  '@seelen/wall': 'wall',
 };
 
 async function loadThemes(allThemes: Theme[], selected: string[]) {
@@ -59,20 +58,16 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
       return selected.indexOf(a.info.filename) - selected.indexOf(b.info.filename);
     });
 
-  const webviewId = getCurrentWebviewWindow().label;
-  const [label, _monitor] = webviewId.split('/');
-  if (!label) {
-    return;
-  }
+  const widget = getCurrentWidget();
 
-  const theme_key = KeyByLabel[label] as keyof Theme['styles'] | undefined;
+  const theme_key = KeyByLabel[widget.id] || widget.id;
   if (!theme_key) {
     return;
   }
 
-  document.getElementById(webviewId)?.remove();
+  document.getElementById(widget.label)?.remove();
   let element = document.createElement('style');
-  element.id = webviewId;
+  element.id = widget.label;
   element.textContent = '';
 
   for (const theme of themes) {

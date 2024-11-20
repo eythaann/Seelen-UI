@@ -1,6 +1,8 @@
 mod apps_config;
 mod events;
 mod icons;
+mod plugins;
+mod widgets;
 
 use arc_swap::ArcSwap;
 use getset::Getters;
@@ -12,7 +14,9 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::state::{IconPack, VirtualDesktopStrategy, WegItems, WindowManagerLayout};
+use seelen_core::state::{
+    IconPack, Plugin, VirtualDesktopStrategy, WegItems, Widget, WindowManagerLayout,
+};
 use std::{
     collections::{HashMap, VecDeque},
     fs::{File, OpenOptions},
@@ -72,7 +76,10 @@ pub struct FullState {
     pub placeholders: HashMap<String, Placeholder>,
     pub layouts: HashMap<String, WindowManagerLayout>,
     pub weg_items: Arc<Mutex<WegItems>>,
-    pub history: LauncherHistory,
+    pub launcher_history: LauncherHistory,
+
+    pub plugins: HashMap<String, Plugin>,
+    pub widgets: HashMap<String, Widget>,
 }
 
 unsafe impl Sync for FullState {}
@@ -92,7 +99,9 @@ impl FullState {
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
             weg_items: Arc::new(Mutex::new(WegItems::default())),
-            history: HashMap::new(),
+            launcher_history: HashMap::new(),
+            plugins: HashMap::new(),
+            widgets: HashMap::new(),
         };
         manager.load_all()?;
         manager.start_listeners()?;
@@ -129,6 +138,12 @@ impl FullState {
 
         let user_app_configs = self.data_dir.join("applications.yml");
         let bundled_app_configs = self.resources_dir.join("static/apps_templates");
+
+        let user_plugins = self.data_dir.join("plugins");
+        let bundled_plugins = self.resources_dir.join("static/plugins");
+
+        let user_widgets = self.data_dir.join("widgets");
+        let bundled_widgets = self.resources_dir.join("static/widgets");
 
         if event.paths.contains(&self.icon_packs_folder()) {
             log::info!("Icons Packs changed");
@@ -202,6 +217,28 @@ impl FullState {
             self.emit_settings_by_app()?;
         }
 
+        if event
+            .paths
+            .iter()
+            .any(|p| p.starts_with(&user_plugins) || p.starts_with(&bundled_plugins))
+        {
+            log::info!("Plugins changed");
+            self.load_plugins()?;
+            self.store_cloned();
+            self.emit_plugins()?;
+        }
+
+        if event
+            .paths
+            .iter()
+            .any(|p| p.starts_with(&user_widgets) || p.starts_with(&bundled_widgets))
+        {
+            log::info!("Widgets changed");
+            self.load_widgets()?;
+            self.store_cloned();
+            self.emit_widgets()?;
+        }
+
         Ok(())
     }
 
@@ -233,14 +270,18 @@ impl FullState {
             self.data_dir.join("applications.yml"),
             self.data_dir.join("history"),
             // resources
-            self.data_dir.join("themes"),
             self.icon_packs_folder(),
+            self.data_dir.join("themes"),
             self.data_dir.join("placeholders"),
             self.data_dir.join("layouts"),
+            self.data_dir.join("plugins"),
+            self.data_dir.join("widgets"),
             self.resources_dir.join("static/themes"),
             self.resources_dir.join("static/placeholders"),
             self.resources_dir.join("static/layouts"),
             self.resources_dir.join("static/apps_templates"),
+            self.resources_dir.join("static/plugins"),
+            self.resources_dir.join("static/widgets"),
         ];
 
         for path in paths {
@@ -485,9 +526,9 @@ impl FullState {
     fn load_history(&mut self) -> Result<()> {
         let history_path = self.data_dir.join("history");
         if history_path.exists() {
-            self.history = serde_yaml::from_str(&std::fs::read_to_string(&history_path)?)?;
+            self.launcher_history = serde_yaml::from_str(&std::fs::read_to_string(&history_path)?)?;
         } else {
-            std::fs::write(history_path, serde_yaml::to_string(&self.history)?)?;
+            std::fs::write(history_path, serde_yaml::to_string(&self.launcher_history)?)?;
         }
         Ok(())
     }
@@ -501,6 +542,8 @@ impl FullState {
         self.load_layouts()?;
         self.load_settings_by_app()?;
         self.load_history()?;
+        self.load_plugins()?;
+        self.load_widgets()?;
         Ok(())
     }
 

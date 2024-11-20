@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 use itertools::Itertools;
-use seelen_core::state::{WegItems, WindowManagerLayout};
+use seelen_core::state::{Plugin, WegItems, Widget, WindowManagerLayout};
 
 use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
 
@@ -39,7 +39,7 @@ pub fn state_get_weg_items() -> WegItems {
 
 #[tauri::command(async)]
 pub fn state_get_history() -> LauncherHistory {
-    FULL_STATE.load().history().clone()
+    FULL_STATE.load().launcher_history().clone()
 }
 
 #[tauri::command(async)]
@@ -71,4 +71,14 @@ pub fn state_get_wallpaper() -> Result<PathBuf> {
 #[tauri::command(async)]
 pub fn state_set_wallpaper(path: String) -> Result<()> {
     WindowsApi::set_wallpaper(path)
+}
+
+#[tauri::command(async)]
+pub fn state_get_plugins() -> Vec<Plugin> {
+    FULL_STATE.load().plugins().values().cloned().collect_vec()
+}
+
+#[tauri::command(async)]
+pub fn state_get_widgets() -> Vec<Widget> {
+    FULL_STATE.load().widgets().values().cloned().collect_vec()
 }

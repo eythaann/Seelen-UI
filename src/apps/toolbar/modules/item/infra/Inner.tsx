@@ -216,6 +216,7 @@ export function InnerItem(props: InnerItemProps) {
       <Reorder.Item
         {...rest}
         id={id}
+        value={(module as any).__value__ || module}
         style={style}
         className={cx('ft-bar-item', {
           // onClickProp is omitted cuz it always comes via context menu dropdown wrapper
@@ -233,7 +234,6 @@ export function InnerItem(props: InnerItemProps) {
 
           performClick(oldOnClick, scope.current);
         }}
-        value={module}
         as="div"
         transition={{ duration: 0.15 }}
       >

@@ -8,6 +8,7 @@ export * from './placeholder';
 export * from './settings_by_app';
 export * from './settings_by_monitor';
 export * from './icon_pack';
+export * from './plugin';
 
 export interface LauncherHistory {
   [x: string]: string[];

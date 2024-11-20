@@ -1,0 +1,7 @@
+id: "@default/focused-app-title"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: generic
+  template: window.title
+  style:
+    flexShrink: 2

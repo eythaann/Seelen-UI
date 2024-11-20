@@ -1,0 +1,7 @@
+id: "@default/focused-app"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: generic
+  template: concat(imgFromExe(window.exe), "  ", window.name)
+  style:
+    flexShrink: 0

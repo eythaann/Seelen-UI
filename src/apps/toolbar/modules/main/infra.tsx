@@ -2,7 +2,7 @@ import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode, useWindowFocusChange } from 'seelen-core';
+import { HideMode, Plugin, useWindowFocusChange } from 'seelen-core';
 import { Placeholder, ToolbarModule, ToolbarModuleType } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -22,7 +22,7 @@ import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
 
-const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any }>> = {
+const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any; value: any }>> = {
   [ToolbarModuleType.Text]: Item,
   [ToolbarModuleType.Generic]: GenericItem,
   [ToolbarModuleType.Date]: DateModule,
@@ -43,18 +43,33 @@ interface Props {
 const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
-function componentByModule(module: ToolbarModule, idx: number) {
+function componentByModule(plugins: Plugin[], item: string | ToolbarModule) {
+  let module: ToolbarModule;
+
+  if (typeof item === 'string') {
+    module = plugins.find((p) => p.id === item)?.plugin;
+    if (!module) {
+      return null;
+    }
+    module = { ...module };
+    module.id = item;
+    (module as any).__value__ = item;
+  } else {
+    module = item;
+  }
+
   let Component = modulesByType[module.type];
   if (!Component) {
     return null;
   }
-  return <Component key={module.id || module.template || idx} module={module} />;
+  return <Component key={module.id} module={module} value={item} />;
 }
 
 export function ToolBar({ structure }: Props) {
   const [isAppFocused, setAppFocus] = useState(false);
   const [delayed, setDelayed] = useState(false);
 
+  const plugins = useSelector(Selectors.plugins);
   const isOverlaped = useSelector(Selectors.isOverlaped);
   const hideMode = useSelector(Selectors.settings.hideMode);
 
@@ -131,13 +146,15 @@ export function ToolBar({ structure }: Props) {
     >
       <BackgroundByLayersV2 prefix="ft-bar" />
       <div className="ft-bar-left">
-        {structure.left.map(componentByModule)}
+        {structure.left.map(componentByModule.bind(null, plugins))}
         <Reorder.Item as="div" value={DividerStart} drag={false} style={{ flex: 1 }} />
       </div>
-      <div className="ft-bar-center">{structure.center.map(componentByModule)}</div>
+      <div className="ft-bar-center">
+        {structure.center.map(componentByModule.bind(null, plugins))}
+      </div>
       <div className="ft-bar-right">
         <Reorder.Item as="div" value={DividerEnd} drag={false} style={{ flex: 1 }} />
-        {structure.right.map(componentByModule)}
+        {structure.right.map(componentByModule.bind(null, plugins))}
       </div>
     </Reorder.Group>
   );

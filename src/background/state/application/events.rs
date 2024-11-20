@@ -55,7 +55,7 @@ impl FullState {
     }
 
     pub(super) fn emit_history(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StateHistoryChanged, self.history())?;
+        get_app_handle().emit(SeelenEvent::StateHistoryChanged, self.launcher_history())?;
         Ok(())
     }
 

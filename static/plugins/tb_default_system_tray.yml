@@ -1,0 +1,6 @@
+id: "@default/system-tray"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: tray
+  template: icon.BsThreeDots
+  tooltip: t("placeholder.open_system_tray")

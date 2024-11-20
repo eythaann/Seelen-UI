@@ -189,6 +189,8 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         state_get_wallpaper,
         state_set_wallpaper,
         state_get_history,
+        state_get_plugins,
+        state_get_widgets,
         // Media
         media_prev,
         media_toggle_play_pause,

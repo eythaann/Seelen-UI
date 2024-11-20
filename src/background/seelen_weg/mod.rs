@@ -230,13 +230,11 @@ impl SeelenWeg {
 // INSTANCE
 impl SeelenWeg {
     pub fn new(postfix: &str) -> Result<Self> {
-        log::info!("Creating {}/{}", Self::TARGET, postfix);
         let weg = Self {
             window: Self::create_window(postfix)?,
             overlaped: false,
             theoretical_rect: RECT::default(),
         };
-
         Ok(weg)
     }
 
@@ -339,14 +337,16 @@ impl SeelenWeg {
 
 impl SeelenWeg {
     pub const TITLE: &'static str = "SeelenWeg";
-    const TARGET: &'static str = "seelenweg";
+    const TARGET: &'static str = "seelen/weg";
 
     fn create_window(postfix: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
+        let label = format!("{}__query__monitor:{}", Self::TARGET, postfix);
+        log::info!("Creating @{}", label);
 
         let window = tauri::WebviewWindowBuilder::new(
             manager,
-            format!("{}/{}", Self::TARGET, postfix),
+            label,
             tauri::WebviewUrl::App("seelenweg/index.html".into()),
         )
         .title(Self::TITLE)

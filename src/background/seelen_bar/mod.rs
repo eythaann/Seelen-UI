@@ -42,10 +42,9 @@ impl Drop for FancyToolbar {
 }
 
 impl FancyToolbar {
-    pub fn new(postfix: &str) -> Result<Self> {
-        log::info!("Creating {}/{}", Self::TARGET, postfix);
+    pub fn new(monitor: &str) -> Result<Self> {
         Ok(Self {
-            window: Self::create_window(postfix)?,
+            window: Self::create_window(monitor)?,
             last_focus: None,
             theoretical_rect: RECT::default(),
             overlaped: false,
@@ -111,7 +110,6 @@ impl FancyToolbar {
 // statics
 impl FancyToolbar {
     pub const TITLE: &'static str = "Seelen Fancy Toolbar";
-    const TARGET: &'static str = "fancy-toolbar";
 
     /// Work area no works fine on multiple monitors
     /// so we use this functions that only takes the toolbar in account
@@ -160,10 +158,10 @@ impl FancyToolbar {
         Ok(())
     }
 
-    fn create_window(postfix: &str) -> Result<WebviewWindow> {
+    fn create_window(monitor: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
-
-        let label = format!("{}/{}", Self::TARGET, postfix);
+        let label = format!("seelen/fancy-toolbar__query__monitor:{}", monitor);
+        log::info!("Creating @{}", label);
         let window = tauri::WebviewWindowBuilder::new(
             manager,
             label,

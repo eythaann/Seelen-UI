@@ -23,19 +23,20 @@ impl Drop for WindowManagerV2 {
 
 impl WindowManagerV2 {
     pub const TITLE: &'static str = "Seelen Window Manager";
-    pub const TARGET: &'static str = "window-manager";
+    pub const TARGET: &'static str = "seelen/window-manager";
 
     pub fn new(monitor_id: &str) -> Result<Self> {
-        log::info!("Creating Tiling Windows Manager");
         Ok(Self {
             window: Self::create_window(monitor_id)?,
         })
     }
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
+        let label = format!("{}__query__monitor:{}", Self::TARGET, monitor_id);
+        log::info!("Creating @{}", label);
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
-            format!("{}/{}", Self::TARGET, monitor_id),
+            label,
             tauri::WebviewUrl::App("seelen_wm_v2/index.html".into()),
         )
         .title(Self::TITLE)
@@ -65,7 +66,7 @@ impl WindowManagerV2 {
                     let workspace_id = get_vd_manager().get_current()?.id();
                     let w = m.get_workspace_mut(&workspace_id);
                     app.emit_to(
-                        format!("{}/{}", Self::TARGET, monitor_id),
+                        format!("{}__query__monitor:{}", Self::TARGET, monitor_id),
                         SeelenEvent::WMSetLayout,
                         w.get_root_node(),
                     )?;

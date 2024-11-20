@@ -5,10 +5,8 @@
   "local": true,
   "windows": [
     "settings",
-    "seelenweg/*",
-    "updater",
-    "window-manager/*",
-    "fancy-toolbar/*"
+    "seelen/weg*",
+    "seelen/window-manager*"
   ],
   "permissions": [
     "core:path:default",
@@ -62,8 +60,6 @@
     "process:allow-exit",
 
     "log:allow-log",
-
-    "updater:default",
 
     "shell:allow-open"
   ]

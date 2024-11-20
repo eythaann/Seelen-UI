@@ -6,6 +6,8 @@ mod settings_by_monitor;
 mod theme;
 mod weg_items;
 mod wm_layout;
+mod plugin;
+mod widget;
 
 pub use icon_pack::*;
 pub use placeholder::*;
@@ -15,6 +17,8 @@ pub use settings_by_monitor::*;
 pub use theme::*;
 pub use weg_items::*;
 pub use wm_layout::*;
+pub use plugin::*;
+pub use widget::*;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};

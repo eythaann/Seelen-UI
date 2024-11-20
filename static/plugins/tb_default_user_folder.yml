@@ -1,0 +1,9 @@
+id: "@default/user-folder"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: generic
+  template: concat("@", env.USERNAME)
+  onClickV2: open(env.USERPROFILE)
+  tooltip: t("placeholder.open_user_folder")
+  style:
+    flexShrink: 0

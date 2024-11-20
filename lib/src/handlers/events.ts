@@ -47,4 +47,6 @@ export enum SeelenEvent {
   StateSettingsByAppChanged = 'settings-by-app',
   StateHistoryChanged = 'history',
   StateIconPacksChanged = 'icon-packs',
+  StatePluginsChanged = 'plugins-changed',
+  StateWidgetsChanged = 'widgets-changed',
 }

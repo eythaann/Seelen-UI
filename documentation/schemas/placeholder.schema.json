@@ -8,7 +8,7 @@
       "default": [],
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ToolbarItem"
+        "$ref": "#/definitions/ToolbarItem2"
       }
     },
     "info": {
@@ -30,7 +30,7 @@
       "default": [],
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ToolbarItem"
+        "$ref": "#/definitions/ToolbarItem2"
       }
     },
     "right": {
@@ -38,7 +38,7 @@
       "default": [],
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ToolbarItem"
+        "$ref": "#/definitions/ToolbarItem2"
       }
     }
   },
@@ -870,6 +870,16 @@
               ]
             }
           }
+        }
+      ]
+    },
+    "ToolbarItem2": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/definitions/ToolbarItem"
         }
       ]
     },

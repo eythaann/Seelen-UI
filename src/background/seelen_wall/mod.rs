@@ -29,10 +29,10 @@ impl Drop for SeelenWall {
 
 impl SeelenWall {
     pub const TITLE: &str = "Seelen Wall";
-    const TARGET: &str = "seelen-wall";
+    const TARGET: &str = "seelen/wall";
 
     pub fn new() -> Result<Self> {
-        log::info!("Creating {}", Self::TARGET);
+        log::info!("Creating @{}", Self::TARGET);
         Ok(Self {
             window: Self::create_window()?,
         })

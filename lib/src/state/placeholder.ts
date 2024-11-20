@@ -111,7 +111,7 @@ export interface CreatorInfo {
 
 export interface Placeholder {
   info: CreatorInfo;
-  left: ToolbarModule[];
-  center: ToolbarModule[];
-  right: ToolbarModule[];
+  left: (string | ToolbarModule)[];
+  center: (string | ToolbarModule)[];
+  right: (string | ToolbarModule)[];
 }

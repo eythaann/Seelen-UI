@@ -1,0 +1,15 @@
+id: "@default/network"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: network
+  withWlanSelector: true
+  tooltip: >-
+    online ? t("placeholder.ethernet_connected") : t("placeholder.ethernet_disconnected")
+  template: >-
+    online
+    ? (
+      unequal(usingInterface, null) and equalText(usingInterface.type, "IEEE80211")
+        ? getIcon("FaWifi", 14)
+        : icon.FaComputer
+    )
+    : icon.TbWorldCancel

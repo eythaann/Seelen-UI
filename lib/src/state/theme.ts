@@ -28,5 +28,5 @@ export interface Theme {
   /** Metadata about the theme */
   info: ThemeInfo;
   /** Css Styles of the theme */
-  styles: ThemeCssByApp;
+  styles: ThemeCssByApp & Record<string, string>;
 }

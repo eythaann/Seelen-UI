@@ -1,0 +1,6 @@
+id: "@default/date"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: date
+  template: date
+  withMiniCalendar: true

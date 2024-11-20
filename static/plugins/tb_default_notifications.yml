@@ -1,0 +1,10 @@
+id: "@default/notifications"
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: notifications
+  template: >-
+    count > 0 ? icon.MdNotificationsActive : icon.MdOutlineNotifications
+  badge: >-
+    count > 0 ? count : ""
+  tooltip: >-
+    concat(t("placeholder.notifications"), ": ", string(count))

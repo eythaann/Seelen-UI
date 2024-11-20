@@ -315,6 +315,13 @@ impl ToolbarItem {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
+#[serde(untagged)]
+pub enum ToolbarItem2 {
+    PluginId(String),
+    Inline(ToolbarItem)
+}
+
 #[derive(Debug, Clone, Default, Serialize, Deserialize, JsonSchema)]
 #[serde(default, rename_all = "camelCase")]
 pub struct PlaceholderInfo {
@@ -334,23 +341,33 @@ pub struct Placeholder {
     /// Metadata about the placeholder
     pub info: PlaceholderInfo,
     /// Items to be displayed in the toolbar
-    pub left: Vec<ToolbarItem>,
+    pub left: Vec<ToolbarItem2>,
     /// Items to be displayed in the toolbar
-    pub center: Vec<ToolbarItem>,
+    pub center: Vec<ToolbarItem2>,
     /// Items to be displayed in the toolbar
-    pub right: Vec<ToolbarItem>,
+    pub right: Vec<ToolbarItem2>,
 }
 
 impl Placeholder {
-    fn sanitize_items(dict: &mut HashSet<String>, items: Vec<ToolbarItem>) -> Vec<ToolbarItem> {
+    fn sanitize_items(dict: &mut HashSet<String>, items: Vec<ToolbarItem2>) -> Vec<ToolbarItem2> {
         let mut result = Vec::new();
-        for mut item in items {
-            if item.id().is_empty() {
-                item.set_id(uuid::Uuid::new_v4().to_string());
-            }
-            if !dict.contains(&item.id()) {
-                dict.insert(item.id());
-                result.push(item);
+        for item in items {
+            match item {
+                ToolbarItem2::PluginId(id) => {
+                    if !dict.contains(&id) {
+                        dict.insert(id.clone());
+                        result.push(ToolbarItem2::PluginId(id));
+                    }
+                }
+                ToolbarItem2::Inline(mut item) => {
+                    if item.id().is_empty() {
+                        item.set_id(uuid::Uuid::new_v4().to_string());
+                    }
+                    if !dict.contains(&item.id()) {
+                        dict.insert(item.id());
+                        result.push(ToolbarItem2::Inline(item));
+                    }
+                }
             }
         }
         result
