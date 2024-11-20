@@ -104,7 +104,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           content={
             <WithContextMenu items={[]}>
               <BackgroundByLayersV2
-                className="weg-item-preview-container"
+                className={ cx('weg-item-preview-container', settings.position.toLowerCase()) }
                 onMouseMoveCapture={(e) => e.stopPropagation()}
                 onContextMenu={(e) => e.stopPropagation()}
                 prefix="preview"
