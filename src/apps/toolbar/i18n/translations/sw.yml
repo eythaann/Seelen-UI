@@ -35,4 +35,5 @@ placeholder:
   notifications: Arifa
 unlabelled_tray: Icon isiyo na msingi ya tray
 context_menu:
-  remove: Ondoa kipengee
+  remove: Ondoa moduli
+  add_module: Ongeza moduli

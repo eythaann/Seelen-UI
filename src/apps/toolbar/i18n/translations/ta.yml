@@ -35,4 +35,5 @@ placeholder:
   notifications: அறிவிப்புகள்
 unlabelled_tray: பெயரிடப்படாத தட்டு ஐகான்
 context_menu:
-  remove: உருப்படியை அகற்று
+  add_module: தொகுதி சேர்க்கவும்
+  remove: தொகுதியை அகற்று

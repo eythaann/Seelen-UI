@@ -44,7 +44,7 @@ export function disableWebviewShortcutsAndContextMenu() {
       }
     }
   });
-  window.addEventListener('contextmenu', (e) => e.preventDefault());
+  window.addEventListener('contextmenu', (e) => e.preventDefault(), { capture: true });
   window.addEventListener('drop', (e) => e.preventDefault());
   window.addEventListener('dragover', (e) => e.preventDefault());
 }

@@ -35,4 +35,5 @@ placeholder:
   notifications: Ilmoitukset
 unlabelled_tray: Leimaton lokerokuvake
 context_menu:
-  remove: Poistaa kohde
+  add_module: Lisää moduuli
+  remove: Poista moduuli

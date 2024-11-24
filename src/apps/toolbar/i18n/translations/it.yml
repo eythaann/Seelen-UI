@@ -35,4 +35,5 @@ placeholder:
   notifications: Notifiche
 unlabelled_tray: Icona del vassoio senza etichetta
 context_menu:
-  remove: Rimuovere l'articolo
+  add_module: Aggiungi modulo
+  remove: Rimuovere il modulo

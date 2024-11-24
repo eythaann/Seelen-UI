@@ -35,4 +35,5 @@ placeholder:
   notifications: Kennisgewings
 unlabelled_tray: Ongeslote skinkbord -ikoon
 context_menu:
-  remove: Verwyder die item
+  add_module: Voeg module by
+  remove: Verwyder die module

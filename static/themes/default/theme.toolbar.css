@@ -64,15 +64,11 @@
   }
 }
 
-.ft-bar-item-context-menu-container {
+.ft-bar-item-context-menu-container,
+.tb-context-menu-container {
   .bg-layer-1 {
     background-color: var(--color-gray-100);
     border-radius: 10px;
-  }
-
-  .ft-bar-item-context-menu {
-    .ft-bar-item-context-menu-item {
-    }
   }
 }
 
@@ -546,7 +542,7 @@
 
     &.calendar-cell-today {
       &::before {
-        content: '';
+        content: "";
         position: absolute;
         top: calc(10% - 2px);
         left: 10%;
@@ -569,7 +565,6 @@
     }
   }
 
-
   & .calendar-header {
     & .calendar-header-placeholder {
       flex: 1;
@@ -578,9 +573,8 @@
     > .calendar-date {
       &:hover {
         color: var(--config-accent-color);
-
       }
-      
+
       font-size: 1.25em;
       margin: 5px;
       font-style: italic;

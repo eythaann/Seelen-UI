@@ -35,4 +35,5 @@ placeholder:
   notifications: నోటిఫికేషన్‌లు
 unlabelled_tray: లేబుల్ చేయని ట్రే చిహ్నం
 context_menu:
-  remove: అంశాన్ని తొలగించండి
+  remove: మాడ్యూల్ తొలగించండి
+  add_module: మాడ్యూల్ జోడించండి

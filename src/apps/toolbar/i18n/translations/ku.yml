@@ -35,4 +35,5 @@ placeholder:
   notifications: Notifications
 unlabelled_tray: Îkonê tray a bêpergal
 context_menu:
-  remove: Tiştê rakirin
+  add_module: Modulê zêde bikin
+  remove: Modulê rakirin

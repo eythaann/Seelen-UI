@@ -35,4 +35,5 @@ placeholder:
   notifications: Pranešimai
 unlabelled_tray: Nepaženklinta dėklo piktograma
 context_menu:
-  remove: Pašalinkite elementą
+  add_module: Pridėti modulį
+  remove: Pašalinkite modulį

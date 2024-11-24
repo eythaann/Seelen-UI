@@ -35,4 +35,5 @@ placeholder:
   notifications: 通知
 unlabelled_tray: 未标记的托盘图标
 context_menu:
-  remove: 删除项目
+  remove: 删除模块
+  add_module: 添加模块

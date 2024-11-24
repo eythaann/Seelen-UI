@@ -35,4 +35,5 @@ placeholder:
   notifications: Notifiki
 unlabelled_tray: Ikona tat-trej mhux immarkata
 context_menu:
-  remove: Neħħi l-oġġett
+  add_module: Żid il-modulu
+  remove: Neħħi l-modulu

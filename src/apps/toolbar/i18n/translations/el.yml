@@ -35,4 +35,5 @@ placeholder:
   notifications: Ειδοποιήσεις
 unlabelled_tray: Εικονίδιο δίσκων χωρίς
 context_menu:
-  remove: Αφαιρέστε το αντικείμενο
+  add_module: Προσθήκη ενότητας
+  remove: Αφαιρέστε την ενότητα

@@ -35,4 +35,5 @@ placeholder:
   notifications: 알림
 unlabelled_tray: 텍스트가 없는 트레이
 context_menu:
-  remove: 항목 제거
+  remove: 모듈을 제거하십시오
+  add_module: 모듈을 추가하십시오

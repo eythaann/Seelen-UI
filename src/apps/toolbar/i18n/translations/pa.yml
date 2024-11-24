@@ -35,4 +35,5 @@ placeholder:
   notifications: ਸੂਚਨਾਵਾਂ
 unlabelled_tray: ਬਿਨਾਲੇ ਟਰੇ ਆਈਕਨ
 context_menu:
-  remove: ਆਈਟਮ ਹਟਾਓ
+  remove: ਮੋਡੀ module ਲ ਹਟਾਓ
+  add_module: ਮੋਡੀ module ਲ ਸ਼ਾਮਲ ਕਰੋ

@@ -35,4 +35,5 @@ placeholder:
   notifications: Meddelanden
 unlabelled_tray: Omärkta fackikon
 context_menu:
-  remove: Ta bort objektet
+  remove: Ta bort modulen
+  add_module: Lägg till modul

@@ -35,4 +35,5 @@ placeholder:
   notifications: Meldingen
 unlabelled_tray: Niet-gelabeld systeemvakpictogram
 context_menu:
-  remove: Verwijder het item
+  remove: Verwijder de module
+  add_module: Module toevoegen

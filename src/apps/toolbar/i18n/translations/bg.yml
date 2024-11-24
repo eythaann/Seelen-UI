@@ -35,4 +35,5 @@ placeholder:
   notifications: Известия
 unlabelled_tray: Необичана икона на таблата
 context_menu:
-  remove: Премахнете елемента
+  remove: Премахване на модула
+  add_module: Добавете модул

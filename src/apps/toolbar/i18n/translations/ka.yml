@@ -35,4 +35,5 @@ placeholder:
   notifications: შეტყობინებები
 unlabelled_tray: არასასურველი უჯრის ხატი
 context_menu:
-  remove: ამოიღეთ ელემენტი
+  add_module: მოდულის დამატება
+  remove: ამოიღეთ მოდული

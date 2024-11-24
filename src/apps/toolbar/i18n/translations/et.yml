@@ -35,4 +35,5 @@ placeholder:
   notifications: Teatised
 unlabelled_tray: Märgistamata salveikoon
 context_menu:
-  remove: Eemaldage üksus
+  remove: Eemaldage moodul
+  add_module: Lisage moodul

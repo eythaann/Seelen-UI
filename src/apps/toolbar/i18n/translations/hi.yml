@@ -35,4 +35,5 @@ placeholder:
   notifications: अधिसूचना
 unlabelled_tray: अनबेल्ड ट्रे आइकन
 context_menu:
-  remove: वस्तु निकालें
+  add_module: मॉड्यूल जोड़ें
+  remove: मॉड्यूल निकालें

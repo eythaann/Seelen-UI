@@ -35,4 +35,5 @@ placeholder:
   notifications: Bildirişlər
 unlabelled_tray: Qeyri-çapsız tepsik nişanı
 context_menu:
-  remove: Elementləri çıxarın
+  add_module: Modul əlavə edin
+  remove: Modulu çıxarın

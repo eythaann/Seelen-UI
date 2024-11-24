@@ -35,4 +35,5 @@ placeholder:
   notifications: Hysbysiadau
 unlabelled_tray: Eicon hambwrdd heb ei labelu
 context_menu:
-  remove: Tynnwch yr eitem
+  remove: Tynnwch y modiwl
+  add_module: Ychwanegu Modiwl

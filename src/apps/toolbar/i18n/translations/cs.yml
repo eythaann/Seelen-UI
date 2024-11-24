@@ -35,4 +35,5 @@ placeholder:
   notifications: Oznámení
 unlabelled_tray: Ikona neznačené podnosy
 context_menu:
-  remove: Odebrat položku
+  add_module: Přidat modul
+  remove: Odebrat modul

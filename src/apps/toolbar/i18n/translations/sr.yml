@@ -35,4 +35,5 @@ placeholder:
   notifications: Обавештења
 unlabelled_tray: Икона за отпадне траи
 context_menu:
-  remove: Уклонити ставку
+  remove: Уклони модул
+  add_module: Додајте модул

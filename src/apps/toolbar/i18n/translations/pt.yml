@@ -35,4 +35,5 @@ placeholder:
   notifications: Notificações
 unlabelled_tray: Ícone de bandeja não marcada
 context_menu:
-  remove: Remova o item
+  add_module: Adicione módulo
+  remove: Remova o módulo

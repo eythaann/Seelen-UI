@@ -35,4 +35,5 @@ placeholder:
   notifications: Notifications
 unlabelled_tray: Icône de plateau non étiquetée
 context_menu:
-  remove: Supprimer
+  add_module: Ajouter le module
+  remove: Retirer le module

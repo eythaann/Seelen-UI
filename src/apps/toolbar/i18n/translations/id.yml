@@ -35,4 +35,5 @@ placeholder:
   notifications: Pemberitahuan
 unlabelled_tray: Ikon baki tanpa label
 context_menu:
-  remove: Hapus item
+  add_module: Tambahkan modul
+  remove: Hapus modul

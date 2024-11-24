@@ -35,4 +35,5 @@ placeholder:
   notifications: خبرتیاوې
 unlabelled_tray: بې بنسټه ټری عکس
 context_menu:
-  remove: توکی لرې کړئ
+  add_module: موډل اضافه کړئ
+  remove: موډول لرې کړئ

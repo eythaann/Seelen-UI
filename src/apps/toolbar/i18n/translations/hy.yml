@@ -35,4 +35,5 @@ placeholder:
   notifications: Ծանուցումներ
 unlabelled_tray: Unlabelled Tray Icon
 context_menu:
-  remove: Հեռացրեք կետը
+  remove: Հեռացրեք մոդուլը
+  add_module: Ավելացնել մոդուլ

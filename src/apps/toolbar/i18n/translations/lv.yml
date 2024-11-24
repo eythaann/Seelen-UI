@@ -35,4 +35,5 @@ placeholder:
   notifications: Paziņojumi
 unlabelled_tray: Neiezīmēta paplātes ikona
 context_menu:
-  remove: Noņemt vienumu
+  add_module: Pievienot moduli
+  remove: Noņemt moduli

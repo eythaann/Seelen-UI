@@ -35,4 +35,5 @@ placeholder:
   notifications: Tilkynningar
 unlabelled_tray: Ómerkt bakkatákn
 context_menu:
-  remove: Fjarlægðu hlutinn
+  remove: Fjarlægðu eininguna
+  add_module: Bættu við einingu

@@ -35,4 +35,5 @@ placeholder:
   notifications: Мэдэгдэл
 unlabelled_tray: Unlabelled Tray дүрс
 context_menu:
-  remove: Зүйлийг арилгах
+  add_module: Модулийг нэмэх
+  remove: Модулийг зайлуулах

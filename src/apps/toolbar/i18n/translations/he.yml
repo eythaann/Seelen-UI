@@ -35,4 +35,5 @@ placeholder:
   notifications: התראות
 unlabelled_tray: אייקון מגש ללא תווית
 context_menu:
-  remove: הסר את הפריט
+  add_module: הוסף מודול
+  remove: הסר את המודול

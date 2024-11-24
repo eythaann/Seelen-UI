@@ -35,4 +35,5 @@ placeholder:
   notifications: Thông báo
 unlabelled_tray: Biểu tượng khay không ghi nhãn
 context_menu:
-  remove: Xóa vật phẩm
+  add_module: Thêm mô -đun
+  remove: Xóa mô -đun

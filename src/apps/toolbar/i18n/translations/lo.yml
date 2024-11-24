@@ -35,4 +35,5 @@ placeholder:
   notifications: ແຈ້ງການ
 unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ
 context_menu:
-  remove: ເອົາລາຍການ
+  add_module: ເພີ່ມໂມດູນ
+  remove: ດຶງອອກຈາກໂມດູນ

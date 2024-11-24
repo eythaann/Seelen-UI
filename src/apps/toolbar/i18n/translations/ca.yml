@@ -35,4 +35,5 @@ placeholder:
   notifications: Notificacions
 unlabelled_tray: Icona de la safata no etiquetada
 context_menu:
-  remove: Eliminar l'element
+  add_module: Afegiu el mòdul
+  remove: Elimina el mòdul

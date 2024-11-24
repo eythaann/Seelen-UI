@@ -35,4 +35,5 @@ placeholder:
   notifications: ማሳወቂያዎች
 unlabelled_tray: ያልተስተካከለ ትሪ አዶ
 context_menu:
-  remove: ንጥል ያስወግዱ
+  remove: ሞጁሎችን ያስወግዱ
+  add_module: ሞዱል ያክሉ

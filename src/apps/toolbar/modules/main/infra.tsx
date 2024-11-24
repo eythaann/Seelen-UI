@@ -1,3 +1,4 @@
+import { Dropdown } from 'antd';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
@@ -21,8 +22,12 @@ import { SavePlaceholderAsCustom } from './application';
 import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
+import { MainContextMenu } from './ContextMenu';
 
-const modulesByType: Record<ToolbarModuleType, JSXElementConstructor<{ module: any; value: any }>> = {
+const modulesByType: Record<
+  ToolbarModuleType,
+  JSXElementConstructor<{ module: any; value: any }>
+> = {
   [ToolbarModuleType.Text]: Item,
   [ToolbarModuleType.Generic]: GenericItem,
   [ToolbarModuleType.Date]: DateModule,
@@ -43,6 +48,7 @@ interface Props {
 const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
+// item can be a toolbar plugin id or a toolbar module
 function componentByModule(plugins: Plugin[], item: string | ToolbarModule) {
   let module: ToolbarModule;
 
@@ -68,6 +74,7 @@ function componentByModule(plugins: Plugin[], item: string | ToolbarModule) {
 export function ToolBar({ structure }: Props) {
   const [isAppFocused, setAppFocus] = useState(false);
   const [delayed, setDelayed] = useState(false);
+  const [openContextMenu, setOpenContextMenu] = useState(false);
 
   const plugins = useSelector(Selectors.plugins);
   const isOverlaped = useSelector(Selectors.isOverlaped);
@@ -78,6 +85,9 @@ export function ToolBar({ structure }: Props) {
 
   useWindowFocusChange((focused) => {
     setAppFocus(focused);
+    if (!focused) {
+      setOpenContextMenu(false);
+    }
   });
 
   useLayoutEffect(() => {
@@ -128,34 +138,41 @@ export function ToolBar({ structure }: Props) {
     !isAppFocused && hideMode !== HideMode.Never && (isOverlaped || hideMode === HideMode.Always);
 
   return (
-    <Reorder.Group
-      values={[
-        ...structure.left,
-        DividerStart,
-        ...structure.center,
-        DividerEnd,
-        ...structure.right,
-      ]}
-      onReorder={onReorderPinned}
-      className={cx('ft-bar', {
-        'ft-bar-hidden': shouldBeHidden,
-        'ft-bar-delayed': delayed,
-      })}
-      axis="x"
-      as="div"
+    <Dropdown
+      trigger={['contextMenu']}
+      open={openContextMenu}
+      onOpenChange={setOpenContextMenu}
+      dropdownRender={() => <MainContextMenu />}
     >
-      <BackgroundByLayersV2 prefix="ft-bar" />
-      <div className="ft-bar-left">
-        {structure.left.map(componentByModule.bind(null, plugins))}
-        <Reorder.Item as="div" value={DividerStart} drag={false} style={{ flex: 1 }} />
-      </div>
-      <div className="ft-bar-center">
-        {structure.center.map(componentByModule.bind(null, plugins))}
-      </div>
-      <div className="ft-bar-right">
-        <Reorder.Item as="div" value={DividerEnd} drag={false} style={{ flex: 1 }} />
-        {structure.right.map(componentByModule.bind(null, plugins))}
-      </div>
-    </Reorder.Group>
+      <Reorder.Group
+        values={[
+          ...structure.left,
+          DividerStart,
+          ...structure.center,
+          DividerEnd,
+          ...structure.right,
+        ]}
+        onReorder={onReorderPinned}
+        className={cx('ft-bar', {
+          'ft-bar-hidden': shouldBeHidden,
+          'ft-bar-delayed': delayed,
+        })}
+        axis="x"
+        as="div"
+      >
+        <BackgroundByLayersV2 prefix="ft-bar" />
+        <div className="ft-bar-left">
+          {structure.left.map(componentByModule.bind(null, plugins))}
+          <Reorder.Item as="div" value={DividerStart} drag={false} style={{ flex: 1 }} />
+        </div>
+        <div className="ft-bar-center">
+          {structure.center.map(componentByModule.bind(null, plugins))}
+        </div>
+        <div className="ft-bar-right">
+          <Reorder.Item as="div" value={DividerEnd} drag={false} style={{ flex: 1 }} />
+          {structure.right.map(componentByModule.bind(null, plugins))}
+        </div>
+      </Reorder.Group>
+    </Dropdown>
   );
 }

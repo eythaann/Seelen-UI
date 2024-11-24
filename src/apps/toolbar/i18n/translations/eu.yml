@@ -35,4 +35,5 @@ placeholder:
   notifications: Jakinarazpenak
 unlabelled_tray: Nahitaezko erretilua ikonoa
 context_menu:
-  remove: Kendu elementua
+  remove: Kendu modulua
+  add_module: Gehitu modulua

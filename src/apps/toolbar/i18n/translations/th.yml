@@ -35,4 +35,5 @@ placeholder:
   notifications: การแจ้งเตือน
 unlabelled_tray: ไอคอนถาดที่ไม่มีป้ายกำกับ
 context_menu:
-  remove: ลบรายการ
+  remove: ลบโมดูล
+  add_module: เพิ่มโมดูล

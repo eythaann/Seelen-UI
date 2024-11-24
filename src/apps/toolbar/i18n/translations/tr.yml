@@ -35,4 +35,5 @@ placeholder:
   notifications: Bildirimler
 unlabelled_tray: Etiketlenmemiş Tepsi Simgesi
 context_menu:
-  remove: Öğeyi kaldır
+  remove: Modülü Kaldır
+  add_module: Modül ekle

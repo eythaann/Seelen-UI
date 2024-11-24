@@ -1,5 +1,6 @@
 context_menu:
-  remove: Remove Item
+  remove: Remove Module
+  add_module: Add Module
 media:
   master_volume: Master Volume
   output_device: Output device

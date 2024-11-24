@@ -35,4 +35,5 @@ placeholder:
   notifications: Powiadomienia
 unlabelled_tray: Ikona nieznakowanej tacki
 context_menu:
-  remove: Usuń element
+  add_module: Dodaj moduł
+  remove: Usuń moduł

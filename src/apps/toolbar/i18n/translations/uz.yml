@@ -35,4 +35,5 @@ placeholder:
   notifications: Bildirishnoma
 unlabelled_tray: Bojavelilmagan aşınma ikonka
 context_menu:
-  remove: Elementni olib tashlang
+  remove: Modulni olib tashlash
+  add_module: Modul qo'shing

@@ -35,4 +35,5 @@ placeholder:
   notifications: Underretninger
 unlabelled_tray: Umnæret bakkeikon
 context_menu:
-  remove: Fjern varen
+  remove: Fjern modulet
+  add_module: Tilføj modul

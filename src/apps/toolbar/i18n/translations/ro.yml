@@ -35,4 +35,5 @@ placeholder:
   notifications: Notificări
 unlabelled_tray: Pictograma tăvii nemarcate
 context_menu:
-  remove: Eliminați elementul
+  add_module: Adăugați modul
+  remove: Scoateți modulul

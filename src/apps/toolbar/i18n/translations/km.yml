@@ -35,4 +35,5 @@ placeholder:
   notifications: ការជូនដំណឹង
 unlabelled_tray: រូបតំណាងថាឡៃដែលមិនស្មោះត្រង់
 context_menu:
-  remove: យកធាតុចេញ
+  remove: យកម៉ូឌុលចេញ
+  add_module: បន្ថែមម៉ូឌុល

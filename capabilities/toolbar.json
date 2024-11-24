@@ -14,6 +14,9 @@
     "core:window:allow-show",
     "core:window:allow-set-ignore-cursor-events",
 
-    "dialog:default"
+    "dialog:default",
+
+    "fs:allow-write-text-file",
+    "fs:scope-appdata-recursive"
   ]
 }

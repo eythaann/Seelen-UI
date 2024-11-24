@@ -35,4 +35,5 @@ placeholder:
   notifications: 通知
 unlabelled_tray: ラベル無し
 context_menu:
-  remove: アイテムを削除
+  remove: モジュールを削除します
+  add_module: モジュールを追加します

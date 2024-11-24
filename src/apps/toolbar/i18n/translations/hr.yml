@@ -35,4 +35,5 @@ placeholder:
   notifications: Obavijesti
 unlabelled_tray: Ikona neobilježene ladice
 context_menu:
-  remove: Uklonite predmet
+  remove: Uklonite modul
+  add_module: Dodajte modul

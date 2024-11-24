@@ -35,4 +35,5 @@ placeholder:
   notifications: સૂચના
 unlabelled_tray: અનન્ય ટ્રે ચિહ્ન
 context_menu:
-  remove: વસ્તુ દૂર કરો
+  remove: મોડ્યુલ દૂર કરો
+  add_module: મોડ્યુલ ઉમેરો

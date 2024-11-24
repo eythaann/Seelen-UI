@@ -35,4 +35,5 @@ placeholder:
   notifications: सूचना
 unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
 context_menu:
-  remove: वस्तु हटाउनुहोस्
+  add_module: मोड्युल थप्नुहोस्
+  remove: मोड्युल हटाउनुहोस्

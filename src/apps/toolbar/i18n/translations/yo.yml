@@ -35,4 +35,5 @@ placeholder:
   notifications: Awọn iwifunni
 unlabelled_tray: Alailowaya ti ko ni ile-iwe
 context_menu:
-  remove: Mu nkan kuro
+  add_module: Fikun module
+  remove: Yọ module

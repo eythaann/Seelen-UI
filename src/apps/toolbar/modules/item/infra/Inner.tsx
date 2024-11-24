@@ -236,6 +236,10 @@ export function InnerItem(props: InnerItemProps) {
         }}
         as="div"
         transition={{ duration: 0.15 }}
+        onContextMenu={(e) => {
+          e.stopPropagation();
+          (rest as any).onContextMenu?.(e);
+        }}
       >
         <div className="ft-bar-item-content">
           {children || elements}

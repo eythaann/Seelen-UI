@@ -35,4 +35,5 @@ placeholder:
   notifications: اطلاعات
 unlabelled_tray: غیر لیبلڈ ٹرے آئیکن
 context_menu:
-  remove: آئٹم کو ہٹا دیں
+  add_module: ماڈیول شامل کریں
+  remove: ماڈیول کو ہٹا دیں

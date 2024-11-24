@@ -35,4 +35,5 @@ placeholder:
   notifications: දැනුම්දීම්
 unlabelled_tray: ලැජ්ජාවේ තැටි නිරූපකය
 context_menu:
-  remove: අයිතමය ඉවත් කරන්න
+  add_module: මොඩියුලය එක් කරන්න
+  remove: මොඩියුලය ඉවත් කරන්න

@@ -35,4 +35,5 @@ placeholder:
   notifications: Izaziso
 unlabelled_tray: Isithonjana se-tray esingafundile
 context_menu:
-  remove: Susa into
+  add_module: Engeza imodyuli
+  remove: Susa module

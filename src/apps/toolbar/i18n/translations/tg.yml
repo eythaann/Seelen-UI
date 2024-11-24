@@ -35,4 +35,5 @@ placeholder:
   notifications: Огоҳиҳо
 unlabelled_tray: Тасвири табақаи ғайриқонунӣ
 context_menu:
-  remove: Ададро тоза кунед
+  add_module: Иловаи модул
+  remove: Модулро хориҷ кунед

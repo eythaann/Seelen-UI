@@ -35,4 +35,5 @@ placeholder:
   notifications: Сповіщення
 unlabelled_tray: Нежитрий ікона лотка
 context_menu:
-  remove: Видаліть елемент
+  remove: Видалити модуль
+  add_module: Додати модуль

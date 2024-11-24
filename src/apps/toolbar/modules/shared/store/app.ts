@@ -63,6 +63,18 @@ export const RootSlice = createSlice({
         state.placeholder.right = action.payload;
       }
     },
+    addItem(state, action: PayloadAction<string>) {
+      if (!state.placeholder) {
+        return;
+      }
+      const alreadyExists =
+        state.placeholder.left.includes(action.payload) ||
+        state.placeholder.right.includes(action.payload) ||
+        state.placeholder.center.includes(action.payload);
+      if (!alreadyExists) {
+        state.placeholder.right.push(action.payload);
+      }
+    },
     removeItem(state, action: PayloadAction<string>) {
       let id = action.payload;
       if (state.placeholder) {

@@ -35,4 +35,5 @@ placeholder:
   notifications: Értesítések
 unlabelled_tray: Jelöletlen tálca ikon
 context_menu:
-  remove: Távolítsa el az elemet
+  add_module: Adjon hozzá modult
+  remove: Távolítsa el a modult

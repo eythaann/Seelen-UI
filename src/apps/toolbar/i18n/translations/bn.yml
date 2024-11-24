@@ -35,4 +35,5 @@ placeholder:
   notifications: বিজ্ঞপ্তি
 unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
 context_menu:
-  remove: আইটেম সরান
+  add_module: মডিউল যুক্ত করুন
+  remove: মডিউল সরান

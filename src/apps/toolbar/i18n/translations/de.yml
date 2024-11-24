@@ -35,4 +35,5 @@ placeholder:
   notifications: Benachrichtigungen
 unlabelled_tray: Entlebte Tablettikone
 context_menu:
-  remove: Gegenstand entfernen
+  remove: Modul entfernen
+  add_module: Modul hinzufügen

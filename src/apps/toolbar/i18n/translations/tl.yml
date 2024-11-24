@@ -35,4 +35,5 @@ placeholder:
   notifications: Mga abiso
 unlabelled_tray: Hindi nabigong icon ng tray
 context_menu:
-  remove: Alisin ang item
+  remove: Alisin ang module
+  add_module: Magdagdag ng module

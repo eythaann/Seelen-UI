@@ -133,6 +133,7 @@
   display: flex !important;
   flex-direction: column !important;
   gap: 4px !important;
+  padding: 4px !important;
 
   .ant-menu-item,
   .ant-dropdown-menu-item {
