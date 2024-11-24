@@ -18,6 +18,7 @@ header:
     seelen_rofi: Rakenduse käivitaja
     virtual_desk: Virtuaalsed töölauad
     home: Kodu
+    mods: Pluginad ja vidinad
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
@@ -248,3 +249,8 @@ update:
   channel: Värskenduskanal
   downloading: Allalaadimine ...
 miscellaneous: Mitmesuguseid
+mods:
+  plugins: Pistikprogrammid
+  target: Sihtmärk
+  widgets: Vidinad
+remove: Eemaldama

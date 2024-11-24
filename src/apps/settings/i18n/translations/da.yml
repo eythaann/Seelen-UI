@@ -18,6 +18,7 @@ header:
     seelen_rofi: App Launcher
     virtual_desk: Virtuelle desktops
     home: Hjem
+    mods: Plugins og widgets
 start:
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
@@ -251,3 +252,8 @@ update:
   channel: Opdateringskanal
   downloading: Download ...
 miscellaneous: Diverse
+mods:
+  target: Mål
+  plugins: Plugins
+  widgets: Widgets
+remove: Fjerne

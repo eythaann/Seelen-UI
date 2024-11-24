@@ -18,6 +18,7 @@ header:
     seelen_rofi: የመተግበሪያ አስጀማሪ
     virtual_desk: ምናባዊ ዴስክቶፕስ
     home: ቤት
+    mods: ተሰኪዎች እና መግብሮች
 start:
   title: እንኳን ደህና መጣህ!
   message: >-
@@ -243,3 +244,8 @@ update:
   downloading: ማውረድ ...
   channel: ጣቢያውን አዘምን
 miscellaneous: ልዩነቶች
+mods:
+  widgets: ፍርግሞች
+  plugins: ተሰኪዎች
+  target: Target ላማ
+remove: ያስወግዱ

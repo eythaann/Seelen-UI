@@ -49,4 +49,5 @@ export enum SeelenEvent {
   StateIconPacksChanged = 'icon-packs',
   StatePluginsChanged = 'plugins-changed',
   StateWidgetsChanged = 'widgets-changed',
+  StateProfilesChanged = 'profiles-changed',
 }

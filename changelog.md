@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### feature
+- add bases for future plugins and widgets sytems.
+
 ### fix
 - popups and context menus fast flashing.
 - media player app not appearing on media module (weg & toolbar).

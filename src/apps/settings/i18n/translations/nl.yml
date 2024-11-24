@@ -18,6 +18,7 @@ header:
     seelen_rofi: Appstarter
     virtual_desk: Virtuele desktops
     home: Thuis
+    mods: Plug-ins en widgets
 start:
   message_accent: Optimaliseer uw productiviteit met stijl!
   title: Welkom!
@@ -253,3 +254,8 @@ update:
   downloading: Downloaden ...
   channel: Updatekanaal
 miscellaneous: Gemengd
+mods:
+  target: Doel
+  widgets: Widgets
+  plugins: Plug -ins
+remove: Verwijderen

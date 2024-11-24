@@ -18,6 +18,7 @@ header:
     seelen_rofi: Εκτοξευτής εφαρμογών
     virtual_desk: Εικονικοί επιτραπέζιοι
     home: Σπίτι
+    mods: Πρόσθετα & Widgets
 start:
   message_accent: Βελτιστοποιήστε την παραγωγικότητά σας με στυλ!
   title: Καλως ΗΡΘΑΤΕ!
@@ -252,3 +253,8 @@ update:
   channel: Κανάλι ενημέρωσης
   downloading: Λήψη ...
 miscellaneous: Ανάμικτος
+mods:
+  target: Στόχος
+  widgets: Widgets
+  plugins: Πρόσθετα
+remove: Αφαιρώ

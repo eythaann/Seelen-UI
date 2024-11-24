@@ -6,7 +6,7 @@ left:
   - "@default/user-folder"
 
   - type: text
-    template: '"//"'
+    template: '"|"'
 
   - "@default/focused-app"
 

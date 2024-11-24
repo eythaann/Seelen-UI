@@ -18,6 +18,7 @@ header:
     seelen_rofi: অ্যাপ লঞ্চার
     virtual_desk: ভার্চুয়াল ডেস্কটপস
     home: বাড়ি
+    mods: প্লাগইন এবং উইজেট
 start:
   title: স্বাগত!
   message: >-
@@ -249,3 +250,8 @@ update:
   channel: আপডেট চ্যানেল
   downloading: ডাউনলোড ...
 miscellaneous: বিবিধ
+mods:
+  target: লক্ষ্য
+  plugins: প্লাগইন
+  widgets: উইজেটস
+remove: সরান

@@ -18,6 +18,7 @@ header:
     seelen_rofi: App launcher
     virtual_desk: Mga Virtual Desktop
     home: Home
+    mods: Mga Plugin at Widget
 start:
   message: >-
     Maligayang pagdating sa Seelen UI, ang panghuli desktop na kapaligiran na
@@ -253,3 +254,8 @@ update:
   downloading: Pag -download ...
   channel: I -update ang channel
 miscellaneous: Miscellaneous
+mods:
+  plugins: Plugins
+  widgets: Mga widget
+  target: Target
+remove: Alisin

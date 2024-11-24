@@ -18,6 +18,7 @@ header:
     seelen_rofi: Spúšťač aplikácií
     virtual_desk: Virtuálne stolné počítače
     home: Domov
+    mods: Pluginy a widgety
 start:
   title: Vitajte!
   message: >-
@@ -249,3 +250,8 @@ update:
   downloading: Sťahovanie ...
   channel: Kanál
 miscellaneous: Rôznorodý
+mods:
+  widgets: Miniaplikácia
+  target: Cieľ
+  plugins: Doplnky
+remove: Odložiť

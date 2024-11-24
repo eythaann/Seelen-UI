@@ -18,6 +18,7 @@ header:
     seelen_wall: הקיר
     virtual_desk: שולחנות עבודה וירטואליים
     home: בַּיִת
+    mods: תוספים ווידג'טים
 start:
   title: ברוך הבא!
   message: >-
@@ -244,3 +245,8 @@ update:
   channel: ערוץ עדכון
   downloading: מוריד ...
 miscellaneous: שונות
+mods:
+  target: יַעַד
+  plugins: תוספים
+  widgets: ווידג'טים
+remove: לְהַסִיר

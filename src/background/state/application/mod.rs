@@ -2,6 +2,7 @@ mod apps_config;
 mod events;
 mod icons;
 mod plugins;
+mod profiles;
 mod widgets;
 
 use arc_swap::ArcSwap;
@@ -15,7 +16,7 @@ use notify_debouncer_full::{
 };
 use parking_lot::Mutex;
 use seelen_core::state::{
-    IconPack, Plugin, VirtualDesktopStrategy, WegItems, Widget, WindowManagerLayout,
+    IconPack, Plugin, Profile, VirtualDesktopStrategy, WegItems, Widget, WindowManagerLayout,
 };
 use std::{
     collections::{HashMap, VecDeque},
@@ -69,6 +70,7 @@ pub struct FullState {
     resources_dir: PathBuf,
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
+    pub profiles: Vec<Profile>,
     pub settings: Settings,
     pub settings_by_app: VecDeque<AppConfig>,
     pub themes: HashMap<String, Theme>,
@@ -92,6 +94,7 @@ impl FullState {
             resources_dir: handle.path().resource_dir()?,
             watcher: Arc::new(None),
             // ======== data ========
+            profiles: Vec::new(),
             settings: Settings::default(),
             settings_by_app: VecDeque::new(),
             themes: HashMap::new(),
@@ -544,6 +547,7 @@ impl FullState {
         self.load_history()?;
         self.load_plugins()?;
         self.load_widgets()?;
+        self.load_profiles()?;
         Ok(())
     }
 

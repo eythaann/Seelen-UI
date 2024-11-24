@@ -18,6 +18,7 @@ header:
     seelen_rofi: Барномасоз
     virtual_desk: Мизи кории виртуалӣ
     home: Хона
+    mods: Плагинҳо ва виджетҳо
 start:
   message_accent: Ҳосилнокии худро бо услуб оптимед кунед!
   message: >-
@@ -246,3 +247,8 @@ update:
   channel: Навсозӣ канал
   downloading: Зеркашӣ кунед ...
 miscellaneous: Дигар
+mods:
+  plugins: Плагинҳо
+  widgets: Виджетҳо
+  target: Мащсад
+remove: Дур кардан

@@ -25,6 +25,7 @@ header:
     seelen_rofi: Приложение пусковая установка
     virtual_desk: Виртуальные рабочие столы
     home: Дом
+    mods: Плагины и виджеты
 start:
   title: Добро пожаловать!
   message: >-
@@ -251,3 +252,8 @@ update:
   downloading: Загрузка ...
   channel: Обновить канал
 miscellaneous: Разнообразный
+mods:
+  widgets: Виджеты
+  target: Цель
+  plugins: Плагины
+remove: Удалять

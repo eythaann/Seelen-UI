@@ -18,6 +18,7 @@ header:
     seelen_rofi: Uygulama Başlatıcısı
     virtual_desk: Sanal Masaüstleri
     home: Ana Sayfa
+    mods: Eklentiler ve Widget'lar
 start:
   title: Hoş Geldiniz!
   message_accent: Verimliliğinizi stil ile optimize edin!
@@ -249,3 +250,8 @@ update:
   downloading: İndirme ...
   channel: Güncelleme kanalı
 miscellaneous: Çeşitli
+mods:
+  target: Hedef
+  widgets: Widget'lar
+  plugins: Eklentiler
+remove: Kaldırmak

@@ -18,6 +18,7 @@ header:
     seelen_wall: බිත්තිය
     virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
     home: මුල් පිටුව
+    mods: ප්ලගින සහ විජට්
 start:
   title: සාදරයෙන් පිළිගනිමු!
   message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
@@ -246,3 +247,8 @@ update:
   channel: නාලිකාව යාවත්කාලීන කරන්න
   downloading: බාගත කිරීම ...
 miscellaneous: විවිධ
+mods:
+  target: ඉලක්කය
+  widgets: විජට්
+  plugins: ප්ලගීන
+remove: ඉවත් කරන්න

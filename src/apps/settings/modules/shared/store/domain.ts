@@ -1,5 +1,13 @@
-import { AppConfiguration, Settings, Theme, UIColors, WindowManagerLayout } from 'seelen-core';
-import { Placeholder } from 'seelen-core';
+import {
+  AppConfiguration,
+  Placeholder,
+  Plugin,
+  Profile,
+  Settings,
+  Theme,
+  UIColors,
+  WindowManagerLayout,
+} from 'seelen-core';
 
 import { Route } from '../../../components/navigation/routes';
 
@@ -15,4 +23,6 @@ export interface RootState extends Settings {
   autostart: boolean | null;
   wallpaper: string | null;
   colors: UIColors;
+  plugins: Plugin[];
+  profiles: Profile[];
 }

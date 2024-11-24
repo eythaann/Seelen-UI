@@ -1,13 +1,13 @@
 use std::{
     env::temp_dir,
-    sync::{atomic::AtomicBool, Arc, OnceLock},
+    sync::{atomic::AtomicBool, Arc},
 };
 
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::handlers::SeelenEvent;
-use tauri::{path::BaseDirectory, AppHandle, Emitter, Manager, Wry};
+use tauri::{AppHandle, Emitter, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Graphics::Gdi::HMONITOR;
 
@@ -17,6 +17,7 @@ use crate::{
     instance::SeelenInstanceContainer,
     log_error,
     modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
+    restoration_and_migrations::RestorationAndMigration,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
     seelen_weg::SeelenWeg,
@@ -26,13 +27,13 @@ use crate::{
     trace_lock,
     utils::{ahk::AutoHotKey, PERFORMANCE_HELPER},
     windows_api::WindowsApi,
+    APP_HANDLE,
 };
 
 lazy_static! {
     pub static ref SEELEN: Arc<Mutex<Seelen>> = Arc::new(Mutex::new(Seelen::default()));
 }
 
-static APP_HANDLE: OnceLock<AppHandle<Wry>> = OnceLock::new();
 static SEELEN_IS_RUNNING: AtomicBool = AtomicBool::new(false);
 
 pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
@@ -151,16 +152,6 @@ impl Seelen {
         Ok(())
     }
 
-    /// Initialize Seelen and Lazy static variables
-    pub fn init(&mut self, handle: &AppHandle<Wry>) -> Result<()> {
-        log::trace!("Initializing Seelen");
-        APP_HANDLE
-            .set(handle.to_owned())
-            .map_err(|_| "Failed to set app handle")?;
-        Self::ensure_folders(handle)?;
-        Ok(())
-    }
-
     fn on_monitor_event(event: MonitorManagerEvent) {
         match event {
             MonitorManagerEvent::Added(_name, id) => {
@@ -194,6 +185,7 @@ impl Seelen {
 
     pub fn start(&mut self) -> Result<()> {
         SEELEN_IS_RUNNING.store(true, std::sync::atomic::Ordering::SeqCst);
+        RestorationAndMigration::run_full()?;
         declare_system_events_handlers()?;
 
         if self.state().is_rofi_enabled() {
@@ -249,43 +241,6 @@ impl Seelen {
     fn remove_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
         self.monitors.retain(|m| m.handle() != &hmonitor);
         self.refresh_windows_positions()?;
-        Ok(())
-    }
-
-    fn ensure_folders(handle: &AppHandle<Wry>) -> Result<()> {
-        log::trace!("Ensuring folders");
-        let path = handle.path();
-        let data_path = path.app_data_dir()?;
-
-        // migration of user settings files below v1.8.3
-        let old_path = path.resolve(".config/seelen", BaseDirectory::Home)?;
-        if old_path.exists() {
-            log::trace!("Migrating user settings from {:?}", old_path);
-            for entry in std::fs::read_dir(&old_path)?.flatten() {
-                if entry.file_type()?.is_dir() {
-                    continue;
-                }
-                std::fs::copy(entry.path(), data_path.join(entry.file_name()))?;
-            }
-            std::fs::remove_dir_all(&old_path)?;
-        }
-
-        let create_if_needed = move |folder: &str| -> Result<()> {
-            let path = data_path.join(folder);
-            if !path.exists() {
-                std::fs::create_dir_all(path)?;
-            }
-            Ok(())
-        };
-
-        create_if_needed("placeholders")?;
-        create_if_needed("themes")?;
-        create_if_needed("layouts")?;
-        create_if_needed("icons/system")?;
-        create_if_needed("wallpapers")?;
-        create_if_needed("plugins")?;
-        create_if_needed("widgets")?;
-
         Ok(())
     }
 

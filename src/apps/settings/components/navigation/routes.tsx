@@ -13,6 +13,7 @@ export enum Route {
   SHORTCUTS = 'shortcuts',
   MONITORS = 'monitors',
   SPECIFIC_APPS = 'specific_apps',
+  MODS = 'mods',
   DEVELOPER = 'developer',
   INFO = 'info',
 }
@@ -29,5 +30,6 @@ export const RouteIcons: Record<Route, React.ReactNode> = {
   [Route.SPECIFIC_APPS]: <Icon iconName="IoIosApps" />,
   [Route.SHORTCUTS]: <Icon iconName="MdLaunch" />,
   [Route.INFO]: <Icon iconName="PiInfoFill" />,
+  [Route.MODS]: <Icon iconName="PiCodeBold" />,
   [Route.DEVELOPER]: <Icon iconName="PiCodeBold" />,
 };

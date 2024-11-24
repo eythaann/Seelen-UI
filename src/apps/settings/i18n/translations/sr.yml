@@ -18,6 +18,7 @@ header:
     seelen_rofi: Лаунцхер
     virtual_desk: Виртуелни радне површине
     home: Дом
+    mods: Додаци и виџети
 start:
   title: Добродошли!
   message_accent: Оптимизирајте своју продуктивност стилом!
@@ -250,3 +251,8 @@ update:
   downloading: Преузимање ...
   channel: Ажурирај канал
 miscellaneous: Остало
+mods:
+  widgets: Видгети
+  target: Мета
+  plugins: Додаци
+remove: Скинути

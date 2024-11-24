@@ -18,6 +18,7 @@ header:
     seelen_wall: Стіна
     virtual_desk: Віртуальні настільні ПК
     home: Домашній
+    mods: Плагіни та віджети
 start:
   title: Ласкаво просимо!
   message_accent: Оптимізуйте свою продуктивність стилем!
@@ -249,3 +250,8 @@ update:
   downloading: Завантаження ...
   channel: Канал оновлення
 miscellaneous: Різний
+mods:
+  target: Цільовий
+  plugins: Плагіни
+  widgets: Віджети
+remove: Видалити

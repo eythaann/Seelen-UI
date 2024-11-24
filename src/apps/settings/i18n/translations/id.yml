@@ -18,6 +18,7 @@ header:
     seelen_rofi: Peluncur Aplikasi
     virtual_desk: Desktop virtual
     home: Rumah
+    mods: Plugin & Widget
 start:
   message: >-
     Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
@@ -249,3 +250,8 @@ update:
   channel: Perbarui saluran
   downloading: Mengunduh ...
 miscellaneous: Aneka ragam
+mods:
+  target: Target
+  plugins: Plugin
+  widgets: Widget
+remove: Menghapus

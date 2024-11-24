@@ -25,6 +25,7 @@ header:
     seelen_rofi: 应用启动器
     virtual_desk: 虚拟桌面
     home: 首页
+    mods: 插件和小部件
 start:
   title: 欢迎使用！
   message: >-
@@ -240,3 +241,8 @@ update:
   downloading: 下载中...
   channel: 更新频道
 miscellaneous: 各种其他设置
+mods:
+  widgets: 小部件
+  target: 目标
+  plugins: 插件
+remove: 消除

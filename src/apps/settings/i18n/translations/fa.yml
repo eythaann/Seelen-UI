@@ -18,6 +18,7 @@ header:
     seelen_wall: دیوار
     virtual_desk: دسک تاپ مجازی
     home: خانه
+    mods: پلاگین ها و ابزارک ها
 start:
   title: خوش آمدی!
   message_accent: بهره وری خود را با سبک بهینه کنید!
@@ -248,3 +249,8 @@ update:
   channel: کانال
   downloading: بارگیری ...
 miscellaneous: متفاوتی
+mods:
+  target: هدف
+  plugins: پلاگین
+  widgets: ویراچه
+remove: برداشتن

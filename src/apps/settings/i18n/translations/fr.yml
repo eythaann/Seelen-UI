@@ -25,6 +25,7 @@ header:
     seelen_rofi: Lanceur d'applications
     virtual_desk: Desktops virtuels
     home: Maison
+    mods: Plugins et widgets
 start:
   title: Accueillir!
   message: "Bienvenue dans Seelen UI, l'environnement de bureau ultime avec un gestionnaire de fenêtres en mosaïque intégré pour améliorer votre expérience Windows\_! Explorez une nouvelle ère d'efficacité et de multitâche avec notre interface intuitive et nos fonctionnalités avancées."
@@ -247,3 +248,8 @@ update:
   downloading: Téléchargement...
   channel: Mettre à jour le canal
 miscellaneous: Divers
+mods:
+  target: Cible
+  plugins: Plugins
+  widgets: Widgets
+remove: Retirer

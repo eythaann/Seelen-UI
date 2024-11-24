@@ -18,6 +18,7 @@ header:
     seelen_wall: Zeď
     virtual_desk: Virtuální stolní počítače
     home: Domov
+    mods: Pluginy a widgety
 start:
   title: Vítejte!
   message: >-
@@ -249,3 +250,8 @@ update:
   downloading: Stahování ...
   channel: Aktualizovat kanál
 miscellaneous: Smíšený
+mods:
+  target: Cíl
+  plugins: Pluginy
+  widgets: Widgety
+remove: Odstranit

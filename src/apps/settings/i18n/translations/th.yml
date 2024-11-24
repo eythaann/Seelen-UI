@@ -18,6 +18,7 @@ header:
     seelen_rofi: แอพ Launcher
     virtual_desk: เดสก์ท็อปเสมือนจริง
     home: บ้าน
+    mods: ปลั๊กอินและวิดเจ็ต
 start:
   title: ยินดีต้อนรับ!
   message_accent: เพิ่มประสิทธิภาพการทำงานของคุณอย่างมีสไตล์!
@@ -243,3 +244,8 @@ update:
   downloading: ดาวน์โหลด ...
   channel: อัปเดตช่อง
 miscellaneous: เบ็ดเตล็ด
+mods:
+  target: เป้า
+  plugins: ปลั๊กอิน
+  widgets: วิดเจ็ต
+remove: ลบ

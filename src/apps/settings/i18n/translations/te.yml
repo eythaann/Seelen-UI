@@ -18,6 +18,7 @@ header:
     seelen_rofi: అనువర్తన లాంచర్
     virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
     home: హోమ్
+    mods: ప్లగిన్‌లు & విడ్జెట్‌లు
 start:
   title: స్వాగతం!
   message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
@@ -249,3 +250,8 @@ update:
   channel: ఛానెల్‌ను నవీకరించండి
   downloading: డౌన్‌లోడ్ ...
 miscellaneous: ఇతరాలు
+mods:
+  widgets: విడ్జెట్లు
+  target: లక్ష్యం
+  plugins: ప్లగిన్లు
+remove: తొలగించండి

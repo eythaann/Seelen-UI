@@ -1,0 +1,27 @@
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 5px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px;
+  background-color: var(--color-gray-50);
+  border-radius: 8px;
+
+  .left {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      font-weight: 600;
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+  }
+}

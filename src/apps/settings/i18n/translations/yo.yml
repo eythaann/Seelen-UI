@@ -18,6 +18,7 @@ header:
     seelen_rofi: Ifilọlẹ app
     virtual_desk: Awọn orisun itẹwe foju
     home: Ile
+    mods: Awọn afikun & Awọn ẹrọ ailorukọ
 start:
   message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
   message: >-
@@ -244,3 +245,8 @@ update:
   downloading: Gbigba lati ayelujara ...
   channel: Ohun elo imudojuiwọn
 miscellaneous: Oriṣiriṣi
+mods:
+  plugins: Afikun
+  target: Ibi-afẹde
+  widgets: Ẹrọ ẹrọ
+remove: Yọkuro

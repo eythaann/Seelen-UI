@@ -18,6 +18,7 @@ header:
     seelen_rofi: Isiqalisi sohlelo lokusebenza
     virtual_desk: Ama-Virtual Desktops
     home: Ikhaya
+    mods: Ama-plugin namawijethi
 start:
   message: >-
     Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
@@ -251,3 +252,8 @@ update:
   channel: Isiteshi sokuvuselela
   downloading: Ukulanda ...
 miscellaneous: '-Nhlobonhlobo'
+mods:
+  widgets: Amawijethi
+  plugins: Amaplithi
+  target: Okuqondiwe
+remove: Susa

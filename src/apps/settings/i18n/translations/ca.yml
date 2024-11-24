@@ -18,6 +18,7 @@ header:
     seelen_rofi: Llançador d'aplicacions
     virtual_desk: Desktops virtuals
     home: Casa
+    mods: Connectors i widgets
 start:
   title: Benvingut!
   message_accent: Optimitzeu la vostra productivitat amb estil.
@@ -251,3 +252,8 @@ update:
   downloading: Descarregant ...
   channel: Canal d'actualització
 miscellaneous: Divers
+mods:
+  widgets: Widgets
+  plugins: Tapins
+  target: Objectiu
+remove: Treure

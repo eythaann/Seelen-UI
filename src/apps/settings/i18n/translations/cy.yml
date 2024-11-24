@@ -18,6 +18,7 @@ header:
     seelen_rofi: Lansiwr ap
     virtual_desk: Penbyrddau Rhithwir
     home: Nghartrefi
+    mods: Ategion & Widgets
 start:
   message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
   title: Croeso!
@@ -251,3 +252,8 @@ update:
   downloading: Lawrlwytho ...
   channel: Diweddaru Sianel
 miscellaneous: Hamddenol
+mods:
+  widgets: Widgets
+  plugins: Ategion
+  target: Targedon
+remove: Godon

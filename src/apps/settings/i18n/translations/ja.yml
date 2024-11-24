@@ -18,6 +18,7 @@ header:
     seelen_rofi: アプリランチャー
     virtual_desk: 仮想デスクトップ
     home: ホーム
+    mods: プラグインとウィジェット
 start:
   title: ようこそ！
   message: >-
@@ -241,3 +242,8 @@ update:
   downloading: ダウンロード中...
   channel: 更新チャンネル
 miscellaneous: その他
+mods:
+  target: ターゲット
+  widgets: ウィジェット
+  plugins: プラグイン
+remove: 取り除く

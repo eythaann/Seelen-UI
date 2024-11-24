@@ -18,6 +18,7 @@ header:
     seelen_rofi: APP Lancher
     virtual_desk: Desktops virtwali
     home: Id-dar
+    mods: Plugins u Widgets
 start:
   title: Merħba!
   message: >-
@@ -249,3 +250,8 @@ update:
   channel: Aġġorna l-kanal
   downloading: Tniżżil ...
 miscellaneous: Varji
+mods:
+  target: Mira
+  widgets: Widgets
+  plugins: Plugins
+remove: Neħħi

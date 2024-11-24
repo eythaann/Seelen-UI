@@ -51,6 +51,8 @@ const initialState: RootState = {
   updater: {
     channel: UpdateChannel.Release,
   },
+  plugins: [],
+  profiles: [],
 };
 
 function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {

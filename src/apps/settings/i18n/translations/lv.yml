@@ -18,6 +18,7 @@ header:
     seelen_rofi: Lietotņu palaišana
     virtual_desk: Virtuālās galddatori
     home: Mājas
+    mods: Spraudņi un logrīki
 start:
   message_accent: Optimizējiet savu produktivitāti ar stilu!
   message: >-
@@ -247,3 +248,8 @@ update:
   channel: Atjaunināt kanālu
   downloading: Lejupielāde ...
 miscellaneous: Dažāds
+mods:
+  widgets: Logrīki
+  plugins: Spraudņi
+  target: Tēlot
+remove: Noņemt

@@ -25,6 +25,7 @@ header:
     seelen_rofi: قاذفة التطبيق
     virtual_desk: أجهزة الكمبيوتر المكتبية الافتراضية
     home: بيت
+    mods: الإضافات والحاجيات
 start:
   title: مرحباً!
   message: >-
@@ -244,3 +245,8 @@ update:
   channel: تحديث قناة
   downloading: تنزيل ...
 miscellaneous: متنوع
+mods:
+  target: هدف
+  widgets: الحاجيات
+  plugins: الإضافات
+remove: يزيل

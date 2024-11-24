@@ -18,6 +18,7 @@ header:
     seelen_rofi: फोटो लन्चर
     virtual_desk: भर्चुअल डेस्कटपहरू
     home: घर
+    mods: प्लगइनहरू र विजेटहरू
 start:
   message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
   message: >-
@@ -248,3 +249,8 @@ update:
   channel: अद्यावधिक च्यानल
   downloading: डाउनलोड गर्दै ...
 miscellaneous: विविघ
+mods:
+  target: लक्य
+  widgets: विजेटहरू
+  plugins: निशम्न
+remove: हटाउनु

@@ -18,6 +18,7 @@ header:
     seelen_wall: Стената
     virtual_desk: Виртуални настолни компютри
     home: Начало
+    mods: Плъгини и джаджи
 start:
   title: Добре дошли!
   message: >-
@@ -249,3 +250,8 @@ update:
   downloading: Изтегляне ...
   channel: Канал за актуализиране
 miscellaneous: Разни
+mods:
+  widgets: Джаджи
+  plugins: Приставки
+  target: Цел
+remove: Извадете

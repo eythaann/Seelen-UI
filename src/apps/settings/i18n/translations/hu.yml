@@ -18,6 +18,7 @@ header:
     seelen_wall: A fal
     virtual_desk: Virtuális asztali számítógépek
     home: Otthon
+    mods: Bővítmények és widgetek
 start:
   title: Üdvözöljük!
   message: >-
@@ -248,3 +249,8 @@ update:
   channel: Frissítési csatorna
   downloading: Letöltés ...
 miscellaneous: Különféle
+mods:
+  target: Cél
+  plugins: Plugins
+  widgets: Kütyü
+remove: Eltávolítás

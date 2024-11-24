@@ -18,6 +18,7 @@ header:
     seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
     virtual_desk: ផ្ទៃតុនិម្មិត
     home: ផ្ទហ
+    mods: កម្មវិធីជំនួយ និងធាតុក្រាហ្វិក
 start:
   title: សូមស្វាគមន៍!
   message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
@@ -246,3 +247,8 @@ update:
   downloading: ទាញយក ...
   channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
 miscellaneous: ដេលមានផ្នេកខុសក្នា
+mods:
+  widgets: ធាតុក្រាហ្វិក
+  plugins: រអារ
+  target: តមរុយសរមាប់បាញ់
+remove: រមកមិ avad ចេញ

@@ -18,6 +18,7 @@ header:
     seelen_rofi: Ilovani ishga tushirish vositasi
     virtual_desk: Virtual ish stollari
     home: Uy
+    mods: Plaginlar va vidjetlar
 start:
   message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
   message: >-
@@ -251,3 +252,8 @@ update:
   channel: Kanalni yangilash
   downloading: Yuklab olish ...
 miscellaneous: Har xil
+mods:
+  plugins: Plaginlar
+  widgets: Vidjetlar
+  target: Maqsad
+remove: Olib tashlamoq

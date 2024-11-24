@@ -25,6 +25,7 @@ header:
     seelen_rofi: 앱 런처
     virtual_desk: 가상 데스크톱
     home: 홈
+    mods: 플러그인 및 위젯
 start:
   title: 환영합니다!
   message: >-
@@ -242,3 +243,8 @@ update:
   downloading: 다운로드 중...
   channel: 업데이트 채널
 miscellaneous: 기타
+mods:
+  target: 목표
+  widgets: 위젯
+  plugins: 플러그인
+remove: 제거하다

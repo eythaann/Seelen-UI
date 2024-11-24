@@ -25,6 +25,7 @@ header:
     seelen_wall: A parede
     virtual_desk: Desktops virtuais
     home: Início
+    mods: Plug-ins e widgets
 start:
   title: Bem-vindo!
   message: >-
@@ -249,3 +250,8 @@ update:
   channel: Atualizar canal
   downloading: Download ...
 miscellaneous: Miscelânea
+mods:
+  target: Alvo
+  widgets: Widgets
+  plugins: Plugins
+remove: Remover

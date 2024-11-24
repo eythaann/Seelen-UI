@@ -18,6 +18,7 @@ header:
     seelen_rofi: Pokretač aplikacija
     virtual_desk: Virtualna radna računala
     home: Dom
+    mods: Dodaci i widgeti
 start:
   message_accent: Optimizirajte svoju produktivnost stilom!
   message: >-
@@ -251,3 +252,8 @@ update:
   downloading: Preuzimanje ...
   channel: Kanal za ažuriranje
 miscellaneous: Razni
+mods:
+  target: Cilj
+  plugins: Dodaci
+  widgets: Widgeti
+remove: Ukloniti

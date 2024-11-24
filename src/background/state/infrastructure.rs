@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 use itertools::Itertools;
-use seelen_core::state::{Plugin, WegItems, Widget, WindowManagerLayout};
+use seelen_core::state::{Plugin, Profile, WegItems, Widget, WindowManagerLayout};
 
 use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
 
@@ -81,4 +81,9 @@ pub fn state_get_plugins() -> Vec<Plugin> {
 #[tauri::command(async)]
 pub fn state_get_widgets() -> Vec<Widget> {
     FULL_STATE.load().widgets().values().cloned().collect_vec()
+}
+
+#[tauri::command(async)]
+pub fn state_get_profiles() -> Vec<Profile> {
+    FULL_STATE.load().profiles.clone()
 }

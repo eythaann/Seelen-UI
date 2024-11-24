@@ -18,6 +18,7 @@ header:
     seelen_wall: Bức tường
     virtual_desk: Máy tính để bàn ảo
     home: Trang chủ
+    mods: Plugin & Widget
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -248,3 +249,8 @@ update:
   channel: Cập nhật kênh
   downloading: Tải xuống ...
 miscellaneous: Linh tinh
+mods:
+  target: Mục tiêu
+  widgets: Widgets
+  plugins: Plugin
+remove: Di dời

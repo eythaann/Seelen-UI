@@ -1,0 +1,25 @@
+left:
+  - "@default/user-folder"
+
+  - type: text
+    template: '"|"'
+
+  - "@default/focused-app"
+
+  - type: generic
+    template: >
+      window.title ? "-" : ""
+
+  - "@default/focused-app-title"
+
+center:
+  - "@default/date"
+
+right:
+  - "@default/system-tray"
+  - "@default/bluetooth"
+  - "@default/network"
+  - "@default/media"
+  - "@default/power"
+  - "@default/notifications"
+  - "@default/quick-settings"

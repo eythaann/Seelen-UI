@@ -18,6 +18,7 @@ header:
     seelen_wall: კედელი
     virtual_desk: ვირტუალური სამუშაო მაგიდა
     home: სახლი
+    mods: დანამატები და ვიჯეტები
 start:
   message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
   title: კეთილი იყოს თქვენი მობრძანება!
@@ -251,3 +252,8 @@ update:
   downloading: ჩამოტვირთვა ...
   channel: განაახლეთ არხი
 miscellaneous: შერეული
+mods:
+  plugins: ამხებო
+  widgets: ვიჯეტები
+  target: სამიზნე
+remove: ამოღება

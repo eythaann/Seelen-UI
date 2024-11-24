@@ -9,6 +9,7 @@ import { DeveloperTools } from './modules/developer/infra';
 import { FancyToolbarSettings } from './modules/fancyToolbar/infra';
 import { General } from './modules/general/main/infra';
 import { Information } from './modules/information/infrastructure';
+import { ModsManager } from './modules/Mods/infra';
 import { SeelenWegSettings } from './modules/seelenweg/infra';
 import { Shortcuts } from './modules/shortcuts/infrastructure';
 import { WallSettings } from './modules/Wall/infra';
@@ -36,6 +37,7 @@ const ComponentByRout: Record<Route, React.JSXElementConstructor<any>> = {
   [Route.SEELEN_WM]: WindowManagerSettings,
   [Route.SEELEN_BAR]: FancyToolbarSettings,
   [Route.DEVELOPER]: DeveloperTools,
+  [Route.MODS]: ModsManager,
 };
 
 export function App() {

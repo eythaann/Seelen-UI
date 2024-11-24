@@ -18,6 +18,7 @@ header:
     seelen_rofi: App Launcher
     virtual_desk: virtual desktops
     home: ບ້ານ
+    mods: ປລັກອິນ & ວິດເຈັດ
 start:
   title: ຍິນດີຕ້ອນຮັບ!
   message_accent: ເພີ່ມປະສິດທິພາບການຜະລິດຂອງເຈົ້າດ້ວຍຮູບແບບ!
@@ -246,3 +247,8 @@ update:
   downloading: ການດາວໂຫລດ ...
   channel: ຊ່ອງທາງການປັບປຸງ
 miscellaneous: ຫຼາຢ
+mods:
+  widgets: widgets
+  plugins: Plugins
+  target: ເປົ້າ
+remove: ເອົາອອກ

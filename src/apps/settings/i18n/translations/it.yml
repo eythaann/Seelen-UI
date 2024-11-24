@@ -18,6 +18,7 @@ header:
     seelen_rofi: Lanciatore di applicazioni
     virtual_desk: Desktop virtuali
     home: Casa
+    mods: Plugin e widget
 start:
   title: Benvenuta!
   message: >-
@@ -251,3 +252,8 @@ update:
   downloading: Download ...
   channel: Canale di aggiornamento
 miscellaneous: Varie
+mods:
+  target: Bersaglio
+  widgets: Widget
+  plugins: Plugin
+remove: Rimuovere

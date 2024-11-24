@@ -18,6 +18,7 @@ header:
     seelen_rofi: App launcher
     virtual_desk: Virtuell Desktops
     home: Doheem
+    mods: Plugins & Widgets
 start:
   title: Wëllkomm!
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
@@ -249,3 +250,8 @@ update:
   channel: Update Kanal
   downloading: NËMMEN ...
 miscellaneous: Erleeën
+mods:
+  target: Zilrät
+  plugins: Plugins
+  widgets: Widgets
+remove: Ofwäschen

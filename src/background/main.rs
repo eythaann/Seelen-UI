@@ -7,6 +7,7 @@ mod hook;
 mod instance;
 mod modules;
 mod plugins;
+mod restoration_and_migrations;
 mod seelen;
 mod seelen_bar;
 mod seelen_rofi;
@@ -20,7 +21,10 @@ mod utils;
 mod windows_api;
 mod winevent;
 
-use std::io::{BufWriter, Write};
+use std::{
+    io::{BufWriter, Write},
+    sync::OnceLock,
+};
 
 use error_handler::Result;
 use exposed::register_invoke_handler;
@@ -42,6 +46,8 @@ use tray::try_register_tray_icon;
 use utils::PERFORMANCE_HELPER;
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
+
+static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 
 fn register_panic_hook() -> Result<()> {
     std::panic::set_hook(Box::new(move |info| {
@@ -107,11 +113,11 @@ fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<()> {
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     Client::listen_tcp()?;
+    APP_HANDLE
+        .set(app.handle().to_owned())
+        .map_err(|_| "Failed to set app handle")?;
 
     validate_webview_runtime_is_installed(app.handle())?;
-
-    let mut seelen = trace_lock!(SEELEN);
-    seelen.init(app.handle())?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
@@ -126,7 +132,7 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
         }
     }
 
-    seelen.start()?;
+    trace_lock!(SEELEN).start()?;
     log_error!(try_register_tray_icon(app));
     trace_lock!(PERFORMANCE_HELPER).end("setup");
     Ok(())

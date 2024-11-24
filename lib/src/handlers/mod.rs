@@ -88,4 +88,5 @@ slu_events_declaration! {
     StateIconPacksChanged = "icon-packs",
     StatePluginsChanged = "plugins-changed",
     StateWidgetsChanged = "widgets-changed",
+    StateProfilesChanged = "profiles-changed",
 }

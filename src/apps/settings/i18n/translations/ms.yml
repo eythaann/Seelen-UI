@@ -18,6 +18,7 @@ header:
     seelen_rofi: Pelancar App
     virtual_desk: Desktop maya
     home: Rumah
+    mods: Pemalam & Widget
 start:
   title: Selamat datang!
   message_accent: Mengoptimumkan produktiviti anda dengan gaya!
@@ -249,3 +250,8 @@ update:
   channel: Kemas kini saluran
   downloading: Memuat turun ...
 miscellaneous: Pelbagai
+mods:
+  plugins: Plugin
+  target: Sasaran
+  widgets: Widget
+remove: Keluarkan

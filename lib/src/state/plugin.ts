@@ -7,6 +7,7 @@ export class Plugin {
   id: string = '';
   target: string = '';
   plugin: any = {};
+  bundled: boolean = false;
 }
 
 export class PluginList {

@@ -18,6 +18,7 @@ header:
     seelen_rofi: હાથ
     virtual_desk: વર્ચ્યુઅલ ડેસ્કટ .પ
     home: ઘર
+    mods: પ્લગઇન્સ અને વિજેટ્સ
 start:
   title: સ્વાગત છે!
   message_accent: શૈલી સાથે તમારી ઉત્પાદકતાને ઑપ્ટિમાઇઝ કરો!
@@ -248,3 +249,8 @@ update:
   downloading: ડાઉનલોડ ...
   channel: અપડેટ
 miscellaneous: પરચુરણ
+mods:
+  plugins: તૃણ
+  target: નિશાન
+  widgets: વિજેટો
+remove: દૂર કરવું

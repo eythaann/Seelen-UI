@@ -18,6 +18,7 @@ header:
     seelen_rofi: App başlatıcısı
     virtual_desk: Virtual masaüstü
     home: Evdə
+    mods: Pluginlər və Vidjetlər
 start:
   title: Xoş gəliş edin!
   message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
@@ -248,3 +249,8 @@ update:
   channel: Kanal yeniləmə
   downloading: Yükləmə ...
 miscellaneous: Müxtəlif
+mods:
+  widgets: Vidjetlər
+  target: Hədəfi
+  plugins: Plaginlər
+remove: Çıxarmaq

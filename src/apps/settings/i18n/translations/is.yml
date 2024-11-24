@@ -18,6 +18,7 @@ header:
     seelen_rofi: App Launcher
     virtual_desk: Sýndarskjáborð
     home: Heim
+    mods: Viðbætur og búnaður
 start:
   title: Velkominn!
   message_accent: Fínstilltu framleiðni þína með stæl!
@@ -247,3 +248,8 @@ update:
   channel: Uppfæra rás
   downloading: Niðurhal ...
 miscellaneous: Ýmislegt
+mods:
+  plugins: Viðbætur
+  target: Miðaðu
+  widgets: Búnaður
+remove: Fjarlægðu

@@ -191,6 +191,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         state_get_history,
         state_get_plugins,
         state_get_widgets,
+        state_get_profiles,
         // Media
         media_prev,
         media_toggle_play_pause,

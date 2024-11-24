@@ -18,6 +18,7 @@ header:
     seelen_rofi: App -lanseerder
     virtual_desk: Virtuele tafelrekenaars
     home: Tuiste
+    mods: Inproppe en widgets
 start:
   title: Welkom!
   message: >-
@@ -251,3 +252,8 @@ update:
   downloading: Aflaai ...
   channel: Update Channel
 miscellaneous: Verskillend
+mods:
+  widgets: Widgets
+  plugins: Plugins
+  target: Teiken
+remove: Verwyder

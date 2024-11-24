@@ -18,6 +18,7 @@ header:
     seelen_rofi: App launcher
     virtual_desk: Desktopên Virtual
     home: Xane
+    mods: Plugin & Widgets
 start:
   title: Bi xêr hatî!
   message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
@@ -246,3 +247,8 @@ update:
   downloading: Daxistin ...
   channel: Kanala Nûve
 miscellaneous: Lihevket
+mods:
+  target: Armanc
+  widgets: Widgets
+  plugins: Pêçanin
+remove: Dûrxistin

@@ -18,6 +18,7 @@ header:
     seelen_wall: دیوار
     virtual_desk: ورچوئل ڈیسک ٹاپس
     home: گھر
+    mods: پلگ انز اور وجیٹس
 start:
   title: عنوان
   message_accent: اپنی صلاحیت کو انداز کے ساتھ بہتر بنائیں!
@@ -248,3 +249,8 @@ update:
   channel: چینل کو اپ ڈیٹ کریں
   downloading: ڈاؤن لوڈ کرنا ...
 miscellaneous: متفرق
+mods:
+  plugins: پلگ ان
+  widgets: ویجٹ
+  target: ہدف
+remove: ہٹا دیں

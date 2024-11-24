@@ -18,6 +18,7 @@ header:
     seelen_rofi: பயன்பாட்டு துவக்கி
     virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
     home: வீடு
+    mods: செருகுநிரல்கள் & விட்ஜெட்டுகள்
 start:
   title: வரவேற்பு!
   message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
@@ -250,3 +251,8 @@ update:
   downloading: பதிவிறக்கம் ...
   channel: சேனலைப் புதுப்பிக்கவும்
 miscellaneous: இதர
+mods:
+  widgets: விட்ஜெட்டுகள்
+  plugins: செருகுநிரல்கள்
+  target: இலக்கு
+remove: அகற்று

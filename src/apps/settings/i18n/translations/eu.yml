@@ -18,6 +18,7 @@ header:
     seelen_rofi: App Launcher
     virtual_desk: Mahaigain birtualak
     home: Etxe
+    mods: Pluginak eta widgetak
 start:
   message: >-
     Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
@@ -249,3 +250,8 @@ update:
   downloading: Deskargatzen ...
   channel: Eguneratu kanala
 miscellaneous: Heterogeneo
+mods:
+  target: Jomuga
+  widgets: Widgets
+  plugins: Plakins
+remove: Atera

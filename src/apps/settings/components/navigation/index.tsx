@@ -53,7 +53,7 @@ const general = [
   Route.SHORTCUTS,
 ];
 const advanced = [Route.MONITORS, Route.SPECIFIC_APPS];
-const developer = [Route.DEVELOPER];
+const developer = [Route.MODS, Route.DEVELOPER];
 
 export const Navigation = memo(() => {
   const [collapsed, setCollapsed] = useState(false);

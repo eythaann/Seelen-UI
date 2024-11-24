@@ -25,6 +25,7 @@ header:
     seelen_rofi: App Launcher
     virtual_desk: Virtuelle Desktops
     home: Home
+    mods: Plugins und Widgets
 start:
   title: Willkommen!
   message: >-
@@ -251,3 +252,8 @@ update:
   downloading: Am Herunterladen ...
   channel: Update-Kanal
 miscellaneous: Verschiedenes
+mods:
+  target: Ziel
+  widgets: Widgets
+  plugins: Plugins
+remove: Entfernen

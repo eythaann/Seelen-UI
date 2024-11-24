@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::Path;
 
 use seelen_core::{handlers::SeelenEvent, state::Plugin};
 use tauri::Emitter;
@@ -13,8 +13,8 @@ impl FullState {
         Ok(())
     }
 
-    fn load_plugin_from_file(path: PathBuf) -> Result<Plugin> {
-        Ok(serde_yaml::from_str(&std::fs::read_to_string(&path)?)?)
+    fn load_plugin_from_file(path: &Path) -> Result<Plugin> {
+        Ok(serde_yaml::from_str(&std::fs::read_to_string(path)?)?)
     }
 
     pub(super) fn load_plugins(&mut self) -> Result<()> {
@@ -27,8 +27,9 @@ impl FullState {
             if path.is_dir() {
                 continue;
             }
-            match Self::load_plugin_from_file(path) {
-                Ok(plugin) => {
+            match Self::load_plugin_from_file(&path) {
+                Ok(mut plugin) => {
+                    plugin.bundled = path.starts_with(&bundled_path);
                     self.plugins.insert(plugin.id.clone(), plugin);
                 }
                 Err(e) => {

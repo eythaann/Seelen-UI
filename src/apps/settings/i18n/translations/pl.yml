@@ -18,6 +18,7 @@ header:
     seelen_rofi: Uruchamianie aplikacji
     virtual_desk: Wirtualne komputery stacjonarne
     home: Dom
+    mods: Wtyczki i widżety
 start:
   title: Powitanie!
   message: >-
@@ -249,3 +250,8 @@ update:
   downloading: Ściąganie...
   channel: Kanał aktualizacji
 miscellaneous: Różnorodny
+mods:
+  target: Cel
+  widgets: Widżety
+  plugins: Wtyczki
+remove: Usunąć

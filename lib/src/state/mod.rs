@@ -8,6 +8,7 @@ mod weg_items;
 mod wm_layout;
 mod plugin;
 mod widget;
+mod profile;
 
 pub use icon_pack::*;
 pub use placeholder::*;
@@ -19,6 +20,7 @@ pub use weg_items::*;
 pub use wm_layout::*;
 pub use plugin::*;
 pub use widget::*;
+pub use profile::*;
 
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};

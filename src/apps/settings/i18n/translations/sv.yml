@@ -18,6 +18,7 @@ header:
     seelen_wall: Väggen
     virtual_desk: Virtuella stationära datorer
     home: Hem
+    mods: Plugins och widgets
 start:
   title: Välkommen!
   message_accent: Optimera din produktivitet med stil!
@@ -251,3 +252,8 @@ update:
   channel: Uppdateringskanal
   downloading: Nedladdning ...
 miscellaneous: Diverse
+mods:
+  target: Mål
+  widgets: Widget
+  plugins: Plugins
+remove: Ta bort
