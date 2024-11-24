@@ -15,10 +15,10 @@ header:
     developer: ਵਿਕਾਸਕਾਰ
     seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
     seelen_rofi: ਐਪ ਲਾਂਚਰ
-    seelen_wall: ਕੰਧ
     virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
     home: ਘਰ
     mods: ਪਲੱਗਇਨ ਅਤੇ ਵਿਜੇਟਸ
+    seelen_wall: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ
 start:
   message: >-
     Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
@@ -229,7 +229,7 @@ wall:
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
   backgrounds: ਵਾਲਪੇਪਰ
   interval: ਵਾਲਪੇਪਰ ਨੂੰ ਹਰ (ਸਕਿੰਟ) ਬਦਲੋ
-  enable: ਧੁੱਪ ਦੀ ਕੰਧ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
 app_launcher:
   runners:
     label: ਦੌੜਾਕ

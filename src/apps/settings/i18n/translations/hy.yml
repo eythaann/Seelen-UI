@@ -15,10 +15,10 @@ header:
     shortcuts: Դյուրանցումներ
     seelen_wm: Պատուհանների կառավարիչ
     seelen_rofi: Ծրագրի գործարկիչ
-    seelen_wall: Պատը
     virtual_desk: Վիրտուալ աշխատասեղաններ
     home: Տուն
     mods: Փլագիններ և վիդջեթներ
+    seelen_wall: Պաստառների կառավարիչ
 start:
   title: Բարի գալուստ
   message: >-
@@ -233,9 +233,9 @@ monitors_configurations:
   label: Մոնիտոր {{ինդեքս}
 wall:
   backgrounds: Պաստառներ
-  enable: Միացնել Seelen Wall- ը
   interval: Փոխեք պաստառները ամեն (վայրկյան)
   no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
+  enable: Միացրեք Պաստառների կառավարիչը
 app_launcher:
   runners:
     label: Վազողներ

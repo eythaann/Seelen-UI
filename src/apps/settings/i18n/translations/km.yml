@@ -14,11 +14,11 @@ header:
     seelen_weg: ចត/របារភារកិច្ច
     seelen_bar: របារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
     specific_apps: កម្មវិធីជាក់លាក់
-    seelen_wall: ជញ្ជាំង
     seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
     virtual_desk: ផ្ទៃតុនិម្មិត
     home: ផ្ទហ
     mods: កម្មវិធីជំនួយ និងធាតុក្រាហ្វិក
+    seelen_wall: កម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
 start:
   title: សូមស្វាគមន៍!
   message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
@@ -227,10 +227,10 @@ save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើ�
 monitors_configurations:
   label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
 wall:
-  enable: បើកជញ្ជាំង Seelen
   backgrounds: ផាបផេច
   no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
   interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរាល់វិនាទី (វិនាទី)
+  enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
 app_launcher:
   runners:
     label: រត់តមនាង

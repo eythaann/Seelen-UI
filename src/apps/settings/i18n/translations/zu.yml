@@ -14,11 +14,11 @@ header:
     specific_apps: Izinhlelo zokusebenza ezikhethekile
     monitors: Ukuqapha
     shortcuts: Amashoshothi
-    seelen_wall: Udonga
     seelen_rofi: Isiqalisi sohlelo lokusebenza
     virtual_desk: Ama-Virtual Desktops
     home: Ikhaya
     mods: Ama-plugin namawijethi
+    seelen_wall: Umphathi Wallpaper
 start:
   message: >-
     Uyemukelwa ku-Seelen UI, imvelo yokugcina yedeskithophu enomphathi weWindows
@@ -234,8 +234,8 @@ wall:
   no_background: >-
     Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
     esikhundleni.
-  enable: Nika amandla udonga lwe-Seleen
   interval: Shintsha iphepha lokunamathisela odongeni wonke (amasekhondi)
+  enable: Nika amandla umphathi wangemuva
 app_launcher:
   runners:
     explorer: Gijima

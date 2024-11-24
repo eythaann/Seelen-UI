@@ -14,11 +14,11 @@ header:
     seelen_bar: Fancy narzędzi
     shortcuts: Skróty
     seelen_wm: Menedżer okien
-    seelen_wall: Ściana
     seelen_rofi: Uruchamianie aplikacji
     virtual_desk: Wirtualne komputery stacjonarne
     home: Dom
     mods: Wtyczki i widżety
+    seelen_wall: Menedżer tapety
 start:
   title: Powitanie!
   message: >-
@@ -232,8 +232,8 @@ monitors_configurations:
 wall:
   interval: Zmień tapetę co (sekundy)
   no_background: Pusty pokaz slajdów, zamiast tego używając tła motywu.
-  enable: Włącz ścianę Seelen
   backgrounds: Tapety
+  enable: Włącz menedżer tapety
 app_launcher:
   runners:
     explorer: Uruchomić

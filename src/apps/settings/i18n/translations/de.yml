@@ -21,11 +21,11 @@ header:
     shortcuts: Kurzbefehle
     developer: Entwickler
     info: Information
-    seelen_wall: Die Wand
     seelen_rofi: App Launcher
     virtual_desk: Virtuelle Desktops
     home: Home
     mods: Plugins und Widgets
+    seelen_wall: Tapetenmanager
 start:
   title: Willkommen!
   message: >-
@@ -232,10 +232,10 @@ save_and_restart: Speichern & neu starten
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  enable: Aktivieren Sie Seelen Wall
   no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
   interval: Wechseln Sie das Hintergrundbild alle [Sekunden]
   backgrounds: Hintergrundbilder
+  enable: Tapetenmanager aktivieren
 app_launcher:
   runners:
     cmd: Befehl

@@ -14,11 +14,11 @@ header:
     monitors: Awọn diirarito
     shortcuts: Awọn ọna abuja
     specific_apps: Apps Pataki
-    seelen_wall: Odi
     seelen_rofi: Ifilọlẹ app
     virtual_desk: Awọn orisun itẹwe foju
     home: Ile
     mods: Awọn afikun & Awọn ẹrọ ailorukọ
+    seelen_wall: Oluṣakoso ogiri
 start:
   message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
   message: >-
@@ -227,8 +227,8 @@ monitors_configurations:
 wall:
   backgrounds: Ogiri ogiri
   interval: Yi ogiri ogiri gbogbo (awọn aaya)
-  enable: Jeki ogiri Eelen
   no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
+  enable: Mu oluṣakoso ogiri ṣiṣẹ
 app_launcher:
   runners:
     explorer: Sare

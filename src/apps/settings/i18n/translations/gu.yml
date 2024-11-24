@@ -14,11 +14,11 @@ header:
     info: માહિતી
     specific_apps: વિશિષ્ટ એપ્લિકેશનો
     seelen_wm: વિન્ડો મેનેજર
-    seelen_wall: દિવાલ
     seelen_rofi: હાથ
     virtual_desk: વર્ચ્યુઅલ ડેસ્કટ .પ
     home: ઘર
     mods: પ્લગઇન્સ અને વિજેટ્સ
+    seelen_wall: વ wallpaper લપેપર મેનેજર
 start:
   title: સ્વાગત છે!
   message_accent: શૈલી સાથે તમારી ઉત્પાદકતાને ઑપ્ટિમાઇઝ કરો!
@@ -232,7 +232,7 @@ wall:
   backgrounds: વ wallpapers લપેપર્સ
   interval: દરેક (સેકંડ) વ wallp લપેપર બદલો
   no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
-  enable: સીલેન દિવાલને સક્ષમ કરો
+  enable: વ wallp લપેપર મેનેજરને સક્ષમ કરો
 app_launcher:
   runners:
     explorer: દોડવું

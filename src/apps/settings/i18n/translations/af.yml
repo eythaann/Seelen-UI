@@ -14,11 +14,11 @@ header:
     seelen_weg: Dock/Taakbalk
     info: Informasie
     specific_apps: Spesifieke programme
-    seelen_wall: Die muur
     seelen_rofi: App -lanseerder
     virtual_desk: Virtuele tafelrekenaars
     home: Tuiste
     mods: Inproppe en widgets
+    seelen_wall: Agtergrondbestuurder
 start:
   title: Welkom!
   message: >-
@@ -234,8 +234,8 @@ monitors_configurations:
 wall:
   no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
   interval: Verander plakpapier elke (sekondes)
-  enable: Aktiveer Seelen Wall
   backgrounds: Agtergronde
+  enable: Aktiveer agtergrondbestuurder
 app_launcher:
   runners:
     explorer: Wedloop

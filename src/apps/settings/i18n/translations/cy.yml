@@ -14,11 +14,11 @@ header:
     developer: Natblygwr
     seelen_weg: Doc/bar tasgau
     seelen_bar: Bar offer ffansi
-    seelen_wall: Y wal
     seelen_rofi: Lansiwr ap
     virtual_desk: Penbyrddau Rhithwir
     home: Nghartrefi
     mods: Ategion & Widgets
+    seelen_wall: Rheolwr papur wal
 start:
   message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
   title: Croeso!
@@ -232,10 +232,10 @@ save_and_restart: Cadw ac Ailgychwyn
 monitors_configurations:
   label: Monitro {{mynegai}}
 wall:
-  enable: Galluogi Wal Seelen
   no_background: Sioe sleidiau gwag, gan ddefnyddio cefndir thema yn lle.
   interval: Newid papur wal bob (eiliad)
   backgrounds: Papurau Wal
+  enable: Galluogi Rheolwr Papur Wal
 app_launcher:
   runners:
     label: Rhedwyr

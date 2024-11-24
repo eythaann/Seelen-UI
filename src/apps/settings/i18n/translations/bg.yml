@@ -15,10 +15,10 @@ header:
     seelen_bar: Фантастична лента с инструменти
     shortcuts: Преки пътища
     seelen_rofi: Изстрелване на приложението
-    seelen_wall: Стената
     virtual_desk: Виртуални настолни компютри
     home: Начало
     mods: Плъгини и джаджи
+    seelen_wall: Мениджър на тапети
 start:
   title: Добре дошли!
   message: >-
@@ -230,10 +230,10 @@ save_and_restart: Запазване и рестартиране
 monitors_configurations:
   label: Монитор {{index}}
 wall:
-  enable: Активирайте стената на Seelen
   backgrounds: Тапети
   no_background: Празно слайдшоу, вместо това използвайки фона на темата.
   interval: Сменяйте тапетите на всеки (секунди)
+  enable: Активирайте мениджъра на тапети
 app_launcher:
   runners:
     cmd: Команда

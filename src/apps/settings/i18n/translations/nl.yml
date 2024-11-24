@@ -14,11 +14,11 @@ header:
     seelen_weg: Dock/taakbalk
     seelen_bar: Fancy werkbalk
     shortcuts: Snelkoppelingen
-    seelen_wall: Achtergrond
     seelen_rofi: Appstarter
     virtual_desk: Virtuele desktops
     home: Thuis
     mods: Plug-ins en widgets
+    seelen_wall: Wallpaper manager
 start:
   message_accent: Optimaliseer uw productiviteit met stijl!
   title: Welkom!
@@ -237,7 +237,7 @@ wall:
   no_background: >-
     Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
     thema.
-  enable: Schakel Seelen -achtergrond in
+  enable: Schakel wallpaper manager in
 app_launcher:
   runners:
     cmd: Commando

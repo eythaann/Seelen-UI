@@ -14,11 +14,11 @@ header:
     shortcuts: Συντομεύσεις
     specific_apps: Συγκεκριμένες εφαρμογές
     seelen_weg: Λέσχη εργασιών
-    seelen_wall: Ο τοίχος
     seelen_rofi: Εκτοξευτής εφαρμογών
     virtual_desk: Εικονικοί επιτραπέζιοι
     home: Σπίτι
     mods: Πρόσθετα & Widgets
+    seelen_wall: Διευθυντής ταπετσαρίας
 start:
   message_accent: Βελτιστοποιήστε την παραγωγικότητά σας με στυλ!
   title: Καλως ΗΡΘΑΤΕ!
@@ -234,9 +234,9 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
-  enable: Ενεργοποιήστε το Wall Seelen
   interval: Αλλάξτε ταπετσαρία κάθε (δευτερόλεπτα)
   backgrounds: Ταπετσαρίες
+  enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
 app_launcher:
   runners:
     explorer: Τρέξιμο

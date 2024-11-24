@@ -14,11 +14,11 @@ header:
     specific_apps: Specifikke apps
     shortcuts: Genveje
     monitors: Monitors
-    seelen_wall: Væggen
     seelen_rofi: App Launcher
     virtual_desk: Virtuelle desktops
     home: Hjem
     mods: Plugins og widgets
+    seelen_wall: Tapet manager
 start:
   message_accent: Optimer din produktivitet med stil!
   title: Velkommen!
@@ -235,7 +235,7 @@ wall:
   backgrounds: Baggrunde
   no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
   interval: Skift tapet hver (sekunder)
-  enable: Aktivér Seelen Wall
+  enable: Aktivér tapet manager
 app_launcher:
   runners:
     cmd: Kommando

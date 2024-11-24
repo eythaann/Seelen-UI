@@ -14,11 +14,11 @@ header:
     shortcuts: शॉर्टकट
     monitors: पर नज़र रखता है
     info: जानकारी
-    seelen_wall: दीवार
     seelen_rofi: ऐप लॉन्चर
     virtual_desk: आभासी डेस्कटॉप्स
     home: घर
     mods: प्लगइन्स और विजेट
+    seelen_wall: वॉलपेपर प्रबंधक
 start:
   message_accent: शैली के साथ अपनी उत्पादकता का अनुकूलन करें!
   message: >-
@@ -230,9 +230,9 @@ monitors_configurations:
   label: मॉनिटर {{इंडेक्स}}
 wall:
   backgrounds: वॉलपेपर
-  enable: सेलेन वॉल को सक्षम करें
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
   interval: वॉलपेपर हर (सेकंड) बदलें
+  enable: वॉलपेपर प्रबंधक सक्षम करें
 app_launcher:
   runners:
     explorer: दौड़ना

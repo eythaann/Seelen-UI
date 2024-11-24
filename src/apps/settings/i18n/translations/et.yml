@@ -14,11 +14,11 @@ header:
     developer: Arendaja
     info: Teave
     seelen_bar: Väljamõeldud tööriistariba
-    seelen_wall: Sein
     seelen_rofi: Rakenduse käivitaja
     virtual_desk: Virtuaalsed töölauad
     home: Kodu
     mods: Pluginad ja vidinad
+    seelen_wall: Tapeedijuht
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
@@ -232,7 +232,7 @@ wall:
   backgrounds: Taustapildid
   interval: Muutke tapeet iga (sekundit)
   no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
-  enable: Luba Seeleni sein
+  enable: Luba tapeedihaldur
 app_launcher:
   runners:
     cmd: Käsk

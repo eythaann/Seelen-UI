@@ -14,11 +14,11 @@ header:
     info: Informacija
     shortcuts: Nuorodos
     general: Bendrasis
-    seelen_wall: Siena
     seelen_rofi: Programos paleidimo priemonė
     virtual_desk: Virtualūs staliniai kompiuteriai
     home: Namai
     mods: Papildiniai ir valdikliai
+    seelen_wall: Tapetų vadovas
 start:
   title: Sveiki!
   message_accent: Optimizuokite savo produktyvumą stiliumi!
@@ -229,9 +229,9 @@ monitors_configurations:
   label: Monitorius {{index}}
 wall:
   backgrounds: Tapetai
-  enable: Įgalinkite Seeleno sieną
   interval: Keiskite tapetų kiekvieną (sekundes)
   no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
+  enable: Įgalinkite tapetų tvarkytuvę
 app_launcher:
   runners:
     explorer: Bėgti

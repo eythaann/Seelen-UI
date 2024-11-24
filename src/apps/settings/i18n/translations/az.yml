@@ -14,11 +14,11 @@ header:
     shortcuts: Qısaylıq
     seelen_bar: Xülya alətlər paneli
     general: General
-    seelen_wall: Divar
     seelen_rofi: App başlatıcısı
     virtual_desk: Virtual masaüstü
     home: Evdə
     mods: Pluginlər və Vidjetlər
+    seelen_wall: Divar kağızı meneceri
 start:
   title: Xoş gəliş edin!
   message_accent: Üslubla məhsuldarlığınızı optimallaşdırın!
@@ -231,8 +231,8 @@ monitors_configurations:
 wall:
   interval: Hər (saniyə) divar kağızı dəyişdirin
   backgrounds: Divar kağızları
-  enable: Seelen Divarını aktivləşdirin
   no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
+  enable: Divar kağızı menecerini aktivləşdirin
 app_launcher:
   runners:
     label: Qaçışçı

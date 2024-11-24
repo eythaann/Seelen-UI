@@ -14,11 +14,11 @@ header:
     seelen_bar: Bar alat mewah
     monitors: Monitor
     shortcuts: Pintasan
-    seelen_wall: Dinding
     seelen_rofi: Pelancar App
     virtual_desk: Desktop maya
     home: Rumah
     mods: Pemalam & Widget
+    seelen_wall: Pengurus Wallpaper
 start:
   title: Selamat datang!
   message_accent: Mengoptimumkan produktiviti anda dengan gaya!
@@ -231,9 +231,9 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   interval: Tukar kertas dinding setiap (saat)
-  enable: Dayakan dinding Seelen
   backgrounds: Kertas dinding
   no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
+  enable: Dayakan Pengurus Wallpaper
 app_launcher:
   runners:
     explorer: Jalankan

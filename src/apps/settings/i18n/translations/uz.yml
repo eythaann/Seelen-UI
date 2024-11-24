@@ -14,11 +14,11 @@ header:
     specific_apps: Muayyan ilovalar
     shortcuts: Yorliqlar
     seelen_weg: Dok / vazifalar paneli
-    seelen_wall: Devor
     seelen_rofi: Ilovani ishga tushirish vositasi
     virtual_desk: Virtual ish stollari
     home: Uy
     mods: Plaginlar va vidjetlar
+    seelen_wall: Fon rasmi menejeri
 start:
   message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
   message: >-
@@ -235,7 +235,7 @@ wall:
   backgrounds: Fon rasmlari
   no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
   interval: Har bir (soniya) devor qog'ozini o'zgartiring
-  enable: Seelen devorini yoqing
+  enable: Fon rasmi menejerini yoqing
 app_launcher:
   runners:
     cmd: Buyruq

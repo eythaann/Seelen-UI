@@ -76,8 +76,13 @@ export function WallSettings() {
       </SettingsGroup>
 
       <SettingsGroup>
-        <b>{t('wall.backgrounds')}</b>
-        {!!backgrounds.length && (
+        <SettingsOption>
+          <b>{t('wall.backgrounds')}</b>
+          <Button type="primary" className={cs.backgroundAdd} onClick={onAddBackgrounds}>
+            <Icon iconName="MdLibraryAdd" size={14} />
+          </Button>
+        </SettingsOption>
+        {!!backgrounds.length ? (
           <Reorder.Group
             values={backgrounds}
             onReorder={onChangeBackgrounds}
@@ -104,13 +109,9 @@ export function WallSettings() {
               );
             })}
           </Reorder.Group>
+        ) : (
+          <div>{t('wall.no_background')}</div>
         )}
-        <SettingsOption>
-          <div>{!backgrounds.length && t('wall.no_background')}</div>
-          <Button type="primary" className={cs.backgroundAdd} onClick={onAddBackgrounds}>
-            <Icon iconName="MdLibraryAdd" size={14} />
-          </Button>
-        </SettingsOption>
       </SettingsGroup>
     </>
   );

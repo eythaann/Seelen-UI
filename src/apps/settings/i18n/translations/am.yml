@@ -14,11 +14,11 @@ header:
     seelen_bar: Fancy የመሣሪያ አሞሌ
     monitors: ተቆጣጣሪዎች
     seelen_wm: የመስኮት አቀናባሪ
-    seelen_wall: ግድግዳው
     seelen_rofi: የመተግበሪያ አስጀማሪ
     virtual_desk: ምናባዊ ዴስክቶፕስ
     home: ቤት
     mods: ተሰኪዎች እና መግብሮች
+    seelen_wall: የግድግዳ ወረቀት ሥራ አስኪያጅ
 start:
   title: እንኳን ደህና መጣህ!
   message: >-
@@ -227,7 +227,7 @@ wall:
   backgrounds: የግድግዳ ወረቀቶች
   interval: የግድግዳ ወረቀት እያንዳንዱን (ሰከንዶች) ይለውጡ
   no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
-  enable: የጥንቃቄ ግድግዳ አንቃ
+  enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
 app_launcher:
   runners:
     explorer: ሩጫ

@@ -14,11 +14,11 @@ header:
     developer: Таҳиякунанда
     seelen_bar: Панели футбол
     info: Ахбор
-    seelen_wall: Девор
     seelen_rofi: Барномасоз
     virtual_desk: Мизи кории виртуалӣ
     home: Хона
     mods: Плагинҳо ва виджетҳо
+    seelen_wall: Обои Менеҷери
 start:
   message_accent: Ҳосилнокии худро бо услуб оптимед кунед!
   message: >-
@@ -227,10 +227,10 @@ save_and_restart: Наҷот ва бозоғоз
 monitors_configurations:
   label: Монитор {Индекс}}
 wall:
-  enable: Фаъолсозии девори Selece
   interval: Девори ҳар (сония) -ро иваз кунед
   backgrounds: Обои обу
   no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
+  enable: Фаъолсозии менеҷери обои
 app_launcher:
   runners:
     label: Давандагон

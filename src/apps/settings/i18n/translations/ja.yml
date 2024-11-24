@@ -14,11 +14,11 @@ header:
     monitors: モニター
     seelen_weg: ドック（タスクバー）
     seelen_bar: ツールバー
-    seelen_wall: 壁紙
     seelen_rofi: アプリランチャー
     virtual_desk: 仮想デスクトップ
     home: ホーム
     mods: プラグインとウィジェット
+    seelen_wall: 壁紙マネージャー
 start:
   title: ようこそ！
   message: >-
@@ -222,10 +222,10 @@ save_and_restart: 保存して再起動
 monitors_configurations:
   label: モニター{{index}}
 wall:
-  enable: Seelen Wallを有効にする
   no_background: 壁紙に使用するファイルを選択
   backgrounds: 壁紙
   interval: 壁紙の変更間隔（秒）
+  enable: 壁紙マネージャーを有効にします
 app_launcher:
   runners:
     cmd: コマンド プロンプト

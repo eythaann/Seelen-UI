@@ -15,10 +15,10 @@ header:
     seelen_wm: ფანჯრის მენეჯერი
     specific_apps: კონკრეტული პროგრამები
     seelen_rofi: აპლიკაციის გამშვები
-    seelen_wall: კედელი
     virtual_desk: ვირტუალური სამუშაო მაგიდა
     home: სახლი
     mods: დანამატები და ვიჯეტები
+    seelen_wall: ფონი მენეჯერი
 start:
   message_accent: თქვენი პროდუქტიულობის ოპტიმიზაცია სტილით!
   title: კეთილი იყოს თქვენი მობრძანება!
@@ -234,8 +234,8 @@ monitors_configurations:
 wall:
   no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
   backgrounds: ფონები
-  enable: ჩართეთ seelen კედელი
   interval: ფონი შეცვალეთ ყოველ (წამში)
+  enable: ჩართეთ ფონი მენეჯერი
 app_launcher:
   runners:
     cmd: ბრძანება

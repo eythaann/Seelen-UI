@@ -14,11 +14,11 @@ header:
     specific_apps: Konkrétne aplikácie
     general: Všeobecný
     seelen_wm: Správca okien
-    seelen_wall: Stena
     seelen_rofi: Spúšťač aplikácií
     virtual_desk: Virtuálne stolné počítače
     home: Domov
     mods: Pluginy a widgety
+    seelen_wall: Manažér tapiet
 start:
   title: Vitajte!
   message: >-
@@ -231,9 +231,9 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
-  enable: Povoliť stenu Seelen
   interval: Vymeňte tapetu každú (sekundy)
   backgrounds: Tapety
+  enable: Povoliť manažéra tapiet
 app_launcher:
   runners:
     label: Bežec

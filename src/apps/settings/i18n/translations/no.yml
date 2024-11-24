@@ -15,10 +15,10 @@ header:
     seelen_weg: Dock/oppgavelinje
     monitors: Skjermer
     seelen_rofi: App Launcher
-    seelen_wall: Veggen
     virtual_desk: Virtuelle stasjonære maskiner
     home: Hjem
     mods: Plugins og widgets
+    seelen_wall: Bakgrunnssjef
 start:
   title: Velkommen!
   message: >-
@@ -233,9 +233,9 @@ monitors_configurations:
   label: Overvåke {{indeks}}
 wall:
   backgrounds: Bakgrunnsbilder
-  enable: Aktiver Seelen Wall
   no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
   interval: Endre bakgrunnsbilder hver (sekunder)
+  enable: Aktiver bakgrunnssjef
 app_launcher:
   runners:
     cmd: Kommando

@@ -15,10 +15,10 @@ header:
     specific_apps: Konkrétní aplikace
     shortcuts: Zkratky
     seelen_rofi: Spouštěč aplikací
-    seelen_wall: Zeď
     virtual_desk: Virtuální stolní počítače
     home: Domov
     mods: Pluginy a widgety
+    seelen_wall: Správce tapet
 start:
   title: Vítejte!
   message: >-
@@ -230,10 +230,10 @@ save_and_restart: Uložit a restartovat
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  enable: Povolte zeď Seelen
   backgrounds: Tapety
   no_background: Prázdná prezentace místo toho za použití pozadí tématu.
   interval: Změňte tapetu každý (sekundy)
+  enable: Povolit správce tapet
 app_launcher:
   runners:
     explorer: Běh

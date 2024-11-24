@@ -14,11 +14,11 @@ header:
     seelen_bar: Barra degli strumenti di fantasia
     seelen_wm: Gestore delle finestre
     specific_apps: App specifiche
-    seelen_wall: Sfondo
     seelen_rofi: Lanciatore di applicazioni
     virtual_desk: Desktop virtuali
     home: Casa
     mods: Plugin e widget
+    seelen_wall: Manager di sfondo
 start:
   title: Benvenuta!
   message: >-
@@ -233,9 +233,9 @@ monitors_configurations:
   label: Monitor {{indice}}
 wall:
   backgrounds: Sfondi
-  enable: Abilita Seelen Wall
   interval: Cambia lo sfondo ogni (secondi)
   no_background: Svuota vuota, usando invece lo sfondo del tema.
+  enable: Abilita Wallpaper Manager
 app_launcher:
   runners:
     cmd: Comando

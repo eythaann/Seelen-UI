@@ -21,11 +21,11 @@ header:
     shortcuts: 快捷键
     developer: 开发者工具
     info: 信息
-    seelen_wall: Seelen 壁纸
     seelen_rofi: 应用启动器
     virtual_desk: 虚拟桌面
     home: 首页
     mods: 插件和小部件
+    seelen_wall: 壁纸经理
 start:
   title: 欢迎使用！
   message: >-
@@ -224,7 +224,7 @@ wall:
   backgrounds: 壁纸
   interval: 每次更改壁纸（秒）
   no_background: 使用的该主题背景为空幻灯片
-  enable: 启用 Seelen Wall
+  enable: 启用壁纸经理
 app_launcher:
   runners:
     cmd: 命令行

@@ -15,10 +15,10 @@ header:
     seelen_wm: කවුළු කළමනාකරු
     seelen_weg: ඩොක්/කාර්ය තීරුව
     seelen_rofi: යෙදුම් දියත් කිරීම
-    seelen_wall: බිත්තිය
     virtual_desk: අතථ්ය ඩෙස්ක්ටොප්
     home: මුල් පිටුව
     mods: ප්ලගින සහ විජට්
+    seelen_wall: බිතුපත් කළමනාකරු
 start:
   title: සාදරයෙන් පිළිගනිමු!
   message_accent: ශෛලිය සමග ඔබේ ඵලදායිතාව ප්රශස්ත කරන්න!
@@ -229,8 +229,8 @@ monitors_configurations:
 wall:
   interval: සෑම (තත්පර) බිතුපත වෙනස් කරන්න
   no_background: හිස් විනිවිදක දර්ශනය, ඒ වෙනුවට තේමාවේ පසුබිම භාවිතා කිරීම.
-  enable: සක්රිය කළ බිත්තිය සක්රීය කරන්න
   backgrounds: බිතුපත්
+  enable: බිතුපත් කළමනාකරු සක්රීය කරන්න
 app_launcher:
   runners:
     cmd: විධානය

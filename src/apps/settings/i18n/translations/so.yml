@@ -14,11 +14,11 @@ header:
     seelen_wm: Maamulaha daaqada
     developer: Abuuris
     info: War
-    seelen_wall: Derbiga
     seelen_rofi: App furaha
     virtual_desk: Desktops Virtual
     home: Guri
     mods: Plugins & Widgets
+    seelen_wall: Maamulaha Wareegtada
 start:
   message: >-
     Ku soo dhawow SELEN Ui, oo ah jawiga desktop-ka ugu dambeeya oo leh
@@ -232,10 +232,10 @@ save_and_restart: Badbaadin & Dib u bilow
 monitors_configurations:
   label: Kormeer {{tus ind ind}}
 wall:
-  enable: U oggolow derbiga Selen
   no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
   interval: Beddel waraaqda derbiga kasta (ilbidhiqsi kasta)
   backgrounds: Darf-biyoodka
+  enable: Awood u yeelo maamulaha derbiga
 app_launcher:
   runners:
     cmd: Amrid

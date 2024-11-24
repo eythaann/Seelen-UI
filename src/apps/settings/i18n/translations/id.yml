@@ -14,11 +14,11 @@ header:
     seelen_wm: Manajer Jendela
     specific_apps: Aplikasi tertentu
     shortcuts: Pintasan
-    seelen_wall: Dindingnya
     seelen_rofi: Peluncur Aplikasi
     virtual_desk: Desktop virtual
     home: Rumah
     mods: Plugin & Widget
+    seelen_wall: Manajer Wallpaper
 start:
   message: >-
     Selamat datang di Seelen UI, lingkungan Ultimate Desktop dengan Windows
@@ -231,9 +231,9 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   backgrounds: Wallpaper
-  enable: Aktifkan Seelen Wall
   interval: Ubah wallpaper setiap (detik)
   no_background: Slideshow kosong, menggunakan latar belakang tema sebagai gantinya.
+  enable: Aktifkan Manajer Wallpaper
 app_launcher:
   runners:
     cmd: Memerintah

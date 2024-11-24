@@ -22,10 +22,10 @@ header:
     developer: Desarrollador
     info: Información
     seelen_rofi: Lanzador de aplicaciones
-    seelen_wall: La pared
     virtual_desk: Escritorios virtuales
     home: Hogar
     mods: Complementos y widgets
+    seelen_wall: Gerente de fondo de pantalla
 start:
   title: ¡Bienvenido!
   message: >-
@@ -238,7 +238,7 @@ wall:
     Presentación de diapositivas vacías, utilizando el fondo del tema en su
     lugar.
   backgrounds: Fondos de pantalla
-  enable: Habilitar la pared de Seelen
+  enable: Habilitar gerente de fondo de pantalla
 app_launcher:
   runners:
     explorer: Correr

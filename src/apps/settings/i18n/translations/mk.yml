@@ -15,10 +15,10 @@ header:
     monitors: Монитори
     specific_apps: Специфични апликации
     seelen_rofi: Апликатор за лансирање
-    seelen_wall: Theидот
     virtual_desk: Виртуелни работна површина
     home: Дома
     mods: Приклучоци и додатоци
+    seelen_wall: Менаџер за позадина
 start:
   title: Добредојдовте!
   message_accent: Оптимизирајте ја вашата продуктивност со стил!
@@ -234,8 +234,8 @@ monitors_configurations:
 wall:
   backgrounds: Позадини
   interval: Променете ја позадината на секои (секунди)
-  enable: Овозможете го Селен Вол
   no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
+  enable: Овозможете менаџер на тапети
 app_launcher:
   runners:
     explorer: Трчај

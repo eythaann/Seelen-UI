@@ -15,10 +15,10 @@ header:
     seelen_wm: Менеджер вікон
     shortcuts: Ярлики
     seelen_rofi: Запуск програми
-    seelen_wall: Стіна
     virtual_desk: Віртуальні настільні ПК
     home: Домашній
     mods: Плагіни та віджети
+    seelen_wall: Менеджер шпалер
 start:
   title: Ласкаво просимо!
   message_accent: Оптимізуйте свою продуктивність стилем!
@@ -230,10 +230,10 @@ save_and_restart: Зберегти та перезапустити
 monitors_configurations:
   label: Монітор {{index}}
 wall:
-  enable: Увімкнути стіну Seelen
   no_background: Порожнє слайд -шоу, використовуючи фон теми.
   backgrounds: Шпалери
   interval: Змінюйте шпалери кожні (секунди)
+  enable: Увімкнути менеджер шпалер
 app_launcher:
   runners:
     explorer: Пробігати

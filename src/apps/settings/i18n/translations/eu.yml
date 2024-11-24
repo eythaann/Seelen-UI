@@ -14,11 +14,11 @@ header:
     general: Jeneral
     seelen_weg: Dock / ataza barra
     seelen_bar: Fancy tresna barra
-    seelen_wall: Horma
     seelen_rofi: App Launcher
     virtual_desk: Mahaigain birtualak
     home: Etxe
     mods: Pluginak eta widgetak
+    seelen_wall: Wallpaper Manager
 start:
   message: >-
     Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
@@ -230,10 +230,10 @@ save_and_restart: Gorde eta berrabiarazi
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  enable: Gaitu Seelen horma
   interval: Aldatu horma-irudia (segundo)
   backgrounds: Horma-irudiak
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
+  enable: Gaitu horma-kudeatzailea
 app_launcher:
   runners:
     label: Kornollari

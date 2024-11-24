@@ -14,11 +14,11 @@ header:
     specific_apps: నిర్దిష్ట యాప్‌లు
     seelen_bar: ఫ్యాన్సీ టూల్‌బార్
     seelen_weg: డాక్/టాస్క్‌బార్
-    seelen_wall: గోడ
     seelen_rofi: అనువర్తన లాంచర్
     virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
     home: హోమ్
     mods: ప్లగిన్‌లు & విడ్జెట్‌లు
+    seelen_wall: వాల్పేపర్ మేనేజర్
 start:
   title: స్వాగతం!
   message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
@@ -230,10 +230,10 @@ save_and_restart: సేవ్ & పున art ప్రారంభించం
 monitors_configurations:
   label: మానిటర్ {{సూచిక}}
 wall:
-  enable: సీలెన్ గోడను ప్రారంభించండి
   interval: ప్రతి (సెకన్లు) వాల్‌పేపర్‌ను మార్చండి
   no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
   backgrounds: వాల్‌పేపర్లు
+  enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
 app_launcher:
   runners:
     label: రన్నర్లు

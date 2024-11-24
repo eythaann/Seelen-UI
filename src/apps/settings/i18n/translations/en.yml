@@ -25,7 +25,7 @@ header:
     seelen_wm: Window Manager
     seelen_weg: Dock/Taskbar
     seelen_rofi: App Launcher
-    seelen_wall: The Wall
+    seelen_wall: Wallpaper Manager
     monitors: Monitors
     specific_apps: Specific Apps
     shortcuts: Shortcuts
@@ -174,7 +174,7 @@ apps_configurations:
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  enable: Enable Seelen Wall
+  enable: Enable Wallpaper Manager
   interval: Change wallpaper every (seconds)
   backgrounds: Wallpapers
   no_background: Empty slideshow, using theme's background instead.

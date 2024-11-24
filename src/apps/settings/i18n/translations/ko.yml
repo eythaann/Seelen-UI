@@ -21,11 +21,11 @@ header:
     shortcuts: 단축키
     developer: 개발자
     info: 정보
-    seelen_wall: 배경화면
     seelen_rofi: 앱 런처
     virtual_desk: 가상 데스크톱
     home: 홈
     mods: 플러그인 및 위젯
+    seelen_wall: 벽지 관리자
 start:
   title: 환영합니다!
   message: >-
@@ -224,9 +224,9 @@ monitors_configurations:
   label: 모니터 {{index}}
 wall:
   no_background: 배경화면이 없습니다. 테마에 내장된 배경화면을 대신 사용합니다.
-  enable: Seelen 배경화면 활성화
   interval: 주기적으로 배경화면 변경하기 (초)
   backgrounds: 배경화면
+  enable: 벽지 관리자를 활성화하십시오
 app_launcher:
   runners:
     explorer: 탐색

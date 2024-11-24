@@ -15,10 +15,10 @@ header:
     seelen_wm: Quản lý cửa sổ
     shortcuts: Phím tắt
     seelen_rofi: Ứng dụng Launcher
-    seelen_wall: Bức tường
     virtual_desk: Máy tính để bàn ảo
     home: Trang chủ
     mods: Plugin & Widget
+    seelen_wall: Quản lý hình nền
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -232,7 +232,7 @@ wall:
   interval: Thay đổi hình nền mỗi (giây)
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
   backgrounds: Hình nền
-  enable: Bật tường Seelen
+  enable: Bật trình quản lý hình nền
 app_launcher:
   runners:
     explorer: Chạy

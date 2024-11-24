@@ -14,11 +14,11 @@ header:
     info: सुचना
     general: जर्नेल
     seelen_wm: वान प्रबन्धक
-    seelen_wall: भित्ता
     seelen_rofi: फोटो लन्चर
     virtual_desk: भर्चुअल डेस्कटपहरू
     home: घर
     mods: प्लगइनहरू र विजेटहरू
+    seelen_wall: वालपेपर प्रबन्धक
 start:
   message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
   message: >-
@@ -232,7 +232,7 @@ wall:
   interval: वालपेपरहरू प्रत्येक (सेकेन्ड) परिवर्तन गर्नुहोस्
   backgrounds: वालपेपरहरू
   no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
-  enable: देख्न सकेनौं
+  enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
 app_launcher:
   runners:
     label: धागक

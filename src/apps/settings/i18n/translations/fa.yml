@@ -15,10 +15,10 @@ header:
     seelen_weg: اسکله/نوار وظیفه
     specific_apps: برنامه های خاص
     seelen_rofi: پرتاب برنامه
-    seelen_wall: دیوار
     virtual_desk: دسک تاپ مجازی
     home: خانه
     mods: پلاگین ها و ابزارک ها
+    seelen_wall: مدیر کاغذ دیواری
 start:
   title: خوش آمدی!
   message_accent: بهره وری خود را با سبک بهینه کنید!
@@ -230,9 +230,9 @@ monitors_configurations:
   label: مانیتور {{فهرست}}
 wall:
   backgrounds: تصاویر پس زمینه
-  enable: Seelen Wall را فعال کنید
   interval: تصویر زمینه را هر (ثانیه) تغییر دهید
   no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
+  enable: مدیر تصویر زمینه را فعال کنید
 app_launcher:
   runners:
     cmd: فرمان

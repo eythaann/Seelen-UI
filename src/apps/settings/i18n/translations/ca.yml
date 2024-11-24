@@ -14,11 +14,11 @@ header:
     monitors: Monitors
     specific_apps: Aplicacions específiques
     general: General
-    seelen_wall: La paret
     seelen_rofi: Llançador d'aplicacions
     virtual_desk: Desktops virtuals
     home: Casa
     mods: Connectors i widgets
+    seelen_wall: Gestor de fons de pantalla
 start:
   title: Benvingut!
   message_accent: Optimitzeu la vostra productivitat amb estil.
@@ -235,7 +235,7 @@ wall:
   backgrounds: Fons de pantalla
   no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
   interval: Canvieu el fons de pantalla cada (segons)
-  enable: Activa la paret de Seelen
+  enable: Activa el gestor de fons de pantalla
 app_launcher:
   runners:
     label: Corredors

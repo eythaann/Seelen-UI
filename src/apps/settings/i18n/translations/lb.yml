@@ -14,11 +14,11 @@ header:
     info: Informatioun
     shortcuts: Ofkierpsen
     seelen_weg: Dock / Taskbar
-    seelen_wall: D'Mauer
     seelen_rofi: App launcher
     virtual_desk: Virtuell Desktops
     home: Doheem
     mods: Plugins & Widgets
+    seelen_wall: Wallpaper Manager
 start:
   title: Wëllkomm!
   message_accent: Optimiséiert Är Produktivitéit mam Stil!
@@ -232,8 +232,8 @@ monitors_configurations:
 wall:
   backgrounds: Wallpapers
   interval: Ännerung Wallpaper all (Sekonnen)
-  enable: Aktivéiert Sendelen Mauer
   no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
+  enable: Aktivéiert Wallpaper Manager
 app_launcher:
   runners:
     cmd: Kommun de Kommentar

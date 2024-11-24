@@ -14,11 +14,11 @@ header:
     seelen_wm: ผู้จัดการหน้าต่าง
     monitors: จอภาพ
     shortcuts: ทางลัด
-    seelen_wall: กำแพง
     seelen_rofi: แอพ Launcher
     virtual_desk: เดสก์ท็อปเสมือนจริง
     home: บ้าน
     mods: ปลั๊กอินและวิดเจ็ต
+    seelen_wall: ผู้จัดการวอลล์เปเปอร์
 start:
   title: ยินดีต้อนรับ!
   message_accent: เพิ่มประสิทธิภาพการทำงานของคุณอย่างมีสไตล์!
@@ -224,10 +224,10 @@ save_and_restart: บันทึกและรีสตาร์ท
 monitors_configurations:
   label: ตรวจสอบ {{index}}
 wall:
-  enable: เปิดใช้งาน Seeelen Wall
   backgrounds: วอลเปเปอร์
   no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
   interval: เปลี่ยนวอลล์เปเปอร์ทุกครั้ง (วินาที)
+  enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
 app_launcher:
   runners:
     cmd: สั่งการ

@@ -14,11 +14,11 @@ header:
     seelen_weg: Dock / Taskbar
     developer: Żviluppatur
     monitors: Monitors
-    seelen_wall: Il-ħajt
     seelen_rofi: APP Lancher
     virtual_desk: Desktops virtwali
     home: Id-dar
     mods: Plugins u Widgets
+    seelen_wall: Maniġer tal-Wallpaper
 start:
   title: Merħba!
   message: >-
@@ -230,10 +230,10 @@ save_and_restart: Issejvja u terġa 'tibda
 monitors_configurations:
   label: Monitor {{indiċi}}
 wall:
-  enable: Jippermetti ħajt tas-seelen
   interval: Ibdel il-wallpaper kull (sekondi)
   backgrounds: Wallpapers
   no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
+  enable: Enable Wallpaper Manager
 app_launcher:
   runners:
     explorer: Ġirja

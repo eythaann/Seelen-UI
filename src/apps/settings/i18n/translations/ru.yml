@@ -21,11 +21,11 @@ header:
     shortcuts: Ярлыки
     developer: Разработчик
     info: Информация
-    seelen_wall: Стена
     seelen_rofi: Приложение пусковая установка
     virtual_desk: Виртуальные рабочие столы
     home: Дом
     mods: Плагины и виджеты
+    seelen_wall: Управляющий обоями
 start:
   title: Добро пожаловать!
   message: >-
@@ -235,7 +235,7 @@ wall:
   interval: Измените обои каждый (секунды)
   backgrounds: Обои
   no_background: Пустое слайд -шоу, используя фон темы.
-  enable: Включить стену Сиэлен
+  enable: Включить менеджер обоев
 app_launcher:
   runners:
     explorer: Бегать

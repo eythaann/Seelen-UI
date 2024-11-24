@@ -14,11 +14,11 @@ header:
     seelen_wm: Менаџер прозора
     specific_apps: Специфичне апликације
     developer: Разводнички
-    seelen_wall: Зид
     seelen_rofi: Лаунцхер
     virtual_desk: Виртуелни радне површине
     home: Дом
     mods: Додаци и виџети
+    seelen_wall: Менаџер позадина
 start:
   title: Добродошли!
   message_accent: Оптимизирајте своју продуктивност стилом!
@@ -233,8 +233,8 @@ monitors_configurations:
 wall:
   interval: Промените позадину сваке (секунде)
   no_background: Празан презентацију, уместо тога користећи прибор за тему.
-  enable: Омогућите Виселен зид
   backgrounds: Позадине
+  enable: Омогућите менаџера позадина
 app_launcher:
   runners:
     cmd: Командант

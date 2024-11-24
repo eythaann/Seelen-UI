@@ -15,10 +15,10 @@ header:
     seelen_bar: סרגל כלים מפואר
     monitors: צגים
     seelen_rofi: משגר אפליקציות
-    seelen_wall: הקיר
     virtual_desk: שולחנות עבודה וירטואליים
     home: בַּיִת
     mods: תוספים ווידג'טים
+    seelen_wall: מנהל טפטים
 start:
   title: ברוך הבא!
   message: >-
@@ -228,7 +228,7 @@ wall:
   backgrounds: טפטים
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
   interval: החלף טפטים כל (שניות)
-  enable: אפשר קיר Seelen
+  enable: אפשר מנהל טפטים
 app_launcher:
   runners:
     cmd: פְּקוּדָה

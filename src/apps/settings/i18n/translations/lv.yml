@@ -14,11 +14,11 @@ header:
     general: Ģenerāldirektors
     seelen_weg: Doks/uzdevumjosla
     monitors: Monitori
-    seelen_wall: Siena
     seelen_rofi: Lietotņu palaišana
     virtual_desk: Virtuālās galddatori
     home: Mājas
     mods: Spraudņi un logrīki
+    seelen_wall: Tapešu vadītājs
 start:
   message_accent: Optimizējiet savu produktivitāti ar stilu!
   message: >-
@@ -228,10 +228,10 @@ save_and_restart: Saglabāt un restartēt
 monitors_configurations:
   label: Monitors {{indekss}}
 wall:
-  enable: Iespējot Seelen Wall
   no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
   interval: Ikreiz nomainiet tapetes (sekundes)
   backgrounds: Tapetes
+  enable: Iespējot fona attēlu pārvaldnieku
 app_launcher:
   runners:
     explorer: Izkropļot

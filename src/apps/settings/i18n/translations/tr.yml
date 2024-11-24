@@ -14,11 +14,11 @@ header:
     specific_apps: Belirli Uygulamalar
     monitors: Monitörler
     shortcuts: Kısayollar
-    seelen_wall: Seelen Duvar
     seelen_rofi: Uygulama Başlatıcısı
     virtual_desk: Sanal Masaüstleri
     home: Ana Sayfa
     mods: Eklentiler ve Widget'lar
+    seelen_wall: Duvar Kağıdı Yöneticisi
 start:
   title: Hoş Geldiniz!
   message_accent: Verimliliğinizi stil ile optimize edin!
@@ -233,7 +233,7 @@ wall:
   no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
   backgrounds: Duvar Kağıtları
   interval: Duvar Kağıdını Her Saniye Değiştir
-  enable: Seelen Duvar'ı Etkinleştir
+  enable: Duvar Kağıdı Yöneticisini Etkinleştir
 app_launcher:
   runners:
     cmd: Komut İstemi

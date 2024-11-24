@@ -15,10 +15,10 @@ header:
     specific_apps: Erityiset sovellukset
     general: Yleinen
     seelen_rofi: Sovelluskäynnistys
-    seelen_wall: Seinä
     virtual_desk: Virtuaalinen työpöytä
     home: Kotiin
     mods: Lisäosat ja widgetit
+    seelen_wall: Taustakuvan johtaja
 start:
   title: Tervetuloa!
   message_accent: Optimoi tuottavuus tyylillä!
@@ -233,9 +233,9 @@ monitors_configurations:
   label: Monitor {{hakemisto}}
 wall:
   interval: Vaihda taustakuva joka (sekunti)
-  enable: Ota Seelen seinälle käyttöön
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
   backgrounds: Taustakuvat
+  enable: Ota taustakuvan johtaja käyttöön
 app_launcher:
   runners:
     cmd: Komento

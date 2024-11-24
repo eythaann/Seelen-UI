@@ -14,11 +14,11 @@ header:
     specific_apps: Aplicații specifice
     seelen_bar: Bara de instrumente fantezistă
     monitors: Monitoare
-    seelen_wall: Peretele
     seelen_rofi: Lansator de aplicații
     virtual_desk: Desktop -uri virtuale
     home: Acasă
     mods: Pluginuri și widget-uri
+    seelen_wall: Manager de tapet
 start:
   title: Bine ati venit!
   message_accent: Optimizează -ți productivitatea cu stil!
@@ -232,10 +232,10 @@ save_and_restart: Salvați și reporniți
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  enable: Activați Seelen Wall
   no_background: Slideshow gol, folosind în schimb fundalul temei.
   interval: Schimbați tapet fiecare (secunde)
   backgrounds: Imagini de fundal
+  enable: Activați manager de tapet
 app_launcher:
   runners:
     cmd: Comanda

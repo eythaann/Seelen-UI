@@ -14,11 +14,11 @@ header:
     monitors: Monitori
     shortcuts: Prečac
     developer: Programer
-    seelen_wall: Zid
     seelen_rofi: Pokretač aplikacija
     virtual_desk: Virtualna radna računala
     home: Dom
     mods: Dodaci i widgeti
+    seelen_wall: Upravitelj pozadine
 start:
   message_accent: Optimizirajte svoju produktivnost stilom!
   message: >-
@@ -232,10 +232,10 @@ save_and_restart: Spremi i ponovno pokrenite
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  enable: Omogući Seelen zid
   backgrounds: Pozadine
   no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
   interval: Promijenite pozadinu svake (sekunde)
+  enable: Omogući upravitelja pozadina
 app_launcher:
   runners:
     cmd: Naredba

@@ -14,11 +14,11 @@ header:
     shortcuts: Kurtefîlm
     specific_apps: Serlêdanên taybetî
     monitors: Çavdêr
-    seelen_wall: Dîwar
     seelen_rofi: App launcher
     virtual_desk: Desktopên Virtual
     home: Xane
     mods: Plugin & Widgets
+    seelen_wall: Gerînendeyê Wallpaper
 start:
   title: Bi xêr hatî!
   message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
@@ -228,9 +228,9 @@ monitors_configurations:
   label: Monitor {{Index-}
 wall:
   backgrounds: Wallpapers
-  enable: Dîwarê Seelen çalak bike
   interval: Wallpaper her (seconds)
   no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
+  enable: Gerînendeyê Wallpaper çalak bike
 app_launcher:
   runners:
     cmd: Ferman

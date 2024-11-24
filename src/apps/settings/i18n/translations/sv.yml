@@ -15,10 +15,10 @@ header:
     seelen_bar: Fint verktygsfält
     shortcuts: Genvägar
     seelen_rofi: Appstart
-    seelen_wall: Väggen
     virtual_desk: Virtuella stationära datorer
     home: Hem
     mods: Plugins och widgets
+    seelen_wall: Tapetchef
 start:
   title: Välkommen!
   message_accent: Optimera din produktivitet med stil!
@@ -234,8 +234,8 @@ monitors_configurations:
 wall:
   no_background: Tomt bildspel, med temas bakgrund istället.
   interval: Ändra tapeter varannan (sekunder)
-  enable: Aktivera Seelen Wall
   backgrounds: Tapeter
+  enable: Aktivera tapetchef
 app_launcher:
   runners:
     cmd: Kommando
