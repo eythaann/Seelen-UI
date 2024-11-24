@@ -59,4 +59,12 @@ export async function declareDocumentAsLayeredHitbox() {
       webview.setIgnoreCursorEvents(false);
     }
   });
+
+  window.addEventListener('touchstart', (e) => {
+    let isOverBody = e.target == document.body;
+    if (isOverBody && !ignoring_cursor_events) {
+      ignoring_cursor_events = true;
+      webview.setIgnoreCursorEvents(true);
+    }
+  });
 }
