@@ -1,5 +1,8 @@
 use getset::Getters;
-use windows::Win32::{Foundation::RECT, Graphics::Gdi::HMONITOR};
+use windows::Win32::{
+    Foundation::RECT,
+    Graphics::Gdi::{DEVMODE_DISPLAY_ORIENTATION, HMONITOR},
+};
 
 use crate::{error_handler::Result, modules::input::domain::Point};
 
@@ -12,6 +15,10 @@ pub struct Monitor {
     work_area: RECT,
     #[getset(get = "pub")]
     device_pixel_ratio: u32,
+    #[getset(get = "pub")]
+    display_orientation: DEVMODE_DISPLAY_ORIENTATION,
+    #[getset(get = "pub")]
+    tablet_mode: bool,
 }
 
 unsafe impl Send for Monitor {}
@@ -42,12 +49,16 @@ impl Monitor {
             monitor,
             work_area: WindowsApi::monitor_rect(monitor).ok().unwrap(),
             device_pixel_ratio: WindowsApi::get_device_pixel_ratio(monitor).ok().unwrap() as u32,
+            display_orientation: WindowsApi::get_display_orientation().ok().unwrap(),
+            tablet_mode: WindowsApi::is_in_tablet_mode().ok().unwrap(),
         }
     }
 
     pub fn update(&mut self) -> Result<()> {
         self.work_area = WindowsApi::monitor_rect(self.monitor)?;
         self.device_pixel_ratio = WindowsApi::get_device_pixel_ratio(self.monitor)? as u32;
+        self.display_orientation = WindowsApi::get_display_orientation()?;
+        self.tablet_mode = WindowsApi::is_in_tablet_mode()?;
 
         Ok(())
     }

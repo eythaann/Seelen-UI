@@ -48,8 +48,10 @@ use windows::{
                 DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint, MonitorFromWindow, HDC,
-                HMONITOR, MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
+                EnumDisplayMonitors, EnumDisplaySettingsA, GetMonitorInfoW, MonitorFromPoint,
+                MonitorFromWindow, DEVMODEA, DEVMODE_DISPLAY_ORIENTATION, DMDO_DEFAULT,
+                ENUM_CURRENT_SETTINGS, HDC, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
+                MONITOR_DEFAULTTOPRIMARY,
             },
         },
         Security::{
@@ -88,11 +90,11 @@ use windows::{
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
                 PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE, GW_OWNER, HWND_TOP,
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
-                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
-                SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER,
-                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CONVERTIBLESLATEMODE, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
                 WS_SIZEBOX, WS_THICKFRAME,
             },
@@ -149,6 +151,20 @@ impl WindowsApi {
         }
         .ok()?;
         Ok(())
+    }
+
+    pub fn get_display_orientation() -> Result<DEVMODE_DISPLAY_ORIENTATION> {
+        let mut devmode = DEVMODEA::default();
+        unsafe {
+            if EnumDisplaySettingsA(None, ENUM_CURRENT_SETTINGS, &mut devmode).into() {
+                return Ok(devmode.Anonymous1.Anonymous2.dmDisplayOrientation);
+            }
+        }
+        Ok(DMDO_DEFAULT)
+    }
+
+    pub fn is_in_tablet_mode() -> Result<bool> {
+        Ok(unsafe { GetSystemMetrics(SM_CONVERTIBLESLATEMODE) } == 0)
     }
 
     pub fn enum_windows(callback: WNDENUMPROC, callback_data_address: isize) -> Result<()> {

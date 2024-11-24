@@ -47,7 +47,22 @@ impl SeelenInstanceContainer {
             self.handle = id;
             self.monitor = Monitor::from(id);
         } else {
+            #[allow(clippy::clone_on_copy)]
+            let before_update = self.monitor.clone();
             self.monitor.update().ok();
+
+            if *self.monitor.display_orientation() != *before_update.display_orientation() {
+                log::trace!(
+                    "Orientation changed to {:?}!",
+                    self.monitor.display_orientation()
+                )
+            }
+            if *self.monitor.tablet_mode() != *before_update.tablet_mode() {
+                log::trace!(
+                    "Touch priority changed to {:?}!",
+                    self.monitor.tablet_mode()
+                )
+            }
         }
     }
 
