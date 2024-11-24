@@ -2,7 +2,6 @@ use getset::{Getters, MutGetters};
 
 use crate::{
     error_handler::Result,
-    log_error,
     seelen_bar::FancyToolbar,
     seelen_weg::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
@@ -44,9 +43,12 @@ impl SeelenInstanceContainer {
     }
 
     pub fn update_handle(&mut self, id: HMONITOR) {
-        self.handle = id;
-        self.monitor = Monitor::from(id);
-        log_error!(self.ensure_positions());
+        if self.handle != id {
+            self.handle = id;
+            self.monitor = Monitor::from(id);
+        } else {
+            self.monitor.update().ok();
+        }
     }
 
     pub fn ensure_positions(&mut self) -> Result<()> {
