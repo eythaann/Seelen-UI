@@ -22,7 +22,7 @@ export function Notifications() {
   const notifications = useSelector(Selectors.notifications);
 
   return (
-    <BackgroundByLayersV2 className="notifications">
+    <BackgroundByLayersV2 className="notifications" onContextMenu={(e) => e.stopPropagation()}>
       <div className="notifications-header">
         <span>Notifications</span>
         <Button

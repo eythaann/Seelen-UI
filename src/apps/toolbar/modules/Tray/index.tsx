@@ -87,7 +87,7 @@ export function TrayModule({ module }: Props) {
       onOpenChange={setOpenPreview}
       arrow={false}
       content={
-        <BackgroundByLayersV2 className="tray" prefix="tray">
+        <BackgroundByLayersV2 className="tray" prefix="tray" onContextMenu={(e) => e.stopPropagation()}>
           <ul className="tray-list">
             {trayList.map((tray, idx) => (
               <TrayItem key={idx} idx={idx} tray={tray} onAction={() => setOpenPreview(false)} />
