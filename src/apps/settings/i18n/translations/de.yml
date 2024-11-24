@@ -233,9 +233,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
-  interval: Wechseln Sie das Hintergrundbild alle [Sekunden]
   backgrounds: Hintergrundbilder
   enable: Tapetenmanager aktivieren
+  interval: Wechseln Sie die Hintergrundbild
+  random: Die Diashow randomisieren
+  hours: Std.
+  seconds: Sekunden
+  minutes: Minuten
 app_launcher:
   runners:
     cmd: Befehl

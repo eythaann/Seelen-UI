@@ -234,8 +234,12 @@ monitors_configurations:
 wall:
   backgrounds: Bakgrunnsbilder
   no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
-  interval: Endre bakgrunnsbilder hver (sekunder)
   enable: Aktiver bakgrunnssjef
+  random: Randomiser lysbildefremvisning
+  interval: Endre bakgrunnsbilde hver
+  minutes: minutter
+  seconds: sekunder
+  hours: timer
 app_launcher:
   runners:
     cmd: Kommando

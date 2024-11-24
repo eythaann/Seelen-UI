@@ -231,10 +231,14 @@ save_and_restart: Сачувај и поново покрените
 monitors_configurations:
   label: Монитор {{Индек}}
 wall:
-  interval: Промените позадину сваке (секунде)
   no_background: Празан презентацију, уместо тога користећи прибор за тему.
   backgrounds: Позадине
   enable: Омогућите менаџера позадина
+  interval: Промените позадину сваком
+  random: Рандомизе СлидеСхов
+  minutes: минут
+  seconds: секунди
+  hours: сати
 app_launcher:
   runners:
     cmd: Командант

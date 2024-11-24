@@ -233,12 +233,16 @@ save_and_restart: Guardar y reiniciar
 monitors_configurations:
   label: Monitor {{índice}}
 wall:
-  interval: Cambiar papel tapiz cada (segundos)
   no_background: >-
     Presentación de diapositivas vacías, utilizando el fondo del tema en su
     lugar.
   backgrounds: Fondos de pantalla
   enable: Habilitar gerente de fondo de pantalla
+  interval: Cambiar papel tapiz cada
+  random: Aleatorizar la presentación de diapositivas
+  minutes: minutos
+  hours: horas
+  seconds: artículos de segunda clase
 app_launcher:
   runners:
     explorer: Correr

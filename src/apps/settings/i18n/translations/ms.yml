@@ -230,10 +230,14 @@ save_and_restart: Jimat & mulakan semula
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  interval: Tukar kertas dinding setiap (saat)
   backgrounds: Kertas dinding
   no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
   enable: Dayakan Pengurus Wallpaper
+  random: Rawak tayangan slaid
+  interval: Tukar kertas dinding setiap
+  hours: jam
+  seconds: saat
+  minutes: minit
 app_launcher:
   runners:
     explorer: Jalankan

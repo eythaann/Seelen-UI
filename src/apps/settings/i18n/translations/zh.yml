@@ -222,9 +222,13 @@ monitors_configurations:
   label: 监视 {{index}}
 wall:
   backgrounds: 壁纸
-  interval: 每次更改壁纸（秒）
   no_background: 使用的该主题背景为空幻灯片
   enable: 启用壁纸经理
+  interval: 每次更改墙纸
+  random: 随机化幻灯片
+  seconds: 秒
+  minutes: 分钟
+  hours: 小时
 app_launcher:
   runners:
     cmd: 命令行

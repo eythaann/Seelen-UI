@@ -227,8 +227,12 @@ monitors_configurations:
 wall:
   backgrounds: خلفيات
   no_background: عرض شرائح فارغ ، باستخدام خلفية السمة بدلاً من ذلك.
-  interval: تغيير خلفية كل (ثواني)
   enable: تمكين مدير خلفية
+  random: عرض عشوائي عرض الشرائح
+  interval: تغيير خلفية كل
+  hours: ساعات
+  seconds: ثوان
+  minutes: دقائق
 app_launcher:
   runners:
     explorer: يجري

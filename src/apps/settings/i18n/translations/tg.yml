@@ -227,10 +227,14 @@ save_and_restart: Наҷот ва бозоғоз
 monitors_configurations:
   label: Монитор {Индекс}}
 wall:
-  interval: Девори ҳар (сония) -ро иваз кунед
   backgrounds: Обои обу
   no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
   enable: Фаъолсозии менеҷери обои
+  interval: Тағйироти ҳар як
+  random: Велосипедро тасодуфан
+  seconds: сонияҳо
+  minutes: дақиқа
+  hours: соат
 app_launcher:
   runners:
     label: Давандагон

@@ -231,9 +231,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   backgrounds: Wallpapers
-  interval: Ännerung Wallpaper all (Sekonnen)
   no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
   enable: Aktivéiert Wallpaper Manager
+  interval: Änneren Wallpaper all
+  random: Zoufälleg Slideshow
+  minutes: Minutte vun der Minutten
+  hours: Stonnen.
+  seconds: Sekonnen
 app_launcher:
   runners:
     cmd: Kommun de Kommentar

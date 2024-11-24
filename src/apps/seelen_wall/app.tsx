@@ -9,28 +9,40 @@ import { ThemedWallpaper, Wallpaper } from './modules/wallpaper/infra';
 import { Selectors } from './modules/shared/store/app';
 
 export function App() {
-  const [currentBg, setCurrentBg] = useState(0);
   const [scope, animate] = useAnimate<HTMLDivElement>();
 
   const version = useSelector(Selectors.version);
-  const { backgrounds, interval } = useSelector(Selectors.settings);
+  const { backgrounds, interval, randomize } = useSelector(Selectors.settings);
 
-  useInterval(() => {
-    if (backgrounds.length > 1) {
-      animate(scope.current, { opacity: 0.1 }).then(() => {
-        setCurrentBg((currentIdx) => currentIdx + 1);
-      });
-    }
-  }, interval * 1000);
+  const [currentBg, setCurrentBg] = useState(
+    randomize ? Math.floor(Math.random() * backgrounds.length) : 0,
+  );
+
+  useInterval(
+    () => {
+      if (backgrounds.length > 1) {
+        animate(scope.current, { opacity: 0.1 }).then(() => {
+          if (randomize) {
+            setCurrentBg(Math.floor(Math.random() * backgrounds.length));
+          } else {
+            setCurrentBg((currentIdx) => (currentIdx + 1) % backgrounds.length);
+          }
+        });
+      }
+    },
+    (interval < 1 ? 1 : interval) * 1000,
+    [randomize, backgrounds.length],
+  );
 
   useEffect(() => {
     getCurrentWindow().show();
   }, []);
 
-  const background = backgrounds[currentBg % backgrounds.length];
+  const background = backgrounds[currentBg];
   if (!background) {
     return <ThemedWallpaper />;
   }
+
   return (
     <Wallpaper
       key={version}

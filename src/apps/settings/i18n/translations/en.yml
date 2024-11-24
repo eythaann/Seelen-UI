@@ -175,9 +175,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   enable: Enable Wallpaper Manager
-  interval: Change wallpaper every (seconds)
+  interval: Change wallpaper every
+  random: Randomize slideshow
   backgrounds: Wallpapers
   no_background: Empty slideshow, using theme's background instead.
+  hours: hours
+  minutes: minutes
+  seconds: seconds
 app_launcher:
   enable: Enable App Launcher
   monitor: Monitor to show

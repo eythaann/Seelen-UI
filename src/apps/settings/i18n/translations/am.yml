@@ -225,9 +225,13 @@ monitors_configurations:
   label: ይቆጣጠሩ {{አው.ፊ.}}}}
 wall:
   backgrounds: የግድግዳ ወረቀቶች
-  interval: የግድግዳ ወረቀት እያንዳንዱን (ሰከንዶች) ይለውጡ
   no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
   enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
+  random: የዘፈቀደ ተንሸራታች ትዕይንት
+  interval: የግድግዳ ወረቀት እያንዳንዱን ይለውጡ
+  minutes: ደቂቃዎች
+  hours: ሰዓታት
+  seconds: ሰከንዶች
 app_launcher:
   runners:
     explorer: ሩጫ

@@ -228,9 +228,13 @@ monitors_configurations:
   label: Monitor {{Index-}
 wall:
   backgrounds: Wallpapers
-  interval: Wallpaper her (seconds)
   no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
   enable: Gerînendeyê Wallpaper çalak bike
+  interval: Her kesê biguherînin
+  random: Slideshow Randomize
+  minutes: deqq
+  seconds: seconds
+  hours: demjimêr
 app_launcher:
   runners:
     cmd: Ferman

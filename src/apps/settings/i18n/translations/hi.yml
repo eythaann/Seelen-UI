@@ -231,8 +231,12 @@ monitors_configurations:
 wall:
   backgrounds: वॉलपेपर
   no_background: खाली स्लाइड शो, इसके बजाय थीम की पृष्ठभूमि का उपयोग करके।
-  interval: वॉलपेपर हर (सेकंड) बदलें
   enable: वॉलपेपर प्रबंधक सक्षम करें
+  interval: वॉलपेपर हर बदलें
+  random: यादृच्छिक स्लाइड शो
+  hours: घंटे
+  seconds: सेकंड
+  minutes: मिनट
 app_launcher:
   runners:
     explorer: दौड़ना

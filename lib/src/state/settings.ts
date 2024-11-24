@@ -35,6 +35,7 @@ export class SeelenWallSettings {
   backgrounds: SeelenWallWallpaper[] = [];
   /** Interval in seconds */
   interval: number = 60;
+  randomize: boolean = false;
 }
 
 export enum SeelenLauncherMonitor {

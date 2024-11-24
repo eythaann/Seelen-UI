@@ -224,9 +224,13 @@ monitors_configurations:
   label: 모니터 {{index}}
 wall:
   no_background: 배경화면이 없습니다. 테마에 내장된 배경화면을 대신 사용합니다.
-  interval: 주기적으로 배경화면 변경하기 (초)
   backgrounds: 배경화면
   enable: 벽지 관리자를 활성화하십시오
+  random: 슬라이드 쇼를 무작위 화하십시오
+  interval: 매번 벽지를 변경하십시오
+  minutes: 분
+  hours: 시간
+  seconds: 초
 app_launcher:
   runners:
     explorer: 탐색

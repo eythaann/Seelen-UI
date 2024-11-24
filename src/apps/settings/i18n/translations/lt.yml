@@ -229,9 +229,13 @@ monitors_configurations:
   label: Monitorius {{index}}
 wall:
   backgrounds: Tapetai
-  interval: Keiskite tapetų kiekvieną (sekundes)
   no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
   enable: Įgalinkite tapetų tvarkytuvę
+  interval: Keiskite tapetų kiekvieną
+  random: Atsitiktinis skaidrių demonstravimas
+  hours: valandos
+  minutes: minutės
+  seconds: sekundės
 app_launcher:
   runners:
     explorer: Bėgti

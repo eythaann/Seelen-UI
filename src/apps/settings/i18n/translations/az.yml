@@ -229,10 +229,14 @@ save_and_restart: Saxla və yenidən başladın
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  interval: Hər (saniyə) divar kağızı dəyişdirin
   backgrounds: Divar kağızları
   no_background: Bunun əvəzinə mövzunun fonundan istifadə edərək boş slayd şousu.
   enable: Divar kağızı menecerini aktivləşdirin
+  interval: Divar kağızı hər birini dəyişdirin
+  random: Slayd şousu
+  hours: sair
+  seconds: saniyə
+  minutes: dəqiqəlik
 app_launcher:
   runners:
     label: Qaçışçı

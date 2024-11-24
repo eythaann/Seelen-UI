@@ -229,10 +229,14 @@ save_and_restart: Lưu & Khởi động lại
 monitors_configurations:
   label: Màn hình {{index}}
 wall:
-  interval: Thay đổi hình nền mỗi (giây)
   no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
   backgrounds: Hình nền
   enable: Bật trình quản lý hình nền
+  interval: Thay đổi hình nền mỗi
+  random: Slideshow ngẫu nhiên
+  hours: giờ
+  minutes: phút
+  seconds: giây
 app_launcher:
   runners:
     explorer: Chạy

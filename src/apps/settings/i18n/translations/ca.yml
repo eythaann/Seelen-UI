@@ -234,8 +234,12 @@ monitors_configurations:
 wall:
   backgrounds: Fons de pantalla
   no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
-  interval: Canvieu el fons de pantalla cada (segons)
   enable: Activa el gestor de fons de pantalla
+  random: Randomize Show de diapositives
+  interval: Canvieu el fons de pantalla cada
+  hours: hores
+  seconds: segons
+  minutes: minuts
 app_launcher:
   runners:
     label: Corredors

@@ -232,10 +232,14 @@ save_and_restart: Tallenna ja käynnistä uudelleen
 monitors_configurations:
   label: Monitor {{hakemisto}}
 wall:
-  interval: Vaihda taustakuva joka (sekunti)
   no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
   backgrounds: Taustakuvat
   enable: Ota taustakuvan johtaja käyttöön
+  random: Satunnaista diaesitys
+  interval: Vaihda taustakuva jokainen
+  hours: tuntia
+  seconds: sekunti
+  minutes: minuutti
 app_launcher:
   runners:
     cmd: Komento

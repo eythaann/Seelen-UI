@@ -234,9 +234,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Άδειο slideshow, χρησιμοποιώντας το φόντο του θέματος αντ 'αυτού.
-  interval: Αλλάξτε ταπετσαρία κάθε (δευτερόλεπτα)
   backgrounds: Ταπετσαρίες
   enable: Ενεργοποίηση διαχειριστή ταπετσαρίας
+  interval: Αλλάξτε ταπετσαρία κάθε
+  random: Τυχαία παρουσίαση
+  minutes: πρακτικά
+  seconds: δευτερόλεπτα
+  hours: ώρες
 app_launcher:
   runners:
     explorer: Τρέξιμο

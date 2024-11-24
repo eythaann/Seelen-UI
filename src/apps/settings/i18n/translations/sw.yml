@@ -228,8 +228,12 @@ monitors_configurations:
 wall:
   no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
   backgrounds: Wallpapers
-  interval: Badilisha Ukuta kila (sekunde)
   enable: Washa Meneja wa Ukuta
+  interval: Badilisha Ukuta kila
+  random: Sisitiza slideshow
+  hours: masaa
+  minutes: dakika
+  seconds: sekunde
 app_launcher:
   runners:
     label: Wakimbiaji

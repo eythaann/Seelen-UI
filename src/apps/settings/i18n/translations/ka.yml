@@ -234,8 +234,12 @@ monitors_configurations:
 wall:
   no_background: ცარიელი სლაიდშოუ, სამაგიეროდ თემის ფონის გამოყენებით.
   backgrounds: ფონები
-  interval: ფონი შეცვალეთ ყოველ (წამში)
   enable: ჩართეთ ფონი მენეჯერი
+  interval: შეცვალეთ ფონი ყველა
+  random: რანდომიზაცია სლაიდშოუ
+  minutes: წუთი
+  seconds: წამები
+  hours: საათი
 app_launcher:
   runners:
     cmd: ბრძანება

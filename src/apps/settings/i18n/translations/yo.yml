@@ -226,9 +226,13 @@ monitors_configurations:
   label: Adirẹsi {{Ṣe atọka}}
 wall:
   backgrounds: Ogiri ogiri
-  interval: Yi ogiri ogiri gbogbo (awọn aaya)
   no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
   enable: Mu oluṣakoso ogiri ṣiṣẹ
+  interval: Ayipada ogiri ni gbogbo
+  random: Afikun ifaworanhan
+  minutes: iṣẹju
+  hours: wakati
+  seconds: aaya
 app_launcher:
   runners:
     explorer: Sare

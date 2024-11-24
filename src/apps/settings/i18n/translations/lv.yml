@@ -229,9 +229,13 @@ monitors_configurations:
   label: Monitors {{indekss}}
 wall:
   no_background: Tukša slaidrāde, tā vietā izmantojot tēmas fonu.
-  interval: Ikreiz nomainiet tapetes (sekundes)
   backgrounds: Tapetes
   enable: Iespējot fona attēlu pārvaldnieku
+  interval: Mainiet fona attēlus katru
+  random: Randomizējiet slaidrādi
+  minutes: protokols
+  seconds: sekundes
+  hours: laiks
 app_launcher:
   runners:
     explorer: Izkropļot

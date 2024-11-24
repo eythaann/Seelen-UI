@@ -1,6 +1,7 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Button, InputNumber, Switch } from 'antd';
 import { Reorder } from 'framer-motion';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { SeelenWallWallpaper } from 'seelen-core';
@@ -17,21 +18,41 @@ export function WallSettings() {
   const wall = useSelector(newSelectors.wall);
   const { enabled, backgrounds, interval } = wall;
 
+  const [time, setTime] = useState({
+    hours: Math.floor(interval / 3600),
+    minutes: Math.floor((interval / 60) % 60),
+    seconds: interval % 60,
+  });
+
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  function onChangeEnabled(value: boolean) {
-    dispatch(RootActions.setWall({ ...wall, enabled: value }));
+  useEffect(() => {
+    setTime({
+      hours: Math.floor(interval / 3600),
+      minutes: Math.floor((interval / 60) % 60),
+      seconds: interval % 60,
+    });
+  }, [interval]);
+
+  const updateWall = (changes: Partial<typeof wall>) => {
+    dispatch(RootActions.setWall({ ...wall, ...changes }));
+  };
+
+  function onChangeEnabled(enabled: boolean) {
+    updateWall({ enabled });
   }
 
-  function onChangeInterval(interval: number | null) {
-    if (interval) {
-      dispatch(RootActions.setWall({ ...wall, interval }));
-    }
-  }
+  const updateTime = (key: 'hours' | 'minutes' | 'seconds', value: number | null) => {
+    if (value === null) return;
+    const newTime = { ...time, [key]: value };
+    setTime(newTime);
+    const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60 + newTime.seconds, 1);
+    updateWall({ interval: newInterval });
+  };
 
   function onChangeBackgrounds(backgrounds: SeelenWallWallpaper[]) {
-    dispatch(RootActions.setWall({ ...wall, backgrounds }));
+    updateWall({ backgrounds });
   }
 
   async function onAddBackgrounds() {
@@ -69,9 +90,28 @@ export function WallSettings() {
           <b>{t('wall.enable')}</b>
           <Switch value={enabled} onChange={onChangeEnabled} />
         </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsOption>
+          <b>{t('wall.random')}</b>
+          <Switch value={wall.randomize} onChange={(randomize) => updateWall({ randomize })} />
+        </SettingsOption>
         <SettingsOption>
           <b>{t('wall.interval')}</b>
-          <InputNumber value={interval} onChange={onChangeInterval} min={1} />
+          <div className={cs.interval}>
+            {['hours', 'minutes', 'seconds'].map((unit) => (
+              <div key={unit}>
+                <b>{t(`wall.${unit}`)}:</b>
+                <InputNumber
+                  value={time[unit as keyof typeof time]}
+                  onChange={(value) => updateTime(unit as 'hours' | 'minutes' | 'seconds', value)}
+                  min={0}
+                  style={{ width: 50 }}
+                />
+              </div>
+            ))}
+          </div>
         </SettingsOption>
       </SettingsGroup>
 

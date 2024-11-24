@@ -230,9 +230,13 @@ monitors_configurations:
   label: مانیتور {{فهرست}}
 wall:
   backgrounds: تصاویر پس زمینه
-  interval: تصویر زمینه را هر (ثانیه) تغییر دهید
   no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
   enable: مدیر تصویر زمینه را فعال کنید
+  random: نمایش پرده ای تصادفی
+  interval: کاغذ دیواری را تغییر دهید
+  minutes: دقایقی
+  hours: ساعت
+  seconds: ثانیه
 app_launcher:
   runners:
     cmd: فرمان

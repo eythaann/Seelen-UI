@@ -230,9 +230,13 @@ monitors_configurations:
   label: Monitor {{indeks}}
 wall:
   backgrounds: Taustapildid
-  interval: Muutke tapeet iga (sekundit)
   no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
   enable: Luba tapeedihaldur
+  interval: Vahetage tapeeti iga
+  random: Randoriseeri slaidiseanss
+  seconds: sekundid
+  minutes: protokoll
+  hours: tööaeg
 app_launcher:
   runners:
     cmd: Käsk

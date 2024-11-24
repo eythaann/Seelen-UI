@@ -232,8 +232,12 @@ monitors_configurations:
 wall:
   no_background: Порожнє слайд -шоу, використовуючи фон теми.
   backgrounds: Шпалери
-  interval: Змінюйте шпалери кожні (секунди)
   enable: Увімкнути менеджер шпалер
+  interval: Змініть шпалери кожен
+  random: Рандомізувати слайд -шоу
+  seconds: секунди
+  hours: годинник
+  minutes: хвилини
 app_launcher:
   runners:
     explorer: Пробігати

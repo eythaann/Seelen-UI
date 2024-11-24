@@ -230,10 +230,14 @@ save_and_restart: Issejvja u terġa 'tibda
 monitors_configurations:
   label: Monitor {{indiċi}}
 wall:
-  interval: Ibdel il-wallpaper kull (sekondi)
   backgrounds: Wallpapers
   no_background: Slideshow vojta, billi tuża l-isfond tat-tema minflok.
   enable: Enable Wallpaper Manager
+  interval: Ibdel il-wallpaper kull
+  random: Randomize slideshow
+  seconds: sekondi
+  minutes: minuti
+  hours: sigħat
 app_launcher:
   runners:
     explorer: Ġirja

@@ -231,8 +231,12 @@ monitors_configurations:
 wall:
   backgrounds: Háttérképek
   no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
-  interval: Változtassa meg a háttérképet minden (másodperc)
   enable: Engedélyezze a háttérképkezelőt
+  interval: Változtasd meg minden háttérképet
+  random: Véletlenszerűsítse a diavetítést
+  minutes: jegyzőkönyv
+  hours: órák
+  seconds: másodpercek
 app_launcher:
   runners:
     cmd: Parancs

@@ -228,8 +228,12 @@ monitors_configurations:
 wall:
   backgrounds: والپيپرونه
   no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
-  interval: وال پیپر هر (ثانیې)
   enable: د وال پیپر مدیر فعال کړئ
+  random: تصادفي سلایډ
+  interval: په وال پیپر بدل کړئ
+  minutes: دقیقې
+  seconds: ثانیې
+  hours: ساعتونه
 app_launcher:
   runners:
     explorer: منډه وهل

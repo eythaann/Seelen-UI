@@ -234,8 +234,12 @@ monitors_configurations:
 wall:
   backgrounds: Baggrunde
   no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
-  interval: Skift tapet hver (sekunder)
   enable: Aktivér tapet manager
+  interval: Skift tapet hver
+  random: Randomiser slideshow
+  seconds: sekunder
+  hours: timer
+  minutes: minutter
 app_launcher:
   runners:
     cmd: Kommando

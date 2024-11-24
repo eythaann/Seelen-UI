@@ -224,8 +224,12 @@ monitors_configurations:
 wall:
   no_background: 壁紙に使用するファイルを選択
   backgrounds: 壁紙
-  interval: 壁紙の変更間隔（秒）
   enable: 壁紙マネージャーを有効にします
+  random: スライドショーをランダム化します
+  interval: 壁紙を毎回変更します
+  minutes: 分
+  seconds: 秒
+  hours: 時間
 app_launcher:
   runners:
     cmd: コマンド プロンプト

@@ -233,9 +233,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Leë skyfievertoning en gebruik die agtergrond van die tema eerder.
-  interval: Verander plakpapier elke (sekondes)
   backgrounds: Agtergronde
   enable: Aktiveer agtergrondbestuurder
+  interval: Verander die muurpapier elke
+  random: Randomize skyfievertoning
+  minutes: minute
+  seconds: sekondes
+  hours: ure
 app_launcher:
   runners:
     explorer: Wedloop

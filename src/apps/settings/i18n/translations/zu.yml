@@ -234,8 +234,12 @@ wall:
   no_background: >-
     Umbukiso wesilayidi esingenalutho, usebenzisa ingemuva le-theme
     esikhundleni.
-  interval: Shintsha iphepha lokunamathisela odongeni wonke (amasekhondi)
   enable: Nika amandla umphathi wangemuva
+  interval: Shintsha iphepha lokunamathisela odongeni
+  random: Nge-slideshow engahleliwe
+  seconds: imisa
+  hours: amahora
+  minutes: imizuzu
 app_launcher:
   runners:
     explorer: Gijima

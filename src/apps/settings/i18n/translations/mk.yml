@@ -233,9 +233,13 @@ monitors_configurations:
   label: Монитор {{индекс}}
 wall:
   backgrounds: Позадини
-  interval: Променете ја позадината на секои (секунди)
   no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
   enable: Овозможете менаџер на тапети
+  random: Рандомизирајте го слајдшоу
+  interval: Променете ја позадината на секој
+  seconds: секунди
+  hours: часови
+  minutes: минути
 app_launcher:
   runners:
     explorer: Трчај

@@ -226,8 +226,12 @@ monitors_configurations:
 wall:
   backgrounds: วอลเปเปอร์
   no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
-  interval: เปลี่ยนวอลล์เปเปอร์ทุกครั้ง (วินาที)
   enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
+  interval: เปลี่ยนวอลล์เปเปอร์ทุก ๆ
+  random: สุ่มสไลด์โชว์
+  hours: ชั่วโมง
+  minutes: นาที
+  seconds: ไม่กี่วินาที
 app_launcher:
   runners:
     cmd: สั่งการ

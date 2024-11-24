@@ -233,9 +233,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Tomt bildspel, med temas bakgrund istället.
-  interval: Ändra tapeter varannan (sekunder)
   backgrounds: Tapeter
   enable: Aktivera tapetchef
+  random: Slumpmässig bildspel
+  interval: Ändra tapeter varje
+  minutes: minuter
+  hours: timme
+  seconds: sekunder
 app_launcher:
   runners:
     cmd: Kommando

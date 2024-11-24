@@ -233,9 +233,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Slideshow gol, folosind în schimb fundalul temei.
-  interval: Schimbați tapet fiecare (secunde)
   backgrounds: Imagini de fundal
   enable: Activați manager de tapet
+  interval: Schimbați tapet fiecare
+  random: Prezentare de diapozitive aleatorie
+  hours: ore
+  seconds: secunde
+  minutes: minute
 app_launcher:
   runners:
     cmd: Comanda

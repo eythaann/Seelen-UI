@@ -231,9 +231,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
-  interval: Vymeňte tapetu každú (sekundy)
   backgrounds: Tapety
   enable: Povoliť manažéra tapiet
+  interval: Vymeňte tapetu každý
+  random: Randomizovať prezentáciu
+  minutes: minúta
+  hours: hodiny
+  seconds: sekundy
 app_launcher:
   runners:
     label: Bežec

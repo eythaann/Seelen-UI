@@ -232,12 +232,16 @@ save_and_restart: Opslaan en opnieuw opstarten
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  interval: Verander achtergrond elke (seconden)
   backgrounds: Achtergronden
   no_background: >-
     Lege diavoorstelling, gebruikt in plaats daarvan de achtergrond van het
     thema.
   enable: Schakel wallpaper manager in
+  interval: Verander wallpaper elke
+  random: Randomize diavoorstelling
+  minutes: notulen
+  hours: uren
+  seconds: seconden
 app_launcher:
   runners:
     cmd: Commando

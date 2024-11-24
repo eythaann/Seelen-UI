@@ -232,8 +232,12 @@ monitors_configurations:
 wall:
   no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
   backgrounds: Duvar Kağıtları
-  interval: Duvar Kağıdını Her Saniye Değiştir
   enable: Duvar Kağıdı Yöneticisini Etkinleştir
+  interval: Duvar kağıdını her şeyi değiştir
+  random: Slayt gösterisini rastgele
+  minutes: dakikalar
+  seconds: saniye
+  hours: saat
 app_launcher:
   runners:
     cmd: Komut İstemi

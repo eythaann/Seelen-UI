@@ -233,9 +233,13 @@ monitors_configurations:
   label: Մոնիտոր {{ինդեքս}
 wall:
   backgrounds: Պաստառներ
-  interval: Փոխեք պաստառները ամեն (վայրկյան)
   no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
   enable: Միացրեք Պաստառների կառավարիչը
+  interval: Ամեն ինչ փոխեք պաստառ
+  random: Պատահականացրեք սլայդերի ցուցադրումը
+  minutes: րոպե
+  seconds: վայրկյան
+  hours: ժամ
 app_launcher:
   runners:
     label: Վազողներ

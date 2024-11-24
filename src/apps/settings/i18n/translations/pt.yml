@@ -231,9 +231,13 @@ monitors_configurations:
   label: Monitor {{index}}
 wall:
   backgrounds: Papéis de parede
-  interval: Mude o papel de parede a cada (segundos)
   no_background: A apresentação de slides vazia, usando o plano de fundo do tema.
   enable: Ativar gerente de papel de parede
+  interval: Troque o papel de parede todos
+  random: Randomize Slideshow
+  minutes: minutos
+  hours: horas
+  seconds: segundas
 app_launcher:
   runners:
     cmd: Comando

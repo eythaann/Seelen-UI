@@ -233,9 +233,13 @@ monitors_configurations:
   label: Kormeer {{tus ind ind}}
 wall:
   no_background: Slideshow madhan, adoo adeegsanaya asalka mawduuca.
-  interval: Beddel waraaqda derbiga kasta (ilbidhiqsi kasta)
   backgrounds: Darf-biyoodka
   enable: Awood u yeelo maamulaha derbiga
+  interval: Beddel wadooyinka si kasta
+  random: Kala sooc slideshow
+  hours: saacadood
+  minutes: daqiiqo
+  seconds: sekan
 app_launcher:
   runners:
     cmd: Amrid

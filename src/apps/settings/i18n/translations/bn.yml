@@ -232,8 +232,12 @@ monitors_configurations:
 wall:
   backgrounds: ওয়ালপেপার
   no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
-  interval: প্রতি ওয়ালপেপার পরিবর্তন করুন (সেকেন্ড)
   enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
+  interval: প্রতিটি ওয়ালপেপার পরিবর্তন করুন
+  random: এলোমেলোভাবে স্লাইডশো
+  seconds: সেকেন্ড
+  hours: ঘন্টা
+  minutes: মিনিট
 app_launcher:
   runners:
     explorer: চালানো

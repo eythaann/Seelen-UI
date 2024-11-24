@@ -230,9 +230,13 @@ monitors_configurations:
   label: مانیٹر {{انڈیکس}}
 wall:
   no_background: اس کے بجائے تھیم کے پس منظر کا استعمال کرتے ہوئے ، خالی سلائیڈ شو۔
-  interval: وال پیپر ہر (سیکنڈ) تبدیل کریں
   backgrounds: وال پیپر
   enable: وال پیپر مینیجر کو فعال کریں
+  random: سلائیڈ شو کو بے ترتیب بنائیں
+  interval: ہر ایک وال پیپر کو تبدیل کریں
+  hours: گھنٹے
+  minutes: منٹ
+  seconds: سیکنڈ
 app_launcher:
   runners:
     cmd: حکم

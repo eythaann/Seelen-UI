@@ -230,10 +230,14 @@ save_and_restart: Gorde eta berrabiarazi
 monitors_configurations:
   label: Monitor {{index}}
 wall:
-  interval: Aldatu horma-irudia (segundo)
   backgrounds: Horma-irudiak
   no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
   enable: Gaitu horma-kudeatzailea
+  interval: Aldatu horma-irudia guztietan
+  random: Aurkezpen diaporama
+  seconds: bizkarbete
+  hours: ordire ordu
+  minutes: minutuak
 app_launcher:
   runners:
     label: Kornollari

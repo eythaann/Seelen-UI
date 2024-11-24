@@ -228,8 +228,12 @@ monitors_configurations:
 wall:
   no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
   backgrounds: ਵਾਲਪੇਪਰ
-  interval: ਵਾਲਪੇਪਰ ਨੂੰ ਹਰ (ਸਕਿੰਟ) ਬਦਲੋ
   enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
+  random: ਸਿਲਾਈਡ ਸਲਾਈਡ ਸ਼ੋਅ
+  hours: ਘੰਟੇ
+  seconds: ਸਕਿੰਟ
+  minutes: ਮਿੰਟ
 app_launcher:
   runners:
     label: ਦੌੜਾਕ

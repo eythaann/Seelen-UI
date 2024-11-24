@@ -228,9 +228,13 @@ monitors_configurations:
   label: Monitor {{{{ດັດສະນີ}}
 wall:
   no_background: ການສະໄລ້ທີ່ເປົ່າ, ໂດຍໃຊ້ພື້ນຫລັງຂອງຫົວຂໍ້ແທນ.
-  interval: ປ່ຽນຮູບວໍເປເປີທຸກໆ (ວິນາທີ)
   backgrounds: ຮູບວໍເປເປີ
   enable: ເປີດໃຊ້ Wallpaper Manager
+  interval: ປ່ຽນຮູບວໍເປເປີທຸກ
+  random: ແບບສະໄລດູນແບບສຸ່ມ
+  minutes: ນາທີ
+  seconds: ວິນາທີ
+  hours: ຊົ່ວໂມງ
 app_launcher:
   runners:
     explorer: ແລ່ນ

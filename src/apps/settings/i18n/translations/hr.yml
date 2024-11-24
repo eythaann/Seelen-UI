@@ -234,8 +234,12 @@ monitors_configurations:
 wall:
   backgrounds: Pozadine
   no_background: Prazni prezentacija, umjesto toga, koristeći pozadinu teme.
-  interval: Promijenite pozadinu svake (sekunde)
   enable: Omogući upravitelja pozadina
+  interval: Promijenite pozadinu svaku
+  random: Randomizirana prezentacija
+  seconds: sekundi
+  minutes: minute
+  hours: sate
 app_launcher:
   runners:
     cmd: Naredba

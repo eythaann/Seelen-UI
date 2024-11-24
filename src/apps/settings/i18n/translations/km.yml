@@ -229,8 +229,12 @@ monitors_configurations:
 wall:
   backgrounds: ផាបផេច
   no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
-  interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរាល់វិនាទី (វិនាទី)
   enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
+  interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរៀងរាល់
+  random: ការបញ្ចាំងស្លាយចៃដន្យដោយចៃដន្យ
+  minutes: បីតោ
+  seconds: វិនាទី
+  hours: ម៉ោង
 app_launcher:
   runners:
     label: រត់តមនាង

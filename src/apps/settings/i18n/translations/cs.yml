@@ -232,8 +232,12 @@ monitors_configurations:
 wall:
   backgrounds: Tapety
   no_background: Prázdná prezentace místo toho za použití pozadí tématu.
-  interval: Změňte tapetu každý (sekundy)
   enable: Povolit správce tapet
+  interval: Změňte tapetu každý
+  random: Randomize prezentace
+  minutes: zápis
+  seconds: sekundy
+  hours: hodiny
 app_launcher:
   runners:
     explorer: Běh

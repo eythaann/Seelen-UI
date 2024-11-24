@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### feature
 - add bases for future plugins and widgets sytems.
+- change wallpaper randomly.
 
 ### enhancements
 - some UI/UX improvements on seelen wallpaper manager.

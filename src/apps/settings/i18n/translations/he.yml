@@ -227,8 +227,12 @@ monitors_configurations:
 wall:
   backgrounds: טפטים
   no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
-  interval: החלף טפטים כל (שניות)
   enable: אפשר מנהל טפטים
+  interval: החלף טפטים כל
+  random: מצגת שקופיות אקראית
+  minutes: פּרוֹטוֹקוֹל
+  hours: שעות
+  seconds: שניות
 app_launcher:
   runners:
     cmd: פְּקוּדָה

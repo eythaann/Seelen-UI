@@ -424,7 +424,8 @@
       "default": {
         "backgrounds": [],
         "enabled": true,
-        "interval": 60
+        "interval": 60,
+        "randomize": false
       },
       "allOf": [
         {
@@ -1372,6 +1373,10 @@
           "type": "integer",
           "format": "uint64",
           "minimum": 0.0
+        },
+        "randomize": {
+          "default": false,
+          "type": "boolean"
         }
       }
     },

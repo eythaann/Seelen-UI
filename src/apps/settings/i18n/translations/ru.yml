@@ -232,10 +232,14 @@ save_and_restart: Сохранить и перезапустить
 monitors_configurations:
   label: Монитор {{index}}
 wall:
-  interval: Измените обои каждый (секунды)
   backgrounds: Обои
   no_background: Пустое слайд -шоу, используя фон темы.
   enable: Включить менеджер обоев
+  interval: Измените обои каждый
+  random: Рандомизируйте слайд -шоу
+  minutes: минуты
+  seconds: секунды
+  hours: часы
 app_launcher:
   runners:
     explorer: Бегать

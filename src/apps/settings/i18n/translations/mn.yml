@@ -230,8 +230,12 @@ monitors_configurations:
 wall:
   backgrounds: Ханын цаас
   no_background: Хоосон слайпешт, оронд нь.
-  interval: БИДНИЙ ХӨГЖЛИЙН ХУВЬЦАА (секунд)
   enable: Wallpaper менежерийг идэвхжүүлэх
+  interval: Ханын цаасыг өөрчлөх
+  random: Санамсаргүй байдлаар Slideshes
+  hours: цаг
+  minutes: хоёр хоног
+  seconds: хоёр цаг
 app_launcher:
   runners:
     explorer: Урсгал

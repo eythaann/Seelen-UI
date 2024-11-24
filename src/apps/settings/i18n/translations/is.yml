@@ -229,9 +229,13 @@ monitors_configurations:
   label: Monitor {{Index}}
 wall:
   backgrounds: Veggfóður
-  interval: Skiptu um veggfóður á hverju (sekúndum)
   no_background: Tómar myndasýning, með því að nota bakgrunn þema í staðinn.
   enable: Virkja veggfóðursstjóra
+  random: Slendandi myndasýning
+  interval: Skiptu um veggfóður hvert
+  hours: klukkustundir
+  seconds: sekúndur
+  minutes: mínútur
 app_launcher:
   runners:
     label: Hlauparar

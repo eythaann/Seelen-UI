@@ -233,9 +233,13 @@ monitors_configurations:
   label: Monitor {{indice}}
 wall:
   backgrounds: Sfondi
-  interval: Cambia lo sfondo ogni (secondi)
   no_background: Svuota vuota, usando invece lo sfondo del tema.
   enable: Abilita Wallpaper Manager
+  interval: Cambia lo sfondo ogni
+  random: Randomizzare la presentazione
+  hours: ore
+  seconds: Secondi
+  minutes: minuti
 app_launcher:
   runners:
     cmd: Comando

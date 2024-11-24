@@ -230,10 +230,14 @@ save_and_restart: సేవ్ & పున art ప్రారంభించం
 monitors_configurations:
   label: మానిటర్ {{సూచిక}}
 wall:
-  interval: ప్రతి (సెకన్లు) వాల్‌పేపర్‌ను మార్చండి
   no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
   backgrounds: వాల్‌పేపర్లు
   enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
+  interval: ప్రతి వాల్‌పేపర్‌ను మార్చండి
+  random: రాండమైజ్ స్లైడ్‌షో
+  seconds: సెకన్లు
+  minutes: నిమిషాలు
+  hours: గంటలు
 app_launcher:
   runners:
     label: రన్నర్లు

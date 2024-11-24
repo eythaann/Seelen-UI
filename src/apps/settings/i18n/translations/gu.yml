@@ -230,9 +230,13 @@ monitors_configurations:
   label: મોનિટર કરો {{અનુક્રમણિકા}}
 wall:
   backgrounds: વ wallpapers લપેપર્સ
-  interval: દરેક (સેકંડ) વ wallp લપેપર બદલો
   no_background: તેના બદલે થીમની પૃષ્ઠભૂમિનો ઉપયોગ કરીને ખાલી સ્લાઇડશો.
   enable: વ wallp લપેપર મેનેજરને સક્ષમ કરો
+  random: સ્લાઇડશોને રેન્ડમાઇઝ કરો
+  interval: દરેક વ wallp લપેપર બદલો
+  hours: સમય
+  minutes: પ્રકાર
+  seconds: સેકન્ડ
 app_launcher:
   runners:
     explorer: દોડવું

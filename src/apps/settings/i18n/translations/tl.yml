@@ -236,8 +236,12 @@ monitors_configurations:
 wall:
   backgrounds: Wallpaper
   no_background: Walang laman na slideshow, gamit ang background ng tema sa halip.
-  interval: Baguhin ang wallpaper bawat (segundo)
   enable: Paganahin ang manager ng wallpaper
+  interval: Baguhin ang wallpaper bawat
+  random: Randomize slideshow
+  minutes: minuto
+  seconds: segundo
+  hours: oras
 app_launcher:
   runners:
     explorer: Tumakbo
