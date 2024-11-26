@@ -1,5 +1,5 @@
 import { invoke } from '@tauri-apps/api/core';
-import { Button, Input } from 'antd';
+import { Button, Input, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SeelenCommand } from 'seelen-core';
@@ -10,11 +10,13 @@ import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
 
 export function WlanSelectorEntry(props: {
-  entry: WlanBssEntry;
+  group: [WlanBssEntry, ...WlanBssEntry[]];
   selected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
-  let { entry, selected, onClick } = props;
+  let { group, selected, onClick } = props;
+  let entry = group[0];
+  let isHiddenGroup = !entry.ssid;
 
   let [loading, setLoading] = useState(false);
   let [showFields, setShowFields] = useState(false);
@@ -26,16 +28,18 @@ export function WlanSelectorEntry(props: {
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (!selected) {
-      setShowFields(false);
-      setShowErrors(false);
-      setSsid(entry.ssid || '');
-      setPassword('');
-    }
+    setShowFields(selected && !entry.known && (!entry.ssid || entry.secured));
+    setSsid(entry.ssid || '');
+    setPassword('');
+    setShowErrors(false);
   }, [selected]);
 
   function onConnection() {
-    setLoading(true);
+    function onfulfilled(success: boolean) {
+      setLoading(false);
+      setShowFields(!success);
+      setShowErrors(!success);
+    }
 
     function onrejected(error: any) {
       console.error(error);
@@ -43,21 +47,11 @@ export function WlanSelectorEntry(props: {
       setShowErrors(true);
     }
 
+    setLoading(true);
+
     if (entry.connected) {
       invoke(SeelenCommand.WlanDisconnect).then(() => setLoading(false), onrejected);
       return;
-    }
-
-    if (!entry.ssid && !showFields) {
-      setShowFields(true);
-      setLoading(false);
-      return;
-    }
-
-    function onfulfilled(success: boolean) {
-      setLoading(false);
-      setShowFields(!success);
-      setShowErrors(!success);
     }
 
     if (showFields) {
@@ -95,6 +89,14 @@ export function WlanSelectorEntry(props: {
     signalIcon = 'GrWifiLow';
   }
 
+  let frequencies: string[] = [];
+  if (group.some((e) => e.channelFrequency < 5_000_000)) {
+    frequencies.push('2.4G');
+  }
+  if (group.some((e) => e.channelFrequency > 5_000_000)) {
+    frequencies.push('5G');
+  }
+
   return (
     <div
       key={entry.bssid}
@@ -105,7 +107,13 @@ export function WlanSelectorEntry(props: {
     >
       <div className="wlan-entry-info">
         <Icon iconName={signalIcon} size={20} />
-        <span className="wlan-entry-info-ssid">{entry.ssid || t('network.hidden')}</span>
+        <span className="wlan-entry-info-ssid">{entry.ssid || `${t('network.hidden')} (${group.length})`}</span>
+        {!isHiddenGroup && <div className="wlan-entry-info-channel">{frequencies.join('/')}</div>}
+        {!isHiddenGroup && entry.secured && (
+          <Tooltip title={t('network.secured')}>
+            <Icon iconName="PiPasswordFill" />
+          </Tooltip>
+        )}
       </div>
       {showFields && (
         <form className="wlan-entry-fields">
@@ -133,7 +141,12 @@ export function WlanSelectorEntry(props: {
       )}
       {selected && (
         <div className="wlan-entry-actions">
-          <Button type="primary" onClick={onConnection} loading={loading} disabled={loading}>
+          <Button
+            type={entry.connected ? 'default' : 'primary'}
+            onClick={onConnection}
+            loading={loading}
+            disabled={loading}
+          >
             {entry.connected ? t('network.disconnect') : t('network.connect')}
           </Button>
         </div>

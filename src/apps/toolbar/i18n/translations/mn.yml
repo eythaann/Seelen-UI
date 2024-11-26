@@ -14,6 +14,11 @@ network:
   disconnect: Тусгаарлах
   connect: Холбох
   more: Сүлжээний илүү олон тохиргоо
+  available: Боломжтой сүлжээнүүд
+  secured: Шифрлэгдсэн сүлжээ
+  saved: Хадгалсан сүлжээнүүд
+  connected: '-д холбогдсон'
+  scanning: Сүлжээг хайж байна
 settings:
   shutdown: Унтраах
   restart: Дахин ачааллах

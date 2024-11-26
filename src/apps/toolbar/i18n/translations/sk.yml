@@ -14,6 +14,11 @@ network:
   connect: Pripojiť
   more: Viac nastavení siete
   not_found: Nenašli sa žiadne siete
+  available: Dostupné siete
+  connected: Pripojené k
+  saved: Uložené siete
+  scanning: Skenovanie sietí
+  secured: Šifrovaná sieť
 settings:
   log_out: Odhlásiť sa
   restart: Reštart

@@ -14,6 +14,11 @@ network:
   more: Mwy o osodiadau rhwydwaith
   disconnect: Ddatgysylltith
   connect: Chysyllta ’
+  saved: Rhwydweithiau wedi'u cadw
+  scanning: Sganio am rwydweithiau
+  available: Rhwydweithiau sydd ar gael
+  connected: Wedi'i gysylltu â
+  secured: Rhwydwaith wedi'i amgryptio
 settings:
   restart: Ail-ddechrau
   log_out: Allgofnodi

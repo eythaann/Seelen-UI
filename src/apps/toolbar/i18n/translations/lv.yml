@@ -14,6 +14,11 @@ network:
   hidden: Slēpts tīkls
   more: Vairāk tīkla iestatījumu
   not_found: Neto atrasti tīkli
+  saved: Saglabātie tīkli
+  scanning: Tīklu meklēšana
+  available: Pieejamie tīkli
+  connected: Savienots ar
+  secured: Šifrēts tīkls
 settings:
   log_out: Izlogoties
   sleep: Gulēt

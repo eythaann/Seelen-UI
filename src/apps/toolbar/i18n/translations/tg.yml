@@ -14,6 +14,11 @@ network:
   more: Танзимоти шабака
   disconnect: Ьудо кардан
   connect: Пайваст кардан
+  connected: Ба
+  scanning: Сканкунии шабакаҳо
+  secured: Шабакаи рамзгузорӣ
+  saved: Шабакаҳои захирашуда
+  available: Шабакаҳои дастрас
 settings:
   restart: Оғози дубора
   shutdown: Пӯшида шудан

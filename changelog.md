@@ -7,6 +7,7 @@
 
 ### enhancements
 - some UI/UX improvements on seelen wallpaper manager.
+- UI/UX improvements on wi-fi toolbar module.
 
 ### fix
 - popups and context menus fast flashing.

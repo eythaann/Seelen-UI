@@ -14,6 +14,11 @@ network:
   more: Izilungiselelo eziningi zenethiwekhi
   not_found: Awekho amanethiwekhi atholakele
   disconnect: Thukulula
+  scanning: Iskenela amanethiwekhi
+  secured: Inethiwekhi ebethelwe
+  connected: Kuxhunywe ku
+  available: Amanethiwekhi atholakalayo
+  saved: Amanethiwekhi alondoloziwe
 settings:
   shutdown: Vala shaqa
   log_out: Phuma

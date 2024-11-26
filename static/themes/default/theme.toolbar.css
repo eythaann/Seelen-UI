@@ -171,10 +171,18 @@
   padding: 0 40px;
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .wlan-selector {
   margin: var(--popups-margin);
   width: 260px;
-  max-height: 50vh;
   box-shadow: 0 0 10px 10px #0001;
   display: flex;
   flex-direction: column;
@@ -183,12 +191,27 @@
     background-color: var(--color-gray-50);
     border-radius: 10px;
   }
+
+  .wlan-selector-title {
+    font-size: 0.8rem;
+    color: var(--color-gray-600);
+    font-weight: 600;
+    padding: 8px 14px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  .wlan-selector-refresh {
+    animation: rotate 1s linear infinite;
+  }
 }
 
 .wlan-selector-entries {
   padding: 8px;
-  flex: 1;
   overflow-y: auto;
+  border-bottom: 1px solid var(--color-gray-300);
+  max-height: 30vh;
 
   .wlan-selector-empty {
     font-style: italic;
@@ -212,25 +235,33 @@
 
 .wlan-entry-info {
   font-weight: 600;
-  gap: 10px;
-}
+  gap: 8px;
 
-.wlan-entry-info-ssid {
-  color: var(--color-gray-800);
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  .wlan-entry-info-ssid {
+    flex: 1;
+    color: var(--color-gray-800);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .wlan-entry-info-channel {
+    font-size: 0.5rem;
+    color: var(--color-gray-600);
+    border: 1px solid var(--color-gray-600);
+    border-radius: 4px;
+    padding: 2px 4px
+  }
 }
 
 .wlan-selector-footer {
-  border-top: solid 1px var(--color-gray-300);
-  padding: 8px 16px;
+  padding: 8px;
   font-weight: 600;
   font-size: 0.8rem;
 
   > span {
     padding: 2px 6px;
-    border-radius: 8px;
+    border-radius: 4px;
 
     &:hover {
       background-color: var(--color-gray-200);

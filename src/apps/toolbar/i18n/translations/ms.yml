@@ -14,6 +14,11 @@ network:
   hidden: Rangkaian Tersembunyi
   not_found: Tiada rangkaian dijumpai
   connect: Sambung
+  saved: Rangkaian yang disimpan
+  scanning: Mengimbas untuk rangkaian
+  secured: Rangkaian yang disulitkan
+  connected: Disambungkan ke
+  available: Rangkaian yang tersedia
 settings:
   shutdown: Menutup
   log_out: Log keluar

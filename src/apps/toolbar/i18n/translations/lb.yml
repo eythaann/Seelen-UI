@@ -14,6 +14,11 @@ network:
   hidden: Verstoppt Netzwierk
   more: Méi Netzwierk Astellunge
   connect: Connecten
+  secured: Verschlësselte Reseau
+  scanning: Scannen fir Netzwierker
+  available: Verfügbar Netzwierker
+  saved: Gespäichert Netzwierker
+  connected: Verbonne mat
 settings:
   restart: Neistart
   shutdown: Ausmaachen

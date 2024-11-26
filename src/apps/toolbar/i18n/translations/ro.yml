@@ -14,6 +14,11 @@ network:
   disconnect: Deconectat
   more: Mai multe setări de rețea
   hidden: Rețea ascunsă
+  connected: Conectat la
+  scanning: Scanare pentru rețele
+  saved: Rețele salvate
+  secured: Rețea criptată
+  available: Rețele disponibile
 settings:
   shutdown: Închide
   sleep: Dormi

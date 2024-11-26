@@ -14,6 +14,11 @@ network:
   hidden: Skrivena mreža
   disconnect: Odspojiti
   more: Više mrežnih postavki
+  connected: Povezan s
+  secured: Šifrirana mreža
+  available: Dostupne mreže
+  scanning: Traženje mreža
+  saved: Spremljene mreže
 settings:
   log_out: Odjavite se
   sleep: Spavati

@@ -11,12 +11,18 @@ use windows::{
         NetworkManagement::WiFi::{
             dot11_BSS_type_any, wlan_interface_state_connected,
             wlan_intf_opcode_current_connection, WlanCloseHandle, WlanEnumInterfaces,
-            WlanGetNetworkBssList, WlanOpenHandle, WlanQueryInterface, WlanScan,
-            WLAN_API_VERSION_2_0, WLAN_BSS_ENTRY, WLAN_BSS_LIST, WLAN_CONNECTION_ATTRIBUTES,
-            WLAN_INTERFACE_INFO_LIST,
+            WlanGetAvailableNetworkList2, WlanGetNetworkBssList, WlanGetProfile,
+            WlanGetProfileList, WlanOpenHandle, WlanQueryInterface, WlanScan,
+            DOT11_CAPABILITY_INFO_PRIVACY, WLAN_API_VERSION_2_0,
+            WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_ADHOC_PROFILES,
+            WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_MANUAL_HIDDEN_PROFILES,
+            WLAN_AVAILABLE_NETWORK_LIST_V2, WLAN_AVAILABLE_NETWORK_V2, WLAN_BSS_ENTRY,
+            WLAN_BSS_LIST, WLAN_CONNECTION_ATTRIBUTES, WLAN_INTERFACE_INFO_LIST,
+            WLAN_PROFILE_INFO_LIST,
         },
     },
 };
+use windows_core::{PCWSTR, PWSTR};
 
 use crate::{error_handler::Result, modules::network::domain::WlanBssEntry};
 
@@ -43,6 +49,9 @@ impl From<&WLAN_BSS_ENTRY> for WlanBssEntry {
             signal: entry.uLinkQuality,
             connected: false,
             connected_channel: false,
+            secured: entry.usCapabilityInformation as u32 & DOT11_CAPABILITY_INFO_PRIVACY
+                == DOT11_CAPABILITY_INFO_PRIVACY,
+            known: false,
         }
     }
 }
@@ -134,6 +143,76 @@ impl NetworkManager {
         Ok(false)
     }
 
+    pub fn get_profiles(client_handle: HANDLE, interface_guid: &GUID) -> Result<()> {
+        unsafe {
+            let mut profile_list_ptr = std::ptr::null_mut::<WLAN_PROFILE_INFO_LIST>();
+            let result =
+                WlanGetProfileList(client_handle, interface_guid, None, &mut profile_list_ptr);
+            if result != 0 || profile_list_ptr.is_null() {
+                return Err(format!("Failed to get profile list, error code: {}", result).into());
+            }
+
+            let profile_list = &*profile_list_ptr;
+            let entries = std::slice::from_raw_parts(
+                profile_list.ProfileInfo.as_ptr(),
+                profile_list.dwNumberOfItems as usize,
+            );
+
+            for entry in entries {
+                let profile_name = PCWSTR(entry.strProfileName.as_ptr());
+                let mut profile_xml = PWSTR::null();
+                let result = WlanGetProfile(
+                    client_handle,
+                    interface_guid,
+                    profile_name,
+                    None,
+                    &mut profile_xml,
+                    None,
+                    None,
+                );
+
+                if result != 0 {
+                    return Err(format!("Failed to get profile, error code: {}", result).into());
+                }
+
+                if !profile_xml.is_null() {
+                    let profile: serde_json::Value =
+                        quick_xml::de::from_str(&profile_xml.to_string()?)?;
+                    println!("{:#?}", profile)
+                }
+            }
+        }
+        Ok(())
+    }
+
+    pub fn get_available_networks(
+        client_handle: HANDLE,
+        interface_guid: &GUID,
+    ) -> Result<Vec<WLAN_AVAILABLE_NETWORK_V2>> {
+        unsafe {
+            let mut network_list_ptr = std::ptr::null_mut::<WLAN_AVAILABLE_NETWORK_LIST_V2>();
+            let result = WlanGetAvailableNetworkList2(
+                client_handle,
+                interface_guid,
+                WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_ADHOC_PROFILES
+                    & WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_MANUAL_HIDDEN_PROFILES,
+                None,
+                &mut network_list_ptr,
+            );
+
+            if result != 0 || network_list_ptr.is_null() {
+                return Err(format!("Failed to get network list, error code: {}", result).into());
+            }
+
+            let network_list = &*network_list_ptr;
+            let entries = std::slice::from_raw_parts(
+                network_list.Network.as_ptr(),
+                network_list.dwNumberOfItems as usize,
+            );
+            Ok(entries.to_vec())
+        }
+    }
+
     pub fn scan_networks() -> Result<Vec<WlanBssEntry>> {
         let client_handle = Self::open_wlan()?;
         let mut wlan_entries = Vec::new();
@@ -154,6 +233,10 @@ impl NetworkManager {
 
             for interface in interfaces {
                 let interface_guid = interface.InterfaceGuid;
+
+                let available_networks =
+                    Self::get_available_networks(client_handle, &interface_guid)?;
+                // let profiles = Self::get_profiles(client_handle, &interface_guid)?;
                 let result = WlanScan(client_handle, &interface_guid, None, None, None);
 
                 if result != 0 {
@@ -207,6 +290,14 @@ impl NetworkManager {
                         if connection.wlanAssociationAttributes.dot11Bssid == entry.dot11Bssid {
                             wrapped_entry.connected_channel = is_connected;
                         }
+                    }
+
+                    if let Some(network) = available_networks
+                        .iter()
+                        .find(|n| n.dot11Ssid.ucSSID == entry.dot11Ssid.ucSSID)
+                    {
+                        let profile = PCWSTR::from_raw(network.strProfileName.as_ptr());
+                        wrapped_entry.known = !profile.is_null() && !profile.is_empty();
                     }
 
                     wlan_entries.push(wrapped_entry);

@@ -14,6 +14,11 @@ network:
     password: كلمة المرور
   disconnect: قطع الاتصال
   connect: يتصل
+  connected: متصل ب
+  scanning: المسح للشبكات
+  available: الشبكات المتاحة
+  secured: شبكة مشفرة
+  saved: الشبكات المحفوظة
 settings:
   title: إعدادات
   app_settings: إعدادات التطبيقات

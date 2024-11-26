@@ -14,6 +14,11 @@ network:
   not_found: Jokių tinklų nerasta
   more: Daugiau tinklo nustatymų
   hidden: Paslėptas tinklas
+  saved: Išsaugoti tinklai
+  connected: Prisijungta prie
+  scanning: Tinklų nuskaitymas
+  secured: Šifruotas tinklas
+  available: Galimi tinklai
 settings:
   log_out: Atsijungti
   restart: Perkrauti

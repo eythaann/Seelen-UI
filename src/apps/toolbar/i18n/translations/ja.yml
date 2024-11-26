@@ -14,6 +14,11 @@ network:
   hidden: 隠れたネットワーク
   more: 詳しい設定
   disconnect: 切断
+  connected: に接続されています
+  scanning: ネットワークのスキャン
+  saved: 保存されたネットワーク
+  secured: 暗号化されたネットワーク
+  available: 利用可能なネットワーク
 settings:
   restart: 再起動
   log_out: ログアウト

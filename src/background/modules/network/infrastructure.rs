@@ -75,8 +75,12 @@ async fn try_connect_to_profile(ssid: &str) -> Result<bool> {
 
     if output.status.success() {
         // wait to ensure connection
-        sleep_millis(2000);
-        Ok(NetworkManager::is_connected_to(ssid)?)
+        let mut attempts = 0;
+        while !NetworkManager::is_connected_to(ssid)? && attempts < 10 {
+            attempts += 1;
+            sleep_millis(1000);
+        }
+        Ok(attempts < 10)
     } else {
         Err(output.into())
     }

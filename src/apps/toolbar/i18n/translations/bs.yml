@@ -14,6 +14,11 @@ network:
   more: Više mrežnih postavki
   hidden: Skrivena mreža
   connect: Povezati
+  saved: Sačuvane mreže
+  scanning: Skeniranje za mreže
+  secured: Šifrovana mreža
+  connected: Povezano na
+  available: Dostupne mreže
 settings:
   shutdown: Ugasiti
   log_out: Odjaviti se

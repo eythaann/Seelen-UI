@@ -14,6 +14,11 @@ network:
   disconnect: Ngắt kết nối
   connect: Kết nối
   more: Nhiều cài đặt mạng hơn
+  connected: Đã kết nối với
+  saved: Mạng đã lưu
+  available: Mạng có sẵn
+  secured: Mạng được mã hóa
+  scanning: Đang quét mạng
 settings:
   sleep: Ngủ
   log_out: Đăng xuất

@@ -14,6 +14,11 @@ network:
   not_found: Nessuna reti trovata
   more: Più impostazioni di rete
   hidden: Rete nascosta
+  connected: Connesso a
+  scanning: Scansione delle reti
+  saved: Reti salvate
+  secured: Rete crittografata
+  available: Reti disponibili
 settings:
   restart: Ricomincia
   app_settings: Impostazioni dell'app

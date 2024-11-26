@@ -14,6 +14,11 @@ network:
   hidden: Verborge netwerk
   connect: Konnekteer
   more: Meer netwerkinstellings
+  scanning: Soek vir netwerke
+  secured: Geënkripteerde netwerk
+  available: Beskikbare netwerke
+  saved: Gestoorde netwerke
+  connected: Gekoppel aan
 settings:
   restart: Begin oor
   log_out: Teken uit

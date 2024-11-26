@@ -14,6 +14,11 @@ network:
   more: Více nastavení sítě
   disconnect: Odpojit
   connect: Připojit
+  connected: Připojeno k
+  saved: Uložené sítě
+  available: Dostupné sítě
+  secured: Šifrovaná síť
+  scanning: Vyhledávání sítí
 settings:
   app_settings: Nastavení aplikace
   restart: Restart

@@ -14,6 +14,11 @@ network:
   not_found: કોઈ નેટવર્ક મળ્યાં નથી
   hidden: છુપાયેલું નેટવર્ક
   more: વધુ નેટવર્ક સેટિંગ્સ
+  connected: સાથે જોડાયેલ છે
+  secured: એન્ક્રિપ્ટેડ નેટવર્ક
+  available: ઉપલબ્ધ નેટવર્ક્સ
+  saved: સાચવેલા નેટવર્ક્સ
+  scanning: નેટવર્ક્સ માટે સ્કેનિંગ
 settings:
   restart: પુનઃપ્રારંભ
   sleep: ઊંઘ

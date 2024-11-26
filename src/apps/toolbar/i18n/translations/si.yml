@@ -14,6 +14,11 @@ network:
   disconnect: විසන්ධි කරන්න
   connect: සම්බන්ධ කරන්න
   hidden: සැඟවුණු ජාලය
+  scanning: ජාල සඳහා ස්කෑන් කිරීම
+  saved: සුරැකි ජාල
+  secured: සංකේතාත්මක ජාලය
+  connected: වෙත සම්බන්ධ කර ඇත
+  available: පවතින ජාල
 settings:
   restart: යළි අරඹන්න
   shutdown: වසා දමන්න

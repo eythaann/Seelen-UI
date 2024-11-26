@@ -14,6 +14,11 @@ network:
   disconnect: Kukatwa
   connect: Unganisha
   hidden: Mtandao uliofichwa
+  connected: Imeunganishwa kwa
+  saved: Mitandao iliyohifadhiwa
+  secured: Mtandao uliosimbwa kwa njia fiche
+  available: Mitandao inayopatikana
+  scanning: Inatafuta mitandao
 settings:
   restart: Anzisha tena
   title: Mipangilio

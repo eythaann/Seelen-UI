@@ -14,6 +14,11 @@ network:
   hidden: छिपा हुआ नेटवर्क
   disconnect: डिस्कनेक्ट
   connect: जोड़ना
+  connected: से जुड़ा
+  secured: एन्क्रिप्टेड नेटवर्क
+  saved: सहेजे गए नेटवर्क
+  scanning: नेटवर्क के लिए स्कैनिंग
+  available: उपलब्ध नेटवर्क
 settings:
   restart: पुनः आरंभ करें
   sleep: नींद

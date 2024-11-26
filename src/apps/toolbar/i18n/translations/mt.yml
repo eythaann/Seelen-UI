@@ -14,6 +14,11 @@ network:
   disconnect: Skonnettja
   hidden: Netwerk moħbi
   more: Aktar settings tan-netwerk
+  scanning: Skennjar għal netwerks
+  saved: Netwerks salvati
+  connected: Konnessi ma'
+  available: Netwerks disponibbli
+  secured: Netwerk kriptat
 settings:
   restart: Erġa ibda
   shutdown: Għalaq

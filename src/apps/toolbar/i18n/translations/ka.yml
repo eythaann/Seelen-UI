@@ -14,6 +14,11 @@ network:
   connect: დაკავშირება
   more: მეტი ქსელის პარამეტრები
   hidden: დამალული ქსელი
+  secured: დაშიფრული ქსელი
+  connected: დაკავშირებულია
+  available: ხელმისაწვდომი ქსელები
+  saved: შენახული ქსელები
+  scanning: სკანირება ქსელებისთვის
 settings:
   restart: Რესტარტი
   shutdown: Გათიშვა

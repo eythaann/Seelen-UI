@@ -14,6 +14,11 @@ network:
   hidden: Rejtett hálózat
   connect: Összekapcsol
   more: További hálózati beállítások
+  connected: Csatlakozva a következőhöz
+  saved: Mentett hálózatok
+  scanning: Hálózatok keresése
+  secured: Titkosított hálózat
+  available: Elérhető hálózatok
 settings:
   app_settings: Alkalmazásbeállítások
   restart: Újrakezd

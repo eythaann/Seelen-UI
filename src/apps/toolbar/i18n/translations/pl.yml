@@ -14,6 +14,11 @@ network:
   not_found: Nie znaleziono sieci
   more: Więcej ustawień sieciowych
   hidden: Ukryta sieć
+  connected: Połączony z
+  saved: Zapisane sieci
+  scanning: Skanowanie w poszukiwaniu sieci
+  available: Dostępne sieci
+  secured: Szyfrowana sieć
 settings:
   app_settings: Ustawienia aplikacji
   log_out: Wyloguj

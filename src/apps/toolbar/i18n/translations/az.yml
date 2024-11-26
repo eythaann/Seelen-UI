@@ -14,6 +14,11 @@ network:
   hidden: Gizli şəbəkə
   disconnect: Ayırd etmək
   connect: Qoşulmaq
+  secured: Şifrələnmiş şəbəkə
+  connected: qoşuldu
+  saved: Saxlanan şəbəkələr
+  scanning: Şəbəkələrin skan edilməsi
+  available: Mövcud şəbəkələr
 settings:
   shutdown: Söndür
   restart: Yenidən başlamaq

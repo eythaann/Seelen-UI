@@ -14,6 +14,11 @@ network:
   connect: Conectar
   disconnect: Desconectar
   hidden: Xarxa oculta
+  connected: Connectat a
+  available: Xarxes disponibles
+  saved: Xarxes guardades
+  secured: Xarxa xifrada
+  scanning: Escaneig de xarxes
 settings:
   app_settings: Configuració de l'aplicació
   title: Configuració

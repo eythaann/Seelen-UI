@@ -14,6 +14,11 @@ network:
   hidden: Gizli Ağ
   not_found: Ağ bulunamadı
   disconnect: Bağlantıyı Kes
+  connected: 'Şuraya bağlanıldı:'
+  saved: Kayıtlı ağlar
+  secured: Şifreli ağ
+  available: Mevcut ağlar
+  scanning: Ağlar taranıyor
 settings:
   shutdown: Kapat
   app_settings: Uygulama Ayarları

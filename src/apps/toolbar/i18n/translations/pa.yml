@@ -14,6 +14,11 @@ network:
   disconnect: ਡਿਸਕਨੈਕਟ
   connect: ਕਨੈਕਟ ਕਰੋ
   more: ਹੋਰ ਨੈੱਟਵਰਕ ਸੈਟਿੰਗਾਂ
+  connected: ਨਾਲ ਜੁੜਿਆ ਹੋਇਆ ਹੈ
+  available: ਉਪਲਬਧ ਨੈੱਟਵਰਕ
+  saved: ਸੁਰੱਖਿਅਤ ਕੀਤੇ ਨੈੱਟਵਰਕ
+  secured: ਐਨਕ੍ਰਿਪਟਡ ਨੈੱਟਵਰਕ
+  scanning: ਨੈੱਟਵਰਕਾਂ ਲਈ ਸਕੈਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ
 settings:
   shutdown: ਸ਼ਟ ਡਾਉਨ
   title: ਸੈਟਿੰਗਜ਼

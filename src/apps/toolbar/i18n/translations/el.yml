@@ -14,6 +14,11 @@ network:
   connect: Συνδέω-συωδεομαι
   hidden: Κρυμμένο δίκτυο
   not_found: Δεν βρέθηκαν δίκτυα
+  connected: Συνδεδεμένο με
+  scanning: Σάρωση για δίκτυα
+  saved: Αποθηκευμένα δίκτυα
+  available: Διαθέσιμα δίκτυα
+  secured: Κρυπτογραφημένο δίκτυο
 settings:
   app_settings: Ρυθμίσεις εφαρμογής
   shutdown: ΤΕΡΜΑΤΙΣΜΟΣ ΛΕΙΤΟΥΡΓΙΑΣ

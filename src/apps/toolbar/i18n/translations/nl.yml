@@ -14,6 +14,11 @@ network:
   more: Meer netwerkinstellingen
   hidden: Verborgen netwerk
   disconnect: Verbinding verbreken
+  connected: Verbonden met
+  saved: Opgeslagen netwerken
+  scanning: Scannen naar netwerken
+  available: Beschikbare netwerken
+  secured: Versleuteld netwerk
 settings:
   app_settings: App instellingen
   shutdown: Afsluiten

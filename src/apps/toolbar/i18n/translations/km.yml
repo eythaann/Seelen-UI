@@ -14,6 +14,11 @@ network:
   connect: តផ្ជាប់
   more: ការកំណត់បណ្តាញច្រើនទៀត
   disconnect: ផ្ដាច់
+  saved: បណ្តាញដែលបានរក្សាទុក
+  connected: បានភ្ជាប់ទៅ
+  available: បណ្តាញដែលមាន
+  scanning: កំពុងស្កេនរកបណ្តាញ
+  secured: បណ្តាញដែលបានអ៊ិនគ្រីប
 settings:
   shutdown: បិទ
   log_out: ចាកចេញ

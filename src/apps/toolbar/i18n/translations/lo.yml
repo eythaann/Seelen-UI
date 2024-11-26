@@ -14,6 +14,11 @@ network:
   not_found: ບໍ່ພົບເຄືອຂ່າຍທີ່ພົບ
   more: ການຕັ້ງຄ່າເຄືອຂ່າຍເພີ່ມເຕີມ
   connect: ເຊື່ອມຕໍ່
+  saved: ເຄືອຂ່າຍທີ່ບັນທຶກໄວ້
+  secured: ເຄືອຂ່າຍເຂົ້າລະຫັດ
+  scanning: ກຳລັງສະແກນຫາເຄືອຂ່າຍ
+  available: ເຄືອຂ່າຍທີ່ມີຢູ່
+  connected: ເຊື່ອມຕໍ່ກັບ
 settings:
   shutdown: ປິດ​ເຄື່ອງ
   restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່

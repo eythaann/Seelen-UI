@@ -14,6 +14,11 @@ network:
   hidden: Скрита мрежа
   more: Повече мрежови настройки
   disconnect: Изключете
+  available: Налични мрежи
+  connected: Свързан с
+  secured: Криптирана мрежа
+  saved: Запазени мрежи
+  scanning: Сканиране за мрежи
 settings:
   shutdown: Изключвам
   log_out: Излез от профила си

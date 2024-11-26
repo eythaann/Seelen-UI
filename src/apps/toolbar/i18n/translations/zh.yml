@@ -14,6 +14,11 @@ network:
     password: 密码
   disconnect: 断开连接
   connect: 连接
+  available: 可用网络
+  scanning: 扫描网络
+  connected: 连接到
+  saved: 已保存的网络
+  secured: 加密网络
 settings:
   title: 设置
   app_settings: 应用设置

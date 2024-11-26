@@ -14,6 +14,11 @@ network:
   disconnect: Исклучување
   connect: Поврзете се
   more: Повеќе мрежни поставки
+  scanning: Скенирање за мрежи
+  saved: Зачувани мрежи
+  available: Достапни мрежи
+  connected: Поврзан со
+  secured: Шифрирана мрежа
 settings:
   shutdown: Исклучи
   restart: Рестарт

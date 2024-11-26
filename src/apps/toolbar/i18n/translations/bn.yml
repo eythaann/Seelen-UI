@@ -14,6 +14,11 @@ network:
   connect: সংযুক্ত করুন
   more: আরও নেটওয়ার্ক সেটিংস
   hidden: লুকানো নেটওয়ার্ক
+  saved: সংরক্ষিত নেটওয়ার্ক
+  available: উপলব্ধ নেটওয়ার্ক
+  connected: সাথে সংযুক্ত
+  scanning: নেটওয়ার্কের জন্য স্ক্যান করা হচ্ছে
+  secured: এনক্রিপ্ট করা নেটওয়ার্ক
 settings:
   app_settings: অ্যাপ সেটিংস
   restart: আবার শুরু

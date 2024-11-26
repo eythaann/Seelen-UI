@@ -14,6 +14,11 @@ network:
   hidden: شبکه پنهان
   more: تنظیمات بیشتر شبکه
   not_found: هیچ شبکه ای پیدا نشده است
+  available: شبکه های موجود
+  saved: شبکه های ذخیره شده
+  connected: متصل به
+  scanning: اسکن شبکه ها
+  secured: شبکه رمزگذاری شده
 settings:
   app_settings: تنظیمات برنامه
   restart: مجدداً

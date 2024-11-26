@@ -14,6 +14,11 @@ network:
   more: Flere nettverksinnstillinger
   hidden: Skjult nettverk
   not_found: Ingen nettverk funnet
+  connected: Koblet til
+  saved: Lagrede nettverk
+  available: Tilgjengelige nettverk
+  scanning: Skanner etter nettverk
+  secured: Kryptert nettverk
 settings:
   restart: Omstart
   shutdown: Skru av

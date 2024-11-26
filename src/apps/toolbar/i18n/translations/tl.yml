@@ -14,6 +14,11 @@ network:
   disconnect: Idiskonekta
   more: Higit pang mga setting ng network
   connect: Kumonekta
+  connected: Nakakonekta sa
+  scanning: Pag-scan para sa mga network
+  available: Magagamit na mga network
+  saved: Mga naka-save na network
+  secured: Naka-encrypt na network
 settings:
   app_settings: Mga Setting ng App
   shutdown: Shutdown

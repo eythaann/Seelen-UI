@@ -14,6 +14,11 @@ network:
   not_found: Engin net fundust
   hidden: Falið net
   connect: Tengdu
+  scanning: Leitar að netkerfum
+  connected: Tengdur við
+  saved: Vistað netkerfi
+  secured: Dulkóðað net
+  available: Tiltæk netkerfi
 settings:
   restart: Endurræsa
   log_out: Að skrá þig út

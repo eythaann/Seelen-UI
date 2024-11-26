@@ -14,6 +14,11 @@ network:
     password: 비밀번호
   disconnect: 연결 끊기
   connect: 연결
+  connected: 연결됨
+  available: 사용 가능한 네트워크
+  saved: 저장된 네트워크
+  secured: 암호화된 네트워크
+  scanning: 네트워크 검색 중
 settings:
   title: 설정
   app_settings: 앱 설정

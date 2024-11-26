@@ -14,6 +14,11 @@ network:
   more: Більше налаштувань мережі
   connect: З'єднувати
   not_found: Жодних мереж не знайдено
+  connected: Підключено до
+  available: Доступні мережі
+  scanning: Сканування мереж
+  saved: Збережені мережі
+  secured: Зашифрована мережа
 settings:
   log_out: Вийти
   shutdown: Закрити

@@ -164,6 +164,10 @@ pub struct WlanBssEntry {
     pub bssid: String,
     pub channel_frequency: u32,
     pub signal: u32,
+    /// true if the network is a saved profile
+    pub known: bool,
+    /// true if the network is encrypted like WEP, WPA, or WPA2
+    pub secured: bool,
     /// true if the interface is connected to this network
     pub connected: bool,
     /// true if the interface is connected to this network and is using this channel frequency

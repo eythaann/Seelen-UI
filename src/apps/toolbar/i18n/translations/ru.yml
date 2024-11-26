@@ -14,6 +14,11 @@ network:
     password: Пароль
   disconnect: Отключить
   connect: Подключить
+  saved: Сохраненные сети
+  available: Доступные сети
+  connected: Подключено к
+  secured: Зашифрованная сеть
+  scanning: Сканирование сетей
 settings:
   title: Настройки
   app_settings: Настройки приложения

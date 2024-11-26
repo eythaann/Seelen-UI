@@ -14,6 +14,11 @@ network:
   disconnect: Katkaista
   more: Lisää verkkoasetuksia
   hidden: Piilotettu verkko
+  available: Käytettävissä olevat verkot
+  saved: Tallennetut verkot
+  connected: 'Yhdistetty:'
+  secured: Salattu verkko
+  scanning: Etsii verkkoja
 settings:
   sleep: Nukkua
   log_out: Kirjautua ulos

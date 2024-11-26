@@ -14,6 +14,11 @@ network:
   not_found: Ingen netværk fundet
   more: Flere netværksindstillinger
   hidden: Skjult netværk
+  connected: Forbundet til
+  saved: Gemte netværk
+  available: Tilgængelige netværk
+  scanning: Scanning efter netværk
+  secured: Krypteret netværk
 settings:
   sleep: Søvn
   shutdown: Lukke ned

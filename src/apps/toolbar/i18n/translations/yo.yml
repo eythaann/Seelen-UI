@@ -14,6 +14,11 @@ network:
   hidden: Nẹtiwọki ti o farapamọ
   connect: Sopọ
   more: Awọn eto nẹtiwọọki diẹ sii
+  saved: Awọn nẹtiwọki ti a fipamọ
+  secured: Nẹtiwọọki ti paroko
+  connected: Ti sopọ si
+  scanning: Ṣiṣayẹwo fun awọn nẹtiwọki
+  available: Awọn nẹtiwọki ti o wa
 settings:
   shutdown: Paade
   title: Ètò

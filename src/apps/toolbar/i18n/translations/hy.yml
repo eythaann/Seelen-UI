@@ -14,6 +14,11 @@ network:
   more: Ավելի շատ ցանցային պարամետրեր
   connect: Միացնել
   not_found: Networks անցեր չեն գտնվել
+  scanning: Ցանցերի սկանավորում
+  secured: Կոդավորված ցանց
+  saved: Պահպանված ցանցեր
+  connected: Միացված է
+  available: Հասանելի ցանցեր
 settings:
   shutdown: Անջատել
   title: Կարգավորումներ

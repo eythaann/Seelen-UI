@@ -14,6 +14,11 @@ network:
     password: Senha
   disconnect: desconectar
   connect: Conectar
+  connected: Conectado a
+  available: Redes disponíveis
+  scanning: Procurando redes
+  saved: Redes salvas
+  secured: Rede criptografada
 settings:
   title: Configurações
   app_settings: Configurações do aplicativo

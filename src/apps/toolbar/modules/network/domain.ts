@@ -1,10 +1,12 @@
 export interface WlanBssEntry {
   ssid: string | null;
   bssid: string;
-  channel_frequency: number;
+  channelFrequency: number;
   signal: number;
   connected: boolean;
-  connected_channel: boolean;
+  connectedChannel: boolean;
+  secured: boolean;
+  known: boolean;
 }
 
 export interface WlanProfile {

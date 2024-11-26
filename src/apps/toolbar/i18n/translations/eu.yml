@@ -14,6 +14,11 @@ network:
   hidden: Ezkutuko sarea
   disconnect: Deskonektatu
   more: Sareko ezarpen gehiago
+  connected: Honekin konektatuta
+  scanning: Sareak bilatzen
+  secured: Sare zifratua
+  available: Eskuragarri dauden sareak
+  saved: Gordetako sareak
 settings:
   restart: Berriro hasi
   shutdown: Itzali
