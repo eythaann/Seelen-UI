@@ -71,7 +71,9 @@ async function main() {
   });
 
   await esbuild.build({
-    entryPoints: appFolders.map((folder) => `./src/apps/${folder}/index.tsx`),
+    entryPoints: appFolders
+      .map((folder) => `./src/apps/${folder}/index.tsx`)
+      .filter((file) => fs.existsSync(file)),
     bundle: true,
     minify: isProdMode,
     sourcemap: !isProdMode,
