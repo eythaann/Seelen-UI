@@ -1,5 +1,6 @@
 pub mod ahk;
 pub mod constants;
+pub mod integrity;
 pub mod pwsh;
 pub mod updater;
 pub mod virtual_desktop;

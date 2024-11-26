@@ -13,6 +13,7 @@
 - popups and context menus fast flashing.
 - media player app not appearing on media module (weg & toolbar).
 - touch looking the cursor.
+- improve start up failure behavior.
 
 ## [2.0.5]
 ### features

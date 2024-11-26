@@ -40,10 +40,11 @@ use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
 use seelen_core::state::Settings;
 use tauri::webview_version;
-use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
-use tauri_plugin_shell::ShellExt;
 use tray::try_register_tray_icon;
-use utils::PERFORMANCE_HELPER;
+use utils::{
+    integrity::{validate_webview_runtime_is_installed, wait_for_webview_optimal_state},
+    PERFORMANCE_HELPER,
+};
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
@@ -90,34 +91,15 @@ fn print_initial_information() {
     log::info!("Locate          : {:?}", Settings::get_locale());
 }
 
-fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<()> {
-    match webview_version() {
-        Ok(_version) => Ok(()),
-        Err(_) => {
-            let ok_pressed = app
-                .dialog()
-                .message("Seelen UI requires Webview2 Runtime. Please install it.")
-                .title("WebView2 Runtime not found")
-                .kind(MessageDialogKind::Error)
-                .ok_button_label("Go to download page")
-                .blocking_show();
-            if ok_pressed {
-                let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
-                app.shell().open(url, None)?;
-            }
-            Err("Webview2 Runtime not found".into())
-        }
-    }
-}
-
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
+    validate_webview_runtime_is_installed(app.handle())?;
+    wait_for_webview_optimal_state(app.handle())?;
+
     Client::listen_tcp()?;
     APP_HANDLE
         .set(app.handle().to_owned())
         .map_err(|_| "Failed to set app handle")?;
-
-    validate_webview_runtime_is_installed(app.handle())?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
