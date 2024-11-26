@@ -17,8 +17,8 @@ use windows::{
             WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_ADHOC_PROFILES,
             WLAN_AVAILABLE_NETWORK_INCLUDE_ALL_MANUAL_HIDDEN_PROFILES,
             WLAN_AVAILABLE_NETWORK_LIST_V2, WLAN_AVAILABLE_NETWORK_V2, WLAN_BSS_ENTRY,
-            WLAN_BSS_LIST, WLAN_CONNECTION_ATTRIBUTES, WLAN_INTERFACE_INFO_LIST,
-            WLAN_PROFILE_INFO_LIST,
+            WLAN_BSS_LIST, WLAN_CONNECTION_ATTRIBUTES, WLAN_INTERFACE_INFO,
+            WLAN_INTERFACE_INFO_LIST, WLAN_PROFILE_INFO_LIST,
         },
     },
 };
@@ -107,22 +107,8 @@ impl NetworkManager {
     pub fn is_connected_to(ssid: &str) -> Result<bool> {
         let client_handle = Self::open_wlan()?;
         unsafe {
-            let mut interface_list_ptr: *mut WLAN_INTERFACE_INFO_LIST = std::ptr::null_mut();
-            let result = WlanEnumInterfaces(client_handle, None, &mut interface_list_ptr);
-
-            if result != 0 || interface_list_ptr.is_null() {
-                return Err(format!("Failed to get interface list, error code: {}", result).into());
-            }
-
-            let interface_list = &*interface_list_ptr;
-            let interfaces = std::slice::from_raw_parts(
-                interface_list.InterfaceInfo.as_ptr(),
-                interface_list.dwNumberOfItems as usize,
-            );
-
-            for interface in interfaces {
+            for interface in Self::get_wlan_interfaces(client_handle)? {
                 let connection = Self::get_connected_wlan(client_handle, &interface.InterfaceGuid);
-
                 if let Some(connection) = connection {
                     let connected_ssid = String::from_utf8_lossy(
                         &connection.wlanAssociationAttributes.dot11Ssid.ucSSID,
@@ -136,14 +122,13 @@ impl NetworkManager {
                     }
                 }
             }
-
             WlanCloseHandle(client_handle, None);
         }
-
         Ok(false)
     }
 
-    pub fn get_profiles(client_handle: HANDLE, interface_guid: &GUID) -> Result<()> {
+    #[allow(dead_code)]
+    fn get_profiles(client_handle: HANDLE, interface_guid: &GUID) -> Result<()> {
         unsafe {
             let mut profile_list_ptr = std::ptr::null_mut::<WLAN_PROFILE_INFO_LIST>();
             let result =
@@ -185,7 +170,25 @@ impl NetworkManager {
         Ok(())
     }
 
-    pub fn get_available_networks(
+    fn get_wlan_interfaces(client_handle: HANDLE) -> Result<Vec<WLAN_INTERFACE_INFO>> {
+        unsafe {
+            let mut interface_list_ptr: *mut WLAN_INTERFACE_INFO_LIST = std::ptr::null_mut();
+            let result = WlanEnumInterfaces(client_handle, None, &mut interface_list_ptr);
+
+            if result != 0 || interface_list_ptr.is_null() {
+                return Err(format!("Failed to get interface list, error code: {}", result).into());
+            }
+
+            let interface_list = &*interface_list_ptr;
+            let interfaces = std::slice::from_raw_parts(
+                interface_list.InterfaceInfo.as_ptr(),
+                interface_list.dwNumberOfItems as usize,
+            );
+            Ok(interfaces.to_vec())
+        }
+    }
+
+    fn get_available_networks(
         client_handle: HANDLE,
         interface_guid: &GUID,
     ) -> Result<Vec<WLAN_AVAILABLE_NETWORK_V2>> {
@@ -213,82 +216,73 @@ impl NetworkManager {
         }
     }
 
+    fn get_bss_entries(
+        client_handle: HANDLE,
+        interface_guid: &GUID,
+    ) -> Result<Vec<WLAN_BSS_ENTRY>> {
+        unsafe {
+            let mut bss_list_ptr = std::ptr::null_mut::<WLAN_BSS_LIST>();
+            let result = WlanGetNetworkBssList(
+                client_handle,
+                interface_guid,
+                None,
+                dot11_BSS_type_any,
+                true,
+                None,
+                &mut bss_list_ptr,
+            );
+
+            if result != 0 || bss_list_ptr.is_null() {
+                return Err(format!("Failed to get bss list, error code: {}", result).into());
+            }
+
+            let bss_list = &*bss_list_ptr;
+            let entries = std::slice::from_raw_parts(
+                bss_list.wlanBssEntries.as_ptr(),
+                bss_list.dwNumberOfItems as usize,
+            );
+            Ok(entries.to_vec())
+        }
+    }
+
     pub fn scan_networks() -> Result<Vec<WlanBssEntry>> {
         let client_handle = Self::open_wlan()?;
         let mut wlan_entries = Vec::new();
 
         unsafe {
-            let mut interface_list_ptr: *mut WLAN_INTERFACE_INFO_LIST = std::ptr::null_mut();
-            let result = WlanEnumInterfaces(client_handle, None, &mut interface_list_ptr);
-
-            if result != 0 || interface_list_ptr.is_null() {
-                return Err(format!("Failed to get interface list, error code: {}", result).into());
-            }
-
-            let interface_list = &*interface_list_ptr;
-            let interfaces = std::slice::from_raw_parts(
-                interface_list.InterfaceInfo.as_ptr(),
-                interface_list.dwNumberOfItems as usize,
-            );
-
-            for interface in interfaces {
+            for interface in Self::get_wlan_interfaces(client_handle)? {
                 let interface_guid = interface.InterfaceGuid;
-
-                let available_networks =
-                    Self::get_available_networks(client_handle, &interface_guid)?;
-                // let profiles = Self::get_profiles(client_handle, &interface_guid)?;
                 let result = WlanScan(client_handle, &interface_guid, None, None, None);
 
                 if result != 0 {
                     return Err(format!("Failed to scan, error code: {}", result).into());
                 }
 
-                let mut bss_list_ptr = std::ptr::null_mut::<WLAN_BSS_LIST>();
-                let result = WlanGetNetworkBssList(
-                    client_handle,
-                    &interface_guid,
-                    None,
-                    dot11_BSS_type_any,
-                    true,
-                    None,
-                    &mut bss_list_ptr,
-                );
-
-                if result != 0 || bss_list_ptr.is_null() {
-                    return Err(format!("Failed to get bss list, error code: {}", result).into());
+                let available_networks =
+                    Self::get_available_networks(client_handle, &interface_guid)?;
+                if available_networks.is_empty() {
+                    continue;
                 }
 
-                let bss_list = &*bss_list_ptr;
-                if bss_list.dwNumberOfItems == 0 {
+                let bss_entries = Self::get_bss_entries(client_handle, &interface_guid)?;
+                if bss_entries.is_empty() {
                     continue;
                 }
 
                 let connection = Self::get_connected_wlan(client_handle, &interface_guid);
-                let is_connected = match connection {
-                    Some(connection) => {
-                        connection.isState.0 & wlan_interface_state_connected.0
-                            == connection.isState.0
-                    }
-                    None => false,
-                };
-
-                let entries = std::slice::from_raw_parts(
-                    bss_list.wlanBssEntries.as_ptr(),
-                    bss_list.dwNumberOfItems as usize,
-                );
-
-                for entry in entries {
-                    let mut wrapped_entry = WlanBssEntry::from(entry);
+                for entry in bss_entries {
+                    let mut wrapped_entry = WlanBssEntry::from(&entry);
 
                     if let Some(connection) = connection {
                         if connection.wlanAssociationAttributes.dot11Ssid.ucSSID
                             == entry.dot11Ssid.ucSSID
                         {
-                            wrapped_entry.connected = is_connected;
-                        }
-
-                        if connection.wlanAssociationAttributes.dot11Bssid == entry.dot11Bssid {
-                            wrapped_entry.connected_channel = is_connected;
+                            wrapped_entry.connected = connection.isState.0
+                                & wlan_interface_state_connected.0
+                                == connection.isState.0;
+                            wrapped_entry.connected_channel = wrapped_entry.connected
+                                && connection.wlanAssociationAttributes.dot11Bssid
+                                    == entry.dot11Bssid;
                         }
                     }
 
