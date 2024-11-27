@@ -3,8 +3,10 @@ use tauri_plugin_updater::{Update, UpdaterExt};
 
 use crate::{error_handler::Result, seelen::get_app_handle, state::application::FULL_STATE};
 
+use super::is_msix_intallation;
+
 pub async fn check_for_updates() -> Result<Option<Update>> {
-    if tauri::is_dev() || std::env::current_exe()?.starts_with("C:\\Program Files\\WindowsApps") {
+    if tauri::is_dev() || is_msix_intallation() {
         return Ok(None);
     }
 

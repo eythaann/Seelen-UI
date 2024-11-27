@@ -10,6 +10,10 @@ use seelen_core::handlers::SeelenEvent;
 use tauri::{AppHandle, Emitter, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Graphics::Gdi::HMONITOR;
+use winreg::{
+    enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS},
+    RegKey,
+};
 
 use crate::{
     error_handler::Result,
@@ -25,7 +29,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, PERFORMANCE_HELPER},
+    utils::{ahk::AutoHotKey, is_msix_intallation, PERFORMANCE_HELPER},
     windows_api::WindowsApi,
     APP_HANDLE,
 };
@@ -179,6 +183,7 @@ impl Seelen {
         }
 
         Self::start_ahk_shortcuts()?;
+        Self::refresh_path_environment()?;
         Self::refresh_auto_start_path().await?;
         Ok(())
     }
@@ -268,6 +273,27 @@ impl Seelen {
     async fn refresh_auto_start_path() -> Result<()> {
         if WindowsApi::is_elevated()? && Self::is_auto_start_enabled().await? {
             Self::set_auto_start(true).await?;
+        }
+        Ok(())
+    }
+
+    pub fn refresh_path_environment() -> Result<()> {
+        if tauri::is_dev() || is_msix_intallation() {
+            return Ok(());
+        }
+
+        let hkcr = RegKey::predef(HKEY_CURRENT_USER);
+        let enviroments = hkcr.open_subkey_with_flags("Environment", KEY_ALL_ACCESS)?;
+        let env_path: String = enviroments.get_value("Path")?;
+
+        let install_folder = std::env::current_exe()?
+            .parent()
+            .expect("Failed to get parent directory")
+            .to_string_lossy()
+            .to_string();
+        if !env_path.contains(&install_folder) {
+            log::trace!("Adding installation directory to PATH environment variable");
+            enviroments.set_value("Path", &format!("{};{}", env_path, install_folder))?;
         }
         Ok(())
     }

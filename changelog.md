@@ -8,6 +8,7 @@
 ### enhancements
 - some UI/UX improvements on seelen wallpaper manager.
 - UI/UX improvements on wi-fi toolbar module.
+- seelen-ui added to user PATH enviroment variable.
 
 ### fix
 - popups and context menus fast flashing.
