@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.6]
 ### feature
 - add bases for future plugins and widgets sytems.
 - change wallpaper randomly.
