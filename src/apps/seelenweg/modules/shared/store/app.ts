@@ -9,6 +9,7 @@ import {
   ExtendedPinnedWegItem,
   ExtendedTemporalWegItem,
   HWND,
+  OpenedWindow,
   RootState,
   SwItem,
 } from './domain';
@@ -25,6 +26,7 @@ const initialState: RootState = {
   isOverlaped: false,
   settings: new SeelenWegSettings(),
   mediaSessions: [],
+  monitorInfo: null,
   colors: UIColors.default(),
 };
 
@@ -168,8 +170,8 @@ export const RootSlice = createSlice({
         return;
       }
 
-      if (!pinedApp.opens.includes(new_app.hwnd)) {
-        pinedApp.opens.push(new_app.hwnd);
+      if (!pinedApp.opens.some((current: OpenedWindow) => current.hwnd === new_app.hwnd)) {
+        pinedApp.opens.push({ hwnd: new_app.hwnd, presentative_monitor: new_app.presentative_monitor });
       }
 
       // update path to pinned apps normally changed on updates
@@ -185,12 +187,33 @@ export const RootSlice = createSlice({
         found.title = action.payload.title;
       }
     },
+    updateMonitorPosition(state, action: PayloadAction<OpenedWindow>) {
+      const current_app = state.openApps[action.payload.hwnd];
+      if (current_app) {
+        current_app.presentative_monitor = action.payload.presentative_monitor;
+      }
+
+      function openSearch(window: OpenedWindow) {
+        return window.hwnd === action.payload.hwnd;
+      }
+
+      state.itemsOnLeft.concat(state.itemsOnCenter).concat(state.itemsOnRight)
+        .filter((app: SwItem) => {
+          if ('opens' in app && app.opens.some(openSearch)) {
+            return true;
+          }
+
+          return false;
+        }).forEach((app: SwItem) => {
+          app.opens = app.opens.filter((window: OpenedWindow) => !openSearch(window)).concat({ hwnd: action.payload.hwnd, presentative_monitor: action.payload.presentative_monitor });
+        });
+    },
     removeOpenApp(state, action: PayloadAction<HWND>) {
       delete state.openApps[action.payload];
 
       function filter(app: SwItem) {
         if ('opens' in app) {
-          app.opens = app.opens.filter((hwnd) => hwnd !== action.payload);
+          app.opens = app.opens.filter((window: OpenedWindow) => window.hwnd !== action.payload);
         }
         return app.type !== SwItemType.TemporalApp || app.opens.length > 0;
       }

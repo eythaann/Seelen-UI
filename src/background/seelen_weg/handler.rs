@@ -1,12 +1,16 @@
 use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
 
 use image::ImageFormat;
-use seelen_core::state::{PinnedWegItemData, WegItem};
+use seelen_core::state::{MonitorInfo, PinnedWegItemData, WegItem};
 use tauri::Emitter;
 
 use crate::{
-    error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
-    state::application::FULL_STATE, trace_lock, windows_api::WindowsApi,
+    error_handler::Result,
+    hook::LAST_ACTIVE_NOT_SEELEN,
+    seelen::get_app_handle,
+    state::application::FULL_STATE,
+    trace_lock,
+    windows_api::{window::Window, WindowsApi},
 };
 use windows::Win32::{
     Foundation::HWND,
@@ -85,6 +89,19 @@ pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
     }
 
     Ok(())
+}
+
+#[tauri::command(async)]
+pub fn weg_get_monitor_info(window: tauri::Window) -> Result<MonitorInfo> {
+    let monitor = Window::from(window.hwnd()?).monitor();
+
+    let result = MonitorInfo {
+        id: monitor.id()?,
+        index: monitor.index()?,
+        is_primary: monitor.is_primary()?,
+    };
+
+    Ok(result)
 }
 
 #[tauri::command(async)]

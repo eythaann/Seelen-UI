@@ -88,6 +88,8 @@ weg:
   dock_side: நிலை
   delay_to_show: காட்ட தாமதம்
   delay_to_hide: மறைக்க தாமதம்
+  item_show_upon_multitaskbar: எனது பணிப்பட்டு பயன்பாடுகளைக் காட்டு
+  behaviour: பல காட்சி நடத்தை
 devtools:
   install_folder: நிறுவல் கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு

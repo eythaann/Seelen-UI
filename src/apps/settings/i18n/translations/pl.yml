@@ -88,6 +88,8 @@ weg:
   dock_side: Pozycja
   delay_to_show: Opóźnienie w pokazie
   delay_to_hide: Opóźnienie w ukryciu
+  behaviour: Wiele zachowań wyświetlaczy
+  item_show_upon_multitaskbar: Pokaż moje aplikacje do paska zadań na
 devtools:
   load: Obciążenie
   custom_config_file: Załaduj niestandardowy plik konfiguracyjny

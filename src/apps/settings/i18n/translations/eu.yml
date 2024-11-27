@@ -88,6 +88,8 @@ weg:
   dock_side: Kokaleku
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
+  behaviour: Bistaratzeko portaera anitz
+  item_show_upon_multitaskbar: Erakutsi nire zeregin-barrako aplikazioak
 devtools:
   enable: Gaitu garatzaileen tresnak
   load: Zamatu

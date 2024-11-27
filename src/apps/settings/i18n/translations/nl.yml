@@ -88,6 +88,8 @@ weg:
   dock_side: Positie
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
+  behaviour: Meervoudig weergavegedrag
+  item_show_upon_multitaskbar: Toon mijn taakbalk -apps op
 devtools:
   load: Laden
   data_folder: Gegevensmap

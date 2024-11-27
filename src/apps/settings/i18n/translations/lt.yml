@@ -88,6 +88,8 @@ weg:
   dock_side: Pozicija
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
+  behaviour: Keli ekrano elgesys
+  item_show_upon_multitaskbar: Parodykite savo užduočių juostos programas
 devtools:
   settings_file: Nustatymų failas
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą

@@ -87,6 +87,8 @@ weg:
   dock_side: पद
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
+  item_show_upon_multitaskbar: मेरे टास्कबार ऐप्स को दिखाएं
+  behaviour: बहु प्रदर्शन व्यवहार
 devtools:
   install_folder: स्थापना फ़ोल्डर
   load: भार

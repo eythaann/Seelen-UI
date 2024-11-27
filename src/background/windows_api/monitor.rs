@@ -41,6 +41,10 @@ impl Monitor {
         WindowsApi::monitor_index(self.0)
     }
 
+    pub fn is_primary(&self) -> Result<bool> {
+        WindowsApi::monitor_get_is_primary(self.0)
+    }
+
     pub fn at(index: usize) -> Option<Monitor> {
         let monitors = MonitorEnumerator::get_all().ok()?;
         monitors.get(index).map(|m| Self::from(*m))

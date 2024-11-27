@@ -88,6 +88,8 @@ weg:
   dock_side: Դիրք
   delay_to_show: Ցուցադրման ուշացում
   delay_to_hide: Հետաձգել թաքցնելը
+  behaviour: Display ուցադրման բազմաթիվ վարք
+  item_show_upon_multitaskbar: Show ույց տվեք իմ աշխատանքային տողի ծրագրերը
 devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ

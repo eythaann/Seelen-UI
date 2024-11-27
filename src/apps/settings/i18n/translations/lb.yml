@@ -88,6 +88,8 @@ weg:
   dock_side: Positioun un
   delay_to_show: Verspéidung fir ze weisen
   delay_to_hide: Verspéidung ze verstoppen
+  behaviour: Multiple Affichage Verhalen
+  item_show_upon_multitaskbar: Weisen meng Taskbar Apps op
 devtools:
   app_folders: App Classeure
   enable: Aktivéiert Entwéckler Tools

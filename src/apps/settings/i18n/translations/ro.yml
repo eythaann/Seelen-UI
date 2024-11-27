@@ -88,6 +88,8 @@ weg:
   dock_side: Poziţie
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
+  item_show_upon_multitaskbar: Arată -mi aplicațiile pentru bara de activități
+  behaviour: Comportament de afișare multiplă
 devtools:
   load: Sarcină
   data_folder: Folder de date

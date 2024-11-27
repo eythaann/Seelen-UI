@@ -88,6 +88,8 @@ weg:
   dock_side: Safle
   delay_to_show: Oedi i ddangos
   delay_to_hide: Oedi i guddio
+  item_show_upon_multitaskbar: Dangos fy apiau bar tasgau ymlaen
+  behaviour: Ymddygiad arddangos lluosog
 devtools:
   data_folder: Ffolder data
   custom_config_file: Llwythwch ffeil ffurfweddu arfer

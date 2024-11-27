@@ -87,6 +87,8 @@ weg:
   dock_side: પદ
   delay_to_show: બતાવવામાં વિલંબ
   delay_to_hide: છુપાવવામાં વિલંબ
+  item_show_upon_multitaskbar: મારી ટાસ્કબાર એપ્લિકેશનો પર બતાવો
+  behaviour: બહુવિધ પ્રદર્શન વર્તન
 devtools:
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો

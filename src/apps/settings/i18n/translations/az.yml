@@ -88,6 +88,8 @@ weg:
   dock_side: Mövqe
   delay_to_show: Göstərmək üçün gecikmə
   delay_to_hide: Gizlətmək üçün gecikmə
+  behaviour: Birdən çox ekran davranışı
+  item_show_upon_multitaskbar: TaskBar tətbiqlərimi göstər
 devtools:
   app_folders: Tətbiq qovluqları
   data_folder: Məlumat qovluğu

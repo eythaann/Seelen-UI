@@ -88,6 +88,8 @@ weg:
   dock_side: ਸਥਿਤੀ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
+  behaviour: ਮਲਟੀਪਲ ਡਿਸਪਲੇਅ ਵਿਵਹਾਰ
+  item_show_upon_multitaskbar: ਮੇਰੇ ਟਾਸਕਬਾਰ ਐਪਸ ਨੂੰ ਦਿਖਾਓ
 devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ

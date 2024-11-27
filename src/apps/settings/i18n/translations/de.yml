@@ -95,6 +95,8 @@ weg:
   dock_side: Position
   delay_to_show: Verzögerung beim Anzeigen
   delay_to_hide: Verzögerung zum Verstecken
+  item_show_upon_multitaskbar: Zeigen Sie meine Taskleisten -Apps an
+  behaviour: Mehrfach Anzeigeverhalten
 devtools:
   enable: Entwicklerwerkzeuge aktivieren
   app_folders: Anwendungsordner

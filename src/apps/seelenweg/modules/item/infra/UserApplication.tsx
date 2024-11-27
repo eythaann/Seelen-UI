@@ -13,6 +13,7 @@ import { Selectors } from '../../shared/store/app';
 import {
   ExtendedPinnedWegItem,
   ExtendedTemporalWegItem,
+  OpenedWindow,
   RootState,
 } from '../../shared/store/domain';
 
@@ -63,7 +64,7 @@ export const UserApplication = memo(({ item }: Props) => {
 
   useEffect(() => {
     if (openPreview) {
-      updatePreviews(item.opens);
+      updatePreviews(item.opens.map((current: OpenedWindow) => current.hwnd));
     }
   }, [openPreview]);
 
@@ -90,9 +91,11 @@ export const UserApplication = memo(({ item }: Props) => {
               prefix="preview"
             >
               <div className="weg-item-preview-scrollbar">
-                {item.opens.map((hwnd) => (
-                  <UserApplicationPreview key={hwnd} hwnd={hwnd} />
-                ))}
+                {item.opens
+                  .map((current: OpenedWindow) => (
+                    <UserApplicationPreview key={current.hwnd} hwnd={current.hwnd} />
+                  ))
+                }
               </div>
             </BackgroundByLayersV2>
           }
@@ -100,21 +103,21 @@ export const UserApplication = memo(({ item }: Props) => {
           <div
             className="weg-item"
             onClick={() => {
-              let hwnd = item.opens[0];
-              if (!hwnd) {
+              let openWindow: OpenedWindow = item.opens[0];
+              if (!openWindow) {
                 if (item.path.endsWith('.lnk')) {
                   invoke(SeelenCommand.OpenFile, { path: item.path });
                 } else {
                   invoke(SeelenCommand.OpenFile, { path: item.execution_command });
                 }
               } else {
-                invoke(SeelenCommand.WegToggleWindowState, { hwnd });
+                invoke(SeelenCommand.WegToggleWindowState, { hwnd: openWindow.hwnd });
               }
             }}
             onAuxClick={(e) => {
-              let hwnd = item.opens[0];
-              if (e.button === 1 && hwnd) {
-                invoke(SeelenCommand.WegCloseApp, { hwnd });
+              let opened: OpenedWindow = item.opens[0];
+              if (e.button === 1 && opened) {
+                invoke(SeelenCommand.WegCloseApp, { hwnd: opened.hwnd });
               }
             }}
             onContextMenu={(e) => e.stopPropagation()}

@@ -88,6 +88,8 @@ weg:
   dock_side: Pożizzjoni
   delay_to_show: Dewmien biex juri
   delay_to_hide: Dewmien biex jinħbew
+  item_show_upon_multitaskbar: Uri l-apps taskbar tiegħi fuq
+  behaviour: Imġieba multipla tal-wiri
 devtools:
   data_folder: Folder tad-dejta
   install_folder: Folder tal-installazzjoni

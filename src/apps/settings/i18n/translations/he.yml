@@ -87,6 +87,8 @@ weg:
   dock_side: מַצָב
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
+  behaviour: התנהגות תצוגה מרובה
+  item_show_upon_multitaskbar: הראה את אפליקציות שורת המשימות שלי
 devtools:
   load: לִטעוֹן
   install_folder: תיקיית התקנה
