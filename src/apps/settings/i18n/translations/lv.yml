@@ -58,6 +58,7 @@ toolbar:
   label: Rīkjosla
   delay_to_show: Kavēšanās parādīt
   delay_to_hide: Aizkavē paslēpties
+  use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
 wm:
   border:
     enable: Iespējot loga robežu
@@ -88,6 +89,7 @@ weg:
   dock_side: Pozīcija
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
+  use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
 devtools:
   install_folder: Instalēšanas mape
   enable: Iespējot izstrādātāju rīkus

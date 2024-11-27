@@ -58,6 +58,7 @@ toolbar:
   label: Thanh công cụ
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
+  use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
 wm:
   border:
     width: Chiều rộng biên giới
@@ -88,6 +89,7 @@ weg:
   dock_side: Chức vụ
   delay_to_show: Trì hoãn hiển thị
   delay_to_hide: Trì hoãn việc ẩn giấu
+  use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
 devtools:
   load: Trọng tải
   app_folders: Thư mục ứng dụng

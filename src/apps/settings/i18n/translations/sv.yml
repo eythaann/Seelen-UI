@@ -58,6 +58,7 @@ toolbar:
   label: Verktygsfält
   delay_to_show: Fördröjning att visa
   delay_to_hide: Dröjsmål att gömma sig
+  use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
 wm:
   border:
     width: Gränsbredd
@@ -88,6 +89,7 @@ weg:
   dock_side: Placera
   delay_to_show: Fördröjning att visa
   delay_to_hide: Dröjsmål att gömma sig
+  use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
 devtools:
   install_folder: Installationsmapp
   load: Ladda

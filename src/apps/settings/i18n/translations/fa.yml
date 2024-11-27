@@ -57,6 +57,7 @@ toolbar:
   label: نوار ابزار
   delay_to_show: تاخیر برای نمایش
   delay_to_hide: تاخیر برای پنهان شدن
+  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
 wm:
   border:
     enable: مرز پنجره را فعال کنید
@@ -87,6 +88,7 @@ weg:
   dock_side: موقعیت
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
+  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
 devtools:
   load: بار
   install_folder: پوشه نصب

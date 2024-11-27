@@ -89,6 +89,14 @@ export const SeelenWegSettings = () => {
           }
         >
           <SettingsOption>
+            <span>{t('weg.use_multiple_monitor_overlap_logic')}</span>
+            <Switch
+              disabled={settings.hideMode != HideMode.OnOverlap}
+              checked={settings.useMultiMonitorOverlapLogic}
+              onChange={(value) => dispatch(SeelenWegActions.setUseMultiMonitorOverlapLogic(value))}
+            />
+          </SettingsOption>
+          <SettingsOption>
             <span>{t('weg.delay_to_show')} (ms)</span>
             <InputNumber
               value={settings.delayToShow}

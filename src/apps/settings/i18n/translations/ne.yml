@@ -57,6 +57,7 @@ toolbar:
   label: औजारपरो
   delay_to_show: देखाउन ढिलाइ
   delay_to_hide: लुकाउन ढिलाइ
+  use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
 wm:
   border:
     offset: सीमा अफसेट
@@ -87,6 +88,7 @@ weg:
   dock_side: स्थिति
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
+  use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
 devtools:
   app_folders: निल्डर
   custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्

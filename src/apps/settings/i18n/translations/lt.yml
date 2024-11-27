@@ -58,6 +58,7 @@ toolbar:
   label: Įrankių juosta
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
+  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
 wm:
   border:
     enable: Įgalinti lango sieną
@@ -88,6 +89,7 @@ weg:
   dock_side: Pozicija
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
+  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
 devtools:
   settings_file: Nustatymų failas
   custom_config_file: Įkelkite pasirinktinį konfigūracijos failą

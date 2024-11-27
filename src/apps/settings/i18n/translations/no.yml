@@ -58,6 +58,7 @@ toolbar:
   label: Verktøylinje
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
+  use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
 wm:
   border:
     enable: Aktiver vinduets grense
@@ -88,6 +89,7 @@ weg:
   dock_side: Stilling
   delay_to_show: Forsinkelse med visning
   delay_to_hide: Utsett å skjule
+  use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
 devtools:
   load: Laste
   custom_config_file: Last inn tilpasset konfigurasjonsfil

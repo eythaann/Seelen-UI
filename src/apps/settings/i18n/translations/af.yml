@@ -58,6 +58,7 @@ toolbar:
   label: Werkbalk
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
+  use_multiple_monitor_overlap_logic: Gebruik vertoonspesifieke in plaas van enkelfokuslogika
 wm:
   border:
     width: Grenswydte
@@ -88,6 +89,7 @@ weg:
   dock_side: Posisie
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
+  use_multiple_monitor_overlap_logic: Gebruik vertoonspesifieke in plaas van enkelfokuslogika
 devtools:
   app_folders: APP -vouers
   load: Vrag

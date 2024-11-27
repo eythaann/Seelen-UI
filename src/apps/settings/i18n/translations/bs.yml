@@ -58,6 +58,7 @@ toolbar:
   label: Alatna traka
   delay_to_show: Kašnjenje za prikaz
   delay_to_hide: Odložite da se sakrijete
+  use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
 wm:
   border:
     width: Širina granice
@@ -88,6 +89,7 @@ weg:
   dock_side: Položaj
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
+  use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
 devtools:
   app_folders: App Mape
   settings_file: Datoteka postavki

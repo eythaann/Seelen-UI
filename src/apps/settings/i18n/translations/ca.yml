@@ -58,6 +58,9 @@ toolbar:
   label: Barra d’eines
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
+  use_multiple_monitor_overlap_logic: >-
+    Utilitzeu la lògica específica de la pantalla en lloc de la lògica
+    d'enfocament únic
 wm:
   border:
     offset: Compensació fronterera
@@ -88,6 +91,9 @@ weg:
   dock_side: Posició
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
+  use_multiple_monitor_overlap_logic: >-
+    Utilitzeu la lògica específica de la pantalla en lloc de la lògica
+    d'enfocament únic
 devtools:
   load: Carregar
   data_folder: Carpeta de dades

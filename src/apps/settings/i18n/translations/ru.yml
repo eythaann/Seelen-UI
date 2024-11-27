@@ -65,6 +65,7 @@ toolbar:
   label: Верхняя панель
   delay_to_hide: Задержка, чтобы скрыть
   delay_to_show: Задержка показа
+  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 wm:
   layout: Макет
   author: Автор
@@ -95,6 +96,7 @@ weg:
     visible_separators: Разделители
   delay_to_show: Задержка показа
   delay_to_hide: Задержка, чтобы скрыть
+  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 devtools:
   enable: Включить инструменты разработчика
   app_folders: Папки приложения

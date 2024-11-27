@@ -58,6 +58,7 @@ toolbar:
   label: Werkbalk
   delay_to_show: Vertraging om te tonen
   delay_to_hide: Vertraging om te verbergen
+  use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
 wm:
   border:
     width: Grensbreedte
@@ -88,6 +89,7 @@ weg:
   dock_side: Positie
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
+  use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
 devtools:
   load: Laden
   data_folder: Gegevensmap

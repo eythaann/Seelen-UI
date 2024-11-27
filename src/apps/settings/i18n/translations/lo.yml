@@ -59,6 +59,7 @@ toolbar:
   label: ແຖບເຄື່ອງມື
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
+  use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
 wm:
   border:
     enable: ເປີດໃຊ້ຂອບຂອງປ່ອງຢ້ຽມ
@@ -89,6 +90,7 @@ weg:
   dock_side: ຕໍາແຫນ່ງ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
+  use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
 devtools:
   custom_config_file: ໂຫຼດໄຟລ໌ການຕັ້ງຄ່າແບບກຳນົດເອງ
   enable: ເປີດໃຊ້ເຄື່ອງມືນັກພັດທະນາ

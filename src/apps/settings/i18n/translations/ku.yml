@@ -57,6 +57,7 @@ toolbar:
   label: Toolbar
   delay_to_show: Dereng nîşan bide
   delay_to_hide: Dereng ji bo veşartinê
+  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
 wm:
   border:
     width: Berfirehiya sînor
@@ -87,6 +88,7 @@ weg:
   dock_side: Rewş
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
+  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
 devtools:
   load: Dawetkirin
   app_folders: Pelên App

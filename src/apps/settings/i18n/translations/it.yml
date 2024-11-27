@@ -73,6 +73,9 @@ toolbar:
   auto_hide: Nascondi automaticamente
   delay_to_show: Ritardo per mostrare
   delay_to_hide: Ritardo per nascondere
+  use_multiple_monitor_overlap_logic: >-
+    Utilizza la logica di visualizzazione specifica anziché quella di focus
+    singolo
 vd:
   disabled_windows_version: La strategia nativa dei Desktop Virtuali non è disponibile per la vostra versione di Windows.
   strategy:

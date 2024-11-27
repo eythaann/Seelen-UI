@@ -58,6 +58,7 @@ toolbar:
   label: టూల్‌బార్
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
+  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
 wm:
   border:
     width: అంచు వెడల్పు
@@ -88,6 +89,7 @@ weg:
   dock_side: స్థానం
   delay_to_show: చూపించడానికి ఆలస్యం
   delay_to_hide: దాచడానికి ఆలస్యం
+  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
 devtools:
   enable: డెవలపర్ సాధనాలను ప్రారంభించండి
   custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి
