@@ -58,6 +58,7 @@ toolbar:
   label: Panel s nástrojmi
   delay_to_hide: Odložiť skryť
   delay_to_show: Oneskorenie zobrazenia
+  use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
 wm:
   border:
     width: Šírka hranice
@@ -88,6 +89,7 @@ weg:
   dock_side: Pozícia
   delay_to_show: Oneskorenie zobrazenia
   delay_to_hide: Odložiť skryť
+  use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
 devtools:
   enable: Povoľte vývojárskym nástrojom
   custom_config_file: Načítať vlastný konfiguračný súbor

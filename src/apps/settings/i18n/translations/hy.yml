@@ -58,6 +58,7 @@ toolbar:
   label: Գործիքագոտու
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
+  use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
 wm:
   border:
     enable: Միացնել պատուհանի սահմանը
@@ -88,6 +89,7 @@ weg:
   dock_side: Դիրք
   delay_to_show: Ցուցադրման ուշացում
   delay_to_hide: Հետաձգել թաքցնելը
+  use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
 devtools:
   custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
   data_folder: Տվյալների պանակ

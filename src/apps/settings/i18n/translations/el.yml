@@ -58,6 +58,7 @@ toolbar:
   label: Γραμμή εργαλείων
   delay_to_hide: Καθυστέρηση για απόκρυψη
   delay_to_show: Καθυστέρηση εμφάνισης
+  use_multiple_monitor_overlap_logic: Χρησιμοποιήστε συγκεκριμένα την οθόνη αντί για λογική εστίασης
 wm:
   border:
     offset: Μετατόπιση των συνόρων
@@ -88,6 +89,7 @@ weg:
   dock_side: Θέση
   delay_to_show: Καθυστέρηση εμφάνισης
   delay_to_hide: Καθυστέρηση για απόκρυψη
+  use_multiple_monitor_overlap_logic: Χρησιμοποιήστε συγκεκριμένα την οθόνη αντί για λογική εστίασης
 devtools:
   data_folder: Φάκελος δεδομένων
   custom_config_file: Φόρτωση προσαρμοσμένου αρχείου ρυθμίσεων

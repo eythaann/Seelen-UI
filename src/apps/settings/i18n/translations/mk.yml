@@ -58,6 +58,7 @@ toolbar:
   label: Лента со алатки
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
+  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
 wm:
   border:
     width: Ширина на границата
@@ -88,6 +89,7 @@ weg:
   dock_side: Позиција
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
+  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
 devtools:
   load: Оптоварување
   custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација

@@ -56,6 +56,7 @@ toolbar:
   label: ツールバーの設定
   delay_to_show: 表示が遅れる
   delay_to_hide: 隠れるまでの遅延
+  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
 wm:
   border:
     offset: 境界線の余白
@@ -86,6 +87,7 @@ weg:
   dock_side: 位置
   delay_to_show: 表示が遅れる
   delay_to_hide: 隠れるまでの遅延
+  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
 devtools:
   load: ロード
   data_folder: データのフォルダー
