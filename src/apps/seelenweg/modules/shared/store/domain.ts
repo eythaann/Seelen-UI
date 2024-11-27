@@ -1,6 +1,7 @@
 import { modify } from 'readable-types';
 import {
   MediaWegItem,
+  MonitorInfo,
   PinnedWegItem,
   SeelenWegSettings,
   SeparatorWegItem,
@@ -74,5 +75,6 @@ export interface RootState extends IRootState<SeelenWegSettings> {
   // ----------------------
   focusedApp: FocusedApp | null;
   isOverlaped: boolean;
+  monitorInfo: MonitorInfo;
   mediaSessions: MediaSession[];
 }

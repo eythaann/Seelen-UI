@@ -268,6 +268,14 @@ impl SeelenWeg {
         self.set_overlaped_status(is_overlaped)
     }
 
+    pub fn propagate_associated_event<S: Serialize + Clone>(
+        &self,
+        event: &str,
+        payload: S,
+    ) -> Result<()> {
+        self.emit(event, payload)
+    }
+
     pub fn hide(&mut self) -> Result<()> {
         WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
         self.window.emit_to(

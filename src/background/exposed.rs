@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::path::PathBuf;
 
+use seelen_core::state::MonitorInfo;
 use tauri::{Builder, WebviewWindow, Wry};
 use tauri_plugin_shell::ShellExt;
 
@@ -18,6 +19,7 @@ use crate::seelen_wm_v2::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
 use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
+use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 use crate::winevent::{SyntheticFullscreenData, WinEvent};
 use crate::{log_error, utils};
@@ -28,6 +30,20 @@ use crate::modules::notifications::infrastructure::*;
 use crate::modules::power::infrastructure::*;
 use crate::modules::system_settings::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
+
+#[tauri::command(async)]
+pub fn get_monitor_info(window: tauri::Window) -> Result<MonitorInfo> {
+    let monitor = Window::from(window.hwnd()?).monitor();
+
+    let result = MonitorInfo {
+        id: monitor.id()?,
+        index: monitor.index()?,
+        orientation: *monitor.display_orientation(),
+        is_tablet_mode: *monitor.tablet_mode(),
+    };
+
+    Ok(result)
+}
 
 #[tauri::command(async)]
 fn select_file_on_explorer(path: String) -> Result<()> {
@@ -177,6 +193,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         simulate_fullscreen,
         check_for_updates,
         install_last_available_update,
+        get_monitor_info,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,

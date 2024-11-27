@@ -3,7 +3,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { debounce } from 'lodash';
-import { SwItemType, WegItem, WegItems } from 'seelen-core';
+import { MonitorInfo, SeelenCommand, SwItemType, WegItem, WegItems } from 'seelen-core';
 
 import { store } from './infra';
 
@@ -49,4 +49,8 @@ export const savePinnedItems = debounce(
 
 export const loadPinnedItems = async (): Promise<WegItems> => {
   return invoke<WegItems>('state_get_weg_items');
+};
+
+export const loadMonitorInfo = async (): Promise<MonitorInfo> => {
+  return invoke<MonitorInfo>(SeelenCommand.RequestMonitorInfo);
 };

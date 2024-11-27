@@ -13,7 +13,7 @@ use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;
 use widestring::U16CStr;
-use windows_core::Interface;
+use windows_core::{Interface, PCSTR};
 
 use std::{
     ffi::{c_void, OsString},
@@ -76,7 +76,9 @@ use windows::{
             },
         },
         UI::{
+            Controls::POINTER_DEVICE_INFO,
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
+            Input::Pointer::GetPointerDevices,
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow},
@@ -153,18 +155,45 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn get_display_orientation() -> Result<DEVMODE_DISPLAY_ORIENTATION> {
+    pub fn get_display_orientation(hmonitor: HMONITOR) -> Result<DEVMODE_DISPLAY_ORIENTATION> {
+        let device = Self::monitor_info(hmonitor)?.szDevice;
+        let utf_device = String::from_utf16(&device).unwrap();
+        let utf_device_bytes = utf_device.as_bytes();
+
         let mut devmode = DEVMODEA::default();
         unsafe {
-            if EnumDisplaySettingsA(None, ENUM_CURRENT_SETTINGS, &mut devmode).into() {
+            if EnumDisplaySettingsA(
+                PCSTR(utf_device_bytes.as_ptr()),
+                ENUM_CURRENT_SETTINGS,
+                &mut devmode,
+            )
+            .into()
+            {
                 return Ok(devmode.Anonymous1.Anonymous2.dmDisplayOrientation);
             }
         }
         Ok(DMDO_DEFAULT)
     }
 
-    pub fn is_in_tablet_mode() -> Result<bool> {
-        Ok(unsafe { GetSystemMetrics(SM_CONVERTIBLESLATEMODE) } == 0)
+    pub fn is_in_tablet_mode(monitor: HMONITOR) -> Result<bool> {
+        if unsafe { GetSystemMetrics(SM_CONVERTIBLESLATEMODE) } == 0 {
+            let is_monitor_touchable = unsafe {
+                let mut count = u32::default();
+
+                GetPointerDevices(&mut count, None)?;
+
+                let mut device: Vec<POINTER_DEVICE_INFO> =
+                    vec![POINTER_DEVICE_INFO::default(); count as usize];
+                let param = &mut device[..];
+                GetPointerDevices(&mut count, Some(param.as_mut_ptr()))?;
+
+                param.iter().any(|item| item.monitor == monitor)
+            };
+
+            return Ok(is_monitor_touchable);
+        }
+
+        Ok(false)
     }
 
     pub fn enum_windows(callback: WNDENUMPROC, callback_data_address: isize) -> Result<()> {

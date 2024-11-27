@@ -1,7 +1,9 @@
 use getset::{Getters, MutGetters};
+use seelen_core::handlers::SeelenEvent;
 
 use crate::{
     error_handler::Result,
+    log_error,
     seelen_bar::FancyToolbar,
     seelen_weg::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
@@ -52,17 +54,40 @@ impl SeelenInstanceContainer {
             self.monitor.update().ok();
 
             if *self.monitor.display_orientation() != *before_update.display_orientation() {
-                log::trace!(
-                    "Orientation changed to {:?}!",
-                    self.monitor.display_orientation()
-                )
+                self.propagate_orientation();
             }
+
             if *self.monitor.tablet_mode() != *before_update.tablet_mode() {
-                log::trace!(
-                    "Touch priority changed to {:?}!",
-                    self.monitor.tablet_mode()
-                )
+                self.propagate_tablet_mode();
             }
+        }
+    }
+
+    fn propagate_orientation(&mut self) {
+        let orientation = self.monitor.display_orientation();
+        if let Some(bar) = &self.toolbar {
+            log_error!(
+                bar.propagate_associated_event(SeelenEvent::ToolbarOrientationChanged, orientation)
+            );
+        }
+        if let Some(weg) = &self.weg {
+            log_error!(
+                weg.propagate_associated_event(SeelenEvent::WegOrientationChanged, orientation)
+            );
+        }
+    }
+    fn propagate_tablet_mode(&mut self) {
+        if let Some(bar) = &self.toolbar {
+            log_error!(bar.propagate_associated_event(
+                SeelenEvent::ToolbarTabletModeChanged,
+                *self.monitor.tablet_mode()
+            ));
+        }
+        if let Some(weg) = &self.weg {
+            log_error!(weg.propagate_associated_event(
+                SeelenEvent::WegTabletModeChanged,
+                *self.monitor.tablet_mode()
+            ));
         }
     }
 

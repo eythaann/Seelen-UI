@@ -1,7 +1,10 @@
 use getset::Getters;
+use seelen_core::state::MonitorOrientation;
 use windows::Win32::{
     Foundation::RECT,
-    Graphics::Gdi::{DEVMODE_DISPLAY_ORIENTATION, HMONITOR},
+    Graphics::Gdi::{
+        DEVMODE_DISPLAY_ORIENTATION, DMDO_180, DMDO_270, DMDO_90, DMDO_DEFAULT, HMONITOR,
+    },
 };
 
 use crate::{error_handler::Result, modules::input::domain::Point};
@@ -16,7 +19,7 @@ pub struct Monitor {
     #[getset(get = "pub")]
     device_pixel_ratio: u32,
     #[getset(get = "pub")]
-    display_orientation: DEVMODE_DISPLAY_ORIENTATION,
+    display_orientation: MonitorOrientation,
     #[getset(get = "pub")]
     tablet_mode: bool,
 }
@@ -49,16 +52,19 @@ impl Monitor {
             monitor,
             work_area: WindowsApi::monitor_rect(monitor).ok().unwrap(),
             device_pixel_ratio: WindowsApi::get_device_pixel_ratio(monitor).ok().unwrap() as u32,
-            display_orientation: WindowsApi::get_display_orientation().ok().unwrap(),
-            tablet_mode: WindowsApi::is_in_tablet_mode().ok().unwrap(),
+            display_orientation: Monitor::convert_orientation(
+                WindowsApi::get_display_orientation(monitor).ok().unwrap(),
+            ),
+            tablet_mode: WindowsApi::is_in_tablet_mode(monitor).ok().unwrap(),
         }
     }
 
     pub fn update(&mut self) -> Result<()> {
         self.work_area = WindowsApi::monitor_rect(self.monitor)?;
         self.device_pixel_ratio = WindowsApi::get_device_pixel_ratio(self.monitor)? as u32;
-        self.display_orientation = WindowsApi::get_display_orientation()?;
-        self.tablet_mode = WindowsApi::is_in_tablet_mode()?;
+        self.display_orientation =
+            Monitor::convert_orientation(WindowsApi::get_display_orientation(self.monitor)?);
+        self.tablet_mode = WindowsApi::is_in_tablet_mode(self.monitor)?;
 
         Ok(())
     }
@@ -89,5 +95,15 @@ impl Monitor {
             }
         }
         None
+    }
+
+    fn convert_orientation(orientation: DEVMODE_DISPLAY_ORIENTATION) -> MonitorOrientation {
+        match orientation {
+            DMDO_DEFAULT => MonitorOrientation::HorizontalNormal,
+            DMDO_180 => MonitorOrientation::HorizontalUpSideDown,
+            DMDO_90 => MonitorOrientation::VerticalNormal,
+            DMDO_270 => MonitorOrientation::VerticalUpSideDown,
+            _ => MonitorOrientation::HorizontalNormal,
+        }
     }
 }

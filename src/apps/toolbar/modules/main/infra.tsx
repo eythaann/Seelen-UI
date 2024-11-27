@@ -79,6 +79,7 @@ export function ToolBar({ structure }: Props) {
   const plugins = useSelector(Selectors.plugins);
   const isOverlaped = useSelector(Selectors.isOverlaped);
   const hideMode = useSelector(Selectors.settings.hideMode);
+  const monitorInfo = useSelector(Selectors.monitorInfo);
 
   const dispatch = useDispatch();
   const [forceUpdate] = useForceUpdate();
@@ -153,7 +154,8 @@ export function ToolBar({ structure }: Props) {
           ...structure.right,
         ]}
         onReorder={onReorderPinned}
-        className={cx('ft-bar', {
+        className={cx('ft-bar', monitorInfo.orientation.toLowerCase(), {
+          tabletMode: monitorInfo.isTabletMode,
           'ft-bar-hidden': shouldBeHidden,
           'ft-bar-delayed': delayed,
         })}

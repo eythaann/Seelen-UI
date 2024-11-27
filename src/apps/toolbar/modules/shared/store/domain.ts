@@ -1,5 +1,5 @@
 import { SoftOpaque } from 'readable-types';
-import { FancyToolbarSettings, Settings } from 'seelen-core';
+import { FancyToolbarSettings, MonitorInfo, Settings } from 'seelen-core';
 import { Placeholder, Plugin } from 'seelen-core';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -116,6 +116,7 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   plugins: Plugin[];
 
   isOverlaped: boolean;
+  monitorInfo: MonitorInfo;
   focused: FocusedApp | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
