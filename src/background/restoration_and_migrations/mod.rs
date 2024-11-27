@@ -44,6 +44,7 @@ impl RestorationAndMigration {
 
         create_if_needed("themes")?;
         create_if_needed("layouts")?;
+        create_if_needed("placeholders")?;
         create_if_needed("icons/system")?;
         create_if_needed("wallpapers")?;
         create_if_needed("plugins")?;

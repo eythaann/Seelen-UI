@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- crashing on fresh installations.
+
 ## [2.0.6]
 ### feature
 - add bases for future plugins and widgets sytems.
