@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.7]
 ### fix
 - crashing on fresh installations.
 
