@@ -58,6 +58,9 @@ toolbar:
   label: Barra degli strumenti
   delay_to_hide: Ritardo per nascondersi
   delay_to_show: Ritardo per la presentazione
+  use_multiple_monitor_overlap_logic: >-
+    Utilizza la logica di visualizzazione specifica anziché quella di focus
+    singolo
 wm:
   border:
     width: Larghezza del bordo
@@ -88,6 +91,9 @@ weg:
   dock_side: Posizione
   delay_to_hide: Ritardo per nascondersi
   delay_to_show: Ritardo per la presentazione
+  use_multiple_monitor_overlap_logic: >-
+    Utilizza la logica di visualizzazione specifica anziché quella di focus
+    singolo
 devtools:
   load: Carico
   custom_config_file: Carica il file di configurazione personalizzato

@@ -58,6 +58,7 @@ toolbar:
   label: Tækjastikur
   delay_to_show: Seinkun á sýningu
   delay_to_hide: Seinkun á að fela
+  use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í staðinn fyrir stakan fókusrökfræði
 wm:
   border:
     enable: Virkja landamæri glugga
@@ -88,6 +89,7 @@ weg:
   dock_side: Staða
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
+  use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í stað eins fókus rökfræði
 devtools:
   load: Hlaða
   app_folders: App möppur

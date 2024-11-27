@@ -58,6 +58,7 @@ toolbar:
   label: கருவிப்பட்டி
   delay_to_show: காட்ட தாமதம்
   delay_to_hide: மறைக்க தாமதம்
+  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
 wm:
   border:
     width: பார்டர் அகலம்
@@ -88,6 +89,7 @@ weg:
   dock_side: நிலை
   delay_to_show: காட்ட தாமதம்
   delay_to_hide: மறைக்க தாமதம்
+  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
 devtools:
   install_folder: நிறுவல் கோப்புறை
   enable: டெவலப்பர் கருவிகளை இயக்கு

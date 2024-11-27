@@ -58,6 +58,7 @@ toolbar:
   label: របាររបន៍របយ័ត្ន។ រប
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
   delay_to_hide: ពន្យារពេលដើម្បីលាក់
+  use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
 wm:
   border:
     enable: បើកស៊ុមបង្អួច
@@ -88,6 +89,7 @@ weg:
   dock_side: តីតាមង
   delay_to_hide: ពន្យារពេលដើម្បីលាក់
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
+  use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
 devtools:
   install_folder: ថតឯកសារដំឡើង
   enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍

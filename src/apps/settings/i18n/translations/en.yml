@@ -76,6 +76,7 @@ toolbar:
   auto_hide: Auto Hide
   delay_to_show: Delay to show
   delay_to_hide: Delay to hide
+  use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
 vd:
   disabled_windows_version: Native Virtual Desktop Strategy is not available for your Windows version.
   strategy:
@@ -112,6 +113,7 @@ weg:
     visible_separators: Visible Separators
   delay_to_show: Delay to show
   delay_to_hide: Delay to hide
+  use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
 devtools:
   enable: Enable Developer Tools
   app_folders: App Folders

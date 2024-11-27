@@ -57,6 +57,7 @@ toolbar:
   label: Ọpa irinṣẹ
   delay_to_show: Idaduro lati ṣafihan
   delay_to_hide: Idaduro lati tọju
+  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
 wm:
   border:
     enable: Jeki aala window
@@ -87,6 +88,7 @@ weg:
   dock_side: Ipo
   delay_to_show: Idaduro lati ṣafihan
   delay_to_hide: Idaduro lati tọju
+  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
 devtools:
   app_folders: Awọn folda App
   install_folder: Filese Fifi sori ẹrọ

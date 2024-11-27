@@ -57,6 +57,7 @@ toolbar:
   label: סרגל כלים
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
+  use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
 wm:
   border:
     offset: קיזוז גבול
@@ -87,6 +88,7 @@ weg:
   dock_side: מַצָב
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
+  use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
 devtools:
   load: לִטעוֹן
   install_folder: תיקיית התקנה

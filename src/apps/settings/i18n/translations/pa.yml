@@ -58,6 +58,7 @@ toolbar:
   label: ਟੂਲਬਾਰ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
+  use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
 wm:
   border:
     offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
@@ -88,6 +89,7 @@ weg:
   dock_side: ਸਥਿਤੀ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
+  use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
 devtools:
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
