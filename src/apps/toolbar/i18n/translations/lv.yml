@@ -42,3 +42,5 @@ unlabelled_tray: Neiezīmēta paplātes ikona
 context_menu:
   add_module: Pievienot moduli
   remove: Noņemt moduli
+  settings: Iestatījumi
+  task_manager: Uzdevumu pārvaldnieks

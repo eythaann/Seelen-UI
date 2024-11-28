@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### enhancements
+- add task manager shortcut on toolbar and dock context menu.
+
 ## [2.0.7]
 ### fix
 - crashing on fresh installations.

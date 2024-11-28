@@ -42,3 +42,5 @@ unlabelled_tray: Nahitaezko erretilua ikonoa
 context_menu:
   remove: Kendu modulua
   add_module: Gehitu modulua
+  settings: Ezarpenak
+  task_manager: Zereginen kudeatzailea

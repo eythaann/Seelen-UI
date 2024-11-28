@@ -1,9 +1,10 @@
 taskbar_menu:
   media: 添加媒体模块
   start: 添加启动模块
-  settings: 打开设置
   add_folder: 引脚自定义文件夹
   add_file: 引导自定义文件
+  task_manager: 任务管理器
+  settings: 设置
 app_menu:
   unpin: 取消固定
   pin: 固定

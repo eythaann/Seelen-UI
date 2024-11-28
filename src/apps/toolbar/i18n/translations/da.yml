@@ -42,3 +42,5 @@ unlabelled_tray: Umnæret bakkeikon
 context_menu:
   remove: Fjern modulet
   add_module: Tilføj modul
+  settings: Indstillinger
+  task_manager: Task Manager

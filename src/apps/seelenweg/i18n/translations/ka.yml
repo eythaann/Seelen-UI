@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: ღია პარამეტრები
   media: დაამატეთ მედია მოდული
   start: დაამატეთ დაწყების მოდული
   add_folder: Pin Custom Folder
   add_file: Pin Custom File
+  settings: პარამეტრები
+  task_manager: სამუშაო მენეჯერი
 app_menu:
   run_as: Ადმინისტრატორის სახელით გაშვება
   close_multiple: Დახურე ყველა

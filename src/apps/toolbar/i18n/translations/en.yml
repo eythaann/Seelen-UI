@@ -1,6 +1,8 @@
 context_menu:
   remove: Remove Module
   add_module: Add Module
+  task_manager: Task Manager
+  settings: Settings
 media:
   master_volume: Master Volume
   output_device: Output device

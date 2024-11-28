@@ -42,3 +42,5 @@ unlabelled_tray: אייקון מגש ללא תווית
 context_menu:
   add_module: הוסף מודול
   remove: הסר את המודול
+  settings: הגדרות
+  task_manager: מנהל משימות

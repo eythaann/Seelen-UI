@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: 設定を開く
   media: メディアモジュールを追加
   start: 開始モジュールを追加
   add_file: ファイルを追加
   add_folder: フォルダを追加
+  task_manager: タスクマネージャー
+  settings: 設定
 app_menu:
   pin: ピン留め
   open_file_location: ファイルの場所を開く

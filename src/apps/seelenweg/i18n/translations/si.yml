@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: විවෘත සැකසුම්
   media: මාධ්ය මොඩියුලය එක් කරන්න
   start: ආරම්භක මොඩියුලය එක් කරන්න
   add_file: පින් අභිරුචි ගොනුව
   add_folder: පින් අභිරුචි ෆෝල්ඩරය
+  settings: සැකසීම්
+  task_manager: කාර්ය කළමනාකරු
 app_menu:
   open_file_location: ගොනුව විවෘත ස්ථානය
   run_as: පරිපාලක ලෙස ක්රියාත්මක වන්න

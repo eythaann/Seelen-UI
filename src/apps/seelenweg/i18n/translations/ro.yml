@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Deschide setările
   media: Adăugați modul media
   start: Adăugați modulul de pornire
   add_file: Fișier personalizat
   add_folder: Pin folder personalizat
+  task_manager: Manager de activități
+  settings: Setări
 app_menu:
   open_file_location: Deschide locația fișierului
   close: Închide

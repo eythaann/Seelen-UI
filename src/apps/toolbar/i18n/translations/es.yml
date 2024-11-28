@@ -42,3 +42,5 @@ unlabelled_tray: Ícono de la bandeja sin etiqueta
 context_menu:
   add_module: Agregar módulo
   remove: Eliminar el módulo
+  settings: Ajustes
+  task_manager: Administrador de tareas

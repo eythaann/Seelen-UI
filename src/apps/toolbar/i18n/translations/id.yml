@@ -42,3 +42,5 @@ unlabelled_tray: Ikon baki tanpa label
 context_menu:
   add_module: Tambahkan modul
   remove: Hapus modul
+  task_manager: Manajer Tugas
+  settings: Pengaturan

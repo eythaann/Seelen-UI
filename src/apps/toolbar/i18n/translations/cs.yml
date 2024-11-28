@@ -42,3 +42,5 @@ unlabelled_tray: Ikona neznačené podnosy
 context_menu:
   add_module: Přidat modul
   remove: Odebrat modul
+  settings: Nastavení
+  task_manager: Správce úloh

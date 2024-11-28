@@ -42,3 +42,5 @@ unlabelled_tray: Нежитрий ікона лотка
 context_menu:
   remove: Видалити модуль
   add_module: Додати модуль
+  settings: Налаштування
+  task_manager: Диспетчер задач

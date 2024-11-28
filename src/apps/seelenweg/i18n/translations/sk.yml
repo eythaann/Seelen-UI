@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Pridať mediálny modul
-  settings: Otvorené nastavenia
   start: Pridať štartový modul
   add_file: Vlastný súbor
   add_folder: Vlastný priečinok
+  settings: Nastavenia
+  task_manager: Správca úloh
 app_menu:
   close: Zavrieť
   run_as: Spustiť ako správca

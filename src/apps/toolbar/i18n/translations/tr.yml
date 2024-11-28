@@ -42,3 +42,5 @@ unlabelled_tray: Etiketlenmemiş Tepsi Simgesi
 context_menu:
   remove: Modülü Kaldır
   add_module: Modül ekle
+  task_manager: Görev Yöneticisi
+  settings: Ayarlar

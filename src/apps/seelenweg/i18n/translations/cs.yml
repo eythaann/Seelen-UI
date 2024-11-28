@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Otevřené nastavení
   media: Přidat mediální modul
   start: Přidat startovací modul
   add_file: Pin vlastní soubor
   add_folder: Pin vlastní složka
+  task_manager: Správce úloh
+  settings: Nastavení
 app_menu:
   pin: Kolík
   pin_to_center: Pin do středu

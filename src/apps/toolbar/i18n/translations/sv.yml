@@ -42,3 +42,5 @@ unlabelled_tray: Omärkta fackikon
 context_menu:
   remove: Ta bort modulen
   add_module: Lägg till modul
+  settings: Inställningar
+  task_manager: Task Manager

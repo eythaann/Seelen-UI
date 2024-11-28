@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: פתח הגדרות
   media: הוסף מודול מדיה
   start: הוסף מודול התחל
   add_file: הצמד קובץ מותאם אישית
   add_folder: סיכה תיקייה בהתאמה אישית
+  settings: הגדרות
+  task_manager: מנהל משימות
 app_menu:
   run_as: הפעל כמנהל
   pin: פִּין

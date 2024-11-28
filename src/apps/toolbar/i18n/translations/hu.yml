@@ -42,3 +42,5 @@ unlabelled_tray: Jelöletlen tálca ikon
 context_menu:
   add_module: Adjon hozzá modult
   remove: Távolítsa el a modult
+  settings: Beállítások elemre
+  task_manager: Feladatkezelő

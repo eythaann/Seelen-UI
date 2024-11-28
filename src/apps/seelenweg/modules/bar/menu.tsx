@@ -67,6 +67,13 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
       type: 'divider',
     },
     {
+      key: 'task_manager',
+      label: t('taskbar_menu.task_manager'),
+      onClick() {
+        invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
+      },
+    },
+    {
       key: 'settings',
       label: t('taskbar_menu.settings'),
       onClick() {

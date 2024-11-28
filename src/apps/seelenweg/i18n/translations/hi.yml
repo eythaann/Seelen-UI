@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: खुली सेटिंग
   media: मीडिया मॉड्यूल जोड़ें
   start: स्टार्ट मॉड्यूल जोड़ें
   add_file: पिन कस्टम फ़ाइल
   add_folder: पिन कस्टम फ़ोल्डर
+  settings: सेटिंग्स
+  task_manager: कार्य प्रबंधक
 app_menu:
   close_multiple: सब बंद करें
   pin_to_right: दाईं ओर पिन करना

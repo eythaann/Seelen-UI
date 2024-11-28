@@ -42,3 +42,5 @@ unlabelled_tray: Икона за отпадне траи
 context_menu:
   remove: Уклони модул
   add_module: Додајте модул
+  task_manager: Таск Манагер
+  settings: Подешавања

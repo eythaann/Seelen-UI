@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: సెట్టింగులు తెరవండి
   media: మీడియా మాడ్యూల్ జోడించండి
   start: ప్రారంభ మాడ్యూల్ జోడించండి
   add_folder: కస్టమ్ ఫోల్డర్‌ను పిన్ చేయండి
   add_file: కస్టమ్ ఫైల్‌ను పిన్ చేయండి
+  settings: సెట్టింగ్‌లు
+  task_manager: టాస్క్ మేనేజర్
 app_menu:
   close: దగ్గరగా
   pin_to_center: పిన్ టు సెంటర్

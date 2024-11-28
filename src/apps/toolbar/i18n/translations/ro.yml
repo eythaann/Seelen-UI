@@ -42,3 +42,5 @@ unlabelled_tray: Pictograma tăvii nemarcate
 context_menu:
   add_module: Adăugați modul
   remove: Scoateți modulul
+  settings: Setări
+  task_manager: Manager de activități

@@ -42,3 +42,5 @@ unlabelled_tray: Ikona nieznakowanej tacki
 context_menu:
   add_module: Dodaj moduł
   remove: Usuń moduł
+  task_manager: Menedżer zadań
+  settings: Ustawienia

@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Medienmodul hinzufügen
   start: Startmodul hinzufügen
-  settings: Einstellungen öffnen
   add_folder: Pin benutzerdefinierte Ordner
   add_file: PIN benutzerdefinierte Datei
+  task_manager: Task-Manager
+  settings: Einstellungen
 app_menu:
   unpin: Lösen
   pin: Anheften

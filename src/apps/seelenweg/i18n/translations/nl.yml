@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Open instellingen
   media: Voeg mediamodule toe
   start: Startmodule toevoegen
   add_file: Pin aangepaste bestand
   add_folder: Pin aangepaste map
+  task_manager: Taakbeheer
+  settings: Instellingen
 app_menu:
   close_multiple: Sluit alles
   pin_to_left: Pin naar links

@@ -42,3 +42,5 @@ unlabelled_tray: Ongeslote skinkbord -ikoon
 context_menu:
   add_module: Voeg module by
   remove: Verwyder die module
+  settings: Instellings
+  task_manager: Taakbestuurder

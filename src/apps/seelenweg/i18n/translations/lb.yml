@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Füügt Media Modul bäi
   start: Füügt Start Modul
-  settings: Oppen Astellungen
   add_file: PIN personaliséiert Datei
   add_folder: PIN CUTE CUTE FOLDER
+  settings: Astellungen
+  task_manager: Aufgab Manager
 app_menu:
   close_multiple: Alles dobäi
   copy_handles: Kopie Handelen

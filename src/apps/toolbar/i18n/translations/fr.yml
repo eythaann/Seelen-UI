@@ -42,3 +42,5 @@ unlabelled_tray: Icône de plateau non étiquetée
 context_menu:
   add_module: Ajouter le module
   remove: Retirer le module
+  task_manager: Gestionnaire de tâches
+  settings: Paramètres

@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: ওপেন সেটিংস
   media: মিডিয়া মডিউল যুক্ত করুন
   start: স্টার্ট মডিউল যুক্ত করুন
   add_file: কাস্টম ফাইল পিন করুন
   add_folder: পিন কাস্টম ফোল্ডার
+  settings: সেটিংস
+  task_manager: টাস্ক ম্যানেজার
 app_menu:
   close_multiple: সব বন্ধ করা
   run_as: প্রশাসক হিসাবে চালান

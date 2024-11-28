@@ -42,3 +42,5 @@ unlabelled_tray: ያልተስተካከለ ትሪ አዶ
 context_menu:
   remove: ሞጁሎችን ያስወግዱ
   add_module: ሞዱል ያክሉ
+  task_manager: ተግባር አስተዳዳሪ
+  settings: ቅንብሮች

@@ -42,3 +42,5 @@ unlabelled_tray: Ómerkt bakkatákn
 context_menu:
   remove: Fjarlægðu eininguna
   add_module: Bættu við einingu
+  task_manager: Verkefnastjóri
+  settings: Stillingar

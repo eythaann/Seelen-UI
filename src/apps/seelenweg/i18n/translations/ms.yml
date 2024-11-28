@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Buka Tetapan
   media: Tambah Modul Media
   start: Tambah Modul Mula
   add_folder: Pin folder adat
   add_file: Fail tersuai pin
+  task_manager: Pengurus Tugas
+  settings: tetapan
 app_menu:
   close_multiple: Tutup semua
   open_file_location: Buka lokasi fail

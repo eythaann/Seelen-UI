@@ -42,3 +42,5 @@ unlabelled_tray: Icon isiyo na msingi ya tray
 context_menu:
   remove: Ondoa moduli
   add_module: Ongeza moduli
+  settings: Mipangilio
+  task_manager: Meneja wa Kazi

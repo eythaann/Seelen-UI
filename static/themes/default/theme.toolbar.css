@@ -66,6 +66,8 @@
 
 .ft-bar-item-context-menu-container,
 .tb-context-menu-container {
+  min-width: 160px;
+
   .bg-layer-1 {
     background-color: var(--color-gray-100);
     border-radius: 10px;

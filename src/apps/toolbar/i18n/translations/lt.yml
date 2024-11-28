@@ -42,3 +42,5 @@ unlabelled_tray: Nepaženklinta dėklo piktograma
 context_menu:
   add_module: Pridėti modulį
   remove: Pašalinkite modulį
+  task_manager: Užduočių tvarkyklė
+  settings: Nustatymai

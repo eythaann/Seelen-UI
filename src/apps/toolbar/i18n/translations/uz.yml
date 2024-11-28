@@ -42,3 +42,5 @@ unlabelled_tray: Bojavelilmagan aşınma ikonka
 context_menu:
   remove: Modulni olib tashlash
   add_module: Modul qo'shing
+  settings: Sozlamalar
+  task_manager: Vazifa menejeri

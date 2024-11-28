@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Faka imodyuli yabezindaba
-  settings: Vula Izilungiselelo
   start: Faka imodyuli yokuqala
   add_file: I-PIN ifayela ngokwezifiso
   add_folder: Ifolda yangokwezifiso
+  settings: Izilungiselelo
+  task_manager: Umphathi Womsebenzi
 app_menu:
   pin_to_center: Pin esikhungweni
   close: Ngokuminyanisa

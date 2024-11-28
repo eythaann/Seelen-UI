@@ -42,3 +42,5 @@ unlabelled_tray: Необичана икона на таблата
 context_menu:
   remove: Премахване на модула
   add_module: Добавете модул
+  task_manager: Диспечер на задачите
+  settings: Настройки

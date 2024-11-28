@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Buksan ang settings
   media: Magdagdag ng module ng media
   start: Magdagdag ng Start Module
   add_folder: Pin pasadyang folder
   add_file: Pin pasadyang file
+  task_manager: Task Manager
+  settings: Mga setting
 app_menu:
   pin_to_left: Pin sa kaliwa
   pin_to_center: Pin sa gitna

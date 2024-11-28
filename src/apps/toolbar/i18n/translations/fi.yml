@@ -42,3 +42,5 @@ unlabelled_tray: Leimaton lokerokuvake
 context_menu:
   add_module: Lisää moduuli
   remove: Poista moduuli
+  task_manager: Tehtävienhallinta
+  settings: Asetukset

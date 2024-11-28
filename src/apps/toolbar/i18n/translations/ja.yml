@@ -42,3 +42,5 @@ unlabelled_tray: ラベル無し
 context_menu:
   remove: モジュールを削除します
   add_module: モジュールを追加します
+  settings: 設定
+  task_manager: タスクマネージャー

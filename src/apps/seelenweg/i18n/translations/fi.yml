@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Avaa asetukset
   start: Lisää aloitusmoduuli
   media: Lisää mediamoduuli
   add_file: Pin mukautettu tiedosto
   add_folder: Pin Custom -kansio
+  settings: Asetukset
+  task_manager: Tehtävienhallinta
 app_menu:
   close_multiple: Sulje kaikki
   run_as: Suorita järjestelmänvalvojana

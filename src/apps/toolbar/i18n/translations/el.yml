@@ -42,3 +42,5 @@ unlabelled_tray: Εικονίδιο δίσκων χωρίς
 context_menu:
   add_module: Προσθήκη ενότητας
   remove: Αφαιρέστε την ενότητα
+  settings: Ρυθμίσεις
+  task_manager: Task Manager

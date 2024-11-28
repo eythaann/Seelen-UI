@@ -42,3 +42,5 @@ unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບກາ
 context_menu:
   add_module: ເພີ່ມໂມດູນ
   remove: ດຶງອອກຈາກໂມດູນ
+  settings: ການຕັ້ງຄ່າ
+  task_manager: Task Manager

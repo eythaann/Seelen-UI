@@ -42,3 +42,5 @@ unlabelled_tray: Тасвири табақаи ғайриқонунӣ
 context_menu:
   add_module: Иловаи модул
   remove: Модулро хориҷ кунед
+  settings: Танзимотҳо
+  task_manager: Менеҷери вазифа

@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Ավելացնել մեդիա մոդուլ
-  settings: Բաց պարամետրեր
   start: Ավելացնել Սկսել մոդուլը
   add_folder: PIN Custom թղթապանակ
   add_file: PIN պատվերով ֆայլ
+  settings: Կարգավորումներ
+  task_manager: Առաջադրանքների կառավարիչ
 app_menu:
   close: փակել
   pin_to_center: Քորոց դեպի կենտրոն

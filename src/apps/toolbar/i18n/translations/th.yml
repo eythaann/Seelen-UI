@@ -42,3 +42,5 @@ unlabelled_tray: ไอคอนถาดที่ไม่มีป้ายก
 context_menu:
   remove: ลบโมดูล
   add_module: เพิ่มโมดูล
+  task_manager: ตัวจัดการงาน
+  settings: การตั้งค่า

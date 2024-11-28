@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Avatud sätted
   start: Lisage käivitusmoodul
   media: Lisage meediumimoodul
   add_file: PIN -i kohandatud fail
   add_folder: PIN -i kohandatud kaust
+  task_manager: Tegumihaldur
+  settings: Seaded
 app_menu:
   pin_to_center: Tihvt keskele
   close: Sulge

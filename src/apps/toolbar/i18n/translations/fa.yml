@@ -42,3 +42,5 @@ unlabelled_tray: نماد سینی بدون نام
 context_menu:
   add_module: ماژول را اضافه کنید
   remove: ماژول را حذف کنید
+  task_manager: Task Manager
+  settings: تنظیمات

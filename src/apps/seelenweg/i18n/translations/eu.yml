@@ -1,9 +1,10 @@
 taskbar_menu:
   start: Gehitu abiapuntu modulua
-  settings: Ezarpenak irekitzea
   media: Gehitu multimedia modulua
   add_file: PIN fitxategi pertsonalizatua
   add_folder: Pin karpeta pertsonalizatua
+  settings: Ezarpenak
+  task_manager: Zereginen kudeatzailea
 app_menu:
   pin: Iskilinba
   close_multiple: Itxi guztiak

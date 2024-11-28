@@ -42,3 +42,5 @@ unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
 context_menu:
   add_module: मोड्युल थप्नुहोस्
   remove: मोड्युल हटाउनुहोस्
+  task_manager: कार्य प्रबन्धक
+  settings: सेटिङहरू

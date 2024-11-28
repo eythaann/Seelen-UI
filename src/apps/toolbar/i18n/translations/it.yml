@@ -42,3 +42,5 @@ unlabelled_tray: Icona del vassoio senza etichetta
 context_menu:
   add_module: Aggiungi modulo
   remove: Rimuovere il modulo
+  task_manager: Responsabile delle attività
+  settings: Impostazioni

@@ -42,3 +42,5 @@ unlabelled_tray: Icona de la safata no etiquetada
 context_menu:
   add_module: Afegiu el mòdul
   remove: Elimina el mòdul
+  settings: Configuració
+  task_manager: Gestor de tasques

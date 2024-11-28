@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Modela medyayê lê zêde bike
-  settings: Mîhengên vekirî
   start: Modulê dest pê bikin
   add_file: Pelê Custom Pel
   add_folder: Peldanka Pêvekirî
+  settings: Settings
+  task_manager: Gerînendetiya Peywiran
 app_menu:
   pin: Derzî
   close: Nêzîkî

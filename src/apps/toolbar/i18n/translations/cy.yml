@@ -42,3 +42,5 @@ unlabelled_tray: Eicon hambwrdd heb ei labelu
 context_menu:
   remove: Tynnwch y modiwl
   add_module: Ychwanegu Modiwl
+  settings: Gosodiadau
+  task_manager: Rheolwr Tasg

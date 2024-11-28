@@ -42,3 +42,5 @@ unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
 context_menu:
   add_module: মডিউল যুক্ত করুন
   remove: মডিউল সরান
+  settings: সেটিংস
+  task_manager: টাস্ক ম্যানেজার

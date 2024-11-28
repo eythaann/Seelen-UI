@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Иловаи модули ВАО
-  settings: Танзимоти кушода
   start: Иловаи модули оғоз
   add_file: Файли фармоишии PIN
   add_folder: Папкаи фармоишии PIN
+  settings: Танзимотҳо
+  task_manager: Менеҷери вазифа
 app_menu:
   copy_handles: Дасткор
   pin_to_center: PIN ба марказ

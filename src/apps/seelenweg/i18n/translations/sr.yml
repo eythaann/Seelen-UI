@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Отвори подешавања
   media: Додајте медијски модул
   start: Додајте почетни модул
   add_file: ПИН Прилагођена датотека
   add_folder: ПИН Прилагођена мапа
+  settings: Подешавања
+  task_manager: Таск Манагер
 app_menu:
   close_multiple: Затворите све
   run_as: Покрени као администратор

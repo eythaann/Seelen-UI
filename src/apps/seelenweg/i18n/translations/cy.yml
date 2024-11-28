@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Gosodiadau Agored
   media: Ychwanegu Modiwl Cyfryngau
   start: Ychwanegu Modiwl Start
   add_file: Pin ffeil arfer
   add_folder: Pin ffolder arfer
+  settings: Gosodiadau
+  task_manager: Rheolwr Tasg
 app_menu:
   copy_handles: Dolenni copi
   pin_to_center: Pin i'r canol

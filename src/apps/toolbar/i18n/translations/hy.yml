@@ -42,3 +42,5 @@ unlabelled_tray: Unlabelled Tray Icon
 context_menu:
   remove: Հեռացրեք մոդուլը
   add_module: Ավելացնել մոդուլ
+  settings: Կարգավորումներ
+  task_manager: Առաջադրանքների կառավարիչ

@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Åbne indstillinger
   media: Tilføj mediemodul
   start: Tilføj startmodul
   add_file: Pin brugerdefineret fil
   add_folder: Pin brugerdefineret mappe
+  task_manager: Task Manager
+  settings: Indstillinger
 app_menu:
   pin_to_center: Stift til centrum
   open_file_location: Åbn filplacering

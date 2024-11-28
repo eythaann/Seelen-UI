@@ -42,3 +42,5 @@ unlabelled_tray: Märgistamata salveikoon
 context_menu:
   remove: Eemaldage moodul
   add_module: Lisage moodul
+  settings: Seaded
+  task_manager: Tegumihaldur

@@ -42,3 +42,5 @@ unlabelled_tray: Ikon dulang yang tidak dilabel
 context_menu:
   remove: Keluarkan modul
   add_module: Tambah modul
+  settings: tetapan
+  task_manager: Pengurus Tugas

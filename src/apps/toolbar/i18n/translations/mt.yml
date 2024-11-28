@@ -42,3 +42,5 @@ unlabelled_tray: Ikona tat-trej mhux immarkata
 context_menu:
   add_module: Żid il-modulu
   remove: Neħħi l-modulu
+  task_manager: Task Manager
+  settings: Settings

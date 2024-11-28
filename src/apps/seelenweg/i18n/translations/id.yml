@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Tambahkan modul media
   start: Tambahkan modul Mulai
-  settings: Buka Pengaturan
   add_file: Pin file khusus
   add_folder: Pin folder khusus
+  settings: Pengaturan
+  task_manager: Manajer Tugas
 app_menu:
   pin_to_center: Pin ke tengah
   open_file_location: Buka Lokasi File

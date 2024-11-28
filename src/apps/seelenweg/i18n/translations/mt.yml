@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Żid il-modulu tal-midja
-  settings: Settings miftuħa
   start: Żid il-modulu tal-bidu
   add_folder: Folder Custom Pin
   add_file: Fajl tad-dwana pin
+  settings: Settings
+  task_manager: Task Manager
 app_menu:
   pin_to_center: Pin għal ċentru
   run_as: Mexxi bħala amministratur

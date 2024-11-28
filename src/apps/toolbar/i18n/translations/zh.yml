@@ -42,3 +42,5 @@ unlabelled_tray: 未标记的托盘图标
 context_menu:
   remove: 删除模块
   add_module: 添加模块
+  task_manager: 任务管理器
+  settings: 设置

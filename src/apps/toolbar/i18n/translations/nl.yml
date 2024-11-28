@@ -42,3 +42,5 @@ unlabelled_tray: Niet-gelabeld systeemvakpictogram
 context_menu:
   remove: Verwijder de module
   add_module: Module toevoegen
+  task_manager: Taakbeheer
+  settings: Instellingen

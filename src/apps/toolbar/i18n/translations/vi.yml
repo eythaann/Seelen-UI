@@ -42,3 +42,5 @@ unlabelled_tray: Biểu tượng khay không ghi nhãn
 context_menu:
   add_module: Thêm mô -đun
   remove: Xóa mô -đun
+  task_manager: Trình quản lý tác vụ
+  settings: Cài đặt

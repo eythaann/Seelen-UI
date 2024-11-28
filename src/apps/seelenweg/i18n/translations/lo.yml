@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: ເປີດການຕັ້ງຄ່າ
   media: ຕື່ມການໂມດູນສື່
   start: ເພີ່ມໂມດູນ Start
   add_file: PIN File Custom
   add_folder: PIN Custom FOLLER
+  task_manager: Task Manager
+  settings: ການຕັ້ງຄ່າ
 app_menu:
   run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
   close_multiple: ປິດທັງຫມົດ

@@ -42,3 +42,5 @@ unlabelled_tray: Ikona neobrađene ladice
 context_menu:
   add_module: Dodajte modul
   remove: Ukloni modul
+  settings: Postavke
+  task_manager: Task Manager

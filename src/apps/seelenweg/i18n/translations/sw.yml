@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Mipangilio ya Fungua
   start: Ongeza moduli ya kuanza
   media: Ongeza moduli ya media
   add_file: Piga faili ya kawaida
   add_folder: Piga folda ya kawaida
+  settings: Mipangilio
+  task_manager: Meneja wa Kazi
 app_menu:
   close_multiple: Funga yote
   pin: Pini

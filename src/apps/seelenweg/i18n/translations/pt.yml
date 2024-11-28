@@ -1,9 +1,10 @@
 taskbar_menu:
   media: Adicionar módulo de mídia
   start: Adicionar módulo inicial
-  settings: Abrir configurações
   add_file: Fixar arquivo personalizado
   add_folder: Fixar pasta personalizada
+  settings: Configurações
+  task_manager: Gerenciador de tarefas
 app_menu:
   unpin: Desafixar
   pin: Fixar

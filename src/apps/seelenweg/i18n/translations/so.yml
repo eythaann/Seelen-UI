@@ -1,9 +1,10 @@
 taskbar_menu:
-  settings: Meel furan
   media: Ku dar module warbaahinta
   start: Ku dar cutubka bilowga
   add_file: Faylka caadada PIN
   add_folder: Faylkaaga caadada PIN
+  task_manager: Maareeyaha Hawsha
+  settings: Dejinta
 app_menu:
   pin_to_left: PIN ilaa bidix
   pin_to_center: PIN ilaa Xarunta

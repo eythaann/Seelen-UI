@@ -42,3 +42,5 @@ unlabelled_tray: Unlabelled Tray дүрс
 context_menu:
   add_module: Модулийг нэмэх
   remove: Модулийг зайлуулах
+  settings: Тохиргоо
+  task_manager: Ажлын менежер

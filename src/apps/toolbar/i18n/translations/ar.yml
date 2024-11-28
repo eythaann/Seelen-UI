@@ -42,3 +42,5 @@ unlabelled_tray: أيقونة صينية غير محدودة
 context_menu:
   remove: إزالة الوحدة النمطية
   add_module: إضافة الوحدة النمطية
+  task_manager: مدير المهام
+  settings: إعدادات

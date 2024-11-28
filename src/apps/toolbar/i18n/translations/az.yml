@@ -42,3 +42,5 @@ unlabelled_tray: Qeyri-çapsız tepsik nişanı
 context_menu:
   add_module: Modul əlavə edin
   remove: Modulu çıxarın
+  task_manager: Tapşırıq meneceri
+  settings: Parametrlər
