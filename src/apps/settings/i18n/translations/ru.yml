@@ -126,7 +126,6 @@ apps_configurations:
     monitor_placeholder: Нет
     workspace: Рабочая область
     workspace_placeholder: Нет
-    title_edit: Изменение {{name}}
     title_create: Создание {{name}}
     title_readonly: Просмотр {{name}}
     ok_edit: Обновить
@@ -141,6 +140,7 @@ apps_configurations:
     wm_options_label: Параметры управления окном
     weg_options_label: Параметры панели задач
     options_label: Дополнительные параметры
+    title_edit: Редактирование {{name}}
   identifier:
     remove: Удалить блок
     id: Идентификатор

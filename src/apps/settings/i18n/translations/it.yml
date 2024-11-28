@@ -112,7 +112,6 @@ apps_configurations:
     name: Nome
     category_placeholder: Nessuno
     title_readonly: Visualizzazione {{name}}
-    title_edit: Moditing {{name}}
     workspace: Spazio di lavoro
     bindings: Binding (Nota che sono richieste entrambe le opzioni)
     title_create: Creazione di {{name}}
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Opzioni dock/barra delle applicazioni
     wm_options_label: Opzioni del gestore delle finestre
     options_label: Opzioni extra
+    title_edit: Modifica {{name}}
   identifier:
     and: E
     or: O

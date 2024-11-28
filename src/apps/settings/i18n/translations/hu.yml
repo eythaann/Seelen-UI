@@ -114,13 +114,13 @@ apps_configurations:
     category_placeholder: Egyik sem
     bindings: Kötés (vegye figyelembe, hogy mindkét lehetőség szükséges)
     title_readonly: '{{Név}} megtekintés'
-    title_edit: '{{Név}} szerkesztés'
     title_create: '{{Név}} létrehozása'
     monitor: Monitor
     ok_edit: Frissít
     weg_options_label: Dokk/tálcás lehetőségek
     wm_options_label: Ablakkezelő opciók
     options_label: Extra lehetőségek
+    title_edit: Szerkesztés {{név}}
   identifier:
     or: VAGY
     add_block: Blokk hozzáadása

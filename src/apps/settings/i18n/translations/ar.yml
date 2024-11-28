@@ -124,7 +124,6 @@ apps_configurations:
     monitor_placeholder: لا أحد
     workspace: مساحة العمل
     workspace_placeholder: لا أحد
-    title_edit: تعديل {{اسم}}
     title_create: إنشاء {{اسم}}
     title_readonly: عرض {{اسم}}
     ok_edit: تحديث
@@ -139,6 +138,7 @@ apps_configurations:
     weg_options_label: خيارات قفص الاتهام/شريط المهام
     wm_options_label: خيارات مدير النافذة
     options_label: خيارات إضافية
+    title_edit: تحرير {{name}}
   identifier:
     remove: حذف الحظر
     id: المعرف

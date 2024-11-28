@@ -115,12 +115,12 @@ apps_configurations:
     ok_edit: Olaangs
     bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
     workspace: Konschtpas
-    title_edit: Ännerung {{Numm}}
     title_create: Erstellen {{Numm}}
     ok_create: Erreeiert eng kreéieren
     weg_options_label: Dock / Taskbaroptiounen
     wm_options_label: Fenster Manager Optiounen
     options_label: Extra Optiounen
+    title_edit: Ännert {{Numm}}
   identifier:
     remove: Läschen Block
     matching_strategy: Passende Strategie

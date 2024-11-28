@@ -111,7 +111,6 @@ apps_configurations:
     category_placeholder: Ниједан
     ok_readonly: Уреди као ново
     ok_edit: ажурирање
-    title_edit: Уређивање {{наме}}
     monitor: Монитор
     title_readonly: Гледајући {{наме}}
     title_create: Стварање {{наме}}
@@ -120,6 +119,7 @@ apps_configurations:
     weg_options_label: Опције прикључке / траке задатака
     wm_options_label: Опције Виндов Манагер опције
     options_label: Додатне опције
+    title_edit: Уређивање {{наме}}
   identifier:
     remove: Избрисати блок
     or: Или

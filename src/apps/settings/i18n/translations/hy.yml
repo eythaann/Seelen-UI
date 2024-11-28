@@ -114,13 +114,13 @@ apps_configurations:
     category: Կատեգորիա
     ok_create: Ստեղծել
     title_readonly: Դիտում է {{Անունը}
-    title_edit: Խմբագրում {{Անվան}
     ok_readonly: Խմբագրել որպես նոր
     ok_edit: Թարմացում
     title_create: Ստեղծելով {{name}
     wm_options_label: Պատուհանների մենեջեր Ընտրանքներ
     weg_options_label: Dock / Taskbar Ընտրանքներ
     options_label: Լրացուցիչ ընտրանքներ
+    title_edit: Խմբագրում {{name}
   identifier:
     or: ԿԱՄ
     and: Մի քանազոր

@@ -116,11 +116,11 @@ apps_configurations:
     title_readonly: Gweld {{enw}}
     ok_edit: Diweddara ’
     category_placeholder: Neb
-    title_edit: Golygu {{enw}}
     ok_create: Chrëid
     weg_options_label: Opsiynau doc/bar tasgau
     wm_options_label: Opsiynau Rheolwr Ffenestr
     options_label: Opsiynau ychwanegol
+    title_edit: Golygu {{enw}}
   identifier:
     matching_strategy: Strategaeth gyfatebol
     id: Dynodwr

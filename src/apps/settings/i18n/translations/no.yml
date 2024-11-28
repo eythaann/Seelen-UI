@@ -104,7 +104,6 @@ apps_configurations:
       pinned: Festet
       unmanage: Unmanage
       hidden: Gjemme deg for dock/oppgavelinje
-    title_edit: Redigering {{name}}
     category: Kategori
     title_create: Opprette {{name}}
     monitor_placeholder: Ingen
@@ -121,6 +120,7 @@ apps_configurations:
     wm_options_label: Vinduslederalternativer
     weg_options_label: Dock/oppgavelinjealternativer
     options_label: Ekstra alternativer
+    title_edit: Redigering {{name}}
   identifier:
     and: OG
     kind: Identifisere av

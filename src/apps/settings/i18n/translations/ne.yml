@@ -105,7 +105,6 @@ apps_configurations:
       hidden: डक / टास्कबारबाट लुकाउनुहोस्
     bindings: बाध्यकारी (नोटहरू दुबै विकल्पहरू आवश्यक छन्)
     ok_create: सृष्टि गर्नु्
-    title_edit: '{{{Name n}}}}}}'
     ok_readonly: नयाँ जस्तै सम्पादन गर्नुहोस्
     workspace: कार्यक्षेत्र
     category_placeholder: केहि पनि होइन
@@ -120,6 +119,7 @@ apps_configurations:
     wm_options_label: विन्डो प्रबन्धक विकल्पहरू
     weg_options_label: डक / टास्कबार विकल्पहरू विकल्पहरू
     options_label: अतिरिक्त विकल्पहरू
+    title_edit: '{{{{नाम} ..'
   identifier:
     and: र
     id: पहिचानकर्ता

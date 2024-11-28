@@ -104,7 +104,6 @@ apps_configurations:
       pinned: Fastgjort
       unmanage: Uudvikling
       hidden: Skjul for dock/proceslinje
-    title_edit: Redigering {{navn}}
     monitor_placeholder: Ingen
     ok_edit: Opdatering
     workspace: Arbejdsområde
@@ -121,6 +120,7 @@ apps_configurations:
     wm_options_label: Vindueschefindstillinger
     weg_options_label: Dock/proceslinjemuligheder
     options_label: Ekstra muligheder
+    title_edit: Redigering {{navn}}
   identifier:
     id: Identifikator
     add_block: Tilføj blok

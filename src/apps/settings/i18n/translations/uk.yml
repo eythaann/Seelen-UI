@@ -114,13 +114,13 @@ apps_configurations:
     monitor_placeholder: Ні
     workspace_placeholder: Ні
     workspace: Робоча область
-    title_edit: Редагування {{Ім'я}}
     ok_create: Створити
     name: Назва
     bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
     weg_options_label: Параметри Dock/Taskbar
     wm_options_label: Параметри менеджера вікон
     options_label: Додаткові варіанти
+    title_edit: Редагування {{Ім'я}}
   identifier:
     and: І
     add_block: Додати блок

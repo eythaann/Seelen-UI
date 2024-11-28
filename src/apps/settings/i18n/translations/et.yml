@@ -114,13 +114,13 @@ apps_configurations:
     workspace_placeholder: Mitte ükski
     monitor: Ekraan
     name: Nimetus
-    title_edit: Redigeerimine {{nimi}}
     title_readonly: Vaatamine {{nimi}}
     bindings: Sidumine (pange tähele mõlemat suvandit)
     ok_edit: Värskendama
     weg_options_label: Dokk/ülesanderiba valikud
     wm_options_label: Aknahalduri valikud
     options_label: Lisavalikud
+    title_edit: Redigeerimine {{nimi}}
   identifier:
     negation: Eitav sobitamine
     matching_strategy: Sobiv strateegia

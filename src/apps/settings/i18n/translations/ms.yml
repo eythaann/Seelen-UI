@@ -104,7 +104,6 @@ apps_configurations:
       unmanage: Unmanage
       pinned: Disematkan
       hidden: Sembunyikan dari Dock/Taskbar
-    title_edit: Editting {{name}}
     category: Kategori
     ok_edit: Kemas kini
     title_readonly: Melihat {{name}}
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Pilihan Dock/Taskbar
     wm_options_label: Pilihan Pengurus Tetingkap
     options_label: Pilihan tambahan
+    title_edit: Penyuntingan {{name}}
   identifier:
     matching_strategy: Strategi yang sepadan
     and: Dan

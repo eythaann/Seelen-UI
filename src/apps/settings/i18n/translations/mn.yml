@@ -111,7 +111,6 @@ apps_configurations:
     ok_edit: Шинэчлэх
     monitor: Хянах
     workspace_placeholder: Хэн ч
-    title_edit: '{{Нэр}}}}'
     ok_create: Шуүгиан дэгдээх
     ok_readonly: Шинэ болгон засах
     name: Нэр
@@ -120,6 +119,7 @@ apps_configurations:
     wm_options_label: Цонх менежерийн сонголтууд
     weg_options_label: Док / Taskbar сонголтууд
     options_label: Нэмий сонголт
+    title_edit: Засварлах {{нэр}}}
   identifier:
     id: Өмнө тайлбар
     or: ЭСВЭЛ

@@ -111,7 +111,6 @@ apps_configurations:
     category_placeholder: Wala
     ok_create: Lumikha
     monitor_placeholder: Wala
-    title_edit: Pag -edit {{pangalan}}
     category: Kategorya
     ok_readonly: I -edit bilang bago
     workspace: Workspace
@@ -121,6 +120,7 @@ apps_configurations:
     wm_options_label: Mga pagpipilian sa Window Manager
     weg_options_label: Mga pagpipilian sa pantalan/taskbar
     options_label: Dagdag na mga pagpipilian
+    title_edit: Pag -edit {{pangalan}}
   identifier:
     id: Identifier
     negation: Negate pagtutugma

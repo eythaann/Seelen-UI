@@ -112,7 +112,6 @@ apps_configurations:
     monitor_placeholder: Ko si
     category: Ẹya
     workspace: Ibi-iṣẹ
-    title_edit: Ṣiṣatunṣe {{Orukọ}}
     ok_create: Lati ṣẹda
     ok_readonly: Satunkọ bi tuntun
     ok_edit: Imudojuiwọn
@@ -120,6 +119,7 @@ apps_configurations:
     wm_options_label: Awọn aṣayan Iṣẹ Iṣẹ window
     weg_options_label: Dock / Awọn aṣayan Iṣẹ-ṣiṣe
     options_label: Awọn aṣayan afikun
+    title_edit: Ṣiṣatunṣe {{Orukọ}}
   identifier:
     negation: Ibaramu tuntun
     add_block: Fi dègbé

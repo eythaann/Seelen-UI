@@ -126,7 +126,6 @@ apps_configurations:
     monitor_placeholder: Nenhum
     workspace: Área de trabalho
     workspace_placeholder: Nenhum
-    title_edit: Editando {{nome}}
     title_create: Criando {{nome}}
     title_readonly: Visualizando {{nome}}
     ok_edit: Atualizar
@@ -141,6 +140,7 @@ apps_configurations:
     weg_options_label: Opções de doca/barra de tarefas
     wm_options_label: Opções do gerenciador de janelas
     options_label: Opções extras
+    title_edit: Edição {{name}}
   identifier:
     remove: Excluir bloco
     id: Identificador

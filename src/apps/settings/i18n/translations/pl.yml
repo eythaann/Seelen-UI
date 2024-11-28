@@ -113,7 +113,6 @@ apps_configurations:
     title_readonly: Przeglądanie {{Nazwa}}
     workspace_placeholder: Nic
     ok_readonly: Edytuj jako nowy
-    title_edit: Edycja {{nazwa}}
     monitor: Monitor
     workspace: Obszar roboczy
     bindings: Wiązanie (wymagane są obie opcje)
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Opcje DOCK/PASKTA
     wm_options_label: Opcje menedżera okien
     options_label: Dodatkowe opcje
+    title_edit: Edycja {{nazwa}}
   identifier:
     and: I
     or: LUB

@@ -113,7 +113,6 @@ apps_configurations:
     name: పేరు
     title_create: '{{name}}ని సృష్టిస్తోంది'
     title_readonly: '{{name}} వీక్షిస్తోంది'
-    title_edit: '{{name}}ని సవరిస్తోంది'
     ok_edit: నవీకరించు
     ok_readonly: కొత్తదిగా సవరించండి
     bindings: బైండింగ్ (రెండు ఎంపికలు అవసరమని గమనించండి)
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: డాక్/టాస్క్‌బార్ ఎంపికలు
     wm_options_label: విండో మేనేజర్ ఎంపికలు
     options_label: అదనపు ఎంపికలు
+    title_edit: సవరణ {{పేరు}}
   identifier:
     and: మరియు
     negation: సరిపోలికను తిరస్కరించండి

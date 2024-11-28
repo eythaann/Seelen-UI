@@ -117,10 +117,10 @@ apps_configurations:
     bindings: Binding (athugaðu að báðir valkostirnir eru nauðsynlegir)
     ok_edit: UPDATE
     ok_create: Búa til
-    title_edit: Breyta {{name}}
     weg_options_label: Valkostir bryggju/verkefna
     wm_options_label: Valkostir gluggastjóra
     options_label: Auka valkostir
+    title_edit: Breyting {{name}}
   identifier:
     matching_strategy: Samsvarandi stefna
     add_block: Bæta við blokk

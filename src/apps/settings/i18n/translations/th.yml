@@ -112,7 +112,6 @@ apps_configurations:
     ok_edit: อัปเดต
     ok_readonly: แก้ไขเป็นใหม่
     workspace: พื้นที่ทำงาน
-    title_edit: แก้ไข {{ชื่อ}}
     workspace_placeholder: ไม่มี
     name: ชื่อ
     bindings: การเชื่อม (หมายเหตุทั้งสองตัวเลือกเป็นสิ่งจำเป็น)
@@ -120,6 +119,7 @@ apps_configurations:
     weg_options_label: ตัวเลือกท่าเทียบเรือ/บาร์
     wm_options_label: ตัวเลือกตัวจัดการหน้าต่าง
     options_label: ตัวเลือกพิเศษ
+    title_edit: การแก้ไข {{ชื่อ}}
   identifier:
     and: และ
     or: หรือ

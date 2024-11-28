@@ -147,7 +147,7 @@ apps_configurations:
     monitor_placeholder: None
     workspace: Workspace
     workspace_placeholder: None
-    title_edit: Editting {{name}}
+    title_edit: Editing {{name}}
     title_create: Creating {{name}}
     title_readonly: Viewing {{name}}
     ok_edit: Update

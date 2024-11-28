@@ -109,7 +109,6 @@ apps_configurations:
     ok_edit: עדכון
     bindings: כריכה (שימו לב לשתי האפשרויות נדרשות)
     category: קטגוריה
-    title_edit: עריכה {{name}}
     ok_readonly: ערוך כחדש
     monitor: צג
     ok_create: לִיצוֹר
@@ -120,6 +119,7 @@ apps_configurations:
     wm_options_label: אפשרויות מנהל חלונות
     weg_options_label: אפשרויות עגינה/שורת משימות
     options_label: אפשרויות נוספות
+    title_edit: עריכה {{name}}
   identifier:
     id: מזהה
     or: אוֹ

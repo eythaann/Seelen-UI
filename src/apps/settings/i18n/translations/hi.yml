@@ -110,7 +110,6 @@ apps_configurations:
     category_placeholder: कोई नहीं
     monitor_placeholder: कोई नहीं
     bindings: बाइंडिंग (ध्यान दें कि दोनों विकल्पों की आवश्यकता है)
-    title_edit: संपादन {{नाम}}
     monitor: निगरानी करना
     category: वर्ग
     workspace_placeholder: कोई नहीं
@@ -120,6 +119,7 @@ apps_configurations:
     wm_options_label: विंडो मैनेजर विकल्प
     weg_options_label: डॉक/टास्कबार विकल्प
     options_label: अतिरिक्त विकल्प
+    title_edit: संपादन {{नाम}}
   identifier:
     remove: ब्लॉक हटाएं
     add_block: ब्लॉक जोड़ें

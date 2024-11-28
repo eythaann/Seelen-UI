@@ -112,7 +112,6 @@ apps_configurations:
     name: Nama
     ok_create: Membuat
     category: Kategori
-    title_edit: Editting {{name}}
     title_create: Membuat {{name}}
     workspace_placeholder: Tidak ada
     ok_readonly: Edit sebagai baru
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Opsi Dock/Taskbar
     wm_options_label: Opsi Manajer Jendela
     options_label: Opsi tambahan
+    title_edit: Mengedit {{name}}
   identifier:
     and: DAN
     matching_strategy: Strategi pencocokan

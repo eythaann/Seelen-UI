@@ -106,7 +106,6 @@ apps_configurations:
       hidden: Piiloutua telakalta/tehtäväpalkista
     category: Kategoria
     title_create: '{{Nimi}} luominen'
-    title_edit: Muokkaaminen {{nimi}}
     category_placeholder: Ei mitään
     ok_edit: Päivittää
     workspace: Työtila
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Dock/tehtäväpalkin vaihtoehdot
     wm_options_label: Window Manager -vaihtoehdot
     options_label: Ylimääräiset vaihtoehdot
+    title_edit: Muokkaaminen {{nimi}}
   identifier:
     add_block: Lisätä
     remove: Poistaa lohko

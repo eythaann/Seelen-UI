@@ -104,7 +104,6 @@ apps_configurations:
       pinned: Закачен
       force: Управување со сила
       hidden: Скриј од пристаништето/лентата со задачи
-    title_edit: Уредување {{име}}
     ok_edit: Ажурирање
     category_placeholder: Ништо
     name: Име
@@ -121,6 +120,7 @@ apps_configurations:
     wm_options_label: Опции за управување со прозорецот
     weg_options_label: Опции на пристаништето/лентата со задачи
     options_label: Дополнителни опции
+    title_edit: Уредување {{име}}
   identifier:
     remove: Избриши блок
     matching_strategy: Стратегија за појавување

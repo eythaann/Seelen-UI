@@ -122,7 +122,6 @@ apps_configurations:
     monitor_placeholder: Aucun
     workspace: Espace de travail
     workspace_placeholder: Aucun
-    title_edit: Modification de {{name}}
     title_create: Création de {{name}}
     title_readonly: Affichage de {{name}}
     ok_edit: Mise à jour
@@ -137,6 +136,7 @@ apps_configurations:
     wm_options_label: Options du gestionnaire de fenêtres
     weg_options_label: Options de quai / barre des tâches
     options_label: Des options supplémentaires
+    title_edit: Édition {{nom}}
   identifier:
     remove: Supprimer le bloc
     id: Identifiant

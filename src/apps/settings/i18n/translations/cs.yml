@@ -113,7 +113,6 @@ apps_configurations:
     monitor_placeholder: Žádný
     bindings: Vazba (poznámka o tom, že jsou vyžadovány obě možnosti)
     workspace: Pracovní prostor
-    title_edit: Editace {{name}}
     title_create: Vytváření {{name}}
     ok_readonly: Upravit jako nové
     name: název
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Možnosti doku/hlavního panelu
     wm_options_label: Možnosti správce oken
     options_label: Další možnosti
+    title_edit: Úpravy {{name}}
   identifier:
     add_block: Přidat blok
     negation: Negovat odpovídající

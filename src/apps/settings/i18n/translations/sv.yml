@@ -111,7 +111,6 @@ apps_configurations:
     bindings: Bindning (Observera att båda alternativen krävs)
     monitor_placeholder: Ingen
     title_create: Skapa {{name}}
-    title_edit: Redge {{name}}
     category_placeholder: Ingen
     ok_create: Skapa
     monitor: Övervaka
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Dock/Aktivitetsfältalternativ
     wm_options_label: Fönsterchefalternativ
     options_label: Extra alternativ
+    title_edit: Redigera {{name}}
   identifier:
     and: OCH
     remove: Radera block

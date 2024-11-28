@@ -110,7 +110,6 @@ apps_configurations:
     ok_readonly: Upravovať ako nové
     title_create: Vytváranie {{name}}
     bindings: Viazanie (POZNÁMKA sú potrebné obe možnosti)
-    title_edit: Editovanie {{name}}
     workspace_placeholder: Žiadny
     category_placeholder: Žiadny
     ok_create: Vytvárať
@@ -121,6 +120,7 @@ apps_configurations:
     wm_options_label: Možnosti správcu okien
     weg_options_label: Možnosti doku/panela úloh
     options_label: Ďalšie možnosti
+    title_edit: Úpravy {{name}}
   identifier:
     remove: Vymazať blok
     negation: Negovať zladenie

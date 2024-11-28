@@ -106,7 +106,6 @@ apps_configurations:
       hidden: Sakrij se od pristaništa/trake
     ok_edit: Ažuriraj
     bindings: Vezivanje (napomena potrebne su obje opcije)
-    title_edit: Uređivanje {{name}}
     category_placeholder: Nijedan
     ok_create: Stvoriti
     ok_readonly: Uredi kao novo
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Opcije pristaništa/trake
     wm_options_label: Opcije upravitelja prozora
     options_label: Dodatne opcije
+    title_edit: Uređivanje {{name}}
   identifier:
     and: I
     negation: Negiranje podudaranja

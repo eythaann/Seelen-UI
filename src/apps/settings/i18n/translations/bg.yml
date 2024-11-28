@@ -104,7 +104,6 @@ apps_configurations:
       unmanage: Несъгласен
       pinned: Прикован
       hidden: Скрийте се от Dock/Taskbar
-    title_edit: Редактиране {{name}}
     title_create: Създаване {{name}}
     workspace: Работно пространство
     category: Категория
@@ -121,6 +120,7 @@ apps_configurations:
     wm_options_label: Опции за мениджър на прозорци
     weg_options_label: Опции за док/лента на задачите
     options_label: Допълнителни опции
+    title_edit: Редактиране {{name}}
   identifier:
     add_block: Добавете блок
     remove: Изтриване на блок

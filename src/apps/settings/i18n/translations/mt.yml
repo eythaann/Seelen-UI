@@ -116,11 +116,11 @@ apps_configurations:
     ok_create: Oħloq
     category: Kategorija
     bindings: Torbot (innota ż-żewġ għażliet huma meħtieġa)
-    title_edit: Editting {{isem}}
     monitor_placeholder: Xejn
     wm_options_label: Għażliet tal-Maniġer tat-Tieqa
     weg_options_label: Għażliet tal-baċir / taskbar
     options_label: Għażliet żejda
+    title_edit: Editjar {{isem}}
   identifier:
     matching_strategy: Strateġija ta 'tqabbil
     and: U

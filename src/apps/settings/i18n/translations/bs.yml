@@ -117,10 +117,10 @@ apps_configurations:
     ok_edit: Ažurirati
     workspace: Radni prostor
     title_create: Stvarajući {{ime}}
-    title_edit: Uređivanje {{ime}}
     wm_options_label: Opcije prozora upravitelja
     weg_options_label: Opcije pristaništa / trake zadataka
     options_label: Dodatne opcije
+    title_edit: Uređivanje {{ime}}
   identifier:
     matching_strategy: Strategija podudaranja
     and: I

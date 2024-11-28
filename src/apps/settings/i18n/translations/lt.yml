@@ -111,7 +111,6 @@ apps_configurations:
     category_placeholder: Nė vienas
     title_create: Kurti {{name}}
     bindings: Įrišimas (pastaba yra būtinos abi parinktys)
-    title_edit: Redagavimas {{name}}
     workspace: Darbo vieta
     workspace_placeholder: Nė vienas
     ok_edit: Atnaujinimas
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: „Dock“/„Taskbar“ parinktys
     wm_options_label: „Windows Manager“ parinktys
     options_label: Papildomos galimybės
+    title_edit: Redagavimas {{name}}
   identifier:
     id: Identifikatorius
     negation: Neigiamas

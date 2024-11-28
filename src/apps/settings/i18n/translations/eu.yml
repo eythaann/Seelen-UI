@@ -117,10 +117,10 @@ apps_configurations:
     workspace: Laneko espazioa
     name: Izen
     ok_create: Sortu
-    title_edit: '{{Name}} editatzea'
     weg_options_label: Dock / ataza barrako aukerak
     wm_options_label: Leiho kudeatzailearen aukerak
     options_label: Aukera gehigarriak
+    title_edit: '{{Name}} edizioa'
   identifier:
     add_block: Gehitu blokea
     kind: Identifikatu

@@ -113,13 +113,13 @@ apps_configurations:
     workspace: فضای کاری
     title_create: ایجاد {{name}}
     title_readonly: مشاهده {{نام}}
-    title_edit: ویرایش {{نام}}
     bindings: اتصال (توجه داشته باشید هر دو گزینه مورد نیاز است)
     ok_readonly: ویرایش به عنوان جدید
     monitor: نظارت
     weg_options_label: گزینه های Dock/TaskBar
     wm_options_label: گزینه های مدیر پنجره
     options_label: گزینه های اضافی
+    title_edit: ویرایش {{نام}}
   identifier:
     and: وت
     or: یا

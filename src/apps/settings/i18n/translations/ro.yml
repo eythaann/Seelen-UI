@@ -115,12 +115,12 @@ apps_configurations:
     title_create: Crearea {{nume}}
     workspace: Spațiu de lucru
     title_readonly: Vizualizare {{nume}}
-    title_edit: Editt {{nume}}
     ok_readonly: Editați ca nou
     monitor: Monitor
     wm_options_label: Opțiuni manager de ferestre
     weg_options_label: Opțiuni de doc/bara de activități
     options_label: Opțiuni suplimentare
+    title_edit: Editare {{nume}}
   identifier:
     and: ȘI
     or: SAU

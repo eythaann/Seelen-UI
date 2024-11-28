@@ -116,10 +116,10 @@ apps_configurations:
     ok_create: Xûliqandin
     workspace_placeholder: Netû
     ok_readonly: Wekî nû biguherînin
-    title_edit: Editting {name}}
     weg_options_label: Vebijarkên Dock / Taskbar
     wm_options_label: Vebijarkên rêveberê pencereyê
     options_label: Vebijarkên zêde
+    title_edit: Verastkirin {{name}}
   identifier:
     and: Û
     or: AN

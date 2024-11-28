@@ -114,13 +114,13 @@ apps_configurations:
     category: বিভাগ
     ok_readonly: নতুন হিসাবে সম্পাদনা
     monitor: মনিটর
-    title_edit: সম্পাদনা {{নাম}}
     title_create: '{{নাম}} তৈরি করা'
     workspace: কর্মক্ষেত্র
     bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
     weg_options_label: ডক/টাস্কবার বিকল্প
     wm_options_label: উইন্ডো ম্যানেজার বিকল্পগুলি
     options_label: অতিরিক্ত বিকল্প
+    title_edit: সম্পাদনা {{নাম}}
   identifier:
     or: বা
     and: এবং

@@ -114,12 +114,12 @@ apps_configurations:
     category_placeholder: کوئی نہیں
     monitor: مانیٹر
     name: نام
-    title_edit: ترمیم {{نام}}
     workspace_placeholder: کوئی نہیں
     title_create: '{{نام}} بنانا'
     wm_options_label: ونڈو مینیجر کے اختیارات
     weg_options_label: گودی/ٹاسک بار کے اختیارات
     options_label: اضافی اختیارات
+    title_edit: ترمیم {{نام}}
   identifier:
     and: اور
     remove: بلاک کو حذف کریں

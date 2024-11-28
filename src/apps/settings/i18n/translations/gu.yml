@@ -115,11 +115,11 @@ apps_configurations:
     ok_edit: અપડેટ કરો
     title_readonly: '{{name}} જોઈ રહ્યાં છીએ'
     bindings: બંધનકર્તા (નોંધો કે બંને વિકલ્પો જરૂરી છે)
-    title_edit: સંપાદન {{name}}
     ok_create: બનાવો
     wm_options_label: વિંડો મેનેજર વિકલ્પો
     weg_options_label: ડોક/ટાસ્કબાર વિકલ્પો
     options_label: વધારાના વિકલ્પો
+    title_edit: સંપાદન {{નામ}}
   identifier:
     remove: બ્લોક કાઢી નાખો
     add_block: બ્લોક ઉમેરો

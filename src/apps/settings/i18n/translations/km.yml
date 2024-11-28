@@ -112,7 +112,6 @@ apps_configurations:
     name: ឈ្មោះ
     title_create: ការបង្កើត {{name}}
     title_readonly: កំពុងមើល {{name}}
-    title_edit: ការកែសម្រួល {{name}}
     ok_edit: ធ្វើបច្ចុប្បន្នភាព
     monitor: ម៉ូនីទ័រ
     ok_create: បង្កើត
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: ជម្រើសចត / ភារកិច្ច
     wm_options_label: ជម្រើសកម្មវិធីគ្រប់គ្រងបង្អួច
     options_label: ជម្រើសបន្ថែម
+    title_edit: ការកែសម្រួល {{ឈ្មោះ}}
   identifier:
     and: និង
     remove: លុបប្លុក

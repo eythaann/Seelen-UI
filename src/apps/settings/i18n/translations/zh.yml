@@ -121,7 +121,6 @@ apps_configurations:
     monitor_placeholder: 无
     workspace: 工作区
     workspace_placeholder: 无
-    title_edit: 编辑 {{name}}
     title_create: 创建 {{name}}
     title_readonly: 查看 {{name}}
     ok_edit: 更新
@@ -136,6 +135,7 @@ apps_configurations:
     weg_options_label: Dock 栏 / 任务栏 选项
     wm_options_label: 窗口管理器选项
     options_label: 其他
+    title_edit: 编辑{{name}}
   identifier:
     remove: 删除块
     id: 标识符

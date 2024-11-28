@@ -112,13 +112,13 @@ apps_configurations:
     bindings: バインディング（両方のオプションが必要です）
     ok_readonly: 新規設定を作成
     workspace_placeholder: なし
-    title_edit: 「{{name}}」を編集する
     title_readonly: 「{{name}}」を表示しています
     name: 名前
     title_create: '{{name}}を作成する'
     weg_options_label: ドック/タスクバーの設定
     wm_options_label: ウィンドウマネージャーの設定
     options_label: 追加の設定
+    title_edit: 編集{{name}}
   identifier:
     id: 識別子
     and: かつ

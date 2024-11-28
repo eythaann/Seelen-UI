@@ -110,7 +110,6 @@ apps_configurations:
     workspace_placeholder: የለም
     ok_edit: ዝመና
     workspace: የስራ ቦታ
-    title_edit: አርትዕ {{{N}}}
     bindings: ማሰሪያ (ሁለቱንም አማራጮች ልብ ይበሉ)
     title_readonly: '{{{}}}}'
     title_create: '{{{ስም} መፍጠር}}'
@@ -119,6 +118,7 @@ apps_configurations:
     weg_options_label: የመርከሪያ / የተግባር አሞሌ አማራጮች
     wm_options_label: የመስኮት አቀናባሪ አማራጮች
     options_label: ተጨማሪ አማራጮች
+    title_edit: አርት editing {{ስም}}}
   identifier:
     remove: ብሎክ ሰርዝ
     and: እና

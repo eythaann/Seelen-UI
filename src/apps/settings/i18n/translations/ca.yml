@@ -108,7 +108,6 @@ apps_configurations:
     workspace: Espai de treball
     name: Nom
     bindings: Enquadernació (nota les dues opcions són necessàries)
-    title_edit: Editing {{nom}}
     category: Categoria
     category_placeholder: Res
     title_readonly: Visualització {{nom}}
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Opcions de moll/barra de tasques
     wm_options_label: Opcions del gestor de finestres
     options_label: Opcions addicionals
+    title_edit: Edició {{nom}}
   identifier:
     add_block: Afegiu bloc
     remove: Esborra el bloc

@@ -126,7 +126,6 @@ apps_configurations:
     monitor_placeholder: Keine
     workspace: Arbeitsbereich
     workspace_placeholder: Keine
-    title_edit: '{{name}} bearbeiten'
     title_create: '{{name}} erstellen'
     title_readonly: '{{name}} ansehen'
     ok_edit: Ändern
@@ -141,6 +140,7 @@ apps_configurations:
       force: Verwaltung erzwingen
       pinned: Angeheftet
       hidden: Vor Dock/Taskleiste verstecken
+    title_edit: Bearbeitung {{Name}}
   identifier:
     remove: Block löschen
     id: Identifikator

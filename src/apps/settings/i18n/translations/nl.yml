@@ -111,7 +111,6 @@ apps_configurations:
     monitor_placeholder: Geen
     title_readonly: '{{{Name}} bekijken'
     workspace: Werkruimte
-    title_edit: Bewerken {{name}}
     ok_readonly: Bewerken als nieuw
     title_create: Het maken van {{name}}
     bindings: Binding (beide opties zijn vereist)
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Dock/taakbalkopties
     wm_options_label: Opties voor vensterbeheerder
     options_label: Extra opties
+    title_edit: Bewerken {{name}}
   identifier:
     and: EN
     or: OF

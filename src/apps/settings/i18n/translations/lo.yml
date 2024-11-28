@@ -115,13 +115,13 @@ apps_configurations:
     ok_edit: ອັບເດດ
     category: ປະເພດ
     title_readonly: ກຳລັງເບິ່ງ {{name}}
-    title_edit: ການແກ້ໄຂ {{name}}
     ok_readonly: ແກ້ໄຂເປັນໃໝ່
     ok_create: ສ້າງ
     bindings: ການຜູກມັດ (ຫມາຍເຫດທັງສອງທາງເລືອກແມ່ນຈໍາເປັນ)
     weg_options_label: ທາງເລືອກ Dock / Taskasbar
     wm_options_label: ຕົວເລືອກຜູ້ຈັດການ window Manager
     options_label: ທາງເລືອກພິເສດ
+    title_edit: ການແກ້ໄຂ {{ne name}}}
   identifier:
     and: ແລະ
     negation: Negate ການຈັບຄູ່

@@ -116,11 +116,11 @@ apps_configurations:
     workspace_placeholder: Namunye
     category: Uhlobo
     workspace: Indawo
-    title_edit: Ukuhleleka {{igama}}
     ok_create: Dala
     wm_options_label: Izinketho ze-Window Manager
     weg_options_label: Izinketho ze-Dock / Taskbar
     options_label: Izinketho Ezengeziwe
+    title_edit: Ukuhlela {{igama}}
   identifier:
     remove: Susa ibhulokhi
     matching_strategy: Isu lokuqondanisa

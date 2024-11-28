@@ -117,10 +117,10 @@ apps_configurations:
     category: Tili
     ok_create: Yaratmoq
     ok_edit: Yangilamoq
-    title_edit: '{{Ism}} tahrirlash'
     wm_options_label: Oyna boshqaruvchisi variantlari
     weg_options_label: Dok / vazifalar paneli
     options_label: Qo'shimcha variantlar
+    title_edit: '{{Ismi}} tahrirlash'
   identifier:
     add_block: Blokni qo'shish
     remove: Blokni o'chirish

@@ -112,7 +112,6 @@ apps_configurations:
     monitor_placeholder: කිසිවක් නැත
     ok_edit: යාවත්කාලීන කරන්න
     category: වර්ගය
-    title_edit: '{{name}} සංස්කරණය කරමින්'
     bindings: බැඳීම (විකල්ප දෙකම අවශ්‍ය බව සලකන්න)
     workspace: වැඩබිම
     ok_readonly: නව ලෙස සංස්කරණය කරන්න
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: තටාකය / කාර්ය තීරුව විකල්ප
     wm_options_label: කවුළු කළමනාකරුගේ විකල්ප
     options_label: අමතර විකල්ප
+    title_edit: සංස්කරණය {{name}}
   identifier:
     and: සහ
     add_block: බ්ලොක් එක් කරන්න

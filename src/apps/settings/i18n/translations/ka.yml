@@ -110,7 +110,6 @@ apps_configurations:
     category_placeholder: არაფერი
     workspace_placeholder: არაფერი
     ok_edit: განახლება
-    title_edit: რედაქტირება {{სახელი}}
     workspace: სამუშაო ადგილი
     ok_readonly: რედაქტირება როგორც ახალი
     title_create: '{{სახელის შექმნა}}'
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: დოკ/დავალების პანელის პარამეტრები
     wm_options_label: ფანჯრის მენეჯერის პარამეტრები
     options_label: დამატებითი პარამეტრები
+    title_edit: რედაქტირება {{სახელი}}
   identifier:
     and: და
     id: პირადობა

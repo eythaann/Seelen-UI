@@ -112,7 +112,6 @@ apps_configurations:
     workspace: ਵਰਕਸਪੇਸ
     name: ਨਾਮ
     workspace_placeholder: ਕੋਈ ਨਹੀਂ
-    title_edit: ਸੰਪਾਦਨ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ {{name}}
     ok_create: ਬਣਾਓ
     category_placeholder: ਕੋਈ ਨਹੀਂ
     ok_edit: ਅਪਡੇਟ
@@ -121,6 +120,7 @@ apps_configurations:
     wm_options_label: ਵਿੰਡੋ ਮੈਨੇਜਰ ਦੇ ਵਿਕਲਪ
     weg_options_label: ਡੌਕ / ਟਾਸਕਬਾਰ ਚੋਣਾਂ
     options_label: ਵਾਧੂ ਵਿਕਲਪ
+    title_edit: ਸੰਪਾਦਨ {ime neame}
   identifier:
     kind: ਦੁਆਰਾ ਪਛਾਣੋ
     id: ਪਛਾਣਕਰਤਾ

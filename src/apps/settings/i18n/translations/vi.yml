@@ -111,7 +111,6 @@ apps_configurations:
     name: Tên
     workspace_placeholder: Không có
     ok_create: Tạo nên
-    title_edit: Chỉnh sửa {{name}}
     bindings: Binding (Lưu ý cả hai tùy chọn đều được yêu cầu)
     monitor: Màn hình
     title_readonly: Xem {{name}}
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Tùy chọn Thanh điều khiển/Thanh nhiệm vụ
     wm_options_label: Tùy chọn Trình quản lý cửa sổ
     options_label: Tùy chọn bổ sung
+    title_edit: Chỉnh sửa {{name}}
   identifier:
     and: VÀ
     or: HOẶC

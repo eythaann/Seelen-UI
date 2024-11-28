@@ -108,7 +108,6 @@ apps_configurations:
     monitor_placeholder: Neviens
     category: Kategorija
     name: Nosaukt
-    title_edit: Rediģēšana {{name}}
     title_create: Izveidot {{name}}
     ok_readonly: Rediģēt kā jaunu
     workspace_placeholder: Neviens
@@ -121,6 +120,7 @@ apps_configurations:
     weg_options_label: Doka/uzdevumjoslas iespējas
     wm_options_label: Logu pārvaldnieka opcijas
     options_label: Papildu iespējas
+    title_edit: Rediģēšana {{name}}
   identifier:
     and: UN
     matching_strategy: Atbilstības stratēģija

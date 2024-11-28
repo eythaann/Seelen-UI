@@ -117,10 +117,10 @@ apps_configurations:
     workspace: Çalışma Alanı
     workspace_placeholder: Yok
     ok_readonly: Yeni Olarak Düzenle
-    title_edit: '{{name}} Düzenleniyor'
     wm_options_label: Pencere Yöneticisi Seçenekleri
     weg_options_label: Dock/Görev Çubuğu Seçenekleri
     options_label: Ekstra Seçenekler
+    title_edit: Düzenleme {{name}}
   identifier:
     and: VE
     matching_strategy: Eşleştirme Stratejisi

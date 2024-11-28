@@ -123,7 +123,6 @@ apps_configurations:
     monitor_placeholder: 없음
     workspace: 작업 공간
     workspace_placeholder: 없음
-    title_edit: '{{name}} 편집'
     title_create: '{{name}} 만들기'
     title_readonly: '{{name}} 보기'
     ok_edit: 수정하기
@@ -138,6 +137,7 @@ apps_configurations:
     wm_options_label: 윈도우 관리자 옵션
     weg_options_label: 독/작업 표시줄 옵션
     options_label: 추가 옵션
+    title_edit: 편집 {{name}}
   identifier:
     remove: 블록 삭제
     id: 식별자
