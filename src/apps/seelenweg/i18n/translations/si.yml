@@ -20,3 +20,5 @@ media_menu:
   remove: මාධ්ය මොඩියුලය ඉවත් කරන්න
 start_menu:
   remove: ආරම්භක මොඩියුලය ඉවත් කරන්න
+media:
+  not_playing: කිසිවක් සෙල්ලම් කරන්නේ නැත

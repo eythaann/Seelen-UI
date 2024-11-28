@@ -20,3 +20,5 @@ media_menu:
   remove: Dileu Modiwl Cyfryngau
 start_menu:
   remove: Tynnwch y modiwl cychwyn
+media:
+  not_playing: Nid oes dim yn chwarae

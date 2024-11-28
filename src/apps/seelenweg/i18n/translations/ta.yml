@@ -20,3 +20,5 @@ media_menu:
   remove: மீடியா தொகுதியை அகற்று
 start_menu:
   remove: தொடக்க தொகுதியை அகற்று
+media:
+  not_playing: எதுவும் விளையாடுவதில்லை

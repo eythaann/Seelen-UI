@@ -20,7 +20,7 @@ export async function loadConstants() {
     await path.resourceDir(),
     'static',
     'icons',
-    'default_thumbnail.jpg',
+    'music_thumbnail.jpg',
   );
   LAZY_CONSTANTS.FOLDER_ICON_PATH = await path.resolve(
     await path.resourceDir(),

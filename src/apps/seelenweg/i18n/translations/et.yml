@@ -20,3 +20,5 @@ media_menu:
   remove: Eemaldage meediumimoodul
 start_menu:
   remove: Eemaldage algusmoodul
+media:
+  not_playing: Miski ei mängi

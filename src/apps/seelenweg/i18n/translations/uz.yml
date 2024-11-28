@@ -20,3 +20,5 @@ media_menu:
   remove: Media modulini olib tashlang
 start_menu:
   remove: Boshlash moduliini olib tashlang
+media:
+  not_playing: Hech narsa o'ynamaydi

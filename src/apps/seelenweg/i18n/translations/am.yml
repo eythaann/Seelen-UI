@@ -20,3 +20,5 @@ media_menu:
   remove: የሚዲያ ሞዱል ያስወግዱ
 start_menu:
   remove: የጀግንነት ሞዱልን ያስወግዱ
+media:
+  not_playing: ምንም የሚጫወት የለም

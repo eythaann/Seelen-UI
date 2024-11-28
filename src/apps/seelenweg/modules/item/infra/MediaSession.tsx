@@ -10,6 +10,7 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { calcLuminance } from '../../../../toolbar/modules/media/application';
 import { Selectors } from '../../shared/store/app';
+import { cx } from 'src/apps/shared/styles';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { WithContextMenu } from '../../../components/WithContextMenu';
@@ -81,28 +82,35 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
             <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
 
             <div className="media-session-info">
-              <span className="media-session-title" style={{ color }}>
-                {session?.title || 'No Media'}
+              <span
+                className={cx('media-session-title', {
+                  'media-session-title-default': !session,
+                })}
+                style={{ color }}
+              >
+                {session ? session.title : t('media.not_playing')}
               </span>
-              <div className="media-session-actions">
-                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
-                  <Icon iconName="TbPlayerSkipBackFilled" color={color} size={12} />
-                </Button>
-                <Button
-                  type="text"
-                  size="small"
-                  onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
-                >
-                  <Icon
-                    iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
-                    color={color}
-                    size={12}
-                  />
-                </Button>
-                <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
-                  <Icon iconName="TbPlayerSkipForwardFilled" color={color} size={12} />
-                </Button>
-              </div>
+              {session && (
+                <div className="media-session-actions">
+                  <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_prev')}>
+                    <Icon iconName="TbPlayerSkipBackFilled" color={color} size={12} />
+                  </Button>
+                  <Button
+                    type="text"
+                    size="small"
+                    onClick={onClickBtn.bind(null, 'media_toggle_play_pause')}
+                  >
+                    <Icon
+                      iconName={session?.playing ? 'TbPlayerPauseFilled' : 'TbPlayerPlayFilled'}
+                      color={color}
+                      size={12}
+                    />
+                  </Button>
+                  <Button type="text" size="small" onClick={onClickBtn.bind(null, 'media_next')}>
+                    <Icon iconName="TbPlayerSkipForwardFilled" color={color} size={12} />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -20,3 +20,5 @@ media_menu:
   remove: मीडिया मॉड्यूल निकालें
 start_menu:
   remove: प्रारंभ मॉड्यूल निकालें
+media:
+  not_playing: कुछ भी नहीं खेल रहा है

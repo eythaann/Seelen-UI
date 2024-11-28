@@ -20,3 +20,5 @@ media_menu:
   remove: Usuń moduł multimediów
 start_menu:
   remove: Usuń moduł startowy
+media:
+  not_playing: Nic nie gra

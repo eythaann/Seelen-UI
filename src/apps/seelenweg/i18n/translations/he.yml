@@ -20,3 +20,5 @@ media_menu:
   remove: הסר את מודול המדיה
 start_menu:
   remove: הסר את מודול ההתחלה
+media:
+  not_playing: שום דבר לא משחק

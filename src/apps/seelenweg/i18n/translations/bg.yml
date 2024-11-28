@@ -20,3 +20,5 @@ media_menu:
   remove: Премахване на медийния модул
 start_menu:
   remove: Премахване на стартовия модул
+media:
+  not_playing: Нищо не играе

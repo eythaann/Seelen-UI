@@ -20,3 +20,5 @@ media_menu:
   remove: Poista mediamoduuli
 start_menu:
   remove: Poista Start -moduuli
+media:
+  not_playing: Mikään ei pelaa

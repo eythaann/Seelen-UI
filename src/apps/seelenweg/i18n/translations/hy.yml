@@ -20,3 +20,5 @@ media_menu:
   remove: Հեռացրեք մեդիա մոդուլը
 start_menu:
   remove: Հեռացրեք Սկսել մոդուլը
+media:
+  not_playing: Ոչինչ չի խաղում

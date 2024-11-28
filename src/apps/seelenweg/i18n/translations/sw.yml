@@ -20,3 +20,5 @@ media_menu:
   remove: Ondoa moduli ya media
 start_menu:
   remove: Ondoa moduli ya kuanza
+media:
+  not_playing: Hakuna kinachocheza

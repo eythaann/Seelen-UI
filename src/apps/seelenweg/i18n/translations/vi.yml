@@ -20,3 +20,5 @@ media_menu:
   remove: Loại bỏ mô -đun phương tiện
 start_menu:
   remove: Xóa mô -đun bắt đầu
+media:
+  not_playing: Không có gì đang chơi

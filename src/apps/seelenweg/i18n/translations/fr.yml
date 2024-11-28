@@ -20,3 +20,5 @@ media_menu:
   remove: Supprimer le module multimédia
 start_menu:
   remove: Supprimer le module de démarrage
+media:
+  not_playing: Rien ne joue

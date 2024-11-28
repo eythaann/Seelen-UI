@@ -20,3 +20,5 @@ media_menu:
   remove: Kendu multimedia modulua
 start_menu:
   remove: Kendu hasierako modulua
+media:
+  not_playing: Ez da ezer jolasten

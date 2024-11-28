@@ -20,3 +20,5 @@ media_menu:
   remove: Видалити медіа -модуль
 start_menu:
   remove: Зніміть модуль запуску
+media:
+  not_playing: Ніщо не грає

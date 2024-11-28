@@ -20,3 +20,5 @@ media_menu:
   remove: Neħħi l-modulu tal-midja
 start_menu:
   remove: Neħħi l-modulu tal-bidu
+media:
+  not_playing: Xejn ma jilgħab

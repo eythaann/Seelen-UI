@@ -20,3 +20,5 @@ media_menu:
   remove: మీడియా మాడ్యూల్ తొలగించండి
 start_menu:
   remove: ప్రారంభ మాడ్యూల్ తొలగించండి
+media:
+  not_playing: ఏమీ ఆడటం లేదు

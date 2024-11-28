@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Copy Handles
   close: Close
   close_multiple: Close All
+media:
+  not_playing: Nothing is playing
 media_menu:
   remove: Remove Media Module
 start_menu:

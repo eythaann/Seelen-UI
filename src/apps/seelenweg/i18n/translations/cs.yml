@@ -20,3 +20,5 @@ media_menu:
   remove: Odebrat mediální modul
 start_menu:
   remove: Odstraňte startovací modul
+media:
+  not_playing: Nic nehraje

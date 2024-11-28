@@ -20,3 +20,5 @@ media_menu:
   remove: Verwijder de mediamodule
 start_menu:
   remove: Verwijder de startmodule
+media:
+  not_playing: Niets speelt

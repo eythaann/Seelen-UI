@@ -20,3 +20,5 @@ media_menu:
   remove: Remover módulo de mídia
 start_menu:
   remove: Remover módulo inicial
+media:
+  not_playing: Nada está tocando

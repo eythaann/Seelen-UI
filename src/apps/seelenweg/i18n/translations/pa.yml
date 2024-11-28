@@ -20,3 +20,5 @@ media_menu:
   remove: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਹਟਾਓ
 start_menu:
   remove: ਸਟਾਰਟ ਮੋਡੀ .ਲ ਹਟਾਓ
+media:
+  not_playing: ਕੁਝ ਨਹੀਂ ਖੇਡ ਰਿਹਾ

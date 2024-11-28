@@ -20,3 +20,5 @@ media_menu:
   remove: МЭДЭЭЛЛИЙН МЭДЭЭЛЛИЙН МЭДЭЭЛЭЛ
 start_menu:
   remove: Эхлэх модулийг устгах
+media:
+  not_playing: Юу ч тоглоогүй байна

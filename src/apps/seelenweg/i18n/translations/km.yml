@@ -20,3 +20,5 @@ media_menu:
   remove: យកម៉ូឌុលមេឌៀចេញ
 start_menu:
   remove: យកម៉ូឌុលចាប់ផ្តើមចេញ
+media:
+  not_playing: គ្មានអ្វីកំពុងលេងទេ

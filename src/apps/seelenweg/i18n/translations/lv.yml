@@ -20,3 +20,5 @@ media_menu:
   remove: Noņemiet multivides moduli
 start_menu:
   remove: Noņemiet sākuma moduli
+media:
+  not_playing: Nekas nespēlē

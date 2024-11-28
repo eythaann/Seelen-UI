@@ -20,3 +20,5 @@ media_menu:
   remove: Ewechzehuelen Media Modul
 start_menu:
   remove: Ewechzehuelen Start Modul
+media:
+  not_playing: Näischt spillt

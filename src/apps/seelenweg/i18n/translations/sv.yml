@@ -20,3 +20,5 @@ media_menu:
   remove: Ta bort mediemodulen
 start_menu:
   remove: Ta bort startmodulen
+media:
+  not_playing: Ingenting spelar

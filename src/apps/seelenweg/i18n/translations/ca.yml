@@ -20,3 +20,5 @@ media_menu:
   remove: Elimina el mòdul de suports
 start_menu:
   remove: Elimina el mòdul d'inici
+media:
+  not_playing: Res està jugant

@@ -19,6 +19,6 @@ export async function loadConstants() {
     resourceDir,
     'static',
     'icons',
-    'default_thumbnail.jpg',
+    'music_thumbnail.jpg',
   );
 }

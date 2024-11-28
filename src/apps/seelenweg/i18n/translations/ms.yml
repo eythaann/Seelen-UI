@@ -20,3 +20,5 @@ media_menu:
   remove: Keluarkan modul media
 start_menu:
   remove: Keluarkan Modul Mula
+media:
+  not_playing: Tidak ada yang bermain

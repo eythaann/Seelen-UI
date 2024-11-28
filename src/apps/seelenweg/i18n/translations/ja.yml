@@ -20,3 +20,5 @@ media_menu:
   remove: メディアモジュールを削除
 start_menu:
   remove: スタートメニューを削除
+media:
+  not_playing: 何も遊んでいません

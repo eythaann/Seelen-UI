@@ -20,3 +20,5 @@ media_menu:
   remove: Fjern mediemodulet
 start_menu:
   remove: Fjern startmodulet
+media:
+  not_playing: Intet spiller

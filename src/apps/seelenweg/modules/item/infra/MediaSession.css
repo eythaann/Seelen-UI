@@ -63,14 +63,21 @@
     padding: 4px;
 
     .media-session-title {
+      letter-spacing: 0.3px;
+      line-height: 1.3em;
       font-size: 0.7rem;
       font-weight: 600;
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
       max-width: 100%;
-      margin-top: -3px;
+      margin-bottom: 2px;
       margin-right: -2px;
+
+      &.media-session-title-default {
+        text-align: center;
+        white-space: normal;
+      }
 
       .vertical & {
         display: none;

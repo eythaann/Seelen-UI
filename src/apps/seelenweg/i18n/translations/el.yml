@@ -20,3 +20,5 @@ media_menu:
   remove: Αφαιρέστε τη μονάδα μέσων
 start_menu:
   remove: Αφαιρέστε την ενότητα εκκίνησης
+media:
+  not_playing: Τίποτα δεν παίζει
