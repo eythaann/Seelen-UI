@@ -26,7 +26,7 @@ left:
 Placeholder files must be in `.yml` or `.yaml`. The file should be located in the following directory:
 
 ```text
-C:\Users{USER}\AppData\Roaming\com.seelen.seelen-ui\placeholders
+C:\Users\{USER}\AppData\Roaming\com.seelen.seelen-ui\placeholders
 └── YourPlaceholderFile.yml
 ```
 
