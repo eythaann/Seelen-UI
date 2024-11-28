@@ -149,6 +149,8 @@ export function SeelenWeg() {
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
 
+  const projectSwItem = (item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen)));
+
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
       <Reorder.Group
@@ -165,7 +167,7 @@ export function SeelenWeg() {
         })}>
         <BackgroundByLayersV2 prefix="taskbar" />
         {[
-          ...pinnedOnLeft.map((item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter(calculateAssociatedViewCounter(associatedViewCounter, isOpen)))),
+          ...pinnedOnLeft.map(projectSwItem),
           <Reorder.Item
             as="div"
             key="separator1"
@@ -176,7 +178,7 @@ export function SeelenWeg() {
             drag={false}
             style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
           />,
-          ...pinnedOnCenter.map((item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter(calculateAssociatedViewCounter(associatedViewCounter, isOpen)))),
+          ...pinnedOnCenter.map(projectSwItem),
           <Reorder.Item
             as="div"
             key="separator2"
@@ -187,7 +189,7 @@ export function SeelenWeg() {
             drag={false}
             style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
           />,
-          ...pinnedOnRight.map((item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter(calculateAssociatedViewCounter(associatedViewCounter, isOpen)))),
+          ...pinnedOnRight.map(projectSwItem),
         ]}
       </Reorder.Group>
     </WithContextMenu>
