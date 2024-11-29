@@ -23,7 +23,7 @@ export function App() {
       if (backgrounds.length > 1) {
         animate(scope.current, { opacity: 0.1 }).then(() => {
           if (randomize) {
-            setCurrentBg(Math.floor(Math.random() * backgrounds.length));
+            setCurrentBg(Math.floor(Math.random() * (backgrounds.length - 1)));
           } else {
             setCurrentBg((currentIdx) => (currentIdx + 1) % backgrounds.length);
           }
