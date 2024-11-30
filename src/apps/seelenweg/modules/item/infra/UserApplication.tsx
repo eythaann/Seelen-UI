@@ -1,5 +1,6 @@
 import { invoke } from '@tauri-apps/api/core';
 import { Popover } from 'antd';
+import moment from 'moment';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -24,14 +25,18 @@ import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
   item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;
+  // This will be triggered in case preview or context menu is opened from this item, or both of them closed.
+  onAssociatedViewOpenChanged?: (isOpen: boolean) => void;
 }
 
-export const UserApplication = memo(({ item }: Props) => {
+export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
   const isFocused = useSelector(
     (state: RootState) => state.focusedApp && item.opens.includes(state.focusedApp.hwnd),
   );
 
   const [openPreview, setOpenPreview] = useState(false);
+  const [openContextMenu, setOpenContextMenu] = useState(false);
+  const [blockUntil, setBlockUntil] = useState(moment(new Date()));
   const settings = useSelector(Selectors.settings);
 
   const { t } = useTranslation();
@@ -57,7 +62,9 @@ export const UserApplication = memo(({ item }: Props) => {
 
   useWindowFocusChange((focused) => {
     if (!focused) {
+      setBlockUntil(moment(new Date()).add(1, 'second'));
       setOpenPreview(false);
+      setOpenContextMenu(false);
     }
   });
 
@@ -73,20 +80,35 @@ export const UserApplication = memo(({ item }: Props) => {
     }
   }, [item]);
 
+  useEffect(() => {
+    if (onAssociatedViewOpenChanged) {
+      onAssociatedViewOpenChanged(openPreview || openContextMenu);
+    }
+  }, [openPreview || openContextMenu]);
+
   return (
-    <DraggableItem item={item}>
-      <WithContextMenu items={getMenuForItem(t, item) || []}>
+    <DraggableItem item={item} className={cx({ 'associated-view-open': openPreview || openContextMenu })}>
+      <WithContextMenu items={getMenuForItem(t, item) || []} onOpenChange={(isOpen) => {
+        setOpenContextMenu(isOpen);
+        if (openPreview && isOpen) {
+          setOpenPreview(false);
+        }
+      }}>
         <Popover
           open={openPreview}
           mouseEnterDelay={0.4}
           placement={calculatePlacement(settings.position)}
-          onOpenChange={(open) => setOpenPreview(open && !!item.opens.length)}
+          onOpenChange={(open) => setOpenPreview(open && !openContextMenu && !!item.opens.length && moment(new Date()) > blockUntil)}
           trigger="hover"
           arrow={false}
           content={
             <BackgroundByLayersV2
-              className="weg-item-preview-container"
+              className={ cx('weg-item-preview-container', settings.position.toLowerCase()) }
               onMouseMoveCapture={(e) => e.stopPropagation()}
+              onContextMenu={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
               prefix="preview"
             >
               <div className="weg-item-preview-scrollbar">

@@ -211,7 +211,7 @@ function MediaControls() {
   const sessions = useSelector(Selectors.mediaSessions);
 
   return (
-    <BackgroundByLayersV2 className="media-control">
+    <BackgroundByLayersV2 className="media-control" onContextMenu={(e) => e.stopPropagation()}>
       <span className="media-control-label">{t('media.master_volume')}</span>
       {!!defaultOutput && (
         <VolumeControl
@@ -314,7 +314,7 @@ export function WithMediaControls({ children }: PropsWithChildren) {
         trigger={[]}
         destroyTooltipOnHide
         content={
-          <BackgroundByLayersV2 className="media-notifier">
+          <BackgroundByLayersV2 className="media-notifier" onContextMenu={(e) => e.stopPropagation()}>
             {defaultOutput && (
               <VolumeControl
                 value={defaultOutput.volume}

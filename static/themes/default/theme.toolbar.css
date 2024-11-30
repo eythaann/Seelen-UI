@@ -11,7 +11,7 @@
   }
 }
 
-#root {
+#root, .fast-settings, .tray, .wlan-selector, .media-control, .notifications, .notification-arrival, .calendar-container {
   font-size: 0.8rem;
   font-weight: 500;
 

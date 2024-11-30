@@ -3,11 +3,14 @@ import { PropsWithChildren, useRef } from 'react';
 
 import { SwItem } from '../../shared/store/domain';
 
+import { cx } from '../../../../shared/styles';
+
 interface Props extends PropsWithChildren {
   item: SwItem;
+  className: String | undefined;
 }
 
-export function DraggableItem({ children, item }: Props) {
+export function DraggableItem({ children, item, className }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   return (
@@ -16,7 +19,7 @@ export function DraggableItem({ children, item }: Props) {
       ref={ref}
       value={item}
       drag
-      className="weg-item-drag-container"
+      className={cx('weg-item-drag-container', className)}
       onDragStart={() => {
         ref.current?.classList.add('dragging');
       }}

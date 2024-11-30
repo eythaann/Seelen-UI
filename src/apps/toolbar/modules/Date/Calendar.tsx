@@ -31,7 +31,7 @@ function DateCalendar() {
   }, []);
 
   return (
-    <BackgroundByLayersV2 className="calendar-container" prefix="calendar">
+    <BackgroundByLayersV2 className="calendar-container" prefix="calendar" onContextMenu={(e) => e.stopPropagation()}>
       <div onWheel={onWheel}>
         <MomentCalendar
           value={date}
