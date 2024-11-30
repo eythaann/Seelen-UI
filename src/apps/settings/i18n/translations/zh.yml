@@ -24,8 +24,8 @@ header:
     seelen_rofi: 应用启动器
     virtual_desk: 虚拟桌面
     home: 首页
-    mods: 插件和小部件
-    seelen_wall: 壁纸经理
+    mods: 插件与小部件
+    seelen_wall: 壁纸管理
 start:
   title: 欢迎使用！
   message: >-
@@ -223,9 +223,9 @@ monitors_configurations:
 wall:
   backgrounds: 壁纸
   no_background: 使用的该主题背景为空幻灯片
-  enable: 启用壁纸经理
-  interval: 每次更改墙纸
-  random: 随机化幻灯片
+  enable: 启用壁纸管理
+  interval: 更换壁纸间隔
+  random: 随机更改幻灯片
   seconds: 秒
   minutes: 分钟
   hours: 小时
@@ -244,7 +244,7 @@ update:
   available: 有新的版本更新！
   downloading: 下载中...
   channel: 更新频道
-miscellaneous: 各种其他设置
+miscellaneous: 其他设置
 mods:
   widgets: 小部件
   target: 目标

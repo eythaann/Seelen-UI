@@ -17,8 +17,8 @@ network:
   available: 可用网络
   scanning: 扫描网络
   connected: 连接到
-  saved: 已保存的网络
-  secured: 加密网络
+  saved: 已知网络
+  secured: 加密的网络
 settings:
   title: 设置
   app_settings: 应用设置
