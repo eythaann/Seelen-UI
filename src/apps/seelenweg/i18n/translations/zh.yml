@@ -1,8 +1,8 @@
 taskbar_menu:
   media: 添加媒体模块
   start: 添加启动模块
-  add_folder: 引脚自定义文件夹
-  add_file: 引导自定义文件
+  add_folder: 固定自定义文件夹
+  add_file: 固定自定义文件
   task_manager: 任务管理器
   settings: 设置
 app_menu:
@@ -21,4 +21,4 @@ media_menu:
 start_menu:
   remove: 移除启动模块
 media:
-  not_playing: 什么都没有玩
+  not_playing: 没有正在播放的内容
