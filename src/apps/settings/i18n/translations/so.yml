@@ -57,6 +57,9 @@ toolbar:
   label: Qalab argamiye
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
+  use_multiple_monitor_overlap_logic: >-
+    Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda
+    kaliya
 wm:
   border:
     enable: Karti xadka daaqadaha
@@ -87,6 +90,9 @@ weg:
   dock_side: Meel
   delay_to_show: Dib u dhig si loo muujiyo
   delay_to_hide: Dib u dhig si loo qariyo
+  use_multiple_monitor_overlap_logic: >-
+    Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda
+    kaliya
 devtools:
   app_folders: Faylka app
   install_folder: Xeerka rakibaadda

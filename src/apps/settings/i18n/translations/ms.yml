@@ -58,6 +58,7 @@ toolbar:
   label: Bar alat
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
+  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
 wm:
   border:
     enable: Dayakan sempadan tetingkap
@@ -88,6 +89,7 @@ weg:
   dock_side: Kedudukan
   delay_to_show: Kelewatan untuk menunjukkan
   delay_to_hide: Bertangguh untuk bersembunyi
+  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
 devtools:
   load: Beban
   data_folder: Folder Data

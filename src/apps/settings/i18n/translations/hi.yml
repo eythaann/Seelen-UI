@@ -57,6 +57,7 @@ toolbar:
   label: उपकरण पट्टी
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
+  use_multiple_monitor_overlap_logic: एकल फोकस तर्क के बजाय प्रदर्शन विशिष्ट का उपयोग करें
 wm:
   border:
     width: सीमा चौड़ाई
@@ -87,6 +88,7 @@ weg:
   dock_side: पद
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
+  use_multiple_monitor_overlap_logic: एकल फोकस तर्क के बजाय प्रदर्शन विशिष्ट का उपयोग करें
 devtools:
   install_folder: स्थापना फ़ोल्डर
   load: भार

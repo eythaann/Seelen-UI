@@ -57,6 +57,7 @@ toolbar:
   label: Zana
   delay_to_show: Kuchelewa kuonyesha
   delay_to_hide: Kuchelewa kujificha
+  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
 wm:
   border:
     enable: Wezesha mpaka wa dirisha
@@ -87,6 +88,7 @@ weg:
   dock_side: Msimamo
   delay_to_show: Kuchelewa kuonyesha
   delay_to_hide: Kuchelewa kujificha
+  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
 devtools:
   app_folders: Folda za programu
   enable: Wezesha zana za msanidi programu

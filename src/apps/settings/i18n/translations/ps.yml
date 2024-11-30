@@ -57,6 +57,7 @@ toolbar:
   label: توکپټه
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
+  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 wm:
   border:
     width: د بريد سور
@@ -87,6 +88,7 @@ weg:
   dock_side: موقعیت
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
+  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ
   enable: د پراختیا کونکي وسیلې فعال کړئ

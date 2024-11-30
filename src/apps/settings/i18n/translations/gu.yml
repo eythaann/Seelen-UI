@@ -57,6 +57,7 @@ toolbar:
   label: વમળ
   delay_to_show: બતાવવામાં વિલંબ
   delay_to_hide: છુપાવવામાં વિલંબ
+  use_multiple_monitor_overlap_logic: સિંગલ ફોકસ લોજિકને બદલે ડિસ્પ્લે સ્પેસિફિકનો ઉપયોગ કરો
 wm:
   border:
     width: સરહદની પહોળાઈ
@@ -87,6 +88,7 @@ weg:
   dock_side: પદ
   delay_to_show: બતાવવામાં વિલંબ
   delay_to_hide: છુપાવવામાં વિલંબ
+  use_multiple_monitor_overlap_logic: સિંગલ ફોકસ લોજિકને બદલે ડિસ્પ્લે સ્પેસિફિકનો ઉપયોગ કરો
 devtools:
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   custom_config_file: કસ્ટમ રૂપરેખા ફાઇલ લોડ કરો

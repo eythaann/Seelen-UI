@@ -57,6 +57,7 @@ toolbar:
   label: แถบเครื่องมือ
   delay_to_show: ล่าช้าในการแสดง
   delay_to_hide: ล่าช้าในการซ่อน
+  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
 wm:
   border:
     width: ความกว้างชายแดน
@@ -87,6 +88,7 @@ weg:
   dock_side: ตำแหน่ง
   delay_to_show: ล่าช้าในการแสดง
   delay_to_hide: ล่าช้าในการซ่อน
+  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
 devtools:
   settings_file: ไฟล์การตั้งค่า
   install_folder: โฟลเดอร์การติดตั้ง

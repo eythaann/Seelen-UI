@@ -58,6 +58,7 @@ toolbar:
   label: Tresna barra
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
+  use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
 wm:
   border:
     width: Ertzaren zabalera
@@ -88,6 +89,7 @@ weg:
   dock_side: Kokaleku
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
+  use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
 devtools:
   enable: Gaitu garatzaileen tresnak
   load: Zamatu
