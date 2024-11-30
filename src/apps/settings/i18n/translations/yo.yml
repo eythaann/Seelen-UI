@@ -87,6 +87,8 @@ weg:
   dock_side: Ipo
   delay_to_show: Idaduro lati ṣafihan
   delay_to_hide: Idaduro lati tọju
+  item_show_upon_multitaskbar: Fihan Awọn ohun elo MyBar Mi lori
+  behaviour: Ihuwasi ifihan pupọ
 devtools:
   app_folders: Awọn folda App
   install_folder: Filese Fifi sori ẹrọ

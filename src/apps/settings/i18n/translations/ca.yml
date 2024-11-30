@@ -88,6 +88,8 @@ weg:
   dock_side: Posició
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
+  item_show_upon_multitaskbar: Mostra les meves aplicacions de la barra de tasques
+  behaviour: Comportament de visualització múltiple
 devtools:
   load: Carregar
   data_folder: Carpeta de dades

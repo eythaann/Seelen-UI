@@ -88,6 +88,8 @@ weg:
   dock_side: Položaj
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
+  behaviour: Višestruko ponašanje prikaza
+  item_show_upon_multitaskbar: Pokažite moju aplikacije za zadaci
 devtools:
   app_folders: App Mape
   settings_file: Datoteka postavki

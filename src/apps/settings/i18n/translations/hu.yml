@@ -88,6 +88,8 @@ weg:
   dock_side: Pozíció
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
+  item_show_upon_multitaskbar: Mutasd meg a tálca -alkalmazásaimat
+  behaviour: Többszörös megjelenítési viselkedés
 devtools:
   load: Betöltés
   app_folders: App mappák

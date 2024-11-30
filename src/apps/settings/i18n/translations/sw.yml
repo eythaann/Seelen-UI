@@ -87,6 +87,8 @@ weg:
   dock_side: Msimamo
   delay_to_show: Kuchelewa kuonyesha
   delay_to_hide: Kuchelewa kujificha
+  behaviour: Tabia nyingi za kuonyesha
+  item_show_upon_multitaskbar: Onyesha programu zangu za kazi
 devtools:
   app_folders: Folda za programu
   enable: Wezesha zana za msanidi programu

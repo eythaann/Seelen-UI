@@ -95,6 +95,8 @@ weg:
   dock_side: Posición
   delay_to_hide: Retraso para esconderse
   delay_to_show: Retraso para mostrar
+  behaviour: Comportamiento de visualización múltiple
+  item_show_upon_multitaskbar: Muestre mis aplicaciones de la barra de tareas en
 devtools:
   enable: Habilitar herramientas de desarrollador
   app_folders: Carpetas de aplicaciones

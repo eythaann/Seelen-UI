@@ -87,6 +87,8 @@ weg:
   dock_side: Rewş
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
+  behaviour: Behsa Multiple Display
+  item_show_upon_multitaskbar: Serlêdanên min ên peywirdariyê nîşan bidin
 devtools:
   load: Dawetkirin
   app_folders: Pelên App

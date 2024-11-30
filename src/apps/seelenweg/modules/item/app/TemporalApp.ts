@@ -23,7 +23,7 @@ export class SwTemporalAppUtils {
       execution_command: item.execution_path,
       is_dir: false,
       title: item.exe.split('\\').at(-1) || 'Unknown',
-      opens: [item.hwnd],
+      opens: [{ hwnd: item.hwnd, presentative_monitor: item.presentative_monitor }],
     };
   }
 }

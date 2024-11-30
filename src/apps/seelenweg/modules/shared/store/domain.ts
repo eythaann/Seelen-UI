@@ -1,6 +1,7 @@
 import { modify } from 'readable-types';
 import {
   MediaWegItem,
+  MonitorInfo,
   PinnedWegItem,
   SeelenWegSettings,
   SeparatorWegItem,
@@ -12,6 +13,10 @@ import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 
 export type HWND = number & {};
+export type OpenedWindow = {
+  hwnd: HWND;
+  presentative_monitor: number;
+};
 
 export interface AppFromBackground {
   title: string;
@@ -21,6 +26,7 @@ export interface AppFromBackground {
   icon_path: string;
   hwnd: HWND;
   creator_hwnd: HWND;
+  presentative_monitor: number;
 }
 
 export enum AppsSides {
@@ -48,7 +54,7 @@ export type ExtendedPinnedWegItem = modify<
   {
     icon: string;
     title: string;
-    opens: HWND[];
+    opens: OpenedWindow[];
   }
 >;
 
@@ -74,5 +80,6 @@ export interface RootState extends IRootState<SeelenWegSettings> {
   // ----------------------
   focusedApp: FocusedApp | null;
   isOverlaped: boolean;
+  monitorInfo: MonitorInfo;
   mediaSessions: MediaSession[];
 }

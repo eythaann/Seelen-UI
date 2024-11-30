@@ -94,6 +94,8 @@ weg:
   dock_side: موضع
   delay_to_hide: تأخير الاختباء
   delay_to_show: تأخير في العرض
+  behaviour: سلوك العرض المتعدد
+  item_show_upon_multitaskbar: أظهر تطبيقات شريط المهام الخاص بي
 devtools:
   enable: تمكين أدوات المطور
   app_folders: مجلدات التطبيق

@@ -15,13 +15,13 @@ import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
+import { AppFromBackground, HWND, MediaSession, OpenedWindow, SwItem } from './domain';
 
 import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
-import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
+import { IsSavingPinnedItems, loadMonitorInfo, loadPinnedItems } from './storeApi';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -92,6 +92,10 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.updateOpenAppInfo(item));
   });
 
+  await listenGlobal<OpenedWindow>('update-monitor-position', (event) => {
+    store.dispatch(RootActions.updateMonitorPosition(event.payload));
+  });
+
   const onFocusChanged = debounce((app: FocusedApp) => {
     store.dispatch(RootActions.setFocusedApp(app));
   }, 200);
@@ -140,6 +144,10 @@ export async function registerStoreEvents() {
 
   await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async () => {
     await loadSettingsToStore();
+  });
+
+  await listenGlobal<[]>('workspaces-changed', async (_) => {
+    store.dispatch(RootActions.setMonitorInfo(await loadMonitorInfo()));
   });
 
   await StartThemingTool();
@@ -197,4 +205,5 @@ export async function loadStore() {
   store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
   store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
   store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
+  store.dispatch(RootActions.setMonitorInfo(await loadMonitorInfo()));
 }

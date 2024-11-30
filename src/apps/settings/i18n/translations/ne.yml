@@ -87,6 +87,8 @@ weg:
   dock_side: स्थिति
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
+  behaviour: बहुविध प्रदर्शन व्यवहार
+  item_show_upon_multitaskbar: मेरो टास्कबार अनुप्रयोगहरू देखाउनुहोस्
 devtools:
   app_folders: निल्डर
   custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्

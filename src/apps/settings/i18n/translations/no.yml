@@ -88,6 +88,8 @@ weg:
   dock_side: Stilling
   delay_to_show: Forsinkelse med visning
   delay_to_hide: Utsett å skjule
+  behaviour: Flere skjermatferd
+  item_show_upon_multitaskbar: Vis oppgavelinjens -appene mine på
 devtools:
   load: Laste
   custom_config_file: Last inn tilpasset konfigurasjonsfil

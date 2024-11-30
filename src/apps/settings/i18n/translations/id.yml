@@ -88,6 +88,8 @@ weg:
   dock_side: Posisi
   delay_to_hide: Penundaan untuk bersembunyi
   delay_to_show: Keterlambatan untuk ditampilkan
+  behaviour: Perilaku tampilan berganda
+  item_show_upon_multitaskbar: Tunjukkan aplikasi bilah tugas saya
 devtools:
   settings_file: File Pengaturan
   install_folder: Folder Instalasi

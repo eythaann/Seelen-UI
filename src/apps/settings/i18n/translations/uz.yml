@@ -88,6 +88,8 @@ weg:
   dock_side: Pozitsiya
   delay_to_show: Ko'rsatish uchun kechikish
   delay_to_hide: Yashirish uchun kechikish
+  behaviour: Bir nechta namoyish xatti-harakati
+  item_show_upon_multitaskbar: Vazifalar panelidagi ilovalarimni ko'rsating
 devtools:
   install_folder: O'rnatish papkasini o'rnatish
   enable: Ishlab chiqaruvchi vositalarni yoqish

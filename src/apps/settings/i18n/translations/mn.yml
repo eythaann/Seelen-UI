@@ -87,6 +87,8 @@ weg:
   dock_side: Байрлал
   delay_to_show: Үзүүлэхийг хойшлуулсан
   delay_to_hide: Нуухыг хойшлуулах
+  item_show_upon_multitaskbar: Миний TaskBar програмыг харуул
+  behaviour: Олон дэлгэцийн зан байдал
 devtools:
   settings_file: Тохиргооын нэр
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх

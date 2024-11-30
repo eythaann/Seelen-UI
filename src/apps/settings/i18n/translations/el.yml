@@ -88,6 +88,8 @@ weg:
   dock_side: Θέση
   delay_to_show: Καθυστέρηση εμφάνισης
   delay_to_hide: Καθυστέρηση για απόκρυψη
+  behaviour: Πολλαπλή συμπεριφορά οθόνης
+  item_show_upon_multitaskbar: Δείξτε τις εφαρμογές της γραμμής εργασιών μου
 devtools:
   data_folder: Φάκελος δεδομένων
   custom_config_file: Φόρτωση προσαρμοσμένου αρχείου ρυθμίσεων

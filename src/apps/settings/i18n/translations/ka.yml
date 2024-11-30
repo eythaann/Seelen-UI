@@ -88,6 +88,8 @@ weg:
   dock_side: პოზიცია
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
+  behaviour: მრავალჯერადი ჩვენების ქცევა
+  item_show_upon_multitaskbar: აჩვენეთ ჩემი დავალების პანელის პროგრამები
 devtools:
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
   app_folders: აპლიკაციის საქაღალდეები

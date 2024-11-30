@@ -88,6 +88,8 @@ weg:
   dock_side: Placera
   delay_to_show: Fördröjning att visa
   delay_to_hide: Dröjsmål att gömma sig
+  behaviour: Flera visningsbeteende
+  item_show_upon_multitaskbar: Visa mina aktivitetsfält -appar på
 devtools:
   install_folder: Installationsmapp
   load: Ladda

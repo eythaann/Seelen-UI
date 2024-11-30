@@ -87,6 +87,8 @@ weg:
   dock_side: Meel
   delay_to_show: Dib u dhig si loo muujiyo
   delay_to_hide: Dib u dhig si loo qariyo
+  behaviour: Dabeecad muujinaya badan
+  item_show_upon_multitaskbar: Muuji barnaamijkeyga hawsha ee shaqada
 devtools:
   app_folders: Faylka app
   install_folder: Xeerka rakibaadda

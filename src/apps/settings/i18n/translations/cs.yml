@@ -88,6 +88,8 @@ weg:
   dock_side: Pozice
   delay_to_hide: Odložit se schovat
   delay_to_show: Zpoždění zobrazení
+  behaviour: Více chování zobrazení
+  item_show_upon_multitaskbar: Zobrazit mé aplikace na hlavním panelu
 devtools:
   data_folder: Datová složka
   settings_file: Nastavení souboru

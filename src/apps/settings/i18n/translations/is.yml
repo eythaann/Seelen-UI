@@ -88,6 +88,8 @@ weg:
   dock_side: Staða
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
+  behaviour: Margfeldi skjáhegðun
+  item_show_upon_multitaskbar: Sýndu verkefnisstikaforritin mín
 devtools:
   load: Hlaða
   app_folders: App möppur

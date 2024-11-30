@@ -88,6 +88,8 @@ weg:
   dock_side: Posisie
   delay_to_hide: Vertraag om weg te steek
   delay_to_show: Vertraag om te wys
+  item_show_upon_multitaskbar: Wys my taakbalkprogramme aan
+  behaviour: Meervoudige vertoongedrag
 devtools:
   app_folders: APP -vouers
   load: Vrag

@@ -88,6 +88,8 @@ weg:
   dock_side: Pozícia
   delay_to_show: Oneskorenie zobrazenia
   delay_to_hide: Odložiť skryť
+  behaviour: Viacnásobné správanie displeja
+  item_show_upon_multitaskbar: Zobraziť moje aplikácie na paneli úloh
 devtools:
   enable: Povoľte vývojárskym nástrojom
   custom_config_file: Načítať vlastný konfiguračný súbor

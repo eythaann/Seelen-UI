@@ -212,6 +212,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         weg_toggle_window_state,
         weg_request_update_previews,
         weg_pin_item,
+        weg_get_monitor_info,
         // Windows Manager
         set_window_position,
         request_focus,
