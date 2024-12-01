@@ -1,4 +1,5 @@
 use getset::{Getters, MutGetters};
+use seelen_core::handlers::SeelenEvent;
 
 use crate::{
     error_handler::Result,
@@ -44,9 +45,50 @@ impl SeelenInstanceContainer {
     }
 
     pub fn update_handle(&mut self, id: HMONITOR) {
-        self.handle = id;
-        self.monitor = Monitor::from(id);
-        log_error!(self.ensure_positions());
+        if self.handle != id {
+            self.handle = id;
+            self.monitor = Monitor::from(id);
+        } else {
+            #[allow(clippy::clone_on_copy)]
+            let before_update = self.monitor.clone();
+            self.monitor.update().ok();
+
+            if *self.monitor.display_orientation() != *before_update.display_orientation() {
+                self.propagate_orientation();
+            }
+
+            if *self.monitor.tablet_mode() != *before_update.tablet_mode() {
+                self.propagate_tablet_mode();
+            }
+        }
+    }
+
+    fn propagate_orientation(&mut self) {
+        let orientation = self.monitor.display_orientation();
+        if let Some(bar) = &self.toolbar {
+            log_error!(
+                bar.propagate_associated_event(SeelenEvent::ToolbarOrientationChanged, orientation)
+            );
+        }
+        if let Some(weg) = &self.weg {
+            log_error!(
+                weg.propagate_associated_event(SeelenEvent::WegOrientationChanged, orientation)
+            );
+        }
+    }
+    fn propagate_tablet_mode(&mut self) {
+        if let Some(bar) = &self.toolbar {
+            log_error!(bar.propagate_associated_event(
+                SeelenEvent::ToolbarTabletModeChanged,
+                *self.monitor.tablet_mode()
+            ));
+        }
+        if let Some(weg) = &self.weg {
+            log_error!(weg.propagate_associated_event(
+                SeelenEvent::WegTabletModeChanged,
+                *self.monitor.tablet_mode()
+            ));
+        }
     }
 
     pub fn ensure_positions(&mut self) -> Result<()> {

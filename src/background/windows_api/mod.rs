@@ -13,7 +13,7 @@ use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;
 use widestring::U16CStr;
-use windows_core::Interface;
+use windows_core::{Interface, PCSTR};
 
 use std::{
     ffi::{c_void, OsString},
@@ -48,8 +48,10 @@ use windows::{
                 DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint, MonitorFromWindow, HDC,
-                HMONITOR, MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
+                EnumDisplayMonitors, EnumDisplaySettingsA, GetMonitorInfoW, MonitorFromPoint,
+                MonitorFromWindow, DEVMODEA, DEVMODE_DISPLAY_ORIENTATION, DMDO_DEFAULT,
+                ENUM_CURRENT_SETTINGS, HDC, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
+                MONITOR_DEFAULTTOPRIMARY,
             },
         },
         Security::{
@@ -74,7 +76,9 @@ use windows::{
             },
         },
         UI::{
+            Controls::POINTER_DEVICE_INFO,
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
+            Input::Pointer::GetPointerDevices,
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow},
@@ -88,11 +92,11 @@ use windows::{
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
                 PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE, GW_OWNER, HWND_TOP,
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
-                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
-                SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER,
-                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CONVERTIBLESLATEMODE, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
                 WS_SIZEBOX, WS_THICKFRAME,
             },
@@ -149,6 +153,47 @@ impl WindowsApi {
         }
         .ok()?;
         Ok(())
+    }
+
+    pub fn get_display_orientation(hmonitor: HMONITOR) -> Result<DEVMODE_DISPLAY_ORIENTATION> {
+        let device = Self::monitor_info(hmonitor)?.szDevice;
+        let utf_device = String::from_utf16(&device).unwrap();
+        let utf_device_bytes = utf_device.as_bytes();
+
+        let mut devmode = DEVMODEA::default();
+        unsafe {
+            if EnumDisplaySettingsA(
+                PCSTR(utf_device_bytes.as_ptr()),
+                ENUM_CURRENT_SETTINGS,
+                &mut devmode,
+            )
+            .into()
+            {
+                return Ok(devmode.Anonymous1.Anonymous2.dmDisplayOrientation);
+            }
+        }
+        Ok(DMDO_DEFAULT)
+    }
+
+    pub fn is_in_tablet_mode(monitor: HMONITOR) -> Result<bool> {
+        if unsafe { GetSystemMetrics(SM_CONVERTIBLESLATEMODE) } == 0 {
+            let is_monitor_touchable = unsafe {
+                let mut count = u32::default();
+
+                GetPointerDevices(&mut count, None)?;
+
+                let mut device: Vec<POINTER_DEVICE_INFO> =
+                    vec![POINTER_DEVICE_INFO::default(); count as usize];
+                let param = &mut device[..];
+                GetPointerDevices(&mut count, Some(param.as_mut_ptr()))?;
+
+                param.iter().any(|item| item.monitor == monitor)
+            };
+
+            return Ok(is_monitor_touchable);
+        }
+
+        Ok(false)
     }
 
     pub fn enum_windows(callback: WNDENUMPROC, callback_data_address: isize) -> Result<()> {

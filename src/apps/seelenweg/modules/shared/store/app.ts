@@ -1,5 +1,5 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { PinnedWegItem, SeelenWegSettings, SwItemType, UIColors } from 'seelen-core';
+import { MonitorOrientation, PinnedWegItem, SeelenWegSettings, SwItemType, UIColors } from 'seelen-core';
 
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 
@@ -23,6 +23,12 @@ const initialState: RootState = {
   openApps: {},
   focusedApp: null,
   isOverlaped: false,
+  monitorInfo: {
+    id: '',
+    index: 0,
+    orientation: MonitorOrientation.HorizontalNormal,
+    is_tablet_mode: false,
+  },
   settings: new SeelenWegSettings(),
   mediaSessions: [],
   colors: UIColors.default(),
@@ -118,6 +124,12 @@ export const RootSlice = createSlice({
         });
       }
       savePinnedItems(current(state));
+    },
+    updateTabletMode(state, current) {
+      state.monitorInfo.isTabletMode = current.payload;
+    },
+    updateOrientation(state, current) {
+      state.monitorInfo.orientation = current.payload;
     },
     removeMediaModule(state) {
       const filter = (current: SwItem) => current.type !== SwItemType.Media;

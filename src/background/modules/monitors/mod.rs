@@ -1,6 +1,6 @@
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use std::sync::Arc;
+use std::sync::{mpsc::Sender, Arc};
 use windows::{
     core::PCWSTR,
     Win32::{
@@ -36,11 +36,11 @@ pub enum MonitorManagerEvent {
     Updated(String, HMONITOR),
 }
 
-type OnMonitorsChange = Box<dyn Fn(MonitorManagerEvent) + Send + Sync>;
+unsafe impl Send for MonitorManagerEvent {}
 
 pub struct MonitorManager {
     pub monitors: Vec<(String, HMONITOR)>,
-    callbacks: Vec<OnMonitorsChange>,
+    callbacks: Vec<Sender<MonitorManagerEvent>>,
 }
 
 unsafe impl Send for MonitorManager {}
@@ -68,13 +68,11 @@ impl MonitorManager {
                     for (name, id) in &new_list {
                         match old_list.iter().position(|x| x.0 == *name) {
                             Some(idx) => {
-                                let (_, old_id) = old_list.remove(idx);
-                                if old_id != *id {
-                                    manager.notify_changes(MonitorManagerEvent::Updated(
-                                        name.clone(),
-                                        *id,
-                                    ));
-                                }
+                                _ = old_list.remove(idx);
+                                manager.notify_changes(MonitorManagerEvent::Updated(
+                                    name.clone(),
+                                    *id,
+                                ));
                             }
                             None => {
                                 manager
@@ -175,16 +173,13 @@ impl MonitorManager {
         Ok(monitors)
     }
 
-    pub fn listen_changes<F>(&mut self, callback: F)
-    where
-        F: Fn(MonitorManagerEvent) + Send + Sync + 'static,
-    {
-        self.callbacks.push(Box::new(callback));
+    pub fn listen_changes(&mut self, sender: Sender<MonitorManagerEvent>) {
+        self.callbacks.push(sender);
     }
 
     pub fn notify_changes(&self, event: MonitorManagerEvent) {
         for callback in &self.callbacks {
-            callback(event.clone());
+            callback.send(event.clone()).ok();
         }
     }
 }

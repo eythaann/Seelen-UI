@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
-import { PluginList, SeelenEvent, UIColors } from 'seelen-core';
+import { MonitorOrientation, PluginList, SeelenEvent, UIColors } from 'seelen-core';
 import { FancyToolbarSettings } from 'seelen-core';
 
 import { IsSavingCustom } from '../../main/application';
@@ -26,6 +26,7 @@ import { UserSettingsLoader } from '../../../../settings/modules/shared/store/st
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
+import { loadMonitorInfo } from './storeApi';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -49,6 +50,14 @@ export async function registerStoreEvents() {
 
   await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
+  });
+
+  await view.listen<boolean>('tablet-mode-changed', (event) => {
+    store.dispatch(RootActions.updateTabletMode(event.payload));
+  });
+
+  await view.listen<MonitorOrientation>('orientation-changed', (event) => {
+    store.dispatch(RootActions.updateOrientation(event.payload));
   });
 
   const onFocusChanged = debounce((app: FocusedApp) => {
@@ -161,6 +170,7 @@ export async function loadStore() {
   setPlaceholder(userSettings);
 
   store.dispatch(RootActions.setEnv(userSettings.env));
+  store.dispatch(RootActions.setMonitorInfo(await loadMonitorInfo()));
 }
 
 export function loadSettingsCSS(settings: FancyToolbarSettings) {

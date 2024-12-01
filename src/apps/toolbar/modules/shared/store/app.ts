@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FancyToolbarSettings, UIColors } from 'seelen-core';
+import { FancyToolbarSettings, MonitorOrientation, UIColors } from 'seelen-core';
 import { Placeholder, ToolbarModule } from 'seelen-core';
 
 import { RootState } from './domain';
@@ -12,6 +12,12 @@ const initialState: RootState = {
   plugins: [],
   dateFormat: '',
   isOverlaped: false,
+  monitorInfo: {
+    id: '',
+    index: 0,
+    orientation: MonitorOrientation.horizontalNormal,
+    isTabletMode: false,
+  },
   focused: null,
   settings: new FancyToolbarSettings(),
   env: {},
@@ -47,6 +53,12 @@ export const RootSlice = createSlice({
     setPlaceholder(state, action: PayloadAction<Placeholder | null>) {
       state.placeholder = action.payload;
       state.version++;
+    },
+    updateTabletMode(state, current) {
+      state.monitorInfo.isTabletMode = current.payload;
+    },
+    updateOrientation(state, current) {
+      state.monitorInfo.orientation = current.payload;
     },
     setItemsOnLeft(state, action: PayloadAction<ToolbarModule[]>) {
       if (state.placeholder) {

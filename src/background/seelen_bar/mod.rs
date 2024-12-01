@@ -158,6 +158,15 @@ impl FancyToolbar {
         Ok(())
     }
 
+    pub fn propagate_associated_event<S: Serialize + Clone>(
+        &self,
+        event: &str,
+        payload: S,
+    ) -> Result<()> {
+        self.window.emit_to(self.window.label(), event, payload)?;
+        Ok(())
+    }
+
     fn create_window(monitor: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
         let label = format!("seelen/fancy-toolbar__query__monitor:{}", monitor);

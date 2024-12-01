@@ -3,6 +3,7 @@ import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
 import {
+  MonitorOrientation,
   SeelenEvent,
   SeelenWegSettings,
   SeelenWegSide,
@@ -21,7 +22,7 @@ import { UserSettingsLoader } from '../../../../settings/modules/shared/store/st
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
-import { IsSavingPinnedItems, loadPinnedItems } from './storeApi';
+import { IsSavingPinnedItems, loadMonitorInfo, loadPinnedItems } from './storeApi';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -69,6 +70,14 @@ export async function registerStoreEvents() {
 
   await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
+  });
+
+  await view.listen<boolean>('tablet-mode-changed', (event) => {
+    store.dispatch(RootActions.updateTabletMode(event.payload));
+  });
+
+  await view.listen<MonitorOrientation>('orientation-changed', (event) => {
+    store.dispatch(RootActions.updateOrientation(event.payload));
   });
 
   await listenGlobal<AppFromBackground[]>('add-multiple-open-apps', async (event) => {
@@ -197,4 +206,5 @@ export async function loadStore() {
   store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
   store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
   store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
+  store.dispatch(RootActions.setMonitorInfo(await loadMonitorInfo()));
 }
