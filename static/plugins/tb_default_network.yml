@@ -1,4 +1,5 @@
 id: "@default/network"
+icon: "FaWifi"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: network

@@ -1,4 +1,5 @@
 id: "@default/notifications"
+icon: "MdOutlineNotifications"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: notifications

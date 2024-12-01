@@ -12,6 +12,7 @@ import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
 import { AppsSides, ExtendedPinnedWegItem, ExtendedTemporalWegItem } from '../shared/store/domain';
 
+import { Icon } from '../../../shared/components/Icon';
 import { savePinnedItems } from '../shared/store/storeApi';
 
 export function getSeelenWegMenu(t: TFunction): ItemType[] {
@@ -19,6 +20,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'add-media-module',
       label: t('taskbar_menu.media'),
+      icon: <Icon iconName="SiVlcmediaplayer" />,
       onClick() {
         store.dispatch(RootActions.addMediaModule());
       },
@@ -26,6 +28,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'add-start-module',
       label: t('taskbar_menu.start'),
+      icon: <Icon iconName="AiFillWindows" />,
       onClick() {
         store.dispatch(RootActions.addStartModule());
       },
@@ -36,6 +39,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'add-item',
       label: t('taskbar_menu.add_file'),
+      icon: <Icon iconName="RiFileAddLine" />,
       async onClick() {
         const files = await dialog.open({
           title: t('taskbar_menu.add_file'),
@@ -53,6 +57,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'add-folder',
       label: t('taskbar_menu.add_folder'),
+      icon: <Icon iconName="RiFolderAddLine" />,
       async onClick() {
         const folder = await dialog.open({
           title: t('taskbar_menu.add_folder'),
@@ -69,6 +74,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'task_manager',
       label: t('taskbar_menu.task_manager'),
+      icon: <Icon iconName="BsListTask" />,
       onClick() {
         invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
       },
@@ -76,6 +82,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'settings',
       label: t('taskbar_menu.settings'),
+      icon: <Icon iconName="MdSettings" />,
       onClick() {
         invoke(SeelenCommand.ShowAppSettings);
       },
@@ -102,6 +109,7 @@ export function getMenuForItem(
     menu.push({
       label: t('app_menu.unpin'),
       key: 'weg_unpin_app',
+      icon: <Icon iconName="RiUnpinLine" />,
       onClick: () => {
         store.dispatch(RootActions.unPinApp(item));
         savePinnedItems();
@@ -110,6 +118,7 @@ export function getMenuForItem(
   } else {
     menu.push({
       key: 'weg_pin_app',
+      icon: <Icon iconName="RiPushpinLine" />,
       label: (
         <Popover
           trigger={['hover']}
@@ -123,16 +132,19 @@ export function getMenuForItem(
                   {
                     key: 'weg_pin_app_left',
                     label: t('app_menu.pin_to_left'),
+                    icon: <Icon iconName="RxPinLeft" />,
                     onClick: () => pin(AppsSides.Left),
                   },
                   {
                     key: 'weg_pin_app_center',
                     label: t('app_menu.pin_to_center'),
+                    icon: <Icon iconName="RiPushpinLine" />,
                     onClick: () => pin(AppsSides.Center),
                   },
                   {
                     key: 'weg_pin_app_right',
                     label: t('app_menu.pin_to_right'),
+                    icon: <Icon iconName="RxPinRight" />,
                     onClick: () => pin(AppsSides.Right),
                   },
                 ]}
@@ -155,11 +167,13 @@ export function getMenuForItem(
     {
       key: 'weg_select_file_on_explorer',
       label: t('app_menu.open_file_location'),
+      icon: <Icon iconName="MdOutlineMyLocation" />,
       onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path }),
     },
     {
       key: 'weg_runas',
       label: t('app_menu.run_as'),
+      icon: <Icon iconName="MdOutlineAdminPanelSettings" />,
       onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.execution_command }),
     },
   );
@@ -169,6 +183,7 @@ export function getMenuForItem(
       {
         key: 'weg_copy_hwnd',
         label: t('app_menu.copy_handles'),
+        icon: <Icon iconName="AiOutlineCopy" />,
         onClick: () =>
           navigator.clipboard.writeText(
             JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16))),
@@ -177,6 +192,7 @@ export function getMenuForItem(
       {
         key: 'weg_close_app',
         label: item.opens.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
+        icon: <Icon iconName="BiWindowClose" />,
         onClick() {
           item.opens.forEach((hwnd) => {
             invoke(SeelenCommand.WegCloseApp, { hwnd });

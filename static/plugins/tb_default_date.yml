@@ -1,4 +1,5 @@
 id: "@default/date"
+icon: "TbCalendar"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: date

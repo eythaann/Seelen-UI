@@ -1,4 +1,5 @@
 id: "@default/media"
+icon: "IoVolumeMediumOutline"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: media

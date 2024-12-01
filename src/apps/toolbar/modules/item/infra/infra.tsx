@@ -4,11 +4,12 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { GenericToolbarModule, useWindowFocusChange } from 'seelen-core';
 
-import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
+import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { SavePlaceholderAsCustom } from '../../main/application';
 import { RootActions, Selectors } from '../../shared/store/app';
 
+import { Icon } from '../../../../shared/components/Icon';
 import { InnerItem, InnerItemProps } from './Inner';
 
 export function Item(props: InnerItemProps) {
@@ -36,6 +37,7 @@ export function Item(props: InnerItemProps) {
               {
                 key: 'remove',
                 label: t('context_menu.remove'),
+                icon: <Icon iconName="CgExtensionRemove" />,
                 className: 'ft-bar-item-context-menu-item',
                 onClick() {
                   d(RootActions.removeItem(props.module.id));

@@ -1,4 +1,5 @@
 id: "@default/quick-settings"
+icon: "LuSettings2"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: settings

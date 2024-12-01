@@ -1,4 +1,5 @@
 id: "@default/bluetooth"
+icon: "TbBluetooth"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: device
