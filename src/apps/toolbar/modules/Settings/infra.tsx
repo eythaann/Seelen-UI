@@ -70,7 +70,7 @@ export function SettingsModule({ module }: Props) {
       onOpenChange={setOpenPreview}
       arrow={false}
       content={
-        <div className="fast-settings">
+        <div className="fast-settings" onContextMenu={(e) => e.stopPropagation()}>
           <BackgroundByLayersV2 prefix="fast-settings" />
           <div className="fast-settings-title">
             <span>{t('settings.title')}</span>

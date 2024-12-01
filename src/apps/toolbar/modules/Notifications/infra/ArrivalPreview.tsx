@@ -51,7 +51,7 @@ export function ArrivalPreview() {
   }, [notifications]);
 
   return (
-    <BackgroundByLayersV2 className="notification-arrival">
+    <BackgroundByLayersV2 className="notification-arrival" onContextMenu={(e) => e.stopPropagation()}>
       <AnimatePresence>
         {currentNotificationPreviewSet &&
           currentNotificationPreviewSet.map((notification) => {

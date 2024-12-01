@@ -56,7 +56,7 @@ function WlanSelector({ open }: { open: boolean }) {
   );
 
   return (
-    <div className="wlan-selector">
+    <div className="wlan-selector" onContextMenu={(e) => e.stopPropagation()}>
       <BackgroundByLayersV2 prefix="wlan-selector" />
 
       {connected && (
