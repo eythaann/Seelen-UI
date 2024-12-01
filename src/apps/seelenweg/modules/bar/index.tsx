@@ -57,7 +57,6 @@ export function SeelenWeg() {
 
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
-  const monitorInfo = useSelector(Selectors.monitorInfo);
 
   const pinnedOnLeft = useSelector(Selectors.itemsOnLeft);
   const pinnedOnCenter = useSelector(Selectors.itemsOnCenter);
@@ -148,12 +147,11 @@ export function SeelenWeg() {
         values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
         onReorder={onReorderPinned}
         axis={isHorizontal ? 'x' : 'y'}
-        className={cx('taskbar', settings.position.toLowerCase(), monitorInfo.orientation.toLowerCase(), {
+        className={cx('taskbar', settings.position.toLowerCase(), {
           horizontal: isHorizontal,
           vertical: !isHorizontal,
           'full-width': settings.mode === SeelenWegMode.FullWidth,
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped),
-          tabletMode: monitorInfo.isTabletMode,
           delayed,
         })}
       >
