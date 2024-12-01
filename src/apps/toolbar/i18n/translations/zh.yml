@@ -5,9 +5,9 @@ media:
   players: 媒体播放器
   device:
     multimedia: 多媒体
-    comunications: 通讯
+    comunications: 通信
 network:
-  not_found: 未找到网络
+  not_found: 未找到 Wi-Fi 网络
   more: 更多网络设置
   hidden: 隐藏网络
   placeholder:
@@ -16,9 +16,9 @@ network:
   connect: 连接
   available: 可用网络
   scanning: 扫描网络
-  connected: 连接到
-  saved: 已知网络
-  secured: 加密的网络
+  connected: 已连接
+  saved: 已保存的网络
+  secured: 加密网络
 settings:
   title: 设置
   app_settings: 应用设置
@@ -31,10 +31,10 @@ placeholder:
   open_user_folder: 打开用户文件夹
   open_system_tray: 打开系统托盘
   bluetooth_devices: 蓝牙和设备
-  ethernet_connected: 网络已连接
-  ethernet_disconnected: 无网络连接
+  ethernet_connected: 互联网访问
+  ethernet_disconnected: 无法访问互联网
   volume: 音量
-  battery_remaining: '% 剩余'
+  battery_remaining: '% 剩余电量'
   smart_charge: ' - 智能充电'
   settings: 快速设置
   notifications: 通知
