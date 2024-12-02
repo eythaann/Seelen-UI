@@ -77,7 +77,7 @@ impl NetworkManager {
     /// emit connectivity changes, always will emit the current state on registration
     pub fn register_events<F>(cb: F)
     where
-        F: Fn(NLM_CONNECTIVITY, Result<String>) + Send + 'static,
+        F: Fn(NLM_CONNECTIVITY, String) + Send + 'static,
     {
         spawn_named_thread("Network Manager", move || {
             let result: Result<()> = Com::run_with_context(|| {
@@ -89,7 +89,8 @@ impl NetworkManager {
                     let current_state = unsafe { list_manager.GetConnectivity() }.ok();
                     if let (Some(current_state), Some(last_state)) = (current_state, last_state) {
                         if current_state != last_state {
-                            cb(current_state, get_local_ip_address());
+                            last_ip = get_local_ip_address_base().ok();
+                            cb(current_state, last_ip.unwrap().to_string());
                         } else if current_state.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
                             == NLM_CONNECTIVITY_IPV4_INTERNET.0
                             || current_state.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
@@ -98,7 +99,7 @@ impl NetworkManager {
                             let current_ip = get_local_ip_address_base().ok();
                             if let (Some(current_ip), Some(last_ip)) = (current_ip, last_ip) {
                                 if current_ip != last_ip {
-                                    cb(current_state, Ok(current_ip.to_string()))
+                                    cb(current_state, current_ip.to_string())
                                 }
                             }
 
