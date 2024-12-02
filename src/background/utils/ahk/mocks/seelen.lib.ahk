@@ -31,6 +31,12 @@ ToggleMutexLockTracing() {
   RunWait(seelen " debugger toggle-trace-lock", , "Hide")
 }
 
+; ================= WEG =================
+
+ForegroundOrRun(idx) {
+  RunWait(seelen " weg foreground-or-run-app " idx, , "Hide")
+}
+
 ; ================= Virtual desktop =================
 
 SwitchWorkspace(idx) {

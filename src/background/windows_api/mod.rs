@@ -19,7 +19,7 @@ use std::{
     ffi::{c_void, OsString},
     os::windows::ffi::OsStrExt,
     path::{Path, PathBuf},
-    thread::sleep,
+    thread::{self, sleep},
     time::Duration,
 };
 
@@ -89,14 +89,14 @@ use windows::{
                 GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
                 PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, HWND_TOP, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-                SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
-                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
-                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL,
-                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
-                WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE, GW_OWNER,
+                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
+                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
+                SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER,
+                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
+                SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
+                WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -361,10 +361,11 @@ impl WindowsApi {
 
             Self::set_minimize_animation(false)?;
             Self::show_window(hwnd, SW_FORCEMINIMIZE)?;
-            Self::show_window(hwnd, SW_RESTORE)?;
+            thread::sleep(Duration::from_millis(100));
+            Self::show_window_async(hwnd, SW_RESTORE)?;
             Self::set_minimize_animation(true)?;
 
-            Self::bring_to(hwnd, HWND_TOP)?;
+            thread::sleep(Duration::from_millis(100));
             Self::set_foreground(hwnd)
         });
     }

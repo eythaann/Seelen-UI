@@ -87,6 +87,25 @@ export function Shortcuts() {
       </SettingsGroup>
 
       <SettingsGroup>
+        <SettingsSubGroup label={t('header.labels.seelen_weg')}>
+          <AhkOptions
+            variables={[
+              'startWegApp1',
+              'startWegApp2',
+              'startWegApp3',
+              'startWegApp4',
+              'startWegApp5',
+              'startWegApp6',
+              'startWegApp7',
+              'startWegApp8',
+              'startWegApp9',
+              'startWegApp0',
+            ]}
+            onChangeVar={onChangeVar} />
+        </SettingsSubGroup>
+      </SettingsGroup>
+
+      <SettingsGroup>
         <SettingsSubGroup label={t('header.labels.seelen_rofi')}>
           <AhkOptions variables={['toggleLauncher']} onChangeVar={onChangeVar} />
         </SettingsSubGroup>
