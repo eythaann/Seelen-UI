@@ -84,7 +84,8 @@ fn register_panic_hook() -> Result<()> {
 
 fn print_initial_information() {
     let version = env!("CARGO_PKG_VERSION");
-    log::info!("───────────────────── Starting Seelen UI v{version} ─────────────────────");
+    let dev = if tauri::is_dev() { " (dev)" } else { "" };
+    log::info!("───────────────────── Starting Seelen UI v{version}{dev}─────────────────────");
     log::info!("Operating System: {}", os_info::get());
     log::info!("WebView2 Runtime: {:?}", webview_version());
     log::info!("Elevated        : {:?}", WindowsApi::is_elevated());

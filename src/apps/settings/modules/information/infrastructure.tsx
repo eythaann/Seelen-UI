@@ -10,12 +10,13 @@ import cs from './infra.module.css';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 
-import { wasInstalledUsingMSIX } from '../../../shared';
+import { isDev, wasInstalledUsingMSIX } from '../../../shared';
 import { Icon } from '../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export function Information() {
   const [isMsixBuild, setIsMsixBuild] = useState(false);
+  const [isDevMode, setIsDevMode] = useState(false);
 
   const devTools = useSelector(newSelectors.devTools);
   const updaterSettings = useSelector(newSelectors.updater);
@@ -25,6 +26,7 @@ export function Information() {
 
   useEffect(() => {
     wasInstalledUsingMSIX().then(setIsMsixBuild);
+    isDev().then(setIsDevMode);
   }, []);
 
   function onToggleDevTools(value: boolean) {
@@ -41,7 +43,7 @@ export function Information() {
         <SettingsSubGroup label="Seelen UI">
           <SettingsOption>
             <span>{t('extras.version')}:</span>
-            <span className={cs.version}>v{EnvConfig.version}</span>
+            <span className={cs.version}>v{EnvConfig.version} {isDevMode && '(dev)'}</span>
           </SettingsOption>
         </SettingsSubGroup>
       </SettingsGroup>
