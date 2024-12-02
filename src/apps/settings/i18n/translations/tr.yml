@@ -209,6 +209,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
     misc_toggle_lock_tracing: Kilit izleme (kütükler)
     toggle_launcher: Geçiş yapmak
+    start_weg_app_9: Görev çubuğu konumu 9'a odaklanın veya uygulamayı başlatın
+    start_weg_app_7: Görev çubuğu konumu 7'ye odaklanın veya uygulamayı başlatın
+    start_weg_app_6: Görev çubuğu konumu 6'ya odaklanın veya uygulamayı başlatın
+    start_weg_app_1: Görev çubuğu konumu 1'e odaklanın veya uygulamayı başlatın
+    start_weg_app_0: Görev çubuğu konumu 10'a odaklanın veya uygulamayı başlatın
+    start_weg_app_5: Görev çubuğu konumu 5'e odaklanın veya uygulamayı başlatın
+    start_weg_app_8: Görev çubuğu konumu 8'e odaklanın veya uygulamayı başlatın
+    start_weg_app_3: Görev çubuğu konumu 3'e odaklanın veya uygulamayı başlatın
+    start_weg_app_4: Görev çubuğu konumu 4'e odaklanın veya uygulamayı başlatın
+    start_weg_app_2: Görev çubuğu konumu 2'ye odaklanın veya uygulamayı başlatın
   enable_tooltip: >-
     Seelen Core API kullanarak kendi kısayollarınızı uygulayacaksanız devre dışı
     bırakın

@@ -209,6 +209,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Tracing události vítězství na přepínání (protokoly)
     misc_open_settings: Otevřené nastavení
     toggle_launcher: Přepínač
+    start_weg_app_5: Zaměřte nebo spusťte aplikaci na pozici hlavního panelu 5
+    start_weg_app_0: Zaměřte nebo spusťte aplikaci na hlavním panelu na pozici 10
+    start_weg_app_6: Zaměřte nebo spusťte aplikaci na hlavním panelu na pozici 6
+    start_weg_app_2: Zaměřte nebo spusťte aplikaci na pozici hlavního panelu 2
+    start_weg_app_9: Zaměřte nebo spusťte aplikaci na hlavním panelu pozice 9
+    start_weg_app_7: Zaměřte nebo spusťte aplikaci na hlavním panelu pozice 7
+    start_weg_app_3: Zaměřte nebo spusťte aplikaci na pozici hlavního panelu 3
+    start_weg_app_8: Zaměřte nebo spusťte aplikaci na hlavním panelu na pozici 8
+    start_weg_app_1: Zaměřte nebo spusťte aplikaci na hlavním panelu pozice 1
+    start_weg_app_4: Zaměřte nebo spusťte aplikaci na pozici hlavního panelu 4
   enable: Povolit integrované zkratky (AHK)
   enable_tooltip: Zakázat, pokud implementujete své vlastní zkratky pomocí API Seelen Core API
   reset: Resetovat na výchozí hodnoty

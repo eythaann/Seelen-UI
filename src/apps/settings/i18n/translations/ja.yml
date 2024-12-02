@@ -203,6 +203,16 @@ shortcuts:
     misc_toggle_lock_tracing: トグルロックトレース（ログ）
     misc_open_settings: 設定を開く
     toggle_launcher: トグル
+    start_weg_app_2: タスクバーの位置 2 にフォーカスするかアプリを起動します
+    start_weg_app_7: タスクバーの位置 7 にフォーカスするかアプリを起動します
+    start_weg_app_1: タスクバーの位置 1 にフォーカスするかアプリを起動します
+    start_weg_app_8: タスクバーの位置 8 にフォーカスするかアプリを起動します
+    start_weg_app_6: タスクバーの位置 6 にフォーカスするかアプリを起動します
+    start_weg_app_5: タスクバーの位置 5 にフォーカスするかアプリを起動します
+    start_weg_app_9: タスクバーの位置 9 にフォーカスするかアプリを起動します
+    start_weg_app_0: タスクバーの位置 10 にフォーカスするかアプリを起動します
+    start_weg_app_3: タスクバーの位置 3 にフォーカスするかアプリを起動します
+    start_weg_app_4: タスクバーの位置 4 にフォーカスするかアプリを起動します
   enable: AutoHotkeyを使用した統合ショートカットを有効にする
   enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください。
   reset: デフォルトにリセットします。

@@ -209,6 +209,16 @@ shortcuts:
     misc_open_settings: Open instellingen
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Logs)
     toggle_launcher: Schakelaar
+    start_weg_app_5: Focus of start app op taakbalkpositie 5
+    start_weg_app_3: Focus of start app op taakbalkpositie 3
+    start_weg_app_1: Focus of start app op taakbalkpositie 1
+    start_weg_app_0: Focus of start app op taakbalkpositie 10
+    start_weg_app_8: Focus of start app op taakbalkpositie 8
+    start_weg_app_9: Focus of start app op taakbalkpositie 9
+    start_weg_app_6: Focus of start app op taakbalkpositie 6
+    start_weg_app_2: Focus of start app op taakbalkpositie 2
+    start_weg_app_7: Focus of start app op taakbalkpositie 7
+    start_weg_app_4: Focus of start app op taakbalkpositie 4
   enable: Geïntegreerde snelkoppelingen inschakelen (AHK)
   enable_tooltip: >-
     Schakel uit als u uw eigen snelkoppelingen implementeert met behulp van de

@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
     misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
     toggle_launcher: Kugeuza
+    start_weg_app_9: Lenga au anza programu kwenye nafasi ya 9 ya upau wa kazi
+    start_weg_app_3: Lenga au anza programu kwenye nafasi ya 3 ya upau wa kazi
+    start_weg_app_7: Lenga au anza programu kwenye nafasi ya 7 ya upau wa kazi
+    start_weg_app_8: Lenga au anza programu kwenye nafasi ya 8 ya upau wa kazi
+    start_weg_app_0: Lenga au anza programu kwenye nafasi ya 10 ya upau wa kazi
+    start_weg_app_2: Lenga au anza programu kwenye nafasi ya 2 ya upau wa kazi
+    start_weg_app_5: Lenga au anza programu kwenye nafasi ya 5 ya upau wa kazi
+    start_weg_app_6: Lenga au anza programu kwenye nafasi ya 6 ya upau wa kazi
+    start_weg_app_1: Lenga au anza programu kwenye nafasi ya 1 ya upau wa kazi
+    start_weg_app_4: Lenga au anza programu kwenye nafasi ya 4 ya upau wa kazi
   enable: Wezesha njia za mkato zilizojumuishwa (AHK)
   enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
   reset: Rudisha kwa defaults
