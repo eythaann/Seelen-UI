@@ -9,6 +9,7 @@ import { RootActions } from '../../shared/store/app';
 
 import { SwItem } from '../../shared/store/domain';
 
+import { Icon } from '../../../../shared/components/Icon';
 import { savePinnedItems } from '../../shared/store/storeApi';
 
 export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
@@ -17,6 +18,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
       {
         key: 'remove',
         label: t('media_menu.remove'),
+        icon: <Icon iconName="CgExtensionRemove" />,
         onClick() {
           store.dispatch(RootActions.removeMediaModule());
         },
@@ -29,6 +31,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
       {
         key: 'remove',
         label: t('start_menu.remove'),
+        icon: <Icon iconName="CgExtensionRemove" />,
         onClick() {
           store.dispatch(RootActions.removeStartModule());
         },
@@ -41,6 +44,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
       {
         key: 'remove',
         label: t('app_menu.unpin'),
+        icon: <Icon iconName="RiUnpinLine" />,
         onClick() {
           store.dispatch(RootActions.unpin(item));
           savePinnedItems();
@@ -52,6 +56,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
       {
         key: 'weg_select_file_on_explorer',
         label: t('app_menu.open_file_location'),
+        icon: <Icon iconName="MdOutlineMyLocation" />,
         onClick: () => invoke(SeelenCommand.SelectFileOnExplorer, { path: item.path }),
       },
     ];

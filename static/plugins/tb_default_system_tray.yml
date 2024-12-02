@@ -1,4 +1,5 @@
 id: "@default/system-tray"
+icon: "IoFileTrayFullOutline"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: tray

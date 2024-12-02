@@ -1,4 +1,5 @@
 id: "@default/focused-app-title"
+icon: "MdCenterFocusWeak"
 target: "@seelen/fancy-toolbar"
 plugin:
   type: generic

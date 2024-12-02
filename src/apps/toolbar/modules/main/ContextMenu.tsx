@@ -22,6 +22,7 @@ export function MainContextMenu() {
         items={[
           {
             key: 'add_module',
+            icon: <Icon iconName="CgExtensionAdd" />,
             label: (
               <Popover
                 trigger={['hover']}
@@ -33,6 +34,7 @@ export function MainContextMenu() {
                       className="tb-context-menu"
                       items={plugins.map((p) => ({
                         key: p.id,
+                        icon: <Icon iconName={p.icon ?? 'TiMinus'} />,
                         label: p.id,
                         onClick: () => {
                           dispatch(RootActions.addItem(p.id));
@@ -55,6 +57,7 @@ export function MainContextMenu() {
           },
           {
             key: 'task_manager',
+            icon: <Icon iconName="BsListTask" />,
             label: t('context_menu.task_manager'),
             onClick() {
               invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
@@ -62,6 +65,7 @@ export function MainContextMenu() {
           },
           {
             key: 'settings',
+            icon: <Icon iconName="MdSettings" />,
             label: t('context_menu.settings'),
             onClick() {
               invoke(SeelenCommand.ShowAppSettings);
