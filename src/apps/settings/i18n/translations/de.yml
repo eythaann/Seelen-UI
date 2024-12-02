@@ -218,6 +218,16 @@ shortcuts:
     misc_open_settings: Einstellungen geöffnet
     misc_toggle_win_event_tracing: Verfolgung des Sieg -Ereignisses (Protokolle) umschalten
     toggle_launcher: Umschalten
+    start_weg_app_8: Fokussieren oder starten Sie die App auf Position 8 in der Taskleiste
+    start_weg_app_4: Fokussieren oder starten Sie die App auf Position 4 in der Taskleiste
+    start_weg_app_3: Fokussieren oder starten Sie die App auf Taskleistenposition 3
+    start_weg_app_6: Fokussieren oder starten Sie die App auf Taskleistenposition 6
+    start_weg_app_2: Fokussieren oder starten Sie die App auf Taskleistenposition 2
+    start_weg_app_1: Fokussieren oder starten Sie die App auf Taskleistenposition 1
+    start_weg_app_9: Fokussieren oder starten Sie die App auf Position 9 in der Taskleiste
+    start_weg_app_7: Fokussieren oder starten Sie die App auf Position 7 in der Taskleiste
+    start_weg_app_0: Fokussieren oder starten Sie die App auf Position 10 in der Taskleiste
+    start_weg_app_5: Fokussieren oder starten Sie die App auf Position 5 in der Taskleiste
   reset: Auf Standards zurücksetzen
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
 vd:

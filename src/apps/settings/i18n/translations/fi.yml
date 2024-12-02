@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)
     misc_toggle_win_event_tracing: Vaihda Win Win Event Tracing (lokit)
     toggle_launcher: Vaihtaa
+    start_weg_app_0: Keskitä tai käynnistä sovellus tehtäväpalkin kohtaan 10
+    start_weg_app_7: Tarkenna tai käynnistä sovellus tehtäväpalkin kohtaan 7
+    start_weg_app_5: Keskitä tai käynnistä sovellus tehtäväpalkin kohtaan 5
+    start_weg_app_8: Keskitä tai käynnistä sovellus tehtäväpalkin kohtaan 8
+    start_weg_app_6: Tarkenna tai käynnistä sovellus tehtäväpalkin kohtaan 6
+    start_weg_app_3: Keskitä tai käynnistä sovellus tehtäväpalkin kohtaan 3
+    start_weg_app_1: Tarkenna tai käynnistä sovellus tehtäväpalkin kohtaan 1
+    start_weg_app_4: Tarkenna tai käynnistä sovellus tehtäväpalkin kohtaan 4
+    start_weg_app_2: Tarkenna tai käynnistä sovellus tehtäväpalkin kohtaan 2
+    start_weg_app_9: Tarkenna tai käynnistä sovellus tehtäväpalkin kohtaan 9
   enable_tooltip: >-
     Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
     -sovellusliittymällä

@@ -207,6 +207,16 @@ shortcuts:
     misc_open_settings: Ezarpenak irekitzea
     misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
     toggle_launcher: Txandatu
+    start_weg_app_6: Enfokatu edo hasi aplikazioa ataza-barrako 6. posizioan
+    start_weg_app_2: Enfokatu edo hasi aplikazioa ataza-barrako 2. posizioan
+    start_weg_app_3: Enfokatu edo hasi aplikazioa ataza-barrako 3. posizioan
+    start_weg_app_1: Enfokatu edo hasi aplikazioa ataza-barraren posizioan 1
+    start_weg_app_8: Enfokatu edo hasi aplikazioa ataza-barrako 8. posizioan
+    start_weg_app_9: Enfokatu edo hasi aplikazioa ataza-barrako 9. posizioan
+    start_weg_app_0: Enfokatu edo hasi aplikazioa ataza-barrako 10. posizioan
+    start_weg_app_5: Enfokatu edo hasi aplikazioa ataza-barrako 5. posizioan
+    start_weg_app_4: Enfokatu edo hasi aplikazioa ataza-barrako 4. posizioan
+    start_weg_app_7: Enfokatu edo hasi aplikazioa ataza-barrako 7. posizioan
   enable: Gaitu lasterbide integratuak (Ahk)
   enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
   reset: Berrezarri lehenetsitakoak

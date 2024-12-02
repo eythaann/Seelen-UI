@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_lock_tracing: Olrhain clo togl (logiau)
     misc_toggle_win_event_tracing: Olrhain Digwyddiad Win Toggle (Logiau)
     toggle_launcher: Toglio
+    start_weg_app_7: Ffocws neu gychwyn ap ar safle bar tasgau 7
+    start_weg_app_0: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 10
+    start_weg_app_3: Ffocws neu gychwyn ap ar safle bar tasgau 3
+    start_weg_app_6: Ffocws neu gychwyn ap ar safle bar tasgau 6
+    start_weg_app_9: Ffocws neu gychwyn ap ar safle bar tasgau 9
+    start_weg_app_2: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 2
+    start_weg_app_5: Ffocws neu gychwyn ap ar safle bar tasgau 5
+    start_weg_app_4: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 4
+    start_weg_app_8: Ffocws neu gychwyn ap ar safle bar tasgau 8
+    start_weg_app_1: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 1
   enable: Galluogi llwybrau byr integredig (AHK)
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan

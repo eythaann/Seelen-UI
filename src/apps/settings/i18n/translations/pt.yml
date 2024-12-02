@@ -216,6 +216,16 @@ shortcuts:
     misc_toggle_lock_tracing: Alternar o rastreamento de bloqueio (logs)
     misc_toggle_win_event_tracing: Alternar o rastreamento do evento Win (logs)
     toggle_launcher: Alternar
+    start_weg_app_5: Concentre-se ou inicie o aplicativo na posição 5 da barra de tarefas
+    start_weg_app_2: Concentre-se ou inicie o aplicativo na posição 2 da barra de tarefas
+    start_weg_app_3: Concentre-se ou inicie o aplicativo na posição 3 da barra de tarefas
+    start_weg_app_0: Concentre-se ou inicie o aplicativo na posição 10 da barra de tarefas
+    start_weg_app_8: Concentre-se ou inicie o aplicativo na posição 8 da barra de tarefas
+    start_weg_app_6: Concentre-se ou inicie o aplicativo na posição 6 da barra de tarefas
+    start_weg_app_4: Concentre-se ou inicie o aplicativo na posição 4 da barra de tarefas
+    start_weg_app_7: Concentre-se ou inicie o aplicativo na posição 7 da barra de tarefas
+    start_weg_app_1: Concentre-se ou inicie o aplicativo na posição 1 da barra de tarefas
+    start_weg_app_9: Concentre-se ou inicie o aplicativo na posição 9 da barra de tarefas
   reset: Redefinir para padrões
   readonly_tooltip: Este é um atalho somente leitura
 vd:

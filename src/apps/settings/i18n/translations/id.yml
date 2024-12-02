@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (Log)
     misc_toggle_lock_tracing: Take Toggle Lock Tracing (Log)
     toggle_launcher: Toggle
+    start_weg_app_3: Fokuskan atau mulai aplikasi pada posisi bilah tugas 3
+    start_weg_app_6: Fokuskan atau mulai aplikasi pada posisi bilah tugas 6
+    start_weg_app_5: Fokuskan atau mulai aplikasi pada posisi bilah tugas 5
+    start_weg_app_0: Fokuskan atau mulai aplikasi pada posisi bilah tugas 10
+    start_weg_app_2: Fokuskan atau mulai aplikasi pada posisi bilah tugas 2
+    start_weg_app_8: Fokuskan atau mulai aplikasi pada posisi bilah tugas 8
+    start_weg_app_9: Fokuskan atau mulai aplikasi pada posisi bilah tugas 9
+    start_weg_app_7: Fokuskan atau mulai aplikasi pada posisi bilah tugas 7
+    start_weg_app_4: Fokuskan atau mulai aplikasi pada posisi bilah tugas 4
+    start_weg_app_1: Fokuskan atau mulai aplikasi pada posisi bilah tugas 1
   enable: Aktifkan pintasan terintegrasi (AHK)
   enable_tooltip: >-
     Nonaktifkan jika Anda akan mengimplementasikan jalan pintas Anda sendiri

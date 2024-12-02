@@ -206,6 +206,16 @@ shortcuts:
     misc_open_settings: Nyissa meg a beállításokat
     misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
     toggle_launcher: Váltás
+    start_weg_app_9: Fókuszáljon vagy indítsa el az alkalmazást a tálca 9-es pozíciójában
+    start_weg_app_4: Fókuszáljon vagy indítsa el az alkalmazást a tálca 4. pozíciójára
+    start_weg_app_7: Fókuszáljon vagy indítsa el az alkalmazást a tálca 7. pozíciójára
+    start_weg_app_2: Fókuszáljon vagy indítsa el az alkalmazást a tálca 2. pozíciójára
+    start_weg_app_1: Fókuszáljon vagy indítsa el az alkalmazást a tálca 1. pozíciójára
+    start_weg_app_0: Fókuszáljon vagy indítsa el az alkalmazást a tálca 10. pozíciójára
+    start_weg_app_5: Fókuszáljon vagy indítsa el az alkalmazást a tálca 5. pozíciójára
+    start_weg_app_8: Fókuszáljon vagy indítsa el az alkalmazást a tálca 8-as pozíciójában
+    start_weg_app_6: Fókuszáljon vagy indítsa el az alkalmazást a tálca 6-os pozíciójában
+    start_weg_app_3: Fókuszáljon vagy indítsa el az alkalmazást a tálca 3. pozíciójára
   enable_tooltip: >-
     Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
     parancsikonjait

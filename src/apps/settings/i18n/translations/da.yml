@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Toggle win begivenhedssporing (logfiler)
     misc_toggle_lock_tracing: Skiftlåssporing (logfiler)
     toggle_launcher: Skift
+    start_weg_app_8: Fokuser eller start appen på proceslinjens position 8
+    start_weg_app_7: Fokuser eller start appen på proceslinjens position 7
+    start_weg_app_4: Fokuser eller start appen på proceslinjens position 4
+    start_weg_app_9: Fokuser eller start appen på proceslinjens position 9
+    start_weg_app_5: Fokuser eller start appen på proceslinjens position 5
+    start_weg_app_0: Fokuser eller start appen på proceslinjens position 10
+    start_weg_app_2: Fokuser eller start appen på proceslinjens position 2
+    start_weg_app_6: Fokuser eller start appen på proceslinjens position 6
+    start_weg_app_1: Fokuser eller start appen på proceslinjens position 1
+    start_weg_app_3: Fokuser eller start appen på proceslinjens position 3
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core

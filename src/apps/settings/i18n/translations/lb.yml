@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
     misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
     toggle_launcher: Talzkle
+    start_weg_app_9: Focus oder start d'App op der Taskbar Positioun 9
+    start_weg_app_6: Focus oder start d'App op der Taskbar Positioun 6
+    start_weg_app_0: Focus oder start d'App op der Taskbar Positioun 10
+    start_weg_app_5: Focus oder start App op Taskbar Positioun 5
+    start_weg_app_1: Focus oder start d'App op der Taskbar Positioun 1
+    start_weg_app_3: Focus oder start d'App op der Taskbar Positioun 3
+    start_weg_app_8: Focus oder start App op Taskbar Positioun 8
+    start_weg_app_7: Focus oder start d'App op der Taskbar Positioun 7
+    start_weg_app_2: Focus oder start d'App op der Taskbar Positioun 2
+    start_weg_app_4: Focus oder start d'App op der Taskbar Positioun 4
   enable: Aktivéiert integréiert Ofkiirzungen (AHK)
   enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
   reset: Reset op Defaults

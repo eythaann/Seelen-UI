@@ -204,6 +204,34 @@ shortcuts:
     misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
     misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
     toggle_launcher: Toggle
+    start_weg_app_0: >-
+      Li ser pozîsyona tabloya peywirê 10 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_5: >-
+      Li ser pozîsyona tabloya peywirê 5 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_3: >-
+      Li ser pozîsyona tabloya peywirê 3 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_8: >-
+      Li ser pozîsyona tabloya peywirê 8 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_4: >-
+      Li ser pozîsyona tabloya peywirê 4 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_1: Li ser pozîsyona karûbarê 1-ê sepanê bisekine an dest pê bike
+    start_weg_app_2: >-
+      Li ser pozîsyona tabloya peywirê 2 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_6: >-
+      Li ser pozîsyona tabloya peywirê 6 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_9: >-
+      Li ser pozîsyona tabloya peywirê 9 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_7: >-
+      Li ser pozîsyona tabloya peywirê 7 bala xwe bidin an sepanê bidin
+      destpêkirin
   enable: Kurtefîlmên entegre (AHK) çalak bikin
   enable_tooltip: >-
     Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh

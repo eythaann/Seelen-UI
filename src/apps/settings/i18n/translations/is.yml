@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_lock_tracing: Skiptu um rekja lás (logs)
     misc_toggle_win_event_tracing: Skiptu um Win Event Tracing (logs)
     toggle_launcher: Skiptu
+    start_weg_app_2: Einbeittu þér eða ræstu forritið á verkstikustöðu 2
+    start_weg_app_6: Einbeittu þér eða ræstu forritið á verkstikustöðu 6
+    start_weg_app_0: Einbeittu þér eða ræstu forritið á verkstikustöðu 10
+    start_weg_app_3: Einbeittu þér eða ræstu forritið á verkefnastikunni stöðu 3
+    start_weg_app_7: Einbeittu þér eða ræstu forritið á verkefnastikunni stöðu 7
+    start_weg_app_5: Einbeittu þér eða ræstu forritið á verkstikustöðu 5
+    start_weg_app_4: Einbeittu þér eða ræstu forritið á verkstikustöðu 4
+    start_weg_app_8: Einbeittu þér eða ræstu forritið á verkefnastikunni 8
+    start_weg_app_1: Einbeittu þér eða ræstu forritið á verkstikustöðu 1
+    start_weg_app_9: Einbeittu þér eða ræstu forritið á verkstikustöðu 9
   enable: Virkja samþætta flýtileiðir (AHK)
   enable_tooltip: Slökktu á ef þú munt innleiða eigin flýtileiðir með Seelen Core API
   reset: Endurstilla í vanskil

@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
     misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
     toggle_launcher: Perjungti
+    start_weg_app_2: Sufokusuokite arba paleiskite programą 2 užduočių juostos pozicijoje
+    start_weg_app_4: Sufokusuokite arba paleiskite programą 4 užduočių juostos padėtyje
+    start_weg_app_8: Sufokusuokite arba paleiskite programą užduočių juostos 8 pozicijoje
+    start_weg_app_9: Sufokusuokite arba paleiskite programą užduočių juostos 9 pozicijoje
+    start_weg_app_6: Sufokusuokite arba paleiskite programą 6 užduočių juostos pozicijoje
+    start_weg_app_7: Sufokusuokite arba paleiskite programą užduočių juostos 7 padėtyje
+    start_weg_app_0: Sufokusuokite arba paleiskite programą užduočių juostos 10 pozicijoje
+    start_weg_app_1: Sufokusuokite arba paleiskite programą 1 užduočių juostos padėtyje
+    start_weg_app_3: Sufokusuokite arba paleiskite programą 3 užduočių juostos pozicijoje
+    start_weg_app_5: Sufokusuokite arba paleiskite programą 5 užduočių juostos padėtyje
   enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
   enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
   reset: Iš naujo nustatykite pagal numatytuosius nustatymus

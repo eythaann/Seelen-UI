@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_lock_tracing: Traċċar tal-Lock Toggle (zkuk)
     misc_open_settings: Settings miftuħa
     toggle_launcher: Toggle
+    start_weg_app_0: Iffoka jew ibda l-app fuq il-pożizzjoni 10 tat-taskbar
+    start_weg_app_1: Iffoka jew ibda l-app fuq il-pożizzjoni 1 tat-taskbar
+    start_weg_app_4: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 4
+    start_weg_app_2: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 2
+    start_weg_app_5: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 5
+    start_weg_app_6: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 6
+    start_weg_app_9: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 9
+    start_weg_app_7: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 7
+    start_weg_app_8: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 8
+    start_weg_app_3: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 3
   enable: Enable Shortcuts Integrati (AHK)
   enable_tooltip: Itfi jekk timplimenta s-shortcuts tiegħek stess billi tuża l-API Seelen Core
   reset: Irrisettja għal nuqqasijiet

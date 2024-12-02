@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_lock_tracing: Wisselslotopsporing (logs)
     misc_toggle_win_event_tracing: Skakel wen -byeenkomsopsporing (logs)
     toggle_launcher: Wissel
+    start_weg_app_3: Fokus of begin toepassing op taakbalkposisie 3
+    start_weg_app_7: Fokus of begin toepassing op taakbalkposisie 7
+    start_weg_app_4: Fokus of begin toepassing op taakbalkposisie 4
+    start_weg_app_0: Fokus of begin toepassing op taakbalkposisie 10
+    start_weg_app_2: Fokus of begin toepassing op taakbalkposisie 2
+    start_weg_app_6: Fokus of begin toepassing op taakbalkposisie 6
+    start_weg_app_9: Fokus of begin toepassing op taakbalkposisie 9
+    start_weg_app_1: Fokus of begin toepassing op taakbalkposisie 1
+    start_weg_app_8: Fokus of begin toepassing op taakbalkposisie 8
+    start_weg_app_5: Fokus of begin toepassing op taakbalkposisie 5
   enable: Aktiveer geïntegreerde kortpaaie (AHK)
   enable_tooltip: >-
     Deaktiveer as u u eie kortpaaie sal implementeer met behulp van die Seelen

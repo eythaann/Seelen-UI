@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_lock_tracing: Togol mengesan kunci (log)
     misc_open_settings: Buka Tetapan
     toggle_launcher: Togol
+    start_weg_app_2: Fokus atau mulakan aplikasi pada kedudukan bar tugas 2
+    start_weg_app_1: Fokus atau mulakan apl pada kedudukan bar tugas 1
+    start_weg_app_4: Fokus atau mulakan aplikasi pada kedudukan bar tugas 4
+    start_weg_app_0: Fokus atau mulakan aplikasi pada kedudukan bar tugas 10
+    start_weg_app_3: Fokus atau mulakan aplikasi pada kedudukan bar tugas 3
+    start_weg_app_9: Fokus atau mulakan aplikasi pada kedudukan bar tugas 9
+    start_weg_app_8: Fokus atau mulakan aplikasi pada kedudukan bar tugas 8
+    start_weg_app_6: Fokus atau mulakan aplikasi pada kedudukan bar tugas 6
+    start_weg_app_7: Fokus atau mulakan aplikasi pada kedudukan bar tugas 7
+    start_weg_app_5: Fokus atau mulakan aplikasi pada kedudukan bar tugas 5
   enable_tooltip: >-
     Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
     teras Seelen

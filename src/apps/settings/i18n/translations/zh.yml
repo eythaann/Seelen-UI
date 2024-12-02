@@ -209,6 +209,16 @@ shortcuts:
     misc_toggle_lock_tracing: 切换锁定跟踪（日志）
     misc_open_settings: 打开设置
     toggle_launcher: 切换
+    start_weg_app_5: 在任务栏位置 5 上聚焦或启动应用程序
+    start_weg_app_1: 在任务栏位置 1 上聚焦或启动应用程序
+    start_weg_app_4: 在任务栏位置 4 上聚焦或启动应用程序
+    start_weg_app_3: 在任务栏位置 3 上聚焦或启动应用程序
+    start_weg_app_2: 在任务栏位置 2 上聚焦或启动应用程序
+    start_weg_app_7: 在任务栏位置 7 上聚焦或启动应用程序
+    start_weg_app_6: 在任务栏位置 6 上聚焦或启动应用程序
+    start_weg_app_8: 在任务栏位置 8 上聚焦或启动应用程序
+    start_weg_app_9: 在任务栏位置 9 上聚焦或启动应用程序
+    start_weg_app_0: 在任务栏位置 10 上聚焦或启动应用程序
   reset: 重置为默认值
   readonly_tooltip: 只读的快捷键
 vd:

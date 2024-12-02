@@ -219,6 +219,16 @@ shortcuts:
     misc_open_settings: Abrir configuración
     misc_toggle_win_event_tracing: Rastreo de eventos para alternar (registros)
     toggle_launcher: Palanca
+    start_weg_app_5: Enfoque o inicie la aplicación en la posición 5 de la barra de tareas
+    start_weg_app_6: Enfoque o inicie la aplicación en la posición 6 de la barra de tareas
+    start_weg_app_9: Enfoque o inicie la aplicación en la posición 9 de la barra de tareas
+    start_weg_app_7: Enfoque o inicie la aplicación en la posición 7 de la barra de tareas
+    start_weg_app_0: Enfoque o inicie la aplicación en la posición 10 de la barra de tareas
+    start_weg_app_4: Enfoque o inicie la aplicación en la posición 4 de la barra de tareas
+    start_weg_app_2: Enfoque o inicie la aplicación en la posición 2 de la barra de tareas
+    start_weg_app_8: Enfoque o inicie la aplicación en la posición 8 de la barra de tareas
+    start_weg_app_3: Enfoque o inicie la aplicación en la posición 3 de la barra de tareas
+    start_weg_app_1: Enfoque o inicie la aplicación en la posición 1 de la barra de tareas
   reset: Reiniciar a los valores predeterminados
   readonly_tooltip: Este es un atajo de solo lectura
 vd:

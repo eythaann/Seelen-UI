@@ -207,6 +207,16 @@ shortcuts:
     misc_open_settings: Atvērti iestatījumi
     misc_toggle_win_event_tracing: Pārslēdziet uzvaru notikumu izsekošanu (žurnāli)
     toggle_launcher: Pārslēgt
+    start_weg_app_8: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 8.\_pozīcijā"
+    start_weg_app_9: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 9.\_pozīcijā"
+    start_weg_app_6: "Fokusējiet vai startējiet lietotni uzdevumjoslas 6.\_pozīcijā"
+    start_weg_app_0: "Fokusējiet vai palaidiet lietotni uzdevumjoslas pozīcijā\_10"
+    start_weg_app_7: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 7.\_pozīcijā"
+    start_weg_app_5: Fokusējiet vai palaidiet lietotni uzdevumjoslas 5. pozīcijā
+    start_weg_app_2: "Fokusējiet vai startējiet lietotni uzdevumjoslas 2.\_pozīcijā"
+    start_weg_app_3: "Fokusējiet vai palaidiet lietotni uzdevumjoslas pozīcijā\_3"
+    start_weg_app_1: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 1.\_pozīcijā"
+    start_weg_app_4: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 4.\_pozīcijā"
   enable: Iespējot integrētus saīsnes (AHK)
   enable_tooltip: Atspējot, ja ieviesīsit savus saīsnes, izmantojot Seelen Core API
   reset: Atiestatīt uz noklusējuma

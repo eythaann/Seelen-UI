@@ -207,6 +207,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Przełączanie zdarzeń wygranych (dzienniki)
     misc_toggle_lock_tracing: Przełączanie śledzenia blokady (dzienniki)
     toggle_launcher: Dźwignia kolankowa
+    start_weg_app_6: Skoncentruj się lub uruchom aplikację na pozycji 6 paska zadań
+    start_weg_app_7: Skoncentruj się lub uruchom aplikację na pozycji 7 paska zadań
+    start_weg_app_8: Skoncentruj się lub uruchom aplikację na pozycji 8 paska zadań
+    start_weg_app_2: Skoncentruj się lub uruchom aplikację na pozycji 2 paska zadań
+    start_weg_app_0: Skoncentruj się lub uruchom aplikację na pozycji 10 paska zadań
+    start_weg_app_1: Skoncentruj się lub uruchom aplikację na pozycji 1 paska zadań
+    start_weg_app_5: Skoncentruj się lub uruchom aplikację na pozycji 5 paska zadań
+    start_weg_app_3: Skoncentruj się lub uruchom aplikację na pozycji 3 paska zadań
+    start_weg_app_4: Skoncentruj się lub uruchom aplikację na pozycji 4 paska zadań
+    start_weg_app_9: Skoncentruj się lub uruchom aplikację na pozycji 9 paska zadań
   enable_tooltip: Wyłącz, jeśli zaimplementujesz własne skróty za pomocą API Seelen Core
   enable: Włącz zintegrowane skróty (AHK)
   reset: Zresetuj do domyślnych
