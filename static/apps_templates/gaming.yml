@@ -26,3 +26,11 @@
     matching_strategy: Equals
   options:
     - hidden
+
+- name: Xbox Game Bar Widgets
+  identifier:
+    id: XboxGameBarWidgets.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - hidden
