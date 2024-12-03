@@ -4428,7 +4428,7 @@ dependencies = [
 
 [[package]]
 name = "seelen-ui"
-version = "2.0.7"
+version = "2.0.8"
 dependencies = [
  "arc-swap",
  "backtrace",

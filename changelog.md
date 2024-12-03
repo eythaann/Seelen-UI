@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.8]
 ### enhancements
 - add task manager shortcut on toolbar and dock context menu.
 - improve default no media style on dock.
