@@ -4,9 +4,11 @@
 ### enhancements
 - add task manager shortcut on toolbar and dock context menu.
 - improve default no media style on dock.
+- add icons to context menus.
 
 ### fix
 - randomized wallpaper slice freeze.
+- bad behavior on context menus and popups.
 
 ## [2.0.7]
 ### fix

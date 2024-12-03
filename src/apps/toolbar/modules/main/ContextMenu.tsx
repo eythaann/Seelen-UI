@@ -34,7 +34,7 @@ export function MainContextMenu() {
                       className="tb-context-menu"
                       items={plugins.map((p) => ({
                         key: p.id,
-                        icon: <Icon iconName={p.icon ?? 'TiMinus'} />,
+                        icon: <Icon iconName={p.icon} />,
                         label: p.id,
                         onClick: () => {
                           dispatch(RootActions.addItem(p.id));
@@ -57,7 +57,7 @@ export function MainContextMenu() {
           },
           {
             key: 'task_manager',
-            icon: <Icon iconName="BsListTask" />,
+            icon: <Icon iconName="PiChartLineFill" />,
             label: t('context_menu.task_manager'),
             onClick() {
               invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
@@ -65,7 +65,7 @@ export function MainContextMenu() {
           },
           {
             key: 'settings',
-            icon: <Icon iconName="MdSettings" />,
+            icon: <Icon iconName="RiSettings4Fill" />,
             label: t('context_menu.settings'),
             onClick() {
               invoke(SeelenCommand.ShowAppSettings);

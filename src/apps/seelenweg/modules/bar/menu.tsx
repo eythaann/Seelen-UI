@@ -20,7 +20,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'add-media-module',
       label: t('taskbar_menu.media'),
-      icon: <Icon iconName="SiVlcmediaplayer" />,
+      icon: <Icon iconName="PiMusicNotesPlusFill" />,
       onClick() {
         store.dispatch(RootActions.addMediaModule());
       },
@@ -28,7 +28,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'add-start-module',
       label: t('taskbar_menu.start'),
-      icon: <Icon iconName="AiFillWindows" />,
+      icon: <Icon iconName="SiWindows" size={14} />,
       onClick() {
         store.dispatch(RootActions.addStartModule());
       },
@@ -74,7 +74,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'task_manager',
       label: t('taskbar_menu.task_manager'),
-      icon: <Icon iconName="BsListTask" />,
+      icon: <Icon iconName="PiChartLineFill" />,
       onClick() {
         invoke(SeelenCommand.OpenFile, { path: 'C:\\Windows\\System32\\Taskmgr.exe' });
       },
@@ -82,7 +82,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
     {
       key: 'settings',
       label: t('taskbar_menu.settings'),
-      icon: <Icon iconName="MdSettings" />,
+      icon: <Icon iconName="RiSettings4Fill" />,
       onClick() {
         invoke(SeelenCommand.ShowAppSettings);
       },
