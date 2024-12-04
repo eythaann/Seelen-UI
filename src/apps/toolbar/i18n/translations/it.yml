@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Comunicazioni
-  input_device: Dispositivo di input
-  master_volume: Volume principale
-  output_device: Dispositivo di uscita
-  players: Giocatori dei media
-network:
-  placeholder:
-    password: Parola d'ordine
-  connect: Collegare
-  disconnect: Disconnessione
-  not_found: Nessuna reti trovata
-  more: Più impostazioni di rete
-  hidden: Rete nascosta
-  connected: Connesso a
-  scanning: Scansione delle reti
-  saved: Reti salvate
-  secured: Rete crittografata
-  available: Reti disponibili
-settings:
-  restart: Ricomincia
-  app_settings: Impostazioni dell'app
-  log_out: Disconnettersi
-  title: Impostazioni
-  sleep: Sonno
-  shutdown: Fermare
-  power: Energia
-placeholder:
-  ethernet_connected: accesso ad Internet
-  volume: Volume
-  ethernet_disconnected: Nessun accesso ad internet
-  battery_remaining: '% residuo'
-  settings: Impostazioni rapide
-  bluetooth_devices: Bluetooth e dispositivi
-  smart_charge: '- Smart Charge'
-  open_user_folder: Apri la cartella utente
-  open_system_tray: Vassoio di sistema aperto
-  notifications: Notifiche
-unlabelled_tray: Icona del vassoio senza etichetta
 context_menu:
-  add_module: Aggiungi modulo
-  remove: Rimuovere il modulo
-  task_manager: Responsabile delle attività
+  remove: Rimuovi Modulo
+  add_module: Aggiungi Modulo
+  task_manager: Gestione Attività
   settings: Impostazioni
+media:
+  master_volume: Volume Generale
+  output_device: Dispositivo di uscita
+  input_device: Dispositivo di ingresso
+  players: Lettori Multimediali
+  device:
+    multimedia: Multimediale
+    comunications: Comunicazioni
+network:
+  connected: Connesso a
+  saved: Reti salvate
+  available: Reti disponibili
+  not_found: Nessuna rete Wi-Fi trovata
+  secured: Rete criptata
+  scanning: Scansione delle reti
+  more: Altre Impostazioni di Rete
+  hidden: Rete Nascosta
+  placeholder:
+    password: Password
+  disconnect: Disconnetti
+  connect: Connetti
+settings:
+  title: Impostazioni
+  app_settings: Impostazioni App
+  log_out: Esci
+  sleep: Sospendi
+  restart: Riavvia
+  shutdown: Spegni
+  power: Alimentazione
+placeholder:
+  open_user_folder: Apri Cartella Utente
+  open_system_tray: Apri System Tray
+  bluetooth_devices: Bluetooth & Dispositivi
+  ethernet_connected: Accesso a Internet
+  ethernet_disconnected: Nessun accesso a Internet
+  volume: Volume
+  battery_remaining: '% rimanente'
+  smart_charge: ' - Carica Intelligente'
+  settings: Impostazioni Rapide
+  notifications: Notifiche
+unlabelled_tray: Icona di Tray senza etichetta
