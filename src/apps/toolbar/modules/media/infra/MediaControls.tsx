@@ -11,12 +11,12 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { selectDefaultOutput, Selectors } from '../../shared/store/app';
 import { calcLuminance } from '../application';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
+import { useTimeout, useWindowFocusChange } from '../../../../shared/hooks';
 
 import './index.css';
 
@@ -150,12 +150,16 @@ interface VolumeControlProps {
   deviceId: string;
   sessionId?: string;
   withRightAction?: boolean;
+  withPercentage?: boolean;
 }
 
+const tooltipVisibilityTimeout = 3 * 1000;
+
 export const VolumeControl = memo((props: VolumeControlProps) => {
-  const { value, icon, deviceId, sessionId, withRightAction = true } = props;
+  const { value, icon, deviceId, sessionId, withRightAction = true, withPercentage = false } = props;
 
   const [internalValue, setInternalValue] = useState(value);
+  const [openTooltip, setOpenTooltip] = useState(false);
 
   useEffect(() => {
     setInternalValue(value);
@@ -168,13 +172,26 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
     [deviceId, sessionId],
   );
 
+  useTimeout(() => {
+    setOpenTooltip(false);
+  },
+  tooltipVisibilityTimeout,
+  [openTooltip]);
+
   const onInternalChange = (value: number) => {
     setInternalValue(value);
+    setOpenTooltip(!withPercentage);
     onExternalChange(value);
   };
 
+  function onWheel(e: React.WheelEvent) {
+    const isUp = e.deltaY < 0;
+    const level = Math.max(0, Math.min(1, internalValue + (isUp ? 0.02 : -0.02)));
+    onInternalChange(level);
+  }
+
   return (
-    <div className="media-control-volume">
+    <div className="media-control-volume" onWheel={onWheel}>
       <Button type="text" onClick={() => invoke(SeelenCommand.MediaToggleMute, { id: deviceId })}>
         {icon}
       </Button>
@@ -185,9 +202,12 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
         max={1}
         step={0.01}
         tooltip={{
-          formatter: (value) => `${(100 * (value || 0)).toFixed(0)}`,
+          open: openTooltip,
+          onOpenChange: (open) => setOpenTooltip(!withPercentage && open),
+          formatter: (value) => `${(100 * (value || 0)).toFixed(0)}%`,
         }}
       />
+      {withPercentage && <span style={{ lineHeight: '100%' }}>{Math.round(internalValue * 100)}%</span>}
       {withRightAction && (
         <Button
           type="text"
@@ -326,6 +346,7 @@ export function WithMediaControls({ children }: PropsWithChildren) {
                   />
                 }
                 withRightAction={false}
+                withPercentage={true}
               />
             )}
           </BackgroundByLayersV2>
