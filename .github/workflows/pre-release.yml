@@ -77,7 +77,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Install frontend dependencies
-        run: npm clean-install
+        run: npm clean-install && npm install -D seelen-core@npm:@seelen-ui/lib@next
 
       - uses: tauri-apps/tauri-action@v0
         env:
