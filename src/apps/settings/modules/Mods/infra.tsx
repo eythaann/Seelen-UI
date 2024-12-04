@@ -9,7 +9,7 @@ import cs from './index.module.css';
 
 export function ModsManager() {
   const plugins = useSelector(newSelectors.plugins);
-  const widgets = [];
+  const widgets = useSelector(newSelectors.widgets);
 
   const { t } = useTranslation();
 
@@ -39,6 +39,18 @@ export function ModsManager() {
         <div className={cs.title}>
           {t('mods.widgets')}: {widgets.length}
         </div>
+        {widgets.map((widget) => (
+          <div key={widget.id} className={cs.item}>
+            <div className={cs.left}>
+              <div className={cs.label}>{widget.id}</div>
+            </div>
+            <div className={cs.right}>
+              <Button danger type="dashed" disabled={true}>
+                {t('remove')}
+              </Button>
+            </div>
+          </div>
+        ))}
       </SettingsGroup>
     </>
   );

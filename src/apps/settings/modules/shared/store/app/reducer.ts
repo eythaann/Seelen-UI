@@ -52,6 +52,7 @@ const initialState: RootState = {
     channel: UpdateChannel.Release,
   },
   plugins: [],
+  widgets: [],
   profiles: [],
 };
 

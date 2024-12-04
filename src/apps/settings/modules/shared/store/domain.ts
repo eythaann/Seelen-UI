@@ -6,6 +6,7 @@ import {
   Settings,
   Theme,
   UIColors,
+  Widget,
   WindowManagerLayout,
 } from 'seelen-core';
 
@@ -24,5 +25,6 @@ export interface RootState extends Settings {
   wallpaper: string | null;
   colors: UIColors;
   plugins: Plugin[];
+  widgets: Widget[];
   profiles: Profile[];
 }

@@ -21,10 +21,6 @@ pre-commit:
       priority: 4
       glob: "**/*.rs"
       run: cargo clippy -- -D warnings
-    build-schemas:
-      priority: 5
-      glob: "**/*.rs"
-      run: npm run build:schemas && git add documentation/schemas/*.schema.json
     post-hook:
       priority: 6
       glob: "**/*.rs"

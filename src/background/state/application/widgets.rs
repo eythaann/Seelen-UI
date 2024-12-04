@@ -17,6 +17,14 @@ impl FullState {
         Ok(serde_yaml::from_str(&std::fs::read_to_string(&path)?)?)
     }
 
+    fn load_widget_from_folder(path: PathBuf) -> Result<Widget> {
+        let mut widget = Self::load_widget_from_file(path.join("metadata.yml"))?;
+        widget.js = Some(std::fs::read_to_string(path.join("index.js"))?);
+        widget.css = Some(std::fs::read_to_string(path.join("index.css"))?);
+        widget.html = Some(std::fs::read_to_string(path.join("index.html"))?);
+        Ok(widget)
+    }
+
     pub(super) fn load_widgets(&mut self) -> Result<()> {
         let user_path = self.data_dir.join("widgets");
         let bundled_path = self.resources_dir.join("static/widgets");
@@ -24,10 +32,12 @@ impl FullState {
         let entries = std::fs::read_dir(&bundled_path)?.chain(std::fs::read_dir(&user_path)?);
         for entry in entries.flatten() {
             let path = entry.path();
-            if path.is_dir() {
-                continue;
-            }
-            match Self::load_widget_from_file(path) {
+            let widget = if path.is_dir() {
+                Self::load_widget_from_folder(path)
+            } else {
+                Self::load_widget_from_file(path)
+            };
+            match widget {
                 Ok(widget) => {
                     self.widgets.insert(widget.id.clone(), widget);
                 }

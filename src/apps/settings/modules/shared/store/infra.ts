@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
-import { AppConfiguration, PluginList, ProfileList, SeelenEvent, Settings, Theme, UIColors } from 'seelen-core';
+import { AppConfiguration, PluginList, ProfileList, SeelenEvent, Settings, Theme, UIColors, WidgetList } from 'seelen-core';
 
 import { startup } from '../tauri/infra';
 
@@ -73,6 +73,10 @@ export async function registerStoreEvents() {
   await PluginList.onChange((list) => {
     store.dispatch(RootActions.setPlugins(list.all()));
   });
+
+  await WidgetList.onChange((list) => {
+    store.dispatch(RootActions.setWidgets(list.all()));
+  });
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
@@ -94,6 +98,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
   store.dispatch(RootActions.setState(newState));
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
+  store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));
   store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).toArray()));
 
   /* // !customPath => avoid start user on manual user loading file
