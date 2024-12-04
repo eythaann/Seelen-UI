@@ -2,12 +2,13 @@ import { Dropdown, Menu } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { GenericToolbarModule, useWindowFocusChange } from 'seelen-core';
+import { GenericToolbarModule } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { SavePlaceholderAsCustom } from '../../main/application';
 import { RootActions, Selectors } from '../../shared/store/app';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { InnerItem, InnerItemProps } from './Inner';

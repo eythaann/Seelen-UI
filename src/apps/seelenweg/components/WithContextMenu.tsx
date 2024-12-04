@@ -1,9 +1,10 @@
 import { Dropdown, Menu } from 'antd';
 import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { PropsWithChildren, useState } from 'react';
-import { useWindowFocusChange } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from './BackgroundByLayers/infra';
+
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 interface Props extends PropsWithChildren {
   items: ItemType<MenuItemType>[];

@@ -2,11 +2,12 @@ import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NotificationsTM, useWindowFocusChange } from 'seelen-core';
+import { NotificationsTM } from 'seelen-core';
 
 import { Item } from '../../item/infra/infra';
 
 import { Selectors } from '../../shared/store/app';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { RootState } from '../../shared/store/domain';
 

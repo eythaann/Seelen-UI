@@ -31,7 +31,7 @@ rustflags = ["-Z", "threads=8"]
 tauri-build = { version = "2.0.0-rc", features = [] }
 
 [dependencies]
-seelen-core = { path = "./lib" }
+seelen-core = { git = "https://github.com/Seelen-Inc/slu-lib.git" }
 tauri = { version = "2.0.0-rc", features = [
     "protocol-asset",
     "tray-icon",

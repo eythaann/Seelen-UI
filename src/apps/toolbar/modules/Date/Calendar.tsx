@@ -3,10 +3,11 @@ import { CalendarMode } from 'antd/es/calendar/generateCalendar';
 import moment, { Moment } from 'moment';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
 import { PropsWithChildren, useCallback, useState, WheelEvent } from 'react';
-import { useWindowFocusChange } from 'seelen-core';
 
 import './infra.css';
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
+
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { Icon } from '../../../shared/components/Icon';
 import { cx } from '../../../shared/styles';

@@ -2,11 +2,12 @@ import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useAnimate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useInterval } from 'seelen-core';
 
 import { ThemedWallpaper, Wallpaper } from './modules/wallpaper/infra';
 
 import { Selectors } from './modules/shared/store/app';
+
+import { useInterval } from '../shared/hooks';
 
 export function App() {
   const [scope, animate] = useAnimate<HTMLDivElement>();

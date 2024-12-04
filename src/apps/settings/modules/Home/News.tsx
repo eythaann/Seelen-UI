@@ -1,8 +1,8 @@
 import { Button, Skeleton } from 'antd';
 import { useAnimate } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { useInterval } from 'seelen-core';
 
+import { useInterval } from 'src/apps/shared/hooks';
 import { cx } from 'src/apps/shared/styles';
 
 import cs from './News.module.css';

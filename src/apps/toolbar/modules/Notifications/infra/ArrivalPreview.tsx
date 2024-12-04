@@ -4,11 +4,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, useTimeout } from 'seelen-core';
+import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
+import { useTimeout } from 'src/apps/shared/hooks';
 
 import { AppNotification } from '../../shared/store/domain';
 

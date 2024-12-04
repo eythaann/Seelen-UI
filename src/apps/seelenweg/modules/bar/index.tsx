@@ -8,7 +8,6 @@ import {
   SeelenWegSide,
   SeparatorWegItem,
   SwItemType,
-  useWindowFocusChange,
 } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
@@ -18,6 +17,7 @@ import { StartMenu } from '../item/infra/StartMenu';
 import { UserApplication } from '../item/infra/UserApplication';
 
 import { RootActions, Selectors } from '../shared/store/app';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { SwItem } from '../shared/store/domain';
 

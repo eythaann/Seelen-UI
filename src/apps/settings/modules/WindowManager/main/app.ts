@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { WindowManagerSettings } from 'seelen-core';
 
 import { matcher, reducersFor, selectorsFor } from '../../shared/utils/app';
 import { BorderSlice } from '../border/app';
-
-import { WindowManagerSettings } from '../../../../../../lib/src/state';
 
 let initialState = new WindowManagerSettings();
 

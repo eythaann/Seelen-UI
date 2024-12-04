@@ -1,11 +1,12 @@
 import moment from 'moment';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DateToolbarModule, useInterval } from 'seelen-core';
+import { DateToolbarModule } from 'seelen-core';
 
 import { Item } from '../item/infra/infra';
 
 import { Selectors } from '../shared/store/app';
+import { useInterval } from 'src/apps/shared/hooks';
 
 import { WithDateCalendar } from './Calendar';
 

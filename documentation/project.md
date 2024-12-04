@@ -42,3 +42,93 @@ To prevent deadlocks in the application, all threads must follow the "Hierarchic
 3. **EVENT**: Finally, acquire locks related to hook or event management.
 
 This order must be respected in all threads to avoid circular wait conditions and ensure safe concurrency.
+
+### Splitting the Codebase - Working with `slu-lib` (Seelen UI Library)
+
+When working with the `slu-lib` library and making changes, follow these steps to configure your development environment. This will allow you to test your changes locally without impacting the main repository.
+
+---
+
+#### 1. Clone the `slu-lib` Repository
+Ensure you have a local copy of the `slu-lib` codebase. If you don’t already have it, clone the repository using the following command:
+
+~~~
+git clone <slu-lib-repository-url>
+cd slu-lib
+~~~
+
+---
+
+#### 2. Create a Branch for Your Changes
+Create a new branch to implement the necessary changes in the library:
+
+~~~
+git checkout -b <your-branch-name>
+~~~
+
+Example:
+~~~
+git checkout -b feature/ui-update
+~~~
+
+Make the required changes and commit your modifications:
+
+~~~
+git add .
+git commit -m "Description of changes made to slu-lib"
+~~~
+
+---
+
+#### 3. Configure `slu-lib` as a Local Dependency
+To allow the main project to use your modified version of `slu-lib`, update its dependency configuration file.
+
+#### For Rust Projects (`Cargo.toml`):
+In the `Cargo.toml` file of the main project, replace the `slu-lib` dependency with your local branch’s Git URL:
+
+~~~
+[dependencies]
+slu-lib = { git = "<slu-lib-repository-url>", branch = "<your-branch-name>" }
+~~~
+
+Example:
+~~~
+[dependencies]
+slu-lib = { git = "https://github.com/your-org/slu-lib", branch = "feature/ui-update" }
+~~~
+
+#### For JavaScript Projects (`package.json`):
+In the `package.json` file of the main project, update the `slu-lib` dependency to point to your Git branch:
+
+~~~
+"dependencies": {
+  "slu-lib": "git+https://<slu-lib-repository-url>#<your-branch-name>"
+}
+~~~
+
+Example:
+~~~
+"dependencies": {
+  "slu-lib": "git+https://github.com/your-org/slu-lib#feature/ui-update"
+}
+~~~
+
+**Important:** These changes should only be used for local development and must not be committed to the repository.
+
+---
+
+#### 4. Test and Iterate
+- After linking the modified version of `slu-lib`, test the main project to ensure the changes work as expected.
+- If further modifications are needed, return to the `slu-lib` repository, make changes, and commit them.
+
+---
+
+#### 5. Finalizing Changes
+Once the changes in `slu-lib` are complete:
+1. Push your branch to the remote repository:
+   ~~~
+   git push origin <your-branch-name>
+   ~~~
+2. Create a pull request to merge your branch into the main `slu-lib` repository.
+3. Once the pull request is merged, update the `slu-lib` dependency in the main project to use the new version.
+---

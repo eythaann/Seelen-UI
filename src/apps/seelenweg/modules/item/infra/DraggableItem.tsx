@@ -7,7 +7,7 @@ import { cx } from '../../../../shared/styles';
 
 interface Props extends PropsWithChildren {
   item: SwItem;
-  className: String | undefined;
+  className?: String;
 }
 
 export function DraggableItem({ children, item, className }: Props) {

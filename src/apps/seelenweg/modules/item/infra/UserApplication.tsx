@@ -4,12 +4,13 @@ import moment from 'moment';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, SeelenWegSide, useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand, SeelenWegSide } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 import { updatePreviews } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import {
   ExtendedPinnedWegItem,

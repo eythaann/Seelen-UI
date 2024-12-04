@@ -3,7 +3,7 @@ import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode, Plugin, useWindowFocusChange } from 'seelen-core';
+import { HideMode, Plugin } from 'seelen-core';
 import { Placeholder, ToolbarModule, ToolbarModuleType } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -18,6 +18,7 @@ import { SettingsModule } from '../Settings/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
@@ -50,10 +51,10 @@ const DividerEnd = 'CenterEnd';
 
 // item can be a toolbar plugin id or a toolbar module
 function componentByModule(plugins: Plugin[], item: string | ToolbarModule) {
-  let module: ToolbarModule;
+  let module: ToolbarModule | undefined;
 
   if (typeof item === 'string') {
-    module = plugins.find((p) => p.id === item)?.plugin;
+    module = plugins.find((p) => p.id === item)?.plugin as ToolbarModule | undefined;
     if (!module) {
       return null;
     }

@@ -3,12 +3,13 @@ import { Button, Popover, Tooltip } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
 import { Icon } from 'src/apps/shared/components/Icon';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { WlanBssEntry } from '../domain';
 

@@ -4,7 +4,7 @@ import { Popover } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand } from 'seelen-core';
 import { TrayTM } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
@@ -12,6 +12,7 @@ import { Item } from '../item/infra/infra';
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { TrayInfo } from '../shared/store/domain';
 

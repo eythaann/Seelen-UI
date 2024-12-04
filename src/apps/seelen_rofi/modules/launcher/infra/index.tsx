@@ -5,10 +5,11 @@ import { motion } from 'framer-motion';
 import { KeyboardEventHandler, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, useWindowFocusChange } from 'seelen-core';
+import { SeelenCommand } from 'seelen-core';
 
 import { Selectors } from '../../shared/store/app';
 import { SaveHistory } from '../app';
+import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { CommandInput } from './CommandInput';
 import { Item } from './Item';
