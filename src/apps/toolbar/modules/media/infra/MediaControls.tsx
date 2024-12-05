@@ -14,6 +14,7 @@ import { calcLuminance } from '../application';
 
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
 
+import AnimatedPopover from '../../../../shared/components/AnimatedPopover';
 import { Icon } from '../../../../shared/components/Icon';
 import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 import { useTimeout, useWindowFocusChange } from '../../../../shared/hooks';
@@ -316,7 +317,13 @@ export function WithMediaControls({ children }: PropsWithChildren) {
   });
 
   return (
-    <Popover
+    <AnimatedPopover
+      animationTimeMs={300}
+      animationDescription={{
+        initial: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
+        animate: { y: '0%', scale: 1, opacity: 1, transformOrigin: '50% 0%' },
+        exit: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
+      }}
       open={openControls}
       trigger="click"
       onOpenChange={(open) => {
@@ -354,6 +361,6 @@ export function WithMediaControls({ children }: PropsWithChildren) {
       >
         {children}
       </Popover>
-    </Popover>
+    </AnimatedPopover>
   );
 }

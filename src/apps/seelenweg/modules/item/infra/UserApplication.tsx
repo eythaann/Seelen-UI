@@ -1,5 +1,4 @@
 import { invoke } from '@tauri-apps/api/core';
-import { Popover } from 'antd';
 import moment from 'moment';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +17,7 @@ import {
   RootState,
 } from '../../shared/store/domain';
 
+import AnimatedPopover from '../../../../shared/components/AnimatedPopover';
 import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { getMenuForItem } from '../../bar/menu';
@@ -95,7 +95,13 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           setOpenPreview(false);
         }
       }}>
-        <Popover
+        <AnimatedPopover
+          animationTimeMs={300}
+          animationDescription={{
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+            exit: { opacity: 0 },
+          }}
           open={openPreview}
           mouseEnterDelay={0.4}
           placement={calculatePlacement(settings.position)}
@@ -103,6 +109,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           trigger="hover"
           arrow={false}
           content={
+            item.opens.length != 0 &&
             <BackgroundByLayersV2
               className={ cx('weg-item-preview-container', settings.position.toLowerCase()) }
               onMouseMoveCapture={(e) => e.stopPropagation()}
@@ -151,7 +158,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
               })}
             />
           </div>
-        </Popover>
+        </AnimatedPopover>
       </WithContextMenu>
     </DraggableItem>
   );
