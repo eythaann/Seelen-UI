@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 use getset::{Getters, MutGetters};
 
 use crate::{
@@ -7,6 +9,7 @@ use crate::{
     seelen_weg::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
     state::application::FullState,
+    widget_loader::WidgetInstance,
     windows_api::{monitor::Monitor, WindowsApi},
 };
 
@@ -21,6 +24,8 @@ pub struct SeelenInstanceContainer {
     toolbar: Option<FancyToolbar>,
     weg: Option<SeelenWeg>,
     wm: Option<WindowManagerV2>,
+    /// third party widgets
+    widgets: HashMap<String, WidgetInstance>,
 }
 
 unsafe impl Send for SeelenInstanceContainer {}
@@ -37,6 +42,7 @@ impl SeelenInstanceContainer {
             toolbar: None,
             weg: None,
             wm: None,
+            widgets: HashMap::new(),
         };
         instance.load_settings(settings)?;
         instance.ensure_positions()?;
@@ -101,6 +107,16 @@ impl SeelenInstanceContainer {
         } else {
             self.wm = None;
         }
+
+        for (id, widget) in &settings.widgets {
+            // Todo: filter by widget settings (enabled state)
+            if self.widgets.contains_key(id) || widget.html.is_none() {
+                continue;
+            }
+            self.widgets
+                .insert(id.clone(), WidgetInstance::load(widget.clone())?);
+        }
+
         Ok(())
     }
 

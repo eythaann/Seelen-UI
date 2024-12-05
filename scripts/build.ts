@@ -5,7 +5,14 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-async function ssrIcons() {
+async function extractIconsIfNecessary() {
+  if (fs.existsSync('./dist/icons')) {
+    return;
+  }
+
+  console.time('Bundle Lazy Icons');
+  fs.mkdirSync('./dist/icons', { recursive: true });
+
   const promises = [
     import('react-icons/ai'),
     import('react-icons/bi'),
@@ -48,6 +55,8 @@ async function ssrIcons() {
       fs.writeFileSync(`./dist/icons/${name}.svg`, svg);
     }
   }
+
+  console.timeEnd('Bundle Lazy Icons');
 }
 
 async function main() {
@@ -63,6 +72,7 @@ async function main() {
     .readdirSync('src/apps')
     .filter((item) => item !== 'shared' && fs.statSync(path.join('src/apps', item)).isDirectory());
 
+  // remove previous build
   appFolders.forEach((folder) => {
     const filePath = path.join('dist', folder);
     if (fs.existsSync(filePath)) {
@@ -70,13 +80,30 @@ async function main() {
     }
   });
 
+  const entryPoints = appFolders
+    .map((folder) => {
+      const vanilla = `./src/apps/${folder}/index.ts`;
+      const react = `./src/apps/${folder}/index.tsx`;
+      const svelte = `./src/apps/${folder}/index.svelte`;
+      if (fs.existsSync(vanilla)) {
+        return vanilla;
+      }
+      if (fs.existsSync(react)) {
+        return react;
+      }
+      if (fs.existsSync(svelte)) {
+        return svelte;
+      }
+      return '';
+    })
+    .filter((file) => !!file);
+
   await esbuild.build({
-    entryPoints: appFolders
-      .map((folder) => `./src/apps/${folder}/index.tsx`)
-      .filter((file) => fs.existsSync(file)),
+    entryPoints: entryPoints,
     bundle: true,
     minify: isProdMode,
     sourcemap: !isProdMode,
+    format: 'esm',
     outdir: './dist',
     jsx: 'automatic',
     define: {
@@ -96,12 +123,7 @@ async function main() {
   });
   console.timeEnd('Build UI');
 
-  if (!fs.existsSync('./dist/icons')) {
-    console.time('Bundle Lazy Icons');
-    fs.mkdirSync('./dist/icons', { recursive: true });
-    await ssrIcons();
-    console.timeEnd('Bundle Lazy Icons');
-  }
+  await extractIconsIfNecessary();
 }
 
 main();

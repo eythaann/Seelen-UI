@@ -1,0 +1,65 @@
+{
+  "$schema": "../gen/schemas/windows-schema.json",
+  "identifier": "general-window",
+  "description": "core:window permissions for all widgets",
+  "local": true,
+  "windows": [
+    "*"
+  ],
+  "permissions": [
+    "core:window:default",
+
+    "core:window:allow-show",
+    "core:window:allow-hide",
+
+    "core:window:deny-create",
+    "core:window:allow-destroy",
+    
+    "core:window:allow-set-always-on-top",
+    "core:window:allow-set-always-on-bottom",
+    "core:window:allow-set-fullscreen",
+
+    "core:window:allow-center",
+    "core:window:allow-set-size",
+    "core:window:allow-set-size-constraints",
+    "core:window:allow-set-position",
+    "core:window:allow-set-min-size",
+    "core:window:allow-set-max-size",
+
+    "core:window:allow-set-resizable",
+    "core:window:allow-set-minimizable",
+    "core:window:allow-set-maximizable",
+    "core:window:allow-set-closable",
+
+    "core:window:allow-minimize",
+    "core:window:allow-unminimize",
+    "core:window:allow-maximize",
+    "core:window:allow-unmaximize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-close",
+
+    "core:window:allow-set-title",
+    "core:window:allow-set-title-bar-style",
+    "core:window:allow-set-decorations",
+    "core:window:allow-set-shadow",
+    "core:window:allow-set-effects",
+    "core:window:allow-set-content-protected",
+    "core:window:allow-set-ignore-cursor-events",
+    
+    "core:window:allow-set-skip-taskbar",
+    "core:window:allow-set-visible-on-all-workspaces",
+
+    "core:window:allow-set-icon",
+    "core:window:allow-set-progress-bar",
+    "core:window:allow-request-user-attention",
+
+    "core:window:allow-set-focus",
+    "core:window:allow-set-cursor-grab",
+    "core:window:allow-set-cursor-icon",
+    "core:window:allow-set-cursor-position",
+    "core:window:allow-set-cursor-visible",
+
+    "core:window:allow-start-dragging",
+    "core:window:allow-start-resize-dragging"
+  ]
+}

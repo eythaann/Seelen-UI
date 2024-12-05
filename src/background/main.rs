@@ -18,6 +18,7 @@ mod state;
 mod system;
 mod tray;
 mod utils;
+mod widget_loader;
 mod windows_api;
 mod winevent;
 

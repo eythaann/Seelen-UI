@@ -1,0 +1,14 @@
+{
+  "$schema": "../gen/schemas/windows-schema.json",
+  "identifier": "general",
+  "description": "general permissions for all widgets",
+  "local": true,
+  "windows": [
+    "*"
+  ],
+  "permissions": [
+    "log:default",
+    "core:event:default",
+    "core:webview:default"
+  ]
+}
