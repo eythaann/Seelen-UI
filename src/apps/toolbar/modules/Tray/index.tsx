@@ -2,7 +2,6 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { TrayToolbarItem } from '@seelen-ui/lib/types';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
-import { Popover } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -16,6 +15,7 @@ import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { TrayInfo } from '../shared/store/domain';
 
+import AnimatedPopover from '../../../shared/components/AnimatedPopover';
 import { OverflowTooltip } from '../../../shared/components/OverflowTooltip';
 
 interface Props {
@@ -82,7 +82,13 @@ export function TrayModule({ module }: Props) {
   }, [openPreview]);
 
   return (
-    <Popover
+    <AnimatedPopover
+      animationTimeMs={300}
+      animationDescription={{
+        initial: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
+        animate: { y: '0%', scale: 1, opacity: 1, transformOrigin: '50% 0%' },
+        exit: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
+      }}
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
@@ -98,6 +104,6 @@ export function TrayModule({ module }: Props) {
       }
     >
       <Item module={module} />
-    </Popover>
+    </AnimatedPopover>
   );
 }
