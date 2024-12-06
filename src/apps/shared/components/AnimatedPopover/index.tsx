@@ -1,5 +1,5 @@
 import { Popover, PopoverProps } from 'antd';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { useTimeout } from '../../hooks';
 import { cx } from '../../styles';
@@ -14,36 +14,24 @@ export interface AnimatedPopoverProps extends PopoverProps {
   animationDescription: PopoverAnimationProps;
 }
 
-export default function AnimatedPopover({ children, open, onOpenChange, content, animationDescription, ...popoverProps }: AnimatedPopoverProps) {
-  const [openPopover, setOpenPopover] = useState(!!open);
+export default function AnimatedPopover({ children, open, content, animationDescription, ...popoverProps }: AnimatedPopoverProps) {
   const [delayedOpenPopover, setDelayedOpenPopover] = useState(false);
 
-  useEffect(() => {
-    setOpenPopover(!!open);
-  }, [open]);
-
   useTimeout(() => {
-    setDelayedOpenPopover(openPopover);
-  }, animationDescription.maxAnimationTimeMs, [openPopover]);
-
-  useEffect(() => {
-    if (onOpenChange) {
-      onOpenChange(delayedOpenPopover);
-    }
-  }, [delayedOpenPopover]);
+    setDelayedOpenPopover(!!open);
+  }, animationDescription.maxAnimationTimeMs, [open]);
 
   const animationObject = {};
   if (animationDescription.openAnimationName) {
-    animationObject[animationDescription.openAnimationName] = openPopover && !delayedOpenPopover;
+    animationObject[animationDescription.openAnimationName] = open && !delayedOpenPopover;
   }
   if (animationDescription.closeAnimationName) {
-    animationObject[animationDescription.closeAnimationName] = delayedOpenPopover && !openPopover;
+    animationObject[animationDescription.closeAnimationName] = delayedOpenPopover && !open;
   }
 
   return (
     <Popover
-      open={openPopover || delayedOpenPopover}
-      onOpenChange={setOpenPopover}
+      open={open || delayedOpenPopover}
       {...popoverProps}
       content={content &&
         <div className={cx(animationObject)}>
