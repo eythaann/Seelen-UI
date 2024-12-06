@@ -183,11 +183,10 @@ export function WithDateCalendar({ children }: PropsWithChildren) {
 
   return (
     <AnimatedPopover
-      animationTimeMs={300}
       animationDescription={{
-        initial: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
-        animate: { y: '0%', scale: 1, opacity: 1, transformOrigin: '50% 0%' },
-        exit: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'calendar-open',
+        closeAnimationName: 'calendar-close',
       }}
       style={{ width: 300 }}
       open={openPreview}

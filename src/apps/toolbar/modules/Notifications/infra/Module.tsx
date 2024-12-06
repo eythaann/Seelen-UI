@@ -34,18 +34,17 @@ export function NotificationsModule({ module }: Props) {
   }, []);
 
   return (
-    <AnimatedPopover
-      animationTimeMs={300}
-      animationDescription={{
-        initial: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
-        animate: { y: '0%', scale: 1, opacity: 1, transformOrigin: '50% 0%' },
-        exit: { y: '-10px', scale: 0, opacity: 0, transformOrigin: '50% 0%' },
-      }}
+    <Popover
       open={!openPreview}
       arrow={false}
       content={<ArrivalPreview />}
     >
-      <Popover
+      <AnimatedPopover
+        animationDescription={{
+          maxAnimationTimeMs: 500,
+          openAnimationName: 'notification-open',
+          closeAnimationName: 'notification-close',
+        }}
         open={openPreview}
         trigger="click"
         onOpenChange={setOpenPreview}
@@ -53,7 +52,7 @@ export function NotificationsModule({ module }: Props) {
         content={<Notifications />}
       >
         <Item extraVars={{ count }} module={module} />
-      </Popover>
-    </AnimatedPopover>
+      </AnimatedPopover>
+    </Popover>
   );
 }

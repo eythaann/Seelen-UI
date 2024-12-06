@@ -102,11 +102,10 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
         }}
       >
         <AnimatedPopover
-          animationTimeMs={300}
           animationDescription={{
-            initial: { opacity: 0 },
-            animate: { opacity: 1 },
-            exit: { opacity: 0 },
+            maxAnimationTimeMs: 500,
+            openAnimationName: 'notification-open',
+            closeAnimationName: 'notification-close',
           }}
           open={openPreview}
           mouseEnterDelay={0.4}
