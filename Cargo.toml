@@ -17,7 +17,7 @@ name = "seelen-ui"
 path = "src/background/main.rs"
 
 [profile.dev]
-# incremental = true
+incremental = true
 rustflags = ["-Z", "threads=8"]
 
 [profile.release]
