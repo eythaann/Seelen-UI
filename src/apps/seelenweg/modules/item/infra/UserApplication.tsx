@@ -104,8 +104,8 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
         <AnimatedPopover
           animationDescription={{
             maxAnimationTimeMs: 500,
-            openAnimationName: 'notification-open',
-            closeAnimationName: 'notification-close',
+            openAnimationName: 'weg-item-preview-container-open',
+            closeAnimationName: 'weg-item-preview-container-close',
           }}
           open={openPreview}
           mouseEnterDelay={0.4}
