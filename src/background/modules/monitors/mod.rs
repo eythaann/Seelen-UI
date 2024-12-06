@@ -18,7 +18,7 @@ use windows::{
 
 use crate::{
     error_handler::Result,
-    log_error, trace_lock,
+    event_manager, log_error, trace_lock,
     utils::spawn_named_thread,
     windows_api::{MonitorEnumerator, WindowsApi},
 };
@@ -36,14 +36,14 @@ pub enum MonitorManagerEvent {
     Updated(String, HMONITOR),
 }
 
-type OnMonitorsChange = Box<dyn Fn(MonitorManagerEvent) + Send + Sync>;
-
 pub struct MonitorManager {
     pub monitors: Vec<(String, HMONITOR)>,
-    callbacks: Vec<OnMonitorsChange>,
 }
 
 unsafe impl Send for MonitorManager {}
+unsafe impl Send for MonitorManagerEvent {}
+
+event_manager!(MonitorManager, MonitorManagerEvent);
 
 impl MonitorManager {
     unsafe extern "system" fn window_proc(
@@ -56,39 +56,34 @@ impl MonitorManager {
             // Added based on this https://stackoverflow.com/a/33762334
             WM_DISPLAYCHANGE | WM_SETTINGCHANGE | WM_DEVICECHANGE => {
                 // log::debug!("Dispatching {}, {:?}, {:?}", message, wparam, lparam);
-                std::thread::spawn(move || {
-                    let mut manager = trace_lock!(MONITOR_MANAGER);
+                let mut old_list = { trace_lock!(MONITOR_MANAGER).monitors.clone() };
+                let new_list = match Self::get_monitors() {
+                    Ok(monitors) => monitors,
+                    Err(_) => return LRESULT(0),
+                };
 
-                    let mut old_list = manager.monitors.clone();
-                    let new_list = match Self::get_monitors() {
-                        Ok(monitors) => monitors,
-                        Err(_) => return,
-                    };
-
-                    for (name, id) in &new_list {
-                        match old_list.iter().position(|x| x.0 == *name) {
-                            Some(idx) => {
-                                let (_, old_id) = old_list.remove(idx);
-                                if old_id != *id {
-                                    manager.notify_changes(MonitorManagerEvent::Updated(
-                                        name.clone(),
-                                        *id,
-                                    ));
-                                }
-                            }
-                            None => {
-                                manager
-                                    .notify_changes(MonitorManagerEvent::Added(name.clone(), *id));
+                let sender = Self::event_tx();
+                for (name, id) in &new_list {
+                    match old_list.iter().position(|x| x.0 == *name) {
+                        Some(idx) => {
+                            let (_, old_id) = old_list.remove(idx);
+                            if old_id != *id {
+                                log_error!(
+                                    sender.send(MonitorManagerEvent::Updated(name.clone(), *id,))
+                                );
                             }
                         }
+                        None => {
+                            log_error!(sender.send(MonitorManagerEvent::Added(name.clone(), *id)))
+                        }
                     }
+                }
 
-                    for (name, id) in old_list {
-                        manager.notify_changes(MonitorManagerEvent::Removed(name, id));
-                    }
+                for (name, id) in old_list {
+                    log_error!(sender.send(MonitorManagerEvent::Removed(name, id)))
+                }
 
-                    manager.monitors = new_list.into_iter().collect();
-                });
+                trace_lock!(MONITOR_MANAGER).monitors = new_list.into_iter().collect();
                 LRESULT(0)
             }
             _ => DefWindowProcW(window, message, wparam, lparam),
@@ -162,7 +157,6 @@ impl MonitorManager {
         })?;
 
         Ok(Self {
-            callbacks: Vec::new(),
             monitors: Self::get_monitors()?,
         })
     }
@@ -173,18 +167,5 @@ impl MonitorManager {
             monitors.push((WindowsApi::monitor_name(m)?, m));
         }
         Ok(monitors)
-    }
-
-    pub fn listen_changes<F>(&mut self, callback: F)
-    where
-        F: Fn(MonitorManagerEvent) + Send + Sync + 'static,
-    {
-        self.callbacks.push(Box::new(callback));
-    }
-
-    pub fn notify_changes(&self, event: MonitorManagerEvent) {
-        for callback in &self.callbacks {
-            callback(event.clone());
-        }
     }
 }

@@ -21,7 +21,7 @@ use crate::{
     hook::register_win_hook,
     instance::SeelenInstanceContainer,
     log_error,
-    modules::monitors::{MonitorManagerEvent, MONITOR_MANAGER},
+    modules::monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
     restoration_and_migrations::RestorationAndMigration,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
@@ -30,7 +30,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, is_msix_intallation, PERFORMANCE_HELPER},
+    utils::{ahk::AutoHotKey, is_msix_intallation, spawn_named_thread, PERFORMANCE_HELPER},
     windows_api::WindowsApi,
     APP_HANDLE,
 };
@@ -211,7 +211,13 @@ impl Seelen {
         for (_name, id) in monitors {
             self.add_monitor(id)?;
         }
-        trace_lock!(MONITOR_MANAGER).listen_changes(Self::on_monitor_event);
+
+        spawn_named_thread("Monitor Listener", || {
+            let rx = MonitorManager::event_rx();
+            while let Ok(event) = rx.recv() {
+                Self::on_monitor_event(event);
+            }
+        })?;
 
         tauri::async_runtime::spawn(async {
             trace_lock!(PERFORMANCE_HELPER).start("lazy setup");

@@ -4,6 +4,10 @@
 ### enhancements
 - add `XboxGameBarWidgets.exe` to the bundled apps settings list.
 
+### refactor
+- themes now use widget ids instead hard-coded keys.
+- improvements on events propagation.
+
 ## [2.0.8]
 ### enhancements
 - add task manager shortcut on toolbar and dock context menu.

@@ -34,10 +34,10 @@ use windows_core::Interface;
 
 use crate::{
     error_handler::Result,
-    log_error,
+    event_manager, log_error,
     seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
-    utils::pcwstr,
+    utils::{pcwstr, spawn_named_thread},
     windows_api::{Com, WindowEnumerator, WindowsApi},
 };
 
@@ -49,14 +49,12 @@ lazy_static! {
     pub static ref MEDIA_MANAGER: Arc<Mutex<MediaManager>> = Arc::new(Mutex::new(
         MediaManager::new().expect("Failed to create media manager")
     ));
-    pub static ref REG_PROPERTY_EVENTS: Arc<Mutex<HashMap<String, EventRegistrationToken>>> =
-        Arc::new(Mutex::new(HashMap::new()));
-    pub static ref REG_PLAYBACK_EVENTS: Arc<Mutex<HashMap<String, EventRegistrationToken>>> =
-        Arc::new(Mutex::new(HashMap::new()));
 }
 
+event_manager!(MediaManager, MediaEvent);
+
 #[derive(Debug)]
-enum MediaEvent {
+pub enum MediaEvent {
     DeviceAdded(String),
     DeviceRemoved(String),
     DefaultDeviceChanged {
@@ -93,23 +91,27 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
         role: ERole,
         device_id: &windows_core::PCWSTR,
     ) -> windows_core::Result<()> {
-        trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DefaultDeviceChanged {
+        let tx = MediaManager::event_tx();
+        let result = tx.send(MediaEvent::DefaultDeviceChanged {
             flow,
             role,
             device_id: unsafe { device_id.to_string()? },
         });
+        log_error!(result);
         Ok(())
     }
 
     fn OnDeviceAdded(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
-        trace_lock!(MEDIA_MANAGER)
-            .emit_event(MediaEvent::DeviceAdded(unsafe { device_id.to_string()? }));
+        let tx = MediaManager::event_tx();
+        let result = tx.send(MediaEvent::DeviceAdded(unsafe { device_id.to_string()? }));
+        log_error!(result);
         Ok(())
     }
 
     fn OnDeviceRemoved(&self, device_id: &windows_core::PCWSTR) -> windows_core::Result<()> {
-        trace_lock!(MEDIA_MANAGER)
-            .emit_event(MediaEvent::DeviceRemoved(unsafe { device_id.to_string()? }));
+        let tx = MediaManager::event_tx();
+        let result = tx.send(MediaEvent::DeviceRemoved(unsafe { device_id.to_string()? }));
+        log_error!(result);
         Ok(())
     }
 
@@ -119,14 +121,12 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
         new_device_state: windows::Win32::Media::Audio::DEVICE_STATE,
     ) -> windows_core::Result<()> {
         let device_id = unsafe { device_id.to_string()? };
-        match new_device_state {
-            DEVICE_STATE_ACTIVE => {
-                trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DeviceAdded(device_id));
-            }
-            _ => {
-                trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DeviceRemoved(device_id));
-            }
-        }
+        let tx = MediaManager::event_tx();
+        let result = match new_device_state {
+            DEVICE_STATE_ACTIVE => tx.send(MediaEvent::DeviceAdded(device_id)),
+            _ => tx.send(MediaEvent::DeviceRemoved(device_id)),
+        };
+        log_error!(result);
         Ok(())
     }
 
@@ -147,12 +147,14 @@ impl MediaManagerEvents {
         if let Some(session) = session {
             let id = session.SourceAppUserModelId()?.to_string();
             let properties = session.TryGetMediaPropertiesAsync()?.get()?;
-            trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerPropertiesChanged {
+            let tx = MediaManager::event_tx();
+            let result = tx.send(MediaEvent::MediaPlayerPropertiesChanged {
                 id,
                 title: properties.Title()?.to_string(),
                 author: properties.Artist()?.to_string(),
                 thumbnail: WindowsApi::extract_thumbnail_from_ref(properties.Thumbnail()?).ok(),
             });
+            log_error!(result);
         }
         Ok(())
     }
@@ -163,11 +165,13 @@ impl MediaManagerEvents {
     ) -> windows_core::Result<()> {
         if let Some(session) = session {
             let playback = session.GetPlaybackInfo()?;
-            trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerPlaybackStatusChanged {
+            let tx = MediaManager::event_tx();
+            let result = tx.send(MediaEvent::MediaPlayerPlaybackStatusChanged {
                 id: session.SourceAppUserModelId()?.to_string(),
                 playing: playback.PlaybackStatus()?
                     == GlobalSystemMediaTransportControlsSessionPlaybackStatus::Playing,
             });
+            log_error!(result);
         }
         Ok(())
     }
@@ -183,16 +187,17 @@ impl MediaManagerEvents {
                 .map(|session| session.id.clone())
                 .collect_vec();
 
+            let tx = MediaManager::event_tx();
             for session in session_manager.GetSessions()? {
                 let id = session.SourceAppUserModelId()?.to_string();
                 if !current_list.contains(&id) {
-                    trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerAdded(session));
+                    let _ = tx.send(MediaEvent::MediaPlayerAdded(session));
                 }
                 current_list.retain(|x| *x != id);
             }
 
             for id in current_list {
-                trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::MediaPlayerRemoved(id));
+                let _ = tx.send(MediaEvent::MediaPlayerRemoved(id));
             }
         }
         Ok(())
@@ -210,11 +215,13 @@ impl IAudioEndpointVolumeCallback_Impl for MediaDeviceEventHandler_Impl {
         data: *mut windows::Win32::Media::Audio::AUDIO_VOLUME_NOTIFICATION_DATA,
     ) -> windows_core::Result<()> {
         if let Some(data) = unsafe { data.as_ref() } {
-            trace_lock!(MEDIA_MANAGER).emit_event(MediaEvent::DeviceVolumeChanged {
+            let tx = MediaManager::event_tx();
+            let result = tx.send(MediaEvent::DeviceVolumeChanged {
                 device_id: self.device_id.clone(),
                 volume: data.fMasterVolume,
                 muted: data.bMuted.as_bool(),
             });
+            log_error!(result);
         }
         Ok(())
     }
@@ -449,7 +456,7 @@ impl MediaManager {
         self.media_player_manager
             .SessionsChanged(&self.media_player_manager_event_handler)?;
 
-        Ok(())
+        Self::start_event_loop()
     }
 
     unsafe fn load_device(&mut self, device: &IMMDevice) -> Result<()> {
@@ -637,27 +644,34 @@ impl MediaManager {
         }
     }
 
-    fn emit_event(&mut self, event: MediaEvent) {
-        let is_changing_players = matches!(
-            event,
-            MediaEvent::MediaPlayerAdded(_)
-                | MediaEvent::MediaPlayerRemoved(_)
-                | MediaEvent::MediaPlayerPropertiesChanged { .. }
-                | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
-        );
+    fn start_event_loop() -> Result<()> {
+        spawn_named_thread("Media Events", || {
+            let rx = Self::event_rx();
+            while let Ok(event) = rx.recv() {
+                let is_changing_players = matches!(
+                    event,
+                    MediaEvent::MediaPlayerAdded(_)
+                        | MediaEvent::MediaPlayerRemoved(_)
+                        | MediaEvent::MediaPlayerPropertiesChanged { .. }
+                        | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
+                );
 
-        log_error!(self.process_event(event));
+                let mut media_manager = trace_lock!(MEDIA_MANAGER);
+                log_error!(media_manager.process_event(event));
 
-        if is_changing_players {
-            self.update_recommended_player();
-            for callback in &self.registered_players_callbacks {
-                callback(self.playing());
+                if is_changing_players {
+                    media_manager.update_recommended_player();
+                    for callback in &media_manager.registered_players_callbacks {
+                        callback(media_manager.playing());
+                    }
+                } else {
+                    for callback in &media_manager.registered_devices_callbacks {
+                        callback(media_manager.inputs(), media_manager.outputs());
+                    }
+                }
             }
-        } else {
-            for callback in &self.registered_devices_callbacks {
-                callback(self.inputs(), self.outputs());
-            }
-        }
+        })?;
+        Ok(())
     }
 
     fn process_event(&mut self, event: MediaEvent) -> Result<()> {
