@@ -1,6 +1,6 @@
 import { listen } from '@tauri-apps/api/event';
 import { useEffect, useState } from 'react';
-import { getCurrentWidget, Settings, Theme, UIColors } from 'seelen-core';
+import { getCurrentWidget, Settings, Theme, UIColors, WidgetId } from 'seelen-core';
 
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
@@ -43,13 +43,14 @@ export function useDarkMode() {
   return isDarkMode;
 }
 
-const KeyByLabel: Record<string, string> = {
+/* backward compatibility object for old themes */
+const OLD_THEME_KEYS_BY_WIDGET_ID = {
   '@seelen/fancy-toolbar': 'toolbar',
   '@seelen/weg': 'weg',
   '@seelen/window-manager': 'wm',
   '@seelen/launcher': 'launcher',
   '@seelen/wall': 'wall',
-};
+} as Record<WidgetId, string>;
 
 async function loadThemes(allThemes: Theme[], selected: string[]) {
   const themes = allThemes
@@ -60,11 +61,6 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
 
   const widget = getCurrentWidget();
 
-  const theme_key = KeyByLabel[widget.id] || widget.id;
-  if (!theme_key) {
-    return;
-  }
-
   document.getElementById(widget.label)?.remove();
   let element = document.createElement('style');
   element.id = widget.label;
@@ -72,7 +68,12 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
 
   for (const theme of themes) {
     let layerName = theme.info.filename.replace(/[\.]/g, '-') + '-theme';
-    element.textContent += `@layer ${layerName} {\n${theme.styles[theme_key]}\n}\n`;
+    const oldKey = OLD_THEME_KEYS_BY_WIDGET_ID[widget.id];
+    const cssFileContent = theme.styles[widget.id] || (oldKey ? theme.styles[oldKey as WidgetId] : undefined);
+    if (!cssFileContent) {
+      continue;
+    }
+    element.textContent += `@layer ${layerName} {\n${cssFileContent}\n}\n`;
   }
 
   document.head.appendChild(element);

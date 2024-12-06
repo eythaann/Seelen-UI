@@ -9,6 +9,7 @@
   "permissions": [
     "log:default",
     "core:event:default",
-    "core:webview:default"
+    "core:webview:default",
+    "dialog:default"
   ]
 }

@@ -1,21 +1,11 @@
 {
   "$schema": "../gen/schemas/windows-schema.json",
-  "identifier": "toolbar",
+  "identifier": "@seleen/fancy-toolbar",
   "windows": [
-    "seelen/fancy-toolbar*"
+    "QHNlZWxlbi9mYW5jeS10b29sYmFy*"
   ],
   "permissions": [
-    "log:default",
     "core:path:default",
-    "core:webview:default",
-    "core:event:default",
-
-    "core:window:default",
-    "core:window:allow-show",
-    "core:window:allow-set-ignore-cursor-events",
-
-    "dialog:default",
-
     "fs:allow-write-text-file",
     "fs:scope-appdata-recursive"
   ]

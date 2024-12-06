@@ -1,12 +1,12 @@
 {
   "$schema": "../gen/schemas/windows-schema.json",
   "identifier": "migrated",
-  "description": "permissions that were migrated from v1",
+  "description": "permissions that were migrated from v1. windows: [settings, weg, wm]",
   "local": true,
   "windows": [
-    "settings",
-    "seelen/weg*",
-    "seelen/window-manager*"
+    "QHNlZWxlbi9zZXR0aW5ncw",
+    "QHNlZWxlbi93ZWc*",
+    "QHNlZWxlbi93aW5kb3ctbWFuYWdlc*"
   ],
   "permissions": [
     "core:path:default",

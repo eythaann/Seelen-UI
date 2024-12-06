@@ -1,3 +1,4 @@
+use base64::Engine;
 use getset::{Getters, MutGetters};
 use seelen_core::handlers::SeelenEvent;
 use tauri::{Emitter, Listener, WebviewWindow};
@@ -23,7 +24,7 @@ impl Drop for WindowManagerV2 {
 
 impl WindowManagerV2 {
     pub const TITLE: &'static str = "Seelen Window Manager";
-    pub const TARGET: &'static str = "seelen/window-manager";
+    pub const TARGET: &'static str = "@seelen/window-manager";
 
     pub fn new(monitor_id: &str) -> Result<Self> {
         Ok(Self {
@@ -33,7 +34,9 @@ impl WindowManagerV2 {
 
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
         let label = format!("{}__query__monitor:{}", Self::TARGET, monitor_id);
-        log::info!("Creating @{}", label);
+        log::info!("Creating {}", label);
+        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
+
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
             label,

@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 
 use getset::{Getters, MutGetters};
+use seelen_core::state::WidgetId;
 
 use crate::{
     error_handler::Result,
@@ -25,7 +26,7 @@ pub struct SeelenInstanceContainer {
     weg: Option<SeelenWeg>,
     wm: Option<WindowManagerV2>,
     /// third party widgets
-    widgets: HashMap<String, WidgetInstance>,
+    widgets: HashMap<WidgetId, WidgetInstance>,
 }
 
 unsafe impl Send for SeelenInstanceContainer {}

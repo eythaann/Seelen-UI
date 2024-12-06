@@ -13,6 +13,7 @@ use crate::{
     },
     windows_api::{window::Window, AppBarData, AppBarDataEdge, WindowsApi},
 };
+use base64::Engine;
 use itertools::Itertools;
 use seelen_core::{handlers::SeelenEvent, state::HideMode};
 use serde::Serialize;
@@ -110,6 +111,7 @@ impl FancyToolbar {
 // statics
 impl FancyToolbar {
     pub const TITLE: &'static str = "Seelen Fancy Toolbar";
+    pub const TARGET: &'static str = "@seelen/fancy-toolbar";
 
     /// Work area no works fine on multiple monitors
     /// so we use this functions that only takes the toolbar in account
@@ -160,8 +162,11 @@ impl FancyToolbar {
 
     fn create_window(monitor: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
-        let label = format!("seelen/fancy-toolbar__query__monitor:{}", monitor);
-        log::info!("Creating @{}", label);
+
+        let label = format!("{}?monitor={}", Self::TARGET, monitor);
+        log::info!("Creating {}", label);
+        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
+
         let window = tauri::WebviewWindowBuilder::new(
             manager,
             label,

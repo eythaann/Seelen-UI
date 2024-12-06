@@ -3,6 +3,7 @@ pub mod handler;
 
 use std::{ffi::OsStr, path::PathBuf};
 
+use base64::Engine;
 use serde::Serialize;
 use tauri::{path::BaseDirectory, Manager, WebviewWindow};
 use windows::Win32::UI::WindowsAndMessaging::SWP_NOACTIVATE;
@@ -35,10 +36,10 @@ impl Drop for SeelenRofi {
 
 impl SeelenRofi {
     pub const TITLE: &str = "Seelen App Launcher";
-    pub const TARGET: &str = "seelen/launcher";
+    pub const TARGET: &str = "@seelen/launcher";
 
     pub fn new() -> Result<Self> {
-        log::info!("Creating @{}", Self::TARGET);
+        log::info!("Creating {}", Self::TARGET);
         Ok(Self {
             // apps should be loaded first because it takes a long time on start and its needed by webview
             apps: Self::load_apps()?,
@@ -108,9 +109,10 @@ impl SeelenRofi {
     }
 
     fn create_window() -> Result<WebviewWindow> {
+        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::TARGET);
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),
-            Self::TARGET,
+            label,
             tauri::WebviewUrl::App("seelen_rofi/index.html".into()),
         )
         .title(Self::TITLE)

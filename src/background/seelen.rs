@@ -3,6 +3,7 @@ use std::{
     sync::{atomic::AtomicBool, Arc},
 };
 
+use base64::Engine;
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
@@ -388,11 +389,12 @@ impl Seelen {
 
     pub fn show_settings() -> Result<()> {
         log::trace!("Show settings window");
+        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode("@seelen/settings");
         let handle = get_app_handle();
-        let window = handle.get_webview_window("settings").or_else(|| {
+        let window = handle.get_webview_window(&label).or_else(|| {
             tauri::WebviewWindowBuilder::new(
                 handle,
-                "settings",
+                label,
                 tauri::WebviewUrl::App("settings/index.html".into()),
             )
             .title("Settings")

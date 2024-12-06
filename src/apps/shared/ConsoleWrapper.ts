@@ -1,6 +1,5 @@
-import { getCurrentWebview } from '@tauri-apps/api/webview';
 import * as Logger from '@tauri-apps/plugin-log';
-import { disableWebviewShortcutsAndContextMenu } from 'seelen-core';
+import { disableWebviewShortcutsAndContextMenu, getCurrentWidget } from 'seelen-core';
 
 export function wrapConsole() {
   const WebConsole = {
@@ -11,11 +10,11 @@ export function wrapConsole() {
     trace: console.trace,
   };
 
-  const label = getCurrentWebview().label;
+  const widget = getCurrentWidget();
+  Logger.info(`Registering ${widget.label} webview console as logger`);
   const StringifyParams = (params: any[]): string => {
     return (
-      label +
-      ':' +
+      `[${widget.id}]: ` +
       params.reduce((a, b) => {
         if (typeof b === 'string') {
           return a + ' ' + b;

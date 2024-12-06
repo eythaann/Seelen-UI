@@ -16,7 +16,8 @@ use notify_debouncer_full::{
 };
 use parking_lot::Mutex;
 use seelen_core::state::{
-    IconPack, Plugin, Profile, VirtualDesktopStrategy, WegItems, Widget, WindowManagerLayout,
+    IconPack, Plugin, PluginId, Profile, VirtualDesktopStrategy, WegItems, Widget, WidgetId,
+    WindowManagerLayout,
 };
 use std::{
     collections::{HashMap, VecDeque},
@@ -80,8 +81,8 @@ pub struct FullState {
     pub weg_items: Arc<Mutex<WegItems>>,
     pub launcher_history: LauncherHistory,
 
-    pub plugins: HashMap<String, Plugin>,
-    pub widgets: HashMap<String, Widget>,
+    pub plugins: HashMap<PluginId, Plugin>,
+    pub widgets: HashMap<WidgetId, Widget>,
 }
 
 unsafe impl Sync for FullState {}
@@ -350,23 +351,38 @@ impl FullState {
         let mut theme = Self::load_theme_from_file(file)?;
 
         if path.join("theme.weg.css").exists() {
-            theme.styles.weg = std::fs::read_to_string(path.join("theme.weg.css"))?;
+            theme.styles.insert(
+                WidgetId("weg".into()),
+                std::fs::read_to_string(path.join("theme.weg.css"))?,
+            );
         }
 
         if path.join("theme.toolbar.css").exists() {
-            theme.styles.toolbar = std::fs::read_to_string(path.join("theme.toolbar.css"))?;
+            theme.styles.insert(
+                WidgetId("toolbar".into()),
+                std::fs::read_to_string(path.join("theme.toolbar.css"))?,
+            );
         }
 
         if path.join("theme.wm.css").exists() {
-            theme.styles.wm = std::fs::read_to_string(path.join("theme.wm.css"))?;
+            theme.styles.insert(
+                WidgetId("wm".into()),
+                std::fs::read_to_string(path.join("theme.wm.css"))?,
+            );
         }
 
         if path.join("theme.launcher.css").exists() {
-            theme.styles.launcher = std::fs::read_to_string(path.join("theme.launcher.css"))?;
+            theme.styles.insert(
+                WidgetId("launcher".into()),
+                std::fs::read_to_string(path.join("theme.launcher.css"))?,
+            );
         }
 
         if path.join("theme.wall.css").exists() {
-            theme.styles.wall = std::fs::read_to_string(path.join("theme.wall.css"))?;
+            theme.styles.insert(
+                WidgetId("wall".into()),
+                std::fs::read_to_string(path.join("theme.wall.css"))?,
+            );
         }
 
         Ok(theme)

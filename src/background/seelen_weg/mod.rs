@@ -5,6 +5,7 @@ pub mod icon_extractor;
 
 use std::{collections::HashMap, path::PathBuf, thread::JoinHandle};
 
+use base64::Engine;
 use getset::{Getters, MutGetters};
 use icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 use image::{DynamicImage, RgbaImage};
@@ -337,12 +338,14 @@ impl SeelenWeg {
 
 impl SeelenWeg {
     pub const TITLE: &'static str = "SeelenWeg";
-    const TARGET: &'static str = "seelen/weg";
+    const TARGET: &'static str = "@seelen/weg";
 
     fn create_window(postfix: &str) -> Result<WebviewWindow> {
         let manager = get_app_handle();
-        let label = format!("{}__query__monitor:{}", Self::TARGET, postfix);
-        log::info!("Creating @{}", label);
+
+        let label = format!("{}?monitor={}", Self::TARGET, postfix);
+        log::info!("Creating {}", label);
+        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 
         let window = tauri::WebviewWindowBuilder::new(
             manager,

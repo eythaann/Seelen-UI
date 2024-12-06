@@ -1,3 +1,4 @@
+use base64::Engine;
 use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
@@ -26,11 +27,12 @@ pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<(
 
 // will fail after 10 seconds if the webview is not in optimal state
 pub fn wait_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
+    let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode("@seelen/integrity");
     let attempts = 0;
     let check = || -> Result<()> {
         let window = tauri::WebviewWindowBuilder::new(
             app,
-            "INTEGRITY",
+            &label,
             tauri::WebviewUrl::App("integrity/index.html".into()),
         )
         .visible(false)

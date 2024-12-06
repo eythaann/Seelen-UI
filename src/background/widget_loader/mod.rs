@@ -16,7 +16,7 @@ impl WidgetInstance {
     }
 
     fn create_window(widget: &Widget) -> Result<tauri::WebviewWindow> {
-        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&widget.id);
+        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(widget.id.to_string());
 
         let window = tauri::WebviewWindowBuilder::new(
             get_app_handle(),

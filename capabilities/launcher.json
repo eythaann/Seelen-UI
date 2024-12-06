@@ -1,16 +1,10 @@
 {
   "$schema": "../gen/schemas/windows-schema.json",
-  "identifier": "launcher",
+  "identifier": "@seelen/launcher",
   "windows": [
-    "seelen/launcher"
+    "QHNlZWxlbi9sYXVuY2hlcg"
   ],
   "permissions": [
-    "log:default",
-    "core:webview:default",
-    "core:event:default",
-    "core:window:default",
-    "core:window:allow-set-ignore-cursor-events",
-    "core:window:allow-hide",
     "core:path:default",
     "fs:allow-write-text-file"
   ]

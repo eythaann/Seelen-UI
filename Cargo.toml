@@ -17,7 +17,7 @@ name = "seelen-ui"
 path = "src/background/main.rs"
 
 [profile.dev]
-incremental = true
+# incremental = true
 rustflags = ["-Z", "threads=8"]
 
 [profile.release]
@@ -31,7 +31,6 @@ rustflags = ["-Z", "threads=8"]
 tauri-build = { version = "2.0.0-rc", features = [] }
 
 [dependencies]
-seelen-core = { git = "https://github.com/Seelen-Inc/slu-lib.git" }
 tauri = { version = "2.0.0-rc", features = [
     "protocol-asset",
     "tray-icon",
@@ -76,6 +75,10 @@ evalexpr = "=11.3.0"
 quick-xml = { version = "0.36.2", features = ["serialize", "encoding"] }
 backtrace = "0.3.71"
 owo-colors = "4.1.0"
+
+[dependencies.seelen-core]
+git = "https://github.com/Seelen-Inc/slu-lib.git" # for release/pre-release/nightly
+# path = "../slu-lib"                               # for local development
 
 [dependencies.windows]
 version = "=0.58.0"

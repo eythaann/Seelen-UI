@@ -1,5 +1,6 @@
 mod hook;
 
+use base64::Engine;
 use tauri::WebviewWindow;
 use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT, WPARAM},
@@ -29,10 +30,10 @@ impl Drop for SeelenWall {
 
 impl SeelenWall {
     pub const TITLE: &str = "Seelen Wall";
-    const TARGET: &str = "seelen/wall";
+    const TARGET: &str = "@seelen/wall";
 
     pub fn new() -> Result<Self> {
-        log::info!("Creating @{}", Self::TARGET);
+        log::info!("Creating {}", Self::TARGET);
         Ok(Self {
             window: Self::create_window()?,
         })
@@ -40,9 +41,10 @@ impl SeelenWall {
 
     fn create_window() -> Result<WebviewWindow> {
         let handle = get_app_handle();
+        let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(Self::TARGET);
         let window = tauri::WebviewWindowBuilder::new(
             handle,
-            Self::TARGET,
+            label,
             tauri::WebviewUrl::App("seelen_wall/index.html".into()),
         )
         .title(Self::TITLE)
