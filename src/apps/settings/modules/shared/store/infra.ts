@@ -2,7 +2,18 @@ import { configureStore } from '@reduxjs/toolkit';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
-import { AppConfiguration, PluginList, ProfileList, SeelenEvent, Settings, Theme, UIColors, WidgetList } from 'seelen-core';
+import {
+  AppConfiguration,
+  ConnectedMonitorList,
+  MonitorConfiguration,
+  PluginList,
+  ProfileList,
+  SeelenEvent,
+  Settings,
+  Theme,
+  UIColors,
+  WidgetList,
+} from 'seelen-core';
 
 import { startup } from '../tauri/infra';
 
@@ -29,6 +40,21 @@ export type store = {
   dispatch: AppDispatch;
   getState: () => RootState;
 };
+
+// ======================
+
+function setMonitorsOnState(list: ConnectedMonitorList) {
+  const monitors = list.all();
+  store.dispatch(RootActions.setConnectedMonitors(monitors));
+  const settingsByMonitor = { ...store.getState().monitorsV2 };
+  for (const monitor of monitors) {
+    if (!settingsByMonitor[monitor.id]) {
+      settingsByMonitor[monitor.id] = new MonitorConfiguration();
+    }
+  }
+  console.log({ monitors, settingsByMonitor });
+  store.dispatch(RootActions.setMonitorsV2(settingsByMonitor));
+}
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
@@ -77,6 +103,8 @@ export async function registerStoreEvents() {
   await WidgetList.onChange((list) => {
     store.dispatch(RootActions.setWidgets(list.all()));
   });
+
+  await ConnectedMonitorList.onChange(setMonitorsOnState);
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
@@ -89,7 +117,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
     .withPlaceholders()
     .withUserApps()
     .withThemes()
-    .withWallpaper()
+    .withSystemWallpaper()
     .load(customPath);
 
   const currentState = store.getState();
@@ -100,11 +128,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));
   store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).toArray()));
-
-  /* // !customPath => avoid start user on manual user loading file
-  if (!Object.keys(userSettings.jsonSettings).length && !customPath) {
-    StartUser();
-  } */
+  setMonitorsOnState(await ConnectedMonitorList.getAsync());
 };
 
 export const SaveStore = async () => {

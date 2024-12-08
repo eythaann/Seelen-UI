@@ -7,6 +7,7 @@
 ### refactor
 - themes now use widget ids instead hard-coded keys.
 - improvements on events propagation.
+- improvements on settings by monitor implementation.
 
 ## [2.0.8]
 ### enhancements

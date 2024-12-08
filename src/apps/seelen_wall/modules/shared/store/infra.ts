@@ -27,7 +27,7 @@ export async function initStore() {
     store.dispatch(Actions.setStop(payload));
   });
 
-  webview.listen(SeelenEvent.GlobalMonitorsChanged, () => {
+  webview.listen(SeelenEvent.SystemMonitorsChanged, () => {
     let version = store.getState().version;
     store.dispatch(Actions.setVersion(version + 1));
   });

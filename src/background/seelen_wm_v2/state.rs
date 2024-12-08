@@ -12,7 +12,7 @@ use crate::{
     error_handler::Result,
     modules::{input::domain::Point, virtual_desk::get_vd_manager},
     state::application::FULL_STATE,
-    windows_api::{monitor::Monitor, window::Window, MonitorEnumerator, WindowsApi},
+    windows_api::{monitor::Monitor, window::Window, MonitorEnumerator},
 };
 
 use super::{cli::Axis, node_impl::WmNodeImpl};
@@ -46,7 +46,7 @@ pub struct WmV2State {
 }
 
 impl WmV2StateWorkspace {
-    pub fn new(monitor_idx: usize, workspace_idx: usize) -> Self {
+    pub fn new(monitor: &Monitor, workspace_idx: usize) -> Self {
         let mut workspace = Self {
             layout_info: None,
             root: None,
@@ -54,7 +54,7 @@ impl WmV2StateWorkspace {
         };
 
         let settings = FULL_STATE.load();
-        let layout_id = settings.get_wm_layout_id(monitor_idx, workspace_idx);
+        let layout_id = settings.get_wm_layout_id(monitor, workspace_idx);
         if let Some(l) = settings.layouts.get(&layout_id).cloned() {
             workspace.layout_info = Some(l.info);
             workspace.root = Some(WmNodeImpl::new(l.structure));
@@ -105,10 +105,10 @@ impl WmV2StateWorkspace {
 }
 
 impl WmV2StateMonitor {
-    pub fn create_workspace(monitor_idx: usize, workspace_id: &str) -> Result<WmV2StateWorkspace> {
+    pub fn create_workspace(monitor: &Monitor, workspace_id: &str) -> Result<WmV2StateWorkspace> {
         for (workspace_idx, w) in get_vd_manager().get_all()?.iter().enumerate() {
             if w.id() == workspace_id {
-                return Ok(WmV2StateWorkspace::new(monitor_idx, workspace_idx));
+                return Ok(WmV2StateWorkspace::new(monitor, workspace_idx));
             }
         }
         Err("Invalid workspace id".into())
@@ -118,11 +118,8 @@ impl WmV2StateMonitor {
         match self.workspaces.entry(workspace_id.to_string()) {
             Entry::Occupied(e) => e.into_mut(),
             Entry::Vacant(e) => {
-                let monitor_idx = Monitor::by_id(&self.id)
-                    .expect("Failed to get monitor")
-                    .index()
-                    .expect("Failed to get monitor index");
-                let new_workspace = Self::create_workspace(monitor_idx, workspace_id)
+                let monitor = Monitor::by_id(&self.id).expect("Failed to get monitor");
+                let new_workspace = Self::create_workspace(&monitor, workspace_id)
                     .expect("Failed to ensure workspace");
                 e.insert(new_workspace)
             }
@@ -148,25 +145,24 @@ impl WmV2State {
     /// will enumarate all monitors and workspaces
     pub fn init(&mut self) -> Result<()> {
         let workspaces = get_vd_manager().get_all()?;
-        for (monitor_idx, hmonitor) in MonitorEnumerator::get_all()?.into_iter().enumerate() {
-            let id = WindowsApi::monitor_name(hmonitor)?;
+        for monitor in MonitorEnumerator::get_all_v2()? {
+            let id = monitor.id()?;
             if self.monitors.contains_key(&id) {
                 continue;
             }
 
-            let mut monitor = WmV2StateMonitor::default();
+            let mut wm_monitor = WmV2StateMonitor::default();
             for (workspace_idx, w) in workspaces.iter().enumerate() {
-                if monitor.workspaces.contains_key(&w.id()) {
+                if wm_monitor.workspaces.contains_key(&w.id()) {
                     continue;
                 }
-
-                monitor
+                wm_monitor
                     .workspaces
-                    .insert(w.id(), WmV2StateWorkspace::new(monitor_idx, workspace_idx));
+                    .insert(w.id(), WmV2StateWorkspace::new(&monitor, workspace_idx));
             }
 
-            monitor.id = id.clone();
-            self.monitors.insert(id, monitor);
+            wm_monitor.id = id.clone();
+            self.monitors.insert(id, wm_monitor);
         }
         Ok(())
     }

@@ -27,4 +27,5 @@ export interface RootState extends Settings {
   plugins: Plugin[];
   widgets: Widget[];
   profiles: Profile[];
+  connectedMonitors: any[];
 }

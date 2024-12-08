@@ -2,7 +2,7 @@ import { Button, Modal, Switch } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { MonitorConfiguration, Rect } from 'seelen-core';
+import { ConnectedMonitor, MonitorConfiguration, Rect } from 'seelen-core';
 
 import { WindowManagerSpacingSettings } from '../../WindowManager/main/infra/GlobalPaddings';
 
@@ -13,28 +13,20 @@ import { SettingsGroup, SettingsOption } from 'src/apps/settings/components/Sett
 import cs from './index.module.css';
 
 interface MonitorConfigProps {
-  index: number;
-  monitor: MonitorConfiguration;
-  onChange: (monitor: MonitorConfiguration) => void;
-  onDelete: () => void;
-  onInsert: () => void;
-}
-
-interface MoreMonitorConfigProps {
-  index: number;
-  monitor: MonitorConfiguration;
+  device: ConnectedMonitor;
+  config: MonitorConfiguration;
   onChange: (monitor: MonitorConfiguration) => void;
 }
 
-export function MoreMonitorConfig({ index, monitor: m, onChange }: MoreMonitorConfigProps) {
+export function MoreMonitorConfig({ device, config, onChange }: MonitorConfigProps) {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
 
   function onChangeGap(v: number | null) {
     onChange({
-      ...m,
+      ...config,
       wm: {
-        ...m.wm,
+        ...config.wm,
         gap: v ? Math.round(v) : null,
       },
     });
@@ -42,9 +34,9 @@ export function MoreMonitorConfig({ index, monitor: m, onChange }: MoreMonitorCo
 
   function onChangePadding(v: number | null) {
     onChange({
-      ...m,
+      ...config,
       wm: {
-        ...m.wm,
+        ...config.wm,
         padding: v ? Math.round(v) : null,
       },
     });
@@ -52,11 +44,11 @@ export function MoreMonitorConfig({ index, monitor: m, onChange }: MoreMonitorCo
 
   function onChangeMargins(side: keyof Rect, v: number | null) {
     onChange({
-      ...m,
+      ...config,
       wm: {
-        ...m.wm,
+        ...config.wm,
         margin: {
-          ...(m.wm.margin || new Rect()),
+          ...(config.wm.margin || new Rect()),
           [side]: Math.round(v || 0),
         },
       },
@@ -65,9 +57,9 @@ export function MoreMonitorConfig({ index, monitor: m, onChange }: MoreMonitorCo
 
   function onClear() {
     onChange({
-      ...m,
+      ...config,
       wm: {
-        ...m.wm,
+        ...config.wm,
         gap: null,
         padding: null,
         margin: null,
@@ -82,16 +74,16 @@ export function MoreMonitorConfig({ index, monitor: m, onChange }: MoreMonitorCo
         {t('more')}
       </Button>
       <Modal
-        title={t('monitors_configurations.label').replace('{{index}}', `${index + 1}`)}
+        title={t('monitors_configurations.label').replace('{{index}}', device.name)}
         open={open}
         onCancel={() => setOpen(false)}
         centered
         footer={null}
       >
         <WindowManagerSpacingSettings
-          gap={m.wm.gap}
-          padding={m.wm.padding}
-          margins={m.wm.margin}
+          gap={config.wm.gap}
+          padding={config.wm.padding}
+          margins={config.wm.margin}
           onChangeGap={onChangeGap}
           onChangePadding={onChangePadding}
           onChangeMargins={onChangeMargins}
@@ -102,18 +94,12 @@ export function MoreMonitorConfig({ index, monitor: m, onChange }: MoreMonitorCo
   );
 }
 
-export function MonitorConfig({
-  monitor: m,
-  index,
-  onChange,
-  onDelete,
-  onInsert,
-}: MonitorConfigProps) {
+export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) {
   const { t } = useTranslation();
 
   function onToggle(key: string, value: boolean) {
     onChange({
-      ...m,
+      ...config,
       [key]: {
         enabled: value,
       },
@@ -124,75 +110,72 @@ export function MonitorConfig({
     <SettingsGroup>
       <div className={cs.itemContainer}>
         <div className={cs.itemLeft}>
-          <Monitor />
-          <div className={cs.actions}>
-            <Button type="primary" danger onClick={onDelete} disabled={index === 0}>
+          <div className={cs.label}>{device.name}</div>
+          <Monitor width={device.width} height={device.height} />
+          {/* <div className={cs.actions}>
+            <Button type="primary" danger>
               {t('delete')}
             </Button>
-            <Button type="primary" onClick={onInsert}>
-              {t('insert')}
-            </Button>
-            <MoreMonitorConfig index={index} monitor={m} onChange={onChange} />
-          </div>
+            <Button type="primary">{t('insert')}</Button>
+            <MoreMonitorConfig device={device} config={config} onChange={onChange} />
+          </div> */}
         </div>
-        <SettingsGroup>
-          <SettingsOption>
-            <b>{t('toolbar.enable')}</b>
-            <Switch value={m.tb.enabled} onChange={(v) => onToggle('tb', v)} />
-          </SettingsOption>
-          {/* <SettingsOption>
-            <b>{t('wm.enable')}</b>
-            <Switch value={m.wm.enabled} onChange={(v) => onToggle('wm', v)} />
-          </SettingsOption> */}
-          <SettingsOption>
-            <b>{t('weg.enable')}</b>
-            <Switch value={m.weg.enabled} onChange={(v) => onToggle('weg', v)} />
-          </SettingsOption>
-          {/* <SettingsOption>
-            <b>{t('wall.enable')}</b>
-            <Switch value={m.wall.enabled} onChange={(v) => onToggle('wall', v)} />
-          </SettingsOption> */}
-        </SettingsGroup>
+        <div className={cs.itemRight}>
+          <SettingsGroup>
+            <SettingsOption>
+              <b>{t('toolbar.enable')}</b>
+              <Switch value={config.tb.enabled} onChange={(v) => onToggle('tb', v)} />
+            </SettingsOption>
+            <SettingsOption>
+              <b>{t('wm.enable')}</b>
+              <Switch value={config.wm.enabled} onChange={(v) => onToggle('wm', v)} disabled />
+            </SettingsOption>
+            <SettingsOption>
+              <b>{t('weg.enable')}</b>
+              <Switch value={config.weg.enabled} onChange={(v) => onToggle('weg', v)} />
+            </SettingsOption>
+            <SettingsOption>
+              <b>{t('wall.enable')}</b>
+              <Switch value={config.wall.enabled} onChange={(v) => onToggle('wall', v)} disabled />
+            </SettingsOption>
+          </SettingsGroup>
+        </div>
       </div>
     </SettingsGroup>
   );
 }
 
 export function SettingsByMonitor() {
-  const monitors = useSelector(newSelectors.monitors);
+  const devices = useSelector(newSelectors.connectedMonitors);
+  const monitors = useSelector(newSelectors.monitorsV2);
 
   const dispatch = useDispatch();
 
-  function onMonitorChange(idx: number, monitor: MonitorConfiguration) {
-    let newMonitors = [...monitors];
-    newMonitors[idx] = monitor;
-    dispatch(RootActions.setMonitors(newMonitors));
-  }
-
-  function insertNewAfter(idx: number) {
-    let newMonitors = [...monitors];
-    newMonitors.splice(idx + 1, 0, new MonitorConfiguration());
-    dispatch(RootActions.setMonitors(newMonitors));
-  }
-
-  function onDelete(idx: number) {
-    let newMonitors = [...monitors];
-    newMonitors.splice(idx, 1);
-    dispatch(RootActions.setMonitors(newMonitors));
+  function onMonitorChange(id: string, monitor: MonitorConfiguration) {
+    dispatch(
+      RootActions.setMonitors({
+        ...monitors,
+        [id]: monitor,
+      }),
+    );
   }
 
   return (
     <>
-      {monitors.map((m, idx) => (
-        <MonitorConfig
-          key={idx}
-          index={idx}
-          monitor={m}
-          onChange={onMonitorChange.bind(null, idx)}
-          onDelete={onDelete.bind(null, idx)}
-          onInsert={insertNewAfter.bind(null, idx)}
-        />
-      ))}
+      {Object.entries(monitors).map(([id, monitor]) => {
+        let device = devices.find((d) => d.id === id);
+        if (!device) {
+          return null;
+        }
+        return (
+          <MonitorConfig
+            key={id}
+            device={device}
+            config={monitor}
+            onChange={onMonitorChange.bind(null, id)}
+          />
+        );
+      })}
     </>
   );
 }

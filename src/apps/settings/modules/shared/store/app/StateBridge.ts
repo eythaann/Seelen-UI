@@ -25,7 +25,7 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'seelenweg',
     'iconPacks',
     'selectedThemes',
-    'monitors',
+    'monitorsV2',
     'ahkEnabled',
     'ahkVariables',
     'devTools',
@@ -35,5 +35,6 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'updater',
     'wall',
     'launcher',
+    'custom',
   ]);
 };

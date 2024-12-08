@@ -1,14 +1,23 @@
 .itemContainer {
-  display: flex;
-  align-items: center;
+  height: 35vh;
+  display: grid;
+  grid-template-columns: minmax(35vh, 1fr) 2fr;
+  grid-template-rows: 100%;
   gap: 10px;
 
   .itemLeft {
-    display: flex;
+    display: grid;
+    grid-template-rows: min-content 1fr;
+    justify-items: center;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
     gap: 5px;
+
+    .label {
+      font-weight: 600;
+      font-size: 1.2rem;
+      line-height: 1.2em;
+      text-align: center;
+    }
 
     .actions {
       display: flex;
@@ -20,5 +29,10 @@
         flex: 1;
       }
     }
+  }
+
+  .itemRight {
+    overflow-y: auto;
+    min-height: 100%;
   }
 }

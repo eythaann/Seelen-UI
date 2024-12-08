@@ -1,3 +1,4 @@
+import { convertFileSrc } from '@tauri-apps/api/core';
 import { motion, useAnimationControls } from 'framer-motion';
 import { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
@@ -7,27 +8,48 @@ import { newSelectors } from '../../modules/shared/store/app/reducer';
 import { cx } from '../../../shared/styles';
 import cs from './index.module.css';
 
-interface Props extends PropsWithChildren, React.HTMLAttributes<HTMLDivElement> {}
+interface Props extends PropsWithChildren, React.HTMLAttributes<HTMLDivElement> {
+  width?: number;
+  height?: number;
+}
 
-export function Monitor({ children, className, ...props }: Props) {
-  const wallpaper = useSelector(newSelectors.wallpaper);
+export function Monitor({ children, className, width = 1920, height = 1080, ...props }: Props) {
+  const seleenWallpaper = useSelector(newSelectors.wall.backgrounds);
+  const systemWallpaper = useSelector(newSelectors.wallpaper);
+
   const controls = useAnimationControls();
 
+  const wallpaper = seleenWallpaper[0]?.path || systemWallpaper;
+
+  const style: React.CSSProperties = {
+    aspectRatio: `${width} / ${height}`,
+  };
+  if (width > height) {
+    style.width = '100%';
+  } else {
+    style.height = '100%';
+  }
+
   return (
-    <div className={cx(cs.monitor, className)} {...props}>
-      <div className={cs.screen}>
-        {wallpaper && (
-          <motion.img
-            className={cs.wallpaper}
-            src={wallpaper}
-            initial={{ opacity: 0 }}
-            animate={controls}
-            onLoad={() => {
-              controls.start({ opacity: 1, transition: { duration: 0.3, ease: 'linear' } });
-            }}
-          />
-        )}
-        {children}
+    <div className={cs.monitorContainer} {...props}>
+      <div
+        className={cx(cs.monitor, className)}
+        style={style}
+      >
+        <div className={cs.screen}>
+          {wallpaper && (
+            <motion.img
+              className={cs.wallpaper}
+              src={convertFileSrc(wallpaper)}
+              initial={{ opacity: 0 }}
+              animate={controls}
+              onLoad={() => {
+                controls.start({ opacity: 1, transition: { duration: 0.3, ease: 'linear' } });
+              }}
+            />
+          )}
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 use windows::Win32::Graphics::Gdi::HMONITOR;
+use windows_core::PCWSTR;
 
 use crate::{error_handler::Result, modules::input::domain::Point};
+use seelen_core::rect::Rect;
 
 use super::{MonitorEnumerator, WindowsApi};
 
@@ -28,13 +30,37 @@ impl From<&Point> for Monitor {
     }
 }
 
+#[derive(Debug, Clone)]
+pub struct DisplayDevice {
+    pub id: String,
+    pub name: String,
+}
+
 impl Monitor {
     pub fn raw(&self) -> HMONITOR {
         self.0
     }
 
+    /// display name
     pub fn id(&self) -> Result<String> {
         WindowsApi::monitor_name(self.0)
+    }
+
+    pub fn display_device(&self) -> Result<DisplayDevice> {
+        let device = WindowsApi::get_display_device(self.0)?;
+        let buffer_id = device.DeviceID;
+        let buffer_name = device.DeviceString;
+        let id = PCWSTR::from_raw(buffer_id.as_ptr());
+        let name = PCWSTR::from_raw(buffer_name.as_ptr());
+        Ok(DisplayDevice {
+            id: unsafe { id.to_string()? },
+            name: unsafe { name.to_string()? },
+        })
+    }
+
+    pub fn rect(&self) -> Result<Rect> {
+        let info = WindowsApi::monitor_info(self.0)?;
+        Ok(Rect::from(info.monitorInfo.rcMonitor))
     }
 
     pub fn index(&self) -> Result<usize> {

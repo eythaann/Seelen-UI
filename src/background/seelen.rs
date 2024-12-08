@@ -7,8 +7,7 @@ use base64::Engine;
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::handlers::SeelenEvent;
-use tauri::{AppHandle, Emitter, Manager, Wry};
+use tauri::{AppHandle, Manager, Wry};
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Graphics::Gdi::HMONITOR;
 use winreg::{
@@ -171,7 +170,6 @@ impl Seelen {
                 }
             }
         }
-        log_error!(get_app_handle().emit(SeelenEvent::GlobalMonitorsChanged, ()));
     }
 
     async fn start_async() -> Result<()> {

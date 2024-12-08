@@ -1,9 +1,15 @@
+.monitorContainer {
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .monitor {
-  height: 144px;
-  width: 256px;
   border-radius: 12px;
   background-color: var(--color-persist-gray-800);
-  padding: 8px;
+  padding: 5px;
 
   .screen {
     position: relative;

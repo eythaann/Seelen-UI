@@ -31,7 +31,8 @@ const getAppSelector = (idx: number | undefined, isNew: boolean) =>
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
   const { t } = useTranslation();
 
-  const monitors = useSelector(RootSelectors.monitors);
+  const _monitors = useSelector(RootSelectors.monitorsV2);
+  const monitors = Object.values(_monitors);
   const _app = useSelector(getAppSelector(idx, !!isNew));
   const initialState = readonlyApp || _app;
   const isReadonly = !!readonlyApp;

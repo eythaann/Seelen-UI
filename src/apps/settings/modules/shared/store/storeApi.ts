@@ -1,5 +1,5 @@
 import { path } from '@tauri-apps/api';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
 import { SeelenCommand } from 'seelen-core';
 
@@ -31,7 +31,7 @@ export class UserSettingsLoader {
     return this;
   }
 
-  withWallpaper() {
+  withSystemWallpaper() {
     this._withWallpaper = true;
     return this;
   }
@@ -78,8 +78,7 @@ export class UserSettingsLoader {
     }
 
     if (this._withWallpaper) {
-      let wallpaper = await invoke<string>(SeelenCommand.StateGetWallpaper);
-      userSettings.wallpaper = wallpaper ? convertFileSrc(wallpaper) : null;
+      userSettings.wallpaper = await invoke(SeelenCommand.StateGetWallpaper);
     }
 
     return userSettings;

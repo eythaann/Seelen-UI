@@ -48,8 +48,9 @@ use windows::{
                 DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint, MonitorFromWindow, HDC,
-                HMONITOR, MONITORENUMPROC, MONITORINFOEXW, MONITOR_DEFAULTTOPRIMARY,
+                EnumDisplayDevicesW, EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint,
+                MonitorFromWindow, DISPLAY_DEVICEW, HDC, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
+                MONITOR_DEFAULTTOPRIMARY,
             },
         },
         Security::{
@@ -87,14 +88,14 @@ use windows::{
                 GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
                 PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, GWL_EXSTYLE, GWL_STYLE, GW_OWNER, HWND_TOP,
-                SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN,
-                SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE,
-                SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER,
-                SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER,
-                SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
-                WS_SIZEBOX, WS_THICKFRAME,
+                SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
+                GWL_STYLE, GW_OWNER, HWND_TOP, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+                SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
+                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
+                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL,
+                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
+                WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -651,20 +652,35 @@ impl WindowsApi {
         unsafe { MonitorFromWindow(GetDesktopWindow(), MONITOR_DEFAULTTOPRIMARY) }
     }
 
-    /// handle of PHYSICAL_MONITOR is bugged and will be always 0
-    pub fn primary_physical_monitor() -> Result<PHYSICAL_MONITOR> {
-        let hmonitor = Self::primary_monitor();
-
+    pub fn physical_monitors(monitor: HMONITOR) -> Result<Vec<PHYSICAL_MONITOR>> {
         let mut c_physical_monitors: u32 = 0;
         let mut p_physical_monitors: Vec<PHYSICAL_MONITOR> = Vec::new();
 
         unsafe {
-            GetNumberOfPhysicalMonitorsFromHMONITOR(hmonitor, &mut c_physical_monitors)?;
+            GetNumberOfPhysicalMonitorsFromHMONITOR(monitor, &mut c_physical_monitors)?;
             p_physical_monitors.resize(c_physical_monitors as usize, std::mem::zeroed());
-            GetPhysicalMonitorsFromHMONITOR(hmonitor, p_physical_monitors.as_mut())?;
+            GetPhysicalMonitorsFromHMONITOR(monitor, p_physical_monitors.as_mut())?;
         };
 
-        Ok(p_physical_monitors[0])
+        Ok(p_physical_monitors)
+    }
+
+    pub fn get_display_device(monitor: HMONITOR) -> Result<DISPLAY_DEVICEW> {
+        let info = Self::monitor_info(monitor)?;
+        let lpdevice = PCWSTR::from_raw(info.szDevice.as_ptr());
+        let mut display = DISPLAY_DEVICEW {
+            cb: std::mem::size_of::<DISPLAY_DEVICEW>() as u32,
+            ..Default::default()
+        };
+        unsafe {
+            EnumDisplayDevicesW(lpdevice, 0, &mut display, EDD_GET_DEVICE_INTERFACE_NAME).ok()?
+        };
+        Ok(display)
+    }
+
+    /// handle of PHYSICAL_MONITOR is bugged and will be always 0
+    pub fn primary_physical_monitor() -> Result<PHYSICAL_MONITOR> {
+        Ok(Self::physical_monitors(Self::primary_monitor())?[0])
     }
 
     pub fn monitor_index(hmonitor: HMONITOR) -> Result<usize> {

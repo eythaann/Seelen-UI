@@ -33,7 +33,8 @@ const initialState: RootState = {
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,
-  monitors: [],
+  monitorsV2: {},
+  connectedMonitors: [],
   appsConfigurations: AppsConfigSlice.getInitialState(),
   ahkEnabled: true,
   ahkVariables: AhkVariablesSlice.getInitialState(),
@@ -54,6 +55,7 @@ const initialState: RootState = {
   plugins: [],
   widgets: [],
   profiles: [],
+  custom: {},
 };
 
 function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {
@@ -86,7 +88,7 @@ export const RootSlice = createSlice({
     setLauncher: toBeSaved(reducers.setLauncher),
     setDevTools: toBeSaved(reducers.setDevTools),
     setUpdater: toBeSavedAndRestarted(reducers.setUpdater),
-    setMonitors: toBeSaved(reducers.setMonitors),
+    setMonitors: toBeSaved(reducers.setMonitorsV2),
     setLanguage: (state, action: PayloadAction<string>) => {
       state.language = action.payload;
       state.toBeSaved = true;

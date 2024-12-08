@@ -91,13 +91,13 @@ impl SeelenInstanceContainer {
     }
 
     pub fn load_settings(&mut self, settings: &FullState) -> Result<()> {
-        if settings.is_bar_enabled_on_monitor(self.monitor.index()?) {
+        if settings.is_bar_enabled_on_monitor(self.monitor()) {
             self.add_toolbar()?;
         } else {
             self.toolbar = None;
         }
 
-        if settings.is_weg_enabled_on_monitor(self.monitor.index()?) {
+        if settings.is_weg_enabled_on_monitor(self.monitor()) {
             self.add_weg()?;
         } else {
             self.weg = None;

@@ -23,6 +23,7 @@ use crate::winevent::{SyntheticFullscreenData, WinEvent};
 use crate::{log_error, utils};
 
 use crate::modules::media::infrastructure::*;
+use crate::modules::monitors::infrastructure::*;
 use crate::modules::network::infrastructure::*;
 use crate::modules::notifications::infrastructure::*;
 use crate::modules::power::infrastructure::*;
@@ -177,6 +178,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         simulate_fullscreen,
         check_for_updates,
         install_last_available_update,
+        get_connected_monitors,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,
