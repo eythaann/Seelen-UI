@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.9]
 ### enhancements
 - add `XboxGameBarWidgets.exe` to the bundled apps settings list.
 
