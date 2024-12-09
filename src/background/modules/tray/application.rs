@@ -178,7 +178,7 @@ impl TrayIcon {
         let icon = extract_and_save_icon_from_file(&path)?;
         Ok(icon
             .to_string_lossy()
-            .trim_start_matches("\\\\?\\")
+            .trim_start_matches(r"\\?\")
             .to_string())
     }
 

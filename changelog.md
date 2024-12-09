@@ -9,6 +9,9 @@
 - improvements on events propagation.
 - improvements on settings by monitor implementation.
 
+### fix
+- window manager not working properly.
+
 ## [2.0.8]
 ### enhancements
 - add task manager shortcut on toolbar and dock context menu.

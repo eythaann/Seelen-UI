@@ -41,9 +41,9 @@ impl Monitor {
         self.0
     }
 
-    /// display name
-    pub fn id(&self) -> Result<String> {
-        WindowsApi::monitor_name(self.0)
+    /// display device id
+    pub fn device_id(&self) -> Result<String> {
+        Ok(self.display_device()?.id)
     }
 
     pub fn display_device(&self) -> Result<DisplayDevice> {
@@ -53,7 +53,9 @@ impl Monitor {
         let id = PCWSTR::from_raw(buffer_id.as_ptr());
         let name = PCWSTR::from_raw(buffer_name.as_ptr());
         Ok(DisplayDevice {
-            id: unsafe { id.to_string()? },
+            id: unsafe { id.to_string()? }
+                .trim_start_matches(r"\\?\")
+                .to_owned(),
             name: unsafe { name.to_string()? },
         })
     }
@@ -68,15 +70,15 @@ impl Monitor {
     }
 
     pub fn at(index: usize) -> Option<Monitor> {
-        let monitors = MonitorEnumerator::get_all().ok()?;
-        monitors.get(index).map(|m| Self::from(*m))
+        let monitors = MonitorEnumerator::get_all_v2().ok()?;
+        monitors.get(index).copied()
     }
 
     pub fn by_id(id: &str) -> Option<Monitor> {
-        for m in MonitorEnumerator::get_all().ok()? {
-            if let Ok(name) = WindowsApi::monitor_name(m) {
-                if name == id {
-                    return Some(Self::from(m));
+        for m in MonitorEnumerator::get_all_v2().ok()? {
+            if let Ok(monitor_device_id) = m.device_id() {
+                if monitor_device_id == id {
+                    return Some(m);
                 }
             }
         }

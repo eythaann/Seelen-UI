@@ -54,10 +54,9 @@ impl FullState {
     pub fn push_and_save_system_icon(&self, key: &str, icon: &Path) -> Result<()> {
         let mut icon_packs = trace_lock!(self.icon_packs);
         let default_icon_pack = icon_packs.get_mut("system").unwrap();
-        default_icon_pack.apps.insert(
-            key.trim_start_matches("\\\\?\\").to_string(),
-            icon.to_owned(),
-        );
+        default_icon_pack
+            .apps
+            .insert(key.trim_start_matches(r"\\?\").to_string(), icon.to_owned());
 
         let folder = self.icon_packs_folder().join("system");
         std::fs::create_dir_all(&folder)?;

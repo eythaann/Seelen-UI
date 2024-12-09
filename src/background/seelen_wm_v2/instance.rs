@@ -1,6 +1,7 @@
 use base64::Engine;
 use getset::{Getters, MutGetters};
 use seelen_core::handlers::SeelenEvent;
+use std::sync::Arc;
 use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{Graphics::Gdi::HMONITOR, UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS};
 
@@ -32,8 +33,16 @@ impl WindowManagerV2 {
         })
     }
 
+    pub fn get_label(monitor_id: &str) -> String {
+        base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(format!(
+            "{}?monitor={}",
+            Self::TARGET,
+            monitor_id
+        ))
+    }
+
     fn create_window(monitor_id: &str) -> Result<WebviewWindow> {
-        let label = format!("{}__query__monitor:{}", Self::TARGET, monitor_id);
+        let label = format!("{}?monitor={}", Self::TARGET, monitor_id);
         log::info!("Creating {}", label);
         let label = base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(&label);
 
@@ -58,8 +67,10 @@ impl WindowManagerV2 {
 
         window.set_ignore_cursor_events(true)?;
 
-        let monitor_id = monitor_id.to_owned();
+        let window_label = Arc::new(window.label().to_owned());
+        let monitor_id = Arc::new(monitor_id.to_owned());
         window.listen("complete-setup", move |_event| {
+            let window_label = window_label.clone();
             let monitor_id = monitor_id.clone();
             std::thread::spawn(move || -> Result<()> {
                 let app = get_app_handle();
@@ -69,7 +80,7 @@ impl WindowManagerV2 {
                     let workspace_id = get_vd_manager().get_current()?.id();
                     let w = m.get_workspace_mut(&workspace_id);
                     app.emit_to(
-                        format!("{}__query__monitor:{}", Self::TARGET, monitor_id),
+                        window_label.as_ref(),
                         SeelenEvent::WMSetLayout,
                         w.get_root_node(),
                     )?;

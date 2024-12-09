@@ -13,7 +13,7 @@ export function App() {
   }, []);
 
   return (
-    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+    <ErrorBoundary fallback={<div>Something went wrong on Window Manager</div>}>
       <Layout />
     </ErrorBoundary>
   );

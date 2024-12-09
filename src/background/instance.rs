@@ -36,10 +36,11 @@ impl SeelenInstanceContainer {
         if hmonitor.is_invalid() {
             return Err("Invalid Monitor".into());
         }
+        let monitor = Monitor::from(hmonitor);
         let mut instance = Self {
             handle: hmonitor,
-            monitor: Monitor::from(hmonitor),
-            name: WindowsApi::monitor_name(hmonitor)?,
+            name: monitor.display_device()?.id,
+            monitor,
             toolbar: None,
             weg: None,
             wm: None,

@@ -118,26 +118,6 @@ impl WindowEnumerator {
 pub struct MonitorEnumerator;
 
 impl MonitorEnumerator {
-    pub fn get_all() -> Result<Vec<HMONITOR>> {
-        let mut handles = Vec::new();
-
-        unsafe extern "system" fn get_handles_proc(
-            hmonitor: HMONITOR,
-            _hdc: HDC,
-            _rect_clip: *mut RECT,
-            lparam: LPARAM,
-        ) -> BOOL {
-            let data_ptr = lparam.0 as *mut Vec<HMONITOR>;
-            if let Some(data) = data_ptr.as_mut() {
-                data.push(hmonitor);
-            }
-            true.into()
-        }
-
-        WindowsApi::enum_display_monitors(Some(get_handles_proc), &mut handles as *mut _ as isize)?;
-        Ok(handles)
-    }
-
     pub fn get_all_v2() -> Result<Vec<Monitor>> {
         let mut handles = Vec::new();
 

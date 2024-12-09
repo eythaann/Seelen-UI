@@ -125,7 +125,7 @@ impl WindowManagerV2 {
                 let state = trace_lock!(WM_STATE);
                 let (m, w) = state.update_size(&foreground, Axis::Horizontal, percentage, false)?;
                 get_app_handle().emit_to(
-                    format!("{}/{}", Self::TARGET, m.id),
+                    Self::get_label(&m.id),
                     SeelenEvent::WMSetLayout,
                     w.get_root_node(),
                 )?;
@@ -140,7 +140,7 @@ impl WindowManagerV2 {
                 let state = trace_lock!(WM_STATE);
                 let (m, w) = state.update_size(&foreground, Axis::Vertical, percentage, false)?;
                 get_app_handle().emit_to(
-                    format!("{}/{}", Self::TARGET, m.id),
+                    Self::get_label(&m.id),
                     SeelenEvent::WMSetLayout,
                     w.get_root_node(),
                 )?;

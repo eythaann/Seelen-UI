@@ -684,13 +684,13 @@ impl WindowsApi {
     }
 
     pub fn monitor_index(hmonitor: HMONITOR) -> Result<usize> {
-        Ok(MonitorEnumerator::get_all()?
+        Ok(MonitorEnumerator::get_all_v2()?
             .into_iter()
-            .position(|m| m == hmonitor)
+            .position(|m| m.raw() == hmonitor)
             .ok_or("could not find monitor index")?)
     }
 
-    pub fn monitor_name(hmonitor: HMONITOR) -> Result<String> {
+    pub fn monitor_device(hmonitor: HMONITOR) -> Result<String> {
         let ex_info = Self::monitor_info(hmonitor)?;
         Ok(U16CStr::from_slice_truncate(&ex_info.szDevice)
             .map_err(|_| "monitor name was not a valid u16 c string")?

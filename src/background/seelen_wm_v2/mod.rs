@@ -70,7 +70,7 @@ impl WindowManagerV2 {
 
     fn render_workspace(monitor_id: &str, w: &WmV2StateWorkspace) -> Result<()> {
         get_app_handle().emit_to(
-            format!("{}/{}", Self::TARGET, monitor_id),
+            Self::get_label(monitor_id),
             SeelenEvent::WMSetLayout,
             w.get_root_node(),
         )?;
@@ -92,13 +92,13 @@ impl WindowManagerV2 {
         let vd_manager = get_vd_manager();
         let current_workspace_id = vd_manager.get_current()?.id();
 
-        let mut monitor_id = window.monitor().id()?;
+        let mut monitor_id = window.monitor().device_id()?;
         let mut workspace_id = window.workspace()?.id();
 
         if let Some(config) = FULL_STATE.load().get_app_config_by_window(window.hwnd()) {
             if let Some(index) = config.bound_monitor {
                 if let Some(monitor) = Monitor::at(index) {
-                    monitor_id = monitor.id()?;
+                    monitor_id = monitor.device_id()?;
                 }
             }
             if let Some(index) = config.bound_workspace {
@@ -117,7 +117,7 @@ impl WindowManagerV2 {
             workspace.add_window(window);
             if workspace_id == current_workspace_id {
                 get_app_handle().emit_to(
-                    format!("{}/{}", Self::TARGET, monitor_id),
+                    Self::get_label(&monitor_id),
                     SeelenEvent::WMSetLayout,
                     workspace.get_root_node(),
                 )?;
@@ -136,7 +136,7 @@ impl WindowManagerV2 {
                 workspace.remove_window(window);
                 if workspace_id == &current_workspace {
                     get_app_handle().emit_to(
-                        format!("{}/{}", Self::TARGET, monitor_id),
+                        Self::get_label(monitor_id),
                         SeelenEvent::WMSetLayout,
                         workspace.get_root_node(),
                     )?;
@@ -152,7 +152,7 @@ impl WindowManagerV2 {
         for (monitor_id, monitor) in state.monitors.iter_mut() {
             let workspace = monitor.get_workspace_mut(&workspace_id);
             get_app_handle().emit_to(
-                format!("{}/{}", Self::TARGET, monitor_id),
+                Self::get_label(monitor_id),
                 SeelenEvent::WMSetLayout,
                 workspace.get_root_node(),
             )?;
