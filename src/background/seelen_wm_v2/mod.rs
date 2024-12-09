@@ -63,7 +63,7 @@ impl WindowManagerV2 {
         trace_lock!(WM_STATE).contains(window)
     }
 
-    fn force_retiling() -> Result<()> {
+    pub fn force_retiling() -> Result<()> {
         get_app_handle().emit(SeelenEvent::WMForceRetiling, ())?;
         Ok(())
     }

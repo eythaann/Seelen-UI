@@ -18,8 +18,15 @@ macro_rules! event_manager {
             crossbeam_channel::Receiver<$event>,
         )> = std::sync::OnceLock::new();
 
+        static CHANNEL_THREAD: std::sync::OnceLock<std::thread::JoinHandle<()>> =
+            std::sync::OnceLock::new();
+
+        static SUBSCRIBERS: std::sync::OnceLock<
+            std::sync::Arc<parking_lot::Mutex<Vec<Box<dyn FnMut($event) + Send + 'static>>>>,
+        > = std::sync::OnceLock::new();
+
         impl $name {
-            pub fn channel() -> &'static (
+            fn channel() -> &'static (
                 crossbeam_channel::Sender<$event>,
                 crossbeam_channel::Receiver<$event>,
             ) {
@@ -30,8 +37,35 @@ macro_rules! event_manager {
                 Self::channel().0.clone()
             }
 
-            pub fn event_rx() -> crossbeam_channel::Receiver<$event> {
-                Self::channel().1.clone()
+            fn subscribers() -> &'static std::sync::Arc<
+                parking_lot::Mutex<Vec<Box<dyn FnMut($event) + Send + 'static>>>,
+            > {
+                SUBSCRIBERS.get_or_init(|| std::sync::Arc::new(parking_lot::Mutex::new(Vec::new())))
+            }
+
+            /// Add a new subscriber to the event manager and start the event processing thread
+            pub fn subscribe<F>(callback: F)
+            where
+                F: FnMut($event) + Send + 'static,
+            {
+                let mut subs = Self::subscribers().lock();
+                subs.push(Box::new(callback));
+                if subs.len() != 1 {
+                    return;
+                }
+                // Start the event processing thread on the first subscriber
+                CHANNEL_THREAD.get_or_init(|| {
+                    let rx = Self::channel().1.clone();
+                    let subscribers = Self::subscribers().clone();
+                    std::thread::spawn(move || {
+                        for event in rx {
+                            let mut subs = subscribers.lock();
+                            for subscriber in subs.iter_mut() {
+                                subscriber(event.clone());
+                            }
+                        }
+                    })
+                });
             }
         }
     };

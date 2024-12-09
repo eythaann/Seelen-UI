@@ -37,7 +37,7 @@ pub struct DisplayDevice {
 }
 
 impl Monitor {
-    pub fn raw(&self) -> HMONITOR {
+    pub fn handle(&self) -> HMONITOR {
         self.0
     }
 

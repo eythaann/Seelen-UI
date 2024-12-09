@@ -59,28 +59,29 @@ impl MonitorManager {
                 let mut old_list = { trace_lock!(MONITOR_MANAGER).monitors.clone() };
                 let new_list = match Self::get_monitors() {
                     Ok(monitors) => monitors,
-                    Err(_) => return LRESULT(0),
+                    Err(err) => {
+                        log::error!("Failed to get monitors: {}", err);
+                        return LRESULT(0);
+                    }
                 };
 
                 let sender = Self::event_tx();
-                for (name, id) in &new_list {
-                    match old_list.iter().position(|x| x.0 == *name) {
+                for (id, handle) in &new_list {
+                    match old_list.iter().position(|x| x.0 == *id) {
                         Some(idx) => {
-                            let (_, old_id) = old_list.remove(idx);
-                            if old_id != *id {
-                                log_error!(
-                                    sender.send(MonitorManagerEvent::Updated(name.clone(), *id,))
-                                );
-                            }
+                            old_list.remove(idx);
+                            log_error!(
+                                sender.send(MonitorManagerEvent::Updated(id.clone(), *handle))
+                            );
                         }
                         None => {
-                            log_error!(sender.send(MonitorManagerEvent::Added(name.clone(), *id)))
+                            log_error!(sender.send(MonitorManagerEvent::Added(id.clone(), *handle)))
                         }
                     }
                 }
 
-                for (name, id) in old_list {
-                    log_error!(sender.send(MonitorManagerEvent::Removed(name, id)))
+                for (id, handle) in old_list {
+                    log_error!(sender.send(MonitorManagerEvent::Removed(id, handle)))
                 }
 
                 trace_lock!(MONITOR_MANAGER).monitors = new_list.into_iter().collect();
@@ -164,7 +165,7 @@ impl MonitorManager {
     fn get_monitors() -> Result<Vec<(String, HMONITOR)>> {
         let mut monitors = Vec::new();
         for m in MonitorEnumerator::get_all_v2()? {
-            monitors.push((m.device_id()?, m.raw()));
+            monitors.push((m.device_id()?, m.handle()));
         }
         Ok(monitors)
     }

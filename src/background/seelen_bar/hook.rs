@@ -23,7 +23,7 @@ impl FancyToolbar {
             }
             WinEvent::ObjectLocationChange => {
                 if window.hwnd() == self.window.hwnd()? {
-                    self.set_position(window.monitor().raw())?;
+                    self.set_position(window.monitor().handle())?;
                 }
                 if origin == WindowsApi::get_foreground_window() {
                     self.handle_overlaped_status(origin)?;

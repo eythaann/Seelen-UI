@@ -29,7 +29,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, is_msix_intallation, spawn_named_thread, PERFORMANCE_HELPER},
+    utils::{ahk::AutoHotKey, is_msix_intallation, PERFORMANCE_HELPER},
     windows_api::WindowsApi,
     APP_HANDLE,
 };
@@ -49,8 +49,7 @@ pub fn get_app_handle<'a>() -> &'a AppHandle<Wry> {
 /** Struct should be initialized first before calling any other methods */
 #[derive(Getters, MutGetters, Default)]
 pub struct Seelen {
-    #[getset(get = "pub", get_mut = "pub")]
-    monitors: Vec<SeelenInstanceContainer>,
+    instances: Vec<SeelenInstanceContainer>,
     #[getset(get = "pub", get_mut = "pub")]
     rofi: Option<SeelenRofi>,
     #[getset(get = "pub", get_mut = "pub")]
@@ -59,26 +58,28 @@ pub struct Seelen {
 
 /* ============== Getters ============== */
 impl Seelen {
+    pub fn instances(&self) -> &Vec<SeelenInstanceContainer> {
+        &self.instances
+    }
+
+    pub fn instances_mut(&mut self) -> &mut Vec<SeelenInstanceContainer> {
+        &mut self.instances
+    }
+
     pub fn is_running() -> bool {
         SEELEN_IS_RUNNING.load(std::sync::atomic::Ordering::Relaxed)
     }
 
     pub fn focused_monitor(&self) -> Option<&SeelenInstanceContainer> {
-        self.monitors.iter().find(|m| m.is_focused())
+        self.instances.iter().find(|m| m.is_focused())
     }
 
     pub fn focused_monitor_mut(&mut self) -> Option<&mut SeelenInstanceContainer> {
-        self.monitors.iter_mut().find(|m| m.is_focused())
+        self.instances.iter_mut().find(|m| m.is_focused())
     }
 
-    pub fn monitor_by_id_mut(&mut self, id: isize) -> Option<&mut SeelenInstanceContainer> {
-        self.monitors
-            .iter_mut()
-            .find(|m| m.handle().0 as isize == id)
-    }
-
-    pub fn monitor_by_name_mut(&mut self, name: &str) -> Option<&mut SeelenInstanceContainer> {
-        self.monitors.iter_mut().find(|m| m.name() == name)
+    pub fn monitor_by_device_id_mut(&mut self, id: &str) -> Option<&mut SeelenInstanceContainer> {
+        self.instances.iter_mut().find(|m| m.id() == id)
     }
 
     pub fn state(&self) -> Arc<FullState> {
@@ -108,9 +109,9 @@ impl Seelen {
         if let Some(wall) = &self.wall {
             wall.update_position()?;
         }
-        for monitor in &mut self.monitors {
-            if WindowsApi::monitor_info(*monitor.handle()).is_ok() {
-                monitor.ensure_positions()?;
+        for instance in &mut self.instances {
+            if WindowsApi::monitor_info(instance.monitor().handle()).is_ok() {
+                instance.ensure_positions()?;
             }
         }
         Ok(())
@@ -148,7 +149,7 @@ impl Seelen {
             false => self.wall = None,
         }
 
-        for monitor in &mut self.monitors {
+        for monitor in &mut self.instances {
             monitor.load_settings(&state)?;
         }
 
@@ -158,16 +159,17 @@ impl Seelen {
 
     fn on_monitor_event(event: MonitorManagerEvent) {
         match event {
-            MonitorManagerEvent::Added(_name, id) => {
-                log_error!(trace_lock!(SEELEN).add_monitor(id));
+            MonitorManagerEvent::Added(_id, handle) => {
+                log_error!(trace_lock!(SEELEN).add_monitor(handle));
             }
-            MonitorManagerEvent::Removed(_name, id) => {
-                log_error!(trace_lock!(SEELEN).remove_monitor(id));
+            MonitorManagerEvent::Removed(id, _handle) => {
+                log_error!(trace_lock!(SEELEN).remove_monitor(&id));
             }
-            MonitorManagerEvent::Updated(name, id) => {
-                if let Some(m) = trace_lock!(SEELEN).monitor_by_name_mut(&name) {
-                    m.update_handle(id);
+            MonitorManagerEvent::Updated(id, handle) => {
+                if let Some(m) = trace_lock!(SEELEN).monitor_by_device_id_mut(&id) {
+                    m.update_handle(handle);
                 }
+                log_error!(trace_lock!(SEELEN).refresh_windows_positions());
             }
         }
     }
@@ -205,17 +207,11 @@ impl Seelen {
         }
 
         log::trace!("Enumerating Monitors & Creating Instances");
-        let monitors = trace_lock!(MONITOR_MANAGER).monitors.clone();
+        let monitors = { trace_lock!(MONITOR_MANAGER).monitors.clone() };
         for (_name, id) in monitors {
             self.add_monitor(id)?;
         }
-
-        spawn_named_thread("Monitor Listener", || {
-            let rx = MonitorManager::event_rx();
-            while let Ok(event) = rx.recv() {
-                Self::on_monitor_event(event);
-            }
-        })?;
+        MonitorManager::subscribe(Self::on_monitor_event);
 
         tauri::async_runtime::spawn(async {
             trace_lock!(PERFORMANCE_HELPER).start("lazy setup");
@@ -241,15 +237,15 @@ impl Seelen {
         }
     }
 
-    fn add_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
-        self.monitors
-            .push(SeelenInstanceContainer::new(hmonitor, &self.state())?);
+    fn add_monitor(&mut self, handle: HMONITOR) -> Result<()> {
+        self.instances
+            .push(SeelenInstanceContainer::new(handle, &self.state())?);
         self.refresh_windows_positions()?;
         Ok(())
     }
 
-    fn remove_monitor(&mut self, hmonitor: HMONITOR) -> Result<()> {
-        self.monitors.retain(|m| m.handle() != &hmonitor);
+    fn remove_monitor(&mut self, id: &str) -> Result<()> {
+        self.instances.retain(|m| m.id() != id);
         self.refresh_windows_positions()?;
         Ok(())
     }

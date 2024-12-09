@@ -37,7 +37,7 @@ use crate::{
     event_manager, log_error,
     seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
-    utils::{pcwstr, spawn_named_thread},
+    utils::pcwstr,
     windows_api::{Com, WindowEnumerator, WindowsApi},
 };
 
@@ -53,7 +53,7 @@ lazy_static! {
 
 event_manager!(MediaManager, MediaEvent);
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub enum MediaEvent {
     DeviceAdded(String),
     DeviceRemoved(String),
@@ -457,8 +457,8 @@ impl MediaManager {
         self.update_recommended_player();
         self.media_player_manager
             .SessionsChanged(&self.media_player_manager_event_handler)?;
-
-        Self::start_event_loop()
+        Self::start_event_loop();
+        Ok(())
     }
 
     unsafe fn load_device(&mut self, device: &IMMDevice) -> Result<()> {
@@ -646,34 +646,30 @@ impl MediaManager {
         }
     }
 
-    fn start_event_loop() -> Result<()> {
-        spawn_named_thread("Media Events", || {
-            let rx = Self::event_rx();
-            while let Ok(event) = rx.recv() {
-                let is_changing_players = matches!(
-                    event,
-                    MediaEvent::MediaPlayerAdded(_)
-                        | MediaEvent::MediaPlayerRemoved(_)
-                        | MediaEvent::MediaPlayerPropertiesChanged { .. }
-                        | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
-                );
+    fn start_event_loop() {
+        Self::subscribe(|event| {
+            let is_changing_players = matches!(
+                event,
+                MediaEvent::MediaPlayerAdded(_)
+                    | MediaEvent::MediaPlayerRemoved(_)
+                    | MediaEvent::MediaPlayerPropertiesChanged { .. }
+                    | MediaEvent::MediaPlayerPlaybackStatusChanged { .. }
+            );
 
-                let mut media_manager = trace_lock!(MEDIA_MANAGER);
-                log_error!(media_manager.process_event(event));
+            let mut media_manager = trace_lock!(MEDIA_MANAGER);
+            log_error!(media_manager.process_event(event));
 
-                if is_changing_players {
-                    media_manager.update_recommended_player();
-                    for callback in &media_manager.registered_players_callbacks {
-                        callback(media_manager.playing());
-                    }
-                } else {
-                    for callback in &media_manager.registered_devices_callbacks {
-                        callback(media_manager.inputs(), media_manager.outputs());
-                    }
+            if is_changing_players {
+                media_manager.update_recommended_player();
+                for callback in &media_manager.registered_players_callbacks {
+                    callback(media_manager.playing());
+                }
+            } else {
+                for callback in &media_manager.registered_devices_callbacks {
+                    callback(media_manager.inputs(), media_manager.outputs());
                 }
             }
-        })?;
-        Ok(())
+        });
     }
 
     fn process_event(&mut self, event: MediaEvent) -> Result<()> {

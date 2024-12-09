@@ -19,7 +19,7 @@ impl TryFrom<Monitor> for PhysicalMonitor {
     fn try_from(m: Monitor) -> Result<Self, Self::Error> {
         let device = m.display_device()?;
         let rect = m.rect()?;
-        let dpi = WindowsApi::get_device_pixel_ratio(m.raw())?;
+        let dpi = WindowsApi::get_device_pixel_ratio(m.handle())?;
         Ok(Self {
             id: device.id,
             name: device.name,

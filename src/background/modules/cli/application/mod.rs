@@ -201,7 +201,7 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
             }
             FancyToolbar::CLI_IDENTIFIER => {
                 let mut seelen = trace_lock!(SEELEN);
-                for monitor in seelen.monitors_mut() {
+                for monitor in seelen.instances_mut() {
                     if let Some(toolbar) = monitor.toolbar_mut() {
                         toolbar.process(matches)?;
                     }
@@ -209,7 +209,7 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
             }
             SeelenWeg::CLI_IDENTIFIER => {
                 let mut seelen = trace_lock!(SEELEN);
-                for monitor in seelen.monitors_mut() {
+                for monitor in seelen.instances_mut() {
                     if let Some(weg) = monitor.weg_mut() {
                         weg.process(matches)?;
                     }

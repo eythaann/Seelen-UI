@@ -48,8 +48,9 @@ use windows::{
                 DWM_CLOAKED_INHERITED, DWM_CLOAKED_SHELL,
             },
             Gdi::{
-                EnumDisplayDevicesW, EnumDisplayMonitors, GetMonitorInfoW, MonitorFromPoint,
-                MonitorFromWindow, DISPLAY_DEVICEW, HDC, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
+                EnumDisplayDevicesW, EnumDisplayMonitors, EnumDisplaySettingsW, GetMonitorInfoW,
+                MonitorFromPoint, MonitorFromWindow, DEVMODEW, DISPLAY_DEVICEW,
+                ENUM_CURRENT_SETTINGS, HDC, HMONITOR, MONITORENUMPROC, MONITORINFOEXW,
                 MONITOR_DEFAULTTOPRIMARY,
             },
         },
@@ -678,6 +679,19 @@ impl WindowsApi {
         Ok(display)
     }
 
+    pub fn get_display_device_settings(monitor: HMONITOR) -> Result<DEVMODEW> {
+        let info = Self::monitor_info(monitor)?;
+        let lpdevice = PCWSTR::from_raw(info.szDevice.as_ptr());
+        let mut devmode = DEVMODEW {
+            dmSize: std::mem::size_of::<DEVMODEW>() as u16,
+            ..DEVMODEW::default()
+        };
+        unsafe {
+            EnumDisplaySettingsW(lpdevice, ENUM_CURRENT_SETTINGS, &mut devmode).ok()?;
+        }
+        Ok(devmode)
+    }
+
     /// handle of PHYSICAL_MONITOR is bugged and will be always 0
     pub fn primary_physical_monitor() -> Result<PHYSICAL_MONITOR> {
         Ok(Self::physical_monitors(Self::primary_monitor())?[0])
@@ -686,18 +700,8 @@ impl WindowsApi {
     pub fn monitor_index(hmonitor: HMONITOR) -> Result<usize> {
         Ok(MonitorEnumerator::get_all_v2()?
             .into_iter()
-            .position(|m| m.raw() == hmonitor)
+            .position(|m| m.handle() == hmonitor)
             .ok_or("could not find monitor index")?)
-    }
-
-    pub fn monitor_device(hmonitor: HMONITOR) -> Result<String> {
-        let ex_info = Self::monitor_info(hmonitor)?;
-        Ok(U16CStr::from_slice_truncate(&ex_info.szDevice)
-            .map_err(|_| "monitor name was not a valid u16 c string")?
-            .to_ustring()
-            .to_string_lossy()
-            .trim_start_matches(r"\\.\")
-            .to_string())
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen

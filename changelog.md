@@ -11,6 +11,7 @@
 
 ### fix
 - window manager not working properly.
+- resolution, scale changes not refreshing the UI.
 
 ## [2.0.8]
 ### enhancements

@@ -202,7 +202,7 @@ impl HookManager {
             log_error_event("Wall Instance", wall.process_win_event(event, &window));
         }
 
-        for monitor in seelen.monitors_mut() {
+        for monitor in seelen.instances_mut() {
             if let Some(toolbar) = monitor.toolbar_mut() {
                 log_error_event("Toolbar Instance", toolbar.process_win_event(event, origin));
             }

@@ -2,8 +2,7 @@ use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
 use crate::{
-    error_handler::Result, log_error, seelen::get_app_handle, utils::spawn_named_thread,
-    windows_api::MonitorEnumerator,
+    error_handler::Result, log_error, seelen::get_app_handle, windows_api::MonitorEnumerator,
 };
 
 use super::{domain::PhysicalMonitor, MonitorManager};
@@ -16,17 +15,12 @@ fn _get_connected_monitors() -> Result<Vec<PhysicalMonitor>> {
     Ok(monitors)
 }
 
-pub fn register_monitor_webview_events() -> Result<()> {
-    spawn_named_thread("Monitor Manager Webview", || {
-        let rx = MonitorManager::event_rx();
-        while let Ok(_event) = rx.recv() {
-            let handler = get_app_handle().clone();
-            if let Ok(monitors) = _get_connected_monitors() {
-                log_error!(handler.emit(SeelenEvent::SystemMonitorsChanged, monitors));
-            }
+pub fn register_monitor_webview_events() {
+    MonitorManager::subscribe(|_event| {
+        if let Ok(monitors) = _get_connected_monitors() {
+            log_error!(get_app_handle().emit(SeelenEvent::SystemMonitorsChanged, monitors));
         }
-    })?;
-    Ok(())
+    });
 }
 
 #[tauri::command(async)]

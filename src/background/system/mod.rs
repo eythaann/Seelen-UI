@@ -45,7 +45,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
         register_notification_events();
     });
 
-    register_monitor_webview_events()?;
+    register_monitor_webview_events();
     register_colors_events();
     Ok(())
 }
