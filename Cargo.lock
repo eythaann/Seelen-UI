@@ -4414,7 +4414,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 [[package]]
 name = "seelen-core"
 version = "1.9.7"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#c47a936e1ad1d27baf2c21c344c6a44837a2eaf6"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#526c50273c75cd2cdfd89aa6b24fa5ca108479b2"
 dependencies = [
  "regex",
  "schemars",
