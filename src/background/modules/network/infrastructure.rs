@@ -29,10 +29,9 @@ pub fn register_network_events() -> Result<()> {
     if !REGISTERED.load(Ordering::Acquire) {
         REGISTERED.store(true, Ordering::Release);
         log::trace!("Registering network events");
-        NetworkManager::register_events(move |connectivity| {
+        NetworkManager::register_events(move |connectivity, ip| {
             log::trace!(target: "network", "Connectivity changed: {:?}", connectivity);
-            if let (Ok(ip), Ok(adapters)) = (get_local_ip_address(), NetworkManager::get_adapters())
-            {
+            if let Ok(adapters) = NetworkManager::get_adapters() {
                 let has_internet_ipv4 = connectivity.0 & NLM_CONNECTIVITY_IPV4_INTERNET.0
                     == NLM_CONNECTIVITY_IPV4_INTERNET.0;
                 let has_internet_ipv6 = connectivity.0 & NLM_CONNECTIVITY_IPV6_INTERNET.0
