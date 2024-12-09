@@ -181,11 +181,13 @@ impl MediaManagerEvents {
         _args: &Option<SessionsChangedEventArgs>,
     ) -> windows_core::Result<()> {
         if let Some(session_manager) = session_manager {
-            let mut current_list = trace_lock!(MEDIA_MANAGER)
-                .playing()
-                .iter()
-                .map(|session| session.id.clone())
-                .collect_vec();
+            let mut current_list = {
+                trace_lock!(MEDIA_MANAGER)
+                    .playing()
+                    .iter()
+                    .map(|session| session.id.clone())
+                    .collect_vec()
+            };
 
             let tx = MediaManager::event_tx();
             for session in session_manager.GetSessions()? {

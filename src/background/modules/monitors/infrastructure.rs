@@ -1,3 +1,4 @@
+use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
 use crate::{
@@ -21,7 +22,7 @@ pub fn register_monitor_webview_events() -> Result<()> {
         while let Ok(_event) = rx.recv() {
             let handler = get_app_handle().clone();
             if let Ok(monitors) = _get_connected_monitors() {
-                log_error!(handler.emit("monitors", monitors));
+                log_error!(handler.emit(SeelenEvent::SystemMonitorsChanged, monitors));
             }
         }
     })?;
