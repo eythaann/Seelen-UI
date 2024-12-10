@@ -80,7 +80,7 @@ git commit -m "Description of changes made to slu-lib"
 
 ---
 
-#### 3. Configure `slu-lib` as a Local Dependency
+#### 3. Option 1, Configure `slu-lib` as a Local Dependency - with remote Repository
 To allow the main project to use your modified version of `slu-lib`, update its dependency configuration file.
 
 #### For Rust Projects (`Cargo.toml`):
@@ -111,6 +111,58 @@ Example:
 "dependencies": {
   "slu-lib": "git+https://github.com/your-org/slu-lib#feature/ui-update"
 }
+~~~
+
+#### 3. Option 2, Configure `slu-lib` as a Local Dependency - local files
+To allow the main project to use your modified version of `slu-lib`, update its dependency configuration file.
+
+#### For Rust Projects (`Cargo.toml`):
+In the `Cargo.toml` file of the main project, replace the `slu-lib` dependency with your local path:
+
+~~~
+[dependencies.seelen-core]
+path = "<path>"                               # for local development
+~~~
+
+Example:
+~~~
+[dependencies.seelen-core]
+path = "../slu-lib"                               # for local development
+~~~
+
+#### For JavaScript Projects (`package.json`):
+In the `package.json` file of the main project, update the `slu-lib` dependency to point to your npm slu home:
+
+~~~
+"dependencies": {
+  "@seelen-ui/lib": "file:<path>",
+}
+~~~
+
+slu must be built before npm reference can be made! The build script after deno installation...
+~~~
+winget install DenoLand.Deno
+~~~
+can be with the following scripts:
+~~~
+deno run -A .\scripts\build_npm.ts
+~~~
+
+Example:
+~~~
+"dependencies": {
+  "@seelen-ui/lib": "file:../slu-lib/npm",
+}
+~~~
+
+alternatively, you can run from the main project library: 
+~~~
+npm install <path>
+~~~
+
+Example> 
+~~~
+npm install ../slu-lib/npm
 ~~~
 
 **Important:** These changes should only be used for local development and must not be committed to the repository.
