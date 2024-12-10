@@ -57,6 +57,7 @@ toolbar:
   label: ٹول بار
   delay_to_hide: چھپانے میں تاخیر
   delay_to_show: دکھانے میں تاخیر
+  use_multiple_monitor_overlap_logic: سنگل فوکس لاجک کے بجائے ڈسپلے مخصوص استعمال کریں۔
 wm:
   border:
     enable: ونڈو کی بارڈر کو فعال کریں
@@ -87,6 +88,7 @@ weg:
   dock_side: پوزیشن
   delay_to_hide: چھپانے میں تاخیر
   delay_to_show: دکھانے میں تاخیر
+  use_multiple_monitor_overlap_logic: سنگل فوکس لاجک کے بجائے ڈسپلے مخصوص استعمال کریں۔
 devtools:
   custom_config_file: کسٹم کنفیگ فائل لوڈ کریں
   data_folder: ڈیٹا فولڈر

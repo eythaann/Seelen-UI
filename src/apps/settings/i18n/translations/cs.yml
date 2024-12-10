@@ -58,6 +58,7 @@ toolbar:
   label: Panel nástrojů
   delay_to_show: Zpoždění zobrazení
   delay_to_hide: Odložit se schovat
+  use_multiple_monitor_overlap_logic: Místo logiky jednoho zaměření použijte specifickou obrazovku
 wm:
   border:
     width: Šířka hranic
@@ -88,6 +89,7 @@ weg:
   dock_side: Pozice
   delay_to_hide: Odložit se schovat
   delay_to_show: Zpoždění zobrazení
+  use_multiple_monitor_overlap_logic: Místo logiky jednoho zaměření použijte specifickou obrazovku
 devtools:
   data_folder: Datová složka
   settings_file: Nastavení souboru

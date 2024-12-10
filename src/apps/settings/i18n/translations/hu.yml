@@ -58,6 +58,7 @@ toolbar:
   label: Eszköztár
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
+  use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
 wm:
   border:
     enable: Engedélyezze az ablak szegélyét
@@ -88,6 +89,7 @@ weg:
   dock_side: Pozíció
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
+  use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
 devtools:
   load: Betöltés
   app_folders: App mappák

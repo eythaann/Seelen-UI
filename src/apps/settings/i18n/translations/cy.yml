@@ -58,6 +58,7 @@ toolbar:
   label: Bariau
   delay_to_show: Oedi i ddangos
   delay_to_hide: Oedi i guddio
+  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
 wm:
   border:
     width: Lled
@@ -88,6 +89,7 @@ weg:
   dock_side: Safle
   delay_to_show: Oedi i ddangos
   delay_to_hide: Oedi i guddio
+  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
 devtools:
   data_folder: Ffolder data
   custom_config_file: Llwythwch ffeil ffurfweddu arfer
