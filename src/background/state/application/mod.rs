@@ -3,6 +3,7 @@ mod events;
 mod icons;
 mod plugins;
 mod profiles;
+mod settings;
 mod widgets;
 
 use arc_swap::ArcSwap;
@@ -16,12 +17,11 @@ use notify_debouncer_full::{
 };
 use parking_lot::Mutex;
 use seelen_core::state::{
-    IconPack, Plugin, PluginId, Profile, VirtualDesktopStrategy, WegItems, Widget, WidgetId,
-    WindowManagerLayout,
+    IconPack, Plugin, PluginId, Profile, WegItems, Widget, WidgetId, WindowManagerLayout,
 };
 use std::{
     collections::{HashMap, VecDeque},
-    fs::{File, OpenOptions},
+    fs::OpenOptions,
     io::{Seek, Write},
     path::{Path, PathBuf},
     sync::{
@@ -34,7 +34,7 @@ use tauri::Manager;
 
 use crate::{
     error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
-    trace_lock, utils::is_virtual_desktop_supported, windows_api::WindowsApi,
+    trace_lock, windows_api::WindowsApi,
 };
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
@@ -45,19 +45,8 @@ lazy_static! {
         log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
     }));
-    static ref OPEN_OPTIONS: OpenOptions = {
-        let mut options = OpenOptions::new();
-        options.write(true).create(true);
-        options
-    };
-    static ref USER_SETTINGS_PATH: PathBuf = DATA_DIR.join("settings.json");
-    static ref USER_SETTINGS_FILE: Arc<Mutex<File>> = Arc::new(Mutex::new(
-        OPEN_OPTIONS.open(USER_SETTINGS_PATH.as_path()).unwrap()
-    ));
+    pub static ref USER_SETTINGS_PATH: PathBuf = DATA_DIR.join("settings.json");
     static ref WEG_ITEMS_PATH: PathBuf = DATA_DIR.join("seelenweg_items.yaml");
-    static ref WEG_ITEMS_FILE: Arc<Mutex<File>> = Arc::new(Mutex::new(
-        OPEN_OPTIONS.open(WEG_ITEMS_PATH.as_path()).unwrap()
-    ));
 }
 
 static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
@@ -112,18 +101,11 @@ impl FullState {
         Ok(manager)
     }
 
-    /// shorthand of `FullState::clone` on Arc reference
+    /// Shorthand of `FullState::clone` on Arc reference
+    ///
+    /// Intended to be used with `ArcSwap::rcu` to mofify the state
     pub fn cloned(&self) -> Self {
         self.clone()
-    }
-
-    /// store `self` as the static `FULL_STATE` instance
-    pub fn store(self) {
-        FULL_STATE.store(Arc::new(self));
-    }
-
-    pub fn store_cloned(&self) {
-        FULL_STATE.store(Arc::new(self.cloned()));
     }
 
     fn process_event(&mut self, event: DebouncedEvent) -> Result<()> {
@@ -152,28 +134,24 @@ impl FullState {
         if event.paths.contains(&self.icon_packs_folder()) {
             log::info!("Icons Packs changed");
             self.load_icons_packs()?;
-            self.store_cloned();
             self.emit_icon_packs()?;
         }
 
         if event.paths.contains(&WEG_ITEMS_PATH) {
             log::info!("Weg Items changed");
             self.load_weg_items()?;
-            self.store_cloned();
             self.emit_weg_items(&*trace_lock!(self.weg_items))?;
         }
 
         if event.paths.contains(&history_path) {
             log::info!("History changed");
             self.load_history()?;
-            self.store_cloned();
             self.emit_history()?;
         }
 
         if event.paths.contains(&USER_SETTINGS_PATH) {
             log::info!("Seelen Settings changed");
-            self.load_settings()?;
-            self.store_cloned();
+            self.read_settings()?;
             self.emit_settings()?;
         }
 
@@ -184,7 +162,6 @@ impl FullState {
         {
             log::info!("Theme changed");
             self.load_themes()?;
-            self.store_cloned();
             self.emit_themes()?;
         }
 
@@ -195,7 +172,6 @@ impl FullState {
         {
             log::info!("Placeholder changed");
             self.load_placeholders()?;
-            self.store_cloned();
             self.emit_placeholders()?;
         }
 
@@ -206,7 +182,6 @@ impl FullState {
         {
             log::info!("Layouts changed");
             self.load_layouts()?;
-            self.store_cloned();
             self.emit_layouts()?;
         }
 
@@ -217,7 +192,6 @@ impl FullState {
         {
             log::info!("Specific App Configuration changed");
             self.load_settings_by_app()?;
-            self.store_cloned();
             self.emit_settings_by_app()?;
         }
 
@@ -228,7 +202,6 @@ impl FullState {
         {
             log::info!("Plugins changed");
             self.load_plugins()?;
-            self.store_cloned();
             self.emit_plugins()?;
         }
 
@@ -239,7 +212,6 @@ impl FullState {
         {
             log::info!("Widgets changed");
             self.load_widgets()?;
-            self.store_cloned();
             self.emit_widgets()?;
         }
 
@@ -255,9 +227,12 @@ impl FullState {
                 Ok(events) => {
                     // log::info!("Seelen UI File Watcher events: {:?}", events);
                     if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
-                        let mut state = FULL_STATE.load().cloned();
                         for event in events {
-                            log_error!(state.process_event(event));
+                            FULL_STATE.rcu(move |state| {
+                                let mut state = state.cloned();
+                                log_error!(state.process_event(event.clone()));
+                                state
+                            });
                         }
                     }
                 }
@@ -303,23 +278,6 @@ impl FullState {
             }
             _ => Err("Invalid settings file extension".into()),
         }
-    }
-
-    fn load_settings(&mut self) -> Result<()> {
-        let path_exists = USER_SETTINGS_PATH.exists();
-        if path_exists {
-            self.settings = Self::get_settings_from_path(&USER_SETTINGS_PATH)?;
-            self.settings.sanitize();
-        }
-
-        if !is_virtual_desktop_supported() {
-            self.settings.virtual_desktop_strategy = VirtualDesktopStrategy::Seelen;
-        }
-
-        if !path_exists {
-            self.save_settings()?;
-        }
-        Ok(())
     }
 
     fn load_weg_items(&mut self) -> Result<()> {
@@ -553,7 +511,7 @@ impl FullState {
     }
 
     fn load_all(&mut self) -> Result<()> {
-        self.load_settings()?;
+        self.read_settings()?;
         self.load_weg_items()?;
         self.load_themes()?;
         self.load_icons_packs()?;
@@ -567,15 +525,12 @@ impl FullState {
         Ok(())
     }
 
-    pub fn save_settings(&self) -> Result<()> {
-        let mut file = trace_lock!(USER_SETTINGS_FILE);
-        file.rewind()?;
-        file.write_all(serde_json::to_string_pretty(&self.settings)?.as_bytes())?;
-        Ok(())
-    }
-
     pub fn save_weg_items(&self, items: &WegItems) -> Result<()> {
-        let mut file = trace_lock!(WEG_ITEMS_FILE);
+        let mut file = OpenOptions::new()
+            .write(true)
+            .create(true)
+            .truncate(true)
+            .open(WEG_ITEMS_PATH.clone())?;
         file.rewind()?;
         file.write_all(serde_yaml::to_string(items)?.as_bytes())?;
         file.flush()?;
@@ -628,7 +583,7 @@ impl FullState {
             self.settings.window_manager.default_layout = format!("{id}.yml");
         }
 
-        self.save_settings()?;
+        self.write_settings()?;
         Ok(())
     }
 }

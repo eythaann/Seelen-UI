@@ -5,7 +5,6 @@ import { cloneDeep } from 'lodash';
 import {
   AppConfiguration,
   ConnectedMonitorList,
-  MonitorConfiguration,
   PluginList,
   ProfileList,
   SeelenEvent,
@@ -44,16 +43,7 @@ export type store = {
 // ======================
 
 function setMonitorsOnState(list: ConnectedMonitorList) {
-  const monitors = list.all();
-  store.dispatch(RootActions.setConnectedMonitors(monitors));
-  const settingsByMonitor = { ...store.getState().monitorsV2 };
-  for (const monitor of monitors) {
-    if (!settingsByMonitor[monitor.id]) {
-      settingsByMonitor[monitor.id] = new MonitorConfiguration();
-    }
-  }
-  console.log({ monitors, settingsByMonitor });
-  store.dispatch(RootActions.setMonitorsV2(settingsByMonitor));
+  store.dispatch(RootActions.setConnectedMonitors(list.all()));
 }
 
 async function initUIColors() {
@@ -122,13 +112,17 @@ export const LoadSettingsToStore = async (customPath?: string) => {
 
   const currentState = store.getState();
   const newState = StaticSettingsToState(userSettings, currentState);
-  newState.lastLoaded = cloneDeep(newState);
   store.dispatch(RootActions.setState(newState));
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));
   store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).toArray()));
   setMonitorsOnState(await ConnectedMonitorList.getAsync());
+
+  const state = { ...store.getState() };
+  state.lastLoaded = cloneDeep(state);
+  state.toBeSaved = false;
+  store.dispatch(RootActions.setState(state));
 };
 
 export const SaveStore = async () => {

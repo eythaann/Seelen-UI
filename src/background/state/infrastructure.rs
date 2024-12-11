@@ -54,6 +54,17 @@ pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
 }
 
 #[tauri::command(async)]
+pub fn state_write_settings(settings: Settings) -> Result<()> {
+    FULL_STATE.rcu(move |state| {
+        let mut state = state.cloned();
+        state.settings = settings.clone();
+        state
+    });
+    FULL_STATE.load().write_settings()?;
+    Ok(())
+}
+
+#[tauri::command(async)]
 pub fn state_get_specific_apps_configurations() -> Vec<AppConfig> {
     FULL_STATE
         .load()

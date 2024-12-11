@@ -12,6 +12,7 @@ use parking_lot::Mutex;
 use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
+use crate::modules::cli::domain::Resource;
 use crate::modules::virtual_desk::{VirtualDesktopManager, VIRTUAL_DESKTOP_MANAGER};
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_bar::FancyToolbar;
@@ -173,10 +174,12 @@ pub fn process_uri(uri: &str) -> Result<()> {
 
     let engine = base64::engine::general_purpose::URL_SAFE_NO_PAD;
     let decoded = engine.decode(contents.as_bytes())?;
-
-    let mut state = FULL_STATE.load().cloned();
-    state.load_resource(serde_yaml::from_slice(&decoded)?)?;
-    state.store();
+    let resource: Resource = serde_yaml::from_slice(&decoded)?;
+    FULL_STATE.rcu(|state| {
+        let mut state = state.cloned();
+        let _ = state.load_resource(resource.clone());
+        state
+    });
     Ok(())
 }
 

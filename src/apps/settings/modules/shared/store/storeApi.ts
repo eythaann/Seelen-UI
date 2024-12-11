@@ -7,7 +7,6 @@ import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
 import { UserSettings } from '../../../../../shared.interfaces';
-import { VariableConvention } from '../../../../shared/schemas';
 
 export class UserSettingsLoader {
   private _withUserApps: boolean = false;
@@ -86,11 +85,8 @@ export class UserSettingsLoader {
 }
 
 export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
-  const json_route = await resolveDataPath('settings.json');
-  await fs.writeTextFile(
-    json_route,
-    JSON.stringify(VariableConvention.fromCamelToSnake(settings), null, 2),
-  );
+  // TODO add command to SeelenCommand enum list and replace here
+  await invoke('state_write_settings', { settings });
 }
 
 export async function saveUserSettings(

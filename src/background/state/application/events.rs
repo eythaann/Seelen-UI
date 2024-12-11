@@ -2,21 +2,11 @@ use itertools::Itertools;
 use seelen_core::{handlers::SeelenEvent, state::WegItems};
 use tauri::Emitter;
 
-use crate::{
-    error_handler::Result,
-    seelen::{get_app_handle, SEELEN},
-    trace_lock,
-};
+use crate::{error_handler::Result, seelen::get_app_handle, trace_lock};
 
 use super::FullState;
 
 impl FullState {
-    pub(super) fn emit_settings(&self) -> Result<()> {
-        get_app_handle().emit(SeelenEvent::StateSettingsChanged, self.settings())?;
-        trace_lock!(SEELEN).on_settings_change()?;
-        Ok(())
-    }
-
     pub fn emit_weg_items(&self, items: &WegItems) -> Result<()> {
         get_app_handle().emit(SeelenEvent::StateWegItemsChanged, items)?;
         Ok(())

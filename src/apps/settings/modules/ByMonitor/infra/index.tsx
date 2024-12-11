@@ -147,14 +147,14 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
 
 export function SettingsByMonitor() {
   const devices = useSelector(newSelectors.connectedMonitors);
-  const monitors = useSelector(newSelectors.monitorsV2);
+  const settingsByMonitor = useSelector(newSelectors.monitorsV2);
 
   const dispatch = useDispatch();
 
   function onMonitorChange(id: string, monitor: MonitorConfiguration) {
     dispatch(
       RootActions.setMonitors({
-        ...monitors,
+        ...settingsByMonitor,
         [id]: monitor,
       }),
     );
@@ -162,17 +162,14 @@ export function SettingsByMonitor() {
 
   return (
     <>
-      {Object.entries(monitors).map(([id, monitor]) => {
-        let device = devices.find((d) => d.id === id);
-        if (!device) {
-          return null;
-        }
+      {devices.map((device) => {
+        let monitor = settingsByMonitor[device.id] || new MonitorConfiguration();
         return (
           <MonitorConfig
-            key={id}
+            key={device.id}
             device={device}
             config={monitor}
-            onChange={onMonitorChange.bind(null, id)}
+            onChange={onMonitorChange.bind(null, device.id)}
           />
         );
       })}

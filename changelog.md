@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fixes
+- fix settings `cancel` button not working correctly.
+- fix settings `save` button not saving the monitor settings correctly.
+
 ## [2.0.9]
 ### enhancements
 - add `XboxGameBarWidgets.exe` to the bundled apps settings list.
