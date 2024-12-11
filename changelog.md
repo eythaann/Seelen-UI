@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.10]
 ### fixes
 - fix settings `cancel` button not working correctly.
 - fix settings `save` button not saving the monitor settings correctly.
