@@ -57,6 +57,7 @@ toolbar:
   label: Балтсний хайрцагны хэрэгсэл
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
+  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 wm:
   border:
     offset: Хилийн офсет
@@ -87,6 +88,7 @@ weg:
   dock_side: Байрлал
   delay_to_show: Үзүүлэхийг хойшлуулсан
   delay_to_hide: Нуухыг хойшлуулах
+  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 devtools:
   settings_file: Тохиргооын нэр
   enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх

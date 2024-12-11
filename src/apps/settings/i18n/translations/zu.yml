@@ -58,6 +58,7 @@ toolbar:
   label: Indawo yamathuluzi
   delay_to_show: Libazisa ukubonisa
   delay_to_hide: Libazise ukucasha
+  use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
 wm:
   border:
     enable: Nika amandla umngcele wewindi
@@ -88,6 +89,7 @@ weg:
   dock_side: Ukuma
   delay_to_show: Libazisa ukubonisa
   delay_to_hide: Libazise ukucasha
+  use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
 devtools:
   install_folder: Ifolda yokufaka
   data_folder: Ifolda yedatha

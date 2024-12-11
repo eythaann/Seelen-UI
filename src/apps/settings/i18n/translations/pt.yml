@@ -65,6 +65,7 @@ toolbar:
   label: Barra de ferramentas
   delay_to_show: Demora para mostrar
   delay_to_hide: Demora para esconder
+  use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 wm:
   layout: Disposição
   author: Autor
@@ -95,6 +96,7 @@ weg:
   dock_side: Posição
   delay_to_hide: Demora para esconder
   delay_to_show: Demora para mostrar
+  use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 devtools:
   enable: Habilitar ferramentas para desenvolvedores
   app_folders: Pastas de aplicativos

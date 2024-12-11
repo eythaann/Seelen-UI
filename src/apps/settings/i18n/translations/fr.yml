@@ -61,6 +61,9 @@ toolbar:
   label: Barre d'outils
   delay_to_hide: Retarder pour se cacher
   delay_to_show: Retard à afficher
+  use_multiple_monitor_overlap_logic: >-
+    Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
+    point unique
 wm:
   layout: Mise en page
   author: Auteur
@@ -91,6 +94,9 @@ weg:
   dock_side: Position
   delay_to_hide: Retarder pour se cacher
   delay_to_show: Retard à afficher
+  use_multiple_monitor_overlap_logic: >-
+    Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
+    point unique
 devtools:
   enable: Activer les outils de développement
   app_folders: Dossiers d'applications

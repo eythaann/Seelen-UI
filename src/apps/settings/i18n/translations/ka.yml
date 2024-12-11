@@ -58,6 +58,7 @@ toolbar:
   label: ინსტრუმენტთა პანელი
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
+  use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
 wm:
   border:
     enable: ფანჯრის საზღვრის ჩართვა
@@ -88,6 +89,7 @@ weg:
   dock_side: პოზიცია
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
+  use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
 devtools:
   enable: ჩართეთ დეველოპერის ინსტრუმენტები
   app_folders: აპლიკაციის საქაღალდეები

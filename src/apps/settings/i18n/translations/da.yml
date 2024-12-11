@@ -58,6 +58,7 @@ toolbar:
   label: Værktøjslinje
   delay_to_show: Forsinket fremvisning
   delay_to_hide: Forsink med at skjule
+  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
 wm:
   border:
     width: Grænsebredde
@@ -88,6 +89,7 @@ weg:
   dock_side: Position
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
+  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
 devtools:
   enable: Aktivér udviklerværktøjer
   settings_file: Indstillinger fil

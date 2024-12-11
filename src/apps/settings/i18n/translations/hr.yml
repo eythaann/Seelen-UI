@@ -58,6 +58,7 @@ toolbar:
   label: Alatna traka
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
+  use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
 wm:
   border:
     offset: Offset
@@ -88,6 +89,7 @@ weg:
   dock_side: Položaj
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
+  use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
 devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku
   data_folder: Mapa podataka

@@ -58,6 +58,7 @@ toolbar:
   label: Alət çubuğu
   delay_to_show: Göstərmək üçün gecikmə
   delay_to_hide: Gizlətmək üçün gecikmə
+  use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
 wm:
   border:
     width: Sərhəd eni
@@ -88,6 +89,7 @@ weg:
   dock_side: Mövqe
   delay_to_show: Göstərmək üçün gecikmə
   delay_to_hide: Gizlətmək üçün gecikmə
+  use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
 devtools:
   app_folders: Tətbiq qovluqları
   data_folder: Məlumat qovluğu

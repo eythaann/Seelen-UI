@@ -58,6 +58,7 @@ toolbar:
   label: Toolbar
   delay_to_show: Dewmien biex juri
   delay_to_hide: Dewmien biex jinħbew
+  use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
 wm:
   border:
     enable: Ippermetti l-fruntiera tat-tieqa
@@ -88,6 +89,7 @@ weg:
   dock_side: Pożizzjoni
   delay_to_show: Dewmien biex juri
   delay_to_hide: Dewmien biex jinħbew
+  use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
 devtools:
   data_folder: Folder tad-dejta
   install_folder: Folder tal-installazzjoni

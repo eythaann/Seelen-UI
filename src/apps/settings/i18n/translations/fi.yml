@@ -58,6 +58,7 @@ toolbar:
   label: Työkalurivi
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
+  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
 wm:
   border:
     offset: Rajan siirtyminen
@@ -88,6 +89,7 @@ weg:
   dock_side: Sijainti
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
+  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
 devtools:
   load: Ladata
   custom_config_file: Lataa mukautettu konfigurointitiedosto

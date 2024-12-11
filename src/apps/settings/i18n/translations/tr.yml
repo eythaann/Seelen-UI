@@ -58,6 +58,7 @@ toolbar:
   label: Araç Çubuğu
   delay_to_hide: Gizlenmeyi geciktir
   delay_to_show: Gösterme gecikmesi
+  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
 wm:
   border:
     width: Kenar Genişliği
@@ -88,6 +89,7 @@ weg:
   dock_side: Konum
   delay_to_hide: Gizlenmeyi geciktir
   delay_to_show: Gösterme gecikmesi
+  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
 devtools:
   custom_config_file: Özel Yapılandırma Dosyası Yükle
   settings_file: Ayarlar Dosyası

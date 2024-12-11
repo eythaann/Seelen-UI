@@ -58,6 +58,7 @@ toolbar:
   label: TO-tcstar
   delay_to_show: Verspéidung fir ze weisen
   delay_to_hide: Verspéidung ze verstoppen
+  use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
 wm:
   border:
     width: Grenz Breet
@@ -88,6 +89,7 @@ weg:
   dock_side: Positioun un
   delay_to_show: Verspéidung fir ze weisen
   delay_to_hide: Verspéidung ze verstoppen
+  use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
 devtools:
   app_folders: App Classeure
   enable: Aktivéiert Entwéckler Tools

@@ -58,6 +58,7 @@ toolbar:
   label: Панель інструментів
   delay_to_show: Затримка, щоб показати
   delay_to_hide: Затримка, щоб сховатися
+  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
 wm:
   border:
     width: Ширина кордону
@@ -88,6 +89,7 @@ weg:
   dock_side: Позиція
   delay_to_show: Затримка, щоб показати
   delay_to_hide: Затримка, щоб сховатися
+  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
 devtools:
   load: Навантаження
   app_folders: Папки додатків

@@ -58,6 +58,7 @@ toolbar:
   label: Bara de instrumente
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
+  use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
 wm:
   border:
     enable: Activați granița ferestrei
@@ -88,6 +89,7 @@ weg:
   dock_side: Poziţie
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
+  use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
 devtools:
   load: Sarcină
   data_folder: Folder de date

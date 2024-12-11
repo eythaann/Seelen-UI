@@ -64,6 +64,7 @@ toolbar:
   label: شريط الأدوات
   delay_to_show: تأخير في العرض
   delay_to_hide: تأخير الاختباء
+  use_multiple_monitor_overlap_logic: استخدم عرضًا خاصًا بدلاً من منطق التركيز الفردي
 wm:
   layout: تَخطِيط
   author: مؤلف
@@ -94,6 +95,7 @@ weg:
   dock_side: موضع
   delay_to_hide: تأخير الاختباء
   delay_to_show: تأخير في العرض
+  use_multiple_monitor_overlap_logic: استخدم عرضًا خاصًا بدلاً من منطق التركيز الفردي
 devtools:
   enable: تمكين أدوات المطور
   app_folders: مجلدات التطبيق

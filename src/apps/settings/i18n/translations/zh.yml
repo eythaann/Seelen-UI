@@ -63,6 +63,7 @@ toolbar:
   label: 工具栏
   delay_to_hide: 延迟隐藏
   delay_to_show: 延迟显示
+  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
 wm:
   layout: 布局
   author: 作者
@@ -93,6 +94,7 @@ weg:
   dock_side: 位置
   delay_to_hide: 隐藏延迟
   delay_to_show: 显示延迟
+  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
 devtools:
   enable: 启用开发工具
   app_folders: 应用程序文件夹

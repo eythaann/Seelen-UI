@@ -56,6 +56,7 @@ toolbar:
   label: የመሣሪያ አሞሌ
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
+  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 wm:
   border:
     width: ድንበር ስፋት
@@ -86,6 +87,7 @@ weg:
   dock_side: አቀማመጥ
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
+  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 devtools:
   app_folders: የመተግበሪያ አቃፊዎች
   data_folder: የውሂብ አቃፊ

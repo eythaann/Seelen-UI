@@ -57,6 +57,7 @@ toolbar:
   label: Алатна трака
   delay_to_hide: Одложите да се сакријете
   delay_to_show: Одлагање приказивања
+  use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
 wm:
   border:
     enable: Омогућите границу прозора
@@ -87,6 +88,7 @@ weg:
   dock_side: Положај
   delay_to_hide: Одложите да бисте се сакрили
   delay_to_show: Одлагање приказивања
+  use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
 devtools:
   enable: Омогућите алате за програмере
   load: Оптеретити

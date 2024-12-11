@@ -58,6 +58,7 @@ toolbar:
   label: Tööriistariba
   delay_to_show: Näitamisega viivitus
   delay_to_hide: Viivitage peitmine
+  use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
 wm:
   border:
     width: Piirilaius
@@ -88,6 +89,7 @@ weg:
   dock_side: Positsioon
   delay_to_show: Näitamisega viivitus
   delay_to_hide: Viivitage peitmine
+  use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
 devtools:
   app_folders: Rakenduse kaustad
   data_folder: Andmekaust
