@@ -30,3 +30,7 @@ jobs:
 
       - name: Commit & Pull Request
         uses: peter-evans/create-pull-request@v7
+        with:
+          sign-commits: true
+          commit-message: "build(deps): update slu-lib dependency"
+          title: "build(deps): update slu-lib dependency"
