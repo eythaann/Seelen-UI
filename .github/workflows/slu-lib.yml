@@ -2,7 +2,7 @@ name: Seelen UI Library dependency update
 
 on:
   repository_dispatch:
-    types: [trigger-deployment]
+    types: [update-slu-lib]
   workflow_dispatch:
 
 jobs:
