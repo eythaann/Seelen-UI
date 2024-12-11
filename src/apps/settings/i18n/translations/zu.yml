@@ -89,6 +89,8 @@ weg:
   dock_side: Ukuma
   delay_to_show: Libazisa ukubonisa
   delay_to_hide: Libazise ukucasha
+  behaviour: Ukuziphatha okuningi kokubonisa
+  item_show_upon_multitaskbar: Khombisa izinhlelo zokusebenza zami ze-taskbar on
   use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
 devtools:
   install_folder: Ifolda yokufaka

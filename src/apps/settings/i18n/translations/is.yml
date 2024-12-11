@@ -89,6 +89,8 @@ weg:
   dock_side: Staða
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
+  behaviour: Margfeldi skjáhegðun
+  item_show_upon_multitaskbar: Sýndu verkefnisstikaforritin mín
   use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í stað eins fókus rökfræði
 devtools:
   load: Hlaða

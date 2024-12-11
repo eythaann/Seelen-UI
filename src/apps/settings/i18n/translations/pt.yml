@@ -96,6 +96,8 @@ weg:
   dock_side: Posição
   delay_to_hide: Demora para esconder
   delay_to_show: Demora para mostrar
+  item_show_upon_multitaskbar: Mostre meus aplicativos de barra de tarefas em
+  behaviour: Múltiplo de comportamento de exibição
   use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 devtools:
   enable: Habilitar ferramentas para desenvolvedores

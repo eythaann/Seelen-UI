@@ -2,7 +2,10 @@ use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
 use crate::{
-    error_handler::Result, log_error, seelen::get_app_handle, windows_api::MonitorEnumerator,
+    error_handler::Result,
+    log_error,
+    seelen::get_app_handle,
+    windows_api::{window::Window, MonitorEnumerator},
 };
 
 use super::{domain::PhysicalMonitor, MonitorManager};
@@ -26,4 +29,10 @@ pub fn register_monitor_webview_events() {
 #[tauri::command(async)]
 pub fn get_connected_monitors() -> Result<Vec<PhysicalMonitor>> {
     _get_connected_monitors()
+}
+
+#[tauri::command(async)]
+pub fn get_current_monitor(window: tauri::Window) -> Result<PhysicalMonitor> {
+    let monitor = Window::from(window.hwnd()?).monitor();
+    monitor.try_into()
 }

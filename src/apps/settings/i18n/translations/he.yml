@@ -88,6 +88,8 @@ weg:
   dock_side: מַצָב
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
+  behaviour: התנהגות תצוגה מרובה
+  item_show_upon_multitaskbar: הראה את אפליקציות שורת המשימות שלי
   use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
 devtools:
   load: לִטעוֹן

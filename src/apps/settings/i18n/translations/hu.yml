@@ -89,6 +89,8 @@ weg:
   dock_side: Pozíció
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
+  item_show_upon_multitaskbar: Mutasd meg a tálca -alkalmazásaimat
+  behaviour: Többszörös megjelenítési viselkedés
   use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
 devtools:
   load: Betöltés

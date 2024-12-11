@@ -88,6 +88,8 @@ weg:
   dock_side: موقعیت
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
+  item_show_upon_multitaskbar: زما د کاري پربيز ایپسونه وښایاست
+  behaviour: د ډیری ښکاره چلند
   use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 devtools:
   custom_config_file: د دودیز ترتیب فایل پورته کړئ

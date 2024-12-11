@@ -89,6 +89,8 @@ weg:
   dock_side: Safle
   delay_to_show: Oedi i ddangos
   delay_to_hide: Oedi i guddio
+  item_show_upon_multitaskbar: Dangos fy apiau bar tasgau ymlaen
+  behaviour: Ymddygiad arddangos lluosog
   use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
 devtools:
   data_folder: Ffolder data

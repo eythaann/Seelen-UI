@@ -91,6 +91,8 @@ weg:
   dock_side: Posició
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
+  item_show_upon_multitaskbar: Mostra les meves aplicacions de la barra de tasques
+  behaviour: Comportament de visualització múltiple
   use_multiple_monitor_overlap_logic: >-
     Utilitzeu la lògica específica de la pantalla en lloc de la lògica
     d'enfocament únic

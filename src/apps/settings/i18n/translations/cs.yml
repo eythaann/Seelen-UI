@@ -89,6 +89,8 @@ weg:
   dock_side: Pozice
   delay_to_hide: Odložit se schovat
   delay_to_show: Zpoždění zobrazení
+  behaviour: Více chování zobrazení
+  item_show_upon_multitaskbar: Zobrazit mé aplikace na hlavním panelu
   use_multiple_monitor_overlap_logic: Místo logiky jednoho zaměření použijte specifickou obrazovku
 devtools:
   data_folder: Datová složka

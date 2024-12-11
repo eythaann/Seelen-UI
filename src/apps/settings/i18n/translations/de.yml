@@ -96,6 +96,8 @@ weg:
   dock_side: Position
   delay_to_show: Verzögerung beim Anzeigen
   delay_to_hide: Verzögerung zum Verstecken
+  item_show_upon_multitaskbar: Zeigen Sie meine Taskleisten -Apps an
+  behaviour: Mehrfach Anzeigeverhalten
   use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
 devtools:
   enable: Entwicklerwerkzeuge aktivieren

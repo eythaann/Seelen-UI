@@ -88,6 +88,8 @@ weg:
   dock_side: स्थिति
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
+  behaviour: बहुविध प्रदर्शन व्यवहार
+  item_show_upon_multitaskbar: मेरो टास्कबार अनुप्रयोगहरू देखाउनुहोस्
   use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
 devtools:
   app_folders: निल्डर

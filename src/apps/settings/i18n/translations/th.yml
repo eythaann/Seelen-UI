@@ -88,6 +88,8 @@ weg:
   dock_side: ตำแหน่ง
   delay_to_show: ล่าช้าในการแสดง
   delay_to_hide: ล่าช้าในการซ่อน
+  item_show_upon_multitaskbar: แสดงแอพแถบงานของฉันบน
+  behaviour: พฤติกรรมการแสดงผลหลายอย่าง
   use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
 devtools:
   settings_file: ไฟล์การตั้งค่า

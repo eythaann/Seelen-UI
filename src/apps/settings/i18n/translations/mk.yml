@@ -89,6 +89,8 @@ weg:
   dock_side: Позиција
   delay_to_hide: Одложување за сокривање
   delay_to_show: Одложување за прикажување
+  item_show_upon_multitaskbar: Покажете ги моите апликации за лентата со задачи на
+  behaviour: Повеќекратно однесување на екранот
   use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
 devtools:
   load: Оптоварување

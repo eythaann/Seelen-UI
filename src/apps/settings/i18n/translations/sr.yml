@@ -88,6 +88,8 @@ weg:
   dock_side: Положај
   delay_to_hide: Одложите да бисте се сакрили
   delay_to_show: Одлагање приказивања
+  item_show_upon_multitaskbar: Прикажи апликације за траке за траку на траци
+  behaviour: Вишеструко понашање екрана
   use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
 devtools:
   enable: Омогућите алате за програмере

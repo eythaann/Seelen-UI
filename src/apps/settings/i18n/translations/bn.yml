@@ -89,6 +89,8 @@ weg:
   dock_side: অবস্থান
   delay_to_show: দেখাতে বিলম্ব
   delay_to_hide: আড়াল করতে বিলম্ব
+  item_show_upon_multitaskbar: আমার টাস্কবার অ্যাপস চালু করুন
+  behaviour: একাধিক প্রদর্শন আচরণ
   use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
 devtools:
   enable: বিকাশকারী সরঞ্জাম সক্ষম করুন

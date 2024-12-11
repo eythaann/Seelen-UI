@@ -89,6 +89,8 @@ weg:
   dock_side: Chức vụ
   delay_to_show: Trì hoãn hiển thị
   delay_to_hide: Trì hoãn việc ẩn giấu
+  item_show_upon_multitaskbar: Hiển thị các ứng dụng Thanh nhiệm vụ của tôi trên
+  behaviour: Nhiều hành vi hiển thị
   use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
 devtools:
   load: Trọng tải

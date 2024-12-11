@@ -89,6 +89,8 @@ weg:
   dock_side: პოზიცია
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
+  behaviour: მრავალჯერადი ჩვენების ქცევა
+  item_show_upon_multitaskbar: აჩვენეთ ჩემი დავალების პანელის პროგრამები
   use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
 devtools:
   enable: ჩართეთ დეველოპერის ინსტრუმენტები

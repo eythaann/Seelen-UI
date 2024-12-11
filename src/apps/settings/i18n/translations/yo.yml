@@ -88,6 +88,8 @@ weg:
   dock_side: Ipo
   delay_to_show: Idaduro lati ṣafihan
   delay_to_hide: Idaduro lati tọju
+  item_show_upon_multitaskbar: Fihan Awọn ohun elo MyBar Mi lori
+  behaviour: Ihuwasi ifihan pupọ
   use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
 devtools:
   app_folders: Awọn folda App

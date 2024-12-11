@@ -87,6 +87,8 @@ weg:
   dock_side: አቀማመጥ
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
+  behaviour: በርካታ የማሳያ ባህሪ
+  item_show_upon_multitaskbar: የተግባር አሞሌ መተግበሪያዎችን አሳይ
   use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 devtools:
   app_folders: የመተግበሪያ አቃፊዎች
