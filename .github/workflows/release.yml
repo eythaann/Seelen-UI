@@ -74,7 +74,7 @@ jobs:
           toolchain: nightly-2024-06-25
 
       - name: Install frontend dependencies
-        run: npm install && npm install -D seelen-core@npm:@seelen-ui/lib@next
+        run: npm install
 
       - uses: tauri-apps/tauri-action@v0
         env:

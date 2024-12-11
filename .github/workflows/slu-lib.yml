@@ -33,4 +33,7 @@ jobs:
         with:
           sign-commits: true
           commit-message: "build(deps): update slu-lib dependency"
+          branch: "dependency/slu-lib"
           title: "build(deps): update slu-lib dependency"
+          body: "Update seelen ui library dependency"
+          labels: "dependencies,javascript,rust"

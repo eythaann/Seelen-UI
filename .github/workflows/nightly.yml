@@ -57,7 +57,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
 
       - name: Install frontend dependencies
-        run: npm clean-install && npm install -D seelen-core@npm:@seelen-ui/lib@next
+        run: npm clean-install
 
       - name: Change version to nightly
         uses: actions/github-script@v6
