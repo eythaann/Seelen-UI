@@ -1,4 +1,24 @@
 .taskbar {
+  --scroll-height: 8px;
+
+  ::-webkit-scrollbar {
+    width: var(--scroll-height);
+    height: var(--scroll-height);
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-gray-400);
+    border-radius: var(--scroll-height);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-gray-500);
+  }
+
   .taskbar-bg-layer-1 {
     opacity: 0.3;
     filter: saturate(0);
@@ -11,6 +31,47 @@
     opacity: 0.8;
     background-color: var(--color-gray-100);
     border-radius: 15px;
+  }
+
+  & .taskbar-scroll-inner-frame {
+    .horizontal & {
+      height: calc(var(--config-item-zoom-size) + var(--config-padding) - 1px);
+
+      .top & {
+        transform: rotateX(180deg);
+      }
+    }
+
+    .vertical & {
+      width: calc(var(--config-item-zoom-size) + var(--config-padding));
+
+      .left & {
+        width: calc(var(--config-item-zoom-size) + var(--config-padding) - 1px);
+
+        transform: rotateY(180deg);
+      }
+    }
+  }
+
+  &.horizontal .taskbar-scroll-container {
+    top: calc(var(--config-item-size) - var(--config-item-zoom-size) - var(--config-padding));
+    height: calc(var(--config-item-zoom-size) + var(--config-padding) * 2 + var(--scroll-height));
+
+    .top & {
+      top: calc(var(--scroll-height) * -1 - var(--config-padding));
+      transform: rotateX(180deg);
+    }
+  }
+  
+  
+  &.vertical .taskbar-scroll-container {
+    left: calc(var(--config-item-size) - var(--config-item-zoom-size) - var(--config-padding));
+    width: calc(var(--config-item-zoom-size) + var(--config-padding) * 2 + var(--scroll-height));
+
+    .left & {
+      left: calc(var(--scroll-height) * -1 - var(--config-padding));
+      transform: rotateY(180deg);
+    }
   }
 }
 
@@ -44,7 +105,7 @@
 .vertical .weg-item::before {
   top: 50%;
   transform: translateY(-50%);
-  width: calc(100% + var(--config-padding) + var(--config-margin));
+  width: calc(100% + var(--config-padding));
   height: calc(100% + var(--config-space-between-items));
 }
 
@@ -52,7 +113,7 @@
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% + var(--config-space-between-items));
-  height: calc(100% + var(--config-padding) + var(--config-margin));
+  height: calc(100% + var(--config-padding));
 }
 
 .bottom .weg-item::before {
@@ -71,33 +132,35 @@
   left: 0;
 }
 
-.weg-item-drag-container:not(.dragging) {
-  --item-size-diff: calc(var(--config-item-zoom-size) - var(--config-item-size));
+.taskbar:not(:has( .weg-item-drag-container.dragging)) {
+  .weg-item-drag-container {
+    --item-size-diff: calc(var(--config-item-zoom-size) - var(--config-item-size));
 
-  &:has(+ .weg-item-drag-container + .weg-item-drag-container:hover) .weg-item {
-    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-  }
-
-  &:has(+ .weg-item-drag-container:hover) .weg-item {
-    width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-    height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
-  }
-
-  &:hover {
-    .weg-item {
-      width: var(--config-item-zoom-size);
-      height: var(--config-item-zoom-size);
+    &:has(+ .weg-item-drag-container + .weg-item-drag-container:hover) .weg-item {
+      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
     }
 
-    + .weg-item-drag-container > .weg-item {
+    &:has(+ .weg-item-drag-container:hover) .weg-item {
       width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
       height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
     }
 
-    + .weg-item-drag-container + .weg-item-drag-container .weg-item {
-      width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
-      height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+    &:hover {
+      .weg-item {
+        width: var(--config-item-zoom-size);
+        height: var(--config-item-zoom-size);
+      }
+
+      + .weg-item-drag-container > .weg-item {
+        width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+        height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.3));
+      }
+
+      + .weg-item-drag-container + .weg-item-drag-container .weg-item {
+        width: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+        height: calc(var(--config-item-zoom-size) - (var(--item-size-diff) * 0.7));
+      }
     }
   }
 }

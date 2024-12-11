@@ -23,11 +23,12 @@ import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
   item: PinnedWegItem | TemporalWegItem;
+  drag: boolean | 'x' | 'y' | undefined;
   // This will be triggered in case preview or context menu is opened from this item, or both of them closed.
   onAssociatedViewOpenChanged?: (isOpen: boolean) => void;
 }
 
-export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
+export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }: Props) => {
   const isFocused = useSelector(
     (state: RootState) =>
       state.focusedApp && item.windows.some((w) => w.handle === state.focusedApp!.hwnd),
@@ -91,6 +92,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
     <DraggableItem
       item={item}
       className={cx({ 'associated-view-open': openPreview || openContextMenu })}
+      drag={drag} 
     >
       <WithContextMenu
         items={getUserApplicationContextMenu(t, item, devTools) || []}
