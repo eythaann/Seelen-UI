@@ -1,5 +1,6 @@
 import {
   HideMode,
+  SeelenWegItemDisplayOption,
   SeelenWegMode,
   SeelenWegSide,
   WegItemType,
@@ -18,7 +19,7 @@ import { UserApplication } from '../item/infra/UserApplication';
 import { RootActions, Selectors } from '../shared/store/app';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
-import { SeparatorWegItem, SwItem } from '../shared/store/domain';
+import { OpenedWindow, SeparatorWegItem, SwItem } from '../shared/store/domain';
 
 import { cx } from '../../../shared/styles';
 import { WithContextMenu } from '../../components/WithContextMenu';
@@ -63,6 +64,7 @@ export function SeelenWeg() {
 
   const settings = useSelector(Selectors.settings);
   const isOverlaped = useSelector(Selectors.isOverlaped);
+  const monitorInfo = useSelector(Selectors.monitorInfo);
 
   const pinnedOnLeft = useSelector(Selectors.itemsOnLeft);
   const pinnedOnCenter = useSelector(Selectors.itemsOnCenter);
@@ -121,6 +123,10 @@ export function SeelenWeg() {
   );
 
   const onReorderPinned = useCallback((apps: SwItem[]) => {
+    if (settings.multitaskbarItemVisibilityBehaviour != SeelenWegItemDisplayOption.AllOnAll || !monitorInfo.isPrimary) {
+      return;
+    }
+
     let extractedPinned: SwItem[] = [];
 
     apps.forEach((app) => {
@@ -150,11 +156,58 @@ export function SeelenWeg() {
 
   const projectSwItem = (item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen)));
 
+  let shouldBeReduced = [];
+  switch (settings.multitaskbarItemVisibilityBehaviour) {
+    case SeelenWegItemDisplayOption.PrimaryScreenAll:
+      if (monitorInfo.isPrimary) {
+        shouldBeReduced = [];
+      } else {
+        shouldBeReduced = [ WegItemType.Pinned, WegItemType.Temporal ];
+      }
+      break;
+    case SeelenWegItemDisplayOption.Minimal:
+      if (monitorInfo.isPrimary) {
+        shouldBeReduced = [ WegItemType.Temporal ];
+      } else {
+        shouldBeReduced = [ WegItemType.Pinned, WegItemType.Temporal ];
+      }
+      break;
+    default:
+      shouldBeReduced = [];
+      break;
+  }
+
+  function isOnMonitor(item: SwItem) {
+    if (shouldBeReduced.includes(item.type)) {
+      return !('opens' in item) || item.opens.some((current: OpenedWindow) => current.presentative_monitor == monitorInfo.id);
+    } else {
+      return true;
+    }
+  }
+
+  function filterOpenElement(item: SwItem): SwItem {
+    const newItem = { ...item };
+
+    if (('opens' in item)) {
+      if (monitorInfo.isPrimary) {
+        newItem.opens = item.opens.filter((current: OpenedWindow) => settings.multitaskbarItemVisibilityBehaviour != SeelenWegItemDisplayOption.Minimal || current.presentative_monitor == monitorInfo.id);
+      } else {
+        newItem.opens = item.opens.filter((current: OpenedWindow) => current.presentative_monitor == monitorInfo.id);
+      }
+    }
+
+    return newItem;
+  }
+
+  const filteredPinOnLeft = pinnedOnLeft.filter(isOnMonitor).map(filterOpenElement);
+  const filteredPinOnCenter = pinnedOnCenter.filter(isOnMonitor).map(filterOpenElement);
+  const filteredPinOnRight = pinnedOnRight.filter(isOnMonitor).map(filterOpenElement);
+
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
       <Reorder.Group
         as="div"
-        values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
+        values={[...filteredPinOnLeft, Separator1, ...filteredPinOnCenter, Separator2, ...filteredPinOnRight]}
         onReorder={onReorderPinned}
         axis={isHorizontal ? 'x' : 'y'}
         className={cx('taskbar', settings.position.toLowerCase(), {
@@ -166,7 +219,7 @@ export function SeelenWeg() {
         })}>
         <BackgroundByLayersV2 prefix="taskbar" />
         {[
-          ...pinnedOnLeft.map(projectSwItem),
+          ...filteredPinOnLeft.map(projectSwItem),
           <Reorder.Item
             as="div"
             key="separator1"
@@ -175,9 +228,9 @@ export function SeelenWeg() {
               visible: settings.visibleSeparators,
             })}
             drag={false}
-            style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
+            style={getSeparatorComplementarySize(filteredPinOnLeft.length, filteredPinOnCenter.length)}
           />,
-          ...pinnedOnCenter.map(projectSwItem),
+          ...filteredPinOnCenter.map(projectSwItem),
           <Reorder.Item
             as="div"
             key="separator2"
@@ -186,9 +239,9 @@ export function SeelenWeg() {
               visible: settings.visibleSeparators,
             })}
             drag={false}
-            style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
+            style={getSeparatorComplementarySize(filteredPinOnRight.length, filteredPinOnCenter.length)}
           />,
-          ...pinnedOnRight.map(projectSwItem),
+          ...filteredPinOnRight.map(projectSwItem),
         ]}
       </Reorder.Group>
     </WithContextMenu>

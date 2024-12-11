@@ -189,6 +189,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         check_for_updates,
         install_last_available_update,
         get_connected_monitors,
+        get_current_monitor,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,

@@ -60,6 +60,13 @@ pub struct SeelenWegApp {
     icon_path: PathBuf,
     execution_path: String,
     creator_hwnd: isize,
+    presentative_monitor: String,
+}
+
+#[derive(Debug, Serialize, Clone)]
+pub struct OpenedWindowPositionChanged {
+    hwnd: isize,
+    presentative_monitor: String,
 }
 
 #[derive(Getters, MutGetters)]
@@ -98,6 +105,26 @@ impl SeelenWeg {
         trace_lock!(OPEN_APPS)
             .iter()
             .any(|app| app.hwnd == addr || app.creator_hwnd == addr)
+    }
+
+    pub fn update_app_position(hwnd: HWND) {
+        let addr = hwnd.0 as isize;
+        let mut apps = trace_lock!(OPEN_APPS);
+        let app = apps.iter_mut().find(|app| app.hwnd == addr);
+        if let (Some(app), Ok(window_position)) = (app, Window::from(hwnd).monitor().device_id()) {
+            if app.presentative_monitor != window_position {
+                app.presentative_monitor = window_position.clone();
+                get_app_handle()
+                    .emit(
+                        SeelenEvent::WegUpdateMonitorPosition,
+                        OpenedWindowPositionChanged {
+                            hwnd: app.hwnd,
+                            presentative_monitor: window_position,
+                        },
+                    )
+                    .expect("Failed to emit");
+            }
+        }
     }
 
     pub fn update_app(hwnd: HWND) {
@@ -140,6 +167,7 @@ impl SeelenWeg {
             execution_path: program_path.to_string_lossy().to_string(),
             icon_path: Default::default(),
             creator_hwnd: creator.hwnd().0 as isize,
+            presentative_monitor: creator.monitor().device_id()?,
         };
 
         if let Some(umid) = creator.app_user_model_id() {

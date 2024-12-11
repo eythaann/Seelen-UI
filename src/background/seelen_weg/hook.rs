@@ -36,6 +36,11 @@ impl SeelenWeg {
                     Self::remove_hwnd(origin);
                 }
             }
+            WinEvent::ObjectLocationChange => {
+                if Self::contains_app(origin) {
+                    Self::update_app_position(origin);
+                }
+            }
             WinEvent::ObjectNameChange => {
                 if Self::contains_app(origin) {
                     Self::update_app(origin);
