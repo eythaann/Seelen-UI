@@ -79,7 +79,7 @@ jobs:
             fs.writeFileSync('Cargo.toml', cargoTomlContent);
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
-      - uses: tauri-apps/tauri-action@v0
+      - uses: tauri-apps/tauri-action@v0.5.16
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
