@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - add new setting on dock and toolbar to maintain overlap state by monitor.
+- add service to restart the seelen-ui app on crash.
 
 ### refactor
 - custom http server to serve files instead bundle it in the executable on development (local).

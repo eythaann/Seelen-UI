@@ -572,6 +572,7 @@ Section Install
   ; Copy main executable
   File "${MAINBINARYSRCPATH}"
   FILE "${__FILEDIR__}\..\..\seelen_ui.pdb"
+  FILE "${__FILEDIR__}\..\..\slu-service.exe"
 
   ; Copy resources
   {{#each resources_dirs}}

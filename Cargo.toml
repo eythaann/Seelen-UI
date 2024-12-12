@@ -16,6 +16,10 @@ build = "scripts/build.rs"
 name = "seelen-ui"
 path = "src/background/main.rs"
 
+[[bin]]
+name = "slu-service"
+path = "src/service/main.rs"
+
 [profile.dev]
 incremental = true
 rustflags = ["-Z", "threads=8"]

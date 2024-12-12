@@ -41,9 +41,10 @@ use plugins::register_plugins;
 use seelen::{Seelen, SEELEN};
 use seelen_core::state::Settings;
 use tauri::webview_version;
+use tauri_plugin_shell::ShellExt;
 use tray::try_register_tray_icon;
 use utils::{
-    integrity::{validate_webview_runtime_is_installed, wait_for_webview_optimal_state},
+    integrity::{check_for_webview_optimal_state, validate_webview_runtime_is_installed},
     PERFORMANCE_HELPER,
 };
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
@@ -93,10 +94,36 @@ fn print_initial_information() {
     log::info!("Locate          : {:?}", Settings::get_locale());
 }
 
+fn run_slu_service(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
+    let path = std::env::current_exe()?;
+    app.shell().open(
+        path.with_file_name("slu-service.exe")
+            .to_string_lossy()
+            .to_string(),
+        None,
+    )?;
+    Ok(())
+}
+
+fn kill_slu_service() -> Result<()> {
+    let mut sys = sysinfo::System::new();
+    sys.refresh_processes();
+    let process = sys.processes().values().find(|p| {
+        p.exe()
+            .is_some_and(|path| path.ends_with("slu-service.exe"))
+    });
+    if let Some(process) = process {
+        process.kill();
+    }
+    Ok(())
+}
+
 fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
+    run_slu_service(app)?;
+
     validate_webview_runtime_is_installed(app.handle())?;
-    wait_for_webview_optimal_state(app.handle())?;
+    check_for_webview_optimal_state(app.handle())?;
 
     Client::listen_tcp()?;
     APP_HANDLE
@@ -132,6 +159,7 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
         }
         tauri::RunEvent::Exit => {
             log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
+            log_error!(kill_slu_service());
             if Seelen::is_running() {
                 trace_lock!(SEELEN).stop();
             }
