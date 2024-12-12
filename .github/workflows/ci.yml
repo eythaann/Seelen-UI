@@ -33,8 +33,6 @@ jobs:
           toolchain: nightly-2024-06-25
       - uses: Swatinem/rust-cache@v2
 
-      - run: mkdir dist
-
       - name: Linter
         run: |-
           rustup component add rustfmt
@@ -55,5 +53,4 @@ jobs:
         with:
           toolchain: nightly-2024-06-25
       - uses: Swatinem/rust-cache@v2
-      - run: mkdir dist
       - run: cargo test --locked --verbose

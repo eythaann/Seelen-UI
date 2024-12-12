@@ -13,18 +13,10 @@ pre-commit:
       priority: 2
       glob: "**/*.rs"
       run: cargo fmt -- --check
-    pre-hook:
-      priority: 3
-      glob: "**/*.rs"
-      run: rust-script ./scripts/lefthook/pre_hook.rs
     rust-code-check:
       priority: 4
       glob: "**/*.rs"
       run: cargo clippy -- -D warnings
-    post-hook:
-      priority: 6
-      glob: "**/*.rs"
-      run: rust-script ./scripts/lefthook/post_hook.rs
 
 pre-push:
   commands:
@@ -32,15 +24,7 @@ pre-push:
       priority: 1
       glob: "**/*.{js,jsx,ts,tsx}"
       run: npm run test
-    pre-hook:
-      priority: 2
-      glob: "**/*.rs"
-      run: rust-script ./scripts/lefthook/pre_hook.rs
     rust-test:
       priority: 3
       glob: "**/*.rs"
       run: cargo test
-    post-hook:
-      priority: 4
-      glob: "**/*.rs"
-      run: rust-script ./scripts/lefthook/post_hook.rs

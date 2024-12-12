@@ -1,15 +1,35 @@
 import esbuild from 'esbuild';
+import express from 'express';
 import fs from 'fs';
 import path from 'path';
 import { renderToStaticMarkup } from 'react-dom/server';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
+async function getArgs() {
+  const argv = await yargs(hideBin(process.argv))
+    .option('production', {
+      type: 'boolean',
+      description: 'Enable Production Minified Bundle',
+      default: false,
+    })
+    .option('serve', {
+      type: 'boolean',
+      description: 'Run a local server',
+      default: false,
+    }).argv;
+  return {
+    isProd: !!argv.production,
+    serve: !!argv.serve,
+  };
+}
+
 async function extractIconsIfNecessary() {
   if (fs.existsSync('./dist/icons')) {
     return;
   }
 
+  console.log('Extracting SVG Icons');
   console.time('Bundle Lazy Icons');
   fs.mkdirSync('./dist/icons', { recursive: true });
 
@@ -59,50 +79,71 @@ async function extractIconsIfNecessary() {
   console.timeEnd('Bundle Lazy Icons');
 }
 
-async function main() {
-  console.time('Build UI');
-  const argv = await yargs(hideBin(process.argv)).option('production', {
-    type: 'boolean',
-    description: 'Enable Production Minified Bundle',
-  }).argv;
+const appFolders = fs
+  .readdirSync('src/apps')
+  .filter((item) => item !== 'shared' && fs.statSync(path.join('src/apps', item)).isDirectory());
 
-  const isProdMode = !!argv.production;
-
-  const appFolders = fs
-    .readdirSync('src/apps')
-    .filter((item) => item !== 'shared' && fs.statSync(path.join('src/apps', item)).isDirectory());
-
-  // remove previous build
-  appFolders.forEach((folder) => {
-    const filePath = path.join('dist', folder);
-    if (fs.existsSync(filePath)) {
-      fs.rmSync(filePath, { recursive: true, force: true });
+const entryPoints = appFolders
+  .map((folder) => {
+    const vanilla = `./src/apps/${folder}/index.ts`;
+    const react = `./src/apps/${folder}/index.tsx`;
+    const svelte = `./src/apps/${folder}/index.svelte`;
+    if (fs.existsSync(vanilla)) {
+      return vanilla;
     }
+    if (fs.existsSync(react)) {
+      return react;
+    }
+    if (fs.existsSync(svelte)) {
+      return svelte;
+    }
+    return '';
+  })
+  .filter((file) => !!file);
+
+const copyPublicByEntry: esbuild.Plugin = {
+  name: 'copy-public-by-entry',
+  setup(build) {
+    build.onStart(() => {
+      console.time('Build UI');
+      // remove old builds
+      appFolders.forEach((folder) => {
+        const filePath = path.join('dist', folder);
+        if (fs.existsSync(filePath)) {
+          fs.rmSync(filePath, { recursive: true, force: true });
+        }
+      });
+    });
+    build.onEnd(() => {
+      // copy public folder for each widget
+      appFolders.forEach((folder) => {
+        let source = `src/apps/${folder}/public`;
+        let target = `dist/${folder}`;
+        fs.cpSync(source, target, { recursive: true });
+      });
+      console.timeEnd('Build UI');
+    });
+  },
+};
+
+function startDevServer() {
+  const app = express();
+  app.use(express.static('dist'));
+  app.listen(3579, () => {
+    console.log('Listening on http://localhost:3579');
   });
+}
 
-  const entryPoints = appFolders
-    .map((folder) => {
-      const vanilla = `./src/apps/${folder}/index.ts`;
-      const react = `./src/apps/${folder}/index.tsx`;
-      const svelte = `./src/apps/${folder}/index.svelte`;
-      if (fs.existsSync(vanilla)) {
-        return vanilla;
-      }
-      if (fs.existsSync(react)) {
-        return react;
-      }
-      if (fs.existsSync(svelte)) {
-        return svelte;
-      }
-      return '';
-    })
-    .filter((file) => !!file);
+void (async function main() {
+  const { isProd, serve } = await getArgs();
 
-  await esbuild.build({
+  await extractIconsIfNecessary();
+
+  const ctx = await esbuild.context({
     entryPoints: entryPoints,
     bundle: true,
-    minify: isProdMode,
-    sourcemap: !isProdMode,
+    minify: isProd,
+    sourcemap: !isProd,
     format: 'esm',
     outdir: './dist',
     jsx: 'automatic',
@@ -114,16 +155,14 @@ async function main() {
     loader: {
       '.yml': 'text',
     },
+    plugins: [copyPublicByEntry],
   });
 
-  appFolders.forEach((folder) => {
-    let source = `src/apps/${folder}/public`;
-    let target = `dist/${folder}`;
-    fs.cpSync(source, target, { recursive: true });
-  });
-  console.timeEnd('Build UI');
-
-  await extractIconsIfNecessary();
-}
-
-main();
+  if (serve) {
+    await ctx.watch();
+    startDevServer();
+  } else {
+    await ctx.rebuild();
+    await ctx.dispose();
+  }
+})();

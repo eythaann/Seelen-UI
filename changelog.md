@@ -1,6 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add new setting on dock and toolbar to maintain overlap state by monitor.
+
+### refactor
+- custom http server to serve files instead bundle it in the executable on development (local).
+
 ## [2.0.10]
 ### fixes
 - fix settings `cancel` button not working correctly.
