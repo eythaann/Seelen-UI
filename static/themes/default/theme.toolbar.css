@@ -43,6 +43,25 @@
   }
 }
 
+@keyframes PopupBaseAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.notification-open, .settings-open, .calendar-open, .tray-open, .wlan-open, .media-open,
+.notification-close, .settings-close, .calendar-close, .tray-close, .wlan-close, .media-close {
+ animation: PopupBaseAnimation 0.2s linear forwards; 
+}
+
+.notification-close, .settings-close, .calendar-close, .tray-close, .wlan-close, .media-close {
+  animation-direction: reverse;
+}
+
 .ft-bar {
   color: #fefefe;
 
