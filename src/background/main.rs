@@ -1,5 +1,6 @@
 // Prevents additional console window on Windows in release
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
+#![feature(never_type)]
 
 mod error_handler;
 mod exposed;
@@ -44,10 +45,10 @@ use tauri::webview_version;
 use tray::try_register_tray_icon;
 use utils::{
     integrity::{
-        check_for_webview_optimal_state, kill_slu_service, start_slu_service,
+        check_for_webview_optimal_state, kill_slu_service, restart_as_appx, start_slu_service,
         validate_webview_runtime_is_installed,
     },
-    PERFORMANCE_HELPER,
+    is_running_as_appx_package, was_installed_using_msix, PERFORMANCE_HELPER,
 };
 use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
@@ -100,7 +101,7 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
 
-    if !tauri::is_dev() {
+    if !tauri::is_dev() || is_running_as_appx_package() {
         start_slu_service(app)?;
     }
 
@@ -162,7 +163,6 @@ fn is_already_runnning() -> bool {
 
 fn main() -> Result<()> {
     register_panic_hook()?;
-    trace_lock!(PERFORMANCE_HELPER).start("setup");
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {
@@ -208,6 +208,11 @@ fn main() -> Result<()> {
         }
     }
 
+    if was_installed_using_msix() && !is_running_as_appx_package() {
+        restart_as_appx()?;
+    }
+
+    trace_lock!(PERFORMANCE_HELPER).start("setup");
     let mut app_builder = tauri::Builder::default();
     app_builder = register_plugins(app_builder);
     app_builder = register_invoke_handler(app_builder);

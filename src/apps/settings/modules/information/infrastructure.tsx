@@ -15,7 +15,7 @@ import { Icon } from '../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../components/SettingsBox';
 
 export function Information() {
-  const [isMsixBuild, setIsMsixBuild] = useState(false);
+  const [isMsixBuild, setIsMsixBuild] = useState(true);
   const [isDevMode, setIsDevMode] = useState(false);
 
   const devTools = useSelector(newSelectors.devTools);

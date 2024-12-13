@@ -17,7 +17,9 @@ use crate::seelen_weg::icon_extractor::{
 use crate::seelen_wm_v2::handler::*;
 use crate::state::infrastructure::*;
 use crate::system::brightness::*;
-use crate::utils::is_virtual_desktop_supported as virtual_desktop_supported;
+use crate::utils::{
+    is_running_as_appx_package, is_virtual_desktop_supported as virtual_desktop_supported,
+};
 use crate::windows_api::WindowsApi;
 use crate::winevent::{SyntheticFullscreenData, WinEvent};
 use crate::{log_error, utils};
@@ -83,6 +85,11 @@ fn run(program: String, args: Vec<String>) {
 #[tauri::command(async)]
 fn is_dev_mode() -> bool {
     tauri::is_dev()
+}
+
+#[tauri::command(async)]
+fn is_appx_package() -> bool {
+    is_running_as_appx_package()
 }
 
 #[tauri::command(async)]
@@ -165,6 +172,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         // General
         run,
         is_dev_mode,
+        is_appx_package,
         open_file,
         run_as_admin,
         select_file_on_explorer,

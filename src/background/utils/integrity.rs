@@ -105,3 +105,10 @@ pub fn kill_slu_service() -> Result<()> {
     }
     Ok(())
 }
+
+pub fn restart_as_appx() -> Result<!> {
+    std::process::Command::new("explorer")
+        .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
+        .spawn()?;
+    std::process::exit(0);
+}

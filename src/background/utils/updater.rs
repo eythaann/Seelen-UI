@@ -6,10 +6,10 @@ use crate::{
     utils::integrity::kill_slu_service,
 };
 
-use super::is_msix_intallation;
+use super::is_running_as_appx_package;
 
 pub async fn check_for_updates() -> Result<Option<Update>> {
-    if tauri::is_dev() || is_msix_intallation() {
+    if tauri::is_dev() || is_running_as_appx_package() {
         return Ok(None);
     }
 
