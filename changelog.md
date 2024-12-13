@@ -11,6 +11,9 @@
 ### refactor
 - custom http server to serve files instead bundle it in the executable on development (local).
 
+### fix
+- remove ghost settings window from dock.
+
 ## [2.0.10]
 ### fixes
 - fix settings `cancel` button not working correctly.

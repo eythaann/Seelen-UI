@@ -179,8 +179,9 @@ impl SeelenWeg {
             Err(_) => return false,
         };
 
-        if path.starts_with("C:\\Windows\\SystemApps")
-            || !window.is_visible()
+        if !window.is_visible()
+            || path.starts_with("C:\\Windows\\SystemApps")
+            || path.starts_with("C:\\Windows\\ImmersiveControlPanel")
             || window.parent().is_some()
             || window.is_seelen_overlay()
         {
