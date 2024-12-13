@@ -17,7 +17,7 @@ import {
   RootState,
 } from '../../shared/store/domain';
 
-import AnimatedPopover from '../../../../shared/components/AnimatedPopover';
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { getMenuForItem } from '../../bar/menu';

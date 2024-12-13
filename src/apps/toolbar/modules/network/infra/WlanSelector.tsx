@@ -13,7 +13,7 @@ import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { WlanBssEntry } from '../domain';
 
-import AnimatedPopover from '../../../../shared/components/AnimatedPopover';
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { WlanSelectorEntry } from './WlanSelectorEntry';
 
 function WlanSelector({ open }: { open: boolean }) {

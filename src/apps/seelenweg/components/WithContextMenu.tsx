@@ -1,10 +1,11 @@
-import { Dropdown, Menu } from 'antd';
+import { Menu } from 'antd';
 import { ItemType, MenuItemType } from 'antd/es/menu/interface';
 import { PropsWithChildren, useState } from 'react';
 
 import { BackgroundByLayersV2 } from './BackgroundByLayers/infra';
 
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
+import { AnimatedDropdown } from '../../shared/components/AnimatedWrappers';
+import { useWindowFocusChange } from '../../shared/hooks';
 
 interface Props extends PropsWithChildren {
   items: ItemType<MenuItemType>[];
@@ -21,7 +22,12 @@ export function WithContextMenu({ children, items, onOpenChange }: Props) {
   });
 
   return (
-    <Dropdown
+    <AnimatedDropdown
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'weg-context-menu-container-open',
+        closeAnimationName: 'weg-context-menu-container-close',
+      }}
       placement="topLeft"
       open={openContextMenu}
       onOpenChange={(isOpen) => {
@@ -49,6 +55,6 @@ export function WithContextMenu({ children, items, onOpenChange }: Props) {
       )}
     >
       {children}
-    </Dropdown>
+    </AnimatedDropdown>
   );
 }
