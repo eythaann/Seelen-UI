@@ -69,6 +69,23 @@ body {
   }
 }
 
+@keyframes PopupBaseAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.launcher-item-context-menu-open, 
+.launcher-item-context-menu-close {
+  animation: PopupBaseAnimation 0.2s linear forwards; 
+}
+.launcher-item-context-menu-close {
+  animation-direction: reverse;
+}
+
 .launcher-body {
   display: flex;
   flex-direction: column;

@@ -11,7 +11,7 @@ import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { RootState } from '../../shared/store/domain';
 
-import AnimatedPopover from '../../../../shared/components/AnimatedPopover';
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { ArrivalPreview } from './ArrivalPreview';
 import { Notifications } from './Notifications';
 
