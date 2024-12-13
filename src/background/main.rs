@@ -101,7 +101,7 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
 
-    if !tauri::is_dev() || is_running_as_appx_package() {
+    if !tauri::is_dev() && !is_running_as_appx_package() {
         start_slu_service(app)?;
     }
 
