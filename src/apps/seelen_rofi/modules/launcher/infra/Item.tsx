@@ -5,6 +5,8 @@ import { Menu } from 'antd';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
+
 import { StartMenuApp } from '../../shared/store/domain';
 
 import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';
@@ -31,24 +33,33 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
       }}
       trigger={['contextMenu']}
       dropdownRender={() => (
-        <Menu
-          items={[
-            {
-              label: t('item.pin'),
-              key: 'pin',
-              onClick() {
-                invoke(SeelenCommand.WegPinItem, { path });
+        <BackgroundByLayersV2
+          className="launcher-item-context-menu"
+          prefix="menu"
+          onContextMenu={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
+          <Menu
+            items={[
+              {
+                label: t('item.pin'),
+                key: 'pin',
+                onClick() {
+                  invoke(SeelenCommand.WegPinItem, { path });
+                },
               },
-            },
-            {
-              label: t('item.open_location'),
-              key: 'open',
-              onClick() {
-                invoke(SeelenCommand.SelectFileOnExplorer, { path });
+              {
+                label: t('item.open_location'),
+                key: 'open',
+                onClick() {
+                  invoke(SeelenCommand.SelectFileOnExplorer, { path });
+                },
               },
-            },
-          ]}
-        />
+            ]}
+          />
+        </BackgroundByLayersV2>
       )}
     >
       <button

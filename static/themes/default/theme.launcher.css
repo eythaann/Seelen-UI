@@ -69,6 +69,12 @@ body {
   }
 }
 
+.launcher-item-context-menu {
+  border-radius: 8px;
+  background-color: var(--color-gray-50);
+  box-shadow: 0 4px 10px 4px #0001;
+}
+
 @keyframes PopupBaseAnimation {
   0% {
     opacity: 0;
