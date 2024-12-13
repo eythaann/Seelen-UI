@@ -36,7 +36,7 @@
     "@tauri-apps/plugin-updater": "^2.0.0-beta.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
+    "@commitlint/cli": "^19.6.0",
     "@commitlint/config-conventional": "^19.2.2",
     "@reduxjs/toolkit": "^2.2.1",
     "@stylistic/eslint-plugin": "^1.6.2",
