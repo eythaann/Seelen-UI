@@ -14,7 +14,7 @@ import { useIcon, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { PinnedWegItem, RootState, TemporalWegItem } from '../../shared/store/domain';
 
-import AnimatedPopover from '../../../../shared/components/AnimatedPopover';
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';

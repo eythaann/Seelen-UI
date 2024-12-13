@@ -1,20 +1,16 @@
-import { Popover, PopoverProps } from 'antd';
+import { Dropdown, DropdownProps } from 'antd';
 import { useState } from 'react';
 
-import { useTimeout } from '../../hooks';
-import { cx } from '../../styles';
+import { CustomAnimationProps } from '../domain';
 
-export interface PopoverAnimationProps {
-  maxAnimationTimeMs: number;
-  openAnimationName: String;
-  closeAnimationName: String;
+import { useTimeout } from '../../../hooks';
+import { cx } from '../../../styles';
+
+export interface AnimatedDropwonProps extends DropdownProps {
+  animationDescription: CustomAnimationProps;
 }
 
-export interface AnimatedPopoverProps extends PopoverProps {
-  animationDescription: PopoverAnimationProps;
-}
-
-export default function AnimatedPopover({ children, open, content, animationDescription, ...popoverProps }: AnimatedPopoverProps) {
+export function AnimatedDropdown({ children, open, dropdownRender, animationDescription, ...dropdownProps }: AnimatedDropwonProps) {
   const [delayedOpenPopover, setDelayedOpenPopover] = useState(false);
 
   useTimeout(() => {
@@ -30,16 +26,16 @@ export default function AnimatedPopover({ children, open, content, animationDesc
   }
 
   return (
-    <Popover
+    <Dropdown
       open={open || delayedOpenPopover}
-      {...popoverProps}
-      content={content &&
+      {...dropdownProps}
+      dropdownRender={(origin) => dropdownRender &&
         <div className={cx(animationObject)}>
-          <>{content}</>
+          {dropdownRender(origin)}
         </div>
       }
     >
       {children}
-    </Popover>
+    </Dropdown>
   );
 }

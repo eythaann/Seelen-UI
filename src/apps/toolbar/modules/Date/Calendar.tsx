@@ -10,7 +10,7 @@ import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundBy
 
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
-import AnimatedPopover from '../../../shared/components/AnimatedPopover';
+import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
 import { Icon } from '../../../shared/components/Icon';
 import { cx } from '../../../shared/styles';
 

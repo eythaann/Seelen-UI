@@ -14,7 +14,7 @@ import { calcLuminance } from '../application';
 
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
 
-import AnimatedPopover from '../../../../shared/components/AnimatedPopover';
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { Icon } from '../../../../shared/components/Icon';
 import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 import { useTimeout, useWindowFocusChange } from '../../../../shared/hooks';
