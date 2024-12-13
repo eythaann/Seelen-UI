@@ -89,6 +89,8 @@ weg:
   dock_side: Positsioon
   delay_to_show: Näitamisega viivitus
   delay_to_hide: Viivitage peitmine
+  item_show_upon_multitaskbar: Näidake minu ülesanderiba rakendusi sisse
+  behaviour: Mitu kuva käitumine
   use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
 devtools:
   app_folders: Rakenduse kaustad

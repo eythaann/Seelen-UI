@@ -87,6 +87,8 @@ weg:
   dock_side: 位置
   delay_to_show: 表示が遅れる
   delay_to_hide: 隠れるまでの遅延
+  behaviour: 複数のディスプレイ動作
+  item_show_upon_multitaskbar: タスクバーアプリを表示します
   use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
 devtools:
   load: ロード

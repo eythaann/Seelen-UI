@@ -88,6 +88,8 @@ weg:
   dock_side: Вазъият
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
+  behaviour: Рафтори намоишии бисёр
+  item_show_upon_multitaskbar: Барномаҳои панели ман нишон диҳед
   use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
 devtools:
   custom_config_file: Файли танзимоти танзими фармоишӣ

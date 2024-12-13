@@ -89,6 +89,8 @@ weg:
   dock_side: ਸਥਿਤੀ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
+  behaviour: ਮਲਟੀਪਲ ਡਿਸਪਲੇਅ ਵਿਵਹਾਰ
+  item_show_upon_multitaskbar: ਮੇਰੇ ਟਾਸਕਬਾਰ ਐਪਸ ਨੂੰ ਦਿਖਾਓ
   use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
 devtools:
   load: ਲੋਡ ਕਰੋ

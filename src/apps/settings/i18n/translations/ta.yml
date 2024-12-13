@@ -89,6 +89,8 @@ weg:
   dock_side: நிலை
   delay_to_show: காட்ட தாமதம்
   delay_to_hide: மறைக்க தாமதம்
+  item_show_upon_multitaskbar: எனது பணிப்பட்டு பயன்பாடுகளைக் காட்டு
+  behaviour: பல காட்சி நடத்தை
   use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
 devtools:
   install_folder: நிறுவல் கோப்புறை

@@ -99,6 +99,8 @@ wm:
 weg:
   label: Dock/Taskbar
   enable: Enable Dock/Taskbar
+  behaviour: Multiple display behaviour
+  item_show_upon_multitaskbar: Show my taskbar apps on
   width: Width
   auto_hide: Auto Hide
   dock_side: Position

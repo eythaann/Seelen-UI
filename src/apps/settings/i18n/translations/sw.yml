@@ -88,6 +88,8 @@ weg:
   dock_side: Msimamo
   delay_to_show: Kuchelewa kuonyesha
   delay_to_hide: Kuchelewa kujificha
+  behaviour: Tabia nyingi za kuonyesha
+  item_show_upon_multitaskbar: Onyesha programu zangu za kazi
   use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
 devtools:
   app_folders: Folda za programu

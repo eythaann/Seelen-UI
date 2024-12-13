@@ -89,6 +89,8 @@ weg:
   dock_side: Positie
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
+  behaviour: Meervoudig weergavegedrag
+  item_show_upon_multitaskbar: Toon mijn taakbalk -apps op
   use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
 devtools:
   load: Laden

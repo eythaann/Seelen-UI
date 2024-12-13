@@ -89,6 +89,8 @@ weg:
   dock_side: Позиція
   delay_to_show: Затримка, щоб показати
   delay_to_hide: Затримка, щоб сховатися
+  behaviour: Численна поведінка дисплея
+  item_show_upon_multitaskbar: Покажіть мої додатки на панелі завдань
   use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
 devtools:
   load: Навантаження

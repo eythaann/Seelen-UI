@@ -88,6 +88,8 @@ weg:
   dock_side: Байрлал
   delay_to_show: Үзүүлэхийг хойшлуулсан
   delay_to_hide: Нуухыг хойшлуулах
+  item_show_upon_multitaskbar: Миний TaskBar програмыг харуул
+  behaviour: Олон дэлгэцийн зан байдал
   use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 devtools:
   settings_file: Тохиргооын нэр

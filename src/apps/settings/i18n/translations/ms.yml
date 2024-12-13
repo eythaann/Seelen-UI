@@ -89,6 +89,8 @@ weg:
   dock_side: Kedudukan
   delay_to_show: Kelewatan untuk menunjukkan
   delay_to_hide: Bertangguh untuk bersembunyi
+  item_show_upon_multitaskbar: Tunjukkan aplikasi bar tugas saya
+  behaviour: Tingkah laku paparan berganda
   use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
 devtools:
   load: Beban

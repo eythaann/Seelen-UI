@@ -89,6 +89,8 @@ weg:
   dock_side: තනතුර
   delay_to_hide: සැඟවීමට ප්රමාද
   delay_to_show: පෙන්වීමට ප්‍රමාදය
+  item_show_upon_multitaskbar: මගේ කාර්ය තීරු යෙදුම් බලන්න
+  behaviour: බහු දර්ශන හැසිරීම
   use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
 devtools:
   enable: සංවර්ධක මෙවලම් සබල කරන්න

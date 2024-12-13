@@ -89,6 +89,8 @@ weg:
   dock_side: Položaj
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
+  behaviour: Višestruko ponašanje prikaza
+  item_show_upon_multitaskbar: Prikaži moje aplikacije TawerBar
   use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
 devtools:
   custom_config_file: Učitajte prilagođenu konfiguracijsku datoteku

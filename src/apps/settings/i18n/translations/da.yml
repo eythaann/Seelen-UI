@@ -89,6 +89,8 @@ weg:
   dock_side: Position
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
+  item_show_upon_multitaskbar: Vis mine proceslinje -apps på
+  behaviour: Flere displayadfærd
   use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
 devtools:
   enable: Aktivér udviklerværktøjer

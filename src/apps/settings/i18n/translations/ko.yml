@@ -94,6 +94,8 @@ weg:
   dock_side: 위치
   delay_to_show: 표시 지연
   delay_to_hide: 숨기기 지연
+  behaviour: 다중 디스플레이 동작
+  item_show_upon_multitaskbar: 내 작업 표시 줄 앱을 표시하십시오
   use_multiple_monitor_overlap_logic: 단일 초점 논리 대신 디스플레이별 사용
 devtools:
   enable: 개발자 도구 활성화

@@ -96,6 +96,8 @@ weg:
     visible_separators: Разделители
   delay_to_show: Задержка показа
   delay_to_hide: Задержка, чтобы скрыть
+  item_show_upon_multitaskbar: Покажите мои приложения панели задач на
+  behaviour: Многократное поведение дисплея
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 devtools:
   enable: Включить инструменты разработчика

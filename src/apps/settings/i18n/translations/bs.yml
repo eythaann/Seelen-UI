@@ -89,6 +89,8 @@ weg:
   dock_side: Položaj
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
+  behaviour: Višestruko ponašanje prikaza
+  item_show_upon_multitaskbar: Pokažite moju aplikacije za zadaci
   use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
 devtools:
   app_folders: App Mape

@@ -89,6 +89,8 @@ weg:
   dock_side: స్థానం
   delay_to_show: చూపించడానికి ఆలస్యం
   delay_to_hide: దాచడానికి ఆలస్యం
+  item_show_upon_multitaskbar: నా టాస్క్‌బార్ అనువర్తనాలను చూపించు
+  behaviour: బహుళ ప్రదర్శన ప్రవర్తన
   use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
 devtools:
   enable: డెవలపర్ సాధనాలను ప్రారంభించండి
