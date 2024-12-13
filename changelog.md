@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.12]
 ### features
 - add new setting on dock and toolbar to maintain overlap state by monitor.
 - add service to restart the seelen-ui app on crash.
