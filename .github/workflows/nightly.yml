@@ -88,6 +88,7 @@ jobs:
           tagName: nightly
           releaseName: Seelen UI Nightly
           prerelease: true
+          includeDebug: true
           args: ${{ matrix.args }}
 
   remove-old-artifacts:
