@@ -33,6 +33,13 @@
   "bundle": {
     "active": true,
     "createUpdaterArtifacts": true,
+    "publisher": "Seelen",
+    "category": "Utility",
+    "copyright": "Copyright © 2024",
+    "shortDescription": "Seelen UI",
+    "longDescription": "Seelen UI Fully Customizable Desktop Environment for Windows",
+    "licenseFile": "LICENSE",
+    "homepage": "https://github.com/eythaann/Seelen-UI",
     "resources": [
       "static/**/*"
     ],
@@ -49,6 +56,7 @@
         "installerIcon": "static/icons/icon.ico",
         "sidebarImage": "static/icons/banner.bmp",
         "template": "templates/installer.nsi",
+        "installerHooks": "templates/installer-hooks.nsh",
         "installMode": "perMachine",
         "startMenuFolder": "Seelen",
         "displayLanguageSelector": true,
@@ -71,13 +79,6 @@
         ]
       }
     },
-    "publisher": "Seelen",
-    "category": "Utility",
-    "copyright": "Copyright © 2024",
-    "shortDescription": "Seelen UI",
-    "longDescription": "Seelen UI Fully Customizable Desktop Environment for Windows",
-    "licenseFile": "LICENSE",
-    "homepage": "https://github.com/eythaann/Seelen-UI",
     "fileAssociations": [
       {
         "ext": [

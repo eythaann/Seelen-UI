@@ -33,6 +33,7 @@ pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<(
             .blocking_show();
         if ok_pressed {
             let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
+            #[allow(deprecated)]
             app.shell().open(url, None)?;
         }
         return Err(title.into());
@@ -64,14 +65,43 @@ pub fn check_for_webview_optimal_state(app: &tauri::AppHandle) -> Result<()> {
 
 pub fn start_integrity_thread(app: tauri::AppHandle) {
     spawn_named_thread("Integrity", move || {
-        let mut attempts = 0;
-        while !WEBVIEW_STATE_VALIDATED.load(Ordering::SeqCst) && attempts < 5 {
-            attempts += 1;
-            std::thread::sleep(std::time::Duration::from_millis(1000));
+        // Maximum number of attempts to validate the webview state (max: 5 seconds)
+        let mut remaining_attempts = 50;
+        while !WEBVIEW_STATE_VALIDATED.load(Ordering::SeqCst) && remaining_attempts > 0 {
+            remaining_attempts -= 1;
+            std::thread::sleep(std::time::Duration::from_millis(100));
         }
-        if !WEBVIEW_STATE_VALIDATED.load(Ordering::SeqCst) {
+        // If all attempts are exhausted, exit the application with an error code
+        if remaining_attempts == 0 {
             app.exit(1);
         }
     })
     .expect("Failed to start integrity thread");
+}
+
+pub fn start_slu_service(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
+    log::trace!("Starting slu-service");
+    let path = std::env::current_exe()?;
+    #[allow(deprecated)]
+    app.shell().open(
+        path.with_file_name("slu-service.exe")
+            .to_string_lossy()
+            .to_string(),
+        None,
+    )?;
+    Ok(())
+}
+
+pub fn kill_slu_service() -> Result<()> {
+    log::trace!("Killing slu-service");
+    let mut sys = sysinfo::System::new();
+    sys.refresh_processes();
+    let process = sys.processes().values().find(|p| {
+        p.exe()
+            .is_some_and(|path| path.ends_with("slu-service.exe"))
+    });
+    if let Some(process) = process {
+        process.kill();
+    }
+    Ok(())
 }

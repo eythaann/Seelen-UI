@@ -159,7 +159,7 @@ void (async function main() {
   });
 
   if (serve) {
-    await ctx.watch();
+    await ctx.rebuild();
     startDevServer();
   } else {
     await ctx.rebuild();

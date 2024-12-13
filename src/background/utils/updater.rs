@@ -1,7 +1,10 @@
 use seelen_core::state::UpdateChannel;
 use tauri_plugin_updater::{Update, UpdaterExt};
 
-use crate::{error_handler::Result, seelen::get_app_handle, state::application::FULL_STATE};
+use crate::{
+    error_handler::Result, seelen::get_app_handle, state::application::FULL_STATE,
+    utils::integrity::kill_slu_service,
+};
 
 use super::is_msix_intallation;
 
@@ -44,12 +47,14 @@ pub async fn check_for_updates() -> Result<Option<Update>> {
 
 pub async fn trace_update_intallation(update: Update) -> Result<()> {
     log::trace!("Update: downloading");
-    update
-        .download_and_install(
+    let bytes = update
+        .download(
             |_chunk_length, _content_length| {},
             || log::trace!("Update: download finished"),
         )
         .await?;
+    kill_slu_service()?;
+    update.install(bytes)?;
     log::trace!("Update: intallation finished");
     Ok(())
 }
