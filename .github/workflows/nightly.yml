@@ -114,7 +114,7 @@ jobs:
           tag_name: nightly
           name: Seelen UI Nightly
           prerelease: true
-          files: target/release/bundle/*.msix
+          files: target/release/bundle/msix/*
 
   remove-old-artifacts:
     needs: build-installers
