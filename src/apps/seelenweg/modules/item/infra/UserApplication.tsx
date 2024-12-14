@@ -26,11 +26,12 @@ import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
   item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;
+  drag: boolean | 'x' | 'y' | undefined;
   // This will be triggered in case preview or context menu is opened from this item, or both of them closed.
   onAssociatedViewOpenChanged?: (isOpen: boolean) => void;
 }
 
-export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
+export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }: Props) => {
   const isFocused = useSelector(
     (state: RootState) => state.focusedApp && item.opens.includes(state.focusedApp.hwnd),
   );
@@ -88,7 +89,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   }, [openPreview || openContextMenu]);
 
   return (
-    <DraggableItem item={item} className={cx({ 'associated-view-open': openPreview || openContextMenu })}>
+    <DraggableItem item={item} drag={drag} className={cx({ 'associated-view-open': openPreview || openContextMenu })}>
       <WithContextMenu items={getMenuForItem(t, item) || []} onOpenChange={(isOpen) => {
         setOpenContextMenu(isOpen);
         if (openPreview && isOpen) {
