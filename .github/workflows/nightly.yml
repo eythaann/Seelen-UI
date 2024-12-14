@@ -91,6 +91,31 @@ jobs:
           includeDebug: true
           args: ${{ matrix.args }}
 
+      - name: Install winget
+        if: matrix.platform == 'windows-latest'
+        uses: Cyberboss/install-winget@v1
+
+      - name: Install MSIX dependencies
+        if: matrix.platform == 'windows-latest'
+        shell: powershell
+        run: |
+          winget install --id Microsoft.DotNet.AspNetCore.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements --force
+          winget install --id MarcinOtorowski.MSIXHero --accept-package-agreements --accept-source-agreements --force
+
+      - name: Bundle MSIX
+        if: matrix.platform == 'windows-latest'
+        run: npx ts-node scripts/bundle.msix.ts
+
+      - name: Upload msix to release
+        if: matrix.platform == 'windows-latest'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: Seelen UI Nightly
+          prerelease: true
+          files: target/release/bundle/*.msix
+
   remove-old-artifacts:
     needs: build-installers
     permissions:

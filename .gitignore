@@ -6,7 +6,6 @@ node_modules
 .env
 target
 gen
-.cert
 
 # Submission Files
 /scripts/SBTemp
