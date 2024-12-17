@@ -209,6 +209,16 @@ shortcuts:
     misc_open_settings: Vula izilungiselelo
     misc_toggle_lock_tracing: Guqula ukukhiya ukulandelela (izingodo)
     toggle_launcher: Ukuguqula
+    start_weg_app_1: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 1
+    start_weg_app_4: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 4
+    start_weg_app_0: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 10
+    start_weg_app_8: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 8
+    start_weg_app_9: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 9
+    start_weg_app_3: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 3
+    start_weg_app_2: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 2
+    start_weg_app_5: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 5
+    start_weg_app_6: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 6
+    start_weg_app_7: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 7
   enable: Nika amandla izinqamuleli ezihlanganisiwe (Ahk)
   enable_tooltip: >-
     Khubaza uma uzosebenzisa izinqamuleli zakho usebenzisa i-Seelen Core Core

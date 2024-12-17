@@ -245,6 +245,16 @@ shortcuts:
     send_to_workspace_7: Invia al Workspace 8
     send_to_workspace_8: Invia al Workspace 9
     send_to_workspace_9: Invia al Workspace 10
+    start_weg_app_7: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 7
+    start_weg_app_8: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 8
+    start_weg_app_1: Evidenzia o avvia l'app sulla posizione 1 della barra delle applicazioni
+    start_weg_app_3: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 3
+    start_weg_app_6: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 6
+    start_weg_app_0: Evidenzia o avvia l'app sulla posizione 10 della barra delle applicazioni
+    start_weg_app_2: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 2
+    start_weg_app_4: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 4
+    start_weg_app_9: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 9
+    start_weg_app_5: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 5
     misc_open_settings: Apri Impostazioni
     misc_toggle_lock_tracing: Attiva/Disattiva Tracciamento Blocco (log)
     misc_toggle_win_event_tracing: Attiva/Disattiva Tracciamento Eventi Windows (log)

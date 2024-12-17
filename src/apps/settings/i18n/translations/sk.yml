@@ -209,6 +209,16 @@ shortcuts:
     misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
     misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
     toggle_launcher: Prepínanie
+    start_weg_app_7: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 7
+    start_weg_app_2: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 2
+    start_weg_app_6: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 6
+    start_weg_app_0: Zamerajte alebo spustite aplikáciu na paneli úloh na pozícii 10
+    start_weg_app_5: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 5
+    start_weg_app_8: Zamerajte alebo spustite aplikáciu na paneli úloh na pozícii 8
+    start_weg_app_9: Zamerajte alebo spustite aplikáciu na paneli úloh 9
+    start_weg_app_4: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 4
+    start_weg_app_1: Zameranie alebo spustenie aplikácie na paneli úloh 1
+    start_weg_app_3: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 3
   enable: Povoliť integrované skratky (AHK)
   enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
   reset: Reset na predvolené hodnoty

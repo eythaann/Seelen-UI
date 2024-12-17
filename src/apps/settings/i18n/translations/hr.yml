@@ -209,6 +209,16 @@ shortcuts:
     misc_toggle_lock_tracing: Preklopljenje zaključavanja (zapisnici)
     misc_open_settings: Otvorene postavke
     toggle_launcher: Prebacivanje
+    start_weg_app_6: Fokusirajte ili pokrenite aplikaciju na poziciji programske trake 6
+    start_weg_app_0: Fokusirajte ili pokrenite aplikaciju na poziciji programske trake 10
+    start_weg_app_1: Fokusirajte ili pokrenite aplikaciju na poziciji programske trake 1
+    start_weg_app_9: Fokusirajte ili pokrenite aplikaciju na poziciji programske trake 9
+    start_weg_app_8: Fokusirajte ili pokrenite aplikaciju na poziciji programske trake 8
+    start_weg_app_5: Fokusirajte ili pokrenite aplikaciju na poziciji 5 programske trake
+    start_weg_app_3: Fokusirajte ili pokrenite aplikaciju na poziciji 3 programske trake
+    start_weg_app_2: Fokusirajte ili pokrenite aplikaciju na poziciji programske trake 2
+    start_weg_app_4: Fokusirajte ili pokrenite aplikaciju na poziciji 4 programske trake
+    start_weg_app_7: Fokusirajte ili pokrenite aplikaciju na poziciji programske trake 7
   enable_tooltip: >-
     Onemogući ako ćete implementirati vlastite prečace pomoću Seelen Core API
     -ja

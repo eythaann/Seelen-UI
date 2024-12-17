@@ -209,6 +209,16 @@ shortcuts:
     misc_open_settings: Otvorite postavke
     misc_toggle_win_event_tracing: Toggle win za praćenje događaja (trupci)
     toggle_launcher: Preklopiti
+    start_weg_app_6: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 6
+    start_weg_app_7: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 7
+    start_weg_app_4: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 4
+    start_weg_app_0: Fokusirajte ili pokrenite aplikaciju na poziciji 10 na traci zadataka
+    start_weg_app_9: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 9
+    start_weg_app_2: Fokusirajte ili pokrenite aplikaciju na poziciji 2 na traci zadataka
+    start_weg_app_1: Fokusirajte ili pokrenite aplikaciju na poziciji 1 na traci zadataka
+    start_weg_app_5: Fokusirajte ili pokrenite aplikaciju na poziciji 5 na traci zadataka
+    start_weg_app_3: Fokusirajte ili pokrenite aplikaciju na poziciji 3 na traci zadataka
+    start_weg_app_8: Fokusirajte ili pokrenite aplikaciju na poziciji 8 na traci zadataka
   enable: Omogući integrirane prečice (AHK)
   enable_tooltip: >-
     Onemogućite ako ćete implementirati vlastite prečice koristeći Seelen Core

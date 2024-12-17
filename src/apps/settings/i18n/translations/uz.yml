@@ -209,6 +209,36 @@ shortcuts:
     misc_toggle_lock_tracing: Qulfni qaytarish (jurnallar)
     misc_toggle_win_event_tracing: Tap The The The The Trecing (jurnallar)
     toggle_launcher: Almashtirmoq
+    start_weg_app_5: >-
+      Vazifalar panelidagi 5-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_7: >-
+      Vazifalar panelidagi 7-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_4: >-
+      Vazifalar panelidagi 4-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_8: >-
+      Vazifalar panelidagi 8-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_3: >-
+      Vazifalar panelidagi 3-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_9: >-
+      Vazifalar panelidagi 9-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_2: >-
+      Vazifalar panelidagi 2-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_1: >-
+      Vazifalar panelidagi 1-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_0: >-
+      Vazifalar panelidagi 10-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
+    start_weg_app_6: >-
+      Vazifalar panelidagi 6-pozitsiyaga diqqatni qarating yoki ilovani ishga
+      tushiring
   enable: Birlashtirilgan yorliqlarni yoqish (AHK)
   enable_tooltip: >-
     Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
