@@ -13,6 +13,12 @@ impl WindowsString {
         }
     }
 
+    pub fn from_str(s: &str) -> Self {
+        Self {
+            inner: s.encode_utf16().chain(Some(0)).collect(),
+        }
+    }
+
     pub fn len(&self) -> usize {
         self.inner
             .iter()

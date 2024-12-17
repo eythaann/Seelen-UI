@@ -168,6 +168,8 @@ async fn install_last_available_update() -> Result<()> {
 }
 
 pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
+    use crate::modules::language;
+
     app_builder.invoke_handler(tauri::generate_handler![
         // General
         run,
@@ -241,5 +243,6 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         // notifications
         notifications_close,
         notifications_close_all,
+        language::get_system_languages,
     ])
 }

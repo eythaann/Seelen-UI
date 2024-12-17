@@ -93,6 +93,7 @@ features = [
     "ApplicationModel_Background",         # background taks
     "Foundation_Collections",              # uwp apps
     "Management_Deployment",               # uwp apps
+    "Win32_Globalization",
     "Win32_UI_Input_KeyboardAndMouse",
     "Win32_UI_WindowsAndMessaging",
     "Win32_UI_Shell",

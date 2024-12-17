@@ -80,9 +80,9 @@ use windows::{
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow},
-                SHCreateItemFromParsingName, SHQueryUserNotificationState, ShellLink,
-                VirtualDesktopManager, QUERY_USER_NOTIFICATION_STATE, QUNS_RUNNING_D3D_FULL_SCREEN,
-                SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, SHLoadIndirectString, SHQueryUserNotificationState,
+                ShellLink, VirtualDesktopManager, QUERY_USER_NOTIFICATION_STATE,
+                QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
@@ -555,6 +555,13 @@ impl WindowsApi {
                 arguments.to_os_string(),
             ))
         })
+    }
+
+    pub fn resolve_indirect_string(text: &str) -> Result<String> {
+        let source = WindowsString::from_str(text);
+        let mut out = WindowsString::new_to_fill(1024);
+        unsafe { SHLoadIndirectString(source.as_pcwstr(), out.as_mut_slice(), None)? };
+        Ok(out.to_string())
     }
 
     pub fn get_executable_display_name(hwnd: HWND) -> Result<String> {
