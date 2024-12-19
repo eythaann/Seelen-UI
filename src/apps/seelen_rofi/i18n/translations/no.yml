@@ -7,5 +7,5 @@ footer:
 header:
   search: App, kommando eller sti
 item:
-  pin: Pin til Dock
   open_location: Åpen filplassering
+  pin: Pin til Dock

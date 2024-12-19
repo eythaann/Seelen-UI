@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Мултимедија
-    comunications: Комуникации
-  input_device: Влезен уред
-  output_device: Излезен уред
-  master_volume: Господар волумен
-  players: Медиа плеери
-network:
-  placeholder:
-    password: Лозинка
-  hidden: Скриена мрежа
-  not_found: Не се пронајдени мрежи
-  disconnect: Исклучување
-  connect: Поврзете се
-  more: Повеќе мрежни поставки
-  scanning: Скенирање за мрежи
-  saved: Зачувани мрежи
-  available: Достапни мрежи
-  connected: Поврзан со
-  secured: Шифрирана мрежа
-settings:
-  shutdown: Исклучи
-  restart: Рестарт
-  log_out: Одјавете се
-  app_settings: Поставки за апликации
-  title: Поставки
-  sleep: Спиење
-  power: Моќ
-placeholder:
-  ethernet_connected: Интернет пристап
-  volume: Волумен
-  settings: Брзи поставки
-  bluetooth_devices: Bluetooth & уреди
-  battery_remaining: Останатите %
-  smart_charge: '- Паметно полнење'
-  open_system_tray: Отворен фиока за систем
-  open_user_folder: Отворете ја папката за корисници
-  ethernet_disconnected: Нема пристап до Интернет
-  notifications: Известувања
-unlabelled_tray: Икона за обележување на послужавник
 context_menu:
-  remove: Отстранете го модулот
   add_module: Додадете модул
+  remove: Отстранете го модулот
   settings: Поставки
   task_manager: Управувач со задачи
+media:
+  device:
+    comunications: Комуникации
+    multimedia: Мултимедија
+  input_device: Влезен уред
+  master_volume: Господар волумен
+  output_device: Излезен уред
+  players: Медиа плеери
+network:
+  available: Достапни мрежи
+  connect: Поврзете се
+  connected: Поврзан со
+  disconnect: Исклучување
+  hidden: Скриена мрежа
+  more: Повеќе мрежни поставки
+  not_found: Не се пронајдени мрежи
+  placeholder:
+    password: Лозинка
+  saved: Зачувани мрежи
+  scanning: Скенирање за мрежи
+  secured: Шифрирана мрежа
+placeholder:
+  battery_remaining: Останатите %
+  bluetooth_devices: Bluetooth & уреди
+  ethernet_connected: Интернет пристап
+  ethernet_disconnected: Нема пристап до Интернет
+  notifications: Известувања
+  open_system_tray: Отворен фиока за систем
+  open_user_folder: Отворете ја папката за корисници
+  settings: Брзи поставки
+  smart_charge: '- Паметно полнење'
+  volume: Волумен
+settings:
+  app_settings: Поставки за апликации
+  log_out: Одјавете се
+  power: Моќ
+  restart: Рестарт
+  shutdown: Исклучи
+  sleep: Спиење
+  title: Поставки
+unlabelled_tray: Икона за обележување на послужавник

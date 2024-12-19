@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Dodaj moduł Start
-  media: Dodaj moduł nośnika
-  add_file: Plik niestandardowy
-  add_folder: Pin Custom Folder
-  settings: Ustawienia
-  task_manager: Menedżer zadań
 app_menu:
-  unpin: Odpiąć
-  pin: Szpilka
-  run_as: Uruchom jako administrator
-  open_file_location: Otwórz lokalizację pliku
   close: Zamknąć
-  pin_to_center: Pin do środka
-  pin_to_right: Pin po prawej
-  copy_handles: Kopiuj uchwyty
   close_multiple: Zamknij wszystko
-  pin_to_left: Szpilka do lewej
+  copy_handles: Kopiuj uchwyty
   kill: Zabij proces
   kill_multiple: Zabij wszystkie procesy
+  open_file_location: Otwórz lokalizację pliku
+  pin: Szpilka
+  pin_to_center: Pin do środka
+  pin_to_left: Szpilka do lewej
+  pin_to_right: Pin po prawej
+  run_as: Uruchom jako administrator
+  unpin: Odpiąć
+media:
+  not_playing: Nic nie gra
 media_menu:
   remove: Usuń moduł multimediów
 start_menu:
   remove: Usuń moduł startowy
-media:
-  not_playing: Nic nie gra
+taskbar_menu:
+  add_file: Plik niestandardowy
+  add_folder: Pin Custom Folder
+  media: Dodaj moduł nośnika
+  settings: Ustawienia
+  start: Dodaj moduł Start
+  task_manager: Menedżer zadań

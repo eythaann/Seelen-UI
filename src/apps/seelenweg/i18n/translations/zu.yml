@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Faka imodyuli yabezindaba
-  start: Faka imodyuli yokuqala
-  add_file: I-PIN ifayela ngokwezifiso
-  add_folder: Ifolda yangokwezifiso
-  settings: Izilungiselelo
-  task_manager: Umphathi Womsebenzi
 app_menu:
-  pin_to_center: Pin esikhungweni
   close: Ngokuminyanisa
   close_multiple: Vala konke
+  copy_handles: Kopisha izibambo
+  kill: Kill Process
+  kill_multiple: Bulala Zonke Izinqubo
   open_file_location: Vula Indawo yefayela
+  pin: Isipeletu
+  pin_to_center: Pin esikhungweni
   pin_to_left: Pin kwesokunxele
   pin_to_right: Pin kwesokudla
   run_as: Gijima njengomlawuli
-  copy_handles: Kopisha izibambo
   unpin: Unpin
-  pin: Isipeletu
-  kill: Kill Process
-  kill_multiple: Bulala Zonke Izinqubo
+media:
+  not_playing: Akukho okudlalayo
 media_menu:
   remove: Susa imodyuli yabezindaba
 start_menu:
   remove: Susa imodyuli yokuqala
-media:
-  not_playing: Akukho okudlalayo
+taskbar_menu:
+  add_file: I-PIN ifayela ngokwezifiso
+  add_folder: Ifolda yangokwezifiso
+  media: Faka imodyuli yabezindaba
+  settings: Izilungiselelo
+  start: Faka imodyuli yokuqala
+  task_manager: Umphathi Womsebenzi

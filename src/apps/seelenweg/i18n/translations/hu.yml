@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Adjon hozzá média modult
-  start: Adja hozzá a Start modult
-  add_folder: Pin egyéni mappa
-  add_file: Pin egyedi fájl
-  settings: Beállítások elemre
-  task_manager: Feladatkezelő
 app_menu:
-  pin_to_right: Pin jobbra
-  unpin: Kibont
-  run_as: Futtatás rendszergazdaként
-  pin: Csap
   close: Bezárás
   close_multiple: Zárja be az összeset
-  pin_to_left: Pin balra
-  pin_to_center: Pin a középpontba
-  open_file_location: Nyissa meg a fájl helyét
   copy_handles: Másolás fogantyúk
   kill: Kill Process
   kill_multiple: Öld meg az összes folyamatot
+  open_file_location: Nyissa meg a fájl helyét
+  pin: Csap
+  pin_to_center: Pin a középpontba
+  pin_to_left: Pin balra
+  pin_to_right: Pin jobbra
+  run_as: Futtatás rendszergazdaként
+  unpin: Kibont
+media:
+  not_playing: Semmi sem játszik
 media_menu:
   remove: Távolítsa el a média modult
 start_menu:
   remove: Távolítsa el a Start modult
-media:
-  not_playing: Semmi sem játszik
+taskbar_menu:
+  add_file: Pin egyedi fájl
+  add_folder: Pin egyéni mappa
+  media: Adjon hozzá média modult
+  settings: Beállítások elemre
+  start: Adja hozzá a Start modult
+  task_manager: Feladatkezelő

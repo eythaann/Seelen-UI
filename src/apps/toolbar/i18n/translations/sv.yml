@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Kommunikation
-  input_device: Inmatningsapparat
-  output_device: Utmatningsanordning
-  players: Mediaspelare
-  master_volume: Mastervolym
-network:
-  placeholder:
-    password: Lösenord
-  more: Fler nätverksinställningar
-  not_found: Inga nätverk hittades
-  disconnect: Koppla ifrån
-  connect: Ansluta
-  hidden: Doldnätverk
-  connected: Ansluten till
-  scanning: Söker efter nätverk
-  secured: Krypterat nätverk
-  available: Tillgängliga nätverk
-  saved: Sparade nätverk
-settings:
-  shutdown: Stänga av
-  restart: Omstart
-  app_settings: App inställningar
-  title: inställningar
-  sleep: Sova
-  log_out: Logga ut
-  power: Driva
-placeholder:
-  ethernet_disconnected: Ingen internetuppkoppling
-  battery_remaining: '% återstående'
-  open_system_tray: Öppet system
-  ethernet_connected: internetåtkomst
-  volume: Volym
-  open_user_folder: Öppen användarmapp
-  bluetooth_devices: Bluetooth & enheter
-  settings: Snabbinställningar
-  smart_charge: '- Smart laddning'
-  notifications: Meddelanden
-unlabelled_tray: Omärkta fackikon
 context_menu:
-  remove: Ta bort modulen
   add_module: Lägg till modul
+  remove: Ta bort modulen
   settings: Inställningar
   task_manager: Task Manager
+media:
+  device:
+    comunications: Kommunikation
+    multimedia: Multimedia
+  input_device: Inmatningsapparat
+  master_volume: Mastervolym
+  output_device: Utmatningsanordning
+  players: Mediaspelare
+network:
+  available: Tillgängliga nätverk
+  connect: Ansluta
+  connected: Ansluten till
+  disconnect: Koppla ifrån
+  hidden: Doldnätverk
+  more: Fler nätverksinställningar
+  not_found: Inga nätverk hittades
+  placeholder:
+    password: Lösenord
+  saved: Sparade nätverk
+  scanning: Söker efter nätverk
+  secured: Krypterat nätverk
+placeholder:
+  battery_remaining: '% återstående'
+  bluetooth_devices: Bluetooth & enheter
+  ethernet_connected: internetåtkomst
+  ethernet_disconnected: Ingen internetuppkoppling
+  notifications: Meddelanden
+  open_system_tray: Öppet system
+  open_user_folder: Öppen användarmapp
+  settings: Snabbinställningar
+  smart_charge: '- Smart laddning'
+  volume: Volym
+settings:
+  app_settings: App inställningar
+  log_out: Logga ut
+  power: Driva
+  restart: Omstart
+  shutdown: Stänga av
+  sleep: Sova
+  title: inställningar
+unlabelled_tray: Omärkta fackikon

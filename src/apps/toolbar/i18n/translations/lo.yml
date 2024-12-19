@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: ໂມສອນເຄີຍີຫໍ້
-    comunications: ການສື່ສານ
-  master_volume: ປະລິມານຕົ້ນສະບັບ
-  output_device: ອຸປະກອນຜົນໄດ້ຮັບ
-  players: ເຄື່ອງຫຼີ້ນສື່
-  input_device: ອຸປະກອນປ້ອນຂໍ້ມູນ
-network:
-  placeholder:
-    password: ລະຫັດຜ່ານ
-  disconnect: ຕັດຂາດ
-  hidden: ເຄືອຂ່າຍທີ່ເຊື່ອງໄວ້
-  not_found: ບໍ່ພົບເຄືອຂ່າຍທີ່ພົບ
-  more: ການຕັ້ງຄ່າເຄືອຂ່າຍເພີ່ມເຕີມ
-  connect: ເຊື່ອມຕໍ່
-  saved: ເຄືອຂ່າຍທີ່ບັນທຶກໄວ້
-  secured: ເຄືອຂ່າຍເຂົ້າລະຫັດ
-  scanning: ກຳລັງສະແກນຫາເຄືອຂ່າຍ
-  available: ເຄືອຂ່າຍທີ່ມີຢູ່
-  connected: ເຊື່ອມຕໍ່ກັບ
-settings:
-  shutdown: ປິດ​ເຄື່ອງ
-  restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່
-  log_out: ອອກ​ຈາກ​ລະ​ບົບ
-  title: ການກໍານົດ
-  app_settings: ການຕັ້ງຄ່າແອັບ app
-  sleep: ນອນ
-  power: ພະເດດ
-placeholder:
-  ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
-  smart_charge: '- ຮັບຜິດຊອບສະຫຼາດ'
-  battery_remaining: ສ່ວນທີ່ເຫຼືອ
-  volume: ປະລິມານ
-  open_system_tray: ເປີດຖາດລະບົບ
-  open_user_folder: ເປີດໂຟນເດີຜູ້ໃຊ້
-  ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
-  bluetooth_devices: Bluetooth & ອຸປະກອນ
-  settings: ການຕັ້ງຄ່າດ່ວນ
-  notifications: ແຈ້ງການ
-unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ
 context_menu:
   add_module: ເພີ່ມໂມດູນ
   remove: ດຶງອອກຈາກໂມດູນ
   settings: ການຕັ້ງຄ່າ
   task_manager: Task Manager
+media:
+  device:
+    comunications: ການສື່ສານ
+    multimedia: ໂມສອນເຄີຍີຫໍ້
+  input_device: ອຸປະກອນປ້ອນຂໍ້ມູນ
+  master_volume: ປະລິມານຕົ້ນສະບັບ
+  output_device: ອຸປະກອນຜົນໄດ້ຮັບ
+  players: ເຄື່ອງຫຼີ້ນສື່
+network:
+  available: ເຄືອຂ່າຍທີ່ມີຢູ່
+  connect: ເຊື່ອມຕໍ່
+  connected: ເຊື່ອມຕໍ່ກັບ
+  disconnect: ຕັດຂາດ
+  hidden: ເຄືອຂ່າຍທີ່ເຊື່ອງໄວ້
+  more: ການຕັ້ງຄ່າເຄືອຂ່າຍເພີ່ມເຕີມ
+  not_found: ບໍ່ພົບເຄືອຂ່າຍທີ່ພົບ
+  placeholder:
+    password: ລະຫັດຜ່ານ
+  saved: ເຄືອຂ່າຍທີ່ບັນທຶກໄວ້
+  scanning: ກຳລັງສະແກນຫາເຄືອຂ່າຍ
+  secured: ເຄືອຂ່າຍເຂົ້າລະຫັດ
+placeholder:
+  battery_remaining: ສ່ວນທີ່ເຫຼືອ
+  bluetooth_devices: Bluetooth & ອຸປະກອນ
+  ethernet_connected: ການ​ເຂົ້າ​ເຖິງ​ອິນ​ເຕີ​ເນັດ
+  ethernet_disconnected: ບໍ່ມີການເຂົ້າເຖິງອິນເຕີເນັດ
+  notifications: ແຈ້ງການ
+  open_system_tray: ເປີດຖາດລະບົບ
+  open_user_folder: ເປີດໂຟນເດີຜູ້ໃຊ້
+  settings: ການຕັ້ງຄ່າດ່ວນ
+  smart_charge: '- ຮັບຜິດຊອບສະຫຼາດ'
+  volume: ປະລິມານ
+settings:
+  app_settings: ການຕັ້ງຄ່າແອັບ app
+  log_out: ອອກ​ຈາກ​ລະ​ບົບ
+  power: ພະເດດ
+  restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່
+  shutdown: ປິດ​ເຄື່ອງ
+  sleep: ນອນ
+  title: ການກໍານົດ
+unlabelled_tray: ໄອຄອນ Tray ທີ່ບໍ່ໄດ້ຮັບການຮັກສາ

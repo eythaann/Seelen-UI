@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Προσθήκη ενότητας μέσων
-  start: Προσθήκη μονάδας εκκίνησης
-  add_folder: Pin προσαρμοσμένος φάκελος
-  add_file: PIN προσαρμοσμένο αρχείο
-  settings: Ρυθμίσεις
-  task_manager: Task Manager
 app_menu:
-  close_multiple: Κλείσ'τα όλα
   close: Κλείσε
-  pin: Καρφίτσα
-  unpin: Ξεκαρφιτσώνω
-  pin_to_right: Pin προς τα δεξιά
+  close_multiple: Κλείσ'τα όλα
   copy_handles: Λαβές αντιγράφων
-  pin_to_center: Καρφίτσα στο κέντρο
-  run_as: Εκτελέστε ως διαχειριστής
-  open_file_location: Ανοίξτε την τοποθεσία αρχείου
-  pin_to_left: Καρφίτσα στα αριστερά
   kill: Διαδικασία θανάτωσης
   kill_multiple: Σκοτώστε όλες τις διαδικασίες
+  open_file_location: Ανοίξτε την τοποθεσία αρχείου
+  pin: Καρφίτσα
+  pin_to_center: Καρφίτσα στο κέντρο
+  pin_to_left: Καρφίτσα στα αριστερά
+  pin_to_right: Pin προς τα δεξιά
+  run_as: Εκτελέστε ως διαχειριστής
+  unpin: Ξεκαρφιτσώνω
+media:
+  not_playing: Τίποτα δεν παίζει
 media_menu:
   remove: Αφαιρέστε τη μονάδα μέσων
 start_menu:
   remove: Αφαιρέστε την ενότητα εκκίνησης
-media:
-  not_playing: Τίποτα δεν παίζει
+taskbar_menu:
+  add_file: PIN προσαρμοσμένο αρχείο
+  add_folder: Pin προσαρμοσμένος φάκελος
+  media: Προσθήκη ενότητας μέσων
+  settings: Ρυθμίσεις
+  start: Προσθήκη μονάδας εκκίνησης
+  task_manager: Task Manager

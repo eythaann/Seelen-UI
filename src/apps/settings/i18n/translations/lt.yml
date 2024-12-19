@@ -1,261 +1,261 @@
-sides:
-  left: Kairėje
-  right: Teisingai
-  top: Viršus
-  bottom: Apačia
-header:
-  labels:
-    developer: Programuotojas
-    seelen_wm: Lango vadovas
-    specific_apps: Konkrečios programos
-    seelen_bar: Išgalvota įrankių juosta
-    monitors: Monitoriai
-    seelen_weg: „Dock“/„Taskbar“
-    info: Informacija
-    shortcuts: Nuorodos
-    general: Bendrasis
-    seelen_rofi: Programos paleidimo priemonė
-    virtual_desk: Virtualūs staliniai kompiuteriai
-    home: Namai
-    mods: Papildiniai ir valdikliai
-    seelen_wall: Tapetų vadovas
-start:
-  title: Sveiki!
-  message_accent: Optimizuokite savo produktyvumą stiliumi!
-  message: >-
-    Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“
-    plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį! Naršykite
-    naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi intuityvia
-    sąsaja ir pažangiomis funkcijomis.
-general:
-  theme:
-    enabled: Įgalintos temos
-    description: apibūdinimas
-    add: Pridėkite temą
-    placeholder: Pasirinkite temą
-    label: Informacija apie temą
-    added: Jau pridėta tema
-    author: Autorius
-    tags: Žymos
-    available: Galima
-    selected: Pasirinktas
-  language: Kalba
-  startup: Paleisti paleidimą?
-  icon_pack:
-    label: ICON PACKS
-  accent_color: Akcento spalva
-  wallpaper:
-    select: Pasirinkite tapetai
-  date_format: Datos formatas
-toolbar:
-  placeholder:
-    select: Įrankių juostos struktūra
-    description: apibūdinimas
-    author: Autorius
-  height: Ūgis
-  enable: Įgalinkite išgalvotą įrankių juostą
-  auto_hide: Automatinis slėptuvė
-  label: Įrankių juosta
-  delay_to_hide: Vėluoti paslėpti
-  delay_to_show: Delsimas parodyti
-  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
-wm:
-  border:
-    enable: Įgalinti lango sieną
-    offset: Sienos poslinkis
-    width: Sienos plotis
-  space_between_containers: Tarpas tarp konteinerių
-  description: apibūdinimas
-  resize_delta: Pakeisti deltos dydį (%)
-  layout: Išdėstymas
-  author: Autorius
-  workspace_offset: Darbo vietos poslinkis (paraštės)
-  workspace_padding: Darbo vietų pamušalas
-  enable: Įgalinkite plytelių langų tvarkyklę
-weg:
-  items:
-    size: Prekės dydis
-    zoom_size: Mastelio dydis (naudojamas temoms)
-    gap: Tarpas tarp daiktų
-    visible_separators: Matomi separatoriai
-    label: Daiktai
-  auto_hide: Automatinis slėptuvė
-  padding: Paminkštinimas
-  margin: Paraštė
-  label: „Dock“/„Taskbar“
-  width: Plotis
-  enable: Įgalinti doką/užduočių juostą
-  gap: Tarpas
-  dock_side: Pozicija
-  delay_to_hide: Vėluoti paslėpti
-  delay_to_show: Delsimas parodyti
-  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
-devtools:
-  settings_file: Nustatymų failas
-  custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
-  enable: Įgalinkite kūrėjo įrankius
-  data_folder: Duomenų aplankas
-  install_folder: Diegimo aplankas
-  load: Įkelti
-  app_folders: Programos aplankai
+app_launcher:
+  enable: Įgalinti programos paleidimo priemonę
+  monitor: Monitorius, kad parodytumėte
+  runners:
+    cmd: Komanda
+    explorer: Bėgti
+    label: Bėgikai
 apps_configurations:
   app:
+    bindings: Įrišimas (pastaba yra būtinos abi parinktys)
+    category: Kategorija
+    category_placeholder: Nė vienas
+    monitor: Monitorius
+    monitor_placeholder: Nė vienas
+    name: vardas
+    ok_create: Sukurti
+    ok_edit: Atnaujinimas
+    ok_readonly: Redaguoti kaip naują
     options:
       float: Plūdė
       force: Jėgos valdymas
+      hidden: Slėpti nuo doko/užduočių juostos
       pinned: Prigludęs
       unmanage: Nevaldomas
-      hidden: Slėpti nuo doko/užduočių juostos
-    name: vardas
-    title_readonly: Peržiūra {{name}}
-    monitor_placeholder: Nė vienas
-    category: Kategorija
-    category_placeholder: Nė vienas
+    options_label: Papildomos galimybės
     title_create: Kurti {{name}}
-    bindings: Įrišimas (pastaba yra būtinos abi parinktys)
-    workspace: Darbo vieta
-    workspace_placeholder: Nė vienas
-    ok_edit: Atnaujinimas
-    ok_create: Sukurti
-    monitor: Monitorius
-    ok_readonly: Redaguoti kaip naują
+    title_edit: Redagavimas {{name}}
+    title_readonly: Peržiūra {{name}}
     weg_options_label: „Dock“/„Taskbar“ parinktys
     wm_options_label: „Windows Manager“ parinktys
-    options_label: Papildomos galimybės
-    title_edit: Redagavimas {{name}}
-  identifier:
-    id: Identifikatorius
-    negation: Neigiamas
-    matching_strategy: Atitikimo strategija
-    add_block: Pridėkite bloką
-    remove: Ištrinti bloką
-    kind: Identifikuoti
-    and: Ir
-    or: Arba
-  swap: Apsikeitimas
-  delete: Ištrinti
-  search: Paieška
+    workspace: Darbo vieta
+    workspace_placeholder: Nė vienas
   bundled_msg: >-
     Šios sujungtos konfigūracijos nėra redaguojamos ir yra skirtos suteikti jums
     geriausią patirtį be pritaikymo. Jie automatiškai sukonfigūruoja dažniausiai
     jums.
-  new: Nauja
-  confirm_delete: Ar tikrai norite ištrinti šią konfigūraciją (-us)?
-  import: Importuoti
-  confirm_delete_title: Patvirtinkite ištrynti
-  export: Eksportas
   bundled_title: APP CONFIC sujungta su „Seelen“
+  confirm_delete: Ar tikrai norite ištrinti šią konfigūraciją (-us)?
+  confirm_delete_title: Patvirtinkite ištrynti
+  delete: Ištrinti
+  export: Eksportas
   extra_info: >-
     „Seelen“ vartotojo sąsaja naudoja tik vieną identifikatorių vienai programai
     (rasta pirmoji atitiktis), todėl svarbi tvarka, kaip nurodyta, bus teikiama
     pirmenybė naujausiai pridėtai, nes pagal numatytuosius nustatymus lentelė
     rūšiuojama nuo naujausios iki senesnės.
-extras:
-  links: Oficialios nuorodos
-  github: Github
-  discord: Nesantaika
-  relaunch: Atsikrauti
-  exit: Mesti/išeiti
-  version: Versija
-shortcuts:
-  labels:
-    reserve_right: Rezervuokite dešinę
-    send_to_workspace_1: Siųsti į 1 darbo vietą
-    switch_workspace_9: Perjunkite į 9 darbo vietą
-    move_to_workspace_3: Pereikite į 3 darbo vietą
-    increase_width: Padidinti plotį
-    send_to_workspace_0: Siųsti į darbo vietą 0
-    focus_right: Susitelkite teisingai
-    decrease_width: Sumažinti plotį
-    switch_workspace_7: Perjunkite į 7 darbo vietą
-    reserve_bottom: Rezervo dugnas
-    send_to_workspace_8: Siųsti į „Workspace 8“
-    reserve_left: Rezervas kairėje
-    reserve_float: Atsargos plūdė
-    send_to_workspace_2: Siųsti į 2 darbo vietą
-    move_to_workspace_5: Pereikite į 5 darbo vietą
-    focus_top: Fokusavimo viršus
-    focus_latest: Sutelkite naujausią
-    send_to_workspace_5: Siųsti į 5 darbo vietą
-    switch_workspace_4: Perjunkite į 4 darbo vietą
-    send_to_workspace_4: Siųsti į 4 darbo vietą
-    send_to_workspace_9: Siųsti į „Workspace 9“
-    send_to_workspace_6: Siųsti į „Workspace 6“
-    move_to_workspace_4: Pereikite į 4 darbo vietą
-    switch_workspace_2: Perjunkite į 2 darbo vietą
-    move_to_workspace_2: Pereikite į 2 darbo vietą
-    switch_workspace_8: Perjunkite į 8 darbo vietą
-    focus_left: Fokusavimas kairėje
-    move_to_workspace_1: Pereikite į 1 darbo vietą
-    increase_height: Padidinti aukštį
-    reserve_top: Rezervuokite viršų
-    switch_workspace_6: Perjunkite į 6 darbo vietą
-    move_to_workspace_7: Pereikite į 7 darbo vietą
-    move_to_workspace_8: Pereikite į 8 darbo vietą
-    switch_workspace_5: Perjunkite į 5 darbo vietą
-    send_to_workspace_7: Siųsti į „Workspace 7“
-    send_to_workspace_3: Siųsti į 3 „Workspace“
-    decrease_height: Sumažinti aukštį
-    restore_sizes: Atkurti dydžius
-    move_to_workspace_6: Pereikite į 6 darbo vietą
-    move_to_workspace_9: Pereikite į 9 darbo vietą
-    switch_workspace_3: Perjunkite į 3 darbo vietą
-    move_to_workspace_0: Pereikite į 0 darbo vietą
-    reserve_stack: Rezervo kaminas
-    focus_bottom: Fokusavimo dugnas
-    switch_workspace_1: Perjunkite į 2 darbo vietą
-    switch_workspace_0: Perjunkite į 1 darbo vietą
-    misc_open_settings: Atidaryti nustatymai
-    misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
-    misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
-    toggle_launcher: Perjungti
-  enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
-  enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
-  reset: Iš naujo nustatykite pagal numatytuosius nustatymus
-  readonly_tooltip: Tai tik skaitomas nuoroda
-delete: Ištrinti
-open: Atviras
-save: Sutaupyti
-inProgress: Vyksta ...
-quit: Mesti
-loading: Pakrovimas ...
+  identifier:
+    add_block: Pridėkite bloką
+    and: Ir
+    id: Identifikatorius
+    kind: Identifikuoti
+    matching_strategy: Atitikimo strategija
+    negation: Neigiamas
+    or: Arba
+    remove: Ištrinti bloką
+  import: Importuoti
+  new: Nauja
+  search: Paieška
+  swap: Apsikeitimas
 cancel: Atšaukti
-vd:
-  strategy:
-    seelen: Seelenas
-    native: Gimtoji
-    label: Virtuali darbalaukio strategija
-  disabled_windows_version: Natūralios virtualios darbalaukio strategijos nėra jūsų „Windows“ versijai.
-save_and_restart: Išsaugokite ir paleiskite iš naujo
-monitors_configurations:
-  label: Monitorius {{index}}
-wall:
-  backgrounds: Tapetai
-  no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
-  enable: Įgalinkite tapetų tvarkytuvę
-  interval: Keiskite tapetų kiekvieną
-  random: Atsitiktinis skaidrių demonstravimas
-  hours: valandos
-  minutes: minutės
-  seconds: sekundės
-app_launcher:
-  runners:
-    explorer: Bėgti
-    label: Bėgikai
-    cmd: Komanda
-  enable: Įgalinti programos paleidimo priemonę
-  monitor: Monitorius, kad parodytumėte
-inherit: Paveldėti
-insert: Įterpti
-more: Daugiau
 close: Uždaryti
-update:
-  available: Galima atnaujinti!
-  downloading: Atsisiuntimas ...
-  channel: Atnaujinkite kanalą
+delete: Ištrinti
+devtools:
+  app_folders: Programos aplankai
+  custom_config_file: Įkelkite pasirinktinį konfigūracijos failą
+  data_folder: Duomenų aplankas
+  enable: Įgalinkite kūrėjo įrankius
+  install_folder: Diegimo aplankas
+  load: Įkelti
+  settings_file: Nustatymų failas
+extras:
+  discord: Nesantaika
+  exit: Mesti/išeiti
+  github: Github
+  links: Oficialios nuorodos
+  relaunch: Atsikrauti
+  version: Versija
+general:
+  accent_color: Akcento spalva
+  date_format: Datos formatas
+  icon_pack:
+    label: ICON PACKS
+  language: Kalba
+  startup: Paleisti paleidimą?
+  theme:
+    add: Pridėkite temą
+    added: Jau pridėta tema
+    author: Autorius
+    available: Galima
+    description: apibūdinimas
+    enabled: Įgalintos temos
+    label: Informacija apie temą
+    placeholder: Pasirinkite temą
+    selected: Pasirinktas
+    tags: Žymos
+  wallpaper:
+    select: Pasirinkite tapetai
+header:
+  labels:
+    developer: Programuotojas
+    general: Bendrasis
+    home: Namai
+    info: Informacija
+    mods: Papildiniai ir valdikliai
+    monitors: Monitoriai
+    seelen_bar: Išgalvota įrankių juosta
+    seelen_rofi: Programos paleidimo priemonė
+    seelen_wall: Tapetų vadovas
+    seelen_weg: „Dock“/„Taskbar“
+    seelen_wm: Lango vadovas
+    shortcuts: Nuorodos
+    specific_apps: Konkrečios programos
+    virtual_desk: Virtualūs staliniai kompiuteriai
+inherit: Paveldėti
+inProgress: Vyksta ...
+insert: Įterpti
+loading: Pakrovimas ...
 miscellaneous: Įvairūs
 mods:
-  target: Taikinys
   plugins: Papildiniai
+  target: Taikinys
   widgets: Valdikliai
+monitors_configurations:
+  label: Monitorius {{index}}
+more: Daugiau
+open: Atviras
+quit: Mesti
 remove: Pašalinti
+save: Sutaupyti
+save_and_restart: Išsaugokite ir paleiskite iš naujo
+shortcuts:
+  enable: Įgalinkite integruotus sparčiuosius klavišus (AHK)
+  enable_tooltip: Išjunkite, jei įdiegsite savo nuorodas naudodami „Seelen Core API“
+  labels:
+    decrease_height: Sumažinti aukštį
+    decrease_width: Sumažinti plotį
+    focus_bottom: Fokusavimo dugnas
+    focus_latest: Sutelkite naujausią
+    focus_left: Fokusavimas kairėje
+    focus_right: Susitelkite teisingai
+    focus_top: Fokusavimo viršus
+    increase_height: Padidinti aukštį
+    increase_width: Padidinti plotį
+    misc_open_settings: Atidaryti nustatymai
+    misc_toggle_lock_tracing: Perjunkite užrakto sekimą (žurnalai)
+    misc_toggle_win_event_tracing: Perjunkite „Win“ įvykių sekimą (žurnalai)
+    move_to_workspace_0: Pereikite į 0 darbo vietą
+    move_to_workspace_1: Pereikite į 1 darbo vietą
+    move_to_workspace_2: Pereikite į 2 darbo vietą
+    move_to_workspace_3: Pereikite į 3 darbo vietą
+    move_to_workspace_4: Pereikite į 4 darbo vietą
+    move_to_workspace_5: Pereikite į 5 darbo vietą
+    move_to_workspace_6: Pereikite į 6 darbo vietą
+    move_to_workspace_7: Pereikite į 7 darbo vietą
+    move_to_workspace_8: Pereikite į 8 darbo vietą
+    move_to_workspace_9: Pereikite į 9 darbo vietą
+    reserve_bottom: Rezervo dugnas
+    reserve_float: Atsargos plūdė
+    reserve_left: Rezervas kairėje
+    reserve_right: Rezervuokite dešinę
+    reserve_stack: Rezervo kaminas
+    reserve_top: Rezervuokite viršų
+    restore_sizes: Atkurti dydžius
+    send_to_workspace_0: Siųsti į darbo vietą 0
+    send_to_workspace_1: Siųsti į 1 darbo vietą
+    send_to_workspace_2: Siųsti į 2 darbo vietą
+    send_to_workspace_3: Siųsti į 3 „Workspace“
+    send_to_workspace_4: Siųsti į 4 darbo vietą
+    send_to_workspace_5: Siųsti į 5 darbo vietą
+    send_to_workspace_6: Siųsti į „Workspace 6“
+    send_to_workspace_7: Siųsti į „Workspace 7“
+    send_to_workspace_8: Siųsti į „Workspace 8“
+    send_to_workspace_9: Siųsti į „Workspace 9“
+    switch_workspace_0: Perjunkite į 1 darbo vietą
+    switch_workspace_1: Perjunkite į 2 darbo vietą
+    switch_workspace_2: Perjunkite į 2 darbo vietą
+    switch_workspace_3: Perjunkite į 3 darbo vietą
+    switch_workspace_4: Perjunkite į 4 darbo vietą
+    switch_workspace_5: Perjunkite į 5 darbo vietą
+    switch_workspace_6: Perjunkite į 6 darbo vietą
+    switch_workspace_7: Perjunkite į 7 darbo vietą
+    switch_workspace_8: Perjunkite į 8 darbo vietą
+    switch_workspace_9: Perjunkite į 9 darbo vietą
+    toggle_launcher: Perjungti
+  readonly_tooltip: Tai tik skaitomas nuoroda
+  reset: Iš naujo nustatykite pagal numatytuosius nustatymus
+sides:
+  bottom: Apačia
+  left: Kairėje
+  right: Teisingai
+  top: Viršus
+start:
+  message: >-
+    Sveiki atvykę į „Seelen UI“, „Ultimate Desktop“ aplinką su „Incorporated“
+    plytelių „Windows Manager“, kad patobulintumėte „Windows“ patirtį! Naršykite
+    naują efektyvumo ir daugiafunkcinių užduočių erą naudodamiesi intuityvia
+    sąsaja ir pažangiomis funkcijomis.
+  message_accent: Optimizuokite savo produktyvumą stiliumi!
+  title: Sveiki!
+toolbar:
+  auto_hide: Automatinis slėptuvė
+  delay_to_hide: Vėluoti paslėpti
+  delay_to_show: Delsimas parodyti
+  enable: Įgalinkite išgalvotą įrankių juostą
+  height: Ūgis
+  label: Įrankių juosta
+  placeholder:
+    author: Autorius
+    description: apibūdinimas
+    select: Įrankių juostos struktūra
+  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
+update:
+  available: Galima atnaujinti!
+  channel: Atnaujinkite kanalą
+  downloading: Atsisiuntimas ...
+vd:
+  disabled_windows_version: Natūralios virtualios darbalaukio strategijos nėra jūsų „Windows“ versijai.
+  strategy:
+    label: Virtuali darbalaukio strategija
+    native: Gimtoji
+    seelen: Seelenas
+wall:
+  backgrounds: Tapetai
+  enable: Įgalinkite tapetų tvarkytuvę
+  hours: valandos
+  interval: Keiskite tapetų kiekvieną
+  minutes: minutės
+  no_background: Tuščias skaidrių demonstravimas, vietoje to, naudodamiesi temos fonu.
+  random: Atsitiktinis skaidrių demonstravimas
+  seconds: sekundės
+weg:
+  auto_hide: Automatinis slėptuvė
+  delay_to_hide: Vėluoti paslėpti
+  delay_to_show: Delsimas parodyti
+  dock_side: Pozicija
+  enable: Įgalinti doką/užduočių juostą
+  gap: Tarpas
+  items:
+    gap: Tarpas tarp daiktų
+    label: Daiktai
+    size: Prekės dydis
+    visible_separators: Matomi separatoriai
+    zoom_size: Mastelio dydis (naudojamas temoms)
+  label: „Dock“/„Taskbar“
+  margin: Paraštė
+  padding: Paminkštinimas
+  use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
+  width: Plotis
+wm:
+  author: Autorius
+  border:
+    enable: Įgalinti lango sieną
+    offset: Sienos poslinkis
+    width: Sienos plotis
+  description: apibūdinimas
+  enable: Įgalinkite plytelių langų tvarkyklę
+  layout: Išdėstymas
+  resize_delta: Pakeisti deltos dydį (%)
+  space_between_containers: Tarpas tarp konteinerių
+  workspace_offset: Darbo vietos poslinkis (paraštės)
+  workspace_padding: Darbo vietų pamušalas

@@ -1,24 +1,26 @@
-taskbar_menu:
-  media: أضف وحدة الوسائط
-  start: أضف وحدة البداية
-  add_file: ثبت الملف
-  add_folder: ثبت المجلد
-  settings: الأعدادات
-  task_manager: مدير المهام
 app_menu:
-  unpin: إزالة التثبيت
-  pin: ثبت الملف
-  pin_to_left: ثبت الملف على اليسار
-  pin_to_center: ثبت الملف في الوسط
-  pin_to_right: ثبت الملف على اليمين
-  open_file_location: افتح مكان الملف
-  run_as: تشغيل كمسؤول
-  copy_handles: انسخ الرمز
   close: اغلق
   close_multiple: اغلق الكل
+  copy_handles: انسخ الرمز
+  kill: قتل العملية
+  kill_multiple: اقتل جميع العمليات
+  open_file_location: افتح مكان الملف
+  pin: ثبت الملف
+  pin_to_center: ثبت الملف في الوسط
+  pin_to_left: ثبت الملف على اليسار
+  pin_to_right: ثبت الملف على اليمين
+  run_as: تشغيل كمسؤول
+  unpin: إزالة التثبيت
+media:
+  not_playing: لا توجد ملفات
 media_menu:
   remove: حذف وحدة الوسائط
 start_menu:
   remove: حذف وحدة البداية
-media:
-  not_playing: لا توجد ملفات
+taskbar_menu:
+  add_file: ثبت الملف
+  add_folder: ثبت المجلد
+  media: أضف وحدة الوسائط
+  settings: الأعدادات
+  start: أضف وحدة البداية
+  task_manager: مدير المهام

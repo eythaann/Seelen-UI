@@ -1,24 +1,192 @@
-sides:
-  left: ਖੱਬੇ
-  bottom: ਹੇਠਾਂ
-  top: ਸਿਖਰ
-  right: ਸੱਜਾ
+app_launcher:
+  enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
+  runners:
+    cmd: ਕਮਾਂਡ
+    explorer: ਚਲਾਓ
+    label: ਦੌੜਾਕ
+apps_configurations:
+  app:
+    bindings: ਬਾਈਡਿੰਗ (ਨੋਟ ਕਰੋ ਕਿ ਦੋਵੇਂ ਵਿਕਲਪ ਲੋੜੀਂਦੇ ਹਨ)
+    category: ਸ਼੍ਰੇਣੀ
+    category_placeholder: ਕੋਈ ਨਹੀਂ
+    monitor: ਮਾਨੀਟਰ
+    monitor_placeholder: ਕੋਈ ਨਹੀਂ
+    name: ਨਾਮ
+    ok_create: ਬਣਾਓ
+    ok_edit: ਅਪਡੇਟ
+    ok_readonly: ਨਵੇਂ ਵਜੋਂ ਸੰਪਾਦਿਤ ਕਰੋ
+    options:
+      float: ਫਲੋਟ
+      force: ਫੋਰਸ ਪ੍ਰਬੰਧਨ
+      hidden: ਡੌਕ / ਟਾਸਕਬਾਰ ਤੋਂ ਲੁਕੋ
+      pinned: ਪਿੰਨ ਕੀਤਾ
+      unmanage: ਅਪ੍ਰਬੰਧਿਤ ਕਰੋ
+    options_label: ਵਾਧੂ ਵਿਕਲਪ
+    title_create: '{{name}} ਬਣਾਉਣਾ'
+    title_edit: ਸੰਪਾਦਨ {ime neame}
+    title_readonly: '{{name}} ਦੇਖ ਰਹੇ ਹਾਂ'
+    weg_options_label: ਡੌਕ / ਟਾਸਕਬਾਰ ਚੋਣਾਂ
+    wm_options_label: ਵਿੰਡੋ ਮੈਨੇਜਰ ਦੇ ਵਿਕਲਪ
+    workspace: ਵਰਕਸਪੇਸ
+    workspace_placeholder: ਕੋਈ ਨਹੀਂ
+  bundled_msg: >-
+    ਇਹ ਬੰਡਲ ਕੀਤੀਆਂ ਸੰਰਚਨਾਵਾਂ ਸੰਪਾਦਨਯੋਗ ਨਹੀਂ ਹਨ ਅਤੇ ਤੁਹਾਨੂੰ ਅਨੁਕੂਲਿਤ ਕੀਤੇ ਬਿਨਾਂ
+    ਵਧੀਆ ਅਨੁਭਵ ਪ੍ਰਦਾਨ ਕਰਨ ਲਈ ਤਿਆਰ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ। ਉਹ ਤੁਹਾਡੇ ਲਈ ਸਭ ਤੋਂ ਆਮ
+    ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਕੌਂਫਿਗਰ ਕਰਦੇ ਹਨ।
+  bundled_title: ਐਪ ਕੌਂਫਿਗ ਸੀਲੇਨ ਨਾਲ ਬੰਡਲ ਕੀਤੀ ਗਈ
+  confirm_delete: ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਸੰਰਚਨਾ/s ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+  confirm_delete_title: ਮਿਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
+  delete: ਮਿਟਾਓ
+  export: ਨਿਰਯਾਤ
+  extra_info: ਵੇਖਣਯੋਗ UI ਪ੍ਰਤੀ ਐਪ ਨੂੰ ਸਿਰਫ ਇਕ ਪਛਾਣਕਰਤਾ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ
+  identifier:
+    add_block: ਬਲਾਕ ਸ਼ਾਮਲ ਕਰੋ
+    and: ਅਤੇ
+    id: ਪਛਾਣਕਰਤਾ
+    kind: ਦੁਆਰਾ ਪਛਾਣੋ
+    matching_strategy: ਮੈਚਿੰਗ ਰਣਨੀਤੀ
+    negation: ਨੈਗੇਟ ਮੈਚਿੰਗ
+    or: ਜਾਂ
+    remove: ਬਲਾਕ ਮਿਟਾਓ
+  import: ਆਯਾਤ ਕਰੋ
+  new: ਨਵਾਂ
+  search: ਖੋਜ
+  swap: ਸਵੈਪ
+cancel: ਰੱਦ ਕਰੋ
+close: ਨੇੜੇ
+delete: ਮਿਟਾਓ
+devtools:
+  app_folders: ਐਪ ਫੋਲਡਰ
+  custom_config_file: ਕਸਟਮ ਕੌਂਫਿਗ ਫਾਈਲ ਲੋਡ ਕਰੋ
+  data_folder: ਡਾਟਾ ਫੋਲਡਰ
+  enable: ਡਿਵੈਲਪਰ ਟੂਲਸ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
+  load: ਲੋਡ ਕਰੋ
+  settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
+extras:
+  discord: ਵਿਵਾਦ
+  exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
+  github: GitHub
+  links: ਅਧਿਕਾਰਤ ਲਿੰਕ
+  relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
+  version: ਸੰਸਕਰਣ
+general:
+  accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
+  date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
+  icon_pack:
+    label: ਆਈਕਾਨ ਪੈਕ
+  language: ਭਾਸ਼ਾ
+  startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
+  theme:
+    add: ਥੀਮ ਸ਼ਾਮਲ ਕਰੋ
+    added: ਥੀਮ ਪਹਿਲਾਂ ਹੀ ਸ਼ਾਮਲ ਕੀਤੀ ਗਈ ਹੈ
+    author: ਲੇਖਕ
+    available: ਉਪਲੱਬਧ
+    description: ਵਰਣਨ
+    enabled: ਸਮਰਥਿਤ ਥੀਮ
+    label: ਥੀਮ ਜਾਣਕਾਰੀ
+    placeholder: ਥੀਮ ਚੁਣੋ
+    selected: ਚੁਣਿਆ ਹੋਇਆ
+    tags: ਟੈਗਸ
+  wallpaper:
+    select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
 header:
   labels:
-    general: ਜਨਰਲ
-    seelen_wm: ਵਿੰਡੋ ਮੈਨੇਜਰ
-    seelen_bar: ਫੈਂਸੀ ਟੂਲਬਾਰ
-    monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
-    specific_apps: ਖਾਸ ਐਪਸ
-    shortcuts: ਸ਼ਾਰਟਕੱਟ
-    info: ਜਾਣਕਾਰੀ
     developer: ਵਿਕਾਸਕਾਰ
-    seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
-    seelen_rofi: ਐਪ ਲਾਂਚਰ
-    virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
+    general: ਜਨਰਲ
     home: ਘਰ
+    info: ਜਾਣਕਾਰੀ
     mods: ਪਲੱਗਇਨ ਅਤੇ ਵਿਜੇਟਸ
+    monitors: ਨਿਗਰਾਨੀ ਕਰਦਾ ਹੈ
+    seelen_bar: ਫੈਂਸੀ ਟੂਲਬਾਰ
+    seelen_rofi: ਐਪ ਲਾਂਚਰ
     seelen_wall: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ
+    seelen_weg: ਡੌਕ/ਟਾਸਕਬਾਰ
+    seelen_wm: ਵਿੰਡੋ ਮੈਨੇਜਰ
+    shortcuts: ਸ਼ਾਰਟਕੱਟ
+    specific_apps: ਖਾਸ ਐਪਸ
+    virtual_desk: ਵਰਚੁਅਲ ਡੈਸਕਟਾਪ
+inherit: ਵਿਰਾਸਤ
+inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
+insert: ਸੰਮਿਲਿਤ ਕਰੋ
+loading: ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
+miscellaneous: ਫੁਟਕਲ
+mods:
+  plugins: ਪਲੱਗਇਨ
+  target: ਟੀਚਾ
+  widgets: ਵਿਜੇਟਸ
+monitors_configurations:
+  label: ਨਿਗਰਾਨੀ {{ਇੰਡੈਕਸ}
+more: ਹੋਰ
+open: ਖੋਲ੍ਹੋ
+quit: ਛੱਡੋ
+remove: ਹਟਾਓ
+save: ਸੇਵ ਕਰੋ
+save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
+shortcuts:
+  enable: ਏਕੀਕ੍ਰਿਤ ਸ਼ਾਰਟਕੱਟ (ahk) ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  enable_tooltip: >-
+    ਅਸਮਰੱਥ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ ਕੋਰ ਏਪੀਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ਾਰਟਕੱਟ
+    ਲਾਗੂ ਕਰਦੇ ਹੋ
+  labels:
+    decrease_height: ਉਚਾਈ ਘਟਾਓ
+    decrease_width: ਚੌੜਾਈ ਘਟਾਓ
+    focus_bottom: ਹੇਠਾਂ ਫੋਕਸ ਕਰੋ
+    focus_latest: ਫੋਕਸ ਤਾਜ਼ਾ
+    focus_left: ਖੱਬੇ ਪਾਸੇ ਫੋਕਸ ਕਰੋ
+    focus_right: ਸੱਜੇ ਫੋਕਸ ਕਰੋ
+    focus_top: ਫੋਕਸ ਸਿਖਰ
+    increase_height: ਉਚਾਈ ਵਧਾਓ
+    increase_width: ਚੌੜਾਈ ਵਧਾਓ
+    misc_open_settings: ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ
+    misc_toggle_lock_tracing: ਟੌਗਲ ਲਾਕ ਟਰੇਸਿੰਗ (ਲੌਗ)
+    misc_toggle_win_event_tracing: ਵਿਨ ਈਵੈਂਟ ਟਰੇਸਿੰਗ (ਲੌਗ) ਨੂੰ ਟੌਗਲ ਕਰੋ
+    move_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
+    move_to_workspace_1: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
+    move_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
+    move_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
+    move_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
+    move_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
+    move_to_workspace_6: ਵਰਕਸਪੇਸ 6 ਤੇ ਜਾਓ
+    move_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
+    move_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
+    move_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
+    reserve_bottom: ਹੇਠਾਂ ਰਿਜ਼ਰਵ ਕਰੋ
+    reserve_float: ਰਿਜ਼ਰਵ ਫਲੋਟ
+    reserve_left: ਖੱਬੇ ਪਾਸੇ ਰਾਖਵਾਂ ਕਰੋ
+    reserve_right: ਰਾਖਵਾਂ ਅਧਿਕਾਰ
+    reserve_stack: ਰਿਜ਼ਰਵ ਸਟੈਕ
+    reserve_top: ਰਿਜ਼ਰਵ ਸਿਖਰ
+    restore_sizes: ਆਕਾਰ ਰੀਸਟੋਰ ਕਰੋ
+    send_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਭੇਜੋ
+    send_to_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਭੇਜੋ
+    send_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਭੇਜੋ
+    send_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਭੇਜੋ
+    send_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਭੇਜੋ
+    send_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਭੇਜੋ
+    send_to_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਭੇਜੋ
+    send_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਭੇਜੋ
+    send_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਭੇਜੋ
+    send_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਭੇਜੋ
+    switch_workspace_0: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
+    switch_workspace_1: ਵਰਕਸਪੇਸ 2 ਤੇ ਜਾਓ
+    switch_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
+    switch_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
+    switch_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
+    switch_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
+    switch_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਜਾਓ
+    switch_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
+    switch_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
+    switch_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
+    toggle_launcher: ਟੌਗਲ
+  readonly_tooltip: ਇਹ ਸਿਰਫ ਇਕੋ ਸ਼ਾਰਟਕੱਟ ਹੈ
+  reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
+sides:
+  bottom: ਹੇਠਾਂ
+  left: ਖੱਬੇ
+  right: ਸੱਜਾ
+  top: ਸਿਖਰ
 start:
   message: >-
     Seelen UI ਵਿੱਚ ਤੁਹਾਡਾ ਸੁਆਗਤ ਹੈ, ਤੁਹਾਡੇ Windows ਅਨੁਭਵ ਨੂੰ ਵਧਾਉਣ ਲਈ ਇੱਕ
@@ -27,233 +195,65 @@ start:
     ਦੀ ਪੜਚੋਲ ਕਰੋ।
   message_accent: ਸ਼ੈਲੀ ਨਾਲ ਆਪਣੀ ਉਤਪਾਦਕਤਾ ਨੂੰ ਅਨੁਕੂਲ ਬਣਾਓ!
   title: ਜੀ ਆਇਆਂ ਨੂੰ!
-general:
-  theme:
-    description: ਵਰਣਨ
-    placeholder: ਥੀਮ ਚੁਣੋ
-    enabled: ਸਮਰਥਿਤ ਥੀਮ
-    add: ਥੀਮ ਸ਼ਾਮਲ ਕਰੋ
-    tags: ਟੈਗਸ
-    author: ਲੇਖਕ
-    added: ਥੀਮ ਪਹਿਲਾਂ ਹੀ ਸ਼ਾਮਲ ਕੀਤੀ ਗਈ ਹੈ
-    label: ਥੀਮ ਜਾਣਕਾਰੀ
-    available: ਉਪਲੱਬਧ
-    selected: ਚੁਣਿਆ ਹੋਇਆ
-  language: ਭਾਸ਼ਾ
-  startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
-  icon_pack:
-    label: ਆਈਕਾਨ ਪੈਕ
-  accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
-  wallpaper:
-    select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
-  date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
 toolbar:
+  auto_hide: ਆਟੋ ਓਹਲੇ
+  delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
+  delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
+  enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  height: ਉਚਾਈ
+  label: ਟੂਲਬਾਰ
   placeholder:
+    author: ਲੇਖਕ
     description: ਵਰਣਨ
     select: ਟੂਲਬਾਰ ਢਾਂਚਾ
-    author: ਲੇਖਕ
-  height: ਉਚਾਈ
-  enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
-  auto_hide: ਆਟੋ ਓਹਲੇ
-  label: ਟੂਲਬਾਰ
-  delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
-  delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
-wm:
-  border:
-    offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
-    enable: ਵਿੰਡੋ ਦੇ ਬਾਰਡਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
-    width: ਬਾਰਡਰ ਚੌੜਾਈ
-  description: ਵਰਣਨ
-  workspace_offset: ਵਰਕਸਪੇਸ ਆਫਸੈੱਟ (ਮਾਰਜਿਨ)
-  author: ਲੇਖਕ
-  space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
-  resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
-  workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ
-  layout: ਖਾਕਾ
-  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਟਾਇਲਿੰਗ ਯੋਗ ਕਰੋ
-weg:
-  items:
-    label: ਇਕਾਈ
-    gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
-    size: ਆਈਟਮ ਦਾ ਆਕਾਰ
-    zoom_size: ਜ਼ੂਮ ਕੀਤਾ ਆਕਾਰ (ਥੀਮਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ)
-    visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
-  enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
-  padding: ਪੈਡਿੰਗ
-  auto_hide: ਆਟੋ ਓਹਲੇ
-  gap: ਪਾੜਾ
-  width: ਚੌੜਾਈ
-  margin: ਹਾਸ਼ੀਏ
-  label: ਡੌਕ/ਟਾਸਕਬਾਰ
-  dock_side: ਸਥਿਤੀ
-  delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
-  delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
-  use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
-devtools:
-  load: ਲੋਡ ਕਰੋ
-  settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
-  enable: ਡਿਵੈਲਪਰ ਟੂਲਸ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
-  data_folder: ਡਾਟਾ ਫੋਲਡਰ
-  app_folders: ਐਪ ਫੋਲਡਰ
-  custom_config_file: ਕਸਟਮ ਕੌਂਫਿਗ ਫਾਈਲ ਲੋਡ ਕਰੋ
-  install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
-apps_configurations:
-  app:
-    options:
-      float: ਫਲੋਟ
-      pinned: ਪਿੰਨ ਕੀਤਾ
-      unmanage: ਅਪ੍ਰਬੰਧਿਤ ਕਰੋ
-      force: ਫੋਰਸ ਪ੍ਰਬੰਧਨ
-      hidden: ਡੌਕ / ਟਾਸਕਬਾਰ ਤੋਂ ਲੁਕੋ
-    category: ਸ਼੍ਰੇਣੀ
-    bindings: ਬਾਈਡਿੰਗ (ਨੋਟ ਕਰੋ ਕਿ ਦੋਵੇਂ ਵਿਕਲਪ ਲੋੜੀਂਦੇ ਹਨ)
-    monitor_placeholder: ਕੋਈ ਨਹੀਂ
-    title_readonly: '{{name}} ਦੇਖ ਰਹੇ ਹਾਂ'
-    ok_readonly: ਨਵੇਂ ਵਜੋਂ ਸੰਪਾਦਿਤ ਕਰੋ
-    workspace: ਵਰਕਸਪੇਸ
-    name: ਨਾਮ
-    workspace_placeholder: ਕੋਈ ਨਹੀਂ
-    ok_create: ਬਣਾਓ
-    category_placeholder: ਕੋਈ ਨਹੀਂ
-    ok_edit: ਅਪਡੇਟ
-    monitor: ਮਾਨੀਟਰ
-    title_create: '{{name}} ਬਣਾਉਣਾ'
-    wm_options_label: ਵਿੰਡੋ ਮੈਨੇਜਰ ਦੇ ਵਿਕਲਪ
-    weg_options_label: ਡੌਕ / ਟਾਸਕਬਾਰ ਚੋਣਾਂ
-    options_label: ਵਾਧੂ ਵਿਕਲਪ
-    title_edit: ਸੰਪਾਦਨ {ime neame}
-  identifier:
-    kind: ਦੁਆਰਾ ਪਛਾਣੋ
-    id: ਪਛਾਣਕਰਤਾ
-    or: ਜਾਂ
-    and: ਅਤੇ
-    matching_strategy: ਮੈਚਿੰਗ ਰਣਨੀਤੀ
-    remove: ਬਲਾਕ ਮਿਟਾਓ
-    negation: ਨੈਗੇਟ ਮੈਚਿੰਗ
-    add_block: ਬਲਾਕ ਸ਼ਾਮਲ ਕਰੋ
-  confirm_delete: ਕੀ ਤੁਸੀਂ ਯਕੀਨੀ ਤੌਰ 'ਤੇ ਇਸ ਸੰਰਚਨਾ/s ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
-  export: ਨਿਰਯਾਤ
-  confirm_delete_title: ਮਿਟਾਉਣ ਦੀ ਪੁਸ਼ਟੀ ਕਰੋ
-  bundled_msg: >-
-    ਇਹ ਬੰਡਲ ਕੀਤੀਆਂ ਸੰਰਚਨਾਵਾਂ ਸੰਪਾਦਨਯੋਗ ਨਹੀਂ ਹਨ ਅਤੇ ਤੁਹਾਨੂੰ ਅਨੁਕੂਲਿਤ ਕੀਤੇ ਬਿਨਾਂ
-    ਵਧੀਆ ਅਨੁਭਵ ਪ੍ਰਦਾਨ ਕਰਨ ਲਈ ਤਿਆਰ ਕੀਤੀਆਂ ਗਈਆਂ ਹਨ। ਉਹ ਤੁਹਾਡੇ ਲਈ ਸਭ ਤੋਂ ਆਮ
-    ਐਪਲੀਕੇਸ਼ਨਾਂ ਨੂੰ ਸਵੈਚਲਿਤ ਤੌਰ 'ਤੇ ਕੌਂਫਿਗਰ ਕਰਦੇ ਹਨ।
-  delete: ਮਿਟਾਓ
-  swap: ਸਵੈਪ
-  search: ਖੋਜ
-  new: ਨਵਾਂ
-  bundled_title: ਐਪ ਕੌਂਫਿਗ ਸੀਲੇਨ ਨਾਲ ਬੰਡਲ ਕੀਤੀ ਗਈ
-  import: ਆਯਾਤ ਕਰੋ
-  extra_info: ਵੇਖਣਯੋਗ UI ਪ੍ਰਤੀ ਐਪ ਨੂੰ ਸਿਰਫ ਇਕ ਪਛਾਣਕਰਤਾ ਦੀ ਵਰਤੋਂ ਕਰਦੇ ਹਨ
-extras:
-  discord: ਵਿਵਾਦ
-  links: ਅਧਿਕਾਰਤ ਲਿੰਕ
-  exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
-  relaunch: ਮੁੜ-ਲਾਂਚ ਕਰੋ
-  github: GitHub
-  version: ਸੰਸਕਰਣ
-shortcuts:
-  labels:
-    switch_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
-    reserve_stack: ਰਿਜ਼ਰਵ ਸਟੈਕ
-    decrease_width: ਚੌੜਾਈ ਘਟਾਓ
-    decrease_height: ਉਚਾਈ ਘਟਾਓ
-    reserve_right: ਰਾਖਵਾਂ ਅਧਿਕਾਰ
-    reserve_top: ਰਿਜ਼ਰਵ ਸਿਖਰ
-    switch_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
-    switch_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
-    reserve_left: ਖੱਬੇ ਪਾਸੇ ਰਾਖਵਾਂ ਕਰੋ
-    switch_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
-    increase_width: ਚੌੜਾਈ ਵਧਾਓ
-    send_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਭੇਜੋ
-    switch_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
-    move_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
-    focus_bottom: ਹੇਠਾਂ ਫੋਕਸ ਕਰੋ
-    switch_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਜਾਓ
-    focus_top: ਫੋਕਸ ਸਿਖਰ
-    move_to_workspace_8: ਵਰਕਸਪੇਸ 8 'ਤੇ ਜਾਓ
-    send_to_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਭੇਜੋ
-    reserve_bottom: ਹੇਠਾਂ ਰਿਜ਼ਰਵ ਕਰੋ
-    switch_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
-    move_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਜਾਓ
-    send_to_workspace_1: ਵਰਕਸਪੇਸ 1 'ਤੇ ਭੇਜੋ
-    send_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਭੇਜੋ
-    send_to_workspace_3: ਵਰਕਸਪੇਸ 3 'ਤੇ ਭੇਜੋ
-    move_to_workspace_1: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
-    move_to_workspace_6: ਵਰਕਸਪੇਸ 6 ਤੇ ਜਾਓ
-    move_to_workspace_7: ਵਰਕਸਪੇਸ 7 'ਤੇ ਜਾਓ
-    restore_sizes: ਆਕਾਰ ਰੀਸਟੋਰ ਕਰੋ
-    increase_height: ਉਚਾਈ ਵਧਾਓ
-    send_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਭੇਜੋ
-    focus_left: ਖੱਬੇ ਪਾਸੇ ਫੋਕਸ ਕਰੋ
-    move_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਜਾਓ
-    send_to_workspace_0: ਵਰਕਸਪੇਸ 0 'ਤੇ ਭੇਜੋ
-    focus_right: ਸੱਜੇ ਫੋਕਸ ਕਰੋ
-    send_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਭੇਜੋ
-    send_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਭੇਜੋ
-    move_to_workspace_5: ਵਰਕਸਪੇਸ 5 'ਤੇ ਜਾਓ
-    move_to_workspace_9: ਵਰਕਸਪੇਸ 9 'ਤੇ ਜਾਓ
-    send_to_workspace_4: ਵਰਕਸਪੇਸ 4 'ਤੇ ਭੇਜੋ
-    reserve_float: ਰਿਜ਼ਰਵ ਫਲੋਟ
-    move_to_workspace_2: ਵਰਕਸਪੇਸ 2 'ਤੇ ਜਾਓ
-    focus_latest: ਫੋਕਸ ਤਾਜ਼ਾ
-    switch_workspace_6: ਵਰਕਸਪੇਸ 6 'ਤੇ ਜਾਓ
-    switch_workspace_0: ਵਰਕਸਪੇਸ 1 ਤੇ ਜਾਓ
-    switch_workspace_1: ਵਰਕਸਪੇਸ 2 ਤੇ ਜਾਓ
-    misc_toggle_lock_tracing: ਟੌਗਲ ਲਾਕ ਟਰੇਸਿੰਗ (ਲੌਗ)
-    misc_toggle_win_event_tracing: ਵਿਨ ਈਵੈਂਟ ਟਰੇਸਿੰਗ (ਲੌਗ) ਨੂੰ ਟੌਗਲ ਕਰੋ
-    misc_open_settings: ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ
-    toggle_launcher: ਟੌਗਲ
-  enable_tooltip: >-
-    ਅਸਮਰੱਥ ਕਰੋ ਜੇਕਰ ਤੁਸੀਂ ਸੀਲੇਨ ਕੋਰ ਏਪੀਆਈ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਆਪਣੇ ਖੁਦ ਦੇ ਸ਼ਾਰਟਕੱਟ
-    ਲਾਗੂ ਕਰਦੇ ਹੋ
-  enable: ਏਕੀਕ੍ਰਿਤ ਸ਼ਾਰਟਕੱਟ (ahk) ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
-  reset: ਡਿਫੌਲਟਸ ਤੇ ਰੀਸੈਟ ਕਰੋ
-  readonly_tooltip: ਇਹ ਸਿਰਫ ਇਕੋ ਸ਼ਾਰਟਕੱਟ ਹੈ
-open: ਖੋਲ੍ਹੋ
-loading: ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ...
-save: ਸੇਵ ਕਰੋ
-delete: ਮਿਟਾਓ
-inProgress: ਤਰੱਕੀ ਹੋ ਰਹੀ ਹੈ...
-cancel: ਰੱਦ ਕਰੋ
-quit: ਛੱਡੋ
-vd:
-  strategy:
-    label: ਵਰਚੁਅਲ ਡੈਸਕਟੌਤੀ ਰਣਨੀਤੀ
-    seelen: ਵੇਖਿਆ
-    native: ਦੇਸੀ
-  disabled_windows_version: ਦੇਸੀ ਵਰਚੁਅਲ ਡੈਸਕਟੌਪ ਰਣਨੀਤੀ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
-save_and_restart: ਸੇਵ ਅਤੇ ਰੀਸਟਾਰਟ
-monitors_configurations:
-  label: ਨਿਗਰਾਨੀ {{ਇੰਡੈਕਸ}
-wall:
-  no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
-  backgrounds: ਵਾਲਪੇਪਰ
-  enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
-  interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
-  random: ਸਿਲਾਈਡ ਸਲਾਈਡ ਸ਼ੋਅ
-  hours: ਘੰਟੇ
-  seconds: ਸਕਿੰਟ
-  minutes: ਮਿੰਟ
-app_launcher:
-  runners:
-    label: ਦੌੜਾਕ
-    cmd: ਕਮਾਂਡ
-    explorer: ਚਲਾਓ
-  monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
-  enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
-more: ਹੋਰ
-inherit: ਵਿਰਾਸਤ
-insert: ਸੰਮਿਲਿਤ ਕਰੋ
-close: ਨੇੜੇ
 update:
   available: ਅਪਡੇਟ ਉਪਲਬਧ!
   channel: ਚੈਨਲ ਅਪਡੇਟ ਕਰੋ
   downloading: ਡਾ ing ਨਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ...
-miscellaneous: ਫੁਟਕਲ
-mods:
-  plugins: ਪਲੱਗਇਨ
-  target: ਟੀਚਾ
-  widgets: ਵਿਜੇਟਸ
-remove: ਹਟਾਓ
+vd:
+  disabled_windows_version: ਦੇਸੀ ਵਰਚੁਅਲ ਡੈਸਕਟੌਪ ਰਣਨੀਤੀ ਤੁਹਾਡੇ ਵਿੰਡੋਜ਼ ਵਰਜ਼ਨ ਲਈ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
+  strategy:
+    label: ਵਰਚੁਅਲ ਡੈਸਕਟੌਤੀ ਰਣਨੀਤੀ
+    native: ਦੇਸੀ
+    seelen: ਵੇਖਿਆ
+wall:
+  backgrounds: ਵਾਲਪੇਪਰ
+  enable: ਵਾਲਪੇਪਰ ਮੈਨੇਜਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  hours: ਘੰਟੇ
+  interval: ਵਾਲਪੇਪਰ ਬਦਲੋ
+  minutes: ਮਿੰਟ
+  no_background: ਇਸ ਦੀ ਬਜਾਏ ਥੀਮ ਦੇ ਬੈਕਗ੍ਰਾਉਂਡ ਦੀ ਵਰਤੋਂ ਕਰਦਿਆਂ, ਖਾਲੀ ਸਲਾਈਡ ਸ਼ੋਅ ਕਰੋ.
+  random: ਸਿਲਾਈਡ ਸਲਾਈਡ ਸ਼ੋਅ
+  seconds: ਸਕਿੰਟ
+weg:
+  auto_hide: ਆਟੋ ਓਹਲੇ
+  delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
+  delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
+  dock_side: ਸਥਿਤੀ
+  enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+  gap: ਪਾੜਾ
+  items:
+    gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
+    label: ਇਕਾਈ
+    size: ਆਈਟਮ ਦਾ ਆਕਾਰ
+    visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
+    zoom_size: ਜ਼ੂਮ ਕੀਤਾ ਆਕਾਰ (ਥੀਮਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ)
+  label: ਡੌਕ/ਟਾਸਕਬਾਰ
+  margin: ਹਾਸ਼ੀਏ
+  padding: ਪੈਡਿੰਗ
+  use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
+  width: ਚੌੜਾਈ
+wm:
+  author: ਲੇਖਕ
+  border:
+    enable: ਵਿੰਡੋ ਦੇ ਬਾਰਡਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
+    offset: ਬਾਰਡਰ ਆਫਸੈੱਟ
+    width: ਬਾਰਡਰ ਚੌੜਾਈ
+  description: ਵਰਣਨ
+  enable: ਵਿੰਡੋ ਮੈਨੇਜਰ ਟਾਇਲਿੰਗ ਯੋਗ ਕਰੋ
+  layout: ਖਾਕਾ
+  resize_delta: ਡੈਲਟਾ ਦਾ ਆਕਾਰ ਬਦਲੋ (%)
+  space_between_containers: ਕੰਟੇਨਰਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
+  workspace_offset: ਵਰਕਸਪੇਸ ਆਫਸੈੱਟ (ਮਾਰਜਿਨ)
+  workspace_padding: ਵਰਕਸਪੇਸ ਪੈਡਿੰਗ

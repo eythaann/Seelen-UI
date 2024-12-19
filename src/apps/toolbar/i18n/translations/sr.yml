@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Додајте модул
+  remove: Уклони модул
+  settings: Подешавања
+  task_manager: Таск Манагер
 media:
   device:
     comunications: Комуникација
     multimedia: Мултимедијални
   input_device: Улазни уређај
+  master_volume: Главна јачина
   output_device: Излазни уређај
   players: Медиа Играчи
-  master_volume: Главна јачина
 network:
+  available: Доступне мреже
+  connect: Повезати
+  connected: Повезано са
+  disconnect: Прекинути везу
+  hidden: Скривена мрежа
+  more: Више мрежних поставки
+  not_found: Није пронађена ниједна мрежа
   placeholder:
     password: Лозинка
-  hidden: Скривена мрежа
-  not_found: Није пронађена ниједна мрежа
-  more: Више мрежних поставки
-  connect: Повезати
-  disconnect: Прекинути везу
-  connected: Повезано са
-  available: Доступне мреже
   saved: Сачуване мреже
-  secured: Шифрована мрежа
   scanning: Скенирање за мреже
-settings:
-  restart: Поново покренути
-  shutdown: Искључити
-  log_out: Одјавити се
-  app_settings: Подешавања апликација
-  title: Подешавања
-  sleep: Спавати
-  power: Моћ
+  secured: Шифрована мрежа
 placeholder:
-  ethernet_disconnected: Нема приступа интернету
+  battery_remaining: преостали%
+  bluetooth_devices: Блуетоотх и уређаји
   ethernet_connected: Приступ интернету
+  ethernet_disconnected: Нема приступа интернету
+  notifications: Обавештења
+  open_system_tray: Отворите лежиште за систем
+  open_user_folder: Отворите фасциклу корисника
+  settings: Брза подешавања
   smart_charge: '- паметно набој'
   volume: Запремина
-  settings: Брза подешавања
-  battery_remaining: преостали%
-  open_user_folder: Отворите фасциклу корисника
-  bluetooth_devices: Блуетоотх и уређаји
-  open_system_tray: Отворите лежиште за систем
-  notifications: Обавештења
+settings:
+  app_settings: Подешавања апликација
+  log_out: Одјавити се
+  power: Моћ
+  restart: Поново покренути
+  shutdown: Искључити
+  sleep: Спавати
+  title: Подешавања
 unlabelled_tray: Икона за отпадне траи
-context_menu:
-  remove: Уклони модул
-  add_module: Додајте модул
-  task_manager: Таск Манагер
-  settings: Подешавања

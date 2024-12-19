@@ -1,264 +1,264 @@
-sides:
-  bottom: கீழே
-  top: மேல்
-  right: சரி
-  left: விட்டு
-header:
-  labels:
-    seelen_wm: சாளர மேலாளர்
-    info: தகவல்
-    monitors: கண்காணிப்பாளர்கள்
-    developer: டெவலப்பர்
-    shortcuts: குறுக்குவழிகள்
-    general: பொது
-    seelen_weg: கப்பல்துறை/பணிப்பட்டி
-    specific_apps: குறிப்பிட்ட பயன்பாடுகள்
-    seelen_bar: ஆடம்பரமான கருவிப்பட்டி
-    seelen_rofi: பயன்பாட்டு துவக்கி
-    virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
-    home: வீடு
-    mods: செருகுநிரல்கள் & விட்ஜெட்டுகள்
-    seelen_wall: வால்பேப்பர் மேலாளர்
-start:
-  title: வரவேற்பு!
-  message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
-  message: >-
-    உங்கள் Windows அனுபவத்தை மேம்படுத்த, ஒருங்கிணைக்கப்பட்ட டைலிங் விண்டோஸ்
-    மேலாளருடன் கூடிய இறுதி டெஸ்க்டாப் சூழலான Seelen UIக்கு வரவேற்கிறோம்! எங்கள்
-    உள்ளுணர்வு இடைமுகம் மற்றும் மேம்பட்ட அம்சங்களுடன் செயல்திறன் மற்றும்
-    பல்பணியின் புதிய சகாப்தத்தை ஆராயுங்கள்.
-general:
-  theme:
-    tags: குறிச்சொற்கள்
-    placeholder: தீம் தேர்ந்தெடுக்கவும்
-    description: விளக்கம்
-    author: நூலாசிரியர்
-    enabled: இயக்கப்பட்ட தீம்கள்
-    add: தீம் சேர்க்கவும்
-    added: தீம் ஏற்கனவே சேர்க்கப்பட்டது
-    label: தீம் தகவல்
-    available: கிடைக்கிறது
-    selected: தேர்ந்தெடுக்கப்பட்டது
-  language: மொழி
-  startup: தொடக்கத்தில் இயக்கவா?
-  icon_pack:
-    label: ஐகான் பொதிகள்
-  accent_color: உச்சரிப்பு நிறம்
-  wallpaper:
-    select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்
-  date_format: தேதி வடிவம்
-toolbar:
-  placeholder:
-    author: நூலாசிரியர்
-    description: விளக்கம்
-    select: கருவிப்பட்டி அமைப்பு
-  height: உயரம்
-  enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
-  auto_hide: ஆட்டோ மறை
-  label: கருவிப்பட்டி
-  delay_to_show: காட்ட தாமதம்
-  delay_to_hide: மறைக்க தாமதம்
-  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
-wm:
-  border:
-    width: பார்டர் அகலம்
-    enable: சாளரத்தின் எல்லையை இயக்கு
-    offset: பார்டர் ஆஃப்செட்
-  author: நூலாசிரியர்
-  description: விளக்கம்
-  space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி
-  workspace_padding: பணியிடங்கள் திணிப்பு
-  resize_delta: டெல்டாவின் அளவை மாற்று (%)
-  workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
-  layout: தளவமைப்பு
-  enable: டைலிங் சாளர மேலாளரை இயக்கவும்
-weg:
-  items:
-    label: பொருட்களை
-    size: பொருளின் அளவு
-    visible_separators: காணக்கூடிய பிரிப்பான்கள்
-    gap: பொருட்களுக்கு இடையே உள்ள இடம்
-    zoom_size: பெரிதாக்கப்பட்ட அளவு (தீம்களுக்குப் பயன்படுத்தப்படுகிறது)
-  auto_hide: தானாக மறை
-  padding: திணிப்பு
-  label: கப்பல்துறை/பணிப்பட்டி
-  margin: விளிம்பு
-  gap: இடைவெளி
-  width: அகலம்
-  enable: டாக்/டாஸ்க்பாரை இயக்கவும்
-  dock_side: நிலை
-  delay_to_show: காட்ட தாமதம்
-  delay_to_hide: மறைக்க தாமதம்
-  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
-devtools:
-  install_folder: நிறுவல் கோப்புறை
-  enable: டெவலப்பர் கருவிகளை இயக்கு
-  custom_config_file: தனிப்பயன் கட்டமைப்பு கோப்பை ஏற்றவும்
-  app_folders: பயன்பாட்டு கோப்புறைகள்
-  data_folder: தரவு கோப்புறை
-  load: ஏற்றவும்
-  settings_file: அமைப்புகள் கோப்பு
+app_launcher:
+  enable: பயன்பாட்டு துவக்கியை இயக்கவும்
+  monitor: காண்பிக்க கண்காணிக்கவும்
+  runners:
+    cmd: கட்டளை
+    explorer: ஓடு
+    label: ஓட்டப்பந்தய வீரர்கள்
 apps_configurations:
   app:
-    options:
-      pinned: பின் செய்யப்பட்டது
-      float: மிதவை
-      unmanage: நிர்வகியுங்கள்
-      force: கட்டாயம் நிர்வகி
-      hidden: கப்பல்துறை/பணிப்பட்டியிலிருந்து மறைக்கவும்
-    monitor: கண்காணிக்கவும்
-    title_create: '{{name}} உருவாக்குகிறது'
-    workspace: பணியிடம்
-    workspace_placeholder: இல்லை
+    bindings: பிணைப்பு (இரண்டு விருப்பங்களும் தேவை என்பதை நினைவில் கொள்ளவும்)
+    category: வகை
     category_placeholder: இல்லை
+    monitor: கண்காணிக்கவும்
     monitor_placeholder: இல்லை
     name: பெயர்
-    category: வகை
     ok_create: உருவாக்கு
-    title_readonly: '{{name}} பார்க்கிறது'
     ok_edit: புதுப்பிக்கவும்
     ok_readonly: புதியதாக திருத்தவும்
-    bindings: பிணைப்பு (இரண்டு விருப்பங்களும் தேவை என்பதை நினைவில் கொள்ளவும்)
-    wm_options_label: சாளர மேலாளர் விருப்பங்கள்
-    weg_options_label: கப்பல்துறை/பணிப்பட்டு விருப்பங்கள்
+    options:
+      float: மிதவை
+      force: கட்டாயம் நிர்வகி
+      hidden: கப்பல்துறை/பணிப்பட்டியிலிருந்து மறைக்கவும்
+      pinned: பின் செய்யப்பட்டது
+      unmanage: நிர்வகியுங்கள்
     options_label: கூடுதல் விருப்பங்கள்
+    title_create: '{{name}} உருவாக்குகிறது'
     title_edit: எடிட்டிங் {{பெயர்}}
-  identifier:
-    and: மற்றும்
-    remove: தடுப்பை நீக்கு
-    negation: பொருத்தத்தை மறுக்கவும்
-    id: அடையாளங்காட்டி
-    add_block: தொகுதியைச் சேர்க்கவும்
-    or: அல்லது
-    kind: மூலம் அடையாளம் காணவும்
-    matching_strategy: பொருந்தும் உத்தி
-  export: ஏற்றுமதி
-  confirm_delete_title: நீக்குவதை உறுதிப்படுத்தவும்
-  delete: அழி
-  bundled_title: பயன்பாட்டு கட்டமைப்பு சீலனுடன் தொகுக்கப்பட்டுள்ளது
-  confirm_delete: இந்த உள்ளமைவு/களை நிச்சயமாக நீக்க விரும்புகிறீர்களா?
+    title_readonly: '{{name}} பார்க்கிறது'
+    weg_options_label: கப்பல்துறை/பணிப்பட்டு விருப்பங்கள்
+    wm_options_label: சாளர மேலாளர் விருப்பங்கள்
+    workspace: பணியிடம்
+    workspace_placeholder: இல்லை
   bundled_msg: >-
     இந்தத் தொகுக்கப்பட்ட உள்ளமைவுகளைத் திருத்த முடியாது மற்றும் தனிப்பயனாக்கம்
     இல்லாமல் சிறந்த அனுபவத்தை உங்களுக்கு வழங்கும் வகையில் வடிவமைக்கப்பட்டுள்ளது.
     உங்களுக்கான பொதுவான பயன்பாடுகளை அவை தானாகவே கட்டமைக்கும்.
-  import: இறக்குமதி
-  search: தேடு
-  swap: இடமாற்று
-  new: புதியது
+  bundled_title: பயன்பாட்டு கட்டமைப்பு சீலனுடன் தொகுக்கப்பட்டுள்ளது
+  confirm_delete: இந்த உள்ளமைவு/களை நிச்சயமாக நீக்க விரும்புகிறீர்களா?
+  confirm_delete_title: நீக்குவதை உறுதிப்படுத்தவும்
+  delete: அழி
+  export: ஏற்றுமதி
   extra_info: >-
     Seelen UI ஆனது ஒரு பயன்பாட்டிற்கு ஒரே ஒரு அடையாளங்காட்டியை மட்டுமே
     பயன்படுத்துகிறது (முதல் பொருத்தம் கண்டறியப்பட்டது) எனவே எப்படி
     குறிப்பிடப்படுகிறது என்பதற்கான வரிசை முக்கியமானது, சமீபத்திய சேர்க்கைக்கு
     முன்னுரிமை அளிக்கப்படும், ஏனெனில் அட்டவணையானது சமீபத்தியது முதல் பழையது வரை
     இயல்புநிலையாக வரிசைப்படுத்தப்படும்.
+  identifier:
+    add_block: தொகுதியைச் சேர்க்கவும்
+    and: மற்றும்
+    id: அடையாளங்காட்டி
+    kind: மூலம் அடையாளம் காணவும்
+    matching_strategy: பொருந்தும் உத்தி
+    negation: பொருத்தத்தை மறுக்கவும்
+    or: அல்லது
+    remove: தடுப்பை நீக்கு
+  import: இறக்குமதி
+  new: புதியது
+  search: தேடு
+  swap: இடமாற்று
+cancel: ரத்து செய்
+close: மூடு
+delete: அழி
+devtools:
+  app_folders: பயன்பாட்டு கோப்புறைகள்
+  custom_config_file: தனிப்பயன் கட்டமைப்பு கோப்பை ஏற்றவும்
+  data_folder: தரவு கோப்புறை
+  enable: டெவலப்பர் கருவிகளை இயக்கு
+  install_folder: நிறுவல் கோப்புறை
+  load: ஏற்றவும்
+  settings_file: அமைப்புகள் கோப்பு
 extras:
   discord: கருத்து வேறுபாடு
   exit: வெளியேறு/வெளியேறு
+  github: கிட்ஹப்
   links: அதிகாரப்பூர்வ இணைப்புகள்
   relaunch: மறுதொடக்கம்
   version: பதிப்பு
-  github: கிட்ஹப்
-shortcuts:
+general:
+  accent_color: உச்சரிப்பு நிறம்
+  date_format: தேதி வடிவம்
+  icon_pack:
+    label: ஐகான் பொதிகள்
+  language: மொழி
+  startup: தொடக்கத்தில் இயக்கவா?
+  theme:
+    add: தீம் சேர்க்கவும்
+    added: தீம் ஏற்கனவே சேர்க்கப்பட்டது
+    author: நூலாசிரியர்
+    available: கிடைக்கிறது
+    description: விளக்கம்
+    enabled: இயக்கப்பட்ட தீம்கள்
+    label: தீம் தகவல்
+    placeholder: தீம் தேர்ந்தெடுக்கவும்
+    selected: தேர்ந்தெடுக்கப்பட்டது
+    tags: குறிச்சொற்கள்
+  wallpaper:
+    select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்
+header:
   labels:
-    focus_latest: சமீபத்திய கவனம்
-    send_to_workspace_2: பணியிடத்திற்கு அனுப்பு 2
-    increase_height: உயரத்தை அதிகரிக்கவும்
-    restore_sizes: அளவுகளை மீட்டமை
-    increase_width: அகலத்தை அதிகரிக்கவும்
-    send_to_workspace_4: பணியிடத்திற்கு அனுப்பு 4
-    move_to_workspace_5: பணியிடத்திற்கு நகர்த்து 5
-    reserve_right: ரிசர்வ் ரைட்
-    switch_workspace_6: பணியிடத்திற்கு மாறவும் 6
-    send_to_workspace_1: பணியிடத்திற்கு அனுப்பு 1
-    send_to_workspace_0: பணியிடம் 0க்கு அனுப்பவும்
-    focus_right: ஃபோகஸ் ரைட்
-    reserve_float: ரிசர்வ் ஃப்ளோட்
-    reserve_left: ரிசர்வ் இடது
-    switch_workspace_5: பணியிடத்திற்கு மாறவும் 5
-    focus_top: ஃபோகஸ் டாப்
-    move_to_workspace_0: பணியிடம் 0க்கு நகர்த்தவும்
-    move_to_workspace_1: பணியிடத்திற்கு நகர்த்து 1
-    move_to_workspace_6: பணியிடத்திற்கு நகர்த்து 6
-    switch_workspace_2: பணியிடத்திற்கு மாறவும் 2
-    reserve_stack: ரிசர்வ் ஸ்டாக்
-    decrease_width: அகலத்தை குறைக்கவும்
-    switch_workspace_8: பணியிடத்திற்கு மாறவும் 8
-    send_to_workspace_8: பணியிடம் 8க்கு அனுப்பவும்
-    reserve_top: ரிசர்வ் டாப்
-    send_to_workspace_5: பணியிடத்திற்கு அனுப்பு 5
-    focus_left: இடதுபுறத்தில் கவனம் செலுத்துங்கள்
-    move_to_workspace_4: பணியிடத்திற்கு நகர்த்து 4
-    send_to_workspace_9: பணியிடம் 9க்கு அனுப்பவும்
-    move_to_workspace_2: பணியிடத்திற்கு நகர்த்து 2
-    move_to_workspace_9: பணியிடத்திற்கு நகர்த்து 9
-    send_to_workspace_3: பணியிடத்திற்கு அனுப்பு 3
-    send_to_workspace_7: பணியிடம் 7க்கு அனுப்பவும்
-    decrease_height: உயரத்தைக் குறைக்கவும்
-    send_to_workspace_6: பணியிடத்திற்கு அனுப்பு 6
-    switch_workspace_4: பணியிடத்திற்கு மாறவும் 4
-    reserve_bottom: ரிசர்வ் பாட்டம்
-    move_to_workspace_8: பணியிடத்திற்கு நகர்த்து 8
-    move_to_workspace_3: பணியிடத்திற்கு நகர்த்து 3
-    switch_workspace_3: பணியிடத்திற்கு மாறவும் 3
-    move_to_workspace_7: பணியிடத்திற்கு நகர்த்து 7
-    switch_workspace_9: பணியிடத்திற்கு மாறவும் 9
-    focus_bottom: கீழே கவனம் செலுத்துங்கள்
-    switch_workspace_7: பணியிடம் 7க்கு மாறவும்
-    switch_workspace_1: பணியிடம் 2 க்கு மாறவும்
-    switch_workspace_0: பணியிடம் 1 க்கு மாறவும்
-    misc_open_settings: திறந்த அமைப்புகள்
-    misc_toggle_win_event_tracing: வெற்றி நிகழ்வு தடமறிதல் (பதிவுகள்)
-    misc_toggle_lock_tracing: பூட்டு தடமறிதல் (பதிவுகள்)
-    toggle_launcher: மாற்று
+    developer: டெவலப்பர்
+    general: பொது
+    home: வீடு
+    info: தகவல்
+    mods: செருகுநிரல்கள் & விட்ஜெட்டுகள்
+    monitors: கண்காணிப்பாளர்கள்
+    seelen_bar: ஆடம்பரமான கருவிப்பட்டி
+    seelen_rofi: பயன்பாட்டு துவக்கி
+    seelen_wall: வால்பேப்பர் மேலாளர்
+    seelen_weg: கப்பல்துறை/பணிப்பட்டி
+    seelen_wm: சாளர மேலாளர்
+    shortcuts: குறுக்குவழிகள்
+    specific_apps: குறிப்பிட்ட பயன்பாடுகள்
+    virtual_desk: மெய்நிகர் டெஸ்க்டாப்புகள்
+inherit: மரபு
+inProgress: செயல்பாட்டில் உள்ளது...
+insert: செருகவும்
+loading: ஏற்றுகிறது...
+miscellaneous: இதர
+mods:
+  plugins: செருகுநிரல்கள்
+  target: இலக்கு
+  widgets: விட்ஜெட்டுகள்
+monitors_configurations:
+  label: கண்காணிக்கவும் {{குறியீட்டு}}}
+more: மேலும்
+open: திற
+quit: விட்டுவிட
+remove: அகற்று
+save: சேமிக்கவும்
+save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்
+shortcuts:
   enable: ஒருங்கிணைந்த குறுக்குவழிகளை இயக்கு (ahk)
   enable_tooltip: >-
     சீலன் கோர் ஏபிஐ பயன்படுத்தி உங்கள் சொந்த ஷார்ட்கட்களை செயல்படுத்தினால்
     முடக்கவும்
-  reset: இயல்புநிலைக்கு மீட்டமைக்கவும்
+  labels:
+    decrease_height: உயரத்தைக் குறைக்கவும்
+    decrease_width: அகலத்தை குறைக்கவும்
+    focus_bottom: கீழே கவனம் செலுத்துங்கள்
+    focus_latest: சமீபத்திய கவனம்
+    focus_left: இடதுபுறத்தில் கவனம் செலுத்துங்கள்
+    focus_right: ஃபோகஸ் ரைட்
+    focus_top: ஃபோகஸ் டாப்
+    increase_height: உயரத்தை அதிகரிக்கவும்
+    increase_width: அகலத்தை அதிகரிக்கவும்
+    misc_open_settings: திறந்த அமைப்புகள்
+    misc_toggle_lock_tracing: பூட்டு தடமறிதல் (பதிவுகள்)
+    misc_toggle_win_event_tracing: வெற்றி நிகழ்வு தடமறிதல் (பதிவுகள்)
+    move_to_workspace_0: பணியிடம் 0க்கு நகர்த்தவும்
+    move_to_workspace_1: பணியிடத்திற்கு நகர்த்து 1
+    move_to_workspace_2: பணியிடத்திற்கு நகர்த்து 2
+    move_to_workspace_3: பணியிடத்திற்கு நகர்த்து 3
+    move_to_workspace_4: பணியிடத்திற்கு நகர்த்து 4
+    move_to_workspace_5: பணியிடத்திற்கு நகர்த்து 5
+    move_to_workspace_6: பணியிடத்திற்கு நகர்த்து 6
+    move_to_workspace_7: பணியிடத்திற்கு நகர்த்து 7
+    move_to_workspace_8: பணியிடத்திற்கு நகர்த்து 8
+    move_to_workspace_9: பணியிடத்திற்கு நகர்த்து 9
+    reserve_bottom: ரிசர்வ் பாட்டம்
+    reserve_float: ரிசர்வ் ஃப்ளோட்
+    reserve_left: ரிசர்வ் இடது
+    reserve_right: ரிசர்வ் ரைட்
+    reserve_stack: ரிசர்வ் ஸ்டாக்
+    reserve_top: ரிசர்வ் டாப்
+    restore_sizes: அளவுகளை மீட்டமை
+    send_to_workspace_0: பணியிடம் 0க்கு அனுப்பவும்
+    send_to_workspace_1: பணியிடத்திற்கு அனுப்பு 1
+    send_to_workspace_2: பணியிடத்திற்கு அனுப்பு 2
+    send_to_workspace_3: பணியிடத்திற்கு அனுப்பு 3
+    send_to_workspace_4: பணியிடத்திற்கு அனுப்பு 4
+    send_to_workspace_5: பணியிடத்திற்கு அனுப்பு 5
+    send_to_workspace_6: பணியிடத்திற்கு அனுப்பு 6
+    send_to_workspace_7: பணியிடம் 7க்கு அனுப்பவும்
+    send_to_workspace_8: பணியிடம் 8க்கு அனுப்பவும்
+    send_to_workspace_9: பணியிடம் 9க்கு அனுப்பவும்
+    switch_workspace_0: பணியிடம் 1 க்கு மாறவும்
+    switch_workspace_1: பணியிடம் 2 க்கு மாறவும்
+    switch_workspace_2: பணியிடத்திற்கு மாறவும் 2
+    switch_workspace_3: பணியிடத்திற்கு மாறவும் 3
+    switch_workspace_4: பணியிடத்திற்கு மாறவும் 4
+    switch_workspace_5: பணியிடத்திற்கு மாறவும் 5
+    switch_workspace_6: பணியிடத்திற்கு மாறவும் 6
+    switch_workspace_7: பணியிடம் 7க்கு மாறவும்
+    switch_workspace_8: பணியிடத்திற்கு மாறவும் 8
+    switch_workspace_9: பணியிடத்திற்கு மாறவும் 9
+    toggle_launcher: மாற்று
   readonly_tooltip: இது படிக்க மட்டும் குறுக்குவழி
-inProgress: செயல்பாட்டில் உள்ளது...
-cancel: ரத்து செய்
-quit: விட்டுவிட
-delete: அழி
-loading: ஏற்றுகிறது...
-save: சேமிக்கவும்
-open: திற
-vd:
-  strategy:
-    native: பூர்வீகம்
-    seelen: சைலர்
-    label: மெய்நிகர் டெஸ்க்டாப் உத்தி
-  disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சொந்த மெய்நிகர் டெஸ்க்டாப் உத்தி கிடைக்கவில்லை.
-save_and_restart: சேமிக்கவும் மறுதொடக்கம் செய்யவும்
-monitors_configurations:
-  label: கண்காணிக்கவும் {{குறியீட்டு}}}
-wall:
-  no_background: வெற்று ஸ்லைடுஷோ, அதற்கு பதிலாக கருப்பொருளின் பின்னணியைப் பயன்படுத்துகிறது.
-  backgrounds: வால்பேப்பர்கள்
-  enable: வால்பேப்பர் மேலாளரை இயக்கவும்
-  interval: ஒவ்வொரு வால்பேப்பரையும் மாற்றவும்
-  random: ஸ்லைடுஷோவை சீரற்றதாக்குங்கள்
-  hours: மணி
-  minutes: நிமிடங்கள்
-  seconds: விநாடிகள்
-app_launcher:
-  runners:
-    label: ஓட்டப்பந்தய வீரர்கள்
-    explorer: ஓடு
-    cmd: கட்டளை
-  monitor: காண்பிக்க கண்காணிக்கவும்
-  enable: பயன்பாட்டு துவக்கியை இயக்கவும்
-insert: செருகவும்
-inherit: மரபு
-more: மேலும்
-close: மூடு
+  reset: இயல்புநிலைக்கு மீட்டமைக்கவும்
+sides:
+  bottom: கீழே
+  left: விட்டு
+  right: சரி
+  top: மேல்
+start:
+  message: >-
+    உங்கள் Windows அனுபவத்தை மேம்படுத்த, ஒருங்கிணைக்கப்பட்ட டைலிங் விண்டோஸ்
+    மேலாளருடன் கூடிய இறுதி டெஸ்க்டாப் சூழலான Seelen UIக்கு வரவேற்கிறோம்! எங்கள்
+    உள்ளுணர்வு இடைமுகம் மற்றும் மேம்பட்ட அம்சங்களுடன் செயல்திறன் மற்றும்
+    பல்பணியின் புதிய சகாப்தத்தை ஆராயுங்கள்.
+  message_accent: பாணியுடன் உங்கள் உற்பத்தித்திறனை மேம்படுத்துங்கள்!
+  title: வரவேற்பு!
+toolbar:
+  auto_hide: ஆட்டோ மறை
+  delay_to_hide: மறைக்க தாமதம்
+  delay_to_show: காட்ட தாமதம்
+  enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
+  height: உயரம்
+  label: கருவிப்பட்டி
+  placeholder:
+    author: நூலாசிரியர்
+    description: விளக்கம்
+    select: கருவிப்பட்டி அமைப்பு
+  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
 update:
   available: புதுப்பிப்பு கிடைக்கிறது!
-  downloading: பதிவிறக்கம் ...
   channel: சேனலைப் புதுப்பிக்கவும்
-miscellaneous: இதர
-mods:
-  widgets: விட்ஜெட்டுகள்
-  plugins: செருகுநிரல்கள்
-  target: இலக்கு
-remove: அகற்று
+  downloading: பதிவிறக்கம் ...
+vd:
+  disabled_windows_version: உங்கள் விண்டோஸ் பதிப்பிற்கு சொந்த மெய்நிகர் டெஸ்க்டாப் உத்தி கிடைக்கவில்லை.
+  strategy:
+    label: மெய்நிகர் டெஸ்க்டாப் உத்தி
+    native: பூர்வீகம்
+    seelen: சைலர்
+wall:
+  backgrounds: வால்பேப்பர்கள்
+  enable: வால்பேப்பர் மேலாளரை இயக்கவும்
+  hours: மணி
+  interval: ஒவ்வொரு வால்பேப்பரையும் மாற்றவும்
+  minutes: நிமிடங்கள்
+  no_background: வெற்று ஸ்லைடுஷோ, அதற்கு பதிலாக கருப்பொருளின் பின்னணியைப் பயன்படுத்துகிறது.
+  random: ஸ்லைடுஷோவை சீரற்றதாக்குங்கள்
+  seconds: விநாடிகள்
+weg:
+  auto_hide: தானாக மறை
+  delay_to_hide: மறைக்க தாமதம்
+  delay_to_show: காட்ட தாமதம்
+  dock_side: நிலை
+  enable: டாக்/டாஸ்க்பாரை இயக்கவும்
+  gap: இடைவெளி
+  items:
+    gap: பொருட்களுக்கு இடையே உள்ள இடம்
+    label: பொருட்களை
+    size: பொருளின் அளவு
+    visible_separators: காணக்கூடிய பிரிப்பான்கள்
+    zoom_size: பெரிதாக்கப்பட்ட அளவு (தீம்களுக்குப் பயன்படுத்தப்படுகிறது)
+  label: கப்பல்துறை/பணிப்பட்டி
+  margin: விளிம்பு
+  padding: திணிப்பு
+  use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
+  width: அகலம்
+wm:
+  author: நூலாசிரியர்
+  border:
+    enable: சாளரத்தின் எல்லையை இயக்கு
+    offset: பார்டர் ஆஃப்செட்
+    width: பார்டர் அகலம்
+  description: விளக்கம்
+  enable: டைலிங் சாளர மேலாளரை இயக்கவும்
+  layout: தளவமைப்பு
+  resize_delta: டெல்டாவின் அளவை மாற்று (%)
+  space_between_containers: கொள்கலன்களுக்கு இடையில் இடைவெளி
+  workspace_offset: பணியிடங்கள் ஆஃப்செட் (விளிம்புகள்)
+  workspace_padding: பணியிடங்கள் திணிப்பு

@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Żid il-modulu
+  remove: Neħħi l-modulu
+  settings: Settings
+  task_manager: Task Manager
 media:
   device:
     comunications: Komunikazzjonijiet
     multimedia: Multimedja
-  master_volume: Volum Master
-  players: Plejers tal-midja
-  output_device: Apparat tal-ħruġ
   input_device: Apparat ta 'input
+  master_volume: Volum Master
+  output_device: Apparat tal-ħruġ
+  players: Plejers tal-midja
 network:
-  placeholder:
-    password: Password
+  available: Netwerks disponibbli
   connect: Qabbad
-  not_found: Ma nstabu l-ebda netwerks
+  connected: Konnessi ma'
   disconnect: Skonnettja
   hidden: Netwerk moħbi
   more: Aktar settings tan-netwerk
-  scanning: Skennjar għal netwerks
+  not_found: Ma nstabu l-ebda netwerks
+  placeholder:
+    password: Password
   saved: Netwerks salvati
-  connected: Konnessi ma'
-  available: Netwerks disponibbli
+  scanning: Skennjar għal netwerks
   secured: Netwerk kriptat
-settings:
-  restart: Erġa ibda
-  shutdown: Għalaq
-  log_out: Oħroġ
-  title: Settings
-  sleep: Irqad
-  app_settings: Settings tal-App
-  power: Qawwa
 placeholder:
-  open_user_folder: Folder tal-utent miftuħ
-  settings: Settings ta 'malajr
+  battery_remaining: '% jibqa '''
+  bluetooth_devices: Bluetooth & Apparat
   ethernet_connected: Aċċess għall-Internet
   ethernet_disconnected: L-ebda aċċess għall-internet
-  smart_charge: '- ħlas intelliġenti'
-  bluetooth_devices: Bluetooth & Apparat
-  battery_remaining: '% jibqa '''
-  open_system_tray: Tray tas-Sistema Miftuħa
-  volume: Volum
   notifications: Notifiki
+  open_system_tray: Tray tas-Sistema Miftuħa
+  open_user_folder: Folder tal-utent miftuħ
+  settings: Settings ta 'malajr
+  smart_charge: '- ħlas intelliġenti'
+  volume: Volum
+settings:
+  app_settings: Settings tal-App
+  log_out: Oħroġ
+  power: Qawwa
+  restart: Erġa ibda
+  shutdown: Għalaq
+  sleep: Irqad
+  title: Settings
 unlabelled_tray: Ikona tat-trej mhux immarkata
-context_menu:
-  add_module: Żid il-modulu
-  remove: Neħħi l-modulu
-  task_manager: Task Manager
-  settings: Settings

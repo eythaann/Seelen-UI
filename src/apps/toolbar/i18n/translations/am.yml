@@ -1,46 +1,46 @@
+context_menu:
+  add_module: ሞዱል ያክሉ
+  remove: ሞጁሎችን ያስወግዱ
+  settings: ቅንብሮች
+  task_manager: ተግባር አስተዳዳሪ
 media:
   device:
-    multimedia: መልቲሚዲያ
     comunications: ግንኙነቶች
-  output_device: የውጤት መሣሪያ
+    multimedia: መልቲሚዲያ
   input_device: የግቤት መሣሪያ
-  players: የሚዲያ ተጫዋቾች
   master_volume: ዋና መጠን
+  output_device: የውጤት መሣሪያ
+  players: የሚዲያ ተጫዋቾች
 network:
-  placeholder:
-    password: የይለፍ ቃል
+  available: የሚገኙ አውታረ መረቦች
+  connect: አገናኝ
+  connected: ጋር ተገናኝቷል።
   disconnect: ያላቅቁ
   hidden: የተደበቀ አውታረመረብ
   more: ተጨማሪ የአውታረ መረብ ቅንብሮች
   not_found: ምንም አውታረመረቦች አልተገኙም
-  connect: አገናኝ
-  secured: የተመሰጠረ አውታረ መረብ
-  connected: ጋር ተገናኝቷል።
-  available: የሚገኙ አውታረ መረቦች
+  placeholder:
+    password: የይለፍ ቃል
   saved: የተቀመጡ አውታረ መረቦች
   scanning: አውታረ መረቦችን በመቃኘት ላይ
-settings:
-  restart: እንደገና ጀምር
-  title: ቅንብሮች
-  shutdown: ዝጋው
-  log_out: ውጣ
-  app_settings: የመተግበሪያ ቅንጅቶች
-  sleep: እንቅልፍ
-  power: ኃይል
+  secured: የተመሰጠረ አውታረ መረብ
 placeholder:
-  smart_charge: '- ዘመናዊ ክፍያ'
+  battery_remaining: '% ይቀራል'
+  bluetooth_devices: ብሉቱዝ እና መሣሪያዎች
+  ethernet_connected: የበይነመረብ መዳረሻ
+  ethernet_disconnected: ምንም የበይነመረብ ግንኙነት የለም
+  notifications: ማሳወቂያዎች
   open_system_tray: ክፍት የስርዓት ትሪ
   open_user_folder: የተከፈተ የተጠቃሚ አቃፊ
-  ethernet_connected: የበይነመረብ መዳረሻ
-  volume: ድምጽ
-  bluetooth_devices: ብሉቱዝ እና መሣሪያዎች
-  ethernet_disconnected: ምንም የበይነመረብ ግንኙነት የለም
   settings: ፈጣን ቅንብሮች
-  battery_remaining: '% ይቀራል'
-  notifications: ማሳወቂያዎች
+  smart_charge: '- ዘመናዊ ክፍያ'
+  volume: ድምጽ
+settings:
+  app_settings: የመተግበሪያ ቅንጅቶች
+  log_out: ውጣ
+  power: ኃይል
+  restart: እንደገና ጀምር
+  shutdown: ዝጋው
+  sleep: እንቅልፍ
+  title: ቅንብሮች
 unlabelled_tray: ያልተስተካከለ ትሪ አዶ
-context_menu:
-  remove: ሞጁሎችን ያስወግዱ
-  add_module: ሞዱል ያክሉ
-  task_manager: ተግባር አስተዳዳሪ
-  settings: ቅንብሮች

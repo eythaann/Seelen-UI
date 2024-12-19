@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: मीडिया मॉड्यूल जोड़ें
-  start: स्टार्ट मॉड्यूल जोड़ें
-  add_file: पिन कस्टम फ़ाइल
-  add_folder: पिन कस्टम फ़ोल्डर
-  settings: सेटिंग्स
-  task_manager: कार्य प्रबंधक
 app_menu:
+  close: बंद करना
   close_multiple: सब बंद करें
-  pin_to_right: दाईं ओर पिन करना
+  copy_handles: कॉपी हैंडल
+  kill: मारने की प्रक्रिया
+  kill_multiple: सभी प्रक्रियाओं को ख़त्म करें
+  open_file_location: फ़ाइल के स्थान को खोलें
+  pin: नत्थी करना
   pin_to_center: केंद्र को पिन करना
   pin_to_left: बाईं ओर पिन
-  close: बंद करना
+  pin_to_right: दाईं ओर पिन करना
   run_as: व्यवस्थापक के रूप में चलाएं
-  open_file_location: फ़ाइल के स्थान को खोलें
-  copy_handles: कॉपी हैंडल
   unpin: अनपिन
-  pin: नत्थी करना
-  kill_multiple: सभी प्रक्रियाओं को ख़त्म करें
-  kill: मारने की प्रक्रिया
+media:
+  not_playing: कुछ भी नहीं खेल रहा है
 media_menu:
   remove: मीडिया मॉड्यूल निकालें
 start_menu:
   remove: प्रारंभ मॉड्यूल निकालें
-media:
-  not_playing: कुछ भी नहीं खेल रहा है
+taskbar_menu:
+  add_file: पिन कस्टम फ़ाइल
+  add_folder: पिन कस्टम फ़ोल्डर
+  media: मीडिया मॉड्यूल जोड़ें
+  settings: सेटिंग्स
+  start: स्टार्ट मॉड्यूल जोड़ें
+  task_manager: कार्य प्रबंधक

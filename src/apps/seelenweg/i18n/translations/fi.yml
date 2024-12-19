@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Lisää aloitusmoduuli
-  media: Lisää mediamoduuli
-  add_file: Pin mukautettu tiedosto
-  add_folder: Pin Custom -kansio
-  settings: Asetukset
-  task_manager: Tehtävienhallinta
 app_menu:
-  close_multiple: Sulje kaikki
-  run_as: Suorita järjestelmänvalvojana
   close: kiinni
-  open_file_location: Avaa tiedoston sijainti
-  pin_to_right: Pistä oikealle
+  close_multiple: Sulje kaikki
   copy_handles: Kopiokahvat
+  kill: Tappoprosessi
+  kill_multiple: Tapa kaikki prosessit
+  open_file_location: Avaa tiedoston sijainti
   pin: Nasta
   pin_to_center: Pintää keskustaan
   pin_to_left: Vasemmalle
+  pin_to_right: Pistä oikealle
+  run_as: Suorita järjestelmänvalvojana
   unpin: Purkaa
-  kill: Tappoprosessi
-  kill_multiple: Tapa kaikki prosessit
+media:
+  not_playing: Mikään ei pelaa
 media_menu:
   remove: Poista mediamoduuli
 start_menu:
   remove: Poista Start -moduuli
-media:
-  not_playing: Mikään ei pelaa
+taskbar_menu:
+  add_file: Pin mukautettu tiedosto
+  add_folder: Pin Custom -kansio
+  media: Lisää mediamoduuli
+  settings: Asetukset
+  start: Lisää aloitusmoduuli
+  task_manager: Tehtävienhallinta

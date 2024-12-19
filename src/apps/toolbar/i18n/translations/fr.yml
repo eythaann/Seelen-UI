@@ -1,46 +1,46 @@
-media:
-  master_volume: Volume principal
-  output_device: Dispositif de sortie
-  input_device: Dispositif d'entrée
-  players: Lecteurs multimédias
-  device:
-    multimedia: Multimédia
-    comunications: Communications
-network:
-  not_found: Aucun réseau trouvé
-  more: Plus de paramètres réseau
-  hidden: Réseau caché
-  placeholder:
-    password: Mot de passe
-  disconnect: Déconnecter
-  connect: Connecter
-  connected: Connecté à
-  available: Réseaux disponibles
-  saved: Réseaux enregistrés
-  secured: Réseau crypté
-  scanning: Recherche de réseaux
-settings:
-  title: Paramètres
-  app_settings: Paramètres de l'application
-  log_out: Se déconnecter
-  sleep: Dormir
-  restart: Redémarrage
-  shutdown: Fermer
-  power: Pouvoir
-placeholder:
-  open_user_folder: Ouvrir le dossier utilisateur
-  open_system_tray: Ouvrir la barre d'état système
-  bluetooth_devices: Bluetooth
-  ethernet_connected: accès Internet
-  ethernet_disconnected: Pas d'accès Internet
-  volume: Volume
-  battery_remaining: '% restant'
-  smart_charge: '- Chargement intelligent'
-  settings: Réglages rapides
-  notifications: Notifications
-unlabelled_tray: Icône de plateau non étiquetée
 context_menu:
   add_module: Ajouter le module
   remove: Retirer le module
-  task_manager: Gestionnaire de tâches
   settings: Paramètres
+  task_manager: Gestionnaire de tâches
+media:
+  device:
+    comunications: Communications
+    multimedia: Multimédia
+  input_device: Dispositif d'entrée
+  master_volume: Volume principal
+  output_device: Dispositif de sortie
+  players: Lecteurs multimédias
+network:
+  available: Réseaux disponibles
+  connect: Connecter
+  connected: Connecté à
+  disconnect: Déconnecter
+  hidden: Réseau caché
+  more: Plus de paramètres réseau
+  not_found: Aucun réseau trouvé
+  placeholder:
+    password: Mot de passe
+  saved: Réseaux enregistrés
+  scanning: Recherche de réseaux
+  secured: Réseau crypté
+placeholder:
+  battery_remaining: '% restant'
+  bluetooth_devices: Bluetooth
+  ethernet_connected: accès Internet
+  ethernet_disconnected: Pas d'accès Internet
+  notifications: Notifications
+  open_system_tray: Ouvrir la barre d'état système
+  open_user_folder: Ouvrir le dossier utilisateur
+  settings: Réglages rapides
+  smart_charge: '- Chargement intelligent'
+  volume: Volume
+settings:
+  app_settings: Paramètres de l'application
+  log_out: Se déconnecter
+  power: Pouvoir
+  restart: Redémarrage
+  shutdown: Fermer
+  sleep: Dormir
+  title: Paramètres
+unlabelled_tray: Icône de plateau non étiquetée

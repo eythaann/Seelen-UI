@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Медиа модулийг нэмнэ
-  start: Эхлэх модулийг нэмнэ үү
-  add_file: PIN захиалгын файл
-  add_folder: Пин захиалгын хавтас
-  task_manager: Ажлын менежер
-  settings: Тохиргоо
 app_menu:
+  close: Ойр дөхөм
+  close_multiple: Бүгдийг хаах
+  copy_handles: Хуулбарлах
+  kill: Алах үйл явц
+  kill_multiple: Бүх процессыг устгах
+  open_file_location: Нээлттэй файлын байршлыг нээнэ үү
+  pin: Сулбээр зүү
+  pin_to_center: Төв рүү зүү
+  pin_to_left: Зүүн тийш зүү
+  pin_to_right: Баруун тийш зүү
   run_as: Администратороор ажиллуулах
   unpin: Нууц
-  pin_to_left: Зүүн тийш зүү
-  close_multiple: Бүгдийг хаах
-  open_file_location: Нээлттэй файлын байршлыг нээнэ үү
-  pin_to_center: Төв рүү зүү
-  copy_handles: Хуулбарлах
-  pin: Сулбээр зүү
-  pin_to_right: Баруун тийш зүү
-  close: Ойр дөхөм
-  kill_multiple: Бүх процессыг устгах
-  kill: Алах үйл явц
+media:
+  not_playing: Юу ч тоглоогүй байна
 media_menu:
   remove: МЭДЭЭЛЛИЙН МЭДЭЭЛЛИЙН МЭДЭЭЛЭЛ
 start_menu:
   remove: Эхлэх модулийг устгах
-media:
-  not_playing: Юу ч тоглоогүй байна
+taskbar_menu:
+  add_file: PIN захиалгын файл
+  add_folder: Пин захиалгын хавтас
+  media: Медиа модулийг нэмнэ
+  settings: Тохиргоо
+  start: Эхлэх модулийг нэмнэ үү
+  task_manager: Ажлын менежер

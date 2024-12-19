@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: បន្ថែមម៉ូឌុលមេឌៀបន្ថែម
-  start: បន្ថែមម៉ូឌុលចាប់ផ្តើម
-  add_file: លេខកូដសម្ងាត់លេខសម្ងាត់
-  add_folder: ថតម្ជុលផ្ទាល់ខ្លួន
-  settings: ការកំណត់
-  task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
 app_menu:
-  run_as: ដំណើរការ​ជា​រ​អ្នកគ្រប់គ្រង
-  pin: ម្ជុល
-  copy_handles: ចម្លងចំណុចទាញ
-  unpin: អក្គោអិន
-  pin_to_center: ម្ជុលទៅកណ្តាល
-  close_multiple: បិទទាំងអស់
-  pin_to_left: ម្ជុលទៅឆ្វេង
-  pin_to_right: ម្ជុលទៅស្តាំ
   close: បិត
-  open_file_location: បើកទីតាំងឯកសារ
+  close_multiple: បិទទាំងអស់
+  copy_handles: ចម្លងចំណុចទាញ
   kill: ដំណើរការសម្លាប់
   kill_multiple: សម្លាប់ដំណើរការទាំងអស់។
+  open_file_location: បើកទីតាំងឯកសារ
+  pin: ម្ជុល
+  pin_to_center: ម្ជុលទៅកណ្តាល
+  pin_to_left: ម្ជុលទៅឆ្វេង
+  pin_to_right: ម្ជុលទៅស្តាំ
+  run_as: ដំណើរការ​ជា​រ​អ្នកគ្រប់គ្រង
+  unpin: អក្គោអិន
+media:
+  not_playing: គ្មានអ្វីកំពុងលេងទេ
 media_menu:
   remove: យកម៉ូឌុលមេឌៀចេញ
 start_menu:
   remove: យកម៉ូឌុលចាប់ផ្តើមចេញ
-media:
-  not_playing: គ្មានអ្វីកំពុងលេងទេ
+taskbar_menu:
+  add_file: លេខកូដសម្ងាត់លេខសម្ងាត់
+  add_folder: ថតម្ជុលផ្ទាល់ខ្លួន
+  media: បន្ថែមម៉ូឌុលមេឌៀបន្ថែម
+  settings: ការកំណត់
+  start: បន្ថែមម៉ូឌុលចាប់ផ្តើម
+  task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច

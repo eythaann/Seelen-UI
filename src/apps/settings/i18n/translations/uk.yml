@@ -1,263 +1,263 @@
-sides:
-  right: Право
-  left: Лівий
-  top: Топ
-  bottom: Дно
-header:
-  labels:
-    specific_apps: Конкретні програми
-    info: Інформація
-    seelen_bar: Панель інструментів вишуканих
-    general: Загальний
-    seelen_weg: Док/панель завдань
-    monitors: Монітори
-    developer: Розробник
-    seelen_wm: Менеджер вікон
-    shortcuts: Ярлики
-    seelen_rofi: Запуск програми
-    virtual_desk: Віртуальні настільні ПК
-    home: Домашній
-    mods: Плагіни та віджети
-    seelen_wall: Менеджер шпалер
-start:
-  title: Ласкаво просимо!
-  message_accent: Оптимізуйте свою продуктивність стилем!
-  message: >-
-    Ласкаво просимо в інтерфейс SEELEN, Ultimate Desktop Envirtional із
-    включеним менеджером з плитки Windows для покращення вашого досвіду Windows
-    ! Вивчіть нову еру ефективності та багатозадачності за допомогою нашого
-    інтуїтивного інтерфейсу та розширених функцій.
-general:
-  theme:
-    enabled: Увімкнено теми
-    added: Тема вже додана
-    description: Опис
-    author: Автор
-    tags: Теги
-    add: Додати тему
-    label: Інформація про тему
-    placeholder: Виберіть тему
-    selected: Обраний
-    available: Доступний
-  language: Мова
-  startup: Бігати на стартап?
-  icon_pack:
-    label: Пакети значків
-  accent_color: Акцентний колір
-  wallpaper:
-    select: Виберіть шпалери
-  date_format: Формат дати
-toolbar:
-  placeholder:
-    select: Структура панелі інструментів
-    description: Опис
-    author: Автор
-  enable: Увімкнути панель інструментів вишуканих
-  height: Висота
-  auto_hide: Автомати
-  label: Панель інструментів
-  delay_to_show: Затримка, щоб показати
-  delay_to_hide: Затримка, щоб сховатися
-  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
-wm:
-  border:
-    width: Ширина кордону
-    enable: Увімкнути кордон вікна
-    offset: Зміщення кордону
-  description: Опис
-  resize_delta: Змінити розмір дельти (%)
-  layout: Макет
-  author: Автор
-  workspace_offset: Зсув робочих просторів (поля)
-  space_between_containers: Простір між контейнерами
-  workspace_padding: Прокладка робочих просторів
-  enable: Увімкнути плитку диспетчера вікон
-weg:
-  items:
-    label: Предмети
-    zoom_size: Збільшений розмір (використовується для тем)
-    size: Розмір товару
-    gap: Простір між предметами
-    visible_separators: Видимі сепаратори
-  enable: Увімкнути док/панель завдань
-  margin: Націнка
-  auto_hide: Автомати
-  label: Док/панель завдань
-  gap: Розрив
-  width: Ширина
-  padding: Прокладка
-  dock_side: Позиція
-  delay_to_show: Затримка, щоб показати
-  delay_to_hide: Затримка, щоб сховатися
-  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
-devtools:
-  load: Навантаження
-  app_folders: Папки додатків
-  install_folder: Папка встановлення
-  custom_config_file: Завантажте власний конфігураційний файл
-  data_folder: Папка даних
-  enable: Увімкнути інструменти розробника
-  settings_file: Файл налаштувань
+app_launcher:
+  enable: Увімкнути запуску додатків
+  monitor: Монітор, щоб показати
+  runners:
+    cmd: Командування
+    explorer: Пробігати
+    label: Бігуни
 apps_configurations:
   app:
+    bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
+    category: Категорія
+    category_placeholder: Ні
+    monitor: Моніторинг
+    monitor_placeholder: Ні
+    name: Назва
+    ok_create: Створити
+    ok_edit: Оновити
+    ok_readonly: Редагувати як нове
     options:
-      force: Управління силою
       float: Плавати
+      force: Управління силою
+      hidden: Сховати з доки/панелі завдань
       pinned: Закріплений
       unmanage: Неемінь
-      hidden: Сховати з доки/панелі завдань
-    ok_edit: Оновити
-    monitor: Моніторинг
-    category: Категорія
+    options_label: Додаткові варіанти
     title_create: Створення {{Ім'я}}
-    ok_readonly: Редагувати як нове
+    title_edit: Редагування {{Ім'я}}
     title_readonly: Перегляд {{Ім'я}}
-    category_placeholder: Ні
-    monitor_placeholder: Ні
-    workspace_placeholder: Ні
-    workspace: Робоча область
-    ok_create: Створити
-    name: Назва
-    bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
     weg_options_label: Параметри Dock/Taskbar
     wm_options_label: Параметри менеджера вікон
-    options_label: Додаткові варіанти
-    title_edit: Редагування {{Ім'я}}
-  identifier:
-    and: І
-    add_block: Додати блок
-    matching_strategy: Стратегія відповідності
-    kind: Ідентифікувати
-    remove: Видалити блок
-    or: Або
-    negation: Заперечувати відповідність
-    id: Ідентифікатор
-  delete: Видаляти
-  confirm_delete: Ви впевнені, що хочете видалити цю конфігурацію?
-  swap: Обміняти
-  bundled_title: Конфігурація додатка в комплекті з Seelen
-  export: Експорт
-  confirm_delete_title: Підтвердьте видалення
-  import: Імпорт
-  search: Обшук
+    workspace: Робоча область
+    workspace_placeholder: Ні
   bundled_msg: >-
     Ці конфігурації в комплекті не підлягають редагуванню та розроблені для
     того, щоб забезпечити вам найкращий досвід без налаштування. Вони
     автоматично налаштовують для вас найпоширеніші програми.
-  new: Новачок
+  bundled_title: Конфігурація додатка в комплекті з Seelen
+  confirm_delete: Ви впевнені, що хочете видалити цю конфігурацію?
+  confirm_delete_title: Підтвердьте видалення
+  delete: Видаляти
+  export: Експорт
   extra_info: >-
     SEELEN інтерфейс використовує лише один ідентифікатор на додаток (знайдено
     першу відповідність), тому порядок у тому, як це специфічно, є важливим,
     останній доданий буде пріоритетним, оскільки примітка таблиця відсортована
     за замовчуванням від останнього до старого.
+  identifier:
+    add_block: Додати блок
+    and: І
+    id: Ідентифікатор
+    kind: Ідентифікувати
+    matching_strategy: Стратегія відповідності
+    negation: Заперечувати відповідність
+    or: Або
+    remove: Видалити блок
+  import: Імпорт
+  new: Новачок
+  search: Обшук
+  swap: Обміняти
+cancel: Скасувати
+close: Закривати
+delete: Видаляти
+devtools:
+  app_folders: Папки додатків
+  custom_config_file: Завантажте власний конфігураційний файл
+  data_folder: Папка даних
+  enable: Увімкнути інструменти розробника
+  install_folder: Папка встановлення
+  load: Навантаження
+  settings_file: Файл налаштувань
 extras:
+  discord: Розбрат
+  exit: Кинути/вийти
+  github: Гітб
   links: Офіційні посилання
   relaunch: Відновлювати
-  github: Гітб
-  exit: Кинути/вийти
-  discord: Розбрат
   version: Версія
-shortcuts:
+general:
+  accent_color: Акцентний колір
+  date_format: Формат дати
+  icon_pack:
+    label: Пакети значків
+  language: Мова
+  startup: Бігати на стартап?
+  theme:
+    add: Додати тему
+    added: Тема вже додана
+    author: Автор
+    available: Доступний
+    description: Опис
+    enabled: Увімкнено теми
+    label: Інформація про тему
+    placeholder: Виберіть тему
+    selected: Обраний
+    tags: Теги
+  wallpaper:
+    select: Виберіть шпалери
+header:
   labels:
-    move_to_workspace_5: Перехід до робочої області 5
-    move_to_workspace_4: Переходити до робочої області 4
-    move_to_workspace_2: Перехід до робочої області 2
-    focus_latest: Фокус найновіший
-    switch_workspace_7: Перехід на робочу область 7
-    switch_workspace_2: Перехід на робочу область 2
-    increase_width: Збільшити ширину
-    switch_workspace_3: Перехід на робочу область 3
-    move_to_workspace_9: Переходити до робочої області 9
-    decrease_height: Зниження висоти
-    increase_height: Збільшити висоту
-    reserve_stack: Резерв
-    send_to_workspace_1: Надіслати на робочу область 1
-    move_to_workspace_8: Перехід до робочої області 8
-    switch_workspace_6: Перехід на робочу область 6
-    send_to_workspace_9: Надіслати на робочу область 9
-    restore_sizes: Відновити розміри
-    focus_top: Фокус
-    move_to_workspace_1: Переходити до робочої області 1
-    reserve_bottom: ЗАБЕЗПЕЧЕННЯ
-    send_to_workspace_3: Надіслати на робочу область 3
-    send_to_workspace_8: Надіслати на робочу область 8
-    move_to_workspace_6: Переходити до робочої області 6
-    switch_workspace_9: Перехід на робочу область 9
-    focus_bottom: Фокус дно
-    reserve_left: Резерв зліва
-    move_to_workspace_0: Перехід до робочої області 0
-    send_to_workspace_5: Надіслати на робочу область 5
-    switch_workspace_5: Перехід на робочу область 5
-    reserve_top: Резервувати топ
-    decrease_width: Зменшення ширини
-    switch_workspace_8: Перехід на робочу область 8
-    send_to_workspace_4: Надіслати на робочу область 4
-    reserve_right: Резервуйте праворуч
-    move_to_workspace_3: Переходити до робочої області 3
-    send_to_workspace_2: Надіслати на робочу область 2
-    switch_workspace_4: Перехід на робочу область 4
-    move_to_workspace_7: Перехід до робочої області 7
-    reserve_float: Резервне плавання
-    send_to_workspace_0: Надіслати на робочу область 0
-    focus_left: Фокус ліворуч
-    send_to_workspace_6: Надіслати на робочу область 6
-    focus_right: Фокус правильно
-    send_to_workspace_7: Надіслати на робочу область 7
-    switch_workspace_0: Перехід на робочу область 1
-    switch_workspace_1: Перехід на робочу область 2
-    misc_open_settings: Відкриті налаштування
-    misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
-    misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
-    toggle_launcher: Перемикатися
-  enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
-  enable: Увімкнути інтегровані ярлики (AHK)
-  reset: Скидання за замовчуванням
-  readonly_tooltip: Це ярлик лише для читання
-delete: Видаляти
+    developer: Розробник
+    general: Загальний
+    home: Домашній
+    info: Інформація
+    mods: Плагіни та віджети
+    monitors: Монітори
+    seelen_bar: Панель інструментів вишуканих
+    seelen_rofi: Запуск програми
+    seelen_wall: Менеджер шпалер
+    seelen_weg: Док/панель завдань
+    seelen_wm: Менеджер вікон
+    shortcuts: Ярлики
+    specific_apps: Конкретні програми
+    virtual_desk: Віртуальні настільні ПК
+inherit: Успадкувати
 inProgress: В процесі...
-cancel: Скасувати
-save: Заощадити
+insert: Вставляти
+loading: Завантаження ...
+miscellaneous: Різний
+mods:
+  plugins: Плагіни
+  target: Цільовий
+  widgets: Віджети
+monitors_configurations:
+  label: Монітор {{index}}
+more: Більше
 open: ВІДЧИНЕНО
 quit: Кинути
-loading: Завантаження ...
+remove: Видалити
+save: Заощадити
+save_and_restart: Зберегти та перезапустити
+shortcuts:
+  enable: Увімкнути інтегровані ярлики (AHK)
+  enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
+  labels:
+    decrease_height: Зниження висоти
+    decrease_width: Зменшення ширини
+    focus_bottom: Фокус дно
+    focus_latest: Фокус найновіший
+    focus_left: Фокус ліворуч
+    focus_right: Фокус правильно
+    focus_top: Фокус
+    increase_height: Збільшити висоту
+    increase_width: Збільшити ширину
+    misc_open_settings: Відкриті налаштування
+    misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
+    misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
+    move_to_workspace_0: Перехід до робочої області 0
+    move_to_workspace_1: Переходити до робочої області 1
+    move_to_workspace_2: Перехід до робочої області 2
+    move_to_workspace_3: Переходити до робочої області 3
+    move_to_workspace_4: Переходити до робочої області 4
+    move_to_workspace_5: Перехід до робочої області 5
+    move_to_workspace_6: Переходити до робочої області 6
+    move_to_workspace_7: Перехід до робочої області 7
+    move_to_workspace_8: Перехід до робочої області 8
+    move_to_workspace_9: Переходити до робочої області 9
+    reserve_bottom: ЗАБЕЗПЕЧЕННЯ
+    reserve_float: Резервне плавання
+    reserve_left: Резерв зліва
+    reserve_right: Резервуйте праворуч
+    reserve_stack: Резерв
+    reserve_top: Резервувати топ
+    restore_sizes: Відновити розміри
+    send_to_workspace_0: Надіслати на робочу область 0
+    send_to_workspace_1: Надіслати на робочу область 1
+    send_to_workspace_2: Надіслати на робочу область 2
+    send_to_workspace_3: Надіслати на робочу область 3
+    send_to_workspace_4: Надіслати на робочу область 4
+    send_to_workspace_5: Надіслати на робочу область 5
+    send_to_workspace_6: Надіслати на робочу область 6
+    send_to_workspace_7: Надіслати на робочу область 7
+    send_to_workspace_8: Надіслати на робочу область 8
+    send_to_workspace_9: Надіслати на робочу область 9
+    switch_workspace_0: Перехід на робочу область 1
+    switch_workspace_1: Перехід на робочу область 2
+    switch_workspace_2: Перехід на робочу область 2
+    switch_workspace_3: Перехід на робочу область 3
+    switch_workspace_4: Перехід на робочу область 4
+    switch_workspace_5: Перехід на робочу область 5
+    switch_workspace_6: Перехід на робочу область 6
+    switch_workspace_7: Перехід на робочу область 7
+    switch_workspace_8: Перехід на робочу область 8
+    switch_workspace_9: Перехід на робочу область 9
+    toggle_launcher: Перемикатися
+  readonly_tooltip: Це ярлик лише для читання
+  reset: Скидання за замовчуванням
+sides:
+  bottom: Дно
+  left: Лівий
+  right: Право
+  top: Топ
+start:
+  message: >-
+    Ласкаво просимо в інтерфейс SEELEN, Ultimate Desktop Envirtional із
+    включеним менеджером з плитки Windows для покращення вашого досвіду Windows
+    ! Вивчіть нову еру ефективності та багатозадачності за допомогою нашого
+    інтуїтивного інтерфейсу та розширених функцій.
+  message_accent: Оптимізуйте свою продуктивність стилем!
+  title: Ласкаво просимо!
+toolbar:
+  auto_hide: Автомати
+  delay_to_hide: Затримка, щоб сховатися
+  delay_to_show: Затримка, щоб показати
+  enable: Увімкнути панель інструментів вишуканих
+  height: Висота
+  label: Панель інструментів
+  placeholder:
+    author: Автор
+    description: Опис
+    select: Структура панелі інструментів
+  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
+update:
+  available: Оновлення доступне!
+  channel: Канал оновлення
+  downloading: Завантаження ...
 vd:
-  strategy:
-    label: Віртуальна стратегія робочого столу
-    seelen: Зимовий
-    native: Рідний
   disabled_windows_version: >-
     Рідна віртуальна стратегія робочого столу недоступна для вашої версії
     Windows.
-save_and_restart: Зберегти та перезапустити
-monitors_configurations:
-  label: Монітор {{index}}
+  strategy:
+    label: Віртуальна стратегія робочого столу
+    native: Рідний
+    seelen: Зимовий
 wall:
-  no_background: Порожнє слайд -шоу, використовуючи фон теми.
   backgrounds: Шпалери
   enable: Увімкнути менеджер шпалер
+  hours: годинник
   interval: Змініть шпалери кожен
+  minutes: хвилини
+  no_background: Порожнє слайд -шоу, використовуючи фон теми.
   random: Рандомізувати слайд -шоу
   seconds: секунди
-  hours: годинник
-  minutes: хвилини
-app_launcher:
-  runners:
-    explorer: Пробігати
-    cmd: Командування
-    label: Бігуни
-  enable: Увімкнути запуску додатків
-  monitor: Монітор, щоб показати
-insert: Вставляти
-inherit: Успадкувати
-more: Більше
-close: Закривати
-update:
-  available: Оновлення доступне!
-  downloading: Завантаження ...
-  channel: Канал оновлення
-miscellaneous: Різний
-mods:
-  target: Цільовий
-  plugins: Плагіни
-  widgets: Віджети
-remove: Видалити
+weg:
+  auto_hide: Автомати
+  delay_to_hide: Затримка, щоб сховатися
+  delay_to_show: Затримка, щоб показати
+  dock_side: Позиція
+  enable: Увімкнути док/панель завдань
+  gap: Розрив
+  items:
+    gap: Простір між предметами
+    label: Предмети
+    size: Розмір товару
+    visible_separators: Видимі сепаратори
+    zoom_size: Збільшений розмір (використовується для тем)
+  label: Док/панель завдань
+  margin: Націнка
+  padding: Прокладка
+  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
+  width: Ширина
+wm:
+  author: Автор
+  border:
+    enable: Увімкнути кордон вікна
+    offset: Зміщення кордону
+    width: Ширина кордону
+  description: Опис
+  enable: Увімкнути плитку диспетчера вікон
+  layout: Макет
+  resize_delta: Змінити розмір дельти (%)
+  space_between_containers: Простір між контейнерами
+  workspace_offset: Зсув робочих просторів (поля)
+  workspace_padding: Прокладка робочих просторів

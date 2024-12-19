@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: 탐색
     cmd: 명령
+    explorer: 탐색
 footer:
   shortcuts: 단축키 표시
 header:

@@ -1,263 +1,263 @@
-sides:
-  left: Dibiarkan
-  bottom: Bawah
-  right: Betul
-  top: Atas
-header:
-  labels:
-    specific_apps: Aplikasi khusus
-    seelen_wm: Pengurus tetingkap
-    info: Maklumat
-    seelen_weg: Dock/Taskbar
-    developer: Pemaju
-    general: Umum
-    seelen_bar: Bar alat mewah
-    monitors: Monitor
-    shortcuts: Pintasan
-    seelen_rofi: Pelancar App
-    virtual_desk: Desktop maya
-    home: Rumah
-    mods: Pemalam & Widget
-    seelen_wall: Pengurus Wallpaper
-start:
-  title: Selamat datang!
-  message_accent: Mengoptimumkan produktiviti anda dengan gaya!
-  message: >-
-    Selamat datang ke Seelen UI, persekitaran desktop muktamad dengan Pengurus
-    Windows Tiling yang diperbadankan untuk meningkatkan pengalaman Windows
-    anda! Terokai era kecekapan baru dan multitasking dengan antara muka
-    intuitif dan ciri canggih kami.
-general:
-  theme:
-    description: Penerangan
-    add: Tambah tema
-    placeholder: Pilih tema
-    author: Pengarang
-    added: Tema sudah ditambah
-    tags: Tag
-    enabled: Tema yang diaktifkan
-    label: Maklumat tema
-    available: Terdapat
-    selected: Dipilih
-  startup: Jalankan permulaan?
-  language: Bahasa
-  icon_pack:
-    label: Pek ikon
-  accent_color: Warna aksen
-  wallpaper:
-    select: Pilih kertas dinding
-  date_format: Format tarikh
-toolbar:
-  placeholder:
-    description: Penerangan
-    author: Pengarang
-    select: Struktur bar alat
-  enable: Dayakan bar alat mewah
-  height: Ketinggian
-  auto_hide: Menyembunyikan auto
-  label: Bar alat
-  delay_to_hide: Bertangguh untuk bersembunyi
-  delay_to_show: Kelewatan untuk menunjukkan
-  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
-wm:
-  border:
-    enable: Dayakan sempadan tetingkap
-    offset: Mengimbangi sempadan
-    width: Lebar sempadan
-  layout: Susun atur
-  description: Penerangan
-  space_between_containers: Ruang antara bekas
-  workspace_offset: Ruang Kerja Offset (margin)
-  resize_delta: Saiz semula delta (%)
-  author: Pengarang
-  workspace_padding: Padding ruang kerja
-  enable: Dayakan pengurus tetingkap jubin
-weg:
-  items:
-    zoom_size: Saiz zum (digunakan untuk tema)
-    size: Saiz item
-    gap: Ruang antara item
-    label: Item
-    visible_separators: Pemisah yang kelihatan
-  enable: Dayakan Dock/Taskbar
-  margin: Margin
-  padding: Padding
-  width: Lebar
-  gap: Jurang
-  label: Dock/Taskbar
-  auto_hide: Menyembunyikan auto
-  dock_side: Kedudukan
-  delay_to_show: Kelewatan untuk menunjukkan
-  delay_to_hide: Bertangguh untuk bersembunyi
-  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
-devtools:
-  load: Beban
-  data_folder: Folder Data
-  settings_file: Fail tetapan
-  app_folders: Folder App
-  enable: Dayakan alat pemaju
-  custom_config_file: Muatkan fail konfigurasi tersuai
-  install_folder: Folder pemasangan
+app_launcher:
+  enable: Dayakan Pelancar App
+  monitor: Pantau untuk menunjukkan
+  runners:
+    cmd: Perintah
+    explorer: Jalankan
+    label: Pelari
 apps_configurations:
   app:
-    options:
-      force: Daya mengurus
-      float: Terapung
-      unmanage: Unmanage
-      pinned: Disematkan
-      hidden: Sembunyikan dari Dock/Taskbar
-    category: Kategori
-    ok_edit: Kemas kini
-    title_readonly: Melihat {{name}}
-    name: Nama
     bindings: Mengikat (perhatikan kedua -dua pilihan diperlukan)
-    workspace: Ruang kerja
-    ok_readonly: Edit sebagai baru
-    workspace_placeholder: Tiada
-    monitor_placeholder: Tiada
-    title_create: Menciptakan {{name}}
-    ok_create: Buat
+    category: Kategori
     category_placeholder: Tiada
     monitor: Memantau
+    monitor_placeholder: Tiada
+    name: Nama
+    ok_create: Buat
+    ok_edit: Kemas kini
+    ok_readonly: Edit sebagai baru
+    options:
+      float: Terapung
+      force: Daya mengurus
+      hidden: Sembunyikan dari Dock/Taskbar
+      pinned: Disematkan
+      unmanage: Unmanage
+    options_label: Pilihan tambahan
+    title_create: Menciptakan {{name}}
+    title_edit: Penyuntingan {{name}}
+    title_readonly: Melihat {{name}}
     weg_options_label: Pilihan Dock/Taskbar
     wm_options_label: Pilihan Pengurus Tetingkap
-    options_label: Pilihan tambahan
-    title_edit: Penyuntingan {{name}}
-  identifier:
-    matching_strategy: Strategi yang sepadan
-    and: Dan
-    add_block: Tambah blok
-    negation: Menafikan padanan
-    kind: Mengenal pasti oleh
-    or: Atau
-    remove: Padam blok
-    id: Pengenalpastian
-  new: Baru
-  export: Eksport
-  swap: Bertukar
-  import: Import
-  bundled_title: Konfigurasi aplikasi dibundel dengan seelen
-  confirm_delete: Adakah anda pasti mahu memadamkan konfigurasi ini?
-  confirm_delete_title: Sahkan padam
-  search: Cari
-  delete: Padam
+    workspace: Ruang kerja
+    workspace_placeholder: Tiada
   bundled_msg: >-
     Konfigurasi yang dibundel ini tidak dapat diedit dan direka untuk memberi
     anda pengalaman terbaik tanpa penyesuaian. Mereka secara automatik
     mengkonfigurasi aplikasi yang paling biasa untuk anda.
+  bundled_title: Konfigurasi aplikasi dibundel dengan seelen
+  confirm_delete: Adakah anda pasti mahu memadamkan konfigurasi ini?
+  confirm_delete_title: Sahkan padam
+  delete: Padam
+  export: Eksport
   extra_info: >-
     UI Seelen hanya menggunakan satu pengecam bagi setiap apl (padanan pertama
     ditemui) jadi susunan cara dikhususkan adalah penting, penambahan terkini
     akan diutamakan, kerana ambil perhatian bahawa jadual diisih secara lalai
     dari terkini ke lama.
+  identifier:
+    add_block: Tambah blok
+    and: Dan
+    id: Pengenalpastian
+    kind: Mengenal pasti oleh
+    matching_strategy: Strategi yang sepadan
+    negation: Menafikan padanan
+    or: Atau
+    remove: Padam blok
+  import: Import
+  new: Baru
+  search: Cari
+  swap: Bertukar
+cancel: Batalkan
+close: Tutup
+delete: Padam
+devtools:
+  app_folders: Folder App
+  custom_config_file: Muatkan fail konfigurasi tersuai
+  data_folder: Folder Data
+  enable: Dayakan alat pemaju
+  install_folder: Folder pemasangan
+  load: Beban
+  settings_file: Fail tetapan
 extras:
-  links: Pautan Rasmi
-  github: Github
-  relaunch: Pelancaran semula
-  version: Versi
   discord: Perselisihan
   exit: Berhenti/keluar
-shortcuts:
+  github: Github
+  links: Pautan Rasmi
+  relaunch: Pelancaran semula
+  version: Versi
+general:
+  accent_color: Warna aksen
+  date_format: Format tarikh
+  icon_pack:
+    label: Pek ikon
+  language: Bahasa
+  startup: Jalankan permulaan?
+  theme:
+    add: Tambah tema
+    added: Tema sudah ditambah
+    author: Pengarang
+    available: Terdapat
+    description: Penerangan
+    enabled: Tema yang diaktifkan
+    label: Maklumat tema
+    placeholder: Pilih tema
+    selected: Dipilih
+    tags: Tag
+  wallpaper:
+    select: Pilih kertas dinding
+header:
   labels:
-    send_to_workspace_4: Hantar ke Ruang Kerja 4
-    move_to_workspace_2: Pindah ke Ruang Kerja 2
-    reserve_stack: Timbunan simpanan
-    decrease_height: Mengurangkan ketinggian
-    send_to_workspace_6: Hantar ke Ruang Kerja 6
-    focus_left: Fokus kiri
-    send_to_workspace_8: Hantar ke Ruang Kerja 8
-    restore_sizes: Pulihkan saiz
-    switch_workspace_4: Beralih ke ruang kerja 4
-    move_to_workspace_5: Pindah ke Ruang Kerja 5
-    switch_workspace_5: Beralih ke ruang kerja 5
-    increase_width: Meningkatkan lebar
-    move_to_workspace_7: Pindah ke Ruang Kerja 7
-    focus_top: Fokus atas
-    focus_bottom: Fokus bawah
-    switch_workspace_9: Beralih ke ruang kerja 9
-    focus_right: Fokus betul
-    send_to_workspace_1: Hantar ke Ruang Kerja 1
-    move_to_workspace_9: Pindah ke Ruang Kerja 9
-    reserve_right: Rizab betul
-    switch_workspace_8: Beralih ke ruang kerja 8
-    focus_latest: Fokus terkini
-    move_to_workspace_8: Pindah ke Ruang Kerja 8
-    send_to_workspace_9: Hantar ke Ruang Kerja 9
-    send_to_workspace_2: Hantar ke Ruang Kerja 2
-    send_to_workspace_5: Hantar ke Ruang Kerja 5
-    decrease_width: Mengurangkan lebar
-    reserve_bottom: Bawah simpanan
-    send_to_workspace_0: Hantar ke Ruang Kerja 0
-    switch_workspace_3: Beralih ke ruang kerja 3
-    move_to_workspace_3: Pindah ke Ruang Kerja 3
-    move_to_workspace_0: Pindah ke Ruang Kerja 0
-    switch_workspace_6: Beralih ke ruang kerja 6
-    move_to_workspace_4: Pindah ke Ruang Kerja 4
-    move_to_workspace_6: Pindah ke Ruang Kerja 6
-    increase_height: Meningkatkan ketinggian
-    switch_workspace_2: Beralih ke ruang kerja 2
-    reserve_float: Rizab terapung
-    reserve_top: Rizab atas
-    reserve_left: Rizab kiri
-    switch_workspace_7: Tukar ke Ruang Kerja 7
-    move_to_workspace_1: Pindah ke Ruang Kerja 1
-    send_to_workspace_7: Hantar ke Ruang Kerja 7
-    send_to_workspace_3: Hantar ke Ruang Kerja 3
-    switch_workspace_1: Beralih ke ruang kerja 2
-    switch_workspace_0: Beralih ke ruang kerja 1
-    misc_toggle_win_event_tracing: Togol Menang Mengesan Acara (Log)
-    misc_toggle_lock_tracing: Togol mengesan kunci (log)
-    misc_open_settings: Buka Tetapan
-    toggle_launcher: Togol
-  enable_tooltip: >-
-    Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
-    teras Seelen
-  enable: Dayakan Pintasan Bersepadu (AHK)
-  reset: Tetapkan semula ke lalai
-  readonly_tooltip: Ini adalah jalan pintas baca sahaja
-open: Buka
-save: Simpan
-quit: Berhenti
-cancel: Batalkan
-delete: Padam
-inProgress: Dalam proses ...
-loading: Memuatkan ...
-vd:
-  strategy:
-    native: Asli
-    seelen: Seelen
-    label: Strategi Desktop Maya
-  disabled_windows_version: Strategi desktop maya asli tidak tersedia untuk versi Windows anda.
-save_and_restart: Jimat & mulakan semula
-monitors_configurations:
-  label: Monitor {{index}}
-wall:
-  backgrounds: Kertas dinding
-  no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
-  enable: Dayakan Pengurus Wallpaper
-  random: Rawak tayangan slaid
-  interval: Tukar kertas dinding setiap
-  hours: jam
-  seconds: saat
-  minutes: minit
-app_launcher:
-  runners:
-    explorer: Jalankan
-    label: Pelari
-    cmd: Perintah
-  monitor: Pantau untuk menunjukkan
-  enable: Dayakan Pelancar App
+    developer: Pemaju
+    general: Umum
+    home: Rumah
+    info: Maklumat
+    mods: Pemalam & Widget
+    monitors: Monitor
+    seelen_bar: Bar alat mewah
+    seelen_rofi: Pelancar App
+    seelen_wall: Pengurus Wallpaper
+    seelen_weg: Dock/Taskbar
+    seelen_wm: Pengurus tetingkap
+    shortcuts: Pintasan
+    specific_apps: Aplikasi khusus
+    virtual_desk: Desktop maya
 inherit: Mewarisi
-more: Lebih
+inProgress: Dalam proses ...
 insert: Masukkan
-close: Tutup
-update:
-  available: Kemas kini tersedia!
-  channel: Kemas kini saluran
-  downloading: Memuat turun ...
+loading: Memuatkan ...
 miscellaneous: Pelbagai
 mods:
   plugins: Plugin
   target: Sasaran
   widgets: Widget
+monitors_configurations:
+  label: Monitor {{index}}
+more: Lebih
+open: Buka
+quit: Berhenti
 remove: Keluarkan
+save: Simpan
+save_and_restart: Jimat & mulakan semula
+shortcuts:
+  enable: Dayakan Pintasan Bersepadu (AHK)
+  enable_tooltip: >-
+    Lumpuhkan jika anda akan melaksanakan pintasan anda sendiri menggunakan API
+    teras Seelen
+  labels:
+    decrease_height: Mengurangkan ketinggian
+    decrease_width: Mengurangkan lebar
+    focus_bottom: Fokus bawah
+    focus_latest: Fokus terkini
+    focus_left: Fokus kiri
+    focus_right: Fokus betul
+    focus_top: Fokus atas
+    increase_height: Meningkatkan ketinggian
+    increase_width: Meningkatkan lebar
+    misc_open_settings: Buka Tetapan
+    misc_toggle_lock_tracing: Togol mengesan kunci (log)
+    misc_toggle_win_event_tracing: Togol Menang Mengesan Acara (Log)
+    move_to_workspace_0: Pindah ke Ruang Kerja 0
+    move_to_workspace_1: Pindah ke Ruang Kerja 1
+    move_to_workspace_2: Pindah ke Ruang Kerja 2
+    move_to_workspace_3: Pindah ke Ruang Kerja 3
+    move_to_workspace_4: Pindah ke Ruang Kerja 4
+    move_to_workspace_5: Pindah ke Ruang Kerja 5
+    move_to_workspace_6: Pindah ke Ruang Kerja 6
+    move_to_workspace_7: Pindah ke Ruang Kerja 7
+    move_to_workspace_8: Pindah ke Ruang Kerja 8
+    move_to_workspace_9: Pindah ke Ruang Kerja 9
+    reserve_bottom: Bawah simpanan
+    reserve_float: Rizab terapung
+    reserve_left: Rizab kiri
+    reserve_right: Rizab betul
+    reserve_stack: Timbunan simpanan
+    reserve_top: Rizab atas
+    restore_sizes: Pulihkan saiz
+    send_to_workspace_0: Hantar ke Ruang Kerja 0
+    send_to_workspace_1: Hantar ke Ruang Kerja 1
+    send_to_workspace_2: Hantar ke Ruang Kerja 2
+    send_to_workspace_3: Hantar ke Ruang Kerja 3
+    send_to_workspace_4: Hantar ke Ruang Kerja 4
+    send_to_workspace_5: Hantar ke Ruang Kerja 5
+    send_to_workspace_6: Hantar ke Ruang Kerja 6
+    send_to_workspace_7: Hantar ke Ruang Kerja 7
+    send_to_workspace_8: Hantar ke Ruang Kerja 8
+    send_to_workspace_9: Hantar ke Ruang Kerja 9
+    switch_workspace_0: Beralih ke ruang kerja 1
+    switch_workspace_1: Beralih ke ruang kerja 2
+    switch_workspace_2: Beralih ke ruang kerja 2
+    switch_workspace_3: Beralih ke ruang kerja 3
+    switch_workspace_4: Beralih ke ruang kerja 4
+    switch_workspace_5: Beralih ke ruang kerja 5
+    switch_workspace_6: Beralih ke ruang kerja 6
+    switch_workspace_7: Tukar ke Ruang Kerja 7
+    switch_workspace_8: Beralih ke ruang kerja 8
+    switch_workspace_9: Beralih ke ruang kerja 9
+    toggle_launcher: Togol
+  readonly_tooltip: Ini adalah jalan pintas baca sahaja
+  reset: Tetapkan semula ke lalai
+sides:
+  bottom: Bawah
+  left: Dibiarkan
+  right: Betul
+  top: Atas
+start:
+  message: >-
+    Selamat datang ke Seelen UI, persekitaran desktop muktamad dengan Pengurus
+    Windows Tiling yang diperbadankan untuk meningkatkan pengalaman Windows
+    anda! Terokai era kecekapan baru dan multitasking dengan antara muka
+    intuitif dan ciri canggih kami.
+  message_accent: Mengoptimumkan produktiviti anda dengan gaya!
+  title: Selamat datang!
+toolbar:
+  auto_hide: Menyembunyikan auto
+  delay_to_hide: Bertangguh untuk bersembunyi
+  delay_to_show: Kelewatan untuk menunjukkan
+  enable: Dayakan bar alat mewah
+  height: Ketinggian
+  label: Bar alat
+  placeholder:
+    author: Pengarang
+    description: Penerangan
+    select: Struktur bar alat
+  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
+update:
+  available: Kemas kini tersedia!
+  channel: Kemas kini saluran
+  downloading: Memuat turun ...
+vd:
+  disabled_windows_version: Strategi desktop maya asli tidak tersedia untuk versi Windows anda.
+  strategy:
+    label: Strategi Desktop Maya
+    native: Asli
+    seelen: Seelen
+wall:
+  backgrounds: Kertas dinding
+  enable: Dayakan Pengurus Wallpaper
+  hours: jam
+  interval: Tukar kertas dinding setiap
+  minutes: minit
+  no_background: Tayangan slaid kosong, menggunakan latar belakang tema.
+  random: Rawak tayangan slaid
+  seconds: saat
+weg:
+  auto_hide: Menyembunyikan auto
+  delay_to_hide: Bertangguh untuk bersembunyi
+  delay_to_show: Kelewatan untuk menunjukkan
+  dock_side: Kedudukan
+  enable: Dayakan Dock/Taskbar
+  gap: Jurang
+  items:
+    gap: Ruang antara item
+    label: Item
+    size: Saiz item
+    visible_separators: Pemisah yang kelihatan
+    zoom_size: Saiz zum (digunakan untuk tema)
+  label: Dock/Taskbar
+  margin: Margin
+  padding: Padding
+  use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
+  width: Lebar
+wm:
+  author: Pengarang
+  border:
+    enable: Dayakan sempadan tetingkap
+    offset: Mengimbangi sempadan
+    width: Lebar sempadan
+  description: Penerangan
+  enable: Dayakan pengurus tetingkap jubin
+  layout: Susun atur
+  resize_delta: Saiz semula delta (%)
+  space_between_containers: Ruang antara bekas
+  workspace_offset: Ruang Kerja Offset (margin)
+  workspace_padding: Padding ruang kerja

@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: மீடியா தொகுதி சேர்க்கவும்
-  start: தொடக்க தொகுதி சேர்க்கவும்
-  add_file: தனிப்பயன் கோப்பை முள்
-  add_folder: தனிப்பயன் கோப்புறையை முள்
-  task_manager: பணி மேலாளர்
-  settings: அமைப்புகள்
 app_menu:
   close: நெருக்கமான
-  run_as: நிர்வாகியாக செயல்படுங்கள்
   close_multiple: அனைத்தையும் மூடு
   copy_handles: நகல் கைப்பிடிகள்
-  pin_to_left: இடதுபுறம் முள்
-  pin_to_right: வலதுபுறம் முள்
-  pin_to_center: மையத்திற்கு முள்
-  pin: முள்
-  open_file_location: கோப்பு இருப்பிடத்தைத் திறக்கவும்
-  unpin: Unpin
   kill: கொலை செயல்முறை
   kill_multiple: அனைத்து செயல்முறைகளையும் கொல்லுங்கள்
+  open_file_location: கோப்பு இருப்பிடத்தைத் திறக்கவும்
+  pin: முள்
+  pin_to_center: மையத்திற்கு முள்
+  pin_to_left: இடதுபுறம் முள்
+  pin_to_right: வலதுபுறம் முள்
+  run_as: நிர்வாகியாக செயல்படுங்கள்
+  unpin: Unpin
+media:
+  not_playing: எதுவும் விளையாடுவதில்லை
 media_menu:
   remove: மீடியா தொகுதியை அகற்று
 start_menu:
   remove: தொடக்க தொகுதியை அகற்று
-media:
-  not_playing: எதுவும் விளையாடுவதில்லை
+taskbar_menu:
+  add_file: தனிப்பயன் கோப்பை முள்
+  add_folder: தனிப்பயன் கோப்புறையை முள்
+  media: மீடியா தொகுதி சேர்க்கவும்
+  settings: அமைப்புகள்
+  start: தொடக்க தொகுதி சேர்க்கவும்
+  task_manager: பணி மேலாளர்

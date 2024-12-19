@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Tambah Modul Media
-  start: Tambah Modul Mula
-  add_folder: Pin folder adat
-  add_file: Fail tersuai pin
-  task_manager: Pengurus Tugas
-  settings: tetapan
 app_menu:
+  close: Tutup
   close_multiple: Tutup semua
+  copy_handles: Salin pemegang
+  kill: Proses Bunuh
+  kill_multiple: Bunuh Semua Proses
   open_file_location: Buka lokasi fail
   pin: Pin
   pin_to_center: Pin ke pusat
-  close: Tutup
+  pin_to_left: Pin ke kiri
+  pin_to_right: Pin ke kanan
   run_as: Jalankan sebagai pentadbir
   unpin: Unpin
-  copy_handles: Salin pemegang
-  pin_to_right: Pin ke kanan
-  pin_to_left: Pin ke kiri
-  kill_multiple: Bunuh Semua Proses
-  kill: Proses Bunuh
+media:
+  not_playing: Tidak ada yang bermain
 media_menu:
   remove: Keluarkan modul media
 start_menu:
   remove: Keluarkan Modul Mula
-media:
-  not_playing: Tidak ada yang bermain
+taskbar_menu:
+  add_file: Fail tersuai pin
+  add_folder: Pin folder adat
+  media: Tambah Modul Media
+  settings: tetapan
+  start: Tambah Modul Mula
+  task_manager: Pengurus Tugas

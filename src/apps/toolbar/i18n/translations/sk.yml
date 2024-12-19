@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimédiá
-    comunications: Komunikácia
-  input_device: Vstupné zariadenie
-  output_device: Výstupné zariadenie
-  master_volume: Zväzok
-  players: Médiá
-network:
-  placeholder:
-    password: Heslo
-  hidden: Skrytá sieť
-  disconnect: Odpojiť
-  connect: Pripojiť
-  more: Viac nastavení siete
-  not_found: Nenašli sa žiadne siete
-  available: Dostupné siete
-  connected: Pripojené k
-  saved: Uložené siete
-  scanning: Skenovanie sietí
-  secured: Šifrovaná sieť
-settings:
-  log_out: Odhlásiť sa
-  restart: Reštart
-  shutdown: Vypnúť
-  title: nastavenie
-  sleep: Spať
-  app_settings: Nastavenia aplikácií
-  power: Moc
-placeholder:
-  ethernet_connected: Prístup na internet
-  ethernet_disconnected: Žiadny prístup na internet
-  open_user_folder: Otvorte priečinok používateľa
-  smart_charge: '- Inteligentný poplatok'
-  settings: Rýchle nastavenia
-  battery_remaining: zostávajúci % %
-  bluetooth_devices: Bluetooth a zariadenia
-  open_system_tray: Podnos otvorených systémov
-  volume: Zväzok
-  notifications: Oznámenia
-unlabelled_tray: Ikona neznačeného podnosu
 context_menu:
   add_module: Pridať modul
   remove: Odstrániť modul
   settings: Nastavenia
   task_manager: Správca úloh
+media:
+  device:
+    comunications: Komunikácia
+    multimedia: Multimédiá
+  input_device: Vstupné zariadenie
+  master_volume: Zväzok
+  output_device: Výstupné zariadenie
+  players: Médiá
+network:
+  available: Dostupné siete
+  connect: Pripojiť
+  connected: Pripojené k
+  disconnect: Odpojiť
+  hidden: Skrytá sieť
+  more: Viac nastavení siete
+  not_found: Nenašli sa žiadne siete
+  placeholder:
+    password: Heslo
+  saved: Uložené siete
+  scanning: Skenovanie sietí
+  secured: Šifrovaná sieť
+placeholder:
+  battery_remaining: zostávajúci % %
+  bluetooth_devices: Bluetooth a zariadenia
+  ethernet_connected: Prístup na internet
+  ethernet_disconnected: Žiadny prístup na internet
+  notifications: Oznámenia
+  open_system_tray: Podnos otvorených systémov
+  open_user_folder: Otvorte priečinok používateľa
+  settings: Rýchle nastavenia
+  smart_charge: '- Inteligentný poplatok'
+  volume: Zväzok
+settings:
+  app_settings: Nastavenia aplikácií
+  log_out: Odhlásiť sa
+  power: Moc
+  restart: Reštart
+  shutdown: Vypnúť
+  sleep: Spať
+  title: nastavenie
+unlabelled_tray: Ikona neznačeného podnosu

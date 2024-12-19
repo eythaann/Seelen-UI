@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimèdia
-    comunications: Comunicacions
-  master_volume: Volum de domini
-  input_device: Dispositiu d'entrada
-  output_device: Dispositiu de sortida
-  players: Reproductors de mitjans de comunicació
-network:
-  placeholder:
-    password: Contrasenya
-  not_found: No es van trobar xarxes
-  more: Més configuració de xarxa
-  connect: Conectar
-  disconnect: Desconectar
-  hidden: Xarxa oculta
-  connected: Connectat a
-  available: Xarxes disponibles
-  saved: Xarxes guardades
-  secured: Xarxa xifrada
-  scanning: Escaneig de xarxes
-settings:
-  app_settings: Configuració de l'aplicació
-  title: Configuració
-  restart: Reinicia
-  shutdown: Tancar
-  log_out: Tancar sessió
-  sleep: Dormir
-  power: Força
-placeholder:
-  settings: Configuració ràpida
-  ethernet_disconnected: Sense accés a Internet
-  battery_remaining: '% restant'
-  smart_charge: '- Càrrega intel·ligent'
-  bluetooth_devices: Bluetooth i dispositius
-  volume: Volum
-  open_user_folder: Obriu la carpeta d'usuari
-  open_system_tray: Safata del sistema obert
-  ethernet_connected: accés a Internet
-  notifications: Notificacions
-unlabelled_tray: Icona de la safata no etiquetada
 context_menu:
   add_module: Afegiu el mòdul
   remove: Elimina el mòdul
   settings: Configuració
   task_manager: Gestor de tasques
+media:
+  device:
+    comunications: Comunicacions
+    multimedia: Multimèdia
+  input_device: Dispositiu d'entrada
+  master_volume: Volum de domini
+  output_device: Dispositiu de sortida
+  players: Reproductors de mitjans de comunicació
+network:
+  available: Xarxes disponibles
+  connect: Conectar
+  connected: Connectat a
+  disconnect: Desconectar
+  hidden: Xarxa oculta
+  more: Més configuració de xarxa
+  not_found: No es van trobar xarxes
+  placeholder:
+    password: Contrasenya
+  saved: Xarxes guardades
+  scanning: Escaneig de xarxes
+  secured: Xarxa xifrada
+placeholder:
+  battery_remaining: '% restant'
+  bluetooth_devices: Bluetooth i dispositius
+  ethernet_connected: accés a Internet
+  ethernet_disconnected: Sense accés a Internet
+  notifications: Notificacions
+  open_system_tray: Safata del sistema obert
+  open_user_folder: Obriu la carpeta d'usuari
+  settings: Configuració ràpida
+  smart_charge: '- Càrrega intel·ligent'
+  volume: Volum
+settings:
+  app_settings: Configuració de l'aplicació
+  log_out: Tancar sessió
+  power: Força
+  restart: Reinicia
+  shutdown: Tancar
+  sleep: Dormir
+  title: Configuració
+unlabelled_tray: Icona de la safata no etiquetada

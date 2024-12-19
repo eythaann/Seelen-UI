@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedija
-    comunications: Komunikacija
-  input_device: Ulazni uređaj
-  output_device: Izlazni uređaj
-  players: Medijski igrači
-  master_volume: Glasnoća
-network:
-  placeholder:
-    password: Lozinka
-  connect: Spojiti
-  not_found: Nisu pronađene mreže
-  hidden: Skrivena mreža
-  disconnect: Odspojiti
-  more: Više mrežnih postavki
-  connected: Povezan s
-  secured: Šifrirana mreža
-  available: Dostupne mreže
-  scanning: Traženje mreža
-  saved: Spremljene mreže
-settings:
-  log_out: Odjavite se
-  sleep: Spavati
-  shutdown: Ugasiti
-  app_settings: Postavke aplikacija
-  restart: Ponovno pokrenuti
-  title: Postavke
-  power: Vlast
-placeholder:
-  volume: Volumen
-  ethernet_connected: pristup internetu
-  ethernet_disconnected: Nema pristupa internetu
-  settings: Brze postavke
-  smart_charge: '- pametni naboj'
-  battery_remaining: '% Ostali'
-  open_user_folder: Otvorena korisnička mapa
-  open_system_tray: Otvoreni sustav
-  bluetooth_devices: Bluetooth i uređaji
-  notifications: Obavijesti
-unlabelled_tray: Ikona neobilježene ladice
 context_menu:
-  remove: Uklonite modul
   add_module: Dodajte modul
+  remove: Uklonite modul
   settings: postavke
   task_manager: Upravitelj zadataka
+media:
+  device:
+    comunications: Komunikacija
+    multimedia: Multimedija
+  input_device: Ulazni uređaj
+  master_volume: Glasnoća
+  output_device: Izlazni uređaj
+  players: Medijski igrači
+network:
+  available: Dostupne mreže
+  connect: Spojiti
+  connected: Povezan s
+  disconnect: Odspojiti
+  hidden: Skrivena mreža
+  more: Više mrežnih postavki
+  not_found: Nisu pronađene mreže
+  placeholder:
+    password: Lozinka
+  saved: Spremljene mreže
+  scanning: Traženje mreža
+  secured: Šifrirana mreža
+placeholder:
+  battery_remaining: '% Ostali'
+  bluetooth_devices: Bluetooth i uređaji
+  ethernet_connected: pristup internetu
+  ethernet_disconnected: Nema pristupa internetu
+  notifications: Obavijesti
+  open_system_tray: Otvoreni sustav
+  open_user_folder: Otvorena korisnička mapa
+  settings: Brze postavke
+  smart_charge: '- pametni naboj'
+  volume: Volumen
+settings:
+  app_settings: Postavke aplikacija
+  log_out: Odjavite se
+  power: Vlast
+  restart: Ponovno pokrenuti
+  shutdown: Ugasiti
+  sleep: Spavati
+  title: Postavke
+unlabelled_tray: Ikona neobilježene ladice

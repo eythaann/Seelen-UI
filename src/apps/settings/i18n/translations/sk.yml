@@ -1,263 +1,263 @@
-sides:
-  right: Správny
-  top: Vrchol
-  left: Vľavo
-  bottom: Spodná časť
+app_launcher:
+  enable: Povoliť spúšťač aplikácií
+  monitor: Monitorovať, aby sa ukázal
+  runners:
+    cmd: Príkaz
+    explorer: Spustenie
+    label: Bežec
+apps_configurations:
+  app:
+    bindings: Viazanie (POZNÁMKA sú potrebné obe možnosti)
+    category: Kategória
+    category_placeholder: Žiadny
+    monitor: Monitor
+    monitor_placeholder: Žiadny
+    name: názov
+    ok_create: Vytvárať
+    ok_edit: Aktualizácia
+    ok_readonly: Upravovať ako nové
+    options:
+      float: Plavák
+      force: Riadiť silu
+      hidden: Skryť pred prístaviskom/panelom úloh
+      pinned: Pripnutý
+      unmanage: Nemeniť
+    options_label: Ďalšie možnosti
+    title_create: Vytváranie {{name}}
+    title_edit: Úpravy {{name}}
+    title_readonly: Prezeranie {{name}}
+    weg_options_label: Možnosti doku/panela úloh
+    wm_options_label: Možnosti správcu okien
+    workspace: Pracovný priestor
+    workspace_placeholder: Žiadny
+  bundled_msg: >-
+    Tieto zviazané konfigurácie nie sú upraviteľné a sú navrhnuté tak, aby vám
+    poskytli najlepší zážitok bez prispôsobenia. Automaticky nakonfigurujú pre
+    vás najbežnejšie aplikácie.
+  bundled_title: Aplikácia konfigurácia zviazaná s Seelen
+  confirm_delete: Ste si istí, že chcete túto konfiguráciu vymazať?
+  confirm_delete_title: Potvrďte odstránenie
+  delete: Vymazať
+  export: Export
+  extra_info: >-
+    Používateľské rozhranie Seelen používa iba jeden identifikátor na aplikáciu
+    (prvá nájdená zhoda), takže poradie, v akom sú špecifikované, je dôležité.
+    Najnovšie pridané budú mať prioritu, pretože tabuľka je predvolene zoradená
+    od najnovšieho po staré.
+  identifier:
+    add_block: Pridať blok
+    and: A
+    id: Identifikátor
+    kind: Určiť
+    matching_strategy: Stratégia
+    negation: Negovať zladenie
+    or: Alebo
+    remove: Vymazať blok
+  import: Dovoz
+  new: Nový
+  search: Vyhľadávanie
+  swap: Vymeniť
+cancel: Zrušiť
+close: Zatvoriť
+delete: Vymazať
+devtools:
+  app_folders: Priečinky
+  custom_config_file: Načítať vlastný konfiguračný súbor
+  data_folder: Priečinok
+  enable: Povoľte vývojárskym nástrojom
+  install_folder: Inštalačný priečinok
+  load: Naložiť
+  settings_file: Nastavovací súbor
+extras:
+  discord: Nesúhlas
+  exit: Prestať
+  github: Potápať sa
+  links: Oficiálne odkazy
+  relaunch: Reštart
+  version: Verzia
+general:
+  accent_color: Prízvuk
+  date_format: Formát
+  icon_pack:
+    label: Ikon
+  language: Jazyk
+  startup: Spustiť pri štarte?
+  theme:
+    add: Pridať tému
+    added: Téma už bola pridaná
+    author: Autor
+    available: Dostupný
+    description: Opis
+    enabled: Povolené témy
+    label: Informácie o téme
+    placeholder: Vyberte tému
+    selected: Vybraný
+    tags: Značky
+  wallpaper:
+    select: Vyberte tapetu
 header:
   labels:
     developer: Vývojár
-    seelen_bar: Ozdobný panel s nástrojmi
-    info: Informácie
-    shortcuts: Skratky
-    seelen_weg: Prístavný panel
-    monitors: Monitorovať
-    specific_apps: Konkrétne aplikácie
     general: Všeobecný
-    seelen_wm: Správca okien
-    seelen_rofi: Spúšťač aplikácií
-    virtual_desk: Virtuálne stolné počítače
     home: Domov
+    info: Informácie
     mods: Pluginy a widgety
+    monitors: Monitorovať
+    seelen_bar: Ozdobný panel s nástrojmi
+    seelen_rofi: Spúšťač aplikácií
     seelen_wall: Manažér tapiet
+    seelen_weg: Prístavný panel
+    seelen_wm: Správca okien
+    shortcuts: Skratky
+    specific_apps: Konkrétne aplikácie
+    virtual_desk: Virtuálne stolné počítače
+inherit: Zdediť
+inProgress: Prebieha ...
+insert: Vložiť
+loading: Načítava...
+miscellaneous: Rôznorodý
+mods:
+  plugins: Doplnky
+  target: Cieľ
+  widgets: Miniaplikácia
+monitors_configurations:
+  label: Monitor {{index}}
+more: Viac
+open: OTVORENÉ
+quit: Prestať
+remove: Odložiť
+save: Uložiť
+save_and_restart: Uložiť a reštartovať
+shortcuts:
+  enable: Povoliť integrované skratky (AHK)
+  enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
+  labels:
+    decrease_height: Zníženie výšky
+    decrease_width: Znížiť šírku
+    focus_bottom: Zaostrenie
+    focus_latest: Najnovší
+    focus_left: Vľavo
+    focus_right: Zamerať sa
+    focus_top: Zaostrenie
+    increase_height: Výška
+    increase_width: Zväčšenie
+    misc_open_settings: Otvorené nastavenia
+    misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
+    misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
+    move_to_workspace_0: Presuňte sa do pracovného priestoru 0
+    move_to_workspace_1: Presun do pracovného priestoru 1
+    move_to_workspace_2: Presuňte sa do pracovného priestoru 2
+    move_to_workspace_3: Presuňte sa do pracovného priestoru 3
+    move_to_workspace_4: Presuňte sa do pracovného priestoru 4
+    move_to_workspace_5: Presuňte sa do pracovného priestoru 5
+    move_to_workspace_6: Presuňte sa do pracovného priestoru 6
+    move_to_workspace_7: Presuňte sa do pracovného priestoru 7
+    move_to_workspace_8: Presuňte sa do pracovného priestoru 8
+    move_to_workspace_9: Presuňte sa do pracovného priestoru 9
+    reserve_bottom: Dno
+    reserve_float: Plavák
+    reserve_left: Vľavo
+    reserve_right: Oprávnenie
+    reserve_stack: Zásobník
+    reserve_top: Horná časť
+    restore_sizes: Obnoviť veľkosti
+    send_to_workspace_0: Pošlite do pracovného priestoru 0
+    send_to_workspace_1: Pošlite do pracovného priestoru 1
+    send_to_workspace_2: Pošlite do pracovného priestoru 2
+    send_to_workspace_3: Pošlite do pracovného priestoru 3
+    send_to_workspace_4: Pošlite do pracovného priestoru 4
+    send_to_workspace_5: Pošlite do pracovného priestoru 5
+    send_to_workspace_6: Pošlite do pracovného priestoru 6
+    send_to_workspace_7: Pošlite do pracovného priestoru 7
+    send_to_workspace_8: Pošlite do pracovného priestoru 8
+    send_to_workspace_9: Pošlite do pracovného priestoru 9
+    switch_workspace_0: Prepnite na pracovný priestor 1
+    switch_workspace_1: Prepnite na pracovný priestor 2
+    switch_workspace_2: Prepnite na pracovný priestor 2
+    switch_workspace_3: Prepnite na pracovný priestor 3
+    switch_workspace_4: Prepnite na pracovný priestor 4
+    switch_workspace_5: Prepnite na pracovný priestor 5
+    switch_workspace_6: Prepnite na pracovný priestor 6
+    switch_workspace_7: Prepnite na pracovný priestor 7
+    switch_workspace_8: Prepnite na pracovný priestor 8
+    switch_workspace_9: Prepnite na pracovný priestor 9
+    toggle_launcher: Prepínanie
+  readonly_tooltip: Toto je skratka iba na čítanie
+  reset: Reset na predvolené hodnoty
+sides:
+  bottom: Spodná časť
+  left: Vľavo
+  right: Správny
+  top: Vrchol
 start:
-  title: Vitajte!
   message: >-
     Vitajte v používateľskom rozhraní Seelen, v konečnom prostredí Desktop so
     začleneným obkladom Windows Manager, aby ste vylepšili váš zážitok z systému
     Windows! Preskúmajte novú éru účinnosti a multitaskingu s naším intuitívnym
     rozhraním a pokročilými funkciami.
   message_accent: Optimalizujte svoju produktivitu štýlom!
-general:
-  theme:
-    placeholder: Vyberte tému
-    description: Opis
-    added: Téma už bola pridaná
-    author: Autor
-    enabled: Povolené témy
-    label: Informácie o téme
-    add: Pridať tému
-    tags: Značky
-    selected: Vybraný
-    available: Dostupný
-  startup: Spustiť pri štarte?
-  language: Jazyk
-  icon_pack:
-    label: Ikon
-  accent_color: Prízvuk
-  wallpaper:
-    select: Vyberte tapetu
-  date_format: Formát
+  title: Vitajte!
 toolbar:
-  placeholder:
-    author: Autor
-    select: Štruktúra
-    description: Opis
+  auto_hide: Automaticky skryť
+  delay_to_hide: Odložiť skryť
+  delay_to_show: Oneskorenie zobrazenia
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
-  auto_hide: Automaticky skryť
   label: Panel s nástrojmi
-  delay_to_hide: Odložiť skryť
-  delay_to_show: Oneskorenie zobrazenia
+  placeholder:
+    author: Autor
+    description: Opis
+    select: Štruktúra
   use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
-wm:
-  border:
-    width: Šírka hranice
-    enable: Povoľte hranicu okna
-    offset: Vyrovnanie
-  author: Autor
-  resize_delta: Zmeňte veľkosť delty (%)
-  workspace_padding: Čalúnenie pracovných priestorov
-  layout: Usporiadanie
-  space_between_containers: Priestor medzi nádobami
-  description: Opis
-  workspace_offset: Offsety Workspaces (marže)
-  enable: Povoľte správcu okien obkladov
-weg:
-  items:
-    size: Veľkosť položky
-    zoom_size: Zväčšená veľkosť (používa sa na témy)
-    visible_separators: Viditeľné oddeľovače
-    label: Predmety
-    gap: Priestor medzi položkami
-  width: Šírka
-  label: Prístavný panel
-  enable: Povoliť prístavisko/panel úloh
-  gap: Priepasť
-  auto_hide: Automaticky skryť
-  padding: Vypchávka
-  margin: Okraj
-  dock_side: Pozícia
-  delay_to_show: Oneskorenie zobrazenia
-  delay_to_hide: Odložiť skryť
-  use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
-devtools:
-  enable: Povoľte vývojárskym nástrojom
-  custom_config_file: Načítať vlastný konfiguračný súbor
-  app_folders: Priečinky
-  install_folder: Inštalačný priečinok
-  load: Naložiť
-  settings_file: Nastavovací súbor
-  data_folder: Priečinok
-apps_configurations:
-  app:
-    options:
-      float: Plavák
-      force: Riadiť silu
-      pinned: Pripnutý
-      unmanage: Nemeniť
-      hidden: Skryť pred prístaviskom/panelom úloh
-    name: názov
-    ok_edit: Aktualizácia
-    workspace: Pracovný priestor
-    ok_readonly: Upravovať ako nové
-    title_create: Vytváranie {{name}}
-    bindings: Viazanie (POZNÁMKA sú potrebné obe možnosti)
-    workspace_placeholder: Žiadny
-    category_placeholder: Žiadny
-    ok_create: Vytvárať
-    title_readonly: Prezeranie {{name}}
-    monitor_placeholder: Žiadny
-    category: Kategória
-    monitor: Monitor
-    wm_options_label: Možnosti správcu okien
-    weg_options_label: Možnosti doku/panela úloh
-    options_label: Ďalšie možnosti
-    title_edit: Úpravy {{name}}
-  identifier:
-    remove: Vymazať blok
-    negation: Negovať zladenie
-    kind: Určiť
-    add_block: Pridať blok
-    id: Identifikátor
-    or: Alebo
-    matching_strategy: Stratégia
-    and: A
-  search: Vyhľadávanie
-  delete: Vymazať
-  export: Export
-  new: Nový
-  import: Dovoz
-  confirm_delete: Ste si istí, že chcete túto konfiguráciu vymazať?
-  confirm_delete_title: Potvrďte odstránenie
-  bundled_title: Aplikácia konfigurácia zviazaná s Seelen
-  bundled_msg: >-
-    Tieto zviazané konfigurácie nie sú upraviteľné a sú navrhnuté tak, aby vám
-    poskytli najlepší zážitok bez prispôsobenia. Automaticky nakonfigurujú pre
-    vás najbežnejšie aplikácie.
-  swap: Vymeniť
-  extra_info: >-
-    Používateľské rozhranie Seelen používa iba jeden identifikátor na aplikáciu
-    (prvá nájdená zhoda), takže poradie, v akom sú špecifikované, je dôležité.
-    Najnovšie pridané budú mať prioritu, pretože tabuľka je predvolene zoradená
-    od najnovšieho po staré.
-extras:
-  relaunch: Reštart
-  version: Verzia
-  github: Potápať sa
-  links: Oficiálne odkazy
-  discord: Nesúhlas
-  exit: Prestať
-shortcuts:
-  labels:
-    decrease_width: Znížiť šírku
-    send_to_workspace_0: Pošlite do pracovného priestoru 0
-    switch_workspace_7: Prepnite na pracovný priestor 7
-    focus_top: Zaostrenie
-    focus_right: Zamerať sa
-    increase_height: Výška
-    move_to_workspace_5: Presuňte sa do pracovného priestoru 5
-    move_to_workspace_4: Presuňte sa do pracovného priestoru 4
-    move_to_workspace_2: Presuňte sa do pracovného priestoru 2
-    move_to_workspace_9: Presuňte sa do pracovného priestoru 9
-    move_to_workspace_8: Presuňte sa do pracovného priestoru 8
-    switch_workspace_4: Prepnite na pracovný priestor 4
-    reserve_stack: Zásobník
-    move_to_workspace_7: Presuňte sa do pracovného priestoru 7
-    send_to_workspace_1: Pošlite do pracovného priestoru 1
-    send_to_workspace_5: Pošlite do pracovného priestoru 5
-    reserve_left: Vľavo
-    reserve_top: Horná časť
-    send_to_workspace_9: Pošlite do pracovného priestoru 9
-    send_to_workspace_2: Pošlite do pracovného priestoru 2
-    switch_workspace_9: Prepnite na pracovný priestor 9
-    send_to_workspace_8: Pošlite do pracovného priestoru 8
-    switch_workspace_5: Prepnite na pracovný priestor 5
-    move_to_workspace_3: Presuňte sa do pracovného priestoru 3
-    move_to_workspace_0: Presuňte sa do pracovného priestoru 0
-    move_to_workspace_6: Presuňte sa do pracovného priestoru 6
-    switch_workspace_3: Prepnite na pracovný priestor 3
-    reserve_bottom: Dno
-    focus_bottom: Zaostrenie
-    send_to_workspace_4: Pošlite do pracovného priestoru 4
-    decrease_height: Zníženie výšky
-    send_to_workspace_6: Pošlite do pracovného priestoru 6
-    reserve_right: Oprávnenie
-    switch_workspace_2: Prepnite na pracovný priestor 2
-    switch_workspace_8: Prepnite na pracovný priestor 8
-    switch_workspace_6: Prepnite na pracovný priestor 6
-    focus_left: Vľavo
-    reserve_float: Plavák
-    focus_latest: Najnovší
-    send_to_workspace_7: Pošlite do pracovného priestoru 7
-    send_to_workspace_3: Pošlite do pracovného priestoru 3
-    move_to_workspace_1: Presun do pracovného priestoru 1
-    increase_width: Zväčšenie
-    restore_sizes: Obnoviť veľkosti
-    switch_workspace_0: Prepnite na pracovný priestor 1
-    switch_workspace_1: Prepnite na pracovný priestor 2
-    misc_open_settings: Otvorené nastavenia
-    misc_toggle_win_event_tracing: Prepnúť sledovanie udalostí Win (protokoly)
-    misc_toggle_lock_tracing: Prepnite sledovanie zámku (protokoly)
-    toggle_launcher: Prepínanie
-  enable: Povoliť integrované skratky (AHK)
-  enable_tooltip: Zakážte, ak pomocou API Seelen Core API implementujete svoje vlastné skratky
-  reset: Reset na predvolené hodnoty
-  readonly_tooltip: Toto je skratka iba na čítanie
-inProgress: Prebieha ...
-loading: Načítava...
-open: OTVORENÉ
-cancel: Zrušiť
-quit: Prestať
-save: Uložiť
-delete: Vymazať
+update:
+  available: Aktualizácia k dispozícii!
+  channel: Kanál
+  downloading: Sťahovanie ...
 vd:
+  disabled_windows_version: >-
+    Natívna virtuálna stolná stratégia nie je k dispozícii pre vašu verziu
+    systému Windows.
   strategy:
     label: Stratégia virtuálnej plochy
     native: Domorodý
     seelen: Kabína
-  disabled_windows_version: >-
-    Natívna virtuálna stolná stratégia nie je k dispozícii pre vašu verziu
-    systému Windows.
-save_and_restart: Uložiť a reštartovať
-monitors_configurations:
-  label: Monitor {{index}}
 wall:
-  no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
   backgrounds: Tapety
   enable: Povoliť manažéra tapiet
-  interval: Vymeňte tapetu každý
-  random: Randomizovať prezentáciu
-  minutes: minúta
   hours: hodiny
+  interval: Vymeňte tapetu každý
+  minutes: minúta
+  no_background: Empty SlideShow, namiesto toho pomocou pozadia témy.
+  random: Randomizovať prezentáciu
   seconds: sekundy
-app_launcher:
-  runners:
-    label: Bežec
-    explorer: Spustenie
-    cmd: Príkaz
-  enable: Povoliť spúšťač aplikácií
-  monitor: Monitorovať, aby sa ukázal
-more: Viac
-insert: Vložiť
-inherit: Zdediť
-close: Zatvoriť
-update:
-  available: Aktualizácia k dispozícii!
-  downloading: Sťahovanie ...
-  channel: Kanál
-miscellaneous: Rôznorodý
-mods:
-  widgets: Miniaplikácia
-  target: Cieľ
-  plugins: Doplnky
-remove: Odložiť
+weg:
+  auto_hide: Automaticky skryť
+  delay_to_hide: Odložiť skryť
+  delay_to_show: Oneskorenie zobrazenia
+  dock_side: Pozícia
+  enable: Povoliť prístavisko/panel úloh
+  gap: Priepasť
+  items:
+    gap: Priestor medzi položkami
+    label: Predmety
+    size: Veľkosť položky
+    visible_separators: Viditeľné oddeľovače
+    zoom_size: Zväčšená veľkosť (používa sa na témy)
+  label: Prístavný panel
+  margin: Okraj
+  padding: Vypchávka
+  use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
+  width: Šírka
+wm:
+  author: Autor
+  border:
+    enable: Povoľte hranicu okna
+    offset: Vyrovnanie
+    width: Šírka hranice
+  description: Opis
+  enable: Povoľte správcu okien obkladov
+  layout: Usporiadanie
+  resize_delta: Zmeňte veľkosť delty (%)
+  space_between_containers: Priestor medzi nádobami
+  workspace_offset: Offsety Workspaces (marže)
+  workspace_padding: Čalúnenie pracovných priestorov

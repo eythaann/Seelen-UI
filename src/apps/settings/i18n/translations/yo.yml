@@ -1,258 +1,258 @@
-sides:
-  bottom: Isalẹ
-  left: Osi
-  top: Oke
-  right: Titọ
-header:
-  labels:
-    seelen_wm: Oluṣakoso window
-    info: Alaye
-    seelen_weg: Dock / forkbar
-    seelen_bar: Ọpa irinṣẹ Fancy
-    general: Gbogboogbo
-    developer: Olugbekun
-    monitors: Awọn diirarito
-    shortcuts: Awọn ọna abuja
-    specific_apps: Apps Pataki
-    seelen_rofi: Ifilọlẹ app
-    virtual_desk: Awọn orisun itẹwe foju
-    home: Ile
-    mods: Awọn afikun & Awọn ẹrọ ailorukọ
-    seelen_wall: Oluṣakoso ogiri
-start:
-  message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
-  message: >-
-    Kaabọ si Sielen UI, agbegbe tabili ti o gaju pẹlu ipilẹ Windows Manager lati
-    jẹki iriri Windows rẹ! Ṣawari akoko ti o ni ṣiṣe ati multitasking pẹlu wa
-    ati awọn ẹya ti ilọsiwaju.
-  title: Kaabọ!
-general:
-  theme:
-    added: Akori ti ṣafikun tẹlẹ
-    enabled: Mu awọn akori ṣiṣẹ
-    label: Alaye Akori
-    description: Isapejuwe
-    placeholder: Yan Akori
-    tags: Afi ami
-    add: Fi ọran kun
-    author: Onkọwe ọkunrin
-    selected: Ti yan
-    available: Wa
-  startup: Ṣiṣe lori ibẹrẹ?
-  language: Ede
-  icon_pack:
-    label: Awọn akopọ aami
-  accent_color: Awọ ara
-  wallpaper:
-    select: Yan Iṣẹṣọ ogiri
-  date_format: Ọna kika ọjọ
-toolbar:
-  placeholder:
-    author: Onkọwe ọkunrin
-    select: Ọpa irinṣẹ
-    description: Isapejuwe
-  height: Giga
-  enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
-  auto_hide: Ibi ipamọ aifọwọyi
-  label: Ọpa irinṣẹ
-  delay_to_show: Idaduro lati ṣafihan
-  delay_to_hide: Idaduro lati tọju
-  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
-wm:
-  border:
-    enable: Jeki aala window
-    width: Iwọn aala
-    offset: Iparun aala
-  resize_delta: Tun ṣe Delta (%)
-  layout: Agbekalẹ
-  description: Isapejuwe
-  space_between_containers: Aaye laarin awọn apoti
-  workspace_offset: Awọn iṣẹ Iṣẹ-iṣẹ (awọn ala)
-  author: Onkọwe ọkunrin
-  workspace_padding: Awọn iṣẹ itasi
-  enable: Jeki oludari window
-weg:
-  items:
-    visible_separators: Awọn iyatọ ti o han
-    gap: Aaye laarin awọn ohun kan
-    size: Iwọn nkan
-    zoom_size: Iwọn sisun (ti a lo fun awọn akori)
-    label: Awọn ohun
-  width: Fifẹ
-  gap: Alafo
-  label: Dock / forkbar
-  enable: Muu dock / forkbar
-  auto_hide: Ibi ipamọ aifọwọyi
-  margin: Ẹlẹsin
-  padding: Fidigọdi silẹ
-  dock_side: Ipo
-  delay_to_show: Idaduro lati ṣafihan
-  delay_to_hide: Idaduro lati tọju
-  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
-devtools:
-  app_folders: Awọn folda App
-  install_folder: Filese Fifi sori ẹrọ
-  enable: Mu awọn irinṣẹ Oláàmúdà ṣiṣẹ
-  custom_config_file: Fifuye faili atunto aṣa
-  settings_file: Faili eto
-  data_folder: Folda data
-  load: Ẹru
+app_launcher:
+  enable: Jeki Ifilọlẹ app
+  monitor: Atẹle lati fihan
+  runners:
+    cmd: Paṣẹ
+    explorer: Sare
+    label: Awọn asayan
 apps_configurations:
   app:
+    bindings: Dide (Ṣe akiyesi awọn aṣayan mejeeji ni a nilo)
+    category: Ẹya
+    category_placeholder: Ko si
+    monitor: Aṣabojuto
+    monitor_placeholder: Ko si
+    name: Orukọ
+    ok_create: Lati ṣẹda
+    ok_edit: Imudojuiwọn
+    ok_readonly: Satunkọ bi tuntun
     options:
-      unmanage: Aileyẹ
       float: Leke
       force: Ṣakoso ṣakoso
-      pinned: Pin
       hidden: Tọju lati dock / forbar
-    name: Orukọ
-    category_placeholder: Ko si
-    title_readonly: Wiwo {{Orukọ}}
-    bindings: Dide (Ṣe akiyesi awọn aṣayan mejeeji ni a nilo)
-    workspace_placeholder: Ko si
-    title_create: Ṣiṣẹda {Orukọ}}
-    monitor_placeholder: Ko si
-    category: Ẹya
-    workspace: Ibi-iṣẹ
-    ok_create: Lati ṣẹda
-    ok_readonly: Satunkọ bi tuntun
-    ok_edit: Imudojuiwọn
-    monitor: Aṣabojuto
-    wm_options_label: Awọn aṣayan Iṣẹ Iṣẹ window
-    weg_options_label: Dock / Awọn aṣayan Iṣẹ-ṣiṣe
+      pinned: Pin
+      unmanage: Aileyẹ
     options_label: Awọn aṣayan afikun
+    title_create: Ṣiṣẹda {Orukọ}}
     title_edit: Ṣiṣatunṣe {{Orukọ}}
-  identifier:
-    negation: Ibaramu tuntun
-    add_block: Fi dègbé
-    kind: Ṣe idanimọ nipasẹ
-    id: Idamo
-    and: Ati
-    or: Tabi
-    matching_strategy: Ibaamu iṣiro
-    remove: Paarẹ Brow
-  confirm_delete: Ṣe o da ọ loju pe o fẹ lati pa iṣeto rẹ / s?
-  delete: Paarẹ
-  new: Tuntun
-  confirm_delete_title: Jẹrisi paarẹ
-  search: Ṣewadii
-  bundled_title: Ohun elo app ṣepọ pẹlu Selen
-  swap: Eepo
-  export: Firanṣẹ si ilẹ okeere
+    title_readonly: Wiwo {{Orukọ}}
+    weg_options_label: Dock / Awọn aṣayan Iṣẹ-ṣiṣe
+    wm_options_label: Awọn aṣayan Iṣẹ Iṣẹ window
+    workspace: Ibi-iṣẹ
+    workspace_placeholder: Ko si
   bundled_msg: >-
     Awọn atunto ti a dapọ mọ ko ṣe deede ati pe a ṣe apẹrẹ lati fun ọ ni iriri
     ti o dara julọ laisi isọdi. Wọn tunto awọn ohun elo ti o wọpọ julọ fun ọ.
-  import: Aṣagbewọle lati ilẹ okeere
+  bundled_title: Ohun elo app ṣepọ pẹlu Selen
+  confirm_delete: Ṣe o da ọ loju pe o fẹ lati pa iṣeto rẹ / s?
+  confirm_delete_title: Jẹrisi paarẹ
+  delete: Paarẹ
+  export: Firanṣẹ si ilẹ okeere
   extra_info: >-
     Sisen UI Nikan idakan kan fun app (ere akọkọ ti a rii) nitorinaa ni alaye ni
     pataki, bi a ṣe le ṣe akiyesi tabili ti o wa ni lẹsẹsẹ nipasẹ aiyipada si
     atijọ.
+  identifier:
+    add_block: Fi dègbé
+    and: Ati
+    id: Idamo
+    kind: Ṣe idanimọ nipasẹ
+    matching_strategy: Ibaamu iṣiro
+    negation: Ibaramu tuntun
+    or: Tabi
+    remove: Paarẹ Brow
+  import: Aṣagbewọle lati ilẹ okeere
+  new: Tuntun
+  search: Ṣewadii
+  swap: Eepo
+cancel: Fagilee
+close: Sunmọ
+delete: Paarẹ
+devtools:
+  app_folders: Awọn folda App
+  custom_config_file: Fifuye faili atunto aṣa
+  data_folder: Folda data
+  enable: Mu awọn irinṣẹ Oláàmúdà ṣiṣẹ
+  install_folder: Filese Fifi sori ẹrọ
+  load: Ẹru
+  settings_file: Faili eto
 extras:
   discord: Di eniyan
+  exit: Duro / Jade
   github: Gitter
+  links: Awọn ọna asopọ osise
   relaunch: Ṣadi
   version: Ẹya
-  links: Awọn ọna asopọ osise
-  exit: Duro / Jade
-shortcuts:
+general:
+  accent_color: Awọ ara
+  date_format: Ọna kika ọjọ
+  icon_pack:
+    label: Awọn akopọ aami
+  language: Ede
+  startup: Ṣiṣe lori ibẹrẹ?
+  theme:
+    add: Fi ọran kun
+    added: Akori ti ṣafikun tẹlẹ
+    author: Onkọwe ọkunrin
+    available: Wa
+    description: Isapejuwe
+    enabled: Mu awọn akori ṣiṣẹ
+    label: Alaye Akori
+    placeholder: Yan Akori
+    selected: Ti yan
+    tags: Afi ami
+  wallpaper:
+    select: Yan Iṣẹṣọ ogiri
+header:
   labels:
-    focus_right: Dojukọ ọtun
-    increase_width: Gbooro
-    reserve_right: Reserve ọtun
-    switch_workspace_3: Yipada si ibi-iṣẹ 3
-    switch_workspace_6: Yipada si ibi-iṣẹ 6
-    focus_latest: Idojukọ
-    focus_top: Dojukọ oke
-    switch_workspace_8: Yipada si ibi-iṣẹ 8
-    decrease_height: Dinku iga
-    reserve_bottom: Isalẹ ifipamọ
-    send_to_workspace_3: Firanṣẹ si ibi-iṣẹ 3
-    send_to_workspace_8: Firanṣẹ si ibi-iṣẹ 8
-    send_to_workspace_1: Firanṣẹ si ibi-iṣẹ 1
-    move_to_workspace_5: Gbe si ibi-iṣẹ 5
-    increase_height: Igasoke giga
-    move_to_workspace_9: Gbe si ibi-ipa 9
-    send_to_workspace_2: Firanṣẹ si ibi-iṣẹ 2
-    focus_left: Idojukọ osi
-    move_to_workspace_3: Gbe si ibi-iṣẹ 3
-    reserve_float: Dase leefofo loju omi
-    switch_workspace_9: Yipada si ibi-iṣẹ 9
-    switch_workspace_2: Yipada si ibi-iṣẹ 2
-    move_to_workspace_0: Gbe si ibi-iṣẹ 0
-    move_to_workspace_2: Gbe si ibi-iṣẹ 2
-    switch_workspace_5: Yipada si ibi-iṣẹ 5
-    switch_workspace_4: Yipada si ibi-iṣẹ 4
-    send_to_workspace_6: Firanṣẹ si ibi-iṣẹ 6
-    send_to_workspace_7: Firanṣẹ si ibi-iṣẹ 7
-    reserve_stack: Ipilẹ akopọ
-    send_to_workspace_9: Firanṣẹ si ibi-iṣẹ 9
-    move_to_workspace_4: Gbe si ibi-iṣẹ 4
-    move_to_workspace_8: Gbe si ibi-iṣẹ 8
-    move_to_workspace_1: Gbe si Accepace 1
-    move_to_workspace_7: Gbe si ibi-iṣẹ 7
-    send_to_workspace_0: Firanṣẹ si ibi-iṣẹ 0
-    send_to_workspace_5: Firanṣẹ si Ibi-iṣẹ 5
-    decrease_width: DIVEELE WA
-    reserve_top: Reserve oke
-    restore_sizes: Pada awọn titobi
-    switch_workspace_7: Yipada si ibi-iṣẹ 7
-    move_to_workspace_6: Gbe si ibi-iṣẹ 6
-    focus_bottom: Idojukọ Idojukọ
-    send_to_workspace_4: Firanṣẹ si ibi-iṣẹ 4
-    reserve_left: Reserve osi
-    switch_workspace_1: Yipada si ibi-iṣẹ 2
-    switch_workspace_0: Yipada si ibi-iṣẹ 1
-    misc_open_settings: Ṣi Eto
-    misc_toggle_win_event_tracing: Tongo Win Iṣẹlẹ iṣẹlẹ (awọn àkọọlẹ)
-    misc_toggle_lock_tracing: Titiipa titiipa (awọn àkọọlẹ)
-    toggle_launcher: Aijiya
-  enable: Mu awọn ọna abuja ti o sopọ mọ (Ahk)
-  enable_tooltip: Muu Ti o ba yoo ṣe awọn ọna abuja tirẹ nipa lilo APEN mojuto API
-  reset: Tun si awọn aseku
-  readonly_tooltip: Eyi jẹ ọna abuja-kika
-delete: Paarẹ
-cancel: Fagilee
-save: Fipamọ
-loading: Loading ...
-inProgress: Ni ilọsiwaju ...
-quit: Lọ kuro
-open: Ṣii
-vd:
-  strategy:
-    label: Foju tabili tabili
-    seelen: Sibẹ
-    native: Ọmọ ibilẹ ọkunrin
-  disabled_windows_version: Abitabi Ojú-iṣẹ Ọmọ-iṣẹ abinibi ko wa fun ẹya Windows rẹ.
-save_and_restart: Fipamọ & Tun bẹrẹ
-monitors_configurations:
-  label: Adirẹsi {{Ṣe atọka}}
-wall:
-  backgrounds: Ogiri ogiri
-  no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
-  enable: Mu oluṣakoso ogiri ṣiṣẹ
-  interval: Ayipada ogiri ni gbogbo
-  random: Afikun ifaworanhan
-  minutes: iṣẹju
-  hours: wakati
-  seconds: aaya
-app_launcher:
-  runners:
-    explorer: Sare
-    label: Awọn asayan
-    cmd: Paṣẹ
-  enable: Jeki Ifilọlẹ app
-  monitor: Atẹle lati fihan
+    developer: Olugbekun
+    general: Gbogboogbo
+    home: Ile
+    info: Alaye
+    mods: Awọn afikun & Awọn ẹrọ ailorukọ
+    monitors: Awọn diirarito
+    seelen_bar: Ọpa irinṣẹ Fancy
+    seelen_rofi: Ifilọlẹ app
+    seelen_wall: Oluṣakoso ogiri
+    seelen_weg: Dock / forkbar
+    seelen_wm: Oluṣakoso window
+    shortcuts: Awọn ọna abuja
+    specific_apps: Apps Pataki
+    virtual_desk: Awọn orisun itẹwe foju
 inherit: Jogun
-more: Diẹ sii
+inProgress: Ni ilọsiwaju ...
 insert: Fisi
-close: Sunmọ
-update:
-  available: Imudojuiwọn wa!
-  downloading: Gbigba lati ayelujara ...
-  channel: Ohun elo imudojuiwọn
+loading: Loading ...
 miscellaneous: Oriṣiriṣi
 mods:
   plugins: Afikun
   target: Ibi-afẹde
   widgets: Ẹrọ ẹrọ
+monitors_configurations:
+  label: Adirẹsi {{Ṣe atọka}}
+more: Diẹ sii
+open: Ṣii
+quit: Lọ kuro
 remove: Yọkuro
+save: Fipamọ
+save_and_restart: Fipamọ & Tun bẹrẹ
+shortcuts:
+  enable: Mu awọn ọna abuja ti o sopọ mọ (Ahk)
+  enable_tooltip: Muu Ti o ba yoo ṣe awọn ọna abuja tirẹ nipa lilo APEN mojuto API
+  labels:
+    decrease_height: Dinku iga
+    decrease_width: DIVEELE WA
+    focus_bottom: Idojukọ Idojukọ
+    focus_latest: Idojukọ
+    focus_left: Idojukọ osi
+    focus_right: Dojukọ ọtun
+    focus_top: Dojukọ oke
+    increase_height: Igasoke giga
+    increase_width: Gbooro
+    misc_open_settings: Ṣi Eto
+    misc_toggle_lock_tracing: Titiipa titiipa (awọn àkọọlẹ)
+    misc_toggle_win_event_tracing: Tongo Win Iṣẹlẹ iṣẹlẹ (awọn àkọọlẹ)
+    move_to_workspace_0: Gbe si ibi-iṣẹ 0
+    move_to_workspace_1: Gbe si Accepace 1
+    move_to_workspace_2: Gbe si ibi-iṣẹ 2
+    move_to_workspace_3: Gbe si ibi-iṣẹ 3
+    move_to_workspace_4: Gbe si ibi-iṣẹ 4
+    move_to_workspace_5: Gbe si ibi-iṣẹ 5
+    move_to_workspace_6: Gbe si ibi-iṣẹ 6
+    move_to_workspace_7: Gbe si ibi-iṣẹ 7
+    move_to_workspace_8: Gbe si ibi-iṣẹ 8
+    move_to_workspace_9: Gbe si ibi-ipa 9
+    reserve_bottom: Isalẹ ifipamọ
+    reserve_float: Dase leefofo loju omi
+    reserve_left: Reserve osi
+    reserve_right: Reserve ọtun
+    reserve_stack: Ipilẹ akopọ
+    reserve_top: Reserve oke
+    restore_sizes: Pada awọn titobi
+    send_to_workspace_0: Firanṣẹ si ibi-iṣẹ 0
+    send_to_workspace_1: Firanṣẹ si ibi-iṣẹ 1
+    send_to_workspace_2: Firanṣẹ si ibi-iṣẹ 2
+    send_to_workspace_3: Firanṣẹ si ibi-iṣẹ 3
+    send_to_workspace_4: Firanṣẹ si ibi-iṣẹ 4
+    send_to_workspace_5: Firanṣẹ si Ibi-iṣẹ 5
+    send_to_workspace_6: Firanṣẹ si ibi-iṣẹ 6
+    send_to_workspace_7: Firanṣẹ si ibi-iṣẹ 7
+    send_to_workspace_8: Firanṣẹ si ibi-iṣẹ 8
+    send_to_workspace_9: Firanṣẹ si ibi-iṣẹ 9
+    switch_workspace_0: Yipada si ibi-iṣẹ 1
+    switch_workspace_1: Yipada si ibi-iṣẹ 2
+    switch_workspace_2: Yipada si ibi-iṣẹ 2
+    switch_workspace_3: Yipada si ibi-iṣẹ 3
+    switch_workspace_4: Yipada si ibi-iṣẹ 4
+    switch_workspace_5: Yipada si ibi-iṣẹ 5
+    switch_workspace_6: Yipada si ibi-iṣẹ 6
+    switch_workspace_7: Yipada si ibi-iṣẹ 7
+    switch_workspace_8: Yipada si ibi-iṣẹ 8
+    switch_workspace_9: Yipada si ibi-iṣẹ 9
+    toggle_launcher: Aijiya
+  readonly_tooltip: Eyi jẹ ọna abuja-kika
+  reset: Tun si awọn aseku
+sides:
+  bottom: Isalẹ
+  left: Osi
+  right: Titọ
+  top: Oke
+start:
+  message: >-
+    Kaabọ si Sielen UI, agbegbe tabili ti o gaju pẹlu ipilẹ Windows Manager lati
+    jẹki iriri Windows rẹ! Ṣawari akoko ti o ni ṣiṣe ati multitasking pẹlu wa
+    ati awọn ẹya ti ilọsiwaju.
+  message_accent: Njẹ iṣelọpọ rẹ pẹlu aṣa!
+  title: Kaabọ!
+toolbar:
+  auto_hide: Ibi ipamọ aifọwọyi
+  delay_to_hide: Idaduro lati tọju
+  delay_to_show: Idaduro lati ṣafihan
+  enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
+  height: Giga
+  label: Ọpa irinṣẹ
+  placeholder:
+    author: Onkọwe ọkunrin
+    description: Isapejuwe
+    select: Ọpa irinṣẹ
+  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
+update:
+  available: Imudojuiwọn wa!
+  channel: Ohun elo imudojuiwọn
+  downloading: Gbigba lati ayelujara ...
+vd:
+  disabled_windows_version: Abitabi Ojú-iṣẹ Ọmọ-iṣẹ abinibi ko wa fun ẹya Windows rẹ.
+  strategy:
+    label: Foju tabili tabili
+    native: Ọmọ ibilẹ ọkunrin
+    seelen: Sibẹ
+wall:
+  backgrounds: Ogiri ogiri
+  enable: Mu oluṣakoso ogiri ṣiṣẹ
+  hours: wakati
+  interval: Ayipada ogiri ni gbogbo
+  minutes: iṣẹju
+  no_background: Sifo Yisile, lilo abẹlẹ idile dipo.
+  random: Afikun ifaworanhan
+  seconds: aaya
+weg:
+  auto_hide: Ibi ipamọ aifọwọyi
+  delay_to_hide: Idaduro lati tọju
+  delay_to_show: Idaduro lati ṣafihan
+  dock_side: Ipo
+  enable: Muu dock / forkbar
+  gap: Alafo
+  items:
+    gap: Aaye laarin awọn ohun kan
+    label: Awọn ohun
+    size: Iwọn nkan
+    visible_separators: Awọn iyatọ ti o han
+    zoom_size: Iwọn sisun (ti a lo fun awọn akori)
+  label: Dock / forkbar
+  margin: Ẹlẹsin
+  padding: Fidigọdi silẹ
+  use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
+  width: Fifẹ
+wm:
+  author: Onkọwe ọkunrin
+  border:
+    enable: Jeki aala window
+    offset: Iparun aala
+    width: Iwọn aala
+  description: Isapejuwe
+  enable: Jeki oludari window
+  layout: Agbekalẹ
+  resize_delta: Tun ṣe Delta (%)
+  space_between_containers: Aaye laarin awọn apoti
+  workspace_offset: Awọn iṣẹ Iṣẹ-iṣẹ (awọn ala)
+  workspace_padding: Awọn iṣẹ itasi

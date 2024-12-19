@@ -1,260 +1,260 @@
-sides:
-  left: Бесоҳибмонда
-  right: Рост
-  bottom: Тагпо
-  top: Боло
-header:
-  labels:
-    shortcuts: Миёнбурҳо
-    seelen_wm: Менеҷери тиреза
-    general: Генерал
-    seelen_weg: Dock / супоришҳо
-    specific_apps: Барномаҳои мушаххас
-    monitors: Мониторҳо
-    developer: Таҳиякунанда
-    seelen_bar: Панели футбол
-    info: Ахбор
-    seelen_rofi: Барномасоз
-    virtual_desk: Мизи кории виртуалӣ
-    home: Хона
-    mods: Плагинҳо ва виджетҳо
-    seelen_wall: Обои Менеҷери
-start:
-  message_accent: Ҳосилнокии худро бо услуб оптимед кунед!
-  message: >-
-    Хуш омадед ба Селен ui, муҳити ниҳооии мизи корӣ бо намоиши менеҷери TIS
-    Windows Manage таҷрибаи Windows Windows! Давраи нави самаранокиро кашф кунед
-    ва бисёрҷанбаҳо бо интерфейси амиқии мо ва хусусиятҳои пешрафта.
-  title: Хуш омадед!
-general:
-  theme:
-    enabled: Дар мавзӯъҳо фаъол карда шудааст
-    label: Маълумот дар мавзӯъ
-    description: Тасвирӣ
-    author: Муаллиф
-    placeholder: Интихоб кунед Мавзӯъ
-    added: Мавзӯъ аллакай илова карда шуд
-    add: Иловаи мавзӯъ
-    tags: Тегҳо
-    selected: Интихоб карда шуд
-    available: Дастрас
-  startup: Оғози кор?
-  language: Забон
-  icon_pack:
-    label: ICon бастаҳои
-  accent_color: Ранги ҳисоб
-  wallpaper:
-    select: Обер-ро интихоб кунед
-  date_format: Шакли сана
-toolbar:
-  placeholder:
-    select: Сохтори панели асбобҳо
-    description: Тасвирӣ
-    author: Муаллиф
-  height: Баландӣ
-  enable: Дастрас кардани панели футболи
-  auto_hide: Худкор Пинҳон кардани
-  label: Асбобу
-  delay_to_show: Таъхир барои нишон додан
-  delay_to_hide: Таъхир барои пинҳон кардан
-  use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
-wm:
-  border:
-    width: Паҳнои сарҳад
-    offset: Ҳафтаи сарҳад
-    enable: Сарҳади тирезаро фаъол созед
-  description: Тасвирӣ
-  layout: Тарҳ
-  space_between_containers: Фосила байни контейнер
-  workspace_offset: Ҷойгиршавӣ
-  author: Муаллиф
-  resize_delta: Татбиқи Delta (%)
-  workspace_padding: Worlpaces Padding
-  enable: Фаъолсозии мудири тиреза
-weg:
-  items:
-    zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
-    visible_separators: Бандиаткунандагони намоён
-    label: Ашё
-    size: Андозаи ашё
-    gap: Фосила байни ашё
-  label: Dock / супоришҳо
-  enable: Dock / Travelar
-  padding: Тахтача
-  width: Васеъ
-  auto_hide: Худкор Пинҳон кардани
-  gap: Фосила
-  margin: Маржа
-  dock_side: Вазъият
-  delay_to_hide: Таъхир барои пинҳон кардан
-  delay_to_show: Таъхир барои нишон додан
-  use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
-devtools:
-  custom_config_file: Файли танзимоти танзими фармоишӣ
-  load: Сарборӣ
-  settings_file: Файлҳои танзимот
-  install_folder: Феҳристи насб
-  enable: Воситаҳои таҳиягарро фаъол кунед
-  data_folder: Папкаи додаҳо
-  app_folders: Папкаҳои барнома
+app_launcher:
+  enable: Фаъолсозии Apple
+  monitor: Нишон додани назорат
+  runners:
+    cmd: Фармон
+    explorer: Давидан
+    label: Давандагон
 apps_configurations:
   app:
-    options:
-      unmanage: Тасдиқнашаванда
-      float: Шино кардан
-      pinned: Пинҳон
-      force: Идоракунии қувва
-      hidden: Аз док / паноҳгоҳ пинҳон кунед
-    monitor_placeholder: Ҳеь
-    monitor: Назорат
-    category: Категория
-    workspace_placeholder: Ҳеь
-    ok_create: Сохтан
-    title_readonly: Дидани {{НОМ}}
-    workspace: Корӣ
     bindings: Бодед
-    name: Ном
+    category: Категория
     category_placeholder: Ҳеь
+    monitor: Назорат
+    monitor_placeholder: Ҳеь
+    name: Ном
+    ok_create: Сохтан
     ok_edit: Навсозӣ
     ok_readonly: Ҳамчун нав
+    options:
+      float: Шино кардан
+      force: Идоракунии қувва
+      hidden: Аз док / паноҳгоҳ пинҳон кунед
+      pinned: Пинҳон
+      unmanage: Тасдиқнашаванда
+    options_label: Имконоти иловагӣ
     title_create: Эҷоди {{НОМИ}}
+    title_edit: Таҳрир {{НОМ}}
+    title_readonly: Дидани {{НОМ}}
     weg_options_label: Параметрҳои Dock / Pitibar
     wm_options_label: Имконоти мудири равзана
-    options_label: Имконоти иловагӣ
-    title_edit: Таҳрир {{НОМ}}
-  identifier:
-    or: Ё
-    kind: Муайян мекунад
-    remove: Нест кардани блок
-    id: Муайянкунанда
-    and: Ва
-    add_block: Блокро илова кунед
-    negation: Мувофиқати манфӣ
-    matching_strategy: Стратегияи мувофиқ
-  confirm_delete_title: Тасдиқро тасдиқ кунед
-  confirm_delete: Шумо мутмаин ҳастед, ки мехоҳед ин конфигуратсия / S-ро нест кунед?
-  swap: Своп
-  export: Содирот
-  bundled_title: App Confile бо seelen
-  import: Воридот
-  new: Нав
-  delete: Нест
+    workspace: Корӣ
+    workspace_placeholder: Ҳеь
   bundled_msg: >-
     Ин конфигуратсияи маҷмӯӣ таҳрир карда намешавад ва барои таъмини таҷрибаи
     беҳтарин бидуни фармоишӣ пешбинӣ шудаанд. Онҳо ба таври худкор барномаҳои
     маъмултарини шуморо барои шумо танзим мекунанд.
-  search: Кофтуков
+  bundled_title: App Confile бо seelen
+  confirm_delete: Шумо мутмаин ҳастед, ки мехоҳед ин конфигуратсия / S-ро нест кунед?
+  confirm_delete_title: Тасдиқро тасдиқ кунед
+  delete: Нест
+  export: Содирот
   extra_info: >-
     Seelen UI дар як барнома танҳо як идентификаторро истифода мебарад (мувофиқи
     аввал пайдо шуд), аз ин рӯ тартиби муайян кардани он муҳим аст, ба охирин
     иловашуда авлавият дода мешавад, зеро қайд кунед, ки ҷадвал аз рӯи нобаёнӣ
     аз охирин то кӯҳна мураттаб карда мешавад.
+  identifier:
+    add_block: Блокро илова кунед
+    and: Ва
+    id: Муайянкунанда
+    kind: Муайян мекунад
+    matching_strategy: Стратегияи мувофиқ
+    negation: Мувофиқати манфӣ
+    or: Ё
+    remove: Нест кардани блок
+  import: Воридот
+  new: Нав
+  search: Кофтуков
+  swap: Своп
+cancel: Манъ кардан
+close: Наздик
+delete: Нест
+devtools:
+  app_folders: Папкаҳои барнома
+  custom_config_file: Файли танзимоти танзими фармоишӣ
+  data_folder: Папкаи додаҳо
+  enable: Воситаҳои таҳиягарро фаъол кунед
+  install_folder: Феҳристи насб
+  load: Сарборӣ
+  settings_file: Файлҳои танзимот
 extras:
-  links: Истеҳсоли расмӣ
-  version: Версия
-  relaunch: Радкунӣ
-  github: Github
   discord: Ихтисор
   exit: Курат / баромадан
-shortcuts:
+  github: Github
+  links: Истеҳсоли расмӣ
+  relaunch: Радкунӣ
+  version: Версия
+general:
+  accent_color: Ранги ҳисоб
+  date_format: Шакли сана
+  icon_pack:
+    label: ICon бастаҳои
+  language: Забон
+  startup: Оғози кор?
+  theme:
+    add: Иловаи мавзӯъ
+    added: Мавзӯъ аллакай илова карда шуд
+    author: Муаллиф
+    available: Дастрас
+    description: Тасвирӣ
+    enabled: Дар мавзӯъҳо фаъол карда шудааст
+    label: Маълумот дар мавзӯъ
+    placeholder: Интихоб кунед Мавзӯъ
+    selected: Интихоб карда шуд
+    tags: Тегҳо
+  wallpaper:
+    select: Обер-ро интихоб кунед
+header:
   labels:
-    increase_height: Баланд бардоштани баландӣ
-    switch_workspace_9: Гузариш ба кории 9
-    reserve_stack: Стекер захира
-    move_to_workspace_0: Ба фазои корпартоӣ ҳаракат кунед
-    switch_workspace_8: Гузариш ба корҳо 8
-    switch_workspace_6: Гузариш ба корҳо 6
-    move_to_workspace_6: Ба корпартои 6 ҳаракат кунед
-    focus_right: Фокус ба
-    send_to_workspace_7: Ба корҳо фиристед 7
-    send_to_workspace_5: Ба кории 5 фиристед
-    move_to_workspace_9: Ба фазои 9 ҳаракат кунед
-    increase_width: Паҳнои васеъ
-    decrease_height: Баландиро кам мекунад
-    send_to_workspace_3: Ба кории 3 фиристед 3
-    send_to_workspace_9: Ба кории 9 фиристед
-    switch_workspace_2: Гузариш ба корҳо 2
-    send_to_workspace_2: Ба кории 2 фиристед 2
-    move_to_workspace_7: Ба корҳо ҳаракат кунед 7
-    focus_left: Тамаркуз ба чап
-    focus_latest: Тамаркуз охирин
-    switch_workspace_4: Гузариш ба корҳо 4
-    reserve_left: Захира
-    send_to_workspace_8: Ба корҳо фиристед 8
-    send_to_workspace_1: Ба кории 1 фиристед 1
-    move_to_workspace_8: Ба фазои корӣ ҳаракат кунед
-    reserve_bottom: Поёни захиравӣ
-    send_to_workspace_6: Ба корҳо фиристед 6
-    move_to_workspace_5: Ба кории 5 ҳаракат кунед
-    switch_workspace_3: Гузариш ба кории 3
-    reserve_float: Шино мекунанд
-    send_to_workspace_4: Ба кории 4 фиристед
-    focus_bottom: Фаъолахш
-    switch_workspace_7: Гузариш ба кории 7
-    move_to_workspace_1: Ба корпартои 1 ҳаракат кунед
-    reserve_top: Болои боло
-    reserve_right: Зарф аз тарафи
-    restore_sizes: Барқарор кардан
-    move_to_workspace_3: Ба кории 3 ҳаракат кунед
-    switch_workspace_5: Гузариш ба корҳо 5
-    send_to_workspace_0: Ба кории 0 фиристед
-    focus_top: Фокус ба боло
-    move_to_workspace_4: Ба фазои 4 ҳаракат кунед
-    move_to_workspace_2: Ба фазои кории 2 гузаред
-    decrease_width: Пойафзол коҳиш диҳед
-    switch_workspace_1: Гузариш ба корҳо 2
-    switch_workspace_0: Гузариш ба Prowspace 1
-    misc_toggle_lock_tracing: Todge Cound Tracking (гузоришҳо)
-    misc_open_settings: Танзимоти кушода
-    misc_toggle_win_event_tracing: Гузариш ба ғолиб Tweacing (гузоришҳо)
-    toggle_launcher: Гузариш
-  enable: Миёнабурҳои ҳамгирошударо фаъол созед (AHK)
-  enable_tooltip: Агар шумо миёнабурҳои худро бо истифода аз Seelen Cear Secten истифода баред
-  reset: Аз нав танзимкунии пешфарз
-  readonly_tooltip: Ин як миёнабурҳои ягона аст
+    developer: Таҳиякунанда
+    general: Генерал
+    home: Хона
+    info: Ахбор
+    mods: Плагинҳо ва виджетҳо
+    monitors: Мониторҳо
+    seelen_bar: Панели футбол
+    seelen_rofi: Барномасоз
+    seelen_wall: Обои Менеҷери
+    seelen_weg: Dock / супоришҳо
+    seelen_wm: Менеҷери тиреза
+    shortcuts: Миёнбурҳо
+    specific_apps: Барномаҳои мушаххас
+    virtual_desk: Мизи кории виртуалӣ
+inherit: Мерос гирифтан
 inProgress: Дар ҷараён...
-open: Кушодан
-save: Пул захира кардан
-quit: Баромадан
+insert: Илова кардан
 loading: Боркунӣ ...
-cancel: Манъ кардан
-delete: Нест
-vd:
-  strategy:
-    seelen: Желен
-    native: Модарӣ
-    label: Стратегияи кории корӣ
-  disabled_windows_version: Стратегияи кории ватанӣ барои версияи Windows дастрас нест.
-save_and_restart: Наҷот ва бозоғоз
+miscellaneous: Дигар
+mods:
+  plugins: Плагинҳо
+  target: Мащсад
+  widgets: Виджетҳо
 monitors_configurations:
   label: Монитор {Индекс}}
-wall:
-  backgrounds: Обои обу
-  no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
-  enable: Фаъолсозии менеҷери обои
-  interval: Тағйироти ҳар як
-  random: Велосипедро тасодуфан
-  seconds: сонияҳо
-  minutes: дақиқа
-  hours: соат
-app_launcher:
-  runners:
-    label: Давандагон
-    explorer: Давидан
-    cmd: Фармон
-  monitor: Нишон додани назорат
-  enable: Фаъолсозии Apple
 more: Бештар
-inherit: Мерос гирифтан
-insert: Илова кардан
-close: Наздик
+open: Кушодан
+quit: Баромадан
+remove: Дур кардан
+save: Пул захира кардан
+save_and_restart: Наҷот ва бозоғоз
+shortcuts:
+  enable: Миёнабурҳои ҳамгирошударо фаъол созед (AHK)
+  enable_tooltip: Агар шумо миёнабурҳои худро бо истифода аз Seelen Cear Secten истифода баред
+  labels:
+    decrease_height: Баландиро кам мекунад
+    decrease_width: Пойафзол коҳиш диҳед
+    focus_bottom: Фаъолахш
+    focus_latest: Тамаркуз охирин
+    focus_left: Тамаркуз ба чап
+    focus_right: Фокус ба
+    focus_top: Фокус ба боло
+    increase_height: Баланд бардоштани баландӣ
+    increase_width: Паҳнои васеъ
+    misc_open_settings: Танзимоти кушода
+    misc_toggle_lock_tracing: Todge Cound Tracking (гузоришҳо)
+    misc_toggle_win_event_tracing: Гузариш ба ғолиб Tweacing (гузоришҳо)
+    move_to_workspace_0: Ба фазои корпартоӣ ҳаракат кунед
+    move_to_workspace_1: Ба корпартои 1 ҳаракат кунед
+    move_to_workspace_2: Ба фазои кории 2 гузаред
+    move_to_workspace_3: Ба кории 3 ҳаракат кунед
+    move_to_workspace_4: Ба фазои 4 ҳаракат кунед
+    move_to_workspace_5: Ба кории 5 ҳаракат кунед
+    move_to_workspace_6: Ба корпартои 6 ҳаракат кунед
+    move_to_workspace_7: Ба корҳо ҳаракат кунед 7
+    move_to_workspace_8: Ба фазои корӣ ҳаракат кунед
+    move_to_workspace_9: Ба фазои 9 ҳаракат кунед
+    reserve_bottom: Поёни захиравӣ
+    reserve_float: Шино мекунанд
+    reserve_left: Захира
+    reserve_right: Зарф аз тарафи
+    reserve_stack: Стекер захира
+    reserve_top: Болои боло
+    restore_sizes: Барқарор кардан
+    send_to_workspace_0: Ба кории 0 фиристед
+    send_to_workspace_1: Ба кории 1 фиристед 1
+    send_to_workspace_2: Ба кории 2 фиристед 2
+    send_to_workspace_3: Ба кории 3 фиристед 3
+    send_to_workspace_4: Ба кории 4 фиристед
+    send_to_workspace_5: Ба кории 5 фиристед
+    send_to_workspace_6: Ба корҳо фиристед 6
+    send_to_workspace_7: Ба корҳо фиристед 7
+    send_to_workspace_8: Ба корҳо фиристед 8
+    send_to_workspace_9: Ба кории 9 фиристед
+    switch_workspace_0: Гузариш ба Prowspace 1
+    switch_workspace_1: Гузариш ба корҳо 2
+    switch_workspace_2: Гузариш ба корҳо 2
+    switch_workspace_3: Гузариш ба кории 3
+    switch_workspace_4: Гузариш ба корҳо 4
+    switch_workspace_5: Гузариш ба корҳо 5
+    switch_workspace_6: Гузариш ба корҳо 6
+    switch_workspace_7: Гузариш ба кории 7
+    switch_workspace_8: Гузариш ба корҳо 8
+    switch_workspace_9: Гузариш ба кории 9
+    toggle_launcher: Гузариш
+  readonly_tooltip: Ин як миёнабурҳои ягона аст
+  reset: Аз нав танзимкунии пешфарз
+sides:
+  bottom: Тагпо
+  left: Бесоҳибмонда
+  right: Рост
+  top: Боло
+start:
+  message: >-
+    Хуш омадед ба Селен ui, муҳити ниҳооии мизи корӣ бо намоиши менеҷери TIS
+    Windows Manage таҷрибаи Windows Windows! Давраи нави самаранокиро кашф кунед
+    ва бисёрҷанбаҳо бо интерфейси амиқии мо ва хусусиятҳои пешрафта.
+  message_accent: Ҳосилнокии худро бо услуб оптимед кунед!
+  title: Хуш омадед!
+toolbar:
+  auto_hide: Худкор Пинҳон кардани
+  delay_to_hide: Таъхир барои пинҳон кардан
+  delay_to_show: Таъхир барои нишон додан
+  enable: Дастрас кардани панели футболи
+  height: Баландӣ
+  label: Асбобу
+  placeholder:
+    author: Муаллиф
+    description: Тасвирӣ
+    select: Сохтори панели асбобҳо
+  use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
 update:
   available: Навсозӣ!
   channel: Навсозӣ канал
   downloading: Зеркашӣ кунед ...
-miscellaneous: Дигар
-mods:
-  plugins: Плагинҳо
-  widgets: Виджетҳо
-  target: Мащсад
-remove: Дур кардан
+vd:
+  disabled_windows_version: Стратегияи кории ватанӣ барои версияи Windows дастрас нест.
+  strategy:
+    label: Стратегияи кории корӣ
+    native: Модарӣ
+    seelen: Желен
+wall:
+  backgrounds: Обои обу
+  enable: Фаъолсозии менеҷери обои
+  hours: соат
+  interval: Тағйироти ҳар як
+  minutes: дақиқа
+  no_background: Слайдҳои холӣ, бо истифодаи заминаи мавзӯъҳо.
+  random: Велосипедро тасодуфан
+  seconds: сонияҳо
+weg:
+  auto_hide: Худкор Пинҳон кардани
+  delay_to_hide: Таъхир барои пинҳон кардан
+  delay_to_show: Таъхир барои нишон додан
+  dock_side: Вазъият
+  enable: Dock / Travelar
+  gap: Фосила
+  items:
+    gap: Фосила байни ашё
+    label: Ашё
+    size: Андозаи ашё
+    visible_separators: Бандиаткунандагони намоён
+    zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
+  label: Dock / супоришҳо
+  margin: Маржа
+  padding: Тахтача
+  use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
+  width: Васеъ
+wm:
+  author: Муаллиф
+  border:
+    enable: Сарҳади тирезаро фаъол созед
+    offset: Ҳафтаи сарҳад
+    width: Паҳнои сарҳад
+  description: Тасвирӣ
+  enable: Фаъолсозии мудири тиреза
+  layout: Тарҳ
+  resize_delta: Татбиқи Delta (%)
+  space_between_containers: Фосила байни контейнер
+  workspace_offset: Ҷойгиршавӣ
+  workspace_padding: Worlpaces Padding

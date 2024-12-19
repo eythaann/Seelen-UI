@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    explorer: Пробігати
     cmd: Командування
+    explorer: Пробігати
 footer:
   shortcuts: Показати ярлики
 header:
   search: Додаток, команда або шлях
 item:
-  pin: PIN до причалу
   open_location: Розташування відкритого файлу
+  pin: PIN до причалу

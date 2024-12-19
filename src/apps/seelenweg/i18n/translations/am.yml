@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: የሚዲያ ሞዱል ያክሉ
-  start: የመነሻ ሞጁል ያክሉ
-  add_file: የፒን ብጁ ፋይል
-  add_folder: የፒን ብጁ አቃፊ
-  settings: ቅንብሮች
-  task_manager: ተግባር አስተዳዳሪ
 app_menu:
   close: ገጠመ
-  pin_to_left: ፒን ወደ ግራ
-  pin_to_right: በቀኝ በኩል ፒን
-  pin_to_center: ፒን እስከ ማእከል
-  open_file_location: የፋይል ቦታ ይክፈቱ
-  pin: ፒን
   close_multiple: ሁሉንም ዝጋ
-  run_as: እንደ አስተዳዳሪ ይሮጡ
   copy_handles: መያዣዎች
-  unpin: እየቀነሰ ይሄዳል
   kill: የመግደል ሂደት
   kill_multiple: ሁሉንም ሂደቶች ይገድሉ
+  open_file_location: የፋይል ቦታ ይክፈቱ
+  pin: ፒን
+  pin_to_center: ፒን እስከ ማእከል
+  pin_to_left: ፒን ወደ ግራ
+  pin_to_right: በቀኝ በኩል ፒን
+  run_as: እንደ አስተዳዳሪ ይሮጡ
+  unpin: እየቀነሰ ይሄዳል
+media:
+  not_playing: ምንም የሚጫወት የለም
 media_menu:
   remove: የሚዲያ ሞዱል ያስወግዱ
 start_menu:
   remove: የጀግንነት ሞዱልን ያስወግዱ
-media:
-  not_playing: ምንም የሚጫወት የለም
+taskbar_menu:
+  add_file: የፒን ብጁ ፋይል
+  add_folder: የፒን ብጁ አቃፊ
+  media: የሚዲያ ሞዱል ያክሉ
+  settings: ቅንብሮች
+  start: የመነሻ ሞጁል ያክሉ
+  task_manager: ተግባር አስተዳዳሪ

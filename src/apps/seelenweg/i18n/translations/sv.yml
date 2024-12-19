@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Lägg till startmodul
-  media: Lägg till mediemodul
-  add_file: Pin Custom File
-  add_folder: Stift anpassad mapp
-  settings: Inställningar
-  task_manager: Task Manager
 app_menu:
-  pin: Stift
-  close_multiple: Stäng alla
-  run_as: Kör som administratör
-  open_file_location: Öppna filplats
   close: Stänga
+  close_multiple: Stäng alla
   copy_handles: Kopieringshandtag
-  pin_to_center: Stift till mitten
-  pin_to_right: Nöja sig till höger
-  unpin: Lutande
-  pin_to_left: Stämma till vänster
   kill: Kill Process
   kill_multiple: Döda alla processer
+  open_file_location: Öppna filplats
+  pin: Stift
+  pin_to_center: Stift till mitten
+  pin_to_left: Stämma till vänster
+  pin_to_right: Nöja sig till höger
+  run_as: Kör som administratör
+  unpin: Lutande
+media:
+  not_playing: Ingenting spelar
 media_menu:
   remove: Ta bort mediemodulen
 start_menu:
   remove: Ta bort startmodulen
-media:
-  not_playing: Ingenting spelar
+taskbar_menu:
+  add_file: Pin Custom File
+  add_folder: Stift anpassad mapp
+  media: Lägg till mediemodul
+  settings: Inställningar
+  start: Lägg till startmodul
+  task_manager: Task Manager

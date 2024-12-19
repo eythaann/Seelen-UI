@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimédia
-    comunications: Kommunikáció
-  output_device: Kimeneti eszköz
-  players: Médialejátszók
-  input_device: Beviteli eszköz
-  master_volume: Fő kötet
-network:
-  placeholder:
-    password: Jelszó
-  disconnect: Leválaszt
-  not_found: Nincsenek hálózatok nem találtak
-  hidden: Rejtett hálózat
-  connect: Összekapcsol
-  more: További hálózati beállítások
-  connected: Csatlakozva a következőhöz
-  saved: Mentett hálózatok
-  scanning: Hálózatok keresése
-  secured: Titkosított hálózat
-  available: Elérhető hálózatok
-settings:
-  app_settings: Alkalmazásbeállítások
-  restart: Újrakezd
-  log_out: Kijelentkezés
-  shutdown: Leállitás
-  sleep: Alvás
-  title: Beállítások
-  power: Hatalom
-placeholder:
-  bluetooth_devices: Bluetooth & eszközök
-  ethernet_connected: internet-hozzáférés
-  smart_charge: '- Intelligens töltés'
-  ethernet_disconnected: Nincs internet hozzaferes
-  settings: Gyors beállítások
-  open_system_tray: Nyitott rendszer tálca
-  battery_remaining: '% megmaradt'
-  volume: Hangerő
-  open_user_folder: Nyissa meg a felhasználói mappát
-  notifications: Értesítések
-unlabelled_tray: Jelöletlen tálca ikon
 context_menu:
   add_module: Adjon hozzá modult
   remove: Távolítsa el a modult
   settings: Beállítások elemre
   task_manager: Feladatkezelő
+media:
+  device:
+    comunications: Kommunikáció
+    multimedia: Multimédia
+  input_device: Beviteli eszköz
+  master_volume: Fő kötet
+  output_device: Kimeneti eszköz
+  players: Médialejátszók
+network:
+  available: Elérhető hálózatok
+  connect: Összekapcsol
+  connected: Csatlakozva a következőhöz
+  disconnect: Leválaszt
+  hidden: Rejtett hálózat
+  more: További hálózati beállítások
+  not_found: Nincsenek hálózatok nem találtak
+  placeholder:
+    password: Jelszó
+  saved: Mentett hálózatok
+  scanning: Hálózatok keresése
+  secured: Titkosított hálózat
+placeholder:
+  battery_remaining: '% megmaradt'
+  bluetooth_devices: Bluetooth & eszközök
+  ethernet_connected: internet-hozzáférés
+  ethernet_disconnected: Nincs internet hozzaferes
+  notifications: Értesítések
+  open_system_tray: Nyitott rendszer tálca
+  open_user_folder: Nyissa meg a felhasználói mappát
+  settings: Gyors beállítások
+  smart_charge: '- Intelligens töltés'
+  volume: Hangerő
+settings:
+  app_settings: Alkalmazásbeállítások
+  log_out: Kijelentkezés
+  power: Hatalom
+  restart: Újrakezd
+  shutdown: Leállitás
+  sleep: Alvás
+  title: Beállítások
+unlabelled_tray: Jelöletlen tálca ikon

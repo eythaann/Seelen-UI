@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    explorer: ແລ່ນ
     cmd: ບັນຊາ
+    explorer: ແລ່ນ
 footer:
   shortcuts: ສະແດງທາງລັດ
 header:
   search: ແອັບ, Command ຫຼື Path
 item:
-  pin: PIN ໃຫ້ DOCK
   open_location: ເປີດສະຖານທີ່ເອກະສານ
+  pin: PIN ໃຫ້ DOCK

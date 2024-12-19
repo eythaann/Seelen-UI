@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Add Media Module
-  start: Add Start Module
-  add_file: Pin Custom File
-  add_folder: Pin Custom Folder
-  task_manager: Task Manager
-  settings: Settings
 app_menu:
-  unpin: Unpin
-  pin: Pin
-  pin_to_left: Pin to Left
-  pin_to_center: Pin to Center
-  pin_to_right: Pin to Right
-  open_file_location: Open File Location
-  run_as: Run as Administrator
-  copy_handles: Copy Handles
   close: Close
-  kill: Kill Process
   close_multiple: Close All
+  copy_handles: Copy Handles
+  kill: Kill Process
   kill_multiple: Kill All Processes
+  open_file_location: Open File Location
+  pin: Pin
+  pin_to_center: Pin to Center
+  pin_to_left: Pin to Left
+  pin_to_right: Pin to Right
+  run_as: Run as Administrator
+  unpin: Unpin
 media:
   not_playing: Nothing is playing
 media_menu:
   remove: Remove Media Module
 start_menu:
   remove: Remove Start Module
+taskbar_menu:
+  add_file: Pin Custom File
+  add_folder: Pin Custom Folder
+  media: Add Media Module
+  settings: Settings
+  start: Add Start Module
+  task_manager: Task Manager

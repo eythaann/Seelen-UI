@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Добавете медиен модул
-  start: Добавете старт модул
-  add_file: ПИН Персонализиран файл
-  add_folder: ПИН Персонализирана папка
-  settings: Настройки
-  task_manager: Диспечер на задачите
 app_menu:
   close: Близо
   close_multiple: Затвори всички
-  run_as: Изпълни като администратор
   copy_handles: Копиращи дръжки
+  kill: Процес на унищожаване
+  kill_multiple: Убийте всички процеси
   open_file_location: Отворете местоположението на файла
+  pin: Щифт
   pin_to_center: Щифт към центъра
   pin_to_left: Пин вляво
   pin_to_right: Пин вдясно
-  pin: Щифт
+  run_as: Изпълни като администратор
   unpin: Unpin
-  kill_multiple: Убийте всички процеси
-  kill: Процес на унищожаване
+media:
+  not_playing: Нищо не играе
 media_menu:
   remove: Премахване на медийния модул
 start_menu:
   remove: Премахване на стартовия модул
-media:
-  not_playing: Нищо не играе
+taskbar_menu:
+  add_file: ПИН Персонализиран файл
+  add_folder: ПИН Персонализирана папка
+  media: Добавете медиен модул
+  settings: Настройки
+  start: Добавете старт модул
+  task_manager: Диспечер на задачите

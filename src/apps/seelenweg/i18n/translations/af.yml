@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Voeg beginmodule by
-  media: Voeg mediasmodule by
-  add_folder: Pin Custom Folder
-  add_file: Pin Custom File
-  settings: Instellings
-  task_manager: Taakbestuurder
 app_menu:
   close: Naby
-  pin: Speld
-  pin_to_right: Speld na regs
   close_multiple: Sluit alles
-  pin_to_center: Speld na die sentrum
-  run_as: Hardloop as administrateur
-  pin_to_left: Speld na links
-  open_file_location: Oop lêlokasie
   copy_handles: Kopiehandvatsels
-  unpin: Unpin
   kill: Doodproses
   kill_multiple: Maak alle prosesse dood
+  open_file_location: Oop lêlokasie
+  pin: Speld
+  pin_to_center: Speld na die sentrum
+  pin_to_left: Speld na links
+  pin_to_right: Speld na regs
+  run_as: Hardloop as administrateur
+  unpin: Unpin
+media:
+  not_playing: Niks speel nie
 media_menu:
   remove: Verwyder die media -module
 start_menu:
   remove: Verwyder beginmodule
-media:
-  not_playing: Niks speel nie
+taskbar_menu:
+  add_file: Pin Custom File
+  add_folder: Pin Custom Folder
+  media: Voeg mediasmodule by
+  settings: Instellings
+  start: Voeg beginmodule by
+  task_manager: Taakbestuurder

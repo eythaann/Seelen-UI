@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: הוסף מודול מדיה
-  start: הוסף מודול התחל
-  add_file: הצמד קובץ מותאם אישית
-  add_folder: סיכה תיקייה בהתאמה אישית
-  settings: הגדרות
-  task_manager: מנהל משימות
 app_menu:
-  run_as: הפעל כמנהל
-  pin: פִּין
-  close_multiple: סגור הכל
   close: סגור
-  unpin: לְהוֹצִיא סִיכָּה
-  pin_to_center: סיכה למרכז
-  open_file_location: פתח את מיקום הקובץ
+  close_multiple: סגור הכל
   copy_handles: העתק ידיות
-  pin_to_right: סיכה לימין
-  pin_to_left: סיכה משמאל
-  kill_multiple: להרוג את כל התהליכים
   kill: תהליך הרג
+  kill_multiple: להרוג את כל התהליכים
+  open_file_location: פתח את מיקום הקובץ
+  pin: פִּין
+  pin_to_center: סיכה למרכז
+  pin_to_left: סיכה משמאל
+  pin_to_right: סיכה לימין
+  run_as: הפעל כמנהל
+  unpin: לְהוֹצִיא סִיכָּה
+media:
+  not_playing: שום דבר לא משחק
 media_menu:
   remove: הסר את מודול המדיה
 start_menu:
   remove: הסר את מודול ההתחלה
-media:
-  not_playing: שום דבר לא משחק
+taskbar_menu:
+  add_file: הצמד קובץ מותאם אישית
+  add_folder: סיכה תיקייה בהתאמה אישית
+  media: הוסף מודול מדיה
+  settings: הגדרות
+  start: הוסף מודול התחל
+  task_manager: מנהל משימות

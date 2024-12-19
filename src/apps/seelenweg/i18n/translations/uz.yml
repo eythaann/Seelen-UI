@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Boshlash moduli qo'shing
-  media: Media modul qo'shing
-  add_file: PIN-kod
-  add_folder: Shaxsiy papka
-  task_manager: Vazifa menejeri
-  settings: Sozlamalar
 app_menu:
-  unpin: Chetlashmoq
-  pin_to_right: O'ngga pin
   close: Yaqin
   close_multiple: Hammasini yaqin
-  open_file_location: Fayl joylashuvi
-  pin_to_center: Markazga PIN
-  run_as: Administrator sifatida yugurish
   copy_handles: Nusxalash vositasi
-  pin: Pin
-  pin_to_left: Chapga o'ting
-  kill_multiple: Barcha jarayonlarni o'ldiring
   kill: O'ldirish jarayoni
+  kill_multiple: Barcha jarayonlarni o'ldiring
+  open_file_location: Fayl joylashuvi
+  pin: Pin
+  pin_to_center: Markazga PIN
+  pin_to_left: Chapga o'ting
+  pin_to_right: O'ngga pin
+  run_as: Administrator sifatida yugurish
+  unpin: Chetlashmoq
+media:
+  not_playing: Hech narsa o'ynamaydi
 media_menu:
   remove: Media modulini olib tashlang
 start_menu:
   remove: Boshlash moduliini olib tashlang
-media:
-  not_playing: Hech narsa o'ynamaydi
+taskbar_menu:
+  add_file: PIN-kod
+  add_folder: Shaxsiy papka
+  media: Media modul qo'shing
+  settings: Sozlamalar
+  start: Boshlash moduli qo'shing
+  task_manager: Vazifa menejeri

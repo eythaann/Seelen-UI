@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Đa phương tiện
-    comunications: Truyền thông
-  master_volume: Khối lượng tổng thể
-  input_device: Thiết bị đầu vào
-  output_device: Thiết bị đầu ra
-  players: Người chơi truyền thông
-network:
-  placeholder:
-    password: Mật khẩu
-  not_found: Không tìm thấy kết nối mạng
-  hidden: Mạng ẩn
-  disconnect: Ngắt kết nối
-  connect: Kết nối
-  more: Nhiều cài đặt mạng hơn
-  connected: Đã kết nối với
-  saved: Mạng đã lưu
-  available: Mạng có sẵn
-  secured: Mạng được mã hóa
-  scanning: Đang quét mạng
-settings:
-  sleep: Ngủ
-  log_out: Đăng xuất
-  restart: Khởi động lại
-  title: Cài đặt
-  app_settings: Cài đặt ứng dụng
-  shutdown: Tắt
-  power: Quyền lực
-placeholder:
-  ethernet_connected: truy cập Internet
-  settings: Cài đặt nhanh
-  ethernet_disconnected: Không có kết nối mạng
-  open_system_tray: Khay mở hệ thống
-  open_user_folder: Mở thư mục người dùng
-  volume: Âm lượng
-  bluetooth_devices: Bluetooth & thiết bị
-  smart_charge: '- Phí thông minh'
-  battery_remaining: '% còn lại'
-  notifications: Thông báo
-unlabelled_tray: Biểu tượng khay không ghi nhãn
 context_menu:
   add_module: Thêm mô -đun
   remove: Xóa mô -đun
-  task_manager: Trình quản lý tác vụ
   settings: Cài đặt
+  task_manager: Trình quản lý tác vụ
+media:
+  device:
+    comunications: Truyền thông
+    multimedia: Đa phương tiện
+  input_device: Thiết bị đầu vào
+  master_volume: Khối lượng tổng thể
+  output_device: Thiết bị đầu ra
+  players: Người chơi truyền thông
+network:
+  available: Mạng có sẵn
+  connect: Kết nối
+  connected: Đã kết nối với
+  disconnect: Ngắt kết nối
+  hidden: Mạng ẩn
+  more: Nhiều cài đặt mạng hơn
+  not_found: Không tìm thấy kết nối mạng
+  placeholder:
+    password: Mật khẩu
+  saved: Mạng đã lưu
+  scanning: Đang quét mạng
+  secured: Mạng được mã hóa
+placeholder:
+  battery_remaining: '% còn lại'
+  bluetooth_devices: Bluetooth & thiết bị
+  ethernet_connected: truy cập Internet
+  ethernet_disconnected: Không có kết nối mạng
+  notifications: Thông báo
+  open_system_tray: Khay mở hệ thống
+  open_user_folder: Mở thư mục người dùng
+  settings: Cài đặt nhanh
+  smart_charge: '- Phí thông minh'
+  volume: Âm lượng
+settings:
+  app_settings: Cài đặt ứng dụng
+  log_out: Đăng xuất
+  power: Quyền lực
+  restart: Khởi động lại
+  shutdown: Tắt
+  sleep: Ngủ
+  title: Cài đặt
+unlabelled_tray: Biểu tượng khay không ghi nhãn

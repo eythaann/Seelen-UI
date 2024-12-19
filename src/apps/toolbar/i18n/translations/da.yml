@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Kommunikation
-  input_device: Inputenhed
-  players: Medieafspillere
-  output_device: Outputenhed
-  master_volume: Mastervolumen
-network:
-  placeholder:
-    password: Adgangskode
-  connect: Forbinde
-  disconnect: Koble fra
-  not_found: Ingen netværk fundet
-  more: Flere netværksindstillinger
-  hidden: Skjult netværk
-  connected: Forbundet til
-  saved: Gemte netværk
-  available: Tilgængelige netværk
-  scanning: Scanning efter netværk
-  secured: Krypteret netværk
-settings:
-  sleep: Søvn
-  shutdown: Lukke ned
-  log_out: Log ud
-  restart: Genstart
-  title: Indstillinger
-  app_settings: Appindstillinger
-  power: Magt
-placeholder:
-  ethernet_connected: Internetadgang
-  volume: Bind
-  settings: Hurtige indstillinger
-  battery_remaining: '% resterende'
-  smart_charge: '- Smart opladning'
-  open_user_folder: Åben brugermappe
-  ethernet_disconnected: Ingen internetadgang
-  bluetooth_devices: Bluetooth & enheder
-  open_system_tray: Åben systembakke
-  notifications: Underretninger
-unlabelled_tray: Umnæret bakkeikon
 context_menu:
-  remove: Fjern modulet
   add_module: Tilføj modul
+  remove: Fjern modulet
   settings: Indstillinger
   task_manager: Task Manager
+media:
+  device:
+    comunications: Kommunikation
+    multimedia: Multimedia
+  input_device: Inputenhed
+  master_volume: Mastervolumen
+  output_device: Outputenhed
+  players: Medieafspillere
+network:
+  available: Tilgængelige netværk
+  connect: Forbinde
+  connected: Forbundet til
+  disconnect: Koble fra
+  hidden: Skjult netværk
+  more: Flere netværksindstillinger
+  not_found: Ingen netværk fundet
+  placeholder:
+    password: Adgangskode
+  saved: Gemte netværk
+  scanning: Scanning efter netværk
+  secured: Krypteret netværk
+placeholder:
+  battery_remaining: '% resterende'
+  bluetooth_devices: Bluetooth & enheder
+  ethernet_connected: Internetadgang
+  ethernet_disconnected: Ingen internetadgang
+  notifications: Underretninger
+  open_system_tray: Åben systembakke
+  open_user_folder: Åben brugermappe
+  settings: Hurtige indstillinger
+  smart_charge: '- Smart opladning'
+  volume: Bind
+settings:
+  app_settings: Appindstillinger
+  log_out: Log ud
+  power: Magt
+  restart: Genstart
+  shutdown: Lukke ned
+  sleep: Søvn
+  title: Indstillinger
+unlabelled_tray: Umnæret bakkeikon

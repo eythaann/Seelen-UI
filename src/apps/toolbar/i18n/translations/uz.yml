@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Modul qo'shing
+  remove: Modulni olib tashlash
+  settings: Sozlamalar
+  task_manager: Vazifa menejeri
 media:
   device:
     comunications: Aloqa
     multimedia: Multimedia
-  output_device: Chiqish moslamasi
-  players: Media pleerlari
   input_device: Kirish moslamasi
   master_volume: Master hajmi
+  output_device: Chiqish moslamasi
+  players: Media pleerlari
 network:
-  placeholder:
-    password: Parol
+  available: Mavjud tarmoqlar
   connect: Ulanmoq
-  hidden: Yashirin tarmoq
+  connected: ga ulangan
   disconnect: Ajratmoq
+  hidden: Yashirin tarmoq
   more: Ko'proq tarmoq sozlamalari
   not_found: Tarmoq topilmadi
-  available: Mavjud tarmoqlar
+  placeholder:
+    password: Parol
   saved: Saqlangan tarmoqlar
-  connected: ga ulangan
-  secured: Shifrlangan tarmoq
   scanning: Tarmoqlarni skanerlash
-settings:
-  restart: Qayta ishga tushirish
-  shutdown: O'chirish; yopish
-  log_out: Chiqish
-  app_settings: Ilova sozlamalari
-  sleep: Uyqu
-  title: Sozlash
-  power: Kuch
+  secured: Shifrlangan tarmoq
 placeholder:
-  ethernet_connected: Internetga ulanish
   battery_remaining: '% Qolgan'
-  ethernet_disconnected: Internetga kirish yo'q
-  open_system_tray: Ochiq tizimning patnisi
   bluetooth_devices: Bluetooth va qurilmalar
-  volume: Hajmi
+  ethernet_connected: Internetga ulanish
+  ethernet_disconnected: Internetga kirish yo'q
+  notifications: Bildirishnoma
+  open_system_tray: Ochiq tizimning patnisi
   open_user_folder: Foydalanuvchi papkasini oching
   settings: Tez sozlamalar
   smart_charge: '- aqlli zaryad'
-  notifications: Bildirishnoma
+  volume: Hajmi
+settings:
+  app_settings: Ilova sozlamalari
+  log_out: Chiqish
+  power: Kuch
+  restart: Qayta ishga tushirish
+  shutdown: O'chirish; yopish
+  sleep: Uyqu
+  title: Sozlash
 unlabelled_tray: Bojavelilmagan aşınma ikonka
-context_menu:
-  remove: Modulni olib tashlash
-  add_module: Modul qo'shing
-  settings: Sozlamalar
-  task_manager: Vazifa menejeri

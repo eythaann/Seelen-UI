@@ -1,46 +1,46 @@
-media:
-  device:
-    comunications: যোগাযোগ
-    multimedia: মাল্টিমিডিয়া
-  master_volume: মাস্টার ভলিউম
-  input_device: প্রেরণকারী যন্ত্র
-  output_device: আউটপুট ডিভাইস
-  players: মিডিয়া প্লেয়ার
-network:
-  placeholder:
-    password: পাসওয়ার্ড
-  disconnect: সংযোগ বিচ্ছিন্ন
-  not_found: কোনও নেটওয়ার্ক পাওয়া যায় নি
-  connect: সংযুক্ত করুন
-  more: আরও নেটওয়ার্ক সেটিংস
-  hidden: লুকানো নেটওয়ার্ক
-  saved: সংরক্ষিত নেটওয়ার্ক
-  available: উপলব্ধ নেটওয়ার্ক
-  connected: সাথে সংযুক্ত
-  scanning: নেটওয়ার্কের জন্য স্ক্যান করা হচ্ছে
-  secured: এনক্রিপ্ট করা নেটওয়ার্ক
-settings:
-  app_settings: অ্যাপ সেটিংস
-  restart: আবার শুরু
-  sleep: ঘুম
-  title: সেটিংস
-  log_out: প্রস্থান
-  shutdown: শাটডাউন
-  power: শক্তি
-placeholder:
-  ethernet_connected: ইন্টারনেট সুবিধা
-  smart_charge: '- স্মার্ট চার্জ'
-  open_system_tray: ওপেন সিস্টেম ট্রে
-  battery_remaining: '% অবশিষ্ট'
-  settings: দ্রুত সেটিংস
-  ethernet_disconnected: কোনও ইন্টারনেট অ্যাক্সেস নেই
-  bluetooth_devices: ব্লুটুথ এবং ডিভাইস
-  volume: ভলিউম
-  open_user_folder: ব্যবহারকারী ফোল্ডারটি খুলুন
-  notifications: বিজ্ঞপ্তি
-unlabelled_tray: লেবেলযুক্ত ট্রে আইকন
 context_menu:
   add_module: মডিউল যুক্ত করুন
   remove: মডিউল সরান
   settings: সেটিংস
   task_manager: টাস্ক ম্যানেজার
+media:
+  device:
+    comunications: যোগাযোগ
+    multimedia: মাল্টিমিডিয়া
+  input_device: প্রেরণকারী যন্ত্র
+  master_volume: মাস্টার ভলিউম
+  output_device: আউটপুট ডিভাইস
+  players: মিডিয়া প্লেয়ার
+network:
+  available: উপলব্ধ নেটওয়ার্ক
+  connect: সংযুক্ত করুন
+  connected: সাথে সংযুক্ত
+  disconnect: সংযোগ বিচ্ছিন্ন
+  hidden: লুকানো নেটওয়ার্ক
+  more: আরও নেটওয়ার্ক সেটিংস
+  not_found: কোনও নেটওয়ার্ক পাওয়া যায় নি
+  placeholder:
+    password: পাসওয়ার্ড
+  saved: সংরক্ষিত নেটওয়ার্ক
+  scanning: নেটওয়ার্কের জন্য স্ক্যান করা হচ্ছে
+  secured: এনক্রিপ্ট করা নেটওয়ার্ক
+placeholder:
+  battery_remaining: '% অবশিষ্ট'
+  bluetooth_devices: ব্লুটুথ এবং ডিভাইস
+  ethernet_connected: ইন্টারনেট সুবিধা
+  ethernet_disconnected: কোনও ইন্টারনেট অ্যাক্সেস নেই
+  notifications: বিজ্ঞপ্তি
+  open_system_tray: ওপেন সিস্টেম ট্রে
+  open_user_folder: ব্যবহারকারী ফোল্ডারটি খুলুন
+  settings: দ্রুত সেটিংস
+  smart_charge: '- স্মার্ট চার্জ'
+  volume: ভলিউম
+settings:
+  app_settings: অ্যাপ সেটিংস
+  log_out: প্রস্থান
+  power: শক্তি
+  restart: আবার শুরু
+  shutdown: শাটডাউন
+  sleep: ঘুম
+  title: সেটিংস
+unlabelled_tray: লেবেলযুক্ত ট্রে আইকন

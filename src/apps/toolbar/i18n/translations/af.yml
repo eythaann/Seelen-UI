@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Kommunikasie
-  input_device: Insetapparaat
-  players: Mediaspelers
-  output_device: Uitsettoestel
-  master_volume: Meestervolume
-network:
-  placeholder:
-    password: Wagwoord
-  not_found: Geen netwerke gevind nie
-  disconnect: Afsluit ??
-  hidden: Verborge netwerk
-  connect: Konnekteer
-  more: Meer netwerkinstellings
-  scanning: Soek vir netwerke
-  secured: Geënkripteerde netwerk
-  available: Beskikbare netwerke
-  saved: Gestoorde netwerke
-  connected: Gekoppel aan
-settings:
-  restart: Begin oor
-  log_out: Teken uit
-  shutdown: Stilstand
-  title: Instellings
-  app_settings: Appinstellings
-  sleep: Slaap
-  power: Mag
-placeholder:
-  ethernet_connected: toegang tot die internet
-  battery_remaining: '% oorblywende'
-  smart_charge: '- Slim lading'
-  settings: Vinnige instellings
-  ethernet_disconnected: Geen internettoegang nie
-  bluetooth_devices: Bluetooth & toestelle
-  volume: Volume
-  open_user_folder: Open gebruikersmap
-  open_system_tray: Oop stelselbak
-  notifications: Kennisgewings
-unlabelled_tray: Ongeslote skinkbord -ikoon
 context_menu:
   add_module: Voeg module by
   remove: Verwyder die module
   settings: Instellings
   task_manager: Taakbestuurder
+media:
+  device:
+    comunications: Kommunikasie
+    multimedia: Multimedia
+  input_device: Insetapparaat
+  master_volume: Meestervolume
+  output_device: Uitsettoestel
+  players: Mediaspelers
+network:
+  available: Beskikbare netwerke
+  connect: Konnekteer
+  connected: Gekoppel aan
+  disconnect: Afsluit ??
+  hidden: Verborge netwerk
+  more: Meer netwerkinstellings
+  not_found: Geen netwerke gevind nie
+  placeholder:
+    password: Wagwoord
+  saved: Gestoorde netwerke
+  scanning: Soek vir netwerke
+  secured: Geënkripteerde netwerk
+placeholder:
+  battery_remaining: '% oorblywende'
+  bluetooth_devices: Bluetooth & toestelle
+  ethernet_connected: toegang tot die internet
+  ethernet_disconnected: Geen internettoegang nie
+  notifications: Kennisgewings
+  open_system_tray: Oop stelselbak
+  open_user_folder: Open gebruikersmap
+  settings: Vinnige instellings
+  smart_charge: '- Slim lading'
+  volume: Volume
+settings:
+  app_settings: Appinstellings
+  log_out: Teken uit
+  power: Mag
+  restart: Begin oor
+  shutdown: Stilstand
+  sleep: Slaap
+  title: Instellings
+unlabelled_tray: Ongeslote skinkbord -ikoon

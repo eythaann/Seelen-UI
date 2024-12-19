@@ -1,46 +1,46 @@
-media:
-  device:
-    comunications: مخابرات
-    multimedia: ملټي میډیا
-  input_device: ننوتنی وسیله
-  players: د میډیا لوبغاړي
-  master_volume: ماسټر برابره
-  output_device: د محصول وسیله
-network:
-  placeholder:
-    password: رمز
-  connect: نښلول
-  not_found: هیڅ جال ونه موندل شو
-  hidden: پټه شبکه
-  more: نور د شبکې تنظیمات
-  disconnect: منحل
-  saved: خوندي شوي شبکې
-  scanning: د شبکو لپاره سکین کول
-  available: شته شبکې
-  secured: کوډ شوی شبکه
-  connected: سره نښلول شوی
-settings:
-  restart: بیا روښانه کول
-  shutdown: ‍‍‍بندول
-  log_out: وتل
-  title: امستنې
-  sleep: ویده شه
-  app_settings: د ایپ امستنې
-  power: ځواک
-placeholder:
-  smart_charge: '- سمارټ چارج'
-  ethernet_disconnected: هیڅ انټرنیټ لاسرسی
-  battery_remaining: ٪ پاتې
-  ethernet_connected: انټرنیټ لاسرسی
-  open_system_tray: د خلاص سیسټم ټری
-  bluetooth_devices: بلوتوث او وسایل
-  volume: حجم
-  open_user_folder: د کارونکي فولډر خلاص کړئ
-  settings: ګړندي امستنې
-  notifications: خبرتیاوې
-unlabelled_tray: بې بنسټه ټری عکس
 context_menu:
   add_module: موډل اضافه کړئ
   remove: موډول لرې کړئ
   settings: ترتیبات
   task_manager: د دندې مدیر
+media:
+  device:
+    comunications: مخابرات
+    multimedia: ملټي میډیا
+  input_device: ننوتنی وسیله
+  master_volume: ماسټر برابره
+  output_device: د محصول وسیله
+  players: د میډیا لوبغاړي
+network:
+  available: شته شبکې
+  connect: نښلول
+  connected: سره نښلول شوی
+  disconnect: منحل
+  hidden: پټه شبکه
+  more: نور د شبکې تنظیمات
+  not_found: هیڅ جال ونه موندل شو
+  placeholder:
+    password: رمز
+  saved: خوندي شوي شبکې
+  scanning: د شبکو لپاره سکین کول
+  secured: کوډ شوی شبکه
+placeholder:
+  battery_remaining: ٪ پاتې
+  bluetooth_devices: بلوتوث او وسایل
+  ethernet_connected: انټرنیټ لاسرسی
+  ethernet_disconnected: هیڅ انټرنیټ لاسرسی
+  notifications: خبرتیاوې
+  open_system_tray: د خلاص سیسټم ټری
+  open_user_folder: د کارونکي فولډر خلاص کړئ
+  settings: ګړندي امستنې
+  smart_charge: '- سمارټ چارج'
+  volume: حجم
+settings:
+  app_settings: د ایپ امستنې
+  log_out: وتل
+  power: ځواک
+  restart: بیا روښانه کول
+  shutdown: ‍‍‍بندول
+  sleep: ویده شه
+  title: امستنې
+unlabelled_tray: بې بنسټه ټری عکس

@@ -1,188 +1,142 @@
-loading: 正在加载...
-inProgress: 进行中...
-cancel: 取消
-save: 保存
-quit: 退出
-open: 打开
-delete: 删除
-sides:
-  left: 左侧
-  right: 右侧
-  top: 顶部
-  bottom: 底部
-header:
-  labels:
-    general: 常规设置
-    seelen_bar: 精美工具栏
-    seelen_wm: 窗口管理器
-    seelen_weg: Dock / 任务栏
-    monitors: 显示器
-    specific_apps: 特定应用程序
-    shortcuts: 快捷键
-    developer: 开发者工具
-    info: 信息
-    seelen_rofi: 应用程序启动器
-    virtual_desk: 虚拟桌面
-    home: 首页
-    mods: 插件和小组件
-    seelen_wall: 壁纸管理器
-start:
-  title: 欢迎使用！
-  message: >-
-    欢迎来到 Seelen UI，这是一个终极桌面环境，内置了平铺窗口管理器，以提升您的 Windows 体验！
-    通过我们直观的界面和先进的功能，探索高效与多任务处理的新纪元。
-  message_accent: 以风格优化您的工作效率！
-general:
-  startup: 开机自启
-  language: 语言
-  theme:
-    label: 主题
-    placeholder: 选择主题
-    author: 作者
-    description: 描述
-    add: 添加主题
-    added: 已添加主题
-    enabled: 已启用主题
-    tags: 标签
-    selected: 已选择
-    available: 可用
-  icon_pack:
-    label: 图标包
-  accent_color: 主色调
-  wallpaper:
-    select: 选择壁纸
-  date_format: 日期格式
-toolbar:
-  enable: 启用精美工具栏
-  placeholder:
-    select: 工具栏结构
-    author: 作者
-    description: 描述
-  height: 高度
-  auto_hide: 自动隐藏
-  label: 工具栏
-  delay_to_hide: 延迟隐藏
-  delay_to_show: 延迟显示
-  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
-wm:
-  layout: 布局
-  author: 作者
-  description: 描述
-  space_between_containers: 容器间距
-  workspace_padding: 工作区内边距
-  workspace_offset: 工作区偏移（边距）
-  resize_delta: 大小调整增量（%）
-  border:
-    enable: 启用窗口边框
-    width: 边框宽度
-    offset: 边框偏移
-  enable: 启用平铺窗口管理器
-weg:
-  label: Dock / 任务栏
-  enable: 启用 Dock / 任务栏
-  width: 宽度
-  auto_hide: 自动隐藏
-  padding: 内边距
-  margin: 边距
-  gap: 间距
-  items:
-    label: 项目
-    size: 项目大小
-    zoom_size: 缩放尺寸（用于主题）
-    gap: 项目间距
-    visible_separators: 可见分隔符
-  dock_side: 位置
-  delay_to_hide: 隐藏延迟
-  delay_to_show: 显示延迟
-  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
-devtools:
-  enable: 启用开发工具
-  app_folders: 应用程序文件夹
-  install_folder: 安装文件夹
-  data_folder: 数据文件夹
-  settings_file: 设置文件
-  custom_config_file: 加载自定义配置文件
-  load: 加载
+app_launcher:
+  enable: 启用应用程序启动器
+  monitor: 要显示的显示器
+  runners:
+    cmd: 命令
+    explorer: 运行
+    label: 运行程序
 apps_configurations:
-  import: 导入
-  export: 导出
-  delete: 删除
-  swap: 交换
-  new: 新增
-  bundled_title: 与 Seelen 捆绑的应用程序配置
-  bundled_msg: 这些捆绑配置不可编辑，旨在为您提供无需定制的最佳体验。它们会自动为您配置最常用的应用程序。
-  confirm_delete_title: 确认删除
-  confirm_delete: 您确定要删除此配置吗？
-  search: 搜索
   app:
-    name: 名称
+    bindings: 绑定（注意两个选项均为必填项）
     category: 类别
     category_placeholder: 无
-    bindings: 绑定（注意两个选项均为必填项）
     monitor: 显示器
     monitor_placeholder: 无
-    workspace: 工作区
-    workspace_placeholder: 无
-    title_create: 创建 {{name}}
-    title_readonly: 查看 {{name}}
-    ok_edit: 更新
+    name: 名称
     ok_create: 创建
+    ok_edit: 更新
     ok_readonly: 作为新内容编辑
     options:
       float: 浮动
-      unmanage: 取消管理
       force: 强制管理
-      pinned: 固定
       hidden: 从 Dock / 任务栏 隐藏
+      pinned: 固定
+      unmanage: 取消管理
+    options_label: 其他
+    title_create: 创建 {{name}}
+    title_edit: 编辑 {{name}}
+    title_readonly: 查看 {{name}}
     weg_options_label: Dock / 任务栏 选项
     wm_options_label: 窗口管理器选项
-    options_label: 其他
-    title_edit: 编辑 {{name}}
+    workspace: 工作区
+    workspace_placeholder: 无
+  bundled_msg: 这些捆绑配置不可编辑，旨在为您提供无需定制的最佳体验。它们会自动为您配置最常用的应用程序。
+  bundled_title: 与 Seelen 捆绑的应用程序配置
+  confirm_delete: 您确定要删除此配置吗？
+  confirm_delete_title: 确认删除
+  delete: 删除
+  export: 导出
+  extra_info: Seelen UI  对每个应用程序只使用一个标识符（找到的第一个匹配），因此“如何指定”的顺序很重要，最新添加的将优先，注册表默认从新到旧排序。
   identifier:
-    remove: 删除块
+    add_block: 添加块
+    and: 与
     id: 标识符
     kind: 标识方式
     matching_strategy: 匹配策略
     negation: 否定匹配
-    and: 与
     or: 或
-    add_block: 添加块
-  extra_info: Seelen UI  对每个应用程序只使用一个标识符（找到的第一个匹配），因此“如何指定”的顺序很重要，最新添加的将优先，注册表默认从新到旧排序。
+    remove: 删除块
+  import: 导入
+  new: 新增
+  search: 搜索
+  swap: 交换
+cancel: 取消
+close: 关闭
+delete: 删除
+devtools:
+  app_folders: 应用程序文件夹
+  custom_config_file: 加载自定义配置文件
+  data_folder: 数据文件夹
+  enable: 启用开发工具
+  install_folder: 安装文件夹
+  load: 加载
+  settings_file: 设置文件
 extras:
-  version: 版本
-  links: 官方链接
-  github: GitHub
   discord: Discord
-  relaunch: 重启应用
   exit: 退出 / 关闭
+  github: GitHub
+  links: 官方链接
+  relaunch: 重启应用
+  version: 版本
+general:
+  accent_color: 主色调
+  date_format: 日期格式
+  icon_pack:
+    label: 图标包
+  language: 语言
+  startup: 开机自启
+  theme:
+    add: 添加主题
+    added: 已添加主题
+    author: 作者
+    available: 可用
+    description: 描述
+    enabled: 已启用主题
+    label: 主题
+    placeholder: 选择主题
+    selected: 已选择
+    tags: 标签
+  wallpaper:
+    select: 选择壁纸
+header:
+  labels:
+    developer: 开发者工具
+    general: 常规设置
+    home: 首页
+    info: 信息
+    mods: 插件和小组件
+    monitors: 显示器
+    seelen_bar: 精美工具栏
+    seelen_rofi: 应用程序启动器
+    seelen_wall: 壁纸管理器
+    seelen_weg: Dock / 任务栏
+    seelen_wm: 窗口管理器
+    shortcuts: 快捷键
+    specific_apps: 特定应用程序
+    virtual_desk: 虚拟桌面
+inherit: 继承
+inProgress: 进行中...
+insert: 插入
+loading: 正在加载...
+miscellaneous: 杂项
+mods:
+  plugins: 插件
+  target: 目标
+  widgets: 小部件
+monitors_configurations:
+  label: 监视 {{index}}
+more: 更多
+open: 打开
+quit: 退出
+remove: 消除
+save: 保存
+save_and_restart: 保存并重启应用
 shortcuts:
   enable: 启用集成快捷键 (ahk)
   enable_tooltip: 如果您要使用 Seelen Core API 实现自定义快捷键，请禁用此项。
   labels:
-    reserve_top: 预留顶部
-    reserve_bottom: 预留底部
-    reserve_left: 预留左侧
-    reserve_right: 预留右侧
-    reserve_float: 浮动储备
-    reserve_stack: 堆栈储备
-    focus_top: 聚焦顶部
+    decrease_height: 降低高度
+    decrease_width: 缩减宽度
     focus_bottom: 聚焦底部
+    focus_latest: 最新聚焦
     focus_left: 聚焦左侧
     focus_right: 聚焦右侧
-    focus_latest: 最新聚焦
-    increase_width: 增加宽度
-    decrease_width: 缩减宽度
+    focus_top: 聚焦顶部
     increase_height: 增加高度
-    decrease_height: 降低高度
-    restore_sizes: 恢复尺寸
-    switch_workspace_2: 切换至工作区 2
-    switch_workspace_3: 切换至工作区 3
-    switch_workspace_4: 切换至工作区 4
-    switch_workspace_5: 切换至工作区 5
-    switch_workspace_6: 切换至工作区 6
-    switch_workspace_7: 切换至工作区 7
-    switch_workspace_8: 切换至工作区 8
-    switch_workspace_9: 切换至工作区 9
+    increase_width: 增加宽度
+    misc_open_settings: 打开设置
+    misc_toggle_lock_tracing: 切换锁定跟踪（日志）
+    misc_toggle_win_event_tracing: 切换 Win 事件跟踪（日志）
     move_to_workspace_0: 移动至工作区 0
     move_to_workspace_1: 移动至工作区 1
     move_to_workspace_2: 移动至工作区 2
@@ -193,6 +147,13 @@ shortcuts:
     move_to_workspace_7: 移动至工作区 7
     move_to_workspace_8: 移动至工作区 8
     move_to_workspace_9: 移动至工作区 9
+    reserve_bottom: 预留底部
+    reserve_float: 浮动储备
+    reserve_left: 预留左侧
+    reserve_right: 预留右侧
+    reserve_stack: 堆栈储备
+    reserve_top: 预留顶部
+    restore_sizes: 恢复尺寸
     send_to_workspace_0: 发送至工作区 0
     send_to_workspace_1: 发送至工作区 1
     send_to_workspace_2: 发送至工作区 2
@@ -203,50 +164,89 @@ shortcuts:
     send_to_workspace_7: 发送至工作区 7
     send_to_workspace_8: 发送至工作区 8
     send_to_workspace_9: 发送至工作区 9
-    switch_workspace_1: 切换至工作区 1
     switch_workspace_0: 切换至工作区 0
-    misc_toggle_win_event_tracing: 切换 Win 事件跟踪（日志）
-    misc_toggle_lock_tracing: 切换锁定跟踪（日志）
-    misc_open_settings: 打开设置
+    switch_workspace_1: 切换至工作区 1
+    switch_workspace_2: 切换至工作区 2
+    switch_workspace_3: 切换至工作区 3
+    switch_workspace_4: 切换至工作区 4
+    switch_workspace_5: 切换至工作区 5
+    switch_workspace_6: 切换至工作区 6
+    switch_workspace_7: 切换至工作区 7
+    switch_workspace_8: 切换至工作区 8
+    switch_workspace_9: 切换至工作区 9
     toggle_launcher: 切换
-  reset: 重置为默认值
   readonly_tooltip: 这是一个只读的快捷键
-vd:
-  strategy:
-    native: 原生
-    label: 虚拟桌面策略
-    seelen: Seelen
-  disabled_windows_version: 本地虚拟桌面策略不适用于您的 Windows 版本。
-save_and_restart: 保存并重启应用
-monitors_configurations:
-  label: 监视 {{index}}
-wall:
-  backgrounds: 壁纸
-  no_background: 空幻灯片，使用主题背景。
-  enable: 启用壁纸管理器
-  interval: 更换壁纸的时间间隔
-  random: 随机更改壁纸
-  seconds: 秒
-  minutes: 分钟
-  hours: 小时
-app_launcher:
-  runners:
-    cmd: 命令
-    explorer: 运行
-    label: 运行程序
-  monitor: 要显示的显示器
-  enable: 启用应用程序启动器
-insert: 插入
-inherit: 继承
-more: 更多
-close: 关闭
+  reset: 重置为默认值
+sides:
+  bottom: 底部
+  left: 左侧
+  right: 右侧
+  top: 顶部
+start:
+  message: >-
+    欢迎来到 Seelen UI，这是一个终极桌面环境，内置了平铺窗口管理器，以提升您的 Windows 体验！
+    通过我们直观的界面和先进的功能，探索高效与多任务处理的新纪元。
+  message_accent: 以风格优化您的工作效率！
+  title: 欢迎使用！
+toolbar:
+  auto_hide: 自动隐藏
+  delay_to_hide: 延迟隐藏
+  delay_to_show: 延迟显示
+  enable: 启用精美工具栏
+  height: 高度
+  label: 工具栏
+  placeholder:
+    author: 作者
+    description: 描述
+    select: 工具栏结构
+  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
 update:
   available: 更新可用！
-  downloading: 正在下载...
   channel: 更新频道
-miscellaneous: 杂项
-mods:
-  widgets: 小部件
-  target: 目标
-  plugins: 插件
-remove: 消除
+  downloading: 正在下载...
+vd:
+  disabled_windows_version: 本地虚拟桌面策略不适用于您的 Windows 版本。
+  strategy:
+    label: 虚拟桌面策略
+    native: 原生
+    seelen: Seelen
+wall:
+  backgrounds: 壁纸
+  enable: 启用壁纸管理器
+  hours: 小时
+  interval: 更换壁纸的时间间隔
+  minutes: 分钟
+  no_background: 空幻灯片，使用主题背景。
+  random: 随机更改壁纸
+  seconds: 秒
+weg:
+  auto_hide: 自动隐藏
+  delay_to_hide: 隐藏延迟
+  delay_to_show: 显示延迟
+  dock_side: 位置
+  enable: 启用 Dock / 任务栏
+  gap: 间距
+  items:
+    gap: 项目间距
+    label: 项目
+    size: 项目大小
+    visible_separators: 可见分隔符
+    zoom_size: 缩放尺寸（用于主题）
+  label: Dock / 任务栏
+  margin: 边距
+  padding: 内边距
+  use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
+  width: 宽度
+wm:
+  author: 作者
+  border:
+    enable: 启用窗口边框
+    offset: 边框偏移
+    width: 边框宽度
+  description: 描述
+  enable: 启用平铺窗口管理器
+  layout: 布局
+  resize_delta: 大小调整增量（%）
+  space_between_containers: 容器间距
+  workspace_offset: 工作区偏移（边距）
+  workspace_padding: 工作区内边距

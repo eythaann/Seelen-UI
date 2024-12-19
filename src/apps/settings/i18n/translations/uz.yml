@@ -1,265 +1,265 @@
-sides:
-  top: Eng yuqori
-  right: To'g'ri
-  bottom: Pastki
-  left: Chapda
-header:
-  labels:
-    info: Ma `lumot
-    seelen_wm: Oyna menejeri
-    seelen_bar: Fashion asboblar paneli
-    monitors: Monitorlar
-    developer: Ishlab chiqaruvchi
-    general: Umumiy
-    specific_apps: Muayyan ilovalar
-    shortcuts: Yorliqlar
-    seelen_weg: Dok / vazifalar paneli
-    seelen_rofi: Ilovani ishga tushirish vositasi
-    virtual_desk: Virtual ish stollari
-    home: Uy
-    mods: Plaginlar va vidjetlar
-    seelen_wall: Fon rasmi menejeri
-start:
-  message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
-  message: >-
-    Windows tajribangizni oshirish uchun "Windows" bosh murabbiyi bo'lgan
-    Windows menejeriga ega Seelen UI-ga xush kelibsiz! Bizning intuitiv
-    interfeysimiz va rivojlangan xususiyatlarimiz bilan samaradorlik va ko'p
-    bosqichli yangi davrni o'rganing.
-  title: Xush kelibsiz!
-general:
-  theme:
-    description: Tavsif
-    placeholder: Mavzuni tanlang
-    label: Mavzu haqida ma'lumot
-    enabled: Mavzular yoqilgan
-    added: Mavzu allaqachon qo'shilgan
-    author: Muallif
-    add: Mavzuni qo'shing
-    tags: Teglar
-    available: Mavjud
-    selected: Tanlangan
-  language: Til
-  startup: Ishga tushirishda ishlaydimi?
-  icon_pack:
-    label: Ikonka paketlari
-  accent_color: Urg'u rangi
-  wallpaper:
-    select: Fon rasmini tanlang
-  date_format: Sana formati
-toolbar:
-  placeholder:
-    description: Tavsif
-    select: Asboblar paneli tuzilishi
-    author: Muallif
-  enable: Fashr asboblar panelini yoqing
-  height: Balandlik
-  auto_hide: Avtomatik yashirish
-  label: Asboblar paneli
-  delay_to_hide: Yashirish uchun kechikish
-  delay_to_show: Ko'rsatish uchun kechikish
-  use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
-wm:
-  border:
-    width: Chegara kengligi
-    offset: Chegara ofset
-    enable: Oynaning chegarasini yoqing
-  description: Tavsif
-  space_between_containers: Idishlar orasidagi bo'shliq
-  workspace_offset: Ishxonalar ofset (marjalar)
-  author: Muallif
-  layout: Tartib
-  resize_delta: Delta (%) ni o'zgartiring
-  workspace_padding: Ish plakding
-  enable: Tiling oyna boshqaruvchisini yoqing
-weg:
-  items:
-    gap: Buyumlar orasidagi bo'shliq
-    zoom_size: Zomed o'lchami (mavzular uchun ishlatiladi)
-    label: Narsalar
-    size: Element hajmi
-    visible_separators: Ko'rinadigan ajratuvchi
-  label: Dok / vazifalar paneli
-  padding: Plomba
-  width: Kenglik
-  auto_hide: Avtomatik yashirish
-  enable: Dock / vazifalar panelini yoqing
-  gap: Bo'shliq
-  margin: Marja
-  dock_side: Pozitsiya
-  delay_to_show: Ko'rsatish uchun kechikish
-  delay_to_hide: Yashirish uchun kechikish
-  use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
-devtools:
-  install_folder: O'rnatish papkasini o'rnatish
-  enable: Ishlab chiqaruvchi vositalarni yoqish
-  app_folders: Ilova papkalari
-  custom_config_file: Custom Config faylini yuklang
-  data_folder: Ma'lumotlar papkasi
-  settings_file: Sozlamalar fayli
-  load: Yuklamoq
+app_launcher:
+  enable: APP ishga tushirishni yoqish
+  monitor: Ko'rish uchun monitor
+  runners:
+    cmd: Buyruq
+    explorer: Yugurish
+    label: Yuguruvchilar
 apps_configurations:
   app:
-    options:
-      force: Kuchni boshqarish
-      pinned: Zebo
-      float: Suzmoq
-      unmanage: Ishtiyoq
-      hidden: Dock / vazifalar panelidan yashirish
-    ok_readonly: Yangi sifatida tahrirlash
-    title_readonly: Ko'rish {{ism}}
-    title_create: '{{Ism}} yaratish'
-    monitor: Monitor
     bindings: Bog'lash (eslatma ikkalasi ham talab qilinadi)
-    monitor_placeholder: Hech biri
-    category_placeholder: Hech biri
-    name: Ism
-    workspace: Ish maydoni
-    workspace_placeholder: Hech biri
     category: Tili
+    category_placeholder: Hech biri
+    monitor: Monitor
+    monitor_placeholder: Hech biri
+    name: Ism
     ok_create: Yaratmoq
     ok_edit: Yangilamoq
-    wm_options_label: Oyna boshqaruvchisi variantlari
-    weg_options_label: Dok / vazifalar paneli
+    ok_readonly: Yangi sifatida tahrirlash
+    options:
+      float: Suzmoq
+      force: Kuchni boshqarish
+      hidden: Dock / vazifalar panelidan yashirish
+      pinned: Zebo
+      unmanage: Ishtiyoq
     options_label: Qo'shimcha variantlar
+    title_create: '{{Ism}} yaratish'
     title_edit: '{{Ismi}} tahrirlash'
-  identifier:
-    add_block: Blokni qo'shish
-    remove: Blokni o'chirish
-    matching_strategy: Mos keladigan strategiya
-    negation: Mos kelmaslik
-    id: Identifikator
-    or: Yoki
-    kind: Aniqlang
-    and: Va
-  search: Qidirmoq
-  import: Import
-  confirm_delete: Ushbu konfiguratsiyani o'chirishni xohlayotganingizga ishonchingiz komilmi?
-  confirm_delete_title: O'chirishni tasdiqlang
+    title_readonly: Ko'rish {{ism}}
+    weg_options_label: Dok / vazifalar paneli
+    wm_options_label: Oyna boshqaruvchisi variantlari
+    workspace: Ish maydoni
+    workspace_placeholder: Hech biri
   bundled_msg: >-
     Ushbu yig'ilgan konfiguratsiyalar tahrirlanmaydi va sizga eng yaxshi
     tajribani taqdim etishsiz taqdim etish uchun mo'ljallangan. Ular avtomatik
     ravishda siz uchun eng keng tarqalgan dasturlarni sozlaydi.
   bundled_title: Dastur konfigurasi Seelen bilan bog'langan
-  export: Eksport
-  new: Yangi
+  confirm_delete: Ushbu konfiguratsiyani o'chirishni xohlayotganingizga ishonchingiz komilmi?
+  confirm_delete_title: O'chirishni tasdiqlang
   delete: O'chirmoq
-  swap: Almashmoq
+  export: Eksport
   extra_info: >-
     Seelen UI har bir ilovada faqat bitta identifikatordan foydalanadi (birinchi
     moslik topildi), shuning uchun qanday belgilanish tartibi muhim, oxirgi
     qoʻshilganlar ustuvor boʻladi, chunki jadval sukut boʻyicha oxirgidan
     eskisiga saralanganligini unutmang.
+  identifier:
+    add_block: Blokni qo'shish
+    and: Va
+    id: Identifikator
+    kind: Aniqlang
+    matching_strategy: Mos keladigan strategiya
+    negation: Mos kelmaslik
+    or: Yoki
+    remove: Blokni o'chirish
+  import: Import
+  new: Yangi
+  search: Qidirmoq
+  swap: Almashmoq
+cancel: Bekor qilmoq
+close: Yaqin
+delete: O'chirmoq
+devtools:
+  app_folders: Ilova papkalari
+  custom_config_file: Custom Config faylini yuklang
+  data_folder: Ma'lumotlar papkasi
+  enable: Ishlab chiqaruvchi vositalarni yoqish
+  install_folder: O'rnatish papkasini o'rnatish
+  load: Yuklamoq
+  settings_file: Sozlamalar fayli
 extras:
-  exit: Chiqish / chiqish
-  links: Rasmiy havolalar
-  github: Gitul
   discord: Kelishmovchilik
-  version: Versiya
+  exit: Chiqish / chiqish
+  github: Gitul
+  links: Rasmiy havolalar
   relaunch: Qolma
-shortcuts:
+  version: Versiya
+general:
+  accent_color: Urg'u rangi
+  date_format: Sana formati
+  icon_pack:
+    label: Ikonka paketlari
+  language: Til
+  startup: Ishga tushirishda ishlaydimi?
+  theme:
+    add: Mavzuni qo'shing
+    added: Mavzu allaqachon qo'shilgan
+    author: Muallif
+    available: Mavjud
+    description: Tavsif
+    enabled: Mavzular yoqilgan
+    label: Mavzu haqida ma'lumot
+    placeholder: Mavzuni tanlang
+    selected: Tanlangan
+    tags: Teglar
+  wallpaper:
+    select: Fon rasmini tanlang
+header:
   labels:
-    send_to_workspace_1: Ish maydoni 1-ga yuboring
-    decrease_height: Balandlikni kamaytirish
-    increase_height: Balandlikni oshirish
-    switch_workspace_7: Ish maydoni 7-ga o'ting
-    move_to_workspace_5: Ish maydoni 5 ga o'ting 5
-    switch_workspace_6: Ish maydoni 6 ga o'tish
-    reserve_bottom: Zaxira pastki
-    move_to_workspace_1: Ish maydoni 1 ga o'ting 1
-    move_to_workspace_6: Ish maydoni 6-ga o'ting
-    focus_right: Joylashtirish
-    move_to_workspace_8: Ish maydoni 8 ga o'ting 8
-    decrease_width: Kenglikni kamaytirish
-    send_to_workspace_7: Ish maydoni 7-ga yuboring
-    move_to_workspace_0: Ish maydoni 0 ga o'ting
-    reserve_top: Zaxira tepasi
-    send_to_workspace_9: Ish maydoni 9-ga yuboring
-    switch_workspace_8: Ish maydoni 8 ga o'tish
-    move_to_workspace_3: Ish maydoni 3 ga o'ting
-    reserve_right: Qo'riqxona
-    increase_width: Kenglikni oshirish
-    reserve_stack: Zaxira to'plami
-    switch_workspace_9: Ish maydoni 9 ga o'tish 9
-    focus_latest: Eng so'nggi
-    move_to_workspace_2: Ish maydoni 2-ga o'ting
-    focus_left: Fince chap
-    move_to_workspace_9: Ish maydoniga o'tish 9
-    switch_workspace_3: Ish maydoni 3 ga o'tish
-    restore_sizes: O'lchamlarini tiklash
-    send_to_workspace_5: Ish maydoni 5-ga yuboring 5
-    focus_top: Face Top
-    move_to_workspace_4: Ish maydoni 4-ga o'ting
-    send_to_workspace_4: Ish maydoni 4-ga yuboring
-    send_to_workspace_8: Ish maydoni 8-ga yuboring
-    switch_workspace_2: Ish maydoni 2-ga o'ting
-    focus_bottom: Fokus suvi
-    reserve_float: Suzmoq
-    send_to_workspace_2: Ish maydoni 2-ga yuboring
-    switch_workspace_5: Ish maydoni 5 ga o'tish
-    reserve_left: Zaxira chap
-    send_to_workspace_6: Ish maydoni 6-ga yuboring
-    move_to_workspace_7: Ish maydoni 7-ga o'ting
-    switch_workspace_4: Ish maydoni 4-ga o'ting
-    send_to_workspace_3: Ish maydoni 3-ga yuboring
-    send_to_workspace_0: Ish maydoni 0 ga yuboring
-    switch_workspace_0: Ish maydoni 1 ga o'tish
-    switch_workspace_1: Ish maydoni 2-ga o'ting
-    misc_open_settings: Ochiq sozlamalar
-    misc_toggle_lock_tracing: Qulfni qaytarish (jurnallar)
-    misc_toggle_win_event_tracing: Tap The The The The Trecing (jurnallar)
-    toggle_launcher: Almashtirmoq
+    developer: Ishlab chiqaruvchi
+    general: Umumiy
+    home: Uy
+    info: Ma `lumot
+    mods: Plaginlar va vidjetlar
+    monitors: Monitorlar
+    seelen_bar: Fashion asboblar paneli
+    seelen_rofi: Ilovani ishga tushirish vositasi
+    seelen_wall: Fon rasmi menejeri
+    seelen_weg: Dok / vazifalar paneli
+    seelen_wm: Oyna menejeri
+    shortcuts: Yorliqlar
+    specific_apps: Muayyan ilovalar
+    virtual_desk: Virtual ish stollari
+inherit: Meros qilib olmoq
+inProgress: Jarayonda...
+insert: Qo'shmoq
+loading: Yuklash ...
+miscellaneous: Har xil
+mods:
+  plugins: Plaginlar
+  target: Maqsad
+  widgets: Vidjetlar
+monitors_configurations:
+  label: '{{Indeks}}'
+more: Ko'proq
+open: Ochiq
+quit: Ketmoq
+remove: Olib tashlamoq
+save: Tejash
+save_and_restart: Saqlang va qayta yoqing
+shortcuts:
   enable: Birlashtirilgan yorliqlarni yoqish (AHK)
   enable_tooltip: >-
     Agar siz Seelen Core API yordamida o'z yorlig'ingizni amalga oshirsangiz,
     o'chiring
-  reset: Standartlarga qayta o'rnating
+  labels:
+    decrease_height: Balandlikni kamaytirish
+    decrease_width: Kenglikni kamaytirish
+    focus_bottom: Fokus suvi
+    focus_latest: Eng so'nggi
+    focus_left: Fince chap
+    focus_right: Joylashtirish
+    focus_top: Face Top
+    increase_height: Balandlikni oshirish
+    increase_width: Kenglikni oshirish
+    misc_open_settings: Ochiq sozlamalar
+    misc_toggle_lock_tracing: Qulfni qaytarish (jurnallar)
+    misc_toggle_win_event_tracing: Tap The The The The Trecing (jurnallar)
+    move_to_workspace_0: Ish maydoni 0 ga o'ting
+    move_to_workspace_1: Ish maydoni 1 ga o'ting 1
+    move_to_workspace_2: Ish maydoni 2-ga o'ting
+    move_to_workspace_3: Ish maydoni 3 ga o'ting
+    move_to_workspace_4: Ish maydoni 4-ga o'ting
+    move_to_workspace_5: Ish maydoni 5 ga o'ting 5
+    move_to_workspace_6: Ish maydoni 6-ga o'ting
+    move_to_workspace_7: Ish maydoni 7-ga o'ting
+    move_to_workspace_8: Ish maydoni 8 ga o'ting 8
+    move_to_workspace_9: Ish maydoniga o'tish 9
+    reserve_bottom: Zaxira pastki
+    reserve_float: Suzmoq
+    reserve_left: Zaxira chap
+    reserve_right: Qo'riqxona
+    reserve_stack: Zaxira to'plami
+    reserve_top: Zaxira tepasi
+    restore_sizes: O'lchamlarini tiklash
+    send_to_workspace_0: Ish maydoni 0 ga yuboring
+    send_to_workspace_1: Ish maydoni 1-ga yuboring
+    send_to_workspace_2: Ish maydoni 2-ga yuboring
+    send_to_workspace_3: Ish maydoni 3-ga yuboring
+    send_to_workspace_4: Ish maydoni 4-ga yuboring
+    send_to_workspace_5: Ish maydoni 5-ga yuboring 5
+    send_to_workspace_6: Ish maydoni 6-ga yuboring
+    send_to_workspace_7: Ish maydoni 7-ga yuboring
+    send_to_workspace_8: Ish maydoni 8-ga yuboring
+    send_to_workspace_9: Ish maydoni 9-ga yuboring
+    switch_workspace_0: Ish maydoni 1 ga o'tish
+    switch_workspace_1: Ish maydoni 2-ga o'ting
+    switch_workspace_2: Ish maydoni 2-ga o'ting
+    switch_workspace_3: Ish maydoni 3 ga o'tish
+    switch_workspace_4: Ish maydoni 4-ga o'ting
+    switch_workspace_5: Ish maydoni 5 ga o'tish
+    switch_workspace_6: Ish maydoni 6 ga o'tish
+    switch_workspace_7: Ish maydoni 7-ga o'ting
+    switch_workspace_8: Ish maydoni 8 ga o'tish
+    switch_workspace_9: Ish maydoni 9 ga o'tish 9
+    toggle_launcher: Almashtirmoq
   readonly_tooltip: Bu faqat o'qish faqat yorliqidir
-inProgress: Jarayonda...
-open: Ochiq
-save: Tejash
-loading: Yuklash ...
-cancel: Bekor qilmoq
-delete: O'chirmoq
-quit: Ketmoq
-vd:
-  strategy:
-    label: Virtual ish stoli strategiyasi
-    native: Mahalliy
-    seelen: Seelen
-  disabled_windows_version: >-
-    National Virtual ish strategiya strategiyasi Windows versiyangiz uchun
-    mavjud emas.
-save_and_restart: Saqlang va qayta yoqing
-monitors_configurations:
-  label: '{{Indeks}}'
-wall:
-  backgrounds: Fon rasmlari
-  no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
-  enable: Fon rasmi menejerini yoqing
-  random: Tasodifiy slayd-shou
-  interval: Har bir devor rasmini o'zgartiring
-  hours: soat
-  minutes: daqiqa
-  seconds: soniya
-app_launcher:
-  runners:
-    cmd: Buyruq
-    label: Yuguruvchilar
-    explorer: Yugurish
-  monitor: Ko'rish uchun monitor
-  enable: APP ishga tushirishni yoqish
-more: Ko'proq
-inherit: Meros qilib olmoq
-insert: Qo'shmoq
-close: Yaqin
+  reset: Standartlarga qayta o'rnating
+sides:
+  bottom: Pastki
+  left: Chapda
+  right: To'g'ri
+  top: Eng yuqori
+start:
+  message: >-
+    Windows tajribangizni oshirish uchun "Windows" bosh murabbiyi bo'lgan
+    Windows menejeriga ega Seelen UI-ga xush kelibsiz! Bizning intuitiv
+    interfeysimiz va rivojlangan xususiyatlarimiz bilan samaradorlik va ko'p
+    bosqichli yangi davrni o'rganing.
+  message_accent: O'zingizning mahsuldorligingizni uslub bilan optimallashtiring!
+  title: Xush kelibsiz!
+toolbar:
+  auto_hide: Avtomatik yashirish
+  delay_to_hide: Yashirish uchun kechikish
+  delay_to_show: Ko'rsatish uchun kechikish
+  enable: Fashr asboblar panelini yoqing
+  height: Balandlik
+  label: Asboblar paneli
+  placeholder:
+    author: Muallif
+    description: Tavsif
+    select: Asboblar paneli tuzilishi
+  use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
 update:
   available: Yangilanish mavjud!
   channel: Kanalni yangilash
   downloading: Yuklab olish ...
-miscellaneous: Har xil
-mods:
-  plugins: Plaginlar
-  widgets: Vidjetlar
-  target: Maqsad
-remove: Olib tashlamoq
+vd:
+  disabled_windows_version: >-
+    National Virtual ish strategiya strategiyasi Windows versiyangiz uchun
+    mavjud emas.
+  strategy:
+    label: Virtual ish stoli strategiyasi
+    native: Mahalliy
+    seelen: Seelen
+wall:
+  backgrounds: Fon rasmlari
+  enable: Fon rasmi menejerini yoqing
+  hours: soat
+  interval: Har bir devor rasmini o'zgartiring
+  minutes: daqiqa
+  no_background: O'rniga slaydshown, ularning o'rniga formatdan foydalanib.
+  random: Tasodifiy slayd-shou
+  seconds: soniya
+weg:
+  auto_hide: Avtomatik yashirish
+  delay_to_hide: Yashirish uchun kechikish
+  delay_to_show: Ko'rsatish uchun kechikish
+  dock_side: Pozitsiya
+  enable: Dock / vazifalar panelini yoqing
+  gap: Bo'shliq
+  items:
+    gap: Buyumlar orasidagi bo'shliq
+    label: Narsalar
+    size: Element hajmi
+    visible_separators: Ko'rinadigan ajratuvchi
+    zoom_size: Zomed o'lchami (mavzular uchun ishlatiladi)
+  label: Dok / vazifalar paneli
+  margin: Marja
+  padding: Plomba
+  use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
+  width: Kenglik
+wm:
+  author: Muallif
+  border:
+    enable: Oynaning chegarasini yoqing
+    offset: Chegara ofset
+    width: Chegara kengligi
+  description: Tavsif
+  enable: Tiling oyna boshqaruvchisini yoqing
+  layout: Tartib
+  resize_delta: Delta (%) ni o'zgartiring
+  space_between_containers: Idishlar orasidagi bo'shliq
+  workspace_offset: Ishxonalar ofset (marjalar)
+  workspace_padding: Ish plakding

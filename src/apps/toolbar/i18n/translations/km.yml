@@ -1,46 +1,46 @@
+context_menu:
+  add_module: បន្ថែមម៉ូឌុល
+  remove: យកម៉ូឌុលចេញ
+  settings: ការកំណត់
+  task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច
 media:
   device:
     comunications: ការអាេយអាេយរយការត្យេដ្ឋ
     multimedia: ពហុមេឌា
   input_device: ឧបករណ៍បញ្ចូល
+  master_volume: កម្រិតសំឡេងមេ
   output_device: ឧបករណ៍ទិន្នផល
   players: អ្នកលេងប្រព័ន្ធផ្សព្វផ្សាយ
-  master_volume: កម្រិតសំឡេងមេ
 network:
+  available: បណ្តាញដែលមាន
+  connect: តផ្ជាប់
+  connected: បានភ្ជាប់ទៅ
+  disconnect: ផ្ដាច់
+  hidden: បណ្តាញដែលលាក់
+  more: ការកំណត់បណ្តាញច្រើនទៀត
+  not_found: រកមិនឃើញបណ្តាញ
   placeholder:
     password: ហក្យសមងាត់
-  not_found: រកមិនឃើញបណ្តាញ
-  hidden: បណ្តាញដែលលាក់
-  connect: តផ្ជាប់
-  more: ការកំណត់បណ្តាញច្រើនទៀត
-  disconnect: ផ្ដាច់
   saved: បណ្តាញដែលបានរក្សាទុក
-  connected: បានភ្ជាប់ទៅ
-  available: បណ្តាញដែលមាន
   scanning: កំពុងស្កេនរកបណ្តាញ
   secured: បណ្តាញដែលបានអ៊ិនគ្រីប
-settings:
-  shutdown: បិទ
-  log_out: ចាកចេញ
-  app_settings: ការកំណត់កម្មវិធី
-  title: ការកំណត់
-  restart: រ្យេដិតនោ
-  sleep: ដមនេក
-  power: អមនាច
 placeholder:
   battery_remaining: នៅសល់%
-  ethernet_connected: ការចូលប្រើអ៊ីនធឺណិត
   bluetooth_devices: ប៊្លូធូសនិងឧបករណ៍
-  open_system_tray: បើកថាសប្រព័ន្ធ
+  ethernet_connected: ការចូលប្រើអ៊ីនធឺណិត
   ethernet_disconnected: គ្មានការចូលប្រើអ៊ីនធឺណិតទេ
-  smart_charge: '- គិតថ្លៃឆ្លាត'
-  open_user_folder: បើកថតអ្នកប្រើ
-  volume: ចមនយន
-  settings: ការកំណត់រហ័ស
   notifications: ការជូនដំណឹង
+  open_system_tray: បើកថាសប្រព័ន្ធ
+  open_user_folder: បើកថតអ្នកប្រើ
+  settings: ការកំណត់រហ័ស
+  smart_charge: '- គិតថ្លៃឆ្លាត'
+  volume: ចមនយន
+settings:
+  app_settings: ការកំណត់កម្មវិធី
+  log_out: ចាកចេញ
+  power: អមនាច
+  restart: រ្យេដិតនោ
+  shutdown: បិទ
+  sleep: ដមនេក
+  title: ការកំណត់
 unlabelled_tray: រូបតំណាងថាឡៃដែលមិនស្មោះត្រង់
-context_menu:
-  remove: យកម៉ូឌុលចេញ
-  add_module: បន្ថែមម៉ូឌុល
-  settings: ការកំណត់
-  task_manager: កម្មវិធីគ្រប់គ្រងភារកិច្ច

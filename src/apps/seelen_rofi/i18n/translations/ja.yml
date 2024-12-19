@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    explorer: エクスプローラー
     cmd: コマンド プロンプト
+    explorer: エクスプローラー
 footer:
   shortcuts: ショートカットを表示
 header:
   search: アプリ、コマンド、またはパス
 item:
-  pin: ドックにピン留め
   open_location: ファイルの場所を開く
+  pin: ドックにピン留め

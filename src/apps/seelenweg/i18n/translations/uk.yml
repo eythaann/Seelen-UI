@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Додати медіа -модуль
-  start: Додайте модуль запуску
-  add_folder: Закріпіть спеціальну папку
-  add_file: Закріпіть власний файл
-  settings: Налаштування
-  task_manager: Диспетчер задач
 app_menu:
-  run_as: Запустити від імені адміністратора
-  pin_to_center: Шпилька до центру
-  copy_handles: Копіювати ручки
-  open_file_location: Розташування відкритого файлу
-  close_multiple: Закрити все
-  pin_to_right: Праворуч праворуч
   close: Закривати
-  unpin: Розмивати
-  pin: Шпилька
-  pin_to_left: Шпилька зліва
+  close_multiple: Закрити все
+  copy_handles: Копіювати ручки
   kill: Процес знищення
   kill_multiple: Закрити всі процеси
+  open_file_location: Розташування відкритого файлу
+  pin: Шпилька
+  pin_to_center: Шпилька до центру
+  pin_to_left: Шпилька зліва
+  pin_to_right: Праворуч праворуч
+  run_as: Запустити від імені адміністратора
+  unpin: Розмивати
+media:
+  not_playing: Ніщо не грає
 media_menu:
   remove: Видалити медіа -модуль
 start_menu:
   remove: Зніміть модуль запуску
-media:
-  not_playing: Ніщо не грає
+taskbar_menu:
+  add_file: Закріпіть власний файл
+  add_folder: Закріпіть спеціальну папку
+  media: Додати медіа -модуль
+  settings: Налаштування
+  start: Додайте модуль запуску
+  task_manager: Диспетчер задач

@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Додадете модул за почеток
-  media: Додадете медиумски модул
-  add_file: Пинк за прилагодена датотека
-  add_folder: ПИНСКИ ПАТНИЦА
-  settings: Поставки
-  task_manager: Управувач со задачи
 app_menu:
-  run_as: Работи како администратор
+  close: Затвори
+  close_multiple: Затворете ги сите
+  copy_handles: Копирање рачки
+  kill: Процес на убивање
+  kill_multiple: Убиј ги сите процеси
   open_file_location: Отворете ја локацијата на датотеката
   pin: Игла
-  unpin: Unpin
-  pin_to_left: Игла на лево
-  copy_handles: Копирање рачки
-  close: Затвори
-  pin_to_right: Игла надесно
-  close_multiple: Затворете ги сите
   pin_to_center: Игла до центар
-  kill_multiple: Убиј ги сите процеси
-  kill: Процес на убивање
+  pin_to_left: Игла на лево
+  pin_to_right: Игла надесно
+  run_as: Работи како администратор
+  unpin: Unpin
+media:
+  not_playing: Ништо не игра
 media_menu:
   remove: Отстранете го модулот за медиуми
 start_menu:
   remove: Отстранете го модулот за почеток
-media:
-  not_playing: Ништо не игра
+taskbar_menu:
+  add_file: Пинк за прилагодена датотека
+  add_folder: ПИНСКИ ПАТНИЦА
+  media: Додадете медиумски модул
+  settings: Поставки
+  start: Додадете модул за почеток
+  task_manager: Управувач со задачи

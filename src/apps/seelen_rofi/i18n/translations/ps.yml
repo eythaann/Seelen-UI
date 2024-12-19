@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: منډه وهل
     cmd: قومانده
+    explorer: منډه وهل
 footer:
   shortcuts: لنډیزونه وښیه
 header:

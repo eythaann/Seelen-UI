@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Մուլտիմեդիա
-    comunications: Կապի
-  master_volume: Վարպետի ծավալը
-  players: Մեդիա նվագարկիչներ
-  output_device: Արդյունքային սարք
-  input_device: Մուտքային սարք
-network:
-  placeholder:
-    password: Գաղտնաբառ
-  hidden: Թաքնված ցանց
-  disconnect: Անջատել
-  more: Ավելի շատ ցանցային պարամետրեր
-  connect: Միացնել
-  not_found: Networks անցեր չեն գտնվել
-  scanning: Ցանցերի սկանավորում
-  secured: Կոդավորված ցանց
-  saved: Պահպանված ցանցեր
-  connected: Միացված է
-  available: Հասանելի ցանցեր
-settings:
-  shutdown: Անջատել
-  title: Կարգավորումներ
-  restart: Վերսկսել
-  log_out: Դուրս գալ
-  app_settings: Ծրագրի կարգավորումներ
-  sleep: Քնել
-  power: Հզորություն
-placeholder:
-  ethernet_connected: Ինտերնետ հասանելիության
-  open_system_tray: Բաց համակարգի սկուտեղ
-  volume: Ծավալ
-  open_user_folder: Բաց օգտագործողի թղթապանակ
-  battery_remaining: Մնացած
-  ethernet_disconnected: Ոչ մի ինտերնետ մուտք չկա
-  settings: Արագ պարամետրեր
-  bluetooth_devices: Bluetooth & սարքեր
-  smart_charge: '- Խելացի վճար'
-  notifications: Ծանուցումներ
-unlabelled_tray: Unlabelled Tray Icon
 context_menu:
-  remove: Հեռացրեք մոդուլը
   add_module: Ավելացնել մոդուլ
+  remove: Հեռացրեք մոդուլը
   settings: Կարգավորումներ
   task_manager: Առաջադրանքների կառավարիչ
+media:
+  device:
+    comunications: Կապի
+    multimedia: Մուլտիմեդիա
+  input_device: Մուտքային սարք
+  master_volume: Վարպետի ծավալը
+  output_device: Արդյունքային սարք
+  players: Մեդիա նվագարկիչներ
+network:
+  available: Հասանելի ցանցեր
+  connect: Միացնել
+  connected: Միացված է
+  disconnect: Անջատել
+  hidden: Թաքնված ցանց
+  more: Ավելի շատ ցանցային պարամետրեր
+  not_found: Networks անցեր չեն գտնվել
+  placeholder:
+    password: Գաղտնաբառ
+  saved: Պահպանված ցանցեր
+  scanning: Ցանցերի սկանավորում
+  secured: Կոդավորված ցանց
+placeholder:
+  battery_remaining: Մնացած
+  bluetooth_devices: Bluetooth & սարքեր
+  ethernet_connected: Ինտերնետ հասանելիության
+  ethernet_disconnected: Ոչ մի ինտերնետ մուտք չկա
+  notifications: Ծանուցումներ
+  open_system_tray: Բաց համակարգի սկուտեղ
+  open_user_folder: Բաց օգտագործողի թղթապանակ
+  settings: Արագ պարամետրեր
+  smart_charge: '- Խելացի վճար'
+  volume: Ծավալ
+settings:
+  app_settings: Ծրագրի կարգավորումներ
+  log_out: Դուրս գալ
+  power: Հզորություն
+  restart: Վերսկսել
+  shutdown: Անջատել
+  sleep: Քնել
+  title: Կարգավորումներ
+unlabelled_tray: Unlabelled Tray Icon

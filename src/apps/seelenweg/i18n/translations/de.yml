@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Medienmodul hinzufügen
-  start: Startmodul hinzufügen
-  add_folder: Pin benutzerdefinierte Ordner
-  add_file: PIN benutzerdefinierte Datei
-  task_manager: Task-Manager
-  settings: Einstellungen
 app_menu:
-  unpin: Lösen
-  pin: Anheften
-  pin_to_left: Links anheften
-  pin_to_center: Zentral anheften
-  pin_to_right: Rechts anheften
-  open_file_location: Dateispeicherort öffnen
-  run_as: Als Administrator ausführen
-  copy_handles: Handles kopieren
   close: Schließen
   close_multiple: Alle schließen
+  copy_handles: Handles kopieren
   kill: Prozess beenden
   kill_multiple: Beenden Sie alle Prozesse
+  open_file_location: Dateispeicherort öffnen
+  pin: Anheften
+  pin_to_center: Zentral anheften
+  pin_to_left: Links anheften
+  pin_to_right: Rechts anheften
+  run_as: Als Administrator ausführen
+  unpin: Lösen
+media:
+  not_playing: Nichts spielt
 media_menu:
   remove: Medienmodul entfernen
 start_menu:
   remove: Startmodul entfernen
-media:
-  not_playing: Nichts spielt
+taskbar_menu:
+  add_file: PIN benutzerdefinierte Datei
+  add_folder: Pin benutzerdefinierte Ordner
+  media: Medienmodul hinzufügen
+  settings: Einstellungen
+  start: Startmodul hinzufügen
+  task_manager: Task-Manager

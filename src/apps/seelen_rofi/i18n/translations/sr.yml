@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    explorer: Трчати
     cmd: Командант
+    explorer: Трчати
 footer:
   shortcuts: Прикажи пречице
 header:
   search: Апликација, наредбу или стаза
 item:
-  pin: ПИН за пристајање
   open_location: Отворите локацију датотеке
+  pin: ПИН за пристајање

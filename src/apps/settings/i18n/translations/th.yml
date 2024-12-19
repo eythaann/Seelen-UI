@@ -1,257 +1,257 @@
-sides:
-  bottom: ด้านล่าง
-  right: ขวา
-  left: ซ้าย
-  top: สูงสุด
-header:
-  labels:
-    info: ข้อมูล
-    general: ทั่วไป
-    developer: ผู้พัฒนา
-    seelen_bar: แถบเครื่องมือแฟนซี
-    seelen_weg: แท่นวาง/บาร์
-    specific_apps: แอพเฉพาะ
-    seelen_wm: ผู้จัดการหน้าต่าง
-    monitors: จอภาพ
-    shortcuts: ทางลัด
-    seelen_rofi: แอพ Launcher
-    virtual_desk: เดสก์ท็อปเสมือนจริง
-    home: บ้าน
-    mods: ปลั๊กอินและวิดเจ็ต
-    seelen_wall: ผู้จัดการวอลล์เปเปอร์
-start:
-  title: ยินดีต้อนรับ!
-  message_accent: เพิ่มประสิทธิภาพการทำงานของคุณอย่างมีสไตล์!
-  message: >-
-    ยินดีต้อนรับสู่ Seelen UI สภาพแวดล้อมเดสก์ท็อปที่ดีที่สุดพร้อมตัวจัดการ
-    Windows Tiling ที่จัดตั้งขึ้นเพื่อปรับปรุงประสบการณ์ Windows ของคุณ!
-    สำรวจยุคใหม่ของประสิทธิภาพและการทำงานหลายอย่างด้วยอินเทอร์เฟซที่ใช้งานง่ายและคุณสมบัติขั้นสูงของเรา
-general:
-  theme:
-    author: ผู้เขียน
-    add: เพิ่มธีม
-    description: คำอธิบาย
-    placeholder: เลือกธีม
-    tags: แท็ก
-    added: ธีมเพิ่มแล้ว
-    label: ข้อมูลธีม
-    enabled: เปิดใช้งานธีม
-    available: มีอยู่
-    selected: ที่เลือกสรรแล้ว
-  language: ภาษา
-  startup: วิ่งเมื่อเริ่มต้น?
-  icon_pack:
-    label: ไอคอนแพ็ค
-  accent_color: สีเน้น
-  wallpaper:
-    select: เลือกวอลล์เปเปอร์
-  date_format: รูปแบบวันที่
-toolbar:
-  placeholder:
-    author: ผู้เขียน
-    description: คำอธิบาย
-    select: โครงสร้างแถบเครื่องมือ
-  height: ความสูง
-  enable: เปิดใช้งานแถบเครื่องมือแฟนซี
-  auto_hide: ซ่อนอัตโนมัติ
-  label: แถบเครื่องมือ
-  delay_to_show: ล่าช้าในการแสดง
-  delay_to_hide: ล่าช้าในการซ่อน
-  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
-wm:
-  border:
-    width: ความกว้างชายแดน
-    enable: เปิดใช้งานเส้นขอบของหน้าต่าง
-    offset: ชดเชยพรมแดน
-  author: ผู้เขียน
-  description: คำอธิบาย
-  workspace_offset: พื้นที่ทำงานออฟเซ็ต (ระยะขอบ)
-  space_between_containers: ช่องว่างระหว่างภาชนะบรรจุ
-  layout: เค้าโครง
-  resize_delta: ปรับขนาดเดลต้า (%)
-  workspace_padding: ช่องว่างพื้นที่ทำงาน
-  enable: เปิดใช้งานตัวจัดการหน้าต่างปูกระเบื้อง
-weg:
-  items:
-    size: ขนาดรายการ
-    zoom_size: ขนาดซูม (ใช้สำหรับธีม)
-    visible_separators: ตัวแยกที่มองเห็นได้
-    label: รายการ
-    gap: ช่องว่างระหว่างรายการ
-  padding: การขยายความ
-  width: ความกว้าง
-  auto_hide: ซ่อนอัตโนมัติ
-  gap: ช่องว่าง
-  margin: ระยะขอบ
-  label: แท่นวาง/บาร์
-  enable: เปิดใช้งาน Dock/Task -Babar
-  dock_side: ตำแหน่ง
-  delay_to_show: ล่าช้าในการแสดง
-  delay_to_hide: ล่าช้าในการซ่อน
-  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
-devtools:
-  settings_file: ไฟล์การตั้งค่า
-  install_folder: โฟลเดอร์การติดตั้ง
-  enable: เปิดใช้งานเครื่องมือนักพัฒนาซอฟต์แวร์
-  custom_config_file: โหลดไฟล์กำหนดค่าที่กำหนดเอง
-  app_folders: โฟลเดอร์แอพ
-  load: โหลด
-  data_folder: โฟลเดอร์ข้อมูล
-apps_configurations:
-  app:
-    options:
-      float: ลอย
-      force: บังคับให้จัดการ
-      pinned: ที่ถูกตรึง
-      unmanage: ไม่มีการจัดการ
-      hidden: ซ่อนจากท่าเรือ/บาร์
-    title_readonly: การดู {{ชื่อ}}
-    category: หมวดหมู่
-    monitor_placeholder: ไม่มี
-    monitor: เฝ้าสังเกต
-    category_placeholder: ไม่มี
-    ok_create: สร้าง
-    ok_edit: อัปเดต
-    ok_readonly: แก้ไขเป็นใหม่
-    workspace: พื้นที่ทำงาน
-    workspace_placeholder: ไม่มี
-    name: ชื่อ
-    bindings: การเชื่อม (หมายเหตุทั้งสองตัวเลือกเป็นสิ่งจำเป็น)
-    title_create: การสร้าง {{ชื่อ}}
-    weg_options_label: ตัวเลือกท่าเทียบเรือ/บาร์
-    wm_options_label: ตัวเลือกตัวจัดการหน้าต่าง
-    options_label: ตัวเลือกพิเศษ
-    title_edit: การแก้ไข {{ชื่อ}}
-  identifier:
-    and: และ
-    or: หรือ
-    id: ตัวระบุ
-    negation: คัดค้านการจับคู่
-    matching_strategy: กลยุทธ์การจับคู่
-    remove: ลบบล็อก
-    kind: ระบุโดย
-    add_block: เพิ่มบล็อก
-  delete: ลบ
-  new: ใหม่
-  swap: แลกเปลี่ยน
-  export: ส่งออก
-  search: ค้นหา
-  bundled_title: แอพกำหนดค่ามาพร้อมกับ Seelen
-  import: นำเข้า
-  bundled_msg: >-
-    การกำหนดค่าแบบรวมเหล่านี้ไม่สามารถแก้ไขได้และได้รับการออกแบบมาเพื่อให้คุณได้รับประสบการณ์ที่ดีที่สุดโดยไม่ต้องปรับแต่ง
-    พวกเขากำหนดค่าแอปพลิเคชันที่พบบ่อยที่สุดสำหรับคุณโดยอัตโนมัติ
-  confirm_delete_title: ยืนยันการลบ
-  confirm_delete: แน่ใจหรือว่าต้องการลบการกำหนดค่านี้/s?
-  extra_info: >-
-    SEELEN UI ใช้ตัวระบุเพียงหนึ่งตัวต่อแอป (พบนัดแรก)
-    ดังนั้นคำสั่งซื้อเฉพาะนั้นมีความสำคัญการเพิ่มล่าสุดจะได้รับการจัดลำดับความสำคัญเนื่องจากหมายเหตุตารางจะถูกเรียงลำดับโดยค่าเริ่มต้นจากล่าสุดถึงเก่า
-extras:
-  github: คนอื่น ๆ
-  discord: ความไม่ลงรอยกัน
-  exit: ออก/ออก
-  relaunch: เปิดใหม่
-  links: ลิงค์อย่างเป็นทางการ
-  version: รุ่น
-shortcuts:
-  labels:
-    focus_left: โฟกัสซ้าย
-    reserve_right: สำรองสิทธิ
-    switch_workspace_7: เปลี่ยนไปใช้พื้นที่ทำงาน 7
-    switch_workspace_3: เปลี่ยนเป็น Workspace 3
-    send_to_workspace_6: ส่งไปยังเวิร์กสเปซ 6
-    send_to_workspace_8: ส่งไปยังเวิร์กสเปซ 8
-    decrease_width: ลดความกว้าง
-    increase_height: เพิ่มความสูง
-    focus_bottom: โฟกัสด้านล่าง
-    send_to_workspace_2: ส่งไปยังเวิร์กสเปซ 2
-    reserve_top: สำรองด้านบน
-    decrease_height: ลดความสูง
-    reserve_bottom: สำรองด้านล่าง
-    move_to_workspace_8: ย้ายไปที่เวิร์กสเปซ 8
-    reserve_float: สำรองลอย
-    send_to_workspace_3: ส่งไปยังเวิร์กสเปซ 3
-    move_to_workspace_2: ย้ายไปที่เวิร์กสเปซ 2
-    move_to_workspace_4: ย้ายไปที่เวิร์กสเปซ 4
-    switch_workspace_6: เปลี่ยนไปใช้พื้นที่ทำงาน 6
-    move_to_workspace_5: ย้ายไปที่เวิร์กสเปซ 5
-    move_to_workspace_0: ย้ายไปที่เวิร์กสเปซ 0
-    switch_workspace_9: เปลี่ยนไปใช้พื้นที่ทำงาน 9
-    move_to_workspace_1: ย้ายไปที่เวิร์กสเปซ 1
-    switch_workspace_5: เปลี่ยนไปใช้พื้นที่ทำงาน 5
-    move_to_workspace_9: ย้ายไปที่เวิร์กสเปซ 9
-    move_to_workspace_6: ย้ายไปที่เวิร์กสเปซ 6
-    send_to_workspace_5: ส่งไปยังเวิร์กสเปซ 5
-    restore_sizes: คืนค่าขนาด
-    send_to_workspace_0: ส่งไปยังเวิร์กสเปซ 0
-    switch_workspace_8: เปลี่ยนไปใช้พื้นที่ทำงาน 8
-    send_to_workspace_1: ส่งไปยังเวิร์กสเปซ 1
-    reserve_stack: กองสำรอง
-    switch_workspace_4: เปลี่ยนไปใช้พื้นที่ทำงาน 4
-    increase_width: เพิ่มความกว้าง
-    reserve_left: สำรองซ้าย
-    focus_top: โฟกัสด้านบน
-    move_to_workspace_3: ย้ายไปที่เวิร์กสเปซ 3
-    focus_right: โฟกัสขวา
-    switch_workspace_2: เปลี่ยนเป็น Workspace 2
-    send_to_workspace_9: ส่งไปยังเวิร์กสเปซ 9
-    focus_latest: โฟกัสล่าสุด
-    send_to_workspace_7: ส่งไปยังเวิร์กสเปซ 7
-    send_to_workspace_4: ส่งไปยังเวิร์กสเปซ 4
-    move_to_workspace_7: ย้ายไปที่เวิร์กสเปซ 7
-    switch_workspace_0: เปลี่ยนไปใช้พื้นที่ทำงาน 1
-    switch_workspace_1: สลับไปที่ Workspace 2
-    misc_toggle_win_event_tracing: สลับการติดตามเหตุการณ์ (บันทึก)
-    misc_open_settings: เปิดการตั้งค่า
-    misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)
-    toggle_launcher: สลับ
-  enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
-  enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API
-  reset: รีเซ็ตเป็นค่าเริ่มต้น
-  readonly_tooltip: นี่คือทางลัดแบบอ่านอย่างเดียว
-inProgress: กำลังดำเนินการ...
-cancel: ยกเลิก
-delete: ลบ
-save: บันทึก
-quit: ล้มเลิก
-open: เปิด
-loading: กำลังโหลด ...
-vd:
-  strategy:
-    native: พื้นเมือง
-    seelen: เซเล่น
-    label: กลยุทธ์เดสก์ท็อปเสมือนจริง
-  disabled_windows_version: กลยุทธ์เดสก์ท็อปเสมือนจริงไม่พร้อมใช้งานสำหรับเวอร์ชัน Windows ของคุณ
-save_and_restart: บันทึกและรีสตาร์ท
-monitors_configurations:
-  label: ตรวจสอบ {{index}}
-wall:
-  backgrounds: วอลเปเปอร์
-  no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
-  enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
-  interval: เปลี่ยนวอลล์เปเปอร์ทุก ๆ
-  random: สุ่มสไลด์โชว์
-  hours: ชั่วโมง
-  minutes: นาที
-  seconds: ไม่กี่วินาที
 app_launcher:
+  enable: เปิดใช้งานแอป Launcher
+  monitor: ตรวจสอบเพื่อแสดง
   runners:
     cmd: สั่งการ
     explorer: วิ่ง
     label: นักวิ่ง
-  monitor: ตรวจสอบเพื่อแสดง
-  enable: เปิดใช้งานแอป Launcher
-more: มากกว่า
-insert: แทรก
-inherit: สืบทอด
+apps_configurations:
+  app:
+    bindings: การเชื่อม (หมายเหตุทั้งสองตัวเลือกเป็นสิ่งจำเป็น)
+    category: หมวดหมู่
+    category_placeholder: ไม่มี
+    monitor: เฝ้าสังเกต
+    monitor_placeholder: ไม่มี
+    name: ชื่อ
+    ok_create: สร้าง
+    ok_edit: อัปเดต
+    ok_readonly: แก้ไขเป็นใหม่
+    options:
+      float: ลอย
+      force: บังคับให้จัดการ
+      hidden: ซ่อนจากท่าเรือ/บาร์
+      pinned: ที่ถูกตรึง
+      unmanage: ไม่มีการจัดการ
+    options_label: ตัวเลือกพิเศษ
+    title_create: การสร้าง {{ชื่อ}}
+    title_edit: การแก้ไข {{ชื่อ}}
+    title_readonly: การดู {{ชื่อ}}
+    weg_options_label: ตัวเลือกท่าเทียบเรือ/บาร์
+    wm_options_label: ตัวเลือกตัวจัดการหน้าต่าง
+    workspace: พื้นที่ทำงาน
+    workspace_placeholder: ไม่มี
+  bundled_msg: >-
+    การกำหนดค่าแบบรวมเหล่านี้ไม่สามารถแก้ไขได้และได้รับการออกแบบมาเพื่อให้คุณได้รับประสบการณ์ที่ดีที่สุดโดยไม่ต้องปรับแต่ง
+    พวกเขากำหนดค่าแอปพลิเคชันที่พบบ่อยที่สุดสำหรับคุณโดยอัตโนมัติ
+  bundled_title: แอพกำหนดค่ามาพร้อมกับ Seelen
+  confirm_delete: แน่ใจหรือว่าต้องการลบการกำหนดค่านี้/s?
+  confirm_delete_title: ยืนยันการลบ
+  delete: ลบ
+  export: ส่งออก
+  extra_info: >-
+    SEELEN UI ใช้ตัวระบุเพียงหนึ่งตัวต่อแอป (พบนัดแรก)
+    ดังนั้นคำสั่งซื้อเฉพาะนั้นมีความสำคัญการเพิ่มล่าสุดจะได้รับการจัดลำดับความสำคัญเนื่องจากหมายเหตุตารางจะถูกเรียงลำดับโดยค่าเริ่มต้นจากล่าสุดถึงเก่า
+  identifier:
+    add_block: เพิ่มบล็อก
+    and: และ
+    id: ตัวระบุ
+    kind: ระบุโดย
+    matching_strategy: กลยุทธ์การจับคู่
+    negation: คัดค้านการจับคู่
+    or: หรือ
+    remove: ลบบล็อก
+  import: นำเข้า
+  new: ใหม่
+  search: ค้นหา
+  swap: แลกเปลี่ยน
+cancel: ยกเลิก
 close: ปิด
-update:
-  available: อัปเดตพร้อมใช้งาน!
-  downloading: ดาวน์โหลด ...
-  channel: อัปเดตช่อง
+delete: ลบ
+devtools:
+  app_folders: โฟลเดอร์แอพ
+  custom_config_file: โหลดไฟล์กำหนดค่าที่กำหนดเอง
+  data_folder: โฟลเดอร์ข้อมูล
+  enable: เปิดใช้งานเครื่องมือนักพัฒนาซอฟต์แวร์
+  install_folder: โฟลเดอร์การติดตั้ง
+  load: โหลด
+  settings_file: ไฟล์การตั้งค่า
+extras:
+  discord: ความไม่ลงรอยกัน
+  exit: ออก/ออก
+  github: คนอื่น ๆ
+  links: ลิงค์อย่างเป็นทางการ
+  relaunch: เปิดใหม่
+  version: รุ่น
+general:
+  accent_color: สีเน้น
+  date_format: รูปแบบวันที่
+  icon_pack:
+    label: ไอคอนแพ็ค
+  language: ภาษา
+  startup: วิ่งเมื่อเริ่มต้น?
+  theme:
+    add: เพิ่มธีม
+    added: ธีมเพิ่มแล้ว
+    author: ผู้เขียน
+    available: มีอยู่
+    description: คำอธิบาย
+    enabled: เปิดใช้งานธีม
+    label: ข้อมูลธีม
+    placeholder: เลือกธีม
+    selected: ที่เลือกสรรแล้ว
+    tags: แท็ก
+  wallpaper:
+    select: เลือกวอลล์เปเปอร์
+header:
+  labels:
+    developer: ผู้พัฒนา
+    general: ทั่วไป
+    home: บ้าน
+    info: ข้อมูล
+    mods: ปลั๊กอินและวิดเจ็ต
+    monitors: จอภาพ
+    seelen_bar: แถบเครื่องมือแฟนซี
+    seelen_rofi: แอพ Launcher
+    seelen_wall: ผู้จัดการวอลล์เปเปอร์
+    seelen_weg: แท่นวาง/บาร์
+    seelen_wm: ผู้จัดการหน้าต่าง
+    shortcuts: ทางลัด
+    specific_apps: แอพเฉพาะ
+    virtual_desk: เดสก์ท็อปเสมือนจริง
+inherit: สืบทอด
+inProgress: กำลังดำเนินการ...
+insert: แทรก
+loading: กำลังโหลด ...
 miscellaneous: เบ็ดเตล็ด
 mods:
-  target: เป้า
   plugins: ปลั๊กอิน
+  target: เป้า
   widgets: วิดเจ็ต
+monitors_configurations:
+  label: ตรวจสอบ {{index}}
+more: มากกว่า
+open: เปิด
+quit: ล้มเลิก
 remove: ลบ
+save: บันทึก
+save_and_restart: บันทึกและรีสตาร์ท
+shortcuts:
+  enable: เปิดใช้งานทางลัดแบบบูรณาการ (AHK)
+  enable_tooltip: ปิดการใช้งานหากคุณจะใช้ทางลัดของคุณเองโดยใช้ Seelen Core API
+  labels:
+    decrease_height: ลดความสูง
+    decrease_width: ลดความกว้าง
+    focus_bottom: โฟกัสด้านล่าง
+    focus_latest: โฟกัสล่าสุด
+    focus_left: โฟกัสซ้าย
+    focus_right: โฟกัสขวา
+    focus_top: โฟกัสด้านบน
+    increase_height: เพิ่มความสูง
+    increase_width: เพิ่มความกว้าง
+    misc_open_settings: เปิดการตั้งค่า
+    misc_toggle_lock_tracing: สลับการติดตามล็อค (บันทึก)
+    misc_toggle_win_event_tracing: สลับการติดตามเหตุการณ์ (บันทึก)
+    move_to_workspace_0: ย้ายไปที่เวิร์กสเปซ 0
+    move_to_workspace_1: ย้ายไปที่เวิร์กสเปซ 1
+    move_to_workspace_2: ย้ายไปที่เวิร์กสเปซ 2
+    move_to_workspace_3: ย้ายไปที่เวิร์กสเปซ 3
+    move_to_workspace_4: ย้ายไปที่เวิร์กสเปซ 4
+    move_to_workspace_5: ย้ายไปที่เวิร์กสเปซ 5
+    move_to_workspace_6: ย้ายไปที่เวิร์กสเปซ 6
+    move_to_workspace_7: ย้ายไปที่เวิร์กสเปซ 7
+    move_to_workspace_8: ย้ายไปที่เวิร์กสเปซ 8
+    move_to_workspace_9: ย้ายไปที่เวิร์กสเปซ 9
+    reserve_bottom: สำรองด้านล่าง
+    reserve_float: สำรองลอย
+    reserve_left: สำรองซ้าย
+    reserve_right: สำรองสิทธิ
+    reserve_stack: กองสำรอง
+    reserve_top: สำรองด้านบน
+    restore_sizes: คืนค่าขนาด
+    send_to_workspace_0: ส่งไปยังเวิร์กสเปซ 0
+    send_to_workspace_1: ส่งไปยังเวิร์กสเปซ 1
+    send_to_workspace_2: ส่งไปยังเวิร์กสเปซ 2
+    send_to_workspace_3: ส่งไปยังเวิร์กสเปซ 3
+    send_to_workspace_4: ส่งไปยังเวิร์กสเปซ 4
+    send_to_workspace_5: ส่งไปยังเวิร์กสเปซ 5
+    send_to_workspace_6: ส่งไปยังเวิร์กสเปซ 6
+    send_to_workspace_7: ส่งไปยังเวิร์กสเปซ 7
+    send_to_workspace_8: ส่งไปยังเวิร์กสเปซ 8
+    send_to_workspace_9: ส่งไปยังเวิร์กสเปซ 9
+    switch_workspace_0: เปลี่ยนไปใช้พื้นที่ทำงาน 1
+    switch_workspace_1: สลับไปที่ Workspace 2
+    switch_workspace_2: เปลี่ยนเป็น Workspace 2
+    switch_workspace_3: เปลี่ยนเป็น Workspace 3
+    switch_workspace_4: เปลี่ยนไปใช้พื้นที่ทำงาน 4
+    switch_workspace_5: เปลี่ยนไปใช้พื้นที่ทำงาน 5
+    switch_workspace_6: เปลี่ยนไปใช้พื้นที่ทำงาน 6
+    switch_workspace_7: เปลี่ยนไปใช้พื้นที่ทำงาน 7
+    switch_workspace_8: เปลี่ยนไปใช้พื้นที่ทำงาน 8
+    switch_workspace_9: เปลี่ยนไปใช้พื้นที่ทำงาน 9
+    toggle_launcher: สลับ
+  readonly_tooltip: นี่คือทางลัดแบบอ่านอย่างเดียว
+  reset: รีเซ็ตเป็นค่าเริ่มต้น
+sides:
+  bottom: ด้านล่าง
+  left: ซ้าย
+  right: ขวา
+  top: สูงสุด
+start:
+  message: >-
+    ยินดีต้อนรับสู่ Seelen UI สภาพแวดล้อมเดสก์ท็อปที่ดีที่สุดพร้อมตัวจัดการ
+    Windows Tiling ที่จัดตั้งขึ้นเพื่อปรับปรุงประสบการณ์ Windows ของคุณ!
+    สำรวจยุคใหม่ของประสิทธิภาพและการทำงานหลายอย่างด้วยอินเทอร์เฟซที่ใช้งานง่ายและคุณสมบัติขั้นสูงของเรา
+  message_accent: เพิ่มประสิทธิภาพการทำงานของคุณอย่างมีสไตล์!
+  title: ยินดีต้อนรับ!
+toolbar:
+  auto_hide: ซ่อนอัตโนมัติ
+  delay_to_hide: ล่าช้าในการซ่อน
+  delay_to_show: ล่าช้าในการแสดง
+  enable: เปิดใช้งานแถบเครื่องมือแฟนซี
+  height: ความสูง
+  label: แถบเครื่องมือ
+  placeholder:
+    author: ผู้เขียน
+    description: คำอธิบาย
+    select: โครงสร้างแถบเครื่องมือ
+  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
+update:
+  available: อัปเดตพร้อมใช้งาน!
+  channel: อัปเดตช่อง
+  downloading: ดาวน์โหลด ...
+vd:
+  disabled_windows_version: กลยุทธ์เดสก์ท็อปเสมือนจริงไม่พร้อมใช้งานสำหรับเวอร์ชัน Windows ของคุณ
+  strategy:
+    label: กลยุทธ์เดสก์ท็อปเสมือนจริง
+    native: พื้นเมือง
+    seelen: เซเล่น
+wall:
+  backgrounds: วอลเปเปอร์
+  enable: เปิดใช้งานผู้จัดการวอลล์เปเปอร์
+  hours: ชั่วโมง
+  interval: เปลี่ยนวอลล์เปเปอร์ทุก ๆ
+  minutes: นาที
+  no_background: สไลด์โชว์เปล่าโดยใช้พื้นหลังของธีมแทน
+  random: สุ่มสไลด์โชว์
+  seconds: ไม่กี่วินาที
+weg:
+  auto_hide: ซ่อนอัตโนมัติ
+  delay_to_hide: ล่าช้าในการซ่อน
+  delay_to_show: ล่าช้าในการแสดง
+  dock_side: ตำแหน่ง
+  enable: เปิดใช้งาน Dock/Task -Babar
+  gap: ช่องว่าง
+  items:
+    gap: ช่องว่างระหว่างรายการ
+    label: รายการ
+    size: ขนาดรายการ
+    visible_separators: ตัวแยกที่มองเห็นได้
+    zoom_size: ขนาดซูม (ใช้สำหรับธีม)
+  label: แท่นวาง/บาร์
+  margin: ระยะขอบ
+  padding: การขยายความ
+  use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
+  width: ความกว้าง
+wm:
+  author: ผู้เขียน
+  border:
+    enable: เปิดใช้งานเส้นขอบของหน้าต่าง
+    offset: ชดเชยพรมแดน
+    width: ความกว้างชายแดน
+  description: คำอธิบาย
+  enable: เปิดใช้งานตัวจัดการหน้าต่างปูกระเบื้อง
+  layout: เค้าโครง
+  resize_delta: ปรับขนาดเดลต้า (%)
+  space_between_containers: ช่องว่างระหว่างภาชนะบรรจุ
+  workspace_offset: พื้นที่ทำงานออฟเซ็ต (ระยะขอบ)
+  workspace_padding: ช่องว่างพื้นที่ทำงาน

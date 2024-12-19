@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: מולטימדיה
-    comunications: תקשורת
-  input_device: מכשיר קלט
-  output_device: מכשיר פלט
-  master_volume: נפח אמן
-  players: שחקני מדיה
-network:
-  placeholder:
-    password: סיסמה
-  connect: לְחַבֵּר
-  disconnect: לְנַתֵק
-  hidden: רשת נסתרת
-  not_found: לא נמצאו רשתות
-  more: הגדרות רשת נוספות
-  connected: מחובר ל
-  available: רשתות זמינות
-  saved: רשתות שמורות
-  secured: רשת מוצפנת
-  scanning: סריקה לאיתור רשתות
-settings:
-  app_settings: הגדרות אפליקציה
-  restart: איתחול
-  log_out: להתנתק
-  shutdown: לכבות
-  title: הגדרות
-  sleep: לִישׁוֹן
-  power: כּוֹחַ
-placeholder:
-  settings: הגדרות מהירות
-  battery_remaining: '% נותר'
-  ethernet_disconnected: אין גישה לאינטרנט
-  smart_charge: '- חיוב חכם'
-  ethernet_connected: גישה לאינטרנט
-  bluetooth_devices: Bluetooth ומכשירים
-  open_system_tray: מגש מערכת פתוח
-  volume: כרך
-  open_user_folder: פתח את תיקיית המשתמש
-  notifications: התראות
-unlabelled_tray: אייקון מגש ללא תווית
 context_menu:
   add_module: הוסף מודול
   remove: הסר את המודול
   settings: הגדרות
   task_manager: מנהל משימות
+media:
+  device:
+    comunications: תקשורת
+    multimedia: מולטימדיה
+  input_device: מכשיר קלט
+  master_volume: נפח אמן
+  output_device: מכשיר פלט
+  players: שחקני מדיה
+network:
+  available: רשתות זמינות
+  connect: לְחַבֵּר
+  connected: מחובר ל
+  disconnect: לְנַתֵק
+  hidden: רשת נסתרת
+  more: הגדרות רשת נוספות
+  not_found: לא נמצאו רשתות
+  placeholder:
+    password: סיסמה
+  saved: רשתות שמורות
+  scanning: סריקה לאיתור רשתות
+  secured: רשת מוצפנת
+placeholder:
+  battery_remaining: '% נותר'
+  bluetooth_devices: Bluetooth ומכשירים
+  ethernet_connected: גישה לאינטרנט
+  ethernet_disconnected: אין גישה לאינטרנט
+  notifications: התראות
+  open_system_tray: מגש מערכת פתוח
+  open_user_folder: פתח את תיקיית המשתמש
+  settings: הגדרות מהירות
+  smart_charge: '- חיוב חכם'
+  volume: כרך
+settings:
+  app_settings: הגדרות אפליקציה
+  log_out: להתנתק
+  power: כּוֹחַ
+  restart: איתחול
+  shutdown: לכבות
+  sleep: לִישׁוֹן
+  title: הגדרות
+unlabelled_tray: אייקון מגש ללא תווית

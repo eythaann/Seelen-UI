@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Dodajte medijski modul
-  start: Dodajte početni modul
-  add_folder: PIN prilagođena mapa
-  add_file: PIN prilagođena datoteka
-  task_manager: Task Manager
-  settings: Postavke
 app_menu:
   close: Zatvoriti
-  open_file_location: Otvorite lokaciju datoteke
-  run_as: Trčite kao administrator
-  pin_to_left: Pin na lijevo
   close_multiple: Zatvoriti sve
-  unpin: Otrcati
   copy_handles: Ručke za kopiranje
-  pin_to_center: Pin za centar
-  pin_to_right: Pin na desno
-  pin: Pin
-  kill_multiple: Ubijte sve procese
   kill: Kill Process
+  kill_multiple: Ubijte sve procese
+  open_file_location: Otvorite lokaciju datoteke
+  pin: Pin
+  pin_to_center: Pin za centar
+  pin_to_left: Pin na lijevo
+  pin_to_right: Pin na desno
+  run_as: Trčite kao administrator
+  unpin: Otrcati
+media:
+  not_playing: Ništa se ne igra
 media_menu:
   remove: Uklonite medijski modul
 start_menu:
   remove: Uklonite početni modul
-media:
-  not_playing: Ništa se ne igra
+taskbar_menu:
+  add_file: PIN prilagođena datoteka
+  add_folder: PIN prilagođena mapa
+  media: Dodajte medijski modul
+  settings: Postavke
+  start: Dodajte početni modul
+  task_manager: Task Manager

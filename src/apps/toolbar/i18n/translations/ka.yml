@@ -1,3 +1,8 @@
+context_menu:
+  add_module: მოდულის დამატება
+  remove: ამოიღეთ მოდული
+  settings: პარამეტრები
+  task_manager: სამუშაო მენეჯერი
 media:
   device:
     comunications: კომუნიკაცია
@@ -7,40 +12,35 @@ media:
   output_device: გამომავალი მოწყობილობა
   players: მედიის მოთამაშეები
 network:
+  available: ხელმისაწვდომი ქსელები
+  connect: დაკავშირება
+  connected: დაკავშირებულია
+  disconnect: გათიშვა
+  hidden: დამალული ქსელი
+  more: მეტი ქსელის პარამეტრები
+  not_found: ქსელები ვერ მოიძებნა
   placeholder:
     password: პაროლი
-  not_found: ქსელები ვერ მოიძებნა
-  disconnect: გათიშვა
-  connect: დაკავშირება
-  more: მეტი ქსელის პარამეტრები
-  hidden: დამალული ქსელი
-  secured: დაშიფრული ქსელი
-  connected: დაკავშირებულია
-  available: ხელმისაწვდომი ქსელები
   saved: შენახული ქსელები
   scanning: სკანირება ქსელებისთვის
+  secured: დაშიფრული ქსელი
+placeholder:
+  battery_remaining: დარჩენილი
+  bluetooth_devices: Bluetooth & მოწყობილობები
+  ethernet_connected: ინტერნეტი
+  ethernet_disconnected: ინტერნეტი არ არის
+  notifications: შეტყობინებები
+  open_system_tray: ღია სისტემის უჯრა
+  open_user_folder: გახსენით მომხმარებლის საქაღალდე
+  settings: სწრაფი პარამეტრები
+  smart_charge: '- ჭკვიანი მუხტი'
+  volume: ტომი
 settings:
+  app_settings: პროგრამის პარამეტრები
+  log_out: შესვლა
+  power: ძალა
   restart: Რესტარტი
   shutdown: Გათიშვა
   sleep: ძილი
-  log_out: შესვლა
-  app_settings: პროგრამის პარამეტრები
   title: პარამეტრები
-  power: ძალა
-placeholder:
-  bluetooth_devices: Bluetooth & მოწყობილობები
-  battery_remaining: დარჩენილი
-  ethernet_connected: ინტერნეტი
-  open_user_folder: გახსენით მომხმარებლის საქაღალდე
-  open_system_tray: ღია სისტემის უჯრა
-  volume: ტომი
-  smart_charge: '- ჭკვიანი მუხტი'
-  settings: სწრაფი პარამეტრები
-  ethernet_disconnected: ინტერნეტი არ არის
-  notifications: შეტყობინებები
 unlabelled_tray: არასასურველი უჯრის ხატი
-context_menu:
-  add_module: მოდულის დამატება
-  remove: ამოიღეთ მოდული
-  settings: პარამეტრები
-  task_manager: სამუშაო მენეჯერი

@@ -1,262 +1,262 @@
-sides:
-  top: بالا
-  right: درست
-  left: ترک کرد
-  bottom: پایین
-header:
-  labels:
-    monitors: مانیتور
-    shortcuts: میانبرها
-    info: اطلاعات
-    developer: توسعه دهنده
-    general: عمومی
-    seelen_wm: مدیر پنجره
-    seelen_bar: نوار ابزار فانتزی
-    seelen_weg: اسکله/نوار وظیفه
-    specific_apps: برنامه های خاص
-    seelen_rofi: پرتاب برنامه
-    virtual_desk: دسک تاپ مجازی
-    home: خانه
-    mods: پلاگین ها و ابزارک ها
-    seelen_wall: مدیر کاغذ دیواری
-start:
-  title: خوش آمدی!
-  message_accent: بهره وری خود را با سبک بهینه کنید!
-  message: >-
-    به Seelen UI ، محیط دسک تاپ نهایی با یک مدیر کاشی کاری ویندوز برای تقویت
-    تجربه ویندوز خوش آمدید! دوره جدیدی از کارآیی و چند وظیفه ای را با رابط بصری
-    و ویژگی های پیشرفته ما کاوش کنید.
-general:
-  theme:
-    placeholder: انتخاب قالب
-    tags: برچسب ها
-    description: شرح
-    author: نویسنده
-    add: موضوع را اضافه کنید
-    added: موضوع قبلاً اضافه شده است
-    label: اطلاعات تم
-    enabled: مضامین را فعال کرد
-    available: در دسترس
-    selected: انتخاب شد
-  language: زبان
-  startup: در راه اندازی اجرا می شود؟
-  icon_pack:
-    label: بسته های نماد
-  accent_color: رنگ لهجه
-  wallpaper:
-    select: تصویر زمینه را انتخاب کنید
-  date_format: قالب تاریخ
-toolbar:
-  placeholder:
-    description: شرح
-    author: نویسنده
-    select: نوار ابزار
-  height: قد
-  enable: نوار ابزار فانتزی را فعال کنید
-  auto_hide: پنهان خودکار
-  label: نوار ابزار
-  delay_to_show: تاخیر برای نمایش
-  delay_to_hide: تاخیر برای پنهان شدن
-  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
-wm:
-  border:
-    enable: مرز پنجره را فعال کنید
-    width: عرض مرز
-    offset: جبران مرز
-  layout: چیدمان
-  author: نویسنده
-  description: شرح
-  workspace_offset: مکانهای کار افست (حاشیه)
-  space_between_containers: فضای بین ظروف
-  resize_delta: تغییر اندازه دلتا (٪)
-  workspace_padding: قسمتهای کاری PADING
-  enable: مدیر پنجره کاشی کاری را فعال کنید
-weg:
-  items:
-    label: موارد
-    size: اندازه مورد
-    gap: فضای بین موارد
-    zoom_size: اندازه بزرگنمایی (برای مضامین استفاده می شود)
-    visible_separators: جداکننده های قابل مشاهده
-  padding: لایه گذاری
-  gap: شکاف
-  margin: لبه
-  label: اسکله/نوار وظیفه
-  auto_hide: پنهان خودکار
-  enable: Dock/TaskBar را فعال کنید
-  width: عرض
-  dock_side: موقعیت
-  delay_to_hide: تاخیر برای پنهان شدن
-  delay_to_show: تاخیر برای نمایش
-  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
-devtools:
-  load: بار
-  install_folder: پوشه نصب
-  custom_config_file: بارگیری پرونده پیکربندی سفارشی
-  enable: ابزارهای توسعه دهنده را فعال کنید
-  settings_file: پرونده تنظیمات
-  data_folder: پوشه داده ها
-  app_folders: پوشه های برنامه
+app_launcher:
+  enable: پرتاب برنامه را فعال کنید
+  monitor: نظارت برای نمایش
+  runners:
+    cmd: فرمان
+    explorer: دویدن
+    label: دونده
 apps_configurations:
   app:
+    bindings: اتصال (توجه داشته باشید هر دو گزینه مورد نیاز است)
+    category: دسته بندی
+    category_placeholder: هیچ یک
+    monitor: نظارت
+    monitor_placeholder: هیچ یک
+    name: نام
+    ok_create: ايجاد كردن
+    ok_edit: به روز رسانی
+    ok_readonly: ویرایش به عنوان جدید
     options:
       float: شناور
-      pinned: بریده شده
-      unmanage: از بین بردن
       force: زور مدیریت
       hidden: مخفی کردن از حوض/نوار وظیفه
-    category: دسته بندی
-    ok_edit: به روز رسانی
-    category_placeholder: هیچ یک
-    name: نام
-    workspace_placeholder: هیچ یک
-    monitor_placeholder: هیچ یک
-    ok_create: ايجاد كردن
-    workspace: فضای کاری
+      pinned: بریده شده
+      unmanage: از بین بردن
+    options_label: گزینه های اضافی
     title_create: ایجاد {{name}}
+    title_edit: ویرایش {{نام}}
     title_readonly: مشاهده {{نام}}
-    bindings: اتصال (توجه داشته باشید هر دو گزینه مورد نیاز است)
-    ok_readonly: ویرایش به عنوان جدید
-    monitor: نظارت
     weg_options_label: گزینه های Dock/TaskBar
     wm_options_label: گزینه های مدیر پنجره
-    options_label: گزینه های اضافی
-    title_edit: ویرایش {{نام}}
-  identifier:
-    and: وت
-    or: یا
-    id: مشخص کننده
-    kind: شناسایی توسط
-    add_block: اضافه کردن
-    negation: نفی تطبیق
-    matching_strategy: استراتژی تطبیق
-    remove: حذف بلوک
-  new: جدید
-  confirm_delete_title: تایید حذف
-  delete: حذف
-  swap: مبادله کردن
-  import: وارد كردن
-  search: جستجو کردن
-  bundled_title: پیکربندی برنامه همراه با Seelen
-  confirm_delete: آیا مطمئن هستید که می خواهید این پیکربندی/s را حذف کنید؟
-  export: صادر کردن
+    workspace: فضای کاری
+    workspace_placeholder: هیچ یک
   bundled_msg: >-
     این تنظیمات بسته بندی شده قابل ویرایش نیستند و به گونه ای طراحی شده اند که
     بدون شخصی سازی بهترین تجربه را برای شما فراهم می کنند. آنها به طور خودکار
     متداول ترین برنامه ها را برای شما پیکربندی می کنند.
+  bundled_title: پیکربندی برنامه همراه با Seelen
+  confirm_delete: آیا مطمئن هستید که می خواهید این پیکربندی/s را حذف کنید؟
+  confirm_delete_title: تایید حذف
+  delete: حذف
+  export: صادر کردن
   extra_info: >-
     رابط کاربری Seelen تنها از یک شناسه برای هر برنامه استفاده می کند (اولین
     تطابق پیدا شد) بنابراین ترتیب نحوه مشخص شدن مهم است، آخرین موارد اضافه شده
     در اولویت قرار می گیرند، زیرا توجه داشته باشید جدول به طور پیش فرض از
     جدیدترین به قدیمی مرتب شده است.
+  identifier:
+    add_block: اضافه کردن
+    and: وت
+    id: مشخص کننده
+    kind: شناسایی توسط
+    matching_strategy: استراتژی تطبیق
+    negation: نفی تطبیق
+    or: یا
+    remove: حذف بلوک
+  import: وارد كردن
+  new: جدید
+  search: جستجو کردن
+  swap: مبادله کردن
+cancel: لغو کردن
+close: نزدیک
+delete: حذف
+devtools:
+  app_folders: پوشه های برنامه
+  custom_config_file: بارگیری پرونده پیکربندی سفارشی
+  data_folder: پوشه داده ها
+  enable: ابزارهای توسعه دهنده را فعال کنید
+  install_folder: پوشه نصب
+  load: بار
+  settings_file: پرونده تنظیمات
 extras:
-  github: گیتوب
   discord: اختلاف
-  version: نسخه
-  links: پیوندهای رسمی
   exit: ترک/خروج
+  github: گیتوب
+  links: پیوندهای رسمی
   relaunch: مجدداً
-shortcuts:
+  version: نسخه
+general:
+  accent_color: رنگ لهجه
+  date_format: قالب تاریخ
+  icon_pack:
+    label: بسته های نماد
+  language: زبان
+  startup: در راه اندازی اجرا می شود؟
+  theme:
+    add: موضوع را اضافه کنید
+    added: موضوع قبلاً اضافه شده است
+    author: نویسنده
+    available: در دسترس
+    description: شرح
+    enabled: مضامین را فعال کرد
+    label: اطلاعات تم
+    placeholder: انتخاب قالب
+    selected: انتخاب شد
+    tags: برچسب ها
+  wallpaper:
+    select: تصویر زمینه را انتخاب کنید
+header:
   labels:
-    reserve_stack: پشته ذخیره
-    switch_workspace_6: تغییر به فضای کاری 6
-    move_to_workspace_8: حرکت به فضای کاری 8
-    reserve_float: شناور رزرو
-    send_to_workspace_9: ارسال به فضای کاری 9
-    switch_workspace_4: تغییر به فضای کاری 4
-    move_to_workspace_3: حرکت به فضای کاری 3
-    move_to_workspace_0: حرکت به فضای کاری 0
-    focus_right: راست تمرکز کنید
-    send_to_workspace_1: ارسال به فضای کاری 1
-    send_to_workspace_3: ارسال به فضای کاری 3
-    send_to_workspace_8: ارسال به فضای کاری 8
-    focus_bottom: پایین تمرکز
-    reserve_bottom: قسمت پایین ذخیره
-    send_to_workspace_7: ارسال به فضای کاری 7
-    focus_top: تمرکز بالا
-    increase_height: افزایش ارتفاع
-    send_to_workspace_6: ارسال به فضای کاری 6
-    switch_workspace_9: تغییر به فضای کاری 9
-    decrease_height: کاهش قد
-    move_to_workspace_5: حرکت به فضای کاری 5
-    focus_latest: آخرین تمرکز
-    move_to_workspace_7: حرکت به فضای کاری 7
-    move_to_workspace_4: حرکت به فضای کاری 4
-    move_to_workspace_6: حرکت به فضای کاری 6
-    switch_workspace_8: تغییر به فضای کاری 8
-    move_to_workspace_9: حرکت به فضای کاری 9
-    reserve_left: رزرو سمت چپ
-    send_to_workspace_5: ارسال به فضای کاری 5
-    move_to_workspace_2: حرکت به فضای کاری 2
-    move_to_workspace_1: حرکت به فضای کاری 1
-    send_to_workspace_0: ارسال به فضای کاری 0
-    send_to_workspace_2: ارسال به فضای کاری 2
-    send_to_workspace_4: ارسال به فضای کاری 4
-    switch_workspace_7: تغییر به فضای کاری 7
-    increase_width: عرض را افزایش دهید
-    reserve_top: بالای ذخیره
-    switch_workspace_3: تغییر به فضای کاری 3
-    focus_left: تمرکز سمت چپ
-    decrease_width: کاهش عرض
-    switch_workspace_5: تغییر به فضای کاری 5
-    switch_workspace_2: تغییر به فضای کاری 2
-    restore_sizes: اندازه ها را بازیابی کنید
-    reserve_right: حق رزرو
-    switch_workspace_0: تغییر به فضای کاری 1
-    switch_workspace_1: تغییر به فضای کاری 2
-    misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)
-    misc_toggle_win_event_tracing: Toggle Win Tracing (سیاهههای مربوط)
-    misc_open_settings: تنظیمات باز
-    toggle_launcher: پیچیدن
+    developer: توسعه دهنده
+    general: عمومی
+    home: خانه
+    info: اطلاعات
+    mods: پلاگین ها و ابزارک ها
+    monitors: مانیتور
+    seelen_bar: نوار ابزار فانتزی
+    seelen_rofi: پرتاب برنامه
+    seelen_wall: مدیر کاغذ دیواری
+    seelen_weg: اسکله/نوار وظیفه
+    seelen_wm: مدیر پنجره
+    shortcuts: میانبرها
+    specific_apps: برنامه های خاص
+    virtual_desk: دسک تاپ مجازی
+inherit: ارث
+inProgress: در حال پیش رفت...
+insert: درج کردن
+loading: بارگذاری...
+miscellaneous: متفاوتی
+mods:
+  plugins: پلاگین
+  target: هدف
+  widgets: ویراچه
+monitors_configurations:
+  label: مانیتور {{فهرست}}
+more: بیشتر
+open: باز کن
+quit: ترک
+remove: برداشتن
+save: صرفه جویی
+save_and_restart: ذخیره و راه اندازی مجدد
+shortcuts:
+  enable: میانبرهای یکپارچه (AHK) را فعال کنید
   enable_tooltip: >-
     اگر میانبرهای خود را با استفاده از API Seelen Core پیاده سازی خواهید کرد ،
     غیرفعال کنید
-  enable: میانبرهای یکپارچه (AHK) را فعال کنید
-  reset: تنظیم مجدد به پیش فرض
+  labels:
+    decrease_height: کاهش قد
+    decrease_width: کاهش عرض
+    focus_bottom: پایین تمرکز
+    focus_latest: آخرین تمرکز
+    focus_left: تمرکز سمت چپ
+    focus_right: راست تمرکز کنید
+    focus_top: تمرکز بالا
+    increase_height: افزایش ارتفاع
+    increase_width: عرض را افزایش دهید
+    misc_open_settings: تنظیمات باز
+    misc_toggle_lock_tracing: Toggle Lock Tracing (سیاهههای مربوط)
+    misc_toggle_win_event_tracing: Toggle Win Tracing (سیاهههای مربوط)
+    move_to_workspace_0: حرکت به فضای کاری 0
+    move_to_workspace_1: حرکت به فضای کاری 1
+    move_to_workspace_2: حرکت به فضای کاری 2
+    move_to_workspace_3: حرکت به فضای کاری 3
+    move_to_workspace_4: حرکت به فضای کاری 4
+    move_to_workspace_5: حرکت به فضای کاری 5
+    move_to_workspace_6: حرکت به فضای کاری 6
+    move_to_workspace_7: حرکت به فضای کاری 7
+    move_to_workspace_8: حرکت به فضای کاری 8
+    move_to_workspace_9: حرکت به فضای کاری 9
+    reserve_bottom: قسمت پایین ذخیره
+    reserve_float: شناور رزرو
+    reserve_left: رزرو سمت چپ
+    reserve_right: حق رزرو
+    reserve_stack: پشته ذخیره
+    reserve_top: بالای ذخیره
+    restore_sizes: اندازه ها را بازیابی کنید
+    send_to_workspace_0: ارسال به فضای کاری 0
+    send_to_workspace_1: ارسال به فضای کاری 1
+    send_to_workspace_2: ارسال به فضای کاری 2
+    send_to_workspace_3: ارسال به فضای کاری 3
+    send_to_workspace_4: ارسال به فضای کاری 4
+    send_to_workspace_5: ارسال به فضای کاری 5
+    send_to_workspace_6: ارسال به فضای کاری 6
+    send_to_workspace_7: ارسال به فضای کاری 7
+    send_to_workspace_8: ارسال به فضای کاری 8
+    send_to_workspace_9: ارسال به فضای کاری 9
+    switch_workspace_0: تغییر به فضای کاری 1
+    switch_workspace_1: تغییر به فضای کاری 2
+    switch_workspace_2: تغییر به فضای کاری 2
+    switch_workspace_3: تغییر به فضای کاری 3
+    switch_workspace_4: تغییر به فضای کاری 4
+    switch_workspace_5: تغییر به فضای کاری 5
+    switch_workspace_6: تغییر به فضای کاری 6
+    switch_workspace_7: تغییر به فضای کاری 7
+    switch_workspace_8: تغییر به فضای کاری 8
+    switch_workspace_9: تغییر به فضای کاری 9
+    toggle_launcher: پیچیدن
   readonly_tooltip: این یک میانبر فقط خواندنی است
-inProgress: در حال پیش رفت...
-cancel: لغو کردن
-save: صرفه جویی
-open: باز کن
-loading: بارگذاری...
-delete: حذف
-quit: ترک
-vd:
-  strategy:
-    seelen: بیچاری
-    label: استراتژی رومیزی مجازی
-    native: بومی
-  disabled_windows_version: استراتژی دسک تاپ مجازی بومی برای نسخه ویندوز شما در دسترس نیست.
-save_and_restart: ذخیره و راه اندازی مجدد
-monitors_configurations:
-  label: مانیتور {{فهرست}}
-wall:
-  backgrounds: تصاویر پس زمینه
-  no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
-  enable: مدیر تصویر زمینه را فعال کنید
-  random: نمایش پرده ای تصادفی
-  interval: کاغذ دیواری را تغییر دهید
-  minutes: دقایقی
-  hours: ساعت
-  seconds: ثانیه
-app_launcher:
-  runners:
-    cmd: فرمان
-    explorer: دویدن
-    label: دونده
-  monitor: نظارت برای نمایش
-  enable: پرتاب برنامه را فعال کنید
-inherit: ارث
-more: بیشتر
-insert: درج کردن
-close: نزدیک
+  reset: تنظیم مجدد به پیش فرض
+sides:
+  bottom: پایین
+  left: ترک کرد
+  right: درست
+  top: بالا
+start:
+  message: >-
+    به Seelen UI ، محیط دسک تاپ نهایی با یک مدیر کاشی کاری ویندوز برای تقویت
+    تجربه ویندوز خوش آمدید! دوره جدیدی از کارآیی و چند وظیفه ای را با رابط بصری
+    و ویژگی های پیشرفته ما کاوش کنید.
+  message_accent: بهره وری خود را با سبک بهینه کنید!
+  title: خوش آمدی!
+toolbar:
+  auto_hide: پنهان خودکار
+  delay_to_hide: تاخیر برای پنهان شدن
+  delay_to_show: تاخیر برای نمایش
+  enable: نوار ابزار فانتزی را فعال کنید
+  height: قد
+  label: نوار ابزار
+  placeholder:
+    author: نویسنده
+    description: شرح
+    select: نوار ابزار
+  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
 update:
   available: بروزرسانی موجود!
   channel: کانال
   downloading: بارگیری ...
-miscellaneous: متفاوتی
-mods:
-  target: هدف
-  plugins: پلاگین
-  widgets: ویراچه
-remove: برداشتن
+vd:
+  disabled_windows_version: استراتژی دسک تاپ مجازی بومی برای نسخه ویندوز شما در دسترس نیست.
+  strategy:
+    label: استراتژی رومیزی مجازی
+    native: بومی
+    seelen: بیچاری
+wall:
+  backgrounds: تصاویر پس زمینه
+  enable: مدیر تصویر زمینه را فعال کنید
+  hours: ساعت
+  interval: کاغذ دیواری را تغییر دهید
+  minutes: دقایقی
+  no_background: نمایش اسلاید خالی ، به جای آن با استفاده از پس زمینه تم.
+  random: نمایش پرده ای تصادفی
+  seconds: ثانیه
+weg:
+  auto_hide: پنهان خودکار
+  delay_to_hide: تاخیر برای پنهان شدن
+  delay_to_show: تاخیر برای نمایش
+  dock_side: موقعیت
+  enable: Dock/TaskBar را فعال کنید
+  gap: شکاف
+  items:
+    gap: فضای بین موارد
+    label: موارد
+    size: اندازه مورد
+    visible_separators: جداکننده های قابل مشاهده
+    zoom_size: اندازه بزرگنمایی (برای مضامین استفاده می شود)
+  label: اسکله/نوار وظیفه
+  margin: لبه
+  padding: لایه گذاری
+  use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
+  width: عرض
+wm:
+  author: نویسنده
+  border:
+    enable: مرز پنجره را فعال کنید
+    offset: جبران مرز
+    width: عرض مرز
+  description: شرح
+  enable: مدیر پنجره کاشی کاری را فعال کنید
+  layout: چیدمان
+  resize_delta: تغییر اندازه دلتا (٪)
+  space_between_containers: فضای بین ظروف
+  workspace_offset: مکانهای کار افست (حاشیه)
+  workspace_padding: قسمتهای کاری PADING

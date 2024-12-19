@@ -1,46 +1,46 @@
+context_menu:
+  add_module: मोड्युल थप्नुहोस्
+  remove: मोड्युल हटाउनुहोस्
+  settings: सेटिङहरू
+  task_manager: कार्य प्रबन्धक
 media:
   device:
     comunications: संचार
     multimedia: मल्टिमेडिया
   input_device: इनपुट उपकरण
-  output_device: आउटपुट उपकरण
   master_volume: मास्टर भोल्युम
+  output_device: आउटपुट उपकरण
   players: मिडिया खेलाडीहरु
 network:
-  placeholder:
-    password: संकेत शब्द
+  available: उपलब्ध नेटवर्कहरू
+  connect: जोड्नु
+  connected: मा जोडिएको छ
   disconnect: अलग गनु
-  not_found: कुनै नेटवर्क फेला परेन
   hidden: लुकेको नेटवर्क
   more: अधिक नेटवर्क सेटिंग्स
-  connect: जोड्नु
+  not_found: कुनै नेटवर्क फेला परेन
+  placeholder:
+    password: संकेत शब्द
   saved: सुरक्षित नेटवर्कहरू
   scanning: नेटवर्कहरूको लागि स्क्यान गर्दै
-  connected: मा जोडिएको छ
-  available: उपलब्ध नेटवर्कहरू
   secured: ईन्क्रिप्टेड नेटवर्क
-settings:
-  shutdown: बन्द गर
-  restart: फेरि शुरु गर्नु
-  log_out: बाहिर निस्कनु
-  app_settings: अनुप्रयोग सेटिंग्स
-  title: बतंग
-  sleep: निदाउनु
-  power: बल
 placeholder:
-  ethernet_connected: इन्टरनेट पहुँच
-  smart_charge: '- स्मार्ट शुल्क'
-  bluetooth_devices: ब्लुटुथ र उपकरणहरू
-  ethernet_disconnected: कुनै इन्टर्नेट पहुँच छैन
-  open_user_folder: प्रयोगकर्ता फोल्डर खोल्नुहोस्
-  volume: आवाज
-  open_system_tray: खुला प्रणाली ट्रे
   battery_remaining: '% बाँकी'
-  settings: द्रुत सेटिंग्स
+  bluetooth_devices: ब्लुटुथ र उपकरणहरू
+  ethernet_connected: इन्टरनेट पहुँच
+  ethernet_disconnected: कुनै इन्टर्नेट पहुँच छैन
   notifications: सूचना
+  open_system_tray: खुला प्रणाली ट्रे
+  open_user_folder: प्रयोगकर्ता फोल्डर खोल्नुहोस्
+  settings: द्रुत सेटिंग्स
+  smart_charge: '- स्मार्ट शुल्क'
+  volume: आवाज
+settings:
+  app_settings: अनुप्रयोग सेटिंग्स
+  log_out: बाहिर निस्कनु
+  power: बल
+  restart: फेरि शुरु गर्नु
+  shutdown: बन्द गर
+  sleep: निदाउनु
+  title: बतंग
 unlabelled_tray: अनलिसर गरिएको ट्रे आइकन
-context_menu:
-  add_module: मोड्युल थप्नुहोस्
-  remove: मोड्युल हटाउनुहोस्
-  task_manager: कार्य प्रबन्धक
-  settings: सेटिङहरू

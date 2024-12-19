@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: Qaçmaq
     cmd: Əmr etmək
+    explorer: Qaçmaq
 footer:
   shortcuts: Qısa yol göstərmək
 header:

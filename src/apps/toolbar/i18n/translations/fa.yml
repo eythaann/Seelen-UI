@@ -1,46 +1,46 @@
+context_menu:
+  add_module: ماژول را اضافه کنید
+  remove: ماژول را حذف کنید
+  settings: تنظیمات
+  task_manager: Task Manager
 media:
   device:
-    multimedia: چند رسانه ای
     comunications: ارتباطات
-  output_device: دستگاه خروجی
+    multimedia: چند رسانه ای
   input_device: دستگاه ورودی
-  players: بازیکنان رسانه ای
   master_volume: جلد استاد
+  output_device: دستگاه خروجی
+  players: بازیکنان رسانه ای
 network:
-  placeholder:
-    password: کلمه عبور
+  available: شبکه های موجود
   connect: وصل کردن
+  connected: متصل به
   disconnect: قطع شدن
   hidden: شبکه پنهان
   more: تنظیمات بیشتر شبکه
   not_found: هیچ شبکه ای پیدا نشده است
-  available: شبکه های موجود
+  placeholder:
+    password: کلمه عبور
   saved: شبکه های ذخیره شده
-  connected: متصل به
   scanning: اسکن شبکه ها
   secured: شبکه رمزگذاری شده
-settings:
-  app_settings: تنظیمات برنامه
-  restart: مجدداً
-  sleep: خواب
-  title: تنظیمات
-  log_out: خروج
-  shutdown: تعطیل
-  power: قدرت
 placeholder:
-  settings: تنظیمات سریع
-  ethernet_connected: دسترسی به اینترنت
-  volume: جلد
-  open_system_tray: سینی سیستم باز
   battery_remaining: ٪ باقی مانده
   bluetooth_devices: بلوتوث و دستگاه
+  ethernet_connected: دسترسی به اینترنت
   ethernet_disconnected: بدون دسترسی به اینترنت
-  smart_charge: '- شارژ هوشمند'
-  open_user_folder: پوشه کاربر را باز کنید
   notifications: اطلاعیه
+  open_system_tray: سینی سیستم باز
+  open_user_folder: پوشه کاربر را باز کنید
+  settings: تنظیمات سریع
+  smart_charge: '- شارژ هوشمند'
+  volume: جلد
+settings:
+  app_settings: تنظیمات برنامه
+  log_out: خروج
+  power: قدرت
+  restart: مجدداً
+  shutdown: تعطیل
+  sleep: خواب
+  title: تنظیمات
 unlabelled_tray: نماد سینی بدون نام
-context_menu:
-  add_module: ماژول را اضافه کنید
-  remove: ماژول را حذف کنید
-  task_manager: Task Manager
-  settings: تنظیمات

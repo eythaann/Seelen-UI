@@ -1,46 +1,46 @@
 context_menu:
-  remove: Remove Module
   add_module: Add Module
-  task_manager: Task Manager
+  remove: Remove Module
   settings: Settings
+  task_manager: Task Manager
 media:
+  device:
+    comunications: Communications
+    multimedia: Multimedia
+  input_device: Input device
   master_volume: Master Volume
   output_device: Output device
-  input_device: Input device
   players: Media Players
-  device:
-    multimedia: Multimedia
-    comunications: Communications
 network:
-  connected: Connected to
-  saved: Saved networks
   available: Available networks
-  not_found: No Wi-Fi networks found
-  secured: Encrypted network
-  scanning: Scanning for networks
-  more: More Network Settings
+  connect: Connect
+  connected: Connected to
+  disconnect: Disconnect
   hidden: Hidden Network
+  more: More Network Settings
+  not_found: No Wi-Fi networks found
   placeholder:
     password: Password
-  disconnect: Disconnect
-  connect: Connect
-settings:
-  title: Settings
-  app_settings: App Settings
-  log_out: Log Out
-  sleep: Sleep
-  restart: Restart
-  shutdown: Shutdown
-  power: Power
+  saved: Saved networks
+  scanning: Scanning for networks
+  secured: Encrypted network
 placeholder:
-  open_user_folder: Open User Folder
-  open_system_tray: Open System Tray
+  battery_remaining: '% remaining'
   bluetooth_devices: Bluetooth & Devices
   ethernet_connected: Internet access
   ethernet_disconnected: No internet access
-  volume: Volume
-  battery_remaining: '% remaining'
-  smart_charge: ' - Smart Charge'
-  settings: Quick Settings
   notifications: Notifications
+  open_system_tray: Open System Tray
+  open_user_folder: Open User Folder
+  settings: Quick Settings
+  smart_charge: ' - Smart Charge'
+  volume: Volume
+settings:
+  app_settings: App Settings
+  log_out: Log Out
+  power: Power
+  restart: Restart
+  shutdown: Shutdown
+  sleep: Sleep
+  title: Settings
 unlabelled_tray: Unlabelled Tray Icon

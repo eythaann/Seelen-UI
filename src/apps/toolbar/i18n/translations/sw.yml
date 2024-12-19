@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Mawasiliano
-  master_volume: Kiasi cha Mwalimu
-  input_device: Kifaa cha Kuingiza
-  players: Wachezaji wa media
-  output_device: Kifaa cha pato
-network:
-  placeholder:
-    password: Nenosiri
-  more: Mipangilio zaidi ya mtandao
-  not_found: Hakuna mitandao iliyopatikana
-  disconnect: Kukatwa
-  connect: Unganisha
-  hidden: Mtandao uliofichwa
-  connected: Imeunganishwa kwa
-  saved: Mitandao iliyohifadhiwa
-  secured: Mtandao uliosimbwa kwa njia fiche
-  available: Mitandao inayopatikana
-  scanning: Inatafuta mitandao
-settings:
-  restart: Anzisha tena
-  title: Mipangilio
-  shutdown: Kuzimisha
-  app_settings: Mipangilio ya programu
-  log_out: Ingia nje
-  sleep: Kulala
-  power: Nguvu
-placeholder:
-  ethernet_connected: Ufikiaji wa mtandao
-  settings: Mipangilio ya haraka
-  smart_charge: '- Smart Charge'
-  bluetooth_devices: Bluetooth & vifaa
-  open_system_tray: Tray ya mfumo wazi
-  open_user_folder: Fungua folda ya Mtumiaji
-  ethernet_disconnected: Hakuna ufikiaji wa mtandao
-  volume: Kiasi
-  battery_remaining: Imebaki
-  notifications: Arifa
-unlabelled_tray: Icon isiyo na msingi ya tray
 context_menu:
-  remove: Ondoa moduli
   add_module: Ongeza moduli
+  remove: Ondoa moduli
   settings: Mipangilio
   task_manager: Meneja wa Kazi
+media:
+  device:
+    comunications: Mawasiliano
+    multimedia: Multimedia
+  input_device: Kifaa cha Kuingiza
+  master_volume: Kiasi cha Mwalimu
+  output_device: Kifaa cha pato
+  players: Wachezaji wa media
+network:
+  available: Mitandao inayopatikana
+  connect: Unganisha
+  connected: Imeunganishwa kwa
+  disconnect: Kukatwa
+  hidden: Mtandao uliofichwa
+  more: Mipangilio zaidi ya mtandao
+  not_found: Hakuna mitandao iliyopatikana
+  placeholder:
+    password: Nenosiri
+  saved: Mitandao iliyohifadhiwa
+  scanning: Inatafuta mitandao
+  secured: Mtandao uliosimbwa kwa njia fiche
+placeholder:
+  battery_remaining: Imebaki
+  bluetooth_devices: Bluetooth & vifaa
+  ethernet_connected: Ufikiaji wa mtandao
+  ethernet_disconnected: Hakuna ufikiaji wa mtandao
+  notifications: Arifa
+  open_system_tray: Tray ya mfumo wazi
+  open_user_folder: Fungua folda ya Mtumiaji
+  settings: Mipangilio ya haraka
+  smart_charge: '- Smart Charge'
+  volume: Kiasi
+settings:
+  app_settings: Mipangilio ya programu
+  log_out: Ingia nje
+  power: Nguvu
+  restart: Anzisha tena
+  shutdown: Kuzimisha
+  sleep: Kulala
+  title: Mipangilio
+unlabelled_tray: Icon isiyo na msingi ya tray

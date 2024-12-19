@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Ṣafikun module Bẹrẹ
-  media: Ṣafikun module Media
-  add_file: Faili aṣa
-  add_folder: Folda aṣa aṣa
-  task_manager: Oluṣakoso iṣẹ-ṣiṣe
-  settings: Eto
 app_menu:
-  run_as: Run bi alakoso
-  pin_to_center: PIN si ile-iṣẹ
-  copy_handles: Daakọ mu
-  unpin: Ainidi
   close: Sunmọ
-  pin_to_left: PIN si osi
   close_multiple: Sunmọ gbogbo
-  open_file_location: Ṣii ipo faili ṣii
-  pin_to_right: Pin si ọtun
-  pin: Pini
-  kill_multiple: Pa Gbogbo awọn ilana
+  copy_handles: Daakọ mu
   kill: Ilana pipa
+  kill_multiple: Pa Gbogbo awọn ilana
+  open_file_location: Ṣii ipo faili ṣii
+  pin: Pini
+  pin_to_center: PIN si ile-iṣẹ
+  pin_to_left: PIN si osi
+  pin_to_right: Pin si ọtun
+  run_as: Run bi alakoso
+  unpin: Ainidi
+media:
+  not_playing: Ko si ohun ti ndun
 media_menu:
   remove: Mu Module Media kuro
 start_menu:
   remove: Yọ module bẹrẹ
-media:
-  not_playing: Ko si ohun ti ndun
+taskbar_menu:
+  add_file: Faili aṣa
+  add_folder: Folda aṣa aṣa
+  media: Ṣafikun module Media
+  settings: Eto
+  start: Ṣafikun module Bẹrẹ
+  task_manager: Oluṣakoso iṣẹ-ṣiṣe

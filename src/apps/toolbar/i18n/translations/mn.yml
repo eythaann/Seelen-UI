@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Модулийг нэмэх
+  remove: Модулийг зайлуулах
+  settings: Тохиргоо
+  task_manager: Ажлын менежер
 media:
   device:
     comunications: Харилцаа
     multimedia: Multimiedia
   input_device: Оролтын төхөөрөмж
   master_volume: Мэргэжч
-  players: Хэвлэл хэвлэл тоглогч
   output_device: Гаралтын төхөөрөмж
+  players: Хэвлэл хэвлэл тоглогч
 network:
+  available: Боломжтой сүлжээнүүд
+  connect: Холбох
+  connected: '-д холбогдсон'
+  disconnect: Тусгаарлах
+  hidden: Цэг сонссон сүлж
+  more: Сүлжээний илүү олон тохиргоо
+  not_found: Сүлжээ олдсонгүй
   placeholder:
     password: Нууц үг
-  not_found: Сүлжээ олдсонгүй
-  hidden: Цэг сонссон сүлж
-  disconnect: Тусгаарлах
-  connect: Холбох
-  more: Сүлжээний илүү олон тохиргоо
-  available: Боломжтой сүлжээнүүд
-  secured: Шифрлэгдсэн сүлжээ
   saved: Хадгалсан сүлжээнүүд
-  connected: '-д холбогдсон'
   scanning: Сүлжээг хайж байна
-settings:
-  shutdown: Унтраах
-  restart: Дахин ачааллах
-  log_out: Гарах
-  app_settings: Дуулахын тохиргоо
-  title: Тохиргоо
-  sleep: Нойр
-  power: Хүч чадал
+  secured: Шифрлэгдсэн сүлжээ
 placeholder:
   battery_remaining: '% үлдсэн'
-  volume: Хэмжээ
-  open_user_folder: Хэрэглэгчийн чиглэлд
-  smart_charge: '- ухаалаг цэнэг'
-  settings: Түлэлцэн тохиргоо
-  open_system_tray: Нээлттэй системийн тавиур
   bluetooth_devices: Блютүүт ба төхөөрөмж
-  ethernet_disconnected: Интернэтэд нэвтрэх боломжгүй байна
   ethernet_connected: Интернэт интернет нэвтрэх
+  ethernet_disconnected: Интернэтэд нэвтрэх боломжгүй байна
   notifications: Мэдэгдэл
+  open_system_tray: Нээлттэй системийн тавиур
+  open_user_folder: Хэрэглэгчийн чиглэлд
+  settings: Түлэлцэн тохиргоо
+  smart_charge: '- ухаалаг цэнэг'
+  volume: Хэмжээ
+settings:
+  app_settings: Дуулахын тохиргоо
+  log_out: Гарах
+  power: Хүч чадал
+  restart: Дахин ачааллах
+  shutdown: Унтраах
+  sleep: Нойр
+  title: Тохиргоо
 unlabelled_tray: Unlabelled Tray дүрс
-context_menu:
-  add_module: Модулийг нэмэх
-  remove: Модулийг зайлуулах
-  settings: Тохиргоо
-  task_manager: Ажлын менежер

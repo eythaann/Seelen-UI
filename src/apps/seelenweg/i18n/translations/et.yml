@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Lisage käivitusmoodul
-  media: Lisage meediumimoodul
-  add_file: PIN -i kohandatud fail
-  add_folder: PIN -i kohandatud kaust
-  task_manager: Tegumihaldur
-  settings: Seaded
 app_menu:
-  pin_to_center: Tihvt keskele
   close: Sulge
-  pin: Nööpnõel
   close_multiple: Sulgege kõik
-  open_file_location: Ava faili asukoht
-  unpin: Lahti keelama
-  pin_to_left: Tihvt vasakule
-  pin_to_right: Tihvt paremal
-  run_as: Joosta administraatorina
   copy_handles: Koopiakäepidemed
   kill: Tapmisprotsess
   kill_multiple: Tapke kõik protsessid
+  open_file_location: Ava faili asukoht
+  pin: Nööpnõel
+  pin_to_center: Tihvt keskele
+  pin_to_left: Tihvt vasakule
+  pin_to_right: Tihvt paremal
+  run_as: Joosta administraatorina
+  unpin: Lahti keelama
+media:
+  not_playing: Miski ei mängi
 media_menu:
   remove: Eemaldage meediumimoodul
 start_menu:
   remove: Eemaldage algusmoodul
-media:
-  not_playing: Miski ei mängi
+taskbar_menu:
+  add_file: PIN -i kohandatud fail
+  add_folder: PIN -i kohandatud kaust
+  media: Lisage meediumimoodul
+  settings: Seaded
+  start: Lisage käivitusmoodul
+  task_manager: Tegumihaldur

@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Tambahkan modul media
-  start: Tambahkan modul Mulai
-  add_file: Pin file khusus
-  add_folder: Pin folder khusus
-  settings: Pengaturan
-  task_manager: Manajer Tugas
 app_menu:
-  pin_to_center: Pin ke tengah
-  open_file_location: Buka Lokasi File
-  close_multiple: Tutup semua
-  run_as: Jalankan sebagai administrator
-  pin_to_right: Pin ke kanan
-  pin: Pin
-  pin_to_left: Pin ke kiri
   close: Menutup
-  unpin: Membuka peniti
+  close_multiple: Tutup semua
   copy_handles: Pegangan Salin
   kill: Bunuh Proses
   kill_multiple: Matikan Semua Proses
+  open_file_location: Buka Lokasi File
+  pin: Pin
+  pin_to_center: Pin ke tengah
+  pin_to_left: Pin ke kiri
+  pin_to_right: Pin ke kanan
+  run_as: Jalankan sebagai administrator
+  unpin: Membuka peniti
+media:
+  not_playing: Tidak ada yang bermain
 media_menu:
   remove: Hapus Modul Media
 start_menu:
   remove: Hapus modul Mulai
-media:
-  not_playing: Tidak ada yang bermain
+taskbar_menu:
+  add_file: Pin file khusus
+  add_folder: Pin folder khusus
+  media: Tambahkan modul media
+  settings: Pengaturan
+  start: Tambahkan modul Mulai
+  task_manager: Manajer Tugas

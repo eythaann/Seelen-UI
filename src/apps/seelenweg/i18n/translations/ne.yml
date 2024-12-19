@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: मिडिया मोड्युल थप्नुहोस्
-  start: स्टार्ट मोड्युल थप्नुहोस्
-  add_folder: पिन कस्टम फोल्डर
-  add_file: पिन अनुकूलन फाइल
-  settings: सेटिङहरू
-  task_manager: कार्य प्रबन्धक
 app_menu:
-  run_as: प्रशासक रूपमा चलाउन
-  pin_to_left: बाँया बायाँ
-  open_file_location: फाइल स्थान खोल्नुहोस्
-  close_multiple: चौमा
-  pin_to_center: केन्द्रमा पिन
-  copy_handles: मुख्य ह्यान्डल
-  pin: आलपिन
-  unpin: चुस्नु
-  pin_to_right: दायाँ राख्न पिन
   close: घनिष्ट
+  close_multiple: चौमा
+  copy_handles: मुख्य ह्यान्डल
   kill: प्रक्रिया मार्नुहोस्
   kill_multiple: सबै प्रक्रियाहरू मार्नुहोस्
+  open_file_location: फाइल स्थान खोल्नुहोस्
+  pin: आलपिन
+  pin_to_center: केन्द्रमा पिन
+  pin_to_left: बाँया बायाँ
+  pin_to_right: दायाँ राख्न पिन
+  run_as: प्रशासक रूपमा चलाउन
+  unpin: चुस्नु
+media:
+  not_playing: केहि खेल्दैन
 media_menu:
   remove: मिडिया मोड्युल हटाउनुहोस्
 start_menu:
   remove: सुरु मोड्युल हटाउनुहोस्
-media:
-  not_playing: केहि खेल्दैन
+taskbar_menu:
+  add_file: पिन अनुकूलन फाइल
+  add_folder: पिन कस्टम फोल्डर
+  media: मिडिया मोड्युल थप्नुहोस्
+  settings: सेटिङहरू
+  start: स्टार्ट मोड्युल थप्नुहोस्
+  task_manager: कार्य प्रबन्धक

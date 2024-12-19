@@ -1,269 +1,269 @@
-sides:
-  left: Esquerre
-  right: Dret
-  bottom: Fons
-  top: Superior
-header:
-  labels:
-    info: Informació
-    seelen_wm: Gestor de finestres
-    seelen_bar: Barra d’eines de luxe
-    shortcuts: Dreceres
-    developer: Desenvolupador
-    seelen_weg: Moll/barra de tasques
-    monitors: Monitors
-    specific_apps: Aplicacions específiques
-    general: General
-    seelen_rofi: Llançador d'aplicacions
-    virtual_desk: Desktops virtuals
-    home: Casa
-    mods: Connectors i widgets
-    seelen_wall: Gestor de fons de pantalla
-start:
-  title: Benvingut!
-  message_accent: Optimitzeu la vostra productivitat amb estil.
-  message: >-
-    Benvingut a la interfície d'usuari de Seelen, l'entorn d'escriptori
-    definitiu amb un gestor de Windows de rajoles incorporat per millorar la
-    vostra experiència de Windows. Exploreu una nova era d’eficiència i
-    multitasca amb la nostra interfície intuïtiva i les funcions avançades.
-general:
-  theme:
-    added: Tema ja afegit
-    tags: Etiquetes
-    add: Afegiu el tema
-    description: Descripció
-    author: Autora
-    enabled: Temes habilitats
-    placeholder: Seleccioneu el tema
-    label: Informació del tema
-    available: Disponible
-    selected: Seleccionat
-  startup: Executeu la posada en marxa?
-  language: Llenguatge
-  icon_pack:
-    label: Paquets d’icones
-  accent_color: Color d’accent
-  wallpaper:
-    select: Seleccioneu fons de pantalla
-  date_format: Format de la data
-toolbar:
-  placeholder:
-    description: Descripció
-    select: Estructura de la barra d’eines
-    author: Autora
-  height: Altura
-  enable: Activa la barra d’eines de luxe
-  auto_hide: Auto amaga
-  label: Barra d’eines
-  delay_to_hide: Tarda en amagar-se
-  delay_to_show: Retard per mostrar
-  use_multiple_monitor_overlap_logic: >-
-    Utilitzeu la lògica específica de la pantalla en lloc de la lògica
-    d'enfocament únic
-wm:
-  border:
-    offset: Compensació fronterera
-    width: Amplada de la frontera
-    enable: Activa la vora de la finestra
-  layout: Pla
-  space_between_containers: Espai entre contenidors
-  workspace_offset: Offset d'espais de treball (marges)
-  resize_delta: Redimensiona el delta (%)
-  workspace_padding: Rado d’espais de treball
-  author: Autora
-  description: Descripció
-  enable: Activa el gestor de finestres de rajoles
-weg:
-  items:
-    visible_separators: Separadors visibles
-    label: Plantes
-    zoom_size: Mida zoom (usada per a temes)
-    size: Mida de l'article
-    gap: Espai entre articles
-  enable: Activa el moll/la barra de tasques
-  gap: Escletxa
-  margin: Marge
-  padding: Encoir
-  width: Amplada
-  label: Moll/barra de tasques
-  auto_hide: Amaga automàtic
-  dock_side: Posició
-  delay_to_hide: Tarda en amagar-se
-  delay_to_show: Retard per mostrar
-  use_multiple_monitor_overlap_logic: >-
-    Utilitzeu la lògica específica de la pantalla en lloc de la lògica
-    d'enfocament únic
-devtools:
-  load: Carregar
-  data_folder: Carpeta de dades
-  settings_file: Arxiu de configuració
-  custom_config_file: Carregueu el fitxer de configuració personalitzada
-  app_folders: Carpetes d'aplicacions
-  enable: Activa les eines de desenvolupadors
-  install_folder: Carpeta d'instal·lació
+app_launcher:
+  enable: Activa el llançador d'aplicacions
+  monitor: Monitoritzar per mostrar
+  runners:
+    cmd: Manar
+    explorer: Dirigir
+    label: Corredors
 apps_configurations:
   app:
-    options:
-      force: Gestionar la força
-      float: Surar
-      unmanage: Implacable
-      pinned: Fixada
-      hidden: Amagueu del moll/barra de tasques
-    ok_edit: Actualitzar
-    workspace: Espai de treball
-    name: Nom
     bindings: Enquadernació (nota les dues opcions són necessàries)
     category: Categoria
     category_placeholder: Res
-    title_readonly: Visualització {{nom}}
-    workspace_placeholder: Res
-    ok_readonly: Edita com a nou
-    ok_create: Crear
     monitor: Observar
-    title_create: Creació {{nom}}
     monitor_placeholder: Res
+    name: Nom
+    ok_create: Crear
+    ok_edit: Actualitzar
+    ok_readonly: Edita com a nou
+    options:
+      float: Surar
+      force: Gestionar la força
+      hidden: Amagueu del moll/barra de tasques
+      pinned: Fixada
+      unmanage: Implacable
+    options_label: Opcions addicionals
+    title_create: Creació {{nom}}
+    title_edit: Edició {{nom}}
+    title_readonly: Visualització {{nom}}
     weg_options_label: Opcions de moll/barra de tasques
     wm_options_label: Opcions del gestor de finestres
-    options_label: Opcions addicionals
-    title_edit: Edició {{nom}}
-  identifier:
-    add_block: Afegiu bloc
-    remove: Esborra el bloc
-    negation: Negar la concordança
-    and: I
-    matching_strategy: Estratègia de coincidència
-    id: Identificador
-    kind: Identificar -se per
-    or: O
-  confirm_delete_title: Confirmeu Suprimeix
-  search: Cerca
-  export: Exportar
-  new: Nou
-  bundled_title: Configuració de l'aplicació agrupada amb Seelen
-  import: Importar
-  confirm_delete: Esteu segur que voleu suprimir aquesta configuració/s?
+    workspace: Espai de treball
+    workspace_placeholder: Res
   bundled_msg: >-
     Aquestes configuracions agrupades no són editables i estan dissenyades per
     proporcionar -vos la millor experiència sense personalització. Configuen
     automàticament les aplicacions més habituals per a vosaltres.
+  bundled_title: Configuració de l'aplicació agrupada amb Seelen
+  confirm_delete: Esteu segur que voleu suprimir aquesta configuració/s?
+  confirm_delete_title: Confirmeu Suprimeix
   delete: Esborrar
-  swap: Canviar
+  export: Exportar
   extra_info: >-
     La interfície d'usuari de Seelen només utilitza un identificador per
     aplicació (primer partit que es troba), de manera que l'ordre de com
     s'especifica és important, es prioritzarà l'últim afegit, ja que nota que la
     taula s'ordena de manera predeterminada de l'antiga a la vella.
+  identifier:
+    add_block: Afegiu bloc
+    and: I
+    id: Identificador
+    kind: Identificar -se per
+    matching_strategy: Estratègia de coincidència
+    negation: Negar la concordança
+    or: O
+    remove: Esborra el bloc
+  import: Importar
+  new: Nou
+  search: Cerca
+  swap: Canviar
+cancel: Cancel · lar
+close: Tancar -se
+delete: Esborrar
+devtools:
+  app_folders: Carpetes d'aplicacions
+  custom_config_file: Carregueu el fitxer de configuració personalitzada
+  data_folder: Carpeta de dades
+  enable: Activa les eines de desenvolupadors
+  install_folder: Carpeta d'instal·lació
+  load: Carregar
+  settings_file: Arxiu de configuració
 extras:
-  github: Github
-  exit: Deixar/sortir
-  links: Enllaços oficials
   discord: Discòrdia
+  exit: Deixar/sortir
+  github: Github
+  links: Enllaços oficials
   relaunch: Rellançar
   version: Versió
-shortcuts:
+general:
+  accent_color: Color d’accent
+  date_format: Format de la data
+  icon_pack:
+    label: Paquets d’icones
+  language: Llenguatge
+  startup: Executeu la posada en marxa?
+  theme:
+    add: Afegiu el tema
+    added: Tema ja afegit
+    author: Autora
+    available: Disponible
+    description: Descripció
+    enabled: Temes habilitats
+    label: Informació del tema
+    placeholder: Seleccioneu el tema
+    selected: Seleccionat
+    tags: Etiquetes
+  wallpaper:
+    select: Seleccioneu fons de pantalla
+header:
   labels:
-    reserve_top: Reserva superior
-    move_to_workspace_4: Traslladar -se a l'espai de treball 4
-    move_to_workspace_7: Desplaceu -vos a l'espai de treball 7
-    send_to_workspace_2: Enviar a l'espai de treball 2
-    send_to_workspace_9: Enviar a l’espai de treball 9
-    switch_workspace_2: Canvia a l'espai de treball 2
-    move_to_workspace_1: Desplaceu -vos a l'espai de treball 1
-    send_to_workspace_7: Enviar a l’espai de treball 7
-    switch_workspace_9: Canvia a l'espai de treball 9
-    reserve_right: Reserva a la dreta
-    reserve_left: Reserva a l'esquerra
-    switch_workspace_3: Canvia a l'espai de treball 3
-    decrease_width: Disminuir l'amplada
-    move_to_workspace_3: Desplaceu -vos a l'espai de treball 3
-    focus_right: Centra't a la dreta
-    move_to_workspace_5: Desplaceu -vos a l'espai de treball 5
-    focus_bottom: Focus Bottom
-    send_to_workspace_3: Envia a l’espai de treball 3
-    switch_workspace_4: Canvia a l'espai de treball 4
-    switch_workspace_6: Canvia a l'espai de treball 6
-    focus_left: Focus deixat
-    move_to_workspace_0: Desplaceu -vos a l'espai de treball 0
-    move_to_workspace_9: Traslladar -se a l'espai de treball 9
-    reserve_float: Reserva flotant
-    reserve_stack: Pila de reserva
-    focus_latest: Focus més recent
-    move_to_workspace_6: Desplaceu -vos a l'espai de treball 6
-    send_to_workspace_6: Enviar a l’espai de treball 6
-    switch_workspace_7: Canvia a l'espai de treball 7
-    switch_workspace_5: Canvia a l'espai de treball 5
-    send_to_workspace_8: Enviar a l'espai de treball 8
-    increase_width: Augment d'amplada
-    switch_workspace_8: Canvia a l'espai de treball 8
-    send_to_workspace_5: Enviar a l’espai de treball 5
-    move_to_workspace_2: Desplaceu -vos a l'espai de treball 2
-    reserve_bottom: Reserva de fons
-    restore_sizes: Restaurar les mides
-    increase_height: Augmentar l'alçada
-    focus_top: Focus Top
-    decrease_height: Disminuir l'alçada
-    move_to_workspace_8: Traslladar -se a l'espai de treball 8
-    send_to_workspace_0: Enviar a l’espai de treball 0
-    send_to_workspace_4: Enviar a l’espai de treball 4
-    send_to_workspace_1: Envia a l'espai de treball 1
-    switch_workspace_0: Canvia a l'espai de treball 1
-    switch_workspace_1: Canvia a l'espai de treball 2
-    misc_toggle_lock_tracing: Tornada de tancament de bloqueig (registres)
-    misc_toggle_win_event_tracing: Toggle Win Traça (registres)
-    misc_open_settings: Configuració oberta
-    toggle_launcher: Essibent
+    developer: Desenvolupador
+    general: General
+    home: Casa
+    info: Informació
+    mods: Connectors i widgets
+    monitors: Monitors
+    seelen_bar: Barra d’eines de luxe
+    seelen_rofi: Llançador d'aplicacions
+    seelen_wall: Gestor de fons de pantalla
+    seelen_weg: Moll/barra de tasques
+    seelen_wm: Gestor de finestres
+    shortcuts: Dreceres
+    specific_apps: Aplicacions específiques
+    virtual_desk: Desktops virtuals
+inherit: Heretar
+inProgress: En progrés...
+insert: Inserir
+loading: Carregant ...
+miscellaneous: Divers
+mods:
+  plugins: Tapins
+  target: Objectiu
+  widgets: Widgets
+monitors_configurations:
+  label: Monitor {{index}}
+more: Més
+open: Obrir
+quit: Abandonar
+remove: Treure
+save: Estalviar
+save_and_restart: Desar i reiniciar
+shortcuts:
   enable: Activa les dreceres integrades (AHK)
   enable_tooltip: >-
     Desactiveu si implementareu les vostres pròpies dreceres mitjançant l'API de
     Seelen Core
-  reset: Restableix als valors predeterminats
+  labels:
+    decrease_height: Disminuir l'alçada
+    decrease_width: Disminuir l'amplada
+    focus_bottom: Focus Bottom
+    focus_latest: Focus més recent
+    focus_left: Focus deixat
+    focus_right: Centra't a la dreta
+    focus_top: Focus Top
+    increase_height: Augmentar l'alçada
+    increase_width: Augment d'amplada
+    misc_open_settings: Configuració oberta
+    misc_toggle_lock_tracing: Tornada de tancament de bloqueig (registres)
+    misc_toggle_win_event_tracing: Toggle Win Traça (registres)
+    move_to_workspace_0: Desplaceu -vos a l'espai de treball 0
+    move_to_workspace_1: Desplaceu -vos a l'espai de treball 1
+    move_to_workspace_2: Desplaceu -vos a l'espai de treball 2
+    move_to_workspace_3: Desplaceu -vos a l'espai de treball 3
+    move_to_workspace_4: Traslladar -se a l'espai de treball 4
+    move_to_workspace_5: Desplaceu -vos a l'espai de treball 5
+    move_to_workspace_6: Desplaceu -vos a l'espai de treball 6
+    move_to_workspace_7: Desplaceu -vos a l'espai de treball 7
+    move_to_workspace_8: Traslladar -se a l'espai de treball 8
+    move_to_workspace_9: Traslladar -se a l'espai de treball 9
+    reserve_bottom: Reserva de fons
+    reserve_float: Reserva flotant
+    reserve_left: Reserva a l'esquerra
+    reserve_right: Reserva a la dreta
+    reserve_stack: Pila de reserva
+    reserve_top: Reserva superior
+    restore_sizes: Restaurar les mides
+    send_to_workspace_0: Enviar a l’espai de treball 0
+    send_to_workspace_1: Envia a l'espai de treball 1
+    send_to_workspace_2: Enviar a l'espai de treball 2
+    send_to_workspace_3: Envia a l’espai de treball 3
+    send_to_workspace_4: Enviar a l’espai de treball 4
+    send_to_workspace_5: Enviar a l’espai de treball 5
+    send_to_workspace_6: Enviar a l’espai de treball 6
+    send_to_workspace_7: Enviar a l’espai de treball 7
+    send_to_workspace_8: Enviar a l'espai de treball 8
+    send_to_workspace_9: Enviar a l’espai de treball 9
+    switch_workspace_0: Canvia a l'espai de treball 1
+    switch_workspace_1: Canvia a l'espai de treball 2
+    switch_workspace_2: Canvia a l'espai de treball 2
+    switch_workspace_3: Canvia a l'espai de treball 3
+    switch_workspace_4: Canvia a l'espai de treball 4
+    switch_workspace_5: Canvia a l'espai de treball 5
+    switch_workspace_6: Canvia a l'espai de treball 6
+    switch_workspace_7: Canvia a l'espai de treball 7
+    switch_workspace_8: Canvia a l'espai de treball 8
+    switch_workspace_9: Canvia a l'espai de treball 9
+    toggle_launcher: Essibent
   readonly_tooltip: Aquesta és una drecera de només lectura
-loading: Carregant ...
-open: Obrir
-delete: Esborrar
-inProgress: En progrés...
-cancel: Cancel · lar
-save: Estalviar
-quit: Abandonar
+  reset: Restableix als valors predeterminats
+sides:
+  bottom: Fons
+  left: Esquerre
+  right: Dret
+  top: Superior
+start:
+  message: >-
+    Benvingut a la interfície d'usuari de Seelen, l'entorn d'escriptori
+    definitiu amb un gestor de Windows de rajoles incorporat per millorar la
+    vostra experiència de Windows. Exploreu una nova era d’eficiència i
+    multitasca amb la nostra interfície intuïtiva i les funcions avançades.
+  message_accent: Optimitzeu la vostra productivitat amb estil.
+  title: Benvingut!
+toolbar:
+  auto_hide: Auto amaga
+  delay_to_hide: Tarda en amagar-se
+  delay_to_show: Retard per mostrar
+  enable: Activa la barra d’eines de luxe
+  height: Altura
+  label: Barra d’eines
+  placeholder:
+    author: Autora
+    description: Descripció
+    select: Estructura de la barra d’eines
+  use_multiple_monitor_overlap_logic: >-
+    Utilitzeu la lògica específica de la pantalla en lloc de la lògica
+    d'enfocament únic
+update:
+  available: Actualitzeu disponible.
+  channel: Canal d'actualització
+  downloading: Descarregant ...
 vd:
-  strategy:
-    seelen: Seelen
-    label: Estratègia d'escriptori virtual
-    native: Nadiua
   disabled_windows_version: >-
     L'estratègia d'escriptori virtual nativa no està disponible per a la vostra
     versió de Windows.
-save_and_restart: Desar i reiniciar
-monitors_configurations:
-  label: Monitor {{index}}
+  strategy:
+    label: Estratègia d'escriptori virtual
+    native: Nadiua
+    seelen: Seelen
 wall:
   backgrounds: Fons de pantalla
-  no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
   enable: Activa el gestor de fons de pantalla
-  random: Randomize Show de diapositives
-  interval: Canvieu el fons de pantalla cada
   hours: hores
-  seconds: segons
+  interval: Canvieu el fons de pantalla cada
   minutes: minuts
-app_launcher:
-  runners:
-    label: Corredors
-    explorer: Dirigir
-    cmd: Manar
-  monitor: Monitoritzar per mostrar
-  enable: Activa el llançador d'aplicacions
-insert: Inserir
-inherit: Heretar
-more: Més
-close: Tancar -se
-update:
-  available: Actualitzeu disponible.
-  downloading: Descarregant ...
-  channel: Canal d'actualització
-miscellaneous: Divers
-mods:
-  widgets: Widgets
-  plugins: Tapins
-  target: Objectiu
-remove: Treure
+  no_background: A la presentació de diapositives buides, utilitzant el fons del tema.
+  random: Randomize Show de diapositives
+  seconds: segons
+weg:
+  auto_hide: Amaga automàtic
+  delay_to_hide: Tarda en amagar-se
+  delay_to_show: Retard per mostrar
+  dock_side: Posició
+  enable: Activa el moll/la barra de tasques
+  gap: Escletxa
+  items:
+    gap: Espai entre articles
+    label: Plantes
+    size: Mida de l'article
+    visible_separators: Separadors visibles
+    zoom_size: Mida zoom (usada per a temes)
+  label: Moll/barra de tasques
+  margin: Marge
+  padding: Encoir
+  use_multiple_monitor_overlap_logic: >-
+    Utilitzeu la lògica específica de la pantalla en lloc de la lògica
+    d'enfocament únic
+  width: Amplada
+wm:
+  author: Autora
+  border:
+    enable: Activa la vora de la finestra
+    offset: Compensació fronterera
+    width: Amplada de la frontera
+  description: Descripció
+  enable: Activa el gestor de finestres de rajoles
+  layout: Pla
+  resize_delta: Redimensiona el delta (%)
+  space_between_containers: Espai entre contenidors
+  workspace_offset: Offset d'espais de treball (marges)
+  workspace_padding: Rado d’espais de treball

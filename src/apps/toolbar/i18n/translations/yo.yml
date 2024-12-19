@@ -1,46 +1,46 @@
-media:
-  device:
-    comunications: Awọn ibaraẹnisọrọ
-    multimedia: Multimedia
-  master_volume: Ohun elo
-  input_device: Ẹrọ titẹ
-  players: Awọn oṣere Media
-  output_device: Ẹrọ iṣelọpọ
-network:
-  placeholder:
-    password: Ọrọ igbaniwọle
-  disconnect: Ge kuro
-  not_found: Ko si awọn nẹtiwọki ti a rii
-  hidden: Nẹtiwọki ti o farapamọ
-  connect: Sopọ
-  more: Awọn eto nẹtiwọọki diẹ sii
-  saved: Awọn nẹtiwọki ti a fipamọ
-  secured: Nẹtiwọọki ti paroko
-  connected: Ti sopọ si
-  scanning: Ṣiṣayẹwo fun awọn nẹtiwọki
-  available: Awọn nẹtiwọki ti o wa
-settings:
-  shutdown: Paade
-  title: Ètò
-  app_settings: Eto App
-  log_out: Wọle
-  restart: Tun bẹrẹ
-  sleep: Sun
-  power: Agbara
-placeholder:
-  ethernet_connected: Wiwọle Intanẹẹti
-  volume: Iwọn didun
-  battery_remaining: '% ti o ku'
-  smart_charge: '- Awọn iṣakoso Smart'
-  open_user_folder: Ṣiṣi folda olumulo
-  ethernet_disconnected: Ko si wiwọle intanẹẹti ko si
-  bluetooth_devices: Bluetooth & awọn ẹrọ
-  settings: Eto Awọn ọna
-  open_system_tray: Ṣii Tẹ Tẹ
-  notifications: Awọn iwifunni
-unlabelled_tray: Alailowaya ti ko ni ile-iwe
 context_menu:
   add_module: Fikun module
   remove: Yọ module
   settings: Eto
   task_manager: Oluṣakoso iṣẹ-ṣiṣe
+media:
+  device:
+    comunications: Awọn ibaraẹnisọrọ
+    multimedia: Multimedia
+  input_device: Ẹrọ titẹ
+  master_volume: Ohun elo
+  output_device: Ẹrọ iṣelọpọ
+  players: Awọn oṣere Media
+network:
+  available: Awọn nẹtiwọki ti o wa
+  connect: Sopọ
+  connected: Ti sopọ si
+  disconnect: Ge kuro
+  hidden: Nẹtiwọki ti o farapamọ
+  more: Awọn eto nẹtiwọọki diẹ sii
+  not_found: Ko si awọn nẹtiwọki ti a rii
+  placeholder:
+    password: Ọrọ igbaniwọle
+  saved: Awọn nẹtiwọki ti a fipamọ
+  scanning: Ṣiṣayẹwo fun awọn nẹtiwọki
+  secured: Nẹtiwọọki ti paroko
+placeholder:
+  battery_remaining: '% ti o ku'
+  bluetooth_devices: Bluetooth & awọn ẹrọ
+  ethernet_connected: Wiwọle Intanẹẹti
+  ethernet_disconnected: Ko si wiwọle intanẹẹti ko si
+  notifications: Awọn iwifunni
+  open_system_tray: Ṣii Tẹ Tẹ
+  open_user_folder: Ṣiṣi folda olumulo
+  settings: Eto Awọn ọna
+  smart_charge: '- Awọn iṣakoso Smart'
+  volume: Iwọn didun
+settings:
+  app_settings: Eto App
+  log_out: Wọle
+  power: Agbara
+  restart: Tun bẹrẹ
+  shutdown: Paade
+  sleep: Sun
+  title: Ètò
+unlabelled_tray: Alailowaya ti ko ni ile-iwe

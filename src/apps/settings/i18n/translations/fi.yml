@@ -1,265 +1,265 @@
-sides:
-  right: Oikea
-  bottom: Pohja
-  top: Ylhäältä
-  left: Vasen
-header:
-  labels:
-    developer: Kehittäjä
-    info: Tiedot
-    seelen_bar: Hieno työkalurivi
-    seelen_weg: Telakka/tehtäväpalkki
-    seelen_wm: Ikkunanhallinta
-    shortcuts: Pikakuvakkeet
-    monitors: Näytöt
-    specific_apps: Erityiset sovellukset
-    general: Yleinen
-    seelen_rofi: Sovelluskäynnistys
-    virtual_desk: Virtuaalinen työpöytä
-    home: Kotiin
-    mods: Lisäosat ja widgetit
-    seelen_wall: Taustakuvan johtaja
-start:
-  title: Tervetuloa!
-  message_accent: Optimoi tuottavuus tyylillä!
-  message: >-
-    Tervetuloa Seelen UI: hen, Ultimate Desktop -ympäristöön, jossa on
-    sisällytetty laatoitus Windows Manager, parantaaksesi Windows -kokemustasi!
-    Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen intuitiivisella
-    rajapinnalla ja edistyneillä ominaisuuksilla.
-general:
-  theme:
-    description: Kuvaus
-    label: Teematiedot
-    added: Jo lisätty teema
-    enabled: Mahdolliset teemat
-    add: Lisätä teemaa
-    tags: Tunnisteet
-    author: Kirjoittaja
-    placeholder: Valitse teema
-    available: Saatavilla
-    selected: Valittu
-  language: Kieli
-  startup: Suorittaa käynnistyksen yhteydessä?
-  icon_pack:
-    label: Kuvakepakkaukset
-  accent_color: Korostusväri
-  wallpaper:
-    select: Valitse taustakuva
-  date_format: Päiväysmuoto
-toolbar:
-  placeholder:
-    description: Kuvaus
-    select: Työkalurivin rakenne
-    author: Kirjoittaja
-  height: Korkeus
-  enable: Ota hieno työkalurivi käyttöön
-  auto_hide: Automaattinen piilo
-  label: Työkalurivi
-  delay_to_hide: Viive piilottaa
-  delay_to_show: Viive näyttöön
-  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
-wm:
-  border:
-    offset: Rajan siirtyminen
-    enable: Ota ikkunan reuna käyttöön
-    width: Rajan leveys
-  layout: Layout
-  description: Kuvaus
-  workspace_padding: Työtilat
-  resize_delta: Muuttaa Delta (%)
-  space_between_containers: Konttien välinen tila
-  author: Kirjoittaja
-  workspace_offset: Työtilojen siirtymä (marginaalit)
-  enable: Ota laatta -ikkunanhallinta käyttöön
-weg:
-  items:
-    zoom_size: Zoomoitu koko (käytetty teemoihin)
-    size: Esineen koko
-    visible_separators: Näkyvät erottimet
-    gap: Tilaa esineiden välillä
-    label: Kohteet
-  width: Leveys
-  margin: Marginaali
-  gap: Kuilu
-  auto_hide: Automaattinen piilo
-  padding: Pehmuste
-  label: Telakka/tehtäväpalkki
-  enable: Ota Dock/tehtäväpalkki käyttöön
-  dock_side: Sijainti
-  delay_to_hide: Viive piilottaa
-  delay_to_show: Viive näyttöön
-  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
-devtools:
-  load: Ladata
-  custom_config_file: Lataa mukautettu konfigurointitiedosto
-  settings_file: Asetustiedosto
-  data_folder: Tietokansio
-  enable: Ota kehittäjätyökalut käyttöön
-  install_folder: Asennuskansio
-  app_folders: Sovelluskansiot
+app_launcher:
+  enable: Ota sovelluksen kantoraketti käyttöön
+  monitor: Tarkkailla
+  runners:
+    cmd: Komento
+    explorer: Juoksua
+    label: Juoksijat
 apps_configurations:
   app:
-    options:
-      force: Voimankäyttö
-      float: Kellua
-      unmanage: Hallinta
-      pinned: Kiinnitetty
-      hidden: Piiloutua telakalta/tehtäväpalkista
-    category: Kategoria
-    title_create: '{{Nimi}} luominen'
-    category_placeholder: Ei mitään
-    ok_edit: Päivittää
-    workspace: Työtila
-    workspace_placeholder: Ei mitään
-    ok_create: Luoda
     bindings: Sidonta (huomautus tarvitaan molemmat vaihtoehdot)
-    ok_readonly: Muokata UUSIA
+    category: Kategoria
+    category_placeholder: Ei mitään
+    monitor: Monitori
     monitor_placeholder: Ei mitään
     name: Nimi
+    ok_create: Luoda
+    ok_edit: Päivittää
+    ok_readonly: Muokata UUSIA
+    options:
+      float: Kellua
+      force: Voimankäyttö
+      hidden: Piiloutua telakalta/tehtäväpalkista
+      pinned: Kiinnitetty
+      unmanage: Hallinta
+    options_label: Ylimääräiset vaihtoehdot
+    title_create: '{{Nimi}} luominen'
+    title_edit: Muokkaaminen {{nimi}}
     title_readonly: Katselu {{nimi}}
-    monitor: Monitori
     weg_options_label: Dock/tehtäväpalkin vaihtoehdot
     wm_options_label: Window Manager -vaihtoehdot
-    options_label: Ylimääräiset vaihtoehdot
-    title_edit: Muokkaaminen {{nimi}}
-  identifier:
-    add_block: Lisätä
-    remove: Poistaa lohko
-    negation: Negatiivista vastaavuus
-    and: JA
-    kind: Tunnistaa jtk
-    matching_strategy: Sovitusstrategia
-    id: Tunniste
-    or: TAI
-  delete: Poistaa
-  new: Uusi
-  export: Viedä
-  confirm_delete: Haluatko varmasti poistaa tämän kokoonpanon/S?
-  swap: Vaihtaa
-  search: Hae
-  import: Tuonti
-  confirm_delete_title: Vahvista poistaminen
+    workspace: Työtila
+    workspace_placeholder: Ei mitään
   bundled_msg: >-
     Näitä pauhutettuja kokoonpanoja ei voida muokata, ja ne on suunniteltu
     tarjoamaan sinulle paras kokemus ilman räätälöintiä. Ne määrittelevät
     sinulle yleisimmät sovellukset automaattisesti.
   bundled_title: APP -konfigurointi, joka on mukana Seelenin kanssa
+  confirm_delete: Haluatko varmasti poistaa tämän kokoonpanon/S?
+  confirm_delete_title: Vahvista poistaminen
+  delete: Poistaa
+  export: Viedä
   extra_info: >-
     Seelen -käyttöliittymä käyttää vain yhtä tunnistetta sovellusta kohden
     (ensimmäinen ottelu löydetty), joten tilaus kuinka spesifikaatio on tärkeä,
     viimeisin lisätty lisätään etusijalle, kuten huomaa, että taulukko
     lajitellaan oletuksena viimeisimmästä vanhaan.
-extras:
-  exit: Lopettaa/poistua
-  relaunch: Käynnistää uudelleen
-  links: Viralliset linkit
-  github: Github
-  version: Versio
-  discord: Erimielisyys
-shortcuts:
-  labels:
-    reserve_bottom: Varata pohja
-    switch_workspace_6: Vaihda työtilaan 6
-    switch_workspace_4: Vaihda työtilaan 4
-    send_to_workspace_9: Lähetä työtilaan 9
-    restore_sizes: Palauttaa koot
-    move_to_workspace_8: Siirry työtilaan 8
-    send_to_workspace_0: Lähetä työtilaan 0
-    reserve_top: Varaa
-    move_to_workspace_2: Siirry työtilaan 2
-    decrease_width: Vähentynyt leveys
-    send_to_workspace_5: Lähetä työtilaan 5
-    send_to_workspace_1: Lähetä työtilaan 1
-    move_to_workspace_3: Siirry työtilaan 3
-    move_to_workspace_9: Siirry työtilaan 9
-    switch_workspace_7: Vaihda työtilaan 7
-    reserve_left: Varaa jäljellä
-    send_to_workspace_8: Lähetä työtilaan 8
-    focus_latest: Focus -viimeisin
-    increase_width: Lisätä leveyttä
-    increase_height: Lisätä korkeutta
-    switch_workspace_2: Vaihda työtilaan 2
-    move_to_workspace_1: Siirry työtilaan 1
-    switch_workspace_3: Vaihda työtilaan 3
-    move_to_workspace_7: Siirry työtilaan 7
-    move_to_workspace_0: Siirry työtilaan 0
-    switch_workspace_8: Vaihda työtilaan 8
-    move_to_workspace_6: Siirry työtilaan 6
-    focus_bottom: Tarkennuspohja
-    switch_workspace_5: Vaihda työtilaan 5
-    decrease_height: Pienenee
-    focus_top: Keskittyä
-    focus_right: Keskittyä oikein
-    reserve_stack: Varantopino
-    reserve_float: Varaa kelluva
-    switch_workspace_9: Vaihda työtilaan 9
-    reserve_right: Varaa oikea
-    send_to_workspace_6: Lähetä työtilaan 6
-    move_to_workspace_5: Siirry työtilaan 5
-    focus_left: Focus jäljellä
-    send_to_workspace_4: Lähetä työtilaan 4
-    send_to_workspace_2: Lähetä työtilaan 2
-    send_to_workspace_7: Lähetä työtilaan 7
-    move_to_workspace_4: Siirry työtilaan 4
-    send_to_workspace_3: Lähetä työtilaan 3
-    switch_workspace_1: Vaihda työtilaan 2
-    switch_workspace_0: Vaihda työtilaan 1
-    misc_open_settings: Avaa asetukset
-    misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)
-    misc_toggle_win_event_tracing: Vaihda Win Win Event Tracing (lokit)
-    toggle_launcher: Vaihtaa
-  enable_tooltip: >-
-    Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
-    -sovellusliittymällä
-  enable: Ota integroidut pikakuvakkeet käyttöön (AHK)
-  reset: Palauta laiminlyöntiin
-  readonly_tooltip: Tämä on vain luku-pikakuvake
-inProgress: Käynnissä...
-delete: Poistaa
-quit: Lopettaa
-save: Tallentaa
-loading: Ladataan...
+  identifier:
+    add_block: Lisätä
+    and: JA
+    id: Tunniste
+    kind: Tunnistaa jtk
+    matching_strategy: Sovitusstrategia
+    negation: Negatiivista vastaavuus
+    or: TAI
+    remove: Poistaa lohko
+  import: Tuonti
+  new: Uusi
+  search: Hae
+  swap: Vaihtaa
 cancel: Peruuttaa
-open: Avata
-vd:
-  strategy:
-    label: Virtuaalinen työpöytästrategia
-    seelen: Seelen
-    native: Alkuperäinen
-  disabled_windows_version: >-
-    Alkuperäinen virtuaalinen työpöytästrategia ei ole käytettävissä Windows
-    -versiollesi.
-save_and_restart: Tallenna ja käynnistä uudelleen
-monitors_configurations:
-  label: Monitor {{hakemisto}}
-wall:
-  no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
-  backgrounds: Taustakuvat
-  enable: Ota taustakuvan johtaja käyttöön
-  random: Satunnaista diaesitys
-  interval: Vaihda taustakuva jokainen
-  hours: tuntia
-  seconds: sekunti
-  minutes: minuutti
-app_launcher:
-  runners:
-    cmd: Komento
-    label: Juoksijat
-    explorer: Juoksua
-  monitor: Tarkkailla
-  enable: Ota sovelluksen kantoraketti käyttöön
-more: Lisää
-inherit: Periä
-insert: Lisätä
 close: Lähellä
-update:
-  available: Päivitä saatavilla!
-  downloading: Lataaminen ...
-  channel: Päivityskanava
+delete: Poistaa
+devtools:
+  app_folders: Sovelluskansiot
+  custom_config_file: Lataa mukautettu konfigurointitiedosto
+  data_folder: Tietokansio
+  enable: Ota kehittäjätyökalut käyttöön
+  install_folder: Asennuskansio
+  load: Ladata
+  settings_file: Asetustiedosto
+extras:
+  discord: Erimielisyys
+  exit: Lopettaa/poistua
+  github: Github
+  links: Viralliset linkit
+  relaunch: Käynnistää uudelleen
+  version: Versio
+general:
+  accent_color: Korostusväri
+  date_format: Päiväysmuoto
+  icon_pack:
+    label: Kuvakepakkaukset
+  language: Kieli
+  startup: Suorittaa käynnistyksen yhteydessä?
+  theme:
+    add: Lisätä teemaa
+    added: Jo lisätty teema
+    author: Kirjoittaja
+    available: Saatavilla
+    description: Kuvaus
+    enabled: Mahdolliset teemat
+    label: Teematiedot
+    placeholder: Valitse teema
+    selected: Valittu
+    tags: Tunnisteet
+  wallpaper:
+    select: Valitse taustakuva
+header:
+  labels:
+    developer: Kehittäjä
+    general: Yleinen
+    home: Kotiin
+    info: Tiedot
+    mods: Lisäosat ja widgetit
+    monitors: Näytöt
+    seelen_bar: Hieno työkalurivi
+    seelen_rofi: Sovelluskäynnistys
+    seelen_wall: Taustakuvan johtaja
+    seelen_weg: Telakka/tehtäväpalkki
+    seelen_wm: Ikkunanhallinta
+    shortcuts: Pikakuvakkeet
+    specific_apps: Erityiset sovellukset
+    virtual_desk: Virtuaalinen työpöytä
+inherit: Periä
+inProgress: Käynnissä...
+insert: Lisätä
+loading: Ladataan...
 miscellaneous: Sekalainen
 mods:
   plugins: Plugins
   target: Kohde
   widgets: Widgetit
+monitors_configurations:
+  label: Monitor {{hakemisto}}
+more: Lisää
+open: Avata
+quit: Lopettaa
 remove: Poistaa
+save: Tallentaa
+save_and_restart: Tallenna ja käynnistä uudelleen
+shortcuts:
+  enable: Ota integroidut pikakuvakkeet käyttöön (AHK)
+  enable_tooltip: >-
+    Poista käytöstä, jos otat käyttöön omat pikakuvakkeet Seelen Core
+    -sovellusliittymällä
+  labels:
+    decrease_height: Pienenee
+    decrease_width: Vähentynyt leveys
+    focus_bottom: Tarkennuspohja
+    focus_latest: Focus -viimeisin
+    focus_left: Focus jäljellä
+    focus_right: Keskittyä oikein
+    focus_top: Keskittyä
+    increase_height: Lisätä korkeutta
+    increase_width: Lisätä leveyttä
+    misc_open_settings: Avaa asetukset
+    misc_toggle_lock_tracing: Vaihda lukkojen jäljitys (lokit)
+    misc_toggle_win_event_tracing: Vaihda Win Win Event Tracing (lokit)
+    move_to_workspace_0: Siirry työtilaan 0
+    move_to_workspace_1: Siirry työtilaan 1
+    move_to_workspace_2: Siirry työtilaan 2
+    move_to_workspace_3: Siirry työtilaan 3
+    move_to_workspace_4: Siirry työtilaan 4
+    move_to_workspace_5: Siirry työtilaan 5
+    move_to_workspace_6: Siirry työtilaan 6
+    move_to_workspace_7: Siirry työtilaan 7
+    move_to_workspace_8: Siirry työtilaan 8
+    move_to_workspace_9: Siirry työtilaan 9
+    reserve_bottom: Varata pohja
+    reserve_float: Varaa kelluva
+    reserve_left: Varaa jäljellä
+    reserve_right: Varaa oikea
+    reserve_stack: Varantopino
+    reserve_top: Varaa
+    restore_sizes: Palauttaa koot
+    send_to_workspace_0: Lähetä työtilaan 0
+    send_to_workspace_1: Lähetä työtilaan 1
+    send_to_workspace_2: Lähetä työtilaan 2
+    send_to_workspace_3: Lähetä työtilaan 3
+    send_to_workspace_4: Lähetä työtilaan 4
+    send_to_workspace_5: Lähetä työtilaan 5
+    send_to_workspace_6: Lähetä työtilaan 6
+    send_to_workspace_7: Lähetä työtilaan 7
+    send_to_workspace_8: Lähetä työtilaan 8
+    send_to_workspace_9: Lähetä työtilaan 9
+    switch_workspace_0: Vaihda työtilaan 1
+    switch_workspace_1: Vaihda työtilaan 2
+    switch_workspace_2: Vaihda työtilaan 2
+    switch_workspace_3: Vaihda työtilaan 3
+    switch_workspace_4: Vaihda työtilaan 4
+    switch_workspace_5: Vaihda työtilaan 5
+    switch_workspace_6: Vaihda työtilaan 6
+    switch_workspace_7: Vaihda työtilaan 7
+    switch_workspace_8: Vaihda työtilaan 8
+    switch_workspace_9: Vaihda työtilaan 9
+    toggle_launcher: Vaihtaa
+  readonly_tooltip: Tämä on vain luku-pikakuvake
+  reset: Palauta laiminlyöntiin
+sides:
+  bottom: Pohja
+  left: Vasen
+  right: Oikea
+  top: Ylhäältä
+start:
+  message: >-
+    Tervetuloa Seelen UI: hen, Ultimate Desktop -ympäristöön, jossa on
+    sisällytetty laatoitus Windows Manager, parantaaksesi Windows -kokemustasi!
+    Tutustu uuteen tehokkuuden ja monitehtavan aikakauteen intuitiivisella
+    rajapinnalla ja edistyneillä ominaisuuksilla.
+  message_accent: Optimoi tuottavuus tyylillä!
+  title: Tervetuloa!
+toolbar:
+  auto_hide: Automaattinen piilo
+  delay_to_hide: Viive piilottaa
+  delay_to_show: Viive näyttöön
+  enable: Ota hieno työkalurivi käyttöön
+  height: Korkeus
+  label: Työkalurivi
+  placeholder:
+    author: Kirjoittaja
+    description: Kuvaus
+    select: Työkalurivin rakenne
+  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
+update:
+  available: Päivitä saatavilla!
+  channel: Päivityskanava
+  downloading: Lataaminen ...
+vd:
+  disabled_windows_version: >-
+    Alkuperäinen virtuaalinen työpöytästrategia ei ole käytettävissä Windows
+    -versiollesi.
+  strategy:
+    label: Virtuaalinen työpöytästrategia
+    native: Alkuperäinen
+    seelen: Seelen
+wall:
+  backgrounds: Taustakuvat
+  enable: Ota taustakuvan johtaja käyttöön
+  hours: tuntia
+  interval: Vaihda taustakuva jokainen
+  minutes: minuutti
+  no_background: Tyhjä diaesitys käyttämällä sen sijaan teeman taustalla.
+  random: Satunnaista diaesitys
+  seconds: sekunti
+weg:
+  auto_hide: Automaattinen piilo
+  delay_to_hide: Viive piilottaa
+  delay_to_show: Viive näyttöön
+  dock_side: Sijainti
+  enable: Ota Dock/tehtäväpalkki käyttöön
+  gap: Kuilu
+  items:
+    gap: Tilaa esineiden välillä
+    label: Kohteet
+    size: Esineen koko
+    visible_separators: Näkyvät erottimet
+    zoom_size: Zoomoitu koko (käytetty teemoihin)
+  label: Telakka/tehtäväpalkki
+  margin: Marginaali
+  padding: Pehmuste
+  use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
+  width: Leveys
+wm:
+  author: Kirjoittaja
+  border:
+    enable: Ota ikkunan reuna käyttöön
+    offset: Rajan siirtyminen
+    width: Rajan leveys
+  description: Kuvaus
+  enable: Ota laatta -ikkunanhallinta käyttöön
+  layout: Layout
+  resize_delta: Muuttaa Delta (%)
+  space_between_containers: Konttien välinen tila
+  workspace_offset: Työtilojen siirtymä (marginaalit)
+  workspace_padding: Työtilat

@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Adicionar módulo de mídia
-  start: Adicionar módulo inicial
-  add_file: Fixar arquivo personalizado
-  add_folder: Fixar pasta personalizada
-  settings: Configurações
-  task_manager: Gerenciador de tarefas
 app_menu:
-  unpin: Desafixar
-  pin: Fixar
-  pin_to_left: Fixar à esquerda
-  pin_to_center: Fixar no centro
-  pin_to_right: Fixar à direita
-  open_file_location: Abrir local do arquivo
-  run_as: Executar como administrador
-  copy_handles: Alças de cópia
   close: Fechar
   close_multiple: Fechar tudo
+  copy_handles: Alças de cópia
   kill: Processo de eliminação
   kill_multiple: Mate todos os processos
+  open_file_location: Abrir local do arquivo
+  pin: Fixar
+  pin_to_center: Fixar no centro
+  pin_to_left: Fixar à esquerda
+  pin_to_right: Fixar à direita
+  run_as: Executar como administrador
+  unpin: Desafixar
+media:
+  not_playing: Nada está tocando
 media_menu:
   remove: Remover módulo de mídia
 start_menu:
   remove: Remover módulo inicial
-media:
-  not_playing: Nada está tocando
+taskbar_menu:
+  add_file: Fixar arquivo personalizado
+  add_folder: Fixar pasta personalizada
+  media: Adicionar módulo de mídia
+  settings: Configurações
+  start: Adicionar módulo inicial
+  task_manager: Gerenciador de tarefas

@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: Τρέξιμο
     cmd: Εντολή
+    explorer: Τρέξιμο
 footer:
   shortcuts: Εμφάνιση συντομεύσεων
 header:

@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Żid il-modulu tal-midja
-  start: Żid il-modulu tal-bidu
-  add_folder: Folder Custom Pin
-  add_file: Fajl tad-dwana pin
-  settings: Settings
-  task_manager: Task Manager
 app_menu:
-  pin_to_center: Pin għal ċentru
-  run_as: Mexxi bħala amministratur
+  close: Viċin
   close_multiple: Agħlaq ilkoll
+  copy_handles: Kopja pumi
+  kill: Qtil Proċess
+  kill_multiple: Oqtol il-Proċessi Kollha
+  open_file_location: Post tal-fajl miftuħ
+  pin: Pin
+  pin_to_center: Pin għal ċentru
   pin_to_left: Pin lejn ix-xellug
   pin_to_right: Pin għal dritt
+  run_as: Mexxi bħala amministratur
   unpin: Unpin
-  close: Viċin
-  copy_handles: Kopja pumi
-  pin: Pin
-  open_file_location: Post tal-fajl miftuħ
-  kill_multiple: Oqtol il-Proċessi Kollha
-  kill: Qtil Proċess
+media:
+  not_playing: Xejn ma jilgħab
 media_menu:
   remove: Neħħi l-modulu tal-midja
 start_menu:
   remove: Neħħi l-modulu tal-bidu
-media:
-  not_playing: Xejn ma jilgħab
+taskbar_menu:
+  add_file: Fajl tad-dwana pin
+  add_folder: Folder Custom Pin
+  media: Żid il-modulu tal-midja
+  settings: Settings
+  start: Żid il-modulu tal-bidu
+  task_manager: Task Manager

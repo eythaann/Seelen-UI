@@ -1,263 +1,263 @@
-sides:
-  bottom: Alt
-  top: Üst
-  left: Sol
-  right: Sağ
-header:
-  labels:
-    info: Bilgi
-    developer: Geliştirici
-    general: Genel
-    seelen_weg: Dock/Görev Çubuğu
-    seelen_wm: Pencere Yöneticisi
-    seelen_bar: Şık Araç Çubuğu
-    specific_apps: Belirli Uygulamalar
-    monitors: Monitörler
-    shortcuts: Kısayollar
-    seelen_rofi: Uygulama Başlatıcısı
-    virtual_desk: Sanal Masaüstleri
-    home: Ana Sayfa
-    mods: Eklentiler ve Widget'lar
-    seelen_wall: Duvar Kağıdı Yöneticisi
-start:
-  title: Hoş Geldiniz!
-  message_accent: Verimliliğinizi stil ile optimize edin!
-  message: >-
-    Seelen UI'a hoş geldiniz, Windows deneyiminizi geliştirmek için entegre bir
-    döşeme pencere yöneticisi ile en iyi masaüstü ortamı! Kullanıcı dostu
-    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevlerde yeni
-    bir çağı keşfedin.
-general:
-  theme:
-    description: Açıklama
-    author: Yazar
-    placeholder: Tema Seç
-    tags: Etiketler
-    enabled: Etkin Temalar
-    label: Tema Bilgileri
-    added: Tema Zaten Ekli
-    add: Tema Ekle
-    available: Mevcut
-    selected: Seçili
-  language: Dil
-  startup: Başlangıçta çalışsın mı?
-  icon_pack:
-    label: İkon Paketleri
-  accent_color: Vurgu Rengi
-  wallpaper:
-    select: Duvar Kağıdı Seç
-  date_format: Tarih Biçimi
-toolbar:
-  placeholder:
-    author: Yazar
-    description: Açıklama
-    select: Araç Çubuğu Yapısı
-  height: Yükseklik
-  enable: Şık Araç Çubuğunu Etkinleştir
-  auto_hide: Otomatik Gizle
-  label: Araç Çubuğu
-  delay_to_hide: Gizlenmeyi geciktir
-  delay_to_show: Gösterme gecikmesi
-  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
-wm:
-  border:
-    width: Kenar Genişliği
-    offset: Kenar Ofseti
-    enable: Pencere Kenraını Etkinleştir
-  layout: Düzen
-  author: Yazar
-  description: Açıklama
-  workspace_padding: Çalışma Alanları İç Boşluğu
-  resize_delta: Yeniden Boyutlandırma Değişimi (%)
-  space_between_containers: Konteynerler Arası Boşluk
-  workspace_offset: Çalışma Alanları Uzaklıkları (Kenar Boşlukları)
-  enable: Döşeme Pencere Yöneticisini Etkinleştir
-weg:
-  items:
-    label: Öğeler
-    zoom_size: Yakınlaştırılmış Boyut (temalar için kullanılır)
-    visible_separators: Görünür Ayırıcılar
-    gap: Öğeler Arası Boşluk
-    size: Öğe Boyutu
-  width: Genişlik
-  auto_hide: Otomatik Gizle
-  gap: Boşluk
-  padding: İç Boşluk
-  margin: Kenar Boşluğu
-  enable: Dock/Görev Çubuğunu Etkinleştir
-  label: Dock/Görev Çubuğu
-  dock_side: Konum
-  delay_to_hide: Gizlenmeyi geciktir
-  delay_to_show: Gösterme gecikmesi
-  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
-devtools:
-  custom_config_file: Özel Yapılandırma Dosyası Yükle
-  settings_file: Ayarlar Dosyası
-  load: Yükle
-  data_folder: Veri Klasörü
-  install_folder: Kurulum Klasörü
-  app_folders: Uygulama Klasörleri
-  enable: Geliştirici Araçlarını Etkinleştir
+app_launcher:
+  enable: Uygulama Başlatıcısını Etkinleştir
+  monitor: Gösterilecek Monitör
+  runners:
+    cmd: Komut İstemi
+    explorer: Çalıştır
+    label: Çalıştırıcılar
 apps_configurations:
   app:
-    options:
-      float: Yüzer
-      pinned: Sabitlenmiş
-      force: Zorla Yönet
-      unmanage: Yönetimden Çıkar
-      hidden: Dock/Görev Çubuğundan Gizle
-    title_create: '{{Name}} Oluşturuluyor'
-    monitor: Monitör
-    category_placeholder: Yok
-    ok_create: Oluştur
-    ok_edit: Düzenle
-    monitor_placeholder: Yok
-    name: İsim
     bindings: Tuş Atama (her iki seçenek de gereklidir)
     category: Kategori
+    category_placeholder: Yok
+    monitor: Monitör
+    monitor_placeholder: Yok
+    name: İsim
+    ok_create: Oluştur
+    ok_edit: Düzenle
+    ok_readonly: Yeni Olarak Düzenle
+    options:
+      float: Yüzer
+      force: Zorla Yönet
+      hidden: Dock/Görev Çubuğundan Gizle
+      pinned: Sabitlenmiş
+      unmanage: Yönetimden Çıkar
+    options_label: Ekstra Seçenekler
+    title_create: '{{Name}} Oluşturuluyor'
+    title_edit: Düzenleme {{name}}
     title_readonly: '{{name}} Görüntüleniyor'
+    weg_options_label: Dock/Görev Çubuğu Seçenekleri
+    wm_options_label: Pencere Yöneticisi Seçenekleri
     workspace: Çalışma Alanı
     workspace_placeholder: Yok
-    ok_readonly: Yeni Olarak Düzenle
-    wm_options_label: Pencere Yöneticisi Seçenekleri
-    weg_options_label: Dock/Görev Çubuğu Seçenekleri
-    options_label: Ekstra Seçenekler
-    title_edit: Düzenleme {{name}}
-  identifier:
-    and: VE
-    matching_strategy: Eşleştirme Stratejisi
-    or: VEYA
-    add_block: Blok Ekle
-    kind: Tanımla
-    id: Tanımlayıcı
-    remove: Bloğu Sil
-    negation: Eşleşmeyi Geçersiz Kıl
-  export: Dışa Aktar
-  swap: Değiştir
-  search: Ara
-  import: İçe Aktar
   bundled_msg: >-
     Bu paketlenmiş yapılandırmalar düzenlenemez ve özelleştirme olmadan size en
     iyi deneyimi sağlamak için tasarlanmıştır. En yaygın uygulamaları sizin için
     otomatik olarak yapılandırır.
-  delete: Sil
-  new: Yeni
   bundled_title: Seelen ile Birlikte Gelen Uygulama Yapılandırması
   confirm_delete: Bu yapılandırmayı silmek istediğinizden emin misiniz?
   confirm_delete_title: Silmeyi Onayla
+  delete: Sil
+  export: Dışa Aktar
   extra_info: >-
     Seelen UI, uygulama başına yalnızca bir tanımlayıcı kullanır (ilk eşleşme
     bulundu), bu nedenle nasıl belirlendiği sırası önemlidir, tablonun
     varsayılan olarak en yeniden eskiye doğru sıralandığını unutmayın, en son
     eklenenlere öncelik verilecektir.
+  identifier:
+    add_block: Blok Ekle
+    and: VE
+    id: Tanımlayıcı
+    kind: Tanımla
+    matching_strategy: Eşleştirme Stratejisi
+    negation: Eşleşmeyi Geçersiz Kıl
+    or: VEYA
+    remove: Bloğu Sil
+  import: İçe Aktar
+  new: Yeni
+  search: Ara
+  swap: Değiştir
+cancel: İptal Et
+close: Kapat
+delete: Sil
+devtools:
+  app_folders: Uygulama Klasörleri
+  custom_config_file: Özel Yapılandırma Dosyası Yükle
+  data_folder: Veri Klasörü
+  enable: Geliştirici Araçlarını Etkinleştir
+  install_folder: Kurulum Klasörü
+  load: Yükle
+  settings_file: Ayarlar Dosyası
 extras:
+  discord: Discord
+  exit: Çık
   github: GitHub
   links: Resmi Bağlantılar
-  discord: Discord
   relaunch: Yeniden Başlat
-  exit: Çık
   version: Sürüm
-shortcuts:
+general:
+  accent_color: Vurgu Rengi
+  date_format: Tarih Biçimi
+  icon_pack:
+    label: İkon Paketleri
+  language: Dil
+  startup: Başlangıçta çalışsın mı?
+  theme:
+    add: Tema Ekle
+    added: Tema Zaten Ekli
+    author: Yazar
+    available: Mevcut
+    description: Açıklama
+    enabled: Etkin Temalar
+    label: Tema Bilgileri
+    placeholder: Tema Seç
+    selected: Seçili
+    tags: Etiketler
+  wallpaper:
+    select: Duvar Kağıdı Seç
+header:
   labels:
-    send_to_workspace_0: Çalışma Alanı 1'e Gönder
-    move_to_workspace_4: Çalışma Alanı 5'e Taşı
-    move_to_workspace_5: Çalışma Alanı 6'ya Taşı
-    move_to_workspace_0: Çalışma Alanı 0'a Taşı
-    focus_latest: En Sona Odaklan
-    restore_sizes: Boyutları Geri Yükle
-    send_to_workspace_4: Çalışma Alanı 4'e Gönder
-    send_to_workspace_8: Çalışma Alanı 9'a Gönder
-    focus_top: Üste Odaklan
-    move_to_workspace_2: Çalışma Alanı 3'e Taşı
-    reserve_top: Üstü Rezerve Et
-    move_to_workspace_1: Çalışma Alanı 2'ye Taşı
-    focus_left: Sola Odaklan
-    send_to_workspace_6: Çalışma Alanı 7'ye Gönder
-    switch_workspace_3: Çalışma Alanı 3'e Geç
-    decrease_width: Genişliği Azalt
-    move_to_workspace_6: Çalışma Alanı 7'ye Taşı
-    switch_workspace_8: Çalışma Alanı 9'a Geç
-    reserve_left: Solu Rezerve Et
-    switch_workspace_9: Çalışma Alanı 10'a Geç
-    reserve_float: Yüzeri Rezerve Et
-    reserve_bottom: Altı Rezerve Et
-    send_to_workspace_1: Çalışma Alanı 2'ye Gönder
-    move_to_workspace_8: Çalışma Alanı 8'e Taşı
-    switch_workspace_2: Çalışma Alanı 3'e Geç
-    switch_workspace_4: Çalışma Alanı 5'e Geç
-    reserve_stack: Yığını Rezerve Et
-    move_to_workspace_7: Çalışma Alanı 8'e Taşı
-    decrease_height: Yüksekliği Azalt
-    send_to_workspace_2: Çalışma Alanı 3'e Gönder
-    move_to_workspace_3: Çalışma Alanı 4'e Taşı
-    send_to_workspace_5: Çalışma Alanı 6'ya Gönder
-    focus_bottom: Alta Odaklan
-    switch_workspace_7: Çalışma Alanı 8'e Geç
-    send_to_workspace_9: Çalışma Alanı 9'a Gönder
-    increase_height: Yüksekliği Artır
-    focus_right: Sağa Odaklan
-    reserve_right: Sağı Rezerve Et
-    send_to_workspace_3: Çalışma Alanı 4'e Gönder
-    increase_width: Genişliği Artır
-    switch_workspace_6: Çalışma Alanı 7'ye Geç
-    move_to_workspace_9: Çalışma Alanı 10'a Taşı
-    send_to_workspace_7: Çalışma Alanı 8'e Gönder
-    switch_workspace_5: Çalışma Alanı 6'ya Geç
-    switch_workspace_0: Çalışma Alanı 1'e Geç
-    switch_workspace_1: Çalışma Alanı 2'ye Geç
-    misc_open_settings: Ayarlar Aç
-    misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
-    misc_toggle_lock_tracing: Kilit izleme (kütükler)
-    toggle_launcher: Geçiş yapmak
+    developer: Geliştirici
+    general: Genel
+    home: Ana Sayfa
+    info: Bilgi
+    mods: Eklentiler ve Widget'lar
+    monitors: Monitörler
+    seelen_bar: Şık Araç Çubuğu
+    seelen_rofi: Uygulama Başlatıcısı
+    seelen_wall: Duvar Kağıdı Yöneticisi
+    seelen_weg: Dock/Görev Çubuğu
+    seelen_wm: Pencere Yöneticisi
+    shortcuts: Kısayollar
+    specific_apps: Belirli Uygulamalar
+    virtual_desk: Sanal Masaüstleri
+inherit: Devral
+inProgress: Devam Ediyor...
+insert: Ekle
+loading: Yükleniyor...
+miscellaneous: Çeşitli
+mods:
+  plugins: Eklentiler
+  target: Hedef
+  widgets: Widget'lar
+monitors_configurations:
+  label: Monitör {{index}}
+more: Daha Fazla
+open: Aç
+quit: Çıkış
+remove: Kaldırmak
+save: Kaydet
+save_and_restart: Kaydet ve Yeniden Başlat
+shortcuts:
+  enable: Entegre Kısayolları Etkinleştir (ahk)
   enable_tooltip: >-
     Seelen Core API kullanarak kendi kısayollarınızı uygulayacaksanız devre dışı
     bırakın
-  enable: Entegre Kısayolları Etkinleştir (ahk)
-  reset: Varsayılanlara Sıfırla
+  labels:
+    decrease_height: Yüksekliği Azalt
+    decrease_width: Genişliği Azalt
+    focus_bottom: Alta Odaklan
+    focus_latest: En Sona Odaklan
+    focus_left: Sola Odaklan
+    focus_right: Sağa Odaklan
+    focus_top: Üste Odaklan
+    increase_height: Yüksekliği Artır
+    increase_width: Genişliği Artır
+    misc_open_settings: Ayarlar Aç
+    misc_toggle_lock_tracing: Kilit izleme (kütükler)
+    misc_toggle_win_event_tracing: Win olay izleme (günlükler) değiştirme
+    move_to_workspace_0: Çalışma Alanı 0'a Taşı
+    move_to_workspace_1: Çalışma Alanı 2'ye Taşı
+    move_to_workspace_2: Çalışma Alanı 3'e Taşı
+    move_to_workspace_3: Çalışma Alanı 4'e Taşı
+    move_to_workspace_4: Çalışma Alanı 5'e Taşı
+    move_to_workspace_5: Çalışma Alanı 6'ya Taşı
+    move_to_workspace_6: Çalışma Alanı 7'ye Taşı
+    move_to_workspace_7: Çalışma Alanı 8'e Taşı
+    move_to_workspace_8: Çalışma Alanı 8'e Taşı
+    move_to_workspace_9: Çalışma Alanı 10'a Taşı
+    reserve_bottom: Altı Rezerve Et
+    reserve_float: Yüzeri Rezerve Et
+    reserve_left: Solu Rezerve Et
+    reserve_right: Sağı Rezerve Et
+    reserve_stack: Yığını Rezerve Et
+    reserve_top: Üstü Rezerve Et
+    restore_sizes: Boyutları Geri Yükle
+    send_to_workspace_0: Çalışma Alanı 1'e Gönder
+    send_to_workspace_1: Çalışma Alanı 2'ye Gönder
+    send_to_workspace_2: Çalışma Alanı 3'e Gönder
+    send_to_workspace_3: Çalışma Alanı 4'e Gönder
+    send_to_workspace_4: Çalışma Alanı 4'e Gönder
+    send_to_workspace_5: Çalışma Alanı 6'ya Gönder
+    send_to_workspace_6: Çalışma Alanı 7'ye Gönder
+    send_to_workspace_7: Çalışma Alanı 8'e Gönder
+    send_to_workspace_8: Çalışma Alanı 9'a Gönder
+    send_to_workspace_9: Çalışma Alanı 9'a Gönder
+    switch_workspace_0: Çalışma Alanı 1'e Geç
+    switch_workspace_1: Çalışma Alanı 2'ye Geç
+    switch_workspace_2: Çalışma Alanı 3'e Geç
+    switch_workspace_3: Çalışma Alanı 3'e Geç
+    switch_workspace_4: Çalışma Alanı 5'e Geç
+    switch_workspace_5: Çalışma Alanı 6'ya Geç
+    switch_workspace_6: Çalışma Alanı 7'ye Geç
+    switch_workspace_7: Çalışma Alanı 8'e Geç
+    switch_workspace_8: Çalışma Alanı 9'a Geç
+    switch_workspace_9: Çalışma Alanı 10'a Geç
+    toggle_launcher: Geçiş yapmak
   readonly_tooltip: Bu salt okunur bir kısayol
-cancel: İptal Et
-inProgress: Devam Ediyor...
-loading: Yükleniyor...
-quit: Çıkış
-save: Kaydet
-delete: Sil
-open: Aç
-vd:
-  strategy:
-    native: Yerli
-    seelen: Seelen
-    label: Sanal Masaüstü Stratejisi
-  disabled_windows_version: Yerli Sanal Masaüstü Stratejisi Windows sürümünüz için mevcut değil.
-save_and_restart: Kaydet ve Yeniden Başlat
-monitors_configurations:
-  label: Monitör {{index}}
-wall:
-  no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
-  backgrounds: Duvar Kağıtları
-  enable: Duvar Kağıdı Yöneticisini Etkinleştir
-  interval: Duvar kağıdını her şeyi değiştir
-  random: Slayt gösterisini rastgele
-  minutes: dakikalar
-  seconds: saniye
-  hours: saat
-app_launcher:
-  runners:
-    cmd: Komut İstemi
-    explorer: Çalıştır
-    label: Çalıştırıcılar
-  monitor: Gösterilecek Monitör
-  enable: Uygulama Başlatıcısını Etkinleştir
-insert: Ekle
-more: Daha Fazla
-inherit: Devral
-close: Kapat
+  reset: Varsayılanlara Sıfırla
+sides:
+  bottom: Alt
+  left: Sol
+  right: Sağ
+  top: Üst
+start:
+  message: >-
+    Seelen UI'a hoş geldiniz, Windows deneyiminizi geliştirmek için entegre bir
+    döşeme pencere yöneticisi ile en iyi masaüstü ortamı! Kullanıcı dostu
+    arayüzümüz ve gelişmiş özelliklerimizle verimlilik ve çoklu görevlerde yeni
+    bir çağı keşfedin.
+  message_accent: Verimliliğinizi stil ile optimize edin!
+  title: Hoş Geldiniz!
+toolbar:
+  auto_hide: Otomatik Gizle
+  delay_to_hide: Gizlenmeyi geciktir
+  delay_to_show: Gösterme gecikmesi
+  enable: Şık Araç Çubuğunu Etkinleştir
+  height: Yükseklik
+  label: Araç Çubuğu
+  placeholder:
+    author: Yazar
+    description: Açıklama
+    select: Araç Çubuğu Yapısı
+  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
 update:
   available: Güncelleme Mevcut!
-  downloading: İndirme ...
   channel: Güncelleme kanalı
-miscellaneous: Çeşitli
-mods:
-  target: Hedef
-  widgets: Widget'lar
-  plugins: Eklentiler
-remove: Kaldırmak
+  downloading: İndirme ...
+vd:
+  disabled_windows_version: Yerli Sanal Masaüstü Stratejisi Windows sürümünüz için mevcut değil.
+  strategy:
+    label: Sanal Masaüstü Stratejisi
+    native: Yerli
+    seelen: Seelen
+wall:
+  backgrounds: Duvar Kağıtları
+  enable: Duvar Kağıdı Yöneticisini Etkinleştir
+  hours: saat
+  interval: Duvar kağıdını her şeyi değiştir
+  minutes: dakikalar
+  no_background: Boş slayt gösterisi, tema arka planı kullanılıyor.
+  random: Slayt gösterisini rastgele
+  seconds: saniye
+weg:
+  auto_hide: Otomatik Gizle
+  delay_to_hide: Gizlenmeyi geciktir
+  delay_to_show: Gösterme gecikmesi
+  dock_side: Konum
+  enable: Dock/Görev Çubuğunu Etkinleştir
+  gap: Boşluk
+  items:
+    gap: Öğeler Arası Boşluk
+    label: Öğeler
+    size: Öğe Boyutu
+    visible_separators: Görünür Ayırıcılar
+    zoom_size: Yakınlaştırılmış Boyut (temalar için kullanılır)
+  label: Dock/Görev Çubuğu
+  margin: Kenar Boşluğu
+  padding: İç Boşluk
+  use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
+  width: Genişlik
+wm:
+  author: Yazar
+  border:
+    enable: Pencere Kenraını Etkinleştir
+    offset: Kenar Ofseti
+    width: Kenar Genişliği
+  description: Açıklama
+  enable: Döşeme Pencere Yöneticisini Etkinleştir
+  layout: Düzen
+  resize_delta: Yeniden Boyutlandırma Değişimi (%)
+  space_between_containers: Konteynerler Arası Boşluk
+  workspace_offset: Çalışma Alanları Uzaklıkları (Kenar Boşlukları)
+  workspace_padding: Çalışma Alanları İç Boşluğu

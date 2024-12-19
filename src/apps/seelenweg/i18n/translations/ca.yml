@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Afegiu el mòdul d'inici
-  media: Afegiu el mòdul de suports
-  add_folder: Pin carpeta personalitzada
-  add_file: Pin el fitxer personalitzat
-  task_manager: Gestor de tasques
-  settings: Configuració
 app_menu:
-  pin_to_left: Pin a l’esquerra
   close: Tanca
-  run_as: Executa com administrador
-  pin: Agulla
   close_multiple: Tanca tot
-  open_file_location: Obriu la ubicació del fitxer
-  pin_to_right: Pin a la dreta
-  pin_to_center: Pin al centre
   copy_handles: Manelles de còpia
-  unpin: Desfeta
-  kill_multiple: Mata tots els processos
   kill: Procés de matança
+  kill_multiple: Mata tots els processos
+  open_file_location: Obriu la ubicació del fitxer
+  pin: Agulla
+  pin_to_center: Pin al centre
+  pin_to_left: Pin a l’esquerra
+  pin_to_right: Pin a la dreta
+  run_as: Executa com administrador
+  unpin: Desfeta
+media:
+  not_playing: Res està jugant
 media_menu:
   remove: Elimina el mòdul de suports
 start_menu:
   remove: Elimina el mòdul d'inici
-media:
-  not_playing: Res està jugant
+taskbar_menu:
+  add_file: Pin el fitxer personalitzat
+  add_folder: Pin carpeta personalitzada
+  media: Afegiu el mòdul de suports
+  settings: Configuració
+  start: Afegiu el mòdul d'inici
+  task_manager: Gestor de tasques

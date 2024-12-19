@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: ຕື່ມການໂມດູນສື່
-  start: ເພີ່ມໂມດູນ Start
-  add_file: PIN File Custom
-  add_folder: PIN Custom FOLLER
-  task_manager: Task Manager
-  settings: ການຕັ້ງຄ່າ
 app_menu:
-  run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
-  close_multiple: ປິດທັງຫມົດ
-  pin_to_right: PIN ກັບຂວາ
-  copy_handles: ຄັດລອກ
-  open_file_location: ເປີດສະຖານທີ່ເອກະສານ
   close: ປິດ
-  pin_to_center: PIN ເຖິງສູນກາງ
-  pin: ເຂັມ PIN
-  unpin: unppin
-  pin_to_left: ເຂັມຊ້າຍໄປ
+  close_multiple: ປິດທັງຫມົດ
+  copy_handles: ຄັດລອກ
   kill: ຂະບວນການຂ້າ
   kill_multiple: ຂ້າຂະບວນການທັງຫມົດ
+  open_file_location: ເປີດສະຖານທີ່ເອກະສານ
+  pin: ເຂັມ PIN
+  pin_to_center: PIN ເຖິງສູນກາງ
+  pin_to_left: ເຂັມຊ້າຍໄປ
+  pin_to_right: PIN ກັບຂວາ
+  run_as: ດໍາເນີນການເປັນຜູ້ບໍລິຫານ
+  unpin: unppin
+media:
+  not_playing: ບໍ່ມີຫຍັງຫຼີ້ນ
 media_menu:
   remove: ເອົາ Module ສື່
 start_menu:
   remove: ເອົາໂມດູນເລີ່ມຕົ້ນ
-media:
-  not_playing: ບໍ່ມີຫຍັງຫຼີ້ນ
+taskbar_menu:
+  add_file: PIN File Custom
+  add_folder: PIN Custom FOLLER
+  media: ຕື່ມການໂມດູນສື່
+  settings: ການຕັ້ງຄ່າ
+  start: ເພີ່ມໂມດູນ Start
+  task_manager: Task Manager

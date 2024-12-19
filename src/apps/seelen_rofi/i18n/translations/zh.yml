@@ -7,5 +7,5 @@ footer:
 header:
   search: 应用程序、命令或路径
 item:
-  pin: 固定到 Dock / 任务栏
   open_location: 打开文件位置
+  pin: 固定到 Dock / 任务栏

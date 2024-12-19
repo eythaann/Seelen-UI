@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Добавить модуль
+  remove: Удалить модуль
+  settings: Настройки
+  task_manager: Диспетчер задач
 media:
+  device:
+    comunications: Коммуникации
+    multimedia: Мультимедиа
+  input_device: Устройство ввода
   master_volume: Основная громкость
   output_device: Устройство вывода
-  input_device: Устройство ввода
   players: Медиаплееры
-  device:
-    multimedia: Мультимедиа
-    comunications: Коммуникации
 network:
-  not_found: Не найдено ни одной сети
-  more: Больше настроек сети
+  available: Доступные сети
+  connect: Подключить
+  connected: Подключено к
+  disconnect: Отключить
   hidden: Скрытая сеть
+  more: Больше настроек сети
+  not_found: Не найдено ни одной сети
   placeholder:
     password: Пароль
-  disconnect: Отключить
-  connect: Подключить
   saved: Сохраненные сети
-  available: Доступные сети
-  connected: Подключено к
-  secured: Зашифрованная сеть
   scanning: Сканирование сетей
-settings:
-  title: Настройки
-  app_settings: Настройки приложения
-  log_out: Выход из системы
-  sleep: Спящий режим
-  restart: Перезагрузка
-  shutdown: Завершение работы
-  power: Питание
+  secured: Зашифрованная сеть
 placeholder:
-  open_user_folder: Открыть папку пользователя
-  open_system_tray: Открыть системный трей
+  battery_remaining: Осталось %
   bluetooth_devices: Bluetooth и устройства
   ethernet_connected: Сеть
   ethernet_disconnected: Нет сети
-  volume: Громкость
-  battery_remaining: Осталось %
-  smart_charge: '- Умная зарядка'
-  settings: Быстрые настройки
   notifications: Уведомления
+  open_system_tray: Открыть системный трей
+  open_user_folder: Открыть папку пользователя
+  settings: Быстрые настройки
+  smart_charge: '- Умная зарядка'
+  volume: Громкость
+settings:
+  app_settings: Настройки приложения
+  log_out: Выход из системы
+  power: Питание
+  restart: Перезагрузка
+  shutdown: Завершение работы
+  sleep: Спящий режим
+  title: Настройки
 unlabelled_tray: Иконка трея без надписи
-context_menu:
-  remove: Удалить модуль
-  add_module: Добавить модуль
-  task_manager: Диспетчер задач
-  settings: Настройки

@@ -1,199 +1,151 @@
-loading: Am Laden...
-inProgress: In Bearbeitung...
-cancel: Abbrechen
-save: Speichern
-quit: Beenden
-open: Öffnen
-delete: Löschen
-sides:
-  left: Links
-  right: Rechts
-  top: Oben
-  bottom: Unten
-header:
-  labels:
-    general: Allgemein
-    seelen_bar: Werkzeugleiste
-    seelen_wm: Tiling Window Manager
-    seelen_weg: Dock/Taskleiste
-    monitors: Monitore
-    specific_apps: Spezifische Apps
-    shortcuts: Kurzbefehle
-    developer: Entwickler
-    info: Information
-    seelen_rofi: App Launcher
-    virtual_desk: Virtuelle Desktops
-    home: Home
-    mods: Plugins und Widgets
-    seelen_wall: Tapetenmanager
-start:
-  title: Willkommen!
-  message: >-
-    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
-    integrierten Fenstermanager, um dein Windows-Erlebnis zu verbessern! Erkunde
-    eine neue Ära der Effizienz und Multitasking mit unserer intuitiven
-    Oberfläche und fortschrittlichen Funktionen.
-  message_accent: Optimiere deine Produktivität mit Stil!
-general:
-  startup: Beim Hochfahren ausführen?
-  language: Sprache
-  theme:
-    label: Themeninformation
-    placeholder: Thema auswählen
-    author: Autor
-    description: Beschreibung
-    add: Thema hinzufügen
-    added: Thema bereits hinzugefügt
-    enabled: Aktivierte Themen
-    tags: Tags
-    selected: Ausgewählt
-    available: Verfügbar
-  icon_pack:
-    label: Icon Packs
-  accent_color: Akzentfarbe
-  wallpaper:
-    select: Wählen Sie Hintergrundbild
-  date_format: Datumsformat
-toolbar:
-  enable: Elegante Werkzeugleiste aktivieren
-  placeholder:
-    select: Struktur der Werkzeugleiste
-    author: Autor
-    description: Beschreibung
-  height: Höhe
-  auto_hide: Automatisch ausblenden
-  label: Symbolleiste
-  delay_to_hide: Verzögerung zum Verstecken
-  delay_to_show: Verzögerung beim Anzeigen
-  use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
-wm:
-  layout: Layout
-  author: Autor
-  description: Beschreibung
-  space_between_containers: Abstand zwischen Containern
-  workspace_padding: Arbeitsbereichs-Padding
-  workspace_offset: Arbeitsbereichs-Versatz (Ränder)
-  resize_delta: Relative Größenänderung (%)
-  border:
-    enable: Fensterrand aktivieren
-    width: Randbreite
-    offset: Randversatz
-  enable: Aktivieren Sie den Tiling Window Manager
-weg:
-  label: Dock/Taskleiste
-  enable: Dock/Taskleiste aktivieren
-  width: Breite
-  auto_hide: Automatisch ausblenden
-  padding: Polsterung
-  margin: Rand
-  gap: Abstand
-  items:
-    label: Elemente
-    size: Elementgröße
-    zoom_size: Vergrößerte Größe (für Themen verwendet)
-    gap: Abstand zwischen Elementen
-    visible_separators: Sichtbare Trennzeichen
-  dock_side: Position
-  delay_to_show: Verzögerung beim Anzeigen
-  delay_to_hide: Verzögerung zum Verstecken
-  use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
-devtools:
-  enable: Entwicklerwerkzeuge aktivieren
-  app_folders: Anwendungsordner
-  install_folder: Installationsordner
-  data_folder: Datenordner
-  settings_file: Einstellungsdatei
-  custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
-  load: Laden
+app_launcher:
+  enable: App Launcher aktivieren
+  monitor: Monitor zum Anzeigen
+  runners:
+    cmd: Befehl
+    explorer: Run
+    label: Runner
 apps_configurations:
-  import: Importieren
-  export: Exportieren
-  delete: Löschen
-  swap: Austauschen
-  new: Neu
-  bundled_title: Mit Seelen gebündelte App-Konfiguration
+  app:
+    bindings: Bindung (beide Optionen sind erforderlich)
+    category: Kategorie
+    category_placeholder: Keine
+    monitor: Monitor
+    monitor_placeholder: Keine
+    name: Name
+    ok_create: Erstellen
+    ok_edit: Ändern
+    ok_readonly: Als neu bearbeiten
+    options:
+      float: Schwebend
+      force: Verwaltung erzwingen
+      hidden: Vor Dock/Taskleiste verstecken
+      pinned: Angeheftet
+      unmanage: Nicht verwalten
+    options_label: Zusätzliche Optionen
+    title_create: '{{name}} erstellen'
+    title_edit: Bearbeitung {{Name}}
+    title_readonly: '{{name}} ansehen'
+    weg_options_label: Dock/Taskleistenoptionen
+    wm_options_label: Fenstermanageroptionen
+    workspace: Arbeitsbereich
+    workspace_placeholder: Keine
   bundled_msg: >-
     Diese gebündelten Konfigurationen sind nicht bearbeitbar und wurden
     entwickelt, um dir das beste Erlebnis ohne Anpassung zu bieten. Sie
     konfigurieren die gebräuchlichsten Anwendungen automatisch für dich.
-  confirm_delete_title: Löschen bestätigen
+  bundled_title: Mit Seelen gebündelte App-Konfiguration
   confirm_delete: Möchtest du diese Konfiguration wirklich löschen?
-  search: Suchen
-  app:
-    name: Name
-    category: Kategorie
-    category_placeholder: Keine
-    bindings: Bindung (beide Optionen sind erforderlich)
-    monitor: Monitor
-    monitor_placeholder: Keine
-    workspace: Arbeitsbereich
-    workspace_placeholder: Keine
-    title_create: '{{name}} erstellen'
-    title_readonly: '{{name}} ansehen'
-    ok_edit: Ändern
-    ok_create: Erstellen
-    ok_readonly: Als neu bearbeiten
-    options_label: Zusätzliche Optionen
-    wm_options_label: Fenstermanageroptionen
-    weg_options_label: Dock/Taskleistenoptionen
-    options:
-      float: Schwebend
-      unmanage: Nicht verwalten
-      force: Verwaltung erzwingen
-      pinned: Angeheftet
-      hidden: Vor Dock/Taskleiste verstecken
-    title_edit: Bearbeitung {{Name}}
-  identifier:
-    remove: Block löschen
-    id: Identifikator
-    kind: Identifizieren nach
-    matching_strategy: Abgleichstrategie
-    negation: Abgleich negieren
-    and: UND
-    or: ODER
-    add_block: Block hinzufügen
+  confirm_delete_title: Löschen bestätigen
+  delete: Löschen
+  export: Exportieren
   extra_info: >-
     Seelen UI Verwenden Sie nur einen Kenner pro App (zuerst übereinstimmend
     gefunden). Die Reihenfolge, in der spezifisch ist, ist wichtig. Die neueste
     hinzugefügte zusätzliche wird priorisiert, da die Tabelle standardmäßig von
     der neuesten nach alt sortiert wird.
+  identifier:
+    add_block: Block hinzufügen
+    and: UND
+    id: Identifikator
+    kind: Identifizieren nach
+    matching_strategy: Abgleichstrategie
+    negation: Abgleich negieren
+    or: ODER
+    remove: Block löschen
+  import: Importieren
+  new: Neu
+  search: Suchen
+  swap: Austauschen
+cancel: Abbrechen
+close: Schließen
+delete: Löschen
+devtools:
+  app_folders: Anwendungsordner
+  custom_config_file: Benutzerdefinierte Konfigurationsdatei laden
+  data_folder: Datenordner
+  enable: Entwicklerwerkzeuge aktivieren
+  install_folder: Installationsordner
+  load: Laden
+  settings_file: Einstellungsdatei
 extras:
-  version: Version
-  links: Offizielle Links
-  github: GitHub
   discord: Discord
-  relaunch: Neu starten
   exit: Beenden
+  github: GitHub
+  links: Offizielle Links
+  relaunch: Neu starten
+  version: Version
+general:
+  accent_color: Akzentfarbe
+  date_format: Datumsformat
+  icon_pack:
+    label: Icon Packs
+  language: Sprache
+  startup: Beim Hochfahren ausführen?
+  theme:
+    add: Thema hinzufügen
+    added: Thema bereits hinzugefügt
+    author: Autor
+    available: Verfügbar
+    description: Beschreibung
+    enabled: Aktivierte Themen
+    label: Themeninformation
+    placeholder: Thema auswählen
+    selected: Ausgewählt
+    tags: Tags
+  wallpaper:
+    select: Wählen Sie Hintergrundbild
+header:
+  labels:
+    developer: Entwickler
+    general: Allgemein
+    home: Home
+    info: Information
+    mods: Plugins und Widgets
+    monitors: Monitore
+    seelen_bar: Werkzeugleiste
+    seelen_rofi: App Launcher
+    seelen_wall: Tapetenmanager
+    seelen_weg: Dock/Taskleiste
+    seelen_wm: Tiling Window Manager
+    shortcuts: Kurzbefehle
+    specific_apps: Spezifische Apps
+    virtual_desk: Virtuelle Desktops
+inherit: Erben
+inProgress: In Bearbeitung...
+insert: Einfügen
+loading: Am Laden...
+miscellaneous: Verschiedenes
+mods:
+  plugins: Plugins
+  target: Ziel
+  widgets: Widgets
+monitors_configurations:
+  label: Monitor {{index}}
+more: Mehr
+open: Öffnen
+quit: Beenden
+remove: Entfernen
+save: Speichern
+save_and_restart: Speichern & neu starten
 shortcuts:
   enable: Integrierte Kurzbefehle aktivieren (ahk)
   enable_tooltip: >-
     Deaktivieren, wenn du deine eigenen Kurzbefehle mit der Seelen Core API
     implementierst
   labels:
-    reserve_top: Oben reservieren
-    reserve_bottom: Unten reservieren
-    reserve_left: Links reservieren
-    reserve_right: Rechts reservieren
-    reserve_float: Schwebend reservieren
-    reserve_stack: Stapel reservieren
-    focus_top: Oben fokussieren
+    decrease_height: Höhe verkleinern
+    decrease_width: Breite verkleinern
     focus_bottom: Unten fokussieren
+    focus_latest: Letztes fokussieren
     focus_left: Links fokussieren
     focus_right: Rechts fokussieren
-    focus_latest: Letztes fokussieren
-    increase_width: Breite vergrößern
-    decrease_width: Breite verkleinern
+    focus_top: Oben fokussieren
     increase_height: Höhe vergrößern
-    decrease_height: Höhe verkleinern
-    restore_sizes: Größen wiederherstellen
-    switch_workspace_2: Zum Arbeitsbereich 2 wechseln
-    switch_workspace_3: Zum Arbeitsbereich 3 wechseln
-    switch_workspace_4: Zum Arbeitsbereich 4 wechseln
-    switch_workspace_5: Zum Arbeitsbereich 5 wechseln
-    switch_workspace_6: Zum Arbeitsbereich 6 wechseln
-    switch_workspace_7: Zum Arbeitsbereich 7 wechseln
-    switch_workspace_8: Zum Arbeitsbereich 8 wechseln
-    switch_workspace_9: Zum Arbeitsbereich 9 wechseln
+    increase_width: Breite vergrößern
+    misc_open_settings: Einstellungen geöffnet
+    misc_toggle_lock_tracing: Schaltersperrverfolgung (Protokolle)
+    misc_toggle_win_event_tracing: Verfolgung des Sieg -Ereignisses (Protokolle) umschalten
     move_to_workspace_0: Zum Arbeitsbereich 0 verschieben
     move_to_workspace_1: Zum Arbeitsbereich 1 verschieben
     move_to_workspace_2: Zum Arbeitsbereich 2 verschieben
@@ -204,6 +156,13 @@ shortcuts:
     move_to_workspace_7: Zum Arbeitsbereich 7 verschieben
     move_to_workspace_8: Zum Arbeitsbereich 8 verschieben
     move_to_workspace_9: Zum Arbeitsbereich 9 verschieben
+    reserve_bottom: Unten reservieren
+    reserve_float: Schwebend reservieren
+    reserve_left: Links reservieren
+    reserve_right: Rechts reservieren
+    reserve_stack: Stapel reservieren
+    reserve_top: Oben reservieren
+    restore_sizes: Größen wiederherstellen
     send_to_workspace_0: Zum Arbeitsbereich 0 senden
     send_to_workspace_1: Zum Arbeitsbereich 1 senden
     send_to_workspace_2: Zum Arbeitsbereich 2 senden
@@ -216,50 +175,91 @@ shortcuts:
     send_to_workspace_9: Zum Arbeitsbereich 9 senden
     switch_workspace_0: Wechseln Sie zum Arbeitsbereich 1
     switch_workspace_1: Wechseln Sie zum Arbeitsbereich 2
-    misc_toggle_lock_tracing: Schaltersperrverfolgung (Protokolle)
-    misc_open_settings: Einstellungen geöffnet
-    misc_toggle_win_event_tracing: Verfolgung des Sieg -Ereignisses (Protokolle) umschalten
+    switch_workspace_2: Zum Arbeitsbereich 2 wechseln
+    switch_workspace_3: Zum Arbeitsbereich 3 wechseln
+    switch_workspace_4: Zum Arbeitsbereich 4 wechseln
+    switch_workspace_5: Zum Arbeitsbereich 5 wechseln
+    switch_workspace_6: Zum Arbeitsbereich 6 wechseln
+    switch_workspace_7: Zum Arbeitsbereich 7 wechseln
+    switch_workspace_8: Zum Arbeitsbereich 8 wechseln
+    switch_workspace_9: Zum Arbeitsbereich 9 wechseln
     toggle_launcher: Umschalten
-  reset: Auf Standards zurücksetzen
   readonly_tooltip: Dies ist eine schreibgeschützte Verknüpfung
+  reset: Auf Standards zurücksetzen
+sides:
+  bottom: Unten
+  left: Links
+  right: Rechts
+  top: Oben
+start:
+  message: >-
+    Willkommen bei Seelen UI, der ultimativen Desktop-Umgebung mit einem
+    integrierten Fenstermanager, um dein Windows-Erlebnis zu verbessern! Erkunde
+    eine neue Ära der Effizienz und Multitasking mit unserer intuitiven
+    Oberfläche und fortschrittlichen Funktionen.
+  message_accent: Optimiere deine Produktivität mit Stil!
+  title: Willkommen!
+toolbar:
+  auto_hide: Automatisch ausblenden
+  delay_to_hide: Verzögerung zum Verstecken
+  delay_to_show: Verzögerung beim Anzeigen
+  enable: Elegante Werkzeugleiste aktivieren
+  height: Höhe
+  label: Symbolleiste
+  placeholder:
+    author: Autor
+    description: Beschreibung
+    select: Struktur der Werkzeugleiste
+  use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
+update:
+  available: Update verfügbar!
+  channel: Update-Kanal
+  downloading: Am Herunterladen ...
 vd:
-  strategy:
-    native: Nativ
-    seelen: Seelen
-    label: Virtuelle Desktop-Strategie
   disabled_windows_version: >-
     Für Ihre Windows-Version ist keine native virtuelle Desktop-Strategie
     verfügbar.
-save_and_restart: Speichern & neu starten
-monitors_configurations:
-  label: Monitor {{index}}
+  strategy:
+    label: Virtuelle Desktop-Strategie
+    native: Nativ
+    seelen: Seelen
 wall:
-  no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
   backgrounds: Hintergrundbilder
   enable: Tapetenmanager aktivieren
-  interval: Wechseln Sie die Hintergrundbild
-  random: Die Diashow randomisieren
   hours: Std.
-  seconds: Sekunden
+  interval: Wechseln Sie die Hintergrundbild
   minutes: Minuten
-app_launcher:
-  runners:
-    cmd: Befehl
-    explorer: Run
-    label: Runner
-  enable: App Launcher aktivieren
-  monitor: Monitor zum Anzeigen
-insert: Einfügen
-more: Mehr
-inherit: Erben
-close: Schließen
-update:
-  available: Update verfügbar!
-  downloading: Am Herunterladen ...
-  channel: Update-Kanal
-miscellaneous: Verschiedenes
-mods:
-  target: Ziel
-  widgets: Widgets
-  plugins: Plugins
-remove: Entfernen
+  no_background: Leere Diashow, stattdessen wird der Hintergrund des Themas verwendet.
+  random: Die Diashow randomisieren
+  seconds: Sekunden
+weg:
+  auto_hide: Automatisch ausblenden
+  delay_to_hide: Verzögerung zum Verstecken
+  delay_to_show: Verzögerung beim Anzeigen
+  dock_side: Position
+  enable: Dock/Taskleiste aktivieren
+  gap: Abstand
+  items:
+    gap: Abstand zwischen Elementen
+    label: Elemente
+    size: Elementgröße
+    visible_separators: Sichtbare Trennzeichen
+    zoom_size: Vergrößerte Größe (für Themen verwendet)
+  label: Dock/Taskleiste
+  margin: Rand
+  padding: Polsterung
+  use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
+  width: Breite
+wm:
+  author: Autor
+  border:
+    enable: Fensterrand aktivieren
+    offset: Randversatz
+    width: Randbreite
+  description: Beschreibung
+  enable: Aktivieren Sie den Tiling Window Manager
+  layout: Layout
+  resize_delta: Relative Größenänderung (%)
+  space_between_containers: Abstand zwischen Containern
+  workspace_offset: Arbeitsbereichs-Versatz (Ränder)
+  workspace_padding: Arbeitsbereichs-Padding

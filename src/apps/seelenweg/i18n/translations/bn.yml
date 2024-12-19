@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: মিডিয়া মডিউল যুক্ত করুন
-  start: স্টার্ট মডিউল যুক্ত করুন
-  add_file: কাস্টম ফাইল পিন করুন
-  add_folder: পিন কাস্টম ফোল্ডার
-  settings: সেটিংস
-  task_manager: টাস্ক ম্যানেজার
 app_menu:
-  close_multiple: সব বন্ধ করা
-  run_as: প্রশাসক হিসাবে চালান
   close: বন্ধ
-  open_file_location: নথির অবস্থান বের করা
-  pin_to_center: কেন্দ্রে পিন
-  pin_to_left: বাম দিকে পিন
-  unpin: আনপিন
-  pin: পিন
-  pin_to_right: ডান পিন
+  close_multiple: সব বন্ধ করা
   copy_handles: হ্যান্ডলগুলি অনুলিপি
   kill: কিল প্রসেস
   kill_multiple: সমস্ত প্রক্রিয়া হত্যা
+  open_file_location: নথির অবস্থান বের করা
+  pin: পিন
+  pin_to_center: কেন্দ্রে পিন
+  pin_to_left: বাম দিকে পিন
+  pin_to_right: ডান পিন
+  run_as: প্রশাসক হিসাবে চালান
+  unpin: আনপিন
+media:
+  not_playing: কিছুই খেলছে না
 media_menu:
   remove: মিডিয়া মডিউল সরান
 start_menu:
   remove: স্টার্ট মডিউল সরান
-media:
-  not_playing: কিছুই খেলছে না
+taskbar_menu:
+  add_file: কাস্টম ফাইল পিন করুন
+  add_folder: পিন কাস্টম ফোল্ডার
+  media: মিডিয়া মডিউল যুক্ত করুন
+  settings: সেটিংস
+  start: স্টার্ট মডিউল যুক্ত করুন
+  task_manager: টাস্ক ম্যানেজার

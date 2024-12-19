@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Bættu við einingu
+  remove: Fjarlægðu eininguna
+  settings: Stillingar
+  task_manager: Verkefnastjóri
 media:
   device:
-    multimedia: Margmiðlun
     comunications: Samskipti
+    multimedia: Margmiðlun
+  input_device: Inntakstæki
   master_volume: Master bindi
   output_device: Framleiðsla tæki
-  input_device: Inntakstæki
   players: Fjölmiðla leikmenn
 network:
-  placeholder:
-    password: Lykilorð
+  available: Tiltæk netkerfi
+  connect: Tengdu
+  connected: Tengdur við
   disconnect: Aftengdu
+  hidden: Falið net
   more: Fleiri netstillingar
   not_found: Engin net fundust
-  hidden: Falið net
-  connect: Tengdu
-  scanning: Leitar að netkerfum
-  connected: Tengdur við
+  placeholder:
+    password: Lykilorð
   saved: Vistað netkerfi
+  scanning: Leitar að netkerfum
   secured: Dulkóðað net
-  available: Tiltæk netkerfi
+placeholder:
+  battery_remaining: '% eftir'
+  bluetooth_devices: Bluetooth og tæki
+  ethernet_connected: internet aðgangur
+  ethernet_disconnected: Enginn internetaðgangur
+  notifications: Tilkynningar
+  open_system_tray: Opinn kerfisbakki
+  open_user_folder: Opna notendamöppu
+  settings: Fljótar stillingar
+  smart_charge: '- Snjall hleðsla'
+  volume: Bindi
 settings:
-  restart: Endurræsa
-  log_out: Að skrá þig út
   app_settings: Forritastillingar
-  title: Stillingar
+  log_out: Að skrá þig út
+  power: Máttur
+  restart: Endurræsa
   shutdown: Lokun
   sleep: Sofðu
-  power: Máttur
-placeholder:
-  ethernet_connected: internet aðgangur
-  smart_charge: '- Snjall hleðsla'
-  bluetooth_devices: Bluetooth og tæki
-  volume: Bindi
-  ethernet_disconnected: Enginn internetaðgangur
-  settings: Fljótar stillingar
-  open_user_folder: Opna notendamöppu
-  battery_remaining: '% eftir'
-  open_system_tray: Opinn kerfisbakki
-  notifications: Tilkynningar
+  title: Stillingar
 unlabelled_tray: Ómerkt bakkatákn
-context_menu:
-  remove: Fjarlægðu eininguna
-  add_module: Bættu við einingu
-  task_manager: Verkefnastjóri
-  settings: Stillingar

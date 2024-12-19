@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Иловаи модули ВАО
-  start: Иловаи модули оғоз
-  add_file: Файли фармоишии PIN
-  add_folder: Папкаи фармоишии PIN
-  settings: Танзимотҳо
-  task_manager: Менеҷери вазифа
 app_menu:
+  close: Наздик
+  close_multiple: Ҳамаашро пӯшед
   copy_handles: Дасткор
+  kill: Раванди куштан
+  kill_multiple: Ҳама равандҳоро кушед
+  open_file_location: Кушодани макони кушод
+  pin: PIN
   pin_to_center: PIN ба марказ
   pin_to_left: PIN ба чап
   pin_to_right: PIN ба рост
-  close_multiple: Ҳамаашро пӯшед
-  pin: PIN
   run_as: Ҳамчун мудир кор кунед
   unpin: Ватанӣ
-  close: Наздик
-  open_file_location: Кушодани макони кушод
-  kill: Раванди куштан
-  kill_multiple: Ҳама равандҳоро кушед
+media:
+  not_playing: Ҳеҷ чиз бозӣ намекунад
 media_menu:
   remove: Модули ВАО-ро хориҷ кунед
 start_menu:
   remove: Модули оғозро хориҷ кунед
-media:
-  not_playing: Ҳеҷ чиз бозӣ намекунад
+taskbar_menu:
+  add_file: Файли фармоишии PIN
+  add_folder: Папкаи фармоишии PIN
+  media: Иловаи модули ВАО
+  settings: Танзимотҳо
+  start: Иловаи модули оғоз
+  task_manager: Менеҷери вазифа

@@ -1,258 +1,258 @@
-sides:
-  bottom: תַחתִית
-  right: ימין
-  left: שמאלה
-  top: חלק עליון
+app_launcher:
+  enable: הפעל משגר אפליקציות
+  monitor: צג כדי להציג
+  runners:
+    cmd: פְּקוּדָה
+    explorer: לָרוּץ
+    label: רצים
+apps_configurations:
+  app:
+    bindings: כריכה (שימו לב לשתי האפשרויות נדרשות)
+    category: קטגוריה
+    category_placeholder: אף אחד
+    monitor: צג
+    monitor_placeholder: אף אחד
+    name: שֵׁם
+    ok_create: לִיצוֹר
+    ok_edit: עדכון
+    ok_readonly: ערוך כחדש
+    options:
+      float: לָצוּף
+      force: כוח לנהל
+      hidden: הסתר ממעגן/שורת משימות
+      pinned: מוצמד
+      unmanage: לא מנוהל
+    options_label: אפשרויות נוספות
+    title_create: יצירת {{name}}
+    title_edit: עריכה {{name}}
+    title_readonly: צופה {{name}}
+    weg_options_label: אפשרויות עגינה/שורת משימות
+    wm_options_label: אפשרויות מנהל חלונות
+    workspace: סביבת עבודה
+    workspace_placeholder: אף אחד
+  bundled_msg: >-
+    תצורות מצורפות אלה אינן ניתנות לעריכה ונועדו לספק לך את החוויה הטובה ביותר
+    ללא התאמה אישית. הם מגדירים באופן אוטומטי את היישומים הנפוצים ביותר עבורך.
+  bundled_title: תצורת אפליקציה מצורפת עם Seelen
+  confirm_delete: האם אתה בטוח שברצונך למחוק תצורה/ים אלה?
+  confirm_delete_title: אשר מחק
+  delete: לִמְחוֹק
+  export: יְצוּא
+  extra_info: >-
+    ממשק המשתמש של Seelen משתמש רק במזהה אחד לכל אפליקציה (נמצאה התאמה ראשונה),
+    כך שסדר האופן שבו הם מוגדרים הוא חשוב, העדיפות האחרונה שנוספה תהיה בסדר
+    עדיפויות, שים לב שהטבלה ממוינת כברירת מחדל מהאחרון לישנה.
+  identifier:
+    add_block: הוסף בלוק
+    and: וכן
+    id: מזהה
+    kind: לזהות על ידי
+    matching_strategy: אסטרטגיה תואמת
+    negation: שולל התאמה
+    or: אוֹ
+    remove: מחק בלוק
+  import: יְבוּא
+  new: חָדָשׁ
+  search: לחפש
+  swap: לְהַחלִיף
+cancel: לְבַטֵל
+close: לִסְגוֹר
+delete: לִמְחוֹק
+devtools:
+  app_folders: תיקיות אפליקציות
+  custom_config_file: טען קובץ תצורה מותאם אישית
+  data_folder: תיקיית נתונים
+  enable: אפשר כלי מפתחים
+  install_folder: תיקיית התקנה
+  load: לִטעוֹן
+  settings_file: קובץ הגדרות
+extras:
+  discord: מַחֲלוֹקֶת
+  exit: יצא/יציאה
+  github: Github
+  links: קישורים רשמיים
+  relaunch: השקה מחדש
+  version: גִרְסָה
+general:
+  accent_color: צבע הדגשה
+  date_format: פורמט תאריך
+  icon_pack:
+    label: חבילות אייקונים
+  language: שפה
+  startup: לרוץ בהפעלה?
+  theme:
+    add: הוסף נושא
+    added: הנושא כבר הוסיף
+    author: מְחַבֵּר
+    available: זמין
+    description: תיאור
+    enabled: נושאים מופעלים
+    label: מידע על נושא
+    placeholder: בחר נושא
+    selected: נבחר
+    tags: תגיות
+  wallpaper:
+    select: בחר טפט
 header:
   labels:
     developer: מפתח
-    info: מֵידָע
-    specific_apps: אפליקציות ספציפיות
     general: כללי
-    seelen_weg: שורת המזח/המשימות
-    shortcuts: קיצורי דרך
-    seelen_wm: מנהל חלונות
-    seelen_bar: סרגל כלים מפואר
-    monitors: צגים
-    seelen_rofi: משגר אפליקציות
-    virtual_desk: שולחנות עבודה וירטואליים
     home: בַּיִת
+    info: מֵידָע
     mods: תוספים ווידג'טים
+    monitors: צגים
+    seelen_bar: סרגל כלים מפואר
+    seelen_rofi: משגר אפליקציות
     seelen_wall: מנהל טפטים
+    seelen_weg: שורת המזח/המשימות
+    seelen_wm: מנהל חלונות
+    shortcuts: קיצורי דרך
+    specific_apps: אפליקציות ספציפיות
+    virtual_desk: שולחנות עבודה וירטואליים
+inherit: לָרֶשֶׁת
+inProgress: בתהליך...
+insert: לְהַכנִיס
+loading: טוען...
+miscellaneous: שונות
+mods:
+  plugins: תוספים
+  target: יַעַד
+  widgets: ווידג'טים
+monitors_configurations:
+  label: צג {{index}}
+more: יוֹתֵר
+open: לִפְתוֹחַ
+quit: לְהַפְסִיק
+remove: לְהַסִיר
+save: להציל
+save_and_restart: שמור והפעלה מחדש
+shortcuts:
+  enable: אפשר קיצורי דרך משולבים (AHK)
+  enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
+  labels:
+    decrease_height: ירידה בגובה
+    decrease_width: ירידה ברוחב
+    focus_bottom: מיקוד תחתון
+    focus_latest: התמקד האחרון
+    focus_left: פוקוס שמאלה
+    focus_right: להתמקד נכון
+    focus_top: מיקוד למעלה
+    increase_height: הגדל את הגובה
+    increase_width: הגדל את הרוחב
+    misc_open_settings: הגדרות פתוחות
+    misc_toggle_lock_tracing: מעקב אחר נעילת נעילה (יומנים)
+    misc_toggle_win_event_tracing: מעקב אחר WIN WIN (יומנים)
+    move_to_workspace_0: עברו לסביבת העבודה 0
+    move_to_workspace_1: לעבור לסביבת העבודה 1
+    move_to_workspace_2: לעבור לסביבת העבודה 2
+    move_to_workspace_3: לעבור לסביבת העבודה 3
+    move_to_workspace_4: עברו לסביבת העבודה 4
+    move_to_workspace_5: לעבור לסביבת העבודה 5
+    move_to_workspace_6: עברו לסביבת העבודה 6
+    move_to_workspace_7: לעבור לסביבת העבודה 7
+    move_to_workspace_8: עברו לסביבת העבודה 8
+    move_to_workspace_9: עברו לסביבת העבודה 9
+    reserve_bottom: שמורה בתחתית
+    reserve_float: שמורה לצוף
+    reserve_left: רזרבה שמאלה
+    reserve_right: שמור ימינה
+    reserve_stack: ערימת מילואים
+    reserve_top: עליון מילואים
+    restore_sizes: שחזור גדלים
+    send_to_workspace_0: שלח לסביבת עבודה 0
+    send_to_workspace_1: שלח לסביבת עבודה 1
+    send_to_workspace_2: שלח לסביבת עבודה 2
+    send_to_workspace_3: שלח לסביבת העבודה 3
+    send_to_workspace_4: שלח לסביבת העבודה 4
+    send_to_workspace_5: שלח לסביבת העבודה 5
+    send_to_workspace_6: שלח לסביבת עבודה 6
+    send_to_workspace_7: שלח לסביבת עבודה 7
+    send_to_workspace_8: שלח לסביבת עבודה 8
+    send_to_workspace_9: שלח לסביבת העבודה 9
+    switch_workspace_0: עבור לסביבת העבודה 1
+    switch_workspace_1: עבור לסביבת העבודה 2
+    switch_workspace_2: עבור לסביבת העבודה 2
+    switch_workspace_3: עבור לסביבת העבודה 3
+    switch_workspace_4: עברו לסביבת העבודה 4
+    switch_workspace_5: עברו לסביבת העבודה 5
+    switch_workspace_6: לעבור לסביבת עבודה 6
+    switch_workspace_7: לעבור לסביבת עבודה 7
+    switch_workspace_8: עברו לסביבת העבודה 8
+    switch_workspace_9: עבור לסביבת העבודה 9
+    toggle_launcher: לְמַתֵג
+  readonly_tooltip: זהו קיצור דרך לקריאה בלבד
+  reset: אפס לברירות מחדל
+sides:
+  bottom: תַחתִית
+  left: שמאלה
+  right: ימין
+  top: חלק עליון
 start:
-  title: ברוך הבא!
   message: >-
     ברוך הבא ל- Seelen UI, סביבת שולחן העבודה האולטימטיבית עם מנהל Windows משולב
     אריחים כדי לשפר את חווית Windows שלך! חקור עידן חדש של יעילות ורב משימות עם
     הממשק האינטואיטיבי והתכונות המתקדמות שלנו.
   message_accent: אופטימיזציה של הפרודוקטיביות שלך עם סגנון!
-general:
-  theme:
-    author: מְחַבֵּר
-    description: תיאור
-    label: מידע על נושא
-    enabled: נושאים מופעלים
-    tags: תגיות
-    added: הנושא כבר הוסיף
-    placeholder: בחר נושא
-    add: הוסף נושא
-    selected: נבחר
-    available: זמין
-  language: שפה
-  startup: לרוץ בהפעלה?
-  icon_pack:
-    label: חבילות אייקונים
-  accent_color: צבע הדגשה
-  wallpaper:
-    select: בחר טפט
-  date_format: פורמט תאריך
+  title: ברוך הבא!
 toolbar:
+  auto_hide: הסתר אוטומטי
+  delay_to_hide: עיכוב להסתיר
+  delay_to_show: עיכוב להצגה
+  enable: אפשר סרגל כלים מפואר
+  height: גוֹבַה
+  label: סרגל כלים
   placeholder:
     author: מְחַבֵּר
     description: תיאור
     select: מבנה סרגל הכלים
-  height: גוֹבַה
-  enable: אפשר סרגל כלים מפואר
-  auto_hide: הסתר אוטומטי
-  label: סרגל כלים
-  delay_to_hide: עיכוב להסתיר
-  delay_to_show: עיכוב להצגה
   use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
-wm:
-  border:
-    offset: קיזוז גבול
-    width: רוחב גבול
-    enable: אפשר את גבול החלון
-  space_between_containers: מרחב בין מכולות
-  layout: מַעֲרָך
-  author: מְחַבֵּר
-  description: תיאור
-  workspace_padding: מרחבי עבודה ריפוד
-  resize_delta: שינוי גודל דלתא (%)
-  workspace_offset: מרחבי עבודה קיזזו (שוליים)
-  enable: אפשר מנהל חלונות אריחים
-weg:
-  items:
-    gap: שטח בין פריטים
-    label: פריטים
-    visible_separators: מפרידים גלויים
-    zoom_size: גודל מתקרב (משמש לנושאים)
-    size: גודל פריט
-  width: רוֹחַב
-  gap: פער
-  auto_hide: הסתר אוטומטי
-  label: שורת המזח/המשימות
-  margin: שולים
-  enable: הפעל את המזח/שורת המשימות
-  padding: ריפוד
-  dock_side: מַצָב
-  delay_to_hide: עיכוב להסתיר
-  delay_to_show: עיכוב להצגה
-  use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
-devtools:
-  load: לִטעוֹן
-  install_folder: תיקיית התקנה
-  custom_config_file: טען קובץ תצורה מותאם אישית
-  data_folder: תיקיית נתונים
-  app_folders: תיקיות אפליקציות
-  settings_file: קובץ הגדרות
-  enable: אפשר כלי מפתחים
-apps_configurations:
-  app:
-    options:
-      float: לָצוּף
-      force: כוח לנהל
-      pinned: מוצמד
-      unmanage: לא מנוהל
-      hidden: הסתר ממעגן/שורת משימות
-    name: שֵׁם
-    monitor_placeholder: אף אחד
-    category_placeholder: אף אחד
-    ok_edit: עדכון
-    bindings: כריכה (שימו לב לשתי האפשרויות נדרשות)
-    category: קטגוריה
-    ok_readonly: ערוך כחדש
-    monitor: צג
-    ok_create: לִיצוֹר
-    workspace_placeholder: אף אחד
-    title_create: יצירת {{name}}
-    workspace: סביבת עבודה
-    title_readonly: צופה {{name}}
-    wm_options_label: אפשרויות מנהל חלונות
-    weg_options_label: אפשרויות עגינה/שורת משימות
-    options_label: אפשרויות נוספות
-    title_edit: עריכה {{name}}
-  identifier:
-    id: מזהה
-    or: אוֹ
-    and: וכן
-    add_block: הוסף בלוק
-    kind: לזהות על ידי
-    remove: מחק בלוק
-    matching_strategy: אסטרטגיה תואמת
-    negation: שולל התאמה
-  new: חָדָשׁ
-  search: לחפש
-  confirm_delete: האם אתה בטוח שברצונך למחוק תצורה/ים אלה?
-  export: יְצוּא
-  delete: לִמְחוֹק
-  import: יְבוּא
-  swap: לְהַחלִיף
-  confirm_delete_title: אשר מחק
-  bundled_title: תצורת אפליקציה מצורפת עם Seelen
-  bundled_msg: >-
-    תצורות מצורפות אלה אינן ניתנות לעריכה ונועדו לספק לך את החוויה הטובה ביותר
-    ללא התאמה אישית. הם מגדירים באופן אוטומטי את היישומים הנפוצים ביותר עבורך.
-  extra_info: >-
-    ממשק המשתמש של Seelen משתמש רק במזהה אחד לכל אפליקציה (נמצאה התאמה ראשונה),
-    כך שסדר האופן שבו הם מוגדרים הוא חשוב, העדיפות האחרונה שנוספה תהיה בסדר
-    עדיפויות, שים לב שהטבלה ממוינת כברירת מחדל מהאחרון לישנה.
-extras:
-  discord: מַחֲלוֹקֶת
-  relaunch: השקה מחדש
-  github: Github
-  version: גִרְסָה
-  links: קישורים רשמיים
-  exit: יצא/יציאה
-shortcuts:
-  labels:
-    move_to_workspace_4: עברו לסביבת העבודה 4
-    move_to_workspace_9: עברו לסביבת העבודה 9
-    switch_workspace_3: עבור לסביבת העבודה 3
-    switch_workspace_4: עברו לסביבת העבודה 4
-    switch_workspace_8: עברו לסביבת העבודה 8
-    decrease_width: ירידה ברוחב
-    focus_latest: התמקד האחרון
-    send_to_workspace_3: שלח לסביבת העבודה 3
-    reserve_bottom: שמורה בתחתית
-    move_to_workspace_8: עברו לסביבת העבודה 8
-    reserve_stack: ערימת מילואים
-    switch_workspace_7: לעבור לסביבת עבודה 7
-    move_to_workspace_0: עברו לסביבת העבודה 0
-    reserve_right: שמור ימינה
-    move_to_workspace_6: עברו לסביבת העבודה 6
-    send_to_workspace_9: שלח לסביבת העבודה 9
-    send_to_workspace_0: שלח לסביבת עבודה 0
-    move_to_workspace_2: לעבור לסביבת העבודה 2
-    move_to_workspace_1: לעבור לסביבת העבודה 1
-    increase_width: הגדל את הרוחב
-    move_to_workspace_7: לעבור לסביבת העבודה 7
-    send_to_workspace_5: שלח לסביבת העבודה 5
-    restore_sizes: שחזור גדלים
-    increase_height: הגדל את הגובה
-    move_to_workspace_5: לעבור לסביבת העבודה 5
-    switch_workspace_5: עברו לסביבת העבודה 5
-    focus_top: מיקוד למעלה
-    focus_right: להתמקד נכון
-    send_to_workspace_1: שלח לסביבת עבודה 1
-    switch_workspace_9: עבור לסביבת העבודה 9
-    reserve_top: עליון מילואים
-    switch_workspace_6: לעבור לסביבת עבודה 6
-    focus_bottom: מיקוד תחתון
-    send_to_workspace_4: שלח לסביבת העבודה 4
-    switch_workspace_2: עבור לסביבת העבודה 2
-    reserve_float: שמורה לצוף
-    send_to_workspace_7: שלח לסביבת עבודה 7
-    send_to_workspace_6: שלח לסביבת עבודה 6
-    focus_left: פוקוס שמאלה
-    reserve_left: רזרבה שמאלה
-    move_to_workspace_3: לעבור לסביבת העבודה 3
-    send_to_workspace_8: שלח לסביבת עבודה 8
-    send_to_workspace_2: שלח לסביבת עבודה 2
-    decrease_height: ירידה בגובה
-    switch_workspace_1: עבור לסביבת העבודה 2
-    switch_workspace_0: עבור לסביבת העבודה 1
-    misc_toggle_win_event_tracing: מעקב אחר WIN WIN (יומנים)
-    misc_open_settings: הגדרות פתוחות
-    misc_toggle_lock_tracing: מעקב אחר נעילת נעילה (יומנים)
-    toggle_launcher: לְמַתֵג
-  enable: אפשר קיצורי דרך משולבים (AHK)
-  enable_tooltip: השבת אם תיישם קיצורי דרך משלך באמצעות ממשק ה- API של Seelen Core
-  reset: אפס לברירות מחדל
-  readonly_tooltip: זהו קיצור דרך לקריאה בלבד
-inProgress: בתהליך...
-loading: טוען...
-open: לִפְתוֹחַ
-cancel: לְבַטֵל
-quit: לְהַפְסִיק
-delete: לִמְחוֹק
-save: להציל
-vd:
-  strategy:
-    native: יָלִיד
-    label: אסטרטגיית שולחן עבודה וירטואלית
-    seelen: Seelen
-  disabled_windows_version: אסטרטגיית שולחן עבודה וירטואלית מקורית אינה זמינה עבור גרסת Windows שלך.
-save_and_restart: שמור והפעלה מחדש
-monitors_configurations:
-  label: צג {{index}}
-wall:
-  backgrounds: טפטים
-  no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
-  enable: אפשר מנהל טפטים
-  interval: החלף טפטים כל
-  random: מצגת שקופיות אקראית
-  minutes: פּרוֹטוֹקוֹל
-  hours: שעות
-  seconds: שניות
-app_launcher:
-  runners:
-    cmd: פְּקוּדָה
-    explorer: לָרוּץ
-    label: רצים
-  monitor: צג כדי להציג
-  enable: הפעל משגר אפליקציות
-inherit: לָרֶשֶׁת
-more: יוֹתֵר
-insert: לְהַכנִיס
-close: לִסְגוֹר
 update:
   available: עדכון זמין!
   channel: ערוץ עדכון
   downloading: מוריד ...
-miscellaneous: שונות
-mods:
-  target: יַעַד
-  plugins: תוספים
-  widgets: ווידג'טים
-remove: לְהַסִיר
+vd:
+  disabled_windows_version: אסטרטגיית שולחן עבודה וירטואלית מקורית אינה זמינה עבור גרסת Windows שלך.
+  strategy:
+    label: אסטרטגיית שולחן עבודה וירטואלית
+    native: יָלִיד
+    seelen: Seelen
+wall:
+  backgrounds: טפטים
+  enable: אפשר מנהל טפטים
+  hours: שעות
+  interval: החלף טפטים כל
+  minutes: פּרוֹטוֹקוֹל
+  no_background: מצגת שקופיות ריקה, באמצעות הרקע של הנושא במקום זאת.
+  random: מצגת שקופיות אקראית
+  seconds: שניות
+weg:
+  auto_hide: הסתר אוטומטי
+  delay_to_hide: עיכוב להסתיר
+  delay_to_show: עיכוב להצגה
+  dock_side: מַצָב
+  enable: הפעל את המזח/שורת המשימות
+  gap: פער
+  items:
+    gap: שטח בין פריטים
+    label: פריטים
+    size: גודל פריט
+    visible_separators: מפרידים גלויים
+    zoom_size: גודל מתקרב (משמש לנושאים)
+  label: שורת המזח/המשימות
+  margin: שולים
+  padding: ריפוד
+  use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
+  width: רוֹחַב
+wm:
+  author: מְחַבֵּר
+  border:
+    enable: אפשר את גבול החלון
+    offset: קיזוז גבול
+    width: רוחב גבול
+  description: תיאור
+  enable: אפשר מנהל חלונות אריחים
+  layout: מַעֲרָך
+  resize_delta: שינוי גודל דלתא (%)
+  space_between_containers: מרחב בין מכולות
+  workspace_offset: מרחבי עבודה קיזזו (שוליים)
+  workspace_padding: מרחבי עבודה ריפוד

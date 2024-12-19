@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Voeg mediamodule toe
-  start: Startmodule toevoegen
-  add_file: Pin aangepaste bestand
-  add_folder: Pin aangepaste map
-  task_manager: Taakbeheer
-  settings: Instellingen
 app_menu:
-  close_multiple: Sluit alles
-  pin_to_left: Pin naar links
-  run_as: Als administrator uitvoeren
-  pin: Pin
   close: Sluiten
-  pin_to_right: Pin naar rechts
-  open_file_location: Open de bestandslocatie
-  pin_to_center: Pin in het midden
+  close_multiple: Sluit alles
   copy_handles: Kopieer handgrepen
-  unpin: Losmaken
   kill: Dood proces
   kill_multiple: Dood alle processen
+  open_file_location: Open de bestandslocatie
+  pin: Pin
+  pin_to_center: Pin in het midden
+  pin_to_left: Pin naar links
+  pin_to_right: Pin naar rechts
+  run_as: Als administrator uitvoeren
+  unpin: Losmaken
+media:
+  not_playing: Niets speelt
 media_menu:
   remove: Verwijder de mediamodule
 start_menu:
   remove: Verwijder de startmodule
-media:
-  not_playing: Niets speelt
+taskbar_menu:
+  add_file: Pin aangepaste bestand
+  add_folder: Pin aangepaste map
+  media: Voeg mediamodule toe
+  settings: Instellingen
+  start: Startmodule toevoegen
+  task_manager: Taakbeheer

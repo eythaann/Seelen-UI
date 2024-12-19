@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Tambah modul
+  remove: Keluarkan modul
+  settings: tetapan
+  task_manager: Pengurus Tugas
 media:
   device:
-    multimedia: Multimedia
     comunications: Komunikasi
-  output_device: Peranti output
+    multimedia: Multimedia
   input_device: Peranti input
   master_volume: Volume Master
+  output_device: Peranti output
   players: Pemain media
 network:
-  placeholder:
-    password: Kata laluan
-  more: Lebih banyak tetapan rangkaian
+  available: Rangkaian yang tersedia
+  connect: Sambung
+  connected: Disambungkan ke
   disconnect: Putuskan sambungan
   hidden: Rangkaian Tersembunyi
+  more: Lebih banyak tetapan rangkaian
   not_found: Tiada rangkaian dijumpai
-  connect: Sambung
+  placeholder:
+    password: Kata laluan
   saved: Rangkaian yang disimpan
   scanning: Mengimbas untuk rangkaian
   secured: Rangkaian yang disulitkan
-  connected: Disambungkan ke
-  available: Rangkaian yang tersedia
-settings:
-  shutdown: Menutup
-  log_out: Log keluar
-  restart: Mula semula
-  sleep: Tidur
-  app_settings: Tetapan aplikasi
-  title: Tetapan
-  power: Kuasa
 placeholder:
-  bluetooth_devices: Bluetooth & peranti
-  volume: Kelantangan
-  smart_charge: '- Caj pintar'
-  open_system_tray: Buka dulang sistem
-  ethernet_connected: akses internet
-  open_user_folder: Buka folder pengguna
   battery_remaining: '% tinggal'
-  settings: Tetapan cepat
+  bluetooth_devices: Bluetooth & peranti
+  ethernet_connected: akses internet
   ethernet_disconnected: Tiada akses Internet
   notifications: Pemberitahuan
+  open_system_tray: Buka dulang sistem
+  open_user_folder: Buka folder pengguna
+  settings: Tetapan cepat
+  smart_charge: '- Caj pintar'
+  volume: Kelantangan
+settings:
+  app_settings: Tetapan aplikasi
+  log_out: Log keluar
+  power: Kuasa
+  restart: Mula semula
+  shutdown: Menutup
+  sleep: Tidur
+  title: Tetapan
 unlabelled_tray: Ikon dulang yang tidak dilabel
-context_menu:
-  remove: Keluarkan modul
-  add_module: Tambah modul
-  settings: tetapan
-  task_manager: Pengurus Tugas

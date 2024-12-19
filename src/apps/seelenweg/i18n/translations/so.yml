@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Ku dar module warbaahinta
-  start: Ku dar cutubka bilowga
-  add_file: Faylka caadada PIN
-  add_folder: Faylkaaga caadada PIN
-  task_manager: Maareeyaha Hawsha
-  settings: Dejinta
 app_menu:
-  pin_to_left: PIN ilaa bidix
-  pin_to_center: PIN ilaa Xarunta
-  open_file_location: Goobta faylka furan
-  run_as: U ordo sidii maamule
   close: Xirid
   close_multiple: Xir dhammaan
-  pin_to_right: PIN ilaa midig
   copy_handles: Nuqullada gacanta
-  unpin: Aan qarin
-  pin: Musbaar yar
-  kill_multiple: Dila Dhammaan Nidaamyada
   kill: Habka dilka
+  kill_multiple: Dila Dhammaan Nidaamyada
+  open_file_location: Goobta faylka furan
+  pin: Musbaar yar
+  pin_to_center: PIN ilaa Xarunta
+  pin_to_left: PIN ilaa bidix
+  pin_to_right: PIN ilaa midig
+  run_as: U ordo sidii maamule
+  unpin: Aan qarin
+media:
+  not_playing: Ma jiraan wax ciyaaraya
 media_menu:
   remove: Ka saar cutubka warbaahinta
 start_menu:
   remove: Ka saar cutubka bilowga
-media:
-  not_playing: Ma jiraan wax ciyaaraya
+taskbar_menu:
+  add_file: Faylka caadada PIN
+  add_folder: Faylkaaga caadada PIN
+  media: Ku dar module warbaahinta
+  settings: Dejinta
+  start: Ku dar cutubka bilowga
+  task_manager: Maareeyaha Hawsha

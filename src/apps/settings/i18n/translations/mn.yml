@@ -1,261 +1,261 @@
-sides:
-  top: Таг
-  right: Зөв байх
-  left: Зүүн
-  bottom: Ероол
-header:
-  labels:
-    seelen_bar: Уран зөгнөлийн багаж самбар
-    shortcuts: Хэв хаягдал
-    general: Жанжин
-    specific_apps: ТУСГАЙ АЖИЛЛАГАА
-    developer: Хөгжчин
-    seelen_weg: Док / Taskbar
-    seelen_wm: Цонхны менежер
-    monitors: Хэлэлт авагч
-    info: Мэдээлэл
-    seelen_rofi: Програм идэвхжсэн
-    virtual_desk: Виржопын ширээний гутал
-    home: Гэр
-    mods: Plugins & Widgets
-    seelen_wall: Хувьцааны төлөөлөгчний менежер
-start:
-  message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
-  message: >-
-    Seelen Ui, Windows-ийг сайжруулахын тулд Windows-ийг сайжруулахын тулд
-    хамгийн дээд талын цонхны менежертэй морилно уу. Шинэ ERA-ийг судлах, олон
-    тооны интерфэйстэй, дэвшилтэт шинж чанаруудтай олон тооны үр ашийг судлах.
-  title: Сайтар хүлээх,!
-general:
-  theme:
-    label: Сэдвийн мэдээлэл
-    tags: Бичиглэл байна
-    author: Зохиолч
-    add: Сэдэв нэмэх
-    description: Тодорхойлолт / төрөл анги
-    enabled: Идэвхжүүлсэн сэдэв
-    placeholder: Сонгуулыг сонгоно уу
-    added: Сэдэв аль хэдийн нэмэгдсэн
-    available: Бэлнээр байгаа
-    selected: Сүл -ийг хийсэн
-  language: Хэл
-  startup: Эхлэх үед гүйх үү?
-  icon_pack:
-    label: Icon багц
-  accent_color: Эргүүлэг
-  wallpaper:
-    select: Ханын зураг сонгох
-  date_format: Огноо формат
-toolbar:
-  placeholder:
-    description: Тодорхойлолт / төрөл анги
-    select: Хэрэгслийн бүтэц
-    author: Зохиолч
-  enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
-  height: Өндөрлөг
-  auto_hide: Авто гүнд
-  label: Балтсний хайрцагны хэрэгсэл
-  delay_to_hide: Нуухыг хойшлуулах
-  delay_to_show: Үзүүлэхийг хойшлуулсан
-  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
-wm:
-  border:
-    offset: Хилийн офсет
-    width: Хилийн өргөн
-    enable: Цонхны хилийг идэвхжүүлэх
-  workspace_offset: Ажлын талбар нь офсет (Margins)
-  space_between_containers: Савны хоорондох зай
-  layout: Төлөвлөгөө
-  description: Тодорхойлолт / төрөл анги
-  workspace_padding: Ажлын талбарууд
-  author: Зохиолч
-  resize_delta: Дельтааг өөрчлөх (%)
-  enable: Цонхны менежерийг идэвхжүүлэх боломжийг олгох
-weg:
-  items:
-    label: Зүйл
-    gap: Зүйлийн хоорондох зай
-    zoom_size: Томруулсан хэмжээ (сэдэвт ашигладаг)
-    size: Зүйлийн хэмжээ
-    visible_separators: Харагдах тусгаарлагч
-  enable: Док / Taskbar-г идэвхжүүлэх
-  label: Док / Taskbar
-  width: Өргөн
-  padding: Дэвсгэр
-  margin: Саруулган өвс
-  gap: Цонх
-  auto_hide: Авто гүнд
-  dock_side: Байрлал
-  delay_to_show: Үзүүлэхийг хойшлуулсан
-  delay_to_hide: Нуухыг хойшлуулах
-  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
-devtools:
-  settings_file: Тохиргооын нэр
-  enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
-  app_folders: Апп хавтас
-  install_folder: Суулгалах хүрээ
-  custom_config_file: Custom Compigh файлыг ачаалах
-  data_folder: Д код хавтас
-  load: Ачих
+app_launcher:
+  enable: App Leader-ийг идэвхжүүлэх
+  monitor: Бие шоу хийх террут
+  runners:
+    cmd: Тушаах
+    explorer: Урсгал
+    label: Төгс эелдэг
 apps_configurations:
   app:
+    bindings: Батлах (Анхааруулга хоёулаа сонголтыг оруулах шаардлагатай)
+    category: Зэрэглэл
+    category_placeholder: Хэн ч
+    monitor: Хянах
+    monitor_placeholder: Хэн ч
+    name: Нэр
+    ok_create: Шуүгиан дэгдээх
+    ok_edit: Шинэчлэх
+    ok_readonly: Шинэ болгон засах
     options:
-      pinned: Ан хатуу
       float: Нисэн өнгөрөх
       force: Хүч удирдах
-      unmanage: Нээлттэй
       hidden: Док / Taskbar-аас нуух
-    category: Зэрэглэл
-    title_readonly: Үзэх {{нэр}}
-    bindings: Батлах (Анхааруулга хоёулаа сонголтыг оруулах шаардлагатай)
-    category_placeholder: Хэн ч
-    workspace: Ауун тал
-    ok_edit: Шинэчлэх
-    monitor: Хянах
-    workspace_placeholder: Хэн ч
-    ok_create: Шуүгиан дэгдээх
-    ok_readonly: Шинэ болгон засах
-    name: Нэр
-    monitor_placeholder: Хэн ч
-    title_create: Үүсгэх {{нэр}}}
-    wm_options_label: Цонх менежерийн сонголтууд
-    weg_options_label: Док / Taskbar сонголтууд
+      pinned: Ан хатуу
+      unmanage: Нээлттэй
     options_label: Нэмий сонголт
+    title_create: Үүсгэх {{нэр}}}
     title_edit: Засварлах {{нэр}}}
-  identifier:
-    id: Өмнө тайлбар
-    or: ЭСВЭЛ
-    negation: Тохирохыг үгүйсгэх
-    kind: Тодорхойлох
-    add_block: Нид нэмнэ
-    and: Ба
-    matching_strategy: Тохирох стратеги
-    remove: Блок устгах
-  delete: Эдгээх
-  swap: Түлхэх
-  bundled_title: App Config Selen-тай багцлав
-  confirm_delete_title: Устгахыг баталгаажуулна уу
-  new: Шинэ
-  import: Импортлох
-  confirm_delete: Та энэ тохиргоог устгахыг хүсч байна уу?
+    title_readonly: Үзэх {{нэр}}
+    weg_options_label: Док / Taskbar сонголтууд
+    wm_options_label: Цонх менежерийн сонголтууд
+    workspace: Ауун тал
+    workspace_placeholder: Хэн ч
   bundled_msg: >-
     Эдгээр багцын тохиргоо нь засварлах боломжгүй бөгөөд танд тохируулга
     хийхгүйгээр хамгийн сайн туршлага өгөх зорилготой юм. Тэд таны хувьд хамгийн
     түгээмэл програмуудыг автоматаар тохируулдаг.
-  search: Эрэл хайгуул хийх
+  bundled_title: App Config Selen-тай багцлав
+  confirm_delete: Та энэ тохиргоог устгахыг хүсч байна уу?
+  confirm_delete_title: Устгахыг баталгаажуулна уу
+  delete: Эдгээх
   export: Гадаадад гаргах
   extra_info: >-
     Seelen ui нь App тутамд зөвхөн нэг танигчийг ашигладаг (эхний тоглолт
     олдсон) нь хамгийн чухал нь хамгийн чухал бөгөөд хүснэгтийг хуучин
     хувилбараас эхлээд эрэмбэлсэн байдлаар эрэмбэлэгдсэн байх ёстой.
-extras:
-  github: Github
-  relaunch: OradAUN
-  exit: Гарах / гарах
-  links: Албан ёсны холбоос
-  version: Таамаглал
-  discord: Холор
-shortcuts:
-  labels:
-    switch_workspace_2: Ажлын талбарт 2 руу шилжих
-    reserve_top: Нэр гаргах
-    move_to_workspace_9: Ажлын талбар руу шилжих 9
-    decrease_height: Өндөр хэмжээг
-    reserve_float: Нөөцийн хөвөх
-    switch_workspace_8: Ажлын талбар руу шилжих 8
-    send_to_workspace_7: Ажлын талбар руу илгээх 7
-    reserve_right: Нөөцийг зөв дарна уу
-    send_to_workspace_5: Ажлын талбар руу илгээх 5
-    focus_latest: Фандик хамгийн сүүлийн үеийн
-    send_to_workspace_2: Ажлын талбарт 2 руу илгээнэ үү
-    focus_top: Додуулах нь эсрэг
-    increase_width: Өргөнийг нэмэгдүүлэх
-    focus_bottom: Дээр төвлөрүү
-    switch_workspace_6: Ажлын талбарт шилжих 6
-    move_to_workspace_1: Ажлын талбар руу шилжих 1
-    reserve_left: Зуух Зүүн
-    switch_workspace_5: Ажлын талбар руу шилжих 5
-    move_to_workspace_8: Ажлын талбар руу шилжих 8
-    focus_right: Домог
-    decrease_width: Гарын хойш хөгжих
-    increase_height: Дээд хэмжээг нэмэгдүүлэх
-    reserve_bottom: Нөөцийг нөөцлөх
-    move_to_workspace_6: Ажлын талбар руу шилжих 6
-    move_to_workspace_7: Ажлын талбар руу шилжих 7
-    send_to_workspace_4: Ажлын талбарт илгээх 4
-    move_to_workspace_3: Ажлын талбар руу шилжих 3
-    switch_workspace_7: Ажлын талбарт шилжих 7
-    reserve_stack: Дурсамж авах
-    move_to_workspace_4: Ажлын талбарт шилжих 4
-    move_to_workspace_2: Ажлын талбар руу шилжих 2
-    switch_workspace_4: Ажлын талбар 4 руу шилжих
-    send_to_workspace_6: Workpace 6 руу илгээнэ үү
-    move_to_workspace_0: Ажлын талбар руу шилжих 0
-    switch_workspace_3: Ажлын талбар руу шилжих 3
-    send_to_workspace_0: Ажлын талбарт 0 руу илгээнэ үү
-    send_to_workspace_8: Ажлын талбар руу илгээх 8
-    send_to_workspace_1: Ажлын талбар руу илгээх 1
-    focus_left: Зүүн талд байна
-    send_to_workspace_3: Ажлын талбар руу илгээх 3
-    move_to_workspace_5: Ажлын талбар руу шилжих 5
-    restore_sizes: Хэмжээг сэргээх
-    switch_workspace_9: Ажлын талбарт шилжих 9
-    send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
-    switch_workspace_0: Ажлын талбарт шилжих 1
-    switch_workspace_1: Ажлын талбарт 2 руу шилжих
-    misc_toggle_win_event_tracing: Тогтмол үйл явдлын үеэр Togge To
-    misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)
-    misc_open_settings: АВир танилцуулга
-    toggle_launcher: Дугуй унах
-  enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
-  enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
-  reset: Үндсэндээ тохируулах
-  readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
-inProgress: Явагдаж байна ...
-delete: Эдгээх
-loading: Ачаалах ...
+  identifier:
+    add_block: Нид нэмнэ
+    and: Ба
+    id: Өмнө тайлбар
+    kind: Тодорхойлох
+    matching_strategy: Тохирох стратеги
+    negation: Тохирохыг үгүйсгэх
+    or: ЭСВЭЛ
+    remove: Блок устгах
+  import: Импортлох
+  new: Шинэ
+  search: Эрэл хайгуул хийх
+  swap: Түлхэх
 cancel: Цуаах
-quit: Орхих
-open: Нээлттэй
-save: Аврах
-vd:
-  strategy:
-    seelen: Сахин суу
-    label: Виртины ширээний эсрэг стратеги
-    native: Төрөлх нутгийн
-  disabled_windows_version: >-
-    Уугуул виртуал ширээний стратеги нь таны Windows хувилбарт ашиглах
-    боломжгүй.
-save_and_restart: Хадгалах & дахин эхлүүлнэ үү
-monitors_configurations:
-  label: Хяналт {{индекс}}
-wall:
-  backgrounds: Ханын цаас
-  no_background: Хоосон слайпешт, оронд нь.
-  enable: Wallpaper менежерийг идэвхжүүлэх
-  interval: Ханын цаасыг өөрчлөх
-  random: Санамсаргүй байдлаар Slideshes
-  hours: цаг
-  minutes: хоёр хоног
-  seconds: хоёр цаг
-app_launcher:
-  runners:
-    explorer: Урсгал
-    cmd: Тушаах
-    label: Төгс эелдэг
-  monitor: Бие шоу хийх террут
-  enable: App Leader-ийг идэвхжүүлэх
-inherit: Удамших
-more: Илүү / их олон
-insert: Оруулах
 close: Ойр дөхөм
-update:
-  available: Шинэчлэх боломжтой!
-  downloading: Татаж авах ...
-  channel: Суваг шинэчлэх
+delete: Эдгээх
+devtools:
+  app_folders: Апп хавтас
+  custom_config_file: Custom Compigh файлыг ачаалах
+  data_folder: Д код хавтас
+  enable: Хөгжүүлэгч хэрэгслийг идэвхжүүлэх
+  install_folder: Суулгалах хүрээ
+  load: Ачих
+  settings_file: Тохиргооын нэр
+extras:
+  discord: Холор
+  exit: Гарах / гарах
+  github: Github
+  links: Албан ёсны холбоос
+  relaunch: OradAUN
+  version: Таамаглал
+general:
+  accent_color: Эргүүлэг
+  date_format: Огноо формат
+  icon_pack:
+    label: Icon багц
+  language: Хэл
+  startup: Эхлэх үед гүйх үү?
+  theme:
+    add: Сэдэв нэмэх
+    added: Сэдэв аль хэдийн нэмэгдсэн
+    author: Зохиолч
+    available: Бэлнээр байгаа
+    description: Тодорхойлолт / төрөл анги
+    enabled: Идэвхжүүлсэн сэдэв
+    label: Сэдвийн мэдээлэл
+    placeholder: Сонгуулыг сонгоно уу
+    selected: Сүл -ийг хийсэн
+    tags: Бичиглэл байна
+  wallpaper:
+    select: Ханын зураг сонгох
+header:
+  labels:
+    developer: Хөгжчин
+    general: Жанжин
+    home: Гэр
+    info: Мэдээлэл
+    mods: Plugins & Widgets
+    monitors: Хэлэлт авагч
+    seelen_bar: Уран зөгнөлийн багаж самбар
+    seelen_rofi: Програм идэвхжсэн
+    seelen_wall: Хувьцааны төлөөлөгчний менежер
+    seelen_weg: Док / Taskbar
+    seelen_wm: Цонхны менежер
+    shortcuts: Хэв хаягдал
+    specific_apps: ТУСГАЙ АЖИЛЛАГАА
+    virtual_desk: Виржопын ширээний гутал
+inherit: Удамших
+inProgress: Явагдаж байна ...
+insert: Оруулах
+loading: Ачаалах ...
 miscellaneous: Олон төрлийн
 mods:
   plugins: Гарын үсэг
-  widgets: Аялалын мэдээ
   target: Даалгавар
+  widgets: Аялалын мэдээ
+monitors_configurations:
+  label: Хяналт {{индекс}}
+more: Илүү / их олон
+open: Нээлттэй
+quit: Орхих
 remove: Зөөх
+save: Аврах
+save_and_restart: Хадгалах & дахин эхлүүлнэ үү
+shortcuts:
+  enable: Нэгдсэн товчлолыг идэвхжүүлэх (AHK)
+  enable_tooltip: Seelen Core Api ашиглан өөрийн товчлолуудыг хэрэгжүүлэхийг идэвхгүй болго
+  labels:
+    decrease_height: Өндөр хэмжээг
+    decrease_width: Гарын хойш хөгжих
+    focus_bottom: Дээр төвлөрүү
+    focus_latest: Фандик хамгийн сүүлийн үеийн
+    focus_left: Зүүн талд байна
+    focus_right: Домог
+    focus_top: Додуулах нь эсрэг
+    increase_height: Дээд хэмжээг нэмэгдүүлэх
+    increase_width: Өргөнийг нэмэгдүүлэх
+    misc_open_settings: АВир танилцуулга
+    misc_toggle_lock_tracing: Түгжих Tracing Tracing (бүртгэл)
+    misc_toggle_win_event_tracing: Тогтмол үйл явдлын үеэр Togge To
+    move_to_workspace_0: Ажлын талбар руу шилжих 0
+    move_to_workspace_1: Ажлын талбар руу шилжих 1
+    move_to_workspace_2: Ажлын талбар руу шилжих 2
+    move_to_workspace_3: Ажлын талбар руу шилжих 3
+    move_to_workspace_4: Ажлын талбарт шилжих 4
+    move_to_workspace_5: Ажлын талбар руу шилжих 5
+    move_to_workspace_6: Ажлын талбар руу шилжих 6
+    move_to_workspace_7: Ажлын талбар руу шилжих 7
+    move_to_workspace_8: Ажлын талбар руу шилжих 8
+    move_to_workspace_9: Ажлын талбар руу шилжих 9
+    reserve_bottom: Нөөцийг нөөцлөх
+    reserve_float: Нөөцийн хөвөх
+    reserve_left: Зуух Зүүн
+    reserve_right: Нөөцийг зөв дарна уу
+    reserve_stack: Дурсамж авах
+    reserve_top: Нэр гаргах
+    restore_sizes: Хэмжээг сэргээх
+    send_to_workspace_0: Ажлын талбарт 0 руу илгээнэ үү
+    send_to_workspace_1: Ажлын талбар руу илгээх 1
+    send_to_workspace_2: Ажлын талбарт 2 руу илгээнэ үү
+    send_to_workspace_3: Ажлын талбар руу илгээх 3
+    send_to_workspace_4: Ажлын талбарт илгээх 4
+    send_to_workspace_5: Ажлын талбар руу илгээх 5
+    send_to_workspace_6: Workpace 6 руу илгээнэ үү
+    send_to_workspace_7: Ажлын талбар руу илгээх 7
+    send_to_workspace_8: Ажлын талбар руу илгээх 8
+    send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
+    switch_workspace_0: Ажлын талбарт шилжих 1
+    switch_workspace_1: Ажлын талбарт 2 руу шилжих
+    switch_workspace_2: Ажлын талбарт 2 руу шилжих
+    switch_workspace_3: Ажлын талбар руу шилжих 3
+    switch_workspace_4: Ажлын талбар 4 руу шилжих
+    switch_workspace_5: Ажлын талбар руу шилжих 5
+    switch_workspace_6: Ажлын талбарт шилжих 6
+    switch_workspace_7: Ажлын талбарт шилжих 7
+    switch_workspace_8: Ажлын талбар руу шилжих 8
+    switch_workspace_9: Ажлын талбарт шилжих 9
+    toggle_launcher: Дугуй унах
+  readonly_tooltip: Энэ бол зөвхөн унших товчлол юм
+  reset: Үндсэндээ тохируулах
+sides:
+  bottom: Ероол
+  left: Зүүн
+  right: Зөв байх
+  top: Таг
+start:
+  message: >-
+    Seelen Ui, Windows-ийг сайжруулахын тулд Windows-ийг сайжруулахын тулд
+    хамгийн дээд талын цонхны менежертэй морилно уу. Шинэ ERA-ийг судлах, олон
+    тооны интерфэйстэй, дэвшилтэт шинж чанаруудтай олон тооны үр ашийг судлах.
+  message_accent: Өөрийнхөө бүтээмжийг загвараар оновчтой болгох!
+  title: Сайтар хүлээх,!
+toolbar:
+  auto_hide: Авто гүнд
+  delay_to_hide: Нуухыг хойшлуулах
+  delay_to_show: Үзүүлэхийг хойшлуулсан
+  enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
+  height: Өндөрлөг
+  label: Балтсний хайрцагны хэрэгсэл
+  placeholder:
+    author: Зохиолч
+    description: Тодорхойлолт / төрөл анги
+    select: Хэрэгслийн бүтэц
+  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
+update:
+  available: Шинэчлэх боломжтой!
+  channel: Суваг шинэчлэх
+  downloading: Татаж авах ...
+vd:
+  disabled_windows_version: >-
+    Уугуул виртуал ширээний стратеги нь таны Windows хувилбарт ашиглах
+    боломжгүй.
+  strategy:
+    label: Виртины ширээний эсрэг стратеги
+    native: Төрөлх нутгийн
+    seelen: Сахин суу
+wall:
+  backgrounds: Ханын цаас
+  enable: Wallpaper менежерийг идэвхжүүлэх
+  hours: цаг
+  interval: Ханын цаасыг өөрчлөх
+  minutes: хоёр хоног
+  no_background: Хоосон слайпешт, оронд нь.
+  random: Санамсаргүй байдлаар Slideshes
+  seconds: хоёр цаг
+weg:
+  auto_hide: Авто гүнд
+  delay_to_hide: Нуухыг хойшлуулах
+  delay_to_show: Үзүүлэхийг хойшлуулсан
+  dock_side: Байрлал
+  enable: Док / Taskbar-г идэвхжүүлэх
+  gap: Цонх
+  items:
+    gap: Зүйлийн хоорондох зай
+    label: Зүйл
+    size: Зүйлийн хэмжээ
+    visible_separators: Харагдах тусгаарлагч
+    zoom_size: Томруулсан хэмжээ (сэдэвт ашигладаг)
+  label: Док / Taskbar
+  margin: Саруулган өвс
+  padding: Дэвсгэр
+  use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
+  width: Өргөн
+wm:
+  author: Зохиолч
+  border:
+    enable: Цонхны хилийг идэвхжүүлэх
+    offset: Хилийн офсет
+    width: Хилийн өргөн
+  description: Тодорхойлолт / төрөл анги
+  enable: Цонхны менежерийг идэвхжүүлэх боломжийг олгох
+  layout: Төлөвлөгөө
+  resize_delta: Дельтааг өөрчлөх (%)
+  space_between_containers: Савны хоорондох зай
+  workspace_offset: Ажлын талбар нь офсет (Margins)
+  workspace_padding: Ажлын талбарууд

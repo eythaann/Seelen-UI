@@ -1,265 +1,265 @@
-sides:
-  left: Venstre
-  right: Højre
-  bottom: Bund
-  top: Top
-header:
-  labels:
-    seelen_wm: Window Manager
-    seelen_weg: Dock/proceslinje
-    developer: Udvikler
-    general: Generel
-    info: Information
-    seelen_bar: Fancy værktøjslinje
-    specific_apps: Specifikke apps
-    shortcuts: Genveje
-    monitors: Monitors
-    seelen_rofi: App Launcher
-    virtual_desk: Virtuelle desktops
-    home: Hjem
-    mods: Plugins og widgets
-    seelen_wall: Tapet manager
-start:
-  message_accent: Optimer din produktivitet med stil!
-  title: Velkommen!
-  message: >-
-    Velkommen til Seelen UI, det ultimative desktopmiljø med en inkorporeret
-    Flising Windows Manager for at forbedre din Windows -oplevelse! Udforsk en
-    ny æra med effektivitet og multitasking med vores intuitive interface og
-    avancerede funktioner.
-general:
-  theme:
-    label: Temaoplysninger
-    placeholder: Vælg tema
-    enabled: Aktiverede temaer
-    author: Forfatter
-    added: Tema allerede tilføjet
-    add: Tilføj tema
-    description: Beskrivelse
-    tags: Tags
-    selected: Valgte
-    available: Ledig
-  startup: Kør ved opstart?
-  language: Sprog
-  icon_pack:
-    label: Ikonpakker
-  accent_color: Accentfarve
-  wallpaper:
-    select: Vælg tapet
-  date_format: Datoformat
-toolbar:
-  placeholder:
-    select: Værktøjslinjestruktur
-    description: Beskrivelse
-    author: Forfatter
-  enable: Aktivér fancy værktøjslinje
-  height: Højde
-  auto_hide: Auto skjul
-  label: Værktøjslinje
-  delay_to_show: Forsinket fremvisning
-  delay_to_hide: Forsink med at skjule
-  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
-wm:
-  border:
-    width: Grænsebredde
-    enable: Aktivér vindues grænse
-    offset: Border Offset
-  author: Forfatter
-  description: Beskrivelse
-  resize_delta: Ændre størrelse på Delta (%)
-  layout: Layout
-  space_between_containers: Rum mellem containere
-  workspace_padding: Arbejdsområder polstring
-  workspace_offset: Arbejdsområder offset (marginer)
-  enable: Aktivér flisevindue manager
-weg:
-  items:
-    label: Genstande
-    zoom_size: Zoomet størrelse (brugt til temaer)
-    visible_separators: Synlige separatorer
-    size: Varestørrelse
-    gap: Rum mellem genstande
-  width: Bredde
-  margin: Margin
-  enable: Aktivér dock/proceslinje
-  auto_hide: Auto skjul
-  gap: Gap
-  padding: Polstring
-  label: Dock/proceslinje
-  dock_side: Position
-  delay_to_hide: Forsink med at skjule
-  delay_to_show: Forsinket fremvisning
-  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
-devtools:
-  enable: Aktivér udviklerværktøjer
-  settings_file: Indstillinger fil
-  app_folders: Appmapper
-  custom_config_file: Indlæs brugerdefineret konfigurationsfil
-  data_folder: Datamappe
-  load: belastning
-  install_folder: Installationsmappe
+app_launcher:
+  enable: Aktivér app Launcher
+  monitor: Overvågning at vise
+  runners:
+    cmd: Kommando
+    explorer: Løbe
+    label: Løbere
 apps_configurations:
   app:
+    bindings: Binding (note begge muligheder er påkrævet)
+    category: Kategori
+    category_placeholder: Ingen
+    monitor: Overvåge
+    monitor_placeholder: Ingen
+    name: Navn
+    ok_create: skab
+    ok_edit: Opdatering
+    ok_readonly: Rediger som ny
     options:
-      force: Force Management
       float: Flyde
+      force: Force Management
+      hidden: Skjul for dock/proceslinje
       pinned: Fastgjort
       unmanage: Uudvikling
-      hidden: Skjul for dock/proceslinje
-    monitor_placeholder: Ingen
-    ok_edit: Opdatering
-    workspace: Arbejdsområde
-    category: Kategori
-    bindings: Binding (note begge muligheder er påkrævet)
-    title_readonly: Visning {{navn}}
-    name: Navn
-    category_placeholder: Ingen
-    ok_readonly: Rediger som ny
-    workspace_placeholder: Ingen
-    title_create: Oprettelse af {{navn}}
-    ok_create: skab
-    monitor: Overvåge
-    wm_options_label: Vindueschefindstillinger
-    weg_options_label: Dock/proceslinjemuligheder
     options_label: Ekstra muligheder
+    title_create: Oprettelse af {{navn}}
     title_edit: Redigering {{navn}}
-  identifier:
-    id: Identifikator
-    add_block: Tilføj blok
-    remove: Slet blok
-    matching_strategy: Matchende strategi
-    or: ELLER
-    kind: Identificer ved
-    and: OG
-    negation: Negat matchning
-  delete: Slet
-  bundled_title: App Config bundtet med Seelen
-  confirm_delete: Er du sikker på, at du vil slette denne konfiguration/er?
-  swap: Bytte rundt
-  export: Eksport
-  new: Ny
+    title_readonly: Visning {{navn}}
+    weg_options_label: Dock/proceslinjemuligheder
+    wm_options_label: Vindueschefindstillinger
+    workspace: Arbejdsområde
+    workspace_placeholder: Ingen
   bundled_msg: >-
     Disse samlede konfigurationer kan ikke redigeres og er designet til at give
     dig den bedste oplevelse uden tilpasning. De konfigurerer automatisk de mest
     almindelige applikationer til dig.
+  bundled_title: App Config bundtet med Seelen
+  confirm_delete: Er du sikker på, at du vil slette denne konfiguration/er?
   confirm_delete_title: Bekræft slet
-  search: Søg
-  import: Importere
+  delete: Slet
+  export: Eksport
   extra_info: >-
     Seelen UI bruger kun én identifikator pr. app (første match fundet), så
     rækkefølgen i, hvordan de specificeres, er vigtig, det senest tilføjede vil
     blive prioriteret, da bemærk, at tabellen er sorteret som standard fra
     seneste til gammel.
+  identifier:
+    add_block: Tilføj blok
+    and: OG
+    id: Identifikator
+    kind: Identificer ved
+    matching_strategy: Matchende strategi
+    negation: Negat matchning
+    or: ELLER
+    remove: Slet blok
+  import: Importere
+  new: Ny
+  search: Søg
+  swap: Bytte rundt
+cancel: Afbestille
+close: Tæt
+delete: Slet
+devtools:
+  app_folders: Appmapper
+  custom_config_file: Indlæs brugerdefineret konfigurationsfil
+  data_folder: Datamappe
+  enable: Aktivér udviklerværktøjer
+  install_folder: Installationsmappe
+  load: belastning
+  settings_file: Indstillinger fil
 extras:
-  exit: Afslut/exit
-  links: Officielle links
-  github: GitHub
   discord: Uenighed
-  version: Version
+  exit: Afslut/exit
+  github: GitHub
+  links: Officielle links
   relaunch: Relancering
-shortcuts:
+  version: Version
+general:
+  accent_color: Accentfarve
+  date_format: Datoformat
+  icon_pack:
+    label: Ikonpakker
+  language: Sprog
+  startup: Kør ved opstart?
+  theme:
+    add: Tilføj tema
+    added: Tema allerede tilføjet
+    author: Forfatter
+    available: Ledig
+    description: Beskrivelse
+    enabled: Aktiverede temaer
+    label: Temaoplysninger
+    placeholder: Vælg tema
+    selected: Valgte
+    tags: Tags
+  wallpaper:
+    select: Vælg tapet
+header:
   labels:
-    move_to_workspace_6: Flyt til arbejdsområde 6
-    move_to_workspace_4: Flyt til arbejdsområde 4
-    decrease_height: Reducer højden
-    reserve_bottom: Reserve bund
-    switch_workspace_5: Skift til arbejdsområde 5
-    restore_sizes: Gendanstørrelser
-    reserve_right: Reserver rigtigt
-    send_to_workspace_9: Send til Workspace 9
-    switch_workspace_3: Skift til arbejdsområde 3
-    move_to_workspace_5: Flyt til arbejdsområde 5
-    send_to_workspace_8: Send til arbejdsområde 8
-    move_to_workspace_2: Flyt til arbejdsområde 2
-    move_to_workspace_0: Flyt til arbejdsområdet 0
-    move_to_workspace_1: Flyt til arbejdsområdet 1
-    increase_width: Øg bredden
-    focus_top: Fokus top
-    focus_left: Fokus tilbage
-    send_to_workspace_4: Send til Workspace 4
-    focus_latest: Fokus seneste
-    send_to_workspace_2: Send til Workspace 2
-    move_to_workspace_8: Flyt til arbejdsområde 8
-    send_to_workspace_0: Send til arbejdsområdet 0
-    reserve_stack: Reserve stak
-    switch_workspace_8: Skift til arbejdsområde 8
-    decrease_width: Reducer bredden
-    switch_workspace_9: Skift til arbejdsområde 9
-    move_to_workspace_7: Flyt til arbejdsområde 7
-    reserve_left: Reserve til venstre
-    reserve_float: Reserve float
-    switch_workspace_7: Skift til arbejdsområde 7
-    switch_workspace_4: Skift til arbejdsområde 4
-    switch_workspace_2: Skift til arbejdsområde 2
-    send_to_workspace_6: Send til arbejdsområde 6
-    send_to_workspace_1: Send til arbejdsområde 1
-    reserve_top: Reserver top
-    send_to_workspace_3: Send til Workspace 3
-    send_to_workspace_7: Send til Workspace 7
-    move_to_workspace_9: Flyt til arbejdsområde 9
-    increase_height: Øg højde
-    focus_bottom: Fokusbund
-    switch_workspace_6: Skift til arbejdsområde 6
-    move_to_workspace_3: Flyt til arbejdsområde 3
-    focus_right: Fokusere rigtigt
-    send_to_workspace_5: Send til arbejdsområde 5
-    switch_workspace_1: Skift til arbejdsområde 2
-    switch_workspace_0: Skift til arbejdsområde 1
-    misc_open_settings: Åbne indstillinger
-    misc_toggle_win_event_tracing: Toggle win begivenhedssporing (logfiler)
-    misc_toggle_lock_tracing: Skiftlåssporing (logfiler)
-    toggle_launcher: Skift
+    developer: Udvikler
+    general: Generel
+    home: Hjem
+    info: Information
+    mods: Plugins og widgets
+    monitors: Monitors
+    seelen_bar: Fancy værktøjslinje
+    seelen_rofi: App Launcher
+    seelen_wall: Tapet manager
+    seelen_weg: Dock/proceslinje
+    seelen_wm: Window Manager
+    shortcuts: Genveje
+    specific_apps: Specifikke apps
+    virtual_desk: Virtuelle desktops
+inherit: Arve
+inProgress: I gang...
+insert: Indsæt
+loading: Indlæser...
+miscellaneous: Diverse
+mods:
+  plugins: Plugins
+  target: Mål
+  widgets: Widgets
+monitors_configurations:
+  label: Monitor {{index}}
+more: Mere
+open: Åben
+quit: Afslut
+remove: Fjerne
+save: Gemme
+save_and_restart: Gem & genstart
+shortcuts:
   enable: Aktivér integrerede genveje (AHK)
   enable_tooltip: >-
     Deaktiver, hvis du implementerer dine egne genveje ved hjælp af Seelen Core
     API
-  reset: Nulstil til misligholdelser
+  labels:
+    decrease_height: Reducer højden
+    decrease_width: Reducer bredden
+    focus_bottom: Fokusbund
+    focus_latest: Fokus seneste
+    focus_left: Fokus tilbage
+    focus_right: Fokusere rigtigt
+    focus_top: Fokus top
+    increase_height: Øg højde
+    increase_width: Øg bredden
+    misc_open_settings: Åbne indstillinger
+    misc_toggle_lock_tracing: Skiftlåssporing (logfiler)
+    misc_toggle_win_event_tracing: Toggle win begivenhedssporing (logfiler)
+    move_to_workspace_0: Flyt til arbejdsområdet 0
+    move_to_workspace_1: Flyt til arbejdsområdet 1
+    move_to_workspace_2: Flyt til arbejdsområde 2
+    move_to_workspace_3: Flyt til arbejdsområde 3
+    move_to_workspace_4: Flyt til arbejdsområde 4
+    move_to_workspace_5: Flyt til arbejdsområde 5
+    move_to_workspace_6: Flyt til arbejdsområde 6
+    move_to_workspace_7: Flyt til arbejdsområde 7
+    move_to_workspace_8: Flyt til arbejdsområde 8
+    move_to_workspace_9: Flyt til arbejdsområde 9
+    reserve_bottom: Reserve bund
+    reserve_float: Reserve float
+    reserve_left: Reserve til venstre
+    reserve_right: Reserver rigtigt
+    reserve_stack: Reserve stak
+    reserve_top: Reserver top
+    restore_sizes: Gendanstørrelser
+    send_to_workspace_0: Send til arbejdsområdet 0
+    send_to_workspace_1: Send til arbejdsområde 1
+    send_to_workspace_2: Send til Workspace 2
+    send_to_workspace_3: Send til Workspace 3
+    send_to_workspace_4: Send til Workspace 4
+    send_to_workspace_5: Send til arbejdsområde 5
+    send_to_workspace_6: Send til arbejdsområde 6
+    send_to_workspace_7: Send til Workspace 7
+    send_to_workspace_8: Send til arbejdsområde 8
+    send_to_workspace_9: Send til Workspace 9
+    switch_workspace_0: Skift til arbejdsområde 1
+    switch_workspace_1: Skift til arbejdsområde 2
+    switch_workspace_2: Skift til arbejdsområde 2
+    switch_workspace_3: Skift til arbejdsområde 3
+    switch_workspace_4: Skift til arbejdsområde 4
+    switch_workspace_5: Skift til arbejdsområde 5
+    switch_workspace_6: Skift til arbejdsområde 6
+    switch_workspace_7: Skift til arbejdsområde 7
+    switch_workspace_8: Skift til arbejdsområde 8
+    switch_workspace_9: Skift til arbejdsområde 9
+    toggle_launcher: Skift
   readonly_tooltip: Dette er en skrivebeskyttet genvej
-inProgress: I gang...
-open: Åben
-delete: Slet
-quit: Afslut
-save: Gemme
-loading: Indlæser...
-cancel: Afbestille
-vd:
-  strategy:
-    native: Hjemmehørende
-    label: Virtuel desktopstrategi
-    seelen: Seelen
-  disabled_windows_version: >-
-    Native Virtual Desktop Strategy er ikke tilgængelig til din Windows
-    -version.
-save_and_restart: Gem & genstart
-monitors_configurations:
-  label: Monitor {{index}}
-wall:
-  backgrounds: Baggrunde
-  no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
-  enable: Aktivér tapet manager
-  interval: Skift tapet hver
-  random: Randomiser slideshow
-  seconds: sekunder
-  hours: timer
-  minutes: minutter
-app_launcher:
-  runners:
-    cmd: Kommando
-    explorer: Løbe
-    label: Løbere
-  monitor: Overvågning at vise
-  enable: Aktivér app Launcher
-more: Mere
-inherit: Arve
-insert: Indsæt
-close: Tæt
+  reset: Nulstil til misligholdelser
+sides:
+  bottom: Bund
+  left: Venstre
+  right: Højre
+  top: Top
+start:
+  message: >-
+    Velkommen til Seelen UI, det ultimative desktopmiljø med en inkorporeret
+    Flising Windows Manager for at forbedre din Windows -oplevelse! Udforsk en
+    ny æra med effektivitet og multitasking med vores intuitive interface og
+    avancerede funktioner.
+  message_accent: Optimer din produktivitet med stil!
+  title: Velkommen!
+toolbar:
+  auto_hide: Auto skjul
+  delay_to_hide: Forsink med at skjule
+  delay_to_show: Forsinket fremvisning
+  enable: Aktivér fancy værktøjslinje
+  height: Højde
+  label: Værktøjslinje
+  placeholder:
+    author: Forfatter
+    description: Beskrivelse
+    select: Værktøjslinjestruktur
+  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
 update:
   available: Opdatering tilgængelig!
   channel: Opdateringskanal
   downloading: Download ...
-miscellaneous: Diverse
-mods:
-  target: Mål
-  plugins: Plugins
-  widgets: Widgets
-remove: Fjerne
+vd:
+  disabled_windows_version: >-
+    Native Virtual Desktop Strategy er ikke tilgængelig til din Windows
+    -version.
+  strategy:
+    label: Virtuel desktopstrategi
+    native: Hjemmehørende
+    seelen: Seelen
+wall:
+  backgrounds: Baggrunde
+  enable: Aktivér tapet manager
+  hours: timer
+  interval: Skift tapet hver
+  minutes: minutter
+  no_background: Tom lysbilledshow ved hjælp af temas baggrund i stedet.
+  random: Randomiser slideshow
+  seconds: sekunder
+weg:
+  auto_hide: Auto skjul
+  delay_to_hide: Forsink med at skjule
+  delay_to_show: Forsinket fremvisning
+  dock_side: Position
+  enable: Aktivér dock/proceslinje
+  gap: Gap
+  items:
+    gap: Rum mellem genstande
+    label: Genstande
+    size: Varestørrelse
+    visible_separators: Synlige separatorer
+    zoom_size: Zoomet størrelse (brugt til temaer)
+  label: Dock/proceslinje
+  margin: Margin
+  padding: Polstring
+  use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
+  width: Bredde
+wm:
+  author: Forfatter
+  border:
+    enable: Aktivér vindues grænse
+    offset: Border Offset
+    width: Grænsebredde
+  description: Beskrivelse
+  enable: Aktivér flisevindue manager
+  layout: Layout
+  resize_delta: Ændre størrelse på Delta (%)
+  space_between_containers: Rum mellem containere
+  workspace_offset: Arbejdsområder offset (marginer)
+  workspace_padding: Arbejdsområder polstring

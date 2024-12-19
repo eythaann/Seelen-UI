@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: Ġirja
     cmd: Kmand
+    explorer: Ġirja
 footer:
   shortcuts: Uri shortcuts
 header:

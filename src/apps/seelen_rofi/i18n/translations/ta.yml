@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: ஓடு
     cmd: கட்டளை
+    explorer: ஓடு
 footer:
   shortcuts: குறுக்குவழிகளைக் காட்டு
 header:

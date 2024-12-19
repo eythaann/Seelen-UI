@@ -1,265 +1,265 @@
-sides:
-  left: Chwith
-  bottom: Waelod
-  top: Brigant
-  right: Dde
-header:
-  labels:
-    seelen_wm: Rheolwr Ffenestr
-    general: Gyffredinol
-    info: Ngwybodaeth
-    monitors: Monitorau
-    shortcuts: Llwybrau byr
-    specific_apps: Apiau penodol
-    developer: Natblygwr
-    seelen_weg: Doc/bar tasgau
-    seelen_bar: Bar offer ffansi
-    seelen_rofi: Lansiwr ap
-    virtual_desk: Penbyrddau Rhithwir
-    home: Nghartrefi
-    mods: Ategion & Widgets
-    seelen_wall: Rheolwr papur wal
-start:
-  message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
-  title: Croeso!
-  message: >-
-    Croeso i Seelen UI, yr amgylchedd bwrdd gwaith yn y pen draw gyda rheolwr
-    ffenestri teils corfforedig i wella'ch profiad Windows! Archwiliwch oes
-    newydd o effeithlonrwydd ac amldasgio gyda'n rhyngwyneb greddfol a'n
-    nodweddion uwch.
-general:
-  theme:
-    placeholder: Dewiswch Thema
-    enabled: Themâu wedi'u galluogi
-    tags: Tagiau
-    author: Awduron
-    add: Ychwanegu Thema
-    added: Thema wedi'i hychwanegu eisoes
-    label: Gwybodaeth Thema
-    description: Disgrifiadau
-    selected: Dethol
-    available: AR GAEL
-  language: Iaith
-  startup: Rhedeg ar gychwyn?
-  icon_pack:
-    label: Pecynnau eicon
-  accent_color: Lliw acen
-  wallpaper:
-    select: Dewis papur wal
-  date_format: Fformat dyddiad
-toolbar:
-  placeholder:
-    author: Awduron
-    description: Disgrifiadau
-    select: Strwythur Bar Offer
-  enable: Galluogi bar offer ffansi
-  height: Uchder
-  auto_hide: Cuddio awto
-  label: Bariau
-  delay_to_show: Oedi i ddangos
-  delay_to_hide: Oedi i guddio
-  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
-wm:
-  border:
-    width: Lled
-    enable: Galluogi ffin ffenestr
-    offset: Gwrthbwyso ar y ffin
-  space_between_containers: Lle rhwng cynwysyddion
-  author: Awduron
-  description: Disgrifiadau
-  workspace_offset: Gwrthbwyso lleoedd gwaith (ymylon)
-  workspace_padding: Padin lleoedd gwaith
-  resize_delta: Newid maint Delta (%)
-  layout: Gynllun
-  enable: Galluogi Rheolwr Ffenestr Teils
-weg:
-  items:
-    label: Eitemau
-    size: Maint eitem
-    visible_separators: Gwahanyddion gweladwy
-    zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
-    gap: Lle rhwng eitemau
-  enable: Galluogi doc/bar tasg
-  auto_hide: Cuddio awto
-  label: Doc/bar tasgau
-  width: Lled
-  padding: Padin
-  margin: Ngherlong
-  gap: Bwlch
-  dock_side: Safle
-  delay_to_show: Oedi i ddangos
-  delay_to_hide: Oedi i guddio
-  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
-devtools:
-  data_folder: Ffolder data
-  custom_config_file: Llwythwch ffeil ffurfweddu arfer
-  load: Lwythet
-  enable: Galluogi Offer Datblygwr
-  app_folders: Ffolderau app
-  settings_file: Ffeil Gosodiadau
-  install_folder: Ffolder gosod
+app_launcher:
+  enable: Galluogi lansiwr app
+  monitor: Monitor i ddangos
+  runners:
+    cmd: Gorchmynnwn
+    explorer: Redych
+    label: Rhedwyr
 apps_configurations:
   app:
-    options:
-      pinned: Pined
-      force: Rheoli Llu
-      unmanage: Di -reol
-      float: Harnofion
-      hidden: Cuddio rhag doc/bar tasg
-    category: Categori
-    ok_readonly: Golygu fel NEWYDD
     bindings: Rhwymo (nodwch fod angen y ddau opsiwn)
-    workspace_placeholder: Neb
-    monitor_placeholder: Neb
-    monitor: Monitrest
-    name: Alwai
-    title_create: Creu {{enw}}
-    workspace: Gweithle
-    title_readonly: Gweld {{enw}}
-    ok_edit: Diweddara ’
+    category: Categori
     category_placeholder: Neb
+    monitor: Monitrest
+    monitor_placeholder: Neb
+    name: Alwai
     ok_create: Chrëid
+    ok_edit: Diweddara ’
+    ok_readonly: Golygu fel NEWYDD
+    options:
+      float: Harnofion
+      force: Rheoli Llu
+      hidden: Cuddio rhag doc/bar tasg
+      pinned: Pined
+      unmanage: Di -reol
+    options_label: Opsiynau ychwanegol
+    title_create: Creu {{enw}}
+    title_edit: Golygu {{enw}}
+    title_readonly: Gweld {{enw}}
     weg_options_label: Opsiynau doc/bar tasgau
     wm_options_label: Opsiynau Rheolwr Ffenestr
-    options_label: Opsiynau ychwanegol
-    title_edit: Golygu {{enw}}
-  identifier:
-    matching_strategy: Strategaeth gyfatebol
-    id: Dynodwr
-    remove: Dileu bloc
-    negation: Negate paru
-    add_block: Ychwanegu bloc
-    kind: Adnabod gan
-    or: Neu
-    and: A
-  new: Newydd
-  bundled_title: App Config wedi'i bwndelu â Seelen
-  confirm_delete: Ydych chi'n siŵr eich bod chi am ddileu'r cyfluniad/au hwn?
-  confirm_delete_title: Cadarnhau Dileu
+    workspace: Gweithle
+    workspace_placeholder: Neb
   bundled_msg: >-
     Nid oes modd golygu'r cyfluniadau bwndelu hyn ac fe'u cynlluniwyd i roi'r
     profiad gorau i chi heb addasu. Maent yn ffurfweddu'r cymwysiadau mwyaf
     cyffredin ar eich cyfer yn awtomatig.
-  export: Allforiff
-  import: Mewnforied
-  search: Chwiloon
+  bundled_title: App Config wedi'i bwndelu â Seelen
+  confirm_delete: Ydych chi'n siŵr eich bod chi am ddileu'r cyfluniad/au hwn?
+  confirm_delete_title: Cadarnhau Dileu
   delete: Croeswn
-  swap: Trwciff
+  export: Allforiff
   extra_info: >-
     Mae Seelen UI yn defnyddio dim ond un dynodwr i bob app (y gêm gyntaf a
     ddarganfuwyd) felly mae'r gorchymyn yn sut yn cael ei nodi yn bwysig, bydd
     yr ychwanegiad diweddaraf yn cael ei flaenoriaethu, fel nodyn mae'r tabl yn
     cael ei ddidoli yn ddiofyn o'r diweddaraf i'r hen.
+  identifier:
+    add_block: Ychwanegu bloc
+    and: A
+    id: Dynodwr
+    kind: Adnabod gan
+    matching_strategy: Strategaeth gyfatebol
+    negation: Negate paru
+    or: Neu
+    remove: Dileu bloc
+  import: Mewnforied
+  new: Newydd
+  search: Chwiloon
+  swap: Trwciff
+cancel: Chansliff
+close: Chaewch
+delete: Croeswn
+devtools:
+  app_folders: Ffolderau app
+  custom_config_file: Llwythwch ffeil ffurfweddu arfer
+  data_folder: Ffolder data
+  enable: Galluogi Offer Datblygwr
+  install_folder: Ffolder gosod
+  load: Lwythet
+  settings_file: Ffeil Gosodiadau
 extras:
-  relaunch: Hail -deirion
-  github: Github
   discord: Anghytgord
-  version: Fersiwn
   exit: Rhoi'r gorau iddi/allanfa
+  github: Github
   links: Dolenni Swyddogol
-shortcuts:
+  relaunch: Hail -deirion
+  version: Fersiwn
+general:
+  accent_color: Lliw acen
+  date_format: Fformat dyddiad
+  icon_pack:
+    label: Pecynnau eicon
+  language: Iaith
+  startup: Rhedeg ar gychwyn?
+  theme:
+    add: Ychwanegu Thema
+    added: Thema wedi'i hychwanegu eisoes
+    author: Awduron
+    available: AR GAEL
+    description: Disgrifiadau
+    enabled: Themâu wedi'u galluogi
+    label: Gwybodaeth Thema
+    placeholder: Dewiswch Thema
+    selected: Dethol
+    tags: Tagiau
+  wallpaper:
+    select: Dewis papur wal
+header:
   labels:
-    reserve_right: Cadw Iawn
-    move_to_workspace_0: Symud i Workpace 0
-    focus_right: Canolbwyntiwch yn iawn
-    switch_workspace_3: Newid i Workpace 3
-    focus_left: Ffocws ar ôl
-    move_to_workspace_3: Symud i Workpace 3
-    switch_workspace_7: Newid i Workpace 7
-    send_to_workspace_4: Anfonwch i Workpace 4
-    reserve_top: Top wrth gefn
-    increase_height: Cynyddu uchder
-    increase_width: Cynyddu lled
-    send_to_workspace_5: Anfonwch i Workpace 5
-    focus_top: Top Ffocws
-    decrease_width: Lleihau lled
-    switch_workspace_5: Newid i Workpace 5
-    reserve_bottom: Cadwch y gwaelod
-    switch_workspace_2: Newid i Workpace 2
-    reserve_stack: Pentwr wrth gefn
-    reserve_left: Gwarchodfa Chwith
-    switch_workspace_9: Newid i Workpace 9
-    focus_latest: Canolbwyntiwch y Diweddaraf
-    send_to_workspace_7: Anfon i Workpace 7
-    send_to_workspace_9: Anfonwch i Workpace 9
-    decrease_height: Lleihau uchder
-    send_to_workspace_8: Anfonwch i Workpace 8
-    switch_workspace_6: Newid i Workpace 6
-    switch_workspace_8: Newid i Workpace 8
-    focus_bottom: Ffocws Gwaelod
-    restore_sizes: Adfer Meintiau
-    switch_workspace_4: Newid i Workpace 4
-    move_to_workspace_7: Symud i Workpace 7
-    send_to_workspace_6: Anfonwch i Workpace 6
-    send_to_workspace_2: Anfonwch i Workpace 2
-    move_to_workspace_5: Symud i Workpace 5
-    move_to_workspace_9: Symud i Workpace 9
-    move_to_workspace_8: Symud i Workpace 8
-    move_to_workspace_6: Symud i Workpace 6
-    send_to_workspace_1: Anfonwch i Workpace 1
-    move_to_workspace_2: Symud i Workpace 2
-    reserve_float: Arnofio wrth gefn
-    send_to_workspace_3: Anfonwch i Workpace 3
-    move_to_workspace_4: Symud i Workpace 4
-    move_to_workspace_1: Symud i Workpace 1
-    send_to_workspace_0: Anfon i Workpace 0
-    switch_workspace_0: Newid i Workpace 1
-    switch_workspace_1: Newid i Workpace 2
-    misc_open_settings: Gosodiadau Agored
-    misc_toggle_lock_tracing: Olrhain clo togl (logiau)
-    misc_toggle_win_event_tracing: Olrhain Digwyddiad Win Toggle (Logiau)
-    toggle_launcher: Toglio
+    developer: Natblygwr
+    general: Gyffredinol
+    home: Nghartrefi
+    info: Ngwybodaeth
+    mods: Ategion & Widgets
+    monitors: Monitorau
+    seelen_bar: Bar offer ffansi
+    seelen_rofi: Lansiwr ap
+    seelen_wall: Rheolwr papur wal
+    seelen_weg: Doc/bar tasgau
+    seelen_wm: Rheolwr Ffenestr
+    shortcuts: Llwybrau byr
+    specific_apps: Apiau penodol
+    virtual_desk: Penbyrddau Rhithwir
+inherit: Hetifedd
+inProgress: Ar y gweill...
+insert: Mewnosodem
+loading: Llwytho ...
+miscellaneous: Hamddenol
+mods:
+  plugins: Ategion
+  target: Targedon
+  widgets: Widgets
+monitors_configurations:
+  label: Monitro {{mynegai}}
+more: Mwy
+open: Ymagorant
+quit: Gadawen
+remove: Godon
+save: Hiachasit
+save_and_restart: Cadw ac Ailgychwyn
+shortcuts:
   enable: Galluogi llwybrau byr integredig (AHK)
   enable_tooltip: >-
     Analluoga os byddwch chi'n gweithredu'ch llwybrau byr eich hun gan
     ddefnyddio API craidd Seelen
-  reset: Ailosod i ddiffygion
+  labels:
+    decrease_height: Lleihau uchder
+    decrease_width: Lleihau lled
+    focus_bottom: Ffocws Gwaelod
+    focus_latest: Canolbwyntiwch y Diweddaraf
+    focus_left: Ffocws ar ôl
+    focus_right: Canolbwyntiwch yn iawn
+    focus_top: Top Ffocws
+    increase_height: Cynyddu uchder
+    increase_width: Cynyddu lled
+    misc_open_settings: Gosodiadau Agored
+    misc_toggle_lock_tracing: Olrhain clo togl (logiau)
+    misc_toggle_win_event_tracing: Olrhain Digwyddiad Win Toggle (Logiau)
+    move_to_workspace_0: Symud i Workpace 0
+    move_to_workspace_1: Symud i Workpace 1
+    move_to_workspace_2: Symud i Workpace 2
+    move_to_workspace_3: Symud i Workpace 3
+    move_to_workspace_4: Symud i Workpace 4
+    move_to_workspace_5: Symud i Workpace 5
+    move_to_workspace_6: Symud i Workpace 6
+    move_to_workspace_7: Symud i Workpace 7
+    move_to_workspace_8: Symud i Workpace 8
+    move_to_workspace_9: Symud i Workpace 9
+    reserve_bottom: Cadwch y gwaelod
+    reserve_float: Arnofio wrth gefn
+    reserve_left: Gwarchodfa Chwith
+    reserve_right: Cadw Iawn
+    reserve_stack: Pentwr wrth gefn
+    reserve_top: Top wrth gefn
+    restore_sizes: Adfer Meintiau
+    send_to_workspace_0: Anfon i Workpace 0
+    send_to_workspace_1: Anfonwch i Workpace 1
+    send_to_workspace_2: Anfonwch i Workpace 2
+    send_to_workspace_3: Anfonwch i Workpace 3
+    send_to_workspace_4: Anfonwch i Workpace 4
+    send_to_workspace_5: Anfonwch i Workpace 5
+    send_to_workspace_6: Anfonwch i Workpace 6
+    send_to_workspace_7: Anfon i Workpace 7
+    send_to_workspace_8: Anfonwch i Workpace 8
+    send_to_workspace_9: Anfonwch i Workpace 9
+    switch_workspace_0: Newid i Workpace 1
+    switch_workspace_1: Newid i Workpace 2
+    switch_workspace_2: Newid i Workpace 2
+    switch_workspace_3: Newid i Workpace 3
+    switch_workspace_4: Newid i Workpace 4
+    switch_workspace_5: Newid i Workpace 5
+    switch_workspace_6: Newid i Workpace 6
+    switch_workspace_7: Newid i Workpace 7
+    switch_workspace_8: Newid i Workpace 8
+    switch_workspace_9: Newid i Workpace 9
+    toggle_launcher: Toglio
   readonly_tooltip: Llwybr byr darllen yn unig yw hwn
-inProgress: Ar y gweill...
-loading: Llwytho ...
-cancel: Chansliff
-save: Hiachasit
-delete: Croeswn
-quit: Gadawen
-open: Ymagorant
+  reset: Ailosod i ddiffygion
+sides:
+  bottom: Waelod
+  left: Chwith
+  right: Dde
+  top: Brigant
+start:
+  message: >-
+    Croeso i Seelen UI, yr amgylchedd bwrdd gwaith yn y pen draw gyda rheolwr
+    ffenestri teils corfforedig i wella'ch profiad Windows! Archwiliwch oes
+    newydd o effeithlonrwydd ac amldasgio gyda'n rhyngwyneb greddfol a'n
+    nodweddion uwch.
+  message_accent: Optimeiddio'ch cynhyrchiant gydag arddull!
+  title: Croeso!
+toolbar:
+  auto_hide: Cuddio awto
+  delay_to_hide: Oedi i guddio
+  delay_to_show: Oedi i ddangos
+  enable: Galluogi bar offer ffansi
+  height: Uchder
+  label: Bariau
+  placeholder:
+    author: Awduron
+    description: Disgrifiadau
+    select: Strwythur Bar Offer
+  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
+update:
+  available: Diweddariad ar gael!
+  channel: Diweddaru Sianel
+  downloading: Lawrlwytho ...
 vd:
-  strategy:
-    seelen: Seelen
-    native: Brodor
-    label: Strategaeth bwrdd gwaith rithwir
   disabled_windows_version: >-
     Nid yw strategaeth bwrdd gwaith rhithwir brodorol ar gael ar gyfer eich
     fersiwn Windows.
-save_and_restart: Cadw ac Ailgychwyn
-monitors_configurations:
-  label: Monitro {{mynegai}}
+  strategy:
+    label: Strategaeth bwrdd gwaith rithwir
+    native: Brodor
+    seelen: Seelen
 wall:
-  no_background: Sioe sleidiau gwag, gan ddefnyddio cefndir thema yn lle.
   backgrounds: Papurau Wal
   enable: Galluogi Rheolwr Papur Wal
-  interval: Newid papur wal bob
-  random: Sioe sleidiau ar hap
-  minutes: munudau
-  seconds: eiliadau
   hours: oriau
-app_launcher:
-  runners:
-    label: Rhedwyr
-    cmd: Gorchmynnwn
-    explorer: Redych
-  monitor: Monitor i ddangos
-  enable: Galluogi lansiwr app
-inherit: Hetifedd
-more: Mwy
-insert: Mewnosodem
-close: Chaewch
-update:
-  available: Diweddariad ar gael!
-  downloading: Lawrlwytho ...
-  channel: Diweddaru Sianel
-miscellaneous: Hamddenol
-mods:
-  widgets: Widgets
-  plugins: Ategion
-  target: Targedon
-remove: Godon
+  interval: Newid papur wal bob
+  minutes: munudau
+  no_background: Sioe sleidiau gwag, gan ddefnyddio cefndir thema yn lle.
+  random: Sioe sleidiau ar hap
+  seconds: eiliadau
+weg:
+  auto_hide: Cuddio awto
+  delay_to_hide: Oedi i guddio
+  delay_to_show: Oedi i ddangos
+  dock_side: Safle
+  enable: Galluogi doc/bar tasg
+  gap: Bwlch
+  items:
+    gap: Lle rhwng eitemau
+    label: Eitemau
+    size: Maint eitem
+    visible_separators: Gwahanyddion gweladwy
+    zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
+  label: Doc/bar tasgau
+  margin: Ngherlong
+  padding: Padin
+  use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
+  width: Lled
+wm:
+  author: Awduron
+  border:
+    enable: Galluogi ffin ffenestr
+    offset: Gwrthbwyso ar y ffin
+    width: Lled
+  description: Disgrifiadau
+  enable: Galluogi Rheolwr Ffenestr Teils
+  layout: Gynllun
+  resize_delta: Newid maint Delta (%)
+  space_between_containers: Lle rhwng cynwysyddion
+  workspace_offset: Gwrthbwyso lleoedd gwaith (ymylon)
+  workspace_padding: Padin lleoedd gwaith

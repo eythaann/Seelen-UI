@@ -1,46 +1,46 @@
-media:
-  device:
-    comunications: Komunikacije
-    multimedia: Multimedija
-  players: Medijski igrači
-  input_device: Uređaj za unos
-  master_volume: Glavni volumen
-  output_device: Izlazni uređaj
-network:
-  placeholder:
-    password: Lozinka
-  disconnect: Prekinuti
-  not_found: Nisu pronađene mreže
-  more: Više mrežnih postavki
-  hidden: Skrivena mreža
-  connect: Povezati
-  saved: Sačuvane mreže
-  scanning: Skeniranje za mreže
-  secured: Šifrovana mreža
-  connected: Povezano na
-  available: Dostupne mreže
-settings:
-  shutdown: Ugasiti
-  log_out: Odjaviti se
-  restart: Ponovo pokrenuti
-  app_settings: Postavke aplikacija
-  sleep: Spavati
-  title: Postavke
-  power: Snaga
-placeholder:
-  ethernet_connected: pristup Internetu
-  ethernet_disconnected: Nema pristupa internetu
-  battery_remaining: preostalo%
-  open_system_tray: Otvorena sistemska ladica
-  smart_charge: '- pametna optužba'
-  open_user_folder: Otvorite mapu korisnika
-  settings: Brze postavke
-  volume: Zapremina
-  bluetooth_devices: Bluetooth i uređaji
-  notifications: Obavijesti
-unlabelled_tray: Ikona neobrađene ladice
 context_menu:
   add_module: Dodajte modul
   remove: Ukloni modul
   settings: Postavke
   task_manager: Task Manager
+media:
+  device:
+    comunications: Komunikacije
+    multimedia: Multimedija
+  input_device: Uređaj za unos
+  master_volume: Glavni volumen
+  output_device: Izlazni uređaj
+  players: Medijski igrači
+network:
+  available: Dostupne mreže
+  connect: Povezati
+  connected: Povezano na
+  disconnect: Prekinuti
+  hidden: Skrivena mreža
+  more: Više mrežnih postavki
+  not_found: Nisu pronađene mreže
+  placeholder:
+    password: Lozinka
+  saved: Sačuvane mreže
+  scanning: Skeniranje za mreže
+  secured: Šifrovana mreža
+placeholder:
+  battery_remaining: preostalo%
+  bluetooth_devices: Bluetooth i uređaji
+  ethernet_connected: pristup Internetu
+  ethernet_disconnected: Nema pristupa internetu
+  notifications: Obavijesti
+  open_system_tray: Otvorena sistemska ladica
+  open_user_folder: Otvorite mapu korisnika
+  settings: Brze postavke
+  smart_charge: '- pametna optužba'
+  volume: Zapremina
+settings:
+  app_settings: Postavke aplikacija
+  log_out: Odjaviti se
+  power: Snaga
+  restart: Ponovo pokrenuti
+  shutdown: Ugasiti
+  sleep: Spavati
+  title: Postavke
+unlabelled_tray: Ikona neobrađene ladice

@@ -1,263 +1,263 @@
-sides:
-  left: Ezker
-  right: Zuzen
-  bottom: Azpi
-  top: Tontor
+app_launcher:
+  enable: Gaitu aplikazioaren abiarazlea
+  monitor: Monitorea erakusteko
+  runners:
+    cmd: Agindu
+    explorer: Korrika
+    label: Kornollari
+apps_configurations:
+  app:
+    bindings: Lotura (kontuan bi aukerak behar dira)
+    category: Kategoria
+    category_placeholder: Ezein ez
+    monitor: Behatu
+    monitor_placeholder: Ezein ez
+    name: Izen
+    ok_create: Sortu
+    ok_edit: Eguneratu
+    ok_readonly: Editatu berria
+    options:
+      float: Flotatu
+      force: Indar kudeatzea
+      hidden: Ezkutatu kai / ataza-barran
+      pinned: Pipe
+      unmanage: Loraza
+    options_label: Aukera gehigarriak
+    title_create: '{{Name}} sortzea'
+    title_edit: '{{Name}} edizioa'
+    title_readonly: '{{Name}} ikustea'
+    weg_options_label: Dock / ataza barrako aukerak
+    wm_options_label: Leiho kudeatzailearen aukerak
+    workspace: Laneko espazioa
+    workspace_placeholder: Ezein ez
+  bundled_msg: >-
+    Konfigurazio multzo hauek ez dira editagarriak eta pertsonalizaziorik gabeko
+    esperientzia onena emateko diseinatuta daude. Zuretzako aplikazio ohikoenak
+    automatikoki konfiguratzen dituzte.
+  bundled_title: App konfigurazioa Seelen-ekin lotuta
+  confirm_delete: Ziur konfigurazio hau ezabatu nahi duzula?
+  confirm_delete_title: Berretsi Ezabatu
+  delete: Ezabatu
+  export: Esportagai
+  extra_info: >-
+    Seelen UIk aplikazio bakoitzeko identifikatzaile bakarra erabili (lehen
+    partidua aurkitu da), beraz, zehatz-mehatz azaltzen da, azken erantsia
+    lehentasuna izango da, ohar gisa taula lehenetsi da lehenetsitakoa
+    zaharretik azkenetik ordenatuta.
+  identifier:
+    add_block: Gehitu blokea
+    and: Eta
+    id: Identifikatzaile
+    kind: Identifikatu
+    matching_strategy: Bat datorren estrategia
+    negation: Ezeztatu bat datozenak
+    or: Ala
+    remove: Ezabatu blokea
+  import: Inportatu
+  new: Berri
+  search: Araketa
+  swap: Tratu
+cancel: Indargabetu
+close: Hurbileko
+delete: Ezabatu
+devtools:
+  app_folders: Aplikazio karpetak
+  custom_config_file: Kargatu Config fitxategi pertsonalizatua
+  data_folder: Datu karpeta
+  enable: Gaitu garatzaileen tresnak
+  install_folder: Instalazio karpeta
+  load: Zamatu
+  settings_file: Ezarpenak fitxategia
+extras:
+  discord: Deskudun
+  exit: Irten / irten
+  github: Github
+  links: Lotura Ofizialak
+  relaunch: Errorefrika
+  version: Bertsio
+general:
+  accent_color: Azentu kolorea
+  date_format: Data formatua
+  icon_pack:
+    label: Ikono paketeak
+  language: Mintzaira
+  startup: Korrika abiaraztean?
+  theme:
+    add: Gehitu gaia
+    added: Gaia dagoeneko gehitu da
+    author: Idazle
+    available: Erabilgarri
+    description: Deskribapen
+    enabled: Gaitutako gaiak
+    label: Gaiaren informazioa
+    placeholder: Hautatu Gaia
+    selected: Hautatu
+    tags: Teskak
+  wallpaper:
+    select: Hautatu horma-irudia
 header:
   labels:
-    info: Informazio
-    seelen_wm: Leiho kudeatzailea
-    specific_apps: Aplikazio espezifikoak
-    monitors: Monitore
     developer: Garatzaile
-    shortcuts: Lasterbideak
     general: Jeneral
-    seelen_weg: Dock / ataza barra
+    home: Etxe
+    info: Informazio
+    mods: Pluginak eta widgetak
+    monitors: Monitore
     seelen_bar: Fancy tresna barra
     seelen_rofi: App Launcher
-    virtual_desk: Mahaigain birtualak
-    home: Etxe
-    mods: Pluginak eta widgetak
     seelen_wall: Wallpaper Manager
+    seelen_weg: Dock / ataza barra
+    seelen_wm: Leiho kudeatzailea
+    shortcuts: Lasterbideak
+    specific_apps: Aplikazio espezifikoak
+    virtual_desk: Mahaigain birtualak
+inherit: Jarauntsi
+inProgress: Abian ...
+insert: Txertatu
+loading: Kargatzen ...
+miscellaneous: Heterogeneo
+mods:
+  plugins: Plakins
+  target: Jomuga
+  widgets: Widgets
+monitors_configurations:
+  label: Monitor {{index}}
+more: Gehiago
+open: Ireki
+quit: Laga
+remove: Atera
+save: Aurreztu
+save_and_restart: Gorde eta berrabiarazi
+shortcuts:
+  enable: Gaitu lasterbide integratuak (Ahk)
+  enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
+  labels:
+    decrease_height: Altuera gutxitu
+    decrease_width: Murriztu zabalera
+    focus_bottom: Fokua Behean
+    focus_latest: Fokua azkena
+    focus_left: Focus ezkerrera
+    focus_right: Argindu eskubidea
+    focus_top: Focus Top
+    increase_height: Altuera handitzea
+    increase_width: Zabalera handitzea
+    misc_open_settings: Ezarpenak irekitzea
+    misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
+    misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
+    move_to_workspace_0: Mugitu 0 lanera
+    move_to_workspace_1: Mugitu lan-eremura 1
+    move_to_workspace_2: Mugitu Workspace 2ra
+    move_to_workspace_3: Mugitu lan-eremura 3
+    move_to_workspace_4: Mugitu Workspace 4ra
+    move_to_workspace_5: Mugitu lan-eremura 5
+    move_to_workspace_6: Mugitu lan-eremura 6
+    move_to_workspace_7: Mugitu lan-eremura 7
+    move_to_workspace_8: Mugitu lan-eremura 8
+    move_to_workspace_9: Mugitu Workspace 9ra
+    reserve_bottom: Erreserbatu behealdea
+    reserve_float: Erreserba karroza
+    reserve_left: Erreserba ezkerrera
+    reserve_right: Erreserbatu eskubidea
+    reserve_stack: Erreserba pila
+    reserve_top: Erreserba Top
+    restore_sizes: Neurriak leheneratu
+    send_to_workspace_0: Bidali lan-eremura 0
+    send_to_workspace_1: Bidali lan-eremura 1
+    send_to_workspace_2: Bidali Workspace 2ra
+    send_to_workspace_3: Bidali lantokira 3
+    send_to_workspace_4: Bidali Workspace 4ra
+    send_to_workspace_5: Bidali lantokira 5
+    send_to_workspace_6: Bidali lantokira 6
+    send_to_workspace_7: Bidali lantokira 7
+    send_to_workspace_8: Bidali lantokira 8
+    send_to_workspace_9: Bidali Workspace 9ra
+    switch_workspace_0: Aldatu lan-eremura 1
+    switch_workspace_1: Aldatu Workspace 2ra
+    switch_workspace_2: Aldatu Workspace 2ra
+    switch_workspace_3: Aldatu lan-eremura 3
+    switch_workspace_4: Aldatu Workspace 4ra
+    switch_workspace_5: Aldatu Workspace 5era
+    switch_workspace_6: Aldatu lan-eremura 6
+    switch_workspace_7: Aldatu Workspace 7ra
+    switch_workspace_8: Aldatu lan-eremura 8
+    switch_workspace_9: Aldatu Workspace 9ra
+    toggle_launcher: Txandatu
+  readonly_tooltip: Hau irakurtzeko lasterbidea da
+  reset: Berrezarri lehenetsitakoak
+sides:
+  bottom: Azpi
+  left: Ezker
+  right: Zuzen
+  top: Tontor
 start:
   message: >-
     Ongi etorri Seelen UI-ra, azken mahaigaineko ingurunea, fitxategien leiho
     kudeatzailearekin txertatu zure Windows esperientzia hobetzeko! Arakatu
     eraginkortasunaren eta multiataza aro berria gure interfaze intuitiboarekin
     eta ezaugarri aurreratuekin.
-  title: Ongi etorri!
   message_accent: Optimizatu zure produktibitatea estiloarekin!
-general:
-  theme:
-    label: Gaiaren informazioa
-    add: Gehitu gaia
-    placeholder: Hautatu Gaia
-    author: Idazle
-    tags: Teskak
-    description: Deskribapen
-    added: Gaia dagoeneko gehitu da
-    enabled: Gaitutako gaiak
-    available: Erabilgarri
-    selected: Hautatu
-  startup: Korrika abiaraztean?
-  language: Mintzaira
-  icon_pack:
-    label: Ikono paketeak
-  accent_color: Azentu kolorea
-  wallpaper:
-    select: Hautatu horma-irudia
-  date_format: Data formatua
+  title: Ongi etorri!
 toolbar:
-  placeholder:
-    select: Tresna-barraren egitura
-    author: Idazle
-    description: Deskribapen
+  auto_hide: Ezkutatu automatikoa
+  delay_to_hide: Ezkutatzeko atzeratu
+  delay_to_show: Erakusteko atzerapena
   enable: Gaitu tresna-barra
   height: Luzera
-  auto_hide: Ezkutatu automatikoa
   label: Tresna barra
-  delay_to_hide: Ezkutatzeko atzeratu
-  delay_to_show: Erakusteko atzerapena
+  placeholder:
+    author: Idazle
+    description: Deskribapen
+    select: Tresna-barraren egitura
   use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
-wm:
-  border:
-    width: Ertzaren zabalera
-    offset: Ertzaren desplazamendua
-    enable: Gaitu leihoen ertza
-  description: Deskribapen
-  space_between_containers: Edukiontzien arteko espazioa
-  workspace_offset: Laneko espazioak desplazamendua (marjinak)
-  layout: Diseinu
-  resize_delta: RETIZE DELTA (%)
-  author: Idazle
-  workspace_padding: Laneko guneak betegarria
-  enable: Gaitu fitxa leiho kudeatzailea
-weg:
-  items:
-    gap: Elementuen arteko espazioa
-    size: Elementuen tamaina
-    visible_separators: Ikusgai bereizgailuak
-    zoom_size: Zoom tamaina (gaietarako erabiltzen da)
-    label: Manatu
-  auto_hide: Ezkutatu automatikoa
-  width: Zabalera
-  enable: Gaitu kaia / ataza barra
-  margin: Emandar
-  gap: Tarte
-  label: Dock / ataza barra
-  padding: Betegarri
-  dock_side: Kokaleku
-  delay_to_hide: Ezkutatzeko atzeratu
-  delay_to_show: Erakusteko atzerapena
-  use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
-devtools:
-  enable: Gaitu garatzaileen tresnak
-  load: Zamatu
-  data_folder: Datu karpeta
-  custom_config_file: Kargatu Config fitxategi pertsonalizatua
-  install_folder: Instalazio karpeta
-  app_folders: Aplikazio karpetak
-  settings_file: Ezarpenak fitxategia
-apps_configurations:
-  app:
-    options:
-      float: Flotatu
-      force: Indar kudeatzea
-      pinned: Pipe
-      unmanage: Loraza
-      hidden: Ezkutatu kai / ataza-barran
-    title_readonly: '{{Name}} ikustea'
-    ok_readonly: Editatu berria
-    monitor: Behatu
-    monitor_placeholder: Ezein ez
-    category_placeholder: Ezein ez
-    category: Kategoria
-    bindings: Lotura (kontuan bi aukerak behar dira)
-    workspace_placeholder: Ezein ez
-    title_create: '{{Name}} sortzea'
-    ok_edit: Eguneratu
-    workspace: Laneko espazioa
-    name: Izen
-    ok_create: Sortu
-    weg_options_label: Dock / ataza barrako aukerak
-    wm_options_label: Leiho kudeatzailearen aukerak
-    options_label: Aukera gehigarriak
-    title_edit: '{{Name}} edizioa'
-  identifier:
-    add_block: Gehitu blokea
-    kind: Identifikatu
-    negation: Ezeztatu bat datozenak
-    and: Eta
-    remove: Ezabatu blokea
-    or: Ala
-    matching_strategy: Bat datorren estrategia
-    id: Identifikatzaile
-  export: Esportagai
-  bundled_title: App konfigurazioa Seelen-ekin lotuta
-  confirm_delete: Ziur konfigurazio hau ezabatu nahi duzula?
-  delete: Ezabatu
-  new: Berri
-  import: Inportatu
-  bundled_msg: >-
-    Konfigurazio multzo hauek ez dira editagarriak eta pertsonalizaziorik gabeko
-    esperientzia onena emateko diseinatuta daude. Zuretzako aplikazio ohikoenak
-    automatikoki konfiguratzen dituzte.
-  search: Araketa
-  swap: Tratu
-  confirm_delete_title: Berretsi Ezabatu
-  extra_info: >-
-    Seelen UIk aplikazio bakoitzeko identifikatzaile bakarra erabili (lehen
-    partidua aurkitu da), beraz, zehatz-mehatz azaltzen da, azken erantsia
-    lehentasuna izango da, ohar gisa taula lehenetsi da lehenetsitakoa
-    zaharretik azkenetik ordenatuta.
-extras:
-  github: Github
-  discord: Deskudun
-  exit: Irten / irten
-  relaunch: Errorefrika
-  links: Lotura Ofizialak
-  version: Bertsio
-shortcuts:
-  labels:
-    restore_sizes: Neurriak leheneratu
-    increase_width: Zabalera handitzea
-    reserve_left: Erreserba ezkerrera
-    reserve_stack: Erreserba pila
-    move_to_workspace_7: Mugitu lan-eremura 7
-    decrease_height: Altuera gutxitu
-    send_to_workspace_8: Bidali lantokira 8
-    reserve_top: Erreserba Top
-    switch_workspace_2: Aldatu Workspace 2ra
-    move_to_workspace_1: Mugitu lan-eremura 1
-    focus_bottom: Fokua Behean
-    focus_latest: Fokua azkena
-    increase_height: Altuera handitzea
-    switch_workspace_8: Aldatu lan-eremura 8
-    focus_right: Argindu eskubidea
-    switch_workspace_6: Aldatu lan-eremura 6
-    switch_workspace_3: Aldatu lan-eremura 3
-    send_to_workspace_5: Bidali lantokira 5
-    switch_workspace_9: Aldatu Workspace 9ra
-    switch_workspace_7: Aldatu Workspace 7ra
-    reserve_right: Erreserbatu eskubidea
-    send_to_workspace_7: Bidali lantokira 7
-    focus_left: Focus ezkerrera
-    switch_workspace_5: Aldatu Workspace 5era
-    move_to_workspace_9: Mugitu Workspace 9ra
-    move_to_workspace_6: Mugitu lan-eremura 6
-    reserve_bottom: Erreserbatu behealdea
-    move_to_workspace_3: Mugitu lan-eremura 3
-    move_to_workspace_2: Mugitu Workspace 2ra
-    decrease_width: Murriztu zabalera
-    send_to_workspace_4: Bidali Workspace 4ra
-    move_to_workspace_8: Mugitu lan-eremura 8
-    move_to_workspace_4: Mugitu Workspace 4ra
-    move_to_workspace_5: Mugitu lan-eremura 5
-    send_to_workspace_6: Bidali lantokira 6
-    switch_workspace_4: Aldatu Workspace 4ra
-    move_to_workspace_0: Mugitu 0 lanera
-    send_to_workspace_2: Bidali Workspace 2ra
-    send_to_workspace_3: Bidali lantokira 3
-    send_to_workspace_0: Bidali lan-eremura 0
-    reserve_float: Erreserba karroza
-    send_to_workspace_9: Bidali Workspace 9ra
-    send_to_workspace_1: Bidali lan-eremura 1
-    focus_top: Focus Top
-    switch_workspace_1: Aldatu Workspace 2ra
-    switch_workspace_0: Aldatu lan-eremura 1
-    misc_toggle_win_event_tracing: Txandakatu Gertaeren trazatzea (erregistroak)
-    misc_open_settings: Ezarpenak irekitzea
-    misc_toggle_lock_tracing: Txandakatu blokeoaren trazadura (erregistroak)
-    toggle_launcher: Txandatu
-  enable: Gaitu lasterbide integratuak (Ahk)
-  enable_tooltip: Desgaitu Seelen Core APIa erabiliz zure lasterbideak ezartzen badituzu
-  reset: Berrezarri lehenetsitakoak
-  readonly_tooltip: Hau irakurtzeko lasterbidea da
-cancel: Indargabetu
-quit: Laga
-delete: Ezabatu
-open: Ireki
-save: Aurreztu
-loading: Kargatzen ...
-inProgress: Abian ...
+update:
+  available: Eguneratu eskuragarri!
+  channel: Eguneratu kanala
+  downloading: Deskargatzen ...
 vd:
+  disabled_windows_version: >-
+    Mahaigaineko estrategia birtuala ez dago erabilgarri zure Windows
+    bertsiorako.
   strategy:
     label: Mahaigaineko estrategia birtuala
     native: Sorterriko
     seelen: Sekelo
-  disabled_windows_version: >-
-    Mahaigaineko estrategia birtuala ez dago erabilgarri zure Windows
-    bertsiorako.
-save_and_restart: Gorde eta berrabiarazi
-monitors_configurations:
-  label: Monitor {{index}}
 wall:
   backgrounds: Horma-irudiak
-  no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
   enable: Gaitu horma-kudeatzailea
+  hours: ordire ordu
   interval: Aldatu horma-irudia guztietan
+  minutes: minutuak
+  no_background: Aurkezpen hutsak, gaiaren atzeko planoa erabiliz.
   random: Aurkezpen diaporama
   seconds: bizkarbete
-  hours: ordire ordu
-  minutes: minutuak
-app_launcher:
-  runners:
-    label: Kornollari
-    explorer: Korrika
-    cmd: Agindu
-  monitor: Monitorea erakusteko
-  enable: Gaitu aplikazioaren abiarazlea
-inherit: Jarauntsi
-insert: Txertatu
-more: Gehiago
-close: Hurbileko
-update:
-  available: Eguneratu eskuragarri!
-  downloading: Deskargatzen ...
-  channel: Eguneratu kanala
-miscellaneous: Heterogeneo
-mods:
-  target: Jomuga
-  widgets: Widgets
-  plugins: Plakins
-remove: Atera
+weg:
+  auto_hide: Ezkutatu automatikoa
+  delay_to_hide: Ezkutatzeko atzeratu
+  delay_to_show: Erakusteko atzerapena
+  dock_side: Kokaleku
+  enable: Gaitu kaia / ataza barra
+  gap: Tarte
+  items:
+    gap: Elementuen arteko espazioa
+    label: Manatu
+    size: Elementuen tamaina
+    visible_separators: Ikusgai bereizgailuak
+    zoom_size: Zoom tamaina (gaietarako erabiltzen da)
+  label: Dock / ataza barra
+  margin: Emandar
+  padding: Betegarri
+  use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
+  width: Zabalera
+wm:
+  author: Idazle
+  border:
+    enable: Gaitu leihoen ertza
+    offset: Ertzaren desplazamendua
+    width: Ertzaren zabalera
+  description: Deskribapen
+  enable: Gaitu fitxa leiho kudeatzailea
+  layout: Diseinu
+  resize_delta: RETIZE DELTA (%)
+  space_between_containers: Edukiontzien arteko espazioa
+  workspace_offset: Laneko espazioak desplazamendua (marjinak)
+  workspace_padding: Laneko guneak betegarria

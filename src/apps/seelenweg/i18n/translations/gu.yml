@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: પ્રારંભ મોડ્યુલ ઉમેરો
-  media: મીડિયા મોડ્યુલ ઉમેરો
-  add_folder: પિન કસ્ટમ ફોલ્ડર
-  add_file: પિન કસ્ટમ ફાઇલ
-  task_manager: ટાસ્ક મેનેજર
-  settings: સેટિંગ્સ
 app_menu:
   close: બંધ
-  pin_to_center: કેન્દ્રથી પિનથી કેન્દ્રમાં
-  pin_to_left: ડાબી બાજુ
-  run_as: વહીવટકર્તા તરીકે ચલાવો
-  copy_handles: નકલ
   close_multiple: બંધ કરવું
-  pin_to_right: જમણી બાજુ
-  unpin: ખોળવું
-  open_file_location: ફાઇલ સ્થાન ખોલો
-  pin: પિન
+  copy_handles: નકલ
   kill: કીલ પ્રોસેસ
   kill_multiple: બધી પ્રક્રિયાઓને મારી નાખો
+  open_file_location: ફાઇલ સ્થાન ખોલો
+  pin: પિન
+  pin_to_center: કેન્દ્રથી પિનથી કેન્દ્રમાં
+  pin_to_left: ડાબી બાજુ
+  pin_to_right: જમણી બાજુ
+  run_as: વહીવટકર્તા તરીકે ચલાવો
+  unpin: ખોળવું
+media:
+  not_playing: કંઈ રમી રહ્યું નથી
 media_menu:
   remove: મીડિયા મોડ્યુલ દૂર કરો
 start_menu:
   remove: પ્રારંભ મોડ્યુલ દૂર કરો
-media:
-  not_playing: કંઈ રમી રહ્યું નથી
+taskbar_menu:
+  add_file: પિન કસ્ટમ ફાઇલ
+  add_folder: પિન કસ્ટમ ફોલ્ડર
+  media: મીડિયા મોડ્યુલ ઉમેરો
+  settings: સેટિંગ્સ
+  start: પ્રારંભ મોડ્યુલ ઉમેરો
+  task_manager: ટાસ્ક મેનેજર

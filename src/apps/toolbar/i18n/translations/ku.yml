@@ -1,46 +1,46 @@
-media:
-  device:
-    comunications: Têkilî
-    multimedia: Multimedia
-  master_volume: Qumarê masterê
-  output_device: Devera deriyê
-  input_device: Cîhaza têketinê
-  players: Lîstikên Medyayê
-network:
-  placeholder:
-    password: Şîfre
-  disconnect: Hevqetandin
-  connect: Bihevgirêdan
-  hidden: Tora Hidden
-  more: Mîhengên bêtir torê
-  not_found: Tora torgilok nehat dîtin
-  scanning: Ji bo toran lêgerîn
-  connected: Girêdayî
-  available: Torên berdest
-  secured: Tora şîfrekirî
-  saved: torên Saved
-settings:
-  shutdown: Temirandin
-  sleep: Xew
-  log_out: Derkeve
-  app_settings: Mîhengên App
-  restart: Destpêkirin
-  title: Mîhengan
-  power: Erk
-placeholder:
-  volume: Bend
-  ethernet_connected: Gihîştina înternetê
-  open_system_tray: Tray pergala vekirî
-  smart_charge: '- heqê harm'
-  bluetooth_devices: Bluetooth & Amûrên
-  ethernet_disconnected: Ne gihîştina înternetê
-  open_user_folder: Peldanka Bikarhêner vekirî
-  settings: Mîhengên Bilez
-  battery_remaining: '% mayî'
-  notifications: Notifications
-unlabelled_tray: Îkonê tray a bêpergal
 context_menu:
   add_module: Modulê zêde bikin
   remove: Modulê rakirin
   settings: Settings
   task_manager: Gerînendetiya Peywiran
+media:
+  device:
+    comunications: Têkilî
+    multimedia: Multimedia
+  input_device: Cîhaza têketinê
+  master_volume: Qumarê masterê
+  output_device: Devera deriyê
+  players: Lîstikên Medyayê
+network:
+  available: Torên berdest
+  connect: Bihevgirêdan
+  connected: Girêdayî
+  disconnect: Hevqetandin
+  hidden: Tora Hidden
+  more: Mîhengên bêtir torê
+  not_found: Tora torgilok nehat dîtin
+  placeholder:
+    password: Şîfre
+  saved: torên Saved
+  scanning: Ji bo toran lêgerîn
+  secured: Tora şîfrekirî
+placeholder:
+  battery_remaining: '% mayî'
+  bluetooth_devices: Bluetooth & Amûrên
+  ethernet_connected: Gihîştina înternetê
+  ethernet_disconnected: Ne gihîştina înternetê
+  notifications: Notifications
+  open_system_tray: Tray pergala vekirî
+  open_user_folder: Peldanka Bikarhêner vekirî
+  settings: Mîhengên Bilez
+  smart_charge: '- heqê harm'
+  volume: Bend
+settings:
+  app_settings: Mîhengên App
+  log_out: Derkeve
+  power: Erk
+  restart: Destpêkirin
+  shutdown: Temirandin
+  sleep: Xew
+  title: Mîhengan
+unlabelled_tray: Îkonê tray a bêpergal

@@ -8,6 +8,22 @@ import { LanguageList } from '../src/apps/shared/lang';
 
 const toTranslate = LanguageList.map((lang) => lang.value).filter((lang) => lang !== 'en');
 
+function deepSortObject<T>(obj: T): T {
+  if (Array.isArray(obj)) {
+    // if it's an array, recursively sort its elements
+    return obj.map(deepSortObject) as unknown as T;
+  } else if (obj !== null && typeof obj === 'object') {
+    // if it's an object, sort its entries
+    const sortedEntries = Object.entries(obj)
+      .sort(([keyA], [keyB]) => keyA.localeCompare(keyB)) // Sort keys
+      .map(([key, value]) => [key, deepSortObject(value)]); // Recursively sort values
+
+    return Object.fromEntries(sortedEntries) as T;
+  }
+  // if it's not an array or object, return it as is
+  return obj;
+}
+
 async function translateObject(base: any, lang: string, mut_obj: any) {
   await Promise.all(
     Object.entries(base).map(async ([key, value]) => {
@@ -35,26 +51,26 @@ async function completeTranslationsFor(
   keysToUpdate: Set<string>,
   deleteKeys: Set<string>,
 ) {
-  const path = `./src/apps/${app}/i18n/translations`;
+  const translationsDir = `./src/apps/${app}/i18n/translations`;
 
-  const en = yaml.load(readFileSync(`${path}/en.yml`, 'utf8'));
+  const en = deepSortObject(yaml.load(readFileSync(`${translationsDir}/en.yml`, 'utf8')));
   deleteKeysDeep(en, Array.from(deleteKeys));
-  writeFileSync(`${path}/en.yml`, yaml.dump(en));
+  writeFileSync(`${translationsDir}/en.yml`, yaml.dump(en));
 
   for (const lang of toTranslate) {
-    const filePath = `${path}/${lang}.yml`;
+    const filePath = `${translationsDir}/${lang}.yml`;
     console.log(`Processing: ${filePath}`);
 
-    let trans: any = {};
+    let translation: any = {};
     if (existsSync(filePath)) {
-      trans = yaml.load(readFileSync(filePath, 'utf8'));
+      translation = yaml.load(readFileSync(filePath, 'utf8'));
     }
 
-    deleteKeysDeep(trans, Array.from(deleteKeys));
-    deleteKeysDeep(trans, Array.from(keysToUpdate));
-    await translateObject(en, lang, trans);
+    deleteKeysDeep(translation, Array.from(deleteKeys));
+    deleteKeysDeep(translation, Array.from(keysToUpdate));
+    await translateObject(en, lang, translation);
 
-    writeFileSync(filePath, yaml.dump(trans));
+    writeFileSync(filePath, yaml.dump(deepSortObject(translation)));
   }
 }
 

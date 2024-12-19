@@ -1,265 +1,265 @@
-sides:
-  top: Գագաթ
-  right: Ճիշտ
-  left: Ձախ
-  bottom: Հատակից
+app_launcher:
+  enable: Միացնել ծրագրի արձակումը
+  monitor: Մոնիտոր, ցույց տալու համար
+  runners:
+    cmd: Հրաման
+    explorer: Վազք
+    label: Վազողներ
+apps_configurations:
+  app:
+    bindings: Պարտադիր (նշում է, որ երկու տարբերակները պարտադիր են)
+    category: Կատեգորիա
+    category_placeholder: Ոչ ոք
+    monitor: Մոնիտոր
+    monitor_placeholder: Ոչ ոք
+    name: Անուն
+    ok_create: Ստեղծել
+    ok_edit: Թարմացում
+    ok_readonly: Խմբագրել որպես նոր
+    options:
+      float: Լողացող
+      force: Ուժի կառավարում
+      hidden: Թաքցնել նավահանգիստից / առաջադրանք
+      pinned: Փածսյա
+      unmanage: Անօդաչուր
+    options_label: Լրացուցիչ ընտրանքներ
+    title_create: Ստեղծելով {{name}
+    title_edit: Խմբագրում {{name}
+    title_readonly: Դիտում է {{Անունը}
+    weg_options_label: Dock / Taskbar Ընտրանքներ
+    wm_options_label: Պատուհանների մենեջեր Ընտրանքներ
+    workspace: Աշխատատեղ
+    workspace_placeholder: Ոչ ոք
+  bundled_msg: >-
+    Այս փաթեթավորված կազմաձեւերը խմբագրելի չեն եւ նախագծված են `առանց
+    հարմարեցման լավագույն փորձը տրամադրելու: Նրանք ինքնաբերաբար կարգավորում են
+    ձեզ համար ամենատարածված դիմումները:
+  bundled_title: Ծրագրի կազմաձեւումը փաթեթավորված է Seelen- ի հետ
+  confirm_delete: 'Համոզված եք, որ ցանկանում եք ջնջել այս կազմաձեւը:'
+  confirm_delete_title: Հաստատեք ջնջել
+  delete: Ջնջել
+  export: Արտահանում
+  extra_info: >-
+    Seelen UI-ն օգտագործում է միայն մեկ նույնացուցիչ յուրաքանչյուր հավելվածի
+    համար (գտնվել է առաջին համընկնումը), այնպես որ կարևոր է ճշգրտման կարգը,
+    առաջնահերթությունը կտրվի վերջին ավելացվածներին, քանի որ աղյուսակը ըստ
+    կանխադրման դասավորված է վերջինից հին:
+  identifier:
+    add_block: Ավելացնել բլոկ
+    and: Մի քանազոր
+    id: Նույնացնող
+    kind: Նույնացնել ըստ
+    matching_strategy: Համապատասխան ռազմավարություն
+    negation: Ժխտել համապատասխանությունը
+    or: ԿԱՄ
+    remove: Delete նջել բլոկը
+  import: Ներմուծում
+  new: Նոր
+  search: Որոնել
+  swap: Փոխանակել
+cancel: Չեղարկել
+close: Սերտ
+delete: Ջնջել
+devtools:
+  app_folders: Ծրագրի թղթապանակներ
+  custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
+  data_folder: Տվյալների պանակ
+  enable: Միացնել մշակողի գործիքները
+  install_folder: Տեղադրման պանակ
+  load: Բեռ
+  settings_file: Կարգավորումներ ֆայլ
+extras:
+  discord: Տարաձայնություն
+  exit: Հանգստացեք / Ելք
+  github: Գյուտ
+  links: Պաշտոնական հղումներ
+  relaunch: Վերակառուցվել
+  version: Տարբերակ
+general:
+  accent_color: Շեշտադրիչ գույն
+  date_format: Ամսաթիվ ձեւաչափ
+  icon_pack:
+    label: Սրբապատկերներ
+  language: Լեզու
+  startup: 'Գործարկման վրա գործարկեք:'
+  theme:
+    add: Ավելացնել թեման
+    added: Թեման արդեն ավելացրեց
+    author: Հեղինակ
+    available: Մատչելի
+    description: Նկարագրություն
+    enabled: Միացված թեմաներ
+    label: Թեման տեղեկատվություն
+    placeholder: Ընտրեք թեման
+    selected: Ընտրված
+    tags: Պիտակներ
+  wallpaper:
+    select: Ընտրեք Պաստառ
 header:
   labels:
-    seelen_bar: Fancy Toolbar
     developer: Մշակող
-    seelen_weg: Dock / Taskbar
-    specific_apps: Հատուկ ծրագրեր
     general: Ընդհանուր
-    monitors: Մոնիտորներ
-    info: Տեղեկություն
-    shortcuts: Դյուրանցումներ
-    seelen_wm: Պատուհանների կառավարիչ
-    seelen_rofi: Ծրագրի գործարկիչ
-    virtual_desk: Վիրտուալ աշխատասեղաններ
     home: Տուն
+    info: Տեղեկություն
     mods: Փլագիններ և վիդջեթներ
+    monitors: Մոնիտորներ
+    seelen_bar: Fancy Toolbar
+    seelen_rofi: Ծրագրի գործարկիչ
     seelen_wall: Պաստառների կառավարիչ
+    seelen_weg: Dock / Taskbar
+    seelen_wm: Պատուհանների կառավարիչ
+    shortcuts: Դյուրանցումներ
+    specific_apps: Հատուկ ծրագրեր
+    virtual_desk: Վիրտուալ աշխատասեղաններ
+inherit: Ժառանգել
+inProgress: Ընթացքի մեջ է...
+insert: Տեղադրել
+loading: Բեռնում ...
+miscellaneous: Զանազան
+mods:
+  plugins: Plugins
+  target: Թիրախ
+  widgets: Widgets
+monitors_configurations:
+  label: Մոնիտոր {{ինդեքս}
+more: Ավելի շատ
+open: Բաց անել
+quit: Թողնել
+remove: Հեռացնել
+save: Խնայել
+save_and_restart: Պահել եւ վերագործարկել
+shortcuts:
+  enable: Միացնել ինտեգրված դյուրանցումները (AHK)
+  enable_tooltip: >-
+    Անջատեք, եթե դուք կիրականացնեք ձեր սեփական դյուրանցումները `օգտագործելով
+    Seelen Core API- ն
+  labels:
+    decrease_height: Նվազեցնել բարձրությունը
+    decrease_width: Լայնության նվազում
+    focus_bottom: Կենտրոնացեք հատակին
+    focus_latest: Կենտրոնացեք վերջին
+    focus_left: Կենտրոնանալ ձախ
+    focus_right: Կենտրոնանալ ճիշտ
+    focus_top: Կենտրոնանալ գագաթին
+    increase_height: Բարձրացնել բարձրությունը
+    increase_width: Բարձրացնել լայնությունը
+    misc_open_settings: Բաց պարամետրեր
+    misc_toggle_lock_tracing: Փոփոխեք կողպեքի հետեւում (տեղեկամատյաններ)
+    misc_toggle_win_event_tracing: Անջատեք շահեք իրադարձության հետագծումը (տեղեկամատյաններ)
+    move_to_workspace_0: Տեղափոխել Workspace 0
+    move_to_workspace_1: Տեղափոխել Workspace 1
+    move_to_workspace_2: Տեղափոխվել դեպի Workspace 2
+    move_to_workspace_3: Տեղափոխվել Workspace 3-ին
+    move_to_workspace_4: Տեղափոխել Workpace 4-ին
+    move_to_workspace_5: Տեղափոխել Workpace 5
+    move_to_workspace_6: Տեղափոխել Workspace 6
+    move_to_workspace_7: Տեղափոխվել Workpace 7-ին
+    move_to_workspace_8: Տեղափոխել Workpace 8
+    move_to_workspace_9: Տեղափոխել Workspace 9
+    reserve_bottom: Ամրագրեք հատակը
+    reserve_float: Ամրագրեք բոց
+    reserve_left: Պահուստը մնացել է
+    reserve_right: Ամրագրեք աջ
+    reserve_stack: Պահեստավորված նյութեր
+    reserve_top: Ամրագրեք վերեւ
+    restore_sizes: Վերականգնել չափերը
+    send_to_workspace_0: Ուղարկել Workspace- ին 0
+    send_to_workspace_1: Ուղարկել Workspace 1-ին
+    send_to_workspace_2: Ուղարկել Workspace 2-ին
+    send_to_workspace_3: Ուղարկել Workspace 3-ին
+    send_to_workspace_4: Ուղարկել Workspace 4-ին
+    send_to_workspace_5: Ուղարկել Workspace 5-ին
+    send_to_workspace_6: Ուղարկել Workspace 6-ին
+    send_to_workspace_7: Ուղարկել Workspace 7-ին
+    send_to_workspace_8: Ուղարկել Workspace 8-ին
+    send_to_workspace_9: Ուղարկել Workspace 9-ին
+    switch_workspace_0: Անցեք աշխատանքային տարածքին 1
+    switch_workspace_1: Անցեք Workspace- ին 2
+    switch_workspace_2: Անցեք Workspace- ին 2
+    switch_workspace_3: Անցեք Workspace- ին 3
+    switch_workspace_4: Անցեք Workspace- ին 4
+    switch_workspace_5: Անցեք Workspace- ին 5
+    switch_workspace_6: Անցեք Workspace- ին 6
+    switch_workspace_7: Անցեք Workspace- ին 7
+    switch_workspace_8: Անցեք Workspace- ին 8
+    switch_workspace_9: Անցեք Workspace- ին 9
+    toggle_launcher: Փոփոխվել
+  readonly_tooltip: Սա ընթերցված դյուրանցում է
+  reset: Վերականգնել կանխադրված
+sides:
+  bottom: Հատակից
+  left: Ձախ
+  right: Ճիշտ
+  top: Գագաթ
 start:
-  title: Բարի գալուստ
   message: >-
     Բարի գալուստ SEELEN UI, Ultimate Desktop միջավայրը `ներառված սալիկապատման
     մենեջեր` ձեր Windows փորձը բարելավելու համար: Ուսումնասիրեք
     արդյունավետության եւ բազմամշակման նոր դարաշրջան մեր ինտուիտիվ ինտերֆեյսով եւ
     առաջադեմ հատկություններով:
   message_accent: 'Օպտիմիզացրեք ձեր արտադրողականությունը ոճով:'
-general:
-  theme:
-    label: Թեման տեղեկատվություն
-    add: Ավելացնել թեման
-    description: Նկարագրություն
-    placeholder: Ընտրեք թեման
-    enabled: Միացված թեմաներ
-    author: Հեղինակ
-    tags: Պիտակներ
-    added: Թեման արդեն ավելացրեց
-    available: Մատչելի
-    selected: Ընտրված
-  language: Լեզու
-  startup: 'Գործարկման վրա գործարկեք:'
-  icon_pack:
-    label: Սրբապատկերներ
-  accent_color: Շեշտադրիչ գույն
-  wallpaper:
-    select: Ընտրեք Պաստառ
-  date_format: Ամսաթիվ ձեւաչափ
+  title: Բարի գալուստ
 toolbar:
+  auto_hide: Ավտոմատ թաքցնել
+  delay_to_hide: Հետաձգել թաքցնելը
+  delay_to_show: Ցուցադրման ուշացում
+  enable: Միացնել Fancy Toolbar- ը
+  height: Բարձրություն
+  label: Գործիքագոտու
   placeholder:
     author: Հեղինակ
     description: Նկարագրություն
     select: Գործիքադարակի կառուցվածքը
-  enable: Միացնել Fancy Toolbar- ը
-  height: Բարձրություն
-  auto_hide: Ավտոմատ թաքցնել
-  label: Գործիքագոտու
-  delay_to_hide: Հետաձգել թաքցնելը
-  delay_to_show: Ցուցադրման ուշացում
   use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
-wm:
-  border:
-    enable: Միացնել պատուհանի սահմանը
-    width: Սահմանի լայնությունը
-    offset: Սահմանի օֆսեթ
-  description: Նկարագրություն
-  resize_delta: Չափափոխել դելտան (%)
-  workspace_offset: Աշխատանքային տարածքների օֆսեթ (լուսանցքներ)
-  layout: Դասավորություն
-  space_between_containers: Տիեզերք բեռնարկղերի միջեւ
-  workspace_padding: Աշխատանքային տարածքների լիցքավորում
-  author: Հեղինակ
-  enable: Միացնել սալիկապատման պատուհանի կառավարիչը
-weg:
-  items:
-    size: Ապրանքի չափը
-    label: Իրերը
-    visible_separators: Տեսանելի տարանջատիչներ
-    gap: Տարածություն իրերի միջեւ
-    zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
-  enable: Միացնել Dock / Taskbar
-  width: Լայնություն
-  auto_hide: Ավտոմատ թաքցնել
-  margin: Լուսանցք
-  gap: Բացվածք
-  label: Dock / Taskbar
-  padding: Լիցք
-  dock_side: Դիրք
-  delay_to_show: Ցուցադրման ուշացում
-  delay_to_hide: Հետաձգել թաքցնելը
-  use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
-devtools:
-  custom_config_file: Բեռնեք պատվերով կազմաձեւման ֆայլը
-  data_folder: Տվյալների պանակ
-  load: Բեռ
-  app_folders: Ծրագրի թղթապանակներ
-  install_folder: Տեղադրման պանակ
-  enable: Միացնել մշակողի գործիքները
-  settings_file: Կարգավորումներ ֆայլ
-apps_configurations:
-  app:
-    options:
-      pinned: Փածսյա
-      unmanage: Անօդաչուր
-      force: Ուժի կառավարում
-      float: Լողացող
-      hidden: Թաքցնել նավահանգիստից / առաջադրանք
-    monitor_placeholder: Ոչ ոք
-    category_placeholder: Ոչ ոք
-    workspace_placeholder: Ոչ ոք
-    name: Անուն
-    bindings: Պարտադիր (նշում է, որ երկու տարբերակները պարտադիր են)
-    workspace: Աշխատատեղ
-    monitor: Մոնիտոր
-    category: Կատեգորիա
-    ok_create: Ստեղծել
-    title_readonly: Դիտում է {{Անունը}
-    ok_readonly: Խմբագրել որպես նոր
-    ok_edit: Թարմացում
-    title_create: Ստեղծելով {{name}
-    wm_options_label: Պատուհանների մենեջեր Ընտրանքներ
-    weg_options_label: Dock / Taskbar Ընտրանքներ
-    options_label: Լրացուցիչ ընտրանքներ
-    title_edit: Խմբագրում {{name}
-  identifier:
-    or: ԿԱՄ
-    and: Մի քանազոր
-    kind: Նույնացնել ըստ
-    id: Նույնացնող
-    remove: Delete նջել բլոկը
-    negation: Ժխտել համապատասխանությունը
-    add_block: Ավելացնել բլոկ
-    matching_strategy: Համապատասխան ռազմավարություն
-  bundled_title: Ծրագրի կազմաձեւումը փաթեթավորված է Seelen- ի հետ
-  confirm_delete_title: Հաստատեք ջնջել
-  swap: Փոխանակել
-  import: Ներմուծում
-  export: Արտահանում
-  new: Նոր
-  confirm_delete: 'Համոզված եք, որ ցանկանում եք ջնջել այս կազմաձեւը:'
-  search: Որոնել
-  delete: Ջնջել
-  bundled_msg: >-
-    Այս փաթեթավորված կազմաձեւերը խմբագրելի չեն եւ նախագծված են `առանց
-    հարմարեցման լավագույն փորձը տրամադրելու: Նրանք ինքնաբերաբար կարգավորում են
-    ձեզ համար ամենատարածված դիմումները:
-  extra_info: >-
-    Seelen UI-ն օգտագործում է միայն մեկ նույնացուցիչ յուրաքանչյուր հավելվածի
-    համար (գտնվել է առաջին համընկնումը), այնպես որ կարևոր է ճշգրտման կարգը,
-    առաջնահերթությունը կտրվի վերջին ավելացվածներին, քանի որ աղյուսակը ըստ
-    կանխադրման դասավորված է վերջինից հին:
-extras:
-  github: Գյուտ
-  discord: Տարաձայնություն
-  links: Պաշտոնական հղումներ
-  relaunch: Վերակառուցվել
-  exit: Հանգստացեք / Ելք
-  version: Տարբերակ
-shortcuts:
-  labels:
-    move_to_workspace_5: Տեղափոխել Workpace 5
-    focus_bottom: Կենտրոնացեք հատակին
-    send_to_workspace_8: Ուղարկել Workspace 8-ին
-    send_to_workspace_3: Ուղարկել Workspace 3-ին
-    move_to_workspace_9: Տեղափոխել Workspace 9
-    reserve_left: Պահուստը մնացել է
-    send_to_workspace_2: Ուղարկել Workspace 2-ին
-    switch_workspace_5: Անցեք Workspace- ին 5
-    focus_top: Կենտրոնանալ գագաթին
-    decrease_width: Լայնության նվազում
-    switch_workspace_2: Անցեք Workspace- ին 2
-    reserve_stack: Պահեստավորված նյութեր
-    reserve_float: Ամրագրեք բոց
-    focus_latest: Կենտրոնացեք վերջին
-    reserve_bottom: Ամրագրեք հատակը
-    send_to_workspace_6: Ուղարկել Workspace 6-ին
-    send_to_workspace_5: Ուղարկել Workspace 5-ին
-    switch_workspace_3: Անցեք Workspace- ին 3
-    move_to_workspace_6: Տեղափոխել Workspace 6
-    switch_workspace_4: Անցեք Workspace- ին 4
-    send_to_workspace_0: Ուղարկել Workspace- ին 0
-    switch_workspace_6: Անցեք Workspace- ին 6
-    focus_right: Կենտրոնանալ ճիշտ
-    send_to_workspace_9: Ուղարկել Workspace 9-ին
-    send_to_workspace_4: Ուղարկել Workspace 4-ին
-    move_to_workspace_2: Տեղափոխվել դեպի Workspace 2
-    switch_workspace_9: Անցեք Workspace- ին 9
-    move_to_workspace_8: Տեղափոխել Workpace 8
-    switch_workspace_7: Անցեք Workspace- ին 7
-    send_to_workspace_7: Ուղարկել Workspace 7-ին
-    focus_left: Կենտրոնանալ ձախ
-    increase_height: Բարձրացնել բարձրությունը
-    reserve_right: Ամրագրեք աջ
-    move_to_workspace_0: Տեղափոխել Workspace 0
-    move_to_workspace_1: Տեղափոխել Workspace 1
-    move_to_workspace_3: Տեղափոխվել Workspace 3-ին
-    restore_sizes: Վերականգնել չափերը
-    decrease_height: Նվազեցնել բարձրությունը
-    increase_width: Բարձրացնել լայնությունը
-    send_to_workspace_1: Ուղարկել Workspace 1-ին
-    move_to_workspace_7: Տեղափոխվել Workpace 7-ին
-    move_to_workspace_4: Տեղափոխել Workpace 4-ին
-    reserve_top: Ամրագրեք վերեւ
-    switch_workspace_8: Անցեք Workspace- ին 8
-    switch_workspace_0: Անցեք աշխատանքային տարածքին 1
-    switch_workspace_1: Անցեք Workspace- ին 2
-    misc_open_settings: Բաց պարամետրեր
-    misc_toggle_win_event_tracing: Անջատեք շահեք իրադարձության հետագծումը (տեղեկամատյաններ)
-    misc_toggle_lock_tracing: Փոփոխեք կողպեքի հետեւում (տեղեկամատյաններ)
-    toggle_launcher: Փոփոխվել
-  enable: Միացնել ինտեգրված դյուրանցումները (AHK)
-  enable_tooltip: >-
-    Անջատեք, եթե դուք կիրականացնեք ձեր սեփական դյուրանցումները `օգտագործելով
-    Seelen Core API- ն
-  reset: Վերականգնել կանխադրված
-  readonly_tooltip: Սա ընթերցված դյուրանցում է
-inProgress: Ընթացքի մեջ է...
-loading: Բեռնում ...
-open: Բաց անել
-save: Խնայել
-cancel: Չեղարկել
-delete: Ջնջել
-quit: Թողնել
-vd:
-  strategy:
-    seelen: Սեգեն
-    native: Տեղական
-    label: Վիրտուալ աշխատասեղանի ռազմավարությունը
-  disabled_windows_version: >-
-    Մայրենիի վիրտուալ աշխատասեղանի ռազմավարությունը մատչելի չէ ձեր Windows
-    տարբերակի համար:
-save_and_restart: Պահել եւ վերագործարկել
-monitors_configurations:
-  label: Մոնիտոր {{ինդեքս}
-wall:
-  backgrounds: Պաստառներ
-  no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
-  enable: Միացրեք Պաստառների կառավարիչը
-  interval: Ամեն ինչ փոխեք պաստառ
-  random: Պատահականացրեք սլայդերի ցուցադրումը
-  minutes: րոպե
-  seconds: վայրկյան
-  hours: ժամ
-app_launcher:
-  runners:
-    label: Վազողներ
-    cmd: Հրաման
-    explorer: Վազք
-  monitor: Մոնիտոր, ցույց տալու համար
-  enable: Միացնել ծրագրի արձակումը
-more: Ավելի շատ
-inherit: Ժառանգել
-insert: Տեղադրել
-close: Սերտ
 update:
   available: 'Թարմացրեք մատչելի:'
   channel: Թարմացրեք ալիքը
   downloading: Ներբեռնում ...
-miscellaneous: Զանազան
-mods:
-  target: Թիրախ
-  plugins: Plugins
-  widgets: Widgets
-remove: Հեռացնել
+vd:
+  disabled_windows_version: >-
+    Մայրենիի վիրտուալ աշխատասեղանի ռազմավարությունը մատչելի չէ ձեր Windows
+    տարբերակի համար:
+  strategy:
+    label: Վիրտուալ աշխատասեղանի ռազմավարությունը
+    native: Տեղական
+    seelen: Սեգեն
+wall:
+  backgrounds: Պաստառներ
+  enable: Միացրեք Պաստառների կառավարիչը
+  hours: ժամ
+  interval: Ամեն ինչ փոխեք պաստառ
+  minutes: րոպե
+  no_background: 'Դատարկ սլայդերի ցուցադրություն, փոխարենը օգտագործելով թեմայի ֆոնը:'
+  random: Պատահականացրեք սլայդերի ցուցադրումը
+  seconds: վայրկյան
+weg:
+  auto_hide: Ավտոմատ թաքցնել
+  delay_to_hide: Հետաձգել թաքցնելը
+  delay_to_show: Ցուցադրման ուշացում
+  dock_side: Դիրք
+  enable: Միացնել Dock / Taskbar
+  gap: Բացվածք
+  items:
+    gap: Տարածություն իրերի միջեւ
+    label: Իրերը
+    size: Ապրանքի չափը
+    visible_separators: Տեսանելի տարանջատիչներ
+    zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
+  label: Dock / Taskbar
+  margin: Լուսանցք
+  padding: Լիցք
+  use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
+  width: Լայնություն
+wm:
+  author: Հեղինակ
+  border:
+    enable: Միացնել պատուհանի սահմանը
+    offset: Սահմանի օֆսեթ
+    width: Սահմանի լայնությունը
+  description: Նկարագրություն
+  enable: Միացնել սալիկապատման պատուհանի կառավարիչը
+  layout: Դասավորություն
+  resize_delta: Չափափոխել դելտան (%)
+  space_between_containers: Տիեզերք բեռնարկղերի միջեւ
+  workspace_offset: Աշխատանքային տարածքների օֆսեթ (լուսանցքներ)
+  workspace_padding: Աշխատանքային տարածքների լիցքավորում

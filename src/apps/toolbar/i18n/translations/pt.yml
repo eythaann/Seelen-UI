@@ -1,46 +1,46 @@
-media:
-  master_volume: Volume principal
-  output_device: Dispositivo de saída
-  input_device: Dispositivo de entrada
-  players: Reprodutores de mídia
-  device:
-    multimedia: Multimídia
-    comunications: Comunicações
-network:
-  not_found: Nenhuma rede encontrada
-  more: Mais configurações de rede
-  hidden: Rede Oculta
-  placeholder:
-    password: Senha
-  disconnect: desconectar
-  connect: Conectar
-  connected: Conectado a
-  available: Redes disponíveis
-  scanning: Procurando redes
-  saved: Redes salvas
-  secured: Rede criptografada
-settings:
-  title: Configurações
-  app_settings: Configurações do aplicativo
-  log_out: Sair
-  sleep: Dormir
-  restart: Reiniciar
-  shutdown: Desligar
-  power: Energia
-placeholder:
-  open_user_folder: Abra a pasta do usuário
-  open_system_tray: Abra a bandeja do sistema
-  bluetooth_devices: Bluetooth
-  ethernet_connected: Acesso à internet
-  ethernet_disconnected: Sem acesso à internet
-  volume: Volume
-  battery_remaining: '% restante'
-  smart_charge: '- Carga Inteligente'
-  settings: Configurações rápidas
-  notifications: Notificações
-unlabelled_tray: Ícone de bandeja não marcada
 context_menu:
   add_module: Adicione módulo
   remove: Remova o módulo
   settings: Configurações
   task_manager: Gerenciador de tarefas
+media:
+  device:
+    comunications: Comunicações
+    multimedia: Multimídia
+  input_device: Dispositivo de entrada
+  master_volume: Volume principal
+  output_device: Dispositivo de saída
+  players: Reprodutores de mídia
+network:
+  available: Redes disponíveis
+  connect: Conectar
+  connected: Conectado a
+  disconnect: desconectar
+  hidden: Rede Oculta
+  more: Mais configurações de rede
+  not_found: Nenhuma rede encontrada
+  placeholder:
+    password: Senha
+  saved: Redes salvas
+  scanning: Procurando redes
+  secured: Rede criptografada
+placeholder:
+  battery_remaining: '% restante'
+  bluetooth_devices: Bluetooth
+  ethernet_connected: Acesso à internet
+  ethernet_disconnected: Sem acesso à internet
+  notifications: Notificações
+  open_system_tray: Abra a bandeja do sistema
+  open_user_folder: Abra a pasta do usuário
+  settings: Configurações rápidas
+  smart_charge: '- Carga Inteligente'
+  volume: Volume
+settings:
+  app_settings: Configurações do aplicativo
+  log_out: Sair
+  power: Energia
+  restart: Reiniciar
+  shutdown: Desligar
+  sleep: Dormir
+  title: Configurações
+unlabelled_tray: Ícone de bandeja não marcada

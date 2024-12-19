@@ -1,199 +1,151 @@
-loading: Загрузка...
-inProgress: В процессе...
-cancel: Отмена
-save: Сохранить
-quit: Закрыть
-open: Открыть
-delete: Удалить
-sides:
-  left: Слева
-  right: Справа
-  top: Сверху
-  bottom: Снизу
-header:
-  labels:
-    general: Общее
-    seelen_bar: Верхняя панель
-    seelen_wm: Менеджер окон
-    seelen_weg: Панель задач
-    monitors: Мониторы
-    specific_apps: Приложения
-    shortcuts: Ярлыки
-    developer: Разработчик
-    info: Информация
-    seelen_rofi: Приложение пусковая установка
-    virtual_desk: Виртуальные рабочие столы
-    home: Дом
-    mods: Плагины и виджеты
-    seelen_wall: Управляющий обоями
-start:
-  title: Добро пожаловать!
-  message: >-
-    Добро пожаловать в Seelen UI, превосходное окружение рабочего стола со
-    встроенным менеджером окон с плиточным расположением для улучшения работы с
-    Windows! Откройте для себя новую эру эффективности и многозадачности
-    благодаря интуитивно понятному интерфейсу и расширенным возможностям.
-  message_accent: Оптимизируйте свою производительность стильно!
-general:
-  startup: Автозапускать при включении системы
-  language: Язык
-  theme:
-    label: Темы
-    placeholder: Выберите тему
-    author: Автор
-    description: Описание
-    add: Добавить тему
-    added: Тема уже добавлена
-    enabled: Включенные темы
-    tags: Теги
-    available: Доступные
-    selected: Выбранные
-  icon_pack:
-    label: Наборы иконок
-  accent_color: Акцентный цвет
-  wallpaper:
-    select: Выберите обои
-  date_format: Формат даты
-toolbar:
-  enable: Включить
-  placeholder:
-    select: Структура верхней панели
-    author: Автор
-    description: Описание
-  height: Высота
-  auto_hide: Автоскрытие
-  label: Верхняя панель
-  delay_to_hide: Задержка, чтобы скрыть
-  delay_to_show: Задержка показа
-  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
-wm:
-  layout: Макет
-  author: Автор
-  description: Описание
-  space_between_containers: Пространство между контейнерами
-  workspace_padding: Внутренний отступ рабочего пространства
-  workspace_offset: Внешний отступ рабочего пространства
-  resize_delta: Изменить размер дельты (%)
-  border:
-    enable: Включить границу окон
-    width: Ширина границы
-    offset: Смещение границы
-  enable: Включить менеджер по плитке окна
-weg:
-  label: Панель задач
-  enable: Включить
-  width: Ширина
-  auto_hide: Автоскрытие
-  dock_side: Расположение
-  padding: Внутренний отступ
-  margin: Внешний отступ
-  gap: Разрыв
-  items:
-    label: Иконки
-    size: Размер иконок
-    zoom_size: Увеличенный размер (используется для тем)
-    gap: Расстояние между иконок
-    visible_separators: Разделители
-  delay_to_show: Задержка показа
-  delay_to_hide: Задержка, чтобы скрыть
-  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
-devtools:
-  enable: Включить инструменты разработчика
-  app_folders: Папки приложения
-  install_folder: Папка установки
-  data_folder: Папка данных
-  settings_file: Файл настроек
-  custom_config_file: Загрузить пользовательский файл конфигурации
-  load: Загрузить
+app_launcher:
+  enable: Включить запуск приложения
+  monitor: Монитор, чтобы показать
+  runners:
+    cmd: Командование
+    explorer: Бегать
+    label: Бегуны
 apps_configurations:
-  import: Импорт
-  export: Экспорт
-  delete: Удалить
-  swap: Сменить
-  new: Новый
-  bundled_title: Конфигурация приложения в комплекте с Seelen
+  app:
+    bindings: Привязка (оба параметра обязательны)
+    category: Категория
+    category_placeholder: Нет
+    monitor: Монитор
+    monitor_placeholder: Нет
+    name: Название
+    ok_create: Создать
+    ok_edit: Обновить
+    ok_readonly: Изменить как новое
+    options:
+      float: Плавающее
+      force: Управлять принудительно
+      hidden: Скрыть из панели задач
+      pinned: Закреплено
+      unmanage: Неуправляемое
+    options_label: Дополнительные параметры
+    title_create: Создание {{name}}
+    title_edit: Редактирование {{name}}
+    title_readonly: Просмотр {{name}}
+    weg_options_label: Параметры панели задач
+    wm_options_label: Параметры управления окном
+    workspace: Рабочая область
+    workspace_placeholder: Нет
   bundled_msg: >-
     Эти встроенные конфигурации не подлежат редактированию и созданы для того,
     чтобы обеспечить вам максимальное удобство без настройки. Они автоматически
     настраивают для вас наиболее распространенные приложения.
-  confirm_delete_title: Подтверждение удаления
+  bundled_title: Конфигурация приложения в комплекте с Seelen
   confirm_delete: Удалить эту конфигурацию?
-  search: Поиск
-  app:
-    name: Название
-    category: Категория
-    category_placeholder: Нет
-    bindings: Привязка (оба параметра обязательны)
-    monitor: Монитор
-    monitor_placeholder: Нет
-    workspace: Рабочая область
-    workspace_placeholder: Нет
-    title_create: Создание {{name}}
-    title_readonly: Просмотр {{name}}
-    ok_edit: Обновить
-    ok_create: Создать
-    ok_readonly: Изменить как новое
-    options:
-      float: Плавающее
-      unmanage: Неуправляемое
-      force: Управлять принудительно
-      pinned: Закреплено
-      hidden: Скрыть из панели задач
-    wm_options_label: Параметры управления окном
-    weg_options_label: Параметры панели задач
-    options_label: Дополнительные параметры
-    title_edit: Редактирование {{name}}
-  identifier:
-    remove: Удалить блок
-    id: Идентификатор
-    kind: Идентифицировать по
-    matching_strategy: Стратегия подбора
-    negation: Отрицательный подбор
-    and: И
-    or: ИЛИ
-    add_block: Добавить блок
+  confirm_delete_title: Подтверждение удаления
+  delete: Удалить
+  export: Экспорт
   extra_info: >-
     Пользовательский интерфейс SEELEN Используйте только один идентификатор на
     приложение (первое совпадение), поэтому важен порядок в том, как
     специфический, последнее добавление будет приоритет, так как примечание.
     Таблица сортируется по умолчанию от последних до старых.
+  identifier:
+    add_block: Добавить блок
+    and: И
+    id: Идентификатор
+    kind: Идентифицировать по
+    matching_strategy: Стратегия подбора
+    negation: Отрицательный подбор
+    or: ИЛИ
+    remove: Удалить блок
+  import: Импорт
+  new: Новый
+  search: Поиск
+  swap: Сменить
+cancel: Отмена
+close: Закрывать
+delete: Удалить
+devtools:
+  app_folders: Папки приложения
+  custom_config_file: Загрузить пользовательский файл конфигурации
+  data_folder: Папка данных
+  enable: Включить инструменты разработчика
+  install_folder: Папка установки
+  load: Загрузить
+  settings_file: Файл настроек
 extras:
-  version: Версия
-  links: Официальные ссылки
-  github: GitHub
   discord: Discord
-  relaunch: Перезапустить
   exit: Выйти
+  github: GitHub
+  links: Официальные ссылки
+  relaunch: Перезапустить
+  version: Версия
+general:
+  accent_color: Акцентный цвет
+  date_format: Формат даты
+  icon_pack:
+    label: Наборы иконок
+  language: Язык
+  startup: Автозапускать при включении системы
+  theme:
+    add: Добавить тему
+    added: Тема уже добавлена
+    author: Автор
+    available: Доступные
+    description: Описание
+    enabled: Включенные темы
+    label: Темы
+    placeholder: Выберите тему
+    selected: Выбранные
+    tags: Теги
+  wallpaper:
+    select: Выберите обои
+header:
+  labels:
+    developer: Разработчик
+    general: Общее
+    home: Дом
+    info: Информация
+    mods: Плагины и виджеты
+    monitors: Мониторы
+    seelen_bar: Верхняя панель
+    seelen_rofi: Приложение пусковая установка
+    seelen_wall: Управляющий обоями
+    seelen_weg: Панель задач
+    seelen_wm: Менеджер окон
+    shortcuts: Ярлыки
+    specific_apps: Приложения
+    virtual_desk: Виртуальные рабочие столы
+inherit: Наследовать
+inProgress: В процессе...
+insert: Вставлять
+loading: Загрузка...
+miscellaneous: Разнообразный
+mods:
+  plugins: Плагины
+  target: Цель
+  widgets: Виджеты
+monitors_configurations:
+  label: Монитор {{index}}
+more: Более
+open: Открыть
+quit: Закрыть
+remove: Удалять
+save: Сохранить
+save_and_restart: Сохранить и перезапустить
 shortcuts:
   enable: Включить встроенные ярлыки (ahk)
   enable_tooltip: >-
     Отключите, если будете реализовывать собственные ярлыки с помощью Seelen
     Core Api
   labels:
-    reserve_top: Зарезервировать верх
-    reserve_bottom: Зарезервировать низ
-    reserve_left: Зарезервировать лево
-    reserve_right: Зарезервировать право
-    reserve_float: Зарезервировать плавующее
-    reserve_stack: Зарезервировать стек
-    focus_top: Фокус верха
+    decrease_height: Уменьшить высоту
+    decrease_width: Уменьшить ширину
     focus_bottom: Фокус низа
+    focus_latest: Фокус последнего
     focus_left: Фокус лева
     focus_right: Фокус права
-    focus_latest: Фокус последнего
-    increase_width: Увеличить ширину
-    decrease_width: Уменьшить ширину
+    focus_top: Фокус верха
     increase_height: Увеличить высоты
-    decrease_height: Уменьшить высоту
-    restore_sizes: Восстановить размеры
-    switch_workspace_2: Переключиться на рабочую область 2
-    switch_workspace_3: Переключиться на рабочую область 3
-    switch_workspace_4: Переключиться на рабочую область 4
-    switch_workspace_5: Переключиться на рабочую область 5
-    switch_workspace_6: Переключиться на рабочую область 6
-    switch_workspace_7: Переключиться на рабочую область 7
-    switch_workspace_8: Переключиться на рабочую область 8
-    switch_workspace_9: Переключиться на рабочую область 9
+    increase_width: Увеличить ширину
+    misc_open_settings: Откройте настройки
+    misc_toggle_lock_tracing: Перевернуть отслеживание блокировки (журналы)
+    misc_toggle_win_event_tracing: Toggle Win Tracing Event (журналы)
     move_to_workspace_0: Перейти в рабочую область 0
     move_to_workspace_1: Перейти в рабочую область 1
     move_to_workspace_2: Перейти в рабочую область 2
@@ -204,6 +156,13 @@ shortcuts:
     move_to_workspace_7: Перейти в рабочую область 7
     move_to_workspace_8: Перейти в рабочую область 8
     move_to_workspace_9: Перейти в рабочую область 9
+    reserve_bottom: Зарезервировать низ
+    reserve_float: Зарезервировать плавующее
+    reserve_left: Зарезервировать лево
+    reserve_right: Зарезервировать право
+    reserve_stack: Зарезервировать стек
+    reserve_top: Зарезервировать верх
+    restore_sizes: Восстановить размеры
     send_to_workspace_0: Отправить в рабочую область 0
     send_to_workspace_1: Отправить в рабочую область 1
     send_to_workspace_2: Отправить в рабочую область 2
@@ -216,50 +175,91 @@ shortcuts:
     send_to_workspace_9: Отправить в рабочую область 9
     switch_workspace_0: Переключитесь на рабочее пространство 1
     switch_workspace_1: Переключитесь на рабочую область 2
-    misc_open_settings: Откройте настройки
-    misc_toggle_lock_tracing: Перевернуть отслеживание блокировки (журналы)
-    misc_toggle_win_event_tracing: Toggle Win Tracing Event (журналы)
+    switch_workspace_2: Переключиться на рабочую область 2
+    switch_workspace_3: Переключиться на рабочую область 3
+    switch_workspace_4: Переключиться на рабочую область 4
+    switch_workspace_5: Переключиться на рабочую область 5
+    switch_workspace_6: Переключиться на рабочую область 6
+    switch_workspace_7: Переключиться на рабочую область 7
+    switch_workspace_8: Переключиться на рабочую область 8
+    switch_workspace_9: Переключиться на рабочую область 9
     toggle_launcher: Переключать
-  reset: Сбросить по умолчанию
   readonly_tooltip: Это ярлык только для чтения
+  reset: Сбросить по умолчанию
+sides:
+  bottom: Снизу
+  left: Слева
+  right: Справа
+  top: Сверху
+start:
+  message: >-
+    Добро пожаловать в Seelen UI, превосходное окружение рабочего стола со
+    встроенным менеджером окон с плиточным расположением для улучшения работы с
+    Windows! Откройте для себя новую эру эффективности и многозадачности
+    благодаря интуитивно понятному интерфейсу и расширенным возможностям.
+  message_accent: Оптимизируйте свою производительность стильно!
+  title: Добро пожаловать!
+toolbar:
+  auto_hide: Автоскрытие
+  delay_to_hide: Задержка, чтобы скрыть
+  delay_to_show: Задержка показа
+  enable: Включить
+  height: Высота
+  label: Верхняя панель
+  placeholder:
+    author: Автор
+    description: Описание
+    select: Структура верхней панели
+  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
+update:
+  available: Обновление доступно!
+  channel: Обновить канал
+  downloading: Загрузка ...
 vd:
-  strategy:
-    native: Нативная
-    seelen: Seelen
-    label: Стратегия виртуального рабочего стола
   disabled_windows_version: >-
     Нативная стратегия виртуального рабочего стола недоступна для вашей версии
     Windows.
-save_and_restart: Сохранить и перезапустить
-monitors_configurations:
-  label: Монитор {{index}}
+  strategy:
+    label: Стратегия виртуального рабочего стола
+    native: Нативная
+    seelen: Seelen
 wall:
   backgrounds: Обои
-  no_background: Пустое слайд -шоу, используя фон темы.
   enable: Включить менеджер обоев
-  interval: Измените обои каждый
-  random: Рандомизируйте слайд -шоу
-  minutes: минуты
-  seconds: секунды
   hours: часы
-app_launcher:
-  runners:
-    explorer: Бегать
-    cmd: Командование
-    label: Бегуны
-  monitor: Монитор, чтобы показать
-  enable: Включить запуск приложения
-inherit: Наследовать
-insert: Вставлять
-more: Более
-close: Закрывать
-update:
-  available: Обновление доступно!
-  downloading: Загрузка ...
-  channel: Обновить канал
-miscellaneous: Разнообразный
-mods:
-  widgets: Виджеты
-  target: Цель
-  plugins: Плагины
-remove: Удалять
+  interval: Измените обои каждый
+  minutes: минуты
+  no_background: Пустое слайд -шоу, используя фон темы.
+  random: Рандомизируйте слайд -шоу
+  seconds: секунды
+weg:
+  auto_hide: Автоскрытие
+  delay_to_hide: Задержка, чтобы скрыть
+  delay_to_show: Задержка показа
+  dock_side: Расположение
+  enable: Включить
+  gap: Разрыв
+  items:
+    gap: Расстояние между иконок
+    label: Иконки
+    size: Размер иконок
+    visible_separators: Разделители
+    zoom_size: Увеличенный размер (используется для тем)
+  label: Панель задач
+  margin: Внешний отступ
+  padding: Внутренний отступ
+  use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
+  width: Ширина
+wm:
+  author: Автор
+  border:
+    enable: Включить границу окон
+    offset: Смещение границы
+    width: Ширина границы
+  description: Описание
+  enable: Включить менеджер по плитке окна
+  layout: Макет
+  resize_delta: Изменить размер дельты (%)
+  space_between_containers: Пространство между контейнерами
+  workspace_offset: Внешний отступ рабочего пространства
+  workspace_padding: Внутренний отступ рабочего пространства

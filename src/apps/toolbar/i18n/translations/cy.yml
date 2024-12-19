@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Ychwanegu Modiwl
+  remove: Tynnwch y modiwl
+  settings: Gosodiadau
+  task_manager: Rheolwr Tasg
 media:
   device:
     comunications: Gyfathrebiadau
     multimedia: Amlgyfrwng
-  players: Chwaraewyr cyfryngau
-  output_device: Dyfais allbwn
-  master_volume: Meistr
   input_device: Dyfais fewnbwn
+  master_volume: Meistr
+  output_device: Dyfais allbwn
+  players: Chwaraewyr cyfryngau
 network:
+  available: Rhwydweithiau sydd ar gael
+  connect: Chysyllta ’
+  connected: Wedi'i gysylltu â
+  disconnect: Ddatgysylltith
+  hidden: Rhwydwaith Cudd
+  more: Mwy o osodiadau rhwydwaith
+  not_found: Ni ddarganfuwyd unrhyw rwydweithiau
   placeholder:
     password: Gyfrinair
-  hidden: Rhwydwaith Cudd
-  not_found: Ni ddarganfuwyd unrhyw rwydweithiau
-  more: Mwy o osodiadau rhwydwaith
-  disconnect: Ddatgysylltith
-  connect: Chysyllta ’
   saved: Rhwydweithiau wedi'u cadw
   scanning: Sganio am rwydweithiau
-  available: Rhwydweithiau sydd ar gael
-  connected: Wedi'i gysylltu â
   secured: Rhwydwaith wedi'i amgryptio
-settings:
-  restart: Ail-ddechrau
-  log_out: Allgofnodi
-  app_settings: Gosodiadau App
-  shutdown: Chaead
-  title: Gosodiadau
-  sleep: Chysger
-  power: Bwerau
 placeholder:
-  open_system_tray: Hambwrdd System Agored
-  smart_charge: '- Tâl craff'
   battery_remaining: '% yn weddill'
-  settings: Gosodiadau Cyflym
-  ethernet_disconnected: Dim Mynediad i'r Rhyngrwyd
-  open_user_folder: Agor Ffolder Defnyddiwr
-  ethernet_connected: Mynediad i'r Rhyngrwyd
   bluetooth_devices: Bluetooth a Dyfeisiau
-  volume: Nghyfrol
+  ethernet_connected: Mynediad i'r Rhyngrwyd
+  ethernet_disconnected: Dim Mynediad i'r Rhyngrwyd
   notifications: Hysbysiadau
+  open_system_tray: Hambwrdd System Agored
+  open_user_folder: Agor Ffolder Defnyddiwr
+  settings: Gosodiadau Cyflym
+  smart_charge: '- Tâl craff'
+  volume: Nghyfrol
+settings:
+  app_settings: Gosodiadau App
+  log_out: Allgofnodi
+  power: Bwerau
+  restart: Ail-ddechrau
+  shutdown: Chaead
+  sleep: Chysger
+  title: Gosodiadau
 unlabelled_tray: Eicon hambwrdd heb ei labelu
-context_menu:
-  remove: Tynnwch y modiwl
-  add_module: Ychwanegu Modiwl
-  settings: Gosodiadau
-  task_manager: Rheolwr Tasg

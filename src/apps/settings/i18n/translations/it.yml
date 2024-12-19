@@ -1,243 +1,149 @@
-loading: Caricamento...
-inProgress: In corso...
-cancel: Annulla
-save: Salva
-save_and_restart: Salva e Riavvia
-quit: Esci
-close: Chiudi
-open: Apri
-delete: Elimina
-remove: Rimuovi
-insert: Inserisci
-more: Altro
-inherit: Eredita
-miscellaneous: Varie
-sides:
-  left: Sinistra
-  right: Destra
-  top: Alto
-  bottom: Basso
-header:
-  labels:
-    home: Home
-    general: Generale
-    seelen_bar: Barra Fancy
-    seelen_wm: Gestore delle Finestre
-    seelen_weg: Dock/Barra delle Attività
-    seelen_rofi: Launcher delle App
-    seelen_wall: Gestore degli Sfondi
-    monitors: Monitor
-    specific_apps: App Specifiche
-    shortcuts: Scorciatoie
-    developer: Sviluppatore
-    info: Informazioni
-    virtual_desk: Desktop Virtuali
-    mods: Plugin & Widget
-mods:
-  plugins: Plugin
-  widgets: Widget
-  target: Target
-start:
-  title: Benvenuti!
-  message: >-
-    Benvenuti in Seelen UI, l'ambiente desktop definitivo con un gestore delle
-    finestre a tiling incorporato per migliorare la vostra esperienza Windows!
-    Esplorate una nuova era di efficienza e multitasking con la nostra
-    interfaccia intuitiva e funzionalità avanzate.
-  message_accent: Ottimizzate la vostra produttività con stile!
-general:
-  startup: Eseguire all'avvio?
-  language: Lingua
-  date_format: Formato Data
-  theme:
-    label: Temi
-    placeholder: Seleziona tema
-    author: Autore
-    description: Descrizione
-    add: Aggiungi tema
-    added: Tema già aggiunto
-    enabled: Temi abilitati
-    tags: Tag
-    available: Disponibile
-    selected: Selezionato
-  icon_pack:
-    label: Pacchetti Icone
-  wallpaper:
-    select: Seleziona Sfondo
-  accent_color: Colore Accentuato
-toolbar:
-  enable: Abilita Barra Fancy
-  placeholder:
-    select: Struttura della Barra
-    author: Autore
-    description: Descrizione
-  label: Barra
-  height: Altezza
-  auto_hide: Nascondi automaticamente
-  delay_to_show: Ritardo per mostrare
-  delay_to_hide: Ritardo per nascondere
-  use_multiple_monitor_overlap_logic: >-
-    Utilizza la logica di visualizzazione specifica anziché quella di focus
-    singolo
-vd:
-  disabled_windows_version: >-
-    La strategia nativa dei Desktop Virtuali non è disponibile per la vostra
-    versione di Windows.
-  strategy:
-    label: Strategia Desktop Virtuale
-    native: Nativa
-    seelen: Seelen
-wm:
-  enable: Abilita Gestore delle Finestre a Tiling
-  layout: Layout
-  author: Autore
-  description: Descrizione
-  space_between_containers: Spazio tra i Contenitori
-  workspace_padding: Spaziatura dei Workspace
-  workspace_offset: Offset dei Workspace (Margini)
-  resize_delta: Delta Ridimensionamento (percento)
-  border:
-    enable: Abilita Bordo delle Finestre
-    width: Larghezza Bordo
-    offset: Offset Bordo
-weg:
-  label: Dock/Barra delle Attività
-  enable: Abilita Dock/Barra delle Attività
-  width: Larghezza
-  auto_hide: Nascondi automaticamente
-  dock_side: Posizione
-  padding: Spaziatura
-  margin: Margine
-  gap: Spazio
-  items:
-    label: Elementi
-    size: Dimensione Elementi
-    zoom_size: Dimensione Zoom (usato per i temi)
-    gap: Spazio tra gli Elementi
-    visible_separators: Separatori Visibili
-  delay_to_show: Ritardo per mostrare
-  delay_to_hide: Ritardo per nascondere
-  use_multiple_monitor_overlap_logic: >-
-    Utilizza la logica di visualizzazione specifica anziché quella di focus
-    singolo
-devtools:
-  enable: Abilita Strumenti Sviluppatore
-  app_folders: Cartelle App
-  install_folder: Cartella di Installazione
-  data_folder: Cartella Dati
-  settings_file: File delle Impostazioni
-  custom_config_file: Carica File di Config Personalizzato
-  load: Carica
+app_launcher:
+  enable: Abilita Launcher delle App
+  monitor: Monitor da mostrare
+  runners:
+    cmd: Comando
+    explorer: Esegui
+    label: Runner
 apps_configurations:
-  import: Importa
-  export: Esporta
-  delete: Elimina
-  swap: Scambia
-  new: Nuovo
-  bundled_title: Config App Fornite con Seelen
+  app:
+    bindings: Associazione (nota che entrambe le opzioni sono richieste)
+    category: Categoria
+    category_placeholder: Nessuna
+    monitor: Monitor
+    monitor_placeholder: Nessuno
+    name: Nome
+    ok_create: Crea
+    ok_edit: Aggiorna
+    ok_readonly: Modifica come Nuovo
+    options:
+      float: Fluttuante
+      force: Forza Gestione
+      hidden: Nascondi da dock/barra delle attività
+      pinned: Fissato
+      unmanage: Non Gestire
+    options_label: Opzioni Extra
+    title_create: Crea {{name}}
+    title_edit: Modifica {{name}}
+    title_readonly: Visualizzazione {{name}}
+    weg_options_label: Opzioni Dock/Barra delle Attività
+    wm_options_label: Opzioni Gestore delle Finestre
+    workspace: Workspace
+    workspace_placeholder: Nessuno
   bundled_msg: >-
     Queste configurazioni fornite non sono modificabili e sono progettate per
     fornirvi la migliore esperienza senza personalizzazione. Configurano
     automaticamente le applicazioni più comuni per voi.
+  bundled_title: Config App Fornite con Seelen
+  confirm_delete: Siete sicuri di voler eliminare questa/e configurazione/i?
+  confirm_delete_title: Conferma Eliminazione
+  delete: Elimina
+  export: Esporta
   extra_info: >-
     Seelen UI utilizza solo un identificatore per app (primo corrispondente
     trovato), quindi l'ordine in cui sono specificate è importante; l'ultima
     aggiunta avrà la priorità. Nota che la tabella è ordinata per impostazione
     predefinita dalla più recente alla più vecchia.
-  confirm_delete_title: Conferma Eliminazione
-  confirm_delete: Siete sicuri di voler eliminare questa/e configurazione/i?
-  search: Cerca
-  app:
-    name: Nome
-    category: Categoria
-    category_placeholder: Nessuna
-    bindings: Associazione (nota che entrambe le opzioni sono richieste)
-    monitor: Monitor
-    monitor_placeholder: Nessuno
-    workspace: Workspace
-    workspace_placeholder: Nessuno
-    title_edit: Modifica {{name}}
-    title_create: Crea {{name}}
-    title_readonly: Visualizzazione {{name}}
-    ok_edit: Aggiorna
-    ok_create: Crea
-    ok_readonly: Modifica come Nuovo
-    options_label: Opzioni Extra
-    wm_options_label: Opzioni Gestore delle Finestre
-    weg_options_label: Opzioni Dock/Barra delle Attività
-    options:
-      float: Fluttuante
-      unmanage: Non Gestire
-      force: Forza Gestione
-      pinned: Fissato
-      hidden: Nascondi da dock/barra delle attività
   identifier:
-    remove: Elimina Blocco
+    add_block: Aggiungi Blocco
+    and: E
     id: Identificatore
     kind: Identifica Per
     matching_strategy: Strategia di Corrispondenza
     negation: Negazione della Corrispondenza
-    and: E
     or: O
-    add_block: Aggiungi Blocco
+    remove: Elimina Blocco
+  import: Importa
+  new: Nuovo
+  search: Cerca
+  swap: Scambia
+cancel: Annulla
+close: Chiudi
+delete: Elimina
+devtools:
+  app_folders: Cartelle App
+  custom_config_file: Carica File di Config Personalizzato
+  data_folder: Cartella Dati
+  enable: Abilita Strumenti Sviluppatore
+  install_folder: Cartella di Installazione
+  load: Carica
+  settings_file: File delle Impostazioni
+extras:
+  discord: Discord
+  exit: Esci
+  github: GitHub
+  links: Link Ufficiali
+  relaunch: Riavvia
+  version: Versione
+general:
+  accent_color: Colore Accentuato
+  date_format: Formato Data
+  icon_pack:
+    label: Pacchetti Icone
+  language: Lingua
+  startup: Eseguire all'avvio?
+  theme:
+    add: Aggiungi tema
+    added: Tema già aggiunto
+    author: Autore
+    available: Disponibile
+    description: Descrizione
+    enabled: Temi abilitati
+    label: Temi
+    placeholder: Seleziona tema
+    selected: Selezionato
+    tags: Tag
+  wallpaper:
+    select: Seleziona Sfondo
+header:
+  labels:
+    developer: Sviluppatore
+    general: Generale
+    home: Home
+    info: Informazioni
+    mods: Plugin & Widget
+    monitors: Monitor
+    seelen_bar: Barra Fancy
+    seelen_rofi: Launcher delle App
+    seelen_wall: Gestore degli Sfondi
+    seelen_weg: Dock/Barra delle Attività
+    seelen_wm: Gestore delle Finestre
+    shortcuts: Scorciatoie
+    specific_apps: App Specifiche
+    virtual_desk: Desktop Virtuali
+inherit: Eredita
+inProgress: In corso...
+insert: Inserisci
+loading: Caricamento...
+miscellaneous: Varie
+mods:
+  plugins: Plugin
+  target: Target
+  widgets: Widget
 monitors_configurations:
   label: Monitor {{index}}
-wall:
-  enable: Abilita Gestore degli Sfondi
-  interval: Cambia sfondo ogni
-  random: Slideshow casuale
-  backgrounds: Sfondi
-  no_background: Slideshow vuoto, usa invece lo sfondo del tema.
-  hours: ore
-  minutes: minuti
-  seconds: secondi
-app_launcher:
-  enable: Abilita Launcher delle App
-  monitor: Monitor da mostrare
-  runners:
-    label: Runner
-    explorer: Esegui
-    cmd: Comando
-extras:
-  version: Versione
-  links: Link Ufficiali
-  github: GitHub
-  discord: Discord
-  relaunch: Riavvia
-  exit: Esci
+more: Altro
+open: Apri
+quit: Esci
+remove: Rimuovi
+save: Salva
+save_and_restart: Salva e Riavvia
 shortcuts:
   enable: Abilita Scorciatoie Integrate (ahk)
-  reset: Ripristina ai Predefiniti
   enable_tooltip: Disabilita se implementerete le vostre scorciatoie usando l'API Seelen Core
-  readonly_tooltip: Questa è una scorciatoia di sola lettura
   labels:
-    toggle_launcher: Attiva/Disattiva
-    reserve_top: Riserva Alto
-    reserve_bottom: Riserva Basso
-    reserve_left: Riserva Sinistra
-    reserve_right: Riserva Destra
-    reserve_float: Riserva Fluttuante
-    reserve_stack: Riserva Impilata
-    focus_top: Focus Alto
+    decrease_height: Diminuisci Altezza
+    decrease_width: Diminuisci Larghezza
     focus_bottom: Focus Basso
+    focus_latest: Focus Ultimo
     focus_left: Focus Sinistra
     focus_right: Focus Destra
-    focus_latest: Focus Ultimo
-    increase_width: Aumenta Larghezza
-    decrease_width: Diminuisci Larghezza
+    focus_top: Focus Alto
     increase_height: Aumenta Altezza
-    decrease_height: Diminuisci Altezza
-    restore_sizes: Ripristina Dimensioni
-    switch_workspace_0: Passa al Workspace 1
-    switch_workspace_1: Passa al Workspace 2
-    switch_workspace_2: Passa al Workspace 3
-    switch_workspace_3: Passa al Workspace 4
-    switch_workspace_4: Passa al Workspace 5
-    switch_workspace_5: Passa al Workspace 6
-    switch_workspace_6: Passa al Workspace 7
-    switch_workspace_7: Passa al Workspace 8
-    switch_workspace_8: Passa al Workspace 9
-    switch_workspace_9: Passa al Workspace 10
+    increase_width: Aumenta Larghezza
+    misc_open_settings: Apri Impostazioni
+    misc_toggle_lock_tracing: Attiva/Disattiva Tracciamento Blocco (log)
+    misc_toggle_win_event_tracing: Attiva/Disattiva Tracciamento Eventi Windows (log)
     move_to_workspace_0: Sposta al Workspace 1
     move_to_workspace_1: Sposta al Workspace 2
     move_to_workspace_2: Sposta al Workspace 3
@@ -248,6 +154,13 @@ shortcuts:
     move_to_workspace_7: Sposta al Workspace 8
     move_to_workspace_8: Sposta al Workspace 9
     move_to_workspace_9: Sposta al Workspace 10
+    reserve_bottom: Riserva Basso
+    reserve_float: Riserva Fluttuante
+    reserve_left: Riserva Sinistra
+    reserve_right: Riserva Destra
+    reserve_stack: Riserva Impilata
+    reserve_top: Riserva Alto
+    restore_sizes: Ripristina Dimensioni
     send_to_workspace_0: Invia al Workspace 1
     send_to_workspace_1: Invia al Workspace 2
     send_to_workspace_2: Invia al Workspace 3
@@ -258,10 +171,97 @@ shortcuts:
     send_to_workspace_7: Invia al Workspace 8
     send_to_workspace_8: Invia al Workspace 9
     send_to_workspace_9: Invia al Workspace 10
-    misc_open_settings: Apri Impostazioni
-    misc_toggle_lock_tracing: Attiva/Disattiva Tracciamento Blocco (log)
-    misc_toggle_win_event_tracing: Attiva/Disattiva Tracciamento Eventi Windows (log)
+    switch_workspace_0: Passa al Workspace 1
+    switch_workspace_1: Passa al Workspace 2
+    switch_workspace_2: Passa al Workspace 3
+    switch_workspace_3: Passa al Workspace 4
+    switch_workspace_4: Passa al Workspace 5
+    switch_workspace_5: Passa al Workspace 6
+    switch_workspace_6: Passa al Workspace 7
+    switch_workspace_7: Passa al Workspace 8
+    switch_workspace_8: Passa al Workspace 9
+    switch_workspace_9: Passa al Workspace 10
+    toggle_launcher: Attiva/Disattiva
+  readonly_tooltip: Questa è una scorciatoia di sola lettura
+  reset: Ripristina ai Predefiniti
+sides:
+  bottom: Basso
+  left: Sinistra
+  right: Destra
+  top: Alto
+start:
+  message: >-
+    Benvenuti in Seelen UI, l'ambiente desktop definitivo con un gestore delle
+    finestre a tiling incorporato per migliorare la vostra esperienza Windows!
+    Esplorate una nuova era di efficienza e multitasking con la nostra
+    interfaccia intuitiva e funzionalità avanzate.
+  message_accent: Ottimizzate la vostra produttività con stile!
+  title: Benvenuti!
+toolbar:
+  auto_hide: Nascondi automaticamente
+  delay_to_hide: Ritardo per nascondere
+  delay_to_show: Ritardo per mostrare
+  enable: Abilita Barra Fancy
+  height: Altezza
+  label: Barra
+  placeholder:
+    author: Autore
+    description: Descrizione
+    select: Struttura della Barra
+  use_multiple_monitor_overlap_logic: >-
+    Utilizza la logica di visualizzazione specifica anziché quella di focus
+    singolo
 update:
   available: Aggiornamento Disponibile!
-  downloading: Download in corso...
   channel: Canale di Aggiornamento
+  downloading: Download in corso...
+vd:
+  disabled_windows_version: >-
+    La strategia nativa dei Desktop Virtuali non è disponibile per la vostra
+    versione di Windows.
+  strategy:
+    label: Strategia Desktop Virtuale
+    native: Nativa
+    seelen: Seelen
+wall:
+  backgrounds: Sfondi
+  enable: Abilita Gestore degli Sfondi
+  hours: ore
+  interval: Cambia sfondo ogni
+  minutes: minuti
+  no_background: Slideshow vuoto, usa invece lo sfondo del tema.
+  random: Slideshow casuale
+  seconds: secondi
+weg:
+  auto_hide: Nascondi automaticamente
+  delay_to_hide: Ritardo per nascondere
+  delay_to_show: Ritardo per mostrare
+  dock_side: Posizione
+  enable: Abilita Dock/Barra delle Attività
+  gap: Spazio
+  items:
+    gap: Spazio tra gli Elementi
+    label: Elementi
+    size: Dimensione Elementi
+    visible_separators: Separatori Visibili
+    zoom_size: Dimensione Zoom (usato per i temi)
+  label: Dock/Barra delle Attività
+  margin: Margine
+  padding: Spaziatura
+  use_multiple_monitor_overlap_logic: >-
+    Utilizza la logica di visualizzazione specifica anziché quella di focus
+    singolo
+  width: Larghezza
+wm:
+  author: Autore
+  border:
+    enable: Abilita Bordo delle Finestre
+    offset: Offset Bordo
+    width: Larghezza Bordo
+  description: Descrizione
+  enable: Abilita Gestore delle Finestre a Tiling
+  layout: Layout
+  resize_delta: Delta Ridimensionamento (percento)
+  space_between_containers: Spazio tra i Contenitori
+  workspace_offset: Offset dei Workspace (Margini)
+  workspace_padding: Spaziatura dei Workspace

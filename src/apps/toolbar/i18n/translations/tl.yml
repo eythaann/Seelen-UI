@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Magdagdag ng module
+  remove: Alisin ang module
+  settings: Mga setting
+  task_manager: Task Manager
 media:
   device:
     comunications: Komunikasyon
     multimedia: Multimedia
-  master_volume: Dami ng master
   input_device: Aparato ng pag -input
-  players: Mga manlalaro ng media
+  master_volume: Dami ng master
   output_device: Aparato ng output
+  players: Mga manlalaro ng media
 network:
-  placeholder:
-    password: Password
-  not_found: Walang nahanap na mga network
-  hidden: Nakatagong network
-  disconnect: Idiskonekta
-  more: Higit pang mga setting ng network
+  available: Magagamit na mga network
   connect: Kumonekta
   connected: Nakakonekta sa
-  scanning: Pag-scan para sa mga network
-  available: Magagamit na mga network
+  disconnect: Idiskonekta
+  hidden: Nakatagong network
+  more: Higit pang mga setting ng network
+  not_found: Walang nahanap na mga network
+  placeholder:
+    password: Password
   saved: Mga naka-save na network
+  scanning: Pag-scan para sa mga network
   secured: Naka-encrypt na network
-settings:
-  app_settings: Mga Setting ng App
-  shutdown: Shutdown
-  sleep: Matulog ka na
-  restart: I -restart
-  log_out: Mag -log out
-  title: Mga setting
-  power: Kapangyarihan
 placeholder:
+  battery_remaining: Nananatili
+  bluetooth_devices: Bluetooth at mga aparato
   ethernet_connected: Internet access
   ethernet_disconnected: Walang internet access
-  settings: Mabilis na mga setting
-  battery_remaining: Nananatili
+  notifications: Mga abiso
   open_system_tray: Bukas na tray ng system
   open_user_folder: Buksan ang folder ng gumagamit
-  volume: Dami
-  bluetooth_devices: Bluetooth at mga aparato
+  settings: Mabilis na mga setting
   smart_charge: '- Smart Charge'
-  notifications: Mga abiso
+  volume: Dami
+settings:
+  app_settings: Mga Setting ng App
+  log_out: Mag -log out
+  power: Kapangyarihan
+  restart: I -restart
+  shutdown: Shutdown
+  sleep: Matulog ka na
+  title: Mga setting
 unlabelled_tray: Hindi nabigong icon ng tray
-context_menu:
-  remove: Alisin ang module
-  add_module: Magdagdag ng module
-  task_manager: Task Manager
-  settings: Mga setting

@@ -1,262 +1,262 @@
-sides:
-  left: Bal
-  right: Jobb
-  bottom: Alsó
-  top: Felső
+app_launcher:
+  enable: Engedélyezze az alkalmazás indítóját
+  monitor: Monitor, hogy megmutassa
+  runners:
+    cmd: Parancs
+    explorer: Fut
+    label: Futók
+apps_configurations:
+  app:
+    bindings: Kötés (vegye figyelembe, hogy mindkét lehetőség szükséges)
+    category: Kategória
+    category_placeholder: Egyik sem
+    monitor: Monitor
+    monitor_placeholder: Egyik sem
+    name: Név
+    ok_create: Teremt
+    ok_edit: Frissít
+    ok_readonly: Szerkesztés újként
+    options:
+      float: Úszó
+      force: Erőkezelés
+      hidden: Rejtőzik a dokkból/tálcánból
+      pinned: Rögzített
+      unmanage: Menedzsment
+    options_label: Extra lehetőségek
+    title_create: '{{Név}} létrehozása'
+    title_edit: Szerkesztés {{név}}
+    title_readonly: '{{Név}} megtekintés'
+    weg_options_label: Dokk/tálcás lehetőségek
+    wm_options_label: Ablakkezelő opciók
+    workspace: Munkaterület
+    workspace_placeholder: Egyik sem
+  bundled_msg: >-
+    Ezek a csomagolt konfigurációk nem szerkeszthetők, és úgy tervezték, hogy
+    testreszabás nélkül biztosítsa a legjobb élményt. Automatikusan
+    konfigurálják a leggyakoribb alkalmazásokat az Ön számára.
+  bundled_title: A Seelen -vel csomagolt alkalmazás konfigurációja
+  confirm_delete: Biztos benne, hogy törölni akarja ezt a konfigurációt/S -t?
+  confirm_delete_title: Törlés jóváhagyása
+  delete: Töröl
+  export: Export
+  extra_info: >-
+    A Seelen UI alkalmazásonként csak egy azonosítót használ (az első egyezés
+    található), ezért fontos a sorrend, a legutolsó hozzáadott lesz prioritás,
+    mivel a táblázat alapértelmezés szerint a legújabbtól a régiig van rendezve.
+  identifier:
+    add_block: Blokk hozzáadása
+    and: ÉS
+    id: Azonosító
+    kind: Azonosít
+    matching_strategy: Megfelelő stratégia
+    negation: Tagadás egyeztetés
+    or: VAGY
+    remove: Blokk törlése
+  import: Behozatal
+  new: Új
+  search: Keresés
+  swap: Csere
+cancel: Megszünteti
+close: Közeli
+delete: Töröl
+devtools:
+  app_folders: App mappák
+  custom_config_file: Töltse be az egyéni konfigurációs fájlt
+  data_folder: Adatmappa
+  enable: Engedélyezze a fejlesztői eszközöket
+  install_folder: Telepítési mappa
+  load: Betöltés
+  settings_file: Beállítási fájl
+extras:
+  discord: Viszály
+  exit: Kilépés/kilépés
+  github: Github
+  links: Hivatalos linkek
+  relaunch: Újraindít
+  version: Változat
+general:
+  accent_color: Akcentus szín
+  date_format: Dátum formátum
+  icon_pack:
+    label: Ikoncsomagok
+  language: Nyelv
+  startup: Futtatni indításkor?
+  theme:
+    add: Téma hozzáadása
+    added: A téma már hozzáadott
+    author: Szerző
+    available: Elérhető
+    description: Leírás
+    enabled: Engedélyezve témák
+    label: Témainformációk
+    placeholder: Válassz témát
+    selected: Kiválasztott
+    tags: Címkék
+  wallpaper:
+    select: Válassza ki a háttérképet
 header:
   labels:
     developer: Fejlesztő
     general: Tábornok
-    monitors: Monitorok
-    info: Információ
-    specific_apps: Konkrét alkalmazások
-    seelen_weg: Dokk/tálca
-    seelen_bar: Divatos eszköztár
-    shortcuts: Parancsikonok
-    seelen_wm: Ablakvezető
-    seelen_rofi: Alkalmazásindító
-    virtual_desk: Virtuális asztali számítógépek
     home: Otthon
+    info: Információ
     mods: Bővítmények és widgetek
+    monitors: Monitorok
+    seelen_bar: Divatos eszköztár
+    seelen_rofi: Alkalmazásindító
     seelen_wall: Háttérképkezelő
+    seelen_weg: Dokk/tálca
+    seelen_wm: Ablakvezető
+    shortcuts: Parancsikonok
+    specific_apps: Konkrét alkalmazások
+    virtual_desk: Virtuális asztali számítógépek
+inherit: Örököl
+inProgress: Folyamatban...
+insert: Beilleszt
+loading: Betöltés...
+miscellaneous: Különféle
+mods:
+  plugins: Plugins
+  target: Cél
+  widgets: Kütyü
+monitors_configurations:
+  label: Monitor {{index}}
+more: Több
+open: Nyisd ki
+quit: Kilépés
+remove: Eltávolítás
+save: Megment
+save_and_restart: Mentés és újraindítás
+shortcuts:
+  enable: Engedélyezze az integrált parancsikonokat (AHK)
+  enable_tooltip: >-
+    Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
+    parancsikonjait
+  labels:
+    decrease_height: Csökkenési magasság
+    decrease_width: Csökken a szélesség
+    focus_bottom: Fókusz alsó
+    focus_latest: Fókuszban a legújabb
+    focus_left: Fókusz balra
+    focus_right: Fókuszál
+    focus_top: Fókusz teteje
+    increase_height: Növelje a magasságot
+    increase_width: Növelje a szélességet
+    misc_open_settings: Nyissa meg a beállításokat
+    misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
+    misc_toggle_win_event_tracing: Váltás a győzelem események nyomon követése (naplók)
+    move_to_workspace_0: Költözni a 0 munkaterületre
+    move_to_workspace_1: Költözni az 1. munkaterületre
+    move_to_workspace_2: Költözni a 2. munkaterületre
+    move_to_workspace_3: Költözni a Munkaterületre 3
+    move_to_workspace_4: Költözni a Workspace 4 -re
+    move_to_workspace_5: Költözni az 5. munkaterületre
+    move_to_workspace_6: Költözni a 6. munkaterületre
+    move_to_workspace_7: Költözni a Workspace 7 -re
+    move_to_workspace_8: Költözni a 8. munkaterületre
+    move_to_workspace_9: Költözni a munkaterületre 9
+    reserve_bottom: Tartalék alsó rész
+    reserve_float: Tartalék úszó
+    reserve_left: Tartalék balra
+    reserve_right: Tartalékolási jog
+    reserve_stack: Tartalékköteg
+    reserve_top: Tartalék
+    restore_sizes: Visszaállítani a méreteket
+    send_to_workspace_0: Küldje el a 0 munkaterületre
+    send_to_workspace_1: Küldje el az 1. munkaterületre
+    send_to_workspace_2: Küldje el a Workspace 2 -et
+    send_to_workspace_3: Küldje el a Workspace 3 -ot
+    send_to_workspace_4: Küldje el a Workspace 4 -et
+    send_to_workspace_5: Küldje el az 5. munkaterületre
+    send_to_workspace_6: Küldje el a 6. munkaterületre
+    send_to_workspace_7: Küldje el a Workspace 7 -et
+    send_to_workspace_8: Küldje el a 8. munkaterületre
+    send_to_workspace_9: Küldje el a munkaterületre 9
+    switch_workspace_0: Váltás az 1. munkaterületre
+    switch_workspace_1: Váltás a 2. munkaterületre
+    switch_workspace_2: Váltás a 2. munkaterületre
+    switch_workspace_3: Váltás a 3. munkaterületre
+    switch_workspace_4: Váltás a Workspace 4 -re
+    switch_workspace_5: Váltás az 5. munkaterületre
+    switch_workspace_6: Váltás a 6 munkaterületre
+    switch_workspace_7: Váltás a 7. munkaterületre
+    switch_workspace_8: Váltás a 8. munkaterületre
+    switch_workspace_9: Váltás a munkaterületre 9
+    toggle_launcher: Váltás
+  readonly_tooltip: Ez egy csak olvasható parancsikon
+  reset: Alapértelmezés visszaállítása az alapértelmezésekre
+sides:
+  bottom: Alsó
+  left: Bal
+  right: Jobb
+  top: Felső
 start:
-  title: Üdvözöljük!
   message: >-
     Üdvözöljük a Seelen UI -ban, az Ultimate Desktop környezetben egy beépített
     burkolólap Windows Manager -rel, hogy javítsa a Windows élményét! Fedezze
     fel a hatékonyság és a multitasking új korszakát az intuitív felületünkkel
     és a fejlett funkciókkal.
   message_accent: Optimalizálja a termelékenységet stílusosan!
-general:
-  theme:
-    author: Szerző
-    description: Leírás
-    placeholder: Válassz témát
-    label: Témainformációk
-    add: Téma hozzáadása
-    added: A téma már hozzáadott
-    enabled: Engedélyezve témák
-    tags: Címkék
-    available: Elérhető
-    selected: Kiválasztott
-  startup: Futtatni indításkor?
-  language: Nyelv
-  icon_pack:
-    label: Ikoncsomagok
-  accent_color: Akcentus szín
-  wallpaper:
-    select: Válassza ki a háttérképet
-  date_format: Dátum formátum
+  title: Üdvözöljük!
 toolbar:
-  placeholder:
-    description: Leírás
-    author: Szerző
-    select: Eszköztár szerkezete
-  height: Magasság
-  enable: Engedélyezze a divatos eszköztárat
   auto_hide: Autóbizalom
+  delay_to_hide: Késleltesse az elrejtést
+  delay_to_show: Megjelenítés késleltetése
+  enable: Engedélyezze a divatos eszköztárat
+  height: Magasság
   label: Eszköztár
-  delay_to_hide: Késleltesse az elrejtést
-  delay_to_show: Megjelenítés késleltetése
+  placeholder:
+    author: Szerző
+    description: Leírás
+    select: Eszköztár szerkezete
   use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
-wm:
-  border:
-    enable: Engedélyezze az ablak szegélyét
-    offset: Határ eltolás
-    width: Határszélesség
-  author: Szerző
-  layout: Elrendezés
-  space_between_containers: Hely a konténerek között
-  description: Leírás
-  workspace_padding: Munkaterületek párnázása
-  resize_delta: Átméretezze a DELTA -t (%)
-  workspace_offset: A munkaterületek eltolása (margók)
-  enable: Engedélyezze a csempe ablakkezelőt
-weg:
-  items:
-    zoom_size: Nagyított méret (a témákhoz használt)
-    size: Elemméret
-    visible_separators: Látható elválasztók
-    label: Tárgyak
-    gap: Hely az elemek között
-  padding: Párnázás
-  auto_hide: Automatikus elrejtés
-  width: Szélesség
-  gap: Rés
-  margin: Árrés
-  label: Dokk/tálca
-  enable: Engedélyezze a dokkolót/tálcát
-  dock_side: Pozíció
-  delay_to_hide: Késleltesse az elrejtést
-  delay_to_show: Megjelenítés késleltetése
-  use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
-devtools:
-  load: Betöltés
-  app_folders: App mappák
-  enable: Engedélyezze a fejlesztői eszközöket
-  custom_config_file: Töltse be az egyéni konfigurációs fájlt
-  install_folder: Telepítési mappa
-  data_folder: Adatmappa
-  settings_file: Beállítási fájl
-apps_configurations:
-  app:
-    options:
-      float: Úszó
-      force: Erőkezelés
-      unmanage: Menedzsment
-      pinned: Rögzített
-      hidden: Rejtőzik a dokkból/tálcánból
-    ok_readonly: Szerkesztés újként
-    name: Név
-    ok_create: Teremt
-    workspace_placeholder: Egyik sem
-    workspace: Munkaterület
-    category: Kategória
-    monitor_placeholder: Egyik sem
-    category_placeholder: Egyik sem
-    bindings: Kötés (vegye figyelembe, hogy mindkét lehetőség szükséges)
-    title_readonly: '{{Név}} megtekintés'
-    title_create: '{{Név}} létrehozása'
-    monitor: Monitor
-    ok_edit: Frissít
-    weg_options_label: Dokk/tálcás lehetőségek
-    wm_options_label: Ablakkezelő opciók
-    options_label: Extra lehetőségek
-    title_edit: Szerkesztés {{név}}
-  identifier:
-    or: VAGY
-    add_block: Blokk hozzáadása
-    and: ÉS
-    id: Azonosító
-    matching_strategy: Megfelelő stratégia
-    remove: Blokk törlése
-    negation: Tagadás egyeztetés
-    kind: Azonosít
-  new: Új
-  delete: Töröl
-  bundled_msg: >-
-    Ezek a csomagolt konfigurációk nem szerkeszthetők, és úgy tervezték, hogy
-    testreszabás nélkül biztosítsa a legjobb élményt. Automatikusan
-    konfigurálják a leggyakoribb alkalmazásokat az Ön számára.
-  confirm_delete_title: Törlés jóváhagyása
-  swap: Csere
-  export: Export
-  search: Keresés
-  bundled_title: A Seelen -vel csomagolt alkalmazás konfigurációja
-  import: Behozatal
-  confirm_delete: Biztos benne, hogy törölni akarja ezt a konfigurációt/S -t?
-  extra_info: >-
-    A Seelen UI alkalmazásonként csak egy azonosítót használ (az első egyezés
-    található), ezért fontos a sorrend, a legutolsó hozzáadott lesz prioritás,
-    mivel a táblázat alapértelmezés szerint a legújabbtól a régiig van rendezve.
-extras:
-  relaunch: Újraindít
-  exit: Kilépés/kilépés
-  version: Változat
-  discord: Viszály
-  github: Github
-  links: Hivatalos linkek
-shortcuts:
-  labels:
-    send_to_workspace_6: Küldje el a 6. munkaterületre
-    reserve_top: Tartalék
-    move_to_workspace_4: Költözni a Workspace 4 -re
-    reserve_right: Tartalékolási jog
-    focus_top: Fókusz teteje
-    move_to_workspace_9: Költözni a munkaterületre 9
-    switch_workspace_4: Váltás a Workspace 4 -re
-    send_to_workspace_5: Küldje el az 5. munkaterületre
-    focus_latest: Fókuszban a legújabb
-    switch_workspace_8: Váltás a 8. munkaterületre
-    focus_left: Fókusz balra
-    reserve_stack: Tartalékköteg
-    move_to_workspace_5: Költözni az 5. munkaterületre
-    send_to_workspace_2: Küldje el a Workspace 2 -et
-    focus_bottom: Fókusz alsó
-    increase_width: Növelje a szélességet
-    send_to_workspace_3: Küldje el a Workspace 3 -ot
-    move_to_workspace_2: Költözni a 2. munkaterületre
-    send_to_workspace_1: Küldje el az 1. munkaterületre
-    move_to_workspace_3: Költözni a Munkaterületre 3
-    switch_workspace_9: Váltás a munkaterületre 9
-    switch_workspace_6: Váltás a 6 munkaterületre
-    reserve_left: Tartalék balra
-    decrease_height: Csökkenési magasság
-    increase_height: Növelje a magasságot
-    reserve_float: Tartalék úszó
-    focus_right: Fókuszál
-    switch_workspace_2: Váltás a 2. munkaterületre
-    move_to_workspace_1: Költözni az 1. munkaterületre
-    send_to_workspace_8: Küldje el a 8. munkaterületre
-    restore_sizes: Visszaállítani a méreteket
-    move_to_workspace_7: Költözni a Workspace 7 -re
-    switch_workspace_7: Váltás a 7. munkaterületre
-    move_to_workspace_0: Költözni a 0 munkaterületre
-    send_to_workspace_0: Küldje el a 0 munkaterületre
-    move_to_workspace_8: Költözni a 8. munkaterületre
-    send_to_workspace_4: Küldje el a Workspace 4 -et
-    switch_workspace_5: Váltás az 5. munkaterületre
-    switch_workspace_3: Váltás a 3. munkaterületre
-    reserve_bottom: Tartalék alsó rész
-    decrease_width: Csökken a szélesség
-    send_to_workspace_9: Küldje el a munkaterületre 9
-    move_to_workspace_6: Költözni a 6. munkaterületre
-    send_to_workspace_7: Küldje el a Workspace 7 -et
-    switch_workspace_0: Váltás az 1. munkaterületre
-    switch_workspace_1: Váltás a 2. munkaterületre
-    misc_toggle_win_event_tracing: Váltás a győzelem események nyomon követése (naplók)
-    misc_open_settings: Nyissa meg a beállításokat
-    misc_toggle_lock_tracing: Váltás zárkövetés (naplók)
-    toggle_launcher: Váltás
-  enable_tooltip: >-
-    Tiltsa le, ha a Seelen Core API segítségével megvalósítja saját
-    parancsikonjait
-  enable: Engedélyezze az integrált parancsikonokat (AHK)
-  reset: Alapértelmezés visszaállítása az alapértelmezésekre
-  readonly_tooltip: Ez egy csak olvasható parancsikon
-inProgress: Folyamatban...
-quit: Kilépés
-cancel: Megszünteti
-save: Megment
-delete: Töröl
-loading: Betöltés...
-open: Nyisd ki
-vd:
-  strategy:
-    native: Bennszülött
-    seelen: Seelen
-    label: Virtuális asztali stratégia
-  disabled_windows_version: A natív virtuális asztali stratégia nem érhető el a Windows verziójához.
-save_and_restart: Mentés és újraindítás
-monitors_configurations:
-  label: Monitor {{index}}
-wall:
-  backgrounds: Háttérképek
-  no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
-  enable: Engedélyezze a háttérképkezelőt
-  interval: Változtasd meg minden háttérképet
-  random: Véletlenszerűsítse a diavetítést
-  minutes: jegyzőkönyv
-  hours: órák
-  seconds: másodpercek
-app_launcher:
-  runners:
-    cmd: Parancs
-    explorer: Fut
-    label: Futók
-  monitor: Monitor, hogy megmutassa
-  enable: Engedélyezze az alkalmazás indítóját
-inherit: Örököl
-more: Több
-insert: Beilleszt
-close: Közeli
 update:
   available: A frissítés elérhető!
   channel: Frissítési csatorna
   downloading: Letöltés ...
-miscellaneous: Különféle
-mods:
-  target: Cél
-  plugins: Plugins
-  widgets: Kütyü
-remove: Eltávolítás
+vd:
+  disabled_windows_version: A natív virtuális asztali stratégia nem érhető el a Windows verziójához.
+  strategy:
+    label: Virtuális asztali stratégia
+    native: Bennszülött
+    seelen: Seelen
+wall:
+  backgrounds: Háttérképek
+  enable: Engedélyezze a háttérképkezelőt
+  hours: órák
+  interval: Változtasd meg minden háttérképet
+  minutes: jegyzőkönyv
+  no_background: Üres diavetítés, inkább a téma hátterének felhasználásával.
+  random: Véletlenszerűsítse a diavetítést
+  seconds: másodpercek
+weg:
+  auto_hide: Automatikus elrejtés
+  delay_to_hide: Késleltesse az elrejtést
+  delay_to_show: Megjelenítés késleltetése
+  dock_side: Pozíció
+  enable: Engedélyezze a dokkolót/tálcát
+  gap: Rés
+  items:
+    gap: Hely az elemek között
+    label: Tárgyak
+    size: Elemméret
+    visible_separators: Látható elválasztók
+    zoom_size: Nagyított méret (a témákhoz használt)
+  label: Dokk/tálca
+  margin: Árrés
+  padding: Párnázás
+  use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
+  width: Szélesség
+wm:
+  author: Szerző
+  border:
+    enable: Engedélyezze az ablak szegélyét
+    offset: Határ eltolás
+    width: Határszélesség
+  description: Leírás
+  enable: Engedélyezze a csempe ablakkezelőt
+  layout: Elrendezés
+  resize_delta: Átméretezze a DELTA -t (%)
+  space_between_containers: Hely a konténerek között
+  workspace_offset: A munkaterületek eltolása (margók)
+  workspace_padding: Munkaterületek párnázása

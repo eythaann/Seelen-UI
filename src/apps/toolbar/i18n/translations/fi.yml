@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Lisää moduuli
+  remove: Poista moduuli
+  settings: Asetukset
+  task_manager: Tehtävienhallinta
 media:
   device:
     comunications: Viitaus
     multimedia: Multimedia
   input_device: Syöttölaite
   master_volume: Pää-äänenvoimakkuus
-  players: Mediapelaajat
   output_device: Lähtölaite
+  players: Mediapelaajat
 network:
+  available: Käytettävissä olevat verkot
+  connect: Kytkeä
+  connected: 'Yhdistetty:'
+  disconnect: Katkaista
+  hidden: Piilotettu verkko
+  more: Lisää verkkoasetuksia
+  not_found: Verkkoja ei löydy
   placeholder:
     password: Salasana
-  connect: Kytkeä
-  not_found: Verkkoja ei löydy
-  disconnect: Katkaista
-  more: Lisää verkkoasetuksia
-  hidden: Piilotettu verkko
-  available: Käytettävissä olevat verkot
   saved: Tallennetut verkot
-  connected: 'Yhdistetty:'
-  secured: Salattu verkko
   scanning: Etsii verkkoja
-settings:
-  sleep: Nukkua
-  log_out: Kirjautua ulos
-  restart: Uudelleenkäynnistää
-  title: asetukset
-  shutdown: Sammuttaa
-  app_settings: Sovellusasetukset
-  power: Voima
+  secured: Salattu verkko
 placeholder:
-  bluetooth_devices: Bluetooth ja laitteet
   battery_remaining: '% jäljelle jäänyt'
-  settings: Pika -asetukset
-  ethernet_disconnected: Ei Internet-yhteyttä
+  bluetooth_devices: Bluetooth ja laitteet
   ethernet_connected: Internet-yhteys
+  ethernet_disconnected: Ei Internet-yhteyttä
+  notifications: Ilmoitukset
   open_system_tray: Avoin järjestelmälokero
   open_user_folder: Avaa käyttäjäkansio
+  settings: Pika -asetukset
   smart_charge: '- Älykäs maksu'
   volume: Tilavuus
-  notifications: Ilmoitukset
+settings:
+  app_settings: Sovellusasetukset
+  log_out: Kirjautua ulos
+  power: Voima
+  restart: Uudelleenkäynnistää
+  shutdown: Sammuttaa
+  sleep: Nukkua
+  title: asetukset
 unlabelled_tray: Leimaton lokerokuvake
-context_menu:
-  add_module: Lisää moduuli
-  remove: Poista moduuli
-  task_manager: Tehtävienhallinta
-  settings: Asetukset

@@ -1,259 +1,259 @@
-sides:
-  right: Haki
-  top: Juu
-  left: Kushoto
-  bottom: Chini
-header:
-  labels:
-    developer: Msanidi programu
-    seelen_wm: Meneja wa Window
-    info: Habari
-    seelen_bar: Zana ya Dhana
-    shortcuts: Njia za mkato
-    specific_apps: Programu maalum
-    seelen_weg: Dock/Taskbar
-    general: Mkuu
-    monitors: Wachunguzi
-    seelen_rofi: Kizindua programu
-    virtual_desk: Dawati za kweli
-    home: Nyumbani
-    mods: Plugins & Widgets
-    seelen_wall: Meneja wa Ukuta
-start:
-  message_accent: Boresha tija yako na mtindo!
-  message: >-
-    Karibu Seelen UI, mazingira ya mwisho ya desktop na meneja wa Windows
-    aliyeingizwa ili kuongeza uzoefu wako wa Windows! Chunguza enzi mpya ya
-    ufanisi na multitasking na interface yetu ya angavu na sifa za hali ya juu.
-  title: Karibu!
-general:
-  theme:
-    enabled: Mada zilizowezeshwa
-    description: Maelezo
-    author: Mwandishi
-    tags: Lebo
-    label: Habari ya mada
-    added: Mada tayari imeongezwa
-    add: Ongeza mandhari
-    placeholder: Chagua mandhari
-    selected: Kuchaguliwa
-    available: Inapatikana
-  language: Lugha
-  startup: Kuendesha kuanza?
-  icon_pack:
-    label: Pakiti za ikoni
-  accent_color: Rangi ya lafudhi
-  wallpaper:
-    select: Chagua Ukuta
-  date_format: Muundo wa tarehe
-toolbar:
-  placeholder:
-    description: Maelezo
-    select: Muundo wa zana
-    author: Mwandishi
-  enable: Wezesha zana ya dhana
-  height: Urefu
-  auto_hide: Kujificha kiotomatiki
-  label: Zana
-  delay_to_show: Kuchelewa kuonyesha
-  delay_to_hide: Kuchelewa kujificha
-  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
-wm:
-  border:
-    enable: Wezesha mpaka wa dirisha
-    width: Upana wa mpaka
-    offset: Kukabiliana na mpaka
-  author: Mwandishi
-  resize_delta: Rudisha Delta (%)
-  workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
-  description: Maelezo
-  space_between_containers: Nafasi kati ya vyombo
-  layout: Mpangilio
-  workspace_padding: Nafasi za kazi
-  enable: Washa Meneja wa Dirisha la Tiling
-weg:
-  items:
-    size: Saizi ya bidhaa
-    gap: Nafasi kati ya vitu
-    label: Vitu
-    zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
-    visible_separators: Watenganisho unaoonekana
-  gap: Pengo
-  width: Upana
-  margin: Margin
-  padding: Padding
-  auto_hide: Kujificha kiotomatiki
-  label: Dock/Taskbar
-  enable: Wezesha Dock/Taskbar
-  dock_side: Msimamo
-  delay_to_show: Kuchelewa kuonyesha
-  delay_to_hide: Kuchelewa kujificha
-  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
-devtools:
-  app_folders: Folda za programu
-  enable: Wezesha zana za msanidi programu
-  load: Mzigo
-  settings_file: Faili ya mipangilio
-  data_folder: Folda ya data
-  install_folder: Folda ya usanikishaji
-  custom_config_file: Pakia faili ya usanidi wa kawaida
+app_launcher:
+  enable: Wezesha Kizindua cha Programu
+  monitor: Fuatilia kuonyesha
+  runners:
+    cmd: Amri
+    explorer: Kukimbia
+    label: Wakimbiaji
 apps_configurations:
   app:
-    options:
-      unmanage: Kuhama
-      force: Nguvu kusimamia
-      pinned: Iliyoandikwa
-      float: Kuelea
-      hidden: Ficha kutoka Dock/Taskbar
-    title_create: Kuunda {{jina}}
-    title_readonly: Kuangalia {{jina}}
-    category_placeholder: Hakuna
-    monitor_placeholder: Hakuna
-    monitor: Kufuatilia
-    ok_edit: Sasisha
-    name: Jina
     bindings: Kufunga (kumbuka chaguzi zote mbili zinahitajika)
     category: Jamii
-    workspace: Nafasi ya kazi
-    ok_readonly: Hariri kama mpya
-    workspace_placeholder: Hakuna
+    category_placeholder: Hakuna
+    monitor: Kufuatilia
+    monitor_placeholder: Hakuna
+    name: Jina
     ok_create: Unda
+    ok_edit: Sasisha
+    ok_readonly: Hariri kama mpya
+    options:
+      float: Kuelea
+      force: Nguvu kusimamia
+      hidden: Ficha kutoka Dock/Taskbar
+      pinned: Iliyoandikwa
+      unmanage: Kuhama
+    options_label: Chaguzi za ziada
+    title_create: Kuunda {{jina}}
+    title_edit: Kuhariri {{jina}}
+    title_readonly: Kuangalia {{jina}}
     weg_options_label: Chaguzi za Dock/Taskbar
     wm_options_label: Chaguzi za Meneja wa Dirisha
-    options_label: Chaguzi za ziada
-    title_edit: Kuhariri {{jina}}
-  identifier:
-    negation: Negate kulinganisha
-    or: Au
-    kind: Tambua na
-    remove: Futa block
-    matching_strategy: Mkakati wa kulinganisha
-    and: Na
-    id: Kitambulisho
-    add_block: Ongeza block
-  confirm_delete: Je! Una uhakika unataka kufuta usanidi huu/s?
+    workspace: Nafasi ya kazi
+    workspace_placeholder: Hakuna
   bundled_msg: >-
     Usanidi huu uliowekwa wazi hauwezi kuhaririwa na umeundwa kukupa uzoefu bora
     bila ubinafsishaji. Wao husanidi moja kwa moja programu za kawaida kwako.
-  export: Kuuza nje
   bundled_title: Programu ya kusanidi na Seelen
-  search: Tafuta
-  new: Mpya
-  delete: Futa
-  import: Kuagiza
+  confirm_delete: Je! Una uhakika unataka kufuta usanidi huu/s?
   confirm_delete_title: Thibitisha Futa
-  swap: Kubadilishana
+  delete: Futa
+  export: Kuuza nje
   extra_info: >-
     Seelen UI hutumia kitambulisho kimoja tu kwa kila programu (kwanza
     kupatikana) kwa hivyo mpangilio wa jinsi ulivyobainishwa ni muhimu, ya hivi
     punde zaidi yatapewa kipaumbele, kwani kumbuka jedwali hupangwa kwa
     chaguo-msingi kutoka kwa hivi karibuni hadi vya zamani.
-extras:
-  relaunch: Kuzindua tena
-  discord: Ugomvi
-  github: GitHub
-  exit: Acha/exit
-  links: Viungo rasmi
-  version: Toleo
-shortcuts:
-  labels:
-    focus_top: Kuzingatia juu
-    increase_width: Ongeza upana
-    restore_sizes: Kurejesha ukubwa
-    focus_left: Kuzingatia kushoto
-    switch_workspace_2: Badilika kwenye nafasi ya kazi 2
-    decrease_height: Kupungua urefu
-    reserve_top: Hifadhi juu
-    reserve_right: Hifadhi haki
-    reserve_stack: Hifadhi ya Hifadhi
-    focus_latest: Kuzingatia hivi karibuni
-    reserve_bottom: Hifadhi chini
-    focus_right: Zingatia kulia
-    switch_workspace_9: Badilika kwa nafasi ya kazi 9
-    switch_workspace_8: Badilika kwa nafasi ya kazi 8
-    move_to_workspace_5: Hoja kwa nafasi ya kazi 5
-    send_to_workspace_1: Tuma kwa nafasi ya kazi 1
-    send_to_workspace_8: Tuma kwa nafasi ya kazi 8
-    send_to_workspace_5: Tuma kwa nafasi ya kazi 5
-    switch_workspace_5: Badilika kwa nafasi ya kazi 5
-    send_to_workspace_4: Tuma kwa nafasi ya kazi 4
-    move_to_workspace_2: Hoja kwenye nafasi ya kazi 2
-    move_to_workspace_8: Hoja kwa nafasi ya kazi 8
-    move_to_workspace_3: Hoja kwenye nafasi ya kazi 3
-    reserve_float: Hifadhi kuelea
-    reserve_left: Hifadhi kushoto
-    switch_workspace_6: Badilika kwa nafasi ya kazi 6
-    decrease_width: Punguza upana
-    send_to_workspace_6: Tuma kwa nafasi ya kazi 6
-    focus_bottom: Kuzingatia chini
-    switch_workspace_7: Badilika kwa nafasi ya kazi 7
-    move_to_workspace_7: Hoja kwa nafasi ya kazi 7
-    increase_height: Ongeza urefu
-    send_to_workspace_2: Tuma kwa nafasi ya kazi 2
-    move_to_workspace_0: Hoja kwenye nafasi ya kazi 0
-    move_to_workspace_6: Hoja kwa nafasi ya kazi 6
-    send_to_workspace_0: Tuma kwa nafasi ya kazi 0
-    switch_workspace_3: Badilika kwa nafasi ya kazi 3
-    switch_workspace_4: Badilika kwa nafasi ya kazi 4
-    send_to_workspace_3: Tuma kwa nafasi ya kazi 3
-    move_to_workspace_1: Hoja kwa nafasi ya kazi 1
-    send_to_workspace_7: Tuma kwa nafasi ya kazi 7
-    move_to_workspace_4: Hoja kwa nafasi ya kazi 4
-    send_to_workspace_9: Tuma kwa nafasi ya kazi 9
-    move_to_workspace_9: Hoja kwa nafasi ya kazi 9
-    switch_workspace_1: Badilika kwenye nafasi ya kazi 2
-    switch_workspace_0: Badilika kwenye nafasi ya kazi 1
-    misc_open_settings: Mipangilio ya Fungua
-    misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
-    misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
-    toggle_launcher: Kugeuza
-  enable: Wezesha njia za mkato zilizojumuishwa (AHK)
-  enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
-  reset: Rudisha kwa defaults
-  readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
-inProgress: Inaendelea...
-loading: Inapakia ...
-delete: Futa
+  identifier:
+    add_block: Ongeza block
+    and: Na
+    id: Kitambulisho
+    kind: Tambua na
+    matching_strategy: Mkakati wa kulinganisha
+    negation: Negate kulinganisha
+    or: Au
+    remove: Futa block
+  import: Kuagiza
+  new: Mpya
+  search: Tafuta
+  swap: Kubadilishana
 cancel: Ghairi
-save: Kuokoa
-quit: Acha
-open: Wazi
-vd:
-  strategy:
-    label: Mkakati wa kweli wa desktop
-    seelen: Seelen
-    native: Mzaliwa
-  disabled_windows_version: Mkakati wa asili wa desktop haupatikani kwa toleo lako la Windows.
-save_and_restart: Okoa na uanze tena
-monitors_configurations:
-  label: Monitor {{index}}
-wall:
-  no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
-  backgrounds: Wallpapers
-  enable: Washa Meneja wa Ukuta
-  interval: Badilisha Ukuta kila
-  random: Sisitiza slideshow
-  hours: masaa
-  minutes: dakika
-  seconds: sekunde
-app_launcher:
-  runners:
-    label: Wakimbiaji
-    explorer: Kukimbia
-    cmd: Amri
-  monitor: Fuatilia kuonyesha
-  enable: Wezesha Kizindua cha Programu
-more: Zaidi
-inherit: Urithi
-insert: Ingiza
 close: Karibu
-update:
-  available: Sasisha inapatikana!
-  downloading: Kupakua ...
-  channel: Sasisha kituo
+delete: Futa
+devtools:
+  app_folders: Folda za programu
+  custom_config_file: Pakia faili ya usanidi wa kawaida
+  data_folder: Folda ya data
+  enable: Wezesha zana za msanidi programu
+  install_folder: Folda ya usanikishaji
+  load: Mzigo
+  settings_file: Faili ya mipangilio
+extras:
+  discord: Ugomvi
+  exit: Acha/exit
+  github: GitHub
+  links: Viungo rasmi
+  relaunch: Kuzindua tena
+  version: Toleo
+general:
+  accent_color: Rangi ya lafudhi
+  date_format: Muundo wa tarehe
+  icon_pack:
+    label: Pakiti za ikoni
+  language: Lugha
+  startup: Kuendesha kuanza?
+  theme:
+    add: Ongeza mandhari
+    added: Mada tayari imeongezwa
+    author: Mwandishi
+    available: Inapatikana
+    description: Maelezo
+    enabled: Mada zilizowezeshwa
+    label: Habari ya mada
+    placeholder: Chagua mandhari
+    selected: Kuchaguliwa
+    tags: Lebo
+  wallpaper:
+    select: Chagua Ukuta
+header:
+  labels:
+    developer: Msanidi programu
+    general: Mkuu
+    home: Nyumbani
+    info: Habari
+    mods: Plugins & Widgets
+    monitors: Wachunguzi
+    seelen_bar: Zana ya Dhana
+    seelen_rofi: Kizindua programu
+    seelen_wall: Meneja wa Ukuta
+    seelen_weg: Dock/Taskbar
+    seelen_wm: Meneja wa Window
+    shortcuts: Njia za mkato
+    specific_apps: Programu maalum
+    virtual_desk: Dawati za kweli
+inherit: Urithi
+inProgress: Inaendelea...
+insert: Ingiza
+loading: Inapakia ...
 miscellaneous: Miscellaneous
 mods:
   plugins: Programu -jalizi
   target: Lengo
   widgets: Vilivyoandikwa
+monitors_configurations:
+  label: Monitor {{index}}
+more: Zaidi
+open: Wazi
+quit: Acha
 remove: Ondoa
+save: Kuokoa
+save_and_restart: Okoa na uanze tena
+shortcuts:
+  enable: Wezesha njia za mkato zilizojumuishwa (AHK)
+  enable_tooltip: Lemaza ikiwa utatumia njia zako za mkato kwa kutumia API ya Seelen Core
+  labels:
+    decrease_height: Kupungua urefu
+    decrease_width: Punguza upana
+    focus_bottom: Kuzingatia chini
+    focus_latest: Kuzingatia hivi karibuni
+    focus_left: Kuzingatia kushoto
+    focus_right: Zingatia kulia
+    focus_top: Kuzingatia juu
+    increase_height: Ongeza urefu
+    increase_width: Ongeza upana
+    misc_open_settings: Mipangilio ya Fungua
+    misc_toggle_lock_tracing: Kubadilisha Ufuatiliaji wa Kufunga (Magogo)
+    misc_toggle_win_event_tracing: Kubadilisha Win Tukio Kufuatilia (Magogo)
+    move_to_workspace_0: Hoja kwenye nafasi ya kazi 0
+    move_to_workspace_1: Hoja kwa nafasi ya kazi 1
+    move_to_workspace_2: Hoja kwenye nafasi ya kazi 2
+    move_to_workspace_3: Hoja kwenye nafasi ya kazi 3
+    move_to_workspace_4: Hoja kwa nafasi ya kazi 4
+    move_to_workspace_5: Hoja kwa nafasi ya kazi 5
+    move_to_workspace_6: Hoja kwa nafasi ya kazi 6
+    move_to_workspace_7: Hoja kwa nafasi ya kazi 7
+    move_to_workspace_8: Hoja kwa nafasi ya kazi 8
+    move_to_workspace_9: Hoja kwa nafasi ya kazi 9
+    reserve_bottom: Hifadhi chini
+    reserve_float: Hifadhi kuelea
+    reserve_left: Hifadhi kushoto
+    reserve_right: Hifadhi haki
+    reserve_stack: Hifadhi ya Hifadhi
+    reserve_top: Hifadhi juu
+    restore_sizes: Kurejesha ukubwa
+    send_to_workspace_0: Tuma kwa nafasi ya kazi 0
+    send_to_workspace_1: Tuma kwa nafasi ya kazi 1
+    send_to_workspace_2: Tuma kwa nafasi ya kazi 2
+    send_to_workspace_3: Tuma kwa nafasi ya kazi 3
+    send_to_workspace_4: Tuma kwa nafasi ya kazi 4
+    send_to_workspace_5: Tuma kwa nafasi ya kazi 5
+    send_to_workspace_6: Tuma kwa nafasi ya kazi 6
+    send_to_workspace_7: Tuma kwa nafasi ya kazi 7
+    send_to_workspace_8: Tuma kwa nafasi ya kazi 8
+    send_to_workspace_9: Tuma kwa nafasi ya kazi 9
+    switch_workspace_0: Badilika kwenye nafasi ya kazi 1
+    switch_workspace_1: Badilika kwenye nafasi ya kazi 2
+    switch_workspace_2: Badilika kwenye nafasi ya kazi 2
+    switch_workspace_3: Badilika kwa nafasi ya kazi 3
+    switch_workspace_4: Badilika kwa nafasi ya kazi 4
+    switch_workspace_5: Badilika kwa nafasi ya kazi 5
+    switch_workspace_6: Badilika kwa nafasi ya kazi 6
+    switch_workspace_7: Badilika kwa nafasi ya kazi 7
+    switch_workspace_8: Badilika kwa nafasi ya kazi 8
+    switch_workspace_9: Badilika kwa nafasi ya kazi 9
+    toggle_launcher: Kugeuza
+  readonly_tooltip: Hii ni njia ya mkato ya kusoma tu
+  reset: Rudisha kwa defaults
+sides:
+  bottom: Chini
+  left: Kushoto
+  right: Haki
+  top: Juu
+start:
+  message: >-
+    Karibu Seelen UI, mazingira ya mwisho ya desktop na meneja wa Windows
+    aliyeingizwa ili kuongeza uzoefu wako wa Windows! Chunguza enzi mpya ya
+    ufanisi na multitasking na interface yetu ya angavu na sifa za hali ya juu.
+  message_accent: Boresha tija yako na mtindo!
+  title: Karibu!
+toolbar:
+  auto_hide: Kujificha kiotomatiki
+  delay_to_hide: Kuchelewa kujificha
+  delay_to_show: Kuchelewa kuonyesha
+  enable: Wezesha zana ya dhana
+  height: Urefu
+  label: Zana
+  placeholder:
+    author: Mwandishi
+    description: Maelezo
+    select: Muundo wa zana
+  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
+update:
+  available: Sasisha inapatikana!
+  channel: Sasisha kituo
+  downloading: Kupakua ...
+vd:
+  disabled_windows_version: Mkakati wa asili wa desktop haupatikani kwa toleo lako la Windows.
+  strategy:
+    label: Mkakati wa kweli wa desktop
+    native: Mzaliwa
+    seelen: Seelen
+wall:
+  backgrounds: Wallpapers
+  enable: Washa Meneja wa Ukuta
+  hours: masaa
+  interval: Badilisha Ukuta kila
+  minutes: dakika
+  no_background: Slideshow tupu, kwa kutumia mandharinyuma ya mandhari badala yake.
+  random: Sisitiza slideshow
+  seconds: sekunde
+weg:
+  auto_hide: Kujificha kiotomatiki
+  delay_to_hide: Kuchelewa kujificha
+  delay_to_show: Kuchelewa kuonyesha
+  dock_side: Msimamo
+  enable: Wezesha Dock/Taskbar
+  gap: Pengo
+  items:
+    gap: Nafasi kati ya vitu
+    label: Vitu
+    size: Saizi ya bidhaa
+    visible_separators: Watenganisho unaoonekana
+    zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
+  label: Dock/Taskbar
+  margin: Margin
+  padding: Padding
+  use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
+  width: Upana
+wm:
+  author: Mwandishi
+  border:
+    enable: Wezesha mpaka wa dirisha
+    offset: Kukabiliana na mpaka
+    width: Upana wa mpaka
+  description: Maelezo
+  enable: Washa Meneja wa Dirisha la Tiling
+  layout: Mpangilio
+  resize_delta: Rudisha Delta (%)
+  space_between_containers: Nafasi kati ya vyombo
+  workspace_offset: Nafasi za kazi za kukabiliana (pembezoni)
+  workspace_padding: Nafasi za kazi

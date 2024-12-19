@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: Korrika
     cmd: Agindu
+    explorer: Korrika
 footer:
   shortcuts: Erakutsi lasterbideak
 header:

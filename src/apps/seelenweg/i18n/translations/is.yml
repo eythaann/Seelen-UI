@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Bættu við Start Module
-  media: Bættu við Media Module
-  add_file: Pinna sérsniðna skrá
-  add_folder: Pinna sérsniðna möppu
-  task_manager: Verkefnastjóri
-  settings: Stillingar
 app_menu:
-  pin_to_left: Pinna til vinstri
-  pin_to_center: Pinna í miðju
-  run_as: Hlaupa sem stjórnandi
-  close_multiple: Lokaðu öllu
   close: Lokaðu
-  unpin: Taka úr
+  close_multiple: Lokaðu öllu
   copy_handles: Afrit handföng
+  kill: Kill Process
+  kill_multiple: Drepa alla ferla
   open_file_location: Opnaðu staðsetningu skráar
   pin: PIN
+  pin_to_center: Pinna í miðju
+  pin_to_left: Pinna til vinstri
   pin_to_right: Pinna til hægri
-  kill_multiple: Drepa alla ferla
-  kill: Kill Process
+  run_as: Hlaupa sem stjórnandi
+  unpin: Taka úr
+media:
+  not_playing: Ekkert er að spila
 media_menu:
   remove: Fjarlægðu miðlunareininguna
 start_menu:
   remove: Fjarlægðu upphafseininguna
-media:
-  not_playing: Ekkert er að spila
+taskbar_menu:
+  add_file: Pinna sérsniðna skrá
+  add_folder: Pinna sérsniðna möppu
+  media: Bættu við Media Module
+  settings: Stillingar
+  start: Bættu við Start Module
+  task_manager: Verkefnastjóri

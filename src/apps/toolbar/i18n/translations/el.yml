@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: ΠΟΛΥΜΕΣΑ
-    comunications: Διαβιβάσεις
-  input_device: Συσκευή εισόδου
-  master_volume: Κύριος όγκος
-  players: Media players
-  output_device: Συσκευή εξόδου
-network:
-  placeholder:
-    password: Κωδικός πρόσβασης
-  more: Περισσότερες ρυθμίσεις δικτύου
-  disconnect: Αποσυνδέω
-  connect: Συνδέω-συωδεομαι
-  hidden: Κρυμμένο δίκτυο
-  not_found: Δεν βρέθηκαν δίκτυα
-  connected: Συνδεδεμένο με
-  scanning: Σάρωση για δίκτυα
-  saved: Αποθηκευμένα δίκτυα
-  available: Διαθέσιμα δίκτυα
-  secured: Κρυπτογραφημένο δίκτυο
-settings:
-  app_settings: Ρυθμίσεις εφαρμογής
-  shutdown: ΤΕΡΜΑΤΙΣΜΟΣ ΛΕΙΤΟΥΡΓΙΑΣ
-  title: Ρυθμίσεις
-  log_out: Αποσύνδεση
-  restart: Επανεκκίνηση
-  sleep: Υπνος
-  power: Εξουσία
-placeholder:
-  settings: Γρήγορες ρυθμίσεις
-  smart_charge: '- έξυπνη χρέωση'
-  volume: Ενταση ΗΧΟΥ
-  open_system_tray: Ανοίξτε το δίσκο του συστήματος
-  open_user_folder: Ανοίξτε το φάκελο χρήστη
-  battery_remaining: '% υπόλοιπο'
-  bluetooth_devices: Bluetooth & συσκευές
-  ethernet_connected: πρόσβαση στο διαδίκτυο
-  ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο
-  notifications: Ειδοποιήσεις
-unlabelled_tray: Εικονίδιο δίσκων χωρίς
 context_menu:
   add_module: Προσθήκη ενότητας
   remove: Αφαιρέστε την ενότητα
   settings: Ρυθμίσεις
   task_manager: Task Manager
+media:
+  device:
+    comunications: Διαβιβάσεις
+    multimedia: ΠΟΛΥΜΕΣΑ
+  input_device: Συσκευή εισόδου
+  master_volume: Κύριος όγκος
+  output_device: Συσκευή εξόδου
+  players: Media players
+network:
+  available: Διαθέσιμα δίκτυα
+  connect: Συνδέω-συωδεομαι
+  connected: Συνδεδεμένο με
+  disconnect: Αποσυνδέω
+  hidden: Κρυμμένο δίκτυο
+  more: Περισσότερες ρυθμίσεις δικτύου
+  not_found: Δεν βρέθηκαν δίκτυα
+  placeholder:
+    password: Κωδικός πρόσβασης
+  saved: Αποθηκευμένα δίκτυα
+  scanning: Σάρωση για δίκτυα
+  secured: Κρυπτογραφημένο δίκτυο
+placeholder:
+  battery_remaining: '% υπόλοιπο'
+  bluetooth_devices: Bluetooth & συσκευές
+  ethernet_connected: πρόσβαση στο διαδίκτυο
+  ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο
+  notifications: Ειδοποιήσεις
+  open_system_tray: Ανοίξτε το δίσκο του συστήματος
+  open_user_folder: Ανοίξτε το φάκελο χρήστη
+  settings: Γρήγορες ρυθμίσεις
+  smart_charge: '- έξυπνη χρέωση'
+  volume: Ενταση ΗΧΟΥ
+settings:
+  app_settings: Ρυθμίσεις εφαρμογής
+  log_out: Αποσύνδεση
+  power: Εξουσία
+  restart: Επανεκκίνηση
+  shutdown: ΤΕΡΜΑΤΙΣΜΟΣ ΛΕΙΤΟΥΡΓΙΑΣ
+  sleep: Υπνος
+  title: Ρυθμίσεις
+unlabelled_tray: Εικονίδιο δίσκων χωρίς

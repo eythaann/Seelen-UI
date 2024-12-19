@@ -1,263 +1,263 @@
-sides:
-  bottom: దిగువన
-  top: టాప్
-  left: ఎడమ
-  right: కుడి
-header:
-  labels:
-    info: సమాచారం
-    general: జనరల్
-    monitors: మానిటర్లు
-    seelen_wm: విండో మేనేజర్
-    shortcuts: సత్వరమార్గాలు
-    developer: డెవలపర్
-    specific_apps: నిర్దిష్ట యాప్‌లు
-    seelen_bar: ఫ్యాన్సీ టూల్‌బార్
-    seelen_weg: డాక్/టాస్క్‌బార్
-    seelen_rofi: అనువర్తన లాంచర్
-    virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
-    home: హోమ్
-    mods: ప్లగిన్‌లు & విడ్జెట్‌లు
-    seelen_wall: వాల్పేపర్ మేనేజర్
-start:
-  title: స్వాగతం!
-  message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
-  message: >-
-    సీలెన్ UIకి స్వాగతం, మీ Windows అనుభవాన్ని మెరుగుపరచడానికి ఇన్‌కార్పొరేటెడ్
-    టైలింగ్ విండోస్ మేనేజర్‌తో అంతిమ డెస్క్‌టాప్ ఎన్విరాన్‌మెంట్! మా సహజమైన
-    ఇంటర్‌ఫేస్ మరియు అధునాతన ఫీచర్‌లతో సమర్ధత మరియు బహువిధి యొక్క కొత్త యుగాన్ని
-    అన్వేషించండి.
-general:
-  theme:
-    tags: టాగ్లు
-    placeholder: థీమ్‌ని ఎంచుకోండి
-    description: వివరణ
-    author: రచయిత
-    label: థీమ్ సమాచారం
-    added: థీమ్ ఇప్పటికే జోడించబడింది
-    enabled: ప్రారంభించబడిన థీమ్‌లు
-    add: థీమ్ జోడించండి
-    available: అందుబాటులో ఉంది
-    selected: ఎంచుకున్నారు
-  language: భాష
-  startup: స్టార్టప్‌లో అమలు చేయాలా?
-  icon_pack:
-    label: ఐకాన్ ప్యాక్‌లు
-  accent_color: యాస రంగు
-  wallpaper:
-    select: వాల్‌పేపర్‌ను ఎంచుకోండి
-  date_format: తేదీ ఆకృతి
-toolbar:
-  placeholder:
-    author: రచయిత
-    description: వివరణ
-    select: టూల్‌బార్ నిర్మాణం
-  height: ఎత్తు
-  enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
-  auto_hide: ఆటో దాచు
-  label: టూల్‌బార్
-  delay_to_hide: దాచడానికి ఆలస్యం
-  delay_to_show: చూపించడానికి ఆలస్యం
-  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
-wm:
-  border:
-    width: అంచు వెడల్పు
-    offset: సరిహద్దు ఆఫ్‌సెట్
-    enable: విండో అంచుని ప్రారంభించండి
-  layout: లేఅవుట్
-  author: రచయిత
-  description: వివరణ
-  space_between_containers: కంటైనర్ల మధ్య ఖాళీ
-  workspace_padding: కార్యస్థలాల పాడింగ్
-  workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)
-  resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
-  enable: టైలింగ్ విండో మేనేజర్‌ను ప్రారంభించండి
-weg:
-  items:
-    label: వస్తువులు
-    size: అంశం పరిమాణం
-    visible_separators: కనిపించే సెపరేటర్లు
-    gap: వస్తువుల మధ్య ఖాళీ
-    zoom_size: జూమ్ చేసిన పరిమాణం (థీమ్‌ల కోసం ఉపయోగించబడుతుంది)
-  auto_hide: ఆటో దాచు
-  padding: పాడింగ్
-  label: డాక్/టాస్క్‌బార్
-  margin: మార్జిన్
-  gap: గ్యాప్
-  width: వెడల్పు
-  enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
-  dock_side: స్థానం
-  delay_to_show: చూపించడానికి ఆలస్యం
-  delay_to_hide: దాచడానికి ఆలస్యం
-  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
-devtools:
-  enable: డెవలపర్ సాధనాలను ప్రారంభించండి
-  custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి
-  settings_file: సెట్టింగుల ఫైల్
-  data_folder: డేటా ఫోల్డర్
-  load: లోడ్ చేయండి
-  install_folder: ఇన్‌స్టాలేషన్ ఫోల్డర్
-  app_folders: యాప్ ఫోల్డర్‌లు
+app_launcher:
+  enable: అనువర్తన లాంచర్‌ను ప్రారంభించండి
+  monitor: చూపించడానికి మానిటర్
+  runners:
+    cmd: కమాండ్
+    explorer: రన్
+    label: రన్నర్లు
 apps_configurations:
   app:
-    options:
-      pinned: పిన్ చేయబడింది
-      float: ఫ్లోట్
-      unmanage: నిర్వహించవద్దు
-      force: బలవంతంగా నిర్వహించండి
-      hidden: డాక్/టాస్క్‌బార్ నుండి దాచండి
-    monitor: మానిటర్
-    workspace: కార్యస్థలం
-    workspace_placeholder: ఏదీ లేదు
-    category_placeholder: ఏదీ లేదు
-    monitor_placeholder: ఏదీ లేదు
+    bindings: బైండింగ్ (రెండు ఎంపికలు అవసరమని గమనించండి)
     category: వర్గం
+    category_placeholder: ఏదీ లేదు
+    monitor: మానిటర్
+    monitor_placeholder: ఏదీ లేదు
     name: పేరు
-    title_create: '{{name}}ని సృష్టిస్తోంది'
-    title_readonly: '{{name}} వీక్షిస్తోంది'
+    ok_create: సృష్టించు
     ok_edit: నవీకరించు
     ok_readonly: కొత్తదిగా సవరించండి
-    bindings: బైండింగ్ (రెండు ఎంపికలు అవసరమని గమనించండి)
-    ok_create: సృష్టించు
+    options:
+      float: ఫ్లోట్
+      force: బలవంతంగా నిర్వహించండి
+      hidden: డాక్/టాస్క్‌బార్ నుండి దాచండి
+      pinned: పిన్ చేయబడింది
+      unmanage: నిర్వహించవద్దు
+    options_label: అదనపు ఎంపికలు
+    title_create: '{{name}}ని సృష్టిస్తోంది'
+    title_edit: సవరణ {{పేరు}}
+    title_readonly: '{{name}} వీక్షిస్తోంది'
     weg_options_label: డాక్/టాస్క్‌బార్ ఎంపికలు
     wm_options_label: విండో మేనేజర్ ఎంపికలు
-    options_label: అదనపు ఎంపికలు
-    title_edit: సవరణ {{పేరు}}
-  identifier:
-    and: మరియు
-    negation: సరిపోలికను తిరస్కరించండి
-    or: లేదా
-    matching_strategy: మ్యాచింగ్ స్ట్రాటజీ
-    remove: బ్లాక్‌ని తొలగించండి
-    add_block: బ్లాక్ జోడించండి
-    id: ఐడెంటిఫైయర్
-    kind: ద్వారా గుర్తించండి
-  search: వెతకండి
-  swap: మార్పిడి
-  new: కొత్తది
-  import: దిగుమతి
-  export: ఎగుమతి చేయండి
-  confirm_delete_title: తొలగించడాన్ని నిర్ధారించండి
-  bundled_title: యాప్ కాన్ఫిగర్ సీలెన్‌తో బండిల్ చేయబడింది
-  delete: తొలగించు
-  confirm_delete: మీరు ఈ కాన్ఫిగరేషన్/లని ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?
+    workspace: కార్యస్థలం
+    workspace_placeholder: ఏదీ లేదు
   bundled_msg: >-
     ఈ బండిల్ కాన్ఫిగరేషన్‌లు సవరించదగినవి కావు మరియు అనుకూలీకరణ లేకుండా మీకు
     ఉత్తమ అనుభవాన్ని అందించడానికి రూపొందించబడ్డాయి. వారు మీ కోసం అత్యంత సాధారణ
     అప్లికేషన్‌లను స్వయంచాలకంగా కాన్ఫిగర్ చేస్తారు.
+  bundled_title: యాప్ కాన్ఫిగర్ సీలెన్‌తో బండిల్ చేయబడింది
+  confirm_delete: మీరు ఈ కాన్ఫిగరేషన్/లని ఖచ్చితంగా తొలగించాలనుకుంటున్నారా?
+  confirm_delete_title: తొలగించడాన్ని నిర్ధారించండి
+  delete: తొలగించు
+  export: ఎగుమతి చేయండి
   extra_info: >-
     సీలెన్ UI ఒక అనువర్తనానికి ఒక ఐడెంటిఫైయర్‌ను మాత్రమే ఉపయోగిస్తుంది (మొదటి
     మ్యాచ్ కనుగొనబడింది) కాబట్టి ఎలా పేర్కొనబడింది అనే క్రమం ముఖ్యమైనది, తాజా
     జోడించిన వాటికి ప్రాధాన్యత ఇవ్వబడుతుంది, ఎందుకంటే పట్టిక డిఫాల్ట్‌గా తాజా
     నుండి పాత వరకు క్రమబద్ధీకరించబడుతుంది.
+  identifier:
+    add_block: బ్లాక్ జోడించండి
+    and: మరియు
+    id: ఐడెంటిఫైయర్
+    kind: ద్వారా గుర్తించండి
+    matching_strategy: మ్యాచింగ్ స్ట్రాటజీ
+    negation: సరిపోలికను తిరస్కరించండి
+    or: లేదా
+    remove: బ్లాక్‌ని తొలగించండి
+  import: దిగుమతి
+  new: కొత్తది
+  search: వెతకండి
+  swap: మార్పిడి
+cancel: రద్దు చేయండి
+close: దగ్గరగా
+delete: తొలగించు
+devtools:
+  app_folders: యాప్ ఫోల్డర్‌లు
+  custom_config_file: కస్టమ్ కాన్ఫిగర్ ఫైల్‌ను లోడ్ చేయండి
+  data_folder: డేటా ఫోల్డర్
+  enable: డెవలపర్ సాధనాలను ప్రారంభించండి
+  install_folder: ఇన్‌స్టాలేషన్ ఫోల్డర్
+  load: లోడ్ చేయండి
+  settings_file: సెట్టింగుల ఫైల్
 extras:
-  version: 'సంస్కరణ: Telugu'
+  discord: అసమ్మతి
+  exit: నిష్క్రమించు/నిష్క్రమించు
   github: GitHub
   links: అధికారిక లింకులు
-  discord: అసమ్మతి
   relaunch: పునఃప్రారంభించండి
-  exit: నిష్క్రమించు/నిష్క్రమించు
-shortcuts:
+  version: 'సంస్కరణ: Telugu'
+general:
+  accent_color: యాస రంగు
+  date_format: తేదీ ఆకృతి
+  icon_pack:
+    label: ఐకాన్ ప్యాక్‌లు
+  language: భాష
+  startup: స్టార్టప్‌లో అమలు చేయాలా?
+  theme:
+    add: థీమ్ జోడించండి
+    added: థీమ్ ఇప్పటికే జోడించబడింది
+    author: రచయిత
+    available: అందుబాటులో ఉంది
+    description: వివరణ
+    enabled: ప్రారంభించబడిన థీమ్‌లు
+    label: థీమ్ సమాచారం
+    placeholder: థీమ్‌ని ఎంచుకోండి
+    selected: ఎంచుకున్నారు
+    tags: టాగ్లు
+  wallpaper:
+    select: వాల్‌పేపర్‌ను ఎంచుకోండి
+header:
   labels:
-    focus_right: ఫోకస్ రైట్
-    reserve_right: రిజర్వ్ హక్కు
-    reserve_left: రిజర్వ్ ఎడమ
-    increase_height: ఎత్తు పెంచండి
-    reserve_bottom: రిజర్వ్ బాటమ్
-    send_to_workspace_0: కార్యస్థలం 0కి పంపండి
-    move_to_workspace_4: కార్యస్థలానికి తరలించు 4
-    switch_workspace_6: కార్యస్థలానికి మారండి 6
-    reserve_top: రిజర్వ్ టాప్
-    focus_latest: తాజాగా ఫోకస్ చేయండి
-    restore_sizes: పరిమాణాలను పునరుద్ధరించండి
-    reserve_stack: రిజర్వ్ స్టాక్
-    focus_left: ఎడమవైపు దృష్టి పెట్టండి
-    move_to_workspace_5: కార్యస్థలానికి తరలించు 5
-    decrease_height: ఎత్తు తగ్గించండి
-    send_to_workspace_1: కార్యస్థలానికి పంపండి 1
-    send_to_workspace_3: కార్యస్థలానికి పంపండి 3
-    send_to_workspace_4: కార్యస్థలానికి పంపండి 4
-    send_to_workspace_2: కార్యస్థలానికి పంపండి 2
-    send_to_workspace_9: కార్యస్థలానికి పంపండి 9
-    move_to_workspace_2: కార్యస్థలానికి తరలించు 2
-    send_to_workspace_5: కార్యస్థలానికి పంపండి 5
-    move_to_workspace_7: కార్యస్థలానికి తరలించు 7
-    increase_width: వెడల్పు పెంచండి
-    switch_workspace_5: కార్యస్థలానికి మారండి 5
-    decrease_width: వెడల్పును తగ్గించండి
-    reserve_float: రిజర్వ్ ఫ్లోట్
-    move_to_workspace_6: కార్యస్థలానికి తరలించు 6
-    send_to_workspace_7: కార్యస్థలానికి పంపండి 7
-    move_to_workspace_1: కార్యస్థలానికి తరలించు 1
-    switch_workspace_8: కార్యస్థలానికి మారండి 8
-    switch_workspace_3: కార్యస్థలానికి మారండి 3
-    focus_top: ఫోకస్ టాప్
-    move_to_workspace_0: కార్యస్థలం 0కి తరలించండి
-    move_to_workspace_9: కార్యస్థలానికి తరలించు 9
-    switch_workspace_2: కార్యస్థలానికి మారండి 2
-    switch_workspace_9: కార్యస్థలానికి మారండి 9
-    send_to_workspace_6: కార్యస్థలానికి పంపండి 6
-    move_to_workspace_8: కార్యస్థలానికి తరలించు 8
-    move_to_workspace_3: కార్యస్థలానికి తరలించు 3
-    switch_workspace_4: కార్యస్థలానికి మారండి 4
-    send_to_workspace_8: కార్యస్థలానికి పంపండి 8
-    switch_workspace_7: కార్యస్థలానికి మారండి 7
-    focus_bottom: ఫోకస్ బాటమ్
-    switch_workspace_0: వర్క్‌స్పేస్ 1 కి మారండి
-    switch_workspace_1: వర్క్‌స్పేస్ 2 కి మారండి
-    misc_open_settings: సెట్టింగులు తెరవండి
-    misc_toggle_lock_tracing: లాక్ ట్రేసింగ్ (లాగ్‌లు) టోగుల్ చేయండి
-    misc_toggle_win_event_tracing: విన్ ఈవెంట్ ట్రేసింగ్ (లాగ్స్) ను టోగుల్ చేయండి
-    toggle_launcher: టోగుల్
+    developer: డెవలపర్
+    general: జనరల్
+    home: హోమ్
+    info: సమాచారం
+    mods: ప్లగిన్‌లు & విడ్జెట్‌లు
+    monitors: మానిటర్లు
+    seelen_bar: ఫ్యాన్సీ టూల్‌బార్
+    seelen_rofi: అనువర్తన లాంచర్
+    seelen_wall: వాల్పేపర్ మేనేజర్
+    seelen_weg: డాక్/టాస్క్‌బార్
+    seelen_wm: విండో మేనేజర్
+    shortcuts: సత్వరమార్గాలు
+    specific_apps: నిర్దిష్ట యాప్‌లు
+    virtual_desk: వర్చువల్ డెస్క్‌టాప్‌లు
+inherit: వారసత్వంగా
+inProgress: పురోగతిలో ఉంది...
+insert: చొప్పించండి
+loading: లోడ్...
+miscellaneous: ఇతరాలు
+mods:
+  plugins: ప్లగిన్లు
+  target: లక్ష్యం
+  widgets: విడ్జెట్లు
+monitors_configurations:
+  label: మానిటర్ {{సూచిక}}
+more: మరిన్ని
+open: తెరవండి
+quit: నిష్క్రమించు
+remove: తొలగించండి
+save: సేవ్ చేయండి
+save_and_restart: సేవ్ & పున art ప్రారంభించండి
+shortcuts:
   enable: ఇంటిగ్రేటెడ్ షార్ట్‌కట్‌లను ప్రారంభించండి (ahk)
   enable_tooltip: >-
     మీరు సీలెన్ కోర్ Apiని ఉపయోగించి మీ స్వంత సత్వరమార్గాలను అమలు చేస్తే
     నిలిపివేయండి
-  reset: డిఫాల్ట్‌లకు రీసెట్ చేయండి
+  labels:
+    decrease_height: ఎత్తు తగ్గించండి
+    decrease_width: వెడల్పును తగ్గించండి
+    focus_bottom: ఫోకస్ బాటమ్
+    focus_latest: తాజాగా ఫోకస్ చేయండి
+    focus_left: ఎడమవైపు దృష్టి పెట్టండి
+    focus_right: ఫోకస్ రైట్
+    focus_top: ఫోకస్ టాప్
+    increase_height: ఎత్తు పెంచండి
+    increase_width: వెడల్పు పెంచండి
+    misc_open_settings: సెట్టింగులు తెరవండి
+    misc_toggle_lock_tracing: లాక్ ట్రేసింగ్ (లాగ్‌లు) టోగుల్ చేయండి
+    misc_toggle_win_event_tracing: విన్ ఈవెంట్ ట్రేసింగ్ (లాగ్స్) ను టోగుల్ చేయండి
+    move_to_workspace_0: కార్యస్థలం 0కి తరలించండి
+    move_to_workspace_1: కార్యస్థలానికి తరలించు 1
+    move_to_workspace_2: కార్యస్థలానికి తరలించు 2
+    move_to_workspace_3: కార్యస్థలానికి తరలించు 3
+    move_to_workspace_4: కార్యస్థలానికి తరలించు 4
+    move_to_workspace_5: కార్యస్థలానికి తరలించు 5
+    move_to_workspace_6: కార్యస్థలానికి తరలించు 6
+    move_to_workspace_7: కార్యస్థలానికి తరలించు 7
+    move_to_workspace_8: కార్యస్థలానికి తరలించు 8
+    move_to_workspace_9: కార్యస్థలానికి తరలించు 9
+    reserve_bottom: రిజర్వ్ బాటమ్
+    reserve_float: రిజర్వ్ ఫ్లోట్
+    reserve_left: రిజర్వ్ ఎడమ
+    reserve_right: రిజర్వ్ హక్కు
+    reserve_stack: రిజర్వ్ స్టాక్
+    reserve_top: రిజర్వ్ టాప్
+    restore_sizes: పరిమాణాలను పునరుద్ధరించండి
+    send_to_workspace_0: కార్యస్థలం 0కి పంపండి
+    send_to_workspace_1: కార్యస్థలానికి పంపండి 1
+    send_to_workspace_2: కార్యస్థలానికి పంపండి 2
+    send_to_workspace_3: కార్యస్థలానికి పంపండి 3
+    send_to_workspace_4: కార్యస్థలానికి పంపండి 4
+    send_to_workspace_5: కార్యస్థలానికి పంపండి 5
+    send_to_workspace_6: కార్యస్థలానికి పంపండి 6
+    send_to_workspace_7: కార్యస్థలానికి పంపండి 7
+    send_to_workspace_8: కార్యస్థలానికి పంపండి 8
+    send_to_workspace_9: కార్యస్థలానికి పంపండి 9
+    switch_workspace_0: వర్క్‌స్పేస్ 1 కి మారండి
+    switch_workspace_1: వర్క్‌స్పేస్ 2 కి మారండి
+    switch_workspace_2: కార్యస్థలానికి మారండి 2
+    switch_workspace_3: కార్యస్థలానికి మారండి 3
+    switch_workspace_4: కార్యస్థలానికి మారండి 4
+    switch_workspace_5: కార్యస్థలానికి మారండి 5
+    switch_workspace_6: కార్యస్థలానికి మారండి 6
+    switch_workspace_7: కార్యస్థలానికి మారండి 7
+    switch_workspace_8: కార్యస్థలానికి మారండి 8
+    switch_workspace_9: కార్యస్థలానికి మారండి 9
+    toggle_launcher: టోగుల్
   readonly_tooltip: ఇది చదవడానికి మాత్రమే సత్వరమార్గం
-loading: లోడ్...
-delete: తొలగించు
-open: తెరవండి
-save: సేవ్ చేయండి
-cancel: రద్దు చేయండి
-quit: నిష్క్రమించు
-inProgress: పురోగతిలో ఉంది...
-vd:
-  strategy:
-    label: వర్చువల్ డెస్క్‌టాప్ వ్యూహం
-    native: స్థానిక
-    seelen: సీలెన్
-  disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం స్థానిక వర్చువల్ డెస్క్‌టాప్ వ్యూహం అందుబాటులో లేదు.
-save_and_restart: సేవ్ & పున art ప్రారంభించండి
-monitors_configurations:
-  label: మానిటర్ {{సూచిక}}
-wall:
-  no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
-  backgrounds: వాల్‌పేపర్లు
-  enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
-  interval: ప్రతి వాల్‌పేపర్‌ను మార్చండి
-  random: రాండమైజ్ స్లైడ్‌షో
-  seconds: సెకన్లు
-  minutes: నిమిషాలు
-  hours: గంటలు
-app_launcher:
-  runners:
-    label: రన్నర్లు
-    explorer: రన్
-    cmd: కమాండ్
-  monitor: చూపించడానికి మానిటర్
-  enable: అనువర్తన లాంచర్‌ను ప్రారంభించండి
-inherit: వారసత్వంగా
-insert: చొప్పించండి
-more: మరిన్ని
-close: దగ్గరగా
+  reset: డిఫాల్ట్‌లకు రీసెట్ చేయండి
+sides:
+  bottom: దిగువన
+  left: ఎడమ
+  right: కుడి
+  top: టాప్
+start:
+  message: >-
+    సీలెన్ UIకి స్వాగతం, మీ Windows అనుభవాన్ని మెరుగుపరచడానికి ఇన్‌కార్పొరేటెడ్
+    టైలింగ్ విండోస్ మేనేజర్‌తో అంతిమ డెస్క్‌టాప్ ఎన్విరాన్‌మెంట్! మా సహజమైన
+    ఇంటర్‌ఫేస్ మరియు అధునాతన ఫీచర్‌లతో సమర్ధత మరియు బహువిధి యొక్క కొత్త యుగాన్ని
+    అన్వేషించండి.
+  message_accent: శైలితో మీ ఉత్పాదకతను ఆప్టిమైజ్ చేయండి!
+  title: స్వాగతం!
+toolbar:
+  auto_hide: ఆటో దాచు
+  delay_to_hide: దాచడానికి ఆలస్యం
+  delay_to_show: చూపించడానికి ఆలస్యం
+  enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
+  height: ఎత్తు
+  label: టూల్‌బార్
+  placeholder:
+    author: రచయిత
+    description: వివరణ
+    select: టూల్‌బార్ నిర్మాణం
+  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
 update:
   available: నవీకరణ అందుబాటులో ఉంది!
   channel: ఛానెల్‌ను నవీకరించండి
   downloading: డౌన్‌లోడ్ ...
-miscellaneous: ఇతరాలు
-mods:
-  widgets: విడ్జెట్లు
-  target: లక్ష్యం
-  plugins: ప్లగిన్లు
-remove: తొలగించండి
+vd:
+  disabled_windows_version: మీ విండోస్ వెర్షన్ కోసం స్థానిక వర్చువల్ డెస్క్‌టాప్ వ్యూహం అందుబాటులో లేదు.
+  strategy:
+    label: వర్చువల్ డెస్క్‌టాప్ వ్యూహం
+    native: స్థానిక
+    seelen: సీలెన్
+wall:
+  backgrounds: వాల్‌పేపర్లు
+  enable: వాల్పేపర్ మేనేజర్‌ను ప్రారంభించండి
+  hours: గంటలు
+  interval: ప్రతి వాల్‌పేపర్‌ను మార్చండి
+  minutes: నిమిషాలు
+  no_background: ఖాళీ స్లైడ్‌షో, బదులుగా థీమ్ యొక్క నేపథ్యాన్ని ఉపయోగించి.
+  random: రాండమైజ్ స్లైడ్‌షో
+  seconds: సెకన్లు
+weg:
+  auto_hide: ఆటో దాచు
+  delay_to_hide: దాచడానికి ఆలస్యం
+  delay_to_show: చూపించడానికి ఆలస్యం
+  dock_side: స్థానం
+  enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
+  gap: గ్యాప్
+  items:
+    gap: వస్తువుల మధ్య ఖాళీ
+    label: వస్తువులు
+    size: అంశం పరిమాణం
+    visible_separators: కనిపించే సెపరేటర్లు
+    zoom_size: జూమ్ చేసిన పరిమాణం (థీమ్‌ల కోసం ఉపయోగించబడుతుంది)
+  label: డాక్/టాస్క్‌బార్
+  margin: మార్జిన్
+  padding: పాడింగ్
+  use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
+  width: వెడల్పు
+wm:
+  author: రచయిత
+  border:
+    enable: విండో అంచుని ప్రారంభించండి
+    offset: సరిహద్దు ఆఫ్‌సెట్
+    width: అంచు వెడల్పు
+  description: వివరణ
+  enable: టైలింగ్ విండో మేనేజర్‌ను ప్రారంభించండి
+  layout: లేఅవుట్
+  resize_delta: డెల్టా (%) పరిమాణాన్ని మార్చండి
+  space_between_containers: కంటైనర్ల మధ్య ఖాళీ
+  workspace_offset: వర్క్‌స్పేస్ ఆఫ్‌సెట్ (మార్జిన్‌లు)
+  workspace_padding: కార్యస్థలాల పాడింగ్

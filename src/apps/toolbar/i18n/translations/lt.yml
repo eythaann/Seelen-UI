@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Pridėti modulį
+  remove: Pašalinkite modulį
+  settings: Nustatymai
+  task_manager: Užduočių tvarkyklė
 media:
   device:
     comunications: Ryšiai
     multimedia: Multimedija
-  master_volume: Pagrindinis garsas
   input_device: Įvesties įrenginys
+  master_volume: Pagrindinis garsas
   output_device: Išvesties įrenginys
   players: Žiniasklaidos žaidėjai
 network:
+  available: Galimi tinklai
+  connect: Prisijungti
+  connected: Prisijungta prie
+  disconnect: Atjungti
+  hidden: Paslėptas tinklas
+  more: Daugiau tinklo nustatymų
+  not_found: Jokių tinklų nerasta
   placeholder:
     password: Slaptažodis
-  disconnect: Atjungti
-  connect: Prisijungti
-  not_found: Jokių tinklų nerasta
-  more: Daugiau tinklo nustatymų
-  hidden: Paslėptas tinklas
   saved: Išsaugoti tinklai
-  connected: Prisijungta prie
   scanning: Tinklų nuskaitymas
   secured: Šifruotas tinklas
-  available: Galimi tinklai
-settings:
-  log_out: Atsijungti
-  restart: Perkrauti
-  shutdown: Išjungti
-  app_settings: Programos nustatymai
-  sleep: Miegas
-  title: Nustatymai
-  power: Galia
 placeholder:
+  battery_remaining: '% liko'
+  bluetooth_devices: „Bluetooth“ ir įrenginiai
+  ethernet_connected: Interneto ryšys
+  ethernet_disconnected: Jokios interneto prieigos
+  notifications: Pranešimai
+  open_system_tray: Atviras sistemos dėklas
+  open_user_folder: Atidaryti vartotojo aplanką
   settings: Greiti nustatymai
   smart_charge: '- Išmanus mokestis'
-  ethernet_connected: Interneto ryšys
-  open_system_tray: Atviras sistemos dėklas
-  battery_remaining: '% liko'
-  ethernet_disconnected: Jokios interneto prieigos
   volume: Apimtis
-  bluetooth_devices: „Bluetooth“ ir įrenginiai
-  open_user_folder: Atidaryti vartotojo aplanką
-  notifications: Pranešimai
+settings:
+  app_settings: Programos nustatymai
+  log_out: Atsijungti
+  power: Galia
+  restart: Perkrauti
+  shutdown: Išjungti
+  sleep: Miegas
+  title: Nustatymai
 unlabelled_tray: Nepaženklinta dėklo piktograma
-context_menu:
-  add_module: Pridėti modulį
-  remove: Pašalinkite modulį
-  task_manager: Užduočių tvarkyklė
-  settings: Nustatymai

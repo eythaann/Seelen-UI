@@ -1,265 +1,265 @@
-sides:
-  top: Topp
-  left: Venstre
-  right: Ikke sant
-  bottom: Bunn
+app_launcher:
+  enable: Aktiver appstarter
+  monitor: Overvåke for å vise
+  runners:
+    cmd: Kommando
+    explorer: Løp
+    label: Løpere
+apps_configurations:
+  app:
+    bindings: Binding (Merk begge alternativene er påkrevd)
+    category: Kategori
+    category_placeholder: Ingen
+    monitor: Observere
+    monitor_placeholder: Ingen
+    name: Navn
+    ok_create: Skape
+    ok_edit: Oppdater
+    ok_readonly: Rediger som ny
+    options:
+      float: Flyte
+      force: Force Manag
+      hidden: Gjemme deg for dock/oppgavelinje
+      pinned: Festet
+      unmanage: Unmanage
+    options_label: Ekstra alternativer
+    title_create: Opprette {{name}}
+    title_edit: Redigering {{name}}
+    title_readonly: Visning {{name}}
+    weg_options_label: Dock/oppgavelinjealternativer
+    wm_options_label: Vinduslederalternativer
+    workspace: Arbeidsområde
+    workspace_placeholder: Ingen
+  bundled_msg: >-
+    Disse samlede konfigurasjonene er ikke redigerbare og er designet for å gi
+    deg den beste opplevelsen uten tilpasning. De konfigurerer automatisk de
+    vanligste applikasjonene for deg.
+  bundled_title: App Config samlet med Seelen
+  confirm_delete: Er du sikker på at du vil slette denne konfigurasjonen/S?
+  confirm_delete_title: Bekreft slett
+  delete: Slett
+  export: Eksport
+  extra_info: >-
+    Seelen-brukergrensesnittet bruker kun én identifikator per app (første treff
+    funnet), så rekkefølgen i hvordan spesifikasjonene er viktig, det siste lagt
+    til vil bli prioritert, da merk at tabellen er sortert som standard fra
+    nyeste til gammel.
+  identifier:
+    add_block: Legg til blokkering
+    and: OG
+    id: Identifikator
+    kind: Identifisere av
+    matching_strategy: Matchende strategi
+    negation: Negere matching
+    or: ELLER
+    remove: Slett blokkering
+  import: Import
+  new: Ny
+  search: Søk
+  swap: Bytte
+cancel: Avbryt
+close: Lukke
+delete: Slett
+devtools:
+  app_folders: App -mapper
+  custom_config_file: Last inn tilpasset konfigurasjonsfil
+  data_folder: Datamappen
+  enable: Aktiver utviklerverktøy
+  install_folder: Installasjonsmappe
+  load: Laste
+  settings_file: Innstillingsfilen
+extras:
+  discord: Uenighet
+  exit: Avslutt/avslutte
+  github: Github
+  links: Offisielle lenker
+  relaunch: Relanseres
+  version: Versjon
+general:
+  accent_color: Aksentfarge
+  date_format: Datoformat
+  icon_pack:
+    label: Ikonpakker
+  language: Språk
+  startup: Kjør ved oppstart?
+  theme:
+    add: Legg til tema
+    added: Tema som allerede er lagt til
+    author: Forfatter
+    available: Tilgjengelig
+    description: Beskrivelse
+    enabled: Aktiverte temaer
+    label: Temainformasjon
+    placeholder: Velg tema
+    selected: Valgt
+    tags: Tagger
+  wallpaper:
+    select: Velg bakgrunnsbilde
 header:
   labels:
-    info: Informasjon
+    developer: Utvikler
     general: Generell
+    home: Hjem
+    info: Informasjon
+    mods: Plugins og widgets
+    monitors: Skjermer
     seelen_bar: Fancy verktøylinje
+    seelen_rofi: App Launcher
+    seelen_wall: Bakgrunnssjef
+    seelen_weg: Dock/oppgavelinje
     seelen_wm: Vindusleder
     shortcuts: Snarveier
     specific_apps: Spesifikke apper
-    developer: Utvikler
-    seelen_weg: Dock/oppgavelinje
-    monitors: Skjermer
-    seelen_rofi: App Launcher
     virtual_desk: Virtuelle stasjonære maskiner
-    home: Hjem
-    mods: Plugins og widgets
-    seelen_wall: Bakgrunnssjef
+inherit: Arve
+inProgress: I prosess...
+insert: Sett inn
+loading: Laster ...
+miscellaneous: Diverse
+mods:
+  plugins: Plugins
+  target: Mål
+  widgets: Widgets
+monitors_configurations:
+  label: Overvåke {{indeks}}
+more: Flere
+open: Åpen
+quit: Slutte
+remove: Fjerne
+save: Lagre
+save_and_restart: Lagre og start på nytt
+shortcuts:
+  enable: Aktiver integrerte snarveier (AHK)
+  enable_tooltip: >-
+    Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
+    Core API
+  labels:
+    decrease_height: Reduser høyden
+    decrease_width: Redusere bredden
+    focus_bottom: Fokus bunnen
+    focus_latest: Fokusere siste
+    focus_left: Fokus igjen
+    focus_right: Fokuser riktig
+    focus_top: Fokus topp
+    increase_height: Øk høyden
+    increase_width: Øke bredden
+    misc_open_settings: Åpne innstillinger
+    misc_toggle_lock_tracing: Toggle Lock Tracing (logger)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logger)
+    move_to_workspace_0: Flytt til arbeidsområdet 0
+    move_to_workspace_1: Flytt til arbeidsområdet 1
+    move_to_workspace_2: Flytt til arbeidsområdet 2
+    move_to_workspace_3: Flytt til arbeidsområdet 3
+    move_to_workspace_4: Flytt til arbeidsområdet 4
+    move_to_workspace_5: Flytt til arbeidsområdet 5
+    move_to_workspace_6: Flytt til arbeidsområdet 6
+    move_to_workspace_7: Flytt til arbeidsområdet 7
+    move_to_workspace_8: Flytt til arbeidsområdet 8
+    move_to_workspace_9: Flytt til arbeidsområdet 9
+    reserve_bottom: Reserve bunn
+    reserve_float: Reserve flyter
+    reserve_left: Reserve igjen
+    reserve_right: Reservere riktig
+    reserve_stack: Reserve stack
+    reserve_top: Reserve top
+    restore_sizes: Gjenopprett størrelser
+    send_to_workspace_0: Send til arbeidsområdet 0
+    send_to_workspace_1: Send til arbeidsområdet 1
+    send_to_workspace_2: Send til arbeidsområdet 2
+    send_to_workspace_3: Send til arbeidsområdet 3
+    send_to_workspace_4: Send til arbeidsområdet 4
+    send_to_workspace_5: Send til arbeidsområdet 5
+    send_to_workspace_6: Send til arbeidsområdet 6
+    send_to_workspace_7: Send til arbeidsområdet 7
+    send_to_workspace_8: Send til arbeidsområdet 8
+    send_to_workspace_9: Send til arbeidsområdet 9
+    switch_workspace_0: Bytt til arbeidsområdet 1
+    switch_workspace_1: Bytt til arbeidsområdet 2
+    switch_workspace_2: Bytt til arbeidsområdet 2
+    switch_workspace_3: Bytt til arbeidsområdet 3
+    switch_workspace_4: Bytt til arbeidsområdet 4
+    switch_workspace_5: Bytt til arbeidsområdet 5
+    switch_workspace_6: Bytt til arbeidsområdet 6
+    switch_workspace_7: Bytt til arbeidsområdet 7
+    switch_workspace_8: Bytt til arbeidsområdet 8
+    switch_workspace_9: Bytt til arbeidsområdet 9
+    toggle_launcher: Veksle
+  readonly_tooltip: Dette er en leselinje-snarvei
+  reset: Tilbakestill til standardverdier
+sides:
+  bottom: Bunn
+  left: Venstre
+  right: Ikke sant
+  top: Topp
 start:
-  title: Velkommen!
   message: >-
     Velkommen til Seelen UI, Ultimate Desktop Environment med en innlemmet
     tilflising av Windows Manager for å forbedre Windows -opplevelsen din!
     Utforsk en ny epoke med effektivitet og multitasking med vårt intuitive
     grensesnitt og avanserte funksjoner.
   message_accent: Optimaliser produktiviteten din med stil!
-general:
-  theme:
-    description: Beskrivelse
-    author: Forfatter
-    enabled: Aktiverte temaer
-    label: Temainformasjon
-    added: Tema som allerede er lagt til
-    tags: Tagger
-    placeholder: Velg tema
-    add: Legg til tema
-    available: Tilgjengelig
-    selected: Valgt
-  language: Språk
-  startup: Kjør ved oppstart?
-  icon_pack:
-    label: Ikonpakker
-  accent_color: Aksentfarge
-  wallpaper:
-    select: Velg bakgrunnsbilde
-  date_format: Datoformat
+  title: Velkommen!
 toolbar:
-  placeholder:
-    description: Beskrivelse
-    author: Forfatter
-    select: Verktøylinjestruktur
-  height: Høyde
-  enable: Aktiver fancy verktøylinje
   auto_hide: Auto Hide
+  delay_to_hide: Utsett å skjule
+  delay_to_show: Forsinkelse med visning
+  enable: Aktiver fancy verktøylinje
+  height: Høyde
   label: Verktøylinje
-  delay_to_hide: Utsett å skjule
-  delay_to_show: Forsinkelse med visning
+  placeholder:
+    author: Forfatter
+    description: Beskrivelse
+    select: Verktøylinjestruktur
   use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
-wm:
-  border:
-    enable: Aktiver vinduets grense
-    width: Grensebredde
-    offset: Grenseforskyvning
-  author: Forfatter
-  description: Beskrivelse
-  layout: Oppsett
-  space_between_containers: Plass mellom containere
-  resize_delta: Endre størrelse på Delta (%)
-  workspace_offset: Arbeidsområder forskyvning (marginer)
-  workspace_padding: Arbeidsområder polstring
-  enable: Aktiver flislegging av vindusleder
-weg:
-  items:
-    zoom_size: Zoomet størrelse (brukt til temaer)
-    visible_separators: Synlige separatorer
-    size: Varestørrelse
-    label: Gjenstander
-    gap: Plass mellom varene
-  width: Bredde
-  auto_hide: Skjul automatisk
-  margin: Margin
-  gap: Mellomrom
-  padding: Polstring
-  label: Dock/oppgavelinje
-  enable: Aktiver dock/oppgavelinje
-  dock_side: Stilling
-  delay_to_show: Forsinkelse med visning
-  delay_to_hide: Utsett å skjule
-  use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
-devtools:
-  load: Laste
-  custom_config_file: Last inn tilpasset konfigurasjonsfil
-  settings_file: Innstillingsfilen
-  install_folder: Installasjonsmappe
-  app_folders: App -mapper
-  data_folder: Datamappen
-  enable: Aktiver utviklerverktøy
-apps_configurations:
-  app:
-    options:
-      float: Flyte
-      force: Force Manag
-      pinned: Festet
-      unmanage: Unmanage
-      hidden: Gjemme deg for dock/oppgavelinje
-    category: Kategori
-    title_create: Opprette {{name}}
-    monitor_placeholder: Ingen
-    ok_edit: Oppdater
-    ok_create: Skape
-    category_placeholder: Ingen
-    bindings: Binding (Merk begge alternativene er påkrevd)
-    workspace_placeholder: Ingen
-    name: Navn
-    monitor: Observere
-    title_readonly: Visning {{name}}
-    workspace: Arbeidsområde
-    ok_readonly: Rediger som ny
-    wm_options_label: Vinduslederalternativer
-    weg_options_label: Dock/oppgavelinjealternativer
-    options_label: Ekstra alternativer
-    title_edit: Redigering {{name}}
-  identifier:
-    and: OG
-    kind: Identifisere av
-    or: ELLER
-    add_block: Legg til blokkering
-    matching_strategy: Matchende strategi
-    id: Identifikator
-    remove: Slett blokkering
-    negation: Negere matching
-  swap: Bytte
-  search: Søk
-  confirm_delete: Er du sikker på at du vil slette denne konfigurasjonen/S?
-  new: Ny
-  bundled_msg: >-
-    Disse samlede konfigurasjonene er ikke redigerbare og er designet for å gi
-    deg den beste opplevelsen uten tilpasning. De konfigurerer automatisk de
-    vanligste applikasjonene for deg.
-  delete: Slett
-  export: Eksport
-  import: Import
-  confirm_delete_title: Bekreft slett
-  bundled_title: App Config samlet med Seelen
-  extra_info: >-
-    Seelen-brukergrensesnittet bruker kun én identifikator per app (første treff
-    funnet), så rekkefølgen i hvordan spesifikasjonene er viktig, det siste lagt
-    til vil bli prioritert, da merk at tabellen er sortert som standard fra
-    nyeste til gammel.
-extras:
-  version: Versjon
-  github: Github
-  relaunch: Relanseres
-  exit: Avslutt/avslutte
-  links: Offisielle lenker
-  discord: Uenighet
-shortcuts:
-  labels:
-    focus_latest: Fokusere siste
-    reserve_left: Reserve igjen
-    focus_top: Fokus topp
-    switch_workspace_2: Bytt til arbeidsområdet 2
-    send_to_workspace_8: Send til arbeidsområdet 8
-    switch_workspace_7: Bytt til arbeidsområdet 7
-    increase_width: Øke bredden
-    send_to_workspace_4: Send til arbeidsområdet 4
-    decrease_width: Redusere bredden
-    move_to_workspace_4: Flytt til arbeidsområdet 4
-    reserve_bottom: Reserve bunn
-    reserve_stack: Reserve stack
-    reserve_float: Reserve flyter
-    move_to_workspace_6: Flytt til arbeidsområdet 6
-    increase_height: Øk høyden
-    focus_right: Fokuser riktig
-    switch_workspace_8: Bytt til arbeidsområdet 8
-    switch_workspace_9: Bytt til arbeidsområdet 9
-    switch_workspace_6: Bytt til arbeidsområdet 6
-    decrease_height: Reduser høyden
-    reserve_top: Reserve top
-    move_to_workspace_8: Flytt til arbeidsområdet 8
-    restore_sizes: Gjenopprett størrelser
-    move_to_workspace_9: Flytt til arbeidsområdet 9
-    focus_bottom: Fokus bunnen
-    move_to_workspace_1: Flytt til arbeidsområdet 1
-    send_to_workspace_2: Send til arbeidsområdet 2
-    reserve_right: Reservere riktig
-    switch_workspace_5: Bytt til arbeidsområdet 5
-    send_to_workspace_6: Send til arbeidsområdet 6
-    switch_workspace_3: Bytt til arbeidsområdet 3
-    move_to_workspace_5: Flytt til arbeidsområdet 5
-    move_to_workspace_2: Flytt til arbeidsområdet 2
-    move_to_workspace_7: Flytt til arbeidsområdet 7
-    switch_workspace_4: Bytt til arbeidsområdet 4
-    move_to_workspace_0: Flytt til arbeidsområdet 0
-    send_to_workspace_5: Send til arbeidsområdet 5
-    focus_left: Fokus igjen
-    send_to_workspace_1: Send til arbeidsområdet 1
-    send_to_workspace_0: Send til arbeidsområdet 0
-    send_to_workspace_9: Send til arbeidsområdet 9
-    move_to_workspace_3: Flytt til arbeidsområdet 3
-    send_to_workspace_7: Send til arbeidsområdet 7
-    send_to_workspace_3: Send til arbeidsområdet 3
-    switch_workspace_0: Bytt til arbeidsområdet 1
-    switch_workspace_1: Bytt til arbeidsområdet 2
-    misc_toggle_lock_tracing: Toggle Lock Tracing (logger)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (logger)
-    misc_open_settings: Åpne innstillinger
-    toggle_launcher: Veksle
-  enable_tooltip: >-
-    Deaktiver om du vil implementere dine egne snarveier ved hjelp av Seelen
-    Core API
-  enable: Aktiver integrerte snarveier (AHK)
-  reset: Tilbakestill til standardverdier
-  readonly_tooltip: Dette er en leselinje-snarvei
-cancel: Avbryt
-inProgress: I prosess...
-quit: Slutte
-open: Åpen
-save: Lagre
-delete: Slett
-loading: Laster ...
+update:
+  available: Oppdatering tilgjengelig!
+  channel: Oppdateringskanal
+  downloading: Last ned ...
 vd:
-  strategy:
-    native: Innfødt
-    seelen: Seelen
-    label: Virtuell skrivebordsstrategi
   disabled_windows_version: >-
     Native Virtual Desktop Strategy er ikke tilgjengelig for Windows -versjonen
     din.
-save_and_restart: Lagre og start på nytt
-monitors_configurations:
-  label: Overvåke {{indeks}}
+  strategy:
+    label: Virtuell skrivebordsstrategi
+    native: Innfødt
+    seelen: Seelen
 wall:
   backgrounds: Bakgrunnsbilder
-  no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
   enable: Aktiver bakgrunnssjef
-  random: Randomiser lysbildefremvisning
+  hours: timer
   interval: Endre bakgrunnsbilde hver
   minutes: minutter
+  no_background: Tom lysbildefremvisning, ved å bruke temaets bakgrunn i stedet.
+  random: Randomiser lysbildefremvisning
   seconds: sekunder
-  hours: timer
-app_launcher:
-  runners:
-    cmd: Kommando
-    explorer: Løp
-    label: Løpere
-  monitor: Overvåke for å vise
-  enable: Aktiver appstarter
-more: Flere
-inherit: Arve
-insert: Sett inn
-close: Lukke
-update:
-  available: Oppdatering tilgjengelig!
-  downloading: Last ned ...
-  channel: Oppdateringskanal
-miscellaneous: Diverse
-mods:
-  target: Mål
-  widgets: Widgets
-  plugins: Plugins
-remove: Fjerne
+weg:
+  auto_hide: Skjul automatisk
+  delay_to_hide: Utsett å skjule
+  delay_to_show: Forsinkelse med visning
+  dock_side: Stilling
+  enable: Aktiver dock/oppgavelinje
+  gap: Mellomrom
+  items:
+    gap: Plass mellom varene
+    label: Gjenstander
+    size: Varestørrelse
+    visible_separators: Synlige separatorer
+    zoom_size: Zoomet størrelse (brukt til temaer)
+  label: Dock/oppgavelinje
+  margin: Margin
+  padding: Polstring
+  use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
+  width: Bredde
+wm:
+  author: Forfatter
+  border:
+    enable: Aktiver vinduets grense
+    offset: Grenseforskyvning
+    width: Grensebredde
+  description: Beskrivelse
+  enable: Aktiver flislegging av vindusleder
+  layout: Oppsett
+  resize_delta: Endre størrelse på Delta (%)
+  space_between_containers: Plass mellom containere
+  workspace_offset: Arbeidsområder forskyvning (marginer)
+  workspace_padding: Arbeidsområder polstring

@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Ավելացնել մեդիա մոդուլ
-  start: Ավելացնել Սկսել մոդուլը
-  add_folder: PIN Custom թղթապանակ
-  add_file: PIN պատվերով ֆայլ
-  settings: Կարգավորումներ
-  task_manager: Առաջադրանքների կառավարիչ
 app_menu:
   close: փակել
-  pin_to_center: Քորոց դեպի կենտրոն
-  pin_to_left: PIN- ը ձախից
-  open_file_location: Բաց ֆայլի գտնվելու վայրը
-  copy_handles: Պատճենել բռնակներ
-  pin_to_right: Քորոց աջից
-  pin: Թոշակ
-  unpin: Անապաղում
   close_multiple: Փակել բոլորը
-  run_as: Գործարկել որպես ադմինիստրատոր
+  copy_handles: Պատճենել բռնակներ
   kill: Սպանության գործընթաց
   kill_multiple: Սպանել բոլոր գործընթացները
+  open_file_location: Բաց ֆայլի գտնվելու վայրը
+  pin: Թոշակ
+  pin_to_center: Քորոց դեպի կենտրոն
+  pin_to_left: PIN- ը ձախից
+  pin_to_right: Քորոց աջից
+  run_as: Գործարկել որպես ադմինիստրատոր
+  unpin: Անապաղում
+media:
+  not_playing: Ոչինչ չի խաղում
 media_menu:
   remove: Հեռացրեք մեդիա մոդուլը
 start_menu:
   remove: Հեռացրեք Սկսել մոդուլը
-media:
-  not_playing: Ոչինչ չի խաղում
+taskbar_menu:
+  add_file: PIN պատվերով ֆայլ
+  add_folder: PIN Custom թղթապանակ
+  media: Ավելացնել մեդիա մոդուլ
+  settings: Կարգավորումներ
+  start: Ավելացնել Սկսել մոդուլը
+  task_manager: Առաջադրանքների կառավարիչ

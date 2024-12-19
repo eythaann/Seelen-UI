@@ -1,260 +1,260 @@
-sides:
-  bottom: បាត
-  right: ត្រូវហើយ។
-  top: កំពូល
-  left: ឆ្វេង
+app_launcher:
+  enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
+  monitor: ម៉ូនីទ័របង្ហាញ
+  runners:
+    cmd: ការបង្គាប់
+    explorer: ការរត់
+    label: រត់តមនាង
+apps_configurations:
+  app:
+    bindings: ការចង (ចំណាំជម្រើសទាំងពីរត្រូវបានទាមទារ)
+    category: ប្រភេទ
+    category_placeholder: គ្មាន
+    monitor: ម៉ូនីទ័រ
+    monitor_placeholder: គ្មាន
+    name: ឈ្មោះ
+    ok_create: បង្កើត
+    ok_edit: ធ្វើបច្ចុប្បន្នភាព
+    ok_readonly: កែសម្រួលដូចថ្មី។
+    options:
+      float: អណ្តែត
+      force: គ្រប់គ្រងដោយបង្ខំ
+      hidden: លាក់ខ្លួនពីចត / ភារកិច្ច
+      pinned: ខ្ទាស់
+      unmanage: មិនគ្រប់គ្រង
+    options_label: ជម្រើសបន្ថែម
+    title_create: ការបង្កើត {{name}}
+    title_edit: ការកែសម្រួល {{ឈ្មោះ}}
+    title_readonly: កំពុងមើល {{name}}
+    weg_options_label: ជម្រើសចត / ភារកិច្ច
+    wm_options_label: ជម្រើសកម្មវិធីគ្រប់គ្រងបង្អួច
+    workspace: កន្លែងធ្វើការ
+    workspace_placeholder: គ្មាន
+  bundled_msg: >-
+    ការ​កំណត់​រចនាសម្ព័ន្ធ​ជា​កញ្ចប់​ទាំង​នេះ​មិន​អាច​កែ​សម្រួល​បាន​ទេ
+    ហើយ​ត្រូវ​បាន​រចនា​ឡើង​ដើម្បី​ផ្ដល់​ឱ្យ​អ្នក​នូវ​បទ​ពិសោធ​ដ៏​ល្អ​បំផុត​ដោយ​មិន​ចាំបាច់​ប្ដូរ​តាម​បំណង។
+    ពួកគេកំណត់រចនាសម្ព័ន្ធកម្មវិធីធម្មតាបំផុតសម្រាប់អ្នកដោយស្វ័យប្រវត្តិ។
+  bundled_title: កម្មវិធីកំណត់រចនាសម្ព័ន្ធបានរួមបញ្ចូលជាមួយ Seelen
+  confirm_delete: តើអ្នកប្រាកដថាចង់លុបការកំណត់រចនាសម្ព័ន្ធនេះទេ?
+  confirm_delete_title: បញ្ជាក់ការលុប
+  delete: លុប
+  export: នាំចេញ
+  extra_info: >-
+    Seeen UI ប្រើគ្រឿងសម្គាល់តែមួយប៉ុណ្ណោះក្នុងមួយកម្មវិធីមួយ
+    (រកឃើញការប្រកួតដំបូង)
+    ដូច្នេះការបញ្ជាទិញក្នុងរបៀបណាដែលមានលក្ខណៈសំខាន់គឺសំខាន់បំផុតនោះនៅពេលដែលការកត់ចំណាំតារាងត្រូវបានតម្រៀបតាមលំនាំដើមពីចុងក្រោយ។
+  identifier:
+    add_block: បន្ថែមប្លុក
+    and: និង
+    id: អ្នកកំណត់អត្តសញ្ញាណ
+    kind: កំណត់អត្តសញ្ញាណដោយ
+    matching_strategy: យុទ្ធសាស្ត្រផ្គូផ្គង
+    negation: ការផ្គូផ្គងអវិជ្ជមាន
+    or: ឬ
+    remove: លុបប្លុក
+  import: នាំចូល
+  new: ថ្មី។
+  search: ស្វែងរក
+  swap: ប្តូរ
+cancel: បោះបង់
+close: បិត
+delete: លុប
+devtools:
+  app_folders: ថតកម្មវិធី
+  custom_config_file: ផ្ទុកឯកសារកំណត់រចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
+  data_folder: ថតទិន្នន័យ
+  enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍
+  install_folder: ថតឯកសារដំឡើង
+  load: ផ្ទុក
+  settings_file: ឯកសារការកំណត់
+extras:
+  discord: ការមិនចុះសម្រុងគ្នា។
+  exit: ចេញ/ចេញ
+  github: GitHub
+  links: តំណភ្ជាប់ផ្លូវការ
+  relaunch: បើកដំណើរការឡើងវិញ
+  version: កំណែ
+general:
+  accent_color: ពណ៌សង្កត់សំឡេង
+  date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
+  icon_pack:
+    label: រូបតំណាងកញ្ចប់
+  language: ភាសា
+  startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
+  theme:
+    add: បន្ថែមប្រធានបទ
+    added: ប្រធានបទត្រូវបានបន្ថែមរួចហើយ
+    author: អ្នកនិពន្ធ
+    available: មានរបយោចន៍
+    description: ការពិពណ៌នា
+    enabled: ស្បែកដែលបានបើក
+    label: ព័ត៌មានអំពីប្រធានបទ
+    placeholder: ជ្រើសរើសប្រធានបទ
+    selected: បានជ្រើស
+    tags: ស្លាក
+  wallpaper:
+    select: ជ្រើសរើសផ្ទាំងរូបភាព
 header:
   labels:
-    general: ទូទៅ
-    monitors: ម៉ូនីទ័រ
-    shortcuts: ផ្លូវកាត់
-    info: ព័ត៌មាន
     developer: អ្នកអភិវឌ្ឍន៍
-    seelen_wm: កម្មវិធីគ្រប់គ្រងបង្អួច
-    seelen_weg: ចត/របារភារកិច្ច
-    seelen_bar: របារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
-    specific_apps: កម្មវិធីជាក់លាក់
-    seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
-    virtual_desk: ផ្ទៃតុនិម្មិត
+    general: ទូទៅ
     home: ផ្ទហ
+    info: ព័ត៌មាន
     mods: កម្មវិធីជំនួយ និងធាតុក្រាហ្វិក
+    monitors: ម៉ូនីទ័រ
+    seelen_bar: របារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
+    seelen_rofi: កម្មវិធីបើកដំណើរការកម្មវិធី
     seelen_wall: កម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
+    seelen_weg: ចត/របារភារកិច្ច
+    seelen_wm: កម្មវិធីគ្រប់គ្រងបង្អួច
+    shortcuts: ផ្លូវកាត់
+    specific_apps: កម្មវិធីជាក់លាក់
+    virtual_desk: ផ្ទៃតុនិម្មិត
+inherit: តតយលមរតក
+inProgress: កំពុង​ដំណើរការ...
+insert: រចក
+loading: កំពុង​ផ្ទុក...
+miscellaneous: ដេលមានផ្នេកខុសក្នា
+mods:
+  plugins: រអារ
+  target: តមរុយសរមាប់បាញ់
+  widgets: ធាតុក្រាហ្វិក
+monitors_configurations:
+  label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
+more: រេចីនចាង
+open: បើក
+quit: ឈប់
+remove: រមកមិ avad ចេញ
+save: រក្សាទុក
+save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
+shortcuts:
+  enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
+  enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api
+  labels:
+    decrease_height: បន្ថយកម្ពស់
+    decrease_width: បន្ថយទទឹង
+    focus_bottom: ផ្ដោតបាត
+    focus_latest: ផ្តោតចុងក្រោយ
+    focus_left: ផ្តោតទៅឆ្វេង
+    focus_right: ផ្តោតលើស្តាំ
+    focus_top: ផ្តោតកំពូល
+    increase_height: បង្កើនកម្ពស់
+    increase_width: បង្កើនទទឹង
+    misc_open_settings: បើកការកំណត់
+    misc_toggle_lock_tracing: បិទបើកការចាក់សោរ (កំណត់ហេតុ)
+    misc_toggle_win_event_tracing: បិទ / បើកព្រឹត្តិការណ៍ឈ្នះ (កំណត់ហេតុ)
+    move_to_workspace_0: ផ្លាស់ទីទៅកន្លែងធ្វើការ 0
+    move_to_workspace_1: ផ្លាស់ទីទៅកន្លែងធ្វើការ 1
+    move_to_workspace_2: ផ្លាស់ទីទៅកន្លែងធ្វើការ 2
+    move_to_workspace_3: ផ្លាស់ទីទៅកន្លែងធ្វើការ 3
+    move_to_workspace_4: ផ្លាស់ទីទៅកន្លែងធ្វើការ 4
+    move_to_workspace_5: ផ្លាស់ទីទៅកន្លែងធ្វើការ 5
+    move_to_workspace_6: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៦
+    move_to_workspace_7: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៧
+    move_to_workspace_8: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៨
+    move_to_workspace_9: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៩
+    reserve_bottom: បាតបម្រុង
+    reserve_float: បម្រុងអណ្តែត
+    reserve_left: កក់ទុកខាងឆ្វេង
+    reserve_right: រក្សាសិទ្ធិ
+    reserve_stack: ស្តុកទុក
+    reserve_top: បម្រុងទុកកំពូល
+    restore_sizes: ស្ដារទំហំ
+    send_to_workspace_0: ផ្ញើទៅកន្លែងធ្វើការ 0
+    send_to_workspace_1: ផ្ញើទៅកាន់កន្លែងធ្វើការ 1
+    send_to_workspace_2: ផ្ញើទៅកន្លែងធ្វើការ ២
+    send_to_workspace_3: ផ្ញើទៅកន្លែងធ្វើការ ៣
+    send_to_workspace_4: ផ្ញើទៅកន្លែងធ្វើការ ៤
+    send_to_workspace_5: ផ្ញើទៅកន្លែងធ្វើការ ៥
+    send_to_workspace_6: ផ្ញើទៅកន្លែងធ្វើការ ៦
+    send_to_workspace_7: ផ្ញើទៅកន្លែងធ្វើការ ៧
+    send_to_workspace_8: ផ្ញើទៅកន្លែងធ្វើការ ៨
+    send_to_workspace_9: ផ្ញើទៅកន្លែងធ្វើការ ៩
+    switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 1
+    switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 2
+    switch_workspace_2: ប្តូរទៅកន្លែងធ្វើការ 2
+    switch_workspace_3: ប្តូរទៅកន្លែងធ្វើការ 3
+    switch_workspace_4: ប្តូរទៅកន្លែងធ្វើការ 4
+    switch_workspace_5: ប្តូរទៅកន្លែងធ្វើការ 5
+    switch_workspace_6: ប្តូរទៅកន្លែងធ្វើការ 6
+    switch_workspace_7: ប្តូរទៅកន្លែងធ្វើការ 7
+    switch_workspace_8: ប្តូរទៅកន្លែងធ្វើការ 8
+    switch_workspace_9: ប្តូរទៅកន្លែងធ្វើការ 9
+    toggle_launcher: តន្លេ
+  readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
+  reset: កំណត់ឡើងវិញនូវលំនាំដើម
+sides:
+  bottom: បាត
+  left: ឆ្វេង
+  right: ត្រូវហើយ។
+  top: កំពូល
 start:
-  title: សូមស្វាគមន៍!
-  message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
   message: >-
     សូមស្វាគមន៍មកកាន់ Seelen UI
     ដែលជាបរិស្ថានផ្ទៃតុចុងក្រោយដែលមានកម្មវិធីគ្រប់គ្រងបង្អួចដាក់បញ្ចូល
     ដើម្បីបង្កើនបទពិសោធន៍ Windows របស់អ្នក! ស្វែងរកយុគសម័យថ្មីនៃប្រសិទ្ធភាព
     និងកិច្ចការច្រើនជាមួយនឹងចំណុចប្រទាក់វិចារណញាណរបស់យើង និងមុខងារកម្រិតខ្ពស់។
-general:
-  theme:
-    description: ការពិពណ៌នា
-    placeholder: ជ្រើសរើសប្រធានបទ
-    tags: ស្លាក
-    author: អ្នកនិពន្ធ
-    add: បន្ថែមប្រធានបទ
-    label: ព័ត៌មានអំពីប្រធានបទ
-    enabled: ស្បែកដែលបានបើក
-    added: ប្រធានបទត្រូវបានបន្ថែមរួចហើយ
-    selected: បានជ្រើស
-    available: មានរបយោចន៍
-  language: ភាសា
-  startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
-  icon_pack:
-    label: រូបតំណាងកញ្ចប់
-  accent_color: ពណ៌សង្កត់សំឡេង
-  wallpaper:
-    select: ជ្រើសរើសផ្ទាំងរូបភាព
-  date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
+  message_accent: បង្កើនផលិតភាពរបស់អ្នកជាមួយនឹងរចនាប័ទ្ម!
+  title: សូមស្វាគមន៍!
 toolbar:
+  auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
+  delay_to_hide: ពន្យារពេលដើម្បីលាក់
+  delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
+  enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
+  height: កម្ពស់
+  label: របាររបន៍របយ័ត្ន។ រប
   placeholder:
+    author: អ្នកនិពន្ធ
     description: ការពិពណ៌នា
     select: រចនាសម្ព័ន្ធរបារឧបករណ៍
-    author: អ្នកនិពន្ធ
-  height: កម្ពស់
-  enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
-  auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
-  label: របាររបន៍របយ័ត្ន។ រប
-  delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
-  delay_to_hide: ពន្យារពេលដើម្បីលាក់
   use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
+update:
+  available: មានបច្ចុប្បន្នភាព!
+  channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
+  downloading: ទាញយក ...
+vd:
+  disabled_windows_version: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិតដើមមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
+  strategy:
+    label: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិត
+    native: នៃកមនើត
+    seelen: កន្លេងតមខ្ច៉ាត់សែល
+wall:
+  backgrounds: ផាបផេច
+  enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
+  hours: ម៉ោង
+  interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរៀងរាល់
+  minutes: បីតោ
+  no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
+  random: ការបញ្ចាំងស្លាយចៃដន្យដោយចៃដន្យ
+  seconds: វិនាទី
+weg:
+  auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
+  delay_to_hide: ពន្យារពេលដើម្បីលាក់
+  delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
+  dock_side: តីតាមង
+  enable: បើកដំណើរការ Dock/Taskbar
+  gap: គម្លាត
+  items:
+    gap: ចន្លោះរវាងធាតុ
+    label: ធាតុ
+    size: ទំហំធាតុ
+    visible_separators: សញ្ញាបំបែកដែលអាចមើលឃើញ
+    zoom_size: ទំហំពង្រីក (ប្រើសម្រាប់ស្បែក)
+  label: ចត/របារភារកិច្ច
+  margin: រឹម
+  padding: ទ្រនាប់
+  use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
+  width: ទទឹង
 wm:
+  author: អ្នកនិពន្ធ
   border:
     enable: បើកស៊ុមបង្អួច
     offset: ព្រំដែនអុហ្វសិត
     width: ទទឹងព្រំដែន
   description: ការពិពណ៌នា
-  workspace_padding: ចន្លោះកន្លែងធ្វើការ
+  enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងបង្អួច
   layout: ប្លង់
-  author: អ្នកនិពន្ធ
+  resize_delta: ប្តូរទំហំដីសណ្តរ (%)
   space_between_containers: ចន្លោះរវាងកុងតឺន័រ
   workspace_offset: កន្លែងធ្វើការអុហ្វសិត (រឹម)
-  resize_delta: ប្តូរទំហំដីសណ្តរ (%)
-  enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងបង្អួច
-weg:
-  items:
-    label: ធាតុ
-    visible_separators: សញ្ញាបំបែកដែលអាចមើលឃើញ
-    gap: ចន្លោះរវាងធាតុ
-    size: ទំហំធាតុ
-    zoom_size: ទំហំពង្រីក (ប្រើសម្រាប់ស្បែក)
-  width: ទទឹង
-  padding: ទ្រនាប់
-  label: ចត/របារភារកិច្ច
-  auto_hide: លាក់ដោយស្វ័យប្រវត្តិ
-  gap: គម្លាត
-  margin: រឹម
-  enable: បើកដំណើរការ Dock/Taskbar
-  dock_side: តីតាមង
-  delay_to_hide: ពន្យារពេលដើម្បីលាក់
-  delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
-  use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
-devtools:
-  install_folder: ថតឯកសារដំឡើង
-  enable: បើកឧបករណ៍អ្នកអភិវឌ្ឍន៍
-  custom_config_file: ផ្ទុកឯកសារកំណត់រចនាសម្ព័ន្ធផ្ទាល់ខ្លួន
-  app_folders: ថតកម្មវិធី
-  load: ផ្ទុក
-  settings_file: ឯកសារការកំណត់
-  data_folder: ថតទិន្នន័យ
-apps_configurations:
-  app:
-    options:
-      pinned: ខ្ទាស់
-      float: អណ្តែត
-      force: គ្រប់គ្រងដោយបង្ខំ
-      unmanage: មិនគ្រប់គ្រង
-      hidden: លាក់ខ្លួនពីចត / ភារកិច្ច
-    workspace_placeholder: គ្មាន
-    workspace: កន្លែងធ្វើការ
-    monitor_placeholder: គ្មាន
-    category_placeholder: គ្មាន
-    category: ប្រភេទ
-    name: ឈ្មោះ
-    title_create: ការបង្កើត {{name}}
-    title_readonly: កំពុងមើល {{name}}
-    ok_edit: ធ្វើបច្ចុប្បន្នភាព
-    monitor: ម៉ូនីទ័រ
-    ok_create: បង្កើត
-    bindings: ការចង (ចំណាំជម្រើសទាំងពីរត្រូវបានទាមទារ)
-    ok_readonly: កែសម្រួលដូចថ្មី។
-    weg_options_label: ជម្រើសចត / ភារកិច្ច
-    wm_options_label: ជម្រើសកម្មវិធីគ្រប់គ្រងបង្អួច
-    options_label: ជម្រើសបន្ថែម
-    title_edit: ការកែសម្រួល {{ឈ្មោះ}}
-  identifier:
-    and: និង
-    remove: លុបប្លុក
-    add_block: បន្ថែមប្លុក
-    negation: ការផ្គូផ្គងអវិជ្ជមាន
-    or: ឬ
-    matching_strategy: យុទ្ធសាស្ត្រផ្គូផ្គង
-    kind: កំណត់អត្តសញ្ញាណដោយ
-    id: អ្នកកំណត់អត្តសញ្ញាណ
-  import: នាំចូល
-  search: ស្វែងរក
-  new: ថ្មី។
-  swap: ប្តូរ
-  export: នាំចេញ
-  delete: លុប
-  bundled_title: កម្មវិធីកំណត់រចនាសម្ព័ន្ធបានរួមបញ្ចូលជាមួយ Seelen
-  confirm_delete_title: បញ្ជាក់ការលុប
-  bundled_msg: >-
-    ការ​កំណត់​រចនាសម្ព័ន្ធ​ជា​កញ្ចប់​ទាំង​នេះ​មិន​អាច​កែ​សម្រួល​បាន​ទេ
-    ហើយ​ត្រូវ​បាន​រចនា​ឡើង​ដើម្បី​ផ្ដល់​ឱ្យ​អ្នក​នូវ​បទ​ពិសោធ​ដ៏​ល្អ​បំផុត​ដោយ​មិន​ចាំបាច់​ប្ដូរ​តាម​បំណង។
-    ពួកគេកំណត់រចនាសម្ព័ន្ធកម្មវិធីធម្មតាបំផុតសម្រាប់អ្នកដោយស្វ័យប្រវត្តិ។
-  confirm_delete: តើអ្នកប្រាកដថាចង់លុបការកំណត់រចនាសម្ព័ន្ធនេះទេ?
-  extra_info: >-
-    Seeen UI ប្រើគ្រឿងសម្គាល់តែមួយប៉ុណ្ណោះក្នុងមួយកម្មវិធីមួយ
-    (រកឃើញការប្រកួតដំបូង)
-    ដូច្នេះការបញ្ជាទិញក្នុងរបៀបណាដែលមានលក្ខណៈសំខាន់គឺសំខាន់បំផុតនោះនៅពេលដែលការកត់ចំណាំតារាងត្រូវបានតម្រៀបតាមលំនាំដើមពីចុងក្រោយ។
-extras:
-  version: កំណែ
-  github: GitHub
-  discord: ការមិនចុះសម្រុងគ្នា។
-  exit: ចេញ/ចេញ
-  relaunch: បើកដំណើរការឡើងវិញ
-  links: តំណភ្ជាប់ផ្លូវការ
-shortcuts:
-  labels:
-    reserve_float: បម្រុងអណ្តែត
-    move_to_workspace_4: ផ្លាស់ទីទៅកន្លែងធ្វើការ 4
-    restore_sizes: ស្ដារទំហំ
-    move_to_workspace_7: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៧
-    increase_height: បង្កើនកម្ពស់
-    focus_latest: ផ្តោតចុងក្រោយ
-    send_to_workspace_5: ផ្ញើទៅកន្លែងធ្វើការ ៥
-    send_to_workspace_1: ផ្ញើទៅកាន់កន្លែងធ្វើការ 1
-    send_to_workspace_3: ផ្ញើទៅកន្លែងធ្វើការ ៣
-    send_to_workspace_4: ផ្ញើទៅកន្លែងធ្វើការ ៤
-    move_to_workspace_5: ផ្លាស់ទីទៅកន្លែងធ្វើការ 5
-    send_to_workspace_7: ផ្ញើទៅកន្លែងធ្វើការ ៧
-    send_to_workspace_2: ផ្ញើទៅកន្លែងធ្វើការ ២
-    focus_left: ផ្តោតទៅឆ្វេង
-    reserve_right: រក្សាសិទ្ធិ
-    send_to_workspace_9: ផ្ញើទៅកន្លែងធ្វើការ ៩
-    send_to_workspace_0: ផ្ញើទៅកន្លែងធ្វើការ 0
-    move_to_workspace_2: ផ្លាស់ទីទៅកន្លែងធ្វើការ 2
-    reserve_top: បម្រុងទុកកំពូល
-    reserve_stack: ស្តុកទុក
-    decrease_height: បន្ថយកម្ពស់
-    focus_top: ផ្តោតកំពូល
-    switch_workspace_2: ប្តូរទៅកន្លែងធ្វើការ 2
-    switch_workspace_3: ប្តូរទៅកន្លែងធ្វើការ 3
-    decrease_width: បន្ថយទទឹង
-    reserve_bottom: បាតបម្រុង
-    switch_workspace_8: ប្តូរទៅកន្លែងធ្វើការ 8
-    switch_workspace_4: ប្តូរទៅកន្លែងធ្វើការ 4
-    move_to_workspace_3: ផ្លាស់ទីទៅកន្លែងធ្វើការ 3
-    increase_width: បង្កើនទទឹង
-    switch_workspace_5: ប្តូរទៅកន្លែងធ្វើការ 5
-    reserve_left: កក់ទុកខាងឆ្វេង
-    move_to_workspace_6: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៦
-    focus_right: ផ្តោតលើស្តាំ
-    move_to_workspace_0: ផ្លាស់ទីទៅកន្លែងធ្វើការ 0
-    move_to_workspace_8: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៨
-    send_to_workspace_8: ផ្ញើទៅកន្លែងធ្វើការ ៨
-    send_to_workspace_6: ផ្ញើទៅកន្លែងធ្វើការ ៦
-    switch_workspace_9: ប្តូរទៅកន្លែងធ្វើការ 9
-    switch_workspace_6: ប្តូរទៅកន្លែងធ្វើការ 6
-    move_to_workspace_9: ផ្លាស់ទីទៅកន្លែងធ្វើការ ៩
-    move_to_workspace_1: ផ្លាស់ទីទៅកន្លែងធ្វើការ 1
-    switch_workspace_7: ប្តូរទៅកន្លែងធ្វើការ 7
-    focus_bottom: ផ្ដោតបាត
-    switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 1
-    switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 2
-    misc_toggle_win_event_tracing: បិទ / បើកព្រឹត្តិការណ៍ឈ្នះ (កំណត់ហេតុ)
-    misc_toggle_lock_tracing: បិទបើកការចាក់សោរ (កំណត់ហេតុ)
-    misc_open_settings: បើកការកំណត់
-    toggle_launcher: តន្លេ
-  enable_tooltip: បិទប្រសិនបើអ្នកនឹងអនុវត្តផ្លូវកាត់ផ្ទាល់ខ្លួនរបស់អ្នកដោយប្រើ Seelen Core Api
-  enable: បើកផ្លូវកាត់រួមបញ្ចូលគ្នា (ahk)
-  reset: កំណត់ឡើងវិញនូវលំនាំដើម
-  readonly_tooltip: នេះគឺជាផ្លូវកាត់ដែលបានតែអាន
-cancel: បោះបង់
-inProgress: កំពុង​ដំណើរការ...
-delete: លុប
-loading: កំពុង​ផ្ទុក...
-save: រក្សាទុក
-quit: ឈប់
-open: បើក
-vd:
-  strategy:
-    label: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិត
-    seelen: កន្លេងតមខ្ច៉ាត់សែល
-    native: នៃកមនើត
-  disabled_windows_version: យុទ្ធសាស្ត្រផ្ទៃតុនិម្មិតដើមមិនមានសម្រាប់កំណែវីនដូរបស់អ្នកទេ។
-save_and_restart: រក្សាទុក & ចាប់ផ្តើមឡើងវិញ
-monitors_configurations:
-  label: ម៉ូនីទ័រ {{សន្ទស្សន៍}}
-wall:
-  backgrounds: ផាបផេច
-  no_background: ការបញ្ចាំងស្លាយទទេដោយប្រើផ្ទៃខាងក្រោយរបស់ស្បែកជំនួសវិញ។
-  enable: បើកដំណើរការកម្មវិធីគ្រប់គ្រងផ្ទាំងរូបភាព
-  interval: ផ្លាស់ប្តូរផ្ទាំងរូបភាពរៀងរាល់
-  random: ការបញ្ចាំងស្លាយចៃដន្យដោយចៃដន្យ
-  minutes: បីតោ
-  seconds: វិនាទី
-  hours: ម៉ោង
-app_launcher:
-  runners:
-    label: រត់តមនាង
-    cmd: ការបង្គាប់
-    explorer: ការរត់
-  enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
-  monitor: ម៉ូនីទ័របង្ហាញ
-insert: រចក
-more: រេចីនចាង
-inherit: តតយលមរតក
-close: បិត
-update:
-  available: មានបច្ចុប្បន្នភាព!
-  downloading: ទាញយក ...
-  channel: ឆានែលធ្វើបច្ចុប្បន្នភាព
-miscellaneous: ដេលមានផ្នេកខុសក្នា
-mods:
-  widgets: ធាតុក្រាហ្វិក
-  plugins: រអារ
-  target: តមរុយសរមាប់បាញ់
-remove: រមកមិ avad ចេញ
+  workspace_padding: ចន្លោះកន្លែងធ្វើការ

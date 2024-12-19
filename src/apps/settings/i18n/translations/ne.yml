@@ -1,262 +1,262 @@
-sides:
-  bottom: पिंध
-  right: ठिक
-  left: देब्रे
-  top: टुप्पो
-header:
-  labels:
-    seelen_bar: फेन्सी उपकरणपट्टी
-    specific_apps: विशिष्ट अनुप्रयोगहरू
-    monitors: मोनिटरहरू
-    developer: विकासकर्ता
-    seelen_weg: डक / टास्कबार
-    shortcuts: सर्टकटहरू
-    info: सुचना
-    general: जर्नेल
-    seelen_wm: वान प्रबन्धक
-    seelen_rofi: फोटो लन्चर
-    virtual_desk: भर्चुअल डेस्कटपहरू
-    home: घर
-    mods: प्लगइनहरू र विजेटहरू
-    seelen_wall: वालपेपर प्रबन्धक
-start:
-  message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
-  message: >-
-    UI देखिएको UICTOP वातावरणको साथ स्वागत छ कि एक समावेशी यात्रा गर्ने ठाउँको
-    साथ तपाईंको विन्डोज अनुभव बढाउन! हाम्रो सहज ईन्टरफेस र उन्नत सुविधाहरूको साथ
-    दक्षता र मल्टिस्किंगको नयाँ युग अन्वेषण गर्नुहोस्।
-  title: स्वागत छ!
-general:
-  theme:
-    enabled: XMES सक्षम गरियो
-    add: थिम थप्नुहोस्
-    label: विषयवस्तु जानकारी
-    author: लेखिका
-    added: विषयवस्तु पहिले नै थपिएको छ
-    placeholder: थिम चयन गर्नुहोस्
-    tags: ट्यागहरू
-    description: वर्णन
-    available: सुलभ
-    selected: चयनित
-  startup: स्टार्टअपमा भाग्नुहोस्?
-  language: भाषा
-  icon_pack:
-    label: आइकन प्याक
-  accent_color: हिम्मता रंग
-  wallpaper:
-    select: वालपेपर चयन गर्नुहोस्
-  date_format: मिति ढाँचा
-toolbar:
-  placeholder:
-    description: वर्णन
-    select: उपकरणपट्टी संरचना
-    author: लेखिका
-  height: ऊचाई
-  enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
-  auto_hide: 'स्वत: लुकाउने'
-  label: औजारपरो
-  delay_to_show: देखाउन ढिलाइ
-  delay_to_hide: लुकाउन ढिलाइ
-  use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
-wm:
-  border:
-    offset: सीमा अफसेट
-    enable: विन्डोको सीमा सक्षम गर्नुहोस्
-    width: सीमा चौडाई
-  description: वर्णन
-  space_between_containers: कन्टेनर बीचको ठाउँ
-  workspace_offset: कार्यस्पेस अफसेट (मार्जिन)
-  layout: नक्शा
-  author: लेखिका
-  resize_delta: रिसाइज डेल्टा (%)
-  workspace_padding: कार्यक्षेत्र प्याडिंग
-  enable: टलिंग विन्डो प्रबन्धक सक्षम गर्नुहोस्
-weg:
-  items:
-    label: वस्तुहरू
-    gap: वस्तुहरू बीचको ठाउँ
-    visible_separators: दृश्य बिल्कुलरहरू
-    size: वस्तुको आकार
-    zoom_size: Zoomed आकार (थिमका लागि प्रयोग गरिएको)
-  padding: प्याडडि .्वन
-  margin: स्पानलिन
-  width: चौडाई
-  auto_hide: 'स्वत: लुकाउने'
-  gap: अन्तराल
-  enable: डक / टास्कबार सक्षम गर्नुहोस्
-  label: डक / टास्कबार
-  dock_side: स्थिति
-  delay_to_hide: लुकाउन ढिलाइ
-  delay_to_show: देखाउन ढिलाइ
-  use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
-devtools:
-  app_folders: निल्डर
-  custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्
-  data_folder: डेटा फोल्डर
-  load: बोभ्क
-  settings_file: सेटिंग्स फाइल
-  install_folder: स्थापना फोल्डर
-  enable: विकासकर्ता उपकरणहरू सक्षम गर्नुहोस्
+app_launcher:
+  enable: अनुप्रयोग सुरुवातकर्तालाई सक्षम गर्नुहोस्
+  monitor: देखाउनको लागि मोनिटर
+  runners:
+    cmd: आदेश
+    explorer: दगुर्ने काम
+    label: धागक
 apps_configurations:
   app:
+    bindings: बाध्यकारी (नोटहरू दुबै विकल्पहरू आवश्यक छन्)
+    category: श्रेणी
+    category_placeholder: केहि पनि होइन
+    monitor: मुल्यांकन गर्नु
+    monitor_placeholder: केहि पनि होइन
+    name: नाम
+    ok_create: सृष्टि गर्नु्
+    ok_edit: अद्यावधिक गर्नुहोस्
+    ok_readonly: नयाँ जस्तै सम्पादन गर्नुहोस्
     options:
-      pinned: गाइन्ड लाग्यो
       float: उत्रनु
-      unmanage: अज्ञात
       force: शक्ति प्रबन्ध
       hidden: डक / टास्कबारबाट लुकाउनुहोस्
-    bindings: बाध्यकारी (नोटहरू दुबै विकल्पहरू आवश्यक छन्)
-    ok_create: सृष्टि गर्नु्
-    ok_readonly: नयाँ जस्तै सम्पादन गर्नुहोस्
-    workspace: कार्यक्षेत्र
-    category_placeholder: केहि पनि होइन
-    ok_edit: अद्यावधिक गर्नुहोस्
-    monitor: मुल्यांकन गर्नु
-    title_readonly: '{{Name N}} अवलोकन}}'
-    category: श्रेणी
-    name: नाम
-    title_create: '{{Neame नाम} सिर्जना गर्दै}'
-    monitor_placeholder: केहि पनि होइन
-    workspace_placeholder: केहि पनि होइन
-    wm_options_label: विन्डो प्रबन्धक विकल्पहरू
-    weg_options_label: डक / टास्कबार विकल्पहरू विकल्पहरू
+      pinned: गाइन्ड लाग्यो
+      unmanage: अज्ञात
     options_label: अतिरिक्त विकल्पहरू
+    title_create: '{{Neame नाम} सिर्जना गर्दै}'
     title_edit: '{{{{नाम} ..'
-  identifier:
-    and: र
-    id: पहिचानकर्ता
-    or: अथवा
-    kind: द्वारा पहिचान
-    add_block: ब्लक थप्नुहोस्
-    negation: मिल्दो मिल्दो
-    matching_strategy: मिलान रणनीति
-    remove: ब्लक मेट्नुहोस्
-  delete: मेटाउन
-  confirm_delete: के तपाईं पक्का यो कन्फिगरेसन / एस मेटाउन चाहनुहुन्छ?
-  confirm_delete_title: पुष्टि गर्नुहोस्
-  import: आयात
-  new: नंया
+    title_readonly: '{{Name N}} अवलोकन}}'
+    weg_options_label: डक / टास्कबार विकल्पहरू विकल्पहरू
+    wm_options_label: विन्डो प्रबन्धक विकल्पहरू
+    workspace: कार्यक्षेत्र
+    workspace_placeholder: केहि पनि होइन
   bundled_msg: >-
     यी बन्डल कन्फिगरेसनहरू सम्पादन हुँदैन र तपाईंलाई अनुकूलन बिना उत्तम अनुभव
     प्रदान गर्न डिजाइन गरिएको हो। तिनीहरू स्वचालित रूपमा तपाइँको लागि सबैभन्दा
     सामान्य अनुप्रयोगहरू कन्फिगर गर्छन्।
-  export: निर्यात गर्नु
   bundled_title: अनुप्रयोग कन्फिगलेेनले भावनाको साथ बन्डल
-  search: खोजी
-  swap: स्वप गर्नु
+  confirm_delete: के तपाईं पक्का यो कन्फिगरेसन / एस मेटाउन चाहनुहुन्छ?
+  confirm_delete_title: पुष्टि गर्नुहोस्
+  delete: मेटाउन
+  export: निर्यात गर्नु
   extra_info: >-
     Seelen UI ले प्रति एप एक मात्र पहिचानकर्ता प्रयोग गर्दछ (पहिलो मिल्दो फेला
     पर्यो) त्यसैले कसरी निर्दिष्ट गरिएको छ भन्ने क्रम महत्त्वपूर्ण छ, पछिल्लो
     थपिएकोलाई प्राथमिकता दिइनेछ, नोट गर्नुहोस् कि तालिकालाई पछिल्लोदेखि पुरानोमा
     पूर्वनिर्धारित रूपमा क्रमबद्ध गरिएको छ।
+  identifier:
+    add_block: ब्लक थप्नुहोस्
+    and: र
+    id: पहिचानकर्ता
+    kind: द्वारा पहिचान
+    matching_strategy: मिलान रणनीति
+    negation: मिल्दो मिल्दो
+    or: अथवा
+    remove: ब्लक मेट्नुहोस्
+  import: आयात
+  new: नंया
+  search: खोजी
+  swap: स्वप गर्नु
+cancel: रद्द गर्नु
+close: घनिष्ट
+delete: मेटाउन
+devtools:
+  app_folders: निल्डर
+  custom_config_file: कस्टम कन्फिगरि फाईल लोड गर्नुहोस्
+  data_folder: डेटा फोल्डर
+  enable: विकासकर्ता उपकरणहरू सक्षम गर्नुहोस्
+  install_folder: स्थापना फोल्डर
+  load: बोभ्क
+  settings_file: सेटिंग्स फाइल
 extras:
+  discord: छलफल दिनु
   exit: छोड्नुहोस् / बाहिर निस्कनुहोस्
   github: Github
   links: आधिकारिक लिंकहरू
   relaunch: पुनःस्था
   version: रुपान्तर
-  discord: छलफल दिनु
-shortcuts:
+general:
+  accent_color: हिम्मता रंग
+  date_format: मिति ढाँचा
+  icon_pack:
+    label: आइकन प्याक
+  language: भाषा
+  startup: स्टार्टअपमा भाग्नुहोस्?
+  theme:
+    add: थिम थप्नुहोस्
+    added: विषयवस्तु पहिले नै थपिएको छ
+    author: लेखिका
+    available: सुलभ
+    description: वर्णन
+    enabled: XMES सक्षम गरियो
+    label: विषयवस्तु जानकारी
+    placeholder: थिम चयन गर्नुहोस्
+    selected: चयनित
+    tags: ट्यागहरू
+  wallpaper:
+    select: वालपेपर चयन गर्नुहोस्
+header:
   labels:
-    reserve_float: रिजर्भ फ्लोट
-    send_to_workspace_8: कार्यक्षेत्र to मा पठाउनुहोस्
-    move_to_workspace_3: कार्यक्षेत्र in मा सार्नुहोस्
-    increase_height: उचाइ बढाउनुहोस्
-    send_to_workspace_9: कार्यक्षेत्र to मा पठाउनुहोस्
-    reserve_bottom: रिजर्व तल
-    move_to_workspace_8: कार्यक्षेत्र to मा सार्नुहोस्
-    switch_workspace_4: कार्यक्षेत्र to मा स्विच गर्नुहोस्
-    move_to_workspace_5: कार्यस्थान to मा सार्नुहोस्
-    decrease_height: उचाई घटाउनुहोस्
-    switch_workspace_3: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    reserve_top: रिजर्व शीर्ष
-    move_to_workspace_4: कार्यक्षेत्र to मा सार्नुहोस्
-    reserve_stack: रिजर्व स्ट्याक
-    switch_workspace_2: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
-    focus_top: फोकस शीर्ष
-    move_to_workspace_1: कार्यक्षेत्र 1 मा सार्नुहोस्
-    move_to_workspace_9: कार्यक्षेत्र in मा सार्नुहोस्
-    send_to_workspace_0: कार्यक्षेत्र 0 लाई पठाउनुहोस्
-    send_to_workspace_5: कार्यक्षेत्र to मा पठाउनुहोस्
-    send_to_workspace_6: कार्यक्षेत्र to मा पठाउनुहोस्
-    reserve_left: त्यागी बायाँ
-    move_to_workspace_6: कार्यक्षेत्र in मा सार्नुहोस्
-    switch_workspace_6: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    focus_bottom: फोकस तल
-    send_to_workspace_7: कार्यक्षेत्र to मा पठाउनुहोस्
-    increase_width: चौडाई बढाउनुहोस्
-    move_to_workspace_7: कार्यस्थान to मा सार्नुहोस्
-    send_to_workspace_2: कार्यक्षेत्र 2 लाई पठाउनुहोस्
-    send_to_workspace_4: कार्यक्षेत्र to मा पठाउनुहोस्
-    switch_workspace_8: कार्यक्षेत्रमा स्विच गर्नुहोस्।
-    move_to_workspace_0: कार्यक्षेत्र 0 मा सार्नुहोस्
-    focus_right: ध्यान केन्द्रित गर्नुहोस्
-    switch_workspace_5: कार्यक्षेत्र in मा स्विच गर्नुहोस्।
-    send_to_workspace_3: कार्यक्षेत्र to मा पठाउनुहोस्
-    focus_latest: पछिल्लो ध्यान दिनुहोस्
-    send_to_workspace_1: कार्यक्षेत्र 1 लाई पठाउनुहोस्
-    focus_left: फर्काउनुहोस्
-    move_to_workspace_2: कार्यक्षेत्र 2 मा सार्नुहोस्
-    switch_workspace_7: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    decrease_width: चौडाई कम
-    reserve_right: रिजर्व सहि
-    restore_sizes: आकार पुनर्स्थापना गर्नुहोस्
-    switch_workspace_9: कार्यक्षेत्र in मा स्विच गर्नुहोस्
-    switch_workspace_0: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
-    switch_workspace_1: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
-    misc_open_settings: खुला सेटिंग्स
-    misc_toggle_win_event_tracing: टगल जीत घटना ट्रेसिंग (लग)
-    misc_toggle_lock_tracing: टगल लक ट्रेसिंग (लग)
-    toggle_launcher: धट लगाउनु
+    developer: विकासकर्ता
+    general: जर्नेल
+    home: घर
+    info: सुचना
+    mods: प्लगइनहरू र विजेटहरू
+    monitors: मोनिटरहरू
+    seelen_bar: फेन्सी उपकरणपट्टी
+    seelen_rofi: फोटो लन्चर
+    seelen_wall: वालपेपर प्रबन्धक
+    seelen_weg: डक / टास्कबार
+    seelen_wm: वान प्रबन्धक
+    shortcuts: सर्टकटहरू
+    specific_apps: विशिष्ट अनुप्रयोगहरू
+    virtual_desk: भर्चुअल डेस्कटपहरू
+inherit: बाबु बाजेबाट पाउनु
+inProgress: प्रगति हुदैछ...
+insert: घुसाउनु
+loading: लोड गर्दै ...
+miscellaneous: विविघ
+mods:
+  plugins: निशम्न
+  target: लक्य
+  widgets: विजेटहरू
+monitors_configurations:
+  label: मोनिटर \ inchtax}}
+more: अरु
+open: खोल्नु
+quit: छोड्नु
+remove: हटाउनु
+save: बचाउनु
+save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
+shortcuts:
+  enable: एकीकृत सर्टकट सक्षम गर्नुहोस् (AHK)
   enable_tooltip: >-
     असक्षम गर्नुहोस् यदि तपाईं देखिने कोर एपीआई प्रयोग गरेर तपाईंको आफ्नै
     सर्टकटहरू लागू गर्नुहुन्छ भने असक्षम गर्नुहोस्
-  enable: एकीकृत सर्टकट सक्षम गर्नुहोस् (AHK)
-  reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
+  labels:
+    decrease_height: उचाई घटाउनुहोस्
+    decrease_width: चौडाई कम
+    focus_bottom: फोकस तल
+    focus_latest: पछिल्लो ध्यान दिनुहोस्
+    focus_left: फर्काउनुहोस्
+    focus_right: ध्यान केन्द्रित गर्नुहोस्
+    focus_top: फोकस शीर्ष
+    increase_height: उचाइ बढाउनुहोस्
+    increase_width: चौडाई बढाउनुहोस्
+    misc_open_settings: खुला सेटिंग्स
+    misc_toggle_lock_tracing: टगल लक ट्रेसिंग (लग)
+    misc_toggle_win_event_tracing: टगल जीत घटना ट्रेसिंग (लग)
+    move_to_workspace_0: कार्यक्षेत्र 0 मा सार्नुहोस्
+    move_to_workspace_1: कार्यक्षेत्र 1 मा सार्नुहोस्
+    move_to_workspace_2: कार्यक्षेत्र 2 मा सार्नुहोस्
+    move_to_workspace_3: कार्यक्षेत्र in मा सार्नुहोस्
+    move_to_workspace_4: कार्यक्षेत्र to मा सार्नुहोस्
+    move_to_workspace_5: कार्यस्थान to मा सार्नुहोस्
+    move_to_workspace_6: कार्यक्षेत्र in मा सार्नुहोस्
+    move_to_workspace_7: कार्यस्थान to मा सार्नुहोस्
+    move_to_workspace_8: कार्यक्षेत्र to मा सार्नुहोस्
+    move_to_workspace_9: कार्यक्षेत्र in मा सार्नुहोस्
+    reserve_bottom: रिजर्व तल
+    reserve_float: रिजर्भ फ्लोट
+    reserve_left: त्यागी बायाँ
+    reserve_right: रिजर्व सहि
+    reserve_stack: रिजर्व स्ट्याक
+    reserve_top: रिजर्व शीर्ष
+    restore_sizes: आकार पुनर्स्थापना गर्नुहोस्
+    send_to_workspace_0: कार्यक्षेत्र 0 लाई पठाउनुहोस्
+    send_to_workspace_1: कार्यक्षेत्र 1 लाई पठाउनुहोस्
+    send_to_workspace_2: कार्यक्षेत्र 2 लाई पठाउनुहोस्
+    send_to_workspace_3: कार्यक्षेत्र to मा पठाउनुहोस्
+    send_to_workspace_4: कार्यक्षेत्र to मा पठाउनुहोस्
+    send_to_workspace_5: कार्यक्षेत्र to मा पठाउनुहोस्
+    send_to_workspace_6: कार्यक्षेत्र to मा पठाउनुहोस्
+    send_to_workspace_7: कार्यक्षेत्र to मा पठाउनुहोस्
+    send_to_workspace_8: कार्यक्षेत्र to मा पठाउनुहोस्
+    send_to_workspace_9: कार्यक्षेत्र to मा पठाउनुहोस्
+    switch_workspace_0: कार्यक्षेत्र 1 मा स्विच गर्नुहोस्
+    switch_workspace_1: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
+    switch_workspace_2: कार्यक्षेत्र 2 मा स्विच गर्नुहोस्
+    switch_workspace_3: कार्यक्षेत्र in मा स्विच गर्नुहोस्
+    switch_workspace_4: कार्यक्षेत्र to मा स्विच गर्नुहोस्
+    switch_workspace_5: कार्यक्षेत्र in मा स्विच गर्नुहोस्।
+    switch_workspace_6: कार्यक्षेत्र in मा स्विच गर्नुहोस्
+    switch_workspace_7: कार्यक्षेत्र in मा स्विच गर्नुहोस्
+    switch_workspace_8: कार्यक्षेत्रमा स्विच गर्नुहोस्।
+    switch_workspace_9: कार्यक्षेत्र in मा स्विच गर्नुहोस्
+    toggle_launcher: धट लगाउनु
   readonly_tooltip: यो एक पढ्न-मात्र सर्टकट हो
-inProgress: प्रगति हुदैछ...
-delete: मेटाउन
-loading: लोड गर्दै ...
-open: खोल्नु
-quit: छोड्नु
-cancel: रद्द गर्नु
-save: बचाउनु
-vd:
-  strategy:
-    label: भर्चुअल डेस्कटप रणनीति
-    native: आदिवासी
-    seelen: सावधानी
-  disabled_windows_version: नेटिभ भर्चुअल डेस्कटप रणनीति तपाईंको विन्डोज संस्करणको लागि उपलब्ध छैन।
-save_and_restart: 'बचत गर्नुहोस् र पुन: सुरु गर्नुहोस्'
-monitors_configurations:
-  label: मोनिटर \ inchtax}}
-wall:
-  backgrounds: वालपेपरहरू
-  no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
-  enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
-  interval: वालपेपर परिवर्तन गर्नुहोस्
-  random: अनियमित रूपमा स्लाइड्स स्लाइड
-  hours: घण्टा
-  minutes: मिनेट
-  seconds: सेकेन्ड
-app_launcher:
-  runners:
-    label: धागक
-    cmd: आदेश
-    explorer: दगुर्ने काम
-  monitor: देखाउनको लागि मोनिटर
-  enable: अनुप्रयोग सुरुवातकर्तालाई सक्षम गर्नुहोस्
-more: अरु
-inherit: बाबु बाजेबाट पाउनु
-insert: घुसाउनु
-close: घनिष्ट
+  reset: पूर्वनिर्धारित गर्न रिसेट गर्नुहोस्
+sides:
+  bottom: पिंध
+  left: देब्रे
+  right: ठिक
+  top: टुप्पो
+start:
+  message: >-
+    UI देखिएको UICTOP वातावरणको साथ स्वागत छ कि एक समावेशी यात्रा गर्ने ठाउँको
+    साथ तपाईंको विन्डोज अनुभव बढाउन! हाम्रो सहज ईन्टरफेस र उन्नत सुविधाहरूको साथ
+    दक्षता र मल्टिस्किंगको नयाँ युग अन्वेषण गर्नुहोस्।
+  message_accent: शैलीको साथ तपाईंको उत्पादकता अनुकूल बनाउनुहोस्!
+  title: स्वागत छ!
+toolbar:
+  auto_hide: 'स्वत: लुकाउने'
+  delay_to_hide: लुकाउन ढिलाइ
+  delay_to_show: देखाउन ढिलाइ
+  enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
+  height: ऊचाई
+  label: औजारपरो
+  placeholder:
+    author: लेखिका
+    description: वर्णन
+    select: उपकरणपट्टी संरचना
+  use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
 update:
   available: अपडेट उपलब्ध!
   channel: अद्यावधिक च्यानल
   downloading: डाउनलोड गर्दै ...
-miscellaneous: विविघ
-mods:
-  target: लक्य
-  widgets: विजेटहरू
-  plugins: निशम्न
-remove: हटाउनु
+vd:
+  disabled_windows_version: नेटिभ भर्चुअल डेस्कटप रणनीति तपाईंको विन्डोज संस्करणको लागि उपलब्ध छैन।
+  strategy:
+    label: भर्चुअल डेस्कटप रणनीति
+    native: आदिवासी
+    seelen: सावधानी
+wall:
+  backgrounds: वालपेपरहरू
+  enable: वालपेपर प्रबन्धक सक्षम गर्नुहोस्
+  hours: घण्टा
+  interval: वालपेपर परिवर्तन गर्नुहोस्
+  minutes: मिनेट
+  no_background: खाली स्लाइडजेशन, यसको सट्टा थिमको पृष्ठभूमि प्रयोग गर्दै।
+  random: अनियमित रूपमा स्लाइड्स स्लाइड
+  seconds: सेकेन्ड
+weg:
+  auto_hide: 'स्वत: लुकाउने'
+  delay_to_hide: लुकाउन ढिलाइ
+  delay_to_show: देखाउन ढिलाइ
+  dock_side: स्थिति
+  enable: डक / टास्कबार सक्षम गर्नुहोस्
+  gap: अन्तराल
+  items:
+    gap: वस्तुहरू बीचको ठाउँ
+    label: वस्तुहरू
+    size: वस्तुको आकार
+    visible_separators: दृश्य बिल्कुलरहरू
+    zoom_size: Zoomed आकार (थिमका लागि प्रयोग गरिएको)
+  label: डक / टास्कबार
+  margin: स्पानलिन
+  padding: प्याडडि .्वन
+  use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
+  width: चौडाई
+wm:
+  author: लेखिका
+  border:
+    enable: विन्डोको सीमा सक्षम गर्नुहोस्
+    offset: सीमा अफसेट
+    width: सीमा चौडाई
+  description: वर्णन
+  enable: टलिंग विन्डो प्रबन्धक सक्षम गर्नुहोस्
+  layout: नक्शा
+  resize_delta: रिसाइज डेल्टा (%)
+  space_between_containers: कन्टेनर बीचको ठाउँ
+  workspace_offset: कार्यस्पेस अफसेट (मार्जिन)
+  workspace_padding: कार्यक्षेत्र प्याडिंग

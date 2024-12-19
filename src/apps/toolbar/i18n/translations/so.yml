@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Ku dar module
+  remove: Ka saar cutubka
+  settings: Dejinta
+  task_manager: Maareeyaha Hawsha
 media:
   device:
     comunications: Isgaar isgaar
     multimedia: Urur badan
   input_device: Qalabka gelinta
+  master_volume: Mugga Master
   output_device: Aaladda wax soo saarka
   players: Ciyaartoyda warbaahinta
-  master_volume: Mugga Master
 network:
-  placeholder:
-    password: Eray sir
-  not_found: Shabakad lama helin
+  available: Shabakado la heli karo
+  connect: Ku xirid
+  connected: Ku xidhan
+  disconnect: Ka furid
   hidden: Shabakada Qarsoon
   more: Meelo badan oo shabakad ah
-  disconnect: Ka furid
-  connect: Ku xirid
-  scanning: Sawirka shabakadaha
+  not_found: Shabakad lama helin
+  placeholder:
+    password: Eray sir
   saved: Shabakado la keydiyay
+  scanning: Sawirka shabakadaha
   secured: Shabakadda qarsoon
-  connected: Ku xidhan
-  available: Shabakado la heli karo
-settings:
-  shutdown: Bakhtii
-  log_out: Ka bax
-  sleep: Seexo
-  app_settings: App Goobaha
-  restart: Dib u bilow
-  title: Dejinta
-  power: Awood
 placeholder:
-  smart_charge: '- SMART SAXIIXA'
-  ethernet_connected: Helitaanka Internetka
-  volume: Mug
-  settings: Meel deg deg ah
-  open_user_folder: Fur Feejignaanta USE
-  open_system_tray: Nidaamka Nidaamka Furan
   battery_remaining: '% haray'
   bluetooth_devices: Bluetooth & aaladda
+  ethernet_connected: Helitaanka Internetka
   ethernet_disconnected: Marin internet ah
   notifications: Ogeysiisyada
+  open_system_tray: Nidaamka Nidaamka Furan
+  open_user_folder: Fur Feejignaanta USE
+  settings: Meel deg deg ah
+  smart_charge: '- SMART SAXIIXA'
+  volume: Mug
+settings:
+  app_settings: App Goobaha
+  log_out: Ka bax
+  power: Awood
+  restart: Dib u bilow
+  shutdown: Bakhtii
+  sleep: Seexo
+  title: Dejinta
 unlabelled_tray: UNIBLEMEMEMED TRAY
-context_menu:
-  remove: Ka saar cutubka
-  add_module: Ku dar module
-  settings: Dejinta
-  task_manager: Maareeyaha Hawsha

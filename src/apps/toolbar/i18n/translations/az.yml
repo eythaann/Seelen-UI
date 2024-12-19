@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Rabitə
-  master_volume: Magistral həcm
-  players: Media oyunçuları
-  input_device: Giriş cihazı
-  output_device: Çıxış cihazı
-network:
-  placeholder:
-    password: Parol
-  more: Daha çox şəbəkə parametrləri
-  not_found: Heç bir şəbəkə tapılmadı
-  hidden: Gizli şəbəkə
-  disconnect: Ayırd etmək
-  connect: Qoşulmaq
-  secured: Şifrələnmiş şəbəkə
-  connected: qoşuldu
-  saved: Saxlanan şəbəkələr
-  scanning: Şəbəkələrin skan edilməsi
-  available: Mövcud şəbəkələr
-settings:
-  shutdown: Söndür
-  restart: Yenidən başlamaq
-  log_out: Çıxış
-  app_settings: Tətbiq parametrləri
-  sleep: Yatmaq
-  title: Parametrlər
-  power: Güc
-placeholder:
-  ethernet_connected: İnternetə çıxışı
-  smart_charge: '- Ağıllı yük'
-  bluetooth_devices: Bluetooth və Cihazlar
-  open_system_tray: Açıq Sistem Tepsisi
-  volume: Həcm
-  open_user_folder: İstifadəçi qovluğu açın
-  ethernet_disconnected: İnternetə giriş yoxdur
-  settings: Tez Parametrlər
-  battery_remaining: Qalan
-  notifications: Bildirişlər
-unlabelled_tray: Qeyri-çapsız tepsik nişanı
 context_menu:
   add_module: Modul əlavə edin
   remove: Modulu çıxarın
-  task_manager: Tapşırıq meneceri
   settings: Parametrlər
+  task_manager: Tapşırıq meneceri
+media:
+  device:
+    comunications: Rabitə
+    multimedia: Multimedia
+  input_device: Giriş cihazı
+  master_volume: Magistral həcm
+  output_device: Çıxış cihazı
+  players: Media oyunçuları
+network:
+  available: Mövcud şəbəkələr
+  connect: Qoşulmaq
+  connected: qoşuldu
+  disconnect: Ayırd etmək
+  hidden: Gizli şəbəkə
+  more: Daha çox şəbəkə parametrləri
+  not_found: Heç bir şəbəkə tapılmadı
+  placeholder:
+    password: Parol
+  saved: Saxlanan şəbəkələr
+  scanning: Şəbəkələrin skan edilməsi
+  secured: Şifrələnmiş şəbəkə
+placeholder:
+  battery_remaining: Qalan
+  bluetooth_devices: Bluetooth və Cihazlar
+  ethernet_connected: İnternetə çıxışı
+  ethernet_disconnected: İnternetə giriş yoxdur
+  notifications: Bildirişlər
+  open_system_tray: Açıq Sistem Tepsisi
+  open_user_folder: İstifadəçi qovluğu açın
+  settings: Tez Parametrlər
+  smart_charge: '- Ağıllı yük'
+  volume: Həcm
+settings:
+  app_settings: Tətbiq parametrləri
+  log_out: Çıxış
+  power: Güc
+  restart: Yenidən başlamaq
+  shutdown: Söndür
+  sleep: Yatmaq
+  title: Parametrlər
+unlabelled_tray: Qeyri-çapsız tepsik nişanı

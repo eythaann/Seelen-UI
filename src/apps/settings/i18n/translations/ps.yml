@@ -1,259 +1,259 @@
-sides:
-  right: ښي
-  bottom: ښکته
-  top: سر
-  left: کیڼ
-header:
-  labels:
-    developer: پراختیا کونکی
-    general: عمومي
-    seelen_bar: د فینسي توکپټه
-    seelen_wm: د کړکۍ مدیر
-    seelen_weg: ډیک / ټاسک بار
-    specific_apps: ځانګړي اطلاقات
-    info: معلومات
-    monitors: څارونکي
-    shortcuts: لنډوکونه
-    seelen_rofi: د اپلیکیشن لانچر
-    virtual_desk: مجازی ډیسټاپونه
-    home: کور
-    mods: پلگ انونه او ویجټونه
-    seelen_wall: د وال پیپر سمبالګر
-start:
-  title: ښه راغلاست!
-  message_accent: د سټایل سره خپل محصول غوره کړئ!
-  message: >-
-    د زنګ وهلو ته ښه راغلاست، حتمي ډیسټاپ چاپیریال د خپل وینډوز تجربې ته وده
-    ورکولو لپاره د شامل شوي ټایټاپ وینډوز چاپیریال سره! زموږ د استثنایی بیرونځای
-    او پرمختللي ب shape و سره د اغیزمنتیا او ضرباتو نوې دوره وپلټئ.
-general:
-  theme:
-    description: تفصیل
-    label: د موضوع معلومات
-    added: موضوع لا دمخه اضافه شوې
-    tags: ټاګز
-    author: لیکوال
-    enabled: د لاسرسي وړ
-    add: موضوع اضافه کړئ
-    placeholder: موضوع وټاکئ
-    available: شتون لري
-    selected: ټاکل شوی
-  startup: په پیل کې چلول؟
-  language: ژبه
-  icon_pack:
-    label: آیکون کڅوړه
-  accent_color: تیزس رنګ
-  wallpaper:
-    select: وال پیپر غوره کړئ
-  date_format: د نیټې ب .ه
-toolbar:
-  placeholder:
-    description: تفصیل
-    select: د توکپټې جوړښت
-    author: لیکوال
-  enable: د فینسي تورې پټه وړتیا وړ کړئ
-  height: لوړوالی
-  auto_hide: آٹو پټول
-  label: توکپټه
-  delay_to_hide: د پټولو لپاره ځنډ
-  delay_to_show: د ښودلو لپاره ځنډ
-  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
-wm:
-  border:
-    width: د بريد سور
-    enable: د کړکۍ پوله فعال کړئ
-    offset: پوله
-  description: تفصیل
-  resize_delta: د ډیلټا (٪) ریموټ کړئ
-  workspace_offset: د کاري ځای ځایونه (مارجینز)
-  workspace_padding: د کارډا ریسس
-  space_between_containers: د کانتینرونو ترمینځ ځای
-  author: لیکوال
-  layout: ترتیب
-  enable: د ټی بایټس کړکۍ مدیر فعال کړئ
-weg:
-  items:
-    size: د توکي اندازه
-    gap: د توکو تر مینځ فضا
-    label: توکي
-    zoom_size: زوم شوی اندازه (د موضوعاتو لپاره کارول کیږي)
-    visible_separators: لیدلي جلا کونکي
-  margin: حاشیه
-  padding: غالۍ
-  label: ډیک / ټاسک بار
-  width: پلنوالی
-  gap: تشې
-  enable: دوک / ټاسک بار فعال کړئ
-  auto_hide: آٹو پټول
-  dock_side: موقعیت
-  delay_to_hide: د پټولو لپاره ځنډ
-  delay_to_show: د ښودلو لپاره ځنډ
-  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
-devtools:
-  custom_config_file: د دودیز ترتیب فایل پورته کړئ
-  enable: د پراختیا کونکي وسیلې فعال کړئ
-  settings_file: د امستنې دوتنه
-  data_folder: د معلوماتو فولډر
-  install_folder: لګول فولډر
-  app_folders: د ایپ فولډرونه
-  load: بار
+app_launcher:
+  enable: د اپلیکیشن لیسچر وړ کړئ
+  monitor: څارنه کول
+  runners:
+    cmd: قومانده
+    explorer: منډه وهل
+    label: چلوونکي
 apps_configurations:
   app:
-    options:
-      unmanage: بې وسلې کول
-      pinned: پینټ شوی
-      force: د ځواک اداره کول
-      float: فلوټ
-      hidden: د ډیک / ټاسک بار څخه پټول
-    ok_readonly: د نوي په توګه
-    category_placeholder: هیڅ نه
-    category: کټګورۍ
-    ok_create: جوړول
-    monitor_placeholder: هیڅ نه
-    monitor: څارونکی
-    ok_edit: تازه کول
-    title_readonly: لیدنه. یو {علی}}
-    name: نوم
-    workspace: کاري ځای
-    title_create: '{{}} رامینځته کول'
     bindings: تړل (په یادداشت کې دواړه اختیارونه اړین دي)
-    workspace_placeholder: هیڅ نه
-    wm_options_label: د کړکۍ مدیر اختیارونه
-    weg_options_label: دوک / ټاسک بار انتخابونه
+    category: کټګورۍ
+    category_placeholder: هیڅ نه
+    monitor: څارونکی
+    monitor_placeholder: هیڅ نه
+    name: نوم
+    ok_create: جوړول
+    ok_edit: تازه کول
+    ok_readonly: د نوي په توګه
+    options:
+      float: فلوټ
+      force: د ځواک اداره کول
+      hidden: د ډیک / ټاسک بار څخه پټول
+      pinned: پینټ شوی
+      unmanage: بې وسلې کول
     options_label: اضافي اختیارونه
+    title_create: '{{}} رامینځته کول'
     title_edit: ترمیم. {{}}
-  identifier:
-    or: یا
-    id: پېژنيزه
-    and: او
-    remove: بلاک ړنګ کړئ
-    add_block: بلاک اضافه کړئ
-    kind: د
-    matching_strategy: برابرول
-    negation: غفلت کول
-  new: نوی
-  import: واردول
-  search: لټون
-  confirm_delete: ایا ته باوري یې چې دا جوړښتونه ړنګول غواړې؟
+    title_readonly: لیدنه. یو {علی}}
+    weg_options_label: دوک / ټاسک بار انتخابونه
+    wm_options_label: د کړکۍ مدیر اختیارونه
+    workspace: کاري ځای
+    workspace_placeholder: هیڅ نه
   bundled_msg: >-
     دا بنډل تشکیلات د ترمیم وړ ندي او ډیزاین شوي چې تاسو ته د دودیز کولو پرته
     غوره تجربه چمتو کړي. دوی په اوتومات ډول ستاسو لپاره خورا عام غوښتنلیکونه
     تنظیموي.
-  delete: حذف کول
-  swap: سویپ
-  confirm_delete_title: ړنګول تایید کړئ
-  export: صادرات
   bundled_title: د اپلیکیشن سره ایپ بنډل شوی
+  confirm_delete: ایا ته باوري یې چې دا جوړښتونه ړنګول غواړې؟
+  confirm_delete_title: ړنګول تایید کړئ
+  delete: حذف کول
+  export: صادرات
   extra_info: >-
     سیلین UI په هر اپلیکیشن کې یوازې یو پیژندونکی کاروي (لومړی میچ وموندل شو) نو
     د مشخص کولو څرنګوالي ترتیب مهم دی ، وروستي اضافه شوي به لومړیتوب ورکړل شي ،
     ځکه چې یادونه وکړئ جدول له وروستي څخه زاړه ته په ډیفالټ ډول ترتیب شوی.
+  identifier:
+    add_block: بلاک اضافه کړئ
+    and: او
+    id: پېژنيزه
+    kind: د
+    matching_strategy: برابرول
+    negation: غفلت کول
+    or: یا
+    remove: بلاک ړنګ کړئ
+  import: واردول
+  new: نوی
+  search: لټون
+  swap: سویپ
+cancel: لغوه کول
+close: بندول
+delete: حذف کول
+devtools:
+  app_folders: د ایپ فولډرونه
+  custom_config_file: د دودیز ترتیب فایل پورته کړئ
+  data_folder: د معلوماتو فولډر
+  enable: د پراختیا کونکي وسیلې فعال کړئ
+  install_folder: لګول فولډر
+  load: بار
+  settings_file: د امستنې دوتنه
 extras:
-  links: رسمي اړیکې
+  discord: ډارول
   exit: پریښودل / وتل
   github: ګیتوب
-  version: نسخه
+  links: رسمي اړیکې
   relaunch: بیا پیل کول
-  discord: ډارول
-shortcuts:
+  version: نسخه
+general:
+  accent_color: تیزس رنګ
+  date_format: د نیټې ب .ه
+  icon_pack:
+    label: آیکون کڅوړه
+  language: ژبه
+  startup: په پیل کې چلول؟
+  theme:
+    add: موضوع اضافه کړئ
+    added: موضوع لا دمخه اضافه شوې
+    author: لیکوال
+    available: شتون لري
+    description: تفصیل
+    enabled: د لاسرسي وړ
+    label: د موضوع معلومات
+    placeholder: موضوع وټاکئ
+    selected: ټاکل شوی
+    tags: ټاګز
+  wallpaper:
+    select: وال پیپر غوره کړئ
+header:
   labels:
-    send_to_workspace_9: کارځای ته واستوئ
-    decrease_height: لوړوالی کمول
-    reserve_left: ساتل شوی
-    focus_right: سم تمرکز
-    send_to_workspace_5: د کارځای 5 ته واستوئ
-    move_to_workspace_9: د کارځای 9 ته لاړشئ
-    send_to_workspace_6: کارځای ته واستوئ
-    switch_workspace_6: د کارځای 6 ته وګرځئ
-    send_to_workspace_1: کارځای ته واستوئ
-    switch_workspace_9: د کارځای شمیره 9
-    focus_left: کي left ه تمرکز
-    move_to_workspace_3: د کارځای 3 ته لاړشئ
-    send_to_workspace_4: کارځای ته واستوئ
-    switch_workspace_4: د کارځای ته وسپارئ
-    switch_workspace_5: د کارځای 5 ته لاړشئ
-    move_to_workspace_8: د کارځای ته لاړشئ
-    send_to_workspace_7: کارځای ته واستوئ
-    reserve_top: خوندي پټی
-    send_to_workspace_2: کارځای ته واستوئ
-    focus_latest: وروستی تمرکز وکړئ
-    move_to_workspace_4: د کارځای ته لاړشئ
-    send_to_workspace_3: کارځای ته واستوئ
-    move_to_workspace_7: د کارځای 7 ته لاړشئ
-    switch_workspace_2: د کارځای 2 ته لاړشئ
-    reserve_float: ریزرو فلوټ
-    switch_workspace_3: د کارځای 3 ته وګرځئ
-    move_to_workspace_5: د کارځای 5 ته لاړشئ
-    reserve_bottom: د
-    decrease_width: د سوری کمول
-    move_to_workspace_0: د کارځای 0 ته لاړشئ
-    send_to_workspace_0: کارځای ته واستوئ
-    focus_top: فوکس سر
-    focus_bottom: ښکته
-    reserve_stack: ریزرو سټیک
-    switch_workspace_7: د کارځای ته لاړشئ
-    move_to_workspace_1: د کارځای 1 ته لاړشئ
-    move_to_workspace_6: د کارځای ته لاړشئ
-    switch_workspace_8: د کارځای 8 ته وګرځئ
-    reserve_right: سم ساتل
-    move_to_workspace_2: د کارځای 2 ته لاړشئ
-    increase_width: پلنوالی زیات کړئ
-    send_to_workspace_8: کارځای ته واستوئ
-    restore_sizes: اندازونه بحال کړئ
-    increase_height: قد زیاتول
-    switch_workspace_1: د کارځای 2 ته لاړشئ
-    switch_workspace_0: د کارځای 1 ته لاړشئ
-    misc_open_settings: خلاص امستنې
-    misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
-    misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
-    toggle_launcher: ټګول
-  enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
-  enable: مدغم شوي لنډیزونه (اه)
-  reset: د افلاسیون لپاره بیا تنظیمول
-  readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
-inProgress: د پرمختګ په حال کې...
-quit: پرېښودل
-delete: حذف کول
-cancel: لغوه کول
-loading: بارول ...
-save: خوندي کړئ
-open: خلاص
-vd:
-  strategy:
-    seelen: تلل
-    label: مجازی ډیسټاپ ستراتیژي
-    native: اصلي
-  disabled_windows_version: اصلي مجازی ډیسک ډیسک ستراتیژي ستاسو د وینډوز نسخه لپاره شتون نلري.
-save_and_restart: خوندي کول او بیا پیل کړئ
-monitors_configurations:
-  label: د {{{پلس} نظارت وکړئ}
-wall:
-  backgrounds: والپيپرونه
-  no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
-  enable: د وال پیپر مدیر فعال کړئ
-  random: تصادفي سلایډ
-  interval: په وال پیپر بدل کړئ
-  minutes: دقیقې
-  seconds: ثانیې
-  hours: ساعتونه
-app_launcher:
-  runners:
-    explorer: منډه وهل
-    cmd: قومانده
-    label: چلوونکي
-  monitor: څارنه کول
-  enable: د اپلیکیشن لیسچر وړ کړئ
-more: نور
+    developer: پراختیا کونکی
+    general: عمومي
+    home: کور
+    info: معلومات
+    mods: پلگ انونه او ویجټونه
+    monitors: څارونکي
+    seelen_bar: د فینسي توکپټه
+    seelen_rofi: د اپلیکیشن لانچر
+    seelen_wall: د وال پیپر سمبالګر
+    seelen_weg: ډیک / ټاسک بار
+    seelen_wm: د کړکۍ مدیر
+    shortcuts: لنډوکونه
+    specific_apps: ځانګړي اطلاقات
+    virtual_desk: مجازی ډیسټاپونه
 inherit: میراث
+inProgress: د پرمختګ په حال کې...
 insert: دننه کړئ
-close: بندول
-update:
-  available: اوسمهالول شتون لري!
-  downloading: دانلود ...
-  channel: چینل تازه کول
+loading: بارول ...
 miscellaneous: متفرقه
 mods:
   plugins: فلګونه
-  widgets: ویجټونه
   target: هدف
+  widgets: ویجټونه
+monitors_configurations:
+  label: د {{{پلس} نظارت وکړئ}
+more: نور
+open: خلاص
+quit: پرېښودل
 remove: لرې کول
+save: خوندي کړئ
+save_and_restart: خوندي کول او بیا پیل کړئ
+shortcuts:
+  enable: مدغم شوي لنډیزونه (اه)
+  enable_tooltip: غیر فعال کړئ که تاسو خپل لنډلارې د سیرلین اصلي API په کارولو سره پلي کړئ
+  labels:
+    decrease_height: لوړوالی کمول
+    decrease_width: د سوری کمول
+    focus_bottom: ښکته
+    focus_latest: وروستی تمرکز وکړئ
+    focus_left: کي left ه تمرکز
+    focus_right: سم تمرکز
+    focus_top: فوکس سر
+    increase_height: قد زیاتول
+    increase_width: پلنوالی زیات کړئ
+    misc_open_settings: خلاص امستنې
+    misc_toggle_lock_tracing: د غلا کولو لاک تعقیب (ونې)
+    misc_toggle_win_event_tracing: د لید لید پاراګ (ونې)
+    move_to_workspace_0: د کارځای 0 ته لاړشئ
+    move_to_workspace_1: د کارځای 1 ته لاړشئ
+    move_to_workspace_2: د کارځای 2 ته لاړشئ
+    move_to_workspace_3: د کارځای 3 ته لاړشئ
+    move_to_workspace_4: د کارځای ته لاړشئ
+    move_to_workspace_5: د کارځای 5 ته لاړشئ
+    move_to_workspace_6: د کارځای ته لاړشئ
+    move_to_workspace_7: د کارځای 7 ته لاړشئ
+    move_to_workspace_8: د کارځای ته لاړشئ
+    move_to_workspace_9: د کارځای 9 ته لاړشئ
+    reserve_bottom: د
+    reserve_float: ریزرو فلوټ
+    reserve_left: ساتل شوی
+    reserve_right: سم ساتل
+    reserve_stack: ریزرو سټیک
+    reserve_top: خوندي پټی
+    restore_sizes: اندازونه بحال کړئ
+    send_to_workspace_0: کارځای ته واستوئ
+    send_to_workspace_1: کارځای ته واستوئ
+    send_to_workspace_2: کارځای ته واستوئ
+    send_to_workspace_3: کارځای ته واستوئ
+    send_to_workspace_4: کارځای ته واستوئ
+    send_to_workspace_5: د کارځای 5 ته واستوئ
+    send_to_workspace_6: کارځای ته واستوئ
+    send_to_workspace_7: کارځای ته واستوئ
+    send_to_workspace_8: کارځای ته واستوئ
+    send_to_workspace_9: کارځای ته واستوئ
+    switch_workspace_0: د کارځای 1 ته لاړشئ
+    switch_workspace_1: د کارځای 2 ته لاړشئ
+    switch_workspace_2: د کارځای 2 ته لاړشئ
+    switch_workspace_3: د کارځای 3 ته وګرځئ
+    switch_workspace_4: د کارځای ته وسپارئ
+    switch_workspace_5: د کارځای 5 ته لاړشئ
+    switch_workspace_6: د کارځای 6 ته وګرځئ
+    switch_workspace_7: د کارځای ته لاړشئ
+    switch_workspace_8: د کارځای 8 ته وګرځئ
+    switch_workspace_9: د کارځای شمیره 9
+    toggle_launcher: ټګول
+  readonly_tooltip: دا یو بشپړ لنډ لنډ پړاو دی
+  reset: د افلاسیون لپاره بیا تنظیمول
+sides:
+  bottom: ښکته
+  left: کیڼ
+  right: ښي
+  top: سر
+start:
+  message: >-
+    د زنګ وهلو ته ښه راغلاست، حتمي ډیسټاپ چاپیریال د خپل وینډوز تجربې ته وده
+    ورکولو لپاره د شامل شوي ټایټاپ وینډوز چاپیریال سره! زموږ د استثنایی بیرونځای
+    او پرمختللي ب shape و سره د اغیزمنتیا او ضرباتو نوې دوره وپلټئ.
+  message_accent: د سټایل سره خپل محصول غوره کړئ!
+  title: ښه راغلاست!
+toolbar:
+  auto_hide: آٹو پټول
+  delay_to_hide: د پټولو لپاره ځنډ
+  delay_to_show: د ښودلو لپاره ځنډ
+  enable: د فینسي تورې پټه وړتیا وړ کړئ
+  height: لوړوالی
+  label: توکپټه
+  placeholder:
+    author: لیکوال
+    description: تفصیل
+    select: د توکپټې جوړښت
+  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
+update:
+  available: اوسمهالول شتون لري!
+  channel: چینل تازه کول
+  downloading: دانلود ...
+vd:
+  disabled_windows_version: اصلي مجازی ډیسک ډیسک ستراتیژي ستاسو د وینډوز نسخه لپاره شتون نلري.
+  strategy:
+    label: مجازی ډیسټاپ ستراتیژي
+    native: اصلي
+    seelen: تلل
+wall:
+  backgrounds: والپيپرونه
+  enable: د وال پیپر مدیر فعال کړئ
+  hours: ساعتونه
+  interval: په وال پیپر بدل کړئ
+  minutes: دقیقې
+  no_background: پرځای یې خالي سلایډونه، پرځای د موضوع شالید په کارولو سره.
+  random: تصادفي سلایډ
+  seconds: ثانیې
+weg:
+  auto_hide: آٹو پټول
+  delay_to_hide: د پټولو لپاره ځنډ
+  delay_to_show: د ښودلو لپاره ځنډ
+  dock_side: موقعیت
+  enable: دوک / ټاسک بار فعال کړئ
+  gap: تشې
+  items:
+    gap: د توکو تر مینځ فضا
+    label: توکي
+    size: د توکي اندازه
+    visible_separators: لیدلي جلا کونکي
+    zoom_size: زوم شوی اندازه (د موضوعاتو لپاره کارول کیږي)
+  label: ډیک / ټاسک بار
+  margin: حاشیه
+  padding: غالۍ
+  use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
+  width: پلنوالی
+wm:
+  author: لیکوال
+  border:
+    enable: د کړکۍ پوله فعال کړئ
+    offset: پوله
+    width: د بريد سور
+  description: تفصیل
+  enable: د ټی بایټس کړکۍ مدیر فعال کړئ
+  layout: ترتیب
+  resize_delta: د ډیلټا (٪) ریموټ کړئ
+  space_between_containers: د کانتینرونو ترمینځ ځای
+  workspace_offset: د کاري ځای ځایونه (مارجینز)
+  workspace_padding: د کارډا ریسس

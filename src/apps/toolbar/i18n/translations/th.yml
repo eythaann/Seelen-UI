@@ -1,46 +1,46 @@
+context_menu:
+  add_module: เพิ่มโมดูล
+  remove: ลบโมดูล
+  settings: การตั้งค่า
+  task_manager: ตัวจัดการงาน
 media:
   device:
     comunications: การสื่อสาร
     multimedia: มัลติมีเดีย
-  output_device: อุปกรณ์ส่งออก
   input_device: อุปกรณ์อินพุต
   master_volume: ระดับปริญญาโท
+  output_device: อุปกรณ์ส่งออก
   players: เครื่องเล่นสื่อ
 network:
-  placeholder:
-    password: รหัสผ่าน
+  available: เครือข่ายที่มีอยู่
   connect: เชื่อมต่อ
-  more: การตั้งค่าเครือข่ายเพิ่มเติม
-  not_found: ไม่พบเครือข่าย
+  connected: เชื่อมต่อกับ
   disconnect: ตัดการเชื่อมต่อ
   hidden: เครือข่ายที่ซ่อน
-  available: เครือข่ายที่มีอยู่
-  secured: เครือข่ายที่เข้ารหัส
-  scanning: กำลังสแกนหาเครือข่าย
+  more: การตั้งค่าเครือข่ายเพิ่มเติม
+  not_found: ไม่พบเครือข่าย
+  placeholder:
+    password: รหัสผ่าน
   saved: เครือข่ายที่บันทึกไว้
-  connected: เชื่อมต่อกับ
+  scanning: กำลังสแกนหาเครือข่าย
+  secured: เครือข่ายที่เข้ารหัส
+placeholder:
+  battery_remaining: '% ที่เหลืออยู่'
+  bluetooth_devices: บลูทู ธ และอุปกรณ์
+  ethernet_connected: การเข้าถึงอินเทอร์เน็ต
+  ethernet_disconnected: ไม่มีการเข้าถึงอินเทอร์เน็ต
+  notifications: การแจ้งเตือน
+  open_system_tray: ถาดระบบเปิด
+  open_user_folder: เปิดโฟลเดอร์ผู้ใช้
+  settings: การตั้งค่าอย่างรวดเร็ว
+  smart_charge: '- ชาร์จอัจฉริยะ'
+  volume: ปริมาณ
 settings:
-  restart: เริ่มต้นใหม่
   app_settings: การตั้งค่าแอป
-  sleep: นอน
-  title: การตั้งค่า
-  shutdown: ปิดตัวลง
   log_out: ออกจากระบบ
   power: พลัง
-placeholder:
-  settings: การตั้งค่าอย่างรวดเร็ว
-  open_system_tray: ถาดระบบเปิด
-  ethernet_disconnected: ไม่มีการเข้าถึงอินเทอร์เน็ต
-  volume: ปริมาณ
-  smart_charge: '- ชาร์จอัจฉริยะ'
-  battery_remaining: '% ที่เหลืออยู่'
-  open_user_folder: เปิดโฟลเดอร์ผู้ใช้
-  ethernet_connected: การเข้าถึงอินเทอร์เน็ต
-  bluetooth_devices: บลูทู ธ และอุปกรณ์
-  notifications: การแจ้งเตือน
+  restart: เริ่มต้นใหม่
+  shutdown: ปิดตัวลง
+  sleep: นอน
+  title: การตั้งค่า
 unlabelled_tray: ไอคอนถาดที่ไม่มีป้ายกำกับ
-context_menu:
-  remove: ลบโมดูล
-  add_module: เพิ่มโมดูล
-  task_manager: ตัวจัดการงาน
-  settings: การตั้งค่า

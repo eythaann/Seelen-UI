@@ -1,257 +1,257 @@
-sides:
-  right: ቀኝ
-  left: ግራ
-  top: ከላይ
-  bottom: ታች
-header:
-  labels:
-    developer: ገንቢ
-    general: አጠቃላይ
-    info: መረጃ
-    seelen_weg: Dock / Accorbar
-    shortcuts: አቋራጮች
-    specific_apps: የተወሰኑ መተግበሪያዎች
-    seelen_bar: Fancy የመሣሪያ አሞሌ
-    monitors: ተቆጣጣሪዎች
-    seelen_wm: የመስኮት አቀናባሪ
-    seelen_rofi: የመተግበሪያ አስጀማሪ
-    virtual_desk: ምናባዊ ዴስክቶፕስ
-    home: ቤት
-    mods: ተሰኪዎች እና መግብሮች
-    seelen_wall: የግድግዳ ወረቀት ሥራ አስኪያጅ
-start:
-  title: እንኳን ደህና መጣህ!
-  message: >-
-    የእርስዎን ዊንዶውስ ተሞክሮ ለማሳደግ ከተዋሃደ ድንገተኛ የዊንዶውስ ሥራ አስኪያጅ ጋር ወደ ደመወዝ የዴስክቶፕ ሥራ
-    አስኪያጅ እንኳን በደህና መጡ! አዲስ የብቃት እና የብዝበዛ ኢቫን እና ባለብዙ ፊደል እና የላቁ ባህሪያችን ጋር ይሳለቁ.
-  message_accent: ምርታማነትዎን በቅጥ ያሻሽሉ!
-general:
-  theme:
-    description: መግለጫ
-    tags: መለያዎች
-    label: ጭብጥ መረጃ
-    add: ጭብጥ ያክሉ
-    author: ደራሲ ደራሲ
-    added: ጭብጥ ቀድሞውኑ ታክሏል
-    placeholder: ጭብጥ ይምረጡ
-    enabled: አስቁ
-    selected: ተመር selected ል
-    available: ይገኛል
-  startup: ጅምር ላይ ይሮጡ?
-  language: ቋንቋ
-  icon_pack:
-    label: አዶዎች ፓኬጆች
-  accent_color: የዝግጅት ቀለም
-  wallpaper:
-    select: የግድግዳ ወረቀት ይምረጡ
-  date_format: የቀን ቅርጸት
-toolbar:
-  placeholder:
-    description: መግለጫ
-    select: የመሣሪያ አሞሌ መዋቅር
-    author: ደራሲ ደራሲ
-  height: ቁመት
-  enable: Fangance የመሳሪያ አሞሌን ያንቁ
-  auto_hide: ራስ-ሰር መደበቅ
-  label: የመሣሪያ አሞሌ
-  delay_to_hide: ለመደበቅ መዘግየት
-  delay_to_show: ለማሳየት መዘግየት
-  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
-wm:
-  border:
-    width: ድንበር ስፋት
-    offset: ድንበር ማካካሻ
-    enable: የመስኮት ድንበር አንቃ
-  description: መግለጫ
-  layout: አቀማመጥ
-  space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ
-  workspace_offset: የስራ ቦታዎች ማካካሻ (ማርጂኖች)
-  workspace_padding: የስራ ቦታዎች ፓድ
-  resize_delta: ዴልታ (%)
-  author: ደራሲ ደራሲ
-  enable: የታሸገ መስኮት አቀናባሪን ያንቁ
-weg:
-  items:
-    zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
-    gap: በእቃዎች መካከል ቦታ
-    label: ዕቃዎች
-    size: የንጥል መጠን
-    visible_separators: የሚታዩ መለያዎች
-  margin: ህዳግ
-  auto_hide: ራስ-ሰር መደበቅ
-  padding: ፓድ
-  enable: መትከያ / ተግባር አሞሌን ያንቁ
-  width: ስፋት
-  gap: ክፍተት
-  label: Dock / Accorbar
-  dock_side: አቀማመጥ
-  delay_to_hide: ለመደበቅ መዘግየት
-  delay_to_show: ለማሳየት መዘግየት
-  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
-devtools:
-  app_folders: የመተግበሪያ አቃፊዎች
-  data_folder: የውሂብ አቃፊ
-  load: ጭነት
-  custom_config_file: ብጁ ውቅያ ፋይልን ይጫኑ
-  install_folder: የመጫን አቃፊ
-  enable: የገንቢ መሳሪያዎችን ያንቁ
-  settings_file: የቅንብሮች ፋይል
+app_launcher:
+  enable: የመተግበሪያ አስጀማሪን አንቃ
+  monitor: ለማሳየት መከታተል
+  runners:
+    cmd: ትእዛዝ
+    explorer: ሩጫ
+    label: ሯጮች
 apps_configurations:
   app:
-    options:
-      float: ተንሳፋፊ
-      pinned: ተያይ ated ል
-      unmanage: አለመግባባት
-      force: ኃይል ማስተዳደር
-      hidden: ከ Dock / Actorbar ይደብቁ
-    monitor_placeholder: የለም
-    monitor: ተቆጣጠር
+    bindings: ማሰሪያ (ሁለቱንም አማራጮች ልብ ይበሉ)
+    category: ምድብ
     category_placeholder: የለም
+    monitor: ተቆጣጠር
+    monitor_placeholder: የለም
     name: ስም
     ok_create: ፍጠር
-    workspace_placeholder: የለም
     ok_edit: ዝመና
-    workspace: የስራ ቦታ
-    bindings: ማሰሪያ (ሁለቱንም አማራጮች ልብ ይበሉ)
-    title_readonly: '{{{}}}}'
-    title_create: '{{{ስም} መፍጠር}}'
-    category: ምድብ
     ok_readonly: እንደ አዲስ ያርትዑ
+    options:
+      float: ተንሳፋፊ
+      force: ኃይል ማስተዳደር
+      hidden: ከ Dock / Actorbar ይደብቁ
+      pinned: ተያይ ated ል
+      unmanage: አለመግባባት
+    options_label: ተጨማሪ አማራጮች
+    title_create: '{{{ስም} መፍጠር}}'
+    title_edit: አርት editing {{ስም}}}
+    title_readonly: '{{{}}}}'
     weg_options_label: የመርከሪያ / የተግባር አሞሌ አማራጮች
     wm_options_label: የመስኮት አቀናባሪ አማራጮች
-    options_label: ተጨማሪ አማራጮች
-    title_edit: አርት editing {{ስም}}}
-  identifier:
-    remove: ብሎክ ሰርዝ
-    and: እና
-    or: ወይም
-    id: መለያ
-    kind: መለየት በ
-    add_block: ብሎክ ያክሉ
-    negation: ማዛመድን
-    matching_strategy: ተዛማጅ ስትራቴጂ
-  new: አዲስ
-  search: ፍለጋ
-  confirm_delete: እርግጠኛ ነዎት ይህንን ውቅር / ቶች መሰረዝ ይፈልጋሉ?
-  confirm_delete_title: መሰረዝ ያረጋግጡ
-  bundled_title: የመተግበሪያ ውቅረት በጥይት የተደመሰሰ
+    workspace: የስራ ቦታ
+    workspace_placeholder: የለም
   bundled_msg: >-
     እነዚህ የታሸጉ ውቅሮች አርት edity ት አይደሉም እናም ያለ ማበጀት ምርጥ ተሞክሮዎን ለማቅረብ የተቀየሱ ናቸው. በጣም
     የተለመዱ ትግበራዎችን በራስ-ሰር ያዋቅሩታል.
+  bundled_title: የመተግበሪያ ውቅረት በጥይት የተደመሰሰ
+  confirm_delete: እርግጠኛ ነዎት ይህንን ውቅር / ቶች መሰረዝ ይፈልጋሉ?
+  confirm_delete_title: መሰረዝ ያረጋግጡ
   delete: ሰርዝ
   export: ወደ ውጭ ይላኩ
-  swap: መቀያየር
-  import: ማስመጣት
   extra_info: >-
     Seelen UI በአንድ መተግበሪያ አንድ መለያ ብቻ ነው የሚጠቀመው (የመጀመሪያው ግጥሚያ ተገኝቷል) ስለዚህ እንዴት
     እንደሚገለጹ ቅደም ተከተላቸው አስፈላጊ ነው፣ የቅርብ ጊዜዎቹ የተጨመሩት ቅድሚያ ይሰጣቸዋል፣ ምክንያቱም ሰንጠረዡ ከቅርቡ
     ወደ አሮጌው በነባሪ የተደረደረ ነው።
+  identifier:
+    add_block: ብሎክ ያክሉ
+    and: እና
+    id: መለያ
+    kind: መለየት በ
+    matching_strategy: ተዛማጅ ስትራቴጂ
+    negation: ማዛመድን
+    or: ወይም
+    remove: ብሎክ ሰርዝ
+  import: ማስመጣት
+  new: አዲስ
+  search: ፍለጋ
+  swap: መቀያየር
+cancel: ይቅር
+close: ገጠመ
+delete: ሰርዝ
+devtools:
+  app_folders: የመተግበሪያ አቃፊዎች
+  custom_config_file: ብጁ ውቅያ ፋይልን ይጫኑ
+  data_folder: የውሂብ አቃፊ
+  enable: የገንቢ መሳሪያዎችን ያንቁ
+  install_folder: የመጫን አቃፊ
+  load: ጭነት
+  settings_file: የቅንብሮች ፋይል
 extras:
-  links: ኦፊሴላዊ አገናኞች
-  github: Github
   discord: አለመግባባት
-  version: ስሪት
   exit: ማቆም / መውጣት
+  github: Github
+  links: ኦፊሴላዊ አገናኞች
   relaunch: እንደገና መነገር
-shortcuts:
+  version: ስሪት
+general:
+  accent_color: የዝግጅት ቀለም
+  date_format: የቀን ቅርጸት
+  icon_pack:
+    label: አዶዎች ፓኬጆች
+  language: ቋንቋ
+  startup: ጅምር ላይ ይሮጡ?
+  theme:
+    add: ጭብጥ ያክሉ
+    added: ጭብጥ ቀድሞውኑ ታክሏል
+    author: ደራሲ ደራሲ
+    available: ይገኛል
+    description: መግለጫ
+    enabled: አስቁ
+    label: ጭብጥ መረጃ
+    placeholder: ጭብጥ ይምረጡ
+    selected: ተመር selected ል
+    tags: መለያዎች
+  wallpaper:
+    select: የግድግዳ ወረቀት ይምረጡ
+header:
   labels:
-    send_to_workspace_2: ወደ የስራ ቦታ 2 ይላኩ 2
-    reserve_left: የተቆራረጠ
-    increase_height: ቁመት ይጨምሩ
-    send_to_workspace_1: ወደ የስራ ቦታ 1 ይላኩ 1
-    reserve_bottom: የተጠባበቅ ክፍል
-    move_to_workspace_0: ወደ የሥራ ቦታ 0 ይሂዱ
-    send_to_workspace_5: ወደ የሥራ ቦታ 5 ይላኩ
-    switch_workspace_9: ወደ የሥራ ቦታ 9 ቀይር
-    switch_workspace_7: ወደ የሥራ ቦታ 7 ቀይር
+    developer: ገንቢ
+    general: አጠቃላይ
+    home: ቤት
+    info: መረጃ
+    mods: ተሰኪዎች እና መግብሮች
+    monitors: ተቆጣጣሪዎች
+    seelen_bar: Fancy የመሣሪያ አሞሌ
+    seelen_rofi: የመተግበሪያ አስጀማሪ
+    seelen_wall: የግድግዳ ወረቀት ሥራ አስኪያጅ
+    seelen_weg: Dock / Accorbar
+    seelen_wm: የመስኮት አቀናባሪ
+    shortcuts: አቋራጮች
+    specific_apps: የተወሰኑ መተግበሪያዎች
+    virtual_desk: ምናባዊ ዴስክቶፕስ
+inherit: ውርስ
+inProgress: በሂደት ላይ...
+insert: ያስገቡ
+loading: በመጫን ላይ ...
+miscellaneous: ልዩነቶች
+mods:
+  plugins: ተሰኪዎች
+  target: Target ላማ
+  widgets: ፍርግሞች
+monitors_configurations:
+  label: ይቆጣጠሩ {{አው.ፊ.}}}}
+more: ተጨማሪ
+open: ክፈት
+quit: አቁም
+remove: ያስወግዱ
+save: አስቀምጥ
+save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
+shortcuts:
+  enable: የተቀናጁ አቋራጮችን (AHK)
+  enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
+  labels:
     decrease_height: ቁመት ቀንሷል
-    increase_width: ስፋት መጨመር
-    switch_workspace_6: ወደ የሥራ ቦታ 6 ይቀይሩ
-    move_to_workspace_3: ወደ የሥራ ቦታ 3 ይሂዱ
-    move_to_workspace_1: ወደ የሥራ ቦታ 1 ይሂዱ
-    focus_right: በትክክል ትኩረት ያድርጉ
-    focus_bottom: ወደ ታች ትኩረት
-    send_to_workspace_0: ወደ የስራ ቦታ 0 ይላኩ 0
-    switch_workspace_8: ወደ የሥራ ቦታ 8 ቀይር
-    move_to_workspace_9: ወደ የሥራ ቦታ 9 ይሂዱ
-    move_to_workspace_4: ወደ የሥራ ቦታ 4 ይሂዱ
-    send_to_workspace_3: ወደ የስራ ቦታ 3 ይላኩ
-    reserve_stack: የተጠባባቂ ቁልል
-    move_to_workspace_5: ወደ የሥራ ቦታ 5 ይሂዱ
-    move_to_workspace_8: ወደ የሥራ ቦታ 8 ይሂዱ
-    move_to_workspace_7: ወደ የሥራ ቦታ 7 ይሂዱ
-    send_to_workspace_7: ወደ የሥራ ቦታ 7 ይላኩ 7
-    focus_top: ትኩረት
-    focus_left: ትኩረት ቀርቷል
-    move_to_workspace_2: ወደ የሥራ ቦታ 2 ይሂዱ
-    switch_workspace_4: ወደ የሥራ ቦታ 4 ይቀይሩ
-    switch_workspace_3: ወደ የስራ ቦታ 3 ቀይር
-    send_to_workspace_9: ወደ የሥራ ቦታ 9 ይላኩ
-    send_to_workspace_6: ወደ የሥራ ቦታ 6 ይላኩ
-    switch_workspace_5: ወደ የሥራ ቦታ 5 ቀይር
-    reserve_top: የላይኛው ክፍል
-    focus_latest: የቅርብ ጊዜዎችን ያተኩሩ
-    reserve_float: የተጠባባቂ ተንሳፋፊ
-    send_to_workspace_4: ወደ የሥራ ቦታ 4 ይላኩ
-    switch_workspace_2: ወደ የሥራ ቦታ 2 ቀይር
-    move_to_workspace_6: ወደ የሥራ ቦታ 1 ይሂዱ
-    send_to_workspace_8: ወደ የሥራ ቦታ 8 ይላኩ 8
-    restore_sizes: መጠኖች ወደነበሩበት ይመልሱ
-    reserve_right: መብት
     decrease_width: ስፋት መቀነስ
-    switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
-    switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
+    focus_bottom: ወደ ታች ትኩረት
+    focus_latest: የቅርብ ጊዜዎችን ያተኩሩ
+    focus_left: ትኩረት ቀርቷል
+    focus_right: በትክክል ትኩረት ያድርጉ
+    focus_top: ትኩረት
+    increase_height: ቁመት ይጨምሩ
+    increase_width: ስፋት መጨመር
     misc_open_settings: ክፍት ቅንብሮች
     misc_toggle_lock_tracing: መቆለፊያ መቆለፊያ (ምዝግብ ማስታወሻዎች)
     misc_toggle_win_event_tracing: የ UNSCUCT PORTERSERSESTERE (ምዝግብ ማስታወሻዎች)
+    move_to_workspace_0: ወደ የሥራ ቦታ 0 ይሂዱ
+    move_to_workspace_1: ወደ የሥራ ቦታ 1 ይሂዱ
+    move_to_workspace_2: ወደ የሥራ ቦታ 2 ይሂዱ
+    move_to_workspace_3: ወደ የሥራ ቦታ 3 ይሂዱ
+    move_to_workspace_4: ወደ የሥራ ቦታ 4 ይሂዱ
+    move_to_workspace_5: ወደ የሥራ ቦታ 5 ይሂዱ
+    move_to_workspace_6: ወደ የሥራ ቦታ 1 ይሂዱ
+    move_to_workspace_7: ወደ የሥራ ቦታ 7 ይሂዱ
+    move_to_workspace_8: ወደ የሥራ ቦታ 8 ይሂዱ
+    move_to_workspace_9: ወደ የሥራ ቦታ 9 ይሂዱ
+    reserve_bottom: የተጠባበቅ ክፍል
+    reserve_float: የተጠባባቂ ተንሳፋፊ
+    reserve_left: የተቆራረጠ
+    reserve_right: መብት
+    reserve_stack: የተጠባባቂ ቁልል
+    reserve_top: የላይኛው ክፍል
+    restore_sizes: መጠኖች ወደነበሩበት ይመልሱ
+    send_to_workspace_0: ወደ የስራ ቦታ 0 ይላኩ 0
+    send_to_workspace_1: ወደ የስራ ቦታ 1 ይላኩ 1
+    send_to_workspace_2: ወደ የስራ ቦታ 2 ይላኩ 2
+    send_to_workspace_3: ወደ የስራ ቦታ 3 ይላኩ
+    send_to_workspace_4: ወደ የሥራ ቦታ 4 ይላኩ
+    send_to_workspace_5: ወደ የሥራ ቦታ 5 ይላኩ
+    send_to_workspace_6: ወደ የሥራ ቦታ 6 ይላኩ
+    send_to_workspace_7: ወደ የሥራ ቦታ 7 ይላኩ 7
+    send_to_workspace_8: ወደ የሥራ ቦታ 8 ይላኩ 8
+    send_to_workspace_9: ወደ የሥራ ቦታ 9 ይላኩ
+    switch_workspace_0: ወደ የሥራ ቦታ 1 ቀይር
+    switch_workspace_1: ወደ የሥራ ቦታ 2 ቀይር
+    switch_workspace_2: ወደ የሥራ ቦታ 2 ቀይር
+    switch_workspace_3: ወደ የስራ ቦታ 3 ቀይር
+    switch_workspace_4: ወደ የሥራ ቦታ 4 ይቀይሩ
+    switch_workspace_5: ወደ የሥራ ቦታ 5 ቀይር
+    switch_workspace_6: ወደ የሥራ ቦታ 6 ይቀይሩ
+    switch_workspace_7: ወደ የሥራ ቦታ 7 ቀይር
+    switch_workspace_8: ወደ የሥራ ቦታ 8 ቀይር
+    switch_workspace_9: ወደ የሥራ ቦታ 9 ቀይር
     toggle_launcher: መቀላቀል
-  enable: የተቀናጁ አቋራጮችን (AHK)
-  enable_tooltip: የእራስዎን አቋራጮዎች ​​የሚተገበሩትን የእራስዎን አቋራጮች የሚተገበሩ ከሆነ ያሰናክሉ
-  reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
   readonly_tooltip: ይህ የተነበበ ብቻ አቋራጭ ነው
-inProgress: በሂደት ላይ...
-open: ክፈት
-cancel: ይቅር
-delete: ሰርዝ
-quit: አቁም
-loading: በመጫን ላይ ...
-save: አስቀምጥ
-vd:
-  strategy:
-    label: ምናባዊ ዴስክቶፕ ስትራቴጂ
-    seelen: እዩ
-    native: ተወላጅ
-  disabled_windows_version: ቤተኛ ምናባዊ ዴስክቶፕ ስትራቴጂ ለዊንዶውስ ስሪትዎ አይገኝም.
-save_and_restart: አስቀምጥ & እንደገና ያስጀምሩ
-monitors_configurations:
-  label: ይቆጣጠሩ {{አው.ፊ.}}}}
-wall:
-  backgrounds: የግድግዳ ወረቀቶች
-  no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
-  enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
-  random: የዘፈቀደ ተንሸራታች ትዕይንት
-  interval: የግድግዳ ወረቀት እያንዳንዱን ይለውጡ
-  minutes: ደቂቃዎች
-  hours: ሰዓታት
-  seconds: ሰከንዶች
-app_launcher:
-  runners:
-    explorer: ሩጫ
-    cmd: ትእዛዝ
-    label: ሯጮች
-  monitor: ለማሳየት መከታተል
-  enable: የመተግበሪያ አስጀማሪን አንቃ
-insert: ያስገቡ
-more: ተጨማሪ
-inherit: ውርስ
-close: ገጠመ
+  reset: ወደ ነባሪዎች ዳግም ያስጀምሩ
+sides:
+  bottom: ታች
+  left: ግራ
+  right: ቀኝ
+  top: ከላይ
+start:
+  message: >-
+    የእርስዎን ዊንዶውስ ተሞክሮ ለማሳደግ ከተዋሃደ ድንገተኛ የዊንዶውስ ሥራ አስኪያጅ ጋር ወደ ደመወዝ የዴስክቶፕ ሥራ
+    አስኪያጅ እንኳን በደህና መጡ! አዲስ የብቃት እና የብዝበዛ ኢቫን እና ባለብዙ ፊደል እና የላቁ ባህሪያችን ጋር ይሳለቁ.
+  message_accent: ምርታማነትዎን በቅጥ ያሻሽሉ!
+  title: እንኳን ደህና መጣህ!
+toolbar:
+  auto_hide: ራስ-ሰር መደበቅ
+  delay_to_hide: ለመደበቅ መዘግየት
+  delay_to_show: ለማሳየት መዘግየት
+  enable: Fangance የመሳሪያ አሞሌን ያንቁ
+  height: ቁመት
+  label: የመሣሪያ አሞሌ
+  placeholder:
+    author: ደራሲ ደራሲ
+    description: መግለጫ
+    select: የመሣሪያ አሞሌ መዋቅር
+  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 update:
   available: ዝመና ይገኛል!
-  downloading: ማውረድ ...
   channel: ጣቢያውን አዘምን
-miscellaneous: ልዩነቶች
-mods:
-  widgets: ፍርግሞች
-  plugins: ተሰኪዎች
-  target: Target ላማ
-remove: ያስወግዱ
+  downloading: ማውረድ ...
+vd:
+  disabled_windows_version: ቤተኛ ምናባዊ ዴስክቶፕ ስትራቴጂ ለዊንዶውስ ስሪትዎ አይገኝም.
+  strategy:
+    label: ምናባዊ ዴስክቶፕ ስትራቴጂ
+    native: ተወላጅ
+    seelen: እዩ
+wall:
+  backgrounds: የግድግዳ ወረቀቶች
+  enable: የግድግዳ ወረቀት ሥራ አስኪያጅን ያንቁ
+  hours: ሰዓታት
+  interval: የግድግዳ ወረቀት እያንዳንዱን ይለውጡ
+  minutes: ደቂቃዎች
+  no_background: በመከራየት የፊት ገጽታውን ዳራ በመጠቀም ባዶ ተንሸራታች ትዕይንት.
+  random: የዘፈቀደ ተንሸራታች ትዕይንት
+  seconds: ሰከንዶች
+weg:
+  auto_hide: ራስ-ሰር መደበቅ
+  delay_to_hide: ለመደበቅ መዘግየት
+  delay_to_show: ለማሳየት መዘግየት
+  dock_side: አቀማመጥ
+  enable: መትከያ / ተግባር አሞሌን ያንቁ
+  gap: ክፍተት
+  items:
+    gap: በእቃዎች መካከል ቦታ
+    label: ዕቃዎች
+    size: የንጥል መጠን
+    visible_separators: የሚታዩ መለያዎች
+    zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
+  label: Dock / Accorbar
+  margin: ህዳግ
+  padding: ፓድ
+  use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
+  width: ስፋት
+wm:
+  author: ደራሲ ደራሲ
+  border:
+    enable: የመስኮት ድንበር አንቃ
+    offset: ድንበር ማካካሻ
+    width: ድንበር ስፋት
+  description: መግለጫ
+  enable: የታሸገ መስኮት አቀናባሪን ያንቁ
+  layout: አቀማመጥ
+  resize_delta: ዴልታ (%)
+  space_between_containers: በእቃ መጫዎቻዎች መካከል ያለው ቦታ
+  workspace_offset: የስራ ቦታዎች ማካካሻ (ማርጂኖች)
+  workspace_padding: የስራ ቦታዎች ፓድ

@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: Løbe
     cmd: Kommando
+    explorer: Løbe
 footer:
   shortcuts: Vis genveje
 header:

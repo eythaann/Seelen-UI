@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Añadir módulo de medios
-  start: Añadir módulo de inicio
-  add_folder: Carpeta personalizada
-  add_file: Pin archivo personalizado
-  task_manager: Administrador de tareas
-  settings: Ajustes
 app_menu:
-  unpin: Desanclar
-  pin: Anclar
-  pin_to_left: Anclar a la izquierda
-  pin_to_center: Anclar al centro
-  pin_to_right: Anclar a la derecha
-  open_file_location: Abrir ubicación del archivo
-  run_as: Ejecutar como administrador
-  copy_handles: Copiar identificadores
   close: Cerrar
   close_multiple: Cerrar todo
+  copy_handles: Copiar identificadores
   kill: Proceso de matar
   kill_multiple: Matar todos los procesos
+  open_file_location: Abrir ubicación del archivo
+  pin: Anclar
+  pin_to_center: Anclar al centro
+  pin_to_left: Anclar a la izquierda
+  pin_to_right: Anclar a la derecha
+  run_as: Ejecutar como administrador
+  unpin: Desanclar
+media:
+  not_playing: Nada esta jugando
 media_menu:
   remove: Eliminar módulo de medios
 start_menu:
   remove: Eliminar módulo de inicio
-media:
-  not_playing: Nada esta jugando
+taskbar_menu:
+  add_file: Pin archivo personalizado
+  add_folder: Carpeta personalizada
+  media: Añadir módulo de medios
+  settings: Ajustes
+  start: Añadir módulo de inicio
+  task_manager: Administrador de tareas

@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: మీడియా మాడ్యూల్ జోడించండి
-  start: ప్రారంభ మాడ్యూల్ జోడించండి
-  add_folder: కస్టమ్ ఫోల్డర్‌ను పిన్ చేయండి
-  add_file: కస్టమ్ ఫైల్‌ను పిన్ చేయండి
-  settings: సెట్టింగ్‌లు
-  task_manager: టాస్క్ మేనేజర్
 app_menu:
   close: దగ్గరగా
-  pin_to_center: పిన్ టు సెంటర్
-  pin_to_left: పిన్ టు లెఫ్ట్
-  open_file_location: ఫైల్ స్థానం తెరవండి
-  pin_to_right: కుడి నుండి పిన్
-  unpin: అన్పిన్
-  pin: పిన్
-  copy_handles: కాపీ హ్యాండిల్స్
   close_multiple: అన్నీ మూసివేయండి
-  run_as: నిర్వాహకుడిగా అమలు చేయండి
+  copy_handles: కాపీ హ్యాండిల్స్
   kill: కిల్ ప్రాసెస్
   kill_multiple: అన్ని ప్రక్రియలను చంపండి
+  open_file_location: ఫైల్ స్థానం తెరవండి
+  pin: పిన్
+  pin_to_center: పిన్ టు సెంటర్
+  pin_to_left: పిన్ టు లెఫ్ట్
+  pin_to_right: కుడి నుండి పిన్
+  run_as: నిర్వాహకుడిగా అమలు చేయండి
+  unpin: అన్పిన్
+media:
+  not_playing: ఏమీ ఆడటం లేదు
 media_menu:
   remove: మీడియా మాడ్యూల్ తొలగించండి
 start_menu:
   remove: ప్రారంభ మాడ్యూల్ తొలగించండి
-media:
-  not_playing: ఏమీ ఆడటం లేదు
+taskbar_menu:
+  add_file: కస్టమ్ ఫైల్‌ను పిన్ చేయండి
+  add_folder: కస్టమ్ ఫోల్డర్‌ను పిన్ చేయండి
+  media: మీడియా మాడ్యూల్ జోడించండి
+  settings: సెట్టింగ్‌లు
+  start: ప్రారంభ మాడ్యూల్ జోడించండి
+  task_manager: టాస్క్ మేనేజర్

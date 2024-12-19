@@ -1,263 +1,263 @@
-sides:
-  bottom: নীচে
-  top: শীর্ষ
-  right: ঠিক আছে
-  left: বাম
+app_launcher:
+  enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
+  monitor: দেখানোর জন্য মনিটর
+  runners:
+    cmd: কমান্ড
+    explorer: চালানো
+    label: রানার্স
+apps_configurations:
+  app:
+    bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
+    category: বিভাগ
+    category_placeholder: কিছুই না
+    monitor: মনিটর
+    monitor_placeholder: কিছুই না
+    name: নাম
+    ok_create: সৃষ্টি
+    ok_edit: হালনাগাদ
+    ok_readonly: নতুন হিসাবে সম্পাদনা
+    options:
+      float: ভাসা
+      force: জোর পরিচালনা
+      hidden: ডক/টাস্কবার থেকে লুকান
+      pinned: পিনড
+      unmanage: আনম্যানেজ
+    options_label: অতিরিক্ত বিকল্প
+    title_create: '{{নাম}} তৈরি করা'
+    title_edit: সম্পাদনা {{নাম}}
+    title_readonly: '{{নাম}} দেখুন'
+    weg_options_label: ডক/টাস্কবার বিকল্প
+    wm_options_label: উইন্ডো ম্যানেজার বিকল্পগুলি
+    workspace: কর্মক্ষেত্র
+    workspace_placeholder: কিছুই না
+  bundled_msg: >-
+    এই বান্ডিলযুক্ত কনফিগারেশনগুলি সম্পাদনাযোগ্য নয় এবং আপনাকে কাস্টমাইজেশন
+    ছাড়াই সেরা অভিজ্ঞতা সরবরাহ করার জন্য ডিজাইন করা হয়েছে। তারা
+    স্বয়ংক্রিয়ভাবে আপনার জন্য সর্বাধিক সাধারণ অ্যাপ্লিকেশনগুলি কনফিগার করে।
+  bundled_title: অ্যাপ কনফিগারেশন সিলেনের সাথে বান্ডিল
+  confirm_delete: আপনি কি নিশ্চিত যে আপনি এই কনফিগারেশন/গুলি মুছতে চান?
+  confirm_delete_title: নিশ্চিত বাতিল
+  delete: মুছে ফেলা
+  export: রফতানি
+  extra_info: >-
+    সিলেন ইউআই প্রতি অ্যাপ্লিকেশনটিতে কেবলমাত্র একটি শনাক্তকারী ব্যবহার করুন
+    (প্রথম ম্যাচটি পাওয়া গেছে) সুতরাং কীভাবে নির্দিষ্ট করা হয়েছে তার ক্রমটি
+    গুরুত্বপূর্ণ, সর্বশেষ যোগ করা অগ্রাধিকার দেওয়া হবে, কারণ দ্রষ্টব্য টেবিলটি
+    সর্বশেষ থেকে পুরানো পর্যন্ত ডিফল্টরূপে বাছাই করা হয়েছে।
+  identifier:
+    add_block: ব্লক যুক্ত করুন
+    and: এবং
+    id: সনাক্তকারী
+    kind: দ্বারা চিহ্নিত করুন
+    matching_strategy: ম্যাচিং কৌশল
+    negation: ম্যাচিং অবহেলা
+    or: বা
+    remove: ব্লক মুছুন
+  import: আমদানি
+  new: নতুন
+  search: অনুসন্ধান
+  swap: অদলবদল
+cancel: বাতিল
+close: বন্ধ
+delete: মুছে ফেলা
+devtools:
+  app_folders: অ্যাপ্লিকেশন ফোল্ডার
+  custom_config_file: কাস্টম কনফিগার ফাইল লোড করুন
+  data_folder: ডেটা ফোল্ডার
+  enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
+  install_folder: ইনস্টলেশন ফোল্ডার
+  load: বোঝা
+  settings_file: সেটিংস ফাইল
+extras:
+  discord: মতবিরোধ
+  exit: প্রস্থান/প্রস্থান
+  github: গিথুব
+  links: অফিসিয়াল লিঙ্ক
+  relaunch: পুনরায় চালু
+  version: সংস্করণ
+general:
+  accent_color: সুরের ধাপের রঙ
+  date_format: তারিখ ফর্ম্যাট
+  icon_pack:
+    label: আইকন প্যাকস
+  language: ভাষা
+  startup: প্রারম্ভকালে চালানো?
+  theme:
+    add: থিম যুক্ত করুন
+    added: থিম ইতিমধ্যে যুক্ত
+    author: লেখক
+    available: উপলব্ধ
+    description: বর্ণনা
+    enabled: সক্ষম থিম
+    label: থিম তথ্য
+    placeholder: থিম নির্বাচন কর
+    selected: নির্বাচিত
+    tags: ট্যাগ
+  wallpaper:
+    select: ওয়ালপেপার নির্বাচন করুন
 header:
   labels:
-    info: তথ্য
     developer: বিকাশকারী
-    seelen_weg: ডক/টাস্কবার
     general: সাধারণ
+    home: বাড়ি
+    info: তথ্য
+    mods: প্লাগইন এবং উইজেট
     monitors: মনিটর
     seelen_bar: অভিনব সরঞ্জামদণ্ড
+    seelen_rofi: অ্যাপ লঞ্চার
+    seelen_wall: ওয়ালপেপার ম্যানেজার
+    seelen_weg: ডক/টাস্কবার
+    seelen_wm: উইন্ডো ম্যানেজার
     shortcuts: শর্টকাটস
     specific_apps: নির্দিষ্ট অ্যাপ্লিকেশন
-    seelen_wm: উইন্ডো ম্যানেজার
-    seelen_rofi: অ্যাপ লঞ্চার
     virtual_desk: ভার্চুয়াল ডেস্কটপস
-    home: বাড়ি
-    mods: প্লাগইন এবং উইজেট
-    seelen_wall: ওয়ালপেপার ম্যানেজার
+inherit: উত্তরাধিকারী
+inProgress: চলমান...
+insert: .োকান
+loading: লোড হচ্ছে ...
+miscellaneous: বিবিধ
+mods:
+  plugins: প্লাগইন
+  target: লক্ষ্য
+  widgets: উইজেটস
+monitors_configurations:
+  label: '{{সূচক}} মনিটর'
+more: আরও
+open: খোলা
+quit: প্রস্থান
+remove: সরান
+save: সংরক্ষণ
+save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
+shortcuts:
+  enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
+  enable_tooltip: >-
+    আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
+    অক্ষম করুন
+  labels:
+    decrease_height: উচ্চতা হ্রাস
+    decrease_width: প্রস্থ হ্রাস
+    focus_bottom: ফোকাস নীচে
+    focus_latest: সর্বশেষ ফোকাস
+    focus_left: ফোকাস বাম
+    focus_right: ডান ফোকাস
+    focus_top: ফোকাস শীর্ষ
+    increase_height: উচ্চতা বৃদ্ধি
+    increase_width: প্রস্থ বৃদ্ধি
+    misc_open_settings: ওপেন সেটিংস
+    misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)
+    misc_toggle_win_event_tracing: টগল উইন ইভেন্ট ট্রেসিং (লগস)
+    move_to_workspace_0: ওয়ার্কস্পেস 0 এ যান
+    move_to_workspace_1: ওয়ার্কস্পেস 1 এ যান
+    move_to_workspace_2: ওয়ার্কস্পেস 2 এ যান
+    move_to_workspace_3: ওয়ার্কস্পেস 3 এ যান
+    move_to_workspace_4: ওয়ার্কস্পেস 4 এ যান
+    move_to_workspace_5: ওয়ার্কস্পেস 5 এ যান
+    move_to_workspace_6: ওয়ার্কস্পেস 6 এ যান
+    move_to_workspace_7: ওয়ার্কস্পেস 7 এ যান
+    move_to_workspace_8: ওয়ার্কস্পেস 8 এ যান
+    move_to_workspace_9: ওয়ার্কস্পেস 9 এ যান
+    reserve_bottom: রিজার্ভ নীচে
+    reserve_float: রিজার্ভ ফ্লোট
+    reserve_left: রিজার্ভ বাম
+    reserve_right: রিজার্ভ রিজার
+    reserve_stack: রিজার্ভ স্ট্যাক
+    reserve_top: রিজার্ভ শীর্ষ
+    restore_sizes: আকার পুনরুদ্ধার
+    send_to_workspace_0: ওয়ার্কস্পেস 0 এ প্রেরণ করুন
+    send_to_workspace_1: ওয়ার্কস্পেস 1 এ প্রেরণ করুন
+    send_to_workspace_2: ওয়ার্কস্পেস 2 এ প্রেরণ করুন
+    send_to_workspace_3: ওয়ার্কস্পেস 3 এ প্রেরণ করুন
+    send_to_workspace_4: ওয়ার্কস্পেস 4 এ প্রেরণ করুন
+    send_to_workspace_5: ওয়ার্কস্পেস 5 এ প্রেরণ করুন
+    send_to_workspace_6: ওয়ার্কস্পেস 6 এ প্রেরণ করুন
+    send_to_workspace_7: ওয়ার্কস্পেস 7 এ প্রেরণ করুন
+    send_to_workspace_8: ওয়ার্কস্পেস 8 এ প্রেরণ করুন
+    send_to_workspace_9: ওয়ার্কস্পেস 9 এ প্রেরণ করুন
+    switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
+    switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
+    switch_workspace_2: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
+    switch_workspace_3: ওয়ার্কস্পেস 3 এ স্যুইচ করুন
+    switch_workspace_4: ওয়ার্কস্পেস 4 এ স্যুইচ করুন
+    switch_workspace_5: ওয়ার্কস্পেস 5 এ স্যুইচ করুন
+    switch_workspace_6: ওয়ার্কস্পেস 6 এ স্যুইচ করুন
+    switch_workspace_7: ওয়ার্কস্পেস 7 এ স্যুইচ করুন
+    switch_workspace_8: ওয়ার্কস্পেস 8 এ স্যুইচ করুন
+    switch_workspace_9: ওয়ার্কস্পেস 9 এ স্যুইচ করুন
+    toggle_launcher: টগল
+  readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
+  reset: ডিফল্টে পুনরায় সেট করুন
+sides:
+  bottom: নীচে
+  left: বাম
+  right: ঠিক আছে
+  top: শীর্ষ
 start:
-  title: স্বাগত!
   message: >-
     আপনার উইন্ডোজ অভিজ্ঞতা বাড়ানোর জন্য একটি অন্তর্ভুক্ত টাইলিং উইন্ডোজ
     ম্যানেজারের সাথে চূড়ান্ত ডেস্কটপ পরিবেশ সিলেন ইউআই -তে আপনাকে স্বাগতম!
     আমাদের স্বজ্ঞাত ইন্টারফেস এবং উন্নত বৈশিষ্ট্যগুলির সাথে দক্ষতা এবং
     মাল্টিটাস্কিংয়ের একটি নতুন যুগের সন্ধান করুন।
   message_accent: স্টাইল দিয়ে আপনার উত্পাদনশীলতা অনুকূলিত করুন!
-general:
-  theme:
-    description: বর্ণনা
-    placeholder: থিম নির্বাচন কর
-    tags: ট্যাগ
-    author: লেখক
-    enabled: সক্ষম থিম
-    label: থিম তথ্য
-    added: থিম ইতিমধ্যে যুক্ত
-    add: থিম যুক্ত করুন
-    selected: নির্বাচিত
-    available: উপলব্ধ
-  startup: প্রারম্ভকালে চালানো?
-  language: ভাষা
-  icon_pack:
-    label: আইকন প্যাকস
-  accent_color: সুরের ধাপের রঙ
-  wallpaper:
-    select: ওয়ালপেপার নির্বাচন করুন
-  date_format: তারিখ ফর্ম্যাট
+  title: স্বাগত!
 toolbar:
+  auto_hide: অটো আড়াল
+  delay_to_hide: আড়াল করতে বিলম্ব
+  delay_to_show: দেখাতে বিলম্ব
+  enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
+  height: উচ্চতা
+  label: সরঞ্জামদণ্ড
   placeholder:
     author: লেখক
     description: বর্ণনা
     select: সরঞ্জামদণ্ড কাঠামো
-  enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
-  height: উচ্চতা
-  auto_hide: অটো আড়াল
-  label: সরঞ্জামদণ্ড
-  delay_to_show: দেখাতে বিলম্ব
-  delay_to_hide: আড়াল করতে বিলম্ব
   use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
-wm:
-  border:
-    width: সীমানার প্রশস্থতা
-    enable: উইন্ডোর সীমানা সক্ষম করুন
-    offset: সীমান্ত অফসেট
-  author: লেখক
-  layout: বিন্যাস
-  description: বর্ণনা
-  resize_delta: পুনরায় আকার ডেল্টা (%)
-  workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
-  space_between_containers: পাত্রে স্থান
-  workspace_padding: ওয়ার্কস্পেস প্যাডিং
-  enable: টাইলিং উইন্ডো ম্যানেজার সক্ষম করুন
-weg:
-  items:
-    size: আইটেমের আকার
-    gap: আইটেম মধ্যে স্থান
-    visible_separators: দৃশ্যমান বিভাজক
-    label: আইটেম
-    zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
-  auto_hide: স্বয়ং চামড়া
-  width: প্রস্থ
-  gap: ফাঁক
-  margin: মার্জিন
-  enable: ডক/টাস্কবার সক্ষম করুন
-  label: ডক/টাস্কবার
-  padding: প্যাডিং
-  dock_side: অবস্থান
-  delay_to_show: দেখাতে বিলম্ব
-  delay_to_hide: আড়াল করতে বিলম্ব
-  use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
-devtools:
-  enable: বিকাশকারী সরঞ্জাম সক্ষম করুন
-  settings_file: সেটিংস ফাইল
-  install_folder: ইনস্টলেশন ফোল্ডার
-  custom_config_file: কাস্টম কনফিগার ফাইল লোড করুন
-  app_folders: অ্যাপ্লিকেশন ফোল্ডার
-  data_folder: ডেটা ফোল্ডার
-  load: বোঝা
-apps_configurations:
-  app:
-    options:
-      float: ভাসা
-      unmanage: আনম্যানেজ
-      force: জোর পরিচালনা
-      pinned: পিনড
-      hidden: ডক/টাস্কবার থেকে লুকান
-    ok_create: সৃষ্টি
-    name: নাম
-    workspace_placeholder: কিছুই না
-    monitor_placeholder: কিছুই না
-    category_placeholder: কিছুই না
-    ok_edit: হালনাগাদ
-    title_readonly: '{{নাম}} দেখুন'
-    category: বিভাগ
-    ok_readonly: নতুন হিসাবে সম্পাদনা
-    monitor: মনিটর
-    title_create: '{{নাম}} তৈরি করা'
-    workspace: কর্মক্ষেত্র
-    bindings: বাইন্ডিং (নোট উভয় বিকল্পের প্রয়োজন)
-    weg_options_label: ডক/টাস্কবার বিকল্প
-    wm_options_label: উইন্ডো ম্যানেজার বিকল্পগুলি
-    options_label: অতিরিক্ত বিকল্প
-    title_edit: সম্পাদনা {{নাম}}
-  identifier:
-    or: বা
-    and: এবং
-    id: সনাক্তকারী
-    negation: ম্যাচিং অবহেলা
-    remove: ব্লক মুছুন
-    kind: দ্বারা চিহ্নিত করুন
-    add_block: ব্লক যুক্ত করুন
-    matching_strategy: ম্যাচিং কৌশল
-  import: আমদানি
-  search: অনুসন্ধান
-  new: নতুন
-  confirm_delete_title: নিশ্চিত বাতিল
-  export: রফতানি
-  delete: মুছে ফেলা
-  confirm_delete: আপনি কি নিশ্চিত যে আপনি এই কনফিগারেশন/গুলি মুছতে চান?
-  bundled_title: অ্যাপ কনফিগারেশন সিলেনের সাথে বান্ডিল
-  swap: অদলবদল
-  bundled_msg: >-
-    এই বান্ডিলযুক্ত কনফিগারেশনগুলি সম্পাদনাযোগ্য নয় এবং আপনাকে কাস্টমাইজেশন
-    ছাড়াই সেরা অভিজ্ঞতা সরবরাহ করার জন্য ডিজাইন করা হয়েছে। তারা
-    স্বয়ংক্রিয়ভাবে আপনার জন্য সর্বাধিক সাধারণ অ্যাপ্লিকেশনগুলি কনফিগার করে।
-  extra_info: >-
-    সিলেন ইউআই প্রতি অ্যাপ্লিকেশনটিতে কেবলমাত্র একটি শনাক্তকারী ব্যবহার করুন
-    (প্রথম ম্যাচটি পাওয়া গেছে) সুতরাং কীভাবে নির্দিষ্ট করা হয়েছে তার ক্রমটি
-    গুরুত্বপূর্ণ, সর্বশেষ যোগ করা অগ্রাধিকার দেওয়া হবে, কারণ দ্রষ্টব্য টেবিলটি
-    সর্বশেষ থেকে পুরানো পর্যন্ত ডিফল্টরূপে বাছাই করা হয়েছে।
-extras:
-  version: সংস্করণ
-  relaunch: পুনরায় চালু
-  exit: প্রস্থান/প্রস্থান
-  links: অফিসিয়াল লিঙ্ক
-  github: গিথুব
-  discord: মতবিরোধ
-shortcuts:
-  labels:
-    focus_latest: সর্বশেষ ফোকাস
-    send_to_workspace_2: ওয়ার্কস্পেস 2 এ প্রেরণ করুন
-    reserve_left: রিজার্ভ বাম
-    switch_workspace_6: ওয়ার্কস্পেস 6 এ স্যুইচ করুন
-    reserve_stack: রিজার্ভ স্ট্যাক
-    decrease_height: উচ্চতা হ্রাস
-    send_to_workspace_8: ওয়ার্কস্পেস 8 এ প্রেরণ করুন
-    send_to_workspace_4: ওয়ার্কস্পেস 4 এ প্রেরণ করুন
-    increase_width: প্রস্থ বৃদ্ধি
-    switch_workspace_9: ওয়ার্কস্পেস 9 এ স্যুইচ করুন
-    switch_workspace_8: ওয়ার্কস্পেস 8 এ স্যুইচ করুন
-    send_to_workspace_5: ওয়ার্কস্পেস 5 এ প্রেরণ করুন
-    move_to_workspace_5: ওয়ার্কস্পেস 5 এ যান
-    send_to_workspace_0: ওয়ার্কস্পেস 0 এ প্রেরণ করুন
-    move_to_workspace_3: ওয়ার্কস্পেস 3 এ যান
-    switch_workspace_5: ওয়ার্কস্পেস 5 এ স্যুইচ করুন
-    focus_top: ফোকাস শীর্ষ
-    focus_right: ডান ফোকাস
-    send_to_workspace_9: ওয়ার্কস্পেস 9 এ প্রেরণ করুন
-    switch_workspace_3: ওয়ার্কস্পেস 3 এ স্যুইচ করুন
-    switch_workspace_4: ওয়ার্কস্পেস 4 এ স্যুইচ করুন
-    move_to_workspace_6: ওয়ার্কস্পেস 6 এ যান
-    increase_height: উচ্চতা বৃদ্ধি
-    reserve_bottom: রিজার্ভ নীচে
-    send_to_workspace_1: ওয়ার্কস্পেস 1 এ প্রেরণ করুন
-    switch_workspace_2: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
-    send_to_workspace_6: ওয়ার্কস্পেস 6 এ প্রেরণ করুন
-    move_to_workspace_9: ওয়ার্কস্পেস 9 এ যান
-    reserve_float: রিজার্ভ ফ্লোট
-    send_to_workspace_3: ওয়ার্কস্পেস 3 এ প্রেরণ করুন
-    switch_workspace_7: ওয়ার্কস্পেস 7 এ স্যুইচ করুন
-    focus_bottom: ফোকাস নীচে
-    move_to_workspace_1: ওয়ার্কস্পেস 1 এ যান
-    move_to_workspace_0: ওয়ার্কস্পেস 0 এ যান
-    decrease_width: প্রস্থ হ্রাস
-    restore_sizes: আকার পুনরুদ্ধার
-    send_to_workspace_7: ওয়ার্কস্পেস 7 এ প্রেরণ করুন
-    move_to_workspace_4: ওয়ার্কস্পেস 4 এ যান
-    move_to_workspace_7: ওয়ার্কস্পেস 7 এ যান
-    reserve_right: রিজার্ভ রিজার
-    move_to_workspace_2: ওয়ার্কস্পেস 2 এ যান
-    focus_left: ফোকাস বাম
-    move_to_workspace_8: ওয়ার্কস্পেস 8 এ যান
-    reserve_top: রিজার্ভ শীর্ষ
-    switch_workspace_1: ওয়ার্কস্পেস 2 এ স্যুইচ করুন
-    switch_workspace_0: ওয়ার্কস্পেস 1 এ স্যুইচ করুন
-    misc_open_settings: ওপেন সেটিংস
-    misc_toggle_lock_tracing: টগল লক ট্রেসিং (লগস)
-    misc_toggle_win_event_tracing: টগল উইন ইভেন্ট ট্রেসিং (লগস)
-    toggle_launcher: টগল
-  enable_tooltip: >-
-    আপনি যদি সিলেন কোর এপিআই ব্যবহার করে নিজের শর্টকাটগুলি প্রয়োগ করেন তবে
-    অক্ষম করুন
-  enable: ইন্টিগ্রেটেড শর্টকাটগুলি সক্ষম করুন (এএইচকে)
-  reset: ডিফল্টে পুনরায় সেট করুন
-  readonly_tooltip: এটি কেবল একটি পঠিত শর্টকাট
-inProgress: চলমান...
-cancel: বাতিল
-delete: মুছে ফেলা
-save: সংরক্ষণ
-open: খোলা
-quit: প্রস্থান
-loading: লোড হচ্ছে ...
-vd:
-  strategy:
-    seelen: সিলেন
-    native: নেটিভ
-    label: ভার্চুয়াল ডেস্কটপ কৌশল
-  disabled_windows_version: নেটিভ ভার্চুয়াল ডেস্কটপ কৌশল আপনার উইন্ডোজ সংস্করণের জন্য উপলব্ধ নয়।
-save_and_restart: সংরক্ষণ করুন এবং পুনরায় চালু করুন
-monitors_configurations:
-  label: '{{সূচক}} মনিটর'
-wall:
-  backgrounds: ওয়ালপেপার
-  no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
-  enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
-  interval: প্রতিটি ওয়ালপেপার পরিবর্তন করুন
-  random: এলোমেলোভাবে স্লাইডশো
-  seconds: সেকেন্ড
-  hours: ঘন্টা
-  minutes: মিনিট
-app_launcher:
-  runners:
-    explorer: চালানো
-    cmd: কমান্ড
-    label: রানার্স
-  enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
-  monitor: দেখানোর জন্য মনিটর
-inherit: উত্তরাধিকারী
-insert: .োকান
-more: আরও
-close: বন্ধ
 update:
   available: আপডেট উপলব্ধ!
   channel: আপডেট চ্যানেল
   downloading: ডাউনলোড ...
-miscellaneous: বিবিধ
-mods:
-  target: লক্ষ্য
-  plugins: প্লাগইন
-  widgets: উইজেটস
-remove: সরান
+vd:
+  disabled_windows_version: নেটিভ ভার্চুয়াল ডেস্কটপ কৌশল আপনার উইন্ডোজ সংস্করণের জন্য উপলব্ধ নয়।
+  strategy:
+    label: ভার্চুয়াল ডেস্কটপ কৌশল
+    native: নেটিভ
+    seelen: সিলেন
+wall:
+  backgrounds: ওয়ালপেপার
+  enable: ওয়ালপেপার ম্যানেজার সক্ষম করুন
+  hours: ঘন্টা
+  interval: প্রতিটি ওয়ালপেপার পরিবর্তন করুন
+  minutes: মিনিট
+  no_background: পরিবর্তে থিমের পটভূমি ব্যবহার করে খালি স্লাইডশো।
+  random: এলোমেলোভাবে স্লাইডশো
+  seconds: সেকেন্ড
+weg:
+  auto_hide: স্বয়ং চামড়া
+  delay_to_hide: আড়াল করতে বিলম্ব
+  delay_to_show: দেখাতে বিলম্ব
+  dock_side: অবস্থান
+  enable: ডক/টাস্কবার সক্ষম করুন
+  gap: ফাঁক
+  items:
+    gap: আইটেম মধ্যে স্থান
+    label: আইটেম
+    size: আইটেমের আকার
+    visible_separators: দৃশ্যমান বিভাজক
+    zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
+  label: ডক/টাস্কবার
+  margin: মার্জিন
+  padding: প্যাডিং
+  use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
+  width: প্রস্থ
+wm:
+  author: লেখক
+  border:
+    enable: উইন্ডোর সীমানা সক্ষম করুন
+    offset: সীমান্ত অফসেট
+    width: সীমানার প্রশস্থতা
+  description: বর্ণনা
+  enable: টাইলিং উইন্ডো ম্যানেজার সক্ষম করুন
+  layout: বিন্যাস
+  resize_delta: পুনরায় আকার ডেল্টা (%)
+  space_between_containers: পাত্রে স্থান
+  workspace_offset: ওয়ার্কস্পেস অফসেট (মার্জিন)
+  workspace_padding: ওয়ার্কস্পেস প্যাডিং

@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Füügt Modul
+  remove: Ewechzehuelen Modul
+  settings: Astellungen
+  task_manager: Aufgab Manager
 media:
   device:
     comunications: Kommunikatiounen
     multimedia: Multimedia
-  players: Media Spiller
+  input_device: Input Apparat
   master_volume: Master Volumen
   output_device: Ausgangsapparat
-  input_device: Input Apparat
+  players: Media Spiller
 network:
-  placeholder:
-    password: Passwuert
-  not_found: Keng Netzwierker fonnt
+  available: Verfügbar Netzwierker
+  connect: Connecten
+  connected: Verbonne mat
   disconnect: Trennen
   hidden: Verstoppt Netzwierk
   more: Méi Netzwierk Astellunge
-  connect: Connecten
-  secured: Verschlësselte Reseau
-  scanning: Scannen fir Netzwierker
-  available: Verfügbar Netzwierker
+  not_found: Keng Netzwierker fonnt
+  placeholder:
+    password: Passwuert
   saved: Gespäichert Netzwierker
-  connected: Verbonne mat
-settings:
-  restart: Neistart
-  shutdown: Ausmaachen
-  log_out: Ausloggen
-  app_settings: App Astellunge
-  title: Astellunge
-  sleep: Schlolof
-  power: Kraaftbeldscht
+  scanning: Scannen fir Netzwierker
+  secured: Verschlësselte Reseau
 placeholder:
   battery_remaining: '% bleiwen'
   bluetooth_devices: Bluetooth & Apparater
-  open_system_tray: Open System Schacht
-  settings: Quick Astellungen
-  smart_charge: '- Smart charge'
-  open_user_folder: Open Benotzer Ordner
   ethernet_connected: Internet Zougang
   ethernet_disconnected: Keen Internetzougang
-  volume: Vuesso
   notifications: Notifikatiounen
+  open_system_tray: Open System Schacht
+  open_user_folder: Open Benotzer Ordner
+  settings: Quick Astellungen
+  smart_charge: '- Smart charge'
+  volume: Vuesso
+settings:
+  app_settings: App Astellunge
+  log_out: Ausloggen
+  power: Kraaftbeldscht
+  restart: Neistart
+  shutdown: Ausmaachen
+  sleep: Schlolof
+  title: Astellunge
 unlabelled_tray: Onbau Take Ikon
-context_menu:
-  remove: Ewechzehuelen Modul
-  add_module: Füügt Modul
-  task_manager: Aufgab Manager
-  settings: Astellungen

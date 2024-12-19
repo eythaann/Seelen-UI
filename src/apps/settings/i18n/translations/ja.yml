@@ -1,255 +1,255 @@
-sides:
-  left: 左
-  right: 右
-  top: 上
-  bottom: 下
-header:
-  labels:
-    developer: 開発者向け
-    info: このアプリについて
-    general: 全般
-    shortcuts: ショートカットキー
-    seelen_wm: ウィンドウマネージャー
-    specific_apps: アプリごとの設定
-    monitors: モニター
-    seelen_weg: ドック（タスクバー）
-    seelen_bar: ツールバー
-    seelen_rofi: アプリランチャー
-    virtual_desk: 仮想デスクトップ
-    home: ホーム
-    mods: プラグインとウィジェット
-    seelen_wall: 壁紙マネージャー
-start:
-  title: ようこそ！
-  message: >-
-    SeelenUIにようこそ！ 組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows での体験を向上させます！
-    直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
-  message_accent: あなた好みのスタイリングで生産性を最適化！
-general:
-  theme:
-    author: 製作者
-    description: 説明
-    add: テーマを追加
-    tags: タグ
-    added: テーマはすでに追加済みです
-    enabled: テーマが有効です
-    label: テーマ情報
-    placeholder: テーマを選択
-    available: 利用可能
-    selected: 選択済み
-  startup: 起動時に実行する
-  language: 言語
-  icon_pack:
-    label: アイコンパック
-  accent_color: アクセントカラー
-  wallpaper:
-    select: 壁紙を選択
-  date_format: 日付形式
-toolbar:
-  placeholder:
-    description: 説明
-    author: 製作者
-    select: ツールバーのテーマ
-  height: 高さ
-  enable: ツールバーを有効にする
-  auto_hide: 自動的に隠す
-  label: ツールバーの設定
-  delay_to_show: 表示が遅れる
-  delay_to_hide: 隠れるまでの遅延
-  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
-wm:
-  border:
-    offset: 境界線の余白
-    enable: ウィンドウの境界線を描画する
-    width: 線幅
-  author: 製作者
-  layout: レイアウト
-  description: 説明
-  workspace_offset: ワークスペース全体の間隔（マージン）
-  space_between_containers: ウィンドウ間の間隔
-  resize_delta: リサイズ時の変化率（％）
-  workspace_padding: ワークスペースの全体の間隔
-  enable: タイリングウィンドウマネージャーを有効にする
-weg:
-  items:
-    size: アイテムのサイズ
-    zoom_size: ズームされたときのサイズ（一部のテーマで使用）
-    visible_separators: セパレーターを表示する
-    label: ドック上のアイテム
-    gap: アイテム間のスペース
-  width: ドックの幅
-  margin: ドックの隙間
-  gap: アイテム間のスペース
-  padding: 余白
-  label: ドック（タスクバー）
-  auto_hide: 自動的に隠す
-  enable: ドック（タスクバー）を有効にする
-  dock_side: 位置
-  delay_to_show: 表示が遅れる
-  delay_to_hide: 隠れるまでの遅延
-  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
-devtools:
-  load: ロード
-  data_folder: データのフォルダー
-  app_folders: アプリのフォルダー
-  enable: 開発者ツールを有効にする
-  settings_file: 設定ファイル
-  install_folder: アプリのフォルダー
-  custom_config_file: カスタム構成ファイルをロードする
-apps_configurations:
-  app:
-    options:
-      float: フロート
-      force: 強制的に操作
-      pinned: ピン留め
-      unmanage: 管理しない
-      hidden: ドック/タスクバーから隠す
-    category_placeholder: なし
-    monitor_placeholder: なし
-    workspace: ワークスペース
-    ok_edit: 適用
-    category: カテゴリー
-    monitor: モニター
-    ok_create: 作成
-    bindings: バインディング（両方のオプションが必要です）
-    ok_readonly: 新規設定を作成
-    workspace_placeholder: なし
-    title_readonly: 「{{name}}」を表示しています
-    name: 名前
-    title_create: '{{name}}を作成する'
-    weg_options_label: ドック/タスクバーの設定
-    wm_options_label: ウィンドウマネージャーの設定
-    options_label: 追加の設定
-    title_edit: 編集{{name}}
-  identifier:
-    id: 識別子
-    and: かつ
-    or: または
-    negation: マッチングを否定する
-    remove: ブロックを削除
-    matching_strategy: マッチングの方法
-    add_block: ブロックを追加
-    kind: 識別方法
-  search: 検索
-  export: エクスポート
-  delete: 消去
-  import: インポート
-  new: 新規
-  swap: 入れ替え
-  confirm_delete: この構成を削除しますか？
-  confirm_delete_title: 削除の確認
-  bundled_msg: >-
-    これらのバンドルされた構成は編集可能ではなく、カスタマイズなしで最高の体験を提供するように設計されています。
-    最も一般的なアプリケーションを自動的に構成します。
-  bundled_title: Seelenにバンドルされたアプリの構成
-  extra_info: >-
-    SeelenUIは、アプリごとに1つの識別子のみを使用します（最初に一致したものが使用されます）。そのため、識別方法の順序が重要であり、最新の追加が優先されます。
-extras:
-  discord: Discordコミュニティー
-  version: バージョン
-  github: GitHubレポジトリ
-  relaunch: SeelenUIを再起動
-  links: リンク
-  exit: SeelenUIを終了
-shortcuts:
-  labels:
-    reserve_left: 左側を予約
-    switch_workspace_5: ワークスペース5に切り替え
-    send_to_workspace_1: ワークスペース1に送信
-    restore_sizes: サイズを復元
-    send_to_workspace_3: ワークスペース3に送信
-    move_to_workspace_2: ワークスペース2に移動
-    send_to_workspace_2: ワークスペース2に送信
-    reserve_stack: スタックを予約
-    move_to_workspace_0: ワークスペース0に移動
-    switch_workspace_2: ワークスペース2に切り替え
-    increase_height: 高さを増やす
-    switch_workspace_3: ワークスペース3に切り替え
-    focus_top: 上にフォーカス
-    send_to_workspace_9: ワークスペース9に送信
-    send_to_workspace_0: ワークスペース0に送信
-    move_to_workspace_4: ワークスペース4に移動
-    send_to_workspace_5: ワークスペース5に送信
-    move_to_workspace_6: ワークスペース6に移動
-    decrease_height: 高さを減らす
-    switch_workspace_7: ワークスペース7に切り替え
-    reserve_bottom: 下側を予約
-    focus_right: 右にフォーカス
-    reserve_right: 右側を予約
-    switch_workspace_8: ワークスペース8に切り替え
-    send_to_workspace_8: ワークスペース8に送信
-    move_to_workspace_8: ワークスペース8に移動
-    switch_workspace_6: ワークスペース6に切り替え
-    send_to_workspace_4: ワークスペース4に送信
-    reserve_float: フロートを予約
-    focus_latest: 最新のウィンドウにフォーカス
-    decrease_width: 幅を減らす
-    reserve_top: 上側を予約
-    move_to_workspace_1: ワークスペース1に移動
-    switch_workspace_4: ワークスペース4に切り替え
-    move_to_workspace_7: ワークスペース7に移動
-    switch_workspace_9: ワークスペース9に切り替え
-    focus_bottom: 下にフォーカス
-    move_to_workspace_9: ワークスペース9に移動
-    move_to_workspace_3: ワークスペース3に移動
-    send_to_workspace_6: ワークスペース6に送信
-    increase_width: 幅を増やす
-    move_to_workspace_5: ワークスペース5に移動
-    focus_left: 左にフォーカス
-    send_to_workspace_7: ワークスペース7に送信
-    switch_workspace_0: ワークスペースに切り替えます1
-    switch_workspace_1: ワークスペースに切り替えます2
-    misc_toggle_win_event_tracing: トグルウィンイベントトレース（ログ）
-    misc_toggle_lock_tracing: トグルロックトレース（ログ）
-    misc_open_settings: 設定を開く
-    toggle_launcher: トグル
-  enable: AutoHotkeyを使用した統合ショートカットを有効にする
-  enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください。
-  reset: デフォルトにリセットします。
-  readonly_tooltip: これは読み取り専用のショートカットです。
-delete: 消去
-loading: 読み込み中...
-inProgress: 近日実装予定...
-quit: 終了
-open: 開く
-save: 保存
-cancel: キャンセル
-vd:
-  strategy:
-    native: ネイティブ
-    label: 仮想デスクトップ戦略
-    seelen: Seelen
-  disabled_windows_version: このバージョンのWindowsでは、ネイティブの仮想デスクトップ戦略は利用できません。
-save_and_restart: 保存して再起動
-monitors_configurations:
-  label: モニター{{index}}
-wall:
-  no_background: 壁紙に使用するファイルを選択
-  backgrounds: 壁紙
-  enable: 壁紙マネージャーを有効にします
-  random: スライドショーをランダム化します
-  interval: 壁紙を毎回変更します
-  minutes: 分
-  seconds: 秒
-  hours: 時間
 app_launcher:
+  enable: アプリランチャーを有効にする
+  monitor: 表示するモニター
   runners:
     cmd: コマンド プロンプト
     explorer: エクスプローラー
     label: ランチャー
-  enable: アプリランチャーを有効にする
-  monitor: 表示するモニター
-more: もっと
-insert: 挿入
-inherit: 継承
+apps_configurations:
+  app:
+    bindings: バインディング（両方のオプションが必要です）
+    category: カテゴリー
+    category_placeholder: なし
+    monitor: モニター
+    monitor_placeholder: なし
+    name: 名前
+    ok_create: 作成
+    ok_edit: 適用
+    ok_readonly: 新規設定を作成
+    options:
+      float: フロート
+      force: 強制的に操作
+      hidden: ドック/タスクバーから隠す
+      pinned: ピン留め
+      unmanage: 管理しない
+    options_label: 追加の設定
+    title_create: '{{name}}を作成する'
+    title_edit: 編集{{name}}
+    title_readonly: 「{{name}}」を表示しています
+    weg_options_label: ドック/タスクバーの設定
+    wm_options_label: ウィンドウマネージャーの設定
+    workspace: ワークスペース
+    workspace_placeholder: なし
+  bundled_msg: >-
+    これらのバンドルされた構成は編集可能ではなく、カスタマイズなしで最高の体験を提供するように設計されています。
+    最も一般的なアプリケーションを自動的に構成します。
+  bundled_title: Seelenにバンドルされたアプリの構成
+  confirm_delete: この構成を削除しますか？
+  confirm_delete_title: 削除の確認
+  delete: 消去
+  export: エクスポート
+  extra_info: >-
+    SeelenUIは、アプリごとに1つの識別子のみを使用します（最初に一致したものが使用されます）。そのため、識別方法の順序が重要であり、最新の追加が優先されます。
+  identifier:
+    add_block: ブロックを追加
+    and: かつ
+    id: 識別子
+    kind: 識別方法
+    matching_strategy: マッチングの方法
+    negation: マッチングを否定する
+    or: または
+    remove: ブロックを削除
+  import: インポート
+  new: 新規
+  search: 検索
+  swap: 入れ替え
+cancel: キャンセル
 close: 閉じる
-update:
-  available: 更新が利用可能です！
-  downloading: ダウンロード中...
-  channel: 更新チャンネル
+delete: 消去
+devtools:
+  app_folders: アプリのフォルダー
+  custom_config_file: カスタム構成ファイルをロードする
+  data_folder: データのフォルダー
+  enable: 開発者ツールを有効にする
+  install_folder: アプリのフォルダー
+  load: ロード
+  settings_file: 設定ファイル
+extras:
+  discord: Discordコミュニティー
+  exit: SeelenUIを終了
+  github: GitHubレポジトリ
+  links: リンク
+  relaunch: SeelenUIを再起動
+  version: バージョン
+general:
+  accent_color: アクセントカラー
+  date_format: 日付形式
+  icon_pack:
+    label: アイコンパック
+  language: 言語
+  startup: 起動時に実行する
+  theme:
+    add: テーマを追加
+    added: テーマはすでに追加済みです
+    author: 製作者
+    available: 利用可能
+    description: 説明
+    enabled: テーマが有効です
+    label: テーマ情報
+    placeholder: テーマを選択
+    selected: 選択済み
+    tags: タグ
+  wallpaper:
+    select: 壁紙を選択
+header:
+  labels:
+    developer: 開発者向け
+    general: 全般
+    home: ホーム
+    info: このアプリについて
+    mods: プラグインとウィジェット
+    monitors: モニター
+    seelen_bar: ツールバー
+    seelen_rofi: アプリランチャー
+    seelen_wall: 壁紙マネージャー
+    seelen_weg: ドック（タスクバー）
+    seelen_wm: ウィンドウマネージャー
+    shortcuts: ショートカットキー
+    specific_apps: アプリごとの設定
+    virtual_desk: 仮想デスクトップ
+inherit: 継承
+inProgress: 近日実装予定...
+insert: 挿入
+loading: 読み込み中...
 miscellaneous: その他
 mods:
+  plugins: プラグイン
   target: ターゲット
   widgets: ウィジェット
-  plugins: プラグイン
+monitors_configurations:
+  label: モニター{{index}}
+more: もっと
+open: 開く
+quit: 終了
 remove: 取り除く
+save: 保存
+save_and_restart: 保存して再起動
+shortcuts:
+  enable: AutoHotkeyを使用した統合ショートカットを有効にする
+  enable_tooltip: Seelen Core APIを使用して独自のショートカットを実装する場合は無効にしてください。
+  labels:
+    decrease_height: 高さを減らす
+    decrease_width: 幅を減らす
+    focus_bottom: 下にフォーカス
+    focus_latest: 最新のウィンドウにフォーカス
+    focus_left: 左にフォーカス
+    focus_right: 右にフォーカス
+    focus_top: 上にフォーカス
+    increase_height: 高さを増やす
+    increase_width: 幅を増やす
+    misc_open_settings: 設定を開く
+    misc_toggle_lock_tracing: トグルロックトレース（ログ）
+    misc_toggle_win_event_tracing: トグルウィンイベントトレース（ログ）
+    move_to_workspace_0: ワークスペース0に移動
+    move_to_workspace_1: ワークスペース1に移動
+    move_to_workspace_2: ワークスペース2に移動
+    move_to_workspace_3: ワークスペース3に移動
+    move_to_workspace_4: ワークスペース4に移動
+    move_to_workspace_5: ワークスペース5に移動
+    move_to_workspace_6: ワークスペース6に移動
+    move_to_workspace_7: ワークスペース7に移動
+    move_to_workspace_8: ワークスペース8に移動
+    move_to_workspace_9: ワークスペース9に移動
+    reserve_bottom: 下側を予約
+    reserve_float: フロートを予約
+    reserve_left: 左側を予約
+    reserve_right: 右側を予約
+    reserve_stack: スタックを予約
+    reserve_top: 上側を予約
+    restore_sizes: サイズを復元
+    send_to_workspace_0: ワークスペース0に送信
+    send_to_workspace_1: ワークスペース1に送信
+    send_to_workspace_2: ワークスペース2に送信
+    send_to_workspace_3: ワークスペース3に送信
+    send_to_workspace_4: ワークスペース4に送信
+    send_to_workspace_5: ワークスペース5に送信
+    send_to_workspace_6: ワークスペース6に送信
+    send_to_workspace_7: ワークスペース7に送信
+    send_to_workspace_8: ワークスペース8に送信
+    send_to_workspace_9: ワークスペース9に送信
+    switch_workspace_0: ワークスペースに切り替えます1
+    switch_workspace_1: ワークスペースに切り替えます2
+    switch_workspace_2: ワークスペース2に切り替え
+    switch_workspace_3: ワークスペース3に切り替え
+    switch_workspace_4: ワークスペース4に切り替え
+    switch_workspace_5: ワークスペース5に切り替え
+    switch_workspace_6: ワークスペース6に切り替え
+    switch_workspace_7: ワークスペース7に切り替え
+    switch_workspace_8: ワークスペース8に切り替え
+    switch_workspace_9: ワークスペース9に切り替え
+    toggle_launcher: トグル
+  readonly_tooltip: これは読み取り専用のショートカットです。
+  reset: デフォルトにリセットします。
+sides:
+  bottom: 下
+  left: 左
+  right: 右
+  top: 上
+start:
+  message: >-
+    SeelenUIにようこそ！ 組み込みのタイル型ウィンドウマネージャーを備えた究極のデスクトップ環境で、あなたのWindows での体験を向上させます！
+    直感的なインターフェースと高度な機能で効率的なマルチタスクの新時代を探求しましょう。
+  message_accent: あなた好みのスタイリングで生産性を最適化！
+  title: ようこそ！
+toolbar:
+  auto_hide: 自動的に隠す
+  delay_to_hide: 隠れるまでの遅延
+  delay_to_show: 表示が遅れる
+  enable: ツールバーを有効にする
+  height: 高さ
+  label: ツールバーの設定
+  placeholder:
+    author: 製作者
+    description: 説明
+    select: ツールバーのテーマ
+  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
+update:
+  available: 更新が利用可能です！
+  channel: 更新チャンネル
+  downloading: ダウンロード中...
+vd:
+  disabled_windows_version: このバージョンのWindowsでは、ネイティブの仮想デスクトップ戦略は利用できません。
+  strategy:
+    label: 仮想デスクトップ戦略
+    native: ネイティブ
+    seelen: Seelen
+wall:
+  backgrounds: 壁紙
+  enable: 壁紙マネージャーを有効にします
+  hours: 時間
+  interval: 壁紙を毎回変更します
+  minutes: 分
+  no_background: 壁紙に使用するファイルを選択
+  random: スライドショーをランダム化します
+  seconds: 秒
+weg:
+  auto_hide: 自動的に隠す
+  delay_to_hide: 隠れるまでの遅延
+  delay_to_show: 表示が遅れる
+  dock_side: 位置
+  enable: ドック（タスクバー）を有効にする
+  gap: アイテム間のスペース
+  items:
+    gap: アイテム間のスペース
+    label: ドック上のアイテム
+    size: アイテムのサイズ
+    visible_separators: セパレーターを表示する
+    zoom_size: ズームされたときのサイズ（一部のテーマで使用）
+  label: ドック（タスクバー）
+  margin: ドックの隙間
+  padding: 余白
+  use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
+  width: ドックの幅
+wm:
+  author: 製作者
+  border:
+    enable: ウィンドウの境界線を描画する
+    offset: 境界線の余白
+    width: 線幅
+  description: 説明
+  enable: タイリングウィンドウマネージャーを有効にする
+  layout: レイアウト
+  resize_delta: リサイズ時の変化率（％）
+  space_between_containers: ウィンドウ間の間隔
+  workspace_offset: ワークスペース全体の間隔（マージン）
+  workspace_padding: ワークスペースの全体の間隔

@@ -1,46 +1,46 @@
-media:
-  master_volume: Volumen Maestro
-  output_device: Dispositivo de salida
-  input_device: Dispositivo de entrada
-  players: Reproductores de medios
-  device:
-    multimedia: Multimedia
-    comunications: Comunicaciones
-network:
-  not_found: No se encontraron redes
-  more: Más configuraciones de red
-  hidden: Red oculta
-  placeholder:
-    password: Contraseña
-  disconnect: Desconectar
-  connect: Conectar
-  available: Redes disponibles
-  connected: Conectado a
-  secured: Red cifrada
-  saved: Redes guardadas
-  scanning: Escaneo de redes
-settings:
-  title: Configuraciones
-  app_settings: Configuraciones de la aplicación
-  log_out: Cerrar sesión
-  sleep: Suspender
-  restart: Reiniciar
-  shutdown: Apagar
-  power: Fuerza
-placeholder:
-  open_user_folder: Abrir carpeta de usuario
-  open_system_tray: Abrir bandeja del sistema
-  bluetooth_devices: Bluetooth y dispositivos
-  ethernet_connected: Acceso a internet
-  ethernet_disconnected: Sin acceso a internet
-  volume: Volumen
-  battery_remaining: '% restante'
-  smart_charge: ' - Carga inteligente'
-  settings: Configuraciones rápidas
-  notifications: Notificaciones
-unlabelled_tray: Ícono de la bandeja sin etiqueta
 context_menu:
   add_module: Agregar módulo
   remove: Eliminar el módulo
   settings: Ajustes
   task_manager: Administrador de tareas
+media:
+  device:
+    comunications: Comunicaciones
+    multimedia: Multimedia
+  input_device: Dispositivo de entrada
+  master_volume: Volumen Maestro
+  output_device: Dispositivo de salida
+  players: Reproductores de medios
+network:
+  available: Redes disponibles
+  connect: Conectar
+  connected: Conectado a
+  disconnect: Desconectar
+  hidden: Red oculta
+  more: Más configuraciones de red
+  not_found: No se encontraron redes
+  placeholder:
+    password: Contraseña
+  saved: Redes guardadas
+  scanning: Escaneo de redes
+  secured: Red cifrada
+placeholder:
+  battery_remaining: '% restante'
+  bluetooth_devices: Bluetooth y dispositivos
+  ethernet_connected: Acceso a internet
+  ethernet_disconnected: Sin acceso a internet
+  notifications: Notificaciones
+  open_system_tray: Abrir bandeja del sistema
+  open_user_folder: Abrir carpeta de usuario
+  settings: Configuraciones rápidas
+  smart_charge: ' - Carga inteligente'
+  volume: Volumen
+settings:
+  app_settings: Configuraciones de la aplicación
+  log_out: Cerrar sesión
+  power: Fuerza
+  restart: Reiniciar
+  shutdown: Apagar
+  sleep: Suspender
+  title: Configuraciones
+unlabelled_tray: Ícono de la bandeja sin etiqueta

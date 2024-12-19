@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Comunicări
-  input_device: Dispozitiv de intrare
-  players: Playere media
-  master_volume: Volumul principal
-  output_device: Dispozitiv de ieșire
-network:
-  placeholder:
-    password: Parola
-  connect: Conectați
-  not_found: Nu au fost găsite rețele
-  disconnect: Deconectat
-  more: Mai multe setări de rețea
-  hidden: Rețea ascunsă
-  connected: Conectat la
-  scanning: Scanare pentru rețele
-  saved: Rețele salvate
-  secured: Rețea criptată
-  available: Rețele disponibile
-settings:
-  shutdown: Închide
-  sleep: Dormi
-  restart: Repornire
-  app_settings: Setări aplicație
-  log_out: Deconectați -vă
-  title: Setări
-  power: Putere
-placeholder:
-  ethernet_connected: acces la internet
-  ethernet_disconnected: Fara acces la internet
-  volume: Volum
-  battery_remaining: '% rămas'
-  bluetooth_devices: Bluetooth & Devices
-  open_user_folder: Deschideți folderul utilizator
-  settings: Setări rapide
-  open_system_tray: Tava de sistem deschisă
-  smart_charge: '- Încărcare inteligentă'
-  notifications: Notificări
-unlabelled_tray: Pictograma tăvii nemarcate
 context_menu:
   add_module: Adăugați modul
   remove: Scoateți modulul
   settings: Setări
   task_manager: Manager de activități
+media:
+  device:
+    comunications: Comunicări
+    multimedia: Multimedia
+  input_device: Dispozitiv de intrare
+  master_volume: Volumul principal
+  output_device: Dispozitiv de ieșire
+  players: Playere media
+network:
+  available: Rețele disponibile
+  connect: Conectați
+  connected: Conectat la
+  disconnect: Deconectat
+  hidden: Rețea ascunsă
+  more: Mai multe setări de rețea
+  not_found: Nu au fost găsite rețele
+  placeholder:
+    password: Parola
+  saved: Rețele salvate
+  scanning: Scanare pentru rețele
+  secured: Rețea criptată
+placeholder:
+  battery_remaining: '% rămas'
+  bluetooth_devices: Bluetooth & Devices
+  ethernet_connected: acces la internet
+  ethernet_disconnected: Fara acces la internet
+  notifications: Notificări
+  open_system_tray: Tava de sistem deschisă
+  open_user_folder: Deschideți folderul utilizator
+  settings: Setări rapide
+  smart_charge: '- Încărcare inteligentă'
+  volume: Volum
+settings:
+  app_settings: Setări aplicație
+  log_out: Deconectați -vă
+  power: Putere
+  restart: Repornire
+  shutdown: Închide
+  sleep: Dormi
+  title: Setări
+unlabelled_tray: Pictograma tăvii nemarcate

@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Tambahkan modul
+  remove: Hapus modul
+  settings: Pengaturan
+  task_manager: Manajer Tugas
 media:
   device:
     comunications: Komunikasi
     multimedia: Multimedia
   input_device: Alat input
   master_volume: Volume utama
-  players: Pemain Media
   output_device: Perangkat output
+  players: Pemain Media
 network:
-  placeholder:
-    password: Kata sandi
-  disconnect: Memutuskan
+  available: Jaringan yang tersedia
   connect: Menghubung
-  not_found: Tidak ada jaringan yang ditemukan
+  connected: Terhubung ke
+  disconnect: Memutuskan
   hidden: Jaringan tersembunyi
   more: Lebih banyak pengaturan jaringan
-  connected: Terhubung ke
+  not_found: Tidak ada jaringan yang ditemukan
+  placeholder:
+    password: Kata sandi
   saved: Jaringan yang disimpan
-  secured: Jaringan terenkripsi
-  available: Jaringan yang tersedia
   scanning: Memindai jaringan
-settings:
-  restart: Mengulang kembali
-  app_settings: Pengaturan aplikasi
-  sleep: Tidur
-  log_out: Keluar
-  shutdown: Matikan
-  title: Pengaturan
-  power: Kekuatan
+  secured: Jaringan terenkripsi
 placeholder:
-  volume: Volume
   battery_remaining: '% tersisa'
-  ethernet_disconnected: Tidak ada akses internet
-  ethernet_connected: Akses internet
-  settings: Pengaturan Cepat
   bluetooth_devices: Bluetooth & perangkat
-  open_user_folder: Buka folder pengguna
-  open_system_tray: Baki sistem terbuka
-  smart_charge: '- Biaya Cerdas'
+  ethernet_connected: Akses internet
+  ethernet_disconnected: Tidak ada akses internet
   notifications: Pemberitahuan
+  open_system_tray: Baki sistem terbuka
+  open_user_folder: Buka folder pengguna
+  settings: Pengaturan Cepat
+  smart_charge: '- Biaya Cerdas'
+  volume: Volume
+settings:
+  app_settings: Pengaturan aplikasi
+  log_out: Keluar
+  power: Kekuatan
+  restart: Mengulang kembali
+  shutdown: Matikan
+  sleep: Tidur
+  title: Pengaturan
 unlabelled_tray: Ikon baki tanpa label
-context_menu:
-  add_module: Tambahkan modul
-  remove: Hapus modul
-  task_manager: Manajer Tugas
-  settings: Pengaturan

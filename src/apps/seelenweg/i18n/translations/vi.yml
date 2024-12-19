@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Thêm mô -đun phương tiện
-  start: Thêm mô -đun bắt đầu
-  add_folder: Pin thư mục tùy chỉnh
-  add_file: Pin tùy chỉnh tệp
-  settings: Cài đặt
-  task_manager: Trình quản lý tác vụ
 app_menu:
-  open_file_location: Mở vị trí file
-  close_multiple: Đóng tất cả
   close: Đóng
-  run_as: Chạy như quản trị viên
+  close_multiple: Đóng tất cả
+  copy_handles: Sao chép tay cầm
+  kill: Quá trình tiêu diệt
+  kill_multiple: Giết tất cả các tiến trình
+  open_file_location: Mở vị trí file
   pin: Ghim
   pin_to_center: Ghim đến trung tâm
-  unpin: Giải nén
   pin_to_left: Ghim sang trái
-  copy_handles: Sao chép tay cầm
   pin_to_right: Ghim sang phải
-  kill_multiple: Giết tất cả các tiến trình
-  kill: Quá trình tiêu diệt
+  run_as: Chạy như quản trị viên
+  unpin: Giải nén
+media:
+  not_playing: Không có gì đang chơi
 media_menu:
   remove: Loại bỏ mô -đun phương tiện
 start_menu:
   remove: Xóa mô -đun bắt đầu
-media:
-  not_playing: Không có gì đang chơi
+taskbar_menu:
+  add_file: Pin tùy chỉnh tệp
+  add_folder: Pin thư mục tùy chỉnh
+  media: Thêm mô -đun phương tiện
+  settings: Cài đặt
+  start: Thêm mô -đun bắt đầu
+  task_manager: Trình quản lý tác vụ

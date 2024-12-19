@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Добавете модул
+  remove: Премахване на модула
+  settings: Настройки
+  task_manager: Диспечер на задачите
 media:
   device:
-    multimedia: Мултимедия
     comunications: Комуникации
-  master_volume: Главен обем
+    multimedia: Мултимедия
   input_device: Вход устройство
+  master_volume: Главен обем
   output_device: Изходно устройство
   players: Медийни играчи
 network:
-  placeholder:
-    password: Парола
-  not_found: Не са намерени мрежи
+  available: Налични мрежи
   connect: Свържете се
+  connected: Свързан с
+  disconnect: Изключете
   hidden: Скрита мрежа
   more: Повече мрежови настройки
-  disconnect: Изключете
-  available: Налични мрежи
-  connected: Свързан с
-  secured: Криптирана мрежа
+  not_found: Не са намерени мрежи
+  placeholder:
+    password: Парола
   saved: Запазени мрежи
   scanning: Сканиране за мрежи
-settings:
-  shutdown: Изключвам
-  log_out: Излез от профила си
-  title: Настройки
-  restart: Рестартирам
-  app_settings: Настройки на приложението
-  sleep: Сън
-  power: Мощност
+  secured: Криптирана мрежа
 placeholder:
   battery_remaining: '% остава'
+  bluetooth_devices: Bluetooth & устройства
+  ethernet_connected: достъп до интернет
+  ethernet_disconnected: Няма достъп до интернет
+  notifications: Известия
   open_system_tray: Отворена система табла
   open_user_folder: Отворете потребителската папка
-  ethernet_disconnected: Няма достъп до интернет
-  smart_charge: '- Smart Charge'
-  ethernet_connected: достъп до интернет
-  volume: Сила на звука
   settings: Бързи настройки
-  bluetooth_devices: Bluetooth & устройства
-  notifications: Известия
+  smart_charge: '- Smart Charge'
+  volume: Сила на звука
+settings:
+  app_settings: Настройки на приложението
+  log_out: Излез от профила си
+  power: Мощност
+  restart: Рестартирам
+  shutdown: Изключвам
+  sleep: Сън
+  title: Настройки
 unlabelled_tray: Необичана икона на таблата
-context_menu:
-  remove: Премахване на модула
-  add_module: Добавете модул
-  task_manager: Диспечер на задачите
-  settings: Настройки

@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Přidat mediální modul
-  start: Přidat startovací modul
-  add_file: Pin vlastní soubor
-  add_folder: Pin vlastní složka
-  task_manager: Správce úloh
-  settings: Nastavení
 app_menu:
-  pin: Kolík
-  pin_to_center: Pin do středu
-  open_file_location: Otevřít umístění souboru
-  close_multiple: Zavřete všechny
-  run_as: Spustit jako administrátor
   close: Zavřít
+  close_multiple: Zavřete všechny
   copy_handles: Kopírovat úchyty
-  pin_to_right: Pin doprava
-  unpin: Unlin
-  pin_to_left: Pin doleva
   kill: Zabít proces
   kill_multiple: Zabijte všechny procesy
+  open_file_location: Otevřít umístění souboru
+  pin: Kolík
+  pin_to_center: Pin do středu
+  pin_to_left: Pin doleva
+  pin_to_right: Pin doprava
+  run_as: Spustit jako administrátor
+  unpin: Unlin
+media:
+  not_playing: Nic nehraje
 media_menu:
   remove: Odebrat mediální modul
 start_menu:
   remove: Odstraňte startovací modul
-media:
-  not_playing: Nic nehraje
+taskbar_menu:
+  add_file: Pin vlastní soubor
+  add_folder: Pin vlastní složka
+  media: Přidat mediální modul
+  settings: Nastavení
+  start: Přidat startovací modul
+  task_manager: Správce úloh

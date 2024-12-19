@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: د میډیا موډول اضافه کړئ
-  start: د پیل ماډل اضافه کړئ
-  add_folder: د ګمرکونو فولډر
-  add_file: دود دودیز فایل
-  task_manager: د دندې مدیر
-  settings: ترتیبات
 app_menu:
-  copy_handles: لاسوندونه کاپي کوي
-  pin_to_center: مرکز ته پن
-  pin_to_right: ښیې خوا ته
-  pin_to_left: د کی to اړخ ته پن
-  open_file_location: د فایل ځای خلاص کړئ
-  close_multiple: ټول وتړئ
-  unpin: غیر رنګ
   close: بندول
-  run_as: د مدیر په توګه چلول
-  pin: پن
-  kill_multiple: ټولې پروسې وژني
+  close_multiple: ټول وتړئ
+  copy_handles: لاسوندونه کاپي کوي
   kill: د وژلو پروسه
+  kill_multiple: ټولې پروسې وژني
+  open_file_location: د فایل ځای خلاص کړئ
+  pin: پن
+  pin_to_center: مرکز ته پن
+  pin_to_left: د کی to اړخ ته پن
+  pin_to_right: ښیې خوا ته
+  run_as: د مدیر په توګه چلول
+  unpin: غیر رنګ
+media:
+  not_playing: هیڅ شی نه لوبیږی
 media_menu:
   remove: د میډیا ماډل لرې کړئ
 start_menu:
   remove: د پیل ماډل لرې کړئ
-media:
-  not_playing: هیڅ شی نه لوبیږی
+taskbar_menu:
+  add_file: دود دودیز فایل
+  add_folder: د ګمرکونو فولډر
+  media: د میډیا موډول اضافه کړئ
+  settings: ترتیبات
+  start: د پیل ماډل اضافه کړئ
+  task_manager: د دندې مدیر

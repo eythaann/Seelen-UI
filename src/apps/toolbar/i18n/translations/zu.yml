@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Ukuxoxisana
-  output_device: I-Output deturment
-  players: Abadlali beMedia
-  master_volume: '-Nqubenzi'
-  input_device: Idivayisi yokufaka
-network:
-  placeholder:
-    password: Igama lokuvunyelwa ukungena endaweni ethile
-  hidden: Inethiwekhi efihliwe
-  connect: Hlangana
-  more: Izilungiselelo eziningi zenethiwekhi
-  not_found: Awekho amanethiwekhi atholakele
-  disconnect: Thukulula
-  scanning: Iskenela amanethiwekhi
-  secured: Inethiwekhi ebethelwe
-  connected: Kuxhunywe ku
-  available: Amanethiwekhi atholakalayo
-  saved: Amanethiwekhi alondoloziwe
-settings:
-  shutdown: Vala shaqa
-  log_out: Phuma
-  restart: Qalanisa
-  title: Amasethingi
-  app_settings: Izilungiselelo zohlelo lokusebenza
-  sleep: Ukulala
-  power: Ubuqhwaga
-placeholder:
-  settings: Izilungiselelo ezisheshayo
-  open_system_tray: I-Open System Tray
-  ethernet_connected: Ukufinyelela i-Inthanethi
-  battery_remaining: '% okusele'
-  bluetooth_devices: I-Bluetooth & Amadivayisi
-  volume: Ukuvimbanisa
-  smart_charge: '- Ukushaja okuhle'
-  open_user_folder: Vula ifolda yomsebenzisi
-  ethernet_disconnected: Akukho ukufinyelela kwe-inthanethi
-  notifications: Izaziso
-unlabelled_tray: Isithonjana se-tray esingafundile
 context_menu:
   add_module: Engeza imodyuli
   remove: Susa module
   settings: Izilungiselelo
   task_manager: Umphathi Womsebenzi
+media:
+  device:
+    comunications: Ukuxoxisana
+    multimedia: Multimedia
+  input_device: Idivayisi yokufaka
+  master_volume: '-Nqubenzi'
+  output_device: I-Output deturment
+  players: Abadlali beMedia
+network:
+  available: Amanethiwekhi atholakalayo
+  connect: Hlangana
+  connected: Kuxhunywe ku
+  disconnect: Thukulula
+  hidden: Inethiwekhi efihliwe
+  more: Izilungiselelo eziningi zenethiwekhi
+  not_found: Awekho amanethiwekhi atholakele
+  placeholder:
+    password: Igama lokuvunyelwa ukungena endaweni ethile
+  saved: Amanethiwekhi alondoloziwe
+  scanning: Iskenela amanethiwekhi
+  secured: Inethiwekhi ebethelwe
+placeholder:
+  battery_remaining: '% okusele'
+  bluetooth_devices: I-Bluetooth & Amadivayisi
+  ethernet_connected: Ukufinyelela i-Inthanethi
+  ethernet_disconnected: Akukho ukufinyelela kwe-inthanethi
+  notifications: Izaziso
+  open_system_tray: I-Open System Tray
+  open_user_folder: Vula ifolda yomsebenzisi
+  settings: Izilungiselelo ezisheshayo
+  smart_charge: '- Ukushaja okuhle'
+  volume: Ukuvimbanisa
+settings:
+  app_settings: Izilungiselelo zohlelo lokusebenza
+  log_out: Phuma
+  power: Ubuqhwaga
+  restart: Qalanisa
+  shutdown: Vala shaqa
+  sleep: Ukulala
+  title: Amasethingi
+unlabelled_tray: Isithonjana se-tray esingafundile

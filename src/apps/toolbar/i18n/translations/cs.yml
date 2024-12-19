@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimédia
-    comunications: komunikace
-  input_device: Vstupní zařízení
-  players: Přehrávače médií
-  master_volume: Hlavní hlasitost
-  output_device: Výstupní zařízení
-network:
-  placeholder:
-    password: Heslo
-  not_found: Nalezeny žádné sítě
-  hidden: Skrytá síť
-  more: Více nastavení sítě
-  disconnect: Odpojit
-  connect: Připojit
-  connected: Připojeno k
-  saved: Uložené sítě
-  available: Dostupné sítě
-  secured: Šifrovaná síť
-  scanning: Vyhledávání sítí
-settings:
-  app_settings: Nastavení aplikace
-  restart: Restart
-  shutdown: Vypnout
-  sleep: Spát
-  log_out: Odhlásit se
-  title: Nastavení
-  power: Moc
-placeholder:
-  ethernet_disconnected: Žádný přístup k internetu
-  volume: Hlasitost
-  bluetooth_devices: Bluetooth & zařízení
-  open_system_tray: Otevřený systémový zásobník
-  ethernet_connected: Přístup na internet
-  open_user_folder: Otevřená složka uživatele
-  smart_charge: '- Chytrý poplatek'
-  battery_remaining: zbývající %
-  settings: Rychlé nastavení
-  notifications: Oznámení
-unlabelled_tray: Ikona neznačené podnosy
 context_menu:
   add_module: Přidat modul
   remove: Odebrat modul
   settings: Nastavení
   task_manager: Správce úloh
+media:
+  device:
+    comunications: komunikace
+    multimedia: Multimédia
+  input_device: Vstupní zařízení
+  master_volume: Hlavní hlasitost
+  output_device: Výstupní zařízení
+  players: Přehrávače médií
+network:
+  available: Dostupné sítě
+  connect: Připojit
+  connected: Připojeno k
+  disconnect: Odpojit
+  hidden: Skrytá síť
+  more: Více nastavení sítě
+  not_found: Nalezeny žádné sítě
+  placeholder:
+    password: Heslo
+  saved: Uložené sítě
+  scanning: Vyhledávání sítí
+  secured: Šifrovaná síť
+placeholder:
+  battery_remaining: zbývající %
+  bluetooth_devices: Bluetooth & zařízení
+  ethernet_connected: Přístup na internet
+  ethernet_disconnected: Žádný přístup k internetu
+  notifications: Oznámení
+  open_system_tray: Otevřený systémový zásobník
+  open_user_folder: Otevřená složka uživatele
+  settings: Rychlé nastavení
+  smart_charge: '- Chytrý poplatek'
+  volume: Hlasitost
+settings:
+  app_settings: Nastavení aplikace
+  log_out: Odhlásit se
+  power: Moc
+  restart: Restart
+  shutdown: Vypnout
+  sleep: Spát
+  title: Nastavení
+unlabelled_tray: Ikona neznačené podnosy

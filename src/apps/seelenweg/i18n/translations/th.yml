@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: เพิ่มโมดูลเริ่มต้น
-  media: เพิ่มโมดูลสื่อ
-  add_file: ไฟล์ที่กำหนดเองพิน
-  add_folder: โฟลเดอร์ที่กำหนดเองพิน
-  settings: การตั้งค่า
-  task_manager: ตัวจัดการงาน
 app_menu:
   close: ปิด
-  pin: เข็มหมุด
-  pin_to_center: พินไปยังศูนย์
-  open_file_location: เปิดตำแหน่งไฟล์
-  unpin: คลาย
   close_multiple: ปิดทั้งหมด
-  run_as: เรียกใช้เป็นผู้ดูแลระบบ
-  pin_to_right: พินไปทางขวา
-  pin_to_left: พินไปทางซ้าย
   copy_handles: สำเนามือจับ
   kill: ฆ่ากระบวนการ
   kill_multiple: ฆ่ากระบวนการทั้งหมด
+  open_file_location: เปิดตำแหน่งไฟล์
+  pin: เข็มหมุด
+  pin_to_center: พินไปยังศูนย์
+  pin_to_left: พินไปทางซ้าย
+  pin_to_right: พินไปทางขวา
+  run_as: เรียกใช้เป็นผู้ดูแลระบบ
+  unpin: คลาย
+media:
+  not_playing: ไม่มีอะไรเล่น
 media_menu:
   remove: ลบโมดูลสื่อ
 start_menu:
   remove: ลบโมดูลเริ่มต้น
-media:
-  not_playing: ไม่มีอะไรเล่น
+taskbar_menu:
+  add_file: ไฟล์ที่กำหนดเองพิน
+  add_folder: โฟลเดอร์ที่กำหนดเองพิน
+  media: เพิ่มโมดูลสื่อ
+  settings: การตั้งค่า
+  start: เพิ่มโมดูลเริ่มต้น
+  task_manager: ตัวจัดการงาน

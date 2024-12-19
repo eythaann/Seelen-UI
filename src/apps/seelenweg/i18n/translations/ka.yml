@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: დაამატეთ მედია მოდული
-  start: დაამატეთ დაწყების მოდული
-  add_folder: Pin Custom Folder
-  add_file: Pin Custom File
-  settings: პარამეტრები
-  task_manager: სამუშაო მენეჯერი
 app_menu:
-  run_as: Ადმინისტრატორის სახელით გაშვება
-  close_multiple: Დახურე ყველა
   close: ახლო
-  pin_to_center: Pin to Center
-  open_file_location: გახსენით ფაილის ადგილმდებარეობა
+  close_multiple: Დახურე ყველა
   copy_handles: ასლის სახელურები
+  kill: მოკვლის პროცესი
+  kill_multiple: მოკალი ყველა პროცესი
+  open_file_location: გახსენით ფაილის ადგილმდებარეობა
+  pin: ქინძისთავი
+  pin_to_center: Pin to Center
   pin_to_left: პინი მარცხნივ
   pin_to_right: Pin მარჯვნივ
+  run_as: Ადმინისტრატორის სახელით გაშვება
   unpin: გაუქმება
-  pin: ქინძისთავი
-  kill_multiple: მოკალი ყველა პროცესი
-  kill: მოკვლის პროცესი
+media:
+  not_playing: არაფერი თამაშობს
 media_menu:
   remove: წაშალეთ მედია მოდული
 start_menu:
   remove: წაშალეთ დაწყების მოდული
-media:
-  not_playing: არაფერი თამაშობს
+taskbar_menu:
+  add_file: Pin Custom File
+  add_folder: Pin Custom Folder
+  media: დაამატეთ მედია მოდული
+  settings: პარამეტრები
+  start: დაამატეთ დაწყების მოდული
+  task_manager: სამუშაო მენეჯერი

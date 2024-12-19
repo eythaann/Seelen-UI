@@ -1,263 +1,263 @@
-sides:
-  right: Riets
-  left: Lénks
-  top: Uewen
-  bottom: Siwenn
-header:
-  labels:
-    seelen_bar: Fantastesch Toolbar
-    monitors: Iwwerschwannegkeeten
-    developer: Entwéckler
-    seelen_wm: Fënter Manager
-    specific_apps: Spezifesch Apps
-    general: Generol
-    info: Informatioun
-    shortcuts: Ofkierpsen
-    seelen_weg: Dock / Taskbar
-    seelen_rofi: App launcher
-    virtual_desk: Virtuell Desktops
-    home: Doheem
-    mods: Plugins & Widgets
-    seelen_wall: Wallpaper Manager
-start:
-  title: Wëllkomm!
-  message_accent: Optimiséiert Är Produktivitéit mam Stil!
-  message: >-
-    Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute
-    Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng nei
-    Ära vun Effizienz a Multits mat eisen intuitiven Interface a
-    fortgeschratgeschen Features.
-general:
-  theme:
-    add: Füügt Thema
-    label: Thema Informatioun
-    added: Thema scho bäigefüügt
-    tags: Tasmmenzwierk
-    description: Broessdatsch
-    author: Auteur
-    enabled: Aktivéiert Themen
-    placeholder: Wielt Thema
-    available: Liwwerungen
-    selected: Allgemeng
-  startup: Run op Startup?
-  language: Sprooche
-  icon_pack:
-    label: ICON Tass
-  accent_color: Akzenter Faarf
-  wallpaper:
-    select: Wielt Wallpaper
-  date_format: Datum Format
-toolbar:
-  placeholder:
-    select: Toolbar Struktur
-    author: Auteur
-    description: Broessdatsch
-  enable: Aktivéiert Fore Toolbar
-  height: Héicht
-  auto_hide: Automatesch
-  label: TO-tcstar
-  delay_to_show: Verspéidung fir ze weisen
-  delay_to_hide: Verspéidung ze verstoppen
-  use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
-wm:
-  border:
-    width: Grenz Breet
-    enable: Aktivéiert Fenster Grenz
-    offset: Grenz Offäll
-  resize_delta: Resize Delta (%)
-  description: Broessdatsch
-  space_between_containers: Raum tëscht Behälter
-  author: Auteur
-  layout: Lueden
-  workspace_offset: Workspaces Offset (Rand)
-  workspace_padding: Aarbechtsberäich padding
-  enable: Aktivéiert Fenster-Manager
-weg:
-  items:
-    size: Telefonsgrouss
-    zoom_size: Zoomed Gréisst (benotzt fir Themen)
-    gap: Raum tëscht Artikelen
-    label: Artikelen
-    visible_separators: Sechsi seichtbar Seperure
-  width: Breet
-  label: Dock / Taskbar
-  padding: Padding
-  auto_hide: Automatesch
-  margin: Den Jean-Margin
-  gap: Knënn
-  enable: Aktivéiert Dock / Taskbar
-  dock_side: Positioun un
-  delay_to_show: Verspéidung fir ze weisen
-  delay_to_hide: Verspéidung ze verstoppen
-  use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
-devtools:
-  app_folders: App Classeure
-  enable: Aktivéiert Entwéckler Tools
-  install_folder: Installatioun Dossier
-  custom_config_file: Luede personaliséiert Konfiguratiounsdatei
-  data_folder: Etabond Dossier
-  settings_file: Settytout-Datei
-  load: Lueden
+app_launcher:
+  enable: Aktivéiert App Launcher
+  monitor: Monitor fir ze weisen
+  runners:
+    cmd: Kommun de Kommentar
+    explorer: Lafe
+    label: Leefer
 apps_configurations:
   app:
+    bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
+    category: Gemengen
+    category_placeholder: Keen
+    monitor: Bonitor
+    monitor_placeholder: Keen
+    name: Numm vum Numm
+    ok_create: Erreeiert eng kreéieren
+    ok_edit: Olaangs
+    ok_readonly: Ännert als nei
     options:
       float: Schwammen
-      pinned: Verbonnen
       force: Kraaft managen
-      unmanage: Unmanage
       hidden: Verstoppen vun Dock / Taskbar
-    title_readonly: '{{{Numm}}'
-    category_placeholder: Keen
-    name: Numm vum Numm
-    monitor_placeholder: Keen
-    ok_readonly: Ännert als nei
-    workspace_placeholder: Keen
-    monitor: Bonitor
-    category: Gemengen
-    ok_edit: Olaangs
-    bindings: Bindend (Notiz béid Optiounen sinn erfuerderlech)
-    workspace: Konschtpas
+      pinned: Verbonnen
+      unmanage: Unmanage
+    options_label: Extra Optiounen
     title_create: Erstellen {{Numm}}
-    ok_create: Erreeiert eng kreéieren
+    title_edit: Ännert {{Numm}}
+    title_readonly: '{{{Numm}}'
     weg_options_label: Dock / Taskbaroptiounen
     wm_options_label: Fenster Manager Optiounen
-    options_label: Extra Optiounen
-    title_edit: Ännert {{Numm}}
-  identifier:
-    remove: Läschen Block
-    matching_strategy: Passende Strategie
-    kind: Identifizéieren duerch
-    negation: Negate passend
-    or: Oder
-    id: Identifizéierer
-    and: An an
-    add_block: Füügt Block
-  bundled_title: App con conflüchteg mat Seelen
-  delete: Läschen
-  confirm_delete_title: Confirméieren Leedung
-  search: Sichen
-  export: Export
-  new: Nei
-  confirm_delete: Sidd Dir sécher, datt Dir dës Configuratioun / s läscht braucht?
-  swap: Zort
-  import: Importéieren
+    workspace: Konschtpas
+    workspace_placeholder: Keen
   bundled_msg: >-
     Dës gebündelt Konfiguratiounen sinn net geännert a sinn entwéckelt fir Iech
     déi bescht Erfahrung ouni Personnalisatioun ze ginn. Si konfiguréieren
     automatesch déi heefegst Uwendungen fir Iech.
+  bundled_title: App con conflüchteg mat Seelen
+  confirm_delete: Sidd Dir sécher, datt Dir dës Configuratioun / s läscht braucht?
+  confirm_delete_title: Confirméieren Leedung
+  delete: Läschen
+  export: Export
   extra_info: >-
     Svelt UI benotzen nëmmen een identifizéierer pro App (Virdeel net fonnt),
     sou wéi kënne bestëmmten onbestëmmt ass wichteg, well den Dësch bestëmmt
     gëtt geschafaf, wéi Den Tabell aus alstoën ass, sou wéi den Dësch par
     rapport ass.
+  identifier:
+    add_block: Füügt Block
+    and: An an
+    id: Identifizéierer
+    kind: Identifizéieren duerch
+    matching_strategy: Passende Strategie
+    negation: Negate passend
+    or: Oder
+    remove: Läschen Block
+  import: Importéieren
+  new: Nei
+  search: Sichen
+  swap: Zort
+cancel: Ofbriechen
+close: Zoumaachen
+delete: Läschen
+devtools:
+  app_folders: App Classeure
+  custom_config_file: Luede personaliséiert Konfiguratiounsdatei
+  data_folder: Etabond Dossier
+  enable: Aktivéiert Entwéckler Tools
+  install_folder: Installatioun Dossier
+  load: Lueden
+  settings_file: Settytout-Datei
 extras:
-  version: Erëm
+  discord: Diskord
+  exit: Ophalen / erausfannen
+  github: Github
   links: Offiziell Linken
   relaunch: Relatioun
-  github: Github
-  exit: Ophalen / erausfannen
-  discord: Diskord
+  version: Erëm
+general:
+  accent_color: Akzenter Faarf
+  date_format: Datum Format
+  icon_pack:
+    label: ICON Tass
+  language: Sprooche
+  startup: Run op Startup?
+  theme:
+    add: Füügt Thema
+    added: Thema scho bäigefüügt
+    author: Auteur
+    available: Liwwerungen
+    description: Broessdatsch
+    enabled: Aktivéiert Themen
+    label: Thema Informatioun
+    placeholder: Wielt Thema
+    selected: Allgemeng
+    tags: Tasmmenzwierk
+  wallpaper:
+    select: Wielt Wallpaper
+header:
+  labels:
+    developer: Entwéckler
+    general: Generol
+    home: Doheem
+    info: Informatioun
+    mods: Plugins & Widgets
+    monitors: Iwwerschwannegkeeten
+    seelen_bar: Fantastesch Toolbar
+    seelen_rofi: App launcher
+    seelen_wall: Wallpaper Manager
+    seelen_weg: Dock / Taskbar
+    seelen_wm: Fënter Manager
+    shortcuts: Ofkierpsen
+    specific_apps: Spezifesch Apps
+    virtual_desk: Virtuell Desktops
+inherit: Ontherrit
+inProgress: A Beaarbechtung...
+insert: INor andafen
+loading: Lueden ...
+miscellaneous: Erleeën
+mods:
+  plugins: Plugins
+  target: Zilrät
+  widgets: Widgets
+monitors_configurations:
+  label: Monitor {{index}}
+more: Méi kleng
+open: Ëmen e gratis
+quit: Ness
+remove: Ofwäschen
+save: Spuerwäit
+save_and_restart: Spuert & nei starten
 shortcuts:
+  enable: Aktivéiert integréiert Ofkiirzungen (AHK)
+  enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
   labels:
     decrease_height: Reduzéiert Héicht
-    reserve_right: Reservéiert richteg
-    switch_workspace_5: Schalt op Aarbechtsberäich 5
-    increase_width: Erhéijung vun der Breet
-    switch_workspace_6: Wiesselt op Workspace 6
-    send_to_workspace_0: Schéckt e Aarbechtsberäich 0
-    send_to_workspace_1: Schéckt op Aarbechtsberäich 1
-    switch_workspace_7: Wiesselt op Aarbechtsberäich 7
-    reserve_stack: Reserve Stack
-    move_to_workspace_4: Gitt op Workspace 4
-    switch_workspace_9: Wiesselt op Workspace 9
-    switch_workspace_3: Wiesselt op Workspace 3
-    switch_workspace_8: Schalt op Workspace 8
-    focus_latest: Fokusséieren dat lescht
-    focus_top: Fokusséieren Top
-    move_to_workspace_1: Gitt op Aarbechtsberäich 1
-    reserve_left: Reserve lénks
     decrease_width: Reduzéiert Breet
-    increase_height: Erhéijen Héicht
     focus_bottom: Fokus ënnen
-    reserve_bottom: Reservéiert ënnen
-    focus_right: Fokusséiert richteg
-    restore_sizes: Restauréiert Gréissten
+    focus_latest: Fokusséieren dat lescht
     focus_left: Fokusséiert lénks
-    move_to_workspace_6: Plënnert op Workspace 6
-    send_to_workspace_4: Schéckt op Aarbechtsberäich 4
-    switch_workspace_2: Schalt op Aarbechtsberäich 2
-    move_to_workspace_8: Plënnert op Workspace 8
-    move_to_workspace_2: Plënnert op Aarbechtsberäich 2
-    send_to_workspace_3: Schéckt op Aarbechtsberäich 3
-    move_to_workspace_0: Plënnert op Workspace 0
-    move_to_workspace_9: Plënnert op Workspace 9
-    move_to_workspace_7: Plënnert op Workspace 7
-    send_to_workspace_5: Schéckt op Aarbechtsberäich 5
-    move_to_workspace_5: Plënnert op Aarbechtsberäich 5
-    send_to_workspace_8: Schéckt e Aarbechtsberäich 8
-    send_to_workspace_9: Schéckt an Aarbechtsbereedung 9
-    send_to_workspace_7: Schéckt op Aarbechtsberäich 7
-    switch_workspace_4: Schalt op Workspace 4
-    move_to_workspace_3: Plënnert op Aarbechtsberäich 3
-    send_to_workspace_6: Schéckt e Aarbechtsberäich 6
-    reserve_top: Reserve Top
-    send_to_workspace_2: Schéckt op Aarbechtsberäich 2
-    reserve_float: Reservéiert Float
-    switch_workspace_1: Schalt op Aarbechtsberäich 2
-    switch_workspace_0: Schalt op Aarbechtsberäich 1
+    focus_right: Fokusséiert richteg
+    focus_top: Fokusséieren Top
+    increase_height: Erhéijen Héicht
+    increase_width: Erhéijung vun der Breet
     misc_open_settings: Oppen Astellungen
     misc_toggle_lock_tracing: Toggle Lock Tracing (Logbicher)
     misc_toggle_win_event_tracing: Toggle gewannen Event Tracing (Logbicher)
+    move_to_workspace_0: Plënnert op Workspace 0
+    move_to_workspace_1: Gitt op Aarbechtsberäich 1
+    move_to_workspace_2: Plënnert op Aarbechtsberäich 2
+    move_to_workspace_3: Plënnert op Aarbechtsberäich 3
+    move_to_workspace_4: Gitt op Workspace 4
+    move_to_workspace_5: Plënnert op Aarbechtsberäich 5
+    move_to_workspace_6: Plënnert op Workspace 6
+    move_to_workspace_7: Plënnert op Workspace 7
+    move_to_workspace_8: Plënnert op Workspace 8
+    move_to_workspace_9: Plënnert op Workspace 9
+    reserve_bottom: Reservéiert ënnen
+    reserve_float: Reservéiert Float
+    reserve_left: Reserve lénks
+    reserve_right: Reservéiert richteg
+    reserve_stack: Reserve Stack
+    reserve_top: Reserve Top
+    restore_sizes: Restauréiert Gréissten
+    send_to_workspace_0: Schéckt e Aarbechtsberäich 0
+    send_to_workspace_1: Schéckt op Aarbechtsberäich 1
+    send_to_workspace_2: Schéckt op Aarbechtsberäich 2
+    send_to_workspace_3: Schéckt op Aarbechtsberäich 3
+    send_to_workspace_4: Schéckt op Aarbechtsberäich 4
+    send_to_workspace_5: Schéckt op Aarbechtsberäich 5
+    send_to_workspace_6: Schéckt e Aarbechtsberäich 6
+    send_to_workspace_7: Schéckt op Aarbechtsberäich 7
+    send_to_workspace_8: Schéckt e Aarbechtsberäich 8
+    send_to_workspace_9: Schéckt an Aarbechtsbereedung 9
+    switch_workspace_0: Schalt op Aarbechtsberäich 1
+    switch_workspace_1: Schalt op Aarbechtsberäich 2
+    switch_workspace_2: Schalt op Aarbechtsberäich 2
+    switch_workspace_3: Wiesselt op Workspace 3
+    switch_workspace_4: Schalt op Workspace 4
+    switch_workspace_5: Schalt op Aarbechtsberäich 5
+    switch_workspace_6: Wiesselt op Workspace 6
+    switch_workspace_7: Wiesselt op Aarbechtsberäich 7
+    switch_workspace_8: Schalt op Workspace 8
+    switch_workspace_9: Wiesselt op Workspace 9
     toggle_launcher: Talzkle
-  enable: Aktivéiert integréiert Ofkiirzungen (AHK)
-  enable_tooltip: Desaktivéiert wann Dir Är eege Ofkiirzungen ëmsetzen mat dem Selen Core API
-  reset: Reset op Defaults
   readonly_tooltip: Dëst ass e Lies-nëmme Mangel
-inProgress: A Beaarbechtung...
-loading: Lueden ...
-open: Ëmen e gratis
-delete: Läschen
-cancel: Ofbriechen
-quit: Ness
-save: Spuerwäit
-vd:
-  strategy:
-    label: Virtuell Desktop Strategie
-    seelen: Gesieg
-    native: Native
-  disabled_windows_version: >-
-    Gebierteg virtuell Desktop Strategie ass net fir Är Windows Versioun
-    verfügbar.
-save_and_restart: Spuert & nei starten
-monitors_configurations:
-  label: Monitor {{index}}
-wall:
-  backgrounds: Wallpapers
-  no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
-  enable: Aktivéiert Wallpaper Manager
-  interval: Änneren Wallpaper all
-  random: Zoufälleg Slideshow
-  minutes: Minutte vun der Minutten
-  hours: Stonnen.
-  seconds: Sekonnen
-app_launcher:
-  runners:
-    cmd: Kommun de Kommentar
-    label: Leefer
-    explorer: Lafe
-  enable: Aktivéiert App Launcher
-  monitor: Monitor fir ze weisen
-more: Méi kleng
-insert: INor andafen
-inherit: Ontherrit
-close: Zoumaachen
+  reset: Reset op Defaults
+sides:
+  bottom: Siwenn
+  left: Lénks
+  right: Riets
+  top: Uewen
+start:
+  message: >-
+    Wëllkomm fir ze gesinn Ui, den ultimativen Desktop Ëmfeld mat engem agebaute
+    Fournisseur Manager fir Är Windows Erfarung ze verbesseren! Entdeckt eng nei
+    Ära vun Effizienz a Multits mat eisen intuitiven Interface a
+    fortgeschratgeschen Features.
+  message_accent: Optimiséiert Är Produktivitéit mam Stil!
+  title: Wëllkomm!
+toolbar:
+  auto_hide: Automatesch
+  delay_to_hide: Verspéidung ze verstoppen
+  delay_to_show: Verspéidung fir ze weisen
+  enable: Aktivéiert Fore Toolbar
+  height: Héicht
+  label: TO-tcstar
+  placeholder:
+    author: Auteur
+    description: Broessdatsch
+    select: Toolbar Struktur
+  use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
 update:
   available: Update verfügbar!
   channel: Update Kanal
   downloading: NËMMEN ...
-miscellaneous: Erleeën
-mods:
-  target: Zilrät
-  plugins: Plugins
-  widgets: Widgets
-remove: Ofwäschen
+vd:
+  disabled_windows_version: >-
+    Gebierteg virtuell Desktop Strategie ass net fir Är Windows Versioun
+    verfügbar.
+  strategy:
+    label: Virtuell Desktop Strategie
+    native: Native
+    seelen: Gesieg
+wall:
+  backgrounds: Wallpapers
+  enable: Aktivéiert Wallpaper Manager
+  hours: Stonnen.
+  interval: Änneren Wallpaper all
+  minutes: Minutte vun der Minutten
+  no_background: Eidel Slatswhow, benotzt den Thema vum Thema amplaz.
+  random: Zoufälleg Slideshow
+  seconds: Sekonnen
+weg:
+  auto_hide: Automatesch
+  delay_to_hide: Verspéidung ze verstoppen
+  delay_to_show: Verspéidung fir ze weisen
+  dock_side: Positioun un
+  enable: Aktivéiert Dock / Taskbar
+  gap: Knënn
+  items:
+    gap: Raum tëscht Artikelen
+    label: Artikelen
+    size: Telefonsgrouss
+    visible_separators: Sechsi seichtbar Seperure
+    zoom_size: Zoomed Gréisst (benotzt fir Themen)
+  label: Dock / Taskbar
+  margin: Den Jean-Margin
+  padding: Padding
+  use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
+  width: Breet
+wm:
+  author: Auteur
+  border:
+    enable: Aktivéiert Fenster Grenz
+    offset: Grenz Offäll
+    width: Grenz Breet
+  description: Broessdatsch
+  enable: Aktivéiert Fenster-Manager
+  layout: Lueden
+  resize_delta: Resize Delta (%)
+  space_between_containers: Raum tëscht Behälter
+  workspace_offset: Workspaces Offset (Rand)
+  workspace_padding: Aarbechtsberäich padding

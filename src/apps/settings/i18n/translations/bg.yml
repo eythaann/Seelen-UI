@@ -1,263 +1,263 @@
-sides:
-  top: Връх
-  left: Наляво
-  bottom: Отдолу
-  right: Точно
+app_launcher:
+  enable: Активирайте стартиращия APP
+  monitor: Монитор да се покаже
+  runners:
+    cmd: Команда
+    explorer: Изпълнете
+    label: Бегачи
+apps_configurations:
+  app:
+    bindings: Обвързване (Забележете, че и двете опции са необходими)
+    category: Категория
+    category_placeholder: Нито един
+    monitor: Монитор
+    monitor_placeholder: Нито един
+    name: Име
+    ok_create: Създаване
+    ok_edit: Актуализация
+    ok_readonly: Редактиране като ново
+    options:
+      float: Float
+      force: Управление на силата
+      hidden: Скрийте се от Dock/Taskbar
+      pinned: Прикован
+      unmanage: Несъгласен
+    options_label: Допълнителни опции
+    title_create: Създаване {{name}}
+    title_edit: Редактиране {{name}}
+    title_readonly: Преглед {{name}}
+    weg_options_label: Опции за док/лента на задачите
+    wm_options_label: Опции за мениджър на прозорци
+    workspace: Работно пространство
+    workspace_placeholder: Нито един
+  bundled_msg: >-
+    Тези пакетни конфигурации не са редактируеми и са предназначени да ви
+    осигурят най -доброто изживяване без персонализиране. Те автоматично
+    конфигурират най -често срещаните приложения за вас.
+  bundled_title: App Config, вградено със Seelen
+  confirm_delete: Сигурни ли сте, че искате да изтриете тази конфигурация/и?
+  confirm_delete_title: Потвърдете изтриването
+  delete: Изтрий
+  export: Експорт
+  extra_info: >-
+    Потребителският интерфейс на Seelen използва само един идентификатор за
+    приложение (първото намерено съвпадение), така че редът на посочване е
+    важен, последно добавеното ще бъде с приоритет, като имайте предвид, че
+    таблицата е сортирана по подразбиране от най-новото към старото.
+  identifier:
+    add_block: Добавете блок
+    and: И
+    id: Идентификатор
+    kind: Определете от
+    matching_strategy: Съответстваща стратегия
+    negation: Отрицание за съвпадение
+    or: ИЛИ
+    remove: Изтриване на блок
+  import: Импортиране
+  new: Ново
+  search: Търсене
+  swap: Размяна
+cancel: Отказ
+close: Затворете
+delete: Изтрий
+devtools:
+  app_folders: Папки на приложения
+  custom_config_file: Заредете персонализиран конфигурационен файл
+  data_folder: Папка с данни
+  enable: Активирайте инструментите за разработчици
+  install_folder: Инсталационна папка
+  load: Зареждане
+  settings_file: Файл за настройки
+extras:
+  discord: Раздор
+  exit: QUIT/EXIT
+  github: Github
+  links: Официални връзки
+  relaunch: Рестартиране
+  version: Версия
+general:
+  accent_color: Цвят на акцент
+  date_format: Формат на дата
+  icon_pack:
+    label: Икони пакети
+  language: Език
+  startup: Да се ​​стартирате при стартиране?
+  theme:
+    add: Добавете тема
+    added: Темата вече е добавена
+    author: Автор
+    available: На разположение
+    description: Описание
+    enabled: Активирани теми
+    label: Информация за темата
+    placeholder: Изберете тема
+    selected: Избран
+    tags: Етикети
+  wallpaper:
+    select: Изберете тапет
 header:
   labels:
-    seelen_wm: Мениджър на прозорци
     developer: Разработчик
-    specific_apps: Конкретни приложения
-    info: Информация
-    monitors: Монитори
-    seelen_weg: Док/лента на задачите
     general: Общ
-    seelen_bar: Фантастична лента с инструменти
-    shortcuts: Преки пътища
-    seelen_rofi: Изстрелване на приложението
-    virtual_desk: Виртуални настолни компютри
     home: Начало
+    info: Информация
     mods: Плъгини и джаджи
+    monitors: Монитори
+    seelen_bar: Фантастична лента с инструменти
+    seelen_rofi: Изстрелване на приложението
     seelen_wall: Мениджър на тапети
+    seelen_weg: Док/лента на задачите
+    seelen_wm: Мениджър на прозорци
+    shortcuts: Преки пътища
+    specific_apps: Конкретни приложения
+    virtual_desk: Виртуални настолни компютри
+inherit: Наследяване
+inProgress: В ход ...
+insert: Вмъкнете
+loading: Зареждане...
+miscellaneous: Разни
+mods:
+  plugins: Приставки
+  target: Цел
+  widgets: Джаджи
+monitors_configurations:
+  label: Монитор {{index}}
+more: Още
+open: Отворен
+quit: Напусна
+remove: Извадете
+save: Запазете
+save_and_restart: Запазване и рестартиране
+shortcuts:
+  enable: Активиране на интегрирани преки пътища (AHK)
+  enable_tooltip: >-
+    Деактивирайте, ако ще внедрите свои собствени преки пътища с помощта на API
+    на Core Seelen
+  labels:
+    decrease_height: Намаляване на височината
+    decrease_width: Намалете ширината
+    focus_bottom: Фокусирайте дъното
+    focus_latest: Фокусирайте последното
+    focus_left: Фокусирайте вляво
+    focus_right: Фокусирайте се вдясно
+    focus_top: Фокус отгоре
+    increase_height: Увеличете височината
+    increase_width: Увеличете ширината
+    misc_open_settings: Отворени настройки
+    misc_toggle_lock_tracing: Toggle Lock Tracing (Logs)
+    misc_toggle_win_event_tracing: Превключване на победа проследяване на събитията (logs)
+    move_to_workspace_0: Преместете се в работно пространство 0
+    move_to_workspace_1: Преместете се в работно пространство 1
+    move_to_workspace_2: Преместете се в работното пространство 2
+    move_to_workspace_3: Преместете се в работното пространство 3
+    move_to_workspace_4: Преместете се в работно пространство 4
+    move_to_workspace_5: Преместете се в работното пространство 5
+    move_to_workspace_6: Преместете се в работно пространство 6
+    move_to_workspace_7: Преместете се в работно пространство 7
+    move_to_workspace_8: Преместете се в работно пространство 8
+    move_to_workspace_9: Преместете се в работно пространство 9
+    reserve_bottom: Резервно дъно
+    reserve_float: Резервен поплавък
+    reserve_left: Резервирайте вляво
+    reserve_right: Резервирайте правилно
+    reserve_stack: Резервен стек
+    reserve_top: Резервен връх
+    restore_sizes: Възстановяване на размерите
+    send_to_workspace_0: Изпратете в работното пространство 0
+    send_to_workspace_1: Изпратете в работното пространство 1
+    send_to_workspace_2: Изпратете в работното пространство 2
+    send_to_workspace_3: Изпратете в Workspace 3
+    send_to_workspace_4: Изпратете в работното пространство 4
+    send_to_workspace_5: Изпратете в работното пространство 5
+    send_to_workspace_6: Изпратете в Workspace 6
+    send_to_workspace_7: Изпратете в работното пространство 7
+    send_to_workspace_8: Изпратете в работното пространство 8
+    send_to_workspace_9: Изпратете в работно пространство 9
+    switch_workspace_0: Превключете в работното пространство 1
+    switch_workspace_1: Превключете в работното пространство 2
+    switch_workspace_2: Превключете в работното пространство 2
+    switch_workspace_3: Превключете в работното пространство 3
+    switch_workspace_4: Превключете в работното пространство 4
+    switch_workspace_5: Превключете в работното пространство 5
+    switch_workspace_6: Превключете в работното пространство 6
+    switch_workspace_7: Превключете в работното пространство 7
+    switch_workspace_8: Превключете в работното пространство 8
+    switch_workspace_9: Превключете в работното пространство 9
+    toggle_launcher: Превключване
+  readonly_tooltip: Това е пряк път само за четене
+  reset: Нулиране на по подразбиране
+sides:
+  bottom: Отдолу
+  left: Наляво
+  right: Точно
+  top: Връх
 start:
-  title: Добре дошли!
   message: >-
     Добре дошли в Seelen UI, най -добрата среда на работния плот с включена
     облицовка на Windows Manager, за да подобри вашето изживяване на Windows!
     Разгледайте нова ера на ефективност и многозадачност с нашия интуитивен
     интерфейс и разширени функции.
   message_accent: Оптимизирайте производителността си със стил!
-general:
-  theme:
-    add: Добавете тема
-    added: Темата вече е добавена
-    author: Автор
-    tags: Етикети
-    description: Описание
-    label: Информация за темата
-    enabled: Активирани теми
-    placeholder: Изберете тема
-    selected: Избран
-    available: На разположение
-  startup: Да се ​​стартирате при стартиране?
-  language: Език
-  icon_pack:
-    label: Икони пакети
-  accent_color: Цвят на акцент
-  wallpaper:
-    select: Изберете тапет
-  date_format: Формат на дата
+  title: Добре дошли!
 toolbar:
-  placeholder:
-    description: Описание
-    select: Структура на лентата с инструменти
-    author: Автор
+  auto_hide: Автоматично скриване
+  delay_to_hide: Забавяне, за да се скрие
+  delay_to_show: Забавяне за показване
   enable: Активирайте фантастичната лента с инструменти
   height: Височина
-  auto_hide: Автоматично скриване
   label: Лента с инструменти
-  delay_to_show: Забавяне за показване
-  delay_to_hide: Забавяне, за да се скрие
+  placeholder:
+    author: Автор
+    description: Описание
+    select: Структура на лентата с инструменти
   use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
+update:
+  available: Налична актуализация!
+  channel: Канал за актуализиране
+  downloading: Изтегляне ...
+vd:
+  disabled_windows_version: Native Virtual Desktop Strategy не е налична за вашата версия на Windows.
+  strategy:
+    label: Виртуална стратегия за настолни компютри
+    native: Роден
+    seelen: Зелен
+wall:
+  backgrounds: Тапети
+  enable: Активирайте мениджъра на тапети
+  hours: часове
+  interval: Променете тапетите всеки
+  minutes: минути
+  no_background: Празно слайдшоу, вместо това използвайки фона на темата.
+  random: Рандомизиране слайдшоу
+  seconds: секунди
+weg:
+  auto_hide: Автоматично скриване
+  delay_to_hide: Забавяне, за да се скрие
+  delay_to_show: Забавяне за показване
+  dock_side: Позиция
+  enable: Активирайте док/лента на задачите
+  gap: Пропаст
+  items:
+    gap: Пространство между артикулите
+    label: Елементи
+    size: Размер на артикула
+    visible_separators: Видими разделители
+    zoom_size: Размерът на мащабиране (използван за теми)
+  label: Док/лента на задачите
+  margin: Марж
+  padding: Подплънки
+  use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
+  width: Ширина
 wm:
+  author: Автор
   border:
     enable: Активирайте границата на Windows
     offset: Гранично изместване
     width: Гранична ширина
   description: Описание
-  resize_delta: Оразмерете делтата (%)
-  workspace_padding: Работни пространства подплънки
-  space_between_containers: Пространство между контейнерите
-  layout: Оформление
-  author: Автор
-  workspace_offset: Изместване на работните пространства (маржове)
   enable: Активирайте мениджъра на прозорци за облицовка
-weg:
-  items:
-    zoom_size: Размерът на мащабиране (използван за теми)
-    gap: Пространство между артикулите
-    visible_separators: Видими разделители
-    label: Елементи
-    size: Размер на артикула
-  padding: Подплънки
-  enable: Активирайте док/лента на задачите
-  auto_hide: Автоматично скриване
-  margin: Марж
-  width: Ширина
-  label: Док/лента на задачите
-  gap: Пропаст
-  dock_side: Позиция
-  delay_to_show: Забавяне за показване
-  delay_to_hide: Забавяне, за да се скрие
-  use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
-devtools:
-  app_folders: Папки на приложения
-  custom_config_file: Заредете персонализиран конфигурационен файл
-  load: Зареждане
-  data_folder: Папка с данни
-  install_folder: Инсталационна папка
-  enable: Активирайте инструментите за разработчици
-  settings_file: Файл за настройки
-apps_configurations:
-  app:
-    options:
-      force: Управление на силата
-      float: Float
-      unmanage: Несъгласен
-      pinned: Прикован
-      hidden: Скрийте се от Dock/Taskbar
-    title_create: Създаване {{name}}
-    workspace: Работно пространство
-    category: Категория
-    ok_readonly: Редактиране като ново
-    ok_edit: Актуализация
-    monitor_placeholder: Нито един
-    name: Име
-    workspace_placeholder: Нито един
-    bindings: Обвързване (Забележете, че и двете опции са необходими)
-    title_readonly: Преглед {{name}}
-    monitor: Монитор
-    category_placeholder: Нито един
-    ok_create: Създаване
-    wm_options_label: Опции за мениджър на прозорци
-    weg_options_label: Опции за док/лента на задачите
-    options_label: Допълнителни опции
-    title_edit: Редактиране {{name}}
-  identifier:
-    add_block: Добавете блок
-    remove: Изтриване на блок
-    id: Идентификатор
-    negation: Отрицание за съвпадение
-    and: И
-    matching_strategy: Съответстваща стратегия
-    kind: Определете от
-    or: ИЛИ
-  new: Ново
-  confirm_delete_title: Потвърдете изтриването
-  bundled_title: App Config, вградено със Seelen
-  search: Търсене
-  confirm_delete: Сигурни ли сте, че искате да изтриете тази конфигурация/и?
-  export: Експорт
-  bundled_msg: >-
-    Тези пакетни конфигурации не са редактируеми и са предназначени да ви
-    осигурят най -доброто изживяване без персонализиране. Те автоматично
-    конфигурират най -често срещаните приложения за вас.
-  delete: Изтрий
-  swap: Размяна
-  import: Импортиране
-  extra_info: >-
-    Потребителският интерфейс на Seelen използва само един идентификатор за
-    приложение (първото намерено съвпадение), така че редът на посочване е
-    важен, последно добавеното ще бъде с приоритет, като имайте предвид, че
-    таблицата е сортирана по подразбиране от най-новото към старото.
-extras:
-  relaunch: Рестартиране
-  links: Официални връзки
-  version: Версия
-  exit: QUIT/EXIT
-  discord: Раздор
-  github: Github
-shortcuts:
-  labels:
-    reserve_float: Резервен поплавък
-    reserve_right: Резервирайте правилно
-    reserve_top: Резервен връх
-    focus_latest: Фокусирайте последното
-    focus_top: Фокус отгоре
-    focus_right: Фокусирайте се вдясно
-    reserve_bottom: Резервно дъно
-    focus_bottom: Фокусирайте дъното
-    reserve_stack: Резервен стек
-    reserve_left: Резервирайте вляво
-    focus_left: Фокусирайте вляво
-    increase_width: Увеличете ширината
-    send_to_workspace_0: Изпратете в работното пространство 0
-    send_to_workspace_4: Изпратете в работното пространство 4
-    send_to_workspace_1: Изпратете в работното пространство 1
-    move_to_workspace_6: Преместете се в работно пространство 6
-    send_to_workspace_8: Изпратете в работното пространство 8
-    send_to_workspace_6: Изпратете в Workspace 6
-    switch_workspace_9: Превключете в работното пространство 9
-    switch_workspace_4: Превключете в работното пространство 4
-    switch_workspace_7: Превключете в работното пространство 7
-    move_to_workspace_0: Преместете се в работно пространство 0
-    decrease_width: Намалете ширината
-    switch_workspace_2: Превключете в работното пространство 2
-    decrease_height: Намаляване на височината
-    move_to_workspace_5: Преместете се в работното пространство 5
-    move_to_workspace_2: Преместете се в работното пространство 2
-    send_to_workspace_2: Изпратете в работното пространство 2
-    move_to_workspace_4: Преместете се в работно пространство 4
-    send_to_workspace_7: Изпратете в работното пространство 7
-    move_to_workspace_1: Преместете се в работно пространство 1
-    move_to_workspace_9: Преместете се в работно пространство 9
-    switch_workspace_5: Превключете в работното пространство 5
-    move_to_workspace_8: Преместете се в работно пространство 8
-    move_to_workspace_7: Преместете се в работно пространство 7
-    switch_workspace_3: Превключете в работното пространство 3
-    send_to_workspace_3: Изпратете в Workspace 3
-    switch_workspace_8: Превключете в работното пространство 8
-    restore_sizes: Възстановяване на размерите
-    send_to_workspace_9: Изпратете в работно пространство 9
-    switch_workspace_6: Превключете в работното пространство 6
-    send_to_workspace_5: Изпратете в работното пространство 5
-    increase_height: Увеличете височината
-    move_to_workspace_3: Преместете се в работното пространство 3
-    switch_workspace_0: Превключете в работното пространство 1
-    switch_workspace_1: Превключете в работното пространство 2
-    misc_toggle_lock_tracing: Toggle Lock Tracing (Logs)
-    misc_toggle_win_event_tracing: Превключване на победа проследяване на събитията (logs)
-    misc_open_settings: Отворени настройки
-    toggle_launcher: Превключване
-  enable_tooltip: >-
-    Деактивирайте, ако ще внедрите свои собствени преки пътища с помощта на API
-    на Core Seelen
-  enable: Активиране на интегрирани преки пътища (AHK)
-  reset: Нулиране на по подразбиране
-  readonly_tooltip: Това е пряк път само за четене
-loading: Зареждане...
-quit: Напусна
-delete: Изтрий
-save: Запазете
-inProgress: В ход ...
-open: Отворен
-cancel: Отказ
-vd:
-  strategy:
-    label: Виртуална стратегия за настолни компютри
-    seelen: Зелен
-    native: Роден
-  disabled_windows_version: Native Virtual Desktop Strategy не е налична за вашата версия на Windows.
-save_and_restart: Запазване и рестартиране
-monitors_configurations:
-  label: Монитор {{index}}
-wall:
-  backgrounds: Тапети
-  no_background: Празно слайдшоу, вместо това използвайки фона на темата.
-  enable: Активирайте мениджъра на тапети
-  interval: Променете тапетите всеки
-  random: Рандомизиране слайдшоу
-  hours: часове
-  minutes: минути
-  seconds: секунди
-app_launcher:
-  runners:
-    cmd: Команда
-    explorer: Изпълнете
-    label: Бегачи
-  enable: Активирайте стартиращия APP
-  monitor: Монитор да се покаже
-more: Още
-inherit: Наследяване
-insert: Вмъкнете
-close: Затворете
-update:
-  available: Налична актуализация!
-  downloading: Изтегляне ...
-  channel: Канал за актуализиране
-miscellaneous: Разни
-mods:
-  widgets: Джаджи
-  plugins: Приставки
-  target: Цел
-remove: Извадете
+  layout: Оформление
+  resize_delta: Оразмерете делтата (%)
+  space_between_containers: Пространство между контейнерите
+  workspace_offset: Изместване на работните пространства (маржове)
+  workspace_padding: Работни пространства подплънки

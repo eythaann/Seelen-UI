@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Medya Modülü Ekle
-  start: Başlat Modülü Ekle
-  add_file: Özel Dosya Sabitle
-  add_folder: Özel Klasör Sabitle
-  task_manager: Görev Yöneticisi
-  settings: Ayarlar
 app_menu:
-  open_file_location: Dosya Konumunu Aç
-  run_as: Yönetici Olarak Çalıştır
-  pin: Sabitle
-  close_multiple: Tümünü Kapat
   close: Kapat
-  pin_to_center: Ortaya Sabitle
+  close_multiple: Tümünü Kapat
   copy_handles: Tanıtıcıları Kopyala
-  pin_to_right: Sağa Sabitle
-  unpin: Sabitlenmeyi Kaldır
-  pin_to_left: Sola Sabitle
-  kill_multiple: Tüm Süreçleri Öldür
   kill: Süreci Sonlandır
+  kill_multiple: Tüm Süreçleri Öldür
+  open_file_location: Dosya Konumunu Aç
+  pin: Sabitle
+  pin_to_center: Ortaya Sabitle
+  pin_to_left: Sola Sabitle
+  pin_to_right: Sağa Sabitle
+  run_as: Yönetici Olarak Çalıştır
+  unpin: Sabitlenmeyi Kaldır
+media:
+  not_playing: Hiçbir şey oynamıyor
 media_menu:
   remove: Medya Modülünü Kaldır
 start_menu:
   remove: Başlat Modülünü Kaldır
-media:
-  not_playing: Hiçbir şey oynamıyor
+taskbar_menu:
+  add_file: Özel Dosya Sabitle
+  add_folder: Özel Klasör Sabitle
+  media: Medya Modülü Ekle
+  settings: Ayarlar
+  start: Başlat Modülü Ekle
+  task_manager: Görev Yöneticisi

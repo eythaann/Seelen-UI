@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Додати модуль
+  remove: Видалити модуль
+  settings: Налаштування
+  task_manager: Диспетчер задач
 media:
   device:
     comunications: Комунікація
     multimedia: Мультимедіа
-  players: Медіаплеєри
-  output_device: Пристрій виводу
-  master_volume: Головний об'єм
   input_device: Пристрій введення
+  master_volume: Головний об'єм
+  output_device: Пристрій виводу
+  players: Медіаплеєри
 network:
+  available: Доступні мережі
+  connect: З'єднувати
+  connected: Підключено до
+  disconnect: Відключити
+  hidden: Прихована мережа
+  more: Більше налаштувань мережі
+  not_found: Жодних мереж не знайдено
   placeholder:
     password: Пароль
-  hidden: Прихована мережа
-  disconnect: Відключити
-  more: Більше налаштувань мережі
-  connect: З'єднувати
-  not_found: Жодних мереж не знайдено
-  connected: Підключено до
-  available: Доступні мережі
-  scanning: Сканування мереж
   saved: Збережені мережі
+  scanning: Сканування мереж
   secured: Зашифрована мережа
+placeholder:
+  battery_remaining: '% залишається'
+  bluetooth_devices: Bluetooth та пристрої
+  ethernet_connected: Доступ в інтернет
+  ethernet_disconnected: Немає доступу до Інтернету
+  notifications: Сповіщення
+  open_system_tray: Лоток відкритого систем
+  open_user_folder: Відкрийте папку користувача
+  settings: Швидкі налаштування
+  smart_charge: '- розумний заряд'
+  volume: Обсяг
 settings:
-  log_out: Вийти
-  shutdown: Закрити
   app_settings: Налаштування додатків
+  log_out: Вийти
+  power: Влада
   restart: Перезапустити
+  shutdown: Закрити
   sleep: Сплячий
   title: Налаштування
-  power: Влада
-placeholder:
-  ethernet_disconnected: Немає доступу до Інтернету
-  ethernet_connected: Доступ в інтернет
-  settings: Швидкі налаштування
-  volume: Обсяг
-  battery_remaining: '% залишається'
-  open_system_tray: Лоток відкритого систем
-  bluetooth_devices: Bluetooth та пристрої
-  smart_charge: '- розумний заряд'
-  open_user_folder: Відкрийте папку користувача
-  notifications: Сповіщення
 unlabelled_tray: Нежитрий ікона лотка
-context_menu:
-  remove: Видалити модуль
-  add_module: Додати модуль
-  settings: Налаштування
-  task_manager: Диспетчер задач

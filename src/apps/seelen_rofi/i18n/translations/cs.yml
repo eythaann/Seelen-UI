@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: Běh
     cmd: Příkaz
+    explorer: Běh
 footer:
   shortcuts: Zobrazit zkratky
 header:

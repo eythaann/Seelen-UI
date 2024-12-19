@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Ychwanegu Modiwl Cyfryngau
-  start: Ychwanegu Modiwl Start
-  add_file: Pin ffeil arfer
-  add_folder: Pin ffolder arfer
-  settings: Gosodiadau
-  task_manager: Rheolwr Tasg
 app_menu:
-  copy_handles: Dolenni copi
-  pin_to_center: Pin i'r canol
-  pin_to_left: Pin i'r chwith
-  run_as: Rhedeg fel Gweinyddwr
-  close_multiple: Cau popeth
-  unpin: Dadleuon
-  open_file_location: Lleoliad Ffeil Agored
   close: Chaewch
-  pin_to_right: Pin i'r dde
-  pin: Piniff
+  close_multiple: Cau popeth
+  copy_handles: Dolenni copi
   kill: Proses Lladd
   kill_multiple: Lladd Pob Proses
+  open_file_location: Lleoliad Ffeil Agored
+  pin: Piniff
+  pin_to_center: Pin i'r canol
+  pin_to_left: Pin i'r chwith
+  pin_to_right: Pin i'r dde
+  run_as: Rhedeg fel Gweinyddwr
+  unpin: Dadleuon
+media:
+  not_playing: Nid oes dim yn chwarae
 media_menu:
   remove: Dileu Modiwl Cyfryngau
 start_menu:
   remove: Tynnwch y modiwl cychwyn
-media:
-  not_playing: Nid oes dim yn chwarae
+taskbar_menu:
+  add_file: Pin ffeil arfer
+  add_folder: Pin ffolder arfer
+  media: Ychwanegu Modiwl Cyfryngau
+  settings: Gosodiadau
+  start: Ychwanegu Modiwl Start
+  task_manager: Rheolwr Tasg

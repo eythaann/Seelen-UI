@@ -1,260 +1,260 @@
-sides:
-  left: Çep
-  bottom: Erd
-  top: Kop
-  right: Rast
-header:
-  labels:
-    info: Agahî
-    general: Giştî
-    seelen_wm: Rêvebirê pencereyê
-    seelen_weg: Dock / Taskbar
-    developer: Pêşvebirin
-    seelen_bar: Fancy Toolbar
-    shortcuts: Kurtefîlm
-    specific_apps: Serlêdanên taybetî
-    monitors: Çavdêr
-    seelen_rofi: App launcher
-    virtual_desk: Desktopên Virtual
-    home: Xane
-    mods: Plugin & Widgets
-    seelen_wall: Gerînendeyê Wallpaper
-start:
-  title: Bi xêr hatî!
-  message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
-  message: >-
-    Welcome to Seelen Ui, hawîrdora desktopê ya paşîn a bi navgînek pencereya bi
-    navgîniya Windows-ê re ku ezmûna Windows zêde bike! Li ser serdemek nû û
-    pirrjimar bi navbeynkariya intuitive û taybetmendiyên pêşkeftî vekolînin.
-general:
-  theme:
-    description: Terîf
-    author: Nivîskar
-    label: Agahdariya Mijarê
-    add: Mijar zêde bikin
-    added: Mijar berê lê zêde kir
-    tags: Tags
-    placeholder: Mijar hilbijêrin
-    enabled: Mijarên çalak kirin
-    available: Berdeste
-    selected: Hilbijartin
-  language: Ziman
-  startup: Li ser destpêka bisekinin?
-  icon_pack:
-    label: Packon icon
-  accent_color: Rengê Accent
-  wallpaper:
-    select: Hilbijêre Wallpaper
-  date_format: Formata Date
-toolbar:
-  placeholder:
-    author: Nivîskar
-    description: Terîf
-    select: Struktura Toolbar
-  height: Bilindî
-  enable: Vebijêrkek Fancy Vebijêrin
-  auto_hide: Auto Hide
-  label: Toolbar
-  delay_to_show: Dereng nîşan bide
-  delay_to_hide: Dereng ji bo veşartinê
-  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
-wm:
-  border:
-    width: Berfirehiya sînor
-    offset: Berdewamiya sînor
-    enable: Sînorê pencereyê çalak bike
-  description: Terîf
-  author: Nivîskar
-  layout: Rêz
-  workspace_offset: Karûbarên Workspan (Margins)
-  space_between_containers: Cîhê di navbera konteyneran de
-  workspace_padding: Karên xebitandinê
-  resize_delta: Delta Resize (%)
-  enable: Gerînendeyê Windowê ya Tilî bikar bînin
-weg:
-  items:
-    size: Mezinahiya tiştê
-    label: Hevokên
-    zoom_size: Mezinahiya zoomed (ji bo mijaran tê bikar anîn)
-    visible_separators: Dabeşên Visible
-    gap: Cîh di navbera tiştan de
-  gap: Qelîştok
-  width: Berî
-  enable: Dock / Taskbar çalak bikin
-  margin: Radihêj
-  auto_hide: Auto Hide
-  label: Dock / Taskbar
-  padding: Padding
-  dock_side: Rewş
-  delay_to_hide: Dereng ji bo veşartinê
-  delay_to_show: Dereng nîşan bide
-  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
-devtools:
-  load: Dawetkirin
-  app_folders: Pelên App
-  settings_file: Pelê Mîhengan
-  data_folder: Peldanka daneyê
-  custom_config_file: Pelê Config-ê ya xwerû barkirin
-  enable: Amûrên Pêşdebir çalak bikin
-  install_folder: Peldanka sazkirinê
-apps_configurations:
-  app:
-    options:
-      float: Avbazîn
-      force: Hêza birêvebirin
-      pinned: Pinned
-      unmanage: Nedar
-      hidden: Ji Dock / Taskbar veşêrin
-    monitor: Lê gûhdarkirin
-    monitor_placeholder: Netû
-    category_placeholder: Netû
-    category: Liq
-    name: Nav
-    title_create: Afirandina {NAME}
-    ok_edit: UDÛDEPATE
-    title_readonly: Dîtin {{NAVEN}
-    bindings: Binding (Nîşe her du vebijark hewce ne)
-    workspace: Workspace
-    ok_create: Xûliqandin
-    workspace_placeholder: Netû
-    ok_readonly: Wekî nû biguherînin
-    weg_options_label: Vebijarkên Dock / Taskbar
-    wm_options_label: Vebijarkên rêveberê pencereyê
-    options_label: Vebijarkên zêde
-    title_edit: Verastkirin {{name}}
-  identifier:
-    and: Û
-    or: AN
-    remove: Blokê jêbirin
-    kind: Ji hêla nas kirin
-    add_block: Blok zêde bikin
-    matching_strategy: Stratejiya hevberdanê
-    id: Nasî
-    negation: Lihevhatina negotî
-  export: Eksport
-  new: Nşh
-  import: Anîn
-  search: Gerr
-  bundled_msg: >-
-    Van konfigurasyonên bundled ne edîtor in û têne çêkirin ku ji we re ezmûna
-    çêtirîn bêyî adetbûnê peyda bikin. Ew bixweber ji bo we serlêdanên herî
-    gelemperî mîheng dikin.
-  confirm_delete_title: DELETE piştrast bikin
-  delete: Lûleêkirin
-  bundled_title: App Confic bi seelen
-  confirm_delete: Ma hûn guman dikin ku hûn dixwazin vê konfigurasyonê / s jêbirin?
-  swap: Sofet
-  extra_info: >-
-    Selen UI tenê yek nasnameyê bikar tînin (yekem maça ku tê dîtin) ji ber vê
-    yekê fermanê girîng e.
-extras:
-  version: Awa
-  links: Girêdanên fermî
-  relaunch: Berxwedêr
-  github: Github
-  exit: Qut / derketin
-  discord: Nakemala
-shortcuts:
-  labels:
-    focus_right: Focus rast
-    switch_workspace_9: Switch to Workspace 9
-    decrease_width: Width kêm bikin
-    focus_top: Focus Top
-    increase_height: Bilindbûnê zêde bikin
-    send_to_workspace_4: Ji Workspace 4 re bişînin
-    decrease_height: Dirêjbûn
-    switch_workspace_5: Switch to Workspace 5
-    reserve_stack: Stack Reserve
-    focus_bottom: Focus Bottom
-    move_to_workspace_1: Move to Workspace 1
-    move_to_workspace_9: Move to Workspace 9
-    increase_width: Berfireh zêde bikin
-    switch_workspace_2: Switch to Workspace 2
-    reserve_top: Top hilînin
-    send_to_workspace_1: Ji bo Workspace 1 bişînin
-    switch_workspace_6: Switch to Workspace 6
-    restore_sizes: Mezinan sererast bikin
-    reserve_right: Rasterast rast bikin
-    switch_workspace_7: Switch to Workspace 7
-    reserve_left: Rezertê çepê
-    focus_left: Focus çep
-    send_to_workspace_2: Ji Workspace 2 re bişînin
-    reserve_float: Float rezervan
-    move_to_workspace_0: Move to Workspace 0
-    send_to_workspace_0: Ji Workspace 0 re bişînin
-    switch_workspace_4: Vegere Workspace 4
-    move_to_workspace_5: Move to Workspace 5
-    send_to_workspace_5: Ji Workspace 5 re bişînin
-    send_to_workspace_8: Ji bo Workspace 8 bişînin
-    send_to_workspace_9: Ji Workspace 9 re bişînin
-    send_to_workspace_3: Ji bo Workspace 3 bişînin
-    move_to_workspace_7: Move to Workspace 7
-    move_to_workspace_3: Move to Workspace 3
-    switch_workspace_3: Switch to Workspace 3
-    move_to_workspace_8: Move to Workspace 8
-    send_to_workspace_6: Ji bo Workspace 6 bişînin
-    focus_latest: FOCUS Latest
-    move_to_workspace_4: Move to Workspace 4
-    send_to_workspace_7: Ji bo Workspace 7 bişînin
-    switch_workspace_8: Switch to Workspace 8
-    move_to_workspace_2: Move to Workspace 2
-    reserve_bottom: Binê binê
-    move_to_workspace_6: Move to Workspace 6
-    switch_workspace_1: Switch to Workspace 2
-    switch_workspace_0: Switch to Workspace 1
-    misc_open_settings: Mîhengên vekirî
-    misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
-    misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
-    toggle_launcher: Toggle
-  enable: Kurtefîlmên entegre (AHK) çalak bikin
-  enable_tooltip: >-
-    Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh
-    bikin
-  reset: Reset to Default
-  readonly_tooltip: Ev kurteyek xwendinê ye
-cancel: Bişûndekirin
-inProgress: Ez teslîm nabim...
-quit: Devjêberdan
-open: Vekirî
-save: Rizgarkirin
-delete: Lûleêkirin
-loading: Loading ...
-vd:
-  strategy:
-    native: Welatî
-    seelen: Seelen
-    label: Stratejiya Desktop Virtual
-  disabled_windows_version: Stratejiya Desktop ya Native ya Native ji bo guhertoya weya Windows-ê nabe.
-save_and_restart: Save & Restart
-monitors_configurations:
-  label: Monitor {{Index-}
-wall:
-  backgrounds: Wallpapers
-  no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
-  enable: Gerînendeyê Wallpaper çalak bike
-  interval: Her kesê biguherînin
-  random: Slideshow Randomize
-  minutes: deqq
-  seconds: seconds
-  hours: demjimêr
 app_launcher:
+  enable: Launcher App çalak bikin
+  monitor: Monitor to Show
   runners:
     cmd: Ferman
     explorer: Rev
     label: Runners
-  enable: Launcher App çalak bikin
-  monitor: Monitor to Show
-insert: Lêzêdekirin
-inherit: Mîratgirtin
-more: Zêde
+apps_configurations:
+  app:
+    bindings: Binding (Nîşe her du vebijark hewce ne)
+    category: Liq
+    category_placeholder: Netû
+    monitor: Lê gûhdarkirin
+    monitor_placeholder: Netû
+    name: Nav
+    ok_create: Xûliqandin
+    ok_edit: UDÛDEPATE
+    ok_readonly: Wekî nû biguherînin
+    options:
+      float: Avbazîn
+      force: Hêza birêvebirin
+      hidden: Ji Dock / Taskbar veşêrin
+      pinned: Pinned
+      unmanage: Nedar
+    options_label: Vebijarkên zêde
+    title_create: Afirandina {NAME}
+    title_edit: Verastkirin {{name}}
+    title_readonly: Dîtin {{NAVEN}
+    weg_options_label: Vebijarkên Dock / Taskbar
+    wm_options_label: Vebijarkên rêveberê pencereyê
+    workspace: Workspace
+    workspace_placeholder: Netû
+  bundled_msg: >-
+    Van konfigurasyonên bundled ne edîtor in û têne çêkirin ku ji we re ezmûna
+    çêtirîn bêyî adetbûnê peyda bikin. Ew bixweber ji bo we serlêdanên herî
+    gelemperî mîheng dikin.
+  bundled_title: App Confic bi seelen
+  confirm_delete: Ma hûn guman dikin ku hûn dixwazin vê konfigurasyonê / s jêbirin?
+  confirm_delete_title: DELETE piştrast bikin
+  delete: Lûleêkirin
+  export: Eksport
+  extra_info: >-
+    Selen UI tenê yek nasnameyê bikar tînin (yekem maça ku tê dîtin) ji ber vê
+    yekê fermanê girîng e.
+  identifier:
+    add_block: Blok zêde bikin
+    and: Û
+    id: Nasî
+    kind: Ji hêla nas kirin
+    matching_strategy: Stratejiya hevberdanê
+    negation: Lihevhatina negotî
+    or: AN
+    remove: Blokê jêbirin
+  import: Anîn
+  new: Nşh
+  search: Gerr
+  swap: Sofet
+cancel: Bişûndekirin
 close: Nêzîkî
-update:
-  available: Nûvekirin!
-  downloading: Daxistin ...
-  channel: Kanala Nûve
+delete: Lûleêkirin
+devtools:
+  app_folders: Pelên App
+  custom_config_file: Pelê Config-ê ya xwerû barkirin
+  data_folder: Peldanka daneyê
+  enable: Amûrên Pêşdebir çalak bikin
+  install_folder: Peldanka sazkirinê
+  load: Dawetkirin
+  settings_file: Pelê Mîhengan
+extras:
+  discord: Nakemala
+  exit: Qut / derketin
+  github: Github
+  links: Girêdanên fermî
+  relaunch: Berxwedêr
+  version: Awa
+general:
+  accent_color: Rengê Accent
+  date_format: Formata Date
+  icon_pack:
+    label: Packon icon
+  language: Ziman
+  startup: Li ser destpêka bisekinin?
+  theme:
+    add: Mijar zêde bikin
+    added: Mijar berê lê zêde kir
+    author: Nivîskar
+    available: Berdeste
+    description: Terîf
+    enabled: Mijarên çalak kirin
+    label: Agahdariya Mijarê
+    placeholder: Mijar hilbijêrin
+    selected: Hilbijartin
+    tags: Tags
+  wallpaper:
+    select: Hilbijêre Wallpaper
+header:
+  labels:
+    developer: Pêşvebirin
+    general: Giştî
+    home: Xane
+    info: Agahî
+    mods: Plugin & Widgets
+    monitors: Çavdêr
+    seelen_bar: Fancy Toolbar
+    seelen_rofi: App launcher
+    seelen_wall: Gerînendeyê Wallpaper
+    seelen_weg: Dock / Taskbar
+    seelen_wm: Rêvebirê pencereyê
+    shortcuts: Kurtefîlm
+    specific_apps: Serlêdanên taybetî
+    virtual_desk: Desktopên Virtual
+inherit: Mîratgirtin
+inProgress: Ez teslîm nabim...
+insert: Lêzêdekirin
+loading: Loading ...
 miscellaneous: Lihevket
 mods:
+  plugins: Pêçanin
   target: Armanc
   widgets: Widgets
-  plugins: Pêçanin
+monitors_configurations:
+  label: Monitor {{Index-}
+more: Zêde
+open: Vekirî
+quit: Devjêberdan
 remove: Dûrxistin
+save: Rizgarkirin
+save_and_restart: Save & Restart
+shortcuts:
+  enable: Kurtefîlmên entegre (AHK) çalak bikin
+  enable_tooltip: >-
+    Heke hûn ê kurteyên xwe bicîh bînin bi karanîna API ya Seelen Core bicîh
+    bikin
+  labels:
+    decrease_height: Dirêjbûn
+    decrease_width: Width kêm bikin
+    focus_bottom: Focus Bottom
+    focus_latest: FOCUS Latest
+    focus_left: Focus çep
+    focus_right: Focus rast
+    focus_top: Focus Top
+    increase_height: Bilindbûnê zêde bikin
+    increase_width: Berfireh zêde bikin
+    misc_open_settings: Mîhengên vekirî
+    misc_toggle_lock_tracing: Toggle Lock Tracing (têketin)
+    misc_toggle_win_event_tracing: Toggle Win Event Tracing (têketin)
+    move_to_workspace_0: Move to Workspace 0
+    move_to_workspace_1: Move to Workspace 1
+    move_to_workspace_2: Move to Workspace 2
+    move_to_workspace_3: Move to Workspace 3
+    move_to_workspace_4: Move to Workspace 4
+    move_to_workspace_5: Move to Workspace 5
+    move_to_workspace_6: Move to Workspace 6
+    move_to_workspace_7: Move to Workspace 7
+    move_to_workspace_8: Move to Workspace 8
+    move_to_workspace_9: Move to Workspace 9
+    reserve_bottom: Binê binê
+    reserve_float: Float rezervan
+    reserve_left: Rezertê çepê
+    reserve_right: Rasterast rast bikin
+    reserve_stack: Stack Reserve
+    reserve_top: Top hilînin
+    restore_sizes: Mezinan sererast bikin
+    send_to_workspace_0: Ji Workspace 0 re bişînin
+    send_to_workspace_1: Ji bo Workspace 1 bişînin
+    send_to_workspace_2: Ji Workspace 2 re bişînin
+    send_to_workspace_3: Ji bo Workspace 3 bişînin
+    send_to_workspace_4: Ji Workspace 4 re bişînin
+    send_to_workspace_5: Ji Workspace 5 re bişînin
+    send_to_workspace_6: Ji bo Workspace 6 bişînin
+    send_to_workspace_7: Ji bo Workspace 7 bişînin
+    send_to_workspace_8: Ji bo Workspace 8 bişînin
+    send_to_workspace_9: Ji Workspace 9 re bişînin
+    switch_workspace_0: Switch to Workspace 1
+    switch_workspace_1: Switch to Workspace 2
+    switch_workspace_2: Switch to Workspace 2
+    switch_workspace_3: Switch to Workspace 3
+    switch_workspace_4: Vegere Workspace 4
+    switch_workspace_5: Switch to Workspace 5
+    switch_workspace_6: Switch to Workspace 6
+    switch_workspace_7: Switch to Workspace 7
+    switch_workspace_8: Switch to Workspace 8
+    switch_workspace_9: Switch to Workspace 9
+    toggle_launcher: Toggle
+  readonly_tooltip: Ev kurteyek xwendinê ye
+  reset: Reset to Default
+sides:
+  bottom: Erd
+  left: Çep
+  right: Rast
+  top: Kop
+start:
+  message: >-
+    Welcome to Seelen Ui, hawîrdora desktopê ya paşîn a bi navgînek pencereya bi
+    navgîniya Windows-ê re ku ezmûna Windows zêde bike! Li ser serdemek nû û
+    pirrjimar bi navbeynkariya intuitive û taybetmendiyên pêşkeftî vekolînin.
+  message_accent: Hilberîna xwe bi şêwazê xweştir bikin!
+  title: Bi xêr hatî!
+toolbar:
+  auto_hide: Auto Hide
+  delay_to_hide: Dereng ji bo veşartinê
+  delay_to_show: Dereng nîşan bide
+  enable: Vebijêrkek Fancy Vebijêrin
+  height: Bilindî
+  label: Toolbar
+  placeholder:
+    author: Nivîskar
+    description: Terîf
+    select: Struktura Toolbar
+  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
+update:
+  available: Nûvekirin!
+  channel: Kanala Nûve
+  downloading: Daxistin ...
+vd:
+  disabled_windows_version: Stratejiya Desktop ya Native ya Native ji bo guhertoya weya Windows-ê nabe.
+  strategy:
+    label: Stratejiya Desktop Virtual
+    native: Welatî
+    seelen: Seelen
+wall:
+  backgrounds: Wallpapers
+  enable: Gerînendeyê Wallpaper çalak bike
+  hours: demjimêr
+  interval: Her kesê biguherînin
+  minutes: deqq
+  no_background: Slideshow vala, li şûna bikaranîna paşnavê mijarê.
+  random: Slideshow Randomize
+  seconds: seconds
+weg:
+  auto_hide: Auto Hide
+  delay_to_hide: Dereng ji bo veşartinê
+  delay_to_show: Dereng nîşan bide
+  dock_side: Rewş
+  enable: Dock / Taskbar çalak bikin
+  gap: Qelîştok
+  items:
+    gap: Cîh di navbera tiştan de
+    label: Hevokên
+    size: Mezinahiya tiştê
+    visible_separators: Dabeşên Visible
+    zoom_size: Mezinahiya zoomed (ji bo mijaran tê bikar anîn)
+  label: Dock / Taskbar
+  margin: Radihêj
+  padding: Padding
+  use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
+  width: Berî
+wm:
+  author: Nivîskar
+  border:
+    enable: Sînorê pencereyê çalak bike
+    offset: Berdewamiya sînor
+    width: Berfirehiya sînor
+  description: Terîf
+  enable: Gerînendeyê Windowê ya Tilî bikar bînin
+  layout: Rêz
+  resize_delta: Delta Resize (%)
+  space_between_containers: Cîhê di navbera konteyneran de
+  workspace_offset: Karûbarên Workspan (Margins)
+  workspace_padding: Karên xebitandinê

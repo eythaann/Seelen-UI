@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Ajouter un module multimédia
-  start: Ajouter un module de démarrage
-  add_folder: PIN FOLDER CUSTOM
-  add_file: Fichier personnalisé d'épingle
-  settings: Paramètres
-  task_manager: Gestionnaire de tâches
 app_menu:
-  unpin: Détacher
-  pin: Épingle
-  pin_to_left: Épingler à gauche
-  pin_to_center: Épingler au centre
-  pin_to_right: Épingler à droite
-  open_file_location: Lieu de fichier ouvert
-  run_as: Exécuter en tant qu'administrateur
-  copy_handles: Poignées de copie
   close: Fermer
   close_multiple: Ferme tout
+  copy_handles: Poignées de copie
   kill: Processus de mise à mort
   kill_multiple: Tuez tous les processus
+  open_file_location: Lieu de fichier ouvert
+  pin: Épingle
+  pin_to_center: Épingler au centre
+  pin_to_left: Épingler à gauche
+  pin_to_right: Épingler à droite
+  run_as: Exécuter en tant qu'administrateur
+  unpin: Détacher
+media:
+  not_playing: Rien ne joue
 media_menu:
   remove: Supprimer le module multimédia
 start_menu:
   remove: Supprimer le module de démarrage
-media:
-  not_playing: Rien ne joue
+taskbar_menu:
+  add_file: Fichier personnalisé d'épingle
+  add_folder: PIN FOLDER CUSTOM
+  media: Ajouter un module multimédia
+  settings: Paramètres
+  start: Ajouter un module de démarrage
+  task_manager: Gestionnaire de tâches

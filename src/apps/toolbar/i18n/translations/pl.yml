@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Komunikacja
-  master_volume: Głośność
-  input_device: Urządzenie wejściowe
-  output_device: Urządzenie wyjściowe
-  players: Gracze multimedialni
-network:
-  placeholder:
-    password: Hasło
-  disconnect: Rozłączyć się
-  connect: Łączyć
-  not_found: Nie znaleziono sieci
-  more: Więcej ustawień sieciowych
-  hidden: Ukryta sieć
-  connected: Połączony z
-  saved: Zapisane sieci
-  scanning: Skanowanie w poszukiwaniu sieci
-  available: Dostępne sieci
-  secured: Szyfrowana sieć
-settings:
-  app_settings: Ustawienia aplikacji
-  log_out: Wyloguj
-  title: Ustawienia
-  sleep: Spać
-  shutdown: Zamknięcie
-  restart: Uruchom ponownie
-  power: Moc
-placeholder:
-  ethernet_connected: dostęp do Internetu
-  battery_remaining: '% pozostały'
-  volume: Tom
-  bluetooth_devices: Bluetooth i urządzenia
-  settings: Szybkie ustawienia
-  ethernet_disconnected: Brak dostępu do internetu
-  smart_charge: '- Inteligentny ładunek'
-  open_user_folder: Otwórz folder użytkownika
-  open_system_tray: Otwórz tacę systemową
-  notifications: Powiadomienia
-unlabelled_tray: Ikona nieznakowanej tacki
 context_menu:
   add_module: Dodaj moduł
   remove: Usuń moduł
-  task_manager: Menedżer zadań
   settings: Ustawienia
+  task_manager: Menedżer zadań
+media:
+  device:
+    comunications: Komunikacja
+    multimedia: Multimedia
+  input_device: Urządzenie wejściowe
+  master_volume: Głośność
+  output_device: Urządzenie wyjściowe
+  players: Gracze multimedialni
+network:
+  available: Dostępne sieci
+  connect: Łączyć
+  connected: Połączony z
+  disconnect: Rozłączyć się
+  hidden: Ukryta sieć
+  more: Więcej ustawień sieciowych
+  not_found: Nie znaleziono sieci
+  placeholder:
+    password: Hasło
+  saved: Zapisane sieci
+  scanning: Skanowanie w poszukiwaniu sieci
+  secured: Szyfrowana sieć
+placeholder:
+  battery_remaining: '% pozostały'
+  bluetooth_devices: Bluetooth i urządzenia
+  ethernet_connected: dostęp do Internetu
+  ethernet_disconnected: Brak dostępu do internetu
+  notifications: Powiadomienia
+  open_system_tray: Otwórz tacę systemową
+  open_user_folder: Otwórz folder użytkownika
+  settings: Szybkie ustawienia
+  smart_charge: '- Inteligentny ładunek'
+  volume: Tom
+settings:
+  app_settings: Ustawienia aplikacji
+  log_out: Wyloguj
+  power: Moc
+  restart: Uruchom ponownie
+  shutdown: Zamknięcie
+  sleep: Spać
+  title: Ustawienia
+unlabelled_tray: Ikona nieznakowanej tacki

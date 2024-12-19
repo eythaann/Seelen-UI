@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਸ਼ਾਮਲ ਕਰੋ
-  start: ਸਟਾਰਟ ਮੋਡੀ ule ਲ ਸ਼ਾਮਲ ਕਰੋ
-  add_file: ਪਿੰਨ ਕਸਟਮ ਫਾਈਲ
-  add_folder: ਪਿੰਨ ਕਸਟਮ ਫੋਲਡਰ
-  settings: ਸੈਟਿੰਗਾਂ
-  task_manager: ਟਾਸਕ ਮੈਨੇਜਰ
 app_menu:
+  close: ਨੇੜੇ
   close_multiple: ਸਾਰੇ ਬੰਦ ਕਰੋ
-  pin_to_center: ਕੇਂਦਰ ਨੂੰ ਪਿੰਨ
-  run_as: ਪ੍ਰਬੰਧਕ ਦੇ ਤੌਰ ਤੇ ਚਲਾਓ
   copy_handles: ਕਾੱਪੀ ਹੈਂਡਲ
+  kill: ਪ੍ਰਕਿਰਿਆ ਨੂੰ ਮਾਰੋ
+  kill_multiple: ਸਾਰੀਆਂ ਪ੍ਰਕਿਰਿਆਵਾਂ ਨੂੰ ਮਾਰੋ
   open_file_location: ਓਪਨ ਫਾਈਲ ਟਿਕਾਣਾ
+  pin: ਪਿੰਨ
+  pin_to_center: ਕੇਂਦਰ ਨੂੰ ਪਿੰਨ
   pin_to_left: ਪਿੰਨ ਛੱਡ ਕੇ
   pin_to_right: ਪਿੰਨ ਕਰਨ ਲਈ
+  run_as: ਪ੍ਰਬੰਧਕ ਦੇ ਤੌਰ ਤੇ ਚਲਾਓ
   unpin: Unpin
-  close: ਨੇੜੇ
-  pin: ਪਿੰਨ
-  kill_multiple: ਸਾਰੀਆਂ ਪ੍ਰਕਿਰਿਆਵਾਂ ਨੂੰ ਮਾਰੋ
-  kill: ਪ੍ਰਕਿਰਿਆ ਨੂੰ ਮਾਰੋ
+media:
+  not_playing: ਕੁਝ ਨਹੀਂ ਖੇਡ ਰਿਹਾ
 media_menu:
   remove: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਹਟਾਓ
 start_menu:
   remove: ਸਟਾਰਟ ਮੋਡੀ .ਲ ਹਟਾਓ
-media:
-  not_playing: ਕੁਝ ਨਹੀਂ ਖੇਡ ਰਿਹਾ
+taskbar_menu:
+  add_file: ਪਿੰਨ ਕਸਟਮ ਫਾਈਲ
+  add_folder: ਪਿੰਨ ਕਸਟਮ ਫੋਲਡਰ
+  media: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਸ਼ਾਮਲ ਕਰੋ
+  settings: ਸੈਟਿੰਗਾਂ
+  start: ਸਟਾਰਟ ਮੋਡੀ ule ਲ ਸ਼ਾਮਲ ਕਰੋ
+  task_manager: ਟਾਸਕ ਮੈਨੇਜਰ

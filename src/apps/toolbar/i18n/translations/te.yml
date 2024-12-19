@@ -1,46 +1,46 @@
+context_menu:
+  add_module: మాడ్యూల్ జోడించండి
+  remove: మాడ్యూల్ తొలగించండి
+  settings: సెట్టింగ్‌లు
+  task_manager: టాస్క్ మేనేజర్
 media:
   device:
     comunications: కమ్యూనికేషన్స్
     multimedia: మల్టీమీడియా
   input_device: ఇన్పుట్ పరికరం
-  players: మీడియా ప్లేయర్స్
   master_volume: మాస్టర్ వాల్యూమ్
   output_device: అవుట్పుట్ పరికరం
+  players: మీడియా ప్లేయర్స్
 network:
-  placeholder:
-    password: పాస్వర్డ్
-  disconnect: డిస్‌కనెక్ట్ చేయండి
-  not_found: నెట్‌వర్క్‌లు ఏవీ కనుగొనబడలేదు
+  available: అందుబాటులో ఉన్న నెట్‌వర్క్‌లు
   connect: కనెక్ట్
+  connected: కనెక్ట్ చేయబడింది
+  disconnect: డిస్‌కనెక్ట్ చేయండి
   hidden: దాచిన నెట్‌వర్క్
   more: మరిన్ని నెట్‌వర్క్ సెట్టింగులు
-  connected: కనెక్ట్ చేయబడింది
-  available: అందుబాటులో ఉన్న నెట్‌వర్క్‌లు
-  scanning: నెట్‌వర్క్‌ల కోసం స్కాన్ చేస్తోంది
+  not_found: నెట్‌వర్క్‌లు ఏవీ కనుగొనబడలేదు
+  placeholder:
+    password: పాస్వర్డ్
   saved: సేవ్ చేసిన నెట్‌వర్క్‌లు
+  scanning: నెట్‌వర్క్‌ల కోసం స్కాన్ చేస్తోంది
   secured: ఎన్‌క్రిప్టెడ్ నెట్‌వర్క్
-settings:
-  log_out: లాగ్ అవుట్
-  app_settings: అనువర్తన సెట్టింగులు
-  shutdown: షట్డౌన్
-  title: సెట్టింగులు
-  restart: పున art ప్రారంభం
-  sleep: నిద్ర
-  power: శక్తి
 placeholder:
+  battery_remaining: '% మిగిలి ఉంది'
+  bluetooth_devices: బ్లూటూత్ & పరికరాలు
   ethernet_connected: ఇంటర్నెట్ సదుపాయం
   ethernet_disconnected: ఇంటర్నెట్ సదుపాయం లేదు
-  bluetooth_devices: బ్లూటూత్ & పరికరాలు
+  notifications: నోటిఫికేషన్‌లు
   open_system_tray: ఓపెన్ సిస్టమ్ ట్రే
-  smart_charge: '- స్మార్ట్ ఛార్జ్'
-  battery_remaining: '% మిగిలి ఉంది'
-  volume: వాల్యూమ్
   open_user_folder: ఓపెన్ యూజర్ ఫోల్డర్
   settings: శీఘ్ర సెట్టింగులు
-  notifications: నోటిఫికేషన్‌లు
+  smart_charge: '- స్మార్ట్ ఛార్జ్'
+  volume: వాల్యూమ్
+settings:
+  app_settings: అనువర్తన సెట్టింగులు
+  log_out: లాగ్ అవుట్
+  power: శక్తి
+  restart: పున art ప్రారంభం
+  shutdown: షట్డౌన్
+  sleep: నిద్ర
+  title: సెట్టింగులు
 unlabelled_tray: లేబుల్ చేయని ట్రే చిహ్నం
-context_menu:
-  remove: మాడ్యూల్ తొలగించండి
-  add_module: మాడ్యూల్ జోడించండి
-  settings: సెట్టింగ్‌లు
-  task_manager: టాస్క్ మేనేజర్

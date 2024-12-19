@@ -1,262 +1,262 @@
+app_launcher:
+  enable: Luba rakenduse käivitaja
+  monitor: Monitor, mida näidata
+  runners:
+    cmd: Käsk
+    explorer: Jooksma
+    label: Jooksjad
+apps_configurations:
+  app:
+    bindings: Sidumine (pange tähele mõlemat suvandit)
+    category: Kategooria
+    category_placeholder: Mitte ükski
+    monitor: Ekraan
+    monitor_placeholder: Mitte ükski
+    name: Nimetus
+    ok_create: Looma
+    ok_edit: Värskendama
+    ok_readonly: Redigeerimine uuena
+    options:
+      float: Ujuk
+      force: Jõudu juhtima
+      hidden: Peida doki/ülesanderiba eest
+      pinned: Kinnitatud
+      unmanage: Juhtimine
+    options_label: Lisavalikud
+    title_create: '{{Name}} loomine'
+    title_edit: Redigeerimine {{nimi}}
+    title_readonly: Vaatamine {{nimi}}
+    weg_options_label: Dokk/ülesanderiba valikud
+    wm_options_label: Aknahalduri valikud
+    workspace: Tööruum
+    workspace_placeholder: Mitte ükski
+  bundled_msg: >-
+    Need komplekteeritud konfiguratsioonid ei ole redigeeritavad ja on loodud
+    selleks, et pakkuda teile parimat kogemust ilma kohandamiseta. Nad
+    konfigureerivad teie jaoks automaatselt kõige levinumaid rakendusi.
+  bundled_title: Rakenduse konfiguratsioon, mis on komplekteeritud Seeleniga
+  confirm_delete: Kas olete kindel, et soovite selle konfiguratsiooni/S kustutada?
+  confirm_delete_title: Kinnitage kustutamine
+  delete: Kustutama
+  export: Ekspordi-
+  extra_info: >-
+    Seeleni kasutajaliides kasutab rakenduse kohta ainult ühte identifikaatorit
+    (leiti esimene vaste), seega on määramise järjekord oluline, viimati lisatud
+    on prioriteediks, kuna tabel sorteeritakse vaikimisi uusimast vanani.
+  identifier:
+    add_block: Lisa plokk
+    and: Ja
+    id: Identifikaator
+    kind: Tuvastama
+    matching_strategy: Sobiv strateegia
+    negation: Eitav sobitamine
+    or: Või
+    remove: Kustutamisplokk
+  import: Import
+  new: Uus
+  search: Otsing
+  swap: Vahetama
+cancel: Tühistama
+close: Sulgur
+delete: Kustutama
+devtools:
+  app_folders: Rakenduse kaustad
+  custom_config_file: Laadige kohandatud konfiguratsioonifail
+  data_folder: Andmekaust
+  enable: Luba arendaja tööriistad
+  install_folder: Installi kaust
+  load: Laadima
+  settings_file: Seadete fail
+extras:
+  discord: Ebakõla
+  exit: Lõpeta/väljumine
+  github: Github
+  links: Ametlikud lingid
+  relaunch: Taaskäivitama
+  version: Versioon
+general:
+  accent_color: Aktsentvärv
+  date_format: Kuupäeva vorming
+  icon_pack:
+    label: Ikoonipakid
+  language: Keel
+  startup: Kas joosta startup?
+  theme:
+    add: Lisada teema
+    added: Teema on juba lisatud
+    author: Autor
+    available: Saadav
+    description: Kirjeldus
+    enabled: Lubatud teemad
+    label: Teemateave
+    placeholder: Valige teema
+    selected: Valitud
+    tags: Sildid
+  wallpaper:
+    select: Valige tapeet
+header:
+  labels:
+    developer: Arendaja
+    general: Üld-
+    home: Kodu
+    info: Teave
+    mods: Pluginad ja vidinad
+    monitors: Monitorid
+    seelen_bar: Väljamõeldud tööriistariba
+    seelen_rofi: Rakenduse käivitaja
+    seelen_wall: Tapeedijuht
+    seelen_weg: Dokk/ülesanderiba
+    seelen_wm: Aknahaldur
+    shortcuts: Otseteed
+    specific_apps: Konkreetsed rakendused
+    virtual_desk: Virtuaalsed töölauad
+inherit: Pärima
+inProgress: Pooleli ...
+insert: Sisestama
+loading: Laadimine ...
+miscellaneous: Mitmesuguseid
+mods:
+  plugins: Pistikprogrammid
+  target: Sihtmärk
+  widgets: Vidinad
+monitors_configurations:
+  label: Monitor {{indeks}}
+more: Rohkem
+open: Avatud
+quit: Loobuma
+remove: Eemaldama
+save: Kokkuhoid
+save_and_restart: Salvesta ja taaskäivitage
+shortcuts:
+  enable: Lubage integreeritud otseteed (AHK)
+  enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
+  labels:
+    decrease_height: Vähendamine kõrgus
+    decrease_width: Languslaius
+    focus_bottom: Fookuse põhi
+    focus_latest: Keskenduda uusim
+    focus_left: Fookus vasakule
+    focus_right: Fookuse õigus
+    focus_top: Fookus ülaosa
+    increase_height: Suurendage kõrgust
+    increase_width: Suurendama laiust
+    misc_open_settings: Avatud sätted
+    misc_toggle_lock_tracing: Lülitage lukustusjälg (logid)
+    misc_toggle_win_event_tracing: Lülitage võidu sündmuste jälgimine (logid)
+    move_to_workspace_0: Liikuge tööruumi 0
+    move_to_workspace_1: Kolige tööalale 1
+    move_to_workspace_2: Kolige tööruumi 2
+    move_to_workspace_3: Kolige tööruumi 3
+    move_to_workspace_4: Kolige tööalale 4
+    move_to_workspace_5: Kolige tööruumi 5
+    move_to_workspace_6: Kolige tööruumi 6
+    move_to_workspace_7: Kolige tööruumi 7
+    move_to_workspace_8: Kolige tööalale 8
+    move_to_workspace_9: Kolige tööruumi 9
+    reserve_bottom: Reservpõhja
+    reserve_float: Reservvajutus
+    reserve_left: Reserv vasak
+    reserve_right: Reservõigus
+    reserve_stack: Reservvirn
+    reserve_top: Reservi ülaosa
+    restore_sizes: Taastada suurused
+    send_to_workspace_0: Saada tööalale 0
+    send_to_workspace_1: Saada tööala 1
+    send_to_workspace_2: Saada tööala 2
+    send_to_workspace_3: Saada tööala 3
+    send_to_workspace_4: Saada tööalale 4
+    send_to_workspace_5: Saada tööalale 5
+    send_to_workspace_6: Saada tööala 6
+    send_to_workspace_7: Saada tööruumi 7
+    send_to_workspace_8: Saada tööala 8
+    send_to_workspace_9: Saada Workspace 9
+    switch_workspace_0: Lülitage tööalale 1
+    switch_workspace_1: Lülitage tööruum 2
+    switch_workspace_2: Lülitage tööruum 2
+    switch_workspace_3: Lülitage tööruum 3
+    switch_workspace_4: Lülitage tööruum 4
+    switch_workspace_5: Lülitage tööruum 5
+    switch_workspace_6: Lülitage tööruumi 6 -le
+    switch_workspace_7: Lülitage tööruumi 7 -le
+    switch_workspace_8: Lülitage tööruumi 8 -le
+    switch_workspace_9: Lülitage Workspace 9 -le
+    toggle_launcher: Lülituma
+  readonly_tooltip: See on kirjutuskaitstud otsetee
+  reset: Lähtestage vaikeseadetele
 sides:
   bottom: Alumine
   left: Vasakul
   right: Paremale
   top: Tipus
-header:
-  labels:
-    seelen_wm: Aknahaldur
-    seelen_weg: Dokk/ülesanderiba
-    specific_apps: Konkreetsed rakendused
-    monitors: Monitorid
-    shortcuts: Otseteed
-    general: Üld-
-    developer: Arendaja
-    info: Teave
-    seelen_bar: Väljamõeldud tööriistariba
-    seelen_rofi: Rakenduse käivitaja
-    virtual_desk: Virtuaalsed töölauad
-    home: Kodu
-    mods: Pluginad ja vidinad
-    seelen_wall: Tapeedijuht
 start:
   message: >-
     Tere tulemast Seelen UI -sse, mis on Ultimate Desktop -keskkond koos
     inkorporeeritud plaatidega Windowsi halduriga, et täiustada oma Windows
     kogemust! Uurige meie intuitiivse liidese ja edasijõudnute funktsioonidega
     uut tõhususe ja multitegumtöötluse ajastut.
-  title: Tere tulemast!
   message_accent: Optimeerige oma tootlikkust stiiliga!
-general:
-  theme:
-    added: Teema on juba lisatud
-    label: Teemateave
-    placeholder: Valige teema
-    description: Kirjeldus
-    tags: Sildid
-    enabled: Lubatud teemad
-    author: Autor
-    add: Lisada teema
-    available: Saadav
-    selected: Valitud
-  language: Keel
-  startup: Kas joosta startup?
-  icon_pack:
-    label: Ikoonipakid
-  accent_color: Aktsentvärv
-  wallpaper:
-    select: Valige tapeet
-  date_format: Kuupäeva vorming
+  title: Tere tulemast!
 toolbar:
+  auto_hide: Automaatne peida
+  delay_to_hide: Viivitage peitmine
+  delay_to_show: Näitamisega viivitus
+  enable: Luba väljamõeldud tööriistariba
+  height: Kõrgus
+  label: Tööriistariba
   placeholder:
     author: Autor
     description: Kirjeldus
     select: Tööriistariba struktuur
-  height: Kõrgus
-  enable: Luba väljamõeldud tööriistariba
-  auto_hide: Automaatne peida
-  label: Tööriistariba
-  delay_to_show: Näitamisega viivitus
-  delay_to_hide: Viivitage peitmine
   use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
-wm:
-  border:
-    width: Piirilaius
-    offset: Piiride nihke
-    enable: Luba akna piir
-  space_between_containers: Konteinerite vaheline ruum
-  workspace_offset: Tööruumide nihkumine (veerised)
-  author: Autor
-  description: Kirjeldus
-  layout: Paigutus
-  workspace_padding: Tööruumide polsterdus
-  resize_delta: Suuruse muutmine delta (%)
-  enable: Luba plaatide aknahaldur
-weg:
-  items:
-    visible_separators: Nähtavad eraldajad
-    label: Esemed
-    size: Üksuse suurus
-    gap: Esemete vaheline ruum
-    zoom_size: Suumendatud suurus (kasutatud teemade jaoks)
-  label: Dokk/ülesanderiba
-  width: Laius
-  padding: Polsterdamine
-  gap: Lüngad
-  auto_hide: Automaatne peida
-  margin: Marginaal
-  enable: Luba dokk/ülesanderiba
-  dock_side: Positsioon
-  delay_to_show: Näitamisega viivitus
-  delay_to_hide: Viivitage peitmine
-  use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
-devtools:
-  app_folders: Rakenduse kaustad
-  data_folder: Andmekaust
-  install_folder: Installi kaust
-  load: Laadima
-  custom_config_file: Laadige kohandatud konfiguratsioonifail
-  settings_file: Seadete fail
-  enable: Luba arendaja tööriistad
-apps_configurations:
-  app:
-    options:
-      force: Jõudu juhtima
-      unmanage: Juhtimine
-      pinned: Kinnitatud
-      float: Ujuk
-      hidden: Peida doki/ülesanderiba eest
-    category: Kategooria
-    category_placeholder: Mitte ükski
-    monitor_placeholder: Mitte ükski
-    workspace: Tööruum
-    ok_readonly: Redigeerimine uuena
-    ok_create: Looma
-    title_create: '{{Name}} loomine'
-    workspace_placeholder: Mitte ükski
-    monitor: Ekraan
-    name: Nimetus
-    title_readonly: Vaatamine {{nimi}}
-    bindings: Sidumine (pange tähele mõlemat suvandit)
-    ok_edit: Värskendama
-    weg_options_label: Dokk/ülesanderiba valikud
-    wm_options_label: Aknahalduri valikud
-    options_label: Lisavalikud
-    title_edit: Redigeerimine {{nimi}}
-  identifier:
-    negation: Eitav sobitamine
-    matching_strategy: Sobiv strateegia
-    and: Ja
-    add_block: Lisa plokk
-    or: Või
-    id: Identifikaator
-    remove: Kustutamisplokk
-    kind: Tuvastama
-  delete: Kustutama
-  confirm_delete: Kas olete kindel, et soovite selle konfiguratsiooni/S kustutada?
-  export: Ekspordi-
-  bundled_msg: >-
-    Need komplekteeritud konfiguratsioonid ei ole redigeeritavad ja on loodud
-    selleks, et pakkuda teile parimat kogemust ilma kohandamiseta. Nad
-    konfigureerivad teie jaoks automaatselt kõige levinumaid rakendusi.
-  swap: Vahetama
-  search: Otsing
-  import: Import
-  new: Uus
-  confirm_delete_title: Kinnitage kustutamine
-  bundled_title: Rakenduse konfiguratsioon, mis on komplekteeritud Seeleniga
-  extra_info: >-
-    Seeleni kasutajaliides kasutab rakenduse kohta ainult ühte identifikaatorit
-    (leiti esimene vaste), seega on määramise järjekord oluline, viimati lisatud
-    on prioriteediks, kuna tabel sorteeritakse vaikimisi uusimast vanani.
-extras:
-  exit: Lõpeta/väljumine
-  relaunch: Taaskäivitama
-  github: Github
-  links: Ametlikud lingid
-  version: Versioon
-  discord: Ebakõla
-shortcuts:
-  labels:
-    increase_width: Suurendama laiust
-    send_to_workspace_9: Saada Workspace 9
-    move_to_workspace_7: Kolige tööruumi 7
-    switch_workspace_2: Lülitage tööruum 2
-    move_to_workspace_1: Kolige tööalale 1
-    increase_height: Suurendage kõrgust
-    switch_workspace_6: Lülitage tööruumi 6 -le
-    move_to_workspace_9: Kolige tööruumi 9
-    move_to_workspace_5: Kolige tööruumi 5
-    focus_left: Fookus vasakule
-    switch_workspace_4: Lülitage tööruum 4
-    focus_top: Fookus ülaosa
-    focus_latest: Keskenduda uusim
-    move_to_workspace_0: Liikuge tööruumi 0
-    send_to_workspace_6: Saada tööala 6
-    decrease_height: Vähendamine kõrgus
-    move_to_workspace_6: Kolige tööruumi 6
-    move_to_workspace_3: Kolige tööruumi 3
-    send_to_workspace_2: Saada tööala 2
-    focus_bottom: Fookuse põhi
-    move_to_workspace_8: Kolige tööalale 8
-    reserve_left: Reserv vasak
-    switch_workspace_8: Lülitage tööruumi 8 -le
-    move_to_workspace_4: Kolige tööalale 4
-    move_to_workspace_2: Kolige tööruumi 2
-    reserve_right: Reservõigus
-    focus_right: Fookuse õigus
-    send_to_workspace_3: Saada tööala 3
-    send_to_workspace_7: Saada tööruumi 7
-    send_to_workspace_8: Saada tööala 8
-    reserve_top: Reservi ülaosa
-    reserve_stack: Reservvirn
-    decrease_width: Languslaius
-    send_to_workspace_0: Saada tööalale 0
-    reserve_float: Reservvajutus
-    reserve_bottom: Reservpõhja
-    send_to_workspace_4: Saada tööalale 4
-    restore_sizes: Taastada suurused
-    send_to_workspace_1: Saada tööala 1
-    switch_workspace_7: Lülitage tööruumi 7 -le
-    send_to_workspace_5: Saada tööalale 5
-    switch_workspace_3: Lülitage tööruum 3
-    switch_workspace_5: Lülitage tööruum 5
-    switch_workspace_9: Lülitage Workspace 9 -le
-    switch_workspace_1: Lülitage tööruum 2
-    switch_workspace_0: Lülitage tööalale 1
-    misc_open_settings: Avatud sätted
-    misc_toggle_win_event_tracing: Lülitage võidu sündmuste jälgimine (logid)
-    misc_toggle_lock_tracing: Lülitage lukustusjälg (logid)
-    toggle_launcher: Lülituma
-  enable_tooltip: Keelake, kui rakendate oma otseteid, kasutades seda Seelen Core API -d
-  enable: Lubage integreeritud otseteed (AHK)
-  reset: Lähtestage vaikeseadetele
-  readonly_tooltip: See on kirjutuskaitstud otsetee
-inProgress: Pooleli ...
-delete: Kustutama
-quit: Loobuma
-save: Kokkuhoid
-loading: Laadimine ...
-cancel: Tühistama
-open: Avatud
-vd:
-  strategy:
-    seelen: Seelen
-    native: Põliselanik
-    label: Virtuaalne töölaua strateegia
-  disabled_windows_version: >-
-    Natiivse virtuaalse töölaua strateegia pole teie Windowsi versiooni jaoks
-    saadaval.
-save_and_restart: Salvesta ja taaskäivitage
-monitors_configurations:
-  label: Monitor {{indeks}}
-wall:
-  backgrounds: Taustapildid
-  no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
-  enable: Luba tapeedihaldur
-  interval: Vahetage tapeeti iga
-  random: Randoriseeri slaidiseanss
-  seconds: sekundid
-  minutes: protokoll
-  hours: tööaeg
-app_launcher:
-  runners:
-    cmd: Käsk
-    label: Jooksjad
-    explorer: Jooksma
-  enable: Luba rakenduse käivitaja
-  monitor: Monitor, mida näidata
-more: Rohkem
-insert: Sisestama
-inherit: Pärima
-close: Sulgur
 update:
   available: Värskendage saadaval!
   channel: Värskenduskanal
   downloading: Allalaadimine ...
-miscellaneous: Mitmesuguseid
-mods:
-  plugins: Pistikprogrammid
-  target: Sihtmärk
-  widgets: Vidinad
-remove: Eemaldama
+vd:
+  disabled_windows_version: >-
+    Natiivse virtuaalse töölaua strateegia pole teie Windowsi versiooni jaoks
+    saadaval.
+  strategy:
+    label: Virtuaalne töölaua strateegia
+    native: Põliselanik
+    seelen: Seelen
+wall:
+  backgrounds: Taustapildid
+  enable: Luba tapeedihaldur
+  hours: tööaeg
+  interval: Vahetage tapeeti iga
+  minutes: protokoll
+  no_background: Tühi slaidiseanss, kasutades selle asemel teema tausta.
+  random: Randoriseeri slaidiseanss
+  seconds: sekundid
+weg:
+  auto_hide: Automaatne peida
+  delay_to_hide: Viivitage peitmine
+  delay_to_show: Näitamisega viivitus
+  dock_side: Positsioon
+  enable: Luba dokk/ülesanderiba
+  gap: Lüngad
+  items:
+    gap: Esemete vaheline ruum
+    label: Esemed
+    size: Üksuse suurus
+    visible_separators: Nähtavad eraldajad
+    zoom_size: Suumendatud suurus (kasutatud teemade jaoks)
+  label: Dokk/ülesanderiba
+  margin: Marginaal
+  padding: Polsterdamine
+  use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
+  width: Laius
+wm:
+  author: Autor
+  border:
+    enable: Luba akna piir
+    offset: Piiride nihke
+    width: Piirilaius
+  description: Kirjeldus
+  enable: Luba plaatide aknahaldur
+  layout: Paigutus
+  resize_delta: Suuruse muutmine delta (%)
+  space_between_containers: Konteinerite vaheline ruum
+  workspace_offset: Tööruumide nihkumine (veerised)
+  workspace_padding: Tööruumide polsterdus

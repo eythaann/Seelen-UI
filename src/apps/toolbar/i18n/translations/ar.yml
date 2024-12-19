@@ -1,46 +1,46 @@
+context_menu:
+  add_module: إضافة الوحدة النمطية
+  remove: إزالة الوحدة النمطية
+  settings: إعدادات
+  task_manager: مدير المهام
 media:
+  device:
+    comunications: مجال الاتصالات
+    multimedia: الوسائط المتعددة
+  input_device: جهاز الإدخال
   master_volume: الصوت الرئيسي
   output_device: جهاز الإخراج
-  input_device: جهاز الإدخال
   players: مشغلات الوسائط
-  device:
-    multimedia: الوسائط المتعددة
-    comunications: مجال الاتصالات
 network:
-  not_found: لم يتم العثور على شبكات
-  more: المزيد من إعدادات الشبكة
-  hidden: الشبكة المخفية
-  placeholder:
-    password: كلمة المرور
-  disconnect: قطع الاتصال
+  available: الشبكات المتاحة
   connect: يتصل
   connected: متصل
-  scanning: البحث عن شبكات
-  available: الشبكات المتاحة
-  secured: شبكة مشفرة
+  disconnect: قطع الاتصال
+  hidden: الشبكة المخفية
+  more: المزيد من إعدادات الشبكة
+  not_found: لم يتم العثور على شبكات
+  placeholder:
+    password: كلمة المرور
   saved: الشبكات المحفوظة
-settings:
-  title: إعدادات
-  app_settings: إعدادات التطبيقات
-  log_out: تسجيل خروج
-  sleep: النوم
-  restart: إعادة التشغيل
-  shutdown: اطفاء الجهاز
-  power: الطاقة
+  scanning: البحث عن شبكات
+  secured: شبكة مشفرة
 placeholder:
-  open_user_folder: افتح مجلد المستخدم
-  open_system_tray: افتح ايقونات النظام
+  battery_remaining: ٪ متبقي
   bluetooth_devices: بلوتوث
   ethernet_connected: خدمة الإنترنت
   ethernet_disconnected: لا يوجد اتصال بالإنترنت
-  volume: الصوت
-  battery_remaining: ٪ متبقي
-  smart_charge: '- الشحن الذكي'
-  settings: الإعدادات السريعة
   notifications: الإشعارات
+  open_system_tray: افتح ايقونات النظام
+  open_user_folder: افتح مجلد المستخدم
+  settings: الإعدادات السريعة
+  smart_charge: '- الشحن الذكي'
+  volume: الصوت
+settings:
+  app_settings: إعدادات التطبيقات
+  log_out: تسجيل خروج
+  power: الطاقة
+  restart: إعادة التشغيل
+  shutdown: اطفاء الجهاز
+  sleep: النوم
+  title: إعدادات
 unlabelled_tray: أيقونة غير مسماة
-context_menu:
-  remove: إزالة الوحدة النمطية
-  add_module: إضافة الوحدة النمطية
-  task_manager: مدير المهام
-  settings: إعدادات

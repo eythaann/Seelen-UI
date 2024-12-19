@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: Correr
     cmd: Dominio
+    explorer: Correr
 footer:
   shortcuts: Mostrar atajos
 header:

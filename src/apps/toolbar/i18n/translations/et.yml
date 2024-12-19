@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimeedia
-    comunications: Suhtlus
-  input_device: Sisendseade
-  players: Meediamängijad
-  master_volume: Kaptenimaht
-  output_device: Väljundseade
-network:
-  placeholder:
-    password: Parool
-  disconnect: Ühenduse katkestama
-  more: Rohkem võrguseadeid
-  not_found: Võrgustikke pole leitud
-  connect: Ühendama
-  hidden: Varjatud võrk
-  available: Saadaolevad võrgud
-  scanning: Võrkude otsimine
-  saved: Salvestatud võrgud
-  secured: Krüpteeritud võrk
-  connected: 'Ühendatud:'
-settings:
-  log_out: Logi välja
-  restart: Taaskäivita
-  shutdown: Lülita välja
-  app_settings: Rakenduse sätted
-  sleep: Magama
-  title: Sätted
-  power: Võimsus
-placeholder:
-  ethernet_disconnected: Interneti -ühendus pole
-  ethernet_connected: internetiühendus
-  battery_remaining: '% järelejäänud'
-  open_system_tray: Avatud süsteemialus
-  open_user_folder: Avage kasutaja kaust
-  smart_charge: '- Nutikas tasu'
-  bluetooth_devices: Bluetooth ja seadmed
-  settings: Kiired seaded
-  volume: Maht
-  notifications: Teatised
-unlabelled_tray: Märgistamata salveikoon
 context_menu:
-  remove: Eemaldage moodul
   add_module: Lisage moodul
+  remove: Eemaldage moodul
   settings: Seaded
   task_manager: Tegumihaldur
+media:
+  device:
+    comunications: Suhtlus
+    multimedia: Multimeedia
+  input_device: Sisendseade
+  master_volume: Kaptenimaht
+  output_device: Väljundseade
+  players: Meediamängijad
+network:
+  available: Saadaolevad võrgud
+  connect: Ühendama
+  connected: 'Ühendatud:'
+  disconnect: Ühenduse katkestama
+  hidden: Varjatud võrk
+  more: Rohkem võrguseadeid
+  not_found: Võrgustikke pole leitud
+  placeholder:
+    password: Parool
+  saved: Salvestatud võrgud
+  scanning: Võrkude otsimine
+  secured: Krüpteeritud võrk
+placeholder:
+  battery_remaining: '% järelejäänud'
+  bluetooth_devices: Bluetooth ja seadmed
+  ethernet_connected: internetiühendus
+  ethernet_disconnected: Interneti -ühendus pole
+  notifications: Teatised
+  open_system_tray: Avatud süsteemialus
+  open_user_folder: Avage kasutaja kaust
+  settings: Kiired seaded
+  smart_charge: '- Nutikas tasu'
+  volume: Maht
+settings:
+  app_settings: Rakenduse sätted
+  log_out: Logi välja
+  power: Võimsus
+  restart: Taaskäivita
+  shutdown: Lülita välja
+  sleep: Magama
+  title: Sätted
+unlabelled_tray: Märgistamata salveikoon

@@ -1,7 +1,7 @@
 app_launcher:
   runners:
-    explorer: రన్
     cmd: కమాండ్
+    explorer: రన్
 footer:
   shortcuts: సత్వరమార్గాలను చూపించు
 header:

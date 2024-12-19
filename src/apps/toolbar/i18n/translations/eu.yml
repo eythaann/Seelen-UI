@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedia
-    comunications: Komunikazioak
-  output_device: Irteerako gailua
-  input_device: Sarrera gailua
-  master_volume: Bolumen maisua
-  players: Komunikabideetako jokalariak
-network:
-  placeholder:
-    password: Kontrazeinu
-  not_found: Ez da sarerik aurkitu
-  connect: Batu
-  hidden: Ezkutuko sarea
-  disconnect: Deskonektatu
-  more: Sareko ezarpen gehiago
-  connected: Honekin konektatuta
-  scanning: Sareak bilatzen
-  secured: Sare zifratua
-  available: Eskuragarri dauden sareak
-  saved: Gordetako sareak
-settings:
-  restart: Berriro hasi
-  shutdown: Itzali
-  log_out: Saioa amaitu
-  sleep: Lo
-  app_settings: Aplikazioaren ezarpenak
-  title: Ezarpen
-  power: Botere
-placeholder:
-  smart_charge: '- Karga adimentsua'
-  open_user_folder: Erabiltzaile karpeta irekia
-  ethernet_connected: Interneterako sarbidea
-  battery_remaining: '% geratzen'
-  open_system_tray: Sistema irekiko erretilua
-  bluetooth_devices: Bluetooth eta gailuak
-  settings: Ezarpen azkarrak
-  volume: Ozentasun
-  ethernet_disconnected: Ez da Interneteko sarbiderik
-  notifications: Jakinarazpenak
-unlabelled_tray: Nahitaezko erretilua ikonoa
 context_menu:
-  remove: Kendu modulua
   add_module: Gehitu modulua
+  remove: Kendu modulua
   settings: Ezarpenak
   task_manager: Zereginen kudeatzailea
+media:
+  device:
+    comunications: Komunikazioak
+    multimedia: Multimedia
+  input_device: Sarrera gailua
+  master_volume: Bolumen maisua
+  output_device: Irteerako gailua
+  players: Komunikabideetako jokalariak
+network:
+  available: Eskuragarri dauden sareak
+  connect: Batu
+  connected: Honekin konektatuta
+  disconnect: Deskonektatu
+  hidden: Ezkutuko sarea
+  more: Sareko ezarpen gehiago
+  not_found: Ez da sarerik aurkitu
+  placeholder:
+    password: Kontrazeinu
+  saved: Gordetako sareak
+  scanning: Sareak bilatzen
+  secured: Sare zifratua
+placeholder:
+  battery_remaining: '% geratzen'
+  bluetooth_devices: Bluetooth eta gailuak
+  ethernet_connected: Interneterako sarbidea
+  ethernet_disconnected: Ez da Interneteko sarbiderik
+  notifications: Jakinarazpenak
+  open_system_tray: Sistema irekiko erretilua
+  open_user_folder: Erabiltzaile karpeta irekia
+  settings: Ezarpen azkarrak
+  smart_charge: '- Karga adimentsua'
+  volume: Ozentasun
+settings:
+  app_settings: Aplikazioaren ezarpenak
+  log_out: Saioa amaitu
+  power: Botere
+  restart: Berriro hasi
+  shutdown: Itzali
+  sleep: Lo
+  title: Ezarpen
+unlabelled_tray: Nahitaezko erretilua ikonoa

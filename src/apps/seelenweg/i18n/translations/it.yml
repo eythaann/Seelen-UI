@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Aggiungi Modulo Media
-  start: Aggiungi Modulo Start
-  add_file: Aggiungi File Personalizzato
-  add_folder: Aggiungi Cartella Personalizzata
-  task_manager: Gestione Attività
-  settings: Impostazioni
 app_menu:
-  unpin: Rimuovi
-  pin: Fissa
-  pin_to_left: Fissa a Sinistra
-  pin_to_center: Fissa al Centro
-  pin_to_right: Fissa a Destra
-  open_file_location: Apri Percorso del File
-  run_as: Esegui come Amministratore
-  copy_handles: Copia Handle
   close: Chiudi
   close_multiple: Chiudi Tutto
-  kill_multiple: Uccidi tutti i processi
+  copy_handles: Copia Handle
   kill: Uccidi il processo
+  kill_multiple: Uccidi tutti i processi
+  open_file_location: Apri Percorso del File
+  pin: Fissa
+  pin_to_center: Fissa al Centro
+  pin_to_left: Fissa a Sinistra
+  pin_to_right: Fissa a Destra
+  run_as: Esegui come Amministratore
+  unpin: Rimuovi
 media:
   not_playing: Nulla in riproduzione
 media_menu:
   remove: Rimuovi Modulo Media
 start_menu:
   remove: Rimuovi Modulo Start
+taskbar_menu:
+  add_file: Aggiungi File Personalizzato
+  add_folder: Aggiungi Cartella Personalizzata
+  media: Aggiungi Modulo Media
+  settings: Impostazioni
+  start: Aggiungi Modulo Start
+  task_manager: Gestione Attività

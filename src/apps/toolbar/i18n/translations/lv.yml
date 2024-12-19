@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: Multimedija
-    comunications: Sakari
-  input_device: Ievades ierīce
-  master_volume: Master tilpums
-  players: Plašsaziņas līdzekļu spēlētāji
-  output_device: Izvades ierīce
-network:
-  placeholder:
-    password: Parole
-  disconnect: Atvienot
-  connect: Savienot
-  hidden: Slēpts tīkls
-  more: Vairāk tīkla iestatījumu
-  not_found: Neto atrasti tīkli
-  saved: Saglabātie tīkli
-  scanning: Tīklu meklēšana
-  available: Pieejamie tīkli
-  connected: Savienots ar
-  secured: Šifrēts tīkls
-settings:
-  log_out: Izlogoties
-  sleep: Gulēt
-  shutdown: Izslēgt
-  title: Iestatījumi
-  restart: Restartēt
-  app_settings: Lietotņu iestatījumi
-  power: Spēks
-placeholder:
-  settings: Ātrie iestatījumi
-  battery_remaining: '% atliekas'
-  ethernet_connected: Interneta pieslēgums
-  smart_charge: '- Viedā maksa'
-  open_user_folder: Atveriet lietotāja mapi
-  open_system_tray: Atvērtā sistēmas paplāte
-  bluetooth_devices: Bluetooth & ierīces
-  volume: Tilpums
-  ethernet_disconnected: Nav piekļuves internetam
-  notifications: Paziņojumi
-unlabelled_tray: Neiezīmēta paplātes ikona
 context_menu:
   add_module: Pievienot moduli
   remove: Noņemt moduli
   settings: Iestatījumi
   task_manager: Uzdevumu pārvaldnieks
+media:
+  device:
+    comunications: Sakari
+    multimedia: Multimedija
+  input_device: Ievades ierīce
+  master_volume: Master tilpums
+  output_device: Izvades ierīce
+  players: Plašsaziņas līdzekļu spēlētāji
+network:
+  available: Pieejamie tīkli
+  connect: Savienot
+  connected: Savienots ar
+  disconnect: Atvienot
+  hidden: Slēpts tīkls
+  more: Vairāk tīkla iestatījumu
+  not_found: Neto atrasti tīkli
+  placeholder:
+    password: Parole
+  saved: Saglabātie tīkli
+  scanning: Tīklu meklēšana
+  secured: Šifrēts tīkls
+placeholder:
+  battery_remaining: '% atliekas'
+  bluetooth_devices: Bluetooth & ierīces
+  ethernet_connected: Interneta pieslēgums
+  ethernet_disconnected: Nav piekļuves internetam
+  notifications: Paziņojumi
+  open_system_tray: Atvērtā sistēmas paplāte
+  open_user_folder: Atveriet lietotāja mapi
+  settings: Ātrie iestatījumi
+  smart_charge: '- Viedā maksa'
+  volume: Tilpums
+settings:
+  app_settings: Lietotņu iestatījumi
+  log_out: Izlogoties
+  power: Spēks
+  restart: Restartēt
+  shutdown: Izslēgt
+  sleep: Gulēt
+  title: Iestatījumi
+unlabelled_tray: Neiezīmēta paplātes ikona

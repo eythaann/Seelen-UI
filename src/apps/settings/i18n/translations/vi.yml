@@ -1,24 +1,193 @@
-sides:
-  right: Phải
-  top: Đứng đầu
-  bottom: Đáy
-  left: Bên trái
+app_launcher:
+  enable: Bật trình khởi chạy ứng dụng
+  monitor: Giám sát để hiển thị
+  runners:
+    cmd: Yêu cầu
+    explorer: Chạy
+    label: Người chạy bộ
+apps_configurations:
+  app:
+    bindings: Binding (Lưu ý cả hai tùy chọn đều được yêu cầu)
+    category: Loại
+    category_placeholder: Không có
+    monitor: Màn hình
+    monitor_placeholder: Không có
+    name: Tên
+    ok_create: Tạo nên
+    ok_edit: Cập nhật
+    ok_readonly: Chỉnh sửa như mới
+    options:
+      float: Trôi nổi
+      force: Quản lý lực lượng
+      hidden: Ẩn từ Dock/Thanh tác vụ
+      pinned: Ghim
+      unmanage: Không quản lý
+    options_label: Tùy chọn bổ sung
+    title_create: Tạo {{name}}
+    title_edit: Chỉnh sửa {{name}}
+    title_readonly: Xem {{name}}
+    weg_options_label: Tùy chọn Thanh điều khiển/Thanh nhiệm vụ
+    wm_options_label: Tùy chọn Trình quản lý cửa sổ
+    workspace: Không gian làm việc
+    workspace_placeholder: Không có
+  bundled_msg: >-
+    Các cấu hình đi kèm này không thể chỉnh sửa và được thiết kế để cung cấp cho
+    bạn trải nghiệm tốt nhất mà không cần tùy chỉnh. Chúng tự động định cấu hình
+    các ứng dụng phổ biến nhất cho bạn.
+  bundled_title: Ứng dụng Cấu hình đi kèm với Seelen
+  confirm_delete: Bạn có chắc bạn muốn xóa cấu hình/s này không?
+  confirm_delete_title: Xác nhận xóa
+  delete: Xóa bỏ
+  export: Xuất khẩu
+  extra_info: >-
+    Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu
+    tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ
+    được ưu tiên, vì ghi chú được sắp xếp theo mặc định từ mới nhất đến cũ.
+  identifier:
+    add_block: Thêm khối
+    and: VÀ
+    id: Định danh
+    kind: Xác định bởi
+    matching_strategy: Chiến lược phù hợp
+    negation: Phủ nhận sự phù hợp
+    or: HOẶC
+    remove: Xóa khối
+  import: Nhập khẩu
+  new: Mới
+  search: Tìm kiếm
+  swap: Tráo đổi
+cancel: Hủy bỏ
+close: Đóng
+delete: Xóa bỏ
+devtools:
+  app_folders: Thư mục ứng dụng
+  custom_config_file: Tải tệp cấu hình tùy chỉnh
+  data_folder: Thư mục dữ liệu
+  enable: Kích hoạt các công cụ nhà phát triển
+  install_folder: Thư mục cài đặt
+  load: Trọng tải
+  settings_file: Cài đặt tập tin
+extras:
+  discord: Bất hòa
+  exit: Thoát/Thoát
+  github: GitHub
+  links: Liên kết chính thức
+  relaunch: Khởi động lại
+  version: Phiên bản
+general:
+  accent_color: Màu nhấn
+  date_format: Định dạng ngày
+  icon_pack:
+    label: Gói biểu tượng
+  language: Ngôn ngữ
+  startup: Chạy khi khởi động?
+  theme:
+    add: Thêm chủ đề
+    added: Chủ đề đã được thêm vào
+    author: Tác giả
+    available: Có sẵn
+    description: Sự miêu tả
+    enabled: Cho phép các chủ đề
+    label: Thông tin chủ đề
+    placeholder: Chọn chủ đề
+    selected: Đã chọn
+    tags: Tags
+  wallpaper:
+    select: Chọn hình nền
 header:
   labels:
-    info: Thông tin
-    seelen_bar: Thanh công cụ ưa thích
-    general: Tổng quan
     developer: Nhà phát triển
-    specific_apps: Ứng dụng cụ thể
+    general: Tổng quan
+    home: Trang chủ
+    info: Thông tin
+    mods: Plugin & Widget
     monitors: Màn hình
+    seelen_bar: Thanh công cụ ưa thích
+    seelen_rofi: Ứng dụng Launcher
+    seelen_wall: Quản lý hình nền
     seelen_weg: Dock/Thanh tác vụ
     seelen_wm: Quản lý cửa sổ
     shortcuts: Phím tắt
-    seelen_rofi: Ứng dụng Launcher
+    specific_apps: Ứng dụng cụ thể
     virtual_desk: Máy tính để bàn ảo
-    home: Trang chủ
-    mods: Plugin & Widget
-    seelen_wall: Quản lý hình nền
+inherit: Kế thừa
+inProgress: Trong tiến trình...
+insert: Chèn
+loading: Đang tải...
+miscellaneous: Linh tinh
+mods:
+  plugins: Plugin
+  target: Mục tiêu
+  widgets: Widgets
+monitors_configurations:
+  label: Màn hình {{index}}
+more: Hơn
+open: Mở
+quit: Từ bỏ
+remove: Di dời
+save: Cứu
+save_and_restart: Lưu & Khởi động lại
+shortcuts:
+  enable: Bật các phím tắt tích hợp (AHK)
+  enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
+  labels:
+    decrease_height: Giảm chiều cao
+    decrease_width: Giảm chiều rộng
+    focus_bottom: Focus bottom
+    focus_latest: Tập trung mới nhất
+    focus_left: Tập trung trái
+    focus_right: Tập trung đúng
+    focus_top: Tập trung hàng đầu
+    increase_height: Tăng chiều cao
+    increase_width: Tăng chiều rộng
+    misc_open_settings: Mở cài đặt
+    misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)
+    misc_toggle_win_event_tracing: Chuyển đổi theo dõi sự kiện (nhật ký)
+    move_to_workspace_0: Di chuyển đến không gian làm việc 0
+    move_to_workspace_1: Di chuyển đến không gian làm việc 1
+    move_to_workspace_2: Di chuyển đến không gian làm việc 2
+    move_to_workspace_3: Di chuyển đến không gian làm việc 3
+    move_to_workspace_4: Di chuyển đến không gian làm việc 4
+    move_to_workspace_5: Di chuyển đến không gian làm việc 5
+    move_to_workspace_6: Di chuyển đến không gian làm việc 6
+    move_to_workspace_7: Di chuyển đến không gian làm việc 7
+    move_to_workspace_8: Di chuyển đến không gian làm việc 8
+    move_to_workspace_9: Di chuyển đến không gian làm việc 9
+    reserve_bottom: Dự trữ đáy
+    reserve_float: Dự trữ nổi
+    reserve_left: Dự trữ trái
+    reserve_right: Đặt trước đúng
+    reserve_stack: Ngân hàng dự trữ
+    reserve_top: Dự trữ hàng đầu
+    restore_sizes: Khôi phục kích thước
+    send_to_workspace_0: Gửi đến không gian làm việc 0
+    send_to_workspace_1: Gửi đến không gian làm việc 1
+    send_to_workspace_2: Gửi đến Workspace 2
+    send_to_workspace_3: Gửi đến không gian làm việc 3
+    send_to_workspace_4: Gửi đến không gian làm việc 4
+    send_to_workspace_5: Gửi đến không gian làm việc 5
+    send_to_workspace_6: Gửi đến không gian làm việc 6
+    send_to_workspace_7: Gửi đến không gian làm việc 7
+    send_to_workspace_8: Gửi đến không gian làm việc 8
+    send_to_workspace_9: Gửi đến không gian làm việc 9
+    switch_workspace_0: Chuyển sang không gian làm việc 1
+    switch_workspace_1: Chuyển sang không gian làm việc 2
+    switch_workspace_2: Chuyển sang không gian làm việc 2
+    switch_workspace_3: Chuyển sang không gian làm việc 3
+    switch_workspace_4: Chuyển sang không gian làm việc 4
+    switch_workspace_5: Chuyển sang không gian làm việc 5
+    switch_workspace_6: Chuyển sang không gian làm việc 6
+    switch_workspace_7: Chuyển sang không gian làm việc 7
+    switch_workspace_8: Chuyển sang không gian làm việc 8
+    switch_workspace_9: Chuyển sang không gian làm việc 9
+    toggle_launcher: Chuyển đổi
+  readonly_tooltip: Đây là một lối tắt chỉ đọc
+  reset: Đặt lại về mặc định
+sides:
+  bottom: Đáy
+  left: Bên trái
+  right: Phải
+  top: Đứng đầu
 start:
   message: >-
     Chào mừng bạn đến Seelen UI, môi trường máy tính để bàn cuối cùng với Trình
@@ -27,236 +196,67 @@ start:
     các tính năng nâng cao của chúng tôi.
   message_accent: Tối ưu hóa năng suất của bạn với phong cách!
   title: Chào mừng!
-general:
-  theme:
-    description: Sự miêu tả
-    placeholder: Chọn chủ đề
-    author: Tác giả
-    add: Thêm chủ đề
-    added: Chủ đề đã được thêm vào
-    label: Thông tin chủ đề
-    tags: Tags
-    enabled: Cho phép các chủ đề
-    selected: Đã chọn
-    available: Có sẵn
-  startup: Chạy khi khởi động?
-  language: Ngôn ngữ
-  icon_pack:
-    label: Gói biểu tượng
-  accent_color: Màu nhấn
-  wallpaper:
-    select: Chọn hình nền
-  date_format: Định dạng ngày
 toolbar:
+  auto_hide: Tự động ẩn
+  delay_to_hide: Trì hoãn việc ẩn giấu
+  delay_to_show: Trì hoãn hiển thị
+  enable: Kích hoạt thanh công cụ ưa thích
+  height: Chiều cao
+  label: Thanh công cụ
   placeholder:
     author: Tác giả
     description: Sự miêu tả
     select: Cấu trúc thanh công cụ
-  height: Chiều cao
-  enable: Kích hoạt thanh công cụ ưa thích
-  auto_hide: Tự động ẩn
-  label: Thanh công cụ
-  delay_to_hide: Trì hoãn việc ẩn giấu
-  delay_to_show: Trì hoãn hiển thị
   use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
-wm:
-  border:
-    width: Chiều rộng biên giới
-    offset: Biên giới bù đắp
-    enable: Bật biên giới của cửa sổ
-  description: Sự miêu tả
-  author: Tác giả
-  layout: Cách trình bày
-  resize_delta: Thay đổi kích thước delta (%)
-  space_between_containers: Không gian giữa các container
-  workspace_padding: Không gian làm việc đệm
-  workspace_offset: Không gian làm việc bù (lề)
-  enable: Bật trình quản lý cửa sổ ốp lát
-weg:
-  items:
-    size: Kích thước mục
-    label: Mặt hàng
-    zoom_size: Kích thước phóng to (được sử dụng cho chủ đề)
-    gap: Không gian giữa các mặt hàng
-    visible_separators: Phân tách có thể nhìn thấy
-  width: Chiều rộng
-  margin: Lề
-  gap: Khoảng cách
-  enable: Bật Dock/Thanh tác vụ
-  padding: Đệm
-  label: Dock/Thanh tác vụ
-  auto_hide: Tự động ẩn
-  dock_side: Chức vụ
-  delay_to_show: Trì hoãn hiển thị
-  delay_to_hide: Trì hoãn việc ẩn giấu
-  use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
-devtools:
-  load: Trọng tải
-  app_folders: Thư mục ứng dụng
-  install_folder: Thư mục cài đặt
-  custom_config_file: Tải tệp cấu hình tùy chỉnh
-  settings_file: Cài đặt tập tin
-  data_folder: Thư mục dữ liệu
-  enable: Kích hoạt các công cụ nhà phát triển
-apps_configurations:
-  app:
-    options:
-      float: Trôi nổi
-      force: Quản lý lực lượng
-      pinned: Ghim
-      unmanage: Không quản lý
-      hidden: Ẩn từ Dock/Thanh tác vụ
-    category_placeholder: Không có
-    category: Loại
-    ok_edit: Cập nhật
-    monitor_placeholder: Không có
-    name: Tên
-    workspace_placeholder: Không có
-    ok_create: Tạo nên
-    bindings: Binding (Lưu ý cả hai tùy chọn đều được yêu cầu)
-    monitor: Màn hình
-    title_readonly: Xem {{name}}
-    workspace: Không gian làm việc
-    ok_readonly: Chỉnh sửa như mới
-    title_create: Tạo {{name}}
-    weg_options_label: Tùy chọn Thanh điều khiển/Thanh nhiệm vụ
-    wm_options_label: Tùy chọn Trình quản lý cửa sổ
-    options_label: Tùy chọn bổ sung
-    title_edit: Chỉnh sửa {{name}}
-  identifier:
-    and: VÀ
-    or: HOẶC
-    negation: Phủ nhận sự phù hợp
-    id: Định danh
-    remove: Xóa khối
-    matching_strategy: Chiến lược phù hợp
-    kind: Xác định bởi
-    add_block: Thêm khối
-  export: Xuất khẩu
-  delete: Xóa bỏ
-  search: Tìm kiếm
-  swap: Tráo đổi
-  new: Mới
-  import: Nhập khẩu
-  bundled_title: Ứng dụng Cấu hình đi kèm với Seelen
-  confirm_delete: Bạn có chắc bạn muốn xóa cấu hình/s này không?
-  confirm_delete_title: Xác nhận xóa
-  bundled_msg: >-
-    Các cấu hình đi kèm này không thể chỉnh sửa và được thiết kế để cung cấp cho
-    bạn trải nghiệm tốt nhất mà không cần tùy chỉnh. Chúng tự động định cấu hình
-    các ứng dụng phổ biến nhất cho bạn.
-  extra_info: >-
-    Seelen UI chỉ sử dụng một định danh cho mỗi ứng dụng (tìm thấy trận đấu đầu
-    tiên) vì vậy thứ tự được cụ thể là quan trọng, phần được thêm mới nhất sẽ
-    được ưu tiên, vì ghi chú được sắp xếp theo mặc định từ mới nhất đến cũ.
-extras:
-  version: Phiên bản
-  discord: Bất hòa
-  links: Liên kết chính thức
-  exit: Thoát/Thoát
-  github: GitHub
-  relaunch: Khởi động lại
-shortcuts:
-  labels:
-    move_to_workspace_4: Di chuyển đến không gian làm việc 4
-    focus_right: Tập trung đúng
-    switch_workspace_4: Chuyển sang không gian làm việc 4
-    send_to_workspace_5: Gửi đến không gian làm việc 5
-    send_to_workspace_8: Gửi đến không gian làm việc 8
-    reserve_right: Đặt trước đúng
-    send_to_workspace_9: Gửi đến không gian làm việc 9
-    reserve_top: Dự trữ hàng đầu
-    focus_bottom: Focus bottom
-    reserve_stack: Ngân hàng dự trữ
-    switch_workspace_3: Chuyển sang không gian làm việc 3
-    increase_height: Tăng chiều cao
-    move_to_workspace_7: Di chuyển đến không gian làm việc 7
-    focus_top: Tập trung hàng đầu
-    move_to_workspace_6: Di chuyển đến không gian làm việc 6
-    move_to_workspace_5: Di chuyển đến không gian làm việc 5
-    focus_latest: Tập trung mới nhất
-    send_to_workspace_6: Gửi đến không gian làm việc 6
-    send_to_workspace_3: Gửi đến không gian làm việc 3
-    switch_workspace_6: Chuyển sang không gian làm việc 6
-    reserve_float: Dự trữ nổi
-    switch_workspace_2: Chuyển sang không gian làm việc 2
-    move_to_workspace_2: Di chuyển đến không gian làm việc 2
-    decrease_width: Giảm chiều rộng
-    send_to_workspace_4: Gửi đến không gian làm việc 4
-    increase_width: Tăng chiều rộng
-    switch_workspace_7: Chuyển sang không gian làm việc 7
-    move_to_workspace_1: Di chuyển đến không gian làm việc 1
-    switch_workspace_8: Chuyển sang không gian làm việc 8
-    decrease_height: Giảm chiều cao
-    move_to_workspace_3: Di chuyển đến không gian làm việc 3
-    move_to_workspace_0: Di chuyển đến không gian làm việc 0
-    switch_workspace_5: Chuyển sang không gian làm việc 5
-    switch_workspace_9: Chuyển sang không gian làm việc 9
-    restore_sizes: Khôi phục kích thước
-    reserve_bottom: Dự trữ đáy
-    send_to_workspace_1: Gửi đến không gian làm việc 1
-    move_to_workspace_8: Di chuyển đến không gian làm việc 8
-    move_to_workspace_9: Di chuyển đến không gian làm việc 9
-    send_to_workspace_0: Gửi đến không gian làm việc 0
-    send_to_workspace_2: Gửi đến Workspace 2
-    reserve_left: Dự trữ trái
-    send_to_workspace_7: Gửi đến không gian làm việc 7
-    focus_left: Tập trung trái
-    switch_workspace_0: Chuyển sang không gian làm việc 1
-    switch_workspace_1: Chuyển sang không gian làm việc 2
-    misc_toggle_lock_tracing: Chuyển đổi dấu vết khóa (nhật ký)
-    misc_open_settings: Mở cài đặt
-    misc_toggle_win_event_tracing: Chuyển đổi theo dõi sự kiện (nhật ký)
-    toggle_launcher: Chuyển đổi
-  enable: Bật các phím tắt tích hợp (AHK)
-  enable_tooltip: Tắt nếu bạn sẽ triển khai các phím tắt của riêng mình bằng API SEELEN Core
-  reset: Đặt lại về mặc định
-  readonly_tooltip: Đây là một lối tắt chỉ đọc
-loading: Đang tải...
-open: Mở
-quit: Từ bỏ
-delete: Xóa bỏ
-inProgress: Trong tiến trình...
-save: Cứu
-cancel: Hủy bỏ
-vd:
-  strategy:
-    native: Tự nhiên
-    seelen: Seelen
-    label: Chiến lược máy tính để bàn ảo
-  disabled_windows_version: >-
-    Chiến lược máy tính để bàn ảo gốc không có sẵn cho phiên bản Windows của
-    bạn.
-save_and_restart: Lưu & Khởi động lại
-monitors_configurations:
-  label: Màn hình {{index}}
-wall:
-  no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
-  backgrounds: Hình nền
-  enable: Bật trình quản lý hình nền
-  interval: Thay đổi hình nền mỗi
-  random: Slideshow ngẫu nhiên
-  hours: giờ
-  minutes: phút
-  seconds: giây
-app_launcher:
-  runners:
-    explorer: Chạy
-    cmd: Yêu cầu
-    label: Người chạy bộ
-  enable: Bật trình khởi chạy ứng dụng
-  monitor: Giám sát để hiển thị
-insert: Chèn
-more: Hơn
-inherit: Kế thừa
-close: Đóng
 update:
   available: Cập nhật có sẵn!
   channel: Cập nhật kênh
   downloading: Tải xuống ...
-miscellaneous: Linh tinh
-mods:
-  target: Mục tiêu
-  widgets: Widgets
-  plugins: Plugin
-remove: Di dời
+vd:
+  disabled_windows_version: >-
+    Chiến lược máy tính để bàn ảo gốc không có sẵn cho phiên bản Windows của
+    bạn.
+  strategy:
+    label: Chiến lược máy tính để bàn ảo
+    native: Tự nhiên
+    seelen: Seelen
+wall:
+  backgrounds: Hình nền
+  enable: Bật trình quản lý hình nền
+  hours: giờ
+  interval: Thay đổi hình nền mỗi
+  minutes: phút
+  no_background: Thay vào đó, trình chiếu trống, sử dụng nền của chủ đề.
+  random: Slideshow ngẫu nhiên
+  seconds: giây
+weg:
+  auto_hide: Tự động ẩn
+  delay_to_hide: Trì hoãn việc ẩn giấu
+  delay_to_show: Trì hoãn hiển thị
+  dock_side: Chức vụ
+  enable: Bật Dock/Thanh tác vụ
+  gap: Khoảng cách
+  items:
+    gap: Không gian giữa các mặt hàng
+    label: Mặt hàng
+    size: Kích thước mục
+    visible_separators: Phân tách có thể nhìn thấy
+    zoom_size: Kích thước phóng to (được sử dụng cho chủ đề)
+  label: Dock/Thanh tác vụ
+  margin: Lề
+  padding: Đệm
+  use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
+  width: Chiều rộng
+wm:
+  author: Tác giả
+  border:
+    enable: Bật biên giới của cửa sổ
+    offset: Biên giới bù đắp
+    width: Chiều rộng biên giới
+  description: Sự miêu tả
+  enable: Bật trình quản lý cửa sổ ốp lát
+  layout: Cách trình bày
+  resize_delta: Thay đổi kích thước delta (%)
+  space_between_containers: Không gian giữa các container
+  workspace_offset: Không gian làm việc bù (lề)
+  workspace_padding: Không gian làm việc đệm

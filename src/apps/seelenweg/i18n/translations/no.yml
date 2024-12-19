@@ -1,26 +1,26 @@
-taskbar_menu:
-  start: Legg til startmodul
-  media: Legg til mediemodul
-  add_file: Pin tilpasset fil
-  add_folder: Pin tilpasset mappe
-  task_manager: Oppgavebehandling
-  settings: Innstillinger
 app_menu:
-  open_file_location: Åpne fil plassering
   close: Lukk
   close_multiple: Lukk alle
-  run_as: Kjør som administrator
-  pin_to_center: Pin til sentrum
-  pin_to_right: Pin til høyre
   copy_handles: Kopier håndtak
-  unpin: Upinn
-  pin: Pin
-  pin_to_left: Pin til venstre
-  kill_multiple: Drep alle prosesser
   kill: Drep prosessen
+  kill_multiple: Drep alle prosesser
+  open_file_location: Åpne fil plassering
+  pin: Pin
+  pin_to_center: Pin til sentrum
+  pin_to_left: Pin til venstre
+  pin_to_right: Pin til høyre
+  run_as: Kjør som administrator
+  unpin: Upinn
+media:
+  not_playing: Ingenting spiller
 media_menu:
   remove: Fjern mediemodulen
 start_menu:
   remove: Fjern startmodulen
-media:
-  not_playing: Ingenting spiller
+taskbar_menu:
+  add_file: Pin tilpasset fil
+  add_folder: Pin tilpasset mappe
+  media: Legg til mediemodul
+  settings: Innstillinger
+  start: Legg til startmodul
+  task_manager: Oppgavebehandling

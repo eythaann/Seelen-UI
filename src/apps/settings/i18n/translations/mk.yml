@@ -1,265 +1,265 @@
-sides:
-  left: Лево
-  top: Врв
-  bottom: Дно
-  right: Десно
-header:
-  labels:
-    seelen_bar: Фенси лента со алатки
-    developer: Развивач
-    shortcuts: Кратенки
-    general: Општо
-    info: Информации
-    seelen_wm: Менаџер на прозорци
-    seelen_weg: Док/лента со задачи
-    monitors: Монитори
-    specific_apps: Специфични апликации
-    seelen_rofi: Апликатор за лансирање
-    virtual_desk: Виртуелни работна површина
-    home: Дома
-    mods: Приклучоци и додатоци
-    seelen_wall: Менаџер за позадина
-start:
-  title: Добредојдовте!
-  message_accent: Оптимизирајте ја вашата продуктивност со стил!
-  message: >-
-    Добредојдовте во Seelen UI, крајната околина за десктоп со вграден менаџер
-    за прозорци за Windows за подобрување на вашето искуство со Windows!
-    Истражете нова ера на ефикасност и мултитаскинг со нашиот интуитивен
-    интерфејс и напредни карактеристики.
-general:
-  theme:
-    tags: Тагови
-    enabled: Овозможени теми
-    author: Автор
-    added: Веќе додадена тема
-    label: Информации за теми
-    description: Опис
-    placeholder: Изберете тема
-    add: Додадете тема
-    selected: Избран
-    available: Достапно
-  language: Јазик
-  startup: Стартувам на стартување?
-  icon_pack:
-    label: Икони пакувања
-  accent_color: Боја на акцент
-  wallpaper:
-    select: Изберете позадина
-  date_format: Формат на датум
-toolbar:
-  placeholder:
-    author: Автор
-    select: Структура на лентата со алатки
-    description: Опис
-  height: Висина
-  enable: Овозможете фенси лента со алатки
-  auto_hide: Автоматско скриј
-  label: Лента со алатки
-  delay_to_hide: Одложување за сокривање
-  delay_to_show: Одложување за прикажување
-  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
-wm:
-  border:
-    width: Ширина на границата
-    offset: Офсет за граница
-    enable: Овозможете ја границата на прозорецот
-  workspace_padding: Подлога за работни места
-  resize_delta: Променете ја големината на Делта (%)
-  workspace_offset: Работни места за неутрализирање (маргини)
-  space_between_containers: Простор помеѓу контејнери
-  layout: Распоред
-  description: Опис
-  author: Автор
-  enable: Овозможете менаџер на прозорецот за плочки
-weg:
-  items:
-    size: Големина на артикалот
-    label: Предмети
-    zoom_size: Зумирана големина (се користи за теми)
-    visible_separators: Видливи сепаратори
-    gap: Простор помеѓу предмети
-  width: Ширина
-  enable: Овозможете пристаниште/лента со задачи
-  auto_hide: Автоматско скриј
-  gap: Јаз
-  margin: Маргина
-  padding: Подлога
-  label: Док/лента со задачи
-  dock_side: Позиција
-  delay_to_hide: Одложување за сокривање
-  delay_to_show: Одложување за прикажување
-  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
-devtools:
-  load: Оптоварување
-  custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација
-  data_folder: Папка со податоци
-  install_folder: Папка за инсталација
-  settings_file: Датотека за поставки
-  enable: Овозможете алатки за развивачи
-  app_folders: Папки со апликации
+app_launcher:
+  enable: Овозможете фрлач на апликации
+  monitor: Монитор за да се покаже
+  runners:
+    cmd: Команда
+    explorer: Трчај
+    label: Тркачи
 apps_configurations:
   app:
+    bindings: Обврзувачки (Забележете дека се потребни и двете опции)
+    category: Категорија
+    category_placeholder: Ништо
+    monitor: Монитор
+    monitor_placeholder: Ништо
+    name: Име
+    ok_create: Креирај
+    ok_edit: Ажурирање
+    ok_readonly: Уреди како ново
     options:
       float: Плови
-      unmanage: Unmanage
-      pinned: Закачен
       force: Управување со сила
       hidden: Скриј од пристаништето/лентата со задачи
-    ok_edit: Ажурирање
-    category_placeholder: Ништо
-    name: Име
-    workspace_placeholder: Ништо
-    workspace: Работен простор
-    ok_create: Креирај
-    monitor_placeholder: Ништо
-    bindings: Обврзувачки (Забележете дека се потребни и двете опции)
-    title_readonly: Гледање {{име}}
-    monitor: Монитор
-    ok_readonly: Уреди како ново
-    category: Категорија
-    title_create: Креирање {{име}}
-    wm_options_label: Опции за управување со прозорецот
-    weg_options_label: Опции на пристаништето/лентата со задачи
+      pinned: Закачен
+      unmanage: Unmanage
     options_label: Дополнителни опции
+    title_create: Креирање {{име}}
     title_edit: Уредување {{име}}
-  identifier:
-    remove: Избриши блок
-    matching_strategy: Стратегија за појавување
-    or: Или
-    id: Идентификатор
-    kind: Идентификувајте од
-    and: И
-    negation: Негираат совпаѓање
-    add_block: Додадете блок
-  delete: Избриши
-  export: Извоз
-  swap: Разменување
-  search: Пребарување
+    title_readonly: Гледање {{име}}
+    weg_options_label: Опции на пристаништето/лентата со задачи
+    wm_options_label: Опции за управување со прозорецот
+    workspace: Работен простор
+    workspace_placeholder: Ништо
   bundled_msg: >-
     Овие конфигурации во комплет не се уредни и се дизајнирани да ви обезбедат
     најдобро искуство без прилагодување. Тие автоматски ги конфигурираат
     најчестите апликации за вас.
-  import: Увоз
-  confirm_delete: Дали сте сигурни дека сакате да ја избришете оваа конфигурација/а?
-  new: Ново
   bundled_title: Конфигурирана апликација во комплет со Селен
+  confirm_delete: Дали сте сигурни дека сакате да ја избришете оваа конфигурација/а?
   confirm_delete_title: Потврдете го Избриши
+  delete: Избриши
+  export: Извоз
   extra_info: >-
     UI UI Користете само еден идентификатор по апликација (пронајден прв
     натпревар), така што нарачката за тоа е важна е важна, најновиот додаден ќе
     биде приоритет, бидејќи белешката табелата е сортирана стандардно од
     најновата до стара.
+  identifier:
+    add_block: Додадете блок
+    and: И
+    id: Идентификатор
+    kind: Идентификувајте од
+    matching_strategy: Стратегија за појавување
+    negation: Негираат совпаѓање
+    or: Или
+    remove: Избриши блок
+  import: Увоз
+  new: Ново
+  search: Пребарување
+  swap: Разменување
+cancel: Откажи
+close: Затвори
+delete: Избриши
+devtools:
+  app_folders: Папки со апликации
+  custom_config_file: Вчитајте ја датотеката за прилагодена конфигурација
+  data_folder: Папка со податоци
+  enable: Овозможете алатки за развивачи
+  install_folder: Папка за инсталација
+  load: Оптоварување
+  settings_file: Датотека за поставки
 extras:
-  relaunch: Повторно започнување
-  links: Официјални врски
-  exit: Откажете/излез
-  version: Верзија
-  github: Github
   discord: Раздор
-shortcuts:
+  exit: Откажете/излез
+  github: Github
+  links: Официјални врски
+  relaunch: Повторно започнување
+  version: Верзија
+general:
+  accent_color: Боја на акцент
+  date_format: Формат на датум
+  icon_pack:
+    label: Икони пакувања
+  language: Јазик
+  startup: Стартувам на стартување?
+  theme:
+    add: Додадете тема
+    added: Веќе додадена тема
+    author: Автор
+    available: Достапно
+    description: Опис
+    enabled: Овозможени теми
+    label: Информации за теми
+    placeholder: Изберете тема
+    selected: Избран
+    tags: Тагови
+  wallpaper:
+    select: Изберете позадина
+header:
   labels:
-    move_to_workspace_2: Преместете се на работниот простор 2
-    move_to_workspace_6: Преместете се на работниот простор 6
-    switch_workspace_2: Префрлете се на работниот простор 2
-    send_to_workspace_3: Испратете на работниот простор 3
-    switch_workspace_5: Префрлете се на работниот простор 5
-    move_to_workspace_7: Преместете се на работниот простор 7
-    reserve_left: Резерва лево
-    focus_bottom: Фокус дното
-    move_to_workspace_1: Преместете се на работниот простор 1
-    reserve_float: Резерва плови
-    send_to_workspace_2: Испратете на работниот простор 2
-    focus_top: Фокус врвот
-    send_to_workspace_0: Испратете на работниот простор 0
-    reserve_stack: Резервен магацин
-    increase_height: Зголемете ја висината
-    switch_workspace_9: Префрлете се на работниот простор 9
-    decrease_height: Намалување на висината
-    increase_width: Зголемете ја ширината
-    send_to_workspace_6: Испратете на работниот простор 6
-    focus_right: Фокусирајте се десно
-    reserve_top: Резервен врв
-    reserve_right: Резервирајте десно
-    send_to_workspace_8: Испратете на работниот простор 8
-    send_to_workspace_5: Испратете на работниот простор 5
-    move_to_workspace_0: Преместете се на работниот простор 0
-    move_to_workspace_8: Преместете се на работниот простор 8
-    reserve_bottom: Резервно дно
-    send_to_workspace_1: Испратете на работниот простор 1
-    switch_workspace_7: Префрлете се на работниот простор 7
-    switch_workspace_4: Префрлете се на работниот простор 4
-    focus_left: Фокусот лево
-    send_to_workspace_4: Испратете на работниот простор 4
-    focus_latest: Фокусирајте се најновите
-    switch_workspace_6: Префрлете се на работниот простор 6
-    send_to_workspace_7: Испратете на работниот простор 7
-    send_to_workspace_9: Испратете на работниот простор 9
-    restore_sizes: Врати големини
-    switch_workspace_8: Префрлете се на работниот простор 8
-    move_to_workspace_3: Преместете се на работниот простор 3
-    decrease_width: Намалување на ширината
-    move_to_workspace_5: Преместете се во работниот простор 5
-    move_to_workspace_4: Преместете се на работниот простор 4
-    move_to_workspace_9: Преместете се на работниот простор 9
-    switch_workspace_3: Префрлете се на работниот простор 3
-    switch_workspace_0: Префрлете се на работниот простор 1
-    switch_workspace_1: Префрлете се на работниот простор 2
-    misc_toggle_lock_tracing: Следење на заклучување на заклучување (логови)
-    misc_toggle_win_event_tracing: Вклучување
-    misc_open_settings: Отворете ги поставките
-    toggle_launcher: Се менува
+    developer: Развивач
+    general: Општо
+    home: Дома
+    info: Информации
+    mods: Приклучоци и додатоци
+    monitors: Монитори
+    seelen_bar: Фенси лента со алатки
+    seelen_rofi: Апликатор за лансирање
+    seelen_wall: Менаџер за позадина
+    seelen_weg: Док/лента со задачи
+    seelen_wm: Менаџер на прозорци
+    shortcuts: Кратенки
+    specific_apps: Специфични апликации
+    virtual_desk: Виртуелни работна површина
+inherit: Наследник
+inProgress: Во тек...
+insert: Вметнете
+loading: Вчитување ...
+miscellaneous: Различни
+mods:
+  plugins: Приклучоци
+  target: Цел
+  widgets: Додатоци
+monitors_configurations:
+  label: Монитор {{индекс}}
+more: Повеќе
+open: Отворено
+quit: Откажете се
+remove: Отстранете
+save: Зачувај
+save_and_restart: Зачувај и рестартирај
+shortcuts:
+  enable: Овозможете интегрирани кратенки (AHK)
   enable_tooltip: >-
     Оневозможете ако ги имплементирате вашите сопствени кратенки со користење на
     API на Core Seelen
-  enable: Овозможете интегрирани кратенки (AHK)
-  reset: Ресетирајте се на стандардно
+  labels:
+    decrease_height: Намалување на висината
+    decrease_width: Намалување на ширината
+    focus_bottom: Фокус дното
+    focus_latest: Фокусирајте се најновите
+    focus_left: Фокусот лево
+    focus_right: Фокусирајте се десно
+    focus_top: Фокус врвот
+    increase_height: Зголемете ја висината
+    increase_width: Зголемете ја ширината
+    misc_open_settings: Отворете ги поставките
+    misc_toggle_lock_tracing: Следење на заклучување на заклучување (логови)
+    misc_toggle_win_event_tracing: Вклучување
+    move_to_workspace_0: Преместете се на работниот простор 0
+    move_to_workspace_1: Преместете се на работниот простор 1
+    move_to_workspace_2: Преместете се на работниот простор 2
+    move_to_workspace_3: Преместете се на работниот простор 3
+    move_to_workspace_4: Преместете се на работниот простор 4
+    move_to_workspace_5: Преместете се во работниот простор 5
+    move_to_workspace_6: Преместете се на работниот простор 6
+    move_to_workspace_7: Преместете се на работниот простор 7
+    move_to_workspace_8: Преместете се на работниот простор 8
+    move_to_workspace_9: Преместете се на работниот простор 9
+    reserve_bottom: Резервно дно
+    reserve_float: Резерва плови
+    reserve_left: Резерва лево
+    reserve_right: Резервирајте десно
+    reserve_stack: Резервен магацин
+    reserve_top: Резервен врв
+    restore_sizes: Врати големини
+    send_to_workspace_0: Испратете на работниот простор 0
+    send_to_workspace_1: Испратете на работниот простор 1
+    send_to_workspace_2: Испратете на работниот простор 2
+    send_to_workspace_3: Испратете на работниот простор 3
+    send_to_workspace_4: Испратете на работниот простор 4
+    send_to_workspace_5: Испратете на работниот простор 5
+    send_to_workspace_6: Испратете на работниот простор 6
+    send_to_workspace_7: Испратете на работниот простор 7
+    send_to_workspace_8: Испратете на работниот простор 8
+    send_to_workspace_9: Испратете на работниот простор 9
+    switch_workspace_0: Префрлете се на работниот простор 1
+    switch_workspace_1: Префрлете се на работниот простор 2
+    switch_workspace_2: Префрлете се на работниот простор 2
+    switch_workspace_3: Префрлете се на работниот простор 3
+    switch_workspace_4: Префрлете се на работниот простор 4
+    switch_workspace_5: Префрлете се на работниот простор 5
+    switch_workspace_6: Префрлете се на работниот простор 6
+    switch_workspace_7: Префрлете се на работниот простор 7
+    switch_workspace_8: Префрлете се на работниот простор 8
+    switch_workspace_9: Префрлете се на работниот простор 9
+    toggle_launcher: Се менува
   readonly_tooltip: Ова е кратенка само за читање
-inProgress: Во тек...
-delete: Избриши
-cancel: Откажи
-loading: Вчитување ...
-quit: Откажете се
-save: Зачувај
-open: Отворено
+  reset: Ресетирајте се на стандардно
+sides:
+  bottom: Дно
+  left: Лево
+  right: Десно
+  top: Врв
+start:
+  message: >-
+    Добредојдовте во Seelen UI, крајната околина за десктоп со вграден менаџер
+    за прозорци за Windows за подобрување на вашето искуство со Windows!
+    Истражете нова ера на ефикасност и мултитаскинг со нашиот интуитивен
+    интерфејс и напредни карактеристики.
+  message_accent: Оптимизирајте ја вашата продуктивност со стил!
+  title: Добредојдовте!
+toolbar:
+  auto_hide: Автоматско скриј
+  delay_to_hide: Одложување за сокривање
+  delay_to_show: Одложување за прикажување
+  enable: Овозможете фенси лента со алатки
+  height: Висина
+  label: Лента со алатки
+  placeholder:
+    author: Автор
+    description: Опис
+    select: Структура на лентата со алатки
+  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
+update:
+  available: Ажурирање достапно!
+  channel: Ажурирање на каналот
+  downloading: Преземање ...
 vd:
+  disabled_windows_version: >-
+    Домородната стратегија за виртуелна работна површина не е достапна за вашата
+    верзија на Windows.
   strategy:
     label: Виртуелна стратегија за десктоп
     native: Мајчин
     seelen: Селен
-  disabled_windows_version: >-
-    Домородната стратегија за виртуелна работна површина не е достапна за вашата
-    верзија на Windows.
-save_and_restart: Зачувај и рестартирај
-monitors_configurations:
-  label: Монитор {{индекс}}
 wall:
   backgrounds: Позадини
-  no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
   enable: Овозможете менаџер на тапети
-  random: Рандомизирајте го слајдшоу
-  interval: Променете ја позадината на секој
-  seconds: секунди
   hours: часови
+  interval: Променете ја позадината на секој
   minutes: минути
-app_launcher:
-  runners:
-    explorer: Трчај
-    cmd: Команда
-    label: Тркачи
-  enable: Овозможете фрлач на апликации
-  monitor: Монитор за да се покаже
-inherit: Наследник
-insert: Вметнете
-more: Повеќе
-close: Затвори
-update:
-  available: Ажурирање достапно!
-  downloading: Преземање ...
-  channel: Ажурирање на каналот
-miscellaneous: Различни
-mods:
-  plugins: Приклучоци
-  widgets: Додатоци
-  target: Цел
-remove: Отстранете
+  no_background: Празен слајдшоу, наместо тоа, користејќи ја позадината на темата.
+  random: Рандомизирајте го слајдшоу
+  seconds: секунди
+weg:
+  auto_hide: Автоматско скриј
+  delay_to_hide: Одложување за сокривање
+  delay_to_show: Одложување за прикажување
+  dock_side: Позиција
+  enable: Овозможете пристаниште/лента со задачи
+  gap: Јаз
+  items:
+    gap: Простор помеѓу предмети
+    label: Предмети
+    size: Големина на артикалот
+    visible_separators: Видливи сепаратори
+    zoom_size: Зумирана големина (се користи за теми)
+  label: Док/лента со задачи
+  margin: Маргина
+  padding: Подлога
+  use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
+  width: Ширина
+wm:
+  author: Автор
+  border:
+    enable: Овозможете ја границата на прозорецот
+    offset: Офсет за граница
+    width: Ширина на границата
+  description: Опис
+  enable: Овозможете менаџер на прозорецот за плочки
+  layout: Распоред
+  resize_delta: Променете ја големината на Делта (%)
+  space_between_containers: Простор помеѓу контејнери
+  workspace_offset: Работни места за неутрализирање (маргини)
+  workspace_padding: Подлога за работни места

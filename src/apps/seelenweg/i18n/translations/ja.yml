@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: メディアモジュールを追加
-  start: 開始モジュールを追加
-  add_file: ファイルを追加
-  add_folder: フォルダを追加
-  task_manager: タスクマネージャー
-  settings: 設定
 app_menu:
-  pin: ピン留め
-  open_file_location: ファイルの場所を開く
   close: 閉じる
-  run_as: 管理者として実行
-  pin_to_center: 中央にピン留め
-  pin_to_right: 右にピン留め
   close_multiple: すべてを閉じる
-  unpin: ピン留めを解除
   copy_handles: ハンドルをコピー
-  pin_to_left: 左にピン留め
   kill: プロセスを強制終了する
   kill_multiple: すべてのプロセスを強制終了する
+  open_file_location: ファイルの場所を開く
+  pin: ピン留め
+  pin_to_center: 中央にピン留め
+  pin_to_left: 左にピン留め
+  pin_to_right: 右にピン留め
+  run_as: 管理者として実行
+  unpin: ピン留めを解除
+media:
+  not_playing: 何も遊んでいません
 media_menu:
   remove: メディアモジュールを削除
 start_menu:
   remove: スタートメニューを削除
-media:
-  not_playing: 何も遊んでいません
+taskbar_menu:
+  add_file: ファイルを追加
+  add_folder: フォルダを追加
+  media: メディアモジュールを追加
+  settings: 設定
+  start: 開始モジュールを追加
+  task_manager: タスクマネージャー

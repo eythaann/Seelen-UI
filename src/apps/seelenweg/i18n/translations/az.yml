@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Media modulu əlavə edin
-  start: Başlama modulu əlavə edin
-  add_folder: Xüsusi qovluğu vurun
-  add_file: Xüsusi faylı pin edin
-  settings: Parametrlər
-  task_manager: Tapşırıq meneceri
 app_menu:
   close: Yaxın
-  pin: Pin
-  pin_to_left: Pin sola
-  pin_to_center: Mərkəzə pin
-  copy_handles: Copular
-  run_as: İdarəçi kimi qaçmaq
-  open_file_location: Fayl yeri açın
   close_multiple: Hamısını bağlayın
-  unpin: Qeyri-pəncələmək
-  pin_to_right: Sağa pin
-  kill_multiple: Bütün prosesləri öldürün
+  copy_handles: Copular
   kill: Öldürmə prosesi
+  kill_multiple: Bütün prosesləri öldürün
+  open_file_location: Fayl yeri açın
+  pin: Pin
+  pin_to_center: Mərkəzə pin
+  pin_to_left: Pin sola
+  pin_to_right: Sağa pin
+  run_as: İdarəçi kimi qaçmaq
+  unpin: Qeyri-pəncələmək
+media:
+  not_playing: Heç nə oynamır
 media_menu:
   remove: Media modulunu çıxarın
 start_menu:
   remove: Başlama modulunu çıxarın
-media:
-  not_playing: Heç nə oynamır
+taskbar_menu:
+  add_file: Xüsusi faylı pin edin
+  add_folder: Xüsusi qovluğu vurun
+  media: Media modulu əlavə edin
+  settings: Parametrlər
+  start: Başlama modulu əlavə edin
+  task_manager: Tapşırıq meneceri

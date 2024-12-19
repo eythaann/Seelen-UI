@@ -1,26 +1,26 @@
-taskbar_menu:
-  media: Pridať mediálny modul
-  start: Pridať štartový modul
-  add_file: Vlastný súbor
-  add_folder: Vlastný priečinok
-  settings: Nastavenia
-  task_manager: Správca úloh
 app_menu:
   close: Zavrieť
-  run_as: Spustiť ako správca
   close_multiple: Zavrieť
-  open_file_location: Otvorte umiestnenie súboru
-  pin_to_center: Špendlík
-  pin_to_right: Špendlík
-  unpin: Zaniknúť
-  pin: Pin
   copy_handles: Kopírovanie rukovätí
-  pin_to_left: Špendlík doľava
-  kill_multiple: Zabi všetky procesy
   kill: Proces zabíjania
+  kill_multiple: Zabi všetky procesy
+  open_file_location: Otvorte umiestnenie súboru
+  pin: Pin
+  pin_to_center: Špendlík
+  pin_to_left: Špendlík doľava
+  pin_to_right: Špendlík
+  run_as: Spustiť ako správca
+  unpin: Zaniknúť
+media:
+  not_playing: Nič nehrá
 media_menu:
   remove: Odstráňte mediálny modul
 start_menu:
   remove: Odstráňte modul Štart
-media:
-  not_playing: Nič nehrá
+taskbar_menu:
+  add_file: Vlastný súbor
+  add_folder: Vlastný priečinok
+  media: Pridať mediálny modul
+  settings: Nastavenia
+  start: Pridať štartový modul
+  task_manager: Správca úloh

@@ -1,46 +1,46 @@
-media:
-  device:
-    multimedia: बहुतायत
-    comunications: संचार
-  master_volume: मूल संस्करण
-  output_device: आउटपुट डिवाइस
-  players: मीडिया -खिलाड़ी
-  input_device: इनपुट डिवाइस
-network:
-  placeholder:
-    password: पासवर्ड
-  not_found: कोई नेटवर्क नहीं मिला
-  more: अधिक नेटवर्क सेटिंग्स
-  hidden: छिपा हुआ नेटवर्क
-  disconnect: डिस्कनेक्ट
-  connect: जोड़ना
-  connected: से जुड़ा
-  secured: एन्क्रिप्टेड नेटवर्क
-  saved: सहेजे गए नेटवर्क
-  scanning: नेटवर्क के लिए स्कैनिंग
-  available: उपलब्ध नेटवर्क
-settings:
-  restart: पुनः आरंभ करें
-  sleep: नींद
-  shutdown: शट डाउन
-  title: समायोजन
-  log_out: लॉग आउट
-  app_settings: एप्लिकेशन सेटिंग
-  power: शक्ति
-placeholder:
-  smart_charge: '- स्मार्ट चार्ज'
-  battery_remaining: '% शेष'
-  open_user_folder: उपयोगकर्ता फ़ोल्डर खोलें
-  bluetooth_devices: ब्लूटूथ और डिवाइस
-  ethernet_connected: इंटरनेट का उपयोग
-  ethernet_disconnected: इंटरनेट की सुविधा नहीं है
-  settings: त्वरित सेटिंग
-  volume: आयतन
-  open_system_tray: खुला तंत्र ट्रे
-  notifications: अधिसूचना
-unlabelled_tray: अनबेल्ड ट्रे आइकन
 context_menu:
   add_module: मॉड्यूल जोड़ें
   remove: मॉड्यूल निकालें
-  task_manager: कार्य प्रबंधक
   settings: सेटिंग्स
+  task_manager: कार्य प्रबंधक
+media:
+  device:
+    comunications: संचार
+    multimedia: बहुतायत
+  input_device: इनपुट डिवाइस
+  master_volume: मूल संस्करण
+  output_device: आउटपुट डिवाइस
+  players: मीडिया -खिलाड़ी
+network:
+  available: उपलब्ध नेटवर्क
+  connect: जोड़ना
+  connected: से जुड़ा
+  disconnect: डिस्कनेक्ट
+  hidden: छिपा हुआ नेटवर्क
+  more: अधिक नेटवर्क सेटिंग्स
+  not_found: कोई नेटवर्क नहीं मिला
+  placeholder:
+    password: पासवर्ड
+  saved: सहेजे गए नेटवर्क
+  scanning: नेटवर्क के लिए स्कैनिंग
+  secured: एन्क्रिप्टेड नेटवर्क
+placeholder:
+  battery_remaining: '% शेष'
+  bluetooth_devices: ब्लूटूथ और डिवाइस
+  ethernet_connected: इंटरनेट का उपयोग
+  ethernet_disconnected: इंटरनेट की सुविधा नहीं है
+  notifications: अधिसूचना
+  open_system_tray: खुला तंत्र ट्रे
+  open_user_folder: उपयोगकर्ता फ़ोल्डर खोलें
+  settings: त्वरित सेटिंग
+  smart_charge: '- स्मार्ट चार्ज'
+  volume: आयतन
+settings:
+  app_settings: एप्लिकेशन सेटिंग
+  log_out: लॉग आउट
+  power: शक्ति
+  restart: पुनः आरंभ करें
+  shutdown: शट डाउन
+  sleep: नींद
+  title: समायोजन
+unlabelled_tray: अनबेल्ड ट्रे आइकन

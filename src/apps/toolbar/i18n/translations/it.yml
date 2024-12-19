@@ -1,46 +1,46 @@
 context_menu:
-  remove: Rimuovi Modulo
   add_module: Aggiungi Modulo
-  task_manager: Gestione Attività
+  remove: Rimuovi Modulo
   settings: Impostazioni
+  task_manager: Gestione Attività
 media:
+  device:
+    comunications: Comunicazioni
+    multimedia: Multimediale
+  input_device: Dispositivo di ingresso
   master_volume: Volume Generale
   output_device: Dispositivo di uscita
-  input_device: Dispositivo di ingresso
   players: Lettori Multimediali
-  device:
-    multimedia: Multimediale
-    comunications: Comunicazioni
 network:
-  connected: Connesso a
-  saved: Reti salvate
   available: Reti disponibili
-  not_found: Nessuna rete Wi-Fi trovata
-  secured: Rete criptata
-  scanning: Scansione delle reti
-  more: Altre Impostazioni di Rete
+  connect: Connetti
+  connected: Connesso a
+  disconnect: Disconnetti
   hidden: Rete Nascosta
+  more: Altre Impostazioni di Rete
+  not_found: Nessuna rete Wi-Fi trovata
   placeholder:
     password: Password
-  disconnect: Disconnetti
-  connect: Connetti
-settings:
-  title: Impostazioni
-  app_settings: Impostazioni App
-  log_out: Esci
-  sleep: Sospendi
-  restart: Riavvia
-  shutdown: Spegni
-  power: Alimentazione
+  saved: Reti salvate
+  scanning: Scansione delle reti
+  secured: Rete criptata
 placeholder:
-  open_user_folder: Apri Cartella Utente
-  open_system_tray: Apri System Tray
+  battery_remaining: '% rimanente'
   bluetooth_devices: Bluetooth & Dispositivi
   ethernet_connected: Accesso a Internet
   ethernet_disconnected: Nessun accesso a Internet
-  volume: Volume
-  battery_remaining: '% rimanente'
-  smart_charge: ' - Carica Intelligente'
-  settings: Impostazioni Rapide
   notifications: Notifiche
+  open_system_tray: Apri System Tray
+  open_user_folder: Apri Cartella Utente
+  settings: Impostazioni Rapide
+  smart_charge: ' - Carica Intelligente'
+  volume: Volume
+settings:
+  app_settings: Impostazioni App
+  log_out: Esci
+  power: Alimentazione
+  restart: Riavvia
+  shutdown: Spegni
+  sleep: Sospendi
+  title: Impostazioni
 unlabelled_tray: Icona di Tray senza etichetta

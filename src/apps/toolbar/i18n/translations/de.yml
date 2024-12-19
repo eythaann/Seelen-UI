@@ -1,46 +1,46 @@
+context_menu:
+  add_module: Modul hinzufügen
+  remove: Modul entfernen
+  settings: Einstellungen
+  task_manager: Task-Manager
 media:
+  device:
+    comunications: Kommunikation
+    multimedia: Multimedia
+  input_device: Eingabegerät
   master_volume: Hauptlautstärke
   output_device: Ausgabegerät
-  input_device: Eingabegerät
   players: Medienplayer
-  device:
-    multimedia: Multimedia
-    comunications: Kommunikation
 network:
-  not_found: Keine Netzwerke gefunden
-  more: Weitere Netzwerkeinstellungen
-  hidden: Verstecktes Netzwerk
-  placeholder:
-    password: Passwort
-  disconnect: Trennen
+  available: Verfügbare Netzwerke
   connect: Verbinden
   connected: Verbunden mit
+  disconnect: Trennen
+  hidden: Verstecktes Netzwerk
+  more: Weitere Netzwerkeinstellungen
+  not_found: Keine Netzwerke gefunden
+  placeholder:
+    password: Passwort
   saved: Gespeicherte Netzwerke
-  secured: Verschlüsseltes Netzwerk
-  available: Verfügbare Netzwerke
   scanning: Nach Netzwerken suchen
-settings:
-  title: Einstellungen
-  app_settings: App-Einstellungen
-  log_out: Abmelden
-  sleep: Ruhezustand
-  restart: Neustarten
-  shutdown: Herunterfahren
-  power: Leistung
+  secured: Verschlüsseltes Netzwerk
 placeholder:
-  open_user_folder: Benutzerordner öffnen
-  open_system_tray: Systemleiste öffnen
+  battery_remaining: '% verbleibend'
   bluetooth_devices: Bluetooth & Geräte
   ethernet_connected: Internetzugang
   ethernet_disconnected: Kein Internetzugang
-  volume: Lautstärke
-  battery_remaining: '% verbleibend'
-  smart_charge: ' - Intelligentes Laden'
-  settings: Schnelleinstellungen
   notifications: Benachrichtigungen
+  open_system_tray: Systemleiste öffnen
+  open_user_folder: Benutzerordner öffnen
+  settings: Schnelleinstellungen
+  smart_charge: ' - Intelligentes Laden'
+  volume: Lautstärke
+settings:
+  app_settings: App-Einstellungen
+  log_out: Abmelden
+  power: Leistung
+  restart: Neustarten
+  shutdown: Herunterfahren
+  sleep: Ruhezustand
+  title: Einstellungen
 unlabelled_tray: Entlebte Tablettikone
-context_menu:
-  remove: Modul entfernen
-  add_module: Modul hinzufügen
-  settings: Einstellungen
-  task_manager: Task-Manager

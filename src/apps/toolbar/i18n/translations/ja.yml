@@ -1,46 +1,46 @@
+context_menu:
+  add_module: モジュールを追加します
+  remove: モジュールを削除します
+  settings: 設定
+  task_manager: タスクマネージャー
 media:
   device:
     comunications: コミュニケーション
     multimedia: マルチメディア
-  output_device: 出力デバイス
-  master_volume: ボリューム
   input_device: 入力デバイス
+  master_volume: ボリューム
+  output_device: 出力デバイス
   players: メディアプレーヤー
 network:
-  placeholder:
-    password: パスワード
+  available: 利用可能なネットワーク
   connect: 接続
-  not_found: ネットワークが見つかりません
+  connected: に接続されています
+  disconnect: 切断
   hidden: 隠れたネットワーク
   more: 詳しい設定
-  disconnect: 切断
-  connected: に接続されています
-  scanning: ネットワークのスキャン
+  not_found: ネットワークが見つかりません
+  placeholder:
+    password: パスワード
   saved: 保存されたネットワーク
+  scanning: ネットワークのスキャン
   secured: 暗号化されたネットワーク
-  available: 利用可能なネットワーク
+placeholder:
+  battery_remaining: ％ 残り
+  bluetooth_devices: Bluetoothとデバイス
+  ethernet_connected: インターネットアクセス
+  ethernet_disconnected: インターネットアクセスなし
+  notifications: 通知
+  open_system_tray: システムトレイを開く
+  open_user_folder: ユーザーフォルダーを開く
+  settings: SeelenUIの設定
+  smart_charge: '- スマートチャージ'
+  volume: 音量
 settings:
-  restart: 再起動
-  log_out: ログアウト
   app_settings: SeelenUIの設定
+  log_out: ログアウト
+  power: 電源
+  restart: 再起動
   shutdown: シャットダウン
   sleep: スリープ
   title: 設定
-  power: 電源
-placeholder:
-  battery_remaining: ％ 残り
-  settings: SeelenUIの設定
-  open_system_tray: システムトレイを開く
-  volume: 音量
-  ethernet_connected: インターネットアクセス
-  bluetooth_devices: Bluetoothとデバイス
-  smart_charge: '- スマートチャージ'
-  open_user_folder: ユーザーフォルダーを開く
-  ethernet_disconnected: インターネットアクセスなし
-  notifications: 通知
 unlabelled_tray: ラベル無し
-context_menu:
-  remove: モジュールを削除します
-  add_module: モジュールを追加します
-  settings: 設定
-  task_manager: タスクマネージャー
