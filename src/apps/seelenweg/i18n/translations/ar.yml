@@ -1,26 +1,24 @@
 taskbar_menu:
-  media: إضافة وحدة الوسائط
-  start: إضافة وحدة البداية
-  add_file: PIN ملف مخصص
-  add_folder: المجلد المخصص دبوس
-  settings: إعدادات
+  media: أضف وحدة الوسائط
+  start: أضف وحدة البداية
+  add_file: ثبت الملف
+  add_folder: ثبت المجلد
+  settings: الأعدادات
   task_manager: مدير المهام
 app_menu:
   unpin: إزالة التثبيت
-  pin: دبوس
-  pin_to_left: دبوس إلى اليسار
-  pin_to_center: تثبيت على المركز
-  pin_to_right: تثبيت على اليمين
-  open_file_location: افتح مكان ملف
+  pin: ثبت الملف
+  pin_to_left: ثبت الملف على اليسار
+  pin_to_center: ثبت الملف في الوسط
+  pin_to_right: ثبت الملف على اليمين
+  open_file_location: افتح مكان الملف
   run_as: تشغيل كمسؤول
-  copy_handles: مقابض النسخ
-  close: يغلق
-  close_multiple: إغلاق الكل
-  kill_multiple: قتل كافة العمليات
-  kill: عملية القتل
+  copy_handles: انسخ الرمز
+  close: اغلق
+  close_multiple: اغلق الكل
 media_menu:
-  remove: إزالة وحدة الوسائط
+  remove: حذف وحدة الوسائط
 start_menu:
-  remove: إزالة وحدة البداية
+  remove: حذف وحدة البداية
 media:
-  not_playing: لا شيء يلعب
+  not_playing: لا توجد ملفات
