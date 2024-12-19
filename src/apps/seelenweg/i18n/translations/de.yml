@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Handles kopieren
   close: Schließen
   close_multiple: Alle schließen
+  kill: Prozess beenden
+  kill_multiple: Beenden Sie alle Prozesse
 media_menu:
   remove: Medienmodul entfernen
 start_menu:

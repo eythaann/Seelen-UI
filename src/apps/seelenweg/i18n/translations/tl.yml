@@ -16,6 +16,8 @@ app_menu:
   unpin: Unpin
   open_file_location: Buksan ang lokasyon ng file
   copy_handles: Kopyahin ang mga hawakan
+  kill: Proseso ng Patayin
+  kill_multiple: Patayin ang Lahat ng Proseso
 media_menu:
   remove: Alisin ang module ng media
 start_menu:

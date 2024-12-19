@@ -16,6 +16,8 @@ app_menu:
   pin_to_center: سینٹر سے پن
   open_file_location: فائل کا مقام کھولیں
   copy_handles: کاپی ہینڈلز
+  kill: عمل کو مار ڈالو
+  kill_multiple: تمام عمل کو مار ڈالو
 media_menu:
   remove: میڈیا ماڈیول کو ہٹا دیں
 start_menu:

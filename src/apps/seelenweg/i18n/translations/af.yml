@@ -16,6 +16,8 @@ app_menu:
   open_file_location: Oop lêlokasie
   copy_handles: Kopiehandvatsels
   unpin: Unpin
+  kill: Doodproses
+  kill_multiple: Maak alle prosesse dood
 media_menu:
   remove: Verwyder die media -module
 start_menu:

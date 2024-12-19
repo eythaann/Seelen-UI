@@ -15,7 +15,9 @@ app_menu:
   run_as: Run as Administrator
   copy_handles: Copy Handles
   close: Close
+  kill: Kill Process
   close_multiple: Close All
+  kill_multiple: Kill All Processes
 media:
   not_playing: Nothing is playing
 media_menu:

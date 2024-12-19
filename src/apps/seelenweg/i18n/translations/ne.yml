@@ -16,6 +16,8 @@ app_menu:
   unpin: चुस्नु
   pin_to_right: दायाँ राख्न पिन
   close: घनिष्ट
+  kill: प्रक्रिया मार्नुहोस्
+  kill_multiple: सबै प्रक्रियाहरू मार्नुहोस्
 media_menu:
   remove: मिडिया मोड्युल हटाउनुहोस्
 start_menu:

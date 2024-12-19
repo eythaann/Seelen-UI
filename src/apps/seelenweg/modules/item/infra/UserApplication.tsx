@@ -38,6 +38,8 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   const [openPreview, setOpenPreview] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
+
+  const devTools = useSelector(Selectors.devTools);
   const settings = useSelector(Selectors.settings);
 
   const { t } = useTranslation();
@@ -89,7 +91,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
 
   return (
     <DraggableItem item={item} className={cx({ 'associated-view-open': openPreview || openContextMenu })}>
-      <WithContextMenu items={getMenuForItem(t, item) || []} onOpenChange={(isOpen) => {
+      <WithContextMenu items={getMenuForItem(t, item, devTools) || []} onOpenChange={(isOpen) => {
         setOpenContextMenu(isOpen);
         if (openPreview && isOpen) {
           setOpenPreview(false);

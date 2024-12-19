@@ -16,6 +16,8 @@ app_menu:
   pin_to_center: Pin za centar
   pin_to_right: Pin na desno
   pin: Pin
+  kill_multiple: Ubijte sve procese
+  kill: Kill Process
 media_menu:
   remove: Uklonite medijski modul
 start_menu:

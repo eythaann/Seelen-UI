@@ -16,6 +16,8 @@ app_menu:
   unpin: Անապաղում
   close_multiple: Փակել բոլորը
   run_as: Գործարկել որպես ադմինիստրատոր
+  kill: Սպանության գործընթաց
+  kill_multiple: Սպանել բոլոր գործընթացները
 media_menu:
   remove: Հեռացրեք մեդիա մոդուլը
 start_menu:

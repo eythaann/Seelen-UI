@@ -16,6 +16,8 @@ app_menu:
   copy_handles: 핸들 복사
   close: 닫기
   close_multiple: 모두 닫기
+  kill_multiple: 모든 프로세스 종료
+  kill: 프로세스 종료
 media_menu:
   remove: 미디어 모듈 제거
 start_menu:

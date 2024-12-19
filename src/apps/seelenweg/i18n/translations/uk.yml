@@ -16,6 +16,8 @@ app_menu:
   unpin: Розмивати
   pin: Шпилька
   pin_to_left: Шпилька зліва
+  kill: Процес знищення
+  kill_multiple: Закрити всі процеси
 media_menu:
   remove: Видалити медіа -модуль
 start_menu:

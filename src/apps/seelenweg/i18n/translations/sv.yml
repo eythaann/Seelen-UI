@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: Nöja sig till höger
   unpin: Lutande
   pin_to_left: Stämma till vänster
+  kill: Kill Process
+  kill_multiple: Döda alla processer
 media_menu:
   remove: Ta bort mediemodulen
 start_menu:

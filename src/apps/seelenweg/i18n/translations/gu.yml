@@ -16,6 +16,8 @@ app_menu:
   unpin: ખોળવું
   open_file_location: ફાઇલ સ્થાન ખોલો
   pin: પિન
+  kill: કીલ પ્રોસેસ
+  kill_multiple: બધી પ્રક્રિયાઓને મારી નાખો
 media_menu:
   remove: મીડિયા મોડ્યુલ દૂર કરો
 start_menu:

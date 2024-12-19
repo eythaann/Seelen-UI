@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Копировать дескрипторы
   close: Закрыть
   close_multiple: Закрыть все
+  kill: Убить процесс
+  kill_multiple: Убить все процессы
 media_menu:
   remove: Удалить модуль медиа
 start_menu:

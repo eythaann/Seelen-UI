@@ -16,6 +16,8 @@ app_menu:
   unpin: Ватанӣ
   close: Наздик
   open_file_location: Кушодани макони кушод
+  kill: Раванди куштан
+  kill_multiple: Ҳама равандҳоро кушед
 media_menu:
   remove: Модули ВАО-ро хориҷ кунед
 start_menu:

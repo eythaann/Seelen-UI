@@ -188,6 +188,7 @@ async function loadSettingsToStore() {
   i18n.changeLanguage(userSettings.jsonSettings.language || undefined);
   const settings = userSettings.jsonSettings.seelenweg;
   store.dispatch(RootActions.setSettings(settings));
+  store.dispatch(RootActions.setDevTools(userSettings.jsonSettings.devTools));
   loadSettingsCSS(settings);
 }
 

@@ -16,6 +16,8 @@ app_menu:
   pin: முள்
   open_file_location: கோப்பு இருப்பிடத்தைத் திறக்கவும்
   unpin: Unpin
+  kill: கொலை செயல்முறை
+  kill_multiple: அனைத்து செயல்முறைகளையும் கொல்லுங்கள்
 media_menu:
   remove: மீடியா தொகுதியை அகற்று
 start_menu:

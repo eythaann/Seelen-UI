@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: Pin doprava
   unpin: Unlin
   pin_to_left: Pin doleva
+  kill: Zabít proces
+  kill_multiple: Zabijte všechny procesy
 media_menu:
   remove: Odebrat mediální modul
 start_menu:

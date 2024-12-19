@@ -16,6 +16,8 @@ app_menu:
   unpin: Unpin
   pin: Ac
   pin_to_left: Pin la stânga
+  kill_multiple: Omoara toate procesele
+  kill: Procesul de ucidere
 media_menu:
   remove: Eliminați modulul media
 start_menu:

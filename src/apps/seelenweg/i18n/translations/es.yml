@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Copiar identificadores
   close: Cerrar
   close_multiple: Cerrar todo
+  kill: Proceso de matar
+  kill_multiple: Matar todos los procesos
 media_menu:
   remove: Eliminar módulo de medios
 start_menu:

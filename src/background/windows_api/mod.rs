@@ -171,11 +171,11 @@ impl WindowsApi {
         Ok(dpi_x as f32 / 96_f32)
     }
 
+    /// Behaviour is undefined if an invalid HWND is given
+    /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid
     pub fn window_thread_process_id(hwnd: HWND) -> (u32, u32) {
         let mut process_id: u32 = 0;
 
-        // Behaviour is undefined if an invalid HWND is given
-        // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid
         let thread_id = unsafe {
             GetWindowThreadProcessId(hwnd, Option::from(std::ptr::addr_of_mut!(process_id)))
         };

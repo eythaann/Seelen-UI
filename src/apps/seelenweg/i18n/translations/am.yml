@@ -16,6 +16,8 @@ app_menu:
   run_as: እንደ አስተዳዳሪ ይሮጡ
   copy_handles: መያዣዎች
   unpin: እየቀነሰ ይሄዳል
+  kill: የመግደል ሂደት
+  kill_multiple: ሁሉንም ሂደቶች ይገድሉ
 media_menu:
   remove: የሚዲያ ሞዱል ያስወግዱ
 start_menu:

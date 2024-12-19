@@ -16,6 +16,8 @@ app_menu:
   open_file_location: Otvorena lokacija datoteke
   unpin: Raskoš
   close_multiple: Zatvori sve
+  kill_multiple: Ubij sve procese
+  kill: Kill Process
 media_menu:
   remove: Uklonite medijski modul
 start_menu:

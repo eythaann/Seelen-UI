@@ -16,6 +16,8 @@ app_menu:
   pin_to_center: Pin in het midden
   copy_handles: Kopieer handgrepen
   unpin: Losmaken
+  kill: Dood proces
+  kill_multiple: Dood alle processen
 media_menu:
   remove: Verwijder de mediamodule
 start_menu:

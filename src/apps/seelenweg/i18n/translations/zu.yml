@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Kopisha izibambo
   unpin: Unpin
   pin: Isipeletu
+  kill: Kill Process
+  kill_multiple: Bulala Zonke Izinqubo
 media_menu:
   remove: Susa imodyuli yabezindaba
 start_menu:

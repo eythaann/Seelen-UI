@@ -16,6 +16,8 @@ app_menu:
   unpin: Unpin
   pin_to_right: Pini kulia
   pin_to_center: Pini katikati
+  kill: Mchakato wa kuua
+  kill_multiple: Kuua Taratibu Zote
 media_menu:
   remove: Ondoa moduli ya media
 start_menu:

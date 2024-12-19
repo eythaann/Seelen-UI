@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: ម្ជុលទៅស្តាំ
   close: បិត
   open_file_location: បើកទីតាំងឯកសារ
+  kill: ដំណើរការសម្លាប់
+  kill_multiple: សម្លាប់ដំណើរការទាំងអស់។
 media_menu:
   remove: យកម៉ូឌុលមេឌៀចេញ
 start_menu:

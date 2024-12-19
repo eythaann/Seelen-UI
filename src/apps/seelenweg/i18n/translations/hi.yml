@@ -16,6 +16,8 @@ app_menu:
   copy_handles: कॉपी हैंडल
   unpin: अनपिन
   pin: नत्थी करना
+  kill_multiple: सभी प्रक्रियाओं को ख़त्म करें
+  kill: मारने की प्रक्रिया
 media_menu:
   remove: मीडिया मॉड्यूल निकालें
 start_menu:

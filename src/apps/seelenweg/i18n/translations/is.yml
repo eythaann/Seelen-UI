@@ -16,6 +16,8 @@ app_menu:
   open_file_location: Opnaðu staðsetningu skráar
   pin: PIN
   pin_to_right: Pinna til hægri
+  kill_multiple: Drepa alla ferla
+  kill: Kill Process
 media_menu:
   remove: Fjarlægðu miðlunareininguna
 start_menu:

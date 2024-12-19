@@ -3,6 +3,7 @@ use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
 use image::ImageFormat;
 use seelen_core::state::{PinnedWegItemData, WegItem};
 use tauri::Emitter;
+use tauri_plugin_shell::ShellExt;
 
 use crate::{
     error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
@@ -59,6 +60,22 @@ pub fn weg_close_app(hwnd: isize) -> Result<()> {
         SeelenWeg::remove_hwnd(hwnd);
     } else {
         WindowsApi::post_message(hwnd, WM_CLOSE, 0, 0)?;
+    }
+    Ok(())
+}
+
+#[tauri::command(async)]
+pub fn weg_kill_app(hwnd: isize) -> Result<()> {
+    let hwnd = HWND(hwnd as _);
+    if !WindowsApi::is_window_visible(hwnd) {
+        SeelenWeg::remove_hwnd(hwnd);
+    } else {
+        let (pid, _) = WindowsApi::window_thread_process_id(hwnd);
+        get_app_handle()
+            .shell()
+            .command("taskkill.exe")
+            .args(["/F", "/PID", &pid.to_string()])
+            .spawn()?;
     }
     Ok(())
 }

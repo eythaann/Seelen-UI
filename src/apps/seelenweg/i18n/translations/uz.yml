@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Nusxalash vositasi
   pin: Pin
   pin_to_left: Chapga o'ting
+  kill_multiple: Barcha jarayonlarni o'ldiring
+  kill: O'ldirish jarayoni
 media_menu:
   remove: Media modulini olib tashlang
 start_menu:

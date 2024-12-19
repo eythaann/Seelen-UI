@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: Pin მარჯვნივ
   unpin: გაუქმება
   pin: ქინძისთავი
+  kill_multiple: მოკალი ყველა პროცესი
+  kill: მოკვლის პროცესი
 media_menu:
   remove: წაშალეთ მედია მოდული
 start_menu:

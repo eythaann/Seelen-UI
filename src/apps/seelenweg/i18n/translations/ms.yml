@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Salin pemegang
   pin_to_right: Pin ke kanan
   pin_to_left: Pin ke kiri
+  kill_multiple: Bunuh Semua Proses
+  kill: Proses Bunuh
 media_menu:
   remove: Keluarkan modul media
 start_menu:

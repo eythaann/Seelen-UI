@@ -16,6 +16,8 @@ app_menu:
   pin_to_left: Pin çepê
   copy_handles: Destên kopî bikin
   unpin: Unpin
+  kill: Pêvajoya Kuştinê
+  kill_multiple: Hemî Pêvajoyan Bikujin
 media_menu:
   remove: Modela medyayê rakin
 start_menu:

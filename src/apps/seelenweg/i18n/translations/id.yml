@@ -16,6 +16,8 @@ app_menu:
   close: Menutup
   unpin: Membuka peniti
   copy_handles: Pegangan Salin
+  kill: Bunuh Proses
+  kill_multiple: Matikan Semua Proses
 media_menu:
   remove: Hapus Modul Media
 start_menu:

@@ -16,6 +16,8 @@ app_menu:
   open_file_location: Ṣii ipo faili ṣii
   pin_to_right: Pin si ọtun
   pin: Pini
+  kill_multiple: Pa Gbogbo awọn ilana
+  kill: Ilana pipa
 media_menu:
   remove: Mu Module Media kuro
 start_menu:

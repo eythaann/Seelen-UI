@@ -64,6 +64,7 @@ export type SwItem =
   | StartMenuWegItem;
 
 export interface RootState extends IRootState<SeelenWegSettings> {
+  devTools: boolean;
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
   itemsOnRight: SwItem[];

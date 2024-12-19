@@ -93,6 +93,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
 export function getMenuForItem(
   t: TFunction,
   item: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
+  devTools: boolean,
 ): ItemType[] {
   const isPinned = isPinnedApp(item);
 
@@ -178,29 +179,45 @@ export function getMenuForItem(
     },
   );
 
-  if (item.opens.length) {
-    menu.push(
-      {
-        key: 'weg_copy_hwnd',
-        label: t('app_menu.copy_handles'),
-        icon: <Icon iconName="AiOutlineCopy" />,
-        onClick: () =>
-          navigator.clipboard.writeText(
-            JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16))),
-          ),
+  if (!item.opens.length) {
+    return menu;
+  }
+
+  if (devTools) {
+    menu.push({
+      key: 'weg_copy_hwnd',
+      label: t('app_menu.copy_handles'),
+      icon: <Icon iconName="AiOutlineCopy" />,
+      onClick: () =>
+        navigator.clipboard.writeText(JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16)))),
+    });
+  }
+
+  menu.push({
+    key: 'weg_close_app',
+    label: item.opens.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
+    icon: <Icon iconName="BiWindowClose" />,
+    onClick() {
+      item.opens.forEach((hwnd) => {
+        invoke(SeelenCommand.WegCloseApp, { hwnd });
+      });
+    },
+    danger: true,
+  });
+
+  if (devTools) {
+    menu.push({
+      key: 'weg_kill_app',
+      label: item.opens.length > 1 ? t('app_menu.kill_multiple') : t('app_menu.kill'),
+      icon: <Icon iconName="MdOutlineDangerous" size={18} />,
+      onClick() {
+        item.opens.forEach((hwnd) => {
+          // todo replace by enum
+          invoke(SeelenCommand.WegKillApp, { hwnd });
+        });
       },
-      {
-        key: 'weg_close_app',
-        label: item.opens.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
-        icon: <Icon iconName="BiWindowClose" />,
-        onClick() {
-          item.opens.forEach((hwnd) => {
-            invoke(SeelenCommand.WegCloseApp, { hwnd });
-          });
-        },
-        danger: true,
-      },
-    );
+      danger: true,
+    });
   }
 
   return menu;

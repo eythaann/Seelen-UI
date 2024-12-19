@@ -16,6 +16,8 @@ app_menu:
   unpin: Net unsträichen
   pin: Pin
   pin_to_right: PIN op riets
+  kill: Kill Prozess
+  kill_multiple: Kill All Prozesser
 media_menu:
   remove: Ewechzehuelen Media Modul
 start_menu:

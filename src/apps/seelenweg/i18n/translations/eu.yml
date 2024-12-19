@@ -16,6 +16,8 @@ app_menu:
   run_as: Exekutatu administratzaile gisa
   open_file_location: Ireki fitxategiaren kokapena
   pin_to_right: PIN eskuin
+  kill_multiple: Kill Prozesu guztiak
+  kill: Hiltzeko prozesua
 media_menu:
   remove: Kendu multimedia modulua
 start_menu:
