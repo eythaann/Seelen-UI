@@ -56,7 +56,7 @@ lazy_static = "1.4.0"
 parking_lot = "0.12.1"
 log = "0.4"
 uuid = "1.8.0"
-image = { version = "0.25.1", features = ["ico"] }
+image = { version = "0.25.5", features = ["ico"] }
 widestring = "1.0.2"
 itertools = "0.12.1"
 clap = { version = "4.5.4", features = ["derive", "string"] }
