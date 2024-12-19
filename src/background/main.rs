@@ -55,7 +55,7 @@ use windows_api::WindowsApi;
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 
-fn register_panic_hook() -> Result<()> {
+fn register_panic_hook() {
     std::panic::set_hook(Box::new(move |info| {
         let cause = info
             .payload()
@@ -84,7 +84,6 @@ fn register_panic_hook() -> Result<()> {
             string_location
         );
     }));
-    Ok(())
 }
 
 fn print_initial_information() {
@@ -165,7 +164,7 @@ fn is_already_runnning() -> bool {
 }
 
 fn main() -> Result<()> {
-    register_panic_hook()?;
+    register_panic_hook();
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {

@@ -43,16 +43,12 @@ use crate::{
 };
 
 lazy_static! {
-    static ref HOOK_MANAGER: Arc<Mutex<HookManager>> = Arc::new(Mutex::new(HookManager::new()));
+    static ref HOOK_MANAGER_SKIPPER: Arc<Mutex<HookManagerSkipper>> = Arc::new(Mutex::new(HookManagerSkipper::default()));
     // Last active window omitting all the seelen overlays
     pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0 as _);
 }
 
 pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
-
-pub struct HookManager {
-    skip: HashMap<isize, Vec<WinEvent>>,
-}
 
 #[derive(Serialize, Clone)]
 pub struct FocusedApp {
@@ -62,50 +58,70 @@ pub struct FocusedApp {
     exe: Option<PathBuf>,
 }
 
-impl HookManager {
-    fn new() -> Self {
-        Self {
-            skip: HashMap::new(),
-        }
-    }
+#[derive(Debug)]
+pub struct HookManagerSkipperItem {
+    hwnd: isize,
+    event: WinEvent,
+    expiry: Instant,
+    skipped: bool,
+}
 
-    pub fn run_with_async<F, T>(f: F) -> JoinHandle<T>
-    where
-        F: FnOnce(&mut HookManager) -> T,
-        F: Send + 'static,
-        T: Send + 'static,
-    {
-        std::thread::spawn(move || f(&mut *trace_lock!(HOOK_MANAGER)))
-    }
+#[derive(Debug, Default)]
+pub struct HookManagerSkipper {
+    to_skip: Vec<HookManagerSkipperItem>,
+}
 
+impl HookManagerSkipper {
+    /// this function is intended to be called before ejecuting a actions that will
+    /// trigger some window event, so the skipper will be removed after 1 second
+    /// if no event is emitted in that interval
     pub fn skip(&mut self, event: WinEvent, hwnd: HWND) {
-        self.skip.entry(hwnd.0 as _).or_default().push(event)
+        self.to_skip.push(HookManagerSkipperItem {
+            hwnd: hwnd.0 as _,
+            event,
+            expiry: Instant::now() + Duration::from_millis(1000),
+            skipped: false,
+        });
     }
 
-    fn should_skip(&self, event: WinEvent, hwnd: HWND) -> bool {
+    fn cleanup(&mut self) {
+        self.to_skip
+            .retain(|s| !s.skipped && s.expiry > Instant::now());
+    }
+
+    fn should_skip(&mut self, event: WinEvent, hwnd: HWND) -> bool {
         // skip foreground on invisible windows
         if event == WinEvent::SystemForeground && !WindowsApi::is_window_visible(hwnd) {
             return true;
         }
-        if let Some(v) = self.skip.get(&(hwnd.0 as _)) {
-            return v.contains(&event);
+
+        let hwnd = hwnd.0 as isize;
+        if let Some(skipper) = self
+            .to_skip
+            .iter_mut()
+            .find(|s| s.hwnd == hwnd && s.event == event && !s.skipped && s.expiry > Instant::now())
+        {
+            skipper.skipped = true;
+            return true;
         }
         false
     }
+}
 
-    fn skip_done(&mut self, event: WinEvent, hwnd: HWND) {
+pub struct HookManager;
+impl HookManager {
+    pub fn run_with_async<F, T>(f: F) -> JoinHandle<T>
+    where
+        F: FnOnce(&mut HookManagerSkipper) -> T,
+        F: Send + 'static,
+        T: Send + 'static,
+    {
+        std::thread::spawn(move || f(&mut *trace_lock!(HOOK_MANAGER_SKIPPER)))
+    }
+
+    fn log_skipped(event: WinEvent) {
         if LOG_WIN_EVENTS.load(Ordering::Relaxed) {
             log::debug!("Skipping WinEvent::{:?}", event);
-        }
-
-        let hwnd = hwnd.0 as isize;
-        if let Some(v) = self.skip.get_mut(&hwnd) {
-            if let Some(pos) = v.iter().position(|e| e == &event) {
-                v.remove(pos);
-            }
-            if v.is_empty() {
-                self.skip.remove(&hwnd);
-            }
         }
     }
 
@@ -135,12 +151,16 @@ impl HookManager {
         );
     }
 
-    fn _event(&mut self, event: WinEvent, origin: HWND, seelen: &mut Seelen) {
+    fn _event(event: WinEvent, origin: HWND) {
         Self::log_event(event, origin);
 
-        if self.should_skip(event, origin) {
-            self.skip_done(event, origin);
-            return;
+        {
+            let mut hook_manager = trace_lock!(HOOK_MANAGER_SKIPPER);
+            if hook_manager.should_skip(event, origin) {
+                Self::log_skipped(event);
+                hook_manager.cleanup();
+                return;
+            }
         }
 
         let window = Window::from(origin);
@@ -179,7 +199,7 @@ impl HookManager {
             log_error_event("Virtual Desk", vd.on_win_event(event, &window));
         }
 
-        let app_state = seelen.state();
+        let app_state = FULL_STATE.load();
         if app_state.is_weg_enabled() {
             std::thread::spawn(move || {
                 log_error_event(
@@ -198,16 +218,20 @@ impl HookManager {
             });
         }
 
-        if let Some(wall) = seelen.wall_mut() {
-            log_error_event("Wall Instance", wall.process_win_event(event, &window));
-        }
+        {
+            let mut seelen = trace_lock!(SEELEN);
+            if let Some(wall) = seelen.wall_mut() {
+                log_error_event("Wall Instance", wall.process_win_event(event, &window));
+            }
+        };
 
-        for monitor in seelen.instances_mut() {
-            if let Some(toolbar) = monitor.toolbar_mut() {
+        let mut seelen = trace_lock!(SEELEN);
+        for instance in seelen.instances_mut() {
+            if let Some(toolbar) = instance.toolbar_mut() {
                 log_error_event("Toolbar Instance", toolbar.process_win_event(event, origin));
             }
 
-            if let Some(weg) = monitor.weg_mut() {
+            if let Some(weg) = instance.weg_mut() {
                 log_error_event(
                     "Weg Instance",
                     weg.process_individual_win_event(event, origin),
@@ -217,14 +241,10 @@ impl HookManager {
     }
 
     pub fn emit_event(event: WinEvent, origin: HWND) {
-        // Follows lock order: CLI -> DATA -> EVENT to avoid deadlocks
-        let mut seelen = trace_lock!(SEELEN);
-        let mut hook_manager = trace_lock!(HOOK_MANAGER);
-        hook_manager._event(event, origin, &mut seelen);
-
+        HookManager::_event(event, origin);
         if let Ok(synthetics) = event.get_synthetics(origin) {
             for synthetic_event in synthetics {
-                hook_manager._event(synthetic_event, origin, &mut seelen)
+                HookManager::_event(synthetic_event, origin)
             }
         }
     }

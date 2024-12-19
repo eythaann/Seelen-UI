@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### fix
 - slu-service was being closed on exit code 1.
+- logging errors on monitor changes.
 
 ## [2.0.12]
 ### fix

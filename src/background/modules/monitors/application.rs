@@ -165,7 +165,9 @@ impl MonitorManager {
     fn get_monitors() -> Result<Vec<(String, HMONITOR)>> {
         let mut monitors = Vec::new();
         for m in MonitorEnumerator::get_all_v2()? {
-            monitors.push((m.device_id()?, m.handle()));
+            if let Ok(id) = m.device_id() {
+                monitors.push((id, m.handle()));
+            }
         }
         Ok(monitors)
     }
