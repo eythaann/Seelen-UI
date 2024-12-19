@@ -69,7 +69,7 @@ async function extractIconsIfNecessary() {
 
   let families = await Promise.all(promises);
   for (const family of families) {
-    for (const [name, ElementConstructor] of Object.entries(family.default)) {
+    for (const [name, ElementConstructor] of Object.entries(family)) {
       const element = ElementConstructor({ size: '1em' });
       const svg = renderToStaticMarkup(element);
       fs.writeFileSync(`./dist/icons/${name}.svg`, svg);
