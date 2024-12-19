@@ -37,7 +37,7 @@
     "@tauri-apps/plugin-updater": "^2.0.0-beta.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "^19.3.0",
+    "@commitlint/cli": "^19.6.1",
     "@commitlint/config-conventional": "^19.2.2",
     "@reduxjs/toolkit": "^2.2.1",
     "@seelen-ui/lib": "^0.1.3-next.20241218211803",
