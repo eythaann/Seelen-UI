@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### features
 - add kill process option on context menu for dock items.
+- multi-language calendar and date module on toolbar.
 
 ### fix
 - slu-service was being closed on exit code 1.

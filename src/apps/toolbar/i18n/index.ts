@@ -1,3 +1,4 @@
+import 'moment/min/locales';
 import i18n from 'i18next';
 import yaml from 'js-yaml';
 import { initReactI18next } from 'react-i18next';

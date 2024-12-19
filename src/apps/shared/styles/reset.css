@@ -163,3 +163,7 @@
     color: inherit !important;
   }
 }
+
+.ant-picker-cell {
+  padding: 0 !important;
+}

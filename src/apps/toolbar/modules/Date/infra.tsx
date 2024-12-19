@@ -1,6 +1,7 @@
 import { DateToolbarItem } from '@seelen-ui/lib/types';
 import moment from 'moment';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { Item } from '../item/infra/infra';
@@ -17,15 +18,17 @@ interface Props {
 export function DateModule({ module }: Props) {
   const dateFormat = useSelector(Selectors.dateFormat);
 
-  const [date, setDate] = useState(moment().format(dateFormat));
+  const { i18n } = useTranslation();
+
+  const [date, setDate] = useState(moment().locale(i18n.language).format(dateFormat));
 
   let interval = dateFormat.includes('ss') ? 1000 : 1000 * 60;
   useInterval(
     () => {
-      setDate(moment().format(dateFormat));
+      setDate(moment().locale(i18n.language).format(dateFormat));
     },
     interval,
-    [dateFormat],
+    [dateFormat, i18n.language],
   );
 
   return (
