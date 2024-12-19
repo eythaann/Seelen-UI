@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- slu-service was being closed on exit code 1.
+
 ## [2.0.12]
 ### fix
 - msix version crashing on start.

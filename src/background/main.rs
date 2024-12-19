@@ -133,15 +133,18 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
 
 fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
     match event {
-        tauri::RunEvent::ExitRequested { api, code, .. } => {
-            // prevent close background on webview windows closing
-            if code.is_none() {
-                api.prevent_exit();
+        tauri::RunEvent::ExitRequested { api, code, .. } => match code {
+            Some(code) => {
+                if code == 0 {
+                    // if exit code is 0 it means that the app was closed by the user
+                    log_error!(kill_slu_service());
+                }
             }
-        }
+            // prevent close background on webview windows closing
+            None => api.prevent_exit(),
+        },
         tauri::RunEvent::Exit => {
             log::info!("───────────────────── Exiting Seelen UI ─────────────────────");
-            log_error!(kill_slu_service());
             if Seelen::is_running() {
                 trace_lock!(SEELEN).stop();
             }
