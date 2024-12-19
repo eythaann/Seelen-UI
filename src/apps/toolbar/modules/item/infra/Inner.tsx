@@ -1,3 +1,4 @@
+import { ToolbarItem } from '@seelen-ui/lib/types';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
@@ -6,7 +7,6 @@ import { evaluate, isResultSet } from 'mathjs';
 import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { ToolbarModule } from 'seelen-core';
 
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
@@ -17,7 +17,7 @@ import { Icon } from '../../../../shared/components/Icon';
 import { cx } from '../../../../shared/styles';
 
 export interface InnerItemProps extends PropsWithChildren {
-  module: ToolbarModule;
+  module: Omit<ToolbarItem, 'type'>;
   extraVars?: Record<string, any>;
   active?: boolean;
   clickable?: boolean;

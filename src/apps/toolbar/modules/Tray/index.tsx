@@ -1,11 +1,11 @@
+import { SeelenCommand } from '@seelen-ui/lib';
+import { TrayToolbarItem } from '@seelen-ui/lib/types';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
-import { TrayTM } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra/infra';
@@ -19,7 +19,7 @@ import { TrayInfo } from '../shared/store/domain';
 import { OverflowTooltip } from '../../../shared/components/OverflowTooltip';
 
 interface Props {
-  module: TrayTM;
+  module: TrayToolbarItem;
 }
 
 function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number }) {

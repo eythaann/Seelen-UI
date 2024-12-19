@@ -1,9 +1,9 @@
+import { VirtualDesktopStrategy } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Alert, Button, ConfigProvider, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { VirtualDesktopStrategy } from 'seelen-core';
 
 import { BorderSettings } from '../../border/infra';
 

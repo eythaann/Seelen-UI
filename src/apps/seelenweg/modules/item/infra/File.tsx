@@ -1,7 +1,7 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';

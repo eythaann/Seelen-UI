@@ -1,7 +1,8 @@
 import { useSelector } from 'react-redux';
-import { WmFallbackNode } from 'seelen-core';
 
 import { Selectors } from '../../../shared/store/app';
+
+import { WmFallbackNode } from '../../domain';
 
 import { cx } from '../../../../../shared/styles';
 import { LeafContainer } from './leaf';

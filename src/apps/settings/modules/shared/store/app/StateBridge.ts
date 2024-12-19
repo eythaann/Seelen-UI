@@ -1,5 +1,5 @@
+import { Settings } from '@seelen-ui/lib/types';
 import { pick } from 'lodash';
-import { Settings } from 'seelen-core';
 
 import { RootState } from '../domain';
 

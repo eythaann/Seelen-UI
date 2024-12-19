@@ -1,5 +1,5 @@
+import { WegItemType } from '@seelen-ui/lib';
 import { convertFileSrc } from '@tauri-apps/api/core';
-import { SwItemType } from 'seelen-core';
 
 import { fs } from '../../../../settings/modules/shared/tauri/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
@@ -17,7 +17,7 @@ export class SwTemporalAppUtils {
 
   static fromBackground(item: AppFromBackground): ExtendedTemporalWegItem {
     return {
-      type: SwItemType.TemporalApp,
+      type: WegItemType.Temporal,
       icon: item.icon || '',
       path: item.exe,
       execution_command: item.execution_path,

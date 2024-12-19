@@ -1,9 +1,9 @@
+import { WegItemType } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { PinnedWegItem, SwItemType } from 'seelen-core';
 
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
-import { ExtendedPinnedWegItem } from '../../shared/store/domain';
+import { ExtendedPinnedWegItem, PinnedWegItem } from '../../shared/store/domain';
 
 export function isWindowsLink(item: PinnedWegItem): boolean {
   return item.path.toLowerCase().endsWith('.lnk');
@@ -18,7 +18,7 @@ export class SwPinnedAppUtils {
 
     return {
       ...item,
-      type: SwItemType.Pinned,
+      type: WegItemType.Pinned,
       icon: convertFileSrc(icon_path),
       title: '',
       opens: [],

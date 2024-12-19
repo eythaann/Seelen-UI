@@ -1,10 +1,11 @@
+import { HideMode } from '@seelen-ui/lib';
+import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
+import { Placeholder, Plugin, ToolbarItem } from '@seelen-ui/lib/types';
 import { Dropdown } from 'antd';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { HideMode, Plugin } from 'seelen-core';
-import { Placeholder, ToolbarModule, ToolbarModuleType } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { DateModule } from '../Date/infra';
@@ -26,20 +27,20 @@ import { WorkspacesModule } from '../Workspaces';
 import { MainContextMenu } from './ContextMenu';
 
 const modulesByType: Record<
-  ToolbarModuleType,
+  ToolbarItem['type'],
   JSXElementConstructor<{ module: any; value: any }>
 > = {
-  [ToolbarModuleType.Text]: Item,
-  [ToolbarModuleType.Generic]: GenericItem,
-  [ToolbarModuleType.Date]: DateModule,
-  [ToolbarModuleType.Power]: PowerModule,
-  [ToolbarModuleType.Settings]: SettingsModule,
-  [ToolbarModuleType.Workspaces]: WorkspacesModule,
-  [ToolbarModuleType.Tray]: TrayModule,
-  [ToolbarModuleType.Network]: NetworkModule,
-  [ToolbarModuleType.Media]: MediaModule,
-  [ToolbarModuleType.Device]: DeviceModule,
-  [ToolbarModuleType.Notifications]: NotificationsModule,
+  [ToolbarItemType.Text]: Item,
+  [ToolbarItemType.Generic]: GenericItem,
+  [ToolbarItemType.Date]: DateModule,
+  [ToolbarItemType.Power]: PowerModule,
+  [ToolbarItemType.Settings]: SettingsModule,
+  [ToolbarItemType.Workspaces]: WorkspacesModule,
+  [ToolbarItemType.Tray]: TrayModule,
+  [ToolbarItemType.Network]: NetworkModule,
+  [ToolbarItemType.Media]: MediaModule,
+  [ToolbarItemType.Device]: DeviceModule,
+  [ToolbarItemType.Notifications]: NotificationsModule,
 };
 
 interface Props {
@@ -50,11 +51,11 @@ const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
 // item can be a toolbar plugin id or a toolbar module
-function componentByModule(plugins: Plugin[], item: string | ToolbarModule) {
-  let module: ToolbarModule | undefined;
+function componentByModule(plugins: Plugin[], item: string | ToolbarItem) {
+  let module: ToolbarItem | undefined;
 
   if (typeof item === 'string') {
-    module = plugins.find((p) => p.id === item)?.plugin as ToolbarModule | undefined;
+    module = plugins.find((p) => p.id === item)?.plugin as ToolbarItem | undefined;
     if (!module) {
       return null;
     }
@@ -112,7 +113,7 @@ export function ToolBar({ structure }: Props) {
   }, [isOverlaped, hideMode]);
 
   const onReorderPinned = useCallback(
-    debounce((apps: (ToolbarModule | string)[]) => {
+    debounce((apps: (ToolbarItem | string)[]) => {
       let dividerStart = apps.indexOf(DividerStart);
       let dividerEnd = apps.indexOf(DividerEnd);
 
@@ -121,13 +122,13 @@ export function ToolBar({ structure }: Props) {
         return;
       }
 
-      let payload = apps.slice(0, dividerStart) as ToolbarModule[];
+      let payload = apps.slice(0, dividerStart) as ToolbarItem[];
       dispatch(RootActions.setItemsOnLeft(payload));
 
-      payload = apps.slice(dividerStart + 1, dividerEnd) as ToolbarModule[];
+      payload = apps.slice(dividerStart + 1, dividerEnd) as ToolbarItem[];
       dispatch(RootActions.setItemsOnCenter(payload));
 
-      payload = apps.slice(dividerEnd + 1) as ToolbarModule[];
+      payload = apps.slice(dividerEnd + 1) as ToolbarItem[];
       dispatch(RootActions.setItemsOnRight(payload));
 
       SavePlaceholderAsCustom()?.catch(console.error);

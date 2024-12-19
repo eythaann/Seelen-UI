@@ -1,7 +1,8 @@
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { MediaToolbarItem } from '@seelen-ui/lib/types';
 import { emit } from '@tauri-apps/api/event';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { invoke, MediaTM, SeelenCommand } from 'seelen-core';
 
 import { Item } from '../../item/infra/infra';
 
@@ -10,7 +11,7 @@ import { Selectors } from '../../shared/store/app';
 import { WithMediaControls } from './MediaControls';
 
 interface Props {
-  module: MediaTM;
+  module: MediaToolbarItem;
 }
 
 function MediaModuleItem({ module, ...rest }: Props) {

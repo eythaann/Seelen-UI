@@ -4,13 +4,14 @@ import { Button } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { MediaWegItem } from 'seelen-core';
 
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { calcLuminance } from '../../../../toolbar/modules/media/application';
 import { Selectors } from '../../shared/store/app';
 import { cx } from 'src/apps/shared/styles';
+
+import { MediaWegItem } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { WithContextMenu } from '../../../components/WithContextMenu';

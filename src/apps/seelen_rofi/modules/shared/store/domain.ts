@@ -1,4 +1,4 @@
-import { LauncherHistory, SeelenLauncherSettings } from 'seelen-core';
+import { SeelenLauncherSettings } from '@seelen-ui/lib/types';
 import { IRootState } from 'src/shared.interfaces';
 
 export interface StartMenuApp {
@@ -9,5 +9,5 @@ export interface StartMenuApp {
 
 export interface LauncherState extends IRootState<SeelenLauncherSettings> {
   apps: StartMenuApp[];
-  history: LauncherHistory;
+  history: { [key: string]: string[] };
 }

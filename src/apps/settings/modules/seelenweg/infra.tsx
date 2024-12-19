@@ -1,6 +1,6 @@
+import { HideMode, SeelenWegMode, SeelenWegSide } from '@seelen-ui/lib';
 import { Button, InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { HideMode, SeelenWegMode, SeelenWegSide } from 'seelen-core';
 
 import { useAppDispatch, useAppSelector } from '../shared/utils/infra';
 

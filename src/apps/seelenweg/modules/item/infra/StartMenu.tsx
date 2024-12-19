@@ -1,19 +1,21 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, StartWegItem } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 
 import { Selectors } from '../../shared/store/app';
+
+import { StartMenuWegItem } from '../../shared/store/domain';
 
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
 interface Props {
-  item: StartWegItem;
+  item: StartMenuWegItem;
 }
 
 const startMenuExes = ['SearchHost.exe', 'StartMenuExperienceHost.exe'];

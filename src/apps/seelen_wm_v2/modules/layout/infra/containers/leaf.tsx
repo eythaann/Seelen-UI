@@ -1,8 +1,8 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useCallback, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { Selectors } from '../../../shared/store/app';
 

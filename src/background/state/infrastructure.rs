@@ -1,7 +1,9 @@
 use std::path::PathBuf;
 
 use itertools::Itertools;
-use seelen_core::state::{Plugin, Profile, WegItems, Widget, WindowManagerLayout};
+use seelen_core::state::{
+    MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
+};
 
 use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
 
@@ -51,6 +53,16 @@ pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
     } else {
         Ok(FULL_STATE.load().settings().clone())
     }
+}
+
+#[tauri::command(async)]
+pub fn state_get_default_settings() -> Settings {
+    Settings::default()
+}
+
+#[tauri::command(async)]
+pub fn state_get_default_monitor_settings() -> MonitorConfiguration {
+    MonitorConfiguration::default()
 }
 
 #[tauri::command(async)]

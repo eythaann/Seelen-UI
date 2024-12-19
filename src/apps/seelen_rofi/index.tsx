@@ -1,7 +1,7 @@
+import { declareDocumentAsLayeredHitbox } from '@seelen-ui/lib';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
-import { declareDocumentAsLayeredHitbox } from 'seelen-core';
 
 import { initStore, store } from './modules/shared/store/infra';
 

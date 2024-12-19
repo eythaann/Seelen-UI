@@ -99,7 +99,7 @@ jobs:
 
       - name: Bundle MSIX
         if: matrix.platform == 'windows-latest'
-        run: npx ts-node scripts/bundle.msix.ts
+        run: npx tsx scripts/bundle.msix.ts
 
       - name: Upload artifacts
         id: artifact-upload-step

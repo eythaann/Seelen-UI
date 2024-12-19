@@ -1,6 +1,5 @@
+import { FancyToolbarSettings, Placeholder, Plugin, Settings } from '@seelen-ui/lib/types';
 import { SoftOpaque } from 'readable-types';
-import { FancyToolbarSettings, Settings } from 'seelen-core';
-import { Placeholder, Plugin } from 'seelen-core';
 
 import { WlanBssEntry } from '../../network/domain';
 

@@ -1,4 +1,5 @@
-import { WindowManagerSettings, WmNode } from 'seelen-core';
+
+import { WindowManagerSettings, WmNode } from '@seelen-ui/lib/types';
 
 import { Reservation } from '../../layout/domain';
 

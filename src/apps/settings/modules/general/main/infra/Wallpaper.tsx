@@ -1,8 +1,8 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { dialog } from '../../../shared/tauri/infra';
 

@@ -105,23 +105,16 @@ const copyPublicByEntry: esbuild.Plugin = {
   name: 'copy-public-by-entry',
   setup(build) {
     build.onStart(() => {
-      console.time('Build UI');
-      // remove old builds
-      appFolders.forEach((folder) => {
-        const filePath = path.join('dist', folder);
-        if (fs.existsSync(filePath)) {
-          fs.rmSync(filePath, { recursive: true, force: true });
-        }
-      });
+      console.time('build');
     });
     build.onEnd(() => {
       // copy public folder for each widget
       appFolders.forEach((folder) => {
         let source = `src/apps/${folder}/public`;
         let target = `dist/${folder}`;
-        fs.cpSync(source, target, { recursive: true });
+        fs.cpSync(source, target, { recursive: true, force: true });
       });
-      console.timeEnd('Build UI');
+      console.timeEnd('build');
     });
   },
 };
@@ -138,6 +131,14 @@ void (async function main() {
   const { isProd, serve } = await getArgs();
 
   await extractIconsIfNecessary();
+
+  console.info('Removing old artifacts');
+  appFolders.forEach((folder) => {
+    const filePath = path.join('dist', folder);
+    if (fs.existsSync(filePath)) {
+      fs.rmSync(filePath, { recursive: true, force: true });
+    }
+  });
 
   const ctx = await esbuild.context({
     entryPoints: entryPoints,
@@ -159,7 +160,7 @@ void (async function main() {
   });
 
   if (serve) {
-    await ctx.rebuild();
+    await ctx.watch();
     startDevServer();
   } else {
     await ctx.rebuild();

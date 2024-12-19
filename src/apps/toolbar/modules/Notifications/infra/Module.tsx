@@ -1,8 +1,8 @@
+import { NotificationsToolbarItem } from '@seelen-ui/lib/types';
 import { emit } from '@tauri-apps/api/event';
 import { Popover } from 'antd';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { NotificationsTM } from 'seelen-core';
 
 import { Item } from '../../item/infra/infra';
 
@@ -15,7 +15,7 @@ import { ArrivalPreview } from './ArrivalPreview';
 import { Notifications } from './Notifications';
 
 interface Props {
-  module: NotificationsTM;
+  module: NotificationsToolbarItem;
 }
 
 export function NotificationsModule({ module }: Props) {

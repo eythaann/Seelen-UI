@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { cloneDeep, pick } from 'lodash';
 import {
-  SeelenLauncherSettings,
-  SeelenWallSettings,
-  SeelenWegSettings,
   UIColors,
   UpdateChannel,
   VirtualDesktopStrategy,
-} from 'seelen-core';
+} from '@seelen-ui/lib';
+import { cloneDeep, pick } from 'lodash';
 
 import { AppsConfigSlice } from '../../../appsConfigurations/app/reducer';
 import { FancyToolbarSlice } from '../../../fancyToolbar/app';
@@ -21,15 +18,16 @@ import { RootState } from '../domain';
 import { StateBuilder } from '../../../../../shared/StateBuilder';
 import { Route } from '../../../../components/navigation/routes';
 import i18n from '../../../../i18n';
+import { defaultSettings } from './default';
 
 const initialState: RootState = {
   lastLoaded: null,
   autostart: null,
   route: Route.HOME,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
-  seelenweg: new SeelenWegSettings(),
-  wall: new SeelenWallSettings(),
-  launcher: new SeelenLauncherSettings(),
+  seelenweg: defaultSettings.inner.seelenweg,
+  wall: defaultSettings.inner.wall,
+  launcher: defaultSettings.inner.launcher,
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,
@@ -46,7 +44,7 @@ const initialState: RootState = {
   devTools: false,
   language: navigator.language.split('-')[0] || 'en',
   dateFormat: 'ddd D MMM, hh:mm A',
-  colors: UIColors.default(),
+  colors: UIColors.default().inner,
   wallpaper: null,
   virtualDesktopStrategy: VirtualDesktopStrategy.Native,
   updater: {
@@ -80,7 +78,7 @@ export const RootSlice = createSlice({
   reducers: {
     ...reducers,
     setState: (_state, action: PayloadAction<RootState>) => {
-      i18n.changeLanguage(action.payload.language);
+      i18n.changeLanguage(action.payload.language || undefined);
       return action.payload;
     },
     setDateFormat: toBeSaved(reducers.setDateFormat),
@@ -102,7 +100,7 @@ export const RootSlice = createSlice({
           ...cloneDeep(state.lastLoaded),
           ...toMaintain,
         };
-        i18n.changeLanguage(newState.language);
+        i18n.changeLanguage(newState.language || undefined);
         return newState;
       }
       return state;

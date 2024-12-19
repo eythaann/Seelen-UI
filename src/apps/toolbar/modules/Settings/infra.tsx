@@ -1,11 +1,11 @@
+import { SeelenCommand } from '@seelen-ui/lib';
+import { SettingsToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Popover, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
-import { SettingsToolbarModule } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundByLayers/infra';
 import { Item } from '../item/infra/infra';
@@ -19,7 +19,7 @@ import { RootState } from '../shared/store/domain';
 import { Icon } from '../../../shared/components/Icon';
 
 interface Props {
-  module: SettingsToolbarModule;
+  module: SettingsToolbarItem;
 }
 
 interface Brightness {

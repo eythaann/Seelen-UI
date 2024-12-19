@@ -1,11 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
+import { AppExtraFlag } from '@seelen-ui/lib';
+import { AppConfig, AppIdentifier } from '@seelen-ui/lib/types';
 import { ConfigProvider, Input, Modal, Select, Switch } from 'antd';
+import { cloneDeep } from 'lodash';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { AppConfiguration, AppExtraFlag, AppIdentifier } from 'seelen-core';
 
 import { ownSelector, RootSelectors } from '../../shared/store/app/selectors';
+import { defaultAppConfig } from '../app/default';
 
 import { RootState } from '../../shared/store/domain';
 import { AppConfigurationExtended, WegApplicationOptions, WmApplicationOptions } from '../domain';
@@ -24,8 +27,8 @@ interface Props {
 }
 
 const getAppSelector = (idx: number | undefined, isNew: boolean) =>
-  createSelector([ownSelector], (state: RootState) => {
-    return idx != null && !isNew ? state.appsConfigurations[idx]! : AppConfiguration.placeholder();
+  createSelector([ownSelector], (state: RootState): AppConfig => {
+    return idx != null && !isNew ? state.appsConfigurations[idx]! : cloneDeep(defaultAppConfig);
   });
 
 export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }: Props) => {
@@ -150,7 +153,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
 
         <SettingsGroup>
           <SettingsSubGroup label={t('apps_configurations.app.wm_options_label')}>
-            {Object.values(WmApplicationOptions).map((value, i) => (
+            {WmApplicationOptions.map((value, i) => (
               <SettingsOption key={i}>
                 <span>{t(`apps_configurations.app.options.${value}`)}</span>
                 <Switch
@@ -162,7 +165,7 @@ export const EditAppModal = ({ idx, onCancel, onSave, isNew, open, readonlyApp }
           </SettingsSubGroup>
 
           <SettingsSubGroup label={t('apps_configurations.app.weg_options_label')}>
-            {Object.values(WegApplicationOptions).map((value, i) => (
+            {WegApplicationOptions.map((value, i) => (
               <SettingsOption key={i}>
                 <span>{t(`apps_configurations.app.options.${value}`)}</span>
                 <Switch

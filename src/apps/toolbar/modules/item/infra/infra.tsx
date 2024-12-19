@@ -1,8 +1,8 @@
+import { GenericToolbarItem } from '@seelen-ui/lib/types';
 import { Dropdown, Menu } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { GenericToolbarModule } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
@@ -55,7 +55,7 @@ export function Item(props: InnerItemProps) {
   );
 }
 
-export function GenericItem({ module }: { module: GenericToolbarModule }) {
+export function GenericItem({ module }: { module: GenericToolbarItem }) {
   const window = useSelector(Selectors.focused) || {
     name: 'None',
     title: 'No Window Focused',

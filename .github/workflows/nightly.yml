@@ -105,7 +105,7 @@ jobs:
 
       - name: Bundle MSIX
         if: matrix.platform == 'windows-latest'
-        run: npx ts-node scripts/bundle.msix.ts
+        run: npx tsx scripts/bundle.msix.ts
 
       - name: Upload msix to release
         if: matrix.platform == 'windows-latest'

@@ -1,3 +1,4 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Checkbox, Tooltip } from 'antd';
@@ -5,7 +6,6 @@ import { motion } from 'framer-motion';
 import { KeyboardEventHandler, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { Selectors } from '../../shared/store/app';
 import { SaveHistory } from '../app';

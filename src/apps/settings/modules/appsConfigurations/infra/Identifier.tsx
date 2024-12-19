@@ -1,8 +1,11 @@
+import { AppIdentifierType, MatchingStrategy } from '@seelen-ui/lib';
+import { AppIdentifier } from '@seelen-ui/lib/types';
 import { Button, Input, Select, Switch } from 'antd';
+import { cloneDeep } from 'lodash';
 import { useTranslation } from 'react-i18next';
-import { AppIdentifier, AppIdentifierType, MatchingStrategy } from 'seelen-core';
 
 import { OptionsFromEnum } from '../../shared/utils/app';
+import { defaultAppConfig } from '../app/default';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { SettingsGroup, SettingsOption } from '../../../components/SettingsBox';
@@ -52,11 +55,11 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
   };
 
   const onAddAndItem = () => {
-    onChange({ ...identifier, and: [AppIdentifier.placeholder(), ...identifier.and] });
+    onChange({ ...identifier, and: [cloneDeep(defaultAppConfig.identifier), ...identifier.and] });
   };
 
   const onAddOrItem = () => {
-    onChange({ ...identifier, or: [AppIdentifier.placeholder(), ...identifier.or] });
+    onChange({ ...identifier, or: [cloneDeep(defaultAppConfig.identifier), ...identifier.or] });
   };
 
   return (

@@ -31,7 +31,7 @@ export function App() {
         });
       }
     },
-    (interval < 1 ? 1 : interval) * 1000,
+    Number((interval < 1 ? 1 : interval) * 1000),
     [randomize, backgrounds.length],
   );
 

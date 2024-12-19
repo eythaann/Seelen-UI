@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { WindowManagerSettings } from 'seelen-core';
 
+import { defaultSettings } from '../../shared/store/app/default';
 import { matcher, reducersFor, selectorsFor } from '../../shared/utils/app';
 import { BorderSlice } from '../border/app';
 
-let initialState = new WindowManagerSettings();
+let initialState = defaultSettings.inner.windowManager;
 
 export const SeelenManagerSlice = createSlice({
   name: 'windowManager',

@@ -1,8 +1,8 @@
-const stylistic = require('@stylistic/eslint-plugin');
-const simpleImportSort = require('eslint-plugin-simple-import-sort');
-const tsEslint = require('typescript-eslint');
+import stylistic from '@stylistic/eslint-plugin';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import { parser as _parser, plugin } from 'typescript-eslint';
 
-module.exports = [
+export default [
   {
     ignores: ['node_modules/', '.git/', 'dist/', 'target/', '.dist/'],
   },
@@ -11,10 +11,10 @@ module.exports = [
     plugins: {
       '@stylistic': stylistic,
       'simple-import-sort': simpleImportSort,
-      '@ts': tsEslint.plugin,
+      '@ts': plugin,
     },
     languageOptions: {
-      parser: tsEslint.parser,
+      parser: _parser,
     },
     rules: {
       'simple-import-sort/imports': [

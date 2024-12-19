@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SeelenWegSettings } from 'seelen-core';
+import { SeelenWegSettings } from '@seelen-ui/lib/types';
 
+import { defaultSettings } from '../shared/store/app/default';
 import { reducersFor, selectorsFor } from '../shared/utils/app';
 
-const initialState = new SeelenWegSettings();
+const initialState: SeelenWegSettings = defaultSettings.inner.seelenweg;
 
 export const SeelenWegSlice = createSlice({
   name: 'seelenweg',

@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { PluginList, SeelenEvent, UIColors } from '@seelen-ui/lib';
+import { FancyToolbarSettings } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
-import { PluginList, SeelenEvent, UIColors } from 'seelen-core';
-import { FancyToolbarSettings } from 'seelen-core';
 
 import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
@@ -38,7 +38,7 @@ export const store = configureStore({
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
-    store.dispatch(RootActions.setColors(colors));
+    store.dispatch(RootActions.setColors(colors.inner));
   }
   loadColors(await UIColors.getAsync());
   await UIColors.onChange(loadColors);
@@ -152,7 +152,7 @@ function setPlaceholder(userSettings: UserSettings) {
 export async function loadStore() {
   const userSettings = await new UserSettingsLoader().withPlaceholders().load();
   const settings = userSettings.jsonSettings.fancyToolbar;
-  i18n.changeLanguage(userSettings.jsonSettings.language);
+  i18n.changeLanguage(userSettings.jsonSettings.language || undefined);
 
   loadSettingsCSS(settings);
   store.dispatch(RootActions.setSettings(settings));

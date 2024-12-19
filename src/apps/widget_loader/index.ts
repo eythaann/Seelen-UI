@@ -1,5 +1,5 @@
+import { WidgetList } from '@seelen-ui/lib';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { WidgetList } from 'seelen-core';
 
 import { wrapConsole } from '../shared/ConsoleWrapper';
 

@@ -1,19 +1,13 @@
-import {
-  AppConfiguration,
-  Placeholder,
-  Settings,
-  Theme,
-  UIColors,
-  WindowManagerLayout,
-} from 'seelen-core';
+import { IUIColors } from '@seelen-ui/lib';
+import { AppConfig, Placeholder, Settings, Theme, WindowManagerLayout } from '@seelen-ui/lib/types';
 export interface IRootState<T> {
   settings: T;
-  colors: UIColors;
+  colors: IUIColors;
 }
 
 export interface UserSettings {
   jsonSettings: Settings;
-  yamlSettings: AppConfiguration[];
+  yamlSettings: AppConfig[];
   themes: Theme[];
   layouts: WindowManagerLayout[];
   placeholders: Placeholder[];

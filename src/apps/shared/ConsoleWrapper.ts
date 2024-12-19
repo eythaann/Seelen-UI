@@ -1,7 +1,12 @@
+import { disableWebviewShortcutsAndContextMenu, getCurrentWidget } from '@seelen-ui/lib';
 import * as Logger from '@tauri-apps/plugin-log';
-import { disableWebviewShortcutsAndContextMenu, getCurrentWidget } from 'seelen-core';
 
 export function wrapConsole() {
+  window.addEventListener('unhandledrejection', (event) => {
+    console.error(event.reason);
+    Logger.error(`Unhandled Rejection - ${event.reason}`);
+  });
+
   const WebConsole = {
     info: console.info,
     warn: console.warn,
@@ -23,10 +28,6 @@ export function wrapConsole() {
       }, '')
     );
   };
-
-  window.addEventListener('unhandledrejection', (event) => {
-    console.error(`Unhandled Rejection - ${event.reason}`);
-  });
 
   console.error = (...params: any[]) => {
     WebConsole.error(...params);

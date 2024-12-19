@@ -1,5 +1,5 @@
+import { getRootElement, SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
-import { getRootElement, SeelenCommand } from 'seelen-core';
 
 export const getRootContainer = getRootElement;
 

@@ -1,14 +1,5 @@
-import {
-  AppConfiguration,
-  Placeholder,
-  Plugin,
-  Profile,
-  Settings,
-  Theme,
-  UIColors,
-  Widget,
-  WindowManagerLayout,
-} from 'seelen-core';
+import { ConnectedMonitor, IUIColors } from '@seelen-ui/lib';
+import { AppConfig, Placeholder, Plugin, Profile, Settings, Theme, Widget, WindowManagerLayout } from '@seelen-ui/lib/types';
 
 import { Route } from '../../../components/navigation/routes';
 
@@ -17,15 +8,15 @@ export interface RootState extends Settings {
   route: Route;
   toBeSaved: boolean;
   toBeRestarted: boolean;
-  appsConfigurations: AppConfiguration[];
+  appsConfigurations: AppConfig[];
   availableThemes: Theme[];
   availableLayouts: WindowManagerLayout[];
   availablePlaceholders: Placeholder[];
   autostart: boolean | null;
   wallpaper: string | null;
-  colors: UIColors;
+  colors: IUIColors;
   plugins: Plugin[];
   widgets: Widget[];
   profiles: Profile[];
-  connectedMonitors: any[];
+  connectedMonitors: ConnectedMonitor[];
 }

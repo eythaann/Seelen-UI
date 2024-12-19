@@ -1,14 +1,13 @@
-import { Reorder } from 'framer-motion';
-import { useCallback, useLayoutEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   HideMode,
   SeelenWegMode,
   SeelenWegSide,
-  SeparatorWegItem,
-  SwItemType,
-} from 'seelen-core';
+  WegItemType,
+} from '@seelen-ui/lib';
+import { Reorder } from 'framer-motion';
+import { useCallback, useLayoutEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { FileOrFolder } from '../item/infra/File';
@@ -19,7 +18,7 @@ import { UserApplication } from '../item/infra/UserApplication';
 import { RootActions, Selectors } from '../shared/store/app';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
-import { SwItem } from '../shared/store/domain';
+import { SeparatorWegItem, SwItem } from '../shared/store/domain';
 
 import { cx } from '../../../shared/styles';
 import { WithContextMenu } from '../../components/WithContextMenu';
@@ -28,12 +27,12 @@ import { getSeelenWegMenu } from './menu';
 
 const Separator1: SeparatorWegItem = {
   id: '1',
-  type: SwItemType.Separator,
+  type: WegItemType.Separator,
 };
 
 const Separator2: SeparatorWegItem = {
   id: '2',
-  type: SwItemType.Separator,
+  type: WegItemType.Separator,
 };
 
 function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean, associatedViewCounter: number) {
@@ -137,7 +136,7 @@ export function SeelenWeg() {
         return;
       }
 
-      if (app.type !== SwItemType.Separator) {
+      if (app.type !== WegItemType.Separator) {
         extractedPinned.push(app);
       }
     });
@@ -197,7 +196,7 @@ export function SeelenWeg() {
 }
 
 function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
-  if (item.type === SwItemType.Pinned && item.path) {
+  if (item.type === WegItemType.Pinned && item.path) {
     if (
       item.execution_command.startsWith('shell:AppsFolder') ||
       item.execution_command.endsWith('.exe')
@@ -207,15 +206,15 @@ function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
     return <FileOrFolder key={item.execution_command} item={item} />;
   }
 
-  if (item.type === SwItemType.TemporalApp && item.path) {
+  if (item.type === WegItemType.Temporal && item.path) {
     return <UserApplication key={item.execution_command} item={item} onAssociatedViewOpenChanged={callback} />;
   }
 
-  if (item.type === SwItemType.Media) {
+  if (item.type === WegItemType.Media) {
     return <MediaSession key="media-item" item={item} />;
   }
 
-  if (item.type === SwItemType.Start) {
+  if (item.type === WegItemType.StartMenu) {
     return <StartMenu key="start-menu" item={item} />;
   }
 

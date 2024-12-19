@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SeelenLauncherSettings, UIColors } from 'seelen-core';
+import { Settings, UIColors } from '@seelen-ui/lib';
 
 import { LauncherState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: LauncherState = {
-  colors: UIColors.default(),
+  colors: UIColors.default().inner,
   apps: [],
   history: {},
-  settings: new SeelenLauncherSettings(),
+  settings: (await Settings.default()).inner.launcher,
 };
 
 export const RootSlice = createSlice({

@@ -1,9 +1,9 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Popover, Tooltip } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 

@@ -1,8 +1,8 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Menu, MenuProps, Popover } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
-import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../components/BackgroundByLayers/infra';
 import { store } from '../shared/store/infra';

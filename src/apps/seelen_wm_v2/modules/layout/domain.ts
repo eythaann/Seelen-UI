@@ -1,4 +1,4 @@
-import { WmFallbackNode, WmHorizontalNode, WmLeafNode, WmStackNode, WmVerticalNode } from 'seelen-core';
+import { WmNode } from '@seelen-ui/lib/types';
 
 export enum Reservation {
   Left = 'Left',
@@ -14,7 +14,13 @@ export enum Sizing {
   Decrease = 'Decrease',
 }
 
-export type BranchNode = WmHorizontalNode | WmVerticalNode;
-export type Node = WmLeafNode | WmFallbackNode | BranchNode | WmStackNode;
+export type WmFallbackNode = Extract<WmNode, { type: 'Fallback' }>;
+export type WmHorizontalNode = Extract<WmNode, { type: 'Horizontal' }>;
+export type WmVerticalNode = Extract<WmNode, { type: 'Vertical' }>;
+export type WmLeafNode = Extract<WmNode, { type: 'Leaf' }>;
+export type WmStackNode = Extract<WmNode, { type: 'Stack' }>;
+
+export type BranchNode = WmVerticalNode | WmHorizontalNode;
+export type Node = WmNode;
 
 export const MAX_ALLOWED_ELEMENTS_PER_ROW = 10;

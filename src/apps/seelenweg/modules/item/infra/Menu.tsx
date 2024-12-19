@@ -1,7 +1,7 @@
+import { SeelenCommand, WegItemType } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
-import { SeelenCommand, SwItemType } from 'seelen-core';
 
 import { store } from '../../shared/store/infra';
 
@@ -13,7 +13,7 @@ import { Icon } from '../../../../shared/components/Icon';
 import { savePinnedItems } from '../../shared/store/storeApi';
 
 export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
-  if (item.type === SwItemType.Media) {
+  if (item.type === WegItemType.Media) {
     return [
       {
         key: 'remove',
@@ -26,7 +26,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
     ];
   }
 
-  if (item.type === SwItemType.Start) {
+  if (item.type === WegItemType.StartMenu) {
     return [
       {
         key: 'remove',
@@ -39,7 +39,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
     ];
   }
 
-  if (item.type === SwItemType.Pinned) {
+  if (item.type === WegItemType.Pinned) {
     return [
       {
         key: 'remove',

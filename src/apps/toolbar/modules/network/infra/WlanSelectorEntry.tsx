@@ -1,8 +1,8 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Input, Tooltip } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SeelenCommand } from 'seelen-core';
 
 import { WlanBssEntry, WlanProfile } from '../domain';
 

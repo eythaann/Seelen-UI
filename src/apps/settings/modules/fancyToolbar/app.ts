@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { FancyToolbarSettings } from 'seelen-core';
 
+import { defaultSettings } from '../shared/store/app/default';
 import { reducersFor } from '../shared/utils/app';
 
-const initialState = new FancyToolbarSettings();
+const initialState = defaultSettings.inner.fancyToolbar;
 
 export const FancyToolbarSlice = createSlice({
   name: 'fancyToolbar',

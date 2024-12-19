@@ -1,6 +1,6 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
-import { SeelenCommand } from 'seelen-core';
 
 import { getGeneratedFilesPath } from './app';
 

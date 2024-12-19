@@ -1,10 +1,10 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 

@@ -1,9 +1,9 @@
+import { UpdateChannel } from '@seelen-ui/lib';
 import { exit, relaunch } from '@tauri-apps/plugin-process';
 import { Button, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { UpdateChannel } from 'seelen-core';
 
 import { EnvConfig } from '../shared/config/infra';
 import cs from './infra.module.css';

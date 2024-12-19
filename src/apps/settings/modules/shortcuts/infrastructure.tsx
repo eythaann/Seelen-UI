@@ -1,8 +1,8 @@
+import { AhkVarList } from '@seelen-ui/lib/types';
 import { Button, Input, Switch, Tooltip } from 'antd';
 import { pick } from 'lodash';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { AhkVarList } from 'seelen-core';
 
 import { RootActions } from '../shared/store/app/reducer';
 import { RootSelectors } from '../shared/store/app/selectors';

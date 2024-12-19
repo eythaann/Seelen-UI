@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { SeelenEvent, Settings, UIColors } from '@seelen-ui/lib';
+import { WmNode } from '@seelen-ui/lib/types';
 import { listen } from '@tauri-apps/api/event';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
-import { SeelenEvent, Settings, UIColors, WmNode } from 'seelen-core';
 
 import { Actions, RootSlice } from './app';
 
@@ -17,7 +18,7 @@ export const store = configureStore({
 });
 
 function setSettings(_settings: Settings) {
-  let settings = _settings.windowManager;
+  let settings = _settings.inner.windowManager;
   store.dispatch(Actions.setSettings(settings));
 
   const styles = document.documentElement.style;
@@ -36,7 +37,7 @@ function setSettings(_settings: Settings) {
 
 async function loadUIColors() {
   function loadColors(colors: UIColors) {
-    store.dispatch(Actions.setColors(colors));
+    store.dispatch(Actions.setColors(colors.inner));
   }
   loadColors(await UIColors.getAsync());
   await UIColors.onChange(loadColors);

@@ -1,7 +1,7 @@
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { Flex, Menu, Popover } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { invoke, SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
 

@@ -1,7 +1,7 @@
+import { NetworkToolbarItem } from '@seelen-ui/lib/types';
 import { emit } from '@tauri-apps/api/event';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { NetworkTM } from 'seelen-core';
 
 import { Item } from '../../item/infra/infra';
 
@@ -10,7 +10,7 @@ import { Selectors } from '../../shared/store/app';
 import { WithWlanSelector } from './WlanSelector';
 
 interface Props {
-  module: NetworkTM;
+  module: NetworkToolbarItem;
 }
 
 function NetworkModuleItem({ module, ...rest }: Props) {

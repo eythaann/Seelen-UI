@@ -1,8 +1,8 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { ColorPicker } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { newSelectors } from '../../../shared/store/app/reducer';
 

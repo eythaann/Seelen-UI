@@ -1,10 +1,10 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button, Popover, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
 import React, { memo, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';

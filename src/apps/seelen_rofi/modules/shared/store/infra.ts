@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { LauncherHistory, SeelenCommand, Settings, UIColors } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
-import { LauncherHistory, SeelenCommand, Settings, UIColors } from 'seelen-core';
 
 import { Actions, RootSlice } from './app';
 
@@ -18,7 +18,7 @@ export const store = configureStore({
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
-    store.dispatch(Actions.setColors(colors));
+    store.dispatch(Actions.setColors(colors.inner));
   }
   loadColors(await UIColors.getAsync());
   await UIColors.onChange(loadColors);
@@ -26,18 +26,18 @@ async function initUIColors() {
 
 export async function initStore() {
   const dispatch = store.dispatch;
-  const settings = await Settings.getAsync();
+  const settings = (await Settings.getAsync()).inner;
 
-  i18n.changeLanguage(settings.language);
+  i18n.changeLanguage(settings.language || undefined);
 
   dispatch(Actions.setSettings(settings.launcher));
   dispatch(Actions.setApps(await invoke(SeelenCommand.LauncherGetApps)));
-  dispatch(Actions.setHistory(await LauncherHistory.getAsync()));
+  dispatch(Actions.setHistory((await LauncherHistory.getAsync()).inner));
 
-  LauncherHistory.onChange((history) => dispatch(Actions.setHistory(history)));
+  LauncherHistory.onChange((history) => dispatch(Actions.setHistory(history.inner)));
   Settings.onChange((settings) => {
-    i18n.changeLanguage(settings.language);
-    dispatch(Actions.setSettings(settings.launcher));
+    i18n.changeLanguage(settings.inner.language || undefined);
+    dispatch(Actions.setSettings(settings.inner.launcher));
   });
 
   await initUIColors();

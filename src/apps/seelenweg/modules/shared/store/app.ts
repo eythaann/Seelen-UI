@@ -1,5 +1,5 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { PinnedWegItem, SeelenWegSettings, SwItemType, UIColors } from 'seelen-core';
+import { Settings, UIColors, WegItemType } from '@seelen-ui/lib';
 
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 
@@ -9,6 +9,7 @@ import {
   ExtendedPinnedWegItem,
   ExtendedTemporalWegItem,
   HWND,
+  PinnedWegItem,
   RootState,
   SwItem,
 } from './domain';
@@ -23,9 +24,9 @@ const initialState: RootState = {
   openApps: {},
   focusedApp: null,
   isOverlaped: false,
-  settings: new SeelenWegSettings(),
+  settings: (await Settings.default()).inner.seelenweg,
   mediaSessions: [],
-  colors: UIColors.default(),
+  colors: UIColors.default().inner,
 };
 
 function removeAppFromState(
@@ -83,7 +84,7 @@ export const RootSlice = createSlice({
       const { app, side } = action.payload;
 
       const appToPin = findApp(state, app) || app;
-      appToPin.type = SwItemType.Pinned;
+      appToPin.type = WegItemType.Pinned;
 
       switch (side) {
         case AppsSides.Left:
@@ -104,7 +105,7 @@ export const RootSlice = createSlice({
     unPinApp(state, action: PayloadAction<ExtendedPinnedWegItem | ExtendedTemporalWegItem>) {
       const found = findApp(state, action.payload);
       if (found) {
-        found.type = SwItemType.TemporalApp;
+        found.type = WegItemType.Temporal;
         if (found.opens.length === 0) {
           removeAppFromState(state, found);
         }
@@ -112,15 +113,15 @@ export const RootSlice = createSlice({
     },
     addMediaModule(state) {
       const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
-      if (!all.some((current) => current.type === SwItemType.Media)) {
+      if (!all.some((current) => current.type === WegItemType.Media)) {
         state.itemsOnRight.push({
-          type: SwItemType.Media,
+          type: WegItemType.Media,
         });
       }
       savePinnedItems(current(state));
     },
     removeMediaModule(state) {
-      const filter = (current: SwItem) => current.type !== SwItemType.Media;
+      const filter = (current: SwItem) => current.type !== WegItemType.Media;
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
@@ -128,15 +129,15 @@ export const RootSlice = createSlice({
     },
     addStartModule(state) {
       const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
-      if (!all.some((current) => current.type === SwItemType.Start)) {
+      if (!all.some((current) => current.type === WegItemType.StartMenu)) {
         state.itemsOnLeft.unshift({
-          type: SwItemType.Start,
+          type: WegItemType.StartMenu,
         });
       }
       savePinnedItems(current(state));
     },
     removeStartModule(state) {
-      const filter = (current: SwItem) => current.type !== SwItemType.Start;
+      const filter = (current: SwItem) => current.type !== WegItemType.StartMenu;
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
@@ -192,7 +193,7 @@ export const RootSlice = createSlice({
         if ('opens' in app) {
           app.opens = app.opens.filter((hwnd) => hwnd !== action.payload);
         }
-        return app.type !== SwItemType.TemporalApp || app.opens.length > 0;
+        return app.type !== WegItemType.Temporal || app.opens.length > 0;
       }
 
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
@@ -207,9 +208,9 @@ export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
 export const isPinnedApp = (item: SwItem): item is ExtendedPinnedWegItem => {
-  return item.type === SwItemType.Pinned;
+  return item.type === WegItemType.Pinned;
 };
 
 export const isTemporalApp = (item: SwItem): item is ExtendedTemporalWegItem => {
-  return item.type === SwItemType.TemporalApp;
+  return item.type === WegItemType.Temporal;
 };

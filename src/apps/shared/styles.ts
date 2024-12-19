@@ -1,6 +1,7 @@
+import { getCurrentWidget, Settings, UIColors } from '@seelen-ui/lib';
+import { Theme, WidgetId } from '@seelen-ui/lib/types';
 import { listen } from '@tauri-apps/api/event';
 import { useEffect, useState } from 'react';
-import { getCurrentWidget, Settings, Theme, UIColors, WidgetId } from 'seelen-core';
 
 import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
@@ -69,7 +70,8 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
   for (const theme of themes) {
     let layerName = theme.info.filename.replace(/[\.]/g, '-') + '-theme';
     const oldKey = OLD_THEME_KEYS_BY_WIDGET_ID[widget.id];
-    const cssFileContent = theme.styles[widget.id] || (oldKey ? theme.styles[oldKey as WidgetId] : undefined);
+    const cssFileContent =
+      theme.styles[widget.id] || (oldKey ? theme.styles[oldKey as WidgetId] : undefined);
     if (!cssFileContent) {
       continue;
     }
@@ -90,12 +92,12 @@ export async function StartThemingTool() {
   });
 
   await Settings.onChange((settings) => {
-    selected = settings.selectedThemes;
+    selected = settings.inner.selectedThemes;
     loadThemes(allThemes, selected);
   });
 
-  UIColors.setAssCssVariables(await UIColors.getAsync());
-  UIColors.onChange(UIColors.setAssCssVariables);
+  (await UIColors.getAsync()).setAssCssVariables();
+  UIColors.onChange((colors) => colors.setAssCssVariables());
 
   await loadThemes(allThemes, selected);
 }

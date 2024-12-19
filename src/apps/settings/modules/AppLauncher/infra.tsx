@@ -1,8 +1,9 @@
+import { SeelenLauncherMonitor } from '@seelen-ui/lib';
+import { SeelenLauncherRunner } from '@seelen-ui/lib/types';
 import { Button, Input, Select, Switch } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { SeelenLauncherMonitor, SeelenLauncherRunner } from 'seelen-core';
 
 import { newSelectors, RootActions } from '../shared/store/app/reducer';
 import { OptionsFromEnum } from '../shared/utils/app';
@@ -31,7 +32,12 @@ export function AppLauncherSettings() {
   }
 
   function onAddRunner() {
-    onChangeRunners([...runners, new SeelenLauncherRunner()]);
+    onChangeRunners([...runners, {
+      id: crypto.randomUUID(),
+      label: '',
+      program: '',
+      readonly: false,
+    }]);
   }
 
   function onRemoveRunner(idx: number) {

@@ -1,9 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Border } from 'seelen-core';
+import { Border } from '@seelen-ui/lib/types';
 
 import { reducersFor, selectorsFor } from '../../shared/utils/app';
 
-const initialState = new Border();
+const initialState: Border = {
+  enabled: false,
+  offset: 0,
+  width: 2,
+};
 
 export const BorderSlice = createSlice({
   name: 'windowManager/border',

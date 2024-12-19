@@ -1,18 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { listen as listenGlobal } from '@tauri-apps/api/event';
-import { Modal } from 'antd';
-import { cloneDeep } from 'lodash';
 import {
-  AppConfiguration,
+  AppConfigurationList,
   ConnectedMonitorList,
+  PlaceholderList,
   PluginList,
   ProfileList,
   SeelenEvent,
   Settings,
-  Theme,
+  ThemeList,
   UIColors,
   WidgetList,
-} from 'seelen-core';
+} from '@seelen-ui/lib';
+import { listen as listenGlobal } from '@tauri-apps/api/event';
+import { Modal } from 'antd';
+import { cloneDeep } from 'lodash';
 
 import { startup } from '../tauri/infra';
 
@@ -48,27 +49,26 @@ function setMonitorsOnState(list: ConnectedMonitorList) {
 
 async function initUIColors() {
   function loadColors(colors: UIColors) {
-    UIColors.setAssCssVariables(colors);
-    store.dispatch(RootActions.setColors(colors));
+    colors.setAssCssVariables();
+    store.dispatch(RootActions.setColors(colors.inner));
   }
   loadColors(await UIColors.getAsync());
   await UIColors.onChange(loadColors);
 }
 
 export async function registerStoreEvents() {
-  await listenGlobal<any[]>('placeholders', async () => {
-    const userSettings = await new UserSettingsLoader().withPlaceholders().load();
-    store.dispatch(RootActions.setAvailablePlaceholders(userSettings.placeholders));
+  PlaceholderList.onChange((list) => {
+    store.dispatch(RootActions.setAvailablePlaceholders(list.all()));
   });
 
-  await listenGlobal<Theme[]>('themes', (event) => {
-    store.dispatch(RootActions.setAvailableThemes(event.payload));
+  ThemeList.onChange((list) => {
+    store.dispatch(RootActions.setAvailableThemes(list.all()));
   });
 
   await initUIColors();
 
-  await listenGlobal<AppConfiguration[]>('settings-by-app', (event) => {
-    store.dispatch(RootActions.setAppsConfigurations(event.payload));
+  AppConfigurationList.onChange((list) => {
+    store.dispatch(RootActions.setAppsConfigurations(list.all()));
   });
 
   await listenGlobal<Settings>(SeelenEvent.StateSettingsChanged, (event) => {
@@ -116,7 +116,7 @@ export const LoadSettingsToStore = async (customPath?: string) => {
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));
-  store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).toArray()));
+  store.dispatch(RootActions.setProfiles((await ProfileList.getAsync()).all()));
   setMonitorsOnState(await ConnectedMonitorList.getAsync());
 
   const state = { ...store.getState() };

@@ -1,10 +1,10 @@
+import { SeelenWallWallpaper } from '@seelen-ui/lib/types';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Button, InputNumber, Switch } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { SeelenWallWallpaper } from 'seelen-core';
 
 import { dialog } from '../shared/tauri/infra';
 
@@ -16,7 +16,7 @@ import cs from './index.module.css';
 
 export function WallSettings() {
   const wall = useSelector(newSelectors.wall);
-  const { enabled, backgrounds, interval } = wall;
+  const { enabled, interval, backgrounds } = wall;
 
   const [time, setTime] = useState({
     hours: Math.floor(interval / 3600),
@@ -45,7 +45,7 @@ export function WallSettings() {
 
   const updateTime = (key: 'hours' | 'minutes' | 'seconds', value: number | null) => {
     if (value === null) return;
-    const newTime = { ...time, [key]: value };
+    const newTime = { ...time, [key]: Math.floor(value) };
     setTime(newTime);
     const newInterval = Math.max(newTime.hours * 3600 + newTime.minutes * 60 + newTime.seconds, 1);
     updateWall({ interval: newInterval });
@@ -71,7 +71,7 @@ export function WallSettings() {
     }
 
     for (const file of [files].flat()) {
-      newBackgrounds.push({ ...new SeelenWallWallpaper(), path: file });
+      newBackgrounds.push({ id: crypto.randomUUID(), path: file });
     }
 
     onChangeBackgrounds([...backgrounds, ...newBackgrounds]);

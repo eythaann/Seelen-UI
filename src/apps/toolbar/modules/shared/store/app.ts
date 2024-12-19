@@ -1,10 +1,12 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { FancyToolbarSettings, UIColors } from 'seelen-core';
-import { Placeholder, ToolbarModule } from 'seelen-core';
+import { Settings, UIColors } from '@seelen-ui/lib';
+import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 
 import { RootState } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
+
+const settings = await Settings.default();
 
 const initialState: RootState = {
   version: 0,
@@ -13,7 +15,7 @@ const initialState: RootState = {
   dateFormat: '',
   isOverlaped: false,
   focused: null,
-  settings: new FancyToolbarSettings(),
+  settings: settings.inner.fancyToolbar,
   env: {},
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {
@@ -36,7 +38,7 @@ const initialState: RootState = {
   mediaOutputs: [],
   mediaInputs: [],
   notifications: [],
-  colors: UIColors.default(),
+  colors: UIColors.default().inner,
 };
 
 export const RootSlice = createSlice({
@@ -48,17 +50,17 @@ export const RootSlice = createSlice({
       state.placeholder = action.payload;
       state.version++;
     },
-    setItemsOnLeft(state, action: PayloadAction<ToolbarModule[]>) {
+    setItemsOnLeft(state, action: PayloadAction<ToolbarItem[]>) {
       if (state.placeholder) {
         state.placeholder.left = action.payload;
       }
     },
-    setItemsOnCenter(state, action: PayloadAction<ToolbarModule[]>) {
+    setItemsOnCenter(state, action: PayloadAction<ToolbarItem[]>) {
       if (state.placeholder) {
         state.placeholder.center = action.payload;
       }
     },
-    setItemsOnRight(state, action: PayloadAction<ToolbarModule[]>) {
+    setItemsOnRight(state, action: PayloadAction<ToolbarItem[]>) {
       if (state.placeholder) {
         state.placeholder.right = action.payload;
       }

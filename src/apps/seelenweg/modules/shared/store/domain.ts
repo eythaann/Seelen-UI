@@ -1,12 +1,5 @@
+import { SeelenWegSettings, WegItem } from '@seelen-ui/lib/types';
 import { modify } from 'readable-types';
-import {
-  MediaWegItem,
-  PinnedWegItem,
-  SeelenWegSettings,
-  SeparatorWegItem,
-  StartWegItem,
-  SwItemType,
-} from 'seelen-core';
 
 import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
@@ -43,6 +36,7 @@ export interface MediaSession {
   } | null;
 }
 
+export type PinnedWegItem = Extract<WegItem, { type: 'Pinned' }>;
 export type ExtendedPinnedWegItem = modify<
   PinnedWegItem,
   {
@@ -55,16 +49,19 @@ export type ExtendedPinnedWegItem = modify<
 export type ExtendedTemporalWegItem = modify<
   ExtendedPinnedWegItem,
   {
-    type: SwItemType.TemporalApp;
+    type: 'Temporal';
   }
 >;
 
+export type SeparatorWegItem = Extract<WegItem, { type: 'Separator' }>;
+export type MediaWegItem = Extract<WegItem, { type: 'Media' }>;
+export type StartMenuWegItem = Extract<WegItem, { type: 'StartMenu' }>;
 export type SwItem =
   | ExtendedPinnedWegItem
   | ExtendedTemporalWegItem
   | SeparatorWegItem
   | MediaWegItem
-  | StartWegItem;
+  | StartMenuWegItem;
 
 export interface RootState extends IRootState<SeelenWegSettings> {
   itemsOnLeft: SwItem[];

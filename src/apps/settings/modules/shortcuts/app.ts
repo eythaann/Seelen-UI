@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AhkVar, AhkVarList } from 'seelen-core';
+import { AhkVar, AhkVarList } from '@seelen-ui/lib/types';
+import { cloneDeep } from 'lodash';
+
+import { defaultSettings } from '../shared/store/app/default';
 
 function getAHK(code: string): string | undefined {
   if (code.startsWith('Key')) {
@@ -69,7 +72,7 @@ export function KeyCodeToAHK(e: React.KeyboardEvent<HTMLInputElement>): AhkVar |
   };
 }
 
-const initialState = new AhkVarList();
+const initialState: AhkVarList = cloneDeep(defaultSettings.inner.ahkVariables);
 
 export const AhkVariablesSlice = createSlice({
   name: 'AhkVariables',
@@ -80,7 +83,7 @@ export const AhkVariablesSlice = createSlice({
       state[action.payload.name] = action.payload.value;
     },
     reset() {
-      return { ...new AhkVarList() };
+      return cloneDeep(defaultSettings.inner.ahkVariables);
     },
   },
 });

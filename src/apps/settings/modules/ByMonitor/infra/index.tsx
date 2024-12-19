@@ -1,8 +1,10 @@
+import { ConnectedMonitor, MonitorConfiguration, Rect } from '@seelen-ui/lib';
+import { MonitorConfiguration as IMonitorConfiguration } from '@seelen-ui/lib/types';
 import { Button, Modal, Switch } from 'antd';
+import { cloneDeep } from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { ConnectedMonitor, MonitorConfiguration, Rect } from 'seelen-core';
 
 import { WindowManagerSpacingSettings } from '../../WindowManager/main/infra/GlobalPaddings';
 
@@ -14,8 +16,8 @@ import cs from './index.module.css';
 
 interface MonitorConfigProps {
   device: ConnectedMonitor;
-  config: MonitorConfiguration;
-  onChange: (monitor: MonitorConfiguration) => void;
+  config: IMonitorConfiguration;
+  onChange: (monitor: IMonitorConfiguration) => void;
 }
 
 export function MoreMonitorConfig({ device, config, onChange }: MonitorConfigProps) {
@@ -145,13 +147,14 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
   );
 }
 
+const defaultMonitorConfig = await MonitorConfiguration.default();
 export function SettingsByMonitor() {
   const devices = useSelector(newSelectors.connectedMonitors);
   const settingsByMonitor = useSelector(newSelectors.monitorsV2);
 
   const dispatch = useDispatch();
 
-  function onMonitorChange(id: string, monitor: MonitorConfiguration) {
+  function onMonitorChange(id: string, monitor: IMonitorConfiguration) {
     dispatch(
       RootActions.setMonitors({
         ...settingsByMonitor,
@@ -163,7 +166,7 @@ export function SettingsByMonitor() {
   return (
     <>
       {devices.map((device) => {
-        let monitor = settingsByMonitor[device.id] || new MonitorConfiguration();
+        let monitor = settingsByMonitor[device.id] || cloneDeep(defaultMonitorConfig.inner);
         return (
           <MonitorConfig
             key={device.id}

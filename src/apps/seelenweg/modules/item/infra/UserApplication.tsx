@@ -1,10 +1,10 @@
+import { SeelenCommand, SeelenWegSide } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Popover } from 'antd';
 import moment from 'moment';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import { SeelenCommand, SeelenWegSide } from 'seelen-core';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
 import { updatePreviews } from '../../shared/utils/infra';

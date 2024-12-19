@@ -1,9 +1,9 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import { Button, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { SeelenCommand } from 'seelen-core';
 
 import { resolveDataPath } from '../shared/config/infra';
 

@@ -1,6 +1,6 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { evaluate } from 'mathjs';
-import { SeelenCommand } from 'seelen-core';
 
 /** @deprecated remove on v2 */
 export enum Actions {

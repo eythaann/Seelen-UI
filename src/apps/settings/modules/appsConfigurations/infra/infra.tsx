@@ -1,3 +1,4 @@
+import { AppConfig } from '@seelen-ui/lib/types';
 import { Button, Input, Modal, Switch, Table, Tooltip } from 'antd';
 import { ColumnsType, ColumnType } from 'antd/es/table';
 import { TFunction } from 'i18next';
@@ -5,7 +6,6 @@ import { cloneDeep } from 'lodash';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch } from 'react-redux';
-import { AppConfiguration } from 'seelen-core';
 
 import { useAppSelector } from '../../shared/utils/infra';
 
@@ -88,7 +88,7 @@ function ActionsTitle() {
 
   const showModal = () => setIsModalOpen(true);
   const onCancel = () => setIsModalOpen(false);
-  const onSave = (app: AppConfiguration) => {
+  const onSave = (app: AppConfig) => {
     dispatch(AppsConfigActions.push([app]));
     setIsModalOpen(false);
   };

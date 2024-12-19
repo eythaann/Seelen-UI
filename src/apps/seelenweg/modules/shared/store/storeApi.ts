@@ -1,9 +1,9 @@
+import { WegItemType } from '@seelen-ui/lib';
+import { WegItem, WegItems } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/core';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
 import { debounce } from 'lodash';
-import { SwItemType, WegItem, WegItems } from 'seelen-core';
 
 import { store } from './infra';
 
@@ -17,9 +17,9 @@ export const savePinnedItems = debounce(
   async (state: RootState = store.getState()): Promise<void> => {
     const cb = (acc: WegItem[], item: SwItem) => {
       switch (item.type) {
-        case SwItemType.TemporalApp:
+        case WegItemType.Temporal:
           break;
-        case SwItemType.Pinned:
+        case WegItemType.Pinned:
           acc.push({
             type: item.type,
             path: item.path,
@@ -46,7 +46,3 @@ export const savePinnedItems = debounce(
   },
   1000,
 );
-
-export const loadPinnedItems = async (): Promise<WegItems> => {
-  return invoke<WegItems>('state_get_weg_items');
-};

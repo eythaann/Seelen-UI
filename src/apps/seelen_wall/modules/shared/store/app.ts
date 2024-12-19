@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { SeelenWallSettings, UIColors } from 'seelen-core';
+import { Settings, UIColors } from '@seelen-ui/lib';
 
 import { RootState } from './domain';
 
@@ -7,8 +7,8 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   version: 0,
-  settings: new SeelenWallSettings(),
-  colors: UIColors.default(),
+  settings: (await Settings.default()).inner.wall,
+  colors: UIColors.default().inner,
   stop: false,
 };
 

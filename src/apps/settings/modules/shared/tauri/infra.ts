@@ -1,6 +1,6 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import * as oldStartup from '@tauri-apps/plugin-autostart';
-import { SeelenCommand } from 'seelen-core';
 
 export * as dialog from '@tauri-apps/plugin-dialog';
 export * as fs from '@tauri-apps/plugin-fs';

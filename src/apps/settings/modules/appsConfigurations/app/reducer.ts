@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppConfiguration } from 'seelen-core';
+import { AppConfig } from '@seelen-ui/lib/types';
 
-const initialState: AppConfiguration[] = [];
+const initialState: AppConfig[] = [];
 
 interface AppPayload {
   idx: number;
@@ -21,10 +21,10 @@ export const AppsConfigSlice = createSlice({
       });
       return newState.filter(Boolean);
     },
-    push: (state, action: PayloadAction<AppConfiguration[]>) => {
+    push: (state, action: PayloadAction<AppConfig[]>) => {
       state.push(...action.payload);
     },
-    replace: (state, action: PayloadAction<AppPayload & { app: AppConfiguration }>) => {
+    replace: (state, action: PayloadAction<AppPayload & { app: AppConfig }>) => {
       const { idx, app } = action.payload;
       state[idx] = app;
     },

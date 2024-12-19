@@ -1,7 +1,7 @@
+import { DateToolbarItem } from '@seelen-ui/lib/types';
 import moment from 'moment';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { DateToolbarModule } from 'seelen-core';
 
 import { Item } from '../item/infra/infra';
 
@@ -11,7 +11,7 @@ import { useInterval } from 'src/apps/shared/hooks';
 import { WithDateCalendar } from './Calendar';
 
 interface Props {
-  module: DateToolbarModule;
+  module: DateToolbarItem;
 }
 
 export function DateModule({ module }: Props) {

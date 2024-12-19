@@ -1,9 +1,9 @@
+import { declareDocumentAsLayeredHitbox, SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { createRoot } from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
-import { declareDocumentAsLayeredHitbox, SeelenCommand } from 'seelen-core';
 
 import { loadStore, registerStoreEvents, store } from './modules/shared/store/infra';
 import { loadConstants } from './modules/shared/utils/infra';

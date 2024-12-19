@@ -1,9 +1,9 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { Dropdown, Menu } from 'antd';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { SeelenCommand } from 'seelen-core';
 
 import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
 

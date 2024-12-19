@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UIColors, WindowManagerSettings } from 'seelen-core';
+import { Settings, UIColors } from '@seelen-ui/lib';
 
 import { RootState } from './domain';
 
@@ -8,8 +8,8 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 const initialState: RootState = {
   _version: 0,
   layout: null,
-  settings: new WindowManagerSettings(),
-  colors: UIColors.default(),
+  settings: (await Settings.default()).inner.windowManager,
+  colors: UIColors.default().inner,
   activeWindow: 0,
   reservation: null,
   overlayVisible: true,

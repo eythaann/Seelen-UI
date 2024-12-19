@@ -1,7 +1,7 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
-import { SeelenCommand } from 'seelen-core';
 
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';

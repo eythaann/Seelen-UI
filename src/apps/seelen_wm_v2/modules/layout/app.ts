@@ -1,17 +1,19 @@
+import { NodeSubtype, NodeType } from '@seelen-ui/lib';
 import { clone } from 'lodash';
 import { evaluate } from 'mathjs';
+
+import { FocusAction } from '../shared/store/domain';
 import {
-  NodeSubtype,
-  NodeType,
+  BranchNode,
+  Node,
+  Reservation,
+  Sizing,
   WmFallbackNode,
   WmHorizontalNode,
   WmLeafNode,
   WmStackNode,
   WmVerticalNode,
-} from 'seelen-core';
-
-import { FocusAction } from '../shared/store/domain';
-import { BranchNode, Node, Reservation, Sizing } from './domain';
+} from './domain';
 
 type HWND = number;
 
@@ -142,7 +144,7 @@ export class NodeImpl<T extends Node> {
     return this.ref.type === NodeType.Vertical;
   }
 
-  isTemporal(): this is NodeImpl<T & { subtype: NodeSubtype.Temporal }> {
+  isTemporal(): this is NodeImpl<T & { subtype: 'Temporal' }> {
     return this.ref.subtype === NodeSubtype.Temporal;
   }
 
@@ -266,7 +268,7 @@ export class NodeImpl<T extends Node> {
     return this as NodeImpl<WmFallbackNode>;
   }
 
-  mutateToBranch(type: NodeType.Horizontal | NodeType.Vertical): NodeImpl<BranchNode> {
+  mutateToBranch(type: 'Horizontal' | 'Vertical'): NodeImpl<BranchNode> {
     if (this.isBranch()) {
       throw new Error('Cannot mutate branch to branch');
     }

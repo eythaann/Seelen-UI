@@ -1,16 +1,15 @@
-import { AppConfiguration, AppExtraFlag } from 'seelen-core';
+import { AppExtraFlag } from '@seelen-ui/lib';
+import { AppConfig } from '@seelen-ui/lib/types';
 
-export enum WmApplicationOptions {
-  Float = `${AppExtraFlag.Float}`,
-  Unmanage = `${AppExtraFlag.Unmanage}`,
-  ForceManage = `${AppExtraFlag.Force}`,
-  Pinned = `${AppExtraFlag.Pinned}`,
-}
+export const WmApplicationOptions = [
+  AppExtraFlag.Float,
+  AppExtraFlag.Unmanage,
+  AppExtraFlag.Force,
+  AppExtraFlag.Pinned,
+];
 
-export enum WegApplicationOptions {
-  Hidden = `${AppExtraFlag.Hidden}`,
-}
+export const WegApplicationOptions = [AppExtraFlag.Hidden];
 
-export interface AppConfigurationExtended extends AppConfiguration {
+export interface AppConfigurationExtended extends AppConfig {
   key: number;
 }
