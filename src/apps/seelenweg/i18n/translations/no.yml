@@ -16,6 +16,8 @@ app_menu:
   unpin: Upinn
   pin: Pin
   pin_to_left: Pin til venstre
+  kill_multiple: Drep alle prosesser
+  kill: Drep prosessen
 media_menu:
   remove: Fjern mediemodulen
 start_menu:

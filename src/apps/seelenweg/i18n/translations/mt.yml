@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Kopja pumi
   pin: Pin
   open_file_location: Post tal-fajl miftuħ
+  kill_multiple: Oqtol il-Proċessi Kollha
+  kill: Qtil Proċess
 media_menu:
   remove: Neħħi l-modulu tal-midja
 start_menu:

@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: พินไปทางขวา
   pin_to_left: พินไปทางซ้าย
   copy_handles: สำเนามือจับ
+  kill: ฆ่ากระบวนการ
+  kill_multiple: ฆ่ากระบวนการทั้งหมด
 media_menu:
   remove: ลบโมดูลสื่อ
 start_menu:

@@ -16,6 +16,8 @@ app_menu:
   pin: পিন
   pin_to_right: ডান পিন
   copy_handles: হ্যান্ডলগুলি অনুলিপি
+  kill: কিল প্রসেস
+  kill_multiple: সমস্ত প্রক্রিয়া হত্যা
 media_menu:
   remove: মিডিয়া মডিউল সরান
 start_menu:

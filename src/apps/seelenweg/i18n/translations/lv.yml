@@ -16,6 +16,8 @@ app_menu:
   pin_to_left: Piespraudiet pa kreisi
   pin_to_center: Piespraudiet centrā
   pin: Piespraust
+  kill: Nogalināšanas process
+  kill_multiple: Nogalināt visus procesus
 media_menu:
   remove: Noņemiet multivides moduli
 start_menu:

@@ -16,6 +16,8 @@ app_menu:
   unpin: ピン留めを解除
   copy_handles: ハンドルをコピー
   pin_to_left: 左にピン留め
+  kill: プロセスを強制終了する
+  kill_multiple: すべてのプロセスを強制終了する
 media_menu:
   remove: メディアモジュールを削除
 start_menu:

@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Copia Handle
   close: Chiudi
   close_multiple: Chiudi Tutto
+  kill_multiple: Uccidi tutti i processi
+  kill: Uccidi il processo
 media:
   not_playing: Nulla in riproduzione
 media_menu:

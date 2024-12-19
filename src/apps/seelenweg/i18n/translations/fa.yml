@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: پین به راست
   close_multiple: همه را ببندید
   run_as: به عنوان مدیر اجرا کنید
+  kill: فرآیند کشتن
+  kill_multiple: کشتن تمام فرآیندها
 media_menu:
   remove: ماژول رسانه را حذف کنید
 start_menu:

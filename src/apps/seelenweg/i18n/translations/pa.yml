@@ -16,6 +16,8 @@ app_menu:
   unpin: Unpin
   close: ਨੇੜੇ
   pin: ਪਿੰਨ
+  kill_multiple: ਸਾਰੀਆਂ ਪ੍ਰਕਿਰਿਆਵਾਂ ਨੂੰ ਮਾਰੋ
+  kill: ਪ੍ਰਕਿਰਿਆ ਨੂੰ ਮਾਰੋ
 media_menu:
   remove: ਮੀਡੀਆ ਮੋਡੀ .ਲ ਹਟਾਓ
 start_menu:

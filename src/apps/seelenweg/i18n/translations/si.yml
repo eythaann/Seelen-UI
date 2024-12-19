@@ -16,6 +16,8 @@ app_menu:
   pin_to_left: වමට
   close: වසන්න
   pin: පින්
+  kill: කිල් ක්‍රියාවලිය
+  kill_multiple: සියලුම ක්‍රියාවලීන් මරා දමන්න
 media_menu:
   remove: මාධ්ය මොඩියුලය ඉවත් කරන්න
 start_menu:

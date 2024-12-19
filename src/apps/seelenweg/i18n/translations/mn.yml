@@ -16,6 +16,8 @@ app_menu:
   pin: Сулбээр зүү
   pin_to_right: Баруун тийш зүү
   close: Ойр дөхөм
+  kill_multiple: Бүх процессыг устгах
+  kill: Алах үйл явц
 media_menu:
   remove: МЭДЭЭЛЛИЙН МЭДЭЭЛЛИЙН МЭДЭЭЛЭЛ
 start_menu:

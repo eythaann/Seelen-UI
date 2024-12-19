@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: Sağa Sabitle
   unpin: Sabitlenmeyi Kaldır
   pin_to_left: Sola Sabitle
+  kill_multiple: Tüm Süreçleri Öldür
+  kill: Süreci Sonlandır
 media_menu:
   remove: Medya Modülünü Kaldır
 start_menu:

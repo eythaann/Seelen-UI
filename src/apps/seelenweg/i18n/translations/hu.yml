@@ -16,6 +16,8 @@ app_menu:
   pin_to_center: Pin a középpontba
   open_file_location: Nyissa meg a fájl helyét
   copy_handles: Másolás fogantyúk
+  kill: Kill Process
+  kill_multiple: Öld meg az összes folyamatot
 media_menu:
   remove: Távolítsa el a média modult
 start_menu:

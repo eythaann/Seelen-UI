@@ -16,6 +16,8 @@ app_menu:
   pin: Pin
   copy_handles: Kopírovanie rukovätí
   pin_to_left: Špendlík doľava
+  kill_multiple: Zabi všetky procesy
+  kill: Proces zabíjania
 media_menu:
   remove: Odstráňte mediálny modul
 start_menu:

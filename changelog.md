@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- add kill process option on context menu for dock items.
+
 ### fix
 - slu-service was being closed on exit code 1.
 - logging errors on monitor changes.

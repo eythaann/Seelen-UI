@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: Tihvt paremal
   run_as: Joosta administraatorina
   copy_handles: Koopiakäepidemed
+  kill: Tapmisprotsess
+  kill_multiple: Tapke kõik protsessid
 media_menu:
   remove: Eemaldage meediumimoodul
 start_menu:

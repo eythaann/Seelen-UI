@@ -16,6 +16,8 @@ app_menu:
   open_file_location: Atidarykite failo vietą
   run_as: Vykdykite kaip administratorius
   close_multiple: Uždaryk viską
+  kill: Nužudymo procesas
+  kill_multiple: Nužudyti visus procesus
 media_menu:
   remove: Pašalinkite medijos modulį
 start_menu:

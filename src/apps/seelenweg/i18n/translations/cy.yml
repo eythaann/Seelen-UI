@@ -16,6 +16,8 @@ app_menu:
   close: Chaewch
   pin_to_right: Pin i'r dde
   pin: Piniff
+  kill: Proses Lladd
+  kill_multiple: Lladd Pob Proses
 media_menu:
   remove: Dileu Modiwl Cyfryngau
 start_menu:

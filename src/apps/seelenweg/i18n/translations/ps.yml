@@ -16,6 +16,8 @@ app_menu:
   close: بندول
   run_as: د مدیر په توګه چلول
   pin: پن
+  kill_multiple: ټولې پروسې وژني
+  kill: د وژلو پروسه
 media_menu:
   remove: د میډیا ماډل لرې کړئ
 start_menu:

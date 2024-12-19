@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Alças de cópia
   close: Fechar
   close_multiple: Fechar tudo
+  kill: Processo de eliminação
+  kill_multiple: Mate todos os processos
 media_menu:
   remove: Remover módulo de mídia
 start_menu:

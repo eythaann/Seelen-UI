@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Poignées de copie
   close: Fermer
   close_multiple: Ferme tout
+  kill: Processus de mise à mort
+  kill_multiple: Tuez tous les processus
 media_menu:
   remove: Supprimer le module multimédia
 start_menu:

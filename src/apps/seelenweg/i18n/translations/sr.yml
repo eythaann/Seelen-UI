@@ -16,6 +16,8 @@ app_menu:
   pin: Пин
   unpin: Развелити
   pin_to_right: Пин удесно
+  kill: Килл Процесс
+  kill_multiple: Убијте све процесе
 media_menu:
   remove: Уклоните медијски модул
 start_menu:

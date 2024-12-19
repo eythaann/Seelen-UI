@@ -16,6 +16,8 @@ app_menu:
   pin_to_center: Pin al centre
   copy_handles: Manelles de còpia
   unpin: Desfeta
+  kill_multiple: Mata tots els processos
+  kill: Procés de matança
 media_menu:
   remove: Elimina el mòdul de suports
 start_menu:

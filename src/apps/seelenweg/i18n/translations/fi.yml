@@ -16,6 +16,8 @@ app_menu:
   pin_to_center: Pintää keskustaan
   pin_to_left: Vasemmalle
   unpin: Purkaa
+  kill: Tappoprosessi
+  kill_multiple: Tapa kaikki prosessit
 media_menu:
   remove: Poista mediamoduuli
 start_menu:

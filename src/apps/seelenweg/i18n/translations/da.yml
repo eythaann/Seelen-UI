@@ -16,6 +16,8 @@ app_menu:
   pin_to_left: Pin til venstre
   pin_to_right: Pin til højre
   run_as: Kør som administrator
+  kill: Aflivningsproces
+  kill_multiple: Dræb alle processer
 media_menu:
   remove: Fjern mediemodulet
 start_menu:

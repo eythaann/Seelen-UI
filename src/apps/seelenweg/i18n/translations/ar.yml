@@ -16,6 +16,8 @@ app_menu:
   copy_handles: مقابض النسخ
   close: يغلق
   close_multiple: إغلاق الكل
+  kill_multiple: قتل كافة العمليات
+  kill: عملية القتل
 media_menu:
   remove: إزالة وحدة الوسائط
 start_menu:

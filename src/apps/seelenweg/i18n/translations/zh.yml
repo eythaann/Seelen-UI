@@ -16,6 +16,8 @@ app_menu:
   copy_handles: 复制句柄
   close: 关闭
   close_multiple: 全部关闭
+  kill: 杀死进程
+  kill_multiple: 杀死所有进程
 media_menu:
   remove: 移除媒体模块
 start_menu:

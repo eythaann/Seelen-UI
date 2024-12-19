@@ -16,6 +16,8 @@ app_menu:
   pin_to_right: Игла надесно
   close_multiple: Затворете ги сите
   pin_to_center: Игла до центар
+  kill_multiple: Убиј ги сите процеси
+  kill: Процес на убивање
 media_menu:
   remove: Отстранете го модулот за медиуми
 start_menu:

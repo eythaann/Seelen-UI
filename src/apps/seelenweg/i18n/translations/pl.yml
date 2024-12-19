@@ -16,6 +16,8 @@ app_menu:
   copy_handles: Kopiuj uchwyty
   close_multiple: Zamknij wszystko
   pin_to_left: Szpilka do lewej
+  kill: Zabij proces
+  kill_multiple: Zabij wszystkie procesy
 media_menu:
   remove: Usuń moduł multimediów
 start_menu:

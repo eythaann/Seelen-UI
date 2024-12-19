@@ -16,6 +16,8 @@ app_menu:
   pin: ເຂັມ PIN
   unpin: unppin
   pin_to_left: ເຂັມຊ້າຍໄປ
+  kill: ຂະບວນການຂ້າ
+  kill_multiple: ຂ້າຂະບວນການທັງຫມົດ
 media_menu:
   remove: ເອົາ Module ສື່
 start_menu:

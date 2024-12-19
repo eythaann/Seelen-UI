@@ -18,6 +18,7 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 import { savePinnedItems } from './storeApi';
 
 const initialState: RootState = {
+  devTools: false,
   itemsOnLeft: [],
   itemsOnCenter: [],
   itemsOnRight: [],

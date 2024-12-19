@@ -40,7 +40,10 @@ mods:
 start:
   title: Benvenuti!
   message: >-
-    Benvenuti in Seelen UI, l'ambiente desktop definitivo con un gestore delle finestre a tiling incorporato per migliorare la vostra esperienza Windows! Esplorate una nuova era di efficienza e multitasking con la nostra interfaccia intuitiva e funzionalità avanzate.
+    Benvenuti in Seelen UI, l'ambiente desktop definitivo con un gestore delle
+    finestre a tiling incorporato per migliorare la vostra esperienza Windows!
+    Esplorate una nuova era di efficienza e multitasking con la nostra
+    interfaccia intuitiva e funzionalità avanzate.
   message_accent: Ottimizzate la vostra produttività con stile!
 general:
   startup: Eseguire all'avvio?
@@ -77,7 +80,9 @@ toolbar:
     Utilizza la logica di visualizzazione specifica anziché quella di focus
     singolo
 vd:
-  disabled_windows_version: La strategia nativa dei Desktop Virtuali non è disponibile per la vostra versione di Windows.
+  disabled_windows_version: >-
+    La strategia nativa dei Desktop Virtuali non è disponibile per la vostra
+    versione di Windows.
   strategy:
     label: Strategia Desktop Virtuale
     native: Nativa
@@ -112,6 +117,9 @@ weg:
     visible_separators: Separatori Visibili
   delay_to_show: Ritardo per mostrare
   delay_to_hide: Ritardo per nascondere
+  use_multiple_monitor_overlap_logic: >-
+    Utilizza la logica di visualizzazione specifica anziché quella di focus
+    singolo
 devtools:
   enable: Abilita Strumenti Sviluppatore
   app_folders: Cartelle App
@@ -128,9 +136,14 @@ apps_configurations:
   new: Nuovo
   bundled_title: Config App Fornite con Seelen
   bundled_msg: >-
-    Queste configurazioni fornite non sono modificabili e sono progettate per fornirvi la migliore esperienza senza personalizzazione. Configurano automaticamente le applicazioni più comuni per voi.
+    Queste configurazioni fornite non sono modificabili e sono progettate per
+    fornirvi la migliore esperienza senza personalizzazione. Configurano
+    automaticamente le applicazioni più comuni per voi.
   extra_info: >-
-    Seelen UI utilizza solo un identificatore per app (primo corrispondente trovato), quindi l'ordine in cui sono specificate è importante; l'ultima aggiunta avrà la priorità. Nota che la tabella è ordinata per impostazione predefinita dalla più recente alla più vecchia.
+    Seelen UI utilizza solo un identificatore per app (primo corrispondente
+    trovato), quindi l'ordine in cui sono specificate è importante; l'ultima
+    aggiunta avrà la priorità. Nota che la tabella è ordinata per impostazione
+    predefinita dalla più recente alla più vecchia.
   confirm_delete_title: Conferma Eliminazione
   confirm_delete: Siete sicuri di voler eliminare questa/e configurazione/i?
   search: Cerca
