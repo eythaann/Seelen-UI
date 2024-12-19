@@ -1,146 +1,147 @@
-loading: تحميل...
-inProgress: في تَقَدم...
-cancel: يلغي
-save: يحفظ
-quit: يترك
-open: يفتح
-delete: يمسح
+loading: جاري التحميل...
+inProgress: قيد التنفيذ...
+cancel: إلغاء
+save: حفظ
+quit: الخروج
+open: فتح
+delete: حذف
 sides:
-  left: غادر
+  left: يسار
   right: يمين
-  top: قمة
-  bottom: قاع
+  top: فوق
+  bottom: تحت
 header:
   labels:
     general: عام
-    seelen_bar: شريط الأدوات الهوى
-    seelen_wm: مدير النافذة
-    seelen_weg: قفص الاتهام / شريط المهام
+    seelen_bar: شريط الأدوات
+    seelen_wm: مدير النوافذ
+    seelen_weg: دائرة المهام/شريط المهام
     monitors: الشاشات
     specific_apps: تطبيقات محددة
     shortcuts: الاختصارات
-    developer: مطور
-    info: معلومة
-    seelen_rofi: قاذفة التطبيق
-    virtual_desk: أجهزة الكمبيوتر المكتبية الافتراضية
-    home: بيت
-    mods: الإضافات والحاجيات
-    seelen_wall: مدير خلفية
+    developer: المطور
+    info: معلومات
+    seelen_rofi: مشغل التطبيقات
+    virtual_desk: الكمبيوتر الافتراضي
+    home: المنزل
+    mods: الإضافات
+    seelen_wall: مدير الخلفيات
 start:
-  title: مرحباً!
+  title: اهلا وسهلا!
   message: >-
-    مرحبًا بك في Seelen UI، بيئة سطح المكتب المثالية مع مدير النوافذ المدمج
-    لتحسين تجربة Windows الخاصة بك! اكتشف عصرًا جديدًا من الكفاءة وتعدد المهام
-    من خلال الواجهة البديهية والميزات المتقدمة.
-  message_accent: قم بتحسين إنتاجيتك بأناقة!
+اهلا فيك في Seelen UI، خدمات سطح المكتب المثالية 
+مع مدير النوافذ لتحسين تجربتك! اكتشف خدمات جديده 
+من الجودة وسهولة الأستخدام لتعدد المهام من خلال
+ واجهات جديده وخدمات مميزة.
+  message_accent: حسن جودة إنتاجيتك!
 general:
-  startup: تشغيل عند بدء التشغيل؟
-  language: لغة
+  startup: تفعيل عند تشغيل الكمبيوتر؟
+  language: اللغات
   theme:
-    label: معلومات الموضوع
-    placeholder: اختر نمطا
-    author: مؤلف
-    description: وصف
-    add: إضافة موضوع
-    added: تمت إضافة الموضوع بالفعل
-    enabled: السمات الممكّنة
-    tags: العلامات
+    label: العنوان
+    placeholder: اختر النمط
+    author: المؤلف
+    description: الوصف
+    add: إضافة النمط
+    added: تمت إضافة النمط بالفعل
+    enabled: مفعل
+    tags: شعارات
     available: متاح
-    selected: المحدد
+    selected: تم التحديد
   icon_pack:
-    label: حزم أيقونة
-  accent_color: لون لهجة
+    label: حزم الأيقونة
+  accent_color: اللون الثانوي
   wallpaper:
-    select: حدد خلفية
+    select: حدد الخلفية
   date_format: تنسيق التاريخ
 toolbar:
-  enable: تمكين شريط الأدوات الفاخر
+  enable: فعل شريط الأدوات الفاخر
   placeholder:
-    select: هيكل شريط الأدوات
-    author: مؤلف
-    description: وصف
-  height: ارتفاع
-  auto_hide: الاختباء التلقائي
+    select: حدد هيكل شريط الأدوات
+    author: المؤلف
+    description: الوصف
+  height: الارتفاع
+  auto_hide: الأخفاء التلقائي
   label: شريط الأدوات
-  delay_to_show: تأخير في العرض
-  delay_to_hide: تأخير الاختباء
-  use_multiple_monitor_overlap_logic: استخدم عرضًا خاصًا بدلاً من منطق التركيز الفردي
+  delay_to_show: تأخير الظهور
+  delay_to_hide: تأخير الأخفاء
+  use_multiple_monitor_overlap_logic: استخدم العرض الخاص بدلاً من منطق التركيز الفردي
 wm:
-  layout: تَخطِيط
-  author: مؤلف
-  description: وصف
-  space_between_containers: الفضاء بين الحاويات
-  workspace_padding: حشو مساحات العمل
-  workspace_offset: إزاحة مساحات العمل (الهوامش)
-  resize_delta: تغيير حجم دلتا (%)
+  layout: التخطيط
+  author: المؤلف
+  description: الوصف
+  space_between_containers: المساحه بين الحاويات
+  workspace_padding:  المساحه بين مساحات العمل
+  workspace_offset: المساحه حول مساحات العمل
+  resize_delta: غير حجم دلتا (%)
   border:
-    enable: تمكين حدود النافذة
+    enable: تفعيل حدود النافذة
     width: عرض الحدود
     offset: إزاحة الحدود
-  enable: تمكين مدير نافذة البلاط
+  enable: تفعيل مدير نافذة البلاط
 weg:
   label: قفص الاتهام / شريط المهام
-  enable: تمكين قفص الاتهام/شريط المهام
-  width: عرض
-  auto_hide: اخفاء تلقائي
-  padding: حشوة
-  margin: هامِش
-  gap: فجوة
+  enable: تفعيل قفص الاتهام/شريط المهام
+  width: العرض
+  auto_hide: الأخفاء التلقائي
+  padding: المساحه
+  margin: الهامش
+  gap: الفراغ
   items:
-    label: أغراض
-    size: حجم الصنف
-    zoom_size: الحجم المكبر (يستخدم للموضوعات)
-    gap: المسافة بين العناصر
-    visible_separators: فواصل مرئية
-  dock_side: موضع
-  delay_to_hide: تأخير الاختباء
-  delay_to_show: تأخير في العرض
-  use_multiple_monitor_overlap_logic: استخدم عرضًا خاصًا بدلاً من منطق التركيز الفردي
+    label: العناصر
+    size: حجم العنصر
+    zoom_size: حجم المكبر (يستخدم للموضوعات)
+    gap: الفراغ بين العناصر
+    visible_separators: الفواصل المرئية
+  dock_side: المكان
+  delay_to_hide: تأخير الأخفاء
+  delay_to_show: تأخير الظهور
+  use_multiple_monitor_overlap_logic: استخدم نمط تعدد الشاشات
 devtools:
-  enable: تمكين أدوات المطور
+  enable: تفعيل أدوات المطور
   app_folders: مجلدات التطبيق
   install_folder: مجلد التثبيت
   data_folder: مجلد البيانات
   settings_file: ملف الإعدادات
-  custom_config_file: تحميل ملف التكوين المخصص
-  load: حمولة
+  custom_config_file: تحميل ملف الأعدادات المخصص
+  load: تحميل
 apps_configurations:
-  import: يستورد
-  export: يصدّر
-  delete: يمسح
+  import: استيراد
+  export: صدر
+  delete: حذف
   swap: تبديل
   new: جديد
-  bundled_title: تكوين التطبيق المجمعة مع Seelen
+  bundled_title: أضافه التطبيقات المجمعه مع Seelen
   bundled_msg: >-
-    هذه التكوينات المجمعة غير قابلة للتحرير وهي مصممة لتوفر لك أفضل تجربة دون
-    تخصيص. يقومون تلقائيًا بتكوين التطبيقات الأكثر شيوعًا لك.
+    هذه الأضافات المجمعة غير قابلة للتحرير وهي مصممة لتوفر لك أفضل تجربة من دون
+    تخصيص. يقومون تلقائيًا بإضافة التطبيقات الأكثر شهره لك.
   confirm_delete_title: تأكيد الحذف
-  confirm_delete: هل أنت متأكد أنك تريد حذف هذا التكوين/التكوينات؟
-  search: يبحث
+  confirm_delete: هل أنت متأكد أنك تريد حذف هذه الأضافات/التجميعات؟
+  search: البحث
   app:
-    name: اسم
-    category: فئة
-    category_placeholder: لا أحد
-    bindings: ملزم (لاحظ أن كلا الخيارين مطلوبان)
-    monitor: شاشة
-    monitor_placeholder: لا أحد
+    name: الاسم
+    category: الفئة
+    category_placeholder: لا يوجد
+    bindings: الزامي (لاحظ أن كلا الخيارين مطلوبه)
+    monitor: الشاشة
+    monitor_placeholder: لا يوجد
     workspace: مساحة العمل
-    workspace_placeholder: لا أحد
-    title_create: إنشاء {{اسم}}
-    title_readonly: عرض {{اسم}}
-    ok_edit: تحديث
-    ok_create: يخلق
-    ok_readonly: تحرير كجديد
+    workspace_placeholder: لا يوجد
+    title_create: إنشاء {{الأسم}}
+    title_readonly: عرض {{الأسم}}
+    ok_edit: تعديل
+    ok_create: إنشاء
+    ok_readonly: عرض قرائه فقط
     options:
       float: يطفو
-      unmanage: غير إدارة
-      force: إدارة القوة
+      unmanage: لم يتم إدارته
+      force: الألزام
       pinned: مثبت
-      hidden: الاختباء من قفص الاتهام/شريط المهام
-    weg_options_label: خيارات قفص الاتهام/شريط المهام
-    wm_options_label: خيارات مدير النافذة
+      hidden: مخفي من دائرة المهام/شريط المهام
+    weg_options_label: خيارات دائرة المهام/شريط المهام
+    wm_options_label: خيارات مدير النوافذ
     options_label: خيارات إضافية
-    title_edit: تحرير {{name}}
+    title_edit: تعديل {{العنوان}}
   identifier:
     remove: حذف الحظر
     id: المعرف
@@ -151,44 +152,44 @@ apps_configurations:
     or: أو
     add_block: أضف بلوك
   extra_info: >-
-    تستخدم واجهة مستخدم Seelen معرفًا واحدًا فقط لكل تطبيق (تم العثور على أول
-    تطابق) لذا فإن الترتيب في كيفية التحديد مهم، وسيتم إعطاء الأولوية لآخر
-    إضافة، كما لاحظ أنه يتم فرز الجدول افتراضيًا من الأحدث إلى الأقدم.
+ تستخدم واجهة Seelen معرف واحد  فقط لكل تطبيق (تم العثور على أول
+    تطابق) فإن الترتيب في كيفية التحديد مهم، وسيتم إعطاء الأولوية لآخر
+    إضافة، كما تلاحظ أنه يتم فرز الجدول افتراضيًا من الأحدث إلى الأقدم.
 extras:
-  version: إصدار
+  version: الإصدار
   links: الروابط الرسمية
-  github: جيثب
-  discord: الفتنة
+  github: جيت هب
+  discord: ديسكورد
   relaunch: إعادة التشغيل
   exit: إنهاء/خروج
 shortcuts:
-  enable: تمكين الاختصارات المتكاملة (ahk)
-  enable_tooltip: قم بالتعطيل إذا كنت ستنفذ الاختصارات الخاصة بك باستخدام Seelen Core Api
+  enable: فعل الاختصارات (ahk)
+  enable_tooltip: قم بتعطيله إذا كنت ستستخدم الاختصارات الخاصة بك باستخدام Seelen Core Api
   labels:
-    reserve_top: احتياطي الأعلى
-    reserve_bottom: احتياطي القاع
-    reserve_left: احتياطي اليسار
-    reserve_right: حق الاحتياط
-    reserve_float: تعويم الاحتياطي
-    reserve_stack: المكدس الاحتياطي
-    focus_top: التركيز الأعلى
-    focus_bottom: التركيز على القاع
+    reserve_top: الاحتياطي الأعلى
+    reserve_bottom: الاحتياطي الأسفل
+    reserve_left: الاحتياطي الأيسر
+    reserve_right: الاحتياطي الأيمن
+    reserve_float: الاحتياطي العائم
+    reserve_stack: الاحتياطي المكدس
+    focus_top: التركيز على الأعلى
+    focus_bottom: التركيز على الأسفل
     focus_left: التركيز على اليسار
-    focus_right: التركيز الصحيح
+    focus_right: التركيز على اليمين
     focus_latest: التركيز على الأحدث
     increase_width: زيادة العرض
     decrease_width: تقليل العرض
     increase_height: زيادة الارتفاع
     decrease_height: تقليل الارتفاع
     restore_sizes: استعادة الأحجام
-    switch_workspace_2: قم بالتبديل إلى مساحة العمل 2
-    switch_workspace_3: قم بالتبديل إلى مساحة العمل 3
-    switch_workspace_4: قم بالتبديل إلى مساحة العمل 4
-    switch_workspace_5: قم بالتبديل إلى مساحة العمل 5
-    switch_workspace_6: قم بالتبديل إلى مساحة العمل 6
-    switch_workspace_7: قم بالتبديل إلى مساحة العمل 7
-    switch_workspace_8: قم بالتبديل إلى مساحة العمل 8
-    switch_workspace_9: قم بالتبديل إلى مساحة العمل 9
+    switch_workspace_2: بدل إلى مساحة العمل 2
+    switch_workspace_3: بدل إلى مساحة العمل 3
+    switch_workspace_4: بدل إلى مساحة العمل 4
+    switch_workspace_5: بدل إلى مساحة العمل 5
+    switch_workspace_6: بدل إلى مساحة العمل 6
+    switch_workspace_7: بدل إلى مساحة العمل 7
+    switch_workspace_8: بدل إلى مساحة العمل 8
+    switch_workspace_9: بدل إلى مساحة العمل 9
     move_to_workspace_0: انتقل إلى مساحة العمل 0
     move_to_workspace_1: انتقل إلى مساحة العمل 1
     move_to_workspace_2: انتقل إلى مساحة العمل 2
@@ -198,24 +199,24 @@ shortcuts:
     move_to_workspace_6: انتقل إلى مساحة العمل 6
     move_to_workspace_7: انتقل إلى مساحة العمل 7
     move_to_workspace_8: انتقل إلى مساحة العمل 8
-    move_to_workspace_9: انتقل إلى مساحة العمل 9
-    send_to_workspace_0: أرسل إلى مساحة العمل 0
-    send_to_workspace_1: أرسل إلى مساحة العمل 1
-    send_to_workspace_2: أرسل إلى مساحة العمل 2
-    send_to_workspace_3: أرسل إلى مساحة العمل 3
-    send_to_workspace_4: أرسل إلى مساحة العمل 4
-    send_to_workspace_5: أرسل إلى مساحة العمل 5
-    send_to_workspace_6: أرسل إلى مساحة العمل 6
-    send_to_workspace_7: أرسل إلى مساحة العمل 7
-    send_to_workspace_8: أرسل إلى مساحة العمل 8
-    send_to_workspace_9: أرسل إلى مساحة العمل 9
-    switch_workspace_1: التبديل إلى مساحة العمل 2
-    switch_workspace_0: التبديل إلى مساحة العمل 1
-    misc_toggle_lock_tracing: تبديل قفل تتبع (سجلات)
-    misc_toggle_win_event_tracing: تبديل الفوز تتبع حدث (سجلات)
+    move_to_workspace_9: انتقل لمساحة العمل 9
+    send_to_workspace_0: أرسل لمساحة العمل 0
+    send_to_workspace_1: أرسل لمساحة العمل 1
+    send_to_workspace_2: أرسل لمساحة العمل 2
+    send_to_workspace_3: أرسل لمساحة العمل 3
+    send_to_workspace_4: أرسل لمساحة العمل 4
+    send_to_workspace_5: أرسل لمساحة العمل 5
+    send_to_workspace_6: أرسل لمساحة العمل 6
+    send_to_workspace_7: أرسل لمساحة العمل 7
+    send_to_workspace_8: أرسل لمساحة العمل 8
+    send_to_workspace_9: أرسل لمساحة العمل 9
+    switch_workspace_1: بدل إلى مساحة العمل 2
+    switch_workspace_0: بدل إلى مساحة العمل 1
+    misc_toggle_lock_tracing: فعل قفل تتبع (سجلات)
+    misc_toggle_win_event_tracing: فعل فوز تتبع حدث (سجلات)
     misc_open_settings: فتح الإعدادات
-    toggle_launcher: تبديل
-  reset: إعادة ضبط على الافتراضات
+    toggle_launcher: فعل مشغل التطبيقات
+  reset: إعادة الضبط على الأساسيات
   readonly_tooltip: هذا اختصار للقراءة فقط
 vd:
   strategy:
@@ -223,25 +224,25 @@ vd:
     seelen: سيلين
     label: استراتيجية سطح المكتب الظاهري
   disabled_windows_version: استراتيجية سطح المكتب الافتراضية الأصلية غير متوفرة لإصدار Windows الخاص بك.
-save_and_restart: حفظ وإعادة التشغيل
+save_and_restart: حفظ وإعد التشغيل
 monitors_configurations:
   label: شاشة {{index}}
 wall:
   backgrounds: خلفيات
-  no_background: عرض شرائح فارغ ، باستخدام خلفية السمة بدلاً من ذلك.
-  enable: تمكين مدير خلفية
-  random: عرض عشوائي عرض الشرائح
-  interval: تغيير خلفية كل
+  no_background: بدون خلفية
+  enable: تمكين مدير الخلفيات
+  random: عرض عشوائي للشرائح
+  interval: تغيير الخلفية كل
   hours: ساعات
   seconds: ثوان
   minutes: دقائق
 app_launcher:
   runners:
-    explorer: يجري
-    cmd: يأمر
+    explorer: أستكشف
+    cmd: الأوامر
     label: المتسابقين
-  enable: تمكين قاذفة التطبيق
-  monitor: شاشة لإظهار
+  enable: تمكين مشغل التطبيقات
+  monitor: الشاشة
 insert: أدخل
 more: أكثر
 inherit: ورث
@@ -252,7 +253,7 @@ update:
   downloading: تنزيل ...
 miscellaneous: متنوع
 mods:
-  target: هدف
-  widgets: الحاجيات
+  target: الهدف
+  widgets: الأيقونات
   plugins: الإضافات
-remove: يزيل
+remove: الحذف
