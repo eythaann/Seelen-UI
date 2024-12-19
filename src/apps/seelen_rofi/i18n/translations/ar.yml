@@ -1,11 +1,11 @@
 app_launcher:
   runners:
-    cmd: يأمر
-    explorer: يجري
+    cmd: الأوامر
+    explorer: أستكشف
 footer:
-  shortcuts: عرض اختصارات
+  shortcuts: أظهر الأختصارات
 header:
-  search: التطبيق أو الأمر أو المسار
+  search: أبحث عن تطبيقات, ملفات, أوامر
 item:
-  pin: دبوس إلى قفص الاتهام
-  open_location: افتح موقع الملف
+  pin: ثبت هذا الملف
+  open_location: افتح مكان الملف

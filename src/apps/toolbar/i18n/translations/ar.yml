@@ -1,6 +1,6 @@
 media:
-  master_volume: الحجم الرئيسي
-  output_device: جهاز إخراج
+  master_volume: الصوت الرئيسي
+  output_device: جهاز الإخراج
   input_device: جهاز الإدخال
   players: مشغلات الوسائط
   device:
@@ -14,8 +14,8 @@ network:
     password: كلمة المرور
   disconnect: قطع الاتصال
   connect: يتصل
-  connected: متصل ب
-  scanning: المسح للشبكات
+  connected: متصل
+  scanning: البحث عن شبكات
   available: الشبكات المتاحة
   secured: شبكة مشفرة
   saved: الشبكات المحفوظة
@@ -23,22 +23,22 @@ settings:
   title: إعدادات
   app_settings: إعدادات التطبيقات
   log_out: تسجيل خروج
-  sleep: ينام
-  restart: إعادة تشغيل
-  shutdown: اغلق
-  power: قوة
+  sleep: النوم
+  restart: إعادة التشغيل
+  shutdown: اطفاء الجهاز
+  power: الطاقة
 placeholder:
   open_user_folder: افتح مجلد المستخدم
-  open_system_tray: افتح علبة النظام
+  open_system_tray: افتح ايقونات النظام
   bluetooth_devices: بلوتوث
   ethernet_connected: خدمة الإنترنت
   ethernet_disconnected: لا يوجد اتصال بالإنترنت
-  volume: مقدار
+  volume: الصوت
   battery_remaining: ٪ متبقي
   smart_charge: '- الشحن الذكي'
   settings: الإعدادات السريعة
-  notifications: إشعارات
-unlabelled_tray: أيقونة صينية غير محدودة
+  notifications: الإشعارات
+unlabelled_tray: أيقونة غير مسماة
 context_menu:
   remove: إزالة الوحدة النمطية
   add_module: إضافة الوحدة النمطية
