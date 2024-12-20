@@ -359,6 +359,12 @@ impl Seelen {
                 .name("seelen.vd.ahk")
                 .execute()?;
 
+            if state.is_weg_enabled() {
+                AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.weg.ahk"), &vars)
+                    .name("seelen.weg.ahk")
+                    .execute()?;
+            }
+
             if state.is_window_manager_enabled() {
                 AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.wm.ahk"), &vars)
                     .name("seelen.wm.ahk")

@@ -1,12 +1,19 @@
 use clap::Command;
+use seelen_core::handlers::SeelenEvent;
 
-use crate::{error_handler::Result, get_subcommands};
+use crate::{
+    error_handler::Result,
+    get_subcommands,
+    windows_api::{monitor::Monitor, WindowsApi},
+};
 
 use super::SeelenWeg;
 
 get_subcommands![
     /** Open Dev Tools (only works if the app is running in dev mode) */
     Debug,
+    /** Set foreground to the application which is idx-nth on the weg. If it is not started, then starts it. */
+    ForegroundOrRunApp(idx: usize => "Which index should be started on weg."),
 ];
 
 impl SeelenWeg {
@@ -25,6 +32,12 @@ impl SeelenWeg {
             SubCommand::Debug => {
                 #[cfg(any(debug_assertions, feature = "devtools"))]
                 self.window.open_devtools();
+            }
+            SubCommand::ForegroundOrRunApp(idx) => {
+                if Monitor::from(WindowsApi::monitor_from_window(self.window.hwnd()?)).index()? == 0
+                {
+                    self.emit(SeelenEvent::WegFocusedAppByIndex, idx)?;
+                }
             }
         };
         Ok(())

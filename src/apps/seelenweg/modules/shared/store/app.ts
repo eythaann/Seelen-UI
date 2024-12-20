@@ -1,5 +1,5 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { Settings, UIColors, WegItemType } from '@seelen-ui/lib';
+import { invoke, SeelenCommand, Settings, UIColors, WegItemType } from '@seelen-ui/lib';
 
 import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 
@@ -101,6 +101,31 @@ export const RootSlice = createSlice({
           state.itemsOnRight.push(appToPin);
           break;
         default:
+      }
+    },
+    startOrFocusApp(state, action: PayloadAction<number>) {
+      const index = action.payload == 0 ? 9 : action.payload - 1;
+
+      const allApp: SwItem[] = state.itemsOnLeft
+        .concat(state.itemsOnCenter)
+        .concat(state.itemsOnRight)
+        .filter((item: SwItem) => item.type === WegItemType.Pinned || item.type === WegItemType.Temporal);
+
+      const item: SwItem | undefined = allApp.at(index);
+
+      if (!item) {
+        return;
+      }
+
+      let hwnd = item.opens[0];
+      if (!hwnd) {
+        if (item.path.endsWith('.lnk')) {
+          invoke(SeelenCommand.OpenFile, { path: item.path });
+        } else {
+          invoke(SeelenCommand.OpenFile, { path: item.execution_command });
+        }
+      } else if (state.focusedApp?.hwnd != hwnd) {
+        invoke(SeelenCommand.RequestFocus, { hwnd });
       }
     },
     unPinApp(state, action: PayloadAction<ExtendedPinnedWegItem | ExtendedTemporalWegItem>) {

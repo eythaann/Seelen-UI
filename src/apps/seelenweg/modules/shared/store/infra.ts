@@ -102,6 +102,10 @@ export async function registerStoreEvents() {
     }
   });
 
+  await view.listen<number>(SeelenEvent.WegFocusedAppByIndex, (event) => {
+    store.dispatch(RootActions.startOrFocusApp(event.payload));
+  });
+
   await listenGlobal<MediaSession[]>('media-sessions', (event) => {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
