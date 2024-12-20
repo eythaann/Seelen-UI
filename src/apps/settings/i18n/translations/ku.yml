@@ -171,6 +171,34 @@ shortcuts:
     send_to_workspace_7: Ji bo Workspace 7 bişînin
     send_to_workspace_8: Ji bo Workspace 8 bişînin
     send_to_workspace_9: Ji Workspace 9 re bişînin
+    start_weg_app_0: >-
+      Li ser pozîsyona tabloya peywirê 10 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_1: Li ser pozîsyona karûbarê 1-ê sepanê bisekine an dest pê bike
+    start_weg_app_2: >-
+      Li ser pozîsyona tabloya peywirê 2 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_3: >-
+      Li ser pozîsyona tabloya peywirê 3 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_4: >-
+      Li ser pozîsyona tabloya peywirê 4 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_5: >-
+      Li ser pozîsyona tabloya peywirê 5 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_6: >-
+      Li ser pozîsyona tabloya peywirê 6 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_7: >-
+      Li ser pozîsyona tabloya peywirê 7 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_8: >-
+      Li ser pozîsyona tabloya peywirê 8 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_9: >-
+      Li ser pozîsyona tabloya peywirê 9 bala xwe bidin an sepanê bidin
+      destpêkirin
     switch_workspace_0: Switch to Workspace 1
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_2: Switch to Workspace 2

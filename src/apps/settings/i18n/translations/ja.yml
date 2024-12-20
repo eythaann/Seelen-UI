@@ -167,6 +167,16 @@ shortcuts:
     send_to_workspace_7: ワークスペース7に送信
     send_to_workspace_8: ワークスペース8に送信
     send_to_workspace_9: ワークスペース9に送信
+    start_weg_app_0: タスクバーの位置 10 にフォーカスするかアプリを起動します
+    start_weg_app_1: タスクバーの位置 1 にフォーカスするかアプリを起動します
+    start_weg_app_2: タスクバーの位置 2 にフォーカスするかアプリを起動します
+    start_weg_app_3: タスクバーの位置 3 にフォーカスするか、アプリを起動します
+    start_weg_app_4: タスクバーの位置 4 にフォーカスするかアプリを起動します
+    start_weg_app_5: タスクバーの位置 5 にフォーカスするかアプリを起動します
+    start_weg_app_6: タスクバーの位置 6 にフォーカスするかアプリを起動します
+    start_weg_app_7: タスクバーの位置 7 にフォーカスするかアプリを起動します
+    start_weg_app_8: タスクバーの位置 8 にフォーカスするかアプリを起動します
+    start_weg_app_9: タスクバーの位置 9 にフォーカスするかアプリを起動します
     switch_workspace_0: ワークスペースに切り替えます1
     switch_workspace_1: ワークスペースに切り替えます2
     switch_workspace_2: ワークスペース2に切り替え

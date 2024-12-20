@@ -164,6 +164,16 @@ shortcuts:
     send_to_workspace_7: 发送至工作区 7
     send_to_workspace_8: 发送至工作区 8
     send_to_workspace_9: 发送至工作区 9
+    start_weg_app_0: 在任务栏位置 10 上聚焦或启动应用程序
+    start_weg_app_1: 在任务栏位置 1 上聚焦或启动应用程序
+    start_weg_app_2: 在任务栏位置 2 上聚焦或启动应用程序
+    start_weg_app_3: 在任务栏位置 3 上聚焦或启动应用程序
+    start_weg_app_4: 在任务栏位置 4 上聚焦或启动应用程序
+    start_weg_app_5: 在任务栏位置 5 上聚焦或启动应用程序
+    start_weg_app_6: 在任务栏位置 6 上聚焦或启动应用程序
+    start_weg_app_7: 在任务栏位置 7 上聚焦或启动应用程序
+    start_weg_app_8: 在任务栏位置 8 上聚焦或启动应用程序
+    start_weg_app_9: 在任务栏位置 9 上聚焦或启动应用程序
     switch_workspace_0: 切换至工作区 0
     switch_workspace_1: 切换至工作区 1
     switch_workspace_2: 切换至工作区 2

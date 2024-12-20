@@ -206,6 +206,56 @@
           "fancy": "Win + Shift + 0",
           "readonly": false
         },
+        "startWegApp0": {
+          "ahk": "#0",
+          "fancy": "Win + 0",
+          "readonly": false
+        },
+        "startWegApp1": {
+          "ahk": "#1",
+          "fancy": "Win + 1",
+          "readonly": false
+        },
+        "startWegApp2": {
+          "ahk": "#2",
+          "fancy": "Win + 2",
+          "readonly": false
+        },
+        "startWegApp3": {
+          "ahk": "#3",
+          "fancy": "Win + 3",
+          "readonly": false
+        },
+        "startWegApp4": {
+          "ahk": "#4",
+          "fancy": "Win + 4",
+          "readonly": false
+        },
+        "startWegApp5": {
+          "ahk": "#5",
+          "fancy": "Win + 5",
+          "readonly": false
+        },
+        "startWegApp6": {
+          "ahk": "#6",
+          "fancy": "Win + 6",
+          "readonly": false
+        },
+        "startWegApp7": {
+          "ahk": "#7",
+          "fancy": "Win + 7",
+          "readonly": false
+        },
+        "startWegApp8": {
+          "ahk": "#8",
+          "fancy": "Win + 8",
+          "readonly": false
+        },
+        "startWegApp9": {
+          "ahk": "#9",
+          "fancy": "Win + 9",
+          "readonly": false
+        },
         "switchWorkspace0": {
           "ahk": "!1",
           "fancy": "Alt + 1",
@@ -950,6 +1000,126 @@
           "default": {
             "ahk": "#+0",
             "fancy": "Win + Shift + 0",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp0": {
+          "default": {
+            "ahk": "#0",
+            "fancy": "Win + 0",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp1": {
+          "default": {
+            "ahk": "#1",
+            "fancy": "Win + 1",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp2": {
+          "default": {
+            "ahk": "#2",
+            "fancy": "Win + 2",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp3": {
+          "default": {
+            "ahk": "#3",
+            "fancy": "Win + 3",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp4": {
+          "default": {
+            "ahk": "#4",
+            "fancy": "Win + 4",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp5": {
+          "default": {
+            "ahk": "#5",
+            "fancy": "Win + 5",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp6": {
+          "default": {
+            "ahk": "#6",
+            "fancy": "Win + 6",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp7": {
+          "default": {
+            "ahk": "#7",
+            "fancy": "Win + 7",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp8": {
+          "default": {
+            "ahk": "#8",
+            "fancy": "Win + 8",
+            "readonly": false
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/AhkVar"
+            }
+          ]
+        },
+        "startWegApp9": {
+          "default": {
+            "ahk": "#9",
+            "fancy": "Win + 9",
             "readonly": false
           },
           "allOf": [
