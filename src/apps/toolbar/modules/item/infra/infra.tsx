@@ -1,5 +1,5 @@
 import { GenericToolbarItem } from '@seelen-ui/lib/types';
-import { Dropdown, Menu } from 'antd';
+import { Menu } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { SavePlaceholderAsCustom } from '../../main/application';
 import { RootActions, Selectors } from '../../shared/store/app';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
+import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';
 import { Icon } from '../../../../shared/components/Icon';
 import { InnerItem, InnerItemProps } from './Inner';
 
@@ -26,7 +27,12 @@ export function Item(props: InnerItemProps) {
   });
 
   return (
-    <Dropdown
+    <AnimatedDropdown
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'ft-bar-item-context-menu-open',
+        closeAnimationName: 'ft-bar-item-context-menu-close',
+      }}
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
       trigger={['contextMenu']}
@@ -51,7 +57,7 @@ export function Item(props: InnerItemProps) {
       )}
     >
       <InnerItem {...props} clickable={!!props.onClick} />
-    </Dropdown>
+    </AnimatedDropdown>
   );
 }
 

@@ -1,4 +1,4 @@
-import { Calendar, Popover, Row } from 'antd';
+import { Calendar, Row } from 'antd';
 import { CalendarMode, HeaderRender } from 'antd/es/calendar/generateCalendar';
 import moment from 'moment';
 import momentGenerateConfig from 'rc-picker/es/generate/moment';
@@ -10,6 +10,7 @@ import { BackgroundByLayersV2 } from '../../../seelenweg/components/BackgroundBy
 
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
+import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
 import { Icon } from '../../../shared/components/Icon';
 import { cx } from '../../../shared/styles';
 
@@ -181,7 +182,12 @@ export function WithDateCalendar({ children }: PropsWithChildren) {
   });
 
   return (
-    <Popover
+    <AnimatedPopover
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'calendar-open',
+        closeAnimationName: 'calendar-close',
+      }}
       style={{ width: 300 }}
       open={openPreview}
       trigger="click"
@@ -190,6 +196,6 @@ export function WithDateCalendar({ children }: PropsWithChildren) {
       content={<DateCalendar />}
     >
       {children}
-    </Popover>
+    </AnimatedPopover>
   );
 }
