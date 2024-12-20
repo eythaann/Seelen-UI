@@ -170,6 +170,16 @@ shortcuts:
     send_to_workspace_7: Send to Workspace 8
     send_to_workspace_8: Send to Workspace 9
     send_to_workspace_9: Send to Workspace 10
+    start_weg_app_0: Focus or start app on taskbar position 10
+    start_weg_app_1: Focus or start app on taskbar position 1
+    start_weg_app_2: Focus or start app on taskbar position 2
+    start_weg_app_3: Focus or start app on taskbar position 3
+    start_weg_app_4: Focus or start app on taskbar position 4
+    start_weg_app_5: Focus or start app on taskbar position 5
+    start_weg_app_6: Focus or start app on taskbar position 6
+    start_weg_app_7: Focus or start app on taskbar position 7
+    start_weg_app_8: Focus or start app on taskbar position 8
+    start_weg_app_9: Focus or start app on taskbar position 9
     switch_workspace_0: Switch to Workspace 1
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_2: Switch to Workspace 3
