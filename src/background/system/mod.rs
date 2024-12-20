@@ -15,6 +15,7 @@ use crate::{
         power::infrastructure::PowerManager,
         system_settings::infrastructure::{register_colors_events, release_colors_events},
         tray::infrastructure::register_tray_events,
+        user::infrastructure::register_user_events,
     },
     seelen::get_app_handle,
 };
@@ -45,6 +46,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
         register_notification_events();
     });
 
+    register_user_events();
     register_monitor_webview_events();
     register_colors_events();
     Ok(())

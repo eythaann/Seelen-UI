@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Settings, UIColors } from '@seelen-ui/lib';
+import { RecentFolder, Settings, UIColors } from '@seelen-ui/lib';
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 
 import { RootState } from './domain';
@@ -14,6 +14,8 @@ const initialState: RootState = {
   plugins: [],
   dateFormat: '',
   isOverlaped: false,
+  user: null,
+  userRecentFolder: RecentFolder.default().all(),
   focused: null,
   settings: settings.inner.fancyToolbar,
   env: {},
@@ -38,6 +40,7 @@ const initialState: RootState = {
   mediaOutputs: [],
   mediaInputs: [],
   notifications: [],
+  history: [],
   colors: UIColors.default().inner,
 };
 
