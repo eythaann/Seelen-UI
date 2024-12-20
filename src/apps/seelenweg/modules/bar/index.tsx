@@ -148,7 +148,7 @@ export function SeelenWeg() {
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
 
-  const projectSwItem = (item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen)));
+  const projectSwItem = (item: SwItem) => ItemByType(item, isHorizontal ? 'x' : 'y', (isOpen) => setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen)));
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
@@ -165,57 +165,74 @@ export function SeelenWeg() {
           delayed,
         })}>
         <BackgroundByLayersV2 prefix="taskbar" />
-        {[
-          ...pinnedOnLeft.map(projectSwItem),
-          <Reorder.Item
-            as="div"
-            key="separator1"
-            value={Separator1}
-            className={cx('weg-separator weg-separator-1', {
-              visible: settings.visibleSeparators,
-            })}
-            drag={false}
-            style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
-          />,
-          ...pinnedOnCenter.map(projectSwItem),
-          <Reorder.Item
-            as="div"
-            key="separator2"
-            value={Separator2}
-            className={cx('weg-separator weg-separator-2', {
-              visible: settings.visibleSeparators,
-            })}
-            drag={false}
-            style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
-          />,
-          ...pinnedOnRight.map(projectSwItem),
-        ]}
+        <div className="taskbar-scroll-container" onWheel={scrollXonY}>
+          <div className="taskbar-scroll-inner-frame">
+            {[
+              ...pinnedOnLeft.map(projectSwItem),
+              <Reorder.Item
+                as="div"
+                key="separator1"
+                value={Separator1}
+                className={cx('weg-separator weg-separator-1', {
+                  visible: settings.visibleSeparators,
+                })}
+                drag={false}
+                style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
+              />,
+              ...pinnedOnCenter.map(projectSwItem),
+              <Reorder.Item
+                as="div"
+                key="separator2"
+                value={Separator2}
+                className={cx('weg-separator weg-separator-2', {
+                  visible: settings.visibleSeparators,
+                })}
+                drag={false}
+                style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
+              />,
+              ...pinnedOnRight.map(projectSwItem),
+            ]}
+          </div>
+        </div>
       </Reorder.Group>
     </WithContextMenu>
   );
 }
 
-function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
+function scrollXonY(e) {
+  e.preventDefault();
+
+  // Capture up/down wheel events and scroll the viewport horizontally
+  const delta = e.deltaY;
+  const currPos = e.currentTarget.scrollLeft;
+  const scrollWidth = e.currentTarget.scrollWidth;
+
+  const newPos = Math.max(0, Math.min(scrollWidth, currPos + delta / 5));
+
+  e.currentTarget.scrollLeft = newPos;
+}
+
+function ItemByType(item: SwItem, drag: boolean | 'x' | 'y' | undefined, callback: (isOpen: boolean) => void) {
   if (item.type === WegItemType.Pinned && item.path) {
     if (
       item.execution_command.startsWith('shell:AppsFolder') ||
       item.execution_command.endsWith('.exe')
     ) {
-      return <UserApplication key={item.execution_command} item={item} onAssociatedViewOpenChanged={callback} />;
+      return <UserApplication key={item.execution_command} drag={drag} item={item} onAssociatedViewOpenChanged={callback} />;
     }
-    return <FileOrFolder key={item.execution_command} item={item} />;
+    return <FileOrFolder drag={drag} key={item.execution_command} item={item} />;
   }
 
   if (item.type === WegItemType.Temporal && item.path) {
-    return <UserApplication key={item.execution_command} item={item} onAssociatedViewOpenChanged={callback} />;
+    return <UserApplication key={item.execution_command} item={item} drag={drag} onAssociatedViewOpenChanged={callback} />;
   }
 
   if (item.type === WegItemType.Media) {
-    return <MediaSession key="media-item" item={item} />;
+    return <MediaSession key="media-item" drag={drag} item={item} />;
   }
 
   if (item.type === WegItemType.StartMenu) {
-    return <StartMenu key="start-menu" item={item} />;
+    return <StartMenu key="start-menu" drag={drag} item={item} />;
   }
 
   return null;
