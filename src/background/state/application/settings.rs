@@ -36,13 +36,13 @@ impl FullState {
     }
 
     pub fn write_settings(&self) -> Result<()> {
-        let mut temp_file = OpenOptions::new()
+        let mut file = OpenOptions::new()
             .write(true)
             .create(true)
             .truncate(true)
             .open(USER_SETTINGS_PATH.as_path())?;
-        temp_file.write_all(serde_json::to_string_pretty(&self.settings)?.as_bytes())?;
-        temp_file.flush()?;
+        file.write_all(serde_json::to_string_pretty(&self.settings)?.as_bytes())?;
+        file.flush()?;
         Ok(())
     }
 }

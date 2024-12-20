@@ -1,18 +1,13 @@
 {
   "$schema": "../gen/schemas/windows-schema.json",
   "identifier": "migrated",
-  "description": "permissions that were migrated from v1. windows: [settings, weg, wm]",
+  "description": "permissions that were migrated from v1. windows: [settings, wm]",
   "local": true,
   "windows": [
     "QHNlZWxlbi9zZXR0aW5ncw",
-    "QHNlZWxlbi93ZWc*",
     "QHNlZWxlbi93aW5kb3ctbWFuYWdlc*"
   ],
   "permissions": [
-    "core:path:default",
-    "core:event:default",
-    "core:window:default",
-    "core:webview:default",
     "core:app:default",
     "core:resources:default",
     "core:menu:default",
@@ -42,13 +37,6 @@
       ]
     },
 
-    "core:window:allow-show",
-    "core:window:allow-close",
-    "core:window:allow-start-dragging",
-    "core:window:allow-set-size",
-    "core:window:allow-set-position",
-    "core:window:allow-set-ignore-cursor-events",
-
     "autostart:allow-enable",
     "autostart:allow-disable",
     "autostart:allow-is-enabled",
@@ -57,10 +45,6 @@
     "dialog:allow-open",
 
     "process:allow-restart",
-    "process:allow-exit",
-
-    "log:allow-log",
-
-    "shell:allow-open"
+    "process:allow-exit"
   ]
 }

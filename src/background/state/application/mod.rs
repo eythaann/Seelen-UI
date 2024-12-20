@@ -4,6 +4,7 @@ mod icons;
 mod plugins;
 mod profiles;
 mod settings;
+mod weg_items;
 mod widgets;
 
 use arc_swap::ArcSwap;
@@ -21,8 +22,6 @@ use seelen_core::state::{
 };
 use std::{
     collections::{HashMap, VecDeque},
-    fs::OpenOptions,
-    io::{Seek, Write},
     path::{Path, PathBuf},
     sync::{
         atomic::{AtomicBool, Ordering},
@@ -34,7 +33,7 @@ use tauri::Manager;
 
 use crate::{
     error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
-    trace_lock, windows_api::WindowsApi,
+    windows_api::WindowsApi,
 };
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
@@ -67,7 +66,7 @@ pub struct FullState {
     pub icon_packs: Arc<Mutex<HashMap<String, IconPack>>>,
     pub placeholders: HashMap<String, Placeholder>,
     pub layouts: HashMap<String, WindowManagerLayout>,
-    pub weg_items: Arc<Mutex<WegItems>>,
+    pub weg_items: WegItems,
     pub launcher_history: LauncherHistory,
 
     pub plugins: HashMap<PluginId, Plugin>,
@@ -91,7 +90,7 @@ impl FullState {
             icon_packs: Arc::new(Mutex::new(HashMap::new())),
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
-            weg_items: Arc::new(Mutex::new(WegItems::default())),
+            weg_items: WegItems::default(),
             launcher_history: HashMap::new(),
             plugins: HashMap::new(),
             widgets: HashMap::new(),
@@ -139,8 +138,8 @@ impl FullState {
 
         if event.paths.contains(&WEG_ITEMS_PATH) {
             log::info!("Weg Items changed");
-            self.load_weg_items()?;
-            self.emit_weg_items(&*trace_lock!(self.weg_items))?;
+            self.read_weg_items()?;
+            self.emit_weg_items()?;
         }
 
         if event.paths.contains(&history_path) {
@@ -278,17 +277,6 @@ impl FullState {
             }
             _ => Err("Invalid settings file extension".into()),
         }
-    }
-
-    fn load_weg_items(&mut self) -> Result<()> {
-        let mut current = trace_lock!(self.weg_items);
-        if WEG_ITEMS_PATH.exists() {
-            *current = serde_yaml::from_str(&std::fs::read_to_string(WEG_ITEMS_PATH.as_path())?)?;
-            current.sanitize();
-        } else {
-            self.save_weg_items(&current)?;
-        }
-        Ok(())
     }
 
     fn load_theme_from_file(path: PathBuf) -> Result<Theme> {
@@ -512,7 +500,7 @@ impl FullState {
 
     fn load_all(&mut self) -> Result<()> {
         self.read_settings()?;
-        self.load_weg_items()?;
+        self.read_weg_items()?;
         self.load_themes()?;
         self.load_icons_packs()?;
         self.load_placeholders()?;
@@ -522,18 +510,6 @@ impl FullState {
         self.load_plugins()?;
         self.load_widgets()?;
         self.load_profiles()?;
-        Ok(())
-    }
-
-    pub fn save_weg_items(&self, items: &WegItems) -> Result<()> {
-        let mut file = OpenOptions::new()
-            .write(true)
-            .create(true)
-            .truncate(true)
-            .open(WEG_ITEMS_PATH.clone())?;
-        file.rewind()?;
-        file.write_all(serde_yaml::to_string(items)?.as_bytes())?;
-        file.flush()?;
         Ok(())
     }
 

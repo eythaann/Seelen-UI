@@ -5,7 +5,6 @@
     "QHNlZWxlbi9sYXVuY2hlcg"
   ],
   "permissions": [
-    "core:path:default",
     "fs:allow-write-text-file"
   ]
 }

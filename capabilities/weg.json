@@ -1,10 +1,11 @@
 {
   "$schema": "../gen/schemas/windows-schema.json",
-  "identifier": "@seleen/fancy-toolbar",
+  "identifier": "@seleen/weg",
   "windows": [
-    "QHNlZWxlbi9mYW5jeS10b29sYmFy*"
+    "QHNlZWxlbi93ZWc*"
   ],
   "permissions": [
+    "fs:allow-exists",
     "fs:allow-write-text-file",
     "fs:scope-appdata-recursive"
   ]

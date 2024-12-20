@@ -200,6 +200,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         state_get_default_settings,
         state_get_default_monitor_settings,
         state_write_settings,
+        state_write_weg_items,
         state_get_specific_apps_configurations,
         state_get_wallpaper,
         state_set_wallpaper,

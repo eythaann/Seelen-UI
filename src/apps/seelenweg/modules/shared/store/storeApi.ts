@@ -1,8 +1,5 @@
-import { WegItemType } from '@seelen-ui/lib';
-import { WegItem, WegItems } from '@seelen-ui/lib/types';
-import { path } from '@tauri-apps/api';
-import { writeTextFile } from '@tauri-apps/plugin-fs';
-import yaml from 'js-yaml';
+import { WegItems, WegItemType } from '@seelen-ui/lib';
+import { WegItem } from '@seelen-ui/lib/types';
 import { debounce } from 'lodash';
 
 import { store } from './infra';
@@ -34,15 +31,13 @@ export const savePinnedItems = debounce(
       return acc;
     };
 
-    const data: WegItems = {
+    const data = new WegItems({
       left: state.itemsOnLeft.reduce(cb, []),
       center: state.itemsOnCenter.reduce(cb, []),
       right: state.itemsOnRight.reduce(cb, []),
-    };
+    });
 
-    const yaml_route = await path.join(await path.appDataDir(), 'seelenweg_items.yaml');
-    IsSavingPinnedItems.current = true;
-    await writeTextFile(yaml_route, yaml.dump(data));
+    await data.save();
   },
   1000,
 );

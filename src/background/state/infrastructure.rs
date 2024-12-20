@@ -5,7 +5,7 @@ use seelen_core::state::{
     MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
 };
 
-use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
+use crate::{error_handler::Result, windows_api::WindowsApi};
 
 use super::{
     application::{FullState, LauncherHistory, FULL_STATE},
@@ -34,9 +34,18 @@ pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
 
 #[tauri::command(async)]
 pub fn state_get_weg_items() -> WegItems {
-    let state = FULL_STATE.load();
-    let items = trace_lock!(state.weg_items);
-    items.clone()
+    FULL_STATE.load().weg_items().clone()
+}
+
+#[tauri::command(async)]
+pub fn state_write_weg_items(mut items: WegItems) -> Result<()> {
+    items.sanitize();
+    FULL_STATE.rcu(move |state| {
+        let mut state = state.cloned();
+        state.weg_items = items.clone();
+        state
+    });
+    FULL_STATE.load().write_weg_items()
 }
 
 #[tauri::command(async)]
@@ -72,8 +81,7 @@ pub fn state_write_settings(settings: Settings) -> Result<()> {
         state.settings = settings.clone();
         state
     });
-    FULL_STATE.load().write_settings()?;
-    Ok(())
+    FULL_STATE.load().write_settings()
 }
 
 #[tauri::command(async)]
