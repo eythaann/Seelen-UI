@@ -50,6 +50,7 @@ pub struct NotificationManager {
     notifications: Vec<AppNotification>,
     notifications_ids: Vec<u32>,
     callbacks: Vec<OnNotificationsChange>,
+    #[allow(dead_code)]
     event_handler: TypedEventHandler<UserNotificationListener, UserNotificationChangedEventArgs>,
     event_token: Option<EventRegistrationToken>,
 }
@@ -100,20 +101,17 @@ impl NotificationManager {
             return Err("Failed to get notification access".into());
         }
 
-        if let Err(err) = self.listener.NotificationChanged(&self.event_handler) {
-            log::debug!(
-                "Failed to use NotificationChanged: {:?}, spawning thread instead",
-                err
-            );
-            spawn_named_thread("Notification Manager", || -> Result<()> {
-                RELEASED.store(false, Ordering::SeqCst);
-                while !RELEASED.load(Ordering::Acquire) {
-                    log_error!(Self::internal_notifications_change(&None, &None));
-                    std::thread::sleep(std::time::Duration::from_secs(1));
-                }
-                Ok(())
-            })?;
-        }
+        // TODO: this only works on MSIX/APPX/UWP builds so idk how to make it work on win32 apps
+        // self.listener.NotificationChanged(&self.event_handler)?;
+        // intead we use a thread
+        spawn_named_thread("Notification Manager", || -> Result<()> {
+            RELEASED.store(false, Ordering::SeqCst);
+            while !RELEASED.load(Ordering::Acquire) {
+                log_error!(Self::internal_notifications_change(&None, &None));
+                std::thread::sleep(std::time::Duration::from_secs(1));
+            }
+            Ok(())
+        })?;
 
         let u_notifications = self
             .listener
