@@ -31,6 +31,7 @@ use crate::modules::notifications::infrastructure::*;
 use crate::modules::power::infrastructure::*;
 use crate::modules::system_settings::infrastructure::*;
 use crate::modules::tray::infrastructure::*;
+use crate::modules::user::infrastructure::*;
 
 #[tauri::command(async)]
 fn select_file_on_explorer(path: String) -> Result<()> {
@@ -189,6 +190,10 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         check_for_updates,
         install_last_available_update,
         get_connected_monitors,
+        // User
+        get_user,
+        get_user_recent_folder_content,
+        set_user_recent_folder_limit,
         // Seelen Settings
         set_auto_start,
         get_auto_start_status,
@@ -219,6 +224,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         set_main_monitor_brightness,
         // Power
         log_out,
+        lock,
         suspend,
         restart,
         shutdown,
