@@ -103,7 +103,7 @@ use windows::{
 };
 
 use crate::{
-    error_handler::Result,
+    error_handler::{Result, WindowsResultExt},
     hook::HookManager,
     modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
@@ -148,8 +148,9 @@ impl WindowsApi {
                 callback,
                 LPARAM(callback_data_address),
             )
+            .ok()
+            .filter_fake_error()?;
         }
-        .ok()?;
         Ok(())
     }
 
@@ -253,24 +254,18 @@ impl WindowsApi {
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
-        let result = unsafe { ShowWindow(hwnd, command) }.ok();
-        if let Err(error) = result {
-            if !error.code().is_ok() {
-                return Err(error.into());
-            }
-        }
+        unsafe { ShowWindow(hwnd, command) }
+            .ok()
+            .filter_fake_error()?;
         Ok(())
     }
 
     pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
-        let result = unsafe { ShowWindowAsync(hwnd, command) }.ok();
-        if let Err(error) = result {
-            if !error.code().is_ok() {
-                return Err(error.into());
-            }
-        }
+        unsafe { ShowWindowAsync(hwnd, command) }
+            .ok()
+            .filter_fake_error()?;
         Ok(())
     }
 
@@ -292,7 +287,7 @@ impl WindowsApi {
         rect: RECT,
         flags: SET_WINDOW_POS_FLAGS,
     ) -> Result<()> {
-        let result = unsafe {
+        unsafe {
             SetWindowPos(
                 hwnd,
                 order,
@@ -302,11 +297,7 @@ impl WindowsApi {
                 (rect.bottom - rect.top).abs(),
                 flags,
             )
-        };
-        if let Err(error) = result {
-            if !error.code().is_ok() {
-                return Err(error.into());
-            }
+            .filter_fake_error()?;
         }
         Ok(())
     }
