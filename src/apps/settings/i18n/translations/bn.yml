@@ -232,11 +232,13 @@ wall:
   seconds: সেকেন্ড
 weg:
   auto_hide: স্বয়ং চামড়া
+  behaviour: একাধিক প্রদর্শন আচরণ
   delay_to_hide: আড়াল করতে বিলম্ব
   delay_to_show: দেখাতে বিলম্ব
   dock_side: অবস্থান
   enable: ডক/টাস্কবার সক্ষম করুন
   gap: ফাঁক
+  item_show_upon_multitaskbar: আমার টাস্কবার অ্যাপস চালু করুন
   items:
     gap: আইটেম মধ্যে স্থান
     label: আইটেম

@@ -227,11 +227,13 @@ wall:
   seconds: שניות
 weg:
   auto_hide: הסתר אוטומטי
+  behaviour: התנהגות תצוגה מרובה
   delay_to_hide: עיכוב להסתיר
   delay_to_show: עיכוב להצגה
   dock_side: מַצָב
   enable: הפעל את המזח/שורת המשימות
   gap: פער
+  item_show_upon_multitaskbar: הראה את אפליקציות שורת המשימות שלי
   items:
     gap: שטח בין פריטים
     label: פריטים

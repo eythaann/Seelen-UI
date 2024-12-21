@@ -229,11 +229,13 @@ wall:
   seconds: තත්පර
 weg:
   auto_hide: ස්වයංක්‍රීය සඟවන්න
+  behaviour: බහු දර්ශන හැසිරීම
   delay_to_hide: සැඟවීමට ප්රමාද
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   dock_side: තනතුර
   enable: Dock/Taskbar සබල කරන්න
   gap: පරතරය
+  item_show_upon_multitaskbar: මගේ කාර්ය තීරු යෙදුම් බලන්න
   items:
     gap: අයිතම අතර අවකාශය
     label: අයිතම

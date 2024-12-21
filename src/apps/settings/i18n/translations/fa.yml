@@ -231,11 +231,13 @@ wall:
   seconds: ثانیه
 weg:
   auto_hide: پنهان خودکار
+  behaviour: رفتار چندگانه نمایش
   delay_to_hide: تاخیر برای پنهان شدن
   delay_to_show: تاخیر برای نمایش
   dock_side: موقعیت
   enable: Dock/TaskBar را فعال کنید
   gap: شکاف
+  item_show_upon_multitaskbar: برنامه های نوار وظیفه من را نشان دهید
   items:
     gap: فضای بین موارد
     label: موارد

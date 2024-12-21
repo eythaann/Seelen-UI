@@ -234,11 +234,13 @@ wall:
   seconds: секунды
 weg:
   auto_hide: Автоскрытие
+  behaviour: Многократное поведение дисплея
   delay_to_hide: Задержка, чтобы скрыть
   delay_to_show: Задержка показа
   dock_side: Расположение
   enable: Включить
   gap: Разрыв
+  item_show_upon_multitaskbar: Покажите мои приложения панели задач на
   items:
     gap: Расстояние между иконок
     label: Иконки

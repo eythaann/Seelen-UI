@@ -236,11 +236,13 @@ wall:
   seconds: segons
 weg:
   auto_hide: Amaga automàtic
+  behaviour: Comportament de visualització múltiple
   delay_to_hide: Tarda en amagar-se
   delay_to_show: Retard per mostrar
   dock_side: Posició
   enable: Activa el moll/la barra de tasques
   gap: Escletxa
+  item_show_upon_multitaskbar: Mostra les meves aplicacions de la barra de tasques
   items:
     gap: Espai entre articles
     label: Plantes

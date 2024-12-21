@@ -230,11 +230,13 @@ wall:
   seconds: sekundės
 weg:
   auto_hide: Automatinis slėptuvė
+  behaviour: Keli ekrano elgesys
   delay_to_hide: Vėluoti paslėpti
   delay_to_show: Delsimas parodyti
   dock_side: Pozicija
   enable: Įgalinti doką/užduočių juostą
   gap: Tarpas
+  item_show_upon_multitaskbar: Parodykite savo užduočių juostos programas
   items:
     gap: Tarpas tarp daiktų
     label: Daiktai

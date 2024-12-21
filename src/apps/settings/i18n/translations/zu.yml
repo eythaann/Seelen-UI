@@ -234,11 +234,13 @@ wall:
   seconds: imisa
 weg:
   auto_hide: Fihla okuzenzakalelayo
+  behaviour: Ukuziphatha okuningi kokubonisa
   delay_to_hide: Libazise ukucasha
   delay_to_show: Libazisa ukubonisa
   dock_side: Ukuma
   enable: Nika amandla i-Dock / Taskbar
   gap: Insungubezi
+  item_show_upon_multitaskbar: Khombisa izinhlelo zokusebenza zami ze-taskbar on
   items:
     gap: Isikhala phakathi kwezinto
     label: Into

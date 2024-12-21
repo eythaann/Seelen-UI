@@ -234,11 +234,13 @@ wall:
   seconds: წამები
 weg:
   auto_hide: Ავტომატური დამალვა
+  behaviour: მრავალჯერადი ჩვენების ქცევა
   delay_to_hide: დაგვიანებით დამალვა
   delay_to_show: დაგვიანებით ჩვენება
   dock_side: პოზიცია
   enable: ჩართეთ dock/taskbar
   gap: ხარპი
+  item_show_upon_multitaskbar: აჩვენეთ ჩემი დავალების პანელის პროგრამები
   items:
     gap: სივრცე ნივთებს შორის
     label: ნივთები

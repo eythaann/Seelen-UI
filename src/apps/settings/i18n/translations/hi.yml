@@ -231,11 +231,13 @@ wall:
   seconds: सेकंड
 weg:
   auto_hide: खुद से छिपना
+  behaviour: बहु प्रदर्शन व्यवहार
   delay_to_hide: छिपाने में देरी
   delay_to_show: दिखाने में देरी
   dock_side: पद
   enable: डॉक/टास्कबार सक्षम करें
   gap: अंतर
+  item_show_upon_multitaskbar: मेरे टास्कबार ऐप्स को दिखाएं
   items:
     gap: वस्तुओं के बीच का स्थान
     label: सामान

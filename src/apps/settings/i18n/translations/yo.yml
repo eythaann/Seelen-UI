@@ -227,11 +227,13 @@ wall:
   seconds: aaya
 weg:
   auto_hide: Ibi ipamọ aifọwọyi
+  behaviour: Ihuwasi ifihan pupọ
   delay_to_hide: Idaduro lati tọju
   delay_to_show: Idaduro lati ṣafihan
   dock_side: Ipo
   enable: Muu dock / forkbar
   gap: Alafo
+  item_show_upon_multitaskbar: Fihan Awọn ohun elo MyBar Mi lori
   items:
     gap: Aaye laarin awọn ohun kan
     label: Awọn ohun

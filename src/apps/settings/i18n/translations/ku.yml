@@ -229,11 +229,13 @@ wall:
   seconds: seconds
 weg:
   auto_hide: Auto Hide
+  behaviour: Behsa Multiple Display
   delay_to_hide: Dereng ji bo veşartinê
   delay_to_show: Dereng nîşan bide
   dock_side: Rewş
   enable: Dock / Taskbar çalak bikin
   gap: Qelîştok
+  item_show_upon_multitaskbar: Serlêdanên min ên peywirdariyê nîşan bidin
   items:
     gap: Cîh di navbera tiştan de
     label: Hevokên

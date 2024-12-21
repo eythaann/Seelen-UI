@@ -236,11 +236,13 @@ wall:
   seconds: sekan
 weg:
   auto_hide: Auto qaraha
+  behaviour: Dabeecad muujinaya badan
   delay_to_hide: Dib u dhig si loo qariyo
   delay_to_show: Dib u dhig si loo muujiyo
   dock_side: Meel
   enable: Kartida DOCK / Turniinka
   gap: Dalool
+  item_show_upon_multitaskbar: Muuji barnaamijkeyga hawsha ee shaqada
   items:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha

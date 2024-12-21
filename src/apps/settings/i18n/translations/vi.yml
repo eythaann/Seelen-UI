@@ -231,11 +231,13 @@ wall:
   seconds: giây
 weg:
   auto_hide: Tự động ẩn
+  behaviour: Nhiều hành vi hiển thị
   delay_to_hide: Trì hoãn việc ẩn giấu
   delay_to_show: Trì hoãn hiển thị
   dock_side: Chức vụ
   enable: Bật Dock/Thanh tác vụ
   gap: Khoảng cách
+  item_show_upon_multitaskbar: Hiển thị các ứng dụng Thanh nhiệm vụ của tôi trên
   items:
     gap: Không gian giữa các mặt hàng
     label: Mặt hàng

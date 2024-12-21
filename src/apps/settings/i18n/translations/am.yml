@@ -226,11 +226,13 @@ wall:
   seconds: ሰከንዶች
 weg:
   auto_hide: ራስ-ሰር መደበቅ
+  behaviour: በርካታ የማሳያ ባህሪ
   delay_to_hide: ለመደበቅ መዘግየት
   delay_to_show: ለማሳየት መዘግየት
   dock_side: አቀማመጥ
   enable: መትከያ / ተግባር አሞሌን ያንቁ
   gap: ክፍተት
+  item_show_upon_multitaskbar: የተግባር አሞሌ መተግበሪያዎችን አሳይ
   items:
     gap: በእቃዎች መካከል ቦታ
     label: ዕቃዎች

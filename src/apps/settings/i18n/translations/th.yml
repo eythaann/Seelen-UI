@@ -226,11 +226,13 @@ wall:
   seconds: ไม่กี่วินาที
 weg:
   auto_hide: ซ่อนอัตโนมัติ
+  behaviour: พฤติกรรมการแสดงผลหลายอย่าง
   delay_to_hide: ล่าช้าในการซ่อน
   delay_to_show: ล่าช้าในการแสดง
   dock_side: ตำแหน่ง
   enable: เปิดใช้งาน Dock/Task -Babar
   gap: ช่องว่าง
+  item_show_upon_multitaskbar: แสดงแอพแถบงานของฉันบน
   items:
     gap: ช่องว่างระหว่างรายการ
     label: รายการ

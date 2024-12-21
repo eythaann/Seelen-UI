@@ -232,11 +232,13 @@ wall:
   seconds: saat
 weg:
   auto_hide: Menyembunyikan auto
+  behaviour: Tingkah laku paparan berganda
   delay_to_hide: Bertangguh untuk bersembunyi
   delay_to_show: Kelewatan untuk menunjukkan
   dock_side: Kedudukan
   enable: Dayakan Dock/Taskbar
   gap: Jurang
+  item_show_upon_multitaskbar: Tunjukkan aplikasi bar tugas saya
   items:
     gap: Ruang antara item
     label: Item

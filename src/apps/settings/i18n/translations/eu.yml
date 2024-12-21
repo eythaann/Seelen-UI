@@ -232,11 +232,13 @@ wall:
   seconds: bizkarbete
 weg:
   auto_hide: Ezkutatu automatikoa
+  behaviour: Bistaratzeko portaera anitz
   delay_to_hide: Ezkutatzeko atzeratu
   delay_to_show: Erakusteko atzerapena
   dock_side: Kokaleku
   enable: Gaitu kaia / ataza barra
   gap: Tarte
+  item_show_upon_multitaskbar: Erakutsi nire zeregin-barrako aplikazioak
   items:
     gap: Elementuen arteko espazioa
     label: Manatu

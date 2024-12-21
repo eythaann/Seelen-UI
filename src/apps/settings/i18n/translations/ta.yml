@@ -233,11 +233,13 @@ wall:
   seconds: விநாடிகள்
 weg:
   auto_hide: தானாக மறை
+  behaviour: பல காட்சி நடத்தை
   delay_to_hide: மறைக்க தாமதம்
   delay_to_show: காட்ட தாமதம்
   dock_side: நிலை
   enable: டாக்/டாஸ்க்பாரை இயக்கவும்
   gap: இடைவெளி
+  item_show_upon_multitaskbar: எனது பணிப்பட்டு பயன்பாடுகளைக் காட்டு
   items:
     gap: பொருட்களுக்கு இடையே உள்ள இடம்
     label: பொருட்களை

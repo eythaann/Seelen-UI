@@ -232,11 +232,13 @@ wall:
   seconds: sekondi
 weg:
   auto_hide: Auto Hide
+  behaviour: Imġieba multipla tal-wiri
   delay_to_hide: Dewmien biex jinħbew
   delay_to_show: Dewmien biex juri
   dock_side: Pożizzjoni
   enable: Enable Dock / Taskbar
   gap: Vojt
+  item_show_upon_multitaskbar: Uri l-apps taskbar tiegħi fuq
   items:
     gap: Spazju bejn l-oġġetti
     label: Oġġetti

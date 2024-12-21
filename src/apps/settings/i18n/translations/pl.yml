@@ -232,11 +232,13 @@ wall:
   seconds: towary drugiej jakości
 weg:
   auto_hide: Automatyczne chowanie
+  behaviour: Wiele zachowań wyświetlaczy
   delay_to_hide: Opóźnienie w ukryciu
   delay_to_show: Opóźnienie w pokazie
   dock_side: Pozycja
   enable: Włącz dok/pasek zadań
   gap: Luka
+  item_show_upon_multitaskbar: Pokaż moje aplikacje do paska zadań na
   items:
     gap: Przestrzeń między przedmiotami
     label: Rzeczy

@@ -232,11 +232,13 @@ wall:
   seconds: sekundi
 weg:
   auto_hide: Auto se sakrio
+  behaviour: Višestruko ponašanje prikaza
   delay_to_hide: Odložite da se sakrijete
   delay_to_show: Kašnjenje za prikaz
   dock_side: Položaj
   enable: Omogući pristanište / traku zadataka
   gap: Jaz
+  item_show_upon_multitaskbar: Pokažite moju aplikacije za zadaci
   items:
     gap: Prostor između predmeta
     label: Predmeti

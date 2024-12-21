@@ -228,11 +228,13 @@ wall:
   seconds: ثانیې
 weg:
   auto_hide: آٹو پټول
+  behaviour: د ډیری ښکاره چلند
   delay_to_hide: د پټولو لپاره ځنډ
   delay_to_show: د ښودلو لپاره ځنډ
   dock_side: موقعیت
   enable: دوک / ټاسک بار فعال کړئ
   gap: تشې
+  item_show_upon_multitaskbar: زما د کاري پربيز ایپسونه وښایاست
   items:
     gap: د توکو تر مینځ فضا
     label: توکي

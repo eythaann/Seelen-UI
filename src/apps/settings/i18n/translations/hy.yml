@@ -234,11 +234,13 @@ wall:
   seconds: վայրկյան
 weg:
   auto_hide: Ավտոմատ թաքցնել
+  behaviour: Display ուցադրման բազմաթիվ վարք
   delay_to_hide: Հետաձգել թաքցնելը
   delay_to_show: Ցուցադրման ուշացում
   dock_side: Դիրք
   enable: Միացնել Dock / Taskbar
   gap: Բացվածք
+  item_show_upon_multitaskbar: Show ույց տվեք իմ աշխատանքային տողի ծրագրերը
   items:
     gap: Տարածություն իրերի միջեւ
     label: Իրերը

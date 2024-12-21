@@ -234,11 +234,13 @@ wall:
   seconds: soniya
 weg:
   auto_hide: Avtomatik yashirish
+  behaviour: Bir nechta namoyish xatti-harakati
   delay_to_hide: Yashirish uchun kechikish
   delay_to_show: Ko'rsatish uchun kechikish
   dock_side: Pozitsiya
   enable: Dock / vazifalar panelini yoqing
   gap: Bo'shliq
+  item_show_upon_multitaskbar: Vazifalar panelidagi ilovalarimni ko'rsating
   items:
     gap: Buyumlar orasidagi bo'shliq
     label: Narsalar

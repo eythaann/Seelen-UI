@@ -234,11 +234,13 @@ wall:
   seconds: Sekunden
 weg:
   auto_hide: Automatisch ausblenden
+  behaviour: Mehrfach Anzeigeverhalten
   delay_to_hide: Verzögerung zum Verstecken
   delay_to_show: Verzögerung beim Anzeigen
   dock_side: Position
   enable: Dock/Taskleiste aktivieren
   gap: Abstand
+  item_show_upon_multitaskbar: Zeigen Sie meine Taskleisten -Apps an
   items:
     gap: Abstand zwischen Elementen
     label: Elemente

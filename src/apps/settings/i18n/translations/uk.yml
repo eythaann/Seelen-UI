@@ -232,11 +232,13 @@ wall:
   seconds: секунди
 weg:
   auto_hide: Автомати
+  behaviour: Численна поведінка дисплея
   delay_to_hide: Затримка, щоб сховатися
   delay_to_show: Затримка, щоб показати
   dock_side: Позиція
   enable: Увімкнути док/панель завдань
   gap: Розрив
+  item_show_upon_multitaskbar: Покажіть мої додатки на панелі завдань
   items:
     gap: Простір між предметами
     label: Предмети

@@ -236,11 +236,13 @@ wall:
   seconds: seconden
 weg:
   auto_hide: Automatisch Verbergen
+  behaviour: Meervoudig weergavegedrag
   delay_to_hide: Vertraging om te verbergen
   delay_to_show: Vertraging om te tonen
   dock_side: Positie
   enable: Schakel dock/taakbalk in
   gap: Gat
+  item_show_upon_multitaskbar: Toon mijn taakbalk -apps op
   items:
     gap: Ruimte tussen items
     label: Items

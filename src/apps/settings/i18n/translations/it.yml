@@ -234,11 +234,13 @@ wall:
   seconds: secondi
 weg:
   auto_hide: Nascondi automaticamente
+  behaviour: Comportamento di visualizzazione multiplo
   delay_to_hide: Ritardo per nascondere
   delay_to_show: Ritardo per mostrare
   dock_side: Posizione
   enable: Abilita Dock/Barra delle Attività
   gap: Spazio
+  item_show_upon_multitaskbar: Mostra le mie app di barra delle applicazioni
   items:
     gap: Spazio tra gli Elementi
     label: Elementi

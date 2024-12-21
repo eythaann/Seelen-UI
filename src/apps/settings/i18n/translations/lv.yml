@@ -230,11 +230,13 @@ wall:
   seconds: sekundes
 weg:
   auto_hide: Auto paslēpt
+  behaviour: Vairāku displeja uzvedība
   delay_to_hide: Aizkavē paslēpties
   delay_to_show: Kavēšanās parādīt
   dock_side: Pozīcija
   enable: Iespējot doku/uzdevumjoslu
   gap: Plaisa
+  item_show_upon_multitaskbar: Parādiet manas uzdevumjoslas lietotnes
   items:
     gap: Vieta starp priekšmetiem
     label: Priekšmeti

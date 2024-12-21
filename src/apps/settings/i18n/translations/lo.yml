@@ -229,11 +229,13 @@ wall:
   seconds: ວິນາທີ
 weg:
   auto_hide: ເຊື່ອງອັດຕະໂນມັດ
+  behaviour: ພຶດຕິກໍາການສະແດງທີ່ຫຼາກຫຼາຍ
   delay_to_hide: ຊັກຊ້າເພື່ອຊ່ອນ
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   dock_side: ຕໍາແຫນ່ງ
   enable: ເປີດໃຊ້ Dock/Taskbar
   gap: ຊ່ອງຫວ່າງ
+  item_show_upon_multitaskbar: ສະແດງແອັບ .. ຂອງ OFF Task ຂອງຂ້ອຍໃສ່
   items:
     gap: ຊ່ອງຫວ່າງລະຫວ່າງລາຍການ
     label: ລາຍການ

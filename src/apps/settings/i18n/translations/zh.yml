@@ -221,11 +221,13 @@ wall:
   seconds: 秒
 weg:
   auto_hide: 自动隐藏
+  behaviour: 多重显示行为
   delay_to_hide: 隐藏延迟
   delay_to_show: 显示延迟
   dock_side: 位置
   enable: 启用 Dock / 任务栏
   gap: 间距
+  item_show_upon_multitaskbar: 显示我的任务栏应用程序
   items:
     gap: 项目间距
     label: 项目
