@@ -8,14 +8,14 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import InlineSVG from 'src/apps/seelenweg/components/InlineSvg';
 
-import { ExtendedPinnedWegItem } from '../../shared/store/domain';
+import { PinnedWegItem } from '../../shared/store/domain';
 
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
 interface Props {
-  item: ExtendedPinnedWegItem;
+  item: PinnedWegItem;
 }
 
 export const FileOrFolder = memo(({ item }: Props) => {

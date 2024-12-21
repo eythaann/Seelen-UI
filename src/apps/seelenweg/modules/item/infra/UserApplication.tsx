@@ -13,9 +13,9 @@ import { Selectors } from '../../shared/store/app';
 import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import {
-  ExtendedPinnedWegItem,
-  ExtendedTemporalWegItem,
+  PinnedWegItem,
   RootState,
+  TemporalWegItem,
 } from '../../shared/store/domain';
 
 import { cx } from '../../../../shared/styles';
@@ -25,14 +25,14 @@ import { DraggableItem } from './DraggableItem';
 import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
-  item: ExtendedPinnedWegItem | ExtendedTemporalWegItem;
+  item: PinnedWegItem | TemporalWegItem;
   // This will be triggered in case preview or context menu is opened from this item, or both of them closed.
   onAssociatedViewOpenChanged?: (isOpen: boolean) => void;
 }
 
 export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
   const isFocused = useSelector(
-    (state: RootState) => state.focusedApp && item.opens.includes(state.focusedApp.hwnd),
+    (state: RootState) => state.focusedApp && item.windows.some((w) => w.handle === state.focusedApp!.hwnd),
   );
 
   const [openPreview, setOpenPreview] = useState(false);
@@ -73,12 +73,12 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
 
   useEffect(() => {
     if (openPreview) {
-      updatePreviews(item.opens);
+      updatePreviews(item.windows.map((w) => w.handle));
     }
   }, [openPreview]);
 
   useEffect(() => {
-    if (!item.opens.length) {
+    if (!item.windows.length) {
       setOpenPreview(false);
     }
   }, [item]);
@@ -101,7 +101,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           open={openPreview}
           mouseEnterDelay={0.4}
           placement={calculatePlacement(settings.position)}
-          onOpenChange={(open) => setOpenPreview(open && !openContextMenu && !!item.opens.length && moment(new Date()) > blockUntil)}
+          onOpenChange={(open) => setOpenPreview(open && !openContextMenu && !!item.windows.length && moment(new Date()) > blockUntil)}
           trigger="hover"
           arrow={false}
           content={
@@ -115,8 +115,8 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
               prefix="preview"
             >
               <div className="weg-item-preview-scrollbar">
-                {item.opens.map((hwnd) => (
-                  <UserApplicationPreview key={hwnd} hwnd={hwnd} />
+                {item.windows.map((window) => (
+                  <UserApplicationPreview key={window.handle} hwnd={window.handle} />
                 ))}
               </div>
             </BackgroundByLayersV2>
@@ -125,30 +125,30 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           <div
             className="weg-item"
             onClick={() => {
-              let hwnd = item.opens[0];
-              if (!hwnd) {
+              let window = item.windows[0];
+              if (!window) {
                 if (item.path.endsWith('.lnk')) {
                   invoke(SeelenCommand.OpenFile, { path: item.path });
                 } else {
                   invoke(SeelenCommand.OpenFile, { path: item.execution_command });
                 }
               } else {
-                invoke(SeelenCommand.WegToggleWindowState, { hwnd });
+                invoke(SeelenCommand.WegToggleWindowState, { hwnd: window.handle });
               }
             }}
             onAuxClick={(e) => {
-              let hwnd = item.opens[0];
-              if (e.button === 1 && hwnd) {
-                invoke(SeelenCommand.WegCloseApp, { hwnd });
+              let window = item.windows[0];
+              if (e.button === 1 && window) {
+                invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
               }
             }}
             onContextMenu={(e) => e.stopPropagation()}
           >
             <BackgroundByLayersV2 prefix="item" />
-            <img className="weg-item-icon" src={item.icon} draggable={false} />
+            <img className="weg-item-icon" src={'item.icon'} draggable={false} />
             <div
               className={cx('weg-item-open-sign', {
-                'weg-item-open-sign-active': !!item.opens.length,
+                'weg-item-open-sign-active': !!item.windows.length,
                 'weg-item-open-sign-focused': isFocused,
               })}
             />

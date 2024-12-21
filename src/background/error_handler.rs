@@ -151,8 +151,8 @@ impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
             Err(error) => {
                 // I really hate windows api for this types of behaviours
                 if error.code().is_ok() {
-                    let app_error = AppError::from(error);
-                    log::warn!("(maybe?) fake win32 error, was skipped: {:?}", app_error);
+                    // let app_error = AppError::from(error);
+                    // log::warn!("(maybe?) fake win32 error, was skipped: {:?}", app_error);
                     Ok(())
                 } else {
                     Err(error)

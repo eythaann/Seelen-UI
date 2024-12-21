@@ -1,17 +1,13 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
 import { Settings, UIColors, WegItemType } from '@seelen-ui/lib';
 
-import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
-
 import {
-  AppFromBackground,
   AppsSides,
-  ExtendedPinnedWegItem,
-  ExtendedTemporalWegItem,
   HWND,
   PinnedWegItem,
   RootState,
   SwItem,
+  TemporalWegItem,
 } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
@@ -32,7 +28,7 @@ const initialState: RootState = {
 
 function removeAppFromState(
   state: RootState,
-  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
+  searched: PinnedWegItem | TemporalWegItem,
 ) {
   const search = (app: SwItem) => 'execution_command' in app && app.execution_command === searched.execution_command;
 
@@ -57,7 +53,7 @@ function removeAppFromState(
 
 function findApp(
   state: RootState,
-  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
+  searched: PinnedWegItem | TemporalWegItem,
 ) {
   return (state.itemsOnLeft.find(
     (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
@@ -67,7 +63,7 @@ function findApp(
     ) ||
     state.itemsOnRight.find(
       (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
-    )) as ExtendedPinnedWegItem | ExtendedTemporalWegItem | undefined;
+    )) as PinnedWegItem | TemporalWegItem | undefined;
 }
 
 export const RootSlice = createSlice({
@@ -81,7 +77,7 @@ export const RootSlice = createSlice({
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
     },
-    pinApp(state, action: PayloadAction<{ app: ExtendedTemporalWegItem; side: AppsSides }>) {
+    pinApp(state, action: PayloadAction<{ app: TemporalWegItem; side: AppsSides }>) {
       const { app, side } = action.payload;
 
       const appToPin = findApp(state, app) || app;
@@ -102,14 +98,16 @@ export const RootSlice = createSlice({
           break;
         default:
       }
+      savePinnedItems(current(state));
     },
-    unPinApp(state, action: PayloadAction<ExtendedPinnedWegItem | ExtendedTemporalWegItem>) {
+    unPinApp(state, action: PayloadAction<PinnedWegItem | TemporalWegItem>) {
       const found = findApp(state, action.payload);
       if (found) {
         found.type = WegItemType.Temporal;
-        if (found.opens.length === 0) {
+        if (found.windows.length === 0) {
           removeAppFromState(state, found);
         }
+        savePinnedItems(current(state));
       }
     },
     addMediaModule(state) {
@@ -144,63 +142,6 @@ export const RootSlice = createSlice({
       state.itemsOnRight = state.itemsOnRight.filter(filter);
       savePinnedItems(current(state));
     },
-    addOpenApp(state, action: PayloadAction<AppFromBackground>) {
-      const new_app = action.payload;
-
-      state.openApps[new_app.hwnd] = new_app;
-
-      let cb = (current: SwItem) =>
-        'execution_command' in current && current.execution_command === new_app.execution_path;
-      let pinedApp = (state.itemsOnLeft.find(cb) ||
-        state.itemsOnCenter.find(cb) ||
-        state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
-
-      if (!pinedApp && !new_app.execution_path.startsWith('shell:AppsFolder')) {
-        const appFilename = new_app.execution_path.split('\\').pop();
-        if (appFilename) {
-          cb = (current: SwItem) => 'path' in current && current.execution_command.endsWith(appFilename);
-          pinedApp = (state.itemsOnLeft.find(cb) ||
-            state.itemsOnCenter.find(cb) ||
-            state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
-        }
-      }
-
-      if (!pinedApp) {
-        state.itemsOnCenter.push(SwTemporalAppUtils.fromBackground(new_app));
-        return;
-      }
-
-      if (!pinedApp.opens.includes(new_app.hwnd)) {
-        pinedApp.opens.push(new_app.hwnd);
-      }
-
-      // update path to pinned apps normally changed on updates
-      if (pinedApp.path !== new_app.exe) {
-        pinedApp.path = new_app.exe;
-        pinedApp.execution_command = new_app.execution_path;
-        savePinnedItems(current(state));
-      }
-    },
-    updateOpenAppInfo(state, action: PayloadAction<AppFromBackground>) {
-      const found = state.openApps[action.payload.hwnd];
-      if (found) {
-        found.title = action.payload.title;
-      }
-    },
-    removeOpenApp(state, action: PayloadAction<HWND>) {
-      delete state.openApps[action.payload];
-
-      function filter(app: SwItem) {
-        if ('opens' in app) {
-          app.opens = app.opens.filter((hwnd) => hwnd !== action.payload);
-        }
-        return app.type !== WegItemType.Temporal || app.opens.length > 0;
-      }
-
-      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
-      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
-      state.itemsOnRight = state.itemsOnRight.filter(filter);
-    },
   },
 });
 
@@ -208,10 +149,10 @@ export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
 export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isPinnedApp = (item: SwItem): item is ExtendedPinnedWegItem => {
+export const isPinnedApp = (item: SwItem): item is PinnedWegItem => {
   return item.type === WegItemType.Pinned;
 };
 
-export const isTemporalApp = (item: SwItem): item is ExtendedTemporalWegItem => {
+export const isTemporalApp = (item: SwItem): item is TemporalWegItem => {
   return item.type === WegItemType.Temporal;
 };

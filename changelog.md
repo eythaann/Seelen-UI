@@ -5,9 +5,13 @@
 - add kill process option on context menu for dock items.
 - multi-language calendar and date module on toolbar.
 
+### refactor
+- move dock state to the background.
+
 ### fix
 - slu-service was being closed on exit code 1.
 - logging errors on monitor changes.
+- duplicated items on dock after drag items.
 
 ## [2.0.12]
 ### fix

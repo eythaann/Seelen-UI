@@ -4,7 +4,10 @@ use std::{
     path::PathBuf,
 };
 
-use windows::Win32::Foundation::HWND;
+use windows::Win32::{
+    Foundation::HWND,
+    UI::WindowsAndMessaging::{WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW},
+};
 
 use crate::{
     error_handler::Result,
@@ -12,7 +15,7 @@ use crate::{
     seelen_bar::FancyToolbar,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
-    seelen_weg::SeelenWeg,
+    seelen_weg::instance::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
 };
 
@@ -198,5 +201,56 @@ impl Window {
                 .contains(&self.title().as_str());
         }
         false
+    }
+
+    pub fn is_real_window(&self) -> bool {
+        let path = match self.process().program_path() {
+            Ok(path) => path,
+            Err(_) => return false,
+        };
+
+        if !self.is_visible()
+            || path.starts_with("C:\\Windows\\SystemApps")
+            || path.starts_with("C:\\Windows\\ImmersiveControlPanel")
+            || self.parent().is_some()
+            || self.is_seelen_overlay()
+        {
+            return false;
+        }
+
+        // this class is used for edge tabs to be shown as independent windows on alt + tab
+        // this only applies when the new tab is created it is binded to explorer.exe for some reason
+        // maybe we can search/learn more about edge tabs later.
+        // fix: https://github.com/eythaann/Seelen-UI/issues/83
+        if self.class() == "Windows.Internal.Shell.TabProxyWindow" {
+            return false;
+        }
+
+        let ex_style = WindowsApi::get_ex_styles(self.hwnd());
+        if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
+            && !ex_style.contains(WS_EX_APPWINDOW)
+        {
+            return false;
+        }
+
+        /* if let Ok(frame_creator) = window.get_frame_creator() {
+            if frame_creator.is_none() {
+                return false;
+            }
+        }
+
+        if WindowsApi::window_is_uwp_suspended(window.hwnd()).unwrap_or_default() {
+            return false;
+        } */
+
+        /* if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
+            if config.options.contains(&AppExtraFlag::Hidden) {
+                log::trace!("Skipping by config: {:?}", window);
+                return false;
+            }
+        }
+
+        !TITLE_BLACK_LIST.contains(&window.title().as_str()) */
+        true
     }
 }

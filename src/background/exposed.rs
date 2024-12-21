@@ -224,6 +224,7 @@ pub fn register_invoke_handler(app_builder: Builder<Wry>) -> Builder<Wry> {
         restart,
         shutdown,
         // SeelenWeg
+        weg_get_items_for_widget,
         weg_close_app,
         weg_kill_app,
         weg_toggle_window_state,

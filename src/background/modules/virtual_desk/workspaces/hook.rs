@@ -2,7 +2,6 @@ use crate::{
     error_handler::Result,
     log_error,
     modules::virtual_desk::get_vd_manager,
-    seelen_weg::SeelenWeg,
     trace_lock,
     windows_api::{window::Window, WindowEnumerator},
     winevent::WinEvent,
@@ -12,7 +11,7 @@ use super::SeelenWorkspacesManager;
 
 impl SeelenWorkspacesManager {
     fn should_be_added(window: &Window) -> bool {
-        SeelenWeg::should_be_added(window.hwnd()) && !window.is_minimized()
+        window.is_real_window() && !window.is_minimized()
     }
 
     fn contains(&self, window: &Window) -> bool {

@@ -10,7 +10,7 @@ import { dialog } from 'src/apps/settings/modules/shared/tauri/infra';
 
 import { isPinnedApp, isTemporalApp, RootActions } from '../shared/store/app';
 
-import { AppsSides, ExtendedPinnedWegItem, ExtendedTemporalWegItem } from '../shared/store/domain';
+import { AppsSides, PinnedWegItem, TemporalWegItem } from '../shared/store/domain';
 
 import { Icon } from '../../../shared/components/Icon';
 import { savePinnedItems } from '../shared/store/storeApi';
@@ -92,7 +92,7 @@ export function getSeelenWegMenu(t: TFunction): ItemType[] {
 
 export function getMenuForItem(
   t: TFunction,
-  item: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
+  item: PinnedWegItem | TemporalWegItem,
   devTools: boolean,
 ): ItemType[] {
   const isPinned = isPinnedApp(item);
@@ -179,7 +179,7 @@ export function getMenuForItem(
     },
   );
 
-  if (!item.opens.length) {
+  if (!item.windows.length) {
     return menu;
   }
 
@@ -189,17 +189,17 @@ export function getMenuForItem(
       label: t('app_menu.copy_handles'),
       icon: <Icon iconName="AiOutlineCopy" />,
       onClick: () =>
-        navigator.clipboard.writeText(JSON.stringify(item.opens.map((hwnd) => hwnd.toString(16)))),
+        navigator.clipboard.writeText(JSON.stringify(item.windows.map((window) => window.handle.toString(16)))),
     });
   }
 
   menu.push({
     key: 'weg_close_app',
-    label: item.opens.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
+    label: item.windows.length > 1 ? t('app_menu.close_multiple') : t('app_menu.close'),
     icon: <Icon iconName="BiWindowClose" />,
     onClick() {
-      item.opens.forEach((hwnd) => {
-        invoke(SeelenCommand.WegCloseApp, { hwnd });
+      item.windows.forEach((window) => {
+        invoke(SeelenCommand.WegCloseApp, { hwnd: window.handle });
       });
     },
     danger: true,
@@ -208,12 +208,12 @@ export function getMenuForItem(
   if (devTools) {
     menu.push({
       key: 'weg_kill_app',
-      label: item.opens.length > 1 ? t('app_menu.kill_multiple') : t('app_menu.kill'),
+      label: item.windows.length > 1 ? t('app_menu.kill_multiple') : t('app_menu.kill'),
       icon: <Icon iconName="MdOutlineDangerous" size={18} />,
       onClick() {
-        item.opens.forEach((hwnd) => {
+        item.windows.forEach((window) => {
           // todo replace by enum
-          invoke(SeelenCommand.WegKillApp, { hwnd });
+          invoke(SeelenCommand.WegKillApp, { hwnd: window.handle });
         });
       },
       danger: true,

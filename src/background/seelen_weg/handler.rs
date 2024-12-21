@@ -1,41 +1,48 @@
 use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
 
 use image::ImageFormat;
-use seelen_core::state::{PinnedWegItemData, WegItem};
+use seelen_core::state::{PinnedWegItemData, WegItem, WegItems};
 use tauri::Emitter;
 use tauri_plugin_shell::ShellExt;
 
 use crate::{
-    error_handler::Result, hook::LAST_ACTIVE_NOT_SEELEN, seelen::get_app_handle,
-    state::application::FULL_STATE, windows_api::WindowsApi,
+    error_handler::Result,
+    hook::LAST_ACTIVE_NOT_SEELEN,
+    seelen::get_app_handle,
+    seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
+    state::application::FULL_STATE,
+    trace_lock,
+    windows_api::{window::Window, WindowsApi},
 };
-use windows::Win32::{
-    Foundation::HWND,
-    UI::WindowsAndMessaging::{SW_MINIMIZE, SW_RESTORE, WM_CLOSE},
-};
+use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, SW_RESTORE, WM_CLOSE};
 
 use super::SeelenWeg;
+
+#[tauri::command(async)]
+pub fn weg_get_items_for_widget() -> WegItems {
+    trace_lock!(WEG_ITEMS_IMPL).get()
+}
 
 #[tauri::command(async)]
 pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
     let temp_dir = std::env::temp_dir();
 
     for addr in handles {
-        let hwnd: HWND = HWND(addr as _);
+        let window = Window::from(addr);
 
-        if hwnd.is_invalid() || !WindowsApi::is_window_visible(hwnd) {
-            SeelenWeg::remove_hwnd(hwnd);
+        if !window.is_visible() {
+            SeelenWeg::remove_hwnd(&window);
             continue;
         }
 
-        if WindowsApi::is_iconic(hwnd) {
+        if window.is_minimized() {
             continue;
         }
 
-        let image = SeelenWeg::capture_window(hwnd);
+        let image = SeelenWeg::capture_window(window.hwnd());
         if let Some(image) = image {
-            let rect = WindowsApi::get_inner_window_rect(hwnd)?;
-            let shadow = WindowsApi::shadow_rect(hwnd)?;
+            let rect = WindowsApi::get_inner_window_rect(window.hwnd())?;
+            let shadow = WindowsApi::shadow_rect(window.hwnd())?;
             let width = rect.right - rect.left;
             let height = rect.bottom - rect.top;
 
@@ -55,26 +62,25 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn weg_close_app(hwnd: isize) -> Result<()> {
-    let hwnd = HWND(hwnd as _);
-    if !WindowsApi::is_window_visible(hwnd) {
-        SeelenWeg::remove_hwnd(hwnd);
+    let window = Window::from(hwnd);
+    if !window.is_visible() {
+        SeelenWeg::remove_hwnd(&window);
     } else {
-        WindowsApi::post_message(hwnd, WM_CLOSE, 0, 0)?;
+        WindowsApi::post_message(window.hwnd(), WM_CLOSE, 0, 0)?;
     }
     Ok(())
 }
 
 #[tauri::command(async)]
 pub fn weg_kill_app(hwnd: isize) -> Result<()> {
-    let hwnd = HWND(hwnd as _);
-    if !WindowsApi::is_window_visible(hwnd) {
-        SeelenWeg::remove_hwnd(hwnd);
+    let window = Window::from(hwnd);
+    if !window.is_visible() {
+        SeelenWeg::remove_hwnd(&window);
     } else {
-        let (pid, _) = WindowsApi::window_thread_process_id(hwnd);
         get_app_handle()
             .shell()
             .command("taskkill.exe")
-            .args(["/F", "/PID", &pid.to_string()])
+            .args(["/F", "/PID", &window.process().id().to_string()])
             .spawn()?;
     }
     Ok(())
@@ -82,23 +88,22 @@ pub fn weg_kill_app(hwnd: isize) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
-    let hwnd = HWND(hwnd as _);
-
-    if hwnd.is_invalid() || !WindowsApi::is_window_visible(hwnd) {
-        SeelenWeg::remove_hwnd(hwnd);
+    let window = Window::from(hwnd);
+    if !window.is_visible() {
+        SeelenWeg::remove_hwnd(&window);
         return Ok(());
     }
 
-    if WindowsApi::is_iconic(hwnd) {
-        WindowsApi::show_window_async(hwnd, SW_RESTORE)?;
+    if window.is_minimized() {
+        WindowsApi::show_window_async(window.hwnd(), SW_RESTORE)?;
         return Ok(());
     }
 
     let last_active = LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire);
-    if last_active == hwnd.0 as isize {
-        WindowsApi::show_window_async(hwnd, SW_MINIMIZE)?;
+    if last_active == window.address() {
+        WindowsApi::show_window_async(window.hwnd(), SW_MINIMIZE)?;
     } else {
-        WindowsApi::set_foreground(hwnd)?;
+        WindowsApi::set_foreground(window.hwnd())?;
     }
 
     Ok(())
@@ -111,6 +116,7 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         path: path.clone(),
         is_dir: path.is_dir(),
         execution_command: path.to_string_lossy().to_string(),
+        windows: vec![],
     };
 
     if path.extension() == Some(OsStr::new("lnk")) {
