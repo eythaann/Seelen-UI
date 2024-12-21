@@ -14,10 +14,9 @@ styles:
     }
 
     .ft-bar-item {
-      background: #121212;
+      background-color: rgba(40, 40, 40, 0.8);
       border-radius: 10px;
       padding: 2px 8px;
-      border: 1px solid #a0a0a0;
       height: 25px;
       transition: background-color 300ms ease-in-out;
 
@@ -26,7 +25,7 @@ styles:
         border-radius: 10px;
 
         &:hover {
-          background-color: #323232;
+          background-color: rgba(50, 50, 50, 1);
         }
       }
     }
