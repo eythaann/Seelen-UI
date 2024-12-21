@@ -236,11 +236,13 @@ wall:
   seconds: segundo
 weg:
   auto_hide: Auto itago
+  behaviour: Maramihang pag -uugali ng pagpapakita
   delay_to_hide: Delay sa pagtatago
   delay_to_show: Pagkaantala sa pagpapakita
   dock_side: Posisyon
   enable: Paganahin ang pantalan/taskbar
   gap: Gap
+  item_show_upon_multitaskbar: Ipakita ang aking mga taskbar apps sa
   items:
     gap: Puwang sa pagitan ng mga item
     label: Mga item

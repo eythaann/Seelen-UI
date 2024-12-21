@@ -234,11 +234,13 @@ wall:
   seconds: secunde
 weg:
   auto_hide: Ascundere automată
+  behaviour: Comportament de afișare multiplă
   delay_to_hide: Întârzie să te ascunzi
   delay_to_show: Întârzieți afișarea
   dock_side: Poziţie
   enable: Activați Dock/Bara de activități
   gap: Decalaj
+  item_show_upon_multitaskbar: Arată -mi aplicațiile pentru bara de activități
   items:
     gap: Spațiu între articole
     label: Articole

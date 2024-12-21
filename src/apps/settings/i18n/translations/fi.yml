@@ -234,11 +234,13 @@ wall:
   seconds: sekunti
 weg:
   auto_hide: Automaattinen piilo
+  behaviour: Useita näyttökäyttäytymistä
   delay_to_hide: Viive piilottaa
   delay_to_show: Viive näyttöön
   dock_side: Sijainti
   enable: Ota Dock/tehtäväpalkki käyttöön
   gap: Kuilu
+  item_show_upon_multitaskbar: Näytä tehtäväpalkkisovellukseni
   items:
     gap: Tilaa esineiden välillä
     label: Kohteet

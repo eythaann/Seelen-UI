@@ -229,11 +229,13 @@ wall:
   seconds: seconds
 weg:
   auto_hide: Auto Hide
+  behaviour: Multiple display behaviour
   delay_to_hide: Delay to hide
   delay_to_show: Delay to show
   dock_side: Position
   enable: Enable Dock/Taskbar
   gap: Gap
+  item_show_upon_multitaskbar: Show my taskbar apps on
   items:
     gap: Space Between Items
     label: Items

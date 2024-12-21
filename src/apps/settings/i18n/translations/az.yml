@@ -231,11 +231,13 @@ wall:
   seconds: saniyə
 weg:
   auto_hide: Avtomatik gizlətmək
+  behaviour: Birdən çox ekran davranışı
   delay_to_hide: Gizlətmək üçün gecikmə
   delay_to_show: Göstərmək üçün gecikmə
   dock_side: Mövqe
   enable: Dock / tapşırıq çubuğunu aktivləşdirin
   gap: Gap
+  item_show_upon_multitaskbar: TaskBar tətbiqlərimi göstər
   items:
     gap: Əşyalar arasındakı boşluq
     label: Maddələr

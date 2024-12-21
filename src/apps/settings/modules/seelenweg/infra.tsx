@@ -1,4 +1,4 @@
-import { HideMode, SeelenWegMode, SeelenWegSide } from '@seelen-ui/lib';
+import { HideMode, SeelenWegItemDisplayOption, SeelenWegMode, SeelenWegSide } from '@seelen-ui/lib';
 import { Button, InputNumber, Select, Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -30,6 +30,20 @@ export const SeelenWegSettings = () => {
           </div>
           <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <SettingsSubGroup label={t('weg.behaviour')}>
+          <SettingsOption>
+            <div>{t('weg.item_show_upon_multitaskbar')}</div>
+            <Select
+              style={{ width: '220px' }}
+              value={settings.multitaskbarItemVisibilityBehaviour}
+              options={OptionsFromEnum(SeelenWegItemDisplayOption)}
+              onChange={(value) => dispatch(SeelenWegActions.setMultitaskbarItemVisibilityBehaviour(value))}
+            />
+          </SettingsOption>
+        </SettingsSubGroup>
       </SettingsGroup>
 
       <SettingsGroup>

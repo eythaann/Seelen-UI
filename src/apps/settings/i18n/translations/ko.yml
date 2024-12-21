@@ -225,11 +225,13 @@ wall:
   seconds: 초
 weg:
   auto_hide: 자동 숨기기
+  behaviour: 다중 디스플레이 동작
   delay_to_hide: 숨기기 지연
   delay_to_show: 표시 지연
   dock_side: 위치
   enable: 독/작업 표시줄 활성화
   gap: 간격
+  item_show_upon_multitaskbar: 내 작업 표시 줄 앱을 표시하십시오
   items:
     gap: 항목 간 간격
     label: 항목

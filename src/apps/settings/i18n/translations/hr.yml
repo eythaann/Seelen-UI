@@ -234,11 +234,13 @@ wall:
   seconds: sekundi
 weg:
   auto_hide: Auto sakrij
+  behaviour: Višestruko ponašanje prikaza
   delay_to_hide: Odgoda za skrivanje
   delay_to_show: Odgoditi prikaz
   dock_side: Položaj
   enable: Omogućite pristanište/zadaću
   gap: Jaz
+  item_show_upon_multitaskbar: Prikaži moje aplikacije TawerBar
   items:
     gap: Prostor između predmeta
     label: Predmeti

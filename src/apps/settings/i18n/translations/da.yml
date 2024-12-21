@@ -234,11 +234,13 @@ wall:
   seconds: sekunder
 weg:
   auto_hide: Auto skjul
+  behaviour: Flere displayadfærd
   delay_to_hide: Forsink med at skjule
   delay_to_show: Forsinket fremvisning
   dock_side: Position
   enable: Aktivér dock/proceslinje
   gap: Gap
+  item_show_upon_multitaskbar: Vis mine proceslinje -apps på
   items:
     gap: Rum mellem genstande
     label: Genstande

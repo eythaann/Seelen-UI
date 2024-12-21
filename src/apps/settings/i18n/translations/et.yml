@@ -231,11 +231,13 @@ wall:
   seconds: sekundid
 weg:
   auto_hide: Automaatne peida
+  behaviour: Mitu kuva käitumine
   delay_to_hide: Viivitage peitmine
   delay_to_show: Näitamisega viivitus
   dock_side: Positsioon
   enable: Luba dokk/ülesanderiba
   gap: Lüngad
+  item_show_upon_multitaskbar: Näidake minu ülesanderiba rakendusi
   items:
     gap: Esemete vaheline ruum
     label: Esemed

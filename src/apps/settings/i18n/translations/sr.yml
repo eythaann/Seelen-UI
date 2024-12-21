@@ -233,11 +233,13 @@ wall:
   seconds: секунди
 weg:
   auto_hide: Аутоматска кожа
+  behaviour: Вишеструко понашање екрана
   delay_to_hide: Одложите да бисте се сакрили
   delay_to_show: Одлагање приказивања
   dock_side: Положај
   enable: Омогући прикључак / траку задатака
   gap: Празнина
+  item_show_upon_multitaskbar: Прикажи апликације за траке за траку на траци
   items:
     gap: Простор између предмета
     label: Предмети

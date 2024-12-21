@@ -232,11 +232,13 @@ wall:
   seconds: segundas
 weg:
   auto_hide: Ocultar automaticamente
+  behaviour: Múltiplo de comportamento de exibição
   delay_to_hide: Demora para esconder
   delay_to_show: Demora para mostrar
   dock_side: Posição
   enable: Habilitar Dock/Barra de Tarefas
   gap: Espaçamento
+  item_show_upon_multitaskbar: Mostre meus aplicativos de barra de tarefas em
   items:
     gap: Espaço entre itens
     label: Item

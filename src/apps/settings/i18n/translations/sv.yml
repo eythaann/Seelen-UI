@@ -234,11 +234,13 @@ wall:
   seconds: sekunder
 weg:
   auto_hide: Auto Hide
+  behaviour: Flera visningsbeteende
   delay_to_hide: Dröjsmål att gömma sig
   delay_to_show: Fördröjning att visa
   dock_side: Placera
   enable: Aktivera bryggor/aktivitetsfält
   gap: Glipa
+  item_show_upon_multitaskbar: Visa mina aktivitetsfält -appar på
   items:
     gap: Utrymme mellan föremål
     label: Föremål

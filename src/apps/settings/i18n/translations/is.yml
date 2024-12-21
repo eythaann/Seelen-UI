@@ -230,11 +230,13 @@ wall:
   seconds: sekúndur
 weg:
   auto_hide: Sjálfvirk fela
+  behaviour: Margfeldi skjáhegðun
   delay_to_hide: Seinkun á að fela
   delay_to_show: Seinkun á sýningu
   dock_side: Staða
   enable: Virkja bryggju/verkefnastiku
   gap: Bil
+  item_show_upon_multitaskbar: Sýndu verkefnisstikaforritin mín
   items:
     gap: Rými milli atriða
     label: Hlutir

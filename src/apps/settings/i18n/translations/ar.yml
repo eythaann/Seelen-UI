@@ -227,11 +227,13 @@ wall:
   seconds: ثوان
 weg:
   auto_hide: الأخفاء التلقائي
+  behaviour: سلوك العرض المتعدد
   delay_to_hide: تأخير الأخفاء
   delay_to_show: تأخير الظهور
   dock_side: المكان
   enable: تفعيل قفص الاتهام/شريط المهام
   gap: الفراغ
+  item_show_upon_multitaskbar: أظهر تطبيقات شريط المهام الخاص بي
   items:
     gap: الفراغ بين العناصر
     label: العناصر

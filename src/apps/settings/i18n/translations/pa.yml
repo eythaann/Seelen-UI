@@ -228,11 +228,13 @@ wall:
   seconds: ਸਕਿੰਟ
 weg:
   auto_hide: ਆਟੋ ਓਹਲੇ
+  behaviour: ਮਲਟੀਪਲ ਡਿਸਪਲੇਅ ਵਿਵਹਾਰ
   delay_to_hide: ਛੁਪਾਉਣ ਲਈ ਦੇਰੀ
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   dock_side: ਸਥਿਤੀ
   enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   gap: ਪਾੜਾ
+  item_show_upon_multitaskbar: ਮੇਰੇ ਟਾਸਕਬਾਰ ਐਪਸ ਨੂੰ ਦਿਖਾਓ
   items:
     gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
     label: ਇਕਾਈ

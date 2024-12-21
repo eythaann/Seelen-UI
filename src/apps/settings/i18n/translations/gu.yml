@@ -231,11 +231,13 @@ wall:
   seconds: સેકન્ડ
 weg:
   auto_hide: સ્વતઃ છુપાવો
+  behaviour: બહુવિધ પ્રદર્શન વર્તન
   delay_to_hide: છુપાવવામાં વિલંબ
   delay_to_show: બતાવવામાં વિલંબ
   dock_side: પદ
   enable: ડોક/ટાસ્કબારને સક્ષમ કરો
   gap: ગેપ
+  item_show_upon_multitaskbar: મારી ટાસ્કબાર એપ્લિકેશનો પર બતાવો
   items:
     gap: વસ્તુઓ વચ્ચે જગ્યા
     label: વસ્તુઓ

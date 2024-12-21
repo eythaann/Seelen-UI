@@ -239,11 +239,13 @@ wall:
   seconds: artículos de segunda clase
 weg:
   auto_hide: Ocultar automáticamente
+  behaviour: Comportamiento de visualización múltiple
   delay_to_hide: Retraso para esconderse
   delay_to_show: Retraso para mostrar
   dock_side: Posición
   enable: Habilitar dock/barra de tareas
   gap: Espacio
+  item_show_upon_multitaskbar: Muestre mis aplicaciones de la barra de tareas en
   items:
     gap: Espacio entre elementos
     label: Elementos

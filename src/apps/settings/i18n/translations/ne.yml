@@ -231,11 +231,13 @@ wall:
   seconds: सेकेन्ड
 weg:
   auto_hide: 'स्वत: लुकाउने'
+  behaviour: बहुविध प्रदर्शन व्यवहार
   delay_to_hide: लुकाउन ढिलाइ
   delay_to_show: देखाउन ढिलाइ
   dock_side: स्थिति
   enable: डक / टास्कबार सक्षम गर्नुहोस्
   gap: अन्तराल
+  item_show_upon_multitaskbar: मेरो टास्कबार अनुप्रयोगहरू देखाउनुहोस्
   items:
     gap: वस्तुहरू बीचको ठाउँ
     label: वस्तुहरू

@@ -232,11 +232,13 @@ wall:
   seconds: Sekonnen
 weg:
   auto_hide: Automatesch
+  behaviour: Multiple Affichage Verhalen
   delay_to_hide: Verspéidung ze verstoppen
   delay_to_show: Verspéidung fir ze weisen
   dock_side: Positioun un
   enable: Aktivéiert Dock / Taskbar
   gap: Knënn
+  item_show_upon_multitaskbar: Weisen meng Taskbar Apps op
   items:
     gap: Raum tëscht Artikelen
     label: Artikelen

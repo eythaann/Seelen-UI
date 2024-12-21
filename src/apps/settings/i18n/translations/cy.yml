@@ -234,11 +234,13 @@ wall:
   seconds: eiliadau
 weg:
   auto_hide: Cuddio awto
+  behaviour: Ymddygiad arddangos lluosog
   delay_to_hide: Oedi i guddio
   delay_to_show: Oedi i ddangos
   dock_side: Safle
   enable: Galluogi doc/bar tasg
   gap: Bwlch
+  item_show_upon_multitaskbar: Dangos fy apiau bar tasgau ymlaen
   items:
     gap: Lle rhwng eitemau
     label: Eitemau

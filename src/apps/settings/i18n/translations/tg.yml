@@ -229,11 +229,13 @@ wall:
   seconds: сонияҳо
 weg:
   auto_hide: Худкор Пинҳон кардани
+  behaviour: Рафтори намоишии бисёр
   delay_to_hide: Таъхир барои пинҳон кардан
   delay_to_show: Таъхир барои нишон додан
   dock_side: Вазъият
   enable: Dock / Travelar
   gap: Фосила
+  item_show_upon_multitaskbar: Барномаҳои панели ман нишон диҳед
   items:
     gap: Фосила байни ашё
     label: Ашё

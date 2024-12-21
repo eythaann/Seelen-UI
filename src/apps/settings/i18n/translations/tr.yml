@@ -232,11 +232,13 @@ wall:
   seconds: saniye
 weg:
   auto_hide: Otomatik Gizle
+  behaviour: Çoklu görüntüleme davranışı
   delay_to_hide: Gizlenmeyi geciktir
   delay_to_show: Gösterme gecikmesi
   dock_side: Konum
   enable: Dock/Görev Çubuğunu Etkinleştir
   gap: Boşluk
+  item_show_upon_multitaskbar: Görev çubuğu uygulamalarımı göster
   items:
     gap: Öğeler Arası Boşluk
     label: Öğeler

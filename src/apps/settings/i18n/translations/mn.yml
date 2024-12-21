@@ -230,11 +230,13 @@ wall:
   seconds: хоёр цаг
 weg:
   auto_hide: Авто гүнд
+  behaviour: Олон дэлгэцийн зан байдал
   delay_to_hide: Нуухыг хойшлуулах
   delay_to_show: Үзүүлэхийг хойшлуулсан
   dock_side: Байрлал
   enable: Док / Taskbar-г идэвхжүүлэх
   gap: Цонх
+  item_show_upon_multitaskbar: Миний TaskBar програмыг харуул
   items:
     gap: Зүйлийн хоорондох зай
     label: Зүйл

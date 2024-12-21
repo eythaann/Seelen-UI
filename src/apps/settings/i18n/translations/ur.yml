@@ -231,11 +231,13 @@ wall:
   seconds: سیکنڈ
 weg:
   auto_hide: خود بخود چھپ جانا
+  behaviour: ایک سے زیادہ ڈسپلے سلوک
   delay_to_hide: چھپانے میں تاخیر
   delay_to_show: دکھانے میں تاخیر
   dock_side: پوزیشن
   enable: ٹاسک بار کو فعال کریں
   gap: گیپ
+  item_show_upon_multitaskbar: میرے ٹاسک بار ایپس کو دکھائیں
   items:
     gap: اشیاء کے درمیان جگہ
     label: اشیاء

@@ -232,11 +232,13 @@ wall:
   seconds: సెకన్లు
 weg:
   auto_hide: ఆటో దాచు
+  behaviour: బహుళ ప్రదర్శన ప్రవర్తన
   delay_to_hide: దాచడానికి ఆలస్యం
   delay_to_show: చూపించడానికి ఆలస్యం
   dock_side: స్థానం
   enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
   gap: గ్యాప్
+  item_show_upon_multitaskbar: నా టాస్క్‌బార్ అనువర్తనాలను చూపించు
   items:
     gap: వస్తువుల మధ్య ఖాళీ
     label: వస్తువులు

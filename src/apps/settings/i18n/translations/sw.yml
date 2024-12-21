@@ -228,11 +228,13 @@ wall:
   seconds: sekunde
 weg:
   auto_hide: Kujificha kiotomatiki
+  behaviour: Tabia nyingi za kuonyesha
   delay_to_hide: Kuchelewa kujificha
   delay_to_show: Kuchelewa kuonyesha
   dock_side: Msimamo
   enable: Wezesha Dock/Taskbar
   gap: Pengo
+  item_show_upon_multitaskbar: Onyesha programu zangu za kazi
   items:
     gap: Nafasi kati ya vitu
     label: Vitu

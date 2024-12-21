@@ -234,11 +234,13 @@ wall:
   seconds: sekunder
 weg:
   auto_hide: Skjul automatisk
+  behaviour: Flere skjermatferd
   delay_to_hide: Utsett å skjule
   delay_to_show: Forsinkelse med visning
   dock_side: Stilling
   enable: Aktiver dock/oppgavelinje
   gap: Mellomrom
+  item_show_upon_multitaskbar: Vis oppgavelinjens -appene mine på
   items:
     gap: Plass mellom varene
     label: Gjenstander

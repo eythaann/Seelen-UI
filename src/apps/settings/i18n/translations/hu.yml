@@ -231,11 +231,13 @@ wall:
   seconds: másodpercek
 weg:
   auto_hide: Automatikus elrejtés
+  behaviour: Többszörös megjelenítési viselkedés
   delay_to_hide: Késleltesse az elrejtést
   delay_to_show: Megjelenítés késleltetése
   dock_side: Pozíció
   enable: Engedélyezze a dokkolót/tálcát
   gap: Rés
+  item_show_upon_multitaskbar: Mutasd meg a tálca -alkalmazásaimat
   items:
     gap: Hely az elemek között
     label: Tárgyak
