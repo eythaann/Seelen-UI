@@ -79,20 +79,19 @@ general:
   accent_color: ઉચ્ચારણ રંગ
   date_format: તારીખ ફોર્મેટ
   icon_pack:
+    available: ઉપલબ્ધ આઇકન પેક
     label: ચિહ્ન
+    selected: સક્રિય આઇકન પેક્સ
   language: ભાષા
+  resource:
+    author: લેખક
+    description: વર્ણન
+    tags: ટૅગ્સ
   startup: સ્ટાર્ટઅપ પર ચલાવો?
   theme:
-    add: થીમ ઉમેરો
-    added: થીમ પહેલેથી જ ઉમેરવામાં આવી છે
-    author: લેખક
-    available: ઉપલબ્ધ
-    description: વર્ણન
-    enabled: સક્ષમ થીમ્સ
-    label: થીમ માહિતી
-    placeholder: થીમ પસંદ કરો
-    selected: પસંદ કરેલું
-    tags: ટૅગ્સ
+    available: ઉપલબ્ધ થીમ્સ
+    label: થીમ્સ
+    selected: સક્રિય થીમ્સ
   wallpaper:
     select: વ wallp લપેપર પસંદ કરો
 header:

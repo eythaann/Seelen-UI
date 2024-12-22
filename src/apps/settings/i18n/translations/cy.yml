@@ -79,20 +79,19 @@ general:
   accent_color: Lliw acen
   date_format: Fformat dyddiad
   icon_pack:
+    available: Pecynnau Eicon Ar Gael
     label: Pecynnau eicon
+    selected: Pecynnau Eicon Actif
   language: Iaith
+  resource:
+    author: Awdur
+    description: Disgrifiad
+    tags: Tagiau
   startup: Rhedeg ar gychwyn?
   theme:
-    add: Ychwanegu Thema
-    added: Thema wedi'i hychwanegu eisoes
-    author: Awduron
-    available: AR GAEL
-    description: Disgrifiadau
-    enabled: Themâu wedi'u galluogi
-    label: Gwybodaeth Thema
-    placeholder: Dewiswch Thema
-    selected: Dethol
-    tags: Tagiau
+    available: Themâu sydd ar Gael
+    label: Themâu
+    selected: Themâu Gweithredol
   wallpaper:
     select: Dewis papur wal
 header:

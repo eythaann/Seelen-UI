@@ -78,20 +78,19 @@ general:
   accent_color: Accent Color
   date_format: Date Format
   icon_pack:
+    available: Available Icon Packs
     label: Icon Packs
+    selected: Active Icon Packs
   language: Language
+  resource:
+    author: Author
+    description: Description
+    tags: Tags
   startup: Run on startup?
   theme:
-    add: Add theme
-    added: Theme already added
-    author: Author
-    available: Available
-    description: Description
-    enabled: Enabled Themes
+    available: Available Themes
     label: Themes
-    placeholder: Select theme
-    selected: Selected
-    tags: Tags
+    selected: Active Themes
   wallpaper:
     select: Select Wallpaper
 header:

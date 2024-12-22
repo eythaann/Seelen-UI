@@ -79,20 +79,19 @@ general:
   accent_color: Akcento spalva
   date_format: Datos formatas
   icon_pack:
+    available: Galimi piktogramų paketai
     label: ICON PACKS
+    selected: Aktyvūs piktogramų paketai
   language: Kalba
+  resource:
+    author: Autorius
+    description: Aprašymas
+    tags: Žymos
   startup: Paleisti paleidimą?
   theme:
-    add: Pridėkite temą
-    added: Jau pridėta tema
-    author: Autorius
-    available: Galima
-    description: apibūdinimas
-    enabled: Įgalintos temos
-    label: Informacija apie temą
-    placeholder: Pasirinkite temą
-    selected: Pasirinktas
-    tags: Žymos
+    available: Galimos temos
+    label: Temos
+    selected: Aktyvios temos
   wallpaper:
     select: Pasirinkite tapetai
 header:

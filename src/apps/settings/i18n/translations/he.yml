@@ -77,20 +77,19 @@ general:
   accent_color: צבע הדגשה
   date_format: פורמט תאריך
   icon_pack:
+    available: חבילות אייקונים זמינות
     label: חבילות אייקונים
+    selected: ערכות אייקונים פעילות
   language: שפה
+  resource:
+    author: מְחַבֵּר
+    description: תֵאוּר
+    tags: תגים
   startup: לרוץ בהפעלה?
   theme:
-    add: הוסף נושא
-    added: הנושא כבר הוסיף
-    author: מְחַבֵּר
-    available: זמין
-    description: תיאור
-    enabled: נושאים מופעלים
-    label: מידע על נושא
-    placeholder: בחר נושא
-    selected: נבחר
-    tags: תגיות
+    available: ערכות נושא זמינות
+    label: ערכות נושא
+    selected: ערכות נושא פעילות
   wallpaper:
     select: בחר טפט
 header:

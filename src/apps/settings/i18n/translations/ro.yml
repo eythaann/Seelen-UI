@@ -79,20 +79,19 @@ general:
   accent_color: Culoare de accent
   date_format: Formatul datei
   icon_pack:
+    available: Pachete de pictograme disponibile
     label: Pachete de pictograme
+    selected: Pachete de pictograme active
   language: Limba
+  resource:
+    author: Autor
+    description: Descriere
+    tags: Etichete
   startup: Rulați la pornire?
   theme:
-    add: Adăugați tema
-    added: Tema deja adăugată
-    author: Autor
-    available: Disponibil
-    description: Descriere
-    enabled: Teme activate
-    label: Informații despre temă
-    placeholder: Selectează tema
-    selected: Selectat
-    tags: Etichete
+    available: Teme disponibile
+    label: Teme
+    selected: Teme active
   wallpaper:
     select: Selectați tapet
 header:

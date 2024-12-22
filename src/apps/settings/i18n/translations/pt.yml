@@ -79,20 +79,19 @@ general:
   accent_color: Cor de destaque
   date_format: Formato de data
   icon_pack:
+    available: Pacotes de ícones disponíveis
     label: Pacotes de ícones
+    selected: Pacotes de ícones ativos
   language: Idioma
+  resource:
+    author: Autor
+    description: Descrição
+    tags: Etiquetas
   startup: Executar ao iniciar?
   theme:
-    add: Adicionar tema
-    added: Tema já adicionado
-    author: Autor
-    available: Disponível
-    description: Descrição
-    enabled: Temas habilitados
-    label: Informações do tema
-    placeholder: Selecione o tema
-    selected: Selecionada
-    tags: Tag
+    available: Temas disponíveis
+    label: Temas
+    selected: Temas ativos
   wallpaper:
     select: Selecione papel de parede
 header:

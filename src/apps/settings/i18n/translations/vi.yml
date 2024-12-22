@@ -78,20 +78,19 @@ general:
   accent_color: Màu nhấn
   date_format: Định dạng ngày
   icon_pack:
+    available: Gói biểu tượng có sẵn
     label: Gói biểu tượng
+    selected: Gói biểu tượng hoạt động
   language: Ngôn ngữ
+  resource:
+    author: Tác giả
+    description: Sự miêu tả
+    tags: Thẻ
   startup: Chạy khi khởi động?
   theme:
-    add: Thêm chủ đề
-    added: Chủ đề đã được thêm vào
-    author: Tác giả
-    available: Có sẵn
-    description: Sự miêu tả
-    enabled: Cho phép các chủ đề
-    label: Thông tin chủ đề
-    placeholder: Chọn chủ đề
-    selected: Đã chọn
-    tags: Tags
+    available: Chủ đề có sẵn
+    label: Chủ đề
+    selected: Chủ đề đang hoạt động
   wallpaper:
     select: Chọn hình nền
 header:

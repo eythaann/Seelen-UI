@@ -79,20 +79,19 @@ general:
   accent_color: Korostusväri
   date_format: Päiväysmuoto
   icon_pack:
+    available: Saatavilla kuvakepaketit
     label: Kuvakepakkaukset
+    selected: Aktiiviset kuvakepaketit
   language: Kieli
+  resource:
+    author: Tekijä
+    description: Kuvaus
+    tags: Tunnisteet
   startup: Suorittaa käynnistyksen yhteydessä?
   theme:
-    add: Lisätä teemaa
-    added: Jo lisätty teema
-    author: Kirjoittaja
-    available: Saatavilla
-    description: Kuvaus
-    enabled: Mahdolliset teemat
-    label: Teematiedot
-    placeholder: Valitse teema
-    selected: Valittu
-    tags: Tunnisteet
+    available: Käytettävissä olevat teemat
+    label: Teemat
+    selected: Aktiiviset teemat
   wallpaper:
     select: Valitse taustakuva
 header:

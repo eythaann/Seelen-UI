@@ -79,20 +79,19 @@ general:
   accent_color: Akzenter Faarf
   date_format: Datum Format
   icon_pack:
+    available: Verfügbar Ikon Packs
     label: ICON Tass
+    selected: Aktiv Ikon Packs
   language: Sprooche
+  resource:
+    author: Auteur
+    description: Beschreiwung
+    tags: Tags
   startup: Run op Startup?
   theme:
-    add: Füügt Thema
-    added: Thema scho bäigefüügt
-    author: Auteur
-    available: Liwwerungen
-    description: Broessdatsch
-    enabled: Aktivéiert Themen
-    label: Thema Informatioun
-    placeholder: Wielt Thema
-    selected: Allgemeng
-    tags: Tasmmenzwierk
+    available: Verfügbar Themen
+    label: Themen
+    selected: Aktiv Themen
   wallpaper:
     select: Wielt Wallpaper
 header:

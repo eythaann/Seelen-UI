@@ -77,20 +77,19 @@ general:
   accent_color: የዝግጅት ቀለም
   date_format: የቀን ቅርጸት
   icon_pack:
+    available: የሚገኙ የአዶ ጥቅሎች
     label: አዶዎች ፓኬጆች
+    selected: ንቁ አዶ ጥቅሎች
   language: ቋንቋ
+  resource:
+    author: ደራሲ
+    description: መግለጫ
+    tags: መለያዎች
   startup: ጅምር ላይ ይሮጡ?
   theme:
-    add: ጭብጥ ያክሉ
-    added: ጭብጥ ቀድሞውኑ ታክሏል
-    author: ደራሲ ደራሲ
-    available: ይገኛል
-    description: መግለጫ
-    enabled: አስቁ
-    label: ጭብጥ መረጃ
-    placeholder: ጭብጥ ይምረጡ
-    selected: ተመር selected ል
-    tags: መለያዎች
+    available: የሚገኙ ገጽታዎች
+    label: ገጽታዎች
+    selected: ንቁ ገጽታዎች
   wallpaper:
     select: የግድግዳ ወረቀት ይምረጡ
 header:

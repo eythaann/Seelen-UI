@@ -79,20 +79,19 @@ general:
   accent_color: აქცენტის ფერი
   date_format: თარიღის ფორმატი
   icon_pack:
+    available: ხელმისაწვდომი ხატების პაკეტები
     label: ხატის პაკეტები
+    selected: აქტიური ხატების პაკეტები
   language: Ენა
+  resource:
+    author: ავტორი
+    description: აღწერა
+    tags: ტეგები
   startup: გაშვებით გაშვებით?
   theme:
-    add: თემის დამატება
-    added: თემა უკვე დამატებულია
-    author: ავტორი
-    available: არსებული
-    description: აღწერილობა
-    enabled: ჩართულია თემები
-    label: თემის ინფორმაცია
-    placeholder: აირჩიეთ თემა
-    selected: არჩეული
-    tags: საკვანძო ნიშნები
+    available: ხელმისაწვდომი თემები
+    label: თემები
+    selected: აქტიური თემები
   wallpaper:
     select: აირჩიეთ ფონი
 header:

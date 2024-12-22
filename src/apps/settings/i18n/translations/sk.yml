@@ -79,20 +79,19 @@ general:
   accent_color: Prízvuk
   date_format: Formát
   icon_pack:
+    available: Dostupné balíčky ikon
     label: Ikon
+    selected: Balíky aktívnych ikon
   language: Jazyk
+  resource:
+    author: Autor
+    description: Popis
+    tags: Tagy
   startup: Spustiť pri štarte?
   theme:
-    add: Pridať tému
-    added: Téma už bola pridaná
-    author: Autor
-    available: Dostupný
-    description: Opis
-    enabled: Povolené témy
-    label: Informácie o téme
-    placeholder: Vyberte tému
-    selected: Vybraný
-    tags: Značky
+    available: Dostupné témy
+    label: Témy
+    selected: Aktívne témy
   wallpaper:
     select: Vyberte tapetu
 header:

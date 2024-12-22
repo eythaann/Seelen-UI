@@ -79,20 +79,19 @@ general:
   accent_color: Umbala we-Accent
   date_format: Ifomethi yosuku
   icon_pack:
+    available: Amaphekhi esithonjana atholakalayo
     label: I-Icon Packs
+    selected: Amaphekhi Wesithonjana Asebenzayo
   language: Ulimi
+  resource:
+    author: Umbhali
+    description: Incazelo
+    tags: Omaka
   startup: Gijima ekuqaleni?
   theme:
-    add: Engeza itimu
-    added: Itimu esevele ingezwe
-    author: Umlobi
-    available: '-Tholakala'
-    description: Ukufanisa
-    enabled: Izindikimba ezinikwe amandla
-    label: Imininingwane yetimu
-    placeholder: Khetha isihloko
-    selected: Ikhethiwe
-    tags: Amathegi
+    available: Izingqikithi Ezitholakalayo
+    label: Izindikimba
+    selected: Izindikimba ezisebenzayo
   wallpaper:
     select: Khetha iphepha lokunamathisela odongeni
 header:

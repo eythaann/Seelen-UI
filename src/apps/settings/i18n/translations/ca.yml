@@ -79,20 +79,19 @@ general:
   accent_color: Color d’accent
   date_format: Format de la data
   icon_pack:
+    available: Paquets d'icones disponibles
     label: Paquets d’icones
+    selected: Paquets d'icones actius
   language: Llenguatge
+  resource:
+    author: Autor
+    description: Descripció
+    tags: Etiquetes
   startup: Executeu la posada en marxa?
   theme:
-    add: Afegiu el tema
-    added: Tema ja afegit
-    author: Autora
-    available: Disponible
-    description: Descripció
-    enabled: Temes habilitats
-    label: Informació del tema
-    placeholder: Seleccioneu el tema
-    selected: Seleccionat
-    tags: Etiquetes
+    available: Temes disponibles
+    label: Temes
+    selected: Temes actius
   wallpaper:
     select: Seleccioneu fons de pantalla
 header:

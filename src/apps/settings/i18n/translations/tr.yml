@@ -79,20 +79,19 @@ general:
   accent_color: Vurgu Rengi
   date_format: Tarih Biçimi
   icon_pack:
+    available: Mevcut Simge Paketleri
     label: İkon Paketleri
+    selected: Aktif Simge Paketleri
   language: Dil
+  resource:
+    author: Yazar
+    description: Tanım
+    tags: Etiketler
   startup: Başlangıçta çalışsın mı?
   theme:
-    add: Tema Ekle
-    added: Tema Zaten Ekli
-    author: Yazar
-    available: Mevcut
-    description: Açıklama
-    enabled: Etkin Temalar
-    label: Tema Bilgileri
-    placeholder: Tema Seç
-    selected: Seçili
-    tags: Etiketler
+    available: Mevcut Temalar
+    label: Temalar
+    selected: Aktif Temalar
   wallpaper:
     select: Duvar Kağıdı Seç
 header:

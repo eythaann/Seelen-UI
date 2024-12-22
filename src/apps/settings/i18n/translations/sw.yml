@@ -78,20 +78,19 @@ general:
   accent_color: Rangi ya lafudhi
   date_format: Muundo wa tarehe
   icon_pack:
+    available: Vifurushi vya ikoni vinavyopatikana
     label: Pakiti za ikoni
+    selected: Vifurushi vya ikoni zinazotumika
   language: Lugha
+  resource:
+    author: Mwandishi
+    description: Maelezo
+    tags: Lebo
   startup: Kuendesha kuanza?
   theme:
-    add: Ongeza mandhari
-    added: Mada tayari imeongezwa
-    author: Mwandishi
-    available: Inapatikana
-    description: Maelezo
-    enabled: Mada zilizowezeshwa
-    label: Habari ya mada
-    placeholder: Chagua mandhari
-    selected: Kuchaguliwa
-    tags: Lebo
+    available: Mandhari Zinazopatikana
+    label: Mandhari
+    selected: Mandhari Inayotumika
   wallpaper:
     select: Chagua Ukuta
 header:

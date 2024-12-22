@@ -77,20 +77,19 @@ general:
   accent_color: ສີສໍານຽງ
   date_format: ຮູບແບບວັນທີ
   icon_pack:
+    available: ໄອຄອນຊອງທີ່ມີໃຫ້
     label: icon ຊອງ
+    selected: ຊຸດໄອຄອນທີ່ໃຊ້ໄດ້
   language: ພາສາ
+  resource:
+    author: ຜູ້ຂຽນ
+    description: ລາຍລະອຽດ
+    tags: ປ້າຍກຳກັບ
   startup: ດໍາເນີນການກ່ຽວກັບການເລີ່ມຕົ້ນ?
   theme:
-    add: ເພີ່ມຫົວຂໍ້
-    added: ເພີ່ມຮູບແບບສີສັນແລ້ວ
-    author: ຜູ້ຂຽນ
-    available: ມີໄວ້
-    description: ລາຍລະອຽດ
-    enabled: ຮູບແບບສີສັນທີ່ເປີດໃຊ້ງານ
-    label: ຂໍ້ມູນຫົວຂໍ້
-    placeholder: ເລືອກຫົວຂໍ້
-    selected: ຄັດເລືອກ
-    tags: ປ້າຍກຳກັບ
+    available: ຮູບແບບສີສັນທີ່ມີຢູ່
+    label: ຫົວຂໍ້
+    selected: ຮູບແບບການເຄື່ອນໄຫວ
   wallpaper:
     select: ເລືອກຮູບວໍເປເປີ
 header:

@@ -79,20 +79,19 @@ general:
   accent_color: Ранги ҳисоб
   date_format: Шакли сана
   icon_pack:
+    available: Бастаҳои нишонаи дастрас
     label: ICon бастаҳои
+    selected: Бастаҳои нишонаи фаъол
   language: Забон
+  resource:
+    author: Муаллиф
+    description: Тавсифи
+    tags: Тегҳо
   startup: Оғози кор?
   theme:
-    add: Иловаи мавзӯъ
-    added: Мавзӯъ аллакай илова карда шуд
-    author: Муаллиф
-    available: Дастрас
-    description: Тасвирӣ
-    enabled: Дар мавзӯъҳо фаъол карда шудааст
-    label: Маълумот дар мавзӯъ
-    placeholder: Интихоб кунед Мавзӯъ
-    selected: Интихоб карда шуд
-    tags: Тегҳо
+    available: Мавзӯъҳои дастрас
+    label: Мавзӯъҳо
+    selected: Мавзӯъҳои фаъол
   wallpaper:
     select: Обер-ро интихоб кунед
 header:

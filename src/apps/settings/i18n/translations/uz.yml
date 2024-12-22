@@ -79,20 +79,19 @@ general:
   accent_color: Urg'u rangi
   date_format: Sana formati
   icon_pack:
+    available: Mavjud piktogramma to'plamlari
     label: Ikonka paketlari
+    selected: Faol piktogramma to'plamlari
   language: Til
+  resource:
+    author: Muallif
+    description: Tavsif
+    tags: Teglar
   startup: Ishga tushirishda ishlaydimi?
   theme:
-    add: Mavzuni qo'shing
-    added: Mavzu allaqachon qo'shilgan
-    author: Muallif
-    available: Mavjud
-    description: Tavsif
-    enabled: Mavzular yoqilgan
-    label: Mavzu haqida ma'lumot
-    placeholder: Mavzuni tanlang
-    selected: Tanlangan
-    tags: Teglar
+    available: Mavjud mavzular
+    label: Mavzular
+    selected: Faol mavzular
   wallpaper:
     select: Fon rasmini tanlang
 header:

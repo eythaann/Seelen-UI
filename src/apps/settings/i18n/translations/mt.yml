@@ -79,20 +79,19 @@ general:
   accent_color: Kulur tal-aċċent
   date_format: Format tad-data
   icon_pack:
+    available: Pakketti ta' Ikoni Disponibbli
     label: Pakketti tal-ikona
+    selected: Pakketti tal-Ikoni Attivi
   language: Lingwa
+  resource:
+    author: Awtur
+    description: Deskrizzjoni
+    tags: Tikketti
   startup: Mexxi fuq l-istartjar?
   theme:
-    add: Żid it-tema
-    added: Tema diġà miżjuda
-    author: Awtur
-    available: Disponibbli
-    description: Deskrizzjoni
-    enabled: Temi ppermettiet
-    label: Informazzjoni dwar it-tema
-    placeholder: Agħżel Tema
-    selected: Magħżula
-    tags: Tags
+    available: Temi Disponibbli
+    label: Temi
+    selected: Temi Attivi
   wallpaper:
     select: Agħżel Wallpaper
 header:

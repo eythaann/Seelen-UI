@@ -76,20 +76,19 @@ general:
   accent_color: 강조 색상
   date_format: 날짜 형식
   icon_pack:
+    available: 사용 가능한 아이콘 팩
     label: 아이콘 팩
+    selected: 활성 아이콘 팩
   language: 언어
+  resource:
+    author: 작가
+    description: 설명
+    tags: 태그
   startup: 시작 시 실행
   theme:
-    add: 테마 추가
-    added: 테마가 이미 추가됨
-    author: 작성자
-    available: 사용 가능
-    description: 설명
-    enabled: 활성화된 테마
-    label: 테마 정보
-    placeholder: 테마 선택
-    selected: 선택됨
-    tags: 태그
+    available: 사용 가능한 테마
+    label: 테마
+    selected: 활성 테마
   wallpaper:
     select: 배경화면을 선택하세요
 header:

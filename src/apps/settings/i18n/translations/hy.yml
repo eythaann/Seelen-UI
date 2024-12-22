@@ -79,20 +79,19 @@ general:
   accent_color: Շեշտադրիչ գույն
   date_format: Ամսաթիվ ձեւաչափ
   icon_pack:
+    available: Հասանելի պատկերակների փաթեթներ
     label: Սրբապատկերներ
+    selected: Ակտիվ պատկերակների փաթեթներ
   language: Լեզու
+  resource:
+    author: Հեղինակ
+    description: Նկարագրություն
+    tags: Պիտակներ
   startup: 'Գործարկման վրա գործարկեք:'
   theme:
-    add: Ավելացնել թեման
-    added: Թեման արդեն ավելացրեց
-    author: Հեղինակ
-    available: Մատչելի
-    description: Նկարագրություն
-    enabled: Միացված թեմաներ
-    label: Թեման տեղեկատվություն
-    placeholder: Ընտրեք թեման
-    selected: Ընտրված
-    tags: Պիտակներ
+    available: Հասանելի թեմաներ
+    label: Թեմաներ
+    selected: Ակտիվ թեմաներ
   wallpaper:
     select: Ընտրեք Պաստառ
 header:

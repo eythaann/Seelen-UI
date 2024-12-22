@@ -79,20 +79,19 @@ general:
   accent_color: رنگ لهجه
   date_format: قالب تاریخ
   icon_pack:
+    available: بسته‌های آیکون موجود
     label: بسته های نماد
+    selected: بسته های آیکون فعال
   language: زبان
+  resource:
+    author: نویسنده
+    description: توضیحات
+    tags: برچسب ها
   startup: در راه اندازی اجرا می شود؟
   theme:
-    add: موضوع را اضافه کنید
-    added: موضوع قبلاً اضافه شده است
-    author: نویسنده
-    available: در دسترس
-    description: شرح
-    enabled: مضامین را فعال کرد
-    label: اطلاعات تم
-    placeholder: انتخاب قالب
-    selected: انتخاب شد
-    tags: برچسب ها
+    available: تم های موجود
+    label: تم ها
+    selected: تم های فعال
   wallpaper:
     select: تصویر زمینه را انتخاب کنید
 header:

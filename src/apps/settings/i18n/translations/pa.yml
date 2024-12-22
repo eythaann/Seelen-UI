@@ -75,20 +75,19 @@ general:
   accent_color: ਲਹਿਜ਼ਾ ਰੰਗ ਦਾ ਰੰਗ
   date_format: ਤਾਰੀਖ ਦਾ ਫਾਰਮੈਟ
   icon_pack:
+    available: ਉਪਲਬਧ ਆਈਕਨ ਪੈਕ
     label: ਆਈਕਾਨ ਪੈਕ
+    selected: ਐਕਟਿਵ ਆਈਕਨ ਪੈਕ
   language: ਭਾਸ਼ਾ
+  resource:
+    author: ਲੇਖਕ
+    description: ਵਰਣਨ
+    tags: ਟੈਗਸ
   startup: ਸਟਾਰਟਅੱਪ 'ਤੇ ਚਲਾਉਣਾ?
   theme:
-    add: ਥੀਮ ਸ਼ਾਮਲ ਕਰੋ
-    added: ਥੀਮ ਪਹਿਲਾਂ ਹੀ ਸ਼ਾਮਲ ਕੀਤੀ ਗਈ ਹੈ
-    author: ਲੇਖਕ
-    available: ਉਪਲੱਬਧ
-    description: ਵਰਣਨ
-    enabled: ਸਮਰਥਿਤ ਥੀਮ
-    label: ਥੀਮ ਜਾਣਕਾਰੀ
-    placeholder: ਥੀਮ ਚੁਣੋ
-    selected: ਚੁਣਿਆ ਹੋਇਆ
-    tags: ਟੈਗਸ
+    available: ਉਪਲਬਧ ਥੀਮ
+    label: ਥੀਮ
+    selected: ਕਿਰਿਆਸ਼ੀਲ ਥੀਮ
   wallpaper:
     select: ਵਾਲਪੇਪਰ ਦੀ ਚੋਣ ਕਰੋ
 header:

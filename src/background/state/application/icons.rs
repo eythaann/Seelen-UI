@@ -1,4 +1,7 @@
-use std::path::{Path, PathBuf};
+use std::{
+    fs::OpenOptions,
+    path::{Path, PathBuf},
+};
 
 use seelen_core::state::IconPack;
 
@@ -45,9 +48,22 @@ impl FullState {
             icon_pack.info.author = "System".to_string();
             icon_pack.info.description = "Icons from Windows and Program Files".to_string();
             icon_pack.info.filename = "system".to_string();
+
+            self.write_system_icon_pack(&icon_pack)?;
             trace_lock!(self.icon_packs).insert(icon_pack.info.filename.clone(), icon_pack);
         }
+        Ok(())
+    }
 
+    pub fn write_system_icon_pack(&self, icon_pack: &IconPack) -> Result<()> {
+        let folder = self.icon_packs_folder().join("system");
+        std::fs::create_dir_all(&folder)?;
+        let mut file = OpenOptions::new()
+            .write(true)
+            .create(true)
+            .truncate(true)
+            .open(folder.join("metadata.yml"))?;
+        serde_yaml::to_writer(&mut file, icon_pack)?;
         Ok(())
     }
 
@@ -57,13 +73,7 @@ impl FullState {
         default_icon_pack
             .apps
             .insert(key.trim_start_matches(r"\\?\").to_string(), icon.to_owned());
-
-        let folder = self.icon_packs_folder().join("system");
-        std::fs::create_dir_all(&folder)?;
-        std::fs::write(
-            folder.join("metadata.yml"),
-            serde_yaml::to_string(default_icon_pack)?,
-        )?;
+        self.write_system_icon_pack(default_icon_pack)?;
         Ok(())
     }
 

@@ -79,20 +79,19 @@ general:
   accent_color: Accentfarve
   date_format: Datoformat
   icon_pack:
+    available: Tilgængelige ikonpakker
     label: Ikonpakker
+    selected: Aktive ikonpakker
   language: Sprog
+  resource:
+    author: Forfatter
+    description: Beskrivelse
+    tags: Tags
   startup: Kør ved opstart?
   theme:
-    add: Tilføj tema
-    added: Tema allerede tilføjet
-    author: Forfatter
-    available: Ledig
-    description: Beskrivelse
-    enabled: Aktiverede temaer
-    label: Temaoplysninger
-    placeholder: Vælg tema
-    selected: Valgte
-    tags: Tags
+    available: Tilgængelige temaer
+    label: Temaer
+    selected: Aktive temaer
   wallpaper:
     select: Vælg tapet
 header:

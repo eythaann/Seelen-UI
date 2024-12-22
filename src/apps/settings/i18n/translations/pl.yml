@@ -79,20 +79,19 @@ general:
   accent_color: Kolor akcentu
   date_format: Format daty
   icon_pack:
+    available: Dostępne pakiety ikon
     label: Pakiety ikony
+    selected: Aktywne pakiety ikon
   language: Język
+  resource:
+    author: Autor
+    description: Opis
+    tags: Tagi
   startup: Biegać na startup?
   theme:
-    add: Dodaj motyw
-    added: Motyw już dodany
-    author: Autor
-    available: Dostępny
-    description: Opis
-    enabled: Włączone motywy
-    label: Informacje o motywie
-    placeholder: Wybierz motyw
-    selected: Wybrany
-    tags: Tagi
+    available: Dostępne motywy
+    label: Motywy
+    selected: Aktywne motywy
   wallpaper:
     select: Wybierz tapetę
 header:

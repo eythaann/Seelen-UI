@@ -81,20 +81,19 @@ general:
   accent_color: Kulay ng accent
   date_format: Format ng petsa
   icon_pack:
+    available: Magagamit na Mga Icon Pack
     label: Icon pack
+    selected: Mga Aktibong Icon Pack
   language: Wika
+  resource:
+    author: May-akda
+    description: Paglalarawan
+    tags: Mga tag
   startup: Patakbuhin sa Startup?
   theme:
-    add: Magdagdag ng tema
-    added: Naidagdag na ang tema
-    author: May -akda
-    available: Magagamit
-    description: Paglalarawan
-    enabled: Pinagana ang mga tema
-    label: Impormasyon sa Tema
-    placeholder: Piliin ang TEMA
-    selected: Napili
-    tags: Tags
+    available: Magagamit na Mga Tema
+    label: Mga tema
+    selected: Mga Aktibong Tema
   wallpaper:
     select: Piliin ang wallpaper
 header:

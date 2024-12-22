@@ -80,20 +80,19 @@ general:
   accent_color: உச்சரிப்பு நிறம்
   date_format: தேதி வடிவம்
   icon_pack:
+    available: கிடைக்கும் ஐகான் பேக்குகள்
     label: ஐகான் பொதிகள்
+    selected: செயலில் உள்ள ஐகான் பேக்குகள்
   language: மொழி
+  resource:
+    author: ஆசிரியர்
+    description: விளக்கம்
+    tags: குறிச்சொற்கள்
   startup: தொடக்கத்தில் இயக்கவா?
   theme:
-    add: தீம் சேர்க்கவும்
-    added: தீம் ஏற்கனவே சேர்க்கப்பட்டது
-    author: நூலாசிரியர்
-    available: கிடைக்கிறது
-    description: விளக்கம்
-    enabled: இயக்கப்பட்ட தீம்கள்
-    label: தீம் தகவல்
-    placeholder: தீம் தேர்ந்தெடுக்கவும்
-    selected: தேர்ந்தெடுக்கப்பட்டது
-    tags: குறிச்சொற்கள்
+    available: கிடைக்கும் தீம்கள்
+    label: தீம்கள்
+    selected: செயலில் உள்ள தீம்கள்
   wallpaper:
     select: வால்பேப்பரைத் தேர்ந்தெடுக்கவும்
 header:

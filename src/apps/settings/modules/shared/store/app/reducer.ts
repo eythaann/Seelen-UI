@@ -37,6 +37,7 @@ const initialState: RootState = {
   ahkEnabled: true,
   ahkVariables: AhkVariablesSlice.getInitialState(),
   availableThemes: [],
+  availableIconPacks: [],
   availableLayouts: [],
   availablePlaceholders: [],
   iconPacks: [],
@@ -45,7 +46,6 @@ const initialState: RootState = {
   language: navigator.language.split('-')[0] || 'en',
   dateFormat: 'ddd D MMM, hh:mm A',
   colors: UIColors.default().inner,
-  wallpaper: null,
   virtualDesktopStrategy: VirtualDesktopStrategy.Native,
   updater: {
     channel: UpdateChannel.Release,

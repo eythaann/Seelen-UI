@@ -78,20 +78,19 @@ general:
   accent_color: Akcentus szín
   date_format: Dátum formátum
   icon_pack:
+    available: Elérhető ikoncsomagok
     label: Ikoncsomagok
+    selected: Aktív ikoncsomagok
   language: Nyelv
+  resource:
+    author: Szerző
+    description: Leírás
+    tags: Címkék
   startup: Futtatni indításkor?
   theme:
-    add: Téma hozzáadása
-    added: A téma már hozzáadott
-    author: Szerző
-    available: Elérhető
-    description: Leírás
-    enabled: Engedélyezve témák
-    label: Témainformációk
-    placeholder: Válassz témát
-    selected: Kiválasztott
-    tags: Címkék
+    available: Elérhető témák
+    label: Témák
+    selected: Aktív témák
   wallpaper:
     select: Válassza ki a háttérképet
 header:

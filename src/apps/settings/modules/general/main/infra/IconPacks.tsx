@@ -8,32 +8,30 @@ import { RootSelectors } from '../../../shared/store/app/selectors';
 
 import cs from './index.module.css';
 
-export function Themes() {
-  const themes = useSelector(RootSelectors.availableThemes);
-  const usingThemes = useSelector(RootSelectors.selectedThemes).filter((x) =>
-    themes.some((y) => y.info.filename === x),
+export function IconPacks() {
+  const iconPacks = useSelector(RootSelectors.availableIconPacks);
+  const usingIcons = useSelector(RootSelectors.iconPacks).filter((x) =>
+    iconPacks.some((y) => y.info.filename === x),
   );
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const dataSource = themes.map((theme) => ({
-    ...theme,
-    key: theme.info.filename,
-    title: theme.info.displayName,
-    disabled: theme.info.filename === 'default',
+  const dataSource = iconPacks.map((pack) => ({
+    ...pack,
+    key: pack.info.filename,
   }));
 
   return (
     <Transfer
       dataSource={dataSource}
-      titles={[t('general.theme.available'), t('general.theme.selected')]}
-      targetKeys={usingThemes}
+      titles={[t('general.icon_pack.available'), t('general.icon_pack.selected')]}
+      targetKeys={usingIcons}
       onChange={(selected, direction, movedKeys) => {
         if (direction === 'right') {
-          dispatch(RootActions.setSelectedThemes([...usingThemes, ...(movedKeys as string[])]));
+          dispatch(RootActions.setIconPacks([...usingIcons, ...(movedKeys as string[])]));
         } else {
-          dispatch(RootActions.setSelectedThemes(selected as string[]));
+          dispatch(RootActions.setIconPacks(selected as string[]));
         }
       }}
       className={cs.transfer}
@@ -46,14 +44,14 @@ export function Themes() {
           <Reorder.Group
             onReorder={(values) => {
               if (direction === 'right') {
-                dispatch(RootActions.setSelectedThemes(values.map((theme) => theme.info.filename)));
+                dispatch(RootActions.setIconPacks(values.map((iconPack) => iconPack.info.filename)));
               }
             }}
             axis="y"
             values={props.dataSource}
           >
-            {dataSource.map((theme) => {
-              const key = theme.info.filename;
+            {dataSource.map((pack) => {
+              const key = pack.info.filename;
               return (
                 <Tooltip
                   key={key}
@@ -62,16 +60,16 @@ export function Themes() {
                   color="#111" // make it solid
                   title={
                     <div>
-                      <h2 className={cs.title}>{theme.info.displayName}</h2>
+                      <h2 className={cs.title}>{pack.info.displayName}</h2>
                       <p>
                         <b>{t('general.resource.author')}: </b>
-                        {theme.info.author}
+                        {pack.info.author}
                       </p>
                       <div className={cs.tagList}>
                         <div>
                           <b>{t('general.resource.tags')}:</b>
                         </div>
-                        {theme.info.tags.map((tag) => (
+                        {pack.info.tags.map((tag) => (
                           <div key={tag} className={cs.tag}>
                             {tag}
                           </div>
@@ -79,18 +77,18 @@ export function Themes() {
                       </div>
                       <p>
                         <b>{t('general.resource.description')}: </b>
-                        {theme.info.description}
+                        {pack.info.description}
                       </p>
                     </div>
                   }
                 >
-                  <Reorder.Item value={theme} drag={direction === 'right' ? 'y' : false}>
+                  <Reorder.Item value={pack} drag={direction === 'right' ? 'y' : false}>
                     <Checkbox
-                      disabled={key === 'default'}
+                      disabled={pack.info.filename === 'system'}
                       checked={selectedKeys.includes(key)}
                       onChange={(e) => onItemSelect(key, e.target.checked)}
                     >
-                      {theme.info.displayName}
+                      {pack.info.displayName}
                     </Checkbox>
                   </Reorder.Item>
                 </Tooltip>

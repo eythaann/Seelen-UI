@@ -79,20 +79,19 @@ general:
   accent_color: Couleur accent
   date_format: Format de date
   icon_pack:
+    available: Packs d'icônes disponibles
     label: Packs d'icônes
+    selected: Packs d'icônes actifs
   language: Langue
+  resource:
+    author: Auteur
+    description: Description
+    tags: Balises
   startup: Exécuter au démarrage?
   theme:
-    add: Ajouter un thème
-    added: Thème déjà ajouté
-    author: Auteur
-    available: Disponible
-    description: Description
-    enabled: Thèmes activés
-    label: Informations sur le thème
-    placeholder: Sélectionne un thème
-    selected: Choisie
-    tags: Mots clés
+    available: Thèmes disponibles
+    label: Thèmes
+    selected: Thèmes actifs
   wallpaper:
     select: Sélectionner le papier peint
 header:

@@ -79,20 +79,19 @@ general:
   accent_color: Акцентный цвет
   date_format: Формат даты
   icon_pack:
+    available: Доступные пакеты значков
     label: Наборы иконок
+    selected: Активные пакеты значков
   language: Язык
+  resource:
+    author: Автор
+    description: Описание
+    tags: Теги
   startup: Автозапускать при включении системы
   theme:
-    add: Добавить тему
-    added: Тема уже добавлена
-    author: Автор
-    available: Доступные
-    description: Описание
-    enabled: Включенные темы
+    available: Доступные темы
     label: Темы
-    placeholder: Выберите тему
-    selected: Выбранные
-    tags: Теги
+    selected: Активные темы
   wallpaper:
     select: Выберите обои
 header:

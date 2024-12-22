@@ -77,20 +77,19 @@ general:
   accent_color: Awọ ara
   date_format: Ọna kika ọjọ
   icon_pack:
+    available: Awọn akopọ Aami ti o wa
     label: Awọn akopọ aami
+    selected: Awọn akopọ Aami ti nṣiṣe lọwọ
   language: Ede
+  resource:
+    author: Onkọwe
+    description: Apejuwe
+    tags: Awọn afi
   startup: Ṣiṣe lori ibẹrẹ?
   theme:
-    add: Fi ọran kun
-    added: Akori ti ṣafikun tẹlẹ
-    author: Onkọwe ọkunrin
-    available: Wa
-    description: Isapejuwe
-    enabled: Mu awọn akori ṣiṣẹ
-    label: Alaye Akori
-    placeholder: Yan Akori
-    selected: Ti yan
-    tags: Afi ami
+    available: Awọn akori to wa
+    label: Awọn akori
+    selected: Awọn akori ti nṣiṣe lọwọ
   wallpaper:
     select: Yan Iṣẹṣọ ogiri
 header:

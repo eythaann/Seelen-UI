@@ -79,20 +79,19 @@ general:
   accent_color: యాస రంగు
   date_format: తేదీ ఆకృతి
   icon_pack:
+    available: అందుబాటులో ఉన్న ఐకాన్ ప్యాక్‌లు
     label: ఐకాన్ ప్యాక్‌లు
+    selected: సక్రియ ఐకాన్ ప్యాక్‌లు
   language: భాష
+  resource:
+    author: రచయిత
+    description: వివరణ
+    tags: ట్యాగ్‌లు
   startup: స్టార్టప్‌లో అమలు చేయాలా?
   theme:
-    add: థీమ్ జోడించండి
-    added: థీమ్ ఇప్పటికే జోడించబడింది
-    author: రచయిత
-    available: అందుబాటులో ఉంది
-    description: వివరణ
-    enabled: ప్రారంభించబడిన థీమ్‌లు
-    label: థీమ్ సమాచారం
-    placeholder: థీమ్‌ని ఎంచుకోండి
-    selected: ఎంచుకున్నారు
-    tags: టాగ్లు
+    available: అందుబాటులో ఉన్న థీమ్‌లు
+    label: థీమ్స్
+    selected: క్రియాశీల థీమ్‌లు
   wallpaper:
     select: వాల్‌పేపర్‌ను ఎంచుకోండి
 header:

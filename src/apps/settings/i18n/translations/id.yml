@@ -79,20 +79,19 @@ general:
   accent_color: Aksen warna
   date_format: Format tanggal
   icon_pack:
+    available: Paket Ikon yang Tersedia
     label: Paket Ikon
+    selected: Paket Ikon Aktif
   language: Bahasa
+  resource:
+    author: Pengarang
+    description: Keterangan
+    tags: Tag
   startup: Jalankan saat startup?
   theme:
-    add: Tambahkan tema
-    added: Tema sudah ditambahkan
-    author: Pengarang
-    available: Tersedia
-    description: Keterangan
-    enabled: Tema yang diaktifkan
-    label: Informasi tema
-    placeholder: Pilih tema
-    selected: Terpilih
-    tags: Tag
+    available: Tema yang Tersedia
+    label: Tema
+    selected: Tema Aktif
   wallpaper:
     select: Pilih wallpaper
 header:

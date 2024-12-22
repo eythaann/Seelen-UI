@@ -79,20 +79,19 @@ general:
   accent_color: स्वरोंका रंग
   date_format: तारिख का प्रारूप
   icon_pack:
+    available: उपलब्ध चिह्न पैक
     label: आइकन पैक
+    selected: सक्रिय चिह्न पैक
   language: भाषा
+  resource:
+    author: लेखक
+    description: विवरण
+    tags: टैग
   startup: स्टार्टअप पर चलाएं?
   theme:
-    add: थीम जोड़ें
-    added: थीम पहले से ही जोड़ा गया
-    author: लेखक
-    available: उपलब्ध
-    description: विवरण
-    enabled: सक्षम थीम
-    label: थीम सूचना
-    placeholder: चुनिंदा विषय
-    selected: चयनित
-    tags: टैग
+    available: उपलब्ध थीम्स
+    label: विषय-वस्तु
+    selected: सक्रिय विषय-वस्तु
   wallpaper:
     select: वॉलपेपर का चयन करें
 header:

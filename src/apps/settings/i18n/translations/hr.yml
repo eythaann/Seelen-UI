@@ -79,20 +79,19 @@ general:
   accent_color: Akcentna boja
   date_format: Format datuma
   icon_pack:
+    available: Dostupni paketi ikona
     label: Ikona pakiranja
+    selected: Aktivni paketi ikona
   language: Jezik
+  resource:
+    author: Autor
+    description: Opis
+    tags: oznake
   startup: Trčati na startup?
   theme:
-    add: Dodaj temu
-    added: Tema već dodana
-    author: Autor
-    available: Dostupno
-    description: Opis
-    enabled: Omogućene teme
-    label: Informacije o temi
-    placeholder: Odaberite temu
-    selected: Odabran
-    tags: Oznake
+    available: Dostupne teme
+    label: Teme
+    selected: Aktivne teme
   wallpaper:
     select: Odaberite Pozadina
 header:

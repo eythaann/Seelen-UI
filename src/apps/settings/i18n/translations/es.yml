@@ -80,20 +80,19 @@ general:
   accent_color: Acentuar el color
   date_format: Formato de fecha
   icon_pack:
+    available: Paquetes de iconos disponibles
     label: Paquetes de iconos
+    selected: Paquetes de iconos activos
   language: Idioma
+  resource:
+    author: Autor
+    description: Descripción
+    tags: Etiquetas
   startup: ¿Ejecutar al inicio?
   theme:
-    add: Agregar tema
-    added: Tema ya agregado
-    author: Autor
-    available: Disponible
-    description: Descripción
-    enabled: Temas habilitados
-    label: Información del tema
-    placeholder: Selecciona un tema
-    selected: Seleccionada
-    tags: Etiquetas
+    available: Temas disponibles
+    label: Temas
+    selected: Temas activos
   wallpaper:
     select: Seleccionar papel tapiz
 header:

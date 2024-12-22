@@ -77,20 +77,19 @@ general:
   accent_color: اللون الثانوي
   date_format: تنسيق التاريخ
   icon_pack:
+    available: حزم الأيقونات المتوفرة
     label: حزم الأيقونة
+    selected: حزم الأيقونات النشطة
   language: اللغات
+  resource:
+    author: مؤلف
+    description: وصف
+    tags: العلامات
   startup: تفعيل عند تشغيل الكمبيوتر؟
   theme:
-    add: إضافة النمط
-    added: تمت إضافة النمط بالفعل
-    author: المؤلف
-    available: متاح
-    description: الوصف
-    enabled: مفعل
-    label: العنوان
-    placeholder: اختر النمط
-    selected: تم التحديد
-    tags: شعارات
+    available: السمات المتاحة
+    label: المواضيع
+    selected: المواضيع النشطة
   wallpaper:
     select: حدد الخلفية
 header:

@@ -76,20 +76,19 @@ general:
   accent_color: สีเน้น
   date_format: รูปแบบวันที่
   icon_pack:
+    available: ชุดไอคอนที่มีอยู่
     label: ไอคอนแพ็ค
+    selected: ชุดไอคอนที่ใช้งานอยู่
   language: ภาษา
+  resource:
+    author: ผู้เขียน
+    description: คำอธิบาย
+    tags: แท็ก
   startup: วิ่งเมื่อเริ่มต้น?
   theme:
-    add: เพิ่มธีม
-    added: ธีมเพิ่มแล้ว
-    author: ผู้เขียน
-    available: มีอยู่
-    description: คำอธิบาย
-    enabled: เปิดใช้งานธีม
-    label: ข้อมูลธีม
-    placeholder: เลือกธีม
-    selected: ที่เลือกสรรแล้ว
-    tags: แท็ก
+    available: ธีมที่มีจำหน่าย
+    label: ธีมส์
+    selected: ธีมที่ใช้งานอยู่
   wallpaper:
     select: เลือกวอลล์เปเปอร์
 header:

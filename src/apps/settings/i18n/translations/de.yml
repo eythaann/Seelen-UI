@@ -79,20 +79,19 @@ general:
   accent_color: Akzentfarbe
   date_format: Datumsformat
   icon_pack:
+    available: Verfügbare Icon-Pakete
     label: Icon Packs
+    selected: Aktive Icon-Pakete
   language: Sprache
+  resource:
+    author: Autor
+    description: Beschreibung
+    tags: Schlagworte
   startup: Beim Hochfahren ausführen?
   theme:
-    add: Thema hinzufügen
-    added: Thema bereits hinzugefügt
-    author: Autor
-    available: Verfügbar
-    description: Beschreibung
-    enabled: Aktivierte Themen
-    label: Themeninformation
-    placeholder: Thema auswählen
-    selected: Ausgewählt
-    tags: Tags
+    available: Verfügbare Themen
+    label: Themen
+    selected: Aktive Themen
   wallpaper:
     select: Wählen Sie Hintergrundbild
 header:

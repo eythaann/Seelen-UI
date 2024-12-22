@@ -77,20 +77,19 @@ general:
   accent_color: Rengê Accent
   date_format: Formata Date
   icon_pack:
+    available: Pakêtên îkonê yên berdest
     label: Packon icon
+    selected: Pakêtên Îkonên Çalak
   language: Ziman
+  resource:
+    author: Nivîskar
+    description: Terîf
+    tags: Tags
   startup: Li ser destpêka bisekinin?
   theme:
-    add: Mijar zêde bikin
-    added: Mijar berê lê zêde kir
-    author: Nivîskar
-    available: Berdeste
-    description: Terîf
-    enabled: Mijarên çalak kirin
-    label: Agahdariya Mijarê
-    placeholder: Mijar hilbijêrin
-    selected: Hilbijartin
-    tags: Tags
+    available: Mijarên Berdest
+    label: Themes
+    selected: Mijarên Çalak
   wallpaper:
     select: Hilbijêre Wallpaper
 header:

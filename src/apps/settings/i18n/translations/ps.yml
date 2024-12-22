@@ -78,20 +78,19 @@ general:
   accent_color: تیزس رنګ
   date_format: د نیټې ب .ه
   icon_pack:
+    available: د آیکون کڅوړې شتون لري
     label: آیکون کڅوړه
+    selected: د فعال آیکون بسته
   language: ژبه
+  resource:
+    author: لیکوال
+    description: تفصیل
+    tags: ټګونه
   startup: په پیل کې چلول؟
   theme:
-    add: موضوع اضافه کړئ
-    added: موضوع لا دمخه اضافه شوې
-    author: لیکوال
-    available: شتون لري
-    description: تفصیل
-    enabled: د لاسرسي وړ
-    label: د موضوع معلومات
-    placeholder: موضوع وټاکئ
-    selected: ټاکل شوی
-    tags: ټاګز
+    available: شته موضوعات
+    label: موضوعات
+    selected: فعال موضوعات
   wallpaper:
     select: وال پیپر غوره کړئ
 header:

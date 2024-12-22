@@ -79,20 +79,19 @@ general:
   accent_color: हिम्मता रंग
   date_format: मिति ढाँचा
   icon_pack:
+    available: उपलब्ध आइकन प्याकहरू
     label: आइकन प्याक
+    selected: सक्रिय आइकन प्याकहरू
   language: भाषा
+  resource:
+    author: लेखक
+    description: विवरण
+    tags: ट्यागहरू
   startup: स्टार्टअपमा भाग्नुहोस्?
   theme:
-    add: थिम थप्नुहोस्
-    added: विषयवस्तु पहिले नै थपिएको छ
-    author: लेखिका
-    available: सुलभ
-    description: वर्णन
-    enabled: XMES सक्षम गरियो
-    label: विषयवस्तु जानकारी
-    placeholder: थिम चयन गर्नुहोस्
-    selected: चयनित
-    tags: ट्यागहरू
+    available: उपलब्ध विषयवस्तुहरू
+    label: विषयवस्तुहरू
+    selected: सक्रिय विषयवस्तुहरू
   wallpaper:
     select: वालपेपर चयन गर्नुहोस्
 header:

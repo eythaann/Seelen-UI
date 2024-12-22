@@ -79,20 +79,19 @@ general:
   accent_color: সুরের ধাপের রঙ
   date_format: তারিখ ফর্ম্যাট
   icon_pack:
+    available: উপলব্ধ আইকন প্যাক
     label: আইকন প্যাকস
+    selected: সক্রিয় আইকন প্যাক
   language: ভাষা
+  resource:
+    author: লেখক
+    description: বর্ণনা
+    tags: ট্যাগ
   startup: প্রারম্ভকালে চালানো?
   theme:
-    add: থিম যুক্ত করুন
-    added: থিম ইতিমধ্যে যুক্ত
-    author: লেখক
-    available: উপলব্ধ
-    description: বর্ণনা
-    enabled: সক্ষম থিম
-    label: থিম তথ্য
-    placeholder: থিম নির্বাচন কর
-    selected: নির্বাচিত
-    tags: ট্যাগ
+    available: উপলব্ধ থিম
+    label: থিম
+    selected: সক্রিয় থিম
   wallpaper:
     select: ওয়ালপেপার নির্বাচন করুন
 header:

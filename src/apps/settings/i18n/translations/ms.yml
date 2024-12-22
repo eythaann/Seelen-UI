@@ -79,20 +79,19 @@ general:
   accent_color: Warna aksen
   date_format: Format tarikh
   icon_pack:
+    available: Pek Ikon Tersedia
     label: Pek ikon
+    selected: Pek Ikon Aktif
   language: Bahasa
+  resource:
+    author: Pengarang
+    description: Penerangan
+    tags: Tag
   startup: Jalankan permulaan?
   theme:
-    add: Tambah tema
-    added: Tema sudah ditambah
-    author: Pengarang
-    available: Terdapat
-    description: Penerangan
-    enabled: Tema yang diaktifkan
-    label: Maklumat tema
-    placeholder: Pilih tema
-    selected: Dipilih
-    tags: Tag
+    available: Tema yang Tersedia
+    label: Tema
+    selected: Tema Aktif
   wallpaper:
     select: Pilih kertas dinding
 header:

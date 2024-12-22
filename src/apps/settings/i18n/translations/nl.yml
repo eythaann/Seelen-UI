@@ -79,20 +79,19 @@ general:
   accent_color: Accent kleur
   date_format: Datumformaat
   icon_pack:
+    available: Beschikbare pictogrampakketten
     label: Pictogrampakketten
+    selected: Actieve pictogrampakketten
   language: Taal
+  resource:
+    author: Auteur
+    description: Beschrijving
+    tags: Labels
   startup: Uitvoeren bij het starten?
   theme:
-    add: Thema toevoegen
-    added: Thema al toegevoegd
-    author: Auteur
-    available: Beschikbaar
-    description: Beschrijving
-    enabled: Ingeschakelde thema's
-    label: Thema -informatie
-    placeholder: Selecteer thema
-    selected: Geselecteerd
-    tags: Tags
+    available: Beschikbare thema's
+    label: Thema's
+    selected: Actieve thema's
   wallpaper:
     select: Selecteer wallpaper
 header:

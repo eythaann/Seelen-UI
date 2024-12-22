@@ -79,20 +79,19 @@ general:
   accent_color: Aksentkleur
   date_format: Datumformaat
   icon_pack:
+    available: Beskikbare ikoonpakkette
     label: Ikoonpakkies
+    selected: Aktiewe ikoonpakkette
   language: Taal
+  resource:
+    author: Skrywer
+    description: Beskrywing
+    tags: Merkers
   startup: Hardloop met opstart?
   theme:
-    add: Voeg tema by
-    added: Tema reeds bygevoeg
-    author: Outeur
-    available: Beskikbaar
-    description: Beskrywing
-    enabled: Ingeskakelde temas
-    label: Tema -inligting
-    placeholder: Kies tema
-    selected: Gekies
-    tags: Tags
+    available: Beskikbare temas
+    label: Temas
+    selected: Aktiewe temas
   wallpaper:
     select: Kies Wallpaper
 header:

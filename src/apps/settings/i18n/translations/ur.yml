@@ -79,20 +79,19 @@ general:
   accent_color: رنگ
   date_format: تاریخ کی شکل
   icon_pack:
+    available: دستیاب آئیکن پیک
     label: آئیکن پیک
+    selected: ایکٹو آئیکن پیک
   language: زبان
+  resource:
+    author: مصنف
+    description: تفصیل
+    tags: ٹیگز
   startup: اسٹارٹ اپ پر چلائیں؟
   theme:
-    add: شامل کریں
-    added: تھیم پہلے ہی شامل کیا گیا ہے
-    author: مصنف
-    available: دستیاب
-    description: تفصیل
-    enabled: قابل تھیمز
-    label: معلومات
-    placeholder: تھیم منتخب کریں
-    selected: منتخب شدہ
-    tags: ٹیگز
+    available: دستیاب تھیمز
+    label: تھیمز
+    selected: ایکٹو تھیمز
   wallpaper:
     select: وال پیپر منتخب کریں
 header:

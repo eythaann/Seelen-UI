@@ -79,20 +79,19 @@ general:
   accent_color: Hreim litur
   date_format: Dagsetningarsnið
   icon_pack:
+    available: Lausir táknpakkar
     label: Táknpakkar
+    selected: Virkir táknpakkar
   language: Tungumál
+  resource:
+    author: Höfundur
+    description: Lýsing
+    tags: Merki
   startup: Hlaupa í gangsetningu?
   theme:
-    add: Bæta við þema
-    added: Þema þegar bætt við
-    author: Höfundur
-    available: Laus
-    description: Lýsing
-    enabled: Virkt þemu
-    label: Þemaupplýsingar
-    placeholder: Veldu þema
-    selected: Valinn
-    tags: Merkimiðar
+    available: Þemu í boði
+    label: Þemu
+    selected: Virk þemu
   wallpaper:
     select: Veldu veggfóður
 header:

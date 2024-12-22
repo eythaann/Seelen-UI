@@ -80,20 +80,19 @@ general:
   accent_color: Έμφαση στο χρώμα
   date_format: Μορφή ημερομηνίας
   icon_pack:
+    available: Διαθέσιμα πακέτα εικονιδίων
     label: Εικονίδια
+    selected: Ενεργά πακέτα εικονιδίων
   language: Γλώσσα
+  resource:
+    author: Συγγραφέας
+    description: Περιγραφή
+    tags: Ετικέτες
   startup: Εκτέλεση κατά την εκκίνηση;
   theme:
-    add: Προσθέστε θέμα
-    added: Το θέμα έχει ήδη προστεθεί
-    author: Συγγραφέας
-    available: Διαθέσιμος
-    description: Περιγραφή
-    enabled: Ενεργοποιημένα θέματα
-    label: Πληροφορίες θεμάτων
-    placeholder: Επέλεξε θέμα
-    selected: Επιλεγμένος
-    tags: Ετικέτες
+    available: Διαθέσιμα θέματα
+    label: Θέματα
+    selected: Ενεργά θέματα
   wallpaper:
     select: Επιλέξτε ταπετσαρία
 header:

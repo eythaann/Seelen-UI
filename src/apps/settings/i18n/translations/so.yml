@@ -80,20 +80,19 @@ general:
   accent_color: Midab caqabad
   date_format: Taariikh format
   icon_pack:
+    available: Xirmooyinka Icon ee la heli karo
     label: Xirmooyinka icon
+    selected: Xirmooyinka Astaanta Firfircoon
   language: Af
+  resource:
+    author: Qore
+    description: Sharaxaada
+    tags: Tags
   startup: Ku orod bilowga?
   theme:
-    add: Ku dar mawduuc
-    added: Mawduuca mar hore ayaa lagu daray
-    author: Qoraa
-    available: Qof heli karo
-    description: Sifo
-    enabled: Awood u yeelo mowduucyada
-    label: Macluumaadka mawduuca
-    placeholder: Xullo mawduuca
-    selected: La xushay
-    tags: Calaamadaha
+    available: Mawduucyada la heli karo
+    label: Mawduucyada
+    selected: Mawduucyada Firfircoon
   wallpaper:
     select: Xulo warqadda
 header:

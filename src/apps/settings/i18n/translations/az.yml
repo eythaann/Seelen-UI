@@ -78,20 +78,19 @@ general:
   accent_color: Vurğu
   date_format: Tarix formatı
   icon_pack:
+    available: Mövcud İkon Paketləri
     label: Icon paketləri
+    selected: Aktiv İkon Paketləri
   language: Dil
+  resource:
+    author: Müəllif
+    description: Təsvir
+    tags: Teqlər
   startup: Başlanğıcda qaçırsınız?
   theme:
-    add: Mövzu əlavə edin
-    added: Mövzu artıq əlavə edildi
-    author: Müəllif
-    available: Mövcud
-    description: Təsvir
-    enabled: Effektiv mövzular
-    label: Tema haqqında məlumat
-    placeholder: Mövzunu seçin
-    selected: Seçilmiş
-    tags: Tags
+    available: Mövcud Mövzular
+    label: Mövzular
+    selected: Aktiv Mövzular
   wallpaper:
     select: Divar kağızı seçin
 header:

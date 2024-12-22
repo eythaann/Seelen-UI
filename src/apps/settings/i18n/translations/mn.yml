@@ -78,20 +78,19 @@ general:
   accent_color: Эргүүлэг
   date_format: Огноо формат
   icon_pack:
+    available: Боломжтой Icon багцууд
     label: Icon багц
+    selected: Идэвхтэй дүрсний багцууд
   language: Хэл
+  resource:
+    author: Зохиогч
+    description: Тодорхойлолт
+    tags: Шошго
   startup: Эхлэх үед гүйх үү?
   theme:
-    add: Сэдэв нэмэх
-    added: Сэдэв аль хэдийн нэмэгдсэн
-    author: Зохиолч
-    available: Бэлнээр байгаа
-    description: Тодорхойлолт / төрөл анги
-    enabled: Идэвхжүүлсэн сэдэв
-    label: Сэдвийн мэдээлэл
-    placeholder: Сонгуулыг сонгоно уу
-    selected: Сүл -ийг хийсэн
-    tags: Бичиглэл байна
+    available: Боломжтой загварууд
+    label: Сэдвүүд
+    selected: Идэвхтэй сэдэв
   wallpaper:
     select: Ханын зураг сонгох
 header:

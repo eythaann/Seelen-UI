@@ -79,20 +79,19 @@ general:
   accent_color: Акцентний колір
   date_format: Формат дати
   icon_pack:
+    available: Доступні пакети значків
     label: Пакети значків
+    selected: Активні пакети значків
   language: Мова
+  resource:
+    author: Автор
+    description: опис
+    tags: Теги
   startup: Бігати на стартап?
   theme:
-    add: Додати тему
-    added: Тема вже додана
-    author: Автор
-    available: Доступний
-    description: Опис
-    enabled: Увімкнено теми
-    label: Інформація про тему
-    placeholder: Виберіть тему
-    selected: Обраний
-    tags: Теги
+    available: Доступні теми
+    label: Теми
+    selected: Активні теми
   wallpaper:
     select: Виберіть шпалери
 header:

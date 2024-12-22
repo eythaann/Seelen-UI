@@ -79,20 +79,19 @@ general:
   accent_color: Цвят на акцент
   date_format: Формат на дата
   icon_pack:
+    available: Налични пакети с икони
     label: Икони пакети
+    selected: Активни пакети с икони
   language: Език
+  resource:
+    author: Автор
+    description: Описание
+    tags: Етикети
   startup: Да се ​​стартирате при стартиране?
   theme:
-    add: Добавете тема
-    added: Темата вече е добавена
-    author: Автор
-    available: На разположение
-    description: Описание
-    enabled: Активирани теми
-    label: Информация за темата
-    placeholder: Изберете тема
-    selected: Избран
-    tags: Етикети
+    available: Налични теми
+    label: Теми
+    selected: Активни теми
   wallpaper:
     select: Изберете тапет
 header:

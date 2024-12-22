@@ -79,20 +79,19 @@ general:
   accent_color: Accentfärg
   date_format: Datumformat
   icon_pack:
+    available: Tillgängliga ikonpaket
     label: Ikonförpackningar
+    selected: Aktiva ikonpaket
   language: Språk
+  resource:
+    author: Författare
+    description: Beskrivning
+    tags: Taggar
   startup: Köras vid start?
   theme:
-    add: Lägga till tema
-    added: Tema som redan har lagts till
-    author: Författare
-    available: Tillgängliga
-    description: Beskrivning
-    enabled: Aktiverade teman
-    label: Temainformation
-    placeholder: Välj tema
-    selected: Vald
-    tags: Taggar
+    available: Tillgängliga teman
+    label: teman
+    selected: Aktiva teman
   wallpaper:
     select: Välj tapeter
 header:

@@ -78,20 +78,19 @@ general:
   accent_color: Aktsentvärv
   date_format: Kuupäeva vorming
   icon_pack:
+    available: Saadaval ikoonipaketid
     label: Ikoonipakid
+    selected: Aktiivsed ikoonipaketid
   language: Keel
+  resource:
+    author: Autor
+    description: Kirjeldus
+    tags: Sildid
   startup: Kas joosta startup?
   theme:
-    add: Lisada teema
-    added: Teema on juba lisatud
-    author: Autor
-    available: Saadav
-    description: Kirjeldus
-    enabled: Lubatud teemad
-    label: Teemateave
-    placeholder: Valige teema
-    selected: Valitud
-    tags: Sildid
+    available: Saadaolevad teemad
+    label: Teemad
+    selected: Aktiivsed teemad
   wallpaper:
     select: Valige tapeet
 header:

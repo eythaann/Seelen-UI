@@ -79,20 +79,19 @@ general:
   accent_color: Azentu kolorea
   date_format: Data formatua
   icon_pack:
+    available: Eskuragarri dauden ikono paketeak
     label: Ikono paketeak
+    selected: Ikono pakete aktiboak
   language: Mintzaira
+  resource:
+    author: Egilea
+    description: Deskribapena
+    tags: Etiketak
   startup: Korrika abiaraztean?
   theme:
-    add: Gehitu gaia
-    added: Gaia dagoeneko gehitu da
-    author: Idazle
-    available: Erabilgarri
-    description: Deskribapen
-    enabled: Gaitutako gaiak
-    label: Gaiaren informazioa
-    placeholder: Hautatu Gaia
-    selected: Hautatu
-    tags: Teskak
+    available: Eskuragarri dauden gaiak
+    label: Gaiak
+    selected: Gai aktiboak
   wallpaper:
     select: Hautatu horma-irudia
 header:

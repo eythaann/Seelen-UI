@@ -13,6 +13,7 @@ import { Icon } from 'src/apps/shared/components/Icon';
 import { LanguageList } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
+import { IconPacks } from './IconPacks';
 import { Themes } from './Themes';
 
 export function General() {
@@ -92,6 +93,13 @@ export function General() {
           <b>{t('general.theme.label')}</b>
         </div>
         <Themes />
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <div style={{ marginBottom: '6px' }}>
+          <b>{t('general.icon_pack.label')}</b>
+        </div>
+        <IconPacks />
       </SettingsGroup>
     </>
   );

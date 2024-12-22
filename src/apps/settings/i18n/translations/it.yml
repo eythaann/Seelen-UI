@@ -79,20 +79,19 @@ general:
   accent_color: Colore Accentuato
   date_format: Formato Data
   icon_pack:
+    available: Pacchetti di icone disponibili
     label: Pacchetti Icone
+    selected: Pacchetti di icone attivi
   language: Lingua
+  resource:
+    author: Autore
+    description: Descrizione
+    tags: Tag
   startup: Eseguire all'avvio?
   theme:
-    add: Aggiungi tema
-    added: Tema già aggiunto
-    author: Autore
-    available: Disponibile
-    description: Descrizione
-    enabled: Temi abilitati
+    available: Temi disponibili
     label: Temi
-    placeholder: Seleziona tema
-    selected: Selezionato
-    tags: Tag
+    selected: Temi attivi
   wallpaper:
     select: Seleziona Sfondo
 header:

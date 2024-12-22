@@ -75,20 +75,19 @@ general:
   accent_color: アクセントカラー
   date_format: 日付形式
   icon_pack:
+    available: 利用可能なアイコン パック
     label: アイコンパック
+    selected: アクティブなアイコン パック
   language: 言語
+  resource:
+    author: 著者
+    description: 説明
+    tags: タグ
   startup: 起動時に実行する
   theme:
-    add: テーマを追加
-    added: テーマはすでに追加済みです
-    author: 製作者
-    available: 利用可能
-    description: 説明
-    enabled: テーマが有効です
-    label: テーマ情報
-    placeholder: テーマを選択
-    selected: 選択済み
-    tags: タグ
+    available: 利用可能なテーマ
+    label: テーマ
+    selected: アクティブなテーマ
   wallpaper:
     select: 壁紙を選択
 header:

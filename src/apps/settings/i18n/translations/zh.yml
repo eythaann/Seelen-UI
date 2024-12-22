@@ -72,20 +72,19 @@ general:
   accent_color: 主色调
   date_format: 日期格式
   icon_pack:
+    available: 可用的图标包
     label: 图标包
+    selected: 活动图标包
   language: 语言
+  resource:
+    author: 作者
+    description: 描述
+    tags: 标签
   startup: 开机自启
   theme:
-    add: 添加主题
-    added: 已添加主题
-    author: 作者
-    available: 可用
-    description: 描述
-    enabled: 已启用主题
+    available: 可用主题
     label: 主题
-    placeholder: 选择主题
-    selected: 已选择
-    tags: 标签
+    selected: 活跃主题
   wallpaper:
     select: 选择壁纸
 header:

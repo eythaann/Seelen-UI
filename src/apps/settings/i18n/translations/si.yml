@@ -78,20 +78,19 @@ general:
   accent_color: උච්චාරණ වර්ණය
   date_format: දිනය ආකෘතිය
   icon_pack:
+    available: පවතින අයිකන ඇසුරුම්
     label: අයිකන ඇසුරුම්
+    selected: ක්‍රියාකාරී අයිකන ඇසුරුම්
   language: භාෂාව
+  resource:
+    author: කර්තෘ
+    description: විස්තරය
+    tags: ටැග්
   startup: ආරම්භයේදී ධාවනය කරන්නද?
   theme:
-    add: තේමාව එකතු කරන්න
-    added: තේමාව දැනටමත් එකතු කර ඇත
-    author: කර්තෘ
-    available: ඇත
-    description: විස්තර
-    enabled: සබල කළ තේමා
-    label: තේමා තොරතුරු
-    placeholder: තේමාව තෝරන්න
-    selected: තෝරාගත්
-    tags: ටැග්
+    available: පවතින තේමා
+    label: තේමා
+    selected: ක්රියාකාරී තේමාවන්
   wallpaper:
     select: බිතුපත තෝරන්න
 header:

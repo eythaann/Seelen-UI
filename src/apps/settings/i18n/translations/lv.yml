@@ -79,20 +79,19 @@ general:
   accent_color: Akcents
   date_format: Datuma formāts
   icon_pack:
+    available: Pieejamie ikonu komplekti
     label: Ikonu paketes
+    selected: Aktīvās ikonu pakotnes
   language: Valoda
+  resource:
+    author: Autors
+    description: Apraksts
+    tags: Tagi
   startup: Skriet startup?
   theme:
-    add: Pievienot tēmu
-    added: Tēma jau pievienota
-    author: Autors
-    available: Pieejams
-    description: Apraksts
-    enabled: Iespējotās tēmas
-    label: Informācija par tēmu
-    placeholder: Atlasīt tēmu
-    selected: Atlasīts
-    tags: Tagi
+    available: Pieejamie motīvi
+    label: Tēmas
+    selected: Aktīvās tēmas
   wallpaper:
     select: Atlasiet fona attēlu
 header:

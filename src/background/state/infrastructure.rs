@@ -2,15 +2,22 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
+    IconPack, MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
 };
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
 
 use super::{
     application::{FullState, LauncherHistory, FULL_STATE},
     domain::{AppConfig, Placeholder, Settings, Theme},
 };
+
+#[tauri::command(async)]
+pub fn state_get_icon_packs() -> Vec<IconPack> {
+    let icon_packs = FULL_STATE.load().icon_packs.clone();
+    let icon_packs = trace_lock!(icon_packs);
+    icon_packs.values().cloned().collect_vec()
+}
 
 #[tauri::command(async)]
 pub fn state_get_themes() -> Vec<Theme> {
