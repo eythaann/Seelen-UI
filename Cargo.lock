@@ -4411,7 +4411,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 [[package]]
 name = "seelen-core"
 version = "1.9.7"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#6fca29a643d59dab2aa9b8d3279a7bbf4f49153e"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#79c23b07138c09b55291c2c64f97d3405fcff9c9"
 dependencies = [
  "regex",
  "schemars",
@@ -6052,6 +6052,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5de17fd2f7da591098415cff336e12965a28061ddace43b59cb3c430179c9439"
 dependencies = [
  "getrandom 0.2.15",
+ "serde",
 ]
 
 [[package]]
