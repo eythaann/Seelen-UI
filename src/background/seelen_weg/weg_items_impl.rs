@@ -1,18 +1,25 @@
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::{PinnedWegItemData, WegAppGroupItem, WegItem, WegItems};
+use seelen_core::{
+    handlers::SeelenEvent,
+    state::{PinnedWegItemData, WegAppGroupItem, WegItem, WegItems},
+};
 use std::sync::Arc;
+use tauri::Emitter;
 
-use crate::{error_handler::Result, state::application::FULL_STATE, windows_api::window::Window};
+use crate::{
+    error_handler::Result, seelen::get_app_handle, state::application::FULL_STATE,
+    windows_api::window::Window,
+};
 
 use super::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid};
 
 lazy_static! {
     pub static ref WEG_ITEMS_IMPL: Arc<Mutex<WegItemsImpl>> =
-        Arc::new(Mutex::new(WegItemsImpl::default()));
+        Arc::new(Mutex::new(WegItemsImpl::new()));
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct WegItemsImpl {
     items: WegItems,
 }
@@ -31,6 +38,23 @@ impl WegItemsImpl {
         WegItemsImpl {
             items: FULL_STATE.load().weg_items.clone(),
         }
+    }
+
+    pub fn on_stored_changed(&mut self, stored: WegItems) -> Result<()> {
+        let mut handles = vec![];
+        for item in self.iter_all() {
+            if let WegItem::Pinned(data) | WegItem::Temporal(data) = item {
+                for w in &data.windows {
+                    handles.push(w.handle);
+                }
+            }
+        }
+        self.items = stored;
+        for handle in handles {
+            self.add(&Window::from(handle))?;
+        }
+        get_app_handle().emit(SeelenEvent::WegInstanceChanged, self.get())?;
+        Ok(())
     }
 
     pub fn iter_all(&self) -> impl Iterator<Item = &WegItem> {
@@ -91,6 +115,7 @@ impl WegItemsImpl {
         }
 
         let data = PinnedWegItemData {
+            id: uuid::Uuid::new_v4().to_string(),
             path,
             execution_command,
             is_dir: false,

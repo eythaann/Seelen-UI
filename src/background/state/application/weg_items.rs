@@ -3,13 +3,17 @@ use std::{fs::OpenOptions, io::Write};
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
-use crate::{error_handler::Result, seelen::get_app_handle};
+use crate::{
+    error_handler::Result, seelen::get_app_handle, seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
+    trace_lock,
+};
 
 use super::{FullState, WEG_ITEMS_PATH};
 
 impl FullState {
     pub(super) fn emit_weg_items(&self) -> Result<()> {
         get_app_handle().emit(SeelenEvent::StateWegItemsChanged, &self.weg_items)?;
+        trace_lock!(WEG_ITEMS_IMPL).on_stored_changed(self.weg_items.clone())?;
         Ok(())
     }
 

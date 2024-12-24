@@ -1,5 +1,5 @@
 import { SeelenCommand, SeelenWegSide } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Popover } from 'antd';
 import moment from 'moment';
 import { memo, useEffect, useState } from 'react';
@@ -7,21 +7,17 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/infra';
-import { updatePreviews } from '../../shared/utils/infra';
+import { LAZY_CONSTANTS, updatePreviews } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
+import { useIcon, useWindowFocusChange } from 'src/apps/shared/hooks';
 
-import {
-  PinnedWegItem,
-  RootState,
-  TemporalWegItem,
-} from '../../shared/store/domain';
+import { PinnedWegItem, RootState, TemporalWegItem } from '../../shared/store/domain';
 
 import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
-import { getMenuForItem } from '../../bar/menu';
 import { DraggableItem } from './DraggableItem';
+import { getUserApplicationContextMenu } from './UserApplicationContextMenu';
 import { UserApplicationPreview } from './UserApplicationPreview';
 
 interface Props {
@@ -32,7 +28,8 @@ interface Props {
 
 export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
   const isFocused = useSelector(
-    (state: RootState) => state.focusedApp && item.windows.some((w) => w.handle === state.focusedApp!.hwnd),
+    (state: RootState) =>
+      state.focusedApp && item.windows.some((w) => w.handle === state.focusedApp!.hwnd),
   );
 
   const [openPreview, setOpenPreview] = useState(false);
@@ -41,6 +38,9 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
 
   const devTools = useSelector(Selectors.devTools);
   const settings = useSelector(Selectors.settings);
+
+  const iconSrc =
+    useIcon(item.execution_command) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
 
   const { t } = useTranslation();
   const calculatePlacement = (position: any) => {
@@ -90,23 +90,33 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   }, [openPreview || openContextMenu]);
 
   return (
-    <DraggableItem item={item} className={cx({ 'associated-view-open': openPreview || openContextMenu })}>
-      <WithContextMenu items={getMenuForItem(t, item, devTools) || []} onOpenChange={(isOpen) => {
-        setOpenContextMenu(isOpen);
-        if (openPreview && isOpen) {
-          setOpenPreview(false);
-        }
-      }}>
+    <DraggableItem
+      item={item}
+      className={cx({ 'associated-view-open': openPreview || openContextMenu })}
+    >
+      <WithContextMenu
+        items={getUserApplicationContextMenu(t, item, devTools) || []}
+        onOpenChange={(isOpen) => {
+          setOpenContextMenu(isOpen);
+          if (openPreview && isOpen) {
+            setOpenPreview(false);
+          }
+        }}
+      >
         <Popover
           open={openPreview}
           mouseEnterDelay={0.4}
           placement={calculatePlacement(settings.position)}
-          onOpenChange={(open) => setOpenPreview(open && !openContextMenu && !!item.windows.length && moment(new Date()) > blockUntil)}
+          onOpenChange={(open) =>
+            setOpenPreview(
+              open && !openContextMenu && !!item.windows.length && moment(new Date()) > blockUntil,
+            )
+          }
           trigger="hover"
           arrow={false}
           content={
             <BackgroundByLayersV2
-              className={ cx('weg-item-preview-container', settings.position.toLowerCase()) }
+              className={cx('weg-item-preview-container', settings.position.toLowerCase())}
               onMouseMoveCapture={(e) => e.stopPropagation()}
               onContextMenu={(e) => {
                 e.stopPropagation();
@@ -116,7 +126,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             >
               <div className="weg-item-preview-scrollbar">
                 {item.windows.map((window) => (
-                  <UserApplicationPreview key={window.handle} hwnd={window.handle} />
+                  <UserApplicationPreview key={window.handle} title={window.title} hwnd={window.handle} />
                 ))}
               </div>
             </BackgroundByLayersV2>
@@ -145,7 +155,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             onContextMenu={(e) => e.stopPropagation()}
           >
             <BackgroundByLayersV2 prefix="item" />
-            <img className="weg-item-icon" src={'item.icon'} draggable={false} />
+            <img className="weg-item-icon" src={iconSrc} draggable={false} />
             <div
               className={cx('weg-item-open-sign', {
                 'weg-item-open-sign-active': !!item.windows.length,

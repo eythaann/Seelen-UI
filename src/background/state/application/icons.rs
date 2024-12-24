@@ -90,11 +90,13 @@ impl FullState {
                     None => None,
                 });
                 if let Some(icon) = maybe_icon {
-                    return Some(
-                        self.icon_packs_folder()
-                            .join(&icon_pack.info.filename)
-                            .join(icon),
-                    );
+                    let full_path = self
+                        .icon_packs_folder()
+                        .join(&icon_pack.info.filename)
+                        .join(icon);
+                    if full_path.exists() {
+                        return Some(full_path);
+                    }
                 }
             }
         }

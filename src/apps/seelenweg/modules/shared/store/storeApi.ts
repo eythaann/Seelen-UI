@@ -18,6 +18,7 @@ export const savePinnedItems = debounce(
           break;
         case WegItemType.Pinned:
           acc.push({
+            id: item.id,
             type: item.type,
             path: item.path,
             execution_command: item.execution_command,

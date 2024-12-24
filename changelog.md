@@ -8,6 +8,7 @@
 
 ### refactor
 - move dock state to the background.
+- remove pin sub-menu on dock.
 
 ### fix
 - slu-service was being closed on exit code 1.

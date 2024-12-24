@@ -130,7 +130,11 @@ impl FullState {
         let user_widgets = self.data_dir.join("widgets");
         let bundled_widgets = self.resources_dir.join("static/widgets");
 
-        if event.paths.contains(&self.icon_packs_folder()) {
+        if event
+            .paths
+            .iter()
+            .any(|p| p.starts_with(self.icon_packs_folder()))
+        {
             log::info!("Icons Packs changed");
             self.load_icons_packs()?;
             self.emit_icon_packs()?;

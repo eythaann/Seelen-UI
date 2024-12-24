@@ -113,6 +113,7 @@ pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
 pub fn weg_pin_item(path: PathBuf) -> Result<()> {
     // todo add support to UWP for seelen rofi
     let mut data = PinnedWegItemData {
+        id: uuid::Uuid::new_v4().to_string(),
         path: path.clone(),
         is_dir: path.is_dir(),
         execution_command: path.to_string_lossy().to_string(),

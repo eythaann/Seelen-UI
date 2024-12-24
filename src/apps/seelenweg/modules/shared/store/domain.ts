@@ -5,23 +5,6 @@ import { FocusedApp } from '../../../../shared/interfaces/common';
 
 export type HWND = number & {};
 
-export interface AppFromBackground {
-  title: string;
-  exe: string;
-  execution_path: string;
-  icon: string;
-  icon_path: string;
-  hwnd: HWND;
-  creator_hwnd: HWND;
-}
-
-export enum AppsSides {
-  Left = 'left',
-  Center = 'center',
-  Right = 'right',
-  Current = 'current',
-}
-
 export interface MediaSession {
   id: string;
   title: string;
@@ -49,7 +32,6 @@ export interface RootState extends IRootState<SeelenWegSettings> {
   itemsOnLeft: SwItem[];
   itemsOnCenter: SwItem[];
   itemsOnRight: SwItem[];
-  openApps: Record<HWND, AppFromBackground>;
   // ----------------------
   focusedApp: FocusedApp | null;
   isOverlaped: boolean;
