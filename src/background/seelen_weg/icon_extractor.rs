@@ -288,7 +288,7 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
     Err("Failed to extract icon".into())
 }
 
-/// returns the path of the icon extracted from the app with the specified user model id.
+/// returns the path of the icon extracted from the app with the specified package app user model id.
 pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf> {
     let app_umid = app_umid.as_ref();
 

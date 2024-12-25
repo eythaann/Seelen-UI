@@ -84,25 +84,57 @@ impl WegItemsImpl {
             return Ok(());
         }
 
-        let creator = match window.get_frame_creator() {
+        // we get the path of the creator in case of Application Frame Host, Web apps
+        let mut path = match window.get_frame_creator() {
             Ok(None) => return Ok(()),
-            Ok(Some(creator)) => creator,
-            Err(_) => *window,
+            Ok(Some(creator)) => creator.exe()?,
+            Err(_) => window.exe()?,
         };
 
-        let path = creator.exe()?;
-        let execution_command = if let Ok(umid) = creator.process().package_app_user_model_id() {
-            let _ = extract_and_save_icon_umid(&umid);
-            format!("shell:AppsFolder\\{umid}")
+        let package_id = window.process().package_app_user_model_id().ok();
+        let assigned_umid = window.app_user_model_id();
+
+        let relaunch_command = if let Some(umid) = package_id.as_ref() {
+            let _ = extract_and_save_icon_umid(umid);
+            format!("\"explorer.exe\" shell:AppsFolder\\{umid}")
+        } else if let Some(umid) = assigned_umid.as_ref() {
+            let shortcut = Window::search_shortcut_with_same_umid(umid);
+            if let Some(shortcut) = shortcut {
+                path = shortcut.clone();
+                let _ = extract_and_save_icon_from_file(&path);
+            }
+            let _ = extract_and_save_icon_from_file(&path);
+            window
+                .relaunch_command()
+                .unwrap_or(format!("\"explorer.exe\" shell:AppsFolder\\{umid}"))
         } else {
             let _ = extract_and_save_icon_from_file(&path);
             path.to_string_lossy().to_string()
         };
 
+        // groups order documented on https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
+        // group should be by umid, if not present then the groups are done by relaunch command
+        // and in last case the groups are done by process id/path
         for item in self.iter_all_mut() {
             match item {
                 WegItem::Pinned(data) | WegItem::Temporal(data) => {
-                    if data.execution_command == execution_command {
+                    if package_id.as_ref().is_some_and(|umid| umid == &data.id) {
+                        data.windows.push(WegAppGroupItem {
+                            title: window.title(),
+                            handle: window.address(),
+                        });
+                        return Ok(());
+                    }
+
+                    if assigned_umid.as_ref().is_some_and(|umid| umid == &data.id) {
+                        data.windows.push(WegAppGroupItem {
+                            title: window.title(),
+                            handle: window.address(),
+                        });
+                        return Ok(());
+                    }
+
+                    if data.relaunch_command == relaunch_command {
                         data.windows.push(WegAppGroupItem {
                             title: window.title(),
                             handle: window.address(),
@@ -116,8 +148,12 @@ impl WegItemsImpl {
 
         let data = PinnedWegItemData {
             id: uuid::Uuid::new_v4().to_string(),
+            umid: package_id.or(assigned_umid),
             path,
-            execution_command,
+            relaunch_command,
+            display_name: window
+                .app_display_name()
+                .unwrap_or_else(|_| "Unkown".to_string()),
             is_dir: false,
             windows: vec![WegAppGroupItem {
                 title: window.title(),

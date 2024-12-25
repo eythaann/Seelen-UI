@@ -42,17 +42,17 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
 }
 
 const iconPackManager = await IconPackManager.create();
-export function useIcon(filePathOrUMID: string): string | null {
-  const [iconSrc, setIconSrc] = useState<string | null>(() => iconPackManager.getIcon(filePathOrUMID));
+export function useIcon(args: { path: string; umid?: string }): string | null {
+  const [iconSrc, setIconSrc] = useState<string | null>(() => iconPackManager.getIcon(args));
 
   useEffect(() => {
-    iconPackManager.onChange(() => setIconSrc(iconPackManager.getIcon(filePathOrUMID)));
+    iconPackManager.onChange(() => setIconSrc(iconPackManager.getIcon(args)));
   }, []);
 
   useLayoutEffect(() => {
     if (!iconSrc) {
       // this will run asynchronously on end `iconPackManager.onChange` will be triggered
-      IconPackManager.extractIcon(filePathOrUMID);
+      IconPackManager.extractIcon(args);
     }
   }, [iconSrc]);
 

@@ -111,19 +111,27 @@ pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn weg_pin_item(path: PathBuf) -> Result<()> {
+    let display_name = if let Some(name) = path.file_name() {
+        name.to_string_lossy().to_string()
+    } else {
+        "Unknown".to_string()
+    };
+
     // todo add support to UWP for seelen rofi
     let mut data = PinnedWegItemData {
         id: uuid::Uuid::new_v4().to_string(),
+        umid: WindowsApi::get_file_umid(&path).ok(),
+        display_name,
         path: path.clone(),
         is_dir: path.is_dir(),
-        execution_command: path.to_string_lossy().to_string(),
+        relaunch_command: path.to_string_lossy().to_string(),
         windows: vec![],
     };
 
     if path.extension() == Some(OsStr::new("lnk")) {
         let (program, _arguments) = WindowsApi::resolve_lnk_target(&path)?;
         data.is_dir = program.is_dir();
-        data.execution_command = program.to_string_lossy().to_string();
+        data.relaunch_command = program.to_string_lossy().to_string();
     }
 
     FULL_STATE.rcu(move |state| {

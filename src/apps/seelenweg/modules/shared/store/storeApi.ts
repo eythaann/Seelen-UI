@@ -16,16 +16,6 @@ export const savePinnedItems = debounce(
       switch (item.type) {
         case WegItemType.Temporal:
           break;
-        case WegItemType.Pinned:
-          acc.push({
-            id: item.id,
-            type: item.type,
-            path: item.path,
-            execution_command: item.execution_command,
-            is_dir: item.is_dir,
-            windows: [],
-          });
-          break;
         default:
           acc.push(item);
           break;

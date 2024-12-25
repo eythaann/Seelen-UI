@@ -108,6 +108,7 @@ function loadSettingsToStore(_settings: Settings) {
 }
 
 function loadWegItemsToStore(items: WegItems) {
+  console.log(items);
   store.dispatch(RootActions.setItemsOnLeft(items.inner.left));
   store.dispatch(RootActions.setItemsOnCenter(items.inner.center));
   store.dispatch(RootActions.setItemsOnRight(items.inner.right));

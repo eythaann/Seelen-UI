@@ -60,7 +60,10 @@ use windows::{
             TOKEN_QUERY,
         },
         Storage::{
-            EnhancedStorage::{PKEY_AppUserModel_ID, PKEY_FileDescription},
+            EnhancedStorage::{
+                PKEY_AppUserModel_ID, PKEY_AppUserModel_RelaunchCommand,
+                PKEY_AppUserModel_RelaunchIconResource, PKEY_FileDescription,
+            },
             FileSystem::WIN32_FIND_DATAW,
         },
         System::{
@@ -79,7 +82,7 @@ use windows::{
             HiDpi::{GetDpiForMonitor, MDT_EFFECTIVE_DPI},
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
-                PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow},
+                PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
                 SHCreateItemFromParsingName, SHLoadIndirectString, SHQueryUserNotificationState,
                 ShellLink, VirtualDesktopManager, QUERY_USER_NOTIFICATION_STATE,
                 QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
@@ -511,12 +514,32 @@ impl WindowsApi {
         Ok(unsafe { SHGetPropertyStoreForWindow(hwnd)? })
     }
 
-    /// this only works for exe apps
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
     pub fn get_window_app_user_model_id_exe(hwnd: HWND) -> Result<String> {
         let store = Self::get_property_store_for_window(hwnd)?;
         let value = unsafe { store.GetValue(&PKEY_AppUserModel_ID)? };
         if value.is_empty() {
             return Err("No AppUserModel_ID".into());
+        }
+        Ok(BSTR::try_from(&value)?.to_string())
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
+    pub fn get_window_relaunch_command(hwnd: HWND) -> Result<String> {
+        let store = Self::get_property_store_for_window(hwnd)?;
+        let value = unsafe { store.GetValue(&PKEY_AppUserModel_RelaunchCommand)? };
+        if value.is_empty() {
+            return Err("No AppUserModel_RelaunchCommand".into());
+        }
+        Ok(BSTR::try_from(&value)?.to_string())
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
+    pub fn get_window_relaunch_icon_resource(hwnd: HWND) -> Result<String> {
+        let store = Self::get_property_store_for_window(hwnd)?;
+        let value = unsafe { store.GetValue(&PKEY_AppUserModel_RelaunchIconResource)? };
+        if value.is_empty() {
+            return Err("No AppUserModel_RelaunchIconResource".into());
         }
         Ok(BSTR::try_from(&value)?.to_string())
     }
@@ -566,6 +589,18 @@ impl WindowsApi {
                     .replace(".exe", "")),
             }
         }
+    }
+
+    pub fn get_file_umid(path: &Path) -> Result<String> {
+        Com::run_with_context(|| unsafe {
+            let shell_item = Self::get_shell_item(&path.to_string_lossy())?;
+            let store: IPropertyStore = shell_item.GetPropertyStore(GPS_DEFAULT)?;
+            let value = store.GetValue(&PKEY_AppUserModel_ID)?;
+            if value.is_empty() {
+                return Err("No AppUserModel_ID".into());
+            }
+            Ok(BSTR::try_from(&value)?.to_string())
+        })
     }
 
     pub fn get_window_text(hwnd: HWND) -> String {

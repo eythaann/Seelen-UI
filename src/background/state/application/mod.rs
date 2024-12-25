@@ -45,7 +45,7 @@ lazy_static! {
         FullState::new().expect("Failed to create State Manager")
     }));
     pub static ref USER_SETTINGS_PATH: PathBuf = DATA_DIR.join("settings.json");
-    static ref WEG_ITEMS_PATH: PathBuf = DATA_DIR.join("seelenweg_items.yaml");
+    static ref WEG_ITEMS_PATH: PathBuf = DATA_DIR.join("seelenweg_items_v2.yaml");
 }
 
 static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);

@@ -20,13 +20,13 @@ interface Props {
 
 export const FileOrFolder = memo(({ item }: Props) => {
   const [iconSrc, setIconSrc] = useState<string>(
-    item.is_dir ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
+    item.isDir ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
   );
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (item.path.endsWith('lnk') || !item.is_dir) {
+    if (item.path.endsWith('lnk') || !item.isDir) {
       invoke<string | null>(SeelenCommand.GetIcon, { path: item.path }).then((icon) => {
         setIconSrc(convertFileSrc(icon || LAZY_CONSTANTS.MISSING_ICON_PATH));
       });

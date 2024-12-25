@@ -57,7 +57,7 @@ export function getUserApplicationContextMenu(
       key: 'weg_runas',
       label: t('app_menu.run_as'),
       icon: <Icon iconName="MdOutlineAdminPanelSettings" />,
-      onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.execution_command }),
+      onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.relaunchCommand }),
     },
   );
 

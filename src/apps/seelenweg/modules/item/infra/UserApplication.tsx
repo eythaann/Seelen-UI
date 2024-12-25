@@ -40,7 +40,10 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   const settings = useSelector(Selectors.settings);
 
   const iconSrc =
-    useIcon(item.execution_command) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
+    useIcon({
+      path: item.path,
+      umid: item.umid || undefined,
+    }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
 
   const { t } = useTranslation();
   const calculatePlacement = (position: any) => {
@@ -78,12 +81,6 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   }, [openPreview]);
 
   useEffect(() => {
-    if (!item.windows.length) {
-      setOpenPreview(false);
-    }
-  }, [item]);
-
-  useEffect(() => {
     if (onAssociatedViewOpenChanged) {
       onAssociatedViewOpenChanged(openPreview || openContextMenu);
     }
@@ -109,7 +106,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           placement={calculatePlacement(settings.position)}
           onOpenChange={(open) =>
             setOpenPreview(
-              open && !openContextMenu && !!item.windows.length && moment(new Date()) > blockUntil,
+              open && !openContextMenu && moment(new Date()) > blockUntil,
             )
           }
           trigger="hover"
@@ -126,8 +123,15 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             >
               <div className="weg-item-preview-scrollbar">
                 {item.windows.map((window) => (
-                  <UserApplicationPreview key={window.handle} title={window.title} hwnd={window.handle} />
+                  <UserApplicationPreview
+                    key={window.handle}
+                    title={window.title}
+                    hwnd={window.handle}
+                  />
                 ))}
+                {item.windows.length === 0 && (
+                  <div className="weg-item-display-name">{item.displayName}</div>
+                )}
               </div>
             </BackgroundByLayersV2>
           }
@@ -137,10 +141,11 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             onClick={() => {
               let window = item.windows[0];
               if (!window) {
+                // TODO CHECK THIS
                 if (item.path.endsWith('.lnk')) {
                   invoke(SeelenCommand.OpenFile, { path: item.path });
                 } else {
-                  invoke(SeelenCommand.OpenFile, { path: item.execution_command });
+                  invoke(SeelenCommand.OpenFile, { path: item.relaunchCommand });
                 }
               } else {
                 invoke(SeelenCommand.WegToggleWindowState, { hwnd: window.handle });
