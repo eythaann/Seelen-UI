@@ -147,10 +147,20 @@ export function SeelenWeg() {
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
 
-  const projectSwItem = (item: SwItem) =>
-    ItemByType(item, (isOpen) =>
-      setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen)),
-    );
+  const shit = useCallback((isOpen: boolean) => {
+    setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen));
+  }, []);
+
+  const projectSwItem = (item: SwItem) => ItemByType(item, shit);
+
+  console.log(
+    'pinnedOnLeft',
+    pinnedOnLeft,
+    'pinnedOnCenter',
+    pinnedOnCenter,
+    'pinnedOnRight',
+    pinnedOnRight,
+  );
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
@@ -199,14 +209,17 @@ export function SeelenWeg() {
 }
 
 function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
-  if (item.type === WegItemType.Pinned && item.path) {
-    if (item.path.endsWith('.exe') || item.relaunchCommand.includes('.exe')) {
+  if (item.type === WegItemType.Pinned) {
+    if (
+      item.path.toLowerCase().endsWith('.exe') ||
+      item.relaunchCommand.toLowerCase().includes('.exe')
+    ) {
       return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
     }
     return <FileOrFolder key={item.id} item={item} />;
   }
 
-  if (item.type === WegItemType.Temporal && item.path) {
+  if (item.type === WegItemType.Temporal) {
     return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
   }
 

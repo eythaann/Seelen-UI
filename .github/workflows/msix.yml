@@ -27,10 +27,10 @@ jobs:
 
             if (msixAsset) {
               core.setOutput('MSIX_ALREADY_EXIST', 'true');
-              console.log('MSIX file exists.');
+              console.info('MSIX file exists.');
             } else {
               core.setOutput('MSIX_ALREADY_EXIST', 'false');
-              console.log('No MSIX file found in the latest release.');
+              console.info('No MSIX file found in the latest release.');
             }
 
   upload-store-msix-to-release:
@@ -61,7 +61,7 @@ jobs:
             const version = tag.replace("v", "") + ".0";
             core.setOutput('version', version);
             core.setOutput('release-tag', tag);
-            console.log("Release tag: ", tag, " Version: ", version);
+            console.info("Release tag: ", tag, " Version: ", version);
 
       - uses: vedantmgoyal9/winget-releaser@main
         with:
