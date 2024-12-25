@@ -7,6 +7,7 @@ import { TFunction } from 'i18next';
 import { store } from '../../shared/store/infra';
 
 import { isPinnedApp, RootActions } from '../../shared/store/app';
+import { parseCommand } from 'src/apps/shared/Command';
 
 import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 
@@ -57,7 +58,10 @@ export function getUserApplicationContextMenu(
       key: 'weg_runas',
       label: t('app_menu.run_as'),
       icon: <Icon iconName="MdOutlineAdminPanelSettings" />,
-      onClick: () => invoke(SeelenCommand.RunAsAdmin, { path: item.relaunchCommand }),
+      onClick: () => {
+        const { program, args } = parseCommand(item.relaunchCommand);
+        invoke(SeelenCommand.RunAsAdmin, { program, args });
+      },
     },
   );
 

@@ -1,4 +1,4 @@
-use std::os::windows::ffi::OsStringExt;
+use std::os::windows::ffi::{OsStrExt, OsStringExt};
 
 use windows_core::{PCWSTR, PWSTR};
 
@@ -16,6 +16,12 @@ impl WindowsString {
     pub fn from_str(s: &str) -> Self {
         Self {
             inner: s.encode_utf16().chain(Some(0)).collect(),
+        }
+    }
+
+    pub fn from_os_string(s: &std::ffi::OsStr) -> Self {
+        Self {
+            inner: s.encode_wide().chain(Some(0)).collect(),
         }
     }
 

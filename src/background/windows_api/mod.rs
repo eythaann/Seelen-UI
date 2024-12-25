@@ -544,6 +544,26 @@ impl WindowsApi {
         Ok(BSTR::try_from(&value)?.to_string())
     }
 
+    pub fn create_temp_shortcut(program: &str, args: &str) -> Result<PathBuf> {
+        Com::run_with_context(|| unsafe {
+            let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
+
+            let program = WindowsString::from_str(program);
+            shell_link.SetPath(program.as_pcwstr())?;
+
+            let arguments = WindowsString::from_str(args);
+            shell_link.SetArguments(arguments.as_pcwstr())?;
+
+            let temp_dir = std::env::temp_dir();
+            let lnk_path = temp_dir.join(format!("{}.lnk", uuid::Uuid::new_v4()));
+            let lnk_path_wide = WindowsString::from_os_string(lnk_path.as_os_str());
+
+            let persist_file: IPersistFile = shell_link.cast()?;
+            persist_file.Save(lnk_path_wide.as_pcwstr(), true)?;
+            Ok(lnk_path)
+        })
+    }
+
     /// return the program and arguments
     pub fn resolve_lnk_target(lnk_path: &Path) -> Result<(PathBuf, OsString)> {
         Com::run_with_context(|| {

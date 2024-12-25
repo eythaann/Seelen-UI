@@ -10,6 +10,7 @@ import { BackgroundByLayersV2 } from '../../../components/BackgroundByLayers/inf
 import { LAZY_CONSTANTS, updatePreviews } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
+import { parseCommand } from 'src/apps/shared/Command';
 import { useIcon, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { PinnedWegItem, RootState, TemporalWegItem } from '../../shared/store/domain';
@@ -141,12 +142,8 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             onClick={() => {
               let window = item.windows[0];
               if (!window) {
-                // TODO CHECK THIS
-                if (item.path.endsWith('.lnk')) {
-                  invoke(SeelenCommand.OpenFile, { path: item.path });
-                } else {
-                  invoke(SeelenCommand.OpenFile, { path: item.relaunchCommand });
-                }
+                const { program, args } = parseCommand(item.relaunchCommand);
+                invoke(SeelenCommand.Run, { program, args });
               } else {
                 invoke(SeelenCommand.WegToggleWindowState, { hwnd: window.handle });
               }

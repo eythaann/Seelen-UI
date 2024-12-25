@@ -43,43 +43,56 @@ fn select_file_on_explorer(path: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-fn open_file(path: String, args: Option<String>) -> Result<()> {
-    // TODO: search a way to allow arguments without executing apps as admin (try using .lnk files and explorer)
-    let _args = args;
+fn open_file(path: String) -> Result<()> {
     get_app_handle()
         .shell()
-        .command("cmd")
-        .args(["/c", "explorer", &path])
+        .command("explorer")
+        .arg(&path)
         .spawn()?;
     Ok(())
 }
 
 #[tauri::command(async)]
-fn run_as_admin(path: String) {
-    tauri::async_runtime::spawn(async move {
-        let app = get_app_handle();
-        log_error!(
-            app.shell()
-                .command("powershell")
-                .args(["-Command", &format!("Start-Process '{}' -Verb runAs", path)])
-                .status()
-                .await
-        );
-    });
+async fn run_as_admin(program: String, args: Vec<String>) -> Result<()> {
+    let command = if args.is_empty() {
+        format!("Start-Process '{}' -Verb runAs", program)
+    } else {
+        format!(
+            "Start-Process '{}' -Verb runAs -ArgumentList '{}'",
+            program,
+            args.join(" ")
+        )
+    };
+    get_app_handle()
+        .shell()
+        .command("powershell")
+        .args([
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-Command",
+            &command,
+        ])
+        .status()
+        .await?;
+    Ok(())
 }
 
 #[tauri::command(async)]
-fn run(program: String, args: Vec<String>) {
-    tauri::async_runtime::spawn(async move {
-        log_error!(
-            get_app_handle()
-                .shell()
-                .command(program)
-                .args(args)
-                .status()
-                .await
-        );
-    });
+async fn run(program: String, args: Vec<String>) -> Result<()> {
+    // we create a link file to trick with explorer into a separated process
+    // and without elevation in case Seelen UI was running as admin
+    // this could take some delay like is creating a file but just are some milliseconds
+    // and this exposed funtion is intended to just run certain times
+    let lnk_file = WindowsApi::create_temp_shortcut(&program, &args.join(" "))?;
+    get_app_handle()
+        .shell()
+        .command("explorer")
+        .arg(&lnk_file)
+        .status()
+        .await?;
+    std::fs::remove_file(&lnk_file)?;
+    Ok(())
 }
 
 #[tauri::command(async)]
