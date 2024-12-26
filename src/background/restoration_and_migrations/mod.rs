@@ -1,18 +1,21 @@
 use tauri::{path::BaseDirectory, Manager};
 
-use crate::{error_handler::Result, seelen::get_app_handle, utils::copy_dir_all};
+use crate::{
+    error_handler::Result,
+    seelen::get_app_handle,
+    utils::{constants::SEELEN_COMMON, copy_dir_all},
+};
 
 pub struct RestorationAndMigration;
 
 impl RestorationAndMigration {
     pub fn recreate_profiles() -> Result<()> {
-        let path = get_app_handle().path();
-        let user_profiles = path.app_data_dir()?.join("profiles");
-        if user_profiles.is_dir() && std::fs::read_dir(&user_profiles)?.next().is_some() {
+        let user_profiles = SEELEN_COMMON.user_profiles_path();
+        if user_profiles.is_dir() && std::fs::read_dir(user_profiles)?.next().is_some() {
             return Ok(());
         }
 
-        let bundled_profiles = path.resource_dir()?.join("static/profiles");
+        let bundled_profiles = SEELEN_COMMON.bundled_profiles_path();
         copy_dir_all(bundled_profiles, user_profiles)?;
         Ok(())
     }

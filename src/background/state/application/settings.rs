@@ -7,10 +7,10 @@ use crate::{
     error_handler::Result,
     seelen::{get_app_handle, SEELEN},
     trace_lock,
-    utils::is_virtual_desktop_supported,
+    utils::{constants::SEELEN_COMMON, is_virtual_desktop_supported},
 };
 
-use super::{FullState, USER_SETTINGS_PATH};
+use super::FullState;
 
 impl FullState {
     pub(super) fn emit_settings(&self) -> Result<()> {
@@ -20,9 +20,9 @@ impl FullState {
     }
 
     pub(super) fn read_settings(&mut self) -> Result<()> {
-        let path_exists = USER_SETTINGS_PATH.exists();
+        let path_exists = SEELEN_COMMON.settings_path().exists();
         if path_exists {
-            self.settings = Self::get_settings_from_path(&USER_SETTINGS_PATH)?;
+            self.settings = Self::get_settings_from_path(SEELEN_COMMON.settings_path())?;
             self.settings.sanitize();
         }
         if !is_virtual_desktop_supported() {
@@ -40,7 +40,7 @@ impl FullState {
             .write(true)
             .create(true)
             .truncate(true)
-            .open(USER_SETTINGS_PATH.as_path())?;
+            .open(SEELEN_COMMON.settings_path())?;
         file.write_all(serde_json::to_string_pretty(&self.settings)?.as_bytes())?;
         file.flush()?;
         Ok(())

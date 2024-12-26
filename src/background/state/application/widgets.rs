@@ -3,7 +3,7 @@ use std::path::PathBuf;
 use seelen_core::{handlers::SeelenEvent, state::Widget};
 use tauri::Emitter;
 
-use crate::{error_handler::Result, seelen::get_app_handle};
+use crate::{error_handler::Result, seelen::get_app_handle, utils::constants::SEELEN_COMMON};
 
 use super::FullState;
 
@@ -26,10 +26,10 @@ impl FullState {
     }
 
     pub(super) fn load_widgets(&mut self) -> Result<()> {
-        let user_path = self.data_dir.join("widgets");
-        let bundled_path = self.resources_dir.join("static/widgets");
+        let user_path = SEELEN_COMMON.user_widgets_path();
+        let bundled_path = SEELEN_COMMON.bundled_widgets_path();
 
-        let entries = std::fs::read_dir(&bundled_path)?.chain(std::fs::read_dir(&user_path)?);
+        let entries = std::fs::read_dir(bundled_path)?.chain(std::fs::read_dir(user_path)?);
         for entry in entries.flatten() {
             let path = entry.path();
             let widget = if path.is_dir() {

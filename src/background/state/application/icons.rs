@@ -5,15 +5,11 @@ use std::{
 
 use seelen_core::state::IconPack;
 
-use crate::{error_handler::Result, trace_lock};
+use crate::{error_handler::Result, trace_lock, utils::constants::SEELEN_COMMON};
 
 use super::FullState;
 
 impl FullState {
-    pub fn icon_packs_folder(&self) -> PathBuf {
-        self.data_dir.join("icons")
-    }
-
     fn load_icon_pack_from_dir(dir_path: &Path) -> Result<IconPack> {
         let file = dir_path.join("metadata.yml");
         if !file.exists() {
@@ -23,7 +19,7 @@ impl FullState {
     }
 
     pub(super) fn load_icons_packs(&mut self) -> Result<()> {
-        let entries = std::fs::read_dir(self.icon_packs_folder())?;
+        let entries = std::fs::read_dir(SEELEN_COMMON.icons_path())?;
         for entry in entries.flatten() {
             let path = entry.path();
             if path.is_dir() {
@@ -56,7 +52,7 @@ impl FullState {
     }
 
     pub fn write_system_icon_pack(&self, icon_pack: &IconPack) -> Result<()> {
-        let folder = self.icon_packs_folder().join("system");
+        let folder = SEELEN_COMMON.icons_path().join("system");
         std::fs::create_dir_all(&folder)?;
         let mut file = OpenOptions::new()
             .write(true)
@@ -90,8 +86,8 @@ impl FullState {
                     None => None,
                 });
                 if let Some(icon) = maybe_icon {
-                    let full_path = self
-                        .icon_packs_folder()
+                    let full_path = SEELEN_COMMON
+                        .icons_path()
                         .join(&icon_pack.info.filename)
                         .join(icon);
                     if full_path.exists() {

@@ -29,23 +29,19 @@ use std::{
     },
     time::Duration,
 };
-use tauri::Manager;
 
 use crate::{
-    error_handler::Result, log_error, modules::cli::domain::Resource, seelen::get_app_handle,
-    windows_api::WindowsApi,
+    error_handler::Result, log_error, modules::cli::domain::Resource,
+    utils::constants::SEELEN_COMMON, windows_api::WindowsApi,
 };
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
 
 lazy_static! {
-    static ref DATA_DIR: PathBuf = get_app_handle().path().app_data_dir().unwrap();
     pub static ref FULL_STATE: Arc<ArcSwap<FullState>> = Arc::new(ArcSwap::from_pointee({
         log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
     }));
-    pub static ref USER_SETTINGS_PATH: PathBuf = DATA_DIR.join("settings.json");
-    static ref WEG_ITEMS_PATH: PathBuf = DATA_DIR.join("seelenweg_items_v2.yaml");
 }
 
 static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
@@ -55,8 +51,6 @@ pub type LauncherHistory = HashMap<String, Vec<String>>;
 #[derive(Getters, Debug, Clone)]
 #[getset(get = "pub")]
 pub struct FullState {
-    data_dir: PathBuf,
-    resources_dir: PathBuf,
     watcher: Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
     // ======== data ========
     pub profiles: Vec<Profile>,
@@ -77,10 +71,7 @@ unsafe impl Sync for FullState {}
 
 impl FullState {
     fn new() -> Result<Self> {
-        let handle = get_app_handle();
         let mut manager = Self {
-            data_dir: handle.path().app_data_dir()?,
-            resources_dir: handle.path().resource_dir()?,
             watcher: Arc::new(None),
             // ======== data ========
             profiles: Vec::new(),
@@ -110,109 +101,95 @@ impl FullState {
     fn process_event(&mut self, event: DebouncedEvent) -> Result<()> {
         let event = event.event;
 
-        let history_path = self.data_dir.join("history");
-
-        let user_themes = self.data_dir.join("themes");
-        let bundled_themes = self.resources_dir.join("static/themes");
-
-        let user_placeholders = self.data_dir.join("placeholders");
-        let bundled_placeholders = self.resources_dir.join("static/placeholders");
-
-        let user_layouts = self.data_dir.join("layouts");
-        let bundled_layouts = self.resources_dir.join("static/layouts");
-
-        let user_app_configs = self.data_dir.join("applications.yml");
-        let bundled_app_configs = self.resources_dir.join("static/apps_templates");
-
-        let user_plugins = self.data_dir.join("plugins");
-        let bundled_plugins = self.resources_dir.join("static/plugins");
-
-        let user_widgets = self.data_dir.join("widgets");
-        let bundled_widgets = self.resources_dir.join("static/widgets");
-
         if event
             .paths
             .iter()
-            .any(|p| p.starts_with(self.icon_packs_folder()))
+            .any(|p| p.starts_with(SEELEN_COMMON.icons_path()))
         {
             log::info!("Icons Packs changed");
             self.load_icons_packs()?;
             self.emit_icon_packs()?;
         }
 
-        if event.paths.contains(&WEG_ITEMS_PATH) {
-            log::info!("Weg Items changed");
+        if event
+            .paths
+            .iter()
+            .any(|p| p == SEELEN_COMMON.weg_items_path())
+        {
             self.read_weg_items()?;
+            log::info!("Weg Items changed");
             self.emit_weg_items()?;
         }
 
-        if event.paths.contains(&history_path) {
+        if event
+            .paths
+            .iter()
+            .any(|p| p == SEELEN_COMMON.history_path())
+        {
             log::info!("History changed");
             self.load_history()?;
             self.emit_history()?;
         }
 
-        if event.paths.contains(&USER_SETTINGS_PATH) {
+        if event
+            .paths
+            .iter()
+            .any(|p| p == SEELEN_COMMON.settings_path())
+        {
             log::info!("Seelen Settings changed");
             self.read_settings()?;
             self.emit_settings()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p.starts_with(&user_themes) || p.starts_with(&bundled_themes))
-        {
+        if event.paths.iter().any(|p| {
+            p.starts_with(SEELEN_COMMON.user_themes_path())
+                || p.starts_with(SEELEN_COMMON.bundled_themes_path())
+        }) {
             log::info!("Theme changed");
             self.load_themes()?;
             self.emit_themes()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p.starts_with(&user_placeholders) || p.starts_with(&bundled_placeholders))
-        {
+        if event.paths.iter().any(|p| {
+            p.starts_with(SEELEN_COMMON.user_placeholders_path())
+                || p.starts_with(SEELEN_COMMON.bundled_placeholders_path())
+        }) {
             log::info!("Placeholder changed");
             self.load_placeholders()?;
             self.emit_placeholders()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p.starts_with(&user_layouts) || p.starts_with(&bundled_layouts))
-        {
+        if event.paths.iter().any(|p| {
+            p.starts_with(SEELEN_COMMON.user_layouts_path())
+                || p.starts_with(SEELEN_COMMON.bundled_layouts_path())
+        }) {
             log::info!("Layouts changed");
             self.load_layouts()?;
             self.emit_layouts()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p.starts_with(&user_app_configs) || p.starts_with(&bundled_app_configs))
-        {
+        if event.paths.iter().any(|p| {
+            p == SEELEN_COMMON.user_app_configs_path()
+                || p.starts_with(SEELEN_COMMON.bundled_app_configs_path())
+        }) {
             log::info!("Specific App Configuration changed");
             self.load_settings_by_app()?;
             self.emit_settings_by_app()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p.starts_with(&user_plugins) || p.starts_with(&bundled_plugins))
-        {
+        if event.paths.iter().any(|p| {
+            p.starts_with(SEELEN_COMMON.user_plugins_path())
+                || p.starts_with(SEELEN_COMMON.bundled_plugins_path())
+        }) {
             log::info!("Plugins changed");
             self.load_plugins()?;
             self.emit_plugins()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p.starts_with(&user_widgets) || p.starts_with(&bundled_widgets))
-        {
+        if event.paths.iter().any(|p| {
+            p.starts_with(SEELEN_COMMON.user_widgets_path())
+                || p.starts_with(SEELEN_COMMON.bundled_widgets_path())
+        }) {
             log::info!("Widgets changed");
             self.load_widgets()?;
             self.emit_widgets()?;
@@ -245,29 +222,28 @@ impl FullState {
             },
         )?;
 
-        let paths: Vec<PathBuf> = vec![
-            // settings & user data
-            USER_SETTINGS_PATH.to_path_buf(),
-            WEG_ITEMS_PATH.to_path_buf(),
-            self.data_dir.join("applications.yml"),
-            self.data_dir.join("history"),
-            // resources
-            self.icon_packs_folder(),
-            self.data_dir.join("themes"),
-            self.data_dir.join("placeholders"),
-            self.data_dir.join("layouts"),
-            self.data_dir.join("plugins"),
-            self.data_dir.join("widgets"),
-            self.resources_dir.join("static/themes"),
-            self.resources_dir.join("static/placeholders"),
-            self.resources_dir.join("static/layouts"),
-            self.resources_dir.join("static/apps_templates"),
-            self.resources_dir.join("static/plugins"),
-            self.resources_dir.join("static/widgets"),
+        let paths: Vec<&Path> = vec![
+            // user data
+            SEELEN_COMMON.settings_path(),
+            SEELEN_COMMON.weg_items_path(),
+            SEELEN_COMMON.user_app_configs_path(),
+            SEELEN_COMMON.history_path(),
+            SEELEN_COMMON.icons_path(),
+            SEELEN_COMMON.user_themes_path(),
+            SEELEN_COMMON.user_placeholders_path(),
+            SEELEN_COMMON.user_layouts_path(),
+            SEELEN_COMMON.user_plugins_path(),
+            SEELEN_COMMON.user_widgets_path(),
+            // bundled data
+            SEELEN_COMMON.bundled_themes_path(),
+            SEELEN_COMMON.bundled_placeholders_path(),
+            SEELEN_COMMON.bundled_layouts_path(),
+            SEELEN_COMMON.bundled_plugins_path(),
+            SEELEN_COMMON.bundled_widgets_path(),
         ];
 
         for path in paths {
-            debouncer.watcher().watch(&path, RecursiveMode::Recursive)?;
+            debouncer.watcher().watch(path, RecursiveMode::Recursive)?;
         }
 
         self.watcher = Arc::new(Some(debouncer));
@@ -339,9 +315,8 @@ impl FullState {
     }
 
     fn load_themes(&mut self) -> Result<()> {
-        let user_path = self.data_dir.join("themes");
-        let resources_path = self.resources_dir.join("static/themes");
-        let entries = std::fs::read_dir(&resources_path)?.chain(std::fs::read_dir(&user_path)?);
+        let entries = std::fs::read_dir(SEELEN_COMMON.bundled_themes_path())?
+            .chain(std::fs::read_dir(SEELEN_COMMON.user_themes_path())?);
         for entry in entries.flatten() {
             let path = entry.path();
             let theme = if path.is_dir() {
@@ -370,9 +345,8 @@ impl FullState {
     }
 
     fn load_placeholders(&mut self) -> Result<()> {
-        let user_path = self.data_dir.join("placeholders");
-        let resources_path = self.resources_dir.join("static/placeholders");
-        let entries = std::fs::read_dir(&resources_path)?.chain(std::fs::read_dir(&user_path)?);
+        let entries = std::fs::read_dir(SEELEN_COMMON.bundled_placeholders_path())?
+            .chain(std::fs::read_dir(SEELEN_COMMON.user_placeholders_path())?);
         for entry in entries.flatten() {
             let path = entry.path();
             if path.is_dir() {
@@ -417,9 +391,9 @@ impl FullState {
     }
 
     fn load_layouts(&mut self) -> Result<()> {
-        let user_path = self.data_dir.join("layouts");
-        let resources_path = self.resources_dir.join("static/layouts");
-        let entries = std::fs::read_dir(&resources_path)?.chain(std::fs::read_dir(&user_path)?);
+        let user_path = SEELEN_COMMON.user_layouts_path();
+        let resources_path = SEELEN_COMMON.bundled_layouts_path();
+        let entries = std::fs::read_dir(resources_path)?.chain(std::fs::read_dir(user_path)?);
         for entry in entries.flatten() {
             let path = entry.path();
             if path.is_dir() {
@@ -455,15 +429,15 @@ impl FullState {
             .cloned()
             .collect_vec();
         std::fs::write(
-            self.data_dir.join("applications.yml"),
+            SEELEN_COMMON.user_app_configs_path(),
             serde_yaml::to_string(&data)?,
         )?;
         Ok(())
     }
 
     fn load_settings_by_app(&mut self) -> Result<()> {
-        let user_apps_path = self.data_dir.join("applications.yml");
-        let apps_templates_path = self.resources_dir.join("static/apps_templates");
+        let user_apps_path = SEELEN_COMMON.user_app_configs_path();
+        let apps_templates_path = SEELEN_COMMON.bundled_app_configs_path();
 
         self.settings_by_app.clear();
         if !user_apps_path.exists() {
@@ -481,7 +455,7 @@ impl FullState {
         }
 
         if user_apps_path.exists() {
-            let content = std::fs::read_to_string(&user_apps_path)?;
+            let content = std::fs::read_to_string(user_apps_path)?;
             let apps: Vec<AppConfig> = serde_yaml::from_str(&content)?;
             self.settings_by_app.extend(apps);
         }
@@ -493,9 +467,9 @@ impl FullState {
     }
 
     fn load_history(&mut self) -> Result<()> {
-        let history_path = self.data_dir.join("history");
+        let history_path = SEELEN_COMMON.history_path();
         if history_path.exists() {
-            self.launcher_history = serde_yaml::from_str(&std::fs::read_to_string(&history_path)?)?;
+            self.launcher_history = serde_yaml::from_str(&std::fs::read_to_string(history_path)?)?;
         } else {
             std::fs::write(history_path, serde_yaml::to_string(&self.launcher_history)?)?;
         }
@@ -530,37 +504,37 @@ impl FullState {
         let id = resource.id;
 
         if let Some(image_url) = resource.wallpaper {
-            let path = self.data_dir.join(format!("wallpapers/{id}.png"));
+            let path = SEELEN_COMMON.wallpapers_path().join(format!("{id}.png"));
             tauri::async_runtime::spawn(async move {
                 log_error!(Self::set_wallpaper(&image_url, &path).await);
             });
         }
 
+        let filename = format!("{id}.yml");
         if let Some(theme) = resource.resources.theme {
-            let filename = format!("{id}.yml");
             std::fs::write(
-                self.data_dir.join(format!("themes/{filename}")),
+                SEELEN_COMMON.user_themes_path().join(&filename),
                 serde_yaml::to_string(&theme)?,
             )?;
             if !self.settings.selected_themes.contains(&filename) {
-                self.settings.selected_themes.push(filename);
+                self.settings.selected_themes.push(filename.clone());
             }
         }
 
         if let Some(placeholder) = resource.resources.placeholder {
             std::fs::write(
-                self.data_dir.join(format!("placeholders/{id}.yml")),
+                SEELEN_COMMON.user_placeholders_path().join(&filename),
                 serde_yaml::to_string(&placeholder)?,
             )?;
-            self.settings.fancy_toolbar.placeholder = format!("{id}.yml");
+            self.settings.fancy_toolbar.placeholder = filename.clone();
         }
 
         if let Some(layout) = resource.resources.layout {
             std::fs::write(
-                self.data_dir.join(format!("layouts/{id}.yml")),
+                SEELEN_COMMON.user_layouts_path().join(&filename),
                 serde_yaml::to_string(&layout)?,
             )?;
-            self.settings.window_manager.default_layout = format!("{id}.yml");
+            self.settings.window_manager.default_layout = filename.clone();
         }
 
         self.write_settings()?;

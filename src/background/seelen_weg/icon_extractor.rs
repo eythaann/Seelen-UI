@@ -25,6 +25,7 @@ use std::path::{Path, PathBuf};
 use crate::error_handler::Result;
 use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;
+use crate::utils::constants::SEELEN_COMMON;
 use crate::windows_api::WindowsApi;
 
 /// Convert BGRA to RGBA
@@ -251,8 +252,8 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
     }
 
     let icon_filename = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
-    let icon_path = state
-        .icon_packs_folder()
+    let icon_path = SEELEN_COMMON
+        .icons_path()
         .join("system")
         .join(&icon_filename);
 
@@ -300,8 +301,8 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
     let app_icon = UwpManager::get_high_quality_icon_path(app_umid)?;
 
     let relative_path = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
-    let image_path = state
-        .icon_packs_folder()
+    let image_path = SEELEN_COMMON
+        .icons_path()
         .join("system")
         .join(&relative_path);
     std::fs::copy(app_icon, &image_path)?;

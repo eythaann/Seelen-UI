@@ -5,10 +5,10 @@ use tauri::Emitter;
 
 use crate::{
     error_handler::Result, seelen::get_app_handle, seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
-    trace_lock,
+    trace_lock, utils::constants::SEELEN_COMMON,
 };
 
-use super::{FullState, WEG_ITEMS_PATH};
+use super::FullState;
 
 impl FullState {
     pub(super) fn emit_weg_items(&self) -> Result<()> {
@@ -18,9 +18,9 @@ impl FullState {
     }
 
     pub(super) fn read_weg_items(&mut self) -> Result<()> {
-        if WEG_ITEMS_PATH.exists() {
+        if SEELEN_COMMON.weg_items_path().exists() {
             self.weg_items =
-                serde_yaml::from_str(&std::fs::read_to_string(WEG_ITEMS_PATH.as_path())?)?;
+                serde_yaml::from_str(&std::fs::read_to_string(SEELEN_COMMON.weg_items_path())?)?;
             self.weg_items.sanitize();
         } else {
             self.write_weg_items()?;
@@ -33,7 +33,7 @@ impl FullState {
             .write(true)
             .create(true)
             .truncate(true)
-            .open(WEG_ITEMS_PATH.as_path())?;
+            .open(SEELEN_COMMON.weg_items_path())?;
         file.write_all(serde_yaml::to_string(&self.weg_items)?.as_bytes())?;
         file.flush()?;
         Ok(())
