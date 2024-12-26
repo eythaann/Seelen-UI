@@ -239,6 +239,10 @@ weg:
     gap: فضای بین موارد
     label: موارد
     size: اندازه مورد
+    temporal_visibility:
+      all: همه
+      label: قابلیت مشاهده موارد پین نشده
+      on_monitor: روی مانیتور
     visible_separators: جداکننده های قابل مشاهده
     zoom_size: اندازه بزرگنمایی (برای مضامین استفاده می شود)
   label: اسکله/نوار وظیفه

@@ -237,6 +237,10 @@ weg:
     gap: Cîh di navbera tiştan de
     label: Hevokên
     size: Mezinahiya tiştê
+    temporal_visibility:
+      all: Gişt
+      label: Dîtina Tiştên Nepînekirî
+      on_monitor: Li ser Monitor
     visible_separators: Dabeşên Visible
     zoom_size: Mezinahiya zoomed (ji bo mijaran tê bikar anîn)
   label: Dock / Taskbar

@@ -238,6 +238,10 @@ weg:
     gap: Зүйлийн хоорондох зай
     label: Зүйл
     size: Зүйлийн хэмжээ
+    temporal_visibility:
+      all: Бүгд
+      label: Тодруулаагүй зүйлсийн харагдах байдал
+      on_monitor: Монитор дээр
     visible_separators: Харагдах тусгаарлагч
     zoom_size: Томруулсан хэмжээ (сэдэвт ашигладаг)
   label: Док / Taskbar

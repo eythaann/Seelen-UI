@@ -6,6 +6,7 @@ use tauri::Emitter;
 use crate::{
     error_handler::Result,
     seelen::{get_app_handle, SEELEN},
+    seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     trace_lock,
     utils::{constants::SEELEN_COMMON, is_virtual_desktop_supported},
 };
@@ -16,6 +17,7 @@ impl FullState {
     pub(super) fn emit_settings(&self) -> Result<()> {
         get_app_handle().emit(SeelenEvent::StateSettingsChanged, self.settings())?;
         trace_lock!(SEELEN).on_settings_change()?;
+        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 

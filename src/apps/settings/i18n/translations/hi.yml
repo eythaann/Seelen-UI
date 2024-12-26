@@ -239,6 +239,10 @@ weg:
     gap: वस्तुओं के बीच का स्थान
     label: सामान
     size: आइटम आकार
+    temporal_visibility:
+      all: सभी
+      label: अनपिन किए गए आइटम दृश्यता
+      on_monitor: मॉनिटर पर
     visible_separators: दृश्य विभाजक
     zoom_size: ज़ूमेड आकार (विषयों के लिए उपयोग किया जाता है)
   label: डॉक/टास्टरबार

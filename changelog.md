@@ -5,6 +5,7 @@
 - add kill process option on context menu for dock items.
 - multi-language calendar and date module on toolbar.
 - add icon packs selector on settings > general.
+- allow show only windows on monitor owner of Dock/Taskbar.
 
 ### refactor
 - move dock state to the background.

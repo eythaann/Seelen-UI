@@ -234,6 +234,10 @@ weg:
     gap: በእቃዎች መካከል ቦታ
     label: ዕቃዎች
     size: የንጥል መጠን
+    temporal_visibility:
+      all: ሁሉም
+      label: ያልተሰካ እቃዎች ታይነት
+      on_monitor: በሞኒተር ላይ
     visible_separators: የሚታዩ መለያዎች
     zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
   label: Dock / Accorbar

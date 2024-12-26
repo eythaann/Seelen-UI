@@ -234,6 +234,10 @@ weg:
     gap: ช่องว่างระหว่างรายการ
     label: รายการ
     size: ขนาดรายการ
+    temporal_visibility:
+      all: ทั้งหมด
+      label: การมองเห็นรายการที่เลิกปักหมุด
+      on_monitor: บนจอภาพ
     visible_separators: ตัวแยกที่มองเห็นได้
     zoom_size: ขนาดซูม (ใช้สำหรับธีม)
   label: แท่นวาง/บาร์

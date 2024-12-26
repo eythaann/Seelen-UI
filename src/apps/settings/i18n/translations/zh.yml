@@ -229,6 +229,10 @@ weg:
     gap: 项目间距
     label: 项目
     size: 项目大小
+    temporal_visibility:
+      all: 全部
+      label: 未固定项目的可见性
+      on_monitor: 在监视器上
     visible_separators: 可见分隔符
     zoom_size: 缩放尺寸（用于主题）
   label: Dock / 任务栏

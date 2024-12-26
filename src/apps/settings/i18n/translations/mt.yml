@@ -240,6 +240,10 @@ weg:
     gap: Spazju bejn l-oġġetti
     label: Oġġetti
     size: Daqs tal-oġġett
+    temporal_visibility:
+      all: Kollha
+      label: Oġġetti Unpinned Viżibilità
+      on_monitor: Fuq Monitor
     visible_separators: Separaturi viżibbli
     zoom_size: Daqs miżjud (użat għat-temi)
   label: Dock / Taskbar

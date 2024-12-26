@@ -242,6 +242,10 @@ weg:
     gap: სივრცე ნივთებს შორის
     label: ნივთები
     size: ნივთის ზომა
+    temporal_visibility:
+      all: ყველა
+      label: ჩამაგრებული ერთეულების ხილვადობა
+      on_monitor: მონიტორზე
     visible_separators: ხილული გამყოფი
     zoom_size: მასშტაბური ზომა (გამოიყენება თემებისთვის)
   label: დოკ/დავალების ზოლი

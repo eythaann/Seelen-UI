@@ -239,6 +239,10 @@ weg:
     gap: Esemete vaheline ruum
     label: Esemed
     size: Üksuse suurus
+    temporal_visibility:
+      all: Kõik
+      label: Kinnitamata üksuste nähtavus
+      on_monitor: Monitoril
     visible_separators: Nähtavad eraldajad
     zoom_size: Suumendatud suurus (kasutatud teemade jaoks)
   label: Dokk/ülesanderiba

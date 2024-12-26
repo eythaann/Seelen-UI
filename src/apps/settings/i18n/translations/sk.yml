@@ -240,6 +240,10 @@ weg:
     gap: Priestor medzi položkami
     label: Predmety
     size: Veľkosť položky
+    temporal_visibility:
+      all: Všetky
+      label: Viditeľnosť nepripnutých položiek
+      on_monitor: Na monitore
     visible_separators: Viditeľné oddeľovače
     zoom_size: Zväčšená veľkosť (používa sa na témy)
   label: Prístavný panel

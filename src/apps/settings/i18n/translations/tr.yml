@@ -240,6 +240,10 @@ weg:
     gap: Öğeler Arası Boşluk
     label: Öğeler
     size: Öğe Boyutu
+    temporal_visibility:
+      all: Tüm
+      label: Sabitlenmemiş Öğelerin Görünürlüğü
+      on_monitor: Monitörde
     visible_separators: Görünür Ayırıcılar
     zoom_size: Yakınlaştırılmış Boyut (temalar için kullanılır)
   label: Dock/Görev Çubuğu

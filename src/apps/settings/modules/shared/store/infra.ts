@@ -3,6 +3,7 @@ import {
   AppConfigurationList,
   ConnectedMonitorList,
   IconPackList,
+  MonitorConfiguration,
   PlaceholderList,
   PluginList,
   ProfileList,
@@ -45,8 +46,17 @@ export type store = {
 
 // ======================
 
+const defaultMonitorConfig = await MonitorConfiguration.default();
 function setMonitorsOnState(list: ConnectedMonitorList) {
+  const state = store.getState();
+  const monitors = { ...state.monitorsV2 };
+  for (const item of list.asArray()) {
+    if (!monitors[item.id]) {
+      monitors[item.id] = cloneDeep(defaultMonitorConfig.inner);
+    }
+  }
   store.dispatch(RootActions.setConnectedMonitors(list.all()));
+  store.dispatch(RootActions.setMonitorsV2(monitors));
 }
 
 async function initUIColors() {

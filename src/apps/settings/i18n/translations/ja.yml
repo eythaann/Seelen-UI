@@ -232,6 +232,10 @@ weg:
     gap: アイテム間のスペース
     label: ドック上のアイテム
     size: アイテムのサイズ
+    temporal_visibility:
+      all: 全て
+      label: 固定されていないアイテムの表示設定
+      on_monitor: モニター上
     visible_separators: セパレーターを表示する
     zoom_size: ズームされたときのサイズ（一部のテーマで使用）
   label: ドック（タスクバー）

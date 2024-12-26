@@ -238,6 +238,10 @@ weg:
     gap: Vieta starp priekšmetiem
     label: Priekšmeti
     size: Vienuma izmērs
+    temporal_visibility:
+      all: Visi
+      label: Atsprausto vienumu redzamība
+      on_monitor: Uz monitora
     visible_separators: Redzami atdalītāji
     zoom_size: Tuvināta izmēra (izmanto tēmām)
   label: Doks/uzdevumjosla

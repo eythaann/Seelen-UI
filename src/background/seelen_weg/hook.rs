@@ -23,7 +23,7 @@ impl SeelenWeg {
             WinEvent::ObjectParentChange => {
                 if let Some(parent) = window.parent() {
                     if Self::contains_app(window) {
-                        Self::remove_hwnd(window);
+                        Self::remove_hwnd(window)?;
                     }
                     if !Self::contains_app(&parent) && Self::should_be_added(&parent) {
                         Self::add(&parent)?;
@@ -32,12 +32,17 @@ impl SeelenWeg {
             }
             WinEvent::ObjectDestroy | WinEvent::ObjectHide => {
                 if Self::contains_app(window) {
-                    Self::remove_hwnd(window);
+                    Self::remove_hwnd(window)?;
+                }
+            }
+            WinEvent::SystemMoveSizeEnd => {
+                if Self::contains_app(window) {
+                    Self::update_app(window)?;
                 }
             }
             WinEvent::ObjectNameChange => {
                 if Self::contains_app(window) {
-                    Self::update_app(window);
+                    Self::update_app(window)?;
                 } else if Self::should_be_added(window) {
                     Self::add(window)?;
                 }

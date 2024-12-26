@@ -240,6 +240,10 @@ weg:
     gap: Prostor mezi položkami
     label: Položky
     size: Velikost položky
+    temporal_visibility:
+      all: Vše
+      label: Viditelnost nepřipnutých položek
+      on_monitor: Na monitoru
     visible_separators: Viditelné separátory
     zoom_size: Zvětšená velikost (použitá pro témata)
   label: Dock/TaskBar

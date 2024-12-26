@@ -240,6 +240,10 @@ weg:
     gap: Przestrzeń między przedmiotami
     label: Rzeczy
     size: Rozmiar elementu
+    temporal_visibility:
+      all: Wszystko
+      label: Widoczność nieprzypiętych elementów
+      on_monitor: Na Monitorze
     visible_separators: Widoczne separatory
     zoom_size: Powiększony rozmiar (używany do motywów)
   label: Dock/Pasek zadań

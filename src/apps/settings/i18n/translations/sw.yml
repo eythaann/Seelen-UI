@@ -236,6 +236,10 @@ weg:
     gap: Nafasi kati ya vitu
     label: Vitu
     size: Saizi ya bidhaa
+    temporal_visibility:
+      all: Wote
+      label: Mwonekano wa Vipengee Vilivyobanduliwa
+      on_monitor: Kwenye Monitor
     visible_separators: Watenganisho unaoonekana
     zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
   label: Dock/Taskbar

@@ -12,8 +12,7 @@ use std::{collections::HashMap, thread::JoinHandle};
 use image::{DynamicImage, RgbaImage};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::{handlers::SeelenEvent, state::AppExtraFlag};
-use tauri::Emitter;
+use seelen_core::state::AppExtraFlag;
 use weg_items_impl::WEG_ITEMS_IMPL;
 use win_screenshot::capture::capture_window;
 use windows::Win32::{
@@ -24,7 +23,6 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::get_app_handle,
     state::application::FULL_STATE,
     trace_lock,
     utils::sleep_millis,
@@ -45,8 +43,11 @@ impl SeelenWeg {
         trace_lock!(WEG_ITEMS_IMPL).contains(window)
     }
 
-    pub fn update_app(_window: &Window) {
-        // TODO implement
+    pub fn update_app(window: &Window) -> Result<()> {
+        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
+        weg.update_window(window);
+        weg.emit_to_webview()?;
+        Ok(())
     }
 
     pub fn enumerate_all_windows() -> Result<()> {
@@ -59,20 +60,17 @@ impl SeelenWeg {
     }
 
     pub fn add(window: &Window) -> Result<()> {
-        let mut items = trace_lock!(WEG_ITEMS_IMPL);
-        items.add(window)?;
-        get_app_handle()
-            .emit(SeelenEvent::WegInstanceChanged, items.get())
-            .expect("Failed to emit");
+        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
+        weg.add(window)?;
+        weg.emit_to_webview()?;
         Ok(())
     }
 
-    pub fn remove_hwnd(window: &Window) {
-        let mut items = trace_lock!(WEG_ITEMS_IMPL);
-        items.remove(window);
-        get_app_handle()
-            .emit(SeelenEvent::WegInstanceChanged, items.get())
-            .expect("Failed to emit");
+    pub fn remove_hwnd(window: &Window) -> Result<()> {
+        let mut weg = trace_lock!(WEG_ITEMS_IMPL);
+        weg.remove(window);
+        weg.emit_to_webview()?;
+        Ok(())
     }
 
     pub fn should_be_added(window: &Window) -> bool {

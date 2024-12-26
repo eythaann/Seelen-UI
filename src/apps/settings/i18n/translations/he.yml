@@ -235,6 +235,10 @@ weg:
     gap: שטח בין פריטים
     label: פריטים
     size: גודל פריט
+    temporal_visibility:
+      all: כֹּל
+      label: נראות פריטים לא מוצמדים
+      on_monitor: במוניטור
     visible_separators: מפרידים גלויים
     zoom_size: גודל מתקרב (משמש לנושאים)
   label: שורת המזח/המשימות

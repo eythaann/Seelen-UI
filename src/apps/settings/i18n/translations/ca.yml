@@ -244,6 +244,10 @@ weg:
     gap: Espai entre articles
     label: Plantes
     size: Mida de l'article
+    temporal_visibility:
+      all: Tots
+      label: Visibilitat dels elements sense fixar
+      on_monitor: Al monitor
     visible_separators: Separadors visibles
     zoom_size: Mida zoom (usada per a temes)
   label: Moll/barra de tasques

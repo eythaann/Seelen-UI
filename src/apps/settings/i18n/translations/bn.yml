@@ -240,6 +240,10 @@ weg:
     gap: আইটেম মধ্যে স্থান
     label: আইটেম
     size: আইটেমের আকার
+    temporal_visibility:
+      all: সব
+      label: আনপিন করা আইটেম দৃশ্যমানতা
+      on_monitor: মনিটরে
     visible_separators: দৃশ্যমান বিভাজক
     zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
   label: ডক/টাস্কবার

@@ -236,6 +236,10 @@ weg:
     gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
     label: ਇਕਾਈ
     size: ਆਈਟਮ ਦਾ ਆਕਾਰ
+    temporal_visibility:
+      all: ਸਾਰੇ
+      label: ਅਨਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
+      on_monitor: ਮਾਨੀਟਰ 'ਤੇ
     visible_separators: ਦਿਖਣਯੋਗ ਵਿਭਾਜਕ
     zoom_size: ਜ਼ੂਮ ਕੀਤਾ ਆਕਾਰ (ਥੀਮਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ)
   label: ਡੌਕ/ਟਾਸਕਬਾਰ

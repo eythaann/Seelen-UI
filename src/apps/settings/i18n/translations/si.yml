@@ -237,6 +237,10 @@ weg:
     gap: අයිතම අතර අවකාශය
     label: අයිතම
     size: අයිතමයේ ප්රමාණය
+    temporal_visibility:
+      all: සියල්ල
+      label: ඇමුණුම් නොකළ අයිතම දෘශ්‍යතාව
+      on_monitor: මොනිටරය මත
     visible_separators: දෘශ්‍ය බෙදුම්කරුවන්
     zoom_size: විශාලනය කළ ප්‍රමාණය (තේමා සඳහා භාවිතා වේ)
   label: ඩොක්/කාර්ය තීරුව

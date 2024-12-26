@@ -238,6 +238,10 @@ weg:
     gap: Rými milli atriða
     label: Hlutir
     size: Stærð hlutar
+    temporal_visibility:
+      all: Allt
+      label: Sýnileiki ófestra hluta
+      on_monitor: Á Skjár
     visible_separators: Sýnilegir skilju
     zoom_size: Aðdráttarstærð (notuð fyrir þemu)
   label: Bryggju/verkefnabar

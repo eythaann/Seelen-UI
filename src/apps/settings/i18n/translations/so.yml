@@ -244,6 +244,10 @@ weg:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha
     size: Shayga cabirka
+    temporal_visibility:
+      all: Dhammaan
+      label: Aragtida Shayada Furan
+      on_monitor: On Monitor
     visible_separators: Kala-sooca muuqda
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
   label: Dock / Tootshar

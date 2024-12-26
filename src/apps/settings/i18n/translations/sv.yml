@@ -242,6 +242,10 @@ weg:
     gap: Utrymme mellan föremål
     label: Föremål
     size: Objektstorlek
+    temporal_visibility:
+      all: Alla
+      label: Synlighet för lossade objekt
+      on_monitor: På bildskärm
     visible_separators: Synliga separatorer
     zoom_size: Zoomad storlek (används för teman)
   label: Docka/arbetsfält

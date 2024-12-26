@@ -124,6 +124,19 @@ export const SeelenWegSettings = () => {
       <SettingsGroup>
         <SettingsSubGroup label={t('weg.items.label')}>
           <SettingsOption>
+            <div>{t('weg.items.temporal_visibility.label')}</div>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.temporalItemsVisibility}
+              options={[
+                { value: 'All', label: t('weg.items.temporal_visibility.all') },
+                { value: 'OnMonitor', label: t('weg.items.temporal_visibility.on_monitor') },
+              ]}
+              onChange={(value) => dispatch(SeelenWegActions.setTemporalItemsVisibility(value))}
+            />
+          </SettingsOption>
+
+          <SettingsOption>
             <div>{t('weg.items.size')}</div>
             <InputNumber
               value={settings.size}

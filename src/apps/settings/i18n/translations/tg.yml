@@ -237,6 +237,10 @@ weg:
     gap: Фосила байни ашё
     label: Ашё
     size: Андозаи ашё
+    temporal_visibility:
+      all: Ҳама
+      label: Намоиши ҷузъҳои ҷудонашуда
+      on_monitor: Дар Монитор
     visible_separators: Бандиаткунандагони намоён
     zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
   label: Dock / супоришҳо

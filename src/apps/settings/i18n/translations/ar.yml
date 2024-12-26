@@ -235,6 +235,10 @@ weg:
     gap: الفراغ بين العناصر
     label: العناصر
     size: حجم العنصر
+    temporal_visibility:
+      all: الجميع
+      label: رؤية العناصر غير المثبتة
+      on_monitor: على الشاشة
     visible_separators: الفواصل المرئية
     zoom_size: حجم المكبر (يستخدم للموضوعات)
   label: قفص الاتهام / شريط المهام

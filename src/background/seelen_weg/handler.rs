@@ -20,6 +20,7 @@ use super::SeelenWeg;
 
 #[tauri::command(async)]
 pub fn weg_get_items_for_widget() -> WegItems {
+    // TODO: filter by monitor/widget
     trace_lock!(WEG_ITEMS_IMPL).get()
 }
 
@@ -31,7 +32,7 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
         let window = Window::from(addr);
 
         if !window.is_visible() {
-            SeelenWeg::remove_hwnd(&window);
+            SeelenWeg::remove_hwnd(&window)?;
             continue;
         }
 
@@ -64,7 +65,7 @@ pub fn weg_request_update_previews(handles: Vec<isize>) -> Result<()> {
 pub fn weg_close_app(hwnd: isize) -> Result<()> {
     let window = Window::from(hwnd);
     if !window.is_visible() {
-        SeelenWeg::remove_hwnd(&window);
+        SeelenWeg::remove_hwnd(&window)?;
     } else {
         WindowsApi::post_message(window.hwnd(), WM_CLOSE, 0, 0)?;
     }
@@ -75,7 +76,7 @@ pub fn weg_close_app(hwnd: isize) -> Result<()> {
 pub fn weg_kill_app(hwnd: isize) -> Result<()> {
     let window = Window::from(hwnd);
     if !window.is_visible() {
-        SeelenWeg::remove_hwnd(&window);
+        SeelenWeg::remove_hwnd(&window)?;
     } else {
         get_app_handle()
             .shell()
@@ -90,7 +91,7 @@ pub fn weg_kill_app(hwnd: isize) -> Result<()> {
 pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
     let window = Window::from(hwnd);
     if !window.is_visible() {
-        SeelenWeg::remove_hwnd(&window);
+        SeelenWeg::remove_hwnd(&window)?;
         return Ok(());
     }
 

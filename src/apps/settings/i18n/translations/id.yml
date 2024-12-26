@@ -240,6 +240,10 @@ weg:
     gap: Ruang antar item
     label: Item
     size: Ukuran item
+    temporal_visibility:
+      all: Semua
+      label: Visibilitas Item yang Tidak Disematkan
+      on_monitor: Di Monitor
     visible_separators: Pemisah yang terlihat
     zoom_size: Ukuran zoom (digunakan untuk tema)
   label: Dock/Taskbar

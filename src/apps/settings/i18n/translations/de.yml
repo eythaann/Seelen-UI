@@ -242,6 +242,10 @@ weg:
     gap: Abstand zwischen Elementen
     label: Elemente
     size: Elementgröße
+    temporal_visibility:
+      all: Alle
+      label: Sichtbarkeit nicht angehefteter Elemente
+      on_monitor: Auf dem Monitor
     visible_separators: Sichtbare Trennzeichen
     zoom_size: Vergrößerte Größe (für Themen verwendet)
   label: Dock/Taskleiste

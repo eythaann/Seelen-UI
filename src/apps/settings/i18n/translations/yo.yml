@@ -235,6 +235,10 @@ weg:
     gap: Aaye laarin awọn ohun kan
     label: Awọn ohun
     size: Iwọn nkan
+    temporal_visibility:
+      all: Gbogbo
+      label: Hihan Awọn nkan ti a ko pin
+      on_monitor: Lori Atẹle
     visible_separators: Awọn iyatọ ti o han
     zoom_size: Iwọn sisun (ti a lo fun awọn akori)
   label: Dock / forkbar

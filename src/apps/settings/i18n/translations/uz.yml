@@ -242,6 +242,10 @@ weg:
     gap: Buyumlar orasidagi bo'shliq
     label: Narsalar
     size: Element hajmi
+    temporal_visibility:
+      all: Hammasi
+      label: Ochilmagan elementlarning ko'rinishi
+      on_monitor: Monitorda
     visible_separators: Ko'rinadigan ajratuvchi
     zoom_size: Zomed o'lchami (mavzular uchun ishlatiladi)
   label: Dok / vazifalar paneli

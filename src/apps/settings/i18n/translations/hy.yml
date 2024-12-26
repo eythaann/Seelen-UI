@@ -242,6 +242,10 @@ weg:
     gap: Տարածություն իրերի միջեւ
     label: Իրերը
     size: Ապրանքի չափը
+    temporal_visibility:
+      all: Բոլորը
+      label: Չամրացված տարրերի տեսանելիություն
+      on_monitor: Մոնիտորի վրա
     visible_separators: Տեսանելի տարանջատիչներ
     zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
   label: Dock / Taskbar

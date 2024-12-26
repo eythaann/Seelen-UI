@@ -244,6 +244,10 @@ weg:
     gap: Ruimte tussen items
     label: Items
     size: Item grootte
+    temporal_visibility:
+      all: Alle
+      label: Zichtbaarheid van losgemaakte items
+      on_monitor: Op monitor
     visible_separators: Zichtbare scheiders
     zoom_size: Ingezoomde grootte (gebruikt voor thema's)
   label: Dock/taakbalk

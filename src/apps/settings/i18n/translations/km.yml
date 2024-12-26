@@ -237,6 +237,10 @@ weg:
     gap: ចន្លោះរវាងធាតុ
     label: ធាតុ
     size: ទំហំធាតុ
+    temporal_visibility:
+      all: ទាំងអស់។
+      label: ភាពមើលឃើញធាតុដែលមិនបានខ្ទាស់
+      on_monitor: នៅលើម៉ូនីទ័រ
     visible_separators: សញ្ញាបំបែកដែលអាចមើលឃើញ
     zoom_size: ទំហំពង្រីក (ប្រើសម្រាប់ស្បែក)
   label: ចត/របារភារកិច្ច

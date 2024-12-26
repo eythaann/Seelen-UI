@@ -240,6 +240,10 @@ weg:
     gap: Raum tëscht Artikelen
     label: Artikelen
     size: Telefonsgrouss
+    temporal_visibility:
+      all: All
+      label: Unpinned Elementer Visibilitéit
+      on_monitor: Op Monitor
     visible_separators: Sechsi seichtbar Seperure
     zoom_size: Zoomed Gréisst (benotzt fir Themen)
   label: Dock / Taskbar

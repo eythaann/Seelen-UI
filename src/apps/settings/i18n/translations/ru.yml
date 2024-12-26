@@ -242,6 +242,10 @@ weg:
     gap: Расстояние между иконок
     label: Иконки
     size: Размер иконок
+    temporal_visibility:
+      all: Все
+      label: Видимость незакрепленных элементов
+      on_monitor: На мониторе
     visible_separators: Разделители
     zoom_size: Увеличенный размер (используется для тем)
   label: Панель задач

@@ -239,6 +239,10 @@ weg:
     gap: Không gian giữa các mặt hàng
     label: Mặt hàng
     size: Kích thước mục
+    temporal_visibility:
+      all: Tất cả
+      label: Hiển thị các mục đã được bỏ ghim
+      on_monitor: Trên màn hình
     visible_separators: Phân tách có thể nhìn thấy
     zoom_size: Kích thước phóng to (được sử dụng cho chủ đề)
   label: Dock/Thanh tác vụ

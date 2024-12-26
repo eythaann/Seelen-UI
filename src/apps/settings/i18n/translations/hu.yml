@@ -239,6 +239,10 @@ weg:
     gap: Hely az elemek között
     label: Tárgyak
     size: Elemméret
+    temporal_visibility:
+      all: Minden
+      label: Rögzített elemek láthatósága
+      on_monitor: Monitoron
     visible_separators: Látható elválasztók
     zoom_size: Nagyított méret (a témákhoz használt)
   label: Dokk/tálca

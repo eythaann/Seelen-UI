@@ -91,7 +91,7 @@ impl SeelenInstanceContainer {
             self.toolbar = None;
         }
 
-        if settings.is_weg_enabled_on_monitor(self.monitor()) {
+        if settings.is_weg_enabled_on_monitor(&self.monitor.device_id()?) {
             self.add_weg()?;
         } else {
             self.weg = None;

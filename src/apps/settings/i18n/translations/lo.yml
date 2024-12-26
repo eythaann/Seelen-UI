@@ -237,6 +237,10 @@ weg:
     gap: ຊ່ອງຫວ່າງລະຫວ່າງລາຍການ
     label: ລາຍການ
     size: ຂະໜາດລາຍການ
+    temporal_visibility:
+      all: ທັງໝົດ
+      label: ການເບິ່ງເຫັນລາຍການທີ່ບໍ່ໄດ້ປັກໝຸດ
+      on_monitor: ໃນ Monitor
     visible_separators: ຕົວແຍກທີ່ເບິ່ງເຫັນໄດ້
     zoom_size: ຂະຫຍາຍຂະໜາດ (ໃຊ້ສຳລັບຮູບແບບສີສັນ)
   label: Dock/Taskbar

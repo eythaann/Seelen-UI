@@ -242,6 +242,10 @@ weg:
     gap: Spazio tra gli Elementi
     label: Elementi
     size: Dimensione Elementi
+    temporal_visibility:
+      all: Tutto
+      label: Visibilità degli elementi non bloccati
+      on_monitor: Sul monitor
     visible_separators: Separatori Visibili
     zoom_size: Dimensione Zoom (usato per i temi)
   label: Dock/Barra delle Attività

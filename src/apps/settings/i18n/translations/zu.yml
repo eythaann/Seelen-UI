@@ -242,6 +242,10 @@ weg:
     gap: Isikhala phakathi kwezinto
     label: Into
     size: Usayizi wento
+    temporal_visibility:
+      all: Konke
+      label: Ukubonakala Kwezinto Ezingaphiniwe
+      on_monitor: Ku-Monitor
     visible_separators: Abahlukanisi ababonakalayo
     zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
   label: Dock / taskbar

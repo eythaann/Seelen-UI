@@ -242,6 +242,10 @@ weg:
     gap: Rum mellem genstande
     label: Genstande
     size: Varestørrelse
+    temporal_visibility:
+      all: Alle
+      label: Synlighed af frigjorte elementer
+      on_monitor: På monitor
     visible_separators: Synlige separatorer
     zoom_size: Zoomet størrelse (brugt til temaer)
   label: Dock/proceslinje

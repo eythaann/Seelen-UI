@@ -236,6 +236,10 @@ weg:
     gap: د توکو تر مینځ فضا
     label: توکي
     size: د توکي اندازه
+    temporal_visibility:
+      all: ټول
+      label: د ناپاک شوي توکو لید لید
+      on_monitor: په مانیټر کې
     visible_separators: لیدلي جلا کونکي
     zoom_size: زوم شوی اندازه (د موضوعاتو لپاره کارول کیږي)
   label: ډیک / ټاسک بار

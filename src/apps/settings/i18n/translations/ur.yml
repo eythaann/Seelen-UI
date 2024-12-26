@@ -239,6 +239,10 @@ weg:
     gap: اشیاء کے درمیان جگہ
     label: اشیاء
     size: آئٹم کا سائز
+    temporal_visibility:
+      all: تمام
+      label: ان پن کردہ آئٹمز کی مرئیت
+      on_monitor: مانیٹر پر
     visible_separators: مرئی جداکار
     zoom_size: زوم سائز (تھیمز کے لئے استعمال کیا جاتا ہے)
   label: ٹاسک بار

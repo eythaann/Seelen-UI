@@ -94,6 +94,7 @@ mod tests {
                 fancy: String::new(),
                 ahk: "!b".to_string(),
                 readonly: false,
+                devonly: false,
             },
         );
         vars.insert(
@@ -102,6 +103,7 @@ mod tests {
                 fancy: String::new(),
                 ahk: "!c".to_string(),
                 readonly: false,
+                devonly: false,
             },
         );
 
@@ -136,6 +138,7 @@ mod tests {
                 fancy: String::new(),
                 ahk: "!b".to_string(),
                 readonly: false,
+                devonly: false,
             },
         );
 

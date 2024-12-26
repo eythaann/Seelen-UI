@@ -242,6 +242,10 @@ weg:
     gap: Tilaa esineiden välillä
     label: Kohteet
     size: Esineen koko
+    temporal_visibility:
+      all: Kaikki
+      label: Irrotettujen kohteiden näkyvyys
+      on_monitor: Monitorissa
     visible_separators: Näkyvät erottimet
     zoom_size: Zoomoitu koko (käytetty teemoihin)
   label: Telakka/tehtäväpalkki

@@ -244,6 +244,10 @@ weg:
     gap: Puwang sa pagitan ng mga item
     label: Mga item
     size: Laki ng item
+    temporal_visibility:
+      all: Lahat
+      label: Visibility ng Mga Na-unpin na Item
+      on_monitor: Sa Monitor
     visible_separators: Visible Separator
     zoom_size: Zoom na laki (ginamit para sa mga tema)
   label: Dock/Taskbar

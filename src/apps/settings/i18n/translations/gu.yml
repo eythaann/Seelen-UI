@@ -239,6 +239,10 @@ weg:
     gap: વસ્તુઓ વચ્ચે જગ્યા
     label: વસ્તુઓ
     size: વસ્તુનું કદ
+    temporal_visibility:
+      all: બધા
+      label: અનપિન કરેલ આઇટમ્સની દૃશ્યતા
+      on_monitor: મોનિટર પર
     visible_separators: દૃશ્યમાન વિભાજક
     zoom_size: ઝૂમ કરેલ કદ (થીમ્સ માટે વપરાયેલ)
   label: ડોક/ટાસ્કબાર

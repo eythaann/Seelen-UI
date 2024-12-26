@@ -242,6 +242,10 @@ weg:
     gap: Lle rhwng eitemau
     label: Eitemau
     size: Maint eitem
+    temporal_visibility:
+      all: Pawb
+      label: Eitemau heb eu Pinio Gwelededd
+      on_monitor: Ar Fonitor
     visible_separators: Gwahanyddion gweladwy
     zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
   label: Doc/bar tasgau
