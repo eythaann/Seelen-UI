@@ -134,15 +134,10 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         data.relaunch_command = program.to_string_lossy().to_string();
     }
 
-    FULL_STATE.rcu(move |state| {
-        let mut state = state.cloned();
-        state
-            .weg_items
-            .center
-            .insert(0, WegItem::Pinned(data.clone()));
-        state.weg_items.sanitize();
-        state
-    });
-    FULL_STATE.load().write_weg_items()?;
+    let guard = FULL_STATE.load();
+    let mut items = guard.weg_items.clone();
+    items.center.insert(0, WegItem::Pinned(data));
+    items.sanitize();
+    guard.write_weg_items(&items)?;
     Ok(())
 }

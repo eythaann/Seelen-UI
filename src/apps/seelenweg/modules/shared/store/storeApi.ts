@@ -1,5 +1,4 @@
 import { WegItems, WegItemType } from '@seelen-ui/lib';
-import { WegItem } from '@seelen-ui/lib/types';
 import { debounce } from 'lodash';
 
 import { store } from './infra';
@@ -12,21 +11,14 @@ export const IsSavingPinnedItems = {
 
 export const savePinnedItems = debounce(
   async (state: RootState = store.getState()): Promise<void> => {
-    const cb = (acc: WegItem[], item: SwItem) => {
-      switch (item.type) {
-        case WegItemType.Temporal:
-          break;
-        default:
-          acc.push(item);
-          break;
-      }
-      return acc;
+    const cb = (item: SwItem) => {
+      return item.type !== WegItemType.Temporal;
     };
 
     const data = new WegItems({
-      left: state.itemsOnLeft.reduce(cb, []),
-      center: state.itemsOnCenter.reduce(cb, []),
-      right: state.itemsOnRight.reduce(cb, []),
+      left: state.itemsOnLeft.filter(cb),
+      center: state.itemsOnCenter.filter(cb),
+      right: state.itemsOnRight.filter(cb),
     });
 
     await data.save();

@@ -116,9 +116,12 @@ impl FullState {
             .iter()
             .any(|p| p == SEELEN_COMMON.weg_items_path())
         {
+            let old = self.weg_items.clone();
             self.read_weg_items()?;
-            log::info!("Weg Items changed");
-            self.emit_weg_items()?;
+            if old != self.weg_items {
+                log::info!("Weg Items changed");
+                self.emit_weg_items()?;
+            }
         }
 
         if event

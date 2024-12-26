@@ -28,7 +28,11 @@ export function getUserApplicationContextMenu(
       key: 'weg_unpin_app',
       icon: <Icon iconName="RiUnpinLine" />,
       onClick: () => {
-        store.dispatch(RootActions.unPinApp(item.id));
+        if (item.windows.length) {
+          store.dispatch(RootActions.unPinApp(item.id));
+        } else {
+          store.dispatch(RootActions.remove(item.id));
+        }
       },
     });
   } else {

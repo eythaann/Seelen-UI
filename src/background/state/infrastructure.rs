@@ -47,12 +47,12 @@ pub fn state_get_weg_items() -> WegItems {
 #[tauri::command(async)]
 pub fn state_write_weg_items(mut items: WegItems) -> Result<()> {
     items.sanitize();
-    FULL_STATE.rcu(move |state| {
-        let mut state = state.cloned();
-        state.weg_items = items.clone();
-        state
-    });
-    FULL_STATE.load().write_weg_items()
+    let guard = FULL_STATE.load();
+    if items == guard.weg_items {
+        return Ok(());
+    }
+    guard.write_weg_items(&items)?;
+    Ok(())
 }
 
 #[tauri::command(async)]
