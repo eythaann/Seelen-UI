@@ -2,9 +2,9 @@ app_launcher:
   enable: Включить запуск приложения
   monitor: Монитор, чтобы показать
   runners:
-    cmd: Командование
-    explorer: Бегать
-    label: Бегуны
+    cmd: Коммандная строка
+    explorer: Запускать
+    label: Пускатели
 apps_configurations:
   app:
     bindings: Привязка (оба параметра обязательны)
@@ -56,7 +56,7 @@ apps_configurations:
   import: Импорт
   new: Новый
   search: Поиск
-  swap: Сменить
+  swap: Заменить
 cancel: Отмена
 close: Закрывать
 delete: Удалить
@@ -112,16 +112,16 @@ header:
     virtual_desk: Виртуальные рабочие столы
 inherit: Наследовать
 inProgress: В процессе...
-insert: Вставлять
+insert: Вставить
 loading: Загрузка...
-miscellaneous: Разнообразный
+miscellaneous: Разнообразное
 mods:
   plugins: Плагины
   target: Цель
   widgets: Виджеты
 monitors_configurations:
   label: Монитор {{index}}
-more: Более
+more: Больше
 open: Открыть
 quit: Закрыть
 remove: Удалять
@@ -140,11 +140,11 @@ shortcuts:
     focus_left: Фокус лева
     focus_right: Фокус права
     focus_top: Фокус верха
-    increase_height: Увеличить высоты
+    increase_height: Увеличить высоту
     increase_width: Увеличить ширину
-    misc_open_settings: Откройте настройки
-    misc_toggle_lock_tracing: Перевернуть отслеживание блокировки (журналы)
-    misc_toggle_win_event_tracing: Toggle Win Tracing Event (журналы)
+    misc_open_settings: Открыть настройки
+    misc_toggle_lock_tracing: Переключить отслеживание блокировки (журналы)
+    misc_toggle_win_event_tracing: Переключить событие отслеживания Win (журналы)
     move_to_workspace_0: Перейти в рабочую область 0
     move_to_workspace_1: Перейти в рабочую область 1
     move_to_workspace_2: Перейти в рабочую область 2
@@ -200,7 +200,7 @@ start:
   title: Добро пожаловать!
 toolbar:
   auto_hide: Автоскрытие
-  delay_to_hide: Задержка, чтобы скрыть
+  delay_to_hide: Задержка скрытия
   delay_to_show: Задержка показа
   enable: Включить
   height: Высота
@@ -212,7 +212,7 @@ toolbar:
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 update:
   available: Обновление доступно!
-  channel: Обновить канал
+  channel: Канал обновлений
   downloading: Загрузка ...
 vd:
   disabled_windows_version: >-
@@ -226,14 +226,14 @@ wall:
   backgrounds: Обои
   enable: Включить менеджер обоев
   hours: часы
-  interval: Измените обои каждый
+  interval: Изменять обои каждые
   minutes: минуты
-  no_background: Пустое слайд -шоу, используя фон темы.
-  random: Рандомизируйте слайд -шоу
+  no_background: Пустое слайд-шоу, используется фон темы.
+  random: Рандомизировать слайд-шоу
   seconds: секунды
 weg:
   auto_hide: Автоскрытие
-  delay_to_hide: Задержка, чтобы скрыть
+  delay_to_hide: Задержка скрытия
   delay_to_show: Задержка показа
   dock_side: Расположение
   enable: Включить
@@ -256,7 +256,7 @@ wm:
     offset: Смещение границы
     width: Ширина границы
   description: Описание
-  enable: Включить менеджер по плитке окна
+  enable: Включить менеджер по тайлингу окнон
   layout: Макет
   resize_delta: Изменить размер дельты (%)
   space_between_containers: Пространство между контейнерами
