@@ -2,7 +2,7 @@ mod app_bar;
 mod com;
 mod iterator;
 pub mod monitor;
-mod process;
+pub mod process;
 mod string_utils;
 pub mod window;
 
@@ -25,6 +25,7 @@ use std::{
 
 use windows::{
     core::{BSTR, GUID, PCWSTR, PWSTR},
+    ApplicationModel::AppInfo,
     Storage::Streams::{
         DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
     },
@@ -62,6 +63,7 @@ use windows::{
         Storage::{
             EnhancedStorage::{
                 PKEY_AppUserModel_ID, PKEY_AppUserModel_RelaunchCommand,
+                PKEY_AppUserModel_RelaunchDisplayNameResource,
                 PKEY_AppUserModel_RelaunchIconResource, PKEY_FileDescription,
             },
             FileSystem::WIN32_FIND_DATAW,
@@ -504,8 +506,8 @@ impl WindowsApi {
         Ok(String::from_utf16(&text[..length])?)
     }
 
-    pub fn get_shell_item(path: &str) -> Result<IShellItem2> {
-        let wide_path: Vec<u16> = path.encode_utf16().chain(Some(0)).collect();
+    pub fn get_shell_item(path: &Path) -> Result<IShellItem2> {
+        let wide_path: Vec<u16> = path.as_os_str().encode_wide().chain(Some(0)).collect();
         let item = unsafe { SHCreateItemFromParsingName(PCWSTR(wide_path.as_ptr()), None)? };
         Ok(item)
     }
@@ -534,6 +536,16 @@ impl WindowsApi {
         Ok(BSTR::try_from(&value)?.to_string())
     }
 
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchdisplaynameresource
+    pub fn get_window_relaunch_display_name(hwnd: HWND) -> Result<String> {
+        let store = Self::get_property_store_for_window(hwnd)?;
+        let value = unsafe { store.GetValue(&PKEY_AppUserModel_RelaunchDisplayNameResource)? };
+        if value.is_empty() {
+            return Err("No AppUserModel_RelaunchDisplayName".into());
+        }
+        Ok(BSTR::try_from(&value)?.to_string())
+    }
+
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
     pub fn get_window_relaunch_icon_resource(hwnd: HWND) -> Result<String> {
         let store = Self::get_property_store_for_window(hwnd)?;
@@ -542,6 +554,15 @@ impl WindowsApi {
             return Err("No AppUserModel_RelaunchIconResource".into());
         }
         Ok(BSTR::try_from(&value)?.to_string())
+    }
+
+    pub fn is_uwp_package_id(package_id: &str) -> bool {
+        Self::get_uwp_app_info(package_id).is_ok()
+    }
+
+    pub fn get_uwp_app_info(umid: &str) -> Result<AppInfo> {
+        let app_info = AppInfo::GetFromAppUserModelId(&umid.into())?;
+        Ok(app_info)
     }
 
     pub fn create_temp_shortcut(program: &str, args: &str) -> Result<PathBuf> {
@@ -598,9 +619,9 @@ impl WindowsApi {
         Ok(out.to_string())
     }
 
-    pub fn get_executable_display_name(hwnd: HWND) -> Result<String> {
-        let shell_item = Self::get_shell_item(&Self::exe_path(hwnd)?)?;
-        unsafe {
+    pub fn get_executable_display_name(path: &Path) -> Result<String> {
+        Com::run_with_context(|| unsafe {
+            let shell_item = Self::get_shell_item(path)?;
             match shell_item.GetString(&PKEY_FileDescription) {
                 Ok(description) => Ok(description.to_string()?),
                 Err(_) => Ok(shell_item
@@ -608,12 +629,12 @@ impl WindowsApi {
                     .to_string()?
                     .replace(".exe", "")),
             }
-        }
+        })
     }
 
     pub fn get_file_umid(path: &Path) -> Result<String> {
         Com::run_with_context(|| unsafe {
-            let shell_item = Self::get_shell_item(&path.to_string_lossy())?;
+            let shell_item = Self::get_shell_item(path)?;
             let store: IPropertyStore = shell_item.GetPropertyStore(GPS_DEFAULT)?;
             let value = store.GetValue(&PKEY_AppUserModel_ID)?;
             if value.is_empty() {

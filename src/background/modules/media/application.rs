@@ -25,9 +25,8 @@ use windows::{
             IMMNotificationClient, IMMNotificationClient_Impl, ISimpleAudioVolume,
             MMDeviceEnumerator, DEVICE_STATE_ACTIVE,
         },
-        Storage::EnhancedStorage::PKEY_FileDescription,
         System::Com::{CLSCTX_ALL, STGM_READ},
-        UI::Shell::{PropertiesSystem::PROPERTYKEY, SIGDN_NORMALDISPLAY},
+        UI::Shell::PropertiesSystem::PROPERTYKEY,
     },
 };
 use windows_core::Interface;
@@ -38,7 +37,7 @@ use crate::{
     seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
     utils::pcwstr,
-    windows_api::{Com, WindowEnumerator, WindowsApi},
+    windows_api::{process::Process, Com, WindowEnumerator, WindowsApi},
 };
 
 use super::domain::{
@@ -475,16 +474,10 @@ impl MediaManager {
 
             let name;
             let icon_path;
-            match WindowsApi::exe_path_by_process(session.GetProcessId()?) {
+            let process = Process::from_id(session.GetProcessId()?);
+            match process.program_path() {
                 Ok(path) => {
-                    let shell_item = WindowsApi::get_shell_item(&path)?;
-                    name = match shell_item.GetString(&PKEY_FileDescription) {
-                        Ok(description) => description.to_string()?,
-                        Err(_) => shell_item
-                            .GetDisplayName(SIGDN_NORMALDISPLAY)?
-                            .to_string()?,
-                    }
-                    .replace(".exe", "");
+                    name = WindowsApi::get_executable_display_name(&path)?;
                     icon_path = extract_and_save_icon_from_file(&path)
                         .ok()
                         .map(|p| p.to_string_lossy().to_string());

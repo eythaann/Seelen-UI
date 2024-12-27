@@ -93,6 +93,17 @@ impl Window {
         WindowsApi::get_window_relaunch_command(self.0).ok()
     }
 
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchdisplaynameresource
+    pub fn relaunch_display_name(&self) -> Option<String> {
+        if let Ok(name) = WindowsApi::get_window_relaunch_display_name(self.0) {
+            if name.starts_with("@") {
+                return WindowsApi::resolve_indirect_string(&name).ok();
+            }
+            return Some(name);
+        }
+        None
+    }
+
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
     pub fn relaunch_icon(&self) -> Option<String> {
         WindowsApi::get_window_relaunch_icon_resource(self.0).ok()
@@ -119,7 +130,7 @@ impl Window {
         if let Ok(info) = self.process().package_app_info() {
             return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
         }
-        WindowsApi::get_executable_display_name(self.0)
+        self.process().program_display_name()
     }
 
     pub fn outer_rect(&self) -> Result<Rect> {

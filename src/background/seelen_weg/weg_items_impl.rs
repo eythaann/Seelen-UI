@@ -4,14 +4,14 @@ use seelen_core::{
     handlers::SeelenEvent,
     state::{PinnedWegItemData, WegAppGroupItem, WegItem, WegItems, WegTemporalItemsVisibility},
 };
-use std::{collections::HashMap, sync::Arc};
+use std::{collections::HashMap, ffi::OsStr, sync::Arc};
 use tauri::Emitter;
 
 use crate::{
     error_handler::Result,
     seelen::get_app_handle,
     state::application::FULL_STATE,
-    windows_api::{window::Window, MonitorEnumerator},
+    windows_api::{window::Window, MonitorEnumerator, WindowsApi},
 };
 
 use super::{
@@ -22,6 +22,13 @@ use super::{
 lazy_static! {
     pub static ref WEG_ITEMS_IMPL: Arc<Mutex<WegItemsImpl>> =
         Arc::new(Mutex::new(WegItemsImpl::new()));
+}
+
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum ShouldGetInfoFrom {
+    Package(String),
+    WindowPropertyStore(String),
+    Process,
 }
 
 #[derive(Debug, Clone)]
@@ -108,25 +115,66 @@ impl WegItemsImpl {
             Err(_) => window.exe()?,
         };
 
-        let package_id = window.process().package_app_user_model_id().ok();
-        let assigned_umid = window.app_user_model_id();
+        let umid = window
+            .process()
+            .package_app_user_model_id()
+            .ok()
+            .or_else(|| window.app_user_model_id());
 
-        let relaunch_command = if let Some(umid) = package_id.as_ref() {
-            let _ = extract_and_save_icon_umid(umid);
-            format!("\"explorer.exe\" shell:AppsFolder\\{umid}")
-        } else if let Some(umid) = assigned_umid.as_ref() {
-            let shortcut = Window::search_shortcut_with_same_umid(umid);
-            if let Some(shortcut) = shortcut {
-                path = shortcut.clone();
-                let _ = extract_and_save_icon_from_file(&path);
+        let get_info_from = match &umid {
+            Some(umid) => {
+                if WindowsApi::is_uwp_package_id(umid) {
+                    ShouldGetInfoFrom::Package(umid.clone())
+                } else {
+                    ShouldGetInfoFrom::WindowPropertyStore(umid.clone())
+                }
             }
-            let _ = extract_and_save_icon_from_file(&path);
-            window
-                .relaunch_command()
-                .unwrap_or(format!("\"explorer.exe\" shell:AppsFolder\\{umid}"))
-        } else {
-            let _ = extract_and_save_icon_from_file(&path);
-            path.to_string_lossy().to_string()
+            None => ShouldGetInfoFrom::Process,
+        };
+
+        let mut display_name = window
+            .app_display_name()
+            .unwrap_or_else(|_| String::from("Unknown"));
+
+        let relaunch_command;
+        match get_info_from {
+            ShouldGetInfoFrom::Package(umid) => {
+                let _ = extract_and_save_icon_umid(&umid);
+                display_name = WindowsApi::get_uwp_app_info(&umid)?
+                    .DisplayInfo()?
+                    .DisplayName()?
+                    .to_string_lossy();
+                relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
+            }
+            ShouldGetInfoFrom::WindowPropertyStore(umid) => {
+                let shortcut = Window::search_shortcut_with_same_umid(&umid);
+                if let Some(shortcut) = shortcut {
+                    path = shortcut.clone();
+                    display_name = path
+                        .file_stem()
+                        .unwrap_or_else(|| OsStr::new("Unknown"))
+                        .to_string_lossy()
+                        .to_string();
+                }
+
+                let _ = extract_and_save_icon_from_file(&path);
+
+                // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
+                // must always be set together. If one of those properties is not set, then neither is used.
+                // https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
+                if let (Some(win_relaunch_command), Some(relaunch_display_name)) =
+                    (window.relaunch_command(), window.relaunch_display_name())
+                {
+                    relaunch_command = win_relaunch_command;
+                    display_name = relaunch_display_name;
+                } else {
+                    relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
+                }
+            }
+            ShouldGetInfoFrom::Process => {
+                let _ = extract_and_save_icon_from_file(&path);
+                relaunch_command = path.to_string_lossy().to_string();
+            }
         };
 
         // groups order documented on https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
@@ -135,15 +183,7 @@ impl WegItemsImpl {
         for item in self.iter_all_mut() {
             match item {
                 WegItem::Pinned(data) | WegItem::Temporal(data) => {
-                    if package_id.as_ref().is_some_and(|umid| umid == &data.id) {
-                        data.windows.push(WegAppGroupItem {
-                            title: window.title(),
-                            handle: window.address(),
-                        });
-                        return Ok(());
-                    }
-
-                    if assigned_umid.as_ref().is_some_and(|umid| umid == &data.id) {
+                    if data.umid.is_some() && umid == data.umid {
                         data.windows.push(WegAppGroupItem {
                             title: window.title(),
                             handle: window.address(),
@@ -165,12 +205,10 @@ impl WegItemsImpl {
 
         let data = PinnedWegItemData {
             id: uuid::Uuid::new_v4().to_string(),
-            umid: package_id.or(assigned_umid),
+            umid,
             path,
             relaunch_command,
-            display_name: window
-                .app_display_name()
-                .unwrap_or_else(|_| "Unkown".to_string()),
+            display_name,
             is_dir: false,
             windows: vec![WegAppGroupItem {
                 title: window.title(),
