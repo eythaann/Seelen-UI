@@ -59,6 +59,12 @@ impl Icons {
 }
 
 pub struct SeelenCommon {
+    // general
+    resource_dir: PathBuf,
+    data_dir: PathBuf,
+    cache_dir: PathBuf,
+    temp_dir: PathBuf,
+    // specifits
     history: PathBuf,
     settings: PathBuf,
     weg_items: PathBuf,
@@ -82,15 +88,14 @@ pub struct SeelenCommon {
 
 impl SeelenCommon {
     pub fn new() -> Self {
-        let handle = get_app_handle();
-        let data_dir = handle
-            .path()
-            .app_data_dir()
-            .expect("Failed to get app data dir");
-        let resource_dir = handle
-            .path()
-            .resource_dir()
-            .expect("Failed to get resource dir");
+        let resolver = get_app_handle().path();
+        let data_dir = resolver.app_data_dir().expect("Failed to get app data dir");
+        let resource_dir = resolver.resource_dir().expect("Failed to get resource dir");
+        let cache_dir = resolver.app_cache_dir().expect("Failed to get cache dir");
+        let temp_dir = resolver
+            .temp_dir()
+            .expect("Failed to get temp dir")
+            .join("com.seelen.seelen-ui");
 
         Self {
             history: data_dir.join("history"),
@@ -112,7 +117,28 @@ impl SeelenCommon {
             wallpapers: data_dir.join("wallpapers"),
             profiles: data_dir.join("profiles"),
             bundled_profiles: resource_dir.join("static/profiles"),
+            // general
+            data_dir,
+            resource_dir,
+            cache_dir,
+            temp_dir,
         }
+    }
+
+    pub fn app_resource_dir(&self) -> &Path {
+        &self.resource_dir
+    }
+
+    pub fn app_data_dir(&self) -> &Path {
+        &self.data_dir
+    }
+
+    pub fn app_cache_dir(&self) -> &Path {
+        &self.cache_dir
+    }
+
+    pub fn app_temp_dir(&self) -> &Path {
+        &self.temp_dir
     }
 
     pub fn settings_path(&self) -> &Path {

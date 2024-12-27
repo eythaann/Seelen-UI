@@ -37,6 +37,9 @@ impl RestorationAndMigration {
             std::fs::remove_dir_all(&old_path)?;
         }
 
+        // temporal folder to group artifacts
+        std::fs::create_dir_all(SEELEN_COMMON.app_temp_dir())?;
+
         let create_if_needed = move |folder: &str| -> Result<()> {
             let path = data_path.join(folder);
             if !path.exists() {
@@ -44,7 +47,6 @@ impl RestorationAndMigration {
             }
             Ok(())
         };
-
         create_if_needed("themes")?;
         create_if_needed("layouts")?;
         create_if_needed("placeholders")?;

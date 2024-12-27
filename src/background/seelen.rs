@@ -29,7 +29,7 @@ use crate::{
     state::application::{FullState, FULL_STATE},
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, is_running_as_appx_package, PERFORMANCE_HELPER},
+    utils::{ahk::AutoHotKey, is_running_as_appx_package},
     windows_api::WindowsApi,
     APP_HANDLE,
 };
@@ -175,14 +175,6 @@ impl Seelen {
     }
 
     async fn start_async() -> Result<()> {
-        if FULL_STATE.load().is_weg_enabled() {
-            SeelenWeg::enumerate_all_windows()?;
-        }
-
-        if FULL_STATE.load().is_window_manager_enabled() {
-            WindowManagerV2::enumerate_all_windows()?;
-        }
-
         Self::start_ahk_shortcuts()?;
         Self::refresh_path_environment()?;
         Self::refresh_auto_start_path().await?;
@@ -214,12 +206,19 @@ impl Seelen {
         MonitorManager::subscribe(Self::on_monitor_event);
 
         tauri::async_runtime::spawn(async {
-            trace_lock!(PERFORMANCE_HELPER).start("lazy setup");
             log_error!(Self::start_async().await);
-            trace_lock!(PERFORMANCE_HELPER).end("lazy setup");
         });
 
         self.refresh_windows_positions()?;
+
+        if FULL_STATE.load().is_weg_enabled() {
+            SeelenWeg::enumerate_all_windows()?;
+        }
+
+        if FULL_STATE.load().is_window_manager_enabled() {
+            WindowManagerV2::enumerate_all_windows()?;
+        }
+
         register_win_hook()?;
         Ok(())
     }
