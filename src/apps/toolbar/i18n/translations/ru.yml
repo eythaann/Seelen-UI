@@ -13,9 +13,9 @@ media:
   players: Медиаплееры
 network:
   available: Доступные сети
-  connect: Подключить
+  connect: Подключиться
   connected: Подключено к
-  disconnect: Отключить
+  disconnect: Отключиться
   hidden: Скрытая сеть
   more: Больше настроек сети
   not_found: Не найдено ни одной сети
