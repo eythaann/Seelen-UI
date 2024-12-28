@@ -21,7 +21,7 @@ apps_configurations:
       force: 강제 관리
       hidden: 독/작업 표시줄에 숨기기
       pinned: 고정
-      unmanage: 관리 안함
+      unmanage: 관리 상태
     options_label: 추가 옵션
     title_create: '{{name}} 만들기'
     title_edit: 편집 {{name}}
@@ -51,7 +51,7 @@ apps_configurations:
     or: 또는
     remove: 블록 삭제
   import: 가져오기
-  new: 새로 만들기
+  new: 신규
   search: 검색
   swap: 교체
 cancel: 취소
@@ -88,9 +88,9 @@ general:
   theme:
     available: 사용 가능한 테마
     label: 테마
-    selected: 활성 테마
+    selected: 현재 테마
   wallpaper:
-    select: 배경화면을 선택하세요
+    select: 배경화면 선택
 header:
   labels:
     developer: 개발자
@@ -202,7 +202,7 @@ toolbar:
     author: 작성자
     description: 설명
     select: 툴바 형식
-  use_multiple_monitor_overlap_logic: 단일 초점 논리 대신 디스플레이별 사용
+  use_multiple_monitor_overlap_logic: 단일 초점 대신 디스플레이별 로직 사용
 update:
   available: 사용 가능한 업데이트가 존재합니다
   channel: 업데이트 채널
@@ -215,12 +215,12 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: 배경화면
-  enable: 벽지 관리자를 활성화하십시오
+  enable: 배경화면 관리자 활성화
   hours: 시간
-  interval: 매번 벽지를 변경하십시오
+  interval: 배경화면 변경 주기
   minutes: 분
-  no_background: 배경화면이 없습니다. 테마에 내장된 배경화면을 대신 사용합니다.
-  random: 슬라이드 쇼를 무작위 화하십시오
+  no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
+  random: 슬라이드 쇼 무작위
   seconds: 초
 weg:
   auto_hide: 자동 숨기기
