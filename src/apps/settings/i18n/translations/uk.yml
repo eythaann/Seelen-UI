@@ -1,10 +1,10 @@
 app_launcher:
-  enable: Увімкнути запуску додатків
-  monitor: Монітор, щоб показати
+  enable: Увімкнути швидкий запуск
+  monitor: Монітор, на якому показати вікно
   runners:
-    cmd: Командування
-    explorer: Пробігати
-    label: Бігуни
+    cmd: Команда
+    explorer: Запуск
+    label: Налаштування запуску
 apps_configurations:
   app:
     bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
@@ -19,31 +19,31 @@ apps_configurations:
     options:
       float: Плавати
       force: Управління силою
-      hidden: Сховати з доки/панелі завдань
+      hidden: Сховати з панелі завдань
       pinned: Закріплений
-      unmanage: Неемінь
-    options_label: Додаткові варіанти
+      unmanage: Не вказано
+    options_label: Додаткові налаштування
     title_create: Створення {{Ім'я}}
     title_edit: Редагування {{Ім'я}}
     title_readonly: Перегляд {{Ім'я}}
-    weg_options_label: Параметри Dock/Taskbar
+    weg_options_label: Параметри Taskbar
     wm_options_label: Параметри менеджера вікон
     workspace: Робоча область
     workspace_placeholder: Ні
   bundled_msg: >-
-    Ці конфігурації в комплекті не підлягають редагуванню та розроблені для
-    того, щоб забезпечити вам найкращий досвід без налаштування. Вони
-    автоматично налаштовують для вас найпоширеніші програми.
+    Ці готові конфігурації не підлягають редагуванню і створені для того, щоб
+    забезпечити вам найкращий досвід роботи без кастомізації. Вони автоматично
+    налаштовують найпоширеніші програми для вас.
   bundled_title: Конфігурація додатка в комплекті з Seelen
   confirm_delete: Ви впевнені, що хочете видалити цю конфігурацію?
   confirm_delete_title: Підтвердьте видалення
   delete: Видаляти
   export: Експорт
   extra_info: >-
-    SEELEN інтерфейс використовує лише один ідентифікатор на додаток (знайдено
-    першу відповідність), тому порядок у тому, як це специфічно, є важливим,
-    останній доданий буде пріоритетним, оскільки примітка таблиця відсортована
-    за замовчуванням від останнього до старого.
+    Seelen UI використовує лише один ідентифікатор для кожного додатка (перший
+    знайдений збіг), тому важливим є порядок, у якому вони вказуються, останні
+    додані додатки матимуть пріоритет, зауважте, що таблиця за замовчуванням
+    відсортована від найновішого до найстарішого.
   identifier:
     add_block: Додати блок
     and: І
@@ -54,40 +54,40 @@ apps_configurations:
     or: Або
     remove: Видалити блок
   import: Імпорт
-  new: Новачок
-  search: Обшук
+  new: Новий
+  search: Пошук
   swap: Обміняти
 cancel: Скасувати
-close: Закривати
-delete: Видаляти
+close: Закрити
+delete: Видалити
 devtools:
   app_folders: Папки додатків
-  custom_config_file: Завантажте власний конфігураційний файл
+  custom_config_file: Завантажити власний конфігураційний файл
   data_folder: Папка даних
   enable: Увімкнути інструменти розробника
   install_folder: Папка встановлення
-  load: Навантаження
+  load: Завантаження
   settings_file: Файл налаштувань
 extras:
-  discord: Розбрат
-  exit: Кинути/вийти
-  github: Гітб
+  discord: Дискорд
+  exit: Закрити програму
+  github: ГітХаб
   links: Офіційні посилання
-  relaunch: Відновлювати
+  relaunch: Перезапуск
   version: Версія
 general:
   accent_color: Акцентний колір
   date_format: Формат дати
   icon_pack:
-    available: Доступні пакети значків
-    label: Пакети значків
-    selected: Активні пакети значків
+    available: Доступні пакети іконок
+    label: Пакети іконок
+    selected: Активні пакети іконок
   language: Мова
   resource:
     author: Автор
-    description: опис
+    description: Опис
     tags: Теги
-  startup: Бігати на стартап?
+  startup: Запускати під час запуску Windows?
   theme:
     available: Доступні теми
     label: Теми
@@ -96,69 +96,69 @@ general:
     select: Виберіть шпалери
 header:
   labels:
-    developer: Розробник
-    general: Загальний
-    home: Домашній
+    developer: Інструменти розробника
+    general: Загальні налаштування
+    home: Домашня сторінка
     info: Інформація
     mods: Плагіни та віджети
     monitors: Монітори
-    seelen_bar: Панель інструментів вишуканих
-    seelen_rofi: Запуск програми
+    seelen_bar: Панель інструментів
+    seelen_rofi: Швидкий запуск
     seelen_wall: Менеджер шпалер
-    seelen_weg: Док/панель завдань
+    seelen_weg: Панель завдань
     seelen_wm: Менеджер вікон
     shortcuts: Ярлики
     specific_apps: Конкретні програми
-    virtual_desk: Віртуальні настільні ПК
+    virtual_desk: Віртуальні робочі столи
 inherit: Успадкувати
 inProgress: В процесі...
-insert: Вставляти
-loading: Завантаження ...
-miscellaneous: Різний
+insert: Вставити
+loading: Завантаження...
+miscellaneous: Різнe
 mods:
   plugins: Плагіни
-  target: Цільовий
+  target: Джерело
   widgets: Віджети
 monitors_configurations:
   label: Монітор {{index}}
 more: Більше
-open: ВІДЧИНЕНО
-quit: Кинути
+open: Відкрити
+quit: Вийти
 remove: Видалити
-save: Заощадити
+save: Зберегти
 save_and_restart: Зберегти та перезапустити
 shortcuts:
-  enable: Увімкнути інтегровані ярлики (AHK)
+  enable: Увімкнути інтегровані ярлики (ahk)
   enable_tooltip: Вимкніть, якщо ви реалізуєте власні ярлики за допомогою API Seelen Core
   labels:
-    decrease_height: Зниження висоти
-    decrease_width: Зменшення ширини
-    focus_bottom: Фокус дно
-    focus_latest: Фокус найновіший
+    decrease_height: Зменшити висоту
+    decrease_width: Зменшити ширину
+    focus_bottom: Фокус знизу
+    focus_latest: Фокус на новішому
     focus_left: Фокус ліворуч
-    focus_right: Фокус правильно
-    focus_top: Фокус
+    focus_right: Фокус праворуч
+    focus_top: Фокус згори
     increase_height: Збільшити висоту
     increase_width: Збільшити ширину
-    misc_open_settings: Відкриті налаштування
-    misc_toggle_lock_tracing: Перемикання відстеження блокування (журнали)
-    misc_toggle_win_event_tracing: Toggle Win Tracing події (журнали)
+    misc_open_settings: Відкрити налаштування
+    misc_toggle_lock_tracing: Перемкнути відстеження блокування (журнали)
+    misc_toggle_win_event_tracing: Перемкнути відстеження подій Windows (журнали)
     move_to_workspace_0: Перехід до робочої області 0
-    move_to_workspace_1: Переходити до робочої області 1
+    move_to_workspace_1: Перехід до робочої області 1
     move_to_workspace_2: Перехід до робочої області 2
-    move_to_workspace_3: Переходити до робочої області 3
-    move_to_workspace_4: Переходити до робочої області 4
+    move_to_workspace_3: Перехід до робочої області 3
+    move_to_workspace_4: Перехід до робочої області 4
     move_to_workspace_5: Перехід до робочої області 5
-    move_to_workspace_6: Переходити до робочої області 6
+    move_to_workspace_6: Перехід до робочої області 6
     move_to_workspace_7: Перехід до робочої області 7
     move_to_workspace_8: Перехід до робочої області 8
-    move_to_workspace_9: Переходити до робочої області 9
-    reserve_bottom: ЗАБЕЗПЕЧЕННЯ
-    reserve_float: Резервне плавання
-    reserve_left: Резерв зліва
-    reserve_right: Резервуйте праворуч
-    reserve_stack: Резерв
-    reserve_top: Резервувати топ
+    move_to_workspace_9: Перехід до робочої області 9
+    reserve_bottom: Резерв знизу
+    reserve_float: Резерв плавання
+    reserve_left: Резерв ліворуч
+    reserve_right: Резерв праворуч
+    reserve_stack: Резерв стеку
+    reserve_top: Резерв згори
     restore_sizes: Відновити розміри
     send_to_workspace_0: Надіслати на робочу область 0
     send_to_workspace_1: Надіслати на робочу область 1
@@ -180,27 +180,27 @@ shortcuts:
     switch_workspace_7: Перехід на робочу область 7
     switch_workspace_8: Перехід на робочу область 8
     switch_workspace_9: Перехід на робочу область 9
-    toggle_launcher: Перемикатися
+    toggle_launcher: Перемкнути
   readonly_tooltip: Це ярлик лише для читання
   reset: Скидання за замовчуванням
 sides:
-  bottom: Дно
-  left: Лівий
+  bottom: Низ
+  left: Ліво
   right: Право
-  top: Топ
+  top: Верх
 start:
   message: >-
-    Ласкаво просимо в інтерфейс SEELEN, Ultimate Desktop Envirtional із
-    включеним менеджером з плитки Windows для покращення вашого досвіду Windows
-    ! Вивчіть нову еру ефективності та багатозадачності за допомогою нашого
-    інтуїтивного інтерфейсу та розширених функцій.
-  message_accent: Оптимізуйте свою продуктивність стилем!
+    Ласкаво просимо до Seelen UI, найкращого середовища робочого столу з
+    вбудованим менеджером вікон для покращення роботи з Windows! Відкрийте
+    для себе нову еру ефективності та багатозадачності з нашим інтуїтивно
+    зрозумілим інтерфейсом та розширеними можливостями.
+  message_accent: Оптимізуйте свою продуктивність зі стилем!
   title: Ласкаво просимо!
 toolbar:
-  auto_hide: Автомати
+  auto_hide: Автоматично приховувати
   delay_to_hide: Затримка, щоб сховатися
   delay_to_show: Затримка, щоб показати
-  enable: Увімкнути панель інструментів вишуканих
+  enable: Увімкнути панель інструментів
   height: Висота
   label: Панель інструментів
   placeholder:
@@ -209,46 +209,46 @@ toolbar:
     select: Структура панелі інструментів
   use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
 update:
-  available: Оновлення доступне!
+  available: Доступне оновлення!
   channel: Канал оновлення
-  downloading: Завантаження ...
+  downloading: Завантаження...
 vd:
   disabled_windows_version: >-
     Рідна віртуальна стратегія робочого столу недоступна для вашої версії
     Windows.
   strategy:
     label: Віртуальна стратегія робочого столу
-    native: Рідний
-    seelen: Зимовий
+    native: Звичайна
+    seelen: Seelen
 wall:
   backgrounds: Шпалери
   enable: Увімкнути менеджер шпалер
-  hours: годинник
-  interval: Змініть шпалери кожен
+  hours: години
+  interval: Зміна шпалер кожні
   minutes: хвилини
-  no_background: Порожнє слайд -шоу, використовуючи фон теми.
-  random: Рандомізувати слайд -шоу
+  no_background: Слайдів не знайдено, натомість застосовано фон теми.
+  random: Рандомізувати слайд шоу
   seconds: секунди
 weg:
-  auto_hide: Автомати
+  auto_hide: Автоматично приховувати
   delay_to_hide: Затримка, щоб сховатися
   delay_to_show: Затримка, щоб показати
   dock_side: Позиція
-  enable: Увімкнути док/панель завдань
-  gap: Розрив
+  enable: Увімкнути панель завдань
+  gap: Відступ
   items:
-    gap: Простір між предметами
-    label: Предмети
-    size: Розмір товару
+    gap: Відступ між піктограмами
+    label: Піктограми
+    size: Розмір піктограм
     temporal_visibility:
       all: всі
       label: Видимість незакріплених елементів
       on_monitor: На моніторі
     visible_separators: Видимі сепаратори
     zoom_size: Збільшений розмір (використовується для тем)
-  label: Док/панель завдань
-  margin: Націнка
-  padding: Прокладка
+  label: Панель завдань
+  margin: Зовнішній відступ
+  padding: Внутрішній відступ
   use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
   width: Ширина
 wm:
@@ -258,9 +258,9 @@ wm:
     offset: Зміщення кордону
     width: Ширина кордону
   description: Опис
-  enable: Увімкнути плитку диспетчера вікон
+  enable: Увімкнути менеджер вікон
   layout: Макет
   resize_delta: Змінити розмір дельти (%)
-  space_between_containers: Простір між контейнерами
-  workspace_offset: Зсув робочих просторів (поля)
-  workspace_padding: Прокладка робочих просторів
+  space_between_containers: Простір між вікнами
+  workspace_offset: Зсув робочих просторів (Зовнішній відступ)
+  workspace_padding: Внутрішній відступ робочих просторів

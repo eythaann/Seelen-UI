@@ -8,12 +8,12 @@ media:
     comunications: Комунікація
     multimedia: Мультимедіа
   input_device: Пристрій введення
-  master_volume: Головний об'єм
+  master_volume: Рівень гучності
   output_device: Пристрій виводу
   players: Медіаплеєри
 network:
   available: Доступні мережі
-  connect: З'єднувати
+  connect: Підключити
   connected: Підключено до
   disconnect: Відключити
   hidden: Прихована мережа
@@ -30,17 +30,17 @@ placeholder:
   ethernet_connected: Доступ в інтернет
   ethernet_disconnected: Немає доступу до Інтернету
   notifications: Сповіщення
-  open_system_tray: Лоток відкритого систем
-  open_user_folder: Відкрийте папку користувача
+  open_system_tray: Системний лоток
+  open_user_folder: Папка користувача
   settings: Швидкі налаштування
   smart_charge: '- розумний заряд'
-  volume: Обсяг
+  volume: Гучність
 settings:
-  app_settings: Налаштування додатків
-  log_out: Вийти
-  power: Влада
+  app_settings: Налаштування додатку
+  log_out: Блокувати
+  power: Живлення
   restart: Перезапустити
-  shutdown: Закрити
-  sleep: Сплячий
+  shutdown: Завершити роботу
+  sleep: Сон
   title: Налаштування
-unlabelled_tray: Нежитрий ікона лотка
+unlabelled_tray: Без маркування
