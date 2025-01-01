@@ -92,7 +92,7 @@ export const UserApplication = memo(({ item, drag, onAssociatedViewOpenChanged }
     <DraggableItem
       item={item}
       className={cx({ 'associated-view-open': openPreview || openContextMenu })}
-      drag={drag} 
+      drag={drag}
     >
       <WithContextMenu
         items={getUserApplicationContextMenu(t, item, devTools) || []}
