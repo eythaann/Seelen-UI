@@ -1,26 +1,26 @@
 app_menu:
-  close: Закривати
+  close: Закрити
   close_multiple: Закрити все
-  copy_handles: Копіювати ручки
-  kill: Процес знищення
-  kill_multiple: Закрити всі процеси
-  open_file_location: Розташування відкритого файлу
-  pin: Шпилька
-  pin_to_center: Шпилька до центру
-  pin_to_left: Шпилька зліва
-  pin_to_right: Праворуч праворуч
+  copy_handles: Копіювати дескриптори
+  kill: Завершити процес
+  kill_multiple: Завершити всі процеси
+  open_file_location: Відкрити розташування файлу
+  pin: Закріпити
+  pin_to_center: Закріпити в центрі
+  pin_to_left: Закріпити ліворуч
+  pin_to_right: Закріпити праворуч
   run_as: Запустити від імені адміністратора
-  unpin: Розмивати
+  unpin: Відкріпити
 media:
-  not_playing: Ніщо не грає
+  not_playing: Нічого не відтворюється
 media_menu:
-  remove: Видалити медіа -модуль
+  remove: Видалити медіамодуль
 start_menu:
-  remove: Зніміть модуль запуску
+  remove: Видалити модуль запуску
 taskbar_menu:
-  add_file: Закріпіть власний файл
-  add_folder: Закріпіть спеціальну папку
-  media: Додати медіа -модуль
+  add_file: Закріпити файл
+  add_folder: Закріпити папку
+  media: Додати медіамодуль
   settings: Налаштування
-  start: Додайте модуль запуску
-  task_manager: Диспетчер задач
+  start: Додати модуль запуску
+  task_manager: Диспетчер завдань
