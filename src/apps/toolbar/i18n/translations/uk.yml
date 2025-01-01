@@ -2,45 +2,45 @@ context_menu:
   add_module: Додати модуль
   remove: Видалити модуль
   settings: Налаштування
-  task_manager: Диспетчер задач
+  task_manager: Диспетчер завдань
 media:
   device:
-    comunications: Комунікація
+    comunications: Зв'язок
     multimedia: Мультимедіа
   input_device: Пристрій введення
-  master_volume: Головний об'єм
-  output_device: Пристрій виводу
+  master_volume: Загальна гучність
+  output_device: Пристрій виведення
   players: Медіаплеєри
 network:
   available: Доступні мережі
-  connect: З'єднувати
+  connect: Підключити
   connected: Підключено до
   disconnect: Відключити
   hidden: Прихована мережа
-  more: Більше налаштувань мережі
+  more: Додаткові параметри мережі
   not_found: Жодних мереж не знайдено
   placeholder:
     password: Пароль
   saved: Збережені мережі
-  scanning: Сканування мереж
-  secured: Зашифрована мережа
+  scanning: Пошук мереж
+  secured: Захищена мережа
 placeholder:
-  battery_remaining: '% залишається'
-  bluetooth_devices: Bluetooth та пристрої
-  ethernet_connected: Доступ в інтернет
-  ethernet_disconnected: Немає доступу до Інтернету
+  battery_remaining: '% залишилося'
+  bluetooth_devices: Bluetooth і пристрої
+  ethernet_connected: Підключено до інтернету
+  ethernet_disconnected: Немає підключення до інтернету
   notifications: Сповіщення
-  open_system_tray: Лоток відкритого систем
-  open_user_folder: Відкрийте папку користувача
+  open_system_tray: Відкрити системний лоток
+  open_user_folder: Відкрити папку користувача
   settings: Швидкі налаштування
-  smart_charge: '- розумний заряд'
-  volume: Обсяг
+  smart_charge: '- розумна зарядка'
+  volume: Гучність
 settings:
-  app_settings: Налаштування додатків
+  app_settings: Налаштування застосунків
   log_out: Вийти
-  power: Влада
+  power: Живлення
   restart: Перезапустити
-  shutdown: Закрити
-  sleep: Сплячий
+  shutdown: Вимкнути
+  sleep: Режим сну
   title: Налаштування
-unlabelled_tray: Нежитрий ікона лотка
+unlabelled_tray: Неназвана іконка
