@@ -244,7 +244,7 @@
 }
 
 
-.weg-item-preview-container-open, .weg-context-menu-container-open
+.weg-item-preview-container-open, .weg-context-menu-container-open,
 .weg-item-preview-container-close, .weg-context-menu-container-close {
   animation: PreviewContainerAnimation 0.2s linear forwards; 
 }

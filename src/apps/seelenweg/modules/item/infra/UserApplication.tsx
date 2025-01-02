@@ -118,7 +118,6 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           trigger="hover"
           arrow={false}
           content={
-            item.opens.length != 0 &&
             <BackgroundByLayersV2
               className={cx('weg-item-preview-container', settings.position.toLowerCase())}
               onMouseMoveCapture={(e) => e.stopPropagation()}
