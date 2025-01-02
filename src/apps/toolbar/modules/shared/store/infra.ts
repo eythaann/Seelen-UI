@@ -3,15 +3,20 @@ import {
   invoke,
   PlaceholderList,
   PluginList,
+  RecentFolder,
   SeelenCommand,
   SeelenEvent,
   Settings,
   UIColors,
+  UserDetails,
 } from '@seelen-ui/lib';
 import { FancyToolbarSettings } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
+import moment from 'moment';
+
+import { LAZY_CONSTANTS } from '../utils/infra';
 
 import { RootActions, RootSlice } from './app';
 
@@ -65,6 +70,14 @@ export async function registerStoreEvents() {
   });
 
   const onFocusChanged = debounce((app: FocusedApp) => {
+    const state = store.getState();
+    if (app.exe && state.history[0]?.exe != app.exe && !app.exe.endsWith('seelen-ui.exe')) {
+      invoke(SeelenCommand.GetIcon, { path: app.exe })
+        .then((icon_path) => store.dispatch(RootActions.setHistory(
+          [ ...state.history, { ...app, date: moment(new Date()), icon_path: icon_path ?? LAZY_CONSTANTS.MISSING_ICON_PATH }]
+            .sort((a, b) => b.date.diff(a.date, 'ms')))))
+        .catch(console.error);
+    }
     store.dispatch(RootActions.setFocused(app));
   }, 200);
   await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
@@ -137,6 +150,12 @@ export async function registerStoreEvents() {
   await PluginList.onChange((list) => {
     store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
   });
+
+  store.dispatch(RootActions.setUser((await UserDetails.getAsync()).user));
+  UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
+
+  store.dispatch(RootActions.setUserRecentFolder((await RecentFolder.getAsync()).all()));
+  RecentFolder.onChange((details) => store.dispatch(RootActions.setUserRecentFolder(details.all())));
 
   await initUIColors();
   await StartThemingTool();

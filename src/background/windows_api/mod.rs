@@ -73,7 +73,7 @@ use windows::{
             LibraryLoader::GetModuleHandleW,
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
-            Shutdown::{ExitWindowsEx, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
+            Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             Threading::{
                 GetCurrentProcess, GetCurrentProcessId, OpenProcess, OpenProcessToken,
                 QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
@@ -978,5 +978,9 @@ impl WindowsApi {
 
     pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
         Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.get()?)
+    }
+
+    pub fn lock_machine() -> Result<()> {
+        unsafe { Ok(LockWorkStation()?) }
     }
 }
