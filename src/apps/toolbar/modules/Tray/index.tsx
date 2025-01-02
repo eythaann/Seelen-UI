@@ -102,7 +102,7 @@ export function TrayModule({ module }: Props) {
         </BackgroundByLayersV2>
       }
     >
-      <Item module={module} />
+      <Item module={module} active={openPreview} />
     </AnimatedPopover>
   );
 }

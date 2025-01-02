@@ -126,6 +126,7 @@
   right: 0;
   transform: translate(25%, -25%);
   background-color: var(--config-accent-color);
+  color: #efefef;
   height: 12px;
   min-width: 12px;
   font-size: 10px;

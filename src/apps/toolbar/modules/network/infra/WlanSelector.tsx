@@ -135,7 +135,11 @@ function WlanSelector({ open }: { open: boolean }) {
   );
 }
 
-export function WithWlanSelector({ children }: PropsWithChildren) {
+export interface WlanSelectorProperties extends PropsWithChildren {
+  setActive: (value: boolean) => void;
+}
+
+export function WithWlanSelector({ setActive, children }: WlanSelectorProperties) {
   const [mounted, setMounted] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
 
@@ -147,6 +151,8 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
     if (!mounted) {
       return;
     }
+    setActive(openPreview);
+
     if (openPreview) {
       invoke(SeelenCommand.WlanStartScanning);
     } else {

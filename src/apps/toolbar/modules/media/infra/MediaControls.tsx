@@ -1,6 +1,6 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { Button, Popover, Slider, Tooltip } from 'antd';
+import { Button, Slider, Tooltip } from 'antd';
 import { debounce } from 'lodash';
 import React, { memo, PropsWithChildren, useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -281,7 +281,11 @@ function MediaControls() {
   );
 }
 
-export function WithMediaControls({ children }: PropsWithChildren) {
+export interface MediaControlProps extends PropsWithChildren {
+  setActive: (value: boolean) => void;
+}
+
+export function WithMediaControls({ children, setActive }: MediaControlProps) {
   const [openControls, setOpenControls] = useState(false);
   const [openNotifier, setOpenNotifier] = useState(false);
 
@@ -293,6 +297,10 @@ export function WithMediaControls({ children }: PropsWithChildren) {
     debounce(() => setOpenNotifier(false), 2000),
     [],
   );
+
+  useEffect(() => {
+    setActive(openControls || openNotifier);
+  }, [openControls || openNotifier]);
 
   useEffect(() => {
     if (!defaultOutput) {
@@ -335,7 +343,12 @@ export function WithMediaControls({ children }: PropsWithChildren) {
       content={<MediaControls />}
       destroyTooltipOnHide
     >
-      <Popover
+      <AnimatedPopover
+        animationDescription={{
+          maxAnimationTimeMs: 500,
+          openAnimationName: 'media-notifier-open',
+          closeAnimationName: 'media-notifier-close',
+        }}
         open={openNotifier}
         arrow={false}
         trigger={[]}
@@ -359,7 +372,7 @@ export function WithMediaControls({ children }: PropsWithChildren) {
         }
       >
         {children}
-      </Popover>
+      </AnimatedPopover>
     </AnimatedPopover>
   );
 }

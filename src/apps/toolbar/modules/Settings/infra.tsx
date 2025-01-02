@@ -162,7 +162,7 @@ export function SettingsModule({ module }: Props) {
         </div>
       }
     >
-      <Item module={module} />
+      <Item module={module} active={openPreview} />
     </AnimatedPopover>
   );
 }

@@ -51,7 +51,7 @@ export function NotificationsModule({ module }: Props) {
         arrow={false}
         content={<Notifications />}
       >
-        <Item extraVars={{ count }} module={module} />
+        <Item extraVars={{ count }} module={module} active={openPreview} />
       </AnimatedPopover>
     </Popover>
   );
