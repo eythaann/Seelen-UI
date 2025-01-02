@@ -1,4 +1,6 @@
+import { RecentFile, User } from '@seelen-ui/lib';
 import { FancyToolbarSettings, Placeholder, Plugin, Settings } from '@seelen-ui/lib/types';
+import { Moment } from 'moment';
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -103,6 +105,11 @@ export interface AppNotification {
   date: number;
 }
 
+export interface AppHistoryItem extends FocusedApp {
+  icon_path: string;
+  date: Moment;
+}
+
 export type WorkspaceId = SoftOpaque<string, 'WorkspaceId'>;
 export interface Workspace {
   id: WorkspaceId;
@@ -115,6 +122,8 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   plugins: Plugin[];
 
   isOverlaped: boolean;
+  user: User | null;
+  userRecentFolder: RecentFile[];
   focused: FocusedApp | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
@@ -130,4 +139,5 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   mediaOutputs: MediaDevice[];
   mediaInputs: MediaDevice[];
   notifications: AppNotification[];
+  history: AppHistoryItem[];
 }
