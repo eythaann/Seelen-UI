@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { SeelenEvent, Settings } from '@seelen-ui/lib';
+import { ConnectedMonitorList, SeelenEvent, Settings } from '@seelen-ui/lib';
 import { getCurrentWebview } from '@tauri-apps/api/webview';
 
 import { Actions, RootSlice } from './app';
@@ -21,6 +21,11 @@ export async function initStore() {
   store.dispatch(Actions.setSettings(settings.inner.wall));
   Settings.onChange((settings) => {
     store.dispatch(Actions.setSettings(settings.inner.wall));
+  });
+
+  store.dispatch(Actions.setMonitors((await ConnectedMonitorList.getAsync()).all()));
+  ConnectedMonitorList.onChange((monitors: ConnectedMonitorList) => {
+    store.dispatch(Actions.setMonitors(monitors.all()));
   });
 
   webview.listen<boolean>(SeelenEvent.WallStop, ({ payload }) => {

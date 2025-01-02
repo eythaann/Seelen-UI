@@ -1,5 +1,5 @@
 import { convertFileSrc } from '@tauri-apps/api/core';
-import { ReactNode, RefObject, useEffect, useRef } from 'react';
+import { CSSProperties, ReactNode, RefObject, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Selectors } from '../shared/store/app';
@@ -11,11 +11,12 @@ export function ThemedWallpaper() {
 export interface Props {
   path: string;
   containerRef: RefObject<HTMLDivElement>;
+  style: CSSProperties | undefined;
   onLoad: () => void;
   onError: () => void;
 }
 
-export function Wallpaper({ path, containerRef, onLoad, onError }: Props) {
+export function Wallpaper({ path, containerRef, style, onLoad, onError }: Props) {
   let stoped = useSelector(Selectors.stop);
   let wallpaper: ReactNode = null;
 
@@ -42,7 +43,7 @@ export function Wallpaper({ path, containerRef, onLoad, onError }: Props) {
         src={convertFileSrc(path)}
         onLoadedData={onLoad}
         onError={onError}
-        autoPlay={!stoped}
+        autoPlay={true}
         loop
         muted
         playsInline
@@ -52,7 +53,7 @@ export function Wallpaper({ path, containerRef, onLoad, onError }: Props) {
   }
 
   return (
-    <div ref={containerRef} className="wallpaper-container">
+    <div ref={containerRef} className="wallpaper-container" style={style}>
       {wallpaper}
     </div>
   );
