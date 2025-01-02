@@ -1,6 +1,6 @@
 import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
-import { Button, Popover, Tooltip } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -13,6 +13,7 @@ import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { WlanBssEntry } from '../domain';
 
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { WlanSelectorEntry } from './WlanSelectorEntry';
 
 function WlanSelector({ open }: { open: boolean }) {
@@ -134,7 +135,11 @@ function WlanSelector({ open }: { open: boolean }) {
   );
 }
 
-export function WithWlanSelector({ children }: PropsWithChildren) {
+export interface WlanSelectorProperties extends PropsWithChildren {
+  setActive: (value: boolean) => void;
+}
+
+export function WithWlanSelector({ setActive, children }: WlanSelectorProperties) {
   const [mounted, setMounted] = useState(false);
   const [openPreview, setOpenPreview] = useState(false);
 
@@ -146,6 +151,8 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
     if (!mounted) {
       return;
     }
+    setActive(openPreview);
+
     if (openPreview) {
       invoke(SeelenCommand.WlanStartScanning);
     } else {
@@ -160,7 +167,12 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
   });
 
   return (
-    <Popover
+    <AnimatedPopover
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'wlan-open',
+        closeAnimationName: 'wlan-close',
+      }}
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
@@ -169,6 +181,6 @@ export function WithWlanSelector({ children }: PropsWithChildren) {
       destroyTooltipOnHide
     >
       {children}
-    </Popover>
+    </AnimatedPopover>
   );
 }

@@ -2,7 +2,7 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { SettingsToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
-import { Popover, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -16,6 +16,7 @@ import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { RootState } from '../shared/store/domain';
 
+import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
 import { Icon } from '../../../shared/components/Icon';
 
 interface Props {
@@ -65,7 +66,12 @@ export function SettingsModule({ module }: Props) {
   });
 
   return (
-    <Popover
+    <AnimatedPopover
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'settings-open',
+        closeAnimationName: 'settings-close',
+      }}
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
@@ -156,7 +162,7 @@ export function SettingsModule({ module }: Props) {
         </div>
       }
     >
-      <Item module={module} />
-    </Popover>
+      <Item module={module} active={openPreview} />
+    </AnimatedPopover>
   );
 }
