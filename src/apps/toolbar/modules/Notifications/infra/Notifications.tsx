@@ -1,13 +1,16 @@
 import { SeelenCommand } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Button } from 'antd';
 import { AnimatePresence, motion } from 'framer-motion';
 import moment from 'moment';
 import { useSelector } from 'react-redux';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
+import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
+
+import { AppNotification } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
 
@@ -37,7 +40,7 @@ export function Notifications() {
 
       <div className="notifications-body">
         <AnimatePresence>
-          {notifications.map((notification) => (
+          {notifications.map((notification: AppNotification) => (
             <motion.div
               className="notification"
               key={notification.id}
@@ -47,7 +50,7 @@ export function Notifications() {
             >
               <div className="notification-header">
                 <div className="notification-header-info">
-                  <Icon iconName="TbNotification" />
+                  <img className="notification-icon" src={convertFileSrc(notification.app_logo ? notification.app_logo : LAZY_CONSTANTS.MISSING_ICON_PATH)} />
                   <div>{notification.app_name}</div>
                   <span>-</span>
                   <div>

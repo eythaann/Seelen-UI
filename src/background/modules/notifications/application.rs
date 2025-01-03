@@ -19,7 +19,13 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, log_error, utils::spawn_named_thread};
+use crate::{
+    error_handler::Result,
+    log_error,
+    seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
+    utils::spawn_named_thread,
+    windows_api::window::Window,
+};
 
 lazy_static! {
     pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
@@ -209,9 +215,18 @@ impl NotificationManager {
             body.push(text.Text()?.to_string());
         }
 
+        let umid = app_info.AppUserModelId()?.to_string_lossy();
+        let mut app_logo = extract_and_save_icon_umid(umid.clone()).ok();
+        if app_logo.is_none() {
+            let windows_app = Window::search_shortcut_with_same_umid(umid.as_str());
+            if let Some(store_app) = windows_app {
+                app_logo = extract_and_save_icon_from_file(store_app).ok();
+            }
+        }
+
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,
-            app_logo: None,
+            app_logo,
             app_name: display_info.DisplayName()?.to_string(),
             app_description: display_info.Description()?.to_string(),
             body,
