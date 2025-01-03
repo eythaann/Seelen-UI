@@ -534,6 +534,10 @@
   color: var(--color-gray-800);
 }
 
+.notification-icon {
+  width: 1.5em;
+}
+
 .notification-body {
   word-break: break-word;
 
