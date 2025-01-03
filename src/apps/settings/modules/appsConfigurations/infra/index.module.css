@@ -10,7 +10,11 @@
   width: 100%;
   background-color: var(--color-green-600);
   padding: 0;
-
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  
   &:hover {
     background-color: var(--color-green-700) !important;
   }
