@@ -51,7 +51,7 @@ apps_configurations:
     or: 또는
     remove: 블록 삭제
   import: 가져오기
-  new: 새로 만들기
+  new: New
   search: 검색
   swap: 교체
 cancel: 취소
