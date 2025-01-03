@@ -1,5 +1,8 @@
 app_launcher:
   enable: Virkja App Launcher
+  launch_on:
+    mouse_over: Mús yfir
+    primary: Aðal
   monitor: Fylgjast með því að sýna
   runners:
     cmd: Skipan
@@ -50,9 +53,20 @@ apps_configurations:
     id: Auðkenni
     kind: Þekkja með
     matching_strategy: Samsvarandi stefna
+    matching_strategy_option:
+      contains: Inniheldur
+      ends_with: Endar með
+      equals: Jafnt
+      regex: Regluleg tjáning
+      starts_with: Byrjar með
     negation: Afneitar samsvörun
     or: Eða
     remove: Eyða blokk
+    type:
+      class: bekk
+      exe: Exe
+      path: Slóð
+      title: Titill
   import: Flytja inn
   new: Nýtt
   search: Leitaðu
@@ -68,6 +82,7 @@ devtools:
   install_folder: Uppsetningarmöppu
   load: Hlaða
   settings_file: Stillingarskrá
+  simulate_fullscreen: Líktu eftir atburði á öllum skjánum
 extras:
   discord: Ósamræmi
   exit: Hætta/hætta
@@ -202,6 +217,10 @@ toolbar:
   delay_to_show: Seinkun á sýningu
   enable: Virkja Fancy tækjastiku
   height: Hæð
+  hide_mode:
+    always: Alltaf
+    never: Aldrei
+    on_overlap: Á skörun
   label: Tækjastikur
   placeholder:
     author: Höfundur
@@ -234,6 +253,10 @@ weg:
   dock_side: Staða
   enable: Virkja bryggju/verkefnastiku
   gap: Bil
+  hide_mode:
+    always: Alltaf
+    never: Aldrei
+    on_overlap: Á skörun
   items:
     gap: Rými milli atriða
     label: Hlutir
@@ -246,6 +269,9 @@ weg:
     zoom_size: Aðdráttarstærð (notuð fyrir þemu)
   label: Bryggju/verkefnabar
   margin: Framlegð
+  mode:
+    full_width: Full skjábreidd
+    min_content: Lítið eins og hægt er
   padding: Padding
   use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í stað eins fókus rökfræði
   width: Breidd

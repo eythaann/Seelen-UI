@@ -1,5 +1,8 @@
 app_launcher:
   enable: ایپ لانچر کو فعال کریں
+  launch_on:
+    mouse_over: ماؤس اوور
+    primary: پرائمری
   monitor: ظاہر کرنے کے لئے مانیٹر
   runners:
     cmd: حکم
@@ -50,9 +53,20 @@ apps_configurations:
     id: شناخت کنندہ
     kind: بذریعہ شناخت کریں
     matching_strategy: مماثل حکمت عملی
+    matching_strategy_option:
+      contains: پر مشتمل ہے۔
+      ends_with: کے ساتھ ختم ہوتا ہے۔
+      equals: برابر ہے۔
+      regex: باقاعدہ اظہار
+      starts_with: سے شروع ہوتا ہے۔
     negation: نفی مماثل
     or: یا
     remove: بلاک کو حذف کریں
+    type:
+      class: کلاس
+      exe: Exe
+      path: راستہ
+      title: عنوان
   import: درآمد
   new: نئی
   search: تلاش
@@ -68,6 +82,7 @@ devtools:
   install_folder: انسٹالیشن فولڈر
   load: لوڈ
   settings_file: سیٹنگ فاعل
+  simulate_fullscreen: پورے اسکرین ایونٹ کی تقلید کریں۔
 extras:
   discord: ڈسکارڈ
   exit: چھوڑ دیں/باہر نکلیں
@@ -203,6 +218,10 @@ toolbar:
   delay_to_show: دکھانے میں تاخیر
   enable: فینسی ٹول بار کو فعال کریں
   height: اونچائی
+  hide_mode:
+    always: ہمیشہ
+    never: کبھی نہیں
+    on_overlap: اوورلیپ پر
   label: ٹول بار
   placeholder:
     author: مصنف
@@ -235,6 +254,10 @@ weg:
   dock_side: پوزیشن
   enable: ٹاسک بار کو فعال کریں
   gap: گیپ
+  hide_mode:
+    always: ہمیشہ
+    never: کبھی نہیں
+    on_overlap: اوورلیپ پر
   items:
     gap: اشیاء کے درمیان جگہ
     label: اشیاء
@@ -247,6 +270,9 @@ weg:
     zoom_size: زوم سائز (تھیمز کے لئے استعمال کیا جاتا ہے)
   label: ٹاسک بار
   margin: مارجن
+  mode:
+    full_width: پوری سکرین کی چوڑائی
+    min_content: جتنا چھوٹا ہو سکتا ہے۔
   padding: بھرتی
   use_multiple_monitor_overlap_logic: سنگل فوکس لاجک کے بجائے ڈسپلے مخصوص استعمال کریں۔
   width: چوڑائی

@@ -1,5 +1,8 @@
 app_launcher:
   enable: Ενεργοποίηση εκτοξευτή εφαρμογών
+  launch_on:
+    mouse_over: Το ποντίκι πάνω
+    primary: Πρωταρχικός
   monitor: Παρακολούθηση για εμφάνιση
   runners:
     cmd: Εντολή
@@ -51,9 +54,20 @@ apps_configurations:
     id: Αναγνωριστικό
     kind: Προσδιορίζω
     matching_strategy: Στρατηγική αντιστοίχισης
+    matching_strategy_option:
+      contains: Περιέχει
+      ends_with: Τελειώνει με
+      equals: Ίσο
+      regex: Τακτική έκφραση
+      starts_with: Ξεκινά με
     negation: Αρνείστε την αντιστοίχιση
     or: Ή
     remove: Διαγραφή μπλοκ
+    type:
+      class: Τάξη
+      exe: Exe
+      path: Μονοπάτι
+      title: Τίτλος
   import: Εισαγωγή
   new: Νέος
   search: Αναζήτηση
@@ -69,6 +83,7 @@ devtools:
   install_folder: Φάκελος εγκατάστασης
   load: Φορτώνω
   settings_file: Αρχείο ρυθμίσεων
+  simulate_fullscreen: Προσομοίωση συμβάντος πλήρους οθόνης
 extras:
   discord: Διχόνοια
   exit: Εγκατάλειψη/έξοδο
@@ -205,6 +220,10 @@ toolbar:
   delay_to_show: Καθυστέρηση εμφάνισης
   enable: Ενεργοποίηση φανταχτερά εργαλεία εργαλείων
   height: Υψος
+  hide_mode:
+    always: Πάντοτε
+    never: Ποτέ
+    on_overlap: Σε επικάλυψη
   label: Γραμμή εργαλείων
   placeholder:
     author: Συγγραφέας
@@ -239,6 +258,10 @@ weg:
   dock_side: Θέση
   enable: Ενεργοποίηση λίστα/γραμμή εργασιών
   gap: Χάσμα
+  hide_mode:
+    always: Πάντοτε
+    never: Ποτέ
+    on_overlap: Σε επικάλυψη
   items:
     gap: Χώρος μεταξύ αντικειμένων
     label: Αντικείμενα
@@ -251,6 +274,9 @@ weg:
     zoom_size: Μέγεθος μεγέθυνσης (χρησιμοποιείται για θέματα)
   label: Λέσχη εργασιών
   margin: Περιθώριο
+  mode:
+    full_width: Πλάτος πλήρους οθόνης
+    min_content: Όσο μικρό μπορεί να είναι
   padding: Υλικό παραγεμίσματος
   use_multiple_monitor_overlap_logic: Χρησιμοποιήστε συγκεκριμένα την οθόνη αντί για λογική εστίασης
   width: Πλάτος

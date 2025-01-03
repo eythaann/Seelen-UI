@@ -1,5 +1,8 @@
 app_launcher:
   enable: App Launcher aktivieren
+  launch_on:
+    mouse_over: Maus drüber
+    primary: Primär
   monitor: Monitor zum Anzeigen
   runners:
     cmd: Befehl
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identifizieren nach
     matching_strategy: Abgleichstrategie
+    matching_strategy_option:
+      contains: Enthält
+      ends_with: Endet mit
+      equals: Gleich
+      regex: Regulärer Ausdruck
+      starts_with: Beginnt mit
     negation: Abgleich negieren
     or: ODER
     remove: Block löschen
+    type:
+      class: Klasse
+      exe: Exe
+      path: Weg
+      title: Titel
   import: Importieren
   new: Neu
   search: Suchen
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei
+  simulate_fullscreen: Vollbildereignis simulieren
 extras:
   discord: Discord
   exit: Beenden
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Verzögerung beim Anzeigen
   enable: Elegante Werkzeugleiste aktivieren
   height: Höhe
+  hide_mode:
+    always: Stets
+    never: Niemals
+    on_overlap: Auf Überlappung
   label: Symbolleiste
   placeholder:
     author: Autor
@@ -238,6 +257,10 @@ weg:
   dock_side: Position
   enable: Dock/Taskleiste aktivieren
   gap: Abstand
+  hide_mode:
+    always: Stets
+    never: Niemals
+    on_overlap: Auf Überlappung
   items:
     gap: Abstand zwischen Elementen
     label: Elemente
@@ -250,6 +273,9 @@ weg:
     zoom_size: Vergrößerte Größe (für Themen verwendet)
   label: Dock/Taskleiste
   margin: Rand
+  mode:
+    full_width: Volle Bildschirmbreite
+    min_content: So klein wie möglich
   padding: Polsterung
   use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
   width: Breite

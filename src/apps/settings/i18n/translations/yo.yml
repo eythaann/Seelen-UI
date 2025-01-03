@@ -1,5 +1,8 @@
 app_launcher:
   enable: Jeki Ifilọlẹ app
+  launch_on:
+    mouse_over: Asin ti pari
+    primary: Alakoko
   monitor: Atẹle lati fihan
   runners:
     cmd: Paṣẹ
@@ -48,9 +51,20 @@ apps_configurations:
     id: Idamo
     kind: Ṣe idanimọ nipasẹ
     matching_strategy: Ibaamu iṣiro
+    matching_strategy_option:
+      contains: Ni ninu
+      ends_with: O pari pẹlu
+      equals: O dọgba
+      regex: Ikosile deede
+      starts_with: Bẹrẹ pẹlu
     negation: Ibaramu tuntun
     or: Tabi
     remove: Paarẹ Brow
+    type:
+      class: Kilasi
+      exe: Exe
+      path: Ona
+      title: Akọle
   import: Aṣagbewọle lati ilẹ okeere
   new: Tuntun
   search: Ṣewadii
@@ -66,6 +80,7 @@ devtools:
   install_folder: Filese Fifi sori ẹrọ
   load: Ẹru
   settings_file: Faili eto
+  simulate_fullscreen: Ṣe afarawe iṣẹlẹ ni kikun iboju
 extras:
   discord: Di eniyan
   exit: Duro / Jade
@@ -199,6 +214,10 @@ toolbar:
   delay_to_show: Idaduro lati ṣafihan
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
   height: Giga
+  hide_mode:
+    always: Nigbagbogbo
+    never: Kò
+    on_overlap: Lori agbekọja
   label: Ọpa irinṣẹ
   placeholder:
     author: Onkọwe ọkunrin
@@ -231,6 +250,10 @@ weg:
   dock_side: Ipo
   enable: Muu dock / forkbar
   gap: Alafo
+  hide_mode:
+    always: Nigbagbogbo
+    never: Kò
+    on_overlap: Lori agbekọja
   items:
     gap: Aaye laarin awọn ohun kan
     label: Awọn ohun
@@ -243,6 +266,9 @@ weg:
     zoom_size: Iwọn sisun (ti a lo fun awọn akori)
   label: Dock / forkbar
   margin: Ẹlẹsin
+  mode:
+    full_width: Iboju kikun iwọn
+    min_content: Kekere bi o ti le jẹ
   padding: Fidigọdi silẹ
   use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
   width: Fifẹ

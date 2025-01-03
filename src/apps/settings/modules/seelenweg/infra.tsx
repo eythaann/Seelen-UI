@@ -39,7 +39,7 @@ export const SeelenWegSettings = () => {
             <Select
               style={{ width: '120px' }}
               value={settings.mode}
-              options={OptionsFromEnum(SeelenWegMode)}
+              options={OptionsFromEnum(SeelenWegMode, 'weg.mode')}
               onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
             />
           </SettingsOption>
@@ -82,7 +82,7 @@ export const SeelenWegSettings = () => {
               <Select
                 style={{ width: '120px' }}
                 value={settings.hideMode}
-                options={OptionsFromEnum(HideMode)}
+                options={OptionsFromEnum(HideMode, 'weg.hide_mode')}
                 onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
               />
             </SettingsOption>

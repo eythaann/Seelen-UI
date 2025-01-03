@@ -1,4 +1,5 @@
 import { Action, Slice } from '@reduxjs/toolkit';
+import { t } from 'i18next';
 
 import { HexColor, ReducersFor, SelectorsFor } from './domain';
 
@@ -59,11 +60,26 @@ export const validateHexColor = (str: string): HexColor | null => {
   return str as HexColor;
 };
 
-export const OptionsFromEnum = (obj: anyObject) =>
+export const OptionsFromEnum = (obj: anyObject, translationPrefix: string) =>
   Object.values(obj).map((value) => ({
-    label: value,
+    label: t(translationPrefix + '.' + toSnakeCase(value)),
     value,
   }));
+
+function toSnakeCase(text: string) {
+  let snake = '';
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i]!;
+    if ((char === char.toLowerCase() && !char.match(/[0-9]/))) {
+      snake += char.toLowerCase();
+    } else if (i == 0) {
+      snake += `${char.toLowerCase()}`;
+    } else {
+      snake += `_${char.toLowerCase()}`;
+    }
+  }
+  return snake;
+}
 
 export function debounce<T extends anyFunction>(fn: T, delay: number): T {
   let timeoutId: NodeJS.Timeout;

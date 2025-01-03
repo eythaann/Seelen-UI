@@ -1,5 +1,8 @@
 app_launcher:
   enable: Uygulama Başlatıcısını Etkinleştir
+  launch_on:
+    mouse_over: Farenin üzerine gelin
+    primary: Öncelik
   monitor: Gösterilecek Monitör
   runners:
     cmd: Komut İstemi
@@ -50,9 +53,20 @@ apps_configurations:
     id: Tanımlayıcı
     kind: Tanımla
     matching_strategy: Eşleştirme Stratejisi
+    matching_strategy_option:
+      contains: İçerir
+      ends_with: 'Şununla biter:'
+      equals: Eşittir
+      regex: Düzenli ifade
+      starts_with: 'Şununla başlar:'
     negation: Eşleşmeyi Geçersiz Kıl
     or: VEYA
     remove: Bloğu Sil
+    type:
+      class: Sınıf
+      exe: Exe
+      path: Yol
+      title: Başlık
   import: İçe Aktar
   new: Yeni
   search: Ara
@@ -68,6 +82,7 @@ devtools:
   install_folder: Kurulum Klasörü
   load: Yükle
   settings_file: Ayarlar Dosyası
+  simulate_fullscreen: Tam ekran etkinliğini simüle et
 extras:
   discord: Discord
   exit: Çık
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Gösterme gecikmesi
   enable: Şık Araç Çubuğunu Etkinleştir
   height: Yükseklik
+  hide_mode:
+    always: Her zaman
+    never: Asla
+    on_overlap: Üst üste binme durumunda
   label: Araç Çubuğu
   placeholder:
     author: Yazar
@@ -236,6 +255,10 @@ weg:
   dock_side: Konum
   enable: Dock/Görev Çubuğunu Etkinleştir
   gap: Boşluk
+  hide_mode:
+    always: Her zaman
+    never: Asla
+    on_overlap: Üst üste binme durumunda
   items:
     gap: Öğeler Arası Boşluk
     label: Öğeler
@@ -248,6 +271,9 @@ weg:
     zoom_size: Yakınlaştırılmış Boyut (temalar için kullanılır)
   label: Dock/Görev Çubuğu
   margin: Kenar Boşluğu
+  mode:
+    full_width: Tam ekran genişliği
+    min_content: Olabildiğince küçük
   padding: İç Boşluk
   use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
   width: Genişlik

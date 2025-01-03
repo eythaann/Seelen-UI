@@ -1,5 +1,8 @@
 app_launcher:
   enable: Abilita Launcher delle App
+  launch_on:
+    mouse_over: Passa il mouse
+    primary: Primario
   monitor: Monitor da mostrare
   runners:
     cmd: Comando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificatore
     kind: Identifica Per
     matching_strategy: Strategia di Corrispondenza
+    matching_strategy_option:
+      contains: Contiene
+      ends_with: Termina con
+      equals: Uguali
+      regex: Espressione regolare
+      starts_with: Inizia con
     negation: Negazione della Corrispondenza
     or: O
     remove: Elimina Blocco
+    type:
+      class: Classe
+      exe: Exe
+      path: Sentiero
+      title: Titolo
   import: Importa
   new: Nuovo
   search: Cerca
@@ -68,6 +82,7 @@ devtools:
   install_folder: Cartella di Installazione
   load: Carica
   settings_file: File delle Impostazioni
+  simulate_fullscreen: Simula un evento a schermo intero
 extras:
   discord: Discord
   exit: Esci
@@ -202,6 +217,10 @@ toolbar:
   delay_to_show: Ritardo per mostrare
   enable: Abilita Barra Fancy
   height: Altezza
+  hide_mode:
+    always: Sempre
+    never: Mai
+    on_overlap: Sulla sovrapposizione
   label: Barra
   placeholder:
     author: Autore
@@ -238,6 +257,10 @@ weg:
   dock_side: Posizione
   enable: Abilita Dock/Barra delle Attività
   gap: Spazio
+  hide_mode:
+    always: Sempre
+    never: Mai
+    on_overlap: Sulla sovrapposizione
   items:
     gap: Spazio tra gli Elementi
     label: Elementi
@@ -250,6 +273,9 @@ weg:
     zoom_size: Dimensione Zoom (usato per i temi)
   label: Dock/Barra delle Attività
   margin: Margine
+  mode:
+    full_width: Larghezza dello schermo intero
+    min_content: Piccolo quanto può essere
   padding: Spaziatura
   use_multiple_monitor_overlap_logic: >-
     Utilizza la logica di visualizzazione specifica anziché quella di focus

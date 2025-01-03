@@ -1,5 +1,8 @@
 app_launcher:
   enable: Nika amandla isiqalisi sohlelo lokusebenza
+  launch_on:
+    mouse_over: Igundane phezu
+    primary: Okuyinhloko
   monitor: Qapha ukukhombisa
   runners:
     cmd: Juba
@@ -50,9 +53,20 @@ apps_configurations:
     id: Isithombe esithi
     kind: Khomba ngu
     matching_strategy: Isu lokuqondanisa
+    matching_strategy_option:
+      contains: Iqukethe
+      ends_with: Iphetha ngokuthi
+      equals: Kuyalingana
+      regex: Inkulumo evamile
+      starts_with: Iqala ngokuthi
     negation: Hlukana nokufanisa
     or: Noma
     remove: Susa ibhulokhi
+    type:
+      class: Ikilasi
+      exe: Exe
+      path: Indlela
+      title: Isihloko
   import: Ngenisa ezweni
   new: '-Kwanamuhla'
   search: Sesha
@@ -68,6 +82,7 @@ devtools:
   install_folder: Ifolda yokufaka
   load: Thwala
   settings_file: Ifayela lezilungiselelo
+  simulate_fullscreen: Lingisa umcimbi wesikrini esigcwele
 extras:
   discord: Ukunqaba
   exit: Quit / Phuma
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Libazisa ukubonisa
   enable: Nika amandla amathuluzi e-fancy
   height: Ubude
+  hide_mode:
+    always: Njalo
+    never: Ungalokothi
+    on_overlap: Ngokugqagqana
   label: Indawo yamathuluzi
   placeholder:
     author: Umlobi
@@ -238,6 +257,10 @@ weg:
   dock_side: Ukuma
   enable: Nika amandla i-Dock / Taskbar
   gap: Insungubezi
+  hide_mode:
+    always: Njalo
+    never: Ungalokothi
+    on_overlap: Ngokugqagqana
   items:
     gap: Isikhala phakathi kwezinto
     label: Into
@@ -250,6 +273,9 @@ weg:
     zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
   label: Dock / taskbar
   margin: Image
+  mode:
+    full_width: Ububanzi besikrini esigcwele
+    min_content: Kuncane njengoba kungaba
   padding: Idilidi
   use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
   width: Ububanzi

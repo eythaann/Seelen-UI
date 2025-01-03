@@ -1,5 +1,8 @@
 app_launcher:
   enable: Schakel App Launcher in
+  launch_on:
+    mouse_over: Muis er overheen
+    primary: Primair
   monitor: Monitor om te laten zien
   runners:
     cmd: Commando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificatie
     kind: Identificeren door
     matching_strategy: Matching -strategie
+    matching_strategy_option:
+      contains: Bevat
+      ends_with: Eindigt met
+      equals: Gelijk aan
+      regex: Reguliere expressie
+      starts_with: Begint met
     negation: Ontkennen matching
     or: OF
     remove: Verwijder blok
+    type:
+      class: Klas
+      exe: Ex
+      path: Pad
+      title: Titel
   import: Importeren
   new: Nieuw
   search: Zoekopdracht
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
+  simulate_fullscreen: Simuleer een gebeurtenis op volledig scherm
 extras:
   discord: Discord
   exit: Stop/exit
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Vertraging om te tonen
   enable: Schakel fancy werkbalk in
   height: Hoogte
+  hide_mode:
+    always: Altijd
+    never: Nooit
+    on_overlap: Op overlap
   label: Werkbalk
   placeholder:
     author: Auteur
@@ -240,6 +259,10 @@ weg:
   dock_side: Positie
   enable: Schakel dock/taakbalk in
   gap: Gat
+  hide_mode:
+    always: Altijd
+    never: Nooit
+    on_overlap: Op overlap
   items:
     gap: Ruimte tussen items
     label: Items
@@ -252,6 +275,9 @@ weg:
     zoom_size: Ingezoomde grootte (gebruikt voor thema's)
   label: Dock/taakbalk
   margin: Marge
+  mode:
+    full_width: Volledige schermbreedte
+    min_content: Klein als het maar kan zijn
   padding: Vulling
   use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
   width: Breedte
