@@ -1,5 +1,8 @@
 app_launcher:
   enable: பயன்பாட்டு துவக்கியை இயக்கவும்
+  launch_on:
+    mouse_over: சுட்டி முடிந்துவிட்டது
+    primary: முதன்மை
   monitor: காண்பிக்க கண்காணிக்கவும்
   runners:
     cmd: கட்டளை
@@ -51,9 +54,20 @@ apps_configurations:
     id: அடையாளங்காட்டி
     kind: மூலம் அடையாளம் காணவும்
     matching_strategy: பொருந்தும் உத்தி
+    matching_strategy_option:
+      contains: கொண்டுள்ளது
+      ends_with: உடன் முடிகிறது
+      equals: சமம்
+      regex: வழக்கமான வெளிப்பாடு
+      starts_with: உடன் தொடங்குகிறது
     negation: பொருத்தத்தை மறுக்கவும்
     or: அல்லது
     remove: தடுப்பை நீக்கு
+    type:
+      class: வகுப்பு
+      exe: Exe
+      path: பாதை
+      title: தலைப்பு
   import: இறக்குமதி
   new: புதியது
   search: தேடு
@@ -69,6 +83,7 @@ devtools:
   install_folder: நிறுவல் கோப்புறை
   load: ஏற்றவும்
   settings_file: அமைப்புகள் கோப்பு
+  simulate_fullscreen: முழுத்திரை நிகழ்வை உருவகப்படுத்தவும்
 extras:
   discord: கருத்து வேறுபாடு
   exit: வெளியேறு/வெளியேறு
@@ -205,6 +220,10 @@ toolbar:
   delay_to_show: காட்ட தாமதம்
   enable: ஆடம்பரமான கருவிப்பட்டியை இயக்கவும்
   height: உயரம்
+  hide_mode:
+    always: எப்போதும்
+    never: ஒருபோதும் இல்லை
+    on_overlap: ஒன்றுடன் ஒன்று
   label: கருவிப்பட்டி
   placeholder:
     author: நூலாசிரியர்
@@ -237,6 +256,10 @@ weg:
   dock_side: நிலை
   enable: டாக்/டாஸ்க்பாரை இயக்கவும்
   gap: இடைவெளி
+  hide_mode:
+    always: எப்போதும்
+    never: ஒருபோதும் இல்லை
+    on_overlap: ஒன்றுடன் ஒன்று
   items:
     gap: பொருட்களுக்கு இடையே உள்ள இடம்
     label: பொருட்களை
@@ -249,6 +272,9 @@ weg:
     zoom_size: பெரிதாக்கப்பட்ட அளவு (தீம்களுக்குப் பயன்படுத்தப்படுகிறது)
   label: கப்பல்துறை/பணிப்பட்டி
   margin: விளிம்பு
+  mode:
+    full_width: முழு திரை அகலம்
+    min_content: முடிந்தவரை சிறியது
   padding: திணிப்பு
   use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
   width: அகலம்

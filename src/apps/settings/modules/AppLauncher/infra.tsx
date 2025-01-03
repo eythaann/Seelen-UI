@@ -72,7 +72,7 @@ export function AppLauncherSettings() {
         <SettingsOption>
           <b>{t('app_launcher.monitor')}</b>
           <Select
-            options={OptionsFromEnum(SeelenLauncherMonitor)}
+            options={OptionsFromEnum(SeelenLauncherMonitor, 'app_launcher.launch_on')}
             value={monitor}
             onChange={onChangeMonitor}
           />

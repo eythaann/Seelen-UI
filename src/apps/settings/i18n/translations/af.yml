@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktiveer App Launcher
+  launch_on:
+    mouse_over: Muis oor
+    primary: Primêr
   monitor: Monitor om te wys
   runners:
     cmd: Kommandeer
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifiseerder
     kind: Identifiseer deur
     matching_strategy: Bypassende strategie
+    matching_strategy_option:
+      contains: Bevat
+      ends_with: Eindig met
+      equals: Gelyk
+      regex: Gereelde uitdrukking
+      starts_with: Begin met
     negation: Ontken ooreenstemming
     or: Of
     remove: Vee blok uit
+    type:
+      class: Klas
+      exe: Exe
+      path: Pad
+      title: Titel
   import: Invoerproduk
   new: Nuut
   search: Soek
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installasie -lêergids
   load: Vrag
   settings_file: Instellingslêer
+  simulate_fullscreen: Simuleer volskerm gebeurtenis
 extras:
   discord: Teenstrydigheid
   exit: Hou op/uitgang
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Vertraag om te wys
   enable: Aktiveer Fancy Toolbar
   height: Hoogte
+  hide_mode:
+    always: Altyd
+    never: Nooit nie
+    on_overlap: Op oorvleueling
   label: Werkbalk
   placeholder:
     author: Outeur
@@ -238,6 +257,10 @@ weg:
   dock_side: Posisie
   enable: Aktiveer dok/taakbalk
   gap: Gat
+  hide_mode:
+    always: Altyd
+    never: Nooit nie
+    on_overlap: Op oorvleueling
   items:
     gap: Ruimte tussen items
     label: Voorwerpe
@@ -250,6 +273,9 @@ weg:
     zoom_size: Ingezoomde grootte (gebruik vir temas)
   label: Dock/Taakbalk
   margin: Marge
+  mode:
+    full_width: Volle skerm breedte
+    min_content: Klein soos kan wees
   padding: Opvulling
   use_multiple_monitor_overlap_logic: Gebruik vertoonspesifieke in plaas van enkelfokuslogika
   width: Wydte

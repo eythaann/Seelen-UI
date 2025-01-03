@@ -1,5 +1,8 @@
 app_launcher:
   enable: अनुप्रयोग सुरुवातकर्तालाई सक्षम गर्नुहोस्
+  launch_on:
+    mouse_over: माउस माथि
+    primary: प्राथमिक
   monitor: देखाउनको लागि मोनिटर
   runners:
     cmd: आदेश
@@ -50,9 +53,20 @@ apps_configurations:
     id: पहिचानकर्ता
     kind: द्वारा पहिचान
     matching_strategy: मिलान रणनीति
+    matching_strategy_option:
+      contains: समावेश गर्दछ
+      ends_with: संग समाप्त हुन्छ
+      equals: बराबर हुन्छ
+      regex: नियमित अभिव्यक्ति
+      starts_with: बाट सुरु हुन्छ
     negation: मिल्दो मिल्दो
     or: अथवा
     remove: ब्लक मेट्नुहोस्
+    type:
+      class: कक्षा
+      exe: Exe
+      path: बाटो
+      title: शीर्षक
   import: आयात
   new: नंया
   search: खोजी
@@ -68,6 +82,7 @@ devtools:
   install_folder: स्थापना फोल्डर
   load: बोभ्क
   settings_file: सेटिंग्स फाइल
+  simulate_fullscreen: फुलस्क्रिन घटना सिमुलेट गर्नुहोस्
 extras:
   discord: छलफल दिनु
   exit: छोड्नुहोस् / बाहिर निस्कनुहोस्
@@ -203,6 +218,10 @@ toolbar:
   delay_to_show: देखाउन ढिलाइ
   enable: फैन्सी उपकरणपट्टी सक्षम गर्नुहोस्
   height: ऊचाई
+  hide_mode:
+    always: सधैं
+    never: कहिल्यै
+    on_overlap: ओभरल्यापमा
   label: औजारपरो
   placeholder:
     author: लेखिका
@@ -235,6 +254,10 @@ weg:
   dock_side: स्थिति
   enable: डक / टास्कबार सक्षम गर्नुहोस्
   gap: अन्तराल
+  hide_mode:
+    always: सधैं
+    never: कहिल्यै
+    on_overlap: ओभरल्यापमा
   items:
     gap: वस्तुहरू बीचको ठाउँ
     label: वस्तुहरू
@@ -247,6 +270,9 @@ weg:
     zoom_size: Zoomed आकार (थिमका लागि प्रयोग गरिएको)
   label: डक / टास्कबार
   margin: स्पानलिन
+  mode:
+    full_width: पूर्ण स्क्रिन चौडाइ
+    min_content: हुनसक्ने सानो
   padding: प्याडडि .्वन
   use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
   width: चौडाई

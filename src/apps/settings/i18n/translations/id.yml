@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktifkan peluncur aplikasi
+  launch_on:
+    mouse_over: Arahkan mouse
+    primary: Utama
   monitor: Monitor untuk ditampilkan
   runners:
     cmd: Memerintah
@@ -50,9 +53,20 @@ apps_configurations:
     id: Pengidentifikasi
     kind: Identifikasi oleh
     matching_strategy: Strategi pencocokan
+    matching_strategy_option:
+      contains: Berisi
+      ends_with: Berakhir dengan
+      equals: Setara
+      regex: Ekspresi reguler
+      starts_with: Dimulai dengan
     negation: Meninggalkan pencocokan
     or: ATAU
     remove: Hapus blok
+    type:
+      class: Kelas
+      exe: Contoh
+      path: Jalur
+      title: Judul
   import: Impor
   new: Baru
   search: Mencari
@@ -68,6 +82,7 @@ devtools:
   install_folder: Folder Instalasi
   load: Memuat
   settings_file: File Pengaturan
+  simulate_fullscreen: Simulasikan acara layar penuh
 extras:
   discord: Perselisihan
   exit: Berhenti/keluar
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Keterlambatan untuk ditampilkan
   enable: Aktifkan toolbar mewah
   height: Tinggi
+  hide_mode:
+    always: Selalu
+    never: Tidak pernah
+    on_overlap: Di tumpang tindih
   label: Toolbar
   placeholder:
     author: Pengarang
@@ -236,6 +255,10 @@ weg:
   dock_side: Posisi
   enable: Aktifkan Dock/Taskbar
   gap: Celah
+  hide_mode:
+    always: Selalu
+    never: Tidak pernah
+    on_overlap: Di tumpang tindih
   items:
     gap: Ruang antar item
     label: Item
@@ -248,6 +271,9 @@ weg:
     zoom_size: Ukuran zoom (digunakan untuk tema)
   label: Dock/Taskbar
   margin: Batas
+  mode:
+    full_width: Lebar layar penuh
+    min_content: Sekecil mungkin
   padding: Lapisan
   use_multiple_monitor_overlap_logic: Gunakan tampilan spesifik, bukan logika fokus tunggal
   width: Lebar

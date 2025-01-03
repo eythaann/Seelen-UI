@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktiver appstarter
+  launch_on:
+    mouse_over: Hold musen over
+    primary: Primær
   monitor: Overvåke for å vise
   runners:
     cmd: Kommando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identifisere av
     matching_strategy: Matchende strategi
+    matching_strategy_option:
+      contains: Inneholder
+      ends_with: Ender med
+      equals: Er lik
+      regex: Regelmessig uttrykk
+      starts_with: Starter med
     negation: Negere matching
     or: ELLER
     remove: Slett blokkering
+    type:
+      class: Klasse
+      exe: Exe
+      path: Sti
+      title: Tittel
   import: Import
   new: Ny
   search: Søk
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installasjonsmappe
   load: Laste
   settings_file: Innstillingsfilen
+  simulate_fullscreen: Simuler fullskjermhendelse
 extras:
   discord: Uenighet
   exit: Avslutt/avslutte
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Forsinkelse med visning
   enable: Aktiver fancy verktøylinje
   height: Høyde
+  hide_mode:
+    always: Alltid
+    never: Aldri
+    on_overlap: På overlapping
   label: Verktøylinje
   placeholder:
     author: Forfatter
@@ -238,6 +257,10 @@ weg:
   dock_side: Stilling
   enable: Aktiver dock/oppgavelinje
   gap: Mellomrom
+  hide_mode:
+    always: Alltid
+    never: Aldri
+    on_overlap: På overlapping
   items:
     gap: Plass mellom varene
     label: Gjenstander
@@ -250,6 +273,9 @@ weg:
     zoom_size: Zoomet størrelse (brukt til temaer)
   label: Dock/oppgavelinje
   margin: Margin
+  mode:
+    full_width: Full skjermbredde
+    min_content: Liten som kan være
   padding: Polstring
   use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
   width: Bredde

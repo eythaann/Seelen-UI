@@ -1,5 +1,8 @@
 app_launcher:
   enable: ჩართეთ აპლიკაციის გამშვები
+  launch_on:
+    mouse_over: მაუსი ზევით
+    primary: პირველადი
   monitor: მონიტორის ჩვენება
   runners:
     cmd: ბრძანება
@@ -50,9 +53,20 @@ apps_configurations:
     id: პირადობა
     kind: იდენტიფიცირება
     matching_strategy: შესაბამისი სტრატეგია
+    matching_strategy_option:
+      contains: შეიცავს
+      ends_with: მთავრდება
+      equals: უდრის
+      regex: რეგულარული გამოხატულება
+      starts_with: იწყება იმით
     negation: უარყოფითი შესატყვისი
     or: ან
     remove: წაშალეთ ბლოკი
+    type:
+      class: კლასი
+      exe: exe
+      path: ბილიკი
+      title: სათაური
   import: იმპორტი
   new: ახალი
   search: ძებნა
@@ -68,6 +82,7 @@ devtools:
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
+  simulate_fullscreen: სრულეკრანიანი მოვლენის სიმულაცია
 extras:
   discord: უთანასწორობა
   exit: დატოვება/გასვლა
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: დაგვიანებით ჩვენება
   enable: ჩართეთ ლამაზი პანელი
   height: სიმაღლე
+  hide_mode:
+    always: ყოველთვის
+    never: არასოდეს
+    on_overlap: გადახურვაზე
   label: ინსტრუმენტთა პანელი
   placeholder:
     author: ავტორი
@@ -238,6 +257,10 @@ weg:
   dock_side: პოზიცია
   enable: ჩართეთ dock/taskbar
   gap: ხარპი
+  hide_mode:
+    always: ყოველთვის
+    never: არასოდეს
+    on_overlap: გადახურვაზე
   items:
     gap: სივრცე ნივთებს შორის
     label: ნივთები
@@ -250,6 +273,9 @@ weg:
     zoom_size: მასშტაბური ზომა (გამოიყენება თემებისთვის)
   label: დოკ/დავალების ზოლი
   margin: ზღვარი
+  mode:
+    full_width: სრული ეკრანის სიგანე
+    min_content: რაც შეიძლება პატარა იყოს
   padding: ბადება
   use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
   width: სიგანე
