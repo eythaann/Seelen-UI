@@ -18,7 +18,8 @@
 .media-control,
 .notifications,
 .notification-arrival,
-.calendar-container {
+.calendar-container,
+.userhome {
   font-size: 0.8rem;
   font-weight: 500;
 
@@ -150,6 +151,180 @@
   &:hover {
     background-color: var(--color-gray-200);
   }
+}
+
+.userhome {
+  margin: var(--popups-margin);
+  width: 260px;
+  box-shadow: 0 0 10px 10px #0001;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  max-height: calc(99vh - var(--config-height));
+
+  .userhome-bg-layer-1 {
+    background-color: var(--color-gray-50);
+    border-radius: 10px;
+  }
+}
+
+.userhome-profile-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 220px;
+
+  margin-bottom: 8px;
+  padding: 12px;
+
+  border-radius: 8px;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);
+  background-color: var(--color-gray-100);
+
+  .userhome-profile-picture-container {
+    height: 100%;
+    
+    .userhome-profile-picture {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 4.5em - 4px);
+      
+      border-radius: 50%;
+      aspect-ratio: 1/1;
+      
+      box-shadow: 0 0 8px 1px rgba(0, 0, 0, 0.4), 0 0 8px 1px rgba(0, 0, 0, 0.4) inset;
+      
+      .userhome-profile-picture-img {
+        height: 100%;
+        border-radius: 50%;
+        aspect-ratio: 1/1;
+      }
+    }
+
+    .userhome-profile-username, .userhome-profile-onedrive, .userhome-profile-passwords {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      width: 100%;
+      height: 2em;
+      font-size: 0.8em;
+
+      margin-top: 2px;
+      padding: 0.25em;
+
+      font-style: italic;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .userhome-profile-username-text, .userhome-profile-onedrive-text, .userhome-profile-passwords-text {
+      margin-left: 0.25em;
+    }
+
+    .userhome-profile-button-signout {
+      position: absolute;
+      
+      width: 2em;
+      height: 2em;
+      
+      top: -0.25em;
+      right: -0.25em;
+
+      opacity: 0.8;
+    }
+    
+    .userhome-profile-button-lock {
+      position: absolute;
+
+      width: 2em;
+      height: 2em;
+
+      top: -0.25em;
+      left: -0.25em;
+
+      opacity: 0.8;
+    }
+
+    .userhome-profile-username, .userhome-profile-onedrive, .userhome-profile-button-lock, .userhome-profile-button-signout, .userhome-profile-passwords {
+      cursor: pointer;
+      padding: 0.25em;
+      border-radius: 8px;
+
+      background-color: transparent;
+
+      transition: background-color 0.3s ease-in-out;
+
+      &:hover {
+        background-color: var(--color-gray-50);
+      }
+    }
+  }
+}
+
+.userhome-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-gray-600);
+  margin-bottom: 4px;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding-bottom: 4px;
+  border-bottom: solid 1px var(--color-gray-300);
+  margin-bottom: 6px;
+}
+
+.userhome-history {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  gap: 4px;
+  flex: 1;
+  max-height: 30vh;
+}
+
+.userhome-history-item {
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  padding: 8px;
+  gap: 6px;
+  height: 1.75em;
+
+  &:hover {
+    background-color: rgba(var(--config-accent-color-rgb), 0.2);
+  }
+}
+
+.userhome-history-item-icon {
+  width: 1rem;
+  height: 1rem;
+  min-height: 1rem;
+  min-width: 1rem;
+  margin: 0 0.25rem;
+}
+
+.userhome-history-item-title {
+  flex: 1;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.userhome-history-item-date {
+  width: 20%;
+
+  line-height: 0.75em;
+  padding-left: 0.25em;
+  font-size: 0.5em;
+  font-style: italic;
+  text-align: right;
+  border-left: 1px solid var(--color-gray-900);
 }
 
 .tray {

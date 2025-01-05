@@ -2,9 +2,9 @@ id: "@default/user-folder"
 icon: "TiUser"
 target: "@seelen/fancy-toolbar"
 plugin:
-  type: generic
+  type: user
+  withUserFolder: true
   template: concat("@", env.USERNAME)
-  onClickV2: open(env.USERPROFILE)
   tooltip: t("placeholder.open_user_folder")
   style:
     flexShrink: 0

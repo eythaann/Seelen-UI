@@ -30,3 +30,13 @@ impl PictureQuality {
         }
     }
 }
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+pub struct User {
+    pub name: String,
+    pub domain: String,
+    pub profile_home_path: PathBuf,
+    pub email: Option<String>,
+    pub one_drive_path: Option<PathBuf>,
+    pub profile_picture_path: Option<PathBuf>,
+}
