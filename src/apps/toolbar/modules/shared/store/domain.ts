@@ -1,4 +1,4 @@
-import { RecentFile, User } from '@seelen-ui/lib';
+import { File, User } from '@seelen-ui/lib';
 import { FancyToolbarSettings, Placeholder, Plugin, Settings } from '@seelen-ui/lib/types';
 import { Moment } from 'moment';
 import { SoftOpaque } from 'readable-types';
@@ -114,7 +114,12 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
 
   isOverlaped: boolean;
   user: User | null;
-  userRecentFolder: RecentFile[];
+  userRecentFolder: File[];
+  userDocumentsFolder: File[];
+  userDownloadsFolder: File[];
+  userPicturesFolder: File[];
+  userVideosFolder: File[];
+  userMusicFolder: File[];
   focused: FocusedApp | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;

@@ -1,6 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
+  DocumentsFolder,
+  DownloadsFolder,
   invoke,
+  MusicFolder,
+  PicturesFolder,
   PlaceholderList,
   PluginList,
   RecentFolder,
@@ -9,6 +13,7 @@ import {
   Settings,
   UIColors,
   UserDetails,
+  VideosFolder,
 } from '@seelen-ui/lib';
 import { FancyToolbarSettings } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
@@ -156,6 +161,21 @@ export async function registerStoreEvents() {
 
   store.dispatch(RootActions.setUserRecentFolder((await RecentFolder.getAsync()).all()));
   RecentFolder.onChange((details) => store.dispatch(RootActions.setUserRecentFolder(details.all())));
+
+  store.dispatch(RootActions.setUserDocumentsFolder((await DocumentsFolder.getAsync()).all()));
+  DocumentsFolder.onChange((details) => store.dispatch(RootActions.setUserDocumentsFolder(details.all())));
+
+  store.dispatch(RootActions.setUserDownloadsFolder((await DownloadsFolder.getAsync()).all()));
+  DownloadsFolder.onChange((details) => store.dispatch(RootActions.setUserDownloadsFolder(details.all())));
+
+  store.dispatch(RootActions.setUserPicturesFolder((await PicturesFolder.getAsync()).all()));
+  PicturesFolder.onChange((details) => store.dispatch(RootActions.setUserPicturesFolder(details.all())));
+
+  store.dispatch(RootActions.setUserVideosFolder((await VideosFolder.getAsync()).all()));
+  VideosFolder.onChange((details) => store.dispatch(RootActions.setUserVideosFolder(details.all())));
+
+  store.dispatch(RootActions.setUserMusicFolder((await MusicFolder.getAsync()).all()));
+  MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
 
   await initUIColors();
   await StartThemingTool();

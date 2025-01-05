@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RecentFolder, Settings, UIColors } from '@seelen-ui/lib';
+import { DocumentsFolder, DownloadsFolder, MusicFolder, PicturesFolder, RecentFolder, Settings, UIColors, VideosFolder } from '@seelen-ui/lib';
 import { Placeholder, ToolbarItem } from '@seelen-ui/lib/types';
 
 import { RootState } from './domain';
@@ -16,6 +16,11 @@ const initialState: RootState = {
   isOverlaped: false,
   user: null,
   userRecentFolder: RecentFolder.default().all(),
+  userDocumentsFolder: DocumentsFolder.default().all(),
+  userDownloadsFolder: DownloadsFolder.default().all(),
+  userPicturesFolder: PicturesFolder.default().all(),
+  userVideosFolder: VideosFolder.default().all(),
+  userMusicFolder: MusicFolder.default().all(),
   focused: null,
   settings: settings.inner.fancyToolbar,
   env: {},

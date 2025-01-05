@@ -7,7 +7,10 @@ use notify_debouncer_full::{
     DebounceEventResult, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use std::{os::windows::fs::MetadataExt, path::PathBuf, sync::Arc, time::Duration};
+use std::{
+    collections::HashMap, fs::DirEntry, os::windows::fs::MetadataExt, path::PathBuf, sync::Arc,
+    time::Duration,
+};
 use tauri::async_runtime::block_on;
 use winreg::{
     enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
@@ -21,7 +24,7 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-use super::domain::{PictureQuality, RecentFile, User};
+use super::domain::{File, FolderType, PictureQuality, User};
 
 const USER_PROFILE_REG_PATH_PATTERN: &str =
     "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\";
@@ -39,21 +42,27 @@ lazy_static! {
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UserManagerEvent {
     UserUpdated(),
-    RecentFolderChanged(),
+    FolderChanged(FolderType),
 }
 
-#[derive(Getters)]
+#[derive(Debug, Getters)]
 pub struct UserManager {
     user_sid: String,
     #[getset(get = "pub")]
-    recent_folder_path: PathBuf,
-    #[getset(get = "pub")]
     user_details: Option<User>,
+    folder_wathcer: Option<Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>>,
     #[getset(get = "pub")]
-    recent_folder: Option<Vec<RecentFile>>,
-    recent_folder_wathcer: Option<Arc<Option<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>>,
+    folders: HashMap<FolderType, UserFolderDetails>,
+}
+
+#[derive(Debug, Getters)]
+pub struct UserFolderDetails {
     #[getset(get = "pub")]
-    recent_folder_limit: usize,
+    path: PathBuf,
+    #[getset(get = "pub")]
+    limit: usize,
+    #[getset(get = "pub")]
+    content: Option<Vec<File>>,
 }
 
 unsafe impl Send for UserManager {}
@@ -66,15 +75,30 @@ impl UserManager {
     pub fn new() -> Result<Self, AppError> {
         let mut instance = Self {
             user_sid: block_on(Self::get_user_sid()).ok().unwrap(),
-            recent_folder_path: Self::get_recent_folder_path().ok().unwrap(),
             user_details: None,
-            recent_folder: None,
-            recent_folder_wathcer: None,
-            recent_folder_limit: 20,
+            folder_wathcer: None,
+            folders: HashMap::new(),
         };
         instance.user_details = instance.create_user().ok();
-        instance.recent_folder = instance.get_recent_files().ok();
-        instance.recent_folder_wathcer = instance.create_file_wathcer().ok();
+
+        for folder in FolderType::values().iter() {
+            let folder_path = folder.to_path();
+            instance.folders.insert(
+                folder.clone(),
+                UserFolderDetails {
+                    path: folder_path.clone(),
+                    limit: 20,
+                    content: Self::get_folder_content(
+                        folder_path,
+                        20,
+                        *folder != FolderType::Recent,
+                    )
+                    .ok(),
+                },
+            );
+        }
+
+        instance.folder_wathcer = instance.create_file_wathcer().ok();
 
         spawn_named_thread("User Manager", move || loop {
             let mut changed = false;
@@ -132,13 +156,94 @@ impl UserManager {
         let sid = PwshScript::new(USER_SID_EXTRACTION_SCRIPT)
             .execute()
             .await?;
-
         Ok(sid)
     }
-    fn get_recent_folder_path() -> Result<PathBuf, AppError> {
-        let path = std::env::temp_dir().join("..\\..\\Roaming\\Microsoft\\Windows\\Recent");
 
-        Ok(path)
+    fn get_recursive_folder(path: PathBuf) -> Box<dyn Iterator<Item = DirEntry>> {
+        let read_dir = std::fs::read_dir(path);
+
+        if let Ok(result) = read_dir {
+            Box::new(
+                result
+                    .filter(|r| r.is_ok())
+                    .map(|r| r.unwrap())
+                    .map(|dir| {
+                        if dir.path().is_dir() {
+                            UserManager::get_recursive_folder(dir.path())
+                        } else {
+                            Box::new([dir].into_iter())
+                        }
+                    })
+                    .flatten(),
+            )
+        } else {
+            Box::new([].into_iter())
+        }
+    }
+
+    fn get_folder_content(
+        path: PathBuf,
+        limit: usize,
+        is_recursive: bool,
+    ) -> Result<Vec<File>, AppError> {
+        let folders = if is_recursive {
+            UserManager::get_recursive_folder(path)
+        } else {
+            Box::new(std::fs::read_dir(path)?.map(|r| r.unwrap()))
+        };
+
+        Ok(folders
+            .filter(|item| {
+                let pathbuf = item.path();
+                let path = pathbuf.as_path();
+                if path.is_file() {
+                    if let Some(extension) = path.extension() {
+                        if extension == "lnk" {
+                            if let Ok((result, _)) = WindowsApi::resolve_lnk_target(path) {
+                                if result.exists() {
+                                    return !result.is_dir();
+                                }
+                            }
+                        } else if extension == "ini" {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }
+
+                false
+            })
+            .map(|item| {
+                let mut current_target = item.path();
+                if current_target.extension().unwrap() == "lnk" {
+                    if let Ok((target, _)) = WindowsApi::resolve_lnk_target(&current_target) {
+                        current_target = target;
+                    }
+                }
+
+                File {
+                    path: std::fs::canonicalize(current_target.clone())
+                        .unwrap()
+                        .to_str()
+                        .unwrap()[4..]
+                        .into(),
+                    last_access_time: if let Ok(metadata) = item.metadata() {
+                        metadata.last_write_time()
+                    } else {
+                        0
+                    },
+                }
+            })
+            .sorted_by_key(|item| {
+                if item.last_access_time == 0 {
+                    i64::MIN
+                } else {
+                    -(item.last_access_time as i64)
+                }
+            })
+            .take(limit)
+            .collect())
     }
 }
 
@@ -164,11 +269,19 @@ impl UserManager {
         Ok(user)
     }
 
-    pub fn set_recent_folder_limit(&mut self, limit: usize) -> Result<(), AppError> {
-        self.recent_folder_limit = limit;
+    pub fn set_folder_limit(
+        &mut self,
+        folder_type: FolderType,
+        limit: usize,
+    ) -> Result<(), AppError> {
+        let folder = self.folders.get_mut(&folder_type);
+        if let Some(model) = folder {
+            model.limit = limit;
+            model.content = Self::get_folder_content(model.path.clone(), limit.clone(), false).ok();
+        }
 
         let sender = Self::event_tx();
-        log_error!(sender.send(UserManagerEvent::RecentFolderChanged()));
+        log_error!(sender.send(UserManagerEvent::FolderChanged(folder_type)));
 
         Ok(())
     }
@@ -183,13 +296,62 @@ impl UserManager {
                 Ok(events) => {
                     // log::info!("RecentFile watcher events: {:?}", events);
                     for event in events {
-                        if let EventKind::Create(_) = event.kind {
-                            for pathbuf in &event.paths {
-                                let path = pathbuf.as_path();
-                                if let Ok((result, _)) = WindowsApi::resolve_lnk_target(path) {
-                                    if result.exists() {
-                                        let file = RecentFile {
-                                            path: std::fs::canonicalize(result.clone())
+                        for pathbuf in &event.paths {
+                            let path = pathbuf.as_path();
+                            let folder_type = FolderType::from_path(pathbuf).unwrap();
+                            match folder_type {
+                                FolderType::Recent => {
+                                    if let EventKind::Create(_) = event.kind {
+                                        if let Ok((result, _)) =
+                                            WindowsApi::resolve_lnk_target(path)
+                                        {
+                                            if result.exists() {
+                                                let file = File {
+                                                    path: std::fs::canonicalize(result.clone())
+                                                        .unwrap()
+                                                        .to_str()
+                                                        .unwrap()[4..]
+                                                        .into(),
+                                                    last_access_time: if let Ok(metadata) =
+                                                        pathbuf.metadata()
+                                                    {
+                                                        metadata.last_write_time()
+                                                    } else {
+                                                        0
+                                                    },
+                                                };
+
+                                                let ref mut folders =
+                                                    trace_lock!(USER_MANAGER).folders;
+                                                let folder = folders.get_mut(&FolderType::Recent);
+                                                if let Some(model) = folder {
+                                                    if let Some(ref mut folder_content) =
+                                                        model.content
+                                                    {
+                                                        if folder_content[0] != file {
+                                                            folder_content.insert(0, file.clone());
+
+                                                            let sender = Self::event_tx();
+                                                            log_error!(sender.send(
+                                                                UserManagerEvent::FolderChanged(
+                                                                    FolderType::Recent
+                                                                )
+                                                            ));
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                FolderType::Downloads
+                                | FolderType::Documents
+                                | FolderType::Pictures
+                                | FolderType::Videos
+                                | FolderType::Music => {
+                                    if let EventKind::Create(_) = event.kind {
+                                        let file = File {
+                                            path: std::fs::canonicalize(pathbuf.clone())
                                                 .unwrap()
                                                 .to_str()
                                                 .unwrap()[4..]
@@ -203,16 +365,38 @@ impl UserManager {
                                             },
                                         };
 
-                                        if let Some(ref mut folder) =
-                                            trace_lock!(USER_MANAGER).recent_folder
-                                        {
-                                            if folder[0] != file {
-                                                folder.insert(0, file.clone());
+                                        let ref mut folders = trace_lock!(USER_MANAGER).folders;
+                                        let folder = folders.get_mut(&folder_type);
+                                        if let Some(model) = folder {
+                                            if let Some(ref mut folder_content) = model.content {
+                                                if folder_content[0] != file {
+                                                    folder_content.insert(0, file.clone());
 
-                                                let sender = Self::event_tx();
-                                                log_error!(sender
-                                                    .send(UserManagerEvent::RecentFolderChanged()));
+                                                    let sender = Self::event_tx();
+                                                    log_error!(sender.send(
+                                                        UserManagerEvent::FolderChanged(
+                                                            folder_type
+                                                        )
+                                                    ));
+                                                }
                                             }
+                                        }
+                                    } else if let EventKind::Access(_) = event.kind {
+                                    } else {
+                                        let ref mut folders = trace_lock!(USER_MANAGER).folders;
+                                        let folder = folders.get_mut(&folder_type);
+                                        if let Some(model) = folder {
+                                            model.content = UserManager::get_folder_content(
+                                                model.path.clone(),
+                                                model.limit,
+                                                true,
+                                            )
+                                            .ok();
+
+                                            let sender = Self::event_tx();
+                                            log_error!(sender.send(
+                                                UserManagerEvent::FolderChanged(folder_type)
+                                            ));
                                         }
                                     }
                                 }
@@ -227,9 +411,10 @@ impl UserManager {
             },
         )?;
 
-        debouncer
-            .watcher()
-            .watch(&self.recent_folder_path, RecursiveMode::Recursive)?;
+        let watcher = debouncer.watcher();
+        for item in &FolderType::values() {
+            watcher.watch(&self.folders[item].path.clone(), RecursiveMode::Recursive)?;
+        }
 
         Ok(Arc::new(Some(debouncer)))
     }
@@ -252,54 +437,5 @@ impl UserManager {
         let path: String = settings.get_value(USER_PROFILE_ONEDRIVE_FOLDER_KEY)?;
 
         Ok((email, PathBuf::from(path)))
-    }
-
-    fn get_recent_files(&self) -> Result<Vec<RecentFile>, AppError> {
-        let result = std::fs::read_dir(self.recent_folder_path.clone())?
-            .map(|r| r.unwrap())
-            .filter(|item| {
-                let pathbuf = item.path();
-                let path = pathbuf.as_path();
-                if let Some(extension) = path.extension() {
-                    if extension == "lnk" {
-                        if let Ok((result, _)) = WindowsApi::resolve_lnk_target(path) {
-                            if result.exists() {
-                                return !result.is_dir();
-                            }
-                        }
-                    }
-                }
-
-                false
-            })
-            .map(|item| {
-                let mut current_target = item.path();
-                if let Ok((target, _)) = WindowsApi::resolve_lnk_target(&current_target) {
-                    current_target = target;
-                }
-
-                RecentFile {
-                    path: std::fs::canonicalize(current_target.clone())
-                        .unwrap()
-                        .to_str()
-                        .unwrap()[4..]
-                        .into(),
-                    last_access_time: if let Ok(metadata) = item.metadata() {
-                        metadata.last_write_time()
-                    } else {
-                        0
-                    },
-                }
-            })
-            .sorted_by_key(|item| {
-                if item.last_access_time == 0 {
-                    i64::MIN
-                } else {
-                    -(item.last_access_time as i64)
-                }
-            })
-            .collect();
-
-        Ok(result)
     }
 }

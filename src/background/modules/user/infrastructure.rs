@@ -2,13 +2,16 @@ use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
 use crate::{
-    error_handler::AppError, log_error, modules::user::USER_MANAGER, seelen::get_app_handle,
+    error_handler::AppError,
+    log_error,
+    modules::user::{domain::FolderChangedArgs, UserManagerEvent, USER_MANAGER},
+    seelen::get_app_handle,
     trace_lock,
 };
 
 use super::{
     application::UserManager,
-    domain::{ExposedRecentFile, User},
+    domain::{ExposedFile, FolderType, User},
 };
 
 fn _get_user() -> Result<User, AppError> {
@@ -22,15 +25,18 @@ pub fn register_user_events() {
     _ = _get_user();
 
     UserManager::subscribe(|event| match event {
-        crate::modules::user::UserManagerEvent::UserUpdated() => {
+        UserManagerEvent::UserUpdated() => {
             if let Ok(user) = _get_user() {
                 log_error!(get_app_handle().emit(SeelenEvent::UserChanged, user));
             }
         }
-        crate::modules::user::UserManagerEvent::RecentFolderChanged() => {
+        UserManagerEvent::FolderChanged(folder) => {
             log_error!(get_app_handle().emit(
-                SeelenEvent::UserRecentFolderChanged,
-                get_user_recent_folder_content().ok().unwrap()
+                SeelenEvent::UserFolderChanged,
+                FolderChangedArgs {
+                    of_folder: folder.clone(),
+                    content: get_user_folder_content(folder).ok(),
+                }
             ));
         }
     });
@@ -42,15 +48,14 @@ pub fn get_user() -> Result<User, AppError> {
 }
 
 #[tauri::command(async)]
-pub fn get_user_recent_folder_content() -> Result<Vec<ExposedRecentFile>, AppError> {
+pub fn get_user_folder_content(folder_type: FolderType) -> Result<Vec<ExposedFile>, AppError> {
     let manager = trace_lock!(USER_MANAGER);
 
-    let result = manager
-        .recent_folder()
+    let result = manager.folders()[&folder_type]
+        .content()
         .as_ref()
         .unwrap()
         .iter()
-        .take(*manager.recent_folder_limit())
         .map(|item| item.clone().into())
         .collect();
 
@@ -58,8 +63,8 @@ pub fn get_user_recent_folder_content() -> Result<Vec<ExposedRecentFile>, AppErr
 }
 
 #[tauri::command(async)]
-pub fn set_user_recent_folder_limit(amount: usize) -> Result<(), AppError> {
+pub fn set_user_folder_limit(folder_type: FolderType, amount: usize) -> Result<(), AppError> {
     let mut manager = trace_lock!(USER_MANAGER);
-    manager.set_recent_folder_limit(amount)?;
+    manager.set_folder_limit(folder_type, amount)?;
     Ok(())
 }
