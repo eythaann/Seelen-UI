@@ -6,6 +6,7 @@ use crate::{
     log_error,
     modules::user::{domain::FolderChangedArgs, UserManagerEvent, USER_MANAGER},
     seelen::get_app_handle,
+    seelen_weg::icon_extractor::extract_and_save_icon_from_file,
     trace_lock,
 };
 
@@ -21,8 +22,16 @@ fn _get_user() -> Result<User, AppError> {
 
 pub fn register_user_events() {
     //Initialize the User Manager for first use.
-    log::trace!("Register for user profile events!");
-    _ = _get_user();
+    log::trace!("Register for user profile events and cache folders' file icons!");
+    let manager = trace_lock!(USER_MANAGER);
+    let folders = manager.folders();
+    for folder_details in folders.values() {
+        if let Some(content) = folder_details.content() {
+            for file in content {
+                _ = extract_and_save_icon_from_file(file.path.clone());
+            }
+        }
+    }
 
     UserManager::subscribe(|event| match event {
         UserManagerEvent::UserUpdated() => {
