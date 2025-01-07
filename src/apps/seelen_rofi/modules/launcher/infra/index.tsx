@@ -110,7 +110,7 @@ export function Launcher() {
             <Item
               key={item.path}
               item={item}
-              hidden={!item.label.toLowerCase().includes(command)}
+              hidden={!item.path.toLowerCase().includes(command)}
             />
           ))}
         </div>

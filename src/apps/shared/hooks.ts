@@ -54,7 +54,7 @@ export function useIcon(args: { path: string; umid?: string }): string | null {
       // this will run asynchronously on end `iconPackManager.onChange` will be triggered
       IconPackManager.extractIcon(args);
     }
-  }, [iconSrc]);
+  }, []);
 
   return iconSrc;
 }

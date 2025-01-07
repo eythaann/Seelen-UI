@@ -68,6 +68,7 @@ impl Window {
         self.0 .0 as isize
     }
 
+    /// TODO move this of place
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
     pub fn search_shortcut_with_same_umid(umid: &str) -> Option<PathBuf> {
         let items = START_MENU_ITEMS.load();

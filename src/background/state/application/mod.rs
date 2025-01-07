@@ -21,17 +21,14 @@ use seelen_core::state::{
     IconPack, Plugin, PluginId, Profile, WegItems, Widget, WidgetId, WindowManagerLayout,
 };
 use std::{
-    collections::{HashMap, VecDeque},
+    collections::{HashMap, HashSet, VecDeque},
     path::{Path, PathBuf},
-    sync::{
-        atomic::{AtomicBool, Ordering},
-        Arc,
-    },
+    sync::Arc,
     time::Duration,
 };
 
 use crate::{
-    error_handler::Result, log_error, modules::cli::domain::Resource,
+    error_handler::Result, log_error, modules::cli::domain::Resource, trace_lock,
     utils::constants::SEELEN_COMMON, windows_api::WindowsApi,
 };
 
@@ -42,9 +39,9 @@ lazy_static! {
         log::trace!("Creating new State Manager");
         FullState::new().expect("Failed to create State Manager")
     }));
+    static ref MODIFICATIONS_TO_SKIP: Arc<Mutex<HashSet<PathBuf>>> =
+        Arc::new(Mutex::new(HashSet::new()));
 }
-
-static FILE_LISTENER_PAUSED: AtomicBool = AtomicBool::new(false);
 
 pub type LauncherHistory = HashMap<String, Vec<String>>;
 
@@ -98,24 +95,38 @@ impl FullState {
         self.clone()
     }
 
-    fn process_event(&mut self, event: DebouncedEvent) -> Result<()> {
-        let event = event.event;
+    pub fn skip_modification(&self, path: PathBuf) {
+        trace_lock!(MODIFICATIONS_TO_SKIP).insert(path);
+    }
 
-        if event
-            .paths
+    fn join_and_filter_debounced_changes(events: Vec<DebouncedEvent>) -> HashSet<PathBuf> {
+        let mut result = HashSet::new();
+        let mut to_skip = trace_lock!(MODIFICATIONS_TO_SKIP);
+        for event in events {
+            for path in event.event.paths {
+                if !path.is_dir() {
+                    result.insert(path);
+                }
+            }
+        }
+
+        let final_result = result.difference(&to_skip).cloned().collect();
+        *to_skip = to_skip.difference(&result).cloned().collect();
+
+        final_result
+    }
+
+    fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {
+        if changed
             .iter()
-            .any(|p| p.starts_with(SEELEN_COMMON.icons_path()))
+            .any(|p| p.starts_with(SEELEN_COMMON.icons_path()) && p.ends_with("metadata.yml"))
         {
             log::info!("Icons Packs changed");
             self.load_icons_packs()?;
             self.emit_icon_packs()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p == SEELEN_COMMON.weg_items_path())
-        {
+        if changed.iter().any(|p| p == SEELEN_COMMON.weg_items_path()) {
             let old = self.weg_items.clone();
             self.read_weg_items()?;
             if old != self.weg_items {
@@ -124,27 +135,19 @@ impl FullState {
             }
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p == SEELEN_COMMON.history_path())
-        {
+        if changed.iter().any(|p| p == SEELEN_COMMON.history_path()) {
             log::info!("History changed");
             self.load_history()?;
             self.emit_history()?;
         }
 
-        if event
-            .paths
-            .iter()
-            .any(|p| p == SEELEN_COMMON.settings_path())
-        {
+        if changed.iter().any(|p| p == SEELEN_COMMON.settings_path()) {
             log::info!("Seelen Settings changed");
             self.read_settings()?;
             self.emit_settings()?;
         }
 
-        if event.paths.iter().any(|p| {
+        if changed.iter().any(|p| {
             p.starts_with(SEELEN_COMMON.user_themes_path())
                 || p.starts_with(SEELEN_COMMON.bundled_themes_path())
         }) {
@@ -153,7 +156,7 @@ impl FullState {
             self.emit_themes()?;
         }
 
-        if event.paths.iter().any(|p| {
+        if changed.iter().any(|p| {
             p.starts_with(SEELEN_COMMON.user_placeholders_path())
                 || p.starts_with(SEELEN_COMMON.bundled_placeholders_path())
         }) {
@@ -162,7 +165,7 @@ impl FullState {
             self.emit_placeholders()?;
         }
 
-        if event.paths.iter().any(|p| {
+        if changed.iter().any(|p| {
             p.starts_with(SEELEN_COMMON.user_layouts_path())
                 || p.starts_with(SEELEN_COMMON.bundled_layouts_path())
         }) {
@@ -171,7 +174,7 @@ impl FullState {
             self.emit_layouts()?;
         }
 
-        if event.paths.iter().any(|p| {
+        if changed.iter().any(|p| {
             p == SEELEN_COMMON.user_app_configs_path()
                 || p.starts_with(SEELEN_COMMON.bundled_app_configs_path())
         }) {
@@ -180,7 +183,7 @@ impl FullState {
             self.emit_settings_by_app()?;
         }
 
-        if event.paths.iter().any(|p| {
+        if changed.iter().any(|p| {
             p.starts_with(SEELEN_COMMON.user_plugins_path())
                 || p.starts_with(SEELEN_COMMON.bundled_plugins_path())
         }) {
@@ -189,7 +192,7 @@ impl FullState {
             self.emit_plugins()?;
         }
 
-        if event.paths.iter().any(|p| {
+        if changed.iter().any(|p| {
             p.starts_with(SEELEN_COMMON.user_widgets_path())
                 || p.starts_with(SEELEN_COMMON.bundled_widgets_path())
         }) {
@@ -204,20 +207,17 @@ impl FullState {
     fn start_listeners(&mut self) -> Result<()> {
         log::trace!("Starting Seelen UI Files Watcher");
         let mut debouncer = new_debouncer(
-            Duration::from_millis(100),
+            Duration::from_millis(500),
             None,
             |result: DebounceEventResult| match result {
                 Ok(events) => {
                     // log::info!("Seelen UI File Watcher events: {:?}", events);
-                    if !FILE_LISTENER_PAUSED.load(Ordering::Acquire) {
-                        for event in events {
-                            FULL_STATE.rcu(move |state| {
-                                let mut state = state.cloned();
-                                log_error!(state.process_event(event.clone()));
-                                state
-                            });
-                        }
-                    }
+                    let changed = Self::join_and_filter_debounced_changes(events);
+                    FULL_STATE.rcu(move |state| {
+                        let mut state = state.cloned();
+                        log_error!(state.process_changes(&changed));
+                        state
+                    });
                 }
                 Err(errors) => errors
                     .iter()

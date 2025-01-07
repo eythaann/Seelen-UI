@@ -268,15 +268,19 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
     // try get icons for URLs
     if ext == Some(OsStr::new("url")) {
         let icon = get_icon_from_url_file(path)?;
+        state.add_system_icon(path.to_string_lossy().as_ref(), &icon_filename);
+        state.write_system_icon_pack()?;
+        state.skip_modification(icon_path.clone());
         icon.save(&icon_path)?;
-        state.push_and_save_system_icon(path.to_string_lossy().as_ref(), &icon_filename)?;
         return Ok(icon_path);
     }
 
     // try get the icon directly from the file
     if let Ok(icon) = get_icon_from_file(path) {
+        state.add_system_icon(path.to_string_lossy().as_ref(), &icon_filename);
+        state.write_system_icon_pack()?;
+        state.skip_modification(icon_path.clone());
         icon.save(&icon_path)?;
-        state.push_and_save_system_icon(path.to_string_lossy().as_ref(), &icon_filename)?;
         return Ok(icon_path);
     }
 
@@ -305,7 +309,9 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
         .icons_path()
         .join("system")
         .join(&relative_path);
+    state.add_system_icon(app_umid, &relative_path);
+    state.write_system_icon_pack()?;
+    state.skip_modification(image_path.clone());
     std::fs::copy(app_icon, &image_path)?;
-    state.push_and_save_system_icon(app_umid, &relative_path)?;
     Ok(image_path)
 }
