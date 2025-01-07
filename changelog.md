@@ -7,6 +7,9 @@
 - add icon packs selector on settings > general.
 - allow show only windows on monitor owner of Dock/Taskbar.
 
+### enhancements
+- allow search languages by their english label.
+
 ### refactor
 - move dock state to the background.
 - remove pin sub-menu on dock.

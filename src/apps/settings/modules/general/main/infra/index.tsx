@@ -10,7 +10,7 @@ import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 import { Icon } from 'src/apps/shared/components/Icon';
 
-import { LanguageList } from '../../../../../shared/lang';
+import { SupportedLanguages } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
 import { IconPacks } from './IconPacks';
@@ -57,10 +57,18 @@ export function General() {
           <b>{t('general.language')}</b>
           <Select
             showSearch
-            optionFilterProp="label"
+            filterOption={(_searching, option) => {
+              if (!option) {
+                return true;
+              }
+              const searching = _searching.toLocaleLowerCase();
+              let label = option.label.toLocaleLowerCase();
+              let enLabel = option.enLabel.toLocaleLowerCase();
+              return label.includes(searching) || enLabel.includes(searching);
+            }}
             style={{ width: '200px' }}
             value={language}
-            options={[...LanguageList]}
+            options={[...SupportedLanguages]}
             onSelect={(value) => dispatch(RootActions.setLanguage(value))}
           />
         </SettingsOption>

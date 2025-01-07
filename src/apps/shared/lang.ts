@@ -1,76 +1,83 @@
-export type Lang = (typeof LanguageList)[number]['value'];
+const _languageList = [
+  { label: 'Deutsch', enLabel: 'German', value: 'de' },
+  { label: 'English', enLabel: 'English', value: 'en' },
+  { label: 'Español', enLabel: 'Spanish', value: 'es' },
+  { label: '한국어', enLabel: 'Korean', value: 'ko' },
+  { label: '中文', enLabel: 'Chinese', value: 'zh' },
+  { label: 'Français', enLabel: 'French', value: 'fr' },
+  { label: 'العربية', enLabel: 'Arabic', value: 'ar' },
+  { label: 'Português', enLabel: 'Portuguese', value: 'pt' },
+  { label: 'Русский', enLabel: 'Russian', value: 'ru' },
+  { label: 'हिन्दी', enLabel: 'Hindi', value: 'hi' },
+  { label: '日本語', enLabel: 'Japanese', value: 'ja' },
+  { label: 'Italiano', enLabel: 'Italian', value: 'it' },
+  { label: 'Nederlands', enLabel: 'Dutch', value: 'nl' },
+  { label: 'Türkçe', enLabel: 'Turkish', value: 'tr' },
+  { label: 'Polski', enLabel: 'Polish', value: 'pl' },
+  { label: 'Українська', enLabel: 'Ukrainian', value: 'uk' },
+  { label: 'Ελληνικά', enLabel: 'Greek', value: 'el' },
+  { label: 'עברית', enLabel: 'Hebrew', value: 'he' },
+  { label: 'Svenska', enLabel: 'Swedish', value: 'sv' },
+  { label: 'Norsk', enLabel: 'Norwegian', value: 'no' },
+  { label: 'Suomi', enLabel: 'Finnish', value: 'fi' },
+  { label: 'Dansk', enLabel: 'Danish', value: 'da' },
+  { label: 'Magyar', enLabel: 'Hungarian', value: 'hu' },
+  { label: 'Română', enLabel: 'Romanian', value: 'ro' },
+  { label: 'Čeština', enLabel: 'Czech', value: 'cs' },
+  { label: 'Slovenský', enLabel: 'Slovak', value: 'sk' },
+  { label: 'Hrvatski', enLabel: 'Croatian', value: 'hr' },
+  { label: 'Български', enLabel: 'Bulgarian', value: 'bg' },
+  { label: 'Lietuvių', enLabel: 'Lithuanian', value: 'lt' },
+  { label: 'Latviešu', enLabel: 'Latvian', value: 'lv' },
+  { label: 'Eesti', enLabel: 'Estonian', value: 'et' },
+  { label: 'Filipino', enLabel: 'Filipino', value: 'tl' },
+  { label: 'Tiếng Việt', enLabel: 'Vietnamese', value: 'vi' },
+  { label: 'ไทย', enLabel: 'Thai', value: 'th' },
+  { label: 'Indonesia', enLabel: 'Indonesian', value: 'id' },
+  { label: 'Malay', enLabel: 'Malay', value: 'ms' },
+  { label: 'Català', enLabel: 'Catalan', value: 'ca' },
+  { label: 'Afrikaans', enLabel: 'Afrikaans', value: 'af' },
+  { label: 'বাংলা', enLabel: 'Bengali', value: 'bn' },
+  { label: 'فارسی', enLabel: 'Farsi', value: 'fa' },
+  { label: 'ਪੰਜਾਬੀ', enLabel: 'Punjabi', value: 'pa' },
+  { label: 'Kiswahili', enLabel: 'Swahili', value: 'sw' },
+  { label: 'தமிழ்', enLabel: 'Tamil', value: 'ta' },
+  { label: 'اردو', enLabel: 'Urdu', value: 'ur' },
+  { label: 'Cymraeg', enLabel: 'Welsh', value: 'cy' },
+  { label: 'አማርኛ', enLabel: 'Amharic', value: 'am' },
+  { label: 'Հայերեն', enLabel: 'Armenian', value: 'hy' },
+  { label: 'Azərbaycan', enLabel: 'Azerbaijani', value: 'az' },
+  { label: 'Euskara', enLabel: 'Basque', value: 'eu' },
+  { label: 'Bosanski', enLabel: 'Bosnian', value: 'bs' },
+  { label: 'ქართული', enLabel: 'Georgian', value: 'ka' },
+  { label: 'ગુજરાતી', enLabel: 'Gujarati', value: 'gu' },
+  { label: 'Íslenska', enLabel: 'Icelandic', value: 'is' },
+  { label: 'ភាសាខ្មែរ', enLabel: 'Khmer', value: 'km' },
+  { label: 'Kurdî', enLabel: 'Kurdish', value: 'ku' },
+  { label: 'ລາວ', enLabel: 'Lao', value: 'lo' },
+  { label: 'Lëtzebuergesch', enLabel: 'Luxembourgish', value: 'lb' },
+  { label: 'Македонски', enLabel: 'Macedonian', value: 'mk' },
+  { label: 'Malti', enLabel: 'Maltese', value: 'mt' },
+  { label: 'Монгол', enLabel: 'Mongolian', value: 'mn' },
+  { label: 'नेपाली', enLabel: 'Nepali', value: 'ne' },
+  { label: 'پښتو', enLabel: 'Pashto', value: 'ps' },
+  { label: 'Српски', enLabel: 'Serbian', value: 'sr' },
+  { label: 'සිංහල', enLabel: 'Sinhala', value: 'si' },
+  { label: 'Soomaali', enLabel: 'Somali', value: 'so' },
+  { label: 'Тоҷикӣ', enLabel: 'Tajik', value: 'tg' },
+  { label: 'తెలుగు', enLabel: 'Telugu', value: 'te' },
+  { label: 'Oʻzbek', enLabel: 'Uzbek', value: 'uz' },
+  { label: 'Yorùbá', enLabel: 'Yoruba', value: 'yo' },
+  { label: 'isiZulu', enLabel: 'Zulu', value: 'zu' },
+] as const;
 
-export const LanguageList = [
-  ...([
-    { label: 'Deutsch', value: 'de' }, // German
-    { label: 'English', value: 'en' }, // English
-    { label: 'Español', value: 'es' }, // Spanish
-    { label: '한국어', value: 'ko' }, // Korean
-    { label: '中文', value: 'zh' }, // Chinese
-    { label: 'Français', value: 'fr' }, // French
-    { label: 'العربية', value: 'ar' }, // Arabic
-    { label: 'Português', value: 'pt' }, // Portuguese
-    { label: 'Русский', value: 'ru' }, // Russian
-    { label: 'हिन्दी', value: 'hi' }, // Hindi
-    { label: '日本語', value: 'ja' }, // Japanese
-    { label: 'Italiano', value: 'it' }, // Italian
-    { label: 'Nederlands', value: 'nl' }, // Dutch
-    { label: 'Türkçe', value: 'tr' }, // Turkish
-    { label: 'Polski', value: 'pl' }, // Polish
-    { label: 'Українська', value: 'uk' }, // Ukrainian
-    { label: 'Ελληνικά', value: 'el' }, // Greek
-    { label: 'עברית', value: 'he' }, // Hebrew
-    { label: 'Svenska', value: 'sv' }, // Swedish
-    { label: 'Norsk', value: 'no' }, // Norwegian
-    { label: 'Suomi', value: 'fi' }, // Finnish
-    { label: 'Dansk', value: 'da' }, // Danish
-    { label: 'Magyar', value: 'hu' }, // Hungarian
-    { label: 'Română', value: 'ro' }, // Romanian
-    { label: 'Čeština', value: 'cs' }, // Czech
-    { label: 'Slovenský', value: 'sk' }, // Slovak
-    { label: 'Hrvatski', value: 'hr' }, // Croatian
-    { label: 'Български', value: 'bg' }, // Bulgarian
-    { label: 'Lietuvių', value: 'lt' }, // Lithuanian
-    { label: 'Latviešu', value: 'lv' }, // Latvian
-    { label: 'Eesti', value: 'et' }, // Estonian
-    { label: 'Filipino', value: 'tl' }, // Filipino
-    { label: 'Tiếng Việt', value: 'vi' }, // Vietnamese
-    { label: 'ไทย', value: 'th' }, // Thai
-    { label: 'Indonesia', value: 'id' }, // Indonesian
-    { label: 'Malay', value: 'ms' }, // Malay
-    { label: 'Català', value: 'ca' }, // Catalan
-    { label: 'Afrikaans', value: 'af' }, // Afrikaans
-    { label: 'বাংলা', value: 'bn' }, // Bengali
-    { label: 'فارسی', value: 'fa' }, // Farsi
-    { label: 'ਪੰਜਾਬੀ', value: 'pa' }, // Punjabi
-    { label: 'Kiswahili', value: 'sw' }, // Swahili
-    { label: 'தமிழ்', value: 'ta' }, // Tamil
-    { label: 'اردو', value: 'ur' }, // Urdu
-    { label: 'Cymraeg', value: 'cy' }, // Welsh
-    { label: 'አማርኛ', value: 'am' }, // Amharic
-    { label: 'Հայերեն', value: 'hy' }, // Armenian
-    { label: 'Azərbaycan', value: 'az' }, // Azerbaijani
-    { label: 'Euskara', value: 'eu' }, // Basque
-    { label: 'Bosanski', value: 'bs' }, // Bosnian
-    { label: 'ქართული', value: 'ka' }, // Georgian
-    { label: 'ગુજરાતી', value: 'gu' }, // Gujarati
-    { label: 'Íslenska', value: 'is' }, // Icelandic
-    { label: 'ភាសាខ្មែរ', value: 'km' }, // Khmer
-    { label: 'Kurdî', value: 'ku' }, // Kurdish
-    { label: 'ລາວ', value: 'lo' }, // Lao
-    { label: 'Lëtzebuergesch', value: 'lb' }, // Luxembourgish
-    { label: 'Македонски', value: 'mk' }, // Macedonian
-    { label: 'Malti', value: 'mt' }, // Maltese
-    { label: 'Монгол', value: 'mn' }, // Mongolian
-    { label: 'नेपाली', value: 'ne' }, // Nepali
-    { label: 'پښتو', value: 'ps' }, // Pashto
-    { label: 'Српски', value: 'sr' }, // Serbian
-    { label: 'සිංහල', value: 'si' }, // Sinhala
-    { label: 'Soomaali', value: 'so' }, // Somali
-    { label: 'Тоҷикӣ', value: 'tg' }, // Tajik
-    { label: 'తెలుగు', value: 'te' }, // Telugu
-    { label: 'Oʻzbek', value: 'uz' }, // Uzbek
-    { label: 'Yorùbá', value: 'yo' }, // Yoruba
-    { label: 'isiZulu', value: 'zu' }, // Zulu
-  ] as const),
-].sort((a, b) => a.label.localeCompare(b.label));
+export type SupportedLanguagesCode = (typeof _languageList)[number]['value'];
+
+export interface Language {
+  label: string;
+  enLabel: string;
+  /** language code @example 'de' 'es' 'zh' 'en_us' 'en_uk' */
+  value: string;
+}
+
+export const SupportedLanguages: Language[] = _languageList.toSorted((a, b) => a.label.localeCompare(b.label));
