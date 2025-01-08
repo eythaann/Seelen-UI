@@ -65,9 +65,9 @@
 ## Overview
 Seelen UI is a tool designed to enhance your Windows desktop experience with a focus on customization and productivity. It integrates smoothly into your system, providing a range of features that allow you to personalize your desktop and optimize your workflow.
 
-* **Customize Your Desktop**: Seelen UI lets you tailor your desktop to fit your style and needs. You can adjust menus, widgets, and other elements to create a workspace that works best for you.
+* **Be Creative**: Seelen UI lets you tailor your desktop to fit your style and needs. You can adjust menus, widgets, icons, and other elements to create a personalized and visually appealing desktop environment.
 
-  ![Seelen UI Minimal Desktop](./documentation/images/preview2.png)
+  ![Seelen UI Custom Theme](./documentation/images/theme_preview.png)
 
 <br/>
 
