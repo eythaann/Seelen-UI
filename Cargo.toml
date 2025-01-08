@@ -32,7 +32,7 @@ codegen-units = 1
 rustflags = ["-Z", "threads=8"]
 
 [build-dependencies]
-tauri-build = { version = "2.0.0-rc", features = [] }
+tauri-build = { version = "2.0.4", features = [] }
 
 [dependencies]
 tauri = { version = "2.0.0-rc", features = [
