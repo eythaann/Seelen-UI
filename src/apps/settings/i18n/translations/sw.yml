@@ -1,5 +1,8 @@
 app_launcher:
   enable: Wezesha Kizindua cha Programu
+  launch_on:
+    mouse_over: Panya juu
+    primary: Msingi
   monitor: Fuatilia kuonyesha
   runners:
     cmd: Amri
@@ -49,9 +52,20 @@ apps_configurations:
     id: Kitambulisho
     kind: Tambua na
     matching_strategy: Mkakati wa kulinganisha
+    matching_strategy_option:
+      contains: Ina
+      ends_with: Inaisha na
+      equals: Sawa
+      regex: Kujieleza mara kwa mara
+      starts_with: Huanza na
     negation: Negate kulinganisha
     or: Au
     remove: Futa block
+    type:
+      class: Darasa
+      exe: Mfano
+      path: Njia
+      title: Kichwa
   import: Kuagiza
   new: Mpya
   search: Tafuta
@@ -67,6 +81,7 @@ devtools:
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio
+  simulate_fullscreen: Iga tukio la skrini nzima
 extras:
   discord: Ugomvi
   exit: Acha/exit
@@ -200,6 +215,10 @@ toolbar:
   delay_to_show: Kuchelewa kuonyesha
   enable: Wezesha zana ya dhana
   height: Urefu
+  hide_mode:
+    always: Daima
+    never: Kamwe
+    on_overlap: Juu ya mwingiliano
   label: Zana
   placeholder:
     author: Mwandishi
@@ -232,6 +251,10 @@ weg:
   dock_side: Msimamo
   enable: Wezesha Dock/Taskbar
   gap: Pengo
+  hide_mode:
+    always: Daima
+    never: Kamwe
+    on_overlap: Juu ya mwingiliano
   items:
     gap: Nafasi kati ya vitu
     label: Vitu
@@ -244,6 +267,9 @@ weg:
     zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
   label: Dock/Taskbar
   margin: Margin
+  mode:
+    full_width: Upana kamili wa skrini
+    min_content: Ndogo kama inaweza kuwa
   padding: Padding
   use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
   width: Upana

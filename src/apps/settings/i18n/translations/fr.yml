@@ -1,5 +1,8 @@
 app_launcher:
   enable: Activer le lanceur d'applications
+  launch_on:
+    mouse_over: Passez la souris
+    primary: Primaire
   monitor: Surveiller à montrer
   runners:
     cmd: Commande
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifiant
     kind: Identifier par
     matching_strategy: Stratégie de correspondance
+    matching_strategy_option:
+      contains: Contient
+      ends_with: Se termine par
+      equals: Égal
+      regex: Expression régulière
+      starts_with: Commence par
     negation: Annuler la correspondance
     or: OU
     remove: Supprimer le bloc
+    type:
+      class: Classe
+      exe: Exe
+      path: Chemin
+      title: Titre
   import: Importer
   new: Nouveau
   search: Recherche
@@ -68,6 +82,7 @@ devtools:
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
+  simulate_fullscreen: Simuler un événement en plein écran
 extras:
   discord: Discorde
   exit: Quitter/Quitter
@@ -200,6 +215,10 @@ toolbar:
   delay_to_show: Retard à afficher
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
+  hide_mode:
+    always: Toujours
+    never: Jamais
+    on_overlap: Sur chevauchement
   label: Barre d'outils
   placeholder:
     author: Auteur
@@ -236,6 +255,10 @@ weg:
   dock_side: Position
   enable: Activer le Dock/la barre des tâches
   gap: Écart
+  hide_mode:
+    always: Toujours
+    never: Jamais
+    on_overlap: Sur chevauchement
   items:
     gap: Espace entre les éléments
     label: Articles
@@ -248,6 +271,9 @@ weg:
     zoom_size: Taille agrandie (utilisée pour les thèmes)
   label: Dock/Barre des tâches
   margin: Marge
+  mode:
+    full_width: Largeur plein écran
+    min_content: Aussi petit que possible
   padding: Rembourrage
   use_multiple_monitor_overlap_logic: >-
     Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au

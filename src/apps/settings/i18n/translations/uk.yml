@@ -1,5 +1,8 @@
 app_launcher:
   enable: Увімкнути швидкий запуск
+  launch_on:
+    mouse_over: Наведіть курсор миші
+    primary: Первинний
   monitor: Монітор, на якому показати вікно
   runners:
     cmd: Команда
@@ -50,9 +53,20 @@ apps_configurations:
     id: Ідентифікатор
     kind: Ідентифікувати
     matching_strategy: Стратегія відповідності
+    matching_strategy_option:
+      contains: Містить
+      ends_with: Закінчується на
+      equals: Дорівнює
+      regex: Регулярний вираз
+      starts_with: Починається з
     negation: Заперечувати відповідність
     or: або
     remove: Видалити блок
+    type:
+      class: Клас
+      exe: Exe
+      path: шлях
+      title: Назва
   import: Імпорт
   new: Новий
   search: Пошук
@@ -68,6 +82,7 @@ devtools:
   install_folder: Папка встановлення
   load: Завантаження
   settings_file: Файл налаштувань
+  simulate_fullscreen: Симулювати повноекранну подію
 extras:
   discord: Дискорд
   exit: Закрити програму
@@ -202,6 +217,10 @@ toolbar:
   delay_to_show: Затримка, щоб показати
   enable: Увімкнути панель інструментів
   height: Висота
+  hide_mode:
+    always: Завжди
+    never: Ніколи
+    on_overlap: На перекриття
   label: Панель інструментів
   placeholder:
     author: Автор
@@ -236,6 +255,10 @@ weg:
   dock_side: Позиція
   enable: Увімкнути панель завдань
   gap: Відступ
+  hide_mode:
+    always: Завжди
+    never: Ніколи
+    on_overlap: На перекриття
   items:
     gap: Відступ між піктограмами
     label: Піктограми
@@ -248,6 +271,9 @@ weg:
     zoom_size: Збільшений розмір (використовується для тем)
   label: Панель завдань
   margin: Зовнішній відступ
+  mode:
+    full_width: Повна ширина екрана
+    min_content: Маленький, наскільки це можливо
   padding: Внутрішній відступ
   use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
   width: Ширина

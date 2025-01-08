@@ -1,5 +1,8 @@
 app_launcher:
   enable: Activa el llançador d'aplicacions
+  launch_on:
+    mouse_over: Passa el ratolí
+    primary: primària
   monitor: Monitoritzar per mostrar
   runners:
     cmd: Manar
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificador
     kind: Identificar -se per
     matching_strategy: Estratègia de coincidència
+    matching_strategy_option:
+      contains: Conté
+      ends_with: Acaba amb
+      equals: Iguals
+      regex: Expressió regular
+      starts_with: Comença amb
     negation: Negar la concordança
     or: O
     remove: Esborra el bloc
+    type:
+      class: Classe
+      exe: Exe
+      path: Camí
+      title: Títol
   import: Importar
   new: Nou
   search: Cerca
@@ -68,6 +82,7 @@ devtools:
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració
+  simulate_fullscreen: Simula un esdeveniment a pantalla completa
 extras:
   discord: Discòrdia
   exit: Deixar/sortir
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Retard per mostrar
   enable: Activa la barra d’eines de luxe
   height: Altura
+  hide_mode:
+    always: Sempre
+    never: Mai
+    on_overlap: Sobre la superposició
   label: Barra d’eines
   placeholder:
     author: Autora
@@ -240,6 +259,10 @@ weg:
   dock_side: Posició
   enable: Activa el moll/la barra de tasques
   gap: Escletxa
+  hide_mode:
+    always: Sempre
+    never: Mai
+    on_overlap: Sobre la superposició
   items:
     gap: Espai entre articles
     label: Plantes
@@ -252,6 +275,9 @@ weg:
     zoom_size: Mida zoom (usada per a temes)
   label: Moll/barra de tasques
   margin: Marge
+  mode:
+    full_width: Amplada de pantalla completa
+    min_content: Petit com pot ser
   padding: Encoir
   use_multiple_monitor_overlap_logic: >-
     Utilitzeu la lògica específica de la pantalla en lloc de la lògica

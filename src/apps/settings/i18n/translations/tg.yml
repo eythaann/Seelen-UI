@@ -1,5 +1,8 @@
 app_launcher:
   enable: Фаъолсозии Apple
+  launch_on:
+    mouse_over: Муш болои
+    primary: ибтидоӣ
   monitor: Нишон додани назорат
   runners:
     cmd: Фармон
@@ -50,9 +53,20 @@ apps_configurations:
     id: Муайянкунанда
     kind: Муайян мекунад
     matching_strategy: Стратегияи мувофиқ
+    matching_strategy_option:
+      contains: Дар бар мегирад
+      ends_with: Бо
+      equals: Баробар
+      regex: Ифодаи муқаррарӣ
+      starts_with: Бо оғоз меёбад
     negation: Мувофиқати манфӣ
     or: Ё
     remove: Нест кардани блок
+    type:
+      class: Синф
+      exe: Парвандаи Иҷрокунанда
+      path: Роҳ
+      title: Унвон
   import: Воридот
   new: Нав
   search: Кофтуков
@@ -68,6 +82,7 @@ devtools:
   install_folder: Феҳристи насб
   load: Сарборӣ
   settings_file: Файлҳои танзимот
+  simulate_fullscreen: Ҳодисаи пурраи экранро тақлид кунед
 extras:
   discord: Ихтисор
   exit: Курат / баромадан
@@ -201,6 +216,10 @@ toolbar:
   delay_to_show: Таъхир барои нишон додан
   enable: Дастрас кардани панели футболи
   height: Баландӣ
+  hide_mode:
+    always: Ҳамеша
+    never: Ҳеҷ гоҳ
+    on_overlap: Дар такрори
   label: Асбобу
   placeholder:
     author: Муаллиф
@@ -233,6 +252,10 @@ weg:
   dock_side: Вазъият
   enable: Dock / Travelar
   gap: Фосила
+  hide_mode:
+    always: Ҳамеша
+    never: Ҳеҷ гоҳ
+    on_overlap: Дар такрори
   items:
     gap: Фосила байни ашё
     label: Ашё
@@ -245,6 +268,9 @@ weg:
     zoom_size: Андозаи масоҳати (барои мавзӯъҳо истифода мешавад)
   label: Dock / супоришҳо
   margin: Маржа
+  mode:
+    full_width: Паҳнои пурраи экран
+    min_content: То ҳадди имкон хурд
   padding: Тахтача
   use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
   width: Васеъ

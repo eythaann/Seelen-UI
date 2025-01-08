@@ -1,5 +1,8 @@
 app_launcher:
   enable: Включить запуск приложения
+  launch_on:
+    mouse_over: Наведите курсор мыши
+    primary: Начальный
   monitor: Монитор, чтобы показать
   runners:
     cmd: Командная строка
@@ -50,9 +53,20 @@ apps_configurations:
     id: Идентификатор
     kind: Идентифицировать по
     matching_strategy: Стратегия подбора
+    matching_strategy_option:
+      contains: Содержит
+      ends_with: Заканчивается на
+      equals: Равно
+      regex: Регулярное выражение
+      starts_with: Начинается с
     negation: Отрицательный подбор
     or: ИЛИ
     remove: Удалить блок
+    type:
+      class: Сорт
+      exe: Exe
+      path: Путь
+      title: Заголовок
   import: Импорт
   new: Новый
   search: Поиск
@@ -68,6 +82,7 @@ devtools:
   install_folder: Папка установки
   load: Загрузить
   settings_file: Файл настроек
+  simulate_fullscreen: Имитировать полноэкранное событие
 extras:
   discord: Discord
   exit: Выйти
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Задержка показа
   enable: Включить
   height: Высота
+  hide_mode:
+    always: Всегда
+    never: Никогда
+    on_overlap: При перекрытии
   label: Верхняя панель
   placeholder:
     author: Автор
@@ -238,6 +257,10 @@ weg:
   dock_side: Расположение
   enable: Включить
   gap: Расстояние
+  hide_mode:
+    always: Всегда
+    never: Никогда
+    on_overlap: При перекрытии
   items:
     gap: Расстояние между иконок
     label: Иконки
@@ -250,6 +273,9 @@ weg:
     zoom_size: Увеличенный размер (используется для тем)
   label: Панель задач
   margin: Внешний отступ
+  mode:
+    full_width: Полная ширина экрана
+    min_content: Маленький, насколько это возможно
   padding: Внутренний отступ
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
   width: Ширина

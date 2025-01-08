@@ -1,5 +1,8 @@
 app_launcher:
   enable: Միացնել ծրագրի արձակումը
+  launch_on:
+    mouse_over: Մկնիկը վերջացել է
+    primary: Առաջնային
   monitor: Մոնիտոր, ցույց տալու համար
   runners:
     cmd: Հրաման
@@ -50,9 +53,20 @@ apps_configurations:
     id: Նույնացնող
     kind: Նույնացնել ըստ
     matching_strategy: Համապատասխան ռազմավարություն
+    matching_strategy_option:
+      contains: Պարունակում է
+      ends_with: Ավարտվում է
+      equals: Հավասար է
+      regex: Կանոնավոր արտահայտություն
+      starts_with: Սկսվում է
     negation: Ժխտել համապատասխանությունը
     or: ԿԱՄ
     remove: Delete նջել բլոկը
+    type:
+      class: Դասարան
+      exe: Exe
+      path: Ճանապարհ
+      title: Վերնագիր
   import: Ներմուծում
   new: Նոր
   search: Որոնել
@@ -68,6 +82,7 @@ devtools:
   install_folder: Տեղադրման պանակ
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ
+  simulate_fullscreen: Ամբողջաէկրան իրադարձությունների նմանակում
 extras:
   discord: Տարաձայնություն
   exit: Հանգստացեք / Ելք
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Ցուցադրման ուշացում
   enable: Միացնել Fancy Toolbar- ը
   height: Բարձրություն
+  hide_mode:
+    always: Միշտ
+    never: Երբեք
+    on_overlap: Համընկնման վրա
   label: Գործիքագոտու
   placeholder:
     author: Հեղինակ
@@ -238,6 +257,10 @@ weg:
   dock_side: Դիրք
   enable: Միացնել Dock / Taskbar
   gap: Բացվածք
+  hide_mode:
+    always: Միշտ
+    never: Երբեք
+    on_overlap: Համընկնման վրա
   items:
     gap: Տարածություն իրերի միջեւ
     label: Իրերը
@@ -250,6 +273,9 @@ weg:
     zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
   label: Dock / Taskbar
   margin: Լուսանցք
+  mode:
+    full_width: Ամբողջ էկրանի լայնությունը
+    min_content: Փոքր, որքան կարող է լինել
   padding: Լիցք
   use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
   width: Լայնություն

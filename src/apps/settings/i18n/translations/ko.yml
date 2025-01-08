@@ -1,5 +1,8 @@
 app_launcher:
   enable: 앱 런처 활성화
+  launch_on:
+    mouse_over: 마우스 오버
+    primary: 주요한
   monitor: 보여줄 화면
   runners:
     cmd: 명령
@@ -47,9 +50,20 @@ apps_configurations:
     id: 식별자
     kind: 식별 기준
     matching_strategy: 식별 방법
+    matching_strategy_option:
+      contains: 포함
+      ends_with: 다음으로 끝남
+      equals: 같음
+      regex: 정규식
+      starts_with: 다음으로 시작
     negation: 조건이 반대일때 식별하기
     or: 또는
     remove: 블록 삭제
+    type:
+      class: 수업
+      exe: exe
+      path: 길
+      title: 제목
   import: 가져오기
   new: 신규
   search: 검색
@@ -65,6 +79,7 @@ devtools:
   install_folder: 설치 폴더
   load: 로드
   settings_file: 설정 파일
+  simulate_fullscreen: 전체 화면 이벤트 시뮬레이션
 extras:
   discord: 디스코드
   exit: 종료/나가기
@@ -197,6 +212,10 @@ toolbar:
   delay_to_show: 표시 지연
   enable: 툴바 활성화
   height: 높이
+  hide_mode:
+    always: 언제나
+    never: 절대
+    on_overlap: 오버랩 시
   label: 도구 모음
   placeholder:
     author: 작성자
@@ -229,6 +248,10 @@ weg:
   dock_side: 위치
   enable: 독/작업 표시줄 활성화
   gap: 간격
+  hide_mode:
+    always: 언제나
+    never: 절대
+    on_overlap: 오버랩 시
   items:
     gap: 항목 간 간격
     label: 항목
@@ -241,6 +264,9 @@ weg:
     zoom_size: 확대된 크기 (테마에 사용됨)
   label: 독/작업 표시줄
   margin: 바깥 여백
+  mode:
+    full_width: 전체 화면 너비
+    min_content: 가능한 한 작은
   padding: 안쪽 여백
   use_multiple_monitor_overlap_logic: 단일 초점 논리 대신 디스플레이별 사용
   width: 너비

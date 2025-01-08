@@ -1,5 +1,8 @@
 app_launcher:
   enable: Włącz uruchamianie aplikacji
+  launch_on:
+    mouse_over: Najedź kursorem
+    primary: Podstawowy
   monitor: Monitor, aby pokazać
   runners:
     cmd: Rozkaz
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identyfikator
     kind: Identyfikować się przez
     matching_strategy: Strategia dopasowywania
+    matching_strategy_option:
+      contains: Zawiera
+      ends_with: Kończy się z
+      equals: Równe
+      regex: Wyrażenie regularne
+      starts_with: Zaczyna się od
     negation: Negate dopasowanie
     or: LUB
     remove: Usuń blok
+    type:
+      class: Klasa
+      exe: Ex
+      path: Ścieżka
+      title: Tytuł
   import: Import
   new: Nowy
   search: Szukaj
@@ -68,6 +82,7 @@ devtools:
   install_folder: Folder instalacyjny
   load: Obciążenie
   settings_file: Plik ustawień
+  simulate_fullscreen: Symuluj wydarzenie na pełnym ekranie
 extras:
   discord: Niezgoda
   exit: Wyjdź/wyjdź
@@ -202,6 +217,10 @@ toolbar:
   delay_to_show: Opóźnienie w pokazie
   enable: Włącz fantazyjny pasek narzędzi
   height: Wysokość
+  hide_mode:
+    always: Zawsze
+    never: Nigdy
+    on_overlap: Na zakładkę
   label: Pasek narzędzi
   placeholder:
     author: Autor
@@ -236,6 +255,10 @@ weg:
   dock_side: Pozycja
   enable: Włącz dok/pasek zadań
   gap: Luka
+  hide_mode:
+    always: Zawsze
+    never: Nigdy
+    on_overlap: Na zakładkę
   items:
     gap: Przestrzeń między przedmiotami
     label: Rzeczy
@@ -248,6 +271,9 @@ weg:
     zoom_size: Powiększony rozmiar (używany do motywów)
   label: Dock/Pasek zadań
   margin: Margines
+  mode:
+    full_width: Pełna szerokość ekranu
+    min_content: Mały, jak to tylko możliwe
   padding: Wyściółka
   use_multiple_monitor_overlap_logic: Użyj logiki specyficznej dla wyświetlacza zamiast logiki pojedynczego fokusu
   width: Szerokość
