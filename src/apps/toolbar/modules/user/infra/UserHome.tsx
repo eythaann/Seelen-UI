@@ -1,8 +1,8 @@
-import { invoke, RecentFile, SeelenCommand, User } from '@seelen-ui/lib';
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { File, User } from '@seelen-ui/lib/types';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Popover, Tooltip } from 'antd';
 import { t } from 'i18next';
-import moment from 'moment';
 import { PropsWithChildren, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -15,14 +15,9 @@ import { AppHistoryItem } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { useWindowFocusChange } from '../../../../shared/hooks';
+import { FilePreview } from './FilePreview';
 
 interface HomeProps {
-}
-
-const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
-
-function WindowsDateFileTimeToDate(fileTime: number) {
-  return new Date(Number(BigInt(fileTime) / 10000n - EPOCH_DIFF_MILLISECONDS));
 }
 
 function UserHome({ }: HomeProps) {
@@ -30,7 +25,7 @@ function UserHome({ }: HomeProps) {
   const [recentCount, setRecentCount] = useState(5);
 
   const user: User = useSelector(Selectors.user);
-  const recentFiles: RecentFile[] = useSelector(Selectors.userRecentFolder);
+  const recentFiles: File[] = useSelector(Selectors.userRecentFolder);
   const history: AppHistoryItem[] = useSelector(Selectors.history);
 
   return (
@@ -112,23 +107,12 @@ function UserHome({ }: HomeProps) {
           </Tooltip>
         </div>
       </div>
-      { recentFiles.length != 0 &&
+      { recentFiles && recentFiles.length != 0 &&
         <>
           <div className="userhome-title">{t('userhome.recent_files.title')}</div>
           <ul className="userhome-history">
             { recentFiles.slice(0, recentCount).map((item, index) => (
-              <Tooltip
-                key={index}
-                mouseLeaveDelay={0}
-                arrow={false}
-                title={item.path}
-                placement="top">
-                <li className="userhome-history-item">
-                  <img className="userhome-history-item-icon" src={convertFileSrc(item.iconLocation)} />
-                  <div className="userhome-history-item-title">{item.name}</div>
-                  <div className="userhome-history-item-date" >{moment(WindowsDateFileTimeToDate(item.lastAccessTime)).fromNow()}</div>
-                </li>
-              </Tooltip>
+              <FilePreview file={item} key={index} />
             ))}
           </ul>
           { recentFiles.length > 5 &&
@@ -148,7 +132,7 @@ function UserHome({ }: HomeProps) {
                 title={item.name + ' - ' + item.title}
                 placement="top">
                 <li className="userhome-history-item" onClick={() => invoke(SeelenCommand.RequestFocus, { hwnd: item.hwnd })}>
-                  <img className="userhome-history-item-icon" src={convertFileSrc(item.icon_path)} />
+                  <img className="userhome-history-item-icon" src={convertFileSrc(item.iconPath)} />
                   <div className="userhome-history-item-title">{item.name} - {item.title}</div>
                   <div className="userhome-history-item-date" >{item.date.fromNow()}</div>
                 </li>
