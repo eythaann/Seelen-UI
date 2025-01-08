@@ -88,7 +88,7 @@ export function FancyToolbarSettings() {
               <Select
                 style={{ width: '120px' }}
                 value={settings.hideMode}
-                options={OptionsFromEnum(HideMode, 'toolbar.hide_mode')}
+                options={OptionsFromEnum(t, HideMode, 'toolbar.hide_mode')}
                 onChange={(value) => dispatch(FancyToolbarActions.setHideMode(value))}
               />
             </SettingsOption>

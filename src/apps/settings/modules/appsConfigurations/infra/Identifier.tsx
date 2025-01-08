@@ -78,13 +78,13 @@ export function Identifier({ identifier, onChange, onRemove }: Props) {
       </SettingsOption>
       <SettingsOption>
         <span>{t('apps_configurations.identifier.kind')}</span>
-        <Select value={kind} options={OptionsFromEnum(AppIdentifierType, 'apps_configurations.identifier.type')} onSelect={onSelectKind} />
+        <Select value={kind} options={OptionsFromEnum(t, AppIdentifierType, 'apps_configurations.identifier.type')} onSelect={onSelectKind} />
       </SettingsOption>
       <SettingsOption>
         <span>{t('apps_configurations.identifier.matching_strategy')}</span>
         <Select
           value={matchingStrategy}
-          options={OptionsFromEnum(MatchingStrategy, 'apps_configurations.identifier.matching_strategy_option')}
+          options={OptionsFromEnum(t, MatchingStrategy, 'apps_configurations.identifier.matching_strategy_option')}
           onSelect={onSelectMatchingStrategy}
         />
       </SettingsOption>
