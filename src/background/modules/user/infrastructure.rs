@@ -4,15 +4,14 @@ use tauri::Emitter;
 use crate::{
     error_handler::AppError,
     log_error,
-    modules::user::{domain::FolderChangedArgs, UserManagerEvent, USER_MANAGER},
+    modules::user::{UserManagerEvent, USER_MANAGER},
     seelen::get_app_handle,
     trace_lock,
 };
 
-use super::{
-    application::UserManager,
-    domain::{File, FolderType, User},
-};
+use super::application::UserManager;
+
+use seelen_core::system_state::{File, FolderChangedArgs, FolderType, User};
 
 fn _get_user() -> Result<User, AppError> {
     let user = { trace_lock!(USER_MANAGER).user_details().clone().unwrap() };

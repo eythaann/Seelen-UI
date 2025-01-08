@@ -7,6 +7,7 @@ use notify_debouncer_full::{
     DebounceEventResult, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
+use seelen_core::system_state::{File, FolderType, User};
 use std::{
     collections::HashMap, fs::DirEntry, os::windows::fs::MetadataExt, path::PathBuf, sync::Arc,
     time::Duration,
@@ -24,7 +25,7 @@ use crate::{
     windows_api::WindowsApi,
 };
 
-use super::domain::{File, FolderType, PictureQuality, User};
+use super::domain::PictureQuality;
 
 const USER_PROFILE_REG_PATH_PATTERN: &str =
     "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\";
@@ -298,14 +299,14 @@ impl UserManager {
                     for event in events {
                         for pathbuf in &event.paths {
                             let path = pathbuf.as_path();
-                            let folder_type = FolderType::from_path(pathbuf).unwrap();
+                            let folder_type = FolderType::from_path(pathbuf);
                             match folder_type {
                                 FolderType::Recent => {
                                     if let EventKind::Create(_) = event.kind {
                                         if let Ok((result, _)) =
                                             WindowsApi::resolve_lnk_target(path)
                                         {
-                                            if result.exists() {
+                                            if result.exists() && result.is_file() {
                                                 let file = File {
                                                     path: std::fs::canonicalize(result.clone())
                                                         .unwrap()
@@ -400,6 +401,10 @@ impl UserManager {
                                         }
                                     }
                                 }
+                                FolderType::Unknown => log::error!(
+                                    "Observed path did not recognised! Path: {:?}",
+                                    path
+                                ),
                             }
                         }
                     }

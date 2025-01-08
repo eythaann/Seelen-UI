@@ -1,5 +1,4 @@
-import { File, User } from '@seelen-ui/lib';
-import { FancyToolbarSettings, Placeholder, Plugin, Settings } from '@seelen-ui/lib/types';
+import { FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
 import { Moment } from 'moment';
 import { SoftOpaque } from 'readable-types';
 
@@ -97,7 +96,7 @@ export interface MediaDevice {
   muted: boolean;
 }
 export interface AppHistoryItem extends FocusedApp {
-  icon_path: string;
+  iconPath: string;
   date: Moment;
 }
 

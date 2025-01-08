@@ -79,8 +79,8 @@ export async function registerStoreEvents() {
     const state = store.getState();
     if (app.exe && state.history[0]?.exe != app.exe && !app.exe.endsWith('seelen-ui.exe')) {
       IconPackManager.extractIcon({ path: app.exe })
-        .then((icon_path) => store.dispatch(RootActions.setHistory(
-          [ ...state.history, { ...app, date: moment(new Date()), icon_path: icon_path ?? LAZY_CONSTANTS.MISSING_ICON_PATH }]
+        .then((iconPath) => store.dispatch(RootActions.setHistory(
+          [ ...state.history, { ...app, date: moment(new Date()), iconPath: iconPath ?? LAZY_CONSTANTS.MISSING_ICON_PATH }]
             .sort((a, b) => b.date.diff(a.date, 'ms')))))
         .catch(console.error);
     }
