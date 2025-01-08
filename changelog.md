@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.14]
 ### hotfix
 - not creating the default (system) icon pack.
 
