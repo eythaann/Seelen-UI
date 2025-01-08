@@ -48,7 +48,7 @@ export function WorkspacesModule({ module }: Props) {
           <Tooltip
             arrow={false}
             mouseLeaveDelay={0}
-            overlayClassName="ft-bar-item-tooltip"
+            classNames={{ root: 'ft-bar-item-tooltip' }}
             title={w.name || `Workspace ${idx + 1}`}
             key={w.id}
           >

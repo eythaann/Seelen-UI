@@ -211,7 +211,7 @@ export function InnerItem(props: InnerItemProps) {
     <Tooltip
       arrow={false}
       mouseLeaveDelay={0}
-      overlayClassName="ft-bar-item-tooltip"
+      classNames={{ root: 'ft-bar-item-tooltip' }}
       title={tooltip ? parseStringToElements(tooltip) : undefined}
     >
       <Reorder.Item
