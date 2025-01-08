@@ -517,7 +517,7 @@ impl WindowsApi {
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
-    pub fn get_window_app_user_model_id_exe(hwnd: HWND) -> Result<String> {
+    pub fn get_window_app_user_model_id(hwnd: HWND) -> Result<String> {
         let store = Self::get_property_store_for_window(hwnd)?;
         let value = unsafe { store.GetValue(&PKEY_AppUserModel_ID)? };
         if value.is_empty() {

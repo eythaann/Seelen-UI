@@ -581,10 +581,7 @@ impl MediaManager {
                 name: w
                     .app_display_name()
                     .unwrap_or_else(|_| "Unknown App".to_string()),
-                icon_path: w
-                    .app_user_model_id()
-                    .and_then(|umid| extract_and_save_icon_umid(&umid).ok())
-                    .or_else(|| w.exe().and_then(extract_and_save_icon_from_file).ok()),
+                icon_path: extract_and_save_icon_umid(&source_app_user_model_id).ok(),
             }),
             thumbnail: properties
                 .Thumbnail()

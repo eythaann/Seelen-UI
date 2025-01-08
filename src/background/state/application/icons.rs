@@ -3,13 +3,25 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use seelen_core::state::IconPack;
+use itertools::Itertools;
+use seelen_core::{handlers::SeelenEvent, state::IconPack};
+use tauri::Emitter;
 
-use crate::{error_handler::Result, trace_lock, utils::constants::SEELEN_COMMON};
+use crate::{
+    error_handler::Result, seelen::get_app_handle, trace_lock, utils::constants::SEELEN_COMMON,
+};
 
 use super::FullState;
 
 impl FullState {
+    pub fn emit_icon_packs(&self) -> Result<()> {
+        get_app_handle().emit(
+            SeelenEvent::StateIconPacksChanged,
+            trace_lock!(self.icon_packs()).values().collect_vec(),
+        )?;
+        Ok(())
+    }
+
     fn load_icon_pack_from_dir(dir_path: &Path) -> Result<IconPack> {
         let file = dir_path.join("metadata.yml");
         if !file.exists() {
@@ -45,32 +57,33 @@ impl FullState {
             icon_pack.info.description = "Icons from Windows and Program Files".to_string();
             icon_pack.info.filename = "system".to_string();
 
-            self.write_system_icon_pack(&icon_pack)?;
             trace_lock!(self.icon_packs).insert(icon_pack.info.filename.clone(), icon_pack);
+            self.write_system_icon_pack()?;
         }
         Ok(())
     }
 
-    pub fn write_system_icon_pack(&self, icon_pack: &IconPack) -> Result<()> {
+    pub fn write_system_icon_pack(&self) -> Result<()> {
         let folder = SEELEN_COMMON.icons_path().join("system");
+        let file_path = folder.join("metadata.yml");
         std::fs::create_dir_all(&folder)?;
         let mut file = OpenOptions::new()
             .write(true)
             .create(true)
             .truncate(true)
-            .open(folder.join("metadata.yml"))?;
-        serde_yaml::to_writer(&mut file, icon_pack)?;
+            .open(&file_path)?;
+        let icons = trace_lock!(self.icon_packs);
+        let system_pack = icons.get("system").unwrap();
+        self.skip_modification(file_path);
+        serde_yaml::to_writer(&mut file, system_pack)?;
         Ok(())
     }
 
-    pub fn push_and_save_system_icon(&self, key: &str, icon: &Path) -> Result<()> {
-        let mut icon_packs = trace_lock!(self.icon_packs);
-        let default_icon_pack = icon_packs.get_mut("system").unwrap();
-        default_icon_pack
-            .apps
-            .insert(key.trim_start_matches(r"\\?\").to_string(), icon.to_owned());
-        self.write_system_icon_pack(default_icon_pack)?;
-        Ok(())
+    pub fn add_system_icon(&self, key: &str, icon: &Path) {
+        let mut icons = trace_lock!(self.icon_packs);
+        let system_pack = icons.get_mut("system").unwrap();
+        let key: String = key.trim_start_matches(r"\\?\").to_string();
+        system_pack.apps.insert(key, icon.to_owned());
     }
 
     /// Get icon pack by app user model id, filename or path

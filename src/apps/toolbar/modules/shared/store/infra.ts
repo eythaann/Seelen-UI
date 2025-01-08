@@ -9,8 +9,8 @@ import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
+import { AppNotification } from '../../Notifications/domain';
 import {
-  AppNotification,
   Battery,
   MediaChannelTransportData,
   MediaDevice,

@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import yaml from 'js-yaml';
 import { initReactI18next } from 'react-i18next';
 
-import { Lang } from '../../shared/lang';
+import { SupportedLanguagesCode } from '../../shared/lang';
 
 i18n.use(initReactI18next).init(
   {
@@ -18,7 +18,7 @@ i18n.use(initReactI18next).init(
 );
 
 export async function loadTranslations() {
-  const translations: Record<Lang, { default: string }> = {
+  const translations: Record<SupportedLanguagesCode, { default: string }> = {
     en: await import('./translations/en.yml'),
     es: await import('./translations/es.yml'),
     de: await import('./translations/de.yml'),

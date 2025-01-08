@@ -5,9 +5,9 @@ app_launcher:
     primary: Начальный
   monitor: Монитор, чтобы показать
   runners:
-    cmd: Командование
-    explorer: Бегать
-    label: Бегуны
+    cmd: Командная строка
+    explorer: Проводник
+    label: Ярлыки
 apps_configurations:
   app:
     bindings: Привязка (оба параметра обязательны)
@@ -72,7 +72,7 @@ apps_configurations:
   search: Поиск
   swap: Сменить
 cancel: Отмена
-close: Закрывать
+close: Закрыть
 delete: Удалить
 devtools:
   app_folders: Папки приложения
@@ -102,7 +102,7 @@ general:
     author: Автор
     description: Описание
     tags: Теги
-  startup: Автозапускать при включении системы
+  startup: Автозапуск при включении системы
   theme:
     available: Доступные темы
     label: Темы
@@ -113,12 +113,12 @@ header:
   labels:
     developer: Разработчик
     general: Общее
-    home: Дом
+    home: Главная страница
     info: Информация
     mods: Плагины и виджеты
     monitors: Мониторы
     seelen_bar: Верхняя панель
-    seelen_rofi: Приложение пусковая установка
+    seelen_rofi: Лаунчер приложений
     seelen_wall: Управляющий обоями
     seelen_weg: Панель задач
     seelen_wm: Менеджер окон
@@ -127,25 +127,25 @@ header:
     virtual_desk: Виртуальные рабочие столы
 inherit: Наследовать
 inProgress: В процессе...
-insert: Вставлять
+insert: Вставить
 loading: Загрузка...
-miscellaneous: Разнообразный
+miscellaneous: Разное
 mods:
   plugins: Плагины
   target: Цель
   widgets: Виджеты
 monitors_configurations:
   label: Монитор {{index}}
-more: Более
+more: Подробнее
 open: Открыть
 quit: Закрыть
-remove: Удалять
+remove: Удалить
 save: Сохранить
 save_and_restart: Сохранить и перезапустить
 shortcuts:
-  enable: Включить встроенные ярлыки (ahk)
+  enable: Включить встроенные быстрые клавиши (ahk)
   enable_tooltip: >-
-    Отключите, если будете реализовывать собственные ярлыки с помощью Seelen
+    Отключите, если будете реализовывать собственные быстрые клавиши с помощью Seelen
     Core Api
   labels:
     decrease_height: Уменьшить высоту
@@ -256,7 +256,7 @@ weg:
   delay_to_show: Задержка показа
   dock_side: Расположение
   enable: Включить
-  gap: Разрыв
+  gap: Расстояние
   hide_mode:
     always: Всегда
     never: Никогда

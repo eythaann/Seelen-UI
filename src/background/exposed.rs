@@ -128,12 +128,15 @@ fn send_keys(keys: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-fn get_icon(path: String) -> Option<PathBuf> {
-    if path.starts_with("shell:AppsFolder") {
-        let umid = path.replace("shell:AppsFolder\\", "");
-        return extract_and_save_icon_umid(&umid).ok();
+fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Option<PathBuf> {
+    let mut icon = None;
+    if let Some(umid) = umid {
+        icon = extract_and_save_icon_umid(&umid).ok();
     }
-    extract_and_save_icon_from_file(&path).ok()
+    match path {
+        Some(path) if icon.is_none() => extract_and_save_icon_from_file(&path).ok(),
+        _ => icon,
+    }
 }
 
 #[tauri::command(async)]

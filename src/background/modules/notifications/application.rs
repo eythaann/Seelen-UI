@@ -1,5 +1,4 @@
 use std::{
-    path::PathBuf,
     sync::{
         atomic::{AtomicBool, Ordering},
         Arc,
@@ -19,7 +18,10 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, log_error, utils::spawn_named_thread};
+use crate::{
+    error_handler::Result, log_error, seelen_weg::icon_extractor::extract_and_save_icon_umid,
+    utils::spawn_named_thread,
+};
 
 lazy_static! {
     pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
@@ -31,9 +33,9 @@ lazy_static! {
 #[allow(dead_code)]
 pub struct AppNotification {
     pub id: u32,
+    app_umid: String,
     app_name: String,
     app_description: String,
-    app_logo: Option<PathBuf>,
     body: Vec<String>,
     date: i64,
 }
@@ -209,9 +211,12 @@ impl NotificationManager {
             body.push(text.Text()?.to_string());
         }
 
+        let umid = app_info.AppUserModelId()?.to_string_lossy();
+        extract_and_save_icon_umid(umid.clone()).ok();
+
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,
-            app_logo: None,
+            app_umid: umid,
             app_name: display_info.DisplayName()?.to_string(),
             app_description: display_info.Description()?.to_string(),
             body,

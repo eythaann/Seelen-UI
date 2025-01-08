@@ -2,6 +2,7 @@ import { FancyToolbarSettings, Placeholder, Plugin, Settings } from '@seelen-ui/
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
+import { AppNotification } from '../../Notifications/domain';
 
 import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
@@ -92,15 +93,6 @@ export interface MediaDevice {
   sessions: MediaDeviceChannel[];
   volume: number;
   muted: boolean;
-}
-
-export interface AppNotification {
-  id: number;
-  app_name: string;
-  app_description: string;
-  app_logo: string | null;
-  body: string[];
-  date: number;
 }
 
 export type WorkspaceId = SoftOpaque<string, 'WorkspaceId'>;

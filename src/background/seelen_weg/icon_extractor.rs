@@ -23,6 +23,7 @@ use std::os::windows::ffi::OsStrExt;
 use std::path::{Path, PathBuf};
 
 use crate::error_handler::Result;
+use crate::modules::start::application::START_MENU_MANAGER;
 use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;
 use crate::utils::constants::SEELEN_COMMON;
@@ -246,10 +247,17 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
         return Err("Path is not a file".into());
     }
 
+    let key = path.to_string_lossy().to_string();
+
     let state = FULL_STATE.load();
-    if let Some(icon) = state.get_icon_by_key(&path.to_string_lossy()) {
+    if let Some(icon) = state.get_icon_by_key(&key) {
         return Ok(icon);
     }
+
+    let file_name = path.file_name().ok_or("Failed to get file name")?;
+    let ext = path.extension();
+    let is_lnk_file = ext == Some(OsStr::new("lnk"));
+    let is_url_file = ext == Some(OsStr::new("url"));
 
     let icon_filename = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
     let icon_path = SEELEN_COMMON
@@ -257,31 +265,30 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
         .join("system")
         .join(&icon_filename);
 
-    let file_name = path.file_name().ok_or("Failed to get file name")?;
-    let ext = path.extension();
-
     log::trace!(
         "Extracting icon for \"{}\"",
         file_name.to_string_lossy().to_string()
     );
 
     // try get icons for URLs
-    if ext == Some(OsStr::new("url")) {
+    if is_url_file {
         let icon = get_icon_from_url_file(path)?;
+        state.add_system_icon(&key, &icon_filename);
+        state.write_system_icon_pack()?;
         icon.save(&icon_path)?;
-        state.push_and_save_system_icon(path.to_string_lossy().as_ref(), &icon_filename)?;
         return Ok(icon_path);
     }
 
     // try get the icon directly from the file
     if let Ok(icon) = get_icon_from_file(path) {
+        state.add_system_icon(&key, &icon_filename);
+        state.write_system_icon_pack()?;
         icon.save(&icon_path)?;
-        state.push_and_save_system_icon(path.to_string_lossy().as_ref(), &icon_filename)?;
         return Ok(icon_path);
     }
 
     // if the lnk don't have an icon, try to extract it from the target
-    if ext == Some(OsStr::new("lnk")) {
+    if is_lnk_file {
         let (target, _) = WindowsApi::resolve_lnk_target(path)?;
         return extract_and_save_icon_from_file(&target);
     }
@@ -298,6 +305,18 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
         return Ok(icon);
     }
 
+    if !WindowsApi::is_uwp_package_id(app_umid) {
+        let shortcut = START_MENU_MANAGER
+            .load()
+            .search_shortcut_with_same_umid(app_umid)
+            .ok_or("No shortcut found for umid")?;
+        let extracted = extract_and_save_icon_from_file(&shortcut)?;
+        let filename = PathBuf::from(extracted.file_name().unwrap());
+        state.add_system_icon(app_umid, &filename);
+        state.write_system_icon_pack()?;
+        return Ok(extracted);
+    }
+
     let app_icon = UwpManager::get_high_quality_icon_path(app_umid)?;
 
     let relative_path = PathBuf::from(format!("{}.png", uuid::Uuid::new_v4()));
@@ -305,7 +324,8 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
         .icons_path()
         .join("system")
         .join(&relative_path);
+    state.add_system_icon(app_umid, &relative_path);
+    state.write_system_icon_pack()?;
     std::fs::copy(app_icon, &image_path)?;
-    state.push_and_save_system_icon(app_umid, &relative_path)?;
     Ok(image_path)
 }

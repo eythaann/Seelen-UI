@@ -9,6 +9,7 @@ use tauri::Emitter;
 
 use crate::{
     error_handler::Result,
+    modules::start::application::START_MENU_MANAGER,
     seelen::get_app_handle,
     state::application::FULL_STATE,
     windows_api::{window::Window, MonitorEnumerator, WindowsApi},
@@ -123,6 +124,7 @@ impl WegItemsImpl {
 
         let get_info_from = match &umid {
             Some(umid) => {
+                let _ = extract_and_save_icon_umid(umid);
                 if WindowsApi::is_uwp_package_id(umid) {
                     ShouldGetInfoFrom::Package(umid.clone())
                 } else {
@@ -139,7 +141,6 @@ impl WegItemsImpl {
         let relaunch_command;
         match get_info_from {
             ShouldGetInfoFrom::Package(umid) => {
-                let _ = extract_and_save_icon_umid(&umid);
                 display_name = WindowsApi::get_uwp_app_info(&umid)?
                     .DisplayInfo()?
                     .DisplayName()?
@@ -147,7 +148,9 @@ impl WegItemsImpl {
                 relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
             }
             ShouldGetInfoFrom::WindowPropertyStore(umid) => {
-                let shortcut = Window::search_shortcut_with_same_umid(&umid);
+                let shortcut = START_MENU_MANAGER
+                    .load()
+                    .search_shortcut_with_same_umid(&umid);
                 if let Some(shortcut) = shortcut {
                     path = shortcut.clone();
                     display_name = path
@@ -155,10 +158,9 @@ impl WegItemsImpl {
                         .unwrap_or_else(|| OsStr::new("Unknown"))
                         .to_string_lossy()
                         .to_string();
+                } else {
+                    let _ = extract_and_save_icon_from_file(&path);
                 }
-
-                let _ = extract_and_save_icon_from_file(&path);
-
                 // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
                 // must always be set together. If one of those properties is not set, then neither is used.
                 // https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
