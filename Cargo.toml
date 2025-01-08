@@ -63,7 +63,7 @@ clap = { version = "4.5.4", features = ["derive", "string"] }
 os_info = "3.9.2"
 crossbeam-channel = "0.5.12"
 regex = "1.11.1"
-getset = "0.1.2"
+getset = "0.1.3"
 phf = "0.11.2"
 sysinfo = "0.30.12"
 battery = "0.7.8"
