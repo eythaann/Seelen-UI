@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### hotfix
+- not creating the default (system) icon pack.
+
 ## [2.0.13]
 ### features
 - add kill process option on context menu for dock items.

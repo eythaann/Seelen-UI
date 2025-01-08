@@ -9,6 +9,7 @@ use tauri::Emitter;
 
 use crate::{
     error_handler::Result,
+    log_error,
     modules::start::application::START_MENU_MANAGER,
     seelen::get_app_handle,
     state::application::FULL_STATE,
@@ -124,7 +125,7 @@ impl WegItemsImpl {
 
         let get_info_from = match &umid {
             Some(umid) => {
-                let _ = extract_and_save_icon_umid(umid);
+                log_error!(extract_and_save_icon_umid(umid));
                 if WindowsApi::is_uwp_package_id(umid) {
                     ShouldGetInfoFrom::Package(umid.clone())
                 } else {
@@ -159,7 +160,7 @@ impl WegItemsImpl {
                         .to_string_lossy()
                         .to_string();
                 } else {
-                    let _ = extract_and_save_icon_from_file(&path);
+                    log_error!(extract_and_save_icon_from_file(&path));
                 }
                 // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
                 // must always be set together. If one of those properties is not set, then neither is used.
@@ -174,7 +175,7 @@ impl WegItemsImpl {
                 }
             }
             ShouldGetInfoFrom::Process => {
-                let _ = extract_and_save_icon_from_file(&path);
+                log_error!(extract_and_save_icon_from_file(&path));
                 relaunch_command = path.to_string_lossy().to_string();
             }
         };

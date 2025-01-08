@@ -94,10 +94,11 @@ impl FullState {
     pub(super) fn load_icons_packs(&mut self) -> Result<()> {
         let entries = std::fs::read_dir(SEELEN_COMMON.icons_path())?;
         let mut icon_packs_manager = trace_lock!(self.icon_packs);
+        icon_packs_manager.0.clear();
 
         for entry in entries.flatten() {
             let path = entry.path();
-            if path.is_dir() {
+            if path.is_dir() && path.join("metadata.yml").exists() {
                 let icon_pack = Self::load_icon_pack_from_dir(&path);
                 match icon_pack {
                     Ok(mut icon_pack) => {
@@ -114,7 +115,7 @@ impl FullState {
         }
 
         // add default icon pack if not exists
-        if icon_packs_manager.0.contains_key("system") {
+        if !icon_packs_manager.0.contains_key("system") {
             let mut icon_pack = IconPack::default();
             icon_pack.info.display_name = "System".to_string();
             icon_pack.info.author = "System".to_string();
@@ -126,6 +127,7 @@ impl FullState {
                 .insert(icon_pack.info.filename.clone(), icon_pack);
             icon_packs_manager.write_system_icon_pack()?;
         }
+
         Ok(())
     }
 }
