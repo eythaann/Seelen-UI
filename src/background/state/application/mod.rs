@@ -141,12 +141,6 @@ impl FullState {
             self.emit_history()?;
         }
 
-        if changed.iter().any(|p| p == SEELEN_COMMON.settings_path()) {
-            log::info!("Seelen Settings changed");
-            self.read_settings()?;
-            self.emit_settings()?;
-        }
-
         if changed.iter().any(|p| {
             p.starts_with(SEELEN_COMMON.user_themes_path())
                 || p.starts_with(SEELEN_COMMON.bundled_themes_path())
@@ -199,6 +193,14 @@ impl FullState {
             log::info!("Widgets changed");
             self.load_widgets()?;
             self.emit_widgets()?;
+        }
+
+        // important: settings changed should be the last one to avoid use unexisting state
+        // like new recently added theme, plugin, widget, etc
+        if changed.iter().any(|p| p == SEELEN_COMMON.settings_path()) {
+            log::info!("Seelen Settings changed");
+            self.read_settings()?;
+            self.emit_settings()?;
         }
 
         Ok(())

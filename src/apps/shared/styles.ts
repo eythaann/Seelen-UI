@@ -1,9 +1,6 @@
-import { getCurrentWidget, Settings, UIColors } from '@seelen-ui/lib';
+import { getCurrentWidget, Settings, ThemeList, UIColors } from '@seelen-ui/lib';
 import { Theme, WidgetId } from '@seelen-ui/lib/types';
-import { listen } from '@tauri-apps/api/event';
 import { useEffect, useState } from 'react';
-
-import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
 type Args = undefined | string | { [x: string]: any };
 export const cx = (...args: Args[]): string => {
@@ -53,7 +50,7 @@ const OLD_THEME_KEYS_BY_WIDGET_ID = {
   '@seelen/wall': 'wall',
 } as Record<WidgetId, string>;
 
-async function loadThemes(allThemes: Theme[], selected: string[]) {
+function loadThemes(allThemes: Theme[], selected: string[]) {
   const themes = allThemes
     .filter((theme) => selected.includes(theme.info.filename))
     .sort((a, b) => {
@@ -82,12 +79,13 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
 }
 
 export async function StartThemingTool() {
-  const userSettings = await new UserSettingsLoader().withThemes().load();
-  let allThemes = userSettings.themes;
-  let selected = userSettings.jsonSettings.selectedThemes;
+  const settings = await Settings.getAsync();
 
-  await listen<Theme[]>('themes', (event) => {
-    allThemes = event.payload;
+  let allThemes = (await ThemeList.getAsync()).asArray();
+  let selected = settings.inner.selectedThemes;
+
+  await ThemeList.onChange((list) => {
+    allThemes = list.asArray();
     loadThemes(allThemes, selected);
   });
 
@@ -99,5 +97,5 @@ export async function StartThemingTool() {
   (await UIColors.getAsync()).setAssCssVariables();
   UIColors.onChange((colors) => colors.setAssCssVariables());
 
-  await loadThemes(allThemes, selected);
+  loadThemes(allThemes, selected);
 }

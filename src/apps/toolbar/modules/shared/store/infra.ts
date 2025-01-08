@@ -1,11 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { PluginList, SeelenEvent, UIColors } from '@seelen-ui/lib';
+import {
+  invoke,
+  PlaceholderList,
+  PluginList,
+  SeelenCommand,
+  SeelenEvent,
+  Settings,
+  UIColors,
+} from '@seelen-ui/lib';
 import { FancyToolbarSettings } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
 
-import { IsSavingCustom } from '../../main/application';
 import { RootActions, RootSlice } from './app';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -21,8 +28,6 @@ import {
   WorkspaceId,
 } from './domain';
 
-import { UserSettings } from '../../../../../shared.interfaces';
-import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
@@ -44,6 +49,14 @@ async function initUIColors() {
   await UIColors.onChange(loadColors);
 }
 
+function setPlaceholder(list: PlaceholderList) {
+  const state = store.getState();
+  const placeholder = list
+    .asArray()
+    .find((placeholder) => placeholder.info.filename === state.settings.placeholder);
+  store.dispatch(RootActions.setPlaceholder(placeholder || list.asArray()[0] || null));
+}
+
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
 
@@ -61,9 +74,7 @@ export async function registerStoreEvents() {
     }
   });
 
-  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async (_event) => {
-    await loadStore();
-  });
+  await Settings.onChange(loadStore);
 
   await listenGlobal<PowerStatus>('power-status', (event) => {
     store.dispatch(RootActions.setPowerStatus(event.payload));
@@ -120,14 +131,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await listenGlobal(SeelenEvent.StatePlaceholdersChanged, async () => {
-    if (IsSavingCustom.current) {
-      IsSavingCustom.current = false;
-      return;
-    }
-    const userSettings = await new UserSettingsLoader().withPlaceholders().load();
-    setPlaceholder(userSettings);
-  });
+  await PlaceholderList.onChange(setPlaceholder);
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).forCurrentWidget()));
   await PluginList.onChange((list) => {
@@ -139,28 +143,19 @@ export async function registerStoreEvents() {
   await view.emitTo(view.label, 'store-events-ready');
 }
 
-function setPlaceholder(userSettings: UserSettings) {
-  const settings = userSettings.jsonSettings.fancyToolbar;
-  const placeholder = settings.placeholder
-    ? userSettings.placeholders.find(
-      (placeholder) => placeholder.info.filename === settings.placeholder,
-    )
-    : null;
-  store.dispatch(RootActions.setPlaceholder(placeholder || userSettings.placeholders[0] || null));
-}
-
 export async function loadStore() {
-  const userSettings = await new UserSettingsLoader().withPlaceholders().load();
-  const settings = userSettings.jsonSettings.fancyToolbar;
-  i18n.changeLanguage(userSettings.jsonSettings.language || undefined);
+  const settings = (await Settings.getAsync()).inner;
 
-  loadSettingsCSS(settings);
-  store.dispatch(RootActions.setSettings(settings));
-  store.dispatch(RootActions.setDateFormat(userSettings.jsonSettings.dateFormat));
+  i18n.changeLanguage(settings.language || undefined);
 
-  setPlaceholder(userSettings);
+  loadSettingsCSS(settings.fancyToolbar);
+  store.dispatch(RootActions.setSettings(settings.fancyToolbar));
+  store.dispatch(RootActions.setDateFormat(settings.dateFormat));
+  store.dispatch(
+    RootActions.setEnv((await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>),
+  );
 
-  store.dispatch(RootActions.setEnv(userSettings.env));
+  PlaceholderList.getAsync().then(setPlaceholder);
 }
 
 export function loadSettingsCSS(settings: FancyToolbarSettings) {

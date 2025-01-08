@@ -153,15 +153,6 @@ export function SeelenWeg() {
 
   const projectSwItem = (item: SwItem) => ItemByType(item, shit);
 
-  console.log(
-    'pinnedOnLeft',
-    pinnedOnLeft,
-    'pinnedOnCenter',
-    pinnedOnCenter,
-    'pinnedOnRight',
-    pinnedOnRight,
-  );
-
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
       <Reorder.Group
