@@ -18,7 +18,7 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
 
   const { t } = useTranslation();
 
-  const icon = useIcon({ path, umid: umid ?? undefined });
+  const icon = useIcon({ path, umid: umid });
 
   function onClick() {
     invoke(SeelenCommand.OpenFile, { path });

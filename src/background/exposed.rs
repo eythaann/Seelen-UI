@@ -18,7 +18,6 @@ use crate::seelen_weg::icon_extractor::{
 use crate::utils::{
     is_running_as_appx_package, is_virtual_desktop_supported as virtual_desktop_supported,
 };
-use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
 use crate::winevent::{SyntheticFullscreenData, WinEvent};
 use crate::{log_error, utils};
@@ -129,17 +128,15 @@ fn send_keys(keys: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-fn get_icon(path: String, umid: Option<String>) -> Option<PathBuf> {
+fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Option<PathBuf> {
+    let mut icon = None;
     if let Some(umid) = umid {
-        if WindowsApi::is_uwp_package_id(&umid) {
-            return extract_and_save_icon_umid(&umid).ok();
-        }
-        let shortcut = Window::search_shortcut_with_same_umid(&umid);
-        if let Some(shortcut) = shortcut {
-            return extract_and_save_icon_from_file(&shortcut).ok();
-        }
+        icon = extract_and_save_icon_umid(&umid).ok();
     }
-    extract_and_save_icon_from_file(&path).ok()
+    match path {
+        Some(path) if icon.is_none() => extract_and_save_icon_from_file(&path).ok(),
+        _ => icon,
+    }
 }
 
 #[tauri::command(async)]

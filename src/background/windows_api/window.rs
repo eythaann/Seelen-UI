@@ -11,10 +11,7 @@ use windows::Win32::{
 
 use crate::{
     error_handler::Result,
-    modules::{
-        start::application::START_MENU_ITEMS,
-        virtual_desk::{get_vd_manager, VirtualDesktop},
-    },
+    modules::virtual_desk::{get_vd_manager, VirtualDesktop},
     seelen_bar::FancyToolbar,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
@@ -68,25 +65,12 @@ impl Window {
         self.0 .0 as isize
     }
 
-    /// TODO move this of place
-    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
-    pub fn search_shortcut_with_same_umid(umid: &str) -> Option<PathBuf> {
-        let items = START_MENU_ITEMS.load();
-        let item = items.iter().find(|item| {
-            if let Some(item_umid) = &item.umid {
-                return item_umid == umid;
-            }
-            false
-        });
-        item.map(|item| item.path.clone())
-    }
-
     /// App user model id asigned to the window via property-store
     /// To get UWP app user model id use `self.process().package_app_user_model_id()`
     ///
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
     pub fn app_user_model_id(&self) -> Option<String> {
-        WindowsApi::get_window_app_user_model_id_exe(self.0).ok()
+        WindowsApi::get_window_app_user_model_id(self.0).ok()
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand

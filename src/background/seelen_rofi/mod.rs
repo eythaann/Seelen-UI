@@ -8,7 +8,7 @@ use windows::Win32::UI::WindowsAndMessaging::SWP_NOACTIVATE;
 use crate::{
     error_handler::Result,
     log_error,
-    modules::start::{application::START_MENU_ITEMS, domain::StartMenuItem},
+    modules::start::{application::START_MENU_MANAGER, domain::StartMenuItem},
     seelen::get_app_handle,
     windows_api::WindowsApi,
 };
@@ -33,7 +33,7 @@ impl SeelenRofi {
         log::info!("Creating {}", Self::TARGET);
         Ok(Self {
             // apps should be loaded first because it takes a long time on start and its needed by webview
-            apps: START_MENU_ITEMS.load().to_vec(),
+            apps: START_MENU_MANAGER.load().list.clone(),
             window: Self::create_window()?,
         })
     }
