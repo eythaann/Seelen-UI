@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.0.13]
 ### features
 - add kill process option on context menu for dock items.
 - multi-language calendar and date module on toolbar.
