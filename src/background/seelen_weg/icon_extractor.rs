@@ -26,6 +26,7 @@ use crate::error_handler::Result;
 use crate::modules::start::application::START_MENU_MANAGER;
 use crate::modules::uwp::UwpManager;
 use crate::state::application::FULL_STATE;
+use crate::trace_lock;
 use crate::utils::constants::SEELEN_COMMON;
 use crate::windows_api::WindowsApi;
 
@@ -249,8 +250,9 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
 
     let key = path.to_string_lossy().to_string();
 
-    let state = FULL_STATE.load();
-    if let Some(icon) = state.get_icon_by_key(&key) {
+    let mutex = FULL_STATE.load().icon_packs().clone();
+    let mut icon_manager = trace_lock!(mutex);
+    if let Some(icon) = icon_manager.get_icon_by_key(&key) {
         return Ok(icon);
     }
 
@@ -273,22 +275,23 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
     // try get icons for URLs
     if is_url_file {
         let icon = get_icon_from_url_file(path)?;
-        state.add_system_icon(&key, &icon_filename);
-        state.write_system_icon_pack()?;
         icon.save(&icon_path)?;
+        icon_manager.add_system_icon(&key, &icon_filename);
+        icon_manager.write_system_icon_pack()?;
         return Ok(icon_path);
     }
 
     // try get the icon directly from the file
     if let Ok(icon) = get_icon_from_file(path) {
-        state.add_system_icon(&key, &icon_filename);
-        state.write_system_icon_pack()?;
         icon.save(&icon_path)?;
+        icon_manager.add_system_icon(&key, &icon_filename);
+        icon_manager.write_system_icon_pack()?;
         return Ok(icon_path);
     }
 
     // if the lnk don't have an icon, try to extract it from the target
     if is_lnk_file {
+        drop(icon_manager);
         let (target, _) = WindowsApi::resolve_lnk_target(path)?;
         return extract_and_save_icon_from_file(&target);
     }
@@ -300,8 +303,8 @@ pub fn extract_and_save_icon_from_file<T: AsRef<Path>>(path: T) -> Result<PathBu
 pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf> {
     let app_umid = app_umid.as_ref();
 
-    let state = FULL_STATE.load();
-    if let Some(icon) = state.get_icon_by_key(app_umid) {
+    let icon_manager_mutex = FULL_STATE.load().icon_packs().clone();
+    if let Some(icon) = trace_lock!(icon_manager_mutex).get_icon_by_key(app_umid) {
         return Ok(icon);
     }
 
@@ -312,8 +315,9 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
             .ok_or("No shortcut found for umid")?;
         let extracted = extract_and_save_icon_from_file(&shortcut)?;
         let filename = PathBuf::from(extracted.file_name().unwrap());
-        state.add_system_icon(app_umid, &filename);
-        state.write_system_icon_pack()?;
+        let mut icon_manager = trace_lock!(icon_manager_mutex);
+        icon_manager.add_system_icon(app_umid, &filename);
+        icon_manager.write_system_icon_pack()?;
         return Ok(extracted);
     }
 
@@ -324,8 +328,9 @@ pub fn extract_and_save_icon_umid<T: AsRef<str>>(app_umid: T) -> Result<PathBuf>
         .icons_path()
         .join("system")
         .join(&relative_path);
-    state.add_system_icon(app_umid, &relative_path);
-    state.write_system_icon_pack()?;
     std::fs::copy(app_icon, &image_path)?;
+    let mut icon_manager = trace_lock!(icon_manager_mutex);
+    icon_manager.add_system_icon(app_umid, &relative_path);
+    icon_manager.write_system_icon_pack()?;
     Ok(image_path)
 }

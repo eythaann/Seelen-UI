@@ -9,6 +9,7 @@ mod widgets;
 
 use arc_swap::ArcSwap;
 use getset::Getters;
+use icons::IconPacksManager;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use notify_debouncer_full::{
@@ -18,7 +19,7 @@ use notify_debouncer_full::{
 };
 use parking_lot::Mutex;
 use seelen_core::state::{
-    IconPack, Plugin, PluginId, Profile, WegItems, Widget, WidgetId, WindowManagerLayout,
+    Plugin, PluginId, Profile, WegItems, Widget, WidgetId, WindowManagerLayout,
 };
 use std::{
     collections::{HashMap, HashSet, VecDeque},
@@ -54,7 +55,7 @@ pub struct FullState {
     pub settings: Settings,
     pub settings_by_app: VecDeque<AppConfig>,
     pub themes: HashMap<String, Theme>,
-    pub icon_packs: Arc<Mutex<HashMap<String, IconPack>>>,
+    pub icon_packs: Arc<Mutex<IconPacksManager>>,
     pub placeholders: HashMap<String, Placeholder>,
     pub layouts: HashMap<String, WindowManagerLayout>,
     pub weg_items: WegItems,
@@ -75,7 +76,7 @@ impl FullState {
             settings: Settings::default(),
             settings_by_app: VecDeque::new(),
             themes: HashMap::new(),
-            icon_packs: Arc::new(Mutex::new(HashMap::new())),
+            icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
             placeholders: HashMap::new(),
             layouts: HashMap::new(),
             weg_items: WegItems::default(),
@@ -117,12 +118,23 @@ impl FullState {
     }
 
     fn process_changes(&mut self, changed: &HashSet<PathBuf>) -> Result<()> {
-        if changed
-            .iter()
-            .any(|p| p.starts_with(SEELEN_COMMON.icons_path()) && p.ends_with("metadata.yml"))
-        {
-            log::info!("Icons Packs changed");
-            self.load_icons_packs()?;
+        let mut is_changing_icons_metadata = false;
+        let mut is_only_changing_system_icons = true;
+
+        for path in changed.iter() {
+            if path.starts_with(SEELEN_COMMON.icons_path()) && path.ends_with("metadata.yml") {
+                is_changing_icons_metadata = true;
+                if !path.ends_with("system\\metadata.yml") {
+                    is_only_changing_system_icons = false;
+                }
+            }
+        }
+
+        if is_changing_icons_metadata {
+            if !is_only_changing_system_icons {
+                log::info!("Icons Packs changed");
+                self.load_icons_packs()?;
+            }
             self.emit_icon_packs()?;
         }
 
@@ -209,7 +221,7 @@ impl FullState {
     fn start_listeners(&mut self) -> Result<()> {
         log::trace!("Starting Seelen UI Files Watcher");
         let mut debouncer = new_debouncer(
-            Duration::from_millis(500),
+            Duration::from_millis(100),
             None,
             |result: DebounceEventResult| match result {
                 Ok(events) => {

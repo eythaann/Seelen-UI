@@ -14,9 +14,9 @@ use super::{
 
 #[tauri::command(async)]
 pub fn state_get_icon_packs() -> Vec<IconPack> {
-    let icon_packs = FULL_STATE.load().icon_packs.clone();
-    let icon_packs = trace_lock!(icon_packs);
-    icon_packs.values().cloned().collect_vec()
+    let mutex = FULL_STATE.load().icon_packs().clone();
+    let icon_packs = trace_lock!(mutex);
+    icon_packs.owned_list()
 }
 
 #[tauri::command(async)]
