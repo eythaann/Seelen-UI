@@ -100,29 +100,55 @@ body {
 .taskbar {
   position: relative;
   overflow: visible;
-  padding: var(--config-padding);
   margin: var(--config-margin);
-  display: flex;
-  justify-content: var(--config-by-position-justify-content);
-  align-items: var(--config-by-position-align-items);
-  flex-direction: var(--config-by-position-flex-direction);
-  gap: var(--config-space-between-items);
-
+  padding: var(--config-padding);
+  
   &.horizontal {
     height: calc(var(--config-item-size) + var(--config-padding) * 2);
-    width: min-content;
-
-    &.full-width {
-      width: calc(100vw - var(--config-margin) * 2);
-    }
   }
 
   &.vertical {
     width: calc(var(--config-item-size) + var(--config-padding) * 2);
-    height: min-content;
+  }
 
-    &.full-width {
-      height: calc(100vh - var(--config-margin) * 2);
+  & .taskbar-scroll-container {
+    position: relative;
+    overflow: auto;
+    
+    & .taskbar-scroll-inner-frame {
+      position: relative;
+      display: flex;
+      justify-content: var(--config-by-position-justify-content);
+      align-items: var(--config-by-position-align-items);
+      flex-direction: var(--config-by-position-flex-direction);
+      gap: var(--config-space-between-items);
+      
+      .horizontal & {
+        width: min-content;
+  
+        .full-width & {
+          width: calc(100vw - var(--config-margin) * 2 - var(--config-padding) * 2);
+        }
+      }
+  
+      .vertical & {
+        justify-content: var(--config-by-position-align-items);
+        align-items: var(--config-by-position-justify-content);
+
+        height: min-content;
+  
+        .full-width & {
+          height: calc(100vh - var(--config-margin) * 2 - var(--config-padding) * 2);
+        }
+      }
+    }
+
+    .horizontal & {
+      max-width: calc(100vw - var(--config-margin) * 2 - var(--config-padding) * 2);
+    }
+
+    .vertical & {
+      max-height: calc(100vh - var(--config-margin) * 2 - var(--config-padding) * 2);
     }
   }
 
@@ -140,7 +166,7 @@ body {
     }
 
     .vertical & {
-      width: 100%;
+      width: var(--config-item-size);
 
       /* first child always is the background */
       &:nth-child(2) {
@@ -153,7 +179,7 @@ body {
     }
 
     .horizontal & {
-      height: 100%;
+      height: var(--config-item-size);
 
       /* first child always is the background */
       &:nth-child(2) {

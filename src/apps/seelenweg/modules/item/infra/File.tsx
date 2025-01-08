@@ -16,9 +16,10 @@ import { getMenuForItem } from './Menu';
 
 interface Props {
   item: PinnedWegItem;
+  drag: boolean | 'x' | 'y' | undefined;
 }
 
-export const FileOrFolder = memo(({ item }: Props) => {
+export const FileOrFolder = memo(({ item, drag }: Props) => {
   const [iconSrc, setIconSrc] = useState<string>(
     item.isDir ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
   );
@@ -34,7 +35,7 @@ export const FileOrFolder = memo(({ item }: Props) => {
   }, [item]);
 
   return (
-    <DraggableItem item={item}>
+    <DraggableItem drag={drag} item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
         <div
           className="weg-item"
