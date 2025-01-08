@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   DocumentsFolder,
   DownloadsFolder,
+  IconPackManager,
   invoke,
   MusicFolder,
   PicturesFolder,
@@ -77,7 +78,7 @@ export async function registerStoreEvents() {
   const onFocusChanged = debounce((app: FocusedApp) => {
     const state = store.getState();
     if (app.exe && state.history[0]?.exe != app.exe && !app.exe.endsWith('seelen-ui.exe')) {
-      invoke(SeelenCommand.GetIcon, { path: app.exe })
+      IconPackManager.extractIcon({ path: app.exe })
         .then((icon_path) => store.dispatch(RootActions.setHistory(
           [ ...state.history, { ...app, date: moment(new Date()), icon_path: icon_path ?? LAZY_CONSTANTS.MISSING_ICON_PATH }]
             .sort((a, b) => b.date.diff(a.date, 'ms')))))

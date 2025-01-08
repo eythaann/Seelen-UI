@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use serde::{Deserialize, Serialize};
 
-use crate::{error_handler::AppError, seelen_weg::icon_extractor, utils::constants::Icons};
+use crate::error_handler::AppError;
 
 #[allow(dead_code)]
 pub enum PictureQuality {
@@ -70,7 +70,7 @@ impl FolderType {
     }
 }
 
-#[derive(Debug, Clone, PartialEq, Eq, Default)]
+#[derive(Debug, Clone, PartialEq, Eq, Default, Serialize)]
 pub struct File {
     pub path: PathBuf,
     pub last_access_time: u64,
@@ -80,42 +80,7 @@ pub struct File {
 #[serde(rename_all = "camelCase")]
 pub struct FolderChangedArgs {
     pub of_folder: FolderType,
-    pub content: Option<Vec<ExposedFile>>,
-}
-
-#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
-#[serde(rename_all = "camelCase")]
-pub struct ExposedFile {
-    pub name: String,
-    pub path: PathBuf,
-    pub icon_location: PathBuf,
-    pub last_access_time: u64,
-}
-
-impl From<File> for ExposedFile {
-    fn from(value: File) -> ExposedFile {
-        ExposedFile {
-            name: value
-                .path
-                .clone()
-                .as_path()
-                .file_name()
-                .unwrap()
-                .to_str()
-                .unwrap()
-                .to_string(),
-            path: value.path.clone(),
-            icon_location: std::fs::canonicalize(
-                icon_extractor::extract_and_save_icon_from_file(&value.path)
-                    .unwrap_or(Icons::missing_app()),
-            )
-            .unwrap()
-            .to_str()
-            .unwrap()[4..]
-                .into(),
-            last_access_time: value.last_access_time,
-        }
-    }
+    pub content: Option<Vec<File>>,
 }
 
 impl PictureQuality {
