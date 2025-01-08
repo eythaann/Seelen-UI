@@ -32,6 +32,7 @@ impl PictureQuality {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct User {
     pub name: String,
     pub domain: String,
