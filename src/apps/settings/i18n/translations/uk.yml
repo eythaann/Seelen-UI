@@ -2,37 +2,37 @@ app_launcher:
   enable: Увімкнути швидкий запуск
   launch_on:
     mouse_over: Наведіть курсор миші
-    primary: Первинний
+    primary: Основний
   monitor: Монітор, на якому показати вікно
   runners:
-    cmd: Команда
+    cmd: Командний рядок
     explorer: Запуск
     label: Налаштування запуску
 apps_configurations:
   app:
-    bindings: Зобов’язання (ПРИМІТКА Обидва варіанти потрібні)
+    bindings: Прив'язка (візьміть до уваги, що обидва варіанти потрібні)
     category: Категорія
-    category_placeholder: Ні
-    monitor: Моніторинг
-    monitor_placeholder: Ні
+    category_placeholder: Ніяка
+    monitor: Монітор
+    monitor_placeholder: Ніякий
     name: Назва
     ok_create: Створити
     ok_edit: Оновити
     ok_readonly: Редагувати як нове
     options:
-      float: Плавати
-      force: Сила
+      float: Плаваюче
+      force: Змусити
       hidden: Сховати з панелі завдань
       pinned: Закріплений
-      unmanage: Не обрано
+      unmanage: Не керувати
     options_label: Додаткові варіанти
-    title_create: Створення {{Ім'я}}
-    title_edit: Редагування {{Ім'я}}
-    title_readonly: Перегляд {{Ім'я}}
-    weg_options_label: Параметри Taskbar
+    title_create: Створення {{name}}
+    title_edit: Редагування {{name}}
+    title_readonly: Перегляд {{name}}
+    weg_options_label: Параметри Dock/панелі задач
     wm_options_label: Параметри менеджера вікон
-    workspace: Робоча область
-    workspace_placeholder: Ні
+    workspace: Робочий простір
+    workspace_placeholder: Ніякий
   bundled_msg: >-
     Ці готові конфігурації не підлягають редагуванню і створені для того, щоб
     забезпечити вам найкращий досвід роботи без кастомізації. Вони автоматично
@@ -44,14 +44,14 @@ apps_configurations:
   export: Експорт
   extra_info: >-
     Seelen UI використовує лише один ідентифікатор для кожного додатка (перший
-    знайдений збіг), тому важливим є порядок, у якому вони вказуються, останні
-    додані додатки матимуть пріоритет, зауважте, що таблиця за замовчуванням
+    знайдений збіг), тому важливим є порядок, у якому вони вказуються. Останні
+    додані додатки матимуть пріоритет. Зауважте, що за замовчуванням таблиця
     відсортована від найновішого до найстарішого.
   identifier:
     add_block: Додати блок
-    and: і
+    and: І
     id: Ідентифікатор
-    kind: Ідентифікувати
+    kind: Ідентифікувати по
     matching_strategy: Стратегія відповідності
     matching_strategy_option:
       contains: Містить
@@ -60,12 +60,12 @@ apps_configurations:
       regex: Регулярний вираз
       starts_with: Починається з
     negation: Заперечувати відповідність
-    or: або
+    or: АБО
     remove: Видалити блок
     type:
       class: Клас
-      exe: Exe
-      path: шлях
+      exe: Виконуваний файл
+      path: Шлях
       title: Назва
   import: Імпорт
   new: Новий
@@ -76,23 +76,23 @@ close: Закрити
 delete: Видалити
 devtools:
   app_folders: Папки додатків
-  custom_config_file: Завантажити власний конфігураційний файл
+  custom_config_file: Імпортувати файл конфігурації
   data_folder: Папка даних
   enable: Увімкнути інструменти розробника
   install_folder: Папка встановлення
-  load: Завантаження
+  load: Відкрити
   settings_file: Файл налаштувань
   simulate_fullscreen: Симулювати повноекранну подію
 extras:
-  discord: Дискорд
+  discord: Discord
   exit: Закрити програму
-  github: ГітХаб
+  github: GitHub
   links: Офіційні посилання
   relaunch: Перезапустити
   version: Версія
 general:
   accent_color: Основний колір
-  date_format: Формат дати
+  date_format: Формат дати та часу
   icon_pack:
     available: Доступні пакети іконок
     label: Пакети іконок
@@ -102,7 +102,7 @@ general:
     author: Автор
     description: Опис
     tags: Теги
-  startup: Запускати під час запуску Windows?
+  startup: Запускати разом з Windows?
   theme:
     available: Доступні теми
     label: Теми
@@ -149,15 +149,15 @@ shortcuts:
     decrease_height: Зменшити висоту
     decrease_width: Зменшити ширину
     focus_bottom: Фокус знизу
-    focus_latest: Фокус на новішому
+    focus_latest: Фокус на найновішому
     focus_left: Фокус ліворуч
     focus_right: Фокус праворуч
     focus_top: Фокус згори
     increase_height: Збільшити висоту
     increase_width: Збільшити ширину
     misc_open_settings: Відкрити налаштування
-    misc_toggle_lock_tracing: Перемкнути відстеження блокування (журнали)
-    misc_toggle_win_event_tracing: Перемкнути відстеження подій Windows (журнали)
+    misc_toggle_lock_tracing: Переключити відстеження блокування (журнали)
+    misc_toggle_win_event_tracing: Переключити відстеження подій Windows (журнали)
     move_to_workspace_0: Перехід до робочої області 0
     move_to_workspace_1: Перехід до робочої області 1
     move_to_workspace_2: Перехід до робочої області 2
@@ -175,29 +175,29 @@ shortcuts:
     reserve_stack: Резерв стаку
     reserve_top: Резервувати згори
     restore_sizes: Відновити розміри
-    send_to_workspace_0: Надіслати на робочу область 0
-    send_to_workspace_1: Надіслати на робочу область 1
-    send_to_workspace_2: Надіслати на робочу область 2
-    send_to_workspace_3: Надіслати на робочу область 3
-    send_to_workspace_4: Надіслати на робочу область 4
-    send_to_workspace_5: Надіслати на робочу область 5
-    send_to_workspace_6: Надіслати на робочу область 6
-    send_to_workspace_7: Надіслати на робочу область 7
-    send_to_workspace_8: Надіслати на робочу область 8
-    send_to_workspace_9: Надіслати на робочу область 9
-    switch_workspace_0: Перемкнути на робочу область 0
-    switch_workspace_1: Перемкнути на робочу область 1
-    switch_workspace_2: Перемкнути на робочу область 2
-    switch_workspace_3: Перемкнути на робочу область 3
-    switch_workspace_4: Перемкнути на робочу область 4
-    switch_workspace_5: Перемкнути на робочу область 5
-    switch_workspace_6: Перемкнути на робочу область 6
-    switch_workspace_7: Перемкнути на робочу область 7
-    switch_workspace_8: Перемкнути на робочу область 8
-    switch_workspace_9: Перемкнути на робочу область 9
-    toggle_launcher: Перемкнути
+    send_to_workspace_0: Надіслати на робочий простір 0
+    send_to_workspace_1: Надіслати на робочий простір 1
+    send_to_workspace_2: Надіслати на робочий простір 2
+    send_to_workspace_3: Надіслати на робочий простір 3
+    send_to_workspace_4: Надіслати на робочий простір 4
+    send_to_workspace_5: Надіслати на робочий простір 5
+    send_to_workspace_6: Надіслати на робочий простір 6
+    send_to_workspace_7: Надіслати на робочий простір 7
+    send_to_workspace_8: Надіслати на робочий простір 8
+    send_to_workspace_9: Надіслати на робочий простір 9
+    switch_workspace_0: Перейти на робочий простір 0
+    switch_workspace_1: Перейти на робочий простір 1
+    switch_workspace_2: Перейти на робочий простір 2
+    switch_workspace_3: Перейти на робочий простір 3
+    switch_workspace_4: Перейти на робочий простір 4
+    switch_workspace_5: Перейти на робочий простір 5
+    switch_workspace_6: Перейти на робочий простір 6
+    switch_workspace_7: Перейти на робочий простір 7
+    switch_workspace_8: Перейти на робочий простір 8
+    switch_workspace_9: Перейти на робочий простір 9
+    toggle_launcher: Переключити
   readonly_tooltip: Це ярлик лише для читання
-  reset: Скидання за замовчуванням
+  reset: Скинути до параметрів за замовчуванням
 sides:
   bottom: Низ
   left: Ліво
@@ -213,20 +213,20 @@ start:
   title: Ласкаво просимо!
 toolbar:
   auto_hide: Автоматично приховувати
-  delay_to_hide: Затримка, щоб сховати
-  delay_to_show: Затримка, щоб показати
+  delay_to_hide: Затримка приховання
+  delay_to_show: Затримка показу
   enable: Увімкнути панель інструментів
   height: Висота
   hide_mode:
     always: Завжди
     never: Ніколи
-    on_overlap: На перекриття
+    on_overlap: При перекритті
   label: Панель інструментів
   placeholder:
     author: Автор
     description: Опис
     select: Структура панелі інструментів
-  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
+  use_multiple_monitor_overlap_logic: Використовувати логіку специфічну до монітора замість однофокусної
 update:
   available: Доступне оновлення!
   channel: Канал оновлення
@@ -246,36 +246,36 @@ wall:
   interval: Зміна шпалер кожні
   minutes: хвилини
   no_background: Слайдів не знайдено, натомість застосовано фон теми.
-  random: Рандомізувати слайд шоу
+  random: Випадковий порядок слайд-шоу
   seconds: секунди
 weg:
   auto_hide: Автоматично приховувати
-  delay_to_hide: Затримка, щоб сховатися
-  delay_to_show: Затримка, щоб показати
-  dock_side: Позиція
+  delay_to_hide: Затримка приховання
+  delay_to_show: Затримка показу
+  dock_side: Позиція панелі
   enable: Увімкнути панель завдань
-  gap: Відступ
+  gap: Відступ від краю
   hide_mode:
     always: Завжди
     never: Ніколи
-    on_overlap: На перекриття
+    on_overlap: При перекритті
   items:
-    gap: Відступ між піктограмами
+    gap: Проміжок між піктограмами
     label: Піктограми
     size: Розмір піктограм
     temporal_visibility:
       all: всі
       label: Видимість незакріплених елементів
       on_monitor: На моніторі
-    visible_separators: Видимі сепаратори
+    visible_separators: Видимі розділювачі
     zoom_size: Збільшений розмір (використовується для тем)
   label: Панель завдань
   margin: Зовнішній відступ
   mode:
-    full_width: Повна ширина екрана
-    min_content: Маленький, наскільки це можливо
+    full_width: На всю ширину екрана
+    min_content: Якнайменший
   padding: Внутрішній відступ
-  use_multiple_monitor_overlap_logic: Використовуйте спеціальну логіку відображення замість однофокусної логіки
+  use_multiple_monitor_overlap_logic: Використовувати логіку специфічну до монітора замість однофокусної
   width: Ширина
 wm:
   author: Автор
@@ -288,5 +288,5 @@ wm:
   layout: Макет
   resize_delta: Змінити розмір дельти (%)
   space_between_containers: Простір між вікнами
-  workspace_offset: Зсув робочих просторів (Зовнішній відступ)
+  workspace_offset: Зсув робочих просторів (Зовнішні поля)
   workspace_padding: Внутрішній відступ робочих просторів
