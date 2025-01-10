@@ -22,10 +22,9 @@ $taskPath = "\Seelen\$taskName"
 
 if ($Enabled -eq "true") {
   $action = New-ScheduledTaskAction -Execute "$ExeRoute" -Argument "--silent"
-  $trigger = New-ScheduledTaskTrigger -AtLogon
+  $trigger = New-ScheduledTaskTrigger -AtLogOn
   $settings = New-ScheduledTaskSettingsSet -Priority 4 -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden
-
-  Register-ScheduledTask -Force -Action $action -Trigger $trigger -Settings $settings -TaskName $taskPath -User $env:USERNAME -RunLevel Highest
+  Register-ScheduledTask -Force -Action $action -Trigger $trigger -Settings $settings -TaskName $taskPath -RunLevel Highest
 }
 else {
   $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue

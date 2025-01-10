@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### hotfix
+- startup toggle not working for certain users.
+
 ## [2.0.14]
 ### hotfix
 - not creating the default (system) icon pack.
