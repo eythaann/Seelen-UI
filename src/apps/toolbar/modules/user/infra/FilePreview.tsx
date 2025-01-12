@@ -1,3 +1,4 @@
+import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { File } from '@seelen-ui/lib/types';
 import { Tooltip } from 'antd';
 import moment from 'moment';
@@ -24,12 +25,12 @@ export function FilePreview({ file }: FilePreviewProps) {
       mouseLeaveDelay={0}
       arrow={false}
       title={file.path}
-      placement="top"
+      placement="right"
     >
-      <li className="userhome-history-item">
-        <img className="userhome-history-item-icon" src={icon || LAZY_CONSTANTS.MISSING_ICON_PATH} />
-        <div className="userhome-history-item-title">{file.path.substring(file.path.lastIndexOf('\\') + 1)}</div>
-        <div className="userhome-history-item-date" >{moment(WindowsDateFileTimeToDate(file.lastAccessTime)).fromNow()}</div>
+      <li className="userhome-folder-content-item" onClick={() => invoke(SeelenCommand.OpenFile, { path: file.path })}>
+        <img className="userhome-folder-content-item-icon" src={icon || LAZY_CONSTANTS.MISSING_ICON_PATH} />
+        <div className="userhome-folder-content-item-title">{file.path.substring(file.path.lastIndexOf('\\') + 1)}</div>
+        <div className="userhome-folder-content-item-date" >{moment(WindowsDateFileTimeToDate(file.lastAccessTime)).fromNow()}</div>
       </li>
     </Tooltip>
   );
