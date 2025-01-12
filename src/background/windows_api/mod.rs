@@ -19,7 +19,7 @@ use std::{
     ffi::{c_void, OsString},
     os::windows::ffi::OsStrExt,
     path::{Path, PathBuf},
-    thread::sleep,
+    thread::{self, sleep},
     time::Duration,
 };
 
@@ -95,20 +95,20 @@ use windows::{
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
                 PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, HWND_TOP, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-                SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
-                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
-                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL,
-                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
-                WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
+                WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
 };
 
 use crate::{
-    error_handler::{Result, WindowsResultExt},
+    error_handler::{AppError, Result, WindowsResultExt},
     hook::HookManager,
     modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
@@ -351,17 +351,39 @@ impl WindowsApi {
         let hwnd = hwnd.0 as isize;
         HookManager::run_with_async(move |hook_manager| {
             let hwnd = HWND(hwnd as _);
+            let mut max_retry_count = 0;
 
             hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
             hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
 
             Self::set_minimize_animation(false)?;
-            Self::show_window(hwnd, SW_FORCEMINIMIZE)?;
-            Self::show_window(hwnd, SW_RESTORE)?;
+            Self::show_window_async(hwnd, SW_FORCEMINIMIZE)?;
+            while max_retry_count < 10 && !Self::is_iconic(hwnd) {
+                thread::sleep(Duration::from_millis(20));
+                max_retry_count += 1;
+            }
+            Self::show_window_async(hwnd, SW_RESTORE)?;
             Self::set_minimize_animation(true)?;
 
-            Self::bring_to(hwnd, HWND_TOP)?;
-            Self::set_foreground(hwnd)
+            max_retry_count = 0;
+            while max_retry_count < 10 && Self::is_iconic(hwnd) {
+                thread::sleep(Duration::from_millis(20));
+                max_retry_count += 1;
+            }
+            max_retry_count = if max_retry_count == 10 { 10 } else { 0 };
+            while max_retry_count < 10 && Self::get_foreground_window() != hwnd {
+                thread::sleep(Duration::from_millis(10));
+
+                Self::set_foreground(hwnd)?;
+                max_retry_count += 1;
+            }
+
+            if max_retry_count == 10 {
+                return Err(AppError::from(
+                    "An operation failed and did not succeded to bring application to foreground!",
+                ));
+            }
+            Ok::<(), AppError>(())
         });
     }
 
