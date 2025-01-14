@@ -6,7 +6,9 @@
   ; Refresh file associations icons
   !insertmacro UPDATEFILEASSOC
   ; Create the app service
-  ExecWait '"$INSTDIR\slu-service.exe" install'
+  FILE "${__FILEDIR__}\..\..\slu-service.exe"
+  nsExec::Exec '"$INSTDIR\slu-service.exe" install'
+  Pop $0
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
@@ -17,5 +19,7 @@
   ; Refresh file associations icons
   !insertmacro UPDATEFILEASSOC
   ; Delete the app service
-  ExecWait '"$INSTDIR\slu-service.exe" uninstall'
+  nsExec::Exec '"$INSTDIR\slu-service.exe" uninstall'
+  Pop $0
+  Delete "$INSTDIR\slu-service.exe"
 !macroend
