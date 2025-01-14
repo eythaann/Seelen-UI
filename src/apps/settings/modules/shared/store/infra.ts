@@ -118,16 +118,18 @@ export async function registerStoreEvents() {
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
-  startup.isEnabled().then((value) => {
-    store.dispatch(RootActions.setAutostart(value));
-  });
-
-  const settings: Settings = customPath ? await Settings.loadCustom(customPath) : await Settings.getAsync();
+  const settings: Settings = customPath
+    ? await Settings.loadCustom(customPath)
+    : await Settings.getAsync();
   const currentState = store.getState();
-  store.dispatch(RootActions.setState({
-    ...currentState,
-    ...settings.inner,
-  }));
+  store.dispatch(
+    RootActions.setState({
+      ...currentState,
+      ...settings.inner,
+    }),
+  );
+
+  store.dispatch(RootActions.setAutostart(await startup.isEnabled()));
 
   store.dispatch(RootActions.setAppsConfigurations((await AppConfigurationList.getAsync()).all()));
 

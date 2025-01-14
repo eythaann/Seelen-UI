@@ -3,7 +3,7 @@ mod com;
 mod iterator;
 pub mod monitor;
 pub mod process;
-mod string_utils;
+pub mod string_utils;
 pub mod window;
 
 pub use app_bar::*;

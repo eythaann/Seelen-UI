@@ -28,13 +28,17 @@ export function General() {
 
   const onAutoStart = async (value: boolean) => {
     setChangingAutostart(true);
-    if (value) {
-      await startup.enable();
-    } else {
-      await startup.disable();
+    try {
+      if (value) {
+        await startup.enable();
+      } else {
+        await startup.disable();
+      }
+      dispatch(RootActions.setAutostart(await startup.isEnabled()));
+    } catch (e) {
+      console.error(e);
     }
     setChangingAutostart(false);
-    dispatch(RootActions.setAutostart(value));
   };
 
   const onDateFormatChange = (e: ChangeEvent<HTMLInputElement>) =>

@@ -1,8 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-### hotfix
-- startup toggle not working for certain users.
+### refactor
+- create separated system service to handle elevated actions.
 
 ## [2.0.14]
 ### hotfix

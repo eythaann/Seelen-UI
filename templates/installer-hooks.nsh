@@ -1,17 +1,21 @@
 !macro NSIS_HOOK_PREINSTALL
-  ; MessageBox MB_OK "PreInstall"
+  ; add code here
 !macroend
 
 !macro NSIS_HOOK_POSTINSTALL
   ; Refresh file associations icons
   !insertmacro UPDATEFILEASSOC
+  ; Create the app service
+  ExecWait '"$INSTDIR\slu-service.exe" install'
 !macroend
 
 !macro NSIS_HOOK_PREUNINSTALL
-  ; MessageBox MB_OK "PreUnInstall"
+  ; add code here
 !macroend
 
 !macro NSIS_HOOK_POSTUNINSTALL
   ; Refresh file associations icons
   !insertmacro UPDATEFILEASSOC
+  ; Delete the app service
+  ExecWait '"$INSTDIR\slu-service.exe" uninstall'
 !macroend

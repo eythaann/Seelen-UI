@@ -15,6 +15,7 @@ use crate::seelen_weg::icon_extractor::{
     extract_and_save_icon_from_file, extract_and_save_icon_umid,
 };
 
+use crate::utils::pwsh::PwshScript;
 use crate::utils::{
     is_running_as_appx_package, is_virtual_desktop_supported as virtual_desktop_supported,
 };
@@ -53,18 +54,7 @@ async fn run_as_admin(program: String, args: Vec<String>) -> Result<()> {
             args.join(" ")
         )
     };
-    get_app_handle()
-        .shell()
-        .command("powershell")
-        .args([
-            "-NoProfile",
-            "-ExecutionPolicy",
-            "Bypass",
-            "-Command",
-            &command,
-        ])
-        .status()
-        .await?;
+    PwshScript::new(command).execute().await?;
     Ok(())
 }
 
@@ -114,7 +104,7 @@ async fn set_auto_start(enabled: bool) -> Result<()> {
 
 #[tauri::command(async)]
 async fn get_auto_start_status() -> Result<bool> {
-    Seelen::is_auto_start_enabled().await
+    Seelen::is_auto_start_enabled()
 }
 
 #[tauri::command(async)]

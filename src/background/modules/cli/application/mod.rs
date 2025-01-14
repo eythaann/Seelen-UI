@@ -80,7 +80,7 @@ macro_rules! get_subcommands {
 
 lazy_static! {
     pub static ref SEELEN_COMMAND_LINE: Arc<Mutex<Command>> = Arc::new(Mutex::new(
-        Command::new("Seelen")
+        Command::new("Seelen UI")
             .author("eythaann")
             .about("Seelen Command Line Interface.")
             .long_about("Seelen Command Line Interface.")
@@ -153,8 +153,8 @@ pub fn is_just_getting_info(matches: &clap::ArgMatches) -> Result<bool> {
     Ok(r)
 }
 
-const URI: &str = "seelen-ui.uri:";
-const URI_MSIX: &str = "seelen-ui-msix.uri:";
+pub const URI: &str = "seelen-ui.uri:";
+pub const URI_MSIX: &str = "seelen-ui-msix.uri:";
 
 pub fn process_uri(uri: &str) -> Result<()> {
     log::trace!("Loading URI: {}", uri);

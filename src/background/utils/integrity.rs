@@ -1,11 +1,12 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use base64::Engine;
+use clap::ArgMatches;
 use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
-use crate::error_handler::Result;
+use crate::{error_handler::Result, modules::cli::application::URI_MSIX};
 
 use super::spawn_named_thread;
 
@@ -79,36 +80,13 @@ pub fn start_integrity_thread(app: tauri::AppHandle) {
     .expect("Failed to start integrity thread");
 }
 
-pub fn start_slu_service(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
-    log::trace!("Starting slu-service");
-    let path = std::env::current_exe()?;
-    #[allow(deprecated)]
-    app.shell().open(
-        path.with_file_name("slu-service.exe")
-            .to_string_lossy()
-            .to_string(),
-        None,
-    )?;
-    Ok(())
-}
-
-pub fn kill_slu_service() -> Result<()> {
-    log::trace!("Killing slu-service");
-    let mut sys = sysinfo::System::new();
-    sys.refresh_processes();
-    let process = sys.processes().values().find(|p| {
-        p.exe()
-            .is_some_and(|path| path.ends_with("slu-service.exe"))
-    });
-    if let Some(process) = process {
-        process.kill();
+pub fn restart_as_appx(args: &ArgMatches) -> Result<!> {
+    let mut command = URI_MSIX.to_string();
+    if args.get_flag("silent") {
+        command += " --silent"
     }
-    Ok(())
-}
-
-pub fn restart_as_appx() -> Result<!> {
     std::process::Command::new("explorer")
-        .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
+        .arg(command)
         .spawn()?;
     std::process::exit(0);
 }
