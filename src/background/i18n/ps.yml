@@ -1,0 +1,8 @@
+runtime:
+  download: د ډاونلوډ پاڼې ته لاړ شئ
+  not_found: WebView2 د چلولو وخت ونه موندل شو
+  not_found_description: Seelen UI د Webview2 Runtime ته اړتیا لري. مهرباني وکړئ دا نصب کړئ.
+  outdated: WebView2 د چلولو وخت زوړ شوی
+  outdated_description: >-
+    Seelen UI د Webview2 Runtime %{min_version} یا لوړ ته اړتیا لري. مهرباني
+    وکړئ تازه یې کړئ.

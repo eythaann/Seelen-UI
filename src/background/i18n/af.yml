@@ -1,0 +1,8 @@
+runtime:
+  download: Gaan na die aflaai bladsy
+  not_found: WebView2 Looptyd nie gevind nie
+  not_found_description: Seelen UI vereis Webview2 Runtime. Installeer dit asseblief.
+  outdated: WebView2 Looptyd verouderd
+  outdated_description: >-
+    Seelen UI vereis Webview2 Runtime %{min_version} of hoër. Dateer dit
+    asseblief op.

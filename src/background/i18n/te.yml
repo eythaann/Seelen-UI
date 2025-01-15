@@ -1,0 +1,8 @@
+runtime:
+  download: డౌన్‌లోడ్ పేజీకి వెళ్లండి
+  not_found: WebView2 రన్‌టైమ్ కనుగొనబడలేదు
+  not_found_description: Seelen UIకి Webview2 రన్‌టైమ్ అవసరం. దయచేసి దీన్ని ఇన్‌స్టాల్ చేయండి.
+  outdated: WebView2 రన్‌టైమ్ పాతది
+  outdated_description: >-
+    Seelen UIకి Webview2 రన్‌టైమ్ %{min_version} లేదా అంతకంటే ఎక్కువ అవసరం.
+    దయచేసి దీన్ని నవీకరించండి.

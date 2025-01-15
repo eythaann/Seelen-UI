@@ -1,0 +1,8 @@
+runtime:
+  download: Biçe rûpela daxistinê
+  not_found: WebView2 Runtime nehat dîtin
+  not_found_description: Seelen UI hewceyê Webview2 Runtime hewce dike. Ji kerema xwe saz bikin.
+  outdated: WebView2 Runtime kevn bûye
+  outdated_description: >-
+    Seelen UI ji Webview2 Runtime %{min_version} an mezintir hewce dike. Ji
+    kerema xwe wê nûve bikin.

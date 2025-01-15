@@ -1,0 +1,8 @@
+runtime:
+  download: Nenda kwenye ukurasa wa kupakua
+  not_found: Muda wa utekelezaji wa WebView2 haujapatikana
+  not_found_description: Seelen UI inahitaji Webview2 Runtime. Tafadhali isakinishe.
+  outdated: WebView2 Runtime imepitwa na wakati
+  outdated_description: >-
+    Seelen UI inahitaji Webview2 Runtime %{min_version} au toleo jipya zaidi.
+    Tafadhali isasishe.

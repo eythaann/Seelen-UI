@@ -1,0 +1,6 @@
+runtime:
+  download: ダウンロードページへ行く
+  not_found: WebView2 ランタイムが見つかりません
+  not_found_description: Seelen UI には Webview2 ランタイムが必要です。インストールしてください。
+  outdated: WebView2 ランタイムが古い
+  outdated_description: Seelen UI には、Webview2 ランタイム %{min_version} 以降が必要です。更新してください。

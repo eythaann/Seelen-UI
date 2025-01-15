@@ -1,0 +1,8 @@
+runtime:
+  download: Tag bogga soo dejinta
+  not_found: WebView2 Runtime lama helin
+  not_found_description: Seelen UI wuxuu u baahan yahay Webview2 Runtime. Fadlan rakib
+  outdated: WebView2 Runtime waa dhacay
+  outdated_description: >-
+    Seelen UI wuxuu u baahan yahay Webview2 Runtime %{min_version} ama ka
+    sareeya. Fadlan u cusboonaysii

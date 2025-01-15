@@ -1,0 +1,10 @@
+runtime:
+  download: Gehen Sie zur Download-Seite
+  not_found: WebView2-Laufzeit nicht gefunden
+  not_found_description: >-
+    Für die Seelen-Benutzeroberfläche ist Webview2 Runtime erforderlich. Bitte
+    installieren Sie es.
+  outdated: WebView2-Laufzeit veraltet
+  outdated_description: >-
+    Für die Seelen-Benutzeroberfläche ist Webview2 Runtime %{min_version} oder
+    höher erforderlich. Bitte aktualisieren Sie es.

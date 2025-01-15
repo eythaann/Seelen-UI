@@ -1,0 +1,10 @@
+runtime:
+  download: Перейдіть на сторінку завантаження
+  not_found: WebView2 Runtime не знайдено
+  not_found_description: >-
+    Інтерфейс користувача Seelen потребує Webview2 Runtime. Будь ласка,
+    встановіть його.
+  outdated: WebView2 Runtime застаріла
+  outdated_description: >-
+    Інтерфейс користувача Seelen вимагає Webview2 Runtime %{min_version} або
+    новішої версії. Будь ласка, оновіть його.

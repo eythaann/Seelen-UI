@@ -1,0 +1,8 @@
+runtime:
+  download: Gå til nedlastingssiden
+  not_found: WebView2 Runtime ikke funnet
+  not_found_description: Seelen UI krever Webview2 Runtime. Vennligst installer den.
+  outdated: WebView2 Runtime utdatert
+  outdated_description: >-
+    Seelen UI krever Webview2 Runtime %{min_version} eller høyere. Vennligst
+    oppdater den.

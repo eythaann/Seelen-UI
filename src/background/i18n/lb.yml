@@ -1,0 +1,8 @@
+runtime:
+  download: Gitt op d'Download Säit
+  not_found: WebView2 Runtime net fonnt
+  not_found_description: Seelen UI erfuerdert Webview2 Runtime. Weg installéieren et.
+  outdated: WebView2 Runtime veroudert
+  outdated_description: >-
+    Seelen UI erfuerdert Webview2 Runtime %{min_version} oder méi héich. Weg
+    update et.

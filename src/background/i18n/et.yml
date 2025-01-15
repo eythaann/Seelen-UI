@@ -1,0 +1,8 @@
+runtime:
+  download: Minge allalaadimislehele
+  not_found: WebView2 käitusaega ei leitud
+  not_found_description: Seeleni kasutajaliides nõuab Webview2 Runtime'i. Palun installige see.
+  outdated: WebView2 käitusaeg on aegunud
+  outdated_description: >-
+    Seeleni kasutajaliides nõuab Webview2 Runtime %{min_version} või uuemat.
+    Palun värskendage seda.

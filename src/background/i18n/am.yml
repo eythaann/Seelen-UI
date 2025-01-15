@@ -1,0 +1,6 @@
+runtime:
+  download: ወደ ማውረድ ገጽ ይሂዱ
+  not_found: WebView2 Runtime አልተገኘም።
+  not_found_description: Seelen UI Webview2 Runtime ያስፈልገዋል። እባክዎ ይጫኑት።
+  outdated: WebView2 Runtime ጊዜው አልፎበታል።
+  outdated_description: Seelen UI Webview2 Runtime %{min_version} ወይም ከዚያ በላይ ይፈልጋል። እባክዎ ያዘምኑት።

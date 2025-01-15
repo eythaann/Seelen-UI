@@ -23,6 +23,10 @@ mod widget_loader;
 mod windows_api;
 mod winevent;
 
+#[macro_use]
+extern crate rust_i18n;
+i18n!("src/background/i18n", fallback = "en");
+
 use std::sync::OnceLock;
 
 use error_handler::Result;

@@ -1,0 +1,8 @@
+runtime:
+  download: Գնացեք ներբեռնման էջ
+  not_found: WebView2 Runtime-ը չի գտնվել
+  not_found_description: 'Seelen UI-ն պահանջում է Webview2 Runtime: Խնդրում ենք տեղադրել այն:'
+  outdated: WebView2 Runtime-ը հնացել է
+  outdated_description: >-
+    Seelen UI-ն պահանջում է Webview2 Runtime %{min_version} կամ ավելի բարձր:
+    Խնդրում ենք թարմացնել այն:

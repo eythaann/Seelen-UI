@@ -1,0 +1,8 @@
+runtime:
+  download: Přejděte na stránku stahování
+  not_found: WebView2 Runtime nebyl nalezen
+  not_found_description: Seelen UI vyžaduje Webview2 Runtime. Nainstalujte jej prosím.
+  outdated: WebView2 Runtime je zastaralé
+  outdated_description: >-
+    Seelen UI vyžaduje Webview2 Runtime %{min_version} nebo vyšší. Aktualizujte
+    jej.

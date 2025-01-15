@@ -1,0 +1,8 @@
+runtime:
+  download: Đi tới trang tải xuống
+  not_found: Không tìm thấy thời gian chạy WebView2
+  not_found_description: Giao diện người dùng Seelen yêu cầu Thời gian chạy Webview2. Hãy cài đặt nó.
+  outdated: Thời gian chạy WebView2 đã lỗi thời
+  outdated_description: >-
+    Giao diện người dùng Seelen yêu cầu Webview2 Runtime %{min_version} trở lên.
+    Hãy cập nhật nó.

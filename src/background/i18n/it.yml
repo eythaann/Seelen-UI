@@ -1,0 +1,10 @@
+runtime:
+  download: Vai alla pagina di download
+  not_found: Runtime WebView2 non trovato
+  not_found_description: >-
+    L'interfaccia utente di Seelen richiede Webview2 Runtime. Per favore
+    installalo.
+  outdated: WebView2 Runtime obsoleto
+  outdated_description: >-
+    L'interfaccia utente di Seelen richiede Webview2 Runtime %{min_version} o
+    versione successiva. Per favore aggiornalo.

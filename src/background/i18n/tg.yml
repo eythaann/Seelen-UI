@@ -1,0 +1,8 @@
+runtime:
+  download: Ба саҳифаи зеркашӣ гузаред
+  not_found: Вақти иҷрои WebView2 ёфт нашуд
+  not_found_description: Seelen UI вақти Webview2-ро талаб мекунад. Лутфан онро насб кунед.
+  outdated: WebView2 Runtime кӯҳна шудааст
+  outdated_description: >-
+    UI Seelen Webview2 Runtime %{min_version} ё навтарро талаб мекунад. Лутфан
+    онро навсозӣ кунед.

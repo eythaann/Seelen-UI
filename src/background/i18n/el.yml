@@ -1,0 +1,8 @@
+runtime:
+  download: Μεταβείτε στη σελίδα λήψης
+  not_found: Ο χρόνος εκτέλεσης WebView2 δεν βρέθηκε
+  not_found_description: Το Seelen UI απαιτεί Webview2 Runtime. Εγκαταστήστε το.
+  outdated: Ο χρόνος εκτέλεσης WebView2 είναι ξεπερασμένος
+  outdated_description: >-
+    Η διεπαφή χρήστη Seelen απαιτεί Webview2 Runtime %{min_version} ή υψηλότερη.
+    Ενημερώστε το.

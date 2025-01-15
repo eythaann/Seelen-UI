@@ -1,0 +1,10 @@
+runtime:
+  download: Przejdź do strony pobierania
+  not_found: Nie znaleziono środowiska uruchomieniowego WebView2
+  not_found_description: >-
+    Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2.
+    Zainstaluj go.
+  outdated: Środowisko wykonawcze WebView2 jest nieaktualne
+  outdated_description: >-
+    Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2
+    %{min_version} lub nowszego. Zaktualizuj to.

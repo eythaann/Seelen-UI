@@ -1,0 +1,8 @@
+runtime:
+  download: Pergi ke halaman muat turun
+  not_found: WebView2 Runtime tidak ditemui
+  not_found_description: UI Seelen memerlukan Webview2 Runtime. Sila pasang.
+  outdated: WebView2 Runtime sudah lapuk
+  outdated_description: >-
+    UI Seelen memerlukan Webview2 Runtime %{min_version} atau lebih tinggi. Sila
+    kemas kini.

@@ -1,0 +1,8 @@
+runtime:
+  download: Yükləmə səhifəsinə keçin
+  not_found: WebView2 İcra vaxtı tapılmadı
+  not_found_description: Seelen UI Webview2 Runtime tələb edir. Zəhmət olmasa quraşdırın.
+  outdated: WebView2 İcra vaxtı köhnəlmişdir
+  outdated_description: >-
+    Seelen UI Webview2 Runtime %{min_version} və ya daha yüksək tələb edir.
+    Zəhmət olmasa yeniləyin.

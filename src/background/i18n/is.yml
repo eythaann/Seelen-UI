@@ -1,0 +1,8 @@
+runtime:
+  download: Farðu á niðurhalssíðuna
+  not_found: WebView2 Runtime fannst ekki
+  not_found_description: Seelen UI krefst Webview2 Runtime. Vinsamlegast settu það upp.
+  outdated: WebView2 Runtime úreltur
+  outdated_description: >-
+    Seelen notendaviðmót krefst Webview2 Runtime %{min_version} eða hærri.
+    Vinsamlegast uppfærðu það.

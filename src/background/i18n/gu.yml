@@ -1,0 +1,8 @@
+runtime:
+  download: ડાઉનલોડ પૃષ્ઠ પર જાઓ
+  not_found: WebView2 રનટાઇમ મળ્યો નથી
+  not_found_description: Seelen UI ને Webview2 રનટાઇમની જરૂર છે. કૃપા કરીને તેને ઇન્સ્ટોલ કરો.
+  outdated: WebView2 રનટાઇમ જૂનો
+  outdated_description: >-
+    સીલેન UI ને Webview2 રનટાઇમ %{min_version} અથવા ઉચ્ચની જરૂર છે. કૃપા કરીને
+    તેને અપડેટ કરો.

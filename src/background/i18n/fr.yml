@@ -1,0 +1,10 @@
+runtime:
+  download: Aller à la page de téléchargement
+  not_found: Le moteur d'exécution WebView2 est introuvable
+  not_found_description: >-
+    L’interface utilisateur de Seelen nécessite le runtime Webview2. Veuillez
+    l'installer.
+  outdated: WebView2 Runtime obsolète
+  outdated_description: >-
+    L'interface utilisateur de Seelen nécessite Webview2 Runtime %{min_version}
+    ou supérieur. Veuillez le mettre à jour.

@@ -1,0 +1,6 @@
+runtime:
+  download: ไปที่หน้าดาวน์โหลด
+  not_found: ไม่พบรันไทม์ WebView2
+  not_found_description: Seelen UI ต้องการรันไทม์ Webview2 กรุณาติดตั้ง.
+  outdated: รันไทม์ WebView2 ล้าสมัย
+  outdated_description: Seelen UI ต้องใช้รันไทม์ Webview2 %{min_version} หรือสูงกว่า กรุณาอัปเดตมัน.

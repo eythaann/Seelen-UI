@@ -1,0 +1,8 @@
+runtime:
+  download: Татаж авах хуудас руу очно уу
+  not_found: WebView2 Ажиллах цаг олдсонгүй
+  not_found_description: Seelen UI нь Webview2 Runtime шаарддаг. Үүнийг суулгана уу.
+  outdated: WebView2 Ажиллах хугацаа хуучирсан
+  outdated_description: >-
+    Seelen UI нь Webview2 Runtime %{min_version} буюу түүнээс дээш байхыг
+    шаарддаг. Үүнийг шинэчилнэ үү.

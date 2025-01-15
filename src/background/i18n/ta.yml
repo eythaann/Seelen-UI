@@ -1,0 +1,8 @@
+runtime:
+  download: பதிவிறக்கப் பக்கத்திற்குச் செல்லவும்
+  not_found: WebView2 இயக்க நேரம் கிடைக்கவில்லை
+  not_found_description: Seelen UIக்கு Webview2 இயக்க நேரம் தேவை. தயவுசெய்து அதை நிறுவவும்.
+  outdated: WebView2 இயக்க நேரம் காலாவதியானது
+  outdated_description: >-
+    Seelen UI க்கு Webview2 இயக்க நேரம் %{min_version} அல்லது அதற்கு மேல் தேவை.
+    தயவுசெய்து அதைப் புதுப்பிக்கவும்.

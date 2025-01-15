@@ -1,0 +1,8 @@
+runtime:
+  download: Lọ si oju-iwe igbasilẹ
+  not_found: WebView2 asiko isise ko ri
+  not_found_description: Seelen UI nilo Webview2 Runtime. Jọwọ fi sii.
+  outdated: WebView2 Runtime ti igba atijọ
+  outdated_description: >-
+    Seelen UI nilo Webview2 Runtime %{min_version} tabi ga julọ. Jọwọ ṣe
+    imudojuiwọn rẹ.

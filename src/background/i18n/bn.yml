@@ -1,0 +1,8 @@
+runtime:
+  download: ডাউনলোড পেজে যান
+  not_found: WebView2 রানটাইম পাওয়া যায়নি
+  not_found_description: Seelen UI এর জন্য Webview2 রানটাইম প্রয়োজন। এটা ইনস্টল করুন.
+  outdated: WebView2 রানটাইম পুরানো
+  outdated_description: >-
+    Seelen UI এর জন্য Webview2 রানটাইম %{min_version} বা উচ্চতর প্রয়োজন। এটা
+    আপডেট করুন.

@@ -1,0 +1,6 @@
+runtime:
+  download: 前往下载页面
+  not_found: 未找到 WebView2 运行时
+  not_found_description: Seelen UI 需要 Webview2 运行时。请安装它。
+  outdated: WebView2 运行时已过时
+  outdated_description: Seelen UI 需要 Webview2 运行时 %{min_version} 或更高版本。请更新它。

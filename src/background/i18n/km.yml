@@ -1,0 +1,6 @@
+runtime:
+  download: ចូលទៅកាន់ទំព័រទាញយក
+  not_found: WebView2 Runtime រកមិនឃើញទេ។
+  not_found_description: Seelen UI ទាមទារ Webview2 Runtime ។ សូមដំឡើងវា។
+  outdated: WebView2 Runtime ហួសសម័យ
+  outdated_description: Seelen UI ទាមទារ Webview2 Runtime %{min_version} ឬខ្ពស់ជាងនេះ។ សូមអាប់ដេតវា។

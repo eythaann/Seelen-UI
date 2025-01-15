@@ -1,0 +1,10 @@
+runtime:
+  download: Pumunta sa pahina ng pag-download
+  not_found: Hindi nahanap ang WebView2 Runtime
+  not_found_description: >-
+    Ang Seelen UI ay nangangailangan ng Webview2 Runtime. Mangyaring i-install
+    ito.
+  outdated: Luma na ang Runtime ng WebView2
+  outdated_description: >-
+    Ang Seelen UI ay nangangailangan ng Webview2 Runtime %{min_version} o mas
+    mataas. Mangyaring i-update ito.

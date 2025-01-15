@@ -1,0 +1,8 @@
+runtime:
+  download: ڈاؤن لوڈ صفحہ پر جائیں۔
+  not_found: WebView2 رن ٹائم نہیں ملا
+  not_found_description: Seelen UI کو Webview2 رن ٹائم کی ضرورت ہے۔ براہ کرم اسے انسٹال کریں۔
+  outdated: WebView2 رن ٹائم پرانا ہے۔
+  outdated_description: >-
+    Seelen UI کو Webview2 رن ٹائم %{min_version} یا اس سے زیادہ درکار ہے۔ براہ
+    کرم اسے اپ ڈیٹ کریں۔
