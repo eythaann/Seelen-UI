@@ -5,6 +5,7 @@ app_menu:
   kill: Proceso de matar
   kill_multiple: Matar todos los procesos
   open_file_location: Abrir ubicación del archivo
+  open_new: Ejecutar una nueva instancia
   pin: Anclar
   pin_to_center: Anclar al centro
   pin_to_left: Anclar a la izquierda

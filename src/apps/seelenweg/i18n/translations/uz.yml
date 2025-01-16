@@ -5,6 +5,7 @@ app_menu:
   kill: O'ldirish jarayoni
   kill_multiple: Barcha jarayonlarni o'ldiring
   open_file_location: Fayl joylashuvi
+  open_new: Yangi misolni ishga tushiring
   pin: Pin
   pin_to_center: Markazga PIN
   pin_to_left: Chapga o'ting

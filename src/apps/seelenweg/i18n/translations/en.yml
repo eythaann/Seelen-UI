@@ -5,6 +5,7 @@ app_menu:
   kill: Kill Process
   kill_multiple: Kill All Processes
   open_file_location: Open File Location
+  open_new: Run new instance
   pin: Pin
   pin_to_center: Pin to Center
   pin_to_left: Pin to Left

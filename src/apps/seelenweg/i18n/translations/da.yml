@@ -5,6 +5,7 @@ app_menu:
   kill: Aflivningsproces
   kill_multiple: Dræb alle processer
   open_file_location: Åbn filplacering
+  open_new: Kør ny forekomst
   pin: Pin
   pin_to_center: Stift til centrum
   pin_to_left: Pin til venstre

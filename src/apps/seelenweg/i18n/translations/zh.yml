@@ -5,6 +5,7 @@ app_menu:
   kill: 杀死进程
   kill_multiple: 杀死所有进程
   open_file_location: 打开文件位置
+  open_new: 运行新实例
   pin: 固定
   pin_to_center: 固定到中心
   pin_to_left: 固定到左侧

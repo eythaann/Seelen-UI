@@ -5,6 +5,7 @@ app_menu:
   kill: Процес на унищожаване
   kill_multiple: Убийте всички процеси
   open_file_location: Отворете местоположението на файла
+  open_new: Стартирайте нов екземпляр
   pin: Щифт
   pin_to_center: Щифт към центъра
   pin_to_left: Пин вляво

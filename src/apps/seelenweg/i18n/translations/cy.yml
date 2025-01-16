@@ -5,6 +5,7 @@ app_menu:
   kill: Proses Lladd
   kill_multiple: Lladd Pob Proses
   open_file_location: Lleoliad Ffeil Agored
+  open_new: Rhedeg enghraifft newydd
   pin: Piniff
   pin_to_center: Pin i'r canol
   pin_to_left: Pin i'r chwith

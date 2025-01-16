@@ -5,6 +5,7 @@ app_menu:
   kill: Öldürmə prosesi
   kill_multiple: Bütün prosesləri öldürün
   open_file_location: Fayl yeri açın
+  open_new: Yeni nümunə işləyin
   pin: Pin
   pin_to_center: Mərkəzə pin
   pin_to_left: Pin sola

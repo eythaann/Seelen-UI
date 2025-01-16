@@ -5,6 +5,7 @@ app_menu:
   kill: Proseso ng Patayin
   kill_multiple: Patayin ang Lahat ng Proseso
   open_file_location: Buksan ang lokasyon ng file
+  open_new: Magpatakbo ng bagong halimbawa
   pin: Pin
   pin_to_center: Pin sa gitna
   pin_to_left: Pin sa kaliwa

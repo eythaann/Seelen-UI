@@ -5,6 +5,7 @@ app_menu:
   kill: მოკვლის პროცესი
   kill_multiple: მოკალი ყველა პროცესი
   open_file_location: გახსენით ფაილის ადგილმდებარეობა
+  open_new: გაუშვით ახალი ინსტანცია
   pin: ქინძისთავი
   pin_to_center: Pin to Center
   pin_to_left: პინი მარცხნივ

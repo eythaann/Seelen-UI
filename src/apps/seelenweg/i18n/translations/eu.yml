@@ -5,6 +5,7 @@ app_menu:
   kill: Hiltzeko prozesua
   kill_multiple: Kill Prozesu guztiak
   open_file_location: Ireki fitxategiaren kokapena
+  open_new: Exekutatu instantzia berria
   pin: Iskilinba
   pin_to_center: Pin zentrora
   pin_to_left: Ezkerrera

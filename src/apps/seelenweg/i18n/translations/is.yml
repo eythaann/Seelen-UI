@@ -5,6 +5,7 @@ app_menu:
   kill: Kill Process
   kill_multiple: Drepa alla ferla
   open_file_location: Opnaðu staðsetningu skráar
+  open_new: Keyra nýtt dæmi
   pin: PIN
   pin_to_center: Pinna í miðju
   pin_to_left: Pinna til vinstri

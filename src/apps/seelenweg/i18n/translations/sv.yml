@@ -5,6 +5,7 @@ app_menu:
   kill: Kill Process
   kill_multiple: Döda alla processer
   open_file_location: Öppna filplats
+  open_new: Kör ny instans
   pin: Stift
   pin_to_center: Stift till mitten
   pin_to_left: Stämma till vänster

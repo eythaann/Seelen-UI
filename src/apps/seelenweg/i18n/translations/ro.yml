@@ -5,6 +5,7 @@ app_menu:
   kill: Procesul de ucidere
   kill_multiple: Omoara toate procesele
   open_file_location: Deschide locația fișierului
+  open_new: Rulați o nouă instanță
   pin: Ac
   pin_to_center: Pin în centru
   pin_to_left: Pin la stânga

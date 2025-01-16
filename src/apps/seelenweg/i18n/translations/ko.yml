@@ -5,6 +5,7 @@ app_menu:
   kill: 프로세스 종료
   kill_multiple: 모든 프로세스 종료
   open_file_location: 파일 위치 열기
+  open_new: 새 인스턴스를 실행하십시오
   pin: 고정
   pin_to_center: 중앙에 고정
   pin_to_left: 왼쪽에 고정

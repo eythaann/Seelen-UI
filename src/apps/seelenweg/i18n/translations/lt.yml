@@ -5,6 +5,7 @@ app_menu:
   kill: Nužudymo procesas
   kill_multiple: Nužudyti visus procesus
   open_file_location: Atidarykite failo vietą
+  open_new: Vykdykite naują egzempliorių
   pin: Kaištis
   pin_to_center: Kaištis iki centro
   pin_to_left: Kaištis į kairę

@@ -5,6 +5,7 @@ app_menu:
   kill: プロセスを強制終了する
   kill_multiple: すべてのプロセスを強制終了する
   open_file_location: ファイルの場所を開く
+  open_new: 新しいインスタンスを実行します
   pin: ピン留め
   pin_to_center: 中央にピン留め
   pin_to_left: 左にピン留め

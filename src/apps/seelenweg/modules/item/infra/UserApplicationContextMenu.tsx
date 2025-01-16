@@ -53,6 +53,12 @@ export function getUserApplicationContextMenu(
       type: 'divider',
     },
     {
+      key: 'weg_run_new',
+      label: t('app_menu.open_new'),
+      icon: <Icon iconName="GrNewWindow" />,
+      onClick: () => invoke(SeelenCommand.OpenFile, { path: item.path }),
+    },
+    {
       key: 'weg_select_file_on_explorer',
       label: t('app_menu.open_file_location'),
       icon: <Icon iconName="MdOutlineMyLocation" />,

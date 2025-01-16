@@ -5,6 +5,7 @@ app_menu:
   kill: የመግደል ሂደት
   kill_multiple: ሁሉንም ሂደቶች ይገድሉ
   open_file_location: የፋይል ቦታ ይክፈቱ
+  open_new: አዲስ ምሳሌ አሂድ
   pin: ፒን
   pin_to_center: ፒን እስከ ማእከል
   pin_to_left: ፒን ወደ ግራ

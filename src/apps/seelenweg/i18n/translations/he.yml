@@ -5,6 +5,7 @@ app_menu:
   kill: תהליך הרג
   kill_multiple: להרוג את כל התהליכים
   open_file_location: פתח את מיקום הקובץ
+  open_new: הפעל מופע חדש
   pin: פִּין
   pin_to_center: סיכה למרכז
   pin_to_left: סיכה משמאל

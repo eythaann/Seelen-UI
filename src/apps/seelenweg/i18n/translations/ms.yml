@@ -5,6 +5,7 @@ app_menu:
   kill: Proses Bunuh
   kill_multiple: Bunuh Semua Proses
   open_file_location: Buka lokasi fail
+  open_new: Jalankan contoh baru
   pin: Pin
   pin_to_center: Pin ke pusat
   pin_to_left: Pin ke kiri

@@ -5,6 +5,7 @@ app_menu:
   kill: Processo de eliminação
   kill_multiple: Mate todos os processos
   open_file_location: Abrir local do arquivo
+  open_new: Execute uma nova instância
   pin: Fixar
   pin_to_center: Fixar no centro
   pin_to_left: Fixar à esquerda

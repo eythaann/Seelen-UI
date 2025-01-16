@@ -5,6 +5,7 @@ app_menu:
   kill: Tappoprosessi
   kill_multiple: Tapa kaikki prosessit
   open_file_location: Avaa tiedoston sijainti
+  open_new: Suorita uusi esimerkki
   pin: Nasta
   pin_to_center: Pintää keskustaan
   pin_to_left: Vasemmalle

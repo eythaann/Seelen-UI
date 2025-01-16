@@ -5,6 +5,7 @@ app_menu:
   kill: Килл Процесс
   kill_multiple: Убијте све процесе
   open_file_location: Отворите локацију датотеке
+  open_new: Покрените нову инстанцу
   pin: Пин
   pin_to_center: ПИН до центра
   pin_to_left: Игните лево

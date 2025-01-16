@@ -5,6 +5,7 @@ app_menu:
   kill: Doodproses
   kill_multiple: Maak alle prosesse dood
   open_file_location: Oop lêlokasie
+  open_new: Begin nuwe instansie
   pin: Speld
   pin_to_center: Speld na die sentrum
   pin_to_left: Speld na links

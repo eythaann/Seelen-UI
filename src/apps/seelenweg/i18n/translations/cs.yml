@@ -5,6 +5,7 @@ app_menu:
   kill: Zabít proces
   kill_multiple: Zabijte všechny procesy
   open_file_location: Otevřít umístění souboru
+  open_new: Spusťte novou instanci
   pin: Kolík
   pin_to_center: Pin do středu
   pin_to_left: Pin doleva

@@ -5,6 +5,7 @@ app_menu:
   kill: Kill Prozess
   kill_multiple: Kill All Prozesser
   open_file_location: Open Dateiplaz
+  open_new: Neie Instanz lafen
   pin: Pin
   pin_to_center: PIN op Zentrum
   pin_to_left: PIN fir lénks

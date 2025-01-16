@@ -5,6 +5,7 @@ app_menu:
   kill: Processus de mise à mort
   kill_multiple: Tuez tous les processus
   open_file_location: Lieu de fichier ouvert
+  open_new: Exécuter une nouvelle instance
   pin: Épingle
   pin_to_center: Épingler au centre
   pin_to_left: Épingler à gauche

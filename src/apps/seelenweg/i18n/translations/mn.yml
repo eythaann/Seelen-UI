@@ -5,6 +5,7 @@ app_menu:
   kill: Алах үйл явц
   kill_multiple: Бүх процессыг устгах
   open_file_location: Нээлттэй файлын байршлыг нээнэ үү
+  open_new: Шинэ жишээ ажиллуулах
   pin: Сулбээр зүү
   pin_to_center: Төв рүү зүү
   pin_to_left: Зүүн тийш зүү

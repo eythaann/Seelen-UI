@@ -5,6 +5,7 @@ app_menu:
   kill: Kill Process
   kill_multiple: Öld meg az összes folyamatot
   open_file_location: Nyissa meg a fájl helyét
+  open_new: Futtasson új példányt
   pin: Csap
   pin_to_center: Pin a középpontba
   pin_to_left: Pin balra

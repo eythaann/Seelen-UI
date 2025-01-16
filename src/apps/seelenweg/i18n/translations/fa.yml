@@ -5,6 +5,7 @@ app_menu:
   kill: فرآیند کشتن
   kill_multiple: کشتن تمام فرآیندها
   open_file_location: مکان فایل را باز کنید
+  open_new: نمونه جدید را اجرا کنید
   pin: پین کردن
   pin_to_center: پین به مرکز
   pin_to_left: پین به سمت چپ

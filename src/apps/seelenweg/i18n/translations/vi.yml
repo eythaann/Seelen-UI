@@ -5,6 +5,7 @@ app_menu:
   kill: Quá trình tiêu diệt
   kill_multiple: Giết tất cả các tiến trình
   open_file_location: Mở vị trí file
+  open_new: Chạy phiên bản mới
   pin: Ghim
   pin_to_center: Ghim đến trung tâm
   pin_to_left: Ghim sang trái
