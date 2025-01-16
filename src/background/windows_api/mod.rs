@@ -408,13 +408,6 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn close_handle(handle: HANDLE) -> Result<()> {
-        unsafe {
-            CloseHandle(handle)?;
-        }
-        Ok(())
-    }
-
     fn process_handle(process_id: u32) -> Result<HANDLE> {
         Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
     }
@@ -433,10 +426,8 @@ impl WindowsApi {
         unsafe { GetDesktopWindow() }
     }
 
-    pub fn window_is_uwp_suspended(hwnd: HWND) -> Result<bool> {
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
+    pub fn is_process_frozen(process_id: u32) -> Result<bool> {
         let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
-
         let is_frozen = unsafe {
             let mut buffer: [PROCESS_EXTENDED_BASIC_INFORMATION; 1] = std::mem::zeroed();
             let status = NtQueryInformationProcess(
@@ -458,8 +449,6 @@ impl WindowsApi {
             let data = buffer[0];
             data.Anonymous.Flags & ProcessInformationFlag::IsFrozen as u32 != 0
         };
-
-        Self::close_handle(handle)?;
         Ok(is_frozen)
     }
 
@@ -472,8 +461,6 @@ impl WindowsApi {
         unsafe {
             QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
         }
-        Self::close_handle(handle)?;
-
         Ok(String::from_utf16(&path[..len as usize])?)
     }
 
