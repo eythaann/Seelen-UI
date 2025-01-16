@@ -19,7 +19,6 @@ use crate::{
     log_error,
     modules::virtual_desk::{get_vd_manager, VirtualDesktop},
     seelen::get_app_handle,
-    seelen_weg::SeelenWeg,
     state::application::FULL_STATE,
     trace_lock,
     windows_api::{monitor::Monitor, window::Window, WindowEnumerator, WindowsApi},
@@ -27,21 +26,22 @@ use crate::{
 
 impl WindowManagerV2 {
     fn is_manageable_window(hwnd: HWND) -> bool {
-        let exe = WindowsApi::exe(hwnd);
+        let window = Window::from(hwnd);
+        let exe = window.exe();
 
         if let Ok(exe) = &exe {
-            if exe.ends_with("ApplicationFrameHost.exe") && SeelenWeg::should_be_added(hwnd) {
+            if exe.ends_with("ApplicationFrameHost.exe") && window.is_real_window() {
                 return true;
             }
         }
 
         // Without admin some apps does not return the exe path so these should be unmanaged
         exe.is_ok()
-        && SeelenWeg::should_be_added(hwnd)
+        && window.is_real_window()
         // Ignore windows without a title bar, and top most windows normally are widgets or tools so they should not be managed
         && (WindowsApi::get_styles(hwnd).contains(WS_CAPTION) && !WindowsApi::get_ex_styles(hwnd).contains(WS_EX_TOPMOST))
-        && !WindowsApi::is_iconic(hwnd)
-        && (get_vd_manager().uses_cloak() || !WindowsApi::is_cloaked(hwnd).unwrap_or(false))
+        && !window.is_minimized()
+        && (get_vd_manager().uses_cloak() || !window.is_cloaked())
     }
 
     fn should_be_managed(hwnd: HWND) -> bool {

@@ -1,7 +1,6 @@
-import { ConnectedMonitor, MonitorConfiguration, Rect } from '@seelen-ui/lib';
+import { ConnectedMonitor, Rect } from '@seelen-ui/lib';
 import { MonitorConfiguration as IMonitorConfiguration } from '@seelen-ui/lib/types';
 import { Button, Modal, Switch } from 'antd';
-import { cloneDeep } from 'lodash';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,9 +8,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { WindowManagerSpacingSettings } from '../../WindowManager/main/infra/GlobalPaddings';
 
 import { newSelectors, RootActions } from '../../shared/store/app/reducer';
+import { WegSettingsDeclaration } from '../application';
 import { Monitor } from 'src/apps/settings/components/monitor';
 import { SettingsGroup, SettingsOption } from 'src/apps/settings/components/SettingsBox';
 
+import { WidgetSettingsModal } from './WidgetSettingsModal';
 import cs from './index.module.css';
 
 interface MonitorConfigProps {
@@ -133,8 +134,8 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
               <Switch value={config.wm.enabled} onChange={(v) => onToggle('wm', v)} disabled />
             </SettingsOption>
             <SettingsOption>
-              <b>{t('weg.enable')}</b>
-              <Switch value={config.weg.enabled} onChange={(v) => onToggle('weg', v)} />
+              <b>{t('header.labels.seelen_weg')}</b>
+              <WidgetSettingsModal widgetId="weg" monitorId={device.id} settings={WegSettingsDeclaration} />
             </SettingsOption>
             <SettingsOption>
               <b>{t('wall.enable')}</b>
@@ -147,7 +148,6 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
   );
 }
 
-const defaultMonitorConfig = await MonitorConfiguration.default();
 export function SettingsByMonitor() {
   const devices = useSelector(newSelectors.connectedMonitors);
   const settingsByMonitor = useSelector(newSelectors.monitorsV2);
@@ -166,7 +166,10 @@ export function SettingsByMonitor() {
   return (
     <>
       {devices.map((device) => {
-        let monitor = settingsByMonitor[device.id] || cloneDeep(defaultMonitorConfig.inner);
+        let monitor = settingsByMonitor[device.id];
+        if (!monitor) {
+          return null;
+        }
         return (
           <MonitorConfig
             key={device.id}

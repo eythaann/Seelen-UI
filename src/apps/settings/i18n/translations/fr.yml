@@ -1,5 +1,8 @@
 app_launcher:
   enable: Activer le lanceur d'applications
+  launch_on:
+    mouse_over: Passez la souris
+    primary: Primaire
   monitor: Surveiller à montrer
   runners:
     cmd: Commande
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifiant
     kind: Identifier par
     matching_strategy: Stratégie de correspondance
+    matching_strategy_option:
+      contains: Contient
+      ends_with: Se termine par
+      equals: Égal
+      regex: Expression régulière
+      starts_with: Commence par
     negation: Annuler la correspondance
     or: OU
     remove: Supprimer le bloc
+    type:
+      class: Classe
+      exe: Exe
+      path: Chemin
+      title: Titre
   import: Importer
   new: Nouveau
   search: Recherche
@@ -68,6 +82,7 @@ devtools:
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
+  simulate_fullscreen: Simuler un événement en plein écran
 extras:
   discord: Discorde
   exit: Quitter/Quitter
@@ -79,20 +94,19 @@ general:
   accent_color: Couleur accent
   date_format: Format de date
   icon_pack:
+    available: Packs d'icônes disponibles
     label: Packs d'icônes
+    selected: Packs d'icônes actifs
   language: Langue
+  resource:
+    author: Auteur
+    description: Description
+    tags: Balises
   startup: Exécuter au démarrage?
   theme:
-    add: Ajouter un thème
-    added: Thème déjà ajouté
-    author: Auteur
-    available: Disponible
-    description: Description
-    enabled: Thèmes activés
-    label: Informations sur le thème
-    placeholder: Sélectionne un thème
-    selected: Choisie
-    tags: Mots clés
+    available: Thèmes disponibles
+    label: Thèmes
+    selected: Thèmes actifs
   wallpaper:
     select: Sélectionner le papier peint
 header:
@@ -231,6 +245,10 @@ toolbar:
   delay_to_show: Retard à afficher
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
+  hide_mode:
+    always: Toujours
+    never: Jamais
+    on_overlap: Sur chevauchement
   label: Barre d'outils
   placeholder:
     author: Auteur
@@ -267,14 +285,25 @@ weg:
   dock_side: Position
   enable: Activer le Dock/la barre des tâches
   gap: Écart
+  hide_mode:
+    always: Toujours
+    never: Jamais
+    on_overlap: Sur chevauchement
   items:
     gap: Espace entre les éléments
     label: Articles
     size: Taille de l'article
+    temporal_visibility:
+      all: Tous
+      label: Visibilité des éléments non épinglés
+      on_monitor: Sur le moniteur
     visible_separators: Séparateurs visibles
     zoom_size: Taille agrandie (utilisée pour les thèmes)
   label: Dock/Barre des tâches
   margin: Marge
+  mode:
+    full_width: Largeur plein écran
+    min_content: Aussi petit que possible
   padding: Rembourrage
   use_multiple_monitor_overlap_logic: >-
     Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au

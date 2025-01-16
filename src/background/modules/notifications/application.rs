@@ -1,5 +1,4 @@
 use std::{
-    path::PathBuf,
     sync::{
         atomic::{AtomicBool, Ordering},
         Arc,
@@ -19,7 +18,10 @@ use windows::{
     },
 };
 
-use crate::{error_handler::Result, log_error, utils::spawn_named_thread};
+use crate::{
+    error_handler::Result, log_error, seelen_weg::icon_extractor::extract_and_save_icon_umid,
+    utils::spawn_named_thread,
+};
 
 lazy_static! {
     pub static ref NOTIFICATION_MANAGER: Arc<Mutex<NotificationManager>> = Arc::new(Mutex::new(
@@ -31,9 +33,9 @@ lazy_static! {
 #[allow(dead_code)]
 pub struct AppNotification {
     pub id: u32,
+    app_umid: String,
     app_name: String,
     app_description: String,
-    app_logo: Option<PathBuf>,
     body: Vec<String>,
     date: i64,
 }
@@ -50,6 +52,7 @@ pub struct NotificationManager {
     notifications: Vec<AppNotification>,
     notifications_ids: Vec<u32>,
     callbacks: Vec<OnNotificationsChange>,
+    #[allow(dead_code)]
     event_handler: TypedEventHandler<UserNotificationListener, UserNotificationChangedEventArgs>,
     event_token: Option<EventRegistrationToken>,
 }
@@ -100,20 +103,17 @@ impl NotificationManager {
             return Err("Failed to get notification access".into());
         }
 
-        if let Err(err) = self.listener.NotificationChanged(&self.event_handler) {
-            log::debug!(
-                "Failed to use NotificationChanged: {:?}, spawning thread instead",
-                err
-            );
-            spawn_named_thread("Notification Manager", || -> Result<()> {
-                RELEASED.store(false, Ordering::SeqCst);
-                while !RELEASED.load(Ordering::Acquire) {
-                    log_error!(Self::internal_notifications_change(&None, &None));
-                    std::thread::sleep(std::time::Duration::from_secs(1));
-                }
-                Ok(())
-            })?;
-        }
+        // TODO: this only works on MSIX/APPX/UWP builds so idk how to make it work on win32 apps
+        // self.listener.NotificationChanged(&self.event_handler)?;
+        // intead we use a thread
+        spawn_named_thread("Notification Manager", || -> Result<()> {
+            RELEASED.store(false, Ordering::SeqCst);
+            while !RELEASED.load(Ordering::Acquire) {
+                log_error!(Self::internal_notifications_change(&None, &None));
+                std::thread::sleep(std::time::Duration::from_secs(1));
+            }
+            Ok(())
+        })?;
 
         let u_notifications = self
             .listener
@@ -211,9 +211,12 @@ impl NotificationManager {
             body.push(text.Text()?.to_string());
         }
 
+        let umid = app_info.AppUserModelId()?.to_string_lossy();
+        log_error!(extract_and_save_icon_umid(umid.clone()));
+
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,
-            app_logo: None,
+            app_umid: umid,
             app_name: display_info.DisplayName()?.to_string(),
             app_description: display_info.Description()?.to_string(),
             body,

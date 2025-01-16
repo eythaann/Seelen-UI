@@ -4,7 +4,10 @@ use std::{
     path::PathBuf,
 };
 
-use windows::Win32::Foundation::HWND;
+use windows::Win32::{
+    Foundation::HWND,
+    UI::WindowsAndMessaging::{WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW},
+};
 
 use crate::{
     error_handler::Result,
@@ -12,7 +15,7 @@ use crate::{
     seelen_bar::FancyToolbar,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
-    seelen_weg::SeelenWeg,
+    seelen_weg::instance::SeelenWeg,
     seelen_wm_v2::instance::WindowManagerV2,
 };
 
@@ -62,13 +65,33 @@ impl Window {
         self.0 .0 as isize
     }
 
-    /// this could return the process user model id if it is a uwp
-    /// or the app user model id asigned to the window via property-store
+    /// App user model id asigned to the window via property-store
+    /// To get UWP app user model id use `self.process().package_app_user_model_id()`
+    ///
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
     pub fn app_user_model_id(&self) -> Option<String> {
-        if let Ok(id) = self.process().package_app_user_model_id() {
-            return Some(id);
+        WindowsApi::get_window_app_user_model_id(self.0).ok()
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
+    pub fn relaunch_command(&self) -> Option<String> {
+        WindowsApi::get_window_relaunch_command(self.0).ok()
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchdisplaynameresource
+    pub fn relaunch_display_name(&self) -> Option<String> {
+        if let Ok(name) = WindowsApi::get_window_relaunch_display_name(self.0) {
+            if name.starts_with("@") {
+                return WindowsApi::resolve_indirect_string(&name).ok();
+            }
+            return Some(name);
         }
-        WindowsApi::get_window_app_user_model_id_exe(self.0).ok()
+        None
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
+    pub fn relaunch_icon(&self) -> Option<String> {
+        WindowsApi::get_window_relaunch_icon_resource(self.0).ok()
     }
 
     pub fn title(&self) -> String {
@@ -92,7 +115,7 @@ impl Window {
         if let Ok(info) = self.process().package_app_info() {
             return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
         }
-        WindowsApi::get_executable_display_name(self.0)
+        self.process().program_display_name()
     }
 
     pub fn outer_rect(&self) -> Result<Rect> {
@@ -198,5 +221,56 @@ impl Window {
                 .contains(&self.title().as_str());
         }
         false
+    }
+
+    pub fn is_real_window(&self) -> bool {
+        let path = match self.process().program_path() {
+            Ok(path) => path,
+            Err(_) => return false,
+        };
+
+        if !self.is_visible()
+            || path.starts_with("C:\\Windows\\SystemApps")
+            || path.starts_with("C:\\Windows\\ImmersiveControlPanel")
+            || self.parent().is_some()
+            || self.is_seelen_overlay()
+        {
+            return false;
+        }
+
+        // this class is used for edge tabs to be shown as independent windows on alt + tab
+        // this only applies when the new tab is created it is binded to explorer.exe for some reason
+        // maybe we can search/learn more about edge tabs later.
+        // fix: https://github.com/eythaann/Seelen-UI/issues/83
+        if self.class() == "Windows.Internal.Shell.TabProxyWindow" {
+            return false;
+        }
+
+        let ex_style = WindowsApi::get_ex_styles(self.hwnd());
+        if (ex_style.contains(WS_EX_TOOLWINDOW) || ex_style.contains(WS_EX_NOACTIVATE))
+            && !ex_style.contains(WS_EX_APPWINDOW)
+        {
+            return false;
+        }
+
+        /* if let Ok(frame_creator) = window.get_frame_creator() {
+            if frame_creator.is_none() {
+                return false;
+            }
+        }
+
+        if WindowsApi::window_is_uwp_suspended(window.hwnd()).unwrap_or_default() {
+            return false;
+        } */
+
+        /* if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
+            if config.options.contains(&AppExtraFlag::Hidden) {
+                log::trace!("Skipping by config: {:?}", window);
+                return false;
+            }
+        }
+
+        !TITLE_BLACK_LIST.contains(&window.title().as_str()) */
+        true
     }
 }

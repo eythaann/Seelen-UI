@@ -1,5 +1,8 @@
 app_launcher:
   enable: એપ્લિકેશન લ laun ંચરને સક્ષમ કરો
+  launch_on:
+    mouse_over: માઉસ ઉપર
+    primary: પ્રાથમિક
   monitor: બતાવવા માટે નિરીક્ષણ કરો
   runners:
     cmd: આદેશ આપવો
@@ -50,9 +53,20 @@ apps_configurations:
     id: ઓળખકર્તા
     kind: દ્વારા ઓળખો
     matching_strategy: મેચિંગ સ્ટ્રેટેજી
+    matching_strategy_option:
+      contains: સમાવે છે
+      ends_with: સાથે સમાપ્ત થાય છે
+      equals: સમકક્ષ
+      regex: નિયમિત અભિવ્યક્તિ
+      starts_with: થી શરૂ થાય છે
     negation: નેગેટ મેચિંગ
     or: અથવા
     remove: બ્લોક કાઢી નાખો
+    type:
+      class: વર્ગ
+      exe: Exe
+      path: પાથ
+      title: શીર્ષક
   import: આયાત કરો
   new: નવી
   search: શોધો
@@ -68,6 +82,7 @@ devtools:
   install_folder: ઇન્સ્ટોલેશન ફોલ્ડર
   load: લોડ
   settings_file: સેટિંગ્સ ફાઇલ
+  simulate_fullscreen: પૂર્ણસ્ક્રીન ઇવેન્ટનું અનુકરણ કરો
 extras:
   discord: વિખવાદ
   exit: છોડો/બહાર નીકળો
@@ -79,20 +94,19 @@ general:
   accent_color: ઉચ્ચારણ રંગ
   date_format: તારીખ ફોર્મેટ
   icon_pack:
+    available: ઉપલબ્ધ આઇકન પેક
     label: ચિહ્ન
+    selected: સક્રિય આઇકન પેક્સ
   language: ભાષા
+  resource:
+    author: લેખક
+    description: વર્ણન
+    tags: ટૅગ્સ
   startup: સ્ટાર્ટઅપ પર ચલાવો?
   theme:
-    add: થીમ ઉમેરો
-    added: થીમ પહેલેથી જ ઉમેરવામાં આવી છે
-    author: લેખક
-    available: ઉપલબ્ધ
-    description: વર્ણન
-    enabled: સક્ષમ થીમ્સ
-    label: થીમ માહિતી
-    placeholder: થીમ પસંદ કરો
-    selected: પસંદ કરેલું
-    tags: ટૅગ્સ
+    available: ઉપલબ્ધ થીમ્સ
+    label: થીમ્સ
+    selected: સક્રિય થીમ્સ
   wallpaper:
     select: વ wallp લપેપર પસંદ કરો
 header:
@@ -214,6 +228,10 @@ toolbar:
   delay_to_show: બતાવવામાં વિલંબ
   enable: ફેન્સી ટૂલબાર સક્ષમ કરો
   height: ઊંચાઈ
+  hide_mode:
+    always: હંમેશા
+    never: ક્યારેય નહીં
+    on_overlap: ઓવરલેપ પર
   label: વમળ
   placeholder:
     author: લેખક
@@ -246,14 +264,25 @@ weg:
   dock_side: પદ
   enable: ડોક/ટાસ્કબારને સક્ષમ કરો
   gap: ગેપ
+  hide_mode:
+    always: હંમેશા
+    never: ક્યારેય નહીં
+    on_overlap: ઓવરલેપ પર
   items:
     gap: વસ્તુઓ વચ્ચે જગ્યા
     label: વસ્તુઓ
     size: વસ્તુનું કદ
+    temporal_visibility:
+      all: બધા
+      label: અનપિન કરેલ આઇટમ્સની દૃશ્યતા
+      on_monitor: મોનિટર પર
     visible_separators: દૃશ્યમાન વિભાજક
     zoom_size: ઝૂમ કરેલ કદ (થીમ્સ માટે વપરાયેલ)
   label: ડોક/ટાસ્કબાર
   margin: માર્જિન
+  mode:
+    full_width: પૂર્ણ સ્ક્રીનની પહોળાઈ
+    min_content: બની શકે તેટલું નાનું
   padding: ગાદી
   use_multiple_monitor_overlap_logic: સિંગલ ફોકસ લોજિકને બદલે ડિસ્પ્લે સ્પેસિફિકનો ઉપયોગ કરો
   width: પહોળાઈ

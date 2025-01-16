@@ -1,10 +1,13 @@
 app_launcher:
   enable: Включить запуск приложения
+  launch_on:
+    mouse_over: Наведите курсор мыши
+    primary: Начальный
   monitor: Монитор, чтобы показать
   runners:
-    cmd: Командование
-    explorer: Бегать
-    label: Бегуны
+    cmd: Командная строка
+    explorer: Проводник
+    label: Ярлыки
 apps_configurations:
   app:
     bindings: Привязка (оба параметра обязательны)
@@ -50,15 +53,26 @@ apps_configurations:
     id: Идентификатор
     kind: Идентифицировать по
     matching_strategy: Стратегия подбора
+    matching_strategy_option:
+      contains: Содержит
+      ends_with: Заканчивается на
+      equals: Равно
+      regex: Регулярное выражение
+      starts_with: Начинается с
     negation: Отрицательный подбор
     or: ИЛИ
     remove: Удалить блок
+    type:
+      class: Сорт
+      exe: Exe
+      path: Путь
+      title: Заголовок
   import: Импорт
   new: Новый
   search: Поиск
   swap: Сменить
 cancel: Отмена
-close: Закрывать
+close: Закрыть
 delete: Удалить
 devtools:
   app_folders: Папки приложения
@@ -68,6 +82,7 @@ devtools:
   install_folder: Папка установки
   load: Загрузить
   settings_file: Файл настроек
+  simulate_fullscreen: Имитировать полноэкранное событие
 extras:
   discord: Discord
   exit: Выйти
@@ -79,32 +94,31 @@ general:
   accent_color: Акцентный цвет
   date_format: Формат даты
   icon_pack:
+    available: Доступные пакеты значков
     label: Наборы иконок
+    selected: Активные пакеты значков
   language: Язык
-  startup: Автозапускать при включении системы
-  theme:
-    add: Добавить тему
-    added: Тема уже добавлена
+  resource:
     author: Автор
-    available: Доступные
     description: Описание
-    enabled: Включенные темы
-    label: Темы
-    placeholder: Выберите тему
-    selected: Выбранные
     tags: Теги
+  startup: Автозапуск при включении системы
+  theme:
+    available: Доступные темы
+    label: Темы
+    selected: Активные темы
   wallpaper:
     select: Выберите обои
 header:
   labels:
     developer: Разработчик
     general: Общее
-    home: Дом
+    home: Главная страница
     info: Информация
     mods: Плагины и виджеты
     monitors: Мониторы
     seelen_bar: Верхняя панель
-    seelen_rofi: Приложение пусковая установка
+    seelen_rofi: Лаунчер приложений
     seelen_wall: Управляющий обоями
     seelen_weg: Панель задач
     seelen_wm: Менеджер окон
@@ -113,25 +127,25 @@ header:
     virtual_desk: Виртуальные рабочие столы
 inherit: Наследовать
 inProgress: В процессе...
-insert: Вставлять
+insert: Вставить
 loading: Загрузка...
-miscellaneous: Разнообразный
+miscellaneous: Разное
 mods:
   plugins: Плагины
   target: Цель
   widgets: Виджеты
 monitors_configurations:
   label: Монитор {{index}}
-more: Более
+more: Подробнее
 open: Открыть
 quit: Закрыть
-remove: Удалять
+remove: Удалить
 save: Сохранить
 save_and_restart: Сохранить и перезапустить
 shortcuts:
-  enable: Включить встроенные ярлыки (ahk)
+  enable: Включить встроенные быстрые клавиши (ahk)
   enable_tooltip: >-
-    Отключите, если будете реализовывать собственные ярлыки с помощью Seelen
+    Отключите, если будете реализовывать собственные быстрые клавиши с помощью Seelen
     Core Api
   labels:
     decrease_height: Уменьшить высоту
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Задержка показа
   enable: Включить
   height: Высота
+  hide_mode:
+    always: Всегда
+    never: Никогда
+    on_overlap: При перекрытии
   label: Верхняя панель
   placeholder:
     author: Автор
@@ -248,15 +266,26 @@ weg:
   delay_to_show: Задержка показа
   dock_side: Расположение
   enable: Включить
-  gap: Разрыв
+  gap: Расстояние
+  hide_mode:
+    always: Всегда
+    never: Никогда
+    on_overlap: При перекрытии
   items:
     gap: Расстояние между иконок
     label: Иконки
     size: Размер иконок
+    temporal_visibility:
+      all: Все
+      label: Видимость незакрепленных элементов
+      on_monitor: На мониторе
     visible_separators: Разделители
     zoom_size: Увеличенный размер (используется для тем)
   label: Панель задач
   margin: Внешний отступ
+  mode:
+    full_width: Полная ширина экрана
+    min_content: Маленький, насколько это возможно
   padding: Внутренний отступ
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
   width: Ширина

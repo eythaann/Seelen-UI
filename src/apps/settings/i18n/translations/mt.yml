@@ -1,5 +1,8 @@
 app_launcher:
   enable: Enable App Launcher
+  launch_on:
+    mouse_over: Mouse fuq
+    primary: Primarja
   monitor: Tissorvelja biex turi
   runners:
     cmd: Kmand
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikatur
     kind: Identifika minn
     matching_strategy: Strateġija ta 'tqabbil
+    matching_strategy_option:
+      contains: Fih
+      ends_with: Tispiċċa bi
+      equals: Indaqs
+      regex: Espressjoni regolari
+      starts_with: Jibda bi
     negation: Iċħad it-tqabbil
     or: Jew
     remove: Ħassar il-blokka
+    type:
+      class: Klassi
+      exe: Exe
+      path: Mogħdija
+      title: Titolu
   import: Importa
   new: Ġdid
   search: Tfittxija
@@ -68,6 +82,7 @@ devtools:
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl
+  simulate_fullscreen: Issimula avveniment fullscreen
 extras:
   discord: Diskordja
   exit: Nieqaf / ħruġ
@@ -79,20 +94,19 @@ general:
   accent_color: Kulur tal-aċċent
   date_format: Format tad-data
   icon_pack:
+    available: Pakketti ta' Ikoni Disponibbli
     label: Pakketti tal-ikona
+    selected: Pakketti tal-Ikoni Attivi
   language: Lingwa
+  resource:
+    author: Awtur
+    description: Deskrizzjoni
+    tags: Tikketti
   startup: Mexxi fuq l-istartjar?
   theme:
-    add: Żid it-tema
-    added: Tema diġà miżjuda
-    author: Awtur
-    available: Disponibbli
-    description: Deskrizzjoni
-    enabled: Temi ppermettiet
-    label: Informazzjoni dwar it-tema
-    placeholder: Agħżel Tema
-    selected: Magħżula
-    tags: Tags
+    available: Temi Disponibbli
+    label: Temi
+    selected: Temi Attivi
   wallpaper:
     select: Agħżel Wallpaper
 header:
@@ -213,6 +227,10 @@ toolbar:
   delay_to_show: Dewmien biex juri
   enable: Jippermetti toolbar tal-fancy
   height: Għoli
+  hide_mode:
+    always: Dejjem
+    never: Qatt
+    on_overlap: Fuq koinċidenza
   label: Toolbar
   placeholder:
     author: Awtur
@@ -247,14 +265,25 @@ weg:
   dock_side: Pożizzjoni
   enable: Enable Dock / Taskbar
   gap: Vojt
+  hide_mode:
+    always: Dejjem
+    never: Qatt
+    on_overlap: Fuq koinċidenza
   items:
     gap: Spazju bejn l-oġġetti
     label: Oġġetti
     size: Daqs tal-oġġett
+    temporal_visibility:
+      all: Kollha
+      label: Oġġetti Unpinned Viżibilità
+      on_monitor: Fuq Monitor
     visible_separators: Separaturi viżibbli
     zoom_size: Daqs miżjud (użat għat-temi)
   label: Dock / Taskbar
   margin: Marġni
+  mode:
+    full_width: Wisa 'tal-iskrin sħiħ
+    min_content: Żgħir kemm jista’ jkun
   padding: Ikkuttunar
   use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
   width: Wisa '

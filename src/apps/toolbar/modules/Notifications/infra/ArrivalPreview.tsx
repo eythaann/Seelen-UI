@@ -1,7 +1,4 @@
-import { SeelenCommand } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
-import { Button } from 'antd';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -11,9 +8,9 @@ import { BackgroundByLayersV2 } from '../../../../seelenweg/components/Backgroun
 import { Selectors } from '../../shared/store/app';
 import { useTimeout } from 'src/apps/shared/hooks';
 
-import { AppNotification } from '../../shared/store/domain';
+import { AppNotification } from '../domain';
 
-import { Icon } from '../../../../shared/components/Icon';
+import { Notification } from './Notification';
 
 // Difference between Windows epoch (1601) and Unix epoch (1970) in milliseconds
 const EPOCH_DIFF_MILLISECONDS = 11644473600000n;
@@ -25,7 +22,9 @@ function WindowsDateFileTimeToDate(fileTime: bigint) {
 
 export function ArrivalPreview() {
   const notifications = useSelector(Selectors.notifications);
-  const [currentNotificationPreviewSet, setCurrentNotificationPreviewSet] = useState<AppNotification[]>([]);
+  const [currentNotificationPreviewSet, setCurrentNotificationPreviewSet] = useState<
+    AppNotification[]
+  >([]);
 
   useTimeout(
     () => {
@@ -52,49 +51,14 @@ export function ArrivalPreview() {
   }, [notifications]);
 
   return (
-    <BackgroundByLayersV2 className="notification-arrival" onContextMenu={(e) => e.stopPropagation()}>
+    <BackgroundByLayersV2
+      className="notification-arrival"
+      onContextMenu={(e) => e.stopPropagation()}
+    >
       <AnimatePresence>
-        {currentNotificationPreviewSet &&
-          currentNotificationPreviewSet.map((notification) => {
-            return (
-              <motion.div
-                className="notification"
-                key={notification.id}
-                animate={{ x: '0%', opacity: 1 }}
-                exit={{ x: '100%', opacity: 0 }}
-                initial={{ x: '100%', opacity: 1 }}
-                transition={{ duration: 0.4 }}
-              >
-                <div className="notification-header">
-                  <div className="notification-header-info">
-                    <Icon iconName="TbNotification" />
-                    <div>{notification.app_name}</div>
-                    <span>-</span>
-                    <div>
-                      {moment(WindowsDateFileTimeToDate(BigInt(notification.date))).fromNow()}
-                    </div>
-                  </div>
-                  <Button
-                    size="small"
-                    type="text"
-                    onClick={() => {
-                      invoke(SeelenCommand.NotificationsClose, { id: notification.id }).catch(
-                        console.error,
-                      );
-                    }}
-                  >
-                    <Icon iconName="IoClose" />
-                  </Button>
-                </div>
-                <div className="notification-body">
-                  <h2 className="notification-body-title">{notification.body[0]}</h2>
-                  {notification.body.slice(1).map((body, idx) => (
-                    <p key={idx}>{body}</p>
-                  ))}
-                </div>
-              </motion.div>
-            );
-          })}
+        {currentNotificationPreviewSet.map((notification) => (
+          <Notification key={notification.id} notification={notification} />
+        ))}
       </AnimatePresence>
     </BackgroundByLayersV2>
   );

@@ -1,5 +1,8 @@
 app_launcher:
   enable: เปิดใช้งานแอป Launcher
+  launch_on:
+    mouse_over: เลื่อนเมาส์ไป
+    primary: หลัก
   monitor: ตรวจสอบเพื่อแสดง
   runners:
     cmd: สั่งการ
@@ -47,9 +50,20 @@ apps_configurations:
     id: ตัวระบุ
     kind: ระบุโดย
     matching_strategy: กลยุทธ์การจับคู่
+    matching_strategy_option:
+      contains: ประกอบด้วย
+      ends_with: ปิดท้ายด้วย
+      equals: เท่ากับ
+      regex: การแสดงออกปกติ
+      starts_with: เริ่มต้นด้วย
     negation: คัดค้านการจับคู่
     or: หรือ
     remove: ลบบล็อก
+    type:
+      class: ระดับ
+      exe: เอ็กซ์
+      path: เส้นทาง
+      title: ชื่อ
   import: นำเข้า
   new: ใหม่
   search: ค้นหา
@@ -65,6 +79,7 @@ devtools:
   install_folder: โฟลเดอร์การติดตั้ง
   load: โหลด
   settings_file: ไฟล์การตั้งค่า
+  simulate_fullscreen: จำลองเหตุการณ์แบบเต็มหน้าจอ
 extras:
   discord: ความไม่ลงรอยกัน
   exit: ออก/ออก
@@ -76,20 +91,19 @@ general:
   accent_color: สีเน้น
   date_format: รูปแบบวันที่
   icon_pack:
+    available: ชุดไอคอนที่มีอยู่
     label: ไอคอนแพ็ค
+    selected: ชุดไอคอนที่ใช้งานอยู่
   language: ภาษา
+  resource:
+    author: ผู้เขียน
+    description: คำอธิบาย
+    tags: แท็ก
   startup: วิ่งเมื่อเริ่มต้น?
   theme:
-    add: เพิ่มธีม
-    added: ธีมเพิ่มแล้ว
-    author: ผู้เขียน
-    available: มีอยู่
-    description: คำอธิบาย
-    enabled: เปิดใช้งานธีม
-    label: ข้อมูลธีม
-    placeholder: เลือกธีม
-    selected: ที่เลือกสรรแล้ว
-    tags: แท็ก
+    available: ธีมที่มีจำหน่าย
+    label: ธีมส์
+    selected: ธีมที่ใช้งานอยู่
   wallpaper:
     select: เลือกวอลล์เปเปอร์
 header:
@@ -209,6 +223,10 @@ toolbar:
   delay_to_show: ล่าช้าในการแสดง
   enable: เปิดใช้งานแถบเครื่องมือแฟนซี
   height: ความสูง
+  hide_mode:
+    always: เสมอ
+    never: ไม่เคย
+    on_overlap: เมื่อทับซ้อนกัน
   label: แถบเครื่องมือ
   placeholder:
     author: ผู้เขียน
@@ -241,14 +259,25 @@ weg:
   dock_side: ตำแหน่ง
   enable: เปิดใช้งาน Dock/Task -Babar
   gap: ช่องว่าง
+  hide_mode:
+    always: เสมอ
+    never: ไม่เคย
+    on_overlap: เมื่อทับซ้อนกัน
   items:
     gap: ช่องว่างระหว่างรายการ
     label: รายการ
     size: ขนาดรายการ
+    temporal_visibility:
+      all: ทั้งหมด
+      label: การมองเห็นรายการที่เลิกปักหมุด
+      on_monitor: บนจอภาพ
     visible_separators: ตัวแยกที่มองเห็นได้
     zoom_size: ขนาดซูม (ใช้สำหรับธีม)
   label: แท่นวาง/บาร์
   margin: ระยะขอบ
+  mode:
+    full_width: ความกว้างเต็มหน้าจอ
+    min_content: เล็กเท่าที่จะทำได้
   padding: การขยายความ
   use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
   width: ความกว้าง

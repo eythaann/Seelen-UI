@@ -14,7 +14,7 @@ for (let key in dependencies) {
 }
 
 let command = `npm update ${toUpdate.join(' ')}`;
-console.log(`${command}\n`);
+console.info(`${command}\n`);
 execSync(command, { stdio: 'inherit' });
 
 const cargoToml = toml.parse(readFileSync('Cargo.toml', 'utf-8'));
@@ -28,5 +28,5 @@ for (let key in dependencies) {
 }
 
 command = `cargo update ${toUpdate.join(' ')}`;
-console.log(`${command}\n`);
+console.info(`${command}\n`);
 execSync(command, { stdio: 'inherit' });

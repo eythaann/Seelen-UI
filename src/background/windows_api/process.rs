@@ -32,6 +32,10 @@ pub enum ProcessInformationFlag {
 pub struct Process(u32);
 
 impl Process {
+    pub fn from_id(id: u32) -> Self {
+        Self(id)
+    }
+
     pub fn from_window(window: &Window) -> Self {
         let (process_id, _) = WindowsApi::window_thread_process_id(window.hwnd());
         Self(process_id)
@@ -90,5 +94,9 @@ impl Process {
             return Err("exe path is empty".into());
         }
         Ok(PathBuf::from(path_string))
+    }
+
+    pub fn program_display_name(&self) -> Result<String> {
+        WindowsApi::get_executable_display_name(&self.program_path()?)
     }
 }

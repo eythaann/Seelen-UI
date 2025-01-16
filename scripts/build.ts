@@ -29,7 +29,7 @@ async function extractIconsIfNecessary() {
     return;
   }
 
-  console.log('Extracting SVG Icons');
+  console.info('Extracting SVG Icons');
   console.time('Bundle Lazy Icons');
   fs.mkdirSync('./dist/icons', { recursive: true });
 
@@ -123,7 +123,7 @@ function startDevServer() {
   const app = express();
   app.use(express.static('dist'));
   app.listen(3579, () => {
-    console.log('Listening on http://localhost:3579');
+    console.info('Listening on http://localhost:3579');
   });
 }
 

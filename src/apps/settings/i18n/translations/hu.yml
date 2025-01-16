@@ -1,5 +1,8 @@
 app_launcher:
   enable: Engedélyezze az alkalmazás indítóját
+  launch_on:
+    mouse_over: Vigye fel az egeret
+    primary: Elsődleges
   monitor: Monitor, hogy megmutassa
   runners:
     cmd: Parancs
@@ -49,9 +52,20 @@ apps_configurations:
     id: Azonosító
     kind: Azonosít
     matching_strategy: Megfelelő stratégia
+    matching_strategy_option:
+      contains: Tartalmaz
+      ends_with: Ezzel végződik
+      equals: Egyenlő
+      regex: Reguláris kifejezés
+      starts_with: Ezzel kezdődik
     negation: Tagadás egyeztetés
     or: VAGY
     remove: Blokk törlése
+    type:
+      class: Osztály
+      exe: Exe
+      path: Útvonal
+      title: Cím
   import: Behozatal
   new: Új
   search: Keresés
@@ -67,6 +81,7 @@ devtools:
   install_folder: Telepítési mappa
   load: Betöltés
   settings_file: Beállítási fájl
+  simulate_fullscreen: Teljes képernyős esemény szimulálása
 extras:
   discord: Viszály
   exit: Kilépés/kilépés
@@ -78,20 +93,19 @@ general:
   accent_color: Akcentus szín
   date_format: Dátum formátum
   icon_pack:
+    available: Elérhető ikoncsomagok
     label: Ikoncsomagok
+    selected: Aktív ikoncsomagok
   language: Nyelv
+  resource:
+    author: Szerző
+    description: Leírás
+    tags: Címkék
   startup: Futtatni indításkor?
   theme:
-    add: Téma hozzáadása
-    added: A téma már hozzáadott
-    author: Szerző
-    available: Elérhető
-    description: Leírás
-    enabled: Engedélyezve témák
-    label: Témainformációk
-    placeholder: Válassz témát
-    selected: Kiválasztott
-    tags: Címkék
+    available: Elérhető témák
+    label: Témák
+    selected: Aktív témák
   wallpaper:
     select: Válassza ki a háttérképet
 header:
@@ -214,6 +228,10 @@ toolbar:
   delay_to_show: Megjelenítés késleltetése
   enable: Engedélyezze a divatos eszköztárat
   height: Magasság
+  hide_mode:
+    always: Mindig
+    never: Soha
+    on_overlap: Az átfedésben
   label: Eszköztár
   placeholder:
     author: Szerző
@@ -246,14 +264,25 @@ weg:
   dock_side: Pozíció
   enable: Engedélyezze a dokkolót/tálcát
   gap: Rés
+  hide_mode:
+    always: Mindig
+    never: Soha
+    on_overlap: Az átfedésben
   items:
     gap: Hely az elemek között
     label: Tárgyak
     size: Elemméret
+    temporal_visibility:
+      all: Minden
+      label: Rögzített elemek láthatósága
+      on_monitor: Monitoron
     visible_separators: Látható elválasztók
     zoom_size: Nagyított méret (a témákhoz használt)
   label: Dokk/tálca
   margin: Árrés
+  mode:
+    full_width: Teljes képernyő szélesség
+    min_content: Amennyire csak lehet
   padding: Párnázás
   use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
   width: Szélesség

@@ -1,18 +1,8 @@
 import { createSlice, current, PayloadAction } from '@reduxjs/toolkit';
-import { invoke, SeelenCommand, Settings, UIColors, WegItemType } from '@seelen-ui/lib';
+import { Settings, UIColors, WegItemType } from '@seelen-ui/lib';
+import { WegItem } from '@seelen-ui/lib/types';
 
-import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
-
-import {
-  AppFromBackground,
-  AppsSides,
-  ExtendedPinnedWegItem,
-  ExtendedTemporalWegItem,
-  HWND,
-  PinnedWegItem,
-  RootState,
-  SwItem,
-} from './domain';
+import { PinnedWegItem, RootState, SwItem, TemporalWegItem } from './domain';
 
 import { StateBuilder } from '../../../../shared/StateBuilder';
 import { savePinnedItems } from './storeApi';
@@ -22,7 +12,6 @@ const initialState: RootState = {
   itemsOnLeft: [],
   itemsOnCenter: [],
   itemsOnRight: [],
-  openApps: {},
   focusedApp: null,
   isOverlaped: false,
   settings: (await Settings.default()).inner.seelenweg,
@@ -30,44 +19,14 @@ const initialState: RootState = {
   colors: UIColors.default().inner,
 };
 
-function removeAppFromState(
-  state: RootState,
-  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
-) {
-  const search = (app: SwItem) => 'execution_command' in app && app.execution_command === searched.execution_command;
-
-  let index = state.itemsOnLeft.findIndex(search);
-  if (index !== -1) {
-    state.itemsOnLeft.splice(index, 1);
-    return;
-  }
-
-  index = state.itemsOnCenter.findIndex(search);
-  if (index !== -1) {
-    state.itemsOnCenter.splice(index, 1);
-    return;
-  }
-
-  index = state.itemsOnRight.findIndex(search);
-  if (index !== -1) {
-    state.itemsOnRight.splice(index, 1);
-    return;
-  }
-}
-
-function findApp(
-  state: RootState,
-  searched: ExtendedPinnedWegItem | ExtendedTemporalWegItem,
-) {
-  return (state.itemsOnLeft.find(
-    (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
-  ) ||
-    state.itemsOnCenter.find(
-      (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
-    ) ||
-    state.itemsOnRight.find(
-      (app) => 'execution_command' in app && app.execution_command === searched.execution_command,
-    )) as ExtendedPinnedWegItem | ExtendedTemporalWegItem | undefined;
+function findApp(state: RootState, id: string): WegItem | null {
+  const cb = (app: WegItem): app is PinnedWegItem => app.id === id;
+  return (
+    state.itemsOnLeft.find(cb) ||
+    state.itemsOnCenter.find(cb) ||
+    state.itemsOnRight.find(cb) ||
+    null
+  );
 }
 
 export const RootSlice = createSlice({
@@ -75,168 +34,57 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    unpin(state, action: PayloadAction<PinnedWegItem>) {
-      const filter = (item: any) => !('path' in item) || item.path !== action.payload.path;
+    remove(state, action: PayloadAction<string>) {
+      const filter = (item: WegItem) => item.id !== action.payload;
       state.itemsOnLeft = state.itemsOnLeft.filter(filter);
       state.itemsOnCenter = state.itemsOnCenter.filter(filter);
       state.itemsOnRight = state.itemsOnRight.filter(filter);
+      savePinnedItems(current(state));
     },
-    pinApp(state, action: PayloadAction<{ app: ExtendedTemporalWegItem; side: AppsSides }>) {
-      const { app, side } = action.payload;
-
-      const appToPin = findApp(state, app) || app;
-      appToPin.type = WegItemType.Pinned;
-
-      switch (side) {
-        case AppsSides.Left:
-          removeAppFromState(state, appToPin);
-          state.itemsOnLeft.unshift(appToPin);
-          break;
-        case AppsSides.Center:
-          removeAppFromState(state, appToPin);
-          state.itemsOnCenter.unshift(appToPin);
-          break;
-        case AppsSides.Right:
-          removeAppFromState(state, appToPin);
-          state.itemsOnRight.push(appToPin);
-          break;
-        default:
+    pinApp(state, action: PayloadAction<string>) {
+      const item = findApp(state, action.payload);
+      if (item) {
+        item.type = WegItemType.Pinned;
+        savePinnedItems(current(state));
       }
     },
-    startOrFocusApp(state, action: PayloadAction<number>) {
-      const index = action.payload == 0 ? 9 : action.payload - 1;
-
-      const allApp: SwItem[] = state.itemsOnLeft
-        .concat(state.itemsOnCenter)
-        .concat(state.itemsOnRight)
-        .filter((item: SwItem) => item.type === WegItemType.Pinned || item.type === WegItemType.Temporal);
-
-      const item: SwItem | undefined = allApp.at(index);
-
-      if (!item) {
-        return;
-      }
-
-      let hwnd = item.opens[0];
-      if (!hwnd) {
-        if (item.path.endsWith('.lnk')) {
-          invoke(SeelenCommand.OpenFile, { path: item.path });
-        } else {
-          invoke(SeelenCommand.OpenFile, { path: item.execution_command });
-        }
-      } else if (state.focusedApp?.hwnd != hwnd) {
-        invoke(SeelenCommand.RequestFocus, { hwnd });
-      }
-    },
-    unPinApp(state, action: PayloadAction<ExtendedPinnedWegItem | ExtendedTemporalWegItem>) {
-      const found = findApp(state, action.payload);
-      if (found) {
-        found.type = WegItemType.Temporal;
-        if (found.opens.length === 0) {
-          removeAppFromState(state, found);
-        }
+    unPinApp(state, action: PayloadAction<string>) {
+      const item = findApp(state, action.payload);
+      if (item) {
+        item.type = WegItemType.Temporal;
+        savePinnedItems(current(state));
       }
     },
     addMediaModule(state) {
       const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
       if (!all.some((current) => current.type === WegItemType.Media)) {
         state.itemsOnRight.push({
+          id: crypto.randomUUID(),
           type: WegItemType.Media,
         });
       }
-      savePinnedItems(current(state));
-    },
-    removeMediaModule(state) {
-      const filter = (current: SwItem) => current.type !== WegItemType.Media;
-      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
-      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
-      state.itemsOnRight = state.itemsOnRight.filter(filter);
       savePinnedItems(current(state));
     },
     addStartModule(state) {
       const all = [...state.itemsOnLeft, ...state.itemsOnCenter, ...state.itemsOnRight];
       if (!all.some((current) => current.type === WegItemType.StartMenu)) {
         state.itemsOnLeft.unshift({
+          id: crypto.randomUUID(),
           type: WegItemType.StartMenu,
         });
       }
       savePinnedItems(current(state));
-    },
-    removeStartModule(state) {
-      const filter = (current: SwItem) => current.type !== WegItemType.StartMenu;
-      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
-      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
-      state.itemsOnRight = state.itemsOnRight.filter(filter);
-      savePinnedItems(current(state));
-    },
-    addOpenApp(state, action: PayloadAction<AppFromBackground>) {
-      const new_app = action.payload;
-
-      state.openApps[new_app.hwnd] = new_app;
-
-      let cb = (current: SwItem) =>
-        'execution_command' in current && current.execution_command === new_app.execution_path;
-      let pinedApp = (state.itemsOnLeft.find(cb) ||
-        state.itemsOnCenter.find(cb) ||
-        state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
-
-      if (!pinedApp && !new_app.execution_path.startsWith('shell:AppsFolder')) {
-        const appFilename = new_app.execution_path.split('\\').pop();
-        if (appFilename) {
-          cb = (current: SwItem) => 'path' in current && current.execution_command.endsWith(appFilename);
-          pinedApp = (state.itemsOnLeft.find(cb) ||
-            state.itemsOnCenter.find(cb) ||
-            state.itemsOnRight.find(cb)) as ExtendedPinnedWegItem | undefined;
-        }
-      }
-
-      if (!pinedApp) {
-        state.itemsOnCenter.push(SwTemporalAppUtils.fromBackground(new_app));
-        return;
-      }
-
-      if (!pinedApp.opens.includes(new_app.hwnd)) {
-        pinedApp.opens.push(new_app.hwnd);
-      }
-
-      // update path to pinned apps normally changed on updates
-      if (pinedApp.path !== new_app.exe) {
-        pinedApp.path = new_app.exe;
-        pinedApp.execution_command = new_app.execution_path;
-        savePinnedItems(current(state));
-      }
-    },
-    updateOpenAppInfo(state, action: PayloadAction<AppFromBackground>) {
-      const found = state.openApps[action.payload.hwnd];
-      if (found) {
-        found.title = action.payload.title;
-      }
-    },
-    removeOpenApp(state, action: PayloadAction<HWND>) {
-      delete state.openApps[action.payload];
-
-      function filter(app: SwItem) {
-        if ('opens' in app) {
-          app.opens = app.opens.filter((hwnd) => hwnd !== action.payload);
-        }
-        return app.type !== WegItemType.Temporal || app.opens.length > 0;
-      }
-
-      state.itemsOnLeft = state.itemsOnLeft.filter(filter);
-      state.itemsOnCenter = state.itemsOnCenter.filter(filter);
-      state.itemsOnRight = state.itemsOnRight.filter(filter);
     },
   },
 });
 
 export const RootActions = RootSlice.actions;
 export const Selectors = StateBuilder.compositeSelector(initialState);
-export const SelectOpenApp = (hwnd: HWND) => (state: RootState) => state.openApps[hwnd];
 
-export const isPinnedApp = (item: SwItem): item is ExtendedPinnedWegItem => {
+export const isPinnedApp = (item: SwItem): item is PinnedWegItem => {
   return item.type === WegItemType.Pinned;
 };
 
-export const isTemporalApp = (item: SwItem): item is ExtendedTemporalWegItem => {
+export const isTemporalApp = (item: SwItem): item is TemporalWegItem => {
   return item.type === WegItemType.Temporal;
 };

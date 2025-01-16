@@ -64,12 +64,12 @@ export function Themes() {
                     <div>
                       <h2 className={cs.title}>{theme.info.displayName}</h2>
                       <p>
-                        <b>{t('general.theme.author')}: </b>
+                        <b>{t('general.resource.author')}: </b>
                         {theme.info.author}
                       </p>
                       <div className={cs.tagList}>
                         <div>
-                          <b>{t('general.theme.tags')}:</b>
+                          <b>{t('general.resource.tags')}:</b>
                         </div>
                         {theme.info.tags.map((tag) => (
                           <div key={tag} className={cs.tag}>
@@ -78,7 +78,7 @@ export function Themes() {
                         ))}
                       </div>
                       <p>
-                        <b>{t('general.theme.description')}: </b>
+                        <b>{t('general.resource.description')}: </b>
                         {theme.info.description}
                       </p>
                     </div>

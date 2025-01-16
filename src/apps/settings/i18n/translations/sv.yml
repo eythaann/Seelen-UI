@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktivera App Launcher
+  launch_on:
+    mouse_over: Musen över
+    primary: Primär
   monitor: Övervaka att visa
   runners:
     cmd: Kommando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifierare
     kind: Identifiera sig genom
     matching_strategy: Matchningsstrategi
+    matching_strategy_option:
+      contains: Innehåller
+      ends_with: Slutar med
+      equals: Lika
+      regex: Reguljärt uttryck
+      starts_with: Börjar med
     negation: Negera matchning
     or: ELLER
     remove: Radera block
+    type:
+      class: Klass
+      exe: Exe
+      path: Väg
+      title: Titel
   import: Importera
   new: Ny
   search: Sök
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installationsmapp
   load: Ladda
   settings_file: Inställningsfil
+  simulate_fullscreen: Simulera helskärmshändelse
 extras:
   discord: Disharmoni
   exit: Sluta/avsluta
@@ -79,20 +94,19 @@ general:
   accent_color: Accentfärg
   date_format: Datumformat
   icon_pack:
+    available: Tillgängliga ikonpaket
     label: Ikonförpackningar
+    selected: Aktiva ikonpaket
   language: Språk
+  resource:
+    author: Författare
+    description: Beskrivning
+    tags: Taggar
   startup: Köras vid start?
   theme:
-    add: Lägga till tema
-    added: Tema som redan har lagts till
-    author: Författare
-    available: Tillgängliga
-    description: Beskrivning
-    enabled: Aktiverade teman
-    label: Temainformation
-    placeholder: Välj tema
-    selected: Vald
-    tags: Taggar
+    available: Tillgängliga teman
+    label: teman
+    selected: Aktiva teman
   wallpaper:
     select: Välj tapeter
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Fördröjning att visa
   enable: Aktivera snyggt verktygsfält
   height: Höjd
+  hide_mode:
+    always: Alltid
+    never: Aldrig
+    on_overlap: På överlappning
   label: Verktygsfält
   placeholder:
     author: Författare
@@ -249,14 +267,25 @@ weg:
   dock_side: Placera
   enable: Aktivera bryggor/aktivitetsfält
   gap: Glipa
+  hide_mode:
+    always: Alltid
+    never: Aldrig
+    on_overlap: På överlappning
   items:
     gap: Utrymme mellan föremål
     label: Föremål
     size: Objektstorlek
+    temporal_visibility:
+      all: Alla
+      label: Synlighet för lossade objekt
+      on_monitor: På bildskärm
     visible_separators: Synliga separatorer
     zoom_size: Zoomad storlek (används för teman)
   label: Docka/arbetsfält
   margin: Marginal
+  mode:
+    full_width: Helskärmsbredd
+    min_content: Liten som kan vara
   padding: Stoppning
   use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
   width: Bredd

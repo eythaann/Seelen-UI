@@ -15,11 +15,10 @@ interface Props extends PropsWithChildren, React.HTMLAttributes<HTMLDivElement> 
 
 export function Monitor({ children, className, width = 1920, height = 1080, ...props }: Props) {
   const seleenWallpaper = useSelector(newSelectors.wall.backgrounds);
-  const systemWallpaper = useSelector(newSelectors.wallpaper);
 
   const controls = useAnimationControls();
 
-  const wallpaper = seleenWallpaper[0]?.path || systemWallpaper;
+  const wallpaper = seleenWallpaper[0]?.path;
 
   const style: React.CSSProperties = {
     aspectRatio: `${width} / ${height}`,

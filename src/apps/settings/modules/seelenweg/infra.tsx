@@ -39,7 +39,7 @@ export const SeelenWegSettings = () => {
             <Select
               style={{ width: '120px' }}
               value={settings.mode}
-              options={OptionsFromEnum(SeelenWegMode)}
+              options={OptionsFromEnum(t, SeelenWegMode, 'weg.mode')}
               onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
             />
           </SettingsOption>
@@ -82,7 +82,7 @@ export const SeelenWegSettings = () => {
               <Select
                 style={{ width: '120px' }}
                 value={settings.hideMode}
-                options={OptionsFromEnum(HideMode)}
+                options={OptionsFromEnum(t, HideMode, 'weg.hide_mode')}
                 onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
               />
             </SettingsOption>
@@ -123,6 +123,19 @@ export const SeelenWegSettings = () => {
 
       <SettingsGroup>
         <SettingsSubGroup label={t('weg.items.label')}>
+          <SettingsOption>
+            <div>{t('weg.items.temporal_visibility.label')}</div>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.temporalItemsVisibility}
+              options={[
+                { value: 'All', label: t('weg.items.temporal_visibility.all') },
+                { value: 'OnMonitor', label: t('weg.items.temporal_visibility.on_monitor') },
+              ]}
+              onChange={(value) => dispatch(SeelenWegActions.setTemporalItemsVisibility(value))}
+            />
+          </SettingsOption>
+
           <SettingsOption>
             <div>{t('weg.items.size')}</div>
             <InputNumber

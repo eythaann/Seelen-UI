@@ -8,25 +8,25 @@ import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import InlineSVG from 'src/apps/seelenweg/components/InlineSvg';
 
-import { ExtendedPinnedWegItem } from '../../shared/store/domain';
+import { PinnedWegItem } from '../../shared/store/domain';
 
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
 import { getMenuForItem } from './Menu';
 
 interface Props {
-  item: ExtendedPinnedWegItem;
+  item: PinnedWegItem;
 }
 
 export const FileOrFolder = memo(({ item }: Props) => {
   const [iconSrc, setIconSrc] = useState<string>(
-    item.is_dir ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
+    item.isDir ? convertFileSrc(LAZY_CONSTANTS.FOLDER_ICON_PATH) : '',
   );
 
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (item.path.endsWith('lnk') || !item.is_dir) {
+    if (item.path.endsWith('lnk') || !item.isDir) {
       invoke<string | null>(SeelenCommand.GetIcon, { path: item.path }).then((icon) => {
         setIconSrc(convertFileSrc(icon || LAZY_CONSTANTS.MISSING_ICON_PATH));
       });

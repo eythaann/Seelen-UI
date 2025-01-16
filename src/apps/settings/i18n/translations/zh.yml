@@ -1,5 +1,8 @@
 app_launcher:
   enable: 启用应用程序启动器
+  launch_on:
+    mouse_over: 鼠标悬停
+    primary: 基本的
   monitor: 要显示的显示器
   runners:
     cmd: 命令
@@ -43,9 +46,20 @@ apps_configurations:
     id: 标识符
     kind: 标识方式
     matching_strategy: 匹配策略
+    matching_strategy_option:
+      contains: 包含
+      ends_with: 结束于
+      equals: 等于
+      regex: 正则表达式
+      starts_with: 开始于
     negation: 否定匹配
     or: 或
     remove: 删除块
+    type:
+      class: 班级
+      exe: EXE文件
+      path: 小路
+      title: 标题
   import: 导入
   new: 新增
   search: 搜索
@@ -61,6 +75,7 @@ devtools:
   install_folder: 安装文件夹
   load: 加载
   settings_file: 设置文件
+  simulate_fullscreen: 模拟全屏事件
 extras:
   discord: Discord
   exit: 退出 / 关闭
@@ -72,20 +87,19 @@ general:
   accent_color: 主色调
   date_format: 日期格式
   icon_pack:
+    available: 可用的图标包
     label: 图标包
+    selected: 活动图标包
   language: 语言
+  resource:
+    author: 作者
+    description: 描述
+    tags: 标签
   startup: 开机自启
   theme:
-    add: 添加主题
-    added: 已添加主题
-    author: 作者
-    available: 可用
-    description: 描述
-    enabled: 已启用主题
+    available: 可用主题
     label: 主题
-    placeholder: 选择主题
-    selected: 已选择
-    tags: 标签
+    selected: 活跃主题
   wallpaper:
     select: 选择壁纸
 header:
@@ -204,6 +218,10 @@ toolbar:
   delay_to_show: 延迟显示
   enable: 启用精美工具栏
   height: 高度
+  hide_mode:
+    always: 总是
+    never: 绝不
+    on_overlap: 关于重叠
   label: 工具栏
   placeholder:
     author: 作者
@@ -236,14 +254,25 @@ weg:
   dock_side: 位置
   enable: 启用 Dock / 任务栏
   gap: 间距
+  hide_mode:
+    always: 总是
+    never: 绝不
+    on_overlap: 关于重叠
   items:
     gap: 项目间距
     label: 项目
     size: 项目大小
+    temporal_visibility:
+      all: 全部
+      label: 未固定项目的可见性
+      on_monitor: 在监视器上
     visible_separators: 可见分隔符
     zoom_size: 缩放尺寸（用于主题）
   label: Dock / 任务栏
   margin: 边距
+  mode:
+    full_width: 全屏宽度
+    min_content: 尽可能小
   padding: 内边距
   use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
   width: 宽度

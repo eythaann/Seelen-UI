@@ -1,5 +1,8 @@
 app_launcher:
   enable: ჩართეთ აპლიკაციის გამშვები
+  launch_on:
+    mouse_over: მაუსი ზევით
+    primary: პირველადი
   monitor: მონიტორის ჩვენება
   runners:
     cmd: ბრძანება
@@ -50,9 +53,20 @@ apps_configurations:
     id: პირადობა
     kind: იდენტიფიცირება
     matching_strategy: შესაბამისი სტრატეგია
+    matching_strategy_option:
+      contains: შეიცავს
+      ends_with: მთავრდება
+      equals: უდრის
+      regex: რეგულარული გამოხატულება
+      starts_with: იწყება იმით
     negation: უარყოფითი შესატყვისი
     or: ან
     remove: წაშალეთ ბლოკი
+    type:
+      class: კლასი
+      exe: exe
+      path: ბილიკი
+      title: სათაური
   import: იმპორტი
   new: ახალი
   search: ძებნა
@@ -68,6 +82,7 @@ devtools:
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
+  simulate_fullscreen: სრულეკრანიანი მოვლენის სიმულაცია
 extras:
   discord: უთანასწორობა
   exit: დატოვება/გასვლა
@@ -79,20 +94,19 @@ general:
   accent_color: აქცენტის ფერი
   date_format: თარიღის ფორმატი
   icon_pack:
+    available: ხელმისაწვდომი ხატების პაკეტები
     label: ხატის პაკეტები
+    selected: აქტიური ხატების პაკეტები
   language: Ენა
+  resource:
+    author: ავტორი
+    description: აღწერა
+    tags: ტეგები
   startup: გაშვებით გაშვებით?
   theme:
-    add: თემის დამატება
-    added: თემა უკვე დამატებულია
-    author: ავტორი
-    available: არსებული
-    description: აღწერილობა
-    enabled: ჩართულია თემები
-    label: თემის ინფორმაცია
-    placeholder: აირჩიეთ თემა
-    selected: არჩეული
-    tags: საკვანძო ნიშნები
+    available: ხელმისაწვდომი თემები
+    label: თემები
+    selected: აქტიური თემები
   wallpaper:
     select: აირჩიეთ ფონი
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: დაგვიანებით ჩვენება
   enable: ჩართეთ ლამაზი პანელი
   height: სიმაღლე
+  hide_mode:
+    always: ყოველთვის
+    never: არასოდეს
+    on_overlap: გადახურვაზე
   label: ინსტრუმენტთა პანელი
   placeholder:
     author: ავტორი
@@ -249,14 +267,25 @@ weg:
   dock_side: პოზიცია
   enable: ჩართეთ dock/taskbar
   gap: ხარპი
+  hide_mode:
+    always: ყოველთვის
+    never: არასოდეს
+    on_overlap: გადახურვაზე
   items:
     gap: სივრცე ნივთებს შორის
     label: ნივთები
     size: ნივთის ზომა
+    temporal_visibility:
+      all: ყველა
+      label: ჩამაგრებული ერთეულების ხილვადობა
+      on_monitor: მონიტორზე
     visible_separators: ხილული გამყოფი
     zoom_size: მასშტაბური ზომა (გამოიყენება თემებისთვის)
   label: დოკ/დავალების ზოლი
   margin: ზღვარი
+  mode:
+    full_width: სრული ეკრანის სიგანე
+    min_content: რაც შეიძლება პატარა იყოს
   padding: ბადება
   use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
   width: სიგანე

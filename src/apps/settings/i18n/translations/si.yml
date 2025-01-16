@@ -1,5 +1,8 @@
 app_launcher:
   enable: යෙදුම් දියත් කරන්නා සක්රීය කරන්න
+  launch_on:
+    mouse_over: මූසිකය ඉවරයි
+    primary: ප්රාථමික
   monitor: පෙන්වීමට අධීක්ෂණය
   runners:
     cmd: විධානය
@@ -49,9 +52,20 @@ apps_configurations:
     id: හඳුනාගැනීම
     kind: විසින් හඳුනා ගන්න
     matching_strategy: ගැලපුම් උපාය මාර්ගය
+    matching_strategy_option:
+      contains: අඩංගු වේ
+      ends_with: සමඟ අවසන් වේ
+      equals: සමාන වේ
+      regex: නිතිපතා ප්රකාශනය
+      starts_with: සමඟ ආරම්භ වේ
     negation: ගැලපීම නිෂේධනය කරන්න
     or: හෝ
     remove: අවහිර කිරීම මකන්න
+    type:
+      class: පන්තිය
+      exe: Exe
+      path: මාර්ගය
+      title: මාතෘකාව
   import: ආනයන
   new: අලුත්
   search: සෙවීම
@@ -67,6 +81,7 @@ devtools:
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව
+  simulate_fullscreen: සම්පූර්ණ තිර සිදුවීම අනුකරණය කරන්න
 extras:
   discord: අසමගිය
   exit: පිටවීම/පිටවීම
@@ -78,20 +93,19 @@ general:
   accent_color: උච්චාරණ වර්ණය
   date_format: දිනය ආකෘතිය
   icon_pack:
+    available: පවතින අයිකන ඇසුරුම්
     label: අයිකන ඇසුරුම්
+    selected: ක්‍රියාකාරී අයිකන ඇසුරුම්
   language: භාෂාව
+  resource:
+    author: කර්තෘ
+    description: විස්තරය
+    tags: ටැග්
   startup: ආරම්භයේදී ධාවනය කරන්නද?
   theme:
-    add: තේමාව එකතු කරන්න
-    added: තේමාව දැනටමත් එකතු කර ඇත
-    author: කර්තෘ
-    available: ඇත
-    description: විස්තර
-    enabled: සබල කළ තේමා
-    label: තේමා තොරතුරු
-    placeholder: තේමාව තෝරන්න
-    selected: තෝරාගත්
-    tags: ටැග්
+    available: පවතින තේමා
+    label: තේමා
+    selected: ක්රියාකාරී තේමාවන්
   wallpaper:
     select: බිතුපත තෝරන්න
 header:
@@ -212,6 +226,10 @@ toolbar:
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
   height: උස
+  hide_mode:
+    always: සෑම විටම
+    never: කවදාවත් නැහැ
+    on_overlap: අතිච්ඡාදනය මත
   label: මෙවලම් තීරුව
   placeholder:
     author: කර්තෘ
@@ -244,14 +262,25 @@ weg:
   dock_side: තනතුර
   enable: Dock/Taskbar සබල කරන්න
   gap: පරතරය
+  hide_mode:
+    always: සෑම විටම
+    never: කවදාවත් නැහැ
+    on_overlap: අතිච්ඡාදනය මත
   items:
     gap: අයිතම අතර අවකාශය
     label: අයිතම
     size: අයිතමයේ ප්රමාණය
+    temporal_visibility:
+      all: සියල්ල
+      label: ඇමුණුම් නොකළ අයිතම දෘශ්‍යතාව
+      on_monitor: මොනිටරය මත
     visible_separators: දෘශ්‍ය බෙදුම්කරුවන්
     zoom_size: විශාලනය කළ ප්‍රමාණය (තේමා සඳහා භාවිතා වේ)
   label: ඩොක්/කාර්ය තීරුව
   margin: ආන්තිකය
+  mode:
+    full_width: සම්පූර්ණ තිර පළල
+    min_content: හැකි තරම් කුඩා
   padding: පෑඩිං
   use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
   width: පළල

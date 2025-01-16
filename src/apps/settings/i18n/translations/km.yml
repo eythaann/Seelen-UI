@@ -1,5 +1,8 @@
 app_launcher:
   enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
+  launch_on:
+    mouse_over: កណ្ដុរលើ
+    primary: បឋមសិក្សា
   monitor: ម៉ូនីទ័របង្ហាញ
   runners:
     cmd: ការបង្គាប់
@@ -49,9 +52,20 @@ apps_configurations:
     id: អ្នកកំណត់អត្តសញ្ញាណ
     kind: កំណត់អត្តសញ្ញាណដោយ
     matching_strategy: យុទ្ធសាស្ត្រផ្គូផ្គង
+    matching_strategy_option:
+      contains: មាន
+      ends_with: បញ្ចប់ដោយ
+      equals: ស្មើ
+      regex: ការបញ្ចេញមតិទៀងទាត់
+      starts_with: ចាប់ផ្តើមជាមួយ
     negation: ការផ្គូផ្គងអវិជ្ជមាន
     or: ឬ
     remove: លុបប្លុក
+    type:
+      class: ថ្នាក់
+      exe: Exe
+      path: ផ្លូវ
+      title: ចំណងជើង
   import: នាំចូល
   new: ថ្មី។
   search: ស្វែងរក
@@ -67,6 +81,7 @@ devtools:
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់
+  simulate_fullscreen: ក្លែងធ្វើព្រឹត្តិការណ៍ពេញអេក្រង់
 extras:
   discord: ការមិនចុះសម្រុងគ្នា។
   exit: ចេញ/ចេញ
@@ -78,20 +93,19 @@ general:
   accent_color: ពណ៌សង្កត់សំឡេង
   date_format: ទ្រង់ទ្រាយកាលបរិច្ឆេទ
   icon_pack:
+    available: កញ្ចប់រូបតំណាងដែលមាន
     label: រូបតំណាងកញ្ចប់
+    selected: កញ្ចប់រូបតំណាងសកម្ម
   language: ភាសា
+  resource:
+    author: អ្នកនិពន្ធ
+    description: ការពិពណ៌នា
+    tags: ស្លាក
   startup: ដំណើរការនៅពេលចាប់ផ្ដើម?
   theme:
-    add: បន្ថែមប្រធានបទ
-    added: ប្រធានបទត្រូវបានបន្ថែមរួចហើយ
-    author: អ្នកនិពន្ធ
-    available: មានរបយោចន៍
-    description: ការពិពណ៌នា
-    enabled: ស្បែកដែលបានបើក
-    label: ព័ត៌មានអំពីប្រធានបទ
-    placeholder: ជ្រើសរើសប្រធានបទ
-    selected: បានជ្រើស
-    tags: ស្លាក
+    available: ស្បែកដែលអាចប្រើបាន
+    label: ស្បែក
+    selected: ស្បែកសកម្ម
   wallpaper:
     select: ជ្រើសរើសផ្ទាំងរូបភាព
 header:
@@ -212,6 +226,10 @@ toolbar:
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
   height: កម្ពស់
+  hide_mode:
+    always: ជានិច្ច
+    never: មិនដែល
+    on_overlap: នៅលើការត្រួតស៊ីគ្នា។
   label: របាររបន៍របយ័ត្ន។ រប
   placeholder:
     author: អ្នកនិពន្ធ
@@ -244,14 +262,25 @@ weg:
   dock_side: តីតាមង
   enable: បើកដំណើរការ Dock/Taskbar
   gap: គម្លាត
+  hide_mode:
+    always: ជានិច្ច
+    never: មិនដែល
+    on_overlap: នៅលើការត្រួតស៊ីគ្នា។
   items:
     gap: ចន្លោះរវាងធាតុ
     label: ធាតុ
     size: ទំហំធាតុ
+    temporal_visibility:
+      all: ទាំងអស់។
+      label: ភាពមើលឃើញធាតុដែលមិនបានខ្ទាស់
+      on_monitor: នៅលើម៉ូនីទ័រ
     visible_separators: សញ្ញាបំបែកដែលអាចមើលឃើញ
     zoom_size: ទំហំពង្រីក (ប្រើសម្រាប់ស្បែក)
   label: ចត/របារភារកិច្ច
   margin: រឹម
+  mode:
+    full_width: ទទឹងពេញអេក្រង់
+    min_content: តូចតាមដែលអាចធ្វើបាន
   padding: ទ្រនាប់
   use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
   width: ទទឹង

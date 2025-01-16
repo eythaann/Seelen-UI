@@ -2,26 +2,22 @@ import { configureStore } from '@reduxjs/toolkit';
 import {
   SeelenEvent,
   SeelenWegSide,
+  Settings,
   UIColors,
   WegItems,
-  WegItemType,
 } from '@seelen-ui/lib';
-import { SeelenWegSettings, WegItem } from '@seelen-ui/lib/types';
+import { SeelenWegSettings } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce } from 'lodash';
 
-import { SwPinnedAppUtils } from '../../item/app/PinnedApp';
-import { SwTemporalAppUtils } from '../../item/app/TemporalApp';
 import { RootActions, RootSlice } from './app';
 
-import { AppFromBackground, HWND, MediaSession, SwItem } from './domain';
+import { MediaSession } from './domain';
 
-import { UserSettingsLoader } from '../../../../settings/modules/shared/store/storeApi';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
-import { IsSavingPinnedItems } from './storeApi';
 
 export const store = configureStore({
   reducer: RootSlice.reducer,
@@ -32,64 +28,15 @@ export const store = configureStore({
   },
 });
 
-async function cleanItems(items: AppFromBackground[]): Promise<AppFromBackground[]> {
-  const result: AppFromBackground[] = [];
-  for (const item of items) {
-    const cleaned = await SwTemporalAppUtils.clean(item);
-    result.push(cleaned);
-  }
-  return result;
-}
-
-async function cleanSavedItems(items: WegItem[]): Promise<SwItem[]> {
-  const result: SwItem[] = [];
-
-  for (const item of items) {
-    if (item.type === WegItemType.Pinned) {
-      result.push(await SwPinnedAppUtils.fromSaved(item));
-    } else {
-      // TODO remove assert
-      result.push(item as SwItem);
-    }
-  }
-
-  return result;
-}
-
-async function initUIColors() {
-  function loadColors(colors: UIColors) {
-    store.dispatch(RootActions.setColors(colors.inner));
-  }
-  loadColors(await UIColors.getAsync());
-  await UIColors.onChange(loadColors);
+function loadColorsToStore(colors: UIColors) {
+  store.dispatch(RootActions.setColors(colors.inner));
 }
 
 export async function registerStoreEvents() {
   const view = getCurrentWebviewWindow();
 
-  await view.listen<boolean>('set-auto-hide', (event) => {
+  await view.listen<boolean>(SeelenEvent.WegOverlaped, (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
-  });
-
-  await listenGlobal<AppFromBackground[]>('add-multiple-open-apps', async (event) => {
-    const items = await cleanItems(event.payload);
-    for (const item of items) {
-      store.dispatch(RootActions.addOpenApp(item));
-    }
-  });
-
-  await listenGlobal<AppFromBackground>('add-open-app', async (event) => {
-    const item = (await cleanItems([event.payload]))[0]!;
-    store.dispatch(RootActions.addOpenApp(item));
-  });
-
-  await listenGlobal<HWND>('remove-open-app', (event) => {
-    store.dispatch(RootActions.removeOpenApp(event.payload));
-  });
-
-  await listenGlobal<AppFromBackground>('update-open-app-info', async (event) => {
-    const item = (await cleanItems([event.payload]))[0]!;
-    store.dispatch(RootActions.updateOpenAppInfo(item));
   });
 
   const onFocusChanged = debounce((app: FocusedApp) => {
@@ -102,52 +49,17 @@ export async function registerStoreEvents() {
     }
   });
 
-  await view.listen<number>(SeelenEvent.WegFocusedAppByIndex, (event) => {
-    store.dispatch(RootActions.startOrFocusApp(event.payload));
-  });
-
-  await listenGlobal<MediaSession[]>('media-sessions', (event) => {
+  await listenGlobal<MediaSession[]>(SeelenEvent.MediaSessions, (event) => {
     store.dispatch(RootActions.setMediaSessions(event.payload));
   });
 
-  await initUIColors();
+  await Settings.onChange(loadSettingsToStore);
 
-  await listenGlobal<unknown>(SeelenEvent.StateWegItemsChanged, async () => {
-    if (IsSavingPinnedItems.current) {
-      IsSavingPinnedItems.current = false;
-      return;
-    }
+  await WegItems.forCurrentWidgetChange(loadWegItemsToStore);
 
-    const apps = (await WegItems.getAsync()).inner;
-    let state = store.getState();
-
-    const leftItems = [
-      ...(await cleanSavedItems(apps.left)),
-      ...state.itemsOnLeft.filter((item) => item.type === WegItemType.Temporal),
-    ];
-
-    const centerItems = [
-      ...(await cleanSavedItems(apps.center)),
-      ...state.itemsOnCenter.filter((item) => item.type === WegItemType.Temporal),
-    ];
-
-    const rightItems = [
-      ...(await cleanSavedItems(apps.right)),
-      ...state.itemsOnRight.filter((item) => item.type === WegItemType.Temporal),
-    ];
-
-    store.dispatch(RootActions.setItemsOnLeft(leftItems));
-    store.dispatch(RootActions.setItemsOnCenter(centerItems));
-    store.dispatch(RootActions.setItemsOnRight(rightItems));
-    await view.emitTo(view.label, 'request-all-open-apps');
-  });
-
-  await listenGlobal<any>(SeelenEvent.StateSettingsChanged, async () => {
-    await loadSettingsToStore();
-  });
+  await UIColors.onChange(loadColorsToStore);
 
   await StartThemingTool();
-  await view.emitTo(view.label, 'request-all-open-apps');
 }
 
 function loadSettingsCSS(settings: SeelenWegSettings) {
@@ -187,19 +99,22 @@ function loadSettingsCSS(settings: SeelenWegSettings) {
   }
 }
 
-async function loadSettingsToStore() {
-  const userSettings = await new UserSettingsLoader().load();
-  i18n.changeLanguage(userSettings.jsonSettings.language || undefined);
-  const settings = userSettings.jsonSettings.seelenweg;
-  store.dispatch(RootActions.setSettings(settings));
-  store.dispatch(RootActions.setDevTools(userSettings.jsonSettings.devTools));
-  loadSettingsCSS(settings);
+function loadSettingsToStore(_settings: Settings) {
+  const settings = _settings.inner;
+  i18n.changeLanguage(settings.language || undefined);
+  store.dispatch(RootActions.setSettings(settings.seelenweg));
+  store.dispatch(RootActions.setDevTools(settings.devTools));
+  loadSettingsCSS(settings.seelenweg);
+}
+
+function loadWegItemsToStore(items: WegItems) {
+  store.dispatch(RootActions.setItemsOnLeft(items.inner.left));
+  store.dispatch(RootActions.setItemsOnCenter(items.inner.center));
+  store.dispatch(RootActions.setItemsOnRight(items.inner.right));
 }
 
 export async function loadStore() {
-  await loadSettingsToStore();
-  const apps = (await WegItems.getAsync()).inner;
-  store.dispatch(RootActions.setItemsOnLeft(await cleanSavedItems(apps.left)));
-  store.dispatch(RootActions.setItemsOnCenter(await cleanSavedItems(apps.center)));
-  store.dispatch(RootActions.setItemsOnRight(await cleanSavedItems(apps.right)));
+  loadSettingsToStore(await Settings.getAsync());
+  loadWegItemsToStore(await WegItems.forCurrentWidget());
+  loadColorsToStore(await UIColors.getAsync());
 }

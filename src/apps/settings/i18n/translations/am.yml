@@ -1,5 +1,8 @@
 app_launcher:
   enable: የመተግበሪያ አስጀማሪን አንቃ
+  launch_on:
+    mouse_over: መዳፊት አልቋል
+    primary: ዋና
   monitor: ለማሳየት መከታተል
   runners:
     cmd: ትእዛዝ
@@ -48,9 +51,20 @@ apps_configurations:
     id: መለያ
     kind: መለየት በ
     matching_strategy: ተዛማጅ ስትራቴጂ
+    matching_strategy_option:
+      contains: ይይዛል
+      ends_with: በዚህ ያበቃል
+      equals: እኩል ነው።
+      regex: መደበኛ አገላለጽ
+      starts_with: ይጀምራል
     negation: ማዛመድን
     or: ወይም
     remove: ብሎክ ሰርዝ
+    type:
+      class: ክፍል
+      exe: Ex
+      path: መንገድ
+      title: ርዕስ
   import: ማስመጣት
   new: አዲስ
   search: ፍለጋ
@@ -66,6 +80,7 @@ devtools:
   install_folder: የመጫን አቃፊ
   load: ጭነት
   settings_file: የቅንብሮች ፋይል
+  simulate_fullscreen: የሙሉ ስክሪን ክስተት አስመስለው
 extras:
   discord: አለመግባባት
   exit: ማቆም / መውጣት
@@ -77,20 +92,19 @@ general:
   accent_color: የዝግጅት ቀለም
   date_format: የቀን ቅርጸት
   icon_pack:
+    available: የሚገኙ የአዶ ጥቅሎች
     label: አዶዎች ፓኬጆች
+    selected: ንቁ አዶ ጥቅሎች
   language: ቋንቋ
+  resource:
+    author: ደራሲ
+    description: መግለጫ
+    tags: መለያዎች
   startup: ጅምር ላይ ይሮጡ?
   theme:
-    add: ጭብጥ ያክሉ
-    added: ጭብጥ ቀድሞውኑ ታክሏል
-    author: ደራሲ ደራሲ
-    available: ይገኛል
-    description: መግለጫ
-    enabled: አስቁ
-    label: ጭብጥ መረጃ
-    placeholder: ጭብጥ ይምረጡ
-    selected: ተመር selected ል
-    tags: መለያዎች
+    available: የሚገኙ ገጽታዎች
+    label: ገጽታዎች
+    selected: ንቁ ገጽታዎች
   wallpaper:
     select: የግድግዳ ወረቀት ይምረጡ
 header:
@@ -209,6 +223,10 @@ toolbar:
   delay_to_show: ለማሳየት መዘግየት
   enable: Fangance የመሳሪያ አሞሌን ያንቁ
   height: ቁመት
+  hide_mode:
+    always: ሁሌም
+    never: በጭራሽ
+    on_overlap: መደራረብ ላይ
   label: የመሣሪያ አሞሌ
   placeholder:
     author: ደራሲ ደራሲ
@@ -241,14 +259,25 @@ weg:
   dock_side: አቀማመጥ
   enable: መትከያ / ተግባር አሞሌን ያንቁ
   gap: ክፍተት
+  hide_mode:
+    always: ሁሌም
+    never: በጭራሽ
+    on_overlap: መደራረብ ላይ
   items:
     gap: በእቃዎች መካከል ቦታ
     label: ዕቃዎች
     size: የንጥል መጠን
+    temporal_visibility:
+      all: ሁሉም
+      label: ያልተሰካ እቃዎች ታይነት
+      on_monitor: በሞኒተር ላይ
     visible_separators: የሚታዩ መለያዎች
     zoom_size: አራዊት መጠን (ለጭቦች ጥቅም ላይ የዋለው)
   label: Dock / Accorbar
   margin: ህዳግ
+  mode:
+    full_width: የሙሉ ማያ ገጽ ስፋት
+    min_content: በተቻለ መጠን ትንሽ
   padding: ፓድ
   use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
   width: ስፋት

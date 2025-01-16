@@ -6,6 +6,7 @@ use std::collections::HashMap;
 
 use application::FullState;
 use domain::AhkVar;
+use seelen_core::state::WegTemporalItemsVisibility;
 
 use crate::windows_api::monitor::Monitor;
 
@@ -14,13 +15,9 @@ impl FullState {
         self.settings.seelenweg.enabled
     }
 
-    pub fn is_weg_enabled_on_monitor(&self, monitor: &Monitor) -> bool {
+    pub fn is_weg_enabled_on_monitor(&self, monitor_id: &str) -> bool {
         let is_global_enabled = self.is_weg_enabled();
-        let device_id = match monitor.display_device() {
-            Ok(device) => device.id,
-            Err(_) => return is_global_enabled,
-        };
-        match self.settings.monitors_v2.get(&device_id) {
+        match self.settings.monitors_v2.get(monitor_id) {
             Some(config) => is_global_enabled && config.weg.enabled,
             None => is_global_enabled,
         }
@@ -73,6 +70,14 @@ impl FullState {
                 Some(workspace) => workspace.layout.clone().unwrap_or(default),
                 None => default,
             },
+            None => default,
+        }
+    }
+
+    pub fn get_weg_temporal_item_visibility(&self, monitor_id: &str) -> WegTemporalItemsVisibility {
+        let default = self.settings.seelenweg.temporal_items_visibility;
+        match self.settings.monitors_v2.get(monitor_id) {
+            Some(config) => config.weg.temporal_items_visibility.unwrap_or(default),
             None => default,
         }
     }

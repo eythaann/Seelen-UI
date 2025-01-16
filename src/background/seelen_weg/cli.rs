@@ -1,5 +1,4 @@
 use clap::Command;
-use seelen_core::handlers::SeelenEvent;
 
 use crate::{
     error_handler::Result,
@@ -33,10 +32,10 @@ impl SeelenWeg {
                 #[cfg(any(debug_assertions, feature = "devtools"))]
                 self.window.open_devtools();
             }
-            SubCommand::ForegroundOrRunApp(idx) => {
+            SubCommand::ForegroundOrRunApp(_) => {
                 if Monitor::from(WindowsApi::monitor_from_window(self.window.hwnd()?)).index()? == 0
                 {
-                    self.emit(SeelenEvent::WegFocusedAppByIndex, idx)?;
+                    // self.emit(SeelenEvent::WegFocusedAppByIndex, idx)?;
                 }
             }
         };

@@ -4,9 +4,9 @@ import yaml from 'js-yaml';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-import { LanguageList } from '../src/apps/shared/lang';
+import { SupportedLanguages } from '../src/apps/shared/lang';
 
-const toTranslate = LanguageList.map((lang) => lang.value).filter((lang) => lang !== 'en');
+const toTranslate = SupportedLanguages.map((lang) => lang.value).filter((lang) => lang !== 'en');
 
 function deepSortObject<T>(obj: T): T {
   if (Array.isArray(obj)) {

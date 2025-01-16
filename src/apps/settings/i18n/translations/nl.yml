@@ -1,5 +1,8 @@
 app_launcher:
   enable: Schakel App Launcher in
+  launch_on:
+    mouse_over: Muis er overheen
+    primary: Primair
   monitor: Monitor om te laten zien
   runners:
     cmd: Commando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificatie
     kind: Identificeren door
     matching_strategy: Matching -strategie
+    matching_strategy_option:
+      contains: Bevat
+      ends_with: Eindigt met
+      equals: Gelijk aan
+      regex: Reguliere expressie
+      starts_with: Begint met
     negation: Ontkennen matching
     or: OF
     remove: Verwijder blok
+    type:
+      class: Klas
+      exe: Ex
+      path: Pad
+      title: Titel
   import: Importeren
   new: Nieuw
   search: Zoekopdracht
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
+  simulate_fullscreen: Simuleer een gebeurtenis op volledig scherm
 extras:
   discord: Discord
   exit: Stop/exit
@@ -79,20 +94,19 @@ general:
   accent_color: Accent kleur
   date_format: Datumformaat
   icon_pack:
+    available: Beschikbare pictogrampakketten
     label: Pictogrampakketten
+    selected: Actieve pictogrampakketten
   language: Taal
+  resource:
+    author: Auteur
+    description: Beschrijving
+    tags: Labels
   startup: Uitvoeren bij het starten?
   theme:
-    add: Thema toevoegen
-    added: Thema al toegevoegd
-    author: Auteur
-    available: Beschikbaar
-    description: Beschrijving
-    enabled: Ingeschakelde thema's
-    label: Thema -informatie
-    placeholder: Selecteer thema
-    selected: Geselecteerd
-    tags: Tags
+    available: Beschikbare thema's
+    label: Thema's
+    selected: Actieve thema's
   wallpaper:
     select: Selecteer wallpaper
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Vertraging om te tonen
   enable: Schakel fancy werkbalk in
   height: Hoogte
+  hide_mode:
+    always: Altijd
+    never: Nooit
+    on_overlap: Op overlap
   label: Werkbalk
   placeholder:
     author: Auteur
@@ -251,14 +269,25 @@ weg:
   dock_side: Positie
   enable: Schakel dock/taakbalk in
   gap: Gat
+  hide_mode:
+    always: Altijd
+    never: Nooit
+    on_overlap: Op overlap
   items:
     gap: Ruimte tussen items
     label: Items
     size: Item grootte
+    temporal_visibility:
+      all: Alle
+      label: Zichtbaarheid van losgemaakte items
+      on_monitor: Op monitor
     visible_separators: Zichtbare scheiders
     zoom_size: Ingezoomde grootte (gebruikt voor thema's)
   label: Dock/taakbalk
   margin: Marge
+  mode:
+    full_width: Volledige schermbreedte
+    min_content: Klein als het maar kan zijn
   padding: Vulling
   use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
   width: Breedte

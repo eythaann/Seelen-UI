@@ -10,9 +10,10 @@ import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 import { Icon } from 'src/apps/shared/components/Icon';
 
-import { LanguageList } from '../../../../../shared/lang';
+import { SupportedLanguages } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
+import { IconPacks } from './IconPacks';
 import { Themes } from './Themes';
 
 export function General() {
@@ -27,13 +28,17 @@ export function General() {
 
   const onAutoStart = async (value: boolean) => {
     setChangingAutostart(true);
-    if (value) {
-      await startup.enable();
-    } else {
-      await startup.disable();
+    try {
+      if (value) {
+        await startup.enable();
+      } else {
+        await startup.disable();
+      }
+      dispatch(RootActions.setAutostart(await startup.isEnabled()));
+    } catch (e) {
+      console.error(e);
     }
     setChangingAutostart(false);
-    dispatch(RootActions.setAutostart(value));
   };
 
   const onDateFormatChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -56,10 +61,18 @@ export function General() {
           <b>{t('general.language')}</b>
           <Select
             showSearch
-            optionFilterProp="label"
+            filterOption={(_searching, option) => {
+              if (!option) {
+                return true;
+              }
+              const searching = _searching.toLocaleLowerCase();
+              let label = option.label.toLocaleLowerCase();
+              let enLabel = option.enLabel.toLocaleLowerCase();
+              return label.includes(searching) || enLabel.includes(searching);
+            }}
             style={{ width: '200px' }}
             value={language}
-            options={[...LanguageList]}
+            options={[...SupportedLanguages]}
             onSelect={(value) => dispatch(RootActions.setLanguage(value))}
           />
         </SettingsOption>
@@ -92,6 +105,13 @@ export function General() {
           <b>{t('general.theme.label')}</b>
         </div>
         <Themes />
+      </SettingsGroup>
+
+      <SettingsGroup>
+        <div style={{ marginBottom: '6px' }}>
+          <b>{t('general.icon_pack.label')}</b>
+        </div>
+        <IconPacks />
       </SettingsGroup>
     </>
   );

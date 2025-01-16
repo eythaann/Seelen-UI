@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
+    IconPack, MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
 };
 
 use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
@@ -11,6 +11,13 @@ use super::{
     application::{FullState, LauncherHistory, FULL_STATE},
     domain::{AppConfig, Placeholder, Settings, Theme},
 };
+
+#[tauri::command(async)]
+pub fn state_get_icon_packs() -> Vec<IconPack> {
+    let mutex = FULL_STATE.load().icon_packs().clone();
+    let icon_packs = trace_lock!(mutex);
+    icon_packs.owned_list()
+}
 
 #[tauri::command(async)]
 pub fn state_get_themes() -> Vec<Theme> {
@@ -34,9 +41,18 @@ pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
 
 #[tauri::command(async)]
 pub fn state_get_weg_items() -> WegItems {
-    let state = FULL_STATE.load();
-    let items = trace_lock!(state.weg_items);
-    items.clone()
+    FULL_STATE.load().weg_items().clone()
+}
+
+#[tauri::command(async)]
+pub fn state_write_weg_items(mut items: WegItems) -> Result<()> {
+    items.sanitize();
+    let guard = FULL_STATE.load();
+    if items == guard.weg_items {
+        return Ok(());
+    }
+    guard.write_weg_items(&items)?;
+    Ok(())
 }
 
 #[tauri::command(async)]
@@ -72,8 +88,7 @@ pub fn state_write_settings(settings: Settings) -> Result<()> {
         state.settings = settings.clone();
         state
     });
-    FULL_STATE.load().write_settings()?;
-    Ok(())
+    FULL_STATE.load().write_settings()
 }
 
 #[tauri::command(async)]

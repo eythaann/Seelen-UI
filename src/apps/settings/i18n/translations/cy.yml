@@ -1,5 +1,8 @@
 app_launcher:
   enable: Galluogi lansiwr app
+  launch_on:
+    mouse_over: Llygoden drosodd
+    primary: Cynradd
   monitor: Monitor i ddangos
   runners:
     cmd: Gorchmynnwn
@@ -50,9 +53,20 @@ apps_configurations:
     id: Dynodwr
     kind: Adnabod gan
     matching_strategy: Strategaeth gyfatebol
+    matching_strategy_option:
+      contains: Yn cynnwys
+      ends_with: Yn gorffen gyda
+      equals: Yn gyfartal
+      regex: Mynegiant rheolaidd
+      starts_with: Yn dechrau gyda
     negation: Negate paru
     or: Neu
     remove: Dileu bloc
+    type:
+      class: Dosbarth
+      exe: Exe
+      path: Llwybr
+      title: Teitl
   import: Mewnforied
   new: Newydd
   search: Chwiloon
@@ -68,6 +82,7 @@ devtools:
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau
+  simulate_fullscreen: Efelychu digwyddiad sgrin lawn
 extras:
   discord: Anghytgord
   exit: Rhoi'r gorau iddi/allanfa
@@ -79,20 +94,19 @@ general:
   accent_color: Lliw acen
   date_format: Fformat dyddiad
   icon_pack:
+    available: Pecynnau Eicon Ar Gael
     label: Pecynnau eicon
+    selected: Pecynnau Eicon Actif
   language: Iaith
+  resource:
+    author: Awdur
+    description: Disgrifiad
+    tags: Tagiau
   startup: Rhedeg ar gychwyn?
   theme:
-    add: Ychwanegu Thema
-    added: Thema wedi'i hychwanegu eisoes
-    author: Awduron
-    available: AR GAEL
-    description: Disgrifiadau
-    enabled: Themâu wedi'u galluogi
-    label: Gwybodaeth Thema
-    placeholder: Dewiswch Thema
-    selected: Dethol
-    tags: Tagiau
+    available: Themâu sydd ar Gael
+    label: Themâu
+    selected: Themâu Gweithredol
   wallpaper:
     select: Dewis papur wal
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Oedi i ddangos
   enable: Galluogi bar offer ffansi
   height: Uchder
+  hide_mode:
+    always: Bob amser
+    never: Byth
+    on_overlap: Ar gorgyffwrdd
   label: Bariau
   placeholder:
     author: Awduron
@@ -249,14 +267,25 @@ weg:
   dock_side: Safle
   enable: Galluogi doc/bar tasg
   gap: Bwlch
+  hide_mode:
+    always: Bob amser
+    never: Byth
+    on_overlap: Ar gorgyffwrdd
   items:
     gap: Lle rhwng eitemau
     label: Eitemau
     size: Maint eitem
+    temporal_visibility:
+      all: Pawb
+      label: Eitemau heb eu Pinio Gwelededd
+      on_monitor: Ar Fonitor
     visible_separators: Gwahanyddion gweladwy
     zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
   label: Doc/bar tasgau
   margin: Ngherlong
+  mode:
+    full_width: Lled sgrin lawn
+    min_content: Bach ag y gall fod
   padding: Padin
   use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
   width: Lled

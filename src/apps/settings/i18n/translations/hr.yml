@@ -1,5 +1,8 @@
 app_launcher:
   enable: Omogućite pokretač aplikacija
+  launch_on:
+    mouse_over: Prijeđite mišem
+    primary: Primarni
   monitor: Monitor za prikaz
   runners:
     cmd: Naredba
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identificirati
     matching_strategy: Podudarna strategija
+    matching_strategy_option:
+      contains: Sadrži
+      ends_with: Završava s
+      equals: Jednako
+      regex: Uobičajeni izraz
+      starts_with: Počinje s
     negation: Negiranje podudaranja
     or: ILI
     remove: Izbriši blok
+    type:
+      class: Klasa
+      exe: Exe
+      path: Put
+      title: Titula
   import: Uvoz
   new: Novi
   search: traži
@@ -68,6 +82,7 @@ devtools:
   install_folder: Mapa za instalaciju
   load: Opterećenje
   settings_file: Datoteka postavki
+  simulate_fullscreen: Simulirajte događaj preko cijelog zaslona
 extras:
   discord: Nesklad
   exit: Prestati/izaći
@@ -79,20 +94,19 @@ general:
   accent_color: Akcentna boja
   date_format: Format datuma
   icon_pack:
+    available: Dostupni paketi ikona
     label: Ikona pakiranja
+    selected: Aktivni paketi ikona
   language: Jezik
+  resource:
+    author: Autor
+    description: Opis
+    tags: oznake
   startup: Trčati na startup?
   theme:
-    add: Dodaj temu
-    added: Tema već dodana
-    author: Autor
-    available: Dostupno
-    description: Opis
-    enabled: Omogućene teme
-    label: Informacije o temi
-    placeholder: Odaberite temu
-    selected: Odabran
-    tags: Oznake
+    available: Dostupne teme
+    label: Teme
+    selected: Aktivne teme
   wallpaper:
     select: Odaberite Pozadina
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Odgoditi prikaz
   enable: Omogućite maštovitu alatnu traku
   height: Visina
+  hide_mode:
+    always: Uvijek
+    never: Nikada
+    on_overlap: Na preklapanju
   label: Alatna traka
   placeholder:
     author: Autor
@@ -249,14 +267,25 @@ weg:
   dock_side: Položaj
   enable: Omogućite pristanište/zadaću
   gap: Jaz
+  hide_mode:
+    always: Uvijek
+    never: Nikada
+    on_overlap: Na preklapanju
   items:
     gap: Prostor između predmeta
     label: Predmeti
     size: Veličina predmeta
+    temporal_visibility:
+      all: Sve
+      label: Vidljivost otkvačenih stavki
+      on_monitor: Na monitoru
     visible_separators: Vidljivi separatori
     zoom_size: Zumirana veličina (koristi se za teme)
   label: Pristanište/trag
   margin: Margina
+  mode:
+    full_width: Puna širina zaslona
+    min_content: Mali koliko može biti
   padding: Jadnja
   use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
   width: Širina

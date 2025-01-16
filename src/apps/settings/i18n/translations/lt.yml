@@ -1,5 +1,8 @@
 app_launcher:
   enable: Įgalinti programos paleidimo priemonę
+  launch_on:
+    mouse_over: Užveskite pelės žymeklį
+    primary: Pirminis
   monitor: Monitorius, kad parodytumėte
   runners:
     cmd: Komanda
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikatorius
     kind: Identifikuoti
     matching_strategy: Atitikimo strategija
+    matching_strategy_option:
+      contains: Sudėtyje yra
+      ends_with: Baigiasi su
+      equals: Lygu
+      regex: Reguliari išraiška
+      starts_with: Prasideda nuo
     negation: Neigiamas
     or: Arba
     remove: Ištrinti bloką
+    type:
+      class: Klasė
+      exe: Exe
+      path: Kelias
+      title: Pavadinimas
   import: Importuoti
   new: Nauja
   search: Paieška
@@ -68,6 +82,7 @@ devtools:
   install_folder: Diegimo aplankas
   load: Įkelti
   settings_file: Nustatymų failas
+  simulate_fullscreen: Imituoti viso ekrano įvykį
 extras:
   discord: Nesantaika
   exit: Mesti/išeiti
@@ -79,20 +94,19 @@ general:
   accent_color: Akcento spalva
   date_format: Datos formatas
   icon_pack:
+    available: Galimi piktogramų paketai
     label: ICON PACKS
+    selected: Aktyvūs piktogramų paketai
   language: Kalba
+  resource:
+    author: Autorius
+    description: Aprašymas
+    tags: Žymos
   startup: Paleisti paleidimą?
   theme:
-    add: Pridėkite temą
-    added: Jau pridėta tema
-    author: Autorius
-    available: Galima
-    description: apibūdinimas
-    enabled: Įgalintos temos
-    label: Informacija apie temą
-    placeholder: Pasirinkite temą
-    selected: Pasirinktas
-    tags: Žymos
+    available: Galimos temos
+    label: Temos
+    selected: Aktyvios temos
   wallpaper:
     select: Pasirinkite tapetai
 header:
@@ -213,6 +227,10 @@ toolbar:
   delay_to_show: Delsimas parodyti
   enable: Įgalinkite išgalvotą įrankių juostą
   height: Ūgis
+  hide_mode:
+    always: Visada
+    never: Niekada
+    on_overlap: Ant persidengimo
   label: Įrankių juosta
   placeholder:
     author: Autorius
@@ -245,14 +263,25 @@ weg:
   dock_side: Pozicija
   enable: Įgalinti doką/užduočių juostą
   gap: Tarpas
+  hide_mode:
+    always: Visada
+    never: Niekada
+    on_overlap: Ant persidengimo
   items:
     gap: Tarpas tarp daiktų
     label: Daiktai
     size: Prekės dydis
+    temporal_visibility:
+      all: Visi
+      label: Atsegtų elementų matomumas
+      on_monitor: Ant monitoriaus
     visible_separators: Matomi separatoriai
     zoom_size: Mastelio dydis (naudojamas temoms)
   label: „Dock“/„Taskbar“
   margin: Paraštė
+  mode:
+    full_width: Visas ekrano plotis
+    min_content: Mažas kaip gali būti
   padding: Paminkštinimas
   use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
   width: Plotis

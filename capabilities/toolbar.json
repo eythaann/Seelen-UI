@@ -5,7 +5,6 @@
     "QHNlZWxlbi9mYW5jeS10b29sYmFy*"
   ],
   "permissions": [
-    "core:path:default",
     "fs:allow-write-text-file",
     "fs:scope-appdata-recursive"
   ]

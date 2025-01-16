@@ -1,5 +1,8 @@
 app_launcher:
   enable: Активирайте стартиращия APP
+  launch_on:
+    mouse_over: Мишка върху
+    primary: Първичен
   monitor: Монитор да се покаже
   runners:
     cmd: Команда
@@ -50,9 +53,20 @@ apps_configurations:
     id: Идентификатор
     kind: Определете от
     matching_strategy: Съответстваща стратегия
+    matching_strategy_option:
+      contains: Съдържа
+      ends_with: Завършва с
+      equals: Равно
+      regex: Редовен израз
+      starts_with: Започва с
     negation: Отрицание за съвпадение
     or: ИЛИ
     remove: Изтриване на блок
+    type:
+      class: Клас
+      exe: Exe
+      path: Пътека
+      title: Заглавие
   import: Импортиране
   new: Ново
   search: Търсене
@@ -68,6 +82,7 @@ devtools:
   install_folder: Инсталационна папка
   load: Зареждане
   settings_file: Файл за настройки
+  simulate_fullscreen: Симулирайте събитие на цял екран
 extras:
   discord: Раздор
   exit: QUIT/EXIT
@@ -79,20 +94,19 @@ general:
   accent_color: Цвят на акцент
   date_format: Формат на дата
   icon_pack:
+    available: Налични пакети с икони
     label: Икони пакети
+    selected: Активни пакети с икони
   language: Език
+  resource:
+    author: Автор
+    description: Описание
+    tags: Етикети
   startup: Да се ​​стартирате при стартиране?
   theme:
-    add: Добавете тема
-    added: Темата вече е добавена
-    author: Автор
-    available: На разположение
-    description: Описание
-    enabled: Активирани теми
-    label: Информация за темата
-    placeholder: Изберете тема
-    selected: Избран
-    tags: Етикети
+    available: Налични теми
+    label: Теми
+    selected: Активни теми
   wallpaper:
     select: Изберете тапет
 header:
@@ -235,6 +249,10 @@ toolbar:
   delay_to_show: Забавяне за показване
   enable: Активирайте фантастичната лента с инструменти
   height: Височина
+  hide_mode:
+    always: Винаги
+    never: Никога
+    on_overlap: При припокриване
   label: Лента с инструменти
   placeholder:
     author: Автор
@@ -267,14 +285,25 @@ weg:
   dock_side: Позиция
   enable: Активирайте док/лента на задачите
   gap: Пропаст
+  hide_mode:
+    always: Винаги
+    never: Никога
+    on_overlap: При припокриване
   items:
     gap: Пространство между артикулите
     label: Елементи
     size: Размер на артикула
+    temporal_visibility:
+      all: Всички
+      label: Видимост на незакрепените елементи
+      on_monitor: На монитора
     visible_separators: Видими разделители
     zoom_size: Размерът на мащабиране (използван за теми)
   label: Док/лента на задачите
   margin: Марж
+  mode:
+    full_width: Пълна ширина на екрана
+    min_content: Малък, колкото може да бъде
   padding: Подплънки
   use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
   width: Ширина

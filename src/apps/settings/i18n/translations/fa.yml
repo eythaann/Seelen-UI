@@ -1,5 +1,8 @@
 app_launcher:
   enable: پرتاب برنامه را فعال کنید
+  launch_on:
+    mouse_over: ماوس روی
+    primary: اولیه
   monitor: نظارت برای نمایش
   runners:
     cmd: فرمان
@@ -50,9 +53,20 @@ apps_configurations:
     id: مشخص کننده
     kind: شناسایی توسط
     matching_strategy: استراتژی تطبیق
+    matching_strategy_option:
+      contains: حاوی
+      ends_with: به پایان می رسد با
+      equals: برابر است
+      regex: بیان منظم
+      starts_with: شروع می شود
     negation: نفی تطبیق
     or: یا
     remove: حذف بلوک
+    type:
+      class: کلاس
+      exe: Exe
+      path: مسیر
+      title: عنوان
   import: وارد كردن
   new: جدید
   search: جستجو کردن
@@ -68,6 +82,7 @@ devtools:
   install_folder: پوشه نصب
   load: بار
   settings_file: پرونده تنظیمات
+  simulate_fullscreen: شبیه سازی رویداد تمام صفحه
 extras:
   discord: اختلاف
   exit: ترک/خروج
@@ -79,20 +94,19 @@ general:
   accent_color: رنگ لهجه
   date_format: قالب تاریخ
   icon_pack:
+    available: بسته‌های آیکون موجود
     label: بسته های نماد
+    selected: بسته های آیکون فعال
   language: زبان
+  resource:
+    author: نویسنده
+    description: توضیحات
+    tags: برچسب ها
   startup: در راه اندازی اجرا می شود؟
   theme:
-    add: موضوع را اضافه کنید
-    added: موضوع قبلاً اضافه شده است
-    author: نویسنده
-    available: در دسترس
-    description: شرح
-    enabled: مضامین را فعال کرد
-    label: اطلاعات تم
-    placeholder: انتخاب قالب
-    selected: انتخاب شد
-    tags: برچسب ها
+    available: تم های موجود
+    label: تم ها
+    selected: تم های فعال
   wallpaper:
     select: تصویر زمینه را انتخاب کنید
 header:
@@ -214,6 +228,10 @@ toolbar:
   delay_to_show: تاخیر برای نمایش
   enable: نوار ابزار فانتزی را فعال کنید
   height: قد
+  hide_mode:
+    always: همیشه
+    never: هرگز
+    on_overlap: روی همپوشانی
   label: نوار ابزار
   placeholder:
     author: نویسنده
@@ -246,14 +264,25 @@ weg:
   dock_side: موقعیت
   enable: Dock/TaskBar را فعال کنید
   gap: شکاف
+  hide_mode:
+    always: همیشه
+    never: هرگز
+    on_overlap: روی همپوشانی
   items:
     gap: فضای بین موارد
     label: موارد
     size: اندازه مورد
+    temporal_visibility:
+      all: همه
+      label: قابلیت مشاهده موارد پین نشده
+      on_monitor: روی مانیتور
     visible_separators: جداکننده های قابل مشاهده
     zoom_size: اندازه بزرگنمایی (برای مضامین استفاده می شود)
   label: اسکله/نوار وظیفه
   margin: لبه
+  mode:
+    full_width: عرض تمام صفحه
+    min_content: کوچک که می تواند باشد
   padding: لایه گذاری
   use_multiple_monitor_overlap_logic: به جای منطق فوکوس منفرد از صفحه نمایش خاص استفاده کنید
   width: عرض

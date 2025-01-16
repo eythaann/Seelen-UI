@@ -1,5 +1,8 @@
 app_launcher:
   enable: Омогући бацач апликација
+  launch_on:
+    mouse_over: Пређите мишем
+    primary: Примарни
   monitor: Монитор за приказивање
   runners:
     cmd: Командант
@@ -50,9 +53,20 @@ apps_configurations:
     id: Идентификатор
     kind: Идентификовати
     matching_strategy: Стратегија подударања
+    matching_strategy_option:
+      contains: Садржи
+      ends_with: Завршава са
+      equals: Једнако
+      regex: Регуларни израз
+      starts_with: Почиње са
     negation: Негирајте подударање
     or: Или
     remove: Избрисати блок
+    type:
+      class: Класа
+      exe: Еке
+      path: Пут
+      title: Наслов
   import: Увоз
   new: Нова
   search: Претрага
@@ -68,6 +82,7 @@ devtools:
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања
+  simulate_fullscreen: Симулирајте догађај преко целог екрана
 extras:
   discord: Нескладан
   exit: Престанак / излаз
@@ -79,20 +94,19 @@ general:
   accent_color: Боја нагласности
   date_format: Формат датума
   icon_pack:
+    available: Доступни пакети икона
     label: Паковање икона
+    selected: Активни пакети икона
   language: Језик
+  resource:
+    author: Аутор
+    description: Опис
+    tags: Ознаке
   startup: Ради на покретању?
   theme:
-    add: Додај тему
-    added: Тема је већ додата
-    author: Аутор
-    available: Доступан
-    description: Опис
-    enabled: Омогућене теме
-    label: Информације о темима
-    placeholder: Изаберите тему
-    selected: Изабран
-    tags: Ознаке
+    available: Доступне теме
+    label: Теме
+    selected: Активне теме
   wallpaper:
     select: Изаберите Позадина
 header:
@@ -214,6 +228,10 @@ toolbar:
   delay_to_show: Одлагање приказивања
   enable: Омогућите фанци траку са алаткама
   height: Висина
+  hide_mode:
+    always: Увек
+    never: Никада
+    on_overlap: На преклапање
   label: Алатна трака
   placeholder:
     author: Аутор
@@ -248,14 +266,25 @@ weg:
   dock_side: Положај
   enable: Омогући прикључак / траку задатака
   gap: Празнина
+  hide_mode:
+    always: Увек
+    never: Никада
+    on_overlap: На преклапање
   items:
     gap: Простор између предмета
     label: Предмети
     size: Величина предмета
+    temporal_visibility:
+      all: Све
+      label: Видљивост откачених ставки
+      on_monitor: На монитору
     visible_separators: Видљиви сепаратори
     zoom_size: Зуомирана величина (користи се за теме)
   label: Доцк / трака задатака
   margin: Маргина
+  mode:
+    full_width: Пуна ширина екрана
+    min_content: Мала колико може бити
   padding: Подлокнути
   use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
   width: Ширина

@@ -1,5 +1,8 @@
 app_launcher:
   enable: Jeki Ifilọlẹ app
+  launch_on:
+    mouse_over: Asin ti pari
+    primary: Alakoko
   monitor: Atẹle lati fihan
   runners:
     cmd: Paṣẹ
@@ -48,9 +51,20 @@ apps_configurations:
     id: Idamo
     kind: Ṣe idanimọ nipasẹ
     matching_strategy: Ibaamu iṣiro
+    matching_strategy_option:
+      contains: Ni ninu
+      ends_with: O pari pẹlu
+      equals: O dọgba
+      regex: Ikosile deede
+      starts_with: Bẹrẹ pẹlu
     negation: Ibaramu tuntun
     or: Tabi
     remove: Paarẹ Brow
+    type:
+      class: Kilasi
+      exe: Exe
+      path: Ona
+      title: Akọle
   import: Aṣagbewọle lati ilẹ okeere
   new: Tuntun
   search: Ṣewadii
@@ -66,6 +80,7 @@ devtools:
   install_folder: Filese Fifi sori ẹrọ
   load: Ẹru
   settings_file: Faili eto
+  simulate_fullscreen: Ṣe afarawe iṣẹlẹ ni kikun iboju
 extras:
   discord: Di eniyan
   exit: Duro / Jade
@@ -77,20 +92,19 @@ general:
   accent_color: Awọ ara
   date_format: Ọna kika ọjọ
   icon_pack:
+    available: Awọn akopọ Aami ti o wa
     label: Awọn akopọ aami
+    selected: Awọn akopọ Aami ti nṣiṣe lọwọ
   language: Ede
+  resource:
+    author: Onkọwe
+    description: Apejuwe
+    tags: Awọn afi
   startup: Ṣiṣe lori ibẹrẹ?
   theme:
-    add: Fi ọran kun
-    added: Akori ti ṣafikun tẹlẹ
-    author: Onkọwe ọkunrin
-    available: Wa
-    description: Isapejuwe
-    enabled: Mu awọn akori ṣiṣẹ
-    label: Alaye Akori
-    placeholder: Yan Akori
-    selected: Ti yan
-    tags: Afi ami
+    available: Awọn akori to wa
+    label: Awọn akori
+    selected: Awọn akori ti nṣiṣe lọwọ
   wallpaper:
     select: Yan Iṣẹṣọ ogiri
 header:
@@ -210,6 +224,10 @@ toolbar:
   delay_to_show: Idaduro lati ṣafihan
   enable: Mu ṣiṣẹ irinṣẹ irinṣẹ Fancy ṣiṣẹ
   height: Giga
+  hide_mode:
+    always: Nigbagbogbo
+    never: Kò
+    on_overlap: Lori agbekọja
   label: Ọpa irinṣẹ
   placeholder:
     author: Onkọwe ọkunrin
@@ -242,14 +260,25 @@ weg:
   dock_side: Ipo
   enable: Muu dock / forkbar
   gap: Alafo
+  hide_mode:
+    always: Nigbagbogbo
+    never: Kò
+    on_overlap: Lori agbekọja
   items:
     gap: Aaye laarin awọn ohun kan
     label: Awọn ohun
     size: Iwọn nkan
+    temporal_visibility:
+      all: Gbogbo
+      label: Hihan Awọn nkan ti a ko pin
+      on_monitor: Lori Atẹle
     visible_separators: Awọn iyatọ ti o han
     zoom_size: Iwọn sisun (ti a lo fun awọn akori)
   label: Dock / forkbar
   margin: Ẹlẹsin
+  mode:
+    full_width: Iboju kikun iwọn
+    min_content: Kekere bi o ti le jẹ
   padding: Fidigọdi silẹ
   use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
   width: Fifẹ

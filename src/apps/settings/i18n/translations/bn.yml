@@ -1,5 +1,8 @@
 app_launcher:
   enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
+  launch_on:
+    mouse_over: মাউস ওভার
+    primary: প্রাথমিক
   monitor: দেখানোর জন্য মনিটর
   runners:
     cmd: কমান্ড
@@ -50,9 +53,20 @@ apps_configurations:
     id: সনাক্তকারী
     kind: দ্বারা চিহ্নিত করুন
     matching_strategy: ম্যাচিং কৌশল
+    matching_strategy_option:
+      contains: ধারণ করে
+      ends_with: দিয়ে শেষ হয়
+      equals: সমান
+      regex: নিয়মিত অভিব্যক্তি
+      starts_with: দিয়ে শুরু হয়
     negation: ম্যাচিং অবহেলা
     or: বা
     remove: ব্লক মুছুন
+    type:
+      class: ক্লাস
+      exe: Exe
+      path: পথ
+      title: শিরোনাম
   import: আমদানি
   new: নতুন
   search: অনুসন্ধান
@@ -68,6 +82,7 @@ devtools:
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
   settings_file: সেটিংস ফাইল
+  simulate_fullscreen: পূর্ণস্ক্রীন ইভেন্ট অনুকরণ
 extras:
   discord: মতবিরোধ
   exit: প্রস্থান/প্রস্থান
@@ -79,20 +94,19 @@ general:
   accent_color: সুরের ধাপের রঙ
   date_format: তারিখ ফর্ম্যাট
   icon_pack:
+    available: উপলব্ধ আইকন প্যাক
     label: আইকন প্যাকস
+    selected: সক্রিয় আইকন প্যাক
   language: ভাষা
+  resource:
+    author: লেখক
+    description: বর্ণনা
+    tags: ট্যাগ
   startup: প্রারম্ভকালে চালানো?
   theme:
-    add: থিম যুক্ত করুন
-    added: থিম ইতিমধ্যে যুক্ত
-    author: লেখক
-    available: উপলব্ধ
-    description: বর্ণনা
-    enabled: সক্ষম থিম
-    label: থিম তথ্য
-    placeholder: থিম নির্বাচন কর
-    selected: নির্বাচিত
-    tags: ট্যাগ
+    available: উপলব্ধ থিম
+    label: থিম
+    selected: সক্রিয় থিম
   wallpaper:
     select: ওয়ালপেপার নির্বাচন করুন
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: দেখাতে বিলম্ব
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
   height: উচ্চতা
+  hide_mode:
+    always: সর্বদা
+    never: কখনই না
+    on_overlap: ওভারল্যাপে
   label: সরঞ্জামদণ্ড
   placeholder:
     author: লেখক
@@ -247,14 +265,25 @@ weg:
   dock_side: অবস্থান
   enable: ডক/টাস্কবার সক্ষম করুন
   gap: ফাঁক
+  hide_mode:
+    always: সর্বদা
+    never: কখনই না
+    on_overlap: ওভারল্যাপে
   items:
     gap: আইটেম মধ্যে স্থান
     label: আইটেম
     size: আইটেমের আকার
+    temporal_visibility:
+      all: সব
+      label: আনপিন করা আইটেম দৃশ্যমানতা
+      on_monitor: মনিটরে
     visible_separators: দৃশ্যমান বিভাজক
     zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
   label: ডক/টাস্কবার
   margin: মার্জিন
+  mode:
+    full_width: পূর্ণ পর্দা প্রস্থ
+    min_content: যতটা সম্ভব ছোট
   padding: প্যাডিং
   use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
   width: প্রস্থ

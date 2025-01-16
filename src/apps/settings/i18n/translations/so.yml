@@ -1,5 +1,8 @@
 app_launcher:
   enable: U oggolow appka bilaabista
+  launch_on:
+    mouse_over: Jiirku wuu dhammaaday
+    primary: Asal ahaan
   monitor: Kormeer si loo muujiyo
   runners:
     cmd: Amrid
@@ -51,9 +54,20 @@ apps_configurations:
     id: Aqoonsiga
     kind: Aqoonso
     matching_strategy: Istaraatiijiyadda iswaafajinta
+    matching_strategy_option:
+      contains: Waxa ku jira
+      ends_with: Ku dhamaata
+      equals: U dhigma
+      regex: Odhaah joogto ah
+      starts_with: Waxay ku bilaabataa
     negation: Ciriiri u dhigma
     or: Ama
     remove: Tirtir xannibaadda
+    type:
+      class: Fasalka
+      exe: Ex
+      path: Jidka
+      title: Ciwaanka
   import: Soo dejin
   new: Cusub
   search: Raadin
@@ -69,6 +83,7 @@ devtools:
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta
+  simulate_fullscreen: Isku day dhacdo shaashad buuxda
 extras:
   discord: Huf
   exit: Jooji / bixitaan
@@ -80,20 +95,19 @@ general:
   accent_color: Midab caqabad
   date_format: Taariikh format
   icon_pack:
+    available: Xirmooyinka Icon ee la heli karo
     label: Xirmooyinka icon
+    selected: Xirmooyinka Astaanta Firfircoon
   language: Af
+  resource:
+    author: Qore
+    description: Sharaxaada
+    tags: Tags
   startup: Ku orod bilowga?
   theme:
-    add: Ku dar mawduuc
-    added: Mawduuca mar hore ayaa lagu daray
-    author: Qoraa
-    available: Qof heli karo
-    description: Sifo
-    enabled: Awood u yeelo mowduucyada
-    label: Macluumaadka mawduuca
-    placeholder: Xullo mawduuca
-    selected: La xushay
-    tags: Calaamadaha
+    available: Mawduucyada la heli karo
+    label: Mawduucyada
+    selected: Mawduucyada Firfircoon
   wallpaper:
     select: Xulo warqadda
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Dib u dhig si loo muujiyo
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
+  hide_mode:
+    always: Had iyo jeer
+    never: Marna
+    on_overlap: Isku dhafka
   label: Qalab argamiye
   placeholder:
     author: Qoraa
@@ -251,14 +269,25 @@ weg:
   dock_side: Meel
   enable: Kartida DOCK / Turniinka
   gap: Dalool
+  hide_mode:
+    always: Had iyo jeer
+    never: Marna
+    on_overlap: Isku dhafka
   items:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha
     size: Shayga cabirka
+    temporal_visibility:
+      all: Dhammaan
+      label: Aragtida Shayada Furan
+      on_monitor: On Monitor
     visible_separators: Kala-sooca muuqda
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
   label: Dock / Tootshar
   margin: Margin
+  mode:
+    full_width: Ballaca shaashadda oo dhan
+    min_content: Yaryar sida ay noqon karto
   padding: Suur
   use_multiple_monitor_overlap_logic: >-
     Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda

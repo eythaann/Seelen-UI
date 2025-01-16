@@ -1,5 +1,8 @@
 app_launcher:
   enable: Activați lansatorul de aplicații
+  launch_on:
+    mouse_over: Trece cu mouse-ul peste
+    primary: Primar
   monitor: Monitor pentru a arăta
   runners:
     cmd: Comanda
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificator
     kind: Identifică de
     matching_strategy: Strategia de potrivire
+    matching_strategy_option:
+      contains: Conține
+      ends_with: Se termină cu
+      equals: Egal
+      regex: Expresia regulată
+      starts_with: Începe cu
     negation: Negate potrivire
     or: SAU
     remove: Ștergeți blocul
+    type:
+      class: Clasă
+      exe: Exe
+      path: Cale
+      title: Titlu
   import: Import
   new: Nou
   search: Căutare
@@ -68,6 +82,7 @@ devtools:
   install_folder: Folder de instalare
   load: Sarcină
   settings_file: Fișier de setări
+  simulate_fullscreen: Simulați un eveniment pe ecran complet
 extras:
   discord: Discordie
   exit: Renunță/ieșire
@@ -79,20 +94,19 @@ general:
   accent_color: Culoare de accent
   date_format: Formatul datei
   icon_pack:
+    available: Pachete de pictograme disponibile
     label: Pachete de pictograme
+    selected: Pachete de pictograme active
   language: Limba
+  resource:
+    author: Autor
+    description: Descriere
+    tags: Etichete
   startup: Rulați la pornire?
   theme:
-    add: Adăugați tema
-    added: Tema deja adăugată
-    author: Autor
-    available: Disponibil
-    description: Descriere
-    enabled: Teme activate
-    label: Informații despre temă
-    placeholder: Selectează tema
-    selected: Selectat
-    tags: Etichete
+    available: Teme disponibile
+    label: Teme
+    selected: Teme active
   wallpaper:
     select: Selectați tapet
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Întârzieți afișarea
   enable: Activați bara de instrumente fantezistă
   height: Înălţime
+  hide_mode:
+    always: Întotdeauna
+    never: Nu
+    on_overlap: Pe suprapunere
   label: Bara de instrumente
   placeholder:
     author: Autor
@@ -249,14 +267,25 @@ weg:
   dock_side: Poziţie
   enable: Activați Dock/Bara de activități
   gap: Decalaj
+  hide_mode:
+    always: Întotdeauna
+    never: Nu
+    on_overlap: Pe suprapunere
   items:
     gap: Spațiu între articole
     label: Articole
     size: Dimensiunea articolului
+    temporal_visibility:
+      all: Toate
+      label: Vizibilitatea elementelor nefixate
+      on_monitor: Pe monitor
     visible_separators: Separatoare vizibile
     zoom_size: Dimensiunea zoomată (folosită pentru teme)
   label: Dock/Bara de activități
   margin: Marjă
+  mode:
+    full_width: Lățimea ecranului complet
+    min_content: Cât de mic poate fi
   padding: Căptușeală
   use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
   width: Lăţime

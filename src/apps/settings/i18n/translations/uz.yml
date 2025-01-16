@@ -1,5 +1,8 @@
 app_launcher:
   enable: APP ishga tushirishni yoqish
+  launch_on:
+    mouse_over: Sichqoncha ustiga
+    primary: Asosiy
   monitor: Ko'rish uchun monitor
   runners:
     cmd: Buyruq
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Aniqlang
     matching_strategy: Mos keladigan strategiya
+    matching_strategy_option:
+      contains: Tarkibida
+      ends_with: bilan tugaydi
+      equals: Teng
+      regex: Muntazam ifoda
+      starts_with: bilan boshlanadi
     negation: Mos kelmaslik
     or: Yoki
     remove: Blokni o'chirish
+    type:
+      class: Sinf
+      exe: Exe
+      path: Yo'l
+      title: Sarlavha
   import: Import
   new: Yangi
   search: Qidirmoq
@@ -68,6 +82,7 @@ devtools:
   install_folder: O'rnatish papkasini o'rnatish
   load: Yuklamoq
   settings_file: Sozlamalar fayli
+  simulate_fullscreen: Toʻliq ekranli hodisani simulyatsiya qilish
 extras:
   discord: Kelishmovchilik
   exit: Chiqish / chiqish
@@ -79,20 +94,19 @@ general:
   accent_color: Urg'u rangi
   date_format: Sana formati
   icon_pack:
+    available: Mavjud piktogramma to'plamlari
     label: Ikonka paketlari
+    selected: Faol piktogramma to'plamlari
   language: Til
+  resource:
+    author: Muallif
+    description: Tavsif
+    tags: Teglar
   startup: Ishga tushirishda ishlaydimi?
   theme:
-    add: Mavzuni qo'shing
-    added: Mavzu allaqachon qo'shilgan
-    author: Muallif
-    available: Mavjud
-    description: Tavsif
-    enabled: Mavzular yoqilgan
-    label: Mavzu haqida ma'lumot
-    placeholder: Mavzuni tanlang
-    selected: Tanlangan
-    tags: Teglar
+    available: Mavjud mavzular
+    label: Mavzular
+    selected: Faol mavzular
   wallpaper:
     select: Fon rasmini tanlang
 header:
@@ -235,6 +249,10 @@ toolbar:
   delay_to_show: Ko'rsatish uchun kechikish
   enable: Fashr asboblar panelini yoqing
   height: Balandlik
+  hide_mode:
+    always: Har doim
+    never: Hech qachon
+    on_overlap: Bir-biriga yopishgan holda
   label: Asboblar paneli
   placeholder:
     author: Muallif
@@ -269,14 +287,25 @@ weg:
   dock_side: Pozitsiya
   enable: Dock / vazifalar panelini yoqing
   gap: Bo'shliq
+  hide_mode:
+    always: Har doim
+    never: Hech qachon
+    on_overlap: Bir-biriga yopishgan holda
   items:
     gap: Buyumlar orasidagi bo'shliq
     label: Narsalar
     size: Element hajmi
+    temporal_visibility:
+      all: Hammasi
+      label: Ochilmagan elementlarning ko'rinishi
+      on_monitor: Monitorda
     visible_separators: Ko'rinadigan ajratuvchi
     zoom_size: Zomed o'lchami (mavzular uchun ishlatiladi)
   label: Dok / vazifalar paneli
   margin: Marja
+  mode:
+    full_width: To'liq ekran kengligi
+    min_content: Iloji boricha kichik
   padding: Plomba
   use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
   width: Kenglik

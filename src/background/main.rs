@@ -23,10 +23,7 @@ mod widget_loader;
 mod windows_api;
 mod winevent;
 
-use std::{
-    io::{BufWriter, Write},
-    sync::OnceLock,
-};
+use std::sync::OnceLock;
 
 use error_handler::Result;
 use exposed::register_invoke_handler;
@@ -34,7 +31,7 @@ use itertools::Itertools;
 use modules::{
     cli::{
         application::{attach_console, is_just_getting_info, SEELEN_COMMAND_LINE},
-        Client,
+        AppClient, ServiceClient,
     },
     tray::application::ensure_tray_overflow_creation,
 };
@@ -45,8 +42,7 @@ use tauri::webview_version;
 use tray::try_register_tray_icon;
 use utils::{
     integrity::{
-        check_for_webview_optimal_state, kill_slu_service, restart_as_appx, start_slu_service,
-        validate_webview_runtime_is_installed,
+        check_for_webview_optimal_state, restart_as_appx, validate_webview_runtime_is_installed,
     },
     is_running_as_appx_package, was_installed_using_msix, PERFORMANCE_HELPER,
 };
@@ -54,6 +50,10 @@ use windows::Win32::Security::{SE_DEBUG_NAME, SE_SHUTDOWN_NAME};
 use windows_api::WindowsApi;
 
 static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
+
+pub fn is_local_dev() -> bool {
+    cfg!(dev)
+}
 
 fn register_panic_hook() {
     std::panic::set_hook(Box::new(move |info| {
@@ -88,8 +88,11 @@ fn register_panic_hook() {
 
 fn print_initial_information() {
     let version = env!("CARGO_PKG_VERSION");
-    let dev = if tauri::is_dev() { " (dev)" } else { "" };
-    log::info!("───────────────────── Starting Seelen UI v{version}{dev}─────────────────────");
+    let debug = if tauri::is_dev() { " (debug)" } else { "" };
+    let local = if is_local_dev() { " (local)" } else { "" };
+    log::info!(
+        "───────────────────── Starting Seelen UI v{version}{local}{debug} ─────────────────────"
+    );
     log::info!("Operating System: {}", os_info::get());
     log::info!("WebView2 Runtime: {:?}", webview_version());
     log::info!("Elevated        : {:?}", WindowsApi::is_elevated());
@@ -100,16 +103,16 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
 
-    if !tauri::is_dev() && !is_running_as_appx_package() {
-        start_slu_service(app)?;
-    }
-
-    check_for_webview_optimal_state(app.handle())?;
-
-    Client::listen_tcp()?;
     APP_HANDLE
         .set(app.handle().to_owned())
         .map_err(|_| "Failed to set app handle")?;
+
+    if !tauri::is_dev() {
+        ServiceClient::start_service()?;
+    }
+
+    check_for_webview_optimal_state(app.handle())?;
+    AppClient::listen_tcp()?;
 
     log_error!(WindowsApi::enable_privilege(SE_SHUTDOWN_NAME));
     log_error!(WindowsApi::enable_privilege(SE_DEBUG_NAME));
@@ -134,9 +137,9 @@ fn app_callback(_: &tauri::AppHandle<tauri::Wry>, event: tauri::RunEvent) {
     match event {
         tauri::RunEvent::ExitRequested { api, code, .. } => match code {
             Some(code) => {
+                // if exit code is 0 it means that the app was closed by the user
                 if code == 0 {
-                    // if exit code is 0 it means that the app was closed by the user
-                    log_error!(kill_slu_service());
+                    log_error!(ServiceClient::emit_stop_signal());
                 }
             }
             // prevent close background on webview windows closing
@@ -169,8 +172,8 @@ fn main() -> Result<()> {
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {
         Ok(m) => m,
-        // (help, --help or -h) are managed as error
         Err(e) => {
+            // (help, --help or -h) and other sugestions are managed as error
             attach_console()?;
             e.print()?;
             return Ok(());
@@ -182,36 +185,11 @@ fn main() -> Result<()> {
     }
 
     if is_already_runnning() {
-        let mut attempts = 0;
-        let mut connection = Client::connect_tcp();
-
-        while connection.is_err() && attempts < 10 {
-            attempts += 1;
-            std::thread::sleep(std::time::Duration::from_millis(100));
-            connection = Client::connect_tcp();
-        }
-
-        if let Ok(stream) = connection {
-            let mut writer = BufWriter::new(stream);
-
-            let args = std::env::args().collect_vec();
-            let msg = serde_json::to_string(&args)?;
-
-            writer.write_all(msg.as_bytes())?;
-            writer.flush()?;
-            return Ok(());
-        }
-
-        // if the connection fails probably is because the app is been closing
-        // so we check if the app is already running again to see if we have to
-        // let the instance be created or not
-        if is_already_runnning() {
-            return Ok(());
-        }
+        return AppClient::redirect_cli_to_instance();
     }
 
     if was_installed_using_msix() && !is_running_as_appx_package() {
-        restart_as_appx()?;
+        restart_as_appx(&matches)?;
     }
 
     trace_lock!(PERFORMANCE_HELPER).start("setup");

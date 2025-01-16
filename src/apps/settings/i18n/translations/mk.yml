@@ -1,5 +1,8 @@
 app_launcher:
   enable: Овозможете фрлач на апликации
+  launch_on:
+    mouse_over: Глувчето над
+    primary: Примарен
   monitor: Монитор за да се покаже
   runners:
     cmd: Команда
@@ -50,9 +53,20 @@ apps_configurations:
     id: Идентификатор
     kind: Идентификувајте од
     matching_strategy: Стратегија за појавување
+    matching_strategy_option:
+      contains: Содржи
+      ends_with: Завршува со
+      equals: Еднакви
+      regex: Редовно изразување
+      starts_with: Започнува со
     negation: Негираат совпаѓање
     or: Или
     remove: Избриши блок
+    type:
+      class: Класа
+      exe: Exe
+      path: Пат
+      title: Наслов
   import: Увоз
   new: Ново
   search: Пребарување
@@ -68,6 +82,7 @@ devtools:
   install_folder: Папка за инсталација
   load: Оптоварување
   settings_file: Датотека за поставки
+  simulate_fullscreen: Симулирајте настан на цел екран
 extras:
   discord: Раздор
   exit: Откажете/излез
@@ -79,20 +94,19 @@ general:
   accent_color: Боја на акцент
   date_format: Формат на датум
   icon_pack:
+    available: Достапни пакети со икони
     label: Икони пакувања
+    selected: Пакети со активни икони
   language: Јазик
+  resource:
+    author: Автор
+    description: Опис
+    tags: Тагови
   startup: Стартувам на стартување?
   theme:
-    add: Додадете тема
-    added: Веќе додадена тема
-    author: Автор
-    available: Достапно
-    description: Опис
-    enabled: Овозможени теми
-    label: Информации за теми
-    placeholder: Изберете тема
-    selected: Избран
-    tags: Тагови
+    available: Достапни теми
+    label: Теми
+    selected: Активни теми
   wallpaper:
     select: Изберете позадина
 header:
@@ -235,6 +249,10 @@ toolbar:
   delay_to_show: Одложување за прикажување
   enable: Овозможете фенси лента со алатки
   height: Висина
+  hide_mode:
+    always: Секогаш
+    never: Никогаш
+    on_overlap: На преклопување
   label: Лента со алатки
   placeholder:
     author: Автор
@@ -269,14 +287,25 @@ weg:
   dock_side: Позиција
   enable: Овозможете пристаниште/лента со задачи
   gap: Јаз
+  hide_mode:
+    always: Секогаш
+    never: Никогаш
+    on_overlap: На преклопување
   items:
     gap: Простор помеѓу предмети
     label: Предмети
     size: Големина на артикалот
+    temporal_visibility:
+      all: Сите
+      label: Видливост на откачени ставки
+      on_monitor: На монитор
     visible_separators: Видливи сепаратори
     zoom_size: Зумирана големина (се користи за теми)
   label: Док/лента со задачи
   margin: Маргина
+  mode:
+    full_width: Ширина на цел екран
+    min_content: Мала колку што може
   padding: Подлога
   use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
   width: Ширина

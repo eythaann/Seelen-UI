@@ -4,7 +4,7 @@
 
 In Seelen UI, themes are managed as layers, allowing multiple themes to be used simultaneously. Since themes are like CSS files, their order is crucial as it determines the cascade order.
 
-Themes can be either a single file or a folder containing a specific file. The file should be a `.yml` file that adheres to the [theme schema](./schemas/theme.schema.json).
+Themes can be either a single file or a folder containing a specific file. The file should be a `.yml` file that adheres to the [theme schema](https://github.com/Seelen-Inc/slu-lib/blob/master/gen/schemas/theme.schema.json).
 
 For a folder, it follows this structure. Instead of using `styles.{module}` in the metadata file, it uses a CSS file named `theme.{module}.css`:
 

@@ -10,6 +10,7 @@
     "log:default",
     "core:event:default",
     "core:webview:default",
+    "core:path:default",
     "dialog:default"
   ]
 }

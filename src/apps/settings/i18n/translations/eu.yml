@@ -1,5 +1,8 @@
 app_launcher:
   enable: Gaitu aplikazioaren abiarazlea
+  launch_on:
+    mouse_over: Sagua pasa
+    primary: Lehen mailakoa
   monitor: Monitorea erakusteko
   runners:
     cmd: Agindu
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikatzaile
     kind: Identifikatu
     matching_strategy: Bat datorren estrategia
+    matching_strategy_option:
+      contains: Dauka
+      ends_with: Honekin amaitzen da
+      equals: Berdin
+      regex: Adierazpen erregularra
+      starts_with: '-rekin hasten da'
     negation: Ezeztatu bat datozenak
     or: Ala
     remove: Ezabatu blokea
+    type:
+      class: Klasea
+      exe: Exe
+      path: Bidea
+      title: Izenburua
   import: Inportatu
   new: Berri
   search: Araketa
@@ -68,6 +82,7 @@ devtools:
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia
+  simulate_fullscreen: Simulatu pantaila osoko gertaera
 extras:
   discord: Deskudun
   exit: Irten / irten
@@ -79,20 +94,19 @@ general:
   accent_color: Azentu kolorea
   date_format: Data formatua
   icon_pack:
+    available: Eskuragarri dauden ikono paketeak
     label: Ikono paketeak
+    selected: Ikono pakete aktiboak
   language: Mintzaira
+  resource:
+    author: Egilea
+    description: Deskribapena
+    tags: Etiketak
   startup: Korrika abiaraztean?
   theme:
-    add: Gehitu gaia
-    added: Gaia dagoeneko gehitu da
-    author: Idazle
-    available: Erabilgarri
-    description: Deskribapen
-    enabled: Gaitutako gaiak
-    label: Gaiaren informazioa
-    placeholder: Hautatu Gaia
-    selected: Hautatu
-    tags: Teskak
+    available: Eskuragarri dauden gaiak
+    label: Gaiak
+    selected: Gai aktiboak
   wallpaper:
     select: Hautatu horma-irudia
 header:
@@ -213,6 +227,10 @@ toolbar:
   delay_to_show: Erakusteko atzerapena
   enable: Gaitu tresna-barra
   height: Luzera
+  hide_mode:
+    always: Beti
+    never: Inoiz ez
+    on_overlap: Gainjartzean
   label: Tresna barra
   placeholder:
     author: Idazle
@@ -247,14 +265,25 @@ weg:
   dock_side: Kokaleku
   enable: Gaitu kaia / ataza barra
   gap: Tarte
+  hide_mode:
+    always: Beti
+    never: Inoiz ez
+    on_overlap: Gainjartzean
   items:
     gap: Elementuen arteko espazioa
     label: Manatu
     size: Elementuen tamaina
+    temporal_visibility:
+      all: Denak
+      label: Ainguratu gabeko elementuen ikusgaitasuna
+      on_monitor: Monitorean
     visible_separators: Ikusgai bereizgailuak
     zoom_size: Zoom tamaina (gaietarako erabiltzen da)
   label: Dock / ataza barra
   margin: Emandar
+  mode:
+    full_width: Pantaila osoko zabalera
+    min_content: Txikia izan daitekeen bezala
   padding: Betegarri
   use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
   width: Zabalera

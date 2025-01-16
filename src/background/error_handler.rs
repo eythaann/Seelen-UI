@@ -134,4 +134,32 @@ impl From<tauri_plugin_shell::process::Output> for AppError {
     }
 }
 
+pub trait WindowsResultExt {
+    /// Call this when convertion a `BOOL` into a result using the win32 crate `BOOL::ok()`
+    ///
+    /// For some reason `BOOL` is 0 that means failure, but the error code in the `Result` is `0`
+    /// and message is `succesfully completed`
+    ///
+    /// Warn: Be careful when using this like win32 api documentation sometimes expect this type of behaviours...
+    fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error>;
+}
+
+impl WindowsResultExt for core::result::Result<(), windows::core::Error> {
+    fn filter_fake_error(self) -> core::result::Result<(), windows::core::Error> {
+        match self {
+            Ok(_) => Ok(()),
+            Err(error) => {
+                // I really hate windows api for this types of behaviours
+                if error.code().is_ok() {
+                    // let app_error = AppError::from(error);
+                    // log::warn!("(maybe?) fake win32 error, was skipped: {:?}", app_error);
+                    Ok(())
+                } else {
+                    Err(error)
+                }
+            }
+        }
+    }
+}
+
 pub type Result<T = ()> = core::result::Result<T, AppError>;

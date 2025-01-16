@@ -1,5 +1,8 @@
 app_launcher:
   enable: アプリランチャーを有効にする
+  launch_on:
+    mouse_over: マウスオーバー
+    primary: 主要な
   monitor: 表示するモニター
   runners:
     cmd: コマンド プロンプト
@@ -46,9 +49,20 @@ apps_configurations:
     id: 識別子
     kind: 識別方法
     matching_strategy: マッチングの方法
+    matching_strategy_option:
+      contains: 含まれています
+      ends_with: で終わる
+      equals: 等しい
+      regex: 正規表現
+      starts_with: で始まる
     negation: マッチングを否定する
     or: または
     remove: ブロックを削除
+    type:
+      class: クラス
+      exe: EXE
+      path: パス
+      title: タイトル
   import: インポート
   new: 新規
   search: 検索
@@ -64,6 +78,7 @@ devtools:
   install_folder: アプリのフォルダー
   load: ロード
   settings_file: 設定ファイル
+  simulate_fullscreen: 全画面イベントをシミュレートする
 extras:
   discord: Discordコミュニティー
   exit: SeelenUIを終了
@@ -75,20 +90,19 @@ general:
   accent_color: アクセントカラー
   date_format: 日付形式
   icon_pack:
+    available: 利用可能なアイコン パック
     label: アイコンパック
+    selected: アクティブなアイコン パック
   language: 言語
+  resource:
+    author: 著者
+    description: 説明
+    tags: タグ
   startup: 起動時に実行する
   theme:
-    add: テーマを追加
-    added: テーマはすでに追加済みです
-    author: 製作者
-    available: 利用可能
-    description: 説明
-    enabled: テーマが有効です
-    label: テーマ情報
-    placeholder: テーマを選択
-    selected: 選択済み
-    tags: タグ
+    available: 利用可能なテーマ
+    label: テーマ
+    selected: アクティブなテーマ
   wallpaper:
     select: 壁紙を選択
 header:
@@ -207,6 +221,10 @@ toolbar:
   delay_to_show: 表示が遅れる
   enable: ツールバーを有効にする
   height: 高さ
+  hide_mode:
+    always: いつも
+    never: 一度もない
+    on_overlap: オーバーラップ時
   label: ツールバーの設定
   placeholder:
     author: 製作者
@@ -239,14 +257,25 @@ weg:
   dock_side: 位置
   enable: ドック（タスクバー）を有効にする
   gap: アイテム間のスペース
+  hide_mode:
+    always: いつも
+    never: 一度もない
+    on_overlap: オーバーラップ時
   items:
     gap: アイテム間のスペース
     label: ドック上のアイテム
     size: アイテムのサイズ
+    temporal_visibility:
+      all: 全て
+      label: 固定されていないアイテムの表示設定
+      on_monitor: モニター上
     visible_separators: セパレーターを表示する
     zoom_size: ズームされたときのサイズ（一部のテーマで使用）
   label: ドック（タスクバー）
   margin: ドックの隙間
+  mode:
+    full_width: 全画面幅
+    min_content: できるだけ小さく
   padding: 余白
   use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
   width: ドックの幅

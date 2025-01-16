@@ -6,11 +6,10 @@ import { RootState } from '../domain';
 import { UserSettings } from '../../../../../../shared.interfaces';
 
 export const StaticSettingsToState = (userSettings: UserSettings, state: RootState): RootState => {
-  const { jsonSettings, yamlSettings, themes, layouts, placeholders, wallpaper } = userSettings;
+  const { jsonSettings, yamlSettings, themes, layouts, placeholders } = userSettings;
   return {
     ...state,
     ...jsonSettings,
-    wallpaper,
     availableThemes: themes,
     availableLayouts: layouts,
     availablePlaceholders: placeholders,

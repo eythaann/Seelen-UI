@@ -1,5 +1,8 @@
 app_launcher:
   enable: Paganahin ang launcher ng app
+  launch_on:
+    mouse_over: Itapat ng mouse
+    primary: Pangunahin
   monitor: Subaybayan upang ipakita
   runners:
     cmd: Utos
@@ -52,9 +55,20 @@ apps_configurations:
     id: Identifier
     kind: Kilalanin ng
     matching_strategy: Diskarte sa pagtutugma
+    matching_strategy_option:
+      contains: Naglalaman
+      ends_with: Nagtatapos sa
+      equals: katumbas
+      regex: Regular na pagpapahayag
+      starts_with: Nagsisimula sa
     negation: Negate pagtutugma
     or: O
     remove: Tanggalin ang bloke
+    type:
+      class: Klase
+      exe: Exe
+      path: Daan
+      title: Pamagat
   import: Angkat
   new: Bago
   search: Maghanap
@@ -70,6 +84,7 @@ devtools:
   install_folder: Folder ng pag -install
   load: Mag -load
   settings_file: File ng mga setting
+  simulate_fullscreen: Gayahin ang fullscreen na kaganapan
 extras:
   discord: Discord
   exit: Huminto/exit
@@ -81,20 +96,19 @@ general:
   accent_color: Kulay ng accent
   date_format: Format ng petsa
   icon_pack:
+    available: Magagamit na Mga Icon Pack
     label: Icon pack
+    selected: Mga Aktibong Icon Pack
   language: Wika
+  resource:
+    author: May-akda
+    description: Paglalarawan
+    tags: Mga tag
   startup: Patakbuhin sa Startup?
   theme:
-    add: Magdagdag ng tema
-    added: Naidagdag na ang tema
-    author: May -akda
-    available: Magagamit
-    description: Paglalarawan
-    enabled: Pinagana ang mga tema
-    label: Impormasyon sa Tema
-    placeholder: Piliin ang TEMA
-    selected: Napili
-    tags: Tags
+    available: Magagamit na Mga Tema
+    label: Mga tema
+    selected: Mga Aktibong Tema
   wallpaper:
     select: Piliin ang wallpaper
 header:
@@ -217,6 +231,10 @@ toolbar:
   delay_to_show: Pagkaantala sa pagpapakita
   enable: Paganahin ang magarbong toolbar
   height: Taas
+  hide_mode:
+    always: Laging
+    never: Hindi kailanman
+    on_overlap: Sa overlap
   label: Toolbar
   placeholder:
     author: May -akda
@@ -251,14 +269,25 @@ weg:
   dock_side: Posisyon
   enable: Paganahin ang pantalan/taskbar
   gap: Gap
+  hide_mode:
+    always: Laging
+    never: Hindi kailanman
+    on_overlap: Sa overlap
   items:
     gap: Puwang sa pagitan ng mga item
     label: Mga item
     size: Laki ng item
+    temporal_visibility:
+      all: Lahat
+      label: Visibility ng Mga Na-unpin na Item
+      on_monitor: Sa Monitor
     visible_separators: Visible Separator
     zoom_size: Zoom na laki (ginamit para sa mga tema)
   label: Dock/Taskbar
   margin: Margin
+  mode:
+    full_width: Buong lapad ng screen
+    min_content: Maliit hangga't maaari
   padding: Padding
   use_multiple_monitor_overlap_logic: Gumamit ng partikular na display sa halip na iisang focus logic
   width: Lapad

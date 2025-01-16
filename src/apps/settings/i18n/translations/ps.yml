@@ -1,5 +1,8 @@
 app_launcher:
   enable: د اپلیکیشن لیسچر وړ کړئ
+  launch_on:
+    mouse_over: موږک پورته کړ
+    primary: لومړني
   monitor: څارنه کول
   runners:
     cmd: قومانده
@@ -49,9 +52,20 @@ apps_configurations:
     id: پېژنيزه
     kind: د
     matching_strategy: برابرول
+    matching_strategy_option:
+      contains: لري
+      ends_with: سره پای ته رسیږي
+      equals: مساوي
+      regex: منظم بیان
+      starts_with: سره پیل کیږي
     negation: غفلت کول
     or: یا
     remove: بلاک ړنګ کړئ
+    type:
+      class: ټولګي
+      exe: Exe
+      path: لاره
+      title: عنوان
   import: واردول
   new: نوی
   search: لټون
@@ -67,6 +81,7 @@ devtools:
   install_folder: لګول فولډر
   load: بار
   settings_file: د امستنې دوتنه
+  simulate_fullscreen: د بشپړ سکرین پیښې انډول کړئ
 extras:
   discord: ډارول
   exit: پریښودل / وتل
@@ -78,20 +93,19 @@ general:
   accent_color: تیزس رنګ
   date_format: د نیټې ب .ه
   icon_pack:
+    available: د آیکون کڅوړې شتون لري
     label: آیکون کڅوړه
+    selected: د فعال آیکون بسته
   language: ژبه
+  resource:
+    author: لیکوال
+    description: تفصیل
+    tags: ټګونه
   startup: په پیل کې چلول؟
   theme:
-    add: موضوع اضافه کړئ
-    added: موضوع لا دمخه اضافه شوې
-    author: لیکوال
-    available: شتون لري
-    description: تفصیل
-    enabled: د لاسرسي وړ
-    label: د موضوع معلومات
-    placeholder: موضوع وټاکئ
-    selected: ټاکل شوی
-    tags: ټاګز
+    available: شته موضوعات
+    label: موضوعات
+    selected: فعال موضوعات
   wallpaper:
     select: وال پیپر غوره کړئ
 header:
@@ -211,6 +225,10 @@ toolbar:
   delay_to_show: د ښودلو لپاره ځنډ
   enable: د فینسي تورې پټه وړتیا وړ کړئ
   height: لوړوالی
+  hide_mode:
+    always: تل
+    never: هیڅکله نه
+    on_overlap: پر اوورلیپ
   label: توکپټه
   placeholder:
     author: لیکوال
@@ -243,14 +261,25 @@ weg:
   dock_side: موقعیت
   enable: دوک / ټاسک بار فعال کړئ
   gap: تشې
+  hide_mode:
+    always: تل
+    never: هیڅکله نه
+    on_overlap: پر اوورلیپ
   items:
     gap: د توکو تر مینځ فضا
     label: توکي
     size: د توکي اندازه
+    temporal_visibility:
+      all: ټول
+      label: د ناپاک شوي توکو لید لید
+      on_monitor: په مانیټر کې
     visible_separators: لیدلي جلا کونکي
     zoom_size: زوم شوی اندازه (د موضوعاتو لپاره کارول کیږي)
   label: ډیک / ټاسک بار
   margin: حاشیه
+  mode:
+    full_width: د بشپړ سکرین پلنوالی
+    min_content: کوچني لکه څنګه چې کیدی شي
   padding: غالۍ
   use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
   width: پلنوالی

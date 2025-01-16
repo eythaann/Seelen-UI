@@ -45,6 +45,7 @@ void async function main() {
 
   // Set app version
   fs.appendFileSync(msixCmdsPath, `setIdentity --packageVersion ${packageVersion}\n`);
+
   // Add main binary
   fs.appendFileSync(
     msixCmdsPath,
@@ -53,6 +54,15 @@ void async function main() {
     )}"\n`,
   );
 
+  // Add crash service
+  fs.appendFileSync(
+    msixCmdsPath,
+    `addFile --target "slu-service.exe" --source "${path.resolve(
+      `target/${target}/slu-service.exe`,
+    )}"\n`,
+  );
+
+  // Add resources
   tauriConfig.bundle.resources.forEach((pattern) => {
     let files = glob.sync(pattern, { nodir: true });
     files.forEach((file) => {

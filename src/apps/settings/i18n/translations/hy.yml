@@ -1,5 +1,8 @@
 app_launcher:
   enable: Միացնել ծրագրի արձակումը
+  launch_on:
+    mouse_over: Մկնիկը վերջացել է
+    primary: Առաջնային
   monitor: Մոնիտոր, ցույց տալու համար
   runners:
     cmd: Հրաման
@@ -50,9 +53,20 @@ apps_configurations:
     id: Նույնացնող
     kind: Նույնացնել ըստ
     matching_strategy: Համապատասխան ռազմավարություն
+    matching_strategy_option:
+      contains: Պարունակում է
+      ends_with: Ավարտվում է
+      equals: Հավասար է
+      regex: Կանոնավոր արտահայտություն
+      starts_with: Սկսվում է
     negation: Ժխտել համապատասխանությունը
     or: ԿԱՄ
     remove: Delete նջել բլոկը
+    type:
+      class: Դասարան
+      exe: Exe
+      path: Ճանապարհ
+      title: Վերնագիր
   import: Ներմուծում
   new: Նոր
   search: Որոնել
@@ -68,6 +82,7 @@ devtools:
   install_folder: Տեղադրման պանակ
   load: Բեռ
   settings_file: Կարգավորումներ ֆայլ
+  simulate_fullscreen: Ամբողջաէկրան իրադարձությունների նմանակում
 extras:
   discord: Տարաձայնություն
   exit: Հանգստացեք / Ելք
@@ -79,20 +94,19 @@ general:
   accent_color: Շեշտադրիչ գույն
   date_format: Ամսաթիվ ձեւաչափ
   icon_pack:
+    available: Հասանելի պատկերակների փաթեթներ
     label: Սրբապատկերներ
+    selected: Ակտիվ պատկերակների փաթեթներ
   language: Լեզու
+  resource:
+    author: Հեղինակ
+    description: Նկարագրություն
+    tags: Պիտակներ
   startup: 'Գործարկման վրա գործարկեք:'
   theme:
-    add: Ավելացնել թեման
-    added: Թեման արդեն ավելացրեց
-    author: Հեղինակ
-    available: Մատչելի
-    description: Նկարագրություն
-    enabled: Միացված թեմաներ
-    label: Թեման տեղեկատվություն
-    placeholder: Ընտրեք թեման
-    selected: Ընտրված
-    tags: Պիտակներ
+    available: Հասանելի թեմաներ
+    label: Թեմաներ
+    selected: Ակտիվ թեմաներ
   wallpaper:
     select: Ընտրեք Պաստառ
 header:
@@ -215,6 +229,10 @@ toolbar:
   delay_to_show: Ցուցադրման ուշացում
   enable: Միացնել Fancy Toolbar- ը
   height: Բարձրություն
+  hide_mode:
+    always: Միշտ
+    never: Երբեք
+    on_overlap: Համընկնման վրա
   label: Գործիքագոտու
   placeholder:
     author: Հեղինակ
@@ -249,14 +267,25 @@ weg:
   dock_side: Դիրք
   enable: Միացնել Dock / Taskbar
   gap: Բացվածք
+  hide_mode:
+    always: Միշտ
+    never: Երբեք
+    on_overlap: Համընկնման վրա
   items:
     gap: Տարածություն իրերի միջեւ
     label: Իրերը
     size: Ապրանքի չափը
+    temporal_visibility:
+      all: Բոլորը
+      label: Չամրացված տարրերի տեսանելիություն
+      on_monitor: Մոնիտորի վրա
     visible_separators: Տեսանելի տարանջատիչներ
     zoom_size: Խոշորացված չափը (օգտագործվում է թեմաների համար)
   label: Dock / Taskbar
   margin: Լուսանցք
+  mode:
+    full_width: Ամբողջ էկրանի լայնությունը
+    min_content: Փոքր, որքան կարող է լինել
   padding: Լիցք
   use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
   width: Լայնություն

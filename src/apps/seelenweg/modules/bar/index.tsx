@@ -1,9 +1,4 @@
-import {
-  HideMode,
-  SeelenWegMode,
-  SeelenWegSide,
-  WegItemType,
-} from '@seelen-ui/lib';
+import { HideMode, SeelenWegMode, SeelenWegSide, WegItemType } from '@seelen-ui/lib';
 import { Reorder } from 'framer-motion';
 import { useCallback, useLayoutEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -35,17 +30,22 @@ const Separator2: SeparatorWegItem = {
   type: WegItemType.Separator,
 };
 
-function shouldBeHidden(hideMode: HideMode, isActive: boolean, isOverlaped: boolean, associatedViewCounter: number) {
+function shouldBeHidden(
+  hideMode: HideMode,
+  isActive: boolean,
+  isOverlaped: boolean,
+  associatedViewCounter: number,
+) {
   let shouldBeHidden = false;
   switch (hideMode) {
     case HideMode.Always:
-      shouldBeHidden = !isActive && (associatedViewCounter == 0);
+      shouldBeHidden = !isActive && associatedViewCounter == 0;
       break;
     case HideMode.Never:
       shouldBeHidden = false;
       break;
     case HideMode.OnOverlap:
-      shouldBeHidden = !isActive && isOverlaped && (associatedViewCounter == 0);
+      shouldBeHidden = !isActive && isOverlaped && associatedViewCounter == 0;
   }
   return shouldBeHidden;
 }
@@ -72,8 +72,7 @@ export function SeelenWeg() {
   const { t } = useTranslation();
 
   useWindowFocusChange((focused) => {
-    if (focused)
-      setAssociatedViewCounter(0);
+    if (focused) setAssociatedViewCounter(0);
     setActive(focused);
   });
 
@@ -148,7 +147,11 @@ export function SeelenWeg() {
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
 
-  const projectSwItem = (item: SwItem) => ItemByType(item, (isOpen) => setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen)));
+  const shit = useCallback((isOpen: boolean) => {
+    setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen));
+  }, []);
+
+  const projectSwItem = (item: SwItem) => ItemByType(item, shit);
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t)}>
@@ -163,7 +166,8 @@ export function SeelenWeg() {
           'full-width': settings.mode === SeelenWegMode.FullWidth,
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped, associatedViewCounter),
           delayed,
-        })}>
+        })}
+      >
         <BackgroundByLayersV2 prefix="taskbar" />
         {[
           ...pinnedOnLeft.map(projectSwItem),
@@ -196,26 +200,26 @@ export function SeelenWeg() {
 }
 
 function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
-  if (item.type === WegItemType.Pinned && item.path) {
+  if (item.type === WegItemType.Pinned) {
     if (
-      item.execution_command.startsWith('shell:AppsFolder') ||
-      item.execution_command.endsWith('.exe')
+      item.path.toLowerCase().endsWith('.exe') ||
+      item.relaunchCommand.toLowerCase().includes('.exe')
     ) {
-      return <UserApplication key={item.execution_command} item={item} onAssociatedViewOpenChanged={callback} />;
+      return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
     }
-    return <FileOrFolder key={item.execution_command} item={item} />;
+    return <FileOrFolder key={item.id} item={item} />;
   }
 
-  if (item.type === WegItemType.Temporal && item.path) {
-    return <UserApplication key={item.execution_command} item={item} onAssociatedViewOpenChanged={callback} />;
+  if (item.type === WegItemType.Temporal) {
+    return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
   }
 
   if (item.type === WegItemType.Media) {
-    return <MediaSession key="media-item" item={item} />;
+    return <MediaSession key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.StartMenu) {
-    return <StartMenu key="start-menu" item={item} />;
+    return <StartMenu key={item.id} item={item} />;
   }
 
   return null;

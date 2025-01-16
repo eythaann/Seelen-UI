@@ -1,4 +1,4 @@
-use std::{collections::HashMap, path::PathBuf, sync::Arc, time::Duration};
+use std::{collections::HashMap, ffi::OsStr, path::PathBuf, sync::Arc, time::Duration};
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -25,9 +25,8 @@ use windows::{
             IMMNotificationClient, IMMNotificationClient_Impl, ISimpleAudioVolume,
             MMDeviceEnumerator, DEVICE_STATE_ACTIVE,
         },
-        Storage::EnhancedStorage::PKEY_FileDescription,
         System::Com::{CLSCTX_ALL, STGM_READ},
-        UI::Shell::{PropertiesSystem::PROPERTYKEY, SIGDN_NORMALDISPLAY},
+        UI::Shell::PropertiesSystem::PROPERTYKEY,
     },
 };
 use windows_core::Interface;
@@ -35,10 +34,11 @@ use windows_core::Interface;
 use crate::{
     error_handler::Result,
     event_manager, log_error,
+    modules::start::application::START_MENU_MANAGER,
     seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
     utils::pcwstr,
-    windows_api::{Com, WindowEnumerator, WindowsApi},
+    windows_api::{process::Process, Com, WindowsApi},
 };
 
 use super::domain::{
@@ -475,16 +475,10 @@ impl MediaManager {
 
             let name;
             let icon_path;
-            match WindowsApi::exe_path_by_process(session.GetProcessId()?) {
+            let process = Process::from_id(session.GetProcessId()?);
+            match process.program_path() {
                 Ok(path) => {
-                    let shell_item = WindowsApi::get_shell_item(&path)?;
-                    name = match shell_item.GetString(&PKEY_FileDescription) {
-                        Ok(description) => description.to_string()?,
-                        Err(_) => shell_item
-                            .GetDisplayName(SIGDN_NORMALDISPLAY)?
-                            .to_string()?,
-                    }
-                    .replace(".exe", "");
+                    name = WindowsApi::get_executable_display_name(&path)?;
                     icon_path = extract_and_save_icon_from_file(&path)
                         .ok()
                         .map(|p| p.to_string_lossy().to_string());
@@ -566,32 +560,38 @@ impl MediaManager {
         &mut self,
         session: GlobalSystemMediaTransportControlsSession,
     ) -> Result<()> {
-        let source_app_user_model_id = session.SourceAppUserModelId()?.to_string_lossy();
+        let source_app_umid = session.SourceAppUserModelId()?.to_string_lossy();
         let properties = session.TryGetMediaPropertiesAsync()?.get()?;
 
         let playback_info = session.GetPlaybackInfo()?;
         let status = playback_info.PlaybackStatus()?;
 
-        // this is only needed when the player is not a uwp app like firefox player as example
-        let owner = WindowEnumerator::new().find(|w| {
-            if let Some(id) = w.app_user_model_id() {
-                return id == source_app_user_model_id;
+        let display_name = if WindowsApi::is_uwp_package_id(&source_app_umid) {
+            WindowsApi::get_uwp_app_info(&source_app_umid)?
+                .DisplayInfo()?
+                .DisplayName()?
+                .to_string_lossy()
+        } else {
+            let shortcut = START_MENU_MANAGER
+                .load()
+                .search_shortcut_with_same_umid(&source_app_umid);
+            match shortcut {
+                Some(shortcut) => shortcut
+                    .file_stem()
+                    .unwrap_or_else(|| OsStr::new("Unknown"))
+                    .to_string_lossy()
+                    .to_string(),
+                None => "Unknown".to_string(),
             }
-            false
-        })?;
+        };
 
         self.playing.push(MediaPlayer {
-            id: source_app_user_model_id.clone(),
+            id: source_app_umid.clone(),
             title: properties.Title().unwrap_or_default().to_string_lossy(),
             author: properties.Artist().unwrap_or_default().to_string_lossy(),
-            owner: owner.map(|w| MediaPlayerOwner {
-                name: w
-                    .app_display_name()
-                    .unwrap_or_else(|_| "Unknown App".to_string()),
-                icon_path: w
-                    .app_user_model_id()
-                    .and_then(|umid| extract_and_save_icon_umid(&umid).ok())
-                    .or_else(|| w.exe().and_then(extract_and_save_icon_from_file).ok()),
+            owner: Some(MediaPlayerOwner {
+                name: display_name,
+                icon_path: extract_and_save_icon_umid(&source_app_umid).ok(),
             }),
             thumbnail: properties
                 .Thumbnail()
@@ -603,13 +603,13 @@ impl MediaManager {
 
         // listen for media transport events
         self.media_player_event_tokens.insert(
-            source_app_user_model_id.clone(),
+            source_app_umid.clone(),
             (
                 session.MediaPropertiesChanged(&self.media_player_properties_event_handler)?,
                 session.PlaybackInfoChanged(&self.media_player_playback_event_handler)?,
             ),
         );
-        self.media_players.insert(source_app_user_model_id, session);
+        self.media_players.insert(source_app_umid, session);
         Ok(())
     }
 

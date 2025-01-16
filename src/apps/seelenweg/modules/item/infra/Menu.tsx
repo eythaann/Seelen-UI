@@ -10,7 +10,6 @@ import { RootActions } from '../../shared/store/app';
 import { SwItem } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
-import { savePinnedItems } from '../../shared/store/storeApi';
 
 export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
   if (item.type === WegItemType.Media) {
@@ -20,7 +19,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
         label: t('media_menu.remove'),
         icon: <Icon iconName="CgExtensionRemove" />,
         onClick() {
-          store.dispatch(RootActions.removeMediaModule());
+          store.dispatch(RootActions.remove(item.id));
         },
       },
     ];
@@ -33,12 +32,13 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
         label: t('start_menu.remove'),
         icon: <Icon iconName="CgExtensionRemove" />,
         onClick() {
-          store.dispatch(RootActions.removeStartModule());
+          store.dispatch(RootActions.remove(item.id));
         },
       },
     ];
   }
 
+  // File or Folder pinned items
   if (item.type === WegItemType.Pinned) {
     return [
       {
@@ -46,8 +46,7 @@ export function getMenuForItem(t: TFunction, item: SwItem): ItemType[] {
         label: t('app_menu.unpin'),
         icon: <Icon iconName="RiUnpinLine" />,
         onClick() {
-          store.dispatch(RootActions.unpin(item));
-          savePinnedItems();
+          store.dispatch(RootActions.remove(item.id));
         },
       },
       {

@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktivéiert App Launcher
+  launch_on:
+    mouse_over: Maus iwwer
+    primary: Primär
   monitor: Monitor fir ze weisen
   runners:
     cmd: Kommun de Kommentar
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifizéierer
     kind: Identifizéieren duerch
     matching_strategy: Passende Strategie
+    matching_strategy_option:
+      contains: Enthält
+      ends_with: Enn mat
+      equals: Gläichzäiteg
+      regex: Regelméisseg Ausdrock
+      starts_with: Fänkt mat
     negation: Negate passend
     or: Oder
     remove: Läschen Block
+    type:
+      class: Klass
+      exe: Exe
+      path: Wee
+      title: Titel
   import: Importéieren
   new: Nei
   search: Sichen
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installatioun Dossier
   load: Lueden
   settings_file: Settytout-Datei
+  simulate_fullscreen: Simuléiert Vollbild Event
 extras:
   discord: Diskord
   exit: Ophalen / erausfannen
@@ -79,20 +94,19 @@ general:
   accent_color: Akzenter Faarf
   date_format: Datum Format
   icon_pack:
+    available: Verfügbar Ikon Packs
     label: ICON Tass
+    selected: Aktiv Ikon Packs
   language: Sprooche
+  resource:
+    author: Auteur
+    description: Beschreiwung
+    tags: Tags
   startup: Run op Startup?
   theme:
-    add: Füügt Thema
-    added: Thema scho bäigefüügt
-    author: Auteur
-    available: Liwwerungen
-    description: Broessdatsch
-    enabled: Aktivéiert Themen
-    label: Thema Informatioun
-    placeholder: Wielt Thema
-    selected: Allgemeng
-    tags: Tasmmenzwierk
+    available: Verfügbar Themen
+    label: Themen
+    selected: Aktiv Themen
   wallpaper:
     select: Wielt Wallpaper
 header:
@@ -213,6 +227,10 @@ toolbar:
   delay_to_show: Verspéidung fir ze weisen
   enable: Aktivéiert Fore Toolbar
   height: Héicht
+  hide_mode:
+    always: Ëmmer
+    never: Ni
+    on_overlap: Op Iwwerlappung
   label: TO-tcstar
   placeholder:
     author: Auteur
@@ -247,14 +265,25 @@ weg:
   dock_side: Positioun un
   enable: Aktivéiert Dock / Taskbar
   gap: Knënn
+  hide_mode:
+    always: Ëmmer
+    never: Ni
+    on_overlap: Op Iwwerlappung
   items:
     gap: Raum tëscht Artikelen
     label: Artikelen
     size: Telefonsgrouss
+    temporal_visibility:
+      all: All
+      label: Unpinned Elementer Visibilitéit
+      on_monitor: Op Monitor
     visible_separators: Sechsi seichtbar Seperure
     zoom_size: Zoomed Gréisst (benotzt fir Themen)
   label: Dock / Taskbar
   margin: Den Jean-Margin
+  mode:
+    full_width: Voll Écran Breet
+    min_content: Kleng wéi méiglech
   padding: Padding
   use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
   width: Breet

@@ -1,9 +1,9 @@
-import { SeelenCommand } from '@seelen-ui/lib';
+import { IconPackManager, SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { Checkbox, Tooltip } from 'antd';
+import { Checkbox, Spin, Tooltip } from 'antd';
 import { motion } from 'framer-motion';
-import { KeyboardEventHandler, useRef, useState } from 'react';
+import { KeyboardEventHandler, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -16,6 +16,7 @@ import { Item } from './Item';
 import { RunnerSelector } from './RunnerSelector';
 
 export function Launcher() {
+  const [loading, setLoading] = useState(true);
   const [showHelp, setShowHelp] = useState(true);
   const [showHistory, setShowHistory] = useState(false);
   const [_command, _setCommand] = useState('');
@@ -38,6 +39,16 @@ export function Launcher() {
       _setCommand('');
       getCurrentWindow().hide();
     }
+  });
+
+  useEffect(() => {
+    async function loadIcons() {
+      for (const app of apps) {
+        await IconPackManager.extractIcon(app);
+      }
+    }
+    // we load all icons one by one first to avoid load all icons at the same time and block the UI
+    loadIcons().finally(() => setLoading(false));
   });
 
   const command = _command.trim().toLowerCase();
@@ -106,13 +117,19 @@ export function Launcher() {
       </div>
       <Tooltip open={showHelp} title="Tab / Shift + Tab" placement="left">
         <div className="launcher-body">
-          {apps.map((item) => (
-            <Item
-              key={item.path}
-              item={item}
-              hidden={!item.label.toLowerCase().includes(command)}
-            />
-          ))}
+          {loading ? (
+            <div className="launcher-loading">
+              <Spin size="large" />
+            </div>
+          ) : (
+            apps.map((item) => (
+              <Item
+                key={item.path}
+                item={item}
+                hidden={!item.path.toLowerCase().includes(command)}
+              />
+            ))
+          )}
         </div>
       </Tooltip>
       <div className="launcher-footer">

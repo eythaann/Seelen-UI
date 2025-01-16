@@ -1,18 +1,21 @@
 use tauri::{path::BaseDirectory, Manager};
 
-use crate::{error_handler::Result, seelen::get_app_handle, utils::copy_dir_all};
+use crate::{
+    error_handler::Result,
+    seelen::get_app_handle,
+    utils::{constants::SEELEN_COMMON, copy_dir_all},
+};
 
 pub struct RestorationAndMigration;
 
 impl RestorationAndMigration {
     pub fn recreate_profiles() -> Result<()> {
-        let path = get_app_handle().path();
-        let user_profiles = path.app_data_dir()?.join("profiles");
-        if user_profiles.is_dir() && std::fs::read_dir(&user_profiles)?.next().is_some() {
+        let user_profiles = SEELEN_COMMON.user_profiles_path();
+        if user_profiles.is_dir() && std::fs::read_dir(user_profiles)?.next().is_some() {
             return Ok(());
         }
 
-        let bundled_profiles = path.resource_dir()?.join("static/profiles");
+        let bundled_profiles = SEELEN_COMMON.bundled_profiles_path();
         copy_dir_all(bundled_profiles, user_profiles)?;
         Ok(())
     }
@@ -34,6 +37,9 @@ impl RestorationAndMigration {
             std::fs::remove_dir_all(&old_path)?;
         }
 
+        // temporal folder to group artifacts
+        std::fs::create_dir_all(SEELEN_COMMON.app_temp_dir())?;
+
         let create_if_needed = move |folder: &str| -> Result<()> {
             let path = data_path.join(folder);
             if !path.exists() {
@@ -41,11 +47,10 @@ impl RestorationAndMigration {
             }
             Ok(())
         };
-
         create_if_needed("themes")?;
         create_if_needed("layouts")?;
         create_if_needed("placeholders")?;
-        create_if_needed("icons/system")?;
+        create_if_needed("icons")?;
         create_if_needed("wallpapers")?;
         create_if_needed("plugins")?;
         create_if_needed("widgets")?;

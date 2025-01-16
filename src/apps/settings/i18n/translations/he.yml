@@ -1,5 +1,8 @@
 app_launcher:
   enable: הפעל משגר אפליקציות
+  launch_on:
+    mouse_over: העכבר מעל
+    primary: יְסוֹדִי
   monitor: צג כדי להציג
   runners:
     cmd: פְּקוּדָה
@@ -48,9 +51,20 @@ apps_configurations:
     id: מזהה
     kind: לזהות על ידי
     matching_strategy: אסטרטגיה תואמת
+    matching_strategy_option:
+      contains: מכיל
+      ends_with: מסתיים ב
+      equals: שווה
+      regex: ביטוי רגיל
+      starts_with: מתחיל עם
     negation: שולל התאמה
     or: אוֹ
     remove: מחק בלוק
+    type:
+      class: מַחלָקָה
+      exe: Exe
+      path: נָתִיב
+      title: כּוֹתֶרֶת
   import: יְבוּא
   new: חָדָשׁ
   search: לחפש
@@ -66,6 +80,7 @@ devtools:
   install_folder: תיקיית התקנה
   load: לִטעוֹן
   settings_file: קובץ הגדרות
+  simulate_fullscreen: הדמיית אירוע במסך מלא
 extras:
   discord: מַחֲלוֹקֶת
   exit: יצא/יציאה
@@ -77,20 +92,19 @@ general:
   accent_color: צבע הדגשה
   date_format: פורמט תאריך
   icon_pack:
+    available: חבילות אייקונים זמינות
     label: חבילות אייקונים
+    selected: ערכות אייקונים פעילות
   language: שפה
+  resource:
+    author: מְחַבֵּר
+    description: תֵאוּר
+    tags: תגים
   startup: לרוץ בהפעלה?
   theme:
-    add: הוסף נושא
-    added: הנושא כבר הוסיף
-    author: מְחַבֵּר
-    available: זמין
-    description: תיאור
-    enabled: נושאים מופעלים
-    label: מידע על נושא
-    placeholder: בחר נושא
-    selected: נבחר
-    tags: תגיות
+    available: ערכות נושא זמינות
+    label: ערכות נושא
+    selected: ערכות נושא פעילות
   wallpaper:
     select: בחר טפט
 header:
@@ -210,6 +224,10 @@ toolbar:
   delay_to_show: עיכוב להצגה
   enable: אפשר סרגל כלים מפואר
   height: גוֹבַה
+  hide_mode:
+    always: תָמִיד
+    never: לְעוֹלָם לֹא
+    on_overlap: על חפיפה
   label: סרגל כלים
   placeholder:
     author: מְחַבֵּר
@@ -242,14 +260,25 @@ weg:
   dock_side: מַצָב
   enable: הפעל את המזח/שורת המשימות
   gap: פער
+  hide_mode:
+    always: תָמִיד
+    never: לְעוֹלָם לֹא
+    on_overlap: על חפיפה
   items:
     gap: שטח בין פריטים
     label: פריטים
     size: גודל פריט
+    temporal_visibility:
+      all: כֹּל
+      label: נראות פריטים לא מוצמדים
+      on_monitor: במוניטור
     visible_separators: מפרידים גלויים
     zoom_size: גודל מתקרב (משמש לנושאים)
   label: שורת המזח/המשימות
   margin: שולים
+  mode:
+    full_width: רוחב מסך מלא
+    min_content: קטן ככל שניתן
   padding: ריפוד
   use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
   width: רוֹחַב
