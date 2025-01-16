@@ -259,6 +259,10 @@ weg:
   items:
     gap: අයිතම අතර අවකාශය
     label: අයිතම
+    pinned_visibility:
+      always: සෑම විටම
+      label: අමුණන ලද අයිතම දෘශ්‍යතාව
+      when_primary: මොනිටරය ප්රාථමික වන විට
     size: අයිතමයේ ප්රමාණය
     temporal_visibility:
       all: සියල්ල

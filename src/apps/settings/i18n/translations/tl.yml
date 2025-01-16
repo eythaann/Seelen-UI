@@ -266,6 +266,10 @@ weg:
   items:
     gap: Puwang sa pagitan ng mga item
     label: Mga item
+    pinned_visibility:
+      always: Laging
+      label: Visibility ng Mga Naka-pin na Item
+      when_primary: Kapag ang monitor ay pangunahin
     size: Laki ng item
     temporal_visibility:
       all: Lahat

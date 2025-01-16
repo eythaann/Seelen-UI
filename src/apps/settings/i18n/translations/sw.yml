@@ -258,6 +258,10 @@ weg:
   items:
     gap: Nafasi kati ya vitu
     label: Vitu
+    pinned_visibility:
+      always: Daima
+      label: Mwonekano wa Vipengee Vilivyobandikwa
+      when_primary: Wakati kufuatilia ni msingi
     size: Saizi ya bidhaa
     temporal_visibility:
       all: Wote

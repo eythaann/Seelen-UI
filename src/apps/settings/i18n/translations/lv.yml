@@ -260,6 +260,10 @@ weg:
   items:
     gap: Vieta starp priekšmetiem
     label: Priekšmeti
+    pinned_visibility:
+      always: Vienmēr
+      label: Piesprausto vienumu redzamība
+      when_primary: Kad monitors ir primārais
     size: Vienuma izmērs
     temporal_visibility:
       all: Visi

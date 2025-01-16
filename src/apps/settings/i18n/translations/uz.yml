@@ -264,6 +264,10 @@ weg:
   items:
     gap: Buyumlar orasidagi bo'shliq
     label: Narsalar
+    pinned_visibility:
+      always: Har doim
+      label: Belgilangan elementlarning ko'rinishi
+      when_primary: Monitor asosiy bo'lganda
     size: Element hajmi
     temporal_visibility:
       all: Hammasi

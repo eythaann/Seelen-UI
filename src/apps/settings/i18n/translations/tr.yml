@@ -262,6 +262,10 @@ weg:
   items:
     gap: Öğeler Arası Boşluk
     label: Öğeler
+    pinned_visibility:
+      always: Her zaman
+      label: Sabitlenmiş Öğelerin Görünürlüğü
+      when_primary: Monitör birincil olduğunda
     size: Öğe Boyutu
     temporal_visibility:
       all: Tüm

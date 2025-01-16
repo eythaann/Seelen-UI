@@ -262,6 +262,10 @@ weg:
   items:
     gap: Spazju bejn l-oġġetti
     label: Oġġetti
+    pinned_visibility:
+      always: Dejjem
+      label: Oġġetti Pinnjati Viżibilità
+      when_primary: Meta l-monitor huwa primarju
     size: Daqs tal-oġġett
     temporal_visibility:
       all: Kollha

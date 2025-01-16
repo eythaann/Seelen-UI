@@ -262,6 +262,10 @@ weg:
   items:
     gap: Ruang antar item
     label: Item
+    pinned_visibility:
+      always: Selalu
+      label: Visibilitas Item yang Disematkan
+      when_primary: Saat monitor menjadi yang utama
     size: Ukuran item
     temporal_visibility:
       all: Semua

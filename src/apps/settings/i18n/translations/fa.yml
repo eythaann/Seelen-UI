@@ -261,6 +261,10 @@ weg:
   items:
     gap: فضای بین موارد
     label: موارد
+    pinned_visibility:
+      always: همیشه
+      label: قابلیت مشاهده موارد پین شده
+      when_primary: وقتی مانیتور اولیه است
     size: اندازه مورد
     temporal_visibility:
       all: همه

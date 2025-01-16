@@ -266,6 +266,10 @@ weg:
   items:
     gap: Espai entre articles
     label: Plantes
+    pinned_visibility:
+      always: Sempre
+      label: Visibilitat dels elements fixats
+      when_primary: Quan el monitor és principal
     size: Mida de l'article
     temporal_visibility:
       all: Tots

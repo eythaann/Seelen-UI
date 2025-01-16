@@ -259,6 +259,10 @@ weg:
   items:
     gap: Cîh di navbera tiştan de
     label: Hevokên
+    pinned_visibility:
+      always: Herdem
+      label: Dîtina Tiştên Pînekirî
+      when_primary: Dema ku çavdêriya sereke ye
     size: Mezinahiya tiştê
     temporal_visibility:
       all: Gişt

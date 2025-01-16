@@ -264,6 +264,10 @@ weg:
   items:
     gap: Rum mellem genstande
     label: Genstande
+    pinned_visibility:
+      always: Altid
+      label: Fastgjorte elementers synlighed
+      when_primary: Når monitoren er primær
     size: Varestørrelse
     temporal_visibility:
       all: Alle

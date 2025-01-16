@@ -257,6 +257,10 @@ weg:
   items:
     gap: الفراغ بين العناصر
     label: العناصر
+    pinned_visibility:
+      always: دائماً
+      label: رؤية العناصر المثبتة
+      when_primary: عندما تكون الشاشة أساسية
     size: حجم العنصر
     temporal_visibility:
       all: الجميع

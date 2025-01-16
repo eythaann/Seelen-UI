@@ -264,6 +264,10 @@ weg:
   items:
     gap: Tilaa esineiden välillä
     label: Kohteet
+    pinned_visibility:
+      always: Aina
+      label: Kiinnitettyjen kohteiden näkyvyys
+      when_primary: Kun näyttö on ensisijainen
     size: Esineen koko
     temporal_visibility:
       all: Kaikki

@@ -264,6 +264,10 @@ weg:
   items:
     gap: Lle rhwng eitemau
     label: Eitemau
+    pinned_visibility:
+      always: Bob amser
+      label: Eitemau wedi'u Pinio Gwelededd
+      when_primary: Pan fydd y monitor yn gynradd
     size: Maint eitem
     temporal_visibility:
       all: Pawb

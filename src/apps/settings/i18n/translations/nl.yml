@@ -266,6 +266,10 @@ weg:
   items:
     gap: Ruimte tussen items
     label: Items
+    pinned_visibility:
+      always: Altijd
+      label: Zichtbaarheid van vastgezette items
+      when_primary: Wanneer de monitor primair is
     size: Item grootte
     temporal_visibility:
       all: Alle

@@ -261,6 +261,10 @@ weg:
   items:
     gap: Əşyalar arasındakı boşluq
     label: Maddələr
+    pinned_visibility:
+      always: Həmişə
+      label: Saxlanmış Elementlərin Görünüşü
+      when_primary: Monitor əsas olduqda
     size: Maddə ölçüsü
     temporal_visibility:
       all: Hamısı

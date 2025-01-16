@@ -266,6 +266,10 @@ weg:
   items:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha
+    pinned_visibility:
+      always: Had iyo jeer
+      label: Shayga Ku dheggan Muuqaal
+      when_primary: Marka kormeeruhu uu yahay aasaasiga
     size: Shayga cabirka
     temporal_visibility:
       all: Dhammaan

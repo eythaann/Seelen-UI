@@ -264,6 +264,10 @@ weg:
   items:
     gap: Utrymme mellan föremål
     label: Föremål
+    pinned_visibility:
+      always: Alltid
+      label: Synlighet för fästa objekt
+      when_primary: När monitorn är primär
     size: Objektstorlek
     temporal_visibility:
       all: Alla

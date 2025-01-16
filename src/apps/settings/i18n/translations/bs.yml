@@ -262,6 +262,10 @@ weg:
   items:
     gap: Prostor između predmeta
     label: Predmeti
+    pinned_visibility:
+      always: Uvijek
+      label: Vidljivost zakačenih stavki
+      when_primary: Kada je monitor primarni
     size: Veličina predmeta
     temporal_visibility:
       all: Sve
