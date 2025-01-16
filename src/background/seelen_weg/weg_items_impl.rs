@@ -51,6 +51,35 @@ fn item_contains_window(item: &WegItem, searching: isize) -> bool {
     }
 }
 
+fn temporalise_collection(source: &Vec<WegItem>) -> Vec<WegItem> {
+    let mut items = vec![];
+    for item in source {
+        match item {
+            WegItem::Temporal(pinned_weg_item_data) => {
+                let mut cloned = pinned_weg_item_data.clone();
+                cloned.set_pin_disabled(true);
+                items.push(WegItem::Temporal(cloned))
+            }
+            WegItem::Pinned(pinned_weg_item_data) => {
+                let mut cloned = pinned_weg_item_data.clone();
+                cloned.set_pin_disabled(true);
+                items.push(WegItem::Temporal(cloned))
+            }
+            WegItem::Separator { id: _ }
+            | WegItem::Media { id: _ }
+            | WegItem::StartMenu { id: _ } => {}
+        }
+    }
+
+    items
+}
+
+fn temporalise(items: &mut WegItems) {
+    items.left = temporalise_collection(&items.left);
+    items.center = temporalise_collection(&items.center);
+    items.right = temporalise_collection(&items.right);
+}
+
 impl WegItemsImpl {
     pub fn new() -> Self {
         WegItemsImpl {
@@ -303,7 +332,7 @@ impl WegItemsImpl {
                 }
                 (WegTemporalItemsVisibility::All, false) => {
                     let mut weg_items = self.clone();
-                    weg_items.items.temporalise();
+                    temporalise(&mut weg_items.items);
                     weg_items.items.sanitize();
                     result.insert(monitor_id, weg_items.items);
                 }
@@ -316,7 +345,7 @@ impl WegItemsImpl {
                 (WegTemporalItemsVisibility::OnMonitor, false) => {
                     let mut weg_items = self.clone();
                     weg_items.filter_by_monitor(&monitor_id);
-                    weg_items.items.temporalise();
+                    temporalise(&mut weg_items.items);
                     weg_items.items.sanitize();
                     result.insert(monitor_id, weg_items.items);
                 }
