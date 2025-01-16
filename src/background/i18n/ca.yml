@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     La IU de Seelen requereix el temps d'execució de Webview2 %{min_version} o
     superior. Si us plau, actualitzeu-lo.
+service:
+  not_running: El servei d'IU de Seelen no s'executa
+  not_running_description: >-
+    Seelen UI Service (servei slu) és una dependència/ajuda perquè l'aplicació
+    funcioni correctament.
+  not_running_ok: Iniciar servei

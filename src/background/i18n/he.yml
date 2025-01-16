@@ -6,3 +6,7 @@ runtime:
   outdated_description: >-
     ממשק המשתמש של Seelen דורש זמן ריצה של Webview2 %{min_version} ומעלה. אנא
     עדכן אותו.
+service:
+  not_running: שירות ממשק המשתמש של Seelen לא פועל
+  not_running_description: Seelen UI Service (slu-service) הוא תלות/עוזר כדי שהאפליקציה תפעל כראוי.
+  not_running_ok: התחל שירות

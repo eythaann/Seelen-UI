@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Seeleni kasutajaliides nõuab Webview2 Runtime %{min_version} või uuemat.
     Palun värskendage seda.
+service:
+  not_running: Seelen UI teenus ei tööta
+  not_running_description: >-
+    Seeleni kasutajaliidese teenus (slu-teenus) on rakenduse nõuetekohaseks
+    tööks sõltuvus/abimees.
+  not_running_ok: Käivitage teenus

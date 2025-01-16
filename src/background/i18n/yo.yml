@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Seelen UI nilo Webview2 Runtime %{min_version} tabi ga julọ. Jọwọ ṣe
     imudojuiwọn rẹ.
+service:
+  not_running: Seelen UI Service ko nṣiṣẹ
+  not_running_description: >-
+    Iṣẹ Seelen UI (iṣẹ slu-slu) jẹ igbẹkẹle/oluranlọwọ fun ohun elo lati ṣiṣẹ
+    daradara.
+  not_running_ok: Bẹrẹ iṣẹ

@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     સીલેન UI ને Webview2 રનટાઇમ %{min_version} અથવા ઉચ્ચની જરૂર છે. કૃપા કરીને
     તેને અપડેટ કરો.
+service:
+  not_running: સીલેન UI સેવા ચાલી રહી નથી
+  not_running_description: >-
+    સીલેન UI સેવા (સ્લુ-સર્વિસ) એ એપ્લિકેશનને યોગ્ય રીતે કાર્ય કરવા માટે એક
+    નિર્ભરતા/સહાયક છે.
+  not_running_ok: સેવા શરૂ કરો

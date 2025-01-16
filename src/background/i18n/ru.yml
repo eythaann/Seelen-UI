@@ -8,3 +8,9 @@ runtime:
   outdated_description: >-
     Для пользовательского интерфейса Seelen требуется среда выполнения Webview2
     %{min_version} или выше. Пожалуйста, обновите его.
+service:
+  not_running: Служба пользовательского интерфейса Seelen не работает
+  not_running_description: >-
+    Служба пользовательского интерфейса Seelen (slu-service) — это
+    зависимость/помощник для правильной работы приложения.
+  not_running_ok: Запустить службу

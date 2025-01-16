@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Seelen UI ji Webview2 Runtime %{min_version} an mezintir hewce dike. Ji
     kerema xwe wê nûve bikin.
+service:
+  not_running: Karûbarê UI ya Seelen nayê xebitandin
+  not_running_description: >-
+    Xizmeta UI ya Seelen (slu-xizmet) ji bo ku sepan bi rêkûpêk bixebite
+    pêwendiyek / arîkarek e.
+  not_running_ok: Xizmetê dest pê bikin

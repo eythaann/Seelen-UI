@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Η διεπαφή χρήστη Seelen απαιτεί Webview2 Runtime %{min_version} ή υψηλότερη.
     Ενημερώστε το.
+service:
+  not_running: Η υπηρεσία διεπαφής χρήστη Seelen δεν εκτελείται
+  not_running_description: >-
+    Η υπηρεσία Seelen UI (slu-service) είναι μια εξάρτηση/βοήθεια για τη σωστή
+    λειτουργία της εφαρμογής.
+  not_running_ok: Ξεκινήστε την υπηρεσία

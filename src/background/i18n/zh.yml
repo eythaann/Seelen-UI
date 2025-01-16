@@ -4,3 +4,7 @@ runtime:
   not_found_description: Seelen UI 需要 Webview2 运行时。请安装它。
   outdated: WebView2 运行时已过时
   outdated_description: Seelen UI 需要 Webview2 运行时 %{min_version} 或更高版本。请更新它。
+service:
+  not_running: Seelen UI 服务未运行
+  not_running_description: Seelen UI 服务（slu-service）是应用程序正常工作的依赖项/帮助程序。
+  not_running_ok: 启动服务

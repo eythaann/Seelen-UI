@@ -4,3 +4,9 @@ runtime:
   not_found_description: Seelen UI ទាមទារ Webview2 Runtime ។ សូមដំឡើងវា។
   outdated: WebView2 Runtime ហួសសម័យ
   outdated_description: Seelen UI ទាមទារ Webview2 Runtime %{min_version} ឬខ្ពស់ជាងនេះ។ សូមអាប់ដេតវា។
+service:
+  not_running: សេវា Seelen UI មិនដំណើរការទេ។
+  not_running_description: >-
+    Seelen UI Service (slu-service)
+    គឺជាការពឹងផ្អែក/ជំនួយសម្រាប់កម្មវិធីឱ្យដំណើរការបានត្រឹមត្រូវ។
+  not_running_ok: ចាប់ផ្តើមសេវាកម្ម

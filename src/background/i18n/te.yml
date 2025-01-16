@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Seelen UIకి Webview2 రన్‌టైమ్ %{min_version} లేదా అంతకంటే ఎక్కువ అవసరం.
     దయచేసి దీన్ని నవీకరించండి.
+service:
+  not_running: సీలెన్ UI సర్వీస్ అమలులో లేదు
+  not_running_description: >-
+    సీలెన్ UI సర్వీస్ (slu-service) అనేది యాప్ సరిగ్గా పని చేయడానికి
+    డిపెండెన్సీ/సహాయకం.
+  not_running_ok: సేవ ప్రారంభించండి

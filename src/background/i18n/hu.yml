@@ -8,3 +8,9 @@ runtime:
   outdated_description: >-
     A Seelen felhasználói felületéhez Webview2 Runtime %{min_version} vagy újabb
     szükséges. Kérjük, frissítse.
+service:
+  not_running: Seelen UI szolgáltatás nem fut
+  not_running_description: >-
+    A Seelen UI szolgáltatás (slu-szolgáltatás) egy függőség/segítő az
+    alkalmazás megfelelő működéséhez.
+  not_running_ok: Indítsa el a szolgáltatást

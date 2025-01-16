@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Giao diện người dùng Seelen yêu cầu Webview2 Runtime %{min_version} trở lên.
     Hãy cập nhật nó.
+service:
+  not_running: Dịch vụ giao diện người dùng Seelen không chạy
+  not_running_description: >-
+    Dịch vụ giao diện người dùng Seelen (slu-service) là một công cụ phụ
+    thuộc/trợ giúp để ứng dụng hoạt động bình thường.
+  not_running_ok: Bắt đầu dịch vụ

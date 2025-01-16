@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     UI Seelen Webview2 Runtime %{min_version} ё навтарро талаб мекунад. Лутфан
     онро навсозӣ кунед.
+service:
+  not_running: Seelen UI Service кор намекунад
+  not_running_description: >-
+    Seelen UI Service (slu-service) як вобастагӣ/ёрирасон барои дуруст кор
+    кардани барнома мебошад.
+  not_running_ok: Хидматро оғоз кунед

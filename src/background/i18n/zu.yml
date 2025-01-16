@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     I-Seelen UI idinga isikhathi sokusebenza se-Webview2 %{min_version} noma
     ngaphezulu. Sicela uyibuyekeze.
+service:
+  not_running: Isevisi ye-Seelen UI ayisebenzi
+  not_running_description: >-
+    Isevisi ye-Seelen UI (slu-service) incike/umsizi ukuze uhlelo lokusebenza
+    lusebenze kahle.
+  not_running_ok: Qala isevisi

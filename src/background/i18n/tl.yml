@@ -8,3 +8,9 @@ runtime:
   outdated_description: >-
     Ang Seelen UI ay nangangailangan ng Webview2 Runtime %{min_version} o mas
     mataas. Mangyaring i-update ito.
+service:
+  not_running: Hindi tumatakbo ang Seelen UI Service
+  not_running_description: >-
+    Ang Seelen UI Service (slu-service) ay isang dependency/helper para gumana
+    nang maayos ang app.
+  not_running_ok: Simulan ang serbisyo

@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Seelen UI د Webview2 Runtime %{min_version} یا لوړ ته اړتیا لري. مهرباني
     وکړئ تازه یې کړئ.
+service:
+  not_running: د سیلین UI خدمت نه روان دی
+  not_running_description: >-
+    د سیلین UI خدمت (slu-service) د ایپ لپاره د سم کار کولو لپاره انحصار / مرسته
+    کونکی دی.
+  not_running_ok: خدمت پیل کړئ

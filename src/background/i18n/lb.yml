@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Seelen UI erfuerdert Webview2 Runtime %{min_version} oder méi héich. Weg
     update et.
+service:
+  not_running: Seelen UI Service net lafen
+  not_running_description: >-
+    Seelen UI Service (slu-Service) ass eng Ofhängegkeet / Helfer fir d'App
+    richteg ze schaffen.
+  not_running_ok: Start Service

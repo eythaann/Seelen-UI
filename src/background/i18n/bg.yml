@@ -6,3 +6,9 @@ runtime:
   outdated_description: >-
     Seelen UI изисква Webview2 Runtime %{min_version} или по-нова версия. Моля,
     актуализирайте го.
+service:
+  not_running: Услугата Seelen UI не работи
+  not_running_description: >-
+    Seelen UI Service (slu-service) е зависимост/помощник за правилното
+    функциониране на приложението.
+  not_running_ok: Стартирайте услугата

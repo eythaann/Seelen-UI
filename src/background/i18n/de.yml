@@ -8,3 +8,9 @@ runtime:
   outdated_description: >-
     Für die Seelen-Benutzeroberfläche ist Webview2 Runtime %{min_version} oder
     höher erforderlich. Bitte aktualisieren Sie es.
+service:
+  not_running: Der Seelen-UI-Dienst läuft nicht
+  not_running_description: >-
+    Der Seelen UI Service (slu-service) ist eine Abhängigkeit/Helfer für die
+    ordnungsgemäße Funktion der App.
+  not_running_ok: Dienst starten
