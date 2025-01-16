@@ -73,6 +73,11 @@ impl Window {
         WindowsApi::get_window_app_user_model_id(self.0).ok()
     }
 
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-preventpinning
+    pub fn prevent_pinning(&self) -> bool {
+        WindowsApi::get_window_prevent_pinning(self.0).unwrap_or(false)
+    }
+
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
     pub fn relaunch_command(&self) -> Option<String> {
         WindowsApi::get_window_relaunch_command(self.0).ok()

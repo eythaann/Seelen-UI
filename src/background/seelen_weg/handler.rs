@@ -127,6 +127,7 @@ pub fn weg_pin_item(path: PathBuf) -> Result<()> {
         is_dir: path.is_dir(),
         relaunch_command: path.to_string_lossy().to_string(),
         windows: vec![],
+        pin_disabled: false,
     };
 
     if path.extension() == Some(OsStr::new("lnk")) {

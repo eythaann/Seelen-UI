@@ -62,8 +62,8 @@ use windows::{
         },
         Storage::{
             EnhancedStorage::{
-                PKEY_AppUserModel_ID, PKEY_AppUserModel_RelaunchCommand,
-                PKEY_AppUserModel_RelaunchDisplayNameResource,
+                PKEY_AppUserModel_ID, PKEY_AppUserModel_PreventPinning,
+                PKEY_AppUserModel_RelaunchCommand, PKEY_AppUserModel_RelaunchDisplayNameResource,
                 PKEY_AppUserModel_RelaunchIconResource, PKEY_FileDescription,
             },
             FileSystem::WIN32_FIND_DATAW,
@@ -524,6 +524,15 @@ impl WindowsApi {
             return Err("No AppUserModel_ID".into());
         }
         Ok(BSTR::try_from(&value)?.to_string())
+    }
+
+    pub fn get_window_prevent_pinning(hwnd: HWND) -> Result<bool> {
+        let store = Self::get_property_store_for_window(hwnd)?;
+        let value = unsafe { store.GetValue(&PKEY_AppUserModel_PreventPinning)? };
+        if value.is_empty() {
+            return Err("No AppUserModel_PreventPinning".into());
+        }
+        Ok(bool::try_from(&value)?)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
