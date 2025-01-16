@@ -2,7 +2,10 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::{
     handlers::SeelenEvent,
-    state::{PinnedWegItemData, WegAppGroupItem, WegItem, WegItems, WegTemporalItemsVisibility},
+    state::{
+        PinnedWegItemData, WegAppGroupItem, WegItem, WegItems, WegPinnedItemsVisibility,
+        WegTemporalItemsVisibility,
+    },
 };
 use std::{collections::HashMap, ffi::OsStr, sync::Arc};
 use tauri::Emitter;
@@ -36,6 +39,7 @@ pub enum ShouldGetInfoFrom {
 #[derive(Debug, Clone)]
 pub struct WegItemsImpl {
     items: WegItems,
+    pre_state: Option<HashMap<String, WegItems>>,
 }
 
 fn item_contains_window(item: &WegItem, searching: isize) -> bool {
@@ -51,18 +55,28 @@ impl WegItemsImpl {
     pub fn new() -> Self {
         WegItemsImpl {
             items: FULL_STATE.load().weg_items.clone(),
+            pre_state: None,
         }
     }
 
-    pub fn emit_to_webview(&self) -> Result<()> {
+    pub fn emit_to_webview(&mut self) -> Result<()> {
         let handle = get_app_handle();
-        for (monitor_id, items) in self.get_filtered_by_monitor()? {
-            handle.emit_to(
-                SeelenWeg::get_label(&monitor_id),
-                SeelenEvent::WegInstanceChanged,
-                items,
-            )?;
+        let current_state = self.get_filtered_by_monitor().ok();
+
+        if current_state != self.pre_state {
+            if let Some(items) = &current_state {
+                for (monitor_id, items) in items {
+                    handle.emit_to(
+                        SeelenWeg::get_label(monitor_id),
+                        SeelenEvent::WegInstanceChanged,
+                        items.clone(),
+                    )?;
+                }
+            }
+
+            self.pre_state = current_state;
         }
+
         Ok(())
     }
 
@@ -217,6 +231,7 @@ impl WegItemsImpl {
                 title: window.title(),
                 handle: window.address(),
             }],
+            pin_disabled: false,
         };
         self.items.center.push(WegItem::Temporal(data));
         Ok(())
@@ -276,14 +291,32 @@ impl WegItemsImpl {
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;
             }
-            let mode = state.get_weg_temporal_item_visibility(&monitor_id);
-            match mode {
-                WegTemporalItemsVisibility::All => {
+            let temporal_mode = state.get_weg_temporal_item_visibility(&monitor_id);
+            let pinned_mode = state.get_weg_pinned_item_visibility(&monitor_id);
+            let pinned_visible = pinned_mode == WegPinnedItemsVisibility::Always
+                || (pinned_mode == WegPinnedItemsVisibility::WhenPrimary
+                    && monitor.is_primary()?);
+
+            match (temporal_mode, pinned_visible) {
+                (WegTemporalItemsVisibility::All, true) => {
                     result.insert(monitor_id, self.items.clone());
                 }
-                WegTemporalItemsVisibility::OnMonitor => {
+                (WegTemporalItemsVisibility::All, false) => {
+                    let mut weg_items = self.clone();
+                    weg_items.items.temporalise();
+                    weg_items.items.sanitize();
+                    result.insert(monitor_id, weg_items.items);
+                }
+                (WegTemporalItemsVisibility::OnMonitor, true) => {
                     let mut weg_items = self.clone();
                     weg_items.filter_by_monitor(&monitor_id);
+                    weg_items.items.sanitize();
+                    result.insert(monitor_id, weg_items.items);
+                }
+                (WegTemporalItemsVisibility::OnMonitor, false) => {
+                    let mut weg_items = self.clone();
+                    weg_items.filter_by_monitor(&monitor_id);
+                    weg_items.items.temporalise();
                     weg_items.items.sanitize();
                     result.insert(monitor_id, weg_items.items);
                 }

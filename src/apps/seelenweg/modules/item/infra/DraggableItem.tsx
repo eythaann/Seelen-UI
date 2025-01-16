@@ -1,6 +1,8 @@
 import { Reorder } from 'framer-motion';
 import { PropsWithChildren, useRef } from 'react';
 
+import { isPinnedApp } from '../../shared/store/app';
+
 import { SwItem } from '../../shared/store/domain';
 
 import { cx } from '../../../../shared/styles';
@@ -18,7 +20,7 @@ export function DraggableItem({ children, item, className }: Props) {
       as="div"
       ref={ref}
       value={item}
-      drag
+      drag={isPinnedApp(item)}
       className={cx('weg-item-drag-container', className)}
       onDragStart={() => {
         ref.current?.classList.add('dragging');

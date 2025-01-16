@@ -23,7 +23,7 @@ use crate::{
     restoration_and_migrations::RestorationAndMigration,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
-    seelen_weg::SeelenWeg,
+    seelen_weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
     seelen_wm_v2::instance::WindowManagerV2,
     state::application::FULL_STATE,
     system::{declare_system_events_handlers, release_system_events_handlers},
@@ -168,6 +168,7 @@ impl Seelen {
                     m.update_handle(handle);
                 }
                 log_error!(trace_lock!(SEELEN).refresh_windows_positions());
+                log_error!(trace_lock!(WEG_ITEMS_IMPL).emit_to_webview());
             }
         }
     }
@@ -243,12 +244,14 @@ impl Seelen {
         self.instances
             .push(SeelenInstanceContainer::new(handle, &state)?);
         self.refresh_windows_positions()?;
+        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, id: &str) -> Result<()> {
         self.instances.retain(|m| m.id() != id);
         self.refresh_windows_positions()?;
+        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 
