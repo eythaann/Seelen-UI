@@ -1,18 +1,13 @@
-use std::{
-    env::temp_dir,
-    sync::{atomic::AtomicBool, Arc},
-};
+use std::sync::{atomic::AtomicBool, Arc};
 
 use base64::Engine;
 use getset::{Getters, MutGetters};
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use tauri::{AppHandle, Manager, Wry};
-use tauri_plugin_shell::ShellExt;
-use windows::Win32::Graphics::Gdi::HMONITOR;
-use winreg::{
-    enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS},
-    RegKey,
+use windows::Win32::{
+    Graphics::Gdi::HMONITOR,
+    System::TaskScheduler::{ITaskService, TaskScheduler},
 };
 
 use crate::{
@@ -20,17 +15,20 @@ use crate::{
     hook::register_win_hook,
     instance::SeelenInstanceContainer,
     log_error,
-    modules::monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
+    modules::{
+        cli::ServiceClient,
+        monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
+    },
     restoration_and_migrations::RestorationAndMigration,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
-    seelen_weg::SeelenWeg,
+    seelen_weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
     seelen_wm_v2::instance::WindowManagerV2,
-    state::application::{FullState, FULL_STATE},
+    state::application::FULL_STATE,
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, is_running_as_appx_package},
-    windows_api::WindowsApi,
+    utils::{ahk::AutoHotKey, pwsh::PwshScript},
+    windows_api::{Com, WindowsApi},
     APP_HANDLE,
 };
 
@@ -81,10 +79,6 @@ impl Seelen {
     pub fn monitor_by_device_id_mut(&mut self, id: &str) -> Option<&mut SeelenInstanceContainer> {
         self.instances.iter_mut().find(|m| m.id() == id)
     }
-
-    pub fn state(&self) -> Arc<FullState> {
-        FULL_STATE.load_full()
-    }
 }
 
 /* ============== Methods ============== */
@@ -118,12 +112,15 @@ impl Seelen {
     }
 
     pub fn on_settings_change(&mut self) -> Result<()> {
-        let state = self.state();
+        let state = FULL_STATE.load();
 
-        match state.is_ahk_enabled() {
-            true => Self::start_ahk_shortcuts()?,
-            false => Self::kill_ahk_shortcuts()?,
-        }
+        tauri::async_runtime::spawn(async {
+            let state = FULL_STATE.load();
+            match state.is_ahk_enabled() {
+                true => log_error!(Self::start_ahk_shortcuts().await),
+                false => log_error!(Self::kill_ahk_shortcuts().await),
+            }
+        });
 
         if state.is_weg_enabled() {
             SeelenWeg::hide_taskbar();
@@ -170,14 +167,13 @@ impl Seelen {
                     m.update_handle(handle);
                 }
                 log_error!(trace_lock!(SEELEN).refresh_windows_positions());
+                log_error!(trace_lock!(WEG_ITEMS_IMPL).emit_to_webview());
             }
         }
     }
 
     async fn start_async() -> Result<()> {
-        Self::start_ahk_shortcuts()?;
-        Self::refresh_path_environment()?;
-        Self::refresh_auto_start_path().await?;
+        Self::start_ahk_shortcuts().await?;
         Ok(())
     }
 
@@ -186,15 +182,17 @@ impl Seelen {
         RestorationAndMigration::run_full()?;
         declare_system_events_handlers()?;
 
-        if self.state().is_rofi_enabled() {
+        let state = FULL_STATE.load();
+
+        if state.is_rofi_enabled() {
             self.add_rofi()?;
         }
 
-        if self.state().is_wall_enabled() {
+        if state.is_wall_enabled() {
             self.add_wall()?;
         }
 
-        if self.state().is_weg_enabled() {
+        if state.is_weg_enabled() {
             SeelenWeg::hide_taskbar();
         }
 
@@ -226,120 +224,57 @@ impl Seelen {
     /// Stop and release all resources
     pub fn stop(&self) {
         SEELEN_IS_RUNNING.store(false, std::sync::atomic::Ordering::SeqCst);
+        let state = FULL_STATE.load();
 
         release_system_events_handlers();
-        if self.state().is_weg_enabled() {
+        if state.is_weg_enabled() {
             log_error!(SeelenWeg::restore_taskbar());
         }
-        if self.state().is_ahk_enabled() {
-            log_error!(Self::kill_ahk_shortcuts());
+        if state.is_ahk_enabled() {
+            tauri::async_runtime::spawn(async {
+                log_error!(Self::kill_ahk_shortcuts().await);
+            });
         }
     }
 
     fn add_monitor(&mut self, handle: HMONITOR) -> Result<()> {
+        let state = FULL_STATE.load();
         self.instances
-            .push(SeelenInstanceContainer::new(handle, &self.state())?);
+            .push(SeelenInstanceContainer::new(handle, &state)?);
         self.refresh_windows_positions()?;
+        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, id: &str) -> Result<()> {
         self.instances.retain(|m| m.id() != id);
         self.refresh_windows_positions()?;
+        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 
-    pub async fn is_auto_start_enabled() -> Result<bool> {
-        let handle = get_app_handle();
-        let output = handle
-            .shell()
-            .command("powershell")
-            .args([
-                "-ExecutionPolicy",
-                "Bypass",
-                "-NoProfile",
-                "-Command",
-                "[bool](Get-ScheduledTask -TaskName Seelen-UI -ErrorAction SilentlyContinue)",
-            ])
-            .output()
-            .await?;
-
-        let (cow, _used, _has_errors) = encoding_rs::GBK.decode(&output.stdout);
-        let stdout = cow.to_string().trim().to_lowercase();
-        Ok(stdout == "true")
+    pub fn is_auto_start_enabled() -> Result<bool> {
+        Com::run_with_context(|| unsafe {
+            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
+            task_service.Connect(None, None, None, None)?;
+            let is_task_enabled = task_service
+                .GetFolder(&"\\Seelen".into())
+                .and_then(|folder| folder.GetTask(&"Seelen UI Service".into()))
+                .and_then(|task| task.Enabled())
+                .map(|v| v.as_bool())
+                .unwrap_or(false);
+            Ok(is_task_enabled)
+        })
     }
 
-    /// override auto-start task in case of location change, normally this happen on MSIX update
-    async fn refresh_auto_start_path() -> Result<()> {
-        if WindowsApi::is_elevated()? && Self::is_auto_start_enabled().await? {
-            Self::set_auto_start(true).await?;
-        }
-        Ok(())
-    }
-
-    pub fn refresh_path_environment() -> Result<()> {
-        if tauri::is_dev() || is_running_as_appx_package() {
-            return Ok(());
-        }
-
-        let hkcr = RegKey::predef(HKEY_CURRENT_USER);
-        let enviroments = hkcr.open_subkey_with_flags("Environment", KEY_ALL_ACCESS)?;
-        let env_path: String = enviroments.get_value("Path")?;
-
-        let install_folder = std::env::current_exe()?
-            .parent()
-            .expect("Failed to get parent directory")
-            .to_string_lossy()
-            .to_string();
-        if !env_path.contains(&install_folder) {
-            log::trace!("Adding installation directory to PATH environment variable");
-            enviroments.set_value("Path", &format!("{};{}", env_path, install_folder))?;
-        }
-        Ok(())
-    }
-
-    pub async fn set_auto_start(enabled: bool) -> Result<()> {
-        let pwsh_script = include_str!("schedule.ps1");
-        let pwsh_script_path = temp_dir().join("schedule.ps1");
-        std::fs::write(&pwsh_script_path, pwsh_script).expect("Failed to write temp script file");
-
-        let exe_path = if is_running_as_appx_package() {
-            // this is the path of the alias generated by msix intaller
-            get_app_handle()
-                .path()
-                .local_data_dir()?
-                .join("Microsoft\\WindowsApps\\seelen-ui.exe")
-        } else {
-            std::env::current_exe()?
-        };
-
-        let output = get_app_handle()
-            .shell()
-            .command("powershell")
-            .args([
-                "-ExecutionPolicy",
-                "Bypass",
-                "-NoProfile",
-                "-File",
-                &pwsh_script_path.to_string_lossy(),
-                "-ExeRoute",
-                &exe_path.to_string_lossy(),
-                "-Enabled",
-                if enabled { "true" } else { "false" },
-            ])
-            .output()
-            .await?;
-
-        if !output.status.success() {
-            return Err(output.into());
-        }
-        Ok(())
+    pub fn set_auto_start(enabled: bool) -> Result<()> {
+        ServiceClient::emit_set_startup(enabled)
     }
 
     // TODO: split ahk logic into another file/module
-    pub fn start_ahk_shortcuts() -> Result<()> {
+    pub async fn start_ahk_shortcuts() -> Result<()> {
         // kill all running shortcuts before starting again
-        Self::kill_ahk_shortcuts()?;
+        Self::kill_ahk_shortcuts().await?;
 
         let state = FULL_STATE.load();
         if state.is_ahk_enabled() {
@@ -378,19 +313,11 @@ impl Seelen {
     }
 
     // TODO: split ahk logic into another file/module
-    pub fn kill_ahk_shortcuts() -> Result<()> {
+    pub async fn kill_ahk_shortcuts() -> Result<()> {
         log::trace!("Killing AHK shortcuts");
-        get_app_handle()
-            .shell()
-            .command("powershell")
-            .args([
-                "-ExecutionPolicy",
-                "Bypass",
-                "-NoProfile",
-                "-Command",
-                r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*static\redis\AutoHotkey.exe*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }",
-            ])
-            .spawn()?;
+        PwshScript::new(
+            r"Get-WmiObject Win32_Process | Where-Object { $_.CommandLine -like '*static\redis\AutoHotkey.exe*' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force }"
+        ).execute().await?;
         Ok(())
     }
 

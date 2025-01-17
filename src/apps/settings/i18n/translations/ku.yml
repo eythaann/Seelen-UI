@@ -1,5 +1,8 @@
 app_launcher:
   enable: Launcher App çalak bikin
+  launch_on:
+    mouse_over: Mişk li ser
+    primary: Bingehîn
   monitor: Monitor to Show
   runners:
     cmd: Ferman
@@ -48,9 +51,20 @@ apps_configurations:
     id: Nasî
     kind: Ji hêla nas kirin
     matching_strategy: Stratejiya hevberdanê
+    matching_strategy_option:
+      contains: Dihewîne
+      ends_with: Bi dawî dibe
+      equals: Wekhevî
+      regex: îfadeya bi rêkûpêk
+      starts_with: Bi dest pê dike
     negation: Lihevhatina negotî
     or: AN
     remove: Blokê jêbirin
+    type:
+      class: Sinif
+      exe: Exe
+      path: Şop
+      title: Nav
   import: Anîn
   new: Nşh
   search: Gerr
@@ -66,6 +80,7 @@ devtools:
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan
+  simulate_fullscreen: Bûyera tevahî ekranê simule bikin
 extras:
   discord: Nakemala
   exit: Qut / derketin
@@ -201,6 +216,10 @@ toolbar:
   delay_to_show: Dereng nîşan bide
   enable: Vebijêrkek Fancy Vebijêrin
   height: Bilindî
+  hide_mode:
+    always: Herdem
+    never: Qet
+    on_overlap: Li ser hevgirtinê
   label: Toolbar
   placeholder:
     author: Nivîskar
@@ -233,9 +252,17 @@ weg:
   dock_side: Rewş
   enable: Dock / Taskbar çalak bikin
   gap: Qelîştok
+  hide_mode:
+    always: Herdem
+    never: Qet
+    on_overlap: Li ser hevgirtinê
   items:
     gap: Cîh di navbera tiştan de
     label: Hevokên
+    pinned_visibility:
+      always: Herdem
+      label: Dîtina Tiştên Pînekirî
+      when_primary: Dema ku çavdêriya sereke ye
     size: Mezinahiya tiştê
     temporal_visibility:
       all: Gişt
@@ -245,6 +272,9 @@ weg:
     zoom_size: Mezinahiya zoomed (ji bo mijaran tê bikar anîn)
   label: Dock / Taskbar
   margin: Radihêj
+  mode:
+    full_width: Firehiya ekrana tevahî
+    min_content: Biçûk ku dikare bibe
   padding: Padding
   use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
   width: Berî

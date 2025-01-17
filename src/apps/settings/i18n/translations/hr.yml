@@ -1,5 +1,8 @@
 app_launcher:
   enable: Omogućite pokretač aplikacija
+  launch_on:
+    mouse_over: Prijeđite mišem
+    primary: Primarni
   monitor: Monitor za prikaz
   runners:
     cmd: Naredba
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identificirati
     matching_strategy: Podudarna strategija
+    matching_strategy_option:
+      contains: Sadrži
+      ends_with: Završava s
+      equals: Jednako
+      regex: Uobičajeni izraz
+      starts_with: Počinje s
     negation: Negiranje podudaranja
     or: ILI
     remove: Izbriši blok
+    type:
+      class: Klasa
+      exe: Exe
+      path: Put
+      title: Titula
   import: Uvoz
   new: Novi
   search: traži
@@ -68,6 +82,7 @@ devtools:
   install_folder: Mapa za instalaciju
   load: Opterećenje
   settings_file: Datoteka postavki
+  simulate_fullscreen: Simulirajte događaj preko cijelog zaslona
 extras:
   discord: Nesklad
   exit: Prestati/izaći
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Odgoditi prikaz
   enable: Omogućite maštovitu alatnu traku
   height: Visina
+  hide_mode:
+    always: Uvijek
+    never: Nikada
+    on_overlap: Na preklapanju
   label: Alatna traka
   placeholder:
     author: Autor
@@ -238,9 +257,17 @@ weg:
   dock_side: Položaj
   enable: Omogućite pristanište/zadaću
   gap: Jaz
+  hide_mode:
+    always: Uvijek
+    never: Nikada
+    on_overlap: Na preklapanju
   items:
     gap: Prostor između predmeta
     label: Predmeti
+    pinned_visibility:
+      always: Uvijek
+      label: Vidljivost prikvačenih stavki
+      when_primary: Kada je monitor primarni
     size: Veličina predmeta
     temporal_visibility:
       all: Sve
@@ -250,6 +277,9 @@ weg:
     zoom_size: Zumirana veličina (koristi se za teme)
   label: Pristanište/trag
   margin: Margina
+  mode:
+    full_width: Puna širina zaslona
+    min_content: Mali koliko može biti
   padding: Jadnja
   use_multiple_monitor_overlap_logic: Koristite specifičnu za prikaz umjesto logike jednog fokusa
   width: Širina

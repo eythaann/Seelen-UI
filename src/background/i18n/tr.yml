@@ -1,0 +1,16 @@
+runtime:
+  download: İndirme sayfasına git
+  not_found: WebView2 Çalışma Zamanı bulunamadı
+  not_found_description: >-
+    Seelen kullanıcı arayüzü Webview2 Çalışma Zamanı gerektirir. Lütfen
+    yükleyin.
+  outdated: WebView2 Çalışma Zamanı güncel değil
+  outdated_description: >-
+    Seelen kullanıcı arayüzü, Webview2 Çalışma Zamanı %{min_version} veya üstünü
+    gerektirir. Lütfen güncelleyin.
+service:
+  not_running: Seelen UI Hizmeti çalışmıyor
+  not_running_description: >-
+    Seelen UI Hizmeti (slu-service), uygulamanın düzgün çalışması için bir
+    bağımlılık/yardımcıdır.
+  not_running_ok: Hizmeti başlat

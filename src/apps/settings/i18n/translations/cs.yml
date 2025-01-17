@@ -1,5 +1,8 @@
 app_launcher:
   enable: Povolit spouštěč aplikací
+  launch_on:
+    mouse_over: Přejeďte myší
+    primary: Primární
   monitor: Monitorovat
   runners:
     cmd: Příkaz
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikátor
     kind: Identifikovat
     matching_strategy: Srovnávací strategie
+    matching_strategy_option:
+      contains: Obsahuje
+      ends_with: Končí s
+      equals: rovná se
+      regex: Regulární výraz
+      starts_with: Začíná s
     negation: Negovat odpovídající
     or: NEBO
     remove: Odstranit blok
+    type:
+      class: Třída
+      exe: Exe
+      path: Cesta
+      title: Titul
   import: Import
   new: Nový
   search: Vyhledávání
@@ -68,6 +82,7 @@ devtools:
   install_folder: Instalační složka
   load: Zatížení
   settings_file: Nastavení souboru
+  simulate_fullscreen: Simulovat událost na celou obrazovku
 extras:
   discord: Svár
   exit: Ukončit/ukončit
@@ -202,6 +217,10 @@ toolbar:
   delay_to_show: Zpoždění zobrazení
   enable: Povolte ozdobný panel nástrojů
   height: Výška
+  hide_mode:
+    always: Vždy
+    never: Nikdy
+    on_overlap: Na překrytí
   label: Panel nástrojů
   placeholder:
     author: Autor
@@ -236,9 +255,17 @@ weg:
   dock_side: Pozice
   enable: Povolte dock/hlavní panel
   gap: Mezera
+  hide_mode:
+    always: Vždy
+    never: Nikdy
+    on_overlap: Na překrytí
   items:
     gap: Prostor mezi položkami
     label: Položky
+    pinned_visibility:
+      always: Vždy
+      label: Viditelnost připnutých položek
+      when_primary: Když je monitor primární
     size: Velikost položky
     temporal_visibility:
       all: Vše
@@ -248,6 +275,9 @@ weg:
     zoom_size: Zvětšená velikost (použitá pro témata)
   label: Dock/TaskBar
   margin: Okraj
+  mode:
+    full_width: Celá šířka obrazovky
+    min_content: Malý jak jen může být
   padding: Polstrování
   use_multiple_monitor_overlap_logic: Místo logiky jednoho zaměření použijte specifickou obrazovku
   width: Šířka

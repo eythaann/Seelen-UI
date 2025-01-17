@@ -1,5 +1,8 @@
 app_launcher:
   enable: Bật trình khởi chạy ứng dụng
+  launch_on:
+    mouse_over: Di chuột qua
+    primary: Sơ đẳng
   monitor: Giám sát để hiển thị
   runners:
     cmd: Yêu cầu
@@ -49,9 +52,20 @@ apps_configurations:
     id: Định danh
     kind: Xác định bởi
     matching_strategy: Chiến lược phù hợp
+    matching_strategy_option:
+      contains: Chứa
+      ends_with: Kết thúc bằng
+      equals: Bằng
+      regex: Biểu thức chính quy
+      starts_with: Bắt đầu với
     negation: Phủ nhận sự phù hợp
     or: HOẶC
     remove: Xóa khối
+    type:
+      class: Lớp học
+      exe: Exe
+      path: Con đường
+      title: Tiêu đề
   import: Nhập khẩu
   new: Mới
   search: Tìm kiếm
@@ -67,6 +81,7 @@ devtools:
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin
+  simulate_fullscreen: Mô phỏng sự kiện toàn màn hình
 extras:
   discord: Bất hòa
   exit: Thoát/Thoát
@@ -201,6 +216,10 @@ toolbar:
   delay_to_show: Trì hoãn hiển thị
   enable: Kích hoạt thanh công cụ ưa thích
   height: Chiều cao
+  hide_mode:
+    always: Luôn luôn
+    never: Không bao giờ
+    on_overlap: Trên sự chồng chéo
   label: Thanh công cụ
   placeholder:
     author: Tác giả
@@ -235,9 +254,17 @@ weg:
   dock_side: Chức vụ
   enable: Bật Dock/Thanh tác vụ
   gap: Khoảng cách
+  hide_mode:
+    always: Luôn luôn
+    never: Không bao giờ
+    on_overlap: Trên sự chồng chéo
   items:
     gap: Không gian giữa các mặt hàng
     label: Mặt hàng
+    pinned_visibility:
+      always: Luôn luôn
+      label: Hiển thị các mục được ghim
+      when_primary: Khi màn hình là chính
     size: Kích thước mục
     temporal_visibility:
       all: Tất cả
@@ -247,6 +274,9 @@ weg:
     zoom_size: Kích thước phóng to (được sử dụng cho chủ đề)
   label: Dock/Thanh tác vụ
   margin: Lề
+  mode:
+    full_width: Chiều rộng toàn màn hình
+    min_content: Nhỏ nhất có thể
   padding: Đệm
   use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
   width: Chiều rộng

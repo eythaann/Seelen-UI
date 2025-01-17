@@ -1,5 +1,8 @@
 app_launcher:
   enable: అనువర్తన లాంచర్‌ను ప్రారంభించండి
+  launch_on:
+    mouse_over: పైగా మౌస్
+    primary: ప్రాథమిక
   monitor: చూపించడానికి మానిటర్
   runners:
     cmd: కమాండ్
@@ -50,9 +53,20 @@ apps_configurations:
     id: ఐడెంటిఫైయర్
     kind: ద్వారా గుర్తించండి
     matching_strategy: మ్యాచింగ్ స్ట్రాటజీ
+    matching_strategy_option:
+      contains: కలిగి ఉంది
+      ends_with: తో ముగుస్తుంది
+      equals: సమానం
+      regex: రెగ్యులర్ వ్యక్తీకరణ
+      starts_with: తో మొదలవుతుంది
     negation: సరిపోలికను తిరస్కరించండి
     or: లేదా
     remove: బ్లాక్‌ని తొలగించండి
+    type:
+      class: తరగతి
+      exe: Exe
+      path: మార్గం
+      title: శీర్షిక
   import: దిగుమతి
   new: కొత్తది
   search: వెతకండి
@@ -68,6 +82,7 @@ devtools:
   install_folder: ఇన్‌స్టాలేషన్ ఫోల్డర్
   load: లోడ్ చేయండి
   settings_file: సెట్టింగుల ఫైల్
+  simulate_fullscreen: పూర్తి స్క్రీన్ ఈవెంట్‌ను అనుకరించండి
 extras:
   discord: అసమ్మతి
   exit: నిష్క్రమించు/నిష్క్రమించు
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: చూపించడానికి ఆలస్యం
   enable: ఫ్యాన్సీ టూల్‌బార్‌ని ప్రారంభించండి
   height: ఎత్తు
+  hide_mode:
+    always: ఎల్లప్పుడూ
+    never: ఎప్పుడూ
+    on_overlap: అతివ్యాప్తిపై
   label: టూల్‌బార్
   placeholder:
     author: రచయిత
@@ -236,9 +255,17 @@ weg:
   dock_side: స్థానం
   enable: డాక్/టాస్క్‌బార్‌ని ప్రారంభించండి
   gap: గ్యాప్
+  hide_mode:
+    always: ఎల్లప్పుడూ
+    never: ఎప్పుడూ
+    on_overlap: అతివ్యాప్తిపై
   items:
     gap: వస్తువుల మధ్య ఖాళీ
     label: వస్తువులు
+    pinned_visibility:
+      always: ఎల్లప్పుడూ
+      label: పిన్ చేయబడిన అంశాల దృశ్యమానత
+      when_primary: మానిటర్ ప్రాథమికంగా ఉన్నప్పుడు
     size: అంశం పరిమాణం
     temporal_visibility:
       all: అన్నీ
@@ -248,6 +275,9 @@ weg:
     zoom_size: జూమ్ చేసిన పరిమాణం (థీమ్‌ల కోసం ఉపయోగించబడుతుంది)
   label: డాక్/టాస్క్‌బార్
   margin: మార్జిన్
+  mode:
+    full_width: పూర్తి స్క్రీన్ వెడల్పు
+    min_content: వీలైనంత చిన్నది
   padding: పాడింగ్
   use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
   width: వెడల్పు

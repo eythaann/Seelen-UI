@@ -12,7 +12,7 @@ jobs:
   check-msix:
     runs-on: ubuntu-latest
     outputs:
-      MSIX_ALREADY_EXIST: ${{ steps.check_msix.outputs.MSIX_ALREADY_EXIST }}
+      MSIX_ALREADY_EXIST: ${{ steps.check_msix.outputs.result }}
     steps:
       - name: Check for MSIX file in latest release
         id: check_msix
@@ -26,11 +26,11 @@ jobs:
             const msixAsset = latestRelease.data.assets.find(asset => asset.name.toLowerCase().endsWith('.msix'));
 
             if (msixAsset) {
-              core.setOutput('MSIX_ALREADY_EXIST', 'true');
               console.info('MSIX file exists.');
+              return 'true';
             } else {
-              core.setOutput('MSIX_ALREADY_EXIST', 'false');
               console.info('No MSIX file found in the latest release.');
+              return 'false';
             }
 
   upload-store-msix-to-release:

@@ -1,5 +1,8 @@
 app_launcher:
   enable: ເປີດໃຊ້ງານ App Launcher
+  launch_on:
+    mouse_over: ເມົ້າເທິງ
+    primary: ປະຖົມ
   monitor: ຕິດຕາມເພື່ອສະແດງ
   runners:
     cmd: ບັນຊາ
@@ -48,9 +51,20 @@ apps_configurations:
     id: ຕົວລະບຸ
     kind: ກໍານົດໂດຍ
     matching_strategy: ຍຸດທະສາດການຈັບຄູ່
+    matching_strategy_option:
+      contains: ປະກອບດ້ວຍ
+      ends_with: ສິ້ນສຸດດ້ວຍ
+      equals: ເທົ່າກັບ
+      regex: ການສະແດງອອກເປັນປົກກະຕິ
+      starts_with: ເລີ່ມຕົ້ນດ້ວຍ
     negation: Negate ການຈັບຄູ່
     or: ຫຼື
     remove: ລຶບ Block
+    type:
+      class: ຫ້ອງຮຽນ
+      exe: exe
+      path: ເສັ້ນທາງ
+      title: ຫົວຂໍ້
   import: ນໍາເຂົ້າ
   new: ໃຫມ່
   search: ຊອກຫາ
@@ -66,6 +80,7 @@ devtools:
   install_folder: ໂຟນເດີການຕິດຕັ້ງ
   load: ໂຫຼດ
   settings_file: ໄຟລ໌ການຕັ້ງຄ່າ
+  simulate_fullscreen: ຈຳລອງເຫດການເຕັມຈໍ
 extras:
   discord: ຄວາມຂັດແຍ້ງ
   exit: ອອກ/ອອກ
@@ -201,6 +216,10 @@ toolbar:
   delay_to_show: ຊັກຊ້າໃນການສະແດງ
   enable: ເປີດໃຊ້ແຖບເຄື່ອງມື Fancy
   height: ຄວາມສູງ
+  hide_mode:
+    always: ສະເໝີ
+    never: ບໍ່ເຄີຍ
+    on_overlap: ທັບຊ້ອນກັນ
   label: ແຖບເຄື່ອງມື
   placeholder:
     author: ຜູ້ຂຽນ
@@ -233,9 +252,17 @@ weg:
   dock_side: ຕໍາແຫນ່ງ
   enable: ເປີດໃຊ້ Dock/Taskbar
   gap: ຊ່ອງຫວ່າງ
+  hide_mode:
+    always: ສະເໝີ
+    never: ບໍ່ເຄີຍ
+    on_overlap: ທັບຊ້ອນກັນ
   items:
     gap: ຊ່ອງຫວ່າງລະຫວ່າງລາຍການ
     label: ລາຍການ
+    pinned_visibility:
+      always: ສະເໝີ
+      label: ການເບິ່ງເຫັນລາຍການທີ່ປັກໝຸດໄວ້
+      when_primary: ເມື່ອຈໍພາບແມ່ນປະຖົມ
     size: ຂະໜາດລາຍການ
     temporal_visibility:
       all: ທັງໝົດ
@@ -245,6 +272,9 @@ weg:
     zoom_size: ຂະຫຍາຍຂະໜາດ (ໃຊ້ສຳລັບຮູບແບບສີສັນ)
   label: Dock/Taskbar
   margin: ຂອບ
+  mode:
+    full_width: ຄວາມກວ້າງເຕັມຈໍ
+    min_content: ຂະຫນາດນ້ອຍເທົ່າທີ່ສາມາດເຮັດໄດ້
   padding: padding
   use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
   width: ກວ້າງ

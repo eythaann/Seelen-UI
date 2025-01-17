@@ -1,0 +1,14 @@
+runtime:
+  download: Joan deskarga orrira
+  not_found: WebView2 Runtime ez da aurkitu
+  not_found_description: Seelen UI-k Webview2 Runtime behar du. Mesedez, instala ezazu.
+  outdated: WebView2 Exekuzio-denbora zaharkituta dago
+  outdated_description: >-
+    Seelen UI-k Webview2 Runtime %{min_version} edo handiagoa behar du. Mesedez,
+    eguneratu.
+service:
+  not_running: Seelen UI Zerbitzua ez dago martxan
+  not_running_description: >-
+    Seelen UI Zerbitzua (slu-zerbitzua) menpekotasun/laguntzailea da aplikazioak
+    behar bezala funtziona dezan.
+  not_running_ok: Hasi zerbitzua

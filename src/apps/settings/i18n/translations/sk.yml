@@ -1,5 +1,8 @@
 app_launcher:
   enable: Povoliť spúšťač aplikácií
+  launch_on:
+    mouse_over: Prejdite myšou
+    primary: Primárne
   monitor: Monitorovať, aby sa ukázal
   runners:
     cmd: Príkaz
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikátor
     kind: Určiť
     matching_strategy: Stratégia
+    matching_strategy_option:
+      contains: Obsahuje
+      ends_with: Končí s
+      equals: Rovná sa
+      regex: Regulárny výraz
+      starts_with: Začína s
     negation: Negovať zladenie
     or: Alebo
     remove: Vymazať blok
+    type:
+      class: triedy
+      exe: Exe
+      path: Cesta
+      title: Názov
   import: Dovoz
   new: Nový
   search: Vyhľadávanie
@@ -68,6 +82,7 @@ devtools:
   install_folder: Inštalačný priečinok
   load: Naložiť
   settings_file: Nastavovací súbor
+  simulate_fullscreen: Simulovať udalosť na celú obrazovku
 extras:
   discord: Nesúhlas
   exit: Prestať
@@ -202,6 +217,10 @@ toolbar:
   delay_to_show: Oneskorenie zobrazenia
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
+  hide_mode:
+    always: Vždy
+    never: Nikdy
+    on_overlap: Na prekrytí
   label: Panel s nástrojmi
   placeholder:
     author: Autor
@@ -236,9 +255,17 @@ weg:
   dock_side: Pozícia
   enable: Povoliť prístavisko/panel úloh
   gap: Priepasť
+  hide_mode:
+    always: Vždy
+    never: Nikdy
+    on_overlap: Na prekrytí
   items:
     gap: Priestor medzi položkami
     label: Predmety
+    pinned_visibility:
+      always: Vždy
+      label: Viditeľnosť pripnutých položiek
+      when_primary: Keď je monitor primárny
     size: Veľkosť položky
     temporal_visibility:
       all: Všetky
@@ -248,6 +275,9 @@ weg:
     zoom_size: Zväčšená veľkosť (používa sa na témy)
   label: Prístavný panel
   margin: Okraj
+  mode:
+    full_width: Celá šírka obrazovky
+    min_content: Malý ako len môže byť
   padding: Vypchávka
   use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
   width: Šírka

@@ -1,5 +1,8 @@
 app_launcher:
   enable: ਐਪ ਲਾਂਚਰ ਨੂੰ ਸਮਰੱਥ ਕਰੋ
+  launch_on:
+    mouse_over: ਮਾਊਸ ਓਵਰ
+    primary: ਪ੍ਰਾਇਮਰੀ
   monitor: ਦਿਖਾਉਣ ਲਈ ਨਿਗਰਾਨੀ
   runners:
     cmd: ਕਮਾਂਡ
@@ -46,9 +49,20 @@ apps_configurations:
     id: ਪਛਾਣਕਰਤਾ
     kind: ਦੁਆਰਾ ਪਛਾਣੋ
     matching_strategy: ਮੈਚਿੰਗ ਰਣਨੀਤੀ
+    matching_strategy_option:
+      contains: ਸ਼ਾਮਿਲ ਹੈ
+      ends_with: ਨਾਲ ਖਤਮ ਹੁੰਦਾ ਹੈ
+      equals: ਬਰਾਬਰ ਹੈ
+      regex: ਨਿਯਮਤ ਸਮੀਕਰਨ
+      starts_with: ਨਾਲ ਸ਼ੁਰੂ ਹੁੰਦਾ ਹੈ
     negation: ਨੈਗੇਟ ਮੈਚਿੰਗ
     or: ਜਾਂ
     remove: ਬਲਾਕ ਮਿਟਾਓ
+    type:
+      class: ਕਲਾਸ
+      exe: ਐਕਸ
+      path: ਮਾਰਗ
+      title: ਸਿਰਲੇਖ
   import: ਆਯਾਤ ਕਰੋ
   new: ਨਵਾਂ
   search: ਖੋਜ
@@ -64,6 +78,7 @@ devtools:
   install_folder: ਇੰਸਟਾਲੇਸ਼ਨ ਫੋਲਡਰ
   load: ਲੋਡ ਕਰੋ
   settings_file: ਸੈਟਿੰਗਜ਼ ਫਾਈਲ
+  simulate_fullscreen: ਪੂਰੀ ਸਕ੍ਰੀਨ ਇਵੈਂਟ ਦੀ ਨਕਲ ਕਰੋ
 extras:
   discord: ਵਿਵਾਦ
   exit: ਛੱਡੋ/ਬਾਹਰ ਨਿਕਲੋ
@@ -200,6 +215,10 @@ toolbar:
   delay_to_show: ਦਿਖਾਉਣ ਵਿੱਚ ਦੇਰੀ
   enable: ਫੈਂਸੀ ਟੂਲਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   height: ਉਚਾਈ
+  hide_mode:
+    always: ਹਮੇਸ਼ਾ
+    never: ਕਦੇ ਨਹੀਂ
+    on_overlap: ਓਵਰਲੈਪ 'ਤੇ
   label: ਟੂਲਬਾਰ
   placeholder:
     author: ਲੇਖਕ
@@ -232,9 +251,17 @@ weg:
   dock_side: ਸਥਿਤੀ
   enable: ਡੌਕ/ਟਾਸਕਬਾਰ ਨੂੰ ਸਮਰੱਥ ਬਣਾਓ
   gap: ਪਾੜਾ
+  hide_mode:
+    always: ਹਮੇਸ਼ਾ
+    never: ਕਦੇ ਨਹੀਂ
+    on_overlap: ਓਵਰਲੈਪ 'ਤੇ
   items:
     gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
     label: ਇਕਾਈ
+    pinned_visibility:
+      always: ਹਮੇਸ਼ਾ
+      label: ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
+      when_primary: ਜਦੋਂ ਮਾਨੀਟਰ ਪ੍ਰਾਇਮਰੀ ਹੁੰਦਾ ਹੈ
     size: ਆਈਟਮ ਦਾ ਆਕਾਰ
     temporal_visibility:
       all: ਸਾਰੇ
@@ -244,6 +271,9 @@ weg:
     zoom_size: ਜ਼ੂਮ ਕੀਤਾ ਆਕਾਰ (ਥੀਮਾਂ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ)
   label: ਡੌਕ/ਟਾਸਕਬਾਰ
   margin: ਹਾਸ਼ੀਏ
+  mode:
+    full_width: ਪੂਰੀ ਸਕ੍ਰੀਨ ਚੌੜਾਈ
+    min_content: ਛੋਟਾ ਜਿੰਨਾ ਹੋ ਸਕਦਾ ਹੈ
   padding: ਪੈਡਿੰਗ
   use_multiple_monitor_overlap_logic: ਸਿੰਗਲ ਫੋਕਸ ਤਰਕ ਦੀ ਬਜਾਏ ਡਿਸਪਲੇ ਵਿਸ਼ੇਸ਼ ਦੀ ਵਰਤੋਂ ਕਰੋ
   width: ਚੌੜਾਈ

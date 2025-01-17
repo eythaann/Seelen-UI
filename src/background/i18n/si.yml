@@ -1,0 +1,14 @@
+runtime:
+  download: බාගැනීම් පිටුවට යන්න
+  not_found: WebView2 ධාවන කාලය හමු නොවීය
+  not_found_description: Seelen UI සඳහා Webview2 ධාවන කාලය අවශ්‍යයි. කරුණාකර එය ස්ථාපනය කරන්න.
+  outdated: WebView2 ධාවන කාලය යල් පැන ඇත
+  outdated_description: >-
+    Seelen UI සඳහා Webview2 ධාවන කාලය %{min_version} හෝ ඉහළ අවශ්‍ය වේ. කරුණාකර
+    එය යාවත්කාලීන කරන්න.
+service:
+  not_running: Seelen UI සේවාව ක්‍රියාත්මක නොවේ
+  not_running_description: >-
+    Seelen UI සේවාව (slu-service) යනු යෙදුම නිසියාකාරව ක්‍රියා කිරීමට
+    යැපුම්/උපකාරකයකි.
+  not_running_ok: සේවාව ආරම්භ කරන්න

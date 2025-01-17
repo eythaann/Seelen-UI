@@ -15,6 +15,7 @@ use crate::seelen_weg::icon_extractor::{
     extract_and_save_icon_from_file, extract_and_save_icon_umid,
 };
 
+use crate::utils::pwsh::PwshScript;
 use crate::utils::{
     is_running_as_appx_package, is_virtual_desktop_supported as virtual_desktop_supported,
 };
@@ -53,18 +54,7 @@ async fn run_as_admin(program: String, args: Vec<String>) -> Result<()> {
             args.join(" ")
         )
     };
-    get_app_handle()
-        .shell()
-        .command("powershell")
-        .args([
-            "-NoProfile",
-            "-ExecutionPolicy",
-            "Bypass",
-            "-Command",
-            &command,
-        ])
-        .status()
-        .await?;
+    PwshScript::new(command).execute().await?;
     Ok(())
 }
 
@@ -109,12 +99,12 @@ fn show_app_settings() {
 
 #[tauri::command(async)]
 async fn set_auto_start(enabled: bool) -> Result<()> {
-    Seelen::set_auto_start(enabled).await
+    Seelen::set_auto_start(enabled)
 }
 
 #[tauri::command(async)]
 async fn get_auto_start_status() -> Result<bool> {
-    Seelen::is_auto_start_enabled().await
+    Seelen::is_auto_start_enabled()
 }
 
 #[tauri::command(async)]
@@ -128,12 +118,15 @@ fn send_keys(keys: String) -> Result<()> {
 }
 
 #[tauri::command(async)]
-fn get_icon(path: String) -> Option<PathBuf> {
-    if path.starts_with("shell:AppsFolder") {
-        let umid = path.replace("shell:AppsFolder\\", "");
-        return extract_and_save_icon_umid(&umid).ok();
+fn get_icon(path: Option<PathBuf>, umid: Option<String>) -> Option<PathBuf> {
+    let mut icon = None;
+    if let Some(umid) = umid {
+        icon = extract_and_save_icon_umid(&umid).ok();
     }
-    extract_and_save_icon_from_file(&path).ok()
+    match path {
+        Some(path) if icon.is_none() => extract_and_save_icon_from_file(&path).ok(),
+        _ => icon,
+    }
 }
 
 #[tauri::command(async)]

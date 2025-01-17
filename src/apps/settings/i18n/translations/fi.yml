@@ -1,5 +1,8 @@
 app_launcher:
   enable: Ota sovelluksen kantoraketti käyttöön
+  launch_on:
+    mouse_over: Vie hiiri päälle
+    primary: Ensisijainen
   monitor: Tarkkailla
   runners:
     cmd: Komento
@@ -50,9 +53,20 @@ apps_configurations:
     id: Tunniste
     kind: Tunnistaa jtk
     matching_strategy: Sovitusstrategia
+    matching_strategy_option:
+      contains: Sisältää
+      ends_with: päättyy
+      equals: Yhtä
+      regex: Säännöllinen lauseke
+      starts_with: Alkaa kanssa
     negation: Negatiivista vastaavuus
     or: TAI
     remove: Poistaa lohko
+    type:
+      class: Luokka
+      exe: Exe
+      path: Polku
+      title: Otsikko
   import: Tuonti
   new: Uusi
   search: Hae
@@ -68,6 +82,7 @@ devtools:
   install_folder: Asennuskansio
   load: Ladata
   settings_file: Asetustiedosto
+  simulate_fullscreen: Simuloi koko näytön tapahtumaa
 extras:
   discord: Erimielisyys
   exit: Lopettaa/poistua
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Viive näyttöön
   enable: Ota hieno työkalurivi käyttöön
   height: Korkeus
+  hide_mode:
+    always: Aina
+    never: Ei koskaan
+    on_overlap: Päällekkäin
   label: Työkalurivi
   placeholder:
     author: Kirjoittaja
@@ -238,9 +257,17 @@ weg:
   dock_side: Sijainti
   enable: Ota Dock/tehtäväpalkki käyttöön
   gap: Kuilu
+  hide_mode:
+    always: Aina
+    never: Ei koskaan
+    on_overlap: Päällekkäin
   items:
     gap: Tilaa esineiden välillä
     label: Kohteet
+    pinned_visibility:
+      always: Aina
+      label: Kiinnitettyjen kohteiden näkyvyys
+      when_primary: Kun näyttö on ensisijainen
     size: Esineen koko
     temporal_visibility:
       all: Kaikki
@@ -250,6 +277,9 @@ weg:
     zoom_size: Zoomoitu koko (käytetty teemoihin)
   label: Telakka/tehtäväpalkki
   margin: Marginaali
+  mode:
+    full_width: Koko näytön leveys
+    min_content: Niin pieni kuin voi olla
   padding: Pehmuste
   use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
   width: Leveys

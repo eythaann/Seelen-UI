@@ -1,3 +1,4 @@
+import { Settings } from '@seelen-ui/lib';
 import { path } from '@tauri-apps/api';
 import { writeTextFile } from '@tauri-apps/plugin-fs';
 import yaml from 'js-yaml';
@@ -5,19 +6,11 @@ import { cloneDeep, debounce } from 'lodash';
 
 import { store } from '../shared/store/infra';
 
-import {
-  saveJsonSettings,
-  UserSettingsLoader,
-} from '../../../settings/modules/shared/store/storeApi';
-
-export const IsSavingCustom = {
-  current: false,
-};
-
 export const SavePlaceholderAsCustom = debounce(async () => {
   const { placeholder, env } = store.getState();
 
   if (!placeholder) return;
+  const wasCustom = placeholder.info.filename === 'custom.yml';
 
   const toBeSaved = cloneDeep(placeholder);
   toBeSaved.info.author = env.USERNAME || 'Me';
@@ -33,9 +26,9 @@ export const SavePlaceholderAsCustom = debounce(async () => {
 
   await writeTextFile(filePath, yaml.dump(toBeSaved));
 
-  let { jsonSettings } = await new UserSettingsLoader().load();
-  jsonSettings.fancyToolbar.placeholder = toBeSaved.info.filename;
-
-  IsSavingCustom.current = true;
-  await saveJsonSettings(jsonSettings);
+  if (!wasCustom) {
+    const settings = await Settings.getAsync();
+    settings.inner.fancyToolbar.placeholder = toBeSaved.info.filename;
+    await settings.save();
+  }
 }, 1000);

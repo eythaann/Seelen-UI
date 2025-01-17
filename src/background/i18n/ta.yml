@@ -1,0 +1,14 @@
+runtime:
+  download: பதிவிறக்கப் பக்கத்திற்குச் செல்லவும்
+  not_found: WebView2 இயக்க நேரம் கிடைக்கவில்லை
+  not_found_description: Seelen UIக்கு Webview2 இயக்க நேரம் தேவை. தயவுசெய்து அதை நிறுவவும்.
+  outdated: WebView2 இயக்க நேரம் காலாவதியானது
+  outdated_description: >-
+    Seelen UI க்கு Webview2 இயக்க நேரம் %{min_version} அல்லது அதற்கு மேல் தேவை.
+    தயவுசெய்து அதைப் புதுப்பிக்கவும்.
+service:
+  not_running: சீலன் UI சேவை இயங்கவில்லை
+  not_running_description: >-
+    சீலன் UI சேவை (slu-service) என்பது ஆப்ஸ் சரியாக வேலை செய்வதற்கான சார்பு/உதவி
+    ஆகும்.
+  not_running_ok: சேவையைத் தொடங்கவும்

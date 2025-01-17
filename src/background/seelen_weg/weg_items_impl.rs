@@ -2,13 +2,18 @@ use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::{
     handlers::SeelenEvent,
-    state::{PinnedWegItemData, WegAppGroupItem, WegItem, WegItems, WegTemporalItemsVisibility},
+    state::{
+        PinnedWegItemData, WegAppGroupItem, WegItem, WegItems, WegPinnedItemsVisibility,
+        WegTemporalItemsVisibility,
+    },
 };
 use std::{collections::HashMap, ffi::OsStr, sync::Arc};
 use tauri::Emitter;
 
 use crate::{
     error_handler::Result,
+    log_error,
+    modules::start::application::START_MENU_MANAGER,
     seelen::get_app_handle,
     state::application::FULL_STATE,
     windows_api::{window::Window, MonitorEnumerator, WindowsApi},
@@ -34,6 +39,7 @@ pub enum ShouldGetInfoFrom {
 #[derive(Debug, Clone)]
 pub struct WegItemsImpl {
     items: WegItems,
+    pre_state: Option<HashMap<String, WegItems>>,
 }
 
 fn item_contains_window(item: &WegItem, searching: isize) -> bool {
@@ -45,22 +51,61 @@ fn item_contains_window(item: &WegItem, searching: isize) -> bool {
     }
 }
 
+fn temporalise_collection(source: &Vec<WegItem>) -> Vec<WegItem> {
+    let mut items = vec![];
+    for item in source {
+        match item {
+            WegItem::Temporal(pinned_weg_item_data) => {
+                let mut cloned = pinned_weg_item_data.clone();
+                cloned.set_pin_disabled(true);
+                items.push(WegItem::Temporal(cloned))
+            }
+            WegItem::Pinned(pinned_weg_item_data) => {
+                let mut cloned = pinned_weg_item_data.clone();
+                cloned.set_pin_disabled(true);
+                items.push(WegItem::Temporal(cloned))
+            }
+            WegItem::Separator { id: _ }
+            | WegItem::Media { id: _ }
+            | WegItem::StartMenu { id: _ } => {}
+        }
+    }
+
+    items
+}
+
+fn temporalise(items: &mut WegItems) {
+    items.left = temporalise_collection(&items.left);
+    items.center = temporalise_collection(&items.center);
+    items.right = temporalise_collection(&items.right);
+}
+
 impl WegItemsImpl {
     pub fn new() -> Self {
         WegItemsImpl {
             items: FULL_STATE.load().weg_items.clone(),
+            pre_state: None,
         }
     }
 
-    pub fn emit_to_webview(&self) -> Result<()> {
+    pub fn emit_to_webview(&mut self) -> Result<()> {
         let handle = get_app_handle();
-        for (monitor_id, items) in self.get_filtered_by_monitor()? {
-            handle.emit_to(
-                SeelenWeg::get_label(&monitor_id),
-                SeelenEvent::WegInstanceChanged,
-                items,
-            )?;
+        let current_state = self.get_filtered_by_monitor().ok();
+
+        if current_state != self.pre_state {
+            if let Some(items) = &current_state {
+                for (monitor_id, items) in items {
+                    handle.emit_to(
+                        SeelenWeg::get_label(monitor_id),
+                        SeelenEvent::WegInstanceChanged,
+                        items.clone(),
+                    )?;
+                }
+            }
+
+            self.pre_state = current_state;
         }
+
         Ok(())
     }
 
@@ -123,6 +168,7 @@ impl WegItemsImpl {
 
         let get_info_from = match &umid {
             Some(umid) => {
+                log_error!(extract_and_save_icon_umid(umid));
                 if WindowsApi::is_uwp_package_id(umid) {
                     ShouldGetInfoFrom::Package(umid.clone())
                 } else {
@@ -132,6 +178,7 @@ impl WegItemsImpl {
             None => ShouldGetInfoFrom::Process,
         };
 
+        let mut pin_disabled = false;
         let mut display_name = window
             .app_display_name()
             .unwrap_or_else(|_| String::from("Unknown"));
@@ -139,7 +186,6 @@ impl WegItemsImpl {
         let relaunch_command;
         match get_info_from {
             ShouldGetInfoFrom::Package(umid) => {
-                let _ = extract_and_save_icon_umid(&umid);
                 display_name = WindowsApi::get_uwp_app_info(&umid)?
                     .DisplayInfo()?
                     .DisplayName()?
@@ -147,7 +193,9 @@ impl WegItemsImpl {
                 relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
             }
             ShouldGetInfoFrom::WindowPropertyStore(umid) => {
-                let shortcut = Window::search_shortcut_with_same_umid(&umid);
+                let shortcut = START_MENU_MANAGER
+                    .load()
+                    .search_shortcut_with_same_umid(&umid);
                 if let Some(shortcut) = shortcut {
                     path = shortcut.clone();
                     display_name = path
@@ -155,10 +203,9 @@ impl WegItemsImpl {
                         .unwrap_or_else(|| OsStr::new("Unknown"))
                         .to_string_lossy()
                         .to_string();
+                } else {
+                    log_error!(extract_and_save_icon_from_file(&path));
                 }
-
-                let _ = extract_and_save_icon_from_file(&path);
-
                 // System.AppUserModel.RelaunchCommand and System.AppUserModel.RelaunchDisplayNameResource
                 // must always be set together. If one of those properties is not set, then neither is used.
                 // https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
@@ -168,11 +215,12 @@ impl WegItemsImpl {
                     relaunch_command = win_relaunch_command;
                     display_name = relaunch_display_name;
                 } else {
+                    pin_disabled = window.prevent_pinning();
                     relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
                 }
             }
             ShouldGetInfoFrom::Process => {
-                let _ = extract_and_save_icon_from_file(&path);
+                log_error!(extract_and_save_icon_from_file(&path));
                 relaunch_command = path.to_string_lossy().to_string();
             }
         };
@@ -214,6 +262,7 @@ impl WegItemsImpl {
                 title: window.title(),
                 handle: window.address(),
             }],
+            pin_disabled,
         };
         self.items.center.push(WegItem::Temporal(data));
         Ok(())
@@ -273,14 +322,32 @@ impl WegItemsImpl {
             if !state.is_weg_enabled_on_monitor(&monitor_id) {
                 continue;
             }
-            let mode = state.get_weg_temporal_item_visibility(&monitor_id);
-            match mode {
-                WegTemporalItemsVisibility::All => {
+            let temporal_mode = state.get_weg_temporal_item_visibility(&monitor_id);
+            let pinned_mode = state.get_weg_pinned_item_visibility(&monitor_id);
+            let pinned_visible = pinned_mode == WegPinnedItemsVisibility::Always
+                || (pinned_mode == WegPinnedItemsVisibility::WhenPrimary
+                    && monitor.is_primary()?);
+
+            match (temporal_mode, pinned_visible) {
+                (WegTemporalItemsVisibility::All, true) => {
                     result.insert(monitor_id, self.items.clone());
                 }
-                WegTemporalItemsVisibility::OnMonitor => {
+                (WegTemporalItemsVisibility::All, false) => {
+                    let mut weg_items = self.clone();
+                    temporalise(&mut weg_items.items);
+                    weg_items.items.sanitize();
+                    result.insert(monitor_id, weg_items.items);
+                }
+                (WegTemporalItemsVisibility::OnMonitor, true) => {
                     let mut weg_items = self.clone();
                     weg_items.filter_by_monitor(&monitor_id);
+                    weg_items.items.sanitize();
+                    result.insert(monitor_id, weg_items.items);
+                }
+                (WegTemporalItemsVisibility::OnMonitor, false) => {
+                    let mut weg_items = self.clone();
+                    weg_items.filter_by_monitor(&monitor_id);
+                    temporalise(&mut weg_items.items);
                     weg_items.items.sanitize();
                     result.insert(monitor_id, weg_items.items);
                 }

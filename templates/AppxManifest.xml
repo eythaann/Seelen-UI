@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  xmlns:uap5="http://schemas.microsoft.com/appx/manifest/uap/windows10/5"
+  xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+  xmlns:desktop7="http://schemas.microsoft.com/appx/manifest/desktop/windows10/7"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap uap3 uap10 rescap uap5">
+  <Identity Name="Seelen.SeelenUI" Publisher="CN=7E60225C-94CB-4B2E-B17F-0159A11074CB" Version="{{version}}" ProcessorArchitecture="x64" />
+  <Properties>
+    <DisplayName>Seelen UI</DisplayName>
+    <PublisherDisplayName>Seelen</PublisherDisplayName>
+    <Description>Fully Customizable Desktop Enviroment for Windows.</Description>
+    <Logo>static\icons\256x256.png</Logo>
+    <uap10:PackageIntegrity>
+      <uap10:Content Enforcement="on" />
+    </uap10:PackageIntegrity>
+  </Properties>
+  <Resources>
+    <Resource Language="en-us" />
+  </Resources>
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0"
+      MaxVersionTested="10.0.22000.1" />
+  </Dependencies>
+  <Applications>
+    <Application Id="App" Executable="seelen-ui.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap3:VisualElements
+        DisplayName="Seelen UI"
+        Description="Fully Customizable Desktop Enviroment for Windows."
+        Square150x150Logo="static\icons\128x128.png"
+        Square44x44Logo="static\icons\48x48.png"
+        BackgroundColor="transparent"
+        AppListEntry="default"
+        VisualGroup="Seelen">
+      </uap3:VisualElements>
+
+      <Extensions>
+        <uap5:Extension Category="windows.appExecutionAlias">
+          <uap5:AppExecutionAlias>
+            <uap5:ExecutionAlias Alias="seelen-ui.exe" />
+          </uap5:AppExecutionAlias>
+        </uap5:Extension>
+
+        <uap:Extension Category="windows.fileTypeAssociation">
+          <uap:FileTypeAssociation Name="seelen-ui-msix.file">
+            <uap:Logo>static\icons\128x128.png</uap:Logo>
+            <uap:DisplayName>Seelen UI</uap:DisplayName>
+            <uap:SupportedFileTypes>
+              <uap:FileType>.slu</uap:FileType>
+            </uap:SupportedFileTypes>
+          </uap:FileTypeAssociation>
+        </uap:Extension>
+
+        <uap10:Extension Category="windows.protocol">
+          <uap10:Protocol Name="seelen-ui-msix.uri">
+            <uap10:Logo>static\icons\128x128.png</uap10:Logo>
+            <uap10:DisplayName>Seelen UI</uap10:DisplayName>
+          </uap10:Protocol>
+        </uap10:Extension>
+      </Extensions>
+    </Application>
+
+    <Application Id="Service" Executable="slu-service.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap3:VisualElements
+        DisplayName="Seelen UI Service"
+        Description="Handle system actions and crash reports."
+        Square150x150Logo="static\icons\128x128.png"
+        Square44x44Logo="static\icons\48x48.png"
+        BackgroundColor="transparent"
+        AppListEntry="none">
+      </uap3:VisualElements>
+
+      <Extensions>
+        <uap5:Extension Category="windows.appExecutionAlias">
+          <uap5:AppExecutionAlias>
+            <uap5:ExecutionAlias Alias="slu-service.exe" />
+          </uap5:AppExecutionAlias>
+        </uap5:Extension>
+      </Extensions>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>

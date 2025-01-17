@@ -4,9 +4,24 @@ import yaml from 'js-yaml';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-import { LanguageList } from '../src/apps/shared/lang';
+import { SupportedLanguages } from '../src/apps/shared/lang';
 
-const toTranslate = LanguageList.map((lang) => lang.value).filter((lang) => lang !== 'en');
+const argv = await yargs(hideBin(process.argv))
+  .option('delete', {
+    type: 'array',
+    description: 'Keys to delete from translations',
+    alias: 'd',
+    coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
+  })
+  .option('update', {
+    type: 'array',
+    description: 'Keys to update in translations',
+    alias: 'u',
+    coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
+  }).argv;
+
+const deleteKeys = new Set(argv.delete || []);
+const keysToUpdate = new Set(argv.update || []);
 
 function deepSortObject<T>(obj: T): T {
   if (Array.isArray(obj)) {
@@ -46,34 +61,6 @@ async function translateObject(base: any, lang: string, mut_obj: any) {
   );
 }
 
-async function completeTranslationsFor(
-  app: string,
-  keysToUpdate: Set<string>,
-  deleteKeys: Set<string>,
-) {
-  const translationsDir = `./src/apps/${app}/i18n/translations`;
-
-  const en = deepSortObject(yaml.load(readFileSync(`${translationsDir}/en.yml`, 'utf8')));
-  deleteKeysDeep(en, Array.from(deleteKeys));
-  writeFileSync(`${translationsDir}/en.yml`, yaml.dump(en));
-
-  for (const lang of toTranslate) {
-    const filePath = `${translationsDir}/${lang}.yml`;
-    console.log(`Processing: ${filePath}`);
-
-    let translation: any = {};
-    if (existsSync(filePath)) {
-      translation = yaml.load(readFileSync(filePath, 'utf8'));
-    }
-
-    deleteKeysDeep(translation, Array.from(deleteKeys));
-    deleteKeysDeep(translation, Array.from(keysToUpdate));
-    await translateObject(en, lang, translation);
-
-    writeFileSync(filePath, yaml.dump(deepSortObject(translation)));
-  }
-}
-
 function deleteKeysDeep(obj: any, keys: string[]) {
   for (const key of keys) {
     deleteDeepKey(obj, key.split('.'));
@@ -98,28 +85,33 @@ function deleteDeepKey(obj: any, path: string[]) {
   delete temp[finalKey];
 }
 
-async function main() {
-  const argv = await yargs(hideBin(process.argv))
-    .option('delete', {
-      type: 'array',
-      description: 'Keys to delete from translations',
-      alias: 'd',
-      coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
-    })
-    .option('update', {
-      type: 'array',
-      description: 'Keys to update in translations',
-      alias: 'u',
-      coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
-    }).argv;
+const toTranslate = SupportedLanguages.map((lang) => lang.value).filter((lang) => lang !== 'en');
 
-  const deleteKeys = new Set(argv.delete || []);
-  const keysToUpdate = new Set(argv.update || []);
+async function completeTranslationsFor(localesDir: string) {
+  const en = deepSortObject(yaml.load(readFileSync(`${localesDir}/en.yml`, 'utf8')));
+  deleteKeysDeep(en, Array.from(deleteKeys));
+  writeFileSync(`${localesDir}/en.yml`, yaml.dump(en));
 
-  await completeTranslationsFor('toolbar', keysToUpdate, deleteKeys);
-  await completeTranslationsFor('seelenweg', keysToUpdate, deleteKeys);
-  await completeTranslationsFor('settings', keysToUpdate, deleteKeys);
-  await completeTranslationsFor('seelen_rofi', keysToUpdate, deleteKeys);
+  for (const lang of toTranslate) {
+    const filePath = `${localesDir}/${lang}.yml`;
+    console.log(`Processing: ${filePath}`);
+
+    let translation: any = {};
+    if (existsSync(filePath)) {
+      translation = yaml.load(readFileSync(filePath, 'utf8'));
+    }
+
+    deleteKeysDeep(translation, Array.from(deleteKeys));
+    deleteKeysDeep(translation, Array.from(keysToUpdate));
+    await translateObject(en, lang, translation);
+
+    writeFileSync(filePath, yaml.dump(deepSortObject(translation)));
+  }
 }
 
-main().catch(console.error);
+await completeTranslationsFor('src/apps/toolbar/i18n/translations');
+await completeTranslationsFor('src/apps/seelenweg/i18n/translations');
+await completeTranslationsFor('src/apps/settings/i18n/translations');
+await completeTranslationsFor('src/apps/seelen_rofi/i18n/translations');
+
+await completeTranslationsFor('src/background/i18n');

@@ -12,8 +12,6 @@ import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 
 export function App() {
-  const version = useSelector(Selectors.version);
-
   const structure = useSelector(Selectors.placeholder);
   const colors = useSelector(Selectors.colors);
 
@@ -44,8 +42,8 @@ export function App() {
         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
-      <ErrorBoundary key={version} fallback={<ErrorFallback />}>
-        <ToolBar key={version} structure={structure} />
+      <ErrorBoundary fallback={<ErrorFallback />}>
+        <ToolBar structure={structure} />
       </ErrorBoundary>
     </ConfigProvider>
   );

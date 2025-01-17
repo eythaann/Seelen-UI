@@ -42,7 +42,8 @@ jobs:
         include:
           - platform: "windows-latest"
             args: ""
-
+    outputs:
+      nightly-version: ${{ steps.change-version.outputs.result }}
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
@@ -64,7 +65,8 @@ jobs:
         run: npm clean-install
 
       - name: Change version to nightly
-        uses: actions/github-script@v6
+        id: change-version
+        uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
@@ -81,6 +83,8 @@ jobs:
             let cargoTomlContent = fs.readFileSync('Cargo.toml', 'utf-8');
             cargoTomlContent = cargoTomlContent.replace(/^version\s*=\s*".*"/m, `version = "${nightlyVersion}"`);
             fs.writeFileSync('Cargo.toml', cargoTomlContent);
+
+            return nightlyVersion;
 
       # If build fails we will be without a nightly build until the next push or workflow_dispatch
       - uses: tauri-apps/tauri-action@v0.5.16
@@ -132,6 +136,8 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
           script: |
             const tagName = 'nightly';
+            const nightlyVersion = '${{ needs.build-installers.outputs.nightly-version }}';
+
             const release = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -145,7 +151,7 @@ jobs:
             });
 
             result.data.forEach(async (asset) => {
-              if (asset.name.endsWith('.sig')) {
+              if (!asset.name.includes(nightlyVersion) || asset.name.endsWith('.sig')) {
                 await github.rest.repos.deleteReleaseAsset({
                   owner: context.repo.owner,
                   repo: context.repo.repo,

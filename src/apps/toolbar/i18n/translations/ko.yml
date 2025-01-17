@@ -1,6 +1,6 @@
 context_menu:
-  add_module: 모듈을 추가하십시오
-  remove: 모듈을 제거하십시오
+  add_module: 모듈 추가
+  remove: 모듈 제거
   settings: 설정
   task_manager: 작업 관리자
 media:

@@ -1,5 +1,8 @@
 app_launcher:
   enable: Tətbiq başlatıcısını aktivləşdirin
+  launch_on:
+    mouse_over: Siçan üzərində
+    primary: İlkin
   monitor: Göstərmək üçün monitor
   runners:
     cmd: Əmr etmək
@@ -49,9 +52,20 @@ apps_configurations:
     id: Eyniləşdirici
     kind: Tərəfindən müəyyənləşdirmək
     matching_strategy: Uyğun strategiya
+    matching_strategy_option:
+      contains: ehtiva edir
+      ends_with: ilə bitir
+      equals: Bərabərdir
+      regex: Daimi ifadə
+      starts_with: ilə başlayır
     negation: Uyğunlaşmanı rədd edin
     or: Və ya
     remove: Bloku silmək
+    type:
+      class: Sinif
+      exe: Exe
+      path: Yol
+      title: Başlıq
   import: İdxal etmək
   new: Yeni
   search: Axtarış
@@ -67,6 +81,7 @@ devtools:
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı
+  simulate_fullscreen: Tam ekran hadisəsini simulyasiya edin
 extras:
   discord: Nifaq
   exit: Çıxmaq / çıxmaq
@@ -203,6 +218,10 @@ toolbar:
   delay_to_show: Göstərmək üçün gecikmə
   enable: Zərif alət çubuğunu aktivləşdirin
   height: Hündürlük
+  hide_mode:
+    always: Həmişə
+    never: Heç vaxt
+    on_overlap: Üst-üstə düşür
   label: Alət çubuğu
   placeholder:
     author: Müəllif
@@ -235,9 +254,17 @@ weg:
   dock_side: Mövqe
   enable: Dock / tapşırıq çubuğunu aktivləşdirin
   gap: Gap
+  hide_mode:
+    always: Həmişə
+    never: Heç vaxt
+    on_overlap: Üst-üstə düşür
   items:
     gap: Əşyalar arasındakı boşluq
     label: Maddələr
+    pinned_visibility:
+      always: Həmişə
+      label: Saxlanmış Elementlərin Görünüşü
+      when_primary: Monitor əsas olduqda
     size: Maddə ölçüsü
     temporal_visibility:
       all: Hamısı
@@ -247,6 +274,9 @@ weg:
     zoom_size: Böyüdülmüş ölçü (mövzular üçün istifadə olunur)
   label: Dock / tapşırıq çubuğu
   margin: Kənarə
+  mode:
+    full_width: Tam ekran eni
+    min_content: Ola bildiyi qədər kiçik
   padding: Paddend
   use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
   width: Geniştəhər

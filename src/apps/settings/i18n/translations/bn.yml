@@ -1,5 +1,8 @@
 app_launcher:
   enable: অ্যাপ্লিকেশন লঞ্চার সক্ষম করুন
+  launch_on:
+    mouse_over: মাউস ওভার
+    primary: প্রাথমিক
   monitor: দেখানোর জন্য মনিটর
   runners:
     cmd: কমান্ড
@@ -50,9 +53,20 @@ apps_configurations:
     id: সনাক্তকারী
     kind: দ্বারা চিহ্নিত করুন
     matching_strategy: ম্যাচিং কৌশল
+    matching_strategy_option:
+      contains: ধারণ করে
+      ends_with: দিয়ে শেষ হয়
+      equals: সমান
+      regex: নিয়মিত অভিব্যক্তি
+      starts_with: দিয়ে শুরু হয়
     negation: ম্যাচিং অবহেলা
     or: বা
     remove: ব্লক মুছুন
+    type:
+      class: ক্লাস
+      exe: Exe
+      path: পথ
+      title: শিরোনাম
   import: আমদানি
   new: নতুন
   search: অনুসন্ধান
@@ -68,6 +82,7 @@ devtools:
   install_folder: ইনস্টলেশন ফোল্ডার
   load: বোঝা
   settings_file: সেটিংস ফাইল
+  simulate_fullscreen: পূর্ণস্ক্রীন ইভেন্ট অনুকরণ
 extras:
   discord: মতবিরোধ
   exit: প্রস্থান/প্রস্থান
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: দেখাতে বিলম্ব
   enable: অভিনব সরঞ্জামদণ্ড সক্ষম করুন
   height: উচ্চতা
+  hide_mode:
+    always: সর্বদা
+    never: কখনই না
+    on_overlap: ওভারল্যাপে
   label: সরঞ্জামদণ্ড
   placeholder:
     author: লেখক
@@ -236,9 +255,17 @@ weg:
   dock_side: অবস্থান
   enable: ডক/টাস্কবার সক্ষম করুন
   gap: ফাঁক
+  hide_mode:
+    always: সর্বদা
+    never: কখনই না
+    on_overlap: ওভারল্যাপে
   items:
     gap: আইটেম মধ্যে স্থান
     label: আইটেম
+    pinned_visibility:
+      always: সর্বদা
+      label: পিন করা আইটেম দৃশ্যমানতা
+      when_primary: যখন মনিটর প্রাথমিক হয়
     size: আইটেমের আকার
     temporal_visibility:
       all: সব
@@ -248,6 +275,9 @@ weg:
     zoom_size: জুমযুক্ত আকার (থিমের জন্য ব্যবহৃত)
   label: ডক/টাস্কবার
   margin: মার্জিন
+  mode:
+    full_width: পূর্ণ পর্দা প্রস্থ
+    min_content: যতটা সম্ভব ছোট
   padding: প্যাডিং
   use_multiple_monitor_overlap_logic: একক ফোকাস লজিকের পরিবর্তে প্রদর্শন নির্দিষ্ট ব্যবহার করুন
   width: প্রস্থ

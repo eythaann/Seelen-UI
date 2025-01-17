@@ -1,5 +1,8 @@
 app_launcher:
   enable: Iespējot lietotņu palaišanas ierīci
+  launch_on:
+    mouse_over: Pārvietojiet peli virsū
+    primary: Primārais
   monitor: Uzraudzīt, lai parādītu
   runners:
     cmd: Vadība
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikators
     kind: Identificēt ar
     matching_strategy: Atbilstības stratēģija
+    matching_strategy_option:
+      contains: Satur
+      ends_with: Beidzas ar
+      equals: Vienāds
+      regex: Regulārā izteiksme
+      starts_with: Sākas ar
     negation: Negatīva atbilstība
     or: Vai
     remove: Dzēst bloku
+    type:
+      class: Klase
+      exe: Exe
+      path: Ceļš
+      title: Nosaukums
   import: Importēt
   new: Jauns
   search: Meklēt
@@ -68,6 +82,7 @@ devtools:
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails
+  simulate_fullscreen: Simulējiet pilnekrāna notikumu
 extras:
   discord: Nesaskaņas
   exit: Atmest/iziet
@@ -202,6 +217,10 @@ toolbar:
   delay_to_show: Kavēšanās parādīt
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
+  hide_mode:
+    always: Vienmēr
+    never: Nekad
+    on_overlap: Uz pārklāšanās
   label: Rīkjosla
   placeholder:
     author: Autors
@@ -234,9 +253,17 @@ weg:
   dock_side: Pozīcija
   enable: Iespējot doku/uzdevumjoslu
   gap: Plaisa
+  hide_mode:
+    always: Vienmēr
+    never: Nekad
+    on_overlap: Uz pārklāšanās
   items:
     gap: Vieta starp priekšmetiem
     label: Priekšmeti
+    pinned_visibility:
+      always: Vienmēr
+      label: Piesprausto vienumu redzamība
+      when_primary: Kad monitors ir primārais
     size: Vienuma izmērs
     temporal_visibility:
       all: Visi
@@ -246,6 +273,9 @@ weg:
     zoom_size: Tuvināta izmēra (izmanto tēmām)
   label: Doks/uzdevumjosla
   margin: Robeža
+  mode:
+    full_width: Pilna ekrāna platums
+    min_content: Cik mazs var būt
   padding: Polsterējums
   use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
   width: Platums

@@ -69,6 +69,7 @@ export function KeyCodeToAHK(e: React.KeyboardEvent<HTMLInputElement>): AhkVar |
     fancy,
     ahk,
     readonly: false,
+    devonly: false,
   };
 }
 

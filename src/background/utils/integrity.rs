@@ -1,42 +1,46 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
 use base64::Engine;
+use clap::ArgMatches;
 use tauri::webview_version;
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 use tauri_plugin_shell::ShellExt;
 
-use crate::error_handler::Result;
+use crate::{error_handler::Result, modules::cli::application::URI_MSIX};
 
 use super::spawn_named_thread;
 
 pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<()> {
-    let mut title = "WebView2 Runtime not found";
-    let mut message = "Seelen UI requires Webview2 Runtime. Please install it.";
-
-    let major = match webview_version() {
+    let error = match webview_version() {
         Ok(version) => {
-            title = "WebView2 Runtime outdated";
-            message = "Seelen UI requires Webview2 Runtime 110 or higher. Please update it.";
             let mut version = version.split('.');
-            version.next().unwrap_or("0").parse().unwrap_or(0)
+            let major = version.next().unwrap_or("0").parse().unwrap_or(0);
+            if major < 110 {
+                Some((
+                    t!("runtime.outdated"),
+                    t!("runtime.outdated_description", min_version = "110"),
+                ))
+            } else {
+                None
+            }
         }
-        Err(_) => 0,
+        Err(_) => Some((t!("runtime.not_found"), t!("runtime.not_found_description"))),
     };
 
-    if major < 110 {
+    if let Some((title, message)) = error {
         let ok_pressed = app
             .dialog()
             .message(message)
             .title(title)
             .kind(MessageDialogKind::Error)
-            .ok_button_label("Go to download page")
+            .ok_button_label(t!("runtime.download"))
             .blocking_show();
         if ok_pressed {
             let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
             #[allow(deprecated)]
             app.shell().open(url, None)?;
         }
-        return Err(title.into());
+        return Err("Webview runtime not installed or outdated".into());
     }
     Ok(())
 }
@@ -79,36 +83,13 @@ pub fn start_integrity_thread(app: tauri::AppHandle) {
     .expect("Failed to start integrity thread");
 }
 
-pub fn start_slu_service(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
-    log::trace!("Starting slu-service");
-    let path = std::env::current_exe()?;
-    #[allow(deprecated)]
-    app.shell().open(
-        path.with_file_name("slu-service.exe")
-            .to_string_lossy()
-            .to_string(),
-        None,
-    )?;
-    Ok(())
-}
-
-pub fn kill_slu_service() -> Result<()> {
-    log::trace!("Killing slu-service");
-    let mut sys = sysinfo::System::new();
-    sys.refresh_processes();
-    let process = sys.processes().values().find(|p| {
-        p.exe()
-            .is_some_and(|path| path.ends_with("slu-service.exe"))
-    });
-    if let Some(process) = process {
-        process.kill();
+pub fn restart_as_appx(args: &ArgMatches) -> Result<!> {
+    let mut command = URI_MSIX.to_string();
+    if args.get_flag("silent") {
+        command += " --silent"
     }
-    Ok(())
-}
-
-pub fn restart_as_appx() -> Result<!> {
     std::process::Command::new("explorer")
-        .arg(r"shell:AppsFolder\Seelen.SeelenUI_p6yyn03m1894e!App")
+        .arg(command)
         .spawn()?;
     std::process::exit(0);
 }

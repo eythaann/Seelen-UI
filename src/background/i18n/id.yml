@@ -1,0 +1,14 @@
+runtime:
+  download: Buka halaman unduh
+  not_found: Waktu Proses WebView2 tidak ditemukan
+  not_found_description: Seelen UI memerlukan Runtime Webview2. Silakan menginstalnya.
+  outdated: Waktu Proses WebView2 sudah ketinggalan jaman
+  outdated_description: >-
+    Seelen UI memerlukan Webview2 Runtime %{min_version} atau lebih tinggi.
+    Harap perbarui.
+service:
+  not_running: Layanan Seelen UI tidak berjalan
+  not_running_description: >-
+    Seelen UI Service (slu-service) adalah ketergantungan/pembantu agar aplikasi
+    berfungsi dengan baik.
+  not_running_ok: Mulai layanan

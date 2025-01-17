@@ -2,7 +2,6 @@ import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
 import { Placeholder, Plugin, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
-import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -112,29 +111,26 @@ export function ToolBar({ structure }: Props) {
     }
   }, [isOverlaped, hideMode]);
 
-  const onReorderPinned = useCallback(
-    debounce((apps: (ToolbarItem | string)[]) => {
-      let dividerStart = apps.indexOf(DividerStart);
-      let dividerEnd = apps.indexOf(DividerEnd);
+  const onReorderPinned = useCallback((apps: (ToolbarItem | string)[]) => {
+    let dividerStart = apps.indexOf(DividerStart);
+    let dividerEnd = apps.indexOf(DividerEnd);
 
-      if (dividerStart === -1 || dividerEnd === -1) {
-        forceUpdate();
-        return;
-      }
+    if (dividerStart === -1 || dividerEnd === -1) {
+      forceUpdate();
+      return;
+    }
 
-      let payload = apps.slice(0, dividerStart) as ToolbarItem[];
-      dispatch(RootActions.setItemsOnLeft(payload));
+    let payload = apps.slice(0, dividerStart) as ToolbarItem[];
+    dispatch(RootActions.setItemsOnLeft(payload));
 
-      payload = apps.slice(dividerStart + 1, dividerEnd) as ToolbarItem[];
-      dispatch(RootActions.setItemsOnCenter(payload));
+    payload = apps.slice(dividerStart + 1, dividerEnd) as ToolbarItem[];
+    dispatch(RootActions.setItemsOnCenter(payload));
 
-      payload = apps.slice(dividerEnd + 1) as ToolbarItem[];
-      dispatch(RootActions.setItemsOnRight(payload));
+    payload = apps.slice(dividerEnd + 1) as ToolbarItem[];
+    dispatch(RootActions.setItemsOnRight(payload));
 
-      SavePlaceholderAsCustom()?.catch(console.error);
-    }, 10),
-    [],
-  );
+    SavePlaceholderAsCustom()?.catch(console.error);
+  }, []);
 
   const shouldBeHidden =
     !isAppFocused && hideMode !== HideMode.Never && (isOverlaped || hideMode === HideMode.Always);

@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktivér app Launcher
+  launch_on:
+    mouse_over: Hold musen over
+    primary: Primær
   monitor: Overvågning at vise
   runners:
     cmd: Kommando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identificer ved
     matching_strategy: Matchende strategi
+    matching_strategy_option:
+      contains: Indeholder
+      ends_with: Slutter med
+      equals: Lige til
+      regex: Regelmæssigt udtryk
+      starts_with: Starter med
     negation: Negat matchning
     or: ELLER
     remove: Slet blok
+    type:
+      class: klasse
+      exe: Exe
+      path: Sti
+      title: Titel
   import: Importere
   new: Ny
   search: Søg
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installationsmappe
   load: belastning
   settings_file: Indstillinger fil
+  simulate_fullscreen: Simuler begivenhed i fuld skærm
 extras:
   discord: Uenighed
   exit: Afslut/exit
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Forsinket fremvisning
   enable: Aktivér fancy værktøjslinje
   height: Højde
+  hide_mode:
+    always: Altid
+    never: Aldrig
+    on_overlap: På overlapning
   label: Værktøjslinje
   placeholder:
     author: Forfatter
@@ -238,9 +257,17 @@ weg:
   dock_side: Position
   enable: Aktivér dock/proceslinje
   gap: Gap
+  hide_mode:
+    always: Altid
+    never: Aldrig
+    on_overlap: På overlapning
   items:
     gap: Rum mellem genstande
     label: Genstande
+    pinned_visibility:
+      always: Altid
+      label: Fastgjorte elementers synlighed
+      when_primary: Når monitoren er primær
     size: Varestørrelse
     temporal_visibility:
       all: Alle
@@ -250,6 +277,9 @@ weg:
     zoom_size: Zoomet størrelse (brugt til temaer)
   label: Dock/proceslinje
   margin: Margin
+  mode:
+    full_width: Fuld skærmbredde
+    min_content: Så lille som det kan være
   padding: Polstring
   use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
   width: Bredde

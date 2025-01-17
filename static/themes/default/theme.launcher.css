@@ -98,6 +98,14 @@ body {
   justify-content: flex-start;
   overflow: auto;
   height: 100%;
+
+  .launcher-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
 }
 
 .launcher-footer {

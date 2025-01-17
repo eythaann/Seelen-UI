@@ -1,5 +1,8 @@
 app_launcher:
   enable: U oggolow appka bilaabista
+  launch_on:
+    mouse_over: Jiirku wuu dhammaaday
+    primary: Asal ahaan
   monitor: Kormeer si loo muujiyo
   runners:
     cmd: Amrid
@@ -51,9 +54,20 @@ apps_configurations:
     id: Aqoonsiga
     kind: Aqoonso
     matching_strategy: Istaraatiijiyadda iswaafajinta
+    matching_strategy_option:
+      contains: Waxa ku jira
+      ends_with: Ku dhamaata
+      equals: U dhigma
+      regex: Odhaah joogto ah
+      starts_with: Waxay ku bilaabataa
     negation: Ciriiri u dhigma
     or: Ama
     remove: Tirtir xannibaadda
+    type:
+      class: Fasalka
+      exe: Ex
+      path: Jidka
+      title: Ciwaanka
   import: Soo dejin
   new: Cusub
   search: Raadin
@@ -69,6 +83,7 @@ devtools:
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta
+  simulate_fullscreen: Isku day dhacdo shaashad buuxda
 extras:
   discord: Huf
   exit: Jooji / bixitaan
@@ -204,6 +219,10 @@ toolbar:
   delay_to_show: Dib u dhig si loo muujiyo
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
+  hide_mode:
+    always: Had iyo jeer
+    never: Marna
+    on_overlap: Isku dhafka
   label: Qalab argamiye
   placeholder:
     author: Qoraa
@@ -240,9 +259,17 @@ weg:
   dock_side: Meel
   enable: Kartida DOCK / Turniinka
   gap: Dalool
+  hide_mode:
+    always: Had iyo jeer
+    never: Marna
+    on_overlap: Isku dhafka
   items:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha
+    pinned_visibility:
+      always: Had iyo jeer
+      label: Shayga Ku dheggan Muuqaal
+      when_primary: Marka kormeeruhu uu yahay aasaasiga
     size: Shayga cabirka
     temporal_visibility:
       all: Dhammaan
@@ -252,6 +279,9 @@ weg:
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
   label: Dock / Tootshar
   margin: Margin
+  mode:
+    full_width: Ballaca shaashadda oo dhan
+    min_content: Yaryar sida ay noqon karto
   padding: Suur
   use_multiple_monitor_overlap_logic: >-
     Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda

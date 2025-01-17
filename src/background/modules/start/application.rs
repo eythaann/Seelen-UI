@@ -12,19 +12,33 @@ use crate::{
 use super::domain::StartMenuItem;
 
 lazy_static! {
-    pub static ref START_MENU_ITEMS: ArcSwap<Vec<StartMenuItem>> = ArcSwap::from_pointee({
+    pub static ref START_MENU_MANAGER: ArcSwap<StartMenuManager> = ArcSwap::from_pointee({
         let mut manager = StartMenuManager::new();
         manager.init().unwrap();
-        manager.list
+        manager
     });
 }
 
 pub struct StartMenuManager {
-    list: Vec<StartMenuItem>,
+    pub list: Vec<StartMenuItem>,
     cache_path: PathBuf,
 }
 
 impl StartMenuManager {
+    pub fn common_items_path() -> PathBuf {
+        PathBuf::from(r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs")
+    }
+
+    pub fn user_items_path() -> PathBuf {
+        get_app_handle()
+            .path()
+            .resolve(
+                r"Microsoft\Windows\Start Menu\Programs",
+                BaseDirectory::Data,
+            )
+            .expect("Failed to resolve user start menu path")
+    }
+
     pub fn new() -> StartMenuManager {
         StartMenuManager {
             list: Vec::new(),
@@ -42,18 +56,15 @@ impl StartMenuManager {
         Ok(())
     }
 
-    pub fn common_items_path() -> PathBuf {
-        PathBuf::from(r"C:\ProgramData\Microsoft\Windows\Start Menu\Programs")
-    }
-
-    pub fn user_items_path() -> PathBuf {
-        get_app_handle()
-            .path()
-            .resolve(
-                r"Microsoft\Windows\Start Menu\Programs",
-                BaseDirectory::Data,
-            )
-            .expect("Failed to resolve user start menu path")
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
+    pub fn search_shortcut_with_same_umid(&self, umid: &str) -> Option<PathBuf> {
+        let item = self.list.iter().find(|item| {
+            if let Some(item_umid) = &item.umid {
+                return item_umid == umid;
+            }
+            false
+        });
+        item.map(|item| item.path.clone())
     }
 
     pub fn store_cache(&self) -> Result<()> {

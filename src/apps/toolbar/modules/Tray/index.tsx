@@ -43,7 +43,7 @@ function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number })
         <img src={convertFileSrc(tray.icon ? tray.icon : LAZY_CONSTANTS.MISSING_ICON_PATH)} />
       </div>
       <OverflowTooltip
-        overlayClassName="tray-item-label-tooltip"
+        rootClassName="tray-item-label-tooltip"
         className="tray-item-label"
         text={tray.label || t('unlabelled_tray')}
         placement="left"
