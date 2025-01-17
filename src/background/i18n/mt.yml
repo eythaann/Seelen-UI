@@ -1,0 +1,14 @@
+runtime:
+  download: Mur fil-paġna tat-tniżżil
+  not_found: WebView2 Runtime ma nstabx
+  not_found_description: Seelen UI teħtieġ Webview2 Runtime. Jekk jogħġbok installah.
+  outdated: WebView2 Runtime skadut
+  outdated_description: >-
+    Seelen UI teħtieġ Webview2 Runtime %{min_version} jew ogħla. Jekk jogħġbok
+    aġġornaha.
+service:
+  not_running: Is-Servizz ta' Seelen UI mhux qed jaħdem
+  not_running_description: >-
+    Seelen UI Service (slu-service) huwa dipendenza/helper biex l-app taħdem
+    sew.
+  not_running_ok: Ibda s-servizz

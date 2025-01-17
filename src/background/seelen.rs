@@ -259,8 +259,10 @@ impl Seelen {
         Com::run_with_context(|| unsafe {
             let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
             task_service.Connect(None, None, None, None)?;
-            let folder = task_service.GetFolder(&"\\Seelen".into())?;
-            Ok(folder.GetTask(&"Seelen UI App".into()).is_ok())
+            let is_task_enabled = task_service
+                .GetFolder(&"\\Seelen".into())
+                .is_ok_and(|folder| folder.GetTask(&"Seelen UI App".into()).is_ok());
+            Ok(is_task_enabled)
         })
     }
 

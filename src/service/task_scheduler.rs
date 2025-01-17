@@ -39,10 +39,14 @@ impl TaskSchedulerHelper {
             task.Principal()?.SetRunLevel(TASK_RUNLEVEL_HIGHEST)?;
 
             let settings = task.Settings()?;
+            settings.SetPriority(4)?;
             settings.SetHidden(VARIANT_TRUE)?;
             settings.SetAllowDemandStart(VARIANT_TRUE)?;
             settings.SetDisallowStartIfOnBatteries(VARIANT_FALSE)?;
             settings.SetStopIfGoingOnBatteries(VARIANT_FALSE)?;
+
+            let triggers = task.Triggers()?;
+            triggers.Create(TASK_TRIGGER_LOGON)?;
 
             let actions = task.Actions()?;
             let exec_action: IExecAction2 = actions.Create(TASK_ACTION_EXEC)?.cast()?;

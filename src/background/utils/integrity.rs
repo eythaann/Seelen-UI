@@ -11,33 +11,36 @@ use crate::{error_handler::Result, modules::cli::application::URI_MSIX};
 use super::spawn_named_thread;
 
 pub fn validate_webview_runtime_is_installed(app: &tauri::AppHandle) -> Result<()> {
-    let mut title = "WebView2 Runtime not found";
-    let mut message = "Seelen UI requires Webview2 Runtime. Please install it.";
-
-    let major = match webview_version() {
+    let error = match webview_version() {
         Ok(version) => {
-            title = "WebView2 Runtime outdated";
-            message = "Seelen UI requires Webview2 Runtime 110 or higher. Please update it.";
             let mut version = version.split('.');
-            version.next().unwrap_or("0").parse().unwrap_or(0)
+            let major = version.next().unwrap_or("0").parse().unwrap_or(0);
+            if major < 110 {
+                Some((
+                    t!("runtime.outdated"),
+                    t!("runtime.outdated_description", min_version = "110"),
+                ))
+            } else {
+                None
+            }
         }
-        Err(_) => 0,
+        Err(_) => Some((t!("runtime.not_found"), t!("runtime.not_found_description"))),
     };
 
-    if major < 110 {
+    if let Some((title, message)) = error {
         let ok_pressed = app
             .dialog()
             .message(message)
             .title(title)
             .kind(MessageDialogKind::Error)
-            .ok_button_label("Go to download page")
+            .ok_button_label(t!("runtime.download"))
             .blocking_show();
         if ok_pressed {
             let url = "https://developer.microsoft.com/en-us/microsoft-edge/webview2/?form=MA13LH#download";
             #[allow(deprecated)]
             app.shell().open(url, None)?;
         }
-        return Err(title.into());
+        return Err("Webview runtime not installed or outdated".into());
     }
     Ok(())
 }
