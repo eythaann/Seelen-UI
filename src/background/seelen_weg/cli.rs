@@ -1,6 +1,7 @@
 use std::ops::Index;
 
 use clap::Command;
+use regex::Regex;
 use seelen_core::state::WegItem;
 use tauri_plugin_shell::ShellExt;
 use windows::Win32::Foundation::HWND;
@@ -63,7 +64,7 @@ impl SeelenWeg {
                             })
                             .collect();
 
-                        if all_items.len() < index {
+                        if all_items.len() <= index {
                             return Ok(());
                         }
 
@@ -86,12 +87,49 @@ impl SeelenWeg {
 
                                 WindowsApi::async_force_set_foreground(hwnd);
                             } else {
-                                get_app_handle()
-                                    .shell()
-                                    .command("explorer")
-                                    .arg(&inner_data.path)
-                                    .spawn()?;
-                                return Ok(());
+                                let regex = Regex::new("\"(.*?)\"|'(.*?)'|(\\S+)").unwrap();
+                                let mut matches = vec![];
+                                for (_, [finds]) in regex
+                                    .captures_iter(&inner_data.relaunch_command)
+                                    .map(|c| c.extract())
+                                {
+                                    matches.push(finds);
+                                }
+
+                                let special_regex = Regex::new("/^[a-zA-Z]:\\/").unwrap();
+                                let mut program = "".to_owned();
+                                if matches.len() > 1 && special_regex.is_match(matches[0]) {
+                                    for item in matches.clone() {
+                                        if !item.starts_with("-") && !item.contains("=") {
+                                            program.push_str(item);
+                                            _ = matches.pop();
+                                        } else {
+                                            break;
+                                        }
+                                    }
+                                } else {
+                                    program = matches.remove(0).to_owned();
+                                }
+
+                                log::trace!("finds: {:?} -> {:?}", program, matches);
+
+                                // we create a link file to trick with explorer into a separated process
+                                // and without elevation in case Seelen UI was running as admin
+                                // this could take some delay like is creating a file but just are some milliseconds
+                                // and this exposed funtion is intended to just run certain times
+                                let lnk_file =
+                                    WindowsApi::create_temp_shortcut(&program, &matches.join(" "))?;
+                                let path = lnk_file.clone();
+                                tauri::async_runtime::block_on(async move {
+                                    get_app_handle()
+                                        .shell()
+                                        .command("explorer")
+                                        .arg(&path)
+                                        .status()
+                                        .await
+                                        .unwrap();
+                                });
+                                std::fs::remove_file(&lnk_file)?;
                             }
                         }
                     }
