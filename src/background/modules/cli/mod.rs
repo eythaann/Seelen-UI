@@ -9,12 +9,11 @@ use std::{
 
 use application::{handle_cli_events, SEELEN_COMMAND_LINE};
 use itertools::Itertools;
-use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 
 use crate::{
     error_handler::Result,
     log_error,
-    seelen::{get_app_handle, Seelen},
+    seelen::Seelen,
     trace_lock,
     utils::{pwsh::PwshScript, spawn_named_thread},
 };
@@ -117,23 +116,22 @@ impl ServiceClient {
     }
 
     // the service should be running since installer will start it or startup task scheduler
-    // so if the service is not running, we need to reinstall it (common on msix setup)
-    pub async fn reinstall_and_start() -> Result<()> {
-        get_app_handle()
+    // so if the service is not running, we need to start it (common on msix setup)
+    pub async fn start_service() -> Result<()> {
+        /* get_app_handle()
             .dialog()
             .message(t!("service.not_running_description"))
             .title(t!("service.not_running"))
             .kind(MessageDialogKind::Info)
             .ok_button_label(t!("service.not_running_ok"))
             .blocking_show();
-
-        log::info!("Reinstalling service...");
+        */
         let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
         PwshScript::new(format!(
-            "&\"{}\" install \n net start slu-service",
+            "Start-Process '{}' -Verb runAs",
             service_path.display(),
         ))
-        .elevated()
+        .inline_command()
         .execute()
         .await?;
         Ok(())
@@ -141,5 +139,9 @@ impl ServiceClient {
 
     pub fn emit_stop_signal() -> Result<()> {
         Self::send_message(&["stop"])
+    }
+
+    pub fn emit_set_startup(enabled: bool) -> Result<()> {
+        Self::send_message(&["set-startup", &enabled.to_string()])
     }
 }

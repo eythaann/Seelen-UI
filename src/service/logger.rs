@@ -8,7 +8,7 @@ use windows::Win32::{
 };
 use winreg::{enums::HKEY_LOCAL_MACHINE, RegKey};
 
-use crate::{error::Result, string_utils::WindowsString, SERVICE_DISPLAY_NAME};
+use crate::{error::Result, is_local_dev, string_utils::WindowsString, SERVICE_DISPLAY_NAME};
 
 pub struct SluServiceLogger {
     handle: HANDLE,
@@ -100,12 +100,17 @@ pub const MSG_TRACE: u32 = event_id(Severity::Information, Customer::System, 0, 
 
 impl log::Log for SluServiceLogger {
     fn enabled(&self, _metadata: &Metadata) -> bool {
-        // metadata.level() <= self.level
-        true
+        !is_local_dev()
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-reporteventw
     fn log(&self, record: &Record) {
+        let message = format!("[{:?}] {}", record.level(), record.args());
+        println!("{}", message);
+        if !self.enabled(record.metadata()) {
+            return;
+        }
+
         let (event_type, event_id) = match record.level() {
             Level::Error => (EVENTLOG_ERROR_TYPE, MSG_ERROR),
             Level::Warn => (EVENTLOG_WARNING_TYPE, MSG_WARNING),
@@ -114,7 +119,7 @@ impl log::Log for SluServiceLogger {
             Level::Trace => (EVENTLOG_INFORMATION_TYPE, MSG_TRACE),
         };
 
-        let msg = WindowsString::from_str(&format!("[{:?}]{}", record.level(), record.args()));
+        let message = WindowsString::from_str(&message);
         unsafe {
             let _ = ReportEventW(
                 self.handle,
@@ -123,7 +128,7 @@ impl log::Log for SluServiceLogger {
                 event_id,
                 None,
                 0,
-                Some(&[msg.as_pcwstr()]),
+                Some(&[message.as_pcwstr()]),
                 None,
             );
         };

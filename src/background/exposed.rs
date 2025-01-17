@@ -99,7 +99,7 @@ fn show_app_settings() {
 
 #[tauri::command(async)]
 async fn set_auto_start(enabled: bool) -> Result<()> {
-    Seelen::set_auto_start(enabled).await
+    Seelen::set_auto_start(enabled)
 }
 
 #[tauri::command(async)]

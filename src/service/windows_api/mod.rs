@@ -1,16 +1,23 @@
 pub mod com;
 
+use std::path::PathBuf;
+
+use com::Com;
 use windows::Win32::{
     Foundation::{FALSE, HANDLE, LUID},
     Security::{
         AdjustTokenPrivileges, LookupPrivilegeValueW, SE_PRIVILEGE_ENABLED,
         TOKEN_ADJUST_PRIVILEGES, TOKEN_PRIVILEGES, TOKEN_QUERY,
     },
-    System::Threading::{GetCurrentProcess, OpenProcessToken},
+    System::{
+        Com::IPersistFile,
+        Threading::{GetCurrentProcess, OpenProcessToken},
+    },
+    UI::Shell::{IShellLinkW, ShellLink},
 };
-use windows_core::PCWSTR;
+use windows_core::{Interface, PCWSTR};
 
-use crate::error::Result;
+use crate::{error::Result, string_utils::WindowsString};
 
 pub struct WindowsApi;
 
@@ -52,5 +59,25 @@ impl WindowsApi {
 
         unsafe { AdjustTokenPrivileges(token_handle, FALSE, Some(&tkp), 0, None, None)? };
         Ok(())
+    }
+
+    pub fn create_temp_shortcut(program: &str, args: &str) -> Result<PathBuf> {
+        Com::run_with_context(|| unsafe {
+            let shell_link: IShellLinkW = Com::create_instance(&ShellLink)?;
+
+            let program = WindowsString::from_str(program);
+            shell_link.SetPath(program.as_pcwstr())?;
+
+            let arguments = WindowsString::from_str(args);
+            shell_link.SetArguments(arguments.as_pcwstr())?;
+
+            let temp_dir = std::env::temp_dir();
+            let lnk_path = temp_dir.join(format!("{}.lnk", uuid::Uuid::new_v4()));
+            let lnk_path_wide = WindowsString::from_os_string(lnk_path.as_os_str());
+
+            let persist_file: IPersistFile = shell_link.cast()?;
+            persist_file.Save(lnk_path_wide.as_pcwstr(), true)?;
+            Ok(lnk_path)
+        })
     }
 }

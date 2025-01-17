@@ -35,6 +35,7 @@ define_app_errors!(
     Windows(windows::core::Error);
     SerdeJson(serde_json::Error);
     Logger(log::SetLoggerError);
+    WideStringNull(widestring::error::MissingNulTerminator);
 );
 
 impl std::fmt::Debug for ServiceError {
