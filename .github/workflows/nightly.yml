@@ -94,6 +94,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
         with:
           tagName: nightly
+          releaseName: Seelen UI Nightly
           prerelease: true
           includeDebug: true
           args: ${{ matrix.args }}
