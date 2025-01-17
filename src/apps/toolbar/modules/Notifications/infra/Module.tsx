@@ -11,6 +11,7 @@ import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { RootState } from '../../shared/store/domain';
 
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { ArrivalPreview } from './ArrivalPreview';
 import { Notifications } from './Notifications';
 
@@ -33,16 +34,25 @@ export function NotificationsModule({ module }: Props) {
   }, []);
 
   return (
-    <Popover open={!openPreview} arrow={false} content={<ArrivalPreview />}>
-      <Popover
+    <Popover
+      open={!openPreview}
+      arrow={false}
+      content={<ArrivalPreview />}
+    >
+      <AnimatedPopover
+        animationDescription={{
+          maxAnimationTimeMs: 500,
+          openAnimationName: 'notification-open',
+          closeAnimationName: 'notification-close',
+        }}
         open={openPreview}
         trigger="click"
         onOpenChange={setOpenPreview}
         arrow={false}
         content={<Notifications />}
       >
-        <Item extraVars={{ count }} module={module} />
-      </Popover>
+        <Item extraVars={{ count }} module={module} active={openPreview} />
+      </AnimatedPopover>
     </Popover>
   );
 }

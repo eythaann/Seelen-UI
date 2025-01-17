@@ -2,14 +2,16 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { path } from '@tauri-apps/api';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { getCurrentWindow } from '@tauri-apps/api/window';
-import { Dropdown, Menu } from 'antd';
+import { Menu } from 'antd';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { OverflowTooltip } from 'src/apps/shared/components/OverflowTooltip';
-import { useIcon } from 'src/apps/shared/hooks';
+import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
 import { StartMenuApp } from '../../shared/store/domain';
+
+import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';
+import { OverflowTooltip } from '../../../../shared/components/OverflowTooltip';
 
 const MISSING_ICON_SRC = convertFileSrc(await path.resolveResource('static/icons/missing.png'));
 
@@ -32,27 +34,41 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
   const displayName = filename?.slice(0, filename.lastIndexOf('.')) || filename || '';
 
   return (
-    <Dropdown
+    <AnimatedDropdown
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'launcher-item-context-menu-open',
+        closeAnimationName: 'launcher-item-context-menu-close',
+      }}
       trigger={['contextMenu']}
       dropdownRender={() => (
-        <Menu
-          items={[
-            {
-              label: t('item.pin'),
-              key: 'pin',
-              onClick() {
-                invoke(SeelenCommand.WegPinItem, { path });
+        <BackgroundByLayersV2
+          className="launcher-item-context-menu"
+          prefix="menu"
+          onContextMenu={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
+          <Menu
+            items={[
+              {
+                label: t('item.pin'),
+                key: 'pin',
+                onClick() {
+                  invoke(SeelenCommand.WegPinItem, { path });
+                },
               },
-            },
-            {
-              label: t('item.open_location'),
-              key: 'open',
-              onClick() {
-                invoke(SeelenCommand.SelectFileOnExplorer, { path });
+              {
+                label: t('item.open_location'),
+                key: 'open',
+                onClick() {
+                  invoke(SeelenCommand.SelectFileOnExplorer, { path });
+                },
               },
-            },
-          ]}
-        />
+            ]}
+          />
+        </BackgroundByLayersV2>
       )}
     >
       <button
@@ -64,6 +80,6 @@ export const Item = memo(({ item, hidden }: { item: StartMenuApp; hidden: boolea
         <OverflowTooltip className="launcher-item-label" text={displayName} />
         <OverflowTooltip className="launcher-item-path" text={shortPath} />
       </button>
-    </Dropdown>
+    </AnimatedDropdown>
   );
 });
