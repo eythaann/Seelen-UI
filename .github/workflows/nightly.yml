@@ -137,6 +137,7 @@ jobs:
           script: |
             const tagName = 'nightly';
             const nightlyVersion = '${{ needs.build-installers.outputs.nightly-version }}';
+            console.info(`nightlyVersion: ${nightlyVersion}`);
 
             const release = await github.rest.repos.getReleaseByTag({
               owner: context.repo.owner,
@@ -152,6 +153,7 @@ jobs:
 
             result.data.forEach(async (asset) => {
               if (!asset.name.includes(nightlyVersion) || asset.name.endsWith('.sig')) {
+                console.info(`deleting ${asset.name}`);
                 await github.rest.repos.deleteReleaseAsset({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
