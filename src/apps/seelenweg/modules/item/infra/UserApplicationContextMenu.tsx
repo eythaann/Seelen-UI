@@ -17,6 +17,7 @@ export function getUserApplicationContextMenu(
   t: TFunction,
   item: PinnedWegItem | TemporalWegItem,
   devTools: boolean,
+  iconSrc: string,
 ): ItemType[] {
   const isPinned = isPinnedApp(item);
 
@@ -57,6 +58,15 @@ export function getUserApplicationContextMenu(
   }
 
   menu.push(
+    {
+      key: 'weg_run_new',
+      label: item.displayName,
+      icon: <img className="weg-context-menu-item-icon" src={iconSrc} />,
+      onClick: () => {
+        const { program, args } = parseCommand(item.relaunchCommand);
+        invoke(SeelenCommand.Run, { program, args });
+      },
+    },
     {
       key: 'weg_select_file_on_explorer',
       label: t('app_menu.open_file_location'),
