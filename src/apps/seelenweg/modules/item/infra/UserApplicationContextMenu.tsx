@@ -1,13 +1,15 @@
 import { SeelenCommand } from '@seelen-ui/lib';
-import { invoke } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { MenuProps } from 'antd';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
 
 import { store } from '../../shared/store/infra';
+import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { isPinnedApp, RootActions } from '../../shared/store/app';
 import { parseCommand } from 'src/apps/shared/Command';
+import { useIcon } from 'src/apps/shared/hooks';
 
 import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 
@@ -48,15 +50,24 @@ export function getUserApplicationContextMenu(
     });
   }
 
+  const iconSrc =
+    useIcon({
+      path: item.path,
+      umid: item.umid,
+    }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
+
   menu.push(
     {
       type: 'divider',
     },
     {
       key: 'weg_run_new',
-      label: t('app_menu.open_new'),
-      icon: <Icon iconName="GrNewWindow" />,
-      onClick: () => invoke(SeelenCommand.OpenFile, { path: item.path }),
+      label: item.displayName,
+      icon: <img className="weg-context-menu-item-icon" src={iconSrc} />,
+      onClick: () => {
+        const { program, args } = parseCommand(item.relaunchCommand);
+        invoke(SeelenCommand.Run, { program, args });
+      },
     },
     {
       key: 'weg_select_file_on_explorer',

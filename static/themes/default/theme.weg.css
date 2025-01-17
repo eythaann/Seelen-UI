@@ -222,7 +222,13 @@
   .weg-context-menu {
     --empty-rule: "delete me on use";
   }
+
+  .weg-context-menu-item-icon {
+    width: 1em;
+  }
 }
+
+
 
 .weg-item-preview-container {
   padding: 10px;
