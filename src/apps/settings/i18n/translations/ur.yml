@@ -261,6 +261,10 @@ weg:
   items:
     gap: اشیاء کے درمیان جگہ
     label: اشیاء
+    pinned_visibility:
+      always: ہمیشہ
+      label: پن کی ہوئی اشیاء کی مرئیت
+      when_primary: جب مانیٹر پرائمری ہو۔
     size: آئٹم کا سائز
     temporal_visibility:
       all: تمام

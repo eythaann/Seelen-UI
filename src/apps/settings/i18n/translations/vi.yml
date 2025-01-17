@@ -261,6 +261,10 @@ weg:
   items:
     gap: Không gian giữa các mặt hàng
     label: Mặt hàng
+    pinned_visibility:
+      always: Luôn luôn
+      label: Hiển thị các mục được ghim
+      when_primary: Khi màn hình là chính
     size: Kích thước mục
     temporal_visibility:
       all: Tất cả

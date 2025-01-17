@@ -140,9 +140,16 @@ export function SeelenWeg() {
       }
     });
 
+    if (isTemporalOnlyWegBar) {
+      dispatch(RootActions.setItemsOnLeft([]));
+      dispatch(RootActions.setItemsOnCenter([]));
+    }
+
     dispatch(RootActions.setItemsOnRight(extractedPinned));
     savePinnedItems();
   }, []);
+
+  const isTemporalOnlyWegBar = !(pinnedOnLeft.some((item) => !item.pinDisabled) || pinnedOnCenter.some((item) => !item.pinDisabled) || pinnedOnRight.some((item) => !item.pinDisabled));
 
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
@@ -154,46 +161,55 @@ export function SeelenWeg() {
   const projectSwItem = (item: SwItem) => ItemByType(item, shit);
 
   return (
-    <WithContextMenu items={getSeelenWegMenu(t)}>
+    <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar)}>
       <Reorder.Group
         as="div"
-        values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
+        values={isTemporalOnlyWegBar ? [...pinnedOnLeft, ...pinnedOnCenter, ...pinnedOnRight] : [...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
         onReorder={onReorderPinned}
         axis={isHorizontal ? 'x' : 'y'}
         className={cx('taskbar', settings.position.toLowerCase(), {
           horizontal: isHorizontal,
           vertical: !isHorizontal,
+          'temporal-only': isTemporalOnlyWegBar,
           'full-width': settings.mode === SeelenWegMode.FullWidth,
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped, associatedViewCounter),
           delayed,
         })}
       >
         <BackgroundByLayersV2 prefix="taskbar" />
-        {[
-          ...pinnedOnLeft.map(projectSwItem),
-          <Reorder.Item
-            as="div"
-            key="separator1"
-            value={Separator1}
-            className={cx('weg-separator weg-separator-1', {
-              visible: settings.visibleSeparators,
-            })}
-            drag={false}
-            style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
-          />,
-          ...pinnedOnCenter.map(projectSwItem),
-          <Reorder.Item
-            as="div"
-            key="separator2"
-            value={Separator2}
-            className={cx('weg-separator weg-separator-2', {
-              visible: settings.visibleSeparators,
-            })}
-            drag={false}
-            style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
-          />,
-          ...pinnedOnRight.map(projectSwItem),
-        ]}
+        {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 &&
+          <span className="weg-empty-state-label">{t('weg.empty')}</span>
+        }
+        {isTemporalOnlyWegBar ?
+          [
+            ...pinnedOnLeft.map(projectSwItem),
+            ...pinnedOnCenter.map(projectSwItem),
+            ...pinnedOnRight.map(projectSwItem),
+          ] : [
+            ...pinnedOnLeft.map(projectSwItem),
+            <Reorder.Item
+              as="div"
+              key="separator1"
+              value={Separator1}
+              className={cx('weg-separator weg-separator-1', {
+                visible: settings.visibleSeparators,
+              })}
+              drag={false}
+              style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
+            />,
+            ...pinnedOnCenter.map(projectSwItem),
+            <Reorder.Item
+              as="div"
+              key="separator2"
+              value={Separator2}
+              className={cx('weg-separator weg-separator-2', {
+                visible: settings.visibleSeparators,
+              })}
+              drag={false}
+              style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
+            />,
+            ...pinnedOnRight.map(projectSwItem),
+          ]}
       </Reorder.Group>
     </WithContextMenu>
   );

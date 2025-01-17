@@ -254,6 +254,10 @@ weg:
   items:
     gap: アイテム間のスペース
     label: ドック上のアイテム
+    pinned_visibility:
+      always: いつも
+      label: ピン留めされたアイテムの表示設定
+      when_primary: モニターがプライマリの場合
     size: アイテムのサイズ
     temporal_visibility:
       all: 全て

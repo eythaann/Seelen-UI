@@ -264,6 +264,10 @@ weg:
   items:
     gap: Spazio tra gli Elementi
     label: Elementi
+    pinned_visibility:
+      always: Sempre
+      label: Visibilità degli elementi appuntati
+      when_primary: Quando il monitor è primario
     size: Dimensione Elementi
     temporal_visibility:
       all: Tutto

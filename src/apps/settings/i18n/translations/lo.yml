@@ -259,6 +259,10 @@ weg:
   items:
     gap: ຊ່ອງຫວ່າງລະຫວ່າງລາຍການ
     label: ລາຍການ
+    pinned_visibility:
+      always: ສະເໝີ
+      label: ການເບິ່ງເຫັນລາຍການທີ່ປັກໝຸດໄວ້
+      when_primary: ເມື່ອຈໍພາບແມ່ນປະຖົມ
     size: ຂະໜາດລາຍການ
     temporal_visibility:
       all: ທັງໝົດ

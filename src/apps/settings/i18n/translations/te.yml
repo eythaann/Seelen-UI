@@ -262,6 +262,10 @@ weg:
   items:
     gap: వస్తువుల మధ్య ఖాళీ
     label: వస్తువులు
+    pinned_visibility:
+      always: ఎల్లప్పుడూ
+      label: పిన్ చేయబడిన అంశాల దృశ్యమానత
+      when_primary: మానిటర్ ప్రాథమికంగా ఉన్నప్పుడు
     size: అంశం పరిమాణం
     temporal_visibility:
       all: అన్నీ

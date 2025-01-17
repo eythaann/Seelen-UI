@@ -259,6 +259,10 @@ weg:
   items:
     gap: Фосила байни ашё
     label: Ашё
+    pinned_visibility:
+      always: Ҳамеша
+      label: Намоиши ашёҳои маҳкамшуда
+      when_primary: Вақте ки монитор ибтидоӣ аст
     size: Андозаи ашё
     temporal_visibility:
       all: Ҳама

@@ -12,6 +12,10 @@
     background-color: var(--color-gray-100);
     border-radius: 15px;
   }
+
+  &.temporal-only {
+    --empty-rule: "delete me on use";
+  }
 }
 
 .weg-separator {
@@ -32,6 +36,16 @@
       border-bottom: 1px solid var(--color-gray-400);
     }
   }
+}
+
+.weg-empty-state-label {
+  white-space: nowrap;
+  width: min-content;
+  line-height: var(--config-item-size);
+  vertical-align: middle;
+  font-style: italic;
+  color: var(--color-gray-400);
+  margin: 0 calc(var(--config-padding) * 2);
 }
 
 /* This will act like a hitbox for items */

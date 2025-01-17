@@ -24,3 +24,5 @@ taskbar_menu:
   settings: postavke
   start: Dodajte modul za start
   task_manager: Upravitelj zadataka
+weg:
+  empty: Nema stavki za prikaz

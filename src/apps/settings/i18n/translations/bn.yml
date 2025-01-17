@@ -262,6 +262,10 @@ weg:
   items:
     gap: আইটেম মধ্যে স্থান
     label: আইটেম
+    pinned_visibility:
+      always: সর্বদা
+      label: পিন করা আইটেম দৃশ্যমানতা
+      when_primary: যখন মনিটর প্রাথমিক হয়
     size: আইটেমের আকার
     temporal_visibility:
       all: সব

@@ -251,6 +251,10 @@ weg:
   items:
     gap: 项目间距
     label: 项目
+    pinned_visibility:
+      always: 总是
+      label: 固定项目可见性
+      when_primary: 当显示器为主要显示器时
     size: 项目大小
     temporal_visibility:
       all: 全部
