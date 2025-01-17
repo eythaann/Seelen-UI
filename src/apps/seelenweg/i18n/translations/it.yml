@@ -5,7 +5,6 @@ app_menu:
   kill: Uccidi il processo
   kill_multiple: Uccidi tutti i processi
   open_file_location: Apri Percorso del File
-  open_new: Esegui nuove istanze
   pin: Fissa
   pin_to_center: Fissa al Centro
   pin_to_left: Fissa a Sinistra

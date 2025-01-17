@@ -5,7 +5,6 @@ app_menu:
   kill: Drep prosessen
   kill_multiple: Drep alle prosesser
   open_file_location: Åpne fil plassering
-  open_new: Kjør ny forekomst
   pin: Pin
   pin_to_center: Pin til sentrum
   pin_to_left: Pin til venstre

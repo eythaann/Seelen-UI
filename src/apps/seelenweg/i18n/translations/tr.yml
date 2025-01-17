@@ -5,7 +5,6 @@ app_menu:
   kill: Süreci Sonlandır
   kill_multiple: Tüm Süreçleri Öldür
   open_file_location: Dosya Konumunu Aç
-  open_new: Yeni örnek çalıştırın
   pin: Sabitle
   pin_to_center: Ortaya Sabitle
   pin_to_left: Sola Sabitle

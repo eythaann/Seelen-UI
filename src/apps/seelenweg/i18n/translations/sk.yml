@@ -5,7 +5,6 @@ app_menu:
   kill: Proces zabíjania
   kill_multiple: Zabi všetky procesy
   open_file_location: Otvorte umiestnenie súboru
-  open_new: Spustiť novú inštanciu
   pin: Pin
   pin_to_center: Špendlík
   pin_to_left: Špendlík doľava

@@ -5,7 +5,6 @@ app_menu:
   kill: قتل العملية
   kill_multiple: اقتل جميع العمليات
   open_file_location: افتح مكان الملف
-  open_new: تشغيل مثيل جديد
   pin: ثبت الملف
   pin_to_center: ثبت الملف في الوسط
   pin_to_left: ثبت الملف على اليسار

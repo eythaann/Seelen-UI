@@ -5,7 +5,6 @@ app_menu:
   kill: Procés de matança
   kill_multiple: Mata tots els processos
   open_file_location: Obriu la ubicació del fitxer
-  open_new: Executeu una nova instància
   pin: Agulla
   pin_to_center: Pin al centre
   pin_to_left: Pin a l’esquerra

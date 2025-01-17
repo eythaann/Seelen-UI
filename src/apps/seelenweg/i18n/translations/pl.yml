@@ -5,7 +5,6 @@ app_menu:
   kill: Zabij proces
   kill_multiple: Zabij wszystkie procesy
   open_file_location: Otwórz lokalizację pliku
-  open_new: Uruchomić nową instancję
   pin: Szpilka
   pin_to_center: Pin do środka
   pin_to_left: Szpilka do lewej

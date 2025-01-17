@@ -5,7 +5,6 @@ app_menu:
   kill: Процес на убивање
   kill_multiple: Убиј ги сите процеси
   open_file_location: Отворете ја локацијата на датотеката
-  open_new: Извршете нов пример
   pin: Игла
   pin_to_center: Игла до центар
   pin_to_left: Игла на лево

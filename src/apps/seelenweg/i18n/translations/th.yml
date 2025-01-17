@@ -5,7 +5,6 @@ app_menu:
   kill: ฆ่ากระบวนการ
   kill_multiple: ฆ่ากระบวนการทั้งหมด
   open_file_location: เปิดตำแหน่งไฟล์
-  open_new: เรียกใช้อินสแตนซ์ใหม่
   pin: เข็มหมุด
   pin_to_center: พินไปยังศูนย์
   pin_to_left: พินไปทางซ้าย

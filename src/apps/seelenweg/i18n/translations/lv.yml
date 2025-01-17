@@ -5,7 +5,6 @@ app_menu:
   kill: Nogalināšanas process
   kill_multiple: Nogalināt visus procesus
   open_file_location: Atveriet faila atrašanās vietu
-  open_new: Palaidiet jaunu gadījumu
   pin: Piespraust
   pin_to_center: Piespraudiet centrā
   pin_to_left: Piespraudiet pa kreisi

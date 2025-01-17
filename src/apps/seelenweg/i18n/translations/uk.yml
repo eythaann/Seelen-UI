@@ -5,7 +5,6 @@ app_menu:
   kill: Зупинити процес
   kill_multiple: Зупинити всі процеси
   open_file_location: Розташування відкритого файлу
-  open_new: Запустіть новий екземпляр
   pin: Закріпити
   pin_to_center: Закріпити по центру
   pin_to_left: Закріпити зліва

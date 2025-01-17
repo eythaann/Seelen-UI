@@ -5,7 +5,6 @@ app_menu:
   kill: Kill Process
   kill_multiple: Ubij sve procese
   open_file_location: Otvorena lokacija datoteke
-  open_new: Pokrenite novu instancu
   pin: Pričvrstiti
   pin_to_center: Pin do centra
   pin_to_left: PIN ulijevo

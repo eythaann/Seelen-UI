@@ -5,7 +5,6 @@ app_menu:
   kill: Убить процесс
   kill_multiple: Убить все процессы
   open_file_location: Открыть местоположение файла
-  open_new: Запустите новый экземпляр
   pin: Закрепить
   pin_to_center: По центру
   pin_to_left: Слева

@@ -5,7 +5,6 @@ app_menu:
   kill: Tapmisprotsess
   kill_multiple: Tapke kõik protsessid
   open_file_location: Ava faili asukoht
-  open_new: Käivitage uus eksemplar
   pin: Nööpnõel
   pin_to_center: Tihvt keskele
   pin_to_left: Tihvt vasakule

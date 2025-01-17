@@ -5,7 +5,6 @@ app_menu:
   kill: Prozess beenden
   kill_multiple: Beenden Sie alle Prozesse
   open_file_location: Dateispeicherort öffnen
-  open_new: Neue Instanz durchführen
   pin: Anheften
   pin_to_center: Zentral anheften
   pin_to_left: Links anheften
