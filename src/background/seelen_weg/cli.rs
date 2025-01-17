@@ -70,7 +70,7 @@ impl SeelenWeg {
                         let item = all_items.index(index);
 
                         if let WegItem::Pinned(inner_data) | WegItem::Temporal(inner_data) = item {
-                            if inner_data.windows.len() > 0 {
+                            if !inner_data.windows.is_empty() {
                                 let application = inner_data.windows.first().unwrap();
                                 let hwnd = HWND(application.handle as _);
                                 log::trace!(
