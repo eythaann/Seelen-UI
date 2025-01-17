@@ -111,8 +111,6 @@ impl SeelenWeg {
                                     program = matches.remove(0).to_owned();
                                 }
 
-                                log::trace!("finds: {:?} -> {:?}", program, matches);
-
                                 // we create a link file to trick with explorer into a separated process
                                 // and without elevation in case Seelen UI was running as admin
                                 // this could take some delay like is creating a file but just are some milliseconds
