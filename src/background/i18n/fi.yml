@@ -1,0 +1,14 @@
+runtime:
+  download: Siirry lataussivulle
+  not_found: WebView2:n suoritusaikaa ei löydy
+  not_found_description: Seelen-käyttöliittymä vaatii Webview2 Runtime -sovelluksen. Asenna se.
+  outdated: WebView2 Runtime vanhentunut
+  outdated_description: >-
+    Seelen-käyttöliittymä vaatii Webview2 Runtime %{min_version} tai uudemman.
+    Päivitä se.
+service:
+  not_running: Seelen UI -palvelu ei ole käynnissä
+  not_running_description: >-
+    Seelen UI Service (slu-service) on riippuvuus/apuohjelma, jonka avulla
+    sovellus toimii oikein.
+  not_running_ok: Aloita palvelu

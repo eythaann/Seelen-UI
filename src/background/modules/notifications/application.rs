@@ -212,7 +212,9 @@ impl NotificationManager {
         }
 
         let umid = app_info.AppUserModelId()?.to_string_lossy();
-        extract_and_save_icon_umid(umid.clone()).ok();
+        if extract_and_save_icon_umid(umid.clone()).is_err() {
+            log::error!("Failed to extract notification icon for {}", umid);
+        }
 
         self.notifications.push(AppNotification {
             id: u_notification.Id()?,

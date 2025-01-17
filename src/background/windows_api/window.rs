@@ -73,6 +73,11 @@ impl Window {
         WindowsApi::get_window_app_user_model_id(self.0).ok()
     }
 
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-preventpinning
+    pub fn prevent_pinning(&self) -> bool {
+        WindowsApi::get_window_prevent_pinning(self.0).unwrap_or(false)
+    }
+
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
     pub fn relaunch_command(&self) -> Option<String> {
         WindowsApi::get_window_relaunch_command(self.0).ok()
@@ -253,24 +258,16 @@ impl Window {
             return false;
         }
 
-        /* if let Ok(frame_creator) = window.get_frame_creator() {
+        if let Ok(frame_creator) = self.get_frame_creator() {
             if frame_creator.is_none() {
                 return false;
             }
         }
 
-        if WindowsApi::window_is_uwp_suspended(window.hwnd()).unwrap_or_default() {
+        if self.process().is_frozen().unwrap_or(false) {
             return false;
-        } */
-
-        /* if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-            if config.options.contains(&AppExtraFlag::Hidden) {
-                log::trace!("Skipping by config: {:?}", window);
-                return false;
-            }
         }
 
-        !TITLE_BLACK_LIST.contains(&window.title().as_str()) */
         true
     }
 }

@@ -1,6 +1,17 @@
 # Changelog
 
 ## [Unreleased]
+### refactor
+- create separated system service to handle elevated actions.
+
+###
+- fix ghost windows caused by a refactor donde on v2.0.13
+
+## [2.0.14]
+### hotfix
+- not creating the default (system) icon pack.
+
+## [2.0.13]
 ### features
 - add kill process option on context menu for dock items.
 - multi-language calendar and date module on toolbar.

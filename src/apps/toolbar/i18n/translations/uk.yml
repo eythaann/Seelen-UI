@@ -7,7 +7,7 @@ media:
   device:
     comunications: Комунікація
     multimedia: Мультимедіа
-  input_device: Пристрій введення
+  input_device: Пристрій вводу
   master_volume: Рівень гучності
   output_device: Пристрій виводу
   players: Медіаплеєри
@@ -25,22 +25,22 @@ network:
   scanning: Сканування мереж
   secured: Зашифрована мережа
 placeholder:
-  battery_remaining: '% залишається'
+  battery_remaining: '% залишилось'
   bluetooth_devices: Bluetooth та пристрої
   ethernet_connected: Доступ в інтернет
   ethernet_disconnected: Немає доступу до Інтернету
   notifications: Сповіщення
   open_system_tray: Системний лоток
-  open_user_folder: Папка користувача
+  open_user_folder: Відкрити папку користувача
   settings: Швидкі налаштування
   smart_charge: '- розумний заряд'
   volume: Гучність
 settings:
   app_settings: Налаштування додатку
-  log_out: Блокувати
+  log_out: Вийти
   power: Живлення
   restart: Перезапустити
   shutdown: Завершити роботу
   sleep: Сон
   title: Налаштування
-unlabelled_tray: Без маркування
+unlabelled_tray: Без назви

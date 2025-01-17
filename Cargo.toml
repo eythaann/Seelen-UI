@@ -2,7 +2,7 @@ cargo-features = ["profile-rustflags"]
 
 [package]
 name = "seelen-ui"
-version = "2.0.12"
+version = "2.0.14"
 description = "Seelen UI Background"
 authors = ["eythaann"]
 license = "Polyform Strict License"
@@ -79,6 +79,7 @@ evalexpr = "=11.3.0"
 quick-xml = { version = "0.36.2", features = ["serialize", "encoding"] }
 backtrace = "0.3.71"
 owo-colors = "4.1.0"
+rust-i18n = "3.1.2"
 
 [dependencies.seelen-core]
 git = "https://github.com/Seelen-Inc/slu-lib.git" # for release/pre-release/nightly
@@ -104,7 +105,11 @@ features = [
     "Win32_System_Console",                # required to attach to console on cli mode
     "Win32_System_Registry",               # required for system tray icon module
     "Win32_Security",                      # required for power management (shutdown, reboot)
+    "Win32_Security_Authorization",        # required to change security on services
     "Win32_System_Kernel",
+    "Win32_System_Services",
+    "Win32_System_EventLog",               # needed for logger on service
+    "Win32_System_TaskScheduler",
     "Win32_System_Threading",
     "Win32_System_WinRT",                  # uwp apps
     "Win32_System_StationsAndDesktops",
