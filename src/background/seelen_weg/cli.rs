@@ -1,8 +1,16 @@
+use std::ops::Index;
+
 use clap::Command;
+use seelen_core::state::WegItem;
+use tauri_plugin_shell::ShellExt;
+use windows::Win32::Foundation::HWND;
 
 use crate::{
     error_handler::Result,
     get_subcommands,
+    seelen::get_app_handle,
+    seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
+    trace_lock,
     windows_api::{monitor::Monitor, WindowsApi},
 };
 
@@ -32,10 +40,61 @@ impl SeelenWeg {
                 #[cfg(any(debug_assertions, feature = "devtools"))]
                 self.window.open_devtools();
             }
-            SubCommand::ForegroundOrRunApp(_) => {
+            SubCommand::ForegroundOrRunApp(idx) => {
                 if Monitor::from(WindowsApi::monitor_from_window(self.window.hwnd()?)).index()? == 0
                 {
-                    // self.emit(SeelenEvent::WegFocusedAppByIndex, idx)?;
+                    //Convert input nuber to array index
+                    let index = if idx == 0 { 9 } else { idx - 1 };
+                    let id = Monitor::from(WindowsApi::monitor_from_cursor_point()).device_id()?;
+
+                    let items = trace_lock!(WEG_ITEMS_IMPL).get_filtered_by_monitor()?;
+                    if let Some(wegitems) = items.get(&id) {
+                        let all_items: Vec<&WegItem> = wegitems
+                            .left
+                            .iter()
+                            .chain(wegitems.center.iter())
+                            .chain(wegitems.right.iter())
+                            .filter(|item| {
+                                if let WegItem::Pinned(_) | WegItem::Temporal(_) = item {
+                                    return true;
+                                }
+
+                                false
+                            })
+                            .collect();
+
+                        if all_items.len() < index {
+                            return Ok(());
+                        }
+
+                        let item = all_items.index(index);
+
+                        if let WegItem::Pinned(inner_data) | WegItem::Temporal(inner_data) = item {
+                            if inner_data.windows.len() > 0 {
+                                let application = inner_data.windows.first().unwrap();
+                                let hwnd = HWND(application.handle as _);
+                                log::trace!(
+                                    "Requesting focus on {:?} - {} , {:?}",
+                                    hwnd,
+                                    WindowsApi::get_window_text(hwnd),
+                                    WindowsApi::exe(hwnd)?,
+                                );
+
+                                if !WindowsApi::is_window(hwnd) {
+                                    return Ok(());
+                                }
+
+                                WindowsApi::async_force_set_foreground(hwnd);
+                            } else {
+                                get_app_handle()
+                                    .shell()
+                                    .command("explorer")
+                                    .arg(&inner_data.path)
+                                    .spawn()?;
+                                return Ok(());
+                            }
+                        }
+                    }
                 }
             }
         };
