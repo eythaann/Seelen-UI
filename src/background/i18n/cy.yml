@@ -1,0 +1,14 @@
+runtime:
+  download: Ewch i'r dudalen lawrlwytho
+  not_found: WebView2 Runtime heb ei ganfod
+  not_found_description: Mae Seelen UI angen Amser Rhedeg Webview2. Os gwelwch yn dda gosod.
+  outdated: WebView2 Runtime wedi dyddio
+  outdated_description: >-
+    Mae Seelen UI angen amser rhedeg Webview2 %{ min_version} neu uwch.
+    Diweddarwch ef.
+service:
+  not_running: Gwasanaeth UI Seelen ddim yn rhedeg
+  not_running_description: >-
+    Mae Seelen UI Service (slu-service) yn ddibyniaeth / cynorthwyydd i'r ap
+    weithio'n iawn.
+  not_running_ok: Dechrau gwasanaeth

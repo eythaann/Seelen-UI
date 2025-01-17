@@ -1,0 +1,14 @@
+runtime:
+  download: Eikite į atsisiuntimo puslapį
+  not_found: WebView2 vykdymo laikas nerastas
+  not_found_description: „Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“. Įdiekite jį.
+  outdated: „WebView2“ vykdymo laikas pasenęs
+  outdated_description: >-
+    „Seelen“ vartotojo sąsajai reikalinga „Webview2 Runtime“ %{min_version} arba
+    naujesnė versija. Prašome atnaujinti.
+service:
+  not_running: Seelen UI paslauga neveikia
+  not_running_description: >-
+    Seelen UI paslauga (slu-service) yra priklausomybė / pagalbininkas, kad
+    programa tinkamai veiktų.
+  not_running_ok: Pradėti paslaugą

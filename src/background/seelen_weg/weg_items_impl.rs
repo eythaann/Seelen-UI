@@ -135,6 +135,7 @@ impl WegItemsImpl {
             None => ShouldGetInfoFrom::Process,
         };
 
+        let mut pin_disabled = false;
         let mut display_name = window
             .app_display_name()
             .unwrap_or_else(|_| String::from("Unknown"));
@@ -171,6 +172,7 @@ impl WegItemsImpl {
                     relaunch_command = win_relaunch_command;
                     display_name = relaunch_display_name;
                 } else {
+                    pin_disabled = window.prevent_pinning();
                     relaunch_command = format!("\"explorer.exe\" shell:AppsFolder\\{umid}");
                 }
             }
@@ -217,6 +219,7 @@ impl WegItemsImpl {
                 title: window.title(),
                 handle: window.address(),
             }],
+            pin_disabled,
         };
         self.items.center.push(WegItem::Temporal(data));
         Ok(())

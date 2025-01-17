@@ -9,11 +9,14 @@ use std::{
 
 use application::{handle_cli_events, SEELEN_COMMAND_LINE};
 use itertools::Itertools;
-use windows::Win32::System::TaskScheduler::{ITaskService, TaskScheduler};
+use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
 
 use crate::{
-    error_handler::Result, log_error, seelen::Seelen, trace_lock, utils::spawn_named_thread,
-    windows_api::Com,
+    error_handler::Result,
+    log_error,
+    seelen::{get_app_handle, Seelen},
+    trace_lock,
+    utils::{pwsh::PwshScript, spawn_named_thread},
 };
 
 pub struct AppClient;
@@ -109,18 +112,31 @@ impl ServiceClient {
         Ok(())
     }
 
-    pub fn start_service() -> Result<()> {
-        Com::run_with_context(|| unsafe {
-            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(None, None, None, None)?;
-            let seelen_folder = task_service.GetFolder(&"\\Seelen".into())?;
-            // could fail for many reasons ex: task is already running
-            // https://learn.microsoft.com/es-es/windows/win32/api/taskschd/nf-taskschd-iregisteredtask-run
-            let _ = seelen_folder
-                .GetTask(&"Seelen UI Service".into())?
-                .Run(None);
-            Ok(())
-        })
+    pub fn is_running() -> bool {
+        Self::connect_tcp().is_ok()
+    }
+
+    // the service should be running since installer will start it or startup task scheduler
+    // so if the service is not running, we need to reinstall it (common on msix setup)
+    pub async fn reinstall_and_start() -> Result<()> {
+        get_app_handle()
+            .dialog()
+            .message(t!("service.not_running_description"))
+            .title(t!("service.not_running"))
+            .kind(MessageDialogKind::Info)
+            .ok_button_label(t!("service.not_running_ok"))
+            .blocking_show();
+
+        log::info!("Reinstalling service...");
+        let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
+        PwshScript::new(format!(
+            "&\"{}\" install \n net start slu-service",
+            service_path.display(),
+        ))
+        .elevated()
+        .execute()
+        .await?;
+        Ok(())
     }
 
     pub fn emit_stop_signal() -> Result<()> {

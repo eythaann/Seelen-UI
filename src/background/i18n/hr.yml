@@ -1,0 +1,14 @@
+runtime:
+  download: Idi na stranicu za preuzimanje
+  not_found: WebView2 Runtime nije pronađen
+  not_found_description: Seelen UI zahtijeva Webview2 Runtime. Molimo instalirajte ga.
+  outdated: WebView2 Runtime je zastario
+  outdated_description: >-
+    Seelen UI zahtijeva Webview2 Runtime %{min_version} ili noviji. Molimo
+    ažurirajte ga.
+service:
+  not_running: Usluga Seelen UI nije pokrenuta
+  not_running_description: >-
+    Seelen UI Service (slu-service) je ovisnost/pomoć za ispravan rad
+    aplikacije.
+  not_running_ok: Pokrenite uslugu

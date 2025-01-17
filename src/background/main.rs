@@ -23,6 +23,10 @@ mod widget_loader;
 mod windows_api;
 mod winevent;
 
+#[macro_use]
+extern crate rust_i18n;
+i18n!("src/background/i18n", fallback = "en");
+
 use std::sync::OnceLock;
 
 use error_handler::Result;
@@ -103,12 +107,8 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
 
-    APP_HANDLE
-        .set(app.handle().to_owned())
-        .map_err(|_| "Failed to set app handle")?;
-
-    if !tauri::is_dev() {
-        ServiceClient::start_service()?;
+    if !tauri::is_dev() && !ServiceClient::is_running() {
+        tauri::async_runtime::block_on(ServiceClient::reinstall_and_start())?;
     }
 
     check_for_webview_optimal_state(app.handle())?;
@@ -199,6 +199,7 @@ fn main() -> Result<()> {
 
     let app = app_builder
         .setup(|app| {
+            APP_HANDLE.set(app.handle().to_owned()).unwrap();
             if let Err(err) = setup(app) {
                 log::error!("Error while setting up: {:?}", err);
                 app.handle().exit(1);
