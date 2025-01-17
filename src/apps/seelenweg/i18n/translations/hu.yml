@@ -24,3 +24,5 @@ taskbar_menu:
   settings: Beállítások elemre
   start: Adja hozzá a Start modult
   task_manager: Feladatkezelő
+weg:
+  empty: Nincs megjeleníthető elem

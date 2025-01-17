@@ -160,7 +160,7 @@ export function SeelenWeg() {
   const projectSwItem = (item: SwItem) => ItemByType(item, shit);
 
   return (
-    <WithContextMenu items={getSeelenWegMenu(t)}>
+    <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar)}>
       <Reorder.Group
         as="div"
         values={isTemporalOnlyWegBar ? [...pinnedOnLeft, ...pinnedOnCenter, ...pinnedOnRight] : [...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
@@ -176,6 +176,9 @@ export function SeelenWeg() {
         })}
       >
         <BackgroundByLayersV2 prefix="taskbar" />
+        {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 &&
+          <span className="weg-empty-state-label">{t('weg.empty')}</span>
+        }
         {isTemporalOnlyWegBar ?
           [
             ...pinnedOnLeft.map(projectSwItem),
