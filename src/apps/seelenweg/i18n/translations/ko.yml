@@ -24,3 +24,5 @@ taskbar_menu:
   settings: 설정
   start: 시작 버튼 추가
   task_manager: 작업 관리자
+weg:
+  empty: 표시할 항목이 없습니다.

@@ -262,6 +262,10 @@ weg:
   items:
     gap: Przestrzeń między przedmiotami
     label: Rzeczy
+    pinned_visibility:
+      always: Zawsze
+      label: Widoczność przypiętych elementów
+      when_primary: Gdy monitor jest głównym
     size: Rozmiar elementu
     temporal_visibility:
       all: Wszystko

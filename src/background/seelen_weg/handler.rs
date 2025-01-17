@@ -19,9 +19,11 @@ use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, SW_RESTORE, WM_CLOSE}
 use super::SeelenWeg;
 
 #[tauri::command(async)]
-pub fn weg_get_items_for_widget() -> WegItems {
-    // TODO: filter by monitor/widget
-    trace_lock!(WEG_ITEMS_IMPL).get()
+pub fn weg_get_items_for_widget(window: tauri::Window) -> Result<WegItems> {
+    let device_id = Window::from(window.hwnd()?).monitor().device_id()?;
+    let items = trace_lock!(WEG_ITEMS_IMPL).get_filtered_by_monitor()?;
+
+    Ok(items[&device_id].clone())
 }
 
 #[tauri::command(async)]

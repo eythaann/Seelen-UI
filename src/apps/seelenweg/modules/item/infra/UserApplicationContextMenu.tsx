@@ -22,36 +22,41 @@ export function getUserApplicationContextMenu(
 
   const menu: MenuProps['items'] = [];
 
-  if (isPinned) {
-    menu.push({
-      label: t('app_menu.unpin'),
-      key: 'weg_unpin_app',
-      icon: <Icon iconName="RiUnpinLine" />,
-      onClick: () => {
-        if (item.windows.length) {
-          store.dispatch(RootActions.unPinApp(item.id));
-        } else {
-          store.dispatch(RootActions.remove(item.id));
-        }
+  if (!item.pinDisabled) {
+    if (isPinned) {
+      menu.push({
+        label: t('app_menu.unpin'),
+        key: 'weg_unpin_app',
+        icon: <Icon iconName="RiUnpinLine" />,
+        onClick: () => {
+          if (item.windows.length) {
+            store.dispatch(RootActions.unPinApp(item.id));
+          } else {
+            store.dispatch(RootActions.remove(item.id));
+          }
+        },
+      });
+    } else {
+      menu.push({
+        key: 'weg_pin_app',
+        icon: <Icon iconName="RiPushpinLine" />,
+        label: (
+          <div style={{ width: '100%', height: '100%', margin: '-10px', padding: '10px' }}>
+            {t('app_menu.pin')}
+          </div>
+        ),
+        onClick: () => store.dispatch(RootActions.pinApp(item.id)),
+      });
+    }
+
+    menu.push(
+      {
+        type: 'divider',
       },
-    });
-  } else {
-    menu.push({
-      key: 'weg_pin_app',
-      icon: <Icon iconName="RiPushpinLine" />,
-      label: (
-        <div style={{ width: '100%', height: '100%', margin: '-10px', padding: '10px' }}>
-          {t('app_menu.pin')}
-        </div>
-      ),
-      onClick: () => store.dispatch(RootActions.pinApp(item.id)),
-    });
+    );
   }
 
   menu.push(
-    {
-      type: 'divider',
-    },
     {
       key: 'weg_select_file_on_explorer',
       label: t('app_menu.open_file_location'),

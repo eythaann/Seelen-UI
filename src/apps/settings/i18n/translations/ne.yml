@@ -261,6 +261,10 @@ weg:
   items:
     gap: वस्तुहरू बीचको ठाउँ
     label: वस्तुहरू
+    pinned_visibility:
+      always: सधैं
+      label: पिन गरिएका वस्तुहरू दृश्यता
+      when_primary: जब मनिटर प्राथमिक छ
     size: वस्तुको आकार
     temporal_visibility:
       all: सबै

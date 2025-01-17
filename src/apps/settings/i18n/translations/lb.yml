@@ -262,6 +262,10 @@ weg:
   items:
     gap: Raum tëscht Artikelen
     label: Artikelen
+    pinned_visibility:
+      always: Ëmmer
+      label: Pinned Elementer Visibilitéit
+      when_primary: Wann de Monitor primär ass
     size: Telefonsgrouss
     temporal_visibility:
       all: All

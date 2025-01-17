@@ -262,6 +262,10 @@ weg:
   items:
     gap: Проміжок між піктограмами
     label: Піктограми
+    pinned_visibility:
+      always: Завжди
+      label: Видимість закріплених елементів
+      when_primary: Коли монітор є основним
     size: Розмір піктограм
     temporal_visibility:
       all: всі

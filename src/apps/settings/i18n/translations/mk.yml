@@ -264,6 +264,10 @@ weg:
   items:
     gap: Простор помеѓу предмети
     label: Предмети
+    pinned_visibility:
+      always: Секогаш
+      label: Видливост на закачени ставки
+      when_primary: Кога мониторот е примарен
     size: Големина на артикалот
     temporal_visibility:
       all: Сите

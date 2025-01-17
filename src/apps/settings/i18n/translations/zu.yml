@@ -264,6 +264,10 @@ weg:
   items:
     gap: Isikhala phakathi kwezinto
     label: Into
+    pinned_visibility:
+      always: Njalo
+      label: Ukubonakala Kwezinto Eziphiniwe
+      when_primary: Lapho imonitha iyinhloko
     size: Usayizi wento
     temporal_visibility:
       all: Konke

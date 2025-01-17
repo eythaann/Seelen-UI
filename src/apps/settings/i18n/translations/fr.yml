@@ -262,6 +262,10 @@ weg:
   items:
     gap: Espace entre les éléments
     label: Articles
+    pinned_visibility:
+      always: Toujours
+      label: Visibilité des éléments épinglés
+      when_primary: Lorsque le moniteur est principal
     size: Taille de l'article
     temporal_visibility:
       all: Tous

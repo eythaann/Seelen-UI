@@ -262,6 +262,10 @@ weg:
   items:
     gap: Пространство между артикулите
     label: Елементи
+    pinned_visibility:
+      always: Винаги
+      label: Видимост на фиксираните елементи
+      when_primary: Когато мониторът е основен
     size: Размер на артикула
     temporal_visibility:
       all: Всички

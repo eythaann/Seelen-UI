@@ -135,6 +135,18 @@ export const SeelenWegSettings = () => {
               onChange={(value) => dispatch(SeelenWegActions.setTemporalItemsVisibility(value))}
             />
           </SettingsOption>
+          <SettingsOption>
+            <div>{t('weg.items.pinned_visibility.label')}</div>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.pinnedItemsVisibility}
+              options={[
+                { value: 'Always', label: t('weg.items.pinned_visibility.always') },
+                { value: 'WhenPrimary', label: t('weg.items.pinned_visibility.when_primary') },
+              ]}
+              onChange={(value) => dispatch(SeelenWegActions.setPinnedItemsVisibility(value))}
+            />
+          </SettingsOption>
 
           <SettingsOption>
             <div>{t('weg.items.size')}</div>

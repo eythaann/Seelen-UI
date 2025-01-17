@@ -261,6 +261,10 @@ weg:
   items:
     gap: Esemete vaheline ruum
     label: Esemed
+    pinned_visibility:
+      always: Alati
+      label: Kinnitatud üksuste nähtavus
+      when_primary: Kui monitor on esmane
     size: Üksuse suurus
     temporal_visibility:
       all: Kõik

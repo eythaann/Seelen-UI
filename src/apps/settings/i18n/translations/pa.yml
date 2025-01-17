@@ -258,6 +258,10 @@ weg:
   items:
     gap: ਆਈਟਮਾਂ ਵਿਚਕਾਰ ਸਪੇਸ
     label: ਇਕਾਈ
+    pinned_visibility:
+      always: ਹਮੇਸ਼ਾ
+      label: ਪਿੰਨ ਕੀਤੀਆਂ ਆਈਟਮਾਂ ਦੀ ਦਿੱਖ
+      when_primary: ਜਦੋਂ ਮਾਨੀਟਰ ਪ੍ਰਾਇਮਰੀ ਹੁੰਦਾ ਹੈ
     size: ਆਈਟਮ ਦਾ ਆਕਾਰ
     temporal_visibility:
       all: ਸਾਰੇ

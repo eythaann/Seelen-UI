@@ -258,6 +258,10 @@ weg:
   items:
     gap: د توکو تر مینځ فضا
     label: توکي
+    pinned_visibility:
+      always: تل
+      label: د پینډ شوي توکو لید
+      when_primary: کله چې څارونکی لومړنی وي
     size: د توکي اندازه
     temporal_visibility:
       all: ټول

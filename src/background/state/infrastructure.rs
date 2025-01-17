@@ -2,10 +2,15 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    IconPack, MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
+    IconPack, MonitorConfiguration, Plugin, Profile, WegItems, WegPinnedItemsVisibility, Widget,
+    WindowManagerLayout,
 };
 
-use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result,
+    trace_lock,
+    windows_api::{window::Window, WindowsApi},
+};
 
 use super::{
     application::{FullState, LauncherHistory, FULL_STATE},
@@ -45,10 +50,16 @@ pub fn state_get_weg_items() -> WegItems {
 }
 
 #[tauri::command(async)]
-pub fn state_write_weg_items(mut items: WegItems) -> Result<()> {
+pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Result<()> {
     items.sanitize();
     let guard = FULL_STATE.load();
-    if items == guard.weg_items {
+
+    let monitor = Window::from(window.hwnd()?).monitor();
+    let device_id = monitor.device_id()?;
+    if guard.get_weg_pinned_item_visibility(&device_id) == WegPinnedItemsVisibility::WhenPrimary
+        && !monitor.is_primary()?
+        || items == guard.weg_items
+    {
         return Ok(());
     }
     guard.write_weg_items(&items)?;

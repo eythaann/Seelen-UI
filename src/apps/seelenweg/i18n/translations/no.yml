@@ -24,3 +24,5 @@ taskbar_menu:
   settings: Innstillinger
   start: Legg til startmodul
   task_manager: Oppgavebehandling
+weg:
+  empty: Ingen elementer å vise

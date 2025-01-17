@@ -257,6 +257,10 @@ weg:
   items:
     gap: שטח בין פריטים
     label: פריטים
+    pinned_visibility:
+      always: תָמִיד
+      label: נראות פריטים מוצמדים
+      when_primary: כאשר המוניטור הוא ראשי
     size: גודל פריט
     temporal_visibility:
       all: כֹּל

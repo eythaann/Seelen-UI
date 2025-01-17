@@ -260,6 +260,10 @@ weg:
   items:
     gap: Зүйлийн хоорондох зай
     label: Зүйл
+    pinned_visibility:
+      always: Үргэлж
+      label: Тогтсон зүйлсийн харагдах байдал
+      when_primary: Монитор анхдагч байх үед
     size: Зүйлийн хэмжээ
     temporal_visibility:
       all: Бүгд

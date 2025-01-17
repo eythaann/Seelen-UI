@@ -264,6 +264,10 @@ weg:
   items:
     gap: სივრცე ნივთებს შორის
     label: ნივთები
+    pinned_visibility:
+      always: ყოველთვის
+      label: ჩამაგრებული ელემენტების ხილვადობა
+      when_primary: როცა მონიტორი პირველადია
     size: ნივთის ზომა
     temporal_visibility:
       all: ყველა

@@ -264,6 +264,10 @@ weg:
   items:
     gap: Abstand zwischen Elementen
     label: Elemente
+    pinned_visibility:
+      always: Stets
+      label: Sichtbarkeit angehefteter Elemente
+      when_primary: Wenn der Monitor primär ist
     size: Elementgröße
     temporal_visibility:
       all: Alle

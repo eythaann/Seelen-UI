@@ -256,6 +256,10 @@ weg:
   items:
     gap: ช่องว่างระหว่างรายการ
     label: รายการ
+    pinned_visibility:
+      always: เสมอ
+      label: การมองเห็นรายการที่ปักหมุด
+      when_primary: เมื่อมอนิเตอร์เป็นเครื่องหลัก
     size: ขนาดรายการ
     temporal_visibility:
       all: ทั้งหมด
