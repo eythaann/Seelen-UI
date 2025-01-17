@@ -45,42 +45,37 @@ impl Process {
         self.0
     }
 
-    fn with_handle<T, F>(&self, f: F) -> Result<T>
-    where
-        F: FnOnce(HANDLE) -> T,
-    {
-        let handle = WindowsApi::open_process(PROCESS_QUERY_INFORMATION, false, self.0)?;
-        let result = f(handle);
-        WindowsApi::close_handle(handle)?;
-        Ok(result)
+    pub fn handle(&self) -> Result<HANDLE> {
+        WindowsApi::open_process(PROCESS_QUERY_INFORMATION, false, self.0)
+    }
+
+    pub fn is_frozen(&self) -> Result<bool> {
+        WindowsApi::is_process_frozen(self.0)
     }
 
     pub fn package_family_name(&self) -> Result<String> {
-        self.with_handle(|hprocess| {
-            let mut len = 1024_u32;
-            let mut family_name = WindowsString::new_to_fill(len as usize);
-            unsafe { GetPackageFamilyName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
-            Ok(family_name.to_string())
-        })?
+        let hprocess = self.handle()?;
+        let mut len = 1024_u32;
+        let mut family_name = WindowsString::new_to_fill(len as usize);
+        unsafe { GetPackageFamilyName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
+        Ok(family_name.to_string())
     }
 
     pub fn package_full_name(&self) -> Result<String> {
-        self.with_handle(|hprocess| {
-            let mut len = 1024_u32;
-            let mut family_name = WindowsString::new_to_fill(len as usize);
-            unsafe { GetPackageFullName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
-            Ok(family_name.to_string())
-        })?
+        let hprocess = self.handle()?;
+        let mut len = 1024_u32;
+        let mut family_name = WindowsString::new_to_fill(len as usize);
+        unsafe { GetPackageFullName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
+        Ok(family_name.to_string())
     }
 
     /// package app user model id
     pub fn package_app_user_model_id(&self) -> Result<String> {
-        self.with_handle(|hprocess| {
-            let mut len = 1024_u32;
-            let mut id = WindowsString::new_to_fill(len as usize);
-            unsafe { GetApplicationUserModelId(hprocess, &mut len, id.as_pwstr()).ok()? };
-            Ok(id.to_string())
-        })?
+        let hprocess = self.handle()?;
+        let mut len = 1024_u32;
+        let mut id = WindowsString::new_to_fill(len as usize);
+        unsafe { GetApplicationUserModelId(hprocess, &mut len, id.as_pwstr()).ok()? };
+        Ok(id.to_string())
     }
 
     pub fn package_app_info(&self) -> Result<AppInfo> {

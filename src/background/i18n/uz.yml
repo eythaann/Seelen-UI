@@ -1,0 +1,14 @@
+runtime:
+  download: Yuklab olish sahifasiga o'ting
+  not_found: WebView2 ish vaqti topilmadi
+  not_found_description: Seelen UI uchun Webview2 Runtime kerak. Iltimos, uni oʻrnating.
+  outdated: WebView2 ish vaqti eskirgan
+  outdated_description: >-
+    Seelen UI uchun Webview2 Runtime %{min_version} yoki undan yuqoriroq talab
+    qilinadi. Iltimos, uni yangilang.
+service:
+  not_running: Seelen UI xizmati ishlamayapti
+  not_running_description: >-
+    Seelen UI xizmati (slu-xizmati) ilovaning to'g'ri ishlashi uchun
+    qaramlik/yordamchi hisoblanadi.
+  not_running_ok: Xizmatni ishga tushirish

@@ -199,7 +199,7 @@ impl SluService {
             )?;
 
             let mut description_str =
-                WindowsString::from_str("Relaunch Seelen UI on crash and handle system actions");
+                WindowsString::from_str("Handle system actions and crash reports.");
             let description = SERVICE_DESCRIPTIONW {
                 lpDescription: description_str.as_pwstr(),
             };

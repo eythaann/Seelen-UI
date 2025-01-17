@@ -1,0 +1,16 @@
+runtime:
+  download: Prejdite na stránku sťahovania
+  not_found: WebView2 Runtime sa nenašlo
+  not_found_description: >-
+    Používateľské rozhranie Seelen vyžaduje Webview2 Runtime. Nainštalujte si
+    ho.
+  outdated: WebView2 Runtime je zastarané
+  outdated_description: >-
+    Používateľské rozhranie Seelen vyžaduje Webview2 Runtime %{min_version}
+    alebo vyššie. Aktualizujte ho.
+service:
+  not_running: Služba používateľského rozhrania Seelen nie je spustená
+  not_running_description: >-
+    Seelen UI Service (slu-service) je závislosť/pomocník pre správne fungovanie
+    aplikácie.
+  not_running_ok: Spustite službu
