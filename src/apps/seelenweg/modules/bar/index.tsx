@@ -122,10 +122,6 @@ export function SeelenWeg() {
   const onReorderPinned = useCallback((apps: SwItem[]) => {
     let extractedPinned: SwItem[] = [];
 
-    if (isTemporalOnlyWegBar) {
-      return;
-    }
-
     apps.forEach((app) => {
       if (app === Separator1) {
         dispatch(RootActions.setItemsOnLeft(extractedPinned));
@@ -143,6 +139,11 @@ export function SeelenWeg() {
         extractedPinned.push(app);
       }
     });
+
+    if (isTemporalOnlyWegBar) {
+      dispatch(RootActions.setItemsOnLeft([]));
+      dispatch(RootActions.setItemsOnCenter([]));
+    }
 
     dispatch(RootActions.setItemsOnRight(extractedPinned));
     savePinnedItems();
