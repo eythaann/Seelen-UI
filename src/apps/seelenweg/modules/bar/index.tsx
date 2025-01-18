@@ -149,7 +149,11 @@ export function SeelenWeg() {
     savePinnedItems();
   }, []);
 
-  const isTemporalOnlyWegBar = !(pinnedOnLeft.some((item) => !item.pinDisabled) || pinnedOnCenter.some((item) => !item.pinDisabled) || pinnedOnRight.some((item) => !item.pinDisabled));
+  const isTemporalOnlyWegBar = !(
+    pinnedOnLeft.some((item) => 'pinDisabled' in item && !item.pinDisabled) ||
+    pinnedOnCenter.some((item) => 'pinDisabled' in item && !item.pinDisabled) ||
+    pinnedOnRight.some((item) => 'pinDisabled' in item && !item.pinDisabled)
+  );
 
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
@@ -164,7 +168,11 @@ export function SeelenWeg() {
     <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar)}>
       <Reorder.Group
         as="div"
-        values={isTemporalOnlyWegBar ? [...pinnedOnLeft, ...pinnedOnCenter, ...pinnedOnRight] : [...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
+        values={
+          isTemporalOnlyWegBar
+            ? [...pinnedOnLeft, ...pinnedOnCenter, ...pinnedOnRight]
+            : [...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]
+        }
         onReorder={onReorderPinned}
         axis={isHorizontal ? 'x' : 'y'}
         className={cx('taskbar', settings.position.toLowerCase(), {
@@ -177,15 +185,16 @@ export function SeelenWeg() {
         })}
       >
         <BackgroundByLayersV2 prefix="taskbar" />
-        {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 &&
+        {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 && (
           <span className="weg-empty-state-label">{t('weg.empty')}</span>
-        }
-        {isTemporalOnlyWegBar ?
-          [
+        )}
+        {isTemporalOnlyWegBar
+          ? [
             ...pinnedOnLeft.map(projectSwItem),
             ...pinnedOnCenter.map(projectSwItem),
             ...pinnedOnRight.map(projectSwItem),
-          ] : [
+          ]
+          : [
             ...pinnedOnLeft.map(projectSwItem),
             <Reorder.Item
               as="div"

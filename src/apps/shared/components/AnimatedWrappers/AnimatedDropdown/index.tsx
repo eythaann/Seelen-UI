@@ -18,12 +18,12 @@ export function AnimatedDropdown({ children, open, onOpenChange, dropdownRender,
     setDelayedOpenPopover((open || openReplacement));
   }, animationDescription.maxAnimationTimeMs, [open || openReplacement]);
 
-  const animationObject = {};
+  const animationClassnames: Record<string, boolean> = {};
   if (animationDescription.openAnimationName) {
-    animationObject[animationDescription.openAnimationName] = (open || openReplacement) && !delayedOpenPopover;
+    animationClassnames[animationDescription.openAnimationName] = (open || openReplacement) && !delayedOpenPopover;
   }
   if (animationDescription.closeAnimationName) {
-    animationObject[animationDescription.closeAnimationName] = delayedOpenPopover && !(open || openReplacement);
+    animationClassnames[animationDescription.closeAnimationName] = delayedOpenPopover && !(open || openReplacement);
   }
 
   return (
@@ -38,7 +38,7 @@ export function AnimatedDropdown({ children, open, onOpenChange, dropdownRender,
       }}
       {...dropdownProps}
       dropdownRender={(origin) => dropdownRender &&
-        <div className={cx(animationObject)}>
+        <div className={cx(animationClassnames)}>
           {dropdownRender(origin)}
         </div>
       }

@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 
+import { useIcon } from 'src/apps/shared/hooks';
+
 import { StartMenuApp } from '../../shared/store/domain';
 
 import { AnimatedDropdown } from '../../../../shared/components/AnimatedWrappers';

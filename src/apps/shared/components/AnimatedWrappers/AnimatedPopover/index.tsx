@@ -18,7 +18,7 @@ export function AnimatedPopover({ children, open, onOpenChange, content, animati
     setDelayedOpenPopover((open || openReplacement));
   }, animationDescription.maxAnimationTimeMs, [open || openReplacement]);
 
-  const animationObject = {};
+  const animationObject: Record<string, boolean> = {};
   if (animationDescription.openAnimationName) {
     animationObject[animationDescription.openAnimationName] = (open || openReplacement) && !delayedOpenPopover;
   }
