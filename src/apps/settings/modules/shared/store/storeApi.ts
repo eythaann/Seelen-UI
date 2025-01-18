@@ -1,4 +1,5 @@
 import { SeelenCommand } from '@seelen-ui/lib';
+import { AppConfig, Settings } from '@seelen-ui/lib/types';
 import { path } from '@tauri-apps/api';
 import { invoke } from '@tauri-apps/api/core';
 import yaml from 'js-yaml';
@@ -6,15 +7,11 @@ import yaml from 'js-yaml';
 import { resolveDataPath } from '../config/infra';
 import { dialog, fs } from '../tauri/infra';
 
-import { UserSettings } from '../../../../../shared.interfaces';
-
-export async function saveJsonSettings(settings: UserSettings['jsonSettings']) {
+export async function saveJsonSettings(settings: Settings) {
   await invoke(SeelenCommand.StateWriteSettings, { settings });
 }
 
-export async function saveUserSettings(
-  settings: Pick<UserSettings, 'jsonSettings' | 'yamlSettings'>,
-) {
+export async function saveUserSettings(settings: { jsonSettings: Settings; yamlSettings: AppConfig[] }) {
   const yaml_route = await resolveDataPath('applications.yml');
   await fs.writeTextFile(
     yaml_route,

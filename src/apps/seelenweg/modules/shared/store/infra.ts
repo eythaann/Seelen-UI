@@ -99,11 +99,10 @@ function loadSettingsCSS(settings: SeelenWegSettings) {
   }
 }
 
-function loadSettingsToStore(_settings: Settings) {
-  const settings = _settings.inner;
-  i18n.changeLanguage(settings.language || undefined);
+function loadSettingsToStore(settings: Settings) {
+  i18n.changeLanguage(settings.inner.language || undefined);
   store.dispatch(RootActions.setSettings(settings.seelenweg));
-  store.dispatch(RootActions.setDevTools(settings.devTools));
+  store.dispatch(RootActions.setDevTools(settings.inner.devTools));
   loadSettingsCSS(settings.seelenweg);
 }
 

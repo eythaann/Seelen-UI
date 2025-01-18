@@ -75,7 +75,8 @@ pub fn state_get_history() -> LauncherHistory {
 pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
     if let Some(path) = path {
         let mut settings = FullState::get_settings_from_path(&path)?;
-        settings.sanitize();
+        settings.migrate()?;
+        settings.sanitize()?;
         Ok(settings)
     } else {
         Ok(FULL_STATE.load().settings().clone())

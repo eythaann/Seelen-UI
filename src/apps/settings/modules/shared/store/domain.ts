@@ -1,5 +1,5 @@
 import { ConnectedMonitor, IUIColors } from '@seelen-ui/lib';
-import { AppConfig, IconPack, Placeholder, Plugin, Profile, Settings, Theme, Widget, WindowManagerLayout } from '@seelen-ui/lib/types';
+import { AppConfig, FancyToolbarSettings, IconPack, Placeholder, Plugin, Profile, SeelenLauncherSettings, SeelenWallSettings, SeelenWegSettings, Settings, Theme, Widget, WindowManagerLayout, WindowManagerSettings } from '@seelen-ui/lib/types';
 
 import { Route } from '../../../components/navigation/routes';
 
@@ -19,4 +19,10 @@ export interface RootState extends Settings {
   widgets: Widget[];
   profiles: Profile[];
   connectedMonitors: ConnectedMonitor[];
+  // migrated since v2.1.0
+  fancyToolbar: FancyToolbarSettings;
+  seelenweg: SeelenWegSettings;
+  wall: SeelenWallSettings;
+  launcher: SeelenLauncherSettings;
+  windowManager: WindowManagerSettings;
 }
