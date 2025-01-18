@@ -9,7 +9,7 @@ const initialState: LauncherState = {
   colors: UIColors.default().inner,
   apps: [],
   history: {},
-  settings: (await Settings.default()).inner.launcher,
+  settings: (await Settings.default()).launcher,
 };
 
 export const RootSlice = createSlice({

@@ -1,27 +1,17 @@
+import {
+  SeelenLauncherWidgetId,
+  SeelenToolbarWidgetId,
+  SeelenWallWidgetId,
+  SeelenWegWidgetId,
+  SeelenWindowManagerWidgetId,
+} from '@seelen-ui/lib';
 import { Settings } from '@seelen-ui/lib/types';
-import { pick } from 'lodash';
+import { cloneDeep, pick } from 'lodash';
 
 import { RootState } from '../domain';
 
-import { UserSettings } from '../../../../../../shared.interfaces';
-
-export const StaticSettingsToState = (userSettings: UserSettings, state: RootState): RootState => {
-  const { jsonSettings, yamlSettings, themes, layouts, placeholders } = userSettings;
-  return {
-    ...state,
-    ...jsonSettings,
-    availableThemes: themes,
-    availableLayouts: layouts,
-    availablePlaceholders: placeholders,
-    appsConfigurations: yamlSettings,
-  };
-};
-
 export const StateToJsonSettings = (state: RootState): Settings => {
-  return pick(state, [
-    'fancyToolbar',
-    'windowManager',
-    'seelenweg',
+  let settings = pick(cloneDeep(state), [
     'iconPacks',
     'selectedThemes',
     'monitorsV2',
@@ -32,8 +22,15 @@ export const StateToJsonSettings = (state: RootState): Settings => {
     'dateFormat',
     'virtualDesktopStrategy',
     'updater',
-    'wall',
-    'launcher',
-    'custom',
+    'byWidget',
   ]);
+
+  // migration since v2.1.0
+  settings.byWidget[SeelenToolbarWidgetId] = state.fancyToolbar;
+  settings.byWidget[SeelenLauncherWidgetId] = state.launcher;
+  settings.byWidget[SeelenWallWidgetId] = state.wall;
+  settings.byWidget[SeelenWegWidgetId] = state.seelenweg;
+  settings.byWidget[SeelenWindowManagerWidgetId] = state.windowManager;
+
+  return settings;
 };

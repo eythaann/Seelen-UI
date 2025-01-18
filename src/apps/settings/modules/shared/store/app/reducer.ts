@@ -25,9 +25,9 @@ const initialState: RootState = {
   autostart: null,
   route: Route.HOME,
   fancyToolbar: FancyToolbarSlice.getInitialState(),
-  seelenweg: defaultSettings.inner.seelenweg,
-  wall: defaultSettings.inner.wall,
-  launcher: defaultSettings.inner.launcher,
+  seelenweg: defaultSettings.seelenweg,
+  wall: defaultSettings.wall,
+  launcher: defaultSettings.launcher,
   windowManager: SeelenManagerSlice.getInitialState(),
   toBeSaved: false,
   toBeRestarted: false,
@@ -53,7 +53,7 @@ const initialState: RootState = {
   plugins: [],
   widgets: [],
   profiles: [],
-  custom: {},
+  byWidget: defaultSettings.inner.byWidget,
 };
 
 function toBeSaved<S, A, R>(fn: (state: S, action: A) => R) {

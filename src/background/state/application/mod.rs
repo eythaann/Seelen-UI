@@ -385,11 +385,11 @@ impl FullState {
             }
         }
 
-        let selected = &mut self.settings.fancy_toolbar.placeholder;
-        if !self.placeholders.contains_key(selected) {
-            *selected = "default.yml".to_string();
+        let selected = self.settings.fancy_toolbar().placeholder;
+        if !self.placeholders.contains_key(&selected) {
+            let toolbar = self.settings.fancy_toolbar_mut();
+            toolbar["placeholder"] = "default.yml".to_string().into();
         }
-
         Ok(())
     }
 
@@ -430,9 +430,10 @@ impl FullState {
             }
         }
 
-        let selected = &mut self.settings.window_manager.default_layout;
-        if !self.layouts.contains_key(selected) {
-            *selected = "BSP.json".to_string();
+        let selected = self.settings.window_manager().default_layout;
+        if !self.layouts.contains_key(&selected) {
+            let wm = self.settings.window_manager_mut();
+            wm["defaultLayout"] = "BSP.json".to_string().into();
         }
 
         Ok(())
@@ -543,7 +544,8 @@ impl FullState {
                 SEELEN_COMMON.user_placeholders_path().join(&filename),
                 serde_yaml::to_string(&placeholder)?,
             )?;
-            self.settings.fancy_toolbar.placeholder = filename.clone();
+            let fancy_toolbar = self.settings.fancy_toolbar_mut();
+            fancy_toolbar["placeholder"] = filename.clone().into();
         }
 
         if let Some(layout) = resource.resources.layout {
@@ -551,7 +553,8 @@ impl FullState {
                 SEELEN_COMMON.user_layouts_path().join(&filename),
                 serde_yaml::to_string(&layout)?,
             )?;
-            self.settings.window_manager.default_layout = filename.clone();
+            let window_manager = self.settings.window_manager_mut();
+            window_manager["defaultLayout"] = filename.clone().into();
         }
 
         self.write_settings()?;
