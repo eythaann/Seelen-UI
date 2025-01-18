@@ -152,6 +152,9 @@ jobs:
             });
 
             result.data.forEach(async (asset) => {
+              if (asset.name.endsWith('.json')) {
+                return;
+              }
               if (!asset.name.includes(nightlyVersion) || asset.name.endsWith('.sig')) {
                 console.info(`deleting ${asset.name}`);
                 await github.rest.repos.deleteReleaseAsset({
