@@ -105,6 +105,7 @@ export const RootSlice = createSlice({
       }
       return state;
     },
+    setIconPacks: toBeSaved(reducers.setIconPacks),
     setSelectedThemes: (state, action: PayloadAction<string[]>) => {
       let themes = new Set(action.payload);
       if (!themes.has('default')) {

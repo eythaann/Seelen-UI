@@ -264,6 +264,10 @@ weg:
   items:
     gap: Plass mellom varene
     label: Gjenstander
+    pinned_visibility:
+      always: Alltid
+      label: Festede elementers synlighet
+      when_primary: Når monitoren er primær
     size: Varestørrelse
     temporal_visibility:
       all: Alle

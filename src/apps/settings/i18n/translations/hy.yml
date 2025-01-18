@@ -264,6 +264,10 @@ weg:
   items:
     gap: Տարածություն իրերի միջեւ
     label: Իրերը
+    pinned_visibility:
+      always: Միշտ
+      label: Ամրացված տարրերի տեսանելիություն
+      when_primary: Երբ մոնիտորը առաջնային է
     size: Ապրանքի չափը
     temporal_visibility:
       all: Բոլորը

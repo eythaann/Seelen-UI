@@ -24,3 +24,5 @@ taskbar_menu:
   settings: Asetukset
   start: Lisää aloitusmoduuli
   task_manager: Tehtävienhallinta
+weg:
+  empty: Ei näytettäviä kohteita

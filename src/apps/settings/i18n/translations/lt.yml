@@ -260,6 +260,10 @@ weg:
   items:
     gap: Tarpas tarp daiktų
     label: Daiktai
+    pinned_visibility:
+      always: Visada
+      label: Prisegtų elementų matomumas
+      when_primary: Kai monitorius yra pagrindinis
     size: Prekės dydis
     temporal_visibility:
       all: Visi

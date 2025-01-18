@@ -69,6 +69,29 @@ body {
   }
 }
 
+.launcher-item-context-menu {
+  border-radius: 8px;
+  background-color: var(--color-gray-50);
+  box-shadow: 0 4px 10px 4px #0001;
+}
+
+@keyframes PopupBaseAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.launcher-item-context-menu-open, 
+.launcher-item-context-menu-close {
+  animation: PopupBaseAnimation 0.2s linear forwards; 
+}
+.launcher-item-context-menu-close {
+  animation-direction: reverse;
+}
+
 .launcher-body {
   display: flex;
   flex-direction: column;

@@ -265,6 +265,10 @@ weg:
   items:
     gap: Χώρος μεταξύ αντικειμένων
     label: Αντικείμενα
+    pinned_visibility:
+      always: Πάντοτε
+      label: Ορατότητα καρφιτσωμένων αντικειμένων
+      when_primary: Όταν η οθόνη είναι κύρια
     size: Μέγεθος αντικειμένου
     temporal_visibility:
       all: Ολοι

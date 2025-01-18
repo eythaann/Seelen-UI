@@ -259,6 +259,10 @@ weg:
   items:
     gap: Space Between Items
     label: Items
+    pinned_visibility:
+      always: Always
+      label: Pinned Items Visibility
+      when_primary: When the monitor is primary
     size: Item Size
     temporal_visibility:
       all: All

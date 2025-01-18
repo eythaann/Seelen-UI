@@ -6,7 +6,7 @@ use std::collections::HashMap;
 
 use application::FullState;
 use domain::AhkVar;
-use seelen_core::state::WegTemporalItemsVisibility;
+use seelen_core::state::{WegPinnedItemsVisibility, WegTemporalItemsVisibility};
 
 use crate::windows_api::monitor::Monitor;
 
@@ -78,6 +78,14 @@ impl FullState {
         let default = self.settings.seelenweg.temporal_items_visibility;
         match self.settings.monitors_v2.get(monitor_id) {
             Some(config) => config.weg.temporal_items_visibility.unwrap_or(default),
+            None => default,
+        }
+    }
+
+    pub fn get_weg_pinned_item_visibility(&self, monitor_id: &str) -> WegPinnedItemsVisibility {
+        let default = self.settings.seelenweg.pinned_items_visibility;
+        match self.settings.monitors_v2.get(monitor_id) {
+            Some(config) => config.weg.pinned_items_visibility.unwrap_or(default),
             None => default,
         }
     }

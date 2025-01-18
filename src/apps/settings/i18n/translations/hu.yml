@@ -261,6 +261,10 @@ weg:
   items:
     gap: Hely az elemek között
     label: Tárgyak
+    pinned_visibility:
+      always: Mindig
+      label: Rögzített elemek láthatósága
+      when_primary: Amikor a monitor az elsődleges
     size: Elemméret
     temporal_visibility:
       all: Minden

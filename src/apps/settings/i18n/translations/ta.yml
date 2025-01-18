@@ -263,6 +263,10 @@ weg:
   items:
     gap: பொருட்களுக்கு இடையே உள்ள இடம்
     label: பொருட்களை
+    pinned_visibility:
+      always: எப்போதும்
+      label: பின் செய்யப்பட்ட பொருட்களின் தெரிவுநிலை
+      when_primary: மானிட்டர் முதன்மையாக இருக்கும்போது
     size: பொருளின் அளவு
     temporal_visibility:
       all: அனைத்து

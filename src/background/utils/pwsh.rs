@@ -16,52 +16,63 @@ const PWSH_COMMON_ARGS: [&str; 7] = [
 ];
 
 pub struct PwshScript {
+    mode: PwshExecutionMode,
     inner: String,
-    args: Vec<String>,
     elevated: bool,
+}
+
+pub enum PwshExecutionMode {
+    ScriptFile(Vec<String>),
+    Command,
 }
 
 impl PwshScript {
     pub fn new<S: Into<String>>(contents: S) -> Self {
         Self {
             inner: contents.into(),
-            args: Vec::new(),
+            mode: PwshExecutionMode::ScriptFile(Vec::new()),
             elevated: false,
         }
     }
 
-    pub fn with_args<I, S>(mut self, args: I) -> Self
-    where
-        I: IntoIterator<Item = S>,
-        S: Into<String>,
-    {
-        self.args = args.into_iter().map(|s| s.into()).collect_vec();
+    pub fn inline_command(mut self) -> Self {
+        self.mode = PwshExecutionMode::Command;
         self
     }
 
+    /// ignored if `mode` is other than `PwshExecutionMode::ScriptFile`
     pub fn elevated(mut self) -> Self {
         self.elevated = true;
         self
     }
 
     fn build_args(&self, script_path_str: &str) -> Vec<String> {
-        let mut args = PWSH_COMMON_ARGS
-            .iter()
-            .map(|s| s.to_string())
-            .chain(["-File".to_string(), script_path_str.to_string()])
-            .chain(self.args.clone())
-            .collect_vec();
-        if self.elevated && !WindowsApi::is_elevated().unwrap_or(false) {
-            args = PWSH_COMMON_ARGS
-            .iter()
-            .map(|s| s.to_string())
-            .chain([
-                "-Command".to_string(),
-                format!("Start-Process 'powershell' -Verb runAs -WindowStyle Hidden -Wait -ArgumentList '{}'", args.join(" "))
-            ])
-            .collect_vec();
+        match &self.mode {
+            PwshExecutionMode::ScriptFile(args) => {
+                let mut args = PWSH_COMMON_ARGS
+                    .iter()
+                    .map(|s| s.to_string())
+                    .chain(["-File".to_string(), script_path_str.to_string()])
+                    .chain(args.clone())
+                    .collect_vec();
+                if self.elevated && !WindowsApi::is_elevated().unwrap_or(false) {
+                    args = PWSH_COMMON_ARGS
+                    .iter()
+                    .map(|s| s.to_string())
+                    .chain([
+                        "-Command".to_string(),
+                        format!("Start-Process 'powershell' -Verb runAs -WindowStyle Hidden -Wait -ArgumentList '{}'", args.join(" "))
+                    ])
+                    .collect_vec();
+                }
+                args
+            }
+            PwshExecutionMode::Command => PWSH_COMMON_ARGS
+                .iter()
+                .map(|s| s.to_string())
+                .chain(["-Command".to_string(), self.inner.to_string()])
+                .collect_vec(),
         }
-        args
     }
 
     /// returns `Ok(stdout)` or `Err(stderr)`

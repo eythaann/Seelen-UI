@@ -9,26 +9,25 @@ use windows::Win32::{
     Graphics::Gdi::HMONITOR,
     System::TaskScheduler::{ITaskService, TaskScheduler},
 };
-use winreg::{
-    enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS},
-    RegKey,
-};
 
 use crate::{
     error_handler::Result,
     hook::register_win_hook,
     instance::SeelenInstanceContainer,
     log_error,
-    modules::monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
+    modules::{
+        cli::ServiceClient,
+        monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
+    },
     restoration_and_migrations::RestorationAndMigration,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
-    seelen_weg::SeelenWeg,
+    seelen_weg::{weg_items_impl::WEG_ITEMS_IMPL, SeelenWeg},
     seelen_wm_v2::instance::WindowManagerV2,
     state::application::FULL_STATE,
     system::{declare_system_events_handlers, release_system_events_handlers},
     trace_lock,
-    utils::{ahk::AutoHotKey, is_running_as_appx_package, pwsh::PwshScript},
+    utils::{ahk::AutoHotKey, pwsh::PwshScript},
     windows_api::{Com, WindowsApi},
     APP_HANDLE,
 };
@@ -168,13 +167,13 @@ impl Seelen {
                     m.update_handle(handle);
                 }
                 log_error!(trace_lock!(SEELEN).refresh_windows_positions());
+                log_error!(trace_lock!(WEG_ITEMS_IMPL).emit_to_webview());
             }
         }
     }
 
     async fn start_async() -> Result<()> {
         Self::start_ahk_shortcuts().await?;
-        Self::refresh_path_environment()?;
         Ok(())
     }
 
@@ -243,12 +242,14 @@ impl Seelen {
         self.instances
             .push(SeelenInstanceContainer::new(handle, &state)?);
         self.refresh_windows_positions()?;
+        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 
     fn remove_monitor(&mut self, id: &str) -> Result<()> {
         self.instances.retain(|m| m.id() != id);
         self.refresh_windows_positions()?;
+        trace_lock!(WEG_ITEMS_IMPL).emit_to_webview()?;
         Ok(())
     }
 
@@ -258,44 +259,16 @@ impl Seelen {
             task_service.Connect(None, None, None, None)?;
             let is_task_enabled = task_service
                 .GetFolder(&"\\Seelen".into())
-                .is_ok_and(|folder| folder.GetTask(&"Seelen UI App".into()).is_ok());
+                .and_then(|folder| folder.GetTask(&"Seelen UI Service".into()))
+                .and_then(|task| task.Enabled())
+                .map(|v| v.as_bool())
+                .unwrap_or(false);
             Ok(is_task_enabled)
         })
     }
 
-    pub async fn set_auto_start(enabled: bool) -> Result<()> {
-        let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
-        PwshScript::new(format!(
-            "&\"{}\" set-startup {}",
-            service_path.display(),
-            enabled
-        ))
-        .elevated()
-        .execute()
-        .await?;
-        Ok(())
-    }
-
-    /// add the installation directory to the PATH environment variable
-    pub fn refresh_path_environment() -> Result<()> {
-        if tauri::is_dev() || is_running_as_appx_package() {
-            return Ok(());
-        }
-
-        let hkcr = RegKey::predef(HKEY_CURRENT_USER);
-        let enviroments = hkcr.open_subkey_with_flags("Environment", KEY_ALL_ACCESS)?;
-        let env_path: String = enviroments.get_value("Path")?;
-
-        let install_folder = std::env::current_exe()?
-            .parent()
-            .expect("Failed to get parent directory")
-            .to_string_lossy()
-            .to_string();
-        if !env_path.contains(&install_folder) {
-            log::trace!("Adding installation directory to PATH environment variable");
-            enviroments.set_value("Path", &format!("{};{}", env_path, install_folder))?;
-        }
-        Ok(())
+    pub fn set_auto_start(enabled: bool) -> Result<()> {
+        ServiceClient::emit_set_startup(enabled)
     }
 
     // TODO: split ahk logic into another file/module

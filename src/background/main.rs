@@ -107,8 +107,8 @@ fn setup(app: &mut tauri::App<tauri::Wry>) -> Result<()> {
     print_initial_information();
     validate_webview_runtime_is_installed(app.handle())?;
 
-    if !tauri::is_dev() && !ServiceClient::is_running() {
-        tauri::async_runtime::block_on(ServiceClient::reinstall_and_start())?;
+    if !ServiceClient::is_running() {
+        tauri::async_runtime::block_on(ServiceClient::start_service())?;
     }
 
     check_for_webview_optimal_state(app.handle())?;

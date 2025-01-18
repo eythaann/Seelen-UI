@@ -7,15 +7,17 @@ use clap::{Arg, Command};
 use serde::Deserialize;
 
 use crate::{
-    error::Result, logger::SluServiceLogger, task_scheduler::TaskSchedulerHelper, SluService,
-    SERVICE_DISPLAY_NAME, SLU_SERVICE,
+    enviroment::{add_installation_dir_to_path, remove_installation_dir_from_path},
+    error::Result,
+    logger::SluServiceLogger,
+    task_scheduler::TaskSchedulerHelper,
+    SERVICE_DISPLAY_NAME,
 };
 
 pub struct ServiceSubcommands;
 impl ServiceSubcommands {
     pub const INSTALL: &str = "install";
     pub const UNINSTALL: &str = "uninstall";
-    pub const START: &str = "start";
     pub const STOP: &str = "stop";
     pub const SET_STARTUP: &str = "set-startup";
 }
@@ -28,13 +30,13 @@ pub fn get_cli() -> Command {
         .before_help("")
         .after_help("To read more about Seelen visit https://github.com/eythaann/seelen-ui.git")
         .subcommands([
-            Command::new(ServiceSubcommands::INSTALL).about("Installs or repairs the service."),
-            Command::new(ServiceSubcommands::UNINSTALL).about("Uninstalls the service."),
-            Command::new(ServiceSubcommands::START)
-                .about("Starts the service (must be installed first)."),
-            Command::new(ServiceSubcommands::STOP).about("Stops the service (TCP only)."),
+            Command::new(ServiceSubcommands::INSTALL)
+                .about("Installs or repairs the service (elevation required)."),
+            Command::new(ServiceSubcommands::UNINSTALL)
+                .about("Uninstalls the service (elevation required)."),
+            Command::new(ServiceSubcommands::STOP).about("Stops the service (TCP)."),
             Command::new(ServiceSubcommands::SET_STARTUP)
-                .about("Sets the Seelen UI App to start on boot.")
+                .about("Sets the service to start on boot (TCP).")
                 .arg(
                     Arg::new("value")
                         .help("true or false")
@@ -47,53 +49,38 @@ pub fn get_cli() -> Command {
 
 /// Handles the CLI and exits the process with 0 if it should
 pub fn handle_cli() -> Result<()> {
-    let mut should_stop_process = true;
     let matches = get_cli().get_matches();
-    match matches.subcommand() {
+    let subcommand = matches.subcommand();
+    match subcommand {
         Some((ServiceSubcommands::INSTALL, _)) => {
-            let result = SluService::install();
-            if result.is_err() {
-                SluService::uninstall()?;
-                return result;
-            }
             SluServiceLogger::install()?;
+            add_installation_dir_to_path()?;
             TaskSchedulerHelper::create_service_task()?;
         }
         Some((ServiceSubcommands::UNINSTALL, _)) => {
-            SluService::uninstall()?;
             SluServiceLogger::uninstall()?;
+            remove_installation_dir_from_path()?;
             TaskSchedulerHelper::remove_service_task()?;
         }
-        Some((ServiceSubcommands::START, _)) => {
-            if !SluService::is_running() {
-                TaskSchedulerHelper::run_service_task()?;
-            } else {
-                println!("Service is already running.");
-            }
+        Some((ServiceSubcommands::STOP, _)) => {
+            ServiceClient::emit_stop_signal()?;
         }
-        Some((ServiceSubcommands::SET_STARTUP, arg)) => {
-            let enabled: bool = *arg.get_one("value").unwrap();
-            if enabled {
-                TaskSchedulerHelper::create_app_startup_task()?;
-            } else {
-                TaskSchedulerHelper::remove_app_startup_task()?;
-            }
-        }
-        _ => {
-            should_stop_process = false;
-        }
+        _ => {}
     }
-    if should_stop_process {
+    if subcommand.is_some() {
         std::process::exit(0);
     }
     Ok(())
 }
 
 pub fn handle_tcp_cli(matches: &clap::ArgMatches) -> Result<()> {
-    #[allow(clippy::single_match)]
     match matches.subcommand() {
         Some((ServiceSubcommands::STOP, _)) => {
-            SLU_SERVICE.lock().stop();
+            crate::stop();
+        }
+        Some((ServiceSubcommands::SET_STARTUP, arg)) => {
+            let enabled: bool = *arg.get_one("value").unwrap();
+            TaskSchedulerHelper::set_enabled_service_task(enabled)?;
         }
         _ => (),
     }
@@ -123,6 +110,7 @@ impl ServiceClient {
         if message.token != Self::token() {
             return Ok(());
         }
+        log::trace!("CLI command received: {}", message.message.join(" "));
         message.message.insert(0, "slu-service.exe".to_owned());
         if let Ok(matches) = get_cli().try_get_matches_from(message.message) {
             handle_tcp_cli(&matches)?;
@@ -156,5 +144,22 @@ impl ServiceClient {
     pub fn connect_tcp() -> Result<TcpStream> {
         let port = std::fs::read_to_string(Self::socket_path())?;
         Ok(TcpStream::connect(format!("127.0.0.1:{}", port))?)
+    }
+
+    fn send_message(message: &[&str]) -> Result<()> {
+        let stream = Self::connect_tcp()?;
+        let writter = std::io::BufWriter::new(stream);
+        serde_json::to_writer(
+            writter,
+            &serde_json::json!({
+                "token": Self::token(),
+                "message": message,
+            }),
+        )?;
+        Ok(())
+    }
+
+    pub fn emit_stop_signal() -> Result<()> {
+        Self::send_message(&["stop"])
     }
 }

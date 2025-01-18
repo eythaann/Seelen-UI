@@ -20,6 +20,7 @@ jobs:
           cache: "npm"
       - run: npm clean-install
       - run: npm run lint
+      - run: npm run type-check
       - run: npm run test
 
   rust-linter:

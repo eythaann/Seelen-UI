@@ -256,6 +256,10 @@ weg:
   items:
     gap: በእቃዎች መካከል ቦታ
     label: ዕቃዎች
+    pinned_visibility:
+      always: ሁሌም
+      label: የተሰኩ ዕቃዎች ታይነት
+      when_primary: መቆጣጠሪያው ቀዳሚ ሲሆን
     size: የንጥል መጠን
     temporal_visibility:
       all: ሁሉም

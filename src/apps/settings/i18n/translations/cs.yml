@@ -262,6 +262,10 @@ weg:
   items:
     gap: Prostor mezi položkami
     label: Položky
+    pinned_visibility:
+      always: Vždy
+      label: Viditelnost připnutých položek
+      when_primary: Když je monitor primární
     size: Velikost položky
     temporal_visibility:
       all: Vše

@@ -257,6 +257,10 @@ weg:
   items:
     gap: Aaye laarin awọn ohun kan
     label: Awọn ohun
+    pinned_visibility:
+      always: Nigbagbogbo
+      label: Pini Awọn nkan Hihan
+      when_primary: Nigbati atẹle jẹ akọkọ
     size: Iwọn nkan
     temporal_visibility:
       all: Gbogbo

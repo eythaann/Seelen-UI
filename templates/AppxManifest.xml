@@ -37,7 +37,7 @@
       </uap3:VisualElements>
 
       <Extensions>
-        <uap5:Extension Category="windows.appExecutionAlias" Executable="seelen-ui.exe" EntryPoint="Windows.FullTrustApplication">
+        <uap5:Extension Category="windows.appExecutionAlias">
           <uap5:AppExecutionAlias>
             <uap5:ExecutionAlias Alias="seelen-ui.exe" />
           </uap5:AppExecutionAlias>
@@ -73,20 +73,16 @@
       </uap3:VisualElements>
 
       <Extensions>
-        <desktop7:Extension Category="windows.service" Executable="slu-service.exe" EntryPoint="Windows.FullTrustApplication">
-          <desktop7:Service
-            Name='slu-service'
-            StartupType='manual'
-            StartAccount='localSystem'
-          ></desktop7:Service>
-        </desktop7:Extension>
+        <uap5:Extension Category="windows.appExecutionAlias">
+          <uap5:AppExecutionAlias>
+            <uap5:ExecutionAlias Alias="slu-service.exe" />
+          </uap5:AppExecutionAlias>
+        </uap5:Extension>
       </Extensions>
     </Application>
   </Applications>
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
-    <rescap:Capability Name="packagedServices" />
-    <rescap:Capability Name="localSystemServices" />
   </Capabilities>
 </Package>

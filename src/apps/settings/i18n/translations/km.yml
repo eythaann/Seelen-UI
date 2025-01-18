@@ -259,6 +259,10 @@ weg:
   items:
     gap: ចន្លោះរវាងធាតុ
     label: ធាតុ
+    pinned_visibility:
+      always: ជានិច្ច
+      label: ភាពមើលឃើញធាតុដែលបានខ្ទាស់
+      when_primary: នៅពេលដែលម៉ូនីទ័រគឺបឋម
     size: ទំហំធាតុ
     temporal_visibility:
       all: ទាំងអស់។

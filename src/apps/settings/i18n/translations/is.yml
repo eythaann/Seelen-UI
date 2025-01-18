@@ -260,6 +260,10 @@ weg:
   items:
     gap: Rými milli atriða
     label: Hlutir
+    pinned_visibility:
+      always: Alltaf
+      label: Sýnileiki festra hluta
+      when_primary: Þegar skjárinn er aðal
     size: Stærð hlutar
     temporal_visibility:
       all: Allt

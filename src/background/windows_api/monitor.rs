@@ -46,6 +46,10 @@ impl Monitor {
         Ok(self.display_device()?.id)
     }
 
+    pub fn is_primary(&self) -> Result<bool> {
+        WindowsApi::monitor_get_is_primary(self.0)
+    }
+
     pub fn display_device(&self) -> Result<DisplayDevice> {
         let device = WindowsApi::get_display_device(self.0)?;
         let buffer_id = device.DeviceID;

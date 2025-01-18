@@ -264,6 +264,10 @@ weg:
   items:
     gap: Расстояние между иконок
     label: Иконки
+    pinned_visibility:
+      always: Всегда
+      label: Видимость закрепленных элементов
+      when_primary: Когда монитор является основным
     size: Размер иконок
     temporal_visibility:
       all: Все

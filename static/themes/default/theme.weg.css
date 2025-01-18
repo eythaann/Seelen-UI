@@ -12,6 +12,10 @@
     background-color: var(--color-gray-100);
     border-radius: 15px;
   }
+
+  &.temporal-only {
+    --empty-rule: "delete me on use";
+  }
 }
 
 .weg-separator {
@@ -32,6 +36,16 @@
       border-bottom: 1px solid var(--color-gray-400);
     }
   }
+}
+
+.weg-empty-state-label {
+  white-space: nowrap;
+  width: min-content;
+  line-height: var(--config-item-size);
+  vertical-align: middle;
+  font-style: italic;
+  color: var(--color-gray-400);
+  margin: 0 calc(var(--config-padding) * 2);
 }
 
 /* This will act like a hitbox for items */
@@ -222,7 +236,13 @@
   .weg-context-menu {
     --empty-rule: "delete me on use";
   }
+
+  .weg-context-menu-item-icon {
+    width: 1em;
+  }
 }
+
+
 
 .weg-item-preview-container {
   padding: 10px;
@@ -233,6 +253,26 @@
     border-radius: 10px;
   }
 }
+
+@keyframes PreviewContainerAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.weg-item-preview-container-open, .weg-context-menu-container-open,
+.weg-item-preview-container-close, .weg-context-menu-container-close {
+  animation: PreviewContainerAnimation 0.2s linear forwards; 
+}
+
+.weg-item-preview-container-close, .weg-context-menu-container-close {
+  animation-direction: reverse;
+}
+
 
 .weg-item-preview {
   padding: 6px 10px 10px 10px;

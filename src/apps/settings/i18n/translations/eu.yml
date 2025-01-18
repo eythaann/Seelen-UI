@@ -262,6 +262,10 @@ weg:
   items:
     gap: Elementuen arteko espazioa
     label: Manatu
+    pinned_visibility:
+      always: Beti
+      label: Ainguratutako elementuen ikusgaitasuna
+      when_primary: Monitorea nagusia denean
     size: Elementuen tamaina
     temporal_visibility:
       all: Denak

@@ -1,7 +1,6 @@
 import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
 import { Placeholder, Plugin, ToolbarItem } from '@seelen-ui/lib/types';
-import { Dropdown } from 'antd';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,8 +17,9 @@ import { SettingsModule } from '../Settings/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
 import { SavePlaceholderAsCustom } from './application';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
+import { AnimatedDropdown } from '../../../shared/components/AnimatedWrappers';
+import { useWindowFocusChange } from '../../../shared/hooks';
 import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
@@ -136,7 +136,12 @@ export function ToolBar({ structure }: Props) {
     !isAppFocused && hideMode !== HideMode.Never && (isOverlaped || hideMode === HideMode.Always);
 
   return (
-    <Dropdown
+    <AnimatedDropdown
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'ft-bar-context-menu-open',
+        closeAnimationName: 'ft-bar-context-menu-close',
+      }}
       trigger={['contextMenu']}
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
@@ -171,6 +176,6 @@ export function ToolBar({ structure }: Props) {
           {structure.right.map(componentByModule.bind(null, plugins))}
         </div>
       </Reorder.Group>
-    </Dropdown>
+    </AnimatedDropdown>
   );
 }
