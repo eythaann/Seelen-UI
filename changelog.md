@@ -5,7 +5,8 @@
 - create separated system service to handle elevated actions.
 
 ###
-- fix ghost windows caused by a refactor donde on v2.0.13
+- fix ghost windows caused by a refactor donde on v2.0.13.
+- not showing save button after icon packs change.
 
 ## [2.0.14]
 ### hotfix
