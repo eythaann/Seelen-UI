@@ -6,11 +6,14 @@ use crate::{
 };
 
 #[derive(Debug, Clone, Serialize)]
+#[serde(default, rename_all = "camelCase")]
 pub struct PhysicalMonitor {
     pub id: String,
     pub name: String,
     pub width: u32,
     pub height: u32,
+    pub from_top: i32,
+    pub from_left: i32,
     pub dpi: f32,
 }
 
@@ -25,6 +28,8 @@ impl TryFrom<Monitor> for PhysicalMonitor {
             name: device.name,
             width: (rect.right - rect.left) as u32,
             height: (rect.bottom - rect.top) as u32,
+            from_left: rect.left,
+            from_top: rect.top,
             dpi,
         })
     }

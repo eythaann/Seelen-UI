@@ -10,6 +10,7 @@ const initialState: RootState = {
   settings: (await Settings.default()).wall,
   colors: UIColors.default().inner,
   stop: false,
+  monitors: [],
 };
 
 export const RootSlice = createSlice({
