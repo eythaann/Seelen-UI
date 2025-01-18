@@ -13,6 +13,7 @@
     "translate": "tsx ./scripts/translate.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
+    "type-check": "tsc --noEmit",
     "postversion": "tsx scripts/postversion.ts",
     "postinstall": "lefthook install"
   },
