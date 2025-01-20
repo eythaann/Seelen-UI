@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { File, FolderType, User } from '@seelen-ui/lib/types';
 import { convertFileSrc } from '@tauri-apps/api/core';
-import { Popover, Tooltip } from 'antd';
+import { Tooltip } from 'antd';
 import { t } from 'i18next';
 import { PropsWithChildren, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,8 @@ import { BackgroundByLayersV2 } from '../../../../seelenweg/components/Backgroun
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
 import { Selectors } from '../../shared/store/app';
+import { AnimatedPopover } from 'src/apps/shared/components/AnimatedWrappers';
+import { cx } from 'src/apps/shared/styles';
 
 import { AppHistoryItem } from '../../shared/store/domain';
 
@@ -46,6 +48,8 @@ function folderTypeToIcon(folderType: FolderType): { icon: string; category: Fol
   }
 }
 
+type SettingsType = 'Theme' | 'IconPack' | 'WEG' | 'Toolbar' | undefined;
+
 export interface UserHomeFolder {
   category: FolderType;
   content: File[];
@@ -53,8 +57,10 @@ export interface UserHomeFolder {
 }
 
 function UserHome({ }: UserHomeProps) {
+  const [historyOpen, setHistoryOpen] = useState(false);
   const [historyCount, setHistoryCount] = useState(5);
   const [categoryOpen, setCategoryOpen] = useState<FolderType>('Recent');
+  const [openSettings, setOpenSettings] = useState<SettingsType>(undefined);
 
   const user: User = useSelector(Selectors.user);
   const folders: UserHomeFolder[] = [
@@ -76,23 +82,13 @@ function UserHome({ }: UserHomeProps) {
               mouseLeaveDelay={0}
               arrow={false}
               title={t('userhome.profile.accounts')}
-              placement="right"
+              placement="bottom"
             >
               <img
                 className="userhome-profile-picture-img"
                 src={convertFileSrc(user.profilePicturePath ?? LAZY_CONSTANTS.MISSING_ICON_PATH)}
                 onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:accounts' })}
               />
-            </Tooltip>
-            <Tooltip
-              mouseLeaveDelay={0}
-              arrow={false}
-              title={t('userhome.profile.log-out')}
-              placement="right"
-            >
-              <button className="userhome-profile-button-signout" onClick={() => invoke(SeelenCommand.LogOut)}>
-                <Icon iconName="BiLogOut" />
-              </button>
             </Tooltip>
             <Tooltip
               mouseLeaveDelay={0}
@@ -160,13 +156,13 @@ function UserHome({ }: UserHomeProps) {
           </Tooltip>
         </div>
       </div>
-      <ul className="userhome-folders">
-        {folders.map((item) => <UserFolder key={item.category} folderProps={item} categoryOpen={categoryOpen} setCategoryOpen={setCategoryOpen}/>)}
-      </ul>
       { history && history.length != 0 &&
         <>
-          <div className="userhome-title">{t('userhome.history.title')}</div>
-          <ul className="userhome-history">
+          <div className="userhome-title" onClick={() => setHistoryOpen(!historyOpen)}>
+            <span>{t('userhome.history.title')}</span>
+            <Icon iconName="IoIosArrowDown" className={cx('userhome-history-expander', { 'userhome-history-expander-open': historyOpen })} />
+          </div>
+          <ul className={cx('userhome-history', { 'userhome-history-open': historyOpen })}>
             {history.slice(0, historyCount).map((item, index) => (
               <Tooltip
                 key={index}
@@ -181,12 +177,83 @@ function UserHome({ }: UserHomeProps) {
                 </li>
               </Tooltip>
             ))}
+            { history.length > 5 &&
+              <button className="userhome-folder-history-extender" onClick={() => setHistoryCount(history.length > historyCount ? historyCount * 2 : 5)}>{history.length > historyCount ? t('userhome.history.more-items') : t('userhome.history.reduce-items')}</button>
+            }
           </ul>
-          { history.length > 5 &&
-            <button className="userhome-folder-history-extender" onClick={() => setHistoryCount(history.length > historyCount ? historyCount * 2 : 5)}>{history.length > historyCount ? t('userhome.history.more-items') : t('userhome.history.reduce-items')}</button>
-          }
         </>
       }
+      <ul className="userhome-folders">
+        <div className="userhome-title">{t('userhome.folders.title')}</div>
+        {folders.map((item) => <UserFolder key={item.category} folderProps={item} categoryOpen={categoryOpen} setCategoryOpen={setCategoryOpen}/>)}
+      </ul>
+      <ul className="userhome-seelen-options">
+        <span className="userhome-title">{t('userhome.seelen_options.label')}</span>
+        <AnimatedPopover
+          animationDescription={{
+            maxAnimationTimeMs: 500,
+            openAnimationName: 'userhome-quicksettings-open',
+            closeAnimationName: 'userhome-quicksettings-close',
+          }}
+          open={openSettings == 'Theme'}
+          trigger="click"
+          onOpenChange={(open) => {
+            if (!open && openSettings == 'Theme') {
+              setOpenSettings(undefined);
+            }
+
+            setOpenSettings(open ? 'Theme' : openSettings);
+          }}
+          arrow={false}
+          placement="right"
+          content={<UserHome></UserHome>}
+          destroyTooltipOnHide
+        >
+          <li className="userhome-seelen-option-item">
+            <Icon iconName="MdStyle" />
+            <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.theme')}</span>
+          </li>
+        </AnimatedPopover>
+        <li className="userhome-seelen-option-item">
+          <Icon iconName="PiPackageDuotone" />
+          <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.icon_pack')}</span>
+        </li>
+        <li className="userhome-seelen-option-item">
+          <Icon iconName="BiSolidDockTop" />
+          <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.fancytoolbar')}</span>
+        </li>
+        <li className="userhome-seelen-option-item">
+          <Icon iconName="BiDockBottom" />
+          <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.weg')}</span>
+        </li>
+        <li className="userhome-seelen-option-item" onClick={() => invoke(SeelenCommand.ShowAppSettings)}>
+          <Icon iconName="RiSettings3Fill" />
+          <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.settings')}</span>
+        </li>
+      </ul>
+      <div className="userhome-power">
+        <span className="userhome-power-label">{t('userhome.power')}</span>
+        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')}>
+          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.LogOut)}>
+            <Icon iconName="BiLogOut" />
+          </button>
+        </Tooltip>
+        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.sleep')}>
+          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Suspend)}>
+            <Icon iconName="BiMoon" />
+          </button>
+        </Tooltip>
+        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
+          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Restart)}>
+            <Icon iconName="VscDebugRestart" />
+          </button>
+        </Tooltip>
+        <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.shutdown')}>
+          <button className="userhome-power-button" onClick={() => invoke(SeelenCommand.Shutdown)}>
+            <Icon iconName="GrPower" />
+          </button>
+        </Tooltip>
+      </div>
     </BackgroundByLayersV2>
   );
 }
@@ -207,7 +274,12 @@ export function WithUserHome({ setOpen, children }: UserHomeModuleProps) {
   useEffect(() => setOpen(openPreview), [openPreview]);
 
   return (
-    <Popover
+    <AnimatedPopover
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'userhome-open',
+        closeAnimationName: 'userhome-close',
+      }}
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
@@ -216,6 +288,6 @@ export function WithUserHome({ setOpen, children }: UserHomeModuleProps) {
       destroyTooltipOnHide
     >
       {children}
-    </Popover>
+    </AnimatedPopover>
   );
 }
