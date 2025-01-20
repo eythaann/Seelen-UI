@@ -9,6 +9,7 @@ pub mod power;
 pub mod start;
 pub mod system_settings;
 pub mod tray;
+pub mod user;
 pub mod uwp;
 pub mod virtual_desk;
 
