@@ -12,16 +12,13 @@ use std::{
     collections::HashMap, fs::DirEntry, os::windows::fs::MetadataExt, path::PathBuf, sync::Arc,
     time::Duration,
 };
-use tauri::async_runtime::block_on;
 use winreg::{
     enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
     RegKey,
 };
 
 use crate::{
-    error_handler::AppError,
-    event_manager, log_error, trace_lock,
-    utils::{pwsh::PwshScript, spawn_named_thread},
+    error_handler::AppError, event_manager, log_error, trace_lock, utils::spawn_named_thread,
     windows_api::WindowsApi,
 };
 
@@ -32,7 +29,9 @@ const USER_PROFILE_REG_PATH_PATTERN: &str =
 const USER_PROFILE_ONEDRIVE_PATH: &str = "SOFTWARE\\Microsoft\\OneDrive\\Accounts\\Personal";
 const USER_PROFILE_ONEDRIVE_EMAIL_KEY: &str = "UserEmail";
 const USER_PROFILE_ONEDRIVE_FOLDER_KEY: &str = "UserFolder";
-const USER_SID_EXTRACTION_SCRIPT: &str =  "(New-Object -ComObject Microsoft.DiskQuota).TranslateLogonNameToSID((Get-WmiObject -Class Win32_ComputerSystem).Username)";
+const USER_SID_AUTH_PATH: &str =
+    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI";
+const USER_SID_AUTH_PATH_KEY: &str = "LastLoggedOnUserSID";
 
 lazy_static! {
     pub static ref USER_MANAGER: Arc<Mutex<UserManager>> = Arc::new(Mutex::new(
@@ -75,7 +74,7 @@ event_manager!(UserManager, UserManagerEvent);
 impl UserManager {
     pub fn new() -> Result<Self, AppError> {
         let mut instance = Self {
-            user_sid: block_on(Self::get_user_sid()).ok().unwrap(),
+            user_sid: Self::get_user_sid().ok().unwrap(),
             user_details: None,
             folder_wathcer: None,
             folders: HashMap::new(),
@@ -153,10 +152,10 @@ impl UserManager {
         Ok(instance)
     }
 
-    async fn get_user_sid() -> Result<String, AppError> {
-        let sid = PwshScript::new(USER_SID_EXTRACTION_SCRIPT)
-            .execute()
-            .await?;
+    fn get_user_sid() -> Result<String, AppError> {
+        let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+        let settings = hklm.open_subkey(USER_SID_AUTH_PATH)?;
+        let sid: String = settings.get_value(USER_SID_AUTH_PATH_KEY)?;
         Ok(sid)
     }
 
@@ -164,19 +163,13 @@ impl UserManager {
         let read_dir = std::fs::read_dir(path);
 
         if let Ok(result) = read_dir {
-            Box::new(
-                result
-                    .filter(|r| r.is_ok())
-                    .map(|r| r.unwrap())
-                    .map(|dir| {
-                        if dir.path().is_dir() {
-                            UserManager::get_recursive_folder(dir.path())
-                        } else {
-                            Box::new([dir].into_iter())
-                        }
-                    })
-                    .flatten(),
-            )
+            Box::new(result.flatten().flat_map(|dir| {
+                if dir.path().is_dir() {
+                    UserManager::get_recursive_folder(dir.path())
+                } else {
+                    Box::new([dir].into_iter())
+                }
+            }))
         } else {
             Box::new([].into_iter())
         }
@@ -205,10 +198,8 @@ impl UserManager {
                                     return !result.is_dir();
                                 }
                             }
-                        } else if extension == "ini" {
-                            return false;
                         } else {
-                            return true;
+                            return extension != "ini";
                         }
                     }
                 }
@@ -278,7 +269,7 @@ impl UserManager {
         let folder = self.folders.get_mut(&folder_type);
         if let Some(model) = folder {
             model.limit = limit;
-            model.content = Self::get_folder_content(model.path.clone(), limit.clone(), false).ok();
+            model.content = Self::get_folder_content(model.path.clone(), limit, false).ok();
         }
 
         let sender = Self::event_tx();
@@ -322,8 +313,8 @@ impl UserManager {
                                                     },
                                                 };
 
-                                                let ref mut folders =
-                                                    trace_lock!(USER_MANAGER).folders;
+                                                let folders =
+                                                    &mut trace_lock!(USER_MANAGER).folders;
                                                 let folder = folders.get_mut(&FolderType::Recent);
                                                 if let Some(model) = folder {
                                                     if let Some(ref mut folder_content) =
@@ -366,7 +357,7 @@ impl UserManager {
                                             },
                                         };
 
-                                        let ref mut folders = trace_lock!(USER_MANAGER).folders;
+                                        let folders = &mut trace_lock!(USER_MANAGER).folders;
                                         let folder = folders.get_mut(&folder_type);
                                         if let Some(model) = folder {
                                             if let Some(ref mut folder_content) = model.content {
@@ -384,7 +375,7 @@ impl UserManager {
                                         }
                                     } else if let EventKind::Access(_) = event.kind {
                                     } else {
-                                        let ref mut folders = trace_lock!(USER_MANAGER).folders;
+                                        let folders = &mut trace_lock!(USER_MANAGER).folders;
                                         let folder = folders.get_mut(&folder_type);
                                         if let Some(model) = folder {
                                             model.content = UserManager::get_folder_content(

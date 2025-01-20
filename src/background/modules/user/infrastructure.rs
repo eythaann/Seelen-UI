@@ -19,10 +19,7 @@ fn _get_user() -> Result<User, AppError> {
 }
 
 pub fn register_user_events() {
-    //Initialize the User Manager for first use.
     log::trace!("Register for user profile events!");
-    _ = _get_user();
-
     UserManager::subscribe(|event| match event {
         UserManagerEvent::UserUpdated() => {
             if let Ok(user) = _get_user() {
@@ -54,9 +51,7 @@ pub fn get_user_folder_content(folder_type: FolderType) -> Result<Vec<File>, App
         .content()
         .as_ref()
         .unwrap()
-        .iter()
-        .map(|item| item.clone())
-        .collect();
+        .to_vec();
 
     Ok(result)
 }
