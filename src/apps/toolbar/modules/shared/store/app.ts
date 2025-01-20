@@ -22,7 +22,7 @@ const initialState: RootState = {
   userVideosFolder: VideosFolder.default().all(),
   userMusicFolder: MusicFolder.default().all(),
   focused: null,
-  settings: settings.inner.fancyToolbar,
+  settings: settings.fancyToolbar,
   env: {},
   // default values of https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-system_power_status
   powerStatus: {

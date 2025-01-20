@@ -184,13 +184,13 @@ export async function registerStoreEvents() {
 }
 
 export async function loadStore() {
-  const settings = (await Settings.getAsync()).inner;
+  const settings = await Settings.getAsync();
 
-  i18n.changeLanguage(settings.language || undefined);
+  i18n.changeLanguage(settings.inner.language || undefined);
 
   loadSettingsCSS(settings.fancyToolbar);
   store.dispatch(RootActions.setSettings(settings.fancyToolbar));
-  store.dispatch(RootActions.setDateFormat(settings.dateFormat));
+  store.dispatch(RootActions.setDateFormat(settings.inner.dateFormat));
   store.dispatch(
     RootActions.setEnv((await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>),
   );

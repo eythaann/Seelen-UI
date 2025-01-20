@@ -1,3 +1,4 @@
+import { SupportedLanguages } from '@seelen-ui/lib';
 import { Input, Select, Switch, Tooltip } from 'antd';
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +11,6 @@ import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 import { Icon } from 'src/apps/shared/components/Icon';
 
-import { SupportedLanguages } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
 import { IconPacks } from './IconPacks';

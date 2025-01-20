@@ -1,10 +1,9 @@
+import { SupportedLanguages } from '@seelen-ui/lib';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import { translate } from 'google-translate-api-x';
 import yaml from 'js-yaml';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
-
-import { SupportedLanguages } from '../src/apps/shared/lang';
 
 const argv = await yargs(hideBin(process.argv))
   .option('delete', {

@@ -1,8 +1,7 @@
+import { SupportedLanguagesCode } from '@seelen-ui/lib';
 import i18n from 'i18next';
 import yaml from 'js-yaml';
 import { initReactI18next } from 'react-i18next';
-
-import { SupportedLanguagesCode } from '../../shared/lang';
 
 i18n.use(initReactI18next).init(
   {

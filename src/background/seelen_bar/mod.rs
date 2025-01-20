@@ -84,7 +84,7 @@ impl FancyToolbar {
                 .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
 
         let state = FULL_STATE.load();
-        let settings = &state.settings().seelenweg;
+        let settings = &state.settings().seelenweg();
 
         if settings.use_multi_monitor_overlap_logic {
             if is_overlaped {
@@ -145,7 +145,7 @@ impl FancyToolbar {
 
         let state = FULL_STATE.load();
         if state.is_bar_enabled() {
-            let toolbar_height = state.settings().fancy_toolbar.height;
+            let toolbar_height = state.settings().fancy_toolbar().height;
             rect.top += (toolbar_height as f32 * dpi) as i32;
         }
 
@@ -156,7 +156,7 @@ impl FancyToolbar {
         let hwnd = HWND(self.window.hwnd()?.0);
 
         let state = FULL_STATE.load();
-        let settings = &state.settings().fancy_toolbar;
+        let settings = &state.settings().fancy_toolbar();
 
         let monitor_info = WindowsApi::monitor_info(monitor)?;
         let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;

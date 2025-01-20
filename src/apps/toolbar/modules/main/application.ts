@@ -28,7 +28,7 @@ export const SavePlaceholderAsCustom = debounce(async () => {
 
   if (!wasCustom) {
     const settings = await Settings.getAsync();
-    settings.inner.fancyToolbar.placeholder = toBeSaved.info.filename;
+    settings.fancyToolbar.placeholder = toBeSaved.info.filename;
     await settings.save();
   }
 }, 1000);

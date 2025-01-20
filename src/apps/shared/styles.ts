@@ -1,4 +1,14 @@
-import { getCurrentWidget, Settings, ThemeList, UIColors } from '@seelen-ui/lib';
+import {
+  getCurrentWidget,
+  SeelenLauncherWidgetId,
+  SeelenToolbarWidgetId,
+  SeelenWallWidgetId,
+  SeelenWegWidgetId,
+  SeelenWindowManagerWidgetId,
+  Settings,
+  ThemeList,
+  UIColors,
+} from '@seelen-ui/lib';
 import { Theme, WidgetId } from '@seelen-ui/lib/types';
 import { useEffect, useState } from 'react';
 
@@ -43,11 +53,11 @@ export function useDarkMode() {
 
 /* backward compatibility object for old themes */
 const OLD_THEME_KEYS_BY_WIDGET_ID = {
-  '@seelen/fancy-toolbar': 'toolbar',
-  '@seelen/weg': 'weg',
-  '@seelen/window-manager': 'wm',
-  '@seelen/launcher': 'launcher',
-  '@seelen/wall': 'wall',
+  [SeelenToolbarWidgetId]: 'toolbar',
+  [SeelenWegWidgetId]: 'weg',
+  [SeelenWindowManagerWidgetId]: 'wm',
+  [SeelenLauncherWidgetId]: 'launcher',
+  [SeelenWallWidgetId]: 'wall',
 } as Record<WidgetId, string>;
 
 function loadThemes(allThemes: Theme[], selected: string[]) {

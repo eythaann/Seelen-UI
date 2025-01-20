@@ -7,14 +7,12 @@ import {
   PlaceholderList,
   PluginList,
   ProfileList,
-  SeelenEvent,
   Settings,
   ThemeList,
   UIColors,
   WidgetList,
   WindowManagerLayoutList,
 } from '@seelen-ui/lib';
-import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
 
@@ -87,7 +85,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setAppsConfigurations(list.all()));
   });
 
-  await listenGlobal<Settings>(SeelenEvent.StateSettingsChanged, (event) => {
+  await Settings.onChange((settings) => {
     if (IsSavingSettings.current) {
       IsSavingSettings.current = false;
       return;
@@ -95,9 +93,15 @@ export async function registerStoreEvents() {
     const currentState = store.getState();
     const newState: RootState = {
       ...currentState,
-      ...event.payload,
+      ...settings.inner,
       toBeSaved: false,
       toBeRestarted: false,
+      // migration since v2.1.0
+      fancyToolbar: settings.fancyToolbar,
+      windowManager: settings.windowManager,
+      seelenweg: settings.seelenweg,
+      wall: settings.wall,
+      launcher: settings.launcher,
     };
     store.dispatch(RootActions.setState(newState));
   });
@@ -121,11 +125,20 @@ export const LoadSettingsToStore = async (customPath?: string) => {
   const settings: Settings = customPath
     ? await Settings.loadCustom(customPath)
     : await Settings.getAsync();
+
+  console.log(settings.inner);
+
   const currentState = store.getState();
   store.dispatch(
     RootActions.setState({
       ...currentState,
       ...settings.inner,
+      // migration since v2.1.0
+      fancyToolbar: settings.fancyToolbar,
+      windowManager: settings.windowManager,
+      seelenweg: settings.seelenweg,
+      wall: settings.wall,
+      launcher: settings.launcher,
     }),
   );
 

@@ -26,9 +26,9 @@ async function initUIColors() {
 
 export async function initStore() {
   const dispatch = store.dispatch;
-  const settings = (await Settings.getAsync()).inner;
+  const settings = await Settings.getAsync();
 
-  i18n.changeLanguage(settings.language || undefined);
+  i18n.changeLanguage(settings.inner.language || undefined);
 
   dispatch(Actions.setSettings(settings.launcher));
   dispatch(Actions.setApps(await invoke(SeelenCommand.LauncherGetApps)));
@@ -37,7 +37,7 @@ export async function initStore() {
   LauncherHistory.onChange((history) => dispatch(Actions.setHistory(history.inner)));
   Settings.onChange((settings) => {
     i18n.changeLanguage(settings.inner.language || undefined);
-    dispatch(Actions.setSettings(settings.inner.launcher));
+    dispatch(Actions.setSettings(settings.launcher));
   });
 
   await initUIColors();
