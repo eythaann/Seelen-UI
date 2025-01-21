@@ -2,7 +2,7 @@ use std::{fs::OpenOptions, io::Write};
 
 use seelen_core::{
     handlers::SeelenEvent,
-    state::{Placeholder, TextToolbarItem, ToolbarItem, ToolbarItem2},
+    state::{GenericToolbarItem, Placeholder, TextToolbarItem, ToolbarItem, ToolbarItem2},
 };
 use tauri::Emitter;
 
@@ -20,7 +20,7 @@ impl FullState {
                     ..Default::default()
                 })),
                 ToolbarItem2::Plugin("@default/focused-app".into()),
-                ToolbarItem2::Inline(ToolbarItem::Text(TextToolbarItem {
+                ToolbarItem2::Inline(ToolbarItem::Generic(GenericToolbarItem {
                     template: "window.title ? \"-\" : \"\"".into(),
                     ..Default::default()
                 })),
