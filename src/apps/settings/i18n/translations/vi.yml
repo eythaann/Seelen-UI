@@ -221,10 +221,7 @@ toolbar:
     never: Không bao giờ
     on_overlap: Trên sự chồng chéo
   label: Thanh công cụ
-  placeholder:
-    author: Tác giả
-    description: Sự miêu tả
-    select: Cấu trúc thanh công cụ
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
 update:
   available: Cập nhật có sẵn!

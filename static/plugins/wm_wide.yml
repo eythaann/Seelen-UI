@@ -1,0 +1,18 @@
+id: "@default/wm-wide"
+target: "@seelen/window-manager"
+metadata:
+  displayName: Wide Layout
+  description: Wide layout for horizontal monitors.
+plugin:
+  no_fallback_behavior: Float
+  structure:
+    type: Horizontal
+    children:
+      - type: Leaf
+        growFactor: 1.5
+      - type: Vertical
+        children:
+          - type: Leaf
+          - type: Leaf
+          - type: Leaf
+          - type: Leaf

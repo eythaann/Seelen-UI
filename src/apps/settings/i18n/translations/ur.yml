@@ -223,10 +223,7 @@ toolbar:
     never: کبھی نہیں
     on_overlap: اوورلیپ پر
   label: ٹول بار
-  placeholder:
-    author: مصنف
-    description: تفصیل
-    select: ٹول بار کا ڈھانچہ
+  placeholder: {}
   use_multiple_monitor_overlap_logic: سنگل فوکس لاجک کے بجائے ڈسپلے مخصوص استعمال کریں۔
 update:
   available: تازہ کاری دستیاب!

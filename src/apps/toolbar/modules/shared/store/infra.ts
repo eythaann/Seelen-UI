@@ -1,14 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  invoke,
-  PlaceholderList,
-  PluginList,
-  SeelenCommand,
-  SeelenEvent,
-  Settings,
-  UIColors,
-} from '@seelen-ui/lib';
-import { FancyToolbarSettings } from '@seelen-ui/lib/types';
+import { invoke, PluginList, SeelenCommand, SeelenEvent, Settings, UIColors } from '@seelen-ui/lib';
+import { FancyToolbarSettings, Placeholder } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
 import { debounce, throttle } from 'lodash';
@@ -47,14 +39,6 @@ async function initUIColors() {
   }
   loadColors(await UIColors.getAsync());
   await UIColors.onChange(loadColors);
-}
-
-function setPlaceholder(list: PlaceholderList) {
-  const state = store.getState();
-  const placeholder = list
-    .asArray()
-    .find((placeholder) => placeholder.info.filename === state.settings.placeholder);
-  store.dispatch(RootActions.setPlaceholder(placeholder || list.asArray()[0] || null));
 }
 
 export async function registerStoreEvents() {
@@ -131,7 +115,9 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setWlanBssEntries(event.payload));
   });
 
-  await PlaceholderList.onChange(setPlaceholder);
+  await listenGlobal<Placeholder>(SeelenEvent.StateToolbarItemsChanged, (event) => {
+    store.dispatch(RootActions.setPlaceholder(event.payload));
+  });
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).forCurrentWidget()));
   await PluginList.onChange((list) => {
@@ -155,7 +141,8 @@ export async function loadStore() {
     RootActions.setEnv((await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>),
   );
 
-  PlaceholderList.getAsync().then(setPlaceholder);
+  let placeholder = await invoke(SeelenCommand.StateGetToolbarItems) as Placeholder;
+  store.dispatch(RootActions.setPlaceholder(placeholder));
 }
 
 export function loadSettingsCSS(settings: FancyToolbarSettings) {

@@ -21,10 +21,6 @@ export function App() {
     getCurrentWebviewWindow().show();
   }, []);
 
-  if (!structure) {
-    return <ErrorFallback msg="NO PLACEHOLDER FOUND. PLEASE TRY REINSTALL THE APP" />;
-  }
-
   return (
     <ConfigProvider
       theme={{

@@ -224,10 +224,7 @@ toolbar:
     never: Marna
     on_overlap: Isku dhafka
   label: Qalab argamiye
-  placeholder:
-    author: Qoraa
-    description: Sifo
-    select: Qaab dhismeedka Qalabka
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda
     kaliya

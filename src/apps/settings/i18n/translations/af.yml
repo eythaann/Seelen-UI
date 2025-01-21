@@ -224,10 +224,7 @@ toolbar:
     never: Nooit nie
     on_overlap: Op oorvleueling
   label: Werkbalk
-  placeholder:
-    author: Outeur
-    description: Beskrywing
-    select: Werkbalkstruktuur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Gebruik vertoonspesifieke in plaas van enkelfokuslogika
 update:
   available: Opdatering beskikbaar!

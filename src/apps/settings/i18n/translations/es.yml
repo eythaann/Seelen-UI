@@ -225,10 +225,7 @@ toolbar:
     never: Nunca
     on_overlap: En superposición
   label: Barra de herramientas
-  placeholder:
-    author: Autor
-    description: Descripción
-    select: Estructura de la barra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utilice una lógica de visualización específica en lugar de una lógica de
     enfoque único

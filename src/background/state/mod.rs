@@ -6,7 +6,7 @@ use std::collections::HashMap;
 
 use application::FullState;
 use domain::AhkVar;
-use seelen_core::state::{WegPinnedItemsVisibility, WegTemporalItemsVisibility};
+use seelen_core::state::{PluginId, WegPinnedItemsVisibility, WegTemporalItemsVisibility};
 
 use crate::windows_api::monitor::Monitor;
 
@@ -59,17 +59,36 @@ impl FullState {
         self.settings.ahk_variables.as_hash_map()
     }
 
-    pub fn get_wm_layout_id(&self, monitor: &Monitor, workspace_idx: usize) -> String {
-        let default = self.settings.window_manager().default_layout;
+    pub fn get_wm_layout_id(&self, monitor: &Monitor, workspace_idx: usize) -> PluginId {
+        let mut default = self.settings.window_manager().default_layout;
+        if !default.is_valid() {
+            default = "@default/wm-bspwm".into();
+        }
+
         let device_id = match monitor.display_device() {
             Ok(device) => device.id,
             Err(_) => return default,
         };
-        match self.settings.monitors_v2.get(&device_id) {
-            Some(config) => match config.workspaces_v2.get(workspace_idx) {
-                Some(workspace) => workspace.layout.clone().unwrap_or(default),
-                None => default,
-            },
+
+        let config = match self.settings.monitors_v2.get(&device_id) {
+            Some(config) => config,
+            None => return default,
+        };
+
+        let workspace = match config.workspaces_v2.get(workspace_idx) {
+            Some(workspace) => workspace,
+            None => return default,
+        };
+
+        match &workspace.layout {
+            Some(layout_id) => {
+                let layout_id: PluginId = layout_id.as_str().into();
+                if layout_id.is_valid() {
+                    layout_id
+                } else {
+                    default
+                }
+            }
             None => default,
         }
     }

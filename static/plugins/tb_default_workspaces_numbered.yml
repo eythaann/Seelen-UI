@@ -1,0 +1,6 @@
+id: "@default/workspaces-numbered"
+icon: GoNumber
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: workspaces
+  mode: numbered

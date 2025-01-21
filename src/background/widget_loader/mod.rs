@@ -23,7 +23,7 @@ impl WidgetInstance {
             label,
             tauri::WebviewUrl::App("widget_loader/index.html".into()),
         )
-        .title(format!("{} - Seelen UI Widget", &widget.id))
+        .title(format!("{} - Seelen UI Widget", *widget.id))
         .build()?;
         Ok(window)
     }

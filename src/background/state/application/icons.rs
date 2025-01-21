@@ -5,7 +5,7 @@ use std::{
 };
 
 use itertools::Itertools;
-use seelen_core::{handlers::SeelenEvent, state::IconPack};
+use seelen_core::{handlers::SeelenEvent, resource::ResourceText, state::IconPack};
 use tauri::Emitter;
 
 use crate::{
@@ -48,7 +48,7 @@ impl IconPacksManager {
                 if let Some(icon) = maybe_icon {
                     let full_path = SEELEN_COMMON
                         .icons_path()
-                        .join(&icon_pack.info.filename)
+                        .join(&icon_pack.metadata.filename)
                         .join(icon);
                     if full_path.exists() {
                         return Some(full_path);
@@ -102,10 +102,11 @@ impl FullState {
                 let icon_pack = Self::load_icon_pack_from_dir(&path);
                 match icon_pack {
                     Ok(mut icon_pack) => {
-                        icon_pack.info.filename = entry.file_name().to_string_lossy().to_string();
+                        icon_pack.metadata.filename =
+                            entry.file_name().to_string_lossy().to_string();
                         icon_packs_manager
                             .0
-                            .insert(icon_pack.info.filename.clone(), icon_pack);
+                            .insert(icon_pack.metadata.filename.clone(), icon_pack);
                     }
                     Err(err) => {
                         log::error!("Failed to load icon pack ({:?}): {:?}", path, err)
@@ -116,15 +117,18 @@ impl FullState {
 
         // add default icon pack if not exists
         if !icon_packs_manager.0.contains_key("system") {
-            let mut icon_pack = IconPack::default();
-            icon_pack.info.display_name = "System".to_string();
-            icon_pack.info.author = "System".to_string();
-            icon_pack.info.description = "Icons from Windows and Program Files".to_string();
-            icon_pack.info.filename = "system".to_string();
+            let mut icon_pack = IconPack {
+                id: "@system/icon-pack".into(),
+                ..Default::default()
+            };
+            icon_pack.metadata.display_name = ResourceText::En("System".to_string());
+            icon_pack.metadata.description =
+                ResourceText::En("Icons from Windows and Program Files".to_string());
+            icon_pack.metadata.filename = "system".to_string();
 
             icon_packs_manager
                 .0
-                .insert(icon_pack.info.filename.clone(), icon_pack);
+                .insert(icon_pack.metadata.filename.clone(), icon_pack);
             icon_packs_manager.write_system_icon_pack()?;
         }
 

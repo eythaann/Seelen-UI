@@ -220,10 +220,7 @@ toolbar:
     never: Jamais
     on_overlap: Sur chevauchement
   label: Barre d'outils
-  placeholder:
-    author: Auteur
-    description: Description
-    select: Structure de la barre d'outils
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
     point unique

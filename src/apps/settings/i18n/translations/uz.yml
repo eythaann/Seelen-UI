@@ -224,10 +224,7 @@ toolbar:
     never: Hech qachon
     on_overlap: Bir-biriga yopishgan holda
   label: Asboblar paneli
-  placeholder:
-    author: Muallif
-    description: Tavsif
-    select: Asboblar paneli tuzilishi
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Yagona fokusli mantiq oʻrniga maxsus displeydan foydalaning
 update:
   available: Yangilanish mavjud!

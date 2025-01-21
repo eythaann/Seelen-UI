@@ -221,10 +221,7 @@ toolbar:
     never: Never
     on_overlap: On overlap
   label: Toolbar
-  placeholder:
-    author: Author
-    description: Description
-    select: Toolbar Structure
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
 update:
   available: Update Available!

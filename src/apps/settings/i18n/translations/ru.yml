@@ -224,10 +224,7 @@ toolbar:
     never: Никогда
     on_overlap: При перекрытии
   label: Верхняя панель
-  placeholder:
-    author: Автор
-    description: Описание
-    select: Структура верхней панели
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 update:
   available: Обновление доступно!

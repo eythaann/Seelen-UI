@@ -224,10 +224,7 @@ toolbar:
     never: Никога
     on_overlap: При припокриване
   label: Лента с инструменти
-  placeholder:
-    author: Автор
-    description: Описание
-    select: Структура на лентата с инструменти
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Използвайте специфична за дисплея вместо логика на единичен фокус
 update:
   available: Налична актуализация!

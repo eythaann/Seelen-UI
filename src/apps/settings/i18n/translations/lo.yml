@@ -221,10 +221,7 @@ toolbar:
     never: ບໍ່ເຄີຍ
     on_overlap: ທັບຊ້ອນກັນ
   label: ແຖບເຄື່ອງມື
-  placeholder:
-    author: ຜູ້ຂຽນ
-    description: ລາຍລະອຽດ
-    select: ໂຄງສ້າງແຖບເຄື່ອງມື
+  placeholder: {}
   use_multiple_monitor_overlap_logic: ໃຊ້ການສະແດງຜົນສະເພາະແທນທີ່ຈະເປັນເຫດຜົນຈຸດສຸມດຽວ
 update:
   available: ປັບປຸງໃຫ້ທັນສະໄຫມ!

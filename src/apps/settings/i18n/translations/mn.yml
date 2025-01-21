@@ -220,10 +220,7 @@ toolbar:
     never: Хэзээ ч үгүй
     on_overlap: Давхардсан дээр
   label: Балтсний хайрцагны хэрэгсэл
-  placeholder:
-    author: Зохиолч
-    description: Тодорхойлолт / төрөл анги
-    select: Хэрэгслийн бүтэц
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 update:
   available: Шинэчлэх боломжтой!

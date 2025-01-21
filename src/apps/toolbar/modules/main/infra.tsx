@@ -1,6 +1,6 @@
 import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
-import { Placeholder, Plugin, ToolbarItem } from '@seelen-ui/lib/types';
+import { Placeholder, Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -50,7 +50,7 @@ const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
 // item can be a toolbar plugin id or a toolbar module
-function componentByModule(plugins: Plugin[], item: string | ToolbarItem) {
+function componentByModule(plugins: Plugin[], item: PluginId | ToolbarItem) {
   let module: ToolbarItem | undefined;
 
   if (typeof item === 'string') {
