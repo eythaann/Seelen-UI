@@ -1,13 +1,13 @@
+id: "@eythaann/rainbow"
 info:
   displayName: Rainbow
-  author: eythaann
   description: COLORS EVERYWHERE!!!
   tags: ['weg']
 layers:
   weg:
     bg: 2
 styles:
-  weg: |
+  "@seelen/weg": |
     @keyframes rainbow {
       to {
         background-position: 0 -200%;

@@ -1,10 +1,10 @@
+id: "@eythaann/bubbles"
 info:
   displayName: Bubbles
-  author: eythaann
   description: Bubbles says pop.
   tags: ["toolbar"]
 styles:
-  toolbar: |
+  "@seelen/fancy-toolbar": |
     .ft-bar-bg-layer-1 {
       display: none;
     }

@@ -222,10 +222,7 @@ toolbar:
     never: Nikdy
     on_overlap: Na prekrytí
   label: Panel s nástrojmi
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Štruktúra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
 update:
   available: Aktualizácia k dispozícii!

@@ -224,10 +224,7 @@ toolbar:
     never: Ungalokothi
     on_overlap: Ngokugqagqana
   label: Indawo yamathuluzi
-  placeholder:
-    author: Umlobi
-    description: Ukufanisa
-    select: Isakhiwo samathuluzi
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
 update:
   available: Ukuvuselelwa Kuyatholakala!

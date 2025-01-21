@@ -224,10 +224,7 @@ toolbar:
     never: Tidak pernah
     on_overlap: Di tumpang tindih
   label: Toolbar
-  placeholder:
-    author: Pengarang
-    description: Keterangan
-    select: Struktur bilah alat
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Gunakan tampilan spesifik, bukan logika fokus tunggal
 update:
   available: Perbarui Tersedia!

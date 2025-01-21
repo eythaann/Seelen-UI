@@ -220,10 +220,7 @@ toolbar:
     never: Kamwe
     on_overlap: Juu ya mwingiliano
   label: Zana
-  placeholder:
-    author: Mwandishi
-    description: Maelezo
-    select: Muundo wa zana
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
 update:
   available: Sasisha inapatikana!

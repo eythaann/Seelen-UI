@@ -222,10 +222,7 @@ toolbar:
     never: Mai
     on_overlap: Sulla sovrapposizione
   label: Barra
-  placeholder:
-    author: Autore
-    description: Descrizione
-    select: Struttura della Barra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utilizza la logica di visualizzazione specifica anziché quella di focus
     singolo

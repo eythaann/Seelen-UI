@@ -213,10 +213,7 @@ toolbar:
     never: 绝不
     on_overlap: 关于重叠
   label: 工具栏
-  placeholder:
-    author: 作者
-    description: 描述
-    select: 工具栏结构
+  placeholder: {}
   use_multiple_monitor_overlap_logic: 使用特定于显示的逻辑而不是单焦点逻辑
 update:
   available: 更新可用！

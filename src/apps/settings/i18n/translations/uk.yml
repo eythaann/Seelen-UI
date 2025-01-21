@@ -222,10 +222,7 @@ toolbar:
     never: Ніколи
     on_overlap: При перекритті
   label: Панель інструментів
-  placeholder:
-    author: Автор
-    description: Опис
-    select: Структура панелі інструментів
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Використовувати логіку специфічну до монітора замість однофокусної
 update:
   available: Доступне оновлення!

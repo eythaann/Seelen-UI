@@ -219,10 +219,7 @@ toolbar:
     never: أبداً
     on_overlap: على التداخل
   label: شريط الأدوات
-  placeholder:
-    author: المؤلف
-    description: الوصف
-    select: حدد هيكل شريط الأدوات
+  placeholder: {}
   use_multiple_monitor_overlap_logic: استخدم العرض الخاص بدلاً من منطق التركيز الفردي
 update:
   available: تحديث متاح!

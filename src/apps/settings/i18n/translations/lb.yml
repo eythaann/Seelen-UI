@@ -222,10 +222,7 @@ toolbar:
     never: Ni
     on_overlap: Op Iwwerlappung
   label: TO-tcstar
-  placeholder:
-    author: Auteur
-    description: Broessdatsch
-    select: Toolbar Struktur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Benotzt Displayspezifesch amplaz vun enger eenzeger Fokuslogik
 update:
   available: Update verfügbar!

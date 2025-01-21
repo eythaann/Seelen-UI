@@ -219,10 +219,7 @@ toolbar:
     never: לְעוֹלָם לֹא
     on_overlap: על חפיפה
   label: סרגל כלים
-  placeholder:
-    author: מְחַבֵּר
-    description: תיאור
-    select: מבנה סרגל הכלים
+  placeholder: {}
   use_multiple_monitor_overlap_logic: השתמש בתצוגה ספציפית במקום בלוגיקה של מיקוד יחיד
 update:
   available: עדכון זמין!

@@ -222,10 +222,7 @@ toolbar:
     never: Nigdy
     on_overlap: Na zakładkę
   label: Pasek narzędzi
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Struktura paska narzędzi
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Użyj logiki specyficznej dla wyświetlacza zamiast logiki pojedynczego fokusu
 update:
   available: Aktualizacja dostępna!

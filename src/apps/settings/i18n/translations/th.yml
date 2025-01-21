@@ -218,10 +218,7 @@ toolbar:
     never: ไม่เคย
     on_overlap: เมื่อทับซ้อนกัน
   label: แถบเครื่องมือ
-  placeholder:
-    author: ผู้เขียน
-    description: คำอธิบาย
-    select: โครงสร้างแถบเครื่องมือ
+  placeholder: {}
   use_multiple_monitor_overlap_logic: ใช้จอแสดงผลเฉพาะแทนตรรกะโฟกัสเดียว
 update:
   available: อัปเดตพร้อมใช้งาน!

@@ -223,10 +223,7 @@ toolbar:
     never: Soha
     on_overlap: Az átfedésben
   label: Eszköztár
-  placeholder:
-    author: Szerző
-    description: Leírás
-    select: Eszköztár szerkezete
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
 update:
   available: A frissítés elérhető!

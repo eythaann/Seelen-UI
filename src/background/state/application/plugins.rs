@@ -29,7 +29,7 @@ impl FullState {
             }
             match Self::load_plugin_from_file(&path) {
                 Ok(mut plugin) => {
-                    plugin.bundled = path.starts_with(bundled_path);
+                    plugin.metadata.bundled = path.starts_with(bundled_path);
                     self.plugins.insert(plugin.id.clone(), plugin);
                 }
                 Err(e) => {

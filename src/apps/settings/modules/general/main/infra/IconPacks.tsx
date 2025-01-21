@@ -5,13 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
+import { ResourceText } from 'src/apps/shared/components/ResourceText';
 
 import cs from './index.module.css';
 
 export function IconPacks() {
   const iconPacks = useSelector(RootSelectors.availableIconPacks);
   const usingIcons = useSelector(RootSelectors.iconPacks).filter((x) =>
-    iconPacks.some((y) => y.info.filename === x),
+    iconPacks.some((y) => y.metadata.filename === x),
   );
 
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export function IconPacks() {
 
   const dataSource = iconPacks.map((pack) => ({
     ...pack,
-    key: pack.info.filename,
+    key: pack.metadata.filename,
   }));
 
   return (
@@ -44,14 +45,16 @@ export function IconPacks() {
           <Reorder.Group
             onReorder={(values) => {
               if (direction === 'right') {
-                dispatch(RootActions.setIconPacks(values.map((iconPack) => iconPack.info.filename)));
+                dispatch(
+                  RootActions.setIconPacks(values.map((iconPack) => iconPack.metadata.filename)),
+                );
               }
             }}
             axis="y"
             values={props.dataSource}
           >
             {dataSource.map((pack) => {
-              const key = pack.info.filename;
+              const key = pack.metadata.filename;
               return (
                 <Tooltip
                   key={key}
@@ -60,16 +63,18 @@ export function IconPacks() {
                   color="#111" // make it solid
                   title={
                     <div>
-                      <h2 className={cs.title}>{pack.info.displayName}</h2>
+                      <h2 className={cs.title}>
+                        <ResourceText text={pack.metadata.displayName} />
+                      </h2>
                       <p>
                         <b>{t('general.resource.author')}: </b>
-                        {pack.info.author}
+                        <ResourceText text={pack.metadata.author} />
                       </p>
                       <div className={cs.tagList}>
                         <div>
                           <b>{t('general.resource.tags')}:</b>
                         </div>
-                        {pack.info.tags.map((tag) => (
+                        {pack.metadata.tags.map((tag) => (
                           <div key={tag} className={cs.tag}>
                             {tag}
                           </div>
@@ -77,18 +82,18 @@ export function IconPacks() {
                       </div>
                       <p>
                         <b>{t('general.resource.description')}: </b>
-                        {pack.info.description}
+                        <ResourceText text={pack.metadata.description} />
                       </p>
                     </div>
                   }
                 >
                   <Reorder.Item value={pack} drag={direction === 'right' ? 'y' : false}>
                     <Checkbox
-                      disabled={pack.info.filename === 'system'}
+                      disabled={pack.metadata.filename === 'system'}
                       checked={selectedKeys.includes(key)}
                       onChange={(e) => onItemSelect(key, e.target.checked)}
                     >
-                      {pack.info.displayName}
+                      <ResourceText text={pack.metadata.displayName} />
                     </Checkbox>
                   </Reorder.Item>
                 </Tooltip>

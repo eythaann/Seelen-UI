@@ -224,10 +224,7 @@ toolbar:
     never: Nu
     on_overlap: Pe suprapunere
   label: Bara de instrumente
-  placeholder:
-    author: Autor
-    description: Descriere
-    select: Structura barei de instrumente
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Utilizați logica specifică afișajului în loc de logica de focalizare unică
 update:
   available: Actualizare disponibilă!

@@ -226,10 +226,7 @@ toolbar:
     never: Hindi kailanman
     on_overlap: Sa overlap
   label: Toolbar
-  placeholder:
-    author: May -akda
-    description: Paglalarawan
-    select: Istraktura ng toolbar
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Gumamit ng partikular na display sa halip na iisang focus logic
 update:
   available: Mag -update Magagamit!

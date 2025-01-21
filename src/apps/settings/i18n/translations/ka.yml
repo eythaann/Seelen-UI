@@ -224,10 +224,7 @@ toolbar:
     never: არასოდეს
     on_overlap: გადახურვაზე
   label: ინსტრუმენტთა პანელი
-  placeholder:
-    author: ავტორი
-    description: აღწერილობა
-    select: ინსტრუმენტთა პანელის სტრუქტურა
+  placeholder: {}
   use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
 update:
   available: განახლება ხელმისაწვდომია!

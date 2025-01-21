@@ -220,10 +220,7 @@ toolbar:
     never: هیڅکله نه
     on_overlap: پر اوورلیپ
   label: توکپټه
-  placeholder:
-    author: لیکوال
-    description: تفصیل
-    select: د توکپټې جوړښت
+  placeholder: {}
   use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 update:
   available: اوسمهالول شتون لري!

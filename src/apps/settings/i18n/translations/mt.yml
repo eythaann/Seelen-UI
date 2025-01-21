@@ -222,10 +222,7 @@ toolbar:
     never: Qatt
     on_overlap: Fuq koinċidenza
   label: Toolbar
-  placeholder:
-    author: Awtur
-    description: Deskrizzjoni
-    select: Struttura tal-Toolbar
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
 update:
   available: Aġġornament disponibbli!

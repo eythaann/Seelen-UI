@@ -221,10 +221,7 @@ toolbar:
     never: Mitte kunagi
     on_overlap: Kattumises
   label: Tööriistariba
-  placeholder:
-    author: Autor
-    description: Kirjeldus
-    select: Tööriistariba struktuur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
 update:
   available: Värskendage saadaval!

@@ -1,3 +1,4 @@
+import { Theme } from '@seelen-ui/lib/types';
 import { Checkbox, Tooltip, Transfer } from 'antd';
 import { Reorder } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
@@ -5,13 +6,14 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
+import { ResourceText } from 'src/apps/shared/components/ResourceText';
 
 import cs from './index.module.css';
 
 export function Themes() {
   const themes = useSelector(RootSelectors.availableThemes);
   const usingThemes = useSelector(RootSelectors.selectedThemes).filter((x) =>
-    themes.some((y) => y.info.filename === x),
+    themes.some((y) => y.metadata.filename === x),
   );
 
   const dispatch = useDispatch();
@@ -19,14 +21,14 @@ export function Themes() {
 
   const dataSource = themes.map((theme) => ({
     ...theme,
-    key: theme.info.filename,
-    title: theme.info.displayName,
-    disabled: theme.info.filename === 'default',
+    key: theme.metadata.filename,
+    title: theme.metadata.displayName,
+    disabled: theme.metadata.filename === 'default',
   }));
 
   return (
     <Transfer
-      dataSource={dataSource}
+      dataSource={dataSource as any}
       titles={[t('general.theme.available'), t('general.theme.selected')]}
       targetKeys={usingThemes}
       onChange={(selected, direction, movedKeys) => {
@@ -52,8 +54,9 @@ export function Themes() {
             axis="y"
             values={props.dataSource}
           >
-            {dataSource.map((theme) => {
-              const key = theme.info.filename;
+            {dataSource.map((_theme) => {
+              const theme = _theme as Theme;
+              const key = theme.metadata.filename;
               return (
                 <Tooltip
                   key={key}
@@ -62,16 +65,18 @@ export function Themes() {
                   color="#111" // make it solid
                   title={
                     <div>
-                      <h2 className={cs.title}>{theme.info.displayName}</h2>
+                      <h2 className={cs.title}>
+                        <ResourceText text={theme.metadata.displayName} />
+                      </h2>
                       <p>
                         <b>{t('general.resource.author')}: </b>
-                        {theme.info.author}
+                        <ResourceText text={theme.metadata.author} />
                       </p>
                       <div className={cs.tagList}>
                         <div>
                           <b>{t('general.resource.tags')}:</b>
                         </div>
-                        {theme.info.tags.map((tag) => (
+                        {theme.metadata.tags.map((tag: string) => (
                           <div key={tag} className={cs.tag}>
                             {tag}
                           </div>
@@ -79,7 +84,7 @@ export function Themes() {
                       </div>
                       <p>
                         <b>{t('general.resource.description')}: </b>
-                        {theme.info.description}
+                        <ResourceText text={theme.metadata.description} />
                       </p>
                     </div>
                   }
@@ -90,7 +95,7 @@ export function Themes() {
                       checked={selectedKeys.includes(key)}
                       onChange={(e) => onItemSelect(key, e.target.checked)}
                     >
-                      {theme.info.displayName}
+                      <ResourceText text={theme.metadata.displayName} />
                     </Checkbox>
                   </Reorder.Item>
                 </Tooltip>

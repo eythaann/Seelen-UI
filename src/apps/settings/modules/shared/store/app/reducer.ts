@@ -38,8 +38,6 @@ const initialState: RootState = {
   ahkVariables: AhkVariablesSlice.getInitialState(),
   availableThemes: [],
   availableIconPacks: [],
-  availableLayouts: [],
-  availablePlaceholders: [],
   iconPacks: [],
   selectedThemes: [],
   devTools: false,

@@ -221,10 +221,7 @@ toolbar:
     never: Ҳеҷ гоҳ
     on_overlap: Дар такрори
   label: Асбобу
-  placeholder:
-    author: Муаллиф
-    description: Тасвирӣ
-    select: Сохтори панели асбобҳо
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Ба ҷои мантиқи фокуси ягона намоиши мушаххасро истифода баред
 update:
   available: Навсозӣ!

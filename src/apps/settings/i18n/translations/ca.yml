@@ -224,10 +224,7 @@ toolbar:
     never: Mai
     on_overlap: Sobre la superposició
   label: Barra d’eines
-  placeholder:
-    author: Autora
-    description: Descripció
-    select: Estructura de la barra d’eines
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utilitzeu la lògica específica de la pantalla en lloc de la lògica
     d'enfocament únic

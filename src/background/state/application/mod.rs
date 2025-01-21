@@ -4,6 +4,7 @@ mod icons;
 mod plugins;
 mod profiles;
 mod settings;
+mod toolbar_items;
 mod weg_items;
 mod widgets;
 
@@ -18,9 +19,7 @@ use notify_debouncer_full::{
     DebounceEventResult, DebouncedEvent, Debouncer, FileIdMap,
 };
 use parking_lot::Mutex;
-use seelen_core::state::{
-    Plugin, PluginId, Profile, WegItems, Widget, WidgetId, WindowManagerLayout,
-};
+use seelen_core::state::{Plugin, PluginId, Profile, WegItems, Widget, WidgetId};
 use std::{
     collections::{HashMap, HashSet, VecDeque},
     path::{Path, PathBuf},
@@ -28,10 +27,7 @@ use std::{
     time::Duration,
 };
 
-use crate::{
-    error_handler::Result, log_error, modules::cli::domain::Resource, trace_lock,
-    utils::constants::SEELEN_COMMON, windows_api::WindowsApi,
-};
+use crate::{error_handler::Result, log_error, trace_lock, utils::constants::SEELEN_COMMON};
 
 use super::domain::{AppConfig, Placeholder, Settings, Theme};
 
@@ -56,9 +52,8 @@ pub struct FullState {
     pub settings_by_app: VecDeque<AppConfig>,
     pub themes: HashMap<String, Theme>,
     pub icon_packs: Arc<Mutex<IconPacksManager>>,
-    pub placeholders: HashMap<String, Placeholder>,
-    pub layouts: HashMap<String, WindowManagerLayout>,
     pub weg_items: WegItems,
+    pub toolbar_items: Placeholder,
     pub launcher_history: LauncherHistory,
 
     pub plugins: HashMap<PluginId, Plugin>,
@@ -77,9 +72,8 @@ impl FullState {
             settings_by_app: VecDeque::new(),
             themes: HashMap::new(),
             icon_packs: Arc::new(Mutex::new(IconPacksManager::default())),
-            placeholders: HashMap::new(),
-            layouts: HashMap::new(),
             weg_items: WegItems::default(),
+            toolbar_items: Placeholder::default(),
             launcher_history: HashMap::new(),
             plugins: HashMap::new(),
             widgets: HashMap::new(),
@@ -147,6 +141,18 @@ impl FullState {
             }
         }
 
+        if changed
+            .iter()
+            .any(|p| p == SEELEN_COMMON.toolbar_items_path())
+        {
+            let old = self.toolbar_items.clone();
+            self.read_toolbar_items()?;
+            if old != self.toolbar_items {
+                log::info!("Toolbar Items changed");
+                self.emit_toolbar_items()?;
+            }
+        }
+
         if changed.iter().any(|p| p == SEELEN_COMMON.history_path()) {
             log::info!("History changed");
             self.load_history()?;
@@ -160,24 +166,6 @@ impl FullState {
             log::info!("Theme changed");
             self.load_themes()?;
             self.emit_themes()?;
-        }
-
-        if changed.iter().any(|p| {
-            p.starts_with(SEELEN_COMMON.user_placeholders_path())
-                || p.starts_with(SEELEN_COMMON.bundled_placeholders_path())
-        }) {
-            log::info!("Placeholder changed");
-            self.load_placeholders()?;
-            self.emit_placeholders()?;
-        }
-
-        if changed.iter().any(|p| {
-            p.starts_with(SEELEN_COMMON.user_layouts_path())
-                || p.starts_with(SEELEN_COMMON.bundled_layouts_path())
-        }) {
-            log::info!("Layouts changed");
-            self.load_layouts()?;
-            self.emit_layouts()?;
         }
 
         if changed.iter().any(|p| {
@@ -243,18 +231,15 @@ impl FullState {
             // user data
             SEELEN_COMMON.settings_path(),
             SEELEN_COMMON.weg_items_path(),
+            SEELEN_COMMON.toolbar_items_path(),
             SEELEN_COMMON.user_app_configs_path(),
             SEELEN_COMMON.history_path(),
             SEELEN_COMMON.icons_path(),
             SEELEN_COMMON.user_themes_path(),
-            SEELEN_COMMON.user_placeholders_path(),
-            SEELEN_COMMON.user_layouts_path(),
             SEELEN_COMMON.user_plugins_path(),
             SEELEN_COMMON.user_widgets_path(),
             // bundled data
             SEELEN_COMMON.bundled_themes_path(),
-            SEELEN_COMMON.bundled_placeholders_path(),
-            SEELEN_COMMON.bundled_layouts_path(),
             SEELEN_COMMON.bundled_plugins_path(),
             SEELEN_COMMON.bundled_widgets_path(),
         ];
@@ -295,35 +280,35 @@ impl FullState {
 
         if path.join("theme.weg.css").exists() {
             theme.styles.insert(
-                WidgetId("weg".into()),
+                "weg".into(),
                 std::fs::read_to_string(path.join("theme.weg.css"))?,
             );
         }
 
         if path.join("theme.toolbar.css").exists() {
             theme.styles.insert(
-                WidgetId("toolbar".into()),
+                "toolbar".into(),
                 std::fs::read_to_string(path.join("theme.toolbar.css"))?,
             );
         }
 
         if path.join("theme.wm.css").exists() {
             theme.styles.insert(
-                WidgetId("wm".into()),
+                "wm".into(),
                 std::fs::read_to_string(path.join("theme.wm.css"))?,
             );
         }
 
         if path.join("theme.launcher.css").exists() {
             theme.styles.insert(
-                WidgetId("launcher".into()),
+                "launcher".into(),
                 std::fs::read_to_string(path.join("theme.launcher.css"))?,
             );
         }
 
         if path.join("theme.wall.css").exists() {
             theme.styles.insert(
-                WidgetId("wall".into()),
+                "wall".into(),
                 std::fs::read_to_string(path.join("theme.wall.css"))?,
             );
         }
@@ -343,99 +328,12 @@ impl FullState {
             };
             match theme {
                 Ok(mut theme) => {
-                    theme.info.filename = entry.file_name().to_string_lossy().to_string();
-                    self.themes.insert(theme.info.filename.clone(), theme);
+                    theme.metadata.filename = entry.file_name().to_string_lossy().to_string();
+                    self.themes.insert(theme.metadata.filename.clone(), theme);
                 }
                 Err(err) => log::error!("Failed to load theme ({:?}): {:?}", entry.path(), err),
             }
         }
-        Ok(())
-    }
-
-    fn load_placeholder_from_file(path: PathBuf) -> Result<Placeholder> {
-        match path.extension() {
-            Some(ext) if ext == "yml" || ext == "yaml" => {
-                Ok(serde_yaml::from_str(&std::fs::read_to_string(&path)?)?)
-            }
-            _ => Err("Invalid placeholder file extension".into()),
-        }
-    }
-
-    fn load_placeholders(&mut self) -> Result<()> {
-        let entries = std::fs::read_dir(SEELEN_COMMON.bundled_placeholders_path())?
-            .chain(std::fs::read_dir(SEELEN_COMMON.user_placeholders_path())?);
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.is_dir() {
-                continue;
-            }
-
-            let placeholder = Self::load_placeholder_from_file(path);
-
-            match placeholder {
-                Ok(mut placeholder) => {
-                    placeholder.sanitize();
-                    placeholder.info.filename = entry.file_name().to_string_lossy().to_string();
-                    self.placeholders
-                        .insert(placeholder.info.filename.clone(), placeholder);
-                }
-                Err(err) => {
-                    log::error!("Failed to load placeholder ({:?}): {:?}", entry.path(), err)
-                }
-            }
-        }
-
-        let selected = self.settings.fancy_toolbar().placeholder;
-        if !self.placeholders.contains_key(&selected) {
-            let toolbar = self.settings.fancy_toolbar_mut();
-            toolbar["placeholder"] = "default.yml".to_string().into();
-        }
-        Ok(())
-    }
-
-    fn load_layout_from_file(path: PathBuf) -> Result<WindowManagerLayout> {
-        match path.extension() {
-            Some(ext) if ext == "yml" || ext == "yaml" || ext == "json" => {
-                let content = std::fs::read_to_string(&path)?;
-                if ext == "json" {
-                    Ok(serde_json::from_str(&content)?)
-                } else {
-                    Ok(serde_yaml::from_str(&content)?)
-                }
-            }
-            _ => Err("Invalid layout file extension".into()),
-        }
-    }
-
-    fn load_layouts(&mut self) -> Result<()> {
-        let user_path = SEELEN_COMMON.user_layouts_path();
-        let resources_path = SEELEN_COMMON.bundled_layouts_path();
-        let entries = std::fs::read_dir(resources_path)?.chain(std::fs::read_dir(user_path)?);
-        for entry in entries.flatten() {
-            let path = entry.path();
-            if path.is_dir() {
-                continue;
-            }
-
-            let layout = Self::load_layout_from_file(path);
-
-            match layout {
-                Ok(mut layout) => {
-                    layout.info.filename = entry.file_name().to_string_lossy().to_string();
-                    self.layouts.insert(layout.info.filename.clone(), layout);
-                }
-                Err(err) => {
-                    log::error!("Failed to load layout ({:?}): {:?}", entry.path(), err)
-                }
-            }
-        }
-
-        let selected = self.settings.window_manager().default_layout;
-        if !self.layouts.contains_key(&selected) {
-            let wm = self.settings.window_manager_mut();
-            wm["defaultLayout"] = "BSP.json".to_string().into();
-        }
-
         Ok(())
     }
 
@@ -497,67 +395,14 @@ impl FullState {
     fn load_all(&mut self) -> Result<()> {
         self.read_settings()?;
         self.read_weg_items()?;
+        self.read_toolbar_items()?;
         self.load_themes()?;
         self.load_icons_packs()?;
-        self.load_placeholders()?;
-        self.load_layouts()?;
         self.load_settings_by_app()?;
         self.load_history()?;
         self.load_plugins()?;
         self.load_widgets()?;
         self.load_profiles()?;
-        Ok(())
-    }
-
-    async fn set_wallpaper(url: &str, path: &Path) -> Result<()> {
-        let response = tauri_plugin_http::reqwest::get(url).await?;
-        let contents = response.bytes().await?;
-        std::fs::write(path, &contents)?;
-        WindowsApi::set_wallpaper(path.to_string_lossy().to_string())?;
-        Ok(())
-    }
-
-    pub fn load_resource(&mut self, resource: Resource) -> Result<()> {
-        log::trace!("Loading resource: {}", resource.id);
-        let id = resource.id;
-
-        if let Some(image_url) = resource.wallpaper {
-            let path = SEELEN_COMMON.wallpapers_path().join(format!("{id}.png"));
-            tauri::async_runtime::spawn(async move {
-                log_error!(Self::set_wallpaper(&image_url, &path).await);
-            });
-        }
-
-        let filename = format!("{id}.yml");
-        if let Some(theme) = resource.resources.theme {
-            std::fs::write(
-                SEELEN_COMMON.user_themes_path().join(&filename),
-                serde_yaml::to_string(&theme)?,
-            )?;
-            if !self.settings.selected_themes.contains(&filename) {
-                self.settings.selected_themes.push(filename.clone());
-            }
-        }
-
-        if let Some(placeholder) = resource.resources.placeholder {
-            std::fs::write(
-                SEELEN_COMMON.user_placeholders_path().join(&filename),
-                serde_yaml::to_string(&placeholder)?,
-            )?;
-            let fancy_toolbar = self.settings.fancy_toolbar_mut();
-            fancy_toolbar["placeholder"] = filename.clone().into();
-        }
-
-        if let Some(layout) = resource.resources.layout {
-            std::fs::write(
-                SEELEN_COMMON.user_layouts_path().join(&filename),
-                serde_yaml::to_string(&layout)?,
-            )?;
-            let window_manager = self.settings.window_manager_mut();
-            window_manager["defaultLayout"] = filename.clone().into();
-        }
-
-        self.write_settings()?;
         Ok(())
     }
 }

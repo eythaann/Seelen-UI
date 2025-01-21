@@ -224,10 +224,7 @@ toolbar:
     never: Nikad
     on_overlap: Na preklapanje
   label: Alatna traka
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Struktura alatne trake
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
 update:
   available: Ažuriraj dostupno!

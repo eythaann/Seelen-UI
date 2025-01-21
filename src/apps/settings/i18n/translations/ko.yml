@@ -217,10 +217,7 @@ toolbar:
     never: 절대
     on_overlap: 오버랩 시
   label: 도구 모음
-  placeholder:
-    author: 작성자
-    description: 설명
-    select: 툴바 형식
+  placeholder: {}
   use_multiple_monitor_overlap_logic: 단일 초점 대신 디스플레이별 로직 사용
 update:
   available: 사용 가능한 업데이트가 존재합니다

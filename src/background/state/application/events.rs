@@ -15,22 +15,6 @@ impl FullState {
         Ok(())
     }
 
-    pub(super) fn emit_placeholders(&self) -> Result<()> {
-        get_app_handle().emit(
-            SeelenEvent::StatePlaceholdersChanged,
-            self.placeholders().values().collect_vec(),
-        )?;
-        Ok(())
-    }
-
-    pub(super) fn emit_layouts(&self) -> Result<()> {
-        get_app_handle().emit(
-            SeelenEvent::StateLayoutsChanged,
-            self.layouts().values().collect_vec(),
-        )?;
-        Ok(())
-    }
-
     pub(super) fn emit_settings_by_app(&self) -> Result<()> {
         get_app_handle().emit(
             SeelenEvent::StateSettingsByAppChanged,
