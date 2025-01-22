@@ -320,7 +320,9 @@ impl UserManager {
                                                     if let Some(ref mut folder_content) =
                                                         model.content
                                                     {
-                                                        if folder_content[0] != file {
+                                                        if folder_content.is_empty() {
+                                                            folder_content.push(file.clone());
+                                                        } else if folder_content[0] != file {
                                                             folder_content.insert(0, file.clone());
 
                                                             let sender = Self::event_tx();
@@ -361,7 +363,9 @@ impl UserManager {
                                         let folder = folders.get_mut(&folder_type);
                                         if let Some(model) = folder {
                                             if let Some(ref mut folder_content) = model.content {
-                                                if folder_content[0] != file {
+                                                if folder_content.is_empty() {
+                                                    folder_content.push(file.clone());
+                                                } else if folder_content[0] != file {
                                                     folder_content.insert(0, file.clone());
 
                                                     let sender = Self::event_tx();

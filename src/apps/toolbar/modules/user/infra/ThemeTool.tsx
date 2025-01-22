@@ -1,3 +1,4 @@
+import { ResourceMetadata } from '@seelen-ui/lib';
 import { IconPack, Theme } from '@seelen-ui/lib/types';
 import { Checkbox, Tooltip, Transfer } from 'antd';
 import { TransferItem } from 'antd/es/transfer';
@@ -5,14 +6,10 @@ import { Reorder } from 'framer-motion';
 import { t } from 'i18next';
 import { useState } from 'react';
 
+import { ResourceText } from 'src/apps/shared/components/ResourceText';
+
 interface ThemeToolItem extends TransferItem {
-  info: {
-    displayName: string;
-    author: string;
-    description: string;
-    filename: string;
-    tags: Array<string>;
-  };
+  metadata: ResourceMetadata;
 }
 export interface ThemeToolArgs {
   dataSource: Theme[] | IconPack[];
@@ -22,22 +19,16 @@ export interface ThemeToolArgs {
 
 export function ThemeTool({ dataSource, usingThemes, setSelectedThemes }: ThemeToolArgs) {
   const [items] = useState<ThemeToolItem[]>(dataSource.map((value) => ({
-    info: {
-      displayName: value.info.displayName,
-      author: value.info.author,
-      description: value.info.description,
-      filename: value.info.filename,
-      tags: value.info.tags,
-    },
-    key: value.info.filename,
-    title: value.info.displayName,
-    disabled: ('styles' in value && value.info.filename === 'default') || ('apps' in value && value.info.filename === 'system'),
-  })));
+    metadata: value.metadata,
+    key: value.metadata.filename,
+    title: ResourceText({ text: value.metadata.displayName }) ?? '',
+    disabled: ('styles' in value && value.metadata.filename === 'default') || ('apps' in value && value.metadata.filename === 'system'),
+  } as ThemeToolItem)));
 
   return (
     <Transfer
       dataSource={items}
-      titles={[t('general.theme.available'), t('general.theme.selected')]}
+      titles={[t('userhome.seelen_options.theme_selector.available'), t('userhome.seelen_options.theme_selector.selected')]}
       targetKeys={usingThemes}
       onChange={(selected, direction, movedKeys) => {
         if (direction === 'right') {
@@ -56,14 +47,14 @@ export function ThemeTool({ dataSource, usingThemes, setSelectedThemes }: ThemeT
           <Reorder.Group
             onReorder={(values) => {
               if (direction === 'right') {
-                setSelectedThemes(values.map((theme) => theme.info.filename));
+                setSelectedThemes(values.map((theme) => theme.metadata.filename));
               }
             }}
             axis="y"
             values={props.dataSource}
           >
             {dataSource.map((theme) => {
-              const key = theme.info.filename;
+              const key = theme.metadata.filename;
               return (
                 <Tooltip
                   key={key}
@@ -72,24 +63,26 @@ export function ThemeTool({ dataSource, usingThemes, setSelectedThemes }: ThemeT
                   color="#111" // make it solid
                   title={
                     <div>
-                      <h2 className="userhome-quicksettings-themetool-title">{theme.info.displayName}</h2>
+                      <h2 className="userhome-quicksettings-themetool-title">
+                        <ResourceText text={theme.metadata.displayName} />
+                      </h2>
                       <p>
-                        <b>{t('general.resource.author')}: </b>
-                        {theme.info.author}
+                        <b>{t('userhome.seelen_options.theme_selector.author')}: </b>
+                        <ResourceText text={theme.metadata.author} />
                       </p>
                       <div className="userhome-quicksettings-themetool-tags">
                         <div>
-                          <b>{t('general.resource.tags')}:</b>
+                          <b>{t('userhome.seelen_options.theme_selector.tags')}:</b>
                         </div>
-                        {theme.info.tags.map((tag) => (
+                        {theme.metadata.tags.map((tag) => (
                           <div key={tag} className="userhome-quicksettings-themetool-tag">
                             {tag}
                           </div>
                         ))}
                       </div>
                       <p>
-                        <b>{t('general.resource.description')}: </b>
-                        {theme.info.description}
+                        <b>{t('userhome.seelen_options.theme_selector.description')}: </b>
+                        <ResourceText text={theme.metadata.description} />
                       </p>
                     </div>
                   }
@@ -100,7 +93,7 @@ export function ThemeTool({ dataSource, usingThemes, setSelectedThemes }: ThemeT
                       checked={selectedKeys.includes(key)}
                       onChange={(e) => onItemSelect(key, e.target.checked)}
                     >
-                      {theme.info.displayName}
+                      <ResourceText text={theme.metadata.displayName} />
                     </Checkbox>
                   </Reorder.Item>
                 </Tooltip>
