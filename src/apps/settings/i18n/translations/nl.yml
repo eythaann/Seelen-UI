@@ -224,10 +224,7 @@ toolbar:
     never: Nooit
     on_overlap: Op overlap
   label: Werkbalk
-  placeholder:
-    author: Auteur
-    description: Beschrijving
-    select: Werkbalkstructuur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
 update:
   available: Update beschikbaar!

@@ -224,10 +224,7 @@ toolbar:
     never: Niemals
     on_overlap: Auf Überlappung
   label: Symbolleiste
-  placeholder:
-    author: Autor
-    description: Beschreibung
-    select: Struktur der Werkzeugleiste
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
 update:
   available: Update verfügbar!

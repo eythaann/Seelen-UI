@@ -223,10 +223,7 @@ toolbar:
     never: Heç vaxt
     on_overlap: Üst-üstə düşür
   label: Alət çubuğu
-  placeholder:
-    author: Müəllif
-    description: Təsvir
-    select: Alətlər paneli quruluşu
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
 update:
   available: YENİLƏNİB!

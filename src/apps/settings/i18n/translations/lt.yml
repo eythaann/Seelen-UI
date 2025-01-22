@@ -222,10 +222,7 @@ toolbar:
     never: Niekada
     on_overlap: Ant persidengimo
   label: Įrankių juosta
-  placeholder:
-    author: Autorius
-    description: apibūdinimas
-    select: Įrankių juostos struktūra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Naudokite konkretų ekraną, o ne vieno fokusavimo logiką
 update:
   available: Galima atnaujinti!

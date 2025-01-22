@@ -4,14 +4,12 @@ import {
   ConnectedMonitorList,
   IconPackList,
   MonitorConfiguration,
-  PlaceholderList,
   PluginList,
   ProfileList,
   Settings,
   ThemeList,
   UIColors,
   WidgetList,
-  WindowManagerLayoutList,
 } from '@seelen-ui/lib';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
@@ -67,14 +65,6 @@ async function initUIColors() {
 }
 
 export async function registerStoreEvents() {
-  PlaceholderList.onChange((list) => {
-    store.dispatch(RootActions.setAvailablePlaceholders(list.all()));
-  });
-
-  WindowManagerLayoutList.onChange((list) => {
-    store.dispatch(RootActions.setAvailableLayouts(list.all()));
-  });
-
   ThemeList.onChange((list) => {
     store.dispatch(RootActions.setAvailableThemes(list.all()));
   });
@@ -148,9 +138,6 @@ export const LoadSettingsToStore = async (customPath?: string) => {
 
   store.dispatch(RootActions.setAvailableThemes((await ThemeList.getAsync()).all()));
   store.dispatch(RootActions.setAvailableIconPacks((await IconPackList.getAsync()).all()));
-
-  store.dispatch(RootActions.setAvailablePlaceholders((await PlaceholderList.getAsync()).all()));
-  store.dispatch(RootActions.setAvailableLayouts((await WindowManagerLayoutList.getAsync()).all()));
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));

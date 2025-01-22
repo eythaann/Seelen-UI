@@ -225,10 +225,7 @@ toolbar:
     never: Ποτέ
     on_overlap: Σε επικάλυψη
   label: Γραμμή εργαλείων
-  placeholder:
-    author: Συγγραφέας
-    description: Περιγραφή
-    select: Δομή γραμμής εργαλείων
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Χρησιμοποιήστε συγκεκριμένα την οθόνη αντί για λογική εστίασης
 update:
   available: Διαθέσιμη ενημέρωση!

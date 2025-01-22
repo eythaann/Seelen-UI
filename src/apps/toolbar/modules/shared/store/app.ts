@@ -10,7 +10,11 @@ const settings = await Settings.default();
 
 const initialState: RootState = {
   version: 0,
-  placeholder: null,
+  placeholder: {
+    left: [],
+    center: [],
+    right: [],
+  },
   plugins: [],
   dateFormat: '',
   isOverlaped: false,
@@ -54,7 +58,7 @@ export const RootSlice = createSlice({
   initialState,
   reducers: {
     ...StateBuilder.reducersFor(initialState),
-    setPlaceholder(state, action: PayloadAction<Placeholder | null>) {
+    setPlaceholder(state, action: PayloadAction<Placeholder>) {
       state.placeholder = action.payload;
       state.version++;
     },

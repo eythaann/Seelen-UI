@@ -4,7 +4,6 @@ use std::ffi::OsStr;
 use std::path::PathBuf;
 use std::sync::Arc;
 
-use base64::Engine;
 use clap::{Arg, ArgAction, Command};
 use debugger::CliDebugger;
 use lazy_static::lazy_static;
@@ -12,14 +11,12 @@ use parking_lot::Mutex;
 use windows::Win32::System::Console::{AttachConsole, FreeConsole, ATTACH_PARENT_PROCESS};
 
 use crate::error_handler::Result;
-use crate::modules::cli::domain::Resource;
 use crate::modules::virtual_desk::{VirtualDesktopManager, VIRTUAL_DESKTOP_MANAGER};
 use crate::seelen::{Seelen, SEELEN};
 use crate::seelen_bar::FancyToolbar;
 use crate::seelen_rofi::SeelenRofi;
 use crate::seelen_weg::SeelenWeg;
 use crate::seelen_wm_v2::instance::WindowManagerV2;
-use crate::state::application::FULL_STATE;
 use crate::trace_lock;
 
 #[macro_export]
@@ -159,7 +156,7 @@ pub const URI_MSIX: &str = "seelen-ui-msix.uri:";
 pub fn process_uri(uri: &str) -> Result<()> {
     log::trace!("Loading URI: {}", uri);
 
-    let contents = if uri.starts_with(URI) {
+    let _contents = if uri.starts_with(URI) {
         uri.trim_start_matches(URI).to_string()
     } else if uri.starts_with(URI_MSIX) {
         uri.trim_start_matches(URI_MSIX).to_string()
@@ -172,14 +169,14 @@ pub fn process_uri(uri: &str) -> Result<()> {
         }
     };
 
-    let engine = base64::engine::general_purpose::URL_SAFE_NO_PAD;
+    /* let engine = base64::engine::general_purpose::URL_SAFE_NO_PAD;
     let decoded = engine.decode(contents.as_bytes())?;
     let resource: Resource = serde_yaml::from_slice(&decoded)?;
     FULL_STATE.rcu(|state| {
         let mut state = state.cloned();
         let _ = state.load_resource(resource.clone());
         state
-    });
+    }); */
     Ok(())
 }
 

@@ -224,10 +224,7 @@ toolbar:
     never: Երբեք
     on_overlap: Համընկնման վրա
   label: Գործիքագոտու
-  placeholder:
-    author: Հեղինակ
-    description: Նկարագրություն
-    select: Գործիքադարակի կառուցվածքը
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Օգտագործեք հատուկ ցուցադրման՝ մեկ ֆոկուսային տրամաբանության փոխարեն
 update:
   available: 'Թարմացրեք մատչելի:'

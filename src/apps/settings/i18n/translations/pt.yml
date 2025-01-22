@@ -222,10 +222,7 @@ toolbar:
     never: Nunca
     on_overlap: Na sobreposição
   label: Barra de ferramentas
-  placeholder:
-    author: Autor
-    description: Descrição
-    select: Estrutura da barra de ferramentas
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 update:
   available: Atualização disponível!

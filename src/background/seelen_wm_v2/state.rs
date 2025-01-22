@@ -6,7 +6,7 @@ use std::{
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
-use seelen_core::state::{NoFallbackBehavior, WManagerLayoutInfo, WmNode};
+use seelen_core::state::{NoFallbackBehavior, WindowManagerLayout, WmNode};
 
 use crate::{
     error_handler::Result,
@@ -30,7 +30,6 @@ lazy_static! {
 #[derive(Debug)]
 pub struct WmV2StateWorkspace {
     root: Option<WmNodeImpl>,
-    layout_info: Option<WManagerLayoutInfo>,
     no_fallback_behavior: NoFallbackBehavior,
 }
 
@@ -48,17 +47,20 @@ pub struct WmV2State {
 impl WmV2StateWorkspace {
     pub fn new(monitor: &Monitor, workspace_idx: usize) -> Self {
         let mut workspace = Self {
-            layout_info: None,
             root: None,
             no_fallback_behavior: NoFallbackBehavior::Float,
         };
 
         let settings = FULL_STATE.load();
         let layout_id = settings.get_wm_layout_id(monitor, workspace_idx);
-        if let Some(l) = settings.layouts.get(&layout_id).cloned() {
-            workspace.layout_info = Some(l.info);
-            workspace.root = Some(WmNodeImpl::new(l.structure));
-            workspace.no_fallback_behavior = l.no_fallback_behavior;
+
+        let plugin_with_layout = settings.plugins().values().find(|p| p.id == layout_id);
+
+        if let Some(p) = plugin_with_layout {
+            if let Ok(layout) = serde_json::from_value::<WindowManagerLayout>(p.plugin.clone()) {
+                workspace.root = Some(WmNodeImpl::new(layout.structure));
+                workspace.no_fallback_behavior = layout.no_fallback_behavior;
+            }
         }
 
         workspace

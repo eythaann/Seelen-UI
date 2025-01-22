@@ -224,10 +224,7 @@ toolbar:
     never: Ei koskaan
     on_overlap: Päällekkäin
   label: Työkalurivi
-  placeholder:
-    author: Kirjoittaja
-    description: Kuvaus
-    select: Työkalurivin rakenne
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Käytä näyttökohtaista logiikkaa yhden kohdistuksen sijaan
 update:
   available: Päivitä saatavilla!

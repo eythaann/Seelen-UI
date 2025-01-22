@@ -221,10 +221,7 @@ toolbar:
     never: Qet
     on_overlap: Li ser hevgirtinê
   label: Toolbar
-  placeholder:
-    author: Nivîskar
-    description: Terîf
-    select: Struktura Toolbar
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
 update:
   available: Nûvekirin!

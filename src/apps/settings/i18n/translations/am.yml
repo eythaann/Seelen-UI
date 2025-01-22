@@ -218,10 +218,7 @@ toolbar:
     never: በጭራሽ
     on_overlap: መደራረብ ላይ
   label: የመሣሪያ አሞሌ
-  placeholder:
-    author: ደራሲ ደራሲ
-    description: መግለጫ
-    select: የመሣሪያ አሞሌ መዋቅር
+  placeholder: {}
   use_multiple_monitor_overlap_logic: ከአንድ የትኩረት ሎጂክ ይልቅ ማሳያን ተጠቀም
 update:
   available: ዝመና ይገኛል!

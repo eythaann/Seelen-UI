@@ -224,10 +224,7 @@ toolbar:
     never: Aldri
     on_overlap: På overlapping
   label: Verktøylinje
-  placeholder:
-    author: Forfatter
-    description: Beskrivelse
-    select: Verktøylinjestruktur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Bruk skjermspesifikk i stedet for enkeltfokuslogikk
 update:
   available: Oppdatering tilgjengelig!

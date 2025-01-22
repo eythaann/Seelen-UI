@@ -224,10 +224,7 @@ toolbar:
     never: Byth
     on_overlap: Ar gorgyffwrdd
   label: Bariau
-  placeholder:
-    author: Awduron
-    description: Disgrifiadau
-    select: Strwythur Bar Offer
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
 update:
   available: Diweddariad ar gael!

@@ -224,10 +224,7 @@ toolbar:
     never: Никогаш
     on_overlap: На преклопување
   label: Лента со алатки
-  placeholder:
-    author: Автор
-    description: Опис
-    select: Структура на лентата со алатки
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Користете специфичен приказ наместо логика со еден фокус
 update:
   available: Ажурирање достапно!

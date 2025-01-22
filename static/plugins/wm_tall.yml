@@ -1,0 +1,18 @@
+id: "@default/wm-tall"
+target: "@seelen/window-manager"
+metadata:
+  displayName: Tall Layout
+  description: Tall layout for vertical monitors.
+plugin:
+  no_fallback_behavior: Float
+  structure:
+    type: Horizontal
+    children:
+      - type: Leaf
+        growFactor: 1.5
+      - type: Vertical
+        children:
+          - type: Leaf
+          - type: Leaf
+          - type: Leaf
+          - type: Leaf

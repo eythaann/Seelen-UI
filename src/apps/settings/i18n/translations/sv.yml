@@ -224,10 +224,7 @@ toolbar:
     never: Aldrig
     on_overlap: På överlappning
   label: Verktygsfält
-  placeholder:
-    author: Författare
-    description: Beskrivning
-    select: Verktygsfältstruktur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
 update:
   available: Uppdatering tillgänglig!

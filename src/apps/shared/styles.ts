@@ -62,9 +62,9 @@ const OLD_THEME_KEYS_BY_WIDGET_ID = {
 
 function loadThemes(allThemes: Theme[], selected: string[]) {
   const themes = allThemes
-    .filter((theme) => selected.includes(theme.info.filename))
+    .filter((theme) => selected.includes(theme.metadata.filename))
     .sort((a, b) => {
-      return selected.indexOf(a.info.filename) - selected.indexOf(b.info.filename);
+      return selected.indexOf(a.metadata.filename) - selected.indexOf(b.metadata.filename);
     });
 
   const widget = getCurrentWidget();
@@ -75,7 +75,7 @@ function loadThemes(allThemes: Theme[], selected: string[]) {
   element.textContent = '';
 
   for (const theme of themes) {
-    let layerName = theme.info.filename.replace(/[\.]/g, '-') + '-theme';
+    let layerName = theme.metadata.filename.replace(/[\.]/g, '-') + '-theme';
     const oldKey = OLD_THEME_KEYS_BY_WIDGET_ID[widget.id];
     const cssFileContent =
       theme.styles[widget.id] || (oldKey ? theme.styles[oldKey as WidgetId] : undefined);

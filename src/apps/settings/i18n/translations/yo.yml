@@ -219,10 +219,7 @@ toolbar:
     never: Kò
     on_overlap: Lori agbekọja
   label: Ọpa irinṣẹ
-  placeholder:
-    author: Onkọwe ọkunrin
-    description: Isapejuwe
-    select: Ọpa irinṣẹ
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Lo ifihan ni pato dipo ọgbọn idojukọ ẹyọkan
 update:
   available: Imudojuiwọn wa!

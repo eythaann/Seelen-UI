@@ -222,10 +222,7 @@ toolbar:
     never: Aldrei
     on_overlap: Á skörun
   label: Tækjastikur
-  placeholder:
-    author: Höfundur
-    description: Lýsing
-    select: Uppbygging tækjastiku
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Notaðu tiltekna skjá í staðinn fyrir stakan fókusrökfræði
 update:
   available: Uppfærsla í boði!

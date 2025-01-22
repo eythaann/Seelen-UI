@@ -223,10 +223,7 @@ toolbar:
     never: कहिल्यै
     on_overlap: ओभरल्यापमा
   label: औजारपरो
-  placeholder:
-    author: लेखिका
-    description: वर्णन
-    select: उपकरणपट्टी संरचना
+  placeholder: {}
   use_multiple_monitor_overlap_logic: एकल फोकस तर्कको सट्टा प्रदर्शन विशिष्ट प्रयोग गर्नुहोस्
 update:
   available: अपडेट उपलब्ध!

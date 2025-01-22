@@ -225,10 +225,7 @@ toolbar:
     never: ஒருபோதும் இல்லை
     on_overlap: ஒன்றுடன் ஒன்று
   label: கருவிப்பட்டி
-  placeholder:
-    author: நூலாசிரியர்
-    description: விளக்கம்
-    select: கருவிப்பட்டி அமைப்பு
+  placeholder: {}
   use_multiple_monitor_overlap_logic: சிங்கிள் ஃபோகஸ் லாஜிக்கிற்குப் பதிலாக குறிப்பிட்ட காட்சியைப் பயன்படுத்தவும்
 update:
   available: புதுப்பிப்பு கிடைக்கிறது!

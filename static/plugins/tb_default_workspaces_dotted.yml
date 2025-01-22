@@ -1,0 +1,6 @@
+id: "@default/workspaces-dotted"
+icon: HiDotsHorizontal
+target: "@seelen/fancy-toolbar"
+plugin:
+  type: workspaces
+  mode: dotted

@@ -222,10 +222,7 @@ toolbar:
     never: Nekad
     on_overlap: Uz pārklāšanās
   label: Rīkjosla
-  placeholder:
-    author: Autors
-    description: Apraksts
-    select: Rīkjoslas struktūra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
 update:
   available: Pieejams atjauninājums!

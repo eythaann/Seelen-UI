@@ -3,7 +3,6 @@ use std::path::PathBuf;
 use itertools::Itertools;
 use seelen_core::state::{
     IconPack, MonitorConfiguration, Plugin, Profile, WegItems, WegPinnedItemsVisibility, Widget,
-    WindowManagerLayout,
 };
 
 use crate::{
@@ -30,18 +29,8 @@ pub fn state_get_themes() -> Vec<Theme> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_placeholders() -> Vec<Placeholder> {
-    FULL_STATE
-        .load()
-        .placeholders()
-        .values()
-        .cloned()
-        .collect_vec()
-}
-
-#[tauri::command(async)]
-pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
-    FULL_STATE.load().layouts().values().cloned().collect_vec()
+pub fn state_get_toolbar_items() -> Placeholder {
+    FULL_STATE.load().toolbar_items().clone()
 }
 
 #[tauri::command(async)]

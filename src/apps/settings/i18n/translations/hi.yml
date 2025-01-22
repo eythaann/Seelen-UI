@@ -223,10 +223,7 @@ toolbar:
     never: कभी नहीं
     on_overlap: ओवरलैप पर
   label: उपकरण पट्टी
-  placeholder:
-    author: लेखक
-    description: विवरण
-    select: उपकरण -संरचना
+  placeholder: {}
   use_multiple_monitor_overlap_logic: एकल फोकस तर्क के बजाय प्रदर्शन विशिष्ट का उपयोग करें
 update:
   available: उपलब्ध अद्यतन!

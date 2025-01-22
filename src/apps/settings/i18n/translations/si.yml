@@ -221,10 +221,7 @@ toolbar:
     never: කවදාවත් නැහැ
     on_overlap: අතිච්ඡාදනය මත
   label: මෙවලම් තීරුව
-  placeholder:
-    author: කර්තෘ
-    description: විස්තර
-    select: මෙවලම් තීරු ව්යුහය
+  placeholder: {}
   use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
 update:
   available: යාවත්කාලීන කිරීම!

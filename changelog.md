@@ -1,11 +1,15 @@
 # Changelog
 
 ## [Unreleased]
+### features
+- allow custom animations on popups/dropdowns.
+- show open new window buttons on dock app items context menu.
+
 ### refactor
 - create separated system service to handle elevated actions.
 
-###
-- fix ghost windows caused by a refactor donde on v2.0.13.
+### fix
+- ghost windows caused by a refactor donde on v2.0.13.
 - not showing save button after icon packs change.
 
 ## [2.0.14]

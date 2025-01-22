@@ -216,10 +216,7 @@ toolbar:
     never: 一度もない
     on_overlap: オーバーラップ時
   label: ツールバーの設定
-  placeholder:
-    author: 製作者
-    description: 説明
-    select: ツールバーのテーマ
+  placeholder: {}
   use_multiple_monitor_overlap_logic: 単焦点ロジックではなくディスプレイ固有のロジックを使用する
 update:
   available: 更新が利用可能です！

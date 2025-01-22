@@ -224,10 +224,7 @@ toolbar:
     never: ఎప్పుడూ
     on_overlap: అతివ్యాప్తిపై
   label: టూల్‌బార్
-  placeholder:
-    author: రచయిత
-    description: వివరణ
-    select: టూల్‌బార్ నిర్మాణం
+  placeholder: {}
   use_multiple_monitor_overlap_logic: సింగిల్ ఫోకస్ లాజిక్‌కు బదులుగా నిర్దిష్ట ప్రదర్శనను ఉపయోగించండి
 update:
   available: నవీకరణ అందుబాటులో ఉంది!

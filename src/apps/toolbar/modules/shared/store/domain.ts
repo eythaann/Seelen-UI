@@ -108,7 +108,7 @@ export interface Workspace {
 
 export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settings, 'dateFormat'> {
   version: number;
-  placeholder: Placeholder | null;
+  placeholder: Placeholder;
   plugins: Plugin[];
 
   isOverlaped: boolean;

@@ -224,10 +224,7 @@ toolbar:
     never: Asla
     on_overlap: Üst üste binme durumunda
   label: Araç Çubuğu
-  placeholder:
-    author: Yazar
-    description: Açıklama
-    select: Araç Çubuğu Yapısı
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tek odaklama mantığı yerine ekrana özel mantık kullanın
 update:
   available: Güncelleme Mevcut!
