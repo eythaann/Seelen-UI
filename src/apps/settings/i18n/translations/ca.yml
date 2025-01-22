@@ -187,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Enviar a l’espai de treball 7
     send_to_workspace_8: Enviar a l'espai de treball 8
     send_to_workspace_9: Enviar a l’espai de treball 9
+    start_weg_app_0: Centra o inicia l'aplicació a la posició 10 de la barra de tasques
+    start_weg_app_1: Centra o inicia l'aplicació a la posició 1 de la barra de tasques
+    start_weg_app_2: Centra o inicia l'aplicació a la posició 2 de la barra de tasques
+    start_weg_app_3: Centra o inicia l'aplicació a la posició 3 de la barra de tasques
+    start_weg_app_4: Centra o inicia l'aplicació a la posició 4 de la barra de tasques
+    start_weg_app_5: Centra o inicia l'aplicació a la posició 5 de la barra de tasques
+    start_weg_app_6: Centra o inicia l'aplicació a la posició 6 de la barra de tasques
+    start_weg_app_7: Centra o inicia l'aplicació a la posició 7 de la barra de tasques
+    start_weg_app_8: Centra o inicia l'aplicació a la posició 8 de la barra de tasques
+    start_weg_app_9: Centra o inicia l'aplicació a la posició 9 de la barra de tasques
     switch_workspace_0: Canvia a l'espai de treball 1
     switch_workspace_1: Canvia a l'espai de treball 2
     switch_workspace_2: Canvia a l'espai de treball 2
