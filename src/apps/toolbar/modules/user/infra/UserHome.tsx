@@ -1,5 +1,5 @@
-import { invoke, SeelenCommand } from '@seelen-ui/lib';
-import { File, FolderType, User } from '@seelen-ui/lib/types';
+import { IconPackList, invoke, SeelenCommand, Settings, ThemeList } from '@seelen-ui/lib';
+import { File, FolderType, IconPack, Theme, User } from '@seelen-ui/lib/types';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { t } from 'i18next';
@@ -17,6 +17,7 @@ import { AppHistoryItem } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { useWindowFocusChange } from '../../../../shared/hooks';
+import { ThemeTool } from './ThemeTool';
 import { UserFolder } from './UserFolder';
 
 interface UserHomeProps {
@@ -48,7 +49,7 @@ function folderTypeToIcon(folderType: FolderType): { icon: string; category: Fol
   }
 }
 
-type SettingsType = 'Theme' | 'IconPack' | 'WEG' | 'Toolbar' | undefined;
+type SettingsType = 'Theme' | 'IconPack' | undefined;
 
 export interface UserHomeFolder {
   category: FolderType;
@@ -62,6 +63,12 @@ function UserHome({ }: UserHomeProps) {
   const [categoryOpen, setCategoryOpen] = useState<FolderType>('Recent');
   const [openSettings, setOpenSettings] = useState<SettingsType>(undefined);
 
+  const [themes, setThemes] = useState<Theme[]>([]);
+  const [iconPacks, setIconPacks] = useState<IconPack[]>([]);
+  const [selectedThemes, setSelectedThemes] = useState<string[] | undefined>(undefined);
+  const [selectedIconPacks, setSelectedIconPacks] = useState<string[] | undefined>(undefined);
+  const [settings, setSettings] = useState<Settings | undefined>(undefined);
+
   const user: User = useSelector(Selectors.user);
   const folders: UserHomeFolder[] = [
     { ...folderTypeToIcon('Recent'), content: useSelector(Selectors.userRecentFolder) },
@@ -72,6 +79,27 @@ function UserHome({ }: UserHomeProps) {
     { ...folderTypeToIcon('Music'), content: useSelector(Selectors.userMusicFolder) },
   ];
   const history: AppHistoryItem[] = useSelector(Selectors.history);
+
+  useEffect(() => {
+    ThemeList.getAsync().then((values) => setThemes(values.all()));
+    IconPackList.getAsync().then((values) => setIconPacks(values.all()));
+    Settings.getAsync().then((settings) => {
+      setSettings(settings);
+      setSelectedThemes(settings.inner.selectedThemes);
+      setSelectedIconPacks(settings.inner.iconPacks);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (settings && settings.inner.selectedThemes.length != selectedThemes?.length && settings.inner.selectedThemes.length != selectedIconPacks?.length) {
+      const innerSettings = settings.inner;
+
+      innerSettings.selectedThemes = [ ...selectedThemes! ] ;
+      innerSettings.iconPacks = [ ...selectedIconPacks! ];
+
+      invoke(SeelenCommand.StateWriteSettings, { settings: innerSettings });
+    }
+  }, [selectedThemes, selectedIconPacks]);
 
   return (
     <BackgroundByLayersV2 prefix="userhome" className="userhome" onContextMenu={(e) => e.stopPropagation()}>
@@ -141,19 +169,6 @@ function UserHome({ }: UserHomeProps) {
               <div className="userhome-profile-onedrive-text">{t('userhome.profile.one-drive')}</div>
             </button>
           </Tooltip>
-          <Tooltip
-            mouseLeaveDelay={0}
-            arrow={false}
-            title={t('userhome.profile.passwords')}
-            placement="right">
-            <button
-              className="userhome-profile-passwords"
-              onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:signinoptions' })}
-            >
-              <Icon iconName="RiLockPasswordFill" />
-              <div className="userhome-profile-passwords-text">****</div>
-            </button>
-          </Tooltip>
         </div>
       </div>
       { history && history.length != 0 &&
@@ -200,13 +215,19 @@ function UserHome({ }: UserHomeProps) {
           onOpenChange={(open) => {
             if (!open && openSettings == 'Theme') {
               setOpenSettings(undefined);
+
+              return;
             }
 
             setOpenSettings(open ? 'Theme' : openSettings);
           }}
           arrow={false}
           placement="right"
-          content={<UserHome></UserHome>}
+          content={
+            <BackgroundByLayersV2 prefix="userhome-quicksettings" className="userhome-quicksettings" onContextMenu={(e) => e.stopPropagation()}>
+              <ThemeTool dataSource={themes} usingThemes={selectedThemes ? selectedThemes : []} setSelectedThemes={setSelectedThemes} />
+            </BackgroundByLayersV2>
+          }
           destroyTooltipOnHide
         >
           <li className="userhome-seelen-option-item">
@@ -214,18 +235,37 @@ function UserHome({ }: UserHomeProps) {
             <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.theme')}</span>
           </li>
         </AnimatedPopover>
-        <li className="userhome-seelen-option-item">
-          <Icon iconName="PiPackageDuotone" />
-          <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.icon_pack')}</span>
-        </li>
-        <li className="userhome-seelen-option-item">
-          <Icon iconName="BiSolidDockTop" />
-          <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.fancytoolbar')}</span>
-        </li>
-        <li className="userhome-seelen-option-item">
-          <Icon iconName="BiDockBottom" />
-          <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.weg')}</span>
-        </li>
+        <AnimatedPopover
+          animationDescription={{
+            maxAnimationTimeMs: 500,
+            openAnimationName: 'userhome-quicksettings-open',
+            closeAnimationName: 'userhome-quicksettings-close',
+          }}
+          open={openSettings == 'IconPack'}
+          trigger="click"
+          onOpenChange={(open) => {
+            if (!open && openSettings == 'IconPack') {
+              setOpenSettings(undefined);
+
+              return;
+            }
+
+            setOpenSettings(open ? 'IconPack' : openSettings);
+          }}
+          arrow={false}
+          placement="right"
+          content={
+            <BackgroundByLayersV2 prefix="userhome-quicksettings" className="userhome-quicksettings" onContextMenu={(e) => e.stopPropagation()}>
+              <ThemeTool dataSource={iconPacks} usingThemes={selectedIconPacks ? selectedIconPacks : []} setSelectedThemes={setSelectedIconPacks} />
+            </BackgroundByLayersV2>
+          }
+          destroyTooltipOnHide
+        >
+          <li className="userhome-seelen-option-item">
+            <Icon iconName="PiPackageDuotone" />
+            <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.icon_pack')}</span>
+          </li>
+        </AnimatedPopover>
         <li className="userhome-seelen-option-item" onClick={() => invoke(SeelenCommand.ShowAppSettings)}>
           <Icon iconName="RiSettings3Fill" />
           <span className="userhome-seelen-option-item-title">{t('userhome.seelen_options.settings')}</span>
