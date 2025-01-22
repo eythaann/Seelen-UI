@@ -36,6 +36,8 @@ pub struct ManifestApplications {
 pub struct ManifestApplication {
     #[serde(rename = "@Id")]
     pub id: String,
+    #[serde(rename = "@Executable")]
+    pub executable: String,
     pub visual_elements: ManifestApplicationVisualElements,
 }
 

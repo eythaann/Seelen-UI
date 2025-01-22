@@ -12,6 +12,7 @@
 - ghost windows caused by a refactor donde on v2.0.13.
 - not showing save button after icon packs change.
 - app failing when powershell is not part of the $PATH enviroment.
+- dock items no updatings paths on store updates.
 
 ## [2.0.14]
 ### hotfix

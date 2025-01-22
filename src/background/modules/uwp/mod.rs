@@ -82,6 +82,21 @@ impl UwpManager {
         Ok(quick_xml::de::from_reader(&mut reader)?)
     }
 
+    pub fn get_app_path(app_umid: &str) -> Result<PathBuf> {
+        let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
+        let package = app_info.Package()?;
+        let manifest = Self::manifest_from_package(&package)?;
+        if let Some(apps) = manifest.applications {
+            for app in apps.application {
+                if app_umid == app.id {
+                    let package_path = PathBuf::from(package.InstalledPath()?.to_os_string());
+                    return Ok(package_path.join(app.executable.clone()));
+                }
+            }
+        }
+        Err(format!("App path not found for {app_umid}").into())
+    }
+
     pub fn get_high_quality_icon_path(app_umid: &str) -> Result<PathBuf> {
         let app_info = AppInfo::GetFromAppUserModelId(&app_umid.into())?;
         let package = app_info.Package()?;
