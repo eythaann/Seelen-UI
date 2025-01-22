@@ -26,6 +26,8 @@ pub enum PwshExecutionMode {
     Command,
 }
 
+static POWERSHELL_PATH: &str = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+
 impl PwshScript {
     pub fn new<S: Into<String>>(contents: S) -> Self {
         Self {
@@ -61,7 +63,7 @@ impl PwshScript {
                     .map(|s| s.to_string())
                     .chain([
                         "-Command".to_string(),
-                        format!("Start-Process 'powershell' -Verb runAs -WindowStyle Hidden -Wait -ArgumentList '{}'", args.join(" "))
+                        format!("Start-Process '{}' -Verb runAs -WindowStyle Hidden -Wait -ArgumentList '{}'", POWERSHELL_PATH, args.join(" "))
                     ])
                     .collect_vec();
                 }
@@ -84,7 +86,7 @@ impl PwshScript {
 
         let args = self.build_args(&script_path.to_string_lossy());
         let shell = get_app_handle().shell();
-        let result = shell.command("powershell").args(args).output().await;
+        let result = shell.command(POWERSHELL_PATH).args(args).output().await;
         // delete script before check output
         std::fs::remove_file(&script_path)?;
         let output = result?;

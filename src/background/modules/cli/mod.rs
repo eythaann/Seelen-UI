@@ -15,13 +15,17 @@ use crate::{
     log_error,
     seelen::Seelen,
     trace_lock,
-    utils::{pwsh::PwshScript, spawn_named_thread},
+    utils::{constants::SEELEN_COMMON, pwsh::PwshScript, spawn_named_thread},
 };
 
 pub struct AppClient;
 impl AppClient {
     fn socket_path() -> PathBuf {
-        std::env::temp_dir().join("com.seelen.seelen-ui\\slu_tcp_socket")
+        let dir = SEELEN_COMMON.app_temp_dir();
+        if !dir.exists() {
+            fs::create_dir_all(dir).unwrap();
+        }
+        dir.join("slu_tcp_socket")
     }
 
     // const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
