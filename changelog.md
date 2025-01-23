@@ -4,6 +4,7 @@
 ### features
 - allow custom animations on popups/dropdowns.
 - show open new window buttons on dock app items context menu.
+- toggle dock items using win + number.
 
 ### refactor
 - create separated system service to handle elevated actions.
