@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
-import { SavePlaceholderAsCustom } from './application';
+import { SaveToolbarItems } from './application';
 import { Icon } from 'src/apps/shared/components/Icon';
 
 export function MainContextMenu() {
@@ -38,7 +38,7 @@ export function MainContextMenu() {
                         label: p.id,
                         onClick: () => {
                           dispatch(RootActions.addItem(p.id));
-                          SavePlaceholderAsCustom();
+                          SaveToolbarItems();
                         },
                       }))}
                     />
