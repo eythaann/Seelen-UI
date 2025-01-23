@@ -17,16 +17,16 @@ use crate::{
     log_error,
     seelen::Seelen,
     trace_lock,
-    utils::{constants::SEELEN_COMMON, pwsh::PwshScript, spawn_named_thread},
+    utils::{pwsh::PwshScript, spawn_named_thread},
     windows_api::Com,
 };
 
 pub struct AppClient;
 impl AppClient {
     fn socket_path() -> PathBuf {
-        let dir = SEELEN_COMMON.app_temp_dir();
+        let dir = std::env::temp_dir().join("com.seelen.seelen-ui");
         if !dir.exists() {
-            fs::create_dir_all(dir).unwrap();
+            fs::create_dir_all(&dir).unwrap();
         }
         dir.join("slu_tcp_socket")
     }
