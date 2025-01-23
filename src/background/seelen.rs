@@ -260,9 +260,10 @@ impl Seelen {
             let is_task_enabled = task_service
                 .GetFolder(&"\\Seelen".into())
                 .and_then(|folder| folder.GetTask(&"Seelen UI Service".into()))
-                .and_then(|task| task.Enabled())
-                .map(|v| v.as_bool())
-                .unwrap_or(false);
+                .and_then(|task| task.Definition())
+                .and_then(|definition| definition.Triggers())
+                .and_then(|triggers| triggers.get_Item(1))
+                .is_ok();
             Ok(is_task_enabled)
         })
     }

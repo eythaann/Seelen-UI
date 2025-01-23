@@ -12,7 +12,6 @@ mod windows_api;
 
 use cli::{handle_cli, ServiceClient};
 use crossbeam_channel::{Receiver, Sender};
-use enviroment::was_installed_using_msix;
 use error::Result;
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -121,21 +120,18 @@ fn is_already_runnning() -> bool {
 }
 
 fn main() -> Result<()> {
-    if was_installed_using_msix() {
-        SluServiceLogger::install()?;
-        TaskSchedulerHelper::create_service_task()?;
-    }
-
-    SluServiceLogger::init()?;
     handle_cli()?;
 
     if is_already_runnning() {
         return Ok(());
     }
 
+    SluServiceLogger::install()?;
+    SluServiceLogger::init()?;
+    TaskSchedulerHelper::create_service_task()?;
+
     log::info!("Starting Seelen UI Service");
     setup()?;
-
     STOP_CHANNEL.1.recv().unwrap();
     log::info!("Seelen UI Service stopped");
     Ok(())
