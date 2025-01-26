@@ -17,7 +17,7 @@ import { SettingsModule } from '../Settings/infra';
 import { UserModule } from '../user/infra/Module';
 
 import { RootActions, Selectors } from '../shared/store/app';
-import { SavePlaceholderAsCustom } from './application';
+import { SaveToolbarItems } from './application';
 
 import { AnimatedDropdown } from '../../../shared/components/AnimatedWrappers';
 import { useWindowFocusChange } from '../../../shared/hooks';
@@ -131,7 +131,7 @@ export function ToolBar({ structure }: Props) {
     payload = apps.slice(dividerEnd + 1) as ToolbarItem[];
     dispatch(RootActions.setItemsOnRight(payload));
 
-    SavePlaceholderAsCustom()?.catch(console.error);
+    SaveToolbarItems()?.catch(console.error);
   }, []);
 
   const shouldBeHidden =

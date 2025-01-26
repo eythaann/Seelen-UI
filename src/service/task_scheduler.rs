@@ -1,8 +1,9 @@
 use windows::Win32::{
     Foundation::{VARIANT_FALSE, VARIANT_TRUE},
     System::TaskScheduler::{
-        IExecAction2, ITaskService, TaskScheduler, TASK_ACTION_EXEC, TASK_CREATE_OR_UPDATE,
-        TASK_LOGON_INTERACTIVE_TOKEN, TASK_RUNLEVEL_HIGHEST, TASK_TRIGGER_LOGON,
+        IExecAction2, ITaskFolder, ITaskService, TaskScheduler, TASK_ACTION_EXEC,
+        TASK_CREATE_OR_UPDATE, TASK_LOGON_INTERACTIVE_TOKEN, TASK_RUNLEVEL_HIGHEST,
+        TASK_TRIGGER_LOGON,
     },
 };
 use windows_core::{Interface, BSTR};
@@ -16,16 +17,35 @@ static OLD_APP_TASK_NAME: &str = "Seelen-UI";
 static SERVICE_TASK_NAME: &str = "Seelen UI Service";
 
 impl TaskSchedulerHelper {
+    unsafe fn get_task_service() -> Result<ITaskService> {
+        let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
+        task_service.Connect(None, None, None, None)?;
+        Ok(task_service)
+    }
+
+    unsafe fn register_task(folder: &ITaskFolder, task_name: &str, task_xml: &BSTR) -> Result<()> {
+        folder.RegisterTask(
+            &task_name.into(),
+            task_xml,
+            TASK_CREATE_OR_UPDATE.0,
+            None,
+            None,
+            TASK_LOGON_INTERACTIVE_TOKEN,
+            None,
+        )?;
+        Ok(())
+    }
+
     /// this task handles the startup of the service and the app on login
     pub fn create_service_task() -> Result<()> {
         let path = std::env::current_exe()?.to_string_lossy().to_string();
         Com::run_with_context(|| unsafe {
-            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(None, None, None, None)?;
-
+            let task_service = Self::get_task_service()?;
             // remove old task as backwards compatibility
+            let mut old_task = None;
             if let Ok(seelen_folder) = task_service.GetFolder(&GROUP_FOLDER.into()) {
                 let _ = seelen_folder.DeleteTask(&OLD_APP_TASK_NAME.into(), 0);
+                old_task = seelen_folder.GetTask(&OLD_APP_TASK_NAME.into()).ok();
             };
             let root_folder = task_service.GetFolder(&"\\".into())?;
 
@@ -40,7 +60,12 @@ impl TaskSchedulerHelper {
             settings.SetStopIfGoingOnBatteries(VARIANT_FALSE)?;
 
             let triggers = task.Triggers()?;
-            triggers.Create(TASK_TRIGGER_LOGON)?;
+            if let Some(old) = old_task {
+                let old_triggers = old.Definition()?.Triggers()?;
+                task.SetTriggers(&old_triggers)?;
+            } else {
+                triggers.Create(TASK_TRIGGER_LOGON)?;
+            }
 
             let actions = task.Actions()?;
             let exec_action: IExecAction2 = actions.Create(TASK_ACTION_EXEC)?.cast()?;
@@ -48,26 +73,29 @@ impl TaskSchedulerHelper {
 
             let mut task_xml = BSTR::new();
             task.XmlText(&mut task_xml)?;
-            root_folder.RegisterTask(
-                &format!("{GROUP_FOLDER}\\{SERVICE_TASK_NAME}").into(),
+            Self::register_task(
+                &root_folder,
+                &format!("{GROUP_FOLDER}\\{SERVICE_TASK_NAME}"),
                 &task_xml,
-                TASK_CREATE_OR_UPDATE.0,
-                None,
-                None,
-                TASK_LOGON_INTERACTIVE_TOKEN,
-                None,
             )?;
             Ok(())
         })
     }
 
-    pub fn set_enabled_service_task(enabled: bool) -> Result<()> {
+    pub fn set_run_on_logon(enabled: bool) -> Result<()> {
         Com::run_with_context(|| unsafe {
-            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
-            task_service.Connect(None, None, None, None)?;
+            let task_service = Self::get_task_service()?;
             let seelen_folder = task_service.GetFolder(&GROUP_FOLDER.into())?;
             let task = seelen_folder.GetTask(&SERVICE_TASK_NAME.into())?;
-            task.SetEnabled(if enabled { VARIANT_TRUE } else { VARIANT_FALSE })?;
+            let task = task.Definition()?;
+            let triggers = task.Triggers()?;
+            triggers.Clear()?;
+            if enabled {
+                triggers.Create(TASK_TRIGGER_LOGON)?;
+            }
+            let mut task_xml = BSTR::new();
+            task.XmlText(&mut task_xml)?;
+            Self::register_task(&seelen_folder, SERVICE_TASK_NAME, &task_xml)?;
             Ok(())
         })
     }

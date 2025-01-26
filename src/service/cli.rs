@@ -80,7 +80,7 @@ pub fn handle_tcp_cli(matches: &clap::ArgMatches) -> Result<()> {
         }
         Some((ServiceSubcommands::SET_STARTUP, arg)) => {
             let enabled: bool = *arg.get_one("value").unwrap();
-            TaskSchedulerHelper::set_enabled_service_task(enabled)?;
+            TaskSchedulerHelper::set_run_on_logon(enabled)?;
         }
         _ => (),
     }
@@ -101,7 +101,7 @@ impl ServiceClient {
     }
 
     fn socket_path() -> PathBuf {
-        PathBuf::from(r"C:\Windows\Temp\slu_service_tcp_socket")
+        std::env::temp_dir().join("slu_service_tcp_socket")
     }
 
     fn handle_message(stream: TcpStream) -> Result<()> {

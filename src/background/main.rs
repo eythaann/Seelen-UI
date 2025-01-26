@@ -60,6 +60,7 @@ pub fn is_local_dev() -> bool {
 }
 
 fn register_panic_hook() {
+    let base_hook = std::panic::take_hook();
     std::panic::set_hook(Box::new(move |info| {
         let cause = info
             .payload()
@@ -87,6 +88,7 @@ fn register_panic_hook() {
             cause,
             string_location
         );
+        base_hook(info);
     }));
 }
 

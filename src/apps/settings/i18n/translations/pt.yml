@@ -185,6 +185,16 @@ shortcuts:
     send_to_workspace_7: Enviar para o espaço de trabalho 7
     send_to_workspace_8: Enviar para o espaço de trabalho 8
     send_to_workspace_9: Enviar para o espaço de trabalho 9
+    start_weg_app_0: Concentre-se ou inicie o aplicativo na posição 10 da barra de tarefas
+    start_weg_app_1: Concentre-se ou inicie o aplicativo na posição 1 da barra de tarefas
+    start_weg_app_2: Concentre-se ou inicie o aplicativo na posição 2 da barra de tarefas
+    start_weg_app_3: Concentre-se ou inicie o aplicativo na posição 3 da barra de tarefas
+    start_weg_app_4: Concentre-se ou inicie o aplicativo na posição 4 da barra de tarefas
+    start_weg_app_5: Concentre-se ou inicie o aplicativo na posição 5 da barra de tarefas
+    start_weg_app_6: Concentre-se ou inicie o aplicativo na posição 6 da barra de tarefas
+    start_weg_app_7: Concentre-se ou inicie o aplicativo na posição 7 da barra de tarefas
+    start_weg_app_8: Concentre-se ou inicie o aplicativo na posição 8 da barra de tarefas
+    start_weg_app_9: Concentre-se ou inicie o aplicativo na posição 9 da barra de tarefas
     switch_workspace_0: Mudar para o espaço de trabalho 1
     switch_workspace_1: Mudar para o espaço de trabalho 2
     switch_workspace_2: Mudar para o espaço de trabalho 2

@@ -4,6 +4,7 @@
 ### features
 - allow custom animations on popups/dropdowns.
 - show open new window buttons on dock app items context menu.
+- toggle dock items using win + number.
 
 ### refactor
 - create separated system service to handle elevated actions.
@@ -11,6 +12,9 @@
 ### fix
 - ghost windows caused by a refactor donde on v2.0.13.
 - not showing save button after icon packs change.
+- app failing when powershell is not part of the $PATH enviroment.
+- dock items no updatings paths on store updates.
+- unremovable workspace module on toolbar.
 
 ## [2.0.14]
 ### hotfix

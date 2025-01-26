@@ -9,6 +9,8 @@ use std::{
 
 use application::{handle_cli_events, SEELEN_COMMAND_LINE};
 use itertools::Itertools;
+use windows::Win32::System::TaskScheduler::{IExecAction2, ITaskService, TaskScheduler};
+use windows_core::Interface;
 
 use crate::{
     error_handler::Result,
@@ -16,12 +18,17 @@ use crate::{
     seelen::Seelen,
     trace_lock,
     utils::{pwsh::PwshScript, spawn_named_thread},
+    windows_api::Com,
 };
 
 pub struct AppClient;
 impl AppClient {
     fn socket_path() -> PathBuf {
-        std::env::temp_dir().join("com.seelen.seelen-ui\\slu_tcp_socket")
+        let dir = std::env::temp_dir().join("com.seelen.seelen-ui");
+        if !dir.exists() {
+            fs::create_dir_all(&dir).unwrap();
+        }
+        dir.join("slu_tcp_socket")
     }
 
     // const BUFFER_SIZE: usize = 5 * 1024 * 1024; // 5 MB
@@ -90,7 +97,7 @@ impl ServiceClient {
     }
 
     fn socket_path() -> PathBuf {
-        PathBuf::from(r"C:\Windows\Temp\slu_service_tcp_socket")
+        std::env::temp_dir().join("slu_service_tcp_socket")
     }
 
     fn connect_tcp() -> Result<TcpStream> {
@@ -115,25 +122,47 @@ impl ServiceClient {
         Self::connect_tcp().is_ok()
     }
 
+    fn start_service_task() -> Result<()> {
+        Com::run_with_context(|| unsafe {
+            let task_service: ITaskService = Com::create_instance(&TaskScheduler)?;
+            task_service.Connect(None, None, None, None)?;
+            let folder = task_service.GetFolder(&"\\Seelen".into())?;
+            let task = folder.GetTask(&"Seelen UI Service".into())?;
+
+            let actions = task.Definition()?.Actions()?;
+            // ask to microsoft what that hell this start counting from 1 instead 0
+            let action: IExecAction2 = actions.get_Item(1)?.cast()?;
+            let mut action_path = windows_core::BSTR::new();
+            action.Path(&mut action_path)?;
+
+            let action_path = PathBuf::from(action_path.to_string());
+            let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
+            match action_path == service_path {
+                true => {
+                    task.Run(None)?;
+                    Ok(())
+                }
+                false => {
+                    Err("Service task is not pointing to the correct service executable".into())
+                }
+            }
+        })
+    }
+
     // the service should be running since installer will start it or startup task scheduler
     // so if the service is not running, we need to start it (common on msix setup)
     pub async fn start_service() -> Result<()> {
-        /* get_app_handle()
-            .dialog()
-            .message(t!("service.not_running_description"))
-            .title(t!("service.not_running"))
-            .kind(MessageDialogKind::Info)
-            .ok_button_label(t!("service.not_running_ok"))
-            .blocking_show();
-        */
-        let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
-        PwshScript::new(format!(
-            "Start-Process '{}' -Verb runAs",
-            service_path.display(),
-        ))
-        .inline_command()
-        .execute()
-        .await?;
+        if let Err(err) = Self::start_service_task() {
+            log::debug!("Can not start service via task: {}", err);
+            let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
+            PwshScript::new(format!(
+                "Start-Process '{}' -Verb runAs",
+                service_path.display(),
+            ))
+            .inline_command()
+            .execute()
+            .await?;
+        }
         Ok(())
     }
 

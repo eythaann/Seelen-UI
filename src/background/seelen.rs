@@ -260,9 +260,10 @@ impl Seelen {
             let is_task_enabled = task_service
                 .GetFolder(&"\\Seelen".into())
                 .and_then(|folder| folder.GetTask(&"Seelen UI Service".into()))
-                .and_then(|task| task.Enabled())
-                .map(|v| v.as_bool())
-                .unwrap_or(false);
+                .and_then(|task| task.Definition())
+                .and_then(|definition| definition.Triggers())
+                .and_then(|triggers| triggers.get_Item(1))
+                .is_ok();
             Ok(is_task_enabled)
         })
     }
@@ -292,6 +293,12 @@ impl Seelen {
             AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.vd.ahk"), &vars)
                 .name("seelen.vd.ahk")
                 .execute()?;
+
+            if state.is_weg_enabled() {
+                AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.weg.ahk"), &vars)
+                    .name("seelen.weg.ahk")
+                    .execute()?;
+            }
 
             if state.is_window_manager_enabled() {
                 AutoHotKey::from_template(include_str!("utils/ahk/mocks/seelen.wm.ahk"), &vars)
