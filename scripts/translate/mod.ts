@@ -16,24 +16,18 @@ if (!API_KEY) {
   process.exit(1);
 }
 
+const targets = SupportedLanguages.filter((lang) => lang.value !== 'en');
+
 const DeeplTranslator = new deepl.Translator(API_KEY);
 
-const argv = await yargs(hideBin(process.argv))
-  .option('delete', {
-    type: 'array',
-    description: 'Keys to delete from translations',
-    alias: 'd',
-    coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
-  })
-  .option('update', {
-    type: 'array',
-    description: 'Keys to update in translations',
-    alias: 'u',
-    coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
-  }).argv;
+const argv = await yargs(hideBin(process.argv)).option('recreate', {
+  type: 'array',
+  description: 'Path of object to recreate translations for. (e.g. `obj.prop.deep.key`)',
+  alias: 'r',
+  coerce: (arg) => (Array.isArray(arg) ? arg.map(String) : [String(arg)]),
+}).argv;
 
-const deleteKeys = new Set(argv.delete || []);
-const keysToUpdate = new Set(argv.update || []);
+const keysToRecreate = new Set(argv.recreate || []);
 
 function deepObjectSize(obj: any, size = 0) {
   for (const key in obj) {
@@ -62,7 +56,7 @@ function deepSortObject<T>(obj: T): T {
   return obj;
 }
 
-async function translateObject(base: object, lang: string, mut_obj: any, translator: Translator) {
+async function translateObject(base: any, lang: string, mut_obj: any, translator: Translator) {
   for (const [key, value] of Object.entries(base)) {
     if (typeof value === 'object') {
       mut_obj[key] ??= {};
@@ -88,45 +82,47 @@ async function translateObject(base: object, lang: string, mut_obj: any, transla
       }
     }
   }
+  // remove obsolete keys
+  for (const key in mut_obj) {
+    if (!base[key]) {
+      delete mut_obj[key];
+    }
+  }
 }
 
 function deleteKeysDeep(obj: any, keys: string[]) {
-  for (const key of keys) {
-    deleteDeepKey(obj, key.split('.'));
-  }
-}
-
-function deleteDeepKey(obj: any, path: string[]) {
-  if (path.length === 0) {
-    return;
-  }
-
-  let temp = obj;
-  let finalKey = path.pop()!;
-
-  for (const key of path) {
-    if (typeof temp[key] !== 'object') {
+  const deletePath = (obj: any, path: string[]) => {
+    if (path.length === 0) {
       return;
     }
-    temp = temp[key];
+    let temp = obj;
+    let finalKey = path.pop()!;
+    for (const key of path) {
+      if (typeof temp[key] !== 'object') {
+        return;
+      }
+      temp = temp[key];
+    }
+    delete temp[finalKey];
+  };
+
+  for (const key of keys) {
+    deletePath(obj, key.split('.'));
   }
-
-  delete temp[finalKey];
 }
-
-const toTranslate = SupportedLanguages.filter((lang) => lang.value !== 'en');
 
 async function completeTranslationsFor(localesDir: string) {
   const enPath = `${localesDir}/en.yml`;
   const en = deepSortObject(yaml.load(readFileSync(enPath, 'utf8')) as object);
-  deleteKeysDeep(en, Array.from(deleteKeys));
   writeFileSync(enPath, yaml.dump(en)); // overwrite sorted
 
   console.log(`* ${enPath} (total: ${deepObjectSize(en)} messages)`);
 
-  for (const item of toTranslate) {
+  for (const item of targets) {
     const filePath = `${localesDir}/${item.value}.yml`;
-    const translator = DeeplSupportedTargetLanguages.includes(item.value as deepl.TargetLanguageCode)
+    const translator = DeeplSupportedTargetLanguages.includes(
+      item.value as deepl.TargetLanguageCode,
+    )
       ? Translator.DeepL
       : Translator.Google;
 
@@ -137,8 +133,7 @@ async function completeTranslationsFor(localesDir: string) {
       translation = yaml.load(readFileSync(filePath, 'utf8'));
     }
 
-    deleteKeysDeep(translation, Array.from(deleteKeys));
-    deleteKeysDeep(translation, Array.from(keysToUpdate));
+    deleteKeysDeep(translation, Array.from(keysToRecreate));
     await translateObject(en, item.value, translation, translator);
 
     writeFileSync(filePath, yaml.dump(deepSortObject(translation)));
