@@ -1,11 +1,11 @@
-import { IconPackManager } from '@seelen-ui/lib';
+import { SeelenCommand } from '@seelen-ui/lib';
 import { ToolbarItem } from '@seelen-ui/lib/types';
-import { convertFileSrc } from '@tauri-apps/api/core';
+import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { cloneDeep } from 'lodash';
 import { evaluate, isResultSet } from 'mathjs';
-import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
+import React, { PropsWithChildren, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -30,7 +30,6 @@ export interface InnerItemProps extends PropsWithChildren {
 
 interface StringToElementProps {
   text: string;
-  iconManager?: IconPackManager;
 }
 
 interface StringToElementState {
@@ -43,7 +42,6 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
   static imgPrefix = 'IMG:';
   static iconPrefix = 'ICON:';
   static exePrefix = 'EXE:';
-  static appPrefix = 'APP:';
 
   static getIcon(name: string, size = 16) {
     return `[ICON:${name}:${size}]`;
@@ -70,14 +68,6 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
     return `[EXE:${size}px:${exe_path}]`;
   }
 
-  static imgFromApp(exe_path: string, umid: string | null, size = 16) {
-    if (!exe_path) {
-      return '';
-    }
-
-    return `[APP:${size}px:${exe_path}:${umid}]`;
-  }
-
   constructor(props: StringToElementProps) {
     super(props);
     this.state = { exe_icon_path: LAZY_CONSTANTS.MISSING_ICON_PATH };
@@ -95,10 +85,6 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
     return this.props.text.startsWith(StringToElement.exePrefix);
   }
 
-  isApp() {
-    return this.props.text.startsWith(StringToElement.appPrefix);
-  }
-
   setExeIcon(exe_path: string | null) {
     this.setState({ exe_icon_path: exe_path || LAZY_CONSTANTS.MISSING_ICON_PATH });
   }
@@ -106,16 +92,10 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
   loadExeIconToState() {
     if (this.isExe()) {
       const [_, _size, path] = this.props.text.split(StringToElement.splitter);
-      if (this.props.iconManager && path) {
-        IconPackManager.extractIcon({ path }).then((x) => this.setExeIcon(x));
-      }
-    }
-
-    if (this.isApp()) {
-      const [_, _size, drive, subpath, umid] = this.props.text.split(StringToElement.splitter);
-      const path = `${drive}:${subpath}`;
-      if (this.props.iconManager && path) {
-        IconPackManager.extractIcon({ path, umid }).then((x) => this.setExeIcon(x));
+      if (path) {
+        invoke<string | null>(SeelenCommand.GetIcon, { path })
+          .then(this.setExeIcon.bind(this))
+          .catch(console.error);
       }
     }
   }
@@ -136,11 +116,6 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
       return <img src={convertFileSrc(this.state.exe_icon_path)} style={{ width }} />;
     }
 
-    if (this.isApp()) {
-      const [_, width] = this.props.text.split(StringToElement.splitter);
-      return <img src={convertFileSrc(this.state.exe_icon_path)} style={{ width }} />;
-    }
-
     if (this.isImg()) {
       const [_, width, url] = this.props.text.split(StringToElement.splitter);
       return <img src={url} style={{ width }} />;
@@ -155,7 +130,7 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
   }
 }
 
-export function ElementsFromEvaluated(content: any, iconManager: IconPackManager | undefined) {
+export function ElementsFromEvaluated(content: any) {
   let text: string = '';
 
   if (typeof content === 'string') {
@@ -170,7 +145,7 @@ export function ElementsFromEvaluated(content: any, iconManager: IconPackManager
 
   const parts: string[] = text.split(/\[|\]/g).filter((part: string) => part);
   const result: React.ReactNode[] = parts.map((part: string, index: number) => {
-    return <StringToElement key={index} text={part} iconManager={iconManager} />;
+    return <StringToElement key={index} text={part} />;
   });
 
   return result;
@@ -196,10 +171,7 @@ export function InnerItem(props: InnerItemProps) {
   const { t } = useTranslation();
   const scope = useRef(new Scope());
 
-  const [iconManager, setIconManager] = useState<IconPackManager | undefined>(undefined);
-
   useEffect(() => {
-    IconPackManager.create().then(setIconManager);
     scope.current.loadInvokeActions();
 
     scope.current.set('env', cloneDeep(env));
@@ -208,8 +180,6 @@ export function InnerItem(props: InnerItemProps) {
     scope.current.set('imgFromUrl', StringToElement.imgFromUrl);
     scope.current.set('imgFromPath', StringToElement.imgFromPath);
     scope.current.set('imgFromExe', StringToElement.imgFromExe);
-    scope.current.set('imgFromApp', StringToElement.imgFromApp);
-
     setMounted(true);
   }, []);
 
@@ -227,7 +197,7 @@ export function InnerItem(props: InnerItemProps) {
   function parseStringToElements(text: string) {
     /// backward compatibility with v1 icon object
     let expr = text.replaceAll(/icon\.(\w+)/g, 'getIcon("$1")');
-    return ElementsFromEvaluated(evaluate(expr, scope.current), iconManager);
+    return ElementsFromEvaluated(evaluate(expr, scope.current));
   }
 
   const elements = template ? parseStringToElements(template) : [];

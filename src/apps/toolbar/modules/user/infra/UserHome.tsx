@@ -79,7 +79,7 @@ function UserHome({ }: UserHomeProps) {
   const [selectedThemes, setSelectedThemes] = useState<string[] | undefined>(undefined);
   const [settings, setSettings] = useState<Settings | undefined>(undefined);
 
-  const user: User = useSelector(Selectors.user);
+  const user: User | null = useSelector(Selectors.user);
   const folders: UserHomeFolder[] = [
     { ...folderTypeToIcon('Recent'), content: useSelector(Selectors.userRecentFolder) },
     { ...folderTypeToIcon('Documents'), content: useSelector(Selectors.userDocumentsFolder) },
@@ -117,62 +117,64 @@ function UserHome({ }: UserHomeProps) {
 
   return (
     <BackgroundByLayersV2 prefix="userhome" className="userhome" onContextMenu={(e) => e.stopPropagation()}>
-      <div className="userhome-profile-container">
-        <div className="userhome-profile-picture-container">
-          <div className="userhome-profile-picture">
+      { user &&
+        <div className="userhome-profile-container">
+          <div className="userhome-profile-picture-container">
+            <div className="userhome-profile-picture">
+              <Tooltip
+                mouseLeaveDelay={0}
+                arrow={false}
+                title={t('userhome.profile.accounts')}
+                placement="bottom"
+              >
+                <img
+                  className="userhome-profile-picture-img"
+                  src={convertFileSrc(user.profilePicturePath ?? LAZY_CONSTANTS.MISSING_ICON_PATH)}
+                  onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:accounts' })}
+                />
+              </Tooltip>
+              <Tooltip
+                mouseLeaveDelay={0}
+                arrow={false}
+                title={t('userhome.profile.lock')}
+                placement="right"
+              >
+                <button className="userhome-profile-button-lock" onClick={() => invoke(SeelenCommand.Lock)}>
+                  <Icon iconName="BiLock" />
+                </button>
+              </Tooltip>
+            </div>
+          </div>
+          <div className="userhome-profile-actions">
             <Tooltip
               mouseLeaveDelay={0}
               arrow={false}
-              title={t('userhome.profile.accounts')}
-              placement="bottom"
-            >
-              <img
-                className="userhome-profile-picture-img"
-                src={convertFileSrc(user.profilePicturePath ?? LAZY_CONSTANTS.MISSING_ICON_PATH)}
-                onClick={() => invoke(SeelenCommand.OpenFile, { path: 'ms-settings:accounts' })}
-              />
+              title={t('userhome.profile.open_user_folder')}
+              placement="right">
+              <button
+                className="userhome-profile-username"
+                onClick={() => invoke(SeelenCommand.OpenFile, { path: user.profileHomePath })}
+              >
+                <Icon iconName="RiFolderUserFill" />
+                <div className="userhome-profile-username-text">{user.domain + '\\' + user.name}</div>
+              </button>
             </Tooltip>
             <Tooltip
               mouseLeaveDelay={0}
               arrow={false}
-              title={t('userhome.profile.lock')}
-              placement="right"
-            >
-              <button className="userhome-profile-button-lock" onClick={() => invoke(SeelenCommand.Lock)}>
-                <Icon iconName="BiLock" />
+              title={t('userhome.profile.open_onedrive')}
+              placement="right">
+              <button
+                className="userhome-profile-onedrive"
+                onClick={() => invoke(SeelenCommand.OpenFile, { path: user.oneDrivePath })}
+              >
+                <Icon iconName="ImOnedrive" />
+                <div className="userhome-profile-onedrive-text">{user.email}</div>
               </button>
             </Tooltip>
           </div>
         </div>
-        <div className="userhome-profile-actions">
-          <Tooltip
-            mouseLeaveDelay={0}
-            arrow={false}
-            title={t('userhome.profile.open_user_folder')}
-            placement="right">
-            <button
-              className="userhome-profile-username"
-              onClick={() => invoke(SeelenCommand.OpenFile, { path: user.profileHomePath })}
-            >
-              <Icon iconName="RiFolderUserFill" />
-              <div className="userhome-profile-username-text">{user.domain + '\\' + user.name}</div>
-            </button>
-          </Tooltip>
-          <Tooltip
-            mouseLeaveDelay={0}
-            arrow={false}
-            title={t('userhome.profile.open_onedrive')}
-            placement="right">
-            <button
-              className="userhome-profile-onedrive"
-              onClick={() => invoke(SeelenCommand.OpenFile, { path: user.oneDrivePath })}
-            >
-              <Icon iconName="ImOnedrive" />
-              <div className="userhome-profile-onedrive-text">{user.email}</div>
-            </button>
-          </Tooltip>
-        </div>
-      </div>
+      }
       { history &&
         <>
           <div className="userhome-title" onClick={() => setHistoryOpen(!historyOpen)}>

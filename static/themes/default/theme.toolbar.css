@@ -19,7 +19,8 @@
 .notifications,
 .notification-arrival,
 .calendar-container,
-.userhome {
+.userhome,
+.userhome-quicksettings {
   font-size: 0.8rem;
   font-weight: 500;
 
@@ -59,7 +60,7 @@
  animation: PopupBaseAnimation 0.2s linear forwards; 
 }
 
-.notification-close, .settings-close, .calendar-close, .tray-close, .wlan-close, .media-close, .ft-bar-item-context-menu-close, .ft-bar-context-menu-close, .userhome-close, , .userhome-quicksettings-close {
+.notification-close, .settings-close, .calendar-close, .tray-close, .wlan-close, .media-close, .ft-bar-item-context-menu-close, .ft-bar-context-menu-close, .userhome-close, .userhome-quicksettings-close {
   animation-direction: reverse;
 }
 
@@ -650,7 +651,7 @@
   }
 }
 
-.userhome, .userhome-quicksettings {
+.userhome {
   margin: var(--popups-margin);
   width: 300px;
   box-shadow: 0 0 10px 10px #0001;
@@ -660,6 +661,21 @@
   max-height: calc(99vh - var(--config-height));
 
   .userhome-bg-layer-1 {
+    background-color: var(--color-gray-50);
+    border-radius: 10px;
+  }
+}
+
+.userhome-quicksettings {
+  margin: var(--popups-margin);
+  margin-left: 1em;
+  width: 500px;
+  box-shadow: 0 0 10px 10px #0001;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  .userhome-quicksettings-bg-layer-1 {
     background-color: var(--color-gray-50);
     border-radius: 10px;
   }
@@ -1046,7 +1062,7 @@
 
       .ant-transfer-list-header-title {
         font-weight: 600;
-        text-align: center;
+        text-align: center !important;
         max-width: 200px;
       }
     }
@@ -1056,24 +1072,24 @@
       padding: 4px 8px;
     }
   }
+}
 
-  .userhome-quicksettings-themetool-tags {
+.userhome-quicksettings-themetool-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  .userhome-quicksettings-themetool-tag {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 4px;
-  
-    .userhome-quicksettings-themetool-tag {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0px 6px;
-      height: 20px;
-      border-radius: 6px;
-      background-color: var(--color-gray-100);
-      color: var(--color-gray-900);
-      font-size: 10px;
-      line-height: 10px;
-    }
+    justify-content: center;
+    padding: 0px 6px;
+    height: 20px;
+    border-radius: 6px;
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-900);
+    font-size: 10px;
+    line-height: 10px;
   }
 }
