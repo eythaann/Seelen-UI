@@ -65,8 +65,13 @@ impl Monitor {
     }
 
     pub fn rect(&self) -> Result<Rect> {
-        let info = WindowsApi::monitor_info(self.0)?;
-        Ok(Rect::from(info.monitorInfo.rcMonitor))
+        let rect = WindowsApi::monitor_info(self.0)?.monitorInfo.rcMonitor;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn index(&self) -> Result<usize> {

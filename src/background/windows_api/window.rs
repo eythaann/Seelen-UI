@@ -124,11 +124,23 @@ impl Window {
     }
 
     pub fn outer_rect(&self) -> Result<Rect> {
-        Ok(WindowsApi::get_outer_window_rect(self.hwnd())?.into())
+        let rect = WindowsApi::get_outer_window_rect(self.hwnd())?;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn inner_rect(&self) -> Result<Rect> {
-        Ok(WindowsApi::get_inner_window_rect(self.hwnd())?.into())
+        let rect = WindowsApi::get_inner_window_rect(self.hwnd())?;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn parent(&self) -> Option<Window> {
