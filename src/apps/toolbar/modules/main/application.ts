@@ -6,7 +6,7 @@ import { cloneDeep, debounce } from 'lodash';
 import { store } from '../shared/store/infra';
 
 export const SaveToolbarItems = debounce(async () => {
-  const { placeholder } = store.getState();
+  const { items: placeholder } = store.getState();
   const toBeSaved = cloneDeep(placeholder);
   const filePath = await path.join(await path.appDataDir(), 'toolbar_items.yml');
   await writeTextFile(filePath, yaml.dump(toBeSaved));

@@ -27,8 +27,6 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
 
   const { mode } = module;
 
-  console.log(rest);
-
   function onContextMenu(e: React.MouseEvent) {
     rest.onContextMenu?.(e);
     e.stopPropagation();
@@ -38,7 +36,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
     return (
       <Reorder.Item
         as="div"
-        value={module}
+        value={(module as any).__value__ || module}
         className="ft-bar-item"
         style={module.style}
         onContextMenu={onContextMenu}
@@ -62,7 +60,7 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
     <Reorder.Item
       as="div"
       id={module.id}
-      value={module}
+      value={(module as any).__value__ || module}
       className="ft-bar-group"
       onContextMenu={onContextMenu}
     >
@@ -84,9 +82,11 @@ function InnerWorkspacesModule({ module, ...rest }: Props) {
               onClick={() => invoke(SeelenCommand.SwitchWorkspace, { idx })}
             >
               <div className="ft-bar-item-content">
-                {mode === WorkspaceToolbarItemMode.Named
-                  ? `${w.name || `Workspace ${idx + 1}`}`
-                  : `${idx + 1}`}
+                <span>
+                  {mode === WorkspaceToolbarItemMode.Named
+                    ? `${w.name || `Workspace ${idx + 1}`}`
+                    : `${idx + 1}`}
+                </span>
               </div>
             </div>
           </Tooltip>

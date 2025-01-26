@@ -3,7 +3,6 @@ import * as deepl from 'deepl-node';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import * as GoogleTranslator from 'google-translate-api-x';
 import yaml from 'js-yaml';
-import _ from 'lodash';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
