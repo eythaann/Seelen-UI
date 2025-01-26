@@ -43,7 +43,7 @@ export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean): ItemTyp
       {
         key: 'add-start-module',
         label: t('taskbar_menu.start'),
-        icon: <Icon iconName="SiWindows" size={14} />,
+        icon: <Icon iconName="BsWindows" size={14} />,
         onClick() {
           store.dispatch(RootActions.addStartModule());
         },
