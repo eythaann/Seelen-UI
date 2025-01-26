@@ -4716,7 +4716,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 [[package]]
 name = "seelen-core"
 version = "1.9.7"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#cfcf5333aae045f9769411d141302f91d96dd491"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#84bac3bc95166e5bbefa58d6703affaaf2fdd45e"
 dependencies = [
  "base64 0.22.1",
  "regex",
@@ -4729,7 +4729,6 @@ dependencies = [
  "ts-rs",
  "url",
  "uuid",
- "windows 0.58.0",
 ]
 
 [[package]]
