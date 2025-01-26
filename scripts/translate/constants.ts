@@ -1,5 +1,10 @@
 import { TargetLanguageCode } from 'deepl-node';
 
+export enum Translator {
+  Google = 'Google',
+  DeepL = 'DeepL',
+}
+
 export const DeeplSupportedTargetLanguages = [
   'ar',
   'bg',
