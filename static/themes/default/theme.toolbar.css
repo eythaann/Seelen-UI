@@ -110,7 +110,7 @@
     transition-timing-function: ease-out;
 
     &:not(:last-child) {
-      margin-right: 5px;
+      margin-right: 12px;
     }
 
     &.workspace-dot-active {
