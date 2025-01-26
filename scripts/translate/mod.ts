@@ -3,10 +3,11 @@ import * as deepl from 'deepl-node';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
 import * as GoogleTranslator from 'google-translate-api-x';
 import yaml from 'js-yaml';
+import _ from 'lodash';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-import { DeeplSupportedTargetLanguages } from './constants';
+import { DeeplSupportedTargetLanguages, Translator } from './constants';
 
 const API_KEY = process.env.DEEPL_API_KEY;
 
@@ -34,6 +35,17 @@ const argv = await yargs(hideBin(process.argv))
 const deleteKeys = new Set(argv.delete || []);
 const keysToUpdate = new Set(argv.update || []);
 
+function deepObjectSize(obj: any, size = 0) {
+  for (const key in obj) {
+    if (typeof obj[key] === 'object') {
+      size = deepObjectSize(obj[key], size);
+    } else {
+      size += 1;
+    }
+  }
+  return size;
+}
+
 function deepSortObject<T>(obj: T): T {
   if (Array.isArray(obj)) {
     // if it's an array, recursively sort its elements
@@ -50,16 +62,20 @@ function deepSortObject<T>(obj: T): T {
   return obj;
 }
 
-async function translateObject(base: object, lang: string, mut_obj: any) {
+async function translateObject(base: object, lang: string, mut_obj: any, translator: Translator) {
   for (const [key, value] of Object.entries(base)) {
     if (typeof value === 'object') {
       mut_obj[key] ??= {};
-      await translateObject(value, lang, mut_obj[key]);
+      await translateObject(value, lang, mut_obj[key], translator);
     }
     // avoid modifying already translated values
     if (typeof value === 'string' && !mut_obj[key]) {
-      if (DeeplSupportedTargetLanguages.includes(lang as deepl.TargetLanguageCode)) {
-        const res = await DeeplTranslator.translateText(value, 'en', lang as deepl.TargetLanguageCode);
+      if (translator === Translator.DeepL) {
+        const res = await DeeplTranslator.translateText(
+          value,
+          'en',
+          lang as deepl.TargetLanguageCode,
+        );
         mut_obj[key] = res.text;
       } else {
         const res = await GoogleTranslator.translate(value, {
@@ -98,16 +114,23 @@ function deleteDeepKey(obj: any, path: string[]) {
   delete temp[finalKey];
 }
 
-const toTranslate = SupportedLanguages.map((lang) => lang.value).filter((lang) => lang !== 'en');
+const toTranslate = SupportedLanguages.filter((lang) => lang.value !== 'en');
 
 async function completeTranslationsFor(localesDir: string) {
-  const en = deepSortObject(yaml.load(readFileSync(`${localesDir}/en.yml`, 'utf8')) as object);
+  const enPath = `${localesDir}/en.yml`;
+  const en = deepSortObject(yaml.load(readFileSync(enPath, 'utf8')) as object);
   deleteKeysDeep(en, Array.from(deleteKeys));
-  writeFileSync(`${localesDir}/en.yml`, yaml.dump(en));
+  writeFileSync(enPath, yaml.dump(en)); // overwrite sorted
 
-  for (const lang of toTranslate) {
-    const filePath = `${localesDir}/${lang}.yml`;
-    console.log(`Processing: ${filePath}`);
+  console.log(`* ${enPath} (total: ${deepObjectSize(en)} messages)`);
+
+  for (const item of toTranslate) {
+    const filePath = `${localesDir}/${item.value}.yml`;
+    const translator = DeeplSupportedTargetLanguages.includes(item.value as deepl.TargetLanguageCode)
+      ? Translator.DeepL
+      : Translator.Google;
+
+    console.log(`  - ${filePath} (${item.enLabel}) - ${translator}`);
 
     let translation: any = {};
     if (existsSync(filePath)) {
@@ -116,10 +139,11 @@ async function completeTranslationsFor(localesDir: string) {
 
     deleteKeysDeep(translation, Array.from(deleteKeys));
     deleteKeysDeep(translation, Array.from(keysToUpdate));
-    await translateObject(en, lang, translation);
+    await translateObject(en, item.value, translation, translator);
 
     writeFileSync(filePath, yaml.dump(deepSortObject(translation)));
   }
+  console.log(); // newline on finish
 }
 
 await completeTranslationsFor('src/apps/toolbar/i18n/translations');
