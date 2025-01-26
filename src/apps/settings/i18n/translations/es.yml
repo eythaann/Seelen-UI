@@ -1,109 +1,108 @@
 app_launcher:
-  enable: Habilitar el lanzador de aplicaciones
+  enable: Activar App Launcher
   launch_on:
-    mouse_over: Pasa el ratón por encima
-    primary: Primario
+    mouse_over: Pasar el ratón por encima
+    primary: Principal
   monitor: Monitor para mostrar
   runners:
-    cmd: Dominio
-    explorer: Correr
-    label: Corredoras
+    cmd: Comando
+    explorer: Ejecutar
+    label: Corredores
 apps_configurations:
   app:
-    bindings: Vinculación (nota, se requieren ambas opciones)
+    bindings: Encuadernación (ambas opciones son obligatorias)
     category: Categoría
-    category_placeholder: Ninguna
+    category_placeholder: Ninguno
     monitor: Monitor
     monitor_placeholder: Ninguno
     name: Nombre
-    ok_create: Crear
-    ok_edit: Actualizar
+    ok_create: Cree
+    ok_edit: Actualización
     ok_readonly: Editar como nuevo
     options:
-      float: Flotar
-      force: Forzar gestión
-      hidden: Esconderse del muelle/barra de tareas
-      pinned: Fijado
+      float: Flotador
+      force: Forzar la gestión
+      hidden: Ocultar del dock/barra de tareas
+      pinned: Pinned
       unmanage: No gestionar
     options_label: Opciones adicionales
-    title_create: Creando {{name}}
-    title_edit: Edición {{nombre}}
-    title_readonly: Viendo {{name}}
-    weg_options_label: Opciones de barra de muelle/tareas
-    wm_options_label: Opciones de administrador de ventanas
+    title_create: Crear {{nombre}}
+    title_edit: Editar {{nombre}}
+    title_readonly: Ver {{nombre}}
+    weg_options_label: Opciones del muelle/barra de tareas
+    wm_options_label: Opciones del gestor de ventanas
     workspace: Espacio de trabajo
     workspace_placeholder: Ninguno
   bundled_msg: >-
-    Estas configuraciones incluidas no son editables y están diseñadas para
-    proporcionarte la mejor experiencia sin personalización. Configuran
-    automáticamente las aplicaciones más comunes para ti.
-  bundled_title: Configuración de la aplicación incluida con Seelen
-  confirm_delete: ¿Estás seguro de que deseas eliminar esta configuración?
-  confirm_delete_title: Confirmar eliminación
-  delete: Eliminar
+    Estas configuraciones no son editables y están diseñadas para ofrecerle la
+    mejor experiencia sin necesidad de personalización. Configuran
+    automáticamente las aplicaciones más comunes.
+  bundled_title: App Config incluido con Seelen
+  confirm_delete: ¿Está seguro de que desea eliminar esta configuración?
+  confirm_delete_title: Confirmar Borrar
+  delete: Borrar
   export: Exportar
   extra_info: >-
-    La interfaz de usuario de Seelen usa solo un identificador por aplicación
-    (primera coincidencia encontrada), por lo que el orden en cómo se
-    especifican es importante; se dará prioridad a los últimos agregados, como
-    se indica en la tabla, que de forma predeterminada está ordenada de la más
-    reciente a la más antigua.
+    Seelen UI utiliza sólo un identificador por aplicación (primera coincidencia
+    encontrada) por lo que el orden en que se especifican es importante, el
+    último añadido tendrá prioridad, como nota la tabla se ordena por defecto de
+    más reciente a más antiguo.
   identifier:
-    add_block: Agregar bloque
-    and: Y (AND)
+    add_block: Añadir bloque
+    and: 'Y'
     id: Identificador
     kind: Identificar por
-    matching_strategy: Estrategia de coincidencia
+    matching_strategy: Estrategia de emparejamiento
     matching_strategy_option:
       contains: Contiene
       ends_with: Termina con
-      equals: igual
-      regex: expresión regular
-      starts_with: comienza con
+      equals: Es igual a
+      regex: Expresión regular
+      starts_with: Empieza por
     negation: Negar coincidencia
-    or: O (OR)
-    remove: Eliminar bloque
+    or: O
+    remove: Borrar bloque
     type:
       class: Clase
       exe: Exe
-      path: Camino
+      path: Ruta
       title: Título
   import: Importar
   new: Nuevo
-  search: Buscar
+  search: Buscar en
   swap: Intercambiar
 cancel: Cancelar
-close: Cerca
-delete: Eliminar
+close: Cerrar
+delete: Borrar
 devtools:
   app_folders: Carpetas de aplicaciones
   custom_config_file: Cargar archivo de configuración personalizado
   data_folder: Carpeta de datos
-  enable: Habilitar herramientas de desarrollador
+  enable: Activar las herramientas para desarrolladores
   install_folder: Carpeta de instalación
-  load: Cargar
+  load: Carga
   settings_file: Archivo de configuración
-  simulate_fullscreen: Simular evento en pantalla completa
+  simulate_fullscreen: Simular evento de pantalla completa
 extras:
-  discord: Discord
-  exit: Salir/Salir
+  discord: Discordia
+  exit: Salir
   github: GitHub
   links: Enlaces oficiales
-  relaunch: Reiniciar
+  relaunch: Relanzamiento
   version: Versión
 general:
-  accent_color: Acentuar el color
+  accent_color: Color de acento
   date_format: Formato de fecha
   icon_pack:
     available: Paquetes de iconos disponibles
     label: Paquetes de iconos
-    selected: Paquetes de iconos activos
+    selected: Packs de iconos activos
   language: Idioma
   resource:
     author: Autor
     description: Descripción
     tags: Etiquetas
-  startup: ¿Ejecutar al inicio?
+  startup: ¿Se ejecuta al arrancar?
   theme:
     available: Temas disponibles
     label: Temas
@@ -114,199 +113,199 @@ header:
   labels:
     developer: Desarrollador
     general: General
-    home: Hogar
+    home: Inicio
     info: Información
-    mods: Complementos y widgets
+    mods: Plugins y widgets
     monitors: Monitores
-    seelen_bar: Barra elegante
+    seelen_bar: Barra de herramientas Fancy
     seelen_rofi: Lanzador de aplicaciones
-    seelen_wall: Gerente de fondo de pantalla
-    seelen_weg: Dock/Barra de tareas
+    seelen_wall: Gestor de fondos de pantalla
+    seelen_weg: Muelle/Barra de Muelle
     seelen_wm: Gestor de ventanas
     shortcuts: Atajos
     specific_apps: Aplicaciones específicas
     virtual_desk: Escritorios virtuales
 inherit: Heredar
-inProgress: En progreso...
-insert: Insertar
+inProgress: En curso...
+insert: Inserte
 loading: Cargando...
-miscellaneous: Misceláneas
+miscellaneous: Varios
 mods:
-  plugins: Complementos
+  plugins: Plugins
   target: Objetivo
   widgets: Widgets
 monitors_configurations:
-  label: Monitor {{índice}}
+  label: Monitor {{index}}
 more: Más
 open: Abrir
-quit: Salir
+quit: Deje de
 remove: Eliminar
 save: Guardar
 save_and_restart: Guardar y reiniciar
 shortcuts:
-  enable: Habilitar atajos integrados (ahk)
+  enable: Activar accesos directos integrados (ahk)
   enable_tooltip: >-
-    Desactiva si vas a implementar tus propios atajos usando la API de Seelen
-    Core
+    Desactivar si va a implementar sus propios accesos directos utilizando el
+    Seelen Core Api
   labels:
-    decrease_height: Disminuir altura
-    decrease_width: Disminuir ancho
-    focus_bottom: Enfocar abajo
-    focus_latest: Enfocar último
-    focus_left: Enfocar izquierda
-    focus_right: Enfocar derecha
-    focus_top: Enfocar arriba
-    increase_height: Aumentar altura
-    increase_width: Aumentar ancho
-    misc_open_settings: Abrir configuración
-    misc_toggle_lock_tracing: Rastreo de bloqueo de al revés (registros)
-    misc_toggle_win_event_tracing: Rastreo de eventos para alternar (registros)
-    move_to_workspace_0: Mover al espacio de trabajo 0
-    move_to_workspace_1: Mover al espacio de trabajo 1
-    move_to_workspace_2: Mover al espacio de trabajo 2
-    move_to_workspace_3: Mover al espacio de trabajo 3
-    move_to_workspace_4: Mover al espacio de trabajo 4
-    move_to_workspace_5: Mover al espacio de trabajo 5
-    move_to_workspace_6: Mover al espacio de trabajo 6
-    move_to_workspace_7: Mover al espacio de trabajo 7
-    move_to_workspace_8: Mover al espacio de trabajo 8
-    move_to_workspace_9: Mover al espacio de trabajo 9
-    reserve_bottom: Reservar abajo
-    reserve_float: Reservar flotar
-    reserve_left: Reservar izquierda
-    reserve_right: Reservar derecha
-    reserve_stack: Reservar pila
-    reserve_top: Reservar arriba
+    decrease_height: Disminuir la altura
+    decrease_width: Disminuir Anchura
+    focus_bottom: Fondo Focus
+    focus_latest: Enfoque Lo último
+    focus_left: Focus Izquierda
+    focus_right: Enfoque a la derecha
+    focus_top: Focus Top
+    increase_height: Aumentar la altura
+    increase_width: Aumentar la anchura
+    misc_open_settings: Abrir la configuración
+    misc_toggle_lock_tracing: Activar el seguimiento de bloqueos (registros)
+    misc_toggle_win_event_tracing: Activar el seguimiento de eventos de Win (registros)
+    move_to_workspace_0: Desplazarse al espacio de trabajo 1
+    move_to_workspace_1: Pasar al espacio de trabajo 2
+    move_to_workspace_2: Pasar al espacio de trabajo 3
+    move_to_workspace_3: Pasar al espacio de trabajo 4
+    move_to_workspace_4: Pasar al espacio de trabajo 5
+    move_to_workspace_5: Pasar al espacio de trabajo 6
+    move_to_workspace_6: Pasar al espacio de trabajo 7
+    move_to_workspace_7: Pasar al espacio de trabajo 8
+    move_to_workspace_8: Pasar al espacio de trabajo 9
+    move_to_workspace_9: Pasar al espacio de trabajo 10
+    reserve_bottom: Fondo de reserva
+    reserve_float: Flotador de reserva
+    reserve_left: Reserva izquierda
+    reserve_right: Derecho de reserva
+    reserve_stack: Pila de reserva
+    reserve_top: Reserva Top
     restore_sizes: Restaurar tamaños
-    send_to_workspace_0: Enviar al espacio de trabajo 0
-    send_to_workspace_1: Enviar al espacio de trabajo 1
-    send_to_workspace_2: Enviar al espacio de trabajo 2
-    send_to_workspace_3: Enviar al espacio de trabajo 3
-    send_to_workspace_4: Enviar al espacio de trabajo 4
-    send_to_workspace_5: Enviar al espacio de trabajo 5
-    send_to_workspace_6: Enviar al espacio de trabajo 6
-    send_to_workspace_7: Enviar al espacio de trabajo 7
-    send_to_workspace_8: Enviar al espacio de trabajo 8
-    send_to_workspace_9: Enviar al espacio de trabajo 9
-    start_weg_app_0: Enfoque o inicie la aplicación en la posición 10 de la barra de tareas
-    start_weg_app_1: Enfoque o inicie la aplicación en la posición 1 de la barra de tareas
-    start_weg_app_2: Enfoque o inicie la aplicación en la posición 2 de la barra de tareas
-    start_weg_app_3: Enfoque o inicie la aplicación en la posición 3 de la barra de tareas
-    start_weg_app_4: Enfoque o inicie la aplicación en la posición 4 de la barra de tareas
-    start_weg_app_5: Enfoque o inicie la aplicación en la posición 5 de la barra de tareas
-    start_weg_app_6: Enfoque o inicie la aplicación en la posición 6 de la barra de tareas
-    start_weg_app_7: Enfoque o inicie la aplicación en la posición 7 de la barra de tareas
-    start_weg_app_8: Enfoque o inicie la aplicación en la posición 8 de la barra de tareas
-    start_weg_app_9: Enfoque o inicie la aplicación en la posición 9 de la barra de tareas
+    send_to_workspace_0: Enviar al espacio de trabajo 1
+    send_to_workspace_1: Enviar a Espacio de trabajo 2
+    send_to_workspace_2: Enviar a Espacio de trabajo 3
+    send_to_workspace_3: Enviar a Espacio de trabajo 4
+    send_to_workspace_4: Enviar a Espacio de trabajo 5
+    send_to_workspace_5: Enviar a Espacio de trabajo 6
+    send_to_workspace_6: Enviar a Espacio de trabajo 7
+    send_to_workspace_7: Enviar a Espacio de trabajo 8
+    send_to_workspace_8: Enviar al espacio de trabajo 9
+    send_to_workspace_9: Enviar a Espacio de trabajo 10
+    start_weg_app_0: Enfocar o iniciar una aplicación en la posición 10 de la barra de tareas
+    start_weg_app_1: Enfocar o iniciar una aplicación en la posición 1 de la barra de tareas
+    start_weg_app_2: Enfocar o iniciar una aplicación en la posición 2 de la barra de tareas
+    start_weg_app_3: Enfocar o iniciar una aplicación en la posición 3 de la barra de tareas
+    start_weg_app_4: Enfocar o iniciar una aplicación en la posición 4 de la barra de tareas
+    start_weg_app_5: Enfocar o iniciar una aplicación en la posición 5 de la barra de tareas
+    start_weg_app_6: Enfocar o iniciar una aplicación en la posición 6 de la barra de tareas
+    start_weg_app_7: Enfocar o iniciar una aplicación en la posición 7 de la barra de tareas
+    start_weg_app_8: Enfocar o iniciar una aplicación en la posición 8 de la barra de tareas
+    start_weg_app_9: Enfocar o iniciar una aplicación en la posición 9 de la barra de tareas
     switch_workspace_0: Cambiar al espacio de trabajo 1
     switch_workspace_1: Cambiar al espacio de trabajo 2
-    switch_workspace_2: Cambiar al espacio de trabajo 2
-    switch_workspace_3: Cambiar al espacio de trabajo 3
-    switch_workspace_4: Cambiar al espacio de trabajo 4
-    switch_workspace_5: Cambiar al espacio de trabajo 5
-    switch_workspace_6: Cambiar al espacio de trabajo 6
-    switch_workspace_7: Cambiar al espacio de trabajo 7
-    switch_workspace_8: Cambiar al espacio de trabajo 8
-    switch_workspace_9: Cambiar al espacio de trabajo 9
-    toggle_launcher: Palanca
-  readonly_tooltip: Este es un atajo de solo lectura
-  reset: Reiniciar a los valores predeterminados
+    switch_workspace_2: Cambiar al espacio de trabajo 3
+    switch_workspace_3: Cambiar al espacio de trabajo 4
+    switch_workspace_4: Cambiar al espacio de trabajo 5
+    switch_workspace_5: Cambiar al espacio de trabajo 6
+    switch_workspace_6: Cambiar al espacio de trabajo 7
+    switch_workspace_7: Cambiar al espacio de trabajo 8
+    switch_workspace_8: Cambiar al espacio de trabajo 9
+    switch_workspace_9: Cambiar al espacio de trabajo 10
+    toggle_launcher: Toggle
+  readonly_tooltip: Se trata de un acceso directo de sólo lectura
+  reset: Restablecer valores por defecto
 sides:
-  bottom: Abajo
+  bottom: Fondo
   left: Izquierda
   right: Derecha
-  top: Arriba
+  top: Top
 start:
   message: >-
-    ¡Bienvenido a Seelen UI, el entorno de escritorio definitivo con un gestor
-    de ventanas en mosaico incorporado para mejorar tu experiencia en Windows !
-    Explora una nueva era de eficiencia y multitarea con nuestra interfaz
-    intuitiva y funciones avanzadas.
-  message_accent: ¡Optimiza tu productividad con estilo!
-  title: ¡Bienvenido!
+    Bienvenido a Seelen UI, el Entorno de Escritorio definitivo con un gestor de
+    ventanas en mosaico incorporado para mejorar tu experiencia Windows. Explora
+    una nueva era de eficiencia y multitarea con nuestra interfaz intuitiva y
+    funciones avanzadas.
+  message_accent: Optimice su productividad con estilo
+  title: Bienvenido.
 toolbar:
-  auto_hide: Escondite automático
-  delay_to_hide: Retraso para esconderse
+  auto_hide: Auto Ocultar
+  delay_to_hide: Retrasar para ocultar
   delay_to_show: Retraso para mostrar
-  enable: Habilitar barra elegante
+  enable: Activar la barra de herramientas Fancy
   height: Altura
   hide_mode:
     always: Siempre
     never: Nunca
-    on_overlap: En superposición
+    on_overlap: Sobre el solapamiento
   label: Barra de herramientas
   placeholder: {}
   use_multiple_monitor_overlap_logic: >-
-    Utilice una lógica de visualización específica en lugar de una lógica de
+    Utilizar una lógica específica para cada pantalla en lugar de una lógica de
     enfoque único
 update:
-  available: Actualización disponible!
-  channel: Actualizar el canal
-  downloading: Descarga ...
+  available: Actualización disponible
+  channel: Canal de actualización
+  downloading: Descargando...
 vd:
   disabled_windows_version: >-
-    La estrategia de escritorio virtual nativa no está disponible para su
+    La estrategia de escritorio virtual nativo no está disponible para su
     versión de Windows.
   strategy:
     label: Estrategia de escritorio virtual
-    native: Nativa
+    native: Nativo
     seelen: Seelen
 wall:
   backgrounds: Fondos de pantalla
-  enable: Habilitar gerente de fondo de pantalla
+  enable: Activar el gestor de fondos de pantalla
   hours: horas
-  interval: Cambiar papel tapiz cada
+  interval: Cambia el fondo de pantalla cada
   minutes: minutos
   no_background: >-
-    Presentación de diapositivas vacías, utilizando el fondo del tema en su
+    Presentación de diapositivas vacía, utilizando el fondo del tema en su
     lugar.
-  random: Aleatorizar la presentación de diapositivas
-  seconds: artículos de segunda clase
+  random: Pase de diapositivas aleatorio
+  seconds: segundos
 weg:
-  auto_hide: Ocultar automáticamente
-  delay_to_hide: Retraso para esconderse
+  auto_hide: Auto Ocultar
+  delay_to_hide: Retrasar para ocultar
   delay_to_show: Retraso para mostrar
   dock_side: Posición
-  enable: Habilitar dock/barra de tareas
-  gap: Espacio
+  enable: Activar Dock/Barra de tareas
+  gap: Brecha
   hide_mode:
     always: Siempre
     never: Nunca
-    on_overlap: En superposición
+    on_overlap: Sobre el solapamiento
   items:
-    gap: Espacio entre elementos
-    label: Elementos
+    gap: Espacio entre artículos
+    label: Artículos
     pinned_visibility:
       always: Siempre
-      label: Visibilidad de elementos fijados
+      label: Visibilidad de los elementos anclados
       when_primary: Cuando el monitor es primario
-    size: Tamaño del elemento
+    size: Tamaño del artículo
     temporal_visibility:
-      all: Todo
-      label: Visibilidad de elementos no fijados
+      all: Todos
+      label: Visibilidad de los elementos no fijados
       on_monitor: En monitor
     visible_separators: Separadores visibles
-    zoom_size: Tamaño ampliado (usado para temas)
-  label: Dock/Barra de tareas
+    zoom_size: Tamaño ampliado (utilizado para temas)
+  label: Muelle/Barra de Muelle
   margin: Margen
   mode:
-    full_width: Ancho de pantalla completa
-    min_content: Tan pequeño como puede ser
-  padding: Relleno
+    full_width: Ancho de pantalla completo
+    min_content: Más pequeño imposible
+  padding: Acolchado
   use_multiple_monitor_overlap_logic: >-
-    Utilice una lógica de visualización específica en lugar de una lógica de
+    Utilizar una lógica específica para cada pantalla en lugar de una lógica de
     enfoque único
-  width: Ancho
+  width: Anchura
 wm:
   author: Autor
   border:
-    enable: Habilitar borde de ventana
+    enable: Activar el borde de la ventana
     offset: Desplazamiento del borde
-    width: Ancho del borde
+    width: Anchura del borde
   description: Descripción
-  enable: Habilitar el administrador de la ventana de mosaico
-  layout: Distribución
-  resize_delta: Delta de redimensionamiento (%)
+  enable: Activar el gestor de ventanas en mosaico
+  layout: Diseño
+  resize_delta: Redimensionar Delta (%)
   space_between_containers: Espacio entre contenedores
-  workspace_offset: Desplazamiento de espacios de trabajo (Márgenes)
-  workspace_padding: Relleno de espacios de trabajo
+  workspace_offset: Desplazamiento de los espacios de trabajo (márgenes)
+  workspace_padding: Espacios de trabajo Acolchado

@@ -1,9 +1,21 @@
 import { SupportedLanguages } from '@seelen-ui/lib';
+import * as deepl from 'deepl-node';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import { translate } from 'google-translate-api-x';
+import * as GoogleTranslator from 'google-translate-api-x';
 import yaml from 'js-yaml';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+
+import { DeeplSupportedTargetLanguages } from './constants';
+
+const API_KEY = process.env.DEEPL_API_KEY;
+
+if (!API_KEY) {
+  console.error('Missing DEEPL_API_KEY');
+  process.exit(1);
+}
+
+const DeeplTranslator = new deepl.Translator(API_KEY);
 
 const argv = await yargs(hideBin(process.argv))
   .option('delete', {
@@ -38,17 +50,19 @@ function deepSortObject<T>(obj: T): T {
   return obj;
 }
 
-async function translateObject(base: any, lang: string, mut_obj: any) {
-  await Promise.all(
-    Object.entries(base).map(async ([key, value]) => {
-      if (typeof value === 'object') {
-        mut_obj[key] ??= {};
-        await translateObject(value, lang, mut_obj[key]);
-      }
-
-      // avoid modifying already translated values
-      if (typeof value === 'string' && !mut_obj[key]) {
-        const res = await translate(value, {
+async function translateObject(base: object, lang: string, mut_obj: any) {
+  for (const [key, value] of Object.entries(base)) {
+    if (typeof value === 'object') {
+      mut_obj[key] ??= {};
+      await translateObject(value, lang, mut_obj[key]);
+    }
+    // avoid modifying already translated values
+    if (typeof value === 'string' && !mut_obj[key]) {
+      if (DeeplSupportedTargetLanguages.includes(lang as deepl.TargetLanguageCode)) {
+        const res = await DeeplTranslator.translateText(value, 'en', lang as deepl.TargetLanguageCode);
+        mut_obj[key] = res.text;
+      } else {
+        const res = await GoogleTranslator.translate(value, {
           from: 'en',
           to: lang,
           forceTo: true,
@@ -56,8 +70,8 @@ async function translateObject(base: any, lang: string, mut_obj: any) {
         });
         mut_obj[key] = res.text;
       }
-    }),
-  );
+    }
+  }
 }
 
 function deleteKeysDeep(obj: any, keys: string[]) {
@@ -87,7 +101,7 @@ function deleteDeepKey(obj: any, path: string[]) {
 const toTranslate = SupportedLanguages.map((lang) => lang.value).filter((lang) => lang !== 'en');
 
 async function completeTranslationsFor(localesDir: string) {
-  const en = deepSortObject(yaml.load(readFileSync(`${localesDir}/en.yml`, 'utf8')));
+  const en = deepSortObject(yaml.load(readFileSync(`${localesDir}/en.yml`, 'utf8')) as object);
   deleteKeysDeep(en, Array.from(deleteKeys));
   writeFileSync(`${localesDir}/en.yml`, yaml.dump(en));
 
