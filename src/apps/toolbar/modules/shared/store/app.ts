@@ -50,6 +50,7 @@ const initialState: RootState = {
   mediaInputs: [],
   notifications: [],
   history: [],
+  historyOnMonitor: [],
   colors: UIColors.default().inner,
 };
 

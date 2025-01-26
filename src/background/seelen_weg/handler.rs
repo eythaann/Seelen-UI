@@ -1,4 +1,4 @@
-use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
+use std::{ffi::OsStr, path::PathBuf};
 
 use image::ImageFormat;
 use seelen_core::state::{PinnedWegItemData, WegItem, WegItems};
@@ -7,7 +7,7 @@ use tauri_plugin_shell::ShellExt;
 
 use crate::{
     error_handler::Result,
-    hook::LAST_ACTIVE_NOT_SEELEN,
+    modules::application_history::APPLICATION_HISTORY,
     seelen::get_app_handle,
     seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     state::application::FULL_STATE,
@@ -102,9 +102,14 @@ pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
         return Ok(());
     }
 
-    let last_active = LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire);
-    if last_active == window.address() {
-        WindowsApi::show_window_async(window.hwnd(), SW_MINIMIZE)?;
+    let history = trace_lock!(APPLICATION_HISTORY);
+    let last_active = history.last_not_seelen_active().ok();
+    if let Some(last_active) = last_active {
+        if last_active.application.hwnd == window.address() {
+            WindowsApi::show_window_async(window.hwnd(), SW_MINIMIZE)?;
+        } else {
+            WindowsApi::set_foreground(window.hwnd())?;
+        }
     } else {
         WindowsApi::set_foreground(window.hwnd())?;
     }

@@ -6,6 +6,7 @@ use crate::{
     error_handler::Result,
     log_error,
     modules::{
+        application_history::infrastructure::register_application_history_events,
         media::infrastructure::{register_media_events, release_media_events},
         monitors::infrastructure::register_monitor_webview_events,
         network::infrastructure::register_network_events,
@@ -46,6 +47,7 @@ pub fn declare_system_events_handlers() -> Result<()> {
         register_notification_events();
     });
 
+    register_application_history_events();
     register_user_events();
     register_monitor_webview_events();
     register_colors_events();

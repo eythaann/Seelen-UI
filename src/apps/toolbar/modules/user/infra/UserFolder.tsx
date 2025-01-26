@@ -31,10 +31,10 @@ export function UserFolder({ folderProps, setCategoryOpen, categoryOpen }: UserF
           <FilePreview file={item} key={index} />
         ))}
         { content.length > 5 &&
-          <button className="userhome-folder-viewcount-extender" onClick={(e) => {
+          <button className={cx('userhome-folder-viewcount-extender', { 'userhome-folder-viewcount-extender-less': content.length > folderShowCount })} onClick={(e) => {
             setFolderShowCount(content.length > folderShowCount ? folderShowCount * 2 : 5);
             e.stopPropagation();
-          }}>{content.length > folderShowCount ? t(`userhome.${category.toLowerCase()}.more-items`) : t(`userhome.${category.toLowerCase()}.reduce-items`)}</button>
+          }}>{content.length > folderShowCount ? t('userhome.folders.more_items') : t('userhome.folders.reduce_items')}</button>
         }
       </ul>
     </li>

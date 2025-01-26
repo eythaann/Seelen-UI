@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import {
+  ApplicationHistory,
   DocumentsFolder,
   DownloadsFolder,
-  IconPackManager,
   invoke,
   MusicFolder,
   PicturesFolder,
@@ -18,10 +18,7 @@ import {
 import { FancyToolbarSettings, Placeholder } from '@seelen-ui/lib/types';
 import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { getCurrentWebviewWindow } from '@tauri-apps/api/webviewWindow';
-import { debounce, throttle } from 'lodash';
-import moment from 'moment';
-
-import { LAZY_CONSTANTS } from '../utils/infra';
+import { throttle } from 'lodash';
 
 import { RootActions, RootSlice } from './app';
 
@@ -38,7 +35,6 @@ import {
   WorkspaceId,
 } from './domain';
 
-import { FocusedApp } from '../../../../shared/interfaces/common';
 import { StartThemingTool } from '../../../../shared/styles';
 import i18n from '../../../i18n';
 
@@ -64,24 +60,6 @@ export async function registerStoreEvents() {
 
   await view.listen<boolean>('set-auto-hide', (event) => {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
-  });
-
-  const onFocusChanged = debounce((app: FocusedApp) => {
-    const state = store.getState();
-    if (app.exe && state.history[0]?.exe != app.exe && !app.exe.endsWith('seelen-ui.exe')) {
-      IconPackManager.extractIcon({ path: app.exe })
-        .then((iconPath) => store.dispatch(RootActions.setHistory(
-          [ ...state.history, { ...app, date: moment(new Date()), iconPath: iconPath ?? LAZY_CONSTANTS.MISSING_ICON_PATH }]
-            .sort((a, b) => b.date.diff(a.date, 'ms')))))
-        .catch(console.error);
-    }
-    store.dispatch(RootActions.setFocused(app));
-  }, 200);
-  await listenGlobal<FocusedApp>(SeelenEvent.GlobalFocusChanged, (e) => {
-    onFocusChanged(e.payload);
-    if (e.payload.name != 'Seelen UI') {
-      onFocusChanged.flush();
-    }
   });
 
   await Settings.onChange(loadStore);
@@ -150,25 +128,16 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setPlugins(list.forCurrentWidget()));
   });
 
-  store.dispatch(RootActions.setUser((await UserDetails.getAsync()).user));
+  ApplicationHistory.onFocusChanged((app) => store.dispatch(RootActions.setFocused(app.payload)));
+  ApplicationHistory.onChange((history) => store.dispatch(RootActions.setHistory(history.all())));
+  ApplicationHistory.onCurrentMonitorHistoryChanged((history) => store.dispatch(RootActions.setHistoryOnMonitor(history.all())));
+
   UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
-
-  store.dispatch(RootActions.setUserRecentFolder((await RecentFolder.getAsync()).all()));
   RecentFolder.onChange((details) => store.dispatch(RootActions.setUserRecentFolder(details.all())));
-
-  store.dispatch(RootActions.setUserDocumentsFolder((await DocumentsFolder.getAsync()).all()));
   DocumentsFolder.onChange((details) => store.dispatch(RootActions.setUserDocumentsFolder(details.all())));
-
-  store.dispatch(RootActions.setUserDownloadsFolder((await DownloadsFolder.getAsync()).all()));
   DownloadsFolder.onChange((details) => store.dispatch(RootActions.setUserDownloadsFolder(details.all())));
-
-  store.dispatch(RootActions.setUserPicturesFolder((await PicturesFolder.getAsync()).all()));
   PicturesFolder.onChange((details) => store.dispatch(RootActions.setUserPicturesFolder(details.all())));
-
-  store.dispatch(RootActions.setUserVideosFolder((await VideosFolder.getAsync()).all()));
   VideosFolder.onChange((details) => store.dispatch(RootActions.setUserVideosFolder(details.all())));
-
-  store.dispatch(RootActions.setUserMusicFolder((await MusicFolder.getAsync()).all()));
   MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
 
   await initUIColors();
@@ -187,6 +156,19 @@ export async function loadStore() {
   store.dispatch(
     RootActions.setEnv((await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>),
   );
+
+  store.dispatch(RootActions.setHistory((await ApplicationHistory.getAsync()).all()));
+  store.dispatch(RootActions.setHistoryOnMonitor((await ApplicationHistory.getCurrentMonitorHistoryAsync()).all()));
+
+  store.dispatch(async () => {
+    store.dispatch(RootActions.setUser((await UserDetails.getAsync()).user));
+    store.dispatch(RootActions.setUserRecentFolder((await RecentFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserDocumentsFolder((await DocumentsFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserDownloadsFolder((await DownloadsFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserPicturesFolder((await PicturesFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserVideosFolder((await VideosFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserMusicFolder((await MusicFolder.getAsync()).all()));
+  });
 
   let placeholder = await invoke(SeelenCommand.StateGetToolbarItems) as Placeholder;
   store.dispatch(RootActions.setPlaceholder(placeholder));

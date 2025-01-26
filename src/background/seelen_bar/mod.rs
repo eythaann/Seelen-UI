@@ -135,6 +135,14 @@ impl FancyToolbar {
     pub const TITLE: &'static str = "Seelen Fancy Toolbar";
     pub const TARGET: &'static str = "@seelen/fancy-toolbar";
 
+    pub fn get_label(monitor_id: &str) -> String {
+        base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(format!(
+            "{}?monitor={}",
+            Self::TARGET,
+            monitor_id
+        ))
+    }
+
     /// Work area no works fine on multiple monitors
     /// so we use this functions that only takes the toolbar in account
     pub fn get_work_area_by_monitor(monitor: HMONITOR) -> Result<RECT> {

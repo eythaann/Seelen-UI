@@ -1,3 +1,4 @@
+pub mod application_history;
 pub mod cli;
 pub mod input;
 pub mod language;
