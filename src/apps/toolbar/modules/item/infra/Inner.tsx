@@ -61,7 +61,7 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
     return StringToElement.imgFromUrl(convertFileSrc(path), size);
   }
 
-  static imgFromExe(exe_path: string, umid: string, size = 16) {
+  static imgFromExe(exe_path: string, umid?: string, size = 16) {
     if (!exe_path) {
       return '';
     }
