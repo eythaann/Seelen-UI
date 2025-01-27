@@ -1,5 +1,8 @@
 app_launcher:
   enable: Омогући бацач апликација
+  launch_on:
+    mouse_over: Пређите мишем
+    primary: Примарни
   monitor: Монитор за приказивање
   runners:
     cmd: Командант
@@ -50,9 +53,20 @@ apps_configurations:
     id: Идентификатор
     kind: Идентификовати
     matching_strategy: Стратегија подударања
+    matching_strategy_option:
+      contains: Садржи
+      ends_with: Завршава са
+      equals: Једнако
+      regex: Регуларни израз
+      starts_with: Почиње са
     negation: Негирајте подударање
     or: Или
     remove: Избрисати блок
+    type:
+      class: Класа
+      exe: Еке
+      path: Пут
+      title: Наслов
   import: Увоз
   new: Нова
   search: Претрага
@@ -68,6 +82,7 @@ devtools:
   install_folder: Инсталациона мапа
   load: Оптеретити
   settings_file: Подешавања
+  simulate_fullscreen: Симулирајте догађај преко целог екрана
 extras:
   discord: Нескладан
   exit: Престанак / излаз
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Пошаљи на радни простор 7
     send_to_workspace_8: Пошаљи на радни простор 8
     send_to_workspace_9: Пошаљи на радни простор 9
+    start_weg_app_0: Фокусирајте или покрените апликацију на позицији 10 на траци задатака
+    start_weg_app_1: Фокусирајте или покрените апликацију на позицији 1 на траци задатака
+    start_weg_app_2: Фокусирајте или покрените апликацију на позицији 2 на траци задатака
+    start_weg_app_3: Фокусирајте или покрените апликацију на позицији 3 на траци задатака
+    start_weg_app_4: Фокусирајте или покрените апликацију на позицији 4 на траци задатака
+    start_weg_app_5: Фокусирајте или покрените апликацију на позицији 5 на траци задатака
+    start_weg_app_6: Фокусирајте или покрените апликацију на позицији 6 на траци задатака
+    start_weg_app_7: Фокусирајте или покрените апликацију на позицији 7 на траци задатака
+    start_weg_app_8: Фокусирајте или покрените апликацију на позицији 8 на траци задатака
+    start_weg_app_9: Фокусирајте или покрените апликацију на позицији 9 на траци задатака
     switch_workspace_0: Пређите на радни простор 1
     switch_workspace_1: Пређите на радни простор 2
     switch_workspace_2: Пређите на радни простор 2
@@ -203,11 +228,12 @@ toolbar:
   delay_to_show: Одлагање приказивања
   enable: Омогућите фанци траку са алаткама
   height: Висина
+  hide_mode:
+    always: Увек
+    never: Никада
+    on_overlap: На преклапање
   label: Алатна трака
-  placeholder:
-    author: Аутор
-    description: Опис
-    select: Структура алатне траке
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
 update:
   available: Ажурирање доступно!
@@ -237,9 +263,17 @@ weg:
   dock_side: Положај
   enable: Омогући прикључак / траку задатака
   gap: Празнина
+  hide_mode:
+    always: Увек
+    never: Никада
+    on_overlap: На преклапање
   items:
     gap: Простор између предмета
     label: Предмети
+    pinned_visibility:
+      always: Увек
+      label: Видљивост закачених ставки
+      when_primary: Када је монитор примарни
     size: Величина предмета
     temporal_visibility:
       all: Све
@@ -249,6 +283,9 @@ weg:
     zoom_size: Зуомирана величина (користи се за теме)
   label: Доцк / трака задатака
   margin: Маргина
+  mode:
+    full_width: Пуна ширина екрана
+    min_content: Мала колико може бити
   padding: Подлокнути
   use_multiple_monitor_overlap_logic: Користите специфичан приказ уместо логике једног фокуса
   width: Ширина

@@ -1,4 +1,5 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
+import { PluginId } from '@seelen-ui/lib/types';
 import { Flex, Menu, Popover } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,14 +7,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from 'src/apps/seelenweg/components/BackgroundByLayers/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
-import { SavePlaceholderAsCustom } from './application';
+import { SaveToolbarItems } from './application';
 import { Icon } from 'src/apps/shared/components/Icon';
 
 export function MainContextMenu() {
+  const items = useSelector(Selectors.items);
   const plugins = useSelector(Selectors.plugins);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
+
+  const allItems = [...items.left, ...items.center, ...items.right];
+
+  const isAlreadyAdded = (id: PluginId) => {
+    return allItems.some((item) => item === id);
+  };
 
   return (
     <BackgroundByLayersV2 className="tb-context-menu-container">
@@ -32,15 +40,22 @@ export function MainContextMenu() {
                   <BackgroundByLayersV2 className="tb-context-menu-container">
                     <Menu
                       className="tb-context-menu"
-                      items={plugins.map((p) => ({
-                        key: p.id,
-                        icon: <Icon iconName={p.icon} />,
-                        label: p.id,
-                        onClick: () => {
-                          dispatch(RootActions.addItem(p.id));
-                          SavePlaceholderAsCustom();
-                        },
-                      }))}
+                      items={plugins.map((plugin) => {
+                        const added = isAlreadyAdded(plugin.id);
+                        return {
+                          key: plugin.id,
+                          icon: <Icon iconName={plugin.icon} />,
+                          label: added ? `✓ ${plugin.id}` : plugin.id,
+                          onClick: () => {
+                            if (added) {
+                              dispatch(RootActions.removeItem(plugin.id));
+                            } else {
+                              dispatch(RootActions.addItem(plugin.id));
+                            }
+                            SaveToolbarItems();
+                          },
+                        };
+                      })}
                     />
                   </BackgroundByLayersV2>
                 }

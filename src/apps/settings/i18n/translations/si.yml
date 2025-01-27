@@ -1,5 +1,8 @@
 app_launcher:
   enable: යෙදුම් දියත් කරන්නා සක්රීය කරන්න
+  launch_on:
+    mouse_over: මූසිකය ඉවරයි
+    primary: ප්රාථමික
   monitor: පෙන්වීමට අධීක්ෂණය
   runners:
     cmd: විධානය
@@ -49,9 +52,20 @@ apps_configurations:
     id: හඳුනාගැනීම
     kind: විසින් හඳුනා ගන්න
     matching_strategy: ගැලපුම් උපාය මාර්ගය
+    matching_strategy_option:
+      contains: අඩංගු වේ
+      ends_with: සමඟ අවසන් වේ
+      equals: සමාන වේ
+      regex: නිතිපතා ප්රකාශනය
+      starts_with: සමඟ ආරම්භ වේ
     negation: ගැලපීම නිෂේධනය කරන්න
     or: හෝ
     remove: අවහිර කිරීම මකන්න
+    type:
+      class: පන්තිය
+      exe: Exe
+      path: මාර්ගය
+      title: මාතෘකාව
   import: ආනයන
   new: අලුත්
   search: සෙවීම
@@ -67,6 +81,7 @@ devtools:
   install_folder: ස්ථාපන ෆෝල්ඩරය
   load: පැටවීම
   settings_file: සැකසුම් ගොනුව
+  simulate_fullscreen: සම්පූර්ණ තිර සිදුවීම අනුකරණය කරන්න
 extras:
   discord: අසමගිය
   exit: පිටවීම/පිටවීම
@@ -169,6 +184,16 @@ shortcuts:
     send_to_workspace_7: Workspace 7 වෙත යවන්න
     send_to_workspace_8: Workspace 8 වෙත යවන්න
     send_to_workspace_9: Workspace 9 වෙත යවන්න
+    start_weg_app_0: කාර්ය තීරුවේ පිහිටීම 10 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_1: කාර්ය තීරුවේ පිහිටීම 1 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_2: කාර්ය තීරුවේ පිහිටීම 2 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_3: කාර්ය තීරුවේ පිහිටීම 3 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_4: කාර්ය තීරුවේ පිහිටීම 4 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_5: කාර්ය තීරු ස්ථානය 5 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_6: කාර්ය තීරුවේ පිහිටීම 6 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_7: කාර්ය තීරුවේ පිහිටීම 7 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_8: කාර්ය තීරුවේ පිහිටීම 8 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
+    start_weg_app_9: කාර්ය තීරුවේ පිහිටීම 9 වෙත අවධානය යොමු කරන්න හෝ යෙදුම ආරම්භ කරන්න
     switch_workspace_0: වැඩබිම් 1 වෙත මාරු වන්න
     switch_workspace_1: වැඩබිම් 2 වෙත මාරු වන්න
     switch_workspace_2: කාර්ය ඉඩ 2 වෙත මාරු වන්න
@@ -201,11 +226,12 @@ toolbar:
   delay_to_show: පෙන්වීමට ප්‍රමාදය
   enable: විසිතුරු මෙවලම් තීරුව සබල කරන්න
   height: උස
+  hide_mode:
+    always: සෑම විටම
+    never: කවදාවත් නැහැ
+    on_overlap: අතිච්ඡාදනය මත
   label: මෙවලම් තීරුව
-  placeholder:
-    author: කර්තෘ
-    description: විස්තර
-    select: මෙවලම් තීරු ව්යුහය
+  placeholder: {}
   use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
 update:
   available: යාවත්කාලීන කිරීම!
@@ -233,9 +259,17 @@ weg:
   dock_side: තනතුර
   enable: Dock/Taskbar සබල කරන්න
   gap: පරතරය
+  hide_mode:
+    always: සෑම විටම
+    never: කවදාවත් නැහැ
+    on_overlap: අතිච්ඡාදනය මත
   items:
     gap: අයිතම අතර අවකාශය
     label: අයිතම
+    pinned_visibility:
+      always: සෑම විටම
+      label: අමුණන ලද අයිතම දෘශ්‍යතාව
+      when_primary: මොනිටරය ප්රාථමික වන විට
     size: අයිතමයේ ප්රමාණය
     temporal_visibility:
       all: සියල්ල
@@ -245,6 +279,9 @@ weg:
     zoom_size: විශාලනය කළ ප්‍රමාණය (තේමා සඳහා භාවිතා වේ)
   label: ඩොක්/කාර්ය තීරුව
   margin: ආන්තිකය
+  mode:
+    full_width: සම්පූර්ණ තිර පළල
+    min_content: හැකි තරම් කුඩා
   padding: පෑඩිං
   use_multiple_monitor_overlap_logic: තනි නාභිගත තර්කය වෙනුවට සංදර්ශකය විශේෂිත භාවිතා කරන්න
   width: පළල

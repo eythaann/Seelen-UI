@@ -24,3 +24,5 @@ taskbar_menu:
   settings: 设置
   start: 添加启动模块
   task_manager: 任务管理器
+weg:
+  empty: 没有可显示的项目

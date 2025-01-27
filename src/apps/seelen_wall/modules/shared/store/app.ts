@@ -7,7 +7,7 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 
 const initialState: RootState = {
   version: 0,
-  settings: (await Settings.default()).inner.wall,
+  settings: (await Settings.default()).wall,
   colors: UIColors.default().inner,
   stop: false,
 };

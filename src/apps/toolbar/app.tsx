@@ -12,9 +12,6 @@ import { useDarkMode } from '../shared/styles';
 import { ErrorFallback } from './components/Error';
 
 export function App() {
-  const version = useSelector(Selectors.version);
-
-  const structure = useSelector(Selectors.placeholder);
   const colors = useSelector(Selectors.colors);
 
   const isDarkMode = useDarkMode();
@@ -23,15 +20,12 @@ export function App() {
     getCurrentWebviewWindow().show();
   }, []);
 
-  if (!structure) {
-    return <ErrorFallback msg="NO PLACEHOLDER FOUND. PLEASE TRY REINSTALL THE APP" />;
-  }
-
   return (
     <ConfigProvider
       theme={{
         token: {
           colorPrimary: isDarkMode ? colors.accent_light : colors.accent_dark,
+          motion: false,
         },
         components: {
           Calendar: {
@@ -43,8 +37,8 @@ export function App() {
         algorithm: isDarkMode ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
-      <ErrorBoundary key={version} fallback={<ErrorFallback />}>
-        <ToolBar key={version} structure={structure} />
+      <ErrorBoundary fallback={<ErrorFallback />}>
+        <ToolBar />
       </ErrorBoundary>
     </ConfigProvider>
   );

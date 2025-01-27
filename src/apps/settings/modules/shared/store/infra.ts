@@ -4,17 +4,13 @@ import {
   ConnectedMonitorList,
   IconPackList,
   MonitorConfiguration,
-  PlaceholderList,
   PluginList,
   ProfileList,
-  SeelenEvent,
   Settings,
   ThemeList,
   UIColors,
   WidgetList,
-  WindowManagerLayoutList,
 } from '@seelen-ui/lib';
-import { listen as listenGlobal } from '@tauri-apps/api/event';
 import { Modal } from 'antd';
 import { cloneDeep } from 'lodash';
 
@@ -69,14 +65,6 @@ async function initUIColors() {
 }
 
 export async function registerStoreEvents() {
-  PlaceholderList.onChange((list) => {
-    store.dispatch(RootActions.setAvailablePlaceholders(list.all()));
-  });
-
-  WindowManagerLayoutList.onChange((list) => {
-    store.dispatch(RootActions.setAvailableLayouts(list.all()));
-  });
-
   ThemeList.onChange((list) => {
     store.dispatch(RootActions.setAvailableThemes(list.all()));
   });
@@ -87,7 +75,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setAppsConfigurations(list.all()));
   });
 
-  await listenGlobal<Settings>(SeelenEvent.StateSettingsChanged, (event) => {
+  await Settings.onChange((settings) => {
     if (IsSavingSettings.current) {
       IsSavingSettings.current = false;
       return;
@@ -95,9 +83,15 @@ export async function registerStoreEvents() {
     const currentState = store.getState();
     const newState: RootState = {
       ...currentState,
-      ...event.payload,
+      ...settings.inner,
       toBeSaved: false,
       toBeRestarted: false,
+      // migration since v2.1.0
+      fancyToolbar: settings.fancyToolbar,
+      windowManager: settings.windowManager,
+      seelenweg: settings.seelenweg,
+      wall: settings.wall,
+      launcher: settings.launcher,
     };
     store.dispatch(RootActions.setState(newState));
   });
@@ -118,24 +112,32 @@ export async function registerStoreEvents() {
 }
 
 export const LoadSettingsToStore = async (customPath?: string) => {
-  startup.isEnabled().then((value) => {
-    store.dispatch(RootActions.setAutostart(value));
-  });
+  const settings: Settings = customPath
+    ? await Settings.loadCustom(customPath)
+    : await Settings.getAsync();
 
-  const settings: Settings = customPath ? await Settings.loadCustom(customPath) : await Settings.getAsync();
+  console.log(settings.inner);
+
   const currentState = store.getState();
-  store.dispatch(RootActions.setState({
-    ...currentState,
-    ...settings.inner,
-  }));
+  store.dispatch(
+    RootActions.setState({
+      ...currentState,
+      ...settings.inner,
+      // migration since v2.1.0
+      fancyToolbar: settings.fancyToolbar,
+      windowManager: settings.windowManager,
+      seelenweg: settings.seelenweg,
+      wall: settings.wall,
+      launcher: settings.launcher,
+    }),
+  );
+
+  store.dispatch(RootActions.setAutostart(await startup.isEnabled()));
 
   store.dispatch(RootActions.setAppsConfigurations((await AppConfigurationList.getAsync()).all()));
 
   store.dispatch(RootActions.setAvailableThemes((await ThemeList.getAsync()).all()));
   store.dispatch(RootActions.setAvailableIconPacks((await IconPackList.getAsync()).all()));
-
-  store.dispatch(RootActions.setAvailablePlaceholders((await PlaceholderList.getAsync()).all()));
-  store.dispatch(RootActions.setAvailableLayouts((await WindowManagerLayoutList.getAsync()).all()));
 
   store.dispatch(RootActions.setPlugins((await PluginList.getAsync()).all()));
   store.dispatch(RootActions.setWidgets((await WidgetList.getAsync()).all()));

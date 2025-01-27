@@ -19,81 +19,57 @@ async function getArgs() {
   };
 }
 
-void async function main() {
-  const { target } = await getArgs();
+const [major, minor, patch, _nightly_date = 0] = packageJson.version.split(/[\.\+]/);
+if (major === undefined || minor === undefined || patch === undefined) {
+  throw new Error('Invalid package version');
+}
 
-  console.info('Building MSIX...');
-  const msixCmdsPath = path.resolve(`target/${target}/msix/commands.txt`);
-  const msixTemplatePath = path.resolve('templates/installer.msix');
+const { target } = await getArgs();
 
-  const [major, minor, patch, nightly_date = 0] = packageJson.version.split(/[\.\+]/);
-  if (major === undefined || minor === undefined || patch === undefined) {
-    throw new Error('Invalid package version');
-  }
+console.info('Building MSIX...');
+const buildFolder = `target/${target}/msix`;
+const bundleFolder = `target/${target}/bundle/msix`;
 
-  // we skip revision here because greater numbers are not supported on msix
-  const packageVersion = `${major}.${minor}.${patch}.0`;
-  const postfix = nightly_date ? `+${nightly_date}` : '';
-  const installer_msix_path = path.resolve(
-    `target/${target}/bundle/msix/Seelen.SeelenUI_${packageVersion}${postfix}_x64__p6yyn03m1894e.msix`,
-  );
+fs.rmSync(buildFolder, { recursive: true, force: true }); // clean up
+fs.mkdirSync(buildFolder, { recursive: true });
+fs.mkdirSync(bundleFolder, { recursive: true });
 
-  if (!fs.existsSync(msixCmdsPath)) {
-    fs.mkdirSync(path.dirname(msixCmdsPath), { recursive: true });
-  }
-  fs.writeFileSync(msixCmdsPath, '');
+// we skip revision here because greater numbers than 65535 are not supported on msix
+const appxPackageVersion = `${major}.${minor}.${patch}.0`;
+const installer_msix_path = path.resolve(
+  `${bundleFolder}/Seelen.SeelenUI_${packageJson.version}_x64__p6yyn03m1894e.msix`,
+);
 
-  // Set app version
-  fs.appendFileSync(msixCmdsPath, `setIdentity --packageVersion ${packageVersion}\n`);
+// Add manifest
+const manifest = fs
+  .readFileSync('templates/AppxManifest.xml', 'utf-8')
+  .replace('{{version}}', appxPackageVersion);
+fs.writeFileSync(`${buildFolder}/AppxManifest.xml`, manifest);
 
-  // Add main binary
-  fs.appendFileSync(
-    msixCmdsPath,
-    `addFile --target "${packageJson.productName}.exe" --source "${path.resolve(
-      `target/${target}/${packageJson.productName}.exe`,
-    )}"\n`,
-  );
+// Add binaries
+fs.copyFileSync(`target/${target}/slu-service.exe`, `${buildFolder}/slu-service.exe`);
+fs.copyFileSync(`target/${target}/seelen-ui.exe`, `${buildFolder}/seelen-ui.exe`);
 
-  // Add crash service
-  fs.appendFileSync(
-    msixCmdsPath,
-    `addFile --target "slu-service.exe" --source "${path.resolve(
-      `target/${target}/slu-service.exe`,
-    )}"\n`,
-  );
-
-  // Add resources
-  tauriConfig.bundle.resources.forEach((pattern) => {
-    let files = glob.sync(pattern, { nodir: true });
-    files.forEach((file) => {
-      fs.appendFileSync(
-        msixCmdsPath,
-        `addFile --target "${file}" --source "${path.resolve(`target/${target}/${file}`)}"\n`,
-      );
-    });
+// Add resources
+tauriConfig.bundle.resources.forEach((pattern) => {
+  let files = glob.sync(pattern, { nodir: true });
+  files.forEach((file) => {
+    fs.mkdirSync(path.dirname(`${buildFolder}/${file}`), { recursive: true });
+    fs.copyFileSync(file, path.resolve(`${buildFolder}/${file}`));
   });
+});
 
-  try {
-    fs.mkdirSync(installer_msix_path.split(path.sep).slice(0, -1).join(path.sep), {
-      recursive: true,
-    });
-    fs.copyFileSync(msixTemplatePath, installer_msix_path);
+try {
+  // create installer bundle
+  let out = execSync(`msixHeroCli pack -d ${buildFolder} -p ${installer_msix_path}`);
+  console.info(out.toString());
 
-    /* let buffer = execSync(
-      'msixherocli.exe newcert --directory ./.cert --name Seelen --password seelen --subject CN=7E60225C-94CB-4B2E-B17F-0159A11074CB',
-    );
-    console.info(buffer.toString()); */
-
-    let buffer = execSync(`msixHeroCli edit "${installer_msix_path}" list "${msixCmdsPath}"`);
-    console.info(buffer.toString());
-
-    buffer = execSync(
-      `msixHeroCli sign -f ./.cert/Seelen.pfx -p seelen -t http://time.certum.pl ${installer_msix_path}`,
-    );
-    console.info(buffer.toString());
-  } catch (error) {
-    console.error('\n\n', error);
-    process.exit(1);
-  }
-}();
-
+  // sign installer with local certificate (this is for testing only) store changes the cert in the windows store
+  let out2 = execSync(
+    `msixHeroCli sign -f ./.cert/Seelen.pfx -p seelen -t http://time.certum.pl ${installer_msix_path}`,
+  );
+  console.info(out2.toString());
+} catch (error) {
+  console.error('\n\n', error?.toString());
+  process.exit(1);
+}

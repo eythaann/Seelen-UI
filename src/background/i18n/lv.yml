@@ -1,0 +1,14 @@
+runtime:
+  download: Dodieties uz lejupielādes lapu
+  not_found: WebView2 izpildlaiks nav atrasts
+  not_found_description: Seelen UI ir nepieciešams Webview2 Runtime. Lūdzu, instalējiet to.
+  outdated: WebView2 izpildlaiks ir novecojis
+  outdated_description: >-
+    Seelen lietotāja interfeisam ir nepieciešama Webview2 Runtime %{min_version}
+    vai jaunāka versija. Lūdzu, atjauniniet to.
+service:
+  not_running: Seelen UI pakalpojums nedarbojas
+  not_running_description: >-
+    Seelen UI pakalpojums (slu-service) ir atkarība/palīgs, lai lietotne
+    darbotos pareizi.
+  not_running_ok: Sāciet pakalpojumu

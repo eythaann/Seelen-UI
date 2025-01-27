@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 use tauri::Emitter;
 
 use crate::error_handler::Result;
-use crate::seelen::{get_app_handle, SEELEN};
+use crate::seelen::get_app_handle;
 use crate::state::application::FULL_STATE;
 use crate::windows_api::window::Window;
 use crate::windows_api::WindowsApi;
@@ -106,10 +106,9 @@ impl WindowManagerV2 {
             SubCommand::CancelReservation => {
                 // self.discard_reservation()?;
             }
-            SubCommand::Debug =>
-            {
-                #[cfg(any(debug_assertions, feature = "devtools"))]
-                if let Some(monitor) = trace_lock!(SEELEN).focused_monitor_mut() {
+            SubCommand::Debug => {
+                #[cfg(debug_assertions)]
+                if let Some(monitor) = trace_lock!(crate::seelen::SEELEN).focused_monitor_mut() {
                     if let Some(wm) = monitor.wm() {
                         wm.window.open_devtools();
                     }
@@ -118,8 +117,8 @@ impl WindowManagerV2 {
             SubCommand::Width(action) => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
-                    Sizing::Increase => FULL_STATE.load().settings.window_manager.resize_delta,
-                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager.resize_delta,
+                    Sizing::Increase => FULL_STATE.load().settings.window_manager().resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager().resize_delta,
                 };
 
                 let state = trace_lock!(WM_STATE);
@@ -133,8 +132,8 @@ impl WindowManagerV2 {
             SubCommand::Height(action) => {
                 let foreground = Window::from(WindowsApi::get_foreground_window());
                 let percentage = match action {
-                    Sizing::Increase => FULL_STATE.load().settings.window_manager.resize_delta,
-                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager.resize_delta,
+                    Sizing::Increase => FULL_STATE.load().settings.window_manager().resize_delta,
+                    Sizing::Decrease => -FULL_STATE.load().settings.window_manager().resize_delta,
                 };
 
                 let state = trace_lock!(WM_STATE);

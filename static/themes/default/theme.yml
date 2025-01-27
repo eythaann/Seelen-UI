@@ -1,10 +1,5 @@
-info:
+id: "@default/theme"
+metadata:
   displayName: Default
-  author: eythaann
   description: Default Seelen Theme
   tags: ['weg', 'toolbar', 'window-manager']
-layers:
-  weg:
-    bg: 2
-  toolbar:
-    bg: 2

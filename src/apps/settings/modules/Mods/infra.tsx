@@ -28,7 +28,7 @@ export function ModsManager() {
               </div>
             </div>
             <div className={cs.right}>
-              <Button danger type="dashed" disabled={plugin.bundled}>
+              <Button danger type="dashed" disabled={plugin.metadata.bundled}>
                 {t('remove')}
               </Button>
             </div>

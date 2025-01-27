@@ -1,5 +1,8 @@
 app_launcher:
   enable: Nika amandla isiqalisi sohlelo lokusebenza
+  launch_on:
+    mouse_over: Igundane phezu
+    primary: Okuyinhloko
   monitor: Qapha ukukhombisa
   runners:
     cmd: Juba
@@ -50,9 +53,20 @@ apps_configurations:
     id: Isithombe esithi
     kind: Khomba ngu
     matching_strategy: Isu lokuqondanisa
+    matching_strategy_option:
+      contains: Iqukethe
+      ends_with: Iphetha ngokuthi
+      equals: Kuyalingana
+      regex: Inkulumo evamile
+      starts_with: Iqala ngokuthi
     negation: Hlukana nokufanisa
     or: Noma
     remove: Susa ibhulokhi
+    type:
+      class: Ikilasi
+      exe: Exe
+      path: Indlela
+      title: Isihloko
   import: Ngenisa ezweni
   new: '-Kwanamuhla'
   search: Sesha
@@ -68,6 +82,7 @@ devtools:
   install_folder: Ifolda yokufaka
   load: Thwala
   settings_file: Ifayela lezilungiselelo
+  simulate_fullscreen: Lingisa umcimbi wesikrini esigcwele
 extras:
   discord: Ukunqaba
   exit: Quit / Phuma
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Thumela kwi-Workpace 7
     send_to_workspace_8: Thumela ku-Workpace 8
     send_to_workspace_9: Thumela ku-Workpace 9
+    start_weg_app_0: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 10
+    start_weg_app_1: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 1
+    start_weg_app_2: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 2
+    start_weg_app_3: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 3
+    start_weg_app_4: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 4
+    start_weg_app_5: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 5
+    start_weg_app_6: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 6
+    start_weg_app_7: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 7
+    start_weg_app_8: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 8
+    start_weg_app_9: Gxila noma qala uhlelo lokusebenza kubha yomsebenzi 9
     switch_workspace_0: Shintshela ku-Workpace 1
     switch_workspace_1: Shintshela ku-Workpace 2
     switch_workspace_2: Shintshela ku-Workpace 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Libazisa ukubonisa
   enable: Nika amandla amathuluzi e-fancy
   height: Ubude
+  hide_mode:
+    always: Njalo
+    never: Ungalokothi
+    on_overlap: Ngokugqagqana
   label: Indawo yamathuluzi
-  placeholder:
-    author: Umlobi
-    description: Ukufanisa
-    select: Isakhiwo samathuluzi
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
 update:
   available: Ukuvuselelwa Kuyatholakala!
@@ -238,9 +264,17 @@ weg:
   dock_side: Ukuma
   enable: Nika amandla i-Dock / Taskbar
   gap: Insungubezi
+  hide_mode:
+    always: Njalo
+    never: Ungalokothi
+    on_overlap: Ngokugqagqana
   items:
     gap: Isikhala phakathi kwezinto
     label: Into
+    pinned_visibility:
+      always: Njalo
+      label: Ukubonakala Kwezinto Eziphiniwe
+      when_primary: Lapho imonitha iyinhloko
     size: Usayizi wento
     temporal_visibility:
       all: Konke
@@ -250,6 +284,9 @@ weg:
     zoom_size: Usayizi osondeza (osetshenziselwa izingqikithi)
   label: Dock / taskbar
   margin: Image
+  mode:
+    full_width: Ububanzi besikrini esigcwele
+    min_content: Kuncane njengoba kungaba
   padding: Idilidi
   use_multiple_monitor_overlap_logic: Sebenzisa isibonisi esiqondile esikhundleni sokugxilisa ingqondo eyodwa
   width: Ububanzi

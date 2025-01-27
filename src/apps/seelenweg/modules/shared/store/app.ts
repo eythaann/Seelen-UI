@@ -14,7 +14,7 @@ const initialState: RootState = {
   itemsOnRight: [],
   focusedApp: null,
   isOverlaped: false,
-  settings: (await Settings.default()).inner.seelenweg,
+  settings: (await Settings.default()).seelenweg,
   mediaSessions: [],
   colors: UIColors.default().inner,
 };

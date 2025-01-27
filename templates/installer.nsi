@@ -388,16 +388,19 @@ Var AppStartMenuFolder
 ; Don't auto jump to finish page after installation page,
 ; because the installation page has useful info that can be used debug any issues with the installer.
 !define MUI_FINISHPAGE_NOAUTOCLOSE
-; Show sponsor link
+; Show discord link
 !define MUI_FINISHPAGE_LINK_COLOR 59a7f6
-!define MUI_FINISHPAGE_LINK "Join us on Discord! 🤍"
+!define MUI_FINISHPAGE_LINK "Join us on Discord!"
 !define MUI_FINISHPAGE_LINK_LOCATION "https://discord.gg/ABfASx5ZAJ"
 !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE RunMainBinary
 !insertmacro MUI_PAGE_FINISH
 
 Function RunMainBinary
-  Exec '"$INSTDIR\${MAINBINARYNAME}.exe"'
+  ; Start the service
+  DetailPrint 'Exec: slu-service.exe'
+  Exec '"$INSTDIR\slu-service.exe"'
+  ; nsis_tauri_utils::RunAsUser "$INSTDIR\${MAINBINARYNAME}.exe" ""
 FunctionEnd
 
 ; Uninstaller Pages
@@ -627,7 +630,6 @@ Section Install
   ; Copy main executable
   File "${MAINBINARYSRCPATH}"
   FILE "${__FILEDIR__}\..\..\seelen_ui.pdb"
-  FILE "${__FILEDIR__}\..\..\slu-service.exe"
 
   ; Copy resources
   {{#each resources_dirs}}
@@ -705,12 +707,11 @@ Section Install
     Call CreateOrUpdateStartMenuShortcut
   !insertmacro MUI_STARTMENU_WRITE_END
 
-  ; Create desktop shortcut and run Executable for silent and passive installers
+  ; Create desktop shortcut for silent and passive installers
   ; because finish page will be skipped
   ${If} $PassiveMode = 1
   ${OrIf} ${Silent}
     Call CreateOrUpdateDesktopShortcut
-    Call RunMainBinary
   ${EndIf}
 
   !ifmacrodef NSIS_HOOK_POSTINSTALL
@@ -768,7 +769,6 @@ Section Uninstall
   ; Copy main executable
   Delete "$INSTDIR\${MAINBINARYNAME}.exe"
   Delete "$INSTDIR\seelen_ui.pdb"
-  Delete "$INSTDIR\slu-service.exe"
 
   ; Delete resources
   {{#each resources}}

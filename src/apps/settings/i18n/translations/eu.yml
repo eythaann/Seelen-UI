@@ -1,5 +1,8 @@
 app_launcher:
   enable: Gaitu aplikazioaren abiarazlea
+  launch_on:
+    mouse_over: Sagua pasa
+    primary: Lehen mailakoa
   monitor: Monitorea erakusteko
   runners:
     cmd: Agindu
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikatzaile
     kind: Identifikatu
     matching_strategy: Bat datorren estrategia
+    matching_strategy_option:
+      contains: Dauka
+      ends_with: Honekin amaitzen da
+      equals: Berdin
+      regex: Adierazpen erregularra
+      starts_with: '-rekin hasten da'
     negation: Ezeztatu bat datozenak
     or: Ala
     remove: Ezabatu blokea
+    type:
+      class: Klasea
+      exe: Exe
+      path: Bidea
+      title: Izenburua
   import: Inportatu
   new: Berri
   search: Araketa
@@ -68,6 +82,7 @@ devtools:
   install_folder: Instalazio karpeta
   load: Zamatu
   settings_file: Ezarpenak fitxategia
+  simulate_fullscreen: Simulatu pantaila osoko gertaera
 extras:
   discord: Deskudun
   exit: Irten / irten
@@ -170,6 +185,16 @@ shortcuts:
     send_to_workspace_7: Bidali lantokira 7
     send_to_workspace_8: Bidali lantokira 8
     send_to_workspace_9: Bidali Workspace 9ra
+    start_weg_app_0: Enfokatu edo hasi aplikazioa ataza-barrako 10. posizioan
+    start_weg_app_1: Enfokatu edo hasi aplikazioa ataza-barraren posizioan 1
+    start_weg_app_2: Enfokatu edo hasi aplikazioa ataza-barrako 2. posizioan
+    start_weg_app_3: Enfokatu edo hasi aplikazioa ataza-barrako 3. posizioan
+    start_weg_app_4: Enfokatu edo hasi aplikazioa ataza-barrako 4. posizioan
+    start_weg_app_5: Enfokatu edo hasi aplikazioa ataza-barrako 5. posizioan
+    start_weg_app_6: Enfokatu edo hasi aplikazioa ataza-barrako 6. posizioan
+    start_weg_app_7: Enfokatu edo hasi aplikazioa ataza-barrako 7. posizioan
+    start_weg_app_8: Enfokatu edo hasi aplikazioa ataza-barrako 8. posizioan
+    start_weg_app_9: Enfokatu edo hasi aplikazioa ataza-barrako 9. posizioan
     switch_workspace_0: Aldatu lan-eremura 1
     switch_workspace_1: Aldatu Workspace 2ra
     switch_workspace_2: Aldatu Workspace 2ra
@@ -202,11 +227,12 @@ toolbar:
   delay_to_show: Erakusteko atzerapena
   enable: Gaitu tresna-barra
   height: Luzera
+  hide_mode:
+    always: Beti
+    never: Inoiz ez
+    on_overlap: Gainjartzean
   label: Tresna barra
-  placeholder:
-    author: Idazle
-    description: Deskribapen
-    select: Tresna-barraren egitura
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
 update:
   available: Eguneratu eskuragarri!
@@ -236,9 +262,17 @@ weg:
   dock_side: Kokaleku
   enable: Gaitu kaia / ataza barra
   gap: Tarte
+  hide_mode:
+    always: Beti
+    never: Inoiz ez
+    on_overlap: Gainjartzean
   items:
     gap: Elementuen arteko espazioa
     label: Manatu
+    pinned_visibility:
+      always: Beti
+      label: Ainguratutako elementuen ikusgaitasuna
+      when_primary: Monitorea nagusia denean
     size: Elementuen tamaina
     temporal_visibility:
       all: Denak
@@ -248,6 +282,9 @@ weg:
     zoom_size: Zoom tamaina (gaietarako erabiltzen da)
   label: Dock / ataza barra
   margin: Emandar
+  mode:
+    full_width: Pantaila osoko zabalera
+    min_content: Txikia izan daitekeen bezala
   padding: Betegarri
   use_multiple_monitor_overlap_logic: Erabili pantaila espezifikoa foku bakarraren ordez
   width: Zabalera

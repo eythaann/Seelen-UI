@@ -46,6 +46,10 @@ impl Monitor {
         Ok(self.display_device()?.id)
     }
 
+    pub fn is_primary(&self) -> Result<bool> {
+        WindowsApi::monitor_get_is_primary(self.0)
+    }
+
     pub fn display_device(&self) -> Result<DisplayDevice> {
         let device = WindowsApi::get_display_device(self.0)?;
         let buffer_id = device.DeviceID;
@@ -61,8 +65,13 @@ impl Monitor {
     }
 
     pub fn rect(&self) -> Result<Rect> {
-        let info = WindowsApi::monitor_info(self.0)?;
-        Ok(Rect::from(info.monitorInfo.rcMonitor))
+        let rect = WindowsApi::monitor_info(self.0)?.monitorInfo.rcMonitor;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn index(&self) -> Result<usize> {

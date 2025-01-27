@@ -1,5 +1,8 @@
 app_launcher:
   enable: 앱 런처 활성화
+  launch_on:
+    mouse_over: 마우스 오버
+    primary: 주요한
   monitor: 보여줄 화면
   runners:
     cmd: 명령
@@ -21,7 +24,7 @@ apps_configurations:
       force: 강제 관리
       hidden: 독/작업 표시줄에 숨기기
       pinned: 고정
-      unmanage: 관리 안함
+      unmanage: 관리 상태
     options_label: 추가 옵션
     title_create: '{{name}} 만들기'
     title_edit: 편집 {{name}}
@@ -47,11 +50,22 @@ apps_configurations:
     id: 식별자
     kind: 식별 기준
     matching_strategy: 식별 방법
+    matching_strategy_option:
+      contains: 포함
+      ends_with: 다음으로 끝남
+      equals: 같음
+      regex: 정규식
+      starts_with: 다음으로 시작
     negation: 조건이 반대일때 식별하기
     or: 또는
     remove: 블록 삭제
+    type:
+      class: 수업
+      exe: exe
+      path: 길
+      title: 제목
   import: 가져오기
-  new: 새로 만들기
+  new: 신규
   search: 검색
   swap: 교체
 cancel: 취소
@@ -65,6 +79,7 @@ devtools:
   install_folder: 설치 폴더
   load: 로드
   settings_file: 설정 파일
+  simulate_fullscreen: 전체 화면 이벤트 시뮬레이션
 extras:
   discord: 디스코드
   exit: 종료/나가기
@@ -88,9 +103,9 @@ general:
   theme:
     available: 사용 가능한 테마
     label: 테마
-    selected: 활성 테마
+    selected: 현재 테마
   wallpaper:
-    select: 배경화면을 선택하세요
+    select: 배경화면 선택
 header:
   labels:
     developer: 개발자
@@ -167,6 +182,16 @@ shortcuts:
     send_to_workspace_7: 작업 공간 8로 보내기
     send_to_workspace_8: 작업 공간 9로 보내기
     send_to_workspace_9: 작업 공간 10으로 보내기
+    start_weg_app_0: 작업 표시줄 위치 10에 앱 초점 맞추기 또는 시작
+    start_weg_app_1: 작업 표시줄 위치 1에 앱 초점 맞추기 또는 시작
+    start_weg_app_2: 작업 표시줄 위치 2에 앱 초점 맞추기 또는 시작
+    start_weg_app_3: 작업 표시줄 위치 3에 앱 초점 맞추기 또는 시작
+    start_weg_app_4: 작업 표시줄 위치 4에 앱 초점 맞추기 또는 시작
+    start_weg_app_5: 작업 표시줄 위치 5에 앱 초점 맞추기 또는 시작
+    start_weg_app_6: 작업 표시줄 위치 6에 앱 초점 맞추기 또는 시작
+    start_weg_app_7: 작업 표시줄 위치 7에 앱 초점 맞추기 또는 시작
+    start_weg_app_8: 작업 표시줄 위치 8에 앱 초점 맞추기 또는 시작
+    start_weg_app_9: 작업 표시줄 위치 9에 앱 초점 맞추기 또는 시작
     switch_workspace_0: 작업 공간 1로 전환
     switch_workspace_1: 작업 공간 2로 전환
     switch_workspace_2: 작업 공간 3으로 전환
@@ -197,12 +222,13 @@ toolbar:
   delay_to_show: 표시 지연
   enable: 툴바 활성화
   height: 높이
+  hide_mode:
+    always: 언제나
+    never: 절대
+    on_overlap: 오버랩 시
   label: 도구 모음
-  placeholder:
-    author: 작성자
-    description: 설명
-    select: 툴바 형식
-  use_multiple_monitor_overlap_logic: 단일 초점 논리 대신 디스플레이별 사용
+  placeholder: {}
+  use_multiple_monitor_overlap_logic: 단일 초점 대신 디스플레이별 로직 사용
 update:
   available: 사용 가능한 업데이트가 존재합니다
   channel: 업데이트 채널
@@ -215,12 +241,12 @@ vd:
     seelen: Seelen
 wall:
   backgrounds: 배경화면
-  enable: 벽지 관리자를 활성화하십시오
+  enable: 배경화면 관리자 활성화
   hours: 시간
-  interval: 매번 벽지를 변경하십시오
+  interval: 배경화면 변경 주기
   minutes: 분
-  no_background: 배경화면이 없습니다. 테마에 내장된 배경화면을 대신 사용합니다.
-  random: 슬라이드 쇼를 무작위 화하십시오
+  no_background: 배경화면이 없으면, 테마에 내장된 배경화면을 대신 사용합니다.
+  random: 슬라이드 쇼 무작위
   seconds: 초
 weg:
   auto_hide: 자동 숨기기
@@ -229,9 +255,17 @@ weg:
   dock_side: 위치
   enable: 독/작업 표시줄 활성화
   gap: 간격
+  hide_mode:
+    always: 언제나
+    never: 절대
+    on_overlap: 오버랩 시
   items:
     gap: 항목 간 간격
     label: 항목
+    pinned_visibility:
+      always: 언제나
+      label: 고정된 항목 가시성
+      when_primary: 모니터가 기본인 경우
     size: 항목 크기
     temporal_visibility:
       all: 모두
@@ -241,6 +275,9 @@ weg:
     zoom_size: 확대된 크기 (테마에 사용됨)
   label: 독/작업 표시줄
   margin: 바깥 여백
+  mode:
+    full_width: 전체 화면 너비
+    min_content: 가능한 한 작은
   padding: 안쪽 여백
   use_multiple_monitor_overlap_logic: 단일 초점 논리 대신 디스플레이별 사용
   width: 너비

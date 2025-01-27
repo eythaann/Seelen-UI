@@ -1,10 +1,13 @@
 app_launcher:
   enable: Включить запуск приложения
+  launch_on:
+    mouse_over: Наведите курсор мыши
+    primary: Начальный
   monitor: Монитор, чтобы показать
   runners:
-    cmd: Командование
-    explorer: Бегать
-    label: Бегуны
+    cmd: Командная строка
+    explorer: Проводник
+    label: Ярлыки
 apps_configurations:
   app:
     bindings: Привязка (оба параметра обязательны)
@@ -50,15 +53,26 @@ apps_configurations:
     id: Идентификатор
     kind: Идентифицировать по
     matching_strategy: Стратегия подбора
+    matching_strategy_option:
+      contains: Содержит
+      ends_with: Заканчивается на
+      equals: Равно
+      regex: Регулярное выражение
+      starts_with: Начинается с
     negation: Отрицательный подбор
     or: ИЛИ
     remove: Удалить блок
+    type:
+      class: Сорт
+      exe: Exe
+      path: Путь
+      title: Заголовок
   import: Импорт
   new: Новый
   search: Поиск
   swap: Сменить
 cancel: Отмена
-close: Закрывать
+close: Закрыть
 delete: Удалить
 devtools:
   app_folders: Папки приложения
@@ -68,6 +82,7 @@ devtools:
   install_folder: Папка установки
   load: Загрузить
   settings_file: Файл настроек
+  simulate_fullscreen: Имитировать полноэкранное событие
 extras:
   discord: Discord
   exit: Выйти
@@ -87,7 +102,7 @@ general:
     author: Автор
     description: Описание
     tags: Теги
-  startup: Автозапускать при включении системы
+  startup: Автозапуск при включении системы
   theme:
     available: Доступные темы
     label: Темы
@@ -98,12 +113,12 @@ header:
   labels:
     developer: Разработчик
     general: Общее
-    home: Дом
+    home: Главная страница
     info: Информация
     mods: Плагины и виджеты
     monitors: Мониторы
     seelen_bar: Верхняя панель
-    seelen_rofi: Приложение пусковая установка
+    seelen_rofi: Лаунчер приложений
     seelen_wall: Управляющий обоями
     seelen_weg: Панель задач
     seelen_wm: Менеджер окон
@@ -112,26 +127,26 @@ header:
     virtual_desk: Виртуальные рабочие столы
 inherit: Наследовать
 inProgress: В процессе...
-insert: Вставлять
+insert: Вставить
 loading: Загрузка...
-miscellaneous: Разнообразный
+miscellaneous: Разное
 mods:
   plugins: Плагины
   target: Цель
   widgets: Виджеты
 monitors_configurations:
   label: Монитор {{index}}
-more: Более
+more: Подробнее
 open: Открыть
 quit: Закрыть
-remove: Удалять
+remove: Удалить
 save: Сохранить
 save_and_restart: Сохранить и перезапустить
 shortcuts:
-  enable: Включить встроенные ярлыки (ahk)
+  enable: Включить встроенные быстрые клавиши (ahk)
   enable_tooltip: >-
-    Отключите, если будете реализовывать собственные ярлыки с помощью Seelen
-    Core Api
+    Отключите, если будете реализовывать собственные быстрые клавиши с помощью
+    Seelen Core Api
   labels:
     decrease_height: Уменьшить высоту
     decrease_width: Уменьшить ширину
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Отправить в рабочую область 7
     send_to_workspace_8: Отправить в рабочую область 8
     send_to_workspace_9: Отправить в рабочую область 9
+    start_weg_app_0: Фокус или запуск приложения в позиции 10 на панели задач
+    start_weg_app_1: Фокус или запуск приложения в позиции 1 на панели задач
+    start_weg_app_2: Фокус или запуск приложения в позиции 2 на панели задач
+    start_weg_app_3: Фокус или запуск приложения в позиции 3 на панели задач
+    start_weg_app_4: Фокус или запуск приложения в позиции 4 на панели задач
+    start_weg_app_5: Фокус или запуск приложения в позиции 5 на панели задач
+    start_weg_app_6: Фокус или запуск приложения в позиции 6 на панели задач
+    start_weg_app_7: Фокус или запуск приложения в позиции 7 на панели задач.
+    start_weg_app_8: Фокус или запуск приложения в позиции 8 на панели задач
+    start_weg_app_9: Фокус или запуск приложения в позиции 9 на панели задач
     switch_workspace_0: Переключитесь на рабочее пространство 1
     switch_workspace_1: Переключитесь на рабочую область 2
     switch_workspace_2: Переключиться на рабочую область 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Задержка показа
   enable: Включить
   height: Высота
+  hide_mode:
+    always: Всегда
+    never: Никогда
+    on_overlap: При перекрытии
   label: Верхняя панель
-  placeholder:
-    author: Автор
-    description: Описание
-    select: Структура верхней панели
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
 update:
   available: Обновление доступно!
@@ -237,10 +263,18 @@ weg:
   delay_to_show: Задержка показа
   dock_side: Расположение
   enable: Включить
-  gap: Разрыв
+  gap: Расстояние
+  hide_mode:
+    always: Всегда
+    never: Никогда
+    on_overlap: При перекрытии
   items:
     gap: Расстояние между иконок
     label: Иконки
+    pinned_visibility:
+      always: Всегда
+      label: Видимость закрепленных элементов
+      when_primary: Когда монитор является основным
     size: Размер иконок
     temporal_visibility:
       all: Все
@@ -250,6 +284,9 @@ weg:
     zoom_size: Увеличенный размер (используется для тем)
   label: Панель задач
   margin: Внешний отступ
+  mode:
+    full_width: Полная ширина экрана
+    min_content: Маленький, насколько это возможно
   padding: Внутренний отступ
   use_multiple_monitor_overlap_logic: Используйте специфичную для дисплея логику вместо логики одного фокуса
   width: Ширина

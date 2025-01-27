@@ -13,6 +13,10 @@ pre-commit:
       priority: 2
       glob: "**/*.rs"
       run: cargo fmt -- --check
+    ts-type-check:
+      priority: 3
+      glob: "**/*.{js,jsx,ts,tsx}"
+      run: npm run type-check
     rust-code-check:
       priority: 4
       glob: "**/*.rs"

@@ -1,5 +1,8 @@
 app_launcher:
   enable: د اپلیکیشن لیسچر وړ کړئ
+  launch_on:
+    mouse_over: موږک پورته کړ
+    primary: لومړني
   monitor: څارنه کول
   runners:
     cmd: قومانده
@@ -49,9 +52,20 @@ apps_configurations:
     id: پېژنيزه
     kind: د
     matching_strategy: برابرول
+    matching_strategy_option:
+      contains: لري
+      ends_with: سره پای ته رسیږي
+      equals: مساوي
+      regex: منظم بیان
+      starts_with: سره پیل کیږي
     negation: غفلت کول
     or: یا
     remove: بلاک ړنګ کړئ
+    type:
+      class: ټولګي
+      exe: Exe
+      path: لاره
+      title: عنوان
   import: واردول
   new: نوی
   search: لټون
@@ -67,6 +81,7 @@ devtools:
   install_folder: لګول فولډر
   load: بار
   settings_file: د امستنې دوتنه
+  simulate_fullscreen: د بشپړ سکرین پیښې انډول کړئ
 extras:
   discord: ډارول
   exit: پریښودل / وتل
@@ -169,6 +184,16 @@ shortcuts:
     send_to_workspace_7: کارځای ته واستوئ
     send_to_workspace_8: کارځای ته واستوئ
     send_to_workspace_9: کارځای ته واستوئ
+    start_weg_app_0: په ټاسک بار موقعیت 10 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_1: په ټاسک بار موقعیت 1 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_2: په ټاسک بار موقعیت 2 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_3: په ټاسک بار موقعیت 3 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_4: په ټاسک بار موقعیت 4 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_5: په ټاسک بار موقعیت 5 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_6: په ټاسک بار موقعیت 6 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_7: په ټاسک بار موقعیت 7 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_8: په ټاسک بار موقعیت 8 باندې تمرکز وکړئ یا ایپ پیل کړئ
+    start_weg_app_9: په ټاسک بار موقعیت 9 باندې تمرکز وکړئ یا ایپ پیل کړئ
     switch_workspace_0: د کارځای 1 ته لاړشئ
     switch_workspace_1: د کارځای 2 ته لاړشئ
     switch_workspace_2: د کارځای 2 ته لاړشئ
@@ -200,11 +225,12 @@ toolbar:
   delay_to_show: د ښودلو لپاره ځنډ
   enable: د فینسي تورې پټه وړتیا وړ کړئ
   height: لوړوالی
+  hide_mode:
+    always: تل
+    never: هیڅکله نه
+    on_overlap: پر اوورلیپ
   label: توکپټه
-  placeholder:
-    author: لیکوال
-    description: تفصیل
-    select: د توکپټې جوړښت
+  placeholder: {}
   use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
 update:
   available: اوسمهالول شتون لري!
@@ -232,9 +258,17 @@ weg:
   dock_side: موقعیت
   enable: دوک / ټاسک بار فعال کړئ
   gap: تشې
+  hide_mode:
+    always: تل
+    never: هیڅکله نه
+    on_overlap: پر اوورلیپ
   items:
     gap: د توکو تر مینځ فضا
     label: توکي
+    pinned_visibility:
+      always: تل
+      label: د پینډ شوي توکو لید
+      when_primary: کله چې څارونکی لومړنی وي
     size: د توکي اندازه
     temporal_visibility:
       all: ټول
@@ -244,6 +278,9 @@ weg:
     zoom_size: زوم شوی اندازه (د موضوعاتو لپاره کارول کیږي)
   label: ډیک / ټاسک بار
   margin: حاشیه
+  mode:
+    full_width: د بشپړ سکرین پلنوالی
+    min_content: کوچني لکه څنګه چې کیدی شي
   padding: غالۍ
   use_multiple_monitor_overlap_logic: د واحد تمرکز منطق پرځای د ښودلو ځانګړي وکاروئ
   width: پلنوالی

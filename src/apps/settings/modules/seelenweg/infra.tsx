@@ -39,7 +39,7 @@ export const SeelenWegSettings = () => {
             <Select
               style={{ width: '120px' }}
               value={settings.mode}
-              options={OptionsFromEnum(SeelenWegMode)}
+              options={OptionsFromEnum(t, SeelenWegMode, 'weg.mode')}
               onChange={(value) => dispatch(SeelenWegActions.setMode(value))}
             />
           </SettingsOption>
@@ -82,7 +82,7 @@ export const SeelenWegSettings = () => {
               <Select
                 style={{ width: '120px' }}
                 value={settings.hideMode}
-                options={OptionsFromEnum(HideMode)}
+                options={OptionsFromEnum(t, HideMode, 'weg.hide_mode')}
                 onChange={(value) => dispatch(SeelenWegActions.setHideMode(value))}
               />
             </SettingsOption>
@@ -133,6 +133,18 @@ export const SeelenWegSettings = () => {
                 { value: 'OnMonitor', label: t('weg.items.temporal_visibility.on_monitor') },
               ]}
               onChange={(value) => dispatch(SeelenWegActions.setTemporalItemsVisibility(value))}
+            />
+          </SettingsOption>
+          <SettingsOption>
+            <div>{t('weg.items.pinned_visibility.label')}</div>
+            <Select
+              style={{ width: '120px' }}
+              value={settings.pinnedItemsVisibility}
+              options={[
+                { value: 'Always', label: t('weg.items.pinned_visibility.always') },
+                { value: 'WhenPrimary', label: t('weg.items.pinned_visibility.when_primary') },
+              ]}
+              onChange={(value) => dispatch(SeelenWegActions.setPinnedItemsVisibility(value))}
             />
           </SettingsOption>
 

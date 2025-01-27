@@ -1,5 +1,8 @@
 app_launcher:
   enable: Iespējot lietotņu palaišanas ierīci
+  launch_on:
+    mouse_over: Pārvietojiet peli virsū
+    primary: Primārais
   monitor: Uzraudzīt, lai parādītu
   runners:
     cmd: Vadība
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikators
     kind: Identificēt ar
     matching_strategy: Atbilstības stratēģija
+    matching_strategy_option:
+      contains: Satur
+      ends_with: Beidzas ar
+      equals: Vienāds
+      regex: Regulārā izteiksme
+      starts_with: Sākas ar
     negation: Negatīva atbilstība
     or: Vai
     remove: Dzēst bloku
+    type:
+      class: Klase
+      exe: Exe
+      path: Ceļš
+      title: Nosaukums
   import: Importēt
   new: Jauns
   search: Meklēt
@@ -68,6 +82,7 @@ devtools:
   install_folder: Instalēšanas mape
   load: Slodze
   settings_file: Iestatīšanas fails
+  simulate_fullscreen: Simulējiet pilnekrāna notikumu
 extras:
   discord: Nesaskaņas
   exit: Atmest/iziet
@@ -170,6 +185,16 @@ shortcuts:
     send_to_workspace_7: Nosūtīt uz darbvietu 7
     send_to_workspace_8: Nosūtīt uz darbvietu 8
     send_to_workspace_9: Nosūtīt uz darbvietu 9
+    start_weg_app_0: "Fokusējiet vai palaidiet lietotni uzdevumjoslas pozīcijā\_10"
+    start_weg_app_1: Fokusējiet vai palaidiet lietotni uzdevumjoslas pozīcijā 1
+    start_weg_app_2: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 2.\_pozīcijā"
+    start_weg_app_3: "Fokusējiet vai palaidiet lietotni uzdevumjoslas pozīcijā\_3"
+    start_weg_app_4: Fokusējiet vai palaidiet lietotni uzdevumjoslas 4. pozīcijā
+    start_weg_app_5: Fokusējiet vai palaidiet lietotni uzdevumjoslas 5. pozīcijā
+    start_weg_app_6: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 6.\_pozīcijā"
+    start_weg_app_7: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 7.\_pozīcijā"
+    start_weg_app_8: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 8.\_pozīcijā"
+    start_weg_app_9: "Fokusējiet vai palaidiet lietotni uzdevumjoslas 9.\_pozīcijā"
     switch_workspace_0: Pārslēdzieties uz 1. darbvietu
     switch_workspace_1: Pārslēdzieties uz darbvietu 2
     switch_workspace_2: Pārslēdzieties uz darbvietu 2
@@ -202,11 +227,12 @@ toolbar:
   delay_to_show: Kavēšanās parādīt
   enable: Iespējot izdomātu rīkjoslu
   height: Augstums
+  hide_mode:
+    always: Vienmēr
+    never: Nekad
+    on_overlap: Uz pārklāšanās
   label: Rīkjosla
-  placeholder:
-    author: Autors
-    description: Apraksts
-    select: Rīkjoslas struktūra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
 update:
   available: Pieejams atjauninājums!
@@ -234,9 +260,17 @@ weg:
   dock_side: Pozīcija
   enable: Iespējot doku/uzdevumjoslu
   gap: Plaisa
+  hide_mode:
+    always: Vienmēr
+    never: Nekad
+    on_overlap: Uz pārklāšanās
   items:
     gap: Vieta starp priekšmetiem
     label: Priekšmeti
+    pinned_visibility:
+      always: Vienmēr
+      label: Piesprausto vienumu redzamība
+      when_primary: Kad monitors ir primārais
     size: Vienuma izmērs
     temporal_visibility:
       all: Visi
@@ -246,6 +280,9 @@ weg:
     zoom_size: Tuvināta izmēra (izmanto tēmām)
   label: Doks/uzdevumjosla
   margin: Robeža
+  mode:
+    full_width: Pilna ekrāna platums
+    min_content: Cik mazs var būt
   padding: Polsterējums
   use_multiple_monitor_overlap_logic: Izmantojiet displeju specifisku, nevis viena fokusa loģiku
   width: Platums

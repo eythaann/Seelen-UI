@@ -1,0 +1,16 @@
+runtime:
+  download: Vai alla pagina di download
+  not_found: Runtime WebView2 non trovato
+  not_found_description: >-
+    L'interfaccia utente di Seelen richiede Webview2 Runtime. Per favore
+    installalo.
+  outdated: WebView2 Runtime obsoleto
+  outdated_description: >-
+    L'interfaccia utente di Seelen richiede Webview2 Runtime %{min_version} o
+    versione successiva. Per favore aggiornalo.
+service:
+  not_running: Il servizio UI Seelen non è in esecuzione
+  not_running_description: >-
+    Seelen UI Service (slu-service) è una dipendenza/un aiuto per il corretto
+    funzionamento dell'app.
+  not_running_ok: Avvia il servizio

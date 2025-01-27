@@ -1,7 +1,7 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { MediaToolbarItem } from '@seelen-ui/lib/types';
 import { emit } from '@tauri-apps/api/event';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Item } from '../../item/infra/infra';
@@ -12,9 +12,10 @@ import { WithMediaControls } from './MediaControls';
 
 interface Props {
   module: MediaToolbarItem;
+  active?: boolean;
 }
 
-function MediaModuleItem({ module, ...rest }: Props) {
+function MediaModuleItem({ module, active, ...rest }: Props) {
   const {
     id,
     volume = 0,
@@ -43,18 +44,21 @@ function MediaModuleItem({ module, ...rest }: Props) {
       onWheel={module.withMediaControls ? onWheel : undefined}
       extraVars={{ volume, isMuted, inputVolume, inputIsMuted, mediaSession }}
       module={module}
+      active={active}
     />
   );
 }
 
 export function MediaModule({ module }: Props) {
+  const [ open, setOpen ] = useState(false);
+
   useEffect(() => {
     emit('register-media-events');
   }, []);
 
   return module.withMediaControls ? (
-    <WithMediaControls>
-      <MediaModuleItem module={module} />
+    <WithMediaControls setActive={setOpen}>
+      <MediaModuleItem module={module} active={open} />
     </WithMediaControls>
   ) : (
     <MediaModuleItem module={module} />

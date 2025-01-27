@@ -1,4 +1,4 @@
-import { VirtualDesktopStrategy } from '@seelen-ui/lib';
+import { SeelenWindowManagerWidgetId, VirtualDesktopStrategy } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { Alert, Button, ConfigProvider, Select, Switch } from 'antd';
 import { useEffect, useState } from 'react';
@@ -10,6 +10,7 @@ import { BorderSettings } from '../../border/infra';
 import { newSelectors, RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 import { WManagerSettingsActions } from '../app';
+import { ResourceText } from 'src/apps/shared/components/ResourceText';
 
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { GlobalPaddings } from './GlobalPaddings';
@@ -20,8 +21,8 @@ export function WindowManagerSettings() {
 
   const vdStrategy = useSelector(RootSelectors.virtualDesktopStrategy);
   const settings = useSelector(RootSelectors.windowManager);
-  const layouts = useSelector(newSelectors.availableLayouts);
   const defaultLayout = useSelector(newSelectors.windowManager.defaultLayout);
+  const plugins = useSelector(RootSelectors.plugins);
 
   const dispatch = useDispatch();
   const { t } = useTranslation();
@@ -44,7 +45,8 @@ export function WindowManagerSettings() {
     dispatch(WManagerSettingsActions.setDefaultLayout(value));
   };
 
-  const usingLayout = layouts.find((layout) => layout.info.filename === defaultLayout);
+  const layouts = plugins.filter((plugin) => plugin.target === SeelenWindowManagerWidgetId);
+  const usingLayout = layouts.find((plugin) => plugin.id === defaultLayout);
 
   return (
     <>
@@ -98,10 +100,10 @@ export function WindowManagerSettings() {
             <Select
               style={{ width: '200px' }}
               value={defaultLayout}
-              options={layouts.map((layout, idx) => ({
-                key: `layout-${idx}`,
-                label: layout.info.displayName,
-                value: layout.info.filename,
+              options={layouts.map((layout) => ({
+                key: layout.id,
+                label: <ResourceText text={layout.metadata.displayName} />,
+                value: layout.id,
               }))}
               onSelect={onSelectLayout}
             />
@@ -109,11 +111,11 @@ export function WindowManagerSettings() {
           <div>
             <p>
               <b>{t('wm.author')}: </b>
-              {usingLayout?.info.author}
+              <ResourceText text={usingLayout?.metadata.author || '-'} />,
             </p>
             <p>
               <b>{t('wm.description')}: </b>
-              {usingLayout?.info.description}
+              <ResourceText text={usingLayout?.metadata.description || '-'} />,
             </p>
           </div>
         </SettingsGroup>

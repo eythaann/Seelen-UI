@@ -1,9 +1,7 @@
 import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
-import { Placeholder, Plugin, ToolbarItem } from '@seelen-ui/lib/types';
-import { Dropdown } from 'antd';
+import { Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
-import { debounce } from 'lodash';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,9 +16,10 @@ import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
 
 import { RootActions, Selectors } from '../shared/store/app';
-import { SavePlaceholderAsCustom } from './application';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
+import { SaveToolbarItems } from './application';
 
+import { AnimatedDropdown } from '../../../shared/components/AnimatedWrappers';
+import { useWindowFocusChange } from '../../../shared/hooks';
 import { cx } from '../../../shared/styles';
 import { TrayModule } from '../Tray';
 import { WorkspacesModule } from '../Workspaces';
@@ -43,15 +42,11 @@ const modulesByType: Record<
   [ToolbarItemType.Notifications]: NotificationsModule,
 };
 
-interface Props {
-  structure: Placeholder;
-}
-
 const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
 // item can be a toolbar plugin id or a toolbar module
-function componentByModule(plugins: Plugin[], item: string | ToolbarItem) {
+function componentByModule(plugins: Plugin[], item: PluginId | ToolbarItem) {
   let module: ToolbarItem | undefined;
 
   if (typeof item === 'string') {
@@ -73,7 +68,9 @@ function componentByModule(plugins: Plugin[], item: string | ToolbarItem) {
   return <Component key={module.id} module={module} value={item} />;
 }
 
-export function ToolBar({ structure }: Props) {
+export function ToolBar() {
+  const structure = useSelector(Selectors.items);
+
   const [isAppFocused, setAppFocus] = useState(false);
   const [delayed, setDelayed] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
@@ -112,35 +109,37 @@ export function ToolBar({ structure }: Props) {
     }
   }, [isOverlaped, hideMode]);
 
-  const onReorderPinned = useCallback(
-    debounce((apps: (ToolbarItem | string)[]) => {
-      let dividerStart = apps.indexOf(DividerStart);
-      let dividerEnd = apps.indexOf(DividerEnd);
+  const onReorderPinned = useCallback((apps: (ToolbarItem | string)[]) => {
+    let dividerStart = apps.indexOf(DividerStart);
+    let dividerEnd = apps.indexOf(DividerEnd);
 
-      if (dividerStart === -1 || dividerEnd === -1) {
-        forceUpdate();
-        return;
-      }
+    if (dividerStart === -1 || dividerEnd === -1) {
+      forceUpdate();
+      return;
+    }
 
-      let payload = apps.slice(0, dividerStart) as ToolbarItem[];
-      dispatch(RootActions.setItemsOnLeft(payload));
+    let payload = apps.slice(0, dividerStart) as ToolbarItem[];
+    dispatch(RootActions.setItemsOnLeft(payload));
 
-      payload = apps.slice(dividerStart + 1, dividerEnd) as ToolbarItem[];
-      dispatch(RootActions.setItemsOnCenter(payload));
+    payload = apps.slice(dividerStart + 1, dividerEnd) as ToolbarItem[];
+    dispatch(RootActions.setItemsOnCenter(payload));
 
-      payload = apps.slice(dividerEnd + 1) as ToolbarItem[];
-      dispatch(RootActions.setItemsOnRight(payload));
+    payload = apps.slice(dividerEnd + 1) as ToolbarItem[];
+    dispatch(RootActions.setItemsOnRight(payload));
 
-      SavePlaceholderAsCustom()?.catch(console.error);
-    }, 10),
-    [],
-  );
+    SaveToolbarItems()?.catch(console.error);
+  }, []);
 
   const shouldBeHidden =
     !isAppFocused && hideMode !== HideMode.Never && (isOverlaped || hideMode === HideMode.Always);
 
   return (
-    <Dropdown
+    <AnimatedDropdown
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'ft-bar-context-menu-open',
+        closeAnimationName: 'ft-bar-context-menu-close',
+      }}
       trigger={['contextMenu']}
       open={openContextMenu}
       onOpenChange={setOpenContextMenu}
@@ -175,6 +174,6 @@ export function ToolBar({ structure }: Props) {
           {structure.right.map(componentByModule.bind(null, plugins))}
         </div>
       </Reorder.Group>
-    </Dropdown>
+    </AnimatedDropdown>
   );
 }

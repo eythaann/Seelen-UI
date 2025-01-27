@@ -1,0 +1,14 @@
+runtime:
+  download: Iya ekhasini lokulanda
+  not_found: Isikhathi sokusebenza se-WebView2 asitholakali
+  not_found_description: I-Seelen UI idinga isikhathi sokusebenza se-Webview2. Sicela uyifake.
+  outdated: I-WebView2 Runtime isiphelelwe yisikhathi
+  outdated_description: >-
+    I-Seelen UI idinga isikhathi sokusebenza se-Webview2 %{min_version} noma
+    ngaphezulu. Sicela uyibuyekeze.
+service:
+  not_running: Isevisi ye-Seelen UI ayisebenzi
+  not_running_description: >-
+    Isevisi ye-Seelen UI (slu-service) incike/umsizi ukuze uhlelo lokusebenza
+    lusebenze kahle.
+  not_running_ok: Qala isevisi

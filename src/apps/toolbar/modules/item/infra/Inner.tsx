@@ -1,3 +1,4 @@
+import { SeelenCommand } from '@seelen-ui/lib';
 import { ToolbarItem } from '@seelen-ui/lib/types';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
@@ -92,7 +93,7 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
     if (this.isExe()) {
       const [_, _size, path] = this.props.text.split(StringToElement.splitter);
       if (path) {
-        invoke<string | null>('get_icon', { path })
+        invoke<string | null>(SeelenCommand.GetIcon, { path })
           .then(this.setExeIcon.bind(this))
           .catch(console.error);
       }
@@ -210,7 +211,7 @@ export function InnerItem(props: InnerItemProps) {
     <Tooltip
       arrow={false}
       mouseLeaveDelay={0}
-      overlayClassName="ft-bar-item-tooltip"
+      classNames={{ root: 'ft-bar-item-tooltip' }}
       title={tooltip ? parseStringToElements(tooltip) : undefined}
     >
       <Reorder.Item

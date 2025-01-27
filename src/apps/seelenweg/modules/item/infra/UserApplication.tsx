@@ -1,6 +1,5 @@
 import { SeelenCommand, SeelenWegSide } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
-import { Popover } from 'antd';
 import moment from 'moment';
 import { memo, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,6 +14,7 @@ import { useIcon, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { PinnedWegItem, RootState, TemporalWegItem } from '../../shared/store/domain';
 
+import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { cx } from '../../../../shared/styles';
 import { WithContextMenu } from '../../../components/WithContextMenu';
 import { DraggableItem } from './DraggableItem';
@@ -43,7 +43,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   const iconSrc =
     useIcon({
       path: item.path,
-      umid: item.umid || undefined,
+      umid: item.umid,
     }) || convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
 
   const { t } = useTranslation();
@@ -93,7 +93,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
       className={cx({ 'associated-view-open': openPreview || openContextMenu })}
     >
       <WithContextMenu
-        items={getUserApplicationContextMenu(t, item, devTools) || []}
+        items={getUserApplicationContextMenu(t, item, devTools, iconSrc) || []}
         onOpenChange={(isOpen) => {
           setOpenContextMenu(isOpen);
           if (openPreview && isOpen) {
@@ -101,14 +101,17 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           }
         }}
       >
-        <Popover
+        <AnimatedPopover
+          animationDescription={{
+            maxAnimationTimeMs: 500,
+            openAnimationName: 'weg-item-preview-container-open',
+            closeAnimationName: 'weg-item-preview-container-close',
+          }}
           open={openPreview}
           mouseEnterDelay={0.4}
           placement={calculatePlacement(settings.position)}
           onOpenChange={(open) =>
-            setOpenPreview(
-              open && !openContextMenu && moment(new Date()) > blockUntil,
-            )
+            setOpenPreview(open && !openContextMenu && moment(new Date()) > blockUntil)
           }
           trigger="hover"
           arrow={false}
@@ -165,7 +168,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
               })}
             />
           </div>
-        </Popover>
+        </AnimatedPopover>
       </WithContextMenu>
     </DraggableItem>
   );

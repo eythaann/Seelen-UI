@@ -1,0 +1,12 @@
+runtime:
+  download: انتقل إلى صفحة التنزيل
+  not_found: لم يتم العثور على وقت تشغيل WebView2
+  not_found_description: تتطلب واجهة مستخدم Seelen وقت تشغيل Webview2. الرجاء تثبيته.
+  outdated: وقت تشغيل WebView2 قديم
+  outdated_description: >-
+    تتطلب واجهة مستخدم Seelen وقت تشغيل Webview2 %{min_version} أو أعلى. يرجى
+    تحديثه.
+service:
+  not_running: خدمة Seelen UI لا تعمل
+  not_running_description: تعتبر خدمة Seelen UI (خدمة slu) بمثابة تبعية/مساعد للتطبيق للعمل بشكل صحيح.
+  not_running_ok: ابدأ الخدمة

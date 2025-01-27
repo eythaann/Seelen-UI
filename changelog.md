@@ -2,10 +2,33 @@
 
 ## [Unreleased]
 ### features
+- allow custom animations on popups/dropdowns.
+- show open new window buttons on dock app items context menu.
+- toggle dock items using win + number.
+
+### refactor
+- create separated system service to handle elevated actions.
+
+### fix
+- ghost windows caused by a refactor donde on v2.0.13.
+- not showing save button after icon packs change.
+- app failing when powershell is not part of the $PATH enviroment.
+- dock items no updatings paths on store updates.
+- unremovable workspace module on toolbar.
+
+## [2.0.14]
+### hotfix
+- not creating the default (system) icon pack.
+
+## [2.0.13]
+### features
 - add kill process option on context menu for dock items.
 - multi-language calendar and date module on toolbar.
 - add icon packs selector on settings > general.
 - allow show only windows on monitor owner of Dock/Taskbar.
+
+### enhancements
+- allow search languages by their english label.
 
 ### refactor
 - move dock state to the background.

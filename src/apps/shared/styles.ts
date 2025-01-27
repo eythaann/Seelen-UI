@@ -1,9 +1,16 @@
-import { getCurrentWidget, Settings, UIColors } from '@seelen-ui/lib';
+import {
+  getCurrentWidget,
+  SeelenLauncherWidgetId,
+  SeelenToolbarWidgetId,
+  SeelenWallWidgetId,
+  SeelenWegWidgetId,
+  SeelenWindowManagerWidgetId,
+  Settings,
+  ThemeList,
+  UIColors,
+} from '@seelen-ui/lib';
 import { Theme, WidgetId } from '@seelen-ui/lib/types';
-import { listen } from '@tauri-apps/api/event';
 import { useEffect, useState } from 'react';
-
-import { UserSettingsLoader } from '../settings/modules/shared/store/storeApi';
 
 type Args = undefined | string | { [x: string]: any };
 export const cx = (...args: Args[]): string => {
@@ -46,18 +53,18 @@ export function useDarkMode() {
 
 /* backward compatibility object for old themes */
 const OLD_THEME_KEYS_BY_WIDGET_ID = {
-  '@seelen/fancy-toolbar': 'toolbar',
-  '@seelen/weg': 'weg',
-  '@seelen/window-manager': 'wm',
-  '@seelen/launcher': 'launcher',
-  '@seelen/wall': 'wall',
+  [SeelenToolbarWidgetId]: 'toolbar',
+  [SeelenWegWidgetId]: 'weg',
+  [SeelenWindowManagerWidgetId]: 'wm',
+  [SeelenLauncherWidgetId]: 'launcher',
+  [SeelenWallWidgetId]: 'wall',
 } as Record<WidgetId, string>;
 
-async function loadThemes(allThemes: Theme[], selected: string[]) {
+function loadThemes(allThemes: Theme[], selected: string[]) {
   const themes = allThemes
-    .filter((theme) => selected.includes(theme.info.filename))
+    .filter((theme) => selected.includes(theme.metadata.filename))
     .sort((a, b) => {
-      return selected.indexOf(a.info.filename) - selected.indexOf(b.info.filename);
+      return selected.indexOf(a.metadata.filename) - selected.indexOf(b.metadata.filename);
     });
 
   const widget = getCurrentWidget();
@@ -68,7 +75,7 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
   element.textContent = '';
 
   for (const theme of themes) {
-    let layerName = theme.info.filename.replace(/[\.]/g, '-') + '-theme';
+    let layerName = theme.metadata.filename.replace(/[\.]/g, '-') + '-theme';
     const oldKey = OLD_THEME_KEYS_BY_WIDGET_ID[widget.id];
     const cssFileContent =
       theme.styles[widget.id] || (oldKey ? theme.styles[oldKey as WidgetId] : undefined);
@@ -82,12 +89,13 @@ async function loadThemes(allThemes: Theme[], selected: string[]) {
 }
 
 export async function StartThemingTool() {
-  const userSettings = await new UserSettingsLoader().withThemes().load();
-  let allThemes = userSettings.themes;
-  let selected = userSettings.jsonSettings.selectedThemes;
+  const settings = await Settings.getAsync();
 
-  await listen<Theme[]>('themes', (event) => {
-    allThemes = event.payload;
+  let allThemes = (await ThemeList.getAsync()).asArray();
+  let selected = settings.inner.selectedThemes;
+
+  await ThemeList.onChange((list) => {
+    allThemes = list.asArray();
     loadThemes(allThemes, selected);
   });
 
@@ -99,5 +107,5 @@ export async function StartThemingTool() {
   (await UIColors.getAsync()).setAssCssVariables();
   UIColors.onChange((colors) => colors.setAssCssVariables());
 
-  await loadThemes(allThemes, selected);
+  loadThemes(allThemes, selected);
 }

@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktivera App Launcher
+  launch_on:
+    mouse_over: Musen över
+    primary: Primär
   monitor: Övervaka att visa
   runners:
     cmd: Kommando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifierare
     kind: Identifiera sig genom
     matching_strategy: Matchningsstrategi
+    matching_strategy_option:
+      contains: Innehåller
+      ends_with: Slutar med
+      equals: Lika
+      regex: Reguljärt uttryck
+      starts_with: Börjar med
     negation: Negera matchning
     or: ELLER
     remove: Radera block
+    type:
+      class: Klass
+      exe: Exe
+      path: Väg
+      title: Titel
   import: Importera
   new: Ny
   search: Sök
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installationsmapp
   load: Ladda
   settings_file: Inställningsfil
+  simulate_fullscreen: Simulera helskärmshändelse
 extras:
   discord: Disharmoni
   exit: Sluta/avsluta
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Skicka till Workspace 7
     send_to_workspace_8: Skicka till Workspace 8
     send_to_workspace_9: Skicka till Workspace 9
+    start_weg_app_0: Fokusera eller starta appen på aktivitetsfältets position 10
+    start_weg_app_1: Fokusera eller starta appen på aktivitetsfältets position 1
+    start_weg_app_2: Fokusera eller starta appen på aktivitetsfältets position 2
+    start_weg_app_3: Fokusera eller starta appen på aktivitetsfältets position 3
+    start_weg_app_4: Fokusera eller starta appen på aktivitetsfältets position 4
+    start_weg_app_5: Fokusera eller starta appen på aktivitetsfältets position 5
+    start_weg_app_6: Fokusera eller starta appen på aktivitetsfältets position 6
+    start_weg_app_7: Fokusera eller starta appen på aktivitetsfältets position 7
+    start_weg_app_8: Fokusera eller starta appen på aktivitetsfältets position 8
+    start_weg_app_9: Fokusera eller starta appen på aktivitetsfältets position 9
     switch_workspace_0: Byt till arbetsyta 1
     switch_workspace_1: Byt till arbetsyta 2
     switch_workspace_2: Byt till arbetsyta 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Fördröjning att visa
   enable: Aktivera snyggt verktygsfält
   height: Höjd
+  hide_mode:
+    always: Alltid
+    never: Aldrig
+    on_overlap: På överlappning
   label: Verktygsfält
-  placeholder:
-    author: Författare
-    description: Beskrivning
-    select: Verktygsfältstruktur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
 update:
   available: Uppdatering tillgänglig!
@@ -238,9 +264,17 @@ weg:
   dock_side: Placera
   enable: Aktivera bryggor/aktivitetsfält
   gap: Glipa
+  hide_mode:
+    always: Alltid
+    never: Aldrig
+    on_overlap: På överlappning
   items:
     gap: Utrymme mellan föremål
     label: Föremål
+    pinned_visibility:
+      always: Alltid
+      label: Synlighet för fästa objekt
+      when_primary: När monitorn är primär
     size: Objektstorlek
     temporal_visibility:
       all: Alla
@@ -250,6 +284,9 @@ weg:
     zoom_size: Zoomad storlek (används för teman)
   label: Docka/arbetsfält
   margin: Marginal
+  mode:
+    full_width: Helskärmsbredd
+    min_content: Liten som kan vara
   padding: Stoppning
   use_multiple_monitor_overlap_logic: Använd displayspecifik istället för enkelfokuslogik
   width: Bredd

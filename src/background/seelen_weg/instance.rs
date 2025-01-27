@@ -123,7 +123,7 @@ impl SeelenWeg {
                 .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
 
         let state = FULL_STATE.load();
-        let settings = &state.settings().seelenweg;
+        let settings = state.settings().seelenweg();
 
         if settings.use_multi_monitor_overlap_logic {
             if is_overlaped {
@@ -168,7 +168,7 @@ impl SeelenWeg {
         let hwnd = HWND(self.window.hwnd()?.0);
 
         let state = FULL_STATE.load();
-        let settings = &state.settings().seelenweg;
+        let settings = state.settings().seelenweg();
         let monitor_dpi = WindowsApi::get_device_pixel_ratio(monitor)?;
         let total_size = (settings.total_size() as f32 * monitor_dpi) as i32;
 

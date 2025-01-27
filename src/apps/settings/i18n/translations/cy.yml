@@ -1,5 +1,8 @@
 app_launcher:
   enable: Galluogi lansiwr app
+  launch_on:
+    mouse_over: Llygoden drosodd
+    primary: Cynradd
   monitor: Monitor i ddangos
   runners:
     cmd: Gorchmynnwn
@@ -50,9 +53,20 @@ apps_configurations:
     id: Dynodwr
     kind: Adnabod gan
     matching_strategy: Strategaeth gyfatebol
+    matching_strategy_option:
+      contains: Yn cynnwys
+      ends_with: Yn gorffen gyda
+      equals: Yn gyfartal
+      regex: Mynegiant rheolaidd
+      starts_with: Yn dechrau gyda
     negation: Negate paru
     or: Neu
     remove: Dileu bloc
+    type:
+      class: Dosbarth
+      exe: Exe
+      path: Llwybr
+      title: Teitl
   import: Mewnforied
   new: Newydd
   search: Chwiloon
@@ -68,6 +82,7 @@ devtools:
   install_folder: Ffolder gosod
   load: Lwythet
   settings_file: Ffeil Gosodiadau
+  simulate_fullscreen: Efelychu digwyddiad sgrin lawn
 extras:
   discord: Anghytgord
   exit: Rhoi'r gorau iddi/allanfa
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Anfon i Workpace 7
     send_to_workspace_8: Anfonwch i Workpace 8
     send_to_workspace_9: Anfonwch i Workpace 9
+    start_weg_app_0: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 10
+    start_weg_app_1: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 1
+    start_weg_app_2: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 2
+    start_weg_app_3: Canolbwyntiwch neu gychwyn ap ar safle bar tasgau 3
+    start_weg_app_4: Ffocws neu gychwyn ap ar safle bar tasgau 4
+    start_weg_app_5: Ffocws neu gychwyn ap ar safle bar tasgau 5
+    start_weg_app_6: Ffocws neu gychwyn ap ar safle bar tasgau 6
+    start_weg_app_7: Ffocws neu gychwyn ap ar safle bar tasgau 7
+    start_weg_app_8: Ffocws neu gychwyn ap ar safle bar tasgau 8
+    start_weg_app_9: Ffocws neu gychwyn ap ar safle bar tasgau 9
     switch_workspace_0: Newid i Workpace 1
     switch_workspace_1: Newid i Workpace 2
     switch_workspace_2: Newid i Workpace 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Oedi i ddangos
   enable: Galluogi bar offer ffansi
   height: Uchder
+  hide_mode:
+    always: Bob amser
+    never: Byth
+    on_overlap: Ar gorgyffwrdd
   label: Bariau
-  placeholder:
-    author: Awduron
-    description: Disgrifiadau
-    select: Strwythur Bar Offer
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
 update:
   available: Diweddariad ar gael!
@@ -238,9 +264,17 @@ weg:
   dock_side: Safle
   enable: Galluogi doc/bar tasg
   gap: Bwlch
+  hide_mode:
+    always: Bob amser
+    never: Byth
+    on_overlap: Ar gorgyffwrdd
   items:
     gap: Lle rhwng eitemau
     label: Eitemau
+    pinned_visibility:
+      always: Bob amser
+      label: Eitemau wedi'u Pinio Gwelededd
+      when_primary: Pan fydd y monitor yn gynradd
     size: Maint eitem
     temporal_visibility:
       all: Pawb
@@ -250,6 +284,9 @@ weg:
     zoom_size: Maint chwyddo (a ddefnyddir ar gyfer themâu)
   label: Doc/bar tasgau
   margin: Ngherlong
+  mode:
+    full_width: Lled sgrin lawn
+    min_content: Bach ag y gall fod
   padding: Padin
   use_multiple_monitor_overlap_logic: Defnyddiwch resymeg arddangos benodol yn hytrach na rhesymeg un ffocws
   width: Lled

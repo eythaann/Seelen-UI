@@ -1,5 +1,8 @@
 app_launcher:
   enable: Włącz uruchamianie aplikacji
+  launch_on:
+    mouse_over: Najedź kursorem
+    primary: Podstawowy
   monitor: Monitor, aby pokazać
   runners:
     cmd: Rozkaz
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identyfikator
     kind: Identyfikować się przez
     matching_strategy: Strategia dopasowywania
+    matching_strategy_option:
+      contains: Zawiera
+      ends_with: Kończy się z
+      equals: Równe
+      regex: Wyrażenie regularne
+      starts_with: Zaczyna się od
     negation: Negate dopasowanie
     or: LUB
     remove: Usuń blok
+    type:
+      class: Klasa
+      exe: Ex
+      path: Ścieżka
+      title: Tytuł
   import: Import
   new: Nowy
   search: Szukaj
@@ -68,6 +82,7 @@ devtools:
   install_folder: Folder instalacyjny
   load: Obciążenie
   settings_file: Plik ustawień
+  simulate_fullscreen: Symuluj wydarzenie na pełnym ekranie
 extras:
   discord: Niezgoda
   exit: Wyjdź/wyjdź
@@ -170,6 +185,16 @@ shortcuts:
     send_to_workspace_7: Wyślij na przestrzeń roboczą 7
     send_to_workspace_8: Wyślij na przestrzeń roboczą 8
     send_to_workspace_9: Wyślij do obszaru roboczego 9
+    start_weg_app_0: Skoncentruj się lub uruchom aplikację na pozycji 10 paska zadań
+    start_weg_app_1: Skoncentruj się lub uruchom aplikację na pozycji 1 paska zadań
+    start_weg_app_2: Skoncentruj się lub uruchom aplikację na pozycji 2 paska zadań
+    start_weg_app_3: Skoncentruj się lub uruchom aplikację na pozycji 3 paska zadań
+    start_weg_app_4: Skoncentruj się lub uruchom aplikację na pozycji 4 paska zadań
+    start_weg_app_5: Skoncentruj się lub uruchom aplikację na pozycji 5 paska zadań
+    start_weg_app_6: Skoncentruj się lub uruchom aplikację na pozycji 6 paska zadań
+    start_weg_app_7: Skoncentruj się lub uruchom aplikację na pozycji 7 paska zadań
+    start_weg_app_8: Skoncentruj się lub uruchom aplikację na pozycji 8 paska zadań
+    start_weg_app_9: Skoncentruj się lub uruchom aplikację na pozycji 9 paska zadań
     switch_workspace_0: Przejdź na obszar roboczy 1
     switch_workspace_1: Przełącz się na przestrzeń roboczą 2
     switch_workspace_2: Przełącz się na przestrzeń roboczą 2
@@ -202,11 +227,12 @@ toolbar:
   delay_to_show: Opóźnienie w pokazie
   enable: Włącz fantazyjny pasek narzędzi
   height: Wysokość
+  hide_mode:
+    always: Zawsze
+    never: Nigdy
+    on_overlap: Na zakładkę
   label: Pasek narzędzi
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Struktura paska narzędzi
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Użyj logiki specyficznej dla wyświetlacza zamiast logiki pojedynczego fokusu
 update:
   available: Aktualizacja dostępna!
@@ -236,9 +262,17 @@ weg:
   dock_side: Pozycja
   enable: Włącz dok/pasek zadań
   gap: Luka
+  hide_mode:
+    always: Zawsze
+    never: Nigdy
+    on_overlap: Na zakładkę
   items:
     gap: Przestrzeń między przedmiotami
     label: Rzeczy
+    pinned_visibility:
+      always: Zawsze
+      label: Widoczność przypiętych elementów
+      when_primary: Gdy monitor jest głównym
     size: Rozmiar elementu
     temporal_visibility:
       all: Wszystko
@@ -248,6 +282,9 @@ weg:
     zoom_size: Powiększony rozmiar (używany do motywów)
   label: Dock/Pasek zadań
   margin: Margines
+  mode:
+    full_width: Pełna szerokość ekranu
+    min_content: Mały, jak to tylko możliwe
   padding: Wyściółka
   use_multiple_monitor_overlap_logic: Użyj logiki specyficznej dla wyświetlacza zamiast logiki pojedynczego fokusu
   width: Szerokość

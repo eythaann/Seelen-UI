@@ -1,5 +1,8 @@
 app_launcher:
   enable: Enable App Launcher
+  launch_on:
+    mouse_over: Mouse fuq
+    primary: Primarja
   monitor: Tissorvelja biex turi
   runners:
     cmd: Kmand
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikatur
     kind: Identifika minn
     matching_strategy: Strateġija ta 'tqabbil
+    matching_strategy_option:
+      contains: Fih
+      ends_with: Tispiċċa bi
+      equals: Indaqs
+      regex: Espressjoni regolari
+      starts_with: Jibda bi
     negation: Iċħad it-tqabbil
     or: Jew
     remove: Ħassar il-blokka
+    type:
+      class: Klassi
+      exe: Exe
+      path: Mogħdija
+      title: Titolu
   import: Importa
   new: Ġdid
   search: Tfittxija
@@ -68,6 +82,7 @@ devtools:
   install_folder: Folder tal-installazzjoni
   load: Tagħbija
   settings_file: Settings Fajl
+  simulate_fullscreen: Issimula avveniment fullscreen
 extras:
   discord: Diskordja
   exit: Nieqaf / ħruġ
@@ -170,6 +185,16 @@ shortcuts:
     send_to_workspace_7: Ibgħat lill-Ispazju tax-Xogħol 7
     send_to_workspace_8: Ibgħat lill-Ispazju tax-Xogħol 8
     send_to_workspace_9: Ibgħat lill-Ispazju tax-Xogħol 9
+    start_weg_app_0: Iffoka jew ibda l-app fuq il-pożizzjoni 10 tat-taskbar
+    start_weg_app_1: Iffoka jew ibda l-app fuq il-pożizzjoni 1 tat-taskbar
+    start_weg_app_2: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 2
+    start_weg_app_3: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 3
+    start_weg_app_4: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 4
+    start_weg_app_5: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 5
+    start_weg_app_6: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 6
+    start_weg_app_7: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 7
+    start_weg_app_8: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 8
+    start_weg_app_9: Iffoka jew ibda l-app fuq il-pożizzjoni tat-taskbar 9
     switch_workspace_0: Aqleb għall-Ispazju tax-Xogħol 1
     switch_workspace_1: Aqleb għall-Ispazju tax-Xogħol 2
     switch_workspace_2: Aqleb għall-Ispazju tax-Xogħol 2
@@ -202,11 +227,12 @@ toolbar:
   delay_to_show: Dewmien biex juri
   enable: Jippermetti toolbar tal-fancy
   height: Għoli
+  hide_mode:
+    always: Dejjem
+    never: Qatt
+    on_overlap: Fuq koinċidenza
   label: Toolbar
-  placeholder:
-    author: Awtur
-    description: Deskrizzjoni
-    select: Struttura tal-Toolbar
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
 update:
   available: Aġġornament disponibbli!
@@ -236,9 +262,17 @@ weg:
   dock_side: Pożizzjoni
   enable: Enable Dock / Taskbar
   gap: Vojt
+  hide_mode:
+    always: Dejjem
+    never: Qatt
+    on_overlap: Fuq koinċidenza
   items:
     gap: Spazju bejn l-oġġetti
     label: Oġġetti
+    pinned_visibility:
+      always: Dejjem
+      label: Oġġetti Pinnjati Viżibilità
+      when_primary: Meta l-monitor huwa primarju
     size: Daqs tal-oġġett
     temporal_visibility:
       all: Kollha
@@ -248,6 +282,9 @@ weg:
     zoom_size: Daqs miżjud (użat għat-temi)
   label: Dock / Taskbar
   margin: Marġni
+  mode:
+    full_width: Wisa 'tal-iskrin sħiħ
+    min_content: Żgħir kemm jista’ jkun
   padding: Ikkuttunar
   use_multiple_monitor_overlap_logic: Uża display speċifiku minflok loġika ta 'fokus wieħed
   width: Wisa '

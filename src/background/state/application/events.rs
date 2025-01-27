@@ -2,7 +2,7 @@ use itertools::Itertools;
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
-use crate::{error_handler::Result, seelen::get_app_handle, trace_lock};
+use crate::{error_handler::Result, seelen::get_app_handle};
 
 use super::FullState;
 
@@ -11,22 +11,6 @@ impl FullState {
         get_app_handle().emit(
             SeelenEvent::StateThemesChanged,
             self.themes().values().collect_vec(),
-        )?;
-        Ok(())
-    }
-
-    pub(super) fn emit_placeholders(&self) -> Result<()> {
-        get_app_handle().emit(
-            SeelenEvent::StatePlaceholdersChanged,
-            self.placeholders().values().collect_vec(),
-        )?;
-        Ok(())
-    }
-
-    pub(super) fn emit_layouts(&self) -> Result<()> {
-        get_app_handle().emit(
-            SeelenEvent::StateLayoutsChanged,
-            self.layouts().values().collect_vec(),
         )?;
         Ok(())
     }
@@ -41,14 +25,6 @@ impl FullState {
 
     pub(super) fn emit_history(&self) -> Result<()> {
         get_app_handle().emit(SeelenEvent::StateHistoryChanged, self.launcher_history())?;
-        Ok(())
-    }
-
-    pub(super) fn emit_icon_packs(&self) -> Result<()> {
-        get_app_handle().emit(
-            SeelenEvent::StateIconPacksChanged,
-            trace_lock!(self.icon_packs()).values().collect_vec(),
-        )?;
         Ok(())
     }
 }

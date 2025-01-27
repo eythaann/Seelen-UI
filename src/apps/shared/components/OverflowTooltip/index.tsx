@@ -6,13 +6,13 @@ import cs from './index.module.css';
 
 interface Props {
   text: string;
-  overlayClassName?: string;
+  rootClassName?: string;
   className?: string;
   placement?: TooltipProps['placement'];
   arrow?: TooltipProps['arrow'];
 }
 
-function _OverflowTooltip({ text, className, ...rest }: Props) {
+function _OverflowTooltip({ text, className, rootClassName, ...rest }: Props) {
   const textRef = useRef<HTMLSpanElement>(null);
   const [isOverflow, setIsOverflow] = useState(false);
 
@@ -27,7 +27,7 @@ function _OverflowTooltip({ text, className, ...rest }: Props) {
   ) : null;
 
   return (
-    <Tooltip title={tooltip} {...rest}>
+    <Tooltip title={tooltip} classNames={{ root: rootClassName }} {...rest}>
       <span ref={textRef} className={cx(cs.text, className)}>
         {text}
       </span>

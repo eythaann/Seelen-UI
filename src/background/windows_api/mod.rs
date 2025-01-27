@@ -3,7 +3,7 @@ mod com;
 mod iterator;
 pub mod monitor;
 pub mod process;
-mod string_utils;
+pub mod string_utils;
 pub mod window;
 
 pub use app_bar::*;
@@ -62,8 +62,8 @@ use windows::{
         },
         Storage::{
             EnhancedStorage::{
-                PKEY_AppUserModel_ID, PKEY_AppUserModel_RelaunchCommand,
-                PKEY_AppUserModel_RelaunchDisplayNameResource,
+                PKEY_AppUserModel_ID, PKEY_AppUserModel_PreventPinning,
+                PKEY_AppUserModel_RelaunchCommand, PKEY_AppUserModel_RelaunchDisplayNameResource,
                 PKEY_AppUserModel_RelaunchIconResource, PKEY_FileDescription,
             },
             FileSystem::WIN32_FIND_DATAW,
@@ -95,13 +95,13 @@ use windows::{
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
                 PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
-                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
-                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-                SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL, SW_RESTORE,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
-                WS_SIZEBOX, WS_THICKFRAME,
+                GWL_STYLE, GW_OWNER, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+                SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
+                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
+                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE, SW_MINIMIZE, SW_NORMAL,
+                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
+                WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -430,13 +430,6 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn close_handle(handle: HANDLE) -> Result<()> {
-        unsafe {
-            CloseHandle(handle)?;
-        }
-        Ok(())
-    }
-
     fn process_handle(process_id: u32) -> Result<HANDLE> {
         Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
     }
@@ -455,10 +448,8 @@ impl WindowsApi {
         unsafe { GetDesktopWindow() }
     }
 
-    pub fn window_is_uwp_suspended(hwnd: HWND) -> Result<bool> {
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
+    pub fn is_process_frozen(process_id: u32) -> Result<bool> {
         let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
-
         let is_frozen = unsafe {
             let mut buffer: [PROCESS_EXTENDED_BASIC_INFORMATION; 1] = std::mem::zeroed();
             let status = NtQueryInformationProcess(
@@ -480,8 +471,6 @@ impl WindowsApi {
             let data = buffer[0];
             data.Anonymous.Flags & ProcessInformationFlag::IsFrozen as u32 != 0
         };
-
-        Self::close_handle(handle)?;
         Ok(is_frozen)
     }
 
@@ -494,8 +483,6 @@ impl WindowsApi {
         unsafe {
             QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
         }
-        Self::close_handle(handle)?;
-
         Ok(String::from_utf16(&path[..len as usize])?)
     }
 
@@ -539,13 +526,22 @@ impl WindowsApi {
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
-    pub fn get_window_app_user_model_id_exe(hwnd: HWND) -> Result<String> {
+    pub fn get_window_app_user_model_id(hwnd: HWND) -> Result<String> {
         let store = Self::get_property_store_for_window(hwnd)?;
         let value = unsafe { store.GetValue(&PKEY_AppUserModel_ID)? };
         if value.is_empty() {
             return Err("No AppUserModel_ID".into());
         }
         Ok(BSTR::try_from(&value)?.to_string())
+    }
+
+    pub fn get_window_prevent_pinning(hwnd: HWND) -> Result<bool> {
+        let store = Self::get_property_store_for_window(hwnd)?;
+        let value = unsafe { store.GetValue(&PKEY_AppUserModel_PreventPinning)? };
+        if value.is_empty() {
+            return Err("No AppUserModel_PreventPinning".into());
+        }
+        Ok(bool::try_from(&value)?)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
@@ -773,6 +769,12 @@ impl WindowsApi {
             EnumDisplayDevicesW(lpdevice, 0, &mut display, EDD_GET_DEVICE_INTERFACE_NAME).ok()?
         };
         Ok(display)
+    }
+
+    pub fn monitor_get_is_primary(hmonitor: HMONITOR) -> Result<bool> {
+        let ex_info = Self::monitor_info(hmonitor)?;
+
+        Ok(ex_info.monitorInfo.dwFlags == MONITORINFOF_PRIMARY)
     }
 
     pub fn get_display_device_settings(monitor: HMONITOR) -> Result<DEVMODEW> {

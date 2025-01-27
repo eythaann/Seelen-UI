@@ -1,0 +1,14 @@
+runtime:
+  download: ໄປທີ່ໜ້າດາວໂຫຼດ
+  not_found: ບໍ່ພົບ WebView2 Runtime
+  not_found_description: Seelen UI ຕ້ອງການ Webview2 Runtime. ກະລຸນາຕິດຕັ້ງມັນ.
+  outdated: WebView2 Runtime ລ້າສະໄຫມ
+  outdated_description: >-
+    Seelen UI ຕ້ອງການ Webview2 Runtime %{min_version} ຫຼືສູງກວ່າ.
+    ກະລຸນາອັບເດດມັນ.
+service:
+  not_running: ການບໍລິການ Seelen UI ບໍ່ເຮັດວຽກ
+  not_running_description: >-
+    Seelen UI Service (slu-service)
+    ເປັນການເພິ່ງພາອາໄສ/ຜູ້ຊ່ວຍເພື່ອໃຫ້ແອັບເຮັດວຽກໄດ້ຢ່າງຖືກຕ້ອງ.
+  not_running_ok: ເລີ່ມການບໍລິການ

@@ -1,5 +1,8 @@
 app_launcher:
   enable: Activa el llançador d'aplicacions
+  launch_on:
+    mouse_over: Passa el ratolí
+    primary: primària
   monitor: Monitoritzar per mostrar
   runners:
     cmd: Manar
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificador
     kind: Identificar -se per
     matching_strategy: Estratègia de coincidència
+    matching_strategy_option:
+      contains: Conté
+      ends_with: Acaba amb
+      equals: Iguals
+      regex: Expressió regular
+      starts_with: Comença amb
     negation: Negar la concordança
     or: O
     remove: Esborra el bloc
+    type:
+      class: Classe
+      exe: Exe
+      path: Camí
+      title: Títol
   import: Importar
   new: Nou
   search: Cerca
@@ -68,6 +82,7 @@ devtools:
   install_folder: Carpeta d'instal·lació
   load: Carregar
   settings_file: Arxiu de configuració
+  simulate_fullscreen: Simula un esdeveniment a pantalla completa
 extras:
   discord: Discòrdia
   exit: Deixar/sortir
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Enviar a l’espai de treball 7
     send_to_workspace_8: Enviar a l'espai de treball 8
     send_to_workspace_9: Enviar a l’espai de treball 9
+    start_weg_app_0: Centra o inicia l'aplicació a la posició 10 de la barra de tasques
+    start_weg_app_1: Centra o inicia l'aplicació a la posició 1 de la barra de tasques
+    start_weg_app_2: Centra o inicia l'aplicació a la posició 2 de la barra de tasques
+    start_weg_app_3: Centra o inicia l'aplicació a la posició 3 de la barra de tasques
+    start_weg_app_4: Centra o inicia l'aplicació a la posició 4 de la barra de tasques
+    start_weg_app_5: Centra o inicia l'aplicació a la posició 5 de la barra de tasques
+    start_weg_app_6: Centra o inicia l'aplicació a la posició 6 de la barra de tasques
+    start_weg_app_7: Centra o inicia l'aplicació a la posició 7 de la barra de tasques
+    start_weg_app_8: Centra o inicia l'aplicació a la posició 8 de la barra de tasques
+    start_weg_app_9: Centra o inicia l'aplicació a la posició 9 de la barra de tasques
     switch_workspace_0: Canvia a l'espai de treball 1
     switch_workspace_1: Canvia a l'espai de treball 2
     switch_workspace_2: Canvia a l'espai de treball 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Retard per mostrar
   enable: Activa la barra d’eines de luxe
   height: Altura
+  hide_mode:
+    always: Sempre
+    never: Mai
+    on_overlap: Sobre la superposició
   label: Barra d’eines
-  placeholder:
-    author: Autora
-    description: Descripció
-    select: Estructura de la barra d’eines
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utilitzeu la lògica específica de la pantalla en lloc de la lògica
     d'enfocament únic
@@ -240,9 +266,17 @@ weg:
   dock_side: Posició
   enable: Activa el moll/la barra de tasques
   gap: Escletxa
+  hide_mode:
+    always: Sempre
+    never: Mai
+    on_overlap: Sobre la superposició
   items:
     gap: Espai entre articles
     label: Plantes
+    pinned_visibility:
+      always: Sempre
+      label: Visibilitat dels elements fixats
+      when_primary: Quan el monitor és principal
     size: Mida de l'article
     temporal_visibility:
       all: Tots
@@ -252,6 +286,9 @@ weg:
     zoom_size: Mida zoom (usada per a temes)
   label: Moll/barra de tasques
   margin: Marge
+  mode:
+    full_width: Amplada de pantalla completa
+    min_content: Petit com pot ser
   padding: Encoir
   use_multiple_monitor_overlap_logic: >-
     Utilitzeu la lògica específica de la pantalla en lloc de la lògica

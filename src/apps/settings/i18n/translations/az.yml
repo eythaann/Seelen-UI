@@ -1,5 +1,8 @@
 app_launcher:
   enable: Tətbiq başlatıcısını aktivləşdirin
+  launch_on:
+    mouse_over: Siçan üzərində
+    primary: İlkin
   monitor: Göstərmək üçün monitor
   runners:
     cmd: Əmr etmək
@@ -49,9 +52,20 @@ apps_configurations:
     id: Eyniləşdirici
     kind: Tərəfindən müəyyənləşdirmək
     matching_strategy: Uyğun strategiya
+    matching_strategy_option:
+      contains: ehtiva edir
+      ends_with: ilə bitir
+      equals: Bərabərdir
+      regex: Daimi ifadə
+      starts_with: ilə başlayır
     negation: Uyğunlaşmanı rədd edin
     or: Və ya
     remove: Bloku silmək
+    type:
+      class: Sinif
+      exe: Exe
+      path: Yol
+      title: Başlıq
   import: İdxal etmək
   new: Yeni
   search: Axtarış
@@ -67,6 +81,7 @@ devtools:
   install_folder: Quraşdırma qovluğu
   load: Yükləmək
   settings_file: Parametrlər faylı
+  simulate_fullscreen: Tam ekran hadisəsini simulyasiya edin
 extras:
   discord: Nifaq
   exit: Çıxmaq / çıxmaq
@@ -171,6 +186,16 @@ shortcuts:
     send_to_workspace_7: 7 iş sahəsinə göndərin
     send_to_workspace_8: İş sahəsinə göndərin 8
     send_to_workspace_9: İş sahəsinə göndərin 9
+    start_weg_app_0: Tətbiqi tapşırıqlar panelinin 10-cu mövqeyinə cəmləyin və ya işə salın
+    start_weg_app_1: Tətbiqi tapşırıqlar panelinin 1-ci mövqeyinə yönəldin və ya işə salın
+    start_weg_app_2: Tətbiqi tapşırıqlar panelinin 2-ci mövqeyinə cəmləyin və ya işə salın
+    start_weg_app_3: Tətbiqi tapşırıqlar panelinin 3-cü mövqeyinə cəmləyin və ya işə salın
+    start_weg_app_4: Tətbiqi tapşırıqlar panelinin 4-cü mövqeyinə yönəldin və ya işə salın
+    start_weg_app_5: Proqramı tapşırıqlar panelinin 5-ci mövqeyinə cəmləyin və ya işə salın
+    start_weg_app_6: Tətbiqi tapşırıqlar panelinin 6-cı mövqeyinə yönəldin və ya işə salın
+    start_weg_app_7: Tətbiqi tapşırıqlar panelinin 7-ci mövqeyinə cəmləyin və ya işə salın
+    start_weg_app_8: Tətbiqi tapşırıqlar panelinin 8-ci mövqeyinə yönəldin və ya işə salın
+    start_weg_app_9: Tətbiqi tapşırıqlar panelinin 9-cu mövqeyinə cəmləyin və ya işə salın
     switch_workspace_0: İş sahəsinə 1 keçin
     switch_workspace_1: İş sahəsinə 2 keçin
     switch_workspace_2: İş sahəsinə 2 keçin
@@ -203,11 +228,12 @@ toolbar:
   delay_to_show: Göstərmək üçün gecikmə
   enable: Zərif alət çubuğunu aktivləşdirin
   height: Hündürlük
+  hide_mode:
+    always: Həmişə
+    never: Heç vaxt
+    on_overlap: Üst-üstə düşür
   label: Alət çubuğu
-  placeholder:
-    author: Müəllif
-    description: Təsvir
-    select: Alətlər paneli quruluşu
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
 update:
   available: YENİLƏNİB!
@@ -235,9 +261,17 @@ weg:
   dock_side: Mövqe
   enable: Dock / tapşırıq çubuğunu aktivləşdirin
   gap: Gap
+  hide_mode:
+    always: Həmişə
+    never: Heç vaxt
+    on_overlap: Üst-üstə düşür
   items:
     gap: Əşyalar arasındakı boşluq
     label: Maddələr
+    pinned_visibility:
+      always: Həmişə
+      label: Saxlanmış Elementlərin Görünüşü
+      when_primary: Monitor əsas olduqda
     size: Maddə ölçüsü
     temporal_visibility:
       all: Hamısı
@@ -247,6 +281,9 @@ weg:
     zoom_size: Böyüdülmüş ölçü (mövzular üçün istifadə olunur)
   label: Dock / tapşırıq çubuğu
   margin: Kənarə
+  mode:
+    full_width: Tam ekran eni
+    min_content: Ola bildiyi qədər kiçik
   padding: Paddend
   use_multiple_monitor_overlap_logic: Tək fokus məntiqi əvəzinə xüsusi ekrandan istifadə edin
   width: Geniştəhər

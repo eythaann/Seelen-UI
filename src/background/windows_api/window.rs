@@ -11,10 +11,7 @@ use windows::Win32::{
 
 use crate::{
     error_handler::Result,
-    modules::{
-        start::application::START_MENU_ITEMS,
-        virtual_desk::{get_vd_manager, VirtualDesktop},
-    },
+    modules::virtual_desk::{get_vd_manager, VirtualDesktop},
     seelen_bar::FancyToolbar,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
@@ -68,24 +65,17 @@ impl Window {
         self.0 .0 as isize
     }
 
-    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchiconresource
-    pub fn search_shortcut_with_same_umid(umid: &str) -> Option<PathBuf> {
-        let items = START_MENU_ITEMS.load();
-        let item = items.iter().find(|item| {
-            if let Some(item_umid) = &item.umid {
-                return item_umid == umid;
-            }
-            false
-        });
-        item.map(|item| item.path.clone())
-    }
-
     /// App user model id asigned to the window via property-store
     /// To get UWP app user model id use `self.process().package_app_user_model_id()`
     ///
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-id
     pub fn app_user_model_id(&self) -> Option<String> {
-        WindowsApi::get_window_app_user_model_id_exe(self.0).ok()
+        WindowsApi::get_window_app_user_model_id(self.0).ok()
+    }
+
+    /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-preventpinning
+    pub fn prevent_pinning(&self) -> bool {
+        WindowsApi::get_window_prevent_pinning(self.0).unwrap_or(false)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/properties/props-system-appusermodel-relaunchcommand
@@ -134,11 +124,23 @@ impl Window {
     }
 
     pub fn outer_rect(&self) -> Result<Rect> {
-        Ok(WindowsApi::get_outer_window_rect(self.hwnd())?.into())
+        let rect = WindowsApi::get_outer_window_rect(self.hwnd())?;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn inner_rect(&self) -> Result<Rect> {
-        Ok(WindowsApi::get_inner_window_rect(self.hwnd())?.into())
+        let rect = WindowsApi::get_inner_window_rect(self.hwnd())?;
+        Ok(Rect {
+            left: rect.left,
+            top: rect.top,
+            right: rect.right,
+            bottom: rect.bottom,
+        })
     }
 
     pub fn parent(&self) -> Option<Window> {
@@ -268,24 +270,16 @@ impl Window {
             return false;
         }
 
-        /* if let Ok(frame_creator) = window.get_frame_creator() {
+        if let Ok(frame_creator) = self.get_frame_creator() {
             if frame_creator.is_none() {
                 return false;
             }
         }
 
-        if WindowsApi::window_is_uwp_suspended(window.hwnd()).unwrap_or_default() {
+        if self.process().is_frozen().unwrap_or(false) {
             return false;
-        } */
-
-        /* if let Some(config) = FULL_STATE.load().get_app_config_by_window(hwnd) {
-            if config.options.contains(&AppExtraFlag::Hidden) {
-                log::trace!("Skipping by config: {:?}", window);
-                return false;
-            }
         }
 
-        !TITLE_BLACK_LIST.contains(&window.title().as_str()) */
         true
     }
 }

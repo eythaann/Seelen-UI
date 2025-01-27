@@ -1,5 +1,8 @@
 app_launcher:
   enable: Dayakan Pelancar App
+  launch_on:
+    mouse_over: Tetikus ke atas
+    primary: utama
   monitor: Pantau untuk menunjukkan
   runners:
     cmd: Perintah
@@ -50,9 +53,20 @@ apps_configurations:
     id: Pengenalpastian
     kind: Mengenal pasti oleh
     matching_strategy: Strategi yang sepadan
+    matching_strategy_option:
+      contains: Mengandungi
+      ends_with: Berakhir dengan
+      equals: sama
+      regex: Ekspresi biasa
+      starts_with: Bermula dengan
     negation: Menafikan padanan
     or: Atau
     remove: Padam blok
+    type:
+      class: Kelas
+      exe: Exe
+      path: Laluan
+      title: Tajuk
   import: Import
   new: Baru
   search: Cari
@@ -68,6 +82,7 @@ devtools:
   install_folder: Folder pemasangan
   load: Beban
   settings_file: Fail tetapan
+  simulate_fullscreen: Simulasikan acara skrin penuh
 extras:
   discord: Perselisihan
   exit: Berhenti/keluar
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Hantar ke Ruang Kerja 7
     send_to_workspace_8: Hantar ke Ruang Kerja 8
     send_to_workspace_9: Hantar ke Ruang Kerja 9
+    start_weg_app_0: Fokus atau mulakan aplikasi pada kedudukan bar tugas 10
+    start_weg_app_1: Fokus atau mulakan apl pada kedudukan bar tugas 1
+    start_weg_app_2: Fokus atau mulakan aplikasi pada kedudukan bar tugas 2
+    start_weg_app_3: Fokus atau mulakan aplikasi pada kedudukan bar tugas 3
+    start_weg_app_4: Fokus atau mulakan aplikasi pada kedudukan bar tugas 4
+    start_weg_app_5: Fokus atau mulakan aplikasi pada kedudukan bar tugas 5
+    start_weg_app_6: Fokus atau mulakan aplikasi pada kedudukan bar tugas 6
+    start_weg_app_7: Fokus atau mulakan aplikasi pada kedudukan bar tugas 7
+    start_weg_app_8: Fokus atau mulakan aplikasi pada kedudukan bar tugas 8
+    start_weg_app_9: Fokus atau mulakan aplikasi pada kedudukan bar tugas 9
     switch_workspace_0: Beralih ke ruang kerja 1
     switch_workspace_1: Beralih ke ruang kerja 2
     switch_workspace_2: Beralih ke ruang kerja 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Kelewatan untuk menunjukkan
   enable: Dayakan bar alat mewah
   height: Ketinggian
+  hide_mode:
+    always: Sentiasa
+    never: tidak pernah
+    on_overlap: Bertindih
   label: Bar alat
-  placeholder:
-    author: Pengarang
-    description: Penerangan
-    select: Struktur bar alat
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
 update:
   available: Kemas kini tersedia!
@@ -236,9 +262,17 @@ weg:
   dock_side: Kedudukan
   enable: Dayakan Dock/Taskbar
   gap: Jurang
+  hide_mode:
+    always: Sentiasa
+    never: tidak pernah
+    on_overlap: Bertindih
   items:
     gap: Ruang antara item
     label: Item
+    pinned_visibility:
+      always: Sentiasa
+      label: Keterlihatan Item Disemat
+      when_primary: Apabila monitor adalah utama
     size: Saiz item
     temporal_visibility:
       all: Semua
@@ -248,6 +282,9 @@ weg:
     zoom_size: Saiz zum (digunakan untuk tema)
   label: Dock/Taskbar
   margin: Margin
+  mode:
+    full_width: Lebar skrin penuh
+    min_content: Kecil yang boleh
   padding: Padding
   use_multiple_monitor_overlap_logic: Gunakan paparan khusus dan bukannya logik fokus tunggal
   width: Lebar

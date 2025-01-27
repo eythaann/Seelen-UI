@@ -1,5 +1,8 @@
 app_launcher:
   enable: App Leader-ийг идэвхжүүлэх
+  launch_on:
+    mouse_over: Хулганы дээгүүр
+    primary: Үндсэн
   monitor: Бие шоу хийх террут
   runners:
     cmd: Тушаах
@@ -49,9 +52,20 @@ apps_configurations:
     id: Өмнө тайлбар
     kind: Тодорхойлох
     matching_strategy: Тохирох стратеги
+    matching_strategy_option:
+      contains: агуулсан
+      ends_with: '-ээр төгсдөг'
+      equals: Тэнцүү
+      regex: Тогтмол илэрхийлэл
+      starts_with: '-ээр эхэлдэг'
     negation: Тохирохыг үгүйсгэх
     or: ЭСВЭЛ
     remove: Блок устгах
+    type:
+      class: Анги
+      exe: Exe
+      path: Зам
+      title: Гарчиг
   import: Импортлох
   new: Шинэ
   search: Эрэл хайгуул хийх
@@ -67,6 +81,7 @@ devtools:
   install_folder: Суулгалах хүрээ
   load: Ачих
   settings_file: Тохиргооын нэр
+  simulate_fullscreen: Бүтэн дэлгэцийн үйл явдлыг дуурайх
 extras:
   discord: Холор
   exit: Гарах / гарах
@@ -169,6 +184,22 @@ shortcuts:
     send_to_workspace_7: Ажлын талбар руу илгээх 7
     send_to_workspace_8: Ажлын талбар руу илгээх 8
     send_to_workspace_9: Ажлын талбарт 9-р илгээнэ үү
+    start_weg_app_0: Taskbar 10-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг эхлүүлэх
+    start_weg_app_1: >-
+      Даалгаврын самбарын 1-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг
+      эхлүүлэх
+    start_weg_app_2: Taskbar 2-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг эхлүүлэх
+    start_weg_app_3: >-
+      Даалгаврын самбарын 3-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг
+      эхлүүлэх
+    start_weg_app_4: Taskbar 4-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг эхлүүлэх
+    start_weg_app_5: Ажлын талбарын 5-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг эхлүүлэх
+    start_weg_app_6: Taskbar 6-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг эхлүүлэх
+    start_weg_app_7: >-
+      Даалгаврын самбарын 7-р байрлалд анхаарлаа төвлөрүүл эсвэл програмыг
+      эхлүүл
+    start_weg_app_8: Taskbar 8-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг эхлүүлэх
+    start_weg_app_9: Taskbar 9-р байрлалд анхаарлаа төвлөрүүлэх эсвэл програмыг эхлүүлэх
     switch_workspace_0: Ажлын талбарт шилжих 1
     switch_workspace_1: Ажлын талбарт 2 руу шилжих
     switch_workspace_2: Ажлын талбарт 2 руу шилжих
@@ -200,11 +231,12 @@ toolbar:
   delay_to_show: Үзүүлэхийг хойшлуулсан
   enable: Ширээний хэрэгслийн самбарыг идэвхжүүлэх
   height: Өндөрлөг
+  hide_mode:
+    always: Үргэлж
+    never: Хэзээ ч үгүй
+    on_overlap: Давхардсан дээр
   label: Балтсний хайрцагны хэрэгсэл
-  placeholder:
-    author: Зохиолч
-    description: Тодорхойлолт / төрөл анги
-    select: Хэрэгслийн бүтэц
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
 update:
   available: Шинэчлэх боломжтой!
@@ -234,9 +266,17 @@ weg:
   dock_side: Байрлал
   enable: Док / Taskbar-г идэвхжүүлэх
   gap: Цонх
+  hide_mode:
+    always: Үргэлж
+    never: Хэзээ ч үгүй
+    on_overlap: Давхардсан дээр
   items:
     gap: Зүйлийн хоорондох зай
     label: Зүйл
+    pinned_visibility:
+      always: Үргэлж
+      label: Тогтсон зүйлсийн харагдах байдал
+      when_primary: Монитор анхдагч байх үед
     size: Зүйлийн хэмжээ
     temporal_visibility:
       all: Бүгд
@@ -246,6 +286,9 @@ weg:
     zoom_size: Томруулсан хэмжээ (сэдэвт ашигладаг)
   label: Док / Taskbar
   margin: Саруулган өвс
+  mode:
+    full_width: Бүтэн дэлгэцийн өргөн
+    min_content: Аль болох жижиг
   padding: Дэвсгэр
   use_multiple_monitor_overlap_logic: Нэг фокусын логикийн оронд тусгай дэлгэцийг ашигла
   width: Өргөн

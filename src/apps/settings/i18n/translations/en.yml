@@ -1,5 +1,8 @@
 app_launcher:
   enable: Enable App Launcher
+  launch_on:
+    mouse_over: Mouse over
+    primary: Primary
   monitor: Monitor to show
   runners:
     cmd: Command
@@ -49,9 +52,20 @@ apps_configurations:
     id: Identifier
     kind: Identify By
     matching_strategy: Matching Strategy
+    matching_strategy_option:
+      contains: Contains
+      ends_with: Ends with
+      equals: Equals
+      regex: Regular expression
+      starts_with: Starts with
     negation: Negate Matching
     or: OR
     remove: Delete Block
+    type:
+      class: Class
+      exe: Exe
+      path: Path
+      title: Title
   import: Import
   new: New
   search: Search
@@ -67,6 +81,7 @@ devtools:
   install_folder: Installation Folder
   load: Load
   settings_file: Settings File
+  simulate_fullscreen: Simulate fullscreen event
 extras:
   discord: Discord
   exit: Quit/Exit
@@ -169,6 +184,16 @@ shortcuts:
     send_to_workspace_7: Send to Workspace 8
     send_to_workspace_8: Send to Workspace 9
     send_to_workspace_9: Send to Workspace 10
+    start_weg_app_0: Focus or start app on taskbar position 10
+    start_weg_app_1: Focus or start app on taskbar position 1
+    start_weg_app_2: Focus or start app on taskbar position 2
+    start_weg_app_3: Focus or start app on taskbar position 3
+    start_weg_app_4: Focus or start app on taskbar position 4
+    start_weg_app_5: Focus or start app on taskbar position 5
+    start_weg_app_6: Focus or start app on taskbar position 6
+    start_weg_app_7: Focus or start app on taskbar position 7
+    start_weg_app_8: Focus or start app on taskbar position 8
+    start_weg_app_9: Focus or start app on taskbar position 9
     switch_workspace_0: Switch to Workspace 1
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_2: Switch to Workspace 3
@@ -201,11 +226,12 @@ toolbar:
   delay_to_show: Delay to show
   enable: Enable Fancy Toolbar
   height: Height
+  hide_mode:
+    always: Always
+    never: Never
+    on_overlap: On overlap
   label: Toolbar
-  placeholder:
-    author: Author
-    description: Description
-    select: Toolbar Structure
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
 update:
   available: Update Available!
@@ -233,9 +259,17 @@ weg:
   dock_side: Position
   enable: Enable Dock/Taskbar
   gap: Gap
+  hide_mode:
+    always: Always
+    never: Never
+    on_overlap: On overlap
   items:
     gap: Space Between Items
     label: Items
+    pinned_visibility:
+      always: Always
+      label: Pinned Items Visibility
+      when_primary: When the monitor is primary
     size: Item Size
     temporal_visibility:
       all: All
@@ -245,6 +279,9 @@ weg:
     zoom_size: Zoomed Size (used for themes)
   label: Dock/Taskbar
   margin: Margin
+  mode:
+    full_width: Full screen width
+    min_content: Small as can be
   padding: Padding
   use_multiple_monitor_overlap_logic: Use display specific instead of single focus logic
   width: Width

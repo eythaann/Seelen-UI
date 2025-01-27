@@ -1,11 +1,8 @@
-import { ConnectedMonitor, Rect } from '@seelen-ui/lib';
-import { MonitorConfiguration as IMonitorConfiguration } from '@seelen-ui/lib/types';
-import { Button, Modal, Switch } from 'antd';
-import { useState } from 'react';
+import { ConnectedMonitor, SeelenToolbarWidgetId, SeelenWallWidgetId, SeelenWegWidgetId, SeelenWindowManagerWidgetId } from '@seelen-ui/lib';
+import { MonitorConfiguration as IMonitorConfiguration, WidgetId } from '@seelen-ui/lib/types';
+import { Switch } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { WindowManagerSpacingSettings } from '../../WindowManager/main/infra/GlobalPaddings';
 
 import { newSelectors, RootActions } from '../../shared/store/app/reducer';
 import { WegSettingsDeclaration } from '../application';
@@ -21,90 +18,17 @@ interface MonitorConfigProps {
   onChange: (monitor: IMonitorConfiguration) => void;
 }
 
-export function MoreMonitorConfig({ device, config, onChange }: MonitorConfigProps) {
-  const [open, setOpen] = useState(false);
-  const { t } = useTranslation();
-
-  function onChangeGap(v: number | null) {
-    onChange({
-      ...config,
-      wm: {
-        ...config.wm,
-        gap: v ? Math.round(v) : null,
-      },
-    });
-  }
-
-  function onChangePadding(v: number | null) {
-    onChange({
-      ...config,
-      wm: {
-        ...config.wm,
-        padding: v ? Math.round(v) : null,
-      },
-    });
-  }
-
-  function onChangeMargins(side: keyof Rect, v: number | null) {
-    onChange({
-      ...config,
-      wm: {
-        ...config.wm,
-        margin: {
-          ...(config.wm.margin || new Rect()),
-          [side]: Math.round(v || 0),
-        },
-      },
-    });
-  }
-
-  function onClear() {
-    onChange({
-      ...config,
-      wm: {
-        ...config.wm,
-        gap: null,
-        padding: null,
-        margin: null,
-      },
-    });
-  }
-
-  // todo(eythan) more settings will be disabled until we have a finished implementation
-  return (
-    <>
-      <Button type="default" onClick={() => setOpen(true)} disabled>
-        {t('more')}
-      </Button>
-      <Modal
-        title={t('monitors_configurations.label').replace('{{index}}', device.name)}
-        open={open}
-        onCancel={() => setOpen(false)}
-        centered
-        footer={null}
-      >
-        <WindowManagerSpacingSettings
-          gap={config.wm.gap}
-          padding={config.wm.padding}
-          margins={config.wm.margin}
-          onChangeGap={onChangeGap}
-          onChangePadding={onChangePadding}
-          onChangeMargins={onChangeMargins}
-          onClear={onClear}
-        />
-      </Modal>
-    </>
-  );
-}
-
 export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) {
   const { t } = useTranslation();
 
-  function onToggle(key: string, value: boolean) {
+  function onToggle(key: WidgetId, value: boolean) {
     onChange({
       ...config,
-      [key]: {
-        enabled: value,
+      byWidget: {
+        ...config.byWidget,
+        [key]: {
+          enabled: value,
+        },
       },
     });
   }
@@ -127,19 +51,23 @@ export function MonitorConfig({ device, config, onChange }: MonitorConfigProps) 
           <SettingsGroup>
             <SettingsOption>
               <b>{t('toolbar.enable')}</b>
-              <Switch value={config.tb.enabled} onChange={(v) => onToggle('tb', v)} />
+              <Switch value={!!config.byWidget[SeelenToolbarWidgetId]?.enabled} onChange={(v) => onToggle(SeelenToolbarWidgetId, v)} />
             </SettingsOption>
             <SettingsOption>
               <b>{t('wm.enable')}</b>
-              <Switch value={config.wm.enabled} onChange={(v) => onToggle('wm', v)} disabled />
+              <Switch value={!!config.byWidget[SeelenWindowManagerWidgetId]?.enabled} onChange={(v) => onToggle(SeelenWindowManagerWidgetId, v)} disabled />
             </SettingsOption>
             <SettingsOption>
               <b>{t('header.labels.seelen_weg')}</b>
-              <WidgetSettingsModal widgetId="weg" monitorId={device.id} settings={WegSettingsDeclaration} />
+              <WidgetSettingsModal
+                widgetId={SeelenWegWidgetId}
+                monitorId={device.id}
+                settings={WegSettingsDeclaration}
+              />
             </SettingsOption>
             <SettingsOption>
               <b>{t('wall.enable')}</b>
-              <Switch value={config.wall.enabled} onChange={(v) => onToggle('wall', v)} disabled />
+              <Switch value={!!config.byWidget[SeelenWallWidgetId]?.enabled} onChange={(v) => onToggle(SeelenWallWidgetId, v)} disabled />
             </SettingsOption>
           </SettingsGroup>
         </div>

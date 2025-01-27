@@ -1,5 +1,8 @@
 app_launcher:
   enable: Schakel App Launcher in
+  launch_on:
+    mouse_over: Muis er overheen
+    primary: Primair
   monitor: Monitor om te laten zien
   runners:
     cmd: Commando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificatie
     kind: Identificeren door
     matching_strategy: Matching -strategie
+    matching_strategy_option:
+      contains: Bevat
+      ends_with: Eindigt met
+      equals: Gelijk aan
+      regex: Reguliere expressie
+      starts_with: Begint met
     negation: Ontkennen matching
     or: OF
     remove: Verwijder blok
+    type:
+      class: Klas
+      exe: Ex
+      path: Pad
+      title: Titel
   import: Importeren
   new: Nieuw
   search: Zoekopdracht
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installatiemap
   load: Laden
   settings_file: Instellingenbestand
+  simulate_fullscreen: Simuleer een gebeurtenis op volledig scherm
 extras:
   discord: Discord
   exit: Stop/exit
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Stuur naar werkruimte 7
     send_to_workspace_8: Stuur naar werkruimte 8
     send_to_workspace_9: Stuur naar werkruimte 9
+    start_weg_app_0: Focus of start app op taakbalkpositie 10
+    start_weg_app_1: Focus of start app op taakbalkpositie 1
+    start_weg_app_2: Focus of start app op taakbalkpositie 2
+    start_weg_app_3: Focus of start app op taakbalkpositie 3
+    start_weg_app_4: Focus of start app op taakbalkpositie 4
+    start_weg_app_5: Focus of start app op taakbalkpositie 5
+    start_weg_app_6: Focus of start app op taakbalkpositie 6
+    start_weg_app_7: Focus of start app op taakbalkpositie 7
+    start_weg_app_8: Focus of start app op taakbalkpositie 8
+    start_weg_app_9: Focus of start app op taakbalkpositie 9
     switch_workspace_0: Schakel over naar werkruimte 1
     switch_workspace_1: Schakel over naar werkruimte 2
     switch_workspace_2: Schakel over naar werkruimte 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Vertraging om te tonen
   enable: Schakel fancy werkbalk in
   height: Hoogte
+  hide_mode:
+    always: Altijd
+    never: Nooit
+    on_overlap: Op overlap
   label: Werkbalk
-  placeholder:
-    author: Auteur
-    description: Beschrijving
-    select: Werkbalkstructuur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
 update:
   available: Update beschikbaar!
@@ -240,9 +266,17 @@ weg:
   dock_side: Positie
   enable: Schakel dock/taakbalk in
   gap: Gat
+  hide_mode:
+    always: Altijd
+    never: Nooit
+    on_overlap: Op overlap
   items:
     gap: Ruimte tussen items
     label: Items
+    pinned_visibility:
+      always: Altijd
+      label: Zichtbaarheid van vastgezette items
+      when_primary: Wanneer de monitor primair is
     size: Item grootte
     temporal_visibility:
       all: Alle
@@ -252,6 +286,9 @@ weg:
     zoom_size: Ingezoomde grootte (gebruikt voor thema's)
   label: Dock/taakbalk
   margin: Marge
+  mode:
+    full_width: Volledige schermbreedte
+    min_content: Klein als het maar kan zijn
   padding: Vulling
   use_multiple_monitor_overlap_logic: Gebruik weergavespecifiek in plaats van logica met één focus
   width: Breedte

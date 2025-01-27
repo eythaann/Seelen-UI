@@ -1,0 +1,16 @@
+runtime:
+  download: Przejdź do strony pobierania
+  not_found: Nie znaleziono środowiska uruchomieniowego WebView2
+  not_found_description: >-
+    Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2.
+    Zainstaluj go.
+  outdated: Środowisko wykonawcze WebView2 jest nieaktualne
+  outdated_description: >-
+    Interfejs użytkownika Seelen wymaga środowiska uruchomieniowego Webview2
+    %{min_version} lub nowszego. Zaktualizuj to.
+service:
+  not_running: Usługa Seelen UI nie działa
+  not_running_description: >-
+    Usługa Seelen UI Service (slu-service) jest zależnością/pomocą umożliwiającą
+    prawidłowe działanie aplikacji.
+  not_running_ok: Uruchom usługę
