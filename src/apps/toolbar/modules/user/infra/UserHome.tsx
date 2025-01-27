@@ -204,7 +204,7 @@ function UserHome({ }: UserHomeProps) {
               <HistoryItem key={index} item={item} />
             ))}
             { history.length > 5 &&
-              <button className="userhome-folder-history-extender" onClick={() => setHistoryCount(history.length > historyCount ? historyCount * 2 : 5)}>{history.length > historyCount ? t('userhome.history.more_items') : t('userhome.history.reduce_items')}</button>
+              <button className="userhome-history-viewcount-extender" onClick={() => setHistoryCount(history.length > historyCount ? historyCount * 2 : 5)}>{history.length > historyCount ? t('userhome.history.more_items') : t('userhome.history.reduce_items')}</button>
             }
           </ul>
         </>

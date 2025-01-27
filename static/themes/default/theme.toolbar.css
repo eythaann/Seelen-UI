@@ -955,6 +955,11 @@
       border-left: 1px solid var(--color-gray-900);
     }
   }
+
+  .userhome-history-viewcount-extender {
+    text-align: left;
+    padding-left: 1.5em;
+  }
 }
 
 .userhome-folder-content {
