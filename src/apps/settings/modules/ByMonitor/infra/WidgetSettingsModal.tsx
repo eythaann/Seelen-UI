@@ -1,6 +1,5 @@
 // This file is for testing, not final implementation yet.
 
-import { MonitorConfiguration } from '@seelen-ui/lib/types';
 import { Button, Modal, Select, Switch } from 'antd';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -27,9 +26,7 @@ export function WidgetSettingsModal({ widgetId, monitorId, settings: declaration
 
   const settingsByMonitor = useSelector(newSelectors.monitorsV2);
   const monitorConfig = settingsByMonitor[monitorId];
-  const widgetConfig = monitorConfig?.[widgetId as keyof MonitorConfiguration] as
-    | Record<string, any>
-    | undefined;
+  const widgetConfig = monitorConfig?.byWidget[widgetId];
 
   const dispatch = useDispatch();
 
@@ -39,9 +36,11 @@ export function WidgetSettingsModal({ widgetId, monitorId, settings: declaration
         ...settingsByMonitor,
         [monitorId]: {
           ...monitorConfig!,
-          [widgetId]: {
-            ...widgetConfig!,
-            [key]: value,
+          byWidget: {
+            [widgetId]: {
+              ...widgetConfig!,
+              [key]: value,
+            },
           },
         },
       }),

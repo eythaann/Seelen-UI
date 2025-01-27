@@ -1,5 +1,8 @@
 app_launcher:
   enable: Ativar lançador de aplicativos
+  launch_on:
+    mouse_over: Passe o mouse
+    primary: Primário
   monitor: Monitor para mostrar
   runners:
     cmd: Comando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identificador
     kind: Identificar por
     matching_strategy: Estratégia de correspondência
+    matching_strategy_option:
+      contains: Contém
+      ends_with: Termina com
+      equals: Igual
+      regex: Expressão regular
+      starts_with: Começa com
     negation: Negar correspondência
     or: OU
     remove: Excluir bloco
+    type:
+      class: Aula
+      exe: Exe
+      path: Caminho
+      title: Título
   import: Importar
   new: Novo
   search: Procurar
@@ -68,6 +82,7 @@ devtools:
   install_folder: Pasta de instalação
   load: Carregar
   settings_file: Arquivo de configurações
+  simulate_fullscreen: Simular evento em tela cheia
 extras:
   discord: Discord
   exit: Sair/Sair
@@ -170,6 +185,16 @@ shortcuts:
     send_to_workspace_7: Enviar para o espaço de trabalho 7
     send_to_workspace_8: Enviar para o espaço de trabalho 8
     send_to_workspace_9: Enviar para o espaço de trabalho 9
+    start_weg_app_0: Concentre-se ou inicie o aplicativo na posição 10 da barra de tarefas
+    start_weg_app_1: Concentre-se ou inicie o aplicativo na posição 1 da barra de tarefas
+    start_weg_app_2: Concentre-se ou inicie o aplicativo na posição 2 da barra de tarefas
+    start_weg_app_3: Concentre-se ou inicie o aplicativo na posição 3 da barra de tarefas
+    start_weg_app_4: Concentre-se ou inicie o aplicativo na posição 4 da barra de tarefas
+    start_weg_app_5: Concentre-se ou inicie o aplicativo na posição 5 da barra de tarefas
+    start_weg_app_6: Concentre-se ou inicie o aplicativo na posição 6 da barra de tarefas
+    start_weg_app_7: Concentre-se ou inicie o aplicativo na posição 7 da barra de tarefas
+    start_weg_app_8: Concentre-se ou inicie o aplicativo na posição 8 da barra de tarefas
+    start_weg_app_9: Concentre-se ou inicie o aplicativo na posição 9 da barra de tarefas
     switch_workspace_0: Mudar para o espaço de trabalho 1
     switch_workspace_1: Mudar para o espaço de trabalho 2
     switch_workspace_2: Mudar para o espaço de trabalho 2
@@ -202,11 +227,12 @@ toolbar:
   delay_to_show: Demora para mostrar
   enable: Ativar barra de ferramentas sofisticada
   height: Altura
+  hide_mode:
+    always: Sempre
+    never: Nunca
+    on_overlap: Na sobreposição
   label: Barra de ferramentas
-  placeholder:
-    author: Autor
-    description: Descrição
-    select: Estrutura da barra de ferramentas
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
 update:
   available: Atualização disponível!
@@ -236,9 +262,17 @@ weg:
   dock_side: Posição
   enable: Habilitar Dock/Barra de Tarefas
   gap: Espaçamento
+  hide_mode:
+    always: Sempre
+    never: Nunca
+    on_overlap: Na sobreposição
   items:
     gap: Espaço entre itens
     label: Item
+    pinned_visibility:
+      always: Sempre
+      label: Visibilidade dos itens fixados
+      when_primary: Quando o monitor é primário
     size: Tamanho do item
     temporal_visibility:
       all: Todos
@@ -248,6 +282,9 @@ weg:
     zoom_size: Tamanho ampliado (usado para temas)
   label: Dock/barra de tarefas
   margin: Margem
+  mode:
+    full_width: Largura de tela inteira
+    min_content: Pequeno como pode ser
   padding: Preenchimento
   use_multiple_monitor_overlap_logic: Use exibição específica em vez de lógica de foco único
   width: Largura

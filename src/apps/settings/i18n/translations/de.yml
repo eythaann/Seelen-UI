@@ -1,5 +1,8 @@
 app_launcher:
   enable: App Launcher aktivieren
+  launch_on:
+    mouse_over: Maus drüber
+    primary: Primär
   monitor: Monitor zum Anzeigen
   runners:
     cmd: Befehl
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identifizieren nach
     matching_strategy: Abgleichstrategie
+    matching_strategy_option:
+      contains: Enthält
+      ends_with: Endet mit
+      equals: Gleich
+      regex: Regulärer Ausdruck
+      starts_with: Beginnt mit
     negation: Abgleich negieren
     or: ODER
     remove: Block löschen
+    type:
+      class: Klasse
+      exe: Exe
+      path: Weg
+      title: Titel
   import: Importieren
   new: Neu
   search: Suchen
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installationsordner
   load: Laden
   settings_file: Einstellungsdatei
+  simulate_fullscreen: Vollbildereignis simulieren
 extras:
   discord: Discord
   exit: Beenden
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Zum Arbeitsbereich 7 senden
     send_to_workspace_8: Zum Arbeitsbereich 8 senden
     send_to_workspace_9: Zum Arbeitsbereich 9 senden
+    start_weg_app_0: Fokussieren oder starten Sie die App auf Position 10 in der Taskleiste
+    start_weg_app_1: Fokussieren oder starten Sie die App auf Taskleistenposition 1
+    start_weg_app_2: Fokussieren oder starten Sie die App auf Taskleistenposition 2
+    start_weg_app_3: Fokussieren oder starten Sie die App auf Taskleistenposition 3
+    start_weg_app_4: Fokussieren oder starten Sie die App auf Position 4 in der Taskleiste
+    start_weg_app_5: Fokussieren oder starten Sie die App auf Position 5 in der Taskleiste
+    start_weg_app_6: Fokussieren oder starten Sie die App auf Position 6 in der Taskleiste
+    start_weg_app_7: Fokussieren oder starten Sie die App auf Position 7 in der Taskleiste
+    start_weg_app_8: Fokussieren oder starten Sie die App auf Position 8 in der Taskleiste
+    start_weg_app_9: Fokussieren oder starten Sie die App auf Position 9 in der Taskleiste
     switch_workspace_0: Wechseln Sie zum Arbeitsbereich 1
     switch_workspace_1: Wechseln Sie zum Arbeitsbereich 2
     switch_workspace_2: Zum Arbeitsbereich 2 wechseln
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Verzögerung beim Anzeigen
   enable: Elegante Werkzeugleiste aktivieren
   height: Höhe
+  hide_mode:
+    always: Stets
+    never: Niemals
+    on_overlap: Auf Überlappung
   label: Symbolleiste
-  placeholder:
-    author: Autor
-    description: Beschreibung
-    select: Struktur der Werkzeugleiste
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
 update:
   available: Update verfügbar!
@@ -238,9 +264,17 @@ weg:
   dock_side: Position
   enable: Dock/Taskleiste aktivieren
   gap: Abstand
+  hide_mode:
+    always: Stets
+    never: Niemals
+    on_overlap: Auf Überlappung
   items:
     gap: Abstand zwischen Elementen
     label: Elemente
+    pinned_visibility:
+      always: Stets
+      label: Sichtbarkeit angehefteter Elemente
+      when_primary: Wenn der Monitor primär ist
     size: Elementgröße
     temporal_visibility:
       all: Alle
@@ -250,6 +284,9 @@ weg:
     zoom_size: Vergrößerte Größe (für Themen verwendet)
   label: Dock/Taskleiste
   margin: Rand
+  mode:
+    full_width: Volle Bildschirmbreite
+    min_content: So klein wie möglich
   padding: Polsterung
   use_multiple_monitor_overlap_logic: Verwenden Sie eine anzeigespezifische statt einer einzelnen Fokuslogik
   width: Breite

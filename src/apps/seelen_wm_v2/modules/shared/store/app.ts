@@ -8,7 +8,7 @@ import { StateBuilder } from '../../../../shared/StateBuilder';
 const initialState: RootState = {
   _version: 0,
   layout: null,
-  settings: (await Settings.default()).inner.windowManager,
+  settings: (await Settings.default()).windowManager,
   colors: UIColors.default().inner,
   activeWindow: 0,
   reservation: null,

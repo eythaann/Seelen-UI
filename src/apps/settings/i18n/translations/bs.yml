@@ -1,5 +1,8 @@
 app_launcher:
   enable: Omogući pokretač aplikacija
+  launch_on:
+    mouse_over: Pređite mišem
+    primary: Primarno
   monitor: Monitor za prikaz
   runners:
     cmd: Naredba
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identificirati
     matching_strategy: Strategija podudaranja
+    matching_strategy_option:
+      contains: Sadrži
+      ends_with: Završava sa
+      equals: Jednako
+      regex: Regularni izraz
+      starts_with: Počinje sa
     negation: Negirati podudaranje
     or: Ili
     remove: Obriši blok
+    type:
+      class: Klasa
+      exe: Exe
+      path: Put
+      title: Naslov
   import: Uvoz
   new: Novo
   search: Pretražiti
@@ -68,6 +82,7 @@ devtools:
   install_folder: Instalacijska mapa
   load: Opteretiti
   settings_file: Datoteka postavki
+  simulate_fullscreen: Simulirajte događaj preko cijelog ekrana
 extras:
   discord: Nesklad
   exit: Prestanite / izlaz
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Pošalji u radni prostor 7
     send_to_workspace_8: Pošalji u radni prostor 8
     send_to_workspace_9: Pošalji u radni prostor 9
+    start_weg_app_0: Fokusirajte ili pokrenite aplikaciju na poziciji 10 na traci zadataka
+    start_weg_app_1: Fokusirajte ili pokrenite aplikaciju na poziciji 1 na traci zadataka
+    start_weg_app_2: Fokusirajte ili pokrenite aplikaciju na poziciji 2 na traci zadataka
+    start_weg_app_3: Fokusirajte ili pokrenite aplikaciju na poziciji 3 na traci zadataka
+    start_weg_app_4: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 4
+    start_weg_app_5: Fokusirajte ili pokrenite aplikaciju na poziciji 5 na traci zadataka
+    start_weg_app_6: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 6
+    start_weg_app_7: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 7
+    start_weg_app_8: Fokusirajte ili pokrenite aplikaciju na poziciji 8 na traci zadataka
+    start_weg_app_9: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 9
     switch_workspace_0: Prebacite se na radni prostor 1
     switch_workspace_1: Prebacite se na radni prostor 2
     switch_workspace_2: Prebacite se na radni prostor 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Kašnjenje za prikaz
   enable: Omogući fantastičnu alatnu traku
   height: Visina
+  hide_mode:
+    always: Uvijek
+    never: Nikad
+    on_overlap: Na preklapanje
   label: Alatna traka
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Struktura alatne trake
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
 update:
   available: Ažuriraj dostupno!
@@ -236,9 +262,17 @@ weg:
   dock_side: Položaj
   enable: Omogući pristanište / traku zadataka
   gap: Jaz
+  hide_mode:
+    always: Uvijek
+    never: Nikad
+    on_overlap: Na preklapanje
   items:
     gap: Prostor između predmeta
     label: Predmeti
+    pinned_visibility:
+      always: Uvijek
+      label: Vidljivost zakačenih stavki
+      when_primary: Kada je monitor primarni
     size: Veličina predmeta
     temporal_visibility:
       all: Sve
@@ -248,6 +282,9 @@ weg:
     zoom_size: Povećana veličina (koristi se za teme)
   label: Dock / programska traka
   margin: Marža
+  mode:
+    full_width: Cijela širina ekrana
+    min_content: Manji koliko može
   padding: Obloga
   use_multiple_monitor_overlap_logic: Koristite specifičan prikaz umjesto logike jednog fokusa
   width: Širina

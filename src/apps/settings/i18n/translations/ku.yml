@@ -1,5 +1,8 @@
 app_launcher:
   enable: Launcher App çalak bikin
+  launch_on:
+    mouse_over: Mişk li ser
+    primary: Bingehîn
   monitor: Monitor to Show
   runners:
     cmd: Ferman
@@ -48,9 +51,20 @@ apps_configurations:
     id: Nasî
     kind: Ji hêla nas kirin
     matching_strategy: Stratejiya hevberdanê
+    matching_strategy_option:
+      contains: Dihewîne
+      ends_with: Bi dawî dibe
+      equals: Wekhevî
+      regex: îfadeya bi rêkûpêk
+      starts_with: Bi dest pê dike
     negation: Lihevhatina negotî
     or: AN
     remove: Blokê jêbirin
+    type:
+      class: Sinif
+      exe: Exe
+      path: Şop
+      title: Nav
   import: Anîn
   new: Nşh
   search: Gerr
@@ -66,6 +80,7 @@ devtools:
   install_folder: Peldanka sazkirinê
   load: Dawetkirin
   settings_file: Pelê Mîhengan
+  simulate_fullscreen: Bûyera tevahî ekranê simule bikin
 extras:
   discord: Nakemala
   exit: Qut / derketin
@@ -170,6 +185,34 @@ shortcuts:
     send_to_workspace_7: Ji bo Workspace 7 bişînin
     send_to_workspace_8: Ji bo Workspace 8 bişînin
     send_to_workspace_9: Ji Workspace 9 re bişînin
+    start_weg_app_0: >-
+      Li ser pozîsyona tabloya peywirê 10 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_1: Li ser pozîsyona karûbarê 1-ê sepanê bisekine an dest pê bike
+    start_weg_app_2: >-
+      Li ser pozîsyona tabloya peywirê 2 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_3: >-
+      Li ser pozîsyona tabloya peywirê 3 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_4: >-
+      Li ser pozîsyona tabloya peywirê 4 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_5: >-
+      Li ser pozîsyona tabloya peywirê 5 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_6: >-
+      Li ser pozîsyona tabloya peywirê 6 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_7: >-
+      Li ser pozîsyona tabloya peywirê 7 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_8: >-
+      Li ser pozîsyona tabloya peywirê 8 bala xwe bidin an sepanê bidin
+      destpêkirin
+    start_weg_app_9: >-
+      Li ser pozîsyona tabloya peywirê 9 bala xwe bidin an sepanê bidin
+      destpêkirin
     switch_workspace_0: Switch to Workspace 1
     switch_workspace_1: Switch to Workspace 2
     switch_workspace_2: Switch to Workspace 2
@@ -201,11 +244,12 @@ toolbar:
   delay_to_show: Dereng nîşan bide
   enable: Vebijêrkek Fancy Vebijêrin
   height: Bilindî
+  hide_mode:
+    always: Herdem
+    never: Qet
+    on_overlap: Li ser hevgirtinê
   label: Toolbar
-  placeholder:
-    author: Nivîskar
-    description: Terîf
-    select: Struktura Toolbar
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
 update:
   available: Nûvekirin!
@@ -233,9 +277,17 @@ weg:
   dock_side: Rewş
   enable: Dock / Taskbar çalak bikin
   gap: Qelîştok
+  hide_mode:
+    always: Herdem
+    never: Qet
+    on_overlap: Li ser hevgirtinê
   items:
     gap: Cîh di navbera tiştan de
     label: Hevokên
+    pinned_visibility:
+      always: Herdem
+      label: Dîtina Tiştên Pînekirî
+      when_primary: Dema ku çavdêriya sereke ye
     size: Mezinahiya tiştê
     temporal_visibility:
       all: Gişt
@@ -245,6 +297,9 @@ weg:
     zoom_size: Mezinahiya zoomed (ji bo mijaran tê bikar anîn)
   label: Dock / Taskbar
   margin: Radihêj
+  mode:
+    full_width: Firehiya ekrana tevahî
+    min_content: Biçûk ku dikare bibe
   padding: Padding
   use_multiple_monitor_overlap_logic: Li şûna mantiqa yekane ya fokusê, pêşandana taybetî bikar bînin
   width: Berî

@@ -68,6 +68,7 @@ pub struct SeelenCommon {
     history: PathBuf,
     settings: PathBuf,
     weg_items: PathBuf,
+    toolbar_items: PathBuf,
     icons: PathBuf,
     user_themes: PathBuf,
     bundled_themes: PathBuf,
@@ -75,10 +76,8 @@ pub struct SeelenCommon {
     bundled_plugins: PathBuf,
     user_app_configs: PathBuf,
     bundled_app_configs: PathBuf,
-    user_layouts: PathBuf,
-    bundled_layouts: PathBuf,
+    /// @deprecated since v2.1.0
     user_placeholders: PathBuf,
-    bundled_placeholders: PathBuf,
     widgets: PathBuf,
     bundled_widgets: PathBuf,
     wallpapers: PathBuf,
@@ -101,6 +100,7 @@ impl SeelenCommon {
             history: data_dir.join("history"),
             settings: data_dir.join("settings.json"),
             weg_items: data_dir.join("seelenweg_items_v2.yml"),
+            toolbar_items: data_dir.join("toolbar_items.yml"),
             icons: data_dir.join("icons"),
             user_themes: data_dir.join("themes"),
             bundled_themes: resource_dir.join("static/themes"),
@@ -108,10 +108,7 @@ impl SeelenCommon {
             bundled_plugins: resource_dir.join("static/plugins"),
             user_app_configs: data_dir.join("applications.yml"),
             bundled_app_configs: resource_dir.join("static/apps_templates"),
-            user_layouts: data_dir.join("layouts"),
-            bundled_layouts: resource_dir.join("static/layouts"),
             user_placeholders: data_dir.join("placeholders"),
-            bundled_placeholders: resource_dir.join("static/placeholders"),
             widgets: data_dir.join("widgets"),
             bundled_widgets: resource_dir.join("static/widgets"),
             wallpapers: data_dir.join("wallpapers"),
@@ -149,6 +146,10 @@ impl SeelenCommon {
         &self.weg_items
     }
 
+    pub fn toolbar_items_path(&self) -> &Path {
+        &self.toolbar_items
+    }
+
     pub fn history_path(&self) -> &Path {
         &self.history
     }
@@ -181,20 +182,9 @@ impl SeelenCommon {
         &self.bundled_app_configs
     }
 
-    pub fn user_layouts_path(&self) -> &Path {
-        &self.user_layouts
-    }
-
-    pub fn bundled_layouts_path(&self) -> &Path {
-        &self.bundled_layouts
-    }
-
+    /// @deprecated since v2.1.0
     pub fn user_placeholders_path(&self) -> &Path {
         &self.user_placeholders
-    }
-
-    pub fn bundled_placeholders_path(&self) -> &Path {
-        &self.bundled_placeholders
     }
 
     pub fn user_widgets_path(&self) -> &Path {

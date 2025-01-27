@@ -18,9 +18,9 @@ export async function initStore() {
   const webview = getCurrentWebview();
   const settings = await Settings.getAsync();
 
-  store.dispatch(Actions.setSettings(settings.inner.wall));
+  store.dispatch(Actions.setSettings(settings.wall));
   Settings.onChange((settings) => {
-    store.dispatch(Actions.setSettings(settings.inner.wall));
+    store.dispatch(Actions.setSettings(settings.wall));
   });
 
   webview.listen<boolean>(SeelenEvent.WallStop, ({ payload }) => {

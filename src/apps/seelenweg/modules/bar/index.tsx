@@ -1,6 +1,6 @@
 import { HideMode, SeelenWegMode, SeelenWegSide, WegItemType } from '@seelen-ui/lib';
 import { Reorder } from 'framer-motion';
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState, WheelEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -140,9 +140,20 @@ export function SeelenWeg() {
       }
     });
 
+    if (isTemporalOnlyWegBar) {
+      dispatch(RootActions.setItemsOnLeft([]));
+      dispatch(RootActions.setItemsOnCenter([]));
+    }
+
     dispatch(RootActions.setItemsOnRight(extractedPinned));
     savePinnedItems();
   }, []);
+
+  const isTemporalOnlyWegBar = !(
+    pinnedOnLeft.some((item) => 'pinDisabled' in item && !item.pinDisabled) ||
+    pinnedOnCenter.some((item) => 'pinDisabled' in item && !item.pinDisabled) ||
+    pinnedOnRight.some((item) => 'pinDisabled' in item && !item.pinDisabled)
+  );
 
   const isHorizontal =
     settings.position === SeelenWegSide.Top || settings.position === SeelenWegSide.Bottom;
@@ -153,25 +164,21 @@ export function SeelenWeg() {
 
   const projectSwItem = (item: SwItem) => ItemByType(item, isHorizontal ? 'x' : 'y', shit);
 
-  console.log(
-    'pinnedOnLeft',
-    pinnedOnLeft,
-    'pinnedOnCenter',
-    pinnedOnCenter,
-    'pinnedOnRight',
-    pinnedOnRight,
-  );
-
   return (
-    <WithContextMenu items={getSeelenWegMenu(t)}>
+    <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar)}>
       <Reorder.Group
         as="div"
-        values={[...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]}
+        values={
+          isTemporalOnlyWegBar
+            ? [...pinnedOnLeft, ...pinnedOnCenter, ...pinnedOnRight]
+            : [...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]
+        }
         onReorder={onReorderPinned}
         axis={isHorizontal ? 'x' : 'y'}
         className={cx('taskbar', settings.position.toLowerCase(), {
           horizontal: isHorizontal,
           vertical: !isHorizontal,
+          'temporal-only': isTemporalOnlyWegBar,
           'full-width': settings.mode === SeelenWegMode.FullWidth,
           hidden: shouldBeHidden(settings.hideMode, isActive, isOverlaped, associatedViewCounter),
           delayed,
@@ -180,31 +187,40 @@ export function SeelenWeg() {
         <BackgroundByLayersV2 prefix="taskbar" />
         <div className="taskbar-scroll-container" onWheel={scrollXonY}>
           <div className="taskbar-scroll-inner-frame">
-            {[
-              ...pinnedOnLeft.map(projectSwItem),
-              <Reorder.Item
-                as="div"
-                key="separator1"
-                value={Separator1}
-                className={cx('weg-separator weg-separator-1', {
-                  visible: settings.visibleSeparators,
-                })}
-                drag={false}
-                style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
-              />,
-              ...pinnedOnCenter.map(projectSwItem),
-              <Reorder.Item
-                as="div"
-                key="separator2"
-                value={Separator2}
-                className={cx('weg-separator weg-separator-2', {
-                  visible: settings.visibleSeparators,
-                })}
-                drag={false}
-                style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
-              />,
-              ...pinnedOnRight.map(projectSwItem),
-            ]}
+            {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 && (
+              <span className="weg-empty-state-label">{t('weg.empty')}</span>
+            )}
+            {isTemporalOnlyWegBar
+              ? [
+                ...pinnedOnLeft.map(projectSwItem),
+                ...pinnedOnCenter.map(projectSwItem),
+                ...pinnedOnRight.map(projectSwItem),
+              ]
+              : [
+                ...pinnedOnLeft.map(projectSwItem),
+                <Reorder.Item
+                  as="div"
+                  key="separator1"
+                  value={Separator1}
+                  className={cx('weg-separator weg-separator-1', {
+                    visible: settings.visibleSeparators,
+                  })}
+                  drag={false}
+                  style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
+                />,
+                ...pinnedOnCenter.map(projectSwItem),
+                <Reorder.Item
+                  as="div"
+                  key="separator2"
+                  value={Separator2}
+                  className={cx('weg-separator weg-separator-2', {
+                    visible: settings.visibleSeparators,
+                  })}
+                  drag={false}
+                  style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
+                />,
+                ...pinnedOnRight.map(projectSwItem),
+              ]}
           </div>
         </div>
       </Reorder.Group>
@@ -212,7 +228,7 @@ export function SeelenWeg() {
   );
 }
 
-function scrollXonY(e) {
+function scrollXonY(e: WheelEvent) {
   e.preventDefault();
 
   // Capture up/down wheel events and scroll the viewport horizontally
@@ -245,7 +261,7 @@ function ItemByType(item: SwItem, drag: boolean | 'x' | 'y' | undefined, callbac
   }
 
   if (item.type === WegItemType.StartMenu) {
-    return <StartMenu key={item.id} item={item} />;
+    return <StartMenu drag={drag} key={item.id} item={item} />;
   }
 
   return null;

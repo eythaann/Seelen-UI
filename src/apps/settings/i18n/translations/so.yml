@@ -1,5 +1,8 @@
 app_launcher:
   enable: U oggolow appka bilaabista
+  launch_on:
+    mouse_over: Jiirku wuu dhammaaday
+    primary: Asal ahaan
   monitor: Kormeer si loo muujiyo
   runners:
     cmd: Amrid
@@ -51,9 +54,20 @@ apps_configurations:
     id: Aqoonsiga
     kind: Aqoonso
     matching_strategy: Istaraatiijiyadda iswaafajinta
+    matching_strategy_option:
+      contains: Waxa ku jira
+      ends_with: Ku dhamaata
+      equals: U dhigma
+      regex: Odhaah joogto ah
+      starts_with: Waxay ku bilaabataa
     negation: Ciriiri u dhigma
     or: Ama
     remove: Tirtir xannibaadda
+    type:
+      class: Fasalka
+      exe: Ex
+      path: Jidka
+      title: Ciwaanka
   import: Soo dejin
   new: Cusub
   search: Raadin
@@ -69,6 +83,7 @@ devtools:
   install_folder: Xeerka rakibaadda
   load: Xammuul
   settings_file: Faylka Dejinta
+  simulate_fullscreen: Isku day dhacdo shaashad buuxda
 extras:
   discord: Huf
   exit: Jooji / bixitaan
@@ -173,6 +188,16 @@ shortcuts:
     send_to_workspace_7: U dir goobta shaqada 7
     send_to_workspace_8: U dir goobta shaqada 8
     send_to_workspace_9: U dir goobta shaqada 9
+    start_weg_app_0: Diirada saar ama ku bilow abka booska shaqada 10
+    start_weg_app_1: Diirada saar ama ku bilow abka booska shaqada 1
+    start_weg_app_2: Diirada saar ama ku bilow abka booska shaqada 2
+    start_weg_app_3: Diirada saar ama ku billow abka booska shaqada 3
+    start_weg_app_4: Diirada saar ama ku billow abka booska shaqada 4
+    start_weg_app_5: Diirada saar ama ku bilow abka booska shaqada 5
+    start_weg_app_6: Diirada saar ama ku billow abka booska shaqada 6
+    start_weg_app_7: Diirada saar ama ku billow abka booska shaqada 7
+    start_weg_app_8: Diirada saar ama ku bilow abka booska shaqada 8
+    start_weg_app_9: Diirada saar ama ku bilow abka booska shaqada 9
     switch_workspace_0: U beddelo goobta shaqada 1
     switch_workspace_1: U beddelo goobta shaqada 2
     switch_workspace_2: U beddelo goobta shaqada 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Dib u dhig si loo muujiyo
   enable: Keeniyaan Qalabka Fancy Toolbar
   height: Dherer
+  hide_mode:
+    always: Had iyo jeer
+    never: Marna
+    on_overlap: Isku dhafka
   label: Qalab argamiye
-  placeholder:
-    author: Qoraa
-    description: Sifo
-    select: Qaab dhismeedka Qalabka
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda
     kaliya
@@ -240,9 +266,17 @@ weg:
   dock_side: Meel
   enable: Kartida DOCK / Turniinka
   gap: Dalool
+  hide_mode:
+    always: Had iyo jeer
+    never: Marna
+    on_overlap: Isku dhafka
   items:
     gap: Meel udhaxeysa waxyaabaha
     label: Waxyaabaha
+    pinned_visibility:
+      always: Had iyo jeer
+      label: Shayga Ku dheggan Muuqaal
+      when_primary: Marka kormeeruhu uu yahay aasaasiga
     size: Shayga cabirka
     temporal_visibility:
       all: Dhammaan
@@ -252,6 +286,9 @@ weg:
     zoom_size: Cabbirka soojiidashada (oo loo isticmaalo mowduucyada)
   label: Dock / Tootshar
   margin: Margin
+  mode:
+    full_width: Ballaca shaashadda oo dhan
+    min_content: Yaryar sida ay noqon karto
   padding: Suur
   use_multiple_monitor_overlap_logic: >-
     Isticmaal bandhig gaar ah halkii aad ka isticmaali lahayd caqli-gal diiradda

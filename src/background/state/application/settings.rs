@@ -25,7 +25,8 @@ impl FullState {
         let path_exists = SEELEN_COMMON.settings_path().exists();
         if path_exists {
             self.settings = Self::get_settings_from_path(SEELEN_COMMON.settings_path())?;
-            self.settings.sanitize();
+            self.settings.migrate()?;
+            self.settings.sanitize()?;
         }
         if !is_virtual_desktop_supported() {
             self.settings.virtual_desktop_strategy = VirtualDesktopStrategy::Seelen;

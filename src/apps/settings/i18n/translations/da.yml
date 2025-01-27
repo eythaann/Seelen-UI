@@ -1,5 +1,8 @@
 app_launcher:
   enable: Aktivér app Launcher
+  launch_on:
+    mouse_over: Hold musen over
+    primary: Primær
   monitor: Overvågning at vise
   runners:
     cmd: Kommando
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikator
     kind: Identificer ved
     matching_strategy: Matchende strategi
+    matching_strategy_option:
+      contains: Indeholder
+      ends_with: Slutter med
+      equals: Lige til
+      regex: Regelmæssigt udtryk
+      starts_with: Starter med
     negation: Negat matchning
     or: ELLER
     remove: Slet blok
+    type:
+      class: klasse
+      exe: Exe
+      path: Sti
+      title: Titel
   import: Importere
   new: Ny
   search: Søg
@@ -68,6 +82,7 @@ devtools:
   install_folder: Installationsmappe
   load: belastning
   settings_file: Indstillinger fil
+  simulate_fullscreen: Simuler begivenhed i fuld skærm
 extras:
   discord: Uenighed
   exit: Afslut/exit
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: Send til Workspace 7
     send_to_workspace_8: Send til arbejdsområde 8
     send_to_workspace_9: Send til Workspace 9
+    start_weg_app_0: Fokuser eller start appen på proceslinjens position 10
+    start_weg_app_1: Fokuser eller start appen på proceslinjens position 1
+    start_weg_app_2: Fokuser eller start appen på proceslinjens position 2
+    start_weg_app_3: Fokuser eller start appen på proceslinjens position 3
+    start_weg_app_4: Fokuser eller start appen på proceslinjens position 4
+    start_weg_app_5: Fokuser eller start appen på proceslinjens position 5
+    start_weg_app_6: Fokuser eller start appen på proceslinjens position 6
+    start_weg_app_7: Fokuser eller start appen på proceslinjens position 7
+    start_weg_app_8: Fokuser eller start appen på proceslinjens position 8
+    start_weg_app_9: Fokuser eller start appen på proceslinjens position 9
     switch_workspace_0: Skift til arbejdsområde 1
     switch_workspace_1: Skift til arbejdsområde 2
     switch_workspace_2: Skift til arbejdsområde 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: Forsinket fremvisning
   enable: Aktivér fancy værktøjslinje
   height: Højde
+  hide_mode:
+    always: Altid
+    never: Aldrig
+    on_overlap: På overlapning
   label: Værktøjslinje
-  placeholder:
-    author: Forfatter
-    description: Beskrivelse
-    select: Værktøjslinjestruktur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
 update:
   available: Opdatering tilgængelig!
@@ -238,9 +264,17 @@ weg:
   dock_side: Position
   enable: Aktivér dock/proceslinje
   gap: Gap
+  hide_mode:
+    always: Altid
+    never: Aldrig
+    on_overlap: På overlapning
   items:
     gap: Rum mellem genstande
     label: Genstande
+    pinned_visibility:
+      always: Altid
+      label: Fastgjorte elementers synlighed
+      when_primary: Når monitoren er primær
     size: Varestørrelse
     temporal_visibility:
       all: Alle
@@ -250,6 +284,9 @@ weg:
     zoom_size: Zoomet størrelse (brugt til temaer)
   label: Dock/proceslinje
   margin: Margin
+  mode:
+    full_width: Fuld skærmbredde
+    min_content: Så lille som det kan være
   padding: Polstring
   use_multiple_monitor_overlap_logic: Brug displayspecifik i stedet for enkeltfokuslogik
   width: Bredde

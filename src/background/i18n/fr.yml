@@ -1,0 +1,16 @@
+runtime:
+  download: Aller à la page de téléchargement
+  not_found: Le moteur d'exécution WebView2 est introuvable
+  not_found_description: >-
+    L’interface utilisateur de Seelen nécessite le runtime Webview2. Veuillez
+    l'installer.
+  outdated: WebView2 Runtime obsolète
+  outdated_description: >-
+    L'interface utilisateur de Seelen nécessite Webview2 Runtime %{min_version}
+    ou supérieur. Veuillez le mettre à jour.
+service:
+  not_running: Le service d'interface utilisateur Seelen ne fonctionne pas
+  not_running_description: >-
+    Seelen UI Service (slu-service) est une dépendance/une aide permettant à
+    l'application de fonctionner correctement.
+  not_running_ok: Démarrer le service

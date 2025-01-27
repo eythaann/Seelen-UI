@@ -1,5 +1,8 @@
 app_launcher:
   enable: Activer le lanceur d'applications
+  launch_on:
+    mouse_over: Passez la souris
+    primary: Primaire
   monitor: Surveiller à montrer
   runners:
     cmd: Commande
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifiant
     kind: Identifier par
     matching_strategy: Stratégie de correspondance
+    matching_strategy_option:
+      contains: Contient
+      ends_with: Se termine par
+      equals: Égal
+      regex: Expression régulière
+      starts_with: Commence par
     negation: Annuler la correspondance
     or: OU
     remove: Supprimer le bloc
+    type:
+      class: Classe
+      exe: Exe
+      path: Chemin
+      title: Titre
   import: Importer
   new: Nouveau
   search: Recherche
@@ -68,6 +82,7 @@ devtools:
   install_folder: Dossier d'installation
   load: Charger
   settings_file: Fichier de paramètres
+  simulate_fullscreen: Simuler un événement en plein écran
 extras:
   discord: Discorde
   exit: Quitter/Quitter
@@ -172,6 +187,36 @@ shortcuts:
     send_to_workspace_7: Envoyer à Workspace 7
     send_to_workspace_8: Envoyer à l'espace de travail 8
     send_to_workspace_9: Envoyer à l'espace de travail 9
+    start_weg_app_0: >-
+      Concentrez-vous ou démarrez l'application sur la position 10 de la barre
+      des tâches
+    start_weg_app_1: >-
+      Concentrez-vous ou démarrez l'application sur la position 1 de la barre
+      des tâches
+    start_weg_app_2: >-
+      Concentrez-vous ou démarrez l'application sur la position 2 de la barre
+      des tâches
+    start_weg_app_3: >-
+      Concentrez-vous ou démarrez l'application sur la position 3 de la barre
+      des tâches
+    start_weg_app_4: >-
+      Concentrez-vous ou démarrez l'application sur la position 4 de la barre
+      des tâches
+    start_weg_app_5: >-
+      Concentrez-vous ou démarrez l'application sur la position 5 de la barre
+      des tâches
+    start_weg_app_6: >-
+      Concentrez-vous ou démarrez l'application sur la position 6 de la barre
+      des tâches
+    start_weg_app_7: >-
+      Concentrez-vous ou démarrez l'application sur la position 7 de la barre
+      des tâches
+    start_weg_app_8: >-
+      Concentrez-vous ou démarrez l'application sur la position 8 de la barre
+      des tâches
+    start_weg_app_9: >-
+      Concentrez-vous ou démarrez l'application sur la position 9 de la barre
+      des tâches
     switch_workspace_0: Passez à l'espace de travail 1
     switch_workspace_1: Passez à l'espace de travail 2
     switch_workspace_2: Passer à l'espace de travail 2
@@ -200,11 +245,12 @@ toolbar:
   delay_to_show: Retard à afficher
   enable: Activer la barre d'outils sophistiquée
   height: Hauteur
+  hide_mode:
+    always: Toujours
+    never: Jamais
+    on_overlap: Sur chevauchement
   label: Barre d'outils
-  placeholder:
-    author: Auteur
-    description: Description
-    select: Structure de la barre d'outils
+  placeholder: {}
   use_multiple_monitor_overlap_logic: >-
     Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au
     point unique
@@ -236,9 +282,17 @@ weg:
   dock_side: Position
   enable: Activer le Dock/la barre des tâches
   gap: Écart
+  hide_mode:
+    always: Toujours
+    never: Jamais
+    on_overlap: Sur chevauchement
   items:
     gap: Espace entre les éléments
     label: Articles
+    pinned_visibility:
+      always: Toujours
+      label: Visibilité des éléments épinglés
+      when_primary: Lorsque le moniteur est principal
     size: Taille de l'article
     temporal_visibility:
       all: Tous
@@ -248,6 +302,9 @@ weg:
     zoom_size: Taille agrandie (utilisée pour les thèmes)
   label: Dock/Barre des tâches
   margin: Marge
+  mode:
+    full_width: Largeur plein écran
+    min_content: Aussi petit que possible
   padding: Rembourrage
   use_multiple_monitor_overlap_logic: >-
     Utiliser une logique d'affichage spécifique au lieu d'une logique de mise au

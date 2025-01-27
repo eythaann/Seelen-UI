@@ -1,0 +1,21 @@
+id: "@default/wm-bspwm"
+target: "@seelen/window-manager"
+metadata:
+  displayName: BSPWM Layout
+  description: default bspwm tile layout.
+plugin:
+  no_fallback_behavior: Float
+  structure:
+    type: Horizontal
+    children:
+      - type: Leaf
+      - type: Vertical
+        children:
+          - type: Leaf
+          - type: Horizontal
+            children:
+              - type: Leaf
+              - type: Vertical
+                children:
+                  - type: Leaf
+                  - type: Leaf

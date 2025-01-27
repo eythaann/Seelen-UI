@@ -1,5 +1,8 @@
 app_launcher:
   enable: Engedélyezze az alkalmazás indítóját
+  launch_on:
+    mouse_over: Vigye fel az egeret
+    primary: Elsődleges
   monitor: Monitor, hogy megmutassa
   runners:
     cmd: Parancs
@@ -49,9 +52,20 @@ apps_configurations:
     id: Azonosító
     kind: Azonosít
     matching_strategy: Megfelelő stratégia
+    matching_strategy_option:
+      contains: Tartalmaz
+      ends_with: Ezzel végződik
+      equals: Egyenlő
+      regex: Reguláris kifejezés
+      starts_with: Ezzel kezdődik
     negation: Tagadás egyeztetés
     or: VAGY
     remove: Blokk törlése
+    type:
+      class: Osztály
+      exe: Exe
+      path: Útvonal
+      title: Cím
   import: Behozatal
   new: Új
   search: Keresés
@@ -67,6 +81,7 @@ devtools:
   install_folder: Telepítési mappa
   load: Betöltés
   settings_file: Beállítási fájl
+  simulate_fullscreen: Teljes képernyős esemény szimulálása
 extras:
   discord: Viszály
   exit: Kilépés/kilépés
@@ -171,6 +186,16 @@ shortcuts:
     send_to_workspace_7: Küldje el a Workspace 7 -et
     send_to_workspace_8: Küldje el a 8. munkaterületre
     send_to_workspace_9: Küldje el a munkaterületre 9
+    start_weg_app_0: Fókuszáljon vagy indítsa el az alkalmazást a tálca 10. pozíciójára
+    start_weg_app_1: Fókuszáljon vagy indítsa el az alkalmazást a tálca 1. pozíciójára
+    start_weg_app_2: Fókuszáljon vagy indítsa el az alkalmazást a tálca 2. pozíciójára
+    start_weg_app_3: Fókuszáljon vagy indítsa el az alkalmazást a tálca 3. pozíciójára
+    start_weg_app_4: Fókuszáljon vagy indítsa el az alkalmazást a tálca 4-es pozíciójában
+    start_weg_app_5: Fókuszáljon vagy indítsa el az alkalmazást a tálca 5. pozíciójára
+    start_weg_app_6: Fókuszáljon vagy indítsa el az alkalmazást a tálca 6-os pozíciójában
+    start_weg_app_7: Fókuszáljon vagy indítsa el az alkalmazást a tálca 7. pozíciójára
+    start_weg_app_8: Fókuszáljon vagy indítsa el az alkalmazást a tálca 8-as pozíciójában
+    start_weg_app_9: Fókuszáljon vagy indítsa el az alkalmazást a tálca 9-es pozíciójában
     switch_workspace_0: Váltás az 1. munkaterületre
     switch_workspace_1: Váltás a 2. munkaterületre
     switch_workspace_2: Váltás a 2. munkaterületre
@@ -203,11 +228,12 @@ toolbar:
   delay_to_show: Megjelenítés késleltetése
   enable: Engedélyezze a divatos eszköztárat
   height: Magasság
+  hide_mode:
+    always: Mindig
+    never: Soha
+    on_overlap: Az átfedésben
   label: Eszköztár
-  placeholder:
-    author: Szerző
-    description: Leírás
-    select: Eszköztár szerkezete
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
 update:
   available: A frissítés elérhető!
@@ -235,9 +261,17 @@ weg:
   dock_side: Pozíció
   enable: Engedélyezze a dokkolót/tálcát
   gap: Rés
+  hide_mode:
+    always: Mindig
+    never: Soha
+    on_overlap: Az átfedésben
   items:
     gap: Hely az elemek között
     label: Tárgyak
+    pinned_visibility:
+      always: Mindig
+      label: Rögzített elemek láthatósága
+      when_primary: Amikor a monitor az elsődleges
     size: Elemméret
     temporal_visibility:
       all: Minden
@@ -247,6 +281,9 @@ weg:
     zoom_size: Nagyított méret (a témákhoz használt)
   label: Dokk/tálca
   margin: Árrés
+  mode:
+    full_width: Teljes képernyő szélesség
+    min_content: Amennyire csak lehet
   padding: Párnázás
   use_multiple_monitor_overlap_logic: Az egyfókuszú logika helyett használjon megjelenítésspecifikus
   width: Szélesség

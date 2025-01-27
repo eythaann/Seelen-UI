@@ -1,0 +1,14 @@
+runtime:
+  download: Đi tới trang tải xuống
+  not_found: Không tìm thấy thời gian chạy WebView2
+  not_found_description: Giao diện người dùng Seelen yêu cầu Thời gian chạy Webview2. Hãy cài đặt nó.
+  outdated: Thời gian chạy WebView2 đã lỗi thời
+  outdated_description: >-
+    Giao diện người dùng Seelen yêu cầu Webview2 Runtime %{min_version} trở lên.
+    Hãy cập nhật nó.
+service:
+  not_running: Dịch vụ giao diện người dùng Seelen không chạy
+  not_running_description: >-
+    Dịch vụ giao diện người dùng Seelen (slu-service) là một công cụ phụ
+    thuộc/trợ giúp để ứng dụng hoạt động bình thường.
+  not_running_ok: Bắt đầu dịch vụ

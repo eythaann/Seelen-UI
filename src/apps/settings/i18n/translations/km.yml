@@ -1,5 +1,8 @@
 app_launcher:
   enable: បើកដំណើរការកម្មវិធីបើកដំណើរការ
+  launch_on:
+    mouse_over: កណ្ដុរលើ
+    primary: បឋមសិក្សា
   monitor: ម៉ូនីទ័របង្ហាញ
   runners:
     cmd: ការបង្គាប់
@@ -49,9 +52,20 @@ apps_configurations:
     id: អ្នកកំណត់អត្តសញ្ញាណ
     kind: កំណត់អត្តសញ្ញាណដោយ
     matching_strategy: យុទ្ធសាស្ត្រផ្គូផ្គង
+    matching_strategy_option:
+      contains: មាន
+      ends_with: បញ្ចប់ដោយ
+      equals: ស្មើ
+      regex: ការបញ្ចេញមតិទៀងទាត់
+      starts_with: ចាប់ផ្តើមជាមួយ
     negation: ការផ្គូផ្គងអវិជ្ជមាន
     or: ឬ
     remove: លុបប្លុក
+    type:
+      class: ថ្នាក់
+      exe: Exe
+      path: ផ្លូវ
+      title: ចំណងជើង
   import: នាំចូល
   new: ថ្មី។
   search: ស្វែងរក
@@ -67,6 +81,7 @@ devtools:
   install_folder: ថតឯកសារដំឡើង
   load: ផ្ទុក
   settings_file: ឯកសារការកំណត់
+  simulate_fullscreen: ក្លែងធ្វើព្រឹត្តិការណ៍ពេញអេក្រង់
 extras:
   discord: ការមិនចុះសម្រុងគ្នា។
   exit: ចេញ/ចេញ
@@ -169,6 +184,16 @@ shortcuts:
     send_to_workspace_7: ផ្ញើទៅកន្លែងធ្វើការ ៧
     send_to_workspace_8: ផ្ញើទៅកន្លែងធ្វើការ ៨
     send_to_workspace_9: ផ្ញើទៅកន្លែងធ្វើការ ៩
+    start_weg_app_0: ផ្ដោត ឬចាប់ផ្ដើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 10
+    start_weg_app_1: ផ្ដោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 1
+    start_weg_app_2: ផ្ដោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 2
+    start_weg_app_3: ផ្ដោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 3
+    start_weg_app_4: ផ្ដោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 4
+    start_weg_app_5: ផ្តោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 5
+    start_weg_app_6: ផ្ដោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 6
+    start_weg_app_7: ផ្តោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 7
+    start_weg_app_8: ផ្ដោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 8
+    start_weg_app_9: ផ្ដោត ឬចាប់ផ្តើមកម្មវិធីនៅលើទីតាំងរបារភារកិច្ច 9
     switch_workspace_0: ប្តូរទៅកន្លែងធ្វើការ 1
     switch_workspace_1: ប្តូរទៅកន្លែងធ្វើការ 2
     switch_workspace_2: ប្តូរទៅកន្លែងធ្វើការ 2
@@ -201,11 +226,12 @@ toolbar:
   delay_to_show: ពន្យាពេលក្នុងការបង្ហាញ
   enable: បើករបារឧបករណ៍ពុម្ពអក្សរក្បូរក្បាច់
   height: កម្ពស់
+  hide_mode:
+    always: ជានិច្ច
+    never: មិនដែល
+    on_overlap: នៅលើការត្រួតស៊ីគ្នា។
   label: របាររបន៍របយ័ត្ន។ រប
-  placeholder:
-    author: អ្នកនិពន្ធ
-    description: ការពិពណ៌នា
-    select: រចនាសម្ព័ន្ធរបារឧបករណ៍
+  placeholder: {}
   use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
 update:
   available: មានបច្ចុប្បន្នភាព!
@@ -233,9 +259,17 @@ weg:
   dock_side: តីតាមង
   enable: បើកដំណើរការ Dock/Taskbar
   gap: គម្លាត
+  hide_mode:
+    always: ជានិច្ច
+    never: មិនដែល
+    on_overlap: នៅលើការត្រួតស៊ីគ្នា។
   items:
     gap: ចន្លោះរវាងធាតុ
     label: ធាតុ
+    pinned_visibility:
+      always: ជានិច្ច
+      label: ភាពមើលឃើញធាតុដែលបានខ្ទាស់
+      when_primary: នៅពេលដែលម៉ូនីទ័រគឺបឋម
     size: ទំហំធាតុ
     temporal_visibility:
       all: ទាំងអស់។
@@ -245,6 +279,9 @@ weg:
     zoom_size: ទំហំពង្រីក (ប្រើសម្រាប់ស្បែក)
   label: ចត/របារភារកិច្ច
   margin: រឹម
+  mode:
+    full_width: ទទឹងពេញអេក្រង់
+    min_content: តូចតាមដែលអាចធ្វើបាន
   padding: ទ្រនាប់
   use_multiple_monitor_overlap_logic: ប្រើការបង្ហាញជាក់លាក់ជំនួសឱ្យតក្កវិជ្ជាផ្តោតតែមួយ
   width: ទទឹង

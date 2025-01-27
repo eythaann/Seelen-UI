@@ -1,4 +1,4 @@
-import { IconPackManager } from '@seelen-ui/lib';
+import { GetIconArgs, IconPackManager } from '@seelen-ui/lib';
 import { getCurrentWindow } from '@tauri-apps/api/window';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
@@ -42,7 +42,7 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
 }
 
 const iconPackManager = await IconPackManager.create();
-export function useIcon(args: { path: string; umid?: string }): string | null {
+export function useIcon(args: GetIconArgs): string | null {
   const [iconSrc, setIconSrc] = useState<string | null>(() => iconPackManager.getIcon(args));
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export function useIcon(args: { path: string; umid?: string }): string | null {
       // this will run asynchronously on end `iconPackManager.onChange` will be triggered
       IconPackManager.extractIcon(args);
     }
-  }, [iconSrc]);
+  }, []);
 
   return iconSrc;
 }

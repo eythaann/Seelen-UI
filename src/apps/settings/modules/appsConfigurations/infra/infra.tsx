@@ -13,6 +13,7 @@ import { RootSelectors } from '../../shared/store/app/selectors';
 import { cx, debounce } from '../../shared/utils/app';
 import { getSorterByBool, getSorterByText } from '../app/filters';
 import { AppsConfigActions } from '../app/reducer';
+import { Icon } from 'src/apps/shared/components/Icon';
 
 import { AppConfigurationExtended, WmApplicationOptions } from '../domain';
 
@@ -74,7 +75,7 @@ const getColumns = (t: TFunction): ColumnsType<AppConfigurationExtended> => {
       key: 'operation',
       fixed: 'right',
       align: 'center',
-      width: 56,
+      width: 60,
       render: (_, record, index) => <Actions record={record} index={index} />,
     },
   ];
@@ -132,7 +133,7 @@ function Actions({ record }: { record: AppConfigurationExtended; index: number }
         />
       )}
       <Button type={record.isBundled ? 'default' : 'primary'} onClick={showModal}>
-        {record.isBundled ? '👁️' : '✏️'}
+        {record.isBundled ? <Icon iconName="FaEye" /> : <Icon iconName="MdOutlineEdit" />}
       </Button>
     </div>
   );

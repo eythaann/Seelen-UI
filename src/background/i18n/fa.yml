@@ -1,0 +1,14 @@
+runtime:
+  download: به صفحه دانلود بروید
+  not_found: WebView2 Runtime یافت نشد
+  not_found_description: رابط کاربری Seelen به Webview2 Runtime نیاز دارد. لطفا آن را نصب کنید.
+  outdated: WebView2 Runtime قدیمی شده است
+  outdated_description: >-
+    رابط کاربری Seelen به Webview2 Runtime %{min_version} یا بالاتر نیاز دارد.
+    لطفا آن را به روز کنید.
+service:
+  not_running: سرویس رابط کاربری Seelen اجرا نمی شود
+  not_running_description: >-
+    سرویس UI Seelen (سرویس slu) یک وابستگی / کمک کننده برای عملکرد صحیح برنامه
+    است.
+  not_running_ok: سرویس را شروع کنید

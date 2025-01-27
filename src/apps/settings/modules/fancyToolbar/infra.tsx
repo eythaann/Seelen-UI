@@ -12,8 +12,6 @@ import { SettingsGroup, SettingsOption, SettingsSubGroup } from '../../component
 
 export function FancyToolbarSettings() {
   const settings = useSelector(RootSelectors.fancyToolbar);
-  const placeholders = useSelector(newSelectors.availablePlaceholders);
-  const selectedStructure = useSelector(newSelectors.fancyToolbar.placeholder);
   const delayToShow = useSelector(newSelectors.fancyToolbar.delayToShow);
   const delayToHide = useSelector(newSelectors.fancyToolbar.delayToHide);
 
@@ -24,14 +22,6 @@ export function FancyToolbarSettings() {
     dispatch(FancyToolbarActions.setEnabled(value));
   };
 
-  const onSelectStructure = (value: string) => {
-    dispatch(FancyToolbarActions.setPlaceholder(value));
-  };
-
-  const usingStructure = placeholders.find(
-    (placeholder) => placeholder.info.filename === selectedStructure,
-  );
-
   return (
     <>
       <SettingsGroup>
@@ -39,32 +29,6 @@ export function FancyToolbarSettings() {
           <b>{t('toolbar.enable')}</b>
           <Switch checked={settings.enabled} onChange={onToggleEnable} />
         </SettingsOption>
-      </SettingsGroup>
-
-      <SettingsGroup>
-        <SettingsOption>
-          <b>{t('toolbar.placeholder.select')}: </b>
-          <Select
-            style={{ width: '200px' }}
-            value={selectedStructure}
-            options={placeholders.map((placeholder, idx) => ({
-              key: `placeholder-${idx}`,
-              label: placeholder.info.displayName,
-              value: placeholder.info.filename,
-            }))}
-            onSelect={onSelectStructure}
-          />
-        </SettingsOption>
-        <div>
-          <p>
-            <b>{t('toolbar.placeholder.author')}: </b>
-            {usingStructure?.info.author}
-          </p>
-          <p>
-            <b>{t('toolbar.placeholder.description')}: </b>
-            {usingStructure?.info.description}
-          </p>
-        </div>
       </SettingsGroup>
 
       <SettingsGroup>
@@ -88,7 +52,7 @@ export function FancyToolbarSettings() {
               <Select
                 style={{ width: '120px' }}
                 value={settings.hideMode}
-                options={OptionsFromEnum(HideMode)}
+                options={OptionsFromEnum(t, HideMode, 'toolbar.hide_mode')}
                 onChange={(value) => dispatch(FancyToolbarActions.setHideMode(value))}
               />
             </SettingsOption>

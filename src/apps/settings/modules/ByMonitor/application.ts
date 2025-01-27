@@ -19,6 +19,16 @@ export const WegSettingsDeclaration: WidgetSettingsDeclarationGroup[] = [
           { value: 'OnMonitor', label: 't::weg.items.temporal_visibility.on_monitor' },
         ],
       },
+      {
+        type: 'select',
+        key: 'pinnedItemsVisibility',
+        label: 't::weg.items.pinned_visibility.label',
+        default: null,
+        options: [
+          { value: 'Always', label: 't::weg.items.pinned_visibility.always' },
+          { value: 'WhenPrimary', label: 't::weg.items.pinned_visibility.when_primary' },
+        ],
+      },
     ],
   },
 ];

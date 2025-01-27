@@ -1,0 +1,10 @@
+runtime:
+  download: 다운로드 페이지로 이동
+  not_found: WebView2 런타임을 찾을 수 없습니다.
+  not_found_description: Seelen UI에는 Webview2 런타임이 필요합니다. 설치해 주세요.
+  outdated: WebView2 런타임이 오래됨
+  outdated_description: Seelen UI에는 Webview2 런타임 %{min_version} 이상이 필요합니다. 업데이트해주세요.
+service:
+  not_running: Seelen UI 서비스가 실행되고 있지 않습니다.
+  not_running_description: Seelen UI 서비스(slu-service)는 앱이 제대로 작동하기 위한 종속성/도우미입니다.
+  not_running_ok: 서비스 시작

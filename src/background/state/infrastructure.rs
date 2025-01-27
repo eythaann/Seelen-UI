@@ -2,10 +2,14 @@ use std::path::PathBuf;
 
 use itertools::Itertools;
 use seelen_core::state::{
-    IconPack, MonitorConfiguration, Plugin, Profile, WegItems, Widget, WindowManagerLayout,
+    IconPack, MonitorConfiguration, Plugin, Profile, WegItems, WegPinnedItemsVisibility, Widget,
 };
 
-use crate::{error_handler::Result, trace_lock, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result,
+    trace_lock,
+    windows_api::{window::Window, WindowsApi},
+};
 
 use super::{
     application::{FullState, LauncherHistory, FULL_STATE},
@@ -14,9 +18,9 @@ use super::{
 
 #[tauri::command(async)]
 pub fn state_get_icon_packs() -> Vec<IconPack> {
-    let icon_packs = FULL_STATE.load().icon_packs.clone();
-    let icon_packs = trace_lock!(icon_packs);
-    icon_packs.values().cloned().collect_vec()
+    let mutex = FULL_STATE.load().icon_packs().clone();
+    let icon_packs = trace_lock!(mutex);
+    icon_packs.owned_list()
 }
 
 #[tauri::command(async)]
@@ -25,18 +29,8 @@ pub fn state_get_themes() -> Vec<Theme> {
 }
 
 #[tauri::command(async)]
-pub fn state_get_placeholders() -> Vec<Placeholder> {
-    FULL_STATE
-        .load()
-        .placeholders()
-        .values()
-        .cloned()
-        .collect_vec()
-}
-
-#[tauri::command(async)]
-pub fn state_get_layouts() -> Vec<WindowManagerLayout> {
-    FULL_STATE.load().layouts().values().cloned().collect_vec()
+pub fn state_get_toolbar_items() -> Placeholder {
+    FULL_STATE.load().toolbar_items().clone()
 }
 
 #[tauri::command(async)]
@@ -45,10 +39,16 @@ pub fn state_get_weg_items() -> WegItems {
 }
 
 #[tauri::command(async)]
-pub fn state_write_weg_items(mut items: WegItems) -> Result<()> {
+pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Result<()> {
     items.sanitize();
     let guard = FULL_STATE.load();
-    if items == guard.weg_items {
+
+    let monitor = Window::from(window.hwnd()?).monitor();
+    let device_id = monitor.device_id()?;
+    if guard.get_weg_pinned_item_visibility(&device_id) == WegPinnedItemsVisibility::WhenPrimary
+        && !monitor.is_primary()?
+        || items == guard.weg_items
+    {
         return Ok(());
     }
     guard.write_weg_items(&items)?;
@@ -64,7 +64,8 @@ pub fn state_get_history() -> LauncherHistory {
 pub fn state_get_settings(path: Option<PathBuf>) -> Result<Settings> {
     if let Some(path) = path {
         let mut settings = FullState::get_settings_from_path(&path)?;
-        settings.sanitize();
+        settings.migrate()?;
+        settings.sanitize()?;
         Ok(settings)
     } else {
         Ok(FULL_STATE.load().settings().clone())

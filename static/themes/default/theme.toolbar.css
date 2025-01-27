@@ -43,6 +43,47 @@
   }
 }
 
+@keyframes PopupBaseAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.notification-open,
+.settings-open,
+.calendar-open,
+.tray-open,
+.wlan-open,
+.media-open,
+.media-notifier-open,
+.ft-bar-item-context-menu-open,
+.ft-bar-context-menu-open,
+.notification-close,
+.settings-close,
+.calendar-close,
+.tray-close,
+.wlan-close,
+.media-close,
+.media-notifier-close,
+.ft-bar-item-context-menu-close,
+.ft-bar-context-menu-close {
+  animation: PopupBaseAnimation 0.2s linear forwards;
+}
+
+.notification-close,
+.settings-close,
+.calendar-close,
+.tray-close,
+.wlan-close,
+.media-close,
+.ft-bar-item-context-menu-close,
+.ft-bar-context-menu-close {
+  animation-direction: reverse;
+}
+
 .ft-bar {
   color: #fefefe;
 
@@ -60,12 +101,20 @@
 
 .ft-bar-item {
   .workspace-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
     background-color: #efefef;
     transition-property: width, border-radius, background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
 
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+
     &.workspace-dot-active {
+      width: 18px;
       background-color: var(--config-accent-color);
     }
   }
@@ -107,6 +156,7 @@
   right: 0;
   transform: translate(25%, -25%);
   background-color: var(--config-accent-color);
+  color: #efefef;
   height: 12px;
   min-width: 12px;
   font-size: 10px;
@@ -532,6 +582,10 @@
   gap: 8px;
   font-size: 0.8rem;
   color: var(--color-gray-800);
+}
+
+.notification-icon {
+  width: 1.5em;
 }
 
 .notification-body {

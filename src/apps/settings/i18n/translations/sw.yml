@@ -1,5 +1,8 @@
 app_launcher:
   enable: Wezesha Kizindua cha Programu
+  launch_on:
+    mouse_over: Panya juu
+    primary: Msingi
   monitor: Fuatilia kuonyesha
   runners:
     cmd: Amri
@@ -49,9 +52,20 @@ apps_configurations:
     id: Kitambulisho
     kind: Tambua na
     matching_strategy: Mkakati wa kulinganisha
+    matching_strategy_option:
+      contains: Ina
+      ends_with: Inaisha na
+      equals: Sawa
+      regex: Kujieleza mara kwa mara
+      starts_with: Huanza na
     negation: Negate kulinganisha
     or: Au
     remove: Futa block
+    type:
+      class: Darasa
+      exe: Mfano
+      path: Njia
+      title: Kichwa
   import: Kuagiza
   new: Mpya
   search: Tafuta
@@ -67,6 +81,7 @@ devtools:
   install_folder: Folda ya usanikishaji
   load: Mzigo
   settings_file: Faili ya mipangilio
+  simulate_fullscreen: Iga tukio la skrini nzima
 extras:
   discord: Ugomvi
   exit: Acha/exit
@@ -169,6 +184,16 @@ shortcuts:
     send_to_workspace_7: Tuma kwa nafasi ya kazi 7
     send_to_workspace_8: Tuma kwa nafasi ya kazi 8
     send_to_workspace_9: Tuma kwa nafasi ya kazi 9
+    start_weg_app_0: Lenga au anza programu kwenye nafasi ya 10 ya upau wa kazi
+    start_weg_app_1: Lenga au anza programu kwenye nafasi ya 1 ya upau wa kazi
+    start_weg_app_2: Lenga au anza programu kwenye nafasi ya 2 ya upau wa kazi
+    start_weg_app_3: Lenga au anza programu kwenye nafasi ya 3 ya upau wa kazi
+    start_weg_app_4: Lenga au anza programu kwenye nafasi ya 4 ya upau wa kazi
+    start_weg_app_5: Lenga au anza programu kwenye nafasi ya 5 ya upau wa kazi
+    start_weg_app_6: Lenga au anza programu kwenye nafasi ya 6 ya upau wa kazi
+    start_weg_app_7: Lenga au anza programu kwenye nafasi ya 7 ya upau wa kazi
+    start_weg_app_8: Lenga au anza programu kwenye nafasi ya 8 ya upau wa kazi
+    start_weg_app_9: Lenga au anza programu kwenye nafasi ya 9 ya upau wa kazi
     switch_workspace_0: Badilika kwenye nafasi ya kazi 1
     switch_workspace_1: Badilika kwenye nafasi ya kazi 2
     switch_workspace_2: Badilika kwenye nafasi ya kazi 2
@@ -200,11 +225,12 @@ toolbar:
   delay_to_show: Kuchelewa kuonyesha
   enable: Wezesha zana ya dhana
   height: Urefu
+  hide_mode:
+    always: Daima
+    never: Kamwe
+    on_overlap: Juu ya mwingiliano
   label: Zana
-  placeholder:
-    author: Mwandishi
-    description: Maelezo
-    select: Muundo wa zana
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
 update:
   available: Sasisha inapatikana!
@@ -232,9 +258,17 @@ weg:
   dock_side: Msimamo
   enable: Wezesha Dock/Taskbar
   gap: Pengo
+  hide_mode:
+    always: Daima
+    never: Kamwe
+    on_overlap: Juu ya mwingiliano
   items:
     gap: Nafasi kati ya vitu
     label: Vitu
+    pinned_visibility:
+      always: Daima
+      label: Mwonekano wa Vipengee Vilivyobandikwa
+      when_primary: Wakati kufuatilia ni msingi
     size: Saizi ya bidhaa
     temporal_visibility:
       all: Wote
@@ -244,6 +278,9 @@ weg:
     zoom_size: Saizi iliyoondolewa (inayotumika kwa mada)
   label: Dock/Taskbar
   margin: Margin
+  mode:
+    full_width: Upana kamili wa skrini
+    min_content: Ndogo kama inaweza kuwa
   padding: Padding
   use_multiple_monitor_overlap_logic: Tumia onyesho maalum badala ya mantiki ya kulenga moja
   width: Upana

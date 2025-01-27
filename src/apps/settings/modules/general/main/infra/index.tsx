@@ -1,3 +1,4 @@
+import { SupportedLanguages } from '@seelen-ui/lib';
 import { Input, Select, Switch, Tooltip } from 'antd';
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +11,6 @@ import { RootActions } from '../../../shared/store/app/reducer';
 import { RootSelectors } from '../../../shared/store/app/selectors';
 import { Icon } from 'src/apps/shared/components/Icon';
 
-import { LanguageList } from '../../../../../shared/lang';
 import { SettingsGroup, SettingsOption } from '../../../../components/SettingsBox';
 import { Colors } from './Colors';
 import { IconPacks } from './IconPacks';
@@ -28,13 +28,17 @@ export function General() {
 
   const onAutoStart = async (value: boolean) => {
     setChangingAutostart(true);
-    if (value) {
-      await startup.enable();
-    } else {
-      await startup.disable();
+    try {
+      if (value) {
+        await startup.enable();
+      } else {
+        await startup.disable();
+      }
+      dispatch(RootActions.setAutostart(await startup.isEnabled()));
+    } catch (e) {
+      console.error(e);
     }
     setChangingAutostart(false);
-    dispatch(RootActions.setAutostart(value));
   };
 
   const onDateFormatChange = (e: ChangeEvent<HTMLInputElement>) =>
@@ -57,10 +61,18 @@ export function General() {
           <b>{t('general.language')}</b>
           <Select
             showSearch
-            optionFilterProp="label"
+            filterOption={(_searching, option) => {
+              if (!option) {
+                return true;
+              }
+              const searching = _searching.toLocaleLowerCase();
+              let label = option.label.toLocaleLowerCase();
+              let enLabel = option.enLabel.toLocaleLowerCase();
+              return label.includes(searching) || enLabel.includes(searching);
+            }}
             style={{ width: '200px' }}
             value={language}
-            options={[...LanguageList]}
+            options={[...SupportedLanguages]}
             onSelect={(value) => dispatch(RootActions.setLanguage(value))}
           />
         </SettingsOption>

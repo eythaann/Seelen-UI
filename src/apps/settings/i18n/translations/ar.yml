@@ -1,5 +1,8 @@
 app_launcher:
   enable: تمكين مشغل التطبيقات
+  launch_on:
+    mouse_over: مرر الماوس
+    primary: أساسي
   monitor: الشاشة
   runners:
     cmd: الأوامر
@@ -48,9 +51,20 @@ apps_configurations:
     id: المعرف
     kind: تحديد بواسطة
     matching_strategy: استراتيجية المطابقة
+    matching_strategy_option:
+      contains: يتضمن
+      ends_with: ينتهي ب
+      equals: يساوي
+      regex: التعبير العادي
+      starts_with: يبدأ ب
     negation: نفي المطابقة
     or: أو
     remove: حذف الحظر
+    type:
+      class: فصل
+      exe: إملف تنفيذى
+      path: طريق
+      title: عنوان
   import: استيراد
   new: جديد
   search: البحث
@@ -66,6 +80,7 @@ devtools:
   install_folder: مجلد التثبيت
   load: تحميل
   settings_file: ملف الإعدادات
+  simulate_fullscreen: محاكاة حدث ملء الشاشة
 extras:
   discord: ديسكورد
   exit: إنهاء/خروج
@@ -168,6 +183,16 @@ shortcuts:
     send_to_workspace_7: أرسل لمساحة العمل 7
     send_to_workspace_8: أرسل لمساحة العمل 8
     send_to_workspace_9: أرسل لمساحة العمل 9
+    start_weg_app_0: ركز أو ابدأ التطبيق على الموضع 10 في شريط المهام
+    start_weg_app_1: قم بالتركيز على التطبيق أو تشغيله على موضع شريط المهام 1
+    start_weg_app_2: قم بالتركيز على التطبيق أو بدء تشغيله على موضع شريط المهام 2
+    start_weg_app_3: قم بالتركيز على التطبيق أو تشغيله على موضع شريط المهام 3
+    start_weg_app_4: قم بالتركيز على التطبيق أو تشغيله على موضع شريط المهام 4
+    start_weg_app_5: قم بالتركيز على التطبيق أو تشغيله على موضع شريط المهام 5
+    start_weg_app_6: قم بالتركيز على التطبيق أو بدء تشغيله على موضع شريط المهام 6
+    start_weg_app_7: قم بالتركيز على التطبيق أو تشغيله على موضع شريط المهام 7
+    start_weg_app_8: قم بالتركيز على التطبيق أو بدء تشغيله على الموضع 8 في شريط المهام
+    start_weg_app_9: ركز أو ابدأ التطبيق على الموضع 9 في شريط المهام
     switch_workspace_0: بدل إلى مساحة العمل 1
     switch_workspace_1: بدل إلى مساحة العمل 2
     switch_workspace_2: بدل إلى مساحة العمل 2
@@ -199,11 +224,12 @@ toolbar:
   delay_to_show: تأخير الظهور
   enable: فعل شريط الأدوات الفاخر
   height: الارتفاع
+  hide_mode:
+    always: دائماً
+    never: أبداً
+    on_overlap: على التداخل
   label: شريط الأدوات
-  placeholder:
-    author: المؤلف
-    description: الوصف
-    select: حدد هيكل شريط الأدوات
+  placeholder: {}
   use_multiple_monitor_overlap_logic: استخدم العرض الخاص بدلاً من منطق التركيز الفردي
 update:
   available: تحديث متاح!
@@ -231,9 +257,17 @@ weg:
   dock_side: المكان
   enable: تفعيل قفص الاتهام/شريط المهام
   gap: الفراغ
+  hide_mode:
+    always: دائماً
+    never: أبداً
+    on_overlap: على التداخل
   items:
     gap: الفراغ بين العناصر
     label: العناصر
+    pinned_visibility:
+      always: دائماً
+      label: رؤية العناصر المثبتة
+      when_primary: عندما تكون الشاشة أساسية
     size: حجم العنصر
     temporal_visibility:
       all: الجميع
@@ -243,6 +277,9 @@ weg:
     zoom_size: حجم المكبر (يستخدم للموضوعات)
   label: قفص الاتهام / شريط المهام
   margin: الهامش
+  mode:
+    full_width: عرض كامل الشاشة
+    min_content: صغيرة كما يمكن أن تكون
   padding: المساحه
   use_multiple_monitor_overlap_logic: استخدم نمط تعدد الشاشات
   width: العرض

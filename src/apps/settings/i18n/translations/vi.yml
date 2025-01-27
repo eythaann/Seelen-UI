@@ -1,5 +1,8 @@
 app_launcher:
   enable: Bật trình khởi chạy ứng dụng
+  launch_on:
+    mouse_over: Di chuột qua
+    primary: Sơ đẳng
   monitor: Giám sát để hiển thị
   runners:
     cmd: Yêu cầu
@@ -49,9 +52,20 @@ apps_configurations:
     id: Định danh
     kind: Xác định bởi
     matching_strategy: Chiến lược phù hợp
+    matching_strategy_option:
+      contains: Chứa
+      ends_with: Kết thúc bằng
+      equals: Bằng
+      regex: Biểu thức chính quy
+      starts_with: Bắt đầu với
     negation: Phủ nhận sự phù hợp
     or: HOẶC
     remove: Xóa khối
+    type:
+      class: Lớp học
+      exe: Exe
+      path: Con đường
+      title: Tiêu đề
   import: Nhập khẩu
   new: Mới
   search: Tìm kiếm
@@ -67,6 +81,7 @@ devtools:
   install_folder: Thư mục cài đặt
   load: Trọng tải
   settings_file: Cài đặt tập tin
+  simulate_fullscreen: Mô phỏng sự kiện toàn màn hình
 extras:
   discord: Bất hòa
   exit: Thoát/Thoát
@@ -169,6 +184,16 @@ shortcuts:
     send_to_workspace_7: Gửi đến không gian làm việc 7
     send_to_workspace_8: Gửi đến không gian làm việc 8
     send_to_workspace_9: Gửi đến không gian làm việc 9
+    start_weg_app_0: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 10
+    start_weg_app_1: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 1
+    start_weg_app_2: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 2
+    start_weg_app_3: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 3
+    start_weg_app_4: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 4
+    start_weg_app_5: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 5
+    start_weg_app_6: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 6
+    start_weg_app_7: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 7
+    start_weg_app_8: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 8
+    start_weg_app_9: Tập trung hoặc khởi động ứng dụng ở vị trí thanh tác vụ 9
     switch_workspace_0: Chuyển sang không gian làm việc 1
     switch_workspace_1: Chuyển sang không gian làm việc 2
     switch_workspace_2: Chuyển sang không gian làm việc 2
@@ -201,11 +226,12 @@ toolbar:
   delay_to_show: Trì hoãn hiển thị
   enable: Kích hoạt thanh công cụ ưa thích
   height: Chiều cao
+  hide_mode:
+    always: Luôn luôn
+    never: Không bao giờ
+    on_overlap: Trên sự chồng chéo
   label: Thanh công cụ
-  placeholder:
-    author: Tác giả
-    description: Sự miêu tả
-    select: Cấu trúc thanh công cụ
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
 update:
   available: Cập nhật có sẵn!
@@ -235,9 +261,17 @@ weg:
   dock_side: Chức vụ
   enable: Bật Dock/Thanh tác vụ
   gap: Khoảng cách
+  hide_mode:
+    always: Luôn luôn
+    never: Không bao giờ
+    on_overlap: Trên sự chồng chéo
   items:
     gap: Không gian giữa các mặt hàng
     label: Mặt hàng
+    pinned_visibility:
+      always: Luôn luôn
+      label: Hiển thị các mục được ghim
+      when_primary: Khi màn hình là chính
     size: Kích thước mục
     temporal_visibility:
       all: Tất cả
@@ -247,6 +281,9 @@ weg:
     zoom_size: Kích thước phóng to (được sử dụng cho chủ đề)
   label: Dock/Thanh tác vụ
   margin: Lề
+  mode:
+    full_width: Chiều rộng toàn màn hình
+    min_content: Nhỏ nhất có thể
   padding: Đệm
   use_multiple_monitor_overlap_logic: Sử dụng hiển thị cụ thể thay vì logic tập trung duy nhất
   width: Chiều rộng

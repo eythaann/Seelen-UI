@@ -1,5 +1,8 @@
 app_launcher:
   enable: ჩართეთ აპლიკაციის გამშვები
+  launch_on:
+    mouse_over: მაუსი ზევით
+    primary: პირველადი
   monitor: მონიტორის ჩვენება
   runners:
     cmd: ბრძანება
@@ -50,9 +53,20 @@ apps_configurations:
     id: პირადობა
     kind: იდენტიფიცირება
     matching_strategy: შესაბამისი სტრატეგია
+    matching_strategy_option:
+      contains: შეიცავს
+      ends_with: მთავრდება
+      equals: უდრის
+      regex: რეგულარული გამოხატულება
+      starts_with: იწყება იმით
     negation: უარყოფითი შესატყვისი
     or: ან
     remove: წაშალეთ ბლოკი
+    type:
+      class: კლასი
+      exe: exe
+      path: ბილიკი
+      title: სათაური
   import: იმპორტი
   new: ახალი
   search: ძებნა
@@ -68,6 +82,7 @@ devtools:
   install_folder: ინსტალაციის საქაღალდე
   load: დატვირთვა
   settings_file: პარამეტრების ფაილი
+  simulate_fullscreen: სრულეკრანიანი მოვლენის სიმულაცია
 extras:
   discord: უთანასწორობა
   exit: დატოვება/გასვლა
@@ -172,6 +187,16 @@ shortcuts:
     send_to_workspace_7: გაგზავნეთ სამუშაო ადგილებზე 7
     send_to_workspace_8: გაგზავნეთ სამუშაო სივრცეში 8
     send_to_workspace_9: გაგზავნეთ სამუშაო სივრცეში 9
+    start_weg_app_0: ფოკუსირება ან აპის გაშვება დავალების ზოლის პოზიციაზე 10
+    start_weg_app_1: ფოკუსირება ან აპის გაშვება დავალების ზოლის პოზიციაზე 1
+    start_weg_app_2: ფოკუსირება ან აპის გაშვება დავალების ზოლის პოზიციაზე 2
+    start_weg_app_3: ფოკუსირება ან აპის გაშვება დავალების პანელის პოზიციაზე 3
+    start_weg_app_4: ფოკუსირება ან აპის გაშვება დავალების ზოლის პოზიციაზე 4
+    start_weg_app_5: ფოკუსირება ან აპის გაშვება დავალების პანელის პოზიციაზე 5
+    start_weg_app_6: ფოკუსირება ან აპის გაშვება დავალების ზოლის პოზიციაზე 6
+    start_weg_app_7: ფოკუსირება ან აპის გაშვება დავალების პანელის პოზიციაზე 7
+    start_weg_app_8: ფოკუსირება ან აპის გაშვება დავალების პანელის პოზიციაზე 8
+    start_weg_app_9: ფოკუსირება ან აპის გაშვება დავალების პანელის პოზიციაზე 9
     switch_workspace_0: გადადით სამუშაო ადგილებზე 1
     switch_workspace_1: გადადით სამუშაო ადგილებზე 2
     switch_workspace_2: გადადით სამუშაო ადგილებზე 2
@@ -204,11 +229,12 @@ toolbar:
   delay_to_show: დაგვიანებით ჩვენება
   enable: ჩართეთ ლამაზი პანელი
   height: სიმაღლე
+  hide_mode:
+    always: ყოველთვის
+    never: არასოდეს
+    on_overlap: გადახურვაზე
   label: ინსტრუმენტთა პანელი
-  placeholder:
-    author: ავტორი
-    description: აღწერილობა
-    select: ინსტრუმენტთა პანელის სტრუქტურა
+  placeholder: {}
   use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
 update:
   available: განახლება ხელმისაწვდომია!
@@ -238,9 +264,17 @@ weg:
   dock_side: პოზიცია
   enable: ჩართეთ dock/taskbar
   gap: ხარპი
+  hide_mode:
+    always: ყოველთვის
+    never: არასოდეს
+    on_overlap: გადახურვაზე
   items:
     gap: სივრცე ნივთებს შორის
     label: ნივთები
+    pinned_visibility:
+      always: ყოველთვის
+      label: ჩამაგრებული ელემენტების ხილვადობა
+      when_primary: როცა მონიტორი პირველადია
     size: ნივთის ზომა
     temporal_visibility:
       all: ყველა
@@ -250,6 +284,9 @@ weg:
     zoom_size: მასშტაბური ზომა (გამოიყენება თემებისთვის)
   label: დოკ/დავალების ზოლი
   margin: ზღვარი
+  mode:
+    full_width: სრული ეკრანის სიგანე
+    min_content: რაც შეიძლება პატარა იყოს
   padding: ბადება
   use_multiple_monitor_overlap_logic: გამოიყენეთ დისპლეის სპეციფიკა ერთი ფოკუსის ლოგიკის ნაცვლად
   width: სიგანე

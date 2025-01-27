@@ -1,5 +1,8 @@
 app_launcher:
   enable: Luba rakenduse käivitaja
+  launch_on:
+    mouse_over: Kursor üle
+    primary: Esmane
   monitor: Monitor, mida näidata
   runners:
     cmd: Käsk
@@ -49,9 +52,20 @@ apps_configurations:
     id: Identifikaator
     kind: Tuvastama
     matching_strategy: Sobiv strateegia
+    matching_strategy_option:
+      contains: Sisaldab
+      ends_with: Lõpeb koos
+      equals: Võrdub
+      regex: Regulaaravaldis
+      starts_with: Alustab sellest
     negation: Eitav sobitamine
     or: Või
     remove: Kustutamisplokk
+    type:
+      class: Klass
+      exe: Exe
+      path: Tee
+      title: Pealkiri
   import: Import
   new: Uus
   search: Otsing
@@ -67,6 +81,7 @@ devtools:
   install_folder: Installi kaust
   load: Laadima
   settings_file: Seadete fail
+  simulate_fullscreen: Täisekraanil toimuva sündmuse simuleerimine
 extras:
   discord: Ebakõla
   exit: Lõpeta/väljumine
@@ -169,6 +184,16 @@ shortcuts:
     send_to_workspace_7: Saada tööruumi 7
     send_to_workspace_8: Saada tööala 8
     send_to_workspace_9: Saada Workspace 9
+    start_weg_app_0: Keskenduge või käivitage rakendus tegumiriba positsioonile 10
+    start_weg_app_1: Fokuseerige või käivitage rakendus tegumiriba positsioonile 1
+    start_weg_app_2: Keskenduge või käivitage rakendus tegumiriba positsioonile 2
+    start_weg_app_3: Keskenduge või käivitage rakendus tegumiriba positsioonile 3
+    start_weg_app_4: Fokuseerige või käivitage rakendus tegumiriba positsioonile 4
+    start_weg_app_5: Keskenduge või käivitage rakendus tegumiriba positsioonile 5
+    start_weg_app_6: Keskenduge või käivitage rakendus tegumiriba positsioonile 6
+    start_weg_app_7: Keskenduge või käivitage rakendus tegumiriba positsioonile 7
+    start_weg_app_8: Keskenduge või käivitage rakendus tegumiriba positsioonile 8
+    start_weg_app_9: Keskenduge või käivitage rakendus tegumiriba positsioonile 9
     switch_workspace_0: Lülitage tööalale 1
     switch_workspace_1: Lülitage tööruum 2
     switch_workspace_2: Lülitage tööruum 2
@@ -201,11 +226,12 @@ toolbar:
   delay_to_show: Näitamisega viivitus
   enable: Luba väljamõeldud tööriistariba
   height: Kõrgus
+  hide_mode:
+    always: Alati
+    never: Mitte kunagi
+    on_overlap: Kattumises
   label: Tööriistariba
-  placeholder:
-    author: Autor
-    description: Kirjeldus
-    select: Tööriistariba struktuur
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
 update:
   available: Värskendage saadaval!
@@ -235,9 +261,17 @@ weg:
   dock_side: Positsioon
   enable: Luba dokk/ülesanderiba
   gap: Lüngad
+  hide_mode:
+    always: Alati
+    never: Mitte kunagi
+    on_overlap: Kattumises
   items:
     gap: Esemete vaheline ruum
     label: Esemed
+    pinned_visibility:
+      always: Alati
+      label: Kinnitatud üksuste nähtavus
+      when_primary: Kui monitor on esmane
     size: Üksuse suurus
     temporal_visibility:
       all: Kõik
@@ -247,6 +281,9 @@ weg:
     zoom_size: Suumendatud suurus (kasutatud teemade jaoks)
   label: Dokk/ülesanderiba
   margin: Marginaal
+  mode:
+    full_width: Täisekraani laius
+    min_content: Nii väike kui olla saab
   padding: Polsterdamine
   use_multiple_monitor_overlap_logic: Kasutage ühe fookuse loogika asemel kuvapõhist
   width: Laius

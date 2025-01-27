@@ -1,5 +1,8 @@
 app_launcher:
   enable: Povoliť spúšťač aplikácií
+  launch_on:
+    mouse_over: Prejdite myšou
+    primary: Primárne
   monitor: Monitorovať, aby sa ukázal
   runners:
     cmd: Príkaz
@@ -50,9 +53,20 @@ apps_configurations:
     id: Identifikátor
     kind: Určiť
     matching_strategy: Stratégia
+    matching_strategy_option:
+      contains: Obsahuje
+      ends_with: Končí s
+      equals: Rovná sa
+      regex: Regulárny výraz
+      starts_with: Začína s
     negation: Negovať zladenie
     or: Alebo
     remove: Vymazať blok
+    type:
+      class: triedy
+      exe: Exe
+      path: Cesta
+      title: Názov
   import: Dovoz
   new: Nový
   search: Vyhľadávanie
@@ -68,6 +82,7 @@ devtools:
   install_folder: Inštalačný priečinok
   load: Naložiť
   settings_file: Nastavovací súbor
+  simulate_fullscreen: Simulovať udalosť na celú obrazovku
 extras:
   discord: Nesúhlas
   exit: Prestať
@@ -170,6 +185,16 @@ shortcuts:
     send_to_workspace_7: Pošlite do pracovného priestoru 7
     send_to_workspace_8: Pošlite do pracovného priestoru 8
     send_to_workspace_9: Pošlite do pracovného priestoru 9
+    start_weg_app_0: Zamerajte alebo spustite aplikáciu na paneli úloh na pozícii 10
+    start_weg_app_1: Zameranie alebo spustenie aplikácie na paneli úloh 1
+    start_weg_app_2: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 2
+    start_weg_app_3: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 3
+    start_weg_app_4: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 4
+    start_weg_app_5: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 5
+    start_weg_app_6: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 6
+    start_weg_app_7: Zamerajte alebo spustite aplikáciu na pozícii panela úloh 7
+    start_weg_app_8: Zamerajte alebo spustite aplikáciu na paneli úloh na pozícii 8
+    start_weg_app_9: Zamerajte alebo spustite aplikáciu na paneli úloh 9
     switch_workspace_0: Prepnite na pracovný priestor 1
     switch_workspace_1: Prepnite na pracovný priestor 2
     switch_workspace_2: Prepnite na pracovný priestor 2
@@ -202,11 +227,12 @@ toolbar:
   delay_to_show: Oneskorenie zobrazenia
   enable: Povoliť ozdobný panel s nástrojmi
   height: Výška
+  hide_mode:
+    always: Vždy
+    never: Nikdy
+    on_overlap: Na prekrytí
   label: Panel s nástrojmi
-  placeholder:
-    author: Autor
-    description: Opis
-    select: Štruktúra
+  placeholder: {}
   use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
 update:
   available: Aktualizácia k dispozícii!
@@ -236,9 +262,17 @@ weg:
   dock_side: Pozícia
   enable: Povoliť prístavisko/panel úloh
   gap: Priepasť
+  hide_mode:
+    always: Vždy
+    never: Nikdy
+    on_overlap: Na prekrytí
   items:
     gap: Priestor medzi položkami
     label: Predmety
+    pinned_visibility:
+      always: Vždy
+      label: Viditeľnosť pripnutých položiek
+      when_primary: Keď je monitor primárny
     size: Veľkosť položky
     temporal_visibility:
       all: Všetky
@@ -248,6 +282,9 @@ weg:
     zoom_size: Zväčšená veľkosť (používa sa na témy)
   label: Prístavný panel
   margin: Okraj
+  mode:
+    full_width: Celá šírka obrazovky
+    min_content: Malý ako len môže byť
   padding: Vypchávka
   use_multiple_monitor_overlap_logic: Namiesto logiky jedného zamerania použite špecifické zobrazenie
   width: Šírka

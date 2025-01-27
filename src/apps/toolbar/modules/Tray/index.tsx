@@ -2,7 +2,6 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { TrayToolbarItem } from '@seelen-ui/lib/types';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
-import { Popover } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -16,6 +15,7 @@ import { useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { TrayInfo } from '../shared/store/domain';
 
+import { AnimatedPopover } from '../../../shared/components/AnimatedWrappers';
 import { OverflowTooltip } from '../../../shared/components/OverflowTooltip';
 
 interface Props {
@@ -43,7 +43,7 @@ function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number })
         <img src={convertFileSrc(tray.icon ? tray.icon : LAZY_CONSTANTS.MISSING_ICON_PATH)} />
       </div>
       <OverflowTooltip
-        overlayClassName="tray-item-label-tooltip"
+        rootClassName="tray-item-label-tooltip"
         className="tray-item-label"
         text={tray.label || t('unlabelled_tray')}
         placement="left"
@@ -82,7 +82,12 @@ export function TrayModule({ module }: Props) {
   }, [openPreview]);
 
   return (
-    <Popover
+    <AnimatedPopover
+      animationDescription={{
+        maxAnimationTimeMs: 500,
+        openAnimationName: 'tray-open',
+        closeAnimationName: 'tray-close',
+      }}
       open={openPreview}
       trigger="click"
       onOpenChange={setOpenPreview}
@@ -97,7 +102,7 @@ export function TrayModule({ module }: Props) {
         </BackgroundByLayersV2>
       }
     >
-      <Item module={module} />
-    </Popover>
+      <Item module={module} active={openPreview} />
+    </AnimatedPopover>
   );
 }
