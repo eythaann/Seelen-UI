@@ -4,20 +4,18 @@
 
 In Seelen UI, themes are managed as layers, allowing multiple themes to be used simultaneously. Since themes are like CSS files, their order is crucial as it determines the cascade order.
 
-Themes can be either a single file or a folder containing a specific file. The file should be a `.yml` file that adheres to the [theme schema](https://github.com/Seelen-Inc/slu-lib/blob/master/gen/schemas/theme.schema.json).
+Themes can be either a single file or a folder following a file structure. The file should be a `.yml` file that adheres to the [theme schema](https://github.com/Seelen-Inc/slu-lib/blob/master/gen/schemas/theme.schema.json).
 
-For a folder, it follows this structure. Instead of using `styles.{module}` in the metadata file, it uses a CSS file named `theme.{module}.css`:
+For a folder, it follows the next structure:
 
 ```
 C:\Users\{USER}\AppData\Roaming\com.seelen.seelen-ui\themes
-└── YourThemeFolder         # Name of your theme
-    ├── theme.yml           # Theme metadata file
-    ├── theme.weg.css
-    ├── theme.toolbar.css
-    └── theme.wm.css
+└── YourThemeFolder             # the name of the folder doesn't matter
+    ├── theme.yml               # Theme metadata file
+    └── seelen                  # creator's username of widgets inside
+        ├── fancy-toolbar.css   # resource's name of widgets
+        └── window-manager.css
 ```
-
-**Note:** the file name or the folder name is used as the identifier of the theme.
 
 ## Examples
 You can use the default themes included in the executable as a guide. See the [themes](../static/themes/) directory in the code as example.

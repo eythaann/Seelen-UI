@@ -11,6 +11,15 @@
   }
 }
 
+@keyframes PopupBaseAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 #root,
 .fast-settings,
 .tray,
@@ -40,15 +49,6 @@
 
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--color-gray-500);
-  }
-}
-
-@keyframes PopupBaseAnimation {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
   }
 }
 

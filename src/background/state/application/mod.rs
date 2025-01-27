@@ -4,6 +4,7 @@ mod icons;
 mod plugins;
 mod profiles;
 mod settings;
+mod themes;
 mod toolbar_items;
 mod weg_items;
 mod widgets;
@@ -259,82 +260,6 @@ impl FullState {
             }
             _ => Err("Invalid settings file extension".into()),
         }
-    }
-
-    fn load_theme_from_file(path: PathBuf) -> Result<Theme> {
-        match path.extension() {
-            Some(ext) if ext == "yml" || ext == "yaml" => {
-                Ok(serde_yaml::from_str(&std::fs::read_to_string(&path)?)?)
-            }
-            _ => Err("Invalid theme file extension".into()),
-        }
-    }
-
-    fn load_theme_from_dir(path: PathBuf) -> Result<Theme> {
-        let file = path.join("theme.yml");
-        if !file.exists() {
-            return Err("theme.yml not found".into());
-        }
-
-        let mut theme = Self::load_theme_from_file(file)?;
-
-        if path.join("theme.weg.css").exists() {
-            theme.styles.insert(
-                "weg".into(),
-                std::fs::read_to_string(path.join("theme.weg.css"))?,
-            );
-        }
-
-        if path.join("theme.toolbar.css").exists() {
-            theme.styles.insert(
-                "toolbar".into(),
-                std::fs::read_to_string(path.join("theme.toolbar.css"))?,
-            );
-        }
-
-        if path.join("theme.wm.css").exists() {
-            theme.styles.insert(
-                "wm".into(),
-                std::fs::read_to_string(path.join("theme.wm.css"))?,
-            );
-        }
-
-        if path.join("theme.launcher.css").exists() {
-            theme.styles.insert(
-                "launcher".into(),
-                std::fs::read_to_string(path.join("theme.launcher.css"))?,
-            );
-        }
-
-        if path.join("theme.wall.css").exists() {
-            theme.styles.insert(
-                "wall".into(),
-                std::fs::read_to_string(path.join("theme.wall.css"))?,
-            );
-        }
-
-        Ok(theme)
-    }
-
-    fn load_themes(&mut self) -> Result<()> {
-        let entries = std::fs::read_dir(SEELEN_COMMON.bundled_themes_path())?
-            .chain(std::fs::read_dir(SEELEN_COMMON.user_themes_path())?);
-        for entry in entries.flatten() {
-            let path = entry.path();
-            let theme = if path.is_dir() {
-                Self::load_theme_from_dir(path)
-            } else {
-                Self::load_theme_from_file(path)
-            };
-            match theme {
-                Ok(mut theme) => {
-                    theme.metadata.filename = entry.file_name().to_string_lossy().to_string();
-                    self.themes.insert(theme.metadata.filename.clone(), theme);
-                }
-                Err(err) => log::error!("Failed to load theme ({:?}): {:?}", entry.path(), err),
-            }
-        }
-        Ok(())
     }
 
     fn save_settings_by_app(&self) -> Result<()> {
