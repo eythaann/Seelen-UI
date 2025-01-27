@@ -1,5 +1,5 @@
 import { Reorder } from 'framer-motion';
-import { PropsWithChildren, useRef } from 'react';
+import { PropsWithChildren, useRef, useState } from 'react';
 
 import { SwItem } from '../../shared/store/domain';
 
@@ -8,9 +8,11 @@ import { cx } from '../../../../shared/styles';
 interface Props extends PropsWithChildren {
   item: SwItem;
   className?: String;
+  drag: boolean | 'x' | 'y' | undefined;
 }
 
-export function DraggableItem({ children, item, className }: Props) {
+export function DraggableItem({ children, item, className, drag }: Props) {
+  const [ isDragging, setDragging ] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   return (
@@ -18,14 +20,16 @@ export function DraggableItem({ children, item, className }: Props) {
       as="div"
       ref={ref}
       value={item}
-      drag
-      className={cx('weg-item-drag-container', className)}
+      drag={drag}
+      className={cx('weg-item-drag-container', className, { 'dragging': isDragging })}
       onDragStart={() => {
         ref.current?.classList.add('dragging');
+        setDragging(true);
       }}
       onDragEnd={() => {
         setTimeout(() => {
           ref.current?.classList.remove('dragging');
+          setDragging(false);
         }, 150);
       }}
     >

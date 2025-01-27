@@ -24,7 +24,7 @@ const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
 const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
-export function MediaSession({ item }: { item: MediaWegItem }) {
+export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean | 'x' | 'y' | undefined }) {
   const [luminance, setLuminance] = useState(0);
 
   const sessions = useSelector(Selectors.mediaSessions);
@@ -57,7 +57,7 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
   };
 
   return (
-    <DraggableItem item={item}>
+    <DraggableItem drag={drag} item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
         <div className="media-session-container" onContextMenu={(e) => e.stopPropagation()}>
           <div

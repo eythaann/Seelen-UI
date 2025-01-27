@@ -1,6 +1,6 @@
 import { HideMode, SeelenWegMode, SeelenWegSide, WegItemType } from '@seelen-ui/lib';
 import { Reorder } from 'framer-motion';
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useLayoutEffect, useState, WheelEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -162,7 +162,7 @@ export function SeelenWeg() {
     setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen));
   }, []);
 
-  const projectSwItem = (item: SwItem) => ItemByType(item, shit);
+  const projectSwItem = (item: SwItem) => ItemByType(item, isHorizontal ? 'x' : 'y', shit);
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar)}>
@@ -185,66 +185,83 @@ export function SeelenWeg() {
         })}
       >
         <BackgroundByLayersV2 prefix="taskbar" />
-        {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 && (
-          <span className="weg-empty-state-label">{t('weg.empty')}</span>
-        )}
-        {isTemporalOnlyWegBar
-          ? [
-            ...pinnedOnLeft.map(projectSwItem),
-            ...pinnedOnCenter.map(projectSwItem),
-            ...pinnedOnRight.map(projectSwItem),
-          ]
-          : [
-            ...pinnedOnLeft.map(projectSwItem),
-            <Reorder.Item
-              as="div"
-              key="separator1"
-              value={Separator1}
-              className={cx('weg-separator weg-separator-1', {
-                visible: settings.visibleSeparators,
-              })}
-              drag={false}
-              style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
-            />,
-            ...pinnedOnCenter.map(projectSwItem),
-            <Reorder.Item
-              as="div"
-              key="separator2"
-              value={Separator2}
-              className={cx('weg-separator weg-separator-2', {
-                visible: settings.visibleSeparators,
-              })}
-              drag={false}
-              style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
-            />,
-            ...pinnedOnRight.map(projectSwItem),
-          ]}
+        <div className="taskbar-scroll-container" onWheel={scrollXonY}>
+          <div className="taskbar-scroll-inner-frame">
+            {pinnedOnLeft.length + pinnedOnCenter.length + pinnedOnRight.length == 0 && (
+              <span className="weg-empty-state-label">{t('weg.empty')}</span>
+            )}
+            {isTemporalOnlyWegBar
+              ? [
+                ...pinnedOnLeft.map(projectSwItem),
+                ...pinnedOnCenter.map(projectSwItem),
+                ...pinnedOnRight.map(projectSwItem),
+              ]
+              : [
+                ...pinnedOnLeft.map(projectSwItem),
+                <Reorder.Item
+                  as="div"
+                  key="separator1"
+                  value={Separator1}
+                  className={cx('weg-separator weg-separator-1', {
+                    visible: settings.visibleSeparators,
+                  })}
+                  drag={false}
+                  style={getSeparatorComplementarySize(pinnedOnLeft.length, pinnedOnCenter.length)}
+                />,
+                ...pinnedOnCenter.map(projectSwItem),
+                <Reorder.Item
+                  as="div"
+                  key="separator2"
+                  value={Separator2}
+                  className={cx('weg-separator weg-separator-2', {
+                    visible: settings.visibleSeparators,
+                  })}
+                  drag={false}
+                  style={getSeparatorComplementarySize(pinnedOnRight.length, pinnedOnCenter.length)}
+                />,
+                ...pinnedOnRight.map(projectSwItem),
+              ]}
+          </div>
+        </div>
       </Reorder.Group>
     </WithContextMenu>
   );
 }
 
-function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
-  if (item.type === WegItemType.Pinned) {
+function scrollXonY(e: WheelEvent) {
+  e.preventDefault();
+
+  // Capture up/down wheel events and scroll the viewport horizontally
+  const delta = e.deltaY;
+  const currPos = e.currentTarget.scrollLeft;
+  const scrollWidth = e.currentTarget.scrollWidth;
+
+  const newPos = Math.max(0, Math.min(scrollWidth, currPos + delta / 5));
+
+  e.currentTarget.scrollLeft = newPos;
+}
+
+function ItemByType(item: SwItem, drag: boolean | 'x' | 'y' | undefined, callback: (isOpen: boolean) => void) {
+  if (item.type === WegItemType.Pinned && item.path) {
     if (
       item.path.toLowerCase().endsWith('.exe') ||
       item.relaunchCommand.toLowerCase().includes('.exe')
     ) {
-      return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
+      return <UserApplication drag={drag} key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
     }
-    return <FileOrFolder key={item.id} item={item} />;
+    return <FileOrFolder drag={drag} key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.Temporal) {
-    return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
+    return <UserApplication drag={drag} key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
   }
 
   if (item.type === WegItemType.Media) {
-    return <MediaSession key={item.id} item={item} />;
+    return <MediaSession drag={drag} key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.StartMenu) {
-    return <StartMenu key={item.id} item={item} />;
+    return <StartMenu drag={drag} key={item.id} item={item} />;
   }
 
   return null;
