@@ -55,12 +55,41 @@
 }
 
 
-.notification-open, .settings-open, .calendar-open, .tray-open, .wlan-open, .media-open, .media-notifier-open, .ft-bar-item-context-menu-open, .ft-bar-context-menu-open, .userhome-open, .userhome-quicksettings-open, 
-.notification-close, .settings-close, .calendar-close, .tray-close, .wlan-close, .media-close, .media-notifier-close, .ft-bar-item-context-menu-close, .ft-bar-context-menu-close, .userhome-close, .userhome-quicksettings-close {
+.notification-open,
+.settings-open,
+.calendar-open,
+.tray-open,
+.wlan-open,
+.media-open,
+.media-notifier-open,
+.ft-bar-item-context-menu-open,
+.ft-bar-context-menu-open,
+.userhome-open,
+.userhome-quicksettings-open, 
+.notification-close,
+.settings-close,
+.calendar-close,
+.tray-close,
+.wlan-close,
+.media-close,
+.media-notifier-close,
+.ft-bar-item-context-menu-close,
+.ft-bar-context-menu-close,
+.userhome-close,
+.userhome-quicksettings-close {
  animation: PopupBaseAnimation 0.2s linear forwards; 
 }
 
-.notification-close, .settings-close, .calendar-close, .tray-close, .wlan-close, .media-close, .ft-bar-item-context-menu-close, .ft-bar-context-menu-close, .userhome-close, .userhome-quicksettings-close {
+.notification-close,
+.settings-close,
+.calendar-close,
+.tray-close,
+.wlan-close,
+.media-close,
+.ft-bar-item-context-menu-close,
+.ft-bar-context-menu-close,
+.userhome-close,
+.userhome-quicksettings-close {
   animation-direction: reverse;
 }
 
@@ -81,12 +110,20 @@
 
 .ft-bar-item {
   .workspace-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
     background-color: #efefef;
     transition-property: width, border-radius, background-color;
     transition-duration: 200ms;
     transition-timing-function: ease-out;
 
+    &:not(:last-child) {
+      margin-right: 12px;
+    }
+
     &.workspace-dot-active {
+      width: 18px;
       background-color: var(--config-accent-color);
     }
   }

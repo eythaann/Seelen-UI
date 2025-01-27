@@ -1,6 +1,6 @@
 import { HideMode } from '@seelen-ui/lib';
 import { ToolbarModuleType as ToolbarItemType } from '@seelen-ui/lib';
-import { Placeholder, Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
+import { Plugin, PluginId, ToolbarItem } from '@seelen-ui/lib/types';
 import { Reorder, useForceUpdate } from 'framer-motion';
 import { JSXElementConstructor, useCallback, useLayoutEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,10 +44,6 @@ const modulesByType: Record<
   [ToolbarItemType.Notifications]: NotificationsModule,
 };
 
-interface Props {
-  structure: Placeholder;
-}
-
 const DividerStart = 'CenterStart';
 const DividerEnd = 'CenterEnd';
 
@@ -74,7 +70,9 @@ function componentByModule(plugins: Plugin[], item: PluginId | ToolbarItem) {
   return <Component key={module.id} module={module} value={item} />;
 }
 
-export function ToolBar({ structure }: Props) {
+export function ToolBar() {
+  const structure = useSelector(Selectors.items);
+
   const [isAppFocused, setAppFocus] = useState(false);
   const [delayed, setDelayed] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);

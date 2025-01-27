@@ -10,7 +10,7 @@ const settings = await Settings.default();
 
 const initialState: RootState = {
   version: 0,
-  placeholder: {
+  items: {
     left: [],
     center: [],
     right: [],
@@ -60,43 +60,43 @@ export const RootSlice = createSlice({
   reducers: {
     ...StateBuilder.reducersFor(initialState),
     setPlaceholder(state, action: PayloadAction<Placeholder>) {
-      state.placeholder = action.payload;
+      state.items = action.payload;
       state.version++;
     },
     setItemsOnLeft(state, action: PayloadAction<ToolbarItem[]>) {
-      if (state.placeholder) {
-        state.placeholder.left = action.payload;
+      if (state.items) {
+        state.items.left = action.payload;
       }
     },
     setItemsOnCenter(state, action: PayloadAction<ToolbarItem[]>) {
-      if (state.placeholder) {
-        state.placeholder.center = action.payload;
+      if (state.items) {
+        state.items.center = action.payload;
       }
     },
     setItemsOnRight(state, action: PayloadAction<ToolbarItem[]>) {
-      if (state.placeholder) {
-        state.placeholder.right = action.payload;
+      if (state.items) {
+        state.items.right = action.payload;
       }
     },
     addItem(state, action: PayloadAction<string>) {
-      if (!state.placeholder) {
+      if (!state.items) {
         return;
       }
       const alreadyExists =
-        state.placeholder.left.includes(action.payload) ||
-        state.placeholder.right.includes(action.payload) ||
-        state.placeholder.center.includes(action.payload);
+        state.items.left.includes(action.payload) ||
+        state.items.right.includes(action.payload) ||
+        state.items.center.includes(action.payload);
       if (!alreadyExists) {
-        state.placeholder.right.push(action.payload);
+        state.items.right.push(action.payload);
       }
     },
     removeItem(state, action: PayloadAction<string>) {
       let id = action.payload;
-      if (state.placeholder) {
+      if (state.items) {
         let filter = (d: any) => d !== id && d.id !== id;
-        state.placeholder.left = state.placeholder.left.filter(filter);
-        state.placeholder.center = state.placeholder.center.filter(filter);
-        state.placeholder.right = state.placeholder.right.filter(filter);
+        state.items.left = state.items.left.filter(filter);
+        state.items.center = state.items.center.filter(filter);
+        state.items.right = state.items.right.filter(filter);
       }
     },
   },
