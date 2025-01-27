@@ -61,14 +61,6 @@ impl ApplicationHistory {
             Ok(&self.history[0])
         }
     }
-
-    pub fn last_not_seelen_active(&self) -> Result<&ApplicationHistoryEntry, AppError> {
-        self.history
-            .iter()
-            .find(|item| !item.is_seelen)
-            .ok_or("Not matching history entry".into())
-    }
-
     fn add(&mut self, item: ApplicationHistoryEntry) -> Result<(), AppError> {
         let application = item.application.clone();
 
@@ -86,26 +78,42 @@ impl ApplicationHistory {
             }
         }
 
-        let sender = Self::event_tx();
-        log_error!(
-            sender.send(ApplicationHistoryEvent::ApplicationHistoryAdded(
-                application
-            ))
-        );
-        log_error!(sender.send(ApplicationHistoryEvent::ApplicationHistoryChanged));
-        let current_state = self.get_filtered_by_monitor()?;
-        if self.history_by_monitor != current_state {
-            self.history_by_monitor = current_state.clone();
-
-            for (monitor, items) in current_state {
-                log_error!(sender.send(
-                    ApplicationHistoryEvent::ApplicationHistoryByMonitorChanged(monitor, items,)
-                ));
-            }
-        }
+        self.emit_event(Some(application));
 
         Ok(())
     }
+    fn emit_event(&mut self, application: Option<FocusedApp>) {
+        let sender = Self::event_tx();
+        if let Some(application) = application {
+            log_error!(
+                sender.send(ApplicationHistoryEvent::ApplicationHistoryAdded(
+                    application
+                ))
+            );
+        }
+        log_error!(sender.send(ApplicationHistoryEvent::ApplicationHistoryChanged));
+        let current_state = self.get_filtered_by_monitor().unwrap();
+        if self.history_by_monitor != current_state {
+            let previous_state = self.history_by_monitor.clone();
+            self.history_by_monitor = current_state.clone();
+
+            for (monitor, items) in current_state {
+                if !previous_state.contains_key(&monitor) || items != previous_state[&monitor] {
+                    log_error!(sender.send(
+                        ApplicationHistoryEvent::ApplicationHistoryByMonitorChanged(monitor, items,)
+                    ));
+                }
+            }
+        }
+    }
+
+    pub fn last_not_seelen_active(&self) -> Result<&ApplicationHistoryEntry, AppError> {
+        self.history
+            .iter()
+            .find(|item| !item.is_seelen)
+            .ok_or("Not matching history entry".into())
+    }
+
     pub fn add_focused(&mut self, application: FocusedApp) -> Result<(), AppError> {
         let window = Window::from(application.hwnd);
 
@@ -149,8 +157,7 @@ impl ApplicationHistory {
         self.capacity = limit;
 
         if modified {
-            let sender = Self::event_tx();
-            log_error!(sender.send(ApplicationHistoryEvent::ApplicationHistoryChanged));
+            self.emit_event(None);
         }
 
         Ok(())
