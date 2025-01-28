@@ -24,14 +24,17 @@ impl ServiceSubcommands {
     pub const SHOW_WINDOW: &str = "show-window";
     pub const SHOW_WINDOW_ASYNC: &str = "show-window-async";
     pub const SET_WINDOW_POSITION: &str = "set-window-position";
+    pub const SET_FOREGROUND: &str = "set-foreground";
 }
 
 pub fn get_cli() -> Command {
+    let hwnd_arg = Arg::new("hwnd")
+        .value_parser(clap::value_parser!(isize))
+        .action(clap::ArgAction::Set)
+        .required(true);
+
     let show_window_args = [
-        Arg::new("hwnd")
-            .value_parser(clap::value_parser!(isize))
-            .action(clap::ArgAction::Set)
-            .required(true),
+        hwnd_arg.clone(),
         Arg::new("command")
             .value_parser(clap::value_parser!(i32))
             .action(clap::ArgAction::Set)
@@ -62,10 +65,7 @@ pub fn get_cli() -> Command {
             Command::new(ServiceSubcommands::SHOW_WINDOW).args(&show_window_args),
             Command::new(ServiceSubcommands::SHOW_WINDOW_ASYNC).args(&show_window_args),
             Command::new(ServiceSubcommands::SET_WINDOW_POSITION).args([
-                Arg::new("hwnd")
-                    .value_parser(clap::value_parser!(isize))
-                    .action(clap::ArgAction::Set)
-                    .required(true),
+                hwnd_arg.clone(),
                 Arg::new("x")
                     .value_parser(clap::value_parser!(i32))
                     .action(clap::ArgAction::Set)
@@ -87,6 +87,7 @@ pub fn get_cli() -> Command {
                     .action(clap::ArgAction::Set)
                     .required(true),
             ]),
+            Command::new(ServiceSubcommands::SET_FOREGROUND).args([hwnd_arg.clone()]),
         ])
 }
 
@@ -143,6 +144,10 @@ pub fn handle_tcp_cli(matches: &clap::ArgMatches) -> Result<()> {
             let height = *arg.get_one::<i32>("height").unwrap();
             let flags = *arg.get_one::<u32>("flags").unwrap();
             WindowsApi::set_position(hwnd, x, y, width, height, flags)?;
+        }
+        Some((ServiceSubcommands::SET_FOREGROUND, arg)) => {
+            let hwnd = *arg.get_one::<isize>("hwnd").unwrap();
+            WindowsApi::set_foreground(hwnd)?;
         }
         _ => (),
     }

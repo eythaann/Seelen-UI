@@ -202,4 +202,8 @@ impl ServiceClient {
             &flags.to_string(),
         ])
     }
+
+    pub fn emit_set_foreground(hwnd: isize) -> Result<()> {
+        Self::send_message(&["set-foreground", &hwnd.to_string()])
+    }
 }

@@ -13,7 +13,6 @@ use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;
 use widestring::U16CStr;
-use window::Window;
 use windows_core::Interface;
 
 use std::{
@@ -76,9 +75,9 @@ use windows::{
             RemoteDesktop::ProcessIdToSessionId,
             Shutdown::{ExitWindowsEx, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             Threading::{
-                GetCurrentProcess, GetCurrentProcessId, OpenProcess, OpenProcessToken,
-                QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_LIMITED_INFORMATION,
+                AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
+                OpenProcess, OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
+                PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
         UI::{
@@ -91,16 +90,16 @@ use windows::{
                 QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
-                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
+                BringWindowToTop, EnumWindows, GetClassNameW, GetDesktopWindow,
+                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindowLongW, GetWindowRect,
+                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
+                IsZoomed, PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
                 GWL_STYLE, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
                 SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
                 SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
                 SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE, SW_RESTORE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_RESTORE,
                 SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
                 WS_SIZEBOX, WS_THICKFRAME,
             },
@@ -110,10 +109,8 @@ use windows::{
 
 use crate::{
     error_handler::{Result, WindowsResultExt},
-    hook::HookManager,
     modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
-    winevent::WinEvent,
 };
 
 #[macro_export]
@@ -196,6 +193,10 @@ impl WindowsApi {
 
     pub fn current_process_id() -> u32 {
         unsafe { GetCurrentProcessId() }
+    }
+
+    pub fn current_thread_id() -> u32 {
+        unsafe { GetCurrentThreadId() }
     }
 
     pub fn current_session_id() -> Result<u32> {
@@ -332,24 +333,30 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn set_foreground(hwnd: HWND) -> Result<()> {
-        unsafe { SetForegroundWindow(hwnd).ok()? };
+    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
+        unsafe { BringWindowToTop(hwnd)? };
         Ok(())
     }
 
-    pub fn async_force_set_foreground(hwnd: HWND) {
-        let window = Window::from(hwnd);
-        HookManager::run_with_async(move |hook_manager| {
-            hook_manager.skip(WinEvent::SystemMinimizeStart, window.hwnd());
-            hook_manager.skip(WinEvent::SystemMinimizeEnd, window.hwnd());
+    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
+        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
+        Ok(())
+    }
 
-            Self::set_minimize_animation(false)?;
-            window.show_window(SW_FORCEMINIMIZE)?;
-            window.show_window(SW_RESTORE)?;
-            Self::set_minimize_animation(true)?;
-
-            Self::set_foreground(window.hwnd())
-        });
+    pub fn set_foreground(hwnd: HWND) -> Result<()> {
+        if Self::is_iconic(hwnd) {
+            Self::show_window(hwnd, SW_RESTORE)?;
+        }
+        let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
+        let app_thread = Self::current_thread_id();
+        if focused_thread != app_thread {
+            Self::attach_thread_input(focused_thread, app_thread, true)?;
+            Self::bring_to_top(hwnd)?;
+            Self::attach_thread_input(focused_thread, app_thread, false)?;
+        } else {
+            Self::bring_to_top(hwnd)?;
+        }
+        Ok(())
     }
 
     fn open_process(

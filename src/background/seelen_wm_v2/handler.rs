@@ -35,6 +35,6 @@ pub fn request_focus(hwnd: isize) -> Result<()> {
     if !window.is_window() {
         return Ok(());
     }
-    WindowsApi::async_force_set_foreground(window.hwnd());
+    window.focus()?;
     Ok(())
 }

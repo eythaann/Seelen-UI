@@ -1,4 +1,4 @@
-use std::{ffi::OsStr, path::PathBuf, sync::atomic::Ordering};
+use std::{ffi::OsStr, path::PathBuf};
 
 use image::ImageFormat;
 use seelen_core::state::{PinnedWegItemData, WegItem, WegItems};
@@ -7,14 +7,13 @@ use tauri_plugin_shell::ShellExt;
 
 use crate::{
     error_handler::Result,
-    hook::LAST_ACTIVE_NOT_SEELEN,
     seelen::get_app_handle,
     seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     state::application::FULL_STATE,
     trace_lock,
     windows_api::{window::Window, WindowsApi},
 };
-use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, SW_RESTORE, WM_CLOSE};
+use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE};
 
 use super::SeelenWeg;
 
@@ -90,25 +89,19 @@ pub fn weg_kill_app(hwnd: isize) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
+pub fn weg_toggle_window_state(hwnd: isize, was_focused: bool) -> Result<()> {
     let window = Window::from(hwnd);
     if !window.is_visible() {
         SeelenWeg::remove_hwnd(&window)?;
         return Ok(());
     }
-
-    if window.is_minimized() {
-        window.show_window_async(SW_RESTORE)?;
-        return Ok(());
-    }
-
-    let last_active = LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire);
-    if last_active == window.address() {
+    // was_focused is intented to know if the window was focused before click on the dock item
+    // on click the items makes the dock being focused.
+    if was_focused {
         window.show_window_async(SW_MINIMIZE)?;
     } else {
-        WindowsApi::set_foreground(window.hwnd())?;
+        window.focus()?;
     }
-
     Ok(())
 }
 

@@ -11,14 +11,15 @@ use windows::Win32::{
     },
     System::{
         Com::IPersistFile,
-        Threading::{GetCurrentProcess, OpenProcessToken},
+        Threading::{AttachThreadInput, GetCurrentProcess, GetCurrentThreadId, OpenProcessToken},
     },
     UI::{
         HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
         Shell::{IShellLinkW, ShellLink},
         WindowsAndMessaging::{
+            BringWindowToTop, GetForegroundWindow, GetWindowThreadProcessId, IsIconic,
             SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-            SWP_NOZORDER,
+            SWP_NOZORDER, SW_RESTORE,
         },
     },
 };
@@ -32,21 +33,66 @@ use crate::{
 pub struct WindowsApi;
 
 impl WindowsApi {
-    pub fn show_window(hwnd: isize, command: i32) -> Result<()> {
+    /// Behaviour is undefined if an invalid HWND is given
+    /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid
+    pub fn window_thread_process_id(hwnd: HWND) -> (u32, u32) {
+        let mut process_id: u32 = 0;
+        let thread_id = unsafe {
+            GetWindowThreadProcessId(hwnd, Option::from(std::ptr::addr_of_mut!(process_id)))
+        };
+        (process_id, thread_id)
+    }
+
+    pub fn show_window(addr: isize, command: i32) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
-        unsafe { ShowWindow(HWND(hwnd as _), SHOW_WINDOW_CMD(command)) }
+        unsafe { ShowWindow(HWND(addr as _), SHOW_WINDOW_CMD(command)) }
             .ok()
             .filter_fake_error()?;
         Ok(())
     }
 
-    pub fn show_window_async(hwnd: isize, command: i32) -> Result<()> {
+    pub fn show_window_async(addr: isize, command: i32) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
-        unsafe { ShowWindowAsync(HWND(hwnd as _), SHOW_WINDOW_CMD(command)) }
+        unsafe { ShowWindowAsync(HWND(addr as _), SHOW_WINDOW_CMD(command)) }
             .ok()
             .filter_fake_error()?;
+        Ok(())
+    }
+
+    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
+        unsafe { BringWindowToTop(hwnd)? };
+        Ok(())
+    }
+
+    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
+        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
+        Ok(())
+    }
+
+    pub fn is_iconic(hwnd: HWND) -> bool {
+        unsafe { IsIconic(hwnd).as_bool() }
+    }
+
+    pub fn get_foreground_window() -> HWND {
+        unsafe { GetForegroundWindow() }
+    }
+
+    pub fn set_foreground(addr: isize) -> Result<()> {
+        let hwnd = HWND(addr as _);
+        if Self::is_iconic(hwnd) {
+            Self::show_window(addr, SW_RESTORE.0)?;
+        }
+        let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
+        let app_thread = Self::current_thread_id();
+        if focused_thread != app_thread {
+            Self::attach_thread_input(focused_thread, app_thread, true)?;
+            Self::bring_to_top(hwnd)?;
+            Self::attach_thread_input(focused_thread, app_thread, false)?;
+        } else {
+            Self::bring_to_top(hwnd)?;
+        }
         Ok(())
     }
 
@@ -80,6 +126,10 @@ impl WindowsApi {
 
     pub fn current_process() -> HANDLE {
         unsafe { GetCurrentProcess() }
+    }
+
+    pub fn current_thread_id() -> u32 {
+        unsafe { GetCurrentThreadId() }
     }
 
     pub fn open_current_process_token() -> Result<HANDLE> {

@@ -185,18 +185,16 @@ shortcuts:
     send_to_workspace_7: Invia al Workspace 8
     send_to_workspace_8: Invia al Workspace 9
     send_to_workspace_9: Invia al Workspace 10
-    start_weg_app_0: Evidenzia o avvia l'app sulla posizione 10 della barra delle applicazioni
-    start_weg_app_1: Evidenzia o avvia l'app sulla posizione 1 della barra delle applicazioni
-    start_weg_app_2: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 2
-    start_weg_app_3: >-
-      Mettere a fuoco o avviare l'app sulla posizione della barra delle
-      applicazioni 3
-    start_weg_app_4: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 4
-    start_weg_app_5: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 5
-    start_weg_app_6: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 6
-    start_weg_app_7: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 7
-    start_weg_app_8: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 8
-    start_weg_app_9: Evidenzia o avvia l'app sulla posizione della barra delle applicazioni 9
+    start_weg_app_0: Focus o Avvia l'app sulla posizione della barra delle applicazioni 1
+    start_weg_app_1: Focus o Avvia l'app sulla posizione della barra delle applicazioni 2
+    start_weg_app_2: Focus o Avvia l'app sulla posizione della barra delle applicazioni 3
+    start_weg_app_3: Focus o Avvia l'app sulla posizione della barra delle applicazioni 4
+    start_weg_app_4: Focus o Avvia l'app sulla posizione della barra delle applicazioni 5
+    start_weg_app_5: Focus o Avvia l'app sulla posizione della barra delle applicazioni 6
+    start_weg_app_6: Focus o Avvia l'app sulla posizione della barra delle applicazioni 7
+    start_weg_app_7: Focus o Avvia l'app sulla posizione della barra delle applicazioni 8
+    start_weg_app_8: Focus o Avvia l'app sulla posizione della barra delle applicazioni 9
+    start_weg_app_9: Focus o Avvia l'app sulla posizione della barra delle applicazioni 10
     switch_workspace_0: Passa al Workspace 1
     switch_workspace_1: Passa al Workspace 2
     switch_workspace_2: Passa al Workspace 3

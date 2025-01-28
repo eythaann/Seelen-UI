@@ -10,7 +10,7 @@
     "dev": "tauri dev",
     "test": "jest",
     "build:ui": "tsx scripts/build.ts",
-    "translate": "tsx ./scripts/translate.ts",
+    "translate": "tsx ./scripts/translate/mod.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix --max-warnings 0",
     "type-check": "tsc --noEmit",

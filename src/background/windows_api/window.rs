@@ -185,7 +185,7 @@ impl Window {
         WindowsApi::is_cloaked(self.0).unwrap_or(false)
     }
 
-    pub fn is_foreground(&self) -> bool {
+    pub fn is_focused(&self) -> bool {
         WindowsApi::get_foreground_window() == self.0
     }
 
@@ -311,6 +311,14 @@ impl Window {
                 (rect.bottom - rect.top).abs(),
                 flags.0,
             )
+        }
+    }
+
+    pub fn focus(&self) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::set_foreground(self.hwnd())
+        } else {
+            ServiceClient::emit_set_foreground(self.address())
         }
     }
 }
