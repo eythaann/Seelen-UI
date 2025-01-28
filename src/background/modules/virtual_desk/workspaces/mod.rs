@@ -88,14 +88,17 @@ impl SeelenWorkspace {
     fn restore(&self) {
         let win_address = self.windows.clone();
         HookManager::run_with_async(move |hook_manager| {
-            for addr in win_address {
-                let window = Window::from(addr);
+            for addr in &win_address {
+                let window = Window::from(*addr);
                 // if is switching by restored window on other workspace it will be already shown
                 if window.is_window() && window.is_minimized() {
                     hook_manager.skip(WinEvent::SystemMinimizeEnd, window.hwnd());
-                    // show_window_async will restore the windows unsorted so we use sync show here
+                    // use normal show instead async cuz it will keep the order of restoring
                     log_error!(window.show_window(SW_RESTORE));
                 }
+            }
+            if let Some(last) = win_address.last() {
+                log_error!(Window::from(*last).focus());
             }
         });
     }

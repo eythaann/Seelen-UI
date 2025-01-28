@@ -258,6 +258,15 @@ impl WindowsApi {
         ))
     }
 
+    /// Sets the visibility state of a window created by the calling thread (could cause a deadlock)
+    ///
+    /// The deadlock occurs if show_window is called for a window created on a different thread but in same process.
+    /// Is safe to use for windows created by other processes
+    ///
+    /// Use this only if you need wait for the window to be visible, otherwise use show_window_async
+    ///
+    /// https://stackoverflow.com/questions/16881820/win32-api-deadlocks-while-using-different-threads
+    /// https://stackoverflow.com/questions/15637124/whats-the-difference-between-showwindow-and-showwindowasync
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow

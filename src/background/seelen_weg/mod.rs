@@ -129,7 +129,7 @@ impl SeelenWeg {
                         trace_lock!(TASKBAR_STATE_ON_INIT)
                             .insert(handle.0 as isize, app_bar.state());
                         app_bar.set_state(AppBarDataState::AutoHide);
-                        let _ = WindowsApi::show_window(*handle, SW_HIDE);
+                        let _ = WindowsApi::show_window_async(*handle, SW_HIDE);
                     }
                     attempts += 1;
                     sleep_millis(50);
@@ -146,7 +146,7 @@ impl SeelenWeg {
                     .get(&(hwnd.0 as isize))
                     .unwrap_or(&AppBarDataState::AlwaysOnTop),
             );
-            WindowsApi::show_window(hwnd, SW_SHOWNORMAL)?;
+            WindowsApi::show_window_async(hwnd, SW_SHOWNORMAL)?;
         }
         Ok(())
     }

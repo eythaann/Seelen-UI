@@ -105,7 +105,7 @@ impl FancyToolbar {
     }
 
     pub fn hide(&mut self) -> Result<()> {
-        WindowsApi::show_window(self.window.hwnd()?, SW_HIDE)?;
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -115,7 +115,7 @@ impl FancyToolbar {
     }
 
     pub fn show(&mut self) -> Result<()> {
-        WindowsApi::show_window(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
