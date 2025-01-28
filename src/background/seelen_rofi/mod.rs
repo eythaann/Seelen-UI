@@ -3,7 +3,7 @@ pub mod handler;
 
 use base64::Engine;
 use tauri::WebviewWindow;
-use windows::Win32::UI::WindowsAndMessaging::SWP_NOACTIVATE;
+use windows::Win32::UI::WindowsAndMessaging::SWP_ASYNCWINDOWPOS;
 
 use crate::{
     error_handler::Result,
@@ -43,7 +43,7 @@ impl SeelenRofi {
             .monitorInfo
             .rcMonitor;
         WindowsApi::move_window(self.window.hwnd()?, &rc_monitor)?;
-        WindowsApi::set_position(self.window.hwnd()?, None, &rc_monitor, SWP_NOACTIVATE)?;
+        WindowsApi::set_position(self.window.hwnd()?, None, &rc_monitor, SWP_ASYNCWINDOWPOS)?;
         std::thread::sleep(std::time::Duration::from_millis(100));
         self.window.show()?;
         self.window.set_focus()?;

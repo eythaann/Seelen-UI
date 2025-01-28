@@ -1,4 +1,9 @@
-use windows::Win32::{Foundation::RECT, UI::WindowsAndMessaging::SW_NORMAL};
+use windows::Win32::{
+    Foundation::RECT,
+    UI::WindowsAndMessaging::{
+        SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOSENDCHANGING, SW_NORMAL,
+    },
+};
 
 use crate::{
     error_handler::Result,
@@ -25,7 +30,10 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
     };
 
     // WindowsApi::move_window(hwnd, &rect)?;
-    window.set_position(&rect)?;
+    window.set_position(
+        &rect,
+        SWP_NOACTIVATE | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS | SWP_NOSENDCHANGING,
+    )?;
     Ok(())
 }
 
