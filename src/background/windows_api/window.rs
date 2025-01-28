@@ -5,9 +5,10 @@ use std::{
 };
 
 use windows::Win32::{
-    Foundation::HWND,
+    Foundation::{HWND, RECT},
     UI::WindowsAndMessaging::{
-        SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+        SHOW_WINDOW_CMD, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOSENDCHANGING,
+        WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
     },
 };
 
@@ -282,10 +283,34 @@ impl Window {
     }
 
     pub fn show_window(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
-        ServiceClient::emit_show_window(self.address(), command.0)
+        if self.process().open_handle().is_ok() {
+            WindowsApi::show_window(self.hwnd(), command)
+        } else {
+            ServiceClient::emit_show_window(self.address(), command.0)
+        }
     }
 
     pub fn show_window_async(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
-        ServiceClient::emit_show_window_async(self.address(), command.0)
+        if self.process().open_handle().is_ok() {
+            WindowsApi::show_window_async(self.hwnd(), command)
+        } else {
+            ServiceClient::emit_show_window_async(self.address(), command.0)
+        }
+    }
+
+    pub fn set_position(&self, rect: &RECT) -> Result<()> {
+        let flags = SWP_NOACTIVATE | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS | SWP_NOSENDCHANGING;
+        if self.process().open_handle().is_ok() {
+            WindowsApi::set_position(self.hwnd(), None, rect, flags)
+        } else {
+            ServiceClient::emit_set_window_position(
+                self.address(),
+                rect.left,
+                rect.top,
+                (rect.right - rect.left).abs(),
+                (rect.bottom - rect.top).abs(),
+                flags.0,
+            )
+        }
     }
 }

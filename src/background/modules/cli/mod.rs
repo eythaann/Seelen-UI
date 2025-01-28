@@ -3,6 +3,7 @@ pub mod domain;
 
 use std::{
     fs,
+    io::Write,
     net::{TcpListener, TcpStream},
     path::PathBuf,
 };
@@ -107,14 +108,15 @@ impl ServiceClient {
 
     fn send_message(message: &[&str]) -> Result<()> {
         let stream = Self::connect_tcp()?;
-        let writter = std::io::BufWriter::new(stream);
+        let mut writter = std::io::BufWriter::new(stream);
         serde_json::to_writer(
-            writter,
+            &mut writter,
             &serde_json::json!({
                 "token": Self::token(),
                 "message": message,
             }),
         )?;
+        writter.flush()?;
         Ok(())
     }
 

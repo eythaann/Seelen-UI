@@ -98,13 +98,13 @@ pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
     }
 
     if window.is_minimized() {
-        WindowsApi::show_window_async(window.hwnd(), SW_RESTORE)?;
+        window.show_window_async(SW_RESTORE)?;
         return Ok(());
     }
 
     let last_active = LAST_ACTIVE_NOT_SEELEN.load(Ordering::Acquire);
     if last_active == window.address() {
-        WindowsApi::show_window_async(window.hwnd(), SW_MINIMIZE)?;
+        window.show_window_async(SW_MINIMIZE)?;
     } else {
         WindowsApi::set_foreground(window.hwnd())?;
     }

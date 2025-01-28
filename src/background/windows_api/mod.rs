@@ -13,6 +13,7 @@ use itertools::Itertools;
 use process::ProcessInformationFlag;
 use string_utils::WindowsString;
 use widestring::U16CStr;
+use window::Window;
 use windows_core::Interface;
 
 use std::{
@@ -93,14 +94,15 @@ use windows::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
                 GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, SystemParametersInfoW,
-                ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE, GWL_STYLE, HWND_TOP,
-                MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
-                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
-                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
-                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
-                SWP_NOZORDER, SW_FORCEMINIMIZE, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
+                SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
+                GWL_STYLE, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+                SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
+                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
+                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
+                WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -109,10 +111,7 @@ use windows::{
 use crate::{
     error_handler::{Result, WindowsResultExt},
     hook::HookManager,
-    modules::{
-        cli::ServiceClient,
-        input::{domain::Point, Mouse},
-    },
+    modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
     winevent::WinEvent,
 };
@@ -258,7 +257,6 @@ impl WindowsApi {
         ))
     }
 
-    /// **WARNING**: Internal use only, to manage external windows use the App Service API instead
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
@@ -268,9 +266,12 @@ impl WindowsApi {
         Ok(())
     }
 
-    /// This is intented to be used to manage windows out of the self process.
     pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
-        ServiceClient::emit_show_window_async(hwnd.0 as isize, command.0)?;
+        // BOOL is returned but does not signify whether or not the operation was succesful
+        // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
+        unsafe { ShowWindowAsync(hwnd, command) }
+            .ok()
+            .filter_fake_error()?;
         Ok(())
     }
 
@@ -337,20 +338,17 @@ impl WindowsApi {
     }
 
     pub fn async_force_set_foreground(hwnd: HWND) {
-        let hwnd = hwnd.0 as isize;
+        let window = Window::from(hwnd);
         HookManager::run_with_async(move |hook_manager| {
-            let hwnd = HWND(hwnd as _);
-
-            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
-            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
+            hook_manager.skip(WinEvent::SystemMinimizeStart, window.hwnd());
+            hook_manager.skip(WinEvent::SystemMinimizeEnd, window.hwnd());
 
             Self::set_minimize_animation(false)?;
-            Self::show_window(hwnd, SW_FORCEMINIMIZE)?;
-            Self::show_window(hwnd, SW_RESTORE)?;
+            window.show_window(SW_FORCEMINIMIZE)?;
+            window.show_window(SW_RESTORE)?;
             Self::set_minimize_animation(true)?;
 
-            Self::bring_to(hwnd, HWND_TOP)?;
-            Self::set_foreground(hwnd)
+            Self::set_foreground(window.hwnd())
         });
     }
 
@@ -442,11 +440,6 @@ impl WindowsApi {
         Ok(String::from_utf16(&path[..len as usize])?)
     }
 
-    pub fn exe_path(hwnd: HWND) -> Result<String> {
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
-        Self::exe_path_by_process(process_id)
-    }
-
     pub fn exe_path_v2(hwnd: HWND) -> Result<PathBuf> {
         let (process_id, _) = Self::window_thread_process_id(hwnd);
         let path_string = Self::exe_path_by_process(process_id)?;
@@ -457,10 +450,10 @@ impl WindowsApi {
     }
 
     pub fn exe(hwnd: HWND) -> Result<String> {
-        Ok(Self::exe_path(hwnd)?
-            .split('\\')
-            .last()
-            .ok_or("there is no last element")?
+        Ok(Self::exe_path_v2(hwnd)?
+            .file_name()
+            .ok_or("there is no file name")?
+            .to_string_lossy()
             .to_string())
     }
 

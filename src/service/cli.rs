@@ -170,16 +170,13 @@ impl ServiceClient {
         let reader = std::io::BufReader::new(stream);
         let mut message: Message = serde_json::from_reader(reader)?;
         if message.token != Self::token() {
+            log::info!("Invalid token received. Skipping message.");
             return Ok(());
         }
         log::trace!("CLI command received: {}", message.message.join(" "));
         message.message.insert(0, "slu-service.exe".to_owned());
         if let Ok(matches) = get_cli().try_get_matches_from(message.message) {
-            std::thread::spawn(move || {
-                if let Err(err) = handle_tcp_cli(&matches) {
-                    log::error!("Failed to handle message: {}", err);
-                }
-            });
+            handle_tcp_cli(&matches)?;
         }
         Ok(())
     }
