@@ -36,8 +36,10 @@ impl SeelenWeg {
 
     pub fn process(matches: &clap::ArgMatches) -> Result<()> {
         let subcommand = SubCommand::try_from(matches)?;
-        if let SubCommand::ForegroundOrRunApp(idx) = subcommand {
+        if let SubCommand::ForegroundOrRunApp(index) = subcommand {
             let id = Monitor::from(WindowsApi::monitor_from_cursor_point()).device_id()?;
+            //This shift the user awaited number to the index (when you press 1 you want to open the 0 index, if you press 0, then it is then 10. item which 9 in index)
+            let idx = if index == 0 { 9 } else { index - 1 };
 
             let items = trace_lock!(WEG_ITEMS_IMPL).get_filtered_by_monitor()?;
             if let Some(wegitems) = items.get(&id) {
