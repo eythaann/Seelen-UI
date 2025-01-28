@@ -1,11 +1,11 @@
 use windows::Win32::{
     Foundation::{HWND, RECT},
     UI::WindowsAndMessaging::{
-        SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOSENDCHANGING,
+        SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOSENDCHANGING, SW_NORMAL,
     },
 };
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error_handler::Result, modules::cli::ServiceClient, windows_api::WindowsApi};
 use seelen_core::rect::Rect;
 
 #[tauri::command(async)]
@@ -16,7 +16,7 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
         return Ok(());
     }
 
-    WindowsApi::unmaximize_window(hwnd)?;
+    ServiceClient::emit_show_window_async(hwnd.0 as _, SW_NORMAL.0)?;
 
     let shadow = WindowsApi::shadow_rect(hwnd)?;
     let rect = RECT {
@@ -27,11 +27,13 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
     };
 
     // WindowsApi::move_window(hwnd, &rect)?;
-    WindowsApi::set_position(
-        hwnd,
-        None,
-        &rect,
-        SWP_NOACTIVATE | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS | SWP_NOSENDCHANGING,
+    ServiceClient::emit_set_window_position(
+        hwnd.0 as _,
+        rect.left,
+        rect.top,
+        (rect.right - rect.left).abs(),
+        (rect.bottom - rect.top).abs(),
+        (SWP_NOACTIVATE | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS | SWP_NOSENDCHANGING).0,
     )?;
     Ok(())
 }

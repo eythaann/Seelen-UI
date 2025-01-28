@@ -5,3 +5,17 @@
     matching_strategy: Legacy
   options:
     - unmanage
+- name: TaskManagerWindow
+  identifier:
+    id: TaskManagerWindow
+    kind: Class
+    matching_strategy: Legacy
+  options:
+    - float
+- name: AutoHotkeyUX.exe
+  identifier:
+    id: AutoHotkeyUX.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage

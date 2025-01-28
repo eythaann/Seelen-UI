@@ -99,7 +99,7 @@ impl SeelenWorkspace {
                 if WindowsApi::is_window(hwnd) && WindowsApi::is_iconic(hwnd) {
                     hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
                     // show_window_async will restore the windows unsorted so we use sync show here
-                    log_error!(WindowsApi::show_window(hwnd, SW_RESTORE));
+                    log_error!(WindowsApi::show_window_async(hwnd, SW_RESTORE));
                 }
             }
         });

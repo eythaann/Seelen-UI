@@ -4,7 +4,7 @@ use std::path::PathBuf;
 
 use com::Com;
 use windows::Win32::{
-    Foundation::{FALSE, HANDLE, LUID},
+    Foundation::{FALSE, HANDLE, HWND, LUID},
     Security::{
         AdjustTokenPrivileges, LookupPrivilegeValueW, SE_PRIVILEGE_ENABLED,
         TOKEN_ADJUST_PRIVILEGES, TOKEN_PRIVILEGES, TOKEN_QUERY,
@@ -13,15 +13,71 @@ use windows::Win32::{
         Com::IPersistFile,
         Threading::{GetCurrentProcess, OpenProcessToken},
     },
-    UI::Shell::{IShellLinkW, ShellLink},
+    UI::{
+        HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
+        Shell::{IShellLinkW, ShellLink},
+        WindowsAndMessaging::{
+            SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+            SWP_NOZORDER,
+        },
+    },
 };
 use windows_core::{Interface, PCWSTR};
 
-use crate::{error::Result, string_utils::WindowsString};
+use crate::{
+    error::{Result, WindowsResultExt},
+    string_utils::WindowsString,
+};
 
 pub struct WindowsApi;
 
 impl WindowsApi {
+    pub fn show_window(hwnd: isize, command: i32) -> Result<()> {
+        // BOOL is returned but does not signify whether or not the operation was succesful
+        // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
+        unsafe { ShowWindow(HWND(hwnd as _), SHOW_WINDOW_CMD(command)) }
+            .ok()
+            .filter_fake_error()?;
+        Ok(())
+    }
+
+    pub fn show_window_async(hwnd: isize, command: i32) -> Result<()> {
+        // BOOL is returned but does not signify whether or not the operation was succesful
+        // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
+        unsafe { ShowWindowAsync(HWND(hwnd as _), SHOW_WINDOW_CMD(command)) }
+            .ok()
+            .filter_fake_error()?;
+        Ok(())
+    }
+
+    pub fn set_position(
+        hwnd: isize,
+        x: i32,
+        y: i32,
+        width: i32,
+        height: i32,
+        flags: u32,
+    ) -> Result<()> {
+        unsafe {
+            SetWindowPos(
+                HWND(hwnd as _),
+                HWND::default(),
+                x,
+                y,
+                width,
+                height,
+                SET_WINDOW_POS_FLAGS(flags) | SWP_NOZORDER,
+            )
+            .filter_fake_error()?;
+        }
+        Ok(())
+    }
+
+    pub fn set_process_dpi_aware() -> Result<()> {
+        unsafe { SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)? };
+        Ok(())
+    }
+
     pub fn current_process() -> HANDLE {
         unsafe { GetCurrentProcess() }
     }

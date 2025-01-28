@@ -27,7 +27,7 @@ use crate::{
 impl WindowManagerV2 {
     fn is_manageable_window(hwnd: HWND) -> bool {
         let window = Window::from(hwnd);
-        let exe = window.exe();
+        let exe = window.process().program_path();
 
         if let Ok(exe) = &exe {
             if exe.ends_with("ApplicationFrameHost.exe") && window.is_real_window() {

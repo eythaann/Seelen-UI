@@ -77,7 +77,7 @@ use windows::{
             Threading::{
                 GetCurrentProcess, GetCurrentProcessId, OpenProcess, OpenProcessToken,
                 QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_INFORMATION, PROCESS_QUERY_LIMITED_INFORMATION,
+                PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
         UI::{
@@ -91,16 +91,15 @@ use windows::{
             },
             WindowsAndMessaging::{
                 EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
+                GetSystemMetrics, GetWindowLongW, GetWindowRect, GetWindowTextW,
                 GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
-                SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, HWND_TOP, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN,
-                SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION,
-                SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE,
-                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, SystemParametersInfoW,
+                ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE, GWL_STYLE, HWND_TOP,
+                MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE,
+                SWP_NOZORDER, SW_FORCEMINIMIZE, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
                 WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
@@ -110,7 +109,10 @@ use windows::{
 use crate::{
     error_handler::{Result, WindowsResultExt},
     hook::HookManager,
-    modules::input::{domain::Point, Mouse},
+    modules::{
+        cli::ServiceClient,
+        input::{domain::Point, Mouse},
+    },
     utils::{is_virtual_desktop_supported, is_windows_11},
     winevent::WinEvent,
 };
@@ -256,6 +258,7 @@ impl WindowsApi {
         ))
     }
 
+    /// **WARNING**: Internal use only, to manage external windows use the App Service API instead
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
@@ -265,17 +268,10 @@ impl WindowsApi {
         Ok(())
     }
 
+    /// This is intented to be used to manage windows out of the self process.
     pub fn show_window_async(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
-        // BOOL is returned but does not signify whether or not the operation was succesful
-        // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
-        unsafe { ShowWindowAsync(hwnd, command) }
-            .ok()
-            .filter_fake_error()?;
+        ServiceClient::emit_show_window_async(hwnd.0 as isize, command.0)?;
         Ok(())
-    }
-
-    pub fn unmaximize_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_NORMAL)
     }
 
     pub fn get_styles(hwnd: HWND) -> WINDOW_STYLE {
@@ -307,6 +303,7 @@ impl WindowsApi {
         Ok(())
     }
 
+    /// **WARNING**: Internal use only, no use with external windows
     pub fn set_position(
         hwnd: HWND,
         order: Option<HWND>,
@@ -332,14 +329,6 @@ impl WindowsApi {
             SWP_ASYNCWINDOWPOS | SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
         )?;
         Ok(())
-    }
-
-    pub fn minimize_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_MINIMIZE)
-    }
-
-    pub fn restore_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_RESTORE)
     }
 
     pub fn set_foreground(hwnd: HWND) -> Result<()> {
@@ -408,18 +397,8 @@ impl WindowsApi {
         Ok(())
     }
 
-    fn process_handle(process_id: u32) -> Result<HANDLE> {
-        Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
-    }
-
-    pub fn get_parent(hwnd: HWND) -> HWND {
-        // TODO change unwrap_or_default and return a result instead
-        unsafe { GetParent(hwnd).unwrap_or_default() }
-    }
-
-    pub fn get_owner(hwnd: HWND) -> HWND {
-        // TODO change unwrap_or_default and return a result instead
-        unsafe { GetWindow(hwnd, GW_OWNER).unwrap_or_default() }
+    pub fn get_parent(hwnd: HWND) -> Result<HWND> {
+        Ok(unsafe { GetParent(hwnd)? })
     }
 
     pub fn get_desktop_window() -> HWND {
@@ -456,8 +435,7 @@ impl WindowsApi {
         let mut len = 512_u32;
         let mut path: Vec<u16> = vec![0; len as usize];
         let text_ptr = path.as_mut_ptr();
-
-        let handle = Self::process_handle(process_id)?;
+        let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
         unsafe {
             QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
         }
