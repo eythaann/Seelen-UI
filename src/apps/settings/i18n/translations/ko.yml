@@ -182,16 +182,16 @@ shortcuts:
     send_to_workspace_7: 작업 공간 8로 보내기
     send_to_workspace_8: 작업 공간 9로 보내기
     send_to_workspace_9: 작업 공간 10으로 보내기
-    start_weg_app_0: 작업 표시줄 위치 10에 앱 초점 맞추기 또는 시작
-    start_weg_app_1: 작업 표시줄 위치 1에 앱 초점 맞추기 또는 시작
-    start_weg_app_2: 작업 표시줄 위치 2에 앱 초점 맞추기 또는 시작
-    start_weg_app_3: 작업 표시줄 위치 3에 앱 초점 맞추기 또는 시작
-    start_weg_app_4: 작업 표시줄 위치 4에 앱 초점 맞추기 또는 시작
-    start_weg_app_5: 작업 표시줄 위치 5에 앱 초점 맞추기 또는 시작
-    start_weg_app_6: 작업 표시줄 위치 6에 앱 초점 맞추기 또는 시작
-    start_weg_app_7: 작업 표시줄 위치 7에 앱 초점 맞추기 또는 시작
-    start_weg_app_8: 작업 표시줄 위치 8에 앱 초점 맞추기 또는 시작
-    start_weg_app_9: 작업 표시줄 위치 9에 앱 초점 맞추기 또는 시작
+    start_weg_app_0: 작업 표시 줄 위치에서 초점 또는 시작 앱 1
+    start_weg_app_1: 작업 표시 줄 위치에서 초점 또는 시작 앱 2
+    start_weg_app_2: 작업 표시 줄 위치에서 초점 또는 시작 앱 3
+    start_weg_app_3: 작업 표시 줄 위치에서 초점 또는 시작 앱 4
+    start_weg_app_4: 작업 표시 줄 위치 5에서 초점 또는 시작 앱
+    start_weg_app_5: 작업 표시 줄 위치 6에서 초점 또는 시작 앱
+    start_weg_app_6: 작업 표시 줄 위치에서 초점 또는 시작 앱 7
+    start_weg_app_7: 작업 표시 줄 위치에서 초점 또는 시작 앱 8
+    start_weg_app_8: 작업 표시 줄 위치에서 초점 또는 시작 앱 9
+    start_weg_app_9: 작업 표시 줄 위치에서 초점 또는 시작 앱 10
     switch_workspace_0: 작업 공간 1로 전환
     switch_workspace_1: 작업 공간 2로 전환
     switch_workspace_2: 작업 공간 3으로 전환

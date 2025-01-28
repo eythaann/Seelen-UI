@@ -90,6 +90,7 @@ fn stop_service_on_seelen_ui_closed() {
 }
 
 pub fn setup() -> Result<()> {
+    WindowsApi::set_process_dpi_aware()?;
     WindowsApi::enable_privilege(SE_TCB_NAME)?;
     ServiceClient::listen_tcp()?;
 

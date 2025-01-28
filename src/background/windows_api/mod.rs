@@ -75,9 +75,9 @@ use windows::{
             RemoteDesktop::ProcessIdToSessionId,
             Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
             Threading::{
-                GetCurrentProcess, GetCurrentProcessId, OpenProcess, OpenProcessToken,
-                QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS, PROCESS_NAME_WIN32,
-                PROCESS_QUERY_INFORMATION, PROCESS_QUERY_LIMITED_INFORMATION,
+                AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
+                OpenProcess, OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
+                PROCESS_NAME_WIN32, PROCESS_QUERY_LIMITED_INFORMATION,
             },
         },
         UI::{
@@ -90,18 +90,18 @@ use windows::{
                 QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
-                EnumWindows, GetClassNameW, GetDesktopWindow, GetForegroundWindow, GetParent,
-                GetSystemMetrics, GetWindow, GetWindowLongW, GetWindowRect, GetWindowTextW,
-                GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible, IsZoomed,
-                PostMessageW, SetForegroundWindow, SetWindowPos, ShowWindow, ShowWindowAsync,
+                BringWindowToTop, EnumWindows, GetClassNameW, GetDesktopWindow,
+                GetForegroundWindow, GetParent, GetSystemMetrics, GetWindowLongW, GetWindowRect,
+                GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
+                IsZoomed, PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, GW_OWNER, HWND_TOP, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS,
-                SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN,
-                SM_YVIRTUALSCREEN, SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION,
-                SPI_GETDESKWALLPAPER, SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS,
-                SWP_NOACTIVATE, SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_FORCEMINIMIZE,
-                SW_MINIMIZE, SW_NORMAL, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                GWL_STYLE, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+                SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
+                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
+                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
+                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_RESTORE,
+                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
+                WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -109,10 +109,8 @@ use windows::{
 
 use crate::{
     error_handler::{Result, WindowsResultExt},
-    hook::HookManager,
     modules::input::{domain::Point, Mouse},
     utils::{is_virtual_desktop_supported, is_windows_11},
-    winevent::WinEvent,
 };
 
 #[macro_export]
@@ -197,6 +195,10 @@ impl WindowsApi {
         unsafe { GetCurrentProcessId() }
     }
 
+    pub fn current_thread_id() -> u32 {
+        unsafe { GetCurrentThreadId() }
+    }
+
     pub fn current_session_id() -> Result<u32> {
         let process_id = Self::current_process_id();
         let mut session_id = 0;
@@ -274,10 +276,6 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn unmaximize_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_NORMAL)
-    }
-
     pub fn get_styles(hwnd: HWND) -> WINDOW_STYLE {
         WINDOW_STYLE(unsafe { GetWindowLongW(hwnd, GWL_STYLE) } as u32)
     }
@@ -307,6 +305,7 @@ impl WindowsApi {
         Ok(())
     }
 
+    /// **WARNING**: Internal use only, no use with external windows
     pub fn set_position(
         hwnd: HWND,
         order: Option<HWND>,
@@ -334,35 +333,30 @@ impl WindowsApi {
         Ok(())
     }
 
-    pub fn minimize_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_MINIMIZE)
-    }
-
-    pub fn restore_window(hwnd: HWND) -> Result<()> {
-        Self::show_window(hwnd, SW_RESTORE)
-    }
-
-    pub fn set_foreground(hwnd: HWND) -> Result<()> {
-        unsafe { SetForegroundWindow(hwnd).ok()? };
+    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
+        unsafe { BringWindowToTop(hwnd)? };
         Ok(())
     }
 
-    pub fn async_force_set_foreground(hwnd: HWND) {
-        let hwnd = hwnd.0 as isize;
-        HookManager::run_with_async(move |hook_manager| {
-            let hwnd = HWND(hwnd as _);
+    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
+        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
+        Ok(())
+    }
 
-            hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
-            hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
-
-            Self::set_minimize_animation(false)?;
-            Self::show_window(hwnd, SW_FORCEMINIMIZE)?;
+    pub fn set_foreground(hwnd: HWND) -> Result<()> {
+        if Self::is_iconic(hwnd) {
             Self::show_window(hwnd, SW_RESTORE)?;
-            Self::set_minimize_animation(true)?;
-
-            Self::bring_to(hwnd, HWND_TOP)?;
-            Self::set_foreground(hwnd)
-        });
+        }
+        let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
+        let app_thread = Self::current_thread_id();
+        if focused_thread != app_thread {
+            Self::attach_thread_input(focused_thread, app_thread, true)?;
+            Self::bring_to_top(hwnd)?;
+            Self::attach_thread_input(focused_thread, app_thread, false)?;
+        } else {
+            Self::bring_to_top(hwnd)?;
+        }
+        Ok(())
     }
 
     fn open_process(
@@ -408,18 +402,8 @@ impl WindowsApi {
         Ok(())
     }
 
-    fn process_handle(process_id: u32) -> Result<HANDLE> {
-        Self::open_process(PROCESS_QUERY_INFORMATION, false, process_id)
-    }
-
-    pub fn get_parent(hwnd: HWND) -> HWND {
-        // TODO change unwrap_or_default and return a result instead
-        unsafe { GetParent(hwnd).unwrap_or_default() }
-    }
-
-    pub fn get_owner(hwnd: HWND) -> HWND {
-        // TODO change unwrap_or_default and return a result instead
-        unsafe { GetWindow(hwnd, GW_OWNER).unwrap_or_default() }
+    pub fn get_parent(hwnd: HWND) -> Result<HWND> {
+        Ok(unsafe { GetParent(hwnd)? })
     }
 
     pub fn get_desktop_window() -> HWND {
@@ -456,17 +440,11 @@ impl WindowsApi {
         let mut len = 512_u32;
         let mut path: Vec<u16> = vec![0; len as usize];
         let text_ptr = path.as_mut_ptr();
-
-        let handle = Self::process_handle(process_id)?;
+        let handle = Self::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, process_id)?;
         unsafe {
             QueryFullProcessImageNameW(handle, PROCESS_NAME_WIN32, PWSTR(text_ptr), &mut len)?;
         }
         Ok(String::from_utf16(&path[..len as usize])?)
-    }
-
-    pub fn exe_path(hwnd: HWND) -> Result<String> {
-        let (process_id, _) = Self::window_thread_process_id(hwnd);
-        Self::exe_path_by_process(process_id)
     }
 
     pub fn exe_path_v2(hwnd: HWND) -> Result<PathBuf> {
@@ -479,10 +457,10 @@ impl WindowsApi {
     }
 
     pub fn exe(hwnd: HWND) -> Result<String> {
-        Ok(Self::exe_path(hwnd)?
-            .split('\\')
-            .last()
-            .ok_or("there is no last element")?
+        Ok(Self::exe_path_v2(hwnd)?
+            .file_name()
+            .ok_or("there is no file name")?
+            .to_string_lossy()
             .to_string())
     }
 

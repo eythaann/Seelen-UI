@@ -7,14 +7,13 @@ use tauri_plugin_shell::ShellExt;
 
 use crate::{
     error_handler::Result,
-    modules::application_history::APPLICATION_HISTORY,
     seelen::get_app_handle,
     seelen_weg::weg_items_impl::WEG_ITEMS_IMPL,
     state::application::FULL_STATE,
     trace_lock,
     windows_api::{window::Window, WindowsApi},
 };
-use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, SW_RESTORE, WM_CLOSE};
+use windows::Win32::UI::WindowsAndMessaging::{SW_MINIMIZE, WM_CLOSE};
 
 use super::SeelenWeg;
 
@@ -90,30 +89,19 @@ pub fn weg_kill_app(hwnd: isize) -> Result<()> {
 }
 
 #[tauri::command(async)]
-pub fn weg_toggle_window_state(hwnd: isize) -> Result<()> {
+pub fn weg_toggle_window_state(hwnd: isize, was_focused: bool) -> Result<()> {
     let window = Window::from(hwnd);
     if !window.is_visible() {
         SeelenWeg::remove_hwnd(&window)?;
         return Ok(());
     }
-
-    if window.is_minimized() {
-        WindowsApi::show_window_async(window.hwnd(), SW_RESTORE)?;
-        return Ok(());
-    }
-
-    let history = trace_lock!(APPLICATION_HISTORY);
-    let last_active = history.last_not_seelen_active().ok();
-    if let Some(last_active) = last_active {
-        if last_active.application.hwnd == window.address() {
-            WindowsApi::show_window_async(window.hwnd(), SW_MINIMIZE)?;
-        } else {
-            WindowsApi::set_foreground(window.hwnd())?;
-        }
+    // was_focused is intented to know if the window was focused before click on the dock item
+    // on click the items makes the dock being focused.
+    if was_focused {
+        window.show_window_async(SW_MINIMIZE)?;
     } else {
-        WindowsApi::set_foreground(window.hwnd())?;
+        window.focus()?;
     }
-
     Ok(())
 }
 

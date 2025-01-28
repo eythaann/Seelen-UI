@@ -25,7 +25,6 @@ impl ApplicationHistory {
                 }
             }
             WinEvent::ObjectFocus | WinEvent::SystemForeground => {
-                let title = window.title();
                 let umid = window
                     .process()
                     .package_app_user_model_id()
@@ -64,9 +63,9 @@ impl ApplicationHistory {
 
                 let app = FocusedApp {
                     hwnd: window.hwnd().0 as _,
-                    title,
+                    title: window.title(),
                     name: app_name,
-                    exe: window.exe().ok(),
+                    exe: window.process().program_path().ok(),
                     umid,
                 };
 

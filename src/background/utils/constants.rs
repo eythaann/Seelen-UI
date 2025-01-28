@@ -182,7 +182,7 @@ impl SeelenCommon {
         &self.bundled_app_configs
     }
 
-    /// @deprecated since v2.1.0
+    /// @deprecated since v2.1.0 will be removed in v3.0
     pub fn user_placeholders_path(&self) -> &Path {
         &self.user_placeholders
     }

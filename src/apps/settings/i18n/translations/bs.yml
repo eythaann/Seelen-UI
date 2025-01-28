@@ -187,16 +187,16 @@ shortcuts:
     send_to_workspace_7: Pošalji u radni prostor 7
     send_to_workspace_8: Pošalji u radni prostor 8
     send_to_workspace_9: Pošalji u radni prostor 9
-    start_weg_app_0: Fokusirajte ili pokrenite aplikaciju na poziciji 10 na traci zadataka
-    start_weg_app_1: Fokusirajte ili pokrenite aplikaciju na poziciji 1 na traci zadataka
-    start_weg_app_2: Fokusirajte ili pokrenite aplikaciju na poziciji 2 na traci zadataka
-    start_weg_app_3: Fokusirajte ili pokrenite aplikaciju na poziciji 3 na traci zadataka
-    start_weg_app_4: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 4
-    start_weg_app_5: Fokusirajte ili pokrenite aplikaciju na poziciji 5 na traci zadataka
-    start_weg_app_6: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 6
-    start_weg_app_7: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 7
-    start_weg_app_8: Fokusirajte ili pokrenite aplikaciju na poziciji 8 na traci zadataka
-    start_weg_app_9: Fokusirajte ili pokrenite aplikaciju na poziciji trake zadataka 9
+    start_weg_app_0: Fokus ili pokretanje aplikacije na položaju zadataka 1
+    start_weg_app_1: Fokus ili pokretanje aplikacije na traci zadataka 2
+    start_weg_app_2: Fokus ili pokretanje aplikacije na položaju na traci zadataka 3
+    start_weg_app_3: Fokus ili pokretanje aplikacije na položaju zadataka 4
+    start_weg_app_4: Fokus ili pokretanje aplikacije na položaju trake zadataka 5
+    start_weg_app_5: Fokus ili pokretanje aplikacije na položaju na traci zadataka 6
+    start_weg_app_6: Fokus ili pokretanje aplikacije na položaju zadataka 7
+    start_weg_app_7: Fokus ili pokretanje aplikacije na položaju zadataka 8
+    start_weg_app_8: Fokus ili pokretanje aplikacije na položaju zadataka 9
+    start_weg_app_9: Fokus ili pokretanje aplikacije na položaju zadataka 10
     switch_workspace_0: Prebacite se na radni prostor 1
     switch_workspace_1: Prebacite se na radni prostor 2
     switch_workspace_2: Prebacite se na radni prostor 2

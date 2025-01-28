@@ -16,15 +16,12 @@ use crate::{
     error_handler::{AppError, Result},
     hook::HookManager,
     log_error, trace_lock,
-    windows_api::WindowsApi,
+    windows_api::window::Window,
     winevent::WinEvent,
 };
 
 use super::{VirtualDesktop, VirtualDesktopEvent, VirtualDesktopManagerTrait, VirtualDesktopTrait};
-use windows::Win32::{
-    Foundation::HWND,
-    UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE},
-};
+use windows::Win32::UI::WindowsAndMessaging::{SW_FORCEMINIMIZE, SW_MINIMIZE, SW_RESTORE};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SeelenWorkspace {
     id: String,
@@ -66,14 +63,12 @@ impl SeelenWorkspace {
         }
     }
 
-    fn remove_window(&mut self, window: isize) {
-        self.windows.retain(|w| *w != window);
+    fn remove_window(&mut self, address: isize) {
+        let window = Window::from(address);
+        self.windows.retain(|w| *w != address);
         HookManager::run_with_async(move |hook_manager| {
-            hook_manager.skip(WinEvent::SystemMinimizeStart, HWND(window as _));
-            log_error!(WindowsApi::show_window_async(
-                HWND(window as _),
-                SW_FORCEMINIMIZE
-            ))
+            hook_manager.skip(WinEvent::SystemMinimizeStart, window.hwnd());
+            log_error!(window.show_window_async(SW_FORCEMINIMIZE))
         });
     }
 
@@ -81,10 +76,10 @@ impl SeelenWorkspace {
         let win_address = self.windows.clone();
         HookManager::run_with_async(move |hook_manager| {
             for addr in win_address {
-                let hwnd = HWND(addr as _);
-                if WindowsApi::is_window(hwnd) {
-                    hook_manager.skip(WinEvent::SystemMinimizeStart, hwnd);
-                    log_error!(WindowsApi::show_window_async(hwnd, SW_MINIMIZE));
+                let window = Window::from(addr);
+                if window.is_window() {
+                    hook_manager.skip(WinEvent::SystemMinimizeStart, window.hwnd());
+                    log_error!(window.show_window_async(SW_MINIMIZE));
                 }
             }
         });
@@ -94,12 +89,12 @@ impl SeelenWorkspace {
         let win_address = self.windows.clone();
         HookManager::run_with_async(move |hook_manager| {
             for addr in win_address {
-                let hwnd = HWND(addr as _);
+                let window = Window::from(addr);
                 // if is switching by restored window on other workspace it will be already shown
-                if WindowsApi::is_window(hwnd) && WindowsApi::is_iconic(hwnd) {
-                    hook_manager.skip(WinEvent::SystemMinimizeEnd, hwnd);
+                if window.is_window() && window.is_minimized() {
+                    hook_manager.skip(WinEvent::SystemMinimizeEnd, window.hwnd());
                     // show_window_async will restore the windows unsorted so we use sync show here
-                    log_error!(WindowsApi::show_window(hwnd, SW_RESTORE));
+                    log_error!(window.show_window(SW_RESTORE));
                 }
             }
         });

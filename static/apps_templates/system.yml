@@ -1,0 +1,74 @@
+- name: Snipping Tool
+  identifier:
+    id: SnippingTool.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+
+- name: Calculator
+  identifier:
+    id: Calculator
+    kind: Title
+    matching_strategy: Equals
+  options:
+    - unmanage
+
+- name: Dropbox
+  identifier:
+    id: Dropbox.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+
+- name: One Drive
+  identifier:
+    id: OneDrive.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+
+- name: PowerToys ColorPickerUI
+  identifier:
+    id: PowerToys.ColorPickerUI.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+- name: PowerToys CropAndLock
+  identifier:
+    id: PowerToys.CropAndLock.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+- name: PowerToys ImageResizer
+  identifier:
+    id: PowerToys.ImageResizer.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+- name: PowerToys Peek UI
+  identifier:
+    id: PowerToys.Peek.UI.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+- name: PowerToys PowerLauncher
+  identifier:
+    id: PowerToys.PowerLauncher.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
+- name: PowerToys PowerAccent
+  identifier:
+    id: PowerToys.PowerAccent.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage

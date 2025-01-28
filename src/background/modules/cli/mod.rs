@@ -3,6 +3,7 @@ pub mod domain;
 
 use std::{
     fs,
+    io::Write,
     net::{TcpListener, TcpStream},
     path::PathBuf,
 };
@@ -107,14 +108,15 @@ impl ServiceClient {
 
     fn send_message(message: &[&str]) -> Result<()> {
         let stream = Self::connect_tcp()?;
-        let writter = std::io::BufWriter::new(stream);
+        let mut writter = std::io::BufWriter::new(stream);
         serde_json::to_writer(
-            writter,
+            &mut writter,
             &serde_json::json!({
                 "token": Self::token(),
                 "message": message,
             }),
         )?;
+        writter.flush()?;
         Ok(())
     }
 
@@ -172,5 +174,36 @@ impl ServiceClient {
 
     pub fn emit_set_startup(enabled: bool) -> Result<()> {
         Self::send_message(&["set-startup", &enabled.to_string()])
+    }
+
+    pub fn emit_show_window(hwnd: isize, command: i32) -> Result<()> {
+        Self::send_message(&["show-window", &hwnd.to_string(), &command.to_string()])
+    }
+
+    pub fn emit_show_window_async(hwnd: isize, command: i32) -> Result<()> {
+        Self::send_message(&["show-window-async", &hwnd.to_string(), &command.to_string()])
+    }
+
+    pub fn emit_set_window_position(
+        hwnd: isize,
+        x: i32,
+        y: i32,
+        width: i32,
+        height: i32,
+        flags: u32,
+    ) -> Result<()> {
+        Self::send_message(&[
+            "set-window-position",
+            &hwnd.to_string(),
+            &x.to_string(),
+            &y.to_string(),
+            &width.to_string(),
+            &height.to_string(),
+            &flags.to_string(),
+        ])
+    }
+
+    pub fn emit_set_foreground(hwnd: isize) -> Result<()> {
+        Self::send_message(&["set-foreground", &hwnd.to_string()])
     }
 }

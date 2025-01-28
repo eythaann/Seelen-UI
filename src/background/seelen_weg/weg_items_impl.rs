@@ -156,8 +156,8 @@ impl WegItemsImpl {
         // we get the path of the creator in case of Application Frame Host, Web apps
         let mut path = match window.get_frame_creator() {
             Ok(None) => return Ok(()),
-            Ok(Some(creator)) => creator.exe()?,
-            Err(_) => window.exe()?,
+            Ok(Some(creator)) => creator.process().program_path()?,
+            Err(_) => window.process().program_path()?,
         };
 
         let umid = window

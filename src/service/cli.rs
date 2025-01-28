@@ -11,6 +11,7 @@ use crate::{
     error::Result,
     logger::SluServiceLogger,
     task_scheduler::TaskSchedulerHelper,
+    windows_api::WindowsApi,
     SERVICE_DISPLAY_NAME,
 };
 
@@ -20,9 +21,26 @@ impl ServiceSubcommands {
     pub const UNINSTALL: &str = "uninstall";
     pub const STOP: &str = "stop";
     pub const SET_STARTUP: &str = "set-startup";
+    pub const SHOW_WINDOW: &str = "show-window";
+    pub const SHOW_WINDOW_ASYNC: &str = "show-window-async";
+    pub const SET_WINDOW_POSITION: &str = "set-window-position";
+    pub const SET_FOREGROUND: &str = "set-foreground";
 }
 
 pub fn get_cli() -> Command {
+    let hwnd_arg = Arg::new("hwnd")
+        .value_parser(clap::value_parser!(isize))
+        .action(clap::ArgAction::Set)
+        .required(true);
+
+    let show_window_args = [
+        hwnd_arg.clone(),
+        Arg::new("command")
+            .value_parser(clap::value_parser!(i32))
+            .action(clap::ArgAction::Set)
+            .required(true),
+    ];
+
     Command::new(SERVICE_DISPLAY_NAME.to_string())
         .author("eythaann")
         .about("Seelen Command Line Interface.")
@@ -44,6 +62,32 @@ pub fn get_cli() -> Command {
                         .action(clap::ArgAction::Set)
                         .required(true),
                 ),
+            Command::new(ServiceSubcommands::SHOW_WINDOW).args(&show_window_args),
+            Command::new(ServiceSubcommands::SHOW_WINDOW_ASYNC).args(&show_window_args),
+            Command::new(ServiceSubcommands::SET_WINDOW_POSITION).args([
+                hwnd_arg.clone(),
+                Arg::new("x")
+                    .value_parser(clap::value_parser!(i32))
+                    .action(clap::ArgAction::Set)
+                    .required(true),
+                Arg::new("y")
+                    .value_parser(clap::value_parser!(i32))
+                    .action(clap::ArgAction::Set)
+                    .required(true),
+                Arg::new("width")
+                    .value_parser(clap::value_parser!(i32))
+                    .action(clap::ArgAction::Set)
+                    .required(true),
+                Arg::new("height")
+                    .value_parser(clap::value_parser!(i32))
+                    .action(clap::ArgAction::Set)
+                    .required(true),
+                Arg::new("flags")
+                    .value_parser(clap::value_parser!(u32))
+                    .action(clap::ArgAction::Set)
+                    .required(true),
+            ]),
+            Command::new(ServiceSubcommands::SET_FOREGROUND).args([hwnd_arg.clone()]),
         ])
 }
 
@@ -82,6 +126,29 @@ pub fn handle_tcp_cli(matches: &clap::ArgMatches) -> Result<()> {
             let enabled: bool = *arg.get_one("value").unwrap();
             TaskSchedulerHelper::set_run_on_logon(enabled)?;
         }
+        Some((ServiceSubcommands::SHOW_WINDOW, arg)) => {
+            let hwnd = *arg.get_one::<isize>("hwnd").unwrap();
+            let command = *arg.get_one::<i32>("command").unwrap();
+            WindowsApi::show_window(hwnd, command)?;
+        }
+        Some((ServiceSubcommands::SHOW_WINDOW_ASYNC, arg)) => {
+            let hwnd = *arg.get_one::<isize>("hwnd").unwrap();
+            let command = *arg.get_one::<i32>("command").unwrap();
+            WindowsApi::show_window_async(hwnd, command)?;
+        }
+        Some((ServiceSubcommands::SET_WINDOW_POSITION, arg)) => {
+            let hwnd = *arg.get_one::<isize>("hwnd").unwrap();
+            let x = *arg.get_one::<i32>("x").unwrap();
+            let y = *arg.get_one::<i32>("y").unwrap();
+            let width = *arg.get_one::<i32>("width").unwrap();
+            let height = *arg.get_one::<i32>("height").unwrap();
+            let flags = *arg.get_one::<u32>("flags").unwrap();
+            WindowsApi::set_position(hwnd, x, y, width, height, flags)?;
+        }
+        Some((ServiceSubcommands::SET_FOREGROUND, arg)) => {
+            let hwnd = *arg.get_one::<isize>("hwnd").unwrap();
+            WindowsApi::set_foreground(hwnd)?;
+        }
         _ => (),
     }
     Ok(())
@@ -108,6 +175,7 @@ impl ServiceClient {
         let reader = std::io::BufReader::new(stream);
         let mut message: Message = serde_json::from_reader(reader)?;
         if message.token != Self::token() {
+            log::info!("Invalid token received. Skipping message.");
             return Ok(());
         }
         log::trace!("CLI command received: {}", message.message.join(" "));

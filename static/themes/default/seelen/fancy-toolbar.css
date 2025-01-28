@@ -54,7 +54,6 @@
   }
 }
 
-
 .notification-open,
 .settings-open,
 .calendar-open,
@@ -830,6 +829,7 @@
   padding-left: 4px;
   border-bottom: solid 1px var(--color-gray-300);
   margin: 4px 0;
+  border-radius: 4px;
 
   .userhome-profile-container + & {
     border-bottom: solid 0px var(--color-gray-300);
