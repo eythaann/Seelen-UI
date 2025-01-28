@@ -85,9 +85,9 @@ use windows::{
             Shell::{
                 IShellItem2, IShellLinkW, IVirtualDesktopManager,
                 PropertiesSystem::{IPropertyStore, SHGetPropertyStoreForWindow, GPS_DEFAULT},
-                SHCreateItemFromParsingName, SHLoadIndirectString, SHQueryUserNotificationState,
-                ShellLink, VirtualDesktopManager, QUERY_USER_NOTIFICATION_STATE,
-                QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
+                SHCreateItemFromParsingName, SHGetKnownFolderPath, SHLoadIndirectString,
+                SHQueryUserNotificationState, ShellLink, VirtualDesktopManager, KF_FLAG_DEFAULT,
+                QUERY_USER_NOTIFICATION_STATE, QUNS_RUNNING_D3D_FULL_SCREEN, SIGDN_NORMALDISPLAY,
             },
             WindowsAndMessaging::{
                 BringWindowToTop, EnumWindows, GetClassNameW, GetDesktopWindow,
@@ -962,5 +962,12 @@ impl WindowsApi {
 
     pub fn lock_machine() -> Result<()> {
         unsafe { Ok(LockWorkStation()?) }
+    }
+
+    pub fn get_known_folder(rfid: &GUID) -> Result<PathBuf> {
+        Ok(unsafe {
+            SHGetKnownFolderPath(rfid as _, KF_FLAG_DEFAULT, HANDLE::default())?.to_string()?
+        }
+        .into())
     }
 }

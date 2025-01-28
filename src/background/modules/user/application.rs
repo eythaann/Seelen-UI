@@ -9,9 +9,14 @@ use notify_debouncer_full::{
 use parking_lot::Mutex;
 use seelen_core::system_state::{File, FolderType, User};
 use std::{
-    collections::HashMap, fs::DirEntry, os::windows::fs::MetadataExt, path::PathBuf, sync::Arc,
+    collections::HashMap,
+    fs::DirEntry,
+    os::windows::fs::MetadataExt,
+    path::{Path, PathBuf},
+    sync::Arc,
     time::Duration,
 };
+use windows_core::GUID;
 use winreg::{
     enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
     RegKey,
@@ -70,6 +75,16 @@ unsafe impl Send for UserManagerEvent {}
 
 event_manager!(UserManager, UserManagerEvent);
 
+lazy_static! {
+    // https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid
+    static ref DOWNLOADS: GUID = GUID::from("374DE290-123F-4565-9164-39C4925E467B");
+    static ref DOCUMENTS: GUID = GUID::from("FDD39AD0-238F-46AF-ADB4-6C85480369C7");
+    static ref PICTURES: GUID = GUID::from("33E28130-4E1E-4676-835A-98395C3BC3BB");
+    static ref VIDEOS: GUID = GUID::from("18989B1D-99B5-455B-841C-AB7C74E4DDFC");
+    static ref MUSICS: GUID = GUID::from("4BD8D571-6D19-48D3-BE97-422220080E43");
+
+}
+
 // Static
 impl UserManager {
     pub fn new() -> Result<Self, AppError> {
@@ -82,7 +97,7 @@ impl UserManager {
         instance.user_details = instance.create_user().ok();
 
         for folder in FolderType::values().iter() {
-            let folder_path = folder.to_path();
+            let folder_path = Self::get_path_from_folder(folder)?;
             instance.folders.insert(
                 folder.clone(),
                 UserFolderDetails {
@@ -150,6 +165,32 @@ impl UserManager {
         })?;
 
         Ok(instance)
+    }
+
+    fn get_path_from_folder(folder_type: &FolderType) -> Result<PathBuf, AppError> {
+        Ok(match folder_type {
+            FolderType::Recent => {
+                std::env::temp_dir().join("..\\..\\Roaming\\Microsoft\\Windows\\Recent")
+            }
+            FolderType::Downloads => WindowsApi::get_known_folder(&DOWNLOADS)?,
+            FolderType::Documents => WindowsApi::get_known_folder(&DOCUMENTS)?,
+            FolderType::Pictures => WindowsApi::get_known_folder(&PICTURES)?,
+            FolderType::Videos => WindowsApi::get_known_folder(&VIDEOS)?,
+            FolderType::Music => WindowsApi::get_known_folder(&MUSICS)?,
+            FolderType::Unknown => {
+                return Err("There is no such folder could be handled!".into());
+            }
+        })
+    }
+
+    fn get_folder_from_path(path: &Path) -> Result<FolderType, AppError> {
+        for folder_type in FolderType::values() {
+            if path.starts_with(Self::get_path_from_folder(&folder_type)?) {
+                return Ok(folder_type);
+            }
+        }
+
+        Ok(FolderType::Unknown)
     }
 
     fn get_user_sid() -> Result<String, AppError> {
@@ -290,7 +331,7 @@ impl UserManager {
                     for event in events {
                         for pathbuf in &event.paths {
                             let path = pathbuf.as_path();
-                            let folder_type = FolderType::from_path(pathbuf);
+                            let folder_type = Self::get_folder_from_path(pathbuf).unwrap();
                             match folder_type {
                                 FolderType::Recent => {
                                     if let EventKind::Create(_) = event.kind {
