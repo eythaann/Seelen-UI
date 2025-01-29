@@ -123,11 +123,11 @@ impl SeelenWeg {
                         };
                         if !input_hwnd.is_invalid() {
                             // can fail on volume window island
-                            let _ = WindowsApi::show_window(input_hwnd, SW_HIDE);
+                            let _ = WindowsApi::show_window_async(input_hwnd, SW_HIDE);
                         }
                         // can fail on volume window island
-                        let _ = WindowsApi::show_window(content_hwnd, SW_HIDE);
-                        WindowsApi::show_window(origin_hwnd, SW_HIDE)?;
+                        let _ = WindowsApi::show_window_async(content_hwnd, SW_HIDE);
+                        WindowsApi::show_window_async(origin_hwnd, SW_HIDE)?;
                     }
                 }
             }

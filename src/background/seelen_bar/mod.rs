@@ -21,7 +21,7 @@ use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
@@ -105,7 +105,7 @@ impl FancyToolbar {
     }
 
     pub fn hide(&mut self) -> Result<()> {
-        WindowsApi::show_window(self.window.hwnd()?, SW_HIDE)?;
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -115,7 +115,7 @@ impl FancyToolbar {
     }
 
     pub fn show(&mut self) -> Result<()> {
-        WindowsApi::show_window(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -186,7 +186,7 @@ impl FancyToolbar {
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(hwnd, &rc_monitor)?;
-        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
+        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 

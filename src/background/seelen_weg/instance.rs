@@ -8,7 +8,7 @@ use tauri::{Emitter, WebviewWindow, Wry};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 use crate::{
@@ -144,7 +144,7 @@ impl SeelenWeg {
     }
 
     pub fn hide(&mut self) -> Result<()> {
-        WindowsApi::show_window(self.window.hwnd()?, SW_HIDE)?;
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_HIDE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -154,7 +154,7 @@ impl SeelenWeg {
     }
 
     pub fn show(&mut self) -> Result<()> {
-        WindowsApi::show_window(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
+        WindowsApi::show_window_async(self.window.hwnd()?, SW_SHOWNOACTIVATE)?;
         self.window.emit_to(
             self.window.label(),
             SeelenEvent::HandleLayeredHitboxes,
@@ -205,7 +205,7 @@ impl SeelenWeg {
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(hwnd, &rc_work)?;
-        WindowsApi::set_position(hwnd, None, &rc_work, SWP_NOACTIVATE)?;
+        WindowsApi::set_position(hwnd, None, &rc_work, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 }

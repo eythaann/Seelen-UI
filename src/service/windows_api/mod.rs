@@ -19,7 +19,7 @@ use windows::Win32::{
         WindowsAndMessaging::{
             BringWindowToTop, GetForegroundWindow, GetWindowThreadProcessId, IsIconic,
             SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-            SWP_NOZORDER, SW_RESTORE,
+            SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
         },
     },
 };
@@ -112,7 +112,7 @@ impl WindowsApi {
                 y,
                 width,
                 height,
-                SET_WINDOW_POS_FLAGS(flags) | SWP_NOZORDER,
+                SET_WINDOW_POS_FLAGS(flags) | SWP_NOACTIVATE | SWP_NOZORDER,
             )
             .filter_fake_error()?;
         }

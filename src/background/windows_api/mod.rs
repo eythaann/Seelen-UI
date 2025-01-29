@@ -99,9 +99,8 @@ use windows::{
                 SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
                 SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
                 SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOMOVE, SWP_NOSIZE, SWP_NOZORDER, SW_RESTORE,
-                SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC,
-                WS_SIZEBOX, WS_THICKFRAME,
+                SWP_NOSIZE, SWP_NOZORDER, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
+                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -258,6 +257,15 @@ impl WindowsApi {
         ))
     }
 
+    /// Sets the visibility state of a window created by the calling thread (could cause a deadlock)
+    ///
+    /// The deadlock occurs if show_window is called for a window created on a different thread but in same process.
+    /// Is safe to use for windows created by other processes
+    ///
+    /// Use this only if you need wait for the window to be visible, otherwise use show_window_async
+    ///
+    /// https://stackoverflow.com/questions/16881820/win32-api-deadlocks-while-using-different-threads
+    /// https://stackoverflow.com/questions/15637124/whats-the-difference-between-showwindow-and-showwindowasync
     pub fn show_window(hwnd: HWND, command: SHOW_WINDOW_CMD) -> Result<()> {
         // BOOL is returned but does not signify whether or not the operation was succesful
         // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
@@ -305,32 +313,24 @@ impl WindowsApi {
         Ok(())
     }
 
-    /// **WARNING**: Internal use only, no use with external windows
+    /// Similar to ShowWindow could cause a deadlock if the window is created on a different thread.
+    ///
+    /// Add the flag `SWP_ASYNCWINDOWPOS` to avoid that of if you don't need to wait for the window position to be set
     pub fn set_position(
         hwnd: HWND,
         order: Option<HWND>,
         rect: &RECT,
         flags: SET_WINDOW_POS_FLAGS,
     ) -> Result<()> {
-        let uflags = match order {
+        let flags = match order {
             Some(_) => flags,
             None => SWP_NOZORDER | flags,
-        };
-        Self::_set_position(hwnd, order.unwrap_or_default(), *rect, uflags)
+        } | SWP_NOACTIVATE;
+        Self::_set_position(hwnd, order.unwrap_or_default(), *rect, flags)
     }
 
     pub fn move_window(hwnd: HWND, rect: &RECT) -> Result<()> {
-        Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_NOACTIVATE)
-    }
-
-    pub fn bring_to(hwnd: HWND, after: HWND) -> Result<()> {
-        Self::set_position(
-            hwnd,
-            Some(after),
-            &Default::default(),
-            SWP_ASYNCWINDOWPOS | SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE,
-        )?;
-        Ok(())
+        Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
     pub fn bring_to_top(hwnd: HWND) -> Result<()> {

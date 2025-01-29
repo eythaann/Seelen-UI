@@ -1,3 +1,4 @@
+import { SeelenWegSide } from '@seelen-ui/lib';
 import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
 import { Button } from 'antd';
@@ -27,6 +28,7 @@ const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 export function MediaSession({ item }: { item: MediaWegItem }) {
   const [luminance, setLuminance] = useState(0);
 
+  const dockPosition = useSelector(Selectors.settings.position);
   const sessions = useSelector(Selectors.mediaSessions);
   const session = sessions.find((s) => s.default);
 
@@ -56,10 +58,18 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
     }
   };
 
+  const isHorizontal = dockPosition === SeelenWegSide.Bottom || dockPosition === SeelenWegSide.Top;
+
   return (
     <DraggableItem item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
-        <div className="media-session-container" onContextMenu={(e) => e.stopPropagation()}>
+        <div
+          className={cx('weg-item media-session-container', {
+            'media-session-container-horizontal': isHorizontal,
+            'media-session-container-vertical': !isHorizontal,
+          })}
+          onContextMenu={(e) => e.stopPropagation()}
+        >
           <div
             className="media-session"
             style={{
