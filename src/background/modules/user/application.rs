@@ -16,15 +16,15 @@ use std::{
     sync::Arc,
     time::Duration,
 };
-use windows_core::GUID;
+use tauri::Manager;
 use winreg::{
     enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
     RegKey,
 };
 
 use crate::{
-    error_handler::AppError, event_manager, log_error, trace_lock, utils::spawn_named_thread,
-    windows_api::WindowsApi,
+    error_handler::AppError, event_manager, log_error, seelen::get_app_handle, trace_lock,
+    utils::spawn_named_thread, windows_api::WindowsApi,
 };
 
 use super::domain::PictureQuality;
@@ -74,16 +74,6 @@ unsafe impl Send for UserManager {}
 unsafe impl Send for UserManagerEvent {}
 
 event_manager!(UserManager, UserManagerEvent);
-
-lazy_static! {
-    // https://learn.microsoft.com/en-us/windows/win32/shell/knownfolderid
-    static ref DOWNLOADS: GUID = GUID::from("374DE290-123F-4565-9164-39C4925E467B");
-    static ref DOCUMENTS: GUID = GUID::from("FDD39AD0-238F-46AF-ADB4-6C85480369C7");
-    static ref PICTURES: GUID = GUID::from("33E28130-4E1E-4676-835A-98395C3BC3BB");
-    static ref VIDEOS: GUID = GUID::from("18989B1D-99B5-455B-841C-AB7C74E4DDFC");
-    static ref MUSICS: GUID = GUID::from("4BD8D571-6D19-48D3-BE97-422220080E43");
-
-}
 
 // Static
 impl UserManager {
@@ -169,14 +159,16 @@ impl UserManager {
 
     fn get_path_from_folder(folder_type: &FolderType) -> Result<PathBuf, AppError> {
         Ok(match folder_type {
-            FolderType::Recent => {
-                std::env::temp_dir().join("..\\..\\Roaming\\Microsoft\\Windows\\Recent")
-            }
-            FolderType::Downloads => WindowsApi::get_known_folder(&DOWNLOADS)?,
-            FolderType::Documents => WindowsApi::get_known_folder(&DOCUMENTS)?,
-            FolderType::Pictures => WindowsApi::get_known_folder(&PICTURES)?,
-            FolderType::Videos => WindowsApi::get_known_folder(&VIDEOS)?,
-            FolderType::Music => WindowsApi::get_known_folder(&MUSICS)?,
+            FolderType::Recent => get_app_handle()
+                .path()
+                .app_data_dir()?
+                .as_path()
+                .join("..\\Microsoft\\Windows\\Recent"),
+            FolderType::Downloads => get_app_handle().path().download_dir()?,
+            FolderType::Documents => get_app_handle().path().document_dir()?,
+            FolderType::Pictures => get_app_handle().path().picture_dir()?,
+            FolderType::Videos => get_app_handle().path().video_dir()?,
+            FolderType::Music => get_app_handle().path().audio_dir()?,
             FolderType::Unknown => {
                 return Err("There is no such folder could be handled!".into());
             }
