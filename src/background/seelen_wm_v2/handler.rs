@@ -1,24 +1,27 @@
 use windows::Win32::{
-    Foundation::{HWND, RECT},
+    Foundation::RECT,
     UI::WindowsAndMessaging::{
-        SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOSENDCHANGING,
+        SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOCOPYBITS, SWP_NOSENDCHANGING, SW_NORMAL,
     },
 };
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{
+    error_handler::Result,
+    windows_api::{window::Window, WindowsApi},
+};
 use seelen_core::rect::Rect;
 
 #[tauri::command(async)]
 pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
-    let hwnd = HWND(hwnd as _);
+    let window = Window::from(hwnd);
 
-    if !WindowsApi::is_window(hwnd) || WindowsApi::is_iconic(hwnd) {
+    if !window.is_window() || window.is_minimized() {
         return Ok(());
     }
 
-    WindowsApi::unmaximize_window(hwnd)?;
+    window.show_window_async(SW_NORMAL)?;
 
-    let shadow = WindowsApi::shadow_rect(hwnd)?;
+    let shadow = WindowsApi::shadow_rect(window.hwnd())?;
     let rect = RECT {
         top: rect.top + shadow.top,
         left: rect.left + shadow.left,
@@ -27,9 +30,7 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
     };
 
     // WindowsApi::move_window(hwnd, &rect)?;
-    WindowsApi::set_position(
-        hwnd,
-        None,
+    window.set_position(
         &rect,
         SWP_NOACTIVATE | SWP_NOCOPYBITS | SWP_ASYNCWINDOWPOS | SWP_NOSENDCHANGING,
     )?;
@@ -38,18 +39,10 @@ pub fn set_window_position(hwnd: isize, rect: Rect) -> Result<()> {
 
 #[tauri::command(async)]
 pub fn request_focus(hwnd: isize) -> Result<()> {
-    let hwnd = HWND(hwnd as _);
-    log::trace!(
-        "Requesting focus on {:?} - {} , {:?}",
-        hwnd,
-        WindowsApi::get_window_text(hwnd),
-        WindowsApi::exe(hwnd)?,
-    );
-
-    if !WindowsApi::is_window(hwnd) {
+    let window = Window::from(hwnd);
+    if !window.is_window() {
         return Ok(());
     }
-
-    WindowsApi::async_force_set_foreground(hwnd);
+    window.focus()?;
     Ok(())
 }

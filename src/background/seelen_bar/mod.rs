@@ -21,7 +21,7 @@ use tauri::{Emitter, Listener, WebviewWindow};
 use windows::Win32::{
     Foundation::{HWND, RECT},
     Graphics::Gdi::HMONITOR,
-    UI::WindowsAndMessaging::{SWP_NOACTIVATE, SW_HIDE, SW_SHOWNOACTIVATE},
+    UI::WindowsAndMessaging::{SWP_ASYNCWINDOWPOS, SW_HIDE, SW_SHOWNOACTIVATE},
 };
 
 pub struct FancyToolbar {
@@ -178,7 +178,7 @@ impl FancyToolbar {
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(hwnd, &rc_monitor)?;
-        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_NOACTIVATE)?;
+        WindowsApi::set_position(hwnd, None, &rc_monitor, SWP_ASYNCWINDOWPOS)?;
         Ok(())
     }
 

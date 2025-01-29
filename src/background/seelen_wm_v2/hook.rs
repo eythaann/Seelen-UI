@@ -118,7 +118,7 @@ impl WindowManagerV2 {
             }
             // apps like firefox doesn't launch ObjectCreate
             WinEvent::ObjectNameChange => {
-                if window.is_foreground()
+                if window.is_focused()
                     && !Self::is_managed(window)
                     && Self::should_be_managed(window.hwnd())
                 {
@@ -127,7 +127,7 @@ impl WindowManagerV2 {
                 }
             }
             WinEvent::ObjectLocationChange => {
-                if window.is_foreground() && window.is_maximized() {
+                if window.is_focused() && window.is_maximized() {
                     Self::set_overlay_visibility(false)?;
                 }
             }

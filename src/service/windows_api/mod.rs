@@ -4,26 +4,132 @@ use std::path::PathBuf;
 
 use com::Com;
 use windows::Win32::{
-    Foundation::{FALSE, HANDLE, LUID},
+    Foundation::{FALSE, HANDLE, HWND, LUID},
     Security::{
         AdjustTokenPrivileges, LookupPrivilegeValueW, SE_PRIVILEGE_ENABLED,
         TOKEN_ADJUST_PRIVILEGES, TOKEN_PRIVILEGES, TOKEN_QUERY,
     },
     System::{
         Com::IPersistFile,
-        Threading::{GetCurrentProcess, OpenProcessToken},
+        Threading::{AttachThreadInput, GetCurrentProcess, GetCurrentThreadId, OpenProcessToken},
     },
-    UI::Shell::{IShellLinkW, ShellLink},
+    UI::{
+        HiDpi::{SetProcessDpiAwarenessContext, DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2},
+        Shell::{IShellLinkW, ShellLink},
+        WindowsAndMessaging::{
+            BringWindowToTop, GetForegroundWindow, GetWindowThreadProcessId, IsIconic,
+            SetWindowPos, ShowWindow, ShowWindowAsync, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
+            SWP_NOACTIVATE, SWP_NOZORDER, SW_RESTORE,
+        },
+    },
 };
 use windows_core::{Interface, PCWSTR};
 
-use crate::{error::Result, string_utils::WindowsString};
+use crate::{
+    error::{Result, WindowsResultExt},
+    string_utils::WindowsString,
+};
 
 pub struct WindowsApi;
 
 impl WindowsApi {
+    /// Behaviour is undefined if an invalid HWND is given
+    /// https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid
+    pub fn window_thread_process_id(hwnd: HWND) -> (u32, u32) {
+        let mut process_id: u32 = 0;
+        let thread_id = unsafe {
+            GetWindowThreadProcessId(hwnd, Option::from(std::ptr::addr_of_mut!(process_id)))
+        };
+        (process_id, thread_id)
+    }
+
+    pub fn show_window(addr: isize, command: i32) -> Result<()> {
+        // BOOL is returned but does not signify whether or not the operation was succesful
+        // https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindow
+        unsafe { ShowWindow(HWND(addr as _), SHOW_WINDOW_CMD(command)) }
+            .ok()
+            .filter_fake_error()?;
+        Ok(())
+    }
+
+    pub fn show_window_async(addr: isize, command: i32) -> Result<()> {
+        // BOOL is returned but does not signify whether or not the operation was succesful
+        // https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-showwindowasync
+        unsafe { ShowWindowAsync(HWND(addr as _), SHOW_WINDOW_CMD(command)) }
+            .ok()
+            .filter_fake_error()?;
+        Ok(())
+    }
+
+    pub fn bring_to_top(hwnd: HWND) -> Result<()> {
+        unsafe { BringWindowToTop(hwnd)? };
+        Ok(())
+    }
+
+    pub fn attach_thread_input(thread_id: u32, attach_to: u32, attach: bool) -> Result<()> {
+        unsafe { AttachThreadInput(thread_id, attach_to, attach).ok()? };
+        Ok(())
+    }
+
+    pub fn is_iconic(hwnd: HWND) -> bool {
+        unsafe { IsIconic(hwnd).as_bool() }
+    }
+
+    pub fn get_foreground_window() -> HWND {
+        unsafe { GetForegroundWindow() }
+    }
+
+    pub fn set_foreground(addr: isize) -> Result<()> {
+        let hwnd = HWND(addr as _);
+        if Self::is_iconic(hwnd) {
+            Self::show_window(addr, SW_RESTORE.0)?;
+        }
+        let (_, focused_thread) = Self::window_thread_process_id(Self::get_foreground_window());
+        let app_thread = Self::current_thread_id();
+        if focused_thread != app_thread {
+            Self::attach_thread_input(focused_thread, app_thread, true)?;
+            Self::bring_to_top(hwnd)?;
+            Self::attach_thread_input(focused_thread, app_thread, false)?;
+        } else {
+            Self::bring_to_top(hwnd)?;
+        }
+        Ok(())
+    }
+
+    pub fn set_position(
+        hwnd: isize,
+        x: i32,
+        y: i32,
+        width: i32,
+        height: i32,
+        flags: u32,
+    ) -> Result<()> {
+        unsafe {
+            SetWindowPos(
+                HWND(hwnd as _),
+                HWND::default(),
+                x,
+                y,
+                width,
+                height,
+                SET_WINDOW_POS_FLAGS(flags) | SWP_NOACTIVATE | SWP_NOZORDER,
+            )
+            .filter_fake_error()?;
+        }
+        Ok(())
+    }
+
+    pub fn set_process_dpi_aware() -> Result<()> {
+        unsafe { SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)? };
+        Ok(())
+    }
+
     pub fn current_process() -> HANDLE {
         unsafe { GetCurrentProcess() }
+    }
+
+    pub fn current_thread_id() -> u32 {
+        unsafe { GetCurrentThreadId() }
     }
 
     pub fn open_current_process_token() -> Result<HANDLE> {

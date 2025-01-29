@@ -87,12 +87,11 @@ impl SeelenWeg {
     }
 
     pub fn process_raw_win_event(event: u32, origin_hwnd: HWND) -> Result<()> {
+        let origin = Window::from(origin_hwnd);
         match event {
             EVENT_OBJECT_SHOW | EVENT_OBJECT_CREATE => {
-                let class = WindowsApi::get_class(origin_hwnd)?;
-                let parent_class =
-                    WindowsApi::get_class(WindowsApi::get_parent(origin_hwnd)).unwrap_or_default();
-
+                let class = origin.class();
+                let parent_class = origin.parent().map(|p| p.class()).unwrap_or_default();
                 if TASKBAR_CLASS
                     .iter()
                     .any(|t| t == &class || t == &parent_class)
@@ -101,9 +100,7 @@ impl SeelenWeg {
                     return Ok(());
                 }
 
-                if class.eq("XamlExplorerHostIslandWindow")
-                    && WindowsApi::get_window_text(origin_hwnd).is_empty()
-                {
+                if class.eq("XamlExplorerHostIslandWindow") && origin.title().is_empty() {
                     let content_hwnd = unsafe {
                         FindWindowExA(
                             origin_hwnd,
@@ -126,11 +123,11 @@ impl SeelenWeg {
                         };
                         if !input_hwnd.is_invalid() {
                             // can fail on volume window island
-                            let _ = WindowsApi::show_window(input_hwnd, SW_HIDE);
+                            let _ = WindowsApi::show_window_async(input_hwnd, SW_HIDE);
                         }
                         // can fail on volume window island
-                        let _ = WindowsApi::show_window(content_hwnd, SW_HIDE);
-                        WindowsApi::show_window(origin_hwnd, SW_HIDE)?;
+                        let _ = WindowsApi::show_window_async(content_hwnd, SW_HIDE);
+                        WindowsApi::show_window_async(origin_hwnd, SW_HIDE)?;
                     }
                 }
             }

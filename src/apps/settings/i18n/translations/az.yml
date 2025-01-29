@@ -186,16 +186,16 @@ shortcuts:
     send_to_workspace_7: 7 iş sahəsinə göndərin
     send_to_workspace_8: İş sahəsinə göndərin 8
     send_to_workspace_9: İş sahəsinə göndərin 9
-    start_weg_app_0: Tətbiqi tapşırıqlar panelinin 10-cu mövqeyinə cəmləyin və ya işə salın
-    start_weg_app_1: Tətbiqi tapşırıqlar panelinin 1-ci mövqeyinə yönəldin və ya işə salın
-    start_weg_app_2: Tətbiqi tapşırıqlar panelinin 2-ci mövqeyinə cəmləyin və ya işə salın
-    start_weg_app_3: Tətbiqi tapşırıqlar panelinin 3-cü mövqeyinə cəmləyin və ya işə salın
-    start_weg_app_4: Tətbiqi tapşırıqlar panelinin 4-cü mövqeyinə yönəldin və ya işə salın
-    start_weg_app_5: Proqramı tapşırıqlar panelinin 5-ci mövqeyinə cəmləyin və ya işə salın
-    start_weg_app_6: Tətbiqi tapşırıqlar panelinin 6-cı mövqeyinə yönəldin və ya işə salın
-    start_weg_app_7: Tətbiqi tapşırıqlar panelinin 7-ci mövqeyinə cəmləyin və ya işə salın
-    start_weg_app_8: Tətbiqi tapşırıqlar panelinin 8-ci mövqeyinə yönəldin və ya işə salın
-    start_weg_app_9: Tətbiqi tapşırıqlar panelinin 9-cu mövqeyinə cəmləyin və ya işə salın
+    start_weg_app_0: Tapşırıq çubuğunda 1-də fokus və ya başlanğıc tətbiqinə başlayın
+    start_weg_app_1: Vəzifə çubuğu mövqeyindəki 2-də fokus və ya başlamaq
+    start_weg_app_2: Vəzifə çubuğu mövqeyində Focus və ya Tətbiqə başlayın 3
+    start_weg_app_3: Task çubuğu mövqeyindəki 4-də fokus və ya başlanğıc tətbiq edin
+    start_weg_app_4: Vəzifə çubuğu mövqeyində Focus və ya Başlat Tətbiqinə 5
+    start_weg_app_5: Tapşırıq çubuğunda 6-da fokus və ya başlanğıc tətbiqetməsidir
+    start_weg_app_6: Tapşırıq çubuğunda 7-də fokus və ya başlama tətbiqinə başlayın
+    start_weg_app_7: Vəzifə çubuğu mövqeyində Focus və ya Başlat Tətbiqinə 8
+    start_weg_app_8: Vəzifə çubuğu mövqeyi 9-da fokus və ya başlamaq
+    start_weg_app_9: Vəzifə çubuğu mövqeyində fokus və ya başlama tətbiqinə 10
     switch_workspace_0: İş sahəsinə 1 keçin
     switch_workspace_1: İş sahəsinə 2 keçin
     switch_workspace_2: İş sahəsinə 2 keçin

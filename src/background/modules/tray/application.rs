@@ -87,7 +87,7 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
         let tray_bar_state = tray_bar.state();
         // This function will fail if taskbar is hidden
         tray_bar.set_state(AppBarDataState::AlwaysOnTop);
-        WindowsApi::show_window(tray_hwnd, SW_SHOW)?;
+        WindowsApi::show_window_async(tray_hwnd, SW_SHOW)?;
 
         let automation: IUIAutomation = Com::create_instance(&CUIAutomation)?;
         let condition = automation.CreateTrueCondition()?;
@@ -199,7 +199,7 @@ impl TrayIcon {
         unsafe { GetCursorPos(&mut cursor_pos as *mut POINT)? };
 
         if let Some(hwnd) = get_tray_overflow_handle() {
-            WindowsApi::show_window(hwnd, SW_SHOW)?;
+            WindowsApi::show_window_async(hwnd, SW_SHOW)?;
             let rect = WindowsApi::get_outer_window_rect(hwnd)?;
 
             WindowsApi::move_window(
@@ -214,7 +214,7 @@ impl TrayIcon {
 
             unsafe { element.ShowContextMenu()? };
             sleep_millis(500);
-            WindowsApi::show_window(hwnd, SW_HIDE)?;
+            WindowsApi::show_window_async(hwnd, SW_HIDE)?;
         }
 
         Ok(())

@@ -208,10 +208,11 @@ pub fn handle_cli_events(matches: &clap::ArgMatches) -> Result<()> {
                 }
             }
             SeelenWeg::CLI_IDENTIFIER => {
+                SeelenWeg::process(matches)?;
                 let mut seelen = trace_lock!(SEELEN);
                 for monitor in seelen.instances_mut() {
                     if let Some(weg) = monitor.weg_mut() {
-                        weg.process(matches)?;
+                        weg.process_by_instance(matches)?;
                     }
                 }
             }

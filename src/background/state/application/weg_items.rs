@@ -44,6 +44,7 @@ impl FullState {
             Self::update_weg_items_paths(&mut self.weg_items.center);
             Self::update_weg_items_paths(&mut self.weg_items.right);
         } else {
+            self.weg_items.sanitize();
             self.write_weg_items(&self.weg_items)?;
         }
         Ok(())

@@ -148,7 +148,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
                 const { program, args } = parseCommand(item.relaunchCommand);
                 invoke(SeelenCommand.Run, { program, args });
               } else {
-                invoke(SeelenCommand.WegToggleWindowState, { hwnd: window.handle });
+                invoke(SeelenCommand.WegToggleWindowState, { hwnd: window.handle, wasFocused: isFocused });
               }
             }}
             onAuxClick={(e) => {

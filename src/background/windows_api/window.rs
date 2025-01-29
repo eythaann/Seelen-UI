@@ -5,13 +5,18 @@ use std::{
 };
 
 use windows::Win32::{
-    Foundation::HWND,
-    UI::WindowsAndMessaging::{WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW},
+    Foundation::{HWND, RECT},
+    UI::WindowsAndMessaging::{
+        SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, WS_EX_APPWINDOW, WS_EX_NOACTIVATE, WS_EX_TOOLWINDOW,
+    },
 };
 
 use crate::{
     error_handler::Result,
-    modules::virtual_desk::{get_vd_manager, VirtualDesktop},
+    modules::{
+        cli::ServiceClient,
+        virtual_desk::{get_vd_manager, VirtualDesktop},
+    },
     seelen_bar::FancyToolbar,
     seelen_rofi::SeelenRofi,
     seelen_wall::SeelenWall,
@@ -44,7 +49,7 @@ impl Debug for Window {
             .field("handle", &self.0 .0)
             .field("title", &self.title())
             .field("class", &self.class())
-            .field("exe", &self.exe())
+            .field("exe", &self.process().program_exe_name())
             .finish()
     }
 }
@@ -111,11 +116,6 @@ impl Window {
         Process::from_window(self)
     }
 
-    /// will fail if process is restricted and the invoker is not running as admin
-    pub fn exe(&self) -> Result<PathBuf> {
-        WindowsApi::exe_path_v2(self.0)
-    }
-
     pub fn app_display_name(&self) -> Result<String> {
         if let Ok(info) = self.process().package_app_info() {
             return Ok(info.DisplayInfo()?.DisplayName()?.to_string_lossy());
@@ -144,11 +144,9 @@ impl Window {
     }
 
     pub fn parent(&self) -> Option<Window> {
-        let parent = WindowsApi::get_parent(self.0);
-        if !parent.is_invalid() {
-            Some(Window(parent))
-        } else {
-            None
+        match WindowsApi::get_parent(self.0) {
+            Ok(parent) => Some(Window::from(parent)),
+            Err(_) => None,
         }
     }
 
@@ -186,7 +184,7 @@ impl Window {
         WindowsApi::is_cloaked(self.0).unwrap_or(false)
     }
 
-    pub fn is_foreground(&self) -> bool {
+    pub fn is_focused(&self) -> bool {
         WindowsApi::get_foreground_window() == self.0
     }
 
@@ -196,7 +194,7 @@ impl Window {
 
     /// is the window an Application Frame Host
     pub fn is_frame(&self) -> Result<bool> {
-        Ok(self.exe()? == PathBuf::from(APP_FRAME_HOST_PATH))
+        Ok(self.process().program_path()? == PathBuf::from(APP_FRAME_HOST_PATH))
     }
 
     /// will fail if the window is not a frame
@@ -226,7 +224,7 @@ impl Window {
     }
 
     pub fn is_seelen_overlay(&self) -> bool {
-        if let Ok(exe) = self.exe() {
+        if let Ok(exe) = self.process().program_path() {
             return exe.ends_with("seelen-ui.exe")
                 && [
                     FancyToolbar::TITLE,
@@ -281,5 +279,44 @@ impl Window {
         }
 
         true
+    }
+
+    pub fn show_window(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::show_window(self.hwnd(), command)
+        } else {
+            ServiceClient::emit_show_window(self.address(), command.0)
+        }
+    }
+
+    pub fn show_window_async(&self, command: SHOW_WINDOW_CMD) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::show_window_async(self.hwnd(), command)
+        } else {
+            ServiceClient::emit_show_window_async(self.address(), command.0)
+        }
+    }
+
+    pub fn set_position(&self, rect: &RECT, flags: SET_WINDOW_POS_FLAGS) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::set_position(self.hwnd(), None, rect, flags)
+        } else {
+            ServiceClient::emit_set_window_position(
+                self.address(),
+                rect.left,
+                rect.top,
+                (rect.right - rect.left).abs(),
+                (rect.bottom - rect.top).abs(),
+                flags.0,
+            )
+        }
+    }
+
+    pub fn focus(&self) -> Result<()> {
+        if self.process().open_handle().is_ok() {
+            WindowsApi::set_foreground(self.hwnd())
+        } else {
+            ServiceClient::emit_set_foreground(self.address())
+        }
     }
 }

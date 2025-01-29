@@ -169,16 +169,15 @@ impl HookManager {
         }
 
         if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
-            let title = window.title();
             log_error!(get_app_handle().emit(
                 SeelenEvent::GlobalFocusChanged,
                 FocusedApp {
-                    title,
                     hwnd: origin.0 as _,
+                    title: window.title(),
                     name: window
                         .app_display_name()
                         .unwrap_or(String::from("Error on App Name")),
-                    exe: window.exe().ok(),
+                    exe: window.process().program_path().ok(),
                 },
             ));
         }

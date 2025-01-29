@@ -7,7 +7,7 @@ use windows::{
         Storage::Packaging::Appx::{
             GetApplicationUserModelId, GetPackageFamilyName, GetPackageFullName,
         },
-        System::Threading::PROCESS_QUERY_INFORMATION,
+        System::Threading::{PROCESS_QUERY_INFORMATION, PROCESS_QUERY_LIMITED_INFORMATION},
     },
 };
 
@@ -45,8 +45,12 @@ impl Process {
         self.0
     }
 
-    pub fn handle(&self) -> Result<HANDLE> {
+    pub fn open_handle(&self) -> Result<HANDLE> {
         WindowsApi::open_process(PROCESS_QUERY_INFORMATION, false, self.0)
+    }
+
+    pub fn open_limited_handle(&self) -> Result<HANDLE> {
+        WindowsApi::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, self.0)
     }
 
     pub fn is_frozen(&self) -> Result<bool> {
@@ -54,7 +58,7 @@ impl Process {
     }
 
     pub fn package_family_name(&self) -> Result<String> {
-        let hprocess = self.handle()?;
+        let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut family_name = WindowsString::new_to_fill(len as usize);
         unsafe { GetPackageFamilyName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
@@ -62,7 +66,7 @@ impl Process {
     }
 
     pub fn package_full_name(&self) -> Result<String> {
-        let hprocess = self.handle()?;
+        let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut family_name = WindowsString::new_to_fill(len as usize);
         unsafe { GetPackageFullName(hprocess, &mut len, family_name.as_pwstr()).ok()? };
@@ -71,7 +75,7 @@ impl Process {
 
     /// package app user model id
     pub fn package_app_user_model_id(&self) -> Result<String> {
-        let hprocess = self.handle()?;
+        let hprocess = self.open_limited_handle()?;
         let mut len = 1024_u32;
         let mut id = WindowsString::new_to_fill(len as usize);
         unsafe { GetApplicationUserModelId(hprocess, &mut len, id.as_pwstr()).ok()? };
@@ -89,6 +93,16 @@ impl Process {
             return Err("exe path is empty".into());
         }
         Ok(PathBuf::from(path_string))
+    }
+
+    /// program path filename
+    pub fn program_exe_name(&self) -> Result<String> {
+        Ok(self
+            .program_path()?
+            .file_name()
+            .ok_or("there is no file name")?
+            .to_string_lossy()
+            .to_string())
     }
 
     pub fn program_display_name(&self) -> Result<String> {

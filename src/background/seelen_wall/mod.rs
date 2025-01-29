@@ -6,7 +6,7 @@ use windows::Win32::{
     Foundation::{HWND, LPARAM, RECT, WPARAM},
     Graphics::Gdi::{InvalidateRect, UpdateWindow},
     UI::WindowsAndMessaging::{
-        FindWindowA, FindWindowExA, PostMessageW, SetParent, SWP_NOACTIVATE,
+        FindWindowA, FindWindowExA, PostMessageW, SetParent, SWP_ASYNCWINDOWPOS,
     },
 };
 
@@ -81,7 +81,7 @@ impl SeelenWall {
 
         // pre set position for resize in case of multiples dpi
         WindowsApi::move_window(main_hwnd, &rect)?;
-        WindowsApi::set_position(main_hwnd, None, &rect, SWP_NOACTIVATE)?;
+        WindowsApi::set_position(main_hwnd, None, &rect, SWP_ASYNCWINDOWPOS)?;
         log_error!(Self::refresh_desktop().map_err(|e| format!("Failed to refresh desktop: {}", e)));
         Ok(())
     }

@@ -1,0 +1,7 @@
+- name: Zoom.exe
+  identifier:
+    id: Zoom.exe
+    kind: Exe
+    matching_strategy: Equals
+  options:
+    - unmanage
