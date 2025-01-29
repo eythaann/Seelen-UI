@@ -1,6 +1,6 @@
-import { SeelenCommand } from '@seelen-ui/lib';
+import { IconPackManager } from '@seelen-ui/lib';
 import { ToolbarItem } from '@seelen-ui/lib/types';
-import { convertFileSrc, invoke } from '@tauri-apps/api/core';
+import { convertFileSrc } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { Reorder } from 'framer-motion';
 import { cloneDeep } from 'lodash';
@@ -61,11 +61,16 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
     return StringToElement.imgFromUrl(convertFileSrc(path), size);
   }
 
-  static imgFromExe(exe_path: string, size = 16) {
+  static imgFromExe(exe_path: string, umid?: string, size = 16) {
     if (!exe_path) {
       return '';
     }
-    return `[EXE:${size}px:${exe_path}]`;
+    if (umid) {
+      // Path got to be the last one because of regex magic
+      return `[EXE:${size}px:${umid}:${exe_path}]`;
+    } else {
+      return `[EXE:${size}px:${exe_path}]`;
+    }
   }
 
   constructor(props: StringToElementProps) {
@@ -91,11 +96,14 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
 
   loadExeIconToState() {
     if (this.isExe()) {
-      const [_, _size, path] = this.props.text.split(StringToElement.splitter);
-      if (path) {
-        invoke<string | null>(SeelenCommand.GetIcon, { path })
-          .then(this.setExeIcon.bind(this))
-          .catch(console.error);
+      const [_, _size, param_0, param_1] = this.props.text.split(StringToElement.splitter);
+
+      if (param_0) { // At least path is given
+        if (param_1) { // When param 1 is given, then we have umid
+          IconPackManager.extractIcon({ path: param_1, umid: param_0 }).then(this.setExeIcon.bind(this));
+        } else { // We have only exe path
+          IconPackManager.extractIcon({ path: param_0 }).then(this.setExeIcon.bind(this));
+        }
       }
     }
   }
@@ -180,6 +188,7 @@ export function InnerItem(props: InnerItemProps) {
     scope.current.set('imgFromUrl', StringToElement.imgFromUrl);
     scope.current.set('imgFromPath', StringToElement.imgFromPath);
     scope.current.set('imgFromExe', StringToElement.imgFromExe);
+
     setMounted(true);
   }, []);
 
