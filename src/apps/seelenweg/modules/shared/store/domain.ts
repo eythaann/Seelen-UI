@@ -1,5 +1,7 @@
 import { SeelenWegSettings, WegItem } from '@seelen-ui/lib/types';
 
+import { AppNotification } from 'src/apps/toolbar/modules/Notifications/domain';
+
 import { IRootState } from '../../../../../shared.interfaces';
 import { FocusedApp } from '../../../../shared/interfaces/common';
 
@@ -36,4 +38,5 @@ export interface RootState extends IRootState<SeelenWegSettings> {
   focusedApp: FocusedApp | null;
   isOverlaped: boolean;
   mediaSessions: MediaSession[];
+  notifications: AppNotification[];
 }

@@ -95,7 +95,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setMediaInputs(event.payload));
   });
 
-  await listenGlobal<AppNotification[]>('notifications', (event) => {
+  await listenGlobal<AppNotification[]>(SeelenEvent.Notifications, (event) => {
     store.dispatch(RootActions.setNotifications(event.payload.sort((a, b) => b.date - a.date)));
   });
 
@@ -141,7 +141,7 @@ export async function loadStore() {
     RootActions.setEnv((await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>),
   );
 
-  let placeholder = await invoke(SeelenCommand.StateGetToolbarItems) as Placeholder;
+  let placeholder = (await invoke(SeelenCommand.StateGetToolbarItems)) as Placeholder;
   store.dispatch(RootActions.setPlaceholder(placeholder));
 }
 

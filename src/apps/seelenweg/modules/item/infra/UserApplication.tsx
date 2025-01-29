@@ -32,6 +32,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
 
+  const notifications = useSelector(Selectors.notifications);
   const devTools = useSelector(Selectors.devTools);
   const settings = useSelector(Selectors.settings);
   const focusedApp = useSelector(Selectors.focusedApp);
@@ -83,6 +84,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
     }
   }, [openPreview || openContextMenu]);
 
+  const notificationsCount = notifications.filter((n) => n.appUmid === item.umid).length;
   return (
     <DraggableItem
       item={item}
@@ -161,10 +163,13 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
           >
             <BackgroundByLayersV2 prefix="item" />
             <img className="weg-item-icon" src={iconSrc} draggable={false} />
+            {notificationsCount > 0 && <div className="weg-item-badge">{notificationsCount}</div>}
             <div
               className={cx('weg-item-open-sign', {
                 'weg-item-open-sign-active': !!item.windows.length,
-                'weg-item-open-sign-focused': item.windows.some((w) => w.handle === focusedApp?.hwnd),
+                'weg-item-open-sign-focused': item.windows.some(
+                  (w) => w.handle === focusedApp?.hwnd,
+                ),
               })}
             />
           </div>

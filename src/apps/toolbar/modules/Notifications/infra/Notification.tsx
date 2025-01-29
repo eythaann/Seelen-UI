@@ -24,7 +24,7 @@ function WindowsDateFileTimeToDate(fileTime: bigint) {
 const MISSING_ICON_SRC = convertFileSrc(await path.resolveResource('static/icons/missing.png'));
 
 export function Notification({ notification }: Props) {
-  const icon = useIcon({ umid: notification.app_umid });
+  const icon = useIcon({ umid: notification.appUmid });
 
   return (
     <motion.div
@@ -38,7 +38,7 @@ export function Notification({ notification }: Props) {
       <div className="notification-header">
         <div className="notification-header-info">
           <img className="notification-icon" src={icon || MISSING_ICON_SRC} />
-          <div>{notification.app_name}</div>
+          <div>{notification.appName}</div>
           <span>-</span>
           <div>{moment(WindowsDateFileTimeToDate(BigInt(notification.date))).fromNow()}</div>
         </div>

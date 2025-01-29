@@ -16,6 +16,7 @@ const initialState: RootState = {
   isOverlaped: false,
   settings: (await Settings.default()).seelenweg,
   mediaSessions: [],
+  notifications: [],
   colors: UIColors.default().inner,
 };
 

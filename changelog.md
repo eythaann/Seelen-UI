@@ -5,6 +5,7 @@
 - allow custom animations on popups/dropdowns.
 - show open new window buttons on dock app items context menu.
 - toggle dock items using win + number.
+- notifications count on dock app items.
 
 ### refactor
 - create separated system service to handle elevated actions.

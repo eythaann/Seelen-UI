@@ -30,7 +30,7 @@ lazy_static! {
 }
 
 #[derive(Debug, Serialize)]
-#[allow(dead_code)]
+#[serde(rename_all = "camelCase")]
 pub struct AppNotification {
     pub id: u32,
     app_umid: String,
