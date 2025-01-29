@@ -122,7 +122,7 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
 
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
     ensure_tray_overflow_creation()?;
-    let tray_from_registry = TrayIconManager::enum_from_registry().unwrap_or_default();
+    let tray_from_registry = TrayIconManager::enum_from_registry()?;
 
     Com::run_with_context(|| unsafe {
         let mut tray_elements = Vec::new();
