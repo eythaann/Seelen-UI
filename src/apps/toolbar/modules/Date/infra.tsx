@@ -1,6 +1,6 @@
 import { DateToolbarItem } from '@seelen-ui/lib/types';
 import moment from 'moment';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -18,17 +18,24 @@ interface Props {
 export function DateModule({ module }: Props) {
   const dateFormat = useSelector(Selectors.dateFormat);
 
-  const { i18n } = useTranslation();
+  const {
+    i18n: { language },
+  } = useTranslation();
 
-  const [date, setDate] = useState(moment().locale(i18n.language).format(dateFormat));
+  const [date, setDate] = useState(moment().locale(language).format(dateFormat));
+
+  // inmediately update the date, like interval is reseted on deps change
+  useEffect(() => {
+    setDate(moment().locale(language).format(dateFormat));
+  }, [dateFormat, language]);
 
   let interval = dateFormat.includes('ss') ? 1000 : 1000 * 60;
   useInterval(
     () => {
-      setDate(moment().locale(i18n.language).format(dateFormat));
+      setDate(moment().locale(language).format(dateFormat));
     },
     interval,
-    [dateFormat, i18n.language],
+    [dateFormat, language],
   );
 
   return (

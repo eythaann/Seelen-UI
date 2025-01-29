@@ -45,8 +45,18 @@ export interface Battery {
 }
 
 export interface TrayInfo {
-  label: string | null;
-  icon: string | null;
+  label: string;
+  registry: {
+    key: string;
+    executablePath: string;
+    initialTooltip: string | null;
+    /** cached PNG buffer */
+    iconSnapshot: number[] | null;
+    iconGuid: string | null;
+    iconUid: number | null;
+    isPromoted: boolean;
+    isRunning: boolean;
+  };
 }
 
 export interface NetworkAdapter {

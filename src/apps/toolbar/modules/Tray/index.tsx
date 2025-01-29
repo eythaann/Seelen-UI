@@ -11,7 +11,7 @@ import { Item } from '../item/infra/infra';
 import { LAZY_CONSTANTS } from '../shared/utils/infra';
 
 import { Selectors } from '../shared/store/app';
-import { useWindowFocusChange } from 'src/apps/shared/hooks';
+import { useIcon, useWindowFocusChange } from 'src/apps/shared/hooks';
 
 import { TrayInfo } from '../shared/store/domain';
 
@@ -22,30 +22,52 @@ interface Props {
   module: TrayToolbarItem;
 }
 
-function TrayItem(props: { tray: TrayInfo; onAction: anyFunction; idx: number }) {
-  const { tray, onAction, idx } = props;
+function TrayItem(props: { tray: TrayInfo }) {
+  const [disabled, setDisabled] = useState(false);
+  const { tray } = props;
 
+  let iconSrc =
+    useIcon({ path: tray.registry.executablePath }) ||
+    convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
   const { t } = useTranslation();
+
+  if (tray.registry.executablePath.endsWith('explorer.exe') && tray.registry.iconSnapshot) {
+    const base64String = btoa(String.fromCharCode(...tray.registry.iconSnapshot));
+    iconSrc = `data:image/png;base64,${base64String}`;
+  }
 
   return (
     <li
       className="tray-item"
       onClick={() => {
-        invoke(SeelenCommand.OnClickTrayIcon, { idx });
-        onAction();
+        if (!disabled) {
+          invoke(SeelenCommand.OnClickTrayIcon, { key: tray.registry.key }).finally(() => {
+            setDisabled(false);
+          });
+        }
+        setDisabled(true);
       }}
       onContextMenu={() => {
-        invoke(SeelenCommand.OnContextMenuTrayIcon, { idx });
-        onAction();
+        if (!disabled) {
+          invoke(SeelenCommand.OnContextMenuTrayIcon, { key: tray.registry.key }).finally(() => {
+            setDisabled(false);
+          });
+        }
+        setDisabled(true);
       }}
     >
-      <div className="tray-item-icon">
-        <img src={convertFileSrc(tray.icon ? tray.icon : LAZY_CONSTANTS.MISSING_ICON_PATH)} />
+      <div className="tray-item-icon-container">
+        <img className="tray-item-icon" src={iconSrc} />
       </div>
       <OverflowTooltip
         rootClassName="tray-item-label-tooltip"
         className="tray-item-label"
-        text={tray.label || t('unlabelled_tray')}
+        text={
+          tray.label ||
+          tray.registry.initialTooltip ||
+          tray.registry.executablePath.split('\\').pop() ||
+          t('unlabelled_tray')
+        }
         placement="left"
         arrow={false}
       />
@@ -93,10 +115,14 @@ export function TrayModule({ module }: Props) {
       onOpenChange={setOpenPreview}
       arrow={false}
       content={
-        <BackgroundByLayersV2 className="tray" prefix="tray" onContextMenu={(e) => e.stopPropagation()}>
+        <BackgroundByLayersV2
+          className="tray"
+          prefix="tray"
+          onContextMenu={(e) => e.stopPropagation()}
+        >
           <ul className="tray-list">
-            {trayList.map((tray, idx) => (
-              <TrayItem key={idx} idx={idx} tray={tray} onAction={() => setOpenPreview(false)} />
+            {trayList.map((tray) => (
+              <TrayItem key={tray.registry.key} tray={tray} />
             ))}
           </ul>
         </BackgroundByLayersV2>

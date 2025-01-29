@@ -4,13 +4,14 @@ use windows::Win32::{
     UI::{
         Accessibility::{
             CUIAutomation, IUIAutomation, IUIAutomationCondition, IUIAutomationElement,
-            IUIAutomationElement3, IUIAutomationInvokePattern, TreeScope, TreeScope_Descendants,
+            IUIAutomationElement3, IUIAutomationInvokePattern, TreeScope, TreeScope_Children,
             TreeScope_Subtree, UIA_InvokePatternId,
         },
+        Shell::{Shell_NotifyIconGetRect, NOTIFYICONIDENTIFIER},
         WindowsAndMessaging::{FindWindowA, FindWindowExA, GetCursorPos, SW_HIDE, SW_SHOW},
     },
 };
-use windows_core::Interface;
+use windows_core::{Interface, GUID};
 use winreg::{
     enums::{HKEY_CURRENT_USER, KEY_ALL_ACCESS},
     RegKey,
@@ -19,12 +20,11 @@ use winreg::{
 use crate::{
     error_handler::Result,
     pcstr,
-    seelen_weg::icon_extractor::extract_and_save_icon_from_file,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
-    windows_api::{AppBarData, AppBarDataState, Com, WindowsApi},
+    windows_api::{window::Window, AppBarData, AppBarDataState, Com, WindowEnumerator, WindowsApi},
 };
 
-use super::domain::{RegistryNotifyIcon, TrayIcon, TrayIconInfo};
+use super::domain::{RegistryNotifyIcon, TrayIcon};
 
 pub fn get_sub_tree(
     element: &IUIAutomationElement,
@@ -52,7 +52,7 @@ pub fn get_tray_overflow_handle() -> Option<HWND> {
     }
 }
 
-fn get_tray_overflow_content_handle() -> Option<HWND> {
+pub fn get_tray_overflow_content_handle() -> Option<HWND> {
     let tray_overflow = get_tray_overflow_handle()?;
     unsafe {
         if is_windows_10() {
@@ -79,6 +79,8 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
     if !is_windows_11() || get_tray_overflow_content_handle().is_some() {
         return Ok(());
     }
+
+    TrayIconManager::enable_chevron()?;
 
     Com::run_with_context(|| unsafe {
         let tray_hwnd = FindWindowA(pcstr!("Shell_TrayWnd"), None)?;
@@ -120,7 +122,7 @@ pub fn ensure_tray_overflow_creation() -> Result<()> {
 
 pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
     ensure_tray_overflow_creation()?;
-    let tray_from_registry = TrayIconManager::enum_from_registry().unwrap_or_default();
+    let tray_from_registry = TrayIconManager::enum_from_registry()?;
 
     Com::run_with_context(|| unsafe {
         let mut tray_elements = Vec::new();
@@ -129,59 +131,30 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
         let condition = automation.CreateTrueCondition()?;
 
         let mut children = Vec::new();
-
         if let Some(tray_overflow) = get_tray_overflow_content_handle() {
             let element: IUIAutomationElement = automation.ElementFromHandle(tray_overflow)?;
-            children.extend(get_sub_tree(&element, &condition, TreeScope_Descendants)?);
+            children.extend(get_sub_tree(&element, &condition, TreeScope_Children)?);
         }
 
+        let mut idx = 0;
         for element in children {
-            let name = element.CurrentName()?.to_string();
-            if !element.CurrentAutomationId()?.is_empty() {
-                let registry = tray_from_registry.iter().find(|t| {
-                    let trimmed = name.trim();
-                    t.initial_tooltip == trimmed
-                        || t.executable_path
-                            .to_lowercase()
-                            .contains(&trimmed.to_lowercase())
-                });
-
+            if let Some(item_on_reg) = tray_from_registry.get(idx) {
                 tray_elements.push(TrayIcon {
+                    label: element
+                        .CurrentName()
+                        .map(|s| s.to_string())
+                        .unwrap_or_default(),
+                    registry: item_on_reg.clone(),
                     ui_automation: element,
-                    registry: registry.cloned(),
                 });
+                idx += 1;
             }
         }
-
         Ok(tray_elements)
     })
 }
 
 impl TrayIcon {
-    pub fn info(&self) -> TrayIconInfo {
-        TrayIconInfo {
-            icon: self.icon().ok(),
-            label: self.name().ok(),
-        }
-    }
-
-    pub fn name(&self) -> Result<String> {
-        Ok(unsafe { self.ui_automation.CurrentName() }?.to_string())
-    }
-
-    pub fn icon(&self) -> Result<String> {
-        if self.registry.is_none() {
-            return Err("Registry icon not found".into());
-        }
-
-        let path = self.registry.as_ref().unwrap().executable_path.clone();
-        let icon = extract_and_save_icon_from_file(&path)?;
-        Ok(icon
-            .to_string_lossy()
-            .trim_start_matches(r"\\?\")
-            .to_string())
-    }
-
     pub fn invoke(&self) -> Result<()> {
         unsafe {
             let invoker = self
@@ -221,8 +194,18 @@ impl TrayIcon {
     }
 }
 
-struct TrayIconManager {}
+pub struct TrayIconManager {}
 impl TrayIconManager {
+    pub fn enable_chevron() -> Result<()> {
+        let hkcr = RegKey::predef(HKEY_CURRENT_USER);
+        let settings = hkcr.open_subkey_with_flags(
+            r"Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify",
+            KEY_ALL_ACCESS,
+        )?;
+        settings.set_value("SystemTrayChevronVisibility", &1u32)?;
+        Ok(())
+    }
+
     pub fn enum_from_registry() -> Result<Vec<RegistryNotifyIcon>> {
         let hkcr = RegKey::predef(HKEY_CURRENT_USER);
         let settings = hkcr.open_subkey("Control Panel\\NotifyIconSettings")?;
@@ -239,42 +222,56 @@ impl TrayIconManager {
 
         let mut registers = Vec::new();
 
-        let sys = sysinfo::System::new_all();
-        let mut processes_string = Vec::new();
-        sys.processes().values().for_each(|p| {
-            if let Some(exe) = p.exe() {
-                processes_string.push(exe.to_string_lossy().to_string().to_lowercase());
-            }
-        });
+        let windows = WindowEnumerator::new().map(Window::from)?;
 
         for id in ids {
-            let key = settings.open_subkey_with_flags(id.to_string(), KEY_ALL_ACCESS)?;
+            let regkey = settings.open_subkey_with_flags(id.to_string(), KEY_ALL_ACCESS)?;
 
-            let promoted: u32 = key.get_value("IsPromoted").unwrap_or_default();
+            let promoted: u32 = regkey.get_value("IsPromoted").unwrap_or_default();
             if promoted == 1 {
-                // avoid show tray icons directly on taskbar
-                // all icons should be in the tray overflow window
-                key.set_value("IsPromoted", &0u32)?;
+                // avoid show tray icons directly on taskbar all icons should be in the tray overflow window
+                regkey.set_value("IsPromoted", &0u32)?;
             }
 
-            if key.get_raw_value("IconGuid").is_ok() {
-                // TODO: Handle Tray Icons like USB devices, Security tray, etc
-                continue;
+            let path_with_guid: String = regkey.get_value("ExecutablePath")?;
+            let mut item = RegistryNotifyIcon {
+                key: id.to_string(),
+                executable_path: resolve_guid_path(path_with_guid)?,
+                icon_snapshot: regkey.get_raw_value("IconSnapShot").map(|v| v.bytes).ok(),
+                initial_tooltip: regkey.get_value("InitialTooltip").ok(),
+                icon_guid: regkey.get_value("IconGuid").ok(),
+                icon_uid: regkey.get_value("UID").ok(),
+                is_promoted: promoted == 1,
+                is_running: false,
             };
 
-            // executable path should always exist in registry
-            let path: String = key.get_value("ExecutablePath")?;
-            let executable_path = resolve_guid_path(path)?.to_string_lossy().to_string();
+            if let Some(icon) = &item.icon_guid {
+                let guid = icon.trim_start_matches("{").trim_end_matches("}");
+                let identifier = NOTIFYICONIDENTIFIER {
+                    cbSize: std::mem::size_of::<NOTIFYICONIDENTIFIER>() as u32,
+                    guidItem: GUID::from(guid),
+                    ..Default::default()
+                };
+                item.is_running = unsafe { Shell_NotifyIconGetRect(&identifier).is_ok() };
+            } else if let Some(uid) = &item.icon_uid {
+                item.is_running = windows.iter().any(|w| match w.process().program_path() {
+                    Ok(path) if path == item.executable_path => {
+                        let identifier = NOTIFYICONIDENTIFIER {
+                            cbSize: std::mem::size_of::<NOTIFYICONIDENTIFIER>() as u32,
+                            hWnd: w.hwnd(),
+                            uID: *uid,
+                            ..Default::default()
+                        };
+                        unsafe { Shell_NotifyIconGetRect(&identifier).is_ok() }
+                    }
+                    _ => false,
+                });
+            }
 
-            let is_executing = processes_string.contains(&executable_path.to_lowercase());
-            if is_executing {
-                registers.push(RegistryNotifyIcon {
-                    executable_path,
-                    initial_tooltip: key.get_value("InitialTooltip").unwrap_or_default(),
-                })
+            if item.is_running {
+                registers.push(item);
             }
         }
-
         Ok(registers)
     }
 }

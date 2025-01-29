@@ -13,9 +13,10 @@ import { Icon } from '../../../../shared/components/Icon';
 interface PreviewProps {
   title: string;
   hwnd: HWND;
+  isFocused: boolean;
 }
 
-export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
+export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps) => {
   const imageUrl = convertFileSrc(`${LAZY_CONSTANTS.TEMP_FOLDER}${hwnd}.png`);
 
   const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
@@ -40,7 +41,7 @@ export const UserApplicationPreview = ({ title, hwnd }: PreviewProps) => {
     <div
       className="weg-item-preview"
       onClick={() => {
-        invoke(SeelenCommand.WegToggleWindowState, { hwnd });
+        invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: isFocused });
       }}
     >
       <div className="weg-item-preview-topbar">

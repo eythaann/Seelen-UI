@@ -12,7 +12,7 @@ import { Selectors } from '../../shared/store/app';
 import { parseCommand } from 'src/apps/shared/Command';
 import { useIcon, useWindowFocusChange } from 'src/apps/shared/hooks';
 
-import { PinnedWegItem, RootState, TemporalWegItem } from '../../shared/store/domain';
+import { PinnedWegItem, TemporalWegItem } from '../../shared/store/domain';
 
 import { AnimatedPopover } from '../../../../shared/components/AnimatedWrappers';
 import { cx } from '../../../../shared/styles';
@@ -28,17 +28,13 @@ interface Props {
 }
 
 export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Props) => {
-  const isFocused = useSelector(
-    (state: RootState) =>
-      state.focusedApp && item.windows.some((w) => w.handle === state.focusedApp!.hwnd),
-  );
-
   const [openPreview, setOpenPreview] = useState(false);
   const [openContextMenu, setOpenContextMenu] = useState(false);
   const [blockUntil, setBlockUntil] = useState(moment(new Date()));
 
   const devTools = useSelector(Selectors.devTools);
   const settings = useSelector(Selectors.settings);
+  const focusedApp = useSelector(Selectors.focusedApp);
 
   const iconSrc =
     useIcon({
@@ -131,6 +127,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
                     key={window.handle}
                     title={window.title}
                     hwnd={window.handle}
+                    isFocused={focusedApp?.hwnd === window.handle}
                   />
                 ))}
                 {item.windows.length === 0 && (
@@ -148,7 +145,10 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
                 const { program, args } = parseCommand(item.relaunchCommand);
                 invoke(SeelenCommand.Run, { program, args });
               } else {
-                invoke(SeelenCommand.WegToggleWindowState, { hwnd: window.handle, wasFocused: isFocused });
+                invoke(SeelenCommand.WegToggleWindowState, {
+                  hwnd: window.handle,
+                  wasFocused: focusedApp?.hwnd === window.handle,
+                });
               }
             }}
             onAuxClick={(e) => {
@@ -164,7 +164,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             <div
               className={cx('weg-item-open-sign', {
                 'weg-item-open-sign-active': !!item.windows.length,
-                'weg-item-open-sign-focused': isFocused,
+                'weg-item-open-sign-focused': item.windows.some((w) => w.handle === focusedApp?.hwnd),
               })}
             />
           </div>
