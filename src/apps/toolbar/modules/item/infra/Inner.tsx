@@ -65,7 +65,12 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
     if (!exe_path) {
       return '';
     }
-    return `[EXE:${size}px:${exe_path}:${umid}]`;
+    if (umid) {
+      // Path got to be the last one because of regex magic
+      return `[EXE:${size}px:${umid}:${exe_path}]`;
+    } else {
+      return `[EXE:${size}px:${exe_path}]`;
+    }
   }
 
   constructor(props: StringToElementProps) {
@@ -91,9 +96,14 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
 
   loadExeIconToState() {
     if (this.isExe()) {
-      const [_, _size, drive, path, umid] = this.props.text.split(StringToElement.splitter);
-      if (path) {
-        IconPackManager.extractIcon({ path: `${drive}:${path}`, umid }).then(this.setExeIcon.bind(this));
+      const [_, _size, param_0, param_1] = this.props.text.split(StringToElement.splitter);
+
+      if (param_0) { // At least path is given
+        if (param_1) { // When param 1 is given, then we have umid
+          IconPackManager.extractIcon({ path: param_1, umid: param_0 }).then(this.setExeIcon.bind(this));
+        } else { // We have only exe path
+          IconPackManager.extractIcon({ path: param_0 }).then(this.setExeIcon.bind(this));
+        }
       }
     }
   }
