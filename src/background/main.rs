@@ -170,6 +170,9 @@ fn is_already_runnning() -> bool {
 
 fn main() -> Result<()> {
     register_panic_hook();
+    /* println!("{:#?}", TrayIconManager::enum_from_registry());
+
+    return Ok(()); */
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {

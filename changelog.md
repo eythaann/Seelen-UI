@@ -15,6 +15,7 @@
 - app failing when powershell is not part of the $PATH enviroment.
 - dock items no updatings paths on store updates.
 - unremovable workspace module on toolbar.
+- missing system tray icons.
 
 ## [2.0.14]
 ### hotfix

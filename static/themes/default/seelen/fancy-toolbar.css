@@ -202,8 +202,10 @@
 }
 
 .tray-item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 1fr;
   align-items: center;
+  gap: 8px;
   border-radius: 8px;
   padding: 8px;
   gap: 6px;
@@ -212,22 +214,26 @@
   &:hover {
     background-color: rgba(var(--config-accent-color-rgb), 0.2);
   }
-}
 
-.tray-item-icon {
-  width: 1rem;
-  height: 1rem;
-  min-height: 1rem;
-  min-width: 1rem;
-}
+  .tray-item-icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.tray-item-label {
-  font-size: 0.7rem;
-  font-weight: 600;
-}
+    .tray-item-icon {
+      height: 1rem;
+      object-fit: contain;
+    }
+  }
 
-.tray-item-label-tooltip {
-  padding: 0 40px;
+  .tray-item-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .tray-item-label-tooltip {
+    padding: 0 40px;
+  }
 }
 
 @keyframes rotate {

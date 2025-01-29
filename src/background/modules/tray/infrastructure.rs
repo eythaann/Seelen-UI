@@ -1,6 +1,5 @@
 use std::sync::atomic::{AtomicBool, Ordering};
 
-use itertools::Itertools;
 use seelen_core::handlers::SeelenEvent;
 use tauri::Emitter;
 
@@ -10,9 +9,7 @@ use crate::{
 };
 
 fn emit_tray_info() -> Result<()> {
-    let handle = get_app_handle();
-    let payload = get_tray_icons()?.iter().map(|t| t.info()).collect_vec();
-    handle.emit(SeelenEvent::TrayInfo, payload)?;
+    get_app_handle().emit(SeelenEvent::TrayInfo, get_tray_icons()?)?;
     Ok(())
 }
 
@@ -35,17 +32,23 @@ pub fn temp_get_by_event_tray_info() {
 }
 
 #[tauri::command(async)]
-pub fn on_click_tray_icon(idx: usize) -> Result<()> {
+pub fn on_click_tray_icon(key: String) -> Result<()> {
     let icons = get_tray_icons()?;
-    let icon = icons.get(idx).ok_or("tray icon index out of bounds")?;
-    icon.invoke()?;
+    let tray_icon = icons
+        .iter()
+        .find(|i| i.registry.key == key)
+        .ok_or("tray icon not found")?;
+    tray_icon.invoke()?;
     Ok(())
 }
 
 #[tauri::command(async)]
-pub fn on_context_menu_tray_icon(idx: usize) -> Result<()> {
+pub fn on_context_menu_tray_icon(key: String) -> Result<()> {
     let icons = get_tray_icons()?;
-    let icon = icons.get(idx).ok_or("tray icon index out of bounds")?;
-    icon.context_menu()?;
+    let tray_icon = icons
+        .iter()
+        .find(|i| i.registry.key == key)
+        .ok_or("tray icon not found")?;
+    tray_icon.context_menu()?;
     Ok(())
 }
