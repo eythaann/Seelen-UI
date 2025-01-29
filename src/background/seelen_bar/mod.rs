@@ -84,7 +84,7 @@ impl FancyToolbar {
                 .contains(&WindowsApi::exe(hwnd).unwrap_or_default().as_str());
 
         let state = FULL_STATE.load();
-        let settings = &state.settings().seelenweg();
+        let settings = &state.settings().fancy_toolbar();
 
         if settings.use_multi_monitor_overlap_logic {
             if is_overlaped {

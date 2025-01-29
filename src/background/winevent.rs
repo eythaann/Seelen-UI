@@ -323,9 +323,11 @@ impl WinEvent {
                             }
                         }
                         _ => {
-                            // remove fullscreen of latest when foregrounding another window
+                            // remove fullscreen of latest when foregrounding another window on the same monitor
                             if let Some(old) = latest_fullscreened.take() {
-                                synthetics.push(Self::SyntheticFullscreenEnd(old));
+                                if old.monitor == WindowsApi::monitor_from_window(origin) {
+                                    synthetics.push(Self::SyntheticFullscreenEnd(old));
+                                }
                             }
                             // if new foregrounded window is fullscreen emit it
                             if is_origin_fullscreen {
