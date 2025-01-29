@@ -86,7 +86,7 @@ export function General() {
                 </a>
               }
             >
-              <Icon iconName="LuHelpCircle" />
+              <Icon iconName="LuCircleHelp" />
             </Tooltip>
           </div>
           <Input

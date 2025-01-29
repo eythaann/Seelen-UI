@@ -16,6 +16,7 @@
 - dock items no updatings paths on store updates.
 - unremovable workspace module on toolbar.
 - missing system tray icons.
+- date not being inmediately updated on settings change.
 
 ## [2.0.14]
 ### hotfix

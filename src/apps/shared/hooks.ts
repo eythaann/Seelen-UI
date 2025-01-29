@@ -13,6 +13,7 @@ export function useWindowFocusChange(cb: (focused: boolean) => void) {
   }, []);
 }
 
+/** Will reset the interval on deps change */
 export function useInterval(cb: () => void, ms: number, deps: any[] = []) {
   const ref = useRef<number | null>(null);
   const clearLastInterval = () => {
