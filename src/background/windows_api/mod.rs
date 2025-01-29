@@ -322,20 +322,15 @@ impl WindowsApi {
         rect: &RECT,
         flags: SET_WINDOW_POS_FLAGS,
     ) -> Result<()> {
-        let uflags = match order {
+        let flags = match order {
             Some(_) => flags,
             None => SWP_NOZORDER | flags,
-        };
-        Self::_set_position(hwnd, order.unwrap_or_default(), *rect, uflags)
+        } | SWP_NOACTIVATE;
+        Self::_set_position(hwnd, order.unwrap_or_default(), *rect, flags)
     }
 
     pub fn move_window(hwnd: HWND, rect: &RECT) -> Result<()> {
-        Self::set_position(
-            hwnd,
-            None,
-            rect,
-            SWP_NOSIZE | SWP_NOACTIVATE | SWP_ASYNCWINDOWPOS,
-        )
+        Self::set_position(hwnd, None, rect, SWP_NOSIZE | SWP_ASYNCWINDOWPOS)
     }
 
     pub fn bring_to_top(hwnd: HWND) -> Result<()> {
