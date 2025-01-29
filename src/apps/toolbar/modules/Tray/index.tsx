@@ -31,7 +31,7 @@ function TrayItem(props: { tray: TrayInfo }) {
     convertFileSrc(LAZY_CONSTANTS.MISSING_ICON_PATH);
   const { t } = useTranslation();
 
-  if (tray.registry.executablePath.endsWith('explorer.exe')) {
+  if (tray.registry.executablePath.endsWith('explorer.exe') && tray.registry.iconSnapshot) {
     const base64String = btoa(String.fromCharCode(...tray.registry.iconSnapshot));
     iconSrc = `data:image/png;base64,${base64String}`;
   }

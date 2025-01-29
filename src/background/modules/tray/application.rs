@@ -237,7 +237,7 @@ impl TrayIconManager {
             let mut item = RegistryNotifyIcon {
                 key: id.to_string(),
                 executable_path: resolve_guid_path(path_with_guid)?,
-                icon_snapshot: regkey.get_raw_value("IconSnapShot")?.bytes,
+                icon_snapshot: regkey.get_raw_value("IconSnapShot").map(|v| v.bytes).ok(),
                 initial_tooltip: regkey.get_value("InitialTooltip").ok(),
                 icon_guid: regkey.get_value("IconGuid").ok(),
                 icon_uid: regkey.get_value("UID").ok(),

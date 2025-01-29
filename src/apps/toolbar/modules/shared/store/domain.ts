@@ -50,8 +50,8 @@ export interface TrayInfo {
     key: string;
     executablePath: string;
     initialTooltip: string | null;
-    /** PNG buffer */
-    iconSnapshot: number[];
+    /** cached PNG buffer */
+    iconSnapshot: number[] | null;
     iconGuid: string | null;
     iconUid: number | null;
     isPromoted: boolean;
