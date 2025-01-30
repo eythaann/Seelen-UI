@@ -99,7 +99,7 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setMediaInputs(event.payload));
   });
 
-  await listenGlobal<AppNotification[]>('notifications', (event) => {
+  await listenGlobal<AppNotification[]>(SeelenEvent.Notifications, (event) => {
     store.dispatch(RootActions.setNotifications(event.payload.sort((a, b) => b.date - a.date)));
   });
 
@@ -170,7 +170,20 @@ export async function loadStore() {
     store.dispatch(RootActions.setUserMusicFolder((await MusicFolder.getAsync()).all()));
   });
 
-  let placeholder = await invoke(SeelenCommand.StateGetToolbarItems) as Placeholder;
+  store.dispatch(RootActions.setHistory((await ApplicationHistory.getAsync()).all()));
+  store.dispatch(RootActions.setHistoryOnMonitor((await ApplicationHistory.getCurrentMonitorHistoryAsync()).all()));
+
+  store.dispatch(async () => {
+    store.dispatch(RootActions.setUser((await UserDetails.getAsync()).user));
+    store.dispatch(RootActions.setUserRecentFolder((await RecentFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserDocumentsFolder((await DocumentsFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserDownloadsFolder((await DownloadsFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserPicturesFolder((await PicturesFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserVideosFolder((await VideosFolder.getAsync()).all()));
+    store.dispatch(RootActions.setUserMusicFolder((await MusicFolder.getAsync()).all()));
+  });
+
+  let placeholder = (await invoke(SeelenCommand.StateGetToolbarItems)) as Placeholder;
   store.dispatch(RootActions.setPlaceholder(placeholder));
 }
 
