@@ -37,6 +37,7 @@ placeholder:
   volume: Volum
 settings:
   app_settings: Setări aplicație
+  brightness: Luminozitate
   log_out: Deconectați -vă
   power: Putere
   restart: Repornire

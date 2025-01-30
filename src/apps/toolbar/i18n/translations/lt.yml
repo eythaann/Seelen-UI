@@ -37,6 +37,7 @@ placeholder:
   volume: Apimtis
 settings:
   app_settings: Programos nustatymai
+  brightness: Ryškumas
   log_out: Atsijungti
   power: Galia
   restart: Perkrauti

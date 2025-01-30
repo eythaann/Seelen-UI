@@ -37,6 +37,7 @@ placeholder:
   volume: Гучність
 settings:
   app_settings: Налаштування додатку
+  brightness: Яскравість
   log_out: Вийти
   power: Живлення
   restart: Перезапустити

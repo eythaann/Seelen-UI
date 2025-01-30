@@ -137,9 +137,12 @@ impl ServiceClient {
             let mut action_path = windows_core::BSTR::new();
             action.Path(&mut action_path)?;
 
-            let action_path = PathBuf::from(action_path.to_string());
-            let service_path = std::env::current_exe()?.with_file_name("slu-service.exe");
-            match action_path == service_path {
+            let service_path = std::env::current_exe()?
+                .with_file_name("slu-service.exe")
+                .to_string_lossy()
+                .to_lowercase();
+
+            match action_path.to_string().to_lowercase() == service_path {
                 true => {
                     task.Run(None)?;
                     Ok(())

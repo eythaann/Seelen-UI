@@ -37,6 +37,7 @@ placeholder:
   volume: الصوت
 settings:
   app_settings: إعدادات التطبيقات
+  brightness: السطوع
   log_out: تسجيل خروج
   power: الطاقة
   restart: إعادة التشغيل

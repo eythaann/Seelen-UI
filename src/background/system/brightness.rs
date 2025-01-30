@@ -1,9 +1,6 @@
 use serde::Serialize;
-use windows::Win32::Devices::Display::{
-    GetMonitorBrightness, GetMonitorCapabilities, SetMonitorBrightness,
-};
 
-use crate::{error_handler::Result, windows_api::WindowsApi};
+use crate::{error_handler::Result, windows_api::monitor::Monitor};
 
 #[derive(Debug, Serialize)]
 pub struct Brightness {
@@ -13,51 +10,24 @@ pub struct Brightness {
 }
 
 #[tauri::command(async)]
-pub fn get_main_monitor_brightness() -> Result<Brightness> {
-    let mut brightness = Brightness {
-        min: 0,
-        max: 0,
-        current: 0,
-    };
-
-    unsafe {
-        let hmonitor = WindowsApi::primary_physical_monitor()?;
-
-        let mut pdwmonitorcapabilities: u32 = 0;
-        let mut pdwsupportedcolortemperatures: u32 = 0;
-        let mut result = GetMonitorCapabilities(
-            hmonitor.hPhysicalMonitor,
-            &mut pdwmonitorcapabilities,
-            &mut pdwsupportedcolortemperatures,
-        );
-
-        if result == 0 {
-            return Err("GetMonitorCapabilities failed".into());
-        }
-
-        result = GetMonitorBrightness(
-            hmonitor.hPhysicalMonitor,
-            &mut brightness.min,
-            &mut brightness.current,
-            &mut brightness.max,
-        );
-
-        if result == 0 {
-            return Err("GetMonitorBrightness failed".into());
-        }
+pub fn get_main_monitor_brightness() -> Result<Option<Brightness>> {
+    let monitor = Monitor::primary();
+    let device = monitor.main_display_device()?;
+    let current = device.ioctl_query_display_brightness()?;
+    if current == 0 && device.ioctl_set_display_brightness(0).is_err() {
+        return Ok(None);
     }
-
-    Ok(brightness)
+    Ok(Some(Brightness {
+        min: 0,
+        max: 100,
+        current: current as u32,
+    }))
 }
 
 #[tauri::command(async)]
-pub fn set_main_monitor_brightness(brightness: u32) -> Result<()> {
-    let result = unsafe {
-        let hmonitor = WindowsApi::primary_physical_monitor()?;
-        SetMonitorBrightness(hmonitor.hPhysicalMonitor, brightness)
-    };
-    if result == 0 {
-        return Err("SetMonitorBrightness failed".into());
-    }
+pub fn set_main_monitor_brightness(brightness: u8) -> Result<()> {
+    let monitor = Monitor::primary();
+    let device = monitor.main_display_device()?;
+    device.ioctl_set_display_brightness(brightness.min(100))?;
     Ok(())
 }

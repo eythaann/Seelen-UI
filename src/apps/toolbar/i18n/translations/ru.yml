@@ -37,6 +37,7 @@ placeholder:
   volume: Громкость
 settings:
   app_settings: Настройки приложения
+  brightness: Яркость
   log_out: Выход из системы
   power: Питание
   restart: Перезагрузка

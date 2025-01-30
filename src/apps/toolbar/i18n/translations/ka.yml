@@ -37,6 +37,7 @@ placeholder:
   volume: ტომი
 settings:
   app_settings: პროგრამის პარამეტრები
+  brightness: სიკაშკაშე
   log_out: შესვლა
   power: ძალა
   restart: Რესტარტი

@@ -37,6 +37,7 @@ placeholder:
   volume: Dami
 settings:
   app_settings: Mga Setting ng App
+  brightness: Ningning
   log_out: Mag -log out
   power: Kapangyarihan
   restart: I -restart

@@ -95,12 +95,12 @@ use windows::{
                 GetWindowTextW, GetWindowThreadProcessId, IsIconic, IsWindow, IsWindowVisible,
                 IsZoomed, PostMessageW, SetWindowPos, ShowWindow, ShowWindowAsync,
                 SystemParametersInfoW, ANIMATIONINFO, EDD_GET_DEVICE_INTERFACE_NAME, GWL_EXSTYLE,
-                GWL_STYLE, MONITORINFOF_PRIMARY, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD,
-                SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN,
-                SPIF_SENDCHANGE, SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER,
-                SPI_SETANIMATION, SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE,
-                SWP_NOSIZE, SWP_NOZORDER, SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS,
-                WINDOW_EX_STYLE, WINDOW_STYLE, WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
+                GWL_STYLE, SET_WINDOW_POS_FLAGS, SHOW_WINDOW_CMD, SM_CXVIRTUALSCREEN,
+                SM_CYVIRTUALSCREEN, SM_XVIRTUALSCREEN, SM_YVIRTUALSCREEN, SPIF_SENDCHANGE,
+                SPIF_UPDATEINIFILE, SPI_GETANIMATION, SPI_GETDESKWALLPAPER, SPI_SETANIMATION,
+                SPI_SETDESKWALLPAPER, SWP_ASYNCWINDOWPOS, SWP_NOACTIVATE, SWP_NOSIZE, SWP_NOZORDER,
+                SW_RESTORE, SYSTEM_PARAMETERS_INFO_UPDATE_FLAGS, WINDOW_EX_STYLE, WINDOW_STYLE,
+                WNDENUMPROC, WS_SIZEBOX, WS_THICKFRAME,
             },
         },
     },
@@ -701,36 +701,40 @@ impl WindowsApi {
         unsafe { MonitorFromWindow(GetDesktopWindow(), MONITOR_DEFAULTTOPRIMARY) }
     }
 
-    pub fn physical_monitors(monitor: HMONITOR) -> Result<Vec<PHYSICAL_MONITOR>> {
+    pub fn get_physical_monitors(monitor: HMONITOR) -> Result<Vec<PHYSICAL_MONITOR>> {
         let mut c_physical_monitors: u32 = 0;
         let mut p_physical_monitors: Vec<PHYSICAL_MONITOR> = Vec::new();
-
         unsafe {
             GetNumberOfPhysicalMonitorsFromHMONITOR(monitor, &mut c_physical_monitors)?;
             p_physical_monitors.resize(c_physical_monitors as usize, std::mem::zeroed());
             GetPhysicalMonitorsFromHMONITOR(monitor, p_physical_monitors.as_mut())?;
         };
-
         Ok(p_physical_monitors)
     }
 
-    pub fn get_display_device(monitor: HMONITOR) -> Result<DISPLAY_DEVICEW> {
+    pub fn get_display_devices(monitor: HMONITOR) -> Result<Vec<DISPLAY_DEVICEW>> {
         let info = Self::monitor_info(monitor)?;
         let lpdevice = PCWSTR::from_raw(info.szDevice.as_ptr());
-        let mut display = DISPLAY_DEVICEW {
-            cb: std::mem::size_of::<DISPLAY_DEVICEW>() as u32,
-            ..Default::default()
-        };
-        unsafe {
-            EnumDisplayDevicesW(lpdevice, 0, &mut display, EDD_GET_DEVICE_INTERFACE_NAME).ok()?
-        };
-        Ok(display)
-    }
-
-    pub fn monitor_get_is_primary(hmonitor: HMONITOR) -> Result<bool> {
-        let ex_info = Self::monitor_info(hmonitor)?;
-
-        Ok(ex_info.monitorInfo.dwFlags == MONITORINFOF_PRIMARY)
+        let mut devices = Vec::new();
+        for device_idx in 0.. {
+            let mut device = DISPLAY_DEVICEW {
+                cb: std::mem::size_of::<DISPLAY_DEVICEW>() as u32,
+                ..Default::default()
+            };
+            if !unsafe {
+                EnumDisplayDevicesW(
+                    lpdevice,
+                    device_idx,
+                    &mut device,
+                    EDD_GET_DEVICE_INTERFACE_NAME,
+                )
+                .as_bool()
+            } {
+                break;
+            }
+            devices.push(device);
+        }
+        Ok(devices)
     }
 
     pub fn get_display_device_settings(monitor: HMONITOR) -> Result<DEVMODEW> {
@@ -744,18 +748,6 @@ impl WindowsApi {
             EnumDisplaySettingsW(lpdevice, ENUM_CURRENT_SETTINGS, &mut devmode).ok()?;
         }
         Ok(devmode)
-    }
-
-    /// handle of PHYSICAL_MONITOR is bugged and will be always 0
-    pub fn primary_physical_monitor() -> Result<PHYSICAL_MONITOR> {
-        Ok(Self::physical_monitors(Self::primary_monitor())?[0])
-    }
-
-    pub fn monitor_index(hmonitor: HMONITOR) -> Result<usize> {
-        Ok(MonitorEnumerator::get_all_v2()?
-            .into_iter()
-            .position(|m| m.handle() == hmonitor)
-            .ok_or("could not find monitor index")?)
     }
 
     /// https://learn.microsoft.com/en-us/windows/win32/gdi/the-virtual-screen

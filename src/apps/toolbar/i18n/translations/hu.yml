@@ -37,6 +37,7 @@ placeholder:
   volume: Hangerő
 settings:
   app_settings: Alkalmazásbeállítások
+  brightness: Fényerő
   log_out: Kijelentkezés
   power: Hatalom
   restart: Újrakezd

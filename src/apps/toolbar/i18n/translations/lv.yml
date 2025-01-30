@@ -37,6 +37,7 @@ placeholder:
   volume: Tilpums
 settings:
   app_settings: Lietotņu iestatījumi
+  brightness: Spilgtums
   log_out: Izlogoties
   power: Spēks
   restart: Restartēt

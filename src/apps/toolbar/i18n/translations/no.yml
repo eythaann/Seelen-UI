@@ -37,6 +37,7 @@ placeholder:
   volume: Volum
 settings:
   app_settings: Appinnstillinger
+  brightness: Lysstyrke
   log_out: Logg ut
   power: Makt
   restart: Omstart

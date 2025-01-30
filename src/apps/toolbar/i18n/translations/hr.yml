@@ -37,6 +37,7 @@ placeholder:
   volume: Volumen
 settings:
   app_settings: Postavke aplikacija
+  brightness: Svjetlost
   log_out: Odjavite se
   power: Vlast
   restart: Ponovno pokrenuti

@@ -37,6 +37,7 @@ placeholder:
   volume: Volumen
 settings:
   app_settings: Configuraciones de la aplicación
+  brightness: Luminosidad
   log_out: Cerrar sesión
   power: Fuerza
   restart: Reiniciar

@@ -107,6 +107,7 @@ features = [
     "Win32_Security",                      # required for power management (shutdown, reboot)
     "Win32_Security_Authorization",        # required to change security on services
     "Win32_System_Kernel",
+    "Win32_System_IO",                     # Input/Output devices
     "Win32_System_Services",
     "Win32_System_EventLog",               # needed for logger on service
     "Win32_System_TaskScheduler",

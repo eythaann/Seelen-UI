@@ -37,6 +37,7 @@ placeholder:
   volume: Ses
 settings:
   app_settings: Uygulama Ayarları
+  brightness: Parlaklık
   log_out: Çıkış Yap
   power: Güç
   restart: Yeniden başlat

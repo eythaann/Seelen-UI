@@ -37,6 +37,7 @@ placeholder:
   volume: حجم
 settings:
   app_settings: د ایپ امستنې
+  brightness: روښانه کول
   log_out: وتل
   power: ځواک
   restart: بیا روښانه کول

@@ -83,6 +83,7 @@ placeholder:
   volume: Volume
 settings:
   app_settings: App Settings
+  brightness: Brightness
   log_out: Log Out
   power: Power
   restart: Restart

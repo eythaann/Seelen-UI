@@ -37,6 +37,7 @@ placeholder:
   volume: आयतन
 settings:
   app_settings: एप्लिकेशन सेटिंग
+  brightness: चमक
   log_out: लॉग आउट
   power: शक्ति
   restart: पुनः आरंभ करें

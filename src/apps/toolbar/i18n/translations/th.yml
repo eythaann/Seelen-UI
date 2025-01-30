@@ -37,6 +37,7 @@ placeholder:
   volume: ปริมาณ
 settings:
   app_settings: การตั้งค่าแอป
+  brightness: ความสว่าง
   log_out: ออกจากระบบ
   power: พลัง
   restart: เริ่มต้นใหม่

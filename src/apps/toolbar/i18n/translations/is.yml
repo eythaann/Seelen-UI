@@ -37,6 +37,7 @@ placeholder:
   volume: Bindi
 settings:
   app_settings: Forritastillingar
+  brightness: Birtustig
   log_out: Að skrá þig út
   power: Máttur
   restart: Endurræsa

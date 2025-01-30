@@ -37,6 +37,7 @@ placeholder:
   volume: Bind
 settings:
   app_settings: Appindstillinger
+  brightness: Lysstyrke
   log_out: Log ud
   power: Magt
   restart: Genstart

@@ -37,6 +37,7 @@ placeholder:
   volume: ድምጽ
 settings:
   app_settings: የመተግበሪያ ቅንጅቶች
+  brightness: ብሩህነት
   log_out: ውጣ
   power: ኃይል
   restart: እንደገና ጀምር

@@ -6,6 +6,7 @@
 - show open new window buttons on dock app items context menu.
 - toggle dock items using win + number.
 - notifications count on dock app items.
+- add brightness slider to quick settings on toolbar.
 
 ### refactor
 - create separated system service to handle elevated actions.

@@ -254,8 +254,9 @@ impl TrayIconManager {
                 };
                 item.is_running = unsafe { Shell_NotifyIconGetRect(&identifier).is_ok() };
             } else if let Some(uid) = &item.icon_uid {
+                let str_item_exe_path = item.executable_path.to_string_lossy().to_lowercase();
                 item.is_running = windows.iter().any(|w| match w.process().program_path() {
-                    Ok(path) if path == item.executable_path => {
+                    Ok(path) if path.to_string_lossy().to_lowercase() == str_item_exe_path => {
                         let identifier = NOTIFYICONIDENTIFIER {
                             cbSize: std::mem::size_of::<NOTIFYICONIDENTIFIER>() as u32,
                             hWnd: w.hwnd(),

@@ -37,6 +37,7 @@ placeholder:
   volume: Volume
 settings:
   app_settings: App instellingen
+  brightness: Helderheid
   log_out: Uitloggen
   power: Energie
   restart: Herstarten

@@ -37,6 +37,7 @@ placeholder:
   volume: Volum
 settings:
   app_settings: Configuració de l'aplicació
+  brightness: Brillantor
   log_out: Tancar sessió
   power: Força
   restart: Reinicia

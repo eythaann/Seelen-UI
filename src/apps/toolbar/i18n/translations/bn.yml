@@ -37,6 +37,7 @@ placeholder:
   volume: ভলিউম
 settings:
   app_settings: অ্যাপ সেটিংস
+  brightness: উজ্জ্বলতা
   log_out: প্রস্থান
   power: শক্তি
   restart: আবার শুরু
