@@ -1,3 +1,13 @@
+:root {
+  --dock-item-hover-color: rgba(var(--config-accent-light-color-rgb), 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dock-item-hover-color: rgba(var(--config-accent-color-rgb), 0.2);
+  }
+}
+
 .taskbar {
   .taskbar-bg-layer-1 {
     opacity: 0.3;
@@ -62,6 +72,11 @@
     box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.5);
   }
 
+  .bg-layer-2 {
+    border-radius: 25%;
+    transition: background-color 0.2s ease-out;
+  }
+
   &.media-session-container {
     &.media-session-container-horizontal {
       width: calc(var(--config-item-size) * 3 + var(--config-space-between-items) * 2);
@@ -72,8 +87,8 @@
   }
 
   &:hover {
-    .bg-layer-1 {
-      filter: brightness(0.9);
+    .bg-layer-2 {
+      background-color: var(--dock-item-hover-color);
     }
   }
 
