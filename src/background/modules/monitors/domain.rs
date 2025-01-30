@@ -22,7 +22,7 @@ impl TryFrom<Monitor> for PhysicalMonitor {
         let dpi = WindowsApi::get_device_pixel_ratio(m.handle())?;
         Ok(Self {
             id: device.id(),
-            name: device.name.to_string(),
+            name: device.description.to_string(),
             width: (rect.right - rect.left) as u32,
             height: (rect.bottom - rect.top) as u32,
             dpi,
