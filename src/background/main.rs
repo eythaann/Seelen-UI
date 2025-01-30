@@ -46,7 +46,8 @@ use tauri::webview_version;
 use tray::try_register_tray_icon;
 use utils::{
     integrity::{
-        check_for_webview_optimal_state, restart_as_appx, validate_webview_runtime_is_installed,
+        check_for_webview_optimal_state, register_panic_hook, restart_as_appx,
+        validate_webview_runtime_is_installed,
     },
     is_running_as_appx_package, was_installed_using_msix, PERFORMANCE_HELPER,
 };
@@ -57,39 +58,6 @@ static APP_HANDLE: OnceLock<tauri::AppHandle<tauri::Wry>> = OnceLock::new();
 
 pub fn is_local_dev() -> bool {
     cfg!(dev)
-}
-
-fn register_panic_hook() {
-    let base_hook = std::panic::take_hook();
-    std::panic::set_hook(Box::new(move |info| {
-        let cause = info
-            .payload()
-            .downcast_ref::<String>()
-            .map(|s| s.to_string())
-            .unwrap_or_else(|| {
-                info.payload()
-                    .downcast_ref::<&str>()
-                    .unwrap_or(&"<cause unknown>")
-                    .to_string()
-            });
-
-        let mut string_location = String::from("<location unknown>");
-        if let Some(location) = info.location() {
-            string_location = format!(
-                "{}:{}:{}",
-                location.file(),
-                location.line(),
-                location.column()
-            );
-        }
-
-        log::error!(
-            "A panic occurred:\n  Cause: {}\n  Location: {}",
-            cause,
-            string_location
-        );
-        base_hook(info);
-    }));
 }
 
 fn print_initial_information() {
@@ -170,9 +138,6 @@ fn is_already_runnning() -> bool {
 
 fn main() -> Result<()> {
     register_panic_hook();
-    /* println!("{:#?}", TrayIconManager::enum_from_registry());
-
-    return Ok(()); */
 
     let command = trace_lock!(SEELEN_COMMAND_LINE).clone();
     let matches = match command.try_get_matches() {

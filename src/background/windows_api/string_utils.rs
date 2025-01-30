@@ -2,6 +2,7 @@ use std::os::windows::ffi::{OsStrExt, OsStringExt};
 
 use windows_core::{PCWSTR, PWSTR};
 
+#[derive(Debug, Clone)]
 pub struct WindowsString {
     pub inner: Vec<u16>,
 }
@@ -11,6 +12,10 @@ impl WindowsString {
         Self {
             inner: vec![0; capacity],
         }
+    }
+
+    pub fn from_slice(s: &[u16]) -> Self {
+        Self { inner: s.to_vec() }
     }
 
     pub fn from_str(s: &str) -> Self {

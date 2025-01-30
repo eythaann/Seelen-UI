@@ -37,6 +37,7 @@ placeholder:
   volume: Ozentasun
 settings:
   app_settings: Aplikazioaren ezarpenak
+  brightness: Distira
   log_out: Saioa amaitu
   power: Botere
   restart: Berriro hasi

@@ -37,6 +37,7 @@ placeholder:
   volume: 音量
 settings:
   app_settings: 应用设置
+  brightness: 亮度
   log_out: 注销
   power: 电源
   restart: 重启

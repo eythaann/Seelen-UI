@@ -37,6 +37,7 @@ placeholder:
   volume: Volume
 settings:
   app_settings: Pengaturan aplikasi
+  brightness: Kecerahan
   log_out: Keluar
   power: Kekuatan
   restart: Mengulang kembali

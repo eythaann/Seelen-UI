@@ -37,6 +37,7 @@ placeholder:
   volume: Volume
 settings:
   app_settings: Paramètres de l'application
+  brightness: Luminosité
   log_out: Se déconnecter
   power: Pouvoir
   restart: Redémarrage

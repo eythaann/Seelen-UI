@@ -46,7 +46,7 @@ pub fn state_write_weg_items(window: tauri::Window, mut items: WegItems) -> Resu
     let monitor = Window::from(window.hwnd()?).monitor();
     let device_id = monitor.device_id()?;
     if guard.get_weg_pinned_item_visibility(&device_id) == WegPinnedItemsVisibility::WhenPrimary
-        && !monitor.is_primary()?
+        && !monitor.is_primary()
         || items == guard.weg_items
     {
         return Ok(());

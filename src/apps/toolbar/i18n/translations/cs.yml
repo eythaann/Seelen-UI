@@ -37,6 +37,7 @@ placeholder:
   volume: Hlasitost
 settings:
   app_settings: Nastavení aplikace
+  brightness: Jas
   log_out: Odhlásit se
   power: Moc
   restart: Restart

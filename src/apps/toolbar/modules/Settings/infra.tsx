@@ -2,8 +2,9 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { SettingsToolbarItem } from '@seelen-ui/lib/types';
 import { invoke } from '@tauri-apps/api/core';
 import { emit } from '@tauri-apps/api/event';
-import { Tooltip } from 'antd';
-import React, { useEffect, useState } from 'react';
+import { Button, Slider, Tooltip } from 'antd';
+import { throttle } from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
@@ -29,13 +30,16 @@ interface Brightness {
   current: number;
 }
 
+function brightnessIcon(brightness: number) {
+  if (brightness >= 60) {
+    return 'TbBrightnessUp';
+  }
+  return brightness >= 30 ? 'TbBrightnessDown' : 'TbBrightnessDownFilled';
+}
+
 export function SettingsModule({ module }: Props) {
   const [openPreview, setOpenPreview] = useState(false);
-  const [_brightness, setBrightness] = useState<Brightness>({
-    min: 0,
-    max: 0,
-    current: 0,
-  });
+  const [brightness, setBrightness] = useState<Brightness | null>(null);
 
   const defaultInput = useSelector((state: RootState) =>
     Selectors.mediaInputs(state).find((d) => d.is_default_multimedia),
@@ -51,12 +55,7 @@ export function SettingsModule({ module }: Props) {
   }, []);
 
   useEffect(() => {
-    invoke<Brightness>('get_main_monitor_brightness')
-      .then(setBrightness)
-      .catch(() => {
-        // TODO brightness is always failing
-        // console.error(e);
-      });
+    invoke<Brightness | null>('get_main_monitor_brightness').then(setBrightness);
   }, [openPreview]);
 
   useWindowFocusChange((focused) => {
@@ -64,6 +63,13 @@ export function SettingsModule({ module }: Props) {
       setOpenPreview(false);
     }
   });
+
+  const setBrightnessExternal = useCallback(
+    throttle((brightness: number) => {
+      invoke('set_main_monitor_brightness', { brightness });
+    }, 100),
+    [],
+  );
 
   return (
     <AnimatedPopover
@@ -96,10 +102,32 @@ export function SettingsModule({ module }: Props) {
             </Tooltip>
           </div>
 
+          {brightness && <span className="fast-settings-label">{t('settings.brightness')}</span>}
+          {brightness && (
+            <div className="fast-settings-item">
+              <Button
+                type="text"
+                onClick={() => {
+                  /* TODO: add auto brightness toggle */
+                }}
+              >
+                <Icon size={20} iconName={brightnessIcon(brightness.current)} />
+              </Button>
+              <Slider
+                value={brightness.current}
+                onChange={(current) => {
+                  setBrightness({ ...brightness, current });
+                  setBrightnessExternal(current);
+                }}
+                min={brightness.min}
+                max={brightness.max}
+              />
+            </div>
+          )}
+
           {!!(defaultInput || defaultOutput) && (
             <span className="fast-settings-label">{t('media.master_volume')}</span>
           )}
-
           {!!defaultOutput && (
             <div className="fast-settings-item">
               <VolumeControl
@@ -113,7 +141,6 @@ export function SettingsModule({ module }: Props) {
               />
             </div>
           )}
-
           {!!defaultInput && (
             <div className="fast-settings-item">
               <VolumeControl
@@ -124,37 +151,37 @@ export function SettingsModule({ module }: Props) {
             </div>
           )}
 
-          {/* brightness.max > 0 && (
-            <div className="fast-settings-item">
-              <Icon iconName="CiBrightnessUp" />
-              <Slider
-                value={brightness.current}
-                onChange={(value) => setBrightness({ ...brightness, current: value })}
-                min={brightness.min}
-                max={brightness.max}
-              />
-            </div>
-          ) */}
-
           <span className="fast-settings-label">{t('settings.power')}</span>
           <div className="fast-settings-item fast-settings-power">
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')}>
-              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.LogOut)}>
+              <button
+                className="fast-settings-item-button"
+                onClick={() => invoke(SeelenCommand.LogOut)}
+              >
                 <Icon iconName="BiLogOut" />
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.sleep')}>
-              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.Suspend)}>
+              <button
+                className="fast-settings-item-button"
+                onClick={() => invoke(SeelenCommand.Suspend)}
+              >
                 <Icon iconName="BiMoon" />
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.restart')}>
-              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.Restart)}>
+              <button
+                className="fast-settings-item-button"
+                onClick={() => invoke(SeelenCommand.Restart)}
+              >
                 <Icon iconName="VscDebugRestart" />
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.shutdown')}>
-              <button className="fast-settings-item-button" onClick={() => invoke(SeelenCommand.Shutdown)}>
+              <button
+                className="fast-settings-item-button"
+                onClick={() => invoke(SeelenCommand.Shutdown)}
+              >
                 <Icon iconName="GrPower" />
               </button>
             </Tooltip>

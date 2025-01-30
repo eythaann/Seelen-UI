@@ -37,6 +37,7 @@ placeholder:
   volume: Tom
 settings:
   app_settings: Ustawienia aplikacji
+  brightness: Jasność
   log_out: Wyloguj
   power: Moc
   restart: Uruchom ponownie

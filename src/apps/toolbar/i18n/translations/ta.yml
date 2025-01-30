@@ -37,6 +37,7 @@ placeholder:
   volume: தொகுதி
 settings:
   app_settings: பயன்பாட்டு அமைப்புகள்
+  brightness: பிரகாசம்
   log_out: வெளியேறு
   power: சக்தி
   restart: மறுதொடக்கம்

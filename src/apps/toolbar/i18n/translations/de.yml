@@ -37,6 +37,7 @@ placeholder:
   volume: Lautstärke
 settings:
   app_settings: App-Einstellungen
+  brightness: Helligkeit
   log_out: Abmelden
   power: Leistung
   restart: Neustarten

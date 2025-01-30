@@ -37,6 +37,7 @@ placeholder:
   volume: Ծավալ
 settings:
   app_settings: Ծրագրի կարգավորումներ
+  brightness: Պայծառություն
   log_out: Դուրս գալ
   power: Հզորություն
   restart: Վերսկսել

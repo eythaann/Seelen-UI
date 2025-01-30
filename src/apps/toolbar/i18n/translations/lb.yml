@@ -37,6 +37,7 @@ placeholder:
   volume: Vuesso
 settings:
   app_settings: App Astellunge
+  brightness: Hellegkeet
   log_out: Ausloggen
   power: Kraaftbeldscht
   restart: Neistart

@@ -37,6 +37,7 @@ placeholder:
   volume: Хэмжээ
 settings:
   app_settings: Дуулахын тохиргоо
+  brightness: Тод
   log_out: Гарах
   power: Хүч чадал
   restart: Дахин ачааллах

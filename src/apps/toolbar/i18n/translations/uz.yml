@@ -37,6 +37,7 @@ placeholder:
   volume: Hajmi
 settings:
   app_settings: Ilova sozlamalari
+  brightness: Yorqinlik
   log_out: Chiqish
   power: Kuch
   restart: Qayta ishga tushirish

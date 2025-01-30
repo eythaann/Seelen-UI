@@ -37,6 +37,7 @@ placeholder:
   volume: Запремина
 settings:
   app_settings: Подешавања апликација
+  brightness: Светлина
   log_out: Одјавити се
   power: Моћ
   restart: Поново покренути

@@ -37,6 +37,7 @@ placeholder:
   volume: Сила на звука
 settings:
   app_settings: Настройки на приложението
+  brightness: Яркост
   log_out: Излез от профила си
   power: Мощност
   restart: Рестартирам

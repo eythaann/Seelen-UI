@@ -37,6 +37,7 @@ placeholder:
   volume: Həcm
 settings:
   app_settings: Tətbiq parametrləri
+  brightness: Parlaqlıq
   log_out: Çıxış
   power: Güc
   restart: Yenidən başlamaq

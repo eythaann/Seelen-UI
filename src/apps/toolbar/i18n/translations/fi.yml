@@ -37,6 +37,7 @@ placeholder:
   volume: Tilavuus
 settings:
   app_settings: Sovellusasetukset
+  brightness: Kirkkaus
   log_out: Kirjautua ulos
   power: Voima
   restart: Uudelleenkäynnistää

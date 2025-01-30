@@ -37,6 +37,7 @@ placeholder:
   volume: ປະລິມານ
 settings:
   app_settings: ການຕັ້ງຄ່າແອັບ app
+  brightness: ຄວາມສະຫວ່າງ
   log_out: ອອກ​ຈາກ​ລະ​ບົບ
   power: ພະເດດ
   restart: ເລີ່ມ​ຕົ້ນ​ໃຫມ່

@@ -325,8 +325,7 @@ impl WegItemsImpl {
             let temporal_mode = state.get_weg_temporal_item_visibility(&monitor_id);
             let pinned_mode = state.get_weg_pinned_item_visibility(&monitor_id);
             let pinned_visible = pinned_mode == WegPinnedItemsVisibility::Always
-                || (pinned_mode == WegPinnedItemsVisibility::WhenPrimary
-                    && monitor.is_primary()?);
+                || (pinned_mode == WegPinnedItemsVisibility::WhenPrimary && monitor.is_primary());
 
             match (temporal_mode, pinned_visible) {
                 (WegTemporalItemsVisibility::All, true) => {

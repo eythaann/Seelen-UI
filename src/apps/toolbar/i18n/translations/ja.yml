@@ -37,6 +37,7 @@ placeholder:
   volume: 音量
 settings:
   app_settings: SeelenUIの設定
+  brightness: 明るさ
   log_out: ログアウト
   power: 電源
   restart: 再起動

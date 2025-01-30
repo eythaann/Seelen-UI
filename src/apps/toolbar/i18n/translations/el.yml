@@ -37,6 +37,7 @@ placeholder:
   volume: Ενταση ΗΧΟΥ
 settings:
   app_settings: Ρυθμίσεις εφαρμογής
+  brightness: Φωτεινότητα
   log_out: Αποσύνδεση
   power: Εξουσία
   restart: Επανεκκίνηση

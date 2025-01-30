@@ -37,6 +37,7 @@ placeholder:
   volume: Volym
 settings:
   app_settings: App inställningar
+  brightness: Ljusstyrka
   log_out: Logga ut
   power: Driva
   restart: Omstart

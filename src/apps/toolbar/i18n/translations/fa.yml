@@ -37,6 +37,7 @@ placeholder:
   volume: جلد
 settings:
   app_settings: تنظیمات برنامه
+  brightness: روشنایی
   log_out: خروج
   power: قدرت
   restart: مجدداً

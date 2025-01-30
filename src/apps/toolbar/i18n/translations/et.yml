@@ -37,6 +37,7 @@ placeholder:
   volume: Maht
 settings:
   app_settings: Rakenduse sätted
+  brightness: Heledus
   log_out: Logi välja
   power: Võimsus
   restart: Taaskäivita

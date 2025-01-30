@@ -37,6 +37,7 @@ placeholder:
   volume: Âm lượng
 settings:
   app_settings: Cài đặt ứng dụng
+  brightness: Độ sáng
   log_out: Đăng xuất
   power: Quyền lực
   restart: Khởi động lại

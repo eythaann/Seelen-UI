@@ -37,6 +37,7 @@ placeholder:
   volume: 볼륨
 settings:
   app_settings: 앱 설정
+  brightness: 밝기
   log_out: 로그아웃
   power: 전원
   restart: 다시 시작

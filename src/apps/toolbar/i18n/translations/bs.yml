@@ -37,6 +37,7 @@ placeholder:
   volume: Zapremina
 settings:
   app_settings: Postavke aplikacija
+  brightness: Svjetlost
   log_out: Odjaviti se
   power: Snaga
   restart: Ponovo pokrenuti
