@@ -61,13 +61,12 @@ function MediaSession({ session }: { session: MediaChannelTransportData }) {
               src={convertFileSrc(
                 session.owner.iconPath ? session.owner.iconPath : LAZY_CONSTANTS.MISSING_ICON_PATH,
               )}
-              draggable={false}
             />
           </Tooltip>
         )}
-        <img className="media-session-thumbnail" src={src} draggable={false} />
+        <img className="media-session-thumbnail" src={src} />
       </div>
-      <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
+      <img className="media-session-blurred-thumbnail" src={src} />
 
       <div className="media-session-info" style={{ color }}>
         <h4 className="media-session-title">{session.title}</h4>
@@ -157,7 +156,14 @@ interface VolumeControlProps {
 const tooltipVisibilityTimeout = 3 * 1000;
 
 export const VolumeControl = memo((props: VolumeControlProps) => {
-  const { value, icon, deviceId, sessionId, withRightAction = true, withPercentage = false } = props;
+  const {
+    value,
+    icon,
+    deviceId,
+    sessionId,
+    withRightAction = true,
+    withPercentage = false,
+  } = props;
 
   const [internalValue, setInternalValue] = useState(value);
   const [openTooltip, setOpenTooltip] = useState(false);
@@ -173,11 +179,13 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
     [deviceId, sessionId],
   );
 
-  useTimeout(() => {
-    setOpenTooltip(false);
-  },
-  tooltipVisibilityTimeout,
-  [openTooltip]);
+  useTimeout(
+    () => {
+      setOpenTooltip(false);
+    },
+    tooltipVisibilityTimeout,
+    [openTooltip],
+  );
 
   const onInternalChange = (value: number) => {
     setInternalValue(value);
@@ -208,7 +216,9 @@ export const VolumeControl = memo((props: VolumeControlProps) => {
           formatter: (value) => `${(100 * (value || 0)).toFixed(0)}%`,
         }}
       />
-      {withPercentage && <span style={{ lineHeight: '100%' }}>{Math.round(internalValue * 100)}%</span>}
+      {withPercentage && (
+        <span style={{ lineHeight: '100%' }}>{Math.round(internalValue * 100)}%</span>
+      )}
       {withRightAction && (
         <Button
           type="text"
@@ -354,7 +364,10 @@ export function WithMediaControls({ children, setActive }: MediaControlProps) {
         trigger={[]}
         destroyTooltipOnHide
         content={
-          <BackgroundByLayersV2 className="media-notifier" onContextMenu={(e) => e.stopPropagation()}>
+          <BackgroundByLayersV2
+            className="media-notifier"
+            onContextMenu={(e) => e.stopPropagation()}
+          >
             {defaultOutput && (
               <VolumeControl
                 value={defaultOutput.volume}

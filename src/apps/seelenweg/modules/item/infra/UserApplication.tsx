@@ -162,7 +162,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
             onContextMenu={(e) => e.stopPropagation()}
           >
             <BackgroundByLayersV2 prefix="item" />
-            <img className="weg-item-icon" src={iconSrc} draggable={false} />
+            <img className="weg-item-icon" src={iconSrc} />
             {notificationsCount > 0 && <div className="weg-item-badge">{notificationsCount}</div>}
             <div
               className={cx('weg-item-open-sign', {
