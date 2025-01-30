@@ -47,7 +47,7 @@ export const FileOrFolder = memo(({ item }: Props) => {
           {iconSrc.endsWith('.svg') ? (
             <InlineSVG className="weg-item-icon" src={iconSrc} />
           ) : (
-            <img className="weg-item-icon" src={iconSrc} draggable={false} />
+            <img className="weg-item-icon" src={iconSrc} />
           )}
         </div>
       </WithContextMenu>

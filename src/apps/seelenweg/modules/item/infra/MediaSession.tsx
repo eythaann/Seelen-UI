@@ -85,12 +85,11 @@ export function MediaSession({ item }: { item: MediaWegItem }) {
                       ? session.owner.iconPath
                       : LAZY_CONSTANTS.MISSING_ICON_PATH,
                   )}
-                  draggable={false}
                 />
               )}
-              <img className="media-session-thumbnail" src={src} draggable={false} />
+              <img className="media-session-thumbnail" src={src} />
             </div>
-            <img className="media-session-blurred-thumbnail" src={src} draggable={false} />
+            <img className="media-session-blurred-thumbnail" src={src} />
 
             <div className="media-session-info">
               <span
