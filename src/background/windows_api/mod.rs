@@ -26,8 +26,10 @@ use std::{
 use windows::{
     core::{BSTR, GUID, PCWSTR, PWSTR},
     ApplicationModel::AppInfo,
+    Foundation::{AsyncStatus, IAsyncOperation},
     Storage::Streams::{
-        DataReader, IRandomAccessStreamReference, IRandomAccessStreamWithContentType,
+        DataReader, DataReaderLoadOperation, IRandomAccessStreamReference,
+        IRandomAccessStreamWithContentType,
     },
     Wdk::System::{
         SystemServices::PROCESS_EXTENDED_BASIC_INFORMATION,
@@ -932,7 +934,7 @@ impl WindowsApi {
         let input_stream = stream.GetInputStreamAt(0)?;
         let data_reader = DataReader::CreateDataReader(&input_stream)?;
 
-        data_reader.LoadAsync(size as u32)?.get()?;
+        Self::wait_for_reader(data_reader.LoadAsync(size as u32)?, None)?;
         data_reader.ReadBytes(&mut buffer)?;
 
         let image = image::load_from_memory_with_format(&buffer, image::ImageFormat::Png)?;
@@ -949,6 +951,58 @@ impl WindowsApi {
     }
 
     pub fn extract_thumbnail_from_ref(stream: IRandomAccessStreamReference) -> Result<PathBuf> {
-        Self::extract_thumbnail_from_stream(stream.OpenReadAsync()?.get()?)
+        Self::extract_thumbnail_from_stream(Self::wait_for_async(stream.OpenReadAsync()?, None)?)
+    }
+
+    pub fn wait_for_async<T>(
+        task: IAsyncOperation<T>,
+        deepness: Option<isize>,
+    ) -> windows_core::Result<T>
+    where
+        T: windows_core::RuntimeType + 'static,
+    {
+        if deepness.is_some() && deepness.unwrap() > 10 {
+            return Err(windows_core::Error::new(
+                windows_core::HRESULT(0),
+                "The task execution is more time than expected!",
+            ));
+        }
+
+        let status = task.Status()?;
+        match status {
+            AsyncStatus::Completed => Ok(task.GetResults()?),
+            AsyncStatus::Error | AsyncStatus::Canceled => Ok(task.get()?),
+            _ => {
+                sleep(Duration::from_millis(30));
+                Self::wait_for_async(
+                    task,
+                    deepness
+                        .or(Some(0))
+                        .map(|v| Some(v + 1))
+                        .expect("Possbile overflow"),
+                )
+            }
+        }
+    }
+    fn wait_for_reader(task: DataReaderLoadOperation, deepness: Option<isize>) -> Result<u32> {
+        if deepness.is_some() && deepness.unwrap() > 10 {
+            return Err("The task execution is more time than expected!".into());
+        }
+
+        let status = task.Status()?;
+        match status {
+            AsyncStatus::Completed => Ok(task.GetResults()?),
+            AsyncStatus::Error | AsyncStatus::Canceled => Ok(task.get()?),
+            _ => {
+                sleep(Duration::from_millis(30));
+                Self::wait_for_reader(
+                    task,
+                    deepness
+                        .or(Some(0))
+                        .map(|v| Some(v + 1))
+                        .expect("Possbile overflow"),
+                )
+            }
+        }
     }
 }

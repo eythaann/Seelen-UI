@@ -1,4 +1,4 @@
-use std::{collections::HashMap, ffi::OsStr, path::PathBuf, sync::Arc, time::Duration};
+use std::{collections::HashMap, ffi::OsStr, path::PathBuf, sync::Arc, thread, time::Duration};
 
 use itertools::Itertools;
 use lazy_static::lazy_static;
@@ -37,7 +37,7 @@ use crate::{
     modules::start::application::START_MENU_MANAGER,
     seelen_weg::icon_extractor::{extract_and_save_icon_from_file, extract_and_save_icon_umid},
     trace_lock,
-    utils::pcwstr,
+    utils::{pcwstr, sleep_millis},
     windows_api::{process::Process, Com, WindowsApi},
 };
 
@@ -140,13 +140,13 @@ impl IMMNotificationClient_Impl for MediaManagerEvents_Impl {
 }
 
 impl MediaManagerEvents {
-    fn on_media_player_properties_changed(
+    fn refresh_media(
         session: &Option<GlobalSystemMediaTransportControlsSession>,
-        _args: &Option<MediaPropertiesChangedEventArgs>,
     ) -> windows_core::Result<()> {
         if let Some(session) = session {
             let id = session.SourceAppUserModelId()?.to_string();
-            let properties = session.TryGetMediaPropertiesAsync()?.get()?;
+            let properties =
+                WindowsApi::wait_for_async(session.TryGetMediaPropertiesAsync()?, None)?;
             let tx = MediaManager::event_tx();
             let result = tx.send(MediaEvent::MediaPlayerPropertiesChanged {
                 id,
@@ -156,6 +156,16 @@ impl MediaManagerEvents {
             });
             log_error!(result);
         }
+
+        Ok(())
+    }
+
+    fn on_media_player_properties_changed(
+        session: &Option<GlobalSystemMediaTransportControlsSession>,
+        _args: &Option<MediaPropertiesChangedEventArgs>,
+    ) -> windows_core::Result<()> {
+        MediaManagerEvents::refresh_media(session)?;
+
         Ok(())
     }
 
@@ -193,7 +203,13 @@ impl MediaManagerEvents {
             for session in session_manager.GetSessions()? {
                 let id = session.SourceAppUserModelId()?.to_string();
                 if !current_list.contains(&id) {
-                    let _ = tx.send(MediaEvent::MediaPlayerAdded(session));
+                    let _ = tx.send(MediaEvent::MediaPlayerAdded(session.clone()));
+
+                    // It is frequent when an app starts the play, only app icon is the thumbnail and later on updates it without event
+                    thread::spawn(move || {
+                        sleep_millis(1000);
+                        log_error!(MediaManagerEvents::refresh_media(&Some(session)));
+                    });
                 }
                 current_list.retain(|x| *x != id);
             }
@@ -391,8 +407,10 @@ impl MediaManager {
 
 impl MediaManager {
     pub fn new() -> Result<Self> {
-        let media_player_manager =
-            GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?.get()?;
+        let media_player_manager = WindowsApi::wait_for_async(
+            GlobalSystemMediaTransportControlsSessionManager::RequestAsync()?,
+            None,
+        )?;
 
         let mut manager = Self {
             inputs: Vec::new(),
@@ -561,7 +579,7 @@ impl MediaManager {
         session: GlobalSystemMediaTransportControlsSession,
     ) -> Result<()> {
         let source_app_umid = session.SourceAppUserModelId()?.to_string_lossy();
-        let properties = session.TryGetMediaPropertiesAsync()?.get()?;
+        let properties = WindowsApi::wait_for_async(session.TryGetMediaPropertiesAsync()?, None)?;
 
         let playback_info = session.GetPlaybackInfo()?;
         let status = playback_info.PlaybackStatus()?;
@@ -715,7 +733,11 @@ impl MediaManager {
                 // load_media_transport_session could fail with 0x80070015 "The device is not ready."
                 // when trying to load a recently added player so we retry a few times
                 let mut max_attempts = 0;
-                while session.TryGetMediaPropertiesAsync()?.get().is_err() && max_attempts < 15 {
+
+                while WindowsApi::wait_for_async(session.TryGetMediaPropertiesAsync()?, None)
+                    .is_err()
+                    && max_attempts < 15
+                {
                     max_attempts += 1;
                     std::thread::sleep(Duration::from_millis(10));
                 }

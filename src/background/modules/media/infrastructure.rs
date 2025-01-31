@@ -5,7 +5,7 @@ use windows::core::GUID;
 
 use crate::{
     error_handler::Result, modules::media::application::MEDIA_MANAGER, seelen::get_app_handle,
-    trace_lock,
+    trace_lock, windows_api::WindowsApi,
 };
 
 use super::domain::{Device, MediaPlayer};
@@ -57,7 +57,7 @@ pub fn media_set_default_device(id: String, role: String) -> Result<()> {
 #[tauri::command(async)]
 pub fn media_next(id: String) -> Result<()> {
     if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
-        let success = session.TrySkipNextAsync()?.get()?;
+        let success = WindowsApi::wait_for_async(session.TrySkipNextAsync()?, None)?;
         if !success {
             return Err("failed to skip next".into());
         }
@@ -68,7 +68,7 @@ pub fn media_next(id: String) -> Result<()> {
 #[tauri::command(async)]
 pub fn media_prev(id: String) -> Result<()> {
     if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
-        let success = session.TrySkipPreviousAsync()?.get()?;
+        let success = WindowsApi::wait_for_async(session.TrySkipPreviousAsync()?, None)?;
         if !success {
             return Err("failed to skip previous".into());
         }
@@ -79,7 +79,7 @@ pub fn media_prev(id: String) -> Result<()> {
 #[tauri::command(async)]
 pub fn media_toggle_play_pause(id: String) -> Result<()> {
     if let Some(session) = trace_lock!(MEDIA_MANAGER).session_by_id(&id) {
-        let success = session.TryTogglePlayPauseAsync()?.get()?;
+        let success = WindowsApi::wait_for_async(session.TryTogglePlayPauseAsync()?, None)?;
         if !success {
             return Err("failed to toggle play".into());
         }
