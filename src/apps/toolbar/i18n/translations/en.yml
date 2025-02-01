@@ -11,6 +11,52 @@ media:
   master_volume: Master Volume
   output_device: Output device
   players: Media Players
+userhome:
+  profile:
+    lock: Lock computer 
+    accounts: Open account settings
+    open_user_folder: Open user folder
+    open_onedrive: Open OneDrive folder
+  history:
+    title: Application's history
+    local: Local history
+    global: Global history
+    more_items: Show more...
+    reduce_items: Show less...
+  folders:
+    title: User folders
+    more_items: Show more...
+    reduce_items: Show less...
+  recent:
+    title: Recently used files
+  documents:
+    title: Documents' folder
+  downloads:
+    title: Downloads' folder
+  pictures:
+    title: Pictures' folder
+  videos:
+    title: Videos' folder
+  music: 
+    title: Music's folder
+  seelen_options:
+    title: Seelen settings and folders
+    theme: Theme quick settings
+    open_installation_folder: Open Seelen settings folder
+    open_log_folder: Open Seelen log folder
+    settings: Show all settings
+    theme_selector:
+      available: Available
+      selected: Selected
+      author: Author
+      tags: Tags
+      description: Description
+  power:
+    title: Power
+    log_out: Log out from the user
+    sleep: Put the computer into sleep
+    restart: Restart the computer
+    shutdown: Turn off the computer
 network:
   available: Available networks
   connect: Connect

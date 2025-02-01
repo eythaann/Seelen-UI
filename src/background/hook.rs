@@ -1,6 +1,5 @@
 use std::{
     collections::HashMap,
-    path::PathBuf,
     sync::{
         atomic::{AtomicBool, AtomicIsize, Ordering},
         Arc,
@@ -13,7 +12,6 @@ use itertools::Itertools;
 use lazy_static::lazy_static;
 use parking_lot::Mutex;
 use seelen_core::handlers::SeelenEvent;
-use serde::Serialize;
 use tauri::Emitter;
 use windows::Win32::{
     Foundation::HWND,
@@ -29,6 +27,7 @@ use crate::{
     error_handler::Result,
     log_error,
     modules::{
+        application_history::ApplicationHistory,
         input::{domain::Point, Mouse},
         virtual_desk::{get_vd_manager, VirtualDesktopEvent, VirtualDesktopManager},
     },
@@ -43,20 +42,11 @@ use crate::{
 };
 
 lazy_static! {
-    static ref HOOK_MANAGER_SKIPPER: Arc<Mutex<HookManagerSkipper>> = Arc::new(Mutex::new(HookManagerSkipper::default()));
-    // Last active window omitting all the seelen overlays
-    pub static ref LAST_ACTIVE_NOT_SEELEN: AtomicIsize = AtomicIsize::new(WindowsApi::get_foreground_window().0 as _);
+    static ref HOOK_MANAGER_SKIPPER: Arc<Mutex<HookManagerSkipper>> =
+        Arc::new(Mutex::new(HookManagerSkipper::default()));
 }
 
 pub static LOG_WIN_EVENTS: AtomicBool = AtomicBool::new(false);
-
-#[derive(Serialize, Clone)]
-pub struct FocusedApp {
-    hwnd: isize,
-    title: String,
-    name: String,
-    exe: Option<PathBuf>,
-}
 
 #[derive(Debug)]
 pub struct HookManagerSkipperItem {
@@ -164,24 +154,6 @@ impl HookManager {
         }
 
         let window = Window::from(origin);
-        if event == WinEvent::SystemForeground && !window.is_seelen_overlay() {
-            LAST_ACTIVE_NOT_SEELEN.store(origin.0 as _, Ordering::Relaxed);
-        }
-
-        if event == WinEvent::ObjectFocus || event == WinEvent::SystemForeground {
-            log_error!(get_app_handle().emit(
-                SeelenEvent::GlobalFocusChanged,
-                FocusedApp {
-                    hwnd: origin.0 as _,
-                    title: window.title(),
-                    name: window
-                        .app_display_name()
-                        .unwrap_or(String::from("Error on App Name")),
-                    exe: window.process().program_path().ok(),
-                },
-            ));
-        }
-
         let log_error_event = move |name: &str, result: Result<()>| {
             if let Err(err) = result {
                 log::error!(
@@ -193,6 +165,13 @@ impl HookManager {
                 );
             }
         };
+
+        std::thread::spawn(move || {
+            log_error_event(
+                "Application History",
+                ApplicationHistory::process_global_win_event(event, &window),
+            );
+        });
 
         if let VirtualDesktopManager::Seelen(vd) = get_vd_manager().as_ref() {
             log_error_event("Virtual Desk", vd.on_win_event(event, &window));

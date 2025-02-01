@@ -148,3 +148,9 @@ pub fn shutdown() -> Result<()> {
     WindowsApi::exit_windows(EWX_SHUTDOWN, SHTDN_REASON_NONE)?;
     Ok(())
 }
+
+#[tauri::command(async)]
+pub fn lock() -> Result<()> {
+    WindowsApi::lock_machine()?;
+    Ok(())
+}

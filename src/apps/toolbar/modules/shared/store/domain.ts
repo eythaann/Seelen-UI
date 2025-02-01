@@ -1,4 +1,4 @@
-import { FancyToolbarSettings, Placeholder, Plugin, Settings } from '@seelen-ui/lib/types';
+import { ApplicationHistoryEntry, FancyToolbarSettings, File, Placeholder, Plugin, Settings, User } from '@seelen-ui/lib/types';
 import { SoftOpaque } from 'readable-types';
 
 import { WlanBssEntry } from '../../network/domain';
@@ -117,6 +117,13 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   plugins: Plugin[];
 
   isOverlaped: boolean;
+  user: User | null;
+  userRecentFolder: File[];
+  userDocumentsFolder: File[];
+  userDownloadsFolder: File[];
+  userPicturesFolder: File[];
+  userVideosFolder: File[];
+  userMusicFolder: File[];
   focused: FocusedApp | null;
   env: Record<string, string>;
   powerStatus: PowerStatus;
@@ -132,4 +139,6 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   mediaOutputs: MediaDevice[];
   mediaInputs: MediaDevice[];
   notifications: AppNotification[];
+  history: ApplicationHistoryEntry[];
+  historyOnMonitor: ApplicationHistoryEntry[];
 }

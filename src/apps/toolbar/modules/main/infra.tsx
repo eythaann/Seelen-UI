@@ -14,6 +14,7 @@ import { NetworkModule } from '../network/infra/Module';
 import { NotificationsModule } from '../Notifications/infra/Module';
 import { PowerModule } from '../Power/infra';
 import { SettingsModule } from '../Settings/infra';
+import { UserModule } from '../user/infra/Module';
 
 import { RootActions, Selectors } from '../shared/store/app';
 import { SaveToolbarItems } from './application';
@@ -31,6 +32,7 @@ const modulesByType: Record<
 > = {
   [ToolbarItemType.Text]: Item,
   [ToolbarItemType.Generic]: GenericItem,
+  [ToolbarItemType.User]: UserModule,
   [ToolbarItemType.Date]: DateModule,
   [ToolbarItemType.Power]: PowerModule,
   [ToolbarItemType.Settings]: SettingsModule,
