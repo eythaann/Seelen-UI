@@ -71,6 +71,18 @@ export function MainContextMenu() {
             type: 'divider',
           },
           {
+            key: 'reoder',
+            icon: <Icon iconName={!items.isReorderDisabled ? 'VscLock' : 'VscUnlock' } />,
+            label: t(!items.isReorderDisabled ? 'context_menu.reorder_disable' : 'context_menu.reorder_enable' ),
+            onClick() {
+              dispatch(RootActions.setToolbarReorderDisabled(!items.isReorderDisabled));
+              SaveToolbarItems();
+            },
+          },
+          {
+            type: 'divider',
+          },
+          {
             key: 'task_manager',
             icon: <Icon iconName="PiChartLineFill" />,
             label: t('context_menu.task_manager'),

@@ -16,6 +16,7 @@ export const savePinnedItems = debounce(
     };
 
     const data = new WegItems({
+      is_reorder_disabled: state.reorderDisabled,
       left: state.itemsOnLeft.filter(cb),
       center: state.itemsOnCenter.filter(cb),
       right: state.itemsOnRight.filter(cb),

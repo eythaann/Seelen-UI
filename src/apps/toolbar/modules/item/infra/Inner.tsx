@@ -173,6 +173,8 @@ export function InnerItem(props: InnerItemProps) {
   } = props;
   const { template, tooltip, onClick: oldOnClick, onClickV2, style, id, badge } = module;
 
+  const structure = useSelector(Selectors.items);
+
   const [mounted, setMounted] = React.useState(false);
   const env = useSelector(Selectors.env);
 
@@ -226,6 +228,7 @@ export function InnerItem(props: InnerItemProps) {
       <Reorder.Item
         {...rest}
         id={id}
+        drag={!structure.isReorderDisabled}
         value={(module as any).__value__ || module}
         style={style}
         className={cx('ft-bar-item', {

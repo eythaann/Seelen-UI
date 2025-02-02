@@ -110,6 +110,12 @@ export const RootSlice = createSlice({
         state.items.right = state.items.right.filter(filter);
       }
     },
+    setToolbarReorderDisabled(state, action: PayloadAction<boolean>) {
+      let enabled = action.payload;
+      if (state.items) {
+        state.items.isReorderDisabled = enabled;
+      }
+    },
   },
 });
 
