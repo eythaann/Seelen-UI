@@ -112,7 +112,7 @@ function loadSettingsToStore(settings: Settings) {
 }
 
 function loadWegItemsToStore(items: WegItems) {
-  store.dispatch(RootActions.setReorderDisabled(items.inner.is_reorder_disabled));
+  store.dispatch(RootActions.setReorderDisabled(items.inner.isReorderDisabled));
   store.dispatch(RootActions.setItemsOnLeft(items.inner.left));
   store.dispatch(RootActions.setItemsOnCenter(items.inner.center));
   store.dispatch(RootActions.setItemsOnRight(items.inner.right));
