@@ -13,7 +13,6 @@ import { AnimatedPopover } from 'src/apps/shared/components/AnimatedWrappers';
 
 import { Icon } from '../../../../shared/components/Icon';
 import { useWindowFocusChange } from '../../../../shared/hooks';
-import { UserAppHistory } from './UserAppHistory';
 import { UserFolder } from './UserFolder';
 import { UserProfile } from './UserProfile';
 
@@ -75,9 +74,6 @@ function UserHome({}: UserHomeProps) {
       onContextMenu={(e) => e.stopPropagation()}
     >
       {user && <UserProfile user={user} />}
-
-      <hr />
-      <UserAppHistory />
 
       <hr />
       <span className="userhome-label">{t('userhome.folders.title')}</span>

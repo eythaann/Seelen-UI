@@ -1,3 +1,4 @@
+// TODO(lurius): use this file on another module
 import { ResourceMetadata } from '@seelen-ui/lib';
 import { IconPack, Theme } from '@seelen-ui/lib/types';
 import { Checkbox, Tooltip, Transfer } from 'antd';

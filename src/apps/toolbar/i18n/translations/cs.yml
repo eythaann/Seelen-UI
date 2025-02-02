@@ -58,12 +58,6 @@ userhome:
     reduce_items: Zobrazit méně...
     title: Adresáře uživatelů
     videos: Videa
-  history:
-    global: Globální historie
-    local: Místní historie
-    more_items: Zobrazit více...
-    reduce_items: Zobrazit méně...
-    title: Historie aplikace
   profile:
     accounts: Nastavení otevřeného účtu
     open_onedrive: Otevření adresáře OneDrive

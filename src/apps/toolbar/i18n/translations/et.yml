@@ -58,12 +58,6 @@ userhome:
     reduce_items: Näita vähem...
     title: Kasutajate kataloogid
     videos: Videod
-  history:
-    global: Ülemaailmne ajalugu
-    local: Kohalik ajalugu
-    more_items: Näita rohkem...
-    reduce_items: Näita vähem...
-    title: Taotluse ajalugu
   profile:
     accounts: Avatud konto seaded
     open_onedrive: Avage OneDrive'i kataloog

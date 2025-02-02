@@ -58,12 +58,6 @@ userhome:
     reduce_items: कम दिखाओ ...
     title: उपयोगकर्ता निर्देशिकाएँ
     videos: वीडियो
-  history:
-    global: वैश्विक इतिहास
-    local: स्थानीय इतिहास
-    more_items: और दिखाओ ...
-    reduce_items: कम दिखाओ ...
-    title: अनुप्रयोग का इतिहास
   profile:
     accounts: खाता सेटिंग्स खोलें
     open_onedrive: ओपन ऑनड्राइव डायरेक्टरी

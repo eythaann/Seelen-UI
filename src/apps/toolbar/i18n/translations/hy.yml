@@ -58,12 +58,6 @@ userhome:
     reduce_items: Show ույց տալ ավելի քիչ ...
     title: Օգտագործողի դիրեկտորիաներ
     videos: Տեսանյութեր
-  history:
-    global: Համաշխարհային պատմություն
-    local: Տեղական պատմություն
-    more_items: Show ուցադրել ավելին ...
-    reduce_items: Show ույց տալ ավելի քիչ ...
-    title: Դիմումի պատմությունը
   profile:
     accounts: Բաց հաշվի կարգավորումներ
     open_onedrive: Բաց օծանելիքի տեղեկատու

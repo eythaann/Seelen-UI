@@ -58,12 +58,6 @@ userhome:
     reduce_items: عرض أقل...
     title: أدلة المستخدم
     videos: مقاطع الفيديو
-  history:
-    global: التاريخ العالمي
-    local: التاريخ المحلي
-    more_items: اعرض المزيد...
-    reduce_items: عرض أقل...
-    title: تاريخ التطبيق
   profile:
     accounts: فتح إعدادات الحساب
     open_onedrive: فتح دليل OneDrive

@@ -58,12 +58,6 @@ userhome:
     reduce_items: הראה פחות ...
     title: ספריות משתמשים
     videos: סרטונים
-  history:
-    global: היסטוריה גלובלית
-    local: היסטוריה מקומית
-    more_items: הראה עוד ...
-    reduce_items: הראה פחות ...
-    title: ההיסטוריה של היישום
   profile:
     accounts: פתח הגדרות חשבון
     open_onedrive: פתיחת מדריך OneDrive

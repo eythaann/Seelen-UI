@@ -58,12 +58,6 @@ userhome:
     reduce_items: Kamroq ko'rsatish ...
     title: Foydalanuvchi kataloglari
     videos: Videolar
-  history:
-    global: Global tarix
-    local: Mahalliy tarix
-    more_items: Ko'proq ma'lumot ...
-    reduce_items: Kamroq ko'rsatish ...
-    title: Ilova tarixi
   profile:
     accounts: Hisobni ochish sozlamalari
     open_onedrive: OneDriv katalogni oching

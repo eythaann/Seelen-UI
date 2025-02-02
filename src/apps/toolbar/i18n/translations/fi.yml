@@ -58,12 +58,6 @@ userhome:
     reduce_items: Näytä vähemmän...
     title: Käyttäjien hakemistot
     videos: Videot
-  history:
-    global: Maailmanlaajuinen historia
-    local: Paikallinen historia
-    more_items: Näytä lisää...
-    reduce_items: Näytä vähemmän...
-    title: Sovelluksen historia
   profile:
     accounts: Avaa tilin asetukset
     open_onedrive: Avaa OneDrive-hakemisto

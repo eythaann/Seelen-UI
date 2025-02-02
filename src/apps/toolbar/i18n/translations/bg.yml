@@ -58,12 +58,6 @@ userhome:
     reduce_items: Покажи по-малко...
     title: Потребителски директории
     videos: Видеоклипове
-  history:
-    global: Глобална история
-    local: Местна история
-    more_items: Покажи повече...
-    reduce_items: Покажи по-малко...
-    title: История на приложението
   profile:
     accounts: Настройки на отворената сметка
     open_onedrive: Отворете директорията на OneDrive

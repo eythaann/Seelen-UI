@@ -58,12 +58,6 @@ userhome:
     reduce_items: Прикажи мање ...
     title: Корисничке именике
     videos: Видеос
-  history:
-    global: Глобална историја
-    local: Локална историја
-    more_items: Прикажи више ...
-    reduce_items: Прикажи мање ...
-    title: Историја апликације
   profile:
     accounts: Подешавања отвореног налога
     open_onedrive: Отворено ОнеДриве именик

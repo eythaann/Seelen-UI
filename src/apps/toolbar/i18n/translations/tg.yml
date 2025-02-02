@@ -58,12 +58,6 @@ userhome:
     reduce_items: Нишон диҳед ...
     title: Директорҳои корбар
     videos: Видео
-  history:
-    global: Таърихи глобалӣ
-    local: Таърихи маҳаллӣ
-    more_items: Мӯҳтарам ...
-    reduce_items: Нишон диҳед ...
-    title: Таърихи барнома
   profile:
     accounts: Танзимоти ҳисоб
     open_onedrive: Кушодани директорияи Ondrive

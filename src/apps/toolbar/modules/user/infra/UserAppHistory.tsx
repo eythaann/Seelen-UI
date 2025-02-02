@@ -1,3 +1,4 @@
+// TODO(lurius): use this file on another module
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { ApplicationHistoryEntry } from '@seelen-ui/lib/types';
 import { convertFileSrc } from '@tauri-apps/api/core';

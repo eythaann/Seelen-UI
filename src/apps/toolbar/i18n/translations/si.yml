@@ -58,12 +58,6 @@ userhome:
     reduce_items: අඩුවෙන් පෙන්වන්න ...
     title: පරිශීලක නාමාවලි
     videos: වීඩියෝ
-  history:
-    global: ගෝලීය ඉතිහාසය
-    local: දේශීය ඉතිහාසය
-    more_items: තවත් පෙන්වන්න ...
-    reduce_items: අඩුවෙන් පෙන්වන්න ...
-    title: යෙදුම් ඉතිහාසය
   profile:
     accounts: ගිණුම් සැකසුම් විවෘත කරන්න
     open_onedrive: OneDrive ඩිරෙක්ටරියක් විවෘත කරන්න

@@ -58,12 +58,6 @@ userhome:
     reduce_items: Εμφάνιση λιγότερων...
     title: Κατάλογοι χρηστών
     videos: Βίντεο
-  history:
-    global: Παγκόσμια ιστορία
-    local: Τοπική ιστορία
-    more_items: Περισσότερα...
-    reduce_items: Εμφάνιση λιγότερων...
-    title: Ιστορικό της εφαρμογής
   profile:
     accounts: Ρυθμίσεις ανοίγματος λογαριασμού
     open_onedrive: Ανοίξτε τον κατάλογο OneDrive

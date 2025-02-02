@@ -58,12 +58,6 @@ userhome:
     reduce_items: Sýna minna ...
     title: Notendaskrár
     videos: Myndbönd
-  history:
-    global: Alheimssaga
-    local: Sveitarfélagssaga
-    more_items: Sýndu meira ...
-    reduce_items: Sýna minna ...
-    title: Saga umsóknar
   profile:
     accounts: Opna reikningsstillingar
     open_onedrive: Opna OneDrive skrá

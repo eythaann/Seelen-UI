@@ -58,12 +58,6 @@ userhome:
     reduce_items: Minder tonen...
     title: Gebruikersmappen
     videos: Video's
-  history:
-    global: Wereldwijde geschiedenis
-    local: Lokale geschiedenis
-    more_items: Toon meer...
-    reduce_items: Minder tonen...
-    title: Geschiedenis van de toepassing
   profile:
     accounts: Instellingen account openen
     open_onedrive: Map OneDrive openen

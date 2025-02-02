@@ -58,12 +58,6 @@ userhome:
     reduce_items: აჩვენე ნაკლები ...
     title: მომხმარებლის დირექტორიები
     videos: ვიდეო
-  history:
-    global: გლობალური ისტორია
-    local: ადგილობრივი ისტორია
-    more_items: მეტი აჩვენე ...
-    reduce_items: აჩვენე ნაკლები ...
-    title: განაცხადის ისტორია
   profile:
     accounts: ღია ანგარიშის პარამეტრები
     open_onedrive: გახსენით OneDrive დირექტორია

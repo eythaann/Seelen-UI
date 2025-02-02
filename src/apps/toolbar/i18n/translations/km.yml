@@ -58,12 +58,6 @@ userhome:
     reduce_items: បង្ហាញតិច ...
     title: ថតអ្នកប្រើ
     videos: វីឌីអូ
-  history:
-    global: ប្រវត្តិសាស្ត្រសកល
-    local: ប្រវត្តិសាស្ត្រក្នុងតំបន់
-    more_items: បង្ហាញបន្ថែមទៀត ...
-    reduce_items: បង្ហាញតិច ...
-    title: ប្រវត្តិរបស់កម្មវិធី
   profile:
     accounts: បើកការកំណត់គណនី
     open_onedrive: បើកថត OdeDrive

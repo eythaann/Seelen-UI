@@ -58,12 +58,6 @@ userhome:
     reduce_items: 显示更少...
     title: 用户目录
     videos: 视频
-  history:
-    global: 全球历史
-    local: 当地历史
-    more_items: 显示更多...
-    reduce_items: 显示更少...
-    title: 申请历史
   profile:
     accounts: 打开账户设置
     open_onedrive: 打开 OneDrive 目录
