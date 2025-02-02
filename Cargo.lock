@@ -4779,7 +4779,7 @@ checksum = "1c107b6f4780854c8b126e228ea8869f4d7b71260f962fefb57b996b8959ba6b"
 [[package]]
 name = "seelen-core"
 version = "1.9.7"
-source = "git+https://github.com/Seelen-Inc/slu-lib.git#998139facb1cd07b2e6119e911e93ab28598fabe"
+source = "git+https://github.com/Seelen-Inc/slu-lib.git#10fbb223f00c023a59f5536922a376e212d14ec6"
 dependencies = [
  "base64 0.22.1",
  "grass",
