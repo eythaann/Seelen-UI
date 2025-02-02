@@ -20,6 +20,7 @@
 - unremovable workspace module on toolbar.
 - missing system tray icons.
 - date not being inmediately updated on settings change.
+- ghost notification hitbox preventing mouse events on windows.
 
 ## [2.0.14]
 ### hotfix

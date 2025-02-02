@@ -3,8 +3,6 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
-
 import { Selectors } from '../../shared/store/app';
 import { useTimeout } from 'src/apps/shared/hooks';
 
@@ -51,15 +49,12 @@ export function ArrivalPreview() {
   }, [notifications]);
 
   return (
-    <BackgroundByLayersV2
-      className="notification-arrival"
-      onContextMenu={(e) => e.stopPropagation()}
-    >
+    <div className="notification-arrival" onContextMenu={(e) => e.stopPropagation()}>
       <AnimatePresence>
         {currentNotificationPreviewSet.map((notification) => (
           <Notification key={notification.id} notification={notification} />
         ))}
       </AnimatePresence>
-    </BackgroundByLayersV2>
+    </div>
   );
 }
