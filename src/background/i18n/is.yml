@@ -10,3 +10,7 @@ service:
   not_running: Seelen UI þjónusta er ekki í gangi
   not_running_description: Seelen UI Service (slu-þjónusta) er háð/hjálp til að appið virki rétt.
   not_running_ok: Byrjaðu þjónustu
+tray:
+  quit: Hættu
+  restart: Endurræstu UI
+  settings: Stillingar

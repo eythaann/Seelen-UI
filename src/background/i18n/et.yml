@@ -12,3 +12,7 @@ service:
     Seeleni kasutajaliidese teenus (slu-teenus) on rakenduse nõuetekohaseks
     tööks sõltuvus/abimees.
   not_running_ok: Käivitage teenus
+tray:
+  quit: Lõpeta
+  restart: UI taaskäivitamine
+  settings: Seaded

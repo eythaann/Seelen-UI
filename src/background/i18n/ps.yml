@@ -12,3 +12,7 @@ service:
     د سیلین UI خدمت (slu-service) د ایپ لپاره د سم کار کولو لپاره انحصار / مرسته
     کونکی دی.
   not_running_ok: خدمت پیل کړئ
+tray:
+  quit: پرېښودل
+  restart: زه له سره بیا پیلوم
+  settings: امستنې

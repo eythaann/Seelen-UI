@@ -12,3 +12,7 @@ service:
     Seelen UI Xidməti (slu-xidmət) tətbiqin düzgün işləməsi üçün
     asılılıq/köməkçidir.
   not_running_ok: Xidmətə başlayın
+tray:
+  quit: Çıxmaq
+  restart: UI-ni yenidən başladın
+  settings: Parametrlər

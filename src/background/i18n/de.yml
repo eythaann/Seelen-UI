@@ -14,3 +14,7 @@ service:
     Der Seelen UI Service (slu-service) ist eine Abhängigkeit/Helfer für die
     ordnungsgemäße Funktion der App.
   not_running_ok: Dienst starten
+tray:
+  quit: Beenden Sie
+  restart: UI neu starten
+  settings: Einstellungen

@@ -12,3 +12,7 @@ service:
     Perkhidmatan UI Seelen (perkhidmatan slu) ialah kebergantungan/pembantu
     untuk apl berfungsi dengan betul.
   not_running_ok: Mulakan perkhidmatan
+tray:
+  quit: Berhenti
+  restart: Mulakan semula ui
+  settings: Tetapan

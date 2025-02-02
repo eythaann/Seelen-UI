@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-Service) ass eng Ofhängegkeet / Helfer fir d'App
     richteg ze schaffen.
   not_running_ok: Start Service
+tray:
+  quit: Ness
+  restart: Restart ui
+  settings: Astellunge

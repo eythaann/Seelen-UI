@@ -14,3 +14,7 @@ service:
     Seelen UI Service (slu-service) — це залежність/помічник для належної роботи
     програми.
   not_running_ok: Запустити службу
+tray:
+  quit: Звільнися.
+  restart: Перезапустити інтерфейс
+  settings: Налаштування

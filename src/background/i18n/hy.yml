@@ -12,3 +12,7 @@ service:
     Seelen UI Service-ը (slu-service) կախվածություն/օգնական է հավելվածի ճիշտ
     աշխատանքի համար:
   not_running_ok: Սկսեք ծառայությունը
+tray:
+  quit: Թողնել
+  restart: Վերագործարկեք UI- ն
+  settings: Կարգավորումներ

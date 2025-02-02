@@ -12,3 +12,7 @@ service:
     Seelen UI සේවාව (slu-service) යනු යෙදුම නිසියාකාරව ක්‍රියා කිරීමට
     යැපුම්/උපකාරකයකි.
   not_running_ok: සේවාව ආරම්භ කරන්න
+tray:
+  quit: ඉවත්ව යන්න
+  restart: UI නැවත ආරම්භ කරන්න
+  settings: සැකසුම්
