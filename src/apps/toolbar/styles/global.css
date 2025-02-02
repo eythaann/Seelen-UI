@@ -200,20 +200,4 @@ body {
       flex: 1;
     }
   }
-
-  .fast-settings-power {
-    display: flex;
-    gap: 6px;
-
-    > .fast-settings-item-button {
-      flex: 1;
-    }
-  }
-
-  .fast-settings-item-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 12px;
-  }
 }

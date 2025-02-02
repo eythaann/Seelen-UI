@@ -214,7 +214,6 @@ impl FancyToolbar {
         .skip_taskbar(true)
         .always_on_top(true)
         .build()?;
-
         window.set_ignore_cursor_events(true)?;
         window.listen("store-events-ready", Self::on_store_events_ready);
         Ok(window)

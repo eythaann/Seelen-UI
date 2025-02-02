@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: İnternetə giriş yoxdur
   notifications: Bildirişlər
   open_system_tray: Açıq Sistem Tepsisi
-  open_user_folder: İstifadəçi qovluğu açın
   settings: Tez Parametrlər
   smart_charge: '- Ağıllı yük'
   volume: Həcm
 settings:
   app_settings: Tətbiq parametrləri
   brightness: Parlaqlıq
+  lock: Qıfıllamaq
   log_out: Çıxış
   power: Güc
   restart: Yenidən başlamaq
@@ -45,3 +45,30 @@ settings:
   sleep: Yatmaq
   title: Parametrlər
 unlabelled_tray: Qeyri-çapsız tepsik nişanı
+userhome:
+  empty_list: Nəhəng
+  folders:
+    desktop: Masaüstü
+    documents: Sənədləşdirmək
+    downloads: Yüklər
+    more_items: Daha çox göstər ...
+    music: Musiqi
+    pictures: Şəkillər
+    recent: Yaxınlarda istifadə olunur
+    reduce_items: Daha az göstər ...
+    title: İstifadəçi qovluqları
+    videos: Videonlar
+  history:
+    global: Qlobal tarix
+    local: Yerli tarix
+    more_items: Daha çox göstər ...
+    reduce_items: Daha az göstər ...
+    title: Tətbiq tarixi
+  profile:
+    accounts: Açıq hesab parametrləri
+    open_onedrive: Açıq OneDrive Kataloqu
+    open_user_folder: Açıq İstifadəçi Kataloqu
+  seelen_options:
+    open_installation_folder: SEELEN Parametrləri qovluğu açın
+    open_log_folder: Seelen Giriş Qovluqunu açın
+    title: Seelen qovluqları

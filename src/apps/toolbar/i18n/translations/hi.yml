@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: इंटरनेट की सुविधा नहीं है
   notifications: अधिसूचना
   open_system_tray: खुला तंत्र ट्रे
-  open_user_folder: उपयोगकर्ता फ़ोल्डर खोलें
   settings: त्वरित सेटिंग
   smart_charge: '- स्मार्ट चार्ज'
   volume: आयतन
 settings:
   app_settings: एप्लिकेशन सेटिंग
   brightness: चमक
+  lock: ताला
   log_out: लॉग आउट
   power: शक्ति
   restart: पुनः आरंभ करें
@@ -45,3 +45,30 @@ settings:
   sleep: नींद
   title: समायोजन
 unlabelled_tray: अनबेल्ड ट्रे आइकन
+userhome:
+  empty_list: कोई आइटम नहीं
+  folders:
+    desktop: डेस्कटॉप
+    documents: दस्तावेज़
+    downloads: डाउनलोड
+    more_items: और दिखाओ ...
+    music: संगीत
+    pictures: चित्र
+    recent: हाल ही में इस्तेमाल किया
+    reduce_items: कम दिखाओ ...
+    title: उपयोगकर्ता निर्देशिकाएँ
+    videos: वीडियो
+  history:
+    global: वैश्विक इतिहास
+    local: स्थानीय इतिहास
+    more_items: और दिखाओ ...
+    reduce_items: कम दिखाओ ...
+    title: अनुप्रयोग का इतिहास
+  profile:
+    accounts: खाता सेटिंग्स खोलें
+    open_onedrive: ओपन ऑनड्राइव डायरेक्टरी
+    open_user_folder: उपयोगकर्ता निर्देशिका खोलें
+  seelen_options:
+    open_installation_folder: सेलेन सेटिंग्स फ़ोल्डर खोलें
+    open_log_folder: सेलेन लॉग फ़ोल्डर खोलें
+    title: सीलेन निर्देशिकाएँ

@@ -119,6 +119,7 @@ export interface RootState extends IRootState<FancyToolbarSettings>, Pick<Settin
   isOverlaped: boolean;
   user: User | null;
   userRecentFolder: File[];
+  userDesktopFolder: File[];
   userDocumentsFolder: File[];
   userDownloadsFolder: File[];
   userPicturesFolder: File[];

@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Дастрасии Интернет надорад
   notifications: Огоҳиҳо
   open_system_tray: Пойгоҳи системаро кушоед
-  open_user_folder: Папкаи корбарро кушоед
   settings: Танзимоти фаврӣ
   smart_charge: '- СПАЛ'
   volume: Баланд
 settings:
   app_settings: Танзимоти барнома
   brightness: Равшанӣ
+  lock: Пайваст кардан
   log_out: Баромадан
   power: Нерӯ
   restart: Оғози дубора
@@ -45,3 +45,30 @@ settings:
   sleep: Хоб
   title: Танзимот
 unlabelled_tray: Тасвири табақаи ғайриқонунӣ
+userhome:
+  empty_list: Ҳеҷ чиз нест
+  folders:
+    desktop: Мизи корӣ
+    documents: Ҳуҷҷатҳо
+    downloads: Боргириҳо
+    more_items: Мӯҳтарам ...
+    music: Мусиқӣ
+    pictures: Тасвирҳо
+    recent: Ба наздикӣ истифода бурд
+    reduce_items: Нишон диҳед ...
+    title: Директорҳои корбар
+    videos: Видео
+  history:
+    global: Таърихи глобалӣ
+    local: Таърихи маҳаллӣ
+    more_items: Мӯҳтарам ...
+    reduce_items: Нишон диҳед ...
+    title: Таърихи барнома
+  profile:
+    accounts: Танзимоти ҳисоб
+    open_onedrive: Кушодани директорияи Ondrive
+    open_user_folder: Феҳристи кушодаи корбар
+  seelen_options:
+    open_installation_folder: Папкаи танзимоти Senelenро кушоед
+    open_log_folder: Папкаи сабти Seelen кушоед
+    title: Директори Селен

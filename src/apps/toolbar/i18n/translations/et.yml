@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Interneti -ühendus pole
   notifications: Teatised
   open_system_tray: Avatud süsteemialus
-  open_user_folder: Avage kasutaja kaust
   settings: Kiired seaded
   smart_charge: '- Nutikas tasu'
   volume: Maht
 settings:
   app_settings: Rakenduse sätted
   brightness: Heledus
+  lock: Lock
   log_out: Logi välja
   power: Võimsus
   restart: Taaskäivita
@@ -45,3 +45,30 @@ settings:
   sleep: Magama
   title: Sätted
 unlabelled_tray: Märgistamata salveikoon
+userhome:
+  empty_list: Puuduvad esemed
+  folders:
+    desktop: Töölauaarvuti
+    documents: Dokumendid
+    downloads: Allalaadimine
+    more_items: Näita rohkem...
+    music: Muusika
+    pictures: Pildid
+    recent: Hiljuti kasutatud
+    reduce_items: Näita vähem...
+    title: Kasutajate kataloogid
+    videos: Videod
+  history:
+    global: Ülemaailmne ajalugu
+    local: Kohalik ajalugu
+    more_items: Näita rohkem...
+    reduce_items: Näita vähem...
+    title: Taotluse ajalugu
+  profile:
+    accounts: Avatud konto seaded
+    open_onedrive: Avage OneDrive'i kataloog
+    open_user_folder: Avatud kasutajakataloog
+  seelen_options:
+    open_installation_folder: Avage Seeleni seadete kaust
+    open_log_folder: Avage Seelen logi kaust
+    title: Seelen kataloogid

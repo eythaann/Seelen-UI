@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: ਕੋਈ ਇੰਟਰਨੈੱਟ ਪਹੁੰਚ ਨਹੀਂ
   notifications: ਸੂਚਨਾਵਾਂ
   open_system_tray: ਸਿਸਟਮ ਟਰੇ ਖੋਲ੍ਹੋ
-  open_user_folder: ਓਪਨ ਯੂਜ਼ਰ ਫੋਲਡਰ
   settings: ਤੇਜ਼ ਸੈਟਿੰਗ
   smart_charge: '- ਸਮਾਰਟ ਚਾਰਜ'
   volume: ਵਾਲੀਅਮ
 settings:
   app_settings: ਐਪ ਸੈਟਿੰਗਾਂ
   brightness: ਚਮਕ
+  lock: ਲਾਕ
   log_out: ਲਾੱਗ ਆਊਟ, ਬਾਹਰ ਆਉਣਾ
   power: ਸ਼ਕਤੀ
   restart: ਰੀਸਟਾਰਟ
@@ -45,3 +45,30 @@ settings:
   sleep: ਨੀਂਦ
   title: ਸੈਟਿੰਗਜ਼
 unlabelled_tray: ਬਿਨਾਲੇ ਟਰੇ ਆਈਕਨ
+userhome:
+  empty_list: ਕੋਈ ਚੀਜ਼ਾਂ ਨਹੀਂ
+  folders:
+    desktop: ਡੈਸਕਟਾਪ
+    documents: ਦਸਤਾਵੇਜ਼
+    downloads: ਡਾਉਨਲੋਡਸ
+    more_items: ਹੋਰ ਦਿਖਾਓ ...
+    music: ਸੰਗੀਤ
+    pictures: ਤਸਵੀਰਾਂ
+    recent: ਹਾਲ ਹੀ ਵਿੱਚ ਵਰਤਿਆ ਗਿਆ
+    reduce_items: ਘੱਟ ਦਿਖਾਓ ...
+    title: ਉਪਭੋਗਤਾ ਡਾਇਰੈਕਟਰੀਆਂ
+    videos: ਵੀਡੀਓ
+  history:
+    global: ਵਿਸ਼ਵਵਿਆਪੀ ਇਤਿਹਾਸ
+    local: ਸਥਾਨਕ ਇਤਿਹਾਸ
+    more_items: ਹੋਰ ਦਿਖਾਓ ...
+    reduce_items: ਘੱਟ ਦਿਖਾਓ ...
+    title: ਅਰਜ਼ੀ ਦਾ ਇਤਿਹਾਸ
+  profile:
+    accounts: ਖਾਤਾ ਸੈਟਿੰਗਜ਼ ਖੋਲ੍ਹੋ
+    open_onedrive: ਵਨਡਰਿਵ ਡਾਇਰੈਕਟਰੀ ਖੋਲ੍ਹੋ
+    open_user_folder: ਓਪਨ ਯੂਜ਼ਰ ਡਾਇਰੈਕਟਰੀ
+  seelen_options:
+    open_installation_folder: ਖੁੱਲੇ ਵੇਖੇ ਗਏ ਸੈਟਿੰਗ ਫੋਲਡਰ
+    open_log_folder: ਖੁੱਲੇ ਬੁਣੇ ਲਾਗ ਫੋਲਡਰ
+    title: ਧਾਰਨਾ

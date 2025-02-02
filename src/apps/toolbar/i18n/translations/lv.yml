@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Nav piekļuves internetam
   notifications: Paziņojumi
   open_system_tray: Atvērtā sistēmas paplāte
-  open_user_folder: Atveriet lietotāja mapi
   settings: Ātrie iestatījumi
   smart_charge: '- Viedā maksa'
   volume: Tilpums
 settings:
   app_settings: Lietotņu iestatījumi
   brightness: Spilgtums
+  lock: Bloķēt
   log_out: Izlogoties
   power: Spēks
   restart: Restartēt
@@ -45,3 +45,30 @@ settings:
   sleep: Gulēt
   title: Iestatījumi
 unlabelled_tray: Neiezīmēta paplātes ikona
+userhome:
+  empty_list: Nav vienību
+  folders:
+    desktop: Darbvirsmas
+    documents: Dokumenti
+    downloads: Lejupielādes
+    more_items: Rādīt vairāk...
+    music: Mūzika
+    pictures: Attēli
+    recent: Nesen izmantots
+    reduce_items: Rādīt mazāk...
+    title: Lietotāju direktoriji
+    videos: Videoklipi
+  history:
+    global: Pasaules vēsture
+    local: Vietējā vēsture
+    more_items: Rādīt vairāk...
+    reduce_items: Rādīt mazāk...
+    title: Pieteikuma vēsture
+  profile:
+    accounts: Atvērt konta iestatījumus
+    open_onedrive: Atveriet OneDrive direktoriju
+    open_user_folder: Atvērt lietotāja direktoriju
+  seelen_options:
+    open_installation_folder: Atveriet Seelen iestatījumu mapi
+    open_log_folder: Atveriet Seelen log mapi
+    title: Seelen katalogi

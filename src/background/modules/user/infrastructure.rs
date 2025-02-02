@@ -30,7 +30,7 @@ pub fn register_user_events() {
             log_error!(get_app_handle().emit(
                 SeelenEvent::UserFolderChanged,
                 FolderChangedArgs {
-                    of_folder: folder.clone(),
+                    of_folder: folder,
                     content: get_user_folder_content(folder).ok(),
                 }
             ));

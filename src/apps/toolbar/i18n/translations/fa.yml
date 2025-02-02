@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: بدون دسترسی به اینترنت
   notifications: اطلاعیه
   open_system_tray: سینی سیستم باز
-  open_user_folder: پوشه کاربر را باز کنید
   settings: تنظیمات سریع
   smart_charge: '- شارژ هوشمند'
   volume: جلد
 settings:
   app_settings: تنظیمات برنامه
   brightness: روشنایی
+  lock: قفل
   log_out: خروج
   power: قدرت
   restart: مجدداً
@@ -45,3 +45,30 @@ settings:
   sleep: خواب
   title: تنظیمات
 unlabelled_tray: نماد سینی بدون نام
+userhome:
+  empty_list: هیچ موردی
+  folders:
+    desktop: دسکتاپ
+    documents: اسناد
+    downloads: بارگیری
+    more_items: نمایش بیشتر ...
+    music: موسیقی
+    pictures: عکس
+    recent: اخیراً استفاده شده است
+    reduce_items: کمتر نشان دهید ...
+    title: دایرکتوری های کاربر
+    videos: فیلم
+  history:
+    global: تاریخ جهانی
+    local: تاریخ محلی
+    more_items: نمایش بیشتر ...
+    reduce_items: کمتر نشان دهید ...
+    title: تاریخچه برنامه
+  profile:
+    accounts: تنظیمات حساب باز
+    open_onedrive: دایرکتوری OneDrive را باز کنید
+    open_user_folder: فهرست کاربر را باز کنید
+  seelen_options:
+    open_installation_folder: پوشه تنظیمات Seelen را باز کنید
+    open_log_folder: پوشه ورود به سیستم Seelen را باز کنید
+    title: دایرکتوری های Seelen

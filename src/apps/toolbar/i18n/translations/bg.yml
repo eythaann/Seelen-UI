@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Няма достъп до интернет
   notifications: Известия
   open_system_tray: Отворена система табла
-  open_user_folder: Отворете потребителската папка
   settings: Бързи настройки
   smart_charge: '- Smart Charge'
   volume: Сила на звука
 settings:
   app_settings: Настройки на приложението
   brightness: Яркост
+  lock: Заключване
   log_out: Излез от профила си
   power: Мощност
   restart: Рестартирам
@@ -45,3 +45,30 @@ settings:
   sleep: Сън
   title: Настройки
 unlabelled_tray: Необичана икона на таблата
+userhome:
+  empty_list: Няма артикули
+  folders:
+    desktop: Настолен компютър
+    documents: Документи
+    downloads: Изтегляне
+    more_items: Покажи повече...
+    music: Музика
+    pictures: Снимки
+    recent: Наскоро използван
+    reduce_items: Покажи по-малко...
+    title: Потребителски директории
+    videos: Видеоклипове
+  history:
+    global: Глобална история
+    local: Местна история
+    more_items: Покажи повече...
+    reduce_items: Покажи по-малко...
+    title: История на приложението
+  profile:
+    accounts: Настройки на отворената сметка
+    open_onedrive: Отворете директорията на OneDrive
+    open_user_folder: Отваряне на потребителската директория
+  seelen_options:
+    open_installation_folder: Отворете папката с настройки на Seelen
+    open_log_folder: Отворете папката Seelen log
+    title: Директории Seelen

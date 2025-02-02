@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Hakuna ufikiaji wa mtandao
   notifications: Arifa
   open_system_tray: Tray ya mfumo wazi
-  open_user_folder: Fungua folda ya Mtumiaji
   settings: Mipangilio ya haraka
   smart_charge: '- Smart Charge'
   volume: Kiasi
 settings:
   app_settings: Mipangilio ya programu
   brightness: Mwangaza
+  lock: Funga
   log_out: Ingia nje
   power: Nguvu
   restart: Anzisha tena
@@ -45,3 +45,30 @@ settings:
   sleep: Kulala
   title: Mipangilio
 unlabelled_tray: Icon isiyo na msingi ya tray
+userhome:
+  empty_list: Hakuna vitu
+  folders:
+    desktop: Desktop
+    documents: Hati
+    downloads: Upakuaji
+    more_items: Onyesha zaidi ...
+    music: Muziki
+    pictures: Picha
+    recent: Imetumika hivi karibuni
+    reduce_items: Onyesha kidogo ...
+    title: Saraka za watumiaji
+    videos: Video
+  history:
+    global: Historia ya Ulimwenguni
+    local: Historia ya Mitaa
+    more_items: Onyesha zaidi ...
+    reduce_items: Onyesha kidogo ...
+    title: Historia ya Maombi
+  profile:
+    accounts: Fungua mipangilio ya akaunti
+    open_onedrive: Fungua saraka ya OneDrive
+    open_user_folder: Saraka ya Mtumiaji Fungua
+  seelen_options:
+    open_installation_folder: Fungua folda ya Mipangilio ya Seelen
+    open_log_folder: Fungua folda ya logi ya Seelen
+    title: Saraka za Seelen

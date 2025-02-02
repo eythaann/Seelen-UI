@@ -21,16 +21,18 @@ export function FilePreview({ file }: FilePreviewProps) {
   const icon = useIcon({ path: file.path });
 
   return (
-    <Tooltip
-      mouseLeaveDelay={0}
-      arrow={false}
-      title={file.path}
-      placement="right"
-    >
-      <li className="userhome-folder-content-item" onClick={() => invoke(SeelenCommand.OpenFile, { path: file.path })}>
-        <img className="userhome-folder-content-item-icon" src={icon || LAZY_CONSTANTS.MISSING_ICON_PATH} />
-        <div className="userhome-folder-content-item-title">{file.path.substring(file.path.lastIndexOf('\\') + 1)}</div>
-        <div className="userhome-folder-content-item-date" >{moment(WindowsDateFileTimeToDate(file.lastAccessTime)).fromNow()}</div>
+    <Tooltip mouseLeaveDelay={0} arrow={false} title={file.path} placement="right">
+      <li
+        className="userhome-file"
+        onClick={() => invoke(SeelenCommand.SelectFileOnExplorer, { path: file.path })}
+      >
+        <img className="userhome-file-icon" src={icon || LAZY_CONSTANTS.MISSING_ICON_PATH} />
+        <div className="userhome-file-label">
+          {file.path.substring(file.path.lastIndexOf('\\') + 1)}
+        </div>
+        <div className="userhome-file-date">
+          {moment(WindowsDateFileTimeToDate(file.lastAccessTime)).fromNow()}
+        </div>
       </li>
     </Tooltip>
   );

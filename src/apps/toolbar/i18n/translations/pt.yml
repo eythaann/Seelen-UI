@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Sem acesso à internet
   notifications: Notificações
   open_system_tray: Abra a bandeja do sistema
-  open_user_folder: Abra a pasta do usuário
   settings: Configurações rápidas
   smart_charge: '- Carga Inteligente'
   volume: Volume
 settings:
   app_settings: Configurações do aplicativo
   brightness: Brilho
+  lock: Trancar
   log_out: Sair
   power: Energia
   restart: Reiniciar
@@ -45,3 +45,30 @@ settings:
   sleep: Dormir
   title: Configurações
 unlabelled_tray: Ícone de bandeja não marcada
+userhome:
+  empty_list: Sem itens
+  folders:
+    desktop: Desktop
+    documents: Documentos
+    downloads: Downloads
+    more_items: Mostre mais ...
+    music: Música
+    pictures: Fotos
+    recent: Usado recentemente
+    reduce_items: Mostrar menos ...
+    title: Diretórios de usuário
+    videos: Vídeos
+  history:
+    global: História global
+    local: História local
+    more_items: Mostre mais ...
+    reduce_items: Mostrar menos ...
+    title: História do aplicativo
+  profile:
+    accounts: Abra as configurações da conta
+    open_onedrive: Open OneDrive Directory
+    open_user_folder: Diretório de usuário aberto
+  seelen_options:
+    open_installation_folder: Pasta de configurações de Seelen abra Seelen
+    open_log_folder: Pasta de log de Seelen aberta
+    title: Diretórios de Seelen

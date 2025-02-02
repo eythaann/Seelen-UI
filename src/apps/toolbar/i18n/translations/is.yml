@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Enginn internetaðgangur
   notifications: Tilkynningar
   open_system_tray: Opinn kerfisbakki
-  open_user_folder: Opna notendamöppu
   settings: Fljótar stillingar
   smart_charge: '- Snjall hleðsla'
   volume: Bindi
 settings:
   app_settings: Forritastillingar
   brightness: Birtustig
+  lock: Læstu
   log_out: Að skrá þig út
   power: Máttur
   restart: Endurræsa
@@ -45,3 +45,30 @@ settings:
   sleep: Sofðu
   title: Stillingar
 unlabelled_tray: Ómerkt bakkatákn
+userhome:
+  empty_list: Engir hlutir
+  folders:
+    desktop: Skrifborð
+    documents: Skjöl
+    downloads: Niðurhal
+    more_items: Sýndu meira ...
+    music: Tónlist
+    pictures: Myndir
+    recent: Nýlega notað
+    reduce_items: Sýna minna ...
+    title: Notendaskrár
+    videos: Myndbönd
+  history:
+    global: Alheimssaga
+    local: Sveitarfélagssaga
+    more_items: Sýndu meira ...
+    reduce_items: Sýna minna ...
+    title: Saga umsóknar
+  profile:
+    accounts: Opna reikningsstillingar
+    open_onedrive: Opna OneDrive skrá
+    open_user_folder: Opna notendaskrá
+  seelen_options:
+    open_installation_folder: Opnaðu Seelen Stillingar möppu
+    open_log_folder: Opnaðu Seelen Log möppu
+    title: Seelen möppur

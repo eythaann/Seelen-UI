@@ -64,8 +64,10 @@ export class StateBuilder {
     selfSelector: any = (self: any) => self,
   ): SelectorFor2<T> {
     for (const key in obj) {
+      if (key in selfSelector) {
+        continue;
+      }
       selfSelector[key] = (state: any) => selfSelector(state)[key];
-
       if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
         selfSelector[key] = StateBuilder.compositeSelector(obj[key], selfSelector[key]);
       }

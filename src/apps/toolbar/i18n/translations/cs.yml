@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Žádný přístup k internetu
   notifications: Oznámení
   open_system_tray: Otevřený systémový zásobník
-  open_user_folder: Otevřená složka uživatele
   settings: Rychlé nastavení
   smart_charge: '- Chytrý poplatek'
   volume: Hlasitost
 settings:
   app_settings: Nastavení aplikace
   brightness: Jas
+  lock: Zámek
   log_out: Odhlásit se
   power: Moc
   restart: Restart
@@ -45,3 +45,30 @@ settings:
   sleep: Spát
   title: Nastavení
 unlabelled_tray: Ikona neznačené podnosy
+userhome:
+  empty_list: Žádné položky
+  folders:
+    desktop: Stolní počítač
+    documents: Dokumenty
+    downloads: Ke stažení na
+    more_items: Zobrazit více...
+    music: Hudba
+    pictures: Obrázky
+    recent: Nedávno použité
+    reduce_items: Zobrazit méně...
+    title: Adresáře uživatelů
+    videos: Videa
+  history:
+    global: Globální historie
+    local: Místní historie
+    more_items: Zobrazit více...
+    reduce_items: Zobrazit méně...
+    title: Historie aplikace
+  profile:
+    accounts: Nastavení otevřeného účtu
+    open_onedrive: Otevření adresáře OneDrive
+    open_user_folder: Otevření uživatelského adresáře
+  seelen_options:
+    open_installation_folder: Otevřete složku nastavení Seelen
+    open_log_folder: Otevřete složku protokolu Seelen
+    title: Adresáře Seelen

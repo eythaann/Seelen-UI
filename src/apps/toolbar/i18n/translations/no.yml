@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Ingen internettilgang
   notifications: Varsler
   open_system_tray: Åpent systembrett
-  open_user_folder: Åpne brukermappe
   settings: Raske innstillinger
   smart_charge: '- Smart kostnad'
   volume: Volum
 settings:
   app_settings: Appinnstillinger
   brightness: Lysstyrke
+  lock: Låse
   log_out: Logg ut
   power: Makt
   restart: Omstart
@@ -45,3 +45,30 @@ settings:
   sleep: Sove
   title: Innstillinger
 unlabelled_tray: Umerket brettikon
+userhome:
+  empty_list: Ingen ting
+  folders:
+    desktop: Skrivebord
+    documents: Dokumenter
+    downloads: Nedlastinger
+    more_items: Vis mer ...
+    music: Musikk
+    pictures: Bilder
+    recent: Nylig brukt
+    reduce_items: Vis mindre ...
+    title: Brukerkataloger
+    videos: Videoer
+  history:
+    global: Global historie
+    local: Lokal historie
+    more_items: Vis mer ...
+    reduce_items: Vis mindre ...
+    title: Applikasjonens historie
+  profile:
+    accounts: Åpne kontoinnstillinger
+    open_onedrive: Åpne OneDrive -katalogen
+    open_user_folder: Åpen brukerkatalog
+  seelen_options:
+    open_installation_folder: Åpne Seelen -innstillingsmappen
+    open_log_folder: Åpne Seelen -loggmappe
+    title: Seelen -kataloger

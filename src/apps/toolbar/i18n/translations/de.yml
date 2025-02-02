@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Kein Internetzugang
   notifications: Benachrichtigungen
   open_system_tray: Systemleiste öffnen
-  open_user_folder: Benutzerordner öffnen
   settings: Schnelleinstellungen
   smart_charge: ' - Intelligentes Laden'
   volume: Lautstärke
 settings:
   app_settings: App-Einstellungen
   brightness: Helligkeit
+  lock: Schloss
   log_out: Abmelden
   power: Leistung
   restart: Neustarten
@@ -45,3 +45,30 @@ settings:
   sleep: Ruhezustand
   title: Einstellungen
 unlabelled_tray: Entlebte Tablettikone
+userhome:
+  empty_list: Keine Artikel
+  folders:
+    desktop: Schreibtisch
+    documents: Dokumente
+    downloads: Herunterladen
+    more_items: Mehr anzeigen...
+    music: Musik
+    pictures: Bilder
+    recent: Kürzlich verwendet
+    reduce_items: Weniger anzeigen...
+    title: Benutzerverzeichnisse
+    videos: Videos
+  history:
+    global: Globale Geschichte
+    local: Lokale Geschichte
+    more_items: Mehr anzeigen...
+    reduce_items: Weniger anzeigen...
+    title: Geschichte der Anwendung
+  profile:
+    accounts: Kontoeinstellungen öffnen
+    open_onedrive: OneDrive-Verzeichnis öffnen
+    open_user_folder: Benutzerverzeichnis öffnen
+  seelen_options:
+    open_installation_folder: Öffnen Sie den Ordner Seelen-Einstellungen
+    open_log_folder: Seelen-Log-Ordner öffnen
+    title: Seelenverzeichnisse

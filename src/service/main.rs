@@ -19,7 +19,7 @@ use logger::SluServiceLogger;
 use std::process::Command;
 use string_utils::WindowsString;
 use task_scheduler::TaskSchedulerHelper;
-use windows::Win32::Security::SE_TCB_NAME;
+use windows::Win32::{Security::SE_TCB_NAME, UI::WindowsAndMessaging::SW_MINIMIZE};
 use windows_api::WindowsApi;
 
 lazy_static! {
@@ -121,8 +121,10 @@ fn is_already_runnning() -> bool {
 }
 
 fn main() -> Result<()> {
+    if is_local_dev() {
+        WindowsApi::show_window(WindowsApi::get_console_window().0 as _, SW_MINIMIZE.0)?;
+    }
     handle_cli()?;
-
     if is_already_runnning() {
         return Ok(());
     }

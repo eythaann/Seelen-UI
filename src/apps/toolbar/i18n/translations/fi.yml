@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Ei Internet-yhteyttä
   notifications: Ilmoitukset
   open_system_tray: Avoin järjestelmälokero
-  open_user_folder: Avaa käyttäjäkansio
   settings: Pika -asetukset
   smart_charge: '- Älykäs maksu'
   volume: Tilavuus
 settings:
   app_settings: Sovellusasetukset
   brightness: Kirkkaus
+  lock: Lukitus
   log_out: Kirjautua ulos
   power: Voima
   restart: Uudelleenkäynnistää
@@ -45,3 +45,30 @@ settings:
   sleep: Nukkua
   title: asetukset
 unlabelled_tray: Leimaton lokerokuvake
+userhome:
+  empty_list: Ei kohteita
+  folders:
+    desktop: Työpöytä
+    documents: Asiakirjat
+    downloads: Lataukset
+    more_items: Näytä lisää...
+    music: Musiikki
+    pictures: Kuvat
+    recent: Hiljattain käytetty
+    reduce_items: Näytä vähemmän...
+    title: Käyttäjien hakemistot
+    videos: Videot
+  history:
+    global: Maailmanlaajuinen historia
+    local: Paikallinen historia
+    more_items: Näytä lisää...
+    reduce_items: Näytä vähemmän...
+    title: Sovelluksen historia
+  profile:
+    accounts: Avaa tilin asetukset
+    open_onedrive: Avaa OneDrive-hakemisto
+    open_user_folder: Avaa käyttäjähakemisto
+  seelen_options:
+    open_installation_folder: Avaa Seelen-asetuskansio
+    open_log_folder: Avaa Seelen log-kansio
+    title: Seelen hakemistot

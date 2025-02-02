@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Ոչ մի ինտերնետ մուտք չկա
   notifications: Ծանուցումներ
   open_system_tray: Բաց համակարգի սկուտեղ
-  open_user_folder: Բաց օգտագործողի թղթապանակ
   settings: Արագ պարամետրեր
   smart_charge: '- Խելացի վճար'
   volume: Ծավալ
 settings:
   app_settings: Ծրագրի կարգավորումներ
   brightness: Պայծառություն
+  lock: Կողպել
   log_out: Դուրս գալ
   power: Հզորություն
   restart: Վերսկսել
@@ -45,3 +45,30 @@ settings:
   sleep: Քնել
   title: Կարգավորումներ
 unlabelled_tray: Unlabelled Tray Icon
+userhome:
+  empty_list: Ոչ մի առարկա
+  folders:
+    desktop: Աշխատասեղան
+    documents: Փաստաթղթեր
+    downloads: Ներլցումներ
+    more_items: Show ուցադրել ավելին ...
+    music: Երաժշտություն
+    pictures: Նկարներ
+    recent: Վերջերս օգտագործված
+    reduce_items: Show ույց տալ ավելի քիչ ...
+    title: Օգտագործողի դիրեկտորիաներ
+    videos: Տեսանյութեր
+  history:
+    global: Համաշխարհային պատմություն
+    local: Տեղական պատմություն
+    more_items: Show ուցադրել ավելին ...
+    reduce_items: Show ույց տալ ավելի քիչ ...
+    title: Դիմումի պատմությունը
+  profile:
+    accounts: Բաց հաշվի կարգավորումներ
+    open_onedrive: Բաց օծանելիքի տեղեկատու
+    open_user_folder: Բաց օգտվողի գրացուցակ
+  seelen_options:
+    open_installation_folder: Բացեք Seelen- ի պարամետրերի պանակ
+    open_log_folder: Բացեք seelen log թղթապանակ
+    title: Seelen դիրեկտորիաներ

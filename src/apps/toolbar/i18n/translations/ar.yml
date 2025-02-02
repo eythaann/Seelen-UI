@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: لا يوجد اتصال بالإنترنت
   notifications: الإشعارات
   open_system_tray: افتح ايقونات النظام
-  open_user_folder: افتح مجلد المستخدم
   settings: الإعدادات السريعة
   smart_charge: '- الشحن الذكي'
   volume: الصوت
 settings:
   app_settings: إعدادات التطبيقات
   brightness: السطوع
+  lock: القفل
   log_out: تسجيل خروج
   power: الطاقة
   restart: إعادة التشغيل
@@ -45,3 +45,30 @@ settings:
   sleep: النوم
   title: إعدادات
 unlabelled_tray: أيقونة غير مسماة
+userhome:
+  empty_list: لا توجد عناصر
+  folders:
+    desktop: سطح المكتب
+    documents: المستندات
+    downloads: التنزيلات
+    more_items: اعرض المزيد...
+    music: الموسيقى
+    pictures: الصور
+    recent: استُخدمت مؤخراً
+    reduce_items: عرض أقل...
+    title: أدلة المستخدم
+    videos: مقاطع الفيديو
+  history:
+    global: التاريخ العالمي
+    local: التاريخ المحلي
+    more_items: اعرض المزيد...
+    reduce_items: عرض أقل...
+    title: تاريخ التطبيق
+  profile:
+    accounts: فتح إعدادات الحساب
+    open_onedrive: فتح دليل OneDrive
+    open_user_folder: فتح دليل المستخدم
+  seelen_options:
+    open_installation_folder: افتح مجلد إعدادات سيلين
+    open_log_folder: افتح مجلد سجل سيلين
+    title: دلائل سيلين

@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Brak dostępu do internetu
   notifications: Powiadomienia
   open_system_tray: Otwórz tacę systemową
-  open_user_folder: Otwórz folder użytkownika
   settings: Szybkie ustawienia
   smart_charge: '- Inteligentny ładunek'
   volume: Tom
 settings:
   app_settings: Ustawienia aplikacji
   brightness: Jasność
+  lock: Blokada
   log_out: Wyloguj
   power: Moc
   restart: Uruchom ponownie
@@ -45,3 +45,30 @@ settings:
   sleep: Spać
   title: Ustawienia
 unlabelled_tray: Ikona nieznakowanej tacki
+userhome:
+  empty_list: Brak przedmiotów
+  folders:
+    desktop: Pulpit
+    documents: Dokumenty
+    downloads: Pliki do pobrania
+    more_items: Pokaż więcej...
+    music: Muzyka
+    pictures: Zdjęcia
+    recent: Ostatnio używane
+    reduce_items: Pokaż mniej...
+    title: Katalogi użytkowników
+    videos: Filmy
+  history:
+    global: Historia globalna
+    local: Historia lokalna
+    more_items: Pokaż więcej...
+    reduce_items: Pokaż mniej...
+    title: Historia aplikacji
+  profile:
+    accounts: Ustawienia otwartego konta
+    open_onedrive: Otwórz katalog OneDrive
+    open_user_folder: Otwórz katalog użytkownika
+  seelen_options:
+    open_installation_folder: Otwórz folder ustawień Seelen
+    open_log_folder: Otwórz folder dziennika Seelen
+    title: Katalogi Seelen

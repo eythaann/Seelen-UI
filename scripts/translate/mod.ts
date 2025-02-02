@@ -56,10 +56,11 @@ function deepSortObject<T>(obj: T): T {
 }
 
 async function translateObject(base: any, lang: string, mut_obj: any, translator: Translator) {
-  for (const [key, value] of Object.entries(base)) {
+  const promises = Object.entries(base).map(async ([key, value]) => {
     if (typeof value === 'object') {
       mut_obj[key] ??= {};
       await translateObject(value, lang, mut_obj[key], translator);
+      return;
     }
     // avoid modifying already translated values
     if (typeof value === 'string' && !mut_obj[key]) {
@@ -80,7 +81,8 @@ async function translateObject(base: any, lang: string, mut_obj: any, translator
         mut_obj[key] = res.text;
       }
     }
-  }
+  });
+  await Promise.all(promises);
   // remove obsolete keys
   for (const key in mut_obj) {
     if (!base[key]) {

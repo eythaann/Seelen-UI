@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: 无法访问互联网
   notifications: 通知
   open_system_tray: 打开系统托盘
-  open_user_folder: 打开用户文件夹
   settings: 快速设置
   smart_charge: ' - 智能充电'
   volume: 音量
 settings:
   app_settings: 应用设置
   brightness: 亮度
+  lock: 锁
   log_out: 注销
   power: 电源
   restart: 重启
@@ -45,3 +45,30 @@ settings:
   sleep: 睡眠
   title: 设置
 unlabelled_tray: 未标记的托盘图标
+userhome:
+  empty_list: 无项目
+  folders:
+    desktop: 台式机
+    documents: 文件
+    downloads: 下载
+    more_items: 显示更多...
+    music: 音乐
+    pictures: 图片
+    recent: 最近使用
+    reduce_items: 显示更少...
+    title: 用户目录
+    videos: 视频
+  history:
+    global: 全球历史
+    local: 当地历史
+    more_items: 显示更多...
+    reduce_items: 显示更少...
+    title: 申请历史
+  profile:
+    accounts: 打开账户设置
+    open_onedrive: 打开 OneDrive 目录
+    open_user_folder: 打开用户目录
+  seelen_options:
+    open_installation_folder: 打开 Seelen 设置文件夹
+    open_log_folder: 打开 Seelen 日志文件夹
+    title: Seelen 目录

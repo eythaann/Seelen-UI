@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: L-ebda aċċess għall-internet
   notifications: Notifiki
   open_system_tray: Tray tas-Sistema Miftuħa
-  open_user_folder: Folder tal-utent miftuħ
   settings: Settings ta 'malajr
   smart_charge: '- ħlas intelliġenti'
   volume: Volum
 settings:
   app_settings: Settings tal-App
   brightness: Luminożità
+  lock: Lock
   log_out: Oħroġ
   power: Qawwa
   restart: Erġa ibda
@@ -45,3 +45,30 @@ settings:
   sleep: Irqad
   title: Settings
 unlabelled_tray: Ikona tat-trej mhux immarkata
+userhome:
+  empty_list: L-ebda oġġetti
+  folders:
+    desktop: Desktop
+    documents: Dokumenti
+    downloads: Downloads
+    more_items: Uri aktar ...
+    music: Mużika
+    pictures: Stampi
+    recent: Reċentement użat
+    reduce_items: Uri inqas ...
+    title: Direttorji tal-utent
+    videos: Vidjows
+  history:
+    global: Storja Globali
+    local: Storja lokali
+    more_items: Uri aktar ...
+    reduce_items: Uri inqas ...
+    title: L-istorja tal-applikazzjoni
+  profile:
+    accounts: Settings tal-kont miftuħ
+    open_onedrive: Open OneDrive Directory
+    open_user_folder: Direttorju tal-Utent miftuħ
+  seelen_options:
+    open_installation_folder: Iftaħ il-folder tas-settings Seelen
+    open_log_folder: Iftaħ Seelen Log Folder
+    title: Direttorji Seelen

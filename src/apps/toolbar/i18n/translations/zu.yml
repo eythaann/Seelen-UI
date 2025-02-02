@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Akukho ukufinyelela kwe-inthanethi
   notifications: Izaziso
   open_system_tray: I-Open System Tray
-  open_user_folder: Vula ifolda yomsebenzisi
   settings: Izilungiselelo ezisheshayo
   smart_charge: '- Ukushaja okuhle'
   volume: Ukuvimbanisa
 settings:
   app_settings: Izilungiselelo zohlelo lokusebenza
   brightness: Ukugqama
+  lock: Khiya hluthulela
   log_out: Phuma
   power: Ubuqhwaga
   restart: Qalanisa
@@ -45,3 +45,30 @@ settings:
   sleep: Ukulala
   title: Amasethingi
 unlabelled_tray: Isithonjana se-tray esingafundile
+userhome:
+  empty_list: Azikho izinto
+  folders:
+    desktop: Desktop
+    documents: Amadokhumenti
+    downloads: Ukulanda
+    more_items: Khombisa okuningi ...
+    music: Umculo
+    pictures: Isithombe
+    recent: Isanda kusetshenziswa
+    reduce_items: Khombisa okuncane ...
+    title: Izincwajanazo Zomsebenzisi
+    videos: Vigenanapho
+  history:
+    global: Umlando Womhlaba Wonke
+    local: Umlando wendawo
+    more_items: Khombisa okuningi ...
+    reduce_items: Khombisa okuncane ...
+    title: Umlando wohlelo lokusebenza
+  profile:
+    accounts: Vula Izilungiselelo ze-Akhawunti
+    open_onedrive: Vula umkhombandlela we-OneDrive
+    open_user_folder: Vula umkhombandlela womsebenzisi
+  seelen_options:
+    open_installation_folder: Vula ifolda yezilungiselelo ze-Seelen Izilungiselelo
+    open_log_folder: Vula ifolda ye-weelen log
+    title: Izincwajana zeSeben

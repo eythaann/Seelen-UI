@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Ingen internetuppkoppling
   notifications: Meddelanden
   open_system_tray: Öppet system
-  open_user_folder: Öppen användarmapp
   settings: Snabbinställningar
   smart_charge: '- Smart laddning'
   volume: Volym
 settings:
   app_settings: App inställningar
   brightness: Ljusstyrka
+  lock: Lås
   log_out: Logga ut
   power: Driva
   restart: Omstart
@@ -45,3 +45,30 @@ settings:
   sleep: Sova
   title: inställningar
 unlabelled_tray: Omärkta fackikon
+userhome:
+  empty_list: Inga föremål
+  folders:
+    desktop: Skrivbord
+    documents: Dokument
+    downloads: Nedladdningar
+    more_items: Visa mer...
+    music: Musik
+    pictures: Bilder
+    recent: Nyligen använt
+    reduce_items: Visa mindre...
+    title: Användarkataloger
+    videos: Videor
+  history:
+    global: Global historia
+    local: Lokal historia
+    more_items: Visa mer...
+    reduce_items: Visa mindre...
+    title: Applikationens historia
+  profile:
+    accounts: Öppna kontoinställningar
+    open_onedrive: Öppna OneDrive-katalogen
+    open_user_folder: Öppna användarkatalogen
+  seelen_options:
+    open_installation_folder: Öppna Seelens inställningsmapp
+    open_log_folder: Öppna Seelen loggmapp
+    title: Seelen kataloger

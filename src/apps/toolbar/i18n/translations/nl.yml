@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Geen toegang tot het internet
   notifications: Meldingen
   open_system_tray: Open systeemlade
-  open_user_folder: Open de gebruikersmap
   settings: Snelle instellingen
   smart_charge: ' - Slimme lading'
   volume: Volume
 settings:
   app_settings: App instellingen
   brightness: Helderheid
+  lock: Slot
   log_out: Uitloggen
   power: Energie
   restart: Herstarten
@@ -45,3 +45,30 @@ settings:
   sleep: Slaap
   title: Instellingen
 unlabelled_tray: Niet-gelabeld systeemvakpictogram
+userhome:
+  empty_list: Geen items
+  folders:
+    desktop: Desktop
+    documents: Documenten
+    downloads: Downloads
+    more_items: Toon meer...
+    music: Muziek
+    pictures: Foto's
+    recent: Onlangs gebruikt
+    reduce_items: Minder tonen...
+    title: Gebruikersmappen
+    videos: Video's
+  history:
+    global: Wereldwijde geschiedenis
+    local: Lokale geschiedenis
+    more_items: Toon meer...
+    reduce_items: Minder tonen...
+    title: Geschiedenis van de toepassing
+  profile:
+    accounts: Instellingen account openen
+    open_onedrive: Map OneDrive openen
+    open_user_folder: Gebruikersmap openen
+  seelen_options:
+    open_installation_folder: Open de instellingenmap van Seelen
+    open_log_folder: Open logboekmap Seelen
+    title: Seelen mappen

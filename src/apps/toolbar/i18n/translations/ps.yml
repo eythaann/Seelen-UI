@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: هیڅ انټرنیټ لاسرسی
   notifications: خبرتیاوې
   open_system_tray: د خلاص سیسټم ټری
-  open_user_folder: د کارونکي فولډر خلاص کړئ
   settings: ګړندي امستنې
   smart_charge: '- سمارټ چارج'
   volume: حجم
 settings:
   app_settings: د ایپ امستنې
   brightness: روښانه کول
+  lock: لاک
   log_out: وتل
   power: ځواک
   restart: بیا روښانه کول
@@ -45,3 +45,30 @@ settings:
   sleep: ویده شه
   title: امستنې
 unlabelled_tray: بې بنسټه ټری عکس
+userhome:
+  empty_list: هیڅ توکي نشته
+  folders:
+    desktop: ډیسټاپ
+    documents: لاسوندونه
+    downloads: کښته کوونې
+    more_items: نور وښایاست ...
+    music: میوزک
+    pictures: انځورونه
+    recent: پدې وروستیو کې کارول شوی
+    reduce_items: لږ وښایاست ...
+    title: د کارونکي عمومي لارښود
+    videos: ویډیوګانې
+  history:
+    global: نړیوال تاریخ
+    local: ځایی تاریخ
+    more_items: نور وښایاست ...
+    reduce_items: لږ وښایاست ...
+    title: د غوښتنلیک تاریخ
+  profile:
+    accounts: د حساب خلاصول
+    open_onedrive: یوډول ډایرکټر خلاص کړئ
+    open_user_folder: د کارونکي لارښود
+  seelen_options:
+    open_installation_folder: د خلاصې املیز فولډر خلاص کړئ
+    open_log_folder: د
+    title: د

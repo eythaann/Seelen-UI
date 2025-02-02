@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Jokios interneto prieigos
   notifications: Pranešimai
   open_system_tray: Atviras sistemos dėklas
-  open_user_folder: Atidaryti vartotojo aplanką
   settings: Greiti nustatymai
   smart_charge: '- Išmanus mokestis'
   volume: Apimtis
 settings:
   app_settings: Programos nustatymai
   brightness: Ryškumas
+  lock: Užraktas
   log_out: Atsijungti
   power: Galia
   restart: Perkrauti
@@ -45,3 +45,30 @@ settings:
   sleep: Miegas
   title: Nustatymai
 unlabelled_tray: Nepaženklinta dėklo piktograma
+userhome:
+  empty_list: Jokių daiktų
+  folders:
+    desktop: Stalinis kompiuteris
+    documents: Dokumentai
+    downloads: Atsisiuntimai
+    more_items: Rodyti daugiau...
+    music: Muzika
+    pictures: Nuotraukos
+    recent: Neseniai naudotas
+    reduce_items: Rodyti mažiau...
+    title: Naudotojų katalogai
+    videos: Vaizdo įrašai
+  history:
+    global: Pasaulinė istorija
+    local: Vietos istorija
+    more_items: Rodyti daugiau...
+    reduce_items: Rodyti mažiau...
+    title: Programos istorija
+  profile:
+    accounts: Atidarytos paskyros nustatymai
+    open_onedrive: Atidarykite "OneDrive" katalogą
+    open_user_folder: Atidarykite naudotojo katalogą
+  seelen_options:
+    open_installation_folder: Atidarykite "Seelen" nustatymų aplanką
+    open_log_folder: Atidarykite "Seelen" žurnalo aplanką
+    title: Seelen katalogai

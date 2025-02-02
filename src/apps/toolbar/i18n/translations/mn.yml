@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Интернэтэд нэвтрэх боломжгүй байна
   notifications: Мэдэгдэл
   open_system_tray: Нээлттэй системийн тавиур
-  open_user_folder: Хэрэглэгчийн чиглэлд
   settings: Түлэлцэн тохиргоо
   smart_charge: '- ухаалаг цэнэг'
   volume: Хэмжээ
 settings:
   app_settings: Дуулахын тохиргоо
   brightness: Тод
+  lock: Түгжих
   log_out: Гарах
   power: Хүч чадал
   restart: Дахин ачааллах
@@ -45,3 +45,30 @@ settings:
   sleep: Нойр
   title: Тохиргоо
 unlabelled_tray: Unlabelled Tray дүрс
+userhome:
+  empty_list: Зүйл байхгүй
+  folders:
+    desktop: Явган худлаа
+    documents: Дч дүрэм
+    downloads: Татаж авах
+    more_items: Илүү ихийг харуулах ...
+    music: Хөгжим
+    pictures: Зураг
+    recent: Саяхан ашигласан
+    reduce_items: Бага харуулах ...
+    title: Хэрэглэгчийн газар
+    videos: Видео бичлэг
+  history:
+    global: Бүх түүх
+    local: Орон нутгийн түүх
+    more_items: Илүү ихийг харуулах ...
+    reduce_items: Бага харуулах ...
+    title: Програмын түүх
+  profile:
+    accounts: Дансны тохиргоог нээх
+    open_onedrive: OnedRive директорыг нээх
+    open_user_folder: Хэрэглэгчийн нэрийг нээх
+  seelen_options:
+    open_installation_folder: Seelen Тохиргоо хавтсыг нээнэ үү
+    open_log_folder: Seelen Log хавтасыг нээнэ үү
+    title: Seeln директорууд

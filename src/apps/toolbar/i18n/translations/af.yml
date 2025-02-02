@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Geen internettoegang nie
   notifications: Kennisgewings
   open_system_tray: Oop stelselbak
-  open_user_folder: Open gebruikersmap
   settings: Vinnige instellings
   smart_charge: '- Slim lading'
   volume: Volume
 settings:
   app_settings: Appinstellings
   brightness: Helderheid
+  lock: Slot
   log_out: Teken uit
   power: Mag
   restart: Begin oor
@@ -45,3 +45,30 @@ settings:
   sleep: Slaap
   title: Instellings
 unlabelled_tray: Ongeslote skinkbord -ikoon
+userhome:
+  empty_list: Geen items nie
+  folders:
+    desktop: Tafelblad
+    documents: Dokumente
+    downloads: Aflaai
+    more_items: Wys meer ...
+    music: Musiek
+    pictures: Foto's
+    recent: Onlangs gebruik
+    reduce_items: Wys minder ...
+    title: Gebruikersgidse
+    videos: Video's
+  history:
+    global: Globale geskiedenis
+    local: Plaaslike geskiedenis
+    more_items: Wys meer ...
+    reduce_items: Wys minder ...
+    title: Toepassing se geskiedenis
+  profile:
+    accounts: Open rekeninginstellings
+    open_onedrive: Oop OneDrive Directory
+    open_user_folder: Open gebruikersgids
+  seelen_options:
+    open_installation_folder: Open Seelen Instellings -lêergids
+    open_log_folder: Maak Seelen Log -lêergids oop
+    title: Seelen Gidse

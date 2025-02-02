@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: ఇంటర్నెట్ సదుపాయం లేదు
   notifications: నోటిఫికేషన్‌లు
   open_system_tray: ఓపెన్ సిస్టమ్ ట్రే
-  open_user_folder: ఓపెన్ యూజర్ ఫోల్డర్
   settings: శీఘ్ర సెట్టింగులు
   smart_charge: '- స్మార్ట్ ఛార్జ్'
   volume: వాల్యూమ్
 settings:
   app_settings: అనువర్తన సెట్టింగులు
   brightness: ప్రకాశం
+  lock: లాక్
   log_out: లాగ్ అవుట్
   power: శక్తి
   restart: పున art ప్రారంభం
@@ -45,3 +45,30 @@ settings:
   sleep: నిద్ర
   title: సెట్టింగులు
 unlabelled_tray: లేబుల్ చేయని ట్రే చిహ్నం
+userhome:
+  empty_list: అంశాలు లేవు
+  folders:
+    desktop: డెస్క్‌టాప్
+    documents: పత్రాలు
+    downloads: డౌన్‌లోడ్‌లు
+    more_items: మరింత చూపించు ...
+    music: సంగీతం
+    pictures: చిత్రాలు
+    recent: ఇటీవల ఉపయోగించబడింది
+    reduce_items: తక్కువ చూపించు ...
+    title: వినియోగదారు డైరెక్టరీలు
+    videos: వీడియోలు
+  history:
+    global: గ్లోబల్ హిస్టరీ
+    local: స్థానిక చరిత్ర
+    more_items: మరింత చూపించు ...
+    reduce_items: తక్కువ చూపించు ...
+    title: అప్లికేషన్ చరిత్ర
+  profile:
+    accounts: ఖాతా సెట్టింగులను తెరవండి
+    open_onedrive: వన్‌డ్రైవ్ డైరెక్టరీని తెరవండి
+    open_user_folder: ఓపెన్ యూజర్ డైరెక్టరీ
+  seelen_options:
+    open_installation_folder: సీలెన్ సెట్టింగుల ఫోల్డర్‌ను తెరవండి
+    open_log_folder: సీలెన్ లాగ్ ఫోల్డర్ తెరవండి
+    title: సీలెన్ డైరెక్టరీలు

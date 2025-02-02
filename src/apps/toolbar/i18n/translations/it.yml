@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Nessun accesso a Internet
   notifications: Notifiche
   open_system_tray: Apri System Tray
-  open_user_folder: Apri Cartella Utente
   settings: Impostazioni Rapide
   smart_charge: ' - Carica Intelligente'
   volume: Volume
 settings:
   app_settings: Impostazioni App
   brightness: Luminosità
+  lock: Blocco
   log_out: Esci
   power: Alimentazione
   restart: Riavvia
@@ -45,3 +45,30 @@ settings:
   sleep: Sospendi
   title: Impostazioni
 unlabelled_tray: Icona di Tray senza etichetta
+userhome:
+  empty_list: Nessun articolo
+  folders:
+    desktop: Desktop
+    documents: Documenti
+    downloads: Download
+    more_items: Mostra di più...
+    music: Musica
+    pictures: Immagini
+    recent: Utilizzato di recente
+    reduce_items: Mostra meno...
+    title: Directory utenti
+    videos: Video
+  history:
+    global: Storia globale
+    local: Storia locale
+    more_items: Mostra di più...
+    reduce_items: Mostra meno...
+    title: Storia dell'applicazione
+  profile:
+    accounts: Impostazioni del conto aperto
+    open_onedrive: Aprire la directory OneDrive
+    open_user_folder: Aprire la directory utente
+  seelen_options:
+    open_installation_folder: Aprire la cartella delle impostazioni di Seelen
+    open_log_folder: Aprire la cartella di log di Seelen
+    title: Elenchi di Seelen

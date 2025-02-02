@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: ایتھر نیٹ ڈسکنیکٹ
   notifications: اطلاعات
   open_system_tray: اوپن سسٹم ٹرے
-  open_user_folder: صارف فولڈر کھولیں
   settings: سیٹٹنگ
   smart_charge: '- سمارٹ چارج'
   volume: والیم
 settings:
   app_settings: ایپ کی ترتیبات
   brightness: چمک
+  lock: لاک
   log_out: لاگ آوٹ
   power: پاور
   restart: ریسٹارٹ
@@ -45,3 +45,30 @@ settings:
   sleep: سلیپ
   title: عنوان
 unlabelled_tray: غیر لیبلڈ ٹرے آئیکن
+userhome:
+  empty_list: کوئی اشیاء نہیں
+  folders:
+    desktop: ڈیسک ٹاپ
+    documents: دستاویزات
+    downloads: ڈاؤن لوڈ
+    more_items: مزید دکھائیں ...
+    music: موسیقی
+    pictures: تصاویر
+    recent: حال ہی میں استعمال ہوا
+    reduce_items: کم دکھائیں ...
+    title: صارف ڈائریکٹریز
+    videos: ویڈیوز
+  history:
+    global: عالمی تاریخ
+    local: مقامی تاریخ
+    more_items: مزید دکھائیں ...
+    reduce_items: کم دکھائیں ...
+    title: درخواست کی تاریخ
+  profile:
+    accounts: اکاؤنٹ کی ترتیبات کھولیں
+    open_onedrive: اوپن ریو ڈائرکٹری کھولیں
+    open_user_folder: صارف کی ڈائرکٹری کھولیں
+  seelen_options:
+    open_installation_folder: سیلن کی ترتیبات کا فولڈر کھولیں
+    open_log_folder: سیلن لاگ فولڈر کھولیں
+    title: سیلن ڈائریکٹریز

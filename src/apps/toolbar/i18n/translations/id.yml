@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Tidak ada akses internet
   notifications: Pemberitahuan
   open_system_tray: Baki sistem terbuka
-  open_user_folder: Buka folder pengguna
   settings: Pengaturan Cepat
   smart_charge: '- Biaya Cerdas'
   volume: Volume
 settings:
   app_settings: Pengaturan aplikasi
   brightness: Kecerahan
+  lock: Mengunci
   log_out: Keluar
   power: Kekuatan
   restart: Mengulang kembali
@@ -45,3 +45,30 @@ settings:
   sleep: Tidur
   title: Pengaturan
 unlabelled_tray: Ikon baki tanpa label
+userhome:
+  empty_list: Tidak ada item
+  folders:
+    desktop: Desktop
+    documents: Dokumen
+    downloads: Unduhan
+    more_items: Tampilkan lebih banyak...
+    music: Musik
+    pictures: Gambar
+    recent: Baru-baru ini digunakan
+    reduce_items: Tampilkan lebih sedikit...
+    title: Direktori pengguna
+    videos: Video
+  history:
+    global: Sejarah global
+    local: Sejarah lokal
+    more_items: Tampilkan lebih banyak...
+    reduce_items: Tampilkan lebih sedikit...
+    title: Riwayat aplikasi
+  profile:
+    accounts: Buka pengaturan akun
+    open_onedrive: Buka direktori OneDrive
+    open_user_folder: Buka direktori pengguna
+  seelen_options:
+    open_installation_folder: Buka folder pengaturan Seelen
+    open_log_folder: Buka folder log Seelen
+    title: Direktori Seelen

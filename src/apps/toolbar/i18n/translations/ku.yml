@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Ne gihîştina înternetê
   notifications: Notifications
   open_system_tray: Tray pergala vekirî
-  open_user_folder: Peldanka Bikarhêner vekirî
   settings: Mîhengên Bilez
   smart_charge: '- heqê harm'
   volume: Bend
 settings:
   app_settings: Mîhengên App
   brightness: Biriqîn
+  lock: Qesr
   log_out: Derkeve
   power: Erk
   restart: Destpêkirin
@@ -45,3 +45,30 @@ settings:
   sleep: Xew
   title: Mîhengan
 unlabelled_tray: Îkonê tray a bêpergal
+userhome:
+  empty_list: Tiştek tune
+  folders:
+    desktop: Desktop
+    documents: Belge
+    downloads: Daxistin
+    more_items: Zêdetir ...
+    music: Mûzîk
+    pictures: Wêneyên wêne
+    recent: Herî dawî bikar anîn
+    reduce_items: Kêmtir nîşan bide ...
+    title: Rêbernameyên bikarhêner
+    videos: Videos
+  history:
+    global: Dîroka gerdûnî
+    local: Dîroka Herêmî
+    more_items: Zêdetir ...
+    reduce_items: Kêmtir nîşan bide ...
+    title: Dîroka Serlêdanê
+  profile:
+    accounts: Mîhengên hesabê vekin
+    open_onedrive: Peldanka OneDrive vekirî
+    open_user_folder: Peldanka Bikarhêner veke
+  seelen_options:
+    open_installation_folder: Peldanka Mîhengên Seelen vekin
+    open_log_folder: Peldanka Log Seelen Open
+    title: Derhênerên Derveyî

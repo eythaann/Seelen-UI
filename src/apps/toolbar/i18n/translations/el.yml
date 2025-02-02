@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Χωρίς πρόσβαση στο Διαδίκτυο
   notifications: Ειδοποιήσεις
   open_system_tray: Ανοίξτε το δίσκο του συστήματος
-  open_user_folder: Ανοίξτε το φάκελο χρήστη
   settings: Γρήγορες ρυθμίσεις
   smart_charge: '- έξυπνη χρέωση'
   volume: Ενταση ΗΧΟΥ
 settings:
   app_settings: Ρυθμίσεις εφαρμογής
   brightness: Φωτεινότητα
+  lock: Κλείδωμα
   log_out: Αποσύνδεση
   power: Εξουσία
   restart: Επανεκκίνηση
@@ -45,3 +45,30 @@ settings:
   sleep: Υπνος
   title: Ρυθμίσεις
 unlabelled_tray: Εικονίδιο δίσκων χωρίς
+userhome:
+  empty_list: Δεν υπάρχουν αντικείμενα
+  folders:
+    desktop: Επιτραπέζια επιφάνεια εργασίας
+    documents: Έγγραφα
+    downloads: Λήψεις
+    more_items: Περισσότερα...
+    music: Μουσική
+    pictures: Εικόνες
+    recent: Χρησιμοποιήθηκε πρόσφατα
+    reduce_items: Εμφάνιση λιγότερων...
+    title: Κατάλογοι χρηστών
+    videos: Βίντεο
+  history:
+    global: Παγκόσμια ιστορία
+    local: Τοπική ιστορία
+    more_items: Περισσότερα...
+    reduce_items: Εμφάνιση λιγότερων...
+    title: Ιστορικό της εφαρμογής
+  profile:
+    accounts: Ρυθμίσεις ανοίγματος λογαριασμού
+    open_onedrive: Ανοίξτε τον κατάλογο OneDrive
+    open_user_folder: Άνοιγμα καταλόγου χρήστη
+  seelen_options:
+    open_installation_folder: Ανοίξτε το φάκελο ρυθμίσεων Seelen
+    open_log_folder: Ανοίξτε το φάκελο Seelen log
+    title: Κατάλογοι Seelen

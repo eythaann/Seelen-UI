@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: İnternet erişimi yok
   notifications: Bildirimler
   open_system_tray: Sistem Tepsisini Aç
-  open_user_folder: Kullanıcı Klasörünü Aç
   settings: Hızlı Ayarlar
   smart_charge: '- Akıllı şarj'
   volume: Ses
 settings:
   app_settings: Uygulama Ayarları
   brightness: Parlaklık
+  lock: Kilit
   log_out: Çıkış Yap
   power: Güç
   restart: Yeniden başlat
@@ -45,3 +45,30 @@ settings:
   sleep: Uyku
   title: Ayarlar
 unlabelled_tray: Etiketlenmemiş Tepsi Simgesi
+userhome:
+  empty_list: Ürün yok
+  folders:
+    desktop: Masaüstü
+    documents: Belgeler
+    downloads: İndirmeler
+    more_items: Daha fazlasını göster...
+    music: Müzik
+    pictures: Resimler
+    recent: Yakın zamanda kullanılmış
+    reduce_items: Daha az göster...
+    title: Kullanıcı dizinleri
+    videos: Videolar
+  history:
+    global: Küresel tarih
+    local: Yerel tarih
+    more_items: Daha fazlasını göster...
+    reduce_items: Daha az göster...
+    title: Uygulama geçmişi
+  profile:
+    accounts: Hesap ayarlarını aç
+    open_onedrive: OneDrive dizinini açın
+    open_user_folder: Kullanıcı dizinini aç
+  seelen_options:
+    open_installation_folder: Seelen ayarlar klasörünü açın
+    open_log_folder: Seelen günlük klasörünü açın
+    title: Seelen dizinleri

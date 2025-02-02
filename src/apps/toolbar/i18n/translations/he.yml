@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: אין גישה לאינטרנט
   notifications: התראות
   open_system_tray: מגש מערכת פתוח
-  open_user_folder: פתח את תיקיית המשתמש
   settings: הגדרות מהירות
   smart_charge: '- חיוב חכם'
   volume: כרך
 settings:
   app_settings: הגדרות אפליקציה
   brightness: בְּהִירוּת
+  lock: לִנְעוֹל
   log_out: להתנתק
   power: כּוֹחַ
   restart: איתחול
@@ -45,3 +45,30 @@ settings:
   sleep: לִישׁוֹן
   title: הגדרות
 unlabelled_tray: אייקון מגש ללא תווית
+userhome:
+  empty_list: אין פריטים
+  folders:
+    desktop: שולחן עבודה
+    documents: מסמכים
+    downloads: הורדות
+    more_items: הראה עוד ...
+    music: מוּסִיקָה
+    pictures: תמונות
+    recent: לאחרונה נעשה שימוש
+    reduce_items: הראה פחות ...
+    title: ספריות משתמשים
+    videos: סרטונים
+  history:
+    global: היסטוריה גלובלית
+    local: היסטוריה מקומית
+    more_items: הראה עוד ...
+    reduce_items: הראה פחות ...
+    title: ההיסטוריה של היישום
+  profile:
+    accounts: פתח הגדרות חשבון
+    open_onedrive: פתיחת מדריך OneDrive
+    open_user_folder: פתח את ספריית המשתמש
+  seelen_options:
+    open_installation_folder: פתח את תיקיית הגדרות Seelen
+    open_log_folder: פתח את תיקיית יומן Seelen
+    title: ספריות Seelen

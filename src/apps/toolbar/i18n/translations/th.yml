@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: ไม่มีการเข้าถึงอินเทอร์เน็ต
   notifications: การแจ้งเตือน
   open_system_tray: ถาดระบบเปิด
-  open_user_folder: เปิดโฟลเดอร์ผู้ใช้
   settings: การตั้งค่าอย่างรวดเร็ว
   smart_charge: '- ชาร์จอัจฉริยะ'
   volume: ปริมาณ
 settings:
   app_settings: การตั้งค่าแอป
   brightness: ความสว่าง
+  lock: ล็อค
   log_out: ออกจากระบบ
   power: พลัง
   restart: เริ่มต้นใหม่
@@ -45,3 +45,30 @@ settings:
   sleep: นอน
   title: การตั้งค่า
 unlabelled_tray: ไอคอนถาดที่ไม่มีป้ายกำกับ
+userhome:
+  empty_list: ไม่มีรายการ
+  folders:
+    desktop: เดสก์ท็อป
+    documents: เอกสาร
+    downloads: การดาวน์โหลด
+    more_items: แสดงเพิ่มเติม ...
+    music: ดนตรี
+    pictures: รูปภาพ
+    recent: ใช้เมื่อเร็ว ๆ นี้
+    reduce_items: แสดงน้อยลง ...
+    title: ไดเรกทอรีผู้ใช้
+    videos: วิดีโอ
+  history:
+    global: ประวัติศาสตร์โลก
+    local: ประวัติท้องถิ่น
+    more_items: แสดงเพิ่มเติม ...
+    reduce_items: แสดงน้อยลง ...
+    title: ประวัติของแอปพลิเคชัน
+  profile:
+    accounts: เปิดการตั้งค่าบัญชี
+    open_onedrive: เปิดไดเรกทอรี OneDrive
+    open_user_folder: เปิดไดเรกทอรีผู้ใช้
+  seelen_options:
+    open_installation_folder: เปิดโฟลเดอร์การตั้งค่า Seelen
+    open_log_folder: เปิดโฟลเดอร์ Seelen Log
+    title: ไดเรกทอรี Seelen

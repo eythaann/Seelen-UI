@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Fara acces la internet
   notifications: Notificări
   open_system_tray: Tava de sistem deschisă
-  open_user_folder: Deschideți folderul utilizator
   settings: Setări rapide
   smart_charge: '- Încărcare inteligentă'
   volume: Volum
 settings:
   app_settings: Setări aplicație
   brightness: Luminozitate
+  lock: Încuietoare
   log_out: Deconectați -vă
   power: Putere
   restart: Repornire
@@ -45,3 +45,30 @@ settings:
   sleep: Dormi
   title: Setări
 unlabelled_tray: Pictograma tăvii nemarcate
+userhome:
+  empty_list: Nu există articole
+  folders:
+    desktop: Desktop
+    documents: Documente
+    downloads: Descărcări
+    more_items: Arată mai mult...
+    music: Muzică
+    pictures: Imagini
+    recent: Utilizate recent
+    reduce_items: Arată mai puțin...
+    title: Directoare utilizator
+    videos: Video
+  history:
+    global: Istoria globală
+    local: Istoria locală
+    more_items: Arată mai mult...
+    reduce_items: Arată mai puțin...
+    title: Istoricul aplicației
+  profile:
+    accounts: Deschideți setările contului
+    open_onedrive: Deschideți directorul OneDrive
+    open_user_folder: Deschideți directorul utilizatorului
+  seelen_options:
+    open_installation_folder: Deschideți folderul de setări Seelen
+    open_log_folder: Deschideți folderul jurnal Seelen
+    title: Directoare Seelen

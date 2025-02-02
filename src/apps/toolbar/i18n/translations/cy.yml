@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Dim Mynediad i'r Rhyngrwyd
   notifications: Hysbysiadau
   open_system_tray: Hambwrdd System Agored
-  open_user_folder: Agor Ffolder Defnyddiwr
   settings: Gosodiadau Cyflym
   smart_charge: '- Tâl craff'
   volume: Nghyfrol
 settings:
   app_settings: Gosodiadau App
   brightness: Disgleirdeb
+  lock: Gloiff
   log_out: Allgofnodi
   power: Bwerau
   restart: Ail-ddechrau
@@ -45,3 +45,30 @@ settings:
   sleep: Chysger
   title: Gosodiadau
 unlabelled_tray: Eicon hambwrdd heb ei labelu
+userhome:
+  empty_list: Dim eitemau
+  folders:
+    desktop: Nyrddiau gwaith
+    documents: Nogfennau
+    downloads: Lawrlwythiadau
+    more_items: Dangos mwy ...
+    music: Ngherddoriaeth
+    pictures: Luniau
+    recent: A ddefnyddiwyd yn ddiweddar
+    reduce_items: Dangos llai ...
+    title: Cyfeiriaduron Defnyddwyr
+    videos: Fideos
+  history:
+    global: Hanes Byd -eang
+    local: Hanes Lleol
+    more_items: Dangos mwy ...
+    reduce_items: Dangos llai ...
+    title: Hanes y Cais
+  profile:
+    accounts: Gosodiadau Cyfrif Agored
+    open_onedrive: Cyfeiriadur OneDrive Open
+    open_user_folder: Agor Cyfeiriadur Defnyddiwr
+  seelen_options:
+    open_installation_folder: Agor Ffolder Gosodiadau Seeel
+    open_log_folder: Agor Ffolder Log Seelen
+    title: Cyfeiriaduron Seelen

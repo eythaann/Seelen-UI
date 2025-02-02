@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Nincs internet hozzaferes
   notifications: Értesítések
   open_system_tray: Nyitott rendszer tálca
-  open_user_folder: Nyissa meg a felhasználói mappát
   settings: Gyors beállítások
   smart_charge: '- Intelligens töltés'
   volume: Hangerő
 settings:
   app_settings: Alkalmazásbeállítások
   brightness: Fényerő
+  lock: Lock
   log_out: Kijelentkezés
   power: Hatalom
   restart: Újrakezd
@@ -45,3 +45,30 @@ settings:
   sleep: Alvás
   title: Beállítások
 unlabelled_tray: Jelöletlen tálca ikon
+userhome:
+  empty_list: Nincsenek tételek
+  folders:
+    desktop: Asztali
+    documents: Dokumentumok
+    downloads: Letöltések
+    more_items: További részletek...
+    music: Zene
+    pictures: Képek
+    recent: Nemrégiben használt
+    reduce_items: Kevesebb mutatása...
+    title: Felhasználói könyvtárak
+    videos: Videók
+  history:
+    global: Globális történelem
+    local: Helytörténet
+    more_items: További részletek...
+    reduce_items: Kevesebb mutatása...
+    title: Az alkalmazás története
+  profile:
+    accounts: Nyitott számla beállításai
+    open_onedrive: OneDrive könyvtár megnyitása
+    open_user_folder: Felhasználói könyvtár megnyitása
+  seelen_options:
+    open_installation_folder: Nyissa meg a Seelen beállítások mappát
+    open_log_folder: Nyissa meg a Seelen log mappát
+    title: Seelen könyvtárak

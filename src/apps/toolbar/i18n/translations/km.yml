@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: គ្មានការចូលប្រើអ៊ីនធឺណិតទេ
   notifications: ការជូនដំណឹង
   open_system_tray: បើកថាសប្រព័ន្ធ
-  open_user_folder: បើកថតអ្នកប្រើ
   settings: ការកំណត់រហ័ស
   smart_charge: '- គិតថ្លៃឆ្លាត'
   volume: ចមនយន
 settings:
   app_settings: ការកំណត់កម្មវិធី
   brightness: ពន្លឺ
+  lock: សោ
   log_out: ចាកចេញ
   power: អមនាច
   restart: រ្យេដិតនោ
@@ -45,3 +45,30 @@ settings:
   sleep: ដមនេក
   title: ការកំណត់
 unlabelled_tray: រូបតំណាងថាឡៃដែលមិនស្មោះត្រង់
+userhome:
+  empty_list: មិនមានធាតុ
+  folders:
+    desktop: ផ្ទៃតុ
+    documents: ឯកសារ
+    downloads: ដេលរេប្យនស់
+    more_items: បង្ហាញបន្ថែមទៀត ...
+    music: តន្រ្ដី
+    pictures: រូបភាព
+    recent: បានប្រើថ្មីៗនេះ
+    reduce_items: បង្ហាញតិច ...
+    title: ថតអ្នកប្រើ
+    videos: វីឌីអូ
+  history:
+    global: ប្រវត្តិសាស្ត្រសកល
+    local: ប្រវត្តិសាស្ត្រក្នុងតំបន់
+    more_items: បង្ហាញបន្ថែមទៀត ...
+    reduce_items: បង្ហាញតិច ...
+    title: ប្រវត្តិរបស់កម្មវិធី
+  profile:
+    accounts: បើកការកំណត់គណនី
+    open_onedrive: បើកថត OdeDrive
+    open_user_folder: បើកថតអ្នកប្រើប្រាស់
+  seelen_options:
+    open_installation_folder: បើកថតការកំណត់ SEEN
+    open_log_folder: បើកថតឯកសារកំណត់ហេតុ Seeen បើក
+    title: ថតឯកសារ Seel

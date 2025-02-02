@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: ინტერნეტი არ არის
   notifications: შეტყობინებები
   open_system_tray: ღია სისტემის უჯრა
-  open_user_folder: გახსენით მომხმარებლის საქაღალდე
   settings: სწრაფი პარამეტრები
   smart_charge: '- ჭკვიანი მუხტი'
   volume: ტომი
 settings:
   app_settings: პროგრამის პარამეტრები
   brightness: სიკაშკაშე
+  lock: დაკეტვა
   log_out: შესვლა
   power: ძალა
   restart: Რესტარტი
@@ -45,3 +45,30 @@ settings:
   sleep: ძილი
   title: პარამეტრები
 unlabelled_tray: არასასურველი უჯრის ხატი
+userhome:
+  empty_list: არ არის ნივთები
+  folders:
+    desktop: დესკტოპი
+    documents: დოკუმენტები
+    downloads: ჩამოტვირთვა
+    more_items: მეტი აჩვენე ...
+    music: მუსიკა
+    pictures: სურათები
+    recent: ახლახან გამოყენებული
+    reduce_items: აჩვენე ნაკლები ...
+    title: მომხმარებლის დირექტორიები
+    videos: ვიდეო
+  history:
+    global: გლობალური ისტორია
+    local: ადგილობრივი ისტორია
+    more_items: მეტი აჩვენე ...
+    reduce_items: აჩვენე ნაკლები ...
+    title: განაცხადის ისტორია
+  profile:
+    accounts: ღია ანგარიშის პარამეტრები
+    open_onedrive: გახსენით OneDrive დირექტორია
+    open_user_folder: გახსენით მომხმარებლის დირექტორია
+  seelen_options:
+    open_installation_folder: გახსენით Seelen პარამეტრების საქაღალდე
+    open_log_folder: გახსენით Seelen Log საქაღალდე
+    title: Seelen Directories

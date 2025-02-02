@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: இணைய அணுகல் இல்லை
   notifications: அறிவிப்புகள்
   open_system_tray: திறந்த கணினி தட்டு
-  open_user_folder: பயனர் கோப்புறையைத் திறக்கவும்
   settings: விரைவான அமைப்புகள்
   smart_charge: '- ஸ்மார்ட் கட்டணம்'
   volume: தொகுதி
 settings:
   app_settings: பயன்பாட்டு அமைப்புகள்
   brightness: பிரகாசம்
+  lock: பூட்டு
   log_out: வெளியேறு
   power: சக்தி
   restart: மறுதொடக்கம்
@@ -45,3 +45,30 @@ settings:
   sleep: தூங்கு
   title: அமைப்புகள்
 unlabelled_tray: பெயரிடப்படாத தட்டு ஐகான்
+userhome:
+  empty_list: உருப்படிகள் இல்லை
+  folders:
+    desktop: டெஸ்க்டாப்
+    documents: ஆவணங்கள்
+    downloads: பதிவிறக்கங்கள்
+    more_items: மேலும் காட்டு ...
+    music: இசை
+    pictures: படங்கள்
+    recent: சமீபத்தில் பயன்படுத்தப்பட்டது
+    reduce_items: குறைவாக காட்டு ...
+    title: பயனர் கோப்பகங்கள்
+    videos: வீடியோக்கள்
+  history:
+    global: உலக வரலாறு
+    local: உள்ளூர் வரலாறு
+    more_items: மேலும் காட்டு ...
+    reduce_items: குறைவாக காட்டு ...
+    title: பயன்பாட்டின் வரலாறு
+  profile:
+    accounts: கணக்கு அமைப்புகளைத் திறக்கவும்
+    open_onedrive: திறந்த onedrive அடைவு
+    open_user_folder: பயனர் கோப்பகத்தைத் திறக்கவும்
+  seelen_options:
+    open_installation_folder: திறந்த சீலன் அமைப்புகள் கோப்புறையைத் திறக்கவும்
+    open_log_folder: சீலன் பதிவு கோப்புறையைத் திறக்கவும்
+    title: சீலன் கோப்பகங்கள்

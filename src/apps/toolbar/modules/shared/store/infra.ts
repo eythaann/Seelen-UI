@@ -3,12 +3,10 @@ import {
   ApplicationHistory,
   DocumentsFolder,
   DownloadsFolder,
-  invoke,
   MusicFolder,
   PicturesFolder,
   PluginList,
   RecentFolder,
-  SeelenCommand,
   SeelenEvent,
   Settings,
   UIColors,
@@ -62,7 +60,8 @@ export async function registerStoreEvents() {
     store.dispatch(RootActions.setIsOverlaped(event.payload));
   });
 
-  await Settings.onChange(loadStore);
+  Settings.getAsync().then(loadSettings);
+  Settings.onChange(loadSettings);
 
   await listenGlobal<PowerStatus>('power-status', (event) => {
     store.dispatch(RootActions.setPowerStatus(event.payload));
@@ -130,14 +129,26 @@ export async function registerStoreEvents() {
 
   ApplicationHistory.onFocusChanged((app) => store.dispatch(RootActions.setFocused(app.payload)));
   ApplicationHistory.onChange((history) => store.dispatch(RootActions.setHistory(history.all())));
-  ApplicationHistory.onCurrentMonitorHistoryChanged((history) => store.dispatch(RootActions.setHistoryOnMonitor(history.all())));
+  ApplicationHistory.onCurrentMonitorHistoryChanged((history) =>
+    store.dispatch(RootActions.setHistoryOnMonitor(history.all())),
+  );
 
   UserDetails.onChange((details) => store.dispatch(RootActions.setUser(details.user)));
-  RecentFolder.onChange((details) => store.dispatch(RootActions.setUserRecentFolder(details.all())));
-  DocumentsFolder.onChange((details) => store.dispatch(RootActions.setUserDocumentsFolder(details.all())));
-  DownloadsFolder.onChange((details) => store.dispatch(RootActions.setUserDownloadsFolder(details.all())));
-  PicturesFolder.onChange((details) => store.dispatch(RootActions.setUserPicturesFolder(details.all())));
-  VideosFolder.onChange((details) => store.dispatch(RootActions.setUserVideosFolder(details.all())));
+  RecentFolder.onChange((details) =>
+    store.dispatch(RootActions.setUserRecentFolder(details.all())),
+  );
+  DocumentsFolder.onChange((details) =>
+    store.dispatch(RootActions.setUserDocumentsFolder(details.all())),
+  );
+  DownloadsFolder.onChange((details) =>
+    store.dispatch(RootActions.setUserDownloadsFolder(details.all())),
+  );
+  PicturesFolder.onChange((details) =>
+    store.dispatch(RootActions.setUserPicturesFolder(details.all())),
+  );
+  VideosFolder.onChange((details) =>
+    store.dispatch(RootActions.setUserVideosFolder(details.all())),
+  );
   MusicFolder.onChange((details) => store.dispatch(RootActions.setUserMusicFolder(details.all())));
 
   await initUIColors();
@@ -145,52 +156,16 @@ export async function registerStoreEvents() {
   await view.emitTo(view.label, 'store-events-ready');
 }
 
-export async function loadStore() {
-  const settings = await Settings.getAsync();
-
-  i18n.changeLanguage(settings.inner.language || undefined);
-
-  loadSettingsCSS(settings.fancyToolbar);
-  store.dispatch(RootActions.setSettings(settings.fancyToolbar));
-  store.dispatch(RootActions.setDateFormat(settings.inner.dateFormat));
-  store.dispatch(
-    RootActions.setEnv((await invoke(SeelenCommand.GetUserEnvs)) as Record<string, string>),
-  );
-
-  store.dispatch(RootActions.setHistory((await ApplicationHistory.getAsync()).all()));
-  store.dispatch(RootActions.setHistoryOnMonitor((await ApplicationHistory.getCurrentMonitorHistoryAsync()).all()));
-
-  store.dispatch(async () => {
-    store.dispatch(RootActions.setUser((await UserDetails.getAsync()).user));
-    store.dispatch(RootActions.setUserRecentFolder((await RecentFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserDocumentsFolder((await DocumentsFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserDownloadsFolder((await DownloadsFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserPicturesFolder((await PicturesFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserVideosFolder((await VideosFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserMusicFolder((await MusicFolder.getAsync()).all()));
-  });
-
-  store.dispatch(RootActions.setHistory((await ApplicationHistory.getAsync()).all()));
-  store.dispatch(RootActions.setHistoryOnMonitor((await ApplicationHistory.getCurrentMonitorHistoryAsync()).all()));
-
-  store.dispatch(async () => {
-    store.dispatch(RootActions.setUser((await UserDetails.getAsync()).user));
-    store.dispatch(RootActions.setUserRecentFolder((await RecentFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserDocumentsFolder((await DocumentsFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserDownloadsFolder((await DownloadsFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserPicturesFolder((await PicturesFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserVideosFolder((await VideosFolder.getAsync()).all()));
-    store.dispatch(RootActions.setUserMusicFolder((await MusicFolder.getAsync()).all()));
-  });
-
-  let placeholder = (await invoke(SeelenCommand.StateGetToolbarItems)) as Placeholder;
-  store.dispatch(RootActions.setPlaceholder(placeholder));
-}
-
-export function loadSettingsCSS(settings: FancyToolbarSettings) {
+function loadSettingsCSS(settings: FancyToolbarSettings) {
   const styles = document.documentElement.style;
-
   styles.setProperty('--config-height', `${settings.height}px`);
   styles.setProperty('--config-time-before-show', `${settings.delayToShow}ms`);
   styles.setProperty('--config-time-before-hide', `${settings.delayToHide}ms`);
+}
+
+async function loadSettings(settings: Settings) {
+  i18n.changeLanguage(settings.inner.language || undefined);
+  loadSettingsCSS(settings.fancyToolbar);
+  store.dispatch(RootActions.setSettings(settings.fancyToolbar));
+  store.dispatch(RootActions.setDateFormat(settings.inner.dateFormat));
 }

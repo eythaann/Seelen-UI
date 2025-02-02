@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Нет сети
   notifications: Уведомления
   open_system_tray: Открыть системный трей
-  open_user_folder: Открыть папку пользователя
   settings: Быстрые настройки
   smart_charge: '- Умная зарядка'
   volume: Громкость
 settings:
   app_settings: Настройки приложения
   brightness: Яркость
+  lock: Замок
   log_out: Выход из системы
   power: Питание
   restart: Перезагрузка
@@ -45,3 +45,30 @@ settings:
   sleep: Спящий режим
   title: Настройки
 unlabelled_tray: Иконка трея без надписи
+userhome:
+  empty_list: Нет предметов
+  folders:
+    desktop: Настольный компьютер
+    documents: Документы
+    downloads: Скачать
+    more_items: Показать еще...
+    music: Музыка
+    pictures: Фотографии
+    recent: Недавно использованные
+    reduce_items: Показать меньше...
+    title: Каталоги пользователей
+    videos: Видео
+  history:
+    global: Всемирная история
+    local: Краеведение
+    more_items: Показать еще...
+    reduce_items: Показать меньше...
+    title: История приложения
+  profile:
+    accounts: Настройки открытого счета
+    open_onedrive: Откройте каталог OneDrive
+    open_user_folder: Откройте каталог пользователя
+  seelen_options:
+    open_installation_folder: Откройте папку настроек Seelen
+    open_log_folder: Откройте папку журнала Seelen
+    title: Каталоги Seelen

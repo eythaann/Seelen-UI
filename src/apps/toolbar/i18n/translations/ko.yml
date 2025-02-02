@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: 인터넷 연결 안됨
   notifications: 알림
   open_system_tray: 시스템 트레이 열기
-  open_user_folder: 사용자 폴더 열기
   settings: 빠른 설정
   smart_charge: ' - 스마트 충전'
   volume: 볼륨
 settings:
   app_settings: 앱 설정
   brightness: 밝기
+  lock: 잠금
   log_out: 로그아웃
   power: 전원
   restart: 다시 시작
@@ -45,3 +45,30 @@ settings:
   sleep: 절전
   title: 설정
 unlabelled_tray: 텍스트가 없는 트레이
+userhome:
+  empty_list: 항목 없음
+  folders:
+    desktop: 데스크톱
+    documents: 문서
+    downloads: 다운로드
+    more_items: 더 보기...
+    music: 음악
+    pictures: 사진
+    recent: 최근 사용
+    reduce_items: 덜 보기...
+    title: 사용자 디렉터리
+    videos: 동영상
+  history:
+    global: 글로벌 역사
+    local: 지역 역사
+    more_items: 더 보기...
+    reduce_items: 덜 보기...
+    title: 애플리케이션 기록
+  profile:
+    accounts: 계정 설정 열기
+    open_onedrive: OneDrive 디렉터리 열기
+    open_user_folder: 사용자 디렉터리 열기
+  seelen_options:
+    open_installation_folder: Seelen 설정 폴더 열기
+    open_log_folder: Seelen 로그 폴더 열기
+    title: 디렉터리 보기

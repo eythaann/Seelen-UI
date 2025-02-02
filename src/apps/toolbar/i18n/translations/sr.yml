@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Нема приступа интернету
   notifications: Обавештења
   open_system_tray: Отворите лежиште за систем
-  open_user_folder: Отворите фасциклу корисника
   settings: Брза подешавања
   smart_charge: '- паметно набој'
   volume: Запремина
 settings:
   app_settings: Подешавања апликација
   brightness: Светлина
+  lock: Закључати
   log_out: Одјавити се
   power: Моћ
   restart: Поново покренути
@@ -45,3 +45,30 @@ settings:
   sleep: Спавати
   title: Подешавања
 unlabelled_tray: Икона за отпадне траи
+userhome:
+  empty_list: Нема предмета
+  folders:
+    desktop: Радна површина
+    documents: Документи
+    downloads: Преузимања
+    more_items: Прикажи више ...
+    music: Музика
+    pictures: Слике
+    recent: Недавно коришћен
+    reduce_items: Прикажи мање ...
+    title: Корисничке именике
+    videos: Видеос
+  history:
+    global: Глобална историја
+    local: Локална историја
+    more_items: Прикажи више ...
+    reduce_items: Прикажи мање ...
+    title: Историја апликације
+  profile:
+    accounts: Подешавања отвореног налога
+    open_onedrive: Отворено ОнеДриве именик
+    open_user_folder: Отворите директориј усер
+  seelen_options:
+    open_installation_folder: Отворите директоријум Сеелен Сеттингс
+    open_log_folder: Отворите мапу Сеелен Лог
+    title: Сеелен директорији

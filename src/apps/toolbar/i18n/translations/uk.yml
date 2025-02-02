@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Немає доступу до Інтернету
   notifications: Сповіщення
   open_system_tray: Системний лоток
-  open_user_folder: Відкрити папку користувача
   settings: Швидкі налаштування
   smart_charge: '- розумний заряд'
   volume: Гучність
 settings:
   app_settings: Налаштування додатку
   brightness: Яскравість
+  lock: Блокування.
   log_out: Вийти
   power: Живлення
   restart: Перезапустити
@@ -45,3 +45,30 @@ settings:
   sleep: Сон
   title: Налаштування
 unlabelled_tray: Без назви
+userhome:
+  empty_list: Немає предметів
+  folders:
+    desktop: Робочий стіл
+    documents: Документи
+    downloads: Завантаження
+    more_items: Показати більше...
+    music: Музика
+    pictures: Зображення
+    recent: Нещодавно використані
+    reduce_items: Показати менше...
+    title: Каталоги користувачів
+    videos: Відео
+  history:
+    global: Глобальна історія
+    local: Краєзнавство
+    more_items: Показати більше...
+    reduce_items: Показати менше...
+    title: Історія додатку
+  profile:
+    accounts: Налаштування відкритого рахунку
+    open_onedrive: Відкрийте каталог OneDrive
+    open_user_folder: Відкрити каталог користувача
+  seelen_options:
+    open_installation_folder: Відкрийте папку налаштувань Seelen
+    open_log_folder: Відкрийте папку журналу Seelen
+    title: Переглянуті каталоги

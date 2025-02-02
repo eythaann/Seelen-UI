@@ -11,6 +11,7 @@ use windows::Win32::{
     },
     System::{
         Com::IPersistFile,
+        Console::GetConsoleWindow,
         Threading::{AttachThreadInput, GetCurrentProcess, GetCurrentThreadId, OpenProcessToken},
     },
     UI::{
@@ -122,6 +123,10 @@ impl WindowsApi {
     pub fn set_process_dpi_aware() -> Result<()> {
         unsafe { SetProcessDpiAwarenessContext(DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2)? };
         Ok(())
+    }
+
+    pub fn get_console_window() -> HWND {
+        unsafe { GetConsoleWindow() }
     }
 
     pub fn current_process() -> HANDLE {

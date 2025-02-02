@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Nema pristupa internetu
   notifications: Obavijesti
   open_system_tray: Otvoreni sustav
-  open_user_folder: Otvorena korisnička mapa
   settings: Brze postavke
   smart_charge: '- pametni naboj'
   volume: Volumen
 settings:
   app_settings: Postavke aplikacija
   brightness: Svjetlost
+  lock: Brana
   log_out: Odjavite se
   power: Vlast
   restart: Ponovno pokrenuti
@@ -45,3 +45,30 @@ settings:
   sleep: Spavati
   title: Postavke
 unlabelled_tray: Ikona neobilježene ladice
+userhome:
+  empty_list: Nema predmeta
+  folders:
+    desktop: Radna površina
+    documents: Dokumenti
+    downloads: Preuzimanja
+    more_items: Pokažite još ...
+    music: Glazba
+    pictures: Slika
+    recent: Nedavno korišteni
+    reduce_items: Pokažite manje ...
+    title: Korisničke direktorije
+    videos: Videozapisi
+  history:
+    global: Globalna povijest
+    local: Lokalna povijest
+    more_items: Pokažite još ...
+    reduce_items: Pokažite manje ...
+    title: Povijest aplikacije
+  profile:
+    accounts: Otvorene postavke računa
+    open_onedrive: Otvoreni direktorij OneDrive
+    open_user_folder: Otvoreni korisnički direktorij
+  seelen_options:
+    open_installation_folder: Otvorite mapu Seelen Settings
+    open_log_folder: Otvorite mapu dnevnika Seelen
+    title: Seelen direktorij

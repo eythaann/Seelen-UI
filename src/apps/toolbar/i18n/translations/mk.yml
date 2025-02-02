@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Нема пристап до Интернет
   notifications: Известувања
   open_system_tray: Отворен фиока за систем
-  open_user_folder: Отворете ја папката за корисници
   settings: Брзи поставки
   smart_charge: '- Паметно полнење'
   volume: Волумен
 settings:
   app_settings: Поставки за апликации
   brightness: Осветленост
+  lock: Заклучување
   log_out: Одјавете се
   power: Моќ
   restart: Рестарт
@@ -45,3 +45,30 @@ settings:
   sleep: Спиење
   title: Поставки
 unlabelled_tray: Икона за обележување на послужавник
+userhome:
+  empty_list: Нема предмети
+  folders:
+    desktop: Работна површина
+    documents: Документи
+    downloads: Преземања
+    more_items: Покажете повеќе ...
+    music: Музика
+    pictures: Слики
+    recent: Неодамна користено
+    reduce_items: Покажете помалку ...
+    title: Кориснички директориуми
+    videos: Видеа
+  history:
+    global: Глобална историја
+    local: Локална историја
+    more_items: Покажете повеќе ...
+    reduce_items: Покажете помалку ...
+    title: Историја на апликацијата
+  profile:
+    accounts: Поставки за отворена сметка
+    open_onedrive: Отворен директориум на OneDrive
+    open_user_folder: Отворете го директориумот за корисници
+  seelen_options:
+    open_installation_folder: Отворете ја папката за поставки Seelen
+    open_log_folder: Отворете ја папката за дневник на Селен
+    title: Директориуми на Селен

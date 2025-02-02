@@ -31,13 +31,13 @@ placeholder:
   ethernet_disconnected: Pas d'accès Internet
   notifications: Notifications
   open_system_tray: Ouvrir la barre d'état système
-  open_user_folder: Ouvrir le dossier utilisateur
   settings: Réglages rapides
   smart_charge: '- Chargement intelligent'
   volume: Volume
 settings:
   app_settings: Paramètres de l'application
   brightness: Luminosité
+  lock: Verrouiller
   log_out: Se déconnecter
   power: Pouvoir
   restart: Redémarrage
@@ -45,3 +45,30 @@ settings:
   sleep: Dormir
   title: Paramètres
 unlabelled_tray: Icône de plateau non étiquetée
+userhome:
+  empty_list: Aucun élément
+  folders:
+    desktop: Bureau
+    documents: Documents
+    downloads: Téléchargements
+    more_items: Afficher plus...
+    music: Musique
+    pictures: Photos
+    recent: Récemment utilisé
+    reduce_items: Montrer moins...
+    title: Répertoires d'utilisateurs
+    videos: Vidéos
+  history:
+    global: Histoire mondiale
+    local: Histoire locale
+    more_items: Afficher plus...
+    reduce_items: Montrer moins...
+    title: Historique de l'application
+  profile:
+    accounts: Ouvrir les paramètres du compte
+    open_onedrive: Ouvrir le répertoire OneDrive
+    open_user_folder: Ouvrir le répertoire des utilisateurs
+  seelen_options:
+    open_installation_folder: Ouvrir le dossier des paramètres de Seelen
+    open_log_folder: Ouvrir le dossier Seelen log
+    title: Annuaires Seelen

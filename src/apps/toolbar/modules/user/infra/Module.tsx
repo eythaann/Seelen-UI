@@ -1,7 +1,10 @@
 import { UserToolbarItem } from '@seelen-ui/lib/types';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { Item } from '../../item/infra/infra';
+
+import { Selectors } from '../../shared/store/app';
 
 import { WithUserHome } from './UserHome';
 
@@ -11,11 +14,13 @@ interface Props {
 }
 
 function UserModuleItem({ module, active, ...rest }: Props) {
+  const user = useSelector(Selectors.user);
   return (
     <Item
       {...rest}
       active={active}
       module={module}
+      extraVars={{ user }}
     />
   );
 }

@@ -54,7 +54,7 @@ class StringToElement extends React.PureComponent<StringToElementProps, StringTo
     return `[IMG:${size}px:${url}]`;
   }
 
-  static imgFromPath(path: string, size = 16) {
+  static imgFromPath(path?: string | null, size = 16) {
     if (!path) {
       return '';
     }

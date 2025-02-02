@@ -153,12 +153,12 @@ export function SettingsModule({ module }: Props) {
 
           <span className="fast-settings-label">{t('settings.power')}</span>
           <div className="fast-settings-item fast-settings-power">
-            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.log_out')}>
+            <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.lock')}>
               <button
                 className="fast-settings-item-button"
-                onClick={() => invoke(SeelenCommand.LogOut)}
+                onClick={() => invoke(SeelenCommand.Lock)}
               >
-                <Icon iconName="BiLogOut" />
+                <Icon iconName="BiLock" />
               </button>
             </Tooltip>
             <Tooltip mouseLeaveDelay={0} arrow={false} title={t('settings.sleep')}>
