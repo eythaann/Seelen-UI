@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- style issue on toolbar user module.
+
 ## [2.1.0]
 ### features
 - allow custom animations on popups/dropdowns.
