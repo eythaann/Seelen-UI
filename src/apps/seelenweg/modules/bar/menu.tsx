@@ -2,18 +2,15 @@ import { SeelenCommand } from '@seelen-ui/lib';
 import { invoke } from '@tauri-apps/api/core';
 import { ItemType } from 'antd/es/menu/interface';
 import { TFunction } from 'i18next';
-import { useSelector } from 'react-redux';
 
 import { store } from '../shared/store/infra';
 import { dialog } from 'src/apps/settings/modules/shared/tauri/infra';
 
-import { RootActions, Selectors } from '../shared/store/app';
+import { RootActions } from '../shared/store/app';
 
 import { Icon } from '../../../shared/components/Icon';
 
-export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean): ItemType[] {
-  let isReorderDisabled: boolean = useSelector(Selectors.reorderDisabled);
-
+export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean, isReorderDisabled?: boolean): ItemType[] {
   if (!!restrictedBar) {
     return [
       {
@@ -35,14 +32,6 @@ export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean): ItemTyp
     ];
   } else {
     return [
-      {
-        key: 'reoder',
-        icon: <Icon iconName={!isReorderDisabled ? 'VscLock' : 'VscUnlock' } />,
-        label: t(!isReorderDisabled ? 'context_menu.reorder_disable' : 'context_menu.reorder_enable' ),
-        onClick() {
-          store.dispatch(RootActions.setWegReorderDisabled(!isReorderDisabled));
-        },
-      },
       {
         key: 'add-media-module',
         label: t('taskbar_menu.media'),
@@ -96,6 +85,14 @@ export function getSeelenWegMenu(t: TFunction, restrictedBar?: boolean): ItemTyp
       },
       {
         type: 'divider',
+      },
+      {
+        key: 'reoder',
+        icon: <Icon iconName={!isReorderDisabled ? 'VscLock' : 'VscUnlock' } />,
+        label: t(!isReorderDisabled ? 'context_menu.reorder_disable' : 'context_menu.reorder_enable' ),
+        onClick() {
+          store.dispatch(RootActions.setWegReorderDisabled(!isReorderDisabled));
+        },
       },
       {
         key: 'task_manager',

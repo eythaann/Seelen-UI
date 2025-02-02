@@ -166,7 +166,7 @@ export function SeelenWeg() {
   const projectSwItem = (item: SwItem) => ItemByType(item, !isReorderDisabled, shit);
 
   return (
-    <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar)}>
+    <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar, isReorderDisabled)}>
       <Reorder.Group
         as="div"
         values={
