@@ -112,10 +112,6 @@ export function ToolBar() {
   }, [isOverlaped, hideMode]);
 
   const onReorderPinned = useCallback((apps: (ToolbarItem | string)[]) => {
-    if (structure.isReorderDisabled) {
-      return;
-    }
-
     let dividerStart = apps.indexOf(DividerStart);
     let dividerEnd = apps.indexOf(DividerEnd);
 
