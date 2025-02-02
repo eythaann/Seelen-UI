@@ -155,7 +155,7 @@ export function ToolBar() {
           DividerEnd,
           ...structure.right,
         ]}
-        onReorder={onReorderPinned}
+        onReorder={!structure.isReorderDisabled ? onReorderPinned : () => {}}
         className={cx('ft-bar', {
           'ft-bar-hidden': shouldBeHidden,
           'ft-bar-delayed': delayed,

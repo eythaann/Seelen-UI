@@ -163,7 +163,7 @@ export function SeelenWeg() {
     setAssociatedViewCounter((current) => calculateAssociatedViewCounter(current, isOpen));
   }, []);
 
-  const projectSwItem = (item: SwItem) => ItemByType(item, !isReorderDisabled, shit);
+  const projectSwItem = (item: SwItem) => ItemByType(item, shit);
 
   return (
     <WithContextMenu items={getSeelenWegMenu(t, isTemporalOnlyWegBar, isReorderDisabled)}>
@@ -174,7 +174,7 @@ export function SeelenWeg() {
             ? [...pinnedOnLeft, ...pinnedOnCenter, ...pinnedOnRight]
             : [...pinnedOnLeft, Separator1, ...pinnedOnCenter, Separator2, ...pinnedOnRight]
         }
-        onReorder={onReorderPinned}
+        onReorder={!isReorderDisabled ? onReorderPinned : () => {}}
         axis={isHorizontal ? 'x' : 'y'}
         className={cx('taskbar', settings.position.toLowerCase(), {
           horizontal: isHorizontal,
@@ -225,27 +225,27 @@ export function SeelenWeg() {
   );
 }
 
-function ItemByType(item: SwItem, drag: boolean, callback: (isOpen: boolean) => void) {
+function ItemByType(item: SwItem, callback: (isOpen: boolean) => void) {
   if (item.type === WegItemType.Pinned) {
     if (
       item.path.toLowerCase().endsWith('.exe') ||
       item.relaunchCommand.toLowerCase().includes('.exe')
     ) {
-      return <UserApplication key={item.id} item={item} drag={drag} onAssociatedViewOpenChanged={callback} />;
+      return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
     }
     return <FileOrFolder key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.Temporal) {
-    return <UserApplication key={item.id} item={item} drag={drag} onAssociatedViewOpenChanged={callback} />;
+    return <UserApplication key={item.id} item={item} onAssociatedViewOpenChanged={callback} />;
   }
 
   if (item.type === WegItemType.Media) {
-    return <MediaSession key={item.id} item={item} drag={drag} />;
+    return <MediaSession key={item.id} item={item} />;
   }
 
   if (item.type === WegItemType.StartMenu) {
-    return <StartMenu key={item.id} item={item} drag={drag} />;
+    return <StartMenu key={item.id} item={item} />;
   }
 
   return null;

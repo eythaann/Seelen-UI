@@ -25,7 +25,7 @@ const MAX_LUMINANCE = 210;
 const MIN_LUMINANCE = 40;
 const BRIGHTNESS_MULTIPLIER = 1.5; // used in css
 
-export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean }) {
+export function MediaSession({ item }: { item: MediaWegItem }) {
   const [luminance, setLuminance] = useState(0);
 
   const dockPosition = useSelector(Selectors.settings.position);
@@ -61,7 +61,7 @@ export function MediaSession({ item, drag }: { item: MediaWegItem; drag: boolean
   const isHorizontal = dockPosition === SeelenWegSide.Bottom || dockPosition === SeelenWegSide.Top;
 
   return (
-    <DraggableItem item={item} drag={drag}>
+    <DraggableItem item={item}>
       <WithContextMenu items={getMenuForItem(t, item)}>
         <div
           className={cx('weg-item media-session-container', {
