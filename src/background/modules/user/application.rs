@@ -97,6 +97,7 @@ impl UserManager {
                         folder_path,
                         20,
                         *folder != FolderType::Recent,
+                        *folder == FolderType::Recent,
                     )
                     .ok(),
                 },
@@ -208,7 +209,12 @@ impl UserManager {
         }
     }
 
-    fn get_folder_content(path: PathBuf, limit: usize, is_recursive: bool) -> Result<Vec<File>> {
+    fn get_folder_content(
+        path: PathBuf,
+        limit: usize,
+        is_recursive: bool,
+        only_lnk: bool,
+    ) -> Result<Vec<File>> {
         let folders = if is_recursive {
             UserManager::get_recursive_folder(path)
         } else {
@@ -228,7 +234,7 @@ impl UserManager {
                                 }
                             }
                         } else {
-                            return extension != "ini";
+                            return extension != "ini" && !only_lnk;
                         }
                     }
                 }
@@ -294,7 +300,13 @@ impl UserManager {
         let folder = self.folders.get_mut(&folder_type);
         if let Some(model) = folder {
             model.limit = limit;
-            model.content = Self::get_folder_content(model.path.clone(), limit, false).ok();
+            model.content = Self::get_folder_content(
+                model.path.clone(),
+                limit,
+                folder_type == FolderType::Recent,
+                folder_type == FolderType::Recent,
+            )
+            .ok();
         }
 
         let sender = Self::event_tx();
@@ -323,8 +335,13 @@ impl UserManager {
             let folders = &mut trace_lock!(USER_MANAGER).folders;
             let folder = folders.get_mut(&folder_type);
             if let Some(model) = folder {
-                model.content =
-                    UserManager::get_folder_content(model.path.clone(), model.limit, true).ok();
+                model.content = UserManager::get_folder_content(
+                    model.path.clone(),
+                    model.limit,
+                    folder_type == FolderType::Recent,
+                    folder_type == FolderType::Recent,
+                )
+                .ok();
                 let sender = Self::event_tx();
                 log_error!(sender.send(UserManagerEvent::FolderChanged(folder_type)));
             }
