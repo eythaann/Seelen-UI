@@ -170,6 +170,13 @@ export const SeelenWegSettings = () => {
             />
           </SettingsOption>
           <SettingsOption>
+            <div>{t('weg.items.thumbnail_generation_enabled')}</div>
+            <Switch
+              checked={settings.thumbnailGenerationEnabled}
+              onChange={(value) => dispatch(SeelenWegActions.setThumbnailGenerationEnabled(value))}
+            />
+          </SettingsOption>
+          <SettingsOption>
             <div>{t('weg.items.visible_separators')}</div>
             <Switch
               checked={settings.visibleSeparators}

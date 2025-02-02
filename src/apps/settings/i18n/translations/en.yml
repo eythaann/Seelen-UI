@@ -275,6 +275,7 @@ weg:
       all: All
       label: Unpinned Items Visibility
       on_monitor: On Monitor
+    thumbnail_generation_enabled: Generate thumbnails on item hoover
     visible_separators: Visible Separators
     zoom_size: Zoomed Size (used for themes)
   label: Dock/Taskbar

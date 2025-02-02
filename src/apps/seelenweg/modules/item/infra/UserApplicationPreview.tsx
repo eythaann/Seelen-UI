@@ -3,12 +3,16 @@ import { convertFileSrc, invoke } from '@tauri-apps/api/core';
 import { listen } from '@tauri-apps/api/event';
 import { Spin } from 'antd';
 import { MouseEvent, useEffect, useReducer, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
+
+import { Selectors } from '../../shared/store/app';
 
 import { HWND } from '../../shared/store/domain';
 
 import { Icon } from '../../../../shared/components/Icon';
+import { cx } from '../../../../shared/styles';
 
 interface PreviewProps {
   title: string;
@@ -17,6 +21,7 @@ interface PreviewProps {
 }
 
 export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps) => {
+  const settings = useSelector(Selectors.settings);
   const imageUrl = convertFileSrc(`${LAZY_CONSTANTS.TEMP_FOLDER}${hwnd}.png`);
 
   const [imageSrc, setImageSrc] = useState<string | null>(imageUrl);
@@ -39,7 +44,7 @@ export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps)
 
   return (
     <div
-      className="weg-item-preview"
+      className={cx('weg-item-preview', { 'weg-item-preview-thumbnail-disabled': !settings.thumbnailGenerationEnabled })}
       onClick={() => {
         invoke(SeelenCommand.WegToggleWindowState, { hwnd, wasFocused: isFocused });
       }}
@@ -50,17 +55,19 @@ export const UserApplicationPreview = ({ title, hwnd, isFocused }: PreviewProps)
           <Icon iconName="IoClose" />
         </div>
       </div>
-      <div className="weg-item-preview-image-container">
-        {imageSrc ? (
-          <img
-            className="weg-item-preview-image"
-            src={imageSrc + `?${new Date().getTime()}`}
-            onError={() => setImageSrc(null)}
-          />
-        ) : (
-          <Spin className="weg-item-preview-spin" />
-        )}
-      </div>
+      { settings.thumbnailGenerationEnabled &&
+        <div className="weg-item-preview-image-container">
+          {imageSrc ? (
+            <img
+              className="weg-item-preview-image"
+              src={imageSrc + `?${new Date().getTime()}`}
+              onError={() => setImageSrc(null)}
+            />
+          ) : (
+            <Spin className="weg-item-preview-spin" />
+          )}
+        </div>
+      }
     </div>
   );
 };
