@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.1.0]
 ### features
 - allow custom animations on popups/dropdowns.
 - show open new window buttons on dock app items context menu.
