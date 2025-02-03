@@ -37,6 +37,7 @@ const USER_PROFILE_ONEDRIVE_FOLDER_KEY: &str = "UserFolder";
 const USER_SID_AUTH_PATH: &str =
     "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI";
 const USER_SID_AUTH_PATH_KEY: &str = "LastLoggedOnUserSID";
+const USER_USERNAME_AUTH_PATH_KEY: &str = "LastLoggedOnUser";
 
 lazy_static! {
     pub static ref USER_MANAGER: Arc<Mutex<UserManager>> = Arc::new(Mutex::new(
@@ -271,14 +272,35 @@ impl UserManager {
 // Instance
 impl UserManager {
     pub fn create_user(&self) -> Result<User> {
+        let elevated = WindowsApi::is_elevated()?;
+
+        let (username, domain, profile_home) = if !elevated {
+            (
+                std::env!("USERNAME").to_string(),
+                std::env!("USERDOMAIN").to_string(),
+                PathBuf::from(std::env!("USERPROFILE")),
+            )
+        } else {
+            let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+            let settings = hklm.open_subkey(USER_SID_AUTH_PATH)?;
+            let username: String = settings.get_value(USER_USERNAME_AUTH_PATH_KEY)?;
+            let splitted = username.split('\\').collect::<Vec<&str>>();
+            (
+                splitted[1].to_string(),
+                splitted[0].to_string(),
+                get_app_handle().path().home_dir()?,
+            )
+        };
+
         let mut user = User {
-            name: std::env!("USERNAME").to_string(),
-            domain: std::env!("USERDOMAIN").to_string(),
-            profile_home_path: PathBuf::from(std::env!("USERPROFILE")),
+            name: username,
+            domain,
+            profile_home_path: profile_home,
             email: None,
             one_drive_path: None,
             profile_picture_path: None,
         };
+        log::trace!("User {:?}", user);
         user.profile_picture_path = self
             .get_user_profile_picture_path(PictureQuality::Quality1080)
             .ok();
