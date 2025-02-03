@@ -58,12 +58,6 @@ userhome:
     reduce_items: Hiển thị ít hơn ...
     title: Thư mục người dùng
     videos: Video
-  history:
-    global: Lịch sử toàn cầu
-    local: Lịch sử địa phương
-    more_items: Hiển thị thêm ...
-    reduce_items: Hiển thị ít hơn ...
-    title: Lịch sử của ứng dụng
   profile:
     accounts: Mở cài đặt tài khoản
     open_onedrive: Mở thư mục OneDrive

@@ -14,3 +14,7 @@ service:
     Seelen UI Service (slu-service) es una dependencia/ayudante para que la
     aplicación funcione correctamente.
   not_running_ok: Iniciar servicio
+tray:
+  quit: Deje de
+  restart: Reiniciar IU
+  settings: Ajustes

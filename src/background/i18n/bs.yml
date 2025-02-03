@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service) je zavisnost/pomoćnik za pravilno
     funkcioniranje aplikacije.
   not_running_ok: Pokreni servis
+tray:
+  quit: Prestati
+  restart: Restart UI
+  settings: Postavke

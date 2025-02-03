@@ -58,12 +58,6 @@ userhome:
     reduce_items: ઓછું બતાવો ...
     title: વપરાશકર્તા નિયામક
     videos: વિડિઓઝ
-  history:
-    global: વૈશ્વિક ઇતિહાસ
-    local: સ્થાનિક ઇતિહાસ
-    more_items: વધુ બતાવો ...
-    reduce_items: ઓછું બતાવો ...
-    title: અરજીનો ઇતિહાસ
   profile:
     accounts: એકાઉન્ટ સેટિંગ્સ ખોલો
     open_onedrive: ખુલ્લી વનડ્રાઇવ ડિરેક્ટરી

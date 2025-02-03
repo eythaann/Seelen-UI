@@ -12,3 +12,7 @@ service:
     Seelen UI pakalpojums (slu-service) ir atkarība/palīgs, lai lietotne
     darbotos pareizi.
   not_running_ok: Sāciet pakalpojumu
+tray:
+  quit: Pārtraukt
+  restart: Lietotāja interfeisa restartēšana
+  settings: Iestatījumi

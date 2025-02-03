@@ -12,3 +12,7 @@ service:
     Mae Seelen UI Service (slu-service) yn ddibyniaeth / cynorthwyydd i'r ap
     weithio'n iawn.
   not_running_ok: Dechrau gwasanaeth
+tray:
+  quit: Gadawen
+  restart: Ailgychwyn UI
+  settings: Gosodiadau

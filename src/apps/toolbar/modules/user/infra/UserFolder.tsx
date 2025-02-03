@@ -42,37 +42,43 @@ export function UserFolder({ folderProps, setCategoryOpen, categoryOpen }: UserF
     setCategoryOpen(categoryOpen == category ? 'Unknown' : category);
   };
 
+  const files =
+    category == 'Recent'
+      ? content.filter((item) => !item.path.toLocaleLowerCase().endsWith('.lnk'))
+      : content;
+
   return (
     <div className="userhome-directory">
       <div className="userhome-directory-header" onClick={OpenOnExplorer}>
         <Icon iconName={icon} className="userhome-directory-icon"></Icon>
         <span>{t(`userhome.folders.${category.toLowerCase()}`)}</span>
-        <Icon
-          iconName="IoIosArrowDown"
-          className={cx('chevron', {
-            'chevron-active': category == categoryOpen,
-          })}
-          onClick={onClickChevron}
-        />
+        <button className="userhome-directory-header-collapse-button" onClick={onClickChevron}>
+          <Icon
+            iconName="IoIosArrowDown"
+            className={cx('chevron', {
+              'chevron-active': category == categoryOpen,
+            })}
+          />
+        </button>
       </div>
       <ul
         className={cx('userhome-directory-content', {
           'userhome-directory-content-open': category == categoryOpen,
         })}
       >
-        {content.length == 0 && <EmptyList />}
-        {content.slice(0, folderShowCount).map((item, index) => (
+        {files.length == 0 && <EmptyList />}
+        {files.slice(0, folderShowCount).map((item, index) => (
           <FilePreview file={item} key={index} />
         ))}
-        {content.length > 5 && (
+        {files.length > 5 && (
           <button
             className="userhome-list-extender"
             onClick={(e) => {
-              setFolderShowCount(content.length > folderShowCount ? folderShowCount * 2 : 5);
+              setFolderShowCount(files.length > folderShowCount ? folderShowCount * 2 : 5);
               e.stopPropagation();
             }}
           >
-            {content.length > folderShowCount
+            {files.length > folderShowCount
               ? t('userhome.folders.more_items')
               : t('userhome.folders.reduce_items')}
           </button>

@@ -12,3 +12,7 @@ service:
     Seelen UI үйлчилгээ (slu-service) нь програмыг зөв ажиллуулахад
     хамааралтай/туслагч юм.
   not_running_ok: Үйлчилгээг эхлүүлэх
+tray:
+  quit: Орхих
+  restart: UI-г дахин эхлүүлнэ үү
+  settings: Тохиргоо

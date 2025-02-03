@@ -58,12 +58,6 @@ userhome:
     reduce_items: Mostra menys ...
     title: Directoris d'usuaris
     videos: Vídeos
-  history:
-    global: Història global
-    local: Història local
-    more_items: Mostra més ...
-    reduce_items: Mostra menys ...
-    title: Història de l'aplicació
   profile:
     accounts: Configuració del compte obert
     open_onedrive: Obriu el directori OneDrive

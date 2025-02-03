@@ -58,12 +58,6 @@ userhome:
     reduce_items: Erakutsi gutxiago ...
     title: Erabiltzaileen direktorioak
     videos: Bideo
-  history:
-    global: Historia globala
-    local: Tokiko historia
-    more_items: Erakutsi gehiago ...
-    reduce_items: Erakutsi gutxiago ...
-    title: Aplikazioaren historia
   profile:
     accounts: Ireki kontuaren ezarpenak
     open_onedrive: OneDrive direktorio irekia

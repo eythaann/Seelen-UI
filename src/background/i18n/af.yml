@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-diens) is 'n afhanklikheid/helper vir die toepassing
     om behoorlik te werk.
   not_running_ok: Begin diens
+tray:
+  quit: Laat vaar
+  restart: Herbegin UI
+  settings: Instellings

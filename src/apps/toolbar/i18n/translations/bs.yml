@@ -58,12 +58,6 @@ userhome:
     reduce_items: Prikaži manje ...
     title: Korisnički direktoriji
     videos: Video snimci
-  history:
-    global: Globalna istorija
-    local: Lokalna istorija
-    more_items: Prikaži više ...
-    reduce_items: Prikaži manje ...
-    title: Istorija aplikacija
   profile:
     accounts: Postavke otvorenog računa
     open_onedrive: Otvoreni direktorij OneDrive

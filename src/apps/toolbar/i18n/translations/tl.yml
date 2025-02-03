@@ -58,12 +58,6 @@ userhome:
     reduce_items: Mas kaunti ang ipakita ...
     title: Mga Direktoryo ng Gumagamit
     videos: Mga video
-  history:
-    global: Global History
-    local: Lokal na Kasaysayan
-    more_items: Ipakita pa ...
-    reduce_items: Mas kaunti ang ipakita ...
-    title: Kasaysayan ng Application
   profile:
     accounts: Buksan ang Mga Setting ng Account
     open_onedrive: Buksan ang direktoryo ng OneDrive

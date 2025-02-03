@@ -14,3 +14,7 @@ service:
     Ang Seelen UI Service (slu-service) ay isang dependency/helper para gumana
     nang maayos ang app.
   not_running_ok: Simulan ang serbisyo
+tray:
+  quit: Huminto ka
+  restart: I -restart ang UI
+  settings: Mga setting

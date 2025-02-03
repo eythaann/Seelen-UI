@@ -58,12 +58,6 @@ userhome:
     reduce_items: کم دکھائیں ...
     title: صارف ڈائریکٹریز
     videos: ویڈیوز
-  history:
-    global: عالمی تاریخ
-    local: مقامی تاریخ
-    more_items: مزید دکھائیں ...
-    reduce_items: کم دکھائیں ...
-    title: درخواست کی تاریخ
   profile:
     accounts: اکاؤنٹ کی ترتیبات کھولیں
     open_onedrive: اوپن ریو ڈائرکٹری کھولیں

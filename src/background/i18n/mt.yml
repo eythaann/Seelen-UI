@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service) huwa dipendenza/helper biex l-app taħdem
     sew.
   not_running_ok: Ibda s-servizz
+tray:
+  quit: Nieqaf
+  restart: Irristartja l-UI
+  settings: Settings

@@ -12,3 +12,7 @@ service:
     Seelen UI paslauga (slu-service) yra priklausomybė / pagalbininkas, kad
     programa tinkamai veiktų.
   not_running_ok: Pradėti paslaugą
+tray:
+  quit: Baigti
+  restart: Iš naujo paleiskite vartotojo sąsają
+  settings: Nustatymai

@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service) adalah ketergantungan/pembantu agar aplikasi
     berfungsi dengan baik.
   not_running_ok: Mulai layanan
+tray:
+  quit: Berhenti
+  restart: Mulai ulang UI
+  settings: Pengaturan

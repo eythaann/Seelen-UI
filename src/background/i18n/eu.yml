@@ -12,3 +12,7 @@ service:
     Seelen UI Zerbitzua (slu-zerbitzua) menpekotasun/laguntzailea da aplikazioak
     behar bezala funtziona dezan.
   not_running_ok: Hasi zerbitzua
+tray:
+  quit: Laga
+  restart: Berrabiarazi ui
+  settings: Ezarpen

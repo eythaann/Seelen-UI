@@ -12,3 +12,7 @@ service:
     Isevisi ye-Seelen UI (slu-service) incike/umsizi ukuze uhlelo lokusebenza
     lusebenze kahle.
   not_running_ok: Qala isevisi
+tray:
+  quit: Yeka
+  restart: Qala kabusha ui
+  settings: Amasethingi

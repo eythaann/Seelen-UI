@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service) waa ku-tiirsanaan/caawiye abka inuu si sax
     ah u shaqeeyo.
   not_running_ok: Bilow adeegga
+tray:
+  quit: Joojin
+  restart: Dib u bilaw Ui
+  settings: Dejinta

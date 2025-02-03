@@ -58,12 +58,6 @@ userhome:
     reduce_items: Kêmtir nîşan bide ...
     title: Rêbernameyên bikarhêner
     videos: Videos
-  history:
-    global: Dîroka gerdûnî
-    local: Dîroka Herêmî
-    more_items: Zêdetir ...
-    reduce_items: Kêmtir nîşan bide ...
-    title: Dîroka Serlêdanê
   profile:
     accounts: Mîhengên hesabê vekin
     open_onedrive: Peldanka OneDrive vekirî

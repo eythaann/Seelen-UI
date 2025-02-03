@@ -58,12 +58,6 @@ userhome:
     reduce_items: குறைவாக காட்டு ...
     title: பயனர் கோப்பகங்கள்
     videos: வீடியோக்கள்
-  history:
-    global: உலக வரலாறு
-    local: உள்ளூர் வரலாறு
-    more_items: மேலும் காட்டு ...
-    reduce_items: குறைவாக காட்டு ...
-    title: பயன்பாட்டின் வரலாறு
   profile:
     accounts: கணக்கு அமைப்புகளைத் திறக்கவும்
     open_onedrive: திறந்த onedrive அடைவு

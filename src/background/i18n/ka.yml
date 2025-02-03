@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service) არის დამოკიდებულება/დამხმარე აპის გამართულად
     მუშაობისთვის.
   not_running_ok: სერვისის დაწყება
+tray:
+  quit: მიტოვება
+  restart: გადატვირთეთ UI
+  settings: პარამეტრები

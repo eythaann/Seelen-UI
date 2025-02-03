@@ -58,12 +58,6 @@ userhome:
     reduce_items: কম দেখান ...
     title: ব্যবহারকারী ডিরেক্টরি
     videos: ভিডিও
-  history:
-    global: বিশ্ব ইতিহাস
-    local: স্থানীয় ইতিহাস
-    more_items: আরও দেখান ...
-    reduce_items: কম দেখান ...
-    title: আবেদনের ইতিহাস
   profile:
     accounts: অ্যাকাউন্ট সেটিংস খুলুন
     open_onedrive: ওয়ানড্রাইভ ডিরেক্টরি খুলুন

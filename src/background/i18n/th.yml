@@ -10,3 +10,7 @@ service:
     Seelen UI Service (slu-service)
     เป็นตัวพึ่งพา/ตัวช่วยเพื่อให้แอปทำงานได้อย่างถูกต้อง
   not_running_ok: เริ่มให้บริการ
+tray:
+  quit: ล้มเลิก
+  restart: รีสตาร์ท UI
+  settings: การตั้งค่า

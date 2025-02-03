@@ -58,12 +58,6 @@ userhome:
     reduce_items: Показати менше...
     title: Каталоги користувачів
     videos: Відео
-  history:
-    global: Глобальна історія
-    local: Краєзнавство
-    more_items: Показати більше...
-    reduce_items: Показати менше...
-    title: Історія додатку
   profile:
     accounts: Налаштування відкритого рахунку
     open_onedrive: Відкрийте каталог OneDrive

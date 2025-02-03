@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- style issue on toolbar user module.
+
+## [2.1.0]
 ### features
 - allow custom animations on popups/dropdowns.
 - show open new window buttons on dock app items context menu.
@@ -20,6 +24,7 @@
 - unremovable workspace module on toolbar.
 - missing system tray icons.
 - date not being inmediately updated on settings change.
+- ghost notification hitbox preventing mouse events on windows.
 
 ## [2.0.14]
 ### hotfix
