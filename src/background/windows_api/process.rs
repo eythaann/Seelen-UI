@@ -49,6 +49,7 @@ impl Process {
         WindowsApi::open_process(PROCESS_QUERY_INFORMATION, false, self.0)
     }
 
+    /// will fail if the process is owned by another user
     pub fn open_limited_handle(&self) -> Result<HANDLE> {
         WindowsApi::open_process(PROCESS_QUERY_LIMITED_INFORMATION, false, self.0)
     }

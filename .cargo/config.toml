@@ -1,0 +1,2 @@
+[env]
+SLU_SERVICE_CONNECTION_TOKEN = "__local__"

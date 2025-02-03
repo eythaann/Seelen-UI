@@ -10,7 +10,7 @@ mod string_utils;
 mod task_scheduler;
 mod windows_api;
 
-use cli::{handle_cli, ServiceClient};
+use cli::{handle_console_client, TcpService};
 use crossbeam_channel::{Receiver, Sender};
 use error::Result;
 use itertools::Itertools;
@@ -92,7 +92,7 @@ fn stop_service_on_seelen_ui_closed() {
 pub fn setup() -> Result<()> {
     WindowsApi::set_process_dpi_aware()?;
     WindowsApi::enable_privilege(SE_TCB_NAME)?;
-    ServiceClient::listen_tcp()?;
+    TcpService::listen_tcp()?;
 
     if !is_seelen_ui_running() {
         launch_seelen_ui()?;
@@ -124,7 +124,7 @@ fn main() -> Result<()> {
     if is_local_dev() {
         WindowsApi::show_window(WindowsApi::get_console_window().0 as _, SW_MINIMIZE.0)?;
     }
-    handle_cli()?;
+    handle_console_client()?;
     if is_already_runnning() {
         return Ok(());
     }
