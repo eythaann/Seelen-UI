@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use windows::Win32::{
     Foundation::{HWND, POINT, RECT},
     UI::{
@@ -21,7 +20,7 @@ use crate::{
     error_handler::Result,
     pcstr,
     utils::{is_windows_10, is_windows_11, resolve_guid_path, sleep_millis},
-    windows_api::{window::Window, AppBarData, AppBarDataState, Com, WindowEnumerator, WindowsApi},
+    windows_api::{AppBarData, AppBarDataState, Com, WindowEnumerator, WindowsApi},
 };
 
 use super::domain::{RegistryNotifyIcon, TrayIcon};
@@ -138,6 +137,8 @@ pub fn get_tray_icons() -> Result<Vec<TrayIcon>> {
 
         let mut idx = 0;
         for element in children {
+            // running items got from the registry should be the same amount as the ones in the tray overflow
+            // and in the same order
             if let Some(item_on_reg) = tray_from_registry.get(idx) {
                 tray_elements.push(TrayIcon {
                     label: element
@@ -208,34 +209,30 @@ impl TrayIconManager {
 
     pub fn enum_from_registry() -> Result<Vec<RegistryNotifyIcon>> {
         let hkcr = RegKey::predef(HKEY_CURRENT_USER);
-        let settings = hkcr.open_subkey("Control Panel\\NotifyIconSettings")?;
-        let list = settings.get_raw_value("UIOrderList")?;
+        let settings =
+            hkcr.open_subkey_with_flags("Control Panel\\NotifyIconSettings", KEY_ALL_ACCESS)?;
 
         // the order in this list is the order in which the icons will be displayed on the Win Taskbar and Win Tray Overflow
-        let ids = list
-            .bytes
-            .chunks_exact(8)
-            .map(|chunk| {
-                u64::from_le_bytes(chunk.try_into().expect("Registry value is not 8 bytes"))
-            })
-            .collect_vec();
+        let list = settings.get_raw_value("UIOrderList")?.bytes;
+
+        let mut windows = Vec::new();
+        WindowEnumerator::new().for_each_v2(|w| {
+            if let Ok(path) = w.process().program_path() {
+                windows.push((w.address(), path.to_string_lossy().to_lowercase()));
+            }
+        })?;
 
         let mut registers = Vec::new();
+        for chunk in list.chunks(8) {
+            let key = u64::from_le_bytes(chunk.try_into()?).to_string();
+            let regkey = settings.open_subkey_with_flags(&key, KEY_ALL_ACCESS)?;
 
-        let windows = WindowEnumerator::new().map(Window::from)?;
-
-        for id in ids {
-            let regkey = settings.open_subkey_with_flags(id.to_string(), KEY_ALL_ACCESS)?;
-
-            let promoted: u32 = regkey.get_value("IsPromoted").unwrap_or_default();
-            if promoted == 1 {
-                // avoid show tray icons directly on taskbar all icons should be in the tray overflow window
-                regkey.set_value("IsPromoted", &0u32)?;
-            }
+            // custom promotion value, to be used on our side
+            let promoted: u32 = regkey.get_value("IsSluPromoted").unwrap_or_default();
 
             let path_with_guid: String = regkey.get_value("ExecutablePath")?;
             let mut item = RegistryNotifyIcon {
-                key: id.to_string(),
+                key,
                 executable_path: resolve_guid_path(path_with_guid)?,
                 icon_snapshot: regkey.get_raw_value("IconSnapShot").map(|v| v.bytes).ok(),
                 initial_tooltip: regkey.get_value("InitialTooltip").ok(),
@@ -255,22 +252,28 @@ impl TrayIconManager {
                 item.is_running = unsafe { Shell_NotifyIconGetRect(&identifier).is_ok() };
             } else if let Some(uid) = &item.icon_uid {
                 let str_item_exe_path = item.executable_path.to_string_lossy().to_lowercase();
-                item.is_running = windows.iter().any(|w| match w.process().program_path() {
-                    Ok(path) if path.to_string_lossy().to_lowercase() == str_item_exe_path => {
+                item.is_running = windows.iter().any(|(hwnd, path)| {
+                    path == &str_item_exe_path && {
                         let identifier = NOTIFYICONIDENTIFIER {
                             cbSize: std::mem::size_of::<NOTIFYICONIDENTIFIER>() as u32,
-                            hWnd: w.hwnd(),
+                            hWnd: HWND(*hwnd as _),
                             uID: *uid,
                             ..Default::default()
                         };
                         unsafe { Shell_NotifyIconGetRect(&identifier).is_ok() }
                     }
-                    _ => false,
                 });
             }
 
             if item.is_running {
                 registers.push(item);
+                // send to tray overflow
+                regkey.set_value("IsPromoted", &0u32)?;
+            } else {
+                // send to taskbar (outside tray overflow) items that are not running
+                // this is done to filter items that can't be handled, as example the old nvidia control panel tray
+                // these are unhandable cuz they are added from another user (SYSTEM)
+                regkey.set_value("IsPromoted", &1u32)?;
             }
         }
         Ok(registers)
