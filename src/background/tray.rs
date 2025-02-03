@@ -31,17 +31,13 @@ pub fn try_register_tray_icon(app: &mut App) -> Result<()> {
 }
 
 fn register_tray_icon(app: &mut App) -> Result<()> {
-    let settings = MenuItemBuilder::with_id("settings", "Open Settings").build(app)?;
-
-    let toggle_pause = MenuItemBuilder::with_id("pause", "Pause/Resume").build(app)?;
-    let restart = MenuItemBuilder::with_id("restart", "Reload").build(app)?;
-
-    let quit = MenuItemBuilder::with_id("quit", "Quit").build(app)?;
+    let settings = MenuItemBuilder::with_id("settings", t!("tray.settings")).build(app)?;
+    let restart = MenuItemBuilder::with_id("restart", t!("tray.restart")).build(app)?;
+    let quit = MenuItemBuilder::with_id("quit", t!("tray.quit")).build(app)?;
 
     let menu = MenuBuilder::new(app)
         .item(&settings)
         .separator()
-        .item(&toggle_pause)
         .item(&restart)
         .separator()
         .item(&quit)
@@ -59,7 +55,6 @@ fn register_tray_icon(app: &mut App) -> Result<()> {
                 "settings" => {
                     log_error!(Seelen::show_settings());
                 }
-                "pause" => {}
                 "restart" => app.restart(),
                 "quit" => app.exit(0),
                 _ => (),

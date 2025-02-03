@@ -58,12 +58,6 @@ userhome:
     reduce_items: Arată mai puțin...
     title: Directoare utilizator
     videos: Video
-  history:
-    global: Istoria globală
-    local: Istoria locală
-    more_items: Arată mai mult...
-    reduce_items: Arată mai puțin...
-    title: Istoricul aplicației
   profile:
     accounts: Deschideți setările contului
     open_onedrive: Deschideți directorul OneDrive

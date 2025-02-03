@@ -58,12 +58,6 @@ userhome:
     reduce_items: Tampilkan lebih sedikit...
     title: Direktori pengguna
     videos: Video
-  history:
-    global: Sejarah global
-    local: Sejarah lokal
-    more_items: Tampilkan lebih banyak...
-    reduce_items: Tampilkan lebih sedikit...
-    title: Riwayat aplikasi
   profile:
     accounts: Buka pengaturan akun
     open_onedrive: Buka direktori OneDrive

@@ -58,12 +58,6 @@ userhome:
     reduce_items: Onyesha kidogo ...
     title: Saraka za watumiaji
     videos: Video
-  history:
-    global: Historia ya Ulimwenguni
-    local: Historia ya Mitaa
-    more_items: Onyesha zaidi ...
-    reduce_items: Onyesha kidogo ...
-    title: Historia ya Maombi
   profile:
     accounts: Fungua mipangilio ya akaunti
     open_onedrive: Fungua saraka ya OneDrive

@@ -10,3 +10,7 @@ service:
   not_running: خدمة Seelen UI لا تعمل
   not_running_description: تعتبر خدمة Seelen UI (خدمة slu) بمثابة تبعية/مساعد للتطبيق للعمل بشكل صحيح.
   not_running_ok: ابدأ الخدمة
+tray:
+  quit: الإقلاع عن التدخين
+  restart: إعادة تشغيل واجهة المستخدم
+  settings: الإعدادات

@@ -58,12 +58,6 @@ userhome:
     reduce_items: Kevesebb mutatása...
     title: Felhasználói könyvtárak
     videos: Videók
-  history:
-    global: Globális történelem
-    local: Helytörténet
-    more_items: További részletek...
-    reduce_items: Kevesebb mutatása...
-    title: Az alkalmazás története
   profile:
     accounts: Nyitott számla beállításai
     open_onedrive: OneDrive könyvtár megnyitása

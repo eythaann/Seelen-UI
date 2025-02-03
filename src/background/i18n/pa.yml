@@ -10,3 +10,7 @@ service:
   not_running: ਸੀਲਨ UI ਸੇਵਾ ਨਹੀਂ ਚੱਲ ਰਹੀ
   not_running_description: ਸੀਲੇਨ UI ਸੇਵਾ (ਸਲੂ-ਸੇਵਾ) ਐਪ ਦੇ ਸਹੀ ਢੰਗ ਨਾਲ ਕੰਮ ਕਰਨ ਲਈ ਇੱਕ ਨਿਰਭਰਤਾ/ਸਹਾਇਕ ਹੈ।
   not_running_ok: ਸੇਵਾ ਸ਼ੁਰੂ ਕਰੋ
+tray:
+  quit: ਛੱਡੋ
+  restart: ਰੀਸਟਾਰਟ ਯੂਆਈ
+  settings: ਸੈਟਿੰਗਜ਼

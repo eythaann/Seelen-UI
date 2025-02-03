@@ -12,3 +12,7 @@ service:
     Xizmeta UI ya Seelen (slu-xizmet) ji bo ku sepan bi rêkûpêk bixebite
     pêwendiyek / arîkarek e.
   not_running_ok: Xizmetê dest pê bikin
+tray:
+  quit: Devjêberdan
+  restart: UI ji nû ve bike
+  settings: Mîhengan

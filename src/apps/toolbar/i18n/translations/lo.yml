@@ -58,12 +58,6 @@ userhome:
     reduce_items: ສະແດງຫນ້ອຍ ...
     title: ລາຍການຜູ້ໃຊ້
     videos: ວິດີກ້າ
-  history:
-    global: ປະຫວັດສາດທົ່ວໂລກ
-    local: ປະຫວັດສາດທ້ອງຖິ່ນ
-    more_items: ສະແດງໃຫ້ເຫັນຕື່ມ ...
-    reduce_items: ສະແດງຫນ້ອຍ ...
-    title: ປະຫວັດຂອງການສະຫມັກ
   profile:
     accounts: ເປີດການຕັ້ງຄ່າບັນຊີ
     open_onedrive: ເປີດໄດເລກະທໍລີ signrive

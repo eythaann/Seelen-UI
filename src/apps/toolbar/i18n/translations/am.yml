@@ -58,12 +58,6 @@ userhome:
     reduce_items: ያነሰ አሳይ ...
     title: የተጠቃሚ ዳይሬክቶች
     videos: ቪዲዮዎች
-  history:
-    global: ዓለም አቀፍ ታሪክ
-    local: የአካባቢ ታሪክ
-    more_items: ተጨማሪ አሳይ ...
-    reduce_items: ያነሰ አሳይ ...
-    title: የትግበራ ታሪክ
   profile:
     accounts: የመለያ ቅንብሮች ይክፈቱ
     open_onedrive: የ Oddrive ማውጫ ይክፈቱ

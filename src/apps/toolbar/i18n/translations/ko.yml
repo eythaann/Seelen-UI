@@ -58,12 +58,6 @@ userhome:
     reduce_items: 덜 보기...
     title: 사용자 디렉터리
     videos: 동영상
-  history:
-    global: 글로벌 역사
-    local: 지역 역사
-    more_items: 더 보기...
-    reduce_items: 덜 보기...
-    title: 애플리케이션 기록
   profile:
     accounts: 계정 설정 열기
     open_onedrive: OneDrive 디렉터리 열기

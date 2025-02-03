@@ -58,12 +58,6 @@ userhome:
     reduce_items: Daha az göster...
     title: Kullanıcı dizinleri
     videos: Videolar
-  history:
-    global: Küresel tarih
-    local: Yerel tarih
-    more_items: Daha fazlasını göster...
-    reduce_items: Daha az göster...
-    title: Uygulama geçmişi
   profile:
     accounts: Hesap ayarlarını aç
     open_onedrive: OneDrive dizinini açın

@@ -58,12 +58,6 @@ userhome:
     reduce_items: Rādīt mazāk...
     title: Lietotāju direktoriji
     videos: Videoklipi
-  history:
-    global: Pasaules vēsture
-    local: Vietējā vēsture
-    more_items: Rādīt vairāk...
-    reduce_items: Rādīt mazāk...
-    title: Pieteikuma vēsture
   profile:
     accounts: Atvērt konta iestatījumus
     open_onedrive: Atveriet OneDrive direktoriju

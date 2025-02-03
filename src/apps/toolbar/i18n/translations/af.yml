@@ -58,12 +58,6 @@ userhome:
     reduce_items: Wys minder ...
     title: Gebruikersgidse
     videos: Video's
-  history:
-    global: Globale geskiedenis
-    local: Plaaslike geskiedenis
-    more_items: Wys meer ...
-    reduce_items: Wys minder ...
-    title: Toepassing se geskiedenis
   profile:
     accounts: Open rekeninginstellings
     open_onedrive: Oop OneDrive Directory

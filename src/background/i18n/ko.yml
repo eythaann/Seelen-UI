@@ -8,3 +8,7 @@ service:
   not_running: Seelen UI 서비스가 실행되고 있지 않습니다.
   not_running_description: Seelen UI 서비스(slu-service)는 앱이 제대로 작동하기 위한 종속성/도우미입니다.
   not_running_ok: 서비스 시작
+tray:
+  quit: 종료
+  restart: UI 다시 시작
+  settings: 설정

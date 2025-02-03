@@ -58,12 +58,6 @@ userhome:
     reduce_items: کمتر نشان دهید ...
     title: دایرکتوری های کاربر
     videos: فیلم
-  history:
-    global: تاریخ جهانی
-    local: تاریخ محلی
-    more_items: نمایش بیشتر ...
-    reduce_items: کمتر نشان دهید ...
-    title: تاریخچه برنامه
   profile:
     accounts: تنظیمات حساب باز
     open_onedrive: دایرکتوری OneDrive را باز کنید

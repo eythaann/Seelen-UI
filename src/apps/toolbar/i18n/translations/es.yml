@@ -58,12 +58,6 @@ userhome:
     reduce_items: Mostrar menos...
     title: Directorios de usuarios
     videos: Vídeos
-  history:
-    global: Historia mundial
-    local: Historia local
-    more_items: Ver más...
-    reduce_items: Mostrar menos...
-    title: Historial de la aplicación
   profile:
     accounts: Abrir cuenta
     open_onedrive: Abrir el directorio OneDrive

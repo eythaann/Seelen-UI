@@ -10,3 +10,7 @@ service:
     Seelen UI Service (slu-service)
     គឺជាការពឹងផ្អែក/ជំនួយសម្រាប់កម្មវិធីឱ្យដំណើរការបានត្រឹមត្រូវ។
   not_running_ok: ចាប់ផ្តើមសេវាកម្ម
+tray:
+  quit: ចាកចេញ
+  restart: ចាប់ផ្តើម UI ឡើងវិញ
+  settings: ការកំណត់

@@ -58,12 +58,6 @@ userhome:
     reduce_items: لږ وښایاست ...
     title: د کارونکي عمومي لارښود
     videos: ویډیوګانې
-  history:
-    global: نړیوال تاریخ
-    local: ځایی تاریخ
-    more_items: نور وښایاست ...
-    reduce_items: لږ وښایاست ...
-    title: د غوښتنلیک تاریخ
   profile:
     accounts: د حساب خلاصول
     open_onedrive: یوډول ډایرکټر خلاص کړئ

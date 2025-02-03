@@ -14,3 +14,7 @@ service:
     Seelen UI Hizmeti (slu-service), uygulamanın düzgün çalışması için bir
     bağımlılık/yardımcıdır.
   not_running_ok: Hizmeti başlat
+tray:
+  quit: Bırak
+  restart: Kullanıcı Arayüzünü Yeniden Başlat
+  settings: Ayarlar

@@ -58,12 +58,6 @@ userhome:
     reduce_items: Бага харуулах ...
     title: Хэрэглэгчийн газар
     videos: Видео бичлэг
-  history:
-    global: Бүх түүх
-    local: Орон нутгийн түүх
-    more_items: Илүү ихийг харуулах ...
-    reduce_items: Бага харуулах ...
-    title: Програмын түүх
   profile:
     accounts: Дансны тохиргоог нээх
     open_onedrive: OnedRive директорыг нээх

@@ -58,12 +58,6 @@ userhome:
     reduce_items: Pokažite manje ...
     title: Korisničke direktorije
     videos: Videozapisi
-  history:
-    global: Globalna povijest
-    local: Lokalna povijest
-    more_items: Pokažite još ...
-    reduce_items: Pokažite manje ...
-    title: Povijest aplikacije
   profile:
     accounts: Otvorene postavke računa
     open_onedrive: Otvoreni direktorij OneDrive

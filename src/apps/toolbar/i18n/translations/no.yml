@@ -58,12 +58,6 @@ userhome:
     reduce_items: Vis mindre ...
     title: Brukerkataloger
     videos: Videoer
-  history:
-    global: Global historie
-    local: Lokal historie
-    more_items: Vis mer ...
-    reduce_items: Vis mindre ...
-    title: Applikasjonens historie
   profile:
     accounts: Åpne kontoinnstillinger
     open_onedrive: Åpne OneDrive -katalogen

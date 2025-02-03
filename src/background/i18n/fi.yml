@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service) on riippuvuus/apuohjelma, jonka avulla
     sovellus toimii oikein.
   not_running_ok: Aloita palvelu
+tray:
+  quit: Lopeta
+  restart: Käynnistä käyttöliittymä uudelleen
+  settings: Asetukset

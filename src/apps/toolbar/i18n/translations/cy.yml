@@ -58,12 +58,6 @@ userhome:
     reduce_items: Dangos llai ...
     title: Cyfeiriaduron Defnyddwyr
     videos: Fideos
-  history:
-    global: Hanes Byd -eang
-    local: Hanes Lleol
-    more_items: Dangos mwy ...
-    reduce_items: Dangos llai ...
-    title: Hanes y Cais
   profile:
     accounts: Gosodiadau Cyfrif Agored
     open_onedrive: Cyfeiriadur OneDrive Open

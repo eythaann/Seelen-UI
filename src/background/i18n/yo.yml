@@ -12,3 +12,7 @@ service:
     Iṣẹ Seelen UI (iṣẹ slu-slu) jẹ igbẹkẹle/oluranlọwọ fun ohun elo lati ṣiṣẹ
     daradara.
   not_running_ok: Bẹrẹ iṣẹ
+tray:
+  quit: Lọ kuro
+  restart: Atunbere ui
+  settings: Eto

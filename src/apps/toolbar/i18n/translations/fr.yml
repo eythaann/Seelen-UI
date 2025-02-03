@@ -58,12 +58,6 @@ userhome:
     reduce_items: Montrer moins...
     title: Répertoires d'utilisateurs
     videos: Vidéos
-  history:
-    global: Histoire mondiale
-    local: Histoire locale
-    more_items: Afficher plus...
-    reduce_items: Montrer moins...
-    title: Historique de l'application
   profile:
     accounts: Ouvrir les paramètres du compte
     open_onedrive: Ouvrir le répertoire OneDrive

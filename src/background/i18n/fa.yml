@@ -12,3 +12,7 @@ service:
     سرویس UI Seelen (سرویس slu) یک وابستگی / کمک کننده برای عملکرد صحیح برنامه
     است.
   not_running_ok: سرویس را شروع کنید
+tray:
+  quit: ترک
+  restart: UI را مجدداً راه اندازی کنید
+  settings: تنظیمات

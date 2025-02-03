@@ -58,12 +58,6 @@ userhome:
     reduce_items: Daha az göstər ...
     title: İstifadəçi qovluqları
     videos: Videonlar
-  history:
-    global: Qlobal tarix
-    local: Yerli tarix
-    more_items: Daha çox göstər ...
-    reduce_items: Daha az göstər ...
-    title: Tətbiq tarixi
   profile:
     accounts: Açıq hesab parametrləri
     open_onedrive: Açıq OneDrive Kataloqu

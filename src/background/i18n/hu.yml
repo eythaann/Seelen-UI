@@ -14,3 +14,7 @@ service:
     A Seelen UI szolgáltatás (slu-szolgáltatás) egy függőség/segítő az
     alkalmazás megfelelő működéséhez.
   not_running_ok: Indítsa el a szolgáltatást
+tray:
+  quit: Kilépés
+  restart: UI újraindítása
+  settings: Beállítások

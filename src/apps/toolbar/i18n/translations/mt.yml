@@ -58,12 +58,6 @@ userhome:
     reduce_items: Uri inqas ...
     title: Direttorji tal-utent
     videos: Vidjows
-  history:
-    global: Storja Globali
-    local: Storja lokali
-    more_items: Uri aktar ...
-    reduce_items: Uri inqas ...
-    title: L-istorja tal-applikazzjoni
   profile:
     accounts: Settings tal-kont miftuħ
     open_onedrive: Open OneDrive Directory

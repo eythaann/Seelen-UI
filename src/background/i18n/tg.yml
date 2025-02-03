@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service) як вобастагӣ/ёрирасон барои дуруст кор
     кардани барнома мебошад.
   not_running_ok: Хидматро оғоз кунед
+tray:
+  quit: Баромадан
+  restart: UI
+  settings: Танзимот

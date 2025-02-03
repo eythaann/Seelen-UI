@@ -12,3 +12,7 @@ service:
     Seelen UI Service (slu-service)
     ເປັນການເພິ່ງພາອາໄສ/ຜູ້ຊ່ວຍເພື່ອໃຫ້ແອັບເຮັດວຽກໄດ້ຢ່າງຖືກຕ້ອງ.
   not_running_ok: ເລີ່ມການບໍລິການ
+tray:
+  quit: ເຊົາ
+  restart: Restart UI
+  settings: ການກໍານົດ

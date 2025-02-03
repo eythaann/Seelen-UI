@@ -58,12 +58,6 @@ userhome:
     reduce_items: もっと見る
     title: ユーザー・ディレクトリ
     videos: ビデオ
-  history:
-    global: 世界の歴史
-    local: 地元の歴史
-    more_items: もっと見る...
-    reduce_items: もっと見る
-    title: 応募履歴
   profile:
     accounts: 口座開設の設定
     open_onedrive: OneDriveのディレクトリを開く

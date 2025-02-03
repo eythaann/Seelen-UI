@@ -58,12 +58,6 @@ userhome:
     reduce_items: Rodyti mažiau...
     title: Naudotojų katalogai
     videos: Vaizdo įrašai
-  history:
-    global: Pasaulinė istorija
-    local: Vietos istorija
-    more_items: Rodyti daugiau...
-    reduce_items: Rodyti mažiau...
-    title: Programos istorija
   profile:
     accounts: Atidarytos paskyros nustatymai
     open_onedrive: Atidarykite "OneDrive" katalogą

@@ -58,12 +58,6 @@ userhome:
     reduce_items: कम देखाउनुहोस् ...
     title: प्रयोगकर्ता डाइरेक्टरीहरू
     videos: भिडियोहरू
-  history:
-    global: विश्वव्यापी इतिहास
-    local: स्थानीय इतिहास
-    more_items: अधिक देखाउनुहोस् ...
-    reduce_items: कम देखाउनुहोस् ...
-    title: अनुप्रयोगको ईतिहास
   profile:
     accounts: खुला खाता सेटिंग्स
     open_onedrive: ओडारन निर्देशिका खोल्नुहोस्

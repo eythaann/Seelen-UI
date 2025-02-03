@@ -58,12 +58,6 @@ userhome:
     reduce_items: తక్కువ చూపించు ...
     title: వినియోగదారు డైరెక్టరీలు
     videos: వీడియోలు
-  history:
-    global: గ్లోబల్ హిస్టరీ
-    local: స్థానిక చరిత్ర
-    more_items: మరింత చూపించు ...
-    reduce_items: తక్కువ చూపించు ...
-    title: అప్లికేషన్ చరిత్ర
   profile:
     accounts: ఖాతా సెట్టింగులను తెరవండి
     open_onedrive: వన్‌డ్రైవ్ డైరెక్టరీని తెరవండి
