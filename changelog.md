@@ -4,6 +4,7 @@
 ### fix
 - style issue on toolbar user module.
 - showing unhandable tray icons (ex: nvidia old control panel).
+- installer being frozen on update.
 
 ## [2.1.0]
 ### features
