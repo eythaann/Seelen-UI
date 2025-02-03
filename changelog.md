@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+## [2.1.2]
 ### fix
 - style issue on toolbar user module.
 - showing unhandable tray icons (ex: nvidia old control panel).
