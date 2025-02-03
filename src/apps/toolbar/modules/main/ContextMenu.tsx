@@ -80,9 +80,6 @@ export function MainContextMenu() {
             },
           },
           {
-            type: 'divider',
-          },
-          {
             key: 'task_manager',
             icon: <Icon iconName="PiChartLineFill" />,
             label: t('context_menu.task_manager'),
