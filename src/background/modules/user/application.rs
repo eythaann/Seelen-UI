@@ -17,6 +17,10 @@ use std::{
     time::Duration,
 };
 use tauri::Manager;
+use windows::Win32::{
+    Security::Authentication::Identity::NameDisplay,
+    System::SystemInformation::ComputerNameDnsDomain,
+};
 use winreg::{
     enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
     RegKey,
@@ -28,15 +32,6 @@ use crate::{
 };
 
 use super::domain::PictureQuality;
-
-const USER_PROFILE_REG_PATH_PATTERN: &str =
-    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\";
-const USER_PROFILE_ONEDRIVE_PATH: &str = "SOFTWARE\\Microsoft\\OneDrive\\Accounts\\Personal";
-const USER_PROFILE_ONEDRIVE_EMAIL_KEY: &str = "UserEmail";
-const USER_PROFILE_ONEDRIVE_FOLDER_KEY: &str = "UserFolder";
-const USER_SID_AUTH_PATH: &str =
-    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI";
-const USER_SID_AUTH_PATH_KEY: &str = "LastLoggedOnUserSID";
 
 lazy_static! {
     pub static ref USER_MANAGER: Arc<Mutex<UserManager>> = Arc::new(Mutex::new(
@@ -151,7 +146,7 @@ impl UserManager {
                 log_error!(sender.send(UserManagerEvent::UserUpdated()))
             }
 
-            std::thread::sleep(Duration::from_millis(5000));
+            std::thread::sleep(Duration::from_secs(10));
         })?;
 
         Ok(instance)
@@ -187,9 +182,9 @@ impl UserManager {
 
     fn get_user_sid() -> Result<String> {
         let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
-        let settings = hklm.open_subkey(USER_SID_AUTH_PATH)?;
-        let sid: String = settings.get_value(USER_SID_AUTH_PATH_KEY)?;
-        Ok(sid)
+        let settings = hklm
+            .open_subkey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI")?;
+        Ok(settings.get_value("LastLoggedOnUserSID")?)
     }
 
     fn get_recursive_folder(path: PathBuf) -> Box<dyn Iterator<Item = DirEntry>> {
@@ -272,9 +267,9 @@ impl UserManager {
 impl UserManager {
     pub fn create_user(&self) -> Result<User> {
         let mut user = User {
-            name: std::env!("USERNAME").to_string(),
-            domain: std::env!("USERDOMAIN").to_string(),
-            profile_home_path: PathBuf::from(std::env!("USERPROFILE")),
+            name: WindowsApi::get_username(NameDisplay).unwrap_or_default(),
+            domain: WindowsApi::get_computer_name(ComputerNameDnsDomain).unwrap_or_default(),
+            profile_home_path: PathBuf::new(), // deprecated, remove this is unncessary
             email: None,
             one_drive_path: None,
             profile_picture_path: None,
@@ -359,21 +354,22 @@ impl UserManager {
 
     fn get_user_profile_picture_path(&self, quality: PictureQuality) -> Result<PathBuf> {
         let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
-        let mut key = String::default();
-        key.push_str(USER_PROFILE_REG_PATH_PATTERN);
-        key.push_str(self.user_sid.as_str());
-        let settings = hklm.open_subkey(key)?;
+        let settings = hklm.open_subkey(
+            format!(
+                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\{}",
+                self.user_sid
+            )
+            .as_str(),
+        )?;
         let path: String = settings.get_value(quality.as_str())?;
-
         Ok(path.into())
     }
 
     fn get_one_drive_attributes(&self) -> Result<(String, PathBuf)> {
-        let hklm = RegKey::predef(HKEY_CURRENT_USER);
-        let settings = hklm.open_subkey(USER_PROFILE_ONEDRIVE_PATH)?;
-        let email: String = settings.get_value(USER_PROFILE_ONEDRIVE_EMAIL_KEY)?;
-        let path: String = settings.get_value(USER_PROFILE_ONEDRIVE_FOLDER_KEY)?;
-
+        let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+        let settings = hkcu.open_subkey("SOFTWARE\\Microsoft\\OneDrive\\Accounts\\Personal")?;
+        let email: String = settings.get_value("UserEmail")?;
+        let path: String = settings.get_value("UserFolder")?;
         Ok((email, PathBuf::from(path)))
     }
 }

@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### fix
+- bad user infomation on user module.
+
 ## [2.1.2]
 ### fix
 - style issue on toolbar user module.

@@ -1,5 +1,6 @@
 import { invoke, SeelenCommand } from '@seelen-ui/lib';
 import { User } from '@seelen-ui/lib/types';
+import { path } from '@tauri-apps/api';
 import { convertFileSrc } from '@tauri-apps/api/core';
 import { Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -61,7 +62,9 @@ export function UserProfile({ user }: Props) {
           >
             <button
               className="userhome-profile-action-button"
-              onClick={() => invoke(SeelenCommand.OpenFile, { path: user.profileHomePath })}
+              onClick={async () => {
+                invoke(SeelenCommand.OpenFile, { path: await path.homeDir() });
+              }}
             >
               <Icon iconName="PiFolderUser" />
             </button>

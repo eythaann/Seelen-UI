@@ -8,7 +8,6 @@ plugin:
     concat(
       imgFromPath(user.profilePicturePath),
       " ",
-      "@",
       user.name
     )
   style:
