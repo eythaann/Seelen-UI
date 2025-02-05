@@ -73,7 +73,7 @@ export const UserApplication = memo(({ item, onAssociatedViewOpenChanged }: Prop
   });
 
   useEffect(() => {
-    if (openPreview) {
+    if (openPreview && settings.thumbnailGenerationEnabled) {
       updatePreviews(item.windows.map((w) => w.handle));
     }
   }, [openPreview]);
