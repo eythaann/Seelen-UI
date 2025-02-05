@@ -52,6 +52,7 @@ define_app_errors!(
     Updater(tauri_plugin_updater::Error);
     WinScreenshot(win_screenshot::capture::WSError);
     EvalExpr(evalexpr::EvalexprError);
+    TryFromSliceError(std::array::TryFromSliceError);
 );
 
 impl std::fmt::Debug for AppError {

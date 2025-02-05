@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 import { BackgroundByLayersV2 } from '../../../../seelenweg/components/BackgroundByLayers/infra';
 import { LAZY_CONSTANTS } from '../../shared/utils/infra';
 
-import { selectDefaultOutput, Selectors } from '../../shared/store/app';
-import { calcLuminance } from '../application';
+import { Selectors } from '../../shared/store/app';
+import { calcLuminance, selectDefaultOutput } from '../application';
 
 import { MediaChannelTransportData, MediaDevice } from '../../shared/store/domain';
 

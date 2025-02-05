@@ -56,9 +56,11 @@ use windows::{
             },
         },
         Security::{
-            AdjustTokenPrivileges, GetTokenInformation, LookupPrivilegeValueW, TokenElevation,
-            SE_PRIVILEGE_ENABLED, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_PRIVILEGES,
-            TOKEN_QUERY,
+            AdjustTokenPrivileges,
+            Authentication::Identity::{GetUserNameExW, EXTENDED_NAME_FORMAT},
+            GetTokenInformation, LookupPrivilegeValueW, TokenElevation, TokenLogonSid,
+            SE_PRIVILEGE_ENABLED, TOKEN_ADJUST_PRIVILEGES, TOKEN_ELEVATION, TOKEN_GROUPS,
+            TOKEN_PRIVILEGES, TOKEN_QUERY,
         },
         Storage::{
             EnhancedStorage::{
@@ -74,6 +76,7 @@ use windows::{
             Power::{GetSystemPowerStatus, SetSuspendState, SYSTEM_POWER_STATUS},
             RemoteDesktop::ProcessIdToSessionId,
             Shutdown::{ExitWindowsEx, LockWorkStation, EXIT_WINDOWS_FLAGS, SHUTDOWN_REASON},
+            SystemInformation::{GetComputerNameExW, COMPUTER_NAME_FORMAT},
             Threading::{
                 AttachThreadInput, GetCurrentProcess, GetCurrentProcessId, GetCurrentThreadId,
                 OpenProcess, OpenProcessToken, QueryFullProcessImageNameW, PROCESS_ACCESS_RIGHTS,
@@ -380,6 +383,23 @@ impl WindowsApi {
             return Err("OpenProcessToken failed".into());
         }
         Ok(token_handle)
+    }
+
+    pub fn get_current_process_info() -> Result<()> {
+        let token_handle = Self::open_current_process_token()?;
+        let mut returnlength = 0;
+        unsafe {
+            let data = TOKEN_GROUPS::default();
+
+            GetTokenInformation(
+                token_handle,
+                TokenLogonSid,
+                Some(&data as *const _ as *mut _),
+                std::mem::size_of::<TOKEN_GROUPS>() as u32,
+                &mut returnlength,
+            )?;
+        }
+        Ok(())
     }
 
     pub fn get_luid(system: PCWSTR, name: PCWSTR) -> Result<LUID> {
@@ -954,5 +974,18 @@ impl WindowsApi {
 
     pub fn lock_machine() -> Result<()> {
         unsafe { Ok(LockWorkStation()?) }
+    }
+
+    // get current thread owner username
+    pub fn get_username(format: EXTENDED_NAME_FORMAT) -> Result<String> {
+        let mut name = WindowsString::new_to_fill(1024);
+        unsafe { GetUserNameExW(format, name.as_pwstr(), &mut 1024).ok()? };
+        Ok(name.to_string())
+    }
+
+    pub fn get_computer_name(format: COMPUTER_NAME_FORMAT) -> Result<String> {
+        let mut name = WindowsString::new_to_fill(1024);
+        unsafe { GetComputerNameExW(format, name.as_pwstr(), &mut 1024)? };
+        Ok(name.to_string())
     }
 }

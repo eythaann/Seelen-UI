@@ -14,7 +14,7 @@ use windows::Win32::{
 use crate::{
     error_handler::Result,
     modules::{
-        cli::ServiceClient,
+        cli::{ServiceClient, SvcAction},
         virtual_desk::{get_vd_manager, VirtualDesktop},
     },
     seelen_bar::FancyToolbar,
@@ -285,7 +285,10 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::show_window(self.hwnd(), command)
         } else {
-            ServiceClient::emit_show_window(self.address(), command.0)
+            ServiceClient::request(SvcAction::ShowWindow {
+                hwnd: self.address(),
+                command: command.0,
+            })
         }
     }
 
@@ -293,7 +296,10 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::show_window_async(self.hwnd(), command)
         } else {
-            ServiceClient::emit_show_window_async(self.address(), command.0)
+            ServiceClient::request(SvcAction::ShowWindowAsync {
+                hwnd: self.address(),
+                command: command.0,
+            })
         }
     }
 
@@ -301,14 +307,14 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::set_position(self.hwnd(), None, rect, flags)
         } else {
-            ServiceClient::emit_set_window_position(
-                self.address(),
-                rect.left,
-                rect.top,
-                (rect.right - rect.left).abs(),
-                (rect.bottom - rect.top).abs(),
-                flags.0,
-            )
+            ServiceClient::request(SvcAction::SetWindowPosition {
+                hwnd: self.address(),
+                x: rect.left,
+                y: rect.top,
+                width: (rect.right - rect.left).abs(),
+                height: (rect.bottom - rect.top).abs(),
+                flags: flags.0,
+            })
         }
     }
 
@@ -316,7 +322,7 @@ impl Window {
         if self.process().open_handle().is_ok() {
             WindowsApi::set_foreground(self.hwnd())
         } else {
-            ServiceClient::emit_set_foreground(self.address())
+            ServiceClient::request(SvcAction::SetForeground(self.address()))
         }
     }
 }

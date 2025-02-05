@@ -2,7 +2,9 @@ use seelen_core::state::UpdateChannel;
 use tauri_plugin_updater::{Update, UpdaterExt};
 
 use crate::{
-    error_handler::Result, modules::cli::ServiceClient, seelen::get_app_handle,
+    error_handler::Result,
+    modules::cli::{ServiceClient, SvcAction},
+    seelen::get_app_handle,
     state::application::FULL_STATE,
 };
 
@@ -53,7 +55,7 @@ pub async fn trace_update_intallation(update: Update) -> Result<()> {
             || log::trace!("Update: download finished"),
         )
         .await?;
-    ServiceClient::emit_stop_signal()?;
+    ServiceClient::request(SvcAction::Stop)?;
     update.install(bytes)?;
     log::trace!("Update: intallation finished");
     Ok(())

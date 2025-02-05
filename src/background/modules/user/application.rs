@@ -1,4 +1,3 @@
-use getset::Getters;
 use itertools::Itertools;
 use lazy_static::lazy_static;
 use notify_debouncer_full::{
@@ -17,6 +16,10 @@ use std::{
     time::Duration,
 };
 use tauri::Manager;
+use windows::Win32::{
+    Security::Authentication::Identity::NameDisplay,
+    System::SystemInformation::ComputerNameDnsDomain,
+};
 use winreg::{
     enums::{HKEY_CURRENT_USER, HKEY_LOCAL_MACHINE},
     RegKey,
@@ -24,19 +27,10 @@ use winreg::{
 
 use crate::{
     error_handler::Result, event_manager, log_error, seelen::get_app_handle, trace_lock,
-    utils::spawn_named_thread, windows_api::WindowsApi,
+    windows_api::WindowsApi,
 };
 
 use super::domain::PictureQuality;
-
-const USER_PROFILE_REG_PATH_PATTERN: &str =
-    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\";
-const USER_PROFILE_ONEDRIVE_PATH: &str = "SOFTWARE\\Microsoft\\OneDrive\\Accounts\\Personal";
-const USER_PROFILE_ONEDRIVE_EMAIL_KEY: &str = "UserEmail";
-const USER_PROFILE_ONEDRIVE_FOLDER_KEY: &str = "UserFolder";
-const USER_SID_AUTH_PATH: &str =
-    "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI";
-const USER_SID_AUTH_PATH_KEY: &str = "LastLoggedOnUserSID";
 
 lazy_static! {
     pub static ref USER_MANAGER: Arc<Mutex<UserManager>> = Arc::new(Mutex::new(
@@ -46,28 +40,23 @@ lazy_static! {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum UserManagerEvent {
+    #[allow(dead_code)]
     UserUpdated(),
     FolderChanged(FolderType),
 }
 
-#[derive(Debug, Getters)]
+#[derive(Debug)]
 pub struct UserManager {
-    user_sid: String,
-    #[getset(get = "pub")]
-    user_details: Option<User>,
+    pub user: User,
+    pub folders: HashMap<FolderType, UserFolderDetails>,
     folder_watcher: Option<Arc<Debouncer<ReadDirectoryChangesWatcher, FileIdMap>>>,
-    #[getset(get = "pub")]
-    folders: HashMap<FolderType, UserFolderDetails>,
 }
 
-#[derive(Debug, Getters)]
+#[derive(Debug)]
 pub struct UserFolderDetails {
-    #[getset(get = "pub")]
-    path: PathBuf,
-    #[getset(get = "pub")]
-    limit: usize,
-    #[getset(get = "pub")]
-    content: Option<Vec<File>>,
+    pub path: PathBuf,
+    pub limit: usize,
+    pub content: Vec<File>,
 }
 
 unsafe impl Send for UserManager {}
@@ -75,88 +64,7 @@ unsafe impl Send for UserManagerEvent {}
 
 event_manager!(UserManager, UserManagerEvent);
 
-// Static
 impl UserManager {
-    pub fn new() -> Result<Self> {
-        let mut instance = Self {
-            user_sid: Self::get_user_sid().ok().unwrap(),
-            user_details: None,
-            folder_watcher: None,
-            folders: HashMap::new(),
-        };
-        instance.user_details = instance.create_user().ok();
-
-        for folder in FolderType::values() {
-            let folder_path = Self::get_path_from_folder(folder)?;
-            instance.folders.insert(
-                *folder,
-                UserFolderDetails {
-                    path: folder_path.clone(),
-                    limit: 20,
-                    content: Self::get_folder_content(
-                        folder_path,
-                        20,
-                        *folder != FolderType::Recent,
-                    )
-                    .ok(),
-                },
-            );
-        }
-
-        instance.folder_watcher = Some(instance.create_file_watcher()?);
-
-        spawn_named_thread("User Manager", move || loop {
-            let mut changed = false;
-            {
-                let mut manager = trace_lock!(USER_MANAGER);
-                let changeable_attributes = (
-                    manager.get_one_drive_attributes(),
-                    manager.get_user_profile_picture_path(PictureQuality::Quality1080),
-                );
-                if let Some(ref mut current_user) = manager.user_details {
-                    if let (Ok((mail, drive_path)), Ok(picture_path)) = changeable_attributes {
-                        let mail_option = Some(mail);
-                        let drive_option = Some(drive_path);
-                        let picture_option = Some(picture_path);
-
-                        if current_user.email != mail_option
-                            || current_user.one_drive_path != drive_option
-                            || current_user.profile_picture_path != picture_option
-                        {
-                            current_user.email = mail_option;
-                            current_user.one_drive_path = drive_option;
-                            current_user.profile_picture_path = picture_option;
-                            changed = true;
-                        }
-                    } else if let (Err(_), Ok(picture_path)) = changeable_attributes {
-                        let picture_option = Some(picture_path);
-                        if current_user.email.is_some()
-                            || current_user.one_drive_path.is_some()
-                            || current_user.profile_picture_path != picture_option
-                        {
-                            current_user.email = None;
-                            current_user.one_drive_path = None;
-                            current_user.profile_picture_path = picture_option;
-                            changed = true;
-                        }
-                    }
-                } else if let Ok(user) = manager.create_user() {
-                    manager.user_details = Some(user);
-                    changed = true;
-                }
-            }
-
-            if changed {
-                let sender = Self::event_tx();
-                log_error!(sender.send(UserManagerEvent::UserUpdated()))
-            }
-
-            std::thread::sleep(Duration::from_millis(5000));
-        })?;
-
-        Ok(instance)
-    }
-
     fn get_path_from_folder(folder_type: &FolderType) -> Result<PathBuf> {
         Ok(match folder_type {
             FolderType::Recent => get_app_handle()
@@ -185,11 +93,11 @@ impl UserManager {
         Ok(FolderType::Unknown)
     }
 
-    fn get_user_sid() -> Result<String> {
+    fn get_logged_on_user_sid() -> Result<String> {
         let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
-        let settings = hklm.open_subkey(USER_SID_AUTH_PATH)?;
-        let sid: String = settings.get_value(USER_SID_AUTH_PATH_KEY)?;
-        Ok(sid)
+        let settings = hklm
+            .open_subkey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Authentication\\LogonUI")?;
+        Ok(settings.get_value("LastLoggedOnUserSID")?)
     }
 
     fn get_recursive_folder(path: PathBuf) -> Box<dyn Iterator<Item = DirEntry>> {
@@ -215,7 +123,7 @@ impl UserManager {
             Box::new(std::fs::read_dir(path)?.map(|r| r.unwrap()))
         };
 
-        Ok(folders
+        let files = folders
             .filter(|item| {
                 let pathbuf = item.path();
                 let path = pathbuf.as_path();
@@ -264,43 +172,52 @@ impl UserManager {
                 }
             })
             .take(limit)
-            .collect())
-    }
-}
+            .collect();
 
-// Instance
-impl UserManager {
-    pub fn create_user(&self) -> Result<User> {
+        Ok(files)
+    }
+
+    fn get_user_profile_picture_path(sid: &str, quality: PictureQuality) -> Result<PathBuf> {
+        let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
+        let settings = hklm.open_subkey(
+            format!(
+                "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AccountPicture\\Users\\{}",
+                sid
+            )
+            .as_str(),
+        )?;
+        let path: String = settings.get_value(quality.as_str())?;
+        Ok(path.into())
+    }
+
+    fn get_one_drive_attributes() -> Result<(String, PathBuf)> {
+        let hkcu = RegKey::predef(HKEY_CURRENT_USER);
+        let settings = hkcu.open_subkey("SOFTWARE\\Microsoft\\OneDrive\\Accounts\\Personal")?;
+        let email: String = settings.get_value("UserEmail")?;
+        let path: String = settings.get_value("UserFolder")?;
+        Ok((email, PathBuf::from(path)))
+    }
+
+    fn get_logged_user() -> User {
         let mut user = User {
-            name: std::env!("USERNAME").to_string(),
-            domain: std::env!("USERDOMAIN").to_string(),
-            profile_home_path: PathBuf::from(std::env!("USERPROFILE")),
+            name: WindowsApi::get_username(NameDisplay).unwrap_or_default(),
+            domain: WindowsApi::get_computer_name(ComputerNameDnsDomain).unwrap_or_default(),
+            profile_home_path: PathBuf::new(), // deprecated, remove this is unncessary
             email: None,
             one_drive_path: None,
             profile_picture_path: None,
         };
-        user.profile_picture_path = self
-            .get_user_profile_picture_path(PictureQuality::Quality1080)
-            .ok();
-        if let Ok((user_mail, one_drive_path)) = self.get_one_drive_attributes() {
-            user.email = Some(user_mail);
-            user.one_drive_path = Some(one_drive_path);
+
+        if let Ok(sid) = Self::get_logged_on_user_sid() {
+            user.profile_picture_path =
+                Self::get_user_profile_picture_path(&sid, PictureQuality::Quality1080).ok();
+            if let Ok((user_mail, one_drive_path)) = Self::get_one_drive_attributes() {
+                user.email = Some(user_mail);
+                user.one_drive_path = Some(one_drive_path);
+            }
         }
 
-        Ok(user)
-    }
-
-    pub fn set_folder_limit(&mut self, folder_type: FolderType, limit: usize) -> Result<()> {
-        let folder = self.folders.get_mut(&folder_type);
-        if let Some(model) = folder {
-            model.limit = limit;
-            model.content = Self::get_folder_content(model.path.clone(), limit, false).ok();
-        }
-
-        let sender = Self::event_tx();
-        log_error!(sender.send(UserManagerEvent::FolderChanged(folder_type)));
-
-        Ok(())
+        user
     }
 
     fn join_debounced_changes(events: Vec<DebouncedEvent>) -> HashSet<PathBuf> {
@@ -319,14 +236,11 @@ impl UserManager {
             if folder_type == FolderType::Unknown {
                 continue;
             }
-
-            let folders = &mut trace_lock!(USER_MANAGER).folders;
-            let folder = folders.get_mut(&folder_type);
-            if let Some(model) = folder {
+            let mut guard = trace_lock!(USER_MANAGER);
+            if let Some(model) = guard.folders.get_mut(&folder_type) {
                 model.content =
-                    UserManager::get_folder_content(model.path.clone(), model.limit, true).ok();
-                let sender = Self::event_tx();
-                log_error!(sender.send(UserManagerEvent::FolderChanged(folder_type)));
+                    UserManager::get_folder_content(model.path.clone(), model.limit, true)?;
+                log_error!(Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type)));
             }
         }
         Ok(())
@@ -357,23 +271,40 @@ impl UserManager {
         Ok(Arc::new(debouncer))
     }
 
-    fn get_user_profile_picture_path(&self, quality: PictureQuality) -> Result<PathBuf> {
-        let hklm = RegKey::predef(HKEY_LOCAL_MACHINE);
-        let mut key = String::default();
-        key.push_str(USER_PROFILE_REG_PATH_PATTERN);
-        key.push_str(self.user_sid.as_str());
-        let settings = hklm.open_subkey(key)?;
-        let path: String = settings.get_value(quality.as_str())?;
+    pub fn new() -> Result<Self> {
+        let mut instance = Self {
+            user: Self::get_logged_user(),
+            folder_watcher: None,
+            folders: HashMap::new(),
+        };
 
-        Ok(path.into())
+        for folder in FolderType::values() {
+            let folder_path = Self::get_path_from_folder(folder)?;
+            instance.folders.insert(
+                *folder,
+                UserFolderDetails {
+                    path: folder_path.clone(),
+                    limit: 20,
+                    content: Self::get_folder_content(
+                        folder_path,
+                        20,
+                        *folder != FolderType::Recent,
+                    )?,
+                },
+            );
+        }
+
+        instance.folder_watcher = Some(instance.create_file_watcher()?);
+        // TODO add event listeners for account information changes.
+        Ok(instance)
     }
 
-    fn get_one_drive_attributes(&self) -> Result<(String, PathBuf)> {
-        let hklm = RegKey::predef(HKEY_CURRENT_USER);
-        let settings = hklm.open_subkey(USER_PROFILE_ONEDRIVE_PATH)?;
-        let email: String = settings.get_value(USER_PROFILE_ONEDRIVE_EMAIL_KEY)?;
-        let path: String = settings.get_value(USER_PROFILE_ONEDRIVE_FOLDER_KEY)?;
-
-        Ok((email, PathBuf::from(path)))
+    pub fn set_folder_limit(&mut self, folder_type: FolderType, limit: usize) -> Result<()> {
+        if let Some(details) = self.folders.get_mut(&folder_type) {
+            details.limit = limit;
+            details.content = Self::get_folder_content(details.path.clone(), limit, false)?;
+        }
+        log_error!(Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type)));
+        Ok(())
     }
 }

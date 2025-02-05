@@ -37,6 +37,7 @@ impl FullState {
                 ToolbarItem2::Plugin("@default/notifications".into()),
                 ToolbarItem2::Plugin("@default/quick-settings".into()),
             ],
+            ..Default::default()
         }
     }
 

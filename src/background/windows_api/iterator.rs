@@ -57,6 +57,25 @@ impl WindowEnumerator {
 
     /// Will call the callback for each window while enumerating.
     /// If enumeration fails it will return error.
+    pub fn for_each_v2<F>(&self, cb: F) -> Result<()>
+    where
+        F: FnMut(Window),
+    {
+        type ForEachCallback<'a> = Box<dyn FnMut(Window) + 'a>;
+        let mut callback: ForEachCallback = Box::new(cb);
+
+        unsafe extern "system" fn enum_proc(hwnd: HWND, lparam: LPARAM) -> BOOL {
+            if let Some(boxed) = (lparam.0 as *mut ForEachCallback).as_mut() {
+                (*boxed)(Window::from(hwnd));
+            }
+            true.into()
+        }
+
+        self.enumerate(enum_proc, LPARAM(&mut callback as *mut _ as isize))
+    }
+
+    /// Will call the callback for each window while enumerating.
+    /// If enumeration fails it will return error.
     pub fn map<F, T>(&self, cb: F) -> Result<Vec<T>>
     where
         F: FnMut(HWND) -> T,

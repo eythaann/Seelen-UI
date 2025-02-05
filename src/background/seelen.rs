@@ -16,7 +16,7 @@ use crate::{
     instance::SeelenInstanceContainer,
     log_error,
     modules::{
-        cli::ServiceClient,
+        cli::{ServiceClient, SvcAction},
         monitors::{MonitorManager, MonitorManagerEvent, MONITOR_MANAGER},
     },
     restoration_and_migrations::RestorationAndMigration,
@@ -269,7 +269,7 @@ impl Seelen {
     }
 
     pub fn set_auto_start(enabled: bool) -> Result<()> {
-        ServiceClient::emit_set_startup(enabled)
+        ServiceClient::request(SvcAction::SetStartup(enabled))
     }
 
     // TODO: split ahk logic into another file/module
