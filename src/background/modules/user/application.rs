@@ -1,4 +1,3 @@
-use itertools::Itertools;
 use lazy_static::lazy_static;
 use notify_debouncer_full::{
     new_debouncer,
@@ -9,7 +8,6 @@ use parking_lot::Mutex;
 use seelen_core::system_state::{File, FolderType, User};
 use std::{
     collections::{HashMap, HashSet},
-    fs::DirEntry,
     os::windows::fs::MetadataExt,
     path::{Path, PathBuf},
     sync::Arc,
@@ -100,81 +98,40 @@ impl UserManager {
         Ok(settings.get_value("LastLoggedOnUserSID")?)
     }
 
-    fn get_recursive_folder(path: PathBuf) -> Box<dyn Iterator<Item = DirEntry>> {
-        let read_dir = std::fs::read_dir(path);
+    fn get_folder_content(path: PathBuf, limit: usize) -> Result<Vec<File>> {
+        let mut list = Vec::new();
 
-        if let Ok(result) = read_dir {
-            Box::new(result.flatten().flat_map(|dir| {
-                if dir.path().is_dir() {
-                    UserManager::get_recursive_folder(dir.path())
-                } else {
-                    Box::new([dir].into_iter())
+        for entry in std::fs::read_dir(path)?.flatten() {
+            let mut path = entry.path();
+            if !path.is_file() {
+                continue;
+            }
+
+            if let Some(extension) = path.extension() {
+                if extension == "ini" {
+                    continue;
                 }
-            }))
-        } else {
-            Box::new([].into_iter())
+                if extension == "lnk" {
+                    path = match WindowsApi::resolve_lnk_target(&path) {
+                        Ok((target, _)) if target.is_file() => target,
+                        _ => continue,
+                    };
+                }
+            }
+
+            list.push(File {
+                path,
+                last_access_time: entry.metadata()?.last_write_time(),
+            });
+
+            if list.len() >= limit {
+                break;
+            }
         }
-    }
 
-    fn get_folder_content(path: PathBuf, limit: usize, is_recursive: bool) -> Result<Vec<File>> {
-        let folders = if is_recursive {
-            UserManager::get_recursive_folder(path)
-        } else {
-            Box::new(std::fs::read_dir(path)?.map(|r| r.unwrap()))
-        };
-
-        let files = folders
-            .filter(|item| {
-                let pathbuf = item.path();
-                let path = pathbuf.as_path();
-                if path.is_file() {
-                    if let Some(extension) = path.extension() {
-                        if extension == "lnk" {
-                            if let Ok((result, _)) = WindowsApi::resolve_lnk_target(path) {
-                                if result.exists() {
-                                    return !result.is_dir();
-                                }
-                            }
-                        } else {
-                            return extension != "ini";
-                        }
-                    }
-                }
-
-                false
-            })
-            .map(|item| {
-                let mut current_target = item.path();
-                if current_target.extension().unwrap() == "lnk" {
-                    if let Ok((target, _)) = WindowsApi::resolve_lnk_target(&current_target) {
-                        current_target = target;
-                    }
-                }
-
-                File {
-                    path: std::fs::canonicalize(current_target.clone())
-                        .unwrap()
-                        .to_str()
-                        .unwrap()[4..]
-                        .into(),
-                    last_access_time: if let Ok(metadata) = item.metadata() {
-                        metadata.last_write_time()
-                    } else {
-                        0
-                    },
-                }
-            })
-            .sorted_by_key(|item| {
-                if item.last_access_time == 0 {
-                    i64::MIN
-                } else {
-                    -(item.last_access_time as i64)
-                }
-            })
-            .take(limit)
-            .collect();
-
-        Ok(files)
+        list.sort_by_key(|item| item.last_access_time);
+        list.reverse();
+        Ok(list)
     }
 
     fn get_user_profile_picture_path(sid: &str, quality: PictureQuality) -> Result<PathBuf> {
@@ -238,8 +195,7 @@ impl UserManager {
             }
             let mut guard = trace_lock!(USER_MANAGER);
             if let Some(model) = guard.folders.get_mut(&folder_type) {
-                model.content =
-                    UserManager::get_folder_content(model.path.clone(), model.limit, true)?;
+                model.content = Self::get_folder_content(model.path.clone(), model.limit)?;
                 log_error!(Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type)));
             }
         }
@@ -285,11 +241,7 @@ impl UserManager {
                 UserFolderDetails {
                     path: folder_path.clone(),
                     limit: 20,
-                    content: Self::get_folder_content(
-                        folder_path,
-                        20,
-                        *folder != FolderType::Recent,
-                    )?,
+                    content: Self::get_folder_content(folder_path, 20)?,
                 },
             );
         }
@@ -302,7 +254,7 @@ impl UserManager {
     pub fn set_folder_limit(&mut self, folder_type: FolderType, limit: usize) -> Result<()> {
         if let Some(details) = self.folders.get_mut(&folder_type) {
             details.limit = limit;
-            details.content = Self::get_folder_content(details.path.clone(), limit, false)?;
+            details.content = Self::get_folder_content(details.path.clone(), limit)?;
         }
         log_error!(Self::event_tx().send(UserManagerEvent::FolderChanged(folder_type)));
         Ok(())
