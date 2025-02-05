@@ -44,11 +44,15 @@ export function useTimeout(cb: () => void, ms: number, deps: any[] = []) {
 
 const iconPackManager = await IconPackManager.create();
 export function useIcon(args: GetIconArgs): string | null {
-  const [iconSrc, setIconSrc] = useState<string | null>(() => iconPackManager.getIcon(args));
+  const [iconSrc, setIconSrc] = useState<string | null>(null);
 
   useEffect(() => {
     iconPackManager.onChange(() => setIconSrc(iconPackManager.getIcon(args)));
   }, []);
+
+  useEffect(() => {
+    setIconSrc(iconPackManager.getIcon(args));
+  }, [args]);
 
   useLayoutEffect(() => {
     if (!iconSrc) {
